@@ -1,16 +1,18 @@
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Subject: Re: [PATCH v8 4/8] libxl: support unmapping static
- shared memory areas during domain destruction
-Date: Wed, 24 Oct 2018 16:32:38 +0300
-Message-ID: <CAPD2p-kg42TmQMhk8XO-dLBmkwAcvto7qdmKKgWd2TbXFYiPnA@mail.gmail.com>
-References: <alpine.DEB.2.10.1810081606390.28877@sstabellini-ThinkPad-X260>
- <1539041841-17655-4-git-send-email-sstabellini@kernel.org>
- <4cd5da8b-edf4-6600-67d9-a30177b7e689@gmail.com>
+From: Eric Duncan <eduncan911@gmail.com>
+Subject: Re: [Xen-users] Intel Z270 support
+Date: Wed, 24 Oct 2018 09:25:09 -0400
+Message-ID: <CACaqnaSSq8=j1wF_+_O1Zc2vW_ebN6ACRdbB5KLdcOcPAZnO1Q__36639.2638454728$1540388184$gmane$org@mail.gmail.com>
+References: <CANkmNDfWfZt_17ewcHX0=EkvpymqVGLSDyd6uyObr7rOHc9tig@mail.gmail.com>
+Reply-To: eduncan911@gmail.com
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7037555469178532543=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <4cd5da8b-edf4-6600-67d9-a30177b7e689@gmail.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=u2dc=ne=gmail.com=eduncan911@srs-us1.protection.inumbo.net>)
+ id 1gFJAX-0007tK-IF
+ for xen-devel@lists.xenproject.org; Wed, 24 Oct 2018 13:25:53 +0000
+In-Reply-To: <CANkmNDfWfZt_17ewcHX0=EkvpymqVGLSDyd6uyObr7rOHc9tig@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,149 +21,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: stefanos@xilinx.com, Wei Liu <wei.liu2@citrix.com>, blackskygg@gmail.com, Oleksandr Andrushchenko <andr2000@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Xen Devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>
+To: Aaron Gray <aaronngray.lists@gmail.com>
+Cc: xen-devel@lists.xenproject.org, xen-users@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBPY3QgMjQsIDIwMTggYXQgMjo0OSBQTSBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbwo8
-YW5kcjIwMDBAZ21haWwuY29tPiB3cm90ZToKPgo+IE9uIDEwLzA5LzIwMTggMDI6MzcgQU0sIFN0
-ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IEZyb206IFpob25nemUgTGl1IDxibGFja3NreWdn
-QGdtYWlsLmNvbT4KPiA+Cj4gPiBBdXRob3I6IFpob25nemUgTGl1IDxibGFja3NreWdnQGdtYWls
-LmNvbT4KPiA+Cj4gPiBBZGQgbGlieGxfX3NzaG1fZGVsIHRvIHVubWFwIHN0YXRpYyBzaGFyZWQg
-bWVtb3J5IGFyZWFzIG1hcHBlZCBieQo+ID4gbGlieGxfX3NzaG1fYWRkIGR1cmluZyBkb21haW4g
-Y3JlYXRpb24uIFRoZSB1bm1hcHBpbmcgcHJvY2VzcyBpczoKPiA+Cj4gPiAqIEZvciBhIG1hc3Rl
-cjogZGVjcmVhc2UgdGhlIHJlZmNvdW50IG9mIHRoZSBzc2htIHJlZ2lvbiwgaWYgdGhlIHJlZmNv
-dW50Cj4gPiAgICByZWFjaGVzIDAsIGNsZWFudXAgdGhlIHdob2xlIHNzaG0gcGF0aC4KPiA+Cj4g
-PiAqIEZvciBhIHNsYXZlOgo+ID4gICAgMSkgdW5tYXAgdGhlIHNoYXJlZCBwYWdlcywgYW5kIGNs
-ZWFudXAgcmVsYXRlZCB4cyBlbnRyaWVzLiBJZiB0aGUKPiA+ICAgICAgIHN5c3RlbSB3b3JrcyBu
-b3JtYWxseSwgYWxsIHRoZSBzaGFyZWQgcGFnZXMgd2lsbCBiZSB1bm1hcHBlZCwgc28gdGhlcmUK
-PiA+ICAgICAgIHdvbid0IGJlIHBhZ2UgbGVha3MuIEluIGNhc2Ugb2YgZXJyb3JzLCB0aGUgdW5t
-YXBwaW5nIHByb2Nlc3Mgd2lsbCBnbwo+ID4gICAgICAgb24gYW5kIHVubWFwIGFsbCB0aGUgb3Ro
-ZXIgcGFnZXMgdGhhdCBjYW4gYmUgdW5tYXBwZWQsIHNvIHRoZSBvdGhlcgo+ID4gICAgICAgcGFn
-ZXMgd29uJ3QgYmUgbGVha2VkLCBlaXRoZXIuCj4gPiAgICAyKSBEZWNyZWFzZSB0aGUgcmVmY291
-bnQgb2YgdGhlIHNzaG0gcmVnaW9uLCBpZiB0aGUgcmVmY291bnQgcmVhY2hlcwo+ID4gICAgICAg
-MCwgY2xlYW51cCB0aGUgd2hvbGUgc3NobSBwYXRoLgo+ID4KPiA+IFRoaXMgaXMgZm9yIHRoZSBw
-cm9wb3NhbCAiQWxsb3cgc2V0dGluZyB1cCBzaGFyZWQgbWVtb3J5IGFyZWFzIGJldHdlZW4gVk1z
-Cj4gPiBmcm9tIHhsIGNvbmZpZyBmaWxlIiAoc2VlIFsxXSkuCj4gPgo+ID4gWzFdIGh0dHBzOi8v
-bGlzdHMueGVuLm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE3LTA4L21zZzAzMjQyLmh0
-bWwKPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBaaG9uZ3plIExpdSA8YmxhY2tza3lnZ0BnbWFpbC5j
-b20+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9zQHhpbGlu
-eC5jb20+Cj4gPgo+ID4gQ2M6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29t
-Pgo+ID4gQ2M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gPiBDYzogU3RlZmFubyBT
-dGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+ID4gQ2M6IEp1bGllbiBHcmFsbCA8
-anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gPiBDYzogeGVuLWRldmVsQGxpc3RzLnhlbi5vcmcKPiA+
-Cj4gPiAtLS0KPiA+IENoYW5nZXMgaW4gdjU6Cj4gPiAtIGZpeCB0eXBvcwo+ID4gLSBhZGQgY29t
-bWVudHMKPiA+IC0gY2Fubm90IG1vdmUgdW5tYXAgYmVmb3JlIHhlbnN0b3JlIHRyYW5zYWN0aW9u
-IGJlY2F1c2UgaXQgbmVlZHMgdG8KPiA+ICAgIHJldHJpZXZlIGJlZ2luL3NpemUgdmFsdWVzIGZy
-b20geGVuc3RvcmUKPiA+IC0tLQo+ID4gICB0b29scy9saWJ4bC9saWJ4bF9kb21haW4uYyAgIHwg
-ICA1ICsrCj4gPiAgIHRvb2xzL2xpYnhsL2xpYnhsX2ludGVybmFsLmggfCAgIDIgKwo+ID4gICB0
-b29scy9saWJ4bC9saWJ4bF9zc2htLmMgICAgIHwgMTA3ICsrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysKPiA+ICAgMyBmaWxlcyBjaGFuZ2VkLCAxMTQgaW5zZXJ0aW9u
-cygrKQo+ID4KPiA+IGRpZmYgLS1naXQgYS90b29scy9saWJ4bC9saWJ4bF9kb21haW4uYyBiL3Rv
-b2xzL2xpYnhsL2xpYnhsX2RvbWFpbi5jCj4gPiBpbmRleCAzMzc3YmJhLi4zZjdmZmE2IDEwMDY0
-NAo+ID4gLS0tIGEvdG9vbHMvbGlieGwvbGlieGxfZG9tYWluLmMKPiA+ICsrKyBiL3Rvb2xzL2xp
-YnhsL2xpYnhsX2RvbWFpbi5jCj4gPiBAQCAtMTA2MCw2ICsxMDYwLDExIEBAIHZvaWQgbGlieGxf
-X2Rlc3Ryb3lfZG9taWQobGlieGxfX2VnYyAqZWdjLCBsaWJ4bF9fZGVzdHJveV9kb21pZF9zdGF0
-ZSAqZGlzKQo+ID4gICAgICAgICAgIGdvdG8gb3V0Owo+ID4gICAgICAgfQo+ID4KPiA+ICsgICAg
-cmMgPSBsaWJ4bF9fc3NobV9kZWwoZ2MsIGRvbWlkKTsKPiA+ICsgICAgaWYgKHJjKSB7Cj4gPiAr
-ICAgICAgICBMT0dEKEVSUk9SLCBkb21pZCwgIkRlbGV0aW5nIHN0YXRpYyBzaG0gZmFpbGVkLiIp
-Owo+ID4gKyAgICB9Cj4gRG8geW91IG5lZWQgYnJhY2tldHMgaGVyZT8KPiA+ICsKPiA+ICAgICAg
-IGlmIChsaWJ4bF9fZGV2aWNlX3BjaV9kZXN0cm95X2FsbChnYywgZG9taWQpIDwgMCkKPiA+ICAg
-ICAgICAgICBMT0dEKEVSUk9SLCBkb21pZCwgIlBjaSBzaHV0ZG93biBmYWlsZWQiKTsKPiA+ICAg
-ICAgIHJjID0geGNfZG9tYWluX3BhdXNlKGN0eC0+eGNoLCBkb21pZCk7Cj4gPiBkaWZmIC0tZ2l0
-IGEvdG9vbHMvbGlieGwvbGlieGxfaW50ZXJuYWwuaCBiL3Rvb2xzL2xpYnhsL2xpYnhsX2ludGVy
-bmFsLmgKPiA+IGluZGV4IDZmMzFhM2QuLmU4NmQzNTYgMTAwNjQ0Cj4gPiAtLS0gYS90b29scy9s
-aWJ4bC9saWJ4bF9pbnRlcm5hbC5oCj4gPiArKysgYi90b29scy9saWJ4bC9saWJ4bF9pbnRlcm5h
-bC5oCj4gPiBAQCAtNDQ0Miw2ICs0NDQyLDggQEAgc3RhdGljIGlubGluZSBjb25zdCBjaGFyICps
-aWJ4bF9fcWVtdV9xbXBfcGF0aChsaWJ4bF9fZ2MgKmdjLCBpbnQgZG9taWQpCj4gPiAgIF9oaWRk
-ZW4gaW50IGxpYnhsX19zc2htX2FkZChsaWJ4bF9fZ2MgKmdjLCB1aW50MzJfdCBkb21pZCwKPiA+
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpYnhsX3N0YXRpY19zaG0gKnNzaG0sIGlu
-dCBsZW4pOwo+ID4KPiA+ICtfaGlkZGVuIGludCBsaWJ4bF9fc3NobV9kZWwobGlieGxfX2djICpn
-YywgdWludDMyX3QgZG9taWQpOwo+ID4gKwo+ID4gICBfaGlkZGVuIGludCBsaWJ4bF9fc3NobV9j
-aGVja19vdmVybGFwKGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLAo+ID4gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGxpYnhsX3N0YXRpY19zaG0gKnNzaG1zLCBp
-bnQgbGVuKTsKPiA+ICAgX2hpZGRlbiBpbnQgbGlieGxfX3NzaG1fc2V0ZGVmYXVsdChsaWJ4bF9f
-Z2MgKmdjLCB1aW50MzJfdCBkb21pZCwKPiA+IGRpZmYgLS1naXQgYS90b29scy9saWJ4bC9saWJ4
-bF9zc2htLmMgYi90b29scy9saWJ4bC9saWJ4bF9zc2htLmMKPiA+IGluZGV4IGY2MWI4MGMuLjk2
-NzIwNTYgMTAwNjQ0Cj4gPiAtLS0gYS90b29scy9saWJ4bC9saWJ4bF9zc2htLmMKPiA+ICsrKyBi
-L3Rvb2xzL2xpYnhsL2xpYnhsX3NzaG0uYwo+ID4gQEAgLTk0LDYgKzk0LDExMyBAQCBpbnQgbGli
-eGxfX3NzaG1fY2hlY2tfb3ZlcmxhcChsaWJ4bF9fZ2MgKmdjLCB1aW50MzJfdCBkb21pZCwKPiA+
-ICAgICAgIHJldHVybiAwOwo+ID4gICB9Cj4gPgo+ID4gKy8qCj4gPiArICogRGVjcmVhc2UgdGhl
-IHJlZmNvdW50IG9mIGFuIHNzaG0uIFdoZW4gcmVmY291bnQgcmVhY2hlcyAwLAo+ID4gKyAqIGNs
-ZWFuIHVwIHRoZSB3aG9sZSBzc2htIHBhdGguCj4gPiArICogWGVuc3RvcmUgb3BlcmF0aW9ucyBh
-cmUgZG9uZSB3aXRoaW4gdGhlIHNhbWUgdHJhbnNhY3Rpb24uCj4gPiArICovCj4gPiArc3RhdGlj
-IHZvaWQgbGlieGxfX3NzaG1fZGVjcmVmKGxpYnhsX19nYyAqZ2MsIHhzX3RyYW5zYWN0aW9uX3Qg
-eHQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGNoYXIgKnNzaG1f
-cGF0aCkKPiA+ICt7Cj4gPiArICAgIGludCBjb3VudDsKPiA+ICsgICAgY29uc3QgY2hhciAqY291
-bnRfcGF0aCwgKmNvdW50X3N0cmluZzsKPiA+ICsKPiA+ICsgICAgY291bnRfcGF0aCA9IEdDU1BS
-SU5URigiJXMvdXNlcmNudCIsIHNzaG1fcGF0aCk7Cj4gPiArICAgIGlmIChsaWJ4bF9feHNfcmVh
-ZF9jaGVja2VkKGdjLCB4dCwgY291bnRfcGF0aCwgJmNvdW50X3N0cmluZykpCj4gPiArICAgICAg
-ICByZXR1cm47Cj4gPiArICAgIGNvdW50ID0gYXRvaShjb3VudF9zdHJpbmcpOwo+ID4gKwo+ID4g
-KyAgICBpZiAoLS1jb3VudCA9PSAwKSB7Cj4gPiArICAgICAgICBsaWJ4bF9feHNfcGF0aF9jbGVh
-bnVwKGdjLCB4dCwgc3NobV9wYXRoKTsKPiA+ICsgICAgICAgIHJldHVybjsKPiA+ICsgICAgfQo+
-ID4gKwo+ID4gKyAgICBjb3VudF9zdHJpbmcgPSBHQ1NQUklOVEYoIiVkIiwgY291bnQpOwo+ID4g
-KyAgICBsaWJ4bF9feHNfd3JpdGVfY2hlY2tlZChnYywgeHQsIGNvdW50X3BhdGgsIGNvdW50X3N0
-cmluZyk7Cj4gPiArCj4gPiArICAgIHJldHVybjsKPiA+ICt9Cj4gPiArCj4gPiArc3RhdGljIHZv
-aWQgbGlieGxfX3NzaG1fZG9fdW5tYXAobGlieGxfX2djICpnYywgdWludDMyX3QgZG9taWQsIGNv
-bnN0IGNoYXIgKmlkLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQ2
-NF90IGJlZ2luLCB1aW50NjRfdCBzaXplKQo+ID4gK3sKPiA+ICsgICAgdWludDY0X3QgZW5kOwo+
-ID4gKyAgICBiZWdpbiA+Pj0gWENfUEFHRV9TSElGVDsKPiA+ICsgICAgc2l6ZSA+Pj0gWENfUEFH
-RV9TSElGVDsKPiA+ICsgICAgZW5kID0gYmVnaW4gKyBzaXplOwo+ID4gKyAgICBmb3IgKDsgYmVn
-aW4gPCBlbmQ7ICsrYmVnaW4pIHsKPiA+ICsgICAgICAgIGlmICh4Y19kb21haW5fcmVtb3ZlX2Zy
-b21fcGh5c21hcChDVFgtPnhjaCwgZG9taWQsIGJlZ2luKSkgewpXaGF0IEkgd2FzIHRoaW5raW5n
-IGlzIHRoYXQgeGNfZG9tYWluX3JlbW92ZV9mcm9tX3BoeXNtYXBfYmF0Y2goKQpjb3VsZCBzcGVl
-ZCB1cCB1bm1hcHBpbmcgaWYgd2FzIHByZXNlbnQpCgo+ID4gKyAgICAgICAgICAgIFNTSE1fRVJS
-T1IoZG9taWQsIGlkLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgInVuYWJsZSB0byB1bm1h
-cCBzaGFyZWQgcGFnZSBhdCAweCUiUFJJeDY0Ii4iLAo+ID4gKyAgICAgICAgICAgICAgICAgICAg
-ICAgYmVnaW4pOwo+ID4gKyAgICAgICAgfQo+ID4gKyAgICB9Cj4gPiArfQo+ID4gKwo+ID4gK3N0
-YXRpYyB2b2lkIGxpYnhsX19zc2htX2RlbF9zbGF2ZShsaWJ4bF9fZ2MgKmdjLCB4c190cmFuc2Fj
-dGlvbl90IHh0LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1aW50MzJf
-dCBkb21pZCwgY29uc3QgY2hhciAqaWQsIGJvb2wgaXNyZXRyeSkKPiBpc3JldHJ5IGlzIG5vdCB1
-c2VkLCBwbGVhc2UgcmVtb3ZlCj4gPiArewo+ID4gKyAgICBjb25zdCBjaGFyICpzbGF2ZV9wYXRo
-LCAqYmVnaW5fc3RyLCAqc2l6ZV9zdHI7Cj4gPiArICAgIHVpbnQ2NF90IGJlZ2luLCBzaXplOwo+
-ID4gKwo+ID4gKyAgICBzbGF2ZV9wYXRoID0gR0NTUFJJTlRGKCIlcy9zbGF2ZXMvJSJQUkl1MzIs
-IFNTSE1fUEFUSChpZCksIGRvbWlkKTsKPiA+ICsKPiA+ICsgICAgYmVnaW5fc3RyID0gbGlieGxf
-X3hzX3JlYWQoZ2MsIHh0LCBHQ1NQUklOVEYoIiVzL2JlZ2luIiwgc2xhdmVfcGF0aCkpOwo+ID4g
-KyAgICBzaXplX3N0ciA9IGxpYnhsX194c19yZWFkKGdjLCB4dCwgR0NTUFJJTlRGKCIlcy9zaXpl
-Iiwgc2xhdmVfcGF0aCkpOwo+ID4gKyAgICBiZWdpbiA9IHN0cnRvdWxsKGJlZ2luX3N0ciwgTlVM
-TCwgMTYpOwo+ID4gKyAgICBzaXplID0gc3RydG91bGwoc2l6ZV9zdHIsIE5VTEwsIDE2KTsKPiA+
-ICsKPiA+ICsgICAgbGlieGxfX3NzaG1fZG9fdW5tYXAoZ2MsIGRvbWlkLCBpZCwgYmVnaW4sIHNp
-emUpOwo+ID4gKyAgICBsaWJ4bF9feHNfcGF0aF9jbGVhbnVwKGdjLCB4dCwgc2xhdmVfcGF0aCk7
-Cj4gPiArfQo+ID4gKwo+ID4gKy8qIERlbGV0ZSBzdGF0aWNfc2htIGVudHJpZXMgaW4gdGhlIHhl
-bnNvdHJlLiAqLwo+ID4gK2ludCBsaWJ4bF9fc3NobV9kZWwobGlieGxfX2djICpnYywgIHVpbnQz
-Ml90IGRvbWlkKQo+ID4gK3sKPiA+ICsgICAgaW50IHJjLCBpOwo+ID4gKyAgICBib29sIGlzcmV0
-cnk7Cj4gPiArICAgIHhzX3RyYW5zYWN0aW9uX3QgeHQgPSBYQlRfTlVMTDsKPiA+ICsgICAgY29u
-c3QgY2hhciAqZG9tX3BhdGgsICpkb21fc3NobV9wYXRoLCAqcm9sZTsKPiA+ICsgICAgY2hhciAq
-KnNzaG1fZW50czsKPiA+ICsgICAgdW5zaWduZWQgaW50IHNzaG1fbnVtOwo+ID4gKwo+ID4gKyAg
-ICBkb21fcGF0aCA9IGxpYnhsX194c19nZXRfZG9tcGF0aChnYywgZG9taWQpOwo+ID4gKyAgICBk
-b21fc3NobV9wYXRoID0gR0NTUFJJTlRGKCIlcy9zdGF0aWNfc2htIiwgZG9tX3BhdGgpOwo+ID4g
-Kwo+ID4gKyAgICBpc3JldHJ5ID0gZmFsc2U7Cj4gc2VlIGFib3ZlLCBpc3JldHJ5IGlzIG5vdCB1
-c2VkCj4gPiArICAgIGZvciAoOzspIHsKPiA+ICsgICAgICAgIHJjID0gbGlieGxfX3hzX3RyYW5z
-YWN0aW9uX3N0YXJ0KGdjLCAmeHQpOwo+ID4gKyAgICAgICAgaWYgKHJjKSBnb3RvIG91dDsKPiA+
-ICsKPiA+ICsgICAgICAgIGlmIChsaWJ4bF9feHNfcmVhZChnYywgeHQsIGRvbV9zc2htX3BhdGgp
-KSB7Cj4gPiArICAgICAgICAgICAgc3NobV9lbnRzID0gbGlieGxfX3hzX2RpcmVjdG9yeShnYywg
-eHQsIGRvbV9zc2htX3BhdGgsICZzc2htX251bSk7Cj4gPiArICAgICAgICAgICAgaWYgKCFzc2ht
-X2VudHMpIGNvbnRpbnVlOwo+ID4gKwo+ID4gKyAgICAgICAgICAgIGZvciAoaSA9IDA7IGkgPCBz
-c2htX251bTsgKytpKSB7Cj4gPiArICAgICAgICAgICAgICAgIHJvbGUgPSBsaWJ4bF9feHNfcmVh
-ZChnYywgeHQsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBHQ1NQ
-UklOVEYoIiVzLyVzL3JvbGUiLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGRvbV9zc2htX3BhdGgsCj4gPiArICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgc3NobV9lbnRzW2ldKSk7Cj4gPiArICAgICAgICAg
-ICAgICAgIGFzc2VydChyb2xlKTsKPiA+ICsgICAgICAgICAgICAgICAgaWYgKCFzdHJuY21wKHJv
-bGUsICJzbGF2ZSIsIDUpKQo+ID4gKyAgICAgICAgICAgICAgICAgICAgbGlieGxfX3NzaG1fZGVs
-X3NsYXZlKGdjLCB4dCwgZG9taWQsIHNzaG1fZW50c1tpXSwgaXNyZXRyeSk7Cj4gPiArCj4gPiAr
-ICAgICAgICAgICAgICAgIGxpYnhsX19zc2htX2RlY3JlZihnYywgeHQsIFNTSE1fUEFUSChzc2ht
-X2VudHNbaV0pKTsKPiA+ICsgICAgICAgICAgICB9Cj4gPiArICAgICAgICB9Cj4gPiArCj4gPiAr
-ICAgICAgICByYyA9IGxpYnhsX194c190cmFuc2FjdGlvbl9jb21taXQoZ2MsICZ4dCk7Cj4gPiAr
-ICAgICAgICBpZiAoIXJjKSBicmVhazsKPiA+ICsgICAgICAgIGlmIChyYyA8IDApIGdvdG8gb3V0
-Owo+ID4gKyAgICAgICAgaXNyZXRyeSA9IHRydWU7Cj4gPiArICAgIH0KPiA+ICsKPiA+ICsgICAg
-cmMgPSAwOwo+ID4gK291dDoKPiA+ICsgICAgbGlieGxfX3hzX3RyYW5zYWN0aW9uX2Fib3J0KGdj
-LCAmeHQpOwo+ID4gKyAgICByZXR1cm4gcmM7Cj4gPiArfQo+ID4gKwo+ID4gICAvKiAgIGxpYnhs
-X19zc2htX2RvX21hcCAtLSBtYXAgcGFnZXMgaW50byBzbGF2ZSdzIHBoeXNtYXAKPiA+ICAgICoK
-PiA+ICAgICogICBUaGlzIGZ1bmN0aW9ucyBtYXBzCj4KPgo+IF9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fCj4gWGVuLWRldmVsIG1haWxpbmcgbGlzdAo+IFhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWwKCgoKLS0gClJlZ2FyZHMsCgpPbGVrc2FuZHIg
-VHlzaGNoZW5rbwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============7037555469178532543==
+Content-Type: multipart/alternative; boundary="000000000000dd5e890578f96cd5"
+
+--000000000000dd5e890578f96cd5
+Content-Type: text/plain; charset="UTF-8"
+
+On Thu, Oct 18, 2018 at 2:03 PM Aaron Gray wrote:
+
+> I have two ASUS PRIME Z270-A machines based on Intel Z270 chipset and am
+> wondering about when support will be available for them and what I can do
+> to speed this up.
+>
+> But I have not done anything to do with kernel work since years ago when I
+> read a lot of the main parts of the Linux 2.4 Kernel. Also I did code to
+> get into and out of protected mode before this.
+>
+> Heres the datasheets that cover the chipset :-
+>
+>
+> https://www.intel.com/content/www/us/en/chipsets/200-series-chipset-pch-datasheet-vol-1.html
+>
+> https://www.intel.com/content/www/us/en/chipsets/200-series-chipset-pch-datasheet-vol-2.html
+>
+> Regards,
+>
+> Aaron
+>
+
+It's your Linux kernel that needs to support your hardware, not Xen itself.
+
+I personally run Xen with an Arch Linux dom0 specifically for this purpose
+of getting the latest hardware support across my devices.  For example, I
+am on kernel 4.18.10 at this moment.  The AUR also keeps a fairly recent
+version of Xen, currently 4.11.
+
+-E
+
+--000000000000dd5e890578f96cd5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Thu, Oc=
+t 18, 2018 at 2:03 PM Aaron Gray wrote:<br></div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
+1ex"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div>I have two ASU=
+S PRIME Z270-A machines based on Intel Z270 chipset and am wondering about =
+when support will be available for them and what I can do to speed this up.=
+</div><div><br></div><div>But I have not done anything to do with kernel wo=
+rk since years ago when I read a lot of the main parts of the Linux 2.4 Ker=
+nel. Also I did code to get into and out of protected mode before this.</di=
+v><div><br></div><div>Heres the datasheets that cover the chipset :-</div><=
+div><br></div><div><a href=3D"https://www.intel.com/content/www/us/en/chips=
+ets/200-series-chipset-pch-datasheet-vol-1.html" target=3D"_blank">https://=
+www.intel.com/content/www/us/en/chipsets/200-series-chipset-pch-datasheet-v=
+ol-1.html</a></div><div><a href=3D"https://www.intel.com/content/www/us/en/=
+chipsets/200-series-chipset-pch-datasheet-vol-2.html" target=3D"_blank">htt=
+ps://www.intel.com/content/www/us/en/chipsets/200-series-chipset-pch-datash=
+eet-vol-2.html</a></div><div><br></div><div>Regards,</div><div><br></div><d=
+iv>Aaron</div></div></div></div></blockquote><div><br></div><div>It&#39;s y=
+our Linux kernel that needs to support your hardware, not Xen itself.</div>=
+<div><br></div><div>I personally run Xen with an Arch Linux dom0 specifical=
+ly for this purpose of getting the latest hardware support across my device=
+s.=C2=A0 For example, I am on kernel 4.18.10 at this moment.=C2=A0 The AUR =
+also keeps a fairly recent version of Xen, currently 4.11.</div><div><br></=
+div><div>-E</div></div></div>
+
+--000000000000dd5e890578f96cd5--
+
+
+--===============7037555469178532543==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7037555469178532543==--
