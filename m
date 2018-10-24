@@ -1,17 +1,17 @@
-From: Andrii Anisov <Andrii_Anisov@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH 01/22] xen/arm: traps: Constify
  show_registers parameters
-Date: Wed, 24 Oct 2018 14:03:15 +0000
-Message-ID: <d94b4ecf-4894-b7d6-10de-200fbc04f22e@epam.com>
+Date: Wed, 24 Oct 2018 15:12:07 +0100
+Message-ID: <911af77d-ef68-e480-7d42-7618236eb519@arm.com>
 References: <20181018132109.31192-1-julien.grall@arm.com>
  <20181018132109.31192-2-julien.grall@arm.com>
+ <d94b4ecf-4894-b7d6-10de-200fbc04f22e@epam.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181018132109.31192-2-julien.grall@arm.com>
+In-Reply-To: <d94b4ecf-4894-b7d6-10de-200fbc04f22e@epam.com>
 Content-Language: en-US
-Content-ID: <23BC011A1D6E4F4FA26CA0643B62ADF1@eurprd03.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,20 +20,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Andrii Anisov <Andrii_Anisov@epam.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gSnVsaWVuLA0KDQoNCk9uIDE4LjEwLjE4IDE2OjIwLCBKdWxpZW4gR3JhbGwgd3JvdGU6
-DQo+IHNob3dfcmVnaXN0ZXJzIGhlbHBlcnMgYXJlIG5vdCBtZWFudCB0byBtb2RpZnkgYW55IHBh
-cmFtZXRlcnMuDQo+IFNvIGNvbnN0aWZ5IHRoZW0uDQo+DQo+IFNpZ25lZC1vZmYtYnk6IEp1bGll
-biBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+DQo+IC0tLQ0KPiAgIHhlbi9hcmNoL2FybS90
-cmFwcy5jICAgICAgICAgICAgfCAxNCArKysrKysrLS0tLS0tLQ0KPiAgIHhlbi9pbmNsdWRlL2Fz
-bS1hcm0vcHJvY2Vzc29yLmggfCAgMiArLQ0KPiAgIDIgZmlsZXMgY2hhbmdlZCwgOCBpbnNlcnRp
-b25zKCspLCA4IGRlbGV0aW9ucygtKQ0KVGhlIGZpbGUgeGVuL2FyY2gvYXJtL3RyYXBzLmMgaGFz
-IGEgYnVuY2ggb2Ygc2hvdyBmdW5jdGlvbnMgZXhjZXB0IGZvciANCnJlZ2lzdGVycy4gRm9yIHN0
-YWNrLCB0cmFjZSwgZXRjLiBTbyBtYXliZSBjb25zdGlmeSB0aGVpciBwYXJhbWV0ZXJzIA0Kcmln
-aHQgYXdheT8NCg0KLS0gDQoNCipBbmRyaWkgQW5pc292Kg0KDQoNCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+CgpPbiAxMC8yNC8xOCAzOjAzIFBNLCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IEhlbGxvIEp1bGll
+biwKCkhpLAoKPiAKPiAKPiBPbiAxOC4xMC4xOCAxNjoyMCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+
+PiBzaG93X3JlZ2lzdGVycyBoZWxwZXJzIGFyZSBub3QgbWVhbnQgdG8gbW9kaWZ5IGFueSBwYXJh
+bWV0ZXJzLgo+PiBTbyBjb25zdGlmeSB0aGVtLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4g
+R3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+PiAtLS0KPj4gICAgeGVuL2FyY2gvYXJtL3Ry
+YXBzLmMgICAgICAgICAgICB8IDE0ICsrKysrKystLS0tLS0tCj4+ICAgIHhlbi9pbmNsdWRlL2Fz
+bS1hcm0vcHJvY2Vzc29yLmggfCAgMiArLQo+PiAgICAyIGZpbGVzIGNoYW5nZWQsIDggaW5zZXJ0
+aW9ucygrKSwgOCBkZWxldGlvbnMoLSkKPiBUaGUgZmlsZSB4ZW4vYXJjaC9hcm0vdHJhcHMuYyBo
+YXMgYSBidW5jaCBvZiBzaG93IGZ1bmN0aW9ucyBleGNlcHQgZm9yCj4gcmVnaXN0ZXJzLiBGb3Ig
+c3RhY2ssIHRyYWNlLCBldGMuIFNvIG1heWJlIGNvbnN0aWZ5IHRoZWlyIHBhcmFtZXRlcnMKPiBy
+aWdodCBhd2F5PwoKR29vZCBpZGVhLiBJIHdpbGwgdXBkYXRlIHRoZSBzZXJpZXMuCgpDaGVlcnMs
+CgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
