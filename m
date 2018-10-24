@@ -1,10 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen: remove redundant 'default n' from
- Kconfig
-Date: Wed, 24 Oct 2018 11:35:33 +0200
-Message-ID: <f5f7e6d3-aec3-8c0a-92d4-50c76ec1516c__3025.56469473547$1540373668$gmane$org@suse.com>
-References: <CGME20181016143359eucas1p1b2033a69cc7b03c090125e1b9566fc1d@eucas1p1.samsung.com>
- <20181016143359eucas1p1b2033a69cc7b03c090125e1b9566fc1d~eHWRlFIki1482014820eucas1p1q@eucas1p1.samsung.com>
+Subject: Re: [PATCH] add myself as reviewer for Xen support in
+ Linux
+Date: Wed, 24 Oct 2018 11:35:59 +0200
+Message-ID: <00c81ec7-9d35-5ca2-bffb-cea48813acc9@suse.com>
+References: <alpine.DEB.2.10.1810171924370.3835@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=zek6=ne=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gFFZh-0006H9-Q9
- for xen-devel@lists.xenproject.org; Wed, 24 Oct 2018 09:35:37 +0000
-In-Reply-To: <20181016143359eucas1p1b2033a69cc7b03c090125e1b9566fc1d~eHWRlFIki1482014820eucas1p1q@eucas1p1.samsung.com>
+ id 1gFFa5-0006IQ-Kl
+ for xen-devel@lists.xenproject.org; Wed, 24 Oct 2018 09:36:01 +0000
+In-Reply-To: <alpine.DEB.2.10.1810171924370.3835@sstabellini-ThinkPad-X260>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,28 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+To: Stefano Stabellini <sstabellini@kernel.org>, boris.ostrovsky@oracle.com
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTYvMTAvMjAxOCAxNjozMywgQmFydGxvbWllaiBab2xuaWVya2lld2ljeiB3cm90ZToKPiAn
-ZGVmYXVsdCBuJyBpcyB0aGUgZGVmYXVsdCB2YWx1ZSBmb3IgYW55IGJvb2wgb3IgdHJpc3RhdGUg
-S2NvbmZpZwo+IHNldHRpbmcgc28gdGhlcmUgaXMgbm8gbmVlZCB0byB3cml0ZSBpdCBleHBsaWNp
-dGx5Lgo+IAo+IEFsc28gc2luY2UgY29tbWl0IGY0NjdjNTY0MGMyOSAoImtjb25maWc6IG9ubHkg
-d3JpdGUgJyMgQ09ORklHX0ZPTwo+IGlzIG5vdCBzZXQnIGZvciB2aXNpYmxlIHN5bWJvbHMiKSB0
-aGUgS2NvbmZpZyBiZWhhdmlvciBpcyB0aGUgc2FtZQo+IHJlZ2FyZGxlc3Mgb2YgJ2RlZmF1bHQg
-bicgYmVpbmcgcHJlc2VudCBvciBub3Q6Cj4gCj4gICAgIC4uLgo+ICAgICBPbmUgc2lkZSBlZmZl
-Y3Qgb2YgKGFuZCB0aGUgbWFpbiBtb3RpdmF0aW9uIGZvcikgdGhpcyBjaGFuZ2UgaXMgbWFraW5n
-Cj4gICAgIHRoZSBmb2xsb3dpbmcgdHdvIGRlZmluaXRpb25zIGJlaGF2ZSBleGFjdGx5IHRoZSBz
-YW1lOgo+ICAgICAKPiAgICAgICAgIGNvbmZpZyBGT08KPiAgICAgICAgICAgICAgICAgYm9vbAo+
-ICAgICAKPiAgICAgICAgIGNvbmZpZyBGT08KPiAgICAgICAgICAgICAgICAgYm9vbAo+ICAgICAg
-ICAgICAgICAgICBkZWZhdWx0IG4KPiAgICAgCj4gICAgIFdpdGggdGhpcyBjaGFuZ2UsIG5laXRo
-ZXIgb2YgdGhlc2Ugd2lsbCBnZW5lcmF0ZSBhCj4gICAgICcjIENPTkZJR19GT08gaXMgbm90IHNl
-dCcgbGluZSAoYXNzdW1pbmcgRk9PIGlzbid0IHNlbGVjdGVkL2ltcGxpZWQpLgo+ICAgICBUaGF0
-IG1pZ2h0IG1ha2UgaXQgY2xlYXJlciB0byBwZW9wbGUgdGhhdCBhIGJhcmUgJ2RlZmF1bHQgbicg
-aXMKPiAgICAgcmVkdW5kYW50Lgo+ICAgICAuLi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBCYXJ0bG9t
-aWVqIFpvbG5pZXJraWV3aWN6IDxiLnpvbG5pZXJraWVAc2Ftc3VuZy5jb20+CgpQdXNoZWQgdG8g
-eGVuLnRpcCBmb3ItbGludXMtNC4yMGEKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTcvMTAvMjAxOCAxNTo0NCwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IEl0IHdvdWxk
+IGJlIGdvb2QgZm9yIG1lIHRvIGtlZXAgYW4gZXllIG9uIHRoZSBwYXRjaGVzIHRoYXQgdG91Y2gg
+WGVuCj4gc3VwcG9ydCBpbiBMaW51eCB0byB0cnkgdG8gc3BvdCBjaGFuZ2VzIHRoYXQgYnJlYWsg
+WGVuIG9uIEFSTSBlYXJseSBvbi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxp
+bmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CgpQdXNoZWQgdG8geGVuLnRpcCBmb3ItbGludXMt
+NC4yMGEKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
