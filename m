@@ -1,20 +1,17 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: How to use PV drivers with fully virtualized HVM on
- x86?
-Date: Wed, 24 Oct 2018 16:29:35 +0200
-Message-ID: <455998b3-2310-6d2c-f42b-14a8e4a6be43@suse.com>
-References: <CAHyh4xgK11VZjgwPKoAwNTx0rD4z+gk+oakY9JrCM426Ekqq0g@mail.gmail.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [PATCH v5 0/6] Allow setting up shared memory areas
+ between VMs from xl config files
+Date: Wed, 24 Oct 2018 17:32:13 +0300
+Message-ID: <39cc3c98-16a6-3714-8a41-fa3a40ff46fe@gmail.com>
+References: <alpine.DEB.2.10.1805241750440.25719@sstabellini-ThinkPad-X260>
+ <192e0efc-417e-a26d-6373-7a775fec3f22@gmail.com>
+ <f84b27cb-ed36-44c1-ac12-3c8b02595286@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=zek6=ne=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gFKAF-0006SP-3E
- for xen-devel@lists.xenproject.org; Wed, 24 Oct 2018 14:29:39 +0000
-In-Reply-To: <CAHyh4xgK11VZjgwPKoAwNTx0rD4z+gk+oakY9JrCM426Ekqq0g@mail.gmail.com>
-Content-Language: de-DE
+In-Reply-To: <f84b27cb-ed36-44c1-ac12-3c8b02595286@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,21 +20,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jintack Lim <jintack@cs.columbia.edu>, xen-devel@lists.xenproject.org, xen-users@lists.xen.org
+To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org
+Cc: wei.liu2@citrix.com, ian.jackson@eu.citrix.com, blackskygg@gmail.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjQvMTAvMjAxOCAxNjoxNiwgSmludGFjayBMaW0gd3JvdGU6Cj4gSGksCj4gCj4gSSdtIGlu
-dGVyZXN0ZWQgcnVubmluZyBIVk0gRG9tVSBvbmx5IHdpdGggUFYgZHJpdmVycyAobmV0d29yayBh
-bmQKPiBkaXNrKS4gRW5hYmxpbmcgQ09ORklHX1hFTl9ORVRERVZfRlJPTlRFTkQgYW5kIHN0dWZm
-IGRpZG4ndCBtYWtlIERvbVUKPiBzZWUgdGhlIFBWIGRldmljZXMgdW50aWwgSSBlbmFibGVkIENP
-TkZJR19YRU5fUFZIVk0uCgpSaWdodCwgdGhhdCdzIGhvdyBpdCBpcyBkb25lIGluIG1vZGVybiBM
-aW51eCBrZXJuZWxzLgoKPiBCdXQgYnkgbG9va2luZyBhdCB0aGUgdmlydHVhbGl6YXRpb24gc3Bl
-Y3RydW1bMV0sIGl0IHNlZW1zIHBvc3NpYmxlIHRvCj4gZG8gIkhWTSB3aXRoIFBWIGRyaXZlcnMi
-LCBidXQgSSBjb3VsZG4ndCBmaW5kIGFueSBndWlkZSAoaS5lLgo+IGtlcm5lbC94ZW4gY29uZmln
-dXJhdGlvbikgdG8gZG8gdGhhdC4gQ291bGQgYW55b25lIHNoZWQgc29tZSBsaWdodCBvbgo+IHRo
-aXM/CgpEaXNhYmxpbmcgbW9zdCBvZiB0aGUgUFYgaW50ZXJmYWNlcyBvdGhlciB0aGFuIHRob3Nl
-IG5lZWRlZCBmb3IgdXNpbmcKUFYgZGV2aWNlcyBpc24ndCBzdXBwb3J0ZWQgaW4gTGludXggc2lu
-Y2Ugc2V2ZXJhbCB5ZWFycyBub3cuCgpBbnkgcmVhc29uIHdoeSB5b3Ugd2FudCB0byBkbyB0aGF0
-PwoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTAvMjQvMjAxOCAwNToyNCBQTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Cj4KPiBPbiAxMC8y
+NC8xOCAzOjE1IFBNLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPj4gSGksIFN0ZWZh
+bm8hCj4+Cj4+IEknbSBqdXN0IGN1cmlvdXMgaWYgdGhlIGJlbG93IGlzIG9uIHlvdXIgVE9ETyBs
+aXN0IFsxXToKPj4KPj4gMy4gRnV0dXJlIERpcmVjdGlvbnM6Cj4+ID09PT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0KPj4KPj4gQWxsb3cgdXNlcnMgdG8g
+b3B0aW9uYWxseSBzaGFyZSAqbWZuLWNvbnRpZ3VvdXMqIHBhZ2VzLgo+Cj4gV2hhdCBpcyB0aGUg
+dXNlIGNhc2UgZm9yIHRoYXQ/Ck5vIHJlYWwgdXNlLWNhc2UgYXQgdGhlIG1vbWVudCwgYnV0IHdl
+IG1pZ2h0IGhhdmUgb25lOiBmb3IgaW5zdGFuY2UsCnNoYXJpbmcgc29tZSBtZW1vcnkgd2hpY2gg
+aXMgdXNlZCBieSBkZXZpY2UgZmlybXdhcmUgYW5kIGRvbWFpbnMuCkJ1dCBpbiB0aGlzIGNhc2Ug
+aW9tZW0gY291bGQgcHJvYmFibHkgaGVscC4uLgo+Cj4gQ2hlZXJzLAo+CgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
