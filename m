@@ -1,15 +1,17 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
 Subject: Re: Ongoing/future speculative mitigation work
-Date: Thu, 25 Oct 2018 19:23:36 +0200
-Message-ID: <faf8d9511adf38f9c769103596df7c85b97db4ca.camel@suse.com>
+Date: Thu, 25 Oct 2018 11:29:08 -0600
+Message-ID: <CABfawhknLovL9xsm_ZQb3jjXriKxQiSo0t8ids0HA9Q3+kRp1A@mail.gmail.com>
 References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
  <CABfawh=GYUi2nvx5Nc1xfu7McVSqCwYOMyA6fyCKgYJCGCRkXA@mail.gmail.com>
  <9270f77c23dad0855a00030cc53ce4b2b9366d22.camel@suse.com>
  <CABfawhkcGspr8+0=A-vLq66HrFK1D7H_abTyMKd21h3Mk2gvNg@mail.gmail.com>
+ <faf8d9511adf38f9c769103596df7c85b97db4ca.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3260293027989696463=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CABfawhkcGspr8+0=A-vLq66HrFK1D7H_abTyMKd21h3Mk2gvNg@mail.gmail.com>
+In-Reply-To: <faf8d9511adf38f9c769103596df7c85b97db4ca.camel@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,114 +20,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Cc: mpohlack@amazon.de, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, joao.m.martins@oracle.com, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, aliguori@amazon.com, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, ross.philipson@oracle.com, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, mdontu <mdontu@bitdefender.com>, dwmw@amazon.co.uk, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: mpohlack@amazon.de, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, joao.m.martins@oracle.com, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, =?UTF-8?Q?Marek_Marczykowski=2DG=C3=B3recki?= <marmarek@invisiblethingslab.com>, aliguori@amazon.com, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, ross.philipson@oracle.com, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, mdontu <mdontu@bitdefender.com>, dwmw@amazon.co.uk, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3260293027989696463==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-8Nbm41r/DQQZ0aTrFqJz"
-
-
---=-8Nbm41r/DQQZ0aTrFqJz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-10-25 at 10:25 -0600, Tamas K Lengyel wrote:
-> On Thu, Oct 25, 2018 at 10:01 AM Dario Faggioli <dfaggioli@suse.com>
-> wrote:
-> >=20
-> > Which is indeed very interesting. But, as we're discussing in the
-> > other
-> > thread, I would, in your case, do some more measurements, varying
-> > the
-> > configuration of the system, in order to be absolutely sure you are
-> > not
-> > hitting some bug or anomaly.
->=20
-> Sure, I would be happy to repeat tests that were done in the past to
-> see whether they are still holding. We have run this test with Xen
-> 4.10, 4.11 and 4.12-unstable on laptops and desktops, using credit1
-> and credit2, and it is consistent that hyperthreading yields the
-> worst
-> performance.=20
->
-So, just to be clear, I'm not saying it's impossible to find a workload
-for which HT is detrimental. Quite the opposite. And these benchmarks
-you're running might well fall into that category.
-
-I'm just suggesting to double check that. :-)
-
-> It varies between platforms but it's around 10-40%
-> performance hit with hyperthread on. This test we do is a very CPU
-> intensive test where we heavily oversubscribe the system. But I don't
-> think it would be all that unusual to run into such a setup in the
-> real world from time-to-time.
->=20
-Ah, ok, so you're _heavily_ oversubscribing...
-
-So, I don't think that an heavily oversubscribed host, where all vCPUs
-would want to run 100% CPU intensive activities --and this not being
-some transient situation-- is that common. And for the ones for which
-it is, there is not much we can do, hyperthreading or not.
-
-In any case, hyperthreading works best when the workload is mixed,
-where it helps making sure that IO-bound tasks have enough chances to
-file a lot of IO requests, without conflicting too much with the CPU-
-bound tasks doing their number/logic crunching.
-
-Having _everyone_ wanting to do actual stuff on the CPUs is, IMO, one
-of the worst workloads for hyperthreading, and it is in fact a workload
-where I've always seen it having the least beneficial effect on
-performance. I guess it's possible that, in your case, it's actually
-really doing more harm than good.
-
-It's an interesting data point, but I wouldn't use a workload like that
-to measure the benefit, or the impact, of an SMT related change.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-8Nbm41r/DQQZ0aTrFqJz
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvR/BgACgkQFkJ4iaW4
-c+5QFRAA6JzTPYf+BKtNQ+vca1XK8IBr7/PXYXl9IyldAsisz26DV6JCzm4Oq5VU
-Wn7kCfOdXQ+jbR9A0oXL7aQ/x2m5w5mZai/+MZZndByjfDEfRMkmnY9Pb1DMwYNL
-NKjKtUlA96+XR1bJpFVM8Wy99l4BbJqMXA/Bizt6w7heuqT+WROGkL5crwkfFki5
-Ait8U0my/0aGtMw32Vj6tlj7EFzOXkZTuBb1Tc409AKXa2X5yl4SJ7J+rqhjGLiN
-gnjdYhYXOkArrNHiZa7uUoetpktWf3mqs+aHRm/jMQp6yxQshfYRRjcZ1LCpqiF0
-xtobvHTiTdCzyHgfRspy2PAanEY4jUObeY82hqk/OkdJfBYfKLZbHt2gnjMTKZEO
-AcOJF6EeuEIQuyb6KU9cP4qEoCySngZmOEBGOjy+/nOcW8/V0XkyaQLVyr6whrqN
-uzOCMAmNjKlfaQEYNq9SmHkNrADcF1z3KcdTCxbTDuf+6YdGsjMtqEZ8+o4kZ0Tj
-Nb6qyit1dCXeI/5Ph9VA3iK415ikcbJDmDuXiwSvaB7HtAWBCwgV2gqH4EfvzwVD
-4C0jsp6IpxQmCutQva7pu0rszZLvr4xN9kAMrmHARkxITLu532czs6ieQnh9vM2Z
-Xelsizzinb2yflGYMh1IeFQ9zHt+I1hCRqV3wsJaZqOxRuS/nSs=
-=T4RO
------END PGP SIGNATURE-----
-
---=-8Nbm41r/DQQZ0aTrFqJz--
-
-
-
---===============3260293027989696463==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3260293027989696463==--
+T24gVGh1LCBPY3QgMjUsIDIwMTggYXQgMTE6MjMgQU0gRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9s
+aUBzdXNlLmNvbT4gd3JvdGU6Cj4KPiBPbiBUaHUsIDIwMTgtMTAtMjUgYXQgMTA6MjUgLTA2MDAs
+IFRhbWFzIEsgTGVuZ3llbCB3cm90ZToKPiA+IE9uIFRodSwgT2N0IDI1LCAyMDE4IGF0IDEwOjAx
+IEFNIERhcmlvIEZhZ2dpb2xpIDxkZmFnZ2lvbGlAc3VzZS5jb20+Cj4gPiB3cm90ZToKPiA+ID4K
+PiA+ID4gV2hpY2ggaXMgaW5kZWVkIHZlcnkgaW50ZXJlc3RpbmcuIEJ1dCwgYXMgd2UncmUgZGlz
+Y3Vzc2luZyBpbiB0aGUKPiA+ID4gb3RoZXIKPiA+ID4gdGhyZWFkLCBJIHdvdWxkLCBpbiB5b3Vy
+IGNhc2UsIGRvIHNvbWUgbW9yZSBtZWFzdXJlbWVudHMsIHZhcnlpbmcKPiA+ID4gdGhlCj4gPiA+
+IGNvbmZpZ3VyYXRpb24gb2YgdGhlIHN5c3RlbSwgaW4gb3JkZXIgdG8gYmUgYWJzb2x1dGVseSBz
+dXJlIHlvdSBhcmUKPiA+ID4gbm90Cj4gPiA+IGhpdHRpbmcgc29tZSBidWcgb3IgYW5vbWFseS4K
+PiA+Cj4gPiBTdXJlLCBJIHdvdWxkIGJlIGhhcHB5IHRvIHJlcGVhdCB0ZXN0cyB0aGF0IHdlcmUg
+ZG9uZSBpbiB0aGUgcGFzdCB0bwo+ID4gc2VlIHdoZXRoZXIgdGhleSBhcmUgc3RpbGwgaG9sZGlu
+Zy4gV2UgaGF2ZSBydW4gdGhpcyB0ZXN0IHdpdGggWGVuCj4gPiA0LjEwLCA0LjExIGFuZCA0LjEy
+LXVuc3RhYmxlIG9uIGxhcHRvcHMgYW5kIGRlc2t0b3BzLCB1c2luZyBjcmVkaXQxCj4gPiBhbmQg
+Y3JlZGl0MiwgYW5kIGl0IGlzIGNvbnNpc3RlbnQgdGhhdCBoeXBlcnRocmVhZGluZyB5aWVsZHMg
+dGhlCj4gPiB3b3JzdAo+ID4gcGVyZm9ybWFuY2UuCj4gPgo+IFNvLCBqdXN0IHRvIGJlIGNsZWFy
+LCBJJ20gbm90IHNheWluZyBpdCdzIGltcG9zc2libGUgdG8gZmluZCBhIHdvcmtsb2FkCj4gZm9y
+IHdoaWNoIEhUIGlzIGRldHJpbWVudGFsLiBRdWl0ZSB0aGUgb3Bwb3NpdGUuIEFuZCB0aGVzZSBi
+ZW5jaG1hcmtzCj4geW91J3JlIHJ1bm5pbmcgbWlnaHQgd2VsbCBmYWxsIGludG8gdGhhdCBjYXRl
+Z29yeS4KPgo+IEknbSBqdXN0IHN1Z2dlc3RpbmcgdG8gZG91YmxlIGNoZWNrIHRoYXQuIDotKQo+
+Cj4gPiBJdCB2YXJpZXMgYmV0d2VlbiBwbGF0Zm9ybXMgYnV0IGl0J3MgYXJvdW5kIDEwLTQwJQo+
+ID4gcGVyZm9ybWFuY2UgaGl0IHdpdGggaHlwZXJ0aHJlYWQgb24uIFRoaXMgdGVzdCB3ZSBkbyBp
+cyBhIHZlcnkgQ1BVCj4gPiBpbnRlbnNpdmUgdGVzdCB3aGVyZSB3ZSBoZWF2aWx5IG92ZXJzdWJz
+Y3JpYmUgdGhlIHN5c3RlbS4gQnV0IEkgZG9uJ3QKPiA+IHRoaW5rIGl0IHdvdWxkIGJlIGFsbCB0
+aGF0IHVudXN1YWwgdG8gcnVuIGludG8gc3VjaCBhIHNldHVwIGluIHRoZQo+ID4gcmVhbCB3b3Js
+ZCBmcm9tIHRpbWUtdG8tdGltZS4KPiA+Cj4gQWgsIG9rLCBzbyB5b3UncmUgX2hlYXZpbHlfIG92
+ZXJzdWJzY3JpYmluZy4uLgo+Cj4gU28sIEkgZG9uJ3QgdGhpbmsgdGhhdCBhbiBoZWF2aWx5IG92
+ZXJzdWJzY3JpYmVkIGhvc3QsIHdoZXJlIGFsbCB2Q1BVcwo+IHdvdWxkIHdhbnQgdG8gcnVuIDEw
+MCUgQ1BVIGludGVuc2l2ZSBhY3Rpdml0aWVzIC0tYW5kIHRoaXMgbm90IGJlaW5nCj4gc29tZSB0
+cmFuc2llbnQgc2l0dWF0aW9uLS0gaXMgdGhhdCBjb21tb24uIEFuZCBmb3IgdGhlIG9uZXMgZm9y
+IHdoaWNoCj4gaXQgaXMsIHRoZXJlIGlzIG5vdCBtdWNoIHdlIGNhbiBkbywgaHlwZXJ0aHJlYWRp
+bmcgb3Igbm90Lgo+Cj4gSW4gYW55IGNhc2UsIGh5cGVydGhyZWFkaW5nIHdvcmtzIGJlc3Qgd2hl
+biB0aGUgd29ya2xvYWQgaXMgbWl4ZWQsCj4gd2hlcmUgaXQgaGVscHMgbWFraW5nIHN1cmUgdGhh
+dCBJTy1ib3VuZCB0YXNrcyBoYXZlIGVub3VnaCBjaGFuY2VzIHRvCj4gZmlsZSBhIGxvdCBvZiBJ
+TyByZXF1ZXN0cywgd2l0aG91dCBjb25mbGljdGluZyB0b28gbXVjaCB3aXRoIHRoZSBDUFUtCj4g
+Ym91bmQgdGFza3MgZG9pbmcgdGhlaXIgbnVtYmVyL2xvZ2ljIGNydW5jaGluZy4KPgo+IEhhdmlu
+ZyBfZXZlcnlvbmVfIHdhbnRpbmcgdG8gZG8gYWN0dWFsIHN0dWZmIG9uIHRoZSBDUFVzIGlzLCBJ
+TU8sIG9uZQo+IG9mIHRoZSB3b3JzdCB3b3JrbG9hZHMgZm9yIGh5cGVydGhyZWFkaW5nLCBhbmQg
+aXQgaXMgaW4gZmFjdCBhIHdvcmtsb2FkCj4gd2hlcmUgSSd2ZSBhbHdheXMgc2VlbiBpdCBoYXZp
+bmcgdGhlIGxlYXN0IGJlbmVmaWNpYWwgZWZmZWN0IG9uCj4gcGVyZm9ybWFuY2UuIEkgZ3Vlc3Mg
+aXQncyBwb3NzaWJsZSB0aGF0LCBpbiB5b3VyIGNhc2UsIGl0J3MgYWN0dWFsbHkKPiByZWFsbHkg
+ZG9pbmcgbW9yZSBoYXJtIHRoYW4gZ29vZC4KPgo+IEl0J3MgYW4gaW50ZXJlc3RpbmcgZGF0YSBw
+b2ludCwgYnV0IEkgd291bGRuJ3QgdXNlIGEgd29ya2xvYWQgbGlrZSB0aGF0Cj4gdG8gbWVhc3Vy
+ZSB0aGUgYmVuZWZpdCwgb3IgdGhlIGltcGFjdCwgb2YgYW4gU01UIHJlbGF0ZWQgY2hhbmdlLgoK
+VGhhbmtzLCBhbmQgaW5kZWVkIHRoaXMgdGVzdCBpcyB0aGUgd29yc3QtY2FzZSBzY2VuYXJpbyBm
+b3IKaHlwZXJ0aHJlYWRpbmcsIHRoYXQncyB3YXMgb3VyIGdvYWwuIFdoaWxlIGEgdHlwaWNhbCB3
+b3JrLWxvYWQgbWF5IG5vdApiZSBzaW1pbGFyLCBpdCBpcyBhIHBvc3NpYmxlIG9uZSBmb3IgdGhl
+IHN5c3RlbSB3ZSBhcmUgY29uY2VybmVkCmFib3V0LiBTbyBpZiBhdCBhbnkgZ2l2ZW4gdGltZSB0
+aGUgYmVuZWZpdCBvZiBoeXBlcnRocmVhZGluZyByYW5nZXMKYmV0d2VlbiBzYXkgKzMwJSBhbmQg
+LTMwJSBhbmQgd2UgY2FuJ3QgcHJlZGljdCB0aGUgd29ya2xvYWQgb3IKb3B0aW1pemUgaXQsIGl0
+IGlzIGxvb2tpbmcgbGlrZSBhIHNhZmUgYmV0IHRvIGp1c3QgZGlzYWJsZQpoeXBlcnRocmVhZGlu
+Zy4gV291bGQgeW91IGFncmVlPwoKVGFtYXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
