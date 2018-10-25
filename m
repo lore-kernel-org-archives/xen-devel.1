@@ -1,15 +1,9 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH RFC] x86/altp2m: fix display frozen when
- switching to a new view early
-Date: Thu, 25 Oct 2018 03:42:09 -0600
-Message-ID: <5BD18FF102000078001F48CF@prv1-mh.provo.novell.com>
-References: <1535963136-31751-1-git-send-email-rcojocaru@bitdefender.com>
- <a44355eb-79ab-30ee-26d1-4d611dc8eeb7@citrix.com>
- <ac06731a-a44c-fce7-0638-eecf68579176@citrix.com>
- <d0358c5a-1f63-e64c-d988-d5475caa766f@bitdefender.com>
- <5BB62FA902000078001EE6BC@prv1-mh.provo.novell.com>
- <d66b5a9f-4e88-7d67-9238-3f813e665d1d@bitdefender.com>
- <7cc2d3bf-a1dc-b803-cfec-8dd8020b3b10@citrix.com>
+Subject: Re: [PATCH RFC] VMX: fix vmx_handle_eoi()
+Date: Thu, 25 Oct 2018 03:46:28 -0600
+Message-ID: <5BD190F402000078001F48E2@prv1-mh.provo.novell.com>
+References: <5BC06A4B02000078001F0EE0@prv1-mh.provo.novell.com>
+ <20181019143010.GA24016@gao-cwp>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -17,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=29w0=nf=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gFc9f-0007Be-9k
- for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 09:42:15 +0000
-In-Reply-To: <7cc2d3bf-a1dc-b803-cfec-8dd8020b3b10@citrix.com>
+ id 1gFcEB-0007MK-Kl
+ for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 09:46:55 +0000
+In-Reply-To: <20181019143010.GA24016@gao-cwp>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,28 +23,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, george.dunlap@citrix.com, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Chao Gao <chao.gao@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE3LjEwLjE4IGF0IDE1OjMwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTcvMTAvMTggMTQ6MjYsIFJhenZhbiBDb2pvY2FydSB3cm90ZToKPj4gT24gMTAv
-NC8xOCA2OjIwIFBNLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+IFJvZ2VyIHJlY2VudGx5IGhhcyBw
-b3N0ZWQgYSBwYXRjaCBhZGRpbmcgcmFuZ2VzZXRfbWVyZ2UoKSwgd2hpY2ggSSB0aGluawo+Pj4g
-aXMgbW9yZSBnZW5lcmFsIHRoYW4geW91ciByYW5nZXNldF9jb3B5KCkuIFRoYXQgc2FpZCwgSSdt
-IGluIG5vIHdheQo+Pj4gY29udmluY2VkIGNvcHlpbmcgKGFuZCB0aGVuIGtlZXBpbmcgaW4gc3lu
-YykgdGhlIHJhbmdlIHNldHMgYWNyb3NzIHRoZQo+Pj4gYWx0cDJtLXMgaXMgdGhlIGJlc3QgYXBw
-cm9hY2guIEl0IG1heSB3ZWxsIGJlIHRoYXQgdGhlIG9wdGltYWwgc29sdXRpb24gaXMKPj4+IHNv
-bWV3aGVyZSBpbiB0aGUgbWlkZGxlIGJldHdlZW4gc2hhcmluZyBldmVyeXRoaW5nIGFuZCBjb3B5
-aW5nCj4+PiBldmVyeXRoaW5nLgo+PiBXb3VsZCBpdCBiZSBwb3NzaWJsZSB0byBnZXQgUm9nZXIn
-cyBwYXRjaCBpbnRvIHN0YWdpbmc/Cj4+Cj4+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-YXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0wNi9tc2cwMTMzMS5odG1sIAo+Pgo+PiBJdCBs
-b29rcyBzaW1wbGUgZW5vdWdoIGFuZCBpdCBoYXMgYWxyZWFkeSBhY2tlZCBieSBXZWkuCj4gCj4g
-TG9va3MgZ29vZCBlbm91Z2ggdG8gbWUuICBQdXNoZWQuCgpXZWxsLCB0aGUgcmVhc29uIEkgZGlk
-bid0IHdhbnQgdG8gY29tbWl0IGl0IG9uIGl0cyBvd24gaXMgdGhhdCBub3cKd2UgaGF2ZSBpdCBp
-biB0aGUgdHJlZSBhcyBkZWFkIGNvZGUuIEFueSBjaGFuZ2Ugb2YgeW91cnMgY291bGQKaGF2ZSBp
-bmNsdWRlZCBSb2dlcidzIHBhdGNoICh1bnRpbCBpdCBtaWdodCBoYXZlIGdvbmUgaW4gZnJvbSBo
-aXMKc2VyaWVzKS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+Pj4+IE9uIDE5LjEwLjE4IGF0IDE2OjMwLCA8Y2hhby5nYW9AaW50ZWwuY29tPiB3cm90ZToKPiBP
+biBGcmksIE9jdCAxMiwgMjAxOCBhdCAwMzozMjo1OUFNIC0wNjAwLCBKYW4gQmV1bGljaCB3cm90
+ZToKPj5JbiBjb21taXQgMzAzMDY2ZmRiMWUgKCJWTVg6IGZpeCBpbnRlcmFjdGlvbiBvZiBBUElD
+LVYgYW5kIFZpcmlkaWFuCj4+ZW11bGF0aW9uIikgSSBzY3Jld2VkIHVwIHF1aXRlIGhlYXZpbHk6
+IEluc3RlYWQgb2YgY2xlYXJpbmcgU1ZJLCBSVkkgd2FzCj4+Y2xlYXJlZC4gRnVydGhlcm1vcmUs
+IHVuY29uZGl0aW9uYWwgY2xlYXJpbmcgb2YgU1ZJIGlzIHdyb25nIHRvbyAtIG90aGVyCj4+SVNS
+IGJpdHMgc2hvdWxkIGJlIHRha2VuIGludG8gYWNjb3VudC4KPj4KPj5JbnRyb2R1Y2UgYSBuZXcg
+aGVscGVyIHNldF9zdmkoKSwgc3BsaXQgb3V0IG9mIHZteF9wcm9jZXNzX2lzcigpLCBhbmQKPj51
+c2UgaXQgYWxzbyBmcm9tIHZteF9oYW5kbGVfZW9pKCkuCj4+Cj4+Rm9sbG93aW5nIHRoZSBwcm9i
+bGVtcyBpbiB2bXhfaW50cl9hc3Npc3QoKSAoc2VlIHRoZSBzdGlsbCBwcmVzZW50IGJpZwo+PmJs
+b2NrIG9mIGRlYnVnZ2luZyBjb2RlIHRoZXJlKSBhbHNvIHdhcm4gKG9uY2UpIGlmIEVPSSdkIHZl
+Y3RvciBhbmQKPj5vcmlnaW5hbCBTVkkgZG9uJ3QgbWF0Y2guCj4+Cj4+U2lnbmVkLW9mZi1ieTog
+SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+IAo+IEFmdGVyIGNvcnJlY3RpbmcgdGhl
+IGRlc2NyaXB0aW9uIGluIHRoZSBmaXJzdCBwYXJhZ3JhcGgKPiAKPiBSZXZpZXdlZC1ieTogQ2hh
+byBHYW8gPGNoYW8uZ2FvQGludGVsLmNvbT4KCldpdGggdGhpcyAtIGFueSBjaGFuY2Ugb2YgZ2V0
+dGluZyB0aGUgbmVjZXNzYXJ5IGFja3M/IE9yCmFtIEkgZXhwZWN0ZWQgdG8gcmUtc3VibWl0IHdp
+dGggdGhlIChhbHJlYWR5KSBhZGp1c3RlZApkZXNjcmlwdGlvbj8KCkphbgoKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
