@@ -1,22 +1,17 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 09/17] x86/amd: put setting
- pv_post_outb_hook under CONFIG_PV
-Date: Thu, 25 Oct 2018 03:22:17 -0600
-Message-ID: <5BD18B4902000078001F4897@prv1-mh.provo.novell.com>
-References: <cover.9120eb87824b754ecdc7b1a5b95ea216404877a3.1538667753.git-series.wei.liu2@citrix.com>
- <f1fafccc6ba352431e3ba72e834fd37e37b9eb9e.1538667753.git-series.wei.liu2@citrix.com>
- <5BC0AC4C02000078001F1097@prv1-mh.provo.novell.com>
- <20181015111924.lkjcwk7oodihz5z4@mac.bytemobile.com>
+Subject: Re: [PATCH v4 20/23] xen: support console_switching
+ between Dom0 and DomUs on ARM
+Date: Thu, 25 Oct 2018 03:37:52 -0600
+Message-ID: <5BD18EF002000078001F48B3@prv1-mh.provo.novell.com>
+References: <alpine.DEB.2.10.1810051140030.24936@sstabellini-ThinkPad-X260>
+ <1538765251-25256-20-git-send-email-sstabellini@kernel.org>
+ <5BBB288102000078001EF757@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1810191556310.31582@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=29w0=nf=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gFbqQ-0005Z2-Vb
- for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 09:22:23 +0000
-In-Reply-To: <20181015111924.lkjcwk7oodihz5z4@mac.bytemobile.com>
+In-Reply-To: <alpine.DEB.2.10.1810191556310.31582@sstabellini-ThinkPad-X260>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,27 +21,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <stefanos@xilinx.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE1LjEwLjE4IGF0IDEzOjE5LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
-IE9uIEZyaSwgT2N0IDEyLCAyMDE4IGF0IDA4OjE0OjM2QU0gLTA2MDAsIEphbiBCZXVsaWNoIHdy
-b3RlOgo+PiA+Pj4gT24gMDQuMTAuMTggYXQgMTc6NDMsIDx3ZWkubGl1MkBjaXRyaXguY29tPiB3
-cm90ZToKPj4gPiBJdCBpcyB1c2VkIGJ5IFBWIGNvZGUgb25seS4KPj4gCj4+IEFuZCB3cm9uZ2x5
-IHNvIC0gdGhlIHNhbWUgaXMgbmVlZGVkIGZvciBhIFBWSCBEb20wIGFmYWljdC4KPiAKPiBZZXMs
-IGxvb2tpbmcgYXQgdGhlIG1vZGVscyBhZmZlY3RlZCBieSB0aGlzIGlzc3VlIGFjY29yZGluZyB0
-bwo+IGluaXRfYW1kIGl0IHNlZW1zIHRvIGNvdmVyIHRoZSBmdWxsIEFNRCBsaW5lIChmcm9tIGZh
-bWlseSAweGYgdG8KPiAweDE3KS4gSSBkb24ndCBzZWVtIHRvIGZpbmQgYSByZWZlcmVuY2UgaW4g
-dGhlIGNvZGUgdG8gdGhlIEVycmF0YSwgZG8KPiB5b3Uga25vdyBpZiB0aGVyZSdzIHNvbWUgZm9y
-bWFsIGRlc2NyaXB0aW9uIG9mIGl0PwoKSSBkb24ndCByZWNhbGwgdGhpcyBoYXZpbmcgYmVlbiBj
-b25zaWRlcmVkIGFuIGVycmF0dW0uCgpDaGVja2luZyBqdXN0IHRoZSBGYW0xMCBhbmQgRmFtMTUg
-QktER3MsIEknbSBnZXR0aW5nIHRoZQppbXByZXNzaW9uIHRoYXQgRmFtMTUgZG9lcyBub3QgaGF2
-ZSB0aGUgaXNzdWUgd29ya2VkIGFyb3VuZApoZXJlLiBJdCBtaWdodCBmdXJ0aGVyIGJlIHRoYXQg
-bm90IGV2ZW4gYWxsIEZhbTEwIHN0ZXBwaW5ncyBhcmUKYWZmZWN0ZWQuIEJyaWFuIC0gYW55IGNo
-YW5jZSB5b3UgY291bGQgY2xhcmlmeSB0aGlzIGZvciB1cz8KCkluZGVwZW5kZW50IG9mIHRoZSBy
-YW5nZSBvZiBzeXN0ZW1zIGFmZmVjdGVkIEkgc3RpbGwgdGhpbmsgdGhhdApQVkggRG9tMCBiZWhh
-dmlvciBoZXJlIG91Z2h0IHRvIGJlIHRoZSBzYW1lIGFzIFBWIERvbTAncy4KCkphbgoKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDIwLjEwLjE4IGF0IDAxOjEwLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
+Cj4gT24gTW9uLCA4IE9jdCAyMDE4LCBKYW4gQmV1bGljaCB3cm90ZToKPj4gPj4+IE9uIDA1LjEw
+LjE4IGF0IDIwOjQ3LCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6Cj4+ID4gQEAgLTM5
+MSwzMSArMzk0LDczIEBAIHN0YXRpYyB2b2lkIGR1bXBfY29uc29sZV9yaW5nX2tleSh1bnNpZ25l
+ZCBjaGFyIGtleSkKPj4gPiAgICAgIGZyZWVfeGVuaGVhcF9wYWdlcyhidWYsIG9yZGVyKTsKPj4g
+PiAgfQo+PiA+ICAKPj4gPiAtLyogQ1RSTC08c3dpdGNoX2NoYXI+IHN3aXRjaGVzIGlucHV0IGRp
+cmVjdGlvbiBiZXR3ZWVuIFhlbiBhbmQgRE9NMC4gKi8KPj4gPiArLyoKPj4gPiArICogQ1RSTC08
+c3dpdGNoX2NoYXI+IHN3aXRjaGVzIGlucHV0IGRpcmVjdGlvbiBiZXR3ZWVuIFhlbiwgRG9tMCBh
+bmQKPj4gPiArICogRG9tVXMuCj4+ID4gKyAqLwo+PiAKPj4gSnVzdCBsaWtlIHRoZSB0aXRsZSwg
+dGhpcyBjb21tZW50IG1ha2VzIGl0IHNvdW5kIGFzIGlmIGFueSBEb21VIGNvdWxkCj4+IHBhcnRp
+Y2lwYXRlIGluIHRoaXMgc3dpdGNoaW5nLgo+IAo+IElzIHRoZSBmb2xsb3dpbmcgYW55IGJldHRl
+cj8KPiAKPiAgIENUUkwtPHN3aXRjaF9jaGFyPiBjaGFuZ2VzIGlucHV0IGRpcmVjdGlvbiwgcm90
+YXRpbmcgYW1vbmcgWGVuLCBEb20wLCBhbmQgCj4gRG9tVXMuCj4gCj4gT3RoZXJ3aXNlIHBsZWFz
+ZSBzdWdnZXN0IHlvdXIgZmF2b3JpdGUgd29yZGluZyBhbmQgSSdsbCB1c2UgaXQuCgoiLi4uLCBh
+bmQgdGhlIDx3aGF0ZXZlci10ZXJtLXlvdS1tZWFuLXRvLXVzLWZvci1ib290LXRpbWUtCmNyZWF0
+ZWQtb25lcz4gRG9tVXMiCgo+PiA+ICsgICAgewo+PiA+ICsgICAgICAgIC8qIERlbGl2ZXIgaW5w
+dXQgdG8gaGFyZHdhcmUgZG9tYWluLCB1bmxlc3MgaXQgaXMgYWxyZWFkeSBmdWxsLiAqLwo+PiAK
+Pj4gTG9va3MgbGlrZSB5b3UndmUgbWlzLWVkaXRlZCB0aGUgb3JpZ2luYWwgY29tbWVudC4KPiAK
+PiBJIHRha2UgdGhhdCB5b3UgbWVhbiB0aGF0IHRoZSB3b3JkICJidWZmZXIiIGlzIG1pc3Npbmcs
+IHJpZ2h0PyBJdCBzaG91bGQKPiBiZToKPiAKPiAgIERlbGl2ZXIgaW5wdXQgdG8gdGhlIGhhcmR3
+YXJlIGRvbWFpbiBidWZmZXIsIHVubGVzcyBpdCBpcyBhbHJlYWR5IGZ1bGwuCgpZZXMsIHRoYW5r
+cy4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
