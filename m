@@ -1,16 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] x86/efi: Do not insert timestamps in efi
- files
-Date: Thu, 25 Oct 2018 09:02:05 +0100
-Message-ID: <20181025080205.kb7nsbl6kksyp7cx@zion.uk.xensource.com>
-References: <7a88f5cb-8f0a-9974-8e84-990045cb8726@suse.de>
- <20181024134522.3295-1-bwiedemann@suse.de>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [OSSTEST PATCH 3/3] mfi-common: Drop freebsd builds
+ on non-freebsd flights
+Date: Thu, 25 Oct 2018 10:49:44 +0200
+Message-ID: <20181025084944.7fq5ehtsso2kxgpz@mac.bytemobile.com>
+References: <20181024103201.18681-1-ian.jackson@eu.citrix.com>
+ <20181024103201.18681-3-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=aquw=nf=citrix.com=prvs=82994c311=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gFbLC-00036J-ET
+ for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 08:50:06 +0000
 Content-Disposition: inline
-In-Reply-To: <20181024134522.3295-1-bwiedemann@suse.de>
+In-Reply-To: <20181024103201.18681-3-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,16 +24,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBPY3QgMjQsIDIwMTggYXQgMDM6NDU6MjJQTSArMDIwMCwgQmVybmhhcmQgTS4gV2ll
-ZGVtYW5uIHdyb3RlOgo+IGluIG9yZGVyIHRvIG1ha2UgYnVpbGRzIHJlcHJvZHVjaWJsZS4KPiBT
-ZWUgaHR0cHM6Ly9yZXByb2R1Y2libGUtYnVpbGRzLm9yZy8gZm9yIHdoeSB0aGlzIGlzIGdvb2Qu
-Cj4gCj4gV2Ugb25seSBhZGQgdGhlIG9wdGlvbiwgaWYgbGQgdW5kZXJzdGFuZHMgaXQuCj4gCj4g
-U2lnbmVkLW9mZi1ieTogQmVybmhhcmQgTS4gV2llZGVtYW5uIDxid2llZGVtYW5uQHN1c2UuZGU+
-CgpSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBPY3QgMjQsIDIwMTggYXQgMTE6MzI6MDFBTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
+dGU6Cj4gU29tZXRoaW5nIGlzIHdyb25nIHdpdGggdGhlIGZyZWVic2QgcmVwb3NpdG9yaWVzLiAg
+VGhpcyBjYXVzZXMgZnJlZWJzZAo+IGhvc3QgaW5zdGFsbGF0aW9uIHRvIGZhaWwuICBUaGlzIHBy
+b2JsZW0gaGFzIHBlcnNpc3RlZCBmb3IgYSB3aGlsZSBub3cKPiBhbmQgaXMgYmxvY2tpbmcgb3Ro
+ZXIgd29yay4KPiAKPiBGb3Igbm93LCBkcm9wIHRoZXNlLiAgVGhlIGpvYnMgYmVpbmcgZHJvcHBl
+ZCBhcmUKPiAgICAgICBidWlsZC1hbWQ2NC14ZW4tZnJlZWJzZAo+ICAgICAgIGJ1aWxkLWFtZDY0
+LXhlbi14c20tZnJlZWJzZAo+IGluIHRoZSBicmFuY2hlcwo+ICAgICAgIG9zc3Rlc3QKPiAgICAg
+ICB4ZW4tdW5zdGFibGUKPiAodmVyaWZpZWQgd2l0aCBzdGFuZGFsb25lLWdlbmVyYXRlLWR1bXAt
+ZmxpZ2h0LXJ1bnZhcnMpLgo+IAo+IENDOiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0
+cml4LmNvbT4KPiBDQzogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiBTaWduZWQtb2Zm
+LWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBS
+b2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCkknbSByZWFsbHkgc29ycnks
+IEkndmUgYmVlbiB0cnlpbmcgdG8gZ2V0IHRoaXMgZml4ZWQgdXBzdHJlYW0gYnV0CnRoZXJlIHNl
+ZW1zIHRvIGJlIHNvbWUgKGluZnJhPykgaXNzdWVzIGJlY2F1c2UgRnJlZUJTRCBpcyBpbiB0aGUK
+bWlkZGxlIG9mIHRoZSBicmFuY2hpbmcgcHJvY2VzcyBmb3IgdGhlIDEyLjAgcmVsZWFzZS4KCkkg
+aGF2ZSBhIHBsYW4gdG8gZml4IHRoaXMgcHJvcGVybHkgc28gdGhlcmUncyBubyBkZXBlbmRlbmN5
+IG9uCnVwc3RyZWFtIGJpbmFyeSBwYWNrYWdlcyBhbnltb3JlLgoKVGhhbmtzLCBSb2dlci4KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
