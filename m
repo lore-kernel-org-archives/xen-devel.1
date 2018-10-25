@@ -1,15 +1,17 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: Ongoing/future speculative mitigation work
-Date: Thu, 25 Oct 2018 17:55:42 +0100
-Message-ID: <7079d0ee-a8ef-e164-12d9-8e3bfef81491@citrix.com>
-References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
- <CABfawh=GYUi2nvx5Nc1xfu7McVSqCwYOMyA6fyCKgYJCGCRkXA@mail.gmail.com>
+From: Andrii Anisov <Andrii_Anisov@epam.com>
+Subject: Re: [PATCH 09/22] xen/arm: Move HSR defines in a new
+ header hsr.h
+Date: Thu, 25 Oct 2018 16:58:23 +0000
+Message-ID: <31039f90-f8ca-8d0d-e0e5-157e047b7a4d@epam.com>
+References: <20181018132109.31192-1-julien.grall@arm.com>
+ <20181018132109.31192-10-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CABfawh=GYUi2nvx5Nc1xfu7McVSqCwYOMyA6fyCKgYJCGCRkXA@mail.gmail.com>
-Content-Language: en-GB
+In-Reply-To: <20181018132109.31192-10-julien.grall@arm.com>
+Content-Language: en-US
+Content-ID: <137CF08DCDD9914081C14499B5AD4776@EPAM.onmicrosoft.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,44 +20,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Cc: mpohlack@amazon.de, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, joao.m.martins@oracle.com, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, aliguori@amazon.com, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, ross.philipson@oracle.com, Dario Faggioli <dfaggioli@suse.com>, msw@amazon.com, Boris Ostrovsky <boris.ostrovsky@oracle.com>, JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, mdontu <mdontu@bitdefender.com>, dwmw@amazon.co.uk, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjQvMTAvMTggMTY6MjQsIFRhbWFzIEsgTGVuZ3llbCB3cm90ZToKPj4gQSBzb2x1dGlvbiB0
-byB0aGlzIGlzc3VlIHdhcyBwcm9wb3NlZCwgd2hlcmVieSBYZW4gc3luY2hyb25pc2VzIHNpYmxp
-bmdzCj4+IG9uIHZtZXhpdC9lbnRyeSwgc28gd2UgYXJlIG5ldmVyIGV4ZWN1dGluZyBjb2RlIGlu
-IHR3byBkaWZmZXJlbnQKPj4gcHJpdmlsZWdlIGxldmVscy4gIEdldHRpbmcgdGhpcyB3b3JraW5n
-IHdvdWxkIG1ha2UgaXQgc2FmZSB0byBjb250aW51ZQo+PiB1c2luZyBoeXBlcnRocmVhZGluZyBl
-dmVuIGluIHRoZSBwcmVzZW5jZSBvZiBMMVRGLiAgT2J2aW91c2x5LCBpdHMgZ29pbmcKPj4gdG8g
-Y29tZSBpbiBwZXJmIGhpdCwgYnV0IGNvbXBhcmVkIHRvIGRpc2FibGluZyBoeXBlcnRocmVhZGlu
-ZywgYWxsIGl0cwo+PiBnb3QgdG8gZG8gaXMgYmVhdCBhIDYwJSBwZXJmIGhpdCB0byBtYWtlIGl0
-IHRoZSBwcmVmZXJhYmxlIG9wdGlvbiBmb3IKPj4gbWFraW5nIHlvdXIgc3lzdGVtIEwxVEYtcHJv
-b2YuCj4gQ291bGQgeW91IHNoZWQgc29tZSBsaWdodCB3aGF0IHRlc3RzIHdlcmUgZG9uZSB3aGVy
-ZSB0aGF0IDYwJQo+IHBlcmZvcm1hbmNlIGhpdCB3YXMgb2JzZXJ2ZWQ/IFdlIGhhdmUgcGVyZm9y
-bWVkIGludGVuc2l2ZSBzdHJlc3MtdGVzdHMKPiB0byBjb25maXJtIHRoaXMgYnV0IGFjY29yZGlu
-ZyB0byBvdXIgZmluZGluZ3MgdHVybmluZyBvZmYKPiBoeXBlci10aHJlYWRpbmcgaXMgYWN0dWFs
-bHkgaW1wcm92aW5nIHBlcmZvcm1hbmNlIG9uIGFsbCBtYWNoaW5lcyB3ZQo+IHRlc3RlZCB0aHVz
-IGZhci4KCkFnZ3JlZ2F0ZSBpbnRlciBhbmQgaW50cmEgaG9zdCBkaXNrIGFuZCBuZXR3b3JrIHRo
-cm91Z2hwdXQsIHdoaWNoIGlzIGEKcmVhc29uYWJsZSBhcHByb3hpbWF0aW9uIG9mIGEgbG9hZCBv
-ZiB3ZWJzZXJ2ZXIgVk0ncyBvbiBhIHNpbmdsZQpwaHlzaWNhbCBzZXJ2ZXIuwqAgU21hbGwgcGFj
-a2V0IElPIHdhcyBoaXQgd29yc3QsIGFzIGl0IGhhcyBhIHZlcnkgaGlnaAp2Y3B1IGNvbnRleHQg
-c3dpdGNoIHJhdGUgYmV0d2VlbiBkb20wIGFuZCBkb21VLsKgIERpc2FibGluZyBIVCBtZWFucyB5
-b3UKaGF2ZSBoYWxmIHRoZSBudW1iZXIgb2YgbG9naWNhbCBjb3JlcyB0byBzY2hlZHVsZSBvbiwg
-d2hpY2ggZG91YmxlcyB0aGUKbWVhbiB0aW1lIHRvIG5leHQgdGltZXNsaWNlLgoKSW4gcHJpbmNp
-cGxlLCBmb3IgYSBmdWxseSBvcHRpbWlzZWQgd29ya2xvYWQsIEhUIGdldHMgeW91IH4zMCUgZXh0
-cmEgZHVlCnRvIGluY3JlYXNlZCB1dGlsaXNhdGlvbiBvZiB0aGUgcGlwZWxpbmUgZnVuY3Rpb25h
-bCB1bml0cy7CoCBTb21lCnJlc291cmNlcyBhcmUgc3RhdGljYWxseSBwYXJ0aXRpb25lZCwgd2hp
-bGUgc29tZSBhcmUgY29tcGV0aXRpdmVseQpzaGFyZWQsIGFuZCBpdHMgbm93IGJlZW4gd2VsbCBw
-cm92ZW4gdGhhdCBhY3Rpb25zIG9uIG9uZSB0aHJlYWQgY2FuIGhhdmUKYSBsYXJnZSBlZmZlY3Qg
-b24gb3RoZXJzLgoKVHdvIGFyYml0cmFyeSB2Y3B1cyBhcmUgbm90IGFuIG9wdGltaXNlZCB3b3Jr
-bG9hZC7CoCBJZiB0aGUgcGVyZgppbXByb3ZlbWVudCB5b3UgZ2V0IGZyb20gbm90IGNvbXBldGlu
-ZyBpbiB0aGUgcGlwZWxpbmUgaXMgZ3JlYXRlciB0aGFuCnRoZSBwZXJmIGxvc3MgZnJvbSBYZW4n
-cyByZWR1Y2VkIGNhcGFiaWxpdHkgdG8gc2NoZWR1bGUsIHRoZW4gZGlzYWJsaW5nCkhUIHdvdWxk
-IGJlIGFuIGltcHJvdmVtZW50LsKgIEkgY2FuIGNlcnRhaW5seSBiZWxpZXZlIHRoYXQgdGhpcyBt
-aWdodCBiZQp0aGUgY2FzZSBmb3IgUXViZXMgc3R5bGUgd29ya2xvYWRzIHdoZXJlIHlvdSBhcmUg
-cHJvYmFibHkgbm90IHZlcnkKb3ZlcnByb3Zpc2lvbmVkLCBhbmQgeW91IHByb2JhYmx5IGRvbid0
-IGhhdmUgbG9uZyBydW5uaW5nIElPIGFuZCBDUFUKYm91bmQgdGFza3MgaW4gdGhlIFZNcy4KCn5B
-bmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Ck9uIDE4LjEwLjE4IDE2OjIwLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gVGhlIEhTUiBkZWZpbmVz
+IGFyZSBwcmV0dHkgbXVjaCBzZWxmLWNvbnRhaW5lZCBhbmQgbm90IG5lY2Vzc2FyeSB0byBiZQo+
+IGluY2x1ZGVkIGV2ZXJ5d2hlcmUgaW4gWGVuLiBTbyBtb3ZlIHRoZW0gaW4gYSBuZXcgaGVhZGVy
+IGhzci5oLgo+Cj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJt
+LmNvbT4KCgpSZXZpZXdlZC1ieTogQW5kcmlpIEFuaXNvdiA8YW5kcmlpX2FuaXNvdkBlcGFtLmNv
+bT4KCi0tIAoKKkFuZHJpaSBBbmlzb3YqCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
