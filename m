@@ -1,16 +1,18 @@
-From: Andrii Anisov <Andrii_Anisov@epam.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH 1/4] xen/arm: gic: Ensure we have an ISB
  between ack and do_IRQ()
-Date: Thu, 25 Oct 2018 14:11:54 +0000
-Message-ID: <77f72cc9-6548-afd9-3766-23326b3551d9@epam.com>
+Date: Thu, 25 Oct 2018 15:22:20 +0100
+Message-ID: <23a2ae51-670e-8fb2-b589-4e63a4a27e7c@arm.com>
 References: <20181023181709.11883-1-julien.grall@arm.com>
  <20181023181709.11883-2-julien.grall@arm.com>
  <6098937f-98de-bff9-6c48-5575a45875e0@epam.com>
  <57ee191b-be21-701e-ef19-4ed4df1cf289@arm.com>
+ <77f72cc9-6548-afd9-3766-23326b3551d9@epam.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1328300745440899058=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <57ee191b-be21-701e-ef19-4ed4df1cf289@arm.com>
+In-Reply-To: <77f72cc9-6548-afd9-3766-23326b3551d9@epam.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,321 +22,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Andrii Anisov <Andrii_Anisov@epam.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 Cc: "andre.przywara@arm.com" <andre.przywara@arm.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1328300745440899058==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_77f72cc96548afd9376623326b3551d9epamcom_"
-
---_000_77f72cc96548afd9376623326b3551d9epamcom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Hello  Julien,
-
-
-On 24.10.18 17:41, Julien Grall wrote:
-> vGIC is not only about GICv2. It also covers GICv3 that is accessible
-> via system registers.
-Yes, I know. But, as you state below, for GICv2 based systems those
-barriers are not needed.
-
->>>    rely on a context synchronising
->>> operation on the CPU to ensure that the updated status register is
->>> visible to the CPU when handling the interrupt. This usually happens as
->>> a result of taking the IRQ exception in the first place, but there are
->>> two race scenarios where this isn't the case.
->>>
->>> For example, let's say we have two peripherals (X and Y), where Y
->>> uses a
->>> system register for its interrupt status.
->>>
->>> Case 1:
->>> 1. CPU takes an IRQ exception as a result of X raising an interrupt
->>> 2. Y then raises its interrupt line, but the update to its system
->>>      register is not yet visible to the CPU
->>> 3. The GIC decides to expose Y's interrupt number first in the Ack
->>>      register
->>> 4. The CPU runs the IRQ handler for Y, but the status register is stale
->> But this scenario somehow explains a strange thing I saw during IRQ
->> latency investigation (optimization attempts) during last weeks.
->> The strange sequence is as following:
->>       1. CPU takes an IRQ exception from the guest context
->>       2. In `enter_hypervisor_head()` function (i.e. in
->> `gic_clear_lrs()`
->> as for mainline) from some LR registers interrupt statuses are read as
->> PENDING
->>       3. Performing further code, without returning to the guest (i.e.
->> inside vgic_vcpu_inject_irq()), it happens that we read status INVALID
->> from the LR we read PENDING before, in step 2. >
->> Please note that we are tailoring xen based on RELEASE-4.10.0.
->
-> As you tailor Xen, I need more details on your modification to be able
-> to provide feedback on the oddness you encounter.
-I guess I should make a dedicated patch applicable to mainline to reveal
-the issue. I hope I'll do this nearest days.
-
-> But you are using GICv2, right? If so, you are not using system
-> registers for the vGIC. This is not covered by this patch.
-Yep, our SoC has GICv2.
-
->>> Case 2:
->>> 1. CPU takes an IRQ exception as a result of X raising an interrupt
->>> 2. CPU reads the interrupt number for X from the Ack register and runs
->>>      its IRQ handler
->>> 3. Y raises its interrupt line and the Ack register is updated, but
->>>      again, the update to its system register is not yet visible to the
->>>      CPU.
->>> 4. Since the GIC drivers poll the Ack register, we read Y's interrupt
->>>      number and run its handler without a context synchronisation
->>>      operation, therefore seeing the stale register value.
->>>
->>> In either case, we run the risk of missing an IRQ. This patch solves
->>> the
->>> problem by ensuring that we execute an ISB in the GIC drivers prior
->>> to invoking the interrupt handler.
->>>
->>> Based on Linux commit 39a06b67c2c1256bcf2361a1f67d2529f70ab206
->>> "irqchip/gic: Ensure we have an ISB between ack and ->handle_irq".
->>>
->>> Signed-off-by: Julien Grall <julien.grall@arm.com>
->>>
->>> ---
->>>       This patch is a candidate for backporting up to Xen 4.9.
->>> ---
->>>    xen/arch/arm/gic.c | 2 ++
->>>    1 file changed, 2 insertions(+)
->>>
->>> diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
->>> index 8d7e491060..305fbd66dd 100644
->>> --- a/xen/arch/arm/gic.c
->>> +++ b/xen/arch/arm/gic.c
->>> @@ -388,12 +388,14 @@ void gic_interrupt(struct cpu_user_regs *regs,
->>> int is_fiq)
->>>            if ( likely(irq >=3D 16 && irq < 1020) )
->>>            {
->>>                local_irq_enable();
->>> +            isb();
->> Taking in account that the first GICH accesses are from
->> `gic_clear_lrs()`, called from `enter_hypervisor_head`, I would suggest
->> moving isb() there.
-Any comments here?
-
->>
->>>                do_IRQ(regs, irq, is_fiq);
->>>                local_irq_disable();
->>>            }
->>>            else if ( is_lpi(irq) )
->>>            {
->>>                local_irq_enable();
->>> +            isb();
->>>                gic_hw_ops->do_LPI(irq);
->>>                local_irq_disable();
->>>            }
->>
->
-> Cheers,
->
-
---
-
-*Andrii Anisov*
-
-
-
---_000_77f72cc96548afd9376623326b3551d9epamcom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-ID: <521448F273908144AFD353BDA85E5416@EPAM.onmicrosoft.com>
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<font size=3D"2"><span style=3D"font-size:11pt">
-<div class=3D"PlainText">Hello&nbsp; Julien,<br>
-<br>
-<br>
-On 24.10.18 17:41, Julien Grall wrote:<br>
-&gt; vGIC is not only about GICv2. It also covers GICv3 that is accessible =
-<br>
-&gt; via system registers.<br>
-Yes, I know. But, as you state below, for GICv2 based systems those <br>
-barriers are not needed.<br>
-<br>
-&gt;&gt;&gt; &nbsp;&nbsp; rely on a context synchronising<br>
-&gt;&gt;&gt; operation on the CPU to ensure that the updated status registe=
-r is<br>
-&gt;&gt;&gt; visible to the CPU when handling the interrupt. This usually h=
-appens as<br>
-&gt;&gt;&gt; a result of taking the IRQ exception in the first place, but t=
-here are<br>
-&gt;&gt;&gt; two race scenarios where this isn't the case.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; For example, let's say we have two peripherals (X and Y), wher=
-e Y <br>
-&gt;&gt;&gt; uses a<br>
-&gt;&gt;&gt; system register for its interrupt status.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Case 1:<br>
-&gt;&gt;&gt; 1. CPU takes an IRQ exception as a result of X raising an inte=
-rrupt<br>
-&gt;&gt;&gt; 2. Y then raises its interrupt line, but the update to its sys=
-tem<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; register is not yet visible to the CP=
-U<br>
-&gt;&gt;&gt; 3. The GIC decides to expose Y's interrupt number first in the=
- Ack<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; register<br>
-&gt;&gt;&gt; 4. The CPU runs the IRQ handler for Y, but the status register=
- is stale<br>
-&gt;&gt; But this scenario somehow explains a strange thing I saw during IR=
-Q<br>
-&gt;&gt; latency investigation (optimization attempts) during last weeks.<b=
-r>
-&gt;&gt; The strange sequence is as following:<br>
-&gt;&gt; &nbsp; &nbsp;&nbsp;&nbsp; 1. CPU takes an IRQ exception from the g=
-uest context<br>
-&gt;&gt; &nbsp; &nbsp;&nbsp;&nbsp; 2. In `enter_hypervisor_head()` function=
- (i.e. in <br>
-&gt;&gt; `gic_clear_lrs()`<br>
-&gt;&gt; as for mainline) from some LR registers interrupt statuses are rea=
-d as<br>
-&gt;&gt; PENDING<br>
-&gt;&gt; &nbsp; &nbsp;&nbsp;&nbsp; 3. Performing further code, without retu=
-rning to the guest (i.e.<br>
-&gt;&gt; inside vgic_vcpu_inject_irq()), it happens that we read status INV=
-ALID<br>
-&gt;&gt; from the LR we read PENDING before, in step 2. &gt;<br>
-&gt;&gt; Please note that we are tailoring xen based on RELEASE-4.10.0.<br>
-&gt;<br>
-&gt; As you tailor Xen, I need more details on your modification to be able=
- <br>
-&gt; to provide feedback on the oddness you encounter.<br>
-I guess I should make a dedicated patch applicable to mainline to reveal <b=
-r>
-the issue. I hope I'll do this nearest days.<br>
-<br>
-&gt; But you are using GICv2, right? If so, you are not using system <br>
-&gt; registers for the vGIC. This is not covered by this patch.<br>
-Yep, our SoC has GICv2.<br>
-<br>
-&gt;&gt;&gt; Case 2:<br>
-&gt;&gt;&gt; 1. CPU takes an IRQ exception as a result of X raising an inte=
-rrupt<br>
-&gt;&gt;&gt; 2. CPU reads the interrupt number for X from the Ack register =
-and runs<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; its IRQ handler<br>
-&gt;&gt;&gt; 3. Y raises its interrupt line and the Ack register is updated=
-, but<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; again, the update to its system regis=
-ter is not yet visible to the<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; CPU.<br>
-&gt;&gt;&gt; 4. Since the GIC drivers poll the Ack register, we read Y's in=
-terrupt<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; number and run its handler without a =
-context synchronisation<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp; operation, therefore seeing the stale=
- register value.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; In either case, we run the risk of missing an IRQ. This patch =
-solves <br>
-&gt;&gt;&gt; the<br>
-&gt;&gt;&gt; problem by ensuring that we execute an ISB in the GIC drivers =
-prior<br>
-&gt;&gt;&gt; to invoking the interrupt handler.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Based on Linux commit 39a06b67c2c1256bcf2361a1f67d2529f70ab206=
-<br>
-&gt;&gt;&gt; &quot;irqchip/gic: Ensure we have an ISB between ack and -&gt;=
-handle_irq&quot;.<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; Signed-off-by: Julien Grall &lt;julien.grall@arm.com&gt;<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; ---<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This patch is a candidate for b=
-ackporting up to Xen 4.9.<br>
-&gt;&gt;&gt; ---<br>
-&gt;&gt;&gt; &nbsp;&nbsp; xen/arch/arm/gic.c | 2 &#43;&#43;<br>
-&gt;&gt;&gt; &nbsp;&nbsp; 1 file changed, 2 insertions(&#43;)<br>
-&gt;&gt;&gt;<br>
-&gt;&gt;&gt; diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c<br>
-&gt;&gt;&gt; index 8d7e491060..305fbd66dd 100644<br>
-&gt;&gt;&gt; --- a/xen/arch/arm/gic.c<br>
-&gt;&gt;&gt; &#43;&#43;&#43; b/xen/arch/arm/gic.c<br>
-&gt;&gt;&gt; @@ -388,12 &#43;388,14 @@ void gic_interrupt(struct cpu_user_r=
-egs *regs, <br>
-&gt;&gt;&gt; int is_fiq)<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; i=
-f ( likely(irq &gt;=3D 16 &amp;&amp; irq &lt; 1020) )<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {=
-<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp; local_irq_enable();<br>
-&gt;&gt;&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp; isb();<br>
-&gt;&gt; Taking in account that the first GICH accesses are from<br>
-&gt;&gt; `gic_clear_lrs()`, called from `enter_hypervisor_head`, I would su=
-ggest<br>
-&gt;&gt; moving isb() there.<br>
-Any comments here?<br>
-<br>
-&gt;&gt;<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp; do_IRQ(regs, irq, is_fiq);<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp; local_irq_disable();<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }=
-<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; e=
-lse if ( is_lpi(irq) )<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {=
-<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp; local_irq_enable();<br>
-&gt;&gt;&gt; &#43;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp; isb();<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp; gic_hw_ops-&gt;do_LPI(irq);<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp; local_irq_disable();<br>
-&gt;&gt;&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }=
-<br>
-&gt;&gt;<br>
-&gt;<br>
-&gt; Cheers,<br>
-&gt;<br>
-<br>
--- <br>
-<br>
-*Andrii Anisov*<br>
-<br>
-<br>
-</div>
-</span></font></div>
-</body>
-</html>
-
---_000_77f72cc96548afd9376623326b3551d9epamcom_--
-
-
---===============1328300745440899058==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1328300745440899058==--
+CgpPbiAxMC8yNS8xOCAzOjExIFBNLCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IEhlbGxvwqAgSnVs
+aWVuLAoKSGksCgo+IE9uIDI0LjEwLjE4IDE3OjQxLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IHZH
+SUMgaXMgbm90IG9ubHkgYWJvdXQgR0lDdjIuIEl0IGFsc28gY292ZXJzIEdJQ3YzIHRoYXQgaXMg
+YWNjZXNzaWJsZSAKPj4gdmlhIHN5c3RlbSByZWdpc3RlcnMuCj4gWWVzLCBJIGtub3cuIEJ1dCwg
+YXMgeW91IHN0YXRlIGJlbG93LCBmb3IgR0lDdjIgYmFzZWQgc3lzdGVtcyB0aG9zZQo+IGJhcnJp
+ZXJzIGFyZSBub3QgbmVlZGVkLgoKWW91IG1pc3JlYWQgd2hhdCBJIHdyb3RlLiBUaGV5IGFyZSBu
+b3QgbmVlZGVkIHRvIGNvdmVyIHRoZSB2R0lDIGZvciAKR0lDdjIgcGxhdGZvcm0uIEhvd2V2ZXIg
+dGhleSBhcmUgc3RpbGwgbmVjZXNzYXJ5LCBmb3IgaW5zdGFuY2UsIGZvciB0aGUgCnRpbWVyIGFz
+IGl0IGlzIGFjY2Vzc2libGUgdmlhIHN5c3RlbSByZWdpc3RlcnMuCgo+IAo+Pj4+IMKgwqAgcmVs
+eSBvbiBhIGNvbnRleHQgc3luY2hyb25pc2luZwo+Pj4+IG9wZXJhdGlvbiBvbiB0aGUgQ1BVIHRv
+IGVuc3VyZSB0aGF0IHRoZSB1cGRhdGVkIHN0YXR1cyByZWdpc3RlciBpcwo+Pj4+IHZpc2libGUg
+dG8gdGhlIENQVSB3aGVuIGhhbmRsaW5nIHRoZSBpbnRlcnJ1cHQuIFRoaXMgdXN1YWxseSBoYXBw
+ZW5zIGFzCj4+Pj4gYSByZXN1bHQgb2YgdGFraW5nIHRoZSBJUlEgZXhjZXB0aW9uIGluIHRoZSBm
+aXJzdCBwbGFjZSwgYnV0IHRoZXJlIGFyZQo+Pj4+IHR3byByYWNlIHNjZW5hcmlvcyB3aGVyZSB0
+aGlzIGlzbid0IHRoZSBjYXNlLgo+Pj4+Cj4+Pj4gRm9yIGV4YW1wbGUsIGxldCdzIHNheSB3ZSBo
+YXZlIHR3byBwZXJpcGhlcmFscyAoWCBhbmQgWSksIHdoZXJlIFkgCj4+Pj4gdXNlcyBhCj4+Pj4g
+c3lzdGVtIHJlZ2lzdGVyIGZvciBpdHMgaW50ZXJydXB0IHN0YXR1cy4KPj4+Pgo+Pj4+IENhc2Ug
+MToKPj4+PiAxLiBDUFUgdGFrZXMgYW4gSVJRIGV4Y2VwdGlvbiBhcyBhIHJlc3VsdCBvZiBYIHJh
+aXNpbmcgYW4gaW50ZXJydXB0Cj4+Pj4gMi4gWSB0aGVuIHJhaXNlcyBpdHMgaW50ZXJydXB0IGxp
+bmUsIGJ1dCB0aGUgdXBkYXRlIHRvIGl0cyBzeXN0ZW0KPj4+PiDCoMKgwqDCoCByZWdpc3RlciBp
+cyBub3QgeWV0IHZpc2libGUgdG8gdGhlIENQVQo+Pj4+IDMuIFRoZSBHSUMgZGVjaWRlcyB0byBl
+eHBvc2UgWSdzIGludGVycnVwdCBudW1iZXIgZmlyc3QgaW4gdGhlIEFjawo+Pj4+IMKgwqDCoMKg
+IHJlZ2lzdGVyCj4+Pj4gNC4gVGhlIENQVSBydW5zIHRoZSBJUlEgaGFuZGxlciBmb3IgWSwgYnV0
+IHRoZSBzdGF0dXMgcmVnaXN0ZXIgaXMgc3RhbGUKPj4+IEJ1dCB0aGlzIHNjZW5hcmlvIHNvbWVo
+b3cgZXhwbGFpbnMgYSBzdHJhbmdlIHRoaW5nIEkgc2F3IGR1cmluZyBJUlEKPj4+IGxhdGVuY3kg
+aW52ZXN0aWdhdGlvbiAob3B0aW1pemF0aW9uIGF0dGVtcHRzKSBkdXJpbmcgbGFzdCB3ZWVrcy4K
+Pj4+IFRoZSBzdHJhbmdlIHNlcXVlbmNlIGlzIGFzIGZvbGxvd2luZzoKPj4+IMKgIMKgwqDCoCAx
+LiBDUFUgdGFrZXMgYW4gSVJRIGV4Y2VwdGlvbiBmcm9tIHRoZSBndWVzdCBjb250ZXh0Cj4+PiDC
+oCDCoMKgwqAgMi4gSW4gYGVudGVyX2h5cGVydmlzb3JfaGVhZCgpYCBmdW5jdGlvbiAoaS5lLiBp
+biAKPj4+IGBnaWNfY2xlYXJfbHJzKClgCj4+PiBhcyBmb3IgbWFpbmxpbmUpIGZyb20gc29tZSBM
+UiByZWdpc3RlcnMgaW50ZXJydXB0IHN0YXR1c2VzIGFyZSByZWFkIGFzCj4+PiBQRU5ESU5HCj4+
+PiDCoCDCoMKgwqAgMy4gUGVyZm9ybWluZyBmdXJ0aGVyIGNvZGUsIHdpdGhvdXQgcmV0dXJuaW5n
+IHRvIHRoZSBndWVzdCAoaS5lLgo+Pj4gaW5zaWRlIHZnaWNfdmNwdV9pbmplY3RfaXJxKCkpLCBp
+dCBoYXBwZW5zIHRoYXQgd2UgcmVhZCBzdGF0dXMgSU5WQUxJRAo+Pj4gZnJvbSB0aGUgTFIgd2Ug
+cmVhZCBQRU5ESU5HIGJlZm9yZSwgaW4gc3RlcCAyLiA+Cj4+PiBQbGVhc2Ugbm90ZSB0aGF0IHdl
+IGFyZSB0YWlsb3JpbmcgeGVuIGJhc2VkIG9uIFJFTEVBU0UtNC4xMC4wLgo+Pgo+PiBBcyB5b3Ug
+dGFpbG9yIFhlbiwgSSBuZWVkIG1vcmUgZGV0YWlscyBvbiB5b3VyIG1vZGlmaWNhdGlvbiB0byBi
+ZSBhYmxlIAo+PiB0byBwcm92aWRlIGZlZWRiYWNrIG9uIHRoZSBvZGRuZXNzIHlvdSBlbmNvdW50
+ZXIuCj4gSSBndWVzcyBJIHNob3VsZCBtYWtlIGEgZGVkaWNhdGVkIHBhdGNoIGFwcGxpY2FibGUg
+dG8gbWFpbmxpbmUgdG8gcmV2ZWFsCj4gdGhlIGlzc3VlLiBJIGhvcGUgSSdsbCBkbyB0aGlzIG5l
+YXJlc3QgZGF5cy4KPiAKPj4gQnV0IHlvdSBhcmUgdXNpbmcgR0lDdjIsIHJpZ2h0PyBJZiBzbywg
+eW91IGFyZSBub3QgdXNpbmcgc3lzdGVtIAo+PiByZWdpc3RlcnMgZm9yIHRoZSB2R0lDLiBUaGlz
+IGlzIG5vdCBjb3ZlcmVkIGJ5IHRoaXMgcGF0Y2guCj4gWWVwLCBvdXIgU29DIGhhcyBHSUN2Mi4K
+PiAKPj4+PiBDYXNlIDI6Cj4+Pj4gMS4gQ1BVIHRha2VzIGFuIElSUSBleGNlcHRpb24gYXMgYSBy
+ZXN1bHQgb2YgWCByYWlzaW5nIGFuIGludGVycnVwdAo+Pj4+IDIuIENQVSByZWFkcyB0aGUgaW50
+ZXJydXB0IG51bWJlciBmb3IgWCBmcm9tIHRoZSBBY2sgcmVnaXN0ZXIgYW5kIHJ1bnMKPj4+PiDC
+oMKgwqDCoCBpdHMgSVJRIGhhbmRsZXIKPj4+PiAzLiBZIHJhaXNlcyBpdHMgaW50ZXJydXB0IGxp
+bmUgYW5kIHRoZSBBY2sgcmVnaXN0ZXIgaXMgdXBkYXRlZCwgYnV0Cj4+Pj4gwqDCoMKgwqAgYWdh
+aW4sIHRoZSB1cGRhdGUgdG8gaXRzIHN5c3RlbSByZWdpc3RlciBpcyBub3QgeWV0IHZpc2libGUg
+dG8gdGhlCj4+Pj4gwqDCoMKgwqAgQ1BVLgo+Pj4+IDQuIFNpbmNlIHRoZSBHSUMgZHJpdmVycyBw
+b2xsIHRoZSBBY2sgcmVnaXN0ZXIsIHdlIHJlYWQgWSdzIGludGVycnVwdAo+Pj4+IMKgwqDCoMKg
+IG51bWJlciBhbmQgcnVuIGl0cyBoYW5kbGVyIHdpdGhvdXQgYSBjb250ZXh0IHN5bmNocm9uaXNh
+dGlvbgo+Pj4+IMKgwqDCoMKgIG9wZXJhdGlvbiwgdGhlcmVmb3JlIHNlZWluZyB0aGUgc3RhbGUg
+cmVnaXN0ZXIgdmFsdWUuCj4+Pj4KPj4+PiBJbiBlaXRoZXIgY2FzZSwgd2UgcnVuIHRoZSByaXNr
+IG9mIG1pc3NpbmcgYW4gSVJRLiBUaGlzIHBhdGNoIHNvbHZlcyAKPj4+PiB0aGUKPj4+PiBwcm9i
+bGVtIGJ5IGVuc3VyaW5nIHRoYXQgd2UgZXhlY3V0ZSBhbiBJU0IgaW4gdGhlIEdJQyBkcml2ZXJz
+IHByaW9yCj4+Pj4gdG8gaW52b2tpbmcgdGhlIGludGVycnVwdCBoYW5kbGVyLgo+Pj4+Cj4+Pj4g
+QmFzZWQgb24gTGludXggY29tbWl0IDM5YTA2YjY3YzJjMTI1NmJjZjIzNjFhMWY2N2QyNTI5Zjcw
+YWIyMDYKPj4+PiAiaXJxY2hpcC9naWM6IEVuc3VyZSB3ZSBoYXZlIGFuIElTQiBiZXR3ZWVuIGFj
+ayBhbmQgLT5oYW5kbGVfaXJxIi4KPj4+Pgo+Pj4+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFs
+bCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4+Pj4KPj4+PiAtLS0KPj4+PiDCoMKgwqDCoMKgIFRo
+aXMgcGF0Y2ggaXMgYSBjYW5kaWRhdGUgZm9yIGJhY2twb3J0aW5nIHVwIHRvIFhlbiA0LjkuCj4+
+Pj4gLS0tCj4+Pj4gwqDCoCB4ZW4vYXJjaC9hcm0vZ2ljLmMgfCAyICsrCj4+Pj4gwqDCoCAxIGZp
+bGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspCj4+Pj4KPj4+PiBkaWZmIC0tZ2l0IGEveGVuL2Fy
+Y2gvYXJtL2dpYy5jIGIveGVuL2FyY2gvYXJtL2dpYy5jCj4+Pj4gaW5kZXggOGQ3ZTQ5MTA2MC4u
+MzA1ZmJkNjZkZCAxMDA2NDQKPj4+PiAtLS0gYS94ZW4vYXJjaC9hcm0vZ2ljLmMKPj4+PiArKysg
+Yi94ZW4vYXJjaC9hcm0vZ2ljLmMKPj4+PiBAQCAtMzg4LDEyICszODgsMTQgQEAgdm9pZCBnaWNf
+aW50ZXJydXB0KHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzLCAKPj4+PiBpbnQgaXNfZmlxKQo+
+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmICggbGlrZWx5KGlycSA+PSAxNiAmJiBpcnEgPCAx
+MDIwKSApCj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqAgewo+Pj4+IMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgbG9jYWxfaXJxX2VuYWJsZSgpOwo+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIGlzYigpOwo+Pj4gVGFraW5nIGluIGFjY291bnQgdGhhdCB0aGUgZmlyc3QgR0lDSCBhY2Nl
+c3NlcyBhcmUgZnJvbQo+Pj4gYGdpY19jbGVhcl9scnMoKWAsIGNhbGxlZCBmcm9tIGBlbnRlcl9o
+eXBlcnZpc29yX2hlYWRgLCBJIHdvdWxkIHN1Z2dlc3QKPj4+IG1vdmluZyBpc2IoKSB0aGVyZS4K
+PiBBbnkgY29tbWVudHMgaGVyZT8KCkkgaGF2ZW4ndCBhbnN3ZXJlZCB0byB0aGlzIGJpdCBiZWNh
+dXNlIEkgdGhvdWdodCB0aGlzIHdhcyByZWxhdGVkIHRvIAp5b3VyIGlzc3VlLgoKSWYgdGhpcyBp
+cyBub3QgcmVsYXRlZCB0byB5b3VyIGlzc3VlLCB0aGVuIHRoZSBwbGFjZW1lbnQgd291bGQgYmUg
+d3JvbmcuIApIZXJlIHRoZSBpc2IoKSBzaXRzIGJldHdlZW4gYWNrKCkgYW5kIGRvX0lSUSgpLgoK
+VGhpcyBlbnN1cmUgdGhlIHN5c3RlbSByZWdpc3RlcnMgYXJlIHN5bmNocm9uaXplZCBhZnRlciB5
+b3UgYWNrbm93bGVkZ2UgCmFuIGludGVycnVwdC4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
