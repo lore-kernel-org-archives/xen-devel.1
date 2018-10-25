@@ -1,17 +1,17 @@
 From: Andrii Anisov <Andrii_Anisov@epam.com>
-Subject: Re: [PATCH 15/22] xen/arm: Remove unnecessary includes
- in asm/mmio.h
-Date: Thu, 25 Oct 2018 17:50:30 +0000
-Message-ID: <005dbcea-6fa3-a9ee-4288-f0a34d6197c2@epam.com>
+Subject: Re: [PATCH 18/22] xen/arm: Remove unnecessary includes
+ in asm-arm/acpi.h
+Date: Thu, 25 Oct 2018 17:52:02 +0000
+Message-ID: <3bd9a64c-b366-2697-e209-bce3a2a0f671@epam.com>
 References: <20181018132109.31192-1-julien.grall@arm.com>
- <20181018132109.31192-16-julien.grall@arm.com>
+ <20181018132109.31192-19-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181018132109.31192-16-julien.grall@arm.com>
+In-Reply-To: <20181018132109.31192-19-julien.grall@arm.com>
 Content-Language: en-US
-Content-ID: <3031D08676235E4FB0AA202C7AA1131C@EPAM.onmicrosoft.com>
+Content-ID: <0A45635C98677E438366FB94628CB422@EPAM.onmicrosoft.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
