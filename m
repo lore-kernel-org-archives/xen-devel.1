@@ -1,18 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: Ongoing/future speculative mitigation work
-Date: Thu, 25 Oct 2018 17:29:15 +0100
-Message-ID: <e1388467-9dc8-9012-f9b8-587617a97a73@citrix.com>
-References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
- <20181022145534.afuxnfzyovdi3hya@zion.uk.xensource.com>
- <5BD1D82402000078001F4B60@prv1-mh.provo.novell.com>
- <187f3a6a-e83e-3dc2-0cb7-69fecdacacf1@citrix.com>
- <5BD1DAEC02000078001F4BAE@prv1-mh.provo.novell.com>
+From: Andrii Anisov <Andrii_Anisov@epam.com>
+Subject: Re: [PATCH 08/22] xen/arm: gic-v3: Re-order includes in
+ alphabetical order
+Date: Thu, 25 Oct 2018 16:39:03 +0000
+Message-ID: <b8c84811-61f4-0c20-31a4-0c5cd6508de1@epam.com>
+References: <20181018132109.31192-1-julien.grall@arm.com>
+ <20181018132109.31192-9-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2605732459314013335=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BD1DAEC02000078001F4BAE@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <20181018132109.31192-9-julien.grall@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,56 +18,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, george.dunlap@citrix.com
-Cc: Martin Pohlack <mpohlack@amazon.de>, Julien Grall <julien.grall@arm.com>, Joao Martins <joao.m.martins@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Mihai Dontu <mdontu@bitdefender.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Anthony Liguori <aliguori@amazon.com>, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ross Philipson <ross.philipson@oracle.com>, Dario Faggioli <dfaggioli@suse.com>, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xen-devel List <xen-devel@lists.xen.org>, Daniel Kiper <daniel.kiper@oracle.com>, David Woodhouse <dwmw@amazon.co.uk>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMTAvMTggMTY6MDIsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDI1LjEwLjE4IGF0
-IDE2OjU2LCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPiB3cm90ZToKPj4gT24gMTAvMjUvMjAx
-OCAwMzo1MCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+PiBPbiAyMi4xMC4xOCBhdCAxNjo1
-NSwgPHdlaS5saXUyQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4+IE9uIFRodSwgT2N0IDE4LCAyMDE4
-IGF0IDA2OjQ2OjIyUE0gKzAxMDAsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+Pj4+IEFuIGVhc3kg
-Zmlyc3Qgc3RlcCBoZXJlIGlzIHRvIHJlbW92ZSBYZW4ncyBkaXJlY3RtYXAsIHdoaWNoIHdpbGwg
-bWVhbgo+Pj4+PiB0aGF0IGd1ZXN0cyBnZW5lcmFsIFJBTSBpc24ndCBtYXBwZWQgYnkgZGVmYXVs
-dCBpbnRvIFhlbidzIGFkZHJlc3MKPj4+Pj4gc3BhY2UuICBUaGlzIHdpbGwgY29tZSB3aXRoIHNv
-bWUgcGVyZm9ybWFuY2UgaGl0LCBhcyB0aGUKPj4+Pj4gbWFwX2RvbWFpbl9wYWdlKCkgaW5mcmFz
-dHJ1Y3R1cmUgd2lsbCBub3cgaGF2ZSB0byBhY3R1YWxseQo+Pj4+PiBjcmVhdGUvZGVzdHJveSBt
-YXBwaW5ncywgYnV0IHJlbW92aW5nIHRoZSBkaXJlY3RtYXAgd2lsbCBjYXVzZSBhbgo+Pj4+PiBp
-bXByb3ZlbWVudCBmb3Igbm9uLXNwZWN1bGF0aXZlIHNlY3VyaXR5IGFzIHdlbGwgKE5vIHBvc3Np
-YmlsaXR5IG9mCj4+Pj4+IHJldDJkaXIgYXMgYW4gZXhwbG9pdCB0ZWNobmlxdWUpLgo+Pj4+IEkg
-aGF2ZSBsb29rZWQgaW50byBtYWtpbmcgdGhlICJzZXBhcmF0ZSB4ZW5oZWFwIGRvbWhlYXAgd2l0
-aCBwYXJ0aWFsCj4+Pj4gZGlyZWN0IG1hcCIgbW9kZSAoc2VlIGNvbW1vbi9wYWdlX2FsbG9jLmMp
-IHdvcmsgYnV0IGZvdW5kIGl0IG5vdCBhcwo+Pj4+IHN0cmFpZ2h0IGZvcndhcmQgYXMgaXQgc2hv
-dWxkJ3ZlIGJlZW4uCj4+Pj4KPj4+PiBCZWZvcmUgSSBzcGVuZCBtb3JlIHRpbWUgb24gdGhpcywg
-SSB3b3VsZCBsaWtlIHNvbWUgb3BpbmlvbnMgb24gaWYgdGhlcmUKPj4+PiBpcyBvdGhlciBhcHBy
-b2FjaCB3aGljaCBtaWdodCBiZSBtb3JlIHVzZWZ1bCB0aGFuIHRoYXQgbW9kZS4KPj4+IEhvdyB3
-b3VsZCBzdWNoIGEgc3BsaXQgaGVhcCBtb2RlbCBoZWxwIHdpdGggTDFURiwgd2hlcmUgdGhlCj4+
-PiBndWVzdCBzcGVjaWZpZXMgaG9zdCBwaHlzaWNhbCBhZGRyZXNzZXMgaW4gaXRzIHZ1bG5lcmFi
-bGUgcGFnZQo+Pj4gdGFibGUgZW50cmllcwo+PiBJIGRvbid0IHRoaW5rIGl0IHdvdWxkLgo+Pgo+
-Pj4gKGFuZCBoZW5jZSBjb3VsZCBzcHkgYXQgeGVuaGVhcCBidXQgLSBkdWUgdG8gbm90Cj4+PiBi
-ZWluZyBtYXBwZWQgLSBub3QgZG9taGVhcCk/Cj4+IEVyLCBkaWRuJ3QgZm9sbG93IHRoaXMgYml0
-IC0tIGlmIEwxVEYgaXMgcmVsYXRlZCB0byBob3N0IHBoeXNpY2FsCj4+IGFkZHJlc3NlcywgaG93
-IGRvZXMgaGF2aW5nIGEgdmlydHVhbCBtYXBwaW5nIGluIFhlbiBhZmZlY3QgdGhpbmdzIGluIGFu
-eQo+PiB3YXk/Cj4gSG1tLCBpbmRlZWQuIFNjcmF0Y2ggdGhhdCBwYXJ0LgoKVGhlcmUgc2VlbXMg
-dG8gYmUgcXVpdGUgYSBiaXQgb2YgY29uZnVzaW9uIGluIHRoZXNlIHJlcGxpZXMuCgpUbyBleHBs
-b2l0IEwxVEYsIHRoZSBkYXRhIGluIHF1ZXN0aW9uIGhhcyB0byBiZSBwcmVzZW50IGluIHRoZSBM
-MSBjYWNoZQp3aGVuIHRoZSBhdHRhY2sgaXMgcGVyZm9ybWVkLgoKSW4gcHJhY3RpY2UsIGFuIGF0
-dGFja2VyIGhhcyB0byBhcnJhbmdlIGZvciB0YXJnZXQgZGF0YSB0byBiZSByZXNpZGVudAppbiB0
-aGUgTDEgY2FjaGUuwqAgT25lIHdheSBpdCBjYW4gZG8gdGhpcyB3aGVuIEhUIGlzIGVuYWJsZWQg
-aXMgdmlhIGEKY2FjaGUtbG9hZCBnYWRnZXQgc3VjaCBhcyB0aGUgZmlyc3QgaGFsZiBvZiBhbiBT
-UDEgYXR0YWNrIG9uIHRoZSBvdGhlcgpoeXBlcnRocmVhZC7CoCBBIGRpZmZlcmVudCB3YXkgbWVj
-aGFuaXNtIGlzIHRvIHRyeSBhbmQgY2F1c2UgWGVuIHRvCnNwZWN1bGF0aXZlbHkgYWNjZXNzIGEg
-cGllY2Ugb2YgZGF0YSwgYW5kIGhhdmUgdGhlIGhhcmR3YXJlIHByZWZldGNoCmJyaW5nIGl0IGlu
-dG8gdGhlIGNhY2hlLgoKRXZlcnl0aGluZyB3aGljaCBpcyB2aXJ0dWFsbHkgbWFwcGVkIGluIFhl
-biBpcyBwb3RlbnRpYWxseSB2dWxuZXJhYmxlLAphbmQgdGhlIGdvYWwgb2YgdGhlICJzZWNyZXQt
-ZnJlZSBYZW4iIGlzIHRvIG1ha2Ugc3VyZSB0aGF0IGluIHRoZQpjb250ZXh0IG9mIG9uZSB2Y3B1
-IHB1bGxpbmcgb2ZmIGFuIGF0dGFjayBsaWtlIHRoaXMsIHRoZXJlIGlzIG5vCmludGVyZXN0aW5n
-IGRhdGEgd2hpY2ggY2FuIGJlIGV4ZmlsdHJhdGVkLgoKQSBzaW5nbGUgeGVuaGVhcCBtb2RlbCBt
-ZWFucyB0aGF0IGV2ZXJ5dGhpbmcgYWxsb2NhdGVkIHdpdGgKYWxsb2NfeGVuaGVhcF9wYWdlKCkg
-KGUuZy4gc3RydWN0IGRvbWFpbiwgc3RydWN0IHZjcHUsIHBjcHUgc3RhY2tzKSBhcmUKcG90ZW50
-aWFsbHkgZXhwb3NlZCB0byBhbGwgZG9tYWlucy4KCkEgc3BsaXQgeGVuaGVhcCBtb2RlbCBtZWFu
-cyB0aGF0IGRhdGEgcGVydGFpbmluZyB0byBvdGhlciBndWVzdHMgaXNuJ3QKbWFwcGVkIGluIHRo
-ZSBjb250ZXh0IG9mIHRoaXMgdmNwdSwgc28gY2Fubm90IGJlIGJyb3VnaHQgaW50byB0aGUgY2Fj
-aGUuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2605732459314013335==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_b8c8481161f40c2031a40c5cd6508de1epamcom_"
+
+--_000_b8c8481161f40c2031a40c5cd6508de1epamcom_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+
+On 18.10.18 16:20, Julien Grall wrote:
+> Signed-off-by: Julien Grall <julien.grall@arm.com>
+> ---
+
+Reviewed-by: Andrii Anisov<andrii_anisov@epam.com>
+
+--
+
+*Andrii Anisov*
+
+
+
+--_000_b8c8481161f40c2031a40c5cd6508de1epamcom_
+Content-Type: text/html; charset="iso-8859-1"
+Content-ID: <3B0950C7D5A9184B9C00E5E21264E0E6@EPAM.onmicrosoft.com>
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
+-family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
+<font size=3D"2"><span style=3D"font-size:11pt">
+<div class=3D"PlainText"><br>
+On 18.10.18 16:20, Julien Grall wrote:<br>
+&gt; Signed-off-by: Julien Grall &lt;julien.grall@arm.com&gt;<br>
+&gt; ---<br>
+<br>
+Reviewed-by: Andrii Anisov&lt;andrii_anisov@epam.com&gt;<br>
+<br>
+-- <br>
+<br>
+*Andrii Anisov*<br>
+<br>
+<br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_b8c8481161f40c2031a40c5cd6508de1epamcom_--
+
+
+--===============2605732459314013335==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2605732459314013335==--
