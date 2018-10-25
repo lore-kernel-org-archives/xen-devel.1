@@ -1,21 +1,15 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH v2] x86/mm/p2m: don't needlessly limit MMIO
- mapping order to 4k
-Date: Thu, 25 Oct 2018 17:21:53 +0000
-Message-ID: <1dd018187a094b3d880055f19187ce5d@AMSPEX02CL03.citrite.net>
-References: <20181017142451.2747-1-paul.durrant@citrix.com>
- <5BD1D2F802000078001F4B3A@prv1-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Ongoing/future speculative mitigation work
+Date: Thu, 25 Oct 2018 19:23:36 +0200
+Message-ID: <faf8d9511adf38f9c769103596df7c85b97db4ca.camel@suse.com>
+References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
+ <CABfawh=GYUi2nvx5Nc1xfu7McVSqCwYOMyA6fyCKgYJCGCRkXA@mail.gmail.com>
+ <9270f77c23dad0855a00030cc53ce4b2b9366d22.camel@suse.com>
+ <CABfawhkcGspr8+0=A-vLq66HrFK1D7H_abTyMKd21h3Mk2gvNg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3260293027989696463=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=okgf=nf=citrix.com=prvs=82995434a=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gFjKZ-0007QH-Pj
- for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 17:21:59 +0000
-In-Reply-To: <5BD1D2F802000078001F4B3A@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <CABfawhkcGspr8+0=A-vLq66HrFK1D7H_abTyMKd21h3Mk2gvNg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,71 +18,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <JBeulich@suse.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+Cc: mpohlack@amazon.de, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, joao.m.martins@oracle.com, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, aliguori@amazon.com, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, ross.philipson@oracle.com, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, mdontu <mdontu@bitdefender.com>, dwmw@amazon.co.uk, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4
-ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24gQmVoYWxmDQo+IE9mIEph
-biBCZXVsaWNoDQo+IFNlbnQ6IDI1IE9jdG9iZXIgMjAxOCAxNToyOA0KPiBUbzogUGF1bCBEdXJy
-YW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4NCj4gQ2M6IEFuZHJldyBDb29wZXIgPEFuZHJl
-dy5Db29wZXIzQGNpdHJpeC5jb20+OyBXZWkgTGl1DQo+IDx3ZWkubGl1MkBjaXRyaXguY29tPjsg
-eGVuLWRldmVsIDx4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+DQo+IFN1YmplY3Q6IFJl
-OiBbWGVuLWRldmVsXSBbUEFUQ0ggdjJdIHg4Ni9tbS9wMm06IGRvbid0IG5lZWRsZXNzbHkgbGlt
-aXQNCj4gTU1JTyBtYXBwaW5nIG9yZGVyIHRvIDRrDQo+IA0KPiA+Pj4gT24gMTcuMTAuMTggYXQg
-MTY6MjQsIDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4gd3JvdGU6DQo+ID4gLS0tIGEveGVuL2Fy
-Y2gveDg2L21tL3AybS5jDQo+ID4gKysrIGIveGVuL2FyY2gveDg2L21tL3AybS5jDQo+ID4gQEAg
-LTIwODEsMTQgKzIwODEsMTEgQEAgc3RhdGljIHVuc2lnbmVkIGludCBtbWlvX29yZGVyKGNvbnN0
-IHN0cnVjdA0KPiBkb21haW4gKmQsDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICB1bnNpZ25lZCBsb25nIHN0YXJ0X2ZuLCB1bnNpZ25lZCBsb25nDQo+IG5yKQ0KPiA+ICB7DQo+
-ID4gICAgICAvKg0KPiA+IC0gICAgICogTm90ZSB0aGF0IHRoZSAhaW9tbXVfdXNlX2hhcF9wdCgp
-IGhlcmUgaGFzIHRocmVlIGVmZmVjdHM6DQo+ID4gLSAgICAgKiAtIGNvdmVyIGlvbW11X3ssdW59
-bWFwX3BhZ2UoKSBub3QgaGF2aW5nIGFuICJvcmRlciIgaW5wdXQgeWV0LA0KPiA+IC0gICAgICog
-LSBleGNsdWRlIHNoYWRvdyBtb2RlICh3aGljaCBkb2Vzbid0IHN1cHBvcnQgbGFyZ2UgTU1JTw0K
-PiBtYXBwaW5ncyksDQo+ID4gLSAgICAgKiAtIGV4Y2x1ZGUgUFYgZ3Vlc3RzLCBzaG91bGQgZXhl
-Y3V0aW9uIHJlYWNoIHRoaXMgY29kZSBmb3Igc3VjaC4NCj4gPiAtICAgICAqIFNvIGJlIGNhcmVm
-dWwgd2hlbiBhbHRlcmluZyB0aGlzLg0KPiA+ICsgICAgICogUFYgZ3Vlc3RzIG9yIHNoYWRvdy1t
-b2RlIEhWTSBndWVzdHMgbXVzdCBiZSByZXN0cmljdGVkIHRvIDRrDQo+ID4gKyAgICAgKiBtYXBw
-aW5ncy4NCj4gDQo+IFNpbmNlIHlvdSd2ZSBhbHJlYWR5IHBvc3RlZCBhIHBhdGNoIHRvIGFkZCBv
-cmRlciBwYXJhbWV0ZXJzIHRvDQo+IElPTU1VIG1hcC91bm1hcCwgSSdkIHByZWZlciB0aGUgcmVz
-cGVjdGl2ZSBwYXJ0IG9mIHRoZSBjb21tZW50DQo+IHRvIGdvIGF3YXkgb25seSB3aGVuIHRoZSBv
-cmRlciB2YWx1ZSByZWFsbHkgY2FuIGJlIHBhc3NlZCB0aHJvdWdoLg0KPiBUaGlzIHRoZW4gcmVx
-dWlyZXMgcGVybWl0dGluZyBub24temVybyB2YWx1ZXMgb25seSB3aGVuIHRoZSBJT01NVXMNCj4g
-YWxzbyBhbGxvdyBmb3IgdGhlIHJlc3BlY3RpdmUgcGFnZSBzaXplcy4NCj4gDQoNCk9rLiBJIGNh
-biBkbyB0aGF0LiBJJ2xsIGhhdmUgdG8gcHJvdmlkZSBzb21lIHdheSBvZiBxdWVyeWluZyB0aGUg
-SU9NTVUgaW1wbGVtZW50YXRpb24gZm9yIHdoaWNoIG9yZGVycyBpdCBzdXBwb3J0cyBpbiB0aGF0
-IGNhc2UuDQoNCj4gSSBhbSBpbiBwYXJ0aWN1bGFyIG5vdCBjb252aW5jZWQgdGhhdCB0aGUgdGlt
-ZSBuZWVkZWQgdG8gY2Fycnkgb3V0DQo+IHRoZSBoeXBlcmNhbGwgaXMgZ29pbmcgdG8gYmUgbG93
-IGVub3VnaCBldmVuIGZvciA1MTIgNGsgcGFnZXM6IFlvdQ0KPiBuZWVkIHRvIHRha2UgaW50byBh
-Y2NvdW50IGZsdXNoZXMsIGluY2x1ZGluZyB0aG9zZSBwb3RlbnRpYWxseQ0KPiBuZWVkZWQgZm9y
-IEFUUy4gWW91IGRvbid0IHByb3ZpZGUgYW55IHByb29mIHRoYXQgZmx1c2hlcyBhcmUNCj4gYWx3
-YXlzIGRlbGF5ZWQgYW5kIGJhdGNoZWQsIG5vciBkbyBJIHRoaW5rIHRoaXMgaXMgdW5pZm9ybWx5
-IHRoZQ0KPiBjYXNlLg0KPiANCg0KSW4gdGVzdGluZywgZG9pbmcgdGhlIDUxMiA0ayBsb29wIGRv
-ZXMgbm90IHNlZW0gdG8gY2F1c2UgaXNzdWVzIHdpdGggZWl0aGVyIFZULWQgb3IgQU1EIElPTU1V
-LiBUaGUgQU1EIElPTU1VIGNhc2UgaXMgc3RpbGwgc2lnbmlmaWNhbnRseSBzbG93ZXIgdGhhbiBW
-VC1kIHRob3VnaCBzbyBJJ20gY3VycmVudGx5IGV4cGVyaW1lbnRpbmcgd2l0aCBlbGlkaW5nIHRo
-ZSBmbHVzaGluZyBhcyB3ZWxsIGFzIHJlbW92aW5nIHRoZSBwYWdlIG1lcmdpbmcgY29kZSB0byBz
-cGVlZCBpdCB1cC4NCg0KPiA+IEBAIC0yMDk2LDggKzIwOTMsMTIgQEAgc3RhdGljIHVuc2lnbmVk
-IGludCBtbWlvX29yZGVyKGNvbnN0IHN0cnVjdA0KPiBkb21haW4gKmQsDQo+ID4gICAgICAgICAg
-ICAgICogc2V0X3R5cGVkX3AybV9lbnRyeSgpIHdoZW4gaXQgbmVlZHMgdG8gemFwIE0yUCBlbnRy
-aWVzDQo+ID4gICAgICAgICAgICAgICogZm9yIGEgUkFNIHJhbmdlLg0KPiA+ICAgICAgICAgICAg
-ICAqLyAmJg0KPiA+IC0gICAgICAgICAhKHN0YXJ0X2ZuICYgKCgxVUwgPDwgUEFHRV9PUkRFUl8x
-RykgLSAxKSkgJiYgKG5yID4+DQo+IFBBR0VfT1JERVJfMUcpICYmDQo+ID4gLSAgICAgICAgIGhh
-cF9oYXNfMWdiICkNCj4gPiArICAgICAgICAgIShzdGFydF9mbiAmICgoMVVMIDw8IFBBR0VfT1JE
-RVJfMUcpIC0gMSkpICYmDQo+ID4gKyAgICAgICAgIChuciA+PiBQQUdFX09SREVSXzFHKSAmJg0K
-PiA+ICsgICAgICAgICBoYXBfaGFzXzFnYiAmJg0KPiA+ICsgICAgICAgICAvKiBkaXNhYmxlIDFH
-IG1hcHBpbmdzIGlmIHdlIG5lZWQgdG8ga2VlcCB0aGUgSU9NTVUgaW4gc3luYyAqLw0KPiA+ICsg
-ICAgICAgICAhbmVlZF9pb21tdV9wdF9zeW5jKGQpDQo+IA0KPiBJIGhhdmUgdG8gYWRtaXQgdGhh
-dCBJIGRvbid0IHVuZGVyc3RhbmQgdGhpcyB2MiBhZGRpdGlvbi4gSG93IGlzDQo+IGtlZXBpbmct
-aW4tc3luYyByZWxldmFudCBmb3IgMUcgYnV0IG5vdCAyTSBwYWdlcz8NCj4gDQoNCkkgd2FzIGF0
-dGVtcHRpbmcgdG8gbWFrZSBpdCBvYnZpb3VzIHRoYXQsIGlmIHRoZSBJT01NVSBtYXBwaW5ncyBu
-ZWVkZWQgc3luY2luZyAoaS5lLiB0aGV5IGFyZSBub3Qgc2hhcmVkKSwgdGhhdCB3ZSB3b3VsZCBu
-b3QgaGFuZGxlIGEgMUcgbWFwcGluZyAoYW5kIHRodXMgYXR0ZW1wdCB0byBpdGVyYXRlIG92ZXIg
-dGhlIDFHIGluIDRrIGNodW5rcykuIA0KDQo+ID4gKyAgICAgICAgKQ0KPiANCj4gTWlzcGxhY2Vk
-IHBhcmVuLg0KDQpUcnVlLg0KDQogIFBhdWwNCg0KPiANCj4gSmFuDQo+IA0KPiANCj4gDQo+IF9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+IFhlbi1kZXZl
-bCBtYWlsaW5nIGxpc3QNCj4gWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnDQo+IGh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWwNCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============3260293027989696463==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-8Nbm41r/DQQZ0aTrFqJz"
+
+
+--=-8Nbm41r/DQQZ0aTrFqJz
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-10-25 at 10:25 -0600, Tamas K Lengyel wrote:
+> On Thu, Oct 25, 2018 at 10:01 AM Dario Faggioli <dfaggioli@suse.com>
+> wrote:
+> >=20
+> > Which is indeed very interesting. But, as we're discussing in the
+> > other
+> > thread, I would, in your case, do some more measurements, varying
+> > the
+> > configuration of the system, in order to be absolutely sure you are
+> > not
+> > hitting some bug or anomaly.
+>=20
+> Sure, I would be happy to repeat tests that were done in the past to
+> see whether they are still holding. We have run this test with Xen
+> 4.10, 4.11 and 4.12-unstable on laptops and desktops, using credit1
+> and credit2, and it is consistent that hyperthreading yields the
+> worst
+> performance.=20
+>
+So, just to be clear, I'm not saying it's impossible to find a workload
+for which HT is detrimental. Quite the opposite. And these benchmarks
+you're running might well fall into that category.
+
+I'm just suggesting to double check that. :-)
+
+> It varies between platforms but it's around 10-40%
+> performance hit with hyperthread on. This test we do is a very CPU
+> intensive test where we heavily oversubscribe the system. But I don't
+> think it would be all that unusual to run into such a setup in the
+> real world from time-to-time.
+>=20
+Ah, ok, so you're _heavily_ oversubscribing...
+
+So, I don't think that an heavily oversubscribed host, where all vCPUs
+would want to run 100% CPU intensive activities --and this not being
+some transient situation-- is that common. And for the ones for which
+it is, there is not much we can do, hyperthreading or not.
+
+In any case, hyperthreading works best when the workload is mixed,
+where it helps making sure that IO-bound tasks have enough chances to
+file a lot of IO requests, without conflicting too much with the CPU-
+bound tasks doing their number/logic crunching.
+
+Having _everyone_ wanting to do actual stuff on the CPUs is, IMO, one
+of the worst workloads for hyperthreading, and it is in fact a workload
+where I've always seen it having the least beneficial effect on
+performance. I guess it's possible that, in your case, it's actually
+really doing more harm than good.
+
+It's an interesting data point, but I wouldn't use a workload like that
+to measure the benefit, or the impact, of an SMT related change.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-8Nbm41r/DQQZ0aTrFqJz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvR/BgACgkQFkJ4iaW4
+c+5QFRAA6JzTPYf+BKtNQ+vca1XK8IBr7/PXYXl9IyldAsisz26DV6JCzm4Oq5VU
+Wn7kCfOdXQ+jbR9A0oXL7aQ/x2m5w5mZai/+MZZndByjfDEfRMkmnY9Pb1DMwYNL
+NKjKtUlA96+XR1bJpFVM8Wy99l4BbJqMXA/Bizt6w7heuqT+WROGkL5crwkfFki5
+Ait8U0my/0aGtMw32Vj6tlj7EFzOXkZTuBb1Tc409AKXa2X5yl4SJ7J+rqhjGLiN
+gnjdYhYXOkArrNHiZa7uUoetpktWf3mqs+aHRm/jMQp6yxQshfYRRjcZ1LCpqiF0
+xtobvHTiTdCzyHgfRspy2PAanEY4jUObeY82hqk/OkdJfBYfKLZbHt2gnjMTKZEO
+AcOJF6EeuEIQuyb6KU9cP4qEoCySngZmOEBGOjy+/nOcW8/V0XkyaQLVyr6whrqN
+uzOCMAmNjKlfaQEYNq9SmHkNrADcF1z3KcdTCxbTDuf+6YdGsjMtqEZ8+o4kZ0Tj
+Nb6qyit1dCXeI/5Ph9VA3iK415ikcbJDmDuXiwSvaB7HtAWBCwgV2gqH4EfvzwVD
+4C0jsp6IpxQmCutQva7pu0rszZLvr4xN9kAMrmHARkxITLu532czs6ieQnh9vM2Z
+Xelsizzinb2yflGYMh1IeFQ9zHt+I1hCRqV3wsJaZqOxRuS/nSs=
+=T4RO
+-----END PGP SIGNATURE-----
+
+--=-8Nbm41r/DQQZ0aTrFqJz--
+
+
+
+--===============3260293027989696463==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3260293027989696463==--
