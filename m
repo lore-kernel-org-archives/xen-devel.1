@@ -1,14 +1,16 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 3/4] x86/vvmx: INVVPID instructions should be
- handled at by L1
-Date: Thu, 25 Oct 2018 16:38:53 +0100
-Message-ID: <1540481933-20666-1-git-send-email-andrew.cooper3@citrix.com>
-References: <1540481802-20037-1-git-send-email-andrew.cooper3@citrix.com>
+From: Andrii Anisov <Andrii_Anisov@epam.com>
+Subject: Re: [PATCH 07/22] xen/arm: gic-3: Remove unused includes
+Date: Thu, 25 Oct 2018 15:41:30 +0000
+Message-ID: <426efa54-900c-ac53-5937-2f0b068f2343@epam.com>
+References: <20181018132109.31192-1-julien.grall@arm.com>
+ <20181018132109.31192-8-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1540481802-20037-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <20181018132109.31192-8-julien.grall@arm.com>
+Content-Language: en-US
+Content-ID: <CA26209E59F4D646881BDC5AE91BE3B3@EPAM.onmicrosoft.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,24 +19,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4K
-LS0tCkNDOiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+CkNDOiBKYW4g
-QmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXgu
-Y29tPgpDQzogSnVuIE5ha2FqaW1hIDxqdW4ubmFrYWppbWFAaW50ZWwuY29tPgpDQzogS2V2aW4g
-VGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+Ci0tLQogeGVuL2FyY2gveDg2L2h2bS92bXgvdnZt
-eC5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKCmRpZmYgLS1naXQgYS94
-ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMK
-aW5kZXggOTM5MDcwNS4uZDFjOGE0MSAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXgv
-dnZteC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3Z2bXguYwpAQCAtMjM0OCw2ICsyMzQ4
-LDcgQEAgaW50IG52bXhfbjJfdm1leGl0X2hhbmRsZXIoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJl
-Z3MsCiAgICAgY2FzZSBFWElUX1JFQVNPTl9WTVhPRkY6CiAgICAgY2FzZSBFWElUX1JFQVNPTl9W
-TVhPTjoKICAgICBjYXNlIEVYSVRfUkVBU09OX0lOVkVQVDoKKyAgICBjYXNlIEVYSVRfUkVBU09O
-X0lOVlZQSUQ6CiAgICAgY2FzZSBFWElUX1JFQVNPTl9YU0VUQlY6CiAgICAgICAgIC8qIGluamVj
-dCB0byBMMSAqLwogICAgICAgICBudmNwdS0+bnZfdm1leGl0X3BlbmRpbmcgPSAxOwotLSAKMi4x
-LjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+Ck9uIDE4LjEwLjE4IDE2OjIwLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gU2lnbmVkLW9mZi1ieTog
+SnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiAtLS0KClJldmlld2VkLWJ5OiBB
+bmRyaWkgQW5pc292PGFuZHJpaV9hbmlzb3ZAZXBhbS5jb20+CgotLSAKCipBbmRyaWkgQW5pc292
+KgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
 ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
 L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
