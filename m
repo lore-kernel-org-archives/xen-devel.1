@@ -1,21 +1,33 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH v3] arch/x86: Add registers to vm_event
-Date: Thu, 25 Oct 2018 16:33:29 +0300
-Message-ID: <0bd1661d-26a9-a256-2e32-d6a85c8cf322@bitdefender.com>
-References: <20181018090157.30186-1-aisaila@bitdefender.com>
- <5BD1AF2B02000078001F49F2@prv1-mh.provo.novell.com>
- <a2d6bd10-ca33-ad1c-2988-b85853e9a613@bitdefender.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Xen optimization
+Date: Thu, 25 Oct 2018 15:44:51 +0200
+Message-ID: <edca5496e2201dce26beafffff0e866e4a1243be.camel@suse.com>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <alpine.DEB.2.10.1810121035440.436@sstabellini-ThinkPad-X260>
+ <CADJ6SV3jk=nnP=6T8R+OuvJH2uQ6uBrLmvudAHkKHP+mN-3hPA@mail.gmail.com>
+ <e0f4fe11-eeb0-3a28-2e7e-246a8f72da19@arm.com>
+ <12a4352a-2fd1-2d04-874a-4a779d18a097@arm.com>
+ <CADJ6SV0E=cO3eFyt+meXTtZaoETYxpsHkViMDU=XV9CwNOjP8A@mail.gmail.com>
+ <21de0bb5-81f2-ca26-e2e0-916c20ab2c02@arm.com>
+ <CADJ6SV3sfqaXm8gvZDAx2wFY5_oiCf+mf0JynCGNrLBFkS-rVw@mail.gmail.com>
+ <alpine.DEB.2.10.1810191336090.31582@sstabellini-ThinkPad-X260>
+ <d3a589c5d95d70ef1c13b4fe6856b7ed387b4ee3.camel@suse.com>
+ <CADJ6SV2891kOd_Ga8jjXdtKdjPAoWtADhizuS+kjSZNNOPMK+w@mail.gmail.com>
+ <alpine.DEB.2.10.1810221037270.31582@sstabellini-ThinkPad-X260>
+ <CADJ6SV0gUvRv_4Kp=Vz5n4WSQ3kgQrC=+gPz1QjrBzdFOoJwPA@mail.gmail.com>
+ <alpine.DEB.2.10.1810231005040.31582@sstabellini-ThinkPad-X260>
+ <CADJ6SV3kj0sN-0nzfqBwbz_BMerArKRtdYAQ-FfgvdM3FPqu_Q@mail.gmail.com>
+ <12464587-0b86-890c-d115-b5cc417ea0ef@arm.com>
+ <CADJ6SV2Uzt=Q_C2ycXwcYqyQr290cHy3SzE0k08=WNHY1eBgRQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6739181682331987593=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=i4aa=nf=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gFflX-0001ZX-Ve
- for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 13:33:36 +0000
-In-Reply-To: <a2d6bd10-ca33-ad1c-2988-b85853e9a613@bitdefender.com>
-Content-Language: en-US-large
+ <srs0=xzhc=nf=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gFfwi-0002Ph-Tt
+ for xen-devel@lists.xenproject.org; Thu, 25 Oct 2018 13:45:08 +0000
+In-Reply-To: <CADJ6SV2Uzt=Q_C2ycXwcYqyQr290cHy3SzE0k08=WNHY1eBgRQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,34 +36,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Alexandru Stefan ISAILA <aisaila@bitdefender.com>, Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Milan Boberic <milanboberic94@gmail.com>, julien.grall@arm.com
+Cc: stefano.stabellini@xilinx.com, andrii_anisov@epam.com, sstabellini@kernel.org, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTAvMjUvMTggNDoxMCBQTSwgQWxleGFuZHJ1IFN0ZWZhbiBJU0FJTEEgd3JvdGU6Cj4gT24g
-MjUuMTAuMjAxOCAxNDo1NSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDE4LjEwLjE4IGF0
-IDExOjAyLCA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+Pj4gK3N0cnVjdCB4ODZf
-c2VsZWN0b3JfcmVnIHsKPj4+ICsgICAgdW5pb24KPj4+ICsgICAgewo+Pj4gKyAgICAgICAgdWlu
-dDY0X3QgYnl0ZXM7Cj4+PiArICAgICAgICBzdHJ1Y3QKPj4+ICsgICAgICAgIHsKPj4+ICsgICAg
-ICAgICAgICB1aW50MzJfdCBiYXNlOwo+Pj4gKyAgICAgICAgICAgIHVpbnQzMl90IGxpbWl0ICA6
-ICAgIDIwOwo+Pj4gKyAgICAgICAgICAgIHVpbnQzMl90IGFyICAgICA6ICAgIDEyOwo+Pj4gKyAg
-ICAgICAgfSBmaWVsZHM7Cj4+PiArICAgIH07Cj4+PiArfTsKPj4KPj4gSSBkb24ndCB1bmRlcnN0
-YW5kIHdoeSBzZWwgd2FzIG1vdmVkIG91dC4gQXJlIHlvdSB0aWdodCBvbgo+PiBzcGFjZSBoZXJl
-LCBzdWNoIHRoYXQgeW91IGNhbid0IHRvbGVyYXRlIHRoZSBwYWRkaW5nIGJ5dGVzPwo+IAo+IEl0
-IHdhcyBkcm9wcGVkIG9uIEFuZHJldydzIHN1Z2dlc3Rpb24uIFdlIGFyZSBvayB3aXRoIGl0IGlu
-IHRoZSAKPiBzdHJ1Y3R1cmUgc28gaWYgaXMgb2sgYnkgeW91IEkgY2FuIGFkZCBpdCBiYWNrLgoK
-V2UgYXJlIHRpZ2h0IG9uIHNwYWNlLiBUaGUgcmluZyBidWZmZXIgaXMgb25seSA0SywgYW5kIGl0
-IGFscmVhZHkgY2FuCm9ubHkgZml0IGFib3V0IDEwIHN5bmMgdm1fZXZlbnRzIGJlZm9yZSBWQ1BV
-cyBuZWVkIHRvIGJlIGJsb2NrZWQgd2FpdGluZwpmb3IgYSBwbGFjZSBpbiB0aGUgYnVmZmVyLiBU
-aGF0J3Mgd2h5IHdlJ3ZlIGF0dGVtcHRlZCB0aGUgcGFja2luZy4KCj4+IEZpbmFsbHkgLSB3aGF0
-IG1lYW5pbmcgdG8gdGhlIGxvdyAob3IgaGlnaCkgNCBiaXRzIG9mICJhciIKPj4gY2Fycnk/Cj4g
-Cj4gSWYgSSBjb3JyZWN0bHkgdW5kZXJzdGFuZCB0aGUgcXVlc3Rpb24sIHdlIHVzZSBhciBiaXRz
-IHRvICBkZXRlcm1pbmUgdGhlIAo+IHJ1bm5pbmcgbW9kZSBvZiB0aGUgZ3Vlc3QuCgpUaGF0J3Mg
-d2hhdCB3ZSBuZWVkIHRoZSBDUyAuYXIgZm9yOiBsb29raW5nIGF0IENTX0FSX0JZVEVTX0QgYW5k
-CkNTX0FSX0JZVEVTX0wsIHRoZSByZXN0IHdlIHBhc3MgYWxvbmcgdG8gdGhlIGludHJvc3BlY3Rp
-b24gZW5naW5lIC0gSSdkCmhhdmUgdG8gY2hlY2sgd2l0aCB0aGVtIGZvciBtb3JlIGRldGFpbHMg
-aWYgcmVxdWVzdGVkLgoKQnV0IEkgdGhpbmsgd2UndmUgcHJvYmFibHkgbWlzdW5kZXJzdG9vZCB0
-aGUgcXVlc3Rpb24uCgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============6739181682331987593==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-oOpLk5+yxXdQd9Y1tcWz"
+
+
+--=-oOpLk5+yxXdQd9Y1tcWz
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2018-10-25 at 14:36 +0200, Milan Boberic wrote:
+> On Thu, Oct 25, 2018 at 1:30 PM Julien Grall <julien.grall@arm.com>
+> wrote:
+> >  Do you have DEBUG enabled?
+>=20
+> I'm not sure where exactly should I disable it. If you check line 18
+> in xl dmesg file in attachment it says debug=3Dn, it's output of xl
+> dmesg. I'm not sure if that is the DEBUG you are talking about.
+>
+Yes, this mean debug is *not* enabled. Which is the correct setup for
+doing performance/latency evaluation.
+
+It might, OTOH, be wise to turn it on when investigating the system
+behavior (but that's a general remark, I don't know to what Julien was
+referring to in this specific case).
+
+To turn it on, in a recent enough Xen, which I think is what you're
+using, you can use Kconfig (e.g., `make -C xen/ menuconfig').
+
+> Also if I add prints somewhere in the code, I can see them, does that
+> mean that DEBUG is enabled? If yes, can you tell me where exactly
+> should I disable it?
+>=20
+It depends on the "print". If you add 'printk("bla");', it is correct
+that you see "bla" in the log, even with debug=3Dn.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-oOpLk5+yxXdQd9Y1tcWz
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvRyNMACgkQFkJ4iaW4
+c+7Z+BAApQZnVyh2XRFEoncb+UMdpcLXiRVuJDl44mjeZAT2vCdo+pVxyDi65JrI
+QJAYIcunFd1t4Qxd0Z6sc8+yj1xbHXKi5tBhzqLUXjV4NWcg/pBeP9GQmcxYCuu/
+MdbiWjmhMteFWae4QhenmtCNydAsmiKEABvJM0Yumku4/zv+Mc+xGMArYkQ6l80X
+wbQ/wtmE6OBpviMEF1aloG2qPQM9p+6gjvOJsfwbPFVwIXGZJaQ+0A82/fG7g+OL
++/sc0hnhZWPb4FBPCCwR/N5kti+/rQsdIYZG23JY9usFuoNbPcw7NwWHMsLvt7Ge
+QteQ3MnoxF5sgAzt0aGr556CBBXvvy4QPUF/Jc8knZyiki0rH2ys7LFsIZMUSAif
+urmBJyNm5cNWUGjburQIYtnNPB0tVmedgqmSBAzoQXsGt0gUo1+o7u/E1IGiK9zB
+B5c78BivAvRs9csuPzXu/i04KkjgWBVJgEEvuZHBS2SshSF23xTfXnRs61s+o4lN
+48JTkx9aJdU8BYK6m6K45OOeKBeCx6N9B0wYRyKyP4Y7Lqt4Py2kvE6geewzdsTG
+3AUhMZF0y4c9gJ6cyxYqOZIBSvwzs4UCm5QZ9dCOLGhO6cHm3A0L+K1057tRvXcV
+o+tjqGOVINZv0bgoe0d9tdkZNxqzEzE5pd2vg2uFUyvW/RMzgMY=
+=CaxD
+-----END PGP SIGNATURE-----
+
+--=-oOpLk5+yxXdQd9Y1tcWz--
+
+
+
+--===============6739181682331987593==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6739181682331987593==--
