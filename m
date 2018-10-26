@@ -1,17 +1,28 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Ongoing/future speculative mitigation work
-Date: Fri, 26 Oct 2018 09:31:12 +0200
-Message-ID: <c545fe3a8e373de8b45765f1510c7e421fecb9c8.camel@suse.com>
-References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
- <CABfawh=GYUi2nvx5Nc1xfu7McVSqCwYOMyA6fyCKgYJCGCRkXA@mail.gmail.com>
- <9270f77c23dad0855a00030cc53ce4b2b9366d22.camel@suse.com>
- <CABfawhkcGspr8+0=A-vLq66HrFK1D7H_abTyMKd21h3Mk2gvNg@mail.gmail.com>
- <faf8d9511adf38f9c769103596df7c85b97db4ca.camel@suse.com>
- <CABfawhknLovL9xsm_ZQb3jjXriKxQiSo0t8ids0HA9Q3+kRp1A@mail.gmail.com>
+From: Christoph Helwig <hch@lst.de>
+Subject: Re: [PATCH] xen-swiotlb: exchange memory with Xen only
+ when pages are contiguous
+Date: Fri, 26 Oct 2018 09:48:02 +0200
+Message-ID: <20181026074802.GA4768__32104.1516181596$1540540013$gmane$org@lst.de>
+References: <bb6d87b4-c371-c6c0-8c48-bc95df018ad1@oracle.com>
+ <20181024130246.GA22616@localhost.localdomain>
+ <83900cf4-690c-9725-d022-d427fdeb4f7d@oracle.com>
+ <581cb7ea-3112-791d-918d-9bb887e4744f@oracle.com>
+ <24a62522-1629-5d0b-398e-6d2c1a0b97f7@oracle.com>
+ <922914c9-22db-c5d1-33da-d07691ebd7d7@oracle.com>
+ <a47fabe8-53d1-47b8-0efc-f9f1e5b4898a@oracle.com>
+ <45f5ffe8-3f48-4485-53f0-5a056be69b0c@oracle.com>
+ <5b64850f-9142-0360-fe4e-9e7bc74d2368@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5073975233582923751=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CABfawhknLovL9xsm_ZQb3jjXriKxQiSo0t8ids0HA9Q3+kRp1A@mail.gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=npj0=ng=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1gFwqj-0006ni-Dr
+ for xen-devel@lists.xenproject.org; Fri, 26 Oct 2018 07:48:05 +0000
+Content-Disposition: inline
+In-Reply-To: <5b64850f-9142-0360-fe4e-9e7bc74d2368@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,110 +31,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Cc: mpohlack@amazon.de, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, joao.m.martins@oracle.com, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>, aliguori@amazon.com, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, ross.philipson@oracle.com, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, JGross@suse.com, sergey.dyasli@citrix.com, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, mdontu <mdontu@bitdefender.com>, dwmw@amazon.co.uk, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Joe Jin <joe.jin@oracle.com>
+Cc: John Sobecki <john.sobecki@oracle.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, "DONGLI.ZHANG" <dongli.zhang@oracle.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, konrad@kernel.org, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Christoph Helwig <hch@lst.de>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5073975233582923751==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-MP738x09aoGQXbiHavbN"
-
-
---=-MP738x09aoGQXbiHavbN
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-10-25 at 11:29 -0600, Tamas K Lengyel wrote:
-> On Thu, Oct 25, 2018 at 11:23 AM Dario Faggioli <dfaggioli@suse.com>
-> wrote:
-> >=20
-> > Having _everyone_ wanting to do actual stuff on the CPUs is, IMO,
-> > one
-> > of the worst workloads for hyperthreading, and it is in fact a
-> > workload
-> > where I've always seen it having the least beneficial effect on
-> > performance. I guess it's possible that, in your case, it's
-> > actually
-> > really doing more harm than good.
-> >=20
-> > It's an interesting data point, but I wouldn't use a workload like
-> > that
-> > to measure the benefit, or the impact, of an SMT related change.
->=20
-> Thanks, and indeed this test is the worst-case scenario for
-> hyperthreading, that's was our goal. While a typical work-load may
-> not
-> be similar, it is a possible one for the system we are concerned
-> about.=20
->
-Sure, and that is fine. But at the same time, it is not much, if at
-all, related with speculative execution, L1TF and coscheduling. It's
-just that, with this workload, hyperthreading is bad, and not much more
-to say.
-
-> So if at any given time the benefit of hyperthreading ranges
-> between say +30% and -30% and we can't predict the workload or
-> optimize it, it is looking like a safe bet to just disable
-> hyperthreading. Would you agree?
->=20
-That's, AFAICR, the OpenBSD's take, back at the time of when TLBLeed
-came out. But, no, I don't really agree. Not entirely, at least.
-
-The way I see it, is that there are special workloads where  SMT gives,
-say, -30%, and those should just disable it, and be done.
-
-For others, it's perfectly fine to keep it on, and we should, ideally,
-find a solution to the security issues it introduces, without
-nullifying the performance benefit it introduces.
-
-And when it comes to judge how good, or bad, such solutions are, we
-should consider both the best and the worst case scenarios, and I'd say
-that the best case scenario is more important, as for the worst case,
-one could just disable SMT, as said above.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-MP738x09aoGQXbiHavbN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvSwsEACgkQFkJ4iaW4
-c+4T5w/8D8P5GYZzuEbzfYfpiCyzIiQ4YdQ85dhAMQMq+UZc6JkWf4vJV+47GD7E
-XvtrulHDxhjAKikoljbK1B8Y0kltmFJf4NPHTDSilPA6vwep+Bx5XqqFC7PpCVeL
-4oSXMSAWF2J2GTJtgGZY2VzYoL6ra+mAVRy29zV0mahp9d5mBJ7luPqFj699Ckj+
-QV/EHDZOYvxiEoj/oyF9wj0rkzHPLEq9RIjrXVGbPNMrrMFq21jlRRgoCBsq6pAl
-No9B6JHZQHNZ4MmOZ0e3o8WDlK5666UJiLZ4mKmGn5GQOpueBgp1FvuKnB660OdX
-5Irc5dj84tW+a24G8x9y4s1mCHIWHnHKhL43Wz+OPdq/o4DvKlqypV4/U3g9EXyy
-diQECc0mGNyJsyNzCb0d7YQGAAlzg7WDzCmRkUVBa7JkBuD6oz2lcQYCDhFRcis0
-W3DB8cxGJWmfmpWEsR/5nPQGumxiJCsSSSoYussYsnMb0BKLjas97RsKzihXzlnq
-is/XdPBVbPdnewG1hRAAbS/Di7fK5eYbvCpc0OOWhp5dBW/T8sD0PLhHKXTK1cCr
-aHSmJkKUah2qew1IiWHW7qeDiNqUOv7R5DvDpIn/Ra+HAqNinqmq/ZVuWpI2Y4rb
-fjP3mIQ/o3lBgHWWL82YcjTXqrA7oD9j/8Jvk6Z1H0sSYyQpJsc=
-=ytvo
------END PGP SIGNATURE-----
-
---=-MP738x09aoGQXbiHavbN--
-
-
-
---===============5073975233582923751==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5073975233582923751==--
+T24gVGh1LCBPY3QgMjUsIDIwMTggYXQgMTE6NTY6MDJBTSAtMDcwMCwgSm9lIEppbiB3cm90ZToK
+PiBJIGp1c3QgZGlzY3Vzc2VkIHRoaXMgcGF0Y2ggd2l0aCBCb3JpcyBpbiBwcml2YXRlLCBoaXMg
+b3BpbmlvbnMoQm9yaXMsCj4gcGxlYXNlIGNvcnJlY3QgbWUgaWYgYW55IG1pc3VuZGVyc3Rvb2Qp
+IGFyZToKPiAKPiAxLiBXaXRoL3dpdGhvdXQgdGhlIGNoZWNrLCBib3RoIGFyZSBpbmNvcnJlY3Qs
+IGhlIHRob3VnaHQgd2UgbmVlZCB0bwo+ICAgIHByZXZlbnRlZCB1bmFsbG9jJ2QgZnJlZSBhdCBo
+ZXJlLiAKPiAyLiBPbiBmcmVlaW5nLCBpZiB1cHBlciBsYXllciBhbHJlYWR5IGNoZWNrZWQgdGhl
+IG1lbW9yeSB3YXMgRE1BLWFibGUsCj4gICAgdGhlIGNoZWNraW5nIGF0IGhlcmUgZG9lcyBub3Qg
+bWFrZSBzZW5zZSwgd2UgY2FuIHJlbW92ZSBhbGwgY2hlY2tzLgo+IDMuIHhlbl9jcmVhdGVfY29u
+dGlndW91c19yZWdpb24oKSBhbmQgeGVuX2Rlc3Ryb3lfY29udGlndW91c19yZWdpb24oKQo+ICAg
+IHRvIGNvbWUgaW4gcGFpcnMuCj4gCj4gRm9yICMxIGFuZCAjMywgSSB0aGluayB3ZSBuZWVkIHNv
+bWV0aGluZyBhc3NvY2lhdGUgaXQsIGxpa2UgYSBsaXN0LCBvbgo+IGFsbG9jYXRpbmcsIGFkZCBh
+ZGRyIHRvIGl0LCBvbiBmcmVlaW5nLCBjaGVjayBpZiBpbiB0aGUgbGlzdC4KCklzIHRoZXJlIGFu
+eSB3YXkgdG8gZmlndXJlIG91dCBiYXNlZCBvbiBhbiBhZGRyZXNzIGlmIHRoZSBleGNoYW5nZQpv
+cGVyYXRpb24gaGFwcGVuZWQ/Cgo+IEZvciAjMiwgSSdtIHdhcyBub3QgZm91bmQgYW55d2hlcmUg
+dmFsaWRhdGVkIHRoZSBhZGRyZXNzIG9uIAo+IGRtYV9mcmVlX2NvaGVyZW50KCkgY2FsbHBhdGgs
+IG5vdCBqdXN0IHhlbi1zd2lvdGxiLgoKQXQgbGVhc3QgZm9yIHNpbXBsZSBkaXJlY3QgbWFwcGlu
+Z3MgdGhlcmUgaXMgbm8gZWFzeSB3YXkgdG8gdmVyaWZ5IHRoYXQKd2l0aG91dCBrZWVwaW5nIGEg
+bGlzdCwgYW5kIGZvciBzb21lIG9mIHRoZSBvcHMgdGhhdCBkbyB2bWFwIGxpa2UKb3BlcmF0aW9u
+cyB3ZSBoYXZlIGJhc2ljIHNhbnRpeSBjaGVja3MsIGJ1dCBub3RoaW5nIHRoYXQgcmVhbGx5IGNh
+dGNoZXMKYSB3cm9uZyBmcmVlLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
