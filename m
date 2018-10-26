@@ -1,12 +1,16 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: usage of libxc compat function fails with staging
-Date: Fri, 26 Oct 2018 11:37:33 +0200
-Message-ID: <20181026113733.7e149032.olaf@aepfle.de>
-References: <20181025140808.13eefc21.olaf@aepfle.de>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [freebsd-master test] 129000: trouble: blocked/broken
+Date: Fri, 26 Oct 2018 09:40:05 +0000
+Message-ID: <osstest-129000-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7736790740194921993=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181025140808.13eefc21.olaf@aepfle.de>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=pe7m=ng=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gFybB-0000jJ-BC
+ for xen-devel@lists.xenproject.org; Fri, 26 Oct 2018 09:40:09 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,54 +19,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============7736790740194921993==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/GnHBlAQXmCrFhUl5jmUlHqJ"; protocol="application/pgp-signature"
-
---Sig_/GnHBlAQXmCrFhUl5jmUlHqJ
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 25 Oct 2018 14:08:08 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> qemu-2.9-20170907T112512.4cd42653f5/include/hw/xen/xen_common.h:61:16: wa=
-rning: implicit declaration of function 'xc_map_foreign_bulk'
-> qemu is built with the various compat flags like :-DXC_WANT_COMPAT_MAP_FO=
-REIGN_API=3D1. I think this should give access to that function.
-
-This appears to be a bug in Qemu. What is the purpose of commit 5eeb39c24b =
-("xen: Use stable library interfaces when they are available.")? I do think=
- Qemu can not predict the future of Xen...
-
-
-Olaf
-
---Sig_/GnHBlAQXmCrFhUl5jmUlHqJ
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW9LgXQAKCRBdQqD6ppg2
-fsIlAJ9FcXoyXJSi0x6F76epnh+OZO/xJgCfZUfBm2I2YXMCHBH2C7zWQlaVD/c=
-=M++j
------END PGP SIGNATURE-----
-
---Sig_/GnHBlAQXmCrFhUl5jmUlHqJ--
-
-
---===============7736790740194921993==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7736790740194921993==--
+ZmxpZ2h0IDEyOTAwMCBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
+LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI5MDAwLwoKRmFpbHVyZXMgYW5kIHBy
+b2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFy
+ZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWls
+ZC1hbWQ2NC1mcmVlYnNkICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAg
+YnJva2VuCiBidWlsZC1hbWQ2NC1mcmVlYnNkICAgICAgICAgICA1IGhvc3QtaW5zdGFsbCg1KSAg
+ICAgICAgYnJva2VuIFJFR1IuIHZzLiAxMjg0OTcKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2Vl
+ZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiBidWlsZC1hbWQ2NC1mcmVlYnNkLWFnYWluICAgICAx
+IGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiBidWlsZC1hbWQ2NC14
+ZW4tZnJlZWJzZCAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAg
+bi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogZnJlZWJzZCAgICAgICAgICAgICAg
+MjY1NjA2ZDY0M2VmNzg4ZWE1ZmM1ZGY2ODk1N2U5Y2Q5NGIzNTQxNQpiYXNlbGluZSB2ZXJzaW9u
+OgogZnJlZWJzZCAgICAgICAgICAgICAgYzBiNDEyY2U5M2I5ZDNlZTc1MGU1ZjI2MmI1MGU2NGM1
+MmQzMDBjYwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI4NDk3ICAyMDE4LTEwLTA4IDA5OjE5OjUy
+IFogICAxOCBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyODU4MiAgMjAxOC0xMC0xMCAwOTox
+OToyNSBaICAgMTYgZGF5cyAgICA4IGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEyOTAw
+MCAgMjAxOC0xMC0yNiAwOToxOTowMyBaICAgIDAgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVv
+cGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIDBtcCA8MG1wQEZyZWVCU0Qu
+b3JnPgogIGFlIDxhZUBGcmVlQlNELm9yZz4KICBhbGxhbmp1ZGUgPGFsbGFuanVkZUBGcmVlQlNE
+Lm9yZz4KICBhbmRyZXcgPGFuZHJld0BGcmVlQlNELm9yZz4KICBhcmljaGFyZHNvbiA8YXJpY2hh
+cmRzb25ARnJlZUJTRC5vcmc+CiAgYXZnIDxhdmdARnJlZUJTRC5vcmc+CiAgYmFwdCA8YmFwdEBG
+cmVlQlNELm9yZz4KICBiY3IgPGJjckBGcmVlQlNELm9yZz4KICBiciA8YnJARnJlZUJTRC5vcmc+
+CiAgYnJvb2tzIDxicm9va3NARnJlZUJTRC5vcmc+CiAgYndpZGF3c2sgPGJ3aWRhd3NrQEZyZWVC
+U0Qub3JnPgogIGJ6IDxiekBGcmVlQlNELm9yZz4KICBjZW0gPGNlbUBGcmVlQlNELm9yZz4KICBj
+eSA8Y3lARnJlZUJTRC5vcmc+CiAgZGF2aWRjcyA8ZGF2aWRjc0BGcmVlQlNELm9yZz4KICBkZWxw
+aGlqIDxkZWxwaGlqQEZyZWVCU0Qub3JnPgogIGRlcyA8ZGVzQEZyZWVCU0Qub3JnPgogIGR0ZXNr
+ZSA8ZHRlc2tlQEZyZWVCU0Qub3JnPgogIGVhZGxlciA8ZWFkbGVyQEZyZWVCU0Qub3JnPgogIGVn
+eXBjaW8gPGVneXBjaW9ARnJlZUJTRC5vcmc+CiAgZW1hc3RlIDxlbWFzdGVARnJlZUJTRC5vcmc+
+CiAgZXJqIDxlcmpARnJlZUJTRC5vcmc+CiAgZXVnZW4gPGV1Z2VuQEZyZWVCU0Qub3JnPgogIGdq
+YiA8Z2piQEZyZWVCU0Qub3JnPgogIGdsZWJpdXMgPGdsZWJpdXNARnJlZUJTRC5vcmc+CiAgZ29u
+em8gPGdvbnpvQEZyZWVCU0Qub3JnPgogIGhzZWxhc2t5IDxoc2VsYXNreUBGcmVlQlNELm9yZz4K
+ICBpbXAgPGltcEBGcmVlQlNELm9yZz4KICBqYW1pZSA8amFtaWVARnJlZUJTRC5vcmc+CiAgamNo
+YW5kcmEgPGpjaGFuZHJhQEZyZWVCU0Qub3JnPgogIGpoYiA8amhiQEZyZWVCU0Qub3JnPgogIGpo
+aWJiaXRzIDxqaGliYml0c0BGcmVlQlNELm9yZz4KICBqa2ltIDxqa2ltQEZyZWVCU0Qub3JnPgog
+IGp0bCA8anRsQEZyZWVCU0Qub3JnPgogIGtldmFucyA8a2V2YW5zQEZyZWVCU0Qub3JnPgogIGtp
+YiA8a2liQEZyZWVCU0Qub3JnPgogIGtwIDxrcEBGcmVlQlNELm9yZz4KICBsdXBvcmwgPGx1cG9y
+bEBGcmVlQlNELm9yZz4KICBtYXJraiA8bWFya2pARnJlZUJTRC5vcmc+CiAgbWF2IDxtYXZARnJl
+ZUJTRC5vcmc+CiAgbWNrdXNpY2sgPG1ja3VzaWNrQEZyZWVCU0Qub3JnPgogIG1qZyA8bWpnQEZy
+ZWVCU0Qub3JnPgogIG1tIDxtbUBGcmVlQlNELm9yZz4KICBtdyA8bXdARnJlZUJTRC5vcmc+CiAg
+bnAgPG5wQEZyZWVCU0Qub3JnPgogIG53aGl0ZWhvcm4gPG53aGl0ZWhvcm5ARnJlZUJTRC5vcmc+
+CiAgb3Nob2dibyA8b3Nob2dib0BGcmVlQlNELm9yZz4KICBwZXRlciA8cGV0ZXJARnJlZUJTRC5v
+cmc+CiAgcGhpbGlwIDxwaGlsaXBARnJlZUJTRC5vcmc+CiAgcGhrIDxwaGtARnJlZUJTRC5vcmc+
+CiAgcmdyaW1lcyA8cmdyaW1lc0BGcmVlQlNELm9yZz4KICByaWdvbGV0dG8gPHJpZ29sZXR0b0BG
+cmVlQlNELm9yZz4KICBybWFja2xlbSA8cm1hY2tsZW1ARnJlZUJTRC5vcmc+CiAgc2h1cmQgPHNo
+dXJkQEZyZWVCU0Qub3JnPgogIHNrb3psb3YgPHNrb3psb3ZARnJlZUJTRC5vcmc+CiAgc2xhdmFz
+aCA8c2xhdmFzaEBGcmVlQlNELm9yZz4KICB0YWthd2F0YSA8dGFrYXdhdGFARnJlZUJTRC5vcmc+
+CiAgdGlqbCA8dGlqbEBGcmVlQlNELm9yZz4KICB0b2JpayA8dG9iaWtARnJlZUJTRC5vcmc+CiAg
+dHJhc3ogPHRyYXN6QEZyZWVCU0Qub3JnPgogIHRzb29tZSA8dHNvb21lQEZyZWVCU0Qub3JnPgog
+IHR1ZXhlbiA8dHVleGVuQEZyZWVCU0Qub3JnPgogIHZtYWZmaW9uZSA8dm1hZmZpb25lQEZyZWVC
+U0Qub3JnPgogIHdodSA8d2h1QEZyZWVCU0Qub3JnPgogIHl1cmlwdiA8eXVyaXB2QEZyZWVCU0Qu
+b3JnPgoKam9iczoKIGJ1aWxkLWFtZDY0LWZyZWVic2QtYWdhaW4gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBibG9ja2VkIAogYnVpbGQtYW1kNjQtZnJlZWJzZCAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NC14ZW4t
+ZnJlZWJzZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgot
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxv
+Z3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25m
+aWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIu
+eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRz
+LCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVu
+Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3Rl
+cgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9i
+O2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAg
+ICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoK
+YnJva2VuLWpvYiBidWlsZC1hbWQ2NC1mcmVlYnNkIGJyb2tlbgpicm9rZW4tc3RlcCBidWlsZC1h
+bWQ2NC1mcmVlYnNkIGhvc3QtaW5zdGFsbCg1KQoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24g
+bG9nOyBpdCB3b3VsZCBiZSA2MDQ2IGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
