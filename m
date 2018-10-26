@@ -1,20 +1,12 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: Ongoing/future speculative mitigation work
-Date: Fri, 26 Oct 2018 10:28:20 +0100
-Message-ID: <20181026092820.bernuj2cskqtwqqv@zion.uk.xensource.com>
-References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
- <20181022145534.afuxnfzyovdi3hya@zion.uk.xensource.com>
- <5BD1D82402000078001F4B60@prv1-mh.provo.novell.com>
- <187f3a6a-e83e-3dc2-0cb7-69fecdacacf1@citrix.com>
- <5BD1DAEC02000078001F4BAE@prv1-mh.provo.novell.com>
- <e1388467-9dc8-9012-f9b8-587617a97a73@citrix.com>
- <5BD2DB5F02000078001F4F31@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: usage of libxc compat function fails with staging
+Date: Fri, 26 Oct 2018 11:37:33 +0200
+Message-ID: <20181026113733.7e149032.olaf@aepfle.de>
+References: <20181025140808.13eefc21.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7736790740194921993=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Disposition: inline
-In-Reply-To: <5BD2DB5F02000078001F4F31@prv1-mh.provo.novell.com>
+In-Reply-To: <20181025140808.13eefc21.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,26 +15,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Martin Pohlack <mpohlack@amazon.de>, Julien Grall <julien.grall@arm.com>, Joao Martins <joao.m.martins@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Mihai Dontu <mdontu@bitdefender.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Anthony Liguori <aliguori@amazon.com>, uwed@amazon.de, Lars Kurth <lars.kurth@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ross Philipson <ross.philipson@oracle.com>, george.dunlap@citrix.com, Dario Faggioli <dfaggioli@suse.com>, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel List <xen-devel@lists.xen.org>, Daniel Kiper <daniel.kiper@oracle.com>, David Woodhouse <dwmw@amazon.c>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBPY3QgMjYsIDIwMTggYXQgMDM6MTY6MTVBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDI1LjEwLjE4IGF0IDE4OjI5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNv
-bT4gd3JvdGU6Cj4gPiBBIHNwbGl0IHhlbmhlYXAgbW9kZWwgbWVhbnMgdGhhdCBkYXRhIHBlcnRh
-aW5pbmcgdG8gb3RoZXIgZ3Vlc3RzIGlzbid0Cj4gPiBtYXBwZWQgaW4gdGhlIGNvbnRleHQgb2Yg
-dGhpcyB2Y3B1LCBzbyBjYW5ub3QgYmUgYnJvdWdodCBpbnRvIHRoZSBjYWNoZS4KPiAKPiBJdCB3
-YXMgbm90IGNsZWFyIHRvIG1lIGZyb20gV2VpJ3Mgb3JpZ2luYWwgbWFpbCB0aGF0IHRhbGsgaGVy
-ZSBpcwo+IGFib3V0ICJzcGxpdCIgaW4gYSBzZW5zZSBvZiAicGVyLWRvbWFpbiI7IEkgd2FzIGFz
-c3VtaW5nIHRoZQo+IENPTkZJR19TRVBBUkFURV9YRU5IRUFQIG1vZGUgaW5zdGVhZC4KClRoZSBz
-cGxpdCBoZWFwIHdhcyBpbmRlZWQgcmVmZXJyaW5nIHRvIENPTkZJR19TRVBBUkFURV9YRU5IRUFQ
-IG1vZGUsIHlldApJIHdoYXQgSSB3YW50ZWQgbW9zdCBpcyB0aGUgcGFydGlhbCBkaXJlY3QgbWFw
-IHdoaWNoIHJlZHVjZXMgdGhlIGFtb3VudApvZiBkYXRhIG1hcHBlZCBpbnNpZGUgWGVuIGNvbnRl
-eHQgLS0gdGhlIG9yaWdpbmFsIGlkZWEgd2FzIHJlbW92aW5nCmRpcmVjdCBtYXAgZGlzY3Vzc2Vk
-IGR1cmluZyBvbmUgb2YgdGhlIGNhbGxzIElJUkMuIEkgdGhvdWdodCBtYWtpbmcgdGhlCnBhcnRp
-YWwgZGlyZWN0IG1hcCBtb2RlIHdvcmsgYW5kIG1ha2UgaXQgYXMgc21hbGwgYXMgcG9zc2libGUg
-d2lsbCBnZXQKdXMgOTAlIHRoZXJlLgoKVGhlICJwZXItZG9tYWluIiBoZWFwIGlzIGEgZGlmZmVy
-ZW50IHdvcmsgaXRlbS4KCldlaS4KCj4gCj4gSmFuCj4gCj4gCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7736790740194921993==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/GnHBlAQXmCrFhUl5jmUlHqJ"; protocol="application/pgp-signature"
+
+--Sig_/GnHBlAQXmCrFhUl5jmUlHqJ
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 25 Oct 2018 14:08:08 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> qemu-2.9-20170907T112512.4cd42653f5/include/hw/xen/xen_common.h:61:16: wa=
+rning: implicit declaration of function 'xc_map_foreign_bulk'
+> qemu is built with the various compat flags like :-DXC_WANT_COMPAT_MAP_FO=
+REIGN_API=3D1. I think this should give access to that function.
+
+This appears to be a bug in Qemu. What is the purpose of commit 5eeb39c24b =
+("xen: Use stable library interfaces when they are available.")? I do think=
+ Qemu can not predict the future of Xen...
+
+
+Olaf
+
+--Sig_/GnHBlAQXmCrFhUl5jmUlHqJ
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW9LgXQAKCRBdQqD6ppg2
+fsIlAJ9FcXoyXJSi0x6F76epnh+OZO/xJgCfZUfBm2I2YXMCHBH2C7zWQlaVD/c=
+=M++j
+-----END PGP SIGNATURE-----
+
+--Sig_/GnHBlAQXmCrFhUl5jmUlHqJ--
+
+
+--===============7736790740194921993==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7736790740194921993==--
