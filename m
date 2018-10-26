@@ -1,19 +1,22 @@
-From: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
-Subject: Re: [PATCH] x86/efi: Do not insert timestamps in efi
- files
-Date: Fri, 26 Oct 2018 13:11:28 +0200
-Message-ID: <12e17c52-f1cf-10e9-7d00-e34fb54e6cd5@suse.de>
-References: <7a88f5cb-8f0a-9974-8e84-990045cb8726@suse.de>
- <20181024134522.3295-1-bwiedemann@suse.de>
- <108D0A7C020000E4CA4B4E14@prv1-mh.provo.novell.com>
- <74F2501302000079CA4B4E14@prv1-mh.provo.novell.com>
- <5BD1B8AA02000078001F4A44@prv1-mh.provo.novell.com>
- <d9db83e2-3f03-78ff-b92c-85ca680b7924@citrix.com>
- <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Ping: [PATCH] x86: restrict HVMOP_pagetable_dying to
+ current
+Date: Fri, 26 Oct 2018 05:12:00 -0600
+Message-ID: <5BD2F68002000078001F50E1@prv1-mh.provo.novell.com>
+References: <5BB74B1A02000078001EECBE@prv1-mh.provo.novell.com>
+ <6acd9399-9e43-5f01-defd-068ee81ee479@citrix.com>
+ <5BB7532802000078001EED52@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2097616512558394129=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=n7n6=ng=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gG02A-0001JW-GF
+ for xen-devel@lists.xenproject.org; Fri, 26 Oct 2018 11:12:06 +0000
+In-Reply-To: <5BB7532802000078001EED52@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,87 +25,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Tim Deegan <tim@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============2097616512558394129==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- protocol="application/pgp-signature";
- boundary="Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC
-Content-Type: multipart/mixed; boundary="XLKlgajG0r87E4bhRxBQjc0lz0OcrJMme";
- protected-headers="v1"
-From: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
-Message-ID: <12e17c52-f1cf-10e9-7d00-e34fb54e6cd5@suse.de>
-Subject: Re: [PATCH] x86/efi: Do not insert timestamps in efi files
-References: <7a88f5cb-8f0a-9974-8e84-990045cb8726@suse.de>
- <20181024134522.3295-1-bwiedemann@suse.de>
- <108D0A7C020000E4CA4B4E14@prv1-mh.provo.novell.com>
- <74F2501302000079CA4B4E14@prv1-mh.provo.novell.com>
- <5BD1B8AA02000078001F4A44@prv1-mh.provo.novell.com>
- <d9db83e2-3f03-78ff-b92c-85ca680b7924@citrix.com>
- <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
-In-Reply-To: <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
-
---XLKlgajG0r87E4bhRxBQjc0lz0OcrJMme
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 25/10/2018 16.08, Jan Beulich wrote:
->>>> On 25.10.18 at 16:00, <andrew.cooper3@citrix.com> wrote:
->> For shipped binaries to customers, exactly when it was built is
->> irrelevant, whereas peoples ability to independently verify the
->> integrity of the binary is important.
->=20
-> Correct, which is why I appreciate the _option_ of zapping the
-> timestamp.
-
-Adding an option for this, would make the (already somewhat ugly) patch
-even more ugly, so I thought, that fixing it in binutils might be the
-better way, because other projects will also want to create reproducible
-PE binaries and we do not want to add such ugly patches to all of them.
-=3D> https://sourceware.org/ml/binutils/2018-10/msg00279.html
-
-
-Let's see what they say.
-
-Ciao
-Bernhard M.
-
-
---XLKlgajG0r87E4bhRxBQjc0lz0OcrJMme--
-
---Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: Using GnuPG with Thunderbird - https://www.enigmail.net/
-
-iF0EARECAB0WIQRk4KvQEtfG32NHprVJNgs7HfuhZAUCW9L2ZAAKCRBJNgs7Hfuh
-ZD2kAKC6FtzOUhQlJfCRcO4HWnfxlwgc9wCdF3sN/CIJS46Pg854ILEnAWEqGd0=
-=4V6p
------END PGP SIGNATURE-----
-
---Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC--
-
-
---===============2097616512558394129==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2097616512558394129==--
+Pj4+IE9uIDA1LjEwLjE4IGF0IDE0OjAzLCA8SkJldWxpY2hAc3VzZS5jb20+IHdyb3RlOgo+Pj4+
+IE9uIDA1LjEwLjE4IGF0IDEzOjU4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6
+Cj4+IE9uIDA1LzEwLzE4IDEyOjI5LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+IFRoaXMgaXMgbm90
+IHVzZWQgKGFuZCBwcm9iYWJseSB3YXMgbmV2ZXIgbWVhbnQgdG8gYmUpIGJ5IHRoZSB0b29sIHN0
+YWNrLgo+Pj4gTGltaXRpbmcgaXQgdG8gdGhlIGN1cnJlbnQgZG9tYWluIGluIHBhcnRpY3VsYXIg
+YWxsb3dzIHRvIGVsaW1pbmF0ZSBhCj4+PiBib2d1cyB1c2Ugb2YgdkNQVSAwIGluIHBhZ2V0YWJs
+ZV9keWluZygpLgo+Pj4KPj4+IFJlbW92ZSB0aGUgbm93IHVubmVjZXNzYXJ5IGRvbWFpbi92Q1BV
+IHBhcmFtZXRlcnMgZnJvbSB0aGUgd3JhcHBlci9ob29rCj4+PiBmdW5jdGlvbnMgYXQgdGhlIHNh
+bWUgdGltZS4KPj4+Cj4+PiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
+ZS5jb20+Cj4+Pgo+Pj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS9odm0uYwo+Pj4gKysrIGIveGVu
+L2FyY2gveDg2L2h2bS9odm0uYwo+Pj4gQEAgLTQ4OTUsMTAgKzQ4OTUsMTIgQEAgbG9uZyBkb19o
+dm1fb3AodW5zaWduZWQgbG9uZyBvcCwgWEVOX0dVRQo+Pj4gICAgICAgICAgICAgIHJldHVybiAt
+RVNSQ0g7Cj4+PiAgCj4+PiAgICAgICAgICByYyA9IC1FSU5WQUw7Cj4+PiAtICAgICAgICBpZiAo
+IGlzX2h2bV9kb21haW4oZCkgJiYgcGFnaW5nX21vZGVfc2hhZG93KGQpICkKPj4+ICsgICAgICAg
+IGlmICggdW5saWtlbHkoZCAhPSBjdXJyZW50LT5kb21haW4pICkKPj4+ICsgICAgICAgICAgICBy
+YyA9IC1FT1BOT1RTVVBQOwo+Pj4gKyAgICAgICAgZWxzZSBpZiAoIGlzX2h2bV9kb21haW4oZCkg
+JiYgcGFnaW5nX21vZGVfc2hhZG93KGQpICkKPj4+ICAgICAgICAgICAgICByYyA9IHhzbV9odm1f
+cGFyYW0oWFNNX1RBUkdFVCwgZCwgb3ApOwo+PiAKPj4gQXMgd2UncmUgc3dpdGNoaW5nIHRvIGN1
+cnJlbnQtb25seSwgc2hvdWxkbid0IHRoaXMgdHVybiB0byBYU01fSE9PSyA/Cj4gCj4gTm90IHN1
+cmUgLSBJIHNpbXBseSBkaWRuJ3Qgd2FudCB0byBmaWRkbGUgd2l0aCBhbnkgb2YgdGhlIHNlbWFu
+dGljcywKPiBhbmQga2VlcGluZyBpdCBhcyBpdCBpcyBtYXkgYmUgc3ViLW9wdGltYWwsIGJ1dCBp
+cyBjZXJ0YWlubHkgbm90IGdvaW5nCj4gdG8gYmUgd3JvbmcuCgpBcmUgeW91IGZpbmUgd2l0aCB0
+aGUgYWJvdmUsIG9yIGRvIHlvdSBkZW1hbmQgdGhlIGNoYW5nZSBpbgpvcmRlciB0byBnaXZlIHlv
+dXIgYWNrPwoKPj4gRXZlcnl0aGluZyBlbHNlIExHVE0sIHdpdGggb25lIHNtYWxsIHN1Z2dlc3Rp
+b24uLi4uCj4+IAo+Pj4gICAgICAgICAgaWYgKCAhcmMgKQo+Pj4gLSAgICAgICAgICAgIHBhZ2V0
+YWJsZV9keWluZyhkLCBhLmdwYSk7Cj4+PiArICAgICAgICAgICAgcGFnZXRhYmxlX2R5aW5nKGEu
+Z3BhKTsKPj4+ICAKPj4+ICAgICAgICAgIHJjdV91bmxvY2tfZG9tYWluKGQpOwo+Pj4gICAgICAg
+ICAgYnJlYWs7Cj4+PiAtLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L3BhZ2luZy5oCj4+PiArKysg
+Yi94ZW4vaW5jbHVkZS9hc20teDg2L3BhZ2luZy5oCj4+PiBAQCAtMzQ1LDcgKzM0NSw3IEBAIHZv
+aWQgcGFnaW5nX3dyaXRlX3AybV9lbnRyeShzdHJ1Y3QgcDJtX2QKPj4+ICAKPj4+ICAvKiBDYWxs
+ZWQgZnJvbSB0aGUgZ3Vlc3QgdG8gaW5kaWNhdGUgdGhhdCB0aGUgYSBwcm9jZXNzIGlzIGJlaW5n
+Cj4+PiAgICogdG9ybiBkb3duIGFuZCBpdHMgcGFnZXRhYmxlcyB3aWxsIHNvb24gYmUgZGlzY2Fy
+ZGVkICovCj4+PiAtdm9pZCBwYWdldGFibGVfZHlpbmcoc3RydWN0IGRvbWFpbiAqZCwgcGFkZHJf
+dCBncGEpOwo+Pj4gK3ZvaWQgcGFnZXRhYmxlX2R5aW5nKHBhZGRyX3QgZ3BhKTsKPj4gCj4+IEZp
+eCB0aGUgY29tbWVudCBzdHlsZSB3aGlsZSBpbiB0aGlzIGFyZWE/Cj4gCj4gV2VsbCwgSSBjYW4g
+Y2VydGFpbmx5IGRvIHNvIC0gSSBkaWRuJ3QgYmVjYXVzZSBJIGRpZG4ndCB0b3VjaCB0aGUKPiBj
+b21tZW50IGl0c2VsZi4KCkkgZGlkbid0IHRoaW5rIGl0IHdhcyBuZWNlc3NhcnkgdG8gcmUtc3Vi
+bWl0IHdpdGgganVzdCB0aGlzIGFkanVzdG1lbnQsCnRoZSBtb3JlIHRoYXQgaXQgd2FzIGEgc3Vn
+Z2VzdGlvbiBvbmx5IGFueXdheS4gSXMgdGhlcmUgYW55dGhpbmcKZWxzZSB0aGF0IG5lZWRzIHRh
+a2luZyBjYXJlIG9mIGJlZm9yZSBJIGNhbiBnZXQgeW91IGFjayBmb3IgdGhlCm5vbi1tbSBwYXJ0
+cz8KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
