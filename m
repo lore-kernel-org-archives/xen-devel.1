@@ -1,22 +1,15 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH V2 3/3] x86/altp2m: fix display frozen when
- switching to a new view early
-Date: Fri, 26 Oct 2018 09:04:59 -0600
-Message-ID: <5BD32D1B02000078001F5472@prv1-mh.provo.novell.com>
-References: <1540300744-7406-1-git-send-email-rcojocaru@bitdefender.com>
- <1540300744-7406-4-git-send-email-rcojocaru@bitdefender.com>
- <5BD328F402000078001F540F@prv1-mh.provo.novell.com>
- <48c7a0be-40f3-32ef-0f7a-d5d3b44a189e@bitdefender.com>
+Subject: Re: [PATCH v2 5/5] x86: Reorganise and rename debug
+ register fields in struct vcpu
+Date: Fri, 26 Oct 2018 09:15:02 -0600
+Message-ID: <5BD32F7602000078001F54A1@prv1-mh.provo.novell.com>
+References: <1539599780-14549-1-git-send-email-andrew.cooper3@citrix.com>
+ <1539599780-14549-6-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=n7n6=ng=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gG3fc-0006fE-Ok
- for xen-devel@lists.xenproject.org; Fri, 26 Oct 2018 15:05:04 +0000
-In-Reply-To: <48c7a0be-40f3-32ef-0f7a-d5d3b44a189e@bitdefender.com>
+In-Reply-To: <1539599780-14549-6-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,23 +19,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI2LjEwLjE4IGF0IDE3OjAwLCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
-dGU6Cj4gT24gMTAvMjYvMTggNTo0NyBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDIz
-LjEwLjE4IGF0IDE1OjE5LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3JvdGU6Cj4+PiAg
-eGVuL2FyY2gveDg2L21tL3AybS1lcHQuYyB8ICA4ICsrKysrCj4+PiAgeGVuL2FyY2gveDg2L21t
-L3AybS5jICAgICB8IDgzIAo+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-Ky0tLS0tLS0tCj4+PiAgMiBmaWxlcyBjaGFuZ2VkLCA3OCBpbnNlcnRpb25zKCspLCAxMyBkZWxl
-dGlvbnMoLSkKPj4gCj4+IFdoYXQgYWJvdXQgcDJtLXB0LmM/Cj4gCj4gSSB0aG91Z2h0IGFsdHAy
-bSB3YXMgYW4gRVBULW9ubHkgdG9vbCwKClJpZ2h0LCBJIGhhZCB0aG91Z2h0IG9mIHRoaXMgYWZ0
-ZXIgc2VuZGluZywgeWV0IEkgc3RpbGwgdGhpbmsgLi4uCgo+IGRvIHlvdSBtZWFuIHRoYXQgSSBz
-aG91bGQgYWxzbwo+IGl0ZXJhdGUgb3ZlciBwb3NzaWJseSBhY3RpdmUgYWx0cDJtcyBpbiBwMm1f
-cHRfaGFuZGxlX2RlZmVycmVkX2NoYW5nZXMoKQo+IHRoZXJlIGFzIHdlbGw/CgouLi4gaGF2aW5n
-IHRoYXQgY29kZSBpbiBzeW5jIF9taWdodF8gYmUgYSBnb29kIGlkZWEuIFdhaXQgZm9yCkdlb3Jn
-ZSdzIG9waW5pb24gdGhvdWdoIGJlZm9yZSB5b3UgaW52ZXN0IHRpbWUgdGhlcmUuCgpKYW4KCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDE1LjEwLjE4IGF0IDEyOjM2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gQEAgLTk3MCw5ICs5NzIsMTMgQEAgaW50IGFyY2hfc2V0X2luZm9fZ3Vlc3QoCj4gICAg
+ICB2LT5hcmNoLnB2LmN0cmxyZWdbNF0gPSBjcjQgPyBwdl9ndWVzdF9jcjRfZml4dXAodiwgY3I0
+KSA6Cj4gICAgICAgICAgcmVhbF9jcjRfdG9fcHZfZ3Vlc3RfY3I0KG1tdV9jcjRfZmVhdHVyZXMp
+Owo+ICAKPiAtICAgIG1lbXNldCh2LT5hcmNoLmRlYnVncmVnLCAwLCBzaXplb2Yodi0+YXJjaC5k
+ZWJ1Z3JlZykpOwo+IC0gICAgZm9yICggaSA9IDA7IGkgPCA4OyBpKysgKQo+IC0gICAgICAgICh2
+b2lkKXNldF9kZWJ1Z3JlZyh2LCBpLCBjKGRlYnVncmVnW2ldKSk7Cj4gKyAgICBtZW1zZXQodi0+
+YXJjaC5kciwgMCwgc2l6ZW9mKHYtPmFyY2guZHIpKTsKPiArICAgIHYtPmFyY2guZHI2ID0gdi0+
+YXJjaC5kcjcgPSB2LT5hcmNoLnB2LmRyN19lbXVsID0gMDsKCkNvbnNpZGVyaW5nIHlvdXIgZWFy
+bGllciBjaGFuZ2UgdG8gY29ycmVjdCBpbml0aWFsIHZhbHVlcywgd291bGRuJ3QKaXQgYmUgYmV0
+dGVyIHRvIHVzZSB0aGUgKG5vbi16ZXJvKSBkZWZhdWx0IHZhbHVlcyBoZXJlIHRvbywgZXZlbgpp
+ZiBkdWUgdG8gLi4uCgo+ICsgICAgZm9yICggaSA9IDA7IGkgPCBBUlJBWV9TSVpFKHYtPmFyY2gu
+ZHIpOyBpKysgKQo+ICsgICAgICAgIHNldF9kZWJ1Z3JlZyh2LCBpLCBjKGRlYnVncmVnW2ldKSk7
+Cj4gKyAgICBzZXRfZGVidWdyZWcodiwgNiwgYyhkZWJ1Z3JlZ1s2XSkpOwo+ICsgICAgc2V0X2Rl
+YnVncmVnKHYsIDcsIGMoZGVidWdyZWdbN10pKTsKCi4uLiB0aGlzIGRvaW5nIHNvIG1pZ2h0IGJl
+IGJlbmlnbiBhdCB0aGlzIHBvaW50IGluIHRpbWU/CgpXaXRoIG9yIHdpdGhvdXQgdGhpcyBhZGp1
+c3RtZW50ClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpKYW4K
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
