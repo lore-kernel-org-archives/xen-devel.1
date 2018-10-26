@@ -1,19 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 4/4] x86/vvmx: Don't handle unknown nested
- vmexit reasons at L0
-Date: Fri, 26 Oct 2018 12:09:40 +0100
-Message-ID: <84386ade-538b-2a60-fd0e-e3661c53c386@citrix.com>
-References: <1540481802-20037-1-git-send-email-andrew.cooper3@citrix.com>
- <1540481946-20712-1-git-send-email-andrew.cooper3@citrix.com>
- <bbe923eb-8b5a-3a4b-7f64-8435de76e88c@citrix.com>
- <0a6695ce-4a22-0df2-d6c0-0aec0987fc48@citrix.com>
- <dd055507-dbbc-c6f5-1b33-1d399e62bb18@citrix.com>
+From: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
+Subject: Re: [PATCH] x86/efi: Do not insert timestamps in efi
+ files
+Date: Fri, 26 Oct 2018 13:11:28 +0200
+Message-ID: <12e17c52-f1cf-10e9-7d00-e34fb54e6cd5@suse.de>
+References: <7a88f5cb-8f0a-9974-8e84-990045cb8726@suse.de>
+ <20181024134522.3295-1-bwiedemann@suse.de>
+ <108D0A7C020000E4CA4B4E14@prv1-mh.provo.novell.com>
+ <74F2501302000079CA4B4E14@prv1-mh.provo.novell.com>
+ <5BD1B8AA02000078001F4A44@prv1-mh.provo.novell.com>
+ <d9db83e2-3f03-78ff-b92c-85ca680b7924@citrix.com>
+ <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2097616512558394129=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <dd055507-dbbc-c6f5-1b33-1d399e62bb18@citrix.com>
-Content-Language: en-GB
+In-Reply-To: <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,60 +22,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sergey Dyasli <sergey.dyasli@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>
+To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjYvMTAvMTggMTA6MTMsIFNlcmdleSBEeWFzbGkgd3JvdGU6Cj4gT24gMjYvMTAvMjAxOCAx
-MDoxMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gT24gMjYvMTAvMjAxOCAxMDowNSwgU2VyZ2V5
-IER5YXNsaSB3cm90ZToKPj4+IE9uIDI1LzEwLzIwMTggMTY6MzksIEFuZHJldyBDb29wZXIgd3Jv
-dGU6Cj4+Pj4gVGhpcyBpcyB2ZXJ5IGRhbmdlcm91cyBmcm9tIGEgc2VjdXJpdHkgcG9pbnQgb2Yg
-dmlldywgYmVjYXVzZSBhIG1pc3NpbmcgZW50cnkKPj4+PiB3aWxsIGNhdXNlIEwyJ3MgYWN0aW9u
-IHRvIGJlIGludGVycHJldGVkIGFzIEwxJ3MgYWN0aW9uLgo+Pj4+Cj4+Pj4gU2lnbmVkLW9mZi1i
-eTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPj4+PiAtLS0KPj4+
-PiBDQzogU2VyZ2V5IER5YXNsaSA8c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPgo+Pj4+IENDOiBK
-YW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+Cj4+Pj4gQ0M6IFdlaSBMaXUgPHdlaS5saXUy
-QGNpdHJpeC5jb20+Cj4+Pj4gQ0M6IEp1biBOYWthamltYSA8anVuLm5ha2FqaW1hQGludGVsLmNv
-bT4KPj4+PiBDQzogS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+Cj4+Pj4gLS0tCj4+
-Pj4gIHhlbi9hcmNoL3g4Ni9odm0vdm14L3Z2bXguYyB8IDMgKystCj4+Pj4gIDEgZmlsZSBjaGFu
-Z2VkLCAyIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkKPj4+Pgo+Pj4+IGRpZmYgLS1naXQg
-YS94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14
-LmMKPj4+PiBpbmRleCBkMWM4YTQxLi44MTdkODVmIDEwMDY0NAo+Pj4+IC0tLSBhL3hlbi9hcmNo
-L3g4Ni9odm0vdm14L3Z2bXguYwo+Pj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3Z2bXgu
-Ywo+Pj4+IEBAIC0yNjA5LDggKzI2MDksOSBAQCBpbnQgbnZteF9uMl92bWV4aXRfaGFuZGxlcihz
-dHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncywKPj4+PiAgICAgICAgICAgICAgbnZjcHUtPm52X3Zt
-ZXhpdF9wZW5kaW5nID0gMTsKPj4+PiAgICAgICAgICBicmVhazsKPj4+PiAgICAgIGRlZmF1bHQ6
-Cj4+Pj4gLSAgICAgICAgZ3ByaW50ayhYRU5MT0dfRVJSLCAiVW5leHBlY3RlZCBuZXN0ZWQgdm1l
-eGl0OiByZWFzb24gJXVcbiIsCj4+Pj4gKyAgICAgICAgZ3ByaW50ayhYRU5MT0dfRVJSLCAiVW5o
-YW5kbGVkIG5lc3RlZCB2bWV4aXQ6IHJlYXNvbiAldVxuIiwKPj4+PiAgICAgICAgICAgICAgICAg
-IGV4aXRfcmVhc29uKTsKPj4+PiArICAgICAgICBkb21haW5fY3Jhc2godi0+ZG9tYWluKTsKPj4+
-PiAgICAgIH0KPj4+PiAgCj4+Pj4gICAgICByZXR1cm4gKCBudmNwdS0+bnZfdm1leGl0X3BlbmRp
-bmcgPT0gMSApOwo+Pj4gQ2FuIHlvdSBjb25zaWRlciBhZGRpbmcgaGFuZGxpbmcgZm9yIHRoZSBm
-b2xsb3dpbmc/Cj4+Pgo+Pj4gCUVYSVRfUkVBU09OX0lOVkQKPj4+IAlFWElUX1JFQVNPTl9SRFRT
-Q1AKPj4+IAlFWElUX1JFQVNPTl9WTUZVTkMKPj4gTG9va3MgbGlrZSB0aGVzZSBzaG91bGQgYmUg
-bWVyZ2VkIGluIHdpdGggdGhlIElOVlZQSUQgY2hhbmdlLCBpZiB5b3VyCj4+IGhhcHB5IHdpdGgg
-dGhhdD8KPiBZZXMsIHRoYXQgd291bGQgYmUgYSBjbGVhbmVyIHdheSwgdGhhbmtzLgoKT2sgLSB0
-aGF0IHBhdGNoIGlzIG5vdyBhcyBmb2xsb3dzOgoKeDg2L3Z2bXg6IExldCBMMSBoYW5kbGUgYWxs
-IHRoZSB1bmNvbmRpdGlvbmFsIHZtZXhpdCBpbnN0cnVjdGlvbnMKClNpZ25lZC1vZmYtYnk6IEFu
-ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Ci4uLgpkaWZmIC0tZ2l0IGEv
-eGVuL2FyY2gveDg2L2h2bS92bXgvdnZteC5jIGIveGVuL2FyY2gveDg2L2h2bS92bXgvdnZteC5j
-CmluZGV4IGFhMjAyZTAuLjcwNTFlYjMgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vdm14
-L3Z2bXguYworKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMKQEAgLTIzODMsNiArMjM4
-Myw4IEBAIGludCBudm14X24yX3ZtZXhpdF9oYW5kbGVyKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpy
-ZWdzLArCoMKgwqDCoCBjYXNlIEVYSVRfUkVBU09OX1RSSVBMRV9GQVVMVDoKwqDCoMKgwqAgY2Fz
-ZSBFWElUX1JFQVNPTl9UQVNLX1NXSVRDSDoKwqDCoMKgwqAgY2FzZSBFWElUX1JFQVNPTl9DUFVJ
-RDoKK8KgwqDCoCBjYXNlIEVYSVRfUkVBU09OX0dFVFNFQzoKK8KgwqDCoCBjYXNlIEVYSVRfUkVB
-U09OX0lOVkQ6CsKgwqDCoMKgIGNhc2UgRVhJVF9SRUFTT05fVk1DQUxMOgrCoMKgwqDCoCBjYXNl
-IEVYSVRfUkVBU09OX1ZNQ0xFQVI6CsKgwqDCoMKgIGNhc2UgRVhJVF9SRUFTT05fVk1MQVVOQ0g6
-CkBAIC0yMzk1LDYgKzIzOTcsNyBAQCBpbnQgbnZteF9uMl92bWV4aXRfaGFuZGxlcihzdHJ1Y3Qg
-Y3B1X3VzZXJfcmVncyAqcmVncywKwqDCoMKgwqAgY2FzZSBFWElUX1JFQVNPTl9WTVhPTjoKwqDC
-oMKgwqAgY2FzZSBFWElUX1JFQVNPTl9JTlZFUFQ6CsKgwqDCoMKgIGNhc2UgRVhJVF9SRUFTT05f
-WFNFVEJWOgorwqDCoMKgIGNhc2UgRVhJVF9SRUFTT05fSU5WVlBJRDoKwqDCoMKgwqDCoMKgwqDC
-oCAvKiBpbmplY3QgdG8gTDEgKi8KwqDCoMKgwqDCoMKgwqDCoCBudmNwdS0+bnZfdm1leGl0X3Bl
-bmRpbmcgPSAxOwrCoMKgwqDCoMKgwqDCoMKgIGJyZWFrOwoKUkRUU0NQIGFuZCBWTUZVTkMgbXVz
-dG4ndCBiZSBibGluZGx5IGZvcndhcmRlZCB0byBMMS7CoCBXZSBuZWVkIHRvIGNoZWNrCndoZXRo
-ZXIgdGhlIGludGVyY2VwdHMgYXJlIGFjdGl2ZSBhbmQgZWl0aGVyIGZvcndhcmQgdG8gTDEgb3Ig
-aGFuZGxlIGF0IEwwLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============2097616512558394129==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature";
+ boundary="Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC
+Content-Type: multipart/mixed; boundary="XLKlgajG0r87E4bhRxBQjc0lz0OcrJMme";
+ protected-headers="v1"
+From: "Bernhard M. Wiedemann" <bwiedemann@suse.de>
+To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+Message-ID: <12e17c52-f1cf-10e9-7d00-e34fb54e6cd5@suse.de>
+Subject: Re: [PATCH] x86/efi: Do not insert timestamps in efi files
+References: <7a88f5cb-8f0a-9974-8e84-990045cb8726@suse.de>
+ <20181024134522.3295-1-bwiedemann@suse.de>
+ <108D0A7C020000E4CA4B4E14@prv1-mh.provo.novell.com>
+ <74F2501302000079CA4B4E14@prv1-mh.provo.novell.com>
+ <5BD1B8AA02000078001F4A44@prv1-mh.provo.novell.com>
+ <d9db83e2-3f03-78ff-b92c-85ca680b7924@citrix.com>
+ <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
+In-Reply-To: <5BD1CE4802000078001F4AF7@prv1-mh.provo.novell.com>
+
+--XLKlgajG0r87E4bhRxBQjc0lz0OcrJMme
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 25/10/2018 16.08, Jan Beulich wrote:
+>>>> On 25.10.18 at 16:00, <andrew.cooper3@citrix.com> wrote:
+>> For shipped binaries to customers, exactly when it was built is
+>> irrelevant, whereas peoples ability to independently verify the
+>> integrity of the binary is important.
+>=20
+> Correct, which is why I appreciate the _option_ of zapping the
+> timestamp.
+
+Adding an option for this, would make the (already somewhat ugly) patch
+even more ugly, so I thought, that fixing it in binutils might be the
+better way, because other projects will also want to create reproducible
+PE binaries and we do not want to add such ugly patches to all of them.
+=3D> https://sourceware.org/ml/binutils/2018-10/msg00279.html
+
+
+Let's see what they say.
+
+Ciao
+Bernhard M.
+
+
+--XLKlgajG0r87E4bhRxBQjc0lz0OcrJMme--
+
+--Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Comment: Using GnuPG with Thunderbird - https://www.enigmail.net/
+
+iF0EARECAB0WIQRk4KvQEtfG32NHprVJNgs7HfuhZAUCW9L2ZAAKCRBJNgs7Hfuh
+ZD2kAKC6FtzOUhQlJfCRcO4HWnfxlwgc9wCdF3sN/CIJS46Pg854ILEnAWEqGd0=
+=4V6p
+-----END PGP SIGNATURE-----
+
+--Wts8Y2ay3BGkkKTjA76GUZzHMjSCw2bJC--
+
+
+--===============2097616512558394129==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2097616512558394129==--
