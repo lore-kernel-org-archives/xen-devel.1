@@ -1,18 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 2/5] x86/domain: Initialise vcpu debug
- registers correctly
-Date: Fri, 26 Oct 2018 15:51:53 +0100
-Message-ID: <55050c05-ed95-89aa-7f6a-2700a7c113b8@citrix.com>
-References: <1539599780-14549-1-git-send-email-andrew.cooper3@citrix.com>
- <1539599780-14549-3-git-send-email-andrew.cooper3@citrix.com>
- <5BD3171402000078001F531D@prv1-mh.provo.novell.com>
- <afe9256a-088c-81d0-dd6d-3a9387e52f46@citrix.com>
- <5BD3269C02000078001F5401@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH V2 2/3] x86/mm: allocate logdirty_ranges for
+ altp2ms
+Date: Fri, 26 Oct 2018 08:54:15 -0600
+Message-ID: <5BD32A9702000078001F5439@prv1-mh.provo.novell.com>
+References: <1540300744-7406-1-git-send-email-rcojocaru@bitdefender.com>
+ <1540300744-7406-3-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3342011605689741800=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BD3269C02000078001F5401@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=n7n6=ng=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gG3VE-0005MH-MZ
+ for xen-devel@lists.xenproject.org; Fri, 26 Oct 2018 14:54:20 +0000
+In-Reply-To: <1540300744-7406-3-git-send-email-rcojocaru@bitdefender.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,146 +24,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3342011605689741800==
-Content-Type: multipart/alternative;
-	boundary="------------44DBB5E38316B63240D34EBE"
-Content-Language: en-GB
-
---------------44DBB5E38316B63240D34EBE
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-On 26/10/2018 15:37, Jan Beulich wrote:
->>>> On 26.10.18 at 16:22, <andrew.cooper3@citrix.com> wrote:
->> On 26/10/2018 14:31, Jan Beulich wrote:
->>>>>> On 15.10.18 at 12:36, <andrew.cooper3@citrix.com> wrote:
->>>> --- a/xen/arch/x86/domain.c
->>>> +++ b/xen/arch/x86/domain.c
->>>> @@ -323,6 +323,18 @@ void free_vcpu_struct(struct vcpu *v)
->>>>      free_xenheap_page(v);
->>>>  }
->>>>  
->>>> +/* Initialise various registers to their architectural INIT/RESET state. */
->>>> +void arch_vcpu_regs_init(struct vcpu *v)
->>>> +{
->>>> +    v->arch.user_regs = (typeof(v->arch.user_regs)){
->>>> +        .rflags = X86_EFLAGS_MBS,
->>>> +    };
->>> Sadly this initializer broke the build once again for gcc 4.3.x.
->> Oh - that's unfortunate.  I guess it will need a memset instead.
-> Or we finally need to bump the minimum version we're happy with.
->
->>> (As a side note, using .eflags instead of .rflags would have a
->>> fair chance of an omitted REX prefix.)
->> You specifically requested rflags over eflags in your previous review.
-> Did I? I haven't been able to find v1 of this patch at all in the archives
-> (going back to May), or in my inbox (using just part of the title for
-> searching). Was that posted in private, or under a different title? I'm
-> trying to figure why I would have asked for that...
-
-<5B17E80A02000078001C8C1D@prv1-mh.provo.novell.com>
-
-This series is the fairly non-controversial parts of the original full series, because there is no point delaying getting it in.  I'm still fighting with the monitor framework, which is a prerequisite to being able to fix #DB injection in the VT-x and SVM code.
-
-~Andrew
-
-
---------------44DBB5E38316B63240D34EBE
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 26/10/2018 15:37, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5BD3269C02000078001F5401@prv1-mh.provo.novell.com">
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">On 26.10.18 at 16:22, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
-</pre>
-          </blockquote>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">On 26/10/2018 14:31, Jan Beulich wrote:
-</pre>
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <blockquote type="cite">
-              <blockquote type="cite">
-                <pre class="moz-quote-pre" wrap="">On 15.10.18 at 12:36, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
-</pre>
-              </blockquote>
-            </blockquote>
-            <pre class="moz-quote-pre" wrap="">--- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -323,6 +323,18 @@ void free_vcpu_struct(struct vcpu *v)
-     free_xenheap_page(v);
- }
- 
-+/* Initialise various registers to their architectural INIT/RESET state. */
-+void arch_vcpu_regs_init(struct vcpu *v)
-+{
-+    v-&gt;arch.user_regs = (typeof(v-&gt;arch.user_regs)){
-+        .rflags = X86_EFLAGS_MBS,
-+    };
-</pre>
-          </blockquote>
-          <pre class="moz-quote-pre" wrap="">Sadly this initializer broke the build once again for gcc 4.3.x.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-Oh - that's unfortunate.  I guess it will need a memset instead.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Or we finally need to bump the minimum version we're happy with.
-
-</pre>
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">(As a side note, using .eflags instead of .rflags would have a
-fair chance of an omitted REX prefix.)
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-You specifically requested rflags over eflags in your previous review.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Did I? I haven't been able to find v1 of this patch at all in the archives
-(going back to May), or in my inbox (using just part of the title for
-searching). Was that posted in private, or under a different title? I'm
-trying to figure why I would have asked for that...</pre>
-    </blockquote>
-    <br>
-    <pre><a class="moz-txt-link-rfc2396E" href="mailto:5B17E80A02000078001C8C1D@prv1-mh.provo.novell.com">&lt;5B17E80A02000078001C8C1D@prv1-mh.provo.novell.com&gt;</a>
-
-This series is the fairly non-controversial parts of the original full series, because there is no point delaying getting it in.  I'm still fighting with the monitor framework, which is a prerequisite to being able to fix #DB injection in the VT-x and SVM code.
-
-~Andrew
-</pre>
-  </body>
-</html>
-
---------------44DBB5E38316B63240D34EBE--
-
-
---===============3342011605689741800==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3342011605689741800==--
+Pj4+IE9uIDIzLjEwLjE4IGF0IDE1OjE5LCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
+dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L21tL3AybS1lcHQuYwo+ICsrKyBiL3hlbi9hcmNoL3g4
+Ni9tbS9wMm0tZXB0LmMKPiBAQCAtMTM0OCw2ICsxMzQ4LDggQEAgaW50IGVwdF9wMm1faW5pdChz
+dHJ1Y3QgcDJtX2RvbWFpbiAqcDJtKQo+ICB2b2lkIGVwdF9wMm1fdW5pbml0KHN0cnVjdCBwMm1f
+ZG9tYWluICpwMm0pCj4gIHsKPiAgICAgIHN0cnVjdCBlcHRfZGF0YSAqZXB0ID0gJnAybS0+ZXB0
+Owo+ICsKPiArICAgIHAybV9mcmVlX2xvZ2RpcnR5KHAybSk7CgpUaGlzIGFuZCAuLi4KCj4gICAg
+ICBmcmVlX2NwdW1hc2tfdmFyKGVwdC0+aW52YWxpZGF0ZSk7Cj4gIH0KPiAgCj4gQEAgLTE0MzQs
+MTEgKzE0MzYsMjAgQEAgdm9pZCBzZXR1cF9lcHRfZHVtcCh2b2lkKQo+ICAgICAgcmVnaXN0ZXJf
+a2V5aGFuZGxlcignRCcsIGVwdF9kdW1wX3AybV90YWJsZSwgImR1bXAgVlQteCBFUFQgdGFibGVz
+IiwgMCk7Cj4gIH0KPiAgCj4gLXZvaWQgcDJtX2luaXRfYWx0cDJtX2VwdChzdHJ1Y3QgZG9tYWlu
+ICpkLCB1bnNpZ25lZCBpbnQgaSkKPiAraW50IHAybV9pbml0X2FsdHAybV9lcHQoc3RydWN0IGRv
+bWFpbiAqZCwgdW5zaWduZWQgaW50IGkpCj4gIHsKPiAgICAgIHN0cnVjdCBwMm1fZG9tYWluICpw
+Mm0gPSBkLT5hcmNoLmFsdHAybV9wMm1baV07Cj4gICAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqaG9z
+dHAybSA9IHAybV9nZXRfaG9zdHAybShkKTsKPiAgICAgIHN0cnVjdCBlcHRfZGF0YSAqZXB0Owo+
+ICsgICAgaW50IHJjID0gcDJtX2luaXRfbG9nZGlydHkocDJtKTsKPiArCj4gKyAgICBpZiAoIHJj
+ICkKPiArICAgICAgICByZXR1cm4gcmM7Cj4gKwo+ICsgICAgcmMgPSByYW5nZXNldF9tZXJnZShw
+Mm0tPmxvZ2RpcnR5X3JhbmdlcywgaG9zdHAybS0+bG9nZGlydHlfcmFuZ2VzKTsKPiArCj4gKyAg
+ICBpZiAoIHJjICkKPiArICAgICAgICByZXR1cm4gcmM7CgouLi4gYWxsIG9mIHRoaXMgbG9naWNh
+bGx5IGJlbG9uZyBpbnRvIHAybS5jLCBhcyBpdCdzIG5vdCBjb2RlIHdoaWNoIGlzCkVQVC1zcGVj
+aWZpYy4gVGhpcyB3b3VsZCBhbHNvIGVsaW1pbmF0ZSB0aGUgbmVlZCB0byBtYWtlIHRoZSB0d28K
+ZnVuY3Rpb25zIG5vbi1zdGF0aWMuCgpBbHNvIEkgdGhpbmsgdGhlIHJhbmdlc2V0X21lcmdlKCkg
+aW52b2NhdGlvbiB3b3VsZCBkZXNlcnZlIGEKYnJpZWYgY29tbWVudCBub3RpbmcgdGhhdCB0aGlz
+ICJtZXJnZSIgaXMgcmVhbGx5IGp1c3QgYSAiY29weSIuCgpKYW4KCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
