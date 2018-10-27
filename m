@@ -1,15 +1,18 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v5 06/25] xen/arm: introduce bootcmdlines
-Date: Fri, 26 Oct 2018 17:34:31 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1810261414130.32521@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH v5 05/25] xen/arm: check for multiboot nodes
+ only under /chosen
+Date: Fri, 26 Oct 2018 17:42:24 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1810261735070.32521@sstabellini-ThinkPad-X260>
 References: <alpine.DEB.2.10.1810221859480.31582@sstabellini-ThinkPad-X260>
- <1540260184-11294-6-git-send-email-sstabellini@kernel.org>
- <e46502b0-59c3-9f7a-28af-3fd31a66c960@arm.com>
+ <1540260184-11294-5-git-send-email-sstabellini@kernel.org>
+ <e0434a3a-17aa-6835-d4b5-f841eacc32b8@arm.com>
+ <alpine.DEB.2.10.1810261357430.32521@sstabellini-ThinkPad-X260>
+ <a63ed658-8f3f-f66f-cfc1-2f1b78ecd8d5@arm.com>
+ <655aea94-13a9-def2-6dcc-6d644f74813f@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-582480120-1540600944=:32521"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <e46502b0-59c3-9f7a-28af-3fd31a66c960@arm.com>
+In-Reply-To: <655aea94-13a9-def2-6dcc-6d644f74813f@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,55 +25,86 @@ To: Julien Grall <julien.grall@arm.com>
 Cc: Stefano Stabellini <stefanos@xilinx.com>, Achin.Gupta@arm.com, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAyNiBPY3QgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4g
-Cj4gT24gMTAvMjMvMTggMzowMiBBTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gQEAg
-LTMxNCwxMiArMzEyLDEyIEBAIHN0YXRpYyB2b2lkIF9faW5pdCBlYXJseV9wcmludF9pbmZvKHZv
-aWQpCj4gPiAgICAgICAgICAgICAgICAgICAgICAgIG1pLT5iYW5rW2ldLnN0YXJ0ICsgbWktPmJh
-bmtbaV0uc2l6ZSAtIDEpOwo+ID4gICAgICAgcHJpbnRrKCJcbiIpOwo+ID4gICAgICAgZm9yICgg
-aSA9IDAgOyBpIDwgbW9kcy0+bnJfbW9kczsgaSsrICkKPiA+IC0gICAgICAgIHByaW50aygiTU9E
-VUxFWyVkXTogJSJQUklwYWRkciIgLSAlIlBSSXBhZGRyIiAlLTEycyAlc1xuIiwKPiA+ICsgICAg
-ICAgIHByaW50aygiTU9EVUxFWyVkXTogJSJQUklwYWRkciIgLSAlIlBSSXBhZGRyIiAlLTEyc1xu
-IiwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgaSwKPiA+ICAgICAgICAgICAgICAgICAgICAg
-ICAgbW9kcy0+bW9kdWxlW2ldLnN0YXJ0LAo+ID4gICAgICAgICAgICAgICAgICAgICAgICBtb2Rz
-LT5tb2R1bGVbaV0uc3RhcnQgKyBtb2RzLT5tb2R1bGVbaV0uc2l6ZSwKPiA+IC0gICAgICAgICAg
-ICAgICAgICAgICBib290X21vZHVsZV9raW5kX2FzX3N0cmluZyhtb2RzLT5tb2R1bGVbaV0ua2lu
-ZCksCj4gPiAtICAgICAgICAgICAgICAgICAgICAgbW9kcy0+bW9kdWxlW2ldLmNtZGxpbmUpOwo+
-ID4gKyAgICAgICAgICAgICAgICAgICAgIGJvb3RfbW9kdWxlX2tpbmRfYXNfc3RyaW5nKG1vZHMt
-Pm1vZHVsZVtpXS5raW5kKSk7Cj4gPiArCj4gPiAgICAgICBucl9yc3ZkID0gZmR0X251bV9tZW1f
-cnN2KGRldmljZV90cmVlX2ZsYXR0ZW5lZCk7Cj4gPiAgICAgICBmb3IgKCBpID0gMDsgaSA8IG5y
-X3JzdmQ7IGkrKyApCj4gPiAgICAgICB7Cj4gPiBAQCAtMzMyLDYgKzMzMCwxMSBAQCBzdGF0aWMg
-dm9pZCBfX2luaXQgZWFybHlfcHJpbnRfaW5mbyh2b2lkKQo+ID4gICAgICAgICAgICAgICAgICAg
-ICAgICBpLCBzLCBlKTsKPiA+ICAgICAgIH0KPiA+ICAgICAgIHByaW50aygiXG4iKTsKPiA+ICsg
-ICAgZm9yICggaSA9IDAgOyBpIDwgY21kcy0+bnJfbW9kczsgaSsrICkKPiA+ICsgICAgICAgIHBy
-aW50aygiQ01ETElORVslZF06JXMgJXNcbiIsIGksCj4gPiArICAgICAgICAgICAgICAgY21kcy0+
-Y21kbGluZVtpXS5kdF9uYW1lLAo+ID4gKyAgICAgICAgICAgICAgICZjbWRzLT5jbWRsaW5lW2ld
-LmNtZGxpbmVbMF0pOwo+ID4gKyAgICBwcmludGsoIlxuIik7Cj4gCj4gSSBhbSBvayB0byBzZWUg
-dG8gYWNjZXB0IHRoaXMgcGF0Y2ggd2l0aCB0aGlzIG5ldyBwcmludHMuIEhvd2V2ZXIsCj4gSSB3
-b3VsZCBsaWtlIHRvIHNlZSBhIGZpeCBmb3IgaXQgYXMgc29vbiBhcyBwb3NzaWJsZSBiZWNhdXNl
-IHRoaXMgd2lsbCBiZSBhCj4gbWFzc2l2ZSBwYWluIHRvIGRlYnVnIGlmIGEgdXNlciBoYXMgYSBp
-c3N1ZS4gSW5kZWVkIHdlIGNhbid0IGZpZ3VyZSBvdXQKPiB3aGV0aGVyIGZyb20gdGhlIGxvZyB0
-aGUgYXNzb2NpYXRhdGlvbiBjbWRsaW5lIDwtPiBtb2R1bGVzLgoKPiAKPiA+IEBAIC0yMTA5LDYg
-KzIxMDcsNyBAQCBzdGF0aWMgdm9pZCBfX2luaXQgZmluZF9nbnR0YWJfcmVnaW9uKHN0cnVjdCBk
-b21haW4KPiA+ICpkLAo+ID4gICAgIGludCBfX2luaXQgY29uc3RydWN0X2RvbTAoc3RydWN0IGRv
-bWFpbiAqZCkKPiA+ICAgewo+ID4gKyAgICBjb25zdCBzdHJ1Y3QgYm9vdGNtZGxpbmUgKmtlcm5l
-bCA9Cj4gPiBib290X2NtZGxpbmVfZmluZF9ieV9raW5kKEJPT1RNT0RfS0VSTkVMKTsKPiA+ICAg
-ICAgIHN0cnVjdCBrZXJuZWxfaW5mbyBraW5mbyA9IHt9Owo+ID4gICAgICAgc3RydWN0IHZjcHUg
-KnNhdmVkX2N1cnJlbnQ7Cj4gPiAgICAgICBpbnQgcmMsIGksIGNwdTsKPiA+IEBAIC0yMTU0LDYg
-KzIxNTMsNyBAQCBpbnQgX19pbml0IGNvbnN0cnVjdF9kb20wKHN0cnVjdCBkb21haW4gKmQpCj4g
-PiAgICAgI2VuZGlmCj4gPiAgICsgICAga2luZm8uY21kbGluZSA9IGtlcm5lbCAhPSBOVUxMID8g
-Jmtlcm5lbC0+Y21kbGluZVswXSA6IE5VTEw7Cj4gCj4gVGhhdCdzIG5vdCB0aGUgbW9zdCBvYnZp
-b3VzIGxpbmUgdG8gcmVhZC4gSSB3b3VsZCBlaXRoZXIgcHV0IHRoZSBjb25kaXRpb24KPiBiZXR3
-ZWVuIHBhcmVudGhlc2VzIG9yIHVzZSBkcm9wICE9IE5VTEwuCgpPSywgSSdsbCBhZGQgdGhlIHBh
-cmVudGhlc2VzCgoKPiBUaGUgcmVzdCBvZiB0aGUgY29kZSBsb29rcyBnb29kIHRvIG1lLiBXaXRo
-IHRoYXQgY2hhbmdlIGFuZCB0aGUgb3RoZXIgY29tbWVudAo+IGFkZHJlc3NlZCBpbiBhIHNlcGFy
-YXRlIHBhdGNoOgo+IAoKVHVybnMgb3V0IHRoYXQgdG8gZG8gdGhhdCB3aXRoIHRoZSBjdXJyZW50
-IHN0b3JlZCBpbmZvcm1hdGlvbiB3ZSBuZWVkCmFjY2VzcyB0byB0aGUgdW5mbGF0dGVuZWQgZGV2
-aWNlIHRyZWUsIHdoaWNoIHdlIGRvbid0IGhhdmUgeWV0IGluCmVhcmx5X3ByaW50X2luZm8uIFNv
-LCBJIGFkZGVkIGEgbmV3IHN0YXJ0IGFkZHJlc3MgZmllbGQgdG8gc3RydWN0CmJvb3RjbWRsaW5l
-IHRvIHN0b3JlIHRoZSBzdGFydCBhZGRyZXNzIGluIG1lbW9yeSBvZiB0aGUgY29ycmVzcG9uZGlu
-Zwpib290bW9kdWxlLiBUaGF0IHdheSwgd2UgY2FuIGVhc2lseSBtYXRjaCBhIGJvb3Rtb2R1bGUg
-d2l0aCB0aGUKY29ycmVzcG9uZGluZyBjbWRsaW5lLgoKSSBkaWQgdGhhdCBpbiBhIG5ldyBwYXRj
-aC4KCgo+IEFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgoKVGhh
-bmtzIQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-582480120-1540600944=:32521
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Fri, 26 Oct 2018, Julien Grall wrote:
+> On 10/26/18 10:27 PM, Julien Grall wrote:
+> > Hi,
+> > 
+> > On 10/26/18 10:12 PM, Stefano Stabellini wrote:
+> > > On Fri, 26 Oct 2018, Julien Grall wrote:
+> > > > Hi Stefano,
+> > > > 
+> > > > On 10/23/18 3:02 AM, Stefano Stabellini wrote:
+> > > > > Make sure to only look for multiboot compatible nodes only under
+> > > > > /chosen, not under any other paths (depth <= 3).
+> > > > > 
+> > > > > Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
+> > > > > 
+> > > > > ---
+> > > > > 
+> > > > > Changes in v5:
+> > > > > - add patch
+> > > > > - add check on return value of fdt_get_path
+> > > > > ---
+> > > > >    xen/arch/arm/bootfdt.c | 13 ++++++++++---
+> > > > >    1 file changed, 10 insertions(+), 3 deletions(-)
+> > > > > 
+> > > > > diff --git a/xen/arch/arm/bootfdt.c b/xen/arch/arm/bootfdt.c
+> > > > > index 8eba42c..a314aca 100644
+> > > > > --- a/xen/arch/arm/bootfdt.c
+> > > > > +++ b/xen/arch/arm/bootfdt.c
+> > > > > @@ -173,7 +173,14 @@ static void __init process_multiboot_node(const
+> > > > > void
+> > > > > *fdt, int node,
+> > > > >        bootmodule_kind kind;
+> > > > >        paddr_t start, size;
+> > > > >        const char *cmdline;
+> > > > > -    int len;
+> > > > > +    int len = sizeof("/chosen");
+> > > > 
+> > > > NIT, I am not convince you win anything with that trick. strlen could be
+> > > > optimized by the compiler (we use __builtin_strlen on Arm64).
+> > > 
+> > > I could use strlen if you prefer, but given that the string is known at
+> > > compile time, it should hopefully be resolved to "8" at compile time
+> > > using sizeof. What's wrong with it?
+> > 
+> > __builtin_strlen should get optimized at compile-time. Although, I don't
+> > seem to be the case when I tried. Not sure why.
+> > 
+> > Never mind then.
+> 
+> Actually I just tried to use __builtin_stlren rather than strlen. And
+> GCC is computing the size at compiler time.
+> 
+> Somehow, I thought arm64 was using __builtin_strlen but it seems to implement
+> there own. Most likely we would want to use __builtin_strlen wor constant
+> string. But that's another story.
+> 
+> In that case, I would prefer if you use __builtin_strlen. This is easier to
+> understand over sizeof.
+
+sizeof should be easier than __builtin_strlen for most: sizeof is part
+of the C language, and it is taught in C classes. I expect everybody
+should know what it is. While __builtin_strlen is a compiler construct,
+which is certainly not for beginners. I think it is strange you find it
+easier, probably a side of effect of years of Xen/kernel programming :-)
+
+I would rather keep it as is.
+--8323329-582480120-1540600944=:32521
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-582480120-1540600944=:32521--
