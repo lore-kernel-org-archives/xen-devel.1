@@ -1,11 +1,14 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/domain: Fix build with GCC 4.3.x
-Date: Mon, 29 Oct 2018 11:52:08 +0000
-Message-ID: <1540813928-25860-1-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] x86/domain: Fix build with GCC 4.3.x
+Date: Mon, 29 Oct 2018 11:53:33 +0000
+Message-ID: <20181029115333.2x6nlbnea6wwt2jc@zion.uk.xensource.com>
+References: <1540813928-25860-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Disposition: inline
+In-Reply-To: <1540813928-25860-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,27 +17,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-R0NDIDQuMy54IGNhbid0IGluaXRpYWxpc2UgdGhlIHVzZXJfcmVncyBzdHJ1Y3R1cmUgbGlrZSB0
-aGlzLgoKUmVwb3J0ZWQtYnk6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KU2lnbmVk
-LW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCkND
-OiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBj
-aXRyaXguY29tPgotLS0KIHhlbi9hcmNoL3g4Ni9kb21haW4uYyB8IDUgKystLS0KIDEgZmlsZSBj
-aGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVu
-L2FyY2gveDg2L2RvbWFpbi5jIGIveGVuL2FyY2gveDg2L2RvbWFpbi5jCmluZGV4IGQ2M2I3MWMu
-LjE5NjkyZTIgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9kb21haW4uYworKysgYi94ZW4vYXJj
-aC94ODYvZG9tYWluLmMKQEAgLTMyNiw5ICszMjYsOCBAQCB2b2lkIGZyZWVfdmNwdV9zdHJ1Y3Qo
-c3RydWN0IHZjcHUgKnYpCiAvKiBJbml0aWFsaXNlIHZhcmlvdXMgcmVnaXN0ZXJzIHRvIHRoZWly
-IGFyY2hpdGVjdHVyYWwgSU5JVC9SRVNFVCBzdGF0ZS4gKi8KIHZvaWQgYXJjaF92Y3B1X3JlZ3Nf
-aW5pdChzdHJ1Y3QgdmNwdSAqdikKIHsKLSAgICB2LT5hcmNoLnVzZXJfcmVncyA9ICh0eXBlb2Yo
-di0+YXJjaC51c2VyX3JlZ3MpKXsKLSAgICAgICAgLnJmbGFncyA9IFg4Nl9FRkxBR1NfTUJTLAot
-ICAgIH07CisgICAgbWVtc2V0KCZ2LT5hcmNoLnVzZXJfcmVncywgMCwgc2l6ZW9mKHYtPmFyY2gu
-dXNlcl9yZWdzKSk7CisgICAgdi0+YXJjaC51c2VyX3JlZ3MuZWZsYWdzID0gWDg2X0VGTEFHU19N
-QlM7CiAKICAgICBtZW1zZXQodi0+YXJjaC5kZWJ1Z3JlZywgMCwgc2l6ZW9mKHYtPmFyY2guZGVi
-dWdyZWcpKTsKICAgICB2LT5hcmNoLmRlYnVncmVnWzZdID0gWDg2X0RSNl9ERUZBVUxUOwotLSAK
-Mi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBPY3QgMjksIDIwMTggYXQgMTE6NTI6MDhBTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBHQ0MgNC4zLnggY2FuJ3QgaW5pdGlhbGlzZSB0aGUgdXNlcl9yZWdzIHN0cnVjdHVy
+ZSBsaWtlIHRoaXMuCj4gCj4gUmVwb3J0ZWQtYnk6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNl
+LmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
+aXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
