@@ -1,16 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH] x86/paravirt: pv_ops isn't GPL only
-Date: Mon, 29 Oct 2018 16:01:16 +0100
-Message-ID: <20181029150116.25372-1-jgross__29058.5914663554$1540825204$gmane$org@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 14/16] x86: make entry point code build
+ when !CONFIG_PV
+Date: Mon, 29 Oct 2018 09:03:18 -0600
+Message-ID: <5BD7213602000078001F5DF4@prv1-mh.provo.novell.com>
+References: <cover.a9d086fddeb7425fc8cbb3d907dbe8d99a55b46c.1539959287.git-series.wei.liu2@citrix.com>
+ <af9f79239874ca4257e136b74460646d36363650.1539959287.git-series.wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=jung=nj=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gH92f-0000Xq-HT
- for xen-devel@lists.xenproject.org; Mon, 29 Oct 2018 15:01:21 +0000
+ (envelope-from <srs0=m5uw=nj=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gH94e-0000e2-32
+ for xen-devel@lists.xenproject.org; Mon, 29 Oct 2018 15:03:24 +0000
+In-Reply-To: <af9f79239874ca4257e136b74460646d36363650.1539959287.git-series.wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,26 +25,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org, virtualization@lists.linux-foundation.org
-Cc: Juergen Gross <jgross@suse.com>, boris.ostrovsky@oracle.com, rusty@rustcorp.com.au, mingo@redhat.com, hpa@zytor.com, akataria@vmware.com, tglx@linutronix.de
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Q29tbWl0IDVjODM1MTFiZGI5ODMyICgieDg2L3BhcmF2aXJ0OiBVc2UgYSBzaW5nbGUgb3BzIHN0
-cnVjdHVyZSIpCmludHJvZHVjZWQgYSByZWdyZXNzaW9uIGZvciBvdXQtb2YtdHJlZSBtb2R1bGVz
-IHVzaW5nIHNwaW5sb2NrcywgYXMKcHZfbG9ja19vcHMgd2FzIGV4cG9ydGVkIHZpYSBFWFBPUlRf
-U1lNQk9MKCksIHdoaWxlIHRoZSBuZXcgcHZfb3BzCnN0cnVjdHVyZSBub3cgY29udGFpbmluZyB0
-aGUgcHYgbG9jayBvcGVyYXRpb25zIGlzIGV4cG9ydGVkIHZpYQpFWFBPUlRfU1lNQk9MX0dQTCgp
-LgoKQ2hhbmdlIHRoYXQgYnkgdXNpbmcgRVhQT1JUX1NZTUJPTChwdl9vcHMpLgoKRml4ZXM6IDVj
-ODM1MTFiZGI5ODMyICgieDg2L3BhcmF2aXJ0OiBVc2UgYSBzaW5nbGUgb3BzIHN0cnVjdHVyZSIp
-ClNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KLS0tCiBhcmNo
-L3g4Ni9rZXJuZWwvcGFyYXZpcnQuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
-bigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2FyY2gveDg2L2tlcm5lbC9wYXJhdmly
-dC5jIGIvYXJjaC94ODYva2VybmVsL3BhcmF2aXJ0LmMKaW5kZXggZTRkNGRmMzc5MjJhLi40NTEy
-M2IxMTZjMDUgMTAwNjQ0Ci0tLSBhL2FyY2gveDg2L2tlcm5lbC9wYXJhdmlydC5jCisrKyBiL2Fy
-Y2gveDg2L2tlcm5lbC9wYXJhdmlydC5jCkBAIC00ODMsNSArNDgzLDUgQEAgTk9LUFJPQkVfU1lN
-Qk9MKG5hdGl2ZV9zZXRfZGVidWdyZWcpOwogTk9LUFJPQkVfU1lNQk9MKG5hdGl2ZV9sb2FkX2lk
-dCk7CiAjZW5kaWYKIAotRVhQT1JUX1NZTUJPTF9HUEwocHZfb3BzKTsKK0VYUE9SVF9TWU1CT0wo
-cHZfb3BzKTsKIEVYUE9SVF9TWU1CT0xfR1BMKHB2X2luZm8pOwotLSAKMi4xNi40CgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDE5LjEwLjE4IGF0IDE2OjI4LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+QEAgLTU0OCwxMCArNTUwLDE0IEBAIEVOVFJZKHJldF9mcm9tX2ludHIpCj4gICAgICAgICAgR0VU
+X0NVUlJFTlQoYngpCj4gICAgICAgICAgdGVzdGIgJDMsIFVSRUdTX2NzKCVyc3ApCj4gICAgICAg
+ICAganogICAgcmVzdG9yZV9hbGxfeGVuCj4gKyNpZmRlZiBDT05GSUdfUFYKPiAgICAgICAgICBt
+b3ZxICBWQ1BVX2RvbWFpbiglcmJ4KSwgJXJheAo+ICAgICAgICAgIGNtcGIgICQwLCBET01BSU5f
+aXNfMzJiaXRfcHYoJXJheCkKPiAgICAgICAgICBqZSAgICB0ZXN0X2FsbF9ldmVudHMKPiAgICAg
+ICAgICBqbXAgICBjb21wYXRfdGVzdF9hbGxfZXZlbnRzCj4gKyNlbHNlCj4gKyAgICAgICAgQlVH
+Cj4gKyNlbmRpZgoKSG1tLCBub3Qgc3VyZSBoZXJlIChhbmQgZWxzZXdoZXJlKTogQW5vdGhlciBv
+cHRpb24gaXMgdG8Kc3RyZWFtbGluZSBleGVjdXRpb24gYnkgcmVwbGFjaW5nIHRoZSBjb25kaXRp
+b25hbCBicmFuY2ggd2l0aCBhbgp1bmNvbmRpdGlvbmFsIG9uZSBpbiB0aGUgIVBWIGNhc2UuIEFu
+ZHJldywgZG8geW91IGhhdmUgYW55CnRob3VnaHRzIGVpdGhlciB3YXk/Cgo+IEBAIC01OTYsOCAr
+NjAyLDkgQEAgRU5UUlkoY29tbW9uX2ludGVycnVwdCkKPiAgICAgICAgICBjbW92bnogJXIxMiwg
+JXIxNQo+ICAgICAgICAgIGNtb3ZueiAlcjEyZCwgJWVieAo+ICAuTGludHJfY3IzX29rYXk6Cj4g
+LQo+ICsjaWZkZWYgQ09ORklHX1BWCj4gICAgICAgICAgQ1I0X1BWMzJfUkVTVE9SRQo+ICsjZW5k
+aWYKCkNvdWxkbid0IHlvdSBpbnN0ZWFkIG1ha2UgdGhlIG1hY3JvIGV4cGFuZCB0byBub3RoaW5n
+PwoKQWxzbyBwbGVhc2UgZG9uJ3QgcmVtb3ZlIHRoZSBibGFuayBsaW5lLgoKSmFuCgoKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
