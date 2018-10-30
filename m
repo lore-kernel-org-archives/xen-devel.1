@@ -1,20 +1,17 @@
-From: Vikram K <vikram.k@pathpartnertech.com>
-Subject: Re: [Xen-users] [XEN][ARM] WiFi bridge creation
-Date: Tue, 30 Oct 2018 15:01:39 +0530
-Message-ID: <CAFsJcmZFrpmattTzwkijF7Wz4cgXErg0090QBx1S-zJCRNnScg@mail.gmail.com>
-References: <CAFsJcmYQRttza046T09sCBZzEs7pm31uxawQJHxsQySpyELkBQ@mail.gmail.com>
- <20181030080929.6d04a875@planb.netng.org>
+From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
+Subject: [PATCH v5] arch/x86: Add registers to vm_event
+Date: Tue, 30 Oct 2018 10:07:04 +0000
+Message-ID: <20181030100651.19975-1-aisaila@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7490816351798996701=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xqb5=nk=pathpartnertech.com=vikram.k@srs-us1.protection.inumbo.net>)
- id 1gHQNP-00018v-3W
- for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 09:31:55 +0000
-Received: by mail-lf1-x133.google.com with SMTP id p86so6085503lfg.5
- for <xen-devel@lists.xenproject.org>; Tue, 30 Oct 2018 02:31:53 -0700 (PDT)
-In-Reply-To: <20181030080929.6d04a875@planb.netng.org>
+ <srs0=ec5o=nk=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
+ id 1gHQvU-0003td-W1
+ for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 10:07:09 +0000
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,185 +20,99 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: vbotka@gmail.com
-Cc: xen-devel@lists.xenproject.org, xen-users@lists.xenproject.org
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, Alexandru Stefan ISAILA <aisaila@bitdefender.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7490816351798996701==
-Content-Type: multipart/alternative; boundary="000000000000055bbf05796edbbd"
-
---000000000000055bbf05796edbbd
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-  As per below link, it is possible to share Internet via WiFi between Dom0
-and DomU,.
-  https://wiki.xenproject.org/wiki/Xen_in_WiFi_networks
-
-  Tried the suggested solution using ebtables, but it did not work.
-
-
-
-* ebtables -t nat -A POSTROUTING -s 00:60:00:00:00:01 \
-              -j snat --to-source 00:60:aa:bb:cc:dd*
-
- In the configurations file we have added below configuration in DomU
-config file.
-* vif = ['mac=00:16:3e:64:b8:40']*
-
-
-Apart from that do we need to add any addition configuration?
-
-
-On Tue, Oct 30, 2018 at 12:39 PM Vladimir Botka <vbotka@gmail.com> wrote:
-
-> On Tue, 30 Oct 2018 10:03:22 +0530
-> Vikram K <vikram.k@pathpartnertech.com> wrote:
->
-> > Hello,
-> > We are using Hikey960 with Debian as Dom0 and DomU. This board has only
-> > WiFi interface. We want to create bridge between Dom0 and DomU so that
-> DomU
-> > has internet access. We tried to create bridge using brtcl command, but
-> it
-> > is not working. Please provide pointers.
->
-> AFAIK, it's not working
-> https://marc.info/?l=linux-wireless&m=136743495526905&w=2
-> "There is a proposed fix that is included in OpenWrt"
-> https://marc.info/?l=linux-wireless&m=145591129008322&w=2
-> More details are avilable in OpenWrt WiKi
-> https://wiki.openwrt.org/doc/recipes/relayclient
->
-> HTH,
->
-> -vlado
->
-
-
--- 
-Thanks & Regards
-Vikram KS
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---000000000000055bbf05796edbbd
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div>Hi=
-,</div><div><br></div><div>=C2=A0 As per below link, it is possible to shar=
-e Internet via WiFi between Dom0 and DomU,.</div><div>=C2=A0 <a href=3D"htt=
-ps://wiki.xenproject.org/wiki/Xen_in_WiFi_networks">https://wiki.xenproject=
-.org/wiki/Xen_in_WiFi_networks</a><br></div><div><br></div><div>=C2=A0 Trie=
-d the suggested solution using ebtables, but it did not work. <br></div><di=
-v><pre><b> <span style=3D"font-family:arial,helvetica,sans-serif">ebtables =
--t nat -A POSTROUTING -s 00:60:00:00:00:01 \
-              -j snat --to-source 00:60:aa:bb:cc:dd</span><br><br></b></pre=
-><pre><span style=3D"font-family:arial,helvetica,sans-serif"> In the config=
-urations file we have added below configuration in DomU config file.<br><b>=
- vif =3D [&#39;mac=3D00:16:3e:64:b8:40&#39;]</b></span><b><br></b></pre>=C2=
-=A0 <br></div><div>Apart from that do we need to add any addition configura=
-tion?<br></div><div><br></div></div></div></div></div><br><div class=3D"gma=
-il_quote"><div dir=3D"ltr">On Tue, Oct 30, 2018 at 12:39 PM Vladimir Botka =
-&lt;<a href=3D"mailto:vbotka@gmail.com">vbotka@gmail.com</a>&gt; wrote:<br>=
-</div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-l=
-eft:1px #ccc solid;padding-left:1ex">On Tue, 30 Oct 2018 10:03:22 +0530<br>
-Vikram K &lt;<a href=3D"mailto:vikram.k@pathpartnertech.com" target=3D"_bla=
-nk">vikram.k@pathpartnertech.com</a>&gt; wrote:<br>
-<br>
-&gt; Hello,<br>
-&gt; We are using Hikey960 with Debian as Dom0 and DomU. This board has onl=
-y<br>
-&gt; WiFi interface. We want to create bridge between Dom0 and DomU so that=
- DomU<br>
-&gt; has internet access. We tried to create bridge using brtcl command, bu=
-t it<br>
-&gt; is not working. Please provide pointers.<br>
-<br>
-AFAIK, it&#39;s not working<br>
-<a href=3D"https://marc.info/?l=3Dlinux-wireless&amp;m=3D136743495526905&am=
-p;w=3D2" rel=3D"noreferrer" target=3D"_blank">https://marc.info/?l=3Dlinux-=
-wireless&amp;m=3D136743495526905&amp;w=3D2</a><br>
-&quot;There is a proposed fix that is included in OpenWrt&quot;<br>
-<a href=3D"https://marc.info/?l=3Dlinux-wireless&amp;m=3D145591129008322&am=
-p;w=3D2" rel=3D"noreferrer" target=3D"_blank">https://marc.info/?l=3Dlinux-=
-wireless&amp;m=3D145591129008322&amp;w=3D2</a><br>
-More details are avilable in OpenWrt WiKi<br>
-<a href=3D"https://wiki.openwrt.org/doc/recipes/relayclient" rel=3D"norefer=
-rer" target=3D"_blank">https://wiki.openwrt.org/doc/recipes/relayclient</a>=
-<br>
-<br>
-HTH,<br>
-<br>
--vlado<br>
-</blockquote></div><br clear=3D"all"><br>-- <br><div dir=3D"ltr" class=3D"g=
-mail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"ltr"><div><d=
-iv dir=3D"ltr"><span>Thanks &amp; Regards<br>Vikram KS<br></span><span styl=
-e=3D"color:rgb(19,79,92)"></span></div></div></div></div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---000000000000055bbf05796edbbd--
-
-
---===============7490816351798996701==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7490816351798996701==--
+VGhpcyBwYXRjaCBhZGRzIGEgY291cGxlIG9mIHJlZ3MgdG8gdGhlIHZtX2V2ZW50IHRoYXQgYXJl
+IHVzZWQgYnkKdGhlIGludHJvc3BlY3Rpb24uIFRoZSBiYXNlLCBsaW1pdCBhbmQgYXIKYml0cyBh
+cmUgY29tcHJlc3NlZCBpbnRvIGEgdWludDY0X3QgdW5pb24gc28gYXMgbm90IHRvIGVubGFyZ2Ug
+dGhlCnZtX2V2ZW50LgoKU2lnbmVkLW9mZi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBi
+aXRkZWZlbmRlci5jb20+CgotLS0KQ2hhbmdlcyBzaW5jZSBWNDoKCS0gQ2hhbmdlIHRoZSBjb21t
+ZW50IGludG8gb25lIGxpbmUKIAktIFB1bGwgdGhlIGJhc2Ugb3V0IG9mIHg4Nl9zZWxlY3Rvcl9y
+ZWcKCS0gUmVuYW1lZCB4ODZfc2VsZWN0b3JfcmVnXzMyLDY0IGludG8geDg2X3NlbGVjdG9yX3Jl
+Zy4KLS0tCiB4ZW4vYXJjaC94ODYvdm1fZXZlbnQuYyAgICAgICB8IDcxICsrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKystLS0tCiB4ZW4vaW5jbHVkZS9wdWJsaWMvdm1fZXZlbnQuaCB8IDI2
+ICsrKysrKysrKysrKy0KIDIgZmlsZXMgY2hhbmdlZCwgODcgaW5zZXJ0aW9ucygrKSwgMTAgZGVs
+ZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3ZtX2V2ZW50LmMgYi94ZW4vYXJj
+aC94ODYvdm1fZXZlbnQuYwppbmRleCAxNWRlNDNjM2U2Li40ZTdiNzQ4MDEwIDEwMDY0NAotLS0g
+YS94ZW4vYXJjaC94ODYvdm1fZXZlbnQuYworKysgYi94ZW4vYXJjaC94ODYvdm1fZXZlbnQuYwpA
+QCAtMTIyLDExICsxMjIsNjYgQEAgdm9pZCB2bV9ldmVudF9tb25pdG9yX25leHRfaW50ZXJydXB0
+KHN0cnVjdCB2Y3B1ICp2KQogICAgIHYtPmFyY2gubW9uaXRvci5uZXh0X2ludGVycnVwdF9lbmFi
+bGVkID0gdHJ1ZTsKIH0KIAorc3RhdGljIHZvaWQgdm1fZXZlbnRfcGFja19zZWdtZW50X3JlZ2lz
+dGVyKGVudW0geDg2X3NlZ21lbnQgc2VnbWVudCwKKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBzdHJ1Y3Qgdm1fZXZlbnRfcmVnc194ODYgKnJlZykKK3sKKyAgICBz
+dHJ1Y3Qgc2VnbWVudF9yZWdpc3RlciBzZWc7CisKKyAgICBodm1fZ2V0X3NlZ21lbnRfcmVnaXN0
+ZXIoY3VycmVudCwgc2VnbWVudCwgJnNlZyk7CisKKyAgICBzd2l0Y2ggKCBzZWdtZW50ICkKKyAg
+ICB7CisgICAgY2FzZSB4ODZfc2VnX3NzOgorICAgICAgICByZWctPnNzX2Jhc2UgPSBzZWcuYmFz
+ZTsKKyAgICAgICAgcmVnLT5zcy5saW1pdCA9IHNlZy5nID8gc2VnLmxpbWl0ID4+IDEyIDogc2Vn
+LmxpbWl0OworICAgICAgICByZWctPnNzLmFyID0gc2VnLmF0dHI7CisgICAgICAgIHJlZy0+c3Nf
+c2VsID0gc2VnLnNlbDsKKyAgICAgICAgYnJlYWs7CisKKyAgICBjYXNlIHg4Nl9zZWdfZnM6Cisg
+ICAgICAgIHJlZy0+ZnNfYmFzZSA9IHNlZy5iYXNlOworICAgICAgICByZWctPmZzLmxpbWl0ID0g
+c2VnLmcgPyBzZWcubGltaXQgPj4gMTIgOiBzZWcubGltaXQ7CisgICAgICAgIHJlZy0+ZnMuYXIg
+PSBzZWcuYXR0cjsKKyAgICAgICAgcmVnLT5mc19zZWwgPSBzZWcuc2VsOworICAgICAgICBicmVh
+azsKKworICAgIGNhc2UgeDg2X3NlZ19nczoKKyAgICAgICAgcmVnLT5nc19iYXNlID0gc2VnLmJh
+c2U7CisgICAgICAgIHJlZy0+Z3MubGltaXQgPSBzZWcuZyA/IHNlZy5saW1pdCA+PiAxMiA6IHNl
+Zy5saW1pdDsKKyAgICAgICAgcmVnLT5ncy5hciA9IHNlZy5hdHRyOworICAgICAgICByZWctPmdz
+X3NlbCA9IHNlZy5zZWw7CisgICAgICAgIGJyZWFrOworCisgICAgY2FzZSB4ODZfc2VnX2NzOgor
+ICAgICAgICByZWctPmNzX2Jhc2UgPSBzZWcuYmFzZTsKKyAgICAgICAgcmVnLT5jcy5saW1pdCA9
+IHNlZy5nID8gc2VnLmxpbWl0ID4+IDEyIDogc2VnLmxpbWl0OworICAgICAgICByZWctPmNzLmFy
+ID0gc2VnLmF0dHI7CisgICAgICAgIHJlZy0+Y3Nfc2VsID0gc2VnLnNlbDsKKyAgICAgICAgYnJl
+YWs7CisKKyAgICBjYXNlIHg4Nl9zZWdfZHM6CisgICAgICAgIHJlZy0+ZHNfYmFzZSA9IHNlZy5i
+YXNlOworICAgICAgICByZWctPmRzLmxpbWl0ID0gc2VnLmcgPyBzZWcubGltaXQgPj4gMTIgOiBz
+ZWcubGltaXQ7CisgICAgICAgIHJlZy0+ZHMuYXIgPSBzZWcuYXR0cjsKKyAgICAgICAgcmVnLT5k
+c19zZWwgPSBzZWcuc2VsOworICAgICAgICBicmVhazsKKworICAgIGNhc2UgeDg2X3NlZ19lczoK
+KyAgICAgICAgcmVnLT5lc19iYXNlID0gc2VnLmJhc2U7CisgICAgICAgIHJlZy0+ZXMubGltaXQg
+PSBzZWcuZyA/IHNlZy5saW1pdCA+PiAxMiA6IHNlZy5saW1pdDsKKyAgICAgICAgcmVnLT5lcy5h
+ciA9IHNlZy5hdHRyOworICAgICAgICByZWctPmVzX3NlbCA9IHNlZy5zZWw7CisgICAgICAgIGJy
+ZWFrOworCisgICAgZGVmYXVsdDoKKyAgICAgICAgQVNTRVJUX1VOUkVBQ0hBQkxFKCk7CisgICAg
+fQorfQorCiB2b2lkIHZtX2V2ZW50X2ZpbGxfcmVncyh2bV9ldmVudF9yZXF1ZXN0X3QgKnJlcSkK
+IHsKICNpZmRlZiBDT05GSUdfSFZNCiAgICAgY29uc3Qgc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJl
+Z3MgPSBndWVzdF9jcHVfdXNlcl9yZWdzKCk7Ci0gICAgc3RydWN0IHNlZ21lbnRfcmVnaXN0ZXIg
+c2VnOwogICAgIHN0cnVjdCBodm1faHdfY3B1IGN0eHQgPSB7fTsKICAgICBzdHJ1Y3QgdmNwdSAq
+Y3VyciA9IGN1cnJlbnQ7CiAKQEAgLTE3MCwxNCArMjI1LDE0IEBAIHZvaWQgdm1fZXZlbnRfZmls
+bF9yZWdzKHZtX2V2ZW50X3JlcXVlc3RfdCAqcmVxKQogICAgIHJlcS0+ZGF0YS5yZWdzLng4Ni5t
+c3Jfc3RhciA9IGN0eHQubXNyX3N0YXI7CiAgICAgcmVxLT5kYXRhLnJlZ3MueDg2Lm1zcl9sc3Rh
+ciA9IGN0eHQubXNyX2xzdGFyOwogCi0gICAgaHZtX2dldF9zZWdtZW50X3JlZ2lzdGVyKGN1cnIs
+IHg4Nl9zZWdfZnMsICZzZWcpOwotICAgIHJlcS0+ZGF0YS5yZWdzLng4Ni5mc19iYXNlID0gc2Vn
+LmJhc2U7Ci0KLSAgICBodm1fZ2V0X3NlZ21lbnRfcmVnaXN0ZXIoY3VyciwgeDg2X3NlZ19ncywg
+JnNlZyk7Ci0gICAgcmVxLT5kYXRhLnJlZ3MueDg2LmdzX2Jhc2UgPSBzZWcuYmFzZTsKKyAgICB2
+bV9ldmVudF9wYWNrX3NlZ21lbnRfcmVnaXN0ZXIoeDg2X3NlZ19mcywgJnJlcS0+ZGF0YS5yZWdz
+Lng4Nik7CisgICAgdm1fZXZlbnRfcGFja19zZWdtZW50X3JlZ2lzdGVyKHg4Nl9zZWdfZ3MsICZy
+ZXEtPmRhdGEucmVncy54ODYpOworICAgIHZtX2V2ZW50X3BhY2tfc2VnbWVudF9yZWdpc3Rlcih4
+ODZfc2VnX2NzLCAmcmVxLT5kYXRhLnJlZ3MueDg2KTsKKyAgICB2bV9ldmVudF9wYWNrX3NlZ21l
+bnRfcmVnaXN0ZXIoeDg2X3NlZ19zcywgJnJlcS0+ZGF0YS5yZWdzLng4Nik7CisgICAgdm1fZXZl
+bnRfcGFja19zZWdtZW50X3JlZ2lzdGVyKHg4Nl9zZWdfZHMsICZyZXEtPmRhdGEucmVncy54ODYp
+OworICAgIHZtX2V2ZW50X3BhY2tfc2VnbWVudF9yZWdpc3Rlcih4ODZfc2VnX2VzLCAmcmVxLT5k
+YXRhLnJlZ3MueDg2KTsKIAotICAgIGh2bV9nZXRfc2VnbWVudF9yZWdpc3RlcihjdXJyLCB4ODZf
+c2VnX2NzLCAmc2VnKTsKLSAgICByZXEtPmRhdGEucmVncy54ODYuY3NfYXJieXRlcyA9IHNlZy5h
+dHRyOworICAgIHJlcS0+ZGF0YS5yZWdzLng4Ni5zaGFkb3dfZ3MgPSBjdHh0LnNoYWRvd19nczsK
+ICNlbmRpZgogfQogCmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9wdWJsaWMvdm1fZXZlbnQuaCBi
+L3hlbi9pbmNsdWRlL3B1YmxpYy92bV9ldmVudC5oCmluZGV4IDM2ZTNmNDY4NWQuLmI5YWMwMDkz
+MjcgMTAwNjQ0Ci0tLSBhL3hlbi9pbmNsdWRlL3B1YmxpYy92bV9ldmVudC5oCisrKyBiL3hlbi9p
+bmNsdWRlL3B1YmxpYy92bV9ldmVudC5oCkBAIC0yOSw3ICsyOSw3IEBACiAKICNpbmNsdWRlICJ4
+ZW4uaCIKIAotI2RlZmluZSBWTV9FVkVOVF9JTlRFUkZBQ0VfVkVSU0lPTiAweDAwMDAwMDAzCisj
+ZGVmaW5lIFZNX0VWRU5UX0lOVEVSRkFDRV9WRVJTSU9OIDB4MDAwMDAwMDQKIAogI2lmIGRlZmlu
+ZWQoX19YRU5fXykgfHwgZGVmaW5lZChfX1hFTl9UT09MU19fKQogCkBAIC0xNTcsNiArMTU3LDEy
+IEBACiAjZGVmaW5lIFZNX0VWRU5UX1g4Nl9DUjQgICAgMgogI2RlZmluZSBWTV9FVkVOVF9YODZf
+WENSMCAgIDMKIAorLyogVGhlIGxpbWl0IGZpZWxkIGlzIHJpZ2h0LXNoaWZ0ZWQgYnkgMTIgYml0
+cyBpZiAuYXIuZyBpcyBzZXQuICovCitzdHJ1Y3QgeDg2X3NlbGVjdG9yX3JlZyB7CisgICAgdWlu
+dDMyX3QgbGltaXQgIDogICAgMjA7CisgICAgdWludDMyX3QgYXIgICAgIDogICAgMTI7Cit9Owor
+CiAvKgogICogVXNpbmcgY3VzdG9tIHZDUFUgc3RydWN0cyAoaS5lLiBub3QgaHZtX2h3X2NwdSkg
+Zm9yIGJvdGggeDg2IGFuZCBBUk0KICAqIHNvIGFzIHRvIG5vdCBmaWxsIHRoZSB2bV9ldmVudCBy
+aW5nIGJ1ZmZlciB0b28gcXVpY2tseS4KQEAgLTE5MSw5ICsxOTcsMjUgQEAgc3RydWN0IHZtX2V2
+ZW50X3JlZ3NfeDg2IHsKICAgICB1aW50NjRfdCBtc3JfZWZlcjsKICAgICB1aW50NjRfdCBtc3Jf
+c3RhcjsKICAgICB1aW50NjRfdCBtc3JfbHN0YXI7CisgICAgdWludDMyX3QgY3NfYmFzZTsKKyAg
+ICB1aW50MzJfdCBzc19iYXNlOworICAgIHVpbnQzMl90IGRzX2Jhc2U7CisgICAgdWludDMyX3Qg
+ZXNfYmFzZTsKICAgICB1aW50NjRfdCBmc19iYXNlOwogICAgIHVpbnQ2NF90IGdzX2Jhc2U7Ci0g
+ICAgdWludDMyX3QgY3NfYXJieXRlczsKKyAgICBzdHJ1Y3QgeDg2X3NlbGVjdG9yX3JlZyBjczsK
+KyAgICBzdHJ1Y3QgeDg2X3NlbGVjdG9yX3JlZyBzczsKKyAgICBzdHJ1Y3QgeDg2X3NlbGVjdG9y
+X3JlZyBkczsKKyAgICBzdHJ1Y3QgeDg2X3NlbGVjdG9yX3JlZyBlczsKKyAgICBzdHJ1Y3QgeDg2
+X3NlbGVjdG9yX3JlZyBmczsKKyAgICBzdHJ1Y3QgeDg2X3NlbGVjdG9yX3JlZyBnczsKKyAgICB1
+aW50NjRfdCBzaGFkb3dfZ3M7CisgICAgdWludDE2X3QgY3Nfc2VsOworICAgIHVpbnQxNl90IHNz
+X3NlbDsKKyAgICB1aW50MTZfdCBkc19zZWw7CisgICAgdWludDE2X3QgZXNfc2VsOworICAgIHVp
+bnQxNl90IGZzX3NlbDsKKyAgICB1aW50MTZfdCBnc19zZWw7CiAgICAgdWludDMyX3QgX3BhZDsK
+IH07CiAKLS0gCjIuMTcuMQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
