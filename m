@@ -1,15 +1,27 @@
-From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH v1 5/6] x86/vvmx: correctly report vvmcs size
-Date: Tue, 30 Oct 2018 08:06:18 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19BE2BD84@SHSMSX101.ccr.corp.intel.com>
-References: <20181012152800.7921-1-sergey.dyasli@citrix.com>
- <20181012152800.7921-6-sergey.dyasli@citrix.com>
+From: Andrii Anisov <Andrii_Anisov@epam.com>
+Subject: Re: [PATCH 1/4] xen/arm: gic: Ensure we have an ISB
+ between ack and do_IRQ()
+Date: Tue, 30 Oct 2018 08:07:20 +0000
+Message-ID: <2f4fec46-632f-f03a-f165-6bf213f77d91@epam.com>
+References: <20181023181709.11883-1-julien.grall@arm.com>
+ <20181023181709.11883-2-julien.grall@arm.com>
+ <6098937f-98de-bff9-6c48-5575a45875e0@epam.com>
+ <57ee191b-be21-701e-ef19-4ed4df1cf289@arm.com>
+ <77f72cc9-6548-afd9-3766-23326b3551d9@epam.com>
+ <6acf65ef-4302-c403-32ba-1d88ab954265@epam.com>
+ <22f7ebc8-c74b-0d8e-4847-9d3df9bcf5db@arm.com>
+ <3622e468-8f44-1e31-138f-db58ca3835ff@epam.com>
+ <2090f5b4-22ff-38bc-3d47-6dbb6d7fccfb@epam.com>
+ <6d1c980b-b316-f634-7793-0aca4b34aa85@arm.com>
+ <dd88b504-1120-267e-f157-1ba08afcf438@epam.com>
+ <7fb8e43d-d9fa-b3e7-d0a2-11d22a793819@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181012152800.7921-6-sergey.dyasli@citrix.com>
+In-Reply-To: <7fb8e43d-d9fa-b3e7-d0a2-11d22a793819@arm.com>
 Content-Language: en-US
+Content-ID: <4D57ED5AA1487F4D8B95DBC9F4FB3A83@EPAM.onmicrosoft.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,33 +30,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sergey Dyasli <sergey.dyasli@citrix.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, "Nakajima, Jun" <jun.nakajima@intel.com>, Jan Beulich <jbeulich@suse.com>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: "andre.przywara@arm.com" <andre.przywara@arm.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBTZXJnZXkgRHlhc2xpIFttYWlsdG86c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tXQo+
-IFNlbnQ6IEZyaWRheSwgT2N0b2JlciAxMiwgMjAxOCAxMToyOCBQTQo+IAo+IFRoZSBzaXplIG9m
-IFhlbidzIHZpcnR1YWwgdm1jcyByZWdpb24gaXMgNDA5NiBieXRlcy4gQ29ycmVjdGx5IHJlcG9y
-dAo+IGl0IHRvIHRoZSBndWVzdCBpbiBjYXNlIHdoZW4gVk1DUyBzaGFkb3dpbmcgaXMgbm90IGF2
-YWlsYWJsZSBpbnN0ZWFkIG9mCj4gcHJvdmlkaW5nIEgvVyB2YWx1ZSAod2hpY2ggaXMgdXN1YWxs
-eSBzbWFsbGVyKS4KCndoYXQgaXMgdGhlIHByb2JsZW0gb2YgcmVwb3J0aW5nIHNtYWxsZXIgc2l6
-ZSBldmVuIHdoZW4gYWN0dWFsCnNpemUgaXMgNDA5Nj8gaXMgTDEgZXhwZWN0ZWQgdG8gYWNjZXNz
-IHRoZSBwb3J0aW9uIGJleW9uZCBoL3cKcmVwb3J0ZWQgc2l6ZT8KCj4gCj4gU2lnbmVkLW9mZi1i
-eTogU2VyZ2V5IER5YXNsaSA8c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPgo+IC0tLQo+ICB4ZW4v
-YXJjaC94ODYvaHZtL3ZteC92dm14LmMgfCA4ICsrKysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCA4
-IGluc2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdnZt
-eC5jCj4gYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMKPiBpbmRleCA4YjY5MWJmYzA0Li4y
-YzJiYTM2ZDk0IDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vdm14L3Z2bXguYwo+ICsr
-KyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3Z2bXguYwo+IEBAIC0yMDY0LDYgKzIwNjQsMTQgQEAg
-aW50IG52bXhfbXNyX3JlYWRfaW50ZXJjZXB0KHVuc2lnbmVkIGludCBtc3IsCj4gdTY0ICptc3Jf
-Y29udGVudCkKPiAgICAgICAgICBkYXRhID0gKGhvc3RfZGF0YSAmICh+MHVsIDw8IDMyKSkgfAo+
-ICAgICAgICAgICAgICAgICAodm1jcy0+dm1jc19yZXZpc2lvbl9pZCAmIDB4N2ZmZmZmZmYpOwo+
-ICAgICAgICAgIHVubWFwX2RvbWFpbl9wYWdlKHZtY3MpOwo+ICsKPiArICAgICAgICBpZiAoICFj
-cHVfaGFzX3ZteF92bWNzX3NoYWRvd2luZyApCj4gKyAgICAgICAgewo+ICsgICAgICAgICAgICAv
-KiBSZXBvcnQgdm1jc19yZWdpb25fc2l6ZSBhcyA0MDk2ICovCj4gKyAgICAgICAgICAgIGRhdGEg
-Jj0gflZNWF9CQVNJQ19WTUNTX1NJWkVfTUFTSzsKPiArICAgICAgICAgICAgZGF0YSB8PSAxVUxM
-IDw8IDQ0Owo+ICsgICAgICAgIH0KPiArCj4gICAgICAgICAgYnJlYWs7Cj4gICAgICB9Cj4gICAg
-ICBjYXNlIE1TUl9JQTMyX1ZNWF9QSU5CQVNFRF9DVExTOgo+IC0tCj4gMi4xNy4xCgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgoKT24gMjkuMTAuMTggMTg6MjIsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBXaGF0IGlzIHRo
+ZSBpc3N1ZT8gSXMgaXQganVzdCB5b3VyIHByaW50IG9yIHRoZXJlIGEgbGF0ZW50IGJ1ZyBpbiAK
+PiBjdXJyZW50IHZHSUM/CgpBaCwgT0ssIHRoYXQgd2FzIHRoZSBpc3N1ZSBmb3IgbWUuCgoKPiBJ
+IGFjdHVhbGx5IHByZWZlciBpZiB3ZSByZS1lbmFibGUgaW50ZXJydXB0cyBhZnRlciAKPiBlbnRy
+eV9oeXBlcnZpc29yX2hlYWQoKS4gVGhpcyBtYWtlcyB0aGUgY29kZSB3b3JraW5nIHRoZSBzYW1l
+IHdheSAKPiBldmVyeXdoZXJlIHNvIGxlc3MgdHJvdWJsZSB0byBmaWd1cmUgb3V0IHByb2JsZW0u
+CgpHb29kIHBvaW50LgoKQWN0dWFsbHkgSSB3YXMgY29uZnVzZWQgYnkgdGhlIHJlcG9ydGVkIGJl
+aGF2aW9yLCBiZWNhdXNlIEkgb3Zlcmxvb2tlZCAKdGhvc2UgbXNyJ3Mgd2l0aCBkaWZmZXJlbnQg
+YXJndW1lbnRzIGluIGVudHJ5LlMgYW5kIGFzc3VtZWQgCmVudGVyX2h5cGVydmlzb3JfaGVhZCgp
+IGFsd2F5cyBydW5zIHdpdGggaXJxcyBkaXNhYmxlZC4KCgotLSAKCipBbmRyaWkgQW5pc292KgoK
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
