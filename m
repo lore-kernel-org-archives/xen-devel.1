@@ -1,34 +1,21 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH] xen-swiotlb: exchange memory with Xen only
- when pages are contiguous
-Date: Tue, 30 Oct 2018 14:51:37 +0000
-Message-ID: <fd0ebd6cc5fe4f668dded9706e2c97d9@AMSPEX02CL03.citrite.net>
-References: <bb6d87b4-c371-c6c0-8c48-bc95df018ad1@oracle.com>
- <20181024130246.GA22616@localhost.localdomain>
- <83900cf4-690c-9725-d022-d427fdeb4f7d@oracle.com>
- <581cb7ea-3112-791d-918d-9bb887e4744f@oracle.com>
- <24a62522-1629-5d0b-398e-6d2c1a0b97f7@oracle.com>
- <922914c9-22db-c5d1-33da-d07691ebd7d7@oracle.com>
- <a47fabe8-53d1-47b8-0efc-f9f1e5b4898a@oracle.com>
- <45f5ffe8-3f48-4485-53f0-5a056be69b0c@oracle.com>
- <5b64850f-9142-0360-fe4e-9e7bc74d2368@oracle.com>
- <3e65208c-cb11-d918-00eb-012a97e56fec@oracle.com>
- <57e5593233c64dc0a36c7d4c750a1ed4@AMSPEX02CL03.citrite.net>
- <cd2efe58-4efb-cf5b-db6e-0bc7838bd9c9@oracle.com>
- <097f1f6f16f7415aa3a52a7c4f5e52dc@AMSPEX02CL03.citrite.net>
- <a7c9265b-1218-264b-b67d-5d80e44fb7d4@oracle.com>
+From: Vladimir Botka <vbotka@gmail.com>
+Subject: Re: [Xen-users] [XEN][ARM] WiFi bridge creation
+Date: Tue, 30 Oct 2018 16:05:40 +0100
+Message-ID: <20181030160540.01ef6a3b@planb.netng.org>
+References: <CAFsJcmYQRttza046T09sCBZzEs7pm31uxawQJHxsQySpyELkBQ@mail.gmail.com>
+ <20181030080929.6d04a875@planb.netng.org>
+ <CAFsJcmZFrpmattTzwkijF7Wz4cgXErg0090QBx1S-zJCRNnScg@mail.gmail.com>
+ <20181030113408.74525d80@planb.netng.org>
+ <CAFsJcmbcCrpJkXqGs3mu=nMZA=2DNcOgf+s-jnNbWMAi1+Ri6A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2765477536205730466=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kzyf=nk=citrix.com=prvs=834dfdc47=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gHVNZ-0008C6-9Y
- for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 14:52:25 +0000
-In-Reply-To: <a7c9265b-1218-264b-b67d-5d80e44fb7d4@oracle.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=m0b/=nk=gmail.com=vbotka@srs-us1.protection.inumbo.net>)
+ id 1gHVaU-0000l7-Ib
+ for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 15:05:46 +0000
+In-Reply-To: <CAFsJcmbcCrpJkXqGs3mu=nMZA=2DNcOgf+s-jnNbWMAi1+Ri6A@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -37,100 +24,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Joe Jin' <joe.jin@oracle.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Cc: John Sobecki <john.sobecki@oracle.com>, "DONGLI.ZHANG" <dongli.zhang@oracle.com>, "linux-kernel@vger.kernel.org\"" <linux-kernel@vger.kernel.org>, "konrad@kernel.org" <konrad@kernel.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Christoph Helwig <hch@lst.de>
+To: Vikram K <vikram.k@pathpartnertech.com>
+Cc: xen-devel@lists.xenproject.org, xen-users@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4
-ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24gQmVoYWxmDQo+IE9mIEpv
-ZSBKaW4NCj4gU2VudDogMzAgT2N0b2JlciAyMDE4IDE0OjQ4DQo+IFRvOiBQYXVsIER1cnJhbnQg
-PFBhdWwuRHVycmFudEBjaXRyaXguY29tPjsgQm9yaXMgT3N0cm92c2t5DQo+IDxib3Jpcy5vc3Ry
-b3Zza3lAb3JhY2xlLmNvbT47IEtvbnJhZCBSemVzenV0ZWsgV2lsaw0KPiA8a29ucmFkLndpbGtA
-b3JhY2xlLmNvbT4NCj4gQ2M6IEpvaG4gU29iZWNraSA8am9obi5zb2JlY2tpQG9yYWNsZS5jb20+
-OyBET05HTEkuWkhBTkcNCj4gPGRvbmdsaS56aGFuZ0BvcmFjbGUuY29tPjsgbGludXgta2VybmVs
-QHZnZXIua2VybmVsLm9yZyIgPGxpbnV4LQ0KPiBrZXJuZWxAdmdlci5rZXJuZWwub3JnPjsga29u
-cmFkQGtlcm5lbC5vcmc7IHhlbi0NCj4gZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc7IENocmlz
-dG9waCBIZWx3aWcgPGhjaEBsc3QuZGU+DQo+IFN1YmplY3Q6IFJlOiBbWGVuLWRldmVsXSBbUEFU
-Q0hdIHhlbi1zd2lvdGxiOiBleGNoYW5nZSBtZW1vcnkgd2l0aCBYZW4NCj4gb25seSB3aGVuIHBh
-Z2VzIGFyZSBjb250aWd1b3VzDQo+IA0KPiBPbiAxMC8zMC8xOCA3OjIxIEFNLCBQYXVsIER1cnJh
-bnQgd3JvdGU6DQo+ID4+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4+IEZyb206IFhl
-bi1kZXZlbCBbbWFpbHRvOnhlbi1kZXZlbC1ib3VuY2VzQGxpc3RzLnhlbnByb2plY3Qub3JnXSBP
-bg0KPiBCZWhhbGYNCj4gPj4gT2YgSm9lIEppbg0KPiA+PiBTZW50OiAzMCBPY3RvYmVyIDIwMTgg
-MTQ6MTMNCj4gPj4gVG86IFBhdWwgRHVycmFudCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+OyBC
-b3JpcyBPc3Ryb3Zza3kNCj4gPj4gPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPjsgS29ucmFk
-IFJ6ZXN6dXRlayBXaWxrDQo+ID4+IDxrb25yYWQud2lsa0BvcmFjbGUuY29tPg0KPiA+PiBDYzog
-Sm9obiBTb2JlY2tpIDxqb2huLnNvYmVja2lAb3JhY2xlLmNvbT47IERPTkdMSS5aSEFORw0KPiA+
-PiA8ZG9uZ2xpLnpoYW5nQG9yYWNsZS5jb20+OyBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3Jn
-IiA8bGludXgtDQo+ID4+IGtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc+OyBrb25yYWRAa2VybmVsLm9y
-ZzsgeGVuLQ0KPiA+PiBkZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZzsgQ2hyaXN0b3BoIEhlbHdp
-ZyA8aGNoQGxzdC5kZT4NCj4gPj4gU3ViamVjdDogUmU6IFtYZW4tZGV2ZWxdIFtQQVRDSF0geGVu
-LXN3aW90bGI6IGV4Y2hhbmdlIG1lbW9yeSB3aXRoIFhlbg0KPiA+PiBvbmx5IHdoZW4gcGFnZXMg
-YXJlIGNvbnRpZ3VvdXMNCj4gPj4NCj4gPj4gT24gMTAvMzAvMTggMTo1OSBBTSwgUGF1bCBEdXJy
-YW50IHdyb3RlOg0KPiA+Pj4+IE9uIDEwLzI1LzE4IDExOjU2IEFNLCBKb2UgSmluIHdyb3RlOg0K
-PiA+Pj4+PiBJIGp1c3QgZGlzY3Vzc2VkIHRoaXMgcGF0Y2ggd2l0aCBCb3JpcyBpbiBwcml2YXRl
-LCBoaXMNCj4gb3BpbmlvbnMoQm9yaXMsDQo+ID4+Pj4+IHBsZWFzZSBjb3JyZWN0IG1lIGlmIGFu
-eSBtaXN1bmRlcnN0b29kKSBhcmU6DQo+ID4+Pj4+DQo+ID4+Pj4+IDEuIFdpdGgvd2l0aG91dCB0
-aGUgY2hlY2ssIGJvdGggYXJlIGluY29ycmVjdCwgaGUgdGhvdWdodCB3ZSBuZWVkIHRvDQo+ID4+
-Pj4+ICAgIHByZXZlbnRlZCB1bmFsbG9jJ2QgZnJlZSBhdCBoZXJlLg0KPiA+Pj4+PiAyLiBPbiBm
-cmVlaW5nLCBpZiB1cHBlciBsYXllciBhbHJlYWR5IGNoZWNrZWQgdGhlIG1lbW9yeSB3YXMgRE1B
-LQ0KPiBhYmxlLA0KPiA+Pj4+PiAgICB0aGUgY2hlY2tpbmcgYXQgaGVyZSBkb2VzIG5vdCBtYWtl
-IHNlbnNlLCB3ZSBjYW4gcmVtb3ZlIGFsbA0KPiBjaGVja3MuDQo+ID4+Pj4+IDMuIHhlbl9jcmVh
-dGVfY29udGlndW91c19yZWdpb24oKSBhbmQNCj4geGVuX2Rlc3Ryb3lfY29udGlndW91c19yZWdp
-b24oKQ0KPiA+Pj4+PiAgICB0byBjb21lIGluIHBhaXJzLg0KPiA+Pj4+IEkgdHJpZWQgdG8gYWRk
-ZWQgcmFkaXhfdHJlZSB0byB0cmFjayBhbGxvY2F0aW5nL2ZyZWVpbmcgYW5kIEkgZm91bmQNCj4g
-Pj4gc29tZQ0KPiA+Pj4+IG1lbW9yeSBvbmx5IGFsbG9jYXRlZCBidXQgd2FzIG5vdCBmcmVlZCwg
-SSBndWVzcyBpdCBjYXVzZWQgYnkgZHJpdmVyDQo+ID4+IHVzZWQNCj4gPj4+PiBkbWFfcG9vbCwg
-dGhhdCBtZWFucyBpZiBsb3RzIG9mIHN1Y2ggcmVxdWVzdHMsIHRoZSBsaXN0IHdpbGwgY29uc3Vt
-ZQ0KPiA+PiBsb3QNCj4gPj4+PiBvZiBtZW1vcnkgZm9yIGl0LiBXaWxsIGNvbnRpbnVlIHRvIHdv
-cmsgb24gaXQsIGlmIGFueW9uZSBoYXZlIGdvb2QNCj4gaWRlYQ0KPiA+Pj4+IGZvciBpdCBwbGVh
-c2UgbGV0IG1lIGtub3csIEknZCBsaWtlIHRvIHRyeSBpdC4NCj4gPj4+Pg0KPiA+Pj4gRldJVywg
-aW4gbXkgWGVuIFBWLUlPTU1VIHRlc3QgcGF0Y2hlcywgSSBoYXZlIGFsc28gdHJpZWQga2VlcGlu
-ZyBhDQo+IGxpc3QNCj4gPj4gb2YgcmFuZ2VzIG1hcHBlZCBmb3IgRE1BIGFuZCBoYXZlIGRpc2Nv
-dmVyZWQgYXBwYXJlbnQgaXNzdWVzIHdpdGggc29tZQ0KPiA+PiBkcml2ZXJzLCBwYXJ0aWN1bGFy
-bHkgdGczLCB0aGF0IHNlZW0gdG8gZnJlZSBtYXBwaW5ncyB0aGF0IGhhdmUgbm90DQo+IGJlZW4N
-Cj4gPj4gYWxsb2NhdGVkIChvciBwb3NzaWJseSBkb3VibGUtZnJlZSkuIEkndmUgbmV2ZXIgZnVs
-bHkgdHJhY2tlZCBkb3duIHRoZQ0KPiA+PiBpc3N1ZS4NCj4gPj4NCj4gPj4gQ2FsbCB0cmFjZSBv
-ZiBmaXJzdCBjYWxsZWQgeGVuX3N3aW90bGJfYWxsb2NfY29oZXJlbnQoVGhlIHBhZ2VzIG5ldmVy
-DQo+ID4+IGJhY2tlZCB0byBYZW4pOg0KPiA+Pg0KPiA+PiBbICAgMjMuNDM2MzMzXSAgWzxmZmZm
-ZmZmZjgxNDA0MGM5Pl0NCj4gPj4geGVuX3N3aW90bGJfYWxsb2NfY29oZXJlbnQrMHgxNjkvMHg1
-MTANCj4gPj4gWyAgIDIzLjQzNjYyM10gIFs8ZmZmZmZmZmY4MTFlYjM4ZD5dID8NCj4ga21lbV9j
-YWNoZV9hbGxvY190cmFjZSsweDFlZC8weDI4MA0KPiA+PiBbICAgMjMuNDM2OTAwXSAgWzxmZmZm
-ZmZmZjgxMWQ3MmFmPl0gZG1hX3Bvb2xfYWxsb2MrMHgxMWYvMHgyNjANCj4gPj4gWyAgIDIzLjQz
-NzE5MF0gIFs8ZmZmZmZmZmY4MTUzNzQ0Mj5dIGVoY2lfcWhfYWxsb2MrMHg1Mi8weDEyMA0KPiA+
-PiBbICAgMjMuNDM3NDgxXSAgWzxmZmZmZmZmZjgxNTNiODBmPl0gZWhjaV9zZXR1cCsweDJiZi8w
-eDhlMA0KPiA+PiBbICAgMjMuNDM3NzYwXSAgWzxmZmZmZmZmZjgxNDc2ZDA2Pl0gPyBfX2Rldl9w
-cmludGsrMHg0Ni8weGEwDQo+ID4+IFsgICAyMy40MzgwNDJdICBbPGZmZmZmZmZmODE0NzcwYjM+
-XSA/IF9kZXZfaW5mbysweDUzLzB4NjANCj4gPj4gWyAgIDIzLjQzODMyN10gIFs8ZmZmZmZmZmY4
-MTUzZjYyMD5dIGVoY2lfcGNpX3NldHVwKzB4YzAvMHg1ZjANCj4gPj4gWyAgIDIzLjQzODYxNV0g
-IFs8ZmZmZmZmZmY4MTUxOWZjZD5dIHVzYl9hZGRfaGNkKzB4MjVkLzB4YWYwDQo+ID4+IFsgICAy
-My40Mzg5MDFdICBbPGZmZmZmZmZmODE1MmM5YTY+XSB1c2JfaGNkX3BjaV9wcm9iZSsweDQwNi8w
-eDUyMA0KPiA+PiBbICAgMjMuNDM5MTc3XSAgWzxmZmZmZmZmZjgxNTNmNDg2Pl0gZWhjaV9wY2lf
-cHJvYmUrMHgzNi8weDQwDQo+ID4+IFsgICAyMy40Mzk0NjldICBbPGZmZmZmZmZmODEzNmU5OWE+
-XSBsb2NhbF9wY2lfcHJvYmUrMHg0YS8weGIwDQo+ID4+IFsgICAyMy40Mzk3NTJdICBbPGZmZmZm
-ZmZmODEzNmZiYTU+XSA/IHBjaV9tYXRjaF9kZXZpY2UrMHhlNS8weDExMA0KPiA+PiBbICAgMjMu
-NDQwMDI3XSAgWzxmZmZmZmZmZjgxMzZmY2UxPl0gcGNpX2RldmljZV9wcm9iZSsweGQxLzB4MTIw
-DQo+ID4+IFsgICAyMy40NDAzMjBdICBbPGZmZmZmZmZmODE0N2IxM2M+XSBkcml2ZXJfcHJvYmVf
-ZGV2aWNlKzB4MjBjLzB4NGQwDQo+ID4+IFsgICAyMy40NDA1OTldICBbPGZmZmZmZmZmODE0N2I0
-ZWI+XSBfX2RyaXZlcl9hdHRhY2grMHg5Yi8weGEwDQo+ID4+IFsgICAyMy40NDA4NzldICBbPGZm
-ZmZmZmZmODE0N2I0NTA+XSA/IF9fZGV2aWNlX2F0dGFjaCsweDUwLzB4NTANCj4gPj4NCj4gPj4g
-QWJvdmUgd2FzIEVIQ0kgdXNlZCBETUEgcG9vbCB0byBhbGxvY2F0ZSBETUEgbWVtb3J5Lg0KPiA+
-Pg0KPiA+PiBEdXJpbmcgbXkgdGVzdGluZywgfjEwMDAgZW50cmllcyB3YXMgbm90IGZyZWVkLCBp
-ZiBtb3JlIFBDSSBkZXZpY2VzDQo+ID4+IHVzZSBETUEgcG9vbCwgdGhlIHRyZWUvbGlzdCB3aWxs
-IGhhdmUgbW9yZSBlbnRyaWVzLCBsb29rcyBpdCdzIG5vdCBhDQo+ID4+IGdvb2QgaWRlYSB0aGF0
-IHVzZSBhIGxpc3QgdG8gdHJhY2sgaXQuDQo+ID4+DQo+ID4NCj4gPiBZZXMsIGl0IHNlZW1zIHBv
-b2xzIGNhbiBoYW5nIG9udG8gYSBzZXJpb3VzIG51bWJlciBvZiBhbGxvY2F0aW9ucyBzbyBhDQo+
-IGxpc3QgaXMgcHJvYmFibHkgbm90IHdpc2UuDQo+IA0KPiBJIGFncmVlIHdpdGggeW91Lg0KPiAN
-Cj4gPiBXaGF0IEkgd2FzIHBvaW50aW5nIG91dCwgdGhvdWdoLCBpcyB0aGF0IGl0IGFwcGVhcnMg
-eW91IGNhbid0IGV2ZW4gdHJhY2sNCj4gbWFwcGluZ3MgKGFzIG9wcG9zZWQgdG8gYWxsb2NhdGlv
-bnMpIHdpdGggYSBsaXN0Lg0KPiANCj4gUmlnaHQuDQo+IA0KPiANCj4gPiBlaXRoZXIgYmVjYXVz
-ZSBkcml2ZXJzIGFwcGFyZW50bHkgdHJ5IHRvIHVubWFwIHRoaW5ncyB0aGV5IGhhdmUgbm90DQo+
-IG1hcHBlZC4NCj4gDQo+IElmIHRoaXMgaGFwcGVuZWQsIHNob3VsZCBiZSBmaXhlZCBieSBkcml2
-ZXIgOikNCg0KT2gsIHRvdGFsbHkgYWdyZWVkLiBJIGZlYXIgdGhlIGJyZWFrYWdlIGlzIHF1aXRl
-IGluZGVtaWMgdGhyb3VnaG91dCBtYW55IGRyaXZlcnMgdGhvdWdoIDotKA0KDQogIFBhdWwNCg0K
-PiANCj4gVGhhbmtzLA0KPiBKb2UNCj4gPg0KPiA+ICAgUGF1bA0KPiA+DQo+IA0KPiBfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0DQo+IFhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZw0KPiBodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVsDQpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2765477536205730466==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/joo9MJVwU596C0dnwmCS3I8"; protocol="application/pgp-signature"
+
+--Sig_/joo9MJVwU596C0dnwmCS3I8
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+> > > > > Hello,
+> > > > > We are using Hikey960 with Debian as Dom0 and DomU. This board has
+> > > > > only WiFi interface. We want to create bridge between Dom0 and Do=
+mU
+> > > > > so that DomU has internet access. We tried to create bridge using=
+ brtcl
+> > > > > command, but it is not working. Please provide pointers. =20
+
+> > > > AFAIK, it's not working
+> > > > https://marc.info/?l=3Dlinux-wireless&m=3D136743495526905&w=3D2
+> > > > "There is a proposed fix that is included in OpenWrt"
+> > > > https://marc.info/?l=3Dlinux-wireless&m=3D145591129008322&w=3D2
+> > > > More details are avilable in OpenWrt WiKi
+> > > > https://wiki.openwrt.org/doc/recipes/relayclient
+> > > > -vlado =20
+
+> > > Hi,
+> > > As per below link, it is possible to share Internet via WiFi between
+> > > Dom0 and DomU,.
+> > > https://wiki.xenproject.org/wiki/Xen_in_WiFi_networks
+> > > Tried the suggested solution using ebtables, but it did not work.
+> > > * ebtables -t nat -A POSTROUTING -s 00:60:00:00:00:01 \
+> > >               -j snat --to-source 00:60:aa:bb:cc:dd*
+> > > In the configurations file we have added below configuration in DomU
+> > > config file.
+> > > * vif =3D ['mac=3D00:16:3e:64:b8:40']*
+> > > Apart from that do we need to add any addition configuration? =20
+
+> > NAT is a different story. Worked for me with Armbian(no XEN) and Atheros
+> > 9280
+> > couple of years ago. I used Ansible to configure it.
+> > https://github.com/vbotka/ansible-linux-postinstall/blob/master/templat=
+es/router1-iptables.j2
+
+Vikram K <vikram.k@pathpartnertech.com> wrote:
+> Thanks Vladimir.
+> Can some one provide pointer/reference on how to use NAT to share WiFi
+> between Dom0 and DomU.
+> Followed the instruction provided in the below link, but no success.
+> https://wiki.debian.org/BridgeNetworkConnections#Bridging_with_a_wireless=
+_NIC
+
+NAT is feasible. Follow the links and come back with specific questions in
+an appropriate list, if needed. Wifi bridge is NO-GO at the moment.
+
+A: Because we read from top to bottom.
+Q: Why should I start my reply below the quoted text?
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?  =20
+A: The lost context.
+Q: What makes top-posted replies harder to read than bottom-posted?
+A: Yes.
+Q: Should I trim down the quoted part of an email to which I'm replying?
+
+-vlado
+
+--Sig_/joo9MJVwU596C0dnwmCS3I8
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEbaThuYKQgbbmDrVkkNGZEo7UTwEFAlvYc0QACgkQkNGZEo7U
+TwE3GggAkmkxB7z2C3HTTLZltUqMbjJwYg8dRmba/DRJjbmb0tipEniB4G3pZxgb
+9hVrOzR56stt4ObOIAOOCVjLmAxOJUc7Hh7nrLmei7XQShAN8OJz+TJz3P2dvUah
+WjbEzWv480g5r51vAMLdLFJ2+AXoFWOErZ+BLQSb1nW15si+kwgYok5HUjRb5Gdf
+AEwNL8v9uEbgMlfLchQppkzvsFhiW55NQ4J4Yfkp3Oedl0cMnV7Oqn9KV7JpRPdE
+E20xa2L4+cq7bMbdfX+CqVjFZOsL00jxo2xTykWKv/VrsXbjAZXhfA93ElqdokWP
+uQce3YmKGfhf0rSe/HC9Ja3y1VaAiw==
+=lAhS
+-----END PGP SIGNATURE-----
+
+--Sig_/joo9MJVwU596C0dnwmCS3I8--
+
+
+--===============2765477536205730466==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2765477536205730466==--
