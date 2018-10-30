@@ -1,8 +1,7 @@
 From: Laurent Vivier <laurent@vivier.eu>
-Subject: [PULL v2 16/20] tests/bios-tables-test: Remove an
- useless cast
-Date: Tue, 30 Oct 2018 12:23:33 +0100
-Message-ID: <20181030112337.17973-17-laurent@vivier.eu>
+Subject: [PULL v2 02/20] vga_int: remove unused function protype
+Date: Tue, 30 Oct 2018 12:23:19 +0100
+Message-ID: <20181030112337.17973-3-laurent@vivier.eu>
 References: <20181030112337.17973-1-laurent@vivier.eu>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -12,8 +11,8 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=oc9f=nk=vivier.eu=laurent@srs-us1.protection.inumbo.net>)
- id 1gHS8D-0003eL-PB
- for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 11:24:21 +0000
+ id 1gHS7q-0003Bf-0b
+ for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 11:23:58 +0000
 In-Reply-To: <20181030112337.17973-1-laurent@vivier.eu>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,30 +23,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: qemu-devel@nongnu.org
-Cc: Peter Maydell <peter.maydell@linaro.org>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>, Gerd Hoffmann <kraxel@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-trivial@nongnu.org, Michael Walle <michael@walle.cc>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>, Fam Zheng <famz@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>, Riku Voipio <riku.voipio@iki.fi>, qemu-arm@nongnu.org, Cleber Rosa <crosa@redhat.com>, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>, Kevin Wolf <kwolf@redhat.com>, Markus Armbruster <armbru@redhat.com>, Laurent Vivier <laurent@vivier.eu>
+Cc: Peter Maydell <peter.maydell@linaro.org>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>, Gerd Hoffmann <kraxel@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-trivial@nongnu.org, yuchenlin <yuchenlin@synology.com>, Michael Walle <michael@walle.cc>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>, Fam Zheng <famz@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>, Riku Voipio <riku.voipio@iki.fi>, qemu-arm@nongnu.org, Cleber Rosa <crosa@redhat.com>, =?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>, Kevin Wolf <kwolf@redhat.com>, Markus Armbruster <armbru@redhat.com>
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPGY0YnVnQGFtc2F0Lm9yZz4KClBhdGNoIGNy
-ZWF0ZWQgbWVjaGFuaWNhbGx5IGJ5IHJlcnVubmluZzoKCiAgJCAgc3BhdGNoIC0tc3AtZmlsZSBz
-Y3JpcHRzL2NvY2NpbmVsbGUvdHlwZWNhc3QuY29jY2kgXAogICAgICAgICAgICAtLW1hY3JvLWZp
-bGUgc2NyaXB0cy9jb2NjaS1tYWNyby1maWxlLmggXAogICAgICAgICAgICAtLWRpciAuIC0taW4t
-cGxhY2UKClNpZ25lZC1vZmYtYnk6IFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIDxmNGJ1Z0BhbXNh
-dC5vcmc+ClJldmlld2VkLWJ5OiBNYXJrdXMgQXJtYnJ1c3RlciA8YXJtYnJ1QHJlZGhhdC5jb20+
-CkFja2VkLWJ5OiBNaWNoYWVsIFMuIFRzaXJraW4gPG1zdEByZWRoYXQuY29tPgpNZXNzYWdlLUlk
-OiA8MjAxODA3MDUxNTU4MTEuMjAzNjYtNS1mNGJ1Z0BhbXNhdC5vcmc+ClNpZ25lZC1vZmYtYnk6
-IExhdXJlbnQgVml2aWVyIDxsYXVyZW50QHZpdmllci5ldT4KLS0tCiB0ZXN0cy9iaW9zLXRhYmxl
-cy10ZXN0LmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
-b24oLSkKCmRpZmYgLS1naXQgYS90ZXN0cy9iaW9zLXRhYmxlcy10ZXN0LmMgYi90ZXN0cy9iaW9z
-LXRhYmxlcy10ZXN0LmMKaW5kZXggYWY0YjFmYjZiZC4uMDJlNzdlYzgxMSAxMDA2NDQKLS0tIGEv
-dGVzdHMvYmlvcy10YWJsZXMtdGVzdC5jCisrKyBiL3Rlc3RzL2Jpb3MtdGFibGVzLXRlc3QuYwpA
-QCAtMzE5LDcgKzMxOSw3IEBAIHN0YXRpYyBib29sIGxvYWRfYXNsKEdBcnJheSAqc2R0cywgQWNw
-aVNkdFRhYmxlICpzZHQpCiAgICAgcmV0ID0gZ19zcGF3bl9jb21tYW5kX2xpbmVfc3luYyhjb21t
-YW5kX2xpbmUtPnN0ciwgJm91dCwgJm91dF9lcnIsIE5VTEwsICZlcnJvcik7CiAgICAgZ19hc3Nl
-cnRfbm9fZXJyb3IoZXJyb3IpOwogICAgIGlmIChyZXQpIHsKLSAgICAgICAgcmV0ID0gZ19maWxl
-X2dldF9jb250ZW50cyhzZHQtPmFzbF9maWxlLCAoZ2NoYXIgKiopJnNkdC0+YXNsLAorICAgICAg
-ICByZXQgPSBnX2ZpbGVfZ2V0X2NvbnRlbnRzKHNkdC0+YXNsX2ZpbGUsICZzZHQtPmFzbCwKICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmc2R0LT5hc2xfbGVuLCAmZXJyb3IpOwog
-ICAgICAgICBnX2Fzc2VydChyZXQpOwogICAgICAgICBnX2Fzc2VydF9ub19lcnJvcihlcnJvcik7
+RnJvbTogeXVjaGVubGluIDx5dWNoZW5saW5Ac3lub2xvZ3kuY29tPgoKU2lnbmVkLW9mZi1ieTog
+eXVjaGVubGluIDx5dWNoZW5saW5Ac3lub2xvZ3kuY29tPgpSZXZpZXdlZC1ieTogUGhpbGlwcGUg
+TWF0aGlldS1EYXVkw6kgPHBoaWxtZEByZWRoYXQuY29tPgpNZXNzYWdlLUlkOiA8MjAxODEwMjIw
+ODAwNTMuOTM3OS0xLXl1Y2hlbmxpbkBzeW5vbG9neS5jb20+ClNpZ25lZC1vZmYtYnk6IExhdXJl
+bnQgVml2aWVyIDxsYXVyZW50QHZpdmllci5ldT4KLS0tCiBody9kaXNwbGF5L3ZnYV9pbnQuaCB8
+IDEgLQogMSBmaWxlIGNoYW5nZWQsIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9ody9kaXNw
+bGF5L3ZnYV9pbnQuaCBiL2h3L2Rpc3BsYXkvdmdhX2ludC5oCmluZGV4IDZlNGZhNDhhNzkuLjU1
+YzQxOGVhYjUgMTAwNjQ0Ci0tLSBhL2h3L2Rpc3BsYXkvdmdhX2ludC5oCisrKyBiL2h3L2Rpc3Bs
+YXkvdmdhX2ludC5oCkBAIC0xNjYsNyArMTY2LDYgQEAgTWVtb3J5UmVnaW9uICp2Z2FfaW5pdF9p
+byhWR0FDb21tb25TdGF0ZSAqcywgT2JqZWN0ICpvYmosCiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGNvbnN0IE1lbW9yeVJlZ2lvblBvcnRpbyAqKnZiZV9wb3J0cyk7CiB2b2lkIHZnYV9jb21t
+b25fcmVzZXQoVkdBQ29tbW9uU3RhdGUgKnMpOwogCi12b2lkIHZnYV9zeW5jX2RpcnR5X2JpdG1h
+cChWR0FDb21tb25TdGF0ZSAqcyk7CiB2b2lkIHZnYV9kaXJ0eV9sb2dfc3RhcnQoVkdBQ29tbW9u
+U3RhdGUgKnMpOwogdm9pZCB2Z2FfZGlydHlfbG9nX3N0b3AoVkdBQ29tbW9uU3RhdGUgKnMpOwog
 Ci0tIAoyLjE3LjIKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
 ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
