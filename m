@@ -1,17 +1,17 @@
-From: Vikram K <vikram.k@pathpartnertech.com>
-Subject: [XEN][ARM] WiFi bridge creation
-Date: Tue, 30 Oct 2018 10:03:22 +0530
-Message-ID: <CAFsJcmYQRttza046T09sCBZzEs7pm31uxawQJHxsQySpyELkBQ@mail.gmail.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [ovmf baseline-only test] 75537: tolerable FAIL
+Date: Tue, 30 Oct 2018 04:37:54 +0000
+Message-ID: <osstest-75537-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5284607074160810439=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xqb5=nk=pathpartnertech.com=vikram.k@srs-us1.protection.inumbo.net>)
- id 1gHLij-0007mv-Me
- for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 04:33:37 +0000
-Received: by mail-lj1-x22c.google.com with SMTP id z21-v6so10033160ljz.0
- for <xen-devel@lists.xenproject.org>; Mon, 29 Oct 2018 21:33:35 -0700 (PDT)
+ <srs0=apc/=nk=xenproject.org=prvs=8344f7b0d=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1gHLmw-00083Z-Md
+ for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 04:37:58 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,97 +20,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-users@lists.xenproject.org, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============5284607074160810439==
-Content-Type: multipart/alternative; boundary="0000000000004457cd05796ab0cf"
-
---0000000000004457cd05796ab0cf
-Content-Type: text/plain; charset="UTF-8"
-
-Hello,
-
-We are using Hikey960 with Debian as Dom0 and DomU. This board has only
-WiFi interface. We want to create bridge between Dom0 and DomU so that DomU
-has internet access. We tried to create bridge using brtcl command, but it
-is not working. Please provide pointers.
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---0000000000004457cd05796ab0cf
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello,</div><div><br></div><div>We are using Hikey960=
- with Debian as Dom0 and DomU. This board has only WiFi interface. We want =
-to create bridge between Dom0 and DomU so that DomU has internet access. We=
- tried to create bridge using brtcl command, but it is not working. Please =
-provide pointers. <br></div><div><br><div dir=3D"ltr"><div><div dir=3D"ltr"=
-><span><br></span><span style=3D"color:rgb(19,79,92)"></span></div></div></=
-div></div></div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---0000000000004457cd05796ab0cf--
-
-
---===============5284607074160810439==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5284607074160810439==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+NTUzNyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzLzc1NTM3LwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiBidWlsZC1hbWQ2NC1s
+aWJ2aXJ0ICAgICAgICAgICA2IGxpYnZpcnQtYnVpbGQgICAgICAgICAgIGZhaWwgYmFzZWxpbmUg
+dW50ZXN0ZWQKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgIDYgbGlidmlydC1idWlsZCAg
+ICAgICAgICAgZmFpbCBiYXNlbGluZSB1bnRlc3RlZAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
+LW92bWYtYW1kNjQgMTAgZGViaWFuLWh2bS1pbnN0YWxsIGZhaWwgYmFzZWxpbmUgdW50ZXN0ZWQK
+IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAxMCBkZWJpYW4taHZtLWluc3Rh
+bGwgZmFpbCBiYXNlbGluZSB1bnRlc3RlZAoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoK
+IG92bWYgICAgICAgICAgICAgICAgIGMwOWIyNTRiZGM2MDUwY2M4YjU4MGEyNjU1OGY2OTJmOTU4
+NjQ1ZDYKYmFzZWxpbmUgdmVyc2lvbjoKIG92bWYgICAgICAgICAgICAgICAgIDJmNjY5M2MyODNi
+NTQ2NjZkZWY2NWU1ZTBkMGI4NGU0OGIyMWNmZWYKCkxhc3QgdGVzdCBvZiBiYXNpcyAgICA3NTUz
+MiAgMjAxOC0xMC0yOSAwMzoyMDozNSBaICAgIDEgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2UgICAg
+NzU1MzcgIDIwMTgtMTAtMjkgMTA6NTI6MTAgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+ClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBDaGFzZWwgQ2hpdSA8
+Y2hhc2VsLmNoaXVAaW50ZWwuY29tPgogIENoYXNlbCwgQ2hpdSA8Y2hhc2VsLmNoaXVAaW50ZWwu
+Y29tPgogIFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQt
+eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1s
+aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
+IGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
+NjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
+dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRl
+Lm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xvZ3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdl
+cwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9v
+c3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVzdC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
+YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3Nz
+dGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBub3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgYzA5
+YjI1NGJkYzYwNTBjYzhiNTgwYTI2NTU4ZjY5MmY5NTg2NDVkNgpBdXRob3I6IENoYXNlbCwgQ2hp
+dSA8Y2hhc2VsLmNoaXVAaW50ZWwuY29tPgpEYXRlOiAgIEZyaSBPY3QgMjYgMTU6MTI6MzMgMjAx
+OCArMDgwMAoKICAgIEludGVsRnNwMlBrZzogRml4ZWQgcG90ZW50aWFsbHkgTlVMTCBwb2ludGVy
+IGFjY2Vzc2luZwogICAgCiAgICBSRUY6IGh0dHBzOi8vYnVnemlsbGEudGlhbm9jb3JlLm9yZy9z
+aG93X2J1Zy5jZ2k/aWQ9MTI4MAogICAgCiAgICBXaGVuIGNvcHlpbmcgSURUIHRhYmxlIGluIFNl
+Y01haW4sIHRoZSBwb2ludGVyIG1pZ2h0IGJlCiAgICBOVUxMIHNvIGFkZGVkIHRoZSBjaGVjayB0
+byBmaXggaXQuCiAgICAKICAgIFRlc3Q6IFZlcmlmaWVkIG9uIGludGVybmFsIHBsYXRmb3JtIGFu
+ZCBib290cyBzdWNjZXNzZnVsbHkuCiAgICAKICAgIENjOiBKaWV3ZW4gWWFvIDxKaWV3ZW4ueWFv
+QGludGVsLmNvbT4KICAgIENjOiBEZXNpbW9uZSBOYXRoYW5pZWwgTCA8bmF0aGFuaWVsLmwuZGVz
+aW1vbmVAaW50ZWwuY29tPgogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmli
+dXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogQ2hhc2VsIENoaXUgPGNoYXNl
+bC5jaGl1QGludGVsLmNvbT4KCmNvbW1pdCA3MDQyNTQ1NmRhZTE2ZmNhMjM1NDA5MzZjOGZiMGQy
+Yjg2Nzc2Yjk3CkF1dGhvcjogUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNvbT4KRGF0ZTogICBU
+aHUgT2N0IDI1IDE4OjA5OjQ2IDIwMTggKzA4MDAKCiAgICBNZGVNb2R1bGVQa2cvVXNiQnVzUGVp
+OiBSZWplY3QgZGVzY3JpcHRvciB3aG9zZSBsZW5ndGggaXMgYmFkCiAgICAKICAgIFRvZGF5J3Mg
+aW1wbGVtZW50YXRpb24gZG9lc24ndCBjaGVjayB3aGV0aGVyIHRoZSBsZW5ndGggb2YKICAgIGRl
+c2NyaXB0b3IgaXMgdmFsaWQgYmVmb3JlIHVzaW5nIGl0LgogICAgCiAgICBUaGUgcGF0Y2ggZml4
+ZXMgdGhpcyBpc3N1ZSBieSBzeW5jaW5nIHRoZSBzaW1pbGFyIGZpeCB0byBVc2JCdXNEeGUuCiAg
+ICA3MGMzYzIzNzBhMmFlZmU3MWNmMGY2YzFhMWUwNjNmN2Q3NGUxZDc5CiAgICAqTWRlTW9kdWxl
+UGtnL1VzYkJ1czogUmVqZWN0IGRlc2NyaXB0b3Igd2hvc2UgbGVuZ3RoIGlzIGJhZAogICAgCiAg
+ICBBZGRpdGlvbmFsbHkgdGhlIHBhdGNoIGFsc28gcmVqZWN0cyB0aGUgZGF0YSB3aGVuIGxlbmd0
+aCBpcwogICAgbGFyZ2VyIHRoYW4gc2l6ZW9mIChQZWlVc2JEZXZpY2UtPkNvbmZpZ3VyYXRpb25E
+YXRhKS4KICAgIAogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29yZSBDb250cmlidXRpb24g
+QWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVs
+LmNvbT4KICAgIFJldmlld2VkLWJ5OiBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAg
+ICBDYzogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+Cgpjb21taXQgYzk2ZGUxZGJh
+ZWRjZTExNDg5OTc0YzNlOTc3ZjFkZTRlYzVjZmI4NApBdXRob3I6IFJ1aXl1IE5pIDxydWl5dS5u
+aUBpbnRlbC5jb20+CkRhdGU6ICAgVGh1IE9jdCAyNSAxNzowNzoxMiAyMDE4ICswODAwCgogICAg
+TWRlTW9kdWxlUGtnL1VzYkJ1c1BlaTogRml4IG91dC1vZi1ib3VuZCByZWFkIGFjY2VzcyB0byBk
+ZXNjcmlwdG9ycwogICAgCiAgICBUb2RheSdzIGltcGxlbWVudGF0aW9uIHJlYWRzIHRoZSBUeXBl
+L0xlbmd0aCBmaWVsZCBpbiB0aGUgVVNCCiAgICBkZXNjcmlwdG9ycyBkYXRhIHdpdGhvdXQgY2hl
+Y2tpbmcgd2hldGhlciB0aGUgb2Zmc2V0IHRvIHJlYWQgaXMKICAgIGJleW9uZCB0aGUgZGF0YSBi
+b3VuZGFyeS4KICAgIAogICAgVGhlIHBhdGNoIGZpeGVzIHRoaXMgaXNzdWUgYnkgc3luY2luZyB0
+aGUgZml4IGluIGNvbW1pdAogICAgNGMwMzRiZjYyY2JjMWYzYzVmNGI1ZGYyNWRlOTdmMGY1Mjgx
+MzJiMgogICAgKk1kZU1vZHVsZVBrZy9Vc2JCdXM6IEZpeCBvdXQtb2YtYm91bmQgcmVhZCBhY2Nl
+c3MgdG8gZGVzY3JpcHRvcnMKICAgIAogICAgUGFyc2VkQnl0ZXMgaW4gVXNiQnVzUGVpLkdldEV4
+cGVjdGVkRGVzY3JpcHRvcigpIGlzIGRpZmZlcmVudCBmcm9tCiAgICBDb25zdW1lZCBpbiBVc2JC
+dXNEeGUuVXNiQ3JlYXRlRGVzYygpLgogICAgUGFyc2VkQnl0ZXMgaXMgdGhlIG9mZnNldCBvZiBm
+b3VuZCBkZXNjcmlwdG9yIHdoaWxlIENvbnN1bWVkIGlzCiAgICBvZmZzZXQgb2YgbmV4dCBkZXNj
+cmlwdG9yIG9mIGZvdW5kIG9uZS4KICAgIAogICAgQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5vQ29y
+ZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQogICAgU2lnbmVkLW9mZi1ieTogUnVpeXUgTmkg
+PHJ1aXl1Lm5pQGludGVsLmNvbT4KICAgIFJldmlld2VkLWJ5OiBTdGFyIFplbmcgPHN0YXIuemVu
+Z0BpbnRlbC5jb20+CiAgICBDYzogSmlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
