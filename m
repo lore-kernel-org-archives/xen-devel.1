@@ -1,28 +1,16 @@
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: Re: [GIT PULL] xen: fixes for 4.20-rc1
-Date: Tue, 30 Oct 2018 09:32:46 -0700
-Message-ID: <CAHk-=wgiWPqTxQuND8zVpYe7gEKhnZnPtd02up4i7C_tDVPrdA__34187.4796119102$1540917112$gmane$org@mail.gmail.com>
-References: <20181030074420.17905-1-jgross@suse.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v5 13/25] xen/arm: move
+ unregister_init_virtual_region to init_done
+Date: Tue, 30 Oct 2018 16:33:30 +0000
+Message-ID: <7321ed24-7ce9-09a7-82ab-fdaab526c88f@arm.com>
+References: <alpine.DEB.2.10.1810221859480.31582@sstabellini-ThinkPad-X260>
+ <1540260184-11294-13-git-send-email-sstabellini@kernel.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=lq7b=nk=linuxfoundation.org=torvalds@srs-us1.protection.inumbo.net>)
- id 1gHWx1-0005F7-Cn
- for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 16:33:07 +0000
-Received: by mail-lj1-x244.google.com with SMTP id s15-v6so12017860lji.3
- for <xen-devel@lists.xenproject.org>; Tue, 30 Oct 2018 09:33:06 -0700 (PDT)
-Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com.
- [209.85.208.175])
- by smtp.gmail.com with ESMTPSA id q69sm1011653lfg.1.2018.10.30.09.33.02
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Tue, 30 Oct 2018 09:33:03 -0700 (PDT)
-Received: by mail-lj1-f175.google.com with SMTP id g26-v6so10727722lja.10
- for <xen-devel@lists.xenproject.org>; Tue, 30 Oct 2018 09:33:02 -0700 (PDT)
-In-Reply-To: <20181030074420.17905-1-jgross@suse.com>
+In-Reply-To: <1540260184-11294-13-git-send-email-sstabellini@kernel.org>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,13 +19,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: jgross@suse.com
-Cc: xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Achin.Gupta@arm.com, andrii_anisov@epam.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBPY3QgMzAsIDIwMTggYXQgMTI6NDQgQU0gSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
-c2UuY29tPiB3cm90ZToKPgo+IEl0IGNvbnRhaW5zIG9ubHkgc2V2ZXJhbCBzbWFsbCBmaXhlcyBh
-bmQgY2xlYW51cHMgdGhpcyB0aW1lLgoKUHVsbGVkLAoKICAgICAgICAgICAgICAgICAgICAgTGlu
-dXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGkgU3RlZmFubywKCk9uIDIzLzEwLzIwMTggMDM6MDIsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90
+ZToKPiBNb3ZlIHVucmVnaXN0ZXJfaW5pdF92aXJ0dWFsX3JlZ2lvbiB0byBpbml0X2RvbmUuIEZv
+bGxvdyB0aGUgc2FtZSBwYXRoCj4gYXMgeDg2LiBJdCBpcyBhbHNvIHVzZWZ1bCB0byBtb3ZlIGl0
+IGxhdGVyIHNvIHRoYXQgY3JlYXRlX2RvbVVzIGNhbiBiZQo+IGNhbGxlZCBiZWZvcmUgdGhhdCBp
+biBmb2xsb3dpbmcgcGF0Y2hlcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxp
+bmkgPHN0ZWZhbm9zQHhpbGlueC5jb20+CgpSZXZpZXdlZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxp
+ZW4uZ3JhbGxAYXJtLmNvbT4KCkNoZWVycywKCj4gLS0tCj4gICB4ZW4vYXJjaC9hcm0vc2V0dXAu
+YyB8IDYgKysrLS0tCj4gICAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0
+aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vc2V0dXAuYyBiL3hlbi9hcmNo
+L2FybS9zZXR1cC5jCj4gaW5kZXggNDlmMmZlZi4uZjNkYzk2YyAxMDA2NDQKPiAtLS0gYS94ZW4v
+YXJjaC9hcm0vc2V0dXAuYwo+ICsrKyBiL3hlbi9hcmNoL2FybS9zZXR1cC5jCj4gQEAgLTY2LDYg
+KzY2LDkgQEAgaW50ZWdlcl9wYXJhbSgieGVuaGVhcF9tZWdhYnl0ZXMiLCBvcHRfeGVuaGVhcF9t
+ZWdhYnl0ZXMpOwo+ICAgCj4gICBzdGF0aWMgX191c2VkIHZvaWQgaW5pdF9kb25lKHZvaWQpCj4g
+ICB7Cj4gKyAgICAvKiBNdXN0IGJlIGRvbmUgcGFzdCBzZXR0aW5nIHN5c3RlbV9zdGF0ZS4gKi8K
+PiArICAgIHVucmVnaXN0ZXJfaW5pdF92aXJ0dWFsX3JlZ2lvbigpOwo+ICsKPiAgICAgICBmcmVl
+X2luaXRfbWVtb3J5KCk7Cj4gICAgICAgc3RhcnR1cF9jcHVfaWRsZV9sb29wKCk7Cj4gICB9Cj4g
+QEAgLTk1NSw5ICs5NTgsNiBAQCB2b2lkIF9faW5pdCBzdGFydF94ZW4odW5zaWduZWQgbG9uZyBi
+b290X3BoeXNfb2Zmc2V0LAo+ICAgCj4gICAgICAgc3lzdGVtX3N0YXRlID0gU1lTX1NUQVRFX2Fj
+dGl2ZTsKPiAgIAo+IC0gICAgLyogTXVzdCBiZSBkb25lIHBhc3Qgc2V0dGluZyBzeXN0ZW1fc3Rh
+dGUuICovCj4gLSAgICB1bnJlZ2lzdGVyX2luaXRfdmlydHVhbF9yZWdpb24oKTsKPiAtCj4gICAg
+ICAgZG9tYWluX3VucGF1c2VfYnlfc3lzdGVtY29udHJvbGxlcihkb20wKTsKPiAgIAo+ICAgICAg
+IC8qIFN3aXRjaCBvbiB0byB0aGUgZHluYW1pY2FsbHkgYWxsb2NhdGVkIHN0YWNrIGZvciB0aGUg
+aWRsZSB2Y3B1Cj4gCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
