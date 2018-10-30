@@ -1,17 +1,19 @@
-From: Christian Lindig <christian.lindig@citrix.com>
-Subject: [PATCH 1/1] tools/ocaml: make type of Xsraw.sync more
- precise
-Date: Tue, 30 Oct 2018 10:17:56 +0000
-Message-ID: <20181030101756.13630-1-christian.lindig@citrix.com>
+From: Vladimir Botka <vbotka@gmail.com>
+Subject: Re: [Xen-users] [XEN][ARM] WiFi bridge creation
+Date: Tue, 30 Oct 2018 11:34:08 +0100
+Message-ID: <20181030113408.74525d80@planb.netng.org>
+References: <CAFsJcmYQRttza046T09sCBZzEs7pm31uxawQJHxsQySpyELkBQ@mail.gmail.com>
+ <20181030080929.6d04a875@planb.netng.org>
+ <CAFsJcmZFrpmattTzwkijF7Wz4cgXErg0090QBx1S-zJCRNnScg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7239256549964692924=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=fwbf=nk=citrix.com=prvs=83410df32=christian.lindig@srs-us1.protection.inumbo.net>)
- id 1gHR68-0004lX-Dw
- for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 10:18:08 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=m0b/=nk=gmail.com=vbotka@srs-us1.protection.inumbo.net>)
+ id 1gHRLi-0006Jh-Aq
+ for xen-devel@lists.xenproject.org; Tue, 30 Oct 2018 10:34:14 +0000
+In-Reply-To: <CAFsJcmZFrpmattTzwkijF7Wz4cgXErg0090QBx1S-zJCRNnScg@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,42 +22,91 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Christian Lindig <christian.lindig@citrix.com>
+To: Vikram K <vikram.k@pathpartnertech.com>
+Cc: xen-devel@lists.xenproject.org, xen-users@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHR5cGUgb2YgWHNyYXcuc3luYyBpcyBtYWRlIG1vcmUgcHJlY2lzZToKCmZyb20gdmFsIHN5
-bmMgOiAoWGVuYnVzLlhiLnQgLT4gJ2EpIC0+IGNvbiAtPiBzdHJpbmcKdG8gICB2YWwgc3luYyA6
-IChYZW5idXMuWGIudCAtPiB1bml0KSAtPiBjb24gLT4gc3RyaW5nCgpUaGUgZmlyc3QgYXJndW1l
-bnQgaXMgZW5mb3JjZWQgdG8gcmV0dXJuIHVuaXQgcmF0aGVyIHRoYW4gYSB2YWx1ZSB0aGF0Cmlz
-IG5vdCB1c2VkIGFueXdheS4KClNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBMaW5kaWcgPGNocmlz
-dGlhbi5saW5kaWdAY2l0cml4LmNvbT4KLS0tCiB0b29scy9vY2FtbC9saWJzL3hzL3hzcmF3Lm1s
-aSAgICB8IDIgKy0KIHRvb2xzL29jYW1sL3hlbnN0b3JlZC9wcm9jZXNzLm1sIHwgNCArKy0tCiAy
-IGZpbGVzIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1n
-aXQgYS90b29scy9vY2FtbC9saWJzL3hzL3hzcmF3Lm1saSBiL3Rvb2xzL29jYW1sL2xpYnMveHMv
-eHNyYXcubWxpCmluZGV4IDU3ZTRmYjBjOTAuLjM3NGYwZjlmYWQgMTAwNjQ0Ci0tLSBhL3Rvb2xz
-L29jYW1sL2xpYnMveHMveHNyYXcubWxpCisrKyBiL3Rvb2xzL29jYW1sL2xpYnMveHMveHNyYXcu
-bWxpCkBAIC0zMyw3ICszMyw3IEBAIHZhbCBoYXNfd2F0Y2hldmVudHMgOiBjb24gLT4gYm9vbAog
-dmFsIGdldF93YXRjaGV2ZW50IDogY29uIC0+IHN0cmluZyAqIHN0cmluZwogdmFsIHJlYWRfd2F0
-Y2hldmVudCA6IGNvbiAtPiBzdHJpbmcgKiBzdHJpbmcKIHZhbCBzeW5jX3JlY3YgOiBYZW5idXMu
-WGIuT3Aub3BlcmF0aW9uIC0+IGNvbiAtPiBzdHJpbmcKLXZhbCBzeW5jIDogKFhlbmJ1cy5YYi50
-IC0+ICdhKSAtPiBjb24gLT4gc3RyaW5nCit2YWwgc3luYyA6IChYZW5idXMuWGIudCAtPiB1bml0
-KSAtPiBjb24gLT4gc3RyaW5nCiB2YWwgYWNrIDogc3RyaW5nIC0+IHVuaXQKIHZhbCB2YWxpZGF0
-ZV9wYXRoIDogc3RyaW5nIC0+IHVuaXQKIHZhbCB2YWxpZGF0ZV93YXRjaF9wYXRoIDogc3RyaW5n
-IC0+IHVuaXQKZGlmZiAtLWdpdCBhL3Rvb2xzL29jYW1sL3hlbnN0b3JlZC9wcm9jZXNzLm1sIGIv
-dG9vbHMvb2NhbWwveGVuc3RvcmVkL3Byb2Nlc3MubWwKaW5kZXggOTc3ZTdjMTFiZS4uZDgxM2Q3
-ZmQ1MCAxMDA2NDQKLS0tIGEvdG9vbHMvb2NhbWwveGVuc3RvcmVkL3Byb2Nlc3MubWwKKysrIGIv
-dG9vbHMvb2NhbWwveGVuc3RvcmVkL3Byb2Nlc3MubWwKQEAgLTM0OCw3ICszNDgsNyBAQCBsZXQg
-dHJhbnNhY3Rpb25fcmVwbGF5IGMgdCBkb21zIGNvbnMgPQogCQkJCWZhbHNlCiAJCQkpCiAJCShm
-dW4gKCkgLT4KLQkJCUNvbm5lY3Rpb24uZW5kX3RyYW5zYWN0aW9uIGMgdGlkIE5vbmUKKwkJCWln
-bm9yZSBAQCBDb25uZWN0aW9uLmVuZF90cmFuc2FjdGlvbiBjIHRpZCBOb25lCiAJCSkKIAogbGV0
-IGRvX3dhdGNoIGNvbiB0IGRvbWFpbnMgY29ucyBkYXRhID0KQEAgLTM2Niw3ICszNjYsNyBAQCBs
-ZXQgZG9fdW53YXRjaCBjb24gdCBkb21haW5zIGNvbnMgZGF0YSA9CiAJCXwgW25vZGU7IHRva2Vu
-OyAiIl0gICAtPiBub2RlLCB0b2tlbgogCQl8IF8gICAgICAgICAgICAgICAgICAgLT4gcmFpc2Ug
-SW52YWxpZF9DbWRfQXJncwogCQlpbgotCUNvbm5lY3Rpb25zLmRlbF93YXRjaCBjb25zIGNvbiBu
-b2RlIHRva2VuCisJaWdub3JlIEBAIENvbm5lY3Rpb25zLmRlbF93YXRjaCBjb25zIGNvbiBub2Rl
-IHRva2VuCiAKIGxldCBkb190cmFuc2FjdGlvbl9zdGFydCBjb24gdCBkb21haW5zIGNvbnMgZGF0
-YSA9CiAJaWYgVHJhbnNhY3Rpb24uZ2V0X2lkIHQgPD4gVHJhbnNhY3Rpb24ubm9uZSB0aGVuCi0t
-IAoyLjE5LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7239256549964692924==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ boundary="Sig_/O8jgs21=Nf//IWlLqx.q1U_"; protocol="application/pgp-signature"
+
+--Sig_/O8jgs21=Nf//IWlLqx.q1U_
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+> On Tue, Oct 30, 2018 at 12:39 PM Vladimir Botka <vbotka@gmail.com> wrote:
+> > On Tue, 30 Oct 2018 10:03:22 +0530
+> > Vikram K <vikram.k@pathpartnertech.com> wrote:
+> > > Hello,
+> > > We are using Hikey960 with Debian as Dom0 and DomU. This board has on=
+ly
+> > > WiFi interface. We want to create bridge between Dom0 and DomU so tha=
+t =20
+> > > DomU =20
+> > > has internet access. We tried to create bridge using brtcl command, b=
+ut =20
+> > > it =20
+> > > is not working. Please provide pointers. =20
+
+> > AFAIK, it's not working
+> > https://marc.info/?l=3Dlinux-wireless&m=3D136743495526905&w=3D2
+> > "There is a proposed fix that is included in OpenWrt"
+> > https://marc.info/?l=3Dlinux-wireless&m=3D145591129008322&w=3D2
+> > More details are avilable in OpenWrt WiKi
+> > https://wiki.openwrt.org/doc/recipes/relayclient
+> > -vlado
+
+On Tue, 30 Oct 2018 15:01:39 +0530
+Vikram K <vikram.k@pathpartnertech.com> wrote:
+> Hi,
+> As per below link, it is possible to share Internet via WiFi between Dom0
+> and DomU,.
+> https://wiki.xenproject.org/wiki/Xen_in_WiFi_networks
+> Tried the suggested solution using ebtables, but it did not work.
+> * ebtables -t nat -A POSTROUTING -s 00:60:00:00:00:01 \
+>               -j snat --to-source 00:60:aa:bb:cc:dd*
+> In the configurations file we have added below configuration in DomU
+> config file.
+> * vif =3D ['mac=3D00:16:3e:64:b8:40']*
+> Apart from that do we need to add any addition configuration?
+
+NAT is a different story. Worked for me with Armbian(no XEN) and Atheros 92=
+80
+couple of years ago. I used Ansible to configure it.
+https://github.com/vbotka/ansible-linux-postinstall/blob/master/templates/r=
+outer1-iptables.j2
+
+HTH,
+
+- vlado
+
+--Sig_/O8jgs21=Nf//IWlLqx.q1U_
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEbaThuYKQgbbmDrVkkNGZEo7UTwEFAlvYM6AACgkQkNGZEo7U
+TwE5lgf9Haf1AwdlZj0KbytTpKZNtM2SByLvgm2UrfeMO3MLoweRh03ZHLhEJaSw
+pNZIfopYYrZAeGH2r8pfp3+whAlFkEC3N5o03N9jqyLyYp3/eoAUgSOFqjpe0wgP
+G3VxuMqYzMbXC/p/fMeOv9ciH/f5utm6vGAcenoqU7uC3JmMsGeorYGMAFGwwj+v
+BSoISVvJpzMyc7figJr/a4ARS0xWR3+izVm9yUUVbJ8nc4Qtw0X2H2Qgz96rEOXj
+lTI+MqRy62kEAmshu81Hv7fej0UWce0g3ByVMMzsIoDRq/moDyrmxgxsaNxmv6rH
+EH8A51QWc1FRHIgCp8IhsnS4uccBEA==
+=slBT
+-----END PGP SIGNATURE-----
+
+--Sig_/O8jgs21=Nf//IWlLqx.q1U_--
+
+
+--===============7239256549964692924==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7239256549964692924==--
