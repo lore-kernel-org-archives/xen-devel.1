@@ -1,20 +1,18 @@
-From: Christian Lindig <christian.lindig@citrix.com>
-Subject: [PATCH v2 1/1] tools/ocaml: Re-introduce
- Xenctrl.with_intf wrapper
-Date: Wed, 31 Oct 2018 11:33:22 +0000
-Message-ID: <20181031113323.22379-1-christian.lindig@citrix.com>
-References: <26EDCEB0-FF2A-42A2-B538-56B8C0124A10@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH v8 6/8] docs: documentation about static
+ shared memory regions
+Date: Wed, 31 Oct 2018 12:11:25 +0000
+Message-ID: <23513.39917.709953.639943@mariner.uk.xensource.com>
+References: <alpine.DEB.2.10.1810081606390.28877@sstabellini-ThinkPad-X260>
+ <1539041841-17655-6-git-send-email-sstabellini@kernel.org>
+ <23512.30192.533642.821746@mariner.uk.xensource.com>
+ <alpine.DEB.2.10.1810301119530.19149@sstabellini-ThinkPad-X260>
+ <b750bc1a-cd62-eef9-af6d-caa9562005ca@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=yun1=nl=citrix.com=prvs=8358bb395=christian.lindig@srs-us1.protection.inumbo.net>)
- id 1gHol9-0008FZ-4K
- for xen-devel@lists.xenproject.org; Wed, 31 Oct 2018 11:34:03 +0000
-In-Reply-To: <26EDCEB0-FF2A-42A2-B538-56B8C0124A10@citrix.com>
+In-Reply-To: <b750bc1a-cd62-eef9-af6d-caa9562005ca@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,12 +21,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: ian.jackson@citrix.com, wei.liu2@citrix.com
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, wei.liu2@citrix.com, blackskygg@gmail.com, lars.kurth@citrix.com, ian.jackson@eu.citrix.com, george.dunlap@citrix.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBwYXRjaCBpIHVwZGF0ZWQ6CgoqIHNldCB0aGUgZ2xvYmFsIGhhbmRsZSB0byBOb25lCiog
-dXBkYXRlZCBkb2N1bWVudGF0aW9uCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+SnVsaWVuIEdyYWxsIHdyaXRlcyAoIlJlOiBbUEFUQ0ggdjggNi84XSBkb2NzOiBkb2N1bWVudGF0
+aW9uIGFib3V0IHN0YXRpYyBzaGFyZWQgbWVtb3J5IHJlZ2lvbnMiKToKPiBPbiAxMC8zMC8xOCA2
+OjU4IFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiBJIGNvbXBsZXRlbHkgYWdyZWUg
+d2l0aCB5b3UgaGVyZSwgYW5kIGdldHRpbmcgcmlkIG9mIHRoZSBtYXN0ZXIvc2xhdmUKPiA+IHRl
+cm1pbm9sb2d5IHdvdWxkIGJlIG5pY2UsIGluIHJldHJvc3BlY3QsIGl0IHdhcyBub3QgYSBnb29k
+IGNob2ljZS4gQnV0Cj4gPiB0aGlzIGlzIHY4IG9mIHRoZSBzZXJpZXMsIGFuZCBhcyBkaXNjdXNz
+ZWQgYSBmZXcgdGltZXMsIHdlIGVuY291cmFnZQo+ID4gcmV2aWV3ZXJzIHRvIGF2b2lkIHRoaXMg
+a2luZCBvZiByZXF1ZXN0cyBhdCB0aGlzIHN0YWdlLgoKU29ycnkgSSdtIGxhdGUgdG8gdGhlIHBh
+cnR5LgoKPiBXaGlsZSBJIGFncmVlIHRoYXQgdGhlIGRlc2lnbiBkb2N1bWVudCBoYXMgYmVlbiBh
+Y2NlcHRlZCBpbiBBdWcgMjAxNywKPiB0aGUgbGFzdCB0aGluZ3Mgd2Ugd2FudCBpcyBhZGRpbmcg
+bW9yZSBwb3RlbnRpYWxseSBvZmZlbnNpdmUgbmFtaW5nIGluIAo+IFhlbi4gSXQgc2hvdWxkIG5v
+dCB0YWtlIHRvbyBtdWNoIHRvIGRvIHRoZSByZW5hbWluZyAoSSBhbSBoYXBweSB0byBoZWxwIAo+
+IGhlcmUpLgoKVGhhbmtzIGZvciB5b3VyIHN1cHBvcnQuICBJIGFtIGFsc28gaGFwcHkgdG8gaGVs
+cC4gIEkgZG9uJ3QgbWluZAp3aGV0aGVyIHRoaXMgaXMgZG9uZSBieSB0aGUgZXF1aXZhbGVudCBv
+ZiBmaWx0ZXItYnJhbmNoIG9uIHRoZSBwYXRjaApzZXJpZXMsIG9yIHdpdGggYSBmb2xsb3d1cCBw
+YXRjaCB0byByZW5hbWUgZXZlcnl0aGluZy4gIEkgY2FuCmNvbnN0cnVjdCB0aGUgZm9sbG93dXAg
+cGF0Y2ggaWYgdGhhdCB3b3VsZCBiZSB3ZWxjb21lLgoKQnV0IHdlIG5lZWQgdG8ga25vdyB3aGF0
+IHRoZSBuZXcgdGVybWlub2xvZ3kgc2hvdWxkIGJlLiAgSXMgYG93bmVyJwphbmQgYGJvcnJvd2Vy
+JyBhIGdvb2QgcGFpcmluZyA/ICBgQm9ycm93JyBpcyBwZXJoYXBzIG5vdCBxdWl0ZSByaWdodApi
+ZWNhdXNlIGl0IGltcGxpZXMgdGhhdCB0aGUgb3JpZ2luYWwgb3duZXIgbm8gbG9uZ2VyIGhhcyBp
+dCB3aGlsZSBpdCdzCmJvcnJvd2VkLiAgT1RPSCBSdXN0IGhhcyByZWFkLW9ubHkgYm9ycm93cyB3
+aGljaCB3b3JrIHNpbWlsYXJseSBzbwpib3Jyb3dpbmcgaW4gYSB3YXkgdGhhdCBkb2Vzbid0IGV4
+Y2x1ZGUgdGhlIG9yaWdpbmFsIGhhcyBhdCBsZWFzdCBzb21lCnByZWNlZGVudC4uLgoKSSBzZWUg
+dGhhdCB0aGUgTGludXggRFQgZG9jdW1lbnQgZG9lc24ndCBuZWVkIHRvIG1lbnRpb24gdGhlIHJv
+bGUsIHNvCndlIGp1c3QgbmVlZCB0byBmaXggdGhlIFhlbiB0cmVlLgoKSWFuLgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
