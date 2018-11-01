@@ -1,21 +1,15 @@
-From: Stefano Stabellini <stefano.stabellini@xilinx.com>
-Subject: Re: [RFC PATCH v2 13/17] xenconsoled: add support for
- up to 3 secondary consoles
-Date: Thu, 1 Nov 2018 13:27:28 -0700
-Message-ID: <alpine.DEB.2.10.1811011324460.7220@sstabellini-ThinkPad-X260>
-References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <58fad8fc7a60c5f9a6e107dafb52df2ef3d15665.1533608042.git-series.marmarek@invisiblethingslab.com>
- <23515.14438.209179.640957@mariner.uk.xensource.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v3] devicetree, xen: add xen,
+ shared-memory binding
+Date: Thu, 1 Nov 2018 13:31:12 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1811011328540.7220@sstabellini-ThinkPad-X260>
+References: <1540343921-7487-1-git-send-email-sstabellini@kernel.org>
+ <0951e2a3-78a1-e849-39e9-5980c9c87277@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-101477242-1541104021=:7220"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=0sdp=nm=xilinx.com=stefanos@srs-us1.protection.inumbo.net>)
- id 1gIJZA-0000s3-MU
- for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 20:27:44 +0000
-In-Reply-To: <23515.14438.209179.640957@mariner.uk.xensource.com>
-Content-ID: <alpine.DEB.2.10.1811011327020.7220@sstabellini-ThinkPad-X260>
+In-Reply-To: <0951e2a3-78a1-e849-39e9-5980c9c87277@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,56 +18,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <stefano.stabellini@xilinx.com>, Wei Liu <wei.liu2@citrix.com>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: mark.rutland@arm.com, devicetree@vger.kernel.org, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, stefanos@xilinx.com, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xen.org, robh+dt@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-101477242-1541104021=:7220
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
-Content-ID: <alpine.DEB.2.10.1811011327021.7220@sstabellini-ThinkPad-X260>
-
-On Thu, 1 Nov 2018, Ian Jackson wrote:
-> Marek Marczykowski-G=C3=B3recki writes ("[RFC PATCH v2 13/17] xenconsoled=
-: add support for up to 3 secondary consoles"):
-> > Based on previous few commits, this adds basic support for multiple
-> > consoles in xenconsoled. A static number of them - up to 3 (+ one
-> > primary).
->=20
-> I'm confused.  I thought we already had support for multiple PV
-> consoles.  Is the problem that the backend is in qemu rather than
-> xenconsoled ?  I'm not sure how this patch interacts with the
-> qemu-provided extra PV consoles in docs/misc/console.txt.
-
-I haven't read this patch, but yes, it is as you wrote. Multiple PV
-consoles are only suppored by QEMU, with the interface described in
-docs/misc/console.txt. It could be nice to be able to support them with
-xenconsoled, but we need to be careful they don't conflict. There is a
-way to specify the desired console backend, either QEMU or xenconsoled,
-so it shouldn't be a problem to have both backends being able to do
-multiple consoles. But we wouldn't want to have a different interface
-from the one described in docs/misc/console.txt, otherwise we'll break
-existing guests (Linux for instance.)
-
-
-> I'm afraid (as you probably predicted) I don't think this patch is
-> suitable for upstream in its current form.  I can see that
-> restructuring xenconsoled to be more dynamic is some work but I may be
-> able to help there.
->=20
-> CCing Stefano, the author of docs/misc/console.txt, at his new
-> address.
---8323329-101477242-1541104021=:7220
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-101477242-1541104021=:7220--
+T24gV2VkLCAzMSBPY3QgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9uIDEw
+LzI0LzE4IDI6MTggQU0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IEZyb206IFN0ZWZh
+bm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT4KPiA+IAo+ID4gSW50cm9kdWNlIGEg
+ZGV2aWNlIHRyZWUgYmluZGluZyBmb3IgWGVuIHJlc2VydmVkLW1lbW9yeSByZWdpb25zLiBUaGV5
+Cj4gPiBhcmUgdXNlZCB0byBzaGFyZSBtZW1vcnkgYWNyb3NzIFZNcyBmcm9tIHRoZSBWTSBjb25m
+aWcgZmlsZXMuIChTZWUKPiA+IHN0YXRpY19zaG0gY29uZmlnIG9wdGlvbi4pCj4gPiAKPiA+IFNp
+Z25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT4KPiA+
+IENjOiBqdWxpZW4uZ3JhbGxAYXJtLmNvbQo+ID4gLS0tCj4gPiBDaGFuZ2VzIGluIHYzOgo+ID4g
+LSByZW1vdmUgZmFsbGJhY2sgdmVyc2lvbgo+ID4gCj4gPiBDaGFuZ2VzIGluIHYyOgo+ID4gLSBm
+aXggQXV0aG9yIGxpbmUKPiA+IC0gYWRkIHZlcnNpb25pbmcKPiA+IC0geGVuLGlkIGluc3RlYWQg
+b2YgaWQKPiA+IC0tLQo+ID4gICAuLi4vYmluZGluZ3MvcmVzZXJ2ZWQtbWVtb3J5L3hlbixzaGFy
+ZWQtbWVtb3J5LnR4dCAgIHwgMjAKPiA+ICsrKysrKysrKysrKysrKysrKysrCj4gPiAgIDEgZmls
+ZSBjaGFuZ2VkLCAyMCBpbnNlcnRpb25zKCspCj4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NAo+ID4g
+RG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL3Jlc2VydmVkLW1lbW9yeS94ZW4sc2hh
+cmVkLW1lbW9yeS50eHQKPiA+IAo+ID4gZGlmZiAtLWdpdAo+ID4gYS9Eb2N1bWVudGF0aW9uL2Rl
+dmljZXRyZWUvYmluZGluZ3MvcmVzZXJ2ZWQtbWVtb3J5L3hlbixzaGFyZWQtbWVtb3J5LnR4dAo+
+ID4gYi9Eb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmluZGluZ3MvcmVzZXJ2ZWQtbWVtb3J5L3hl
+bixzaGFyZWQtbWVtb3J5LnR4dAo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQKPiA+IGluZGV4IDAw
+MDAwMDAuLjdjODE2ODMKPiA+IC0tLSAvZGV2L251bGwKPiA+ICsrKwo+ID4gYi9Eb2N1bWVudGF0
+aW9uL2RldmljZXRyZWUvYmluZGluZ3MvcmVzZXJ2ZWQtbWVtb3J5L3hlbixzaGFyZWQtbWVtb3J5
+LnR4dAo+ID4gQEAgLTAsMCArMSwyMCBAQAo+ID4gKyogWGVuIGh5cGVydmlzb3IgcmVzZXJ2ZWQt
+bWVtb3J5IGJpbmRpbmcKPiA+ICsKPiA+ICtFeHBvc2Ugb25lIG9yIG1vcmUgbWVtb3J5IHJlZ2lv
+bnMgYXMgcmVzZXJ2ZWQtbWVtb3J5IHRvIHRoZSBndWVzdAo+ID4gK3ZpcnR1YWwgbWFjaGluZS4g
+VHlwaWNhbGx5LCBhIHJlZ2lvbiBpcyBjb25maWd1cmVkIGF0IFZNIGNyZWF0aW9uIHRpbWUKPiA+
+ICt0byBiZSBhIHNoYXJlZCBtZW1vcnkgYXJlYSBhY3Jvc3MgbXVsdGlwbGUgdmlydHVhbCBtYWNo
+aW5lcyBmb3IKPiA+ICtjb21tdW5pY2F0aW9uIGFtb25nIHRoZW0uCj4gCj4gSSBtYXkgaGF2ZSBu
+b3RpY2Ugc29tZSBpc3N1ZSB3aXRoIHRoaXMgYmluZGluZy4gTG9va2luZyBhdCB0aGUgZGVzaWdu
+IGRvY3VtZW50Cj4gWzFdLCB0aGUgIm1hc3RlciIgZG9tYWluIG1heSBwcm92aWRlIGEgYmlnIGJh
+Y2tpbmcgcmVnaW9uIHRoYXQgd291bGQgYmUgc3BsaXQKPiBhbmQgc2hhcmUgd2l0aCBtdWx0aXBs
+ZSAic2xhdmUiLgo+IAo+IEZvciB0aGUgIm1hc3RlciIgZG9tYWluLCB0aGlzIGJpbmRpbmcgd291
+bGQgc3BlY2lmeSB0aGUgZnVsbCBiYWNraW5nIHJlZ2lvbi4KPiBUaGUgIm1hc3RlciIgT1Mgd291
+bGQgbm90IGJlIGFibGUgdG8ga25vdyBob3cgdGhlIHJlZ2lvbiB3b3VsZCBiZSB1c2VkIGhlcmUu
+Cj4gCj4gRm9yIHRoZSAic2xhdmUiIGRvbWFpbiwgaXQgbG9va3MgbGlrZSBpdCBtaWdodCBiZSBw
+b3NzaWJsZSB0byBtYXAgdGhlIHNhbWUKPiByZWdpb24gKHNvIHNhbWUgSUQpIHR3aWNlLiBTbyB3
+ZSB3b3VsZCBlbmQgdXAgdG8gY3JlYXRlIHRoZSBzYW1lIGJpbmRpbmdzCj4gdHdpY2UuCj4gCj4g
+QW55IG9waW9uaW9uIG9uIGhvdyB3ZSBzaG91bGQgcHJvY2VlZCB3aXRoIHRoZXNlIHR3byB1c2Ug
+Y2FzZXM/CgpKdWxpZW4gYW5kIEkgZGlzY3Vzc2VkIHRoaXMgbW9ybmluZyB0byBjbGFyaWZ5IHRo
+YXQgcmVnaW9ucyBzaG91bGRuJ3QgYmUKbWFwcGVkIHR3aWNlIGluIHRoZSBYZW4gZG9jcywgYW5k
+IGFkZGluZyBhbiAib2Zmc2V0IiBwcm9wZXJ0eSB0byB0aGlzCmJpbmRpbmcuCgpJJ2xsIHNlbmQg
+YW4gdXBkYXRlIHRvIHRoaXMgcHJvcG9zYWwgYWRkaW5nIHRoZSBvZmZzZXQuCgo+ID4gKwo+ID4g
+K0ZvciBlYWNoIG9mIHRoZXNlIHByZS1zaGFyZWQgbWVtb3J5IHJlZ2lvbnMsIGEgcmFuZ2UgaXMg
+ZXhwb3NlZCB1bmRlcgo+ID4gK3RoZSAvcmVzZXJ2ZWQtbWVtb3J5IG5vZGUgYXMgYSBjaGlsZCBu
+b2RlLiBFYWNoIHJhbmdlIHN1Yi1ub2RlIGlzIG5hbWVkCj4gPiAreGVuLXNobWVtQDxhZGRyZXNz
+PiBhbmQgaGFzIHRoZSBmb2xsb3dpbmcgcHJvcGVydGllczoKPiA+ICsKPiA+ICstIGNvbXBhdGli
+bGU6Cj4gPiArCWNvbXBhdGlibGUgPSAieGVuLHNoYXJlZC1tZW1vcnktdjEiCj4gPiArCj4gPiAr
+LSByZWc6Cj4gPiArCXRoZSBiYXNlIGd1ZXN0IHBoeXNpY2FsIGFkZHJlc3MgYW5kIHNpemUgb2Yg
+dGhlIHNoYXJlZCBtZW1vcnkgcmVnaW9uCj4gPiArCj4gPiArLSB4ZW4saWQ6Cj4gPiArCWEgc3Ry
+aW5nIHRoYXQgaWRlbnRpZmllcyB0aGUgc2hhcmVkIG1lbW9yeSByZWdpb24gYXMgc3BlY2lmaWVk
+IGluCj4gPiArCXRoZSBWTSBjb25maWcgZmlsZQo+ID4gCj4gCj4gQ2hlZXJzLAo+IAo+IFsxXSBo
+dHRwczovL2xpc3RzLnhlbi5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0xMC9tc2cw
+MDczMC5odG1sCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
