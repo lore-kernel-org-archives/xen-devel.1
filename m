@@ -1,27 +1,24 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
- runnning in a Linux-based stubdomain.
-Date: Thu, 1 Nov 2018 17:48:37 +0000
-Message-ID: <23515.15477.194395.558778@mariner.uk.xensource.com>
-References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <23494.5998.10340.694382@mariner.uk.xensource.com>
- <20181016173240.GA1563@mail-itl>
- <23494.9572.676973.726194@mariner.uk.xensource.com>
- <20181016204628.GD1563@mail-itl>
- <23495.21043.960987.833172@mariner.uk.xensource.com>
- <20181017160559.GB2755@mail-itl>
- <23515.12398.298018.490061@mariner.uk.xensource.com>
- <20181101173207.GB1638@mail-itl>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [OSSTEST PATCH] README.hardware-acquisition
+Date: Thu, 1 Nov 2018 10:50:38 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1811010926550.7220@sstabellini-ThinkPad-X260>
+References: <20181030161326.17879-1-ian.jackson@eu.citrix.com>
+ <CAFLBxZabx3rG1t8C+6p-+kojxq1WNOqEXn23GyB+w0OgjDYLiQ@mail.gmail.com>
+ <CAFLBxZYyKbw3L0p+a9FbLiHy3icSOTPG+Dndk+L1eZjnxaufaA@mail.gmail.com>
+ <alpine.DEB.2.10.1810311138360.7220@sstabellini-ThinkPad-X260>
+ <CAFLBxZZtiPxCw8Pz4+3JN81ENjzms+qnQEhHBcbJs9FxEP_QXA@mail.gmail.com>
+ <FE9A527C-599E-4644-9F89-D3C51E719F60@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1376700852-1541089755=:7220"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rvhc=nm=citrix.com=prvs=836b135c8=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gIH5G-0003zu-3n
- for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:48:42 +0000
-In-Reply-To: <20181101173207.GB1638@mail-itl>
+ <srs0=6kmy=nm=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gIH7C-0004kO-CL
+ for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:50:42 +0000
+In-Reply-To: <FE9A527C-599E-4644-9F89-D3C51E719F60@citrix.com>
+Content-ID: <alpine.DEB.2.10.1811011039500.7220@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,63 +27,85 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Eric Shelton <eshelton@pobox.com>
+To: Lars Kurth <lars.kurth@citrix.com>
+Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <dunlapg@umich.edu>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@citrix.com>, "infra@xenproject.org" <infra@xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIlJlOiBbUkZDIFBBVENIIHYyIDAw
-LzE3XSBBZGQgc3VwcG9ydCBmb3IgcWVtdS14ZW4gcnVubm5pbmcgaW4gYSBMaW51eC1iYXNlZCBz
-dHViZG9tYWluLiIpOgo+IGxpYnhlbnZjaGFuX3NlcnZlcl9pbml0IGlzIGFzeW5jaHJvbm91cy4K
-Ckkgd2VudCB0byBsb29rIGFuZCBJIHRoaW5rIHdoYXQgeW91IG1lYW4gaXMgdGhhdCBpdCBpcyBm
-YXN0LiAgSWUsIGl0CmRvZXMgbm90IG5lZWQgdG8gd2FpdCBmb3IgYW55dGhpbmcuCgo+IGxpYnhl
-bnZjaGFuX2NsaWVudF9pbml0IGlzIHRvbywKPiBidXQgaXQgZmFpbHMgaWYgY2FsbGVkIGJlZm9y
-ZSBzZXJ2ZXIgaXMgcmVhZHkuCgpUaGF0IGlzIGxlc3MgZ29vZC4KCj4gSSBoYXZlIGEKPiB3cmFw
-cGVyWzFdIGFyb3VuZCBsaWJ4ZW52Y2hhbl9jbGllbnRfaW5pdCBpbiBRdWJlcyBjb2RlIHdoaWNo
-IHNvbHZlIHRoaXMKPiBwcm9ibGVtIHdpdGggeHNfd2F0Y2guICJsaWJ2Y2hhbjogY3JlYXRlIHhl
-bnN0b3JlIGVudHJpZXMgaW4gb25lCj4gdHJhbnNhY3Rpb24iIHBhdGNoIGlzIHJlbGF0ZWQgdG8g
-dGhhdCB3cmFwcGVyLgoKQWgsIHllcywgSSBzYXcgdGhhdCwgSSB0aGluayBpdCBzaG91bGQgZ28g
-aW4gc29vbiBpZiBpdCBoYXNuJ3QKYWxyZWFkeS4KCj4gTWF5YmUgaXQgc2hvdWxkIGJlIGFsc28g
-YWRkZWQgdG8gbGlieGVudmNoYW4/IFJpZ2h0IG5vdyBpdCBvbmx5IHdhaXRzCj4gKHN5bmNocm9u
-b3VzbHkpIGZvciBzZXJ2ZXIgdG8gYXBwZWFyICh1c2luZyB3aGlsZSguLi4pIHhzX3JlYWRfd2F0
-Y2goKSkuCgpUaGF0J3MgcmF0aGVyIHBvb3IuCgo+IFRoaXMgaXMgc2xpZ2h0bHkgbW9yZSBjb21w
-bGV4LCBhcyBpdCBhbHNvIGhhbmRsZSByZW1vdGUgZG9tYWluIGRlYXRoCj4gYmVmb3JlIGVzdGFi
-bGlzaGluZyBjb25uZWN0aW9uIGFzIHdlbGwgcWFzIHNhdmUrcmVzdG9yZSBsb2NhbCBkb21haW4u
-Cj4gQnV0IGl0IGNhbiBiZSBwcm92aWRlZCBhcyBhIHNlcGFyYXRlIGZ1bmN0aW9uIGxpa2UKPiBs
-aWJ4ZW52Y2hhbl9jbGllbnRfd2FpdF9mb3Jfc2VydmVyIG9yIHN1Y2guCgpBSVVJIHlvdSB3b3Vs
-ZCB3YW50IHRvIGNhbGwgc3VjaCBhIGZ1bmN0aW9uIGluIGxpYnhsLCBiZWNhdXNlIHlvdXIKcWVt
-dSBzdHViZG9tIGlzIHRoZSBzZXJ2ZXIgPyAgSW4gd2hpY2ggY2FzZSBhIHN5bmNocm9ub3VzIGNh
-bGwgaXMgbm8KZ29vZCwgYmVjYXVzZSBpdCB3b3VsZCBhbGxvdyBhIHJvZ3VlIGxpbnV4IHN0dWJk
-b20gdG8gYmxvY2sgdGhlIGVudGlyZQpsaWJ4bCBwcm9jZXNzLgoKPiBQcm92aWRpbmcgYSBmdW5j
-dGlvbiB0aGF0IGNvdWxkIGJlIHVzZWQgaW4gbGlieGwgd291bGQgYmUgbW9yZSBjb21wbGV4LAo+
-IGFzIGl0IG5lZWRzIHRvIGludGVncmF0ZSB3aXRoIGxpYnhsIGFzeW5jIEFQSS4KCk9oLCB5b3Un
-cmUgYWhlYWQgb2YgbWUuCgo+IE1heWJlIGl0IGNvdWxkIHVzZQo+IGdvb2Qgb2xkIHRyaWNrIHdp
-dGggc2VwYXJhdGUgdGhyZWFkICsgcGlwZSgpIGZvciBzaWduYWxpbmcgcmVhZGluZXNzPwoKbGli
-eGwgaGFzIGNvZGUgZm9yIHdhaXRpbmcgZm9yIHhzIHdhdGNoZXMgYW5kIGRvbWFpbiBkZWF0aCBh
-bmQgc28gb24KYWxyZWFkeS4KCkhvdyBhYm91dCB0aGlzOiBwcm92aWRlIGEgbmV3IHZhcmlhbnQg
-b2YgbGlieGVudmNoYW5fY2xpZW50X2luaXQgd2hpY2gKY2FuIGdpdmUgYSByZXR1cm4gaW5kaWNh
-dGlvbiBvZiB0aGUgZm9ybSBgdGhpcyBzZXJ2ZXIgZG9lcyBub3QgYXBwZWFyCnRvIGJlIHNldCB1
-cDsgcGxlYXNlIHdhdGNoIG9uIHRoZSBmb2xsb3dpbmcgeGVuc3RvcmUga2V5IGFuZCB0aGVuIGNh
-bGwKbWUgYWdhaW4gd2hlbiB0aGUgd2F0Y2ggZmlyZXMnLiAgVGhhdCB3b3VsZCBiZSBzaW1wbGUs
-IGFuZCBub3QgaW52b2x2ZQpmdXJ0aGVyIGV2ZW50IGxvb3AgZW50YW5nbGVtZW50LCBhbmQgd291
-bGQgZml0IG5pY2VseSBpbnRvIGxpYnhsLgoKPiBUaGlzIHdheSwgdGhlIGxpYnhlbnZjaGFuX2Ns
-aWVudF93YWl0X2Zvcl9zZXJ2ZXIgd291bGQgc3RhcnQgc2VwYXJhdGUKPiB0aHJlYWQgKHVzaW5n
-IG93biB4ZW5zdG9yZSBjb25uZWN0aW9uKSBhbmQgcmV0dXJuIGZkIHRoYXQgbGlieGwgY2FuIHdh
-aXQKPiBvbi4gTm8gbmVlZCB0byBjb252ZXJ0IGxpYnhlbnZjaGFuX2NsaWVudF93YWl0X2Zvcl9z
-ZXJ2ZXIgaW50byBjYWxsYmFjawo+IGhlbGwuLi4KClRoYXQgbWF5IGJlIG92ZXJraWxsLgoKPiA+
-IERvZXNuJ3QgdGhpcyBwb3RlbnRpYWxseSBtZWFuIHRoYXQgdGhlIHFtcCBjb25zb2xlIGNvbm5l
-Y3Rpb24gY2FuCj4gPiBiZWNvbWUgaXJyZWNvdmVyYWJseSBkZXN5bmNocm9uaXNlZCA/ICBJIGRv
-bid0IGtub3cgaG93IHlvdSB3b3VsZAo+ID4gcmVjb3ZlciBmcm9tIHRoZSBzaXR1YXRpb24gd2hl
-cmUgYW5vdGhlciBsaWJ4bCBwcm9jZXNzIGhhZCBnb3QgaGFsZndheQo+ID4gdGhyb3VnaCBzb21l
-IHFtcCBzdHVmZiBhbmQgYmVlbiB0ZXJtaW5hdGVkIChmb3Igd2hhdGV2ZXIgcmVhc29uOyBtYXli
-ZQo+ID4gdGhlIGNhbGxpbmcgdG9vbHN0YWNrIGNyYXNoZWQpLgo+IAo+IFRoYXQncyByaWdodCwg
-aXQgY291bGQgcmVzdWx0IGluIGlycmVjb3ZlcmFibHkgZGVzeW5jaHJvbmlzZWQKPiBjb25uZWN0
-aW9uLiBTbywgd2UgbmVlZCBvdXQgb2YgYmFuZCByZXNldC4KClNvdW5kcyBjb21wbGljYXRlZC4g
-IEkgdGhpbmsgdGhhdCBpcyB3aGF0IHlvdXIgY29uc29sZSBzdGF0ZSBzdHVmZiBpcwphYm91dC4u
-LgoKPiA+IFRoYXQncyBub3QgYSB0ZXJyaWJsZSBpZGVhIGJ1dCBJIGNhbid0IHNlZSBpdCBiZWlu
-ZyBwb3B1bGFyIHdpdGggcWVtdQo+ID4gdXBzdHJlYW0sIHNvIHlvdSdkIGVuZCB1cCB3cml0aW5n
-IGEga2luZCBvZiBiaWRpcmVjdGlvbmFsCj4gPiBxbXA8LT54ZW5zdG9yZSBwcm94eS4gIFVyZ2gu
-Cj4gCj4gV2VsbCwgSSBkbyB0aGF0IGFscmVhZHkgKGZvciBwY2ktaW5zKS4gSW4gYmFzaC4KCmhh
-aGFoYWhhLiAgV2VsbCwgSSB0aGluayB2Y2hhbiBtYXkgYmUgZWFzaWVyLgoKUmVnYXJkcywKSWFu
-LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1376700852-1541089755=:7220
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1811011039501.7220@sstabellini-ThinkPad-X260>
+
+On Thu, 1 Nov 2018, Lars Kurth wrote:
+> ﻿On 01/11/2018, 11:30, "George Dunlap" <dunlapg@umich.edu> wrote:
+> 
+>     On Wed, Oct 31, 2018 at 6:46 PM Stefano Stabellini
+>     <sstabellini@kernel.org> wrote:
+>     > > > ---
+>     > > > + Baremetal boot from Debian stable or stable-backports:
+>     > > >
+>     > > > In order to avoid cross-compilation, Osstest must be able to install a
+>     > > > bare-metal system on the host itself in order to build Linux and Xen
+>     > > > test binaries for that host. At the moment osstest uses Debian for
+>     > > > this, and there is no facility in osstest for building custom kernels
+>     > > > for this purpose.  As such, a suitable Linux kernel binary which can
+>     > > > boot baremetal on the proposed hardware must be available from Debian
+>     > > > (at least `stable', or, if that is not possible, `stable-backports').
+>     > > > Osstest cannot install using a patched version of Linux, or one built
+>     > > > from a particular git branch, or some such.  If the required kernel is
+>     > > > not available in Debian, the vendor should ideally work with the
+>     > > > Debian project to ensure and validate that Debian stable-backports
+>     > > > kernel binaries boot on the proposed hardware.  Alternately, the
+>     > > > vendor can work with the community to implement the necessary
+>     > > > functionality within osstest to enable it to build custom kernels for
+>     > > > build installs, or use alternate distributions which have better
+>     > > > baremetal support for the hardware.
+>     >
+>     > If we want to grow Xen on ARM testing in OSSTest for embedded boards, I
+>     > think that requiring Debian kernel support is unrealistic,
+>     
+>     You keep using the word "requirement" as though it's an active choice
+>     that is being made.  This is a checklist for what kind of hardware can
+>     currently be integrated into the XenProject test lab; it is not a
+>     policy document or a design document.  As such, it should reflect the
+>     situation as it exists at the moment, not how we would like it to be,
+>     or how we think it may be at some point in the future.  At the moment,
+>     only kind of hardware which can actually be integrated is one on which
+>     Debian will boot; so this is listed as a criterion.  There's no point
+>     buying hardware which only boots on the XenProject Linux tree until
+>     osstest can actually boot such hardware.
+>     
+>     It also includes pointers for how to change the situation.  If and
+>     when the situation changes, we can change the document.
+
+It looks like this thread wasn't the right one to raise my concerns
+about embedded testing in OSSTests. If this doc is just describing what
+the situation is today, then, of course, Ian should go ahead and commit
+it as is. He knows best what the situation is like.
+
+FYI I have been talking with Ian about sending Xilinx MPSoC boards to
+the COLO for OSSTests usage for a while now. Ian wrote that he would
+send "a checklist for OSSTests hardware". When I saw this email I
+thought that this was it, and I interpreted it as requirements.
+
+
+> I agree with George and Ian. The document describes what is possible now. Part of the rationale for this document, is to enable Ian to off-load more responsibility related to adding machines to OSSTEST to Credativ (from procurement to putting machines into service). This will free up some of Ian's time to focus on development work. The project pays for the service by Credativ by the hour: to manage costs we need to ensure that we don't blow the allocated hours budget (which already happened once this year). Anything which does not work with OSSTEST out-of-the box or cannot work because there is no OSSTEST support will very quickly burn through the project's support budget. Thus, we need to define boundaries to avoid running up costs for tickets in the order of several thousands of USD.
+> 
+> If we want to increase Arm testing, the necessary functionality has to be implemented in OSSTEST. I don’t think you can expect Ian to implement such functionality in OSSTEST, given all the other work which is already on his plate: although I believe Ian stated several times that he would help someone else to do this.
+ 
+Unfortunately, looking at my schedule, I am unable to provide help on
+this front in the foreseeable feature :-(
+--8323329-1376700852-1541089755=:7220
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1376700852-1541089755=:7220--
