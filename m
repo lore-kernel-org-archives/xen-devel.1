@@ -1,24 +1,21 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [OSSTEST PATCH] README.hardware-acquisition
-Date: Thu, 1 Nov 2018 10:50:38 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1811010926550.7220@sstabellini-ThinkPad-X260>
-References: <20181030161326.17879-1-ian.jackson@eu.citrix.com>
- <CAFLBxZabx3rG1t8C+6p-+kojxq1WNOqEXn23GyB+w0OgjDYLiQ@mail.gmail.com>
- <CAFLBxZYyKbw3L0p+a9FbLiHy3icSOTPG+Dndk+L1eZjnxaufaA@mail.gmail.com>
- <alpine.DEB.2.10.1810311138360.7220@sstabellini-ThinkPad-X260>
- <CAFLBxZZtiPxCw8Pz4+3JN81ENjzms+qnQEhHBcbJs9FxEP_QXA@mail.gmail.com>
- <FE9A527C-599E-4644-9F89-D3C51E719F60@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH v2 15/17] xenconsoled: add support for
+ non-pty output
+Date: Thu, 1 Nov 2018 18:54:00 +0100
+Message-ID: <20181101175400.GC1638@mail-itl>
+References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <ffe791977a14b8b3e06d13ac8626a25bf0530a81.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <23515.14664.497790.457717@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1376700852-1541089755=:7220"
+Content-Type: multipart/mixed; boundary="===============6891203966603595945=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=6kmy=nm=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gIH7C-0004kO-CL
- for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:50:42 +0000
-In-Reply-To: <FE9A527C-599E-4644-9F89-D3C51E719F60@citrix.com>
-Content-ID: <alpine.DEB.2.10.1811011039500.7220@sstabellini-ThinkPad-X260>
+ <srs0=7tsl=nm=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gIHAU-0004tg-IP
+ for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:54:06 +0000
+In-Reply-To: <23515.14664.497790.457717@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,78 +24,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, George Dunlap <dunlapg@umich.edu>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@citrix.com>, "infra@xenproject.org" <infra@xenproject.org>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <stefano.stabellini@xilinx.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
 
---8323329-1376700852-1541089755=:7220
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1811011039501.7220@sstabellini-ThinkPad-X260>
-
-On Thu, 1 Nov 2018, Lars Kurth wrote:
-> ﻿On 01/11/2018, 11:30, "George Dunlap" <dunlapg@umich.edu> wrote:
-> 
->     On Wed, Oct 31, 2018 at 6:46 PM Stefano Stabellini
->     <sstabellini@kernel.org> wrote:
->     > > > ---
->     > > > + Baremetal boot from Debian stable or stable-backports:
->     > > >
->     > > > In order to avoid cross-compilation, Osstest must be able to install a
->     > > > bare-metal system on the host itself in order to build Linux and Xen
->     > > > test binaries for that host. At the moment osstest uses Debian for
->     > > > this, and there is no facility in osstest for building custom kernels
->     > > > for this purpose.  As such, a suitable Linux kernel binary which can
->     > > > boot baremetal on the proposed hardware must be available from Debian
->     > > > (at least `stable', or, if that is not possible, `stable-backports').
->     > > > Osstest cannot install using a patched version of Linux, or one built
->     > > > from a particular git branch, or some such.  If the required kernel is
->     > > > not available in Debian, the vendor should ideally work with the
->     > > > Debian project to ensure and validate that Debian stable-backports
->     > > > kernel binaries boot on the proposed hardware.  Alternately, the
->     > > > vendor can work with the community to implement the necessary
->     > > > functionality within osstest to enable it to build custom kernels for
->     > > > build installs, or use alternate distributions which have better
->     > > > baremetal support for the hardware.
->     >
->     > If we want to grow Xen on ARM testing in OSSTest for embedded boards, I
->     > think that requiring Debian kernel support is unrealistic,
->     
->     You keep using the word "requirement" as though it's an active choice
->     that is being made.  This is a checklist for what kind of hardware can
->     currently be integrated into the XenProject test lab; it is not a
->     policy document or a design document.  As such, it should reflect the
->     situation as it exists at the moment, not how we would like it to be,
->     or how we think it may be at some point in the future.  At the moment,
->     only kind of hardware which can actually be integrated is one on which
->     Debian will boot; so this is listed as a criterion.  There's no point
->     buying hardware which only boots on the XenProject Linux tree until
->     osstest can actually boot such hardware.
->     
->     It also includes pointers for how to change the situation.  If and
->     when the situation changes, we can change the document.
-
-It looks like this thread wasn't the right one to raise my concerns
-about embedded testing in OSSTests. If this doc is just describing what
-the situation is today, then, of course, Ian should go ahead and commit
-it as is. He knows best what the situation is like.
-
-FYI I have been talking with Ian about sending Xilinx MPSoC boards to
-the COLO for OSSTests usage for a while now. Ian wrote that he would
-send "a checklist for OSSTests hardware". When I saw this email I
-thought that this was it, and I interpreted it as requirements.
+--===============6891203966603595945==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="+nBD6E3TurpgldQp"
+Content-Disposition: inline
 
 
-> I agree with George and Ian. The document describes what is possible now. Part of the rationale for this document, is to enable Ian to off-load more responsibility related to adding machines to OSSTEST to Credativ (from procurement to putting machines into service). This will free up some of Ian's time to focus on development work. The project pays for the service by Credativ by the hour: to manage costs we need to ensure that we don't blow the allocated hours budget (which already happened once this year). Anything which does not work with OSSTEST out-of-the box or cannot work because there is no OSSTEST support will very quickly burn through the project's support budget. Thus, we need to define boundaries to avoid running up costs for tickets in the order of several thousands of USD.
-> 
-> If we want to increase Arm testing, the necessary functionality has to be implemented in OSSTEST. I don’t think you can expect Ian to implement such functionality in OSSTEST, given all the other work which is already on his plate: although I believe Ian stated several times that he would help someone else to do this.
- 
-Unfortunately, looking at my schedule, I am unable to provide help on
-this front in the foreseeable feature :-(
---8323329-1376700852-1541089755=:7220
+--+nBD6E3TurpgldQp
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Nov 01, 2018 at 05:35:04PM +0000, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("[RFC PATCH v2 15/17] xenconsoled=
+: add support for non-pty output"):
+> > Handle 'output' xenstore entry, as qemu does. Right now support only few
+> > simple options:
+> >  - "pty" (unchanged)
+> >  - "file:path" (overwrite file)
+> >  - "pipe:path" (read-write file/pipe)
+> >  - "null"
+>=20
+> I have always thought the qemu set of console things very awkward to
+> deal with.  pipe, in particular, is very awkward to use because pipes
+> have poor semantics for this.
+
+In fact libxl usage of "pipe" isn't about pipe at all. It's about
+reading from normal file. This rely on a qemu fallback "pipe" handling -
+first it looks for two pipes: path.in and path.out (for in- and
+out-bound data). When it doesn't find them, it fallback to just "path"
+opened for read and write.
+And libxl use that fallback only. With normal file (see below).
+
+> Would it be useful if I implemented a facility for xenconsoled to make
+> an AF_UNIX listening socket for each console it handles ?  People who
+> wanted to talk to the console would connect() to it.
+
+This is meant to be compatible with other console backend(s) - namely
+qemu-xen and qemu-xen-traditional. If xenconsoled backend for N>1
+consoles would behave differently (in a way not supported by qemu one),
+each place would need additional handling for that...
+There are not many places though: "file:" is used to write qemu-dm (in
+stubdomain) state to a file and "pipe:" is used to read it from that
+file.
+
+Note that real pipes are not used here at all. This is just awkward
+naming for "read from this file".
+
+> Multiple connections would be supported a la screen or tmux, although
+> of course for your application you'd use a lock to prevent multiple
+> access.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--+nBD6E3TurpgldQp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvbPbgACgkQ24/THMrX
+1yzdxwf/Y86WtL8L1BbVs3u/KIpDai78UFRCjmPz1Y3mPyinnO3D9QoNLjrdnEG+
+LIDyl0y425yCeTfw3GX8qKi2rr7ajpyzMJHhNPkDxi5EqEb5rkCZytq3aDzcjt0q
+LZ64K2YupjHibHbQqzZG94IyJ1smFCdZIllakfdCc9mEyI7nw2pFAof8cFFJqGDS
+aLzFearAXYjue7V6wrvx9/oxXIfn7N7SNRDuWN7t2HfjsgHw/VXpOhaGYvweUo2w
+KXVNwqhb96ye9/EPN8vRtYD8mRdncRHLjLYrqpO9uk/3kOOijHmhNhaoXLBBFIrB
+sTreFw4WbNq+mKfmiNwtq/CHUT6PJA==
+=bLMl
+-----END PGP SIGNATURE-----
+
+--+nBD6E3TurpgldQp--
+
+
+--===============6891203966603595945==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -108,4 +115,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---8323329-1376700852-1541089755=:7220--
+--===============6891203966603595945==--
