@@ -1,21 +1,20 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [RFC PATCH v2 07/17] libxl: add save/restore
- support for qemu-xen in stubdomain
-Date: Thu, 1 Nov 2018 18:16:23 +0100
-Message-ID: <20181101171623.GC2580@mail-itl>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [RFC PATCH v2 11/17] xenconsoled: add support for
+ consoles using 'state' xenstore entry
+Date: Thu, 1 Nov 2018 17:21:39 +0000
+Message-ID: <23515.13859.675144.207575@mariner.uk.xensource.com>
 References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
- <b13d7decb6d5d3b1d3a3e97348707f2180e46020.1533608042.git-series.marmarek@invisiblethingslab.com>
- <23515.13241.636952.929175@mariner.uk.xensource.com>
+ <ba81fc5252f1f05771995920220daf1e4348bc6e.1533608042.git-series.marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8811542327078776727=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=7tsl=nm=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gIGa6-0000ei-L7
- for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:16:30 +0000
-In-Reply-To: <23515.13241.636952.929175@mariner.uk.xensource.com>
+ <srs0=rvhc=nm=citrix.com=prvs=836b135c8=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1gIGfF-0001VK-27
+ for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:21:49 +0000
+In-Reply-To: <ba81fc5252f1f05771995920220daf1e4348bc6e.1533608042.git-series.marmarek@invisiblethingslab.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,102 +23,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
 Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8811542327078776727==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="uXxzq0nDebZQVNAZ"
-Content-Disposition: inline
-
-
---uXxzq0nDebZQVNAZ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Nov 01, 2018 at 05:11:21PM +0000, Ian Jackson wrote:
-> Marek Marczykowski-G=C3=B3recki writes ("[RFC PATCH v2 07/17] libxl: add =
-save/restore support for qemu-xen in stubdomain"):
-> > Rely on a wrapper script in stubdomain to attach FD 3/4 of qemu to
-> > relevant consoles.
-> ...
-> >      if (state->saved_state) {
-> > -        /* This file descriptor is meant to be used by QEMU */
-> > -        *dm_state_fd =3D open(state->saved_state, O_RDONLY);
-> > -        flexarray_append(dm_args, "-incoming");
-> > -        flexarray_append(dm_args, GCSPRINTF("fd:%d",*dm_state_fd));
-> > +        if (is_stubdom) {
-> > +            /* Linux stubdomain connects specific FD to STUBDOM_CONSOL=
-E_RESTORE
-> > +             */
-> > +            flexarray_append(dm_args, "-incoming");
-> > +            flexarray_append(dm_args, "fd:3");
->=20
-> I think this hardcoded fd is troublesome.  For example, we don't have
-> anywhere to write down the list of hardcoded fds being used like this.
-> I mean, libxl and the Linux qemu stubdom wrapper script are allowed to
-> cooperate, but at least this needs a clear comment in the wrapper
-> script, and a reference here to the in-tree location of the script.
-
-This is exactly what I'm writing about in cover letter. And indeed some
-#define would be helpful here.
-
-> I'm missing the code which is transfers the data from the
-> state->saved_state to the console.  Am I just being dim ?
-
-This is done by existing code by connecting STUBDOM_CONSOLE_RESTORE to
-that file. See libxl_dm.c:spawn_stub_launch_dm.
-
-> > diff --git a/tools/libxl/libxl_dom_suspend.c b/tools/libxl/libxl_dom_su=
-spend.c
-> ...
-> >          /* Save DM state into filename */
-> > +        if (dm_domid) {
-> > +            /* if DM is in stubdomain, instruct it to use console, whi=
-ch is
-> > +             * connected to a file pointed by filename */
-> > +            filename =3D "/proc/self/fd/4";
->=20
-> Same comment (mutatis mutandi).
->=20
-> Ian.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---uXxzq0nDebZQVNAZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvbNOcACgkQ24/THMrX
-1ywgdwf+MRPFpD1v/bY2uohdrAXPD/DlD24yVqcQdFph2UskTA+nSi0HAVRQtc1U
-iAEgStviNKHuy6ilypVBkkj9tT1wcsmSbr8WkT58ZkXrr+hzU10ECU6HBIBvRsvZ
-ueLSFgSRh/uSjeucdehY/IFdbYa/6FsJDpdWzkzCTTgQsODQHLJi8AoKlxzrW6KL
-FgJzf71zRmGxZdrb/P8BkQS9Cl6BEgy4yh+wHvHE4vNfC732YH3l+QrkRb863mrx
-Oyuwg52TQwigXSe3ICPS8CaJh+XwhjnPje/G1Gqa6j4ldkji9gP/KgLYxabQEnCm
-XBnlI3mGGM7bB8frMV/03CTeArttDw==
-=unVO
------END PGP SIGNATURE-----
-
---uXxzq0nDebZQVNAZ--
-
-
---===============8811542327078776727==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8811542327078776727==--
+TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIltSRkMgUEFUQ0ggdjIgMTEvMTdd
+IHhlbmNvbnNvbGVkOiBhZGQgc3VwcG9ydCBmb3IgY29uc29sZXMgdXNpbmcgJ3N0YXRlJyB4ZW5z
+dG9yZSBlbnRyeSIpOgo+IEFkZCBzdXBwb3J0IGZvciBzdGFuZGFyZCB4ZW5idXMgaW5pdGlhbGl6
+YXRpb24gcHJvdG9jb2wgdXNpbmcgJ3N0YXRlJwo+IHhlbnN0b3JlIGVudHJ5LiBJdCB3aWxsIGJl
+IG5lY2Vzc2FyeSBmb3Igc2Vjb25kYXJ5IGNvbnNvbGVzLgo+IEZvciBjb25zb2xlcyBzdXBwb3J0
+aW5nIGl0LCByZWFkICdzdGF0ZScgZW50cnkgb24gdGhlIGZyb250ZW5kIGFuZAo+IHByb2NlZWQg
+YWNjb3JkaW5nbHkgLSBlaXRoZXIgaW5pdCBjb25zb2xlIG9yIGNsb3NlIGl0LiBXaGVuIGNsb3Np
+bmcsCj4gbWFrZSBzdXJlIGFsbCB0aGUgaW4tdHJhbnNpdCBkYXRhIGlzIGZsdXNoZWQgKGJvdGgg
+ZnJvbSBzaGFyZWQgcmluZyBhbmQKPiBmcm9tIGxvY2FsIGJ1ZmZlciksIGlmIHBvc3NpYmxlLiBU
+aGlzIGlzIGVzcGVjaWFsbHkgaW1wb3J0YW50IGZvcgo+IE1pbmlPUy1iYXNlZCBxZW11IHN0dWJk
+b21haW4sIHdoaWNoIGNsb3NlcyBjb25zb2xlIGp1c3QgYWZ0ZXIgd3JpdGluZwo+IGRldmljZSBt
+b2RlbCBzdGF0ZSB0byBpdC4KPiBGb3IgY29uc29sZXMgd2l0aG91dCAnc3RhdGUnIGZpZWxkIGJl
+aGF2aW9yIGlzIHVuY2hhbmdlZCAtIG9uIGFueSB3YXRjaAo+IGV2ZW50IHRyeSB0byBjb25uZWN0
+IGNvbnNvbGUsIGFzIGxvbmcgYXMgZG9tYWluIGlzIGFsaXZlLgoKSSdtIG5vdCBvcHBvc2VkIHRv
+IHRoZSBpbnRyb2R1Y3Rpb24gb2YgdGhpcyBzdGF0ZSBmaWVsZC4gIFRoZSBjb2RlCmxvb2tzIHBs
+YXVzaWJsZS4KCkJ1dDoKCkZpcnN0bHksIHlvdSBoYXZlIHB1dCB0aGUgcHJvdG9jb2wgZGVzY3Jp
+cHRpb24gaW4geW91ciBjb21taXQKbWVzc2FnZSAoYW5kIGl0IHNlZW1zIHJhdGhlciBpbmZvcm1h
+bCkuICBDYW4geW91IHBsZWFzZSBwcm92aWRlCmEgY29tcHJlaGVuc2l2ZSBwcm90b2NvbCBzcGVj
+aWZpY2F0aW9uIGluLXRyZWUgPyAgWW91IG5lZWQgdG8gcGF0Y2gKICAgZG9jcy9taXNjL2NvbnNv
+bGUudHh0CkkgdGhpbmsuCgpJIHNheSBgY29tcHJlaGVuc2l2ZScgYmVjYXVzZSB5b3VyIHRleHQg
+aXMgbm90IHBhcnRpY3VsYXJseSBjbGVhcmx5CmFib3V0IHdobyBpcyBzdXBwb3NlZCB0byBgZmx1
+c2gnIHdoaWNoIGRhdGEgZXhhY3RseSB3aGVuLiAgTm9yIHdoYXQKYGZsdXNoaW5nJyBtZWFucyAo
+ZG9lcyBpdCBldmVyIG1lYW4gZGlzY2FyZGluZz8pCgpTZWNvbmRseTogd2hhdCBhYm91dCBiYWNr
+d2FyZHMgY29tcGF0aWJpbGl0eSA/ICBJIHRoaW5rIHdlIG5lZWQgdG8gYXQKbGVhc3QgdGhpbmsg
+YWJvdXQgdGhlIHBvc3NpYmlsaXR5IHRoYXQgdGhlcmUgYXJlIHNvbWUgZ3Vlc3QgZnJvbnRlbmRz
+Cm91dCB0aGVyZSB3aGljaCBtYXkgbG9vayBmb3IgYSBgc3RhdGUnIG5vZGUgYW5kIGRvIHNvbWV0
+aGluZwp1bmRlc2lyYWJsZSB3aXRoIGl0LiAgSSB0aGluayB0aGlzIHBvc3NpYmlsaXR5IGlzIHJl
+bW90ZSBidXQgaXQgc2hvdWxkCmJlIG1lbnRpb25lZCBpbiB0aGUgY29tbWl0IG1lc3NhZ2UuCgpX
+aGF0IGFib3V0IHRoZSBwb3NzaWJpbGl0eSB0aGF0IG9uZSBvciB0aGUgb3RoZXIgZW5kIG9mIHRo
+ZSBjb25uZWN0aW9uCm1heSBiZSByZXBsYWNlZCBieSBhIGRpZmZlcmVudCBpbXBsZW1lbnRhdGlv
+biwgc28gdGhhdCB0aGUgcGVlcgphcHBlYXJzIHRvIGdhaW4gb3IgbG9zZSBzdXBwb3J0IGZvciBg
+c3RhdGUnID8KCkknbGwgYmUgYWJsZSB0byByZXZpZXcgdGhlIGNvZGUgbW9yZSBlZmZlY3RpdmVs
+eSB3aGVuIHRoZXJlIGlzIGEKZm9ybWFsIHByb3RvY29sIHNwZWMgdG8gY29tcGFyZSBpdCB0by4u
+LgoKSWFuLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
