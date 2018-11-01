@@ -1,20 +1,21 @@
-From: Ian Jackson <ian.jackson@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
 Subject: Re: [RFC PATCH v2 07/17] libxl: add save/restore
  support for qemu-xen in stubdomain
-Date: Thu, 1 Nov 2018 17:11:21 +0000
-Message-ID: <23515.13241.636952.929175@mariner.uk.xensource.com>
+Date: Thu, 1 Nov 2018 18:16:23 +0100
+Message-ID: <20181101171623.GC2580@mail-itl>
 References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
  <b13d7decb6d5d3b1d3a3e97348707f2180e46020.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <23515.13241.636952.929175@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8811542327078776727=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rvhc=nm=citrix.com=prvs=836b135c8=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gIGVd-0000Rx-Lv
- for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:11:53 +0000
-In-Reply-To: <b13d7decb6d5d3b1d3a3e97348707f2180e46020.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <srs0=7tsl=nm=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gIGa6-0000ei-L7
+ for xen-devel@lists.xenproject.org; Thu, 01 Nov 2018 17:16:30 +0000
+In-Reply-To: <23515.13241.636952.929175@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,38 +24,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+To: Ian Jackson <ian.jackson@citrix.com>
 Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIltSRkMgUEFUQ0ggdjIgMDcvMTdd
-IGxpYnhsOiBhZGQgc2F2ZS9yZXN0b3JlIHN1cHBvcnQgZm9yIHFlbXUteGVuIGluIHN0dWJkb21h
-aW4iKToKPiBSZWx5IG9uIGEgd3JhcHBlciBzY3JpcHQgaW4gc3R1YmRvbWFpbiB0byBhdHRhY2gg
-RkQgMy80IG9mIHFlbXUgdG8KPiByZWxldmFudCBjb25zb2xlcy4KLi4uCj4gICAgICBpZiAoc3Rh
-dGUtPnNhdmVkX3N0YXRlKSB7Cj4gLSAgICAgICAgLyogVGhpcyBmaWxlIGRlc2NyaXB0b3IgaXMg
-bWVhbnQgdG8gYmUgdXNlZCBieSBRRU1VICovCj4gLSAgICAgICAgKmRtX3N0YXRlX2ZkID0gb3Bl
-bihzdGF0ZS0+c2F2ZWRfc3RhdGUsIE9fUkRPTkxZKTsKPiAtICAgICAgICBmbGV4YXJyYXlfYXBw
-ZW5kKGRtX2FyZ3MsICItaW5jb21pbmciKTsKPiAtICAgICAgICBmbGV4YXJyYXlfYXBwZW5kKGRt
-X2FyZ3MsIEdDU1BSSU5URigiZmQ6JWQiLCpkbV9zdGF0ZV9mZCkpOwo+ICsgICAgICAgIGlmIChp
-c19zdHViZG9tKSB7Cj4gKyAgICAgICAgICAgIC8qIExpbnV4IHN0dWJkb21haW4gY29ubmVjdHMg
-c3BlY2lmaWMgRkQgdG8gU1RVQkRPTV9DT05TT0xFX1JFU1RPUkUKPiArICAgICAgICAgICAgICov
-Cj4gKyAgICAgICAgICAgIGZsZXhhcnJheV9hcHBlbmQoZG1fYXJncywgIi1pbmNvbWluZyIpOwo+
-ICsgICAgICAgICAgICBmbGV4YXJyYXlfYXBwZW5kKGRtX2FyZ3MsICJmZDozIik7CgpJIHRoaW5r
-IHRoaXMgaGFyZGNvZGVkIGZkIGlzIHRyb3VibGVzb21lLiAgRm9yIGV4YW1wbGUsIHdlIGRvbid0
-IGhhdmUKYW55d2hlcmUgdG8gd3JpdGUgZG93biB0aGUgbGlzdCBvZiBoYXJkY29kZWQgZmRzIGJl
-aW5nIHVzZWQgbGlrZSB0aGlzLgpJIG1lYW4sIGxpYnhsIGFuZCB0aGUgTGludXggcWVtdSBzdHVi
-ZG9tIHdyYXBwZXIgc2NyaXB0IGFyZSBhbGxvd2VkIHRvCmNvb3BlcmF0ZSwgYnV0IGF0IGxlYXN0
-IHRoaXMgbmVlZHMgYSBjbGVhciBjb21tZW50IGluIHRoZSB3cmFwcGVyCnNjcmlwdCwgYW5kIGEg
-cmVmZXJlbmNlIGhlcmUgdG8gdGhlIGluLXRyZWUgbG9jYXRpb24gb2YgdGhlIHNjcmlwdC4KCkkn
-bSBtaXNzaW5nIHRoZSBjb2RlIHdoaWNoIGlzIHRyYW5zZmVycyB0aGUgZGF0YSBmcm9tIHRoZQpz
-dGF0ZS0+c2F2ZWRfc3RhdGUgdG8gdGhlIGNvbnNvbGUuICBBbSBJIGp1c3QgYmVpbmcgZGltID8K
-Cj4gZGlmZiAtLWdpdCBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RvbV9zdXNwZW5kLmMgYi90b29scy9s
-aWJ4bC9saWJ4bF9kb21fc3VzcGVuZC5jCi4uLgo+ICAgICAgICAgIC8qIFNhdmUgRE0gc3RhdGUg
-aW50byBmaWxlbmFtZSAqLwo+ICsgICAgICAgIGlmIChkbV9kb21pZCkgewo+ICsgICAgICAgICAg
-ICAvKiBpZiBETSBpcyBpbiBzdHViZG9tYWluLCBpbnN0cnVjdCBpdCB0byB1c2UgY29uc29sZSwg
-d2hpY2ggaXMKPiArICAgICAgICAgICAgICogY29ubmVjdGVkIHRvIGEgZmlsZSBwb2ludGVkIGJ5
-IGZpbGVuYW1lICovCj4gKyAgICAgICAgICAgIGZpbGVuYW1lID0gIi9wcm9jL3NlbGYvZmQvNCI7
-CgpTYW1lIGNvbW1lbnQgKG11dGF0aXMgbXV0YW5kaSkuCgpJYW4uCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============8811542327078776727==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="uXxzq0nDebZQVNAZ"
+Content-Disposition: inline
+
+
+--uXxzq0nDebZQVNAZ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Nov 01, 2018 at 05:11:21PM +0000, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("[RFC PATCH v2 07/17] libxl: add =
+save/restore support for qemu-xen in stubdomain"):
+> > Rely on a wrapper script in stubdomain to attach FD 3/4 of qemu to
+> > relevant consoles.
+> ...
+> >      if (state->saved_state) {
+> > -        /* This file descriptor is meant to be used by QEMU */
+> > -        *dm_state_fd =3D open(state->saved_state, O_RDONLY);
+> > -        flexarray_append(dm_args, "-incoming");
+> > -        flexarray_append(dm_args, GCSPRINTF("fd:%d",*dm_state_fd));
+> > +        if (is_stubdom) {
+> > +            /* Linux stubdomain connects specific FD to STUBDOM_CONSOL=
+E_RESTORE
+> > +             */
+> > +            flexarray_append(dm_args, "-incoming");
+> > +            flexarray_append(dm_args, "fd:3");
+>=20
+> I think this hardcoded fd is troublesome.  For example, we don't have
+> anywhere to write down the list of hardcoded fds being used like this.
+> I mean, libxl and the Linux qemu stubdom wrapper script are allowed to
+> cooperate, but at least this needs a clear comment in the wrapper
+> script, and a reference here to the in-tree location of the script.
+
+This is exactly what I'm writing about in cover letter. And indeed some
+#define would be helpful here.
+
+> I'm missing the code which is transfers the data from the
+> state->saved_state to the console.  Am I just being dim ?
+
+This is done by existing code by connecting STUBDOM_CONSOLE_RESTORE to
+that file. See libxl_dm.c:spawn_stub_launch_dm.
+
+> > diff --git a/tools/libxl/libxl_dom_suspend.c b/tools/libxl/libxl_dom_su=
+spend.c
+> ...
+> >          /* Save DM state into filename */
+> > +        if (dm_domid) {
+> > +            /* if DM is in stubdomain, instruct it to use console, whi=
+ch is
+> > +             * connected to a file pointed by filename */
+> > +            filename =3D "/proc/self/fd/4";
+>=20
+> Same comment (mutatis mutandi).
+>=20
+> Ian.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--uXxzq0nDebZQVNAZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvbNOcACgkQ24/THMrX
+1ywgdwf+MRPFpD1v/bY2uohdrAXPD/DlD24yVqcQdFph2UskTA+nSi0HAVRQtc1U
+iAEgStviNKHuy6ilypVBkkj9tT1wcsmSbr8WkT58ZkXrr+hzU10ECU6HBIBvRsvZ
+ueLSFgSRh/uSjeucdehY/IFdbYa/6FsJDpdWzkzCTTgQsODQHLJi8AoKlxzrW6KL
+FgJzf71zRmGxZdrb/P8BkQS9Cl6BEgy4yh+wHvHE4vNfC732YH3l+QrkRb863mrx
+Oyuwg52TQwigXSe3ICPS8CaJh+XwhjnPje/G1Gqa6j4ldkji9gP/KgLYxabQEnCm
+XBnlI3mGGM7bB8frMV/03CTeArttDw==
+=unVO
+-----END PGP SIGNATURE-----
+
+--uXxzq0nDebZQVNAZ--
+
+
+--===============8811542327078776727==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8811542327078776727==--
