@@ -1,18 +1,20 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v2] libxl/arm: fix guest type conversion
-Date: Fri, 2 Nov 2018 11:01:07 +0000
-Message-ID: <23516.11891.204976.787950@mariner.uk.xensource.com>
-References: <20181101133316.20788-1-wei.liu2@citrix.com>
+From: Kevin Wolf <kwolf@redhat.com>
+Subject: xen_disk qdevification (was: [PATCH 0/3] Performance
+ improvements for xen_disk v2)
+Date: Fri, 2 Nov 2018 12:04:12 +0100
+Message-ID: <20181102110412.GD7521__31861.2361945727$1541156582$gmane$org@dhcp-200-186.str.redhat.com>
+References: <154115285434.11300.8459925605672823399.stgit@dhcp-3-135.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=vtjf=nn=citrix.com=prvs=837fd0aa5=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gIXCq-0000bs-4l
- for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 11:01:36 +0000
-In-Reply-To: <20181101133316.20788-1-wei.liu2@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=8rrq=nn=redhat.com=kwolf@srs-us1.protection.inumbo.net>)
+ id 1gIXFR-0000jE-DG
+ for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 11:04:17 +0000
+Content-Disposition: inline
+In-Reply-To: <154115285434.11300.8459925605672823399.stgit@dhcp-3-135.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,25 +23,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Tim Smith <tim.smith@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, armbru@redhat.com, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJbUEFUQ0ggdjJdIGxpYnhsL2FybTogZml4IGd1ZXN0IHR5cGUgY29u
-dmVyc2lvbiIpOgo+IENvbW1pdCAzNTk5NzBmZDhiICgidG9vbHMvbGlieGw6IFN3aXRjaCBBcm0g
-Z3Vlc3QgdHlwZSB0byBQVkgiKSBtaXNzZWQKPiBjaGFuZ2luZyB0aGUgdHlwZSBmaWVsZCBpbiBj
-X2luZm8uIFRoaXMgaXNzdWUgZGlkbid0IHN1cmZhY2UgdW50aWwKPiBlZjcyYzkzZGY5IHdoaWNo
-IG1hZGUgY3JlYXRpbmcgUFYgZ3Vlc3Qgb24gQXJtIHVudXNhYmxlLgouLi4KPiArI2lmIGRlZmlu
-ZWQoX19hcm1fXykgfHwgZGVmaW5lZChfX2FhcmNoNjRfXykKPiArICAgIGlmIChjX2luZm8tPnR5
-cGUgPT0gTElCWExfRE9NQUlOX1RZUEVfUFYpIHsKPiArICAgICAgICBMT0coV0FSTiwgIkNvbnZl
-cnRpbmcgUFYgZ3Vlc3QgdG8gUFZILiIpOwo+ICsgICAgICAgIExPRyhXQVJOLCAiQXJtIGd1ZXN0
-IGFyZSBub3cgUFZILiIpOwo+ICsgICAgICAgIExPRyhXQVJOLCAiUGxlYXNlIGZpeCB5b3VyIGNv
-bmZpZ3VyYXRpb24gZmlsZS90b29sc3RhY2suIik7Cj4gKwo+ICsgICAgICAgIGNfaW5mby0+dHlw
-ZSA9IExJQlhMX0RPTUFJTl9UWVBFX1BWSDsKPiArICAgIH0KPiArI2VuZGlmCgpQbGVhc2UsIG5v
-ICNpZmRlZnMgaW4gdGhlIG1haW4gcGFydCBvZiB0aGUgY29kZS4KTWF5YmUgSSBzaG91bGQgaGF2
-ZSB0aGUgTWFrZWZpbGUgdGhyb3cgYSBmaXQgYWJvdXQgdGhpcy4KCkkgdGhpbmsgeW91IG1heSBu
-ZWVkIHRvIGNoYW5nZQogIGxpYnhsX19hcmNoX2RvbWFpbl9idWlsZF9pbmZvX3NldGRlZmF1bHQK
-dG8KICBsaWJ4bF9fYXJjaF9kb21haW5fY3JlYXRlX2luZm9fc2V0ZGVmYXVsdAoKU29ycnksCklh
-bi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+QW0gMDIuMTEuMjAxOCB1bSAxMTowMCBoYXQgVGltIFNtaXRoIGdlc2NocmllYmVuOgo+IEEgc2Vy
+aWVzIG9mIHBlcmZvcm1hbmNlIGltcHJvdmVtZW50cyBmb3IgZGlza3MgdXNpbmcgdGhlIFhlbiBQ
+ViByaW5nLgo+IAo+IFRoZXNlIGhhdmUgaGFkIGZhaXJseSBleHRlbnNpdmUgdGVzdGluZy4KPiAK
+PiBUaGUgYmF0Y2hpbmcgYW5kIGxhdGVuY3kgaW1wcm92ZW1lbnRzIHRvZ2V0aGVyIGJvb3N0IHRo
+ZSB0aHJvdWdocHV0Cj4gb2Ygc21hbGwgcmVhZHMgYW5kIHdyaXRlcyBieSB0d28gdG8gc2l4IHBl
+cmNlbnQgKG1lYXN1cmVkIHVzaW5nIGZpbwo+IGluIHRoZSBndWVzdCkKPiAKPiBBdm9pZGluZyBy
+ZXBlYXRlZCBjYWxscyB0byBwb3NpeF9tZW1hbGlnbigpIHJlZHVjZWQgdGhlIGRpcnR5IGhlYXAK
+PiBmcm9tIDI1TUIgdG8gNU1CIGluIHRoZSBjYXNlIG9mIGEgc2luZ2xlIGRhdGFwYXRoIHByb2Nl
+c3Mgd2hpbGUgYWxzbwo+IGltcHJvdmluZyBwZXJmb3JtYW5jZS4KPiAKPiB2MiByZW1vdmVzIHNv
+bWUgY2hlY2twYXRjaCBjb21wbGFpbnRzIGFuZCBmaXhlcyB0aGUgQ0NzCgpDb21wbGV0ZWx5IHVu
+cmVsYXRlZCwgYnV0IHNpbmNlIHlvdSdyZSB0aGUgZmlyc3QgcGVyc29uIHRvdWNoaW5nCnhlbl9k
+aXNrIGluIGEgd2hpbGUsIHlvdSdyZSBteSB2aWN0aW06CgpBdCBLVk0gRm9ydW0gd2UgZGlzY3Vz
+c2VkIHNlbmRpbmcgYSBwYXRjaCB0byBkZXByZWNhdGUgeGVuX2Rpc2sgYmVjYXVzZQphZnRlciBh
+bGwgdGhvc2UgeWVhcnMsIGl0IHN0aWxsIGhhc24ndCBiZWVuIGNvbnZlcnRlZCB0byBxZGV2LiBN
+YXJrdXMgaXMKY3VycmVudGx5IGZpeGluZyBzb21lIG90aGVyIG5vdCB5ZXQgcWRldmlmaWVkIGJs
+b2NrIGRldmljZSwgYnV0IGFmdGVyCnRoYXQgeGVuX2Rpc2sgd2lsbCBiZSB0aGUgb25seSBvbmUg
+bGVmdC4KCkEgd2hpbGUgYWdvLCBhIGRvd25zdHJlYW0gcGF0Y2ggcmV2aWV3IGZvdW5kIG91dCB0
+aGF0IHRoZXJlIGFyZSBzb21lIFFNUApjb21tYW5kcyB0aGF0IHdvdWxkIGltbWVkaWF0ZWx5IGNy
+YXNoIGlmIGEgeGVuX2Rpc2sgZGV2aWNlIHdlcmUgcHJlc2VudApiZWNhdXNlIG9mIHRoZSBsYWNr
+aW5nIHFkZXZpZmljYXRpb24uIFRoaXMgaXMgbm90IHRoZSBjb2RlIHF1YWxpdHkKc3RhbmRhcmQg
+SSBlbnZpc2lvbiBmb3IgUUVNVS4gSXQncyB0aW1lIGZvciBub24tcWRldiBkZXZpY2VzIHRvIGdv
+LgoKU28gaWYgeW91IGd1eXMgYXJlIHN0aWxsIGludGVyZXN0ZWQgaW4gdGhlIGRldmljZSwgY291
+bGQgc29tZW9uZSBwbGVhc2UKZmluYWxseSBsb29rIGludG8gY29udmVydGluZyBpdD8KCktldmlu
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
