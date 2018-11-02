@@ -1,34 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [OSSTEST PATCH] README.hardware-acquisition [and 1
- more messages] [and 2 more messages] [and 2 more messages]
-Date: Fri, 2 Nov 2018 18:08:51 +0000
-Message-ID: <25ada98c-bd5a-83c2-134a-171293f7f638@arm.com>
-References: <CAFLBxZYyKbw3L0p+a9FbLiHy3icSOTPG+Dndk+L1eZjnxaufaA@mail.gmail.com>
- <alpine.DEB.2.10.1810311138360.7220@sstabellini-ThinkPad-X260>
- <CAFLBxZZtiPxCw8Pz4+3JN81ENjzms+qnQEhHBcbJs9FxEP_QXA@mail.gmail.com>
- <18bf9618-d950-8cfa-1746-e330f3ce0e66@arm.com>
- <alpine.DEB.2.10.1810301528180.22840@sstabellini-ThinkPad-X260>
- <23513.52378.653350.705575@mariner.uk.xensource.com>
- <alpine.DEB.2.10.1810310942530.7220@sstabellini-ThinkPad-X260>
- <23514.62634.413212.853593@mariner.uk.xensource.com>
- <alpine.DEB.2.10.1811011051290.7220@sstabellini-ThinkPad-X260>
- <5F35FB3B-9C4F-467C-8461-5201D0BF5E18@citrix.com>
- <20181102141632.jr4vjefvou5562zd@zion.uk.xensource.com>
- <20181030161326.17879-1-ian.jackson@eu.citrix.com>
- <CAFLBxZabx3rG1t8C+6p-+kojxq1WNOqEXn23GyB+w0OgjDYLiQ@mail.gmail.com>
- <23516.26572.806824.551458@mariner.uk.xensource.com>
- <alpine.DEB.2.10.1811021048170.18518@sstabellini-ThinkPad-X260>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/3] x86emul: raise #GP(0) in VME mode for
+ POPF with TF set in new value
+Date: Fri, 2 Nov 2018 18:14:24 +0000
+Message-ID: <44156271-6b5a-fd35-bb9c-c30a0e158c36@citrix.com>
+References: <5BDC7E5802000078001F75BA@prv1-mh.provo.novell.com>
+ <5BDC7F3002000078001F75CF@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=6ich=nn=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gIdsO-0002o8-2E
- for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 18:08:56 +0000
-In-Reply-To: <alpine.DEB.2.10.1811021048170.18518@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+ <srs0=a587=nn=citrix.com=prvs=837a34217=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gIdyF-0003g2-6r
+ for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 18:14:59 +0000
+In-Reply-To: <5BDC7F3002000078001F75CF@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -37,25 +24,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Ian Jackson <ian.jackson@citrix.com>
-Cc: Artem_Mygaiev@epam.com, Lars Kurth <lars.kurth@citrix.com>, Wei Liu <wei.liu2@citrix.com>, stefanos@xilinx.com, George Dunlap <dunlapg@umich.edu>, xen-devel@lists.xenproject.org, Stefano Stabellini <stefano.stabellini@xilinx.com>, infra@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMi8xMS8yMDE4IDE3OjU2LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gT24gRnJp
-LCAyIE5vdiAyMDE4LCBJYW4gSmFja3NvbiB3cm90ZToKPj4gSWUgdGhlIGJpZ2dlc3Qgd29yayBo
-ZXJlIG9mIGFsbCBraW5kcyBpcyBpcyBnbHVlLiAgQWRkaW5nIG1vcmUKPj4gZW50aXRpZXMgdG8g
-dGhlIHByb2JsZW0gd2lsbCBpbmNyZWFzZSByYXRoZXIgdGhhbiByZWR1Y2UgdGhlIGFtb3VudCBv
-Zgo+PiBnbHVlIGNvZGUgdGhhdCBuZWVkcyB0byBiZSB3cml0dGVuLgo+IAo+IEJhc2ljYWxseSwg
-eW91IGFyZSBzYXlpbmcgdGhhdCBldmVuIGlmIGhhZCBhIHdlbGwgbWFpbnRhaW5lZCBkZWIKPiBy
-ZXBvc2l0b3J5IG9mIGtlcm5lbCBwYWNrYWdlcyBmb3IgT1NTVGVzdCB0byB1c2UsIGRvZXNuJ3Qg
-bWF0dGVyIGhvdyB3ZQo+IGFjaGlldmUgdGhpcyBnb2FsLCBpdCB3b3VsZCBzdGlsbCByZXF1aXJl
-IGEgbm9uIHRyaXZpYWwgYW1vdW50IG9mIHdvcmsKPiB0byBkbyB0aGUgaW50ZWdyYXRpb24gd2l0
-aCBPU1NUZXN0LgoKVGhpcyBpcyBub3QgaG93IEkgdW5kZXJzdG9vZCB0aGUgdGhyZWFkLiBJIGJl
-bGlldmUgdGhpcyB3YXMgcmVsYXRlZCB0byB1c2UgYW4gCmV4dGVybmFsIENJIGxvb3AuCgpJbiBv
-dXIgY2FzZSwgb25jZSB3ZSBoYXZlIGEgZGViIHBhY2thZ2UuIFRoZW4gdGhpcyBpcyBub3QgbXVj
-aCBkaWZmZXJlbnQgdGhhbiAKdXNpbmcgYSBiYWNrcG9ydCBrZXJuZWwuIFdlIGFscmVhZHkgaGF2
-ZSBzdWNoIHN1cHBvcnQgaW4gT3NzdGVzdCwgc28gaXQgc2hvdWxkIApub3QgYmUgdG9vIGRpZmZp
-Y3VsdCB0byBhZGFwdCBpdCBmb3IgYSBkaWZmZXJlbnQgcmVwby4KCkNoZWVycywKCi0tIApKdWxp
-ZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDIvMTEvMTggMTY6NDUsIEphbiBCZXVsaWNoIHdyb3RlOgo+IFRoaXMgaXMgYSBjaGVjayBl
+eHBsaWNpdGx5IGxpc3RlZCBieSB0aGUgaW5zdHJ1Y3Rpb24gcGFnZSBpbiB0aGUgU0RNLgo+Cj4g
+U2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSG1tIC0gbG9v
+a2luZyBhdCB0aGUgbGlzdGluZywgSSB0aGluayB3ZSd2ZSBnb3QgYW4gSU9QTCBtaXNtYXRjaC7C
+oCBUaGlzCmJlaGF2aW91ciwgYXMgd2VsbCBhcyB0aGUgVklQIGFkanVzdG1lbnQgaW4gY29udGV4
+dCwgb25seSBhcHBseSBhdCBJT1BMIDwgMy4KCn5BbmRyZXcKCj4KPiAtLS0gYS94ZW4vYXJjaC94
+ODYveDg2X2VtdWxhdGUveDg2X2VtdWxhdGUuYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni94ODZfZW11
+bGF0ZS94ODZfZW11bGF0ZS5jCj4gQEAgLTQwNDksNiArNDA0OSw3IEBAIHg4Nl9lbXVsYXRlKAo+
+ICAgICAgICAgICAgICBkc3QudmFsID0gKHVpbnQxNl90KWRzdC52YWwgfCAoX3JlZ3MuZWZsYWdz
+ICYgMHhmZmZmMDAwMHUpOwo+ICAgICAgICAgICAgICBpZiAoIGNyNCAmIFg4Nl9DUjRfVk1FICkK
+PiAgICAgICAgICAgICAgewo+ICsgICAgICAgICAgICAgICAgZ2VuZXJhdGVfZXhjZXB0aW9uX2lm
+KGRzdC52YWwgJiBYODZfRUZMQUdTX1RGLCBFWENfR1AsIDApOwo+ICAgICAgICAgICAgICAgICAg
+aWYgKCBkc3QudmFsICYgWDg2X0VGTEFHU19JRiApCj4gICAgICAgICAgICAgICAgICB7Cj4gICAg
+ICAgICAgICAgICAgICAgICAgZ2VuZXJhdGVfZXhjZXB0aW9uX2lmKF9yZWdzLmVmbGFncyAmIFg4
+Nl9FRkxBR1NfVklQLAo+Cj4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
