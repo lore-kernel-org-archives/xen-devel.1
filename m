@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [PATCH 1/8] tools/libvchan: Initialise xs_transaction_t
- to XBT_NULL, not NULL
-Date: Fri, 2 Nov 2018 17:01:06 +0000
-Message-ID: <20181102170113.11646-2-ian.jackson@eu.citrix.com>
+Subject: [PATCH 2/8] tools/xenstore: Document that xs_close(0)
+ is OK.
+Date: Fri, 2 Nov 2018 17:01:07 +0000
+Message-ID: <20181102170113.11646-3-ian.jackson@eu.citrix.com>
 References: <23516.33005.649128.145551@mariner.uk.xensource.com>
  <20181102170113.11646-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
@@ -13,8 +13,8 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=vtjf=nn=citrix.com=prvs=837fd0aa5=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gIcpW-0004ZA-G7
- for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 17:01:54 +0000
+ id 1gIcpX-0004ZG-CR
+ for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 17:01:55 +0000
 In-Reply-To: <20181102170113.11646-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,17 +28,18 @@ To: xen-devel@lists.xenproject.org
 Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBpcyBhbiBpbnRlZ2VyIHR5cGUsIG5vdCBhIHBvaW50ZXIuCgpTaWduZWQtb2ZmLWJ5OiBJ
-YW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KLS0tCiB0b29scy9saWJ2Y2hh
-bi9pbml0LmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
-b24oLSkKCmRpZmYgLS1naXQgYS90b29scy9saWJ2Y2hhbi9pbml0LmMgYi90b29scy9saWJ2Y2hh
-bi9pbml0LmMKaW5kZXggYmE1YTZlYjI5ZS4uMTgwODMzZGMyZiAxMDA2NDQKLS0tIGEvdG9vbHMv
-bGlidmNoYW4vaW5pdC5jCisrKyBiL3Rvb2xzL2xpYnZjaGFuL2luaXQuYwpAQCAtMjUwLDcgKzI1
-MCw3IEBAIHN0YXRpYyBpbnQgaW5pdF94c19zcnYoc3RydWN0IGxpYnhlbnZjaGFuICpjdHJsLCBp
-bnQgZG9tYWluLCBjb25zdCBjaGFyKiB4c19iYXNlCiAJY2hhciBidWZbNjRdOwogCWNoYXIgcmVm
-WzE2XTsKIAljaGFyKiBkb21pZF9zdHIgPSBOVUxMOwotCXhzX3RyYW5zYWN0aW9uX3QgeHNfdHJh
-bnMgPSBOVUxMOworCXhzX3RyYW5zYWN0aW9uX3QgeHNfdHJhbnMgPSBYQlRfTlVMTDsKIAl4cyA9
-IHhzX2RvbWFpbl9vcGVuKCk7CiAJaWYgKCF4cykKIAkJZ290byBmYWlsOwotLSAKMi4xMS4wCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+U2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0t
+LQogdG9vbHMveGVuc3RvcmUvaW5jbHVkZS94ZW5zdG9yZS5oIHwgMiArLQogMSBmaWxlIGNoYW5n
+ZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvdG9vbHMveGVu
+c3RvcmUvaW5jbHVkZS94ZW5zdG9yZS5oIGIvdG9vbHMveGVuc3RvcmUvaW5jbHVkZS94ZW5zdG9y
+ZS5oCmluZGV4IDA2NGI2MmM0NTUuLjg4OWRjMjM4NjMgMTAwNjQ0Ci0tLSBhL3Rvb2xzL3hlbnN0
+b3JlL2luY2x1ZGUveGVuc3RvcmUuaAorKysgYi90b29scy94ZW5zdG9yZS9pbmNsdWRlL3hlbnN0
+b3JlLmgKQEAgLTc3LDcgKzc3LDcgQEAgdHlwZWRlZiB1aW50MzJfdCB4c190cmFuc2FjdGlvbl90
+Owogc3RydWN0IHhzX2hhbmRsZSAqeHNfb3Blbih1bnNpZ25lZCBsb25nIGZsYWdzKTsKIAogLyog
+Q2xvc2UgdGhlIGNvbm5lY3Rpb24gdG8gdGhlIHhzIGRhZW1vbi4gKi8KLXZvaWQgeHNfY2xvc2Uo
+c3RydWN0IHhzX2hhbmRsZSAqeHNoKTsKK3ZvaWQgeHNfY2xvc2Uoc3RydWN0IHhzX2hhbmRsZSAq
+eHNoIC8qIE5VTEwgb2sgKi8pOwogCiAvKiBDb25uZWN0IHRvIHRoZSB4cyBkYWVtb24uCiAgKiBS
+ZXR1cm5zIGEgaGFuZGxlIG9yIE5VTEwuCi0tIAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
