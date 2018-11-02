@@ -1,21 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v3] devicetree, xen: add xen,
- shared-memory binding
-Date: Fri, 2 Nov 2018 15:31:26 +0000
-Message-ID: <db72b927-f7c3-e1ed-9c7a-efc54c9f0e2f@arm.com>
-References: <1540343921-7487-1-git-send-email-sstabellini@kernel.org>
- <0951e2a3-78a1-e849-39e9-5980c9c87277@arm.com>
- <alpine.DEB.2.10.1811011328540.7220@sstabellini-ThinkPad-X260>
- <0fae152c-c301-11ae-86f6-60d77e83519b@arm.com>
- <alpine.DEB.2.10.1811011338250.7220@sstabellini-ThinkPad-X260>
- <2cef49bf-2928-5966-fd97-7aef5b563699@arm.com>
- <23516.28048.425922.477559@mariner.uk.xensource.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] xen/grant-table: Fix incorrect
+ gnttab_dma_free_pages() pr_debug message
+Date: Fri, 2 Nov 2018 16:35:11 +0100
+Message-ID: <dab89b7a-f13d-39b1-b25e-a2e7325fa003__2574.22357467494$1541172842$gmane$org@suse.com>
+References: <1541167463-32024-1-git-send-email-Liam.Merwick@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <23516.28048.425922.477559@mariner.uk.xensource.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=gwqu=nn=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1gIbTf-0002a2-Q8
+ for xen-devel@lists.xenproject.org; Fri, 02 Nov 2018 15:35:15 +0000
+In-Reply-To: <1541167463-32024-1-git-send-email-Liam.Merwick@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,22 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: mark.rutland@arm.com, devicetree@vger.kernel.org, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, stefanos@xilinx.com, xen-devel@lists.xen.org, robh+dt@kernel.org
+To: Liam Merwick <Liam.Merwick@oracle.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Cc: boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSWFuLAoKT24gMDIvMTEvMjAxOCAxNTozMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gSnVsaWVu
-IEdyYWxsIHdyaXRlcyAoIlJlOiBbUEFUQ0ggdjNdIGRldmljZXRyZWUseGVuOiBhZGQgeGVuLHNo
-YXJlZC1tZW1vcnkgYmluZGluZyIpOgo+PiBPbiAxMS8xLzE4IDg6NDAgUE0sIFN0ZWZhbm8gU3Rh
-YmVsbGluaSB3cm90ZToKPj4+ICAgRnJvbSB0aGUgRFQgYmluZGluZyBwb2ludCBvZiB2aWV3LCBp
-dCB3b3VsZCBiZSBmaW5lLiBDb25jZXB0dWFsbHkgaXQKPj4+IHdvdWxkIGFsc28gYmUgZmluZS4g
-SG93ZXZlciwgSSBkb3VidCB0aGF0IHRoZSBjdXJyZW50IGxpYnhsCj4+PiBpbXBsZW1lbnRhdGlv
-biB3b3VsZCB3b3JrIHdpdGggbXVsdGlwbGUgbWFwcGluZ3MuCj4+Cj4+IEkgY2FuJ3Qgc2VlIHdo
-eSBpdCB3b3VsZCBub3Qgd29yay4gSSB0aGluayB3ZSBkZXNpZ25lZCB0aGUgcmVmY291bnQgZm9y
-Cj4+IHRoaXMgcHVycG9zZS4KPiAKPiBsaWJ4bCBkb2Vzbid0IHNlZSB0aGUgYWN0dWFsIG1hcHBp
-bmdzLCBkb2VzIGl0ID8gIEl0IGp1c3QgcHV0cyB0aGluZ3MKPiBpbnRvIHRoZSBwMm0uCgpZZXMu
-IFRoYXQncyB3aHkgSSB0aGluayBtdWx0aXBsZSBtYXBwaW5ncyBpcyBhY3R1YWxseSBwb3NzaWJs
-ZS4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDIvMTEvMjAxOCAxNTowNCwgTGlhbSBNZXJ3aWNrIHdyb3RlOgo+IElmIGEgY2FsbCB0byB4
+ZW5tZW1fcmVzZXJ2YXRpb25faW5jcmVhc2UoKSBpbiBnbnR0YWJfZG1hX2ZyZWVfcGFnZXMoKQo+
+IGZhaWxzIGl0IHRyaWdnZXJzIGEgbWVzc2FnZSAiRmFpbGVkIHRvIGRlY3JlYXNlIHJlc2VydmF0
+aW9uLi4uIiB3aGljaAo+IHNob3VsZCBiZSAiRmFpbGVkIHRvIGluY3JlYXNlIHJlc2VydmF0aW9u
+Li4uIgo+IAo+IEZpeGVzOiA5YmRjNzMwNGY1MzYgKCd4ZW4vZ3JhbnQtdGFibGU6IEFsbG93IGFs
+bG9jYXRpbmcgYnVmZmVycyBzdWl0YWJsZSBmb3IgRE1BJykKPiBSZXBvcnRlZC1ieTogUm9zcyBQ
+aGlsaXBzb24gPHJvc3MucGhpbGlwc29uQG9yYWNsZS5jb20+Cj4gU2lnbmVkLW9mZi1ieTogTGlh
+bSBNZXJ3aWNrIDxsaWFtLm1lcndpY2tAb3JhY2xlLmNvbT4KPiBSZXZpZXdlZC1ieTogTWFyayBL
+YW5kYSA8bWFyay5rYW5kYUBvcmFjbGUuY29tPgoKUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3Mg
+PGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
