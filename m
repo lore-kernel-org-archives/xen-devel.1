@@ -1,17 +1,17 @@
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Subject: [distros-debian-stretch test] 75566: tolerable FAIL
-Date: Sat, 3 Nov 2018 15:32:42 +0000
-Message-ID: <osstest-75566-mainreport@xen.org>
+From: Rian Quinn <quinnr@ainfosec.com>
+Subject: x86 Community Call: Nov 14 - 15:00 - 16:00 UTC - Call
+ for Agenda Items
+Date: Sat, 3 Nov 2018 15:41:44 +0000
+Message-ID: <16d8698098c24db8a68342f6af26f93a@ainfosec.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4493463245708674685=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rubx=no=xenproject.org=prvs=83810d20f=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1gIxuq-0007CT-4k
- for xen-devel@lists.xenproject.org; Sat, 03 Nov 2018 15:32:48 +0000
+ <srs0=hjyu=no=ainfosec.com=quinnr@srs-us1.protection.inumbo.net>)
+ id 1gIy3X-00086K-57
+ for xen-devel@lists.xenproject.org; Sat, 03 Nov 2018 15:41:47 +0000
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,41 +20,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>, "tamas.k.lengyel@gmail.com" <tamas.k.lengyel@gmail.com>, "intel-xen@intel.com" <intel-xen@intel.com>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Christopher Clark <christopher.w.clark@gmail.com>, "persaur@gmail.com" <persaur@gmail.com>, "jgross@suse.com" <jgross@suse.com>, "john.ji@intel.com" <john.ji@intel.com>, "Cc: dgar.iglesias@xilinx.com" <dgar.iglesias@xilinx.com>, "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Grall <julien.grall@arm.com>, "Stewart.Hildebrand@dornerworks.com" <Stewart.Hildebrand@dornerworks.com>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, volodymyr_babchuk@epam
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDc1NTY2IGRpc3Ryb3MtZGViaWFuLXN0cmV0Y2ggcmVhbCBbcmVhbF0KaHR0cDovL29z
-c3Rlc3QueGVuc291cmNlLmNvbS9vc3N0ZXN0L2xvZ3MvNzU1NjYvCgpGYWlsdXJlcyA6LS8gYnV0
-IG5vIHJlZ3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5v
-dCBibG9ja2luZzoKIHRlc3QtYXJtaGYtYXJtaGYtYXJtaGYtc3RyZXRjaC1uZXRib290LXB5Z3J1
-YiAxMCBkZWJpYW4tZGktaW5zdGFsbCBmYWlsIGJsb2NrZWQgaW4gNzU1MTgKIHRlc3QtYW1kNjQt
-aTM4Ni1hbWQ2NC1zdHJldGNoLW5ldGJvb3QtcHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZh
-aWwgYmxvY2tlZCBpbiA3NTUxOAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1zdHJldGNoLW5ldGJv
-b3QtcHZncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgYmxvY2tlZCBpbiA3NTUxOAogdGVz
-dC1hbWQ2NC1pMzg2LWkzODYtc3RyZXRjaC1uZXRib290LXB2Z3J1YiAxMCBkZWJpYW4tZGktaW5z
-dGFsbCBmYWlsIGJsb2NrZWQgaW4gNzU1MTgKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1zdHJldGNo
-LW5ldGJvb3QtcHlncnViIDEwIGRlYmlhbi1kaS1pbnN0YWxsIGZhaWwgYmxvY2tlZCBpbiA3NTUx
-OAoKYmFzZWxpbmUgdmVyc2lvbjoKIGZsaWdodCAgICAgICAgICAgICAgIDc1NTE4Cgpqb2JzOgog
-YnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZv
-cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1zdHJldGNo
-LW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-aTM4Ni1zdHJldGNoLW5ldGJvb3QtcHZncnViICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1hbWQ2NC1zdHJldGNoLW5ldGJvb3QtcHlncnViICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi1hcm1oZi1zdHJldGNoLW5ldGJvb3QtcHlncnVi
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtc3RyZXRjaC1u
-ZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZs
-aWdodCBvbiBvc3N0ZXN0LnhzLmNpdHJpdGUubmV0CmxvZ3M6IC9ob21lL29zc3Rlc3QvbG9ncwpp
-bWFnZXM6IC9ob21lL29zc3Rlc3QvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJl
-IGF2YWlsYWJsZSBhdAogICAgaHR0cDovL29zc3Rlc3QueGVuc291cmNlLmNvbS9vc3N0ZXN0L2xv
-Z3MKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMu
-eGVuc291cmNlLmNvbS9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoIG5vdCBh
-cHBsaWNhYmxlLgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============4493463245708674685==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_16d8698098c24db8a68342f6af26f93aainfoseccom_"
+
+--_000_16d8698098c24db8a68342f6af26f93aainfoseccom_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+All,
+
+
+I added an action item to the list for the November call to discuss the wor=
+k we are doing at AIS with respect to documenting every resource and regist=
+er that a Xen PVH guest touches using the Bareflank hypervisor. We are taki=
+ng a whitelist approach which means to get a Xen PVH guest to work we have =
+to explicitly grant access to every CPUID, MSR, port, memory address, and p=
+rivileged instruction and we are documenting these requirements as we go. T=
+he goal of the discussion is to introduce our work and get feedback and int=
+erest in the results from the rest of the group.
+
+
+Thanks,
+
+
+Rian Quinn, PhD
+Chief Technology Officer
+
+Assured Information Security
+153 Brooks Road
+Rome, NY 13441
+315-336-3306
+Cell: 720-607-1719
+quinnr@ainfosec.com<mailto:bushingere@ainfosec.com>
+
+--_000_16d8698098c24db8a68342f6af26f93aainfoseccom_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size:12pt; color=
+:rgb(0,0,0); font-family:Calibri,Helvetica,sans-serif,Helvetica,EmojiFont,&=
+quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,NotoColorEmoji,&quo=
+t;Segoe UI Symbol&quot;,&quot;Android Emoji&quot;,EmojiSymbols">
+<p>All,</p>
+<p><br>
+</p>
+<p>I added an action item to the list for the November call to discuss the =
+work we are doing at AIS with respect to documenting every resource and reg=
+ister that a Xen PVH guest touches using the Bareflank hypervisor. We are t=
+aking a whitelist approach which
+ means to get a Xen PVH guest to work we have to explicitly grant access to=
+ every CPUID, MSR, port, memory address, and privileged instruction and we =
+are documenting these requirements as we go. The goal of the discussion is =
+to introduce our work and get feedback
+ and interest in the results from the rest of the group.&nbsp;</p>
+<p><br>
+</p>
+<p>Thanks,</p>
+<p><br>
+</p>
+<div id=3D"Signature">
+<div id=3D"divtagdefaultwrapper" dir=3D"ltr" style=3D"font-size:12pt; color=
+:rgb(0,0,0); font-family:Calibri,Arial,Helvetica,sans-serif,Helvetica,Emoji=
+Font,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;,NotoColorEmoj=
+i,&quot;Segoe UI Symbol&quot;,&quot;Android Emoji&quot;,EmojiSymbols">
+<p><b></b></p>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:10pt"><b>Rian Quinn, PhD</b></span></font></span></font></b><br>
+</div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt"><i>Chief Technology Officer</i></span></font></span></font></b></di=
+v>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt"><i>&nbsp;</i></span></font></span></font></b></div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt">Assured Information Security</span></font></span></font></b></div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt"><span tabindex=3D"0" class=3D"contextualExtensionHighlight ms-font-=
+color-themePrimary ms-border-color-themePrimary ident_299_329">153
+ Brooks Road</span></span></font></span></font></b></div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt"><span tabindex=3D"0" class=3D"contextualExtensionHighlight ms-font-=
+color-themePrimary ms-border-color-themePrimary ident_299_329">Rome,
+ NY 13441</span></span></font></span></font></b></div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt">315-336-3306</span></font></span></font></b></div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2" color=3D"#212121"><span style=3D"font-si=
+ze:9pt">Cell: 720-607-1719</span></font></span></font></b></div>
+<div style=3D"color:rgb(33,33,33); font-size:15px; margin:0px"><b><font fac=
+e=3D"Calibri,sans-serif" size=3D"2"><span style=3D"font-size:11pt"><font fa=
+ce=3D"Arial,sans-serif" size=3D"2"><span style=3D"font-size:9pt"><a href=3D=
+"mailto:bushingere@ainfosec.com" target=3D"_blank" id=3D"LPNoLP">quinnr@ain=
+fosec.com</a></span></font></span></font></b></div>
+<p><span style=3D"font-size:11pt"></span></p>
+<p></p>
+</div>
+</div>
+</div>
+</body>
+</html>
+
+--_000_16d8698098c24db8a68342f6af26f93aainfoseccom_--
+
+
+--===============4493463245708674685==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4493463245708674685==--
