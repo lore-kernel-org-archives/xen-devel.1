@@ -1,16 +1,10 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 129406: all pass - PUSHED
-Date: Sun, 04 Nov 2018 10:04:42 +0000
-Message-ID: <osstest-129406-mainreport@xen.org>
+From: Rishi <2rushikeshj@gmail.com>
+Subject: Dom0 kernel 4.14 with SMP randomly crashing
+Date: Sun, 4 Nov 2018 18:37:36 +0530
+Message-ID: <CAO9XypUsz-e3vmX-n5eSMz7rG2aZpDG1h03CMRAAT2X=TpZNNw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4940604271605558723=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=05uz=np=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gJFGx-000166-0p
- for xen-devel@lists.xenproject.org; Sun, 04 Nov 2018 10:04:47 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,43 +13,189 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyOTQwNiB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
-Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEyOTQwNi8KClBlcmZlY3Qg
-Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
-YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDJjZjExMzg5MWEzOGNj
-MDU0MzRiYzk4NzZmZmMxMDdhOTkwODg3YmUKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
-ICAgICAgICAgIDhlNzUxYWM1OWNmZDExNDNkMDk1YzQ1OTI3YmExYmVjMGQ0NDFlZTQKCkxhc3Qg
-dGVzdCBvZiBiYXNpcyAgIDEyOTIyOCAgMjAxOC0xMC0zMSAwOToxODo1MSBaICAgIDQgZGF5cwpU
-ZXN0aW5nIHNhbWUgc2luY2UgICAxMjk0MDYgIDIwMTgtMTEtMDQgMDk6MTg6NDQgWiAgICAwIGRh
-eXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
-dGVzdDoKICBBbGV4YW5kcnUgSXNhaWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4KICBBbmRy
-ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEJyaWFuIFdvb2RzIDxicmlh
-bi53b29kc0BhbWQuY29tPgogIENocmlzdGlhbiBMaW5kaWcgPGNocmlzdGlhbi5saW5kaWdAY2l0
-cml4LmNvbT4KICBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CiAgSWFu
-IEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CiAgSmFuIEJldWxpY2ggPGpiZXVs
-aWNoQHN1c2UuY29tPgogIEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgogIE1hcmVr
-IE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4K
-ICBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgogIFJhenZhbiBDb2pvY2Fy
-dSA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KICBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5w
-YXVAY2l0cml4LmNvbT4KICBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKam9iczoKIGNv
-dmVyaXR5LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVu
-cHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFn
-ZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8v
-bG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9m
-IHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRw
-Oi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUu
-ZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
-ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4g
-YmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5n
-aXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hv
-bWUveGVuL2dpdC94ZW4uZ2l0CiAgIDhlNzUxYWM1OWMuLjJjZjExMzg5MWEgIDJjZjExMzg5MWEz
-OGNjMDU0MzRiYzk4NzZmZmMxMDdhOTkwODg3YmUgLT4gY292ZXJpdHktdGVzdGVkL3Ntb2tlCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============4940604271605558723==
+Content-Type: multipart/alternative; boundary="00000000000084d2540579d6748a"
+
+--00000000000084d2540579d6748a
+Content-Type: text/plain; charset="UTF-8"
+
+I've built a dom0 kernel 4.14 with SMP support. The dom0 kernel crashes
+when I'm downloading a large file on host. It does not crash if I have
+nosmp boot option on xen command line.
+
+my .config SMP options are
+
+[root@f6029920339a wip-kernel-4.14.78]# grep SMP .config
+
+CONFIG_X86_64_*SMP*=y
+
+CONFIG_GENERIC_*SMP*_IDLE_THREAD=y
+
+CONFIG_*SMP*=y
+
+CONFIG_XEN_PV_*SMP*=y
+
+CONFIG_XEN_PVHVM_*SMP*=y
+
+# CONFIG_MAX*SMP* is not set
+
+CONFIG_PM_SLEEP_*SMP*=y
+
+CONFIG_SCSI_SAS_HOST_*SMP*=y
+
+
+While comparing it to earlier kernels the options
+
+CONFIG_XEN_PV_*SMP*=y
+
+CONFIG_XEN_PVHVM_*SMP*=y
+
+
+are newly introduced. Does xen need any update to better handle them?
+
+My xen versions is : 4.7.6
+
+--00000000000084d2540579d6748a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>I&#39;ve built a dom0 kernel 4.14 with SMP support. T=
+he dom0 kernel crashes when I&#39;m downloading a large file on host. It do=
+es not crash if I have nosmp boot option on xen command line.<br></div><div=
+><br></div><div>my .config SMP options are</div><div>
+
+
+
+
+
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">[root@f6029920339a wip-kernel-4=
+.14.78]# grep SMP .config</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_X86_64_</span><span clas=
+s=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color:rg=
+b(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-varia=
+nt-ligatures:no-common-ligatures">=3Dy</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_GENERIC_</span><span cla=
+ss=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color:r=
+gb(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-vari=
+ant-ligatures:no-common-ligatures">_IDLE_THREAD=3Dy</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_</span><span class=3D"gm=
+ail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color:rgb(202,5=
+1,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-variant-liga=
+tures:no-common-ligatures">=3Dy</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_XEN_PV_</span><span clas=
+s=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color:rg=
+b(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-varia=
+nt-ligatures:no-common-ligatures">=3Dy</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_XEN_PVHVM_</span><span c=
+lass=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color=
+:rgb(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-va=
+riant-ligatures:no-common-ligatures">=3Dy</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures"># CONFIG_MAX</span><span class=
+=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color:rgb=
+(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-varian=
+t-ligatures:no-common-ligatures"> is not set</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_PM_SLEEP_</span><span cl=
+ass=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;color:=
+rgb(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"font-var=
+iant-ligatures:no-common-ligatures">=3Dy</span></p>
+<p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:no=
+rmal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"=
+font-variant-ligatures:no-common-ligatures">CONFIG_SCSI_SAS_HOST_</span><sp=
+an class=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;c=
+olor:rgb(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"fon=
+t-variant-ligatures:no-common-ligatures">=3Dy</span></p><p class=3D"gmail-p=
+1" style=3D"margin:0px;font-variant-numeric:normal;font-variant-east-asian:=
+normal;font-stretch:normal;font-size:11px;line-height:normal;font-family:Me=
+nlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"font-variant-ligatu=
+res:no-common-ligatures"><br></span></p><p class=3D"gmail-p1" style=3D"marg=
+in:0px;font-variant-numeric:normal;font-variant-east-asian:normal;font-stre=
+tch:normal;font-size:11px;line-height:normal;font-family:Menlo;color:rgb(0,=
+0,0)"><span style=3D"color:rgb(34,34,34);font-family:Arial,Helvetica,sans-s=
+erif;font-size:small">While comparing it to earlier kernels the options=C2=
+=A0</span><br></p><p class=3D"gmail-p1" style=3D"margin:0px;font:11px Menlo=
+;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"font-variant-ligatures=
+:no-common-ligatures">CONFIG_XEN_PV_</span><span class=3D"gmail-s2" style=
+=3D"font-variant-ligatures:no-common-ligatures;color:rgb(202,51,35)"><b>SMP=
+</b></span><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-comm=
+on-ligatures">=3Dy</span></p><p class=3D"gmail-p1" style=3D"margin:0px;font=
+-variant-numeric:normal;font-variant-east-asian:normal;font-stretch:normal;=
+font-size:11px;line-height:normal;font-family:Menlo;color:rgb(0,0,0)">
+
+
+
+
+
+
+</p><p class=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;f=
+ont-variant-east-asian:normal;font-stretch:normal;font-size:11px;line-heigh=
+t:normal;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=
+=3D"font-variant-ligatures:no-common-ligatures">CONFIG_XEN_PVHVM_</span><sp=
+an class=3D"gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;c=
+olor:rgb(202,51,35)"><b>SMP</b></span><span class=3D"gmail-s1" style=3D"fon=
+t-variant-ligatures:no-common-ligatures">=3Dy</span></p><p class=3D"gmail-p=
+1" style=3D"margin:0px;font-variant-numeric:normal;font-variant-east-asian:=
+normal;font-stretch:normal;font-size:11px;line-height:normal;font-family:Me=
+nlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"font-variant-ligatu=
+res:no-common-ligatures"><br></span></p><p class=3D"gmail-p1" style=3D"marg=
+in:0px;font-variant-numeric:normal;font-variant-east-asian:normal;font-stre=
+tch:normal;font-size:11px;line-height:normal;font-family:Menlo;color:rgb(0,=
+0,0)"><span class=3D"gmail-s1" style=3D"font-variant-ligatures:no-common-li=
+gatures"><span style=3D"color:rgb(34,34,34);font-family:Arial,Helvetica,san=
+s-serif;font-size:small;font-variant-ligatures:normal">are newly introduced=
+. Does xen need any update to better handle them?</span><br></span></p><p c=
+lass=3D"gmail-p1" style=3D"margin:0px;font-variant-numeric:normal;font-vari=
+ant-east-asian:normal;font-stretch:normal;font-size:11px;line-height:normal=
+;font-family:Menlo;color:rgb(0,0,0)"><span class=3D"gmail-s1" style=3D"font=
+-variant-ligatures:no-common-ligatures"><span style=3D"color:rgb(34,34,34);=
+font-family:Arial,Helvetica,sans-serif;font-size:small;font-variant-ligatur=
+es:normal">My xen versions is=C2=A0</span></span><span style=3D"font-varian=
+t-ligatures:no-common-ligatures">: 4.7.6</span></p>
+
+
+
+
+
+</div></div>
+
+--00000000000084d2540579d6748a--
+
+
+--===============4940604271605558723==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4940604271605558723==--
