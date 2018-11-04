@@ -1,9 +1,10 @@
 From: Rishi <2rushikeshj@gmail.com>
-Subject: Dom0 kernel 4.14 with SMP randomly crashing
-Date: Sun, 4 Nov 2018 18:37:36 +0530
-Message-ID: <CAO9XypUsz-e3vmX-n5eSMz7rG2aZpDG1h03CMRAAT2X=TpZNNw@mail.gmail.com>
+Subject: Re: Dom0 kernel 4.14 with SMP randomly crashing
+Date: Sun, 4 Nov 2018 19:54:08 +0530
+Message-ID: <CAO9XypUZRphnT24zaopxHDSkHC=-f1=mGT4k5f4nMkTwLrBr1w@mail.gmail.com>
+References: <CAO9XypUsz-e3vmX-n5eSMz7rG2aZpDG1h03CMRAAT2X=TpZNNw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4940604271605558723=="
+Content-Type: multipart/mixed; boundary="===============6484963817594884007=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -16,56 +17,76 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============4940604271605558723==
-Content-Type: multipart/alternative; boundary="00000000000084d2540579d6748a"
+--===============6484963817594884007==
+Content-Type: multipart/alternative; boundary="0000000000003243830579d78658"
 
---00000000000084d2540579d6748a
+--0000000000003243830579d78658
 Content-Type: text/plain; charset="UTF-8"
 
-I've built a dom0 kernel 4.14 with SMP support. The dom0 kernel crashes
-when I'm downloading a large file on host. It does not crash if I have
-nosmp boot option on xen command line.
+Found the references of these in
+https://lists.xenproject.org/archives/html/xen-devel/2017-02/msg03120.html
+proposal to split PV, PVHVM and PVH code in kernel.
 
-my .config SMP options are
+There is no mention of any change or requirement from Xen perspective. Any
+other way to track this problem?
 
-[root@f6029920339a wip-kernel-4.14.78]# grep SMP .config
+On Sun, Nov 4, 2018 at 6:37 PM Rishi <2rushikeshj@gmail.com> wrote:
 
-CONFIG_X86_64_*SMP*=y
+> I've built a dom0 kernel 4.14 with SMP support. The dom0 kernel crashes
+> when I'm downloading a large file on host. It does not crash if I have
+> nosmp boot option on xen command line.
+>
+> my .config SMP options are
+>
+> [root@f6029920339a wip-kernel-4.14.78]# grep SMP .config
+>
+> CONFIG_X86_64_*SMP*=y
+>
+> CONFIG_GENERIC_*SMP*_IDLE_THREAD=y
+>
+> CONFIG_*SMP*=y
+>
+> CONFIG_XEN_PV_*SMP*=y
+>
+> CONFIG_XEN_PVHVM_*SMP*=y
+>
+> # CONFIG_MAX*SMP* is not set
+>
+> CONFIG_PM_SLEEP_*SMP*=y
+>
+> CONFIG_SCSI_SAS_HOST_*SMP*=y
+>
+>
+> While comparing it to earlier kernels the options
+>
+> CONFIG_XEN_PV_*SMP*=y
+>
+> CONFIG_XEN_PVHVM_*SMP*=y
+>
+>
+> are newly introduced. Does xen need any update to better handle them?
+>
+> My xen versions is : 4.7.6
+>
 
-CONFIG_GENERIC_*SMP*_IDLE_THREAD=y
-
-CONFIG_*SMP*=y
-
-CONFIG_XEN_PV_*SMP*=y
-
-CONFIG_XEN_PVHVM_*SMP*=y
-
-# CONFIG_MAX*SMP* is not set
-
-CONFIG_PM_SLEEP_*SMP*=y
-
-CONFIG_SCSI_SAS_HOST_*SMP*=y
-
-
-While comparing it to earlier kernels the options
-
-CONFIG_XEN_PV_*SMP*=y
-
-CONFIG_XEN_PVHVM_*SMP*=y
-
-
-are newly introduced. Does xen need any update to better handle them?
-
-My xen versions is : 4.7.6
-
---00000000000084d2540579d6748a
+--0000000000003243830579d78658
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div dir=3D"ltr"><div>I&#39;ve built a dom0 kernel 4.14 with SMP support. T=
-he dom0 kernel crashes when I&#39;m downloading a large file on host. It do=
-es not crash if I have nosmp boot option on xen command line.<br></div><div=
-><br></div><div>my .config SMP options are</div><div>
+<div dir=3D"ltr"><div dir=3D"ltr">Found the references of these in=C2=A0<a =
+href=3D"https://lists.xenproject.org/archives/html/xen-devel/2017-02/msg031=
+20.html">https://lists.xenproject.org/archives/html/xen-devel/2017-02/msg03=
+120.html</a> proposal to split PV, PVHVM and PVH code in kernel.</div><div =
+dir=3D"ltr"><br></div><div>There is no mention of any change or requirement=
+ from Xen perspective. Any other way to track this problem?</div></div><br>=
+<div class=3D"gmail_quote"><div dir=3D"ltr">On Sun, Nov 4, 2018 at 6:37 PM =
+Rishi &lt;<a href=3D"mailto:2rushikeshj@gmail.com">2rushikeshj@gmail.com</a=
+>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0=
+ 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><div dir=3D"ltr"><div>=
+I&#39;ve built a dom0 kernel 4.14 with SMP support. The dom0 kernel crashes=
+ when I&#39;m downloading a large file on host. It does not crash if I have=
+ nosmp boot option on xen command line.<br></div><div><br></div><div>my .co=
+nfig SMP options are</div><div>
 
 
 
@@ -183,12 +204,12 @@ t-ligatures:no-common-ligatures">: 4.7.6</span></p>
 
 
 
-</div></div>
+</div></div></blockquote></div>
 
---00000000000084d2540579d6748a--
+--0000000000003243830579d78658--
 
 
---===============4940604271605558723==
+--===============6484963817594884007==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -198,4 +219,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============4940604271605558723==--
+--===============6484963817594884007==--
