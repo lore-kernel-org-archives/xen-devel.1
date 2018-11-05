@@ -1,11 +1,14 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/traps: Misc non-functional cleanup
-Date: Mon, 5 Nov 2018 16:19:05 +0000
-Message-ID: <1541434745-23469-1-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] x86/traps: Misc non-functional cleanup
+Date: Mon, 5 Nov 2018 16:23:04 +0000
+Message-ID: <20181105162304.zru74jxyr5th5vtx@zion.uk.xensource.com>
+References: <1541434745-23469-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Disposition: inline
+In-Reply-To: <1541434745-23469-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,32 +17,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ICogcy91bnNpZ25lZCBjaGFyL3VpbnQ4X3QvIGZvciBjbGFyaXR5CiAqIERyb3AgcmVkdW5kYW50
-IHJldHVybiBhdCB0aGUgZW5kIG9mIGEgdm9pZCBmdW5jdGlvbgoKU2lnbmVkLW9mZi1ieTogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBKYW4gQmV1bGlj
-aCA8SkJldWxpY2hAc3VzZS5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoK
-Tm90aWNlZCB3aGlsZSByZXZpZXdpbmcgV2VpJ3MgQ09ORklHX1BWIHNlcmllcy4KLS0tCiB4ZW4v
-YXJjaC94ODYvdHJhcHMuYyB8IDggKysrLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlv
-bnMoKyksIDUgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3RyYXBzLmMg
-Yi94ZW4vYXJjaC94ODYvdHJhcHMuYwppbmRleCBjNjBjOGY1Li5kOGIyMTMwIDEwMDY0NAotLS0g
-YS94ZW4vYXJjaC94ODYvdHJhcHMuYworKysgYi94ZW4vYXJjaC94ODYvdHJhcHMuYwpAQCAtMTUz
-MCw5ICsxNTMwLDkgQEAgdm9pZCBkb19nZW5lcmFsX3Byb3RlY3Rpb24oc3RydWN0IGNwdV91c2Vy
-X3JlZ3MgKnJlZ3MpCiAgICAgaWYgKCByZWdzLT5lcnJvcl9jb2RlICYgWDg2X1hFQ19JRFQgKQog
-ICAgIHsKICAgICAgICAgLyogVGhpcyBmYXVsdCBtdXN0IGJlIGR1ZSB0byA8SU5UIG4+IGluc3Ry
-dWN0aW9uLiAqLwotICAgICAgICBjb25zdCBzdHJ1Y3QgdHJhcF9pbmZvICp0aTsKLSAgICAgICAg
-dW5zaWduZWQgY2hhciB2ZWN0b3IgPSByZWdzLT5lcnJvcl9jb2RlID4+IDM7Ci0gICAgICAgIHRp
-ID0gJnYtPmFyY2gucHYudHJhcF9jdHh0W3ZlY3Rvcl07CisgICAgICAgIHVpbnQ4X3QgdmVjdG9y
-ID0gcmVncy0+ZXJyb3JfY29kZSA+PiAzOworICAgICAgICBjb25zdCBzdHJ1Y3QgdHJhcF9pbmZv
-ICp0aSA9ICZ2LT5hcmNoLnB2LnRyYXBfY3R4dFt2ZWN0b3JdOworCiAgICAgICAgIGlmICggcGVy
-bWl0X3NvZnRpbnQoVElfR0VUX0RQTCh0aSksIHYsIHJlZ3MpICkKICAgICAgICAgewogICAgICAg
-ICAgICAgcmVncy0+cmlwICs9IDI7CkBAIC0xNzcxLDggKzE3NzEsNiBAQCB2b2lkIGRvX2Rldmlj
-ZV9ub3RfYXZhaWxhYmxlKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQogICAgIH0KICAgICBl
-bHNlCiAgICAgICAgIFRSQUNFXzBEKFRSQ19QVl9NQVRIX1NUQVRFX1JFU1RPUkUpOwotCi0gICAg
-cmV0dXJuOwogfQogCiB2b2lkIGRvX2RlYnVnKHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQot
-LSAKMi4xLjQKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBOb3YgMDUsIDIwMTggYXQgMDQ6MTk6MDVQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiAgKiBzL3Vuc2lnbmVkIGNoYXIvdWludDhfdC8gZm9yIGNsYXJpdHkKPiAgKiBEcm9w
+IHJlZHVuZGFudCByZXR1cm4gYXQgdGhlIGVuZCBvZiBhIHZvaWQgZnVuY3Rpb24KPiAKPiBTaWdu
+ZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKUmV2
+aWV3ZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
