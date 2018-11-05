@@ -1,27 +1,23 @@
-From: Arun KS <arunks@codeaurora.org>
-Subject: Re: [PATCH v5 1/2] memory_hotplug: Free pages as higher
- order
-Date: Mon, 05 Nov 2018 15:12:27 +0530
-Message-ID: <beaa1acf7423da7ee0f9bbc4cee2d14a__48719.2373876043$1541410877$gmane$org@codeaurora.org>
-References: <1538727006-5727-1-git-send-email-arunks@codeaurora.org>
- <72215e75-6c7e-0aef-c06e-e3aba47cf806@suse.cz>
- <efb65160af41d0e18cb2dcb30c2fb86a@codeaurora.org>
- <20181010173334.GL5873@dhcp22.suse.cz>
- <a2d576a5fc82cdf54fc89409686e58f5@codeaurora.org>
- <20181011075503.GQ5873@dhcp22.suse.cz>
- <20181018191825.fcad6e28f32a3686f201acdf@linux-foundation.org>
- <20181019080755.GK18839@dhcp22.suse.cz>
- <c6289fada694462ed708174f9a1f3b6c@codeaurora.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 2/3] x86emul: raise #GP(0) in VME mode for
+ POPF with TF set in new value
+Date: Mon, 05 Nov 2018 02:47:21 -0700
+Message-ID: <5BE011A902000078001F7D7B@prv1-mh.provo.novell.com>
+References: <5BDC7E5802000078001F75BA@prv1-mh.provo.novell.com>
+ <5BDC7F3002000078001F75CF@prv1-mh.provo.novell.com>
+ <44156271-6b5a-fd35-bb9c-c30a0e158c36@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=dwfx=nq=codeaurora.org=arunks@srs-us1.protection.inumbo.net>)
- id 1gJbOv-0001Se-UH
- for xen-devel@lists.xenproject.org; Mon, 05 Nov 2018 09:42:29 +0000
-In-Reply-To: <c6289fada694462ed708174f9a1f3b6c@codeaurora.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=5iqt=nq=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gJbTl-0001gG-Fj
+ for xen-devel@lists.xenproject.org; Mon, 05 Nov 2018 09:47:29 +0000
+In-Reply-To: <44156271-6b5a-fd35-bb9c-c30a0e158c36@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,20 +26,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Michal Hocko <mhocko@kernel.org>
-Cc: vatsa@codeaurora.org, linux-mm@kvack.org, getarunks@gmail.com, kys@microsoft.com, boris.ostrovsky@oracle.com, sthemmin@microsoft.com, xen-devel@lists.xenproject.org, haiyangz@microsoft.com, yasu.isimatu@gmail.com, dan.j.williams@intel.com, Andrew Morton <akpm@linux-foundation.org>, Vlastimil Babka <vbabka@suse.cz>, osalvador@suse.de, jgross@suse.com, aaron.lu@intel.com, malat@debian.org, gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org, vinmenon@codeaurora.org, jrdr.linux@gmail.com, devel@linuxdriverproject.org, iamjoonsoo.kim@lge.com, mgorman@techsingularity.net, kirill.shutemov@linux.intel.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOC0xMC0yMiAxNjowMywgQXJ1biBLUyB3cm90ZToKPiBPbiAyMDE4LTEwLTE5IDEzOjM3
-LCBNaWNoYWwgSG9ja28gd3JvdGU6Cj4+IE9uIFRodSAxOC0xMC0xOCAxOToxODoyNSwgQW5kcmV3
-IE1vcnRvbiB3cm90ZToKPj4gWy4uLl0KPj4+IFNvIHRoaXMgcGF0Y2ggbmVlZHMgbW9yZSB3b3Jr
-LCB5ZXM/Cj4+IAo+PiBZZXMsIEkndmUgdGFsa2VkIHRvIEFydW4gKGhlIGlzIG9mZmxpbmUgdW50
-aWwgbmV4dCB3ZWVrKSBvZmZsaXN0IGFuZCAKPj4gaGUKPj4gd2lsbCBwbGF5IHdpdGggdGhpcyBz
-b21lIG1vcmUuCj4gCj4gQ29udmVydGVkIHRvdGFsaGlnaF9wYWdlcywgdG90YWxyYW1fcGFnZXMg
-YW5kIHpvbmUtPm1hbmFnZWRfcGFnZSB0bwo+IGF0b21pYyBhbmQgdGVzdGVkIGhvdCBhZGQuIExh
-dGVuY3kgaXMgbm90IGVmZmVjdGVkIHdpdGggdGhpcyBjaGFuZ2UuCj4gV2lsbCBzZW5kIG91dCBh
-IHNlcGFyYXRlIHBhdGNoIG9uIHRvcCBvZiB0aGlzIG9uZS4KSGVsbG8gQW5kcmV3L01pY2hhbCwK
-CldpbGwgdGhpcyBiZSBnb2luZyBpbiBzdWJzZXF1ZW50IC1yY3M/CgpSZWdhcmRzLApBcnVuCgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDAyLjExLjE4IGF0IDE5OjE0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDIvMTEvMTggMTY6NDUsIEphbiBCZXVsaWNoIHdyb3RlOgo+PiBUaGlzIGlzIGEg
+Y2hlY2sgZXhwbGljaXRseSBsaXN0ZWQgYnkgdGhlIGluc3RydWN0aW9uIHBhZ2UgaW4gdGhlIFNE
+TS4KPj4KPj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+
+IAo+IEhtbSAtIGxvb2tpbmcgYXQgdGhlIGxpc3RpbmcsIEkgdGhpbmsgd2UndmUgZ290IGFuIElP
+UEwgbWlzbWF0Y2guICBUaGlzCj4gYmVoYXZpb3VyLCBhcyB3ZWxsIGFzIHRoZSBWSVAgYWRqdXN0
+bWVudCBpbiBjb250ZXh0LCBvbmx5IGFwcGx5IGF0IElPUEwgPCAzLgoKQWgsIHllcywgYnV0IHRo
+YXQnbGwgYmUgYW5vdGhlciAocHJlcmVxKSBwYXRjaC4KCkphbgoKCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
