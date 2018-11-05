@@ -1,7 +1,7 @@
-From: Rishi <2rushikeshj@gmail.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: Dom0 kernel 4.14 with SMP randomly crashing
-Date: Mon, 5 Nov 2018 18:00:10 +0530
-Message-ID: <CAO9XypVrwzvC4iNP9HR63kjj_n-Ju30mvptd89GtK6TYO0yUTQ@mail.gmail.com>
+Date: Mon, 5 Nov 2018 12:49:16 +0000
+Message-ID: <20181105124916.da2kqcczcomnxepv@zion.uk.xensource.com>
 References: <CAO9XypUsz-e3vmX-n5eSMz7rG2aZpDG1h03CMRAAT2X=TpZNNw@mail.gmail.com>
  <20181105101938.mj2c6l4nx5sbsk2n@zion.uk.xensource.com>
  <CAO9XypWZ=Qr4Bo9Km_MUeod3cCHOnA=SonXXRF95zeeu0+RNHQ@mail.gmail.com>
@@ -10,10 +10,13 @@ References: <CAO9XypUsz-e3vmX-n5eSMz7rG2aZpDG1h03CMRAAT2X=TpZNNw@mail.gmail.com>
  <20181105114127.s57z7n7p4pmix5b5@zion.uk.xensource.com>
  <CAO9XypV42TO8c=26dRJSNnFukXDfWp_0rM3McRBKZs1crT1qEA@mail.gmail.com>
  <20181105115850.f677uvjmm7vqfikc@zion.uk.xensource.com>
+ <CAO9XypVrwzvC4iNP9HR63kjj_n-Ju30mvptd89GtK6TYO0yUTQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0287050578245869222=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181105115850.f677uvjmm7vqfikc@zion.uk.xensource.com>
+Content-Disposition: inline
+In-Reply-To: <CAO9XypVrwzvC4iNP9HR63kjj_n-Ju30mvptd89GtK6TYO0yUTQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,137 +25,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xen.org
+To: Rishi <2rushikeshj@gmail.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============0287050578245869222==
-Content-Type: multipart/alternative; boundary="00000000000075bce50579ea0c87"
-
---00000000000075bce50579ea0c87
-Content-Type: text/plain; charset="UTF-8"
-
-I'm using a XenServer Host and XCP-NG on it as HVM. I used xencons=tty
-console=ttyS0 on XCP-NG dom0 kernel line, to obtain serial console.
-I'm working on to build a more recent dom0 kernel for improved support of
-Ceph in XenServer/XCP-NG.
-
-
-
-On Mon, Nov 5, 2018 at 5:28 PM Wei Liu <wei.liu2@citrix.com> wrote:
-
-> On Mon, Nov 05, 2018 at 05:18:43PM +0530, Rishi wrote:
-> > Yes, I'm running it in a HVM domU for development purpose.
->
-> What is your exact setup?
->
-> Wei.
->
-> >
-> > On Mon, Nov 5, 2018 at 5:11 PM Wei Liu <wei.liu2@citrix.com> wrote:
-> >
-> > > On Mon, Nov 05, 2018 at 04:58:35PM +0530, Rishi wrote:
-> > > > Alright, I got the serial console and following is the crash log.
-> Thank
-> > > you
-> > > > for pointing that out.
-> > > >
-> > > > [  133.594852] watchdog: BUG: soft lockup - CPU#2 stuck for 22s!
-> > > > [ksoftirqd/2:22]
-> > > >
-> > > > [  133.599232] Kernel panic - not syncing: softlockup: hung tasks
-> > > >
-> > > > [  133.602275] CPU: 2 PID: 22 Comm: ksoftirqd/2 Tainted: G
-> > > > L    4.19.1
-> > > > #1
-> > > >
-> > > > [  133.606620] Hardware name: Xen HVM domU, BIOS 4.4.1-xs132257
-> > > 12/12/2016
-> > >
-> > > Is this serial log from the host? It says it is running as a HVM DomU.
-> > > Maybe you have mistaken guest serial log with host serial log?
-> > >
-> > > This indicates your machine runs XenServer, which has its own patch
-> > > queues on top of upstream Xen. You may also want to report to xs-devel
-> > > mailing list.
-> > >
-> > > Wei.
-> > >
->
-
---00000000000075bce50579ea0c87
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">I&#39;m using a XenServer Host and XCP-NG on it as HVM. I =
-used=C2=A0<span style=3D"font-variant-ligatures:no-common-ligatures;color:r=
-gb(0,0,0);font-family:Menlo;font-size:11px">xencons=3Dtty console=3DttyS0=
-=C2=A0</span>on XCP-NG dom0 kernel line, to obtain serial console.<div>I&#3=
-9;m working on to build a more recent dom0 kernel for improved support of C=
-eph in XenServer/XCP-NG.</div><div><br></div><div><br></div></div><br><div =
-class=3D"gmail_quote"><div dir=3D"ltr">On Mon, Nov 5, 2018 at 5:28 PM Wei L=
-iu &lt;<a href=3D"mailto:wei.liu2@citrix.com">wei.liu2@citrix.com</a>&gt; w=
-rote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex=
-;border-left:1px #ccc solid;padding-left:1ex">On Mon, Nov 05, 2018 at 05:18=
-:43PM +0530, Rishi wrote:<br>
-&gt; Yes, I&#39;m running it in a HVM domU for development purpose.<br>
-<br>
-What is your exact setup?<br>
-<br>
-Wei.<br>
-<br>
-&gt; <br>
-&gt; On Mon, Nov 5, 2018 at 5:11 PM Wei Liu &lt;<a href=3D"mailto:wei.liu2@=
-citrix.com" target=3D"_blank">wei.liu2@citrix.com</a>&gt; wrote:<br>
-&gt; <br>
-&gt; &gt; On Mon, Nov 05, 2018 at 04:58:35PM +0530, Rishi wrote:<br>
-&gt; &gt; &gt; Alright, I got the serial console and following is the crash=
- log. Thank<br>
-&gt; &gt; you<br>
-&gt; &gt; &gt; for pointing that out.<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; [=C2=A0 133.594852] watchdog: BUG: soft lockup - CPU#2 stuck=
- for 22s!<br>
-&gt; &gt; &gt; [ksoftirqd/2:22]<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; [=C2=A0 133.599232] Kernel panic - not syncing: softlockup: =
-hung tasks<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; [=C2=A0 133.602275] CPU: 2 PID: 22 Comm: ksoftirqd/2 Tainted=
-: G<br>
-&gt; &gt; &gt; L=C2=A0 =C2=A0 4.19.1<br>
-&gt; &gt; &gt; #1<br>
-&gt; &gt; &gt;<br>
-&gt; &gt; &gt; [=C2=A0 133.606620] Hardware name: Xen HVM domU, BIOS 4.4.1-=
-xs132257<br>
-&gt; &gt; 12/12/2016<br>
-&gt; &gt;<br>
-&gt; &gt; Is this serial log from the host? It says it is running as a HVM =
-DomU.<br>
-&gt; &gt; Maybe you have mistaken guest serial log with host serial log?<br=
->
-&gt; &gt;<br>
-&gt; &gt; This indicates your machine runs XenServer, which has its own pat=
-ch<br>
-&gt; &gt; queues on top of upstream Xen. You may also want to report to xs-=
-devel<br>
-&gt; &gt; mailing list.<br>
-&gt; &gt;<br>
-&gt; &gt; Wei.<br>
-&gt; &gt;<br>
-</blockquote></div>
-
---00000000000075bce50579ea0c87--
-
-
---===============0287050578245869222==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0287050578245869222==--
+SSBmb3Jnb3QgdG8gc2F5OiBwbGVhc2UgZG9uJ3QgdG9wLXBvc3QuCgpPbiBNb24sIE5vdiAwNSwg
+MjAxOCBhdCAwNjowMDoxMFBNICswNTMwLCBSaXNoaSB3cm90ZToKPiBJJ20gdXNpbmcgYSBYZW5T
+ZXJ2ZXIgSG9zdCBhbmQgWENQLU5HIG9uIGl0IGFzIEhWTS4gSSB1c2VkIHhlbmNvbnM9dHR5Cj4g
+Y29uc29sZT10dHlTMCBvbiBYQ1AtTkcgZG9tMCBrZXJuZWwgbGluZSwgdG8gb2J0YWluIHNlcmlh
+bCBjb25zb2xlLgo+IEknbSB3b3JraW5nIG9uIHRvIGJ1aWxkIGEgbW9yZSByZWNlbnQgZG9tMCBr
+ZXJuZWwgZm9yIGltcHJvdmVkIHN1cHBvcnQgb2YKPiBDZXBoIGluIFhlblNlcnZlci9YQ1AtTkcu
+CgpUaGlzIGlzIGFuIGludGVyZXN0aW5nIHNldHVwLiBJIGRvbid0IHRoaW5rIHlvdSBjYW4gZXhw
+ZWN0IHRvIGp1c3QgZHJvcAppbiBhIG5ldyBrZXJuZWwgdG8gWGVuU2VydmVyL1hDUC1ORyBhbmQg
+dGhlbiBpdCB3b3JrcyBmbGF3bGVzc2x5LiBXaGF0CmRpZCB5b3UgZG8gdG8gdGhlIHBhdGNoIHF1
+ZXVlIFhlblNlcnZlciBjYXJyaWVzIGZvciA0LjQ/CgpBbHNvLCBoYXZlIHlvdSBnb3QgYSB3b3Jr
+aW5nIGJhc2VsaW5lPyBJLmUuIGRpZCB0aGUgc3RvY2sgNC40IGtlcm5lbAp3b3JrPwoKV2VpLgoK
+PiAKPiAKPiAKPiBPbiBNb24sIE5vdiA1LCAyMDE4IGF0IDU6MjggUE0gV2VpIExpdSA8d2VpLmxp
+dTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4gCj4gPiBPbiBNb24sIE5vdiAwNSwgMjAxOCBhdCAwNTox
+ODo0M1BNICswNTMwLCBSaXNoaSB3cm90ZToKPiA+ID4gWWVzLCBJJ20gcnVubmluZyBpdCBpbiBh
+IEhWTSBkb21VIGZvciBkZXZlbG9wbWVudCBwdXJwb3NlLgo+ID4KPiA+IFdoYXQgaXMgeW91ciBl
+eGFjdCBzZXR1cD8KPiA+Cj4gPiBXZWkuCj4gPgo+ID4gPgo+ID4gPiBPbiBNb24sIE5vdiA1LCAy
+MDE4IGF0IDU6MTEgUE0gV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiA+
+Cj4gPiA+ID4gT24gTW9uLCBOb3YgMDUsIDIwMTggYXQgMDQ6NTg6MzVQTSArMDUzMCwgUmlzaGkg
+d3JvdGU6Cj4gPiA+ID4gPiBBbHJpZ2h0LCBJIGdvdCB0aGUgc2VyaWFsIGNvbnNvbGUgYW5kIGZv
+bGxvd2luZyBpcyB0aGUgY3Jhc2ggbG9nLgo+ID4gVGhhbmsKPiA+ID4gPiB5b3UKPiA+ID4gPiA+
+IGZvciBwb2ludGluZyB0aGF0IG91dC4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBbICAxMzMuNTk0ODUy
+XSB3YXRjaGRvZzogQlVHOiBzb2Z0IGxvY2t1cCAtIENQVSMyIHN0dWNrIGZvciAyMnMhCj4gPiA+
+ID4gPiBba3NvZnRpcnFkLzI6MjJdCj4gPiA+ID4gPgo+ID4gPiA+ID4gWyAgMTMzLjU5OTIzMl0g
+S2VybmVsIHBhbmljIC0gbm90IHN5bmNpbmc6IHNvZnRsb2NrdXA6IGh1bmcgdGFza3MKPiA+ID4g
+PiA+Cj4gPiA+ID4gPiBbICAxMzMuNjAyMjc1XSBDUFU6IDIgUElEOiAyMiBDb21tOiBrc29mdGly
+cWQvMiBUYWludGVkOiBHCj4gPiA+ID4gPiBMICAgIDQuMTkuMQo+ID4gPiA+ID4gIzEKPiA+ID4g
+PiA+Cj4gPiA+ID4gPiBbICAxMzMuNjA2NjIwXSBIYXJkd2FyZSBuYW1lOiBYZW4gSFZNIGRvbVUs
+IEJJT1MgNC40LjEteHMxMzIyNTcKPiA+ID4gPiAxMi8xMi8yMDE2Cj4gPiA+ID4KPiA+ID4gPiBJ
+cyB0aGlzIHNlcmlhbCBsb2cgZnJvbSB0aGUgaG9zdD8gSXQgc2F5cyBpdCBpcyBydW5uaW5nIGFz
+IGEgSFZNIERvbVUuCj4gPiA+ID4gTWF5YmUgeW91IGhhdmUgbWlzdGFrZW4gZ3Vlc3Qgc2VyaWFs
+IGxvZyB3aXRoIGhvc3Qgc2VyaWFsIGxvZz8KPiA+ID4gPgo+ID4gPiA+IFRoaXMgaW5kaWNhdGVz
+IHlvdXIgbWFjaGluZSBydW5zIFhlblNlcnZlciwgd2hpY2ggaGFzIGl0cyBvd24gcGF0Y2gKPiA+
+ID4gPiBxdWV1ZXMgb24gdG9wIG9mIHVwc3RyZWFtIFhlbi4gWW91IG1heSBhbHNvIHdhbnQgdG8g
+cmVwb3J0IHRvIHhzLWRldmVsCj4gPiA+ID4gbWFpbGluZyBsaXN0Lgo+ID4gPiA+Cj4gPiA+ID4g
+V2VpLgo+ID4gPiA+Cj4gPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
