@@ -1,23 +1,19 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: Dom0 kernel 4.14 with SMP randomly crashing
-Date: Tue, 6 Nov 2018 12:17:42 +0000
-Message-ID: <20181106121742.gae3zp2aeqojfmcj@zion.uk.xensource.com>
-References: <20181105105852.ae4sjkkcm6eumpwr@zion.uk.xensource.com>
- <CAO9XypUXJkhGEiH14HuMW8zOha9mRQh0+kpMa_0b2doHhjJUCQ@mail.gmail.com>
- <20181105114127.s57z7n7p4pmix5b5@zion.uk.xensource.com>
- <CAO9XypV42TO8c=26dRJSNnFukXDfWp_0rM3McRBKZs1crT1qEA@mail.gmail.com>
- <20181105115850.f677uvjmm7vqfikc@zion.uk.xensource.com>
- <CAO9XypVrwzvC4iNP9HR63kjj_n-Ju30mvptd89GtK6TYO0yUTQ@mail.gmail.com>
- <20181105124916.da2kqcczcomnxepv@zion.uk.xensource.com>
- <CAO9XypU_sRsxe5J7SAaoVPOK-zCF68-LLd8v-2m+nyyqae3P4A@mail.gmail.com>
- <CAO9XypXCio51Dbt6chxufyH_6M73HfXufQQS751gmNK5R3Uo5A@mail.gmail.com>
- <CAO9XypWzkV_cpCy+WygT5JWt6FujBMm47B_ydNjF-qoX-koKSA@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v2 0/3] x86emul: VME/PVI mode fixes
+Date: Tue, 06 Nov 2018 06:33:09 -0700
+Message-ID: <5BE1981502000078001F89C7@prv1-mh.provo.novell.com>
+References: <5BDC7E5802000078001F75BA@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=hxzx=nr=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gK1Tm-0005hP-Mv
+ for xen-devel@lists.xenproject.org; Tue, 06 Nov 2018 13:33:14 +0000
 Content-Disposition: inline
-In-Reply-To: <CAO9XypWzkV_cpCy+WygT5JWt6FujBMm47B_ydNjF-qoX-koKSA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,39 +22,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Rishi <2rushikeshj@gmail.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xen.org
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBOb3YgMDYsIDIwMTggYXQgMDM6MzE6MzFQTSArMDUzMCwgUmlzaGkgd3JvdGU6Cj4g
-Cj4gU28gYWZ0ZXIga25vd2luZyB0aGUgc3RhY2sgdHJhY2UsIGl0IGFwcGVhcnMgdGhhdCB0aGUg
-Q1BVIHdhcyBnZXR0aW5nIHN0dWNrCj4gZm9yIHhlbl9oeXBlcmNhbGxfeGVuX3ZlcnNpb24KClRo
-YXQgaHlwZXJjYWxsIGlzIHVzZWQgd2hlbiBhIFBWIGtlcm5lbCAocmUtKWVuYWJsZXMgaW50ZXJy
-dXB0cy4gU2VlCnhlbl9pcnFfZW5hYmxlLiBUaGUgcHVycG9zZSBpcyB0byBmb3JjZSB0aGUga2Vy
-bmVsIHRvIHN3aXRjaCB0bwpoeXBlcnZpc29yLgoKPiAKPiB3YXRjaGRvZzogQlVHOiBzb2Z0IGxv
-Y2t1cCAtIENQVSMwIHN0dWNrIGZvciAyM3MhIFtzd2FwcGVyLzA6MF0KPiAKPiAKPiBbMzA1Njku
-NTgyNzQwXSB3YXRjaGRvZzogQlVHOiBzb2Z0IGxvY2t1cCAtIENQVSMwIHN0dWNrIGZvciAyM3Mh
-Cj4gW3N3YXBwZXIvMDowXQo+IAo+IFszMDU2OS41ODgxODZdIEtlcm5lbCBwYW5pYyAtIG5vdCBz
-eW5jaW5nOiBzb2Z0bG9ja3VwOiBodW5nIHRhc2tzCj4gCj4gWzMwNTY5LjU5MTMwN10gQ1BVOiAw
-IFBJRDogMCBDb21tOiBzd2FwcGVyLzAgVGFpbnRlZDogRyAgICAgICAgICAgICBMICAgIDQuMTku
-MQo+ICMxCj4gCj4gWzMwNTY5LjU5NTExMF0gSGFyZHdhcmUgbmFtZTogWGVuIEhWTSBkb21VLCBC
-SU9TIDQuNC4xLXhzMTMyMjU3IDEyLzEyLzIwMTYKPiAKPiBbMzA1NjkuNTk4MzU2XSBDYWxsIFRy
-YWNlOgo+IAo+IFszMDU2OS41OTk1OTddICA8SVJRPgo+IAo+IFszMDU2OS42MDA5MjBdICBkdW1w
-X3N0YWNrKzB4NWEvMHg3Mwo+IAo+IFszMDU2OS42MDI5OThdICBwYW5pYysweGU4LzB4MjQ5Cj4g
-Cj4gWzMwNTY5LjYwNDgwNl0gIHdhdGNoZG9nX3RpbWVyX2ZuKzB4MjAwLzB4MjMwCj4gCj4gWzMw
-NTY5LjYwNzAyOV0gID8gc29mdGxvY2t1cF9mbisweDQwLzB4NDAKPiAKPiBbMzA1NjkuNjA5MjQ2
-XSAgX19ocnRpbWVyX3J1bl9xdWV1ZXMrMHgxMzMvMHgyNzAKPiAKPiBbMzA1NjkuNjExNzEyXSAg
-aHJ0aW1lcl9pbnRlcnJ1cHQrMHhmYi8weDI2MAo+IAo+IFszMDU2OS42MTM4MDBdICB4ZW5fdGlt
-ZXJfaW50ZXJydXB0KzB4MWIvMHgzMAo+IAo+IFszMDU2OS42MTY5NzJdICBfX2hhbmRsZV9pcnFf
-ZXZlbnRfcGVyY3B1KzB4NjkvMHgxYTAKPiAKPiBbMzA1NjkuNjE5ODMxXSAgaGFuZGxlX2lycV9l
-dmVudF9wZXJjcHUrMHgzMC8weDcwCj4gCj4gWzMwNTY5LjYyMjM4Ml0gIGhhbmRsZV9wZXJjcHVf
-aXJxKzB4MzQvMHg1MAo+IAo+IFszMDU2OS42MjUwNDhdICBnZW5lcmljX2hhbmRsZV9pcnErMHgx
-ZS8weDMwCj4gCj4gWzMwNTY5LjYyNzIxNl0gIF9fZXZ0Y2huX2ZpZm9faGFuZGxlX2V2ZW50cysw
-eDE2My8weDFhMAo+IAo+IFszMDU2OS42Mjk5NTVdICBfX3hlbl9ldnRjaG5fZG9fdXBjYWxsKzB4
-NDEvMHg3MAo+IAo+IFszMDU2OS42MzI2MTJdICB4ZW5fZXZ0Y2huX2RvX3VwY2FsbCsweDI3LzB4
-NTAKPiAKPiBbMzA1NjkuNjM1MTM2XSAgeGVuX2RvX2h5cGVydmlzb3JfY2FsbGJhY2srMHgyOS8w
-eDQwCj4gCj4gWzMwNTY5LjYzODE4MV0gUklQOiBlMDMwOnhlbl9oeXBlcmNhbGxfeGVuX3ZlcnNp
-b24rMHhhLzB4MjAKCldoYXQgaXMgdGhlIGFzbSBjb2RlIGZvciB0aGlzIFJJUD8KCgpXZWkuCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+MTogc2tpcCBWSUYgcHJvY2Vzc2luZyBpbiBWTUUgbW9kZSBmb3IgMTYtYml0IFBPUEYgYXQgSU9Q
+TCAzCjI6IHJhaXNlICNHUCgwKSBpbiBWTUUgbW9kZSBmb3IgUE9QRiB3aXRoIFRGIHNldCBpbiBu
+ZXcgdmFsdWUKMzogY29uc29saWRhdGUgQ1I0IGhhbmRsaW5nCgpKYW4KCgoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
