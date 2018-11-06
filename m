@@ -1,19 +1,23 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [RFC 16/16] xen/arm: Track page accessed between
- batch of Set/Way operations
-Date: Tue, 6 Nov 2018 10:41:18 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1811061039560.18518@sstabellini-ThinkPad-X260>
-References: <20181008183352.16291-1-julien.grall@arm.com>
- <20181008183352.16291-17-julien.grall@arm.com>
- <alpine.DEB.2.10.1811051314590.18518@sstabellini-ThinkPad-X260>
- <f51d32af-0369-d253-ea6b-5651d2135c8d@arm.com>
- <alpine.DEB.2.10.1811060938390.18518@sstabellini-ThinkPad-X260>
- <86d09f63-727d-0eab-2a96-79ca7e8c15ec@arm.com>
+From: Rishi <2rushikeshj@gmail.com>
+Subject: Re: Dom0 kernel 4.14 with SMP randomly crashing
+Date: Wed, 7 Nov 2018 00:16:39 +0530
+Message-ID: <CAO9XypUBUvw2g1Q2YBvFT8kCoNzboTchqKGDqXi4WQ82D+MU9A@mail.gmail.com>
+References: <20181105105852.ae4sjkkcm6eumpwr@zion.uk.xensource.com>
+ <CAO9XypUXJkhGEiH14HuMW8zOha9mRQh0+kpMa_0b2doHhjJUCQ@mail.gmail.com>
+ <20181105114127.s57z7n7p4pmix5b5@zion.uk.xensource.com>
+ <CAO9XypV42TO8c=26dRJSNnFukXDfWp_0rM3McRBKZs1crT1qEA@mail.gmail.com>
+ <20181105115850.f677uvjmm7vqfikc@zion.uk.xensource.com>
+ <CAO9XypVrwzvC4iNP9HR63kjj_n-Ju30mvptd89GtK6TYO0yUTQ@mail.gmail.com>
+ <20181105124916.da2kqcczcomnxepv@zion.uk.xensource.com>
+ <CAO9XypU_sRsxe5J7SAaoVPOK-zCF68-LLd8v-2m+nyyqae3P4A@mail.gmail.com>
+ <CAO9XypXCio51Dbt6chxufyH_6M73HfXufQQS751gmNK5R3Uo5A@mail.gmail.com>
+ <CAO9XypWzkV_cpCy+WygT5JWt6FujBMm47B_ydNjF-qoX-koKSA@mail.gmail.com>
+ <20181106121742.gae3zp2aeqojfmcj@zion.uk.xensource.com>
+ <CAO9XypUtBpsCJXoaAWiJQnjjfxQJ=uE1utf67EdkG92QHbtMnA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4728029614919780203=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <86d09f63-727d-0eab-2a96-79ca7e8c15ec@arm.com>
+In-Reply-To: <CAO9XypUtBpsCJXoaAWiJQnjjfxQJ=uE1utf67EdkG92QHbtMnA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,67 +26,264 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, andre.przywara@linaro.org, xen-devel@lists.xen.org, Jan Beulich <jbeulich@suse.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCA2IE5vdiAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gT24gMDYvMTEvMjAxOCAx
-Nzo0MywgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gT24gTW9uLCA1IE5vdiAyMDE4LCBK
-dWxpZW4gR3JhbGwgd3JvdGU6Cj4gPiA+IEhpIFN0ZWZhbm8sCj4gPiA+IAo+ID4gPiBPbiAxMS81
-LzE4IDk6MzUgUE0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+ID4gPiBPbiBNb24sIDgg
-T2N0IDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gPiA+IEF0IHRoZSBtb21lbnQsIHRo
-ZSBpbXBsZW1lbnRhdGlvbiBvZiBTZXQvV2F5IG9wZXJhdGlvbnMgd2lsbCBnbwo+ID4gPiA+ID4g
-dGhyb3VnaAo+ID4gPiA+ID4gYWxsIHRoZSBlbnRyaWVzIG9mIHRoZSBndWVzdCBQMk0gYW5kIGZs
-dXNoIHRoZW0uIEhvd2V2ZXIsIHRoaXMgaXMgdmVyeQo+ID4gPiA+ID4gZXhwZW5zaXZlIGFuZCBt
-YXkgcmVuZGVyIHVudXNhYmxlIGEgZ3Vlc3QgT1MgdXNpbmcgdGhlbS4KPiA+ID4gPiA+IAo+ID4g
-PiA+ID4gRm9yIGluc3RhbmNlLCBMaW51eCAzMi1iaXQgd2lsbCB1c2UgU2V0L1dheSBvcGVyYXRp
-b25zIGR1cmluZwo+ID4gPiA+ID4gc2Vjb25kYXJ5Cj4gPiA+ID4gPiBDUFUgYnJpbmctdXAuIEFz
-IHRoZSBpbXBsZW1lbnRhdGlvbiBpcyByZWFsbHkgZXhwZW5zaXZlLCBpdCBtYXkgYmUKPiA+ID4g
-PiA+IHBvc3NpYmxlCj4gPiA+ID4gPiB0byBoaXQgdGhlIENQVSBicmluZy11cCB0aW1lb3V0Lgo+
-ID4gPiA+ID4gCj4gPiA+ID4gPiBUbyBsaW1pdCB0aGUgU2V0L1dheSBpbXBhY3QsIHdlIHRyYWNr
-IHdoYXQgcGFnZXMgaGFzIGJlZW4gb2YgdGhlIGd1ZXN0Cj4gPiA+ID4gPiBoYXMgYmVlbiBhY2Nl
-c3NlZCBiZXR3ZWVuIGJhdGNoIG9mIFNldC9XYXkgb3BlcmF0aW9ucy4gVGhpcyBpcyBkb25lCj4g
-PiA+ID4gPiB1c2luZyBiaXRbMF0gKGFrYSB2YWxpZCBiaXQpIG9mIHRoZSBQMk0gZW50cnkuCj4g
-PiA+ID4gCj4gPiA+ID4gVGhpcyBpcyBnb2luZyB0byBpbXByb3ZlIHBlcmZvcm1hbmNlIG9mIGls
-bC1tYW5uZXJlZCBndWVzdHMgYXQgdGhlIGNvc3QKPiA+ID4gPiBvZiBodXJ0aW5nIHBlcmZvcm1h
-bmNlIG9mIHdlbGwtbWFubmVyZWQgZ3Vlc3RzLiBJcyBpdCByZWFsbHkgYSBnb29kCj4gPiA+ID4g
-dHJhZGUtb2ZmPyBTaG91bGQgdGhpcyBiZWhhdmlvciBhdCBsZWFzdCBiZSBjb25maWd1cmFibGUg
-d2l0aCBhIFhlbgo+ID4gPiA+IGNvbW1hbmQgbGluZT8KPiA+ID4gCj4gPiA+IFdlbGwsIHdlIGhh
-dmUgdGhlIGNob2ljZSBiZXR3ZWVuIG5vdCBiZWVuIGFibGUgdG8gYm9vdCBMaW51eCAzMi1iaXQK
-PiA+ID4gYW55bW9yZSBvcgo+ID4gPiBoYXZlIGEgc2xpZ2h0IGltcGFjdCBhdCB0aGUgYm9vdCB0
-aW1lIGZvciBhbGwgZ3Vlc3RzLgo+ID4gCj4gPiBXYWl0IC0tIEkgdGhvdWdodCB0aGF0IHdpdGgg
-dGhlIHNldC93YXkgZW11bGF0aW9uIGludHJvZHVjZWQgYnkgcGF0Y2gKPiA+ICMxNSB3ZSB3b3Vs
-ZCBiZSBhYmxlIHRvIGJvb3QgTGludXggMzItYml0IGFscmVhZHkuIFRoaXMgcGF0Y2ggaXMgYQo+
-ID4gcGVyZm9ybWFuY2UgaW1wcm92ZW1lbnQuIE9yIGlzIGl0IGFjdHVhbGx5IG5lZWRlZCB0byBi
-b290IExpbnV4IDMyLWJpdD8KPiAKPiBUaGUgcHJvYmxlbSBpcyBMaW51eCAzMi1iaXQgY2FsbHMg
-YSBmZXcgdGltZSBzZXQvd2F5IGR1cmluZyBzZWNvbmRhcnkgQ1BVCj4gYnJpbmcgdXAuIEl0IGFs
-c28gaGFzIGEgdGltZW91dCBvZiAxcyB0byBmdWxseSBib290IHRoYXQgQ1BVLiBJbiBteSB0ZXN0
-aW5nLCBJCj4gY2FuIGVhc2lseSBoaXQgdGhlIHRpbWVvdXQgZXZlbiB3aXRoIGEgc21hbGwgYW1v
-dW50IG9mIG1lbW9yeS4KIApEYW1uISBJdCBpcyB3b3JzdCB0aGFuIEkgdGhvdWdodC4KCgo+IElm
-IHdlIGRvbid0IHN0YXJ0IHRyYWNraW5nIHRoZSBwYWdlIGZyb20gdGhlIGJlZ2lubmluZywgdGhl
-biB5b3Ugd291bGQgbmVlZCB0bwo+IGNsZWFuIHRoZSBmdWxsIFJBTSB0aGUgZmlyc3QgdGltZS4g
-SWYgeW91IHN0YXJ0IHRvIHRyYWNrIGZyb20gdGhlIGJlZ2lubmluZywKPiB5b3UgbWF5IGp1c3Qg
-aGF2ZSB0byBjbGVhbiBhIGNvdXBsZSBvZiBNQi4KPgo+ID4gCj4gPiA+IEFzIHlvdSBtYXkgaGF2
-ZSBub3RpY2VkIHRoZSBjb21tYW5kIGxpbmUgaXMgYmVlbiBzdWdnZXN0ZWQgYmVsb3cuIEkgZGlk
-bid0Cj4gPiA+IHlldAo+ID4gPiBpbXBsZW1lbnRlZCBhcyB3ZSBhZ3JlZWQgYXQgQ29ubmVjdCBp
-dCB3b3VsZCBiZSBnb29kIHRvIHN0YXJ0IGdldHRpbmcKPiA+ID4gZmVlZGJhY2sKPiA+ID4gb24g
-aXQuCj4gPiAKPiA+IFN1cmUuIEkgd2FzIHRoaW5raW5nIGFib3V0IHRoaXMgLS0gZG9lcyBpdCBt
-YWtlIHNlbnNlIHRvIGhhdmUgZGlmZmVyZW50Cj4gPiBkZWZhdWx0cyBmb3IgMzJiaXQgYW5kIDY0
-Yml0IGd1ZXN0cz8KPiA+IAo+ID4gMzJiaXQgLT4gZGVmYXVsdCBwMm1faW52YWxpZGF0ZV9yb290
-Cj4gPiA2NGJpdCAtPiBkZWZhdWx0IG5vdAo+IAo+IFRoZSBkZWNpc2lvbiBpcyBub3QgdGhhdCBl
-YXN5LiBXaGlsZSBMaW51eCBhcm02NCBkb2VzIG5vdCBjb250YWluIHNldC93YXkKPiBhbnltb3Jl
-LCBVRUZJIHN0aWxsIHVzZSB0aGVtIChJIGNoZWNrZWQgaXQgYSBjb3VwbGUgb2YgbW9udGhzIGFn
-bykuCj4gCj4gSSBoYXZlbid0IGRvbmUgYW55IGJlbmNobWFyayB5ZXQuIFRoYXQncyBteSBuZXh0
-IHN0ZXAuCgpPSywgbWFrZXMgc2Vuc2UKCgo+ID4gPiBJIGFtIG5vdCBlbnRpcmVseSB0byB1bmRl
-cnN0YW5kIHlvdXIgbGFzdCBzZW50ZW5jZSwgdGhpcyBmZWF0dXJlIGlzIHR1cm5lZAo+ID4gPiBv
-ZmYKPiA+ID4gd2hlbiBhbiBJT01NVSBpcyBwcmVzZW50LiBTbyB3aGF0IGlzIHlvdXIgdXNlIGNh
-c2UgaGVyZT8KPiA+ICAgTXkgc2VudGVuY2Ugd2FzIGJhZGx5IHdyaXR0ZW4sIHNvcnJ5LiBJIG1l
-YW50IHRvIHNheSB0aGF0IGV2ZW4gd2hlbiBhbgo+ID4gSU9NTVUgaXMgTk9UIHByZXNlbnQsIHRo
-ZXJlIGFyZSBjYXNlcyB3aGVyZSB3ZSBtaWdodCBub3Qgd2FudCB0byBjYWxsCj4gPiBwMm1faW52
-YWxpZGF0ZV9yb290Lgo+IAo+IEJlZm9yZSBpbXBsZW1lbnRpbmcgYSBjb21tYW5kIGxpbmUgb3B0
-aW9uIChvciBldmVuIHBsdW1iaW5nIHRoYXQgdG8gdGhlIGd1ZXN0Cj4gY29uZmlndXJhdGlvbiks
-IEkgd2FudCB0byB1bmRlcnN0YW5kIHdoYXQgaXMgdGhlIHJlYWwgaW1wYWN0IG9uIHRoZSBib290
-IHRpbWUKPiBmb3IgIm5vcm1hbCIgZ3Vlc3QuCgp5ZXMsIG1ha2VzIHNlbnNlCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============4728029614919780203==
+Content-Type: multipart/alternative; boundary="000000000000bc286d057a036cc5"
+
+--000000000000bc286d057a036cc5
+Content-Type: text/plain; charset="UTF-8"
+
+On Tue, Nov 6, 2018 at 10:41 PM Rishi <2rushikeshj@gmail.com> wrote:
+
+>
+>
+> On Tue, Nov 6, 2018 at 5:47 PM Wei Liu <wei.liu2@citrix.com> wrote:
+>
+>> On Tue, Nov 06, 2018 at 03:31:31PM +0530, Rishi wrote:
+>> >
+>> > So after knowing the stack trace, it appears that the CPU was getting
+>> stuck
+>> > for xen_hypercall_xen_version
+>>
+>> That hypercall is used when a PV kernel (re-)enables interrupts. See
+>> xen_irq_enable. The purpose is to force the kernel to switch to
+>> hypervisor.
+>>
+>> >
+>> > watchdog: BUG: soft lockup - CPU#0 stuck for 23s! [swapper/0:0]
+>> >
+>> >
+>> > [30569.582740] watchdog: BUG: soft lockup - CPU#0 stuck for 23s!
+>> > [swapper/0:0]
+>> >
+>> > [30569.588186] Kernel panic - not syncing: softlockup: hung tasks
+>> >
+>> > [30569.591307] CPU: 0 PID: 0 Comm: swapper/0 Tainted: G             L
+>>   4.19.1
+>> > #1
+>> >
+>> > [30569.595110] Hardware name: Xen HVM domU, BIOS 4.4.1-xs132257
+>> 12/12/2016
+>> >
+>> > [30569.598356] Call Trace:
+>> >
+>> > [30569.599597]  <IRQ>
+>> >
+>> > [30569.600920]  dump_stack+0x5a/0x73
+>> >
+>> > [30569.602998]  panic+0xe8/0x249
+>> >
+>> > [30569.604806]  watchdog_timer_fn+0x200/0x230
+>> >
+>> > [30569.607029]  ? softlockup_fn+0x40/0x40
+>> >
+>> > [30569.609246]  __hrtimer_run_queues+0x133/0x270
+>> >
+>> > [30569.611712]  hrtimer_interrupt+0xfb/0x260
+>> >
+>> > [30569.613800]  xen_timer_interrupt+0x1b/0x30
+>> >
+>> > [30569.616972]  __handle_irq_event_percpu+0x69/0x1a0
+>> >
+>> > [30569.619831]  handle_irq_event_percpu+0x30/0x70
+>> >
+>> > [30569.622382]  handle_percpu_irq+0x34/0x50
+>> >
+>> > [30569.625048]  generic_handle_irq+0x1e/0x30
+>> >
+>> > [30569.627216]  __evtchn_fifo_handle_events+0x163/0x1a0
+>> >
+>> > [30569.629955]  __xen_evtchn_do_upcall+0x41/0x70
+>> >
+>> > [30569.632612]  xen_evtchn_do_upcall+0x27/0x50
+>> >
+>> > [30569.635136]  xen_do_hypervisor_callback+0x29/0x40
+>> >
+>> > [30569.638181] RIP: e030:xen_hypercall_xen_version+0xa/0x20
+>>
+>> What is the asm code for this RIP?
+>>
+>>
+>> Wei.
+>>
+>
+> The issue of crash is getting resolved with appending "noirqbalance" at
+> xen command line. This way all dom0 cpus are available but not irq balanced
+> at xen.
+>
+> Even though I'm running irqbalance service in dom0 the irqs seems to be
+> not moving. <- this is dom0 perspective, I do not know yet, if it follows
+> Xen irq.
+>
+> I tried objdump, while I have  have the function in out but there is no
+> asm code of it. Its just "..."
+>
+> ffffffff81001220 <xen_hypercall_xen_version>:
+>
+>         ...
+>
+>
+> ffffffff81001240 <xen_hypercall_console_io>:
+>
+>         ...
+>
+> All "hypercalls" appear similarly.
+>
+
+How frequent can be that hypercall/xen_irq_enable()? Like n/s or once a
+while?
+During my tests, the system runs stable unless I'm downloading a large
+file. Files around a GB size are getting downloaded without crash, but
+system crash comes when its above it. I'm using a 2.1GB file & wget to
+download.
+
+Is there a way I can simulate PV kernel (re-)enable of interrupt using a
+kernel module with a controlled fashion?
+
+--000000000000bc286d057a036cc5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Tue=
+, Nov 6, 2018 at 10:41 PM Rishi &lt;<a href=3D"mailto:2rushikeshj@gmail.com=
+">2rushikeshj@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_=
+quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
+ex"><div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On=
+ Tue, Nov 6, 2018 at 5:47 PM Wei Liu &lt;<a href=3D"mailto:wei.liu2@citrix.=
+com" target=3D"_blank">wei.liu2@citrix.com</a>&gt; wrote:<br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex">On Tue, Nov 06, 2018 at 03:31:31PM +0530, Rishi wrot=
+e:<br>
+&gt; <br>
+&gt; So after knowing the stack trace, it appears that the CPU was getting =
+stuck<br>
+&gt; for xen_hypercall_xen_version<br>
+<br>
+That hypercall is used when a PV kernel (re-)enables interrupts. See<br>
+xen_irq_enable. The purpose is to force the kernel to switch to<br>
+hypervisor.<br>
+<br>
+&gt; <br>
+&gt; watchdog: BUG: soft lockup - CPU#0 stuck for 23s! [swapper/0:0]<br>
+&gt; <br>
+&gt; <br>
+&gt; [30569.582740] watchdog: BUG: soft lockup - CPU#0 stuck for 23s!<br>
+&gt; [swapper/0:0]<br>
+&gt; <br>
+&gt; [30569.588186] Kernel panic - not syncing: softlockup: hung tasks<br>
+&gt; <br>
+&gt; [30569.591307] CPU: 0 PID: 0 Comm: swapper/0 Tainted: G=C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0L=C2=A0 =C2=A0 4.19.1<br>
+&gt; #1<br>
+&gt; <br>
+&gt; [30569.595110] Hardware name: Xen HVM domU, BIOS 4.4.1-xs132257 12/12/=
+2016<br>
+&gt; <br>
+&gt; [30569.598356] Call Trace:<br>
+&gt; <br>
+&gt; [30569.599597]=C2=A0 &lt;IRQ&gt;<br>
+&gt; <br>
+&gt; [30569.600920]=C2=A0 dump_stack+0x5a/0x73<br>
+&gt; <br>
+&gt; [30569.602998]=C2=A0 panic+0xe8/0x249<br>
+&gt; <br>
+&gt; [30569.604806]=C2=A0 watchdog_timer_fn+0x200/0x230<br>
+&gt; <br>
+&gt; [30569.607029]=C2=A0 ? softlockup_fn+0x40/0x40<br>
+&gt; <br>
+&gt; [30569.609246]=C2=A0 __hrtimer_run_queues+0x133/0x270<br>
+&gt; <br>
+&gt; [30569.611712]=C2=A0 hrtimer_interrupt+0xfb/0x260<br>
+&gt; <br>
+&gt; [30569.613800]=C2=A0 xen_timer_interrupt+0x1b/0x30<br>
+&gt; <br>
+&gt; [30569.616972]=C2=A0 __handle_irq_event_percpu+0x69/0x1a0<br>
+&gt; <br>
+&gt; [30569.619831]=C2=A0 handle_irq_event_percpu+0x30/0x70<br>
+&gt; <br>
+&gt; [30569.622382]=C2=A0 handle_percpu_irq+0x34/0x50<br>
+&gt; <br>
+&gt; [30569.625048]=C2=A0 generic_handle_irq+0x1e/0x30<br>
+&gt; <br>
+&gt; [30569.627216]=C2=A0 __evtchn_fifo_handle_events+0x163/0x1a0<br>
+&gt; <br>
+&gt; [30569.629955]=C2=A0 __xen_evtchn_do_upcall+0x41/0x70<br>
+&gt; <br>
+&gt; [30569.632612]=C2=A0 xen_evtchn_do_upcall+0x27/0x50<br>
+&gt; <br>
+&gt; [30569.635136]=C2=A0 xen_do_hypervisor_callback+0x29/0x40<br>
+&gt; <br>
+&gt; [30569.638181] RIP: e030:xen_hypercall_xen_version+0xa/0x20<br>
+<br>
+What is the asm code for this RIP?<br>
+<br>
+<br>
+Wei.<br></blockquote><div><br></div><div>The issue of crash is getting reso=
+lved with appending &quot;noirqbalance&quot; at xen command line. This way =
+all dom0 cpus are available but not irq balanced at xen.<br><br>Even though=
+ I&#39;m running irqbalance service in dom0 the irqs seems to be not moving=
+. &lt;- this is dom0 perspective, I do not know yet, if it follows Xen irq.=
+<br><br>I tried objdump, while I have=C2=A0 have the function in out but th=
+ere is no asm code of it. Its just &quot;...&quot;<br><br>
+
+
+
+
+
+<p class=3D"m_-1081119484632643339gmail-p1" style=3D"margin:0px;font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-stretch:normal;font-si=
+ze:11px;line-height:normal;font-family:Menlo;color:rgb(0,0,0)"><span class=
+=3D"m_-1081119484632643339gmail-s1" style=3D"font-variant-ligatures:no-comm=
+on-ligatures">ffffffff81001220 &lt;</span><span class=3D"m_-108111948463264=
+3339gmail-s2" style=3D"font-variant-ligatures:no-common-ligatures;backgroun=
+d-color:rgb(135,138,4)">xen_hypercall_xen_version</span><span class=3D"m_-1=
+081119484632643339gmail-s1" style=3D"font-variant-ligatures:no-common-ligat=
+ures">&gt;:</span></p>
+<p class=3D"m_-1081119484632643339gmail-p1" style=3D"margin:0px;font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-stretch:normal;font-si=
+ze:11px;line-height:normal;font-family:Menlo;color:rgb(0,0,0)"><span class=
+=3D"m_-1081119484632643339gmail-s1" style=3D"font-variant-ligatures:no-comm=
+on-ligatures"><span class=3D"m_-1081119484632643339gmail-Apple-converted-sp=
+ace">=C2=A0 =C2=A0 =C2=A0 =C2=A0 </span>...</span></p>
+<p class=3D"m_-1081119484632643339gmail-p2" style=3D"margin:0px;font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-stretch:normal;font-si=
+ze:11px;line-height:normal;font-family:Menlo;color:rgb(0,0,0);min-height:13=
+px"><span class=3D"m_-1081119484632643339gmail-s1" style=3D"font-variant-li=
+gatures:no-common-ligatures"></span><br></p>
+<p class=3D"m_-1081119484632643339gmail-p1" style=3D"margin:0px;font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-stretch:normal;font-si=
+ze:11px;line-height:normal;font-family:Menlo;color:rgb(0,0,0)"><span class=
+=3D"m_-1081119484632643339gmail-s1" style=3D"font-variant-ligatures:no-comm=
+on-ligatures">ffffffff81001240 &lt;xen_hypercall_console_io&gt;:</span></p>
+<p class=3D"m_-1081119484632643339gmail-p1" style=3D"margin:0px;font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-stretch:normal;font-si=
+ze:11px;line-height:normal;font-family:Menlo;color:rgb(0,0,0)"><span class=
+=3D"m_-1081119484632643339gmail-s1" style=3D"font-variant-ligatures:no-comm=
+on-ligatures"><span class=3D"m_-1081119484632643339gmail-Apple-converted-sp=
+ace">=C2=A0 =C2=A0 =C2=A0 =C2=A0 </span>...<br><br>All &quot;hypercalls&quo=
+t; appear similarly.</span></p></div></div></div></blockquote><div><br>How =
+frequent can be that hypercall/xen_irq_enable()? Like n/s or once a while?<=
+br>During my tests, the system runs stable unless I&#39;m downloading a lar=
+ge file. Files around a GB size are getting downloaded without crash, but s=
+ystem crash comes when its above it. I&#39;m using a 2.1GB file &amp; wget =
+to download.<br><br>Is there a way I can simulate PV kernel (re-)enable of =
+interrupt using a kernel module with a controlled fashion?=C2=A0</div></div=
+></div>
+
+--000000000000bc286d057a036cc5--
+
+
+--===============4728029614919780203==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4728029614919780203==--
