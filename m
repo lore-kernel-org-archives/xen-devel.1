@@ -1,14 +1,23 @@
-From: Sergey Dyasli <sergey.dyasli@citrix.com>
-Subject: [PATCH v2 3/8] x86/vvmx: add
- VMX_INSN_INVEPT_INVVPID_INVALID_OP errno
-Date: Tue, 6 Nov 2018 12:07:54 +0000
-Message-ID: <20181106120759.8789-4-sergey.dyasli@citrix.com>
-References: <20181106120759.8789-1-sergey.dyasli@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 8/8] tools/libvchan:
+ libxenvchan_client_init: use ENOENT for no server
+Date: Tue, 6 Nov 2018 13:15:55 +0100
+Message-ID: <20181106121555.GU1638@mail-itl>
+References: <23516.33005.649128.145551@mariner.uk.xensource.com>
+ <20181102170113.11646-1-ian.jackson@eu.citrix.com>
+ <20181102170113.11646-9-ian.jackson@eu.citrix.com>
+ <20181106100016.hawdyzngqvo3zi73@zion.uk.xensource.com>
+ <23521.32491.467037.246289@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5237499233695039124=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181106120759.8789-1-sergey.dyasli@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=ydkh=nr=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gK0H7-0007iL-K2
+ for xen-devel@lists.xenproject.org; Tue, 06 Nov 2018 12:16:05 +0000
+In-Reply-To: <23521.32491.467037.246289@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,38 +26,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QW5kIHVzZSBpdCBpbiBudm14X2hhbmRsZV9pbnZlcHQoKSBhbmQgbnZteF9oYW5kbGVfaW52dnBp
-ZCgpLgoKU2lnbmVkLW9mZi1ieTogU2VyZ2V5IER5YXNsaSA8c2VyZ2V5LmR5YXNsaUBjaXRyaXgu
-Y29tPgotLS0KdjI6Ci0gbmV3IHBhdGNoCi0tLQogeGVuL2FyY2gveDg2L2h2bS92bXgvdnZteC5j
-ICAgICAgICB8IDQgKystLQogeGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vdm14L3ZtY3MuaCB8IDEg
-KwogMiBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZm
-IC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS92bXgvdnZteC5jIGIveGVuL2FyY2gveDg2L2h2bS92
-bXgvdnZteC5jCmluZGV4IGQ0MzdmMzMxOTMuLmJhNGY2ZDY3ZmUgMTAwNjQ0Ci0tLSBhL3hlbi9h
-cmNoL3g4Ni9odm0vdm14L3Z2bXguYworKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMK
-QEAgLTE5MDEsNyArMTkwMSw3IEBAIHN0YXRpYyBpbnQgbnZteF9oYW5kbGVfaW52ZXB0KHN0cnVj
-dCBjcHVfdXNlcl9yZWdzICpyZWdzKQogICAgICAgICBfX2ludmVwdChJTlZFUFRfQUxMX0NPTlRF
-WFQsIDApOwogICAgICAgICBicmVhazsKICAgICBkZWZhdWx0OgotICAgICAgICB2bWZhaWxfaW52
-YWxpZChyZWdzKTsKKyAgICAgICAgdm1mYWlsKHJlZ3MsIFZNWF9JTlNOX0lOVkVQVF9JTlZWUElE
-X0lOVkFMSURfT1ApOwogICAgICAgICByZXR1cm4gWDg2RU1VTF9PS0FZOwogICAgIH0KICAgICB2
-bXN1Y2NlZWQocmVncyk7CkBAIC0xOTI2LDcgKzE5MjYsNyBAQCBzdGF0aWMgaW50IG52bXhfaGFu
-ZGxlX2ludnZwaWQoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MpCiAgICAgICAgIGh2bV9hc2lk
-X2ZsdXNoX3ZjcHVfYXNpZCgmdmNwdV9uZXN0ZWRodm0oY3VycmVudCkubnZfbjJhc2lkKTsKICAg
-ICAgICAgYnJlYWs7CiAgICAgZGVmYXVsdDoKLSAgICAgICAgdm1mYWlsX2ludmFsaWQocmVncyk7
-CisgICAgICAgIHZtZmFpbChyZWdzLCBWTVhfSU5TTl9JTlZFUFRfSU5WVlBJRF9JTlZBTElEX09Q
-KTsKICAgICAgICAgcmV0dXJuIFg4NkVNVUxfT0tBWTsKICAgICB9CiAKZGlmZiAtLWdpdCBhL3hl
-bi9pbmNsdWRlL2FzbS14ODYvaHZtL3ZteC92bWNzLmggYi94ZW4vaW5jbHVkZS9hc20teDg2L2h2
-bS92bXgvdm1jcy5oCmluZGV4IDc2ZGQwNGE3MmQuLjZkMGFlNTZmYzEgMTAwNjQ0Ci0tLSBhL3hl
-bi9pbmNsdWRlL2FzbS14ODYvaHZtL3ZteC92bWNzLmgKKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4
-Ni9odm0vdm14L3ZtY3MuaApAQCAtNTM4LDYgKzUzOCw3IEBAIGVudW0gdm14X2luc25fZXJybm8K
-ICAgICBWTVhfSU5TTl9VTlNVUFBPUlRFRF9WTUNTX0NPTVBPTkVOVCAgICA9IDEyLAogICAgIFZN
-WF9JTlNOX1ZNWE9OX0lOX1ZNWF9ST09UICAgICAgICAgICAgID0gMTUsCiAgICAgVk1YX0lOU05f
-Vk1FTlRSWV9CTE9DS0VEX0JZX01PVl9TUyAgICAgPSAyNiwKKyAgICBWTVhfSU5TTl9JTlZFUFRf
-SU5WVlBJRF9JTlZBTElEX09QICAgICA9IDI4LAogICAgIFZNWF9JTlNOX0ZBSUxfSU5WQUxJRCAg
-ICAgICAgICAgICAgICAgID0gfjAsCiB9OwogCi0tIAoyLjE3LjEKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============5237499233695039124==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="a+0P3INHs7aeI7wh"
+Content-Disposition: inline
+
+
+--a+0P3INHs7aeI7wh
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 06, 2018 at 11:45:47AM +0000, Ian Jackson wrote:
+> Wei Liu writes ("Re: [PATCH 8/8] tools/libvchan: libxenvchan_client_init:=
+ use ENOENT for no server"):
+> > On Fri, Nov 02, 2018 at 05:01:13PM +0000, Ian Jackson wrote:
+> > > * Promise that we will set errno to ENOENT if the server is not
+> > >   yet set up.
+> > > * Arrange that all ENOENT returns other than from the read of ring-ref
+> > >   are turned into EIO, logging when we do so.
+> >=20
+> > This sounds reasonable to me, but I would like to hear from Marek that
+> > this doesn't break Qubes.
+>=20
+> Right.  Marek, this series was intended to help with vchan for qmp.
+> But obviously I don't want to break anything else.  I don't think this
+> should break anything but I would appreciate a review or at least an
+> opinion...
+
+Does xentoollog require any explicit configuration? If yes, that would
+break non-xen-tools users (including Qubes). Otherwise looks good.
+Thanks!
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--a+0P3INHs7aeI7wh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvhhf4ACgkQ24/THMrX
+1yxt8Af/bIxINav/jEFc3nYVbhgilcNdraXl+BywuBqvo30zeiNeRJeK+OhW2hIb
+G1leL0CA8OKhzz+tq5055+Lxm0KF64TJ6wuZn1cgUWGt59ojLvQCfdkVvqzTH8Y7
+AYUaXQzsC+7KsSzl20ti6MbJkgpA0/7k9Y9aGvfkXoL4JvdJTHf1Vh8FcwoySniG
+Bs4yr2KLBtU2E5zDPl/R6sIHIkUBzgOg8aRR1FguaLE0LKv/OydcgLfWtyc2x+H1
+CZE7Yw2NcHCCAIewWSruN2CnnOmVbeNFyu5LtTpt/bFIEPC81AvUOZA1DjwBNruW
+wGQagR470jtTB4kxDFbdWZAn2MX0iA==
+=qV4/
+-----END PGP SIGNATURE-----
+
+--a+0P3INHs7aeI7wh--
+
+
+--===============5237499233695039124==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5237499233695039124==--
