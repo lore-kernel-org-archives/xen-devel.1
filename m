@@ -1,23 +1,21 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH 8/8] tools/libvchan:
- libxenvchan_client_init: use ENOENT for no server
-Date: Tue, 6 Nov 2018 13:15:55 +0100
-Message-ID: <20181106121555.GU1638@mail-itl>
-References: <23516.33005.649128.145551@mariner.uk.xensource.com>
- <20181102170113.11646-1-ian.jackson@eu.citrix.com>
- <20181102170113.11646-9-ian.jackson@eu.citrix.com>
- <20181106100016.hawdyzngqvo3zi73@zion.uk.xensource.com>
- <23521.32491.467037.246289@mariner.uk.xensource.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v4 2/6] SUPPORT.md: Add qemu-depriv section
+Date: Tue, 6 Nov 2018 12:14:41 +0000
+Message-ID: <f1ce20b0-24e3-2459-9453-d9da7a3cfeda@citrix.com>
+References: <20181105180711.20322-1-george.dunlap@citrix.com>
+ <20181105180711.20322-2-george.dunlap@citrix.com>
+ <38128939ff5a4494a8bf920632569128@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5237499233695039124=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=ydkh=nr=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gK0H7-0007iL-K2
- for xen-devel@lists.xenproject.org; Tue, 06 Nov 2018 12:16:05 +0000
-In-Reply-To: <23521.32491.467037.246289@mariner.uk.xensource.com>
+ <srs0=pbld=nr=citrix.com=prvs=8415d0394=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gK0Hi-0007qy-Sb
+ for xen-devel@lists.xenproject.org; Tue, 06 Nov 2018 12:16:42 +0000
+In-Reply-To: <38128939ff5a4494a8bf920632569128@AMSPEX02CL03.citrite.net>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,76 +24,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Paul Durrant <Paul.Durrant@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Wilk <konrad.wilk@oracle.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, Ross Lagerwall <ross.lagerwall@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Anthony Perard <anthony.perard@citrix.com>, Ian Jackson <Ian.Jackson@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5237499233695039124==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="a+0P3INHs7aeI7wh"
-Content-Disposition: inline
-
-
---a+0P3INHs7aeI7wh
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Nov 06, 2018 at 11:45:47AM +0000, Ian Jackson wrote:
-> Wei Liu writes ("Re: [PATCH 8/8] tools/libvchan: libxenvchan_client_init:=
- use ENOENT for no server"):
-> > On Fri, Nov 02, 2018 at 05:01:13PM +0000, Ian Jackson wrote:
-> > > * Promise that we will set errno to ENOENT if the server is not
-> > >   yet set up.
-> > > * Arrange that all ENOENT returns other than from the read of ring-ref
-> > >   are turned into EIO, logging when we do so.
-> >=20
-> > This sounds reasonable to me, but I would like to hear from Marek that
-> > this doesn't break Qubes.
->=20
-> Right.  Marek, this series was intended to help with vchan for qmp.
-> But obviously I don't want to break anything else.  I don't think this
-> should break anything but I would appreciate a review or at least an
-> opinion...
-
-Does xentoollog require any explicit configuration? If yes, that would
-break non-xen-tools users (including Qubes). Otherwise looks good.
-Thanks!
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---a+0P3INHs7aeI7wh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvhhf4ACgkQ24/THMrX
-1yxt8Af/bIxINav/jEFc3nYVbhgilcNdraXl+BywuBqvo30zeiNeRJeK+OhW2hIb
-G1leL0CA8OKhzz+tq5055+Lxm0KF64TJ6wuZn1cgUWGt59ojLvQCfdkVvqzTH8Y7
-AYUaXQzsC+7KsSzl20ti6MbJkgpA0/7k9Y9aGvfkXoL4JvdJTHf1Vh8FcwoySniG
-Bs4yr2KLBtU2E5zDPl/R6sIHIkUBzgOg8aRR1FguaLE0LKv/OydcgLfWtyc2x+H1
-CZE7Yw2NcHCCAIewWSruN2CnnOmVbeNFyu5LtTpt/bFIEPC81AvUOZA1DjwBNruW
-wGQagR470jtTB4kxDFbdWZAn2MX0iA==
-=qV4/
------END PGP SIGNATURE-----
-
---a+0P3INHs7aeI7wh--
-
-
---===============5237499233695039124==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5237499233695039124==--
+T24gMTEvMDYvMjAxOCAwOTowOCBBTSwgUGF1bCBEdXJyYW50IHdyb3RlOgo+PiAtLS0tLU9yaWdp
+bmFsIE1lc3NhZ2UtLS0tLQo+PiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4ZW4tZGV2ZWwtYm91
+bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24gQmVoYWxmCj4+IE9mIEdlb3JnZSBEdW5sYXAK
+Pj4gU2VudDogMDUgTm92ZW1iZXIgMjAxOCAxODowNwo+PiBUbzogeGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCj4+IENjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5l
+bC5vcmc+OyBXZWkgTGl1Cj4+IDx3ZWkubGl1MkBjaXRyaXguY29tPjsgS29ucmFkIFdpbGsgPGtv
+bnJhZC53aWxrQG9yYWNsZS5jb20+OyBBbmRyZXcgQ29vcGVyCj4+IDxBbmRyZXcuQ29vcGVyM0Bj
+aXRyaXguY29tPjsgVGltIChYZW4ub3JnKSA8dGltQHhlbi5vcmc+OyBHZW9yZ2UgRHVubGFwCj4+
+IDxHZW9yZ2UuRHVubGFwQGNpdHJpeC5jb20+OyBSb3NzIExhZ2Vyd2FsbCA8cm9zcy5sYWdlcndh
+bGxAY2l0cml4LmNvbT47Cj4+IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+OyBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Owo+PiBBbnRob255IFBlcmFyZCA8YW50aG9u
+eS5wZXJhcmRAY2l0cml4LmNvbT47IElhbiBKYWNrc29uCj4+IDxJYW4uSmFja3NvbkBjaXRyaXgu
+Y29tPgo+PiBTdWJqZWN0OiBbWGVuLWRldmVsXSBbUEFUQ0ggdjQgMi82XSBTVVBQT1JULm1kOiBB
+ZGQgcWVtdS1kZXByaXYgc2VjdGlvbgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBHZW9yZ2UgRHVubGFw
+IDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+Cj4+IC0tLQo+PiBDaGFuZ2VzIHNpbmNlIHYzOgo+
+PiAtIE1vdmVkIGZyb20gdGhlIHFlbXUtZGVwcml2IGRvYyBwYXRjaGVzLgo+PiAtIFJld29yZCB0
+byBpbmNsdWRlIHRoZSBwb3NzaWJpbGl0eSBvZiBoYXZpbmcgYSBub24tZG9tMCAiZGV2aWNlbW9k
+ZWwiCj4+ICAgZG9tYWluIHdoaWNoIG1heSB3YW50IHRvIGJlIHByb3RlY3RlZAo+PiAtIFNwZWNp
+ZnkgYExpbnV4IGRvbTBgIGFzIHRoZSBjdXJyZW50bHktdGVjaC1zdXBwb3J0ZWQgd2luZG93Cj4+
+Cj4+IENDOiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4KPj4gQ0M6IFdlaSBM
+aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4+IENDOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
+cGVyM0BjaXRyaXguY29tPgo+PiBDQzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+
+PiBDQzogVGltIERlZWdhbiA8dGltQHhlbi5vcmc+Cj4+IENDOiBLb25yYWQgV2lsayA8a29ucmFk
+LndpbGtAb3JhY2xlLmNvbT4KPj4gQ0M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlA
+a2VybmVsLm9yZz4KPj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4+
+IENDOiBBbnRob255IFBlcmFyZCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPj4gQ0M6IFJv
+c3MgTGFnZXJ3YWxsIDxyb3NzLmxhZ2Vyd2FsbEBjaXRyaXguY29tPgo+PiAtLS0KPj4gIFNVUFBP
+UlQubWQgfCAyMCArKysrKysrKysrKysrKysrKysrKwo+PiAgMSBmaWxlIGNoYW5nZWQsIDIwIGlu
+c2VydGlvbnMoKykKPj4KPj4gZGlmZiAtLWdpdCBhL1NVUFBPUlQubWQgYi9TVVBQT1JULm1kCj4+
+IGluZGV4IDRmMjAzZGE4NGEuLjFmMGY1ODU3YTcgMTAwNjQ0Cj4+IC0tLSBhL1NVUFBPUlQubWQK
+Pj4gKysrIGIvU1VQUE9SVC5tZAo+PiBAQCAtNTI1LDYgKzUyNSwyNiBAQCBWdWxuZXJhYmlsaXRp
+ZXMgb2YgYSBkZXZpY2UgbW9kZWwgc3R1YiBkb21haW4KPj4gIHRvIGEgaG9zdGlsZSBkcml2ZXIg
+ZG9tYWluIChlaXRoZXIgY29tcHJvbWlzZWQgb3IgdW50cnVzdGVkKQo+PiAgYXJlIGV4Y2x1ZGVk
+IGZyb20gc2VjdXJpdHkgc3VwcG9ydC4KPj4KPj4gKyMjIyBEZXZpY2UgTW9kZWwgRGVwcml2aWxl
+Z2luZwo+PiArCj4+ICsgICAgU3RhdHVzLCBMaW51eCBkb20wOiBUZWNoIFByZXZpZXcsIHdpdGgg
+bGltaXRlZCBzdXBwb3J0Cj4+ICsKPj4gK1RoaXMgbWVhbnMgYWRkaW5nIGV4dHJhIHJlc3RyaWN0
+aW9ucyB0byBhIGRldmljZSBtb2RlbCBpbiBvcmRlciB0bwo+PiArcHJldmVudCBhIGNvbXByb21p
+c2VkIGRldmljZSBtb2RlbCBmcm9tIGF0dGFjayB0aGUgcmVzdCBvZiB0aGUgZG9tYWluCj4gCj4g
+cy9hdHRhY2svYXR0YWNraW5nLwoKWWVhaCwgdGhpcyBwYXJhZ3JhcGggaW4gcGFydGljdWxhciBz
+ZWVtcyB0byBoYXZlIGNoYWxsZW5nZWQgYnkgYWJpbGl0eQp0byBmb3JtIGdyYW1tYXRpY2FsbHkt
+Y29ycmVjdCBFbmdsaXNoIHNlbnRlbmNlcy4uLiBhbnl3YXkgdGhhbmtzLCBJJ2xsCmZpeCBpdCB1
+cCBvbiBjaGVjay1pbi4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
