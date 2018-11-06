@@ -1,15 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/emul: Assert the STI shadow when POPF
- sets the interrupt flag
-Date: Tue, 06 Nov 2018 07:56:35 -0700
-Message-ID: <5BE1ABA302000078001F8B44@prv1-mh.provo.novell.com>
-References: <1541513355-1365-1-git-send-email-andrew.cooper3@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v2 2/8] x86/nestedhvm: introduce
+ vvmcx_valid()
+Date: Tue, 6 Nov 2018 09:58:26 -0500
+Message-ID: <aebb9815-0735-12e5-1803-427e729f39f5@oracle.com>
+References: <20181106120759.8789-1-sergey.dyasli@citrix.com>
+ <20181106120759.8789-3-sergey.dyasli@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1541513355-1365-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <20181106120759.8789-3-sergey.dyasli@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,22 +19,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Sergey Dyasli <sergey.dyasli@citrix.com>, xen-devel@lists.xen.org
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA2LjExLjE4IGF0IDE1OjA5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlL3g4Nl9lbXVsYXRlLmMKPiArKysg
-Yi94ZW4vYXJjaC94ODYveDg2X2VtdWxhdGUveDg2X2VtdWxhdGUuYwo+IEBAIC00MDYxLDYgKzQw
-NjEsMTIgQEAgeDg2X2VtdWxhdGUoCj4gICAgICAgICAgICAgIH0KPiAgICAgICAgICB9Cj4gICAg
-ICAgICAgZHN0LnZhbCAmPSBFRkxBR1NfTU9ESUZJQUJMRTsKPiArCj4gKyAgICAgICAgLyogV2hl
-biBJRiB0cmFuc2l0aW9ucyBmcm9tIDAgdG8gMSwgYXNzZXJ0IHRoZSBTVEkgc2hhZG93LiAqLwo+
-ICsgICAgICAgIGlmICggIShfcmVncy5lZmxhZ3MgJiBYODZfRUZMQUdTX0lGKSAmJgo+ICsgICAg
-ICAgICAgICAgKChkc3QudmFsICYgfm1hc2spICYgWDg2X0VGTEFHU19JRikgKQo+ICsgICAgICAg
-ICAgICBjdHh0LT5yZXRpcmUuc3RpID0gdHJ1ZTsKCkknbSBlbnRpcmVseSB1bmF3YXJlIHRoYXQg
-UE9QRiBiZWhhdmVzIHRoZSBzYW1lIHdheSBhcyBTVEkgaW4gdGhpcwpyZWdhcmQuIFRoZXJlZm9y
-ZTogQXJlIHlvdSBzdXJlPyBDYW4geW91IHBvaW50IG1lIHRvIHdoZXJlIHRoaXMgaXMKc3BlbGxl
-ZCBvdXQ/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+T24gMTEvNi8xOCA3OjA3IEFNLCBTZXJnZXkgRHlhc2xpIHdyb3RlOgo+IEFzIGEgY29udmVuaWVu
+dCBoZWxwZXIgZnVuY3Rpb24gYW5kIHJlZmFjdG9yIHRoZSBjb2RlIHRvIHVzZSBpdC4KPgo+IE5v
+IGZ1bmN0aW9uYWwgY2hhbmdlLgo+Cj4gU2lnbmVkLW9mZi1ieTogU2VyZ2V5IER5YXNsaSA8c2Vy
+Z2V5LmR5YXNsaUBjaXRyaXguY29tPgo+IC0tLQo+IENDOiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlz
+Lm9zdHJvdnNreUBvcmFjbGUuY29tPgo+IENDOiBTdXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1cmF2
+ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+IENDOiBCcmlhbiBXb29kcyA8YnJpYW4ud29vZHNA
+YW1kLmNvbT4KPgo+IHYyOgo+IC0gVXNlIHRoZSBuZXcgaGVscGVyIGluIG5lc3RlZHN2bS5jCgpS
+ZXZpZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4K
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
