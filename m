@@ -1,22 +1,23 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 4/8] tools/libvchan: init_xs_srv: Simplify
- error handling (2)
-Date: Tue, 6 Nov 2018 11:42:00 +0000
-Message-ID: <23521.32264.655635.978393@mariner.uk.xensource.com>
+Subject: Re: [PATCH 8/8] tools/libvchan:
+ libxenvchan_client_init: use ENOENT for no server
+Date: Tue, 6 Nov 2018 11:45:47 +0000
+Message-ID: <23521.32491.467037.246289@mariner.uk.xensource.com>
 References: <23516.33005.649128.145551@mariner.uk.xensource.com>
  <20181102170113.11646-1-ian.jackson@eu.citrix.com>
- <20181102170113.11646-5-ian.jackson@eu.citrix.com>
- <20181106094811.gcsqvjkhliis7a7l@zion.uk.xensource.com>
+ <20181102170113.11646-9-ian.jackson@eu.citrix.com>
+ <20181106100016.hawdyzngqvo3zi73@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=gdlp=nr=citrix.com=prvs=841612198=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gJzkC-0003bP-Cf
- for xen-devel@lists.xenproject.org; Tue, 06 Nov 2018 11:42:04 +0000
-In-Reply-To: <20181106094811.gcsqvjkhliis7a7l@zion.uk.xensource.com>
+ id 1gJzns-0003tD-NF
+ for xen-devel@lists.xenproject.org; Tue, 06 Nov 2018 11:45:52 +0000
+In-Reply-To: <20181106100016.hawdyzngqvo3zi73@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,15 +30,19 @@ To: Wei Liu <wei.liu2@citrix.com>
 Cc: xen-devel@lists.xenproject.org, Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJSZTogW1BBVENIIDQvOF0gdG9vbHMvbGlidmNoYW46IGluaXRfeHNf
-c3J2OiBTaW1wbGlmeSBlcnJvciBoYW5kbGluZyAoMikiKToKPiBPbiBGcmksIE5vdiAwMiwgMjAx
-OCBhdCAwNTowMTowOVBNICswMDAwLCBJYW4gSmFja3NvbiB3cm90ZToKPiA+ICogQWJvbGlzaCBm
-YWlsX3hzX29wZW4gd2hpY2ggaXMgbm93IGV4YWN0bHkgdGhlIHNhbWUgYXMgZmFpbC4KPiA+ICog
-Q2hhbmdlIGFsbCBnb3RvcyB0byByZWZlciB0byBmYWlsIGluc3RlYWQuCj4gPiBObyBmdW5jdGlv
-bmFsIGNoYW5nZS4KPiAKPiBPaCAgaGVyZSBpdCBpcy4KClJpZ2h0IDotKS4gIFNlcGFyYXRpbmcg
-dGhlIHBhdGNoZXMgbGlrZSB0aGlzIG1hZGUgdGhlIGZpcnN0IGhhbGYgYSBsb3QKY2xlYXJlciwg
-SSBmb3VuZC4KCj4gRmVlbCBmcmVlIHRvIGFkZCBteSBhY2sgdG8geW91ciBwcmV2aW91cyBwYXRj
-aC4KClRoYW5rcy4KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+V2VpIExpdSB3cml0ZXMgKCJSZTogW1BBVENIIDgvOF0gdG9vbHMvbGlidmNoYW46IGxpYnhlbnZj
+aGFuX2NsaWVudF9pbml0OiB1c2UgRU5PRU5UIGZvciBubyBzZXJ2ZXIiKToKPiBPbiBGcmksIE5v
+diAwMiwgMjAxOCBhdCAwNTowMToxM1BNICswMDAwLCBJYW4gSmFja3NvbiB3cm90ZToKPiA+ICog
+UHJvbWlzZSB0aGF0IHdlIHdpbGwgc2V0IGVycm5vIHRvIEVOT0VOVCBpZiB0aGUgc2VydmVyIGlz
+IG5vdAo+ID4gICB5ZXQgc2V0IHVwLgo+ID4gKiBBcnJhbmdlIHRoYXQgYWxsIEVOT0VOVCByZXR1
+cm5zIG90aGVyIHRoYW4gZnJvbSB0aGUgcmVhZCBvZiByaW5nLXJlZgo+ID4gICBhcmUgdHVybmVk
+IGludG8gRUlPLCBsb2dnaW5nIHdoZW4gd2UgZG8gc28uCj4gCj4gVGhpcyBzb3VuZHMgcmVhc29u
+YWJsZSB0byBtZSwgYnV0IEkgd291bGQgbGlrZSB0byBoZWFyIGZyb20gTWFyZWsgdGhhdAo+IHRo
+aXMgZG9lc24ndCBicmVhayBRdWJlcy4KClJpZ2h0LiAgTWFyZWssIHRoaXMgc2VyaWVzIHdhcyBp
+bnRlbmRlZCB0byBoZWxwIHdpdGggdmNoYW4gZm9yIHFtcC4KQnV0IG9idmlvdXNseSBJIGRvbid0
+IHdhbnQgdG8gYnJlYWsgYW55dGhpbmcgZWxzZS4gIEkgZG9uJ3QgdGhpbmsgdGhpcwpzaG91bGQg
+YnJlYWsgYW55dGhpbmcgYnV0IEkgd291bGQgYXBwcmVjaWF0ZSBhIHJldmlldyBvciBhdCBsZWFz
+dCBhbgpvcGluaW9uLi4uCgpUaGFua3MsCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
