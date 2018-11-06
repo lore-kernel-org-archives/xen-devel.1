@@ -1,13 +1,15 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: Porting XEN hypervisor on iMX8QM
-Date: Tue, 6 Nov 2018 10:59:12 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1811061053370.18518@sstabellini-ThinkPad-X260>
+Date: Tue, 6 Nov 2018 19:06:07 +0000
+Message-ID: <469ba780-e86a-6db6-e772-e31f025122f4@arm.com>
 References: <CAAxnE7vgDxcekeE04z_Ps7mJ9EX6W9a=U+r765GKStuZNonBMw@mail.gmail.com>
+ <alpine.DEB.2.10.1811061053370.18518@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1753675011-1541530424=:18518"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAAxnE7vgDxcekeE04z_Ps7mJ9EX6W9a=U+r765GKStuZNonBMw@mail.gmail.com>
-Content-ID: <alpine.DEB.2.10.1811061053530.18518@sstabellini-ThinkPad-X260>
+In-Reply-To: <alpine.DEB.2.10.1811061053370.18518@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,57 +18,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ravi Pichholiya <pichholiyaravi@gmail.com>
-Cc: julien.grall@arm.com, sstabellini@kernel.org, xen-devel@lists.xen.org
+To: Stefano Stabellini <sstabellini@kernel.org>, Ravi Pichholiya <pichholiyaravi@gmail.com>
+Cc: Peng Fan <peng.fan@nxp.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1753675011-1541530424=:18518
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1811061053531.18518@sstabellini-ThinkPad-X260>
-
-Hi Ravi,
-
-Please have a look at our wiki as a reference:
-http://wiki.xenproject.org/wiki/Xen_ARM_with_Virtualization_Extensions
-
-I would start from cross-compiling the Xen hypervisor (the xen/
-directory), no need to build the Xen userspace tools initially.
-Make sure to have the right early boot uart driver, see
-CONFIG_EARLY_PRINTK and docs/misc/arm/early-printk.txt.
-
-After you boot the Xen binary from uboot, you should be able to see some
-console output from the hypervisror. The step after that is booting
-Dom0.
-
-Cheers,
-
-Stefano
-
-On Mon, 5 Nov 2018, Ravi Pichholiya wrote:
-> Hi Stefano,
-> This is in reference to our LinkedIn discussion, in our one of the project we need to port XEN hypervisor on iMx8QM.
-> 
-> Request you to share what all visibility we should require from boot prospective as currently we are having access to Device tree
-> and U-boot source code only. Is access to any other files are also required?
-> 
-> Also some reference to start with the porting of XEN if available with you.
-> 
-> Thanks & Regards,
-> Ravi Pichholiya
-> 
-> 
---8323329-1753675011-1541530424=:18518
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1753675011-1541530424=:18518--
+SGksCgpJIGFtIENDaW5nIFBlbmcgRmFuIHdobyBpcyB3b3JraW5nIGZvciBOWFAgYW5kIGFsc28g
+b24gWGVuLiBQZW5nLCBkbyB5b3UgaGF2ZSAKYW55IHBvaW50ZXIgdG8gZ2V0dGluZyBYZW4gcnVu
+bmluZyBvbiBpTVg4UU0/CgpDaGVlcnMsCgpPbiAwNi8xMS8yMDE4IDE4OjU5LCBTdGVmYW5vIFN0
+YWJlbGxpbmkgd3JvdGU6Cj4gSGkgUmF2aSwKPiAKPiBQbGVhc2UgaGF2ZSBhIGxvb2sgYXQgb3Vy
+IHdpa2kgYXMgYSByZWZlcmVuY2U6Cj4gaHR0cDovL3dpa2kueGVucHJvamVjdC5vcmcvd2lraS9Y
+ZW5fQVJNX3dpdGhfVmlydHVhbGl6YXRpb25fRXh0ZW5zaW9ucwo+IAo+IEkgd291bGQgc3RhcnQg
+ZnJvbSBjcm9zcy1jb21waWxpbmcgdGhlIFhlbiBoeXBlcnZpc29yICh0aGUgeGVuLwo+IGRpcmVj
+dG9yeSksIG5vIG5lZWQgdG8gYnVpbGQgdGhlIFhlbiB1c2Vyc3BhY2UgdG9vbHMgaW5pdGlhbGx5
+Lgo+IE1ha2Ugc3VyZSB0byBoYXZlIHRoZSByaWdodCBlYXJseSBib290IHVhcnQgZHJpdmVyLCBz
+ZWUKPiBDT05GSUdfRUFSTFlfUFJJTlRLIGFuZCBkb2NzL21pc2MvYXJtL2Vhcmx5LXByaW50ay50
+eHQuCj4gCj4gQWZ0ZXIgeW91IGJvb3QgdGhlIFhlbiBiaW5hcnkgZnJvbSB1Ym9vdCwgeW91IHNo
+b3VsZCBiZSBhYmxlIHRvIHNlZSBzb21lCj4gY29uc29sZSBvdXRwdXQgZnJvbSB0aGUgaHlwZXJ2
+aXNyb3IuIFRoZSBzdGVwIGFmdGVyIHRoYXQgaXMgYm9vdGluZwo+IERvbTAuCj4gCj4gQ2hlZXJz
+LAo+IAo+IFN0ZWZhbm8KPiAKPiBPbiBNb24sIDUgTm92IDIwMTgsIFJhdmkgUGljaGhvbGl5YSB3
+cm90ZToKPj4gSGkgU3RlZmFubywKPj4gVGhpcyBpcyBpbiByZWZlcmVuY2UgdG8gb3VyIExpbmtl
+ZEluIGRpc2N1c3Npb24sIGluIG91ciBvbmUgb2YgdGhlIHByb2plY3Qgd2UgbmVlZCB0byBwb3J0
+IFhFTiBoeXBlcnZpc29yIG9uIGlNeDhRTS4KPj4KPj4gUmVxdWVzdCB5b3UgdG8gc2hhcmUgd2hh
+dCBhbGwgdmlzaWJpbGl0eSB3ZSBzaG91bGQgcmVxdWlyZSBmcm9tIGJvb3QgcHJvc3BlY3RpdmUg
+YXMgY3VycmVudGx5IHdlIGFyZSBoYXZpbmcgYWNjZXNzIHRvIERldmljZSB0cmVlCj4+IGFuZCBV
+LWJvb3Qgc291cmNlIGNvZGUgb25seS4gSXMgYWNjZXNzIHRvIGFueSBvdGhlciBmaWxlcyBhcmUg
+YWxzbyByZXF1aXJlZD8KPj4KPj4gQWxzbyBzb21lIHJlZmVyZW5jZSB0byBzdGFydCB3aXRoIHRo
+ZSBwb3J0aW5nIG9mIFhFTiBpZiBhdmFpbGFibGUgd2l0aCB5b3UuCj4+Cj4+IFRoYW5rcyAmwqBS
+ZWdhcmRzLAo+PiBSYXZpIFBpY2hob2xpeWEKPj4KCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
