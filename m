@@ -1,16 +1,16 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v2 2/8] x86/nestedhvm: introduce
- vvmcx_valid()
-Date: Tue, 6 Nov 2018 09:58:26 -0500
-Message-ID: <aebb9815-0735-12e5-1803-427e729f39f5@oracle.com>
-References: <20181106120759.8789-1-sergey.dyasli@citrix.com>
- <20181106120759.8789-3-sergey.dyasli@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 3/6] tools/x86emul: Use struct cpuid_policy
+ in the userspace test harnesses
+Date: Tue, 06 Nov 2018 08:25:02 -0700
+Message-ID: <5BE1B24E02000078001F8B8A@prv1-mh.provo.novell.com>
+References: <1541416867-30253-1-git-send-email-andrew.cooper3@citrix.com>
+ <1541416867-30253-4-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181106120759.8789-3-sergey.dyasli@citrix.com>
-Content-Language: en-US
+In-Reply-To: <1541416867-30253-4-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,18 +19,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sergey Dyasli <sergey.dyasli@citrix.com>, xen-devel@lists.xen.org
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvNi8xOCA3OjA3IEFNLCBTZXJnZXkgRHlhc2xpIHdyb3RlOgo+IEFzIGEgY29udmVuaWVu
-dCBoZWxwZXIgZnVuY3Rpb24gYW5kIHJlZmFjdG9yIHRoZSBjb2RlIHRvIHVzZSBpdC4KPgo+IE5v
-IGZ1bmN0aW9uYWwgY2hhbmdlLgo+Cj4gU2lnbmVkLW9mZi1ieTogU2VyZ2V5IER5YXNsaSA8c2Vy
-Z2V5LmR5YXNsaUBjaXRyaXguY29tPgo+IC0tLQo+IENDOiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlz
-Lm9zdHJvdnNreUBvcmFjbGUuY29tPgo+IENDOiBTdXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1cmF2
-ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+IENDOiBCcmlhbiBXb29kcyA8YnJpYW4ud29vZHNA
-YW1kLmNvbT4KPgo+IHYyOgo+IC0gVXNlIHRoZSBuZXcgaGVscGVyIGluIG5lc3RlZHN2bS5jCgpS
-ZXZpZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4K
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDA1LjExLjE4IGF0IDEyOjIxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gKyNkZWZpbmUgY2FjaGVfbGluZV9zaXplKCkgKGNwLmJhc2ljLmNsZmx1c2hfc2l6ZSAq
+IDgpCgpXaGlsZSB0aGUgcGFyZW50aGVzZXMgYXJlIGluZGVlZCBuZWVkZWQgaGVyZSwgLi4uCgo+
+ICsjZGVmaW5lIGNwdV9oYXNfbW14ICAgICAgIChjcC5iYXNpYy5tbXgpCgouLi4gdGhleSBjb3Vs
+ZCBiZSBvbWl0dGVkIGhlcmUuIEknZCBwcmVmZXIgaWYgdGhleSB3ZXJlIGRyb3BwZWQsCmJ1dCB3
+aGljaGV2ZXIgd2F5IHlvdSBkZWNpZGUgdG8gZG8KQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1
+bGljaEBzdXNlLmNvbT4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
