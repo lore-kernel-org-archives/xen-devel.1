@@ -1,14 +1,22 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] tools/xen-cpuid: Fix 32bit build
-Date: Wed, 7 Nov 2018 12:54:09 +0000
-Message-ID: <20181107125409.ays7jriv6hvorbi2@zion.uk.xensource.com>
-References: <1541595204-4286-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 7/8] xenalyze: Build for Both ARM and x86
+ Platforms
+Date: Wed, 7 Nov 2018 13:04:50 +0000
+Message-ID: <20181107130450.fjvynz3ytkunbib4@zion.uk.xensource.com>
+References: <20181106191454.22143-1-julien.grall@arm.com>
+ <20181106191454.22143-8-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=eq5n=ns=citrix.com=prvs=8424bdc41=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gKNVv-0000zP-HR
+ for xen-devel@lists.xenproject.org; Wed, 07 Nov 2018 13:04:55 +0000
 Content-Disposition: inline
-In-Reply-To: <1541595204-4286-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <20181106191454.22143-8-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,18 +25,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Ian Jackson <Ian.Jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: sstabellini@kernel.org, Wei Liu <wei.liu2@citrix.com>, Benjamin Sanda <ben.sanda@dornerworks.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBOb3YgMDcsIDIwMTggYXQgMTI6NTM6MjRQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBDbGFuZyByZXBvcnRzOgo+IAo+ICAgeGVuLWNwdWlkLmM6MzA3OjI5OiBlcnJvcjog
-Zm9ybWF0IHNwZWNpZmllcyB0eXBlICd1bnNpZ25lZCBsb25nJyBidXQgdGhlCj4gICBhcmd1bWVu
-dCBoYXMgdHlwZSAndWludDY0X3QnIChha2EgJ3Vuc2lnbmVkIGxvbmcgbG9uZycpIFstV2Vycm9y
-LC1XZm9ybWF0XQo+IAo+ICAgICAgICAgICAgICAgICAgbXNyc1tsXS5pZHgsIG1zcnNbbF0udmFs
-KTsKPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+fn5+fn5+fgo+IAo+IFVzZSBQ
-Ukl4NjQgaW5zdGVhZC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5j
-b20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCBOb3YgMDYsIDIwMTggYXQgMDc6MTQ6NTNQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
+b3RlOgo+IEZyb206IEJlbmphbWluIFNhbmRhIDxiZW4uc2FuZGFAZG9ybmVyd29ya3MuY29tPgo+
+IAo+IE1vZGlmaWVkIHRvIHByb3ZpZGUgYnVpbGRpbmcgb2YgdGhlIHhlbmFseXplIGJpbmFyeSBm
+b3IgYm90aCBBUk0gYW5kCj4geDg2IHBsYXRmb3Jtcy4gVGhlIHhlbmFseXplIGJpbmFyeSBpcyBu
+b3cgYnVpbHQgYXMgcGFydCBvZiB0aGUgQklOCj4gbGlzdCBmb3IgYm90aCBwbGF0Zm9ybXMuCj4g
+Cj4gU2lnbmVkLW9mZi1ieTogQmVuamFtaW4gU2FuZGEgPGJlbi5zYW5kYUBkb3JuZXJ3b3Jrcy5j
+b20+Cj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4K
+CkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
