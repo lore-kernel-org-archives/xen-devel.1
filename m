@@ -1,18 +1,25 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] xen: sched: Credit2: during scheduling,
- update the idle mask before using it
-Date: Wed, 07 Nov 2018 18:58:54 +0100
-Message-ID: <742baf00117093a38fbd35b8ffb7e0d13b0cde61.camel@suse.com>
-References: <153926549830.22680.203200918007449375.stgit@wayrath>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v4 10/12] IOMMU: introduce IOMMU_MIXED
+ config option
+Date: Wed, 7 Nov 2018 18:01:59 +0000
+Message-ID: <dfa558ec-fe4a-98f5-96ef-ebba77235cea@arm.com>
+References: <5B97C28802000078001E7456@prv1-mh.provo.novell.com>
+ <5BB343D802000078001ED9F6@prv1-mh.provo.novell.com>
+ <5BB345DD02000078001EDA5A@prv1-mh.provo.novell.com>
+ <cd8f6501-75d8-4c97-8559-77ac5b834fc6@arm.com>
+ <5BE1B7B502000078001F8BD3@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7367197121225770723=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=3bvd=ns=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gKS6Z-0001im-LS
- for xen-devel@lists.xenproject.org; Wed, 07 Nov 2018 17:59:03 +0000
-In-Reply-To: <153926549830.22680.203200918007449375.stgit@wayrath>
+ <srs0=seal=ns=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gKS9U-0002gz-2T
+ for xen-devel@lists.xenproject.org; Wed, 07 Nov 2018 18:02:04 +0000
+In-Reply-To: <5BE1B7B502000078001F8BD3@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,84 +28,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7367197121225770723==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-0GFY1BRJghQWKtSmcMtT"
-
-
---=-0GFY1BRJghQWKtSmcMtT
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2018-10-11 at 15:44 +0200, Dario Faggioli wrote:
-> Load balancing, when happening, at the end of a "scheduler epoch",
-> can
-> trigger vcpu migration, which in its turn may call runq_tickle(). If
-> the
-> cpu where this happens was idle, but we're now going to schedule a
-> vcpu
-> on it, let's update the runq's idle cpus mask accordingly _before_
-> doing
-> load balancing.
->=20
-> Not doing that, in fact, may cause runq_tickle() to think that the
-> cpu
-> is still idle, and tickle it to go pick up a vcpu from the runqueue,
-> which might be wrong/unideal.
->=20
-> Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
-> ---
-> Cc: George Dunlap <george.dunlap@citrix.com>
->
-Ping?
-
-Thanks and Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-0GFY1BRJghQWKtSmcMtT
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvjJ94ACgkQFkJ4iaW4
-c+6Vvw//QT9IIohircsd8nHlKe9yn9vr5hEdCl9wklFS3dR6VxsNxO6N/UeceO8Y
-YwZK6T93Y2uMuvSV/DYzhX3oDYbOOtyPQT4ycxdIGiEOhiaOux3fotNAp6d923+4
-myIevWk2JyJTvXdpODU+TSrUCm6SfF59idRki9B/PYl4+xQpJCc4WtSkDiWh8etq
-QCbHGtoc6yyB9BbiSNjZ6Ro7BTYUysRImMFiVg+GDBNz7+9PPPrjmkGPuaBJPrh2
-RQ2K+rlOCakSXSRxSWtqHvVERr6BmLJvMv47iL0tKrdcpoHWdzRW8/AYh6RuOGal
-KBeLft1R/9ZUiblGcs2H5nwDHhn7xqMCZIrds/NUt8eswvNDNvz7jA7KaAtbrnFW
-HanKYOCzCleIfzFnQDoPYcu9AKQ4xvNeIhYvRgK8CSOXBwhjzMCRMmr/oS9HiPe4
-+UKQPjooJHSjRDeC8GqTas3c8eq5O8TCP9TdC9eNoZbabCQ64TEGU57qiQHSEIw2
-3+KQ6nbUabEiS8jUAyVZHPlxjow4KmZ8YRSW8K3gFQC3rW/ZyZGi/djxWJDqL6ef
-K7Cn2UrXN3ivLtU5FRJWvQr/QYot15mX21FSeSzTaZSGafO+GHBoVKps3xh3xlCe
-XAmp9uuPsQ399xTOueY+eRffH4p9eJh+fUZSXB2Vbi/FWh9xOOg=
-=SOsT
------END PGP SIGNATURE-----
-
---=-0GFY1BRJghQWKtSmcMtT--
-
-
-
---===============7367197121225770723==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7367197121225770723==--
+SGkgSmFuLAoKT24gMDYvMTEvMjAxOCAxNTo0OCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24g
+MDIuMTAuMTggYXQgMTI6MzgsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IE9uIDAy
+LzEwLzIwMTggMTE6MTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4gQVJNIGlzIGludGVuZGVkIHRv
+IGdhaW4gc3VwcG9ydCBmb3IgaGV0ZXJvZ2VuZW91cyBJT01NVXMgb24gYSBzaW5nbGUKPj4+IHN5
+c3RlbS4gVGhpcyBub3Qgb25seSBkaXNhbGxvd3MgYm9vdCB0aW1lIHJlcGxhY2VtZW50IG9mIHJl
+c3BlY3RpdmUKPj4+IGluZGlyZWN0IGNhbGxzIChoYW5kbGluZyBvZiB3aGljaCBpcyB0aGUgbWFp
+biBnb2FsIG9mIHRoZSBpbnRyb2R1Y3Rpb24KPj4+IGhlcmUpLCBidXQgbW9yZSBnZW5lcmFsbHkg
+ZGlzYWxsb3dzIGNhbGxzIHVzaW5nIHRoZSBpb21tdV9vcHMoKSByZXR1cm4KPj4+IHZhbHVlIGRp
+cmVjdGx5IC0gYWxsIHN1Y2ggY2FsbHMgbmVlZCB0byBoYXZlIG1lYW5zIChjb21tb25seSBhIGRv
+bWFpbgo+Pj4gcG9pbnRlcikgdG8ga25vdyB0aGUgdGFyZ2V0ZWQgSU9NTVUuCj4+Pgo+Pj4gRGlz
+YWxsb3cgYWxsIGhvb2tzIGxhY2tpbmcgc3VjaCBjb250ZXh0IGZvciB0aGUgdGltZSBiZWluZywg
+d2hpY2ggaW4KPj4+IGVmZmVjdCBpcyBzb21lIGRlYWQgY29kZSBlbGltaW5hdGlvbiBmb3IgQVJN
+LiBPbmNlIGV4dGVuZGVkIHN1aXRhYmx5LAo+Pj4gaW5kaXZpZHVhbCBvZiB0aGVzZSBob29rcyBj
+YW4gYmUgbW92ZWQgb3V0IG9mIHRoZWlyIGd1YXJkcyBhZ2FpbiBpbiB0aGUKPj4+IGZ1dHVyZS4K
+Pj4KPj4gV2hpbGUgaW4gdGhlb3J5IGl0IGlzIHBvc3NpYmxlIHRvIGhhdmUgcGxhdGZvcm0gd2l0
+aCBoZXRlcmVuZW91cyBJT01NVXMuCj4+ICAgIEkgZG9uJ3Qgc2VlIHN1Y2ggc3VjaCBzdXBwb3J0
+IGNvbWluZyBpbiBYZW4gZm9yIHRoZSBmb3Jlc2VlYWJsZQo+PiBmdXR1cmUuIE5vdGUgdGhhdCBl
+dmVuIExpbnV4IGRvZXMgbm90IHN1cHBvcnQgc3VjaCBjYXNlLgo+Pgo+PiBUaGlzIHBhdGNoIGlz
+IGdvaW5nIHRvIG1ha2UgbW9yZSBjb21wbGljYXRlIHRvIHVuc2hhcmUgcGFnZS10YWJsZXMgYXMK
+Pj4gbm93IHdlIHdvdWxkIG5lZWQgdG8gY2FyZSBvZiBtaXhlZCBjYXNlLiBTbyBJIHdvdWxkIHJh
+dGhlciBub3Qgc2V0Cj4+IElPTU1VX01JWEVEIG9uIEFybSB1bnRpbCB3ZSBoYXZlIGEgdXNlIGNh
+c2UgZm9yIGl0Lgo+IAo+IFNvIGlmIEkgZHJvcCB0aGlzIGhlcmUsIGhvdyB3b3VsZCB5b3Ugd2Fu
+dCBpb21tdV9nZXRfb3BzKCkKPiBnZXQgaGFuZGxlZCBvbiBBcm0gKHBhdGNoIDExKT8gUmlnaHQg
+bm93IEknZCBtZWFuIHRvIGxlYXZlIGl0Cj4gYWxvbmUsIGJ1dCBpdCBjb3VsZCBhbHNvIGJlIHN3
+aXRjaGVkIHRvIHRoZSAobmV3KSB4ODYgd2F5IChidXQKPiB0aGF0IHdvdWxkIHRoZW4gcGVyaGFw
+cyBtYWtlIG1peGVkIG1vZGUgaW50cm9kdWN0aW9uIG1vcmUKPiBkaWZmaWN1bHQgZG93biB0aGUg
+cm9hZCksIGFsbG93aW5nIHRvIGdldCBhd2F5IHdpdGggZmV3ZXIKPiAjaWZkZWYtcy4KCkkgd291
+bGQgaW50cm9kdWNlIHRoZSBpb21tdV9nZXRfb3BzIGZvciB4ODYgaW4gYXNtLXg4Ni9pb21tdS5o
+LgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
