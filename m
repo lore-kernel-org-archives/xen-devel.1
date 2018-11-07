@@ -1,23 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 8/8] xen: Swich parameter in
- get_page_from_gfn to use typesafe gfn
-Date: Wed, 7 Nov 2018 13:08:30 +0000
-Message-ID: <409e3d54-2ae6-155c-a6bb-cd8f8d80cc26@arm.com>
-References: <20181106191454.22143-1-julien.grall@arm.com>
- <20181106191454.22143-9-julien.grall@arm.com>
- <479bb855-0bb7-dd30-a7a4-692b189cc7c5@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v3 4/5] tools/misc: fix hard tabs in
+ xen-hvmctx.c
+Date: Wed, 7 Nov 2018 13:08:38 +0000
+Message-ID: <20181107130838.urbvile4kfgexf33@zion.uk.xensource.com>
+References: <20181107105223.27013-1-paul.durrant@citrix.com>
+ <20181107105223.27013-5-paul.durrant@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=seal=ns=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gKNZT-0001Dz-R1
- for xen-devel@lists.xenproject.org; Wed, 07 Nov 2018 13:08:35 +0000
-In-Reply-To: <479bb855-0bb7-dd30-a7a4-692b189cc7c5@citrix.com>
-Content-Language: en-US
+ <srs0=eq5n=ns=citrix.com=prvs=8424bdc41=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gKNZa-0001Eb-5u
+ for xen-devel@lists.xenproject.org; Wed, 07 Nov 2018 13:08:42 +0000
+Content-Disposition: inline
+In-Reply-To: <20181107105223.27013-5-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,20 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, sstabellini@kernel.org, xen-devel@lists.xenproject.org
-Cc: Jun Nakajima <jun.nakajima@intel.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQW5kcmV3LAoKT24gMDYvMTEvMjAxOCAyMDoxMSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBU
-aGlzIGxvb2tzIGxpa2UgaXQgd291bGQgYmUgY2xlYW5lciBieSBub3Qgc3BsaXR0aW5nIG1mbiBv
-dXQgaW50byBhCj4gc2VwYXJhdGUgdmFyaWFibGUuCj4gCj4gcGFnZSA9IG1mbl90b19wYWdlKF9t
-Zm4oZ2ZuX3goZ2ZuKSkpOwo+IAo+IHJldHVybiBtZm5fdmFsaWQobWZuKSAmJiBnZXRfcGFnZShw
-YWdlLCBkKSA/IHBhZ2UgOiBOVUxMOwo+IAo+IFRoZSBvbmx5IHJlYXNvbiB0aGlzIGxvb2tzIG9k
-ZCBpcyBiZWNhdXNlIG9mIHRoZSBtZm4gPT4gZ2ZuIGVxdWFsaXR5LAo+IGJ1dCB3ZSBhcmUganVz
-dCBiZXNpZGUgYSBjb21tZW50IGV4cGxhaW5pbmcgdGhhdCB3ZSBhcmUgbm9uLXRyYW5zbGF0ZWQu
-CgpJIGludHJvZHVjZWQgdGhlIG1mbiB2YXJpYWJsZSB0byBhdm9pZCBkdXBsaWNhdGluZyBfbWZu
-KGdmbl94KGdmbikpIGluIHRoZSB0d28gCnBsYWNlcyB3aGVyZSBnZm4gd2FzIHVzZWQuCgpJIGFt
-IGhhcHB5IHRvIGR1cGxpY2F0ZWQgaWYgeW91IHByZWZlci4KCkNoZWVycywKCi0tIApKdWxpZW4g
-R3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBOb3YgMDcsIDIwMTggYXQgMTA6NTI6MjJBTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IEFsc28gYWRkIGVtYWNzIGJvaWxlcnBsYXRlIHRvIGF2b2lkIGZ1dHVyZSBwcm9ibGVt
+cy4KPiAKPiBQdXJlbHkgY29zbWV0aWMuIE5vIGZ1bmN0aW9uYWwgY2hhbmdlLgo+IAo+IFNpZ25l
+ZC1vZmYtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+Cj4gQWNrZWQt
+Ynk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpJIGhhdmUgcHVzaGVkIHRoaXMgcGF0
+Y2ggdG8gc3RhZ2luZy4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
