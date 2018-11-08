@@ -1,20 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/amd: don't set pv_post_outb_hook when
- !CONFIG_PV
-Date: Thu, 8 Nov 2018 14:58:49 +0000
-Message-ID: <8cf749f8-244b-932d-6908-4cd5b2933cf4@citrix.com>
-References: <20181108145809.12232-1-wei.liu2@citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH v8] arch/x86: Add registers to vm_event
+Date: Thu, 8 Nov 2018 17:19:48 +0200
+Message-ID: <a0028d6c-27f6-5e39-c19b-39da0474e276@bitdefender.com>
+References: <20181105095354.9082-1-aisaila@bitdefender.com>
+ <CABfawh=8mksd3_ZO0i=0q44VGoyRj2pHOudczYTfzdH7brZnoQ@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nrah=nt=citrix.com=prvs=843bae1bd=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1gKlsV-0003Uc-GO
- for xen-devel@lists.xenproject.org; Thu, 08 Nov 2018 15:05:51 +0000
-In-Reply-To: <20181108145809.12232-1-wei.liu2@citrix.com>
-Content-Language: en-GB
+ <srs0=6g0g=nt=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1gKm68-0004VT-Nh
+ for xen-devel@lists.xenproject.org; Thu, 08 Nov 2018 15:19:56 +0000
+In-Reply-To: <CABfawh=8mksd3_ZO0i=0q44VGoyRj2pHOudczYTfzdH7brZnoQ@mail.gmail.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,13 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Tamas K Lengyel <tamas@tklengyel.com>, Alexandru Isaila <aisaila@bitdefender.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMTEvMTggMTQ6NTgsIFdlaSBMaXUgd3JvdGU6Cj4gT2J2aW91c2x5IGl0IHdvbid0IGV4
-aXN0IHdoZW4gUFYgaXMgZGlzYWJsZWQuCj4KPiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWku
-bGl1MkBjaXRyaXguY29tPgoKQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
-QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTEvNi8xOCA3OjE2IFBNLCBUYW1hcyBLIExlbmd5ZWwgd3JvdGU6Cj4gT24gTW9uLCBOb3Yg
+NSwgMjAxOCBhdCAyOjU0IEFNIEFsZXhhbmRydSBTdGVmYW4gSVNBSUxBCj4gPGFpc2FpbGFAYml0
+ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4KPj4gVGhpcyBwYXRjaCBhZGRzIGEgY291cGxlIG9mIHJl
+Z3MgdG8gdGhlIHZtX2V2ZW50IHRoYXQgYXJlIHVzZWQgYnkKPj4gdGhlIGludHJvc3BlY3Rpb24u
+IFRoZSBiYXNlLCBsaW1pdCBhbmQgYXIKPj4gYml0cyBhcmUgY29tcHJlc3NlZCBpbnRvIGEgdWlu
+dDY0X3QgdW5pb24gc28gYXMgbm90IHRvIGVubGFyZ2UgdGhlCj4+IHZtX2V2ZW50Lgo+Pgo+PiBT
+aWduZWQtb2ZmLWJ5OiBBbGV4YW5kcnUgSXNhaWxhIDxhaXNhaWxhQGJpdGRlZmVuZGVyLmNvbT4K
+PiAKPiBBY2tlZC1ieTogVGFtYXMgSyBMZW5neWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29tPgoKVG8g
+dGhlIGJlc3Qgb2YgbXkgYWJpbGl0eSB0byBmaWd1cmUgb3V0IHRoZSBuZWNlc3NhcnkgYWNrcywg
+SSBiZWxpZXZlCnRoYXQgdGhpcyBvbmUgaXMgcmVhZHkgdG8gZ28gaW4uIDopCgoKVGhhbmtzLApS
+YXp2YW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
