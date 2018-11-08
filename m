@@ -1,21 +1,16 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: Guest soft lockups with "xen: make xen_qlock_wait()
- nestable"
-Date: Thu, 8 Nov 2018 09:18:02 +0100
-Message-ID: <4a3e30f5-917e-ea54-0ff9-8135ee3bd4a4@suse.com>
-References: <3a55659d-4d7e-ea03-0c46-cd115ff1d8f9@eikelenboom.it>
- <c007d98d-1744-f40c-a801-8c1956605d29@suse.com>
- <9e2d3c8a-07b8-dcf8-fb52-0071b63b92d2@eikelenboom.it>
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+Subject: Re: [PATCH v2] mm/page_alloc: make bootscrub happen in
+ idle-loop
+Date: Thu, 8 Nov 2018 09:05:28 +0000
+Message-ID: <c8da68f7-d499-3b8a-41e8-d28e59f0867a@citrix.com>
+References: <20181009152119.15567-1-sergey.dyasli@citrix.com>
+ <d3ce560e-4df8-9f31-d511-90af144361c4@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------8EDF101C66654113A4FFDE2F"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=wlbw=nt=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gKfVu-0001lM-TU
- for xen-devel@lists.xenproject.org; Thu, 08 Nov 2018 08:18:06 +0000
-In-Reply-To: <9e2d3c8a-07b8-dcf8-fb52-0071b63b92d2@eikelenboom.it>
-Content-Language: de-DE
+In-Reply-To: <d3ce560e-4df8-9f31-d511-90af144361c4@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,141 +19,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sander Eikelenboom <linux@eikelenboom.it>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
+Cc: "sergey.dyasli@citrix.com >> Sergey Dyasli" <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------8EDF101C66654113A4FFDE2F
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-On 08/11/2018 09:14, Sander Eikelenboom wrote:
-> On 08/11/18 08:08, Juergen Gross wrote:
->> On 07/11/2018 10:30, Sander Eikelenboom wrote:
->>> Hi Juergen / Boris,
->>>
->>> Last week i tested Linux kernel 4.19.0 stable with the Xen "for-linus-4.20" branch pulled on top.
->>> Unfortunately i was seeing guests lockup after some time, see below for the logging from one of the guest
->>> which i was able to capture.
->>> Reverting "xen: make xen_qlock_wait() nestable" 7250f6d35681dfc44749d90598a2d51a118ce2b8,
->>> made the lockups disappear.
->>>
->>> These guests are stressed quite hard in both CPU and networking, 
->>> so they are probably more susceptible to locking issues.
->>>
->>> System is a AMD phenom x6, running Xen-unstable.
->>>
->>> Any ideas ?
->>
->> Just checked the hypervisor again: it seems a pending interrupt for a
->> HVM/PVH vcpu won't let SCHEDOP_poll return in case interrupts are
->> disabled.
->>
->> I need to rework the patch for that scenario. Until then I'll revert
->> it.
-> 
-> Thanks for looking into it.
-
-Could you try the attached patch (on top of 7250f6d35681df)?
-
-
-Juergen
-
-
---------------8EDF101C66654113A4FFDE2F
-Content-Type: text/x-patch;
- name="0001-xen-fix-xen_qlock_wait.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="0001-xen-fix-xen_qlock_wait.patch"
-
->From 4f2d04b321d4eb50dab5cdfaa025336f9360618a Mon Sep 17 00:00:00 2001
-From: Juergen Gross <jgross@suse.com>
-Date: Thu, 8 Nov 2018 08:35:06 +0100
-Subject: [PATCH] xen: fix xen_qlock_wait()
-
-Commit a856531951dc80 ("xen: make xen_qlock_wait() nestable")
-introduced a regression for Xen guests running fully virtualized
-(HVM or PVH mode). The Xen hypervisor wouldn't return from the poll
-hypercall with interrupts disabled in case of an interrupt (for PV
-guests it does).
-
-So instead of disabling interrupts in xen_qlock_wait() use a nesting
-counter to avoid calling xen_clear_irq_pending() in case
-xen_qlock_wait() is nested.
-
-Fixes: a856531951dc80 ("xen: make xen_qlock_wait() nestable")
-Cc: stable@vger.kernel.org
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- arch/x86/xen/spinlock.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
-
-diff --git a/arch/x86/xen/spinlock.c b/arch/x86/xen/spinlock.c
-index 441c88262169..22f3baa67a25 100644
---- a/arch/x86/xen/spinlock.c
-+++ b/arch/x86/xen/spinlock.c
-@@ -9,6 +9,7 @@
- #include <linux/log2.h>
- #include <linux/gfp.h>
- #include <linux/slab.h>
-+#include <linux/atomic.h>
- 
- #include <asm/paravirt.h>
- #include <asm/qspinlock.h>
-@@ -21,6 +22,7 @@
- 
- static DEFINE_PER_CPU(int, lock_kicker_irq) = -1;
- static DEFINE_PER_CPU(char *, irq_name);
-+static DEFINE_PER_CPU(atomic_t, xen_qlock_wait_nest);
- static bool xen_pvspin = true;
- 
- static void xen_qlock_kick(int cpu)
-@@ -39,25 +41,25 @@ static void xen_qlock_kick(int cpu)
-  */
- static void xen_qlock_wait(u8 *byte, u8 val)
- {
--	unsigned long flags;
- 	int irq = __this_cpu_read(lock_kicker_irq);
- 
- 	/* If kicker interrupts not initialized yet, just spin */
- 	if (irq == -1 || in_nmi())
- 		return;
- 
--	/* Guard against reentry. */
--	local_irq_save(flags);
-+	/* Detect reentry. */
-+	atomic_inc(&xen_qlock_wait_nest);
- 
--	/* If irq pending already clear it. */
--	if (xen_test_irq_pending(irq)) {
-+	/* If irq pending already and no nested call clear it. */
-+	if (atomic_read(&xen_qlock_wait_nest) == 1 &&
-+	    xen_test_irq_pending(irq)) {
- 		xen_clear_irq_pending(irq);
- 	} else if (READ_ONCE(*byte) == val) {
- 		/* Block until irq becomes pending (or a spurious wakeup) */
- 		xen_poll_irq(irq);
- 	}
- 
--	local_irq_restore(flags);
-+	atomic_dec(&xen_qlock_wait_nest);
- }
- 
- static irqreturn_t dummy_handler(int irq, void *dev_id)
--- 
-2.16.4
-
-
---------------8EDF101C66654113A4FFDE2F
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------8EDF101C66654113A4FFDE2F--
+T24gMDcvMTEvMjAxOCAxODoyMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwOS8xMC8xOCAx
+NjoyMSwgU2VyZ2V5IER5YXNsaSB3cm90ZToKPj4gU2NydWJiaW5nIFJBTSBkdXJpbmcgYm9vdCBt
+YXkgdGFrZSBhIGxvbmcgdGltZSBvbiBtYWNoaW5lcyB3aXRoIGxvdHMKPj4gb2YgUkFNLiBBZGQg
+J2lkbGUnIG9wdGlvbiB0byBib290c2NydWIgd2hpY2ggbWFya3MgYWxsIHBhZ2VzIGRpcnR5Cj4+
+IGluaXRpYWxseSBzbyB0aGV5IHdpbGwgZXZlbnR1YWxseSBiZSBzY3J1YmJlZCBpbiBpZGxlLWxv
+b3Agb24gZXZlcnkKPj4gb25saW5lIENQVS4KPj4KPj4gSXQncyBndWFyYW50ZWVkIHRoYXQgdGhl
+IGFsbG9jYXRvciB3aWxsIHJldHVybiBzY3J1YmJlZCBwYWdlcyBieSBkb2luZwo+PiBlYWdlciBz
+Y3J1YmJpbmcgZHVyaW5nIGFsbG9jYXRpb24gKHVubGVzcyBNRU1GX25vX3NjcnViIHdhcyBwcm92
+aWRlZCkuCj4+Cj4+IFVzZSB0aGUgbmV3ICdpZGxlJyBvcHRpb24gYXMgdGhlIGRlZmF1bHQgb25l
+Lgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJp
+eC5jb20+Cj4gCj4gVGhpcyBwYXRjaCByZWxpYWJseSBicmVha3MgYm9vdCwgYWx0aG91Z2ggaXRz
+IG5vdCBpbW1lZGlhdGVseSBvYnZpb3VzIGhvdzoKPiAKPiAoZDkpIChYRU4pIG1jaGVja19wb2xs
+OiBNYWNoaW5lIGNoZWNrIHBvbGxpbmcgdGltZXIgc3RhcnRlZC4KPiAoZDkpIChYRU4pIHhlbm9w
+cm9mOiBJbml0aWFsaXphdGlvbiBmYWlsZWQuIEludGVsIHByb2Nlc3NvciBmYW1pbHkgNiBtb2Rl
+bCA2MCBpcyBub3Qgc3VwcG9ydGVkCj4gKGQ5KSAoWEVOKSBEb20wIGhhcyBtYXhpbXVtIDQwMCBQ
+SVJRcwo+IChkOSkgKFhFTikgLS0tLVsgWGVuLTQuMTItdW5zdGFibGUgIHg4Nl82NCAgZGVidWc9
+eSAgIE5vdCB0YWludGVkIF0tLS0tCj4gKGQ5KSAoWEVOKSBDUFU6ICAgIDAKPiAoZDkpIChYRU4p
+IFJJUDogICAgZTAwODpbPGZmZmY4MmQwODA0NDBkZGI+XSBzZXR1cC5jI2NtZGxpbmVfY29vaysw
+eDFkLzB4NzcKPiAoZDkpIChYRU4pIFJGTEFHUzogMDAwMDAwMDAwMDAxMDI4MiAgIENPTlRFWFQ6
+IGh5cGVydmlzb3IKPiAoZDkpIChYRU4pIHJheDogZmZmZjgyZDA4MDQwNmJkYyAgIHJieDogZmZm
+ZjgzMDBjMmMyYzJjMiAgIHJjeDogMDAwMDAwMDAwMDAwMDAwMAo+IChkOSkgKFhFTikgcmR4OiAw
+MDAwMDAwN2M3ZmZmZmZmICAgcnNpOiBmZmZmODMwMDAwNDVjMjRiICAgcmRpOiBmZmZmODMwMDAw
+NDVjMjRiCj4gKGQ5KSAoWEVOKSByYnA6IGZmZmY4MmQwODA0YjdkYTggICByc3A6IGZmZmY4MmQw
+ODA0YjdkOTggICByODogIGZmZmY4MzAwM2YwNTcwMDAKPiAoZDkpIChYRU4pIHI5OiAgN2ZmZmZm
+ZmZmZmZmZmZmZiAgIHIxMDogMDAwMDAwMDAwMDAwMDAwMCAgIHIxMTogMDAwMDAwMDAwMDAwMDAw
+MQo+IChkOSkgKFhFTikgcjEyOiBmZmZmODMwMDNmMGQ4MTAwICAgcjEzOiAwMDAwMDAwMDAwMDAw
+MDAwICAgcjE0OiBmZmZmODJkMDgwNWYzM2QwCj4gKGQ5KSAoWEVOKSByMTU6IDAwMDAwMDAwMDAw
+MDAwMDIgICBjcjA6IDAwMDAwMDAwODAwNTAwM2IgICBjcjQ6IDAwMDAwMDAwMDAxNTI2ZTAKPiAo
+ZDkpIChYRU4pIGNyMzogMDAwMDAwMDAzZmVhNzAwMCAgIGNyMjogZmZmZjgzMDBjMmMyYzJjMgo+
+IChkOSkgKFhFTikgZnNiOiAwMDAwMDAwMDAwMDAwMDAwICAgZ3NiOiAwMDAwMDAwMDAwMDAwMDAw
+ICAgZ3NzOiAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSBkczogMDAwMCAgIGVzOiAwMDAw
+ICAgZnM6IDAwMDAgICBnczogMDAwMCAgIHNzOiAwMDAwICAgY3M6IGUwMDgKPiAoZDkpIChYRU4p
+IFhlbiBjb2RlIGFyb3VuZCA8ZmZmZjgyZDA4MDQ0MGRkYj4gKHNldHVwLmMjY21kbGluZV9jb29r
+KzB4MWQvMHg3Nyk6Cj4gKGQ5KSAoWEVOKSAgMDUgNWUgZmMgZmYgNDggMGYgNDQgZDggPDgwPiAz
+YiAyMCA3NSAwOSA0OCA4MyBjMyAwMSA4MCAzYiAyMCA3NCBmNyA4MCAzZAo+IChkOSkgKFhFTikg
+WGVuIHN0YWNrIHRyYWNlIGZyb20gcnNwPWZmZmY4MmQwODA0YjdkOTg6Cj4gKGQ5KSAoWEVOKSAg
+ICAwMDAwMDAwMDAwMDAwMDAwIGZmZmY4MzAwYzJjMmMyYzIgZmZmZjgyZDA4MDRiN2VlOCBmZmZm
+ODJkMDgwNDQzYjdmCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAz
+ZjM0ODAgMDAwMDAwMDAwMDAwMDAwMiAwMDAwMDAwMDAwMDAwMDAyCj4gKGQ5KSAoWEVOKSAgICAw
+MDAwMDAwMDAwMDAwMDAyIDAwMDAwMDAwMDAwMDAwMDIgMDAwMDAwMDAwMDAwMDAwMiAwMDAwMDAw
+MDAwMDAwMDAxCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAxIDAwMDAwMDAwMDAwMDAw
+MDMgMDAwMDAwMDAwMDBmZWZmYyAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAw
+MDAwMDAwMGZlZmZkIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDgwMDE2MyAwMDAwMDAwMGZl
+ZmZkMDAwCj4gKGQ5KSAoWEVOKSAgICBmZmZmODMwMDAwNDVjMjRiIGZmZmZmZmZmMDAwMDAwMDIg
+MDAwMDAwMDAwMDAwMDAwMSAwMDAwMDAwMDAwMDAwMDAxCj4gKGQ5KSAoWEVOKSAgICBmZmZmODMw
+MDAwNDhkYTgwIGZmZmY4MmQwODA0OGRiMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAw
+MDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAyMDAwMDAwMDQgMDAw
+MDAwNDBmZmZmZmZmZiAwMDAwMDAwMDAwMDAwNDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwODAw
+MDAwMDAwIDAwMDAwMDAxMDAwMDAwNmUgMDAwMDAwMDAwMDAwMDAwMyAwMDAwMDAwMDAwMDAwMmY4
+Cj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAw
+MDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAw
+MDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCBmZmZmODJkMDgwMjAwMGYzCj4g
+KGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAw
+MDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAw
+IDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5
+KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAw
+MDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAw
+MDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAo
+WEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAw
+MCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAw
+MDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVO
+KSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDAgZmZmZjgzMDAzZjBjZTAwMCAw
+MDAwMDAwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAgICAwMDAwMDAwMDAwMTUyNmUwIDAwMDAwMDAw
+MDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDYwMDAwMDAwMDAwCj4gKGQ5KSAoWEVOKSAg
+ICAwMDAwMDAxODAwMDAwMDAwCj4gKGQ5KSAoWEVOKSBYZW4gY2FsbCB0cmFjZToKPiAoZDkpIChY
+RU4pICAgIFs8ZmZmZjgyZDA4MDQ0MGRkYj5dIHNldHVwLmMjY21kbGluZV9jb29rKzB4MWQvMHg3
+Nwo+IChkOSkgKFhFTikgICAgWzxmZmZmODJkMDgwNDQzYjdmPl0gX19zdGFydF94ZW4rMHgyNTlj
+LzB4MjkyZAo+IChkOSkgKFhFTikgICAgWzxmZmZmODJkMDgwMjAwMGYzPl0gX19oaWdoX3N0YXJ0
+KzB4NTMvMHg1NQo+IChkOSkgKFhFTikgCj4gKGQ5KSAoWEVOKSBQYWdldGFibGUgd2FsayBmcm9t
+IGZmZmY4MzAwYzJjMmMyYzI6Cj4gKGQ5KSAoWEVOKSAgTDRbMHgxMDZdID0gODAwMDAwMDAzZmVh
+NTA2MyBmZmZmZmZmZmZmZmZmZmZmCj4gKGQ5KSAoWEVOKSAgTDNbMHgwMDNdID0gMDAwMDAwMDAz
+ZmVhMjA2MyBmZmZmZmZmZmZmZmZmZmZmCj4gKGQ5KSAoWEVOKSAgTDJbMHgwMTZdID0gMDAwMDAw
+MDAwMDAwMDAwMCBmZmZmZmZmZmZmZmZmZmZmCj4gKGQ5KSAoWEVOKSAKPiAoZDkpIChYRU4pICoq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioKPiAoZDkpIChYRU4pIFBhbmlj
+IG9uIENQVSAwOgo+IChkOSkgKFhFTikgRkFUQUwgUEFHRSBGQVVMVAo+IChkOSkgKFhFTikgW2Vy
+cm9yX2NvZGU9MDAwMF0KPiAoZDkpIChYRU4pIEZhdWx0aW5nIGxpbmVhciBhZGRyZXNzOiBmZmZm
+ODMwMGMyYzJjMmMyCj4gKGQ5KSAoWEVOKSAqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqCj4gKGQ5KSAoWEVOKSAKPiAoZDkpIChYRU4pIFJlYm9vdCBpbiBmaXZlIHNlY29u
+ZHMuLi4KPiAKPiBUaGUgbG93IHBhcnQgb2YgMHhmZmZmODMwMGMyYzJjMmMyIGxvb2tzIHRvIGJl
+IHBvaXNvbmVkLCBzbwo+IF9fdmEobW9kWzBdLnN0cmluZykgaXMgb2J2aW91c2x5IHR1cm5pbmcg
+b3V0IHRvIGJlIGp1bmsuCgoweGMyIGlzIGEgU0NSVUJfUEFUVEVSTiwgc28gbXkgcGF0Y2ggbWln
+aHQgaGF2ZSB1bmNvdmVyZWQgYSByZWFsIGlzc3VlLgpUaGVyZSBhcmUgMiBpbXBsaWNhdGlvbnMg
+b2YgaWRsZSBzY3J1YjoKCiAgICAxLiBhbGxvY194ZW5oZWFwX3BhZ2VzKCkgbWlnaHQgcmV0dXJu
+IHNjcnViYmVkIG1lbW9yeSAoZGVzcGl0ZQogICAgICAgcGFzc2luZyBNRU1GX25vX3NjcnViLCBh
+bmQgYWZ0ZXIgc2Vjb25kYXJ5IENQVXMgZW50ZXIgaWRsZS1sb29wKQoKICAgIDIuIGFsbG9jX2Rv
+bWhlYXBfcGFnZXMoKSB3aWxsIHJldHVybiBzY3J1YmJlZCBtZW1vcnkgYnkgZGVmYXVsdAogICAg
+ICAgZHVyaW5nIFhlbiBib290CgpXaGF0IGlzIHRoZSBleGFjdCBwbGFjZSBvZiB0aGlzIGNyYXNo
+PyBNYXliZSB6ZXJvaW5nIG9mIGFsbG9jYXRlZCBwYWdlcwppcyBuZWVkZWQgdGhlcmU/IENhbiB5
+b3UgcmVwcm9kdWNlIHRoZSBpc3N1ZSB3aXRoIFJlbGVhc2UgYnVpbGQsIHdoZXJlCnNjcnViIHBh
+dHRlcm4gaXMgMD8KCi0tClRoYW5rcywKU2VyZ2V5CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
