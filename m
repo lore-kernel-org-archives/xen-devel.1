@@ -1,27 +1,22 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH v8] arch/x86: Add registers to vm_event
-Date: Thu, 8 Nov 2018 20:22:06 +0200
-Message-ID: <4bf400ee-9c3e-a9ac-5a12-149ad5c6e8db@bitdefender.com>
-References: <20181105095354.9082-1-aisaila@bitdefender.com>
- <CABfawh=8mksd3_ZO0i=0q44VGoyRj2pHOudczYTfzdH7brZnoQ@mail.gmail.com>
- <a0028d6c-27f6-5e39-c19b-39da0474e276@bitdefender.com>
- <20181108155359.6ihkpw2pd6m7edki@zion.uk.xensource.com>
- <be9410dd-ddd1-db1d-1166-df096c739d1d@bitdefender.com>
- <20181108172201.lzdlkl6wir3b7ypa@zion.uk.xensource.com>
- <af75d830-5a6f-f514-1eca-adce268964fd@bitdefender.com>
- <20181108180231.53r2exdgeepiy56t@zion.uk.xensource.com>
-Mime-Version: 1.0
+From: Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: [PATCH 2/2] automation: build with Ubuntu 18.04
+Date: Thu, 8 Nov 2018 12:27:40 -0600
+Message-ID: <5BCCF29C-2C21-4CD0-80EF-A78CB42CFF8A@cardoe.com>
+References: <20181022151851.18355-1-wei.liu2@citrix.com>
+ <20181022151851.18355-6-wei.liu2@citrix.com>
+ <20181108180901.mro4lwzwnxfhykk6@zion.uk.xensource.com>
+Mime-Version: 1.0 (1.0)
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=6g0g=nt=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gKowk-0001bo-9x
- for xen-devel@lists.xenproject.org; Thu, 08 Nov 2018 18:22:26 +0000
-In-Reply-To: <20181108180231.53r2exdgeepiy56t@zion.uk.xensource.com>
-Content-Language: en-US-large
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=qrre=nt=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
+ id 1gKp1r-0001mx-WA
+ for xen-devel@lists.xenproject.org; Thu, 08 Nov 2018 18:27:44 +0000
+Received: by mail-yw1-xc41.google.com with SMTP id j75-v6so8379664ywj.10
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Nov 2018 10:27:42 -0800 (PST)
+In-Reply-To: <20181108180901.mro4lwzwnxfhykk6@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,18 +26,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>
-Cc: Alexandru Isaila <aisaila@bitdefender.com>, Xen-devel <xen-devel@lists.xenproject.org>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvOC8xOCA4OjAyIFBNLCBXZWkgTGl1IHdyb3RlOgo+IFNwZWFraW5nIG9mIGJ1aWxkIGJy
-ZWFrYWdlOiB3b3VsZCB5b3UgZ3V5cyBjb25zaWRlciBzaWduaW5nIHVwIHRvIGdpdGxhYgo+IHNv
-IHRoYXQgeW91IGNhbiB1c2UgYWxsIHRoZSBidWlsZCB0ZXN0IGluZnJhc3RydWN0dXJlIHRoZXJl
-IGJlZm9yZQo+IHN1Ym1pc3Npb24/IEl0IHdvdWxkIHByb2JhYmx5IHNheSB5b3UgZnJvbSBidWls
-ZGluZyBsb2NhbCBmb3IgZGlmZmVyZW50Cj4gZGlzdHJvcyBhbmQgY29uZmlncy4KPiAKPiBTZWUg
-aHR0cHM6Ly9naXRsYWIuY29tL3hlbi1wcm9qZWN0L3hlbi9waXBlbGluZXMvMzU5MTg1MTAKClll
-cywgdGhhdCBkb2VzIHNvdW5kIHZlcnkgaW50ZXJlc3RpbmcuIEknbSBub3Qgc3VyZSB3aGF0IHRo
-YXQgZW50YWlscyAvCndoYXQgdGhlIHByb2NlZHVyZSBpcyB0aG91Z2guIENvdWxkIHlvdSBwbGVh
-c2UgdGVsbCB1cyBtb3JlPwoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+Cj4gT24gTm92IDgsIDIwMTgsIGF0IDEyOjA5IFBNLCBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXgu
+Y29tPiB3cm90ZToKPiAKPj4gT24gTW9uLCBPY3QgMjIsIDIwMTggYXQgMDQ6MTg6NTFQTSArMDEw
+MCwgV2VpIExpdSB3cm90ZToKPj4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0
+cml4LmNvbT4KPiAKPiBJIHdpbGwgY29tbWl0IHRoZXNlIHR3byBwYXRjaGVzIHdpdGhvdXQgYWNr
+cy4gVGhleSBhcmUgYSBuZXQgYmVuZWZpdCB0bwo+IFhlbiAtLSBJIGRvbid0IHRoaW5rIHRoYXQg
+d2lsbCBiZSBjb250cm92ZXJzaWFsLgo+IAo+IFdlaS4KClNvdW5kcyBnb29kIHRvIG1lLiBTb3Jy
+eSBJIG1pc3NlZCB0aGVtIHdoaWxlIEkgd2FzIGdvbmUuIElmIHlvdSBoYXZlbuKAmXQgY29tbWl0
+dGVkIHRoZW0geWV0IHlvdSBoYXZlIG15IEFjay4gCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
