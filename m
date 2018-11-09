@@ -1,20 +1,17 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2] x86/traps: use only one stub function
- for l/cstar
-Date: Fri, 09 Nov 2018 03:54:36 -0700
-Message-ID: <5BE5676C02000078001FA1BA@prv1-mh.provo.novell.com>
-References: <20181109104636.1771-1-wei.liu2@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2 7/8] x86/vvmx: correctly report vvmcs size
+Date: Fri, 9 Nov 2018 10:54:41 +0000
+Message-ID: <20181109105441.lfxtj4hlwmxf35sa@zion.uk.xensource.com>
+References: <20181106120759.8789-1-sergey.dyasli@citrix.com>
+ <20181106120759.8789-8-sergey.dyasli@citrix.com>
+ <20181107132847.coqzmrvfsnupdglu@zion.uk.xensource.com>
+ <1de346a6-e378-f816-580a-ee04889d6ce8@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=mulf=nu=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gL4Qw-0007hn-Ub
- for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 10:54:38 +0000
-In-Reply-To: <20181109104636.1771-1-wei.liu2@citrix.com>
 Content-Disposition: inline
+In-Reply-To: <1de346a6-e378-f816-580a-ee04889d6ce8@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,15 +20,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Sergey Dyasli <sergey.dyasli@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, xen-devel@lists.xen.org, Jun Nakajima <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjExLjE4IGF0IDExOjQ2LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-QW5kIHBsYWNlIGl0IGludG8gLnRleHQuY29sZC4KPiAKPiBSZXF1ZXN0ZWQtYnk6IEphbiBCZXVs
-aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1
-MkBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4KClRoYW5rcyBmb3IgZG9pbmcgdGhpcy4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVGh1LCBOb3YgMDgsIDIwMTggYXQgMTA6Mjg6MjRBTSArMDAwMCwgU2VyZ2V5IER5YXNsaSB3
+cm90ZToKPiBPbiAwNy8xMS8yMDE4IDEzOjI4LCBXZWkgTGl1IHdyb3RlOgo+ID4gT24gVHVlLCBO
+b3YgMDYsIDIwMTggYXQgMTI6MDc6NThQTSArMDAwMCwgU2VyZ2V5IER5YXNsaSB3cm90ZToKPiA+
+PiBUaGUgc2l6ZSBvZiBYZW4ncyB2aXJ0dWFsIHZtY3MgcmVnaW9uIGlzIDQwOTYgYnl0ZXMgKHNl
+ZSBjb21tZW50IGFib3V0Cj4gPj4gVmlydHVhbCBWTUNTIGxheW91dCBpbiBpbmNsdWRlL2FzbS14
+ODYvaHZtL3ZteC92dm14LmgpLiBDb3JyZWN0bHkgcmVwb3J0Cj4gPj4gaXQgdG8gdGhlIGd1ZXN0
+IGluIGNhc2Ugd2hlbiBWTUNTIHNoYWRvd2luZyBpcyBub3QgYXZhaWxhYmxlIGluc3RlYWQgb2YK
+PiA+PiBwcm92aWRpbmcgSC9XIHZhbHVlICh3aGljaCBpcyB1c3VhbGx5IHNtYWxsZXIpLgo+ID4+
+Cj4gPj4gU2lnbmVkLW9mZi1ieTogU2VyZ2V5IER5YXNsaSA8c2VyZ2V5LmR5YXNsaUBjaXRyaXgu
+Y29tPgo+ID4+IC0tLQo+ID4+IHYyOgo+ID4+IC0gc2xpZ2h0IGNvbW1pdCBtZXNzYWdlIGNoYW5n
+ZQo+ID4+IC0tLQo+ID4+ICB4ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMgfCA4ICsrKysrKysr
+Cj4gPj4gIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKykKPiA+Pgo+ID4+IGRpZmYgLS1n
+aXQgYS94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92
+dm14LmMKPiA+PiBpbmRleCAyZjUzNzBjZWVkLi4zN2QzY2RkODU5IDEwMDY0NAo+ID4+IC0tLSBh
+L3hlbi9hcmNoL3g4Ni9odm0vdm14L3Z2bXguYwo+ID4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0v
+dm14L3Z2bXguYwo+ID4+IEBAIC0yMTAxLDYgKzIxMDEsMTQgQEAgaW50IG52bXhfbXNyX3JlYWRf
+aW50ZXJjZXB0KHVuc2lnbmVkIGludCBtc3IsIHU2NCAqbXNyX2NvbnRlbnQpCj4gPj4gICAgICAg
+ICAgZGF0YSA9IChob3N0X2RhdGEgJiAofjB1bCA8PCAzMikpIHwKPiA+PiAgICAgICAgICAgICAg
+ICAgKHZtY3MtPnZtY3NfcmV2aXNpb25faWQgJiAweDdmZmZmZmZmKTsKPiA+PiAgICAgICAgICB1
+bm1hcF9kb21haW5fcGFnZSh2bWNzKTsKPiA+PiArCj4gPj4gKyAgICAgICAgaWYgKCAhY3B1X2hh
+c192bXhfdm1jc19zaGFkb3dpbmcgKQo+ID4+ICsgICAgICAgIHsKPiA+PiArICAgICAgICAgICAg
+LyogUmVwb3J0IHZtY3NfcmVnaW9uX3NpemUgYXMgNDA5NiAqLwo+ID4+ICsgICAgICAgICAgICBk
+YXRhICY9IH5WTVhfQkFTSUNfVk1DU19TSVpFX01BU0s7Cj4gPj4gKyAgICAgICAgICAgIGRhdGEg
+fD0gMVVMTCA8PCA0NDsKPiA+IAo+ID4gQ2FuIHlvdSBpbnRyb2R1Y2UgYSBkZWZpbmUgZm9yIHRo
+aXMgdG8gYXZvaWQgdXNpbmcgYSBtYWdpYyBudW1iZXI/Cj4gCj4gSSBkb24ndCBzZWUgbXVjaCBw
+b2ludCBpbiBtYWtpbmcgYSBkZWZpbmUgZm9yIHNldmVyYWwgcmVhc29uczoKPiAKPiAxLiBJdCdz
+IG5vdCBnb2luZyB0byBiZSB1c2VkIGFueXdoZXJlIGVsc2UKPiAKPiAyLiBJbnRlbCBTRE0gY2xl
+YXJseSBzdGF0ZXMgdGhhdCBWTUNTIHNpemUgaXMgImF0IG1vc3QgNDA5NiAoYml0IDQ0Cj4gICAg
+aXMgc2V0IGlmIGFuZCBvbmx5IGlmIGJpdHMgNDM6MzIgYXJlIGNsZWFyKSIKPiAKPiAzLiBNeSBW
+TVggTVNScyBzZXJpZXMgd2lsbCBpbnRyb2R1Y2UgYSBuaWNlIHN0cnVjdCwgYWZ0ZXIgd2hpY2gg
+dGhpcwo+ICAgIGFzc2lnbm1lbnQgd2lsbCBsb29rIGxpa2UgImJhc2ljLnZtY3NfcmVnaW9uX3Np
+emUgPSA0MDk2OyIKPiAKCkZhaXIgZW5vdWdoLiBJIGhhdmUgbm8gb2JqZWN0aW9uIGFueW1vcmUu
+CgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
