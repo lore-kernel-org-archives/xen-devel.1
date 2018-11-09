@@ -1,18 +1,19 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] pass-through: adjust pIRQ migration
-Date: Fri, 9 Nov 2018 11:44:21 +0000
-Message-ID: <c7ae8821-8563-d97a-7546-edb99c6a7976@citrix.com>
-References: <5B9678B402000078001E6CD6@prv1-mh.provo.novell.com>
+Subject: Re: Xen 4.12 Development Update
+Date: Fri, 9 Nov 2018 11:44:44 +0000
+Message-ID: <e6bb3662-998e-4d9e-cec1-25a33b81a593@citrix.com>
+References: <20181109101631.5729-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <srs0=wzzi=nu=citrix.com=prvs=84405b137=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1gL5D7-0005Kj-Fz
- for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 11:44:25 +0000
-In-Reply-To: <5B9678B402000078001E6CD6@prv1-mh.provo.novell.com>
+ id 1gL5DT-0005MJ-99
+ for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 11:44:47 +0000
+In-Reply-To: <20181109101631.5729-1-jgross@suse.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,19 +23,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTAvMDkvMTggMTQ6NTksIEphbiBCZXVsaWNoIHdyb3RlOgo+IEZvciBvbmUgaXQgaXMgcXVp
-dGUgcG9pbnRsZXNzIHRvIGl0ZXJhdGUgb3ZlciBhbGwgcElSUS1zIHRoZSBkb21haW4gaGFzCj4g
-d2hlbiBqdXN0IG9uZSBpcyBiZWluZyBhZGp1c3RlZC4gSW50cm9kdWNlIGh2bV9taWdyYXRlX3Bp
-cnEoKS4KPgo+IEFkZGl0aW9uYWxseSBpdCBpcyBib2d1cyB0byBtaWdyYXRlIHRoZSBwSVJRIHRv
-IGEgdkNQVSBkaWZmZXJlbnQgZnJvbQo+IHRoZSBvbmUgdGhlIGV2ZW50IGlzIHN1cHBvc2VkIHRv
-IGJlIHBvc3RlZCB0byAtIGlmIGFueXRoaW5nLCBpdCBtaWdodCBiZQo+IHdvcnRoIGNvbnNpZGVy
-aW5nIG5vdCB0byBtaWdyYXRlIHRoZSBwSVJRIGF0IGFsbCBpbiB0aGUgcG9zdGluZyBjYXNlLgo+
-Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKQWNrZWQt
-Ynk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDkvMTEvMTggMTA6MTYsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gPSBQcm9qZWN0cyA9Cj4K
+PiA9PSBIeXBlcnZpc29yID09IAo+Cj4gKiAgSW1wcm92ZW1lbnRzIHRvIGRvbWFpbiBjcmVhdGlv
+biAodjIpCj4gICAtICBBbmRyZXcgQ29vcGVyCgpUaGVyZSBpcyBvbmUga25vd24gYnVnIHdoaWNo
+IGRlZmluaXRlbHkgbmVlZHMgcmVzb2x2aW5nIGJlZm9yZSA0LjEyIGdvZXMKb3V0LsKgIEF0dGVt
+cHRpbmcgdG8gY3JlYXRlIGEgVk0gd2l0aCAwIHZjcHVzIHRyaXBzIG92ZXIgYSBiYWQgZXJyb3Ig
+cGF0aAp3aGVuIHdlIHRyeSB0byByZW1vdmUgcGVybWlzc2lvbnMgZm9yIGFuIGlycSB3aGljaCB3
+ZSBuZXZlciBnYXZlIGluIHRoZQpmaXJzdCBwbGFjZS7CoCBUaGUgZml4IGlzIG1vc3QgbGlrZWx5
+IHRvIG5vdCBjaGFuZ2UgaXJxIHBlcm1pc3Npb25zIG9uIHVubWFwLgoKQmV5b25kIHRoYXQsIHRo
+ZSBuZXh0IGFjdGlvbnMgYXJlIHRvIG1ha2UgdGhlIGNyZWF0ZS9kZXN0cm95IHBhdGhzCmlkZW1w
+b3RlbnQuwqAgSWYgYW55b25lIGZlZWxzIGxpa2UgaGVscGluZyBvdXQgaGVyZSwgcGxlYXNlIGRv
+LgoKQWZ0ZXIgdGhhdCwgRE9NQ1RMX21heF92Y3B1cyBuZWVkcyB0byBiZSBmb2xkZWQgaW50byB0
+aGUgY3JlYXRlIHBhdGguCgpBbiBvcnRob2dvbmFsIHRhc2ssIHdoaWNoIHJlYWxseSBhbHNvIG5l
+ZWRzIGRvaW5nIGJlZm9yZSA0LjEyIGdvZXMgb3V0CmlzIHRvIHJlYXJyYW5nZSB0aGUgcG9pbnQg
+YXQgd2hpY2ggZC0+bWF4X2NwdXMgaXMgY2FsY3VsYXRlZCwgc28gQVJNCmdldHMgdGhpcyBudW1i
+ZXIgZWFybHkgZW5vdWdoIGluIGNvbnN0cnVjdGlvbiB0byBwcm9wZXJseSBidWlsZCB0aGUKR0lD
+LsKgIChBdCB0aGUgbW9tZW50LCB0aGVyZSBpcyBhIGJhaXQtYW5kLXN3aXRjaCB0byBkZWZlciBH
+SUMKY29uc3RydWN0aW9uIHVudGlsIHRoZSBmaXJzdCB2Y3B1IGlzIGJlaW5nIGNvbnN0cnVjdGVk
+KS4KCj4gPT09IHg4NiA9PT0KCiogRml4ZXMgdG8gI0RCIGluamVjdGlvbgoKVGhpcyBpcyBhbHNv
+IGEgc3dhbXAuwqAgQWxyZWFkeSBkb25lOgoKMSkgRml4ZXMgdG8gdmNwdSByZWdpc3RlciBpbml0
+aWFsaXNhdGlvbgoKU3RpbGwgdG8gZG86CgoyKSBSZXdvcmsgbW9uaXRvciBob29raW5nIHRvIGF2
+b2lkIGxpdmVsb2NrcyB3aXRoIGEgZml4ZWQgI0RCCjMpIFBsdW1iIHBlbmRpbmdfZGJnIGludG8g
+eDg2X2V2ZW50LCBpbmNsdWRpbmcgcmVwb3J0aW5nIHByb3Blcmx5IGluIG1vbml0b3IKNCkgRml4
+IHhlbl9kbV9vcF9pbmplY3RfZXZlbnQgdG8gYXVkaXQgaXRzIGRhdGEgcmF0aGVyIHRoYW4gY2F1
+c2luZyBhCnZtZW50cnkgZmFpbHVyZQo1KSBGaXggbWVyZ2luZyBvZiBuZXcgYml0cyBpbnRvICVk
+cjYKNikgRml4IHNpbmdsZXN0ZXBwaW5nIHRvIG5vdCByZXN1bHQgaW4gYSB2bWVudHJ5IGZhaWx1
+cmUgd2hlbiBpbiBhbiBTVEkKc2hhZG93CiROKSBQZXN0ZXIgSW50ZWwgc29tZSBtb3JlIGFzIHRv
+IHdoeSBhIHZtZXhpdCB3aXRoIGJvdGggc2luZ2xlc3RlcCBhbmQKYnJlYWtwb2ludCBldmVudHMg
+cGVuZGluZyBsb3NlcyBhcmNoaXRlY3R1cmFsIGluZm9ybWF0aW9uLgoKQWxzbywgdGhlIGJpZyBv
+bmUuCgoqIENQVUlEL01TUiBYZW4vdG9vbHN0YWNrIGltcHJvdmVtZW50cwoKVGhpcyBpcyBibG9j
+a2luZyBhbiBlbm9ybW91cyBxdWFudGl0eSBvZiB3b3JrLCBpbmNsdWRlZCBidXQgbm90IGxpbWl0
+ZWQgdG86CgoxKSBGaXhpbmcgdG9wb2xvZ3kgbGF5b3V0LsKgIFVuYmxvY2tzIHRoZSA+MTI3IHZj
+cHUgd29yaywgYW5kIGNvcmUtYXdhcmUKc2NoZWR1bGluZyB3b3JrLgoyKSBWaXJ0dXNhbGlzaW5n
+IGZlYXR1cmVzIHdoaWNoIE1TUnMgZm9yIGNvbmZpZ3VyYXRpb24sIGluY2x1ZGluZwpuZXN0ZWQt
+VlR4LCBTR1gsIEludGVsIFBUIGFuZCBNU1JfQVJDSF9DQVBTLgoKfkFuZHJldwoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
