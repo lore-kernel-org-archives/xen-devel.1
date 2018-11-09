@@ -1,16 +1,18 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH 2/6] libx86: Split
- x86_cpuid_policy_fill_native() out of calculate_raw_policy()
-Date: Fri, 9 Nov 2018 16:24:06 +0000
-Message-ID: <1fd922d8-ec20-1173-a472-579a507c531c@citrix.com>
-References: <1541416867-30253-1-git-send-email-andrew.cooper3@citrix.com>
- <1541416867-30253-3-git-send-email-andrew.cooper3@citrix.com>
- <5BE19AA602000078001F89E5@prv1-mh.provo.novell.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [xen-4.7-testing baseline-only test] 75583: tolerable
+ FAIL
+Date: Fri, 9 Nov 2018 16:24:52 +0000
+Message-ID: <osstest-75583-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9172188827756113419=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BE19AA602000078001F89E5@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=82uh=nu=xenproject.org=prvs=844706637=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1gL9bQ-00076x-9w
+ for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 16:25:48 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,267 +21,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============9172188827756113419==
-Content-Type: multipart/alternative;
-	boundary="------------48D9EAA3DAF16E7A59FAE847"
-Content-Language: en-GB
-
---------------48D9EAA3DAF16E7A59FAE847
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 06/11/18 13:44, Jan Beulich wrote:
->>>> On 05.11.18 at 12:21, <andrew.cooper3@citrix.com> wrote:
->> --- a/xen/include/xen/lib/x86/cpuid.h
->> +++ b/xen/include/xen/lib/x86/cpuid.h
->> @@ -20,6 +20,21 @@ struct cpuid_leaf
->>      uint32_t a, b, c, d;
->>  };
->>  
->> +static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
->> +{
->> +    asm volatile ( "cpuid"
->> +                   : "=a" (l->a), "=b" (l->b), "=c" (l->c), "=d" (l->d)
->> +                   : "a" (leaf) );
->> +}
->> +
->> +static inline void cpuid_count_leaf(
->> +    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *l)
->> +{
->> +    asm volatile ( "cpuid"
->> +                   : "=a" (l->a), "=b" (l->b), "=c" (l->c), "=d" (l->d)
->> +                   : "a" (leaf), "c" (subleaf) );
->> +}
-> Especially with this now being library code (i.e. side effects like
-> serialization not being supposed to be of interest): Why
-> volatile?
-
-Force of habit, I think.  I'll drop volatile here.
-
-We should probably do the same for Xen, although there is one place in
-the Intel ucode handler which would need adjusting to cope.
-
->> --- a/xen/lib/x86/cpuid.c
->> +++ b/xen/lib/x86/cpuid.c
->> @@ -2,6 +2,114 @@
->>  
->>  #include <xen/lib/x86/cpuid.h>
->>  
->> +void x86_cpuid_policy_fill_native(struct cpuid_policy *p)
->> +{
->> +    unsigned int i;
->> +
->> +    cpuid_leaf(0, &p->basic.raw[0]);
->> +    for ( i = 1; i < min(ARRAY_SIZE(p->basic.raw),
->> +                         p->basic.max_leaf + 1ul); ++i )
->> +    {
->> +        switch ( i )
->> +        {
->> +        case 0x4: case 0x7: case 0xb: case 0xd:
->> +            /* Multi-invocation leaves.  Deferred. */
->> +            continue;
->> +        }
->> +
->> +        cpuid_leaf(i, &p->basic.raw[i]);
->> +    }
->> +
->> +    if ( p->basic.max_leaf >= 4 )
->> +    {
->> +        for ( i = 0; i < ARRAY_SIZE(p->cache.raw); ++i )
->> +        {
->> +            union {
->> +                struct cpuid_leaf l;
->> +                struct cpuid_cache_leaf c;
->> +            } u;
->> +
->> +            cpuid_count_leaf(4, i, &u.l);
->> +
->> +            if ( u.c.type == 0 )
->> +                break;
->> +
->> +            p->cache.subleaf[i] = u.c;
->> +        }
->> +
->> +        /*
->> +         * The choice of CPUID_GUEST_NR_CACHE is arbitrary.  It is expected
->> +         * that it will eventually need increasing for future hardware.
->> +         */
->> +#ifdef __XEN__
->> +        if ( i == ARRAY_SIZE(p->cache.raw) )
->> +            printk(XENLOG_WARNING
->> +                   "CPUID: Insufficient Leaf 4 space for this hardware\n");
->> +#endif
-> There being another similar instance further down, and possibly
-> new ones to appear later, plus such a warning potentially also
-> being of interest in the harness - would you mind abstracting
-> (could be as simple as making printk() and XENLOG_* available
-> where needed, provided there's no consumer which would
-> rather not want such logging) this so it can go without #ifdef-ary?
-
-Well - it was this consideration which caused me to omit it.
-
-Realistically, the first situation to hit this message will be someone
-booting Xen on a brand new piece of hardware, so I expect changes to the
-structure size to come from vendors.
-
-One user is the AFL fuzzer, and that definitely doesn't want to be
-spitting out a warning on every fork().  The other current user is the
-x86 instruction emulator, where this functionality isn't the interesting
-part.  Furthermore, I don't expect the toolstack to be making use of
-this itself, so it won't be useful to attempt to plumb the message
-through there.
-
-~Andrew
-
---------------48D9EAA3DAF16E7A59FAE847
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 06/11/18 13:44, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5BE19AA602000078001F89E5@prv1-mh.provo.novell.com">
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre wrap="">On 05.11.18 at 12:21, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
-</pre>
-          </blockquote>
-        </blockquote>
-        <pre wrap="">--- a/xen/include/xen/lib/x86/cpuid.h
-+++ b/xen/include/xen/lib/x86/cpuid.h
-@@ -20,6 +20,21 @@ struct cpuid_leaf
-     uint32_t a, b, c, d;
- };
- 
-+static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
-+{
-+    asm volatile ( "cpuid"
-+                   : "=a" (l-&gt;a), "=b" (l-&gt;b), "=c" (l-&gt;c), "=d" (l-&gt;d)
-+                   : "a" (leaf) );
-+}
-+
-+static inline void cpuid_count_leaf(
-+    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *l)
-+{
-+    asm volatile ( "cpuid"
-+                   : "=a" (l-&gt;a), "=b" (l-&gt;b), "=c" (l-&gt;c), "=d" (l-&gt;d)
-+                   : "a" (leaf), "c" (subleaf) );
-+}
-</pre>
-      </blockquote>
-      <pre wrap="">Especially with this now being library code (i.e. side effects like
-serialization not being supposed to be of interest): Why
-volatile?</pre>
-    </blockquote>
-    <br>
-    Force of habit, I think.  I'll drop volatile here.<br>
-    <br>
-    We should probably do the same for Xen, although there is one place
-    in the Intel ucode handler which would need adjusting to cope.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:5BE19AA602000078001F89E5@prv1-mh.provo.novell.com">
-      <pre wrap="">
-</pre>
-      <blockquote type="cite">
-        <pre wrap="">--- a/xen/lib/x86/cpuid.c
-+++ b/xen/lib/x86/cpuid.c
-@@ -2,6 +2,114 @@
- 
- #include &lt;xen/lib/x86/cpuid.h&gt;
- 
-+void x86_cpuid_policy_fill_native(struct cpuid_policy *p)
-+{
-+    unsigned int i;
-+
-+    cpuid_leaf(0, &amp;p-&gt;basic.raw[0]);
-+    for ( i = 1; i &lt; min(ARRAY_SIZE(p-&gt;basic.raw),
-+                         p-&gt;basic.max_leaf + 1ul); ++i )
-+    {
-+        switch ( i )
-+        {
-+        case 0x4: case 0x7: case 0xb: case 0xd:
-+            /* Multi-invocation leaves.  Deferred. */
-+            continue;
-+        }
-+
-+        cpuid_leaf(i, &amp;p-&gt;basic.raw[i]);
-+    }
-+
-+    if ( p-&gt;basic.max_leaf &gt;= 4 )
-+    {
-+        for ( i = 0; i &lt; ARRAY_SIZE(p-&gt;cache.raw); ++i )
-+        {
-+            union {
-+                struct cpuid_leaf l;
-+                struct cpuid_cache_leaf c;
-+            } u;
-+
-+            cpuid_count_leaf(4, i, &amp;u.l);
-+
-+            if ( u.c.type == 0 )
-+                break;
-+
-+            p-&gt;cache.subleaf[i] = u.c;
-+        }
-+
-+        /*
-+         * The choice of CPUID_GUEST_NR_CACHE is arbitrary.  It is expected
-+         * that it will eventually need increasing for future hardware.
-+         */
-+#ifdef __XEN__
-+        if ( i == ARRAY_SIZE(p-&gt;cache.raw) )
-+            printk(XENLOG_WARNING
-+                   "CPUID: Insufficient Leaf 4 space for this hardware\n");
-+#endif
-</pre>
-      </blockquote>
-      <pre wrap="">There being another similar instance further down, and possibly
-new ones to appear later, plus such a warning potentially also
-being of interest in the harness - would you mind abstracting
-(could be as simple as making printk() and XENLOG_* available
-where needed, provided there's no consumer which would
-rather not want such logging) this so it can go without #ifdef-ary?</pre>
-    </blockquote>
-    <br>
-    Well - it was this consideration which caused me to omit it.<br>
-    <br>
-    Realistically, the first situation to hit this message will be
-    someone booting Xen on a brand new piece of hardware, so I expect
-    changes to the structure size to come from vendors.<br>
-    <br>
-    One user is the AFL fuzzer, and that definitely doesn't want to be
-    spitting out a warning on every fork().  The other current user is
-    the x86 instruction emulator, where this functionality isn't the
-    interesting part.  Furthermore, I don't expect the toolstack to be
-    making use of this itself, so it won't be useful to attempt to plumb
-    the message through there.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------48D9EAA3DAF16E7A59FAE847--
-
-
---===============9172188827756113419==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9172188827756113419==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA3
+NTU4MyB4ZW4tNC43LXRlc3RpbmcgcmVhbCBbcmVhbF0KaHR0cDovL29zc3Rlc3QueGVuc291cmNl
+LmNvbS9vc3N0ZXN0L2xvZ3MvNzU1ODMvCgpGYWlsdXJlcyA6LS8gYnV0IG5vIHJlZ3Jlc3Npb25z
+LgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRl
+c3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgIDYgeGVuLWluc3RhbGwgICAgICAgICAgICAgZmFp
+bCBiYXNlbGluZSB1bnRlc3RlZAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2
+IDEwIHdpbmRvd3MtaW5zdGFsbCBmYWlsIGJhc2VsaW5lIHVudGVzdGVkCiB0ZXN0LWFybWhmLWFy
+bWhmLXhsLW11bHRpdmNwdSAxMiBndWVzdC1zdGFydCAgICAgICAgICAgIGZhaWwgYmFzZWxpbmUg
+dW50ZXN0ZWQKIHRlc3QtYXJtaGYtYXJtaGYteGwtbWlkd2F5ICAgMTIgZ3Vlc3Qtc3RhcnQgICAg
+ICAgICAgICAgZmFpbCBiYXNlbGluZSB1bnRlc3RlZAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAg
+ICAgICAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICBmYWlsIGJhc2VsaW5lIHVudGVzdGVkCiB0
+ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAgICAgIGZh
+aWwgYmFzZWxpbmUgdW50ZXN0ZWQKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTIgZ3Vl
+c3Qtc3RhcnQgICAgICAgICAgICAgZmFpbCBiYXNlbGluZSB1bnRlc3RlZAogdGVzdC1hbWQ2NC1h
+bWQ2NC1xZW11dS1uZXN0ZWQtaW50ZWwgMTQgeGVuLWJvb3QvbDEgICAgICBmYWlsIGJhc2VsaW5l
+IHVudGVzdGVkCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtcHZncnViIDE5IGd1ZXN0LXN0YXJ0L2Rl
+Ymlhbi5yZXBlYXQgZmFpbCBiYXNlbGluZSB1bnRlc3RlZAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1kZWJpYW5odm0tYW1kNjQgMTYgZ3Vlc3QtbG9jYWxtaWdyYXRlL3gxMCBmYWlsIGJhc2Vs
+aW5lIHVudGVzdGVkCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgMTYgZ3Vl
+c3QtbG9jYWxtaWdyYXRlL3gxMCBmYWlsIGJhc2VsaW5lIHVudGVzdGVkCiB0ZXN0LWFybWhmLWFy
+bWhmLXhsLXZoZCAgICAgIDEwIGRlYmlhbi1kaS1pbnN0YWxsICAgICAgIGZhaWwgYmFzZWxpbmUg
+dW50ZXN0ZWQKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTAgZGViaWFuLWRpLWluc3Rh
+bGwgICAgICAgZmFpbCBiYXNlbGluZSB1bnRlc3RlZAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
+LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
+ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2
+IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1h
+bWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBu
+ZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9y
+dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
+dS13czE2LWFtZDY0IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwog
+dGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQxICAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAg
+ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1p
+Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
+YW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAg
+bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAxMyBtaWdyYXRlLXN1cHBv
+cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
+cnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFp
+bCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1k
+NjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1k
+NjQtYW1kNjQtbGlidmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
+ICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlh
+bi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwt
+cWVtdXQtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBh
+c3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAg
+ICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43
+LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBm
+YWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1
+ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBm
+b3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDNkM2U0NzRkNjhiMWEwNjNkMTliOWEz
+MzBjMzQ2MzAyNTEwNDk3MGMKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAg
+IDNkMzNjYzZkZGYzNzAyNmI1NTMwZjgzZjVmYTNhZjA1YjIyZjllNDMKCkxhc3QgdGVzdCBvZiBi
+YXNpcyAgICA3NTQ2MSAgMjAxOC0xMC0yMCAwMzo0NjozMCBaICAgMjAgZGF5cwpUZXN0aW5nIHNh
+bWUgc2luY2UgICAgNzU1ODMgIDIwMTgtMTEtMDkgMDc6MDY6MDYgWiAgICAwIGRheXMgICAgMSBh
+dHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIGJ1aWxkLWFtZDY0LXh0ZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
+LWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
+YW1kNjQtcHJldiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiBidWlsZC1pMzg2LXByZXYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYtcHZvcHMgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
+Mzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIGJ1aWxkLWFtZDY0LXJ1bXBydW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1ydW1wcnVuICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0x
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRm
+LWFtZDY0LWFtZDY0LTIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC00ICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTUg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
+dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZt
+LWFtZDY0LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1
+LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+aTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20g
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5o
+dm0tYW1kNjQteHNtICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14
+c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
+Mzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0
+ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkz
+ODYtcWVtdXQtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGVi
+aWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
+NjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
+dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3Zt
+Zi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2
+LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4tYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjct
+YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
+c3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
+ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAg
+ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd3MxNi1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
+eGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
+dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
+IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
+bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXJ1bXBydW4taTM4NiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
+LXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICBm
+YWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAg
+ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4
+NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVt
+dXUtbmVzdGVkLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
+bWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2
+aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
+ZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtbWlkd2F5ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1taWdydXBncmFkZSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbWlncnVw
+Z3JhZGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
+NjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
+NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2
+Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
+LWFtZDY0LXB5Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWNvdzIgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2
+NC1zaGFkb3cgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1k
+ZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
+bWQ2NC14bC1zaGFkb3cgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWkzODYteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9y
+dC1mbGlnaHQgb24gb3NzdGVzdC54cy5jaXRyaXRlLm5ldApsb2dzOiAvaG9tZS9vc3N0ZXN0L2xv
+Z3MKaW1hZ2VzOiAvaG9tZS9vc3N0ZXN0L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMu
+IGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5i
+aXRzLnhlbnNvdXJjZS5jb20vZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaCBu
+b3QgYXBwbGljYWJsZS4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgM2QzZTQ3NGQ2OGIxYTA2M2QxOWI5YTMzMGMzNDYz
+MDI1MTA0OTcwYwpBdXRob3I6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KRGF0ZTog
+ICBXZWQgTm92IDcgMDk6NTQ6NTcgMjAxOCArMDEwMAoKICAgIHg4Njogd29yayBhcm91bmQgSExF
+IGhvc3QgbG9ja3VwIGVycmF0dW0KICAgIAogICAgWEFDUVVJUkUgcHJlZml4ZWQgYWNjZXNzZXMg
+dG8gdGhlIDRNYiByYW5nZSBvZiBtZW1vcnkgc3RhcnRpbmcgYXQgMUdiCiAgICBhcmUgbGlhYmxl
+IHRvIGxvY2sgdXAgdGhlIHByb2Nlc3Nvci4gRGlzYWxsb3cgdXNlIG9mIHRoaXMgbWVtb3J5IHJh
+bmdlLgogICAgCiAgICBVbmZvcnR1bmF0ZWx5IHRoZSBhdmFpbGFibGUgQ29yZSBHZW43IGFuZCBH
+ZW44IHNwZWMgdXBkYXRlcyBhcmUgcHJldHR5CiAgICBvbGQsIHNvIEkgY2FuIG9ubHkgZ3Vlc3Mg
+dGhhdCB0aGV5J3JlIHNpbWlsYXJseSBhZmZlY3RlZCB3aGVuIENvcmUgR2VuNgogICAgaXMgYW5k
+IHRoZSBYZW9uIGNvdW50ZXJwYXJ0cyBhcmUsIHRvby4KICAgIAogICAgVGhpcyBpcyBwYXJ0IG9m
+IFhTQS0yODIuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBz
+dXNlLmNvbT4KICAgIFJldmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0Bj
+aXRyaXguY29tPgogICAgbWFzdGVyIGNvbW1pdDogY2M3NjQxMGQyMGFmZjJjYzA3YjI2OGIwNzEz
+ZGMxZDI3NDBjNmUxMgogICAgbWFzdGVyIGRhdGU6IDIwMTgtMTEtMDcgMDk6MzM6MjQgKzAxMDAK
+CmNvbW1pdCA0ZTY5ZTQzMjcyNGNjZjI1MTRjZjU1MzljN2M2M2FhZjMxY2RmNGY5CkF1dGhvcjog
+SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpEYXRlOiAgIFdlZCBOb3YgNyAwOTo1NDow
+NyAyMDE4ICswMTAwCgogICAgeDg2OiBleHRlbmQgZ2V0X3BsYXRmb3JtX2JhZHBhZ2VzKCkgaW50
+ZXJmYWNlCiAgICAKICAgIFVzZSBhIHN0cnVjdHVyZSBzbyBhbG9uZyB3aXRoIGFuIGFkZHJlc3Mg
+KG5vdyBmcmFtZSBudW1iZXIpIGFuIG9yZGVyIGNhbgogICAgYWxzbyBiZSBzcGVjaWZpZWQuCiAg
+ICAKICAgIFRoaXMgaXMgcGFydCBvZiBYU0EtMjgyLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgICBSZXZpZXdlZC1ieTogQW5kcmV3IENv
+b3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIG1hc3RlciBjb21taXQ6IDg2MTdl
+NjlmYjgzMDdiMzcyZWVmZjQxZDU1ZWM5NjZkYmViYTM2ZWIKICAgIG1hc3RlciBkYXRlOiAyMDE4
+LTExLTA3IDA5OjMyOjA4ICswMTAwCihxZW11IGNoYW5nZXMgbm90IGluY2x1ZGVkKQoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
