@@ -1,19 +1,22 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Xen 4.12 Development Update
-Date: Fri, 09 Nov 2018 19:02:21 +0100
-Message-ID: <9e318b36708f65a15706ef36d224e65cf85f3e88.camel@suse.com>
-References: <20181109101631.5729-1-jgross@suse.com>
- <5BE5673A02000078001FA1B7@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 1/8] xen/page_alloc: Move
+ get_pg_owner()/put_pg_owner() from x86 to common code
+Date: Fri, 9 Nov 2018 18:06:23 +0000
+Message-ID: <4c184df3-7115-0a1b-b65b-8b5251d558e3@arm.com>
+References: <20181106191454.22143-1-julien.grall@arm.com>
+ <20181106191454.22143-2-julien.grall@arm.com>
+ <5BE2B05002000078001F8F8D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1643659669259023210=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mhqu=nu=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gLB6z-0000A6-Pm
- for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 18:02:29 +0000
-In-Reply-To: <5BE5673A02000078001FA1B7@prv1-mh.provo.novell.com>
+ <srs0=dfw9=nu=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gLBAq-0000NH-Fh
+ for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 18:06:28 +0000
+In-Reply-To: <5BE2B05002000078001F8F8D@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,90 +25,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Benjamin Sanda <ben.sanda@dornerworks.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1643659669259023210==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-kg1M8ZYzL4ydS5khzr9C"
-
-
---=-kg1M8ZYzL4ydS5khzr9C
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-11-09 at 03:53 -0700, Jan Beulich wrote:
-> > > > On 09.11.18 at 11:16, <jgross@suse.com> wrote:
-> > =3D=3D Hypervisor =3D=3D=20
-> >=20
-> > *  Per-cpu tasklet
-> >   -  XEN-28
-> >   -  Konrad Rzeszutek Wilk
-> >=20
-> > *  Improvements to domain creation (v2)
-> >   -  Andrew Cooper
-> >=20
-> > *  Argo (inter-VM communication)
-> >   -  Christopher Clark
->=20
-> Core aware scheduling (Dario)?
->
-Yes, indeed. Thanks Jan:
-
- *  Core aware scheduling for Credit2
-   - Dario Faggioli
-
-Status is RFC posted, waiting for feedback.
-
-If I do get some feedback (and depending on the feedback itself, of
-course :-D ) there are chances for such series to be ready in time.
-
-The Credit1 one has, on the other hand, much smaller chances.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-kg1M8ZYzL4ydS5khzr9C
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvly60ACgkQFkJ4iaW4
-c+4jGQ//SD9fpSbLuqKeYQpSQ3CP1K0WaApmnHcC8WH/rpmH5WC/PnJzmQ7yqqWs
-a6eOo/VPA5TIWK+oheFLWcysh44dGZiYm4fJv8ZXEcyaqhUoahqjX1mIt3e67UQX
-JyT0GU8rTOQ7M3fJbq7kJDY1IgReuIO+eUTyappE3pfXm1CCxj3ZJ7ES+6qsg1RK
-ONukfP8ai+sOCTDNsEJcbcilI1bnmipOHJvnPw7u/pr7Uk4JKaOoe9LXAkDgsA/7
-S6yTELzEYIFk7oPeHUpGkhELXrcUdLwIqqlsqirnmG0mBV7Vhffz0LBLBQ6dMfjh
-dUZiZ/lPOxpkie6BOXtKLKVFRxLfqkJGL5IQo/oazvNG67UM1cUDz4m7ZrtEzlaH
-UtevD6sJMQS3TO5OX5igh9oxoRsNwGX69BDUch7VFBBZAgHhNV/sNsCk+a5bLyBz
-rp+XU9szl1ybTP1+eNgIv/1FRSz/ummHzUha1TJWd9G+hrLQjmroThN1cg37XXOH
-3/pgzcb2PNRAHG/GAYR0UAJT1+y6Uyk/sxvcUTKiXIQFQlY9amAdEiT5D+VzY4mP
-h98J4UM+bxlmVkN5a+B112r8bOaaM056WuVvHcomb7vp4SdUhPojj9XQ/nuyQMAn
-kNbynSb7CFyvziBbTnsAIyH4l+oXHJQyh34Myzm/jlOMFnOtbEE=
-=IrBw
------END PGP SIGNATURE-----
-
---=-kg1M8ZYzL4ydS5khzr9C--
-
-
-
---===============1643659669259023210==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1643659669259023210==--
+SGkgSmFuLAoKT24gMDcvMTEvMjAxOCAwOToyOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24g
+MDYuMTEuMTggYXQgMjA6MTQsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IEZyb206
+IEJlbmphbWluIFNhbmRhIDxiZW4uc2FuZGFAZG9ybmVyd29ya3MuY29tPgo+Pgo+PiBnZXRfcGdf
+b3duZXIoKSBhbmQgcHV0X3BnX293bmVyKCkgd2lsbCBiZSBuZWNlc3NhcnkgaW4gYSBmb2xsb3ct
+dXAKPj4gY29tbWl0IHRvIHN1cHBvcnQgeGVudHJhY2Ugb24gQXJtLiBTbyBtb3ZlIHRoZSBoZWxw
+ZXIgdG8gY29tbW9uIGNvZGUuCj4+Cj4+IE5vdGUgdGhhdCBwdXRfcGdfb3duZXIoKSBoYXMgYmVl
+biB0dXJuZWQgdG8gYSBtYWNybyByYXRoZXIgdGhhbiBzdGF0aWMKPj4gaW5saW5lIGJlY2F1c2Ug
+b2YgaW50ZXItZGVwZW5kZW5jeSBiZXR3ZWVuIGluY2x1ZGVzLgo+IAo+IENvdWxkIHRoaXMgYmUg
+YXZvaWRlZCBieSBwbGFjaW5nIGJvdGggaW4gYSBkaWZmZXJlbnQgaGVhZGVyLAo+IGUuZy4gc2No
+ZWQuaD8KVGhpcyBzZWVtcyB0byB3b3JrLiBJIHdpbGwgdXNlIHRoYXQgaW4gdGhlIG5leHQgdmVy
+c2lvbi4KCj4gTWlkLXRlcm0gd2Ugc2hvdWxkIHByb2JhYmx5IHRyeSB0byBzcGxpdCBvdXQKPiB0
+eXBlIChzdHJ1Y3R1cmUpIGRlY2xhcmF0aW9ucyBmcm9tIHNjaGVkLmgsIHRvIG1ha2UgaXQgZWFz
+aWVyCj4gdG8gaGF2ZSBmdWxsIHR5cGVzIGF2YWlsYWJsZSB3aXRob3V0IGhhdmluZyB0byByZXNw
+ZWN0IG90aGVyCj4gaW5jbHVkZSBkZXBlbmRlbmNpZXMuCgpUaGUgaW5jbHVkZSBkZXBlbmRlbmNp
+ZXMgb24gWGVuIGlzIGEgYml0IG9mIGEgbmlnaHRtYXJlLiBJIGhhdmUgc3RhcnRlZCB0byBjbGVh
+biAKaXQgdXAgb24gQXJtIGFuZCBJIHdpbGwgc3VwcG9ydCBhbnkgY2hhbmdlcyBpbiB0aGUgY29t
+bW9uIGhlYWRlcnMuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
