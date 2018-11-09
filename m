@@ -1,17 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 2/5] xen/common: Use %*pb[l] instead of
- {cpu, node}mask_scn{, list}printf()
-Date: Fri, 9 Nov 2018 18:01:22 +0000
-Message-ID: <e7126bf5-b054-8042-eefb-0afd384f5fb9@citrix.com>
-References: <1540213082-616-1-git-send-email-andrew.cooper3@citrix.com>
- <1540213082-616-3-git-send-email-andrew.cooper3@citrix.com>
- <5BD1A15A02000078001F4996@prv1-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Xen 4.12 Development Update
+Date: Fri, 09 Nov 2018 19:02:21 +0100
+Message-ID: <9e318b36708f65a15706ef36d224e65cf85f3e88.camel@suse.com>
+References: <20181109101631.5729-1-jgross@suse.com>
+ <5BE5673A02000078001FA1B7@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1643659669259023210=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BD1A15A02000078001F4996@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=mhqu=nu=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gLB6z-0000A6-Pm
+ for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 18:02:29 +0000
+In-Reply-To: <5BE5673A02000078001FA1B7@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,42 +22,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>, Juergen Gross <jgross@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjUvMTAvMTggMTE6NTYsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIyLjEwLjE4IGF0
-IDE0OjU3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IFRoaXMgcmVtb3Zl
-cyBhbGwgdXNlIG9mIGtleWhhbmRsZXJfc2NyYXRjaCBhcyBhIGJvdW5jZS1idWZmZXIgZm9yIHRo
-ZSByZW5kZXJlZAo+PiBzdHJpbmcuICBJbiBzb21lIGNhc2VzLCBjb2xsYXBzZSBjb21iaW5lIGFk
-amFjZW50IHByaW50aygpJ3Mgd2hpY2ggYXJlIHdyaXRpbmcKPj4gcGFydHMgb2YgdGhlIHNhbWUg
-bGluZS4KPj4KPj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEFu
-ZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4+IFJldmlld2VkLWJ5OiBX
-ZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+PiBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpi
-ZXVsaWNoQHN1c2UuY29tPgo+PiBBY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2Uu
-Y29tPgo+PiAtLS0KPj4gQ0M6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29t
-Pgo+PiBDQzogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+PiBD
-QzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPj4KPj4gdjI6Cj4+ICAqIFVz
-ZSAtPmJpdHMgZm9yIGNwdW1hc2tzCj4gTm8sIEknbSBzb3JyeSAtIHRoaXMgaXMgbm90IHdoYXQg
-SSBnYXZlIG15IGFjayBmb3IuIEkgc3BlY2lmaWNhbGx5Cj4gc2FpZCB0aGF0IC0+Yml0cyBtYXkg
-b25seSBiZSB1c2VkIGJ5IHRoZSBjcHVtYXNrIGltcGxlbWVudGF0aW9uLgo+IEV2ZXJ5dGhpbmcg
-ZWxzZSBzaG91bGQgdXNlIHRoZSBjcHVtYXNrX2JpdHMoKSB3cmFwcGVyLgoKY3B1bWFza19iaXRz
-KCkgaXMgd29yc2UgdGhhbiB1c2VsZXNzLCBiZWNhdXNlIGl0IGlzIGxvbmdlciB0aGFuIHRoZQph
-bHRlcm5hdGl2ZSwgYW5kIHJlc3VsdHMgaW4gaGFyZGVyIHRvIHJlYWQgY29kZS4KCkkgd2lsbCBu
-b3QgYmUgYWRkaW5nIHRvIGl0cyAobWlzKXVzZS4KCj4KPj4gLS0tIGEveGVuL2NvbW1vbi9ldmVu
-dF9jaGFubmVsLmMKPj4gKysrIGIveGVuL2NvbW1vbi9ldmVudF9jaGFubmVsLmMKPj4gQEAgLTEz
-NzcsMTEgKzEzNzcsOSBAQCBzdGF0aWMgdm9pZCBkb21haW5fZHVtcF9ldnRjaG5faW5mbyhzdHJ1
-Y3QgZG9tYWluICpkKQo+PiAgICAgIHVuc2lnbmVkIGludCBwb3J0Owo+PiAgICAgIGludCBpcnE7
-Cj4+ICAKPj4gLSAgICBiaXRtYXBfc2NubGlzdHByaW50ZihrZXloYW5kbGVyX3NjcmF0Y2gsIHNp
-emVvZihrZXloYW5kbGVyX3NjcmF0Y2gpLAo+PiAtICAgICAgICAgICAgICAgICAgICAgICAgIGQt
-PnBvbGxfbWFzaywgZC0+bWF4X3ZjcHVzKTsKPj4gICAgICBwcmludGsoIkV2ZW50IGNoYW5uZWwg
-aW5mb3JtYXRpb24gZm9yIGRvbWFpbiAlZDpcbiIKPj4gLSAgICAgICAgICAgIlBvbGxpbmcgdkNQ
-VXM6IHslc31cbiIKPj4gLSAgICAgICAgICAgIiAgICBwb3J0IFtwL20vc11cbiIsIGQtPmRvbWFp
-bl9pZCwga2V5aGFuZGxlcl9zY3JhdGNoKTsKPj4gKyAgICAgICAgICAgIlBvbGxpbmcgdkNQVXM6
-IHslKnBibH1cbiIKPj4gKyAgICAgICAgICAgIiAgICBwb3J0IFtwL20vc11cbiIsIGQtPmRvbWFp
-bl9pZCwgZC0+bWF4X3ZjcHVzLCBkLT5wb2xsX21hc2spOwo+IE5laXRoZXIgY3B1bWFza19iaXRz
-KCkgbm9yIGl0cyBvcGVuIGNvZGluZyBoZXJlIGF0IGFsbD8KCk5vLsKgIFdoeSBkbyB5b3UgdGhp
-bmsgcG9sbF9tYXNrIGlzIGEgY3B1bWFzaz/CoCBJdHMgYSBzdHJhaWdodCBiaXRtYXAuCgp+QW5k
-cmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============1643659669259023210==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-kg1M8ZYzL4ydS5khzr9C"
+
+
+--=-kg1M8ZYzL4ydS5khzr9C
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-11-09 at 03:53 -0700, Jan Beulich wrote:
+> > > > On 09.11.18 at 11:16, <jgross@suse.com> wrote:
+> > =3D=3D Hypervisor =3D=3D=20
+> >=20
+> > *  Per-cpu tasklet
+> >   -  XEN-28
+> >   -  Konrad Rzeszutek Wilk
+> >=20
+> > *  Improvements to domain creation (v2)
+> >   -  Andrew Cooper
+> >=20
+> > *  Argo (inter-VM communication)
+> >   -  Christopher Clark
+>=20
+> Core aware scheduling (Dario)?
+>
+Yes, indeed. Thanks Jan:
+
+ *  Core aware scheduling for Credit2
+   - Dario Faggioli
+
+Status is RFC posted, waiting for feedback.
+
+If I do get some feedback (and depending on the feedback itself, of
+course :-D ) there are chances for such series to be ready in time.
+
+The Credit1 one has, on the other hand, much smaller chances.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-kg1M8ZYzL4ydS5khzr9C
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvly60ACgkQFkJ4iaW4
+c+4jGQ//SD9fpSbLuqKeYQpSQ3CP1K0WaApmnHcC8WH/rpmH5WC/PnJzmQ7yqqWs
+a6eOo/VPA5TIWK+oheFLWcysh44dGZiYm4fJv8ZXEcyaqhUoahqjX1mIt3e67UQX
+JyT0GU8rTOQ7M3fJbq7kJDY1IgReuIO+eUTyappE3pfXm1CCxj3ZJ7ES+6qsg1RK
+ONukfP8ai+sOCTDNsEJcbcilI1bnmipOHJvnPw7u/pr7Uk4JKaOoe9LXAkDgsA/7
+S6yTELzEYIFk7oPeHUpGkhELXrcUdLwIqqlsqirnmG0mBV7Vhffz0LBLBQ6dMfjh
+dUZiZ/lPOxpkie6BOXtKLKVFRxLfqkJGL5IQo/oazvNG67UM1cUDz4m7ZrtEzlaH
+UtevD6sJMQS3TO5OX5igh9oxoRsNwGX69BDUch7VFBBZAgHhNV/sNsCk+a5bLyBz
+rp+XU9szl1ybTP1+eNgIv/1FRSz/ummHzUha1TJWd9G+hrLQjmroThN1cg37XXOH
+3/pgzcb2PNRAHG/GAYR0UAJT1+y6Uyk/sxvcUTKiXIQFQlY9amAdEiT5D+VzY4mP
+h98J4UM+bxlmVkN5a+B112r8bOaaM056WuVvHcomb7vp4SdUhPojj9XQ/nuyQMAn
+kNbynSb7CFyvziBbTnsAIyH4l+oXHJQyh34Myzm/jlOMFnOtbEE=
+=IrBw
+-----END PGP SIGNATURE-----
+
+--=-kg1M8ZYzL4ydS5khzr9C--
+
+
+
+--===============1643659669259023210==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1643659669259023210==--
