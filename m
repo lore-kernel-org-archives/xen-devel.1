@@ -1,30 +1,16 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH V4 3/3] x86/altp2m: fix display frozen when
- switching to a new view early
-Date: Fri, 9 Nov 2018 17:36:37 +0200
-Message-ID: <bd6f06ec-e3d3-06f7-ad19-4017a17112ee@bitdefender.com>
-References: <1541083542-22464-1-git-send-email-rcojocaru@bitdefender.com>
- <1541083542-22464-4-git-send-email-rcojocaru@bitdefender.com>
- <65ef6cc6-a198-f875-ec11-e3727360f257@citrix.com>
- <ad4906fd-37b9-965e-f7b3-45937b8ebedf@bitdefender.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 2/6] libx86: Split
+ x86_cpuid_policy_fill_native() out of calculate_raw_policy()
+Date: Fri, 9 Nov 2018 16:24:06 +0000
+Message-ID: <1fd922d8-ec20-1173-a472-579a507c531c@citrix.com>
+References: <1541416867-30253-1-git-send-email-andrew.cooper3@citrix.com>
+ <1541416867-30253-3-git-send-email-andrew.cooper3@citrix.com>
+ <5BE19AA602000078001F89E5@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9172188827756113419=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=y7e3=nu=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gL8pv-0002YF-Qd
- for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 15:36:43 +0000
-Received: from smtp.bitdefender.com (smtp01.buh.bitdefender.com [10.17.80.75])
- by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
- 9A2EA3074B71
- for <xen-devel@lists.xenproject.org>; Fri,  9 Nov 2018 17:36:41 +0200 (EET)
-Received: from [10.10.196.90] (unknown [10.10.196.90])
- by smtp.bitdefender.com (Postfix) with ESMTPSA id 8661A300F70D
- for <xen-devel@lists.xenproject.org>; Fri,  9 Nov 2018 17:36:41 +0200 (EET)
-In-Reply-To: <ad4906fd-37b9-965e-f7b3-45937b8ebedf@bitdefender.com>
-Content-Language: en-US-large
+In-Reply-To: <5BE19AA602000078001F89E5@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,56 +19,267 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvOS8xOCA0OjE5IFBNLCBSYXp2YW4gQ29qb2NhcnUgd3JvdGU6Cj4gT24gMTEvOC8xOCA4
-OjE0IFBNLCBHZW9yZ2UgRHVubGFwIHdyb3RlOgo+PiBPbiAxMS8wMS8yMDE4IDAyOjQ1IFBNLCBS
-YXp2YW4gQ29qb2NhcnUgd3JvdGU6Cj4+IC4uLmhlcmUgYW5kLi4uCj4+Cj4+PiArCj4+PiAgaW50
-IHAybV9zZXRfaW9yZXFfc2VydmVyKHN0cnVjdCBkb21haW4gKmQsCj4+PiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHVuc2lnbmVkIGludCBmbGFncywKPj4+ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgc3RydWN0IGh2bV9pb3JlcV9zZXJ2ZXIgKnMpCj4+PiBAQCAtOTk0LDEyICsxMDMzLDEy
-IEBAIGludCBwMm1fY2hhbmdlX3R5cGVfb25lKHN0cnVjdCBkb21haW4gKmQsIHVuc2lnbmVkIGxv
-bmcgZ2ZuX2wsCj4+PiAgfQo+Pj4gIAo+Pj4gIC8qIE1vZGlmeSB0aGUgcDJtIHR5cGUgb2YgYSBy
-YW5nZSBvZiBnZm5zIGZyb20gb3QgdG8gbnQuICovCj4+PiAtdm9pZCBwMm1fY2hhbmdlX3R5cGVf
-cmFuZ2Uoc3RydWN0IGRvbWFpbiAqZCwgCj4+PiAtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-dW5zaWduZWQgbG9uZyBzdGFydCwgdW5zaWduZWQgbG9uZyBlbmQsCj4+PiAtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcDJtX3R5cGVfdCBvdCwgcDJtX3R5cGVfdCBudCkKPj4+ICtzdGF0aWMg
-dm9pZCBjaGFuZ2VfdHlwZV9yYW5nZShzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtLAo+Pj4gKyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgc3RhcnQsIHVuc2lnbmVkIGxv
-bmcgZW5kLAo+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHAybV90eXBlX3Qgb3Qs
-IHAybV90eXBlX3QgbnQpCj4+PiAgewo+Pj4gICAgICB1bnNpZ25lZCBsb25nIGdmbiA9IHN0YXJ0
-Owo+Pj4gLSAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtID0gcDJtX2dldF9ob3N0cDJtKGQpOwo+
-Pj4gKyAgICBzdHJ1Y3QgZG9tYWluICpkID0gcDJtLT5kb21haW47Cj4+PiAgICAgIGludCByYyA9
-IDA7Cj4+PiAgCj4+PiAgICAgIEFTU0VSVChvdCAhPSBudCk7Cj4+PiBAQCAtMTA1Miw2ICsxMDkx
-LDI0IEBAIHZvaWQgcDJtX2NoYW5nZV90eXBlX3JhbmdlKHN0cnVjdCBkb21haW4gKmQsCj4+PiAg
-ICAgIHAybV91bmxvY2socDJtKTsKPj4+ICB9Cj4+PiAgCj4+PiArdm9pZCBwMm1fY2hhbmdlX3R5
-cGVfcmFuZ2Uoc3RydWN0IGRvbWFpbiAqZCwKPj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
-ICB1bnNpZ25lZCBsb25nIHN0YXJ0LCB1bnNpZ25lZCBsb25nIGVuZCwKPj4+ICsgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwMm1fdHlwZV90IG90LCBwMm1fdHlwZV90IG50KQo+Pj4gK3sKPj4+
-ICsgICAgY2hhbmdlX3R5cGVfcmFuZ2UocDJtX2dldF9ob3N0cDJtKGQpLCBzdGFydCwgZW5kLCBv
-dCwgbnQpOwo+Pj4gKwo+Pj4gKyNpZmRlZiBDT05GSUdfSFZNCj4+PiArICAgIGlmICggdW5saWtl
-bHkoYWx0cDJtX2FjdGl2ZShkKSkgKQo+Pj4gKyAgICB7Cj4+PiArICAgICAgICB1bnNpZ25lZCBp
-bnQgaTsKPj4+ICsKPj4+ICsgICAgICAgIGZvciAoIGkgPSAwOyBpIDwgTUFYX0FMVFAyTTsgaSsr
-ICkKPj4+ICsgICAgICAgICAgICBpZiAoIGQtPmFyY2guYWx0cDJtX2VwdHBbaV0gIT0gbWZuX3go
-SU5WQUxJRF9NRk4pICkKPj4+ICsgICAgICAgICAgICAgICAgY2hhbmdlX3R5cGVfcmFuZ2UoZC0+
-YXJjaC5hbHRwMm1fcDJtW2ldLCBzdGFydCwgZW5kLCBvdCwgbnQpOwo+Pj4gKyAgICB9Cj4+PiAr
-I2VuZGlmCj4+PiArfQo+Pj4gKwo+Pgo+PiAuLi5oZXJlIHlvdSBncmFiICYgcmVsZWFzZSBlYWNo
-IGxvY2sgc2VwYXJhdGVseSwgaW5zaWRlIHRoZSB1cGRhdGUKPj4gZnVuY3Rpb24uICBtZW1vcnlf
-dHlwZV9jaGFuZ2VkIGlzIHByb2JhYmx5IG1vcmUgb3IgbGVzcyBpZGVtcG90ZW50LCBzbwo+PiB3
-b24ndCBtYXR0ZXIgaWYgdHdvIGRpZmZlcmVudCBjYWxscyByYWNlOyBidXQgaXQgc2VlbXMgbGlr
-ZWx5IHRoYXQgaWYKPj4gdHdvIHAybV9jaGFuZ2VfdHlwZV9yYW5nZSgpIGNhbGxzIGhhcHBlbiBj
-b25jdXJyZW50bHksIHRoZSB2YXJpb3VzCj4+IGFsdHAybXMgd2lsbCBnZXQgZGlmZmVyZW50IHJl
-c3VsdHMuICBJcyBpdCB3b3J0aCByZWZhY3RvcmluZyBib3RoIG9mCj4+IHRoZXNlIHNvIHRoYXQs
-IGxpa2UgY2hhbmdlX2VudHJ5X3R5cGVfZ2xvYmFsLCB5b3UgaG9sZCB0aGUgaG9zdCBwMm0gbG9j
-awo+PiB3aGlsZSB5b3UgY2hhbmdlIHRoZSBpbmRpdmlkdWFsIGFsdHAybSBsb2Nrcz8KPiAKPiBJ
-IGhhdmUgY2hhbmdlZCB0aGUgY29kZSB0byBkbyBhbGwgdGhlIG1vZGlmaWNhdGlvbnMgdW5kZXIg
-aG9zdHAybSBsb2NrLAo+IGFuZCBvbiBjaGFuZ2luZyB0aGUgcmVzb2x1dGlvbiBvbiBhIGhvc3Qg
-d2l0aCB0aHJlZSBhbHRwMm1zIEkgZ2V0IGEKPiAiV2F0Y2hkb2cgdGltZXIgZGV0ZWN0cyB0aGF0
-IENQVTMgaXMgc3R1Y2shIiBoeXBlcnZpc29yIGNyYXNoOgoKQXBvbG9naWVzLCB0aGlzIGlzIGNs
-ZWFybHkgbXkgZmF1bHQuIEkndmUgbWlzc2VkIGEgY29weS1wYXN0ZSBwcm9ibGVtCnRoYXQgd2Vu
-dCB3cm9uZyAtIEkgaGF2ZSBhIHAybV9sb2NrKCkgd2hlcmUgdGhlcmUgc2hvdWxkIGhhdmUgYmVl
-biBhCnAybV91bmxvY2soKS4KCkknbSBzb3JyeSBmb3IgdGhlIG5vaXNlLgoKClRoYW5rcywKUmF6
-dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============9172188827756113419==
+Content-Type: multipart/alternative;
+	boundary="------------48D9EAA3DAF16E7A59FAE847"
+Content-Language: en-GB
+
+--------------48D9EAA3DAF16E7A59FAE847
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 06/11/18 13:44, Jan Beulich wrote:
+>>>> On 05.11.18 at 12:21, <andrew.cooper3@citrix.com> wrote:
+>> --- a/xen/include/xen/lib/x86/cpuid.h
+>> +++ b/xen/include/xen/lib/x86/cpuid.h
+>> @@ -20,6 +20,21 @@ struct cpuid_leaf
+>>      uint32_t a, b, c, d;
+>>  };
+>>  
+>> +static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
+>> +{
+>> +    asm volatile ( "cpuid"
+>> +                   : "=a" (l->a), "=b" (l->b), "=c" (l->c), "=d" (l->d)
+>> +                   : "a" (leaf) );
+>> +}
+>> +
+>> +static inline void cpuid_count_leaf(
+>> +    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *l)
+>> +{
+>> +    asm volatile ( "cpuid"
+>> +                   : "=a" (l->a), "=b" (l->b), "=c" (l->c), "=d" (l->d)
+>> +                   : "a" (leaf), "c" (subleaf) );
+>> +}
+> Especially with this now being library code (i.e. side effects like
+> serialization not being supposed to be of interest): Why
+> volatile?
+
+Force of habit, I think.  I'll drop volatile here.
+
+We should probably do the same for Xen, although there is one place in
+the Intel ucode handler which would need adjusting to cope.
+
+>> --- a/xen/lib/x86/cpuid.c
+>> +++ b/xen/lib/x86/cpuid.c
+>> @@ -2,6 +2,114 @@
+>>  
+>>  #include <xen/lib/x86/cpuid.h>
+>>  
+>> +void x86_cpuid_policy_fill_native(struct cpuid_policy *p)
+>> +{
+>> +    unsigned int i;
+>> +
+>> +    cpuid_leaf(0, &p->basic.raw[0]);
+>> +    for ( i = 1; i < min(ARRAY_SIZE(p->basic.raw),
+>> +                         p->basic.max_leaf + 1ul); ++i )
+>> +    {
+>> +        switch ( i )
+>> +        {
+>> +        case 0x4: case 0x7: case 0xb: case 0xd:
+>> +            /* Multi-invocation leaves.  Deferred. */
+>> +            continue;
+>> +        }
+>> +
+>> +        cpuid_leaf(i, &p->basic.raw[i]);
+>> +    }
+>> +
+>> +    if ( p->basic.max_leaf >= 4 )
+>> +    {
+>> +        for ( i = 0; i < ARRAY_SIZE(p->cache.raw); ++i )
+>> +        {
+>> +            union {
+>> +                struct cpuid_leaf l;
+>> +                struct cpuid_cache_leaf c;
+>> +            } u;
+>> +
+>> +            cpuid_count_leaf(4, i, &u.l);
+>> +
+>> +            if ( u.c.type == 0 )
+>> +                break;
+>> +
+>> +            p->cache.subleaf[i] = u.c;
+>> +        }
+>> +
+>> +        /*
+>> +         * The choice of CPUID_GUEST_NR_CACHE is arbitrary.  It is expected
+>> +         * that it will eventually need increasing for future hardware.
+>> +         */
+>> +#ifdef __XEN__
+>> +        if ( i == ARRAY_SIZE(p->cache.raw) )
+>> +            printk(XENLOG_WARNING
+>> +                   "CPUID: Insufficient Leaf 4 space for this hardware\n");
+>> +#endif
+> There being another similar instance further down, and possibly
+> new ones to appear later, plus such a warning potentially also
+> being of interest in the harness - would you mind abstracting
+> (could be as simple as making printk() and XENLOG_* available
+> where needed, provided there's no consumer which would
+> rather not want such logging) this so it can go without #ifdef-ary?
+
+Well - it was this consideration which caused me to omit it.
+
+Realistically, the first situation to hit this message will be someone
+booting Xen on a brand new piece of hardware, so I expect changes to the
+structure size to come from vendors.
+
+One user is the AFL fuzzer, and that definitely doesn't want to be
+spitting out a warning on every fork().  The other current user is the
+x86 instruction emulator, where this functionality isn't the interesting
+part.  Furthermore, I don't expect the toolstack to be making use of
+this itself, so it won't be useful to attempt to plumb the message
+through there.
+
+~Andrew
+
+--------------48D9EAA3DAF16E7A59FAE847
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 06/11/18 13:44, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:5BE19AA602000078001F89E5@prv1-mh.provo.novell.com">
+      <blockquote type="cite">
+        <blockquote type="cite">
+          <blockquote type="cite">
+            <pre wrap="">On 05.11.18 at 12:21, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
+</pre>
+          </blockquote>
+        </blockquote>
+        <pre wrap="">--- a/xen/include/xen/lib/x86/cpuid.h
++++ b/xen/include/xen/lib/x86/cpuid.h
+@@ -20,6 +20,21 @@ struct cpuid_leaf
+     uint32_t a, b, c, d;
+ };
+ 
++static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
++{
++    asm volatile ( "cpuid"
++                   : "=a" (l-&gt;a), "=b" (l-&gt;b), "=c" (l-&gt;c), "=d" (l-&gt;d)
++                   : "a" (leaf) );
++}
++
++static inline void cpuid_count_leaf(
++    uint32_t leaf, uint32_t subleaf, struct cpuid_leaf *l)
++{
++    asm volatile ( "cpuid"
++                   : "=a" (l-&gt;a), "=b" (l-&gt;b), "=c" (l-&gt;c), "=d" (l-&gt;d)
++                   : "a" (leaf), "c" (subleaf) );
++}
+</pre>
+      </blockquote>
+      <pre wrap="">Especially with this now being library code (i.e. side effects like
+serialization not being supposed to be of interest): Why
+volatile?</pre>
+    </blockquote>
+    <br>
+    Force of habit, I think.  I'll drop volatile here.<br>
+    <br>
+    We should probably do the same for Xen, although there is one place
+    in the Intel ucode handler which would need adjusting to cope.<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:5BE19AA602000078001F89E5@prv1-mh.provo.novell.com">
+      <pre wrap="">
+</pre>
+      <blockquote type="cite">
+        <pre wrap="">--- a/xen/lib/x86/cpuid.c
++++ b/xen/lib/x86/cpuid.c
+@@ -2,6 +2,114 @@
+ 
+ #include &lt;xen/lib/x86/cpuid.h&gt;
+ 
++void x86_cpuid_policy_fill_native(struct cpuid_policy *p)
++{
++    unsigned int i;
++
++    cpuid_leaf(0, &amp;p-&gt;basic.raw[0]);
++    for ( i = 1; i &lt; min(ARRAY_SIZE(p-&gt;basic.raw),
++                         p-&gt;basic.max_leaf + 1ul); ++i )
++    {
++        switch ( i )
++        {
++        case 0x4: case 0x7: case 0xb: case 0xd:
++            /* Multi-invocation leaves.  Deferred. */
++            continue;
++        }
++
++        cpuid_leaf(i, &amp;p-&gt;basic.raw[i]);
++    }
++
++    if ( p-&gt;basic.max_leaf &gt;= 4 )
++    {
++        for ( i = 0; i &lt; ARRAY_SIZE(p-&gt;cache.raw); ++i )
++        {
++            union {
++                struct cpuid_leaf l;
++                struct cpuid_cache_leaf c;
++            } u;
++
++            cpuid_count_leaf(4, i, &amp;u.l);
++
++            if ( u.c.type == 0 )
++                break;
++
++            p-&gt;cache.subleaf[i] = u.c;
++        }
++
++        /*
++         * The choice of CPUID_GUEST_NR_CACHE is arbitrary.  It is expected
++         * that it will eventually need increasing for future hardware.
++         */
++#ifdef __XEN__
++        if ( i == ARRAY_SIZE(p-&gt;cache.raw) )
++            printk(XENLOG_WARNING
++                   "CPUID: Insufficient Leaf 4 space for this hardware\n");
++#endif
+</pre>
+      </blockquote>
+      <pre wrap="">There being another similar instance further down, and possibly
+new ones to appear later, plus such a warning potentially also
+being of interest in the harness - would you mind abstracting
+(could be as simple as making printk() and XENLOG_* available
+where needed, provided there's no consumer which would
+rather not want such logging) this so it can go without #ifdef-ary?</pre>
+    </blockquote>
+    <br>
+    Well - it was this consideration which caused me to omit it.<br>
+    <br>
+    Realistically, the first situation to hit this message will be
+    someone booting Xen on a brand new piece of hardware, so I expect
+    changes to the structure size to come from vendors.<br>
+    <br>
+    One user is the AFL fuzzer, and that definitely doesn't want to be
+    spitting out a warning on every fork().  The other current user is
+    the x86 instruction emulator, where this functionality isn't the
+    interesting part.  Furthermore, I don't expect the toolstack to be
+    making use of this itself, so it won't be useful to attempt to plumb
+    the message through there.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------48D9EAA3DAF16E7A59FAE847--
+
+
+--===============9172188827756113419==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9172188827756113419==--
