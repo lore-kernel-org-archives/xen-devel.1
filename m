@@ -1,19 +1,19 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: Xen 4.12 Development Update
-Date: Fri, 09 Nov 2018 03:53:46 -0700
-Message-ID: <5BE5673A02000078001FA1B7@prv1-mh.provo.novell.com>
-References: <20181109101631.5729-1-jgross@suse.com>
+Subject: Re: [PATCH v2] x86/traps: use only one stub function
+ for l/cstar
+Date: Fri, 09 Nov 2018 03:54:36 -0700
+Message-ID: <5BE5676C02000078001FA1BA@prv1-mh.provo.novell.com>
+References: <20181109104636.1771-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=mulf=nu=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gL4Q9-0007bA-11
- for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 10:53:49 +0000
-In-Reply-To: <20181109101631.5729-1-jgross@suse.com>
+ id 1gL4Qw-0007hn-Ub
+ for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 10:54:38 +0000
+In-Reply-To: <20181109104636.1771-1-wei.liu2@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,26 +23,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA5LjExLjE4IGF0IDExOjE2LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBJIGhh
-dmUgc3RhcnRlZCB0byBpbmNsdWRlIHRoZSB2ZXJzaW9uIG51bWJlciBvZiBzZXJpZXMgYXNzb2Np
-YXRlZCB0byBlYWNoCj4gZmVhdHVyZS4gQ2FuIGVhY2ggb3duZXIgc2VuZCBhbiB1cGRhdGUgb24g
-dGhlIHZlcnNpb24gbnVtYmVyIGlmIHRoZSBzZXJpZXMKPiB3YXMgcG9zdGVkIHVwc3RyZWFtPwoK
-T2gsIEkgaGFkIGFzc3VtZWQgeW91J2QgbWFpbnRhaW4gdGhpcyBhcyB0aGluZ3MgZ2V0IHBvc3Rl
-ZC4KCj4gPT0gSHlwZXJ2aXNvciA9PSAKPiAKPiAqICBQZXItY3B1IHRhc2tsZXQKPiAgIC0gIFhF
-Ti0yOAo+ICAgLSAgS29ucmFkIFJ6ZXN6dXRlayBXaWxrCj4gCj4gKiAgSW1wcm92ZW1lbnRzIHRv
-IGRvbWFpbiBjcmVhdGlvbiAodjIpCj4gICAtICBBbmRyZXcgQ29vcGVyCj4gCj4gKiAgQXJnbyAo
-aW50ZXItVk0gY29tbXVuaWNhdGlvbikKPiAgIC0gIENocmlzdG9waGVyIENsYXJrCgpDb3JlIGF3
-YXJlIHNjaGVkdWxpbmcgKERhcmlvKT8KCj4gPT09IHg4NiA9PT0gCj4gCj4gKiAgaHlwZXJ2aXNv
-ciB4ODYgaW5zdHJ1Y3Rpb24gZW11bGF0b3IgYWRkaXRpb25zICh2MikKPiAgIC0gIEphbiBCZXVs
-aWNoCgpUaGlzIGFwcGVhcnMgdG8gcmVmZXIgdG8gdjQgb2YgIng4NmVtdWw6IGZpeGVzLCBpbXBy
-b3ZlbWVudHMsIGFuZApiZWdpbm5pbmdzIG9mIEFWWDUxMiBzdXBwb3J0IiAod2hpY2gsIGRlc3Bp
-dGUgaXRzIHRpdGxlLCBpcyBub3cgbW9yZQp0aGFuIDUwJSBvZiB0aGUgQVZYNTEyIHdvcmspLgoK
-PiAqICBQVi1JT01NVSAodjYpCj4gICAtICBQYXVsIER1cnJhbnQKCnY3IHdhcyBwb3N0ZWQgYWxt
-b3N0IGEgbW9udGggYWdvLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+Pj4+IE9uIDA5LjExLjE4IGF0IDExOjQ2LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+QW5kIHBsYWNlIGl0IGludG8gLnRleHQuY29sZC4KPiAKPiBSZXF1ZXN0ZWQtYnk6IEphbiBCZXVs
+aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1
+MkBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
+bT4KClRoYW5rcyBmb3IgZG9pbmcgdGhpcy4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
