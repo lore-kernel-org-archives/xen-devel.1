@@ -1,24 +1,20 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v2 01/11] tools/libs/toollog: Provide a
- default logger
-Date: Fri, 9 Nov 2018 11:11:32 +0000
-Message-ID: <23525.27492.178253.243669@mariner.uk.xensource.com>
-References: <20181108170805.12774-1-ian.jackson@eu.citrix.com>
- <20181108170805.12774-2-ian.jackson@eu.citrix.com>
- <aba7e30d-63cb-fd76-1544-2cbdcb931233@citrix.com>
- <23524.29245.4775.691541@mariner.uk.xensource.com>
- <a077dcd4-b115-957d-6d9b-e02d8d3ba6a4@citrix.com>
- <54c67aa0-b588-e3d0-d908-145318f9560a@citrix.com>
+From: Greg KH <greg@kroah.com>
+Subject: Re: [PATCH] xen-blkfront: fix kernel panic with
+ blkfront_remove()
+Date: Fri, 9 Nov 2018 03:17:00 -0800
+Message-ID: <20181109111700.GC26335__10044.8812162087$1541762165$gmane$org@kroah.com>
+References: <1541725108-1468-1-git-send-email-manjunath.b.patil@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=gbfi=nu=citrix.com=prvs=84465d680=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gL4hL-0001cW-Pd
- for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 11:11:35 +0000
-In-Reply-To: <54c67aa0-b588-e3d0-d908-145318f9560a@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=3zcp=nu=kroah.com=greg@srs-us1.protection.inumbo.net>)
+ id 1gL4mg-0001sI-TW
+ for xen-devel@lists.xenproject.org; Fri, 09 Nov 2018 11:17:07 +0000
+Content-Disposition: inline
+In-Reply-To: <1541725108-1468-1-git-send-email-manjunath.b.patil@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,19 +23,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Manjunath Patil <manjunath.b.patil@oracle.com>
+Cc: jgross@suse.com, axboe@kernel.dk, konrad.wilk@oracle.com, linux-kernel@vger.kernel.org, stable@vger.kernel.org, linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-QW5kcmV3IENvb3BlciB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gW1BBVENIIHYyIDAxLzExXSB0
-b29scy9saWJzL3Rvb2xsb2c6IFByb3ZpZGUgYSBkZWZhdWx0IGxvZ2dlciIpOgo+IEFsdGhvdWdo
-IGFjdHVhbGx5LCB5b3UgY2FuJ3QgY2FwdHVyZSBzdGRlcnIgaW4gYSB2YXJpYWJsZSBsaWtlIHRo
-aXMgYXQKPiBhbGwuwqAgZnJlb3BlbigpIGF0IGEgbGF0ZXIgcG9pbnQgd2lsbCBjbG9zZSB0aGUg
-Y3VycmVudCBGSUxFIG9iamVjdCBhbmQKPiBjcmVhdGUgYSBuZXcgb25lLCBhZnRlciB3aGljaCB0
-aGlzIGxvZ2dlciB3aWxsIHVzZS1hZnRlci1mcmVlLgoKZnJlb3BlbiguLi4sZikgYWx3YXlzIHJl
-dHVybnMgTlVMTCBvciBmLiAgVGhlcmUncyBubyB3YXkgdG8gY2hhbmdlIHRoZQpwb2ludGVyIHZh
-bHVlIG9mIHN0ZGVyci4gIEluZGVlZCBzb21lIGxpYmNzIGhhdmUKICAjZGVmaW5lIHN0ZGVyciAo
-Jl9fc3RkaW9zdHJlYW1zWzJdKQpvciBzb21lIHN1Y2guCgpJYW4uCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVGh1LCBOb3YgMDgsIDIwMTggYXQgMDQ6NTg6MjhQTSAtMDgwMCwgTWFuanVuYXRoIFBhdGls
+IHdyb3RlOgo+IElmIGEgaG90LWF0dGFjaGluZyBkZXZpY2UgZmFpbHMgaW5zaWRlIGRvbVVbZXg6
+bmVnb3RpYXRlX21xKCkgcmV0dXJucwo+IHdpdGggRU5PTUVNXSB3ZSBjbGVhciB0aGUgYmxrZnJv
+bnRfaW5mbyBzdHJ1Y3QgaW4gdGFsa190b19ibGtiYWNrKCkKPiAKPiBXaGVuIHdlIHRyeSB0byBk
+ZXRhY2ggdGhlIGRldmljZSwgYmxrZnJvbnRfcmVtb3ZlKCkgdHJpZXMgdG8gYWNjZXNzCj4gYmxr
+ZnJvbnRfaW5mbyBsZWFkaW5nIHRvIGtlcm5lbCBwYW5pYy4KPiAKPiBUeXBpY2FsIGNhbGwgc3Rh
+Y2sgaW52b2x2aW5nIHBhbmljIC0KPiAgIzEwIHBhZ2VfZmF1bHQgYXQgZmZmZmZmZmY4MTZmMjVk
+Zgo+ICAgICAgW2V4Y2VwdGlvbiBSSVA6IGJsa2lmX2ZyZWUrNDZdCj4gICMxMSBibGtmcm9udF9y
+ZW1vdmUgYXQgZmZmZmZmZmZhMDA0ZGU0NyBbeGVuX2Jsa2Zyb250XQo+ICAjMTIgeGVuYnVzX2Rl
+dl9yZW1vdmUgYXQgZmZmZmZmZmY4MTNmYWE0Ywo+ICAjMTMgX19kZXZpY2VfcmVsZWFzZV9kcml2
+ZXIgYXQgZmZmZmZmZmY4MTQ3NjlhYQo+ICAjMTQgZGV2aWNlX3JlbGVhc2VfZHJpdmVyIGF0IGZm
+ZmZmZmZmODE0NzZhNjMKPiAgIzE1IGJ1c19yZW1vdmVfZGV2aWNlIGF0IGZmZmZmZmZmODE0NzYy
+ZWIKPiAgIzE2IGRldmljZV9kZWwgYXQgZmZmZmZmZmY4MTQ3MjY4NAo+ICAjMTcgZGV2aWNlX3Vu
+cmVnaXN0ZXIgYXQgZmZmZmZmZmY4MTQ3MjdlMgo+ICAjMTggeGVuYnVzX2Rldl9jaGFuZ2VkIGF0
+IGZmZmZmZmZmODEzZmE4OWYKPiAgIzE5IGZyb250ZW5kX2NoYW5nZWQgYXQgZmZmZmZmZmY4MTNm
+Y2ExOQo+ICAjMjAgeGVud2F0Y2hfdGhyZWFkIGF0IGZmZmZmZmZmODEzZjg4ZjkKPiAgIzIxIGt0
+aHJlYWQgYXQgZmZmZmZmZmY4MTBhNDg2Ygo+ICAjMjIgcmV0X2Zyb21fZm9yayBhdCBmZmZmZmZm
+ZjgxNmVkMmE4Cj4gCj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKPiBTaWduZWQtb2ZmLWJ5
+OiBNYW5qdW5hdGggUGF0aWwgPG1hbmp1bmF0aC5iLnBhdGlsQG9yYWNsZS5jb20+Cj4gLS0tCj4g
+IGRyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMgfCAgICAzICsrKwo+ICAxIGZpbGVzIGNoYW5n
+ZWQsIDMgaW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYyBiL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMK
+PiBpbmRleCBkYzhmZTI1Li4xNDRjZGE4IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvYmxvY2sveGVu
+LWJsa2Zyb250LmMKPiArKysgYi9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jCj4gQEAgLTI0
+OTYsNiArMjQ5Niw5IEBAIHN0YXRpYyBpbnQgYmxrZnJvbnRfcmVtb3ZlKHN0cnVjdCB4ZW5idXNf
+ZGV2aWNlICp4YmRldikKPiAgCj4gIAlkZXZfZGJnKCZ4YmRldi0+ZGV2LCAiJXMgcmVtb3ZlZCIs
+IHhiZGV2LT5ub2RlbmFtZSk7Cj4gIAo+ICsJaWYoIWluZm8pCj4gKwkJcmV0dXJuIDA7Cj4gKwoK
+QWx3YXlzIHJ1biBzY3JpcHRzL2NoZWNrcGF0Y2gucGwgb24geW91ciBwYXRjaGVzIHNvIHlvdSBk
+byBub3QgZ2V0IGEKZ3J1bXB5IG1haW50YWluZXIgdGVsbGluZyB5b3UgdG8gcnVuIHNjcmlwdHMv
+Y2hlY2twYXRjaC5wbCBvbiB5b3VyCnBhdGNoZXMuCgp0aGFua3MsCgpncmVnIGstaAoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
