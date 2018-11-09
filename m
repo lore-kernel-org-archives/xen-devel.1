@@ -1,11 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/badpage: Fix badpage->order overflow
-Date: Fri, 9 Nov 2018 14:42:55 +0000
-Message-ID: <1541774575-31536-1-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] x86/hvm: Unify hvm_event_pending()'s API
+ with the !CONFIG_HVM version
+Date: Fri, 9 Nov 2018 14:46:19 +0000
+Message-ID: <20181109144619.6t5w5rlzv2uv2zy7@zion.uk.xensource.com>
+References: <1541774547-31337-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Disposition: inline
+In-Reply-To: <1541774547-31337-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,31 +18,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Rm9yIG9yZGVyIDMyIG9yIG1vcmUsIHRoZSBzaGlmdCB3aWxsIHRydW5jYXRlLiAgU3BvdHRlZCBi
-eSBDb3Zlcml0eS4KClNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
-QGNpdHJpeC5jb20+Ci0tLQpDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29tPgpDQzog
-V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCiB4ZW4vY29tbW9uL3BhZ2VfYWxsb2Mu
-YyB8IDQgKystLQogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMo
-LSkKCmRpZmYgLS1naXQgYS94ZW4vY29tbW9uL3BhZ2VfYWxsb2MuYyBiL3hlbi9jb21tb24vcGFn
-ZV9hbGxvYy5jCmluZGV4IDFhZWMxM2UuLjg4ZDE2MzcgMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24v
-cGFnZV9hbGxvYy5jCisrKyBiL3hlbi9jb21tb24vcGFnZV9hbGxvYy5jCkBAIC0zMzQsNyArMzM0
-LDcgQEAgdm9pZCBfX2luaXQgaW5pdF9ib290X3BhZ2VzKHBhZGRyX3QgcHMsIHBhZGRyX3QgcGUp
-CiAgICAgICAgIGZvciAoIGkgPSAwOyBpIDwgYXJyYXlfc2l6ZTsgaSsrICkKICAgICAgICAgewog
-ICAgICAgICAgICAgYm9vdG1lbV9yZWdpb25femFwKGJhZHBhZ2UtPm1mbiwKLSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBiYWRwYWdlLT5tZm4gKyAoMVUgPDwgYmFkcGFnZS0+b3JkZXIp
-KTsKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiYWRwYWdlLT5tZm4gKyAoMVVMIDw8
-IGJhZHBhZ2UtPm9yZGVyKSk7CiAgICAgICAgICAgICBiYWRwYWdlKys7CiAgICAgICAgIH0KICAg
-ICB9CkBAIC0zNDcsNyArMzQ3LDcgQEAgdm9pZCBfX2luaXQgaW5pdF9ib290X3BhZ2VzKHBhZGRy
-X3QgcHMsIHBhZGRyX3QgcGUpCiAgICAgICAgICAgICBmb3IgKCBpID0gMDsgaSA8IGFycmF5X3Np
-emU7IGkrKyApCiAgICAgICAgICAgICB7CiAgICAgICAgICAgICAgICAgYm9vdG1lbV9yZWdpb25f
-emFwKGJhZHBhZ2UtPm1mbiwKLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmFk
-cGFnZS0+bWZuICsgKDFVIDw8IGJhZHBhZ2UtPm9yZGVyKSk7CisgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJhZHBhZ2UtPm1mbiArICgxVUwgPDwgYmFkcGFnZS0+b3JkZXIpKTsK
-ICAgICAgICAgICAgICAgICBiYWRwYWdlKys7CiAgICAgICAgICAgICB9CiAgICAgICAgIH0KLS0g
-CjIuMS40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gRnJpLCBOb3YgMDksIDIwMTggYXQgMDI6NDI6MjdQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBObyBmdW5jdGlvbmFsIGNoYW5nZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcg
+Q29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IFdlaSBMaXUg
+PHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
