@@ -1,8 +1,8 @@
 From: <gregkh@linuxfoundation.org>
 Subject: Patch "x86/xen: Fix boot loader version reported for
- PVH guests" has been added to the 4.14-stable tree
-Date: Sat, 10 Nov 2018 10:44:33 -0800
-Message-ID: <1541875473141153@kroah.com>
+ PVH guests" has been added to the 4.18-stable tree
+Date: Sat, 10 Nov 2018 10:44:40 -0800
+Message-ID: <1541875480178135@kroah.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,8 +10,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=ywra=nv=linuxfoundation.org=gregkh@kernel.org>)
- id 1gLYFL-0003f8-NX
- for xen-devel@lists.xenproject.org; Sat, 10 Nov 2018 18:44:39 +0000
+ id 1gLYFc-0003ge-9H
+ for xen-devel@lists.xenproject.org; Sat, 10 Nov 2018 18:44:56 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,11 +26,11 @@ List-Id: xen-devel@lists.xenproject.org
 
 ClRoaXMgaXMgYSBub3RlIHRvIGxldCB5b3Uga25vdyB0aGF0IEkndmUganVzdCBhZGRlZCB0aGUg
 cGF0Y2ggdGl0bGVkCgogICAgeDg2L3hlbjogRml4IGJvb3QgbG9hZGVyIHZlcnNpb24gcmVwb3J0
-ZWQgZm9yIFBWSCBndWVzdHMKCnRvIHRoZSA0LjE0LXN0YWJsZSB0cmVlIHdoaWNoIGNhbiBiZSBm
+ZWQgZm9yIFBWSCBndWVzdHMKCnRvIHRoZSA0LjE4LXN0YWJsZSB0cmVlIHdoaWNoIGNhbiBiZSBm
 b3VuZCBhdDoKICAgIGh0dHA6Ly93d3cua2VybmVsLm9yZy9naXQvP3A9bGludXgva2VybmVsL2dp
 dC9zdGFibGUvc3RhYmxlLXF1ZXVlLmdpdDthPXN1bW1hcnkKClRoZSBmaWxlbmFtZSBvZiB0aGUg
 cGF0Y2ggaXM6CiAgICAgeDg2LXhlbi1maXgtYm9vdC1sb2FkZXItdmVyc2lvbi1yZXBvcnRlZC1m
-b3ItcHZoLWd1ZXN0cy5wYXRjaAphbmQgaXQgY2FuIGJlIGZvdW5kIGluIHRoZSBxdWV1ZS00LjE0
+b3ItcHZoLWd1ZXN0cy5wYXRjaAphbmQgaXQgY2FuIGJlIGZvdW5kIGluIHRoZSBxdWV1ZS00LjE4
 IHN1YmRpcmVjdG9yeS4KCklmIHlvdSwgb3IgYW55b25lIGVsc2UsIGZlZWxzIGl0IHNob3VsZCBu
 b3QgYmUgYWRkZWQgdG8gdGhlIHN0YWJsZSB0cmVlLApwbGVhc2UgbGV0IDxzdGFibGVAdmdlci5r
 ZXJuZWwub3JnPiBrbm93IGFib3V0IGl0LgoKCkZyb20gMzU3ZDI5MWNlMDM1ZDFiNzU3NTY4MDU4
@@ -56,15 +56,16 @@ b3JnPgpTaWduZWQtb2ZmLWJ5OiBHcmVnIEtyb2FoLUhhcnRtYW4gPGdyZWdraEBsaW51eGZvdW5k
 YXRpb24ub3JnPgoKLS0tCiBhcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2aC5jIHwgICAgMiArLQog
 MSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgotLS0gYS9hcmNo
 L3g4Ni94ZW4vZW5saWdodGVuX3B2aC5jCisrKyBiL2FyY2gveDg2L3hlbi9lbmxpZ2h0ZW5fcHZo
-LmMKQEAgLTc2LDcgKzc2LDcgQEAgc3RhdGljIHZvaWQgX19pbml0IGluaXRfcHZoX2Jvb3RwYXJh
+LmMKQEAgLTc1LDcgKzc1LDcgQEAgc3RhdGljIHZvaWQgX19pbml0IGluaXRfcHZoX2Jvb3RwYXJh
 bXModgogCSAqIFZlcnNpb24gMi4xMiBzdXBwb3J0cyBYZW4gZW50cnkgcG9pbnQgYnV0IHdlIHdp
 bGwgdXNlIGRlZmF1bHQgeDg2L1BDCiAJICogZW52aXJvbm1lbnQgKGkuZS4gaGFyZHdhcmVfc3Vi
 YXJjaCAwKS4KIAkgKi8KLQlwdmhfYm9vdHBhcmFtcy5oZHIudmVyc2lvbiA9IDB4MjEyOworCXB2
 aF9ib290cGFyYW1zLmhkci52ZXJzaW9uID0gKDIgPDwgOCkgfCAxMjsKIAlwdmhfYm9vdHBhcmFt
-cy5oZHIudHlwZV9vZl9sb2FkZXIgPSAoOSA8PCA0KSB8IDA7IC8qIFhlbiBsb2FkZXIgKi8KIH0K
-IAoKClBhdGNoZXMgY3VycmVudGx5IGluIHN0YWJsZS1xdWV1ZSB3aGljaCBtaWdodCBiZSBmcm9t
-IGpncm9zc0BzdXNlLmNvbSBhcmUKCnF1ZXVlLTQuMTQveDg2LXhlbi1maXgtYm9vdC1sb2FkZXIt
-dmVyc2lvbi1yZXBvcnRlZC1mb3ItcHZoLWd1ZXN0cy5wYXRjaAoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+cy5oZHIudHlwZV9vZl9sb2FkZXIgPSAoOSA8PCA0KSB8IDA7IC8qIFhlbiBsb2FkZXIgKi8KIAog
+CXg4Nl9pbml0LmFjcGkuZ2V0X3Jvb3RfcG9pbnRlciA9IHB2aF9nZXRfcm9vdF9wb2ludGVyOwoK
+ClBhdGNoZXMgY3VycmVudGx5IGluIHN0YWJsZS1xdWV1ZSB3aGljaCBtaWdodCBiZSBmcm9tIGpn
+cm9zc0BzdXNlLmNvbSBhcmUKCnF1ZXVlLTQuMTgveDg2LXhlbi1maXgtYm9vdC1sb2FkZXItdmVy
+c2lvbi1yZXBvcnRlZC1mb3ItcHZoLWd1ZXN0cy5wYXRjaAoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
