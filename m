@@ -1,20 +1,17 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v2 11/11] tools/libvchan:
- libxenvchan_client_init: use ENOENT for no server
-Date: Sat, 10 Nov 2018 10:06:47 +0100
-Message-ID: <20181110090647.GC4051@mail-itl>
-References: <20181108170805.12774-1-ian.jackson@eu.citrix.com>
- <20181108170805.12774-12-ian.jackson@eu.citrix.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 129745: regressions - FAIL
+Date: Sat, 10 Nov 2018 09:50:50 +0000
+Message-ID: <osstest-129745-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============9155952007922509068=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=5xml=nv=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gLPED-0007zv-5I
- for xen-devel@lists.xenproject.org; Sat, 10 Nov 2018 09:06:53 +0000
-In-Reply-To: <20181108170805.12774-12-ian.jackson@eu.citrix.com>
+ <srs0=a2pm=nv=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gLPuw-0003Tc-UN
+ for xen-devel@lists.xenproject.org; Sat, 10 Nov 2018 09:51:02 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,130 +20,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============9155952007922509068==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="NU0Ex4SbNnrxsi6C"
-Content-Disposition: inline
-
-
---NU0Ex4SbNnrxsi6C
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Nov 08, 2018 at 05:08:05PM +0000, Ian Jackson wrote:
-> * Promise that we will set errno to ENOENT if the server is not
->   yet set up.
-> * Arrange that all ENOENT returns other than from the read of ring-ref
->   are turned into EIO, logging when we do so.
->=20
-> Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
-> CC: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-
-Since xtl_log now accepts NULL, it should be fine. Thanks!
-Reviewed-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.c=
-om>
-
-> ---
->  tools/libvchan/init.c        | 11 ++++++++++-
->  tools/libvchan/libxenvchan.h |  4 ++++
->  2 files changed, 14 insertions(+), 1 deletion(-)
->=20
-> diff --git a/tools/libvchan/init.c b/tools/libvchan/init.c
-> index d987acd338..e58f6bf9ac 100644
-> --- a/tools/libvchan/init.c
-> +++ b/tools/libvchan/init.c
-> @@ -45,6 +45,7 @@
->  #include <xen/sys/gntalloc.h>
->  #include <xen/sys/gntdev.h>
->  #include <libxenvchan.h>
-> +#include <xentoollog.h>
-> =20
->  #ifndef PAGE_SHIFT
->  #define PAGE_SHIFT 12
-> @@ -419,7 +420,7 @@ struct libxenvchan *libxenvchan_client_init(struct xe=
-ntoollog_logger *logger,
->  	snprintf(buf, sizeof buf, "%s/ring-ref", xs_path);
->  	ref =3D xs_read(xs, 0, buf, &len);
->  	if (!ref)
-> -		goto fail;
-> +		goto fail_allow_enoent;
->  	ring_ref =3D atoi(ref);
->  	free(ref);
->  	if (!ring_ref)
-> @@ -452,7 +453,15 @@ struct libxenvchan *libxenvchan_client_init(struct x=
-entoollog_logger *logger,
->  	if (xs)
->  		xs_daemon_close(xs);
->  	return ctrl;
-> +
->   fail:
-> +	if (errno =3D=3D ENOENT) {
-> +		xtl_log(logger, XTL_ERROR, errno, "vchan",
-> +			"error talking to server `%s', returning EIO",
-> +			xs_path);
-> +		errno =3D EIO;
-> +	}
-> + fail_allow_enoent:
->  	libxenvchan_close(ctrl);
->  	ctrl =3D NULL;
->  	goto out;
-> diff --git a/tools/libvchan/libxenvchan.h b/tools/libvchan/libxenvchan.h
-> index e4ccca1ff0..8a4ec2ce4c 100644
-> --- a/tools/libvchan/libxenvchan.h
-> +++ b/tools/libvchan/libxenvchan.h
-> @@ -105,6 +105,10 @@ struct libxenvchan *libxenvchan_server_init(struct x=
-entoollog_logger *logger,
->   * safely, however no locking is performed, so you must prevent multiple=
- clients
->   * from connecting to a single server.
->   *
-> + * Failing with ENOENT means the server has not yet called
-> + * libxenvchan_server_init, You may wait for a server to appear by
-> + * setting a xenstore watch on xs_path.
-> + *
->   * @param logger Logger for libxc errors
->   * @param domain The peer domain to connect to
->   * @param xs_path Base xenstore path for storing ring/event data
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---NU0Ex4SbNnrxsi6C
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvmn6gACgkQ24/THMrX
-1yyJJQf/Qpjt5UtCS/ripTaasjkrXb7AsE2HHRXi7rS2RhiHISfXsmtwPe4Zp+QB
-IOOyyz6UzSiiOg5EoGn9ksbD1i12epKFkS9W7m+3SjogsCsppeDWEzD+Ai+okC2O
-9W1YtmhAv76gMTvggYfNwcW7tthENFWWh6MhaaJVfCllXK0UDGMjCEo0s2HfPSvS
-LhOKqTZk1BpEHxTTyrp3BnI9GRi3OxAyMHR/sq7IgUig/HasIeto3G88jp2qD3wg
-hkuFq1V9I4Ih+TxJRvsJpco+3jQmEqO0Zvm8+pDHeL/hXa2wy9VhJAVumECTaAj2
-UvVP/KQr/l5R/1H+0UhQ4CLwheMGnA==
-=rXZf
------END PGP SIGNATURE-----
-
---NU0Ex4SbNnrxsi6C--
-
-
---===============9155952007922509068==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9155952007922509068==--
+ZmxpZ2h0IDEyOTc0NSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjk3NDUvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
+Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgIDYgeGVu
+LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtYW1kNjQg
+ICAgICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
+cy4gMTI5NDc1CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
+ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWkzODYteHNtICAgICAgICAg
+ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
+VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICBibG9ja2VkIG4vYQogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgMSBidWlsZC1j
+aGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
+CiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
+ICAgICAgICAgICAgICAgOGNkNGU3MzRjY2RmYmM5NjFjNzJhZWFhOGRiZDNmNTE1NDE3MWY5Ygpi
+YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
+NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
+LTExLTA1IDIxOjEzOjExIFogICAgNCBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
+MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgIDMgZGF5cyAgIDIwIGF0dGVtcHRzClRlc3Rpbmcgc2Ft
+ZSBzaW5jZSAgIDEyOTY2MiAgMjAxOC0xMS0wOCAyMDoxMTowNSBaICAgIDEgZGF5cyAgIDE2IGF0
+dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIERh
+bmRhbiBCaSA8ZGFuZGFuLmJpQGludGVsLmNvbT4KICBGdSBTaXl1YW4gPHNpeXVhbi5mdUBpbnRl
+bC5jb20+CiAgSGFvIFd1IDxoYW8uYS53dUBpbnRlbC5jb20+CiAgSmlhbiBKIFdhbmcgPGppYW4u
+ai53YW5nQGludGVsLmNvbT4KICBKaWF4aW4gV3UgPEppYXhpbi53dUBpbnRlbC5jb20+CiAgSmll
+d2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAgTGFzemxvIEVyc2VrIDxsZXJzZWtAcmVk
+aGF0LmNvbT4KICBNYXJjIFp5bmdpZXIgPG1hcmMuenluZ2llckBhcm0uY29tPgogIE1pbmcgSHVh
+bmcgPG1pbmcuaHVhbmdAbGluYXJvLm9yZz4KICBSdWl5dSBOaSA8cnVpeXUubmlAaW50ZWwuY29t
+PgogIFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICBXdSBKaWF4aW4gPGppYXhpbi53
+dUBpbnRlbC5jb20+CiAgeXVjaGVubGluIDx5dWNoZW5saW5Ac3lub2xvZ3kuY29tPgoKam9iczoK
+IGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBmYWlsICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
+YnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIGJsb2NrZWQgCiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9w
+cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAg
+ICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAg
+ICAgICAgICAgICAgICAgICBibG9ja2VkIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rl
+c3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczog
+L2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxl
+IGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MK
+CkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWws
+IGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
+PWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
+L2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhh
+cm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0
+d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24g
+bG9nOyBpdCB3b3VsZCBiZSA0NTggbGluZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
