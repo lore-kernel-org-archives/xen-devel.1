@@ -1,20 +1,19 @@
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: [PATCH 4.19 042/361] x86/xen: Fix boot loader version
+Subject: [PATCH 4.18 037/350] x86/xen: Fix boot loader version
  reported for PVH guests
-Date: Sun, 11 Nov 2018 14:16:29 -0800
-Message-ID: <20181111221625.728414024@linuxfoundation.org>
-References: <20181111221619.915519183@linuxfoundation.org>
+Date: Sun, 11 Nov 2018 14:18:21 -0800
+Message-ID: <20181111221708.732023332__23585.831517312$1541975293$gmane$org@linuxfoundation.org>
+References: <20181111221707.043394111@linuxfoundation.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=xqpf=nw=linuxfoundation.org=gregkh@kernel.org>)
- id 1gLyCC-00018G-NZ
- for xen-devel@lists.xenproject.org; Sun, 11 Nov 2018 22:27:08 +0000
-In-Reply-To: <20181111221619.915519183@linuxfoundation.org>
+ id 1gLyEQ-0001Fj-0L
+ for xen-devel@lists.xenproject.org; Sun, 11 Nov 2018 22:29:26 +0000
+In-Reply-To: <20181111221707.043394111@linuxfoundation.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,7 +26,7 @@ To: linux-kernel@vger.kernel.org
 Cc: Juergen Gross <jgross@suse.com>, corbet@lwn.net, Peter Zijlstra <peterz@infradead.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-doc@vger.kernel.org, stable@vger.kernel.org, Ingo Molnar <mingo@kernel.org>, bp@alien8.de, xen-devel@lists.xenproject.org, Thomas Gleixner <tglx@linutronix.de>, Linus Torvalds <torvalds@linux-foundation.org>, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-NC4xOS1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
+NC4xOC1zdGFibGUgcmV2aWV3IHBhdGNoLiAgSWYgYW55b25lIGhhcyBhbnkgb2JqZWN0aW9ucywg
 cGxlYXNlIGxldCBtZSBrbm93LgoKLS0tLS0tLS0tLS0tLS0tLS0tCgpGcm9tOiBKdWVyZ2VuIEdy
 b3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQgMzU3ZDI5MWNlMDM1ZDFiNzU3NTY4MDU4ZjNj
 OTg5OGM2MGQxMjViMSB1cHN0cmVhbS4KClRoZSBib290IGxvYWRlciB2ZXJzaW9uIHJlcG9ydGVk
