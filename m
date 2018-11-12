@@ -1,15 +1,18 @@
-From: Ravi Pichholiya <pichholiyaravi@gmail.com>
-Subject: Re: Porting XEN hypervisor on iMX8QM
-Date: Mon, 12 Nov 2018 11:32:59 +0530
-Message-ID: <CAAxnE7v8scLcTMPGG+yDOA9amwACRFCqT7nNBmgn47Wq724s=w@mail.gmail.com>
-References: <CAAxnE7vgDxcekeE04z_Ps7mJ9EX6W9a=U+r765GKStuZNonBMw@mail.gmail.com>
- <alpine.DEB.2.10.1811061053370.18518@sstabellini-ThinkPad-X260>
- <469ba780-e86a-6db6-e772-e31f025122f4@arm.com>
- <AM0PR04MB4481EA57FDD36F1F11E89BB688C40@AM0PR04MB4481.eurprd04.prod.outlook.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [linux-linus bisection] complete
+ test-amd64-amd64-xl-pvhv2-amd
+Date: Mon, 12 Nov 2018 06:20:04 +0000
+Message-ID: <E1gM5Zs-0003ZL-5r@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2277125022524422884=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <AM0PR04MB4481EA57FDD36F1F11E89BB688C40@AM0PR04MB4481.eurprd04.prod.outlook.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=qidy=nx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gM5Zw-0004uR-Cf
+ for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 06:20:08 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,234 +21,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: peng.fan@nxp.com
-Cc: julien.grall@arm.com, sstabellini@kernel.org, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============2277125022524422884==
-Content-Type: multipart/alternative; boundary="000000000000af5a72057a717495"
-
---000000000000af5a72057a717495
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi All,
-
-Many thanks for your response. We will go through all provided information
-and try to put step forward for porting XEN.
-
-
-
-Thanks & Regards,
-Ravi Pichholiya
-
-On Wed, Nov 7, 2018 at 6:54 AM Peng Fan <peng.fan@nxp.com> wrote:
-
-> Hi Ravi,
->
-> You could find code here
-> https://source.codeaurora.org/external/imx/imx-xen/
->
-> The latest public branch should be
-> https://source.codeaurora.org/external/imx/imx-xen/log/?h=3Dimx_4.14.62_1=
-.0.0_beta
-> but this has not gone through test, you could take as reference. We have
-> some new code still not public now.
->
-> Regards,
-> Peng.
-> > -----Original Message-----
-> > From: Julien Grall [mailto:julien.grall@arm.com]
-> > Sent: 2018=E5=B9=B411=E6=9C=887=E6=97=A5 3:06
-> > To: Stefano Stabellini <sstabellini@kernel.org>; Ravi Pichholiya
-> > <pichholiyaravi@gmail.com>
-> > Cc: xen-devel@lists.xen.org; Peng Fan <peng.fan@nxp.com>
-> > Subject: Re: Porting XEN hypervisor on iMX8QM
-> >
-> > Hi,
-> >
-> > I am CCing Peng Fan who is working for NXP and also on Xen. Peng, do yo=
-u
-> have
-> > any pointer to getting Xen running on iMX8QM?
-> >
-> > Cheers,
-> >
-> > On 06/11/2018 18:59, Stefano Stabellini wrote:
-> > > Hi Ravi,
-> > >
-> > > Please have a look at our wiki as a reference:
-> > > https://emea01.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fw=
-iki
-> > > .xenproject.org%2Fwiki%2FXen_ARM_with_Virtualization_Extensions&amp;d
-> > a
-> > >
-> > ta=3D02%7C01%7Cpeng.fan%40nxp.com%7C29f2e7554eeb4239e2be08d6441ae9
-> > e7%7C6
-> > >
-> > 86ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C636771279731653739&am
-> > p;sdata
-> > >
-> > =3DFLKtTp%2FaAk6B7Suv0vUttF04z%2BLo1Gw%2FmaI5p9RV%2BZE%3D&amp;re
-> > served=3D0
-> > >
-> > > I would start from cross-compiling the Xen hypervisor (the xen/
-> > > directory), no need to build the Xen userspace tools initially.
-> > > Make sure to have the right early boot uart driver, see
-> > > CONFIG_EARLY_PRINTK and docs/misc/arm/early-printk.txt.
-> > >
-> > > After you boot the Xen binary from uboot, you should be able to see
-> > > some console output from the hypervisror. The step after that is
-> > > booting Dom0.
-> > >
-> > > Cheers,
-> > >
-> > > Stefano
-> > >
-> > > On Mon, 5 Nov 2018, Ravi Pichholiya wrote:
-> > >> Hi Stefano,
-> > >> This is in reference to our LinkedIn discussion, in our one of the
-> project we
-> > need to port XEN hypervisor on iMx8QM.
-> > >>
-> > >> Request you to share what all visibility we should require from boot
-> > >> prospective as currently we are having access to Device tree and
-> U-boot
-> > source code only. Is access to any other files are also required?
-> > >>
-> > >> Also some reference to start with the porting of XEN if available
-> with you.
-> > >>
-> > >> Thanks & Regards,
-> > >> Ravi Pichholiya
-> > >>
-> >
-> > --
-> > Julien Grall
->
-
---000000000000af5a72057a717495
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hi All,</div><div><br></div><div>Many thanks for your=
- response. We will go through all provided information and try to put step =
-forward for porting XEN.</div><div><br></div><div><br></div><div><br></div>=
-<div>Thanks &amp; Regards,</div><div>Ravi Pichholiya<br></div></div><br><di=
-v class=3D"gmail_quote"><div dir=3D"ltr">On Wed, Nov 7, 2018 at 6:54 AM Pen=
-g Fan &lt;<a href=3D"mailto:peng.fan@nxp.com">peng.fan@nxp.com</a>&gt; wrot=
-e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bo=
-rder-left:1px #ccc solid;padding-left:1ex">Hi Ravi,<br>
-<br>
-You could find code here<br>
-<a href=3D"https://source.codeaurora.org/external/imx/imx-xen/" rel=3D"nore=
-ferrer" target=3D"_blank">https://source.codeaurora.org/external/imx/imx-xe=
-n/</a><br>
-<br>
-The latest public branch should be <a href=3D"https://source.codeaurora.org=
-/external/imx/imx-xen/log/?h=3Dimx_4.14.62_1.0.0_beta" rel=3D"noreferrer" t=
-arget=3D"_blank">https://source.codeaurora.org/external/imx/imx-xen/log/?h=
-=3Dimx_4.14.62_1.0.0_beta</a> but this has not gone through test, you could=
- take as reference. We have some new code still not public now. <br>
-<br>
-Regards,<br>
-Peng.<br>
-&gt; -----Original Message-----<br>
-&gt; From: Julien Grall [mailto:<a href=3D"mailto:julien.grall@arm.com" tar=
-get=3D"_blank">julien.grall@arm.com</a>]<br>
-&gt; Sent: 2018=E5=B9=B411=E6=9C=887=E6=97=A5 3:06<br>
-&gt; To: Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" t=
-arget=3D"_blank">sstabellini@kernel.org</a>&gt;; Ravi Pichholiya<br>
-&gt; &lt;<a href=3D"mailto:pichholiyaravi@gmail.com" target=3D"_blank">pich=
-holiyaravi@gmail.com</a>&gt;<br>
-&gt; Cc: <a href=3D"mailto:xen-devel@lists.xen.org" target=3D"_blank">xen-d=
-evel@lists.xen.org</a>; Peng Fan &lt;<a href=3D"mailto:peng.fan@nxp.com" ta=
-rget=3D"_blank">peng.fan@nxp.com</a>&gt;<br>
-&gt; Subject: Re: Porting XEN hypervisor on iMX8QM<br>
-&gt; <br>
-&gt; Hi,<br>
-&gt; <br>
-&gt; I am CCing Peng Fan who is working for NXP and also on Xen. Peng, do y=
-ou have<br>
-&gt; any pointer to getting Xen running on iMX8QM?<br>
-&gt; <br>
-&gt; Cheers,<br>
-&gt; <br>
-&gt; On 06/11/2018 18:59, Stefano Stabellini wrote:<br>
-&gt; &gt; Hi Ravi,<br>
-&gt; &gt;<br>
-&gt; &gt; Please have a look at our wiki as a reference:<br>
-&gt; &gt; <a href=3D"https://emea01.safelinks.protection.outlook.com/?url=
-=3Dhttp%3A%2F%2Fwiki" rel=3D"noreferrer" target=3D"_blank">https://emea01.s=
-afelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fwiki</a><br>
-&gt; &gt; .<a href=3D"http://xenproject.org" rel=3D"noreferrer" target=3D"_=
-blank">xenproject.org</a>%2Fwiki%2FXen_ARM_with_Virtualization_Extensions&a=
-mp;amp;d<br>
-&gt; a<br>
-&gt; &gt;<br>
-&gt; ta=3D02%7C01%7Cpeng.fan%<a href=3D"http://40nxp.com" rel=3D"noreferrer=
-" target=3D"_blank">40nxp.com</a>%7C29f2e7554eeb4239e2be08d6441ae9<br>
-&gt; e7%7C6<br>
-&gt; &gt;<br>
-&gt; 86ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C636771279731653739&amp;am<br=
->
-&gt; p;sdata<br>
-&gt; &gt;<br>
-&gt; =3DFLKtTp%2FaAk6B7Suv0vUttF04z%2BLo1Gw%2FmaI5p9RV%2BZE%3D&amp;amp;re<b=
-r>
-&gt; served=3D0<br>
-&gt; &gt;<br>
-&gt; &gt; I would start from cross-compiling the Xen hypervisor (the xen/<b=
-r>
-&gt; &gt; directory), no need to build the Xen userspace tools initially.<b=
-r>
-&gt; &gt; Make sure to have the right early boot uart driver, see<br>
-&gt; &gt; CONFIG_EARLY_PRINTK and docs/misc/arm/early-printk.txt.<br>
-&gt; &gt;<br>
-&gt; &gt; After you boot the Xen binary from uboot, you should be able to s=
-ee<br>
-&gt; &gt; some console output from the hypervisror. The step after that is<=
-br>
-&gt; &gt; booting Dom0.<br>
-&gt; &gt;<br>
-&gt; &gt; Cheers,<br>
-&gt; &gt;<br>
-&gt; &gt; Stefano<br>
-&gt; &gt;<br>
-&gt; &gt; On Mon, 5 Nov 2018, Ravi Pichholiya wrote:<br>
-&gt; &gt;&gt; Hi Stefano,<br>
-&gt; &gt;&gt; This is in reference to our LinkedIn discussion, in our one o=
-f the project we<br>
-&gt; need to port XEN hypervisor on iMx8QM.<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; Request you to share what all visibility we should require fr=
-om boot<br>
-&gt; &gt;&gt; prospective as currently we are having access to Device tree =
-and U-boot<br>
-&gt; source code only. Is access to any other files are also required?<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; Also some reference to start with the porting of XEN if avail=
-able with you.<br>
-&gt; &gt;&gt;<br>
-&gt; &gt;&gt; Thanks &amp;=C2=A0Regards,<br>
-&gt; &gt;&gt; Ravi Pichholiya<br>
-&gt; &gt;&gt;<br>
-&gt; <br>
-&gt; --<br>
-&gt; Julien Grall<br>
-</blockquote></div>
-
---000000000000af5a72057a717495--
-
-
---===============2277125022524422884==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2277125022524422884==--
+YnJhbmNoIHhlbi11bnN0YWJsZQp4ZW5icmFuY2ggeGVuLXVuc3RhYmxlCmpvYiB0ZXN0LWFtZDY0
+LWFtZDY0LXhsLXB2aHYyLWFtZAp0ZXN0aWQgeGVuLWJvb3QKClRyZWU6IGxpbnV4IGdpdDovL2dp
+dC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2YWxkcy9saW51eC0yLjYu
+Z2l0ClRyZWU6IGxpbnV4ZmlybXdhcmUgZ2l0Oi8veGVuYml0cy54ZW4ub3JnL29zc3Rlc3QvbGlu
+dXgtZmlybXdhcmUuZ2l0ClRyZWU6IHFlbXUgZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3FlbXUteGVu
+LXRyYWRpdGlvbmFsLmdpdApUcmVlOiBxZW11dSBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcvcWVtdS14
+ZW4uZ2l0ClRyZWU6IHhlbiBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcveGVuLmdpdAoKKioqIEZvdW5k
+IGFuZCByZXByb2R1Y2VkIHByb2JsZW0gY2hhbmdlc2V0ICoqKgoKICBCdWcgaXMgaW4gdHJlZTog
+IGxpbnV4IGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2
+YWxkcy9saW51eC0yLjYuZ2l0CiAgQnVnIGludHJvZHVjZWQ6ICAyNGNjZWE3ZTEwMmRlOGNiYzkz
+YWIzYmVmYjEyM2JiZDE4NTMyYmU5CiAgQnVnIG5vdCBwcmVzZW50OiBjMzQzZGI0NTVlYjMxMDVm
+MTFiYjVhYzI5MGQ3N2FiMjAwNmIwMjA5CiAgTGFzdCBmYWlsIHJlcHJvOiBodHRwOi8vbG9ncy50
+ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTI5ODIzLwoKCiAgKFJldmlzaW9u
+IGxvZyB0b28gbG9uZywgb21pdHRlZC4pCgoKRm9yIGJpc2VjdGlvbiByZXZpc2lvbi10dXBsZSBn
+cmFwaCBzZWU6CiAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3Qv
+cmVzdWx0cy9iaXNlY3QvbGludXgtbGludXMvdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQu
+eGVuLWJvb3QuaHRtbApSZXZpc2lvbiBJRHMgaW4gZWFjaCBncmFwaCBub2RlIHJlZmVyLCByZXNw
+ZWN0aXZlbHksIHRvIHRoZSBUcmVlcyBhYm92ZS4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0KUnVubmluZyBjcy1iaXNlY3Rpb24tc3RlcCAtLWdyYXBoLW91dD0vaG9t
+ZS9sb2dzL3Jlc3VsdHMvYmlzZWN0L2xpbnV4LWxpbnVzL3Rlc3QtYW1kNjQtYW1kNjQteGwtcHZo
+djItYW1kLnhlbi1ib290IC0tc3VtbWFyeS1vdXQ9dG1wLzEyOTgyMy5iaXNlY3Rpb24tc3VtbWFy
+eSAtLWJhc2lzLXRlbXBsYXRlPTEyNTg5OCAtLWJsZXNzaW5ncz1yZWFsLHJlYWwtYmlzZWN0IGxp
+bnV4LWxpbnVzIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItYW1kIHhlbi1ib290ClNlYXJjaGlu
+ZyBmb3IgZmFpbHVyZSAvIGJhc2lzIHBhc3M6CiAxMjk2ODAgZmFpbCBbaG9zdD1waW5vdDFdIC8g
+MTI4OTQ1IFtob3N0PWpvdWJlcnRpbjBdIDEyODkyMCBbaG9zdD1yaW1hdmExXSAxMjg4ODUgW2hv
+c3Q9cGlub3QwXSAxMjg4NjEgb2suCkZhaWx1cmUgLyBiYXNpcyBwYXNzIGZsaWdodHM6IDEyOTY4
+MCAvIDEyODg2MQoodHJlZSB3aXRoIG5vIHVybDogbWluaW9zKQoodHJlZSB3aXRoIG5vIHVybDog
+b3ZtZikKKHRyZWUgd2l0aCBubyB1cmw6IHNlYWJpb3MpClRyZWU6IGxpbnV4IGdpdDovL2dpdC5r
+ZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2YWxkcy9saW51eC0yLjYuZ2l0
+ClRyZWU6IGxpbnV4ZmlybXdhcmUgZ2l0Oi8veGVuYml0cy54ZW4ub3JnL29zc3Rlc3QvbGludXgt
+ZmlybXdhcmUuZ2l0ClRyZWU6IHFlbXUgZ2l0Oi8veGVuYml0cy54ZW4ub3JnL3FlbXUteGVuLXRy
+YWRpdGlvbmFsLmdpdApUcmVlOiBxZW11dSBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcvcWVtdS14ZW4u
+Z2l0ClRyZWU6IHhlbiBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcveGVuLmdpdApMYXRlc3QgMjRjY2Vh
+N2UxMDJkZThjYmM5M2FiM2JlZmIxMjNiYmQxODUzMmJlOSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1
+ODMxMGI1MThmMGRmY2Q4ODYwIGQwZDhhZDM5ZWNiNTFjZDc0OTdjZDUyNDQ4NGZlMDlmNTA4NzY3
+OTggZGU1YjY3OGNhNGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4NiAyY2YxMTM4OTFhMzhj
+YzA1NDM0YmM5ODc2ZmZjMTA3YTk5MDg4N2JlCkJhc2lzIHBhc3MgYzM0M2RiNDU1ZWIzMTA1ZjEx
+YmI1YWMyOTBkNzdhYjIwMDZiMDIwOSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRm
+Y2Q4ODYwIDljMGVlZDYxOGYzN2RkNWI0YTU3YzhiM2ZiYzQ4ZWY4OTEzZTMxNDkgZGU1YjY3OGNh
+NGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4NiA5MjY2NmZkZDZlMGFmYWI5ODliMmQ4OTc1
+OWQ5YjQzZjJjNjQ1YWU3CkdlbmVyYXRpbmcgcmV2aXNpb25zIHdpdGggLi9hZGhvYy1yZXZ0dXBs
+ZS1nZW5lcmF0b3IgIGdpdDovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dp
+dC90b3J2YWxkcy9saW51eC0yLjYuZ2l0I2MzNDNkYjQ1NWViMzEwNWYxMWJiNWFjMjkwZDc3YWIy
+MDA2YjAyMDktMjRjY2VhN2UxMDJkZThjYmM5M2FiM2JlZmIxMjNiYmQxODUzMmJlOSBnaXQ6Ly94
+ZW5iaXRzLnhlbi5vcmcvb3NzdGVzdC9saW51eC1maXJtd2FyZS5naXQjYzUzMGE3NWMxZTZhNDcy
+YjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MC1jNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThm
+MGRmY2Q4ODYwIGdpdDovL3hlbmJpdHMueGVuLm9yZy9xZW11LXhlbi10cmFkaXRpb25hbC5naXQj
+OWMwZWVkNjE4ZjM3ZGQ1YjRhNTdjOGIzZmJjNDhlZjg5MTNlMzE0OS1kMGQ4YWQzOWVjYjUxY2Q3
+NDk3Y2Q1MjQ0ODRmZTA5ZjUwODc2Nzk4IGdpdDovL3hlbmJpdHMueGVuLm9yZy9xZW11LXhlbi5n
+aXQjZGU1YjY3OGNhNGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4Ni1kZTViNjc4Y2E0ZGNk
+ZmE4M2UzMjI0OTFkNDc4ZDY2ZGY1NmMxOTg2IGdpdDovL3hlbmJpdHMueGVuLm9yZy94ZW4uZ2l0
+IzkyNjY2ZmRkNmUwYWZhYjk4OWIyZDg5NzU5ZDliNDNmMmM2NDVhZTctMmNmMTEzODkxYTM4Y2Mw
+NTQzNGJjOTg3NmZmYzEwN2E5OTA4ODdiZQphZGhvYy1yZXZ0dXBsZS1nZW5lcmF0b3I6IHRyZWUg
+ZGlzY29udGlndW91czogbGludXgtMi42CkxvYWRlZCAyMDA1IG5vZGVzIGluIHJldmlzaW9uIGdy
+YXBoClNlYXJjaGluZyBmb3IgdGVzdCByZXN1bHRzOgogMTI4NjYzIFtob3N0PXBpbm90MF0KIDEy
+ODcyNyBbaG9zdD1yaW1hdmExXQogMTI4ODYxIHBhc3MgYzM0M2RiNDU1ZWIzMTA1ZjExYmI1YWMy
+OTBkNzdhYjIwMDZiMDIwOSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYw
+IDljMGVlZDYxOGYzN2RkNWI0YTU3YzhiM2ZiYzQ4ZWY4OTEzZTMxNDkgZGU1YjY3OGNhNGRjZGZh
+ODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4NiA5MjY2NmZkZDZlMGFmYWI5ODliMmQ4OTc1OWQ5YjQz
+ZjJjNjQ1YWU3CiAxMjg4MzUgW2hvc3Q9am91YmVydGluMF0KIDEyODg4NSBbaG9zdD1waW5vdDBd
+CiAxMjg5MjAgW2hvc3Q9cmltYXZhMV0KIDEyODk0NSBbaG9zdD1qb3ViZXJ0aW4wXQogMTI4OTcw
+IGZhaWwgaXJyZWxldmFudAogMTI5MDA1IGZhaWwgaXJyZWxldmFudAogMTI5MDcyIGZhaWwgaXJy
+ZWxldmFudAogMTI5MTY3IGZhaWwgaXJyZWxldmFudAogMTI5MjU4IGZhaWwgaXJyZWxldmFudAog
+MTI5MzA0IGZhaWwgaXJyZWxldmFudAogMTI5Mzg5IGZhaWwgaXJyZWxldmFudAogMTI5MzQ4IGZh
+aWwgaXJyZWxldmFudAogMTI5NDE3IGZhaWwgaXJyZWxldmFudAogMTI5NTMwIGZhaWwgaXJyZWxl
+dmFudAogMTI5NDYwIGZhaWwgaXJyZWxldmFudAogMTI5NjgwIGZhaWwgMjRjY2VhN2UxMDJkZThj
+YmM5M2FiM2JlZmIxMjNiYmQxODUzMmJlOSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThm
+MGRmY2Q4ODYwIGQwZDhhZDM5ZWNiNTFjZDc0OTdjZDUyNDQ4NGZlMDlmNTA4NzY3OTggZGU1YjY3
+OGNhNGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4NiAyY2YxMTM4OTFhMzhjYzA1NDM0YmM5
+ODc2ZmZjMTA3YTk5MDg4N2JlCiAxMjk4MTIgcGFzcyBjMzQzZGI0NTVlYjMxMDVmMTFiYjVhYzI5
+MGQ3N2FiMjAwNmIwMjA5IGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAg
+ZDBkOGFkMzllY2I1MWNkNzQ5N2NkNTI0NDg0ZmUwOWY1MDg3Njc5OCBkZTViNjc4Y2E0ZGNkZmE4
+M2UzMjI0OTFkNDc4ZDY2ZGY1NmMxOTg2IDJjZjExMzg5MWEzOGNjMDU0MzRiYzk4NzZmZmMxMDdh
+OTkwODg3YmUKIDEyOTgxNCBmYWlsIDI0Y2NlYTdlMTAyZGU4Y2JjOTNhYjNiZWZiMTIzYmJkMTg1
+MzJiZTkgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBkMGQ4YWQzOWVj
+YjUxY2Q3NDk3Y2Q1MjQ0ODRmZTA5ZjUwODc2Nzk4IGRlNWI2NzhjYTRkY2RmYTgzZTMyMjQ5MWQ0
+NzhkNjZkZjU2YzE5ODYgMmNmMTEzODkxYTM4Y2MwNTQzNGJjOTg3NmZmYzEwN2E5OTA4ODdiZQog
+MTI5ODE1IHBhc3MgYzM0M2RiNDU1ZWIzMTA1ZjExYmI1YWMyOTBkNzdhYjIwMDZiMDIwOSBjNTMw
+YTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGQwZDhhZDM5ZWNiNTFjZDc0OTdj
+ZDUyNDQ4NGZlMDlmNTA4NzY3OTggZGU1YjY3OGNhNGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZj
+MTk4NiAyY2YxMTM4OTFhMzhjYzA1NDM0YmM5ODc2ZmZjMTA3YTk5MDg4N2JlCiAxMjk4MTkgZmFp
+bCAyNGNjZWE3ZTEwMmRlOGNiYzkzYWIzYmVmYjEyM2JiZDE4NTMyYmU5IGM1MzBhNzVjMWU2YTQ3
+MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgZDBkOGFkMzllY2I1MWNkNzQ5N2NkNTI0NDg0ZmUw
+OWY1MDg3Njc5OCBkZTViNjc4Y2E0ZGNkZmE4M2UzMjI0OTFkNDc4ZDY2ZGY1NmMxOTg2IDJjZjEx
+Mzg5MWEzOGNjMDU0MzRiYzk4NzZmZmMxMDdhOTkwODg3YmUKIDEyOTgwMiBwYXNzIGMzNDNkYjQ1
+NWViMzEwNWYxMWJiNWFjMjkwZDc3YWIyMDA2YjAyMDkgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgz
+MTBiNTE4ZjBkZmNkODg2MCA5YzBlZWQ2MThmMzdkZDViNGE1N2M4YjNmYmM0OGVmODkxM2UzMTQ5
+IGRlNWI2NzhjYTRkY2RmYTgzZTMyMjQ5MWQ0NzhkNjZkZjU2YzE5ODYgOTI2NjZmZGQ2ZTBhZmFi
+OTg5YjJkODk3NTlkOWI0M2YyYzY0NWFlNwogMTI5ODAzIGZhaWwgMjRjY2VhN2UxMDJkZThjYmM5
+M2FiM2JlZmIxMjNiYmQxODUzMmJlOSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRm
+Y2Q4ODYwIGQwZDhhZDM5ZWNiNTFjZDc0OTdjZDUyNDQ4NGZlMDlmNTA4NzY3OTggZGU1YjY3OGNh
+NGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4NiAyY2YxMTM4OTFhMzhjYzA1NDM0YmM5ODc2
+ZmZjMTA3YTk5MDg4N2JlCiAxMjk4MDQgcGFzcyBjMzQzZGI0NTVlYjMxMDVmMTFiYjVhYzI5MGQ3
+N2FiMjAwNmIwMjA5IGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgOWMw
+ZWVkNjE4ZjM3ZGQ1YjRhNTdjOGIzZmJjNDhlZjg5MTNlMzE0OSBkZTViNjc4Y2E0ZGNkZmE4M2Uz
+MjI0OTFkNDc4ZDY2ZGY1NmMxOTg2IDQ2MDI5ZGExMmU1ZWZlY2E2ZDk1N2U1NzkzYmQzNGYyOTY1
+ZmEwYTEKIDEyOTgyMCBwYXNzIGMzNDNkYjQ1NWViMzEwNWYxMWJiNWFjMjkwZDc3YWIyMDA2YjAy
+MDkgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBkMGQ4YWQzOWVjYjUx
+Y2Q3NDk3Y2Q1MjQ0ODRmZTA5ZjUwODc2Nzk4IGRlNWI2NzhjYTRkY2RmYTgzZTMyMjQ5MWQ0Nzhk
+NjZkZjU2YzE5ODYgMmNmMTEzODkxYTM4Y2MwNTQzNGJjOTg3NmZmYzEwN2E5OTA4ODdiZQogMTI5
+ODA1IHBhc3MgYzM0M2RiNDU1ZWIzMTA1ZjExYmI1YWMyOTBkNzdhYjIwMDZiMDIwOSBjNTMwYTc1
+YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4ODYwIGQwZDhhZDM5ZWNiNTFjZDc0OTdjZDUy
+NDQ4NGZlMDlmNTA4NzY3OTggZGU1YjY3OGNhNGRjZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4
+NiBjMjM4ZWEzZjRjYWNjZjM2YWIxYTU1OWY5NThjYmU1MTkyMzI3ZjZhCiAxMjk4MDYgcGFzcyBj
+MzQzZGI0NTVlYjMxMDVmMTFiYjVhYzI5MGQ3N2FiMjAwNmIwMjA5IGM1MzBhNzVjMWU2YTQ3MmIw
+ZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgZDBkOGFkMzllY2I1MWNkNzQ5N2NkNTI0NDg0ZmUwOWY1
+MDg3Njc5OCBkZTViNjc4Y2E0ZGNkZmE4M2UzMjI0OTFkNDc4ZDY2ZGY1NmMxOTg2IGNlNDc0NjJj
+YjRkMDQ5OTcxYWVkZWM1MWMxMTA1NjczYmU0MWFkY2UKIDEyOTgwNyBwYXNzIGMzNDNkYjQ1NWVi
+MzEwNWYxMWJiNWFjMjkwZDc3YWIyMDA2YjAyMDkgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBi
+NTE4ZjBkZmNkODg2MCBkMGQ4YWQzOWVjYjUxY2Q3NDk3Y2Q1MjQ0ODRmZTA5ZjUwODc2Nzk4IGRl
+NWI2NzhjYTRkY2RmYTgzZTMyMjQ5MWQ0NzhkNjZkZjU2YzE5ODYgYjcyNjI0YWFkNWIwMGYyZjZl
+OTc2YWVmNGQ2MmVlZGE4M2ZkMDIxOAogMTI5ODIzIGZhaWwgMjRjY2VhN2UxMDJkZThjYmM5M2Fi
+M2JlZmIxMjNiYmQxODUzMmJlOSBjNTMwYTc1YzFlNmE0NzJiMGViOTU1ODMxMGI1MThmMGRmY2Q4
+ODYwIGQwZDhhZDM5ZWNiNTFjZDc0OTdjZDUyNDQ4NGZlMDlmNTA4NzY3OTggZGU1YjY3OGNhNGRj
+ZGZhODNlMzIyNDkxZDQ3OGQ2NmRmNTZjMTk4NiAyY2YxMTM4OTFhMzhjYzA1NDM0YmM5ODc2ZmZj
+MTA3YTk5MDg4N2JlCiAxMjk4MDkgcGFzcyBjMzQzZGI0NTVlYjMxMDVmMTFiYjVhYzI5MGQ3N2Fi
+MjAwNmIwMjA5IGM1MzBhNzVjMWU2YTQ3MmIwZWI5NTU4MzEwYjUxOGYwZGZjZDg4NjAgZDBkOGFk
+MzllY2I1MWNkNzQ5N2NkNTI0NDg0ZmUwOWY1MDg3Njc5OCBkZTViNjc4Y2E0ZGNkZmE4M2UzMjI0
+OTFkNDc4ZDY2ZGY1NmMxOTg2IDQ1Y2I5YTQxMjNiNTU1MGViMWY4NDg0NmZlNTQ4MmFjYWUxYzEz
+YTMKIDEyOTgxMSBwYXNzIGMzNDNkYjQ1NWViMzEwNWYxMWJiNWFjMjkwZDc3YWIyMDA2YjAyMDkg
+YzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBkMGQ4YWQzOWVjYjUxY2Q3
+NDk3Y2Q1MjQ0ODRmZTA5ZjUwODc2Nzk4IGRlNWI2NzhjYTRkY2RmYTgzZTMyMjQ5MWQ0NzhkNjZk
+ZjU2YzE5ODYgNmNiMjdlNDE3ZTU3YzJmNGQ2ODlmYTE5OTcxZjIwZjc1ZTljMDcwOApTZWFyY2hp
+bmcgZm9yIGludGVyZXN0aW5nIHZlcnNpb25zCiBSZXN1bHQgZm91bmQ6IGZsaWdodCAxMjg4NjEg
+KHBhc3MpLCBmb3IgYmFzaXMgcGFzcwogUmVzdWx0IGZvdW5kOiBmbGlnaHQgMTI5NjgwIChmYWls
+KSwgZm9yIGJhc2lzIGZhaWx1cmUKIFJlcHJvIGZvdW5kOiBmbGlnaHQgMTI5ODAyIChwYXNzKSwg
+Zm9yIGJhc2lzIHBhc3MKIFJlcHJvIGZvdW5kOiBmbGlnaHQgMTI5ODAzIChmYWlsKSwgZm9yIGJh
+c2lzIGZhaWx1cmUKIDAgcmV2aXNpb25zIGF0IGMzNDNkYjQ1NWViMzEwNWYxMWJiNWFjMjkwZDc3
+YWIyMDA2YjAyMDkgYzUzMGE3NWMxZTZhNDcyYjBlYjk1NTgzMTBiNTE4ZjBkZmNkODg2MCBkMGQ4
+YWQzOWVjYjUxY2Q3NDk3Y2Q1MjQ0ODRmZTA5ZjUwODc2Nzk4IGRlNWI2NzhjYTRkY2RmYTgzZTMy
+MjQ5MWQ0NzhkNjZkZjU2YzE5ODYgMmNmMTEzODkxYTM4Y2MwNTQzNGJjOTg3NmZmYzEwN2E5OTA4
+ODdiZQpObyByZXZpc2lvbnMgbGVmdCB0byB0ZXN0LCBjaGVja2luZyBncmFwaCBzdGF0ZS4KIFJl
+c3VsdCBmb3VuZDogZmxpZ2h0IDEyOTgxMiAocGFzcyksIGZvciBsYXN0IHBhc3MKIFJlc3VsdCBm
+b3VuZDogZmxpZ2h0IDEyOTgxNCAoZmFpbCksIGZvciBmaXJzdCBmYWlsdXJlCiBSZXBybyBmb3Vu
+ZDogZmxpZ2h0IDEyOTgxNSAocGFzcyksIGZvciBsYXN0IHBhc3MKIFJlcHJvIGZvdW5kOiBmbGln
+aHQgMTI5ODE5IChmYWlsKSwgZm9yIGZpcnN0IGZhaWx1cmUKIFJlcHJvIGZvdW5kOiBmbGlnaHQg
+MTI5ODIwIChwYXNzKSwgZm9yIGxhc3QgcGFzcwogUmVwcm8gZm91bmQ6IGZsaWdodCAxMjk4MjMg
+KGZhaWwpLCBmb3IgZmlyc3QgZmFpbHVyZQoKKioqIEZvdW5kIGFuZCByZXByb2R1Y2VkIHByb2Js
+ZW0gY2hhbmdlc2V0ICoqKgoKICBCdWcgaXMgaW4gdHJlZTogIGxpbnV4IGdpdDovL2dpdC5rZXJu
+ZWwub3JnL3B1Yi9zY20vbGludXgva2VybmVsL2dpdC90b3J2YWxkcy9saW51eC0yLjYuZ2l0CiAg
+QnVnIGludHJvZHVjZWQ6ICAyNGNjZWE3ZTEwMmRlOGNiYzkzYWIzYmVmYjEyM2JiZDE4NTMyYmU5
+CiAgQnVnIG5vdCBwcmVzZW50OiBjMzQzZGI0NTVlYjMxMDVmMTFiYjVhYzI5MGQ3N2FiMjAwNmIw
+MjA5CiAgTGFzdCBmYWlsIHJlcHJvOiBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9y
+Zy9vc3N0ZXN0L2xvZ3MvMTI5ODIzLwoKCiAgKFJldmlzaW9uIGxvZyB0b28gbG9uZywgb21pdHRl
+ZC4pCgpSZXZpc2lvbiBncmFwaCBsZWZ0IGluIC9ob21lL2xvZ3MvcmVzdWx0cy9iaXNlY3QvbGlu
+dXgtbGludXMvdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQueGVuLWJvb3Que2RvdCxwcyxw
+bmcsaHRtbCxzdmd9LgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCjEy
+OTgyMzogdG9sZXJhYmxlIEFMTCBGQUlMCgpmbGlnaHQgMTI5ODIzIGxpbnV4LWxpbnVzIHJlYWwt
+YmlzZWN0IFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0
+L2xvZ3MvMTI5ODIzLwoKRmFpbHVyZXMgOi0vIGJ1dCBubyByZWdyZXNzaW9ucy4KClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCwKaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBy
+dW46CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgNyB4ZW4tYm9vdCAgICAgICAgICAg
+ICAgIGZhaWwgYmFzZWxpbmUgdW50ZXN0ZWQKCgpqb2JzOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1w
+dmh2Mi1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCgoKLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNn
+LXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAv
+aG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZp
+bGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5k
+IG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcv
+Z2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAg
+IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
+QURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0
+cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
