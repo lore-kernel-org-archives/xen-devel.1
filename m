@@ -1,15 +1,22 @@
-From: Mirela Simonovic <mirela.simonovic@aggios.com>
-Subject: Re: [PATCH 02/18] xen/arm: Implement PSCI system
- suspend call (virtual interface)
-Date: Mon, 12 Nov 2018 12:50:33 +0100
-Message-ID: <CAKPH-NjKU6KvU7ZaQUXuaKYFBgKqCNO0uW2Rn2K8YVEtbew8mg@mail.gmail.com>
-References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
- <1542022244-22977-3-git-send-email-mirela.simonovic@aggios.com>
- <5BE9672802000078001FAD79@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v5 11/13] IOMMU: move inclusion point of
+ asm/iommu.h
+Date: Mon, 12 Nov 2018 11:55:28 +0000
+Message-ID: <83536565-9c1b-3c0b-589c-62e2ebeee9f5@arm.com>
+References: <5B97C28802000078001E7456@prv1-mh.provo.novell.com>
+ <5BE45CB602000078001F9C6A@prv1-mh.provo.novell.com>
+ <5BE460D402000078001F9CF4@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5960888566671885199=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BE9672802000078001FAD79@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=kbrj=nx=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gMAoX-000404-8s
+ for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 11:55:33 +0000
+In-Reply-To: <5BE460D402000078001F9CF4@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,79 +25,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Davorin Mista <dm@aggios.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Xen Devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <stefano.stabellini@xilinx.com>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5960888566671885199==
-Content-Type: multipart/alternative; boundary="000000000000a01413057a764f4f"
-
---000000000000a01413057a764f4f
-Content-Type: text/plain; charset="UTF-8"
-
-What?
-
-On Mon, Nov 12, 2018 at 12:42 PM Jan Beulich <JBeulich@suse.com> wrote:
-
-> >>> On 12.11.18 at 12:30, <mirela.simonovic@aggios.com> wrote:
-> > --- a/xen/include/xen/sched.h
-> > +++ b/xen/include/xen/sched.h
-> > @@ -24,6 +24,7 @@
-> >  #include <xen/wait.h>
-> >  #include <public/xen.h>
-> >  #include <public/domctl.h>
-> > +#include <public/sched.h>
-> >  #include <public/sysctl.h>
-> >  #include <public/vcpu.h>
-> >  #include <public/vm_event.h>
->
-> Why?
->
-> Jan.
->
->
->
-
---000000000000a01413057a764f4f
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">What?</div><br><div class=3D"gmail_quote"><div dir=3D"ltr"=
->On Mon, Nov 12, 2018 at 12:42 PM Jan Beulich &lt;<a href=3D"mailto:JBeulic=
-h@suse.com">JBeulich@suse.com</a>&gt; wrote:<br></div><blockquote class=3D"=
-gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-=
-left:1ex">&gt;&gt;&gt; On 12.11.18 at 12:30, &lt;<a href=3D"mailto:mirela.s=
-imonovic@aggios.com" target=3D"_blank">mirela.simonovic@aggios.com</a>&gt; =
-wrote:<br>
-&gt; --- a/xen/include/xen/sched.h<br>
-&gt; +++ b/xen/include/xen/sched.h<br>
-&gt; @@ -24,6 +24,7 @@<br>
-&gt;=C2=A0 #include &lt;xen/wait.h&gt;<br>
-&gt;=C2=A0 #include &lt;public/xen.h&gt;<br>
-&gt;=C2=A0 #include &lt;public/domctl.h&gt;<br>
-&gt; +#include &lt;public/sched.h&gt;<br>
-&gt;=C2=A0 #include &lt;public/sysctl.h&gt;<br>
-&gt;=C2=A0 #include &lt;public/vcpu.h&gt;<br>
-&gt;=C2=A0 #include &lt;public/vm_event.h&gt;<br>
-<br>
-Why?<br>
-<br>
-Jan.<br>
-<br>
-<br>
-</blockquote></div>
-
---000000000000a01413057a764f4f--
-
-
---===============5960888566671885199==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5960888566671885199==--
+SGkgSmFuLAoKT24gMTEvOC8xOCA0OjE0IFBNLCBKYW4gQmV1bGljaCB3cm90ZToKPiBJbiBwcmVw
+YXJhdGlvbiBvZiBhbGxvd2luZyBpbmxpbmUgZnVuY3Rpb25zIGluIGFzbS9pb21tdS5oIHRvCj4g
+ZGUtcmVmZXJlbmNlIHN0cnVjdCBzdHJ1Y3QgaW9tbXVfb3BzLCBtb3ZlIHRoZSBpbmNsdXNpb24g
+ZG93bndhcmRzIHBhc3QKPiB0aGUgZGVjbGFyYXRpb24gb2YgdGhhdCBzdHJ1Y3R1cmUuIFRoaXMg
+aW4gdHVybiByZXF1aXJlcyBtb3ZpbmcgdGhlCj4gc3RydWN0IGRvbWFpbl9pb21tdSBkZWNsYXJh
+dGlvbiwgYXMgaXQgcmVxdWlyZXMgc3RydWN0IGFyY2hfaW9tbXUgdG8gYmUKPiBmdWxseSBkZWNs
+YXJlZCBiZWZvcmVoYW5kLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
+aEBzdXNlLmNvbT4KCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29t
+PgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
