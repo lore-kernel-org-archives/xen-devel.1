@@ -1,17 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 129856: regressions - FAIL
-Date: Mon, 12 Nov 2018 23:15:39 +0000
-Message-ID: <osstest-129856-mainreport@xen.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [RFC 09/16] xen/arm: p2m: Introduce a function to
+ resolve translation fault
+Date: Mon, 12 Nov 2018 15:36:40 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1811121533510.8259@sstabellini-ThinkPad-X260>
+References: <20181008183352.16291-1-julien.grall@arm.com>
+ <20181008183352.16291-10-julien.grall@arm.com>
+ <alpine.DEB.2.10.1811021531060.18518@sstabellini-ThinkPad-X260>
+ <ecb491ab-313d-de21-bc97-6e578aa6df77@arm.com>
+ <alpine.DEB.2.10.1811050934140.18518@sstabellini-ThinkPad-X260>
+ <21a4b3d5-b054-f215-2839-2a9f8fbaa01a@arm.com>
+ <bada26b6-ca13-35eb-30aa-77356f114e4d@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1383830356-1542065801=:8259"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qidy=nx=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gMLQu-0004wG-0r
- for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 23:15:52 +0000
+In-Reply-To: <bada26b6-ca13-35eb-30aa-77356f114e4d@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,67 +22,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEyOTg1NiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMjk4NTYvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
-Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgIDYgeGVu
-LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtaTM4Ni14
-c20gICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTI5NDc1CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWkzODYgICAgICAgICAgICAg
-ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgMSBidWlsZC1jaGVjaygxKSAgICAgICAg
-ICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgIDEg
-YnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiBidWlsZC1pMzg2LWxpYnZp
-cnQgICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9h
-CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
-ICAgICAgICAgICAgICAgZGEyYzgxZWU5NmViYTVkNWM4ZWY5MWZkODcwYWM5OGQzY2Y3MmJlYgpi
-YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
-NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
-LTExLTA1IDIxOjEzOjExIFogICAgNyBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
-MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgIDYgZGF5cyAgIDM2IGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEyOTg1NiAgMjAxOC0xMS0xMiAxNzo0MToyMCBaICAgIDAgZGF5cyAgICAxIGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFy
-ZCBCaWVzaGV1dmVsIDxhcmQuYmllc2hldXZlbEBsaW5hcm8ub3JnPgogIERhbmRhbiBCaSA8ZGFu
-ZGFuLmJpQGludGVsLmNvbT4KICBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+CiAgRnUg
-U2l5dWFuIDxzaXl1YW4uZnVAaW50ZWwuY29tPgogIEhhbyBXdSA8aGFvLmEud3VAaW50ZWwuY29t
-PgogIEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgSmlheGluIFd1IDxKaWF4
-aW4ud3VAaW50ZWwuY29tPgogIEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgogIExh
-c3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgTGltaW5nIEdhbyA8bGltaW5nLmdhb0Bp
-bnRlbC5jb20+CiAgTWFyYyBaeW5naWVyIDxtYXJjLnp5bmdpZXJAYXJtLmNvbT4KICBNaW5nIEh1
-YW5nIDxtaW5nLmh1YW5nQGxpbmFyby5vcmc+CiAgUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNv
-bT4KICBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAgV3UgSmlheGluIDxqaWF4aW4u
-d3VAaW50ZWwuY29tPgogIHl1Y2hlbmxpbiA8eXVjaGVubGluQHN5bm9sb2d5LmNvbT4KCmpvYnM6
-CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1pMzg2ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBibG9ja2VkIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZv
-cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0
-ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6
-IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJs
-ZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dz
-CgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFs
-LCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
-YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9y
-Zy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBo
-YXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dp
-dHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9u
-IGxvZzsgaXQgd291bGQgYmUgODA3IGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1383830356-1542065801=:8259
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Mon, 12 Nov 2018, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 11/6/18 2:20 PM, Julien Grall wrote:
+> > On 05/11/2018 17:56, Stefano Stabellini wrote:
+> > > On Mon, 5 Nov 2018, Julien Grall wrote:
+> > > > On 02/11/2018 23:27, Stefano Stabellini wrote:
+> > > > > On Mon, 8 Oct 2018, Julien Grall wrote:
+> > > > > 
+> > > > > > +    /*
+> > > > > > +     * Now that the work on the entry is done, set the valid bit to
+> > > > > > prevent
+> > > > > > +     * another fault on that entry.
+> > > > > > +     */
+> > > > > > +    resolved = true;
+> > > > > > +    entry.p2m.valid = 1;
+> > > > > > +
+> > > > > > +    p2m_write_pte(table + offsets[level], entry, p2m->clean_pte);
+> > > > > > +
+> > > > > > +    /*
+> > > > > > +     * No need to flush the TLBs as the modified entry had the
+> > > > > > valid bit
+> > > > > > +     * unset.
+> > > > > > +     */
+> > > > > > +
+> > > > > > +out_unmap:
+> > > > > > +    unmap_domain_page(table);
+> > > > > > +
+> > > > > > +out:
+> > > > > > +    p2m_write_unlock(p2m);
+> > > > > > +
+> > > > > > +    return resolved;
+> > > > > > +}
+> > > > > > +
+> > > > > >    static inline int p2m_insert_mapping(struct domain *d,
+> > > > > >                                         gfn_t start_gfn,
+> > > > > >                                         unsigned long nr,
+> > > 
+> > > 
+> > > We probably want to update the comment on top of the call to
+> > > p2m_resolve_translation_fault:
+> > 
+> > Whoops. I will fix it.
+> 
+> Looking at this again. I think the comment on top of the call to
+> p2m_resolve_translation_fault still makes sense. Feel free to suggest an
+> update of the comment if you think it is not enough.
+
+        /*
+         * The PT walk may have failed because someone was playing with
+         * the Stage-2 page table or because the valid bit was left
+         * unset to track memory accesses. In these cases, we want to
+         * return to the guest.
+         */
+--8323329-1383830356-1542065801=:8259
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1383830356-1542065801=:8259--
