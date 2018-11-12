@@ -1,21 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v7 5/7] iommu / vtd: introduce a new
- 'refcount' flag...
-Date: Mon, 12 Nov 2018 06:37:03 -0700
-Message-ID: <5BE981FF02000078001FAFEF@prv1-mh.provo.novell.com>
-References: <20181015103559.22075-1-paul.durrant@citrix.com>
- <20181015103559.22075-6-paul.durrant@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH v2 11/11] tools/libvchan:
+ libxenvchan_client_init: use ENOENT for no server
+Date: Mon, 12 Nov 2018 13:52:49 +0000
+Message-ID: <23529.34225.339196.925833@mariner.uk.xensource.com>
+References: <20181108170805.12774-1-ian.jackson@eu.citrix.com>
+ <20181108170805.12774-12-ian.jackson@eu.citrix.com>
+ <20181110090647.GC4051@mail-itl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=18fz=nx=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gMCOq-0005kL-LK
- for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 13:37:08 +0000
-In-Reply-To: <20181015103559.22075-6-paul.durrant@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=0ka0=nx=citrix.com=prvs=847df0986=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1gMCe6-0007MD-AZ
+ for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 13:52:54 +0000
+In-Reply-To: <20181110090647.GC4051@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,40 +25,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Kevin Tian <kevin.tian@intel.com>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE1LjEwLjE4IGF0IDEyOjM1LCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+IC4uLnRvIG1lYW4gJ3RoZSBwYWdlIChiZWluZykgbWFwcGVkIGlzIHJlZmVyZW5jZSBjb3Vu
-dGVkJy4KPiAKPiBBbiBpbXBvcnRhbnQgcHJlLXJlcXVpc2l0ZSBmb3IgUFYtSU9NTVUgbWFwcGlu
-ZyBpcyBiZWluZyBhYmxlIHRvIHRlbGwgdGhlCj4gZGlmZmVyZW5jZSBiZXR3ZWVuIElPTU1VIGVu
-dHJpZXMgYWRkZWQgYXQgc3RhcnQtb2YtZGF5IGJ5IFhlbiBhbmQgdGhvc2UKPiB0aGF0IGhhdmUg
-YmVlbiBhZGRlZCBieSBhIFBWLUlPTU1VIG1hcCBvcGVyYXRpb24uIFRoZSByZWFzb24gZm9yIHRo
-aXMgaXMKPiB0aGF0IHRoZSBwYWdlcyBmb3IgdGhlIGZvcm1lciBkbyBub3QgaGF2ZSBhbiBleHRy
-YSByZWZlcmVuY2UgdGFrZW4gcHJpb3IgdG8KPiBtYXBwaW5nIGJ1dCB0aGUgbGF0dGVyIHdpbGwg
-KGZvciBzYWZldHkvc2VjdXJpdHkgcmVhc29ucykuCgpNYWtlcyBtZSB3b25kZXIgd2hldGhlciBw
-cm9wZXIgcmVmLWNvdW50aW5nLCBhdCBsZWFzdCBpbiB0aGUKbm9uLXNoYXJlZC1wYWdlLXRhYmxl
-cyBjYXNlLCBzaG91bGRuJ3QgYmUgYSBwcmVyZXEgdG8gUFYgSU9NTVUuCk90aGVyd2lzZSB0aGlz
-IGludHJvZHVjZXMgY2x1bXNpbmVzcyBqdXN0IHRvIHdvcmsgYXJvdW5kIG90aGVyCmNsdW1zaW5l
-c3MuCgo+IFRoaXMgcGF0Y2ggdGhlcmVmb3JlIGludHJvZHVjZXMgYSBuZXcgSU9NTUZfcmVmY291
-bnQgZmxhZyB0aGF0IHRoZQo+IHN1YnNlcXVlbnQgcGF0Y2ggYWRkaW5nIHRoZSBQVi1JT01NVSBt
-YXAgb3BlcmF0aW9uIHdpbGwgdXNlIHRvIG1hcmsKPiBlbnRyaWVzIHRoYXQgaXQgYWRkcy4gV2hl
-biB0aGUgVlQtZCBtYXBwaW5nIGNvZGUgZW5jb3VudGVycyB0aGlzIGZsYWcKPiBpdCB3aWxsIHNl
-dCBhIGJpdCBpbiB0aGUgSU9NTVUgUFRFIHRoYXQgaXMgaWdub3JlZCBieSB0aGUgSU9NTVUgaXRz
-ZWxmLAo+IHN1Y2ggdGhhdCBhIHN1YnNxdWVudCBsb29rdXAgb3BlcmF0aW9uIGNhbiBkZXRlcm1p
-bmUgd2hldGhlciB0aGUgbWFwcGVkCj4gcGFnZSB3YXMgcmVmZXJlbmNlIGNvdW50ZWQgb3Igbm90
-IChhbmQgaGVuY2UgZm9yYmlkIGEgUFYtSU9NTVUgdW5tYXAKPiBvcGVyYXRpb24gaW4gdGhlIGxh
-dHRlciBjYXNlKS4KCkkgZG9uJ3QgdW5kZXJzdGFuZCB0aGlzOiBJZiB5b3UgY2FuJ3QgdW5tYXAg
-c3RhcnQtb2YtZGF5IG1hcHBpbmdzLAp0aGVuIGhvdyBjYW4geW91IGV2ZXIgZXN0YWJsaXNoIHlv
-dXIgb3duIG1hcHBpbmdzIHVzaW5nIHRoZSBuZXcKaHlwZXJjYWxscz8KCkZ1cnRoZXJtb3JlLCBs
-b29raW5nIGF0IHRoZSBwYXRjaCwgeW91IGRvbid0IGFwcGVhciB0byByZWYtY291bnQKYW55dGhp
-bmcuIFlvdSByZWFsbHkgb25seSBzZXQgYSBQVEUgYml0LiBJT01NVV9yZWZjb3VudCBsb29rcyBs
-aWtlCmEgbWlzbm9tZXIgdGhlbi4gSU9NTVVfbWFwX2R5biBwZXJoYXBzPyAoSW4gdGhpcyBjYXNl
-IG15CnJlbWFyayBmdXJ0aGVyIHVwIHJlZ2FyZGluZyByZWYtY291bnRpbmcgYXMgYSBwcmVyZXEg
-b2YgY291cnNlIGlzCmlycmVsZXZhbnQsIGJ1dCBJJ3ZlIGxlZnQgaXQgdGhlcmUganVzdCB0byBh
-bHNvIGRvY3VtZW50IHRoZQpjb25mdXNpb24gYXJpc2luZyBmcm9tIHRoZSBuYW1pbmcuIFRoZW4g
-YWdhaW4gSSBoYXZlIHlldCB0byBzZWUKd2hhdCB0aGUgbmV4dCBwYXRjaCBkb2VzLikKCkphbgoK
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+TWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyaXRlcyAoIlJlOiBbWGVuLWRldmVsXSBbUEFU
+Q0ggdjIgMTEvMTFdIHRvb2xzL2xpYnZjaGFuOiBsaWJ4ZW52Y2hhbl9jbGllbnRfaW5pdDogdXNl
+IEVOT0VOVCBmb3Igbm8gc2VydmVyIik6Cj4gU2luY2UgeHRsX2xvZyBub3cgYWNjZXB0cyBOVUxM
+LCBpdCBzaG91bGQgYmUgZmluZS4gVGhhbmtzIQo+IFJldmlld2VkLWJ5OiBNYXJlayBNYXJjenlr
+b3dza2ktR8OzcmVja2kgPG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+CgpUaGFua3Mu
+CgpJIGFtIHJlbHVjdGFudCB0byBjb21taXQgdGhpcyBzZXJpZXMgd2l0aG91dCBoYXZpbmcgYmVl
+biBhYmxlIHRvIHRlc3QKaXQuICBUaGVyZSdzIHRoZSBsaWJ2Y2hhbiBub2RlLmMgYW5kIG5vZGUt
+c2VsZWN0LmMgYnV0IHRoZXkgc2VlbSBhIGJpdApyYXcuCgpEbyB5b3UgaGF2ZSBhIHNjcmlwdCBv
+ciBzb21ldGhpbmcgdG8gd3JhcCB0aGVtIHVwID8KCklkZWFsbHkgSSBndWVzcyB0aGlzIHdvdWxk
+IGJlIHJ1biBieSBvc3N0ZXN0IHNvbWVob3cuCgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
