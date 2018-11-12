@@ -1,17 +1,19 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH] libxl/depriv: Remove RLIMIT_NPROC restriction
-Date: Mon, 12 Nov 2018 11:24:54 +0000
-Message-ID: <20181112112454.9187-1-george.dunlap@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH] libxl/depriv: Remove RLIMIT_NPROC
+ restriction
+Date: Mon, 12 Nov 2018 11:26:36 +0000
+Message-ID: <23529.25452.649002.526691@mariner.uk.xensource.com>
+References: <20181112112454.9187-1-george.dunlap@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=sgyq=nx=citrix.com=prvs=847ffe6e6=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1gMALO-0004BX-Ta
- for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 11:25:26 +0000
+ <srs0=0ka0=nx=citrix.com=prvs=847df0986=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1gMAMb-0004Fi-72
+ for xen-devel@lists.xenproject.org; Mon, 12 Nov 2018 11:26:41 +0000
+In-Reply-To: <20181112112454.9187-1-george.dunlap@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,43 +22,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Anthony Perard <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBhbHNvIHByZXZlbnRzIFFFTVUgZnJvbSBjcmVhdGluZyBwdHJlYWRzLCB3aGljaCBpdCBy
-ZXF1aXJlcyBmb3IKY2VydGFpbiBkZXZpY2VzIHRvIGZ1bmN0aW9uLgoKU2lnbmVkLW9mZi1ieTog
-R2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgotLS0KQ0M6IElhbiBKYWNr
-c29uIDxpYW4uamFja3NvbkBjaXRyaXguY29tPgpDQzogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4
-LmNvbT4KQ0M6IEFudGhvbnkgUGVyYXJkIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgotLS0K
-IGRvY3MvZGVzaWducy9xZW11LWRlcHJpdmlsZWdlLm1kIHwgNCArKystCiB0b29scy9saWJ4bC9s
-aWJ4bF9saW51eC5jICAgICAgICB8IDEgLQogMiBmaWxlcyBjaGFuZ2VkLCAzIGluc2VydGlvbnMo
-KyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZG9jcy9kZXNpZ25zL3FlbXUtZGVwcml2
-aWxlZ2UubWQgYi9kb2NzL2Rlc2lnbnMvcWVtdS1kZXByaXZpbGVnZS5tZAppbmRleCAwNjdjZjI0
-NzYyLi5mNzQ0NGE0MzRkIDEwMDY0NAotLS0gYS9kb2NzL2Rlc2lnbnMvcWVtdS1kZXByaXZpbGVn
-ZS5tZAorKysgYi9kb2NzL2Rlc2lnbnMvcWVtdS1kZXByaXZpbGVnZS5tZApAQCAtMTE0LDcgKzEx
-NCw2IEBAIHJlc291cmNlcyBhdmFpbGFibGUgdG8gaXQuCiAKIExpbWl0cyB0aGF0IGNhbiBiZSBp
-bXBsZW1lbnRlZCBpbW1lZGlhdGVseSB3aXRob3V0IG11Y2ggZWZmb3J0OgogIC0gUkxJTUlUX0ZT
-SVpFYCAoZmlsZSBzaXplKSB0byAyNTZLaUIuCi0gLSBSTElNSVRfTlBST0MgKGFmdGVyIHVpZCBj
-aGFuZ2VzIHRvIGEgdW5pcXVlIHVpZCkKIAogUHJvYmFibHkgbm90IG5lY2Vzc2FyeSBidXQgd2h5
-IG5vdDoKICAtIFJMSU1JVF9DT1JFOiAwCkBAIC0xNDIsNiArMTQxLDkgQEAgdmlydHVhbCBtZW1v
-cnkgd2hpY2ggUUVNVSB1c2VzIGFzIGEgbWFwY2FjaGUuICB4ZW4tbWFwY2FjaGUuYyBhbHJlYWR5
-CiBmaWRkbGVzIHdpdGggdGhpczsgaXQgd291bGQgYmUgc3RyYWlnaHRmb3J3YXJkIHRvIG1ha2Ug
-aXQgKnNldCogdGhlCiBybGltaXQgdG8gd2hhdCBpdCB0aGlua3MgYSBzZW5zaWJsZSBsaW1pdCBp
-cy4KIAorUkxJTUlUX05QUk9DIGxpbWl0cyB0b3RhbCBudW1iZXIgb2YgcHJvY2Vzc2VzIG9yIHRo
-cmVhZHMuICBRRU1VIHVzZXMKK3RocmVhZHMgZm9yIHNvbWUgZGV2aWNlcywgc28gdGhpcyB3b3Vs
-ZCByZXF1aXJlIHNvbWUgdGhvdWdodC4KKwogT3RoZXIgdGhpbmdzIHRoYXQgd291bGQgdGFrZSBz
-b21lIGNsZXZlcm5lc3MgLyBjaGFuZ2VzIHRvIFFFTVUgdG8KIHV0aWxpemUgZHVlIHRvIG9yZGVy
-aW5nIGNvbnN0cmFudHM6CiAgLSBSTElNSVRfTk9GSUxFUyAoYWZ0ZXIgYWxsIG5lY2Vzc2FyeSBm
-aWxlcyBhcmUgb3BlbmVkKQpkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGwvbGlieGxfbGludXguYyBi
-L3Rvb2xzL2xpYnhsL2xpYnhsX2xpbnV4LmMKaW5kZXggOTIxMDUxYzBlNi4uNjQ3NWNjYTY0YiAx
-MDA2NDQKLS0tIGEvdG9vbHMvbGlieGwvbGlieGxfbGludXguYworKysgYi90b29scy9saWJ4bC9s
-aWJ4bF9saW51eC5jCkBAIC0zMTgsNyArMzE4LDYgQEAgc3RhdGljIHN0cnVjdCB7CiAgICAgUkxJ
-TUlUX0VOVFJZKFJMSU1JVF9GU0laRSwgICAgMjU2KjEwMjQpLAogCiAgICAgLyogU2hvdWxkbid0
-IG5lZWQgYW55IG9mIHRoZXNlICovCi0gICAgUkxJTUlUX0VOVFJZKFJMSU1JVF9OUFJPQywgICAg
-MCksCiAgICAgUkxJTUlUX0VOVFJZKFJMSU1JVF9DT1JFLCAgICAgMCksCiAgICAgUkxJTUlUX0VO
-VFJZKFJMSU1JVF9NU0dRVUVVRSwgMCksCiAgICAgUkxJTUlUX0VOVFJZKFJMSU1JVF9MT0NLUywg
-ICAgMCksCi0tIAoyLjE5LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+R2VvcmdlIER1bmxhcCB3cml0ZXMgKCJbUEFUQ0hdIGxpYnhsL2RlcHJpdjogUmVtb3ZlIFJMSU1J
+VF9OUFJPQyByZXN0cmljdGlvbiIpOgo+IFRoaXMgYWxzbyBwcmV2ZW50cyBRRU1VIGZyb20gY3Jl
+YXRpbmcgcHRyZWFkcywgd2hpY2ggaXQgcmVxdWlyZXMgZm9yCj4gY2VydGFpbiBkZXZpY2VzIHRv
+IGZ1bmN0aW9uLgoKQWNrZWQtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXgu
+Y29tPgoKVG8gdW5ibG9jayBzdGFnaW5nLgoKV2Ugc2hvdWxkIGNvbnNpZGVyIHdoZXRoZXIgd2Ug
+Y2FuIGltcG9zZSBhIHNtYWxsZXIgbGltaXQgYW5kIGlmIHNvCndoYXQgaXQgc2hvdWxkIGJlIChh
+bmQgd2hldGhlciBpdCBuZWVkcyB0byBiZSBkeW5hbWljKS4KCklhbi4KCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
