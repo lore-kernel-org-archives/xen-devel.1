@@ -1,25 +1,20 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH 02/18] xen/arm: Implement PSCI system
- suspend call (virtual interface)
-Date: Tue, 13 Nov 2018 12:39:51 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1811131108330.8259@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH 03/18] xen/arm: Save GIC and virtual timer
+ context when the domain suspends
+Date: Tue, 13 Nov 2018 12:44:48 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1811131242560.8259@sstabellini-ThinkPad-X260>
 References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
- <1542022244-22977-3-git-send-email-mirela.simonovic@aggios.com>
- <1c5ca0ad-ee3d-2936-b57d-0ded1415176d@arm.com>
- <CAKPH-Nge2EMDLihthEVGAO0gY8EACksuN6ch1ZJV6+t1JeK=JQ@mail.gmail.com>
- <d24be446-af5a-7881-2db4-b25afac3e1f4@citrix.com>
- <alpine.DEB.2.10.1811121738570.8259@sstabellini-ThinkPad-X260>
- <34830ab6-53dc-52c5-680d-a654d4b1ce4f@arm.com>
+ <1542022244-22977-4-git-send-email-mirela.simonovic@aggios.com>
+ <03aa1b00-b087-6258-0273-d40c526d7d08@arm.com>
+ <CAKPH-NipkcTy+_GKPVptQxnc-3cqo5UiQ8ao05Yi8egdXMX0Qg@mail.gmail.com>
+ <811e51c5-516a-4bcf-f9e3-02c5b448b967@arm.com>
+ <CAKPH-Ngc_LMdG8tKPDzLWxy+1fuamiO_PTPHQSAkN0AVy9oofA@mail.gmail.com>
+ <17ab88c4-cdf7-8f7f-5933-25d9294f3641@arm.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-758655672-1542136193=:8259"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=+wyv=ny=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gMfTW-0003To-83
- for xen-devel@lists.xenproject.org; Tue, 13 Nov 2018 20:39:54 +0000
-In-Reply-To: <34830ab6-53dc-52c5-680d-a654d4b1ce4f@arm.com>
-Content-ID: <alpine.DEB.2.10.1811131110100.8259@sstabellini-ThinkPad-X260>
+In-Reply-To: <17ab88c4-cdf7-8f7f-5933-25d9294f3641@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,112 +24,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Davorin Mista <dm@aggios.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Xen Devel <xen-devel@lists.xen.org>, Jan Beulich <jbeulich@suse.com>, Stefano Stabellini <stefano.stabellini@xilinx.com>, xen-devel <xen-devel@lists.xenproject.org>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
+Cc: Xen Devel <xen-devel@lists.xen.org>, Davorin Mista <dm@aggios.com>, Andre Przywara <andre.przywara@arm.com>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <stefano.stabellini@xilinx.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-758655672-1542136193=:8259
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1811131110101.8259@sstabellini-ThinkPad-X260>
-
-On Tue, 13 Nov 2018, Julien Grall wrote:
-> > > > > > diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-> > > > > > index e594b48d81..7f8105465c 100644
-> > > > > > --- a/xen/arch/arm/domain.c
-> > > > > > +++ b/xen/arch/arm/domain.c
-> > > > > > @@ -97,6 +97,11 @@ static void ctxt_switch_from(struct vcpu *p)
-> > > > > >        if ( is_idle_vcpu(p) )
-> > > > > >            return;
-> > > > > > 
-> > > > > > +    /* VCPU's context should not be saved if its domain is
-> > > > > > suspended */
-> > > > > > +    if ( p->domain->is_shut_down &&
-> > > > > > +        (p->domain->shutdown_code == SHUTDOWN_suspend) )
-> > > > > > +        return;
-> > > > > SHUTDOWN_suspend is used in Xen for other purpose (see
-> > > > > SCHEDOP_shutdown). The other user of that code relies on all the state
-> > > > > to be saved on suspend.
-> > > > > 
-> > > > We just need a flag to mark a domain as suspended, and I do believe
-> > > > SHUTDOWN_suspend is not used anywhere else.
-> > > > Let's come back on this.
-> > > 
-> > > SHUTDOWN_suspend is used for migration.
-> > 
-> > That is true, but it is not only used for migration. It is also used
-> > for suspending a guest and saving its state to file with the intention
-> > of resuming it later from file.
-> 
-> Which is some sort of migration at the end. However, they don't have the same
-> semantics as suspend/resume regarding the state of the vCPU.
- 
-Right
-
- 
-> > > Grep for it through the Xen
-> > > tree and you'll find several pieces of documentation, including the
-> > > description of what this shutdown code means.
-> > > 
-> > > What you are introducing here is not a shutdown - it is a suspend with
-> > > the intent to resume executing later.  As such, it shouldn't use Xen's
-> > > shutdown infrastructure, which exists mainly to communicate with the
-> > > toolstack.
-> > 
-> > Future work will need toolstack support for suspending/resuming guests.
-> > SHUTDOWN_suspend is the most natural fit today; we don't want to hijack
-> > domain pause, because if we do, then we can't normally pause a domain
-> > anymore. 
-> 
-> Why? suspend/resume is like pausing the domain but will be resumed on event
-> (e.g interrupts) rather than user request.
-
-I meant to say two things.
-
-1) Which domain state should we use for suspended guests?
-
-This patch is using SHUTDOWN_suspend. Taken on its own, a regular "pause
-state" sounds like an option, in fact it is necessary to set the domain
-as paused otherwise the scheduler will schedule it. But in addition we
-need to distinguish a normal paused state from a PSCI system suspend
-state. We need to know that the domain has been system-suspended with
-PSCI, not just paused.
-
-
-2) This ties into the discussion of what xl commands we want to use to
-request a domU to suspend. We don't need to talk about it now, but at
-some point we'll want something equivalent to "xl save" or "xl trigger
-sleep" and "xl restore" or "xl trigger s3resume" for this suspended
-state.
-
-If we mark the domU simply as "paused" it will be difficult to implement
-correctly "xl restore" / "xl trigger s3resume". We should be able to
-distinguish a domain which is simply not running or paused (as in "xl
-pause") from one that has been put to sleep.  Otherwise we won't be able
-to use "xl pause" in its original sense anymore. "xl pause" will become
-effectively "xl trigger sleep" on ARM. Which is something to consider
-but I don't think that is what we want.
-
-The most similar feature is ACPI S3 in x86-land but the current calls
-are so ACPI/x86 specific that don't make much sense on a ACPI-less ARM
-implementation. If I am not mistaken, on x86 there is a special struct
-domain flag for this: d->arch.hvm.is_s3_suspended. 
-
-
-Let's leave aside the "which commands should we use" discussion for now
-because it doesn't related to this patch series. It seems to me that the
-best option is to introduce a new ARM specific struct domain flag,
-something akin to d->arch.hvm.is_s3_suspended but ARM PSCI specific.
---8323329-758655672-1542136193=:8259
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+T24gTW9uLCAxMiBOb3YgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ICgrIEFuZHJlKQo+IAo+
+IE9uIDExLzEyLzE4IDU6NDIgUE0sIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4gPiBIaSBKdWxp
+ZW4sCj4gPiAKPiA+IE9uIE1vbiwgTm92IDEyLCAyMDE4IGF0IDY6MDAgUE0gSnVsaWVuIEdyYWxs
+IDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4gPiA+IAo+ID4gPiAKPiA+ID4gCj4gPiA+
+IE9uIDExLzEyLzE4IDQ6NTIgUE0sIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4gPiA+ID4gSGkg
+SnVsaWVuLAo+ID4gPiAKPiA+ID4gSGksCj4gPiA+IAo+ID4gPiA+IFRoYW5rcyBmb3IgdGhlIGZl
+ZWRiYWNrLgo+ID4gPiA+IAo+ID4gPiA+IE9uIE1vbiwgTm92IDEyLCAyMDE4IGF0IDQ6MzYgUE0g
+SnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiA+ID4gPiB3cm90ZToKPiA+ID4g
+PiA+IAo+ID4gPiA+ID4gSGkgTWlyZWxhLAo+ID4gPiA+ID4gCj4gPiA+ID4gPiBPbiAxMS8xMi8x
+OCAxMTozMCBBTSwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiA+ID4gPiA+ID4gR0lDIGFuZCB2
+aXJ0dWFsIHRpbWVyIGNvbnRleHQgbXVzdCBiZSBzYXZlZCB3aGVuIHRoZSBkb21haW4KPiA+ID4g
+PiA+ID4gc3VzcGVuZHMuCj4gPiA+ID4gPiAKPiA+ID4gPiA+IFBsZWFzZSBwcm92aWRlIHRoZSBy
+YXRpb25hbGUgZm9yIHRoaXMuIElzIGl0IHJlcXVpcmVkIGJ5IHRoZSBzcGVjPwo+ID4gPiA+ID4g
+Cj4gPiA+ID4gCj4gPiA+ID4gVGhpcyBpcyByZXF1aXJlZCBmb3IgR0lDIGJlY2F1c2UgYSBndWVz
+dCBsZWF2ZXMgZW5hYmxlZCBpbnRlcnJ1cHRzIGluCj4gPiA+ID4gdGhlIEdJQyB0aGF0IGNvdWxk
+IHdha2UgaXQgdXAsIGFuZCBvbiByZXN1bWUgaXQgc2hvdWxkIGJlIGFibGUgdG8KPiA+ID4gPiBk
+ZXRlY3Qgd2hpY2ggaW50ZXJydXB0IHdva2UgaXQgdXAuIFdpdGhvdXQgc2F2aW5nL3Jlc3Rvcmlu
+ZyB0aGUgc3RhdGUKPiA+ID4gPiBvZiBHSUMgdGhpcyB3b3VsZCBub3QgYmUgcG9zc2libGUuCj4g
+PiA+IAo+ID4gPiBJIGFtIGNvbmZ1c2VkLiBJbiBwYXRjaCAjMTAsIHlvdSBzYXZlIHRoZSBHSUMg
+aG9zdCBiZWNhdXNlIHRoZSBHSUMgY2FuCj4gPiA+IGJlIHBvd2VyZWQtZG93bi4gTGludXggaXMg
+YWxzbyBzYXZpbmcgdGhlIEdJQyBzdGF0ZS4gU28gaG93IHRoZQo+ID4gPiBpbnRlcnJ1cHQgY2Fu
+IGNvbWUgdXAgaWYgdGhlIEdJQyBpcyBwb3dlcmVkIGRvd24/Cj4gPiA+IAo+ID4gCj4gPiBBZnRl
+ciBYZW4gKG9yIExpbnV4IGluIHRoZSBjb25maWcgd2l0aG91dCBYZW4pIGhhbmRzIG92ZXIgdGhl
+IGNvbnRyb2wKPiA+IHRvIEVMMyBvbiBzdXNwZW5kIChjYWxscyBzeXN0ZW0gc3VzcGVuZCBQU0NJ
+IHRvIEVMMyksIGl0IGxlYXZlcwo+ID4gZW5hYmxlZCBpbnRlcnJ1cHRzIHRoYXQgYXJlIGl0cyB3
+YWtlLXVwIHNvdXJjZXMuIFNhdmluZyBhIEdJQyBzdGF0ZQo+ID4gb25seSBtZWFucyB0aGF0IGl0
+cyBjdXJyZW50IGNvbmZpZ3VyYXRpb24gd2lsbCBiZSByZW1lbWJlcmVkIHNvbWV3aGVyZQo+ID4g
+aW4gZGF0YSBzdHJ1Y3R1cmVzLCBidXQgdGhlIGNvbmZpZ3VyYXRpb24gaXMgbm90IGNoYW5nZWQg
+b24gc3VzcGVuZC4KPiA+IEV2ZXJ5dGhpbmcgdGhhdCBoYXBwZW5zIHdpdGggaW50ZXJydXB0IGNv
+bmZpZ3VyYXRpb24gZnJvbSB0aGlzIHBvaW50Cj4gPiBvbiBpcyBwbGF0Zm9ybSBzcGVjaWZpYy4g
+Tm93IHRoZXJlIGFyZSAyIG9wdGlvbnM6IDEpIEVMMyB3aWxsIG5ldmVyCj4gPiBhbGxvdyBDUFUw
+IHRvIGJlIHBvd2VyZWQgZG93biBhbmQgdGhlIHdha2UtdXAgaW50ZXJydXB0IHdpbGwgaW5kZWVk
+Cj4gPiBwcm9wYWdhdGUgdmlhIEdJQzsKPiA+IG9yIDIpIENQVTAgd2lsbCBiZSBwb3dlcmVkIGRv
+d24gYW5kIHRoZSBHSUMgbWF5IGJlCj4gPiBwb3dlcmVkIGRvd24gYXMgd2VsbCwgc28gYW4gZXh0
+ZXJuYWwgaGVscCBpcyBuZWVkZWQgdG8gZGVhbCB3aXRoCj4gPiB3YWtlLXVwIGFuZCByZXN1bWUg
+KGUuZy4gaW4gb3JkZXIgdG8gcmVhY3QgdG8gYSB3YWtlLXVwIGludGVycnVwdAo+ID4gd2hpbGUg
+dGhlIEdJQyBpcyBkb3duLCBhbmQgcG93ZXIgdXAgQ1BVMCkuIFRoaXMgZXh0ZXJuYWwgaGVscCBp
+cwo+ID4gcHJvdmlkZWQgYnkgc29tZSBsb3ctcG93ZXIgcHJvY2Vzc29yIG91dHNpZGUgb2YgdGhl
+IENvcnRleC1BIGNsdXN0ZXIuCj4gPiAKPiA+IFNvIHRoZSBwbGF0Zm9ybSBmaXJtd2FyZSBpcyBy
+ZXNwb25zaWJsZSBmb3IgcHJvcGVybHkgY29uZmlndXJpbmcgYQo+ID4gd2FrZS11cCBwYXRoIGlm
+IEdJQyBnb2VzIGRvd24uIFRoaXMgaXMgY29tbW9ubHkgaGFuZGxlZCBieSBFTDMKPiA+IGNvbW11
+bmljYXRpbmcgd2l0aCBsb3ctcG93ZXIgcHJvY2Vzc29yLiBXaGVuIHRoZSBHSUMgcG93ZXIgY29t
+ZXMgdXAsCj4gPiB0aGUgaW50ZXJydXB0IHRyaWdnZXJlZCBieSBhIHBlcmlwaGVyYWwgaXMgc3Rp
+bGwgYWN0aXZlIGFuZCB0aGUKPiA+IHNvZnR3YXJlIG9uIENvcnRleC1BIGNsdXN0ZXIgc2hvdWxk
+IGJlIGFibGUgdG8gb2JzZXJ2ZSBpdCBvbmNlIHRoZSBHSUMKPiA+IHN0YXRlIGlzIHJlc3RvcmVk
+LCBpLmUuIGludGVycnVwdHMgZ2V0IGVuYWJsZWQgYXQgR0lDLgo+IAo+IFRoYW5rIHlvdSBmb3Ig
+dGhlIGV4cGxhbmF0aW9uLiAgTm93IHRoZSBxdWVzdGlvbiBpcyB3aHkgY2FuJ3Qgd2UgcmVzZXQg
+YXQKPiBsZWFzdCB0aGUgR0lDIENQVSBpbnRlcmZhY2U/Cj4gCj4gQUZBSVUsIHRoZSBndWVzdCBz
+aG91bGQgcmVzdG9yZSB0aGVtIGluIGFueSBjYXNlLiBUaGUgb25seSB0aGluZ3Mgd2UgbmVlZCB0
+bwo+IGtub3cgaXMgdGhlIGludGVycnVwdCB3YXMgcmVjZWl2ZWQgZm9yIGEgZ2l2ZW4gZ3Vlc3Qu
+IFdlIGNhbiB0aGVuIHF1ZXVlIGl0IGFuZAo+IHdha2UtdXAgdGhlIGRvbWFpbi4KPiAKPiBUaGlz
+IHNlZW1zIHRvIGZpdCB3aXRoIHRoZSBkZXNjcmlwdGlvbiBvbiB0b3Agb2YgZ2ljX2Rpc3Rfc2F2
+ZSgpIGluIExpbnV4Cj4gR0lDdjIgZHJpdmVyLgoKQ2FuIHdlIHJlbHkgb24gYWxsIFBTQ0kgY29t
+cGxpYW50IE9TZXMgdG8gcmVzdG9yZSB0aGVpciBvd24gR0lDIGFnYWluIGF0CnJlc3VtZT8gVGhl
+IFBTQ0kgc3BlYyBpcyBub3QgdmVyeSBjbGVhciBpbiB0aGF0IHJlZ2FyZCAoYXQgdGhlIHRoZQp2
+ZXJzaW9uIEkgYW0gbG9va2luZyBhdC4uLikgSSBhbSBqdXN0IGFza2luZyBzbyB0aGF0IHdlIGRv
+bid0IGNvbWUgdXAKd2l0aCBhIHNvbHV0aW9uIHRoYXQgb25seSB3b3JrcyB3aXRoIExpbnV4LgoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-758655672-1542136193=:8259--
