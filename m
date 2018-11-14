@@ -1,22 +1,15 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 08/18] xen/arm: Disable/enable non-boot
- physical CPUs on suspend/resume
-Date: Wed, 14 Nov 2018 10:52:10 +0000
-Message-ID: <283a8957-99d6-6b17-c52d-f8b0d9a7ca83@arm.com>
-References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
- <1542022244-22977-9-git-send-email-mirela.simonovic@aggios.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH trivial] mm/page_alloc: fix a typo in printk
+ for idle scrub
+Date: Wed, 14 Nov 2018 11:54:30 +0100
+Message-ID: <20181114105430.5uvacdidfweflaku@mac>
+References: <20181114103742.13801-1-sergey.dyasli@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=aca3=nz=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gMsmN-0008C7-7q
- for xen-devel@lists.xenproject.org; Wed, 14 Nov 2018 10:52:15 +0000
-In-Reply-To: <1542022244-22977-9-git-send-email-mirela.simonovic@aggios.com>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <20181114103742.13801-1-sergey.dyasli@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,45 +18,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org, xen-devel@lists.xenproject.org
-Cc: stefano.stabellini@xilinx.com, Stefano Stabellini <sstabellini@kernel.org>, dm@aggios.com, saeed.nowshadi@xilinx.com
+To: Sergey Dyasli <sergey.dyasli@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTWlyZWxhLAoKT24gMTIvMTEvMjAxOCAxMTozMCwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToK
-PiBOb24tYm9vdCBDUFVzIGhhdmUgdG8gYmUgZGlzYWJsZWQgb24gc3VzcGVuZCBhbmQgZW5hYmxl
-ZCBvbiByZXN1bWUKPiAoaG90cGx1Zy1iYXNlZCBtZWNoYW5pc20pLiBEaXNhYmxpbmcgbm9uLWJv
-b3QgQ1BVcyB3aWxsIGxlYWQgdG8gUFNDSQo+IENQVV9PRkYgdG8gYmUgY2FsbGVkIGJ5IGVhY2gg
-bm9uLWJvb3QgQ1BVLiBEZXBlbmRpbmcgb24gdGhlIHVuZGVybHlpbmcKPiBwbGF0Zm9ybSBjYXBh
-YmlsaXRpZXMsIHRoaXMgbWF5IGxlYWQgdG8gdGhlIHBoeXNpY2FsIHBvd2VyaW5nIGRvd24gb2YK
-PiBDUFVzLiBUZXN0ZWQgb24gWGlsaW54IFp5bnEgVWx0cmFzY2FsZSsgTVBTb0MgKGluY2x1ZGlu
-ZyBwb3dlciBkb3duIG9mCj4gZWFjaCBub24tYm9vdCBDUFUpLgo+IAo+IFNpZ25lZC1vZmYtYnk6
-IE1pcmVsYSBTaW1vbm92aWMgPG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbT4KPiBTaWduZWQt
-b2ZmLWJ5OiBTYWVlZCBOb3dzaGFkaSA8c2FlZWQubm93c2hhZGlAeGlsaW54LmNvbT4KPiAtLS0K
-PiAgIHhlbi9hcmNoL2FybS9zdXNwZW5kLmMgfCAxNSArKysrKysrKysrKysrKy0KPiAgIDEgZmls
-ZSBjaGFuZ2VkLCAxNCBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCj4gCj4gZGlmZiAtLWdp
-dCBhL3hlbi9hcmNoL2FybS9zdXNwZW5kLmMgYi94ZW4vYXJjaC9hcm0vc3VzcGVuZC5jCj4gaW5k
-ZXggNTc1YWZkNWViOC4uZGFlMWIxZjdkNiAxMDA2NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vc3Vz
-cGVuZC5jCj4gKysrIGIveGVuL2FyY2gvYXJtL3N1c3BlbmQuYwo+IEBAIC0xLDQgKzEsNSBAQAo+
-ICAgI2luY2x1ZGUgPHhlbi9zY2hlZC5oPgo+ICsjaW5jbHVkZSA8eGVuL2NwdS5oPgo+ICAgI2lu
-Y2x1ZGUgPGFzbS9jcHVmZWF0dXJlLmg+Cj4gICAjaW5jbHVkZSA8YXNtL2V2ZW50Lmg+Cj4gICAj
-aW5jbHVkZSA8YXNtL3BzY2kuaD4KPiBAQCAtMTE1LDE3ICsxMTYsMjkgQEAgc3RhdGljIHZvaWQg
-dmNwdV9zdXNwZW5kKHJlZ2lzdGVyX3QgZXBvaW50LCByZWdpc3Rlcl90IGNpZCkKPiAgIC8qIFhl
-biBzdXNwZW5kLiBOb3RlOiBkYXRhIGlzIG5vdCB1c2VkIChzdXNwZW5kIGlzIHRoZSBzdXNwZW5k
-IHRvIFJBTSkgKi8KPiAgIHN0YXRpYyBsb25nIHN5c3RlbV9zdXNwZW5kKHZvaWQgKmRhdGEpCj4g
-ICB7Cj4gKyAgICBpbnQgc3RhdHVzOwo+ICsKPiAgICAgICBCVUdfT04oc3lzdGVtX3N0YXRlICE9
-IFNZU19TVEFURV9hY3RpdmUpOwo+ICAgCj4gICAgICAgc3lzdGVtX3N0YXRlID0gU1lTX1NUQVRF
-X3N1c3BlbmQ7Cj4gICAgICAgZnJlZXplX2RvbWFpbnMoKTsKPiAgIAo+ICsgICAgc3RhdHVzID0g
-ZGlzYWJsZV9ub25ib290X2NwdXMoKTsKPiArICAgIGlmICggc3RhdHVzICkKPiArICAgIHsKPiAr
-ICAgICAgICBzeXN0ZW1fc3RhdGUgPSBTWVNfU1RBVEVfcmVzdW1lOwo+ICsgICAgICAgIGdvdG8g
-cmVzdW1lX25vbmJvb3RfY3B1czsKPiArICAgIH0KPiArCj4gICAgICAgc3lzdGVtX3N0YXRlID0g
-U1lTX1NUQVRFX3Jlc3VtZTsKPiAgIAo+ICtyZXN1bWVfbm9uYm9vdF9jcHVzOgo+ICsgICAgZW5h
-YmxlX25vbmJvb3RfY3B1cygpOwo+ICAgICAgIHRoYXdfZG9tYWlucygpOwo+ICAgICAgIHN5c3Rl
-bV9zdGF0ZSA9IFNZU19TVEFURV9hY3RpdmU7Cj4gKyAgICBkc2Ioc3kpOwoKV2h5IGRvIHlvdSBu
-ZWVkIGEgZHNiKHN5KSBoZXJlPwoKPiAgIAo+IC0gICAgcmV0dXJuIC1FTk9TWVM7CgpXaHkgZG8g
-eW91IHJldHVybiAtRU5PU1lTIHVudGlsIHRoaXMgcGF0Y2g/IFNob3VsZCBub3QgaGF2ZSBpdCBi
-ZSAwPwoKPiArICAgIHJldHVybiBzdGF0dXM7Cj4gICB9Cj4gICAKPiAgIGludDMyX3QgZG9tYWlu
-X3N1c3BlbmQocmVnaXN0ZXJfdCBlcG9pbnQsIHJlZ2lzdGVyX3QgY2lkKQo+IAoKQ2hlZXJzLAoK
-LS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+T24gV2VkLCBOb3YgMTQsIDIwMTggYXQgMTA6Mzc6NDJBTSArMDAwMCwgU2VyZ2V5IER5YXNsaSB3
+cm90ZToKPiBTaWduZWQtb2ZmLWJ5OiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJp
+eC5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5j
+b20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
