@@ -1,26 +1,47 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v4 06/44] x86emul: test for correct EVEX
- Disp8 scaling
-Date: Wed, 14 Nov 2018 07:17:54 -0700
-Message-ID: <5BEC2E9202000078001FC06B@prv1-mh.provo.novell.com>
-References: <5B6BF83602000078001DC548@prv1-mh.provo.novell.com>
- <5BAA34B502000078001EB9B6@prv1-mh.provo.novell.com>
- <5BAA383002000078001EB9EF@prv1-mh.provo.novell.com>
- <32137fcd-b3d1-a427-a4bb-67733a10eb09@citrix.com>
- <5BEAB19D02000078001FB68A@prv1-mh.provo.novell.com>
- <6eb73469-6eef-be46-e52a-95d809e5ca79@citrix.com>
+From: =?UTF-8?Q?H=c3=a5kon_Alstadheim?= <hakon@alstadheim.priv.no>
+Subject: [PATCH cargo-cult-version] For linux-4.19.x .
+ Xen/PCIback: Implement PCI flr/slot/bus reset with 'reset' SysFS attribute
+Date: Wed, 14 Nov 2018 15:24:32 +0100
+Message-ID: <bb94b090-bf7a-f944-128e-b08f919b3738@alstadheim.priv.no>
+References: <8a3bc517-1255-4547-d244-5c400e44cc77@Oracle.COM>
+ <f19dbb09-ef22-2cf4-fb38-2a7c42b5dc48@Oracle.COM>
+ <5A377E020200007800197FFA@prv-mh.provo.novell.com>
+ <559ffd12-b541-8a69-60bd-fbe10e3dc159@oracle.com>
+ <20180916114306.GF18222@reaktio.net>
+ <a726840b-8a5c-0890-73c6-3a95a7205153@oracle.com>
+ <20180918071519.GG18222@reaktio.net>
+ <5E7DDB68-4E68-48A5-AEEC-EE1B21A50E9E@citrix.com>
+ <352310b3-ec9b-2ceb-83f0-4550718120c3@oracle.com>
+ <20180919090526.s3ahnemrt2ik2tx3@mac.bytemobile.com>
+ <20181003155104.GH5318@reaktio.net>
+ <f6b8e055-7afc-b4de-af88-425d799dcd28@oracle.com>
+ <5d467c35-a524-ab84-e2fd-e0e80211ae7d@alstadheim.priv.no>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------3E918930726E6FF5BCFE508B"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=etbn=nz=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gMvzT-0004nq-G2
- for xen-devel@lists.xenproject.org; Wed, 14 Nov 2018 14:17:59 +0000
-In-Reply-To: <6eb73469-6eef-be46-e52a-95d809e5ca79@citrix.com>
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=qojw=nz=alstadheim.priv.no=hakon@srs-us1.protection.inumbo.net>)
+ id 1gMw5v-0005ak-B9
+ for xen-devel@lists.xenproject.org; Wed, 14 Nov 2018 14:24:39 +0000
+Received: from postfix-relay.alstadheim.priv.no
+ (148-252-110.181.3p.ntebredband.no [148.252.110.181])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ (Authenticated sender: hakon.alstadheim@ntebb.no)
+ by asav21.altibox.net (Postfix) with ESMTPSA id DFDFD801A4
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Nov 2018 15:24:33 +0100 (CET)
+Received: from smtps.alstadheim.priv.no (localhost [127.0.0.1])
+ by postfix-relay.alstadheim.priv.no (Postfix) with ESMTP id 55337624E8A6
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Nov 2018 15:24:33 +0100 (CET)
+Received: from [192.168.2.201] (unknown [192.168.2.201])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hakon)
+ by smtps.alstadheim.priv.no (Postfix) with ESMTPSA id F1FCE241067F
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Nov 2018 15:24:32 +0100 (CET)
+In-Reply-To: <5d467c35-a524-ab84-e2fd-e0e80211ae7d@alstadheim.priv.no>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,125 +50,253 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEzLjExLjE4IGF0IDE2OjQ1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTMvMTEvMjAxOCAxMToxMiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDEy
-LjExLjE4IGF0IDE4OjQyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBP
-biAyNS8wOS8xOCAxNDoyOSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gK2VudW0gdmwgewo+Pj4+
-ICsgICAgVkxfMTI4LAo+Pj4+ICsgICAgVkxfMjU2LAo+Pj4+ICsgICAgVkxfNTEyLAo+Pj4+ICt9
-Owo+Pj4+ICsKPj4+PiArZW51bSBzY2FsZSB7Cj4+Pj4gKyAgICBTQ192bCwKPj4+PiArICAgIFND
-X2VsLAo+Pj4+ICt9Owo+Pj4+ICsKPj4+PiArZW51bSB2c3ogewo+Pj4+ICsgICAgVlNaX3ZsLAo+
-Pj4+ICsgICAgVlNaX3ZsXzIsIC8qIFZMIC8gMiAqLwo+Pj4+ICsgICAgVlNaX3ZsXzQsIC8qIFZM
-IC8gNCAqLwo+Pj4+ICsgICAgVlNaX3ZsXzgsIC8qIFZMIC8gOCAqLwo+Pj4+ICsgICAgLyogIm5v
-IGJyb2FkY2FzdCIgaW1wbGllZCBmcm9tIGhlcmUgb24uICovCj4+Pj4gKyAgICBWU1pfZWwsCj4+
-Pj4gKyAgICBWU1pfZWxfMiwgLyogRUwgKiAyICovCj4+Pj4gKyAgICBWU1pfZWxfNCwgLyogRUwg
-KiA0ICovCj4+Pj4gKyAgICBWU1pfZWxfOCwgLyogRUwgKiA4ICovCj4+Pj4gK307Cj4+Pj4gKwo+
-Pj4gVGhlc2UgYWNyb255bXMgZ2V0IGluY3JlYXNpbmdseSBkaWZmaWN1bHQgdG8gZm9sbG93LiAg
-V2hhdCBpcyBlbCBpbiB0aGlzCj4+PiBjb250ZXh0Pwo+PiBWTCAtPiB2ZWN0b3IgbGVuZ3RoCj4+
-IEVMIC0+IGVsZW1lbnQgbGVuZ3RoCj4gCj4gQ2FuIHlvdSBhdCBsZWFzdCBsZWF2ZSB0cmFpbGlu
-ZyBjb21tZW50cyBhZnRlciB0aGUgaWRlbnRpZmllcnMgZm9yIHRoZQo+IGJlbmVmaXQgb2YgcGVv
-cGxlIG90aGVyIHRoYW4geW91IHJlYWRpbmcgdGhlIGNvZGU/CgpXaWxsIGRvLgoKPj4+PiArc3Rh
-dGljIGNvbnN0IHN0cnVjdCB0ZXN0IGF2eDUxMmZfYWxsW10gPSB7Cj4+Pj4gKyAgICBJTlNOX1NG
-UChtb3YsICAgICAgICAgICAgMGYsIDEwKSwKPj4+PiArICAgIElOU05fU0ZQKG1vdiwgICAgICAg
-ICAgICAwZiwgMTEpLAo+Pj4+ICsgICAgSU5TTl9QRlBfTkIobW92YSwgICAgICAgIDBmLCAyOCks
-Cj4+Pj4gKyAgICBJTlNOX1BGUF9OQihtb3ZhLCAgICAgICAgMGYsIDI5KSwKPj4+PiArICAgIElO
-U04obW92ZHFhMzIsICAgICA2NiwgICAwZiwgNmYsICAgIHZsLCAgIGRfbmIsIHZsKSwKPj4+PiAr
-ICAgIElOU04obW92ZHFhMzIsICAgICA2NiwgICAwZiwgN2YsICAgIHZsLCAgIGRfbmIsIHZsKSwK
-Pj4+PiArICAgIElOU04obW92ZHFhNjQsICAgICA2NiwgICAwZiwgNmYsICAgIHZsLCAgIHFfbmIs
-IHZsKSwKPj4+PiArICAgIElOU04obW92ZHFhNjQsICAgICA2NiwgICAwZiwgN2YsICAgIHZsLCAg
-IHFfbmIsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1MzIsICAgICBmMywgICAwZiwgNmYsICAg
-IHZsLCAgIGRfbmIsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1MzIsICAgICBmMywgICAwZiwg
-N2YsICAgIHZsLCAgIGRfbmIsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1NjQsICAgICBmMywg
-ICAwZiwgNmYsICAgIHZsLCAgIHFfbmIsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1NjQsICAg
-ICBmMywgICAwZiwgN2YsICAgIHZsLCAgIHFfbmIsIHZsKSwKPj4+PiArICAgIElOU04obW92bnRk
-cSwgICAgICA2NiwgICAwZiwgZTcsICAgIHZsLCAgIGRfbmIsIHZsKSwKPj4+PiArICAgIElOU04o
-bW92bnRkcWEsICAgICA2NiwgMGYzOCwgMmEsICAgIHZsLCAgIGRfbmIsIHZsKSwKPj4+PiArICAg
-IElOU05fUEZQX05CKG1vdm50LCAgICAgICAwZiwgMmIpLAo+Pj4+ICsgICAgSU5TTl9QRlBfTkIo
-bW92dSwgICAgICAgIDBmLCAxMCksCj4+Pj4gKyAgICBJTlNOX1BGUF9OQihtb3Z1LCAgICAgICAg
-MGYsIDExKSwKPj4+PiArfTsKPj4+PiArCj4+Pj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdGVzdCBh
-dng1MTJmXzEyOFtdID0gewo+Pj4+ICsgICAgSU5TTihtb3YsICAgICAgIDY2LCAgIDBmLCA2ZSwg
-ZWwsIGRxNjQsIGVsKSwKPj4+PiArICAgIElOU04obW92LCAgICAgICA2NiwgICAwZiwgN2UsIGVs
-LCBkcTY0LCBlbCksCj4+Pj4gKyAgICBJTlNOKG1vdnEsICAgICAgZjMsICAgMGYsIDdlLCBlbCwg
-ICAgcSwgZWwpLAo+Pj4+ICsgICAgSU5TTihtb3ZxLCAgICAgIDY2LCAgIDBmLCBkNiwgZWwsICAg
-IHEsIGVsKSwKPj4+PiArfTsKPj4+PiArCj4+Pj4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdGVzdCBh
-dng1MTJid19hbGxbXSA9IHsKPj4+PiArICAgIElOU04obW92ZHF1OCwgICAgIGYyLCAgIDBmLCA2
-ZiwgICAgdmwsICAgIGIsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1OCwgICAgIGYyLCAgIDBm
-LCA3ZiwgICAgdmwsICAgIGIsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1MTYsICAgIGYyLCAg
-IDBmLCA2ZiwgICAgdmwsICAgIHcsIHZsKSwKPj4+PiArICAgIElOU04obW92ZHF1MTYsICAgIGYy
-LCAgIDBmLCA3ZiwgICAgdmwsICAgIHcsIHZsKSwKPj4+PiArfTsKPj4+PiArCj4+Pj4gK3N0YXRp
-YyBjb25zdCB1bnNpZ25lZCBjaGFyIHZsX2FsbFtdID0geyBWTF81MTIsIFZMXzEyOCwgVkxfMjU2
-IH07Cj4+Pj4gK3N0YXRpYyBjb25zdCB1bnNpZ25lZCBjaGFyIHZsXzEyOFtdID0geyBWTF8xMjgg
-fTsKPj4+IFdoYXQgYXJlIHRoZXNlIGZvciwgYW5kIHdoeSBpcyB2bF9hbGxbXSdzIFZMXzEyOCBv
-dXQgb2Ygb3JkZXI/Cj4+IFRoZSBSVU4oKSBtYWNybyBpbnZvY2F0aW9ucyAoZnVydGhlciBkb3du
-KSByZWZlcmVuY2Ugb25lIHRoZW0KPj4gZWFjaCwgdG8gaW5kaWNhdGUgd2hhdCB2ZWN0b3IgbGVu
-Z3RocyB0byB0ZXN0LiBUaGUgZmlyc3QgYXJyYXkKPj4gZW50cnkgZG9lcyBhbHdheXMgZ2V0IHVz
-ZWQsIHdoaWxlIHN1YnNlcXVlbnQgZW50cmllcyAoaWYgYW55KQo+PiByZXF1aXJlIEFWWDUxMlZM
-IHRvIGJlIGF2YWlsYWJsZS4gU2VlIHRoZSBjb25kaXRpb25hbCBhdCB0aGUgdG9wCj4+IG9mIHRo
-ZSBpbm5lciBsb29wIGluIHRlc3RfZ3JvdXAoKS4KPiAKPiBBZnRlciByZS1yZWFkaW5nIHRoZSBh
-cHBhcmVudGx5IHJlbGV2YW50IGJpdHMgb2YgVm9sIDEsIDIgYW5kIDMsIEknbQo+IHN0aWxsIGFj
-dHVhbGx5IG5vbmUgdGhlIHdpc2VyIGFzIHRvIHdoaWNoIEFWWDUxMiBmZWF0dXJlIGJpdHMgbWVh
-biB3aGF0LgoKV2hhdCBmZWF0dXJlIGJpdHMgYXJlIHlvdSB0YWxraW5nIGFib3V0PyBUaGUgY29u
-dGV4dCBhYm92ZSBkb2Vzbid0CnJlZmVyIHRvIGFueSwgYXQgbGVhc3Qgbm90IGRpcmVjdGx5LgoK
-PiBJcyB0aGVyZSBhIGNoYXB0ZXIgd2l0aCBhbiBvdmVydmlldyB0aGF0IEkndmUgb3Zlcmxvb2tl
-ZCwgb3IgaWYgbm90LCBjYW4KPiB3ZSBzZWUgYWJvdXQgcHV0dGluZyBvbmUgdG9nZXRoZXI/CgpJ
-J2QgaGF2ZSB0byB1bmRlcnN0YW5kIChhcyBwZXIgYWJvdmUpIHdoYXQgZXhhY3RseSB5b3UncmUg
-YWZ0ZXIgaW4Kb3JkZXIgdG8gYW5zd2VyIHRoaXMgYW5kL29yIHB1dCBzb21ldGhpbmcgdG9nZXRo
-ZXIuIFdoYXQgSSBoYWQKZG9uZSBpbiB0aGUgeWVhciB0aGF0IEkgaGFkIGJlZW4gd2FpdGluZyBm
-b3IgYSBtYWNoaW5lIHRvIGJlIGFibGUKdG8gdGVzdCBhbGwgb2YgdGhpcyB3YXMgdG8gcHV0IHRv
-Z2V0aGVyIHR3byBjbGFzc2lmeWluZyB0YWJsZXMuIE9uZSBpcwp3aGF0IEknbSBzbG93bHkgbWln
-cmF0aW5nIGludG8gdGhlIHRhYmxlcyByaWdodCBoZXJlLiBUaGUgb3RoZXIgaXMKdGFraW5nIGEg
-c2xpZ2h0bHkgZGlmZmVyZW50IHZpZXcsIGdyb3VwaW5nIHRoZW0gYnkgbWVtb3J5IGFjY2Vzcwp3
-aWR0aCwgRGlzcDggc2NhbGluZyBiZWhhdmlvciwgYW5kICJ0dXBsZSB0eXBlIjoKCk1ORU1PTklD
-CQlEaXNwOCBTY2FsZQkJTWVtIFdpZHRoCQlDYXRlZ29yeQo9PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PQp2cGNvbXByZXNzYgkJMAkJCVZMCQkJVHVwbGUxIFNjYWxhcgp2cGV4cGFuZGIKLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KdnBicm9hZGNhc3RiCQkwCQkJRGlzcDggU2NhbGUJ
-CVR1cGxlMSBTY2FsYXIKdnBleHRyYgp2cGluc3JiCj09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09CnZwY29tcHJlc3N3CQkxCQkJVkwJCQlUdXBsZTEgU2NhbGFyCnZwZXhwYW5kdwotLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQp2cGJyb2FkY2FzdHcJCTEJCQlEaXNwOCBTY2FsZQkJVHVw
-bGUxIFNjYWxhcgp2cGV4dHJ3CnZwaW5zcncKPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0K
-dmNvbXByZXNzcHMJCTIJCQlWTAkJCVR1cGxlMSBTY2FsYXIKdmV4cGFuZHBzCnZwY29tcHJlc3Nk
-CnZwZXhwYW5kZAoKZXRjLgoKQnV0IEkgZGlkbid0IGNvbXBpbGUgYW55dGhpbmcgbWF0Y2hpbmcg
-dXAgd2l0aCBmZWF0dXJlIGZsYWdzLCBvdGhlcgp0aGFuIHRoZSBmaXJzdCBoYXZpbmcgdGFibGVz
-IGdyb3VwZWQgYnkgZmVhdHVyZXMuIEkgZGlkIGEgbG90IG9mCmJpbnV0aWxzIHdvcmsgdGhvdWdo
-IGR1cmluZyB0aGF0IHRpbWUgYXMgd2VsbCwgdG8gZ2V0IHRoaW5ncyBpbnRvIGEKbW9yZSBzYW5l
-IHN0YXRlIHRoZXJlLiBBbiBvcmlnaW5hbCB0aG91Z2h0IG9mIG1pbmUgd2FzIHdoZXRoZXIKd2Ug
-Y291bGQgcmUtdXNlIHRoZWlyIG9wY29kZSB0YWJsZSwgd2hpY2ggaXMgd2h5IEkgZmlyc3Qgd2Fu
-dGVkCnRvIGdldCBpdCBpbnRvIGJldHRlciBzaGFwZS4KCihBIDNyZCB0YWJsZSB0aGVuIHR1cm5l
-ZCBvdXQgaGVscGZ1bCBmb3IgaW1wbGVtZW50aW5nIHRoZSBteXJpYWQgb2YKY29udmVyc2lvbiBp
-bnNucywgYnV0IHRoYXQncyBqdXN0IGEgcmUtb3JkZXJlZCBkZXJpdmF0aW9uIG9mIHRoZSBmaXJz
-dApvbmUgaGVyZSwgZ29pbmcgYnkgZW5jb2RpbmcgaW5zdGVhZC4pCgo+Pj4+ICsKPj4+PiArLyoK
-Pj4+PiArICogVGhpcyB0YWJsZSwgaW5kaWNhdGluZyB0aGUgcHJlc2VuY2Ugb2YgYW4gaW1tZWRp
-YXRlIChieXRlKSBmb3IgYW4gb3Bjb2RlCj4+Pj4gKyAqIHNwYWNlIDBmIG1ham9yIG9wY29kZSwg
-aXMgaW5kZXhlZCBieSBoaWdoIG1ham9yIG9wY29kZSBieXRlIG5pYmJsZSwgd2l0aAo+Pj4+ICsg
-KiBlYWNoIHRhYmxlIGVsZW1lbnQgdGhlbiBiaXQtaW5kZXhlZCBieSBsb3cgbWFqb3Igb3Bjb2Rl
-IGJ5dGUgbmliYmxlLgo+Pj4+ICsgKi8KPj4+PiArc3RhdGljIGNvbnN0IHVpbnQxNl90IGltbTBm
-WzE2XSA9IHsKPj4+PiArICAgIFsweDddID0gKDEgPDwgMHgwKSAvKiB2cHNodWYqICovIHwKPj4+
-PiArICAgICAgICAgICAgKDEgPDwgMHgxKSAvKiB2cHN7bGwscmEscmx9dyAqLyB8Cj4+Pj4gKyAg
-ICAgICAgICAgICgxIDw8IDB4MikgLyogdnBze2wscn1sZCwgdnB7cm9sLHJvcixzcmF9e2QscX0g
-Ki8gfAo+Pj4+ICsgICAgICAgICAgICAoMSA8PCAweDMpIC8qIHZwc3tsLHJ9bHssZH1xICovLAo+
-Pj4+ICsgICAgWzB4Y10gPSAoMSA8PCAweDIpIC8qIHZjbXB7cCxzfXtkLHN9ICovIHwKPj4+PiAr
-ICAgICAgICAgICAgKDEgPDwgMHg0KSAvKiB2cGluc3J3ICovIHwKPj4+PiArICAgICAgICAgICAg
-KDEgPDwgMHg1KSAvKiB2cGV4dHJ3ICovIHwKPj4+PiArICAgICAgICAgICAgKDEgPDwgMHg2KSAv
-KiB2c2h1ZnB7ZCxzfSAqLywKPj4+PiArfTsKPj4+PiArCj4+Pj4gK3N0YXRpYyBzdHJ1Y3QgeDg2
-X2VtdWxhdGVfb3BzIGVtdWxvcHM7Cj4+Pj4gKwo+Pj4+ICtzdGF0aWMgdW5zaWduZWQgaW50IGFj
-Y2Vzc2VkWzMgKiA2NF07Cj4+PiBXaGF0IGFyZSB0aGUgZXhwZWN0ZWQgcHJvcGVydGllcz8gIFdo
-eSAzICogPwo+PiBTZWUgcmVjb3JkX2FjY2VzcygpOiBUaGUgaW5zdHJ1Y3Rpb25zIHVuZGVyIHRl
-c3QgYWxsIGdldCBhIERpc3A4IHZhbHVlCj4+IG9mIDEgZW5jb2RlZC4gSW4gb3JkZXIgdG8gYmUg
-YWJsZSB0byBzZW5zaWJseSBzZWUgaG93IGV4YWN0bHkgdGhpbmdzCj4+IGdvIHdyb25nIChkdXJp
-bmcgZGVidWdnaW5nKSwgaXQgc2ltcGx5IGhlbHBzIHRvIGNvdmVyIHRoZSBlbnRpcmUgcmFuZ2UK
-Pj4gZnJvbSB6ZXJvIHRvIDMgdGltZXMgdGhlIChtYXhpbXVtKSB2ZWN0b3IgbGVuZ3RoLiBBbGwg
-YWNjZXNzZXMgZmFydGhlcgo+PiBvdXQgb2YgYm91bmRzIHRoYW4gYnkgdmVjdG9yIGxlbmd0aCB3
-aWxsIG5vdCBiZSByZWNvcmRlZCBoZXJlLCBhbmQKPj4gaGVuY2UgZmFpbCAic2lsZW50bHkiLgo+
-IAo+IFBsZWFzZSBjYW4geW91IHB1dCBhIHNob3J0IGRlc2NyaXB0aW9uIGluIGEgY29tbWVudCBz
-b21ld2hlcmUgYXJvdW5kCj4gYWJvdXQgaGVyZS4KCkFnYWluLCB3aWxsIGRvLgoKSmFuCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is a multi-part message in MIME format.
+--------------3E918930726E6FF5BCFE508B
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+Den 23.10.2018 20:40, skrev Håkon Alstadheim:
+>
+> Den 08. okt. 2018 16:32, skrev Boris Ostrovsky:
+>> Are these two patches still needed? ISTR they were  written originally
+>> to deal with guest trying to use device that was previously assigned to
+>> another guest. But pcistub_put_pci_dev() calls
+>> __pci_reset_function_locked() which first tries FLR, and it looks like
+>> it was added relatively recently.
+>>
+>>
+> Sorry for the late reply, but I just now booted xen staging-4.11
+> (94fba9f438a2c36ad9bf3a481a6013ddc7cf8cd9), with gentoo-sources-4.19.0
+> as dom0. Shut down and started again a VM that has a secondary GPU
+> passed through, and the whole  machine hung. I haven't had time to look
+> more closely into this, other than that my old "do_flr" patch no longer
+> applies to gentoo-sources (i.e. the linux kernel sources) . "do_flr"
+> worked for me on linux-4.18.? , with appropriate patch to the linux kernel.
+
+Without some kind of fix, my whole server (dom0) goes down whenever a 
+domu with pci passed through is re-started.
+
+NOTE: I am not a programmer. I have no idea what I am doing.
+
+The patch I have as a starting-point does not compile correctly when 
+applied to kernel version 4.19.x. I get implicit declarations of  
+pci_try_reset_slot() and pci_try_reset_bus(). Replacing those with  
+pci_reset_bus(dev) gives me the attached patch which applies cleanly to 
+gentoo-sources-4.19.2, compiles without warnings, and works to let me 
+restart a domU with pci-passthrough (modulo changing do_flr to reset in  
+xen libxl).
+
+I hope a dev will adopt these and give them proper care :-) .
+
+
+
+
+--------------3E918930726E6FF5BCFE508B
+Content-Type: text/x-patch;
+ name="pci_brute_reset-home-hack.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="pci_brute_reset-home-hack.patch"
+
+--- a/drivers/xen/xen-pciback/pci_stub.c	2018-10-22 08:37:37.000000000 +0200
++++ b/drivers/xen/xen-pciback/pci_stub.c	2018-11-14 12:45:21.926468126 +0100
+@@ -244,6 +244,90 @@
+ 	return found_dev;
+ }
+ 
++struct pcistub_args {
++	struct pci_dev *dev;
++	unsigned int dcount;
++};
++
++static int pcistub_search_dev(struct pci_dev *dev, void *data)
++{
++	struct pcistub_device *psdev;
++	struct pcistub_args *arg = data;
++	bool found_dev = false;
++	unsigned long flags;
++
++	spin_lock_irqsave(&pcistub_devices_lock, flags);
++
++	list_for_each_entry(psdev, &pcistub_devices, dev_list) {
++		if (psdev->dev == dev) {
++			found_dev = true;
++			arg->dcount++;
++			break;
++		}
++	}
++
++	spin_unlock_irqrestore(&pcistub_devices_lock, flags);
++
++	/* Device not owned by pcistub, someone owns it. Abort the walk */
++	if (!found_dev)
++		arg->dev = dev;
++
++	return found_dev ? 0 : 1;
++}
++
++static int pcistub_reset_dev(struct pci_dev *dev)
++{
++	struct xen_pcibk_dev_data *dev_data;
++	bool slot = false, bus = false;
++	struct pcistub_args arg = {};
++
++	if (!dev)
++		return -EINVAL;
++
++	dev_dbg(&dev->dev, "[%s]\n", __func__);
++
++	if (!pci_probe_reset_slot(dev->slot))
++		slot = true;
++	else if ((!pci_probe_reset_bus(dev->bus)) &&
++		 (!pci_is_root_bus(dev->bus)))
++		bus = true;
++
++	if (!bus && !slot)
++		return -EOPNOTSUPP;
++
++	/*
++	 * Make sure all devices on this bus are owned by the
++	 * PCI backend so that we can safely reset the whole bus.
++	 */
++	pci_walk_bus(dev->bus, pcistub_search_dev, &arg);
++
++	/* All devices under the bus should be part of pcistub! */
++	if (arg.dev) {
++		dev_err(&dev->dev, "%s device on bus 0x%x is not owned by pcistub\n",
++			pci_name(arg.dev), dev->bus->number);
++
++		return -EBUSY;
++	}
++
++	dev_dbg(&dev->dev, "pcistub owns %d devices on bus 0x%x\n",
++		arg.dcount, dev->bus->number);
++
++	dev_data = pci_get_drvdata(dev);
++	if (!pci_load_saved_state(dev, dev_data->pci_saved_state))
++		pci_restore_state(dev);
++
++	/* This disables the device. */
++	xen_pcibk_reset_device(dev);
++
++	/* Cleanup up any emulated fields */
++	xen_pcibk_config_reset_dev(dev);
++
++	dev_dbg(&dev->dev, "resetting %s device using %s reset\n",
++		pci_name(dev), slot ? "slot" : "bus");
++
++	return pci_reset_bus(dev);
++}
++
+ /*
+  * Called when:
+  *  - XenBus state has been reconfigure (pci unplug). See xen_pcibk_remove_device
+@@ -1430,6 +1514,33 @@
+ }
+ static DRIVER_ATTR_RW(permissive);
+ 
++static ssize_t reset_store(struct device_driver *drv, const char *buf,
++			      size_t count)
++{
++	struct pcistub_device *psdev;
++	int domain, bus, slot, func;
++	int err;
++
++	err = str_to_slot(buf, &domain, &bus, &slot, &func);
++	if (err)
++		return err;
++
++	psdev = pcistub_device_find(domain, bus, slot, func);
++	if (psdev) {
++		err = pcistub_reset_dev(psdev->dev);
++		pcistub_device_put(psdev);
++	} else {
++		err = -ENODEV;
++	}
++
++	if (!err)
++		err = count;
++
++	return err;
++}
++
++static DRIVER_ATTR_WO(reset);
++
+ static void pcistub_exit(void)
+ {
+ 	driver_remove_file(&xen_pcibk_pci_driver.driver, &driver_attr_new_slot);
+@@ -1443,6 +1554,8 @@
+ 			   &driver_attr_irq_handlers);
+ 	driver_remove_file(&xen_pcibk_pci_driver.driver,
+ 			   &driver_attr_irq_handler_state);
++	driver_remove_file(&xen_pcibk_pci_driver.driver,
++			   &driver_attr_reset);
+ 	pci_unregister_driver(&xen_pcibk_pci_driver);
+ }
+ 
+@@ -1536,6 +1649,11 @@
+ 	if (!err)
+ 		err = driver_create_file(&xen_pcibk_pci_driver.driver,
+ 					&driver_attr_irq_handler_state);
++
++	if (!err)
++		err = driver_create_file(&xen_pcibk_pci_driver.driver,
++					 &driver_attr_reset);
++
+ 	if (err)
+ 		pcistub_exit();
+ 
+ 
+--- a/Documentation/ABI/testing/sysfs-driver-pciback	2017-11-12 19:46:13.000000000 +0100
++++ b/Documentation/ABI/testing/sysfs-driver-pciback	2017-11-25 21:37:35.235738190 +0100
+@@ -11,3 +11,15 @@
+                 #echo 00:19.0-E0:2:FF > /sys/bus/pci/drivers/pciback/quirks
+                 will allow the guest to read and write to the configuration
+                 register 0x0E.
++
++What:           /sys/bus/pci/drivers/pciback/reset
++Date:           Nov 2017
++KernelVersion:  4.15
++Contact:        xen-devel@lists.xenproject.org
++Description:
++                An option to perform a slot or bus reset when a PCI device
++		is owned by Xen PCI backend. Writing a string of DDDD:BB:DD.F
++		will cause the pciback driver to perform a slot or bus reset
++		if the device supports it. It also checks to make sure that
++		all of the devices under the bridge are owned by Xen PCI
++		backend.
+
+--------------3E918930726E6FF5BCFE508B
+Content-Type: text/x-patch;
+ name="do_flr-to-reset.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="do_flr-to-reset.patch"
+
+--- a/tools/libxl/libxl_pci.c	2018-10-24 15:57:14.384810336 +0200
++++ b/tools/libxl/libxl_pci.c	2018-10-24 15:58:32.759342602 +0200
+@@ -1119,7 +1119,7 @@
+     char *reset;
+     int fd, rc;
+ 
+-    reset = GCSPRINTF("%s/do_flr", SYSFS_PCIBACK_DRIVER);
++    reset = GCSPRINTF("%s/reset", SYSFS_PCIBACK_DRIVER);
+     fd = open(reset, O_WRONLY);
+     if (fd >= 0) {
+         char *buf = GCSPRINTF(PCI_BDF, domain, bus, dev, func);
+
+--------------3E918930726E6FF5BCFE508B
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------3E918930726E6FF5BCFE508B--
