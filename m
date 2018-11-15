@@ -1,16 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 130096: regressions - FAIL
-Date: Thu, 15 Nov 2018 07:45:46 +0000
-Message-ID: <osstest-130096-mainreport@xen.org>
+From: Pavel Machek <pavel@ucw.cz>
+Subject: Re: [PATCH RFC 6/6] PM / Hibernate: exclude all
+ PageOffline() pages
+Date: Thu, 15 Nov 2018 08:48:10 +0100
+Message-ID: <20181115074810.GA9055__24395.2134893791$1542268015$gmane$org@amd>
+References: <20181114211704.6381-1-david@redhat.com>
+ <20181114211704.6381-7-david@redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1312678857933920376=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wfeu=n2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gNCLW-0004ZC-PU
- for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 07:45:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=TRFs=N2=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
+ id 1gNCNp-0004fK-QO
+ for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 07:48:13 +0000
+In-Reply-To: <20181114211704.6381-7-david@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,67 +23,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: David Hildenbrand <david@redhat.com>
+Cc: Len Brown <len.brown@intel.com>, Michal Hocko <mhocko@suse.com>, linux-pm@vger.kernel.org, linux-doc@vger.kernel.org, "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>, linux-mm@kvack.org, "Michael S. Tsirkin" <mst@redhat.com>, xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org, devel@linuxdriverproject.org, Andrew Morton <akpm@linux-foundation.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMDA5NiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzAwOTYvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
-Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgIDYgeGVu
-LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtYW1kNjQt
-eHNtICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTI5NDc1CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWkzODYteHNtICAgICAgICAg
-ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIGJ1aWxk
-LWkzODYtbGlidmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
-bG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgMSBidWls
-ZC1jaGVjaygxKSAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LW92bWYtYW1kNjQgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9h
-CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
-ICAgICAgICAgICAgICAgODU1ODgzODkyMjJhMzYzNmJhZjBmOWVkODIyN2YyNDM0YWY0YzNmOQpi
-YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
-NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
-LTExLTA1IDIxOjEzOjExIFogICAgOSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
-MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgIDggZGF5cyAgIDc0IGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEzMDAxNCAgMjAxOC0xMS0xNCAwMzo0Mzo0NiBaICAgIDEgZGF5cyAgIDE0IGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFy
-ZCBCaWVzaGV1dmVsIDxhcmQuYmllc2hldXZlbEBsaW5hcm8ub3JnPgogIERhbmRhbiBCaSA8ZGFu
-ZGFuLmJpQGludGVsLmNvbT4KICBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+CiAgRnUg
-U2l5dWFuIDxzaXl1YW4uZnVAaW50ZWwuY29tPgogIEhhbyBXdSA8aGFvLmEud3VAaW50ZWwuY29t
-PgogIEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgSmlheGluIFd1IDxKaWF4
-aW4ud3VAaW50ZWwuY29tPgogIEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgogIExh
-c3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgTGltaW5nIEdhbyA8bGltaW5nLmdhb0Bp
-bnRlbC5jb20+CiAgTWFyYyBaeW5naWVyIDxtYXJjLnp5bmdpZXJAYXJtLmNvbT4KICBNaW5nIEh1
-YW5nIDxtaW5nLmh1YW5nQGxpbmFyby5vcmc+CiAgUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNv
-bT4KICBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAgV3UgSmlheGluIDxqaWF4aW4u
-d3VAaW50ZWwuY29tPgogIHl1Y2hlbmxpbiA8eXVjaGVubGluQHN5bm9sb2d5LmNvbT4KCmpvYnM6
-CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1pMzg2ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBibG9ja2VkIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZv
-cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0
-ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6
-IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJs
-ZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dz
-CgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFs
-LCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
-YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9y
-Zy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBo
-YXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dp
-dHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9u
-IGxvZzsgaXQgd291bGQgYmUgODcxIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1312678857933920376==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
+Content-Disposition: inline
+
+
+--jRHKVT23PllUwdXP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed 2018-11-14 22:17:04, David Hildenbrand wrote:
+> The content of pages that are marked PG_offline is not of interest
+> (e.g. inflated by a balloon driver), let's skip these pages.
+>=20
+> Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
+
+Acked-by: Pavel Machek <pavel@ucw.cz>
+
+> diff --git a/kernel/power/snapshot.c b/kernel/power/snapshot.c
+> index b0308a2c6000..01db1d13481a 100644
+> --- a/kernel/power/snapshot.c
+> +++ b/kernel/power/snapshot.c
+> @@ -1222,7 +1222,7 @@ static struct page *saveable_highmem_page(struct zo=
+ne *zone, unsigned long pfn)
+>  	BUG_ON(!PageHighMem(page));
+> =20
+>  	if (swsusp_page_is_forbidden(page) ||  swsusp_page_is_free(page) ||
+> -	    PageReserved(page))
+> +	    PageReserved(page) || PageOffline(page))
+>  		return NULL;
+> =20
+>  	if (page_is_guard(page))
+> @@ -1286,6 +1286,9 @@ static struct page *saveable_page(struct zone *zone=
+, unsigned long pfn)
+>  	if (swsusp_page_is_forbidden(page) || swsusp_page_is_free(page))
+>  		return NULL;
+> =20
+> +	if (PageOffline(page))
+> +		return NULL;
+> +
+>  	if (PageReserved(page)
+>  	    && (!kernel_page_present(page) || pfn_is_nosave(pfn)))
+>  		return NULL;
+
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
+
+--jRHKVT23PllUwdXP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAlvtJLoACgkQMOfwapXb+vIKwQCgqMCGJ4BEWmMsp5gihD0MR/cx
+lFwAnAqKSOIHgjFwhl+uKuaItXeOXj2x
+=TTZ/
+-----END PGP SIGNATURE-----
+
+--jRHKVT23PllUwdXP--
+
+
+--===============1312678857933920376==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1312678857933920376==--
