@@ -1,20 +1,15 @@
-From: Pavel Machek <pavel@ucw.cz>
-Subject: Re: [PATCH RFC 6/6] PM / Hibernate: exclude all
- PageOffline() pages
-Date: Thu, 15 Nov 2018 08:48:10 +0100
-Message-ID: <20181115074810.GA9055__24395.2134893791$1542268015$gmane$org@amd>
-References: <20181114211704.6381-1-david@redhat.com>
- <20181114211704.6381-7-david@redhat.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v4 10/19] xen: setup hypercall page for PVH
+Date: Thu, 15 Nov 2018 09:33:04 +0100
+Message-ID: <20181115083304.zty3xor4j4nthhvt__49015.1068698198$1542270725$gmane$org@mac>
+References: <20181102123738.16395-1-jgross@suse.com>
+ <20181102123738.16395-11-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1312678857933920376=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=TRFs=N2=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
- id 1gNCNp-0004fK-QO
- for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 07:48:13 +0000
-In-Reply-To: <20181114211704.6381-7-david@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20181102123738.16395-11-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,84 +18,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: David Hildenbrand <david@redhat.com>
-Cc: Len Brown <len.brown@intel.com>, Michal Hocko <mhocko@suse.com>, linux-pm@vger.kernel.org, linux-doc@vger.kernel.org, "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>, linux-mm@kvack.org, "Michael S. Tsirkin" <mst@redhat.com>, xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org, devel@linuxdriverproject.org, Andrew Morton <akpm@linux-foundation.org>
+To: Juergen Gross <jgross@suse.com>
+Cc: hans@knorrie.org, grub-devel@gnu.org, daniel.kiper@oracle.com, xen-devel@lists.xen.org, phcoder@gmail.com
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1312678857933920376==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
-Content-Disposition: inline
-
-
---jRHKVT23PllUwdXP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed 2018-11-14 22:17:04, David Hildenbrand wrote:
-> The content of pages that are marked PG_offline is not of interest
-> (e.g. inflated by a balloon driver), let's skip these pages.
->=20
-> Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
-
-Acked-by: Pavel Machek <pavel@ucw.cz>
-
-> diff --git a/kernel/power/snapshot.c b/kernel/power/snapshot.c
-> index b0308a2c6000..01db1d13481a 100644
-> --- a/kernel/power/snapshot.c
-> +++ b/kernel/power/snapshot.c
-> @@ -1222,7 +1222,7 @@ static struct page *saveable_highmem_page(struct zo=
-ne *zone, unsigned long pfn)
->  	BUG_ON(!PageHighMem(page));
-> =20
->  	if (swsusp_page_is_forbidden(page) ||  swsusp_page_is_free(page) ||
-> -	    PageReserved(page))
-> +	    PageReserved(page) || PageOffline(page))
->  		return NULL;
-> =20
->  	if (page_is_guard(page))
-> @@ -1286,6 +1286,9 @@ static struct page *saveable_page(struct zone *zone=
-, unsigned long pfn)
->  	if (swsusp_page_is_forbidden(page) || swsusp_page_is_free(page))
->  		return NULL;
-> =20
-> +	if (PageOffline(page))
-> +		return NULL;
-> +
->  	if (PageReserved(page)
->  	    && (!kernel_page_present(page) || pfn_is_nosave(pfn)))
->  		return NULL;
-
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
-
---jRHKVT23PllUwdXP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAlvtJLoACgkQMOfwapXb+vIKwQCgqMCGJ4BEWmMsp5gihD0MR/cx
-lFwAnAqKSOIHgjFwhl+uKuaItXeOXj2x
-=TTZ/
------END PGP SIGNATURE-----
-
---jRHKVT23PllUwdXP--
-
-
---===============1312678857933920376==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1312678857933920376==--
+T24gRnJpLCBOb3YgMDIsIDIwMTggYXQgMDE6Mzc6MjlQTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBBZGQgdGhlIG5lZWRlZCBjb2RlIHRvIHNldHVwIHRoZSBoeXBlcmNhbGwgcGFnZSBm
+b3IgY2FsbGluZyBpbnRvIHRoZQo+IFhlbiBoeXBlcnZpc29yLgo+IAo+IFNpZ25lZC1vZmYtYnk6
+IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KClRoYW5rcywgTEdUTSwganVzdCBvbmUg
+c3VnZ2VzdGlvbiBhbmQgb25lIHF1ZXN0aW9uLgoKPiAtLS0KPiBWMzogZ3J1Yl94ZW5fZWFybHlf
+aGFsdC0+Z3J1Yl94ZW5fcGFuaWMgKFJvZ2VyIFBhdSBNb25uw6kpCj4gICAgIGlzc3VlIHBhbmlj
+IG1lc3NhZ2UgKFJvZ2VyIFBhdSBNb25uw6kpCj4gICAgIHJld3JpdGUgZ3J1Yl94ZW5faHlwZXJj
+YWxsIHRvIGF2b2lkIHJlZ2lzdGVyIHZhcmlhYmxlcyAoRGFuaWVsIEtpcGVyKQo+IC0tLQo+ICBn
+cnViLWNvcmUva2Vybi9pMzg2L3hlbi9wdmguYyB8IDY5ICsrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysKPiAgMSBmaWxlIGNoYW5nZWQsIDY5IGluc2VydGlvbnMoKykK
+PiAKPiBkaWZmIC0tZ2l0IGEvZ3J1Yi1jb3JlL2tlcm4vaTM4Ni94ZW4vcHZoLmMgYi9ncnViLWNv
+cmUva2Vybi9pMzg2L3hlbi9wdmguYwo+IGluZGV4IGFjNjE4MWY0ZS4uN2U5MGE0NTM4IDEwMDY0
+NAo+IC0tLSBhL2dydWItY29yZS9rZXJuL2kzODYveGVuL3B2aC5jCj4gKysrIGIvZ3J1Yi1jb3Jl
+L2tlcm4vaTM4Ni94ZW4vcHZoLmMKPiBAQCAtMjAsMTQgKzIwLDgzIEBACj4gICNpbmNsdWRlIDxn
+cnViL21pc2MuaD4KPiAgI2luY2x1ZGUgPGdydWIvbWVtb3J5Lmg+Cj4gICNpbmNsdWRlIDxncnVi
+L21tLmg+Cj4gKyNpbmNsdWRlIDxncnViL2kzODYvY3B1aWQuaD4KPiArI2luY2x1ZGUgPGdydWIv
+aTM4Ni9pby5oPgo+ICAjaW5jbHVkZSA8Z3J1Yi94ZW4uaD4KPiAgI2luY2x1ZGUgPGdydWIvbWFj
+aGluZS9rZXJuZWwuaD4KPiAgCj4gKyNkZWZpbmUgWEVOX0NPTlNPTEVfUE9SVCAgIDB4ZTkKClRo
+aXMgaXMgbm93IHBhcnQgb2YgdGhlIHB1YmxpYyBoZWFkZXJzIChYRU5fSFZNX0RFQlVHQ09OU19J
+T1BPUlQpIGlmCnlvdSB3aXNoIHRvIHBpY2sgaXQgdXAgZnJvbSB0aGVyZS4KCj4gKwo+ICBncnVi
+X3VpbnQ2NF90IGdydWJfcnNkcF9hZGRyOwo+ICAKPiArc3RhdGljIGNoYXIgaHlwZXJjYWxsX3Bh
+Z2VbR1JVQl9YRU5fUEFHRV9TSVpFXQo+ICsgIF9fYXR0cmlidXRlX18gKChhbGlnbmVkIChHUlVC
+X1hFTl9QQUdFX1NJWkUpKSk7Cj4gKwo+ICtzdGF0aWMgZ3J1Yl91aW50MzJfdCB4ZW5fY3B1aWRf
+YmFzZTsKPiArCj4gK3N0YXRpYyB2b2lkCj4gK2dydWJfeGVuX3BhbmljIChjb25zdCBjaGFyICpt
+c2cpCj4gK3sKPiArICBjb25zdCBjaGFyICpjOwo+ICsKPiArICBmb3IgKGMgPSBtc2c7ICpjOyBj
+KyspCj4gKyAgICBncnViX291dGIgKCpjLCBYRU5fQ09OU09MRV9QT1JUKTsKPiArCj4gKyAgYXNt
+IHZvbGF0aWxlICgiaGx0Iik7CgpTaG91bGQgdGhpcyBiZSAiY2xpOyBobHQ7Iiwgb3IgZG9lcyBn
+cnViIGFsd2F5cyBydW5zIHdpdGggaW50ZXJydXB0IGZsYWcKY2xlYXI/CgpUaGFua3MsIFJvZ2Vy
+LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
