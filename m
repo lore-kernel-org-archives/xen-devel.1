@@ -1,17 +1,18 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH v2 3/3] x86/HVM: honor p2m_ioreq_server type
-Date: Thu, 15 Nov 2018 05:43:36 -0700
-Message-ID: <5BED69F802000078001FC60B@prv1-mh.provo.novell.com>
+Subject: [PATCH v2 0/3] x86/HVM: honor p2m_ioreq_server type
+Date: Thu, 15 Nov 2018 05:45:50 -0700
+Message-ID: <5BED6A7E02000078001FC615@prv1-mh.provo.novell.com>
 References: <5BEAA1DB02000078001FB5BD@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=wsre=n2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gNGzk-0008K9-Lv
- for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 12:43:40 +0000
+ (envelope-from <SRS0=wsRE=N2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gNH1v-00007I-2I
+ for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 12:45:55 +0000
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
