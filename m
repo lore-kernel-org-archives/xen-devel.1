@@ -1,16 +1,25 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 05/18] xen/arm: Trigger Xen suspend when
- Dom0 completes suspend
-Date: Thu, 15 Nov 2018 18:23:07 +0000
-Message-ID: <27e0234f-8343-e291-0182-f35885e0e241@arm.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 10/18] xen/arm: Implement GIC suspend/resume
+ functions (gicv2 only)
+Date: Thu, 15 Nov 2018 10:26:30 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1811151026250.22115@sstabellini-ThinkPad-X260>
 References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
- <1542022244-22977-6-git-send-email-mirela.simonovic@aggios.com>
+ <1542022244-22977-11-git-send-email-mirela.simonovic@aggios.com>
+ <746b0ad8-4ce1-dfaf-eadc-939657426900@arm.com>
+ <ed9f3dc5-7f91-6d49-ee09-b362afcee5b0@aggios.com>
+ <64d1c6ba-de67-4757-5be6-2390286eb60e@arm.com>
+ <alpine.DEB.2.10.1811141410250.302@sstabellini-ThinkPad-X260>
+ <384421bf-3ce7-28b5-a360-a31f6e059c08@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-392878405-1542306397=:22115"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1542022244-22977-6-git-send-email-mirela.simonovic@aggios.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=hzrU=N2=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gNMLg-0007b5-4f
+ for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 18:26:40 +0000
+In-Reply-To: <384421bf-3ce7-28b5-a360-a31f6e059c08@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,80 +28,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mirela Simonovic <mirela.simonovic@aggios.com>, xen-devel@lists.xen.org, xen-devel@lists.xenproject.org
-Cc: stefano.stabellini@xilinx.com, Stefano Stabellini <sstabellini@kernel.org>, dm@aggios.com, saeed.nowshadi@xilinx.com
+To: Julien Grall <Julien.Grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, "saeed.nowshadi@xilinx.com" <saeed.nowshadi@xilinx.com>, "dm@aggios.com" <dm@aggios.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "stefano.stabellini@xilinx.com" <stefano.stabellini@xilinx.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, nd <nd@arm.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgTWlyZWxhLAoKT24gMTEvMTIvMTggMTE6MzAgQU0sIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6
-Cj4gV2hlbiBEb20wIGZpbmFsaXplcyBpdHMgc3VzcGVuZCBwcm9jZWR1cmUgdGhlIHN1c3BlbmQg
-b2YgWGVuIGlzCj4gdHJpZ2dlcmVkIGJ5IGNhbGxpbmcgc3lzdGVtX3N1c3BlbmQoKS4gRG9tMCBm
-aW5hbGl6ZXMgdGhlIHN1c3BlbmQgZnJvbQo+IGl0cyBib290IGNvcmUgKFZDUFUjMCksIHdoaWNo
-IGNvdWxkIGJlIG1hcHBlZCB0byBhbnkgcGh5c2ljYWwgQ1BVLAo+IGkuZS4gdGhlIHN5c3RlbV9z
-dXNwZW5kKCkgZnVuY3Rpb24gY291bGQgYmUgZXhlY3V0ZWQgYnkgYW55IHBoeXNpY2FsCj4gQ1BV
-LiBTaW5jZSBYZW4gc3VzcGVuZCBwcm9jZWR1cmUgaGFzIHRvIGJlIHJ1biBieSB0aGUgYm9vdCBD
-UFUKPiAobm9uLWJvb3QgQ1BVcyB3aWxsIGJlIGRpc2FibGVkIGF0IHNvbWUgcG9pbnQgaW4gc3Vz
-cGVuZCBwcm9jZWR1cmUpLAo+IHN5c3RlbV9zdXNwZW5kKCkgZXhlY3V0aW9uIGhhcyB0byBjb250
-aW51ZSBvbiBDUFUjMC4KPiAKPiBXaGVuIHRoZSBzeXN0ZW1fc3VzcGVuZCgpIHJldHVybnMgMCwg
-aXQgbWVhbnMgdGhhdCB0aGUgc3lzdGVtIHdhcwo+IHN1c3BlbmRlZCBhbmQgaXQgaXMgY29taW5n
-IG91dCBvZiB0aGUgcmVzdW1lIHByb2NlZHVyZS4gUmVnYXJkbGVzcwo+IG9mIHRoZSBzeXN0ZW1f
-c3VzcGVuZCgpIHJldHVybiB2YWx1ZSwgYWZ0ZXIgdGhpcyBmdW5jdGlvbiByZXR1cm5zCj4gWGVu
-IGlzIGZ1bGx5IGZ1bmN0aW9uYWwsIGFuZCBpdHMgc3RhdGUsIGluY2x1ZGluZyBhbGwgZGV2aWNl
-cyBhbmQgZGF0YQo+IHN0cnVjdHVyZXMsIG1hdGNoZXMgdGhlIHN0YXRlIHByaW9yIHRvIGNhbGxp
-bmcgc3lzdGVtX3N1c3BlbmQoKS4KPiBUaGUgc3RhdHVzIGlzIHJldHVybmVkIGJ5IHN5c3RlbV9z
-dXNwZW5kKCkgZm9yIGRlYnVnZ2luZy9sb2dnaW5nCj4gcHVycG9zZXMgYW5kIGZ1bmN0aW9uIHBy
-b3RvdHlwZSBjb21wYXRpYmlsaXR5Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IE1pcmVsYSBTaW1vbm92
-aWMgPG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbT4KPiBTaWduZWQtb2ZmLWJ5OiBTYWVlZCBO
-b3dzaGFkaSA8c2FlZWQubm93c2hhZGlAeGlsaW54LmNvbT4KPiAtLS0KPiAgIHhlbi9hcmNoL2Fy
-bS9zdXNwZW5kLmMgfCAzNCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4gICAx
-IGZpbGUgY2hhbmdlZCwgMzQgaW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJj
-aC9hcm0vc3VzcGVuZC5jIGIveGVuL2FyY2gvYXJtL3N1c3BlbmQuYwo+IGluZGV4IGYyMzM4ZTQx
-ZGIuLjIxYjQ1ZjgyNDggMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gvYXJtL3N1c3BlbmQuYwo+ICsr
-KyBiL3hlbi9hcmNoL2FybS9zdXNwZW5kLmMKPiBAQCAtMTEyLDExICsxMTIsMjAgQEAgc3RhdGlj
-IHZvaWQgdmNwdV9zdXNwZW5kKHJlZ2lzdGVyX3QgZXBvaW50LCByZWdpc3Rlcl90IGNpZCkKPiAg
-ICAgICBfYXJjaF9zZXRfaW5mb19ndWVzdCh2LCAmY3R4dCk7Cj4gICB9Cj4gICAKPiArLyogWGVu
-IHN1c3BlbmQuIE5vdGU6IGRhdGEgaXMgbm90IHVzZWQgKHN1c3BlbmQgaXMgdGhlIHN1c3BlbmQg
-dG8gUkFNKSAqLwo+ICtzdGF0aWMgbG9uZyBzeXN0ZW1fc3VzcGVuZCh2b2lkICpkYXRhKQo+ICt7
-Cj4gKyAgICBCVUdfT04oc3lzdGVtX3N0YXRlICE9IFNZU19TVEFURV9hY3RpdmUpOwo+ICsKPiAr
-ICAgIHJldHVybiAtRU5PU1lTOwo+ICt9Cj4gKwo+ICAgaW50MzJfdCBkb21haW5fc3VzcGVuZChy
-ZWdpc3Rlcl90IGVwb2ludCwgcmVnaXN0ZXJfdCBjaWQpCj4gICB7Cj4gICAgICAgc3RydWN0IHZj
-cHUgKnY7Cj4gICAgICAgc3RydWN0IGRvbWFpbiAqZCA9IGN1cnJlbnQtPmRvbWFpbjsKPiAgICAg
-ICBib29sIGlzX3RodW1iID0gZXBvaW50ICYgMTsKPiArICAgIGludCBzdGF0dXM7Cj4gICAKPiAg
-ICAgICBkcHJpbnRrKFhFTkxPR19ERUJVRywKPiAgICAgICAgICAgICAgICJEb20lZCBzdXNwZW5k
-OiBlcG9pbnQ9MHglIlBSSXJlZ2lzdGVyIiwgY2lkPTB4JSJQUklyZWdpc3RlciJcbiIsCj4gQEAg
-LTE1Niw2ICsxNjUsMzEgQEAgaW50MzJfdCBkb21haW5fc3VzcGVuZChyZWdpc3Rlcl90IGVwb2lu
-dCwgcmVnaXN0ZXJfdCBjaWQpCj4gICAgICAgICovCj4gICAgICAgdmNwdV9ibG9ja191bmxlc3Nf
-ZXZlbnRfcGVuZGluZyhjdXJyZW50KTsKPiAgIAo+ICsgICAgLyogSWYgdGhpcyB3YXMgZG9tMCB0
-aGUgd2hvbGUgc3lzdGVtIHNob3VsZCBzdXNwZW5kOiB0cmlnZ2VyIFhlbiBzdXNwZW5kICovCj4g
-KyAgICBpZiAoIGlzX2hhcmR3YXJlX2RvbWFpbihkKSApCj4gKyAgICB7Cj4gKyAgICAgICAgLyoK
-PiArICAgICAgICAgKiBzeXN0ZW1fc3VzcGVuZCBzaG91bGQgYmUgY2FsbGVkIHdoZW4gRG9tMCBm
-aW5hbGl6ZXMgdGhlIHN1c3BlbmQKPiArICAgICAgICAgKiBwcm9jZWR1cmUgZnJvbSBpdHMgYm9v
-dCBjb3JlIChWQ1BVIzApLiBIb3dldmVyLCBEb20wJ3MgVkNQVSMwIGNvdWxkCj4gKyAgICAgICAg
-ICogYmUgbWFwcGVkIHRvIGFueSBQQ1BVICh0aGlzIGZ1bmN0aW9uIGNvdWxkIGJlIGV4ZWN1dGVk
-IGJ5IGFueSBQQ1BVKS4KPiArICAgICAgICAgKiBUaGUgc3VzcGVuZCBwcm9jZWR1cmUgaGFzIHRv
-IGJlIGZpbmFsaXplZCBieSB0aGUgUENQVSMwIChub24tYm9vdAo+ICsgICAgICAgICAqIFBDUFVz
-IHdpbGwgYmUgZGlzYWJsZWQgZHVyaW5nIHRoZSBzdXNwZW5kKS4KPiArICAgICAgICAgKi8KPiAr
-ICAgICAgICBzdGF0dXMgPSBjb250aW51ZV9oeXBlcmNhbGxfb25fY3B1KDAsIHN5c3RlbV9zdXNw
-ZW5kLCBOVUxMKTsKPiArICAgICAgICAvKgo+ICsgICAgICAgICAqIElmIGFuIGVycm9yIGhhcHBl
-bmVkLCB0aGVyZSBpcyBub3RoaW5nIHRoYXQgbmVlZHMgdG8gYmUgZG9uZSBoZXJlCj4gKyAgICAg
-ICAgICogYmVjYXVzZSB0aGUgc3lzdGVtX3N1c3BlbmQgYWx3YXlzIHJldHVybnMgaW4gZnVsbHkg
-ZnVuY3Rpb25hbCBzdGF0ZQo+ICsgICAgICAgICAqIG5vIG1hdHRlciB3aGF0IHRoZSBvdXRjb21l
-IG9mIHN1c3BlbmQgcHJvY2VkdXJlIGlzLiBJZiB0aGUgc3lzdGVtCj4gKyAgICAgICAgICogc3Vz
-cGVuZGVkIHN1Y2Nlc3NmdWxseSB0aGUgZnVuY3Rpb24gd2lsbCByZXR1cm4gMCBhZnRlciB0aGUg
-cmVzdW1lLgo+ICsgICAgICAgICAqIE90aGVyd2lzZSwgaWYgYW4gZXJyb3IgaXMgcmV0dXJuZWQg
-aXQgbWVhbnMgWGVuIGRpZCBub3Qgc3VzcGVuZGVkLAo+ICsgICAgICAgICAqIGJ1dCBpdCBpcyBz
-dGlsbCBpbiB0aGUgc2FtZSBzdGF0ZSBhcyBpZiB0aGUgc3lzdGVtX3N1c3BlbmQgd2FzIG5ldmVy
-Cj4gKyAgICAgICAgICogY2FsbGVkLiBXZSBkdW1wIGEgZGVidWcgbWVzc2FnZSBpbiBjYXNlIG9m
-IGFuIGVycm9yIGZvciBkZWJ1Z2dpbmcvCj4gKyAgICAgICAgICogbG9nZ2luZyBwdXJwb3NlLgo+
-ICsgICAgICAgICAqLwo+ICsgICAgICAgIGlmICggc3RhdHVzICkKPiArICAgICAgICAgICAgZHBy
-aW50ayhYRU5MT0dfRVJSLCAiRmFpbGVkIHRvIHN1c3BlbmQsIGVycm5vPSVkXG4iLCBzdGF0dXMp
-Owo+ICsgICAgfQoKQWZ0ZXIgZGlzY3Vzc2luZyB3ZSBTdGVmYW5vIHRvZGF5LCBJIGhhdmUgb25l
-IG1vcmUgcXVlc3Rpb24gcmVnYXJkaW5nIApEb20wIHN1c3BlbmQuCgogRnJvbSBteSB1bmRlcnN0
-YW5kaW5nLCB0aGUgaG9zdCBtYXkgcmVzdW1lIGJlY2F1c2Ugb2YgYW4gZXZlbnQgCnRhcmdldGlu
-ZyBhIGd1ZXN0LiBUaGlzIG1lYW5zIHRoYXQgRG9tMCB3b3VsZCBzdGlsbCBiZSBibG9ja2VkLiBB
-cyBEb20wIAp3b3VsZCBjb250YWluIFBWIGJhY2tlbmQsIGhvdyBkbyB5b3UgZXhwZWN0IHRoaXMg
-dG8gd29yaz8KCklzIHRoZXJlIGFueSBwb3RlbnRpYWwgZGVwZW5kZW5jeSBiZXR3ZWVuIGZyb250
-ZW5kIGFuZCBiYWNrZW5kPyBPciB3b3VsZCAKRG9tMCBiZSByZXN1bWUgd2hlbiB0aGUgUFYgZnJv
-bnRlbmQgcHJvYmUgdGhlIGJhY2tlbmQ/CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-392878405-1542306397=:22115
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 14 Nov 2018, Julien Grall wrote:
+> Hi,
+> 
+> On 14/11/2018 22:18, Stefano Stabellini wrote:
+> > On Wed, 14 Nov 2018, Julien Grall wrote:
+> >>>>>    @@ -1319,6 +1341,129 @@ static void gicv2_do_LPI(unsigned int lpi)
+> >>>>>        BUG();
+> >>>>>    }
+> >>>>>    +static void gicv2_alloc_context(struct gicv2_context *gc)
+> >>>>> +{
+> >>>>
+> >>>> Is it necessary to allocate them at boot? Can we make them static or
+> >>>> allocate them when we suspend?
+> >>>>
+> >>>
+> >>> We need to allocate dynamically because the size of allocated data depends
+> >>> on the number of irq lines, which is not known at the compile time.
+> >>
+> >> Well you know the upper bound. Why can't you use the upper bound?
+> >>
+> >>> Alternative is to allocate on suspend, but I believe it is better to do this
+> >>> when the system boots.
+> >>
+> >> Why is it better?
+> > 
+> > I'll reply here also to your other point because they are related:
+> > 
+> >> Suspend/resume is not a critical feature in common case. So I would
+> >> prefer if we disable it when we can't alloc memory.
+> > 
+> > 
+> > It is true that suspend/resume is not a critical feature for the common
+> > case, but proceeding as "normal" when a memory allocation fails is not a
+> > good idea: if the hypervisor is so low in memory as to fail in an
+> > allocation like this one, it is not going to be able to work right. In
+> > no other cases in Xen we continue on memory allocation failures, even
+> > for less-critical features.
+> > 
+> > I suggest that we either allocate statically using the upper bound as
+> > you suggested, although it leads to some memory being wasted.
+> 
+> We are speaking of at most 2KB of memory. I don't think it is going to 
+> be waste given of the number of interrupts GIC usually supports.
+> 
+> The more that we already statically allocate irq_desc.
+
+OK
+--8323329-392878405-1542306397=:22115
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-392878405-1542306397=:22115--
