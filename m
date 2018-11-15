@@ -1,16 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 3/5] xen/domain: Move guest type checks
- into the arch_sanitise_domain_config() path
-Date: Thu, 15 Nov 2018 03:51:02 -0700
-Message-ID: <5BED4F9602000078001FC4F2@prv1-mh.provo.novell.com>
-References: <1542039391-32406-4-git-send-email-andrew.cooper3@citrix.com>
- <1542217484-11659-1-git-send-email-andrew.cooper3@citrix.com>
- <013C0C6C020000F58E2C01CD@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH V6 3/4] x86/mm: allocate logdirty_ranges for
+ altp2ms
+Date: Thu, 15 Nov 2018 03:56:53 -0700
+Message-ID: <5BED50F502000078001FC510@prv1-mh.provo.novell.com>
+References: <1542228002-21075-1-git-send-email-rcojocaru@bitdefender.com>
+ <1542228002-21075-4-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <013C0C6C020000F58E2C01CD@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=wsre=n2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gNFKT-00054f-8P
+ for xen-devel@lists.xenproject.org; Thu, 15 Nov 2018 10:56:57 +0000
+In-Reply-To: <1542228002-21075-4-git-send-email-rcojocaru@bitdefender.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,18 +24,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE0LjExLjE4IGF0IDE4OjQ0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gVGhpcyBpcyBhIG1vcmUgYXBwcm9wcmlhdGUgbG9jYXRpb24gZm9yIHRoZSBjaGVja3Mg
-dG8gaGFwcGVuLCBhbmQgY2xlYW5zIHVwCj4gdGhlIGNvbW1vbiBjb2RlIHN1YnN0YW50aWFsbHku
-Cj4gCj4gVGFrZSB0aGUgb3Bwb3J0dW5pdHkgdG8gbWFrZSBBUk0gc3RyaWN0bHkgcmVxdWlyZSBI
-Vk18SEFQIGZvciBndWVzdHMsIHdoaWNoIGlzCj4gaG93IHRoZSB0b29sc3RhY2sgYmVoYXZlcywg
-YW5kIGxlYXZlIGEgZHByaW50aygpIGJlaGluZCBmb3IgYXVkaXRpbmcgZmFpbHVyZXMuCj4gCj4g
-U2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4K
-ClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDE0LjExLjE4IGF0IDIxOjQwLCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
+dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L21tL3AybS5jCj4gKysrIGIveGVuL2FyY2gveDg2L21t
+L3AybS5jCj4gQEAgLTIyODIsNiArMjI4MiwzNCBAQCBib29sX3QgcDJtX2FsdHAybV9sYXp5X2Nv
+cHkoc3RydWN0IHZjcHUgKnYsIHBhZGRyX3QgZ3BhLAo+ICAgICAgcmV0dXJuIDE7Cj4gIH0KPiAg
+Cj4gK3N0YXRpYyB2b2lkIHAybV9yZXNldF9hbHRwMm0oc3RydWN0IGRvbWFpbiAqZCwgdW5zaWdu
+ZWQgaW50IGlkeCwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICBib29sIHJlc2V0X3Jl
+bWFwcGVkLCBib29sIGZyZWVfbG9nZGlydHlfcmFuZ2VzKQoKRXNwZWNpYWxseSB0aGUgY2FsbCBz
+aXRlcyBhcmUgcXVpdGUgdWdseSB0byByZWFkIHdpdGggdHdvIGJvb2xlYW5zIGxpa2UKdGhlc2Uu
+IERpZCB5b3UgY29uc2lkZXIgaW50cm9kdWNpbmcgYW4gdW5zaWduZWQgaW50IGZsYWdzIHBhcmFt
+ZXRlcgppbnN0ZWFkLCB3aXRoIHN1aXRhYmxlIHN5bWJvbHMgY29uc3RhbnRzICNkZWZpbmUtZCB0
+byBtYWtlIHZpc2libGUKYXQgdGhlIGNhbGwgc2l0ZXMgd2hhdCBiZWhhdmlvciBpcyB3YW50ZWQ/
+CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
