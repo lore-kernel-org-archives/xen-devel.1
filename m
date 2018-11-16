@@ -1,19 +1,20 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 2/2] automation: build on openSUSE Leap.
-Date: Fri, 16 Nov 2018 19:51:34 +0100
-Message-ID: <4839c3ce19f62382faea9ed861955bc5def542ae.camel@suse.com>
-References: <154239232312.10244.2674246603103909622.stgit@wayrath>
- <154239307020.10244.149878067287347106.stgit@wayrath>
- <20181116184217.lzfwehdx3t42z23q@zion.uk.xensource.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH 17/18] xen/arm: Resume Dom0 after Xen resumes
+Date: Fri, 16 Nov 2018 11:03:51 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1811161056400.22115@sstabellini-ThinkPad-X260>
+References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
+ <1542022244-22977-18-git-send-email-mirela.simonovic@aggios.com>
+ <77c3d2c9-a1e0-a5b3-0a4e-fc6ea079b817@arm.com>
+ <CAKPH-Ngdb_w+uHKFrMd_fF62pM0idQJie2RdKDtD8HbZyNV1WQ@mail.gmail.com>
+ <CAKPH-NiEnpDWwT65zwczx20hZcEN4qTayQXpO4=4iye2mcky3Q@mail.gmail.com>
+ <dc9b6382-490e-fd41-6fec-faf211103cee@arm.com>
+ <CAKPH-Ngn1vp0oxtXs_cO5WnCJJExg5y=QQO5tck6fd1Z76ozsg@mail.gmail.com>
+ <2edccbdc-5c9e-630a-27f0-1c937f926bec@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4826424653465090971=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nxwo=n3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gNjDU-00034H-65
- for xen-devel@lists.xenproject.org; Fri, 16 Nov 2018 18:51:44 +0000
-In-Reply-To: <20181116184217.lzfwehdx3t42z23q@zion.uk.xensource.com>
+In-Reply-To: <2edccbdc-5c9e-630a-27f0-1c937f926bec@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,75 +23,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Xen Devel <xen-devel@lists.xen.org>, Davorin Mista <dm@aggios.com>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <stefano.stabellini@xilinx.com>, Mirela Simonovic <mirela.simonovic@aggios.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4826424653465090971==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-1B6rpRimEWHu6WJbMXJc"
-
-
---=-1B6rpRimEWHu6WJbMXJc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-11-16 at 18:42 +0000, Wei Liu wrote:
-> On Fri, Nov 16, 2018 at 07:31:10PM +0100, Dario Faggioli wrote:
-> > Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
->=20
-> Acked-by: Wei Liu <wei.liu2@citrix.com>
->=20
-> I would like to rearrange your code a bit to move it above the
-> arm builds.
->=20
-Sure, that indeed makes sense.
-
-Lemme know if you'd do it when committing, or you want me to.
-
-Thanks and Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-1B6rpRimEWHu6WJbMXJc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvvEbYACgkQFkJ4iaW4
-c+4DcA//U1lib7/RzyRkHQ3X7IkkcIxfFl5b3uiOIcWJ7ISpt/GwqDUD8vK+0m8w
-KfRPhgrwv5TwzIMWwGxDvuT+QFl211gkR5XhBUJJCDY5q0De6AbJdxRK9mrkcKty
-dX1SViIcOLsQzu9G5uVj9TsLLvcH5N/qP4XPgLpwpyrpJGB4jVTs/s7lFDEKuT9c
-HfcdJchygq81Xi02YeidLQU9jXAU9nUJvQs0Q6qYmHF7OqgbWM98HgEZ9uL3+zkB
-x4tn0Q7zXl9hN5eqZqW4hiIFfmlNVPDNwp74PXTzybsT90UdAarIEzf3DxLhqX/0
-5UfMgm6JKd/WQb4E33TTBmJAUWXSPrBy/DZEw8/zChfSf/cOcm+4FPAoNAIpwaes
-wQXyYy56+K2CpiVFfG1NYYqSWXanqJMY9omZKdok3MGbnjc4R2nJI+fjYa315gd5
-/m7C7qxdtUma/RLxQLs+mx/+kV69YYXscp3Bwblmhay96cvQGj1vFmiYxkN/5QqG
-Bn6Wp3TjIHbo8l2LYalCB2UZmWSmiIIM85HlLGuIMRvjNo5IRJZO0MzG9qU1AUnO
-i9weV/qLenbKk8M2/sQ/aCuSYLpzMf3CZcOaFIUp6u9BJPQN1ZMiKnD4Ep5MhkzV
-2a/4ozJOHk+iv7XsMaT9NJGYSuaWtx3oplaLNHDFMbGrwRyGAQg=
-=O9xv
------END PGP SIGNATURE-----
-
---=-1B6rpRimEWHu6WJbMXJc--
-
-
-
---===============4826424653465090971==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4826424653465090971==--
+T24gRnJpLCAxNiBOb3YgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9uIDE2LzExLzIwMTgg
+MTI6MzQsIE1pcmVsYSBTaW1vbm92aWMgd3JvdGU6Cj4gPiBIaSBKdWxpZW4sCj4gCj4gSGkgTWly
+ZWxhLAo+IAo+ID4gCj4gPiBPbiBGcmksIE5vdiAxNiwgMjAxOCBhdCAxMjo0NCBQTSBKdWxpZW4g
+R3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPiB3cm90ZToKPiA+ID4gCj4gPiA+IAo+ID4gPiAK
+PiA+ID4gT24gMTYvMTEvMjAxOCAxMToyOSwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiA+ID4g
+PiBPbiBGcmksIE5vdiAxNiwgMjAxOCBhdCAxMTozMyBBTSBNaXJlbGEgU2ltb25vdmljCj4gPiA+
+ID4gPG1pcmVsYS5zaW1vbm92aWNAYWdnaW9zLmNvbT4gd3JvdGU6Cj4gPiA+ID4gPiAKPiA+ID4g
+PiA+IEhpIEp1bGllbiwKPiA+ID4gPiA+IAo+ID4gPiA+ID4gT24gVGh1LCBOb3YgMTUsIDIwMTgg
+YXQgOTozMSBQTSBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+ID4gPiA+ID4g
+d3JvdGU6Cj4gPiA+ID4gPiA+IAo+ID4gPiA+ID4gPiBIaSwKPiA+ID4gPiA+ID4gCj4gPiA+ID4g
+PiA+IE9uIDExLzEyLzE4IDExOjMwIEFNLCBNaXJlbGEgU2ltb25vdmljIHdyb3RlOgo+ID4gPiA+
+ID4gPiA+IFRoZSByZXN1bWUgb2YgRG9tMCBzaG91bGQgYWx3YXlzIGZvbGxvdyBYZW4ncyByZXN1
+bWUuIFRoaXMgaXMKPiA+ID4gPiA+ID4gPiBkb25lIGJ5IHVuYmxvY2tpbmcgdGhlIGZpcnN0IHZD
+UFUgb2YgRG9tMC4KPiA+ID4gPiA+ID4gCj4gPiA+ID4gPiA+IFBsZWFzZSBleHBsYWluIHdoeSB5
+b3UgYWx3YXlzIG5lZWQgdG8gcmVzdW1lIERvbTAgYWZ0ZXJ3YXJkcy4KPiA+ID4gPiA+ID4gCj4g
+PiA+ID4gPiAKPiA+ID4gPiA+IFdlIGRvbid0IG5lZWQgdG8sIGJ1dCB0aGF0IGlzIHdoYXQgaXMg
+cHJvbWlzZWQgaW4gdGhlIGRlc2lnbiBzcGVjLgo+ID4gPiAKPiA+ID4gWW91IHN1cmVseSBoYWQg
+c29tZSByYXRpb25hbGUgd2hlbiB3cml0aW5nIHRoZSBwcm9taXNlIGluIHRoZSBkZXNpZ24KPiA+
+ID4gZG9jdW1lbnQsCj4gPiA+IHJpZ2h0Pwo+ID4gPiAKPiA+ID4gU28gd2hhdCBpcyB0aGUgcmVh
+c29uIGJlaGluZCBpdD8gSSBkb24ndCB3YW50IHRvIHJlc3VtZSBhIGRvbWFpbiBpZiB0aGF0J3MK
+PiA+ID4gbm90Cj4gPiA+IG5lY2Vzc2FyeS4KPiA+ID4gCj4gPiA+ID4gPiAKPiA+ID4gPiAKPiA+
+ID4gPiBUbyBiZSBtb3JlIHNwZWNpZmljIC0gYSBkb21VIHRoYXQgZG9lc24ndCBkZXBlbmQgb24g
+ZG9tMCBjYW4gcmVzdW1lCj4gPiA+ID4gYW5kIHdvcmsgaGFwcGlseSB3aXRob3V0IGRvbTAgYmVp
+bmcgcmVzdW1lZCwgaS5lLiBqdXN0IFhlbiBhbmQgZG9tVQo+ID4gPiA+IHJlc3VtZS4gU28gcGF0
+Y2ggIltQQVRDSCAxNy8xOF0geGVuL2FybTogUmVzdW1lIERvbTAgYWZ0ZXIgWGVuCj4gPiA+ID4g
+cmVzdW1lcyIgaXMgbm90IGEgbXVzdCAod2hlbiB0aGVyZSBhcmUgbm8gUFYgZHJpdmVycyBpbnZv
+bHZlZCkuCj4gPiA+IAo+ID4gPiBQViBiYWNrZW5kcyBkb24ndCBuZWNlc3NhcmlseSByZXNpZGUg
+aW4gdGhlIGhhcmR3YXJlIGRvbWFpbi4gU28gaG93IGlzCj4gPiA+IHRoaXMKPiA+ID4gZ29pbmcg
+dG8gd29yayBmb3IgdGhlIG90aGVyIGNhc2U/Cj4gPiA+IAo+ID4gCj4gPiBJIGhvbmVzdGx5IGJl
+bGlldmUgdGhhdCB0aGlzIGlzIG5vdCBuZWNlc3NhcnksIGFuZCBpcyBzdWItb3B0aW1hbC4gSXQK
+PiA+IHJlbGllcyBvbiBhbiBhc3N1bXB0aW9uIHRoYXQgZG9tMCBjb250YWlucyBhbGwgdGhlIFBW
+IGRyaXZlcnMsIHdoaWNoCj4gPiBpcyBub3QgYWx3YXlzIGNvcnJlY3QuCj4gCj4gV2VsbCwgdGhl
+cmUgYXJlIG90aGVyIHJlYXNvbnMgdG8gcmVzdW1lIHRoZSBoYXJkd2FyZSBkb21haW4uIFRoZSBo
+YXJkd2FyZQo+IGRvbWFpbiBvd25zIG1vc3QgdGhlIGRldmljZXMgYW5kIG1heSBiZSBwYXJ0IG9m
+IHRoZSBzdXNwZW5kL3Jlc3VtZSBwYXRoLgo+IAo+IEFzIHlvdSB0aWUgdGhlIGhvc3Qgc3VzcGVu
+ZCB0byB0aGUgaGFyZHdhcmUgZG9tYWluIHN1c3BlbmQsIGl0IG1heSBtYWtlcyBzZW5zZQo+IHRv
+IHJlc3VtZSBhdCB0aGUgc2FtZSB0aW1lLiBJdCBpcyB0aGUga2luZCBvZiByYXRpb25hbGUgSSB3
+b3VsZCBleHBlY3QgaW4gdGhlCj4gY29tbWl0IG1lc3NhZ2UuCj4KPiA+IEkgd291bGQgcHJlZmVy
+IGlmIHNvbWVvbmUgY2FuIHRlbGwgdXMgdGhhdCBhbnkgZnJvbnRlbmQgd2lsbCB0cmlnZ2VyCj4g
+PiBhbiBldmVudCB0byB0aGUgYmFja2VuZCwgYW5kIHRoZSBldmVudCB3b3VsZCBnbyB0aHJvdWdo
+IFhlbi4gVGhhdCB3YXksCj4gPiB0aGlzIGV2ZW50IHdvdWxkIGNhdXNlIGEgZG9tYWluIGNvbnRh
+aW5pbmcgdGhlIGJhY2tlbmQgZHJpdmVyIHRvCj4gPiByZXN1bWUuIEkgdGhpbmsgdGhpcyBpcyB0
+aGUgYmVzdCBwb3NzaWJsZSBzb2x1dGlvbiwgYnV0IGl0IHJlbGllcyBvbgo+ID4gYW4gYXNzdW1w
+dGlvbiB0aGF0IHRoZSBldmVudCB3aWxsIGdvIHRocm91Z2ggWGVuLCBhbmQgSSdtIG5vdAo+ID4g
+a25vd2xlZGdlYWJsZSBlbm91Z2ggdG8gY2xhaW0gdGhhdCB0aGlzIGlzIGluZGVlZCB0aGUgY2Fz
+ZS4KPiAKPiBJIHRoaW5rIGl0IGlzIHNob3VsZCB3b3JrLCB0aGUgYmVzdCB3YXkgdG8gZmluZCBv
+dXQgaWYgYnVpbGRpbmcgYSB0ZXN0IGNhc2UKPiBmb3IgaXQuCgpZZXMsIFBWIHByb3RvY29scyB1
+c2UgaHlwZXJjYWxscyB0byBzZW5kIG5vdGlmaWNhdGlvbnMgdG8gdGhlIG90aGVyIGVuZC4KU3Bl
+Y2lmaWNhbGx5LCB0aGUgZnVuY3Rpb24gYXQgdGhlIExpbnV4IHNpZGUgaXMKaW5jbHVkZS94ZW4v
+ZXZlbnRzLmg6bm90aWZ5X3JlbW90ZV92aWFfZXZ0Y2huLiBUaGUgWGVuIGltcGxlbWVudGF0aW9u
+CmZvciB0aGUgaHlwZXJjYWxsIGlzIHhlbi9jb21tb24vZXZlbnRfY2hhbm5lbC5jOmV2dGNobl9z
+ZW5kLCB3aGVyZSAncmQnCmlzIHRoZSBkZXN0aW5hdGlvbiBkb21haW4uCgpJdCBzaG91bGQgYmUg
+cG9zc2libGUgdG8gZmlndXJlIG91dCB3aGljaCBkb21haW4gbmVlZHMgdG8gYXdha2VuIGZyb20K
+dGhlcmUuCgpJdCB3b3VsZCBmYW50YXN0aWMgdG8gaGF2ZSB0aGF0IGluIHRoaXMgcGF0Y2ggc2Vy
+aWVzLCBhbmQgbWlnaHQgbm90IGJlCnRvbyBkaWZmaWN1bHQgdG8gZG8uIEhvd2V2ZXIsIEkgYWxz
+byB0aGluayB0aGF0IGFsd2F5cyB3YWtpbmcgdXAgdGhlCmhhcmR3YXJlIGRvbWFpbiBjb3VsZCBi
+ZSBhIGRlY2VudCB3YXkgdG8gc3RhcnQgYW5kIGNvdWxkIGJlIE9LIGZvciB0aGlzCnBhdGNoIHNl
+cmllcyB3aGljaCBpcyB0aGUgdmVyeSBmaXJzdCB0byBpbnRyb2R1Y2Ugc3VzcGVuZC9yZXN1bWUK
+ZnVuY3Rpb25hbGl0aWVzIG9uIFhlbiBvbiBBUk0uIEJ1dCB0aGUgbGltaXRhdGlvbiBzaG91bGQg
+YmUgd2VsbApleHBsYWluZWQgaW4gdGhlIGNvbW1pdCBtZXNzYWdlLCBhcyBKdWxpZW4gd3JvdGUs
+IGFuZCBwb3NzaWJseSBldmVuIGFzCmFuIGluLWNvZGUgY29tbWVudCB3aXRoIGEgVE9ETy4KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
