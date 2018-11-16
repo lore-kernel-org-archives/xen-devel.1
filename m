@@ -1,21 +1,22 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 0/2] automation: build in an openSUSE Leap
- container.
-Date: Fri, 16 Nov 2018 22:41:40 +0100
-Message-ID: <166e546c9caf2d060cc747f3f1878bda92000e31.camel@suse.com>
-References: <154239232312.10244.2674246603103909622.stgit@wayrath>
- <20181116184457.db7gqwikyom65gps@zion.uk.xensource.com>
- <6b70f22f2573a01c883e993f07e7197423fba059.camel@suse.com>
+From: Mirela Simonovic <mirela.simonovic@aggios.com>
+Subject: Re: [PATCH 17/18] xen/arm: Resume Dom0 after Xen resumes
+Date: Fri, 16 Nov 2018 22:41:35 +0100
+Message-ID: <CAKPH-Ni3noct-9WHGLgUCG+19MKOJnbpk_uMMGcPEQ3Kd1U11Q@mail.gmail.com>
+References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
+ <1542022244-22977-18-git-send-email-mirela.simonovic@aggios.com>
+ <77c3d2c9-a1e0-a5b3-0a4e-fc6ea079b817@arm.com>
+ <CAKPH-Ngdb_w+uHKFrMd_fF62pM0idQJie2RdKDtD8HbZyNV1WQ@mail.gmail.com>
+ <CAKPH-NiEnpDWwT65zwczx20hZcEN4qTayQXpO4=4iye2mcky3Q@mail.gmail.com>
+ <dc9b6382-490e-fd41-6fec-faf211103cee@arm.com>
+ <CAKPH-Ngn1vp0oxtXs_cO5WnCJJExg5y=QQO5tck6fd1Z76ozsg@mail.gmail.com>
+ <2edccbdc-5c9e-630a-27f0-1c937f926bec@arm.com>
+ <alpine.DEB.2.10.1811161056400.22115@sstabellini-ThinkPad-X260>
+ <alpine.DEB.2.10.1811161105070.22115@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4000302462175930668=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=nXWO=N3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gNls3-0007cA-Fe
- for xen-devel@lists.xenproject.org; Fri, 16 Nov 2018 21:41:47 +0000
-In-Reply-To: <6b70f22f2573a01c883e993f07e7197423fba059.camel@suse.com>
+In-Reply-To: <alpine.DEB.2.10.1811161105070.22115@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,91 +25,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Xen Devel <xen-devel@lists.xen.org>, Davorin Mista <dm@aggios.com>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <stefano.stabellini@xilinx.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4000302462175930668==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-SUOGxTA+d5YIf9YG+AEq"
-
-
---=-SUOGxTA+d5YIf9YG+AEq
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2018-11-16 at 19:50 +0100, Dario Faggioli wrote:
-> On Fri, 2018-11-16 at 18:44 +0000, Wei Liu wrote:
-> > On Fri, Nov 16, 2018 at 07:30:55PM +0100, Dario Faggioli wrote:
-> > >=20
-> > I have been playing with the CI system today so it could have been
-> > a
-> > bit
-> > overwhelmed. Let's wait until next week to see if it comes back.
-> >=20
-> Ok, sure. What I'm most interested, is to see if the opensuse jobs
-> pass
-> (i.e., if I got the rune, the name of the container, etc, right :-)
-> ).
->=20
-And... it worked! :-)
-
-Now, the next step would be to add openSUSE Tumbleweed too.
-
-But I have a question, Tumbleweed is rolling (and it's actually rolling
-quite fast); how can we handle that?
-
-I'd say the container image should be rebuild (or, at least, the
-'package refresh && package update' bits of the dockerfile be re-
-executed), if not at every run of the pipeline, frequently enough. Can
-we do that?
-
-I see that we have Debian unstable, which is also rolling, but do we
-actually update it, or is it, basically, just a snapshot?
-
-Thanks and Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-SUOGxTA+d5YIf9YG+AEq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvvOZQACgkQFkJ4iaW4
-c+6otQ//d9VnAzxkcCEP5qVHeQlYOaRf4ORZzK7pUMfLjhCscKVSaqUECaYoGzVf
-angqzkldQe/AQeUWKfwDjhTpcDsE0Yv68DfTwGrtCkZumXFcr3oNmvBwtEGG6BUO
-dq6sdLAdJKCEP57Hk7pgxSoN+fonYE9StkMiL5cHx9DkGrtLdJDIpElt5xKNyYX3
-bN/DuYhEsZa4GPt2OoA5ZBWhiPjQ69MO5e/LnJO/Om77IvnMpW7/fgzeITxlGkxp
-tcD0kFuZUEOrcEFtG8ZZVODtz4S3gtWSrkYDMcjXBxm2hsUntrqQuW+aeXL6vptj
-qf3bJBcq7fz4u785vqCSlYeQkFuGMLqyo6O1KHrFkCkUgydmVPSbKLIgIeG4hKev
-d3K0RDmdwJZJ5mt8axPlUp49p3apiSWyR2O/vjsG220iviWn/fey1T0YzoelLbyi
-MumTrPmUXQ2d6cWQTL4BoPNh4oqH/cNyjwRBWfZhVha/DJGLfFrKlJPtZ6/tb7rq
-t7fCmwuCqdVxf21BE5mvgxZRXempLCZGecyUD4EiY0lSSJV3okatXDzBgiyFve1h
-+5iW+hf8lsewFDguRix1NxM6vLLYaH8K38ToCcicYn3pNx3uw1XRvlg7QjOglIgc
-hRggGkhEdxBAzwNzzP/CNbjBLlooOO0C9yrmaZIx53ElLQbdy3w=
-=Ffqk
------END PGP SIGNATURE-----
-
---=-SUOGxTA+d5YIf9YG+AEq--
-
-
-
---===============4000302462175930668==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4000302462175930668==--
+SGkgU3RlZmFubywKCk9uIEZyaSwgTm92IDE2LCAyMDE4IGF0IDg6MDkgUE0gU3RlZmFubyBTdGFi
+ZWxsaW5pCjxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiB3cm90ZToKPgo+IE9uIEZyaSwgMTYgTm92
+IDIwMTgsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IE9uIEZyaSwgMTYgTm92IDIwMTgs
+IEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gT24gMTYvMTEvMjAxOCAxMjozNCwgTWlyZWxhIFNp
+bW9ub3ZpYyB3cm90ZToKPiA+ID4gPiBIaSBKdWxpZW4sCj4gPiA+Cj4gPiA+IEhpIE1pcmVsYSwK
+PiA+ID4KPiA+ID4gPgo+ID4gPiA+IE9uIEZyaSwgTm92IDE2LCAyMDE4IGF0IDEyOjQ0IFBNIEp1
+bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+ID4gPiA+ID4KPiA+ID4g
+PiA+Cj4gPiA+ID4gPgo+ID4gPiA+ID4gT24gMTYvMTEvMjAxOCAxMToyOSwgTWlyZWxhIFNpbW9u
+b3ZpYyB3cm90ZToKPiA+ID4gPiA+ID4gT24gRnJpLCBOb3YgMTYsIDIwMTggYXQgMTE6MzMgQU0g
+TWlyZWxhIFNpbW9ub3ZpYwo+ID4gPiA+ID4gPiA8bWlyZWxhLnNpbW9ub3ZpY0BhZ2dpb3MuY29t
+PiB3cm90ZToKPiA+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiA+IEhpIEp1bGllbiwKPiA+ID4gPiA+
+ID4gPgo+ID4gPiA+ID4gPiA+IE9uIFRodSwgTm92IDE1LCAyMDE4IGF0IDk6MzEgUE0gSnVsaWVu
+IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiA+ID4gPiA+ID4gPiB3cm90ZToKPiA+ID4g
+PiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gPiBIaSwKPiA+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+
+ID4gPiBPbiAxMS8xMi8xOCAxMTozMCBBTSwgTWlyZWxhIFNpbW9ub3ZpYyB3cm90ZToKPiA+ID4g
+PiA+ID4gPiA+ID4gVGhlIHJlc3VtZSBvZiBEb20wIHNob3VsZCBhbHdheXMgZm9sbG93IFhlbidz
+IHJlc3VtZS4gVGhpcyBpcwo+ID4gPiA+ID4gPiA+ID4gPiBkb25lIGJ5IHVuYmxvY2tpbmcgdGhl
+IGZpcnN0IHZDUFUgb2YgRG9tMC4KPiA+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gPiBQbGVh
+c2UgZXhwbGFpbiB3aHkgeW91IGFsd2F5cyBuZWVkIHRvIHJlc3VtZSBEb20wIGFmdGVyd2FyZHMu
+Cj4gPiA+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ID4gV2UgZG9uJ3QgbmVl
+ZCB0bywgYnV0IHRoYXQgaXMgd2hhdCBpcyBwcm9taXNlZCBpbiB0aGUgZGVzaWduIHNwZWMuCj4g
+PiA+ID4gPgo+ID4gPiA+ID4gWW91IHN1cmVseSBoYWQgc29tZSByYXRpb25hbGUgd2hlbiB3cml0
+aW5nIHRoZSBwcm9taXNlIGluIHRoZSBkZXNpZ24KPiA+ID4gPiA+IGRvY3VtZW50LAo+ID4gPiA+
+ID4gcmlnaHQ/Cj4gPiA+ID4gPgo+ID4gPiA+ID4gU28gd2hhdCBpcyB0aGUgcmVhc29uIGJlaGlu
+ZCBpdD8gSSBkb24ndCB3YW50IHRvIHJlc3VtZSBhIGRvbWFpbiBpZiB0aGF0J3MKPiA+ID4gPiA+
+IG5vdAo+ID4gPiA+ID4gbmVjZXNzYXJ5Lgo+ID4gPiA+ID4KPiA+ID4gPiA+ID4gPgo+ID4gPiA+
+ID4gPgo+ID4gPiA+ID4gPiBUbyBiZSBtb3JlIHNwZWNpZmljIC0gYSBkb21VIHRoYXQgZG9lc24n
+dCBkZXBlbmQgb24gZG9tMCBjYW4gcmVzdW1lCj4gPiA+ID4gPiA+IGFuZCB3b3JrIGhhcHBpbHkg
+d2l0aG91dCBkb20wIGJlaW5nIHJlc3VtZWQsIGkuZS4ganVzdCBYZW4gYW5kIGRvbVUKPiA+ID4g
+PiA+ID4gcmVzdW1lLiBTbyBwYXRjaCAiW1BBVENIIDE3LzE4XSB4ZW4vYXJtOiBSZXN1bWUgRG9t
+MCBhZnRlciBYZW4KPiA+ID4gPiA+ID4gcmVzdW1lcyIgaXMgbm90IGEgbXVzdCAod2hlbiB0aGVy
+ZSBhcmUgbm8gUFYgZHJpdmVycyBpbnZvbHZlZCkuCj4gPiA+ID4gPgo+ID4gPiA+ID4gUFYgYmFj
+a2VuZHMgZG9uJ3QgbmVjZXNzYXJpbHkgcmVzaWRlIGluIHRoZSBoYXJkd2FyZSBkb21haW4uIFNv
+IGhvdyBpcwo+ID4gPiA+ID4gdGhpcwo+ID4gPiA+ID4gZ29pbmcgdG8gd29yayBmb3IgdGhlIG90
+aGVyIGNhc2U/Cj4gPiA+ID4gPgo+ID4gPiA+Cj4gPiA+ID4gSSBob25lc3RseSBiZWxpZXZlIHRo
+YXQgdGhpcyBpcyBub3QgbmVjZXNzYXJ5LCBhbmQgaXMgc3ViLW9wdGltYWwuIEl0Cj4gPiA+ID4g
+cmVsaWVzIG9uIGFuIGFzc3VtcHRpb24gdGhhdCBkb20wIGNvbnRhaW5zIGFsbCB0aGUgUFYgZHJp
+dmVycywgd2hpY2gKPiA+ID4gPiBpcyBub3QgYWx3YXlzIGNvcnJlY3QuCj4gPiA+Cj4gPiA+IFdl
+bGwsIHRoZXJlIGFyZSBvdGhlciByZWFzb25zIHRvIHJlc3VtZSB0aGUgaGFyZHdhcmUgZG9tYWlu
+LiBUaGUgaGFyZHdhcmUKPiA+ID4gZG9tYWluIG93bnMgbW9zdCB0aGUgZGV2aWNlcyBhbmQgbWF5
+IGJlIHBhcnQgb2YgdGhlIHN1c3BlbmQvcmVzdW1lIHBhdGguCj4gPiA+Cj4gPiA+IEFzIHlvdSB0
+aWUgdGhlIGhvc3Qgc3VzcGVuZCB0byB0aGUgaGFyZHdhcmUgZG9tYWluIHN1c3BlbmQsIGl0IG1h
+eSBtYWtlcyBzZW5zZQo+ID4gPiB0byByZXN1bWUgYXQgdGhlIHNhbWUgdGltZS4gSXQgaXMgdGhl
+IGtpbmQgb2YgcmF0aW9uYWxlIEkgd291bGQgZXhwZWN0IGluIHRoZQo+ID4gPiBjb21taXQgbWVz
+c2FnZS4KPiA+ID4KPiA+ID4gPiBJIHdvdWxkIHByZWZlciBpZiBzb21lb25lIGNhbiB0ZWxsIHVz
+IHRoYXQgYW55IGZyb250ZW5kIHdpbGwgdHJpZ2dlcgo+ID4gPiA+IGFuIGV2ZW50IHRvIHRoZSBi
+YWNrZW5kLCBhbmQgdGhlIGV2ZW50IHdvdWxkIGdvIHRocm91Z2ggWGVuLiBUaGF0IHdheSwKPiA+
+ID4gPiB0aGlzIGV2ZW50IHdvdWxkIGNhdXNlIGEgZG9tYWluIGNvbnRhaW5pbmcgdGhlIGJhY2tl
+bmQgZHJpdmVyIHRvCj4gPiA+ID4gcmVzdW1lLiBJIHRoaW5rIHRoaXMgaXMgdGhlIGJlc3QgcG9z
+c2libGUgc29sdXRpb24sIGJ1dCBpdCByZWxpZXMgb24KPiA+ID4gPiBhbiBhc3N1bXB0aW9uIHRo
+YXQgdGhlIGV2ZW50IHdpbGwgZ28gdGhyb3VnaCBYZW4sIGFuZCBJJ20gbm90Cj4gPiA+ID4ga25v
+d2xlZGdlYWJsZSBlbm91Z2ggdG8gY2xhaW0gdGhhdCB0aGlzIGlzIGluZGVlZCB0aGUgY2FzZS4K
+PiA+ID4KPiA+ID4gSSB0aGluayBpdCBpcyBzaG91bGQgd29yaywgdGhlIGJlc3Qgd2F5IHRvIGZp
+bmQgb3V0IGlmIGJ1aWxkaW5nIGEgdGVzdCBjYXNlCj4gPiA+IGZvciBpdC4KPiA+Cj4gPiBZZXMs
+IFBWIHByb3RvY29scyB1c2UgaHlwZXJjYWxscyB0byBzZW5kIG5vdGlmaWNhdGlvbnMgdG8gdGhl
+IG90aGVyIGVuZC4KPiA+IFNwZWNpZmljYWxseSwgdGhlIGZ1bmN0aW9uIGF0IHRoZSBMaW51eCBz
+aWRlIGlzCj4gPiBpbmNsdWRlL3hlbi9ldmVudHMuaDpub3RpZnlfcmVtb3RlX3ZpYV9ldnRjaG4u
+IFRoZSBYZW4gaW1wbGVtZW50YXRpb24KPiA+IGZvciB0aGUgaHlwZXJjYWxsIGlzIHhlbi9jb21t
+b24vZXZlbnRfY2hhbm5lbC5jOmV2dGNobl9zZW5kLCB3aGVyZSAncmQnCj4gPiBpcyB0aGUgZGVz
+dGluYXRpb24gZG9tYWluLgo+ID4KPiA+IEl0IHNob3VsZCBiZSBwb3NzaWJsZSB0byBmaWd1cmUg
+b3V0IHdoaWNoIGRvbWFpbiBuZWVkcyB0byBhd2FrZW4gZnJvbQo+ID4gdGhlcmUuCj4KPiBBY3R1
+YWxseSwgZXZ0Y2huX3NlbmQgZXZlbnR1YWxseSB3aWxsIHRyaWdnZXIgYSBwcm9wZXIgaW50ZXJy
+dXB0Cj4gaW5qZWN0aW9uIGludG8gdGhlIGRvbWFpbiAoeGVuL2FyY2gvYXJtL3ZnaWMuYzphcmNo
+X2V2dGNobl9pbmplY3QpLAo+IHdoaWNoIHdpbGwgbmVjZXNzYXJlbHkgd2FrZSBpdCB1cC4gU28g
+aXQgaXMgcG9zc2libGUgdGhhdCBpdCB3aWxsCj4gYWxyZWFkeSB3b3JrIHdpdGhvdXQgYW55IG5l
+ZWQgZm9yIGFkZGl0aW9uYWwgY2hhbmdlcz8KPgoKQWJzb2x1dGVseSwgdGhhdCBzb3VuZHMgZ3Jl
+YXQgOikgVGhlbiB3ZSBjb3VsZCBqdXN0IGRyb3AgdGhpcyBwYXRjaC4KT2YgY291cnNlLCB3ZSBu
+ZWVkIHRvIHRlc3QgdG8gY29uZmlybQoKPgo+ID4gSXQgd291bGQgZmFudGFzdGljIHRvIGhhdmUg
+dGhhdCBpbiB0aGlzIHBhdGNoIHNlcmllcywgYW5kIG1pZ2h0IG5vdCBiZQo+ID4gdG9vIGRpZmZp
+Y3VsdCB0byBkby4gSG93ZXZlciwgSSBhbHNvIHRoaW5rIHRoYXQgYWx3YXlzIHdha2luZyB1cCB0
+aGUKPiA+IGhhcmR3YXJlIGRvbWFpbiBjb3VsZCBiZSBhIGRlY2VudCB3YXkgdG8gc3RhcnQgYW5k
+IGNvdWxkIGJlIE9LIGZvciB0aGlzCj4gPiBwYXRjaCBzZXJpZXMgd2hpY2ggaXMgdGhlIHZlcnkg
+Zmlyc3QgdG8gaW50cm9kdWNlIHN1c3BlbmQvcmVzdW1lCj4gPiBmdW5jdGlvbmFsaXRpZXMgb24g
+WGVuIG9uIEFSTS4gQnV0IHRoZSBsaW1pdGF0aW9uIHNob3VsZCBiZSB3ZWxsCj4gPiBleHBsYWlu
+ZWQgaW4gdGhlIGNvbW1pdCBtZXNzYWdlLCBhcyBKdWxpZW4gd3JvdGUsIGFuZCBwb3NzaWJseSBl
+dmVuIGFzCj4gPiBhbiBpbi1jb2RlIGNvbW1lbnQgd2l0aCBhIFRPRE8uCj4KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
