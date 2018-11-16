@@ -1,24 +1,28 @@
-From: Doug Goldstein <cardoe@cardoe.com>
-Subject: Re: [PATCH 0/2] automation: build in an openSUSE Leap
- container.
-Date: Fri, 16 Nov 2018 16:51:04 -0600
-Message-ID: <3DE0228E-066A-4349-BB8E-D10A07FEE161@cardoe.com>
-References: <154239232312.10244.2674246603103909622.stgit@wayrath>
- <20181116184457.db7gqwikyom65gps@zion.uk.xensource.com>
- <6b70f22f2573a01c883e993f07e7197423fba059.camel@suse.com>
- <166e546c9caf2d060cc747f3f1878bda92000e31.camel@suse.com>
-Mime-Version: 1.0 (1.0)
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 17/18] xen/arm: Resume Dom0 after Xen resumes
+Date: Sat, 17 Nov 2018 00:01:44 +0100
+Message-ID: <855b1bb125bb3ec2a7d51dd0144787700d6568c0.camel@suse.com>
+References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
+ <1542022244-22977-18-git-send-email-mirela.simonovic@aggios.com>
+ <77c3d2c9-a1e0-a5b3-0a4e-fc6ea079b817@arm.com>
+ <CAKPH-Ngdb_w+uHKFrMd_fF62pM0idQJie2RdKDtD8HbZyNV1WQ@mail.gmail.com>
+ <CAKPH-NiEnpDWwT65zwczx20hZcEN4qTayQXpO4=4iye2mcky3Q@mail.gmail.com>
+ <dc9b6382-490e-fd41-6fec-faf211103cee@arm.com>
+ <CAKPH-Ngn1vp0oxtXs_cO5WnCJJExg5y=QQO5tck6fd1Z76ozsg@mail.gmail.com>
+ <2edccbdc-5c9e-630a-27f0-1c937f926bec@arm.com>
+ <alpine.DEB.2.10.1811161056400.22115@sstabellini-ThinkPad-X260>
+ <alpine.DEB.2.10.1811161105070.22115@sstabellini-ThinkPad-X260>
+ <CAKPH-Ni3noct-9WHGLgUCG+19MKOJnbpk_uMMGcPEQ3Kd1U11Q@mail.gmail.com>
+ <6b1b7986-5ce1-b3d2-11c9-63e7b17606f7@arm.com>
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============1511463935260139604=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=8djw=n3=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
- id 1gNmx8-00054r-Kt
- for xen-devel@lists.xenproject.org; Fri, 16 Nov 2018 22:51:07 +0000
-Received: by mail-oi1-x243.google.com with SMTP id b141so11949824oii.12
- for <xen-devel@lists.xenproject.org>; Fri, 16 Nov 2018 14:51:05 -0800 (PST)
-In-Reply-To: <166e546c9caf2d060cc747f3f1878bda92000e31.camel@suse.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=nxwo=n3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gNn7U-0005u6-J2
+ for xen-devel@lists.xenproject.org; Fri, 16 Nov 2018 23:01:48 +0000
+In-Reply-To: <6b1b7986-5ce1-b3d2-11c9-63e7b17606f7@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,32 +31,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Julien Grall <Julien.Grall@arm.com>, Mirela Simonovic <mirela.simonovic@aggios.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: Stefano Stabellini <stefano.stabellini@xilinx.com>, Xen Devel <xen-devel@lists.xen.org>, Davorin Mista <dm@aggios.com>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Cj4gT24gTm92IDE2LCAyMDE4LCBhdCAzOjQxIFBNLCBEYXJpbyBGYWdnaW9saSA8ZGZhZ2dpb2xp
-QHN1c2UuY29tPiB3cm90ZToKPiAKPj4gT24gRnJpLCAyMDE4LTExLTE2IGF0IDE5OjUwICswMTAw
-LCBEYXJpbyBGYWdnaW9saSB3cm90ZToKPj4+IE9uIEZyaSwgMjAxOC0xMS0xNiBhdCAxODo0NCAr
-MDAwMCwgV2VpIExpdSB3cm90ZToKPj4+PiBPbiBGcmksIE5vdiAxNiwgMjAxOCBhdCAwNzozMDo1
-NVBNICswMTAwLCBEYXJpbyBGYWdnaW9saSB3cm90ZToKPj4+PiAKPj4+IEkgaGF2ZSBiZWVuIHBs
-YXlpbmcgd2l0aCB0aGUgQ0kgc3lzdGVtIHRvZGF5IHNvIGl0IGNvdWxkIGhhdmUgYmVlbgo+Pj4g
-YQo+Pj4gYml0Cj4+PiBvdmVyd2hlbG1lZC4gTGV0J3Mgd2FpdCB1bnRpbCBuZXh0IHdlZWsgdG8g
-c2VlIGlmIGl0IGNvbWVzIGJhY2suCj4+PiAKPj4gT2ssIHN1cmUuIFdoYXQgSSdtIG1vc3QgaW50
-ZXJlc3RlZCwgaXMgdG8gc2VlIGlmIHRoZSBvcGVuc3VzZSBqb2JzCj4+IHBhc3MKPj4gKGkuZS4s
-IGlmIEkgZ290IHRoZSBydW5lLCB0aGUgbmFtZSBvZiB0aGUgY29udGFpbmVyLCBldGMsIHJpZ2h0
-IDotKQo+PiApLgo+PiAKPiBBbmQuLi4gaXQgd29ya2VkISA6LSkKPiAKPiBOb3csIHRoZSBuZXh0
-IHN0ZXAgd291bGQgYmUgdG8gYWRkIG9wZW5TVVNFIFR1bWJsZXdlZWQgdG9vLgo+IAo+IEJ1dCBJ
-IGhhdmUgYSBxdWVzdGlvbiwgVHVtYmxld2VlZCBpcyByb2xsaW5nIChhbmQgaXQncyBhY3R1YWxs
-eSByb2xsaW5nCj4gcXVpdGUgZmFzdCk7IGhvdyBjYW4gd2UgaGFuZGxlIHRoYXQ/Cj4gCj4gSSdk
-IHNheSB0aGUgY29udGFpbmVyIGltYWdlIHNob3VsZCBiZSByZWJ1aWxkIChvciwgYXQgbGVhc3Qs
-IHRoZQo+ICdwYWNrYWdlIHJlZnJlc2ggJiYgcGFja2FnZSB1cGRhdGUnIGJpdHMgb2YgdGhlIGRv
-Y2tlcmZpbGUgYmUgcmUtCj4gZXhlY3V0ZWQpLCBpZiBub3QgYXQgZXZlcnkgcnVuIG9mIHRoZSBw
-aXBlbGluZSwgZnJlcXVlbnRseSBlbm91Z2guIENhbgo+IHdlIGRvIHRoYXQ/Cj4gCj4gSSBzZWUg
-dGhhdCB3ZSBoYXZlIERlYmlhbiB1bnN0YWJsZSwgd2hpY2ggaXMgYWxzbyByb2xsaW5nLCBidXQg
-ZG8gd2UKPiBhY3R1YWxseSB1cGRhdGUgaXQsIG9yIGlzIGl0LCBiYXNpY2FsbHksIGp1c3QgYSBz
-bmFwc2hvdD8KCkl04oCZcyBiYXNpY2FsbHkgYSBzbmFwc2hvdC4gV2UgY291bGQgY3JlYXRlIGEg
-cGlwZWxpbmUgdG8gcmVidWlsZCBjb250YWluZXJzIHBlcmlvZGljYWxseS4gCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============1511463935260139604==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-YbLNUAmDDj2Dg4QIlZLK"
+
+
+--=-YbLNUAmDDj2Dg4QIlZLK
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2018-11-16 at 21:58 +0000, Julien Grall wrote:
+> On 16/11/2018 21:41, Mirela Simonovic wrote:
+> > On Fri, Nov 16, 2018 at 8:09 PM Stefano Stabellini
+> > <sstabellini@kernel.org> wrote:
+> > > > It should be possible to figure out which domain needs to
+> > > > awaken from
+> > > > there.
+> > >=20
+> > > Actually, evtchn_send eventually will trigger a proper interrupt
+> > > injection into the domain
+> > > (xen/arch/arm/vgic.c:arch_evtchn_inject),
+> > > which will necessarely wake it up. So it is possible that it will
+> > > already work without any need for additional changes?
+> > >=20
+> >=20
+> > Absolutely, that sounds great :) Then we could just drop this
+> > patch.
+>=20
+> I don't think you can drop this patch... As you tie the host suspend
+> to=20
+> the hardware domain suspend, it may makes sense to resume at the same
+> time.
+>=20
+FWIW, I think that too.
+
+In fact, let's assume a *fully* disaggregated setup, where dom0 only
+has the toolstack, while it has no hardware, no PV backend, etc... If
+we don't resume it explicitly together with Xen, who is going to resume
+it? :-O
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-YbLNUAmDDj2Dg4QIlZLK
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvvTFgACgkQFkJ4iaW4
+c+569hAAxFk54UZ8nk8WB7EV16+WCKZyQHVr0EhfG7v70VCneUPPkh82DYXNzqaB
+9e1bN4zevjA30G13/IGS3qrBZqWBvvbiEw6m0YyHnbqySSnLyRvpUZHKvie8mUop
+cZjh4thNmPj3noG/PR/O3GIm9IXKAXcOKA68ZDBc0tGDky6qGvollrpu9+DXPOv9
+oMkDw9rwNO/JdlAHCJH86Z8Yfk2CumidVj2agfUbCzRZ66e2O7LoCDyH6MY+piPw
+j1qO8OHsuee26AqlsRr4wxX4BgAT+it8tKAkpiSkB4OPc0kcRa3hyu+KB04ZVuuL
+1yoXMf0SAuVUSRWXKkSk+Eg7zLk7eIEonvDwJQcMp1iHzJiNsMkdqh8R/6Ct9hLH
+Srnbmtt9Z24KnxVtDLkMiWSmmmQ+pqTAgFVMoDJRaBcdt6r4ZFYXPEBc6OCWD3bn
+8HqX/U4ocj9UzT/LqiZquwtYI343+8oMUq72n0awx6lKA+tCMw1xIhPQBED3iDSu
+fAeTBjImaIzXtlqSqi3MOnxwNZsIg1lkfl96V7KhheGnWxq8SFbxd9KZoiyes2ts
+DjoDwLlPXSVuO+qa7yZ4NKHTwJgBsbYfMRp8WyTsEo+Ppzano/i/zveEa20ZD8Q9
+w9xCF/lGyO+iYRDYA4PZIDqOqt7wWK4nMqy6UrdBtVQsysH3CE0=
+=ucHa
+-----END PGP SIGNATURE-----
+
+--=-YbLNUAmDDj2Dg4QIlZLK--
+
+
+
+--===============1511463935260139604==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1511463935260139604==--
