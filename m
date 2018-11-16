@@ -1,25 +1,24 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 04/18] xen/arm: While a domain is suspended
- put its watchdogs on pause
-Date: Fri, 16 Nov 2018 23:40:20 +0100
-Message-ID: <63d7f87653a37dcbf71823f8123e3b00239662d4.camel@suse.com>
-References: <1542022244-22977-1-git-send-email-mirela.simonovic@aggios.com>
- <1542022244-22977-5-git-send-email-mirela.simonovic@aggios.com>
- <5BE9684802000078001FADC0@prv1-mh.provo.novell.com>
- <CAKPH-NgJ=YFcdQtL4iN3RbFTLyiV7VgHWo1YVZw4qA5Sh5MtHw@mail.gmail.com>
- <5BE99AD802000078001FB100@prv1-mh.provo.novell.com>
- <CAKPH-Nhnvc4VMtD5OL1KZwfm5VbVMaHwb7fX5zf45oNvaps7Sg@mail.gmail.com>
- <b535914c-2085-c5d5-137b-bc728bfcf4e9@citrix.com>
-Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4096656859514387272=="
+From: Doug Goldstein <cardoe@cardoe.com>
+Subject: Re: [PATCH 0/2] automation: build in an openSUSE Leap
+ container.
+Date: Fri, 16 Nov 2018 16:51:04 -0600
+Message-ID: <3DE0228E-066A-4349-BB8E-D10A07FEE161@cardoe.com>
+References: <154239232312.10244.2674246603103909622.stgit@wayrath>
+ <20181116184457.db7gqwikyom65gps@zion.uk.xensource.com>
+ <6b70f22f2573a01c883e993f07e7197423fba059.camel@suse.com>
+ <166e546c9caf2d060cc747f3f1878bda92000e31.camel@suse.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=nXWO=N3=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gNmmh-0004Az-Sh
- for xen-devel@lists.xenproject.org; Fri, 16 Nov 2018 22:40:19 +0000
-In-Reply-To: <b535914c-2085-c5d5-137b-bc728bfcf4e9@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=8djw=n3=cardoe.com=cardoe@srs-us1.protection.inumbo.net>)
+ id 1gNmx8-00054r-Kt
+ for xen-devel@lists.xenproject.org; Fri, 16 Nov 2018 22:51:07 +0000
+Received: by mail-oi1-x243.google.com with SMTP id b141so11949824oii.12
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Nov 2018 14:51:05 -0800 (PST)
+In-Reply-To: <166e546c9caf2d060cc747f3f1878bda92000e31.camel@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,84 +27,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Davorin Mista <dm@aggios.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Saeed Nowshadi <saeed.nowshadi@xilinx.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <stefano.stabellini@xilinx.com>, Dario Faggioli <dfaggioli@suse.com>, Xen Devel <xen-devel@lists.xen.org>, MirelaSimonovic <mirela.simonovic@aggios.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
+To: Dario Faggioli <dfaggioli@suse.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4096656859514387272==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-7R/CGdkQfehhvdBbTKF2"
-
-
---=-7R/CGdkQfehhvdBbTKF2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2018-11-12 at 15:33 +0000, Andrew Cooper wrote:
-> On 12/11/18 15:31, Mirela Simonovic wrote:
-> >=20
-> > Thanks, now it's clear. We need to change the type for
-> > watchdog_timer
-> > to be the derived structure of timer that additionally contains
-> > 'suspended' variable. That makes sense, we'll do so.
->=20
-> Why do you need a suspended variable?  Stash the frequency the guest
-> requested on the last hypercall, and fully kill/re-create the timer
-> on
-> suspend/resume.
->=20
-I *think* what they want is something like: when, at time t1, a domain
-is suspended, it has a (watchdog) timer armed, which was going to
-expire and fire in 13.2 ms (i.e., at t1 + 13.2ms); when, at time t2 >>
-t1, the domain is resumed, that (watchdog) timer should fire in 13.2
-ms, i.e. at t2 + 13.2ms.
-
-This being said, I don't see a behavior like this terribly useful for a
-whatchdog either (but I may be missing something).
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-7R/CGdkQfehhvdBbTKF2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlvvR1QACgkQFkJ4iaW4
-c+5+QhAAsWBIVnmYvcFhZZeNwBufmxcjBSfSVc/stqh2ZKQFqJU1Jtfo8LUKIGTK
-ArCDSC4e7hNkvKIiPgnZ9LO8fMuKUA9p8Z+aIg3DwUuGOji0eSC5xnu/6I6eabcl
-Zue7gYr2PZWDh9e4j3J0p1de2gIRXDw5K+uMjV3zcGbHdXx5zGq5MZ5045lR9DpU
-Ulbjt/61qPvn30OM3CTU7vWSj1gzb2KUXwwB968ZDC42DwW6DOJF4XNHheX5oBQy
-n3WBCUpeIAOwm/kkzfQ0yVgnC6feV2v1DWqJB/8xIIKNABdxnBNgvYjdQuEYOC63
-9uWV0b5XeNR2nGcvzLAUjPkvwjReHs6Ij2+b+cbVClOEfsdST5a14S0IE27tNTjM
-3UNUckPIdhEFA7zqE36Nj/vM8RB8iT0r6WaTxdyY0vMdvgD5CyNi+qyn08HulUcd
-bkZbAitCx8zRDxxqw9zWnxz84tZqgxJ4/WP+glCzBbEh01NobeCvnfMQ/VCfqzjx
-wSCKsNYf2bfTznOxwk1p+phDlDJQjkzjNIy8/ROLbRD3iIjfzYIIuXH2Bw/xKJEv
-BQvcZqptRMc2oax72UwkDLRzEKGTVtmfngt7NMK0lIyN79A3zamiAaGtbmyyItdl
-/pZ4vECX36AskZUuoicYN85p1mkjCprC++5zP3tNHCNCbcwtGzk=
-=8UcS
------END PGP SIGNATURE-----
-
---=-7R/CGdkQfehhvdBbTKF2--
-
-
-
---===============4096656859514387272==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4096656859514387272==--
+Cj4gT24gTm92IDE2LCAyMDE4LCBhdCAzOjQxIFBNLCBEYXJpbyBGYWdnaW9saSA8ZGZhZ2dpb2xp
+QHN1c2UuY29tPiB3cm90ZToKPiAKPj4gT24gRnJpLCAyMDE4LTExLTE2IGF0IDE5OjUwICswMTAw
+LCBEYXJpbyBGYWdnaW9saSB3cm90ZToKPj4+IE9uIEZyaSwgMjAxOC0xMS0xNiBhdCAxODo0NCAr
+MDAwMCwgV2VpIExpdSB3cm90ZToKPj4+PiBPbiBGcmksIE5vdiAxNiwgMjAxOCBhdCAwNzozMDo1
+NVBNICswMTAwLCBEYXJpbyBGYWdnaW9saSB3cm90ZToKPj4+PiAKPj4+IEkgaGF2ZSBiZWVuIHBs
+YXlpbmcgd2l0aCB0aGUgQ0kgc3lzdGVtIHRvZGF5IHNvIGl0IGNvdWxkIGhhdmUgYmVlbgo+Pj4g
+YQo+Pj4gYml0Cj4+PiBvdmVyd2hlbG1lZC4gTGV0J3Mgd2FpdCB1bnRpbCBuZXh0IHdlZWsgdG8g
+c2VlIGlmIGl0IGNvbWVzIGJhY2suCj4+PiAKPj4gT2ssIHN1cmUuIFdoYXQgSSdtIG1vc3QgaW50
+ZXJlc3RlZCwgaXMgdG8gc2VlIGlmIHRoZSBvcGVuc3VzZSBqb2JzCj4+IHBhc3MKPj4gKGkuZS4s
+IGlmIEkgZ290IHRoZSBydW5lLCB0aGUgbmFtZSBvZiB0aGUgY29udGFpbmVyLCBldGMsIHJpZ2h0
+IDotKQo+PiApLgo+PiAKPiBBbmQuLi4gaXQgd29ya2VkISA6LSkKPiAKPiBOb3csIHRoZSBuZXh0
+IHN0ZXAgd291bGQgYmUgdG8gYWRkIG9wZW5TVVNFIFR1bWJsZXdlZWQgdG9vLgo+IAo+IEJ1dCBJ
+IGhhdmUgYSBxdWVzdGlvbiwgVHVtYmxld2VlZCBpcyByb2xsaW5nIChhbmQgaXQncyBhY3R1YWxs
+eSByb2xsaW5nCj4gcXVpdGUgZmFzdCk7IGhvdyBjYW4gd2UgaGFuZGxlIHRoYXQ/Cj4gCj4gSSdk
+IHNheSB0aGUgY29udGFpbmVyIGltYWdlIHNob3VsZCBiZSByZWJ1aWxkIChvciwgYXQgbGVhc3Qs
+IHRoZQo+ICdwYWNrYWdlIHJlZnJlc2ggJiYgcGFja2FnZSB1cGRhdGUnIGJpdHMgb2YgdGhlIGRv
+Y2tlcmZpbGUgYmUgcmUtCj4gZXhlY3V0ZWQpLCBpZiBub3QgYXQgZXZlcnkgcnVuIG9mIHRoZSBw
+aXBlbGluZSwgZnJlcXVlbnRseSBlbm91Z2guIENhbgo+IHdlIGRvIHRoYXQ/Cj4gCj4gSSBzZWUg
+dGhhdCB3ZSBoYXZlIERlYmlhbiB1bnN0YWJsZSwgd2hpY2ggaXMgYWxzbyByb2xsaW5nLCBidXQg
+ZG8gd2UKPiBhY3R1YWxseSB1cGRhdGUgaXQsIG9yIGlzIGl0LCBiYXNpY2FsbHksIGp1c3QgYSBz
+bmFwc2hvdD8KCkl04oCZcyBiYXNpY2FsbHkgYSBzbmFwc2hvdC4gV2UgY291bGQgY3JlYXRlIGEg
+cGlwZWxpbmUgdG8gcmVidWlsZCBjb250YWluZXJzIHBlcmlvZGljYWxseS4gCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
