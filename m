@@ -1,15 +1,29 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable bisection] complete build-i386
-Date: Sat, 17 Nov 2018 18:17:26 +0000
-Message-ID: <E1gO59q-0000RU-UU@osstest.test-lab.xenproject.org>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH V6 4/4] x86/altp2m: fix display frozen when
+ switching to a new view early
+Date: Sat, 17 Nov 2018 20:58:11 +0200
+Message-ID: <70f50b49-9b7a-13d9-442c-62df33105552@bitdefender.com>
+References: <1542228002-21075-1-git-send-email-rcojocaru@bitdefender.com>
+ <1542228002-21075-5-git-send-email-rcojocaru@bitdefender.com>
+ <3603CF64-3679-43F6-A389-E88DAA0BF503@citrix.com>
+ <482be5fb-0406-c203-2664-070a77e329e9@bitdefender.com>
+ <5BEE972D02000078001FCB0D@prv1-mh.provo.novell.com>
+ <62c1f237-9d1d-06f3-49f8-e48be8d38b3f@citrix.com>
+ <6ef4e095-cbd3-3d37-7759-0d3faa720e84@bitdefender.com>
+ <c6e1ee08-0b71-f8f8-5862-94a8d01ac1e1@citrix.com>
+ <e33cad9e-f138-48b0-d12c-5178eea9b6e2@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4844716337951075419=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=kxhy=n4=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gO59w-0006Pi-P1
- for xen-devel@lists.xenproject.org; Sat, 17 Nov 2018 18:17:32 +0000
+ <SRS0=sR2E=N4=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1gO5nY-0000vO-U9
+ for xen-devel@lists.xenproject.org; Sat, 17 Nov 2018 18:58:28 +0000
+In-Reply-To: <e33cad9e-f138-48b0-d12c-5178eea9b6e2@bitdefender.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,170 +32,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4844716337951075419==
-Content-Type: text/plain
-
-branch xen-unstable
-xenbranch xen-unstable
-job build-i386
-testid xen-build
-
-Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-Tree: xen git://xenbits.xen.org/xen.git
-
-*** Found and reproduced problem changeset ***
-
-  Bug is in tree:  xen git://xenbits.xen.org/xen.git
-  Bug introduced:  c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
-  Bug not present: c49338ef287c44113476d4c6ccaad7fa2924f8c7
-  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/130323/
-
-
-  commit c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
-  Author: Andrew Cooper <andrew.cooper3@citrix.com>
-  Date:   Thu Jul 19 16:50:03 2018 +0100
-  
-      libx86: Split x86_cpuid_policy_fill_native() out of calculate_raw_policy()
-      
-      This will shortly be wanted by the userspace emulator harnesses as well.
-      
-      Consolidate the cpuid{,_count}_leaf() helpers beside the structure definition,
-      rather than having them scattered throughout Xen.
-      
-      Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-      Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-      Acked-by: Jan Beulich <jbeulich@suse.com>
-
-
-For bisection revision-tuple graph see:
-   http://logs.test-lab.xenproject.org/osstest/results/bisect/xen-unstable/build-i386.xen-build.html
-Revision IDs in each graph node refer, respectively, to the Trees above.
-
-----------------------------------------
-Running cs-bisection-step --graph-out=/home/logs/results/bisect/xen-unstable/build-i386.xen-build --summary-out=tmp/130323.bisection-summary --basis-template=129426 --blessings=real,real-bisect xen-unstable build-i386 xen-build
-Searching for failure / basis pass:
- 130063 fail [host=albana0] / 129817 ok.
-Failure / basis pass flights: 130063 / 129817
-(tree with no url: minios)
-(tree in basispass but not in latest: ovmf)
-(tree in basispass but not in latest: seabios)
-Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-Tree: xen git://xenbits.xen.org/xen.git
-Latest d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 15410d8fc8d6e63ab138a5c47427f418a43a1c56
-Basis pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 6d8ffac1f7a782dc2c7f8df3871a294729ae36bd
-Generating revisions with ./adhoc-revtuple-generator  git://xenbits.xen.org/qemu-xen-traditional.git#d0d8ad39ecb51cd7497cd524484fe09f50876798-d0d8ad39ecb51cd7497cd524484fe09f50876798 git://xenbits.xen.org/qemu-xen.git#de5b678ca4dcdfa83e322491d478d66df56c1986-de5b678ca4dcdfa83e322491d478d66df56c1986 git://xenbits.xen.org/xen.git#6d8ffac1f7a782dc2c7f8df3871a294729ae36bd-15410d8fc8d6e63ab138a5c47427f418a43a1c56
-Loaded 1001 nodes in revision graph
-Searching for test results:
- 129738 [host=debina0]
- 129843 [host=debina0]
- 129855 [host=debina0]
- 129818 pass irrelevant
- 129849 [host=fiano1]
- 129831 [host=fiano0]
- 129817 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 6d8ffac1f7a782dc2c7f8df3871a294729ae36bd
- 129822 [host=debina0]
- 129839 [host=huxelrebe0]
- 129851 [host=fiano1]
- 129853 [host=debina1]
- 129859 [host=debina0]
- 129865 [host=huxelrebe0]
- 130063 fail d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 15410d8fc8d6e63ab138a5c47427f418a43a1c56
- 130318 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c49338ef287c44113476d4c6ccaad7fa2924f8c7
- 130303 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 3b439f636ee9a9588203cf0aa0edfa18ccdc60b9
- 130314 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c49338ef287c44113476d4c6ccaad7fa2924f8c7
- 130294 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 6d8ffac1f7a782dc2c7f8df3871a294729ae36bd
- 130305 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c6aae55786e138951daf25e14709895d8c166948
- 130316 fail d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
- 130299 fail d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 15410d8fc8d6e63ab138a5c47427f418a43a1c56
- 130300 fail d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
- 130309 pass d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c49338ef287c44113476d4c6ccaad7fa2924f8c7
- 130323 fail d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
- 130312 fail d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
-Searching for interesting versions
- Result found: flight 129817 (pass), for basis pass
- Result found: flight 130063 (fail), for basis failure
- Repro found: flight 130294 (pass), for basis pass
- Repro found: flight 130299 (fail), for basis failure
- 0 revisions at d0d8ad39ecb51cd7497cd524484fe09f50876798 de5b678ca4dcdfa83e322491d478d66df56c1986 c49338ef287c44113476d4c6ccaad7fa2924f8c7
-No revisions left to test, checking graph state.
- Result found: flight 130309 (pass), for last pass
- Result found: flight 130312 (fail), for first failure
- Repro found: flight 130314 (pass), for last pass
- Repro found: flight 130316 (fail), for first failure
- Repro found: flight 130318 (pass), for last pass
- Repro found: flight 130323 (fail), for first failure
-
-*** Found and reproduced problem changeset ***
-
-  Bug is in tree:  xen git://xenbits.xen.org/xen.git
-  Bug introduced:  c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
-  Bug not present: c49338ef287c44113476d4c6ccaad7fa2924f8c7
-  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/130323/
-
-
-  commit c66ef0fbe12b3e1e2da849dd85e5b7fe3aa81de5
-  Author: Andrew Cooper <andrew.cooper3@citrix.com>
-  Date:   Thu Jul 19 16:50:03 2018 +0100
-  
-      libx86: Split x86_cpuid_policy_fill_native() out of calculate_raw_policy()
-      
-      This will shortly be wanted by the userspace emulator harnesses as well.
-      
-      Consolidate the cpuid{,_count}_leaf() helpers beside the structure definition,
-      rather than having them scattered throughout Xen.
-      
-      Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-      Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-      Acked-by: Jan Beulich <jbeulich@suse.com>
-
-Revision graph left in /home/logs/results/bisect/xen-unstable/build-i386.xen-build.{dot,ps,png,html,svg}.
-----------------------------------------
-130323: tolerable ALL FAIL
-
-flight 130323 xen-unstable real-bisect [real]
-http://logs.test-lab.xenproject.org/osstest/logs/130323/
-
-Failures :-/ but no regressions.
-
-Tests which did not succeed,
-including tests which could not be run:
- build-i386                    6 xen-build               fail baseline untested
-
-
-jobs:
- build-i386                                                   fail    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-
---===============4844716337951075419==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4844716337951075419==--
+T24gMTEvMTYvMTggOTo1MCBQTSwgUmF6dmFuIENvam9jYXJ1IHdyb3RlOgo+IE9uIDExLzE2LzE4
+IDc6NTkgUE0sIEdlb3JnZSBEdW5sYXAgd3JvdGU6Cj4+IE9uIHRoZSBvdGhlciBoYW5kLCB3ZSB3
+YW50IHRoZSBsb2dkaXJ0eSByYW5nZXNldHMgdG8gYWN0dWFsbHkgbWF0Y2ggdGhlCj4+IGhvc3Qn
+cyByYW5nZXNldHM7IHVzaW5nIGFsdHAybS0+bWF4X21hcHBlZF9wZm4gZm9yIHRoaXMgaXMgY2xl
+YXJseQo+PiB3cm9uZy4gVGhlIGVhc2llc3QgZml4IHdvdWxkIGJlIGp1c3QgdG8gZXhwbGljaXRs
+eSB1c2UgdGhlIGhvc3Qncwo+PiBtYXhfbWFwcGVkX3BmbiB3aGVuIGNhbGN1bGF0aW5nIHRoZSBj
+bGlwcGluZy4gIEEgbW9yZSBjb21wbGV0ZSBmaXggd291bGQKPj4gaW52b2x2ZSBjYWxjdWxhdGlu
+ZyB0d28gZGlmZmVyZW50IHJhbmdlcyAtLSBhICJyYW5nZXNldCIgcmFuZ2UgYW5kIGEKPj4gImlu
+dmFsaWRhdGUiIHJhbmdlLCB0aGUgc2Vjb25kIG9mIHdoaWNoIHdvdWxkIGJlIGNsaXBwZWQgb24g
+YWx0cDJtcyBieQo+PiB7bWluLG1heH1fcmVtYXBwZWRfZ2ZuLgo+Pgo+PiBTb21ldGhpbmcgbGlr
+ZSB0aGUgYXR0YWNoZWQgKGNvbXBpbGUtdGVzdGVkIG9ubHkpLiAgSSdtIHBhcnRpYWwgdG8KPj4g
+aGF2aW5nIGJvdGggcGF0Y2hlcyBhcHBsaWVkLCBidXQgSSdkIGJlIG9wZW4gdG8gYXJndW1lbnRz
+IHRoYXQgd2Ugc2hvdWxkCj4+IG9ubHkgdXNlIHRoZSBmaXJzdC4KPiAKPiBUaGFua3MhIEkgaGF2
+ZW4ndCB5ZXQgYmVlbiBhYmxlIHRvIHRoaW5rIGluIGRlcHRoIGFib3V0IHRoZSBsb2dpYywgYnV0
+IEkKPiBkaWQgbWFuYWdlIHRvIGFwcGx5IHRoZW0uIEp1c3QgYXBwbHlpbmcgdGhlIGZpcnN0IG9u
+ZSBhbGxvd3MgbWUgdG8gc2V0Cj4gcDJtLT5tYXhfbWFwcGVkX3BmbiA9IDA7IHdpdGhvdXQgdGhl
+IEFTU0VSVCgpIGNyYXNoaW5nIHRoZSBoeXBlcnZpc29yLAo+IGFuZCBldmVyeXRoaW5nIGFwcGVh
+cnMgdG8gd29yayB3ZWxsLgo+IAo+IFdpdGggYm90aCBwYXRjaGVzIGFwcGxpZXMsIHRoZSBkaXNw
+bGF5IHJlbWFpbnMgZnJvemVuICh0aGluZ3MgYXBwZWFyIHRvCj4gYmVoYXZlIC0gZXh0ZXJuYWxs
+eSAtIGluIHRoZSBzYW1lIHdheSBhcyBiZWZvcmUgdGhlIHNlcmllcykuCgpSaWdodCwgSSBrbm93
+IHdoeSB0aGUgc2Vjb25kIHBhdGNoIGtlZXBzIHRoZSBkaXNwbGF5IGZyb3plbi4gSXQncwpiZWNh
+dXNlIGZvciBhbHRwMm1zICh3aGVyZSBpdCBtYXR0ZXJzIG1vc3QpLCB0aGUgcGF0Y2ggYmFzaWNh
+bGx5IGRvZXMKaW52YWxpZGF0ZV9zdGFydCA9IG1heChpbnZhbGlkYXRlX3N0YXJ0LCBwMm0tPm1p
+bl9yZW1hcHBlZF9nZm4pIGFuZAppbnZhbGlkYXRlX2VuZCA9IG1pbihpbnZhbGlkYXRlX2VuZCwg
+cDJtLT5tYXhfcmVtYXBwZWRfZ2ZuKS4KCkhvd2V2ZXIsIGFzIHByZXZpb3VzbHkgcmVxdWVzdGVk
+LCBJJ3ZlIG5vdyBtYWRlIHAybS0+bWF4X3JlbWFwcGVkX2dmbgpiZWdpbiBsaWZlIGFzIDAgZm9y
+IGFsdHAybXMsIGFuZCBwMm0tPm1pbl9yZW1hcHBlZF9nZm4gaXMgaW5pdGlhbGl6ZWQgdG8KSU5W
+QUxJRF9HRk4sIHdoaWNoIGlzIGRlY2ltYWwgMTg0NDY3NDQwNzM3MDk1NTE2MTUuIFNvIHdlIGdl
+dAppbnZhbGlkYXRlX2VuZDogMCwgaW52YWxpZGF0ZV9zdGFydDogMTg0NDY3NDQwNzM3MDk1NTE2
+MTUsCmludmFsaWRhdGVfZW5kIDwgaW52YWxpZGF0ZV9zdGFydCwgcmVzdWx0aW5nIGluIG5vdGhp
+bmcgYmVpbmcgZG9uZSBmb3IKYWx0cDJtcywgd2hpY2ggaXMgZnVuY3Rpb25hbGx5IGJhY2sgdG8g
+c3F1YXJlIG9uZS4KCkluIGxpZ2h0IG9mIHRoaXMgYW5hbHlzaXMsIEkgc3VwcG9zZSBJIHNob3Vs
+ZCBub3cgYWxzbyBkaXNyZWdhcmQgdGhlCnJlY29tbWVuZGF0aW9uIHRvIGNsaXAgZmlyc3RfZ2Zu
+IGFuZCBtYXhfbnIgdG8gZml0IHdpdGhpbgpwMm0tPm1pbl9yZW1hcHBlZF9nZm4gYW5kIHAybS0+
+bWF4X3JlbWFwcGVkX2dmbiBmb3IgYWx0cDJtcyBpbgpmaW5pc2hfdHlwZV9jaGFuZ2UoKSwgZm9y
+IG9idmlvdXMgcmVhc29ucyAtIHVubGVzcyB5b3UgcHJlZmVyIGEKZGlmZmVyZW50IHN0cmF0ZWd5
+LgoKClRoYW5rcywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
