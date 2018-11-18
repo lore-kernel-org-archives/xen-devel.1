@@ -1,29 +1,17 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [RFC PATCH v2 00/17] Add support for qemu-xen
- runnning in a Linux-based stubdomain.
-Date: Sun, 18 Nov 2018 18:25:53 +0100
-Message-ID: <20181118172553.GN781@mail-itl>
-References: <20181016173240.GA1563@mail-itl>
- <23494.9572.676973.726194@mariner.uk.xensource.com>
- <20181016204628.GD1563@mail-itl>
- <23495.21043.960987.833172@mariner.uk.xensource.com>
- <20181017160559.GB2755@mail-itl>
- <23515.12398.298018.490061@mariner.uk.xensource.com>
- <20181101173207.GB1638@mail-itl>
- <20181115174144.GM1302@perard.uk.xensource.com>
- <20181115185708.GI781@mail-itl>
- <20181116103907.GN1302@perard.uk.xensource.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 130414: regressions - FAIL
+Date: Sun, 18 Nov 2018 18:02:41 +0000
+Message-ID: <osstest-130414-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7586107485857142882=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HfAK=N5=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gOQpd-0005xs-03
- for xen-devel@lists.xenproject.org; Sun, 18 Nov 2018 17:26:01 +0000
-In-Reply-To: <20181116103907.GN1302@perard.uk.xensource.com>
+ <SRS0=iCVZ=N5=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gORPN-0000QE-Ma
+ for xen-devel@lists.xenproject.org; Sun, 18 Nov 2018 18:02:57 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,121 +20,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: Simon Gaiser <simon@invisiblethingslab.com>, Ian Jackson <ian.jackson@citrix.com>, Eric Shelton <eshelton@pobox.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7586107485857142882==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="v4cNTr+tRGSs1txX"
-Content-Disposition: inline
-
-
---v4cNTr+tRGSs1txX
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Nov 16, 2018 at 10:39:07AM +0000, Anthony PERARD wrote:
-> On Thu, Nov 15, 2018 at 07:57:08PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Thu, Nov 15, 2018 at 05:41:44PM +0000, Anthony PERARD wrote:
-> > > On Thu, Nov 01, 2018 at 06:32:07PM +0100, Marek Marczykowski-G=C3=B3r=
-ecki wrote:
-> > > > On Thu, Nov 01, 2018 at 04:57:18PM +0000, Ian Jackson wrote:
-> > > > > Marek Marczykowski-G=C3=B3recki writes ("Re: [RFC PATCH v2 00/17]=
- Add support for qemu-xen runnning in a Linux-based stubdomain."):
-> > > > > > 2. pv console
-> > > > > >   pros:
-> > > > > >    - no qemu modifications
-> > > > > >    - same read()/write() on libxl side
-> > > > > >   cons:
-> > > > > >    - no out of band reset, needs libxl handling for that (skipp=
-ing
-> > > > > >      negotiation)
-> > > > >=20
-> > > > > Doesn't this potentially mean that the qmp console connection can
-> > > > > become irrecoverably desynchronised ?  I don't know how you would
-> > > > > recover from the situation where another libxl process had got ha=
-lfway
-> > > > > through some qmp stuff and been terminated (for whatever reason; =
-maybe
-> > > > > the calling toolstack crashed).
-> > > >=20
-> > > > That's right, it could result in irrecoverably desynchronised
-> > > > connection. So, we need out of band reset.
-> > >=20
-> > > Actually, it looks like we can recover that situation without out of
-> > > band reset. It's even in the spec[1]:
-> >=20
-> > That's interesting. And it mention serial console explicitly as the use
-> > case for this. Does it apply to monitor socket too, or guest agent only?
-> > I'd much prefer to use console, as the code would be much simpler (the
-> > same handling for local and stubdomain qemu).
->=20
-> The 'guest-sync-delimited' command doesn't seems to be available on the
-> monitor socket. I should have checked that ... but that would just mean
-> that libxl would need to tolerate the first read to be an incompleted
-> json-object. Then we can use the 'id' that every response have to figure
-> out if it was a reply sent to a previous libxl run. We can maybe encode
-> the pid into the id.
-
-It may be tricky to figure out where is the end of such incomplete json
-object... Suppose you read:
-
-{ "x": { "y": 1 } } }
-
-If you read this from the beginning looking for json, you'll get valid
-json object unless you encounter the last "}" (which you may receive in
-separate read() call, if you're unlucky). I'm afraid the logic for
-skipping initial (possibly incomplete) object(s) may be quite complex.
-Maybe better propose upstream to include 'guest-sync-delimited' also on
-monitor socket too? In that case, the command naming will be awkward,
-but still, similar command would be useful in that context.
-
-> > Also, this doesn't cover capabilities (re-)negotiation. While actual
-> > capabilities are probably not a problem, libxl do store qemu version
-> > from the server greeting (is it used anywhere?).
->=20
-> The QEMU version is still available after the capabilities negociation,
-> one simply need to execute 'query-version'.
-
-That's good.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---v4cNTr+tRGSs1txX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlvxoKMACgkQ24/THMrX
-1yzhdgf+Iw7ioUJnoI7lH+to+oda0/H5fnVmP6XiI7hB8Lw+8cRj4KQdUUaOFhhK
-/bVezRioAcJyj5p5ui0KSb0YXF/26gRKhBnzZP0Xy8Aq9ecX8OWdTzH/cKw2i6Ub
-SSsa51KWSzxnwbi9sCC5zwipDqRx5rLbgMQIsqPzlMRgJPVLqH3uihQsKMUjhl9Y
-a2C39wT7Cj0FAupwNc/KDzjbS/DWmadxgpX04K1lAaQvc+umSg1zyd9FN6yj60jk
-YxfP+41qZcIbc4Qqtektq1UyOqfX+L3xoZ+Pxxb/dHzCw9/oEZXV0CA5tO6BEjLj
-tYgzGyuXrKA41aTMpq4LqqqR5VTZqg==
-=/5rq
------END PGP SIGNATURE-----
-
---v4cNTr+tRGSs1txX--
-
-
---===============7586107485857142882==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7586107485857142882==--
+ZmxpZ2h0IDEzMDQxNCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzA0MTQvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
+Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgIDYgeGVu
+LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtYW1kNjQt
+eHNtICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
+cy4gMTI5NDc1CiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
+ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWkzODYteHNtICAgICAgICAg
+ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
+VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAx
+IGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiBidWlsZC1hbWQ2NC1saWJ2
+aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9h
+CiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
+ICAgICAgICAgICAgICAgNjYxMjcwMTFhNTQ0YjkwZTgwMGViMzYxOWU4NGMyZjk0YTM1NDkwMwpi
+YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
+NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
+LTExLTA1IDIxOjEzOjExIFogICAxMiBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
+MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgMTEgZGF5cyAgMTIyIGF0dGVtcHRzClRlc3Rpbmcgc2Ft
+ZSBzaW5jZSAgIDEzMDEyMCAgMjAxOC0xMS0xNSAxNDo0MTowMyBaICAgIDMgZGF5cyAgIDQ0IGF0
+dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFy
+ZCBCaWVzaGV1dmVsIDxhcmQuYmllc2hldXZlbEBsaW5hcm8ub3JnPgogIERhbmRhbiBCaSA8ZGFu
+ZGFuLmJpQGludGVsLmNvbT4KICBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+CiAgRnUg
+U2l5dWFuIDxzaXl1YW4uZnVAaW50ZWwuY29tPgogIEhhbyBXdSA8aGFvLmEud3VAaW50ZWwuY29t
+PgogIEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgSmlheGluIFd1IDxKaWF4
+aW4ud3VAaW50ZWwuY29tPgogIEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgogIExh
+c3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgTGltaW5nIEdhbyA8bGltaW5nLmdhb0Bp
+bnRlbC5jb20+CiAgTWFyYyBaeW5naWVyIDxtYXJjLnp5bmdpZXJAYXJtLmNvbT4KICBNaW5nIEh1
+YW5nIDxtaW5nLmh1YW5nQGxpbmFyby5vcmc+CiAgUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNv
+bT4KICBTdGFyIFplbmcgPHN0YXIuemVuZ0BpbnRlbC5jb20+CiAgV3UgSmlheGluIDxqaWF4aW4u
+d3VAaW50ZWwuY29tPgogIHl1Y2hlbmxpbiA8eXVjaGVubGluQHN5bm9sb2d5LmNvbT4KCmpvYnM6
+CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1pMzg2ICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
+IGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBibG9ja2VkIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZv
+cHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
+ICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0
+ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6
+IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJs
+ZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dz
+CgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFs
+LCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
+YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9y
+Zy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBo
+YXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dp
+dHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9u
+IGxvZzsgaXQgd291bGQgYmUgOTExIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
