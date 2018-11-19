@@ -1,24 +1,28 @@
-From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
-Subject: Re: [PATCH v1] x86/hvm: Generic instruction
- re-execution mechanism for execute faults
-Date: Mon, 19 Nov 2018 15:56:14 +0000
-Message-ID: <638d0c37-68aa-6e68-480e-f3c1cc74777d@bitdefender.com>
-References: <20181116100624.21977-1-aisaila@bitdefender.com>
- <20181116170412.xrwuun3cqxll22l3@mac>
- <3d3ae38a-bfae-9908-dac6-163216f900e3@bitdefender.com>
- <20181119150824.lfquw2j2ehhvjbhk@mac>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH V6 4/4] x86/altp2m: fix display frozen when
+ switching to a new view early
+Date: Mon, 19 Nov 2018 15:58:52 +0000
+Message-ID: <43323e2f-e1c1-5fc7-c1b5-8a3b58819718@citrix.com>
+References: <1542228002-21075-1-git-send-email-rcojocaru@bitdefender.com>
+ <1542228002-21075-5-git-send-email-rcojocaru@bitdefender.com>
+ <3603CF64-3679-43F6-A389-E88DAA0BF503@citrix.com>
+ <482be5fb-0406-c203-2664-070a77e329e9@bitdefender.com>
+ <5BEE972D02000078001FCB0D@prv1-mh.provo.novell.com>
+ <62c1f237-9d1d-06f3-49f8-e48be8d38b3f@citrix.com>
+ <6ef4e095-cbd3-3d37-7759-0d3faa720e84@bitdefender.com>
+ <c6e1ee08-0b71-f8f8-5862-94a8d01ac1e1@citrix.com>
+ <e33cad9e-f138-48b0-d12c-5178eea9b6e2@bitdefender.com>
+ <70f50b49-9b7a-13d9-442c-62df33105552@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="------------87940B2DED7D31D6237C500C"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=sw5n=n6=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1gOluN-0002Ed-Lj
- for xen-devel@lists.xenproject.org; Mon, 19 Nov 2018 15:56:19 +0000
-In-Reply-To: <20181119150824.lfquw2j2ehhvjbhk@mac>
+ <srs0=v//2=n6=citrix.com=prvs=8541ae097=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gOlxi-0002SQ-Td
+ for xen-devel@lists.xenproject.org; Mon, 19 Nov 2018 15:59:46 +0000
+In-Reply-To: <70f50b49-9b7a-13d9-442c-62df33105552@bitdefender.com>
 Content-Language: en-US
-Content-ID: <FB8CCA0553EC1B4381BD21E3CD782C40@eurprd02.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,90 +31,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
-Cc: "kevin.tian@intel.com" <kevin.tian@intel.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, =?utf-8?B?TWloYWkgRG9uyJt1?= <mdontu@bitdefender.com>, Andrei Vlad LUTAS <vlutas@bitdefender.com>, "jun.nakajima@intel.com" <jun.nakajima@intel.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Anshul Makkar <anshul.makkar@citrix.com>
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-DQoNCk9uIDE5LjExLjIwMTggMTc6MDgsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6DQo+IE9uIE1v
-biwgTm92IDE5LCAyMDE4IGF0IDAxOjMwOjA5UE0gKzAwMDAsIEFsZXhhbmRydSBTdGVmYW4gSVNB
-SUxBIHdyb3RlOg0KPj4+PiArICAgIC8qIE5vdyB0cmFuc2Zvcm0gb3VyIFJXWCB2YWx1ZXMgaW4g
-YSBYRU5NRU1fYWNjZXNzXyogY29uc3RhbnQuICovDQo+Pj4+ICsgICAgaWYgKCByID09IDAgJiYg
-dyA9PSAwICYmIHggPT0gMCApDQo+Pj4+ICsgICAgICAgIG5ld19hY2Nlc3MgPSBYRU5NRU1fYWNj
-ZXNzX247DQo+Pj4+ICsgICAgZWxzZSBpZiAoIHIgPT0gMCAmJiB3ID09IDAgJiYgeCA9PSAxICkN
-Cj4+Pj4gKyAgICAgICAgbmV3X2FjY2VzcyA9IFhFTk1FTV9hY2Nlc3NfeDsNCj4+Pj4gKyAgICBl
-bHNlIGlmICggciA9PSAwICYmIHcgPT0gMSAmJiB4ID09IDAgKQ0KPj4+PiArICAgICAgICBuZXdf
-YWNjZXNzID0gWEVOTUVNX2FjY2Vzc193Ow0KPj4+PiArICAgIGVsc2UgaWYgKCByID09IDAgJiYg
-dyA9PSAxICYmIHggPT0gMSApDQo+Pj4+ICsgICAgICAgIG5ld19hY2Nlc3MgPSBYRU5NRU1fYWNj
-ZXNzX3d4Ow0KPj4+PiArICAgIGVsc2UgaWYgKCByID09IDEgJiYgdyA9PSAwICYmIHggPT0gMCAp
-DQo+Pj4+ICsgICAgICAgIG5ld19hY2Nlc3MgPSBYRU5NRU1fYWNjZXNzX3I7DQo+Pj4+ICsgICAg
-ZWxzZSBpZiAoIHIgPT0gMSAmJiB3ID09IDAgJiYgeCA9PSAxICkNCj4+Pj4gKyAgICAgICAgbmV3
-X2FjY2VzcyA9IFhFTk1FTV9hY2Nlc3Nfcng7DQo+Pj4+ICsgICAgZWxzZSBpZiAoIHIgPT0gMSAm
-JiB3ID09IDEgJiYgeCA9PSAwICkNCj4+Pj4gKyAgICAgICAgbmV3X2FjY2VzcyA9IFhFTk1FTV9h
-Y2Nlc3Nfcnc7DQo+Pj4+ICsgICAgZWxzZSBpZiAoIHIgPT0gMSAmJiB3ID09IDEgJiYgeCA9PSAx
-ICkNCj4+Pj4gKyAgICAgICAgbmV3X2FjY2VzcyA9IFhFTk1FTV9hY2Nlc3Nfcnd4Ow0KPj4+PiAr
-ICAgIGVsc2UNCj4+Pj4gKyAgICAgICAgbmV3X2FjY2VzcyA9IHJlcXVpcmVkX2FjY2VzczsgLyog
-U2hvdWxkIG5ldmVyIGdldCBoZXJlLiAqLw0KPj4+DQo+Pj4gVGhlcmUgc2VlbXMgdG8gYmUgYSBs
-b3Qgb2YgdHJhbnNsYXRpb24gZnJvbSB4ZW5tZW1fYWNjZXNzX3QgdG8gYm9vbA0KPj4+IGZpZWxk
-cyBhbmQgdGhlbiB0byB4ZW5tZW1fYWNjZXNzX3QgYWdhaW4uIENhbid0IHlvdSBqdXN0IGF2b2lk
-IHRoZQ0KPj4+IGJvb2xlYW5zPw0KPj4NCj4+IFRoZSB0cmFuc2xhdGlvbiBpcyBkb25lIGJlY2F1
-c2UgdGhlIHJpZ2h0cyBhcmUgY3VtdWxhdGl2ZSBhbmQgSSB0aGluaw0KPj4gdGhpcyBpcyB0aGUg
-Y2xlYXIgd2F5IHRvIGRvIHRoaXMuDQo+IA0KPiBTbyB0aGUgc3dpdGNoIGNvbnZlcnRzIHJlcXVp
-cmVkX2FjY2VzcyB1c2luZyB0aGUgZm9sbG93aW5nIHJlbGF0aW9uOg0KPiANCj4gX3IgICAtPiBy
-ID0gMSB3ID0gMCB4ID0gMA0KPiBfdyAgIC0+IHIgPSAwIHcgPSAxIHggPSAwDQo+IF94ICAgLT4g
-ciA9IDAgdyA9IDAgeCA9IDENCj4gX3J4ICAtPiByID0gMSB3ID0gMSB4ID0gMA0KPiBfd3ggIC0+
-IHIgPSAwIHcgPSAxIHggPSAxDQo+IF9ydyAgLT4gciA9IDEgdyA9IDEgeCA9IDANCj4gX3J3eCAt
-PiByID0gMSB3ID0gMSB4ID0gMQ0KPiANCj4gVGhlbiB0aGUgaWYgYmVsb3cgcGVyZm9ybXMgdGhl
-IGZvbGxvd2luZyB0cmFuc2Zvcm1hdGlvbjoNCj4gDQo+IHIgPSAwIHcgPSAwIHggPSAwIC0+IF9u
-DQo+IHIgPSAxIHcgPSAwIHggPSAwIC0+IF9yDQo+IHIgPSAwIHcgPSAxIHggPSAwIC0+IF93DQo+
-IHIgPSAwIHcgPSAwIHggPSAxIC0+IF94DQo+IHIgPSAxIHcgPSAxIHggPSAwIC0+IF9ydw0KPiBy
-ID0gMCB3ID0gMSB4ID0gMSAtPiBfd3gNCj4gciA9IDEgdyA9IDEgeCA9IDAgLT4gX3J3DQo+IHIg
-PSAxIHcgPSAxIHggPSAxIC0+IF9yd3gNCj4gDQo+IEknbSBub3Qgc3VyZSBJIHVuZGVyc3RhbmQg
-dGhpcyBjaHVuayBvZiBjb2RlLCBiZWNhdXNlIHlvdSBlbmQgdXANCj4gZ2V0dGluZyBleGFjdGx5
-IHRoZSBzYW1lIHR5cGUgdGhhdCB5b3UgaGF2ZSBhcyB0aGUgaW5wdXQsIGFuZCBhIHR5cGUNCj4g
-bm90IGxpc3RlZCBoZXJlIGlzIGp1c3Qgc2lsZW50bHkgcGFzc2VkIHRocm91Z2gsIHNvIEkgZG9u
-J3Qgc2VlIHRoZQ0KPiBwb2ludCBpbiBkb2luZyB0aGlzIHRyYW5zZm9ybWF0aW9uLg0KDQpUaGUg
-Zmlyc3Qgc3dpdGNoIGlzIGZvciBjdXJfYWNjZXNzIGFuZCBpdCBzZXRzIHIsdyx4IGFjY29yZGlu
-Z2x5LA0KdGhlIHNlY29uZCBzd2l0Y2ggaXMgcmVxdWlyZWRfYWNjZXNzIHdoZXJlIHIsdyx4IGFy
-ZSBhcHBlbmRlZA0KYW5kIHRoZW4gaW4gdGhlIGxhc3QgaWYoKS4uIHBhcnQgbmV3X2FjY2VzcyBp
-cyBhc3NpZ25lZCBhY2NvcmRpbmcgdG8gdGhlDQpwcmV2aW91cyBhc3NpZ25tZW50cyBvZiByLHcs
-eC4NCg0KPiANCj4+DQo+Pj4+ICAgICAgICBpZiAoIHZtX2V2ZW50X2NoZWNrX3JpbmcoZC0+dm1f
-ZXZlbnRfbW9uaXRvcikgJiYNCj4+Pj4gICAgICAgICAgICAgZC0+YXJjaC5tb25pdG9yLmluZ3Vl
-c3RfcGFnZWZhdWx0X2Rpc2FibGVkICYmDQo+Pj4+IC0gICAgICAgICBucGZlYy5raW5kICE9IG5w
-ZmVjX2tpbmRfd2l0aF9nbGEgKSAvKiBkb24ndCBzZW5kIGEgbWVtX2V2ZW50ICovDQo+Pj4+ICsg
-ICAgICAgICBucGZlYy5raW5kICE9IG5wZmVjX2tpbmRfd2l0aF9nbGEgJiYNCj4+Pj4gKyAgICAg
-ICAgIGh2bV9mdW5jcy5zdGFydF9yZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24gKSAvKiBkb24ndCBzZW5k
-IGEgbWVtX2V2ZW50ICovDQo+Pj4+ICAgICAgICB7DQo+Pj4+IC0gICAgICAgIGh2bV9lbXVsYXRl
-X29uZV92bV9ldmVudChFTVVMX0tJTkRfTk9STUFMLCBUUkFQX2ludmFsaWRfb3AsIFg4Nl9FVkVO
-VF9OT19FQyk7DQo+Pj4+IC0NCj4+Pj4gKyAgICAgICAgdi0+YXJjaC52bV9ldmVudC0+ZW11bGF0
-ZV9mbGFncyA9IDA7DQo+Pj4+ICsgICAgICAgIGh2bV9mdW5jcy5zdGFydF9yZWV4ZWN1dGVfaW5z
-dHJ1Y3Rpb24odiwgZ3BhLCBYRU5NRU1fYWNjZXNzX3J3KTsNCj4+Pj4gICAgICAgICAgICByZXR1
-cm4gdHJ1ZTsNCj4+Pj4gICAgICAgIH0NCj4+Pg0KPj4+IERvbid0IHlvdSBuZWVkIHRvIGZhbGxi
-YWNrIHRvIHVzaW5nIGh2bV9lbXVsYXRlX29uZV92bV9ldmVudCBpZg0KPj4+IHN0YXJ0X3JlZXhl
-Y3V0ZV9pbnN0cnVjdGlvbiBpcyBub3QgYXZhaWxhYmxlPw0KPj4NCj4+IEZhbGxiYWNrIHdpdGgg
-aHZtX2VtdWxhdGVfb25lX3ZtX2V2ZW50IGNhbiByZXN1bHQgaW4gbG9vc2luZyBldmVudHMuDQo+
-IA0KPiBCdXQgYnkgY2hhbmdpbmcgdGhpcyBoZXJlIHVuY29uZGl0aW9uYWxseSB5b3UgYXJlIHJl
-bW92aW5nIHRoaXMNCj4gZnVuY3Rpb25hbGl0eSBvbiBBTUQgaGFyZHdhcmUsIHdoaWNoIGl0IHVz
-ZWQgdG8gaGF2ZSBiZWZvcmUgYnkgbWFraW5nDQo+IHVzZSBvZiBodm1fZW11bGF0ZV9vbmVfdm1f
-ZXZlbnQuDQo+IA0KPiBJIHRoaW5rIHRoaXMgbmVlZHMgdG8gYXQgbGVhc3QgYmUgd3JpdHRlbiBp
-biB0aGUgY29tbWl0IG1lc3NhZ2UuDQoNCkZvciBBTUQgSSBjb3VsZCBhZGQgaWYgKGNwdV9oYXNf
-c3ZtKCkpIGFuZCBjYWxsIGVtdWxhdGVfb25lX3ZtX2V2ZW50LiANCkludHJvc3BlY3Rpb24gd2lz
-ZSBsb29zaW5nIHZhbHVhYmxlIGluZm8gaXMgbm90IGEgZ29vZCB0aGluZyB0byBoYXZlIA0KYmVj
-YXVzZSBpdCBjb3VsZCByZXN1bHQgaW4gc2VjdXJpdHkgYnJlYWNoLg0KDQo+IA0KPj4+PiArICAg
-ICAgICBmb3JfZWFjaF92Y3B1KGQsIHYpDQo+Pj4+ICsgICAgICAgIHsNCj4+Pj4gKyAgICAgICAg
-ICAgIGlmICggIXYtPmFyY2gucmV4ZWNfbGV2ZWwgKQ0KPj4+PiArICAgICAgICAgICAgICAgIGNv
-bnRpbnVlOw0KPj4+PiArDQo+Pj4+ICsgICAgICAgICAgICBmb3IgKCBpID0gdi0+YXJjaC5yZXhl
-Y19sZXZlbCAtIDE7IGkgPj0gMDsgaS0tICkNCj4+Pg0KPj4+IElzIHRoZXJlIGFueSByZWFzb24g
-dGhpcyBoYXMgdG8gYmUgZG9uZSBiYWNrd2FyZHM/DQo+Pj4NCj4+PiBJZiB5b3UgZG8gaXQgZnJv
-bSAwIHRvIHYtPmFyY2gucmV4ZWNfbGV2ZWwgeW91IGNvdWxkIHVzZSBhbiB1bnNpZ25lZA0KPj4+
-IGludCBhcyB0aGUgaW5kZXguDQo+Pg0KPj4gVGhpcyBpcyBkb25lIGJhY2t3YXJkcyBiZWNhdXNl
-IG9mIHRoZSBjb3JyZXNwb25kaW5nIGNvZGUgaW4NCj4+IHZteF9zdG9wX3JlZXhlY3V0ZV9pbnN0
-cnVjdGlvbigpIGJ1dCBoZXJlIGl0IGNhbiBiZSB0dXJuZWQgdGhlIG90aGVyIHdheQ0KPj4gaWYg
-eW91IGluc2lzdCBvbiBpIHRvIGJlIHVuc2lnbmVkLg0KPiANCj4gWWVzLCBKYW4gaGFzIGFsc28g
-c3VnZ2VzdGVkIGEgd2F5IHRvIG1ha2UgaSB1bnNpZ25lZCB3aGlsZSBrZWVwaW5nIHRoZQ0KPiBs
-b29wIGJhY2t3YXJkcywgYnV0IEkgZG9uJ3Qgc2VlIHRoZSBwb2ludCBvZiBwZXJmb3JtaW5nIHRo
-ZSBsb29wDQo+IGJhY2t3YXJkcyBpZiB0aGVyZSdzIG5vIG5lZWQuDQo+IA0KDQpUaGVyZSBpcyBu
-byBwcm9ibGVtIGhlcmUsIEkgY2FuIGNoYW5nZSBpdCBpbiB0aGUgbmV4dCB2ZXJzaW9uLg0KDQpS
-ZWdhcmRzLA0KQWxleA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+--------------87940B2DED7D31D6237C500C
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 11/17/18 6:58 PM, Razvan Cojocaru wrote:
+> On 11/16/18 9:50 PM, Razvan Cojocaru wrote:
+>> On 11/16/18 7:59 PM, George Dunlap wrote:
+>>> On the other hand, we want the logdirty rangesets to actually match the
+>>> host's rangesets; using altp2m->max_mapped_pfn for this is clearly
+>>> wrong. The easiest fix would be just to explicitly use the host's
+>>> max_mapped_pfn when calculating the clipping.  A more complete fix would
+>>> involve calculating two different ranges -- a "rangeset" range and a
+>>> "invalidate" range, the second of which would be clipped on altp2ms by
+>>> {min,max}_remapped_gfn.
+>>>
+>>> Something like the attached (compile-tested only).  I'm partial to
+>>> having both patches applied, but I'd be open to arguments that we should
+>>> only use the first.
+>>
+>> Thanks! I haven't yet been able to think in depth about the logic, but I
+>> did manage to apply them. Just applying the first one allows me to set
+>> p2m->max_mapped_pfn = 0; without the ASSERT() crashing the hypervisor,
+>> and everything appears to work well.
+>>
+>> With both patches applies, the display remains frozen (things appear to
+>> behave - externally - in the same way as before the series).
+> 
+> Right, I know why the second patch keeps the display frozen. It's
+> because for altp2ms (where it matters most), the patch basically does
+> invalidate_start = max(invalidate_start, p2m->min_remapped_gfn) and
+> invalidate_end = min(invalidate_end, p2m->max_remapped_gfn).
+> 
+> However, as previously requested, I've now made p2m->max_remapped_gfn
+> begin life as 0 for altp2ms, and p2m->min_remapped_gfn is initialized to
+> INVALID_GFN, which is decimal 18446744073709551615. So we get
+> invalidate_end: 0, invalidate_start: 18446744073709551615,
+> invalidate_end < invalidate_start, resulting in nothing being done for
+> altp2ms, which is functionally back to square one.
+
+But this doesn't explain why my reasoning was wrong; and it's always
+dangerous to use a system whose behavior you don't really understand,
+even if it seems to work.
+
+It turns out I'd made a mistake in saying that altp2m->max_mapped_pfn ==
+alt2m->max_remapped_gfn.  The first is the highest gfn present in the
+altp2m, either copied from the hostp2m or changed; the second is the
+highest value changed (via p2m_altp2m_change_gfn()).
+
+What about using the attached patch instead?
+
+ -George
+
+--------------87940B2DED7D31D6237C500C
+Content-Type: text/x-patch;
+	name="0002-p2m-change_range_type-Only-invalidate-mapped-gfns.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="0002-p2m-change_range_type-Only-invalidate-mapped-gfns.patch"
+
+=46rom f4c72ecb95cfa5d597b8e28e99e681cfeaa32199 Mon Sep 17 00:00:00 2001
+From: George Dunlap <george.dunlap@citrix.com>
+Date: Fri, 16 Nov 2018 16:28:25 +0000
+Subject: [PATCH 2/2] p2m: change_range_type: Only invalidate mapped gfns
+
+change_range_type() invalidates gfn ranges to lazily change the type
+of a range of gfns, and also modifies the logdirty rangesets of that
+p2m. At the moment, it clips both down by the hostp2m.
+
+While this will result in correct behavior, it's not entirely efficient,
+since invalidated entries outside that range will, on fault, simply be
+modified back to "empty" before faulting normally again.
+
+Separate out the calculation of the two ranges.  Keep using the
+hostp2m's max_mapped_pfn to clip the logdirty ranges, but use the
+current p2m's max_mapped_pfn to further clip the invalidation range
+for alternate p2ms.
+
+Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+---
+ xen/arch/x86/mm/p2m.c | 61 +++++++++++++++++++++++++++++--------------
+ 1 file changed, 42 insertions(+), 19 deletions(-)
+
+diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
+index 6d764d1e22..b97e138452 100644
+--- a/xen/arch/x86/mm/p2m.c
++++ b/xen/arch/x86/mm/p2m.c
+@@ -1043,41 +1043,64 @@ static void change_type_range(struct p2m_domain *=
+p2m,
+                               p2m_type_t ot, p2m_type_t nt)
+ {
+     unsigned long rangeset_start, rangeset_end;
++    unsigned long invalidate_start, invalidate_end;
+     struct domain *d =3D p2m->domain;
+     unsigned long host_max_pfn =3D p2m_get_hostp2m(d)->max_mapped_pfn;
++    unsigned long max_pfn =3D p2m->max_mapped_pfn;
+     int rc =3D 0;
+    =20
+-    rangeset_start =3D start;
+-    rangeset_end   =3D end - 1;
++    /*=20
++     * If we have an altp2m, the logdirty rangeset range needs to
++     * match that of the hostp2m, but for efficiency, we want to clip
++     * down the the invalidation range according to the mapped values
++     * in the altp2m.  Keep track of and clip the ranges separately.
++     */
++    rangeset_start =3D invalidate_start =3D start;
++    rangeset_end   =3D invalidate_end   =3D end - 1;
+    =20
+-    /* Always clip the rangeset down to the host p2m */
++    /* Clip down to the host p2m */
+     if ( unlikely(rangeset_end > host_max_pfn) )
+-        rangeset_end =3D host_max_pfn;
++        rangeset_end =3D invalidate_end =3D host_max_pfn;
+        =20
+     /* If the requested range is out of scope, return doing nothing */
+     if ( rangeset_start > rangeset_end )
+         return;
+            =20
++    if ( p2m_is_altp2m(p2m) )
++        invalidate_end =3D min(invalidate_end, max_pfn);
++       =20
+     p2m->defer_nested_flush =3D 1;
+=20
+     /*=20
+-     * If all valid gfns are in the invalidation range, just do a
+-     * global type change.  Otherwise, invalidate only the range we
+-     * need.
++     * If the p2m is empty, or the range is outside the currently
++     * mapped range, no need to do the invalidation; just update the
++     * rangeset.
+      */
+-    if ( !rangeset_start && rangeset_end >=3D p2m->max_mapped_pfn)
+-        p2m->change_entry_type_global(p2m, ot, nt);
+-    else
+-        rc =3D p2m->change_entry_type_range(p2m, ot, nt,
+-                                          rangeset_start, rangeset_end);=
+
+-   =20
+-    if ( rc )
+-    {
+-        printk(XENLOG_G_ERR "Error %d changing Dom%d GFNs [%lx,%lx] from=
+ %d to %d\n",
+-               rc, d->domain_id, rangeset_start, rangeset_end, ot, nt);
+-        domain_crash(d);
++    if ( invalidate_start < invalidate_end )
++    {
++        /*=20
++         * If all valid gfns are in the invalidation range, just do a
++         * global type change.  Otherwise, invalidate only the range
++         * we need. =20
++         *
++         * NB that invalidate_end can't logically be >max_pfn at this
++         * point.  If this changes, the =3D=3D will need to be changed t=
+o
++         * >=3D.
++         */
++        ASSERT(invalidate_end <=3D max_pfn);
++        if ( !invalidate_start && invalidate_end =3D=3D max_pfn)
++            p2m->change_entry_type_global(p2m, ot, nt);
++        else
++            rc =3D p2m->change_entry_type_range(p2m, ot, nt,
++                                              invalidate_start, invalida=
+te_end);
++        if ( rc )
++        {
++            printk(XENLOG_G_ERR "Error %d changing Dom%d GFNs [%lx,%lx] =
+from %d to %d\n",
++                   rc, d->domain_id, invalidate_start, invalidate_end, o=
+t, nt);
++            domain_crash(d);
++        }
+     }
+-
++   =20
+     switch ( nt )
+     {
+     case p2m_ram_rw:
+--=20
+2.19.1
+
+
+--------------87940B2DED7D31D6237C500C
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--------------87940B2DED7D31D6237C500C--
