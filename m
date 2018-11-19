@@ -1,15 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] libx86: Work around GCC bug with ebx output
- constrants
-Date: Mon, 19 Nov 2018 14:33:06 +0000
-Message-ID: <b4d259ec-0d51-ac29-4341-a94bd78163ef@citrix.com>
-References: <1542633088-11101-1-git-send-email-andrew.cooper3@citrix.com>
- <5BF2BFDE02000078001FD7D2@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/msr: Handle
+ MSR_AMD64_DR{0-3}_ADDRESS_MASK in the new MSR infrastructure
+Date: Mon, 19 Nov 2018 07:35:34 -0700
+Message-ID: <5BF2CA3602000078001FD83C@prv1-mh.provo.novell.com>
+References: <1542375677-6092-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4248395736723255128=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5BF2BFDE02000078001FD7D2@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <1542375677-6092-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,95 +18,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4248395736723255128==
-Content-Type: multipart/alternative;
-	boundary="------------6C03F2E0CE8765280FDCC1D6"
-Content-Language: en-GB
-
---------------6C03F2E0CE8765280FDCC1D6
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-On 19/11/2018 13:51, Jan Beulich wrote:
->>  static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
->>  {
->> -    asm ( "cpuid"
->> -          : "=a" (l->a), "=b" (l->b), "=c" (l->c), "=d" (l->d)
->> +    asm ( XCHG_BX
->> +          "cpuid;"
->> +          XCHG_BX
->> +          : "=a" (l->a), BX_CON (l->b), "=c" (l->c), "=d" (l->d)
-> Strictly speaking all other outputs also need to use =& in the
-> 32-bit case. But I wouldn't insist on such an adjustment. With
-> the others done
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-
-Using =& for the constraints which also have inputs results "operand has
-impossible constraints"
-
-It should only matter for the output-only operands, to prevent GCC
-allocating %[er]dx for the bx constraint, but that shouldn't matter
-anyway because =&r can't be allocated to conflict with =d
-
-~Andrew
-
---------------6C03F2E0CE8765280FDCC1D6
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 19/11/2018 13:51, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5BF2BFDE02000078001FD7D2@prv1-mh.provo.novell.com">
-      <blockquote type="cite" style="color: #000000;">
-        <pre class="moz-quote-pre" wrap=""> static inline void cpuid_leaf(uint32_t leaf, struct cpuid_leaf *l)
- {
--    asm ( "cpuid"
--          : "=a" (l-&gt;a), "=b" (l-&gt;b), "=c" (l-&gt;c), "=d" (l-&gt;d)
-+    asm ( XCHG_BX
-+          "cpuid;"
-+          XCHG_BX
-+          : "=a" (l-&gt;a), BX_CON (l-&gt;b), "=c" (l-&gt;c), "=d" (l-&gt;d)
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">Strictly speaking all other outputs also need to use =&amp; in the
-32-bit case. But I wouldn't insist on such an adjustment. With
-the others done
-Reviewed-by: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com" moz-do-not-send="true">&lt;jbeulich@suse.com&gt;</a>
-</pre>
-    </blockquote>
-    <br>
-    Using =&amp; for the constraints which also have inputs results
-    "operand has impossible constraints"<br>
-    <br>
-    It should only matter for the output-only operands, to prevent GCC
-    allocating %[er]dx for the bx constraint, but that shouldn't matter
-    anyway because =&amp;r can't be allocated to conflict with =d<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------6C03F2E0CE8765280FDCC1D6--
-
-
---===============4248395736723255128==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4248395736723255128==--
+Pj4+IE9uIDE2LjExLjE4IGF0IDE0OjQxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gVGhpcyBpcyBhIGZvbGxvd3VwIHRvIGMvcyA5NmYyMzVjMjYgd2hpY2ggZnVsZmlscyB0
+aGUgcmVtYWluaW5nIFRPRE8gaXRlbS4KPiAKPiBGaXJzdCBvZiBhbGwsIHRoZSBwcmUtZXhpc3Rp
+bmcgU1ZNIGNvZGUgaGFzIGEgYnVnLiAgVGhlIHZhbHVlIGluCj4gbXNycy0+ZHJfbWFza1tdIG1h
+eSBiZSBzdGFsZSwgYXMgd2UgYWxsb3cgZGlyZWN0IGFjY2VzcyB0byB0aGVzZSBNU1JzLgo+IFJl
+c29sdmUgdGhpcyBpbiBndWVzdF9yZG1zcigpIGJ5IHJlYWRpbmcgZGlyZWN0bHkgZnJvbSBoYXJk
+d2FyZSBpbiB0aGUKPiBhZmZlY3RlZCBjYXNlLgo+IAo+IFdpdGggdGhlIHJlYWRpbmcvd3JpdGlu
+ZyBsb2dpYyBtb3ZlZCB0byB0aGUgY29tbW9uIGd1ZXN0X3tyZCx3cn1tc3IoKQo+IGluZnJhc3Ry
+dWN0dXJlLCB0aGUgbWlncmF0aW9uIGxvZ2ljIGNhbiBiZSBzaW1wbGlmaWVkLiAgVGhlIFBWIG1p
+Z3JhdGlvbiBsb2dpYwo+IGRyb3BzIGFsbCBvZiBpdHMgc3BlY2lhbCBjYXNpbmcsIGFuZCBTVk0n
+cyBlbnRpcmUge2luaXQsc2F2ZSxsb2FkfV9tc3IoKQo+IGluZnJhc3RydWN0dXJlIGJlY29tZXMg
+dW5uZWNlc3NhcnkuCj4gCj4gVGhlIHJlc3VsdGluZyBkaWZmc3RhdCBzaG93cyBxdWl0ZSBob3cg
+ZXhwZW5zaXZlIHRoZSBQViBzcGVjaWFsIGNhc2VzIHdoZXJlIGluCj4gYXJjaF9kb19kb21jdGwo
+KS4KPiAKPiAgIGFkZC9yZW1vdmU6IDAvMyBncm93L3NocmluazogNC82IHVwL2Rvd246IDQ2NS8t
+MTQ5NCAoLTEwMjkpCj4gICBGdW5jdGlvbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBvbGQgICAgIG5ldyAgIGRlbHRhCj4gICBndWVzdF9yZG1zciAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAyNTIgICAgIDQ4NCAgICArMjMyCj4gICBndWVzdF93cm1zciAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICA2NTMgICAgIDgyMiAgICArMTY5Cj4gICBtc3Jz
+X3RvX3NlbmQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDggICAgICA0OCAgICAg
+KzQwCj4gICBodm1fbG9hZF9jcHVfbXNycyAgICAgICAgICAgICAgICAgICAgICAgICAgICA0ODkg
+ICAgIDUxMyAgICAgKzI0Cj4gICBzdm1faW5pdF9tc3IgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgMjEgICAgICAgLSAgICAgLTIxCj4gICBodm1fc2F2ZV9jcHVfbXNycyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAzNjUgICAgIDM0MyAgICAgLTIyCj4gICByZWFkX21zciAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDEwODkgICAgMTAwMSAgICAgLTg4Cj4gICB3
+cml0ZV9tc3IgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE4MjkgICAgMTY4OSAg
+ICAtMTQwCj4gICBzdm1fbXNyX3JlYWRfaW50ZXJjZXB0ICAgICAgICAgICAgICAgICAgICAgIDEx
+MjQgICAgIDk3MCAgICAtMTU0Cj4gICBzdm1fbG9hZF9tc3IgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAxOTUgICAgICAgLSAgICAtMTk1Cj4gICBzdm1fc2F2ZV9tc3IgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAxOTYgICAgICAgLSAgICAtMTk2Cj4gICBzdm1fbXNyX3dy
+aXRlX2ludGVyY2VwdCAgICAgICAgICAgICAgICAgICAgIDE0NjEgICAgMTI2NSAgICAtMTk2Cj4g
+ICBhcmNoX2RvX2RvbWN0bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDk1ODEgICAgOTA5
+OSAgICAtNDgyCj4gICBUb3RhbDogQmVmb3JlPTMzMTQ2MTAsIEFmdGVyPTMzMTM1ODEsIGNoZyAt
+MC4wMyUKPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0Bj
+aXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
