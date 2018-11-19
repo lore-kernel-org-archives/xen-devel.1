@@ -1,20 +1,28 @@
-From: Pavel Machek <pavel@ucw.cz>
-Subject: Re: [PATCH v1 7/8] PM / Hibernate: use
- pfn_to_online_page()
-Date: Mon, 19 Nov 2018 14:16:53 +0100
-Message-ID: <20181119131653.GA27556__1480.86856720528$1542633346$gmane$org@amd>
-References: <20181119101616.8901-1-david@redhat.com>
- <20181119101616.8901-8-david@redhat.com>
+From: Chao Gao <chao.gao@intel.com>
+Subject: Re: [PATCH v2] xen/pt: fix some pass-thru devices don't
+ work across reboot
+Date: Mon, 19 Nov 2018 21:20:57 +0800
+Message-ID: <20181119132055.GA19865@gao-cwp>
+References: <1542244226-35003-1-git-send-email-chao.gao@intel.com>
+ <20181115104039.geyiusafhsq4q7x4@mac>
+ <20181116075348.GA6684@gao-cwp>
+ <20181116093529.4ucjehnm75tulsdq@mac>
+ <5BEE950D02000078001FCAFA@prv1-mh.provo.novell.com>
+ <20181116143011.z6ydirxyxlf4migk@mac>
+ <20181119124519.GA18130@gao-cwp>
+ <5BF2B2AC02000078001FD75D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4687955112231350195=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=lwbq=N6=ucw.cz=pavel@srs-us1.protection.inumbo.net>)
- id 1gOjQ9-00041n-CT
- for xen-devel@lists.xenproject.org; Mon, 19 Nov 2018 13:16:57 +0000
-In-Reply-To: <20181119101616.8901-8-david@redhat.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Eeom=N6=intel.com=chao.gao@srs-us1.protection.inumbo.net>)
+ id 1gOjQZ-00043b-5b
+ for xen-devel@lists.xenproject.org; Mon, 19 Nov 2018 13:17:23 +0000
+Content-Disposition: inline
+In-Reply-To: <5BF2B2AC02000078001FD75D@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,58 +31,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: David Hildenbrand <david@redhat.com>
-Cc: Len Brown <len.brown@intel.com>, Michal Hocko <mhocko@suse.com>, linux-pm@vger.kernel.org, pv-drivers@vmware.com, "Rafael J. Wysocki" <rjw@rjwysocki.net>, linux-doc@vger.kernel.org, kexec-ml <kexec@lists.infradead.org>, linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>, linux-mm@kvack.org, "Michael S. Tsirkin" <mst@redhat.com>, xen-devel@lists.xenproject.org, linux-fsdevel@vger.kernel.org, devel@linuxdriverproject.org, Andrew Morton <akpm@linux-foundation.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4687955112231350195==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="PNTmBPCT7hxwcZjr"
-Content-Disposition: inline
-
-
---PNTmBPCT7hxwcZjr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon 2018-11-19 11:16:15, David Hildenbrand wrote:
-> Let's use pfn_to_online_page() instead of pfn_to_page() when checking
-> for saveable pages to not save/restore offline memory sections.
->=20
-> Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
-
-Acked-by: Pavel Machek <pavel@ucw.cz>
-
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
-
---PNTmBPCT7hxwcZjr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAlvyt8UACgkQMOfwapXb+vKC6ACeIzp6Bg+hmUwQWwjh+ih57//k
-JAoAoJFh/JwjaBISFtEww2yg/SP3hHMv
-=Xcas
------END PGP SIGNATURE-----
-
---PNTmBPCT7hxwcZjr--
-
-
---===============4687955112231350195==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4687955112231350195==--
+T24gTW9uLCBOb3YgMTksIDIwMTggYXQgMDU6NTU6MDhBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4+Pj4gT24gMTkuMTEuMTggYXQgMTM6NDUsIDxjaGFvLmdhb0BpbnRlbC5jb20+IHdyb3Rl
+Ogo+PiBBbm90aGVyIHNvbHV0aW9uIGNhbWUgdG8gbXkgbWluZDoKPj4gCj4+IFRoZSBpbnRlbnRp
+b24gb2YgWGVuIHNldHRpbmcgJ2hvc3RfbWFza2FsbCcgaXMgdG8gbWFzayBhIHNpbmdsZSB2ZWN0
+b3IuIEhvdwo+PiBhYm91dCBjb252ZXJ0aW5nIHRoZSBob3N0X21hc2thbGwgdG8gbWFzayBhbGwg
+dmVjdG9ycyB3aGVuIFhlbiB0cmllcyB0byBpbml0IAo+PiB0aGUgZmlyc3QgdmVjdG9yIGluIG1z
+aXhfY2FwYWJpbGl0eV9pbml0KCk/IEFjdHVhbGx5LCBvbiBoYXJkd2FyZSwgYWxsCj4+IHZlY3Rv
+cidzIG1hc2sgYml0IGlzIGFscmVhZHkgc2V0IHdoZW4gcGNpYmFjayBpcyBwZXJmb3JtaW5nIGRl
+dmljZSByZXNldC4gU28KPj4gaXQgd29uJ3QgYnJlYWsgYW55dGhpbmcuIFdpdGggY29tbWl0IDY5
+ZDk5ZDFiMjIzLCBldmVuIGEgZ3Vlc3QgaGFzIGNsZWFyZWQKPj4gc29tZSB2ZWN0b3JzJyBtYXNr
+IGJpdCBiZWZvcmUgdGhlIGNvbnZlcnRpb24sIGl0IHdvbid0IGJlIGFuIGlzc3VlLgo+Cj5CdXQg
+d2UgYWxyZWFkeSBtYXNrIHZlY3RvcnMgaW4gbXNpeF9jYXBhYmlsaXR5X2luaXQoKS4gSSB0aG91
+Z2h0IHdlIGhhZAo+YWxyZWFkeSBzZXR0bGVkIHRoYXQgaWYgd2UgY2FtZSB0aHJvdWdoIHRoaXMg
+ZnVuY3Rpb24gYmVmb3JlIGFzc2lnbmluZwo+dGhlIGRldmljZSB0byBhIChuZXcgb3Igc2FtZS9y
+ZXN0YXJ0aW5nKSBndWVzdCwgYWxsIG91Z2h0IHRvIGJlIGZpbmU6Cj5XaGVuIHdlIGNvbWUgaGVy
+ZSBmb3IgdGhlIGZpcnN0IGVudHJ5LCB3ZSBhbHNvIHR1cm4gb2ZmIGhvc3RfbWFza2FsbC4KClll
+cywgaXQgaXMgcmVhc29uYWJsZS4KCj5UaGF0J3Mgd2h5IHdlJ3ZlIGJlZW4gc3VnZ2VzdGluZyB0
+byBnbyB0aHJvdWdoIGEgcmVsZWFzZS9wcmVwYXJlCj5jeWNsZS4KCldpbGwgZm9sbG93IHlvdXIg
+c3VnZ2VzdGlvbi4KClRoYW5rcwpDaGFvCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
