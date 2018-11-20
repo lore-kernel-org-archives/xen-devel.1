@@ -1,18 +1,16 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 130576: trouble:
- blocked/broken/pass
-Date: Tue, 20 Nov 2018 06:00:45 +0000
-Message-ID: <osstest-130576-mainreport@xen.org>
+From: "Chen, Farrah" <farrah.chen@intel.com>
+Subject: Xen make grub error
+Date: Tue, 20 Nov 2018 06:45:19 +0000
+Message-ID: <1B925CC0CD9F3341B32D442251E7E1DC3D86D718@shsmsx102.ccr.corp.intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4209648467042661586=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=8g5+=N7=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gOz5l-0001Wy-1w
- for xen-devel@lists.xenproject.org; Tue, 20 Nov 2018 06:00:57 +0000
+ <srs0=kvi+=n7=intel.com=farrah.chen@srs-us1.protection.inumbo.net>)
+ id 1gOzmo-0004Sx-Ol
+ for xen-devel@lists.xenproject.org; Tue, 20 Nov 2018 06:45:26 +0000
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,179 +19,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "bug-grub@gnu.org" <bug-grub@gnu.org>, "Hao, Xudong" <xudong.hao@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMDU3NiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMDU3Ni8KCkZhaWx1cmVzIGFu
-ZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFu
-ZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgog
-YnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAg
-ICAgIGJyb2tlbgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwo
-NCkgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMwMjg5CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1
-Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAg
-ICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2
-NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3Vw
-cG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwg
-ICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFz
-cwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDM5
-NjExZmRlZTVkMTM4ZDRkMzlkYzk5NzA1MWMzYTdkZDIzYjZkZjkKYmFzZWxpbmUgdmVyc2lvbjoK
-IHhlbiAgICAgICAgICAgICAgICAgIDkwMWFiZmVmNWRlMTQ5NTQ2YjE2ZmJhNmY0ZDViZDdkZWYw
-OGM2NzIKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzMDI4OSAgMjAxOC0xMS0xNyAxMTowMDozNiBa
-ICAgIDIgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzA0OTAgIDIwMTgtMTEtMTkgMDk6MDA6
-MjcgWiAgICAwIGRheXMgICAgNyBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMzA1NjIg
-IDIwMTgtMTEtMjAgMDA6MDE6MjIgWiAgICAwIGRheXMgICAgMiBhdHRlbXB0cwoKLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3Bs
-ZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRy
-ZXcuY29vcGVyM0BjaXRyaXguY29tPgogIERvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNv
-bT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgV2VpIExpdSA8d2VpLmxpdTJA
-Y2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJt
-aGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14c20g
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9n
-cy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBo
-dHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0
-aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAg
-ICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1S
-RUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/
-cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29k
-ZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3Nz
-dGVzdC5naXQ7YT1zdW1tYXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFybTY0LXhzbSBicm9rZW4KYnJv
-a2VuLXN0ZXAgYnVpbGQtYXJtNjQteHNtIGhvc3QtaW5zdGFsbCg0KQoKTm90IHB1c2hpbmcuCgot
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0KY29tbWl0IDM5NjExZmRlZTVkMTM4ZDRkMzlkYzk5NzA1MWMzYTdkZDIzYjZkZjkKQXV0aG9y
-OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpEYXRlOiAgIE1vbiBO
-b3YgMTkgMjE6MTY6MjggMjAxOCArMDAwMAoKICAgIGF1dG9tYXRpb246IEFkZCAzMmJpdCBEZWJp
-YW4gSmVzc2llIGJ1aWxkcwogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxh
-bmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUy
-QGNpdHJpeC5jb20+CiAgICBbIHdlaTogcmViYXNlIF0KICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBM
-aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpjb21taXQgMjE5ZmM0ODQwYTc5MzAzMGY3NjNjYmYz
-Y2RkNmI2NjYwNjAxYjNlYQpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNp
-dHJpeC5jb20+CkRhdGU6ICAgTW9uIE5vdiAxOSAxNjowMToyMCAyMDE4ICswMDAwCgogICAgYXV0
-b21hdGlvbjogQWRkIGEgMzJiaXQgRGViaWFuIEplc3NpZSBkb2NrZXJmaWxlCiAgICAKICAgIFNp
-Z25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAg
-ICBBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmNvbW1pdCBkNGY1MDdl
-NTVkNDRhODgyNzUzMDA3YjAxZmI5NzM3ODRlNzNlNGI5CkF1dGhvcjogV2VpIExpdSA8d2VpLmxp
-dTJAY2l0cml4LmNvbT4KRGF0ZTogICBGcmkgTm92IDE2IDEzOjAzOjU5IDIwMTggKzAwMDAKCiAg
-ICBhdXRvbWF0aW9uOiBwcm9wZXJseSB0YWcgeDg2IGpvYnMgaW4gR2l0bGFiIENJCiAgICAKICAg
-IFNpbmNlIHdlIGhhdmUgaW50cm9kdWNlZCBhcm02NCB2YXJpYW50cywgd2UnZCBiZXR0ZXIgc3Rh
-cnQgdGFnZ2luZyB0aGUKICAgIG9sZCBvbmVzLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgogICAgQWNrZWQtYnk6IERvdWcgR29sZHN0ZWluIDxj
-YXJkb2VAY2FyZG9lLmNvbT4KCmNvbW1pdCA3NWM4MDM3YzFlNDZmOTExNzUxOGU0NTE2OTNiNWRk
-YjRmN2IzNGI5CkF1dGhvcjogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KRGF0ZTogICBG
-cmkgTm92IDE2IDEyOjU0OjAzIDIwMTggKzAwMDAKCiAgICBhdXRvbWF0aW9uOiBpbnRyb2R1Y2Ug
-c29tZSBSQU5EQ09ORklHIHRlc3RzCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdl
-aS5saXUyQGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBj
-YXJkb2UuY29tPgoKY29tbWl0IDk4OGViYmVmYzJhNTUwZmY4Mzk3ZjY1YjBhMmRjMThmNGU3MmY0
-NzQKQXV0aG9yOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpEYXRlOiAgIEZyaSBOb3Yg
-MTYgMTE6NDA6NTYgMjAxOCArMDAwMAoKICAgIGF1dG9tYXRpb246IHJlZmFjdG9yIGdpdGxhYi1j
-aS55YW1sCiAgICAKICAgIFVzZSB0aGUgImV4dGVuZHMiIGtleXdvcmQgaW50cm9kdWNlZCBpbiAx
-MS4zIHRvIHJlZHVjZSByZXBldGl0aW9uIGluCiAgICBqb2JzLiBNb3JlIGltcG9ydGFudGx5LCB0
-aGlzIGhlbHBzIHVzIGJldHRlciBvcmdhbmlzZSB0aGUgcHJvcGVydGllcwogICAgb2Ygam9icy4K
-ICAgIAogICAgU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KICAg
-IEFja2VkLWJ5OiBEb3VnIEdvbGRzdGVpbiA8Y2FyZG9lQGNhcmRvZS5jb20+Cgpjb21taXQgNzNl
-ZTU1NzQwODRiOWJmYTYxOTRjMTA5NmNiMWU0Y2U3NmZlZGIzZgpBdXRob3I6IEFuZHJldyBDb29w
-ZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CkRhdGU6ICAgTW9uIE5vdiAxOSAxMzowMzow
-MiAyMDE4ICswMDAwCgogICAgbGlieDg2OiBXb3JrIGFyb3VuZCBHQ0MgYmVpbmcgdW5hYmxlIHRv
-IHNwaWxsIHRoZSBQSUMgaGFyZCByZWdpc3RlcgogICAgCiAgICBWZXJzaW9ucyBvZiBHQ0MgYmVm
-b3JlIDUgY2FuJ3QgY29tcGlsZSBjcHVpZC5jLCBhbmQgZmFpbCB3aXRoIHRoZSByYXRoZXIgY3J5
-cHRpYzoKICAgIAogICAgICBJbiBmaWxlIGluY2x1ZGVkIGZyb20gbGliL3g4Ni9jcHVpZC5jOjM6
-MDoKICAgICAgbGliL3g4Ni9jcHVpZC5jOiBJbiBmdW5jdGlvbiDigJh4ODZfY3B1aWRfcG9saWN5
-X2ZpbGxfbmF0aXZl4oCZOgogICAgICBpbmNsdWRlL3hlbi9saWIveDg2L2NwdWlkLmg6MjU6NTog
-ZXJyb3I6IGluY29uc2lzdGVudCBvcGVyYW5kIGNvbnN0cmFpbnRzIGluIGFuIOKAmGFzbeKAmQog
-ICAgICAgICAgIGFzbSAoICJjcHVpZCIKICAgICAgICAgICBeCiAgICAKICAgIFNlZSBodHRwczov
-L2djYy5nbnUub3JnL2J1Z3ppbGxhL3Nob3dfYnVnLmNnaT9pZD01NDIzMiBmb3IgbW9yZSBkZXRh
-aWxzLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVy
-M0BjaXRyaXguY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
-LmNvbT4KCmNvbW1pdCA4NmQ0N2FkY2QzYzRmNDk0NDU2YTNkNmVlMDZlOTQxYjEzMmUzZWIyCkF1
-dGhvcjogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0ZTogICBG
-cmkgRGVjIDEgMTM6Mjk6MzYgMjAxNyArMDAwMAoKICAgIHg4Ni9tc3I6IEhhbmRsZSBNU1JfQU1E
-NjRfRFJ7MC0zfV9BRERSRVNTX01BU0sgaW4gdGhlIG5ldyBNU1IgaW5mcmFzdHJ1Y3R1cmUKICAg
-IAogICAgVGhpcyBpcyBhIGZvbGxvd3VwIHRvIGMvcyA5NmYyMzVjMjYgd2hpY2ggZnVsZmlscyB0
-aGUgcmVtYWluaW5nIFRPRE8gaXRlbS4KICAgIAogICAgRmlyc3Qgb2YgYWxsLCB0aGUgcHJlLWV4
-aXN0aW5nIFNWTSBjb2RlIGhhcyBhIGJ1Zy4gIFRoZSB2YWx1ZSBpbgogICAgbXNycy0+ZHJfbWFz
-a1tdIG1heSBiZSBzdGFsZSwgYXMgd2UgYWxsb3cgZGlyZWN0IGFjY2VzcyB0byB0aGVzZSBNU1Jz
-LgogICAgUmVzb2x2ZSB0aGlzIGluIGd1ZXN0X3JkbXNyKCkgYnkgcmVhZGluZyBkaXJlY3RseSBm
-cm9tIGhhcmR3YXJlIGluIHRoZQogICAgYWZmZWN0ZWQgY2FzZS4KICAgIAogICAgV2l0aCB0aGUg
-cmVhZGluZy93cml0aW5nIGxvZ2ljIG1vdmVkIHRvIHRoZSBjb21tb24gZ3Vlc3Rfe3JkLHdyfW1z
-cigpCiAgICBpbmZyYXN0cnVjdHVyZSwgdGhlIG1pZ3JhdGlvbiBsb2dpYyBjYW4gYmUgc2ltcGxp
-ZmllZC4gIFRoZSBQViBtaWdyYXRpb24gbG9naWMKICAgIGRyb3BzIGFsbCBvZiBpdHMgc3BlY2lh
-bCBjYXNpbmcsIGFuZCBTVk0ncyBlbnRpcmUge2luaXQsc2F2ZSxsb2FkfV9tc3IoKQogICAgaW5m
-cmFzdHJ1Y3R1cmUgYmVjb21lcyB1bm5lY2Vzc2FyeS4KICAgIAogICAgVGhlIHJlc3VsdGluZyBk
-aWZmc3RhdCBzaG93cyBxdWl0ZSBob3cgZXhwZW5zaXZlIHRoZSBQViBzcGVjaWFsIGNhc2VzIHdo
-ZXJlIGluCiAgICBhcmNoX2RvX2RvbWN0bCgpLgogICAgCiAgICAgIGFkZC9yZW1vdmU6IDAvMyBn
-cm93L3NocmluazogNC82IHVwL2Rvd246IDQ2NS8tMTQ5NCAoLTEwMjkpCiAgICAgIEZ1bmN0aW9u
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9sZCAgICAgbmV3ICAgZGVsdGEK
-ICAgICAgZ3Vlc3RfcmRtc3IgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMjUyICAg
-ICA0ODQgICAgKzIzMgogICAgICBndWVzdF93cm1zciAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICA2NTMgICAgIDgyMiAgICArMTY5CiAgICAgIG1zcnNfdG9fc2VuZCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgOCAgICAgIDQ4ICAgICArNDAKICAgICAgaHZtX2xvYWRf
-Y3B1X21zcnMgICAgICAgICAgICAgICAgICAgICAgICAgICAgNDg5ICAgICA1MTMgICAgICsyNAog
-ICAgICBzdm1faW5pdF9tc3IgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMjEgICAg
-ICAgLSAgICAgLTIxCiAgICAgIGh2bV9zYXZlX2NwdV9tc3JzICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIDM2NSAgICAgMzQzICAgICAtMjIKICAgICAgcmVhZF9tc3IgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAxMDg5ICAgIDEwMDEgICAgIC04OAogICAgICB3cml0ZV9tc3Ig
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDE4MjkgICAgMTY4OSAgICAtMTQwCiAg
-ICAgIHN2bV9tc3JfcmVhZF9pbnRlcmNlcHQgICAgICAgICAgICAgICAgICAgICAgMTEyNCAgICAg
-OTcwICAgIC0xNTQKICAgICAgc3ZtX2xvYWRfbXNyICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgMTk1ICAgICAgIC0gICAgLTE5NQogICAgICBzdm1fc2F2ZV9tc3IgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAxOTYgICAgICAgLSAgICAtMTk2CiAgICAgIHN2bV9tc3Jfd3Jp
-dGVfaW50ZXJjZXB0ICAgICAgICAgICAgICAgICAgICAgMTQ2MSAgICAxMjY1ICAgIC0xOTYKICAg
-ICAgYXJjaF9kb19kb21jdGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA5NTgxICAgIDkw
-OTkgICAgLTQ4MgogICAgICBUb3RhbDogQmVmb3JlPTMzMTQ2MTAsIEFmdGVyPTMzMTM1ODEsIGNo
-ZyAtMC4wMyUKICAgIAogICAgU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5OiAgQm9yaXMgT3N0cm92c2t5IDxib3Jp
-cy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJl
-dWxpY2hAc3VzZS5jb20+Cgpjb21taXQgNTllMDg3YmY2YTljOGFkODA1Mjk0YzMyZGZkN2M3NzA2
-OGQ4MWVmZgpBdXRob3I6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
-CkRhdGU6ICAgVGh1IFNlcCA2IDExOjQyOjM0IDIwMTggKzAwMDAKCiAgICB4ZW4va2V5aGFuZGxl
-cjogRHJvcCBrZXloYW5kbGVyX3NjcmF0Y2gKICAgIAogICAgV2l0aCBhbG1vc3QgYWxsIHVzZXJz
-IG9mIGtleWhhbmRsZXJfc2NyYXRjaCBnb25lLCBjbGVhbiB1cCB0aGUgMyByZW1haW5pbmcKICAg
-IHVzZXJzIGFuZCBkcm9wIHRoZSBidWZmZXIuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEFuZHJl
-dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgICBSZXZpZXdlZC1ieTogV2Vp
-IExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8
-amJldWxpY2hAc3VzZS5jb20+Cgpjb21taXQgMzAzMTFkMmU4MmEzZWI2OWFhMTY2NzM4MmE2YjI1
-MjlmNmQ5NDRjNApBdXRob3I6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkRhdGU6ICAg
-RnJpIE5vdiAxNiAxODo1ODo1NSAyMDE4ICswMDAwCgogICAgeDg2OiBmaXggZWZpLmxkcyBkZXBl
-bmRlbmN5IGdlbmVyYXRpb24KICAgIAogICAgUkFORENPTkZJRyBidWlsZHMgZGlzY292ZXIgZWZp
-LmxkcyBpcyBub3QgdXBkYXRlZCB3aGVuIGF1dG9nZW5lcmF0ZWQKICAgIGhlYWRlcnMgYXJlIHVw
-ZGF0ZWQuCiAgICAKICAgIFVwb24gaW5zcGVjdGlvbiwgdGhlIGdlbmVyYXRlZCAuZCBmaWxlIGNv
-bnRhaW5zIHhlbi5sZHMubyBhcyB0YXJnZXQsCiAgICBub3QgdGhlIG9uY2UgdGhvdWdodCBlZmku
-bGRzLm8uIFRoYXQncyBiZWNhdXNlIGdjYyBkaXNyZWdhcmRzIHRoZQogICAgb3V0cHV0IG9iamVj
-dCBuYW1lIHNwZWNpZmllZCBieSAtbyB3aGVuIGdlbmVyYXRpbmcgZGVwZW5kZW5jeSwgc28gdGhl
-CiAgICBzZWQgaW52b2NhdGlvbiBoYXMgbm8gZWZmZWN0LgogICAgCiAgICBBcmd1YWJseSB0aGF0
-J3MgYSBidWcgaW4gZ2NjLCB3aGljaCBjYW4gYmUgZml4ZWQgYXQgc29tZSBwb2ludCwgc28gd2UK
-ICAgIG1ha2UgdGhlIHNlZCBydW5lIHdvcmsgd2l0aCAqLmxkcy4gQXQgdGhlIHNhbWUgdGltZSBy
-ZXBsYWNlIHRoZQogICAgaGFyZGNvZGVkIHNlZCBydW5lIGZvciB4ZW4ubGRzIHdpdGggdGhlIG5l
-dyBvbmUuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5j
-b20+CiAgICBBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKY29tbWl0
-IGU5YzQ1NzRkODE1NmI1MzcwNjdkNDdiYzQzNjJjZGU3MTc0Y2MzZDcKQXV0aG9yOiBXZWkgTGl1
-IDx3ZWkubGl1MkBjaXRyaXguY29tPgpEYXRlOiAgIE1vbiBOb3YgMTkgMTA6MDM6NTQgMjAxOCAr
-MDAwMAoKICAgIENvbmZpZy5tazogdXBkYXRlIHNlYWJpb3MKICAgIAogICAgVGhpcyBuZXcgcmVs
-ZWFzZSBjb250YWlucyBhIGZpeCBmb3IgYnVpbGRpbmcgbGVnYWN5IGFjcGkgdGFibGVzIHdpdGgK
-ICAgIG5ld2VyIGlhc2wsIHdoaWNoIHdlIHdhbnQuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdl
-aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpjb21taXQgZDk1ZGE5MWZiNDk3ZDg1ODM4MjZm
-NjczZjkzMjVlNzNhNzUxNDI3NwpBdXRob3I6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
-bT4KRGF0ZTogICBNb24gTm92IDE5IDA5OjQxOjI1IDIwMTggKzAxMDAKCiAgICB4ODYvSFZNOiBn
-cm93IE1NSU8gY2FjaGUgZGF0YSBzaXplIHRvIDY0IGJ5dGVzCiAgICAKICAgIFRoaXMgaXMgbmVl
-ZGVkIGJlZm9yZSBlbmFibGluZyBhbnkgQVZYNTEyIGluc25zIGluIHRoZSBlbXVsYXRvci4gQ2hh
-bmdlCiAgICB0aGUgd2F5IGFsaWdubWVudCBpcyBlbmZvcmNlZCBhdCB0aGUgc2FtZSB0aW1lLgog
-ICAgCiAgICBBZGQgYSBjaGVjayB0aGF0IHRoZSBidWZmZXIgd29uJ3QgYWN0dWFsbHkgb3ZlcmZs
-b3csIGFuZCB3aGlsZSBhdCBpdAogICAgYWxzbyBjb252ZXJ0IHRoZSBjaGVjayBmb3IgYWNjZXNz
-ZXMgdG8gbm90IGNyb3NzIHBhZ2UgYm91bmRhcmllcy4KICAgIAogICAgU2lnbmVkLW9mZi1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogICAgUmV2aWV3ZWQtYnk6IFBhdWwgRHVy
-cmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTogQW5kcmV3IENvb3Bl
-ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KKHFlbXUgY2hhbmdlcyBub3QgaW5jbHVkZWQp
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============4209648467042661586==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_1B925CC0CD9F3341B32D442251E7E1DC3D86D718shsmsx102ccrcor_"
+
+--_000_1B925CC0CD9F3341B32D442251E7E1DC3D86D718shsmsx102ccrcor_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+When we make grub with xen, we met below error, do you have any advice?
+
+cd grub
+./autogen.sh
+./configure --target=3Damd64 --with-platform=3Dxen --prefix=3D${PWD}/../pvg=
+rub2
+make
+
+.........
+loader/i386/xen.c: In function 'grub_cmd_xen':
+loader/i386/xen.c:650:10: error: too few arguments to function 'grub_create=
+_loader_cmdline'
+          sizeof (xen_state.next_start.cmd_line) - 1);
+          ^
+In file included from loader/i386/xen.c:38:0:
+../include/grub/lib/cmdline.h:29:12: note: declared here
+grub_err_t grub_create_loader_cmdline (int argc, char *argv[], char *buf,
+            ^
+loader/i386/xen.c:651:3: error: pointer targets in passing argument 1 of 'g=
+rub_verify_string' differ in signedness [-Werror=3Dpointer-sign]
+   err =3D grub_verify_string (xen_state.next_start.cmd_line, GRUB_VERIFY_M=
+ODULE_CMDLINE);
+   ^
+In file included from ../include/grub/lib/cmdline.h:24:0,
+                 from loader/i386/xen.c:38:
+../include/grub/verify.h:81:1: note: expected 'char *' but argument is of t=
+ype 'int8_t *'
+grub_verify_string (char *str, enum grub_verify_string_type type);
+^
+loader/i386/xen.c: In function 'grub_cmd_module':
+loader/i386/xen.c:914:10: error: too few arguments to function 'grub_create=
+_loader_cmdline'
+          get_virtual_current_address (ch), cmdline_len);
+          ^
+In file included from loader/i386/xen.c:38:0:
+../include/grub/lib/cmdline.h:29:12: note: declared here
+grub_err_t grub_create_loader_cmdline (int argc, char *argv[], char *buf,
+            ^
+cc1: all warnings being treated as errors
+make[3]: *** [loader/i386/linux_module-xen.o] Error 1
+make[3]: Leaving directory `/home/build/xen_build/nightly/xen_dom0/xen-mast=
+er-20181120091929-6d8ffac1/grub/grub-core'
+make[2]: *** [all] Error 2
+make[2]: Leaving directory `/home/build/xen_build/nightly/xen_dom0/xen-mast=
+er-20181120091929-6d8ffac1/grub/grub-core'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/home/build/xen_build/nightly/xen_dom0/xen-mast=
+er-20181120091929-6d8ffac1/grub'
+make: *** [all] Error 2
+
+
+Thanks,
+Fan
+
+
+--_000_1B925CC0CD9F3341B32D442251E7E1DC3D86D718shsmsx102ccrcor_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:SimSun;
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"\@SimSun";
+	panose-1:2 1 6 0 3 1 1 1 1 1;}
+@font-face
+	{font-family:"Intel Clear";
+	panose-1:2 11 6 4 2 2 3 2 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">Hi,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">When we make grub with xen, we met below error, do y=
+ou have any advice?<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">cd grub<o:p></o:p></p>
+<p class=3D"MsoNormal">./autogen.sh<o:p></o:p></p>
+<p class=3D"MsoNormal">./configure --target=3Damd64 --with-platform=3Dxen -=
+-prefix=3D${PWD}/../pvgrub2<o:p></o:p></p>
+<p class=3D"MsoNormal">make<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">&#8230;&#8230;&#8230;<o:p></o:p></p>
+<p class=3D"MsoNormal">loader/i386/xen.c: In function &#8216;grub_cmd_xen&#=
+8217;:<o:p></o:p></p>
+<p class=3D"MsoNormal">loader/i386/xen.c:650:10: error: too few arguments t=
+o function &#8216;grub_create_loader_cmdline&#8217;<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p; sizeof (xen_state.next_start.cmd_line) - 1);<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p; ^<o:p></o:p></p>
+<p class=3D"MsoNormal">In file included from loader/i386/xen.c:38:0:<o:p></=
+o:p></p>
+<p class=3D"MsoNormal">../include/grub/lib/cmdline.h:29:12: note: declared =
+here<o:p></o:p></p>
+<p class=3D"MsoNormal">grub_err_t grub_create_loader_cmdline (int argc, cha=
+r *argv[], char *buf,<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; ^<o:p></o:p></p>
+<p class=3D"MsoNormal">loader/i386/xen.c:651:3: error: pointer targets in p=
+assing argument 1 of &#8216;grub_verify_string&#8217; differ in signedness =
+[-Werror=3Dpointer-sign]<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp; err =3D grub_verify_string (xen_state.n=
+ext_start.cmd_line, GRUB_VERIFY_MODULE_CMDLINE);<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp; ^<o:p></o:p></p>
+<p class=3D"MsoNormal">In file included from ../include/grub/lib/cmdline.h:=
+24:0,<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from loader/i386/xen.c:38:<o:p=
+></o:p></p>
+<p class=3D"MsoNormal">../include/grub/verify.h:81:1: note: expected &#8216=
+;char *&#8217; but argument is of type &#8216;int8_t *&#8217;<o:p></o:p></p=
+>
+<p class=3D"MsoNormal">grub_verify_string (char *str, enum grub_verify_stri=
+ng_type type);<o:p></o:p></p>
+<p class=3D"MsoNormal">^<o:p></o:p></p>
+<p class=3D"MsoNormal">loader/i386/xen.c: In function &#8216;grub_cmd_modul=
+e&#8217;:<o:p></o:p></p>
+<p class=3D"MsoNormal">loader/i386/xen.c:914:10: error: too few arguments t=
+o function &#8216;grub_create_loader_cmdline&#8217;<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p; get_virtual_current_address (ch), cmdline_len);<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p; ^<o:p></o:p></p>
+<p class=3D"MsoNormal">In file included from loader/i386/xen.c:38:0:<o:p></=
+o:p></p>
+<p class=3D"MsoNormal">../include/grub/lib/cmdline.h:29:12: note: declared =
+here<o:p></o:p></p>
+<p class=3D"MsoNormal">grub_err_t grub_create_loader_cmdline (int argc, cha=
+r *argv[], char *buf,<o:p></o:p></p>
+<p class=3D"MsoNormal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp; ^<o:p></o:p></p>
+<p class=3D"MsoNormal">cc1: all warnings being treated as errors<o:p></o:p>=
+</p>
+<p class=3D"MsoNormal">make[3]: *** [loader/i386/linux_module-xen.o] Error =
+1<o:p></o:p></p>
+<p class=3D"MsoNormal">make[3]: Leaving directory `/home/build/xen_build/ni=
+ghtly/xen_dom0/xen-master-20181120091929-6d8ffac1/grub/grub-core'<o:p></o:p=
+></p>
+<p class=3D"MsoNormal">make[2]: *** [all] Error 2<o:p></o:p></p>
+<p class=3D"MsoNormal">make[2]: Leaving directory `/home/build/xen_build/ni=
+ghtly/xen_dom0/xen-master-20181120091929-6d8ffac1/grub/grub-core'<o:p></o:p=
+></p>
+<p class=3D"MsoNormal">make[1]: *** [all-recursive] Error 1<o:p></o:p></p>
+<p class=3D"MsoNormal">make[1]: Leaving directory `/home/build/xen_build/ni=
+ghtly/xen_dom0/xen-master-20181120091929-6d8ffac1/grub'<o:p></o:p></p>
+<p class=3D"MsoNormal">make: *** [all] Error 2<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Thanks,<o:p></o:p></p>
+<p class=3D"MsoNormal">Fan<span style=3D"font-family:&quot;Intel Clear&quot=
+;,sans-serif"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_1B925CC0CD9F3341B32D442251E7E1DC3D86D718shsmsx102ccrcor_--
+
+
+--===============4209648467042661586==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4209648467042661586==--
