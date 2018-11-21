@@ -1,28 +1,18 @@
-From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
-Subject: Re: [PATCH v1] x86/hvm: Generic instruction
- re-execution mechanism for execute faults
-Date: Wed, 21 Nov 2018 12:00:48 +0000
-Message-ID: <1b78eeb1-395b-71c3-d1c1-f6d1d84e19fd@bitdefender.com>
-References: <20181116100624.21977-1-aisaila@bitdefender.com>
- <20181116170412.xrwuun3cqxll22l3@mac>
- <3d3ae38a-bfae-9908-dac6-163216f900e3@bitdefender.com>
- <20181119150824.lfquw2j2ehhvjbhk@mac>
- <638d0c37-68aa-6e68-480e-f3c1cc74777d@bitdefender.com>
- <20181121095654.6lez6zzstpl45qtt@mac>
- <bc6dfdf4-bd99-237c-707e-6f08eda0f825@bitdefender.com>
- <20181121114126.sblh3te5pkcciwuw@mac>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: [PATCH V2] x86/p2m: constify
+ p2m_mem_access_sanity_check()
+Date: Wed, 21 Nov 2018 14:09:35 +0200
+Message-ID: <1542802175-3955-1-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nvd6=oa=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1gPRBd-0003cI-U0
- for xen-devel@lists.xenproject.org; Wed, 21 Nov 2018 12:00:54 +0000
-In-Reply-To: <20181121114126.sblh3te5pkcciwuw@mac>
-Content-Language: en-US
-Content-ID: <337552B7A6FBAF42ABE6E905E0B3C1E9@eurprd02.prod.outlook.com>
+ <SRS0=RqMg=OA=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1gPRK9-0003uS-5G
+ for xen-devel@lists.xenproject.org; Wed, 21 Nov 2018 12:09:41 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,34 +21,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
-Cc: "kevin.tian@intel.com" <kevin.tian@intel.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, =?utf-8?B?TWloYWkgRG9uyJt1?= <mdontu@bitdefender.com>, Andrei Vlad LUTAS <vlutas@bitdefender.com>, "jun.nakajima@intel.com" <jun.nakajima@intel.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Anshul Makkar <anshul.makkar@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: tamas@tklengyel.com, wei.liu2@citrix.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, george.dunlap@eu.citrix.com, andrew.cooper3@citrix.com, jbeulich@suse.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-DQoNCk9uIDIxLjExLjIwMTggMTM6NDEsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6DQo+IE9uIFdl
-ZCwgTm92IDIxLCAyMDE4IGF0IDEwOjI4OjE4QU0gKzAwMDAsIEFsZXhhbmRydSBTdGVmYW4gSVNB
-SUxBIHdyb3RlOg0KPj4NCj4+DQo+PiBPbiAyMS4xMS4yMDE4IDExOjU2LCBSb2dlciBQYXUgTW9u
-bsOpIHdyb3RlOg0KPj4+IE9uIE1vbiwgTm92IDE5LCAyMDE4IGF0IDAzOjU2OjE0UE0gKzAwMDAs
-IEFsZXhhbmRydSBTdGVmYW4gSVNBSUxBIHdyb3RlOg0KPj4+PiBPbiAxOS4xMS4yMDE4IDE3OjA4
-LCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOg0KPj4+IEFsc28sIGFmdGVyIGxvb2tpbmcgYXQgdGhl
-IGNvZGUgSSdtIG5vdCBzdXJlIEkgc2VlIHdoeSB0aGlzIG5lZWRzIHRvDQo+Pj4gYmUgVk1YIHNw
-ZWNpZmljLCBBRkFJQ1QgaXQgZG9lc24ndCBkaXJlY3RseSBjYWxsIGFueSBWTVggZnVuY3Rpb25z
-Pw0KPj4+DQo+Pg0KPj4gSXQgaXMgdm14IHNwZWNpZmljIGJlY2F1c2Ugc3ZtIGRvZXMgbm90IGhh
-dmUgc2luZ2xlIHN0ZXAuIFdlIHRhbGtlZA0KPj4gYWJvdXQgaW4gdGhlIHBhc3QgYWJvdXQgdGhp
-cyBhbmQgaXQgdHVybmVkIG91dCB0aGF0IGl0IHdhcyB0byBtdWNoDQo+PiB0cm91YmxlIHRvIG1h
-a2UgYSBjdXN0b20gc2luZ2xlIHN0ZXAuDQo+IA0KPiBJIHN0aWxsIHRoaW5rIHRoaXMgc2hvdWxk
-bid0IGJlIFZNWCBzcGVjaWZpYywgYW5kIHlvdSBzaG91bGQganVzdA0KPiByZXR1cm4gLUVPUE5P
-VFNVUFAgaWYgc2luZ2xlIHN0ZXBwaW5nIGlzIG5vdCBzdXBwb3J0ZWQsIGp1c3QgbGlrZQ0KPiBo
-dm1fZGVidWdfb3AgZG9lcy4gSW4gZmFjdCBJJ20gbWlzc2luZyBhIGhlbHBlciB0byBzZXQgc2lu
-Z2xlDQo+IHN0ZXBwaW5nLCB3aGljaCB3b3VsZCBiZSB0aGUgcmlnaHQgcGxhY2UgdG8gcmV0dXJu
-IC1FT1BOT1RTVVBQLg0KPiANCj4gVGhlbiB5b3VyIHJleGVjIHdvdWxkbid0IG5lZWQgdG8ga25v
-dyBhbnl0aGluZyBhYm91dCB0aGUgaGFyZHdhcmUgYW5kDQo+IHdvdWxkIGp1c3QgYXR0ZW1wdCB0
-byBzZXQgc2luZ2xlIHN0ZXBwaW5nLCBmYWlsaW5nIGlmIGl0IGNhbm5vdCBiZQ0KPiBlbmFibGVk
-Lg0KPiANCg0KVGhlcmUgaXMgYSBoZWxwZXIgZnVuY3Rpb24gZm9yIHNpbmdsZSBzdGVwICJodm1f
-aXNfc2luZ2xlc3RlcF9zdXBwb3J0ZWQiIA0KYW5kIHdlIGhhdmUgdGhlIGQtPmFyY2gubW9uaXRv
-ci5pbmd1ZXN0X3BhZ2VmYXVsdF9kaXNhYmxlZCBtb25pdG9yIGZsYWcuIA0KSSBjYW4gcmV0dXJu
-IG5vdCBzdXBwb3J0ZWQgaW4gdGhlIHhjX21vbml0b3JfaW5ndWVzdF9wYWdlZmF1bHQgY2FsbCBh
-bmQgDQpzYXZlIHRpbWUgb24gdGhlIHByb2Nlc3MuDQoNCn5BbGV4DQpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+TWlub3IgaW1wcm92ZW1lbnQ7IHNpbXBseSBpbXByb3ZpbmcgY29kZSBxdWFsaXR5IGJ5IHVzaW5n
+IGNvbnN0cwp3aGVyZXZlciByZWFzb25hYmxlLgoKU3VnZ2VzdGVkLWJ5OiBKYW4gQmV1bGljaCA8
+SkJldWxpY2hAc3VzZS5jb20+ClNpZ25lZC1vZmYtYnk6IFJhenZhbiBDb2pvY2FydSA8cmNvam9j
+YXJ1QGJpdGRlZmVuZGVyLmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jICAg
+ICB8IDIgKy0KIHhlbi9pbmNsdWRlL2FzbS14ODYvbWVtX2FjY2Vzcy5oIHwgMiArLQogMiBmaWxl
+cyBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
+eGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYyBiL3hlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNz
+LmMKaW5kZXggMzBjMmYxYS4uNTZjMDZhNCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L21tL21l
+bV9hY2Nlc3MuYworKysgYi94ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCkBAIC01NDEsNyAr
+NTQxLDcgQEAgdm9pZCBhcmNoX3AybV9zZXRfYWNjZXNzX3JlcXVpcmVkKHN0cnVjdCBkb21haW4g
+KmQsIGJvb2wgYWNjZXNzX3JlcXVpcmVkKQogI2VuZGlmCiB9CiAKLWJvb2wgcDJtX21lbV9hY2Nl
+c3Nfc2FuaXR5X2NoZWNrKHN0cnVjdCBkb21haW4gKmQpCitib29sIHAybV9tZW1fYWNjZXNzX3Nh
+bml0eV9jaGVjayhjb25zdCBzdHJ1Y3QgZG9tYWluICpkKQogewogICAgIHJldHVybiBpc19odm1f
+ZG9tYWluKGQpICYmIGNwdV9oYXNfdm14ICYmIGhhcF9lbmFibGVkKGQpOwogfQpkaWZmIC0tZ2l0
+IGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9tZW1fYWNjZXNzLmggYi94ZW4vaW5jbHVkZS9hc20teDg2
+L21lbV9hY2Nlc3MuaAppbmRleCBjODE1ZGI4Li45OTgxN2EzIDEwMDY0NAotLS0gYS94ZW4vaW5j
+bHVkZS9hc20teDg2L21lbV9hY2Nlc3MuaAorKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L21lbV9h
+Y2Nlc3MuaApAQCAtNDQsNyArNDQsNyBAQCBib29sIHAybV9tZW1fYWNjZXNzX2VtdWxhdGVfY2hl
+Y2soc3RydWN0IHZjcHUgKnYsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29u
+c3Qgdm1fZXZlbnRfcmVzcG9uc2VfdCAqcnNwKTsKIAogLyogU2FuaXR5IGNoZWNrIGZvciBtZW1f
+YWNjZXNzIGhhcmR3YXJlIHN1cHBvcnQgKi8KLWJvb2wgcDJtX21lbV9hY2Nlc3Nfc2FuaXR5X2No
+ZWNrKHN0cnVjdCBkb21haW4gKmQpOworYm9vbCBwMm1fbWVtX2FjY2Vzc19zYW5pdHlfY2hlY2so
+Y29uc3Qgc3RydWN0IGRvbWFpbiAqZCk7CiAKICNlbmRpZiAvKl9fQVNNX1g4Nl9NRU1fQUNDRVNT
+X0hfXyAqLwogCi0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
