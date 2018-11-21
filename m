@@ -1,16 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 130628: regressions - FAIL
-Date: Wed, 21 Nov 2018 21:38:09 +0000
-Message-ID: <osstest-130628-mainreport@xen.org>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] xen: sched: Credit2: during scheduling,
+ update the idle mask before using it
+Date: Wed, 21 Nov 2018 22:39:46 +0100
+Message-ID: <e66c64c5448ab4eb73d422bdd28022660cfe559b.camel@suse.com>
+References: <153926549830.22680.203200918007449375.stgit@wayrath>
+ <dd747aed-8144-2de3-f6d3-62943bf60173@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6205881781057495977=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=so8w=oa=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gPaCI-0006jh-SZ
- for xen-devel@lists.xenproject.org; Wed, 21 Nov 2018 21:38:10 +0000
+ <srs0=i3vo=oa=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gPaDi-0006pa-S1
+ for xen-devel@lists.xenproject.org; Wed, 21 Nov 2018 21:39:38 +0000
+In-Reply-To: <dd747aed-8144-2de3-f6d3-62943bf60173@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,75 +22,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMDYyOCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzA2MjgvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
-Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgIDYgeGVu
-LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtaTM4NiAg
-ICAgICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTI5NDc1CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIGJ1aWxk
-LWFtZDY0LWxpYnZpcnQgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
-bG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxk
-LWNoZWNrKDEpICAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
-CiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
-ICAgICAgICAgICAgICAgZDAyMTg2OGNjZjQ5ZTJhMzk2NjQwMjE5MDkzNTRlZjExNTBiMGE2ZApi
-YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
-NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
-LTExLTA1IDIxOjEzOjExIFogICAxNiBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
-MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgMTUgZGF5cyAgMTM4IGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEzMDYyOCAgMjAxOC0xMS0yMCAyMDo0MzoyMSBaICAgIDEgZGF5cyAgICAxIGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFy
-ZCBCaWVzaGV1dmVsIDxhcmQuYmllc2hldXZlbEBsaW5hcm8ub3JnPgogIEJvYkNGIDxib2IuYy5m
-ZW5nQGludGVsLmNvbT4KICBDaGFzZWwgQ2hpdSA8Y2hhc2VsLmNoaXVAaW50ZWwuY29tPgogIENo
-YXNlbCwgQ2hpdSA8Y2hhc2VsLmNoaXVAaW50ZWwuY29tPgogIERhbmRhbiBCaSA8ZGFuZGFuLmJp
-QGludGVsLmNvbT4KICBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+CiAgRmVuZywgQm9i
-IEMgPGJvYi5jLmZlbmdAaW50ZWwuY29tPgogIEZ1IFNpeXVhbiA8c2l5dWFuLmZ1QGludGVsLmNv
-bT4KICBIYW8gV3UgPGhhby5hLnd1QGludGVsLmNvbT4KICBKZWZmIEJyYXNlbiA8amJyYXNlbkBu
-dmlkaWEuY29tPgogIEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgSmlheGlu
-IFd1IDxKaWF4aW4ud3VAaW50ZWwuY29tPgogIEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwu
-Y29tPgogIExhc3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgTGltaW5nIEdhbyA8bGlt
-aW5nLmdhb0BpbnRlbC5jb20+CiAgTGl1IFl1IDxwZWRyb2EubGl1QG91dGxvb2suY29tPgogIE1h
-cmMgWnluZ2llciA8bWFyYy56eW5naWVyQGFybS5jb20+CiAgTWFyY2luIFdvanRhcyA8bXdAc2Vt
-aWhhbGYuY29tPgogIE1pbmcgSHVhbmcgPG1pbmcuaHVhbmdAbGluYXJvLm9yZz4KICBQZWRyb2Eg
-TGl1IDxwZWRyb2EubGl1QG91dGxvb2suY29tPgogIFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5j
-b20+CiAgc2hlbmdsZWkgPHNoZW5nbGVpLnpoYW5nQGludGVsLmNvbT4KICBTaGVuZ2xlaSBaaGFu
-ZyA8c2hlbmdsZWkuemhhbmdAaW50ZWwuY29tPgogIFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVs
-LmNvbT4KICBUb21hc3ogTWljaGFsZWMgPHRtQHNlbWloYWxmLmNvbT4KICBXdSBKaWF4aW4gPGpp
-YXhpbi53dUBpbnRlbC5jb20+CiAgeXVjaGVubGluIDx5dWNoZW5saW5Ac3lub2xvZ3kuY29tPgog
-IFpoYW5nLCBDaGFvIEIgPGNoYW8uYi56aGFuZ0BpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1k
-NjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
-ICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2
-NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
-ZCAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBibG9ja2VkIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2Vk
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dz
-L2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0
-dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRp
-b24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJF
-QURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9w
-PW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2Rl
-IGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0
-ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdv
-dWxkIGJlIDE0ODggbGluZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+
+--===============6205881781057495977==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-5iiDmAnY4v8cCVQydEeT"
+
+
+--=-5iiDmAnY4v8cCVQydEeT
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-11-21 at 15:57 +0000, George Dunlap wrote:
+> On 10/11/18 2:44 PM, Dario Faggioli wrote:
+> >=20
+> Reviewed-by: George Dunlap <george.dunlap@citrix.com>
+>=20
+> One comment: The title seems to have excessive tags.  You only need
+> enough for people scrolling through to figure out the domain;
+> "xen/credit2:", or even just "credit2:" is enough.  More than that
+> makes
+> the line too long and can obscure important information if the lines
+> end
+> up being clipped.
+>=20
+Makes sense.
+
+> Do you mind if I change that on check-in?
+>=20
+Go ahead, no problem at all.
+
+Thanks and Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-5iiDmAnY4v8cCVQydEeT
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlv10KMACgkQFkJ4iaW4
+c+4kKBAAtG51aC59mr2roRhmXOHvxVbHRK33xd/hQ5GIZTkJgQgY5SWDLUxpeINg
+0z4lqpn3pRVxcz7F1pnN9zuQk5cxl+9K8xz1sJGPQaH+5olVDzR2+5gic8r+D9+C
+8VHlb0vI4O34xBvIvX12ZmYc/bNCeKzaKYgcScu5iPKpF8qlFUo+sW1LY79t5fAH
+wf+6w3JUX0CyUDzX0ZHXUK35sd0fBhnP6lOxYebDlYhs1/yo0QnhSf9qE07rTB/X
+LRELJ9lnDUN/jECuEodc2XP6YtiAEEs6vlT+7Y2RsNuqd6tvlBAsAuOHrB2NGh1d
+/N2UqM3SnovS4ErYcXHfloX06MXIclLcQbw0PDKxv6s/T8H6EDoNLJNXUONQaYBw
+3IMspTmE16oAzgSh6MtCx351bd+jp/vP3OPoQAT8YGVJpleMOCra/XQwhSKtN4mb
+i4zDekUaapex1qEav9L+mDuWE++8l8UsuE9kM4phhnSilAlOwckA5dobTNxvueak
+aZe34fMi/IBC605HE6YOHcSUy9l46sJYbx2s72ED+yd4OdBeGRJEktKQ4FaqlKbg
+Cx62rnYOLsoCOE3iKjtr0J6crxD/ALNTuFC0LqRTPc3IEdIgdoWkfty12DXxQJbm
+seuk3g0kENrD/FcBkBjknBx6h3BKkSqVtvfNYzT+3DiybPLFXs4=
+=khXC
+-----END PGP SIGNATURE-----
+
+--=-5iiDmAnY4v8cCVQydEeT--
+
+
+
+--===============6205881781057495977==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6205881781057495977==--
