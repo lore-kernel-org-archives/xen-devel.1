@@ -1,15 +1,21 @@
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Subject: Re: [PATCH 02/14] x86/mem-sharing: Don't leave the
- altp2m lock held when nominating a page
-Date: Wed, 21 Nov 2018 09:56:20 -0700
-Message-ID: <CABfawh=tcfCOWGaCqAzYJALLip9onxYR7hMJN+jUwO2ykZ6CUg@mail.gmail.com>
-References: <1542806482-24030-1-git-send-email-andrew.cooper3@citrix.com>
- <1542806482-24030-3-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] automation: git clean between builds
+Date: Wed, 21 Nov 2018 17:07:02 +0000
+Message-ID: <20181121170702.hsxpn3y4qzfy34sz@zion.uk.xensource.com>
+References: <20181121163256.25289-1-wei.liu2@citrix.com>
+ <435968E2-ECEE-4D72-82DD-AA18C90B3EEA@cardoe.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1542806482-24030-3-git-send-email-andrew.cooper3@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=88OY=OA=citrix.com=prvs=85659e452=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gPVy0-0002IA-Up
+ for xen-devel@lists.xenproject.org; Wed, 21 Nov 2018 17:07:08 +0000
+Content-Disposition: inline
+In-Reply-To: <435968E2-ECEE-4D72-82DD-AA18C90B3EEA@cardoe.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,18 +24,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Doug Goldstein <cardoe@cardoe.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBOb3YgMjEsIDIwMTggYXQgNjoyMSBBTSBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
-cGVyM0BjaXRyaXguY29tPiB3cm90ZToKPgo+IGdldF9nZm5fdHlwZV9hY2Nlc3MoKSBpbnRlcm5h
-bGx5IHRha2VzIHRoZSBwMm0gbG9jaywgYW5kIG5vdGhpbmcgZXZlciB1bmxvY2tzCj4gaXQuICBT
-d2l0Y2ggdG8gdXNpbmcgdGhlIHVubG9ja2VkIGFjY2Vzc29yIGluc3RlYWQuCj4KPiBUaGlzIHdh
-c24ndCBpbmNsdWRlZCBpbiBYU0EtMjc3IGJlY2F1c2UgbmVpdGhlciBtZW0tc2hhcmluZyBub3Ig
-YWx0cDJtIGFyZQo+IHN1cHBvcnRlZC4KPgo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIg
-PGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpBY2tlZC1ieTogVGFtYXMgSyBMZW5neWVsIDx0
-YW1hc0B0a2xlbmd5ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gV2VkLCBOb3YgMjEsIDIwMTggYXQgMTA6NTE6NTVBTSAtMDYwMCwgRG91ZyBHb2xkc3RlaW4g
+d3JvdGU6Cj4gCj4gPiBPbiBOb3YgMjEsIDIwMTgsIGF0IDEwOjMyIEFNLCBXZWkgTGl1IDx3ZWku
+bGl1MkBjaXRyaXguY29tPiB3cm90ZToKPiA+IAo+ID4gQ3VycmVudGx5IHJhbmRjb25maWcgdGVz
+dHMgYXJlIG1vcmUgbGlrZWx5IHRvIGZhaWwgdGhhbiB0byBzdWNjZWVkCj4gPiBiZWNhdXNlIG9m
+IGEgYnVnIGluIHhlbidzIGJ1aWxkIHN5c3RlbTogc3ltYm9scy1kdW1teS5vJ3MgZGVwZW5kZW5j
+eQo+ID4gaXMgd3JvbmcsIHdoaWNoIGNhdXNlcyBpdCB0byBub3QgZ2V0IHJlYnVpbGQgYmV0d2Vl
+biBydW5zLCB3aGljaAo+ID4gZXZlbnR1YWxseSBjYXVzZXMgbGlua2luZyB0byBmYWlsLiBUaGVy
+ZSBtYXkgYWxzbyBiZSBvdGhlciBjb3JuZXIKPiA+IGNhc2VzIHdlIGhhdmVuJ3QgZGlzY292ZXJl
+ZC4KPiA+IAo+ID4gVGhlIGZpeCBpcyBub3Qgc3RyYWlnaHRmb3J3YXJkLiBGb3Igbm93LCBtYWtl
+IHN1cmUgdGhlIHRyZWUgaXMgY2xlYW5lZAo+ID4gcHJvcGVybHkgYmV0d2VlbiBidWlsZHMgc28g
+d2UgZG9uJ3Qgc2VlIHJhbmRvbSBmYWlsdXJlcyBpbiBHaXRsYWIgQ0kuCj4gPiAKPiA+IFNpZ25l
+ZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gPiAKPiAKPiBTb3VuZHMg
+Z29vZCBhcyBhIGZpeCBmb3Igbm93IHRvIGdldCB1cyBnb2luZy4gCj4gCj4gQWNrZWQtYnk6IERv
+dWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNvbT4KCkkgdGhpbmsgSSB3aWxsIG5lZWQgdG8g
+c3dpdGNoIGZyb20gZ2l0IGNsZWFuIHRvIG1ha2UgY2xlYW4gdG8gYXZvaWQKd2lwaW5nIG91dCBh
+bGwgdGhlIGFydGlmYWN0cy4gRG9lcyB5b3VyIGFjayBzdGlsbCBzdGFuZD8KCldlaS4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
