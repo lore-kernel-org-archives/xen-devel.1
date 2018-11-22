@@ -1,23 +1,21 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [Qemu-devel] [PATCH] Xen PCI passthrough: fix
- passthrough failure when irq map failure
-Date: Thu, 22 Nov 2018 15:18:05 +0100
-Message-ID: <20181122141805.vyqywi4ep65loye3@mac>
-References: <20181016021439.6212-1-yan.y.zhao@intel.com>
- <F22B14EC3CFBB843AD3E03B6B78F2C6A4ACFD80C@SHSMSX104.ccr.corp.intel.com>
- <20181018145636.k6ptvn4iszabjhxw@mac.bytemobile.com>
- <20181122131110.GA31906@joy-OptiPlex-7040>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH V9 2/7] x86/p2m: switch global_logdirty from
+ bool_t to bool
+Date: Thu, 22 Nov 2018 14:19:19 +0000
+Message-ID: <20181122141919.i5cbugoqaml6fwwe@zion.uk.xensource.com>
+References: <1542886828-11241-1-git-send-email-rcojocaru@bitdefender.com>
+ <1542886828-11241-3-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=mihh=ob=citrix.com=prvs=8571d395d=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gPpo7-0005we-Qw
- for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 14:18:15 +0000
+ <srs0=nkve=ob=citrix.com=prvs=857cca76a=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gPppD-00066x-SC
+ for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 14:19:23 +0000
 Content-Disposition: inline
-In-Reply-To: <20181122131110.GA31906@joy-OptiPlex-7040>
+In-Reply-To: <1542886828-11241-3-git-send-email-rcojocaru@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,43 +24,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Zhao Yan <yan.y.zhao@intel.com>
-Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, qemu-devel@nongnu.org
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBOb3YgMjIsIDIwMTggYXQgMDg6MTE6MjBBTSAtMDUwMCwgWmhhbyBZYW4gd3JvdGU6
-Cj4gT24gVGh1LCBPY3QgMTgsIDIwMTggYXQgMDM6NTY6MzZQTSArMDEwMCwgUm9nZXIgUGF1IE1v
-bm7DqSB3cm90ZToKPiA+IE9uIFRodSwgT2N0IDE4LCAyMDE4IGF0IDA4OjIyOjQxQU0gKzAwMDAs
-IFpoYW8sIFlhbiBZIHdyb3RlOgo+ID4gPiBIaQo+ID4gPiBUaGUgYmFja2dyb3VuZCBmb3IgdGhp
-cyBwYXRjaCBpcyB0aGF0OiBmb3Igc29tZSBwY2kgZGV2aWNlLCBldmVuIGl0J3MgUENJX0lOVEVS
-UlVQVF9QSU4gaXMgbm90IDAsIGl0IGFjdHVhbGx5IGRvZXMgbm90IHN1cHBvcnQgSU5UeCBtb2Rl
-LCBzbyB3ZSBzaG91bGQganVzdCByZXBvcnQgZXJyb3IsIGRpc2FibGUgSU5UeCBtb2RlIGFuZCBj
-b250aW51ZSB0aGUgcGFzc3Rocm91Z2guCj4gPiA+IEhvd2V2ZXIsIHRoZSBjb21taXQgNWExMWQw
-ZjcgcmVnYXJkcyB0aGlzIGFzIGVycm9yIGNvbmRpdGlvbiBhbmQgbGV0IHFlbXUgcXVpdCBwYXNz
-dGhyb3VnaCwgd2hpY2ggaXMgdG9vIHJpZ29yb3VzLgo+ID4gPiAKPiA+ID4gRXJyb3IgbWVzc2Fn
-ZSBpcyBiZWxvdzoKPiA+ID4gbGlieGw6IGVycm9yOiBsaWJ4bF9xbXAuYzoyODc6cW1wX2hhbmRs
-ZV9lcnJvcl9yZXNwb25zZTogRG9tYWluIDI6cmVjZWl2ZWQgYW4gZXJyb3IgbWVzc2FnZSBmcm9t
-IFFNUCBzZXJ2ZXI6IE1hcHBpbmcgbWFjaGluZSBpcnEgMCB0byBwaXJxIC0xIGZhaWxlZDogT3Bl
-cmF0aW9uIG5vdCBwZXJtaXR0ZWQKPiA+IAo+ID4gSSdtIGhhdmluZyBpc3N1ZXMgZmlndXJpbmcg
-b3V0IHdoYXQncyBoYXBwZW5pbmcgaGVyZS4KPiA+IHMtPnJlYWxfZGV2aWNlLmlycSBpcyAwLCB5
-ZXQgdGhlIFBDSSBjb25maWcgc3BhY2UgcmVhZCBvZgo+ID4gUENJX0lOVEVSUlVQVF9QSU4gcmV0
-dXJucyBzb21ldGhpbmcgZGlmZmVyZW50IHRoYW4gMC4KPiA+IAo+ID4gQUZBSUNUIHRoaXMgaXMg
-ZHVlIHRvIHNvbWUga2luZCBvZiBlcnJvciBpbiBMaW51eCwgc28gdGhhdCBldmVuIHdoZW4KPiA+
-IHRoZSBkZXZpY2UgaXMgc3VwcG9zZWQgdG8gaGF2ZSBhIHZhbGlkIElSUSB0aGUgc3lzZnMgbm9k
-ZSBpdCBpcyBzZXQgdG8KPiA+IDAsIGRvIHlvdSBrbm93IHRoZSBhY3R1YWwgdW5kZXJseWluZyBj
-YXVzZSBvZiB0aGlzPwo+ID4gCj4gPiBUaGFua3MsIFJvZ2VyLgo+IEhpIFJvZ2VyCj4gU29ycnkg
-Zm9yIHRoZSBsYXRlciByZXBseSwgSSBqdXN0IG1pc3NlZCB0aGlzIG1haWwuLi4KPiBPbiBteSBz
-aWRlLCBpdCdzIGJlY2F1c2UgdGhlIGhhcmR3YXJlIGFjdHVhbGx5IGRvZXMgbm90IHN1cHBvcnQg
-SU5UeCBtb2RlLAo+IGJ1dCBpdHMgY29uZmlndXJhdGlvbiBzcGFjZSBkb2VzIG5vdCByZXBvcnQg
-UENJX0lOVEVSUlVQVF9QSU4gdG8gMC4gSXQncyBhCj4gaGFyZHdhcmUgYnVnLCBidXQgcHJldmlv
-dXMgdmVyc2lvbiBvZiBxZW11IGNhbiB0b2xlcmF0ZSBpdCwgc3dpdGNoIHRvIE1TSQo+IGFuZCBt
-YWtlIHBhc3N0aHJvdWdoIHdvcmsuCgpUaGVuIEkgdGhpbmsgaXQgd291bGQgYmUgYmV0dGVyIHRv
-IGNoZWNrIGJvdGggUENJX0lOVEVSUlVQVF9QSU4gYW5kCnMtPnJlYWxfZGV2aWNlLmlycSBiZWZv
-cmUgYXR0ZW1wdGluZyB0byBtYXAgdGhlIElSUS4KCk1ha2luZyB0aGUgZXJyb3Igbm9uLWZhdGFs
-IHdvdWxkIG1lYW4gdGhhdCBhIGRldmljZSB3aXRoIGEgdmFsaWQgSVJRCmNvdWxkIGZhaWwgdG8g
-YmUgc2V0dXAgY29ycmVjdGx5IGJ1dCB0aGUgZ3Vlc3Qgd2lsbCBzdGlsbCBiZSBjcmVhdGVkLAph
-bmQgdGhpbmdzIHdvbid0IGdvIGFzIGV4cGVjdGVkIHdoZW4gdGhlIGd1ZXN0IGF0dGVtcHRzIHRv
-IHVzZSBpdC4KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gVGh1LCBOb3YgMjIsIDIwMTggYXQgMDE6NDA6MjNQTSArMDIwMCwgUmF6dmFuIENvam9jYXJ1
+IHdyb3RlOgo+IFNpZ25lZC1vZmYtYnk6IFJhenZhbiBDb2pvY2FydSA8cmNvam9jYXJ1QGJpdGRl
+ZmVuZGVyLmNvbT4KClJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
