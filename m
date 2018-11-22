@@ -1,7 +1,7 @@
 From: Julien Grall <julien.grall@arm.com>
 Subject: [PATCH] xen/arm: Stop relocating Xen
-Date: Thu, 22 Nov 2018 20:46:40 +0000
-Message-ID: <20181122204640.30926-1-julien.grall@arm.com>
+Date: Thu, 22 Nov 2018 20:47:18 +0000
+Message-ID: <20181122204718.30972-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -15,7 +15,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xen.org
-Cc: Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org, andre.przywara@linaro.org
+Cc: andre.przywara@arm.com, Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
 QXQgdGhlIG1vbWVudCwgWGVuIGlzIHJlbG9jYXRlZCB0b3dhcmRzIHRoZSBlbmQgb2YgdGhlIG1l
