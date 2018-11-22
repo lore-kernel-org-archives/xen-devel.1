@@ -1,30 +1,21 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH v1] x86/hvm: Generic instruction
- re-execution mechanism for execute faults
-Date: Thu, 22 Nov 2018 20:24:52 +0200
-Message-ID: <f3ec3175-1c2e-e3a2-ed8f-63bf4c235fca@bitdefender.com>
-References: <20181116170412.xrwuun3cqxll22l3@mac>
- <b83547dc-f8bd-d537-0407-fc371fee2ea7@bitdefender.com>
- <20181122100554.pyqqa5iw6g27erkv@mac>
- <7efdfb5e-044b-f2a3-6562-d3468997096a@bitdefender.com>
- <20181122105821.6ihjcq5dy2lqjj6j@mac>
- <98f57a8a-288d-45ec-ef01-889fce63eeff@bitdefender.com>
- <20181122144924.ffy6xxwqugoj24nj@mac>
- <c4eca955-0384-7988-ae6c-6385823523ae@bitdefender.com>
- <20181122153756.au3ntxgfqjjhd6sb@mac>
- <a945d190-c891-6a90-01cd-c0cc723699ae@bitdefender.com>
- <20181122170801.pzdoif2g73aamnmu@mac>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v6 05/11] libxl_qmp: Implementation of
+ libxl__ev_qmp_*
+Date: Thu, 22 Nov 2018 20:04:53 +0100
+Message-ID: <20181122190453.GA6260@mail-itl>
+References: <20181112164930.25893-1-anthony.perard@citrix.com>
+ <20181112164930.25893-6-anthony.perard@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0979876242624809794=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=qves=ob=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gPtev-0008N6-3w
- for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 18:25:01 +0000
-In-Reply-To: <20181122170801.pzdoif2g73aamnmu@mac>
-Content-Language: en-US-large
+ <SRS0=HDGj=OB=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gPuHg-0003EM-Ve
+ for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 19:05:05 +0000
+In-Reply-To: <20181112164930.25893-6-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,81 +24,190 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: "kevin.tian@intel.com" <kevin.tian@intel.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, =?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>, Andrei Vlad LUTAS <vlutas@bitdefender.com>, "jun.nakajima@intel.com" <jun.nakajima@intel.com>, Alexandru Stefan ISAILA <aisaila@bitdefender.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Anshul Makkar <anshul.makkar@citrix.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMjIvMTggNzowOCBQTSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToKPiBPbiBUaHUsIE5v
-diAyMiwgMjAxOCBhdCAwNjo1MjowN1BNICswMjAwLCBSYXp2YW4gQ29qb2NhcnUgd3JvdGU6Cj4+
-IE9uIDExLzIyLzE4IDU6MzcgUE0sIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4+PiBJIGRvbid0
-IHRoaW5rIHlvdSBhcmUgc3VwcG9zZWQgdG8gdHJ5IHRvIHBhdXNlIG90aGVyIHZjcHVzIHdoaWxl
-Cj4+PiBob2xkaW5nIGEgbG9jaywgYXMgeW91IGNhbiBzZWUgaXQncyBxdWl0ZSBsaWtlbHkgdGhh
-dCB5b3Ugd2lsbCBlbmQgdXAKPj4+IGRlYWRsb2NraW5nIGJlY2F1c2UgdGhlIHZDUFUgeW91IGFy
-ZSB0cnlpbmcgdG8gcGF1c2UgaXMgc3R1Y2sgd2FpdGluZwo+Pj4gb24gdGhlIGxvY2sgdGhhdCB5
-b3UgYXJlIGhvbGRpbmcuCj4+Pgo+Pj4gWW91IHNob3VsZCBmaWd1cmUgb3V0IHdoZXRoZXIgeW91
-IGNhbiBnZXQgaW50byB2bXhfc3RhcnRfcmVleGVjdXRlCj4+PiB3aXRob3V0IGhvbGRpbmcgYW55
-IGxvY2tzLCBvciBhbHRlcm5hdGl2ZWx5IGRyb3AgdGhlIGxvY2ssIHBhdXNlIHRoZQo+Pj4gdkNQ
-VXMgYW5kIHBpY2sgdGhlIGxvY2sgYWdhaW4uCj4+Pgo+Pj4gU2VlIGZvciBleGFtcGxlIGhvdyBo
-YXBfdHJhY2tfZGlydHlfdnJhbSByZWxlYXNlcyB0aGUgbG9jayBiZWZvcmUKPj4+IGF0dGVtcHRp
-bmcgdG8gcGF1c2UgdGhlIGRvbWFpbiBmb3IgdGhpcyBzYW1lIHJlYXNvbi4KPj4KPj4gUmlnaHQs
-IHRoaXMgd2lsbCB0YWtlIG1vcmUgdGhpbmtpbmcuCj4+Cj4+IEkndmUgdW5sb2NrZWQgdGhlIHAy
-bSBmb3IgdGVzdGluZyBhbmQgdGhlIGluaXRpYWwgaGFuZyBpcyBnb25lLCBob3dldmVyCj4+IHRo
-ZSBzYW1lIHByb2JsZW0gbm93IGFwcGxpZXMgdG8gcmV4ZWNfbG9jazogbm90aGluZyBwcmV2ZW50
-cyB0d28gb3IgbW9yZQo+PiBWQ1BVcyBmcm9tIGFycml2aW5nIGluIHZteF9zdGFydF9yZWV4ZWN1
-dGVfaW5zdHJ1Y3Rpb24oKSBzaW11bHRhbmVvdXNseSwKPj4gYXQgd2hpY2ggcG9pbnQgb25lIG9m
-IHRoZW0gbWlnaHQgdGFrZSB0aGUgbG9jayBhbmQgdHJ5IHRvIHBhdXNlIHRoZQo+PiBvdGhlciwg
-d2hpbGUgdGhlIG90aGVyIGlzIHdhaXRpbmcgdG8gdGFrZSB0aGUgbG9jaywgd2l0aCBwcmVkaWN0
-YWJsZQo+PiByZXN1bHRzLgo+Pgo+PiBPbiB0aGUgb3RoZXIgaGFuZCwgcmVsZWFzaW5nIHJleGVj
-X2xvY2sgYXMgd2VsbCB3aWxsIGFsbG93IHR3byBWQ1BVcyB0bwo+PiBlbmQgdXAgdHJ5aW5nIHRv
-IHBhdXNlIGVhY2ggb3RoZXIgKGVzcGVjaWFsbHkgdW5wbGVhc2FudCBpbiBhIDIgVkNQVQo+PiBn
-dWVzdCkuIEF0IGFueSBnaXZlbiBtb21lbnQsIHRoZXJlIHNob3VsZCBiZSBvbmx5IG9uZSBWQ1BV
-IGFsaXZlIGFuZAo+PiB0cnlpbmcgdG8gcmVleGVjdXRlIGFuIGluc3RydWN0aW9uIC0gYW5kIGF0
-IGxlYXN0IG9uZSBWQ1BVIGFsaXZlIG9uIHRoZQo+PiBndWVzdC4KPj4KPj4gV2UnbGwgZ2V0IG1v
-cmUgY29mZmVlLCBhbmQgb2YgY291cnNlIHN1Z2dlc3Rpb25zIGFyZSBhcHByZWNpYXRlZCAoYXMg
-aGFzCj4+IGJlZW4gYWxsIHlvdXIgaGVscCkuCj4gCj4gSG0sIEkgZG9uJ3QgdGhpbmsgaXQncyBn
-ZW5lcmFsbHkgc2FmZSB0byB0cnkgdG8gcGF1c2UgZG9tYWluIHZDUFVzCj4gZnJvbSB0aGUgc2Ft
-ZSBkb21haW4gY29udGV4dCwgYXMgeW91IHNheSBpdCdzIGxpa2VseSB0byBkZWFkbG9jayBzaW5j
-ZQo+IHR3byB2Q1BVcyBmcm9tIHRoZSBzYW1lIGRvbWFpbiBtaWdodCB0cnkgdG8gcGF1c2Ugb25l
-IGFub3RoZXIuCj4gCj4gTXkga25vd2xlZGdlIG9mIGFsbCB0aGlzIGludHJvc3BlY3Rpb24gbG9n
-aWMgaXMgdmVyeSB2YWd1ZSwgZG8geW91Cj4gcmVhbGx5IG5lZWQgdG8gc3RvcCB0aGUgb3RoZXIg
-dkNQVXMgd2hpbGUgcGVyZm9ybWluZyB0aGlzIHJlZXhlY3V0aW9uPwo+IAo+IFdoYXQgYXJlIHlv
-dSB0cnlpbmcgdG8gcHJldmVudCBieSBwYXVzaW5nIG90aGVyIHZDUFVzPwoKWWVzLCB0aGF0J3Mg
-dW5mb3J0dW5hdGVseSB2ZXJ5IG5lY2Vzc2FyeS4KClRoZSBzY2VuYXJpbyBpcyB0aGlzOiBmb3Ig
-aW50cm9zcGVjdGlvbiBwdXJwb3NlcywgYSBidW5jaCBvZiBwYWdlcyBhcmUKbWFya2VkIHJlYWQt
-b25seSBpbiB0aGUgRVBUIChvciBuby1leGVjdXRlLCBidXQgZm9yIHRoZSBwdXJwb3NlcyBvZiB0
-aGlzCmV4YW1wbGUgbGV0J3Mgc3RpY2sgdG8gcmVhZC1vbmx5KS4KCk5vdywgd2UnbGwgZ2V0IHZt
-X2V2ZW50cyB3aGVuZXZlciBhbiBpbnN0cnVjdGlvbiB3aWxsIHRyeSB0byB3cml0ZSBpbnRvCm9u
-ZSBvZiB0aG9zZS4gVm1fZXZlbnRzIGFyZSBleHBlbnNpdmUsIHNvIHdlIF9yZWFsbHlfIHdhbnQg
-dG8gZ2V0IGFzIGZldwpvZiB0aG9zZSBhcyBwb3NzaWJsZSB3aGlsZSBzdGlsbCBrZWVwaW5nIHRo
-ZSBndWVzdCBwcm90ZWN0ZWQuIFNvIHdlIHdhbnQKdG8gZmlsdGVyIG91dCBpcnJlbGV2YW50IG9u
-ZXMuCgpUaGUgbWFpbiBjYXRlZ29yeSBvZiBpcnJlbGV2YW50IG9uZXMgYXJlIGZhdWx0cyBjYXVz
-ZWQgYnkgd2Fsa2luZyB0aGUKZ3Vlc3QncyBwYWdlIHRhYmxlLiBXZSBvbmx5IHdhbnQgZXZlbnRz
-IGNhdXNlZCBieSBhbiBhY3R1YWwgd3JpdGUgaW50byBhCnByb3RlY3RlZCBwYWdlIGJ5IGFuIGFj
-dHVhbCBpbnN0cnVjdGlvbiBydW5uaW5nIGF0IFJJUCBpbiB0aGUgZ3Vlc3QuCgpTbywgd2UgZG9u
-J3Qgd2FudCB0byBnZXQgdGhvc2Ugdm1fZXZlbnRzIHdoZXJlIG5wZmVjLmtpbmQgIT0KbnBmZWNf
-a2luZF93aXRoX2dsYSBpbiBwMm1fbWVtX2FjY2Vzc19jaGVjaygpLCBoZW5jZSB0aGlzIHBhdGNo
-OgoKaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1jb21taXRkaWZm
-O2g9YzUzODdjNGQ3NTYwMmRiYjJmMGQzZDk2MWE1YzRiOGZhZjM4NzNkYgoKX0hvd2V2ZXJfLCBw
-bGVhc2UgcGljdHVyZSBhbiBpbnN0cnVjdGlvbiB0aGF0IGJvdGggd3JpdGVzIGludG8gYSBwYWdl
-IFAxCndlJ3JlIGludGVyZXN0ZWQgaW4sIF9hbmRfIGNhdXNlcyBhIHdyaXRlIGludG8gYSByZWFk
-LW9ubHkgcGFnZS13YWxrCnJlbGF0ZWQgcGFnZSBQMi4gRW11bGF0aW5nIHRoZSBjdXJyZW50IGlu
-c3RydWN0aW9uLCBhcyB0aGUgdXBzdHJlYW0KcGF0Y2ggZG9lcywgZG9lcyBlbGltaW5hdGUgdGhl
-IHZtX2V2ZW50IGNhdXNlZCBieSB3cml0aW5nIGludG8gUDIsIGJ1dAp3aXRoIHRoZSB1bmZvcnR1
-bmF0ZSBzaWRlLWVmZmVjdCBvZiBsb3NpbmcgYSBwb3RlbnRpYWxseSBjcml0aWNhbCBldmVudApm
-b3IgdGhlIHdyaXRlIGludG8gUDEuCgpXaGF0IHRoaXMgcGF0Y2ggYXR0ZW1wdHMgdG8gZG8gaXMg
-dG8gbWFyayBQMSByd3ggKHNvIGFsbG93IHRoZSB3cml0ZSksCnRoZW4gcHV0IHRoZSBmYXVsdGlu
-ZyBWQ1BVIGludG8gc2luZ2xlc3RlcCBtb2RlLCB0aGVuIHJlc3RvcmUgdGhlCnJlc3RyaWN0aW9u
-cyBhZnRlciBpdCBoYXMgZmluaXNoZWQgc2luZ2xlIHN0ZXBwaW5nLiBCeSBub3cgaXQncyBvYnZp
-b3VzCndoeSBhbGwgdGhlIG90aGVyIFZDUFVzIG5lZWQgdG8gYmUgcGF1c2VkOiBvbmUgb2YgdGhl
-bSBtaWdodCBkbyBhCm1hbGljaW91cyB3cml0ZSBpbnRvIFAxIHRoYXQgc2lsZW50bHkgc3VjY2Vl
-ZHMgKHNpbmNlIHRoZSBFUFQgaXMgc2hhcmVkCmFtb25nIGFsbCBWQ1BVcyAtIHB1dHRpbmcgYWx0
-cDJtIGFzaWRlIGZvciBhIG1vbWVudCkuIFdlIGRvbid0IHdhbnQgdGhhdC4KCkFsdGVybmF0aXZl
-bHksIHdlJ2QgYmUgaGFwcHkgd2l0aCBzaW1wbHkgYmVpbmcgYWJsZSB0byBzZXQgdGhlIHJlbGV2
-YW50CkEvRCBiaXRzIGluIHRoZSBwYWdlcyB0b3VjaGVkIGJ5IHRoZSBwYWdlIHdhbGssIGJ1dCBh
-ZnRlciBsZW5naHR5Cm5lZ290aWF0aW9ucyB0aGF0IGNhbiBiZSBmb3VuZCBpbiB0aGUgeGVuLWRl
-dmVsIGFyY2hpdmVzIHdlIHdlcmUgdW5hYmxlCnRvIGZpbmQgYSBzYWZlLCBhcmNoaXRlY3R1cmFs
-bHkgY29ycmVjdCB3YXkgb2YgZG9pbmcgdGhhdC4KCkkgaG9wZSB0aGlzIHNoZWRzIHNvbWUgbGln
-aHQgb24gaXQuCgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+
+--===============0979876242624809794==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="a8Wt8u1KmwUX3Y2C"
+Content-Disposition: inline
+
+
+--a8Wt8u1KmwUX3Y2C
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Nov 12, 2018 at 04:49:24PM +0000, Anthony PERARD wrote:
+(...)
+> +/* QMP FD callbacks */
+> +
+> +static void qmp_ev_fd_callback(libxl__egc *egc, libxl__ev_fd *ev_fd,
+> +                               int fd, short events, short revents)
+> +{
+> +    EGC_GC;
+> +    int rc;
+> +    libxl__json_object *o =3D NULL;
+> +    libxl__ev_qmp *ev =3D CONTAINER_OF(ev_fd, *ev, qmp_efd);
+> +
+> +    if (revents & (POLLHUP)) {
+> +        LOGD(ERROR, ev->domid, "received POLLHUP from QMP socket");
+> +        rc =3D ERROR_PROTOCOL_ERROR_QMP;
+> +        goto out;
+> +    }
+> +    if (revents & ~(POLLIN|POLLOUT)) {
+> +        LOGD(ERROR, ev->domid,
+> +             "unexpected poll event 0x%x on QMP socket (expected POLLIN "
+> +             "and/or POLLOUT)",
+> +            revents);
+> +        rc =3D ERROR_FAIL;
+> +        goto out;
+> +    }
+> +
+> +    if (revents & POLLOUT) {
+> +        rc =3D qmp_ev_callback_writable(gc, ev, fd);
+> +        if (rc)
+> +            goto out;
+> +    }
+> +
+> +    if (revents & POLLIN) {
+> +        rc =3D qmp_ev_callback_readable(egc, ev, fd);
+> +        if (rc)
+> +            goto out;
+> +
+> +        /* parse input */
+> +        while (1) {
+> +            /* parse rx buffer to find one json object */
+> +            rc =3D qmp_ev_get_next_msg(egc, ev, &o);
+> +            if (rc =3D=3D ERROR_NOTFOUND) {
+> +                rc =3D 0;
+> +                break;
+> +            } else if (rc)
+> +                goto out;
+> +
+> +            /* Must be last and return when the user callback is called =
+*/
+> +            rc =3D qmp_ev_handle_message(egc, ev, o);
+> +            if (rc < 0)
+> +                goto out;
+> +            if (rc =3D=3D 1) {
+> +                /* user callback has been called */
+> +                return;
+> +            }
+> +        }
+> +    }
+> +
+> +    qmp_ev_ensure_reading_writing(gc, ev);
+> +
+> +out:
+> +    if (rc) {
+> +        LOGD(ERROR, ev->domid,
+> +             "Error happend with the QMP connection to QEMU");
+> +
+> +        /* On error, deallocate all private ressources */
+> +        libxl__ev_qmp_dispose(gc, ev);
+> +
+> +        /* And tell libxl__ev_qmp user about the error */
+> +        ev->callback(egc, ev, NULL, rc); /* must be last */
+> +    }
+> +}
+> +
+(...)
+> +static int qmp_ev_callback_readable(libxl__egc *egc,
+> +                                    libxl__ev_qmp *ev, int fd)
+> +{
+> +    EGC_GC;
+> +
+> +    while (1) {
+> +        ssize_t r;
+> +
+> +        /* Check if the buffer still have space, or increase size */
+> +        if (ev->rx_buf_size - ev->rx_buf_used < QMP_RECEIVE_BUFFER_SIZE)=
+ {
+> +            ev->rx_buf_size =3D max(ev->rx_buf_size * 2,
+> +                               (size_t)QMP_RECEIVE_BUFFER_SIZE * 2);
+> +            assert(ev->rx_buf_size <=3D QMP_MAX_SIZE_RX_BUF);
+> +            if (ev->rx_buf_size > QMP_MAX_SIZE_RX_BUF) {
+> +                LOGD(ERROR, ev->domid,
+> +                     "QMP receive buffer is too big (%ld > %lld)",
+> +                     ev->rx_buf_size, QMP_MAX_SIZE_RX_BUF);
+> +                return ERROR_BUFFERFULL;
+
+What if you receive multiple messages (events?), but actually a single
+message do fit in a buffer? I think it would be better to stop receiving
+the data in the case of buffer full, but try to find a valid message
+before erroring out.
+
+> +            }
+> +            ev->rx_buf =3D libxl__realloc(NOGC, ev->rx_buf, ev->rx_buf_s=
+ize);
+> +        }
+> +
+> +        r =3D read(fd, ev->rx_buf + ev->rx_buf_used,
+> +                 ev->rx_buf_size - ev->rx_buf_used);
+> +        if (r < 0) {
+> +            if (errno =3D=3D EINTR) {
+> +                continue;
+> +            }
+> +            if (errno =3D=3D EWOULDBLOCK) {
+> +                break;
+> +            }
+> +            LOGED(ERROR, ev->domid, "error reading QMP socket");
+> +            return ERROR_FAIL;
+> +        }
+> +
+> +        if (r =3D=3D 0) {
+> +            LOGD(ERROR, ev->domid, "Unexpected EOF on QMP socket");
+> +            return ERROR_PROTOCOL_ERROR_QMP;
+> +        }
+> +
+> +        LOG_QMP("received %ldB: '%.*s'", r,
+> +                (int)r, ev->rx_buf + ev->rx_buf_used);
+> +
+> +        ev->rx_buf_used +=3D r;
+> +        assert(ev->rx_buf_used <=3D ev->rx_buf_size);
+> +    }
+> +
+> +    return 0;
+> +}
+
+(...)
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--a8Wt8u1KmwUX3Y2C
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlv2/dgACgkQ24/THMrX
+1yyQBwf/UINYy5C3lxq+sMsGUoY5symwPZ42+BUoPAPsGkdBQxz+aJCBsf33NKzf
+rJqXqlKOw236ONrqjWN0GK5JYKIafl6UZJHJ+StE0AuZO8h8sy7ssnf1eG6+CN71
+DgurthpHBOssNaUEU3JxaS3WyIZn9SI8LFdTOZ+d5BuB9ErHUBEiQxAxpbgDG9iQ
+eXbA2tmagQ7cg9grWyGAeUZlCMX3Eidyp+ZdEkH4Euj8KtY0/jjVyCCLp0c8kn+a
+rY1RLxvo74oOOplL/L0rQhj/WyER6CyMJaUmd9ormnbxniKzhmT9koYkO7gq1b1l
+H5dXAU7boR+5V7m0/mr805iU6YeWWQ==
+=hY4f
+-----END PGP SIGNATURE-----
+
+--a8Wt8u1KmwUX3Y2C--
+
+
+--===============0979876242624809794==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0979876242624809794==--
