@@ -1,22 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: qemu assert in staging during HVM live migration
-Date: Thu, 22 Nov 2018 11:03:45 +0100
-Message-ID: <20181122100344.GA13748@aepfle.de>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v1] x86/hvm: Generic instruction
+ re-execution mechanism for execute faults
+Date: Thu, 22 Nov 2018 11:05:54 +0100
+Message-ID: <20181122100554.pyqqa5iw6g27erkv@mac>
+References: <20181116100624.21977-1-aisaila@bitdefender.com>
+ <20181116170412.xrwuun3cqxll22l3@mac>
+ <b83547dc-f8bd-d537-0407-fc371fee2ea7@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2029909873618459653=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=aics=ob=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gPlpy-0004Go-JL
- for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 10:03:55 +0000
-Received: from aepfle.de by smtp.strato.de (RZmta 44.4 AUTH)
- with ESMTPSA id z0117auAMA3mWWk
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate)
- for <xen-devel@lists.xenproject.org>;
- Thu, 22 Nov 2018 11:03:48 +0100 (CET)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=mihh=ob=citrix.com=prvs=8571d395d=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gPls5-0004WM-8K
+ for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 10:06:05 +0000
+Content-Disposition: inline
+In-Reply-To: <b83547dc-f8bd-d537-0407-fc371fee2ea7@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,1196 +25,343 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Cc: "kevin.tian@intel.com" <kevin.tian@intel.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "jun.nakajima@intel.com" <jun.nakajima@intel.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, Mihai =?utf-8?B?RG9uyJt1?= <mdontu@bitdefender.com>, Andrei Vlad LUTAS <vlutas@bitdefender.com>, "jbeulich@suse.com" <jbeulich@suse.com>, Alexandru Stefan ISAILA <aisaila@bitdefender.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Anshul Makkar <anshul.makkar@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2029909873618459653==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="E/DnYTRukya0zdZ1"
-Content-Disposition: inline
-
-
---E/DnYTRukya0zdZ1
-Content-Type: multipart/mixed; boundary="s/l3CgOIzMHHjg/5"
-Content-Disposition: inline
-
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-While debugging something else, it turned out that staging and/or qemu
-can not migrate HVM domUs. qemu runs into an assert when the domU is
-about to be migrated with 'xl migrate domU dom0':
-
-qemu-system-i386: block/block-backend.c:903: blk_get_attached_dev_id: Assertion `!blk->legacy_dev' failed.
-
-Using /usr/bin/qemu-system-i386 from qemu-3.1 failed as well.
-The workaround was to enforce my own qemu-2.12.
-
-Since I have very very little runtime available on that system, thats
-all the info I could collect.
-Any idea what might be wrong? That 'legacy' code is in qemu since a few
-years already, according to 'git blame'.
-
-Olaf
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: attachment; filename="domU.cfg"
-
-name = "domUname"
-uuid = "3fae4e2e-dcf6-11e8-b1da-76a50c452436"
-maxmem = 32768
-memory = 32768
-vcpus = 16
-pae = 1
-acpi = 1
-apic = 1
-viridian = 0
-rtc_timeoffset = 0
-localtime = 0
-on_poweroff = "destroy"
-on_reboot = "restart"
-on_crash = "destroy"
-#device_model_override = "/usr/lib64/qemu-2.12/bin/qemu-system-i386"
-sdl = 0
-vnc = 1
-vncunused = 1
-keymap = "en-us"
-vif = [ "mac=00:16:3e:79:78:20,bridge=br0,script=vif-bridge,type=vif,vifname=v20", "mac=00:16:3e:79:78:15,bridge=br0,script=vif-bridge,type=vif,vifname=v15" ]
-parallel = "none"
-serial = "pty"
-builder = "hvm"
-boot = "c"
-disk = [ "format=raw,vdev=xvda,access=rw,backendtype=qdisk,target=/path/v83-xvda", "format=raw,vdev=xvdb,access=rw,backendtype=qdisk,target=/path/v86-xvdb", "format=raw,vdev=xvdc,access=rw,backendtype=qdisk,target=/path/v87-xvdc", "format=raw,vdev=xvdd,access=rw,backendtype=qdisk,target=/path/v88-xvdd", "format=raw,vdev=xvde,access=rw,backendtype=qdisk,target=/path/v90-xvde", "format=raw,vdev=xvdy,access=ro,backendtype=qdisk,target=/dev/shm/vhostmd0", "format=raw,vdev=xvdz,access=rw,backendtype=qdisk,target=/path/v91-xvdz" ]
-
-
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: attachment; filename="xl-create.txt"
-Content-Transfer-Encoding: quoted-printable
-
-Parsing config from domU.cfg
-{
-    "c_info": {
-        "type": "hvm",
-        "name": "domUname",
-        "uuid": "3fae4e2e-dcf6-11e8-b1da-76a50c452436",
-        "run_hotplug_scripts": "True"
-    },
-    "b_info": {
-        "max_vcpus": 16,
-        "avail_vcpus": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15
-        ],
-        "max_memkb": 33554432,
-        "target_memkb": 33554432,
-        "shadow_memkb": 278528,
-        "localtime": "False",
-        "sched_params": {
-
-        },
-        "claim_mode": "True",
-        "acpi": "True",
-        "apic": "True",
-        "type.hvm": {
-            "pae": "True",
-            "viridian": "False",
-            "vga": {
-
-            },
-            "vnc": {
-                "enable": "True",
-                "findunused": "True"
-            },
-            "keymap": "en-us",
-            "sdl": {
-                "enable": "False"
-            },
-            "spice": {
-
-            },
-            "serial": "pty",
-            "boot": "c",
-            "rdm": {
-
-            }
-        },
-        "arch_arm": {
-
-        }
-    },
-    "disks": [
-        {
-            "pdev_path": "/path/v83-xvda",
-            "vdev": "xvda",
-            "backend": "qdisk",
-            "format": "raw",
-            "readwrite": 1
-        },
-        {
-            "pdev_path": "/path/v86-xvdb",
-            "vdev": "xvdb",
-            "backend": "qdisk",
-            "format": "raw",
-            "readwrite": 1
-        },
-        {
-            "pdev_path": "/path/v87-xvdc",
-            "vdev": "xvdc",
-            "backend": "qdisk",
-            "format": "raw",
-            "readwrite": 1
-        },
-        {
-            "pdev_path": "/path/v88-xvdd",
-            "vdev": "xvdd",
-            "backend": "qdisk",
-            "format": "raw",
-            "readwrite": 1
-        },
-        {
-            "pdev_path": "/path/v90-xvde",
-            "vdev": "xvde",
-            "backend": "qdisk",
-            "format": "raw",
-            "readwrite": 1
-        },
-        {
-            "pdev_path": "/dev/shm/vhostmd0",
-            "vdev": "xvdy",
-            "backend": "qdisk",
-            "format": "raw"
-        },
-        {
-            "pdev_path": "/path/v91-xvdz",
-            "vdev": "xvdz",
-            "backend": "qdisk",
-            "format": "raw",
-            "readwrite": 1
-        }
-    ],
-    "nics": [
-        {
-            "devid": 0,
-            "mac": "00:16:3e:79:78:20",
-            "bridge": "br0",
-            "ifname": "v20",
-            "script": "vif-bridge",
-            "nictype": "vif"
-        },
-        {
-            "devid": 1,
-            "mac": "00:16:3e:79:78:15",
-            "bridge": "br0",
-            "ifname": "v15",
-            "script": "vif-bridge",
-            "nictype": "vif"
-        }
-    ],
-    "on_reboot": "restart",
-    "on_soft_reset": "soft_reset"
-}
-libxl: debug: libxl_create.c:1675:do_domain_create: Domain 0:ao 0x20c1220: =
-create: how=3D(nil) callback=3D(nil) poller=3D0x20b6300
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvda spec.backend=3Dqdisk
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdb spec.backend=3Dqdisk
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdc spec.backend=3Dqdisk
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdd spec.backend=3Dqdisk
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvde spec.backend=3Dqdisk
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdy spec.backend=3Dqdisk
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdz spec.backend=3Dqdisk
-libxl: debug: libxl_create.c:999:initiate_domain_create: Domain 7:running b=
-ootloader
-libxl: debug: libxl_bootloader.c:328:libxl__bootloader_run: Domain 7:not a =
-PV/PVH domain, skipping bootloader
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0b9530: deregister unregistered
-libxl: debug: libxl_numa.c:502:libxl__get_numa_candidate: New best NUMA pla=
-cement candidate found: nr_nodes=3D1, nr_cpus=3D44, nr_vcpus=3D32, free_mem=
-kb=3D500073
-libxl: debug: libxl_numa.c:502:libxl__get_numa_candidate: New best NUMA pla=
-cement candidate found: nr_nodes=3D1, nr_cpus=3D44, nr_vcpus=3D16, free_mem=
-kb=3D522751
-libxl: debug: libxl_numa.c:502:libxl__get_numa_candidate: New best NUMA pla=
-cement candidate found: nr_nodes=3D1, nr_cpus=3D44, nr_vcpus=3D16, free_mem=
-kb=3D523261
-libxl: detail: libxl_dom.c:235:numa_place_domain: NUMA placement candidate =
-with 1 nodes, 44 cpus and 523261 KB free selected
-domainbuilder: detail: xc_dom_allocate: cmdline=3D"", features=3D""
-domainbuilder: detail: xc_dom_kernel_file: filename=3D"/usr/lib/xen/boot/hv=
-mloader"
-domainbuilder: detail: xc_dom_malloc_filemap    : 614 kB
-libxl: debug: libxl_dom.c:988:libxl__load_hvm_firmware_module: Loading BIOS=
-: /usr/lib/xen/boot/seabios.bin
-domainbuilder: detail: xc_dom_boot_xen_init: ver 4.12, caps xen-3.0-x86_64 =
-xen-3.0-x86_32p hvm-3.0-x86_32 hvm-3.0-x86_32p hvm-3.0-x86_64=20
-domainbuilder: detail: xc_dom_parse_image: called
-domainbuilder: detail: xc_dom_find_loader: trying multiboot-binary loader .=
-=2E.=20
-domainbuilder: detail: loader probe failed
-domainbuilder: detail: xc_dom_find_loader: trying HVM-generic loader ...=20
-domainbuilder: detail: loader probe OK
-xc: detail: ELF: phdr: paddr=3D0x100000 memsz=3D0x66ca4
-xc: detail: ELF: memory: 0x100000 -> 0x166ca4
-domainbuilder: detail: xc_dom_mem_init: mem 32760 MB, pages 0x7ff800 pages,=
- 4k each
-domainbuilder: detail: xc_dom_mem_init: 0x7ff800 pages
-domainbuilder: detail: xc_dom_boot_mem_init: called
-domainbuilder: detail: range: start=3D0x0 end=3D0xf0000000
-domainbuilder: detail: range: start=3D0x100000000 end=3D0x80f800000
-domainbuilder: detail: xc_dom_malloc            : 64 MB
-xc: detail: PHYSICAL MEMORY ALLOCATION:
-xc: detail:   4KB PAGES: 0x0000000000000200
-xc: detail:   2MB PAGES: 0x00000000000003fb
-xc: detail:   1GB PAGES: 0x000000000000001e
-domainbuilder: detail: xc_dom_build_image: called
-domainbuilder: detail: xc_dom_pfn_to_ptr_retcount: domU mapping: pfn 0x100+=
-0x67 at 0x7f8c92cd2000
-domainbuilder: detail: xc_dom_alloc_segment:   kernel       : 0x100000 -> 0=
-x167000  (pfn 0x100 + 0x67 pages)
-xc: detail: ELF: phdr 0 at 0x7f8c92c6b000 -> 0x7f8c92cc80c8
-domainbuilder: detail: xc_dom_pfn_to_ptr_retcount: domU mapping: pfn 0x167+=
-0x40 at 0x7f8c92c92000
-domainbuilder: detail: xc_dom_alloc_segment:   System Firmware module : 0x1=
-67000 -> 0x1a7000  (pfn 0x167 + 0x40 pages)
-domainbuilder: detail: xc_dom_pfn_to_ptr_retcount: domU mapping: pfn 0x1a7+=
-0x1 at 0x7f8c92e2d000
-domainbuilder: detail: xc_dom_alloc_segment:   HVM start info : 0x1a7000 ->=
- 0x1a8000  (pfn 0x1a7 + 0x1 pages)
-domainbuilder: detail: alloc_pgtables_hvm: doing nothing
-domainbuilder: detail: xc_dom_build_image  : virt_alloc_end : 0x1a8000
-domainbuilder: detail: xc_dom_build_image  : virt_pgtab_end : 0x0
-domainbuilder: detail: xc_dom_boot_image: called
-domainbuilder: detail: xc_dom_compat_check: supported guest type: xen-3.0-x=
-86_64
-domainbuilder: detail: xc_dom_compat_check: supported guest type: xen-3.0-x=
-86_32p
-domainbuilder: detail: xc_dom_compat_check: supported guest type: hvm-3.0-x=
-86_32 <=3D matches
-domainbuilder: detail: xc_dom_compat_check: supported guest type: hvm-3.0-x=
-86_32p
-domainbuilder: detail: xc_dom_compat_check: supported guest type: hvm-3.0-x=
-86_64
-domainbuilder: detail: domain builder memory footprint
-domainbuilder: detail:    allocated
-domainbuilder: detail:       malloc             : 64 MB
-domainbuilder: detail:       anon mmap          : 0 bytes
-domainbuilder: detail:    mapped
-domainbuilder: detail:       file mmap          : 614 kB
-domainbuilder: detail:       domU mmap          : 672 kB
-domainbuilder: detail: vcpu_hvm: called
-domainbuilder: detail: compat_gnttab_hvm_seed: d7: pfn=3D0x80f800
-domainbuilder: detail: xc_dom_set_gnttab_entry: d7 gnt[0] -> d0 0xfefff
-domainbuilder: detail: xc_dom_set_gnttab_entry: d7 gnt[1] -> d0 0xfeffc
-domainbuilder: detail: xc_dom_release: called
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvda spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0bb880: deregister unregistered
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdb spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0bc9e0: deregister unregistered
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdc spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0be0e0: deregister unregistered
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdd spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0bf180: deregister unregistered
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvde spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c0220: deregister unregistered
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdy spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0bccf0: deregister unregistered
-libxl: debug: libxl_device.c:397:libxl__device_disk_set_backend: Disk vdev=
-=3Dxvdz spec.backend=3Dqdisk
-libxl: debug: libxl_linux.c:227:libxl__get_hotplug_script_info: Domain 7:ba=
-ckend_kind 3, no need to execute scripts
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c32e0: deregister unregistered
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /path/v83-xvda
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /path/v86-xvdb
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /path/v87-xvdc
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /path/v88-xvdd
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /path/v90-xvde
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /dev/shm/vhostmd0
-libxl: debug: libxl_disk.c:918:libxl__device_disk_find_local_path: Directly=
- accessing local RAW disk /path/v91-xvdz
-libxl: debug: libxl_dm.c:1695:libxl__build_device_model_args_new: Domain 7:=
-dm_restrict disabled, starting QEMU as root
-libxl: debug: libxl_dm.c:2372:libxl__spawn_local_dm: Domain 7:Spawning devi=
-ce-model /usr/lib/xen/bin/qemu-system-i386 with arguments:
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  /usr/lib/xe=
-n/bin/qemu-system-i386
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -xen-domid
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  7
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -chardev
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  socket,id=
-=3Dlibxl-cmd,path=3D/var/run/xen/qmp-libxl-7,server,nowait
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -no-shutdown
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -mon
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  chardev=3Dl=
-ibxl-cmd,mode=3Dcontrol
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -chardev
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  socket,id=
-=3Dlibxenstat-cmd,path=3D/var/run/xen/qmp-libxenstat-7,server,nowait
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -mon
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  chardev=3Dl=
-ibxenstat-cmd,mode=3Dcontrol
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -nodefaults
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -no-user-co=
-nfig
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -name
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  domUname
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -vnc
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  127.0.0.1:0=
-,to=3D99
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -display
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  none
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -k
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  en-us
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -serial
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  pty
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -device
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  cirrus-vga,=
-vgamem_mb=3D8
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -boot
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  order=3Dc
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -smp
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  16,maxcpus=
-=3D16
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -net
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  none
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -machine
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  xenfv
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -m
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  32760
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -drive
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  file=3D/pat=
-h/v83-xvda,if=3Dide,index=3D0,media=3Ddisk,format=3Draw,cache=3Dwriteback
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -drive
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  file=3D/pat=
-h/v86-xvdb,if=3Dide,index=3D1,media=3Ddisk,format=3Draw,cache=3Dwriteback
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -drive
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  file=3D/pat=
-h/v87-xvdc,if=3Dide,index=3D2,media=3Ddisk,format=3Draw,cache=3Dwriteback
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  -drive
-libxl: debug: libxl_dm.c:2374:libxl__spawn_local_dm: Domain 7:  file=3D/pat=
-h/v88-xvdd,if=3Dide,index=3D3,media=3Ddisk,format=3Draw,cache=3Dwriteback
-libxl: debug: libxl_dm.c:2376:libxl__spawn_local_dm: Domain 7:Spawning devi=
-ce-model /usr/lib/xen/bin/qemu-system-i386 with additional environment:
-libxl: debug: libxl_dm.c:2378:libxl__spawn_local_dm: Domain 7:  XEN_QEMU_CO=
-NSOLE_LIMIT=3D1048576
-libxl: debug: libxl_event.c:639:libxl__ev_xswatch_register: watch w=3D0x20b=
-9828 wpath=3D/local/domain/0/device-model/7/state token=3D3/0: register slo=
-tnum=3D3
-libxl: debug: libxl_create.c:1712:do_domain_create: Domain 0:ao 0x20c1220: =
-inprogress: poller=3D0x20b6300, flags=3Di
-libxl: debug: libxl_event.c:576:watchfd_callback: watch w=3D0x20b9828 wpath=
-=3D/local/domain/0/device-model/7/state token=3D3/0: event epath=3D/local/d=
-omain/0/device-model/7/state
-libxl: debug: libxl_exec.c:398:spawn_watch_event: domain 7 device model: sp=
-awn watch p=3D(null)
-libxl: debug: libxl_event.c:576:watchfd_callback: watch w=3D0x20b9828 wpath=
-=3D/local/domain/0/device-model/7/state token=3D3/0: event epath=3D/local/d=
-omain/0/device-model/7/state
-libxl: debug: libxl_exec.c:398:spawn_watch_event: domain 7 device model: sp=
-awn watch p=3Drunning
-libxl: debug: libxl_event.c:676:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0b9828 wpath=3D/local/domain/0/device-model/7/state token=3D3/0: deregister=
- slotnum=3D3
-libxl: debug: libxl_exec.c:129:libxl_report_child_exitstatus: domain 7 devi=
-ce model (dying as expected) [4582] died due to fatal signal Killed
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0b9828: deregister unregistered
-libxl: debug: libxl_qmp.c:779:libxl__qmp_initialize: Domain 7:connected to =
-/var/run/xen/qmp-libxl-7
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: q=
-mp
-libxl: debug: libxl_qmp.c:358:qmp_handle_response: Domain 7:QEMU version: 3=
-=2E0.0
-libxl: debug: libxl_qmp.c:628:qmp_send_prepare: Domain 7:next qmp command: =
-'{"execute":"qmp_capabilities","id":1}'
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: r=
-eturn
-libxl: debug: libxl_qmp.c:628:qmp_send_prepare: Domain 7:next qmp command: =
-'{"execute":"query-chardev","id":2}'
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: r=
-eturn
-libxl: debug: libxl_qmp.c:628:qmp_send_prepare: Domain 7:next qmp command: =
-'{"execute":"query-vnc","id":3}'
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: r=
-eturn
-libxl: debug: libxl_event.c:639:libxl__ev_xswatch_register: watch w=3D0x20c=
-67f0 wpath=3D/local/domain/0/backend/vif/7/0/state token=3D3/1: register sl=
-otnum=3D3
-libxl: debug: libxl_event.c:639:libxl__ev_xswatch_register: watch w=3D0x20c=
-6f30 wpath=3D/local/domain/0/backend/vif/7/1/state token=3D2/2: register sl=
-otnum=3D2
-libxl: debug: libxl_event.c:576:watchfd_callback: watch w=3D0x20c67f0 wpath=
-=3D/local/domain/0/backend/vif/7/0/state token=3D3/1: event epath=3D/local/=
-domain/0/backend/vif/7/0/state
-libxl: debug: libxl_event.c:877:devstate_callback: backend /local/domain/0/=
-backend/vif/7/0/state wanted state 2 ok
-libxl: debug: libxl_event.c:676:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c67f0 wpath=3D/local/domain/0/backend/vif/7/0/state token=3D3/1: deregiste=
-r slotnum=3D3
-libxl: debug: libxl_device.c:1117:device_backend_callback: Domain 7:calling=
- device_backend_cleanup
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c67f0: deregister unregistered
-libxl: debug: libxl_device.c:1218:device_hotplug: Domain 7:calling hotplug =
-script: /etc/xen/scripts/vif-bridge online
-libxl: debug: libxl_device.c:1219:device_hotplug: Domain 7:extra args:
-libxl: debug: libxl_device.c:1225:device_hotplug: Domain 7:	type_if=3Dvif
-libxl: debug: libxl_device.c:1227:device_hotplug: Domain 7:env:
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	script: /etc/xe=
-n/scripts/vif-bridge
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	XENBUS_TYPE: vif
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	XENBUS_PATH: ba=
-ckend/vif/7/0
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	XENBUS_BASE_PAT=
-H: backend
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	netdev:=20
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	vif: vif7.0
-libxl: debug: libxl_aoutils.c:593:libxl__async_exec_start: forking to execu=
-te: /etc/xen/scripts/vif-bridge online=20
-libxl: debug: libxl_event.c:545:watchfd_callback: watch epath=3D/local/doma=
-in/0/backend/vif/7/0/state token=3D3/1: empty slot
-libxl: debug: libxl_event.c:576:watchfd_callback: watch w=3D0x20c6f30 wpath=
-=3D/local/domain/0/backend/vif/7/1/state token=3D2/2: event epath=3D/local/=
-domain/0/backend/vif/7/1/state
-libxl: debug: libxl_event.c:877:devstate_callback: backend /local/domain/0/=
-backend/vif/7/1/state wanted state 2 ok
-libxl: debug: libxl_event.c:676:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c6f30 wpath=3D/local/domain/0/backend/vif/7/1/state token=3D2/2: deregiste=
-r slotnum=3D2
-libxl: debug: libxl_device.c:1117:device_backend_callback: Domain 7:calling=
- device_backend_cleanup
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c6f30: deregister unregistered
-libxl: debug: libxl_device.c:1218:device_hotplug: Domain 7:calling hotplug =
-script: /etc/xen/scripts/vif-bridge online
-libxl: debug: libxl_device.c:1219:device_hotplug: Domain 7:extra args:
-libxl: debug: libxl_device.c:1225:device_hotplug: Domain 7:	type_if=3Dvif
-libxl: debug: libxl_device.c:1227:device_hotplug: Domain 7:env:
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	script: /etc/xe=
-n/scripts/vif-bridge
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	XENBUS_TYPE: vif
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	XENBUS_PATH: ba=
-ckend/vif/7/1
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	XENBUS_BASE_PAT=
-H: backend
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	netdev:=20
-libxl: debug: libxl_device.c:1234:device_hotplug: Domain 7:	vif: vif7.1
-libxl: debug: libxl_aoutils.c:593:libxl__async_exec_start: forking to execu=
-te: /etc/xen/scripts/vif-bridge online=20
-libxl: debug: libxl_event.c:545:watchfd_callback: watch epath=3D/local/doma=
-in/0/backend/vif/7/1/state token=3D2/2: empty slot
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c68f0: deregister unregistered
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c68f0: deregister unregistered
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c7030: deregister unregistered
-libxl: debug: libxl_device.c:1203:device_hotplug: Domain 7:No hotplug scrip=
-t to execute
-libxl: debug: libxl_event.c:689:libxl__ev_xswatch_deregister: watch w=3D0x2=
-0c7030: deregister unregistered
-libxl: debug: libxl_event.c:2190:libxl__ao_progress_report: ao 0x20c1220: p=
-rogress report: ignored
-libxl: debug: libxl_event.c:1873:libxl__ao_complete: ao 0x20c1220: complete=
-, rc=3D0
-libxl: debug: libxl_event.c:1842:libxl__ao__destroy: ao 0x20c1220: destroy
-libxl: debug: libxl_qmp.c:779:libxl__qmp_initialize: Domain 7:connected to =
-/var/run/xen/qmp-libxl-7
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: q=
-mp
-libxl: debug: libxl_qmp.c:358:qmp_handle_response: Domain 7:QEMU version: 3=
-=2E0.0
-libxl: debug: libxl_qmp.c:628:qmp_send_prepare: Domain 7:next qmp command: =
-'{"execute":"qmp_capabilities","id":1}'
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: r=
-eturn
-libxl: debug: libxl_qmp.c:628:qmp_send_prepare: Domain 7:next qmp command: =
-'{"execute":"cont","id":2}'
-libxl: debug: libxl_qmp.c:343:qmp_handle_response: Domain 7:message type: r=
-eturn
-xencall:buffer: debug: total allocations:931 total releases:931
-xencall:buffer: debug: current allocations:0 maximum allocations:3
-xencall:buffer: debug: cache current size:3
-xencall:buffer: debug: cache hits:911 misses:3 toobig:17
-xencall:buffer: debug: total allocations:0 total releases:0
-xencall:buffer: debug: current allocations:0 maximum allocations:0
-xencall:buffer: debug: cache current size:0
-xencall:buffer: debug: cache hits:0 misses:0 toobig:0
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: attachment; filename="xl-migrate.txt"
-
-libxl: error: libxl_qmp.c:774:libxl__qmp_initialize: Domain 7:Connection error: Connection refused
-libxl: error: libxl_domain.c:1519:libxl__update_avail_vcpus_qmp: Domain 7:Fail to get number of cpus
-libxl: error: libxl_domain.c:1642:libxl_retrieve_domain_configuration: Domain 7:Fail to update available cpu map
-unable to retrieve domain configuration
-xencall:buffer: debug: total allocations:31 total releases:31
-xencall:buffer: debug: current allocations:0 maximum allocations:2
-xencall:buffer: debug: cache current size:2
-xencall:buffer: debug: cache hits:22 misses:2 toobig:7
-xencall:buffer: debug: total allocations:0 total releases:0
-xencall:buffer: debug: current allocations:0 maximum allocations:0
-xencall:buffer: debug: cache current size:0
-xencall:buffer: debug: cache hits:0 misses:0 toobig:0
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: attachment; filename="xenstore-ls.before-migration-xen4.12.txt"
-
-/tool = ""
-/tool/xenstored = ""
-/local = ""
-/local/domain = ""
-/local/domain/0 = ""
-/local/domain/0/domid = "0"
-/local/domain/0/name = "Domain-0"
-/local/domain/0/device-model = ""
-/local/domain/0/device-model/0 = ""
-/local/domain/0/device-model/0/backends = ""
-/local/domain/0/device-model/0/backends/console = ""
-/local/domain/0/device-model/0/backends/vkbd = ""
-/local/domain/0/device-model/0/backends/qdisk = ""
-/local/domain/0/device-model/0/backends/vfb = ""
-/local/domain/0/device-model/0/backends/qnic = ""
-/local/domain/0/device-model/0/state = "running"
-/local/domain/0/device-model/7 = ""
-/local/domain/0/device-model/7/backends = ""
-/local/domain/0/device-model/7/backends/console = ""
-/local/domain/0/device-model/7/backends/vkbd = ""
-/local/domain/0/device-model/7/backends/qdisk = ""
-/local/domain/0/device-model/7/state = "running"
-/local/domain/0/memory = ""
-/local/domain/0/memory/target = "16777216"
-/local/domain/0/memory/static-max = "16777216"
-/local/domain/0/backend = ""
-/local/domain/0/backend/qdisk = ""
-/local/domain/0/backend/qdisk/7 = ""
-/local/domain/0/backend/qdisk/7/51712 = ""
-/local/domain/0/backend/qdisk/7/51712/frontend = "/local/domain/7/device/vbd/51712"
-/local/domain/0/backend/qdisk/7/51712/params = "aio:/path/v83-xvda"
-/local/domain/0/backend/qdisk/7/51712/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/51712/online = "1"
-/local/domain/0/backend/qdisk/7/51712/removable = "0"
-/local/domain/0/backend/qdisk/7/51712/bootable = "1"
-/local/domain/0/backend/qdisk/7/51712/state = "2"
-/local/domain/0/backend/qdisk/7/51712/dev = "xvda"
-/local/domain/0/backend/qdisk/7/51712/type = "qdisk"
-/local/domain/0/backend/qdisk/7/51712/mode = "w"
-/local/domain/0/backend/qdisk/7/51712/device-type = "disk"
-/local/domain/0/backend/qdisk/7/51712/discard-enable = "1"
-/local/domain/0/backend/qdisk/7/51712/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/51712/info = "0"
-/local/domain/0/backend/qdisk/7/51712/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/51712/feature-discard = "1"
-/local/domain/0/backend/qdisk/7/51712/hotplug-status = "connected"
-/local/domain/0/backend/qdisk/7/51728 = ""
-/local/domain/0/backend/qdisk/7/51728/frontend = "/local/domain/7/device/vbd/51728"
-/local/domain/0/backend/qdisk/7/51728/params = "aio:/path/v86-xvdb"
-/local/domain/0/backend/qdisk/7/51728/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/51728/online = "1"
-/local/domain/0/backend/qdisk/7/51728/removable = "0"
-/local/domain/0/backend/qdisk/7/51728/bootable = "1"
-/local/domain/0/backend/qdisk/7/51728/state = "2"
-/local/domain/0/backend/qdisk/7/51728/dev = "xvdb"
-/local/domain/0/backend/qdisk/7/51728/type = "qdisk"
-/local/domain/0/backend/qdisk/7/51728/mode = "w"
-/local/domain/0/backend/qdisk/7/51728/device-type = "disk"
-/local/domain/0/backend/qdisk/7/51728/discard-enable = "1"
-/local/domain/0/backend/qdisk/7/51728/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/51728/info = "0"
-/local/domain/0/backend/qdisk/7/51728/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/51728/feature-discard = "1"
-/local/domain/0/backend/qdisk/7/51728/hotplug-status = "connected"
-/local/domain/0/backend/qdisk/7/51744 = ""
-/local/domain/0/backend/qdisk/7/51744/frontend = "/local/domain/7/device/vbd/51744"
-/local/domain/0/backend/qdisk/7/51744/params = "aio:/path/v87-xvdc"
-/local/domain/0/backend/qdisk/7/51744/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/51744/online = "1"
-/local/domain/0/backend/qdisk/7/51744/removable = "0"
-/local/domain/0/backend/qdisk/7/51744/bootable = "1"
-/local/domain/0/backend/qdisk/7/51744/state = "2"
-/local/domain/0/backend/qdisk/7/51744/dev = "xvdc"
-/local/domain/0/backend/qdisk/7/51744/type = "qdisk"
-/local/domain/0/backend/qdisk/7/51744/mode = "w"
-/local/domain/0/backend/qdisk/7/51744/device-type = "disk"
-/local/domain/0/backend/qdisk/7/51744/discard-enable = "1"
-/local/domain/0/backend/qdisk/7/51744/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/51744/info = "0"
-/local/domain/0/backend/qdisk/7/51744/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/51744/feature-discard = "1"
-/local/domain/0/backend/qdisk/7/51744/hotplug-status = "connected"
-/local/domain/0/backend/qdisk/7/51760 = ""
-/local/domain/0/backend/qdisk/7/51760/frontend = "/local/domain/7/device/vbd/51760"
-/local/domain/0/backend/qdisk/7/51760/params = "aio:/path/v88-xvdd"
-/local/domain/0/backend/qdisk/7/51760/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/51760/online = "1"
-/local/domain/0/backend/qdisk/7/51760/removable = "0"
-/local/domain/0/backend/qdisk/7/51760/bootable = "1"
-/local/domain/0/backend/qdisk/7/51760/state = "2"
-/local/domain/0/backend/qdisk/7/51760/dev = "xvdd"
-/local/domain/0/backend/qdisk/7/51760/type = "qdisk"
-/local/domain/0/backend/qdisk/7/51760/mode = "w"
-/local/domain/0/backend/qdisk/7/51760/device-type = "disk"
-/local/domain/0/backend/qdisk/7/51760/discard-enable = "1"
-/local/domain/0/backend/qdisk/7/51760/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/51760/info = "0"
-/local/domain/0/backend/qdisk/7/51760/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/51760/feature-discard = "1"
-/local/domain/0/backend/qdisk/7/51760/hotplug-status = "connected"
-/local/domain/0/backend/qdisk/7/51776 = ""
-/local/domain/0/backend/qdisk/7/51776/frontend = "/local/domain/7/device/vbd/51776"
-/local/domain/0/backend/qdisk/7/51776/params = "aio:/path/v90-xvde"
-/local/domain/0/backend/qdisk/7/51776/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/51776/online = "1"
-/local/domain/0/backend/qdisk/7/51776/removable = "0"
-/local/domain/0/backend/qdisk/7/51776/bootable = "1"
-/local/domain/0/backend/qdisk/7/51776/state = "2"
-/local/domain/0/backend/qdisk/7/51776/dev = "xvde"
-/local/domain/0/backend/qdisk/7/51776/type = "qdisk"
-/local/domain/0/backend/qdisk/7/51776/mode = "w"
-/local/domain/0/backend/qdisk/7/51776/device-type = "disk"
-/local/domain/0/backend/qdisk/7/51776/discard-enable = "1"
-/local/domain/0/backend/qdisk/7/51776/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/51776/info = "0"
-/local/domain/0/backend/qdisk/7/51776/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/51776/feature-discard = "1"
-/local/domain/0/backend/qdisk/7/51776/hotplug-status = "connected"
-/local/domain/0/backend/qdisk/7/268441600 = ""
-/local/domain/0/backend/qdisk/7/268441600/frontend = "/local/domain/7/device/vbd/268441600"
-/local/domain/0/backend/qdisk/7/268441600/params = "aio:/dev/shm/vhostmd0"
-/local/domain/0/backend/qdisk/7/268441600/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/268441600/online = "1"
-/local/domain/0/backend/qdisk/7/268441600/removable = "0"
-/local/domain/0/backend/qdisk/7/268441600/bootable = "1"
-/local/domain/0/backend/qdisk/7/268441600/state = "2"
-/local/domain/0/backend/qdisk/7/268441600/dev = "xvdy"
-/local/domain/0/backend/qdisk/7/268441600/type = "qdisk"
-/local/domain/0/backend/qdisk/7/268441600/mode = "r"
-/local/domain/0/backend/qdisk/7/268441600/device-type = "disk"
-/local/domain/0/backend/qdisk/7/268441600/discard-enable = "0"
-/local/domain/0/backend/qdisk/7/268441600/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/268441600/info = "4"
-/local/domain/0/backend/qdisk/7/268441600/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/268441600/hotplug-status = "connected"
-/local/domain/0/backend/qdisk/7/268441856 = ""
-/local/domain/0/backend/qdisk/7/268441856/frontend = "/local/domain/7/device/vbd/268441856"
-/local/domain/0/backend/qdisk/7/268441856/params = "aio:/path/v91-xvdz"
-/local/domain/0/backend/qdisk/7/268441856/frontend-id = "7"
-/local/domain/0/backend/qdisk/7/268441856/online = "1"
-/local/domain/0/backend/qdisk/7/268441856/removable = "0"
-/local/domain/0/backend/qdisk/7/268441856/bootable = "1"
-/local/domain/0/backend/qdisk/7/268441856/state = "2"
-/local/domain/0/backend/qdisk/7/268441856/dev = "xvdz"
-/local/domain/0/backend/qdisk/7/268441856/type = "qdisk"
-/local/domain/0/backend/qdisk/7/268441856/mode = "w"
-/local/domain/0/backend/qdisk/7/268441856/device-type = "disk"
-/local/domain/0/backend/qdisk/7/268441856/discard-enable = "1"
-/local/domain/0/backend/qdisk/7/268441856/feature-flush-cache = "1"
-/local/domain/0/backend/qdisk/7/268441856/info = "0"
-/local/domain/0/backend/qdisk/7/268441856/max-ring-page-order = "4"
-/local/domain/0/backend/qdisk/7/268441856/feature-discard = "1"
-/local/domain/0/backend/qdisk/7/268441856/hotplug-status = "connected"
-/local/domain/0/backend/console = ""
-/local/domain/0/backend/console/7 = ""
-/local/domain/0/backend/console/7/0 = ""
-/local/domain/0/backend/console/7/0/frontend = "/local/domain/7/console"
-/local/domain/0/backend/console/7/0/frontend-id = "7"
-/local/domain/0/backend/console/7/0/online = "1"
-/local/domain/0/backend/console/7/0/state = "1"
-/local/domain/0/backend/console/7/0/protocol = "vt100"
-/local/domain/0/backend/vkbd = ""
-/local/domain/0/backend/vkbd/7 = ""
-/local/domain/0/backend/vkbd/7/0 = ""
-/local/domain/0/backend/vkbd/7/0/frontend = "/local/domain/7/device/vkbd/0"
-/local/domain/0/backend/vkbd/7/0/frontend-id = "7"
-/local/domain/0/backend/vkbd/7/0/online = "1"
-/local/domain/0/backend/vkbd/7/0/state = "2"
-/local/domain/0/backend/vkbd/7/0/backend-type = "qemu"
-/local/domain/0/backend/vkbd/7/0/feature-abs-pointer = "1"
-/local/domain/0/backend/vkbd/7/0/feature-raw-pointer = "1"
-/local/domain/0/backend/vkbd/7/0/hotplug-status = "connected"
-/local/domain/0/backend/vif = ""
-/local/domain/0/backend/vif/7 = ""
-/local/domain/0/backend/vif/7/0 = ""
-/local/domain/0/backend/vif/7/0/frontend = "/local/domain/7/device/vif/0"
-/local/domain/0/backend/vif/7/0/frontend-id = "7"
-/local/domain/0/backend/vif/7/0/online = "1"
-/local/domain/0/backend/vif/7/0/state = "2"
-/local/domain/0/backend/vif/7/0/script = "/etc/xen/scripts/vif-bridge"
-/local/domain/0/backend/vif/7/0/vifname = "v20"
-/local/domain/0/backend/vif/7/0/mac = "00:16:3e:79:78:20"
-/local/domain/0/backend/vif/7/0/bridge = "br0"
-/local/domain/0/backend/vif/7/0/handle = "0"
-/local/domain/0/backend/vif/7/0/type = "vif"
-/local/domain/0/backend/vif/7/0/feature-sg = "1"
-/local/domain/0/backend/vif/7/0/feature-gso-tcpv4 = "1"
-/local/domain/0/backend/vif/7/0/feature-gso-tcpv6 = "1"
-/local/domain/0/backend/vif/7/0/feature-ipv6-csum-offload = "1"
-/local/domain/0/backend/vif/7/0/feature-rx-copy = "1"
-/local/domain/0/backend/vif/7/0/feature-rx-flip = "0"
-/local/domain/0/backend/vif/7/0/feature-multicast-control = "1"
-/local/domain/0/backend/vif/7/0/feature-split-event-channels = "1"
-/local/domain/0/backend/vif/7/0/multi-queue-max-queues = "8"
-/local/domain/0/backend/vif/7/0/hotplug-status = "connected"
-/local/domain/0/backend/vif/7/1 = ""
-/local/domain/0/backend/vif/7/1/frontend = "/local/domain/7/device/vif/1"
-/local/domain/0/backend/vif/7/1/frontend-id = "7"
-/local/domain/0/backend/vif/7/1/online = "1"
-/local/domain/0/backend/vif/7/1/state = "2"
-/local/domain/0/backend/vif/7/1/script = "/etc/xen/scripts/vif-bridge"
-/local/domain/0/backend/vif/7/1/vifname = "v15"
-/local/domain/0/backend/vif/7/1/mac = "00:16:3e:79:78:15"
-/local/domain/0/backend/vif/7/1/bridge = "br0"
-/local/domain/0/backend/vif/7/1/handle = "1"
-/local/domain/0/backend/vif/7/1/type = "vif"
-/local/domain/0/backend/vif/7/1/feature-sg = "1"
-/local/domain/0/backend/vif/7/1/feature-gso-tcpv4 = "1"
-/local/domain/0/backend/vif/7/1/feature-gso-tcpv6 = "1"
-/local/domain/0/backend/vif/7/1/feature-ipv6-csum-offload = "1"
-/local/domain/0/backend/vif/7/1/feature-rx-copy = "1"
-/local/domain/0/backend/vif/7/1/feature-rx-flip = "0"
-/local/domain/0/backend/vif/7/1/feature-multicast-control = "1"
-/local/domain/0/backend/vif/7/1/feature-split-event-channels = "1"
-/local/domain/0/backend/vif/7/1/multi-queue-max-queues = "8"
-/local/domain/0/backend/vif/7/1/hotplug-status = "connected"
-/local/domain/7 = ""
-/local/domain/7/vm = "/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436"
-/local/domain/7/name = "domUname"
-/local/domain/7/cpu = ""
-/local/domain/7/cpu/0 = ""
-/local/domain/7/cpu/0/availability = "online"
-/local/domain/7/cpu/1 = ""
-/local/domain/7/cpu/1/availability = "online"
-/local/domain/7/cpu/2 = ""
-/local/domain/7/cpu/2/availability = "online"
-/local/domain/7/cpu/3 = ""
-/local/domain/7/cpu/3/availability = "online"
-/local/domain/7/cpu/4 = ""
-/local/domain/7/cpu/4/availability = "online"
-/local/domain/7/cpu/5 = ""
-/local/domain/7/cpu/5/availability = "online"
-/local/domain/7/cpu/6 = ""
-/local/domain/7/cpu/6/availability = "online"
-/local/domain/7/cpu/7 = ""
-/local/domain/7/cpu/7/availability = "online"
-/local/domain/7/cpu/8 = ""
-/local/domain/7/cpu/8/availability = "online"
-/local/domain/7/cpu/9 = ""
-/local/domain/7/cpu/9/availability = "online"
-/local/domain/7/cpu/10 = ""
-/local/domain/7/cpu/10/availability = "online"
-/local/domain/7/cpu/11 = ""
-/local/domain/7/cpu/11/availability = "online"
-/local/domain/7/cpu/12 = ""
-/local/domain/7/cpu/12/availability = "online"
-/local/domain/7/cpu/13 = ""
-/local/domain/7/cpu/13/availability = "online"
-/local/domain/7/cpu/14 = ""
-/local/domain/7/cpu/14/availability = "online"
-/local/domain/7/cpu/15 = ""
-/local/domain/7/cpu/15/availability = "online"
-/local/domain/7/memory = ""
-/local/domain/7/memory/static-max = "33554432"
-/local/domain/7/memory/target = "33546240"
-/local/domain/7/memory/videoram = "8192"
-/local/domain/7/device = ""
-/local/domain/7/device/suspend = ""
-/local/domain/7/device/suspend/event-channel = ""
-/local/domain/7/device/vbd = ""
-/local/domain/7/device/vbd/51712 = ""
-/local/domain/7/device/vbd/51712/backend = "/local/domain/0/backend/qdisk/7/51712"
-/local/domain/7/device/vbd/51712/backend-id = "0"
-/local/domain/7/device/vbd/51712/state = "1"
-/local/domain/7/device/vbd/51712/virtual-device = "51712"
-/local/domain/7/device/vbd/51712/device-type = "disk"
-/local/domain/7/device/vbd/51728 = ""
-/local/domain/7/device/vbd/51728/backend = "/local/domain/0/backend/qdisk/7/51728"
-/local/domain/7/device/vbd/51728/backend-id = "0"
-/local/domain/7/device/vbd/51728/state = "1"
-/local/domain/7/device/vbd/51728/virtual-device = "51728"
-/local/domain/7/device/vbd/51728/device-type = "disk"
-/local/domain/7/device/vbd/51744 = ""
-/local/domain/7/device/vbd/51744/backend = "/local/domain/0/backend/qdisk/7/51744"
-/local/domain/7/device/vbd/51744/backend-id = "0"
-/local/domain/7/device/vbd/51744/state = "1"
-/local/domain/7/device/vbd/51744/virtual-device = "51744"
-/local/domain/7/device/vbd/51744/device-type = "disk"
-/local/domain/7/device/vbd/51760 = ""
-/local/domain/7/device/vbd/51760/backend = "/local/domain/0/backend/qdisk/7/51760"
-/local/domain/7/device/vbd/51760/backend-id = "0"
-/local/domain/7/device/vbd/51760/state = "1"
-/local/domain/7/device/vbd/51760/virtual-device = "51760"
-/local/domain/7/device/vbd/51760/device-type = "disk"
-/local/domain/7/device/vbd/51776 = ""
-/local/domain/7/device/vbd/51776/backend = "/local/domain/0/backend/qdisk/7/51776"
-/local/domain/7/device/vbd/51776/backend-id = "0"
-/local/domain/7/device/vbd/51776/state = "1"
-/local/domain/7/device/vbd/51776/virtual-device = "51776"
-/local/domain/7/device/vbd/51776/device-type = "disk"
-/local/domain/7/device/vbd/268441600 = ""
-/local/domain/7/device/vbd/268441600/backend = "/local/domain/0/backend/qdisk/7/268441600"
-/local/domain/7/device/vbd/268441600/backend-id = "0"
-/local/domain/7/device/vbd/268441600/state = "1"
-/local/domain/7/device/vbd/268441600/virtual-device = "268441600"
-/local/domain/7/device/vbd/268441600/device-type = "disk"
-/local/domain/7/device/vbd/268441856 = ""
-/local/domain/7/device/vbd/268441856/backend = "/local/domain/0/backend/qdisk/7/268441856"
-/local/domain/7/device/vbd/268441856/backend-id = "0"
-/local/domain/7/device/vbd/268441856/state = "1"
-/local/domain/7/device/vbd/268441856/virtual-device = "268441856"
-/local/domain/7/device/vbd/268441856/device-type = "disk"
-/local/domain/7/device/vkbd = ""
-/local/domain/7/device/vkbd/0 = ""
-/local/domain/7/device/vkbd/0/backend = "/local/domain/0/backend/vkbd/7/0"
-/local/domain/7/device/vkbd/0/backend-id = "0"
-/local/domain/7/device/vkbd/0/state = "1"
-/local/domain/7/device/vif = ""
-/local/domain/7/device/vif/0 = ""
-/local/domain/7/device/vif/0/backend = "/local/domain/0/backend/vif/7/0"
-/local/domain/7/device/vif/0/backend-id = "0"
-/local/domain/7/device/vif/0/state = "1"
-/local/domain/7/device/vif/0/handle = "0"
-/local/domain/7/device/vif/0/mac = "00:16:3e:79:78:20"
-/local/domain/7/device/vif/1 = ""
-/local/domain/7/device/vif/1/backend = "/local/domain/0/backend/vif/7/1"
-/local/domain/7/device/vif/1/backend-id = "0"
-/local/domain/7/device/vif/1/state = "1"
-/local/domain/7/device/vif/1/handle = "1"
-/local/domain/7/device/vif/1/mac = "00:16:3e:79:78:15"
-/local/domain/7/control = ""
-/local/domain/7/control/shutdown = ""
-/local/domain/7/control/feature-poweroff = ""
-/local/domain/7/control/feature-reboot = ""
-/local/domain/7/control/feature-suspend = ""
-/local/domain/7/control/feature-s3 = ""
-/local/domain/7/control/feature-s4 = ""
-/local/domain/7/control/sysrq = ""
-/local/domain/7/control/platform-feature-multiprocessor-suspend = "1"
-/local/domain/7/control/platform-feature-xs_reset_watches = "1"
-/local/domain/7/hvmloader = ""
-/local/domain/7/hvmloader/bios = "seabios"
-/local/domain/7/hvmloader/allow-memory-relocate = "0"
-/local/domain/7/data = ""
-/local/domain/7/drivers = ""
-/local/domain/7/feature = ""
-/local/domain/7/attr = ""
-/local/domain/7/domid = "7"
-/local/domain/7/store = ""
-/local/domain/7/store/port = "1"
-/local/domain/7/store/ring-ref = "1044476"
-/local/domain/7/platform = ""
-/local/domain/7/platform/acpi = "1"
-/local/domain/7/platform/acpi_s3 = "1"
-/local/domain/7/platform/acpi_s4 = "1"
-/local/domain/7/platform/acpi_laptop_slate = "0"
-/local/domain/7/platform/device-model = "qemu_xen"
-/local/domain/7/console = ""
-/local/domain/7/console/backend = "/local/domain/0/backend/console/7/0"
-/local/domain/7/console/backend-id = "0"
-/local/domain/7/console/limit = "1048576"
-/local/domain/7/console/type = "xenconsoled"
-/local/domain/7/console/output = "pty"
-/local/domain/7/console/tty = "/dev/pts/2"
-/local/domain/7/console/port = "2"
-/local/domain/7/console/ring-ref = "1044479"
-/local/domain/7/console/vnc-listen = "127.0.0.1"
-/local/domain/7/console/vnc-port = "5900"
-/local/domain/7/image = ""
-/local/domain/7/image/device-model-pid = "4583"
-/local/domain/7/serial = ""
-/local/domain/7/serial/0 = ""
-/local/domain/7/serial/0/tty = "/dev/pts/3"
-/vm = ""
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436 = ""
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/name = "domUname"
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/uuid = "3fae4e2e-dcf6-11e8-b1da-76a50c452436"
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/rtc = ""
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/rtc/timeoffset = ""
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/image = ""
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/image/ostype = "hvm"
-/vm/3fae4e2e-dcf6-11e8-b1da-76a50c452436/start_time = "1542877481.75"
-/libxl = ""
-/libxl/7 = ""
-/libxl/7/device = ""
-/libxl/7/device/vbd = ""
-/libxl/7/device/vbd/51712 = ""
-/libxl/7/device/vbd/51712/frontend = "/local/domain/7/device/vbd/51712"
-/libxl/7/device/vbd/51712/backend = "/local/domain/0/backend/qdisk/7/51712"
-/libxl/7/device/vbd/51712/params = "aio:/path/v83-xvda"
-/libxl/7/device/vbd/51712/frontend-id = "7"
-/libxl/7/device/vbd/51712/online = "1"
-/libxl/7/device/vbd/51712/removable = "0"
-/libxl/7/device/vbd/51712/bootable = "1"
-/libxl/7/device/vbd/51712/state = "1"
-/libxl/7/device/vbd/51712/dev = "xvda"
-/libxl/7/device/vbd/51712/type = "qdisk"
-/libxl/7/device/vbd/51712/mode = "w"
-/libxl/7/device/vbd/51712/device-type = "disk"
-/libxl/7/device/vbd/51712/discard-enable = "1"
-/libxl/7/device/vbd/51728 = ""
-/libxl/7/device/vbd/51728/frontend = "/local/domain/7/device/vbd/51728"
-/libxl/7/device/vbd/51728/backend = "/local/domain/0/backend/qdisk/7/51728"
-/libxl/7/device/vbd/51728/params = "aio:/path/v86-xvdb"
-/libxl/7/device/vbd/51728/frontend-id = "7"
-/libxl/7/device/vbd/51728/online = "1"
-/libxl/7/device/vbd/51728/removable = "0"
-/libxl/7/device/vbd/51728/bootable = "1"
-/libxl/7/device/vbd/51728/state = "1"
-/libxl/7/device/vbd/51728/dev = "xvdb"
-/libxl/7/device/vbd/51728/type = "qdisk"
-/libxl/7/device/vbd/51728/mode = "w"
-/libxl/7/device/vbd/51728/device-type = "disk"
-/libxl/7/device/vbd/51728/discard-enable = "1"
-/libxl/7/device/vbd/51744 = ""
-/libxl/7/device/vbd/51744/frontend = "/local/domain/7/device/vbd/51744"
-/libxl/7/device/vbd/51744/backend = "/local/domain/0/backend/qdisk/7/51744"
-/libxl/7/device/vbd/51744/params = "aio:/path/v87-xvdc"
-/libxl/7/device/vbd/51744/frontend-id = "7"
-/libxl/7/device/vbd/51744/online = "1"
-/libxl/7/device/vbd/51744/removable = "0"
-/libxl/7/device/vbd/51744/bootable = "1"
-/libxl/7/device/vbd/51744/state = "1"
-/libxl/7/device/vbd/51744/dev = "xvdc"
-/libxl/7/device/vbd/51744/type = "qdisk"
-/libxl/7/device/vbd/51744/mode = "w"
-/libxl/7/device/vbd/51744/device-type = "disk"
-/libxl/7/device/vbd/51744/discard-enable = "1"
-/libxl/7/device/vbd/51760 = ""
-/libxl/7/device/vbd/51760/frontend = "/local/domain/7/device/vbd/51760"
-/libxl/7/device/vbd/51760/backend = "/local/domain/0/backend/qdisk/7/51760"
-/libxl/7/device/vbd/51760/params = "aio:/path/v88-xvdd"
-/libxl/7/device/vbd/51760/frontend-id = "7"
-/libxl/7/device/vbd/51760/online = "1"
-/libxl/7/device/vbd/51760/removable = "0"
-/libxl/7/device/vbd/51760/bootable = "1"
-/libxl/7/device/vbd/51760/state = "1"
-/libxl/7/device/vbd/51760/dev = "xvdd"
-/libxl/7/device/vbd/51760/type = "qdisk"
-/libxl/7/device/vbd/51760/mode = "w"
-/libxl/7/device/vbd/51760/device-type = "disk"
-/libxl/7/device/vbd/51760/discard-enable = "1"
-/libxl/7/device/vbd/51776 = ""
-/libxl/7/device/vbd/51776/frontend = "/local/domain/7/device/vbd/51776"
-/libxl/7/device/vbd/51776/backend = "/local/domain/0/backend/qdisk/7/51776"
-/libxl/7/device/vbd/51776/params = "aio:/path/v90-xvde"
-/libxl/7/device/vbd/51776/frontend-id = "7"
-/libxl/7/device/vbd/51776/online = "1"
-/libxl/7/device/vbd/51776/removable = "0"
-/libxl/7/device/vbd/51776/bootable = "1"
-/libxl/7/device/vbd/51776/state = "1"
-/libxl/7/device/vbd/51776/dev = "xvde"
-/libxl/7/device/vbd/51776/type = "qdisk"
-/libxl/7/device/vbd/51776/mode = "w"
-/libxl/7/device/vbd/51776/device-type = "disk"
-/libxl/7/device/vbd/51776/discard-enable = "1"
-/libxl/7/device/vbd/268441600 = ""
-/libxl/7/device/vbd/268441600/frontend = "/local/domain/7/device/vbd/268441600"
-/libxl/7/device/vbd/268441600/backend = "/local/domain/0/backend/qdisk/7/268441600"
-/libxl/7/device/vbd/268441600/params = "aio:/dev/shm/vhostmd0"
-/libxl/7/device/vbd/268441600/frontend-id = "7"
-/libxl/7/device/vbd/268441600/online = "1"
-/libxl/7/device/vbd/268441600/removable = "0"
-/libxl/7/device/vbd/268441600/bootable = "1"
-/libxl/7/device/vbd/268441600/state = "1"
-/libxl/7/device/vbd/268441600/dev = "xvdy"
-/libxl/7/device/vbd/268441600/type = "qdisk"
-/libxl/7/device/vbd/268441600/mode = "r"
-/libxl/7/device/vbd/268441600/device-type = "disk"
-/libxl/7/device/vbd/268441600/discard-enable = "0"
-/libxl/7/device/vbd/268441856 = ""
-/libxl/7/device/vbd/268441856/frontend = "/local/domain/7/device/vbd/268441856"
-/libxl/7/device/vbd/268441856/backend = "/local/domain/0/backend/qdisk/7/268441856"
-/libxl/7/device/vbd/268441856/params = "aio:/path/v91-xvdz"
-/libxl/7/device/vbd/268441856/frontend-id = "7"
-/libxl/7/device/vbd/268441856/online = "1"
-/libxl/7/device/vbd/268441856/removable = "0"
-/libxl/7/device/vbd/268441856/bootable = "1"
-/libxl/7/device/vbd/268441856/state = "1"
-/libxl/7/device/vbd/268441856/dev = "xvdz"
-/libxl/7/device/vbd/268441856/type = "qdisk"
-/libxl/7/device/vbd/268441856/mode = "w"
-/libxl/7/device/vbd/268441856/device-type = "disk"
-/libxl/7/device/vbd/268441856/discard-enable = "1"
-/libxl/7/device/console = ""
-/libxl/7/device/console/0 = ""
-/libxl/7/device/console/0/frontend = "/local/domain/7/console"
-/libxl/7/device/console/0/backend = "/local/domain/0/backend/console/7/0"
-/libxl/7/device/console/0/frontend-id = "7"
-/libxl/7/device/console/0/online = "1"
-/libxl/7/device/console/0/state = "1"
-/libxl/7/device/console/0/protocol = "vt100"
-/libxl/7/device/vkbd = ""
-/libxl/7/device/vkbd/0 = ""
-/libxl/7/device/vkbd/0/frontend = "/local/domain/7/device/vkbd/0"
-/libxl/7/device/vkbd/0/backend = "/local/domain/0/backend/vkbd/7/0"
-/libxl/7/device/vkbd/0/frontend-id = "7"
-/libxl/7/device/vkbd/0/online = "1"
-/libxl/7/device/vkbd/0/state = "1"
-/libxl/7/device/vkbd/0/backend-type = "qemu"
-/libxl/7/device/vif = ""
-/libxl/7/device/vif/0 = ""
-/libxl/7/device/vif/0/frontend = "/local/domain/7/device/vif/0"
-/libxl/7/device/vif/0/backend = "/local/domain/0/backend/vif/7/0"
-/libxl/7/device/vif/0/frontend-id = "7"
-/libxl/7/device/vif/0/online = "1"
-/libxl/7/device/vif/0/state = "1"
-/libxl/7/device/vif/0/script = "/etc/xen/scripts/vif-bridge"
-/libxl/7/device/vif/0/vifname = "v20"
-/libxl/7/device/vif/0/mac = "00:16:3e:79:78:20"
-/libxl/7/device/vif/0/bridge = "br0"
-/libxl/7/device/vif/0/handle = "0"
-/libxl/7/device/vif/0/type = "vif"
-/libxl/7/device/vif/1 = ""
-/libxl/7/device/vif/1/frontend = "/local/domain/7/device/vif/1"
-/libxl/7/device/vif/1/backend = "/local/domain/0/backend/vif/7/1"
-/libxl/7/device/vif/1/frontend-id = "7"
-/libxl/7/device/vif/1/online = "1"
-/libxl/7/device/vif/1/state = "1"
-/libxl/7/device/vif/1/script = "/etc/xen/scripts/vif-bridge"
-/libxl/7/device/vif/1/vifname = "v15"
-/libxl/7/device/vif/1/mac = "00:16:3e:79:78:15"
-/libxl/7/device/vif/1/bridge = "br0"
-/libxl/7/device/vif/1/handle = "1"
-/libxl/7/device/vif/1/type = "vif"
-/libxl/7/type = "hvm"
-/libxl/7/dm-version = "qemu_xen"
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: attachment; filename="xl-domUname.log"
-
-Waiting for domain domUname (domid 7) to die [pid 4730]
-libxl: debug: libxl_event.c:639:libxl__ev_xswatch_register: watch w=0x20b75c0 wpath=@releaseDomain token=3/0: register slotnum=3
-libxl: debug: libxl_event.c:576:watchfd_callback: watch w=0x20b75c0 wpath=@releaseDomain token=3/0: event epath=@releaseDomain
-libxl: debug: libxl_domain.c:767:domain_death_xswatch_callback: Domain 7:[evg=0x20b6200] nentries=1 rc=1 7..7
-libxl: debug: libxl_domain.c:778:domain_death_xswatch_callback: Domain 7:[evg=0x20b6200]   got=domaininfos[0] got->domain=7
-libxl: debug: libxl_domain.c:804:domain_death_xswatch_callback: Domain 7:Exists shutdown_reported=0 dominf.flags=ffff0102
-libxl: debug: libxl_domain.c:771:domain_death_xswatch_callback: [evg=0] all reported
-libxl: debug: libxl_domain.c:833:domain_death_xswatch_callback: domain death search done
-libxl: debug: libxl_event.c:576:watchfd_callback: watch w=0x20b75c0 wpath=@releaseDomain token=3/0: event epath=@releaseDomain
-libxl: debug: libxl_domain.c:767:domain_death_xswatch_callback: Domain 7:[evg=0x20b6200] nentries=1 rc=1 7..7
-libxl: debug: libxl_domain.c:778:domain_death_xswatch_callback: Domain 7:[evg=0x20b6200]   got=domaininfos[0] got->domain=7
-libxl: debug: libxl_domain.c:804:domain_death_xswatch_callback: Domain 7:Exists shutdown_reported=0 dominf.flags=ffff010b
-libxl: debug: libxl_domain.c:724:domain_death_occurred: Domain 7:dying
-libxl: debug: libxl_domain.c:771:domain_death_xswatch_callback: [evg=0] all reported
-libxl: debug: libxl_domain.c:833:domain_death_xswatch_callback: domain death search done
-Domain 7 has been destroyed.
-libxl: debug: libxl_event.c:676:libxl__ev_xswatch_deregister: watch w=0x20b75c0 wpath=@releaseDomain token=3/0: deregister slotnum=3
-xencall:buffer: debug: total allocations:4 total releases:4
-xencall:buffer: debug: current allocations:0 maximum allocations:2
-xencall:buffer: debug: cache current size:2
-xencall:buffer: debug: cache hits:2 misses:2 toobig:0
-xencall:buffer: debug: total allocations:0 total releases:0
-xencall:buffer: debug: current allocations:0 maximum allocations:0
-xencall:buffer: debug: cache current size:0
-xencall:buffer: debug: cache hits:0 misses:0 toobig:0
-
---s/l3CgOIzMHHjg/5
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: attachment; filename="qemu-dm-domUname.log"
-
-qemu-system-i386: -serial pty: char device redirected to /dev/pts/3 (label serial0)
-gnttab: error: ioctl GRANT COPY failed 25 : Inappropriate ioctl for device
-VNC server running on 127.0.0.1:5900
-qemu-system-i386: /home/abuild/rpmbuild/BUILD/xen-4.12.20181120T144428.668f149048/non-dbg/tools/qemu-xen-dir/block/block-backend.c:903: blk_get_attached_dev_id: Assertion `!blk->legacy_dev' failed.
-
---s/l3CgOIzMHHjg/5--
-
---E/DnYTRukya0zdZ1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/Z+/QAKCRBdQqD6ppg2
-fvHeAJ0VazCzS2BNztwXokZ7Y7hlwvh0MACeOU8F6sPzA7cQ8oIugviq4+oGWQY=
-=RYW6
------END PGP SIGNATURE-----
-
---E/DnYTRukya0zdZ1--
-
-
---===============2029909873618459653==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2029909873618459653==--
+T24gV2VkLCBOb3YgMjEsIDIwMTggYXQgMDg6NTU6NDhQTSArMDIwMCwgUmF6dmFuIENvam9jYXJ1
+IHdyb3RlOgo+IE9uIDExLzE2LzE4IDc6MDQgUE0sIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4g
+Pj4gKyAgICAgICAgICAgIGlmICggYSA9PSB2ICkKPiA+PiArICAgICAgICAgICAgICAgIGNvbnRp
+bnVlOwo+ID4+ICsKPiA+PiArICAgICAgICAgICAgLyogUGF1c2UsIHN5bmNlZC4gKi8KPiA+PiAr
+ICAgICAgICAgICAgd2hpbGUgKCAhYS0+YXJjaC5pbl9ob3N0ICkKPiA+IFdoeSBub3QgdXNlIGEt
+PmlzX3J1bm5pbmcgYXMgYSB3YXkgdG8ga25vdyB3aGV0aGVyIHRoZSB2Q1BVIGlzCj4gPiBydW5u
+aW5nPwo+ID4gCj4gPiBJIHRoaW5rIHRoZSBsb2dpYyBvZiB1c2luZyB2Y3B1X3BhdXNlIGFuZCBl
+eHBlY3RpbmcgdGhlIHJ1bm5pbmcgdmNwdQo+ID4gdG8gdGFrZSBhIHZtZXhpdCBhbmQgdGh1cyBz
+ZXQgaW5faG9zdCBpcyB3cm9uZyBiZWNhdXNlIGEgdmNwdSB0aGF0Cj4gPiB3YXNuJ3QgcnVubmlu
+ZyB3aGVuIHZjcHVfcGF1c2Vfbm9zeW5jIGlzIGNhbGxlZCB3b24ndCBnZXQgc2NoZWR1bGVkCj4g
+PiBhbnltb3JlLCB0aHVzIG5vdCB0YWtpbmcgYSB2bWV4aXQgYW5kIHRoaXMgZnVuY3Rpb24gd2ls
+bCBsb2NrdXAuCj4gPiAKPiA+IEkgZG9uJ3QgdGhpbmsgeW91IG5lZWQgdGhlIGluX2hvc3QgYm9v
+bGVhbiBhdCBhbGwuCj4gPiAKPiA+PiArICAgICAgICAgICAgICAgIGNwdV9yZWxheCgpOwo+ID4g
+SXMgdGhpcyByZWFsbHkgYmV0dGVyIHRoYW4gdXNpbmcgdmNwdV9wYXVzZT8KPiA+IAo+ID4gSSBh
+c3N1bWUgdGhpcyBpcyBkb25lIHRvIGF2b2lkIHdhaXRpbmcgb24gZWFjaCB2Y3B1LCBhbmQgaW5z
+dGVhZCBkb2luZwo+ID4gaXQgaGVyZSBsaWtlbHkgbWVhbnMgbGVzcyB3YWl0IHRpbWU/Cj4gCj4g
+VGhlIHByb2JsZW0gd2l0aCBwbGFpbiB2Y3B1X3BhdXNlKCkgaXMgdGhhdCB3ZSB3ZXJlbid0IGFi
+bGUgdG8gdXNlIGl0LAo+IGZvciB0aGUgc2FtZSByZWFzb24gKHdoaWNoIHJlbWFpbnMgdW5jbGVh
+ciBhcyBvZiB5ZXQpIHRoYXQgd2UgY291bGRuJ3QKPiB1c2UgYS0+aXNfcnVubmluZzogd2UgZ2V0
+IENQVSBzdHVjayBoeXBlcnZpc29yIGNyYXNoZXMgdGhhdCB3YXkuIEhlcmUncwo+IG9uZSB0aGF0
+IHVzZXMgdGhlIHNhbWUgbG9naWMsIGJ1dCBsb29wcyBvbiBhLT5pc19ydW5uaW5nIGluc3RlYWQg
+b2YKPiAhYS0+YXJjaC5pbl9ob3N0Ogo+Cj4gKFhFTikgWyAzNjYzLjE5KFhFTikgWyAzNjY3Ljk5
+NTA2MV0gV2F0Y2hkb2cgdGltZXIgZGV0ZWN0cyB0aGF0IENQVTAgaXMKPiBzdHVjayEKPiAoWEVO
+KSBbIDM2NjguMDAwNjk0XSAtLS0tWyBYZW4tNC43LjUgIHg4Nl82NCAgZGVidWc9eSAgTm90IHRh
+aW50ZWQgXS0tLS0KPiAoWEVOKSBbIDM2NjguMDA3MTA4XSBDUFU6ICAgIDAKPiAoWEVOKSBbIDM2
+NjguMDA5ODgyXSBSSVA6ICAgIGUwMDg6WzxmZmZmODJkMDgwMTMyN2QyPl0KPiB2Y3B1X3NsZWVw
+X3N5bmMrMHg0MC8weDcxCj4gKFhFTikgWyAzNjY4LjAxNjk4OV0gUkZMQUdTOiAwMDAwMDAwMDAw
+MDAwMjAyICAgQ09OVEVYVDogaHlwZXJ2aXNvciAoZDB2MCkKPiAoWEVOKSBbIDM2NjguMDIzNTc1
+XSByYXg6IDAwMDAwMDAwMDAwMDAwMDEgICByYng6IGZmZmY4MzAwN2NjZmMwMDAKPiByY3g6IGZm
+ZmY4MzAwN2NjZmMxMjgKPiAoWEVOKSBbIDM2NjguMDMxNTQ4XSByZHg6IDAwMDAwMDAwMDAwMDAw
+MDAgICByc2k6IDAwMDAwMDAwMDAwMDAyNDYKPiByZGk6IGZmZmY4MzBjNTI5ODQxNDgKPiAoWEVO
+KSBbIDM2NjguMDM5NTIyXSByYnA6IGZmZmY4MzAwN2NmMmZjZDggICByc3A6IGZmZmY4MzAwN2Nm
+MmZjYzggICByODoKPiAgMDAwMDAwMDAwMDAwMDAwMwo+IChYRU4pIFsgMzY2OC4wNDc0OTVdIHI5
+OiAgMDAwMDAwMDAwMDAwMDAwMCAgIHIxMDogZmZmZjgyZDA4MDM0ODQ2MAo+IHIxMTogMDAwMDAw
+MDAwMDAwMDAwMAo+IChYRU4pIFsgMzY2OC4wNTU0NjVdIHIxMjogZmZmZjgyZDA4MDEzMjc5MiAg
+IHIxMzogZmZmZjgzMGIxNzJiNDAwMAo+IHIxNDogZmZmZjgyYzAwMDIyNTAwMAo+IChYRU4pIFsg
+MzY2OC4wNjM0MzldIHIxNTogMDAwMDAwMDAwMDBmMDAwMCAgIGNyMDogMDAwMDAwMDA4MDA1MDAz
+Mwo+IGNyNDogMDAwMDAwMDAwMDM1MjZlMAo+IChYRU4pIFsgMzY2OC4wNzE0MTVdIGNyMzogMDAw
+MDAwMGI0YmE5NDAwMCAgIGNyMjogMDAwMDdmNjE2MTcxNGY3MAo+IChYRU4pIFsgMzY2OC4wNzcz
+MDhdIGZzYjogMDAwMDdmOTE2NGYwODhjMCAgIGdzYjogZmZmZjg4MDI3NmMwMDAwMAo+IGdzczog
+MDAwMDAwMDAwMDAwMDAwMAo+IChYRU4pIFsgMzY2OC4wODUyODBdIGRzOiAwMDAwICAgZXM6IDAw
+MDAgICBmczogMDAwMCAgIGdzOiAwMDAwICAgc3M6Cj4gZTAxMCAgIGNzOiBlMDA4Cj4gKFhFTikg
+WyAzNjY4LjA5MjczMV0gWGVuIGNvZGUgYXJvdW5kIDxmZmZmODJkMDgwMTMyN2QyPgo+ICh2Y3B1
+X3NsZWVwX3N5bmMrMHg0MC8weDcxKToKPiAoWEVOKSBbIDM2NjguMTAwMTg2XSAgMDEgMDAgMDAg
+MDAgNzQgMjQgZjMgOTAgPDhiPiAxMSA0OCA4YiA0MyAxMCA4YiA4MAo+IGRjIDAxIDAwIDAwIDA5
+IGQwIDQ4IDk4Cj4gKFhFTikgWyAzNjY4LjEwODU5M10gWGVuIHN0YWNrIHRyYWNlIGZyb20gcnNw
+PWZmZmY4MzAwN2NmMmZjYzg6Cj4gKFhFTikgWyAzNjY4LjExNDIyM10gICAgMDAwMDAwMDAwMDAw
+MDI0MCBmZmZmODMwMDdjY2ZjMDAwCj4gZmZmZjgzMDA3Y2YyZmQwOCBmZmZmODJkMDgwMTA3MzVi
+Cj4gKFhFTikgWyAzNjY4LjEyMjI4Ml0gICAgZmZmZjgyZDA4MDEzNThhZCBmZmZmODMwYjE3MmI0
+MDAwCj4gMDAwMDAwMDAwMDAwMDI0MCAwMDAwMDAwMDAwMDAwMDQ4Cj4gKFhFTikgWyAzNjY4LjEz
+MDM0Nl0gICAgZmZmZjgzMDA3Y2YyZmQxOCBmZmZmODJkMDgwMTA4NzlhCj4gZmZmZjgzMDA3Y2Yy
+ZmQ4OCBmZmZmODJkMDgwMjQ1ZTY5Cj4gKFhFTikgWyAzNjY4LjEzODQwMl0gICAgZmZmZjgzMDA3
+ZDYxNTAwMCBmZmZmODMwYjE3MmI0NjU4Cj4gZmZmZjgzMDA3Y2YyZmQ0OCAwMDAwMDAwMDAwMGYw
+MDAwCj4gKFhFTikgWyAzNjY4LjE0NjQ2NF0gICAgMDAwMDdmOTE2NGZiODAwNCAwMDAwMDAwMDAw
+MDAwMDQ4Cj4gZmZmZjgzMGM1Mjk3NDAwMCAwMDAwMDAwMDAwMDAwMDA2Cj4gKFhFTikgWyAzNjY4
+LjE1NDUyM10gICAgZmZmZmZmZmZmZmZmZmZmZiBmZmZmZmZmZmZmZmZmZmVhCj4gMDAwMDdmOTE2
+NGZiMTAwNCAwMDAwMDAwMDAwMDAwMDAwCj4gKFhFTikgWyAzNjY4LjE2MjU4NF0gICAgZmZmZjgz
+MDA3Y2YyZmU0OCBmZmZmODJkMDgwMWRkOGY1Cj4gZmZmZjgyZDA4MDM3NGQ1OCBmZmZmODJkMDgw
+MjRiMzA4Cj4gKFhFTikgWyAzNjY4LjE3MDY0M10gICAgZmZmZjgzMDA3Y2YyZmRjOCBmZmZmODMw
+MDdjZjJmZmZmCj4gZmZmZjgzMDA3Y2YyZmRjOCBmZmZmODMwYjE3MmI0MDAwCj4gKFhFTikgWyAz
+NjY4LjE3ODcwNF0gICAgMDAwMDAyNDAwMDAwMDAwMSAwMDAwMDAwMDAwMGYwMDAwCj4gMDAwMDdm
+OTE2NGZiODAwNCBmZmZmZmZmZmZmZmZmZmZjCj4gKFhFTikgWyAzNjY4LjE4Njc2M10gICAgMDAw
+MDAwMDAwMDAwMDI5MyAwMDAwN2Y5MTYzMWY4NWQzCj4gZmZmZjgyZDA4MDI1MDgzNCBmZmZmODJk
+MDgwMjUwODI4Cj4gKFhFTikgWyAzNjY4LjE5NDgyMF0gICAgZmZmZjgyZDA4MDI1MDgzNCBmZmZm
+ODJkMDgwMjUwODI4Cj4gZmZmZjgyZDA4MDI1MDgzNCBmZmZmODMwMDdjZjJmZWY4Cj4gKFhFTikg
+WyAzNjY4LjIwMjg4Ml0gICAgMDAwMDAwMDAwMDAwMDAyMiBmZmZmODJkMDgwMWRjMDM3Cj4gZGVh
+ZGJlZWZkZWFkZjAwZCBmZmZmZmZmZjgxMDAxNDRhCj4gKFhFTikgWyAzNjY4LjIxMDk0Ml0gICAg
+ZmZmZjgzMDA3Y2YyZmVlOCBmZmZmODJkMDgwMTcyYWNhCj4gMDJmZjgyZDA4MDI1MDgzNCAwMDAw
+MDAwMDAwMDAwMDA2Cj4gKFhFTikgWyAzNjY4LjIxOTAwMF0gICAgMDAwMDdmOTE2NGZiMTAwNCBk
+ZWFkYmVlZmRlYWRmMDBkCj4gZGVhZGJlZWZkZWFkZjAwZCBkZWFkYmVlZmRlYWRmMDBkCj4gKFhF
+TikgWyAzNjY4LjIyNzA2Ml0gICAgZmZmZjgyZDA4MDI1MDgzNCBmZmZmODJkMDgwMjUwODI4Cj4g
+ZmZmZjgyZDA4MDI1MDgzNCBmZmZmODJkMDgwMjUwODI4Cj4gKFhFTikgWyAzNjY4LjIzNTEyMV0g
+ICAgZmZmZjgyZDA4MDI1MDgzNCBmZmZmODJkMDgwMjUwODI4Cj4gZmZmZjgyZDA4MDI1MDgzNCBm
+ZmZmODMwMDdkNjE1MDAwCj4gKFhFTikgWyAzNjY4LjI0MzE4MF0gICAgMDAwMDAwMDAwMDAwMDAw
+MCAwMDAwMDAwMDAwMDAwMDAwCj4gMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwCj4g
+KFhFTikgWyAzNjY4LjI1MTI0MF0gICAgMDAwMDdjZmY4MzBkMDBlNyBmZmZmODJkMDgwMjUwODk5
+Cj4gMDAwMDdmZmVmNmJhZjFkMCAwMDAwMDAwMDAwMzA1MDAwCj4gKFhFTikgWyAzNjY4LjI1OTI5
+OF0gICAgZmZmZjg4MDIyNzQwYjkwMCBmZmZmZmZmZmZmZmZmZmYyCj4gZmZmZjg4MDIyYjMxZmU5
+OCBmZmZmODgwMjZmMzM3NGQ4Cj4gKFhFTikgWyAzNjY4LjI2NzM2MV0gICAgMDAwMDAwMDAwMDAw
+MDI4MiAwMDAwMDAwMDAwMDAwMDAwCj4gZmZmZjg4MDA3Yzk5NTA4MCAwMDAwMDAwMDAwMDAwMDAw
+Cj4gKFhFTikgWyAzNjY4LjI3NTQxN10gWGVuIGNhbGwgdHJhY2U6Cj4gKFhFTikgWyAzNjY4LjI3
+ODcxNF0gICAgWzxmZmZmODJkMDgwMTMyN2QyPl0gdmNwdV9zbGVlcF9zeW5jKzB4NDAvMHg3MQo+
+IChYRU4pIFsgMzY2OC4yODQ5NTJdICAgIFs8ZmZmZjgyZDA4MDEwNzM1Yj5dCj4gZG9tYWluLmMj
+ZG9fZG9tYWluX3BhdXNlKzB4MzMvMHg0Zgo+IChYRU4pIFsgMzY2OC4yOTE5NzNdICAgIFs8ZmZm
+ZjgyZDA4MDEwODc5YT5dIGRvbWFpbl9wYXVzZSsweDI1LzB4MjcKPiAoWEVOKSBbIDM2NjguMjk3
+OTUyXSAgICBbPGZmZmY4MmQwODAyNDVlNjk+XQo+IGhhcF90cmFja19kaXJ0eV92cmFtKzB4MmMx
+LzB4NGE3Cj4gKFhFTikgWyAzNjY4LjMwNDc5N10gICAgWzxmZmZmODJkMDgwMWRkOGY1Pl0gZG9f
+aHZtX29wKzB4MThiZS8weDJiNTgKPiAoWEVOKSBbIDM2NjguMzEwODY0XSAgICBbPGZmZmY4MmQw
+ODAxNzJhY2E+XSBwdl9oeXBlcmNhbGwrMHgxZTUvMHg0MDIKPiAoWEVOKSBbIDM2NjguMzE3MDE3
+XSAgICBbPGZmZmY4MmQwODAyNTA4OTk+XSBlbnRyeS5vI3Rlc3RfYWxsX2V2ZW50cyswLzB4M2QK
+PiAoWEVOKSBbIDM2NjguMzIzNjg5XQo+IChYRU4pIFsgMzY2OC4zMjU2ODVdCj4gKFhFTikgWyAz
+NjY4LjMyNzY3OF0gKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKgo+IChY
+RU4pIFsgMzY2OC4zMzMxMzhdIFBhbmljIG9uIENQVSAwOgo+IChYRU4pIFsgMzY2OC4zMzY0Mjhd
+IEZBVEFMIFRSQVA6IHZlY3RvciA9IDIgKG5taSkKPiAoWEVOKSBbIDM2NjguMzQwODUwXSBbZXJy
+b3JfY29kZT0wMDAwXQo+IChYRU4pIFsgMzY2OC4zNDQ0MDRdICoqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioKPiAoWEVOKSBbIDM2NjguMzQ5ODYzXQo+IChYRU4pIFsgMzY2
+OC4zNTE4NTRdIFJlYm9vdCBpbiBmaXZlIHNlY29uZHMuLi4KPiAoWEVOKSBbIDM2NjguMzU2MDE3
+XSBEdW1waW5nIG90aGVyIENQVXMKPiAoWEVOKSBbIDM2NjguMzU5NTY3XSAqKiogRHVtcGluZyBD
+UFUxIGhvc3Qgc3RhdGU6ICoqKgo+IChYRU4pIFsgMzY2OC4zNjQzMzddIC0tLS1bIFhlbi00Ljcu
+NSAgeDg2XzY0ICBkZWJ1Zz15ICBOb3QgdGFpbnRlZCBdLS0tLQo+IChYRU4pIFsgMzY2OC4zNzA3
+NTBdIENQVTogICAgMQo+IChYRU4pIFsgMzY2OC4zNzM1MjJdIFJJUDogICAgZTAwODpbPGZmZmY4
+MmQwODAxNmI1YTY+XQo+IGRvbWFpbi5jI2RlZmF1bHRfaWRsZSsweGEyLzB4YjUKPiAoWEVOKSBb
+IDM2NjguMzgxMTQ5XSBSRkxBR1M6IDAwMDAwMDAwMDAwMDAyMDIgICBDT05URVhUOiBoeXBlcnZp
+c29yCj4gKFhFTikgWyAzNjY4LjM4NzEyOF0gcmF4OiAwMDAwMDAwMDAwMDAwMDAwICAgcmJ4OiBm
+ZmZmODMwYzUyOWI3ZmZmCj4gcmN4OiAwMDAwMDAwMDAwMDAwMDQ4Cj4gKFhFTikgWyAzNjY4LjM5
+NTEwMV0gcmR4OiAwMDAwMDAwMDAwMDAwMDAwICAgcnNpOiBmZmZmODMwYzUyOWI3ZmZmCj4gcmRp
+OiBmZmZmODMwYzUyOWI3ZWY4Cj4gKFhFTikgWyAzNjY4LjQwMzA3Nl0gcmJwOiBmZmZmODMwYzUy
+OWI3ZWQwICAgcnNwOiBmZmZmODMwYzUyOWI3ZWQwICAgcjg6Cj4gIGZmZmY4MzBjNTI5ZmU0YTgK
+PiAoWEVOKSBbIDM2NjguNDExMDQ4XSByOTogIGZmZmY4MzBjNTI5YmFjMjAgICByMTA6IGZmZmY4
+MzBjNTI5ZmU0OTAKPiByMTE6IGZmZmY4MzBjNTI5YmExNDgKPiAoWEVOKSBbIDM2NjguNDE5MDE5
+XSByMTI6IGZmZmY4MzBjNTI5YmExNDAgICByMTM6IGZmZmY4MzAwN2NmNzUwMDAKPiByMTQ6IDAw
+MDAwMzU0MGZkN2NkNmIKPiAoWEVOKSBbIDM2NjguNDI2OTk0XSByMTU6IGZmZmZmZmZmZmZmZmZm
+ZmYgICBjcjA6IDAwMDAwMDAwODAwNTAwM2IKPiBjcjQ6IDAwMDAwMDAwMDAzNTI2ZTAKPiAoWEVO
+KSBbIDM2NjguNDM0OTY0XSBjcjM6IDAwMDAwMDAwN2NmMWQwMDAgICBjcjI6IDAwMDAwMDAwMDAw
+MDAwMDAKPiAoWEVOKSBbIDM2NjguNDQwODYxXSBmc2I6IDAwMDAwMDAwMDAwMDAwMDAgICBnc2I6
+IDAwMDAwMDAwMDAwMDAwMDAKPiBnc3M6IDAwMDAwMDAwMDAwMDAwMDAKPiAoWEVOKSBbIDM2Njgu
+NDQ4ODMyXSBkczogMDAwMCAgIGVzOiAwMDAwICAgZnM6IDAwMDAgICBnczogMDAwMCAgIHNzOgo+
+IDAwMDAgICBjczogZTAwOAo+IChYRU4pIFsgMzY2OC40NTYyODVdIFhlbiBjb2RlIGFyb3VuZCA8
+ZmZmZjgyZDA4MDE2YjVhNj4KPiAoZG9tYWluLmMjZGVmYXVsdF9pZGxlKzB4YTIvMHhiNSk6Cj4g
+KFhFTikgWyAzNjY4LjQ2NDI2MF0gIDAwIDAwIDAwIDBmIDMwIDkwIGZiIGY0IDwwZj4gYjYgNDYg
+ZjUgODAgYTcgZmQgMDAKPiAwMCAwMCBmZSAwZiAzMCA5MCBlYiAwMQo+IChYRU4pIFsgMzY2OC40
+NzI2NjNdIFhlbiBzdGFjayB0cmFjZSBmcm9tIHJzcD1mZmZmODMwYzUyOWI3ZWQwOgo+IChYRU4p
+IFsgMzY2OC40NzgyOTddICAgIGZmZmY4MzBjNTI5YjdlZjAgZmZmZjgyZDA4MDE2YjYyOAo+IGZm
+ZmY4MmQwODAxMzRmZmUgZmZmZjgzMDA3Y2Y3NTAwMAo+IChYRU4pIFsgMzY2OC40ODYzNThdICAg
+IGZmZmY4MzBjNTI5YjdkZjAgMDAwMDAwMDAwMDAwMDAwMAo+IDAwMDAwMDAwMDAwMDAwMDAgMDAw
+MDAwMDAwMDAwMDAwMAo+IChYRU4pIFsgMzY2OC40OTQ0MTddICAgIDAwMDAwMDAwMDAwMDAwMDAg
+MDAwMDAwMDAwMDFjM2EzOAo+IDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMAo+IChY
+RU4pIFsgMzY2OC41MDI0NzhdICAgIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMAo+
+IDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMAo+IChYRU4pIFsgMzY2OC41MTA1Mzhd
+ICAgIDAwMDAwMDAwMDAwMDAyZmYgMDAwMDAwMDAwMDFjMDBlOQo+IDAwMDAwMDAwMDAwMDAwMDAg
+MDAwMDAwMDAwMDAwMDAwMAo+IChYRU4pIFsgMzY2OC41MTg1OTVdICAgIDAwMDBiZWVmMDAwMGJl
+ZWYgMDAwMDAwMDAwMDEwM2YxNQo+IDAwMDAwMGJmMDAwMGJlZWYgMDAwMDAwMDAwMDAwMDA0Ngo+
+IChYRU4pIFsgMzY2OC41MjY2NTZdICAgIDAwMDAwMDAwMDAxYzNhMzggMDAwMDAwMDAwMDAwYmVl
+Zgo+IGZmZmZlYTAwMGQ1YmJlZWYgZmZmZmVhMDAwZDViYmVlZgo+IChYRU4pIFsgMzY2OC41MzQ3
+MTVdICAgIDAwMDAwMDAwMDAwMGJlZWYgMDAwMDAwMDAwMDAwYmVlZgo+IDAxN2ZmZmMwMDAwMDAw
+MDEgZmZmZjgzMDA3Y2Y3NTAwMAo+IChYRU4pIFsgMzY2OC41NDI3NzVdICAgIDAwMDAwMDNiZDI2
+NDYzODAgMDAwMDAwMDAwMDM1MjZlMAo+IDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMGM1Mjk5ZTAw
+MAo+IChYRU4pIFsgMzY2OC41NTA4MzddICAgIDAwMDAwNzAxMDAwMDAwMDAgMDAwMDAwMDAwMDAw
+MDAwMAo+IChYRU4pIFsgMzY2OC41NTU5NDhdIFhlbiBjYWxsIHRyYWNlOgo+IChYRU4pIFsgMzY2
+OC41NTkyNDJdICAgIFs8ZmZmZjgyZDA4MDE2YjVhNj5dIGRvbWFpbi5jI2RlZmF1bHRfaWRsZSsw
+eGEyLzB4YjUKPiAoWEVOKSBbIDM2NjguNTY2MDAwXSAgICBbPGZmZmY4MmQwODAxNmI2Mjg+XSBk
+b21haW4uYyNpZGxlX2xvb3ArMHg1Ny8weDZlCj4gKFhFTikgWyAzNjY4LjU3MjUwMl0KPiAoWEVO
+KSBbIDM2NjguNTc0NDk0XSAqKiogRHVtcGluZyBDUFUyIGhvc3Qgc3RhdGU6ICoqKgo+IChYRU4p
+IFsgMzY2OC41NzkyNjFdIC0tLS1bIFhlbi00LjcuNSAgeDg2XzY0ICBkZWJ1Zz15ICBOb3QgdGFp
+bnRlZCBdLS0tLQo+IChYRU4pIFsgMzY2OC41ODU2NzVdIENQVTogICAgMgo+IChYRU4pIFsgMzY2
+OC41ODg0NDldIFJJUDogICAgZTAwODpbPGZmZmY4MmQwODAxMjc4ODA+XQo+IHF1ZXVlX3JlYWRf
+bG9ja19zbG93cGF0aCsweDI3LzB4NGQKPiAoWEVOKSBbIDM2NjguNTk2MzMyXSBSRkxBR1M6IDAw
+MDAwMDAwMDAwMDAyODYgICBDT05URVhUOiBoeXBlcnZpc29yIChkMXYxKQo+IChYRU4pIFsgMzY2
+OC42MDI5MTldIHJheDogMDAwMDAwMDAwMDAwMDBmZiAgIHJieDogZmZmZjgzMGIxYjJiNjk4MAo+
+IHJjeDogMDAwMDAwMDAwMDAwMDAwMAo+IChYRU4pIFsgMzY2OC42MTA4OTNdIHJkeDogZmZmZjgz
+MGM1Mjk5N2ZmZiAgIHJzaTogMDAwMDAwMDAwMDAwMDAwOQo+IHJkaTogZmZmZjgzMGIxYjJiNjk4
+YQo+IChYRU4pIFsgMzY2OC42MTg4NjVdIHJicDogZmZmZjgzMGM1Mjk5N2E2OCAgIHJzcDogZmZm
+ZjgzMGM1Mjk5N2E1OCAgIHI4Ogo+ICAwMDAwMDAwMDAwMDAwMDAwCj4gKFhFTikgWyAzNjY4LjYy
+NjgzN10gcjk6ICAwMDAwMDAwMDAwMDAwMDAzICAgcjEwOiAwMDAwMDAwMDAwMDAwMDAwCj4gcjEx
+OiAwMDAwMDAwMDAwMDAwMDAwCj4gKFhFTikgWyAzNjY4LjYzNDgxMl0gcjEyOiBmZmZmODMwYjFi
+MmI2OTg0ICAgcjEzOiBmZmZmODMwYzUyOTk3YWE0Cj4gcjE0OiBmZmZmODMwYzUyOTk3YzM0Cj4g
+KFhFTikgWyAzNjY4LjY0Mjc4Nl0gcjE1OiAwMDAwMDAwMDAwMDAwMWFhICAgY3IwOiAwMDAwMDAw
+MDgwMDUwMDMzCj4gY3I0OiAwMDAwMDAwMDAwMzUyNmUwCj4gKFhFTikgWyAzNjY4LjY1MDc1OV0g
+Y3IzOiAwMDAwMDAwYjEwNWVmMDAwICAgY3IyOiAwMDAwMDE5MDA2OGMzMDAwCj4gKFhFTikgWyAz
+NjY4LjY1NjY1MF0gZnNiOiAwMDAwMDAwMDAwMDAwMDAwICAgZ3NiOiAwMDAwMDAwMDAwMDAwMDAw
+Cj4gZ3NzOiAwMDAwMDA0ZjU4YmQzMDAwCj4gKFhFTikgWyAzNjY4LjY2NDYyNF0gZHM6IDAwMDAg
+ICBlczogMDAwMCAgIGZzOiAwMDAwICAgZ3M6IDAwMDAgICBzczoKPiAwMDAwICAgY3M6IGUwMDgK
+PiAoWEVOKSBbIDM2NjguNjcyMDc3XSBYZW4gY29kZSBhcm91bmQgPGZmZmY4MmQwODAxMjc4ODA+
+Cj4gKHF1ZXVlX3JlYWRfbG9ja19zbG93cGF0aCsweDI3LzB4NGQpOgo+IChYRU4pIFsgMzY2OC42
+ODAzMDldICA4NCBjMCA3NCAwOCBmMyA5MCA4YiAwMyA8ODQ+IGMwIDc1IGY4IGI4IDAwIDAxIDAw
+Cj4gMDAgZjAgMGYgYzEgMDMgM2MgZmYgNzUKPiAoWEVOKSBbIDM2NjguNjg4NzE3XSBYZW4gc3Rh
+Y2sgdHJhY2UgZnJvbSByc3A9ZmZmZjgzMGM1Mjk5N2E1ODoKPiAoWEVOKSBbIDM2NjguNjk0MzUx
+XSAgICBmZmZmODMwYjFiMmI2OTgwIGZmZmY4MzBjNTI5OTdiNTQKPiBmZmZmODMwYzUyOTk3YWQ4
+IGZmZmY4MmQwODAyMGMxZGYKPiAoWEVOKSBbIDM2NjguNzAyNDExXSAgICBmZmZmODMwYzUyOTk3
+YjA4IGZmZmY4MmQwODAyMTdkYjQKPiBmZmZmODMwYjE3MmI0MDAwIDAwMDAwMDAzNTI5OTdjNDQK
+PiAoWEVOKSBbIDM2NjguNzEwNDY4XSAgICAwMDAwMDAwMDBkYjEyZjQzIDAwMDAwMDAwMDAwMDAw
+MDAKPiBmZmZmODMwYzAwMDAwMDAwIDAwMDAwMDAwMDAwMDAxYWEKPiAoWEVOKSBbIDM2NjguNzE4
+NTI5XSAgICBmZmZmODMwYjFiMmI2OTgwIGZmZmZmODAxYTFlMThkMDMKPiBmZmZmODMwYzUyOTk3
+YzM0IGZmZmY4MzAwNzhiYTcwMDAKPiAoWEVOKSBbIDM2NjguNzI2NTkxXSAgICBmZmZmODMwYzUy
+OTk3Yjg4IGZmZmY4MmQwODAyNDcyMDgKPiBmZmZmODMwYjFiMmI2OTgwIGZmZmY4MzBjNTI5OTdj
+NDQKPiAoWEVOKSBbIDM2NjguNzM0NjQ4XSAgICAwMDAwMDAwMDAwMDAwMDAwIGZmZmZmODAxYTFl
+MThkMDMKPiBmZmZmODMwYzUyOTk3YjY4IGZmZmY4MmQwODAyMGJmMjAKPiAoWEVOKSBbIDM2Njgu
+NzQyNzA3XSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAyMDhhMDA4ZTMKPiBmZmZmODMwYzUy
+OTk3YjU4IDAwMDAwMDA0MDAwMDAwMDAKPiAoWEVOKSBbIDM2NjguNzUwNzY4XSAgICAwMDAwMDAw
+MDAwMDA4MDAwIDAwMDAwMDAwMDAwMDAwMDAKPiBmZmZmODMwYzUyOTk3YmUwIDAwMDAwMDAwMDAw
+MDAwMDAKPiAoWEVOKSBbIDM2NjguNzU4ODI2XSAgICAwMDAwMDAwMDAwMDAwMDAwIGZmZmY4MzAw
+NzhiYTcwMDAKPiBmZmZmODMwYzUyOTk3YzM0IGZmZmZmODAxYTFlMThkMDMKPiAoWEVOKSBbIDM2
+NjguNzY2ODg4XSAgICBmZmZmODMwYjFiMmI2OTgwIGZmZmY4MmQwODAzMTE1MjAKPiBmZmZmODMw
+YzUyOTk3Yjk4IGZmZmY4MmQwODAyNDc0NzUKPiAoWEVOKSBbIDM2NjguNzc0OTQ1XSAgICBmZmZm
+ODMwYzUyOTk3YmU4IGZmZmY4MmQwODAyMTI3NTEKPiAwMDAwMDAwMDAwMDA4MDAwIGZmZmZlZjA3
+YzM4Yjc2YjAKPiAoWEVOKSBbIDM2NjguNzgzMDA2XSAgICAwMDAwMDAwMDAwMDAwMDEwIGZmZmZm
+ODAxYTFlMThkMDMKPiBmZmZmZjgwMWExZTE4ZDAzIDAwMDAwMDAwMDAwMDBkMDMKPiAoWEVOKSBb
+IDM2NjguNzkxMDY3XSAgICAwMDBmZmZmZjgwMWExZTE4IGZmZmY4MzBjNTI5OTdlZjgKPiBmZmZm
+ODMwYzUyOTk3Yzc4IGZmZmY4MmQwODAxZDY2YTAKPiAoWEVOKSBbIDM2NjguNzk5MTI4XSAgICBm
+ZmZmZWYwN2MzOGI3NzA4IGZmZmY4MzBjNTI5OTdjNDQKPiBmZmZmODMwYzUyOTk3YzM0IDAwMDAw
+MDAwMDAwMDAwMDQKPiAoWEVOKSBbIDM2NjguODA3MTg4XSAgICBmZmZmODMwYzUyOTk3ZDM4IDAw
+MDAwMDEwMDAwMDAwMDQKPiBmZmZmODMwMDc4YmE3MDAwIDAwMDAwMDExMDAwMDAwMTAKPiAoWEVO
+KSBbIDM2NjguODE1MjQ0XSAgICBmZmZmZWEwMDBkNTliZWVmIGZmZmZlYTAwMGQ1OWJlZWYKPiAw
+MDAwMDAwMDAwMDBiZWVmIGZmZmY4MzBjNTI5OTdkMTAKPiAoWEVOKSBbIDM2NjguODIzMzA0XSAg
+ICBmZmZmODMwMDc4YmE3MDAwIDAwMDAwMDAwMDAwMDAwMDEKPiAwMDAwMDAwMDAwMDAwMDAwIGZm
+ZmY4MzBjNTI5OTdlZjgKPiAoWEVOKSBbIDM2NjguODMxMzYzXSAgICBmZmZmODMwYzUyOTk3Yzg4
+IGZmZmY4MmQwODAxZDg0NGQKPiBmZmZmODMwYzUyOTk3Y2U4IGZmZmY4MmQwODAxZDEzZGEKPiAo
+WEVOKSBbIDM2NjguODM5NDIzXSAgICBmZmZmODMwYzUyOTk3ZDM4IGZmZmY4MmQwODAzMTA3ZTAK
+PiAwMDAwMDAwMDAwMDAwMDAwIGZmZmZmODAxYTFlMThkMDMKPiAoWEVOKSBbIDM2NjguODQ3NDg0
+XSAgICBmZmZmODMwYzUyOTk3Y2Q4IGZmZmY4MzAwNzhiYTcwMDAKPiBmZmZmODMwYzUyOTk3ZDEw
+IDAwMDAwMDAwMDAwMDAwMmMKPiAoWEVOKSBbIDM2NjguODU1NTQ0XSBYZW4gY2FsbCB0cmFjZToK
+PiAoWEVOKSBbIDM2NjguODU4ODM4XSAgICBbPGZmZmY4MmQwODAxMjc4ODA+XQo+IHF1ZXVlX3Jl
+YWRfbG9ja19zbG93cGF0aCsweDI3LzB4NGQKPiAoWEVOKSBbIDM2NjguODY1ODU3XSAgICBbPGZm
+ZmY4MmQwODAyMGMxZGY+XQo+IGdldF9wYWdlX2Zyb21fZ2ZuX3AybSsweDE0ZS8weDNiMAo+IChY
+RU4pIFsgMzY2OC44NzI3OTJdICAgIFs8ZmZmZjgyZDA4MDI0NzIwOD5dCj4gaGFwX3AybV9nYV90
+b19nZm5fNF9sZXZlbHMrMHg0OC8weDI5OQo+IChYRU4pIFsgMzY2OC44ODAwNzFdICAgIFs8ZmZm
+ZjgyZDA4MDI0NzQ3NT5dCj4gaGFwX2d2YV90b19nZm5fNF9sZXZlbHMrMHgxYy8weDFlCj4gKFhF
+TikgWyAzNjY4Ljg4NzAwNF0gICAgWzxmZmZmODJkMDgwMjEyNzUxPl0gcGFnaW5nX2d2YV90b19n
+Zm4rMHgxMGUvMHgxMWQKPiAoWEVOKSBbIDM2NjguODkzNTkwXSAgICBbPGZmZmY4MmQwODAxZDY2
+YTA+XSBodm0uYyNfX2h2bV9jb3B5KzB4OTgvMHgzN2YKPiAoWEVOKSBbIDM2NjguOTAwMDAzXSAg
+ICBbPGZmZmY4MmQwODAxZDg0NGQ+XQo+IGh2bV9mZXRjaF9mcm9tX2d1ZXN0X3ZpcnRfbm9mYXVs
+dCsweDE0LzB4MTYKPiAoWEVOKSBbIDM2NjguOTA3ODAxXSAgICBbPGZmZmY4MmQwODAxZDEzZGE+
+XQo+IGVtdWxhdGUuYyNfaHZtX2VtdWxhdGVfb25lKzB4MTE4LzB4MmJjCj4gKFhFTikgWyAzNjY4
+LjkxNTE2OF0gICAgWzxmZmZmODJkMDgwMWQxNjc0Pl0gaHZtX2VtdWxhdGVfb25lKzB4MTAvMHgx
+Mgo+IChYRU4pIFsgMzY2OC45MjE0MDldICAgIFs8ZmZmZjgyZDA4MDFlMDhjMj5dIGhhbmRsZV9t
+bWlvKzB4NTIvMHhjOQo+IChYRU4pIFsgMzY2OC45MjczMDNdICAgIFs8ZmZmZjgyZDA4MDIwMzRh
+Mj5dCj4gdm14X3ZtZXhpdF9oYW5kbGVyKzB4MWUwZS8weDFlNDUKPiAoWEVOKSBbIDM2NjguOTM0
+MTQ5XSAgICBbPGZmZmY4MmQwODAyMDgyMGM+XQo+IHZteF9hc21fdm1leGl0X2hhbmRsZXIrMHhl
+Yy8weDI1MAo+IChYRU4pIFsgMzY2OC45NDEwNzldCj4gKFhFTikgWyAzNjY4Ljk0MzA3Ml0gKioq
+IER1bXBpbmcgQ1BVMiBndWVzdCBzdGF0ZSAoZDF2MSk6ICoqKgo+IChYRU4pIFsgMzY2OC45NDg1
+MzNdIC0tLS1bIFhlbi00LjcuNSAgeDg2XzY0ICBkZWJ1Zz15ICBOb3QgdGFpbnRlZCBdLS0tLQo+
+IChYRU4pIFsgMzY2OC45NTQ5NDhdIENQVTogICAgMgo+IChYRU4pIFsgMzY2OC45NTc3MTldIFJJ
+UDogICAgMDAxMDpbPGZmZmZmODAxYTFlMThkMDM+XQo+IChYRU4pIFsgMzY2OC45NjI1NzJdIFJG
+TEFHUzogMDAwMDAwMDAwMDAxMDA0NiAgIENPTlRFWFQ6IGh2bSBndWVzdCAoZDF2MSkKPiAoWEVO
+KSBbIDM2NjguOTY5MDc1XSByYXg6IGZmZmZmNzg4ODAwMDkwMDAgICByYng6IDAwMDAwMDAwMDAw
+NDAwMmYKPiByY3g6IGZmZmZmODAxYTFlMTkzMDAKPiAoWEVOKSBbIDM2NjguOTc3MDQ1XSByZHg6
+IGZmZmZlZjA3YzM4Yjc2YjggICByc2k6IGZmZmZlZjA3YzM4Yjc3MDgKPiByZGk6IDAwMDAwMDAw
+MDAwMDAwMDAKPiAoWEVOKSBbIDM2NjguOTg1MDE4XSByYnA6IGZmZmZlZjA3YzM4Yjc2YjAgICBy
+c3A6IGZmZmZlZjA3YzM4Yjc1ZjAgICByODoKPiAgZmZmZmVmMDdjMzhiNzcwOAo+IChYRU4pIFsg
+MzY2OC45OTI5OTFdIHI5OiAgMDAwMDAwMDAwMDAwMDAyZiAgIHIxMDogMDAwMDAwMDAwMDAwMDAw
+MQo+IHIxMTogMDAwMDAwMDAwMDAwMDAwMQo+IChYRU4pIFsgMzY2OS4wMDA5NjZdIHIxMjogMDAw
+MDAwMDAwMDAwMDAwMSAgIHIxMzogMDAwMDAwMDAwMDAwMDAwMAo+IHIxNDogMDAwMDAwMDAwMDAw
+MDAwMQo+IChYRU4pIFsgMzY2OS4wMDg5MzhdIHIxNTogMDAwMDAwMDAwMDAwMDAyZiAgIGNyMDog
+MDAwMDAwMDA4MDA1MDAzMQo+IGNyNDogMDAwMDAwMDAwMDE3MDY3OAo+IChYRU4pIFsgMzY2OS4w
+MTY5MTNdIGNyMzogMDAwMDAwMDAwMDFhYTAwMiAgIGNyMjogMDAwMDAxOTAwNjhjMzAwMAo+IChY
+RU4pIFsgMzY2OS4wMjI4MDZdIGZzYjogMDAwMDAwMDAwMDAwMDAwMCAgIGdzYjogZmZmZmM5ODE0
+YzgyMDAwMAo+IGdzczogMDAwMDAwMDQ3M2JmZTAwMAo+IChYRU4pIFsgMzY2OS4wMzA3NzZdIGRz
+OiAwMDJiICAgZXM6IDAwMmIgICBmczogMDA1MyAgIGdzOiAwMDJiICAgc3M6Cj4gMDAwMCAgIGNz
+OiAwMDEwCj4gKFhFTikgWyAzNjY5LjAzODIyOV0KPiAoWEVOKSBbIDM2NjkuMDQwMjIzXSAqKiog
+RHVtcGluZyBDUFUzIGhvc3Qgc3RhdGU6ICoqKgo+IChYRU4pIFsgMzY2OS4wNDQ5ODhdIC0tLS1b
+IFhlbi00LjcuNSAgeDg2XzY0ICBkZWJ1Zz15ICBOb3QgdGFpbnRlZCBdLS0tLQo+IChYRU4pIFsg
+MzY2OS4wNTE0MDNdIENQVTogICAgMwo+IChYRU4pIFsgMzY2OS4wNTQxNzddIFJJUDogICAgZTAw
+ODpbPGZmZmY4MmQwODAyMTAwNmE+XQo+IHZteF9zdGFydF9yZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24r
+MHgxMDcvMHg2OGEKPiAoWEVOKSBbIDM2NjkuMDYyODQxXSBSRkxBR1M6IDAwMDAwMDAwMDAwMDAy
+MDIgICBDT05URVhUOiBoeXBlcnZpc29yIChkMXYwKQo+IChYRU4pIFsgMzY2OS4wNjk0MzFdIHJh
+eDogZmZmZjgzMDA3OGJhNzAwMCAgIHJieDogZmZmZjgzMDA3Y2NmYzAwMAo+IHJjeDogMDAwMDAw
+MDAwMDAwMDAwMgo+IChYRU4pIFsgMzY2OS4wNzc0MDRdIHJkeDogZmZmZjgzMGM1Mjk3ZmZmZiAg
+IHJzaTogMDAwMDAwMDAwMDAwMDI0Ngo+IHJkaTogZmZmZjgzMGM1Mjk5ODE0OAo+IChYRU4pIFsg
+MzY2OS4wODUzNzddIHJicDogZmZmZjgzMGM1Mjk3ZmQxOCAgIHJzcDogZmZmZjgzMGM1Mjk3ZmNi
+OCAgIHI4Ogo+ICAwMDAwMDAwMDAwMDAwMDAyCj4gKFhFTikgWyAzNjY5LjA5MzM0OV0gcjk6ICAw
+MDAwMDAwMDAwMDAwMDA2ICAgcjEwOiAwMDAwMDAwMDAwMDNkOTc2Cj4gcjExOiAwMDAwMDAwMDAw
+MDAwMDA2Cj4gKFhFTikgWyAzNjY5LjEwMTMyMF0gcjEyOiAwMDAwMDAwMDAwMDAwMDAwICAgcjEz
+OiBmZmZmODJkMDgwMjhhM2U0Cj4gcjE0OiAwMDAwMDAwMDAwMDAwMDAwCj4gKFhFTikgWyAzNjY5
+LjEwOTI5Nl0gcjE1OiAwMDAwMDAwMTEzZjAwN2Y4ICAgY3IwOiAwMDAwMDAwMDgwMDUwMDMzCj4g
+Y3I0OiAwMDAwMDAwMDAwMzUyNmUwCj4gKFhFTikgWyAzNjY5LjExNzI2OV0gY3IzOiAwMDAwMDAw
+YjEwMzgwMDAwICAgY3IyOiAwMDAwMDAwMDAwMDAwMDAwCj4gKFhFTikgWyAzNjY5LjEyMzE2M10g
+ZnNiOiAwMDAwMDAwMDAwMDAwMDAwICAgZ3NiOiAwMDAwMDAwMDAwMDAwMDAwCj4gZ3NzOiBmZmZm
+ZjgwMWExMjllMDAwCj4gKFhFTikgWyAzNjY5LjEzMTEzMl0gZHM6IDAwMDAgICBlczogMDAwMCAg
+IGZzOiAwMDAwICAgZ3M6IDAwMDAgICBzczoKPiAwMDAwICAgY3M6IGUwMDgKPiAoWEVOKSBbIDM2
+NjkuMTM4NTg2XSBYZW4gY29kZSBhcm91bmQgPGZmZmY4MmQwODAyMTAwNmE+Cj4gKHZteF9zdGFy
+dF9yZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24rMHgxMDcvMHg2OGEpOgo+IChYRU4pIFsgMzY2OS4xNDc1
+OThdICA5MCA4MCBiOCAwYiAwMSAwMCAwMCAwMCA8NzU+IGY1IDQ4IDhiIDQwIDE4IDQ4IDg1Cj4g
+YzAgNzUgZGUgZTkgMTkgMDUgMDAgMDAKPiAoWEVOKSBbIDM2NjkuMTU2MDA1XSBYZW4gc3RhY2sg
+dHJhY2UgZnJvbSByc3A9ZmZmZjgzMGM1Mjk3ZmNiODoKPiAoWEVOKSBbIDM2NjkuMTYxNjQwXSAg
+ICBmZmZmODMwYjE3MzQyODAwIDAwMDAwMDAzMDAwMDAwMDkKPiAwMDAwMDAwMDAwMDAwMTAwIGZm
+ZmY4MzBiMTczNDIwMDAKPiAoWEVOKSBbIDM2NjkuMTY5Njk3XSAgICBmZmZmODMwYzAwMDAwMDAw
+IGZmZmY4MzBiMWIyYjY5ODAKPiBmZmZmODMwYjE3MmI0MDAwIGZmZmY4MzBiMWIyYjY5ODAKPiAo
+WEVOKSBbIDM2NjkuMTc3NzYxXSAgICAwMDAwMDAwMDFiMmI2ODAxIDAwMDAwMDAwMDAwMDAwMDIK
+PiBmZmZmODMwMDdjY2ZjMDAwIDAwMDAwMDAwMDAwMDAwM2IKPiAoWEVOKSBbIDM2NjkuMTg1ODE4
+XSAgICBmZmZmODMwYzUyOTdmZGE4IGZmZmY4MmQwODAyMTBiM2UKPiAwMDAwMDAwMDAwMTEzZjAw
+IDAwMDAwMDAwMDAwMDAwMDAKPiAoWEVOKSBbIDM2NjkuMTkzODc3XSAgICAwMDAwN2ZmOTFjZDM0
+ZDYwIDAwMDAwMDAxMTNmMDA3ZjgKPiAwMDAwMDAwMDAwMDAwMDAwIGZmZmY4MzBjNTI5N2ZkZjAK
+PiAoWEVOKSBbIDM2NjkuMjAxOTM3XSAgICAwMDAwMDAwMDAwMTEzZjAwIDAwMDAwMDAwMDAwMDAw
+MDAKPiBmZmZmODMwMDdjY2ZjMDAwIDAwMDAwMDAwMDAwMDAwMDUKPiAoWEVOKSBbIDM2NjkuMjA5
+OTk3XSAgICBmZmZmODMwMDdjY2ZjMDAwIGZmZmY4MzBiMTcyYjQwMDAKPiBmZmZmODMwMDdjY2Zj
+MDAwIGZmZmY4MzAwN2NjZmMwMDAKPiAoWEVOKSBbIDM2NjkuMjE4MDU2XSAgICAwMDAwMDAwMDAw
+MTEzZjAwIDAwMDAwMDAwMDAwMDAwMDAKPiBmZmZmODMwYzUyOTdmZTM4IGZmZmY4MmQwODAxZGVl
+OWUKPiAoWEVOKSBbIDM2NjkuMjI2MTE2XSAgICAwMDAwMDAwMDAwOTEzZjAwIDAwMDAwMDAwMDAw
+MDAwMDAKPiAwMDAwN2ZmOTFjZDM0ZDYwIGZmZmY4MzBiMWIyYjY5ODAKPiAoWEVOKSBbIDM2Njku
+MjM0MTc3XSAgICAwMDAwMDAzYjUyOTdmZTM4IDAwMDAwMDAxMTNmMDA3ZjgKPiAwMDAwMDAwMDAw
+MDAwMjk2IDAwMDAwMDAwMDAwMDAwMDAKPiAoWEVOKSBbIDM2NjkuMjQyMjM2XSAgICBmZmZmODMw
+YjFiMmI2OTgwIDAwMDAwMDAwMDAwMDAwMDUKPiBmZmZmODJkMDgwMjA4MWQxIGZmZmY4MzBjNTI5
+N2ZlZjgKPiAoWEVOKSBbIDM2NjkuMjUwMjk1XSAgICBmZmZmODMwMDdjY2ZjMDAwIDAwMDAwMDAw
+MDAwMDA2YWIKPiAwMDAwMDAwMDAwMDAwMDFiIDAwMDAwMDAxMTNmMDA3ZjgKPiAoWEVOKSBbIDM2
+NjkuMjU4MzU0XSAgICBmZmZmODMwYzUyOTdmZWU4IGZmZmY4MmQwODAyMDJjMDAKPiBmZmZmODJk
+MDgwMjA4MWQxIDAwMDAwMDAwMDAwMDAwODAKPiAoWEVOKSBbIDM2NjkuMjY2NDE3XSAgICAwMDAw
+MDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwMDIKPiBmZmZmODMwYjE3MmI0MDAwIDAwMDAwMDAw
+MDAxMTNmMDAKPiAoWEVOKSBbIDM2NjkuMjc0NDc0XSAgICAwMDAwN2ZmOTFjZDM0ZDYwIDAwMDAw
+MDAwMDAwMDAwM2IKPiBmZmZmODJkMDgwMjA4MWQxIGZmZmY4MmQwODAyMDgxYzUKPiAoWEVOKSBb
+IDM2NjkuMjgyNTM3XSAgICBmZmZmODJkMDgwMjA4MWQxIGZmZmY4MmQwODAyMDgxYzUKPiBmZmZm
+ODJkMDgwMjA4MWQxIGZmZmY4MmQwODAyMDgxYzUKPiAoWEVOKSBbIDM2NjkuMjkwNTk2XSAgICBm
+ZmZmODJkMDgwMjA4MWQxIGZmZmY4MzAwN2NjZmMwMDAKPiAwMDAwMDAwMDAwMDAwMDAwIDAwMDAw
+MDAwMDAwMDAwMDAKPiAoWEVOKSBbIDM2NjkuMjk4NjU1XSAgICAwMDAwMDAwMDAwMDAwMDAwIDAw
+MDAwMDAwMDAwMDAwMDAKPiAwMDAwN2NmM2FkNjgwMGU3IGZmZmY4MmQwODAyMDgyMGMKPiAoWEVO
+KSBbIDM2NjkuMzA2NzEyXSAgICAwMDAwN2ZmOTFjZDM0ZDYwIDAwMDAwMTkyODVjNDJhNTAKPiAw
+MDAwMDE5Mjg1OGE4ZWIwIDAwMDAwMDAwMDAwMDAwMDAKPiAoWEVOKSBbIDM2NjkuMzE0NzcyXSAg
+ICAwMDAwMDE5Mjg1ODk0NDM4IDQxYzY0ZTZkYTNiZDI4NDUKPiAwMDAwMTA0MDAwMDAwMDAwIDAw
+MDAwZmZmMjM5YTY5YWMKPiAoWEVOKSBbIDM2NjkuMzIyODMyXSBYZW4gY2FsbCB0cmFjZToKPiAo
+WEVOKSBbIDM2NjkuMzI2MTI4XSAgICBbPGZmZmY4MmQwODAyMTAwNmE+XQo+IHZteF9zdGFydF9y
+ZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24rMHgxMDcvMHg2OGEKPiAoWEVOKSBbIDM2NjkuMzMzOTI1XSAg
+ICBbPGZmZmY4MmQwODAyMTBiM2U+XQo+IHAybV9tZW1fYWNjZXNzX2NoZWNrKzB4NTUxLzB4NjRk
+Cj4gKFhFTikgWyAzNjY5LjM0MDc3NF0gICAgWzxmZmZmODJkMDgwMWRlZTllPl0KPiBodm1faGFw
+X25lc3RlZF9wYWdlX2ZhdWx0KzB4MmYyLzB4NjMxCj4gKFhFTikgWyAzNjY5LjM0ODA1MV0gICAg
+WzxmZmZmODJkMDgwMjAyYzAwPl0KPiB2bXhfdm1leGl0X2hhbmRsZXIrMHgxNTZjLzB4MWU0NQo+
+IChYRU4pIFsgMzY2OS4zNTQ4OTldICAgIFs8ZmZmZjgyZDA4MDIwODIwYz5dCj4gdm14X2FzbV92
+bWV4aXRfaGFuZGxlcisweGVjLzB4MjUwCj4gKFhFTikgWyAzNjY5LjM2MTgzMl0KPiAoWEVOKSBb
+IDM2NjkuMzYzODI3XSAqKiogRHVtcGluZyBDUFUzIGd1ZXN0IHN0YXRlIChkMXYwKTogKioqCj4g
+KFhFTikgWyAzNjY5LjM2OTI4NV0gLS0tLVsgWGVuLTQuNy41ICB4ODZfNjQgIGRlYnVnPXkgIE5v
+dCB0YWludGVkIF0tLS0tCj4gKFhFTikgWyAzNjY5LjM3NTcwMF0gQ1BVOiAgICAzCj4gKFhFTikg
+WyAzNjY5LjM3ODQ3MV0gUklQOiAgICAwMDMzOls8MDAwMDdmZjkxY2QzNGQ2MD5dCj4gKFhFTikg
+WyAzNjY5LjM4MzMyM10gUkZMQUdTOiAwMDAwMDAwMDAwMDEwMjQ3ICAgQ09OVEVYVDogaHZtIGd1
+ZXN0IChkMXYwKQo+IChYRU4pIFsgMzY2OS4zODk4MjRdIHJheDogMDAwMDdmZjkxY2QzNGQ2MCAg
+IHJieDogNDFjNjRlNmRhM2JkMjg0NQo+IHJjeDogNDFjNjRlNmRhM2JkMjg0NQo+IChYRU4pIFsg
+MzY2OS4zOTc3OTldIHJkeDogMDAwMDAwMDAwMDAwMDA3NyAgIHJzaTogMDAwMDAwMDAwMDAwMDAw
+MQo+IHJkaTogMDAwMDAxOTI4NTg3NzE1MAo+IChYRU4pIFsgMzY2OS40MDU3NjhdIHJicDogMDAw
+MDAxOTI4NTg5NDQzOCAgIHJzcDogMDAwMDAwOGQ2YWE3ZjYwOCAgIHI4Ogo+ICAwMDAwMDAwMDAw
+MDAwMDAwCj4gKFhFTikgWyAzNjY5LjQxMzc0M10gcjk6ICAwMDAwMDE5Mjg1OGE4ZWIwICAgcjEw
+OiAwMDAwMGZmZjIzOWE2OWFjCj4gcjExOiAwMDAwMTA0MDAwMDAwMDAwCj4gKFhFTikgWyAzNjY5
+LjQyMTcxNl0gcjEyOiAwMDAwMDAwMDAwMDAwMDAwICAgcjEzOiAwMDAwMDE5Mjg1OGE4ZWIwCj4g
+cjE0OiAwMDAwMDE5Mjg1YzQyYTUwCj4gKFhFTikgWyAzNjY5LjQyOTY5MF0gcjE1OiAwMDAwN2Zm
+OTFjZDM0ZDYwICAgY3IwOiAwMDAwMDAwMDgwMDUwMDMxCj4gY3I0OiAwMDAwMDAwMDAwMTcwNjc4
+Cj4gKFhFTikgWyAzNjY5LjQzNzY2Ml0gY3IzOiAwMDAwMDAwMTEzZjAwMDAyICAgY3IyOiAwMDAw
+MDAwMDAwMDAwMDAwCj4gKFhFTikgWyAzNjY5LjQ0MzU1NV0gZnNiOiAwMDAwMDAwMDAwMDAwMDAw
+ICAgZ3NiOiAwMDAwMDA4ZDZhN2NmMDAwCj4gZ3NzOiAwMDAwMDAyNTYyZDIwMDAwCj4gKFhFTikg
+WyAzNjY5LjQ1MTUyOV0gZHM6IDAwMmIgICBlczogMDAyYiAgIGZzOiAwMDUzICAgZ3M6IDAwMmIg
+ICBzczoKPiAwMDJiICAgY3M6IDAwMzMKPiAoWEVOKSBbIDM2NjkuNDU4OTgwXQo+IChYRU4pIFsg
+MzY2OS40NjM1ODRdIEFQSUMgZXJyb3Igb24gQ1BVMDogNDAoMDApCj4gCj4gU29tZSBzY2hlZHVs
+ZXIgbWFnaWMgYXBwZWFycyB0byBoYXBwZW4gaGVyZSB3aGVyZSBpdCBpcyB1bmNsZWFyIHdoeQo+
+IGlzX3J1bm5pbmcgZG9lc24ndCBzZWVtIHRvIGVuZCB1cCBiZWluZyAwIGFzIGV4cGVjdGVkIGlu
+IG91ciBjYXNlLiBXZSdsbAo+IGtlZXAgZGlnZ2luZy4KClRoZXJlIHNlZW1zIHRvIGJlIHNvbWUg
+a2luZCBvZiBkZWFkbG9jayBiZXR3ZWVuCnZteF9zdGFydF9yZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24g
+YW5kIGhhcF90cmFja19kaXJ0eV92cmFtL2hhbmRsZV9tbWlvLgpBcmUgeW91IGhvbGRpbmcgYSBs
+b2NrIHdoaWxlIHRyeWluZyB0byBwdXQgdGhlIG90aGVyIHZjcHVzIHRvIHNsZWVwPwoKUm9nZXIu
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
