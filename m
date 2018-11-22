@@ -1,15 +1,15 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 05/14] x86/p2m: Don't overwrite
- p2m_altp2m_lazy_copy()'s callers p2m pointer
-Date: Thu, 22 Nov 2018 08:03:39 -0700
-Message-ID: <5BF6C54B02000078001FEFCD@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 06/14] x86/hvm: Make the altp2m locking
+ easier to follow
+Date: Thu, 22 Nov 2018 08:08:26 -0700
+Message-ID: <5BF6C66A02000078001FEFE5@prv1-mh.provo.novell.com>
 References: <1542806482-24030-1-git-send-email-andrew.cooper3@citrix.com>
- <1542806482-24030-6-git-send-email-andrew.cooper3@citrix.com>
+ <1542806482-24030-7-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1542806482-24030-6-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1542806482-24030-7-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,17 +24,20 @@ Cc: Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Razvan
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDIxLjExLjE4IGF0IDE0OjIxLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gVGhlIGZpbmFsIHBhcmFtZXRlciB0byBwMm1fYWx0cDJtX2xhenlfY29weSgpIGFwcGVh
-cnMgdG8gYmUgdW5uZWNlc3NhcnksIGFuZAo+IHJlc3VsdHMgaW4gdmVyeSBoYXJkLXRvLWZvbGxv
-dyBjb2RlLiAgSGF2ZSB0aGUgc29sZSBjYWxsZXIgc2V0IGl0cyBsb2NhbCBwMm0KPiBwb2ludGVy
-IGFwcHJvcHJpYXRlbHksIGFuZCBkcm9wIHRoZSBwYXJhbWV0ZXIuCj4gCj4gV2l0aCB0aGF0IGRv
-bmUsIGEgbGV2ZWwgb2YgaW5kaXJlY3Rpb24gb2YgYXAybSBjYW4gYmUgZHJvcHBlZCBpbnNpZGUK
-PiBwMm1fYWx0cDJtX2xhenlfY29weSgpLiAgV2hpbGUgY2hhbmdpbmcgdGhlIEFQSSwgc3dpdGNo
-IGl0IGZyb20gYm9vbF90IHRvCj4gYm9vbCwgYW5kIGRyb3AgcHJpbnRpbmcgb2YgdGhlIGFsdHAy
-bSdzIHZpcnR1YWwgYWRkcmVzcywgYmVjYXVzZSBpdCBpcyBvZiBubwo+IHVzZSBldmVuIHdoZW4g
-ZGVidWdnaW5nLgo+IAo+IE5vIChpbnRlbmRlZCkgb3ZlcmFsbCBjaGFuZ2UgaW4gYmVoYXZpb3Vy
-Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+dGU6Cj4gRHJvcCB0aGUgYXAybV9hY3RpdmUgYm9vbGVhbiwgYW5kIGNvbnNpc3RlbnRseSB1c2Ug
+dGhlIHVubG9ja2luZyBmb3JtOgo+IAo+ICAgaWYgKCBwMm0gIT0gaG9zdHAybSApCj4gICAgICAg
+IF9fcHV0X2dmbihwMm0sIGdmbik7Cj4gICBfX3B1dF9nZm4oaG9zdHAybSwgZ2ZuKTsKPiAKPiB3
+aGljaCBtYWtlcyBpdCBjbGVhciB0aGF0IHdlIGFsd2F5cyB1bmxvY2sgdGhlIGFsdHAybSdzIGdm
+biBpZiBpdCBpcyBpbiB1c2UsCj4gYW5kIGFsd2F5cyB1bmxvY2sgdGhlIGhvc3RwMm0ncyBnZm4u
+ICBUaGlzIGFsc28gZHJvcHMgdGhlIHRlcm5hcnkgZXhwcmVzc2lvbgo+IGluIHRoZSBsb2dkaXJ0
+eSBjYXNlLgo+IAo+IEV4dGVuZCB0aGUgbG9nZGlydHkgY29tbWVudCB0byBpZGVudGlmeSB3aGVy
+ZSB0aGUgbG9ja2luZyB2aW9sYXRpb24gaXMgbGlhYmxlCj4gdG8gb2NjdXIuCj4gCj4gTm8gKGlu
+dGVuZGVkKSBvdmVyYWxsIGNoYW5nZSBpbiBiZWhhdmlvdXIuCj4gCj4gU2lnbmVkLW9mZi1ieTog
+QW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CmFsYmVpdCBJIHRoaW5rIHRoZSB0aXRsZSBj
+b3VsZCBkbyB3aXRoIHNvbWUgaW1wcm92ZW1lbnQ6IEFzIGl0IHN0YW5kcwppdCByZWFkcyBhcyBp
+ZiB5b3UgZG8gYW4gYWx0cDJtLWdsb2JhbCBjaGFuZ2UsIGJ1dCBpdCdzIGFsbCBsaW1pdGVkIHRv
+Cmh2bV9oYXBfbmVzdGVkX3BhZ2VfZmF1bHQoKS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
