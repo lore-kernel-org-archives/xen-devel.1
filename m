@@ -1,21 +1,14 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH V9 2/7] x86/p2m: switch global_logdirty from
- bool_t to bool
-Date: Thu, 22 Nov 2018 14:19:19 +0000
-Message-ID: <20181122141919.i5cbugoqaml6fwwe@zion.uk.xensource.com>
-References: <1542886828-11241-1-git-send-email-rcojocaru@bitdefender.com>
- <1542886828-11241-3-git-send-email-rcojocaru@bitdefender.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [RFC 00/16] xen/arm: Implement Set/Way operations
+Date: Thu, 22 Nov 2018 14:21:17 +0000
+Message-ID: <8324c48d-eee7-dec7-5447-754bac53ee94@arm.com>
+References: <20181008183352.16291-1-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=nkve=ob=citrix.com=prvs=857cca76a=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gPppD-00066x-SC
- for xen-devel@lists.xenproject.org; Thu, 22 Nov 2018 14:19:23 +0000
-Content-Disposition: inline
-In-Reply-To: <1542886828-11241-3-git-send-email-rcojocaru@bitdefender.com>
+In-Reply-To: <20181008183352.16291-1-julien.grall@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,13 +17,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Cc: xen-devel@lists.xenproject.org, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: xen-devel@lists.xen.org
+Cc: Andre Przywara <andre.przywara@arm.com>, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBOb3YgMjIsIDIwMTggYXQgMDE6NDA6MjNQTSArMDIwMCwgUmF6dmFuIENvam9jYXJ1
-IHdyb3RlOgo+IFNpZ25lZC1vZmYtYnk6IFJhenZhbiBDb2pvY2FydSA8cmNvam9jYXJ1QGJpdGRl
-ZmVuZGVyLmNvbT4KClJldmlld2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgpPbiAxMC84LzE4IDc6MzMgUE0sIEp1bGllbiBHcmFsbCB3cm90ZToKPiBKdWxpZW4gR3Jh
+bGwgKDE2KToKPiAgICB4ZW4vYXJtOiBJbnRyb2R1Y2UgaGVscGVycyB0byBnZXQvc2V0IGFuIE1G
+TiBmcm9tL3RvIGFuIExQQUUgZW50cnkKPiAgICB4ZW4vYXJtOiBBbGxvdyBscGFlX2lzX3t0YWJs
+ZSwgbWFwcGluZ30gaGVscGVycyB0byB3b3JrIG9uIGludmFsaWQKPiAgICAgIGVudHJ5Cj4gICAg
+eGVuL2FybTogZ3Vlc3Rfd2Fsa190YWJsZXM6IFN3aXRjaCB0aGUgcmV0dXJuIHRvIGJvb2wKPiAg
+ICB4ZW4vYXJtOiBwMm06IEludHJvZHVjZSBhIGhlbHBlciB0byBnZW5lcmF0ZSBQMk0gdGFibGUg
+ZW50cnkgZnJvbSBhCj4gICAgICBwYWdlCgpJIGhhdmUgbWVyZ2VkIHRoZSA0IHBhdGNoZXMgYWJv
+dmUuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
