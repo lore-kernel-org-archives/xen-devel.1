@@ -1,19 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/atomic: Improvements and
- simplifications to assembly constraints
-Date: Thu, 22 Nov 2018 07:24:29 -0700
-Message-ID: <5BF6BC1D02000078001FEF23@prv1-mh.provo.novell.com>
-References: <1542829065-19681-1-git-send-email-andrew.cooper3@citrix.com>
- <5BF66F8402000078001FEBF5@prv1-mh.provo.novell.com>
- <80218ab1-8d65-5a38-0ef6-477301f37d50@citrix.com>
- <5BF6ACC602000078001FEE46@prv1-mh.provo.novell.com>
- <0ae8f7df-e687-3866-aafe-c9209081adbe@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 11/14] xen/mm: Switch
+ mfn_to_virt()/virt_to_mfn() to using mfn_t
+Date: Thu, 22 Nov 2018 14:32:27 +0000
+Message-ID: <a463b994-2fe4-7ac6-d47a-9935d3f33f5d@arm.com>
+References: <1542806482-24030-1-git-send-email-andrew.cooper3@citrix.com>
+ <1542806482-24030-12-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <0ae8f7df-e687-3866-aafe-c9209081adbe@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <1542806482-24030-12-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,39 +19,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIyLjExLjE4IGF0IDE0OjU4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjIvMTEvMjAxOCAxMzoxOSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDIy
-LjExLjE4IGF0IDEzOjM4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBP
-biAyMi8xMS8yMDE4IDA4OjU3LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiAgPj4+IE9uIDIxLjEx
-LjE4IGF0IDIwOjM3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+Pj4+IEBA
-IC03OSwzMSArNzIsMjcgQEAgc3RhdGljIGFsd2F5c19pbmxpbmUgdW5zaWduZWQgbG9uZyBfX2Nt
-cHhjaGcoCj4+Pj4+ICAgICAgc3dpdGNoICggc2l6ZSApCj4+Pj4+ICAgICAgewo+Pj4+PiAgICAg
-IGNhc2UgMToKPj4+Pj4gLSAgICAgICAgYXNtIHZvbGF0aWxlICggImxvY2s7IGNtcHhjaGdiICVi
-MSwlMiIKPj4+Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgOiAiPWEiIChwcmV2KQo+Pj4+PiAt
-ICAgICAgICAgICAgICAgICAgICAgICA6ICJxIiAobmV3KSwgIm0iICgqX194ZyhwdHIpKSwKPj4+
-Pj4gLSAgICAgICAgICAgICAgICAgICAgICAgIjAiIChvbGQpCj4+Pj4+ICsgICAgICAgIGFzbSB2
-b2xhdGlsZSAoICJsb2NrOyBjbXB4Y2hnICViW25ld10sICVbcHRyXSIKPj4+Pj4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgOiAiPWEiIChwcmV2KSwgW3B0cl0gIittIiAoKih1aW50OF90ICopcHRy
-KQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICA6IFtuZXddICJyIiAobmV3KSwgIjAiIChv
-bGQpCj4+Pj4gQW55IHJlYXNvbiB5b3UgcmV0YWluIHRoZSByZWZlcmVuY2UgYnkgbnVtYmVyIGlu
-IHRoZSBpbnB1dAo+Pj4+IGNvbnN0cmFpbnQgaGVyZSwgcmF0aGVyIHRoYW4gZ2l2aW5nIGl0cyBj
-b3JyZXNwb25kaW5nIG91dHB1dAo+Pj4+IG9uZSBhIG5hbWU/Cj4+PiBOb3Qgc3BlY2lmaWNhbGx5
-LiAgSSBzdXBwb3NlIHRoaXMgaXMgZG9hYmxlIGJlY2F1c2UgdGhlIGNvbnN0cmFpbnQgaXMgYW4K
-Pj4+IGV4cGxpY2l0bHkgcmVnaXN0ZXIuCj4+IEkgZG9uJ3QgdW5kZXJzdGFuZDogV2hhdCBkb2Vz
-IHJlZ2lzdGVyIG9yIG5vIGhhdmUgdG8gZG8gd2l0aAo+PiBpdD8gRGlkIHlvdSBwZXJoYXBzIG1p
-c3VuZGVyc3RhbmQ/IEknbSBhc2tpbmcgZm9yIFtwcmV2XSAiYSIgKHByZXYpCj4+IGFuZCB0aGVu
-ICJbcHJldl0iIChvbGQpLgo+IAo+IEhtbSAtIEknZCBmb3Jnb3R0ZW4gdGhhdCBzeW50YXgsIGJ1
-dCBJJ20gc3RpbGwgbm90IGdvaW5nIHRvIGRvIGl0IGxpa2UgdGhhdC4KPiAKPiBVc2luZyAiPWEi
-IChwcmV2KSA6ICJhIiAob2xkKSBpcyBmaW5lLCBhbmQgc2xpZ2h0bHkgYmV0dGVyIHRoYW4gd2hh
-dCB3ZQo+IGhhdmUgY3VycmVudGx5LiAgSXQgYWxzbyBjbG9zZWx5IG1hdGNoZXMgaG93IHRoZSBp
-bnN0cnVjdGlvbiBpcwo+IGRlc2NyaWJlZCBpbiB0aGUgbWFudWFsLCB3aGVyZWFzIHVzaW5nICJb
-cHJldl0iIChvbGQpIGlzIGxvbmdlciwgYW5kCj4gYWRkcyBhIGxldmVsIG9mIGluZGlyZWN0aW9u
-IHdoaWNoIG1ha2VzIHRoZSBjb2RlIGhhcmRlciB0byBmb2xsb3cuCgpGaW5lIHdpdGggbWUgLSBh
-bGwgSSdtIGFmdGVyIGl0IHRvIHNlZSB0aGUgIjAiIGdvbmUuCgpKYW4KCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGkgQW5kcmV3LAoKT24gMTEvMjEvMTggMToyMSBQTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBT
+ZWVtaW5nbHksIGEgbWFqb3JpdHkgb2YgdXNlcnMgZWl0aGVyIG92ZXJyaWRlIHRoZSBoZWxwZXJz
+IGFueXdheSwgb3IgaGF2ZSBhbgo+IG1mbl90IGluIHRoZWlyIGhhbmRzLgo+IAo+IFVwZGF0ZSB0
+aGUgQVBJLCBhbmQgYWRqdXN0IGFsbCB1c2VycyB0byBtYXRjaC4gIEluIHNvbWUgcGxhY2VzLCB1
+c2UgdGhlCj4gdW5zaWduZWQgbG9uZyB2YXJpYW50IGluIHBsYWNlcyB3aGVyZSB3ZSBhcmUgaW50
+ZXJhY3Rpbmcgd2l0aCBhbiBleHRlcm5hbAo+IHN0cnVjdCBhbmQgdGhlcmUgaXMgbm8gY2hhbmNl
+IG9mIHRoZW0gc3dpdGNoaW5nIHRvIG1mbl90Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBD
+b29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpBUk0gJiBjb21tb24gY29kZToKClJl
+dmlld2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgoKQ2hlZXJzLAoK
+LS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
