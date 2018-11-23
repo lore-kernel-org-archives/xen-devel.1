@@ -1,17 +1,24 @@
-From: Vikram K <vikram.k@pathpartnertech.com>
-Subject: How to create interface for wireless network
-Date: Fri, 23 Nov 2018 10:13:44 +0530
-Message-ID: <CAFsJcmagk+eGXuHtxtG0BA9eLRCMYiUgoyckyYJ3UiAt6SDaig@mail.gmail.com>
+From: Zhao Yan <yan.y.zhao@intel.com>
+Subject: Re: [Qemu-devel] [PATCH] Xen PCI passthrough: fix
+ passthrough failure when irq map failure
+Date: Fri, 23 Nov 2018 00:04:51 -0500
+Message-ID: <20181123050451.GC31906@joy-OptiPlex-7040>
+References: <20181016021439.6212-1-yan.y.zhao@intel.com>
+ <F22B14EC3CFBB843AD3E03B6B78F2C6A4ACFD80C@SHSMSX104.ccr.corp.intel.com>
+ <20181018145636.k6ptvn4iszabjhxw@mac.bytemobile.com>
+ <20181122131110.GA31906@joy-OptiPlex-7040>
+ <20181122141805.vyqywi4ep65loye3@mac>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5681825367264191085=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=rwdk=oc=pathpartnertech.com=vikram.k@srs-us1.protection.inumbo.net>)
- id 1gQ3Jw-0000Wz-LM
- for xen-devel@lists.xenproject.org; Fri, 23 Nov 2018 04:44:00 +0000
-Received: by mail-lf1-x12f.google.com with SMTP id f23so7794567lfc.13
- for <xen-devel@lists.xenproject.org>; Thu, 22 Nov 2018 20:43:57 -0800 (PST)
+ <srs0=ir1e=oc=intel.com=yan.y.zhao@srs-us1.protection.inumbo.net>)
+ id 1gQ3iN-0002s2-Cb
+ for xen-devel@lists.xenproject.org; Fri, 23 Nov 2018 05:09:15 +0000
+Content-Disposition: inline
+In-Reply-To: <20181122141805.vyqywi4ep65loye3@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,99 +27,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-users@lists.xenproject.org, xen-devel@lists.xenproject.org
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, qemu-devel@nongnu.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============5681825367264191085==
-Content-Type: multipart/alternative; boundary="00000000000087ec81057b4da173"
-
---00000000000087ec81057b4da173
-Content-Type: text/plain; charset="UTF-8"
-
-Hello,
-
-In case of Ethernet a bridge interface is created between Dom0 and DomU, so
-that DomU has the internet access bridge interface. We have only wireless
-chip in our board and how to create interface in case of wireless?
-Bridging doesn't work in case of wireless network. If we want use NAT, then
-through interface DomU will have access to internet?
-
--- 
-
-
-
-
-
-
-This
-message contains confidential information and is intended only 
-for the
-individual(s) named. If you are not the intended
-recipient, you are 
-notified that disclosing, copying, distributing or taking any
-action in 
-reliance on the contents of this mail and attached file/s is strictly
-
-prohibited. Please notify the
-sender immediately and delete this e-mail 
-from your system. E-mail transmission
-cannot be guaranteed to be secured or 
-error-free as information could be
-intercepted, corrupted, lost, destroyed, 
-arrive late or incomplete, or contain
-viruses. The sender therefore does 
-not accept liability for any errors or
-omissions in the contents of this 
-message, which arise as a result of e-mail
-transmission.
-
---00000000000087ec81057b4da173
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Hello,</div><div><br></div><div>In case of Ethernet a=
- bridge interface is created between Dom0 and DomU, so that DomU has the in=
-ternet access bridge interface. We have only wireless chip in our board and=
- how to create interface in case of wireless?=C2=A0 Bridging doesn&#39;t wo=
-rk in case of wireless network. If we want use NAT, then through interface =
-DomU will have access to internet?<br></div><div><div dir=3D"ltr"><div><div=
- dir=3D"ltr"><span><br></span><span style=3D"color:rgb(19,79,92)"></span></=
-div></div></div></div></div>
-
-<br>
-
-
-
-
-<p><span lang=3D"EN-IN">This
-message contains confidential information and is intended only for the
-individual(s) named.</span><span lang=3D"EN-IN"> </span>If you are not the =
-intended
-recipient, you are notified that disclosing, copying, distributing or takin=
-g any
-action in reliance on the contents of this mail and attached file/s is stri=
-ctly
-prohibited<span lang=3D"EN-IN">. Please notify the
-sender immediately and delete this e-mail from your system. E-mail transmis=
-sion
-cannot be guaranteed to be secured or error-free as information could be
-intercepted, corrupted, lost, destroyed, arrive late or incomplete, or cont=
-ain
-viruses. The sender therefore does not accept liability for any errors or
-omissions in the contents of this message, which arise as a result of e-mai=
-l
-transmission.</span></p>
---00000000000087ec81057b4da173--
-
-
---===============5681825367264191085==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5681825367264191085==--
+T24gVGh1LCBOb3YgMjIsIDIwMTggYXQgMDM6MTg6MDVQTSArMDEwMCwgUm9nZXIgUGF1IE1vbm7D
+qSB3cm90ZToKPiBPbiBUaHUsIE5vdiAyMiwgMjAxOCBhdCAwODoxMToyMEFNIC0wNTAwLCBaaGFv
+IFlhbiB3cm90ZToKPiA+IE9uIFRodSwgT2N0IDE4LCAyMDE4IGF0IDAzOjU2OjM2UE0gKzAxMDAs
+IFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6Cj4gPiA+IE9uIFRodSwgT2N0IDE4LCAyMDE4IGF0IDA4
+OjIyOjQxQU0gKzAwMDAsIFpoYW8sIFlhbiBZIHdyb3RlOgo+ID4gPiA+IEhpCj4gPiA+ID4gVGhl
+IGJhY2tncm91bmQgZm9yIHRoaXMgcGF0Y2ggaXMgdGhhdDogZm9yIHNvbWUgcGNpIGRldmljZSwg
+ZXZlbiBpdCdzIFBDSV9JTlRFUlJVUFRfUElOIGlzIG5vdCAwLCBpdCBhY3R1YWxseSBkb2VzIG5v
+dCBzdXBwb3J0IElOVHggbW9kZSwgc28gd2Ugc2hvdWxkIGp1c3QgcmVwb3J0IGVycm9yLCBkaXNh
+YmxlIElOVHggbW9kZSBhbmQgY29udGludWUgdGhlIHBhc3N0aHJvdWdoLgo+ID4gPiA+IEhvd2V2
+ZXIsIHRoZSBjb21taXQgNWExMWQwZjcgcmVnYXJkcyB0aGlzIGFzIGVycm9yIGNvbmRpdGlvbiBh
+bmQgbGV0IHFlbXUgcXVpdCBwYXNzdGhyb3VnaCwgd2hpY2ggaXMgdG9vIHJpZ29yb3VzLgo+ID4g
+PiA+IAo+ID4gPiA+IEVycm9yIG1lc3NhZ2UgaXMgYmVsb3c6Cj4gPiA+ID4gbGlieGw6IGVycm9y
+OiBsaWJ4bF9xbXAuYzoyODc6cW1wX2hhbmRsZV9lcnJvcl9yZXNwb25zZTogRG9tYWluIDI6cmVj
+ZWl2ZWQgYW4gZXJyb3IgbWVzc2FnZSBmcm9tIFFNUCBzZXJ2ZXI6IE1hcHBpbmcgbWFjaGluZSBp
+cnEgMCB0byBwaXJxIC0xIGZhaWxlZDogT3BlcmF0aW9uIG5vdCBwZXJtaXR0ZWQKPiA+ID4gCj4g
+PiA+IEknbSBoYXZpbmcgaXNzdWVzIGZpZ3VyaW5nIG91dCB3aGF0J3MgaGFwcGVuaW5nIGhlcmUu
+Cj4gPiA+IHMtPnJlYWxfZGV2aWNlLmlycSBpcyAwLCB5ZXQgdGhlIFBDSSBjb25maWcgc3BhY2Ug
+cmVhZCBvZgo+ID4gPiBQQ0lfSU5URVJSVVBUX1BJTiByZXR1cm5zIHNvbWV0aGluZyBkaWZmZXJl
+bnQgdGhhbiAwLgo+ID4gPiAKPiA+ID4gQUZBSUNUIHRoaXMgaXMgZHVlIHRvIHNvbWUga2luZCBv
+ZiBlcnJvciBpbiBMaW51eCwgc28gdGhhdCBldmVuIHdoZW4KPiA+ID4gdGhlIGRldmljZSBpcyBz
+dXBwb3NlZCB0byBoYXZlIGEgdmFsaWQgSVJRIHRoZSBzeXNmcyBub2RlIGl0IGlzIHNldCB0bwo+
+ID4gPiAwLCBkbyB5b3Uga25vdyB0aGUgYWN0dWFsIHVuZGVybHlpbmcgY2F1c2Ugb2YgdGhpcz8K
+PiA+ID4gCj4gPiA+IFRoYW5rcywgUm9nZXIuCj4gPiBIaSBSb2dlcgo+ID4gU29ycnkgZm9yIHRo
+ZSBsYXRlciByZXBseSwgSSBqdXN0IG1pc3NlZCB0aGlzIG1haWwuLi4KPiA+IE9uIG15IHNpZGUs
+IGl0J3MgYmVjYXVzZSB0aGUgaGFyZHdhcmUgYWN0dWFsbHkgZG9lcyBub3Qgc3VwcG9ydCBJTlR4
+IG1vZGUsCj4gPiBidXQgaXRzIGNvbmZpZ3VyYXRpb24gc3BhY2UgZG9lcyBub3QgcmVwb3J0IFBD
+SV9JTlRFUlJVUFRfUElOIHRvIDAuIEl0J3MgYQo+ID4gaGFyZHdhcmUgYnVnLCBidXQgcHJldmlv
+dXMgdmVyc2lvbiBvZiBxZW11IGNhbiB0b2xlcmF0ZSBpdCwgc3dpdGNoIHRvIE1TSQo+ID4gYW5k
+IG1ha2UgcGFzc3Rocm91Z2ggd29yay4KPiAKPiBUaGVuIEkgdGhpbmsgaXQgd291bGQgYmUgYmV0
+dGVyIHRvIGNoZWNrIGJvdGggUENJX0lOVEVSUlVQVF9QSU4gYW5kCj4gcy0+cmVhbF9kZXZpY2Uu
+aXJxIGJlZm9yZSBhdHRlbXB0aW5nIHRvIG1hcCB0aGUgSVJRLgo+IAo+IE1ha2luZyB0aGUgZXJy
+b3Igbm9uLWZhdGFsIHdvdWxkIG1lYW4gdGhhdCBhIGRldmljZSB3aXRoIGEgdmFsaWQgSVJRCj4g
+Y291bGQgZmFpbCB0byBiZSBzZXR1cCBjb3JyZWN0bHkgYnV0IHRoZSBndWVzdCB3aWxsIHN0aWxs
+IGJlIGNyZWF0ZWQsCj4gYW5kIHRoaW5ncyB3b24ndCBnbyBhcyBleHBlY3RlZCB3aGVuIHRoZSBn
+dWVzdCBhdHRlbXB0cyB0byB1c2UgaXQuCj4gCj4gVGhhbmtzLCBSb2dlci4KaGkgcm9nZXIKdGhh
+bmtzIGZvciB5b3VyIHN1Z2d1ZXN0aW9uLiBpdCdzIHJpZ2h0IHRoYXQgInMtPnJlYWxfZGV2aWNl
+LmlycSIgaXMgbmVlZGVkIHRvIGJlIGNoZWNrZWQgYmVmb3JlIG1hcHBpbmcsIGxpa2UgaWYgaXQn
+cyAwLgpidXQgb24gdGhlIG90aGVyIGhhbmQsIG1heWJlIHhjX3BoeXNkZXZfbWFwX3BpcnEoKSBp
+dHNlbGYgY2FuIHNlcnZlIGFzIGEgY2hlY2tpbmcgb2YgInMtPnJlYWxfZGV2aWNlLmlycSIgPwps
+aWtlIGluIG91ciBjYXNlLCBpdCB3aWxsIGZhaWwgYW5kIHJldHVybiAtRVBFUk0uCnRoZW4gZXJy
+b3IgaGFubGluZyBpcyBzdGlsbCBjb25kdWN0ZWQgPT0+c2V0IElOVFhfRElTQUJMRSBmbGFnLCBl
+dmVudGhyb3VnaCB0aGUgZXJyb3IgaXMgbm90IGZhdGFsLgoKICAgIG1hY2hpbmVfaXJxID0gcy0+
+cmVhbF9kZXZpY2UuaXJxOwogICAgcmMgPSB4Y19waHlzZGV2X21hcF9waXJxKHhlbl94YywgeGVu
+X2RvbWlkLCBtYWNoaW5lX2lycSwgJnBpcnEpOwogICAgaWYgKHJjIDwgMCkgewogICAgICAgIGVy
+cm9yX3NldGdfZXJybm8oZXJycCwgZXJybm8sICJNYXBwaW5nIG1hY2hpbmUgaXJxICV1IHRvIgog
+ICAgICAgICAgICAgICAgICAgICAgICAgIiBwaXJxICVpIGZhaWxlZCIsIG1hY2hpbmVfaXJxLCBw
+aXJxKTsKCiAgICAgICAgLyogRGlzYWJsZSBQQ0kgaW50eCBhc3NlcnRpb24gKHR1cm4gb24gYml0
+MTAgb2YgZGV2Y3RsKSAqLwogICAgICAgIGNtZCB8PSBQQ0lfQ09NTUFORF9JTlRYX0RJU0FCTEU7
+CiAgICAgICAgbWFjaGluZV9pcnEgPSAwOwogICAgICAgIHMtPm1hY2hpbmVfaXJxID0gMDsKU28s
+IGRvIHlvdSB0aGluayBpdCdzIGFsbCByaWdodCBqdXN0IGNvbnZlcnRpbmcgZmF0YWwgZXJyb3Ig
+dG8gbm9uLWZhdGFsPwoKClRoYW5rcwpZYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
