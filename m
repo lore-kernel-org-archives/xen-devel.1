@@ -1,12 +1,15 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] tools/libs: Make
- xenforeignmemory_unmap_resource() idempotent
-Date: Fri, 23 Nov 2018 15:12:06 +0000
-Message-ID: <1542985926-31623-1-git-send-email-andrew.cooper3@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v5 11/20] xen: setup hypercall page for PVH
+Date: Fri, 23 Nov 2018 16:14:07 +0100
+Message-ID: <20181123151407.ln2bymyoqvjksvaq__6220.98121461949$1542985978$gmane$org@mac>
+References: <20181121142855.13537-1-jgross@suse.com>
+ <20181121142855.13537-12-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Disposition: inline
+In-Reply-To: <20181121142855.13537-12-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,29 +18,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: hans@knorrie.org, grub-devel@gnu.org, phcoder@gmail.com, daniel.kiper@oracle.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-TW9zdCBvdGhlciBjbG9zZS91bm1hcCBmdW5jdGlvbnMgYXJlLgoKU2lnbmVkLW9mZi1ieTogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBJYW4gSmFja3Nv
-biA8SWFuLkphY2tzb25AY2l0cml4LmNvbT4KQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5j
-b20+CkNDOiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgoKVGhpcyBpZGVh
-bGx5IHdhbnRzIGJhY2twb3J0aW5nIHRvIDQuMTEgdG8gaGl0IDQuMTEuMQoKSSBnb3QgYW4gdW5l
-eHBlY3RlZCBzaG9jayB3aGlsZSB0cnlpbmcgdG8gZGlhZ25vc2Ugd2h5IEdWVC1nIGlzIHN0aWxs
-CmJyb2tlbiAoZGlmZmVyZW50bHkhKSBvbiBzdGFnaW5nLgotLS0KIHRvb2xzL2xpYnMvZm9yZWln
-bm1lbW9yeS9jb3JlLmMgfCA3ICsrKysrKy0KIDEgZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMo
-KyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS90b29scy9saWJzL2ZvcmVpZ25tZW1vcnkv
-Y29yZS5jIGIvdG9vbHMvbGlicy9mb3JlaWdubWVtb3J5L2NvcmUuYwppbmRleCA2M2YxMmUyLi4y
-NTE2ZmQ0IDEwMDY0NAotLS0gYS90b29scy9saWJzL2ZvcmVpZ25tZW1vcnkvY29yZS5jCisrKyBi
-L3Rvb2xzL2xpYnMvZm9yZWlnbm1lbW9yeS9jb3JlLmMKQEAgLTE4Miw3ICsxODIsMTIgQEAgeGVu
-Zm9yZWlnbm1lbW9yeV9yZXNvdXJjZV9oYW5kbGUgKnhlbmZvcmVpZ25tZW1vcnlfbWFwX3Jlc291
-cmNlKAogaW50IHhlbmZvcmVpZ25tZW1vcnlfdW5tYXBfcmVzb3VyY2UoCiAgICAgeGVuZm9yZWln
-bm1lbW9yeV9oYW5kbGUgKmZtZW0sIHhlbmZvcmVpZ25tZW1vcnlfcmVzb3VyY2VfaGFuZGxlICpm
-cmVzKQogewotICAgIGludCByYyA9IG9zZGVwX3hlbmZvcmVpZ25tZW1vcnlfdW5tYXBfcmVzb3Vy
-Y2UoZm1lbSwgZnJlcyk7CisgICAgaW50IHJjOworCisgICAgaWYgKCAhZnJlcyApCisgICAgICAg
-IHJldHVybiAwOworCisgICAgcmMgPSBvc2RlcF94ZW5mb3JlaWdubWVtb3J5X3VubWFwX3Jlc291
-cmNlKGZtZW0sIGZyZXMpOwogCiAgICAgZnJlZShmcmVzKTsKICAgICByZXR1cm4gcmM7Ci0tIAoy
-LjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBOb3YgMjEsIDIwMTggYXQgMDM6Mjg6NDZQTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBBZGQgdGhlIG5lZWRlZCBjb2RlIHRvIHNldHVwIHRoZSBoeXBlcmNhbGwgcGFnZSBm
+b3IgY2FsbGluZyBpbnRvIHRoZQo+IFhlbiBoeXBlcnZpc29yLgo+IAo+IEltcG9ydCB0aGUgWEVO
+X0hWTV9ERUJVR0NPTlNfSU9QT1JUIGRlZmluZSBmcm9tIFhlbiB1bnN0YWJsZSBpbnRvCj4gaW5j
+bHVkZS94ZW4vYXJjaC14ODYveGVuLmgKPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIu
+cGF1QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
