@@ -1,19 +1,18 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: qemu assert in staging during HVM live migration
-Date: Fri, 23 Nov 2018 15:54:49 +0000
-Message-ID: <20181123155449.GB6902@perard.uk.xensource.com>
+Date: Fri, 23 Nov 2018 16:57:08 +0100
+Message-ID: <20181123165708.0a085d8e.olaf@aepfle.de>
 References: <20181122100344.GA13748@aepfle.de>
+ <20181123155449.GB6902@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6263059555776771046=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=wcvb=oc=citrix.com=prvs=85824b8b3=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1gQDnB-0000zz-W9
- for xen-devel@lists.xenproject.org; Fri, 23 Nov 2018 15:54:54 +0000
-Content-Disposition: inline
-In-Reply-To: <20181122100344.GA13748@aepfle.de>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=cybj=oc=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gQDpU-00019X-R5
+ for xen-devel@lists.xenproject.org; Fri, 23 Nov 2018 15:57:17 +0000
+In-Reply-To: <20181123155449.GB6902@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,33 +21,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
+To: Anthony PERARD <anthony.perard@citrix.com>
 Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBOb3YgMjIsIDIwMTggYXQgMTE6MDM6NDVBTSArMDEwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gV2hpbGUgZGVidWdnaW5nIHNvbWV0aGluZyBlbHNlLCBpdCB0dXJuZWQgb3V0IHRoYXQg
-c3RhZ2luZyBhbmQvb3IgcWVtdQo+IGNhbiBub3QgbWlncmF0ZSBIVk0gZG9tVXMuIHFlbXUgcnVu
-cyBpbnRvIGFuIGFzc2VydCB3aGVuIHRoZSBkb21VIGlzCj4gYWJvdXQgdG8gYmUgbWlncmF0ZWQg
-d2l0aCAneGwgbWlncmF0ZSBkb21VIGRvbTAnOgo+IAo+IHFlbXUtc3lzdGVtLWkzODY6IGJsb2Nr
-L2Jsb2NrLWJhY2tlbmQuYzo5MDM6IGJsa19nZXRfYXR0YWNoZWRfZGV2X2lkOiBBc3NlcnRpb24g
-YCFibGstPmxlZ2FjeV9kZXYnIGZhaWxlZC4KPiBVc2luZyAvdXNyL2Jpbi9xZW11LXN5c3RlbS1p
-Mzg2IGZyb20gcWVtdS0zLjEgZmFpbGVkIGFzIHdlbGwuCj4gVGhlIHdvcmthcm91bmQgd2FzIHRv
-IGVuZm9yY2UgbXkgb3duIHFlbXUtMi4xMi4KPiAKPiBTaW5jZSBJIGhhdmUgdmVyeSB2ZXJ5IGxp
-dHRsZSBydW50aW1lIGF2YWlsYWJsZSBvbiB0aGF0IHN5c3RlbSwgdGhhdHMKPiBhbGwgdGhlIGlu
-Zm8gSSBjb3VsZCBjb2xsZWN0Lgo+IEFueSBpZGVhIHdoYXQgbWlnaHQgYmUgd3Jvbmc/IFRoYXQg
-J2xlZ2FjeScgY29kZSBpcyBpbiBxZW11IHNpbmNlIGEgZmV3Cj4geWVhcnMgYWxyZWFkeSwgYWNj
-b3JkaW5nIHRvICdnaXQgYmxhbWUnLgoKSXMgeW91ciB0b29sc3RhY2sgcnVucyB0aGUgUU1QIGNv
-bW1hbmQgJ3F1ZXJ5LWJsb2NrJyBvciBzb21lIG90aGVyCmNvbW1hbmQgcmVsYXRlZCB0byBibG9j
-ayBiZWhpbmQgbGlieGwncyBiYWNrPwoKeGVuLWRpc2sgKHFkaXNrKSBpcyBjdXJyZW50bHkgdXNp
-bmcgbGVnYWN5IHN0dWZmIGluIFFFTVUsIGFuZCB0aGlzCmxlZ2FjeSBzdHVmZiBpcyBnb2luZyB0
-byBkaXNhcHBlYXIuIFBhdWwgaGF2ZSBhIHBhdGNoIHNlcmllcyB0bwptb2Rlcm5pc2UgaXQ6Cmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0x
-MS9tc2cwMjQxMS5odG1sCmlmIHlvdSBmZWVsIGxpa2UgdGVzdGluZywgYXMgdGhhdCBzaG91bGQg
-Z2V0IHJpZCBvZiB0aGUgZmFpbGVkIGFzc2VydC4KCkJlc2lkZSB0aGF0LCBJIGRvbid0IGtub3cg
-aWYgc29tZXRoaW5nIGVsc2UgbWlnaHQgYmUgd3JvbmcuIFdoYXQgcGF0Y2hlcwppcyB0aGVyZSBv
-biB5b3VyIHFlbXUtMi4xMiAoYXQgbGVhc3QgcGF0Y2hlcyByZWxhdGVkIHRvIHhlbi1kaXNrKT8K
-ClRoYW5rcywKCi0tIApBbnRob255IFBFUkFSRAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+--===============6263059555776771046==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/ZvgGqR7CMRFcKn.OFkj83Sc"; protocol="application/pgp-signature"
+
+--Sig_/ZvgGqR7CMRFcKn.OFkj83Sc
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 23 Nov 2018 15:54:49 +0000
+schrieb Anthony PERARD <anthony.perard@citrix.com>:
+
+> Is your toolstack runs the QMP command 'query-block' or some other
+> command related to block behind libxl's back?
+
+This is plain xl create + xl migrate from staging.
+
+> Beside that, I don't know if something else might be wrong. What patches
+> is there on your qemu-2.12 (at least patches related to xen-disk)?
+
+Nothing related. I will see if I can get some runtime to try the suggested =
+changes.
+
+Olaf
+
+--Sig_/ZvgGqR7CMRFcKn.OFkj83Sc
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/gjVAAKCRBdQqD6ppg2
+fok3AJ0WDEk2opK26+cFfY6tQud6+Z4b1gCbBUSiQmW7ts0xghONLduBk8ki3CY=
+=ZPCD
+-----END PGP SIGNATURE-----
+
+--Sig_/ZvgGqR7CMRFcKn.OFkj83Sc--
+
+
+--===============6263059555776771046==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6263059555776771046==--
