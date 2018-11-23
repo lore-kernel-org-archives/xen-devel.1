@@ -1,27 +1,29 @@
-From: Ben Clewett <ben.clewett@roadtech.co.uk>
-Subject: Xen and Inter-VM-Communications
-Date: Fri, 23 Nov 2018 11:57:10 +0000
-Message-ID: <ab737a9c-b8be-f194-b5ce-976a4d6e2eba@roadtech.co.uk>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] mm: fix LLVM code-generation issue
+Date: Fri, 23 Nov 2018 13:15:03 +0100
+Message-ID: <20181123121503.bpqfjqp5wz7goy4n@mac>
+References: <a1236490-870a-bdac-2a79-0a487417713c@citrix.com>
+ <20873c8e-a087-a414-e8fe-dde56ac05cb7@arm.com>
+ <20181123112340.fb5jsjoqwmtd3khy@mac>
+ <6A900FE40200004F0063616D@prv1-mh.provo.novell.com>
+ <EED9718A020000A45C475325@prv1-mh.provo.novell.com>
+ <07D102DD0200008F8E2C01CD@prv1-mh.provo.novell.com>
+ <8B4AD5A1020000935C475325@prv1-mh.provo.novell.com>
+ <84A23E9D020000170063616D@prv1-mh.provo.novell.com>
+ <5BF7E5A002000078001FF5B6@prv1-mh.provo.novell.com>
+ <34cc742e-3f66-b368-65e4-82d4b33ce4b1@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7766116201258551850=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=7ctj=OC=roadtech.co.uk=ben.clewett@srs-us1.protection.inumbo.net>)
- id 1gQA5H-0007by-Bc
- for xen-devel@lists.xenproject.org; Fri, 23 Nov 2018 11:57:19 +0000
-Received: from imsva.roadtech.co.uk (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 9CD218C051
- for <xen-devel@lists.xenproject.org>; Fri, 23 Nov 2018 11:57:15 +0000 (GMT)
-Received: from smtp.roadtech.co.uk (unknown [195.245.100.39])
- by imsva.roadtech.co.uk (Postfix) with ESMTPS id 882EC8C03F
- for <xen-devel@lists.xenproject.org>; Fri, 23 Nov 2018 11:57:15 +0000 (GMT)
-Received: from [172.16.24.219] (prog-benc-laptop4.roadtech.private
- [172.16.24.219])
- by smtp.roadtech.co.uk (8.14.4/8.14.4) with ESMTP id wANBvCbk005425
- for <xen-devel@lists.xenproject.org>; Fri, 23 Nov 2018 11:57:13 GMT
-Content-Language: en-GB
+ <SRS0=2k7W=OC=citrix.com=prvs=8582a9f6d=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gQAMf-000146-SZ
+ for xen-devel@lists.xenproject.org; Fri, 23 Nov 2018 12:15:17 +0000
+Content-Disposition: inline
+In-Reply-To: <34cc742e-3f66-b368-65e4-82d4b33ce4b1@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,98 +32,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, george.dunlap@citrix.com, Tim Deegan <tim@xen.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7766116201258551850==
-Content-Type: text/html; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#666666" bgcolor="#FFFFFF">
-    Hi Guys,<br>
-    <br>
-    I am interested in using Inter-VM-Communications (IVMC) to enhance
-    performance between TCP server/applications running on the same
-    Hypervisor.<br>
-    <br>
-    For instance, XenLoop seems like the magic silver bullet to solve
-    our requirements.<br>
-    <br>
-    Can I please ask what the opinion of developers are?  What IVMC do
-    you recommend?  Have you any experience with XenLoop?<br>
-    <br>
-    Thanks!<br>
-    <br>
-    Ben<br>
-    <br>
-    <br>
-    <div class="moz-signature">-- <br>
-      <p><span
-          style="font-size:12.0pt;color:#1F497D;mso-fareast-language:EN-GB"><b>Ben
-            Clewett</b></span></p>
-      <p><img src="https://www.roadtech.co.uk/assets/rt-logo.png"><br>
-      </p>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB"><b>Road
-          Tech Computer Systems Ltd</b></span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB"><a
-          href="http://www.roadtech.co.uk">www.roadtech.co.uk</a></span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB"><a
-          href="http://www.tachomaster.co.uk">www.tachomaster.co.uk</a></span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB"><a
-          href="http://www.falcontracking.co.uk">www.falcontracking.co.uk</a></span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB"><a
-          href="http://www.predrive.co.uk">www.predrive.co.uk</a></span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB"><a
-          href="http://www.roadrunnerlive.co.uk">www.roadrunnerlive.co.uk</a></span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB">Shenley
-        Hall</span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB">Rectory
-        Lane</span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB">Shenley</span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB">Hertfordshire
-        WD7 9AN</span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB">United
-        Kingdom</span><br>
-      <span
-        style="font-size:10.0pt;color:#000000;mso-fareast-language:EN-GB">+44
-        (0)1923 460000</span><br>
-      <br>
-      <span
-        style="font-size:8.0pt;color:#000000;mso-fareast-language:EN-GB">Road
-        Tech Computer Systems Ltd is a company registered in England and
-        Wales. Registered number: 2017435. Registered office: c/o
-        Hillier Hopkins, Radius House, 51 Clarendon Road, WATFORD, WD17
-        1HP</span><br>
-    </div>
-  </body>
-</html>
-
-
---===============7766116201258551850==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7766116201258551850==--
+T24gRnJpLCBOb3YgMjMsIDIwMTggYXQgMTE6Mzk6MzJBTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
+b3RlOgo+IEhpIEphbiwKPiAKPiBPbiAyMy8xMS8yMDE4IDExOjMzLCBKYW4gQmV1bGljaCB3cm90
+ZToKPiA+ID4gPiA+IE9uIDIzLjExLjE4IGF0IDEyOjIzLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+
+IHdyb3RlOgo+ID4gPiBJbWFnZSBhbiBBUCByZWFkcyBzeXN0ZW1fc3RhdGUgPCBTWVNfU1RBVEVf
+YWN0aXZlLCB0aGVuIEJTUCBzZXRzCj4gPiA+IHN5c3RlbV9zdGF0ZSA9IFNZU19TVEFURV9hY3Rp
+dmUgYW5kIGNsZWFycyB0aGUgaW5pdCBtYXBwaW5ncywgdGhlbgo+ID4gPiB3aGVuIHRoZSBBUCB0
+cmllcyB0byByZWFkIGFuIGluaXQgdmFyaWFibGUgaXQgd291bGQgZ2V0IGEgcGFnZSBmYXVsdC4K
+PiA+IAo+ID4gQXMgc2FpZCBiZWZvcmUgLSBBUHMgYXJlIHN1cHBvc2VkIHRvIGJlIHF1aWVzY2Vu
+dCBkdXJpbmcgdGhpcwo+ID4gcGFydGljdWxhciB0cmFuc2l0aW9uIG9mIHN5c3RlbV9zdGF0ZSwg
+YW5kIHRoZSBpZGxlIHNjcnViYmluZyBhZGRlZAo+ID4gYW4gZXhjZXB0aW9uIHRvIHRoYXQgcnVs
+ZS4gSSBkb24ndCBzZWUgd2h5IHN1Y2ggYW4gZXhjZXB0aW9uIG1heQo+ID4gbm90IGludm9sdmUg
+ZXhjZXB0aW9uYWwgdHJlYXRtZW50IG9uIHRoZSBwYXJ0aWN1bGFyIHJlYWRpbmcgcGF0aC4KPiA+
+IEZ1cnRoZXJtb3JlIEFQcywgd2hpY2ggbWF5IGFsc28gYmUgYnJvdWdodCB1cCBhdCBydW4gdGlt
+ZSwgbWF5Cj4gPiBuZXZlciBldmVyIHRvdWNoIGluaXQgbWFwcGluZ3Mgb2YgYW55IGtpbmQuCj4g
+Cj4gVGhlICJzdXBwb3NlZCIgaXMgcXVpdGUgd29ycnlpbmcgYmVjYXVzZSB3ZSBoYXZlIG5vIHdh
+eSB0byB2ZXJpZnkgdGhhdAo+IGFzc3VtcHRpb24gdW50aWwgd2UgZ2V0IGEgcmFuZG9tIGNyYXNo
+Lgo+IAo+IEFsc28sIHRoZSBjb3N0IG9mIHRoZSBiYXJyaWVyIHNob3VsZCBiZSBxdWl0ZSBjaGVh
+cCBvdmVyIHRoZSByZXN0IG9mIHRoZSBmdW5jdGlvbi4KClJpZ2h0LCBidXQgdW5sZXNzIEknbSBt
+aXNzaW5nIHNvbWV0aGluZyB0aGF0IHdvbid0IGNvbXBsZXRlbHkgZml4IHRoZQppc3N1ZSBlaXRo
+ZXI/CgpUaGUgb25seSB3YXkgSSBzZWUgdG8gYmUgY29tcGxldGVseSBzYWZlIGlzIHRvIGVpdGhl
+ciB1c2UgYSBtdXRleCBvcgp0byBtYWtlIG9wdF9ib290c2NydWIgbm9uLWluaXQuCgpSb2dlci4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
