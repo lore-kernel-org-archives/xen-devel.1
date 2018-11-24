@@ -1,18 +1,17 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 130756: regressions -
+Subject: [xen-unstable-smoke test] 130760: regressions -
  trouble: blocked/broken/fail/pass
-Date: Sat, 24 Nov 2018 06:48:25 +0000
-Message-ID: <osstest-130756-mainreport@xen.org>
+Date: Sat, 24 Nov 2018 09:23:38 +0000
+Message-ID: <osstest-130760-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ITgI=OD=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gQRk5-00075F-5x
- for xen-devel@lists.xenproject.org; Sat, 24 Nov 2018 06:48:37 +0000
+ <srs0=itgi=od=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gQUAA-0004nN-Hx
+ for xen-devel@lists.xenproject.org; Sat, 24 Nov 2018 09:23:42 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,8 +23,8 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMDc1NiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMDc1Ni8KClJlZ3Jlc3Npb25z
+ZmxpZ2h0IDEzMDc2MCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMDc2MC8KClJlZ3Jlc3Npb25z
 IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
 ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQteHNtICAgICAg
 ICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYW1k
@@ -33,12 +32,12 @@ NjQgICAgICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdS
 LiB2cy4gMTMwMjg5CgpSZWdyZXNzaW9ucyB3aGljaCBhcmUgcmVnYXJkZWQgYXMgYWxsb3dhYmxl
 IChub3QgYmxvY2tpbmcpOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgMiBob3N0cy1h
 bGxvY2F0ZSAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMwMjg5CgpUZXN0cyB3aGljaCBkaWQg
-bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02NC1hcm02NC14bC14
-c20gICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAg
-IGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAg
-MSBidWlsZC1jaGVjaygxKSAgICAgICAgIGJsb2NrZWQgbi9hCiBidWlsZC1hbWQ2NC1saWJ2aXJ0
-ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiBi
+bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogYnVpbGQtYW1kNjQtbGlidmlydCAg
+ICAgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVz
+dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgMSBidWlsZC1jaGVjaygxKSAg
+ICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAxIGJ1aWxk
+LWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
+YnZpcnQgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiBi
 dWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAzIGNhcHR1cmUtbG9ncyAgICAgICAgICBicm9r
 ZW4gYmxvY2tlZCBpbiAxMzAyODkKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTMgbWln
 cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
@@ -48,8 +47,8 @@ ICAgICAgZmMzNjM3ZTlhZjlhMzAxZDkyNjk1OTk5Mjk5YTNlOWE4NDU4YzNjMQpiYXNlbGluZSB2
 ZXJzaW9uOgogeGVuICAgICAgICAgICAgICAgICAgOTAxYWJmZWY1ZGUxNDk1NDZiMTZmYmE2ZjRk
 NWJkN2RlZjA4YzY3MgoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTMwMjg5ICAyMDE4LTExLTE3IDEx
 OjAwOjM2IFogICAgNiBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEzMDQ5MCAgMjAxOC0xMS0x
-OSAwOTowMDoyNyBaICAgIDQgZGF5cyAgIDQwIGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAg
-IDEzMDczMyAgMjAxOC0xMS0yMyAxNjowMDo0MCBaICAgIDAgZGF5cyAgICA1IGF0dGVtcHRzCgot
+OSAwOTowMDoyNyBaICAgIDUgZGF5cyAgIDQxIGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAg
+IDEzMDczMyAgMjAxOC0xMS0yMyAxNjowMDo0MCBaICAgIDAgZGF5cyAgICA2IGF0dGVtcHRzCgot
 LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
 LS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFuZHJldyBDb29w
 ZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9s
