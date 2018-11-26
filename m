@@ -1,17 +1,18 @@
 From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 130799: regressions -
+Subject: [xen-unstable-smoke test] 130800: regressions -
  trouble: blocked/broken/fail/pass
-Date: Sun, 25 Nov 2018 22:25:27 +0000
-Message-ID: <osstest-130799-mainreport@xen.org>
+Date: Mon, 26 Nov 2018 00:59:24 +0000
+Message-ID: <osstest-130800-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jlsr=oe=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gR2qK-00032D-TS
- for xen-devel@lists.xenproject.org; Sun, 25 Nov 2018 22:25:32 +0000
+ <SRS0=wVla=OF=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gR5FU-0000A1-Rh
+ for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 00:59:40 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,8 +24,8 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMDc5OSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMDc5OS8KClJlZ3Jlc3Npb25z
+ZmxpZ2h0IDEzMDgwMCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMDgwMC8KClJlZ3Jlc3Npb25z
 IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
 ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQteHNtICAgICAg
 ICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYW1k
@@ -32,10 +33,10 @@ NjQgICAgICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdS
 LiB2cy4gMTMwMjg5CgpSZWdyZXNzaW9ucyB3aGljaCBhcmUgcmVnYXJkZWQgYXMgYWxsb3dhYmxl
 IChub3QgYmxvY2tpbmcpOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgMiBob3N0cy1h
 bGxvY2F0ZSAgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMwMjg5CgpUZXN0cyB3aGljaCBkaWQg
-bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2
-aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgMSBidWlsZC1jaGVjaygxKSAg
-ICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAxIGJ1aWxk
+bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1kZWJpYW5odm0taTM4NiAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgIGJsb2NrZWQgbi9h
+CiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAxIGJ1aWxk
 LWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiBidWlsZC1hbWQ2NC1saWJ2aXJ0
 ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiBi
 dWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAzIGNhcHR1cmUtbG9ncyAgICAgICAgICBicm9r
@@ -47,8 +48,8 @@ ICAgICAgZmMzNjM3ZTlhZjlhMzAxZDkyNjk1OTk5Mjk5YTNlOWE4NDU4YzNjMQpiYXNlbGluZSB2
 ZXJzaW9uOgogeGVuICAgICAgICAgICAgICAgICAgOTAxYWJmZWY1ZGUxNDk1NDZiMTZmYmE2ZjRk
 NWJkN2RlZjA4YzY3MgoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTMwMjg5ICAyMDE4LTExLTE3IDEx
 OjAwOjM2IFogICAgOCBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEzMDQ5MCAgMjAxOC0xMS0x
-OSAwOTowMDoyNyBaICAgIDYgZGF5cyAgIDU0IGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAg
-IDEzMDczMyAgMjAxOC0xMS0yMyAxNjowMDo0MCBaICAgIDIgZGF5cyAgIDE5IGF0dGVtcHRzCgot
+OSAwOTowMDoyNyBaICAgIDYgZGF5cyAgIDU1IGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAg
+IDEzMDczMyAgMjAxOC0xMS0yMyAxNjowMDo0MCBaICAgIDIgZGF5cyAgIDIwIGF0dGVtcHRzCgot
 LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
 LS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFuZHJldyBDb29w
 ZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgRGFyaW8gRmFnZ2lvbGkgPGRmYWdnaW9s
