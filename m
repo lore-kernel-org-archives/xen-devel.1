@@ -1,18 +1,16 @@
-From: Petre Eftime <epetre@amazon.com>
-Subject: [PATCH] tools/xenstore: domain can sometimes disappear
- when destroying connection
-Date: Mon, 26 Nov 2018 13:22:04 +0000
-Message-ID: <20181126132204.16258-1-epetre@amazon.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 4/4] xen/arch: Switch local_irq_restore() to
+ being a static inline helper
+Date: Mon, 26 Nov 2018 06:30:33 -0700
+Message-ID: <5BFBF579020000780020000B@prv1-mh.provo.novell.com>
+References: <1542991976-6190-1-git-send-email-andrew.cooper3@citrix.com>
+ <1542991976-6190-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=dBkc=OF=amazon.com=prvs=861f547f5=epetre@srs-us1.protection.inumbo.net>)
- id 1gRGqd-0006PG-1w
- for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 13:22:47 +0000
+In-Reply-To: <1542991976-6190-5-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,35 +19,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Amit Shah <aams@amazon.com>, Petre Eftime <epetre@amazon.com>, David Woodhouse <dwmw@amazon.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlcmUgaXMgYSBjaXJjdWxhciBsaW5rIGZvcm1lZCBiZXR3ZWVuIGRvbWFpbiBhbmQgYSBjb25u
-ZWN0aW9uLiBJbiBjZXJ0YWluCmNpcmN1c3RhbmNlcywgd2hlbiBjb25uIGlzIGZyZWVkLCBkb21h
-aW4gaXMgYWxzbyBmcmVlZCwgd2hpY2ggbGVhZHMgdG8gdXNlCmFmdGVyIGZyZWUgd2hlbiB0cnlp
-bmcgdG8gc2V0IHRoZSBjb25uIGZpZWxkIGluIGRvbWFpbiB0byBudWxsLgoKU2lnbmVkLW9mZi1i
-eTogUGV0cmUgRWZ0aW1lIDxlcGV0cmVAYW1hem9uLmNvbT4KLS0tCiB0b29scy94ZW5zdG9yZS94
-ZW5zdG9yZWRfZG9tYWluLmMgfCA5ICsrKysrKysrLQogMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0
-aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlL3hlbnN0
-b3JlZF9kb21haW4uYyBiL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlZF9kb21haW4uYwppbmRleCBm
-YTY2NTUwMzNhLi5mMDg1ZDQwNDc2IDEwMDY0NAotLS0gYS90b29scy94ZW5zdG9yZS94ZW5zdG9y
-ZWRfZG9tYWluLmMKKysrIGIvdG9vbHMveGVuc3RvcmUveGVuc3RvcmVkX2RvbWFpbi5jCkBAIC0y
-MjIsNiArMjIyLDcgQEAgc3RhdGljIHZvaWQgZG9tYWluX2NsZWFudXAodm9pZCkKIHsKIAl4Y19k
-b21pbmZvX3QgZG9taW5mbzsKIAlzdHJ1Y3QgZG9tYWluICpkb21haW47CisJc3RydWN0IGNvbm5l
-Y3Rpb24gKnRtcF9jb25uOwogCWludCBub3RpZnkgPSAwOwogCiAgYWdhaW46CkBAIC0yMzgsOCAr
-MjM5LDE0IEBAIHN0YXRpYyB2b2lkIGRvbWFpbl9jbGVhbnVwKHZvaWQpCiAJCQkJY29udGludWU7
-CiAJCX0KIAkJaWYgKGRvbWFpbi0+Y29ubikgewotCQkJdGFsbG9jX3VubGluayh0YWxsb2NfYXV0
-b2ZyZWVfY29udGV4dCgpLCBkb21haW4tPmNvbm4pOworCQkJLyoKKwkJCSAqIEluIGNlcnRhaW4g
-Y2lyY3Vtc3RhbmNlcyBjb25uIG93bnMgZG9tYWluIGFuZAorCQkJICogZG9tYWluIHdpbGwgYmUg
-ZnJlZWQgd2hlbiBjb25uIGlzIHVubGlua2VkLgorCQkJICovCisJCQl0bXBfY29ubiA9IGRvbWFp
-bi0+Y29ubjsKIAkJCWRvbWFpbi0+Y29ubiA9IE5VTEw7CisKKwkJCXRhbGxvY191bmxpbmsodGFs
-bG9jX2F1dG9mcmVlX2NvbnRleHQoKSwgdG1wX2Nvbm4pOwogCQkJbm90aWZ5ID0gMDsgLyogZGVz
-dHJveV9kb21haW4oKSBmaXJlcyB0aGUgd2F0Y2ggKi8KIAkJCWdvdG8gYWdhaW47CiAJCX0KLS0g
-CjIuMTYuNQoKCgoKQW1hem9uIERldmVsb3BtZW50IENlbnRlciAoUm9tYW5pYSkgUy5SLkwuIHJl
-Z2lzdGVyZWQgb2ZmaWNlOiAyN0EgU2YuIExhemFyIFN0cmVldCwgVUJDNSwgZmxvb3IgMiwgSWFz
-aSwgSWFzaSBDb3VudHksIDcwMDA0NSwgUm9tYW5pYS4gUmVnaXN0ZXJlZCBpbiBSb21hbmlhLiBS
-ZWdpc3RyYXRpb24gbnVtYmVyIEoyMi8yNjIxLzIwMDUuCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDIzLjExLjE4IGF0IDE3OjUyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gUkZDLCBhcyBJIGV4cGVjdCB0aGlzIHBhdGNoIHRvIGdldCBzb21lIG9iamVjdGlvbiBm
+b3IgcmVtb3ZpbmcgdGhlIElSUSBzYWZldHkKPiBjaGVjaywgYnV0IHRoZSBvbmx5IHJlYXNvbnMg
+dGhhdCBjaGFuZ2Ugd2FzIG1hZGUgaW4gZTVmYzY0MzRkNyB3YXMgYmVjYXVzZSBJCj4gdGFsayB0
+YWxrZWQgaW50byBkb2luZyBpdCB3aGlsZSB0cnlpbmcgdG8gY2xlYW4gdXAgc29tZSB1bm5lY2Vz
+c2FyeSB1c2Ugb2YKPiBtYWdpYyBudW1iZXJzLgo+IAo+IE5vIHVzZXJzIGFyZSBjaGFuZ2luZyBh
+bnkgZmxhZ3MgKHNlZWluZyBhcyBJJ3ZlIGF1ZGl0aW5nIHRoZW0gYWxsIGluIHRoaXMKPiBzZXJp
+ZXMpLCBhbmQgdGhlIGltcHJvdmVtZW50IGluIGVtaXR0ZWQgY29kZSBuZXRzIHVzOgoKVXNlcnMg
+bm90IGNoYW5naW5nIGFueSBmbGFncyBhcyBwZXIgeW91ciBhdWRpdCBpcyBvbmx5IG9uZSBoYWxm
+IG9mIGl0OgpJIGFzc3VtZSB5b3UgbWVhbiB0aGUgdmFsdWUgcmV0dXJuZWQgZnJvbSBsb2NhbF9p
+cnFfc2F2ZSgpIGdldHMKcGFzc2VkIGJhY2sgdW5tb2RpZmllZCBpbnRvIGxvY2FsX2lycV9yZXN0
+b3JlKCkuIFRoZSBvdGhlciBxdWVzdGlvbgppcyB3aGV0aGVyIGludGVybWVkaWF0ZWx5IGFub3Ro
+ZXIgY2hhbmdlIHRvIHRoZSBDUFUgcmVnaXN0ZXIgaGFzCm9jY3VycmVkLCB3aGljaCBpcyBtZWFu
+dCB0byBwZXJzaXN0LiBXaXRoIEFybSBhbHNvIGNvbnRyb2xsaW5nIGUuZy4KZW5hYmxlZCBzdGF0
+dXMgb2YgYWJvcnRzIHRoaXMgd2F5LCBpdCBtYXkgYmUgZXZlbiBtb3JlIG9mIGFuIGlzc3VlCnRo
+ZXJlIHRoYW4gb24geDg2LgoKCj4gK3N0YXRpYyBpbmxpbmUgdm9pZCBsb2NhbF9pcnFfcmVzdG9y
+ZSh1bnNpZ25lZCBsb25nIGZsYWdzKQo+ICt7Cj4gKyAgICBhc20gdm9sYXRpbGUgKCAicHVzaCAl
+MDsgcG9wZjsiIDo6ICJnIiAoZmxhZ3MpIDogIm1lbW9yeSIgKTsKCkknbSBhZnJhaWQgdGhpcyBp
+cyBub3QgZW50aXJlbHkgcmlnaHQgKGJ1dCBwZXJoYXBzIGJlbmlnbik6IE5vdAphbGwgY29uc3Rh
+bnRzIGFyZSB2YWxpZCB0byBiZSBoYW5kZWQgdG8gUFVTSC4gSWYgeW91IHdhbnQgdG8KYWxsb3cg
+aW1tZWRpYXRlcyBpbiB0aGUgZmlyc3QgcGxhY2UsIHRoaXMgd291bGQgbmVlZCB0byBiZSAicm1l
+IiwKSSB0aGluay4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
