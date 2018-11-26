@@ -1,17 +1,21 @@
-From: Matthew Daley <mattd@bugfuzz.com>
-Subject: Re: Problems building and running Xen on Hikey960
-Date: Mon, 26 Nov 2018 14:07:23 +1300
-Message-ID: <CAD3CaneTvD6vy4QjisdonhxfmV37+S-=duGW3q_JFVhxJPHJHw@mail.gmail.com>
-References: <CAD3CancOq7wwLGEoL6HcCc8iO2rYtGr8n68GA=e6iiqtUVGZyQ@mail.gmail.com>
- <31b037ae-0f4e-0494-7460-b0d78422e01b@arm.com>
- <CAD3CanfUmzin+jw6xHYJ=8vQ6V2DGbRXjj0LdCm7qspMtZ7Y=g@mail.gmail.com>
- <481882d7-e510-51ae-2529-8bf381b6c252@arm.com>
- <CAD3CaneTnc9VGb830sWmYU9VAuOh9wxPcOnxq2OpmFxP-h0row@mail.gmail.com>
- <6dd06247-df82-5206-5fe1-77ed41da3e96@arm.com>
+From: "Tian, Kevin" <kevin.tian@intel.com>
+Subject: Re: [PATCH 4.9 and older] VMX: allow migration of
+ guests with SSBD enabled
+Date: Mon, 26 Nov 2018 01:08:24 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19BE685E6@SHSMSX101.ccr.corp.intel.com>
+References: <5BF7BA7302000078001FF399@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2465177648282826500=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <6dd06247-df82-5206-5fe1-77ed41da3e96@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=GJa3=OF=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
+ id 1gR5O2-00089B-Ia
+ for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 01:08:30 +0000
+In-Reply-To: <5BF7BA7302000078001FF399@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,98 +24,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: julien.grall@arm.com
-Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, "Nakajima,
+ Jun" <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2465177648282826500==
-Content-Type: multipart/alternative; boundary="0000000000004f6883057b86f5ae"
-
---0000000000004f6883057b86f5ae
-Content-Type: text/plain; charset="UTF-8"
-
-On Fri, 23 Nov 2018 at 09:51, Julien Grall <julien.grall@arm.com> wrote:
-
-> Hi Matthew,
->
-> Sorry for the late answer and thank you for testing the patch.
->
-> On 11/13/18 10:43 PM, Matthew Daley wrote:
-> > On Tue, 13 Nov 2018 at 02:01, Julien Grall <julien.grall@arm.com> wrote:
-> >> On 11/11/18 1:15 AM, Matthew Daley wrote:
-> > I gave this a go but unfortunately the same problem occurs (error
-> > -9s). Just to check nothing weird is happening I added a printk to
-> > check the value of __pa(init_secondary) in call_psci_cpu_on, giving
-> > 0xdfe00180.
->
-> I have posted a patch that disables completely the relocation [1]. Could
-> you have a try and see whether it works now?
->
-> Cheers,
->
-> [1] https://lists.xen.org/archives/html/xen-devel/2018-11/msg02638.html
->
-> --
-> Julien Grall
->
-
-Hi Julien,
-
-Unfortunately with this patch it appears to freeze after the call
-to switch_ttbr(ttbr).
-
-- Matthew
-
---0000000000004f6883057b86f5ae
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div>On Fri, 23 Nov 2018 at 09:51, Julien=
- Grall &lt;<a href=3D"mailto:julien.grall@arm.com">julien.grall@arm.com</a>=
-&gt; wrote:<br></div></div><div class=3D"gmail_quote"><blockquote class=3D"=
-gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-=
-left:1ex">Hi Matthew,<br>
-<br>
-Sorry for the late answer and thank you for testing the patch.<br>
-<br>
-On 11/13/18 10:43 PM, Matthew Daley wrote:<br>
-&gt; On Tue, 13 Nov 2018 at 02:01, Julien Grall &lt;<a href=3D"mailto:julie=
-n.grall@arm.com" target=3D"_blank">julien.grall@arm.com</a>&gt; wrote:<br>
-&gt;&gt; On 11/11/18 1:15 AM, Matthew Daley wrote:<br>
-&gt; I gave this a go but unfortunately the same problem occurs (error<br>
-&gt; -9s). Just to check nothing weird is happening I added a printk to<br>
-&gt; check the value of __pa(init_secondary) in call_psci_cpu_on, giving<br=
->
-&gt; 0xdfe00180.<br>
-<br>
-I have posted a patch that disables completely the relocation [1]. Could <b=
-r>
-you have a try and see whether it works now?<br>
-<br>
-Cheers,<br>
-<br>
-[1] <a href=3D"https://lists.xen.org/archives/html/xen-devel/2018-11/msg026=
-38.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xen.org/archive=
-s/html/xen-devel/2018-11/msg02638.html</a><br>
-<br>
--- <br>
-Julien Grall<br></blockquote><div><br></div><div>Hi Julien,<br class=3D"gma=
-il-Apple-interchange-newline"></div><div><br></div>Unfortunately with this =
-patch it appears to freeze after the call to=C2=A0switch_ttbr(ttbr).</div><=
-div class=3D"gmail_quote"><br></div><div class=3D"gmail_quote">- Matthew</d=
-iv></div>
-
---0000000000004f6883057b86f5ae--
-
-
---===============2465177648282826500==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2465177648282826500==--
+PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+IFNlbnQ6IEZy
+aWRheSwgTm92ZW1iZXIgMjMsIDIwMTggNDozMCBQTQo+IAo+IFRoZSBiYWNrcG9ydCBvZiBjZDUz
+MDIzZGY5ICgieDg2L21zcjogVmlydHVhbGlzZSBNU1JfU1BFQ19DVFJMLlNTQkQgZm9yCj4gZ3Vl
+c3RzIHRvIHVzZSIpIGRpZCBub3QgbWlycm9yIHRoZSBQViBzaWRlIGNoYW5nZSBpbnRvIHRoZSBI
+Vk0gKFZNWC0KPiBzcGVjaWZpYykgY29kZSBwYXRoLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkFja2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50
+aWFuQGludGVsLmNvbT4KCj4gCj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKPiAr
+KysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwo+IEBAIC05NzgsNyArOTgxLDggQEAgc3Rh
+dGljIGludCB2bXhfbG9hZF9tc3Ioc3RydWN0IHZjcHUgKnYsCj4gICAgICAgICAgICAgICAqIGln
+bm9yZWQpIHdoZW4gU1RJQlAgaXNuJ3QgZW51bWVyYXRlZCBpbiBoYXJkd2FyZS4KPiAgICAgICAg
+ICAgICAgICovCj4gICAgICAgICAgICAgIGVsc2UgaWYgKCBjdHh0LT5tc3JbaV0udmFsICYKPiAt
+ICAgICAgICAgICAgICAgICAgICAgIH4oU1BFQ19DVFJMX0lCUlMgfCBTUEVDX0NUUkxfU1RJQlAp
+ICkKPiArICAgICAgICAgICAgICAgICAgICAgIH4oU1BFQ19DVFJMX0lCUlMgfCBTUEVDX0NUUkxf
+U1RJQlAgfAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAodi0+ZG9tYWluLT5hcmNoLmNwdWlk
+LT5mZWF0LnNzYmQgPyBTUEVDX0NUUkxfU1NCRCA6IDApKSApCj4gICAgICAgICAgICAgICAgICBl
+cnIgPSAtRU5YSU87Cj4gICAgICAgICAgICAgIGVsc2UKPiAgICAgICAgICAgICAgICAgIHYtPmFy
+Y2guc3BlY19jdHJsID0gY3R4dC0+bXNyW2ldLnZhbDsKPiAKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
