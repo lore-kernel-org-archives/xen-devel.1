@@ -1,17 +1,19 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v1] xl: free bitmaps on exit
-Date: Mon, 26 Nov 2018 16:04:08 +0100
-Message-ID: <20181126160408.266d6394.olaf@aepfle.de>
-References: <20181126145822.2121-1-olaf@aepfle.de>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] viridian: fix assertion failure
+Date: Mon, 26 Nov 2018 16:04:26 +0100
+Message-ID: <20181126150426.2x3p53otb4cuiiin@mac>
+References: <20181126145454.1634-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4053288979342952049=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=bbsm=of=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gRIR5-0001Cb-2X
- for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 15:04:31 +0000
-In-Reply-To: <20181126145822.2121-1-olaf@aepfle.de>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=obox=of=citrix.com=prvs=8619cf47e=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gRISL-0001Jy-8g
+ for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 15:05:49 +0000
+Content-Disposition: inline
+In-Reply-To: <20181126145454.1634-1-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,52 +22,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4053288979342952049==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/T7CRPvcqeXzygirF6q6K8fG"; protocol="application/pgp-signature"
-
---Sig_/T7CRPvcqeXzygirF6q6K8fG
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 26 Nov 2018 15:58:22 +0100
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> +++ b/tools/xl/xl.c
-> @@ -229,6 +229,9 @@ static void parse_global_config(const char *configfil=
-e,
-
-Actually I think that should go to xl_ctx_free() instead. I moved it down t=
-o parse_global_config() by accident.
-
-Olaf
-
---Sig_/T7CRPvcqeXzygirF6q6K8fG
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/wLaAAKCRBdQqD6ppg2
-fr5CAKD6RJW7hy1SOiHjgQqpLoOMqZw37QCg6yZd9ft0zkjYeVPYAPx2sVlfE+Y=
-=i44i
------END PGP SIGNATURE-----
-
---Sig_/T7CRPvcqeXzygirF6q6K8fG--
-
-
---===============4053288979342952049==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4053288979342952049==--
+T24gTW9uLCBOb3YgMjYsIDIwMTggYXQgMDI6NTQ6NTRQTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IFdoaWxzdCBhdHRlbXB0aW5nIHRvIGNyYXNoIGFuIGFwcGFyZW50bHkgd2VkZ2VkIFdp
+bmRvd3MgZG9tYWluIHVzaW5nCj4gJ3hlbi1odm1jcmFzaCcgSSBtYW5hZ2VkIHRvIHRyaWdnZXIg
+dGhlIGZvbGxvd2luZyBBU1NFUlQ6Cj4gCj4gKFhFTikgQXNzZXJ0aW9uICchdnAtPnB0cicgZmFp
+bGVkIGF0IHZpcmlkaWFuLmM6NjA3Cj4gCj4gd2l0aCBzdGFjazoKPiAKPiAoWEVOKSAgICBbPGZm
+ZmY4MmQwODAzMmM1NWQ+XSB2aXJpZGlhbl9tYXBfZ3Vlc3RfcGFnZSsweDFiNC8weDFiNgo+IChY
+RU4pICAgIFs8ZmZmZjgyZDA4MDMyYjFkYj5dIHZpcmlkaWFuX3N5bmljX2xvYWRfdmNwdV9jdHh0
+KzB4MzkvMHgzYgo+IChYRU4pICAgIFs8ZmZmZjgyZDA4MDMyYjkwZD5dIHZpcmlkaWFuLmMjdmly
+aWRpYW5fbG9hZF92Y3B1X2N0eHQrMHg5My8weGNjCj4gKFhFTikgICAgWzxmZmZmODJkMDgwMzA5
+NmQ2Pl0gaHZtX2xvYWQrMHgxMGUvMHgxOWUKPiAoWEVOKSAgICBbPGZmZmY4MmQwODAyNzRjNmQ+
+XSBhcmNoX2RvX2RvbWN0bCsweGI3NC8weDI1YjQKPiAoWEVOKSAgICBbPGZmZmY4MmQwODAyMDY4
+YWI+XSBkb19kb21jdGwrMHgxNmY3LzB4MTlkOAo+IAo+IFRoaXMgaGFwcGVuZWQgYmVjYXVzZSB2
+aXJpZGlhbl9tYXBfZ3Vlc3RfcGFnZSgpIHdhcyBub3Qgd3JpdHRlbiB0byBjb3BlCj4gd2l0aCBi
+ZWluZyBjYWxsZWQgbXVsdGlwbGUgdGltZXMsIGJ1dCB0aGlzIGlzIHVuZm9ydHVuYXRlbHkgZXhh
+Y3RseSB3aGF0Cj4gaGFwcGVucyB3aGVuIHhlbi1odm1jcmFzaCByZS1sb2FkcyB0aGUgZG9tYWlu
+IGNvbnRleHQgKGhhdmluZyBjbG9iYmVyZWQKPiB0aGUgdmFsdWVzIG9mIFJJUCkuCj4gCj4gVGhp
+cyBwYXRjaCBzaW1wbHkgbWFrZXMgdmlyaWRpYW5fbWFwX2d1ZXN0X3BhZ2UoKSByZXR1cm4gaW1t
+ZWRpYXRlbHkgaWYgaXQKPiBmaW5kcyB0aGUgcGFnZSBhbHJlYWR5IG1hcHBlZCAoaS5lLiB2cC0+
+cHRyICE9IE5VTEwpLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJy
+YW50QGNpdHJpeC5jb20+Cj4gLS0tCj4gQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNv
+bT4KPiBDYzogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBDYzog
+V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiBDYzogIlJvZ2VyIFBhdSBNb25uw6kiIDxy
+b2dlci5wYXVAY2l0cml4LmNvbT4KPiAtLS0KPiAgeGVuL2FyY2gveDg2L2h2bS92aXJpZGlhbi92
+aXJpZGlhbi5jIHwgMyArKy0KPiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMSBk
+ZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3ZpcmlkaWFuL3Zp
+cmlkaWFuLmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZpcmlkaWFuL3ZpcmlkaWFuLmMKPiBpbmRleCA3
+ZDczZjQxZGU2Li5iOTk1MDFlZWEyIDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vdmly
+aWRpYW4vdmlyaWRpYW4uYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vdmlyaWRpYW4vdmlyaWRp
+YW4uYwo+IEBAIC02MDQsNyArNjA0LDggQEAgdm9pZCB2aXJpZGlhbl9tYXBfZ3Vlc3RfcGFnZShz
+dHJ1Y3QgdmNwdSAqdiwgc3RydWN0IHZpcmlkaWFuX3BhZ2UgKnZwKQo+ICAgICAgdW5zaWduZWQg
+bG9uZyBnbWZuID0gdnAtPm1zci5maWVsZHMucGZuOwo+ICAgICAgc3RydWN0IHBhZ2VfaW5mbyAq
+cGFnZSA9IGdldF9wYWdlX2Zyb21fZ2ZuKGQsIGdtZm4sIE5VTEwsIFAyTV9BTExPQyk7Cj4gIAo+
+IC0gICAgQVNTRVJUKCF2cC0+cHRyKTsKPiArICAgIGlmICggdnAtPnB0ciApCj4gKyAgICAgICAg
+cmV0dXJuOwoKSXNuJ3QgdGhpcyBsaWtlbHkgdG8gZ2V0IHRoZSBwYWdlIHJlZmVyZW5jZSBjb3Vu
+dGluZyBvdXQgb2Ygc3luYz8gWW91CndpbGwgcmV0dXJuIHdpdGhvdXQgYSBwdXRfcGFnZSwgYW5k
+IHZpcmlkaWFuX3VubWFwX2d1ZXN0X3BhZ2Ugd2lsbCBzZXQKdnAtPnB0ciA9IE5VTEwgYW5kIGNh
+bGwgcHV0X3BhZ2VfYW5kX3R5cGUgd2l0aG91dCB0YWtpbmcgaW50byBhY2NvdW50CnRoZSByZWZl
+cmVuY2UgY291bnQuCgpJZiB2aXJpZGlhbl9tYXBfZ3Vlc3RfcGFnZSBuZWVkcyB0byBiZSBjYWxs
+ZWQgbXVsdGlwbGUgdGltZXMgeW91Cmxpa2VseSBuZWVkIHNvbWUgcmVmZXJlbmNlIGNvdW50aW5n
+IEFGQUlDVCwgc28gdGhhdCB0aGUgbGFzdCBjYWxsIHRvCnZpcmlkaWFuX3VubWFwX2d1ZXN0X3Bh
+Z2UgaXMgdGhlIG9uZSB0aGF0IHJlbGVhc2VzIHRoZSBwYWdlIGFuZCBzZXRzCnZwLT5wdHIgPSBO
+VUxMLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
