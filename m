@@ -1,20 +1,17 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 03/14] AMD/IOMMU: Fix multiple reference
- counting errors
-Date: Mon, 26 Nov 2018 02:05:13 -0700
-Message-ID: <5BFBB74902000078001FFBDF@prv1-mh.provo.novell.com>
-References: <1542806482-24030-1-git-send-email-andrew.cooper3@citrix.com>
- <1542806482-24030-4-git-send-email-andrew.cooper3@citrix.com>
- <5BF6C27902000078001FEF9D@prv1-mh.provo.novell.com>
- <6e804647-5e9a-4d41-c441-1317b418e4dc@citrix.com>
- <5BF7B8F202000078001FF37E@prv1-mh.provo.novell.com>
- <764100c1-dd77-b7a0-4588-d06e1ab63cb8@citrix.com>
+From: Paul Durrant <paul.durrant@citrix.com>
+Subject: [PATCH 0/2] amd-iommu: cosmetic fixes
+Date: Mon, 26 Nov 2018 09:05:24 +0000
+Message-ID: <20181126090526.21737-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <764100c1-dd77-b7a0-4588-d06e1ab63cb8@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=xvjC=OF=citrix.com=prvs=861df4a88=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1gRCpi-00037j-Eq
+ for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 09:05:34 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,45 +20,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <paul.durrant@citrix.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIzLjExLjE4IGF0IDE3OjAzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjMvMTEvMjAxOCAwODoyMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDIy
-LjExLjE4IGF0IDE4OjQ2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBP
-biAyMi8xMS8yMDE4IDE0OjUxLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gQEAgLTIyMCwxMiAr
-MjE5LDE4IEBAIHZvaWQgZ3Vlc3RfaW9tbXVfYWRkX3Bwcl9sb2coc3RydWN0IGRvbWFpbiAqZCwg
-dTMyIGVudHJ5W10pCj4+Pj4+ICAgICAgdW5tYXBfZG9tYWluX3BhZ2UobG9nX2Jhc2UpOwo+Pj4+
-PiAgCj4+Pj4+ICAgICAgZ3Vlc3RfaW9tbXVfZGVsaXZlcl9tc2koZCk7Cj4+Pj4+ICsKPj4+Pj4g
-K291dDoKPj4+PiBQbGVhc2UgaW5kZW50IGJ5IGF0IGxlYXN0IG9uZSBibGFuayAoc2FtZSBmdXJ0
-aGVyIGRvd24pLgo+Pj4gSSB0aG91Z2h0IHlvdSd2ZSBzYWlkIHRoYXQgeW91J3JlIG5vIGxvbmdl
-ciB1c2luZyBhbiBvYnNvbGV0ZSB2ZXJzaW9uIG9mCj4+PiBkaWZmLgo+PiBJIGRvbid0IHRoaW5r
-IEkndmUgZXZlciBzYWlkIHNvLCBhbmQgSSBkb24ndCB0aGluayBpdCBtYXR0ZXJzIG11Y2ggd2hh
-dAo+PiBJIHBlcnNvbmFsbHkgdXNlLgo+IAo+IFRoZSBvbmx5IHJlYXNvbiB3ZSBoYXZlIHRoaXMg
-cXVpcmsgb2YgYSBjb2Rpbmcgc3R5bGUgaXMgYmVjYXVzZSB5b3UKPiBpbnNpc3RlZCB3aGVuIERh
-dmlkIHdhcyBwdXR0aW5nIHRvZ2V0aGVyIENPRElOR19TVFlMRSwgYW5kIHRoZSByZWFzb24KPiB5
-b3UgZ2F2ZSB3YXMgdG8gd29yayBhcm91bmQgdmVyc2lvbnMgb2YgYGRpZmYgLXVgIHdoaWNoIG1p
-c3Rvb2sgdGhlIGNhc2UKPiBsYWJlbCBmb3IgdGhlIGZ1bmN0aW9uIG5hbWUgd2hlbiBjcmVhdGlu
-ZyB0aGUgdW5pZmllZCBoZWFkZXIuICB2MSBvZgo+IERhdmlkJ3MgcGF0Y2ggdmVyeSBzcGVjaWZp
-Y2FsbHkgZGlkbid0IGhhdmUgdGhlIG9uZSBzcGFjZSwgYmVjYXVzZSBoZQo+IHdhcyBhY3R1YWxs
-eSB0cnlpbmcgdG8gZ2V0IHJpZCBvZiB0aGF0LCBhcyBpdCB3YXMgKGFuZCBzdGlsbCBpcykKPiBj
-b21wbGV0ZWx5IHVuZXhwZWN0ZWQgZm9yIG5ldyBkZXZlbG9wZXJzLCBhbmQgYSBmcmVxdWVudCBz
-b3VyY2Ugb2YgY3VydAo+IHJldmlldyByZXNwb25zZXMuCgpQZXJzb25hbGx5IEkgZmluZCBpdCB1
-bmRlc2lyYWJsZSB0byBoYXZlIGFueXRoaW5nIG90aGVyIHRoYXQgZmlsZQpzY29wZSB0aGluZ3Mg
-dG8gc3RhcnQgaW4gY29sdW1uIDEuIE9mIGNvdXJzZSwgYXMgeW91J3JlIGxpa2VseQphd2FyZSwg
-SSdtIGFuIG9wcG9uZW50IG9mIGxhYmVscyBhbmQgZ290by1zIGFsdG9nZXRoZXIsIGFuZApwcm9i
-YWJseSB0aGUgZm9ybWVyIGRpc2xpa2UgaXMgc29ydCBvZiBhIHJlc3VsdCBvZiB0aGUgbGF0dGVy
-LgoKPiBJZiB0aGlzIGlzIG5vIGxvbmdlciBhIGNvbmNlcm4sIGNhbiBJIHN1Z2dlc3Qgd2UgdXBk
-YXRlIENPRElOR19TVFlMRS4gCgpFdmVuIHRoZSB2ZXJzaW9uIG9mIGRpZmYgb24gbXkgbWFpbiBt
-b3N0IG1vZGVybiBzeXN0ZW0gKDMuNikKZ2V0cyB0aGlzIHdyb25nLCBzbyBJJ2QgcHJlZmVyIGlm
-IHdlIGNvdWxkIHN0aWNrIHRvIGluZGVudGVkIGxhYmVscy4KSSBjb250aW51ZSB0byBiZSBvZiB0
-aGUgb3BpbmlvbiB0aGF0IHRoZSB1c2Ugb2YgZ2l0IHNob3VsZCBub3QgYmUKYSByZXF1aXJlbWVu
-dCBmb3IgZGV2ZWxvcGVyczsgcGxhaW4gZGlmZiBhbmQgcGF0Y2ggb3VnaHQgdG8Kc3VmZmljZSBm
-b3IgcGVvcGxlIHRvIHByb2R1Y2UgYWNjZXB0YWJsZSBwYXRjaGVzLgoKSSdkIGxpa2UgdG8gbm90
-ZSB0aG91Z2ggdGhhdCAuL0NPRElOR19TVFlMRSBzYXlzIG5vdGhpbmcgZWl0aGVyCndheSBhZmFp
-Y3MsIHNvIEkgYWxzbyBoYXZlIG5vIGJhc2lzIHRvIF9pbnNpc3RfIG9uIHRoaXMgc3R5bGUuIEkn
-dmUKanVzdCBzZW50IGEgcGF0Y2ggdG8gcmVjdGlmeSB0aGlzLgoKSmFuCgoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Tm8gZnVuY3Rpb25hbCBjaGFuZ2UuCgpQYXVsIER1cnJhbnQgKDIpOgogIGFtZC1pb21tdTogcmVw
+bGFjZSBvY2N1cnJlbmNlcyBvZiBib29sX3Qgd2l0aCBib29sCiAgYW1kLWlvbW11OiByZXBsYWNl
+IG9jY3VycmVuY2VzIG9mIHU8Tj4gd2l0aCB1aW50PE4+X3QuLi4KCiB4ZW4vZHJpdmVycy9wYXNz
+dGhyb3VnaC9hbWQvaW9tbXVfbWFwLmMgfCAxMzcgKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0t
+LS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCA3MCBpbnNlcnRpb25zKCspLCA2NyBkZWxldGlvbnMoLSkK
+IAotLS0KQ2M6IFN1cmF2ZWUgU3V0aGlrdWxwYW5pdCA8c3VyYXZlZS5zdXRoaWt1bHBhbml0QGFt
+ZC5jb20+CkNjOiBCcmlhbiBXb29kcyA8YnJpYW4ud29vZHNAYW1kLmNvbT4JICAgIAotLSAKMi4x
+MS4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
