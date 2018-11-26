@@ -1,20 +1,20 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH] viridian: fix assertion failure
-Date: Mon, 26 Nov 2018 15:08:50 +0000
-Message-ID: <351559a8f93f4373b9423743ea4fe7b3@AMSPEX02CL03.citrite.net>
-References: <20181126145454.1634-1-paul.durrant@citrix.com>
- <20181126150426.2x3p53otb4cuiiin@mac>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: qemu assert in staging during HVM live migration
+Date: Mon, 26 Nov 2018 16:16:48 +0100
+Message-ID: <20181126161648.063b401b.olaf@aepfle.de>
+References: <20181122100344.GA13748@aepfle.de>
+ <20181123155449.GB6902@perard.uk.xensource.com>
+ <20181123165708.0a085d8e.olaf@aepfle.de>
+ <20181126143205.GL2448@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3331468437648104176=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xvjc=of=citrix.com=prvs=861df4a88=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gRIWg-0002KJ-Gr
- for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 15:10:18 +0000
-In-Reply-To: <20181126150426.2x3p53otb4cuiiin@mac>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=bbsm=of=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gRId3-0002Vs-Og
+ for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 15:16:54 +0000
+In-Reply-To: <20181126143205.GL2448@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,65 +23,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IFJvZ2VyIFBhdSBNb25uZQo+IFNl
-bnQ6IDI2IE5vdmVtYmVyIDIwMTggMTU6MDQKPiBUbzogUGF1bCBEdXJyYW50IDxQYXVsLkR1cnJh
-bnRAY2l0cml4LmNvbT4KPiBDYzogeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnOyBKYW4g
-QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Owo+IEFuZHJldyBDb29wZXIgPEFuZHJldy5Db29w
-ZXIzQGNpdHJpeC5jb20+OyBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+IFN1YmplY3Q6
-IFJlOiBbUEFUQ0hdIHZpcmlkaWFuOiBmaXggYXNzZXJ0aW9uIGZhaWx1cmUKPiAKPiBPbiBNb24s
-IE5vdiAyNiwgMjAxOCBhdCAwMjo1NDo1NFBNICswMDAwLCBQYXVsIER1cnJhbnQgd3JvdGU6Cj4g
-PiBXaGlsc3QgYXR0ZW1wdGluZyB0byBjcmFzaCBhbiBhcHBhcmVudGx5IHdlZGdlZCBXaW5kb3dz
-IGRvbWFpbiB1c2luZwo+ID4gJ3hlbi1odm1jcmFzaCcgSSBtYW5hZ2VkIHRvIHRyaWdnZXIgdGhl
-IGZvbGxvd2luZyBBU1NFUlQ6Cj4gPgo+ID4gKFhFTikgQXNzZXJ0aW9uICchdnAtPnB0cicgZmFp
-bGVkIGF0IHZpcmlkaWFuLmM6NjA3Cj4gPgo+ID4gd2l0aCBzdGFjazoKPiA+Cj4gPiAoWEVOKSAg
-ICBbPGZmZmY4MmQwODAzMmM1NWQ+XSB2aXJpZGlhbl9tYXBfZ3Vlc3RfcGFnZSsweDFiNC8weDFi
-Ngo+ID4gKFhFTikgICAgWzxmZmZmODJkMDgwMzJiMWRiPl0gdmlyaWRpYW5fc3luaWNfbG9hZF92
-Y3B1X2N0eHQrMHgzOS8weDNiCj4gPiAoWEVOKSAgICBbPGZmZmY4MmQwODAzMmI5MGQ+XQo+IHZp
-cmlkaWFuLmMjdmlyaWRpYW5fbG9hZF92Y3B1X2N0eHQrMHg5My8weGNjCj4gPiAoWEVOKSAgICBb
-PGZmZmY4MmQwODAzMDk2ZDY+XSBodm1fbG9hZCsweDEwZS8weDE5ZQo+ID4gKFhFTikgICAgWzxm
-ZmZmODJkMDgwMjc0YzZkPl0gYXJjaF9kb19kb21jdGwrMHhiNzQvMHgyNWI0Cj4gPiAoWEVOKSAg
-ICBbPGZmZmY4MmQwODAyMDY4YWI+XSBkb19kb21jdGwrMHgxNmY3LzB4MTlkOAo+ID4KPiA+IFRo
-aXMgaGFwcGVuZWQgYmVjYXVzZSB2aXJpZGlhbl9tYXBfZ3Vlc3RfcGFnZSgpIHdhcyBub3Qgd3Jp
-dHRlbiB0byBjb3BlCj4gPiB3aXRoIGJlaW5nIGNhbGxlZCBtdWx0aXBsZSB0aW1lcywgYnV0IHRo
-aXMgaXMgdW5mb3J0dW5hdGVseSBleGFjdGx5IHdoYXQKPiA+IGhhcHBlbnMgd2hlbiB4ZW4taHZt
-Y3Jhc2ggcmUtbG9hZHMgdGhlIGRvbWFpbiBjb250ZXh0IChoYXZpbmcgY2xvYmJlcmVkCj4gPiB0
-aGUgdmFsdWVzIG9mIFJJUCkuCj4gPgo+ID4gVGhpcyBwYXRjaCBzaW1wbHkgbWFrZXMgdmlyaWRp
-YW5fbWFwX2d1ZXN0X3BhZ2UoKSByZXR1cm4gaW1tZWRpYXRlbHkgaWYKPiBpdAo+ID4gZmluZHMg
-dGhlIHBhZ2UgYWxyZWFkeSBtYXBwZWQgKGkuZS4gdnAtPnB0ciAhPSBOVUxMKS4KPiA+Cj4gPiBT
-aWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgo+ID4g
-LS0tCj4gPiBDYzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+ID4gQ2M6IEFuZHJl
-dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gPiBDYzogV2VpIExpdSA8d2Vp
-LmxpdTJAY2l0cml4LmNvbT4KPiA+IENjOiAiUm9nZXIgUGF1IE1vbm7DqSIgPHJvZ2VyLnBhdUBj
-aXRyaXguY29tPgo+ID4gLS0tCj4gPiAgeGVuL2FyY2gveDg2L2h2bS92aXJpZGlhbi92aXJpZGlh
-bi5jIHwgMyArKy0KPiA+ICAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAxIGRlbGV0
-aW9uKC0pCj4gPgo+ID4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vdmlyaWRpYW4vdmly
-aWRpYW4uYwo+IGIveGVuL2FyY2gveDg2L2h2bS92aXJpZGlhbi92aXJpZGlhbi5jCj4gPiBpbmRl
-eCA3ZDczZjQxZGU2Li5iOTk1MDFlZWEyIDEwMDY0NAo+ID4gLS0tIGEveGVuL2FyY2gveDg2L2h2
-bS92aXJpZGlhbi92aXJpZGlhbi5jCj4gPiArKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZpcmlkaWFu
-L3ZpcmlkaWFuLmMKPiA+IEBAIC02MDQsNyArNjA0LDggQEAgdm9pZCB2aXJpZGlhbl9tYXBfZ3Vl
-c3RfcGFnZShzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0Cj4gdmlyaWRpYW5fcGFnZSAqdnApCj4gPiAg
-ICAgIHVuc2lnbmVkIGxvbmcgZ21mbiA9IHZwLT5tc3IuZmllbGRzLnBmbjsKPiA+ICAgICAgc3Ry
-dWN0IHBhZ2VfaW5mbyAqcGFnZSA9IGdldF9wYWdlX2Zyb21fZ2ZuKGQsIGdtZm4sIE5VTEwsCj4g
-UDJNX0FMTE9DKTsKPiA+Cj4gPiAtICAgIEFTU0VSVCghdnAtPnB0cik7Cj4gPiArICAgIGlmICgg
-dnAtPnB0ciApCj4gPiArICAgICAgICByZXR1cm47Cj4gCj4gSXNuJ3QgdGhpcyBsaWtlbHkgdG8g
-Z2V0IHRoZSBwYWdlIHJlZmVyZW5jZSBjb3VudGluZyBvdXQgb2Ygc3luYz8gWW91Cj4gd2lsbCBy
-ZXR1cm4gd2l0aG91dCBhIHB1dF9wYWdlLCBhbmQgdmlyaWRpYW5fdW5tYXBfZ3Vlc3RfcGFnZSB3
-aWxsIHNldAo+IHZwLT5wdHIgPSBOVUxMIGFuZCBjYWxsIHB1dF9wYWdlX2FuZF90eXBlIHdpdGhv
-dXQgdGFraW5nIGludG8gYWNjb3VudAo+IHRoZSByZWZlcmVuY2UgY291bnQuCj4gCgpEYW1uLiBN
-aXNzZWQgdGhhdCB0aGUgc2lkZSBlZmZlY3Qgd2FzIGluIHRoZSBpbml0aWFsaXplci4gSSdsbCBu
-ZWVkIHRvIG1vdmUgaXQgYmVsb3cgdGhlIGNoZWNrLgoKPiBJZiB2aXJpZGlhbl9tYXBfZ3Vlc3Rf
-cGFnZSBuZWVkcyB0byBiZSBjYWxsZWQgbXVsdGlwbGUgdGltZXMgeW91Cj4gbGlrZWx5IG5lZWQg
-c29tZSByZWZlcmVuY2UgY291bnRpbmcgQUZBSUNULCBzbyB0aGF0IHRoZSBsYXN0IGNhbGwgdG8K
-PiB2aXJpZGlhbl91bm1hcF9ndWVzdF9wYWdlIGlzIHRoZSBvbmUgdGhhdCByZWxlYXNlcyB0aGUg
-cGFnZSBhbmQgc2V0cwo+IHZwLT5wdHIgPSBOVUxMLgoKSSBzaG91bGRuJ3QgbmVlZCB0byByZWZl
-cmVuY2UgY291bnQuIFdoZW4gdGhlIE1TUiBpcyBzZXQgYnkgdGhlIGd1ZXN0IHRoZXJlIGlzIGFs
-d2F5cyBhbiB1bm1hcCB0aGVuIGEgbWFwLiBJdCBpcyBqdXN0IHRoZSBjb250ZXh0IGxvYWQgY2Fz
-ZSB0aGF0IHNob3VsZCBvbmx5IG1hcCBvbiB0aGUgZmlyc3QgY2FsbCAodG8gaGFuZGxlIHJlc3Vt
-ZSBjb3JyZWN0bHkpLgoKICBQYXVsCgo+IAo+IFRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============3331468437648104176==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/kBYB9EphR_E7Et9cZQkTipj"; protocol="application/pgp-signature"
+
+--Sig_/kBYB9EphR_E7Et9cZQkTipj
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 26 Nov 2018 14:32:05 +0000
+schrieb Anthony PERARD <anthony.perard@citrix.com>:
+
+> Also, a backtrace of the original problem would be nice.
+
+There is no backtrace, all the data I could grab was sent to this list.
+I was unable to reproduce it as well.
+
+Olaf
+
+--Sig_/kBYB9EphR_E7Et9cZQkTipj
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/wOYAAKCRBdQqD6ppg2
+frzYAKDexxyWL+5HxNIkIJr/SdNokEUiGwCdHy4Q6McHsbroiWYcZRurc7Jhva8=
+=n+Z7
+-----END PGP SIGNATURE-----
+
+--Sig_/kBYB9EphR_E7Et9cZQkTipj--
+
+
+--===============3331468437648104176==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3331468437648104176==--
