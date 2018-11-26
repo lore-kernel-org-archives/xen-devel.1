@@ -1,25 +1,19 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH] xen: only clobber multicall elements
- without error
-Date: Mon, 26 Nov 2018 16:01:41 +0000
-Message-ID: <4c7158b4-d4da-994e-545b-8f5dec97dbb6@arm.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] Increase framebuffer size to todays
+ standards
+Date: Mon, 26 Nov 2018 17:03:35 +0100
+Message-ID: <20181126170335.01a6ac58.olaf@aepfle.de>
+References: <20181125191405.3028-1-olaf@aepfle.de>
+ <5BFBCB7F02000078001FFD9B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7501960092973797448=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=n+h+=of=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gRJKU-0000VP-Pv
- for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 16:01:46 +0000
-References: =?UTF-8?B?PDIwMTgxMTIzMTMyNTE2LjI4Njgx77+977+977+977+9Me+/vQ==?=
- =?UTF-8?B?77+977+977+9amdyb3NzQHN1c2UuY29tPiA8NUJGQkQxQzYwMjAwMDA3ODAwMUZG?=
- =?UTF-8?B?RTA5QHN1c2UuY29tPiA8ZDM4YjFjMzPvv701Y2Nh77+9NTcyYe+/vWE5NDLvv71i?=
- =?UTF-8?Q?1db8ca309a2=40suse=2ecom=3e_=3c5BFBFCD3020000780020004F=40suse=2e?=
- =?UTF-8?Q?com=3e_=3c955bec0d-f574-53c5-91a5-1d6ea0bc4f2a=40suse=2ecom=3e_?=
- =?UTF-8?Q?=3c5BFC0A1302000078002000E1=40suse=2ecom=3e_=3c06592737-411f-d518?=
- =?UTF-8?Q?-d972-6b4cdc704d9b=40suse=2ecom=3e?=
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=bbsm=of=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gRJMW-0000e6-SS
+ for xen-devel@lists.xenproject.org; Mon, 26 Nov 2018 16:03:53 +0000
+In-Reply-To: <5BFBCB7F02000078001FFD9B@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,64 +22,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyNi8xMS8yMDE4IDE1OjI5LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IE9uIDI2LzExLzIw
-MTggMTU6NTgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAyNi4xMS4xOCBhdCAxNToyMywg
-PGpncm9zc0BzdXNlLmNvbT4gd3JvdGU6Cj4+PiBPbiAyNi8xMS8yMDE4IDE1OjAxLCBKYW4gQmV1
-bGljaCB3cm90ZToKPj4+Pj4+PiBPbiAyNi4xMS4xOCBhdCAxNDo1MiwgPGpncm9zc0BzdXNlLmNv
-bT4gd3JvdGU6Cj4+Pj4+IEkgZG9uJ3QgdGhpbmsgdGhlIGh5cGVydmlzb3Igc2hvdWxkIGV4cGxp
-Y2l0bHkgdHJ5IHRvIG1ha2UgaXQgYXMgaGFyZCBhcwo+Pj4+PiBwb3NzaWJsZSBmb3IgdGhlIGd1
-ZXN0IHRvIGZpbmQgcHJvYmxlbXMgaW4gdGhlIGNvZGUuCj4+Pj4KPj4+PiBUaGF0J3MgaW5kZWVk
-IG5vdCB0aGUgaHlwZXJ2aXNvcidzIGdvYWwuIEluc3RlYWQgaXQgdHJpZXMgdG8gbWFrZQo+Pj4+
-IGl0IGFzIGhhcmQgYXMgcG9zc2libGUgZm9yIHRoZSBndWVzdCAoZGV2ZWxvcGVyKSB0byBtYWtl
-IHdyb25nCj4+Pj4gYXNzdW1wdGlvbnMuCj4+Pgo+Pj4gTGV0J3MgbG9vayBhdCB0aGUgY3VycmVu
-dCBleGFtcGxlIHdoeSBJIHdyb3RlIHRoaXMgcGF0Y2g6Cj4+Pgo+Pj4gVGhlIExpbnV4IGtlcm5l
-bCdzIHVzZSBvZiBtdWx0aWNhbGxzIHNob3VsZCBuZXZlciB0cmlnZ2VyIGFueSBzaW5nbGUKPj4+
-IGNhbGwgdG8gcmV0dXJuIGFuIGVycm9yIChyZXR1cm4gdmFsdWUgPCAwKS4gQSBrZXJuZWwgY29t
-cGlsZWQgZm9yCj4+PiBwcm9kdWN0aXZlIHVzZSB3aWxsIGNhdGNoIHN1Y2ggZXJyb3JzLCBidXQg
-aGFzIG5vIGtub3dsZWRnZSB3aGljaAo+Pj4gc2luZ2xlIGNhbGwgaGFzIGZhaWxlZCwgYXMgaXQg
-ZG9lc24ndCBrZWVwIHRyYWNrIG9mIHRoZSBzaW5nbGUgZW50cmllcwo+Pj4gKG5vbi1wcm9kdWN0
-aXZlIGtlcm5lbHMgaGF2ZSBhbiBvcHRpb24gYXZhaWxhYmxlIGluIHRoZSByZXNwZWN0aXZlCj4+
-PiBzb3VyY2UgdG8gY29weSB0aGUgZW50cmllcyBiZWZvcmUgZG9pbmcgdGhlIG11bHRpY2FsbCBp
-biBvcmRlciB0byBoYXZlCj4+PiBzb21lIGRpYWdub3N0aWMgZGF0YSBhdmFpbGFibGUgaW4gY2Fz
-ZSBvZiBzdWNoIGFuIGVycm9yKS4gQ2F0Y2hpbmcgYW4KPj4+IGVycm9yIGZyb20gYSBtdWx0aWNh
-bGwgcmlnaHQgbm93IG1lYW5zIGEgV0FSTigpIHdpdGggYSBzdGFjayBiYWNrdHJhY2UKPj4+IChm
-b3IgdGhlIG11bHRpY2FsbCBpdHNlbGYsIG5vdCBmb3IgdGhlIGVudHJ5IGNhdXNpbmcgdGhlIGVy
-cm9yKS4KPj4+Cj4+PiBJIGhhdmUgYSBjdXN0b21lciByZXBvcnQgZm9yIGEgY2FzZSB3aGVyZSBz
-dWNoIGEgYmFja3RyYWNlIHdhcyBwcm9kdWNlZAo+Pj4gYW5kIGEga2VybmVsIGNyYXNoIHNvbWUg
-c2Vjb25kcyBsYXRlciwgb2J2aW91c2x5IGR1ZSB0byBpbGxlZ2FsbHkKPj4+IHVubWFwcGVkIG1l
-bW9yeSBwYWdlcyByZXN1bHRpbmcgZnJvbSB0aGUgZmFpbGVkIG11bHRpY2FsbC4gVW5mb3J0dW5h
-dGVseQo+Pj4gdGhlcmUgYXJlIG11bHRpcGxlIHBvc3NpYmlsaXRpZXMgd2hhdCBtaWdodCBoYXZl
-IGdvbmUgd3JvbmcgYW5kIEkgZG9uJ3QKPj4+IGtub3cgd2hpY2ggb25lIHdhcyB0aGUgY3VscHJp
-dC4gVGhlIHByb2JsZW0gY2FuJ3QgYmUgYSB2ZXJ5IGNvbW1vbiBvbmUsCj4+PiBiZWNhdXNlIHRo
-ZXJlIGlzIG9ubHkgb25lIHN1Y2ggcmVwb3J0IHJpZ2h0IG5vdywgd2hpY2ggbWlnaHQgZGVwZW5k
-IG9uCj4+PiBhIHNwZWNpYWwgZHJpdmVyLgo+Pj4KPj4+IEZpbmRpbmcgdGhpcyBidWcgd2l0aG91
-dCBhIGtub3duIHJlcHJvZHVjZXIgYW5kIHRoZSBjdXJyZW50IGFtb3VudCBvZgo+Pj4gZGlhZ25v
-c3RpYyBkYXRhIGlzIG5leHQgdG8gaW1wb3NzaWJsZS4gU28gSSdkIGxpa2UgdG8gaGF2ZSBtb3Jl
-IGRhdGEKPj4+IGF2YWlsYWJsZSB3aXRob3V0IGhhdmluZyB0byBodXJ0IHBlcmZvcm1hbmNlIGZv
-ciB0aGUgOTkuOTk5OTk5JSBvZiB0aGUKPj4+IGNhc2VzIHdoZXJlIG5vdGhpbmcgYmFkIGhhcHBl
-bnMuCj4+Pgo+Pj4gSW4gY2FzZSB5b3UgaGF2ZSBhbiBpZGVhIGhvdyB0byBzb2x2ZSB0aGlzIHBy
-b2JsZW0gaW4gYW5vdGhlciB3YXkgSSdkIGJlCj4+PiBoYXBweSB0byBmb2xsb3cgdGhhdCByb3V0
-ZS4gSSdkIHJlYWxseSBsaWtlIHRvIGJlIGFibGUgdG8gaGF2ZSBhIGJldHRlcgo+Pj4gY2x1ZSBp
-biBjYXNlIHN1Y2ggYW4gZXJyb3Igb2NjdXJzIGluIGZ1dHVyZS4KPj4KPj4gU2luY2UgeW91IGhh
-dmUgYSBwcm9kdWN0aW9uIGtlcm5lbCwgSSBhc3N1bWUgeW91IGFsc28gaGF2ZSBhCj4+IHByb2R1
-Y3Rpb24gaHlwZXJ2aXNvci4gVGhpcyBoeXBlcnZpc29yIGRvZXNuJ3QgY2xvYmJlciB0aGUKPj4g
-YXJndW1lbnRzIGlmIEknbSBub3QgbWlzdGFrZW4uIFRoZXJlZm9yZQo+PiAtIGluIHRoZSBkZWJ1
-Z2dpbmcgc2NlbmFyaW8geW91IChjYW4pIGhhdmUgYWxsIGRhdGEgYXZhaWxhYmxlIGJ5Cj4+ICAg
-IHZpcnR1ZSBvZiB0aGUgaW5mb3JtYXRpb24gZ2V0dGluZyBjb3BpZWQgaW4gdGhlIGtlcm5lbCwK
-Pj4gLSBpbiB0aGUgcmVsZWFzZSBzY2VuYXJpbyB5b3UgaGF2ZSBhbGwgZGF0YSBhdmFpbGFibGUg
-c2luY2UgaXQncwo+PiAgICBsZWZ0IHVuLWNsb2JiZXJlZC4KPj4gQW0gSSBtaXNzaW5nIGFueXRo
-aW5nIChJIGRvbid0IHZpZXcgbWl4ZWQgZGVidWcvcmVsZWFzZSBzZXR1cHMKPj4gb2Yga2VybmVs
-IGFuZCBoeXBlcnZpc29yIGFzIG92ZXJseSBpbXBvcnRhbnQgaGVyZSk/Cj4gCj4gTm8sIHlvdSBh
-cmUgbWlzc2luZyBub3RoaW5nIGhlcmUuIE9UT0ggYSBkZWJ1ZyBoeXBlcnZpc29yIGRlc3Ryb3lp
-bmcKPiBkZWJ1ZyBkYXRhIGlzIGtpbmQgb2Ygd2VpcmQsIHNvIEkgcG9zdGVkIHRoaXMgcGF0Y2gu
-CgpUaGlzIGlzIGEgcXVpdGUgY29tbW9uIGFwcHJvYWNoIGlmIHlvdSB3YW50IHRvIGVuZm9yY2Ug
-dGhlIG90aGVyIGVudGl0eSB0byBub3QgCnJlbHkgb24gc29tZSBmaWVsZHMuIFRoaXMgYWxzbyBm
-b2xsb3dzIHdoYXQgd2UgZG8gZm9yIGh5cGVyY2FsbHMgKGF0IGxlYXN0IG9uIEFybSkuCgpDaGVl
-cnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+--===============7501960092973797448==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/FoLqpkE49XPOQQmvnUgwcZ8"; protocol="application/pgp-signature"
+
+--Sig_/FoLqpkE49XPOQQmvnUgwcZ8
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 26 Nov 2018 03:31:27 -0700
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> And I think a change like this should (a) address the more general
+> case rather than just your laptop (or laptops in general) and (b)
+> actually add some headroom. Hence at the very least I'd see us
+> go to 4096x3072. WHUXGA would even call for 7680x4800.
+
+So should I resend this patch with higher values, or should I remove
+the bounds check entirely? Not sure what it is trying to achieve, the
+framebuffer may fail either way if the BIOS provides bogus values.
+
+Olaf
+
+--Sig_/FoLqpkE49XPOQQmvnUgwcZ8
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/wZVwAKCRBdQqD6ppg2
+fltDAKCcJF/LelVCzNtCLJQDAL63eKcXMgCfbd1KiwAhv3LwPhlst5Ls359wMqI=
+=T9J6
+-----END PGP SIGNATURE-----
+
+--Sig_/FoLqpkE49XPOQQmvnUgwcZ8--
+
+
+--===============7501960092973797448==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7501960092973797448==--
