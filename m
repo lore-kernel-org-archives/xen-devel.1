@@ -1,18 +1,18 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v2] xl: free bitmaps on exit
-Date: Tue, 27 Nov 2018 18:09:33 +0100
-Message-ID: <20181127180933.5fe93cec.olaf@aepfle.de>
-References: <20181127100608.4197-1-olaf@aepfle.de>
- <20181127165538.7xglqre6psla42kq@zion.uk.xensource.com>
+From: Volodymyr Babchuk <vlad.babchuk@gmail.com>
+Subject: [ARM] gvirt_to_maddr fails when DomU is created
+Date: Tue, 27 Nov 2018 19:12:50 +0200
+Message-ID: <CAOcqxo3MTA0iSAD2m5P87+YBwv_d5_-RHSEX0uuwFwHAC0dVZg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3451642881170553146=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=1451=og=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gRgrz-00007X-2A
- for xen-devel@lists.xenproject.org; Tue, 27 Nov 2018 17:09:55 +0000
-In-Reply-To: <20181127165538.7xglqre6psla42kq@zion.uk.xensource.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=wjng=og=gmail.com=vlad.babchuk@srs-us1.protection.inumbo.net>)
+ id 1gRgv4-0000wN-41
+ for xen-devel@lists.xenproject.org; Tue, 27 Nov 2018 17:13:06 +0000
+Received: by mail-lj1-x231.google.com with SMTP id u6-v6so20753816ljd.1
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Nov 2018 09:13:04 -0800 (PST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,52 +21,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3451642881170553146==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/7FlSKRbYP_Kfkx+r_a5j5fI"; protocol="application/pgp-signature"
-
---Sig_/7FlSKRbYP_Kfkx+r_a5j5fI
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Tue, 27 Nov 2018 16:55:38 +0000
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> Looking more closely into this, these lines should be moved even
-> earlier before the call to libxl_ctx_alloc -- there is an exit there.
-
-Is it required to install the atexit handler before alloc()?
-To me it looks like atexit(xl_ctx_free) should be done right after, or insi=
-de, xl_ctx_alloc().
-
-Olaf
-
---Sig_/7FlSKRbYP_Kfkx+r_a5j5fI
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/16TgAKCRBdQqD6ppg2
-ft1dAJ0W3muL6VEEnVtz3EsgQh93xg0TbACffGroRjMDiB5RvN+Ng/4o0c3EhnY=
-=KxCC
------END PGP SIGNATURE-----
-
---Sig_/7FlSKRbYP_Kfkx+r_a5j5fI--
-
-
---===============3451642881170553146==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3451642881170553146==--
+SGVsbG8gY29tbXVuaXR5LAoKQWZ0ZXIgY3JlYXRpbmcgZG9tVSwgSSdtIHNlZWluZyBsb3RzIG9m
+IHRoaXMgbWVzc2FnZXMgZnJvbSBoeXBlcnZpc29yOgoKKFhFTikgcDJtLmM6MTQ0MjogZDF2MDog
+Z3ZpcnRfdG9fbWFkZHIgZmFpbGVkIHZhPTB4ZmZmZjgwMDAwZWZjN2YwZgpmbGFncz0weDEgcGFy
+PTB4ODA5CihYRU4pIHAybS5jOjE0NDI6IGQxdjA6IGd2aXJ0X3RvX21hZGRyIGZhaWxlZCB2YT0w
+eGZmZmY4MDAwMGVmYzdmMDAKZmxhZ3M9MHgxIHBhcj0weDgwOQooWEVOKSBwMm0uYzoxNDQyOiBk
+MXYwOiBndmlydF90b19tYWRkciBmYWlsZWQgdmE9MHhmZmZmODAwMDBlZmM3ZjBmCmZsYWdzPTB4
+MSBwYXI9MHg4MDkKCkludGVyZXN0aW5nbHksIEknbSBnZXR0aW5nIHRoZW0gZnJvbSBib3RoIERv
+bTAgYW5kIERvbVU6CgooWEVOKSBwMm0uYzoxNDQyOiBkMHYwOiBndmlydF90b19tYWRkciBmYWls
+ZWQgdmE9MHhmZmZmODAwMDNlZmQ3ZjBmCmZsYWdzPTB4MSBwYXI9MHg4MDkKKFhFTikgcDJtLmM6
+MTQ0MjogZDF2MDogZ3ZpcnRfdG9fbWFkZHIgZmFpbGVkIHZhPTB4ZmZmZjgwMDAwZWZjN2YwZgpm
+bGFncz0weDEgcGFyPTB4ODA5CgpCdXQgb25seSBhZnRlciBEb21VIGlzIGNyZWF0ZWQuCgpJIGF0
+dGFjaGVkIEdEQiBhbmQgZm91bmQgdGhhdCB0aGlzIGlzIGNhdXNlZCBieSB1cGRhdGVfcnVuc3Rh
+dGVfYXJlYToKCihnZGIpIGJ0CiMwICBnZXRfcGFnZV9mcm9tX2d2YSAodj0weDgwMDA1ZGJlMjAw
+MCwgdkBlbnRyeT0weDIyZjJjOCA8c2NoZWR1bGUrMTIzNj4sCiAgICB2YT12YUBlbnRyeT0xODQ0
+NjYwMzMzNzI3Nzk5NjgxNSwgZmxhZ3M9ZmxhZ3NAZW50cnk9MSkgYXQgcDJtLmM6MTQ0MAojMSAg
+MHgwMDAwMDAwMDAwMjRlMzIwIGluIHRyYW5zbGF0ZV9nZXRfcGFnZSAod3JpdGU9dHJ1ZSwgbGlu
+ZWFyPXRydWUsCmFkZHI9MTg0NDY2MDMzMzcyNzc5OTY4MTUsCiAgICBpbmZvPS4uLikgYXQgZ3Vl
+c3Rjb3B5LmM6MzcKIzIgIGNvcHlfZ3Vlc3QgKGJ1Zj1idWZAZW50cnk9MHg4MDAwNWRiZTIwZDcs
+CmFkZHI9YWRkckBlbnRyeT0xODQ0NjYwMzMzNzI3Nzk5NjgxNSwgbGVuPWxlbkBlbnRyeT0xLAog
+ICAgaW5mbz0uLi4sIGZsYWdzPWZsYWdzQGVudHJ5PTYpIGF0IGd1ZXN0Y29weS5jOjY5CiMzICAw
+eDAwMDAwMDAwMDAyNGU0NWMgaW4gcmF3X2NvcHlfdG9fZ3Vlc3QgKHRvPXRvQGVudHJ5PTB4ZmZm
+ZjgwMDAzZWZkN2YwZiwKICAgIGZyb209ZnJvbUBlbnRyeT0weDgwMDA1ZGJlMjBkNywgbGVuPWxl
+bkBlbnRyeT0xKSBhdCBndWVzdGNvcHkuYzoxMTAKIzQgIDB4MDAwMDAwMDAwMDI0OTdiNCBpbiB1
+cGRhdGVfcnVuc3RhdGVfYXJlYQoodj12QGVudHJ5PTB4ODAwMDVkYmUyMDAwKSBhdCBkb21haW4u
+YzoyODcKIzUgIDB4MDAwMDAwMDAwMDI0OWViOCBpbiBjb250ZXh0X3N3aXRjaCAocHJldj1wcmV2
+QGVudHJ5PTB4ODAwMDVkYmUyMDAwLAogICAgbmV4dD1uZXh0QGVudHJ5PTB4ODAwMDViZjNjMDAw
+KSBhdCBkb21haW4uYzozNDQKIzYgIDB4MDAwMDAwMDAwMDIyZjJjOCBpbiBzY2hlZHVsZSAoKSBh
+dCBzY2hlZHVsZS5jOjE1ODMKIzcgIDB4MDAwMDAwMDAwMDIzMmMxMCBpbiBfX2RvX3NvZnRpcnEK
+KGlnbm9yZV9tYXNrPWlnbm9yZV9tYXNrQGVudHJ5PTApIGF0IHNvZnRpcnEuYzo1MAojOCAgMHgw
+MDAwMDAwMDAwMjMyY2E0IGluIGRvX3NvZnRpcnEgKCkgYXQgc29mdGlycS5jOjY0CiM5ICAweDAw
+MDAwMDAwMDAyNTgyNTQgaW4gbGVhdmVfaHlwZXJ2aXNvcl90YWlsICgpIGF0IHRyYXBzLmM6MjMw
+MgoKVGhpcyBpc3N1ZSBpcyBlbmNvdW50ZXJlZCBvbiBRRU1VLUFSTXY4LiBEb20wIGtlcm5lbCBp
+cyBMaW51eCA0LjE5LjAKTXkgWEVOIG1hc3RlciBpcyBhdCBkOGZmYWMxZjcgInhlbi9hcm06IGdp
+YzogUmVtb3ZlIGR1cGxpY2F0ZWQgY29tbWVudAppbiBkb19zZ2kiCgpUaGUgc2FtZSBzZXR1cCB3
+b3JrZWQgcGVyZmVjdGx5IHdpdGggWGVuIDQuMTAuMgoKSnVsaWVuLCBJIHNhdyBvbiBtYWlsaW5n
+IGxpc3QsIHRoYXQgeW91IHBhaWQgYXR0ZW50aW9uIHRvIGlzc3VlcyB3aXRoCmd2aXJ0X3RvX21h
+ZGRyLApzbyBtYXliZSB5b3UgY2FuIGJlIGludGVyZXN0ZWQgaW4gdGhpcy4KCi0tIApXQlIgVm9s
+b2R5bXlyIEJhYmNodWsgYWthIGxvcmMgWyszODA5NzY2NDYwMTNdCm1haWx0bzogdmxhZC5iYWJj
+aHVrQGdtYWlsLmNvbQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
