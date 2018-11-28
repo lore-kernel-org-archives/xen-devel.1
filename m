@@ -1,20 +1,20 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v2] xl: free bitmaps on exit
-Date: Wed, 28 Nov 2018 09:29:37 +0100
-Message-ID: <20181128092937.31ec88f9.olaf@aepfle.de>
-References: <20181127100608.4197-1-olaf@aepfle.de>
- <20181127165538.7xglqre6psla42kq@zion.uk.xensource.com>
- <20181127180933.5fe93cec.olaf@aepfle.de>
- <20181127171906.2okpiqidqp3alvsr@zion.uk.xensource.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH] xen/x86: fix paging_max_paddr_bits()
+Date: Wed, 28 Nov 2018 09:41:20 +0100
+Message-ID: <20181128084120.sznv4wwpca6uzbtr@mac>
+References: <20181128075224.30765-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4525935981042837298=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=ou13=oh=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gRvE7-00031n-ET
- for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 08:29:44 +0000
-In-Reply-To: <20181127171906.2okpiqidqp3alvsr@zion.uk.xensource.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=ir32=OH=citrix.com=prvs=8634c6f68=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gRvPX-0004N5-KA
+ for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 08:41:31 +0000
+Content-Disposition: inline
+In-Reply-To: <20181128075224.30765-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,49 +23,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, wei.liu2@citrix.com, jbeulich@suse.com, andrew.cooper3@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============4525935981042837298==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/ma0xWIC28TQA8yWd/n8=v1D"; protocol="application/pgp-signature"
-
---Sig_/ma0xWIC28TQA8yWd/n8=v1D
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Tue, 27 Nov 2018 17:19:06 +0000
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> The other option -- to call atexit right after -- looks plausible to me.
-
-After looking through main(), moving the atexit() seems safe to me.
-
-Olaf
-
---Sig_/ma0xWIC28TQA8yWd/n8=v1D
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCW/5R8QAKCRBdQqD6ppg2
-ft3BAJwIpc5QWRg8D3wt+J7tiAecVPfE1ACghWxq1CvfYzMNLd2ncAOkAoVkC1c=
-=0Qpz
------END PGP SIGNATURE-----
-
---Sig_/ma0xWIC28TQA8yWd/n8=v1D--
-
-
---===============4525935981042837298==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4525935981042837298==--
+T24gV2VkLCBOb3YgMjgsIDIwMTggYXQgMDg6NTI6MjRBTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBwYWdpbmdfbWF4X3BhZGRyX2JpdHMoKSBoYXMgYW4gaW52YWxpZCB1c2Ugb2YgSVNf
+RU5BQkxFRCgpOiBpbnN0ZWFkIG9mCj4gSVNfRU5BQkxFRChDT05GSUdfQklHTUVNKSBpdCBpcyB1
+c2luZyBJU19FTkFCTEVEKEJJR01FTSkuIEZpeCB0aGF0Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEp1
+ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbW8+CgpSZXZpZXdlZC1ieTogUm9nZXIgUGF1IE1v
+bm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
