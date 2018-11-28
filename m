@@ -1,18 +1,20 @@
-From: Manjunath Patil <manjunath.b.patil@oracle.com>
-Subject: [PATCH] xen-blkfront: use old rinfo after enomem during
- migration
-Date: Wed, 28 Nov 2018 21:17:45 -0800
-Message-ID: <1543468665-22795-1-git-send-email-manjunath.b.patil@oracle.com>
+From: Joey Pabalinas <joeypabalinas@gmail.com>
+Subject: Re: [PATCH] xen: xlate_mmu: add missing header to fix
+ 'W=1' warning
+Date: Wed, 28 Nov 2018 07:38:40 -1000
+Message-ID: <20181128173840.wdulfu75d3mwdd2i__44355.1845536151$1543470142$gmane$org@gmail.com>
+References: <1543328607-10546-1-git-send-email-boddepalli.srikanth@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2741811124107174676=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=vrjR=OI=oracle.com=manjunath.b.patil@srs-us1.protection.inumbo.net>)
- id 1gSEgx-0002eE-QJ
- for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 05:16:47 +0000
+ <srs0=ucsu=oh=gmail.com=joeypabalinas@srs-us1.protection.inumbo.net>)
+ id 1gS3nR-0006jq-FP
+ for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 17:38:45 +0000
+Received: by mail-pl1-x632.google.com with SMTP id k8so7077565pls.11
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Nov 2018 09:38:44 -0800 (PST)
+In-Reply-To: <1543328607-10546-1-git-send-email-boddepalli.srikanth@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,70 +23,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: boris.ostrovsky@oracle.com, jgross@suse.com, konrad.wilk@oracle.com, roger.pau@citrix.com, axboe@kernel.dk
-Cc: linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, manjuanth.b.patil@oracle.com
+To: Srikanth Boddepalli <boddepalli.srikanth@gmail.com>
+Cc: jgross@suse.com, sstabellini@kernel.org, linux-kernel@vger.kernel.org, Joey Pabalinas <joeypabalinas@gmail.com>, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCkZlZWwgZnJlZSB0byBzdWdnZXN0L2NvbW1lbnQgb24gdGhpcy4KCkkgYW0gdHJ5aW5nIHRv
-IGRvIHRoZSBmb2xsb3dpbmcgYXQgZHN0IGR1cmluZyB0aGUgbWlncmF0aW9uIG5vdy4KMS4gRG9u
-dCBjbGVhciB0aGUgb2xkIHJpbmZvIGluIGJsa2lmX2ZyZWUoKS4gSW5zdGVhZCBqdXN0IGNsZWFu
-IGl0LgoyLiBTdG9yZSB0aGUgb2xkIHJpbmZvIGFuZCBucl9yaW5ncyBpbnRvIHRlbXAgdmFyaWFi
-bGVzIGluIG5lZ290aWF0ZV9tcSgpCjMuIGxldCBucl9yaW5ncyBnZXQgcmUtY2FsY3VsYXRlZCBi
-YXNlZCBvbiBiYWNrZW5kIGRhdGEKNC4gdHJ5IGFsbG9jYXRpbmcgbmV3IG1lbW9yeSBiYXNlZCBv
-biBuZXcgbnJfcmluZ3MKNS4gCiAgYS4gSWYgbWVtb3J5IGFsbG9jYXRpb24gaXMgYSBzdWNjZXNz
-CiAgICAgLSBmcmVlIHRoZSBvbGQgcmluZm8gYW5kIHByb2NlZWQgdG8gdXNlIHRoZSBuZXcgcmlu
-Zm8KICBiLiBJZiBtZW1vcnkgYWxsb2NhdGlvbiBpcyBhIGZhaWx1cmUKICAgICAtIHVzZSB0aGUg
-b2xkIHRoZSByaW5mbwogICAgIC0gYWRqdXN0IHRoZSBucl9yaW5ncyB0byB0aGUgbG93ZXN0IG9m
-IG5ldyBucl9yaW5ncyBhbmQgb2xkIG5yX3JpbmdzCgotVGhhbmtzLApNYW5qdW5hdGgKLS0KRHVy
-aW5nIG1pZ3JhdGlvbiwgdGhlIGRzdCBzaWRlIGRldmljZSByZXN1bWUgY2FuIGZhaWwgdG8gYWxs
-b2NhdGUgcmluZm8Kc3RydWN0LiBFYWNoIHJpbmZvIGlzIGFib3V0IDgwSyBpbiBzaXplIGFuZCBh
-bGxvY2F0aW5nIDRbdHlwaWNhbF0gc3VjaApyaW5ncyB3b3VsZCBuZWVkIGFuIG9yZGVyIDcgYWxs
-b2NhdGlvbls1MTJLQiBjaHVja10gdGhlcmUgYnkgaW5jcmVzaW5nCnRoZSBjaGFuY2Ugb2YgbWVt
-b3J5IGFsbG9jYXRpb24gZmFpbHVyZS4gRGV2aWNlIHJlc3VtZSBmYWlsdXJlIGR1cmluZwptaWdy
-YXRpb24gd2lsbCBsZWFkIHRoZSBwcm9jZXNzZXMgYWNjZXNzaW5nIHRoZSBkZXZpY2UgaW50byBo
-dW5nIHN0YXRlLgoKVGhpcyBwYXRjaCBhaW1zIHRvIHJldXNlIG9sZCByaW5mbyBpbiBjYXNlIG9m
-IG1lbW9yeSBhbGxvY2F0aW9uIGZhaWx1cmUuCgpTaWduZWQtb2ZmLWJ5OiBNYW5qdW5hdGggUGF0
-aWwgPG1hbmp1bmF0aC5iLnBhdGlsQG9yYWNsZS5jb20+Ci0tLQogZHJpdmVycy9ibG9jay94ZW4t
-YmxrZnJvbnQuYyB8ICAgNDYgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0t
-LS0KIDEgZmlsZXMgY2hhbmdlZCwgMzkgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKCmRp
-ZmYgLS1naXQgYS9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtmcm9udC5jIGIvZHJpdmVycy9ibG9jay94
-ZW4tYmxrZnJvbnQuYwppbmRleCAwZWQ0YjIwLi4wNDFiYTY3IDEwMDY0NAotLS0gYS9kcml2ZXJz
-L2Jsb2NrL3hlbi1ibGtmcm9udC5jCisrKyBiL2RyaXZlcnMvYmxvY2sveGVuLWJsa2Zyb250LmMK
-QEAgLTEzNTMsOSArMTM1MywxNyBAQCBzdGF0aWMgdm9pZCBibGtpZl9mcmVlKHN0cnVjdCBibGtm
-cm9udF9pbmZvICppbmZvLCBpbnQgc3VzcGVuZCkKIAlmb3IgKGkgPSAwOyBpIDwgaW5mby0+bnJf
-cmluZ3M7IGkrKykKIAkJYmxraWZfZnJlZV9yaW5nKCZpbmZvLT5yaW5mb1tpXSk7CiAKLQlrZnJl
-ZShpbmZvLT5yaW5mbyk7Ci0JaW5mby0+cmluZm8gPSBOVUxMOwotCWluZm8tPm5yX3JpbmdzID0g
-MDsKKwlpZiAodW5saWtlbHkoaW5mby0+Y29ubmVjdGVkID09IEJMS0lGX1NUQVRFX1NVU1BFTkRF
-RCkpIHsKKwkJLyogV2UgYXJlIG1pZ3JhdGluZy4gWW91IG1heSByZXVzZSBpdC4gSnVzdCBjbGVh
-bi4gKi8KKwkJZm9yIChpID0gMDsgaSA8IGluZm8tPm5yX3JpbmdzOyBpKyspIHsKKwkJCW1lbXNl
-dCgmaW5mby0+cmluZm9baV0sIDAsCisJCQkJc2l6ZW9mKHN0cnVjdCBibGtmcm9udF9yaW5nX2lu
-Zm8pKTsKKwkJfQorCX0gZWxzZSB7CisJCWtmcmVlKGluZm8tPnJpbmZvKTsKKwkJaW5mby0+cmlu
-Zm8gPSBOVUxMOworCQlpbmZvLT5ucl9yaW5ncyA9IDA7CisJfQogfQogCiBzdHJ1Y3QgY29weV9m
-cm9tX2dyYW50IHsKQEAgLTE5MDMsNiArMTkxMSwxNiBAQCBzdGF0aWMgaW50IG5lZ290aWF0ZV9t
-cShzdHJ1Y3QgYmxrZnJvbnRfaW5mbyAqaW5mbykKIHsKIAl1bnNpZ25lZCBpbnQgYmFja2VuZF9t
-YXhfcXVldWVzOwogCXVuc2lnbmVkIGludCBpOworCXN0cnVjdCBibGtmcm9udF9yaW5nX2luZm8g
-KnJpbmZvX29sZCA9IE5VTEw7CisJdW5zaWduZWQgaW50IG5yX3JpbmdzX29sZCA9IDA7CisKKwkv
-KiBNaWdyYXRpbmcuIFdlIGRpZCBub3QgZnJlZSBvbGQgcmluZm8uIFJldXNlIGl0IGlmIHBvc3Np
-YmxlICovCisJaWYgKHVubGlrZWx5KGluZm8tPmNvbm5lY3RlZCA9PSBCTEtJRl9TVEFURV9TVVNQ
-RU5ERUQpKSB7CisJCW5yX3JpbmdzX29sZCA9IGluZm8tPm5yX3JpbmdzOworCQlyaW5mb19vbGQg
-PSBpbmZvLT5yaW5mbzsKKwkJaW5mby0+cmluZm8gPSBOVUxMOworCQlpbmZvLT5ucl9yaW5ncyA9
-IDA7CisJfQogCiAJQlVHX09OKGluZm8tPm5yX3JpbmdzKTsKIApAQCAtMTkxOCwxMCArMTkzNiwy
-NCBAQCBzdGF0aWMgaW50IG5lZ290aWF0ZV9tcShzdHJ1Y3QgYmxrZnJvbnRfaW5mbyAqaW5mbykK
-IAkJCSAgICAgIHNpemVvZihzdHJ1Y3QgYmxrZnJvbnRfcmluZ19pbmZvKSwKIAkJCSAgICAgIEdG
-UF9LRVJORUwpOwogCWlmICghaW5mby0+cmluZm8pIHsKLQkJeGVuYnVzX2Rldl9mYXRhbChpbmZv
-LT54YmRldiwgLUVOT01FTSwgImFsbG9jYXRpbmcgcmluZ19pbmZvIHN0cnVjdHVyZSIpOwotCQlp
-bmZvLT5ucl9yaW5ncyA9IDA7Ci0JCXJldHVybiAtRU5PTUVNOwotCX0KKwkJaWYgKHVubGlrZWx5
-KG5yX3JpbmdzX29sZCkpIHsKKwkJCS8qIFdlIG1pZ2h0IHdhc3RlIHNvbWUgbWVtb3J5IGlmCisJ
-CQkgKiBpbmZvLT5ucl9yaW5ncyA8IG5yX3JpbmdzX29sZAorCQkJICovCisJCQlpbmZvLT5yaW5m
-byA9IHJpbmZvX29sZDsKKwkJCWlmIChpbmZvLT5ucl9yaW5ncyA+IG5yX3JpbmdzX29sZCkKKwkJ
-CQlpbmZvLT5ucl9yaW5ncyA9IG5yX3JpbmdzX29sZDsKKwkJCXhlbmJ1c19kZXZfZmF0YWwoaW5m
-by0+eGJkZXYsIC1FTk9NRU0sCisJCQkicmV1c2luZyBvbGQgcmluZ19pbmZvIHN0cnVjdHVyZShu
-ZXcgcmluZyBzaXplPSVkKSIsCisJCQkJaW5mby0+bnJfcmluZ3MpOworCQl9IGVsc2UgeworCQkJ
-eGVuYnVzX2Rldl9mYXRhbChpbmZvLT54YmRldiwgLUVOT01FTSwKKwkJCQkiYWxsb2NhdGluZyBy
-aW5nX2luZm8gc3RydWN0dXJlIik7CisJCQlpbmZvLT5ucl9yaW5ncyA9IDA7CisJCQlyZXR1cm4g
-LUVOT01FTTsKKwkJfQorCX0gZWxzZSBpZiAodW5saWtlbHkobnJfcmluZ3Nfb2xkKSkKKwkJa2Zy
-ZWUocmluZm9fb2xkKTsKIAogCWZvciAoaSA9IDA7IGkgPCBpbmZvLT5ucl9yaW5nczsgaSsrKSB7
-CiAJCXN0cnVjdCBibGtmcm9udF9yaW5nX2luZm8gKnJpbmZvOwotLSAKMS43LjEKCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============2741811124107174676==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="ctfnzmxuhvk5aoiq"
+Content-Disposition: inline
+
+
+--ctfnzmxuhvk5aoiq
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Nov 27, 2018 at 07:53:27PM +0530, Srikanth Boddepalli wrote:
+> Add a missing header otherwise compiler warns about missed prototype:
+>=20
+> drivers/xen/xlate_mmu.c:183:5: warning: no previous prototype for 'xen_xl=
+ate_unmap_gfn_range?' [-Wmissing-prototypes]
+>   int xen_xlate_unmap_gfn_range(struct vm_area_struct *vma,
+>       ^~~~~~~~~~~~~~~~~~~~~~~~~
+
+Reviewed-by: Joey Pabalinas <joeypabalinas@gmail.com>
+
+--=20
+Cheers,
+Joey Pabalinas
+
+--ctfnzmxuhvk5aoiq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEENpTlWU2hUK/KMvHp2rGdfm9DtVIFAlv+0p8ACgkQ2rGdfm9D
+tVIzGRAAm1uz+/E+KPd+YrX2tYdQn1FmmnwD1cOGubXDLjs1g/ongTN7MzEFgjta
+GukfJQN/94bdqTwOmKQCouwk+s8AMa8wrUbVPYUKb4kwglnJon46msXrfvNjzIwm
+/jpwWePXP6h+HGem90zaxAXI626bojLMI1PcyMrBockXs/qY8bj/8Y5HCfwbRgWI
+6xaWmr/oMoaWaFDl2IcsfpiMEvOuAub9XRzVLJmG5n574dRaLDwEf3ozDEE+da+a
+Rk6Ti+6Hy6RFz22LjwU2xrEP5yrnHl6rnNFX1/4XdDEcwuFPaDaNjrCmduWMVqjJ
++D6TjETS+IUrO/E9w3YcqpsCot/z05BODx8OI2d0PFlArK2MTXnG27NyrVkmCL8L
+5F5ypIPocgG/2fWhPq7u8ImbxVocvZXoaIKzNoRf2HK80WlTbYpVdgXB/dljZAee
+kNVnEh+5nXhp8+4F0ked7z32Tskqwe6CfOkdNYsv0UfnmlMHLdCYvcYynMtYdxIi
+5lw8+qZA4h4Mzx+NmuE/gPHqEdDL2zm0CY3JnF1lncTtQunFvHOo6OPPixuFuON8
+V83LoB+0PVVrM5FEWrMcL5YSl5Sa6nZcah/v2MZpRav1Rc9OoJpS2iaGDwAGnJD1
+tzjtLM4peKZNjU1M2R0X3CrTZf8x/Ulpds9HiyAap3PU3xZNq0c=
+=WeLl
+-----END PGP SIGNATURE-----
+
+--ctfnzmxuhvk5aoiq--
+
+
+--===============2741811124107174676==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2741811124107174676==--
