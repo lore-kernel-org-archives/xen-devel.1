@@ -1,15 +1,16 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v5 01/20] xen: add some xen headers
-Date: Wed, 28 Nov 2018 12:46:02 +0100
-Message-ID: <fdde807e-e438-0e1c-a7e7-997f790ba6f7__25767.9612063386$1543405488$gmane$org@suse.com>
+Subject: Re: [PATCH v5 15/20] xen_pvh: add build runes for
+ grub-core
+Date: Wed, 28 Nov 2018 12:52:28 +0100
+Message-ID: <e40203a5-7ca3-4139-43ae-5c5913809aa6__5015.46900854937$1543405935$gmane$org@suse.com>
 References: <20181121142855.13537-1-jgross@suse.com>
- <20181121142855.13537-2-jgross@suse.com>
- <20181128113127.6vej2pzrb4frdzje@tomti.i.net-space.pl>
+ <20181121142855.13537-16-jgross@suse.com>
+ <20181127211748.6x6mldxk343v7qvj@tomti.i.net-space.pl>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181128113127.6vej2pzrb4frdzje@tomti.i.net-space.pl>
+In-Reply-To: <20181127211748.6x6mldxk343v7qvj@tomti.i.net-space.pl>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,28 +24,16 @@ To: Daniel Kiper <daniel.kiper@oracle.com>
 Cc: hans@knorrie.org, grub-devel@gnu.org, phcoder@gmail.com, roger.pau@citrix.com, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjgvMTEvMjAxOCAxMjozMSwgRGFuaWVsIEtpcGVyIHdyb3RlOgo+IE9uIFdlZCwgTm92IDIx
-LCAyMDE4IGF0IDAzOjI4OjM2UE0gKzAxMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+IEluIG9y
-ZGVyIHRvIHN1cHBvcnQgZ3J1YjIgaW4gWGVuIFBWSCBlbnZpcm9ubWVudCBzb21lIGFkZGl0aW9u
-YWwgWGVuCj4+IGhlYWRlcnMgYXJlIG5lZWRlZCBhcyBncnViMiB3aWxsIGJlIHN0YXJ0ZWQgaW4g
-UFZIIG1vZGUgcmVxdWlyaW5nIHRvCj4+IHVzZSBzZXZlcmFsIEhWTSBoeXBlcmNhbGxzIGFuZCBz
-dHJ1Y3R1cmVzLgo+Pgo+PiBBZGQgdGhlIG5lZWRlZCBoZWFkZXJzIGZyb20gWGVuIDQuMTAgYmVp
-bmcgdGhlIGZpcnN0IFhlbiB2ZXJzaW9uIHdpdGgKPj4gZnVsbCAobm90IG9ubHkgZXhwZXJpbWVu
-dGFsKSBQVkggZ3Vlc3Qgc3VwcG9ydC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9z
-cyA8amdyb3NzQHN1c2UuY29tPgo+PiBSZXZpZXdlZC1ieTogRGFuaWVsIEtpcGVyIDxkYW5pZWwu
-a2lwZXJAb3JhY2xlLmNvbT4KPiAKPiBXaGVuIEkgYXBwbHkgdGhpcyBwYXRjaCBJIGdldCB0aGlz
-Ogo+IAo+ICAgQXBwbHlpbmc6IHhlbjogYWRkIHNvbWUgeGVuIGhlYWRlcnMKPiAgIC5naXQvcmVi
-YXNlLWFwcGx5L3BhdGNoOjcyMzogdHJhaWxpbmcgd2hpdGVzcGFjZS4KPiAgICAqCj4gICAuZ2l0
-L3JlYmFzZS1hcHBseS9wYXRjaDo3MjU6IHRyYWlsaW5nIHdoaXRlc3BhY2UuCj4gICAgKgo+ICAg
-LmdpdC9yZWJhc2UtYXBwbHkvcGF0Y2g6NzY0OiB0cmFpbGluZyB3aGl0ZXNwYWNlLgo+ICAgICog
-TWF4aW11bSAjIGJpdHMgYWRkcmVzc2FibGUgYnkgdGhlIHVzZXIgb2YgdGhlIGFsbG9jYXRlZCBy
-ZWdpb24gKGUuZy4sIEkvTwo+ICAgLmdpdC9yZWJhc2UtYXBwbHkvcGF0Y2g6NzY1OiB0cmFpbGlu
-ZyB3aGl0ZXNwYWNlLgo+ICAgICogZGV2aWNlcyBvZnRlbiBoYXZlIGEgMzItYml0IGxpbWl0YXRp
-b24gZXZlbiBpbiA2NC1iaXQgc3lzdGVtcykuIElmIHplcm8KPiAgIC5naXQvcmViYXNlLWFwcGx5
-L3BhdGNoOjc2NjogdHJhaWxpbmcgd2hpdGVzcGFjZS4KPiAgICAqIHRoZW4gdGhlIHVzZXIgaGFz
-IG5vIGFkZHJlc3NpbmcgcmVzdHJpY3Rpb24uIFRoaXMgZmllbGQgaXMgbm90IHVzZWQgYnkKPiAg
-IHdhcm5pbmc6IHNxdWVsY2hlZCA3IHdoaXRlc3BhY2UgZXJyb3JzCj4gICB3YXJuaW5nOiAxMiBs
-aW5lcyBhZGQgd2hpdGVzcGFjZSBlcnJvcnMuCj4gCj4gQ291bGQgeW91IGZpeCB0aGlzPwoKWWVz
-LgoKCkp1ZXJnZW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMjcvMTEvMjAxOCAyMjoxNywgRGFuaWVsIEtpcGVyIHdyb3RlOgo+IE9uIFdlZCwgTm92IDIx
+LCAyMDE4IGF0IDAzOjI4OjUwUE0gKzAxMDAsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4+IEFkZCB0
+aGUgbW9kaWZpY2F0aW9ucyB0byB0aGUgYnVpbGQgc3lzdGVtIG5lZWRlZCB0byBidWlsZCBhIHhl
+bl9wdmgKPj4gZ3J1Yi4KPj4KPj4gU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3Nz
+QHN1c2UuY29tPgo+PiBSZXZpZXdlZC1ieTogRGFuaWVsIEtpcGVyIDxkYW5pZWwua2lwZXJAb3Jh
+Y2xlLmNvbT4KPj4gLS0tCj4+IFYzOiBzb3J0ZWQgc29tZSBmaWxlbmFtZXMgKERhbmllbCBLaXBl
+cikKPj4gVjQ6IGFkZCBidXMvcGNpLmMgdG8geGVuX3B2aAo+IAo+IFY1IGRyb3BzIGJ1cy9wY2ku
+YyBmcm9tIHhlbl9wdmguIElzIGl0IGludGVudGlvbmFsIG9yIG1pc3Rha2U/CgpBcyB0aGUgcGF0
+Y2ggbmVlZGluZyB0aGlzIGhhcyBiZWVuIGRyb3BwZWQgYWdhaW4gdGhpcyB3YXMKaW50ZW50aW9u
+YWwuCgoKSnVlcmdlbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
