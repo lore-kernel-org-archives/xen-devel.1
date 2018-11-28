@@ -1,22 +1,37 @@
-From: George Dunlap <George.Dunlap@citrix.com>
-Subject: Re: [PATCH 9/9] libxl: Kill QEMU with "reaper" ruid
-Date: Wed, 28 Nov 2018 18:33:31 +0000
-Message-ID: <E01AFF18-E01D-4912-8D1D-D3068B86837B@citrix.com>
-References: <20181123171502.29519-1-george.dunlap@citrix.com>
- <20181123171502.29519-9-george.dunlap@citrix.com>
- <23550.51750.957497.310933@mariner.uk.xensource.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: Re: remove the ->mapping_error method from dma_map_ops
+ V2
+Date: Wed, 28 Nov 2018 11:19:15 -0800
+Message-ID: <CAHk-=whcbiSxSUprsKjVPEdN5-+o8WnTGiKxEV-+HbKNDs=iNA__26439.4302423627$1543432716$gmane$org@mail.gmail.com>
+References: <CAHk-=wh=_T=A53+o4zLNbKio43LGqVDb0KCbWPDvAg54bRDmWw@mail.gmail.com>
+ <20181122170715.GI30658@n2100.armlinux.org.uk>
+ <CAHk-=wgfGzXuDAKFQPdzMib3QCRHfSTsy5=gLU-WCoya+Ym+1A@mail.gmail.com>
+ <11829e3c-7302-f821-cf5c-863e5267a17b@arm.com>
+ <CAHk-=whxf0zqutExPr_j1A625Z3gcL6k_ABzKo1BtzN4F93hkA@mail.gmail.com>
+ <20181123065511.GA17856@lst.de> <20181128074117.GA21126@lst.de>
+ <CAHk-=wg5+rXK8dpjkSmK7tuz29VfxVWNEwmTVYB409mmyLkeew@mail.gmail.com>
+ <20181128174545.GJ30658@n2100.armlinux.org.uk>
+ <CAHk-=whnz4Kty6cas11bc2Gh=9zTzeeRS2k=dV9Hfc4B=xnHkQ@mail.gmail.com>
+ <20181128180841.GM30658@n2100.armlinux.org.uk>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3697526988356726052=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=/wkf=oh=citrix.com=prvs=86304e188=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1gS4ff-0003aW-15
- for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 18:34:47 +0000
-In-Reply-To: <23550.51750.957497.310933@mariner.uk.xensource.com>
-Content-Language: en-US
-Content-ID: <0672A26CE2F5824A86E44FA312992A3E@citrix.com>
+ <srs0=ggdt=oh=linuxfoundation.org=torvalds@srs-us1.protection.inumbo.net>)
+ id 1gS5N0-0006VO-O5
+ for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 19:19:34 +0000
+Received: by mail-lj1-x22e.google.com with SMTP id t9-v6so24473743ljh.6
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Nov 2018 11:19:32 -0800 (PST)
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com.
+ [209.85.208.172])
+ by smtp.gmail.com with ESMTPSA id v11-v6sm1258457ljc.57.2018.11.28.11.19.28
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 28 Nov 2018 11:19:28 -0800 (PST)
+Received: by mail-lj1-f172.google.com with SMTP id c19-v6so24488918lja.5
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Nov 2018 11:19:28 -0800 (PST)
+In-Reply-To: <20181128180841.GM30658@n2100.armlinux.org.uk>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,90 +40,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <Ian.Jackson@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
+To: Russell King - ARM Linux <linux@armlinux.org.uk>
+Cc: linux-arch@vger.kernel.org, linux-ia64@vger.kernel.org, linux-parisc@vger.kernel.org, David Woodhouse <dwmw2@infradead.org>, the arch/x86 maintainers <x86@kernel.org>, Linux List Kernel Mailing <linux-kernel@vger.kernel.org>, iommu@lists.linux-foundation.org, linux-alpha@vger.kernel.org, xen-devel@lists.xenproject.org, robin.murphy@arm.com, Christoph Hellwig <hch@lst.de>, linux-arm-kernel@lists.infradead.org
 List-Id: xen-devel@lists.xenproject.org
 
-DQoNCj4gT24gTm92IDI4LCAyMDE4LCBhdCA1OjAyIFBNLCBJYW4gSmFja3NvbiA8aWFuLmphY2tz
-b25AY2l0cml4LmNvbT4gd3JvdGU6DQo+IA0KPiBHZW9yZ2UgRHVubGFwIHdyaXRlcyAoIltQQVRD
-SCA5LzldIGxpYnhsOiBLaWxsIFFFTVUgd2l0aCAicmVhcGVyIiBydWlkIik6DQo+PiBVc2luZyBr
-aWxsKC0xKSB0byBraWxsaW5nIGFuIHVudHJ1c3RlZCBkbSBwcm9jZXNzIHdpdGggdGhlIHJlYWwg
-dWlkDQo+PiBlcXVhbCB0byB0aGUgZG1fdWlkIGlzbid0IGd1YXJhbnRlZWQgdG8gc3VjY2VlZDog
-dGhlIHByb2Nlc3MgaW4NCj4+IHF1ZXN0aW9uIG1heSBiZSBhYmxlIHRvIGtpbGwgdGhlIHJlYXBl
-ciBwcm9jZXNzIGFmdGVyIHRoZSBzZXRyZXN1aWQoKQ0KPj4gYW5kIGJlZm9yZSB0aGUga2lsbCgp
-Lg0KPiAuLi4NCj4+ICtzdGF0aWMgaW50IGxpYnhsX19nZXRfcmVhcGVyX3VpZChsaWJ4bF9fZ2Mg
-KmdjKQ0KPj4gK3sNCj4+ICsgICAgc3RydWN0IHBhc3N3ZCAqdXNlcl9iYXNlLCB1c2VyX3B3YnVm
-Ow0KPj4gKyAgICBpbnQgcmV0Ow0KPj4gKyAgICByZXQgPSB1c2VybG9va3VwX2hlbHBlcl9nZXRw
-d25hbShnYywgTElCWExfUUVNVV9VU0VSX1JBTkdFX0JBU0UsDQo+PiArICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAmdXNlcl9wd2J1ZiwgJnVzZXJfYmFzZSk7DQo+IA0K
-PiByZXQgc2hvdWxkIGJlIHIgSSB0aGluay4NCj4gDQo+IEFsc28gSSB0aGluayB5b3UgbmVlZCB0
-byBoYW5kbGUgZXJyb3JzIHByb3Blcmx5ID8gIEllIHNldCBhbmQgY2hlY2sNCj4gZXJybm8uDQoN
-CkRvbuKAmXQgSSB3YW50IHRvIHBhc3MgdXAgdGhlIGVycm5vIHZhbHVlcyBzZXQgYnkgdGhlIGdl
-dHB3bmFtIGZ1bmN0aW9ucz8NCg0KQWx0aG91Z2ggSSBzdXBwb3NlIEkgc2hvdWxkIGFsc28gbWFr
-ZSBzdXJlIHRoYXQgdGhlIHVpZCBJIHJldHVybiBpcyBub3QgemVyby4uLg0KDQo+IA0KPj4gY29u
-c3QgY2hhciAqbGlieGxfX2RvbWFpbl9kZXZpY2VfbW9kZWwobGlieGxfX2djICpnYywNCj4+ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IGxpYnhsX2RvbWFpbl9i
-dWlsZF9pbmZvICppbmZvKQ0KPj4gew0KPj4gQEAgLTI3MTksMTIgKzI3MjgsNjIgQEAgdm9pZCBs
-aWJ4bF9fZGVzdHJveV9kZXZpY2VfbW9kZWwobGlieGxfX2VnYyAqZWdjLA0KPiAuLi4NCj4+IC0g
-ICAgICAgIHJldCA9IHNldHJlc3VpZChkbV91aWQsIGRtX3VpZCwgMCk7DQo+PiArICAgICAgICBm
-ZCA9IG9wZW4obG9ja2ZpbGUsIE9fUkRXUnxPX0NSRUFULCAwNjY2KTsNCj4+ICsgICAgICAgIGlm
-IChmZCA8IDApIHsNCj4+ICsgICAgICAgICAgICAvKiBBbGwgb3RoZXIgZXJybm86IEVCQURGLCBF
-SU5WQUwsIEVOT0xDSywgRVdPVUxEQkxPQ0sgKi8NCj4+ICsgICAgICAgICAgICBMT0dFRChFUlJP
-UiwgZG9taWQsDQo+PiArICAgICAgICAgICAgICAgICAgInVuZXhwZWN0ZWQgZXJyb3Igd2hpbGUg
-dHJ5aW5nIHRvIG9wZW4gbG9ja2ZpbGUgJXMsIGVycm5vPSVkIiwNCj4+ICsgICAgICAgICAgICAg
-ICAgICBsb2NrZmlsZSwgZXJybm8pOw0KPj4gKyAgICAgICAgICAgIGdvdG8ga2lsbDsNCj4gDQo+
-IE1vcmUgZ290b3MhICBJIGRvdWJ0IHRoaXMgZXJyb3IgaGFuZGxpbmcgaXMgcmlnaHQuDQo+IA0K
-PiBJJ20gYWxzbyBub3QgY29udmluY2VkIHRoYXQgaXQgaXMgc2Vuc2libGUgdG8gaGFuZGxlIHRo
-ZSBjYXNlIHdoZXJlIHdlDQo+IGhhdmUgbXVsdGlwbGUgcGVyLWRvbWFpbiB1aWRzIGJ1dCBubyBy
-ZWFwZXIgdWlkLiAgVGhpcyB0dXJucyBob3N0DQo+IGNvbmZpZ3VyYXRpb24gZXJyb3JzIGludG8g
-c3lzdGVtcyB0aGF0IGFyZSBsZXNzIHNlY3VyZSB0aGFuIHRoZXkNCj4gc2hvdWxkIGJlIGluIGEg
-cmVhbGx5IG9ic2N1cmUgd2F5Lg0KDQpBdCB0aGlzIHBvaW50LCB3ZSBoYXZlIGEgdGFyZ2V0X3Vp
-ZCBidXQgbm8gd2F5IG9mIGdldHRpbmcgYSBsb2NrIGZvciByZWFwZXJfdWlkLiAgV2UgaGF2ZSB0
-aHJlZSBvcHRpb25zOg0KDQoxLiBEb27igJl0IGtpbGwoLTEpIGF0IGFsbC4NCjIuIFRyeSB0byAg
-a2lsbCgtMSkgd2l0aCBzZXRyZXN1aWQodGFyZ2V0X3VpZCwgdGFyZ2V0X3VpZCwgMCkNCjMuIGtp
-bGwoLTEpIHdpdGggc2V0cmVzdWlkKHJlYXBlcl91aWQsIHRhcmdldF91aWQsIDApIHdpdGhvdXQg
-aG9sZGluZyB0aGUgbG9jay4NCg0KIzEgbWVhbnMgdGhhdCBhIHJvZ3VlIHFlbXUgd2lsbCBub3Qg
-YmUgZGVzdHJveWVkLg0KDQojMiBtZWFucyB0aGF0IHRoZXJl4oCZcyBhIHJhY2UsIHdoZXJlYnkg
-c29tZXRpbWVzIHRoZSByb2d1ZSBxZW11IGlzIGRlc3Ryb3llZCwgYW5kIHNvbWV0aW1lcyB0aGUg
-cmVhcGVyIHByb2Nlc3MgaXMgZGVzdHJveWVkIGJ5IHRoZSByb2d1ZSBxZW11IGZpcnN0Lg0KDQoj
-MyBtZWFucyB0aGVyZeKAmXMgYSByYWNlLCB3aGVyZWJ5IHNvbWV0aW1lcyBldmVyeXRoaW5nIHdv
-cmtzIGZpbmUsIHNvbWV0aW1lcyBib3RoIHRoZSByb2d1ZSBxZW11IGFuZCAqdGhlIHJlYXBlciBw
-cm9jZXNzIGZyb20gYW5vdGhlciBkb21haW4qIGlzIGRlc3Ryb3llZCwgYW5kIHNvbWV0aW1lcyB0
-aGlzIHJlYXBlciBwcm9jZXNzIGlzIGtpbGxlZCBieSB0aGUgcmVhcGVyIHByb2Nlc3MgZnJvbSBh
-bm90aGVyIGRvbWFpbiAobGVhdmluZyB0aGUgcm9ndWUgcWVtdSBhbGl2ZSkuDQoNCkkgdGhpbmsg
-IzEgaXMgb2J2aW91c2x5IHRoZSBiZXN0IG9wdGlvbi4NCg0KPiANCj4+ICsgICAgICAgIC8qIFRy
-eSB0byBsb2NrIHRoZSBmaWxlICovDQo+PiArICAgICAgICB3aGlsZSAoZmxvY2soZmQsIExPQ0tf
-RVgpKSB7DQo+IA0KPiBDT0RJTkdfU1RZTEUsIG5vIGNhbGwgaW5zaWRlIHRoZSBjb25kaXRpb24g
-cGxlYXNlLg0KDQpJIGMmcOKAmWQgdGhpcyBmcm9tIGxpYnhsX2ludGVybmFsLmM6bGlieGxfX2xv
-Y2tfZG9tYWluX3VzZXJkYXRhKCkuDQoNCkkgdGFrZSBpdCB5b3XigJlyZSByZWZlcnJpbmcgdG8g
-dGhlIOKAnEVSUk9SIEhBTkRMSU5H4oCdIHNlY3Rpb24gb2YgQ09ESU5HX1NUWUxFPyAgSXQgd2Fz
-buKAmXQgb2J2aW91cyB0byBtZSB0aGF0IHJlZmVycyB0byB3aGlsZSgpIGxvb3BzLg0KDQpJIHRh
-a2UgaXQgeW914oCZZCBwcmVmZXIgIndoaWxlKHRydWUpIHsgcmMgPSBmbG9jaygpOyBpZighcmMp
-IGJyZWFrOyDigKZ94oCdIGluc3RlYWQ/DQoNCkFuZCBpZiBJIG1heSBtYWtlIGEgbWlub3Igc3Vn
-Z2VzdGlvbjogVGhpcyBpcyB0aGUgc2Vjb25kIHRpbWUgaW4gdGhpcyBzZXJpZXMgeW914oCZdmUg
-c2FpZCDigJxkb27igJl0IGRvIFjigJ0gZm9yIGZhaXJseSBjb21tb24gY29kZSBpZGlvbXMgd2l0
-aG91dCBnaXZpbmcgbWUgZ3VpZGFuY2UgYXMgdG8gd2hhdCB5b3XigJlkIGxpa2UgdG8gc2VlIGlu
-c3RlYWQuIA0KDQo+IE92ZXJhbGwgSSB0aGluayB0aGlzIHN0dWZmIG5lZWRzIGEgZGlmZmVyZW50
-IGVycm9yIGhhbmRsaW5nIGFwcHJvYWNoOg0KPiANCj4gKiBXZSBzaG91bGQgZGlzdGluZ3Vpc2gg
-ZXhwZWN0ZWQgYW5kIHJlYXNvbmFibGUgY29uZmlndXJhdGlvbnMsIHdoZXJlDQo+ICAgd2UgZmFs
-bCBiYWNrIHRvIGxlc3Mgc2VjdXJlIG1ldGhvZHMsIGZyb20gb3RoZXIgdW5leHBlY3RlZA0KPiAg
-IHNpdHVhdGlvbnMuDQo+IA0KPiAqIEluIG90aGVyIHVuZXhwZWN0ZWQgc2l0dWF0aW9ucyAod2hl
-dGhlciBiYWQgaG9zdCBjb25maWd1cmF0aW9uIG9yDQo+ICAgc3lzY2FsbCBlcnJvcnMgb3Igd2hh
-dGV2ZXIpIHdlIHNob3VsZCBtYWtlIGEgYmVzdCBlZmZvcnQgdG8NCj4gICBkZXN0cm95IGFzIG11
-Y2ggYXMgd2UgY2FuLg0KDQpXaGljaCBpcyB3aGF0IHRoZSBjb2RlIGRvZXMuDQoNCj4gDQo+ICog
-QnV0IGNydWNpYWxseSBpbiBzdWNoIHNpdHVhdGlvbnMgKGkpIG92ZXJhbGwgZGVzdHJveSBhbyBz
-aG91bGQNCj4gICByZXR1cm4gYSBmYWlsdXJlIGVycm9yIGNvZGUgKGlpKSB0aGUgZG9tYWluIGl0
-c2VsZiBzaG91bGQgbm90IGJlDQo+ICAgZGVzdHJveWVkIGluIFhlbi4gIFRoaXMgbWVhbnMgdGhh
-dCBgeGwgZGVzdHJveScgZmFpbHMsIGFuZCBjYW4gYmUNCj4gICByZXBlYXRlZCBhZnRlciB0aGUg
-cHJvYmxlbSBpcyBjb3JyZWN0ZWQuDQoNClRoaXMgbWVhbnMgdGhhdCBpbiBzdWNoIGEgc2l0dWF0
-aW9uLCB3ZSBtaWdodCBzdWNjZXNzZnVsbHkga2lsbCB0aGUgZGV2aWNlbW9kZWwsIGJ1dCBsZWF2
-ZSBhIHpvbWJpZSBkb21haW4gbHlpbmcgYXJvdW5kLg0KDQpJIHN1cHBvc2UgdGhhdCBtaWdodCBi
-ZSB0aGUgbGVhc3QtYmFkIG9wdGlvbiwgYXMgMSkgd291bGQgYmUgbW9yZSBsaWtlbHkgdG8gYWxl
-cnQgdGhlIGFkbWluaXN0cmF0b3IgdG8gZml4IHRoZSBjb25maWd1cmF0aW9uIGVycm9yLCBhbmQg
-MikgdGhlIGRvbWFpbiB3b3VsZCBob2xkIHRoZSBkb21pZCwgc3VjaCB0aGF0IGFueSB1bmtpbGxl
-ZCBxZW11IHByb2Nlc3NlcyB3b3VsZG7igJl0IGJlIGFibGUgdG8gY2F1c2UgbWlzY2hpZWYgb24g
-b3RoZXIgZG9tYWlucy4NCg0KUHJvYmFibHkgc29tZSBvZiB0aGVzZSBwcmluY2lwbGVzIHNob3Vs
-ZCBiZSBpbiBhIGNvbW1lbnQgc29tZXdoZXJlLg0KDQogLUdlb3JnZQ0KDQoNCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============3697526988356726052==
+Content-Type: multipart/alternative; boundary="000000000000de3c2d057bbe713a"
+
+--000000000000de3c2d057bbe713a
+Content-Type: text/plain; charset="UTF-8"
+
+On Wed, Nov 28, 2018, 10:08 Russell King - ARM Linux <linux@armlinux.org.uk
+wrote:
+
+> >
+> > You already cannot do that kmalloc(), exactly because of ERR_PTR().
+>
+> I'm very sorry, but I think you are confused.
+>
+> kmalloc() returns a _virtual_ address, which quite rightly must not be
+> in the top 4K of 4GB, exactly due to ERR_PTR().  That is fine.
+>
+> However, that is a completely different kettle of fish from a physical
+> or DMA address - neither of which are virtual addresses.
+>
+
+You cut away the part that showed that I'm not in the least confused.
+
+Let me just paste it back in here:
+
+  "Which is what we ALREADY do for these exact reasons. If the DMA
+mappings means that you'd need to add one more page to that list of
+reserved pages, then so be it."
+
+So no, I'm not at all confused.
+
+Let me re-iterate: the argument that all addresses have to be dma'able is
+garbage.
+
+*Exactly* as with kmalloc and limited virtual addresses, we can limit
+physical addresses.
+
+      Linus
+
+--000000000000de3c2d057bbe713a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">=
+On Wed, Nov 28, 2018, 10:08 Russell King - ARM Linux &lt;<a href=3D"mailto:=
+linux@armlinux.org.uk">linux@armlinux.org.uk</a> wrote:</div><blockquote cl=
+ass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;p=
+adding-left:1ex">
+&gt; <br>
+&gt; You already cannot do that kmalloc(), exactly because of ERR_PTR().<br=
+>
+<br>
+I&#39;m very sorry, but I think you are confused.<br>
+<br>
+kmalloc() returns a _virtual_ address, which quite rightly must not be<br>
+in the top 4K of 4GB, exactly due to ERR_PTR().=C2=A0 That is fine.<br>
+<br>
+However, that is a completely different kettle of fish from a physical<br>
+or DMA address - neither of which are virtual addresses.<br></blockquote></=
+div></div><div dir=3D"auto"><br></div><div dir=3D"auto">You cut away the pa=
+rt that showed that I&#39;m not in the least confused.</div><div dir=3D"aut=
+o"><br></div><div dir=3D"auto">Let me just paste it back in here:</div><div=
+ dir=3D"auto"><br></div><div dir=3D"auto">=C2=A0 &quot;Which is what we ALR=
+EADY do for these exact reasons. If the DMA</div>mappings means that you&#3=
+9;d need to add one more page to that list of<br style=3D"">reserved pages,=
+ then so be it.&quot;<div dir=3D"auto"><br></div><div dir=3D"auto">So no, I=
+&#39;m not at all confused.=C2=A0</div><div dir=3D"auto"><br></div><div dir=
+=3D"auto">Let me re-iterate: the argument that all addresses have to be dma=
+&#39;able is garbage.=C2=A0</div><div dir=3D"auto"><br></div><div dir=3D"au=
+to">*Exactly* as with kmalloc and limited virtual addresses, we can limit p=
+hysical addresses.</div><div dir=3D"auto"><br></div><div dir=3D"auto">=C2=
+=A0 =C2=A0 =C2=A0 Linus</div></div>
+
+--000000000000de3c2d057bbe713a--
+
+
+--===============3697526988356726052==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3697526988356726052==--
