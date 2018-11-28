@@ -1,21 +1,18 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH] xen: xlate_mmu: add missing header to fix
- 'W=1' warning
-Date: Wed, 28 Nov 2018 11:24:19 -0500
-Message-ID: <f8721ec3-9048-fa21-71c7-deb208f3f026__47889.0200298794$1543422214$gmane$org@oracle.com>
-References: <1543328607-10546-1-git-send-email-boddepalli.srikanth@gmail.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH 1/9] libxl: Remove redundant pidpath setting
+Date: Wed, 28 Nov 2018 16:25:27 +0000
+Message-ID: <23550.49527.468154.709986@mariner.uk.xensource.com>
+References: <20181123171502.29519-1-george.dunlap@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Ysil=OH=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1gS2dm-0005X8-Jv
- for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 16:24:42 +0000
-In-Reply-To: <1543328607-10546-1-git-send-email-boddepalli.srikanth@gmail.com>
-Content-Language: en-US
+ <srs0=bc+k=oh=citrix.com=prvs=863aa12bc=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1gS2eZ-0005dc-JZ
+ for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 16:25:31 +0000
+In-Reply-To: <20181123171502.29519-1-george.dunlap@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +21,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Srikanth Boddepalli <boddepalli.srikanth@gmail.com>
-Cc: jgross@suse.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, linux-kernel@vger.kernel.org
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMjcvMTggOToyMyBBTSwgU3Jpa2FudGggQm9kZGVwYWxsaSB3cm90ZToKPiBBZGQgYSBt
-aXNzaW5nIGhlYWRlciBvdGhlcndpc2UgY29tcGlsZXIgd2FybnMgYWJvdXQgbWlzc2VkIHByb3Rv
-dHlwZToKPgo+IGRyaXZlcnMveGVuL3hsYXRlX21tdS5jOjE4Mzo1OiB3YXJuaW5nOiBubyBwcmV2
-aW91cyBwcm90b3R5cGUgZm9yICd4ZW5feGxhdGVfdW5tYXBfZ2ZuX3JhbmdlPycgWy1XbWlzc2lu
-Zy1wcm90b3R5cGVzXQo+ICAgaW50IHhlbl94bGF0ZV91bm1hcF9nZm5fcmFuZ2Uoc3RydWN0IHZt
-X2FyZWFfc3RydWN0ICp2bWEsCj4gICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+Cj4g
-U2lnbmVkLW9mZi1ieTogU3Jpa2FudGggQm9kZGVwYWxsaSA8Ym9kZGVwYWxsaS5zcmlrYW50aEBn
-bWFpbC5jb20+Cj4gLS0tCgoKUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0
-cm92c2t5QG9yYWNsZS5jb20+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+R2VvcmdlIER1bmxhcCB3cml0ZXMgKCJbUEFUQ0ggMS85XSBsaWJ4bDogUmVtb3ZlIHJlZHVuZGFu
+dCBwaWRwYXRoIHNldHRpbmciKToKPiBUaGlzIGV4YWN0IHNhbWUgbGluZSBpcyBkdXBsaWNhdGVk
+IGZ1cnRoZXIgb24gd2l0aG91dCBiZWluZyB1c2VkIG9yCj4gbW9kaWZpZWQgaW4gYmV0d2Vlbi4K
+CkknbGwgdGFrZSB5b3VyIHdvcmQgZm9yIHRoYXQgOi0pCgpBY2tlZC1ieTogSWFuIEphY2tzb24g
+PGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
