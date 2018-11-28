@@ -1,18 +1,21 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v4] tools: set Dom0 UUID if requested
-Date: Wed, 28 Nov 2018 16:03:33 +0000
-Message-ID: <23550.48213.904624.807206@mariner.uk.xensource.com>
-References: <20181126104044.16358-1-wei.liu2@citrix.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH 01/18] xen: re-name XenDevice to
+ XenLegacyDevice...
+Date: Wed, 28 Nov 2018 16:06:16 +0000
+Message-ID: <20181128160616.GB14786__3103.91404568708$1543421167$gmane$org@perard.uk.xensource.com>
+References: <20181121151211.15997-1-paul.durrant@citrix.com>
+ <20181121151211.15997-2-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=bc+k=oh=citrix.com=prvs=863aa12bc=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gS2JN-0003kJ-Q8
- for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 16:03:37 +0000
-In-Reply-To: <20181126104044.16358-1-wei.liu2@citrix.com>
+ <srs0=9c/f=oh=citrix.com=prvs=8631c8a8c=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1gS2Mz-0003tX-VC
+ for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 16:07:21 +0000
+Content-Disposition: inline
+In-Reply-To: <20181121151211.15997-2-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,19 +24,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Edwin =?iso-8859-1?Q?T=F6r=F6k?= <edvin.torok@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, Eduardo Habkost <ehabkost@redhat.com>, qemu-block@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, qemu-devel@nongnu.org, Greg Kurz <groug@kaod.org>, Paolo Bonzini <pbonzini@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>, xen-devel@lists.xenproject.org, Max Reitz <mreitz@redhat.com>, Richard Henderson <rth@twiddle.net>
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJbUEFUQ0ggdjRdIHRvb2xzOiBzZXQgRG9tMCBVVUlEIGlmIHJlcXVl
-c3RlZCIpOgo+IEludHJvZHVjZSBYRU5fRE9NMF9VVUlEIGluIFhlbidzIGdsb2JhbCBjb25maWd1
-cmF0aW9uIGZpbGUuICBNYWtlCj4geGVuLWluaXQtZG9tMCBhY2NlcHQgYW4gZXh0cmEgYXJndW1l
-bnQgZm9yIFVVSUQuCj4gCj4gQWxzbyBzd2l0Y2ggeHNfb3BlbiBlcnJvciBtZXNzYWdlIHRvIHVz
-ZSBwZXJyb3IuCj4gCj4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNv
-bT4KPiBSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IFJldmll
-d2VkLWJ5OiBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5jb20+CgpBY2tlZC1i
-eTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CgooSSBhbSBub3QgcXVh
-bGlmaWVkIHRvIGNoZWNrIHRoZSBzeXN0ZW1kIHBhcnRzLCBidXQgdGhlIHJlc3QgTEdUTS4pCgpU
-aGFua3MsCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBOb3YgMjEsIDIwMTggYXQgMDM6MTE6NTRQTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IC4uLmFuZCB4ZW5fYmFja2VuZC5oIHRvIHhlbi1sZWdhY3ktYmFja2VuZC5oCj4gCj4g
+UmF0aGVyIHRoYW4gYXR0ZW1wdGluZyB0byBjb252ZXJ0IHRoZSBleGlzdGluZyBiYWNrZW5kIGlu
+ZnJhc3RydWN0dXJlIHRvCj4gYmUgUU9NIGNvbXBsaWFudCAod2hpY2ggd291bGQgYmUgaGFyZCB0
+byBkbyBpbiBhbiBpbmNyZW1lbnRhbCBmYXNoaW9uKSwKPiBzdWJzZXF1ZW50IHBhdGNoZXMgd2ls
+bCBpbnRyb2R1Y2UgYSBjb21wbGV0ZWx5IG5ldyBmcmFtZXdvcmsgZm9yIFhlbiBQVgo+IGJhY2tl
+bmRzLiBIZW5jZSBpdCBpcyBuZWNlc3NhcnkgdG8gcmUtbmFtZSBwYXJ0cyBvZiBleGlzdGluZyBj
+b2RlIHRvIGF2b2lkCj4gbmFtZSBjbGFzaGVzLiBUaGUgcmUtbmFtZWQgJ2xlZ2FjeScgaW5mcmFz
+dHJ1Y3R1cmUgd2lsbCBiZSByZW1vdmVkIG9uY2UgYWxsCj4gYmFja2VuZHMgaGF2ZSBiZWVuIHBv
+cnRlZCB0byB0aGUgbmV3IGZyYW1ld29yay4KPiAKPiBUaGlzIHBhdGNoIGlzIHB1cmVseSBjb3Nt
+ZXRpYy4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCgpBY2tlZC1ieTogQW50aG9ueSBQRVJBUkQgPGFu
+dGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgotLSAKQW50aG9ueSBQRVJBUkQKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
