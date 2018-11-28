@@ -1,19 +1,21 @@
-From: Matthew Daley <mattd@bugfuzz.com>
-Subject: Re: Problems building and running Xen on Hikey960
-Date: Wed, 28 Nov 2018 19:43:25 +1300
-Message-ID: <CAD3Canc0pDySymzsUiwvsJt_1ctPkrsJSPi=kWSZYdCJ_KLfuA@mail.gmail.com>
-References: <CAD3CancOq7wwLGEoL6HcCc8iO2rYtGr8n68GA=e6iiqtUVGZyQ@mail.gmail.com>
- <31b037ae-0f4e-0494-7460-b0d78422e01b@arm.com>
- <CAD3CanfUmzin+jw6xHYJ=8vQ6V2DGbRXjj0LdCm7qspMtZ7Y=g@mail.gmail.com>
- <481882d7-e510-51ae-2529-8bf381b6c252@arm.com>
- <CAD3CaneTnc9VGb830sWmYU9VAuOh9wxPcOnxq2OpmFxP-h0row@mail.gmail.com>
- <6dd06247-df82-5206-5fe1-77ed41da3e96@arm.com>
- <CAD3CaneTvD6vy4QjisdonhxfmV37+S-=duGW3q_JFVhxJPHJHw@mail.gmail.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 0/3] xen/x86: support setting dom0_mem
+ depending on host size
+Date: Wed, 28 Nov 2018 07:58:39 +0100
+Message-ID: <a68b3056-9ccb-7147-6c7a-421643373ca1@suse.com>
+References: <20181122164028.8451-1-jgross@suse.com>
+ <alpine.DEB.2.10.1811271129330.4577@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAD3CaneTvD6vy4QjisdonhxfmV37+S-=duGW3q_JFVhxJPHJHw@mail.gmail.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=+lgq=oh=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1gRto3-0004Rz-92
+ for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 06:58:43 +0000
+In-Reply-To: <alpine.DEB.2.10.1811271129330.4577@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,35 +24,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: julien.grall@arm.com
-Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen-devel <xen-devel@lists.xen.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: wei.liu2@citrix.com, konrad.wilk@oracle.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, julien.grall@arm.com, jbeulich@suse.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAyNiBOb3YgMjAxOCBhdCAxNDowNywgTWF0dGhldyBEYWxleSA8bWF0dGRAYnVnZnV6
-ei5jb20+IHdyb3RlOgo+Cj4gT24gRnJpLCAyMyBOb3YgMjAxOCBhdCAwOTo1MSwgSnVsaWVuIEdy
-YWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+Cj4+IEhpIE1hdHRoZXcsCj4+Cj4+
-IFNvcnJ5IGZvciB0aGUgbGF0ZSBhbnN3ZXIgYW5kIHRoYW5rIHlvdSBmb3IgdGVzdGluZyB0aGUg
-cGF0Y2guCj4+Cj4+IE9uIDExLzEzLzE4IDEwOjQzIFBNLCBNYXR0aGV3IERhbGV5IHdyb3RlOgo+
-PiA+IE9uIFR1ZSwgMTMgTm92IDIwMTggYXQgMDI6MDEsIEp1bGllbiBHcmFsbCA8anVsaWVuLmdy
-YWxsQGFybS5jb20+IHdyb3RlOgo+PiA+PiBPbiAxMS8xMS8xOCAxOjE1IEFNLCBNYXR0aGV3IERh
-bGV5IHdyb3RlOgo+PiA+IEkgZ2F2ZSB0aGlzIGEgZ28gYnV0IHVuZm9ydHVuYXRlbHkgdGhlIHNh
-bWUgcHJvYmxlbSBvY2N1cnMgKGVycm9yCj4+ID4gLTlzKS4gSnVzdCB0byBjaGVjayBub3RoaW5n
-IHdlaXJkIGlzIGhhcHBlbmluZyBJIGFkZGVkIGEgcHJpbnRrIHRvCj4+ID4gY2hlY2sgdGhlIHZh
-bHVlIG9mIF9fcGEoaW5pdF9zZWNvbmRhcnkpIGluIGNhbGxfcHNjaV9jcHVfb24sIGdpdmluZwo+
-PiA+IDB4ZGZlMDAxODAuCj4+Cj4+IEkgaGF2ZSBwb3N0ZWQgYSBwYXRjaCB0aGF0IGRpc2FibGVz
-IGNvbXBsZXRlbHkgdGhlIHJlbG9jYXRpb24gWzFdLiBDb3VsZAo+PiB5b3UgaGF2ZSBhIHRyeSBh
-bmQgc2VlIHdoZXRoZXIgaXQgd29ya3Mgbm93Pwo+Pgo+PiBDaGVlcnMsCj4+Cj4+IFsxXSBodHRw
-czovL2xpc3RzLnhlbi5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOC0xMS9tc2cwMjYz
-OC5odG1sCj4+Cj4+IC0tCj4+IEp1bGllbiBHcmFsbAo+Cj4KPiBIaSBKdWxpZW4sCj4KPiBVbmZv
-cnR1bmF0ZWx5IHdpdGggdGhpcyBwYXRjaCBpdCBhcHBlYXJzIHRvIGZyZWV6ZSBhZnRlciB0aGUg
-Y2FsbCB0byBzd2l0Y2hfdHRicih0dGJyKS4KPgo+IC0gTWF0dGhldwoKU28gbG9va2luZyBhdCBz
-ZXR1cF9wYWdldGFibGVzLCBteSB1bmRlcnN0YW5kaW5nIGlzIHRoYXQgaXQgc2V0cyB1cCBhCjJN
-aUIgbWFwcGluZyBmb3IgWGVuJ3MgLnRleHQgc2VjdGlvbiAoYmVmb3JlIHRoZW4gc3BsaXR0aW5n
-IGl0IGludG8KNEtpQiBwYWdlcykuIEhvd2V2ZXIsIEdSVUIgaXMgbG9hZGluZyBYZW4gaW4gUkFN
-IGF0IDB4Qjg3MzYwMDAgZm9yIG1lLgpUaGlzIGlzbid0IDJNaUIgYWxpZ25lZCAoYW5kIGlzbid0
-IGluIGxvdyBtZW1vcnkgZWl0aGVyISksIHNvIEkgY2FuJ3QKc2VlIGhvdyB0aGlzIHdvdWxkIHdv
-cms7IGl0IHN0aWxsIHJlcXVpcmVzIHJlbG9jYXRpb24gb3IgYSBtb3JlCmdyYW51bGFyIG1hcHBp
-bmcsIG5vPwoKLSBNYXR0aGV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+T24gMjcvMTEvMjAxOCAyMDozMywgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IEhpIEp1ZXJn
+ZW4sCj4gCj4gSSBkb24ndCBtZWFuIHRvIHNjb3BlLWNyZWVwIHlvdXIgc2VyaWVzLCBhbmQgSSB0
+aGluayBpdCBpcyBmaW5lIGlmIHlvdQo+IGRvbid0IHdhbnQgdG8gZG8gaXQsIGJ1dCBpdCB3b3Vs
+ZCBiZSBmYW50YXN0aWMgaWYgeW91IHRvb2sgdGhlCj4gb3Bwb3J0dW5pdHkgdG8gbWFrZSBkb20w
+X21lbSBjb21tb24gYWNyb3NzIGFyY2hpdGVjdHVyZXMuCj4gCj4gT24gQVJNLCB3ZSBwYXJzZSBp
+dCBpbiB4ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmM6cGFyc2VfZG9tMF9tZW0uCj4gSSB0aGlu
+ayB0aGUgQVJNIGFuZCB4ODYgaW1wbGVtZW50YXRpb25zIHNob3VsZCBiZSB0aGUgc2FtZS4KClRo
+aXMgc2hvdWxkIGJlIGRvbmUgYnkgc29tZW9uZSBtb3JlIGZhbWlsaWFyIHdpdGggdGhlIEFSTSBy
+ZXF1aXJlbWVudHMKYW5kIGludGVybmFscy4KCkEgbWFqb3IgZGlmZmVyZW5jZSBiZXR3ZWVuIEFS
+TSBhbmQgeDg2IHNlZW1zIHRvIGJlIHRoZSBkZWZhdWx0IHNpemUgb2YKZG9tMDogb24gQVJNIGl0
+IGlzIGxpbWl0ZWQgdG8gNTEyTUIsIHdoaWxlIG9uIHg4NiBpdCBpcyBtb3N0IG9mIHRoZQpob3N0
+J3MgbWVtb3J5LiBJIGd1ZXNzIHRoZXJlIGlzIGEgcmVhc29uIGZvciB0aGF0IGRpZmZlcmVuY2Us
+IGJ1dCBJCmRvbid0IHJlYWxseSBrbm93IHdoeS4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
