@@ -1,22 +1,13 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH 2/9] libxl: Move dm user determination logic
- into a helper function
-Date: Wed, 28 Nov 2018 15:20:27 +0000
-Message-ID: <20181128152027.67m5qavqnyvg7w3o@zion.uk.xensource.com>
-References: <20181123171502.29519-1-george.dunlap@citrix.com>
- <20181123171502.29519-2-george.dunlap@citrix.com>
+From: Heiko =?ISO-8859-1?Q?St=FCbner?= <heiko@sntech.de>
+Subject: Re: [PATCH 1/9] mm: Introduce new vm_insert_range API
+Date: Wed, 28 Nov 2018 16:21:05 +0100
+Message-ID: <3555131.qyOKUBSTPx__40043.6745294884$1543418748$gmane$org@diego>
+References: <20181115154530.GA27872@jordon-HP-15-Notebook-PC>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=fE64=OH=citrix.com=prvs=863b436f6=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gS1ee-00076A-5v
- for xen-devel@lists.xenproject.org; Wed, 28 Nov 2018 15:21:32 +0000
-Content-Disposition: inline
-In-Reply-To: <20181123171502.29519-2-george.dunlap@citrix.com>
+In-Reply-To: <20181115154530.GA27872@jordon-HP-15-Notebook-PC>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,21 +16,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>
-Cc: Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Souptick Joarder <jrdr.linux@gmail.com>
+Cc: mhocko@suse.com, peterz@infradead.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux1394-devel@lists.sourceforge.net, m.szyprowski@samsung.com, sfr@canb.auug.org.au, oleksandr_andrushchenko@epam.com, joro@8bytes.org, linux@armlinux.org.uk, willy@infradead.org, airlied@linux.ie, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, treding@nvidia.com, linux-media@vger.kernel.org, keescook@chromium.org, pawel@osciak.com, riel@surriel.com, iommu@lists.linux-foundation.org, rppt@linux.vnet.ibm.com, boris.ostrovsky@oracle.com, mchehab@kernel.org, iamjoonsoo.kim@lge.com, vbabka@suse.cz, jgross@suse.com, hjc@rock-chips.com, xen-devel@lists.xen.org, kyungmin.park@samsung.com, stefanr@s5r6.in-berlin.de, akpm@linux-foundation.org, robin.murphy@arm.com, kirill.shutemov@linux.intel.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBOb3YgMjMsIDIwMTggYXQgMDU6MTQ6NTVQTSArMDAwMCwgR2VvcmdlIER1bmxhcCB3
-cm90ZToKPiBUbyByZWxpYWJseSBraWxsIGFuIHVudHJ1c3RlZCBkZXZpY2Vtb2RlbCwgd2UgbmVl
-ZCB0byBrbm93IG5vdCBvbmx5Cj4gaXRzIHBpZCwgYnV0IGl0cyB1aWQuICBJbiBwcmVwYXJhdGlv
-biBmb3IgdGhpcywgbW92ZSB0aGUgdXNlcmlkCj4gZGV0ZXJtaW5hdGlvbiBsb2dpYyBpbnRvIGEg
-aGVscGVyIGZ1bmN0aW9uLgo+IAo+IENyZWF0ZSBhIG5ldyBmaWVsZCwgYGRtX3J1bmFzYCwgaW4g
-bGlieGxfX2RvbWFpbl9idWlsZF9zdGF0ZSB0byBzdG9yZQo+IHRoZSB2YWx1ZSBkdXJpbmcgZG9t
-YWluIGNyZWF0aW9uLgo+IAo+IFRoaXMgY2hhbmdlIGFsc28gcmVtb3ZlcyB1bm5lY2Vzc2FyeSBk
-dXBsaWNhdGlvbiBvZiB0aGUgYXJndW1lbnQKPiBjb25zdHJ1Y3Rpb24gY29kZS4KPiAKPiBObyBm
-dW5jdGlvbmFsIGNoYW5nZSBpbnRlbmRlZC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBHZW9yZ2UgRHVu
-bGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CgpBcyBmYXIgYXMgSSBjYW4gdGVsbCB0aGUg
-Y29kZSBpcyBjb3JyZWN0OgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+QW0gRG9ubmVyc3RhZywgMTUuIE5vdmVtYmVyIDIwMTgsIDE2OjQ1OjMwIENFVCBzY2hyaWViIFNv
+dXB0aWNrIEpvYXJkZXI6Cj4gUHJldmlvdWx5IGRyaXZlcnMgaGF2ZSB0aGVpciBvd24gd2F5IG9m
+IG1hcHBpbmcgcmFuZ2Ugb2YKPiBrZXJuZWwgcGFnZXMvbWVtb3J5IGludG8gdXNlciB2bWEgYW5k
+IHRoaXMgd2FzIGRvbmUgYnkKPiBpbnZva2luZyB2bV9pbnNlcnRfcGFnZSgpIHdpdGhpbiBhIGxv
+b3AuCj4gCj4gQXMgdGhpcyBwYXR0ZXJuIGlzIGNvbW1vbiBhY3Jvc3MgZGlmZmVyZW50IGRyaXZl
+cnMsIGl0IGNhbgo+IGJlIGdlbmVyYWxpemVkIGJ5IGNyZWF0aW5nIGEgbmV3IGZ1bmN0aW9uIGFu
+ZCB1c2UgaXQgYWNyb3NzCj4gdGhlIGRyaXZlcnMuCj4gCj4gdm1faW5zZXJ0X3JhbmdlIGlzIHRo
+ZSBuZXcgQVBJIHdoaWNoIHdpbGwgYmUgdXNlZCB0byBtYXAgYQo+IHJhbmdlIG9mIGtlcm5lbCBt
+ZW1vcnkvcGFnZXMgdG8gdXNlciB2bWEuCj4gCj4gU2lnbmVkLW9mZi1ieTogU291cHRpY2sgSm9h
+cmRlciA8anJkci5saW51eEBnbWFpbC5jb20+Cj4gUmV2aWV3ZWQtYnk6IE1hdHRoZXcgV2lsY294
+IDx3aWxseUBpbmZyYWRlYWQub3JnPgoKRXhjZXB0IHRoZSBtaXNzaW5nIEVYUE9SVF9TWU1CT0wg
+Zm9yIG1vZHVsZSBidWlsZHMgdGhpcyBuZXcKQVBJIGlzIHN1cHBvc2VkIHRvIHJ1biBhbHNvIHdp
+dGhpbiB0aGUgUm9ja2NoaXAgZHJtIGRyaXZlciwgc28Kb24gcmszMTg4LCByazMyODgsIHJrMzMy
+OCBhbmQgcmszMzk5IHdpdGggZ3JhcGhpY3MKVGVzdGVkLWJ5OiBIZWlrbyBTdHVlYm5lciA8aGVp
+a29Ac250ZWNoLmRlPgoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
