@@ -1,18 +1,23 @@
 From: Hans van Kranenburg <hans@knorrie.org>
-Subject: Re: [PATCH 0/2] Move RSDP address out of setup_header
-Date: Thu, 29 Nov 2018 02:05:24 +0100
-Message-ID: <22e0ae54-9d7e-bea5-c8b8-5eac2c9174c1@knorrie.org>
-References: <20181120072529.5489-1-jgross@suse.com>
+Subject: Linux 4.19.5 fails to boot as Xen dom0
+Date: Thu, 29 Nov 2018 02:22:16 +0100
+Message-ID: <a9a32e52-f50f-7d1a-ade0-baa2348ad78a@knorrie.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=vhwl=oi=knorrie.org=hans@srs-us1.protection.inumbo.net>)
- id 1gSAll-0000Ms-0T
- for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 01:05:29 +0000
-In-Reply-To: <20181120072529.5489-1-jgross@suse.com>
+ (envelope-from <SRS0=VHWl=OI=knorrie.org=hans@srs-us1.protection.inumbo.net>)
+ id 1gSB23-0001m9-Dt
+ for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 01:22:19 +0000
+Received: from [IPv6:2001:980:4a41:fb::12] (unknown
+ [IPv6:2001:980:4a41:fb::12])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by syrinx.knorrie.org (Postfix) with ESMTPSA id 65AB82F8F6B23
+ for <xen-devel@lists.xenproject.org>; Thu, 29 Nov 2018 02:22:16 +0100 (CET)
 Content-Language: en_US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,42 +27,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
-Cc: sstabellini@kernel.org, daniel.kiper@oracle.com, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, boris.ostrovsky@oracle.com, tglx@linutronix.de
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxMS8yMC8xOCA4OjI1IEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IFJlc2VuZCB3
-aXRoIERhbmllbCdzIG1haWxvIGFkZHJlc3MgY29ycmVjdGVkCj4gCj4gSW5zdGVhZCBvZiBwYXNz
-aW5nIHRoZSBSU0RQIGFkZHJlc3MgZm9yIFhlbiBQVkggZ3Vlc3RzIGZyb20gZ3J1YjIgdG8KPiB0
-aGUga2VybmVsIGluIHNldHVwX2hlYWRlciBtb3ZlIGl0IGludG8gdGhlIG5vbi1sZWdhY3kgcGFy
-dCBvZiB0aGUKPiBib290X3BhcmFtcyBzdHJ1Y3R1cmUuCj4gCj4gVGhpcyBwYXRjaCBzZXJpZXMg
-c2hvdWxkIGJlIGFwcGxpZWQgcmF0aGVyIHNvb25lciB0aGFuIGxhdGVyIGluIG9yZGVyCj4gdG8g
-YXZvaWQgc2hpcHBpbmcgbGludXggNC4yMCB3aXRoIGEgY29ya3kgYm9vdCBwcm90b2NvbC4KPiAK
-PiBKdWVyZ2VuIEdyb3NzICgyKToKPiAgIHg4Ni9ib290OiByZXZlcnQgY29tbWl0IGFlN2UxMjM4
-ZTY4ZjJhIChBZGQgQUNQSSBSU0RQIGFkZHJlc3MgdG8KPiAgICAgc2V0dXBfaGVhZGVyKQo+ICAg
-eDg2L2FjcGksIHg4Ni9ib290OiBUYWtlIFJTRFAgYWRkcmVzcyBmcm9tIGJvb3QgcGFyYW1zIGlm
-IGF2YWlsYWJsZQo+IAo+ICBEb2N1bWVudGF0aW9uL3g4Ni9ib290LnR4dCAgICAgICAgICAgIHwg
-MzIgKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgYXJjaC94ODYvYm9vdC9oZWFk
-ZXIuUyAgICAgICAgICAgICAgICB8ICA2ICstLS0tLQo+ICBhcmNoL3g4Ni9pbmNsdWRlL2FzbS94
-ODZfaW5pdC5oICAgICAgIHwgIDIgLS0KPiAgYXJjaC94ODYvaW5jbHVkZS91YXBpL2FzbS9ib290
-cGFyYW0uaCB8ICA3ICsrLS0tLS0KPiAgYXJjaC94ODYva2VybmVsL2FjcGkvYm9vdC5jICAgICAg
-ICAgICB8ICAyICstCj4gIGFyY2gveDg2L2tlcm5lbC9oZWFkMzIuYyAgICAgICAgICAgICAgfCAg
-MSAtCj4gIGFyY2gveDg2L2tlcm5lbC9oZWFkNjQuYyAgICAgICAgICAgICAgfCAgMiAtLQo+ICBh
-cmNoL3g4Ni9rZXJuZWwvc2V0dXAuYyAgICAgICAgICAgICAgIHwgMTcgLS0tLS0tLS0tLS0tLS0t
-LS0KPiAgOCBmaWxlcyBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDY0IGRlbGV0aW9ucygtKQoK
-RldJVywgSSBjYW4gY29uZmlybSB0aGF0IEkgY2FuIGJvb3QgYSBYZW4gZG9tVSBpbiBQVkggbW9k
-ZSB3aXRoIHRoZQpmb2xsb3dpbmcgZm91ciBwYXRjaGVzIGFkZGVkIG9uIHRvcCBvZiBMaW51eCA0
-LjE5LjUgKGFwcGxpZWQgaW4gdGhpcwpvcmRlciksIGluIGNvbWJpbmF0aW9uIHdpdGggZ3J1YiBt
-YXN0ZXIgYnJhbmNoIHdpdGggcGF0Y2hzZXQgdjUgZm9yIGdydWIKb24gdG9wOgoKRGF0ZTogICBX
-ZWQgT2N0IDEwIDA4OjE0OjU1IDIwMTggKzAyMDAKeDg2L2Jvb3Q6IEFkZCBBQ1BJIFJTRFAgYWRk
-cmVzcyB0byBzZXR1cF9oZWFkZXIKCkRhdGU6ICAgV2VkIE9jdCAxMCAwODoxNDo1NiAyMDE4ICsw
-MjAwCng4Ni9hY3BpLCB4ODYvYm9vdDogVGFrZSBSU0RQIGFkZHJlc3MgZm9yIGJvb3QgcGFyYW1z
-IGlmIGF2YWlsYWJsZQoKRGF0ZTogICBUdWUgTm92IDIwIDA4OjI1OjI4IDIwMTggKzAxMDAKeDg2
-L2Jvb3Q6IHJldmVydCBjb21taXQgYWU3ZTEyMzhlNjhmMmEgKEFkZCBBQ1BJIFJTRFAgYWRkcmVz
-cyB0bwpzZXR1cF9oZWFkZXIpCgpEYXRlOiAgIFR1ZSBOb3YgMjAgMDg6MjU6MjkgMjAxOCArMDEw
-MAp4ODYvYWNwaSwgeDg2L2Jvb3Q6IFRha2UgUlNEUCBhZGRyZXNzIGZyb20gYm9vdCBwYXJhbXMg
-aWYgYXZhaWxhYmxlCgpbICAgIDAuMjA1ODg0XSBCb290aW5nIHBhcmF2aXJ0dWFsaXplZCBrZXJu
-ZWwgb24gWGVuIFBWSAoKVGhhbmtzLApIYW5zCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+SGksCgpBcyBhbHNvIHNlZW4gYXQ6Cmh0dHBzOi8vYnVncy5kZWJpYW4ub3JnL2NnaS1iaW4vYnVn
+cmVwb3J0LmNnaT9idWc9OTE0OTUxCgpBdHRhY2hlZCB0aGVyZSBhcmUgdHdvIHNlcmlhbCBjb25z
+b2xlIG91dHB1dCBsb2dzLiBPbmUgaXMgc3RhcnRpbmcgd2l0aApYZW4gNC4xMSAoZnJvbSBkZWJp
+YW4gdW5zdGFibGUpIGFzIGRvbTAsIGFuZCB0aGUgb3RoZXIgb25lIHdpdGhvdXQgWGVuLgoKWyAg
+ICAyLjA4NTU0M10gQlVHOiB1bmFibGUgdG8gaGFuZGxlIGtlcm5lbCBwYWdpbmcgcmVxdWVzdCBh
+dApmZmZmODg4ZDlmZmZjMDAwClsgICAgMi4wODU2MTBdIFBHRCAyMDBjMDY3IFA0RCAyMDBjMDY3
+IFBVRCAwClsgICAgMi4wODU2NzRdIE9vcHM6IDAwMDAgWyMxXSBTTVAgTk9QVEkKWyAgICAyLjA4
+NTczNl0gQ1BVOiAxIFBJRDogMSBDb21tOiBzd2FwcGVyLzAgTm90IHRhaW50ZWQKNC4xOS4wLXRy
+dW5rLWFtZDY0ICMxIERlYmlhbiA0LjE5LjUtMX5leHAxK3B2aDEKWyAgICAyLjA4NTgyM10gSGFy
+ZHdhcmUgbmFtZTogSFAgUHJvTGlhbnQgREwzNjAgRzcsIEJJT1MgUDY4IDA1LzIxLzIwMTgKWyAg
+ICAyLjA4NTg5NV0gUklQOiBlMDMwOnB0ZHVtcF93YWxrX3BnZF9sZXZlbF9jb3JlKzB4MWZkLzB4
+NDkwClsuLi5dCgpUaGUgcHRpPW9mZiBzZXR0aW5nIG9uIHRoZSBQViBkb20wIGtlcm5lbCBpcyBs
+ZWZ0IGJlaGluZCBmcm9tIHRoZSB0aW1lCndoZW4gNC45IGZhaWxlZCB0byBib290IGFzIFhlbiBk
+b20wIGJlY2F1c2Ugb2YgdGhlIGJ1ZyBoYW5kbGluZyB0aGF0LgoKSGFucwoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
