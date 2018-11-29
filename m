@@ -1,20 +1,19 @@
 From: Julien Grall <julien.grall@arm.com>
 Subject: [PATCH 1/2] xen/arm: mm: Set-up page permission for Xen
  mappings earlier on
-Date: Thu, 29 Nov 2018 11:37:43 +0000
-Message-ID: <20181129113744.2797-2-julien.grall@arm.com>
-References: <20181129113744.2797-1-julien.grall@arm.com>
+Date: Thu, 29 Nov 2018 11:38:35 +0000
+Message-ID: <20181129113836.2853-2-julien.grall@arm.com>
+References: <20181129113836.2853-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=I9BH=OI=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gSKeG-00082Y-BD
- for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 11:38:24 +0000
-In-Reply-To: <20181129113744.2797-1-julien.grall@arm.com>
+ <srs0=i9bh=oi=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gSKea-00088B-Ej
+ for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 11:38:44 +0000
+In-Reply-To: <20181129113836.2853-1-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,8 +22,8 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: andre.przywara@arm.com, Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org
+To: julien.grall@arm.com, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
 WGVuIG1hcHBpbmcgaXMgZmlyc3QgY3JlYXRlIHVzaW5nIGEgMk1CIHBhZ2UgYW5kIHRoZW4gc2hh
