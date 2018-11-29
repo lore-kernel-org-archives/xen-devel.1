@@ -1,23 +1,19 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v2 11/11] tools/libvchan:
- libxenvchan_client_init: use ENOENT for no server
-Date: Thu, 29 Nov 2018 01:01:32 +0100
-Message-ID: <20181129000132.GJ2580@mail-itl>
-References: <20181108170805.12774-1-ian.jackson@eu.citrix.com>
- <20181108170805.12774-12-ian.jackson@eu.citrix.com>
- <20181110090647.GC4051@mail-itl>
- <23529.34225.339196.925833@mariner.uk.xensource.com>
+From: Hans van Kranenburg <hans@knorrie.org>
+Subject: Re: [PATCH 0/2] Move RSDP address out of setup_header
+Date: Thu, 29 Nov 2018 02:05:24 +0100
+Message-ID: <22e0ae54-9d7e-bea5-c8b8-5eac2c9174c1@knorrie.org>
+References: <20181120072529.5489-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4759316649967946209=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=cl6A=OI=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gS9m0-0005wJ-GA
- for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 00:01:40 +0000
-In-Reply-To: <23529.34225.339196.925833@mariner.uk.xensource.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=vhwl=oi=knorrie.org=hans@srs-us1.protection.inumbo.net>)
+ id 1gSAll-0000Ms-0T
+ for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 01:05:29 +0000
+In-Reply-To: <20181120072529.5489-1-jgross@suse.com>
+Content-Language: en_US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,107 +22,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
+Cc: sstabellini@kernel.org, daniel.kiper@oracle.com, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, boris.ostrovsky@oracle.com, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4759316649967946209==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="HSQ3hISbU3Um6hch"
-Content-Disposition: inline
-
-
---HSQ3hISbU3Um6hch
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Nov 12, 2018 at 01:52:49PM +0000, Ian Jackson wrote:
-> Marek Marczykowski-G=C3=B3recki writes ("Re: [Xen-devel] [PATCH v2 11/11]=
- tools/libvchan: libxenvchan_client_init: use ENOENT for no server"):
-> > Since xtl_log now accepts NULL, it should be fine. Thanks!
-> > Reviewed-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingsl=
-ab.com>
->=20
-> Thanks.
->=20
-> I am reluctant to commit this series without having been able to test
-> it.  There's the libvchan node.c and node-select.c but they seem a bit
-> raw.
->=20
-> Do you have a script or something to wrap them up ?
-
-Not really. I've done a manual test, in two domains:
-
-server:    vchan-node2 server $xid2 /local/domain/$xid1/data/vchan/$xid2/12=
-34
-
-client:    vchan-node2 client $xid1 /local/domain/$xid1/data/vchan/$xid2/12=
-34
-
-($xid1 and $xid2 are domains ID of server and client respectively)
-
-When start it in this order, it works fine. But if I start the client
-earlier, I get libxenvchan_*_init: Permission denied. That makes sense -
-before server setup permissions on xenstore, the client can't read the
-entries but not because of ENOENT, but EACCESS.
-
-> Ideally I guess this would be run by osstest somehow.
-
-I've tried... But stumbled across a bunch of problems:
-1. Xen tools are not installed in guest
-2. vchan-node* are not installed at all
-3. I need two domUs for this (or maybe dom0 and domU?) and processes
-running in parallel (this is where my perl ends).
-
-I gave up after point 2. Do you want patches for point 1 and 2 anyway?
-New ts-guest-xen-install assume the build for dom0 is fine for domU too
-(which is true for Debian)...
-As for the second point, I've installed it into $(bindir) as a quick
-hack, but not sure if this is the best option.
-I'm not jet sure how to put all those pieces together. I guess I need to
-edit sg-run-job, but that's jet another language...
-
-BTW vchan doesn't like loopback connections (within the same domain), as
-gnttab doesn't like it. Is it something fixable, or is it working as
-designed? If the latter, I think at least kernel shouldn't panic in that
-case... More details:
-https://github.com/QubesOS/qubes-issues/issues/951
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---HSQ3hISbU3Um6hch
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlv/LFwACgkQ24/THMrX
-1yz80Af9Haj4vMpWccEfH+PySr2d7vSA4KImtSkC1/8h0b+//tQhs2/djDcpYTrQ
-YD41t1FtIFhn2udC7s6dy6LYihVBvHsRBgP0zqYQEObMJO8uwqF1xopBhLwa9Bri
-6Xs80JqjzgYBEfVp9Oak7ZbUQKnxaqaly+A0B7kKEO0xZy4NU7pZ7LinlXaRHIiw
-fEwJ/5NmNcEZWlVFBSjYUvoJBT7xqRUnkURBvBv3BX8fs2bRcLqVNbDqiIbML/I4
-oZWOA2j4BhsrWmptbyUhVvB9mzGUmbKuctQJ8GApg16QHWTYW/9fJpfoSzrkvfME
-/+clG+9+9wZFkVNZxTwl8zwnwKeF+g==
-=05Mn
------END PGP SIGNATURE-----
-
---HSQ3hISbU3Um6hch--
-
-
---===============4759316649967946209==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4759316649967946209==--
+SGksCgpPbiAxMS8yMC8xOCA4OjI1IEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IFJlc2VuZCB3
+aXRoIERhbmllbCdzIG1haWxvIGFkZHJlc3MgY29ycmVjdGVkCj4gCj4gSW5zdGVhZCBvZiBwYXNz
+aW5nIHRoZSBSU0RQIGFkZHJlc3MgZm9yIFhlbiBQVkggZ3Vlc3RzIGZyb20gZ3J1YjIgdG8KPiB0
+aGUga2VybmVsIGluIHNldHVwX2hlYWRlciBtb3ZlIGl0IGludG8gdGhlIG5vbi1sZWdhY3kgcGFy
+dCBvZiB0aGUKPiBib290X3BhcmFtcyBzdHJ1Y3R1cmUuCj4gCj4gVGhpcyBwYXRjaCBzZXJpZXMg
+c2hvdWxkIGJlIGFwcGxpZWQgcmF0aGVyIHNvb25lciB0aGFuIGxhdGVyIGluIG9yZGVyCj4gdG8g
+YXZvaWQgc2hpcHBpbmcgbGludXggNC4yMCB3aXRoIGEgY29ya3kgYm9vdCBwcm90b2NvbC4KPiAK
+PiBKdWVyZ2VuIEdyb3NzICgyKToKPiAgIHg4Ni9ib290OiByZXZlcnQgY29tbWl0IGFlN2UxMjM4
+ZTY4ZjJhIChBZGQgQUNQSSBSU0RQIGFkZHJlc3MgdG8KPiAgICAgc2V0dXBfaGVhZGVyKQo+ICAg
+eDg2L2FjcGksIHg4Ni9ib290OiBUYWtlIFJTRFAgYWRkcmVzcyBmcm9tIGJvb3QgcGFyYW1zIGlm
+IGF2YWlsYWJsZQo+IAo+ICBEb2N1bWVudGF0aW9uL3g4Ni9ib290LnR4dCAgICAgICAgICAgIHwg
+MzIgKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgYXJjaC94ODYvYm9vdC9oZWFk
+ZXIuUyAgICAgICAgICAgICAgICB8ICA2ICstLS0tLQo+ICBhcmNoL3g4Ni9pbmNsdWRlL2FzbS94
+ODZfaW5pdC5oICAgICAgIHwgIDIgLS0KPiAgYXJjaC94ODYvaW5jbHVkZS91YXBpL2FzbS9ib290
+cGFyYW0uaCB8ICA3ICsrLS0tLS0KPiAgYXJjaC94ODYva2VybmVsL2FjcGkvYm9vdC5jICAgICAg
+ICAgICB8ICAyICstCj4gIGFyY2gveDg2L2tlcm5lbC9oZWFkMzIuYyAgICAgICAgICAgICAgfCAg
+MSAtCj4gIGFyY2gveDg2L2tlcm5lbC9oZWFkNjQuYyAgICAgICAgICAgICAgfCAgMiAtLQo+ICBh
+cmNoL3g4Ni9rZXJuZWwvc2V0dXAuYyAgICAgICAgICAgICAgIHwgMTcgLS0tLS0tLS0tLS0tLS0t
+LS0KPiAgOCBmaWxlcyBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDY0IGRlbGV0aW9ucygtKQoK
+RldJVywgSSBjYW4gY29uZmlybSB0aGF0IEkgY2FuIGJvb3QgYSBYZW4gZG9tVSBpbiBQVkggbW9k
+ZSB3aXRoIHRoZQpmb2xsb3dpbmcgZm91ciBwYXRjaGVzIGFkZGVkIG9uIHRvcCBvZiBMaW51eCA0
+LjE5LjUgKGFwcGxpZWQgaW4gdGhpcwpvcmRlciksIGluIGNvbWJpbmF0aW9uIHdpdGggZ3J1YiBt
+YXN0ZXIgYnJhbmNoIHdpdGggcGF0Y2hzZXQgdjUgZm9yIGdydWIKb24gdG9wOgoKRGF0ZTogICBX
+ZWQgT2N0IDEwIDA4OjE0OjU1IDIwMTggKzAyMDAKeDg2L2Jvb3Q6IEFkZCBBQ1BJIFJTRFAgYWRk
+cmVzcyB0byBzZXR1cF9oZWFkZXIKCkRhdGU6ICAgV2VkIE9jdCAxMCAwODoxNDo1NiAyMDE4ICsw
+MjAwCng4Ni9hY3BpLCB4ODYvYm9vdDogVGFrZSBSU0RQIGFkZHJlc3MgZm9yIGJvb3QgcGFyYW1z
+IGlmIGF2YWlsYWJsZQoKRGF0ZTogICBUdWUgTm92IDIwIDA4OjI1OjI4IDIwMTggKzAxMDAKeDg2
+L2Jvb3Q6IHJldmVydCBjb21taXQgYWU3ZTEyMzhlNjhmMmEgKEFkZCBBQ1BJIFJTRFAgYWRkcmVz
+cyB0bwpzZXR1cF9oZWFkZXIpCgpEYXRlOiAgIFR1ZSBOb3YgMjAgMDg6MjU6MjkgMjAxOCArMDEw
+MAp4ODYvYWNwaSwgeDg2L2Jvb3Q6IFRha2UgUlNEUCBhZGRyZXNzIGZyb20gYm9vdCBwYXJhbXMg
+aWYgYXZhaWxhYmxlCgpbICAgIDAuMjA1ODg0XSBCb290aW5nIHBhcmF2aXJ0dWFsaXplZCBrZXJu
+ZWwgb24gWGVuIFBWSAoKVGhhbmtzLApIYW5zCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
