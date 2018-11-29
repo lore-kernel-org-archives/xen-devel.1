@@ -1,15 +1,20 @@
-From: Hans van Kranenburg <hans@knorrie.org>
-Subject: Re: [PATCH v6 00/20] xen: add pvh guest support
-Date: Thu, 29 Nov 2018 13:40:35 +0100
-Message-ID: <5433b040-5d30-3464-13ac-dedc999f130c@knorrie.org>
-References: <20181128135530.32545-1-jgross@suse.com>
- <20181129122221.a4pmp67xfdgvwfxo@tomti.i.net-space.pl>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] tools/xenstore: domain can sometimes
+ disappear when destroying connection
+Date: Thu, 29 Nov 2018 12:52:55 +0000
+Message-ID: <20181129125255.uesjk4cyoqzgp53e@zion.uk.xensource.com>
+References: <20181126132204.16258-1-epetre@amazon.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181129122221.a4pmp67xfdgvwfxo@tomti.i.net-space.pl>
-Content-Language: en_US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=wph9=oi=citrix.com=prvs=8644391f1=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gSLoX-00082B-8v
+ for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 12:53:05 +0000
+Content-Disposition: inline
+In-Reply-To: <20181126132204.16258-1-epetre@amazon.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,26 +23,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Daniel Kiper <daniel.kiper@oracle.com>, Juergen Gross <jgross@suse.com>
-Cc: grub-devel@gnu.org, roger.pau@citrix.com, xen-devel@lists.xen.org, phcoder@gmail.com
+To: Petre Eftime <epetre@amazon.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Amit Shah <aams@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>, David Woodhouse <dwmw@amazon.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgRGFuaWVsLAoKT24gMTEvMjkvMTggMToyMiBQTSwgRGFuaWVsIEtpcGVyIHdyb3RlOgo+IE9u
-IFdlZCwgTm92IDI4LCAyMDE4IGF0IDAyOjU1OjEwUE0gKzAxMDAsIEp1ZXJnZW4gR3Jvc3Mgd3Jv
-dGU6Cj4+IFRoaXMgcGF0Y2ggc2VyaWVzIGFkZHMgc3VwcG9ydCBmb3IgYm9vdGluZyBMaW51eCBh
-cyBQVkggZ3Vlc3QuCj4+Cj4+IFNpbWlsYXIgdG8gaTM4Ni94ZW4gYW5kIHg4Nl82NC94ZW4gcGxh
-dGZvcm1zIHRoZSBuZXcgaTM4Ni94ZW5wdmgKPj4gcGxhdGZvcm0gZ3J1YiBpcyBib290ZWQgYXMg
-YSBzdGFuZGFsb25lIGltYWdlIGRpcmVjdGx5IGJ5IFhlbi4KPj4KPj4gRm9yIGJvb3RpbmcgTGlu
-dXgga2VybmVsIGl0IGlzIHVzaW5nIHRoZSBzdGFuZGFyZCBsaW51eCBrZXJuZWwKPj4gbG9hZGVy
-LiBUaGUgb25seSBtb2RpZmljYXRpb24gb2YgdGhlIGxpbnV4IGxvYWRlciBpcyB0byBwYXNzIHRo
-ZQo+PiBBQ1BJIFJTRFAgYWRkcmVzcyB2aWEgYm9vdCBwYXJhbWV0ZXJzIHRvIHRoZSBrZXJuZWws
-IGFzIHRoYXQgdGFibGUKPj4gbWlnaHQgbm90IGJlIGxvY2F0ZWQgYXQgdGhlIHVzdWFsIHBoeXNp
-Y2FsIGFkZHJlc3MganVzdCBiZWxvdyAxTUIuCj4+Cj4+IFRoZSByZWxhdGVkIExpbnV4IGtlcm5l
-bCBwYXRjaGVzIGhhdmUgYmVlbiBhY2NlcHRlZCBmb3IgNC4yMC1yYzQKPiAKPiBQYXRjaCBzZXQg
-TEdUTS4gSWYgdGhlcmUgYXJlIG5vIG9iamVjdGlvbnMgSSB3aWxsIGFwcGx5IGl0IGluIGEgd2Vl
-awo+IG9yIHNvLgo+IAo+IEhhbnMsIG1heSBJIGFkZCAiVGVzdGVkLWJ5OiBIYW5zIHZhbiBLcmFu
-ZW5idXJnIDxoYW5zQGtub3JyaWUub3JnPiIgdG8KPiB0aGUgcGF0Y2hlcz8KClN1cmUhCgo+IEp1
-ZXJnZW4sIHRoYW5rIHlvdSBmb3IgZG9pbmcgdGhlIHdvcmsuCgpIYW5zCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBOb3YgMjYsIDIwMTggYXQgMDE6MjI6MDRQTSArMDAwMCwgUGV0cmUgRWZ0aW1lIHdy
+b3RlOgo+IFRoZXJlIGlzIGEgY2lyY3VsYXIgbGluayBmb3JtZWQgYmV0d2VlbiBkb21haW4gYW5k
+IGEgY29ubmVjdGlvbi4gSW4gY2VydGFpbgo+IGNpcmN1c3RhbmNlcywgd2hlbiBjb25uIGlzIGZy
+ZWVkLCBkb21haW4gaXMgYWxzbyBmcmVlZCwgd2hpY2ggbGVhZHMgdG8gdXNlCj4gYWZ0ZXIgZnJl
+ZSB3aGVuIHRyeWluZyB0byBzZXQgdGhlIGNvbm4gZmllbGQgaW4gZG9tYWluIHRvIG51bGwuCgpB
+Y3R1YWxseSwgY2FuIHlvdSBwcm92aWRlIG1vcmUgY29udGV4dCBvbiB0aGlzPyBXaGVuIHdpbGwg
+dGhlIGNpcmN1bGFyCmxpbmsgaGFwcGVuPwoKV2VpLgoKPiAKPiBTaWduZWQtb2ZmLWJ5OiBQZXRy
+ZSBFZnRpbWUgPGVwZXRyZUBhbWF6b24uY29tPgo+IC0tLQo+ICB0b29scy94ZW5zdG9yZS94ZW5z
+dG9yZWRfZG9tYWluLmMgfCA5ICsrKysrKysrLQo+ICAxIGZpbGUgY2hhbmdlZCwgOCBpbnNlcnRp
+b25zKCspLCAxIGRlbGV0aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlL3hl
+bnN0b3JlZF9kb21haW4uYyBiL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlZF9kb21haW4uYwo+IGlu
+ZGV4IGZhNjY1NTAzM2EuLmYwODVkNDA0NzYgMTAwNjQ0Cj4gLS0tIGEvdG9vbHMveGVuc3RvcmUv
+eGVuc3RvcmVkX2RvbWFpbi5jCj4gKysrIGIvdG9vbHMveGVuc3RvcmUveGVuc3RvcmVkX2RvbWFp
+bi5jCj4gQEAgLTIyMiw2ICsyMjIsNyBAQCBzdGF0aWMgdm9pZCBkb21haW5fY2xlYW51cCh2b2lk
+KQo+ICB7Cj4gIAl4Y19kb21pbmZvX3QgZG9taW5mbzsKPiAgCXN0cnVjdCBkb21haW4gKmRvbWFp
+bjsKPiArCXN0cnVjdCBjb25uZWN0aW9uICp0bXBfY29ubjsKPiAgCWludCBub3RpZnkgPSAwOwo+
+ICAKPiAgIGFnYWluOgo+IEBAIC0yMzgsOCArMjM5LDE0IEBAIHN0YXRpYyB2b2lkIGRvbWFpbl9j
+bGVhbnVwKHZvaWQpCj4gIAkJCQljb250aW51ZTsKPiAgCQl9Cj4gIAkJaWYgKGRvbWFpbi0+Y29u
+bikgewo+IC0JCQl0YWxsb2NfdW5saW5rKHRhbGxvY19hdXRvZnJlZV9jb250ZXh0KCksIGRvbWFp
+bi0+Y29ubik7Cj4gKwkJCS8qCj4gKwkJCSAqIEluIGNlcnRhaW4gY2lyY3Vtc3RhbmNlcyBjb25u
+IG93bnMgZG9tYWluIGFuZAo+ICsJCQkgKiBkb21haW4gd2lsbCBiZSBmcmVlZCB3aGVuIGNvbm4g
+aXMgdW5saW5rZWQuCj4gKwkJCSAqLwo+ICsJCQl0bXBfY29ubiA9IGRvbWFpbi0+Y29ubjsKPiAg
+CQkJZG9tYWluLT5jb25uID0gTlVMTDsKPiArCj4gKwkJCXRhbGxvY191bmxpbmsodGFsbG9jX2F1
+dG9mcmVlX2NvbnRleHQoKSwgdG1wX2Nvbm4pOwo+ICAJCQlub3RpZnkgPSAwOyAvKiBkZXN0cm95
+X2RvbWFpbigpIGZpcmVzIHRoZSB3YXRjaCAqLwo+ICAJCQlnb3RvIGFnYWluOwo+ICAJCX0KPiAt
+LSAKPiAyLjE2LjUKPiAKPiAKPiAKPiAKPiBBbWF6b24gRGV2ZWxvcG1lbnQgQ2VudGVyIChSb21h
+bmlhKSBTLlIuTC4gcmVnaXN0ZXJlZCBvZmZpY2U6IDI3QSBTZi4gTGF6YXIgU3RyZWV0LCBVQkM1
+LCBmbG9vciAyLCBJYXNpLCBJYXNpIENvdW50eSwgNzAwMDQ1LCBSb21hbmlhLiBSZWdpc3RlcmVk
+IGluIFJvbWFuaWEuIFJlZ2lzdHJhdGlvbiBudW1iZXIgSjIyLzI2MjEvMjAwNS4KPiAKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
