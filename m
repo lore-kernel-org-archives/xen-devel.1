@@ -1,15 +1,10 @@
-From: Andrii Anisov <Andrii_Anisov@epam.com>
-Subject: Re: [RFC 00/16] Old GIC (gic-vgic) optimizations for
- GICV2
-Date: Thu, 29 Nov 2018 07:40:00 +0000
-Message-ID: <AM6PR03MB49190806B62E1E4A883096C3E6D20@AM6PR03MB4919.eurprd03.prod.outlook.com>
-References: <1543440731-21947-1-git-send-email-andrii.anisov@gmail.com>
+From: Omkar Bolla <omkar062@gmail.com>
+Subject: Xen support on ARM64
+Date: Thu, 29 Nov 2018 13:09:19 +0530
+Message-ID: <CAKPiPDrgwFCM4ic=O1uUaHgN-WoYMwuOtxtgLSWzhy3d2MYr2A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6763985109778205074=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1543440731-21947-1-git-send-email-andrii.anisov@gmail.com>
-Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,74 +13,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>, "julien.grall@arm.com" <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: Andrii Anisov <andrii.anisov@gmail.com>
+To: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-CkhlbGxvLAoKQWdhaW4sIEkgc2VudCB0aGlzIGNvdmVyIGxldHRlciBvbmx5IHRvIG15c2VsZi4g
-U28sIGhlcmUgaXQgaXMsIGhvcGUgaXQgZG9lcyBub3QgYnJlYWsgdGhlIHRocmVhZC4gU29ycnkg
-Zm9yIHRoZSBtZXNzLgoKCkZyb206IEFuZHJpaSBBbmlzb3YgPGFuZHJpaS5hbmlzb3ZAZ21haWwu
-Y29tPgpTZW50OiBXZWRuZXNkYXksIE5vdmVtYmVyIDI4LCAyMDE4IDExOjMxIFBNCkNjOiBBbmRy
-aWkgQW5pc292ClN1YmplY3Q6IFtSRkMgMDAvMTZdIE9sZCBHSUMgKGdpYy12Z2ljKSBvcHRpbWl6
-YXRpb25zIGZvciBHSUNWMgrCoCAKCkZyb206IEFuZHJpaSBBbmlzb3YgPGFuZHJpaV9hbmlzb3ZA
-ZXBhbS5jb20+CgpUaGlzIHBhdGNoIHNlcmllcyBpcyBhbiBhdHRlbXB0IHRvIHJlZHVjZSBJUlEg
-bGF0ZW5jeSB3aXRoIHRoZQpvbGQgR0lDIGltcGxlbWVudGF0aW9uIChnaWMtdmdpYykuIFRoZXNl
-IHBhdGNoZXMgb3JpZ2luYWxseSBiYXNlZApvbiBYRU4gNC4xMCByZWxlYXNlLiBUaGUgbW90aXZh
-dGlvbiB3YXMgdG8gaW1wcm92ZSBiZW5jaG1hcmsKcmVzdWx0cyBvZiBhIHN5c3RlbSBnaXZlbiB0
-byBhIGN1c3RvbWVyIGZvciBldmFsdWF0aW9uLgpUaGlzIHBhdGNoIHNlcmllcyBpcyB0YWlsb3Jl
-ZCBmb3IgR0lDdjIgb24gUkNBUiBIMy4gU2V2ZXJhbApvZiB0aGUgbW9zdCBjb250cm92ZXJzaWFs
-IHBhdGNoZXMgKGkuZS4gTFJzIHNoYWRvd2luZykgd2VyZQpub3Qgc2hhcmVkIHRvIHRoZSBjdXN0
-b21lciwgYW5kIGhlcmUgYXJlIGZvciBjb21tZW50cyBhbmQgZGlzY3Vzc2lvbi4KSSBob3BlIHNl
-dmVyYWwgcGF0Y2hlcyBmcm9tIGhlcmUgY291bGQgYmUgdXBzdHJlYW1lZC4gU29tZSBhcyBpcywK
-b3RoZXJzIHdpdGggbW9kaWZpY2F0aW9ucy4KClRoZXJlIGFyZSBzZXZlcmFsIHNpbXBsZSBpZGVh
-cyBiZWhpbmQgdGhlc2UgY2hhbmdlczoKwqDCoMKgIC0gcmVkdWNlIGFuIGV4Y2Vzc2l2ZSBjb2Rl
-IChjb25kaXRpb24gY2hlY2tzKQrCoMKgwqAgLSBkcm9wIGFuIGV4Y2Vzc2l2ZSBwZXJpcGhlcmFs
-IHJlZ2lzdGVyIGFjY2Vzc2VzCsKgwqDCoCAtIGlmIG5vdCByZWR1Y2UsIHRoZW4gbW92ZSBhbiBl
-eGNlc3NpdmUgY29kZSBvdXQgb2Ygc3BpbmxvY2tzCsKgwqDCoCAtIGlmIG5vdCBkcm9wLCB0aGVu
-IG1vdmUgYW4gZXhjZXNzaXZlIHJlZ2lzdGVyCsKgwqDCoMKgwqAgYWNjZXNzZXMgb3V0IG9mIHNw
-aW5sb2NrcwoKV2l0aCBwb3J0aW5nIGV4aXN0aW5nIHBhdGNoZXMsIEkndmUgZ290IGFub3RoZXIg
-aWRlYSB0aGF0IGFjY2Vzc2luZwpQRVJfQ1BVIHZhcmlhYmxlcyBsaWtlIGBjdXJyZW50YCBhbmQg
-YGxyX21hc2tgIGlzIG5vdCByZWFsbHkgY2hlYXAuClNvIGl0IHNob3VsZCBwcm9kdWNlIGZhc3Rl
-ciBjb2RlIGtlZXBpbmcgYGxyX21hc2tgIHNvbGVseSBpbgpgc3RydWN0IHZjcHVgIGFuZCBwYXNz
-IGBjdXJyZW50YCBhcyBhIGZ1bmN0aW9uIHBhcmFtZXRlciBpbnN0ZWFkCm9mIGNhbGN1bGF0aW9u
-IGl0IGVhY2ggdGltZSBpbiBjYWxsZWQgZnVuY3Rpb25zLgoKQW5kcmlpIEFuaXNvdiAoMTUpOgrC
-oCBoYWNrOiBkcm9wIEdJQyB2MyBzdXBwb3J0CsKgIHZnaWM6IG1vdmUgcGF1c2VfZmxhZ3MgY2hl
-Y2sgb3V0IG9mIHZnaWMgc3BpbmxvY2sKwqAgdmdpYzogbW92ZSBpcnFfdG9fcGVuZGluZyBvdXQg
-b2YgbG9jawrCoCBnaWMtdmdpYzogRHJvcCBhbiBleGNlc3NpdmUgY2xlYXJfbHJzCsKgIGdpYzog
-ZHJvcCBpbnRlcnJ1cHRzIGVuYWJsaW5nIG9uIGludGVycnVwdHMgcHJvY2Vzc2luZwrCoCBnaWMt
-dmdpYzp2Z2ljOiBkbyBub3Qga2VlcCBkaXNhYmxlZCBJUlFzIGluIGFueSBvZiBxdWV1ZXMKwqAg
-Z2ljOiBzZXBhcmF0ZSBwcGkgcHJvY2Vzc2luZwrCoCBnaWMtdmdpYzp2Z2ljOiBhdm9pZCBleGNl
-c3NpdmUgY29udmVyc2lvbnMKwqAgZ2ljOnZnaWM6Z2ljLXZnaWM6IGludHJvZHVjZSBub24tYXRv
-bWljIGJpdG9wcwrCoCBpcnE6IHNraXAgYWN0aW9uIGF2YWxhYmlsaXR5IGNoZWNrIGZvciBndWVz
-dCdzIElSUQrCoCBnaWMtdjI6IFdyaXRlIEhDUiBvbmx5IG9uIGNoYW5nZQrCoCBnaWMtdmdpYzog
-c2tpcCBpcnFzIGxvY2tpbmcKwqAgaGFjazogYXJtL2RvbWFpbjogc2ltcGxpZnkgY29udGV4dCBy
-ZXN0b3JlIGZyb20gaWRsZSB2Y3B1CsKgIGhhY2s6IG1vdmUgZ2ljdjIgTFJzIHJlYWRzIGFuZCB3
-cml0ZXMgb3V0IG9mIHNwaW5sb2NrcwrCoCBnaWM6IHZnaWM6IGFsaWduIGZyZXF1ZW50bHkgYWNj
-ZXNzZWQgZGF0YSBieSBjYWNoZSBsaW5lIHNpemUKCkp1bGllbiBHcmFsbCAoMSk6CsKgIHhlbi9h
-cm06IFJlLWVuYWJsZSBpbnRlcnJ1cHQgbGF0ZXIgaW4gdGhlIHRyYXAgcGF0aAoKwqB4ZW4vYXJj
-aC9hcm0vYXJtNjQvZW50cnkuU8KgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMTEgKystLS0KwqB4ZW4v
-YXJjaC9hcm0vY29uZmlncy9hcm02NF9kZWZjb25maWcgfMKgIDEgKwrCoHhlbi9hcmNoL2FybS9k
-b21haW4uY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8IDI1ICsrKysrKy0tLS0KwqB4
-ZW4vYXJjaC9hcm0vZ2ljLXYyLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCA2MyAr
-KysrKysrKysrKysrKysrLS0tLS0tLS0KwqB4ZW4vYXJjaC9hcm0vZ2ljLXYzLWxwaS5jwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCB8wqAgMiArCsKgeGVuL2FyY2gvYXJtL2dpYy12My5jwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICsKwqB4ZW4vYXJjaC9hcm0vZ2ljLXZnaWMuY8Kg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgODQgKysrKysrKysrKysrKysrKysrKy0tLS0tLS0t
-LS0tLS0KwqB4ZW4vYXJjaC9hcm0vZ2ljLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqAgfCAzMiArKysrKysrKysrKy0tCsKgeGVuL2FyY2gvYXJtL2lycS5jwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgNDYgKysrKysrKysrKysrKysrLS0tCsKgeGVuL2Fy
-Y2gvYXJtL3RyYXBzLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqAgNiArKysK
-wqB4ZW4vYXJjaC9hcm0vdmdpYy12My1pdHMuY8KgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoCAzICst
-CsKgeGVuL2FyY2gvYXJtL3ZnaWMuY8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-fCA5MyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0KwqB4ZW4vYXJjaC9hcm0v
-dmdpYy92Z2ljLmPCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDIgKwrCoHhlbi9pbmNsdWRl
-L2FzbS1hcm0vY29uZmlnLmjCoMKgwqDCoMKgwqDCoMKgIHzCoCAyICstCsKgeGVuL2luY2x1ZGUv
-YXNtLWFybS9naWMuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfCAxMCArKy0tCsKgeGVuL2luY2x1
-ZGUvYXNtLWFybS9pcnEuaMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDMgKysKwqB4ZW4vaW5j
-bHVkZS9hc20tYXJtL3ZnaWMuaMKgwqDCoMKgwqDCoMKgwqDCoMKgIHwgMjQgKysrKysrLS0tLQrC
-oHhlbi9pbmNsdWRlL3hlbi9zY2hlZC5owqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgIDEg
-KwrCoDE4IGZpbGVzIGNoYW5nZWQsIDI5OSBpbnNlcnRpb25zKCspLCAxMTEgZGVsZXRpb25zKC0p
-CgotLSAKMi43LjQKCiAgICAKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+--===============6763985109778205074==
+Content-Type: multipart/alternative; boundary="000000000000809882057bc8c8cd"
+
+--000000000000809882057bc8c8cd
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+I just wanted to run xen hypervisor on ARMv8 architecture, I tried on
+Hikey960 platform which has armv8, but latest xen giving cpu errors.
+
+Could you please tell me, on which platforms latest xen is working?
+
+Thanks,
+Omkar B
+
+--000000000000809882057bc8c8cd
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div>Hi,</div><div><br></div><div>I just wanted to run xen=
+ hypervisor on ARMv8 architecture, I tried on Hikey960 platform which has a=
+rmv8, but latest xen giving cpu errors.</div><div><br></div><div>Could you =
+please tell me, on which platforms latest xen is working?</div><div><br></d=
+iv><div>Thanks,</div><div>Omkar B</div><div><br></div></div>
+
+--000000000000809882057bc8c8cd--
+
+
+--===============6763985109778205074==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6763985109778205074==--
