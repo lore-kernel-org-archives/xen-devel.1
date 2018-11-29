@@ -1,16 +1,22 @@
-From: Wen Yang <wen.yang99@zte.com.cn>
-Subject: [PATCH] pvcalls-front: Use GFP_ATOMIC under spin_lock
-Date: Thu, 29 Nov 2018 20:01:01 +0800
-Message-ID: <20181129120101.19678-1-wen.yang99__38417.8044078455$1543493908$gmane$org@zte.com.cn>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH 3/9] libxl: Get rid of support for
+ QEMU_USER_BASE (xen-qemuuser-domidNN)
+Date: Thu, 29 Nov 2018 12:19:39 +0000
+Message-ID: <23551.55643.499943.970846@mariner.uk.xensource.com>
+References: <20181123171502.29519-1-george.dunlap@citrix.com>
+ <20181123171502.29519-3-george.dunlap@citrix.com>
+ <23550.50094.781157.267276@mariner.uk.xensource.com>
+ <516E2908-A45E-44CE-94C1-F11D8A10195C@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=6esn=oi=zte.com.cn=wen.yang99@srs-us1.protection.inumbo.net>)
- id 1gSL0S-00032g-Ry
- for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 12:01:20 +0000
+ <srs0=mb5d=oi=citrix.com=prvs=8641bc5b5=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1gSLJD-0005GF-5C
+ for xen-devel@lists.xenproject.org; Thu, 29 Nov 2018 12:20:43 +0000
+In-Reply-To: <516E2908-A45E-44CE-94C1-F11D8A10195C@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,38 +25,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: boris.ostrovsky@oracle.com, jgross@suse.com, sstabellini@kernel.org
-Cc: xen-devel@lists.xenproject.org, Julia Lawall <julia.lawall@lip6.fr>, zhong.weidong@zte.com.cn, linux-kernel@vger.kernel.org, Wen Yang <wen.yang99@zte.com.cn>
+To: George Dunlap <George.Dunlap@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHByb2JsZW0gaXMgdGhhdCB3ZSBjYWxsIHRoaXMgd2l0aCBhIHNwaW4gbG9jayBoZWxkLgpU
-aGUgY2FsbCB0cmVlIGlzOgpwdmNhbGxzX2Zyb250X2FjY2VwdCgpIGhvbGRzIGJlZGF0YS0+c29j
-a2V0X2xvY2suCiAgICAtPiBjcmVhdGVfYWN0aXZlKCkKICAgICAgICAtPiBfX2dldF9mcmVlX3Bh
-Z2VzKCkgdXNlcyBHRlBfS0VSTkVMCgpUaGUgY3JlYXRlX2FjdGl2ZSgpIGZ1bmN0aW9uIGlzIG9u
-bHkgY2FsbGVkIGZyb20gcHZjYWxsc19mcm9udF9hY2NlcHQoKQp3aXRoIGEgc3Bpbl9sb2NrIGhl
-bGQsIFRoZSBhbGxvY2F0aW9uIGlzIG5vdCBhbGxvd2VkIHRvIHNsZWVwIGFuZApHRlBfS0VSTkVM
-IGlzIG5vdCBzdWZmaWNpZW50LCBpdCBoYXMgdG8gYmUgQVRPTUlDLgoKVGhpcyBpc3N1ZSB3YXMg
-ZGV0ZWN0ZWQgYnkgdXNpbmcgdGhlIENvY2NpbmVsbGUgc29mdHdhcmUuCgpTaWduZWQtb2ZmLWJ5
-OiBXZW4gWWFuZyA8d2VuLnlhbmc5OUB6dGUuY29tLmNuPgpDQzogSnVsaWEgTGF3YWxsIDxqdWxp
-YS5sYXdhbGxAbGlwNi5mcj4KQ0M6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9y
-YWNsZS5jb20+CkNDOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkNDOiBTdGVmYW5v
-IFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNDOiB4ZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKQ0M6IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmcKLS0tCiBkcml2
-ZXJzL3hlbi9wdmNhbGxzLWZyb250LmMgfCA0ICsrLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2Vy
-dGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy94ZW4vcHZjYWxs
-cy1mcm9udC5jIGIvZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jCmluZGV4IDJmMTFjYTcyYTI4
-MS4uZjJiYmMwNmEwZjdmIDEwMDY0NAotLS0gYS9kcml2ZXJzL3hlbi9wdmNhbGxzLWZyb250LmMK
-KysrIGIvZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jCkBAIC0zNDQsMTEgKzM0NCwxMSBAQCBz
-dGF0aWMgaW50IGNyZWF0ZV9hY3RpdmUoc3RydWN0IHNvY2tfbWFwcGluZyAqbWFwLCBpbnQgKmV2
-dGNobikKIAlpbml0X3dhaXRxdWV1ZV9oZWFkKCZtYXAtPmFjdGl2ZS5pbmZsaWdodF9jb25uX3Jl
-cSk7CiAKIAltYXAtPmFjdGl2ZS5yaW5nID0gKHN0cnVjdCBwdmNhbGxzX2RhdGFfaW50ZiAqKQot
-CQlfX2dldF9mcmVlX3BhZ2UoR0ZQX0tFUk5FTCB8IF9fR0ZQX1pFUk8pOworCQlfX2dldF9mcmVl
-X3BhZ2UoR0ZQX0FUT01JQyB8IF9fR0ZQX1pFUk8pOwogCWlmIChtYXAtPmFjdGl2ZS5yaW5nID09
-IE5VTEwpCiAJCWdvdG8gb3V0X2Vycm9yOwogCW1hcC0+YWN0aXZlLnJpbmctPnJpbmdfb3JkZXIg
-PSBQVkNBTExTX1JJTkdfT1JERVI7Ci0JYnl0ZXMgPSAodm9pZCAqKV9fZ2V0X2ZyZWVfcGFnZXMo
-R0ZQX0tFUk5FTCB8IF9fR0ZQX1pFUk8sCisJYnl0ZXMgPSAodm9pZCAqKV9fZ2V0X2ZyZWVfcGFn
-ZXMoR0ZQX0FUT01JQyB8IF9fR0ZQX1pFUk8sCiAJCQkJCVBWQ0FMTFNfUklOR19PUkRFUik7CiAJ
-aWYgKGJ5dGVzID09IE5VTEwpCiAJCWdvdG8gb3V0X2Vycm9yOwotLSAKMi4xOS4xCgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+R2VvcmdlIER1bmxhcCB3cml0ZXMgKCJSZTogW1BBVENIIDMvOV0gbGlieGw6IEdldCByaWQgb2Yg
+c3VwcG9ydCBmb3IgUUVNVV9VU0VSX0JBU0UgKHhlbi1xZW11dXNlci1kb21pZE5OKSIpOgo+IEni
+gJlkIHBlcnNvbmFsbHkganVzdCBhcyBzb29uIGxlYXZlIGl0IG91dCAoYW5kIGFkZCBpdCBiYWNr
+IGluIGlmIHNvbWVvbmUgYXNrcyBmb3IgaXQpLCBidXQgaWYgeW91IHRoaW5rIGl0IGhhcyB2YWx1
+ZSBJIGNhbiBsZWF2ZSBpdCBpbiBhbmQgZG8gdGhlIHdvcmsgb2YgdGhpbmtpbmcgYWJvdXQgdGhl
+IGxvZ2ljLgoKT0ssIGZpbmUsIEknbSBzb2xkLgoKQWNrZWQtYnk6IElhbiBKYWNrc29uIDxpYW4u
+amFja3NvbkBldS5jaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
