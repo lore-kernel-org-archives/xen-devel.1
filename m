@@ -1,20 +1,17 @@
-From: Tim Deegan <tim@xen.org>
-Subject: Re: [PATCH] x86/shadow: don't enable shadow mode with
- too small a shadow allocation
-Date: Fri, 30 Nov 2018 10:27:50 +0000
-Message-ID: <20181130102750.GB96875@deinos.phlegethon.org>
-References: <5BFFFD58020000780020141D@prv1-mh.provo.novell.com>
+From: Paul Durrant <paul.durrant@citrix.com>
+Subject: [PATCH 0/2] iommu improvements
+Date: Fri, 30 Nov 2018 10:45:16 +0000
+Message-ID: <20181130104518.39981-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=gtv1=oj=xen.org=tim@srs-us1.protection.inumbo.net>)
- id 1gSg1b-0008QN-Ki
- for xen-devel@lists.xenproject.org; Fri, 30 Nov 2018 10:27:55 +0000
-Content-Disposition: inline
-In-Reply-To: <5BFFFD58020000780020141D@prv1-mh.provo.novell.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=yj6f=OJ=citrix.com=prvs=865b20271=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1gSgJf-0001Sl-DZ
+ for xen-devel@lists.xenproject.org; Fri, 30 Nov 2018 10:46:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,19 +20,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QXQgMDc6NTMgLTA3MDAgb24gMjkgTm92ICgxNTQzNDc3OTkyKSwgSmFuIEJldWxpY2ggd3JvdGU6
-Cj4gV2UndmUgaGFkIG1vcmUgdGhhbiBvbmUgcmVwb3J0IG9mIGhvc3QgY3Jhc2hlcyBhZnRlciBm
-YWlsZWQgbWlncmF0aW9uLAo+IGFuZCBpbiBhdCBsZWFzdCBvbmUgY2FzZSB3ZSd2ZSBoYWQgYSBo
-aW50IHRvd2FyZHMgYSB0b28gZmFyIHNocnVuawo+IHNoYWRvdyBhbGxvY2F0aW9uIHBvb2wuIElu
-c3RlYWQgb2YganVzdCBjaGVja2luZyB0aGUgcG9vbCBmb3IgYmVpbmcKPiBlbXB0eSwgY2hlY2sg
-d2hldGhlciB0aGUgcG9vbCBpcyBzbWFsbGVyIHRoYW4gd2hhdAo+IHNoYWRvd19zZXRfYWxsb2Nh
-dGlvbigpIHdvdWxkIG1pbmltYWxseSBidW1wIGl0IHRvIGlmIGl0IHdhcyBpbnZva2VkIGluCj4g
-dGhlIGZpcnN0IHBsYWNlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
-aEBzdXNlLmNvbT4KCkFja2VkLWJ5OiBUaW0gRGVlZ2FuIDx0aW1AeGVuLm9yZz4KClRoYW5rcywK
-ClRpbS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+UGF1bCBEdXJyYW50ICgyKToKICBhbWQtaW9tbXU6IGFkZCBmbHVzaCBpb21tdV9vcHMKICBpb21t
+dTogZWxpZGUgZmx1c2hpbmcgZm9yIGhpZ2hlciBvcmRlciBtYXAvdW5tYXAgb3BlcmF0aW9ucwoK
+IHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9tYXAuYyAgICAgICB8IDExNCArKysr
+KysrKysrKysrKysrKysrKy0tLS0tLQogeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL3BjaV9h
+bWRfaW9tbXUuYyAgIHwgICAyICsKIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FybS9zbW11LmMg
+ICAgICAgICAgICB8ICAxMyArKy0KIHhlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2lvbW11LmMgICAg
+ICAgICAgICAgICB8ICAzMSArKysrKystCiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9t
+bXUuYyAgICAgICAgICAgfCAgMjYgKysrLS0tCiB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC94ODYv
+aW9tbXUuYyAgICAgICAgICAgfCAgMTUgKysrLQogeGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3Zt
+L2FtZC1pb21tdS1wcm90by5oIHwgICA3ICstCiB4ZW4vaW5jbHVkZS94ZW4vaW9tbXUuaCAgICAg
+ICAgICAgICAgICAgICAgICAgfCAgMTggKysrLQogOCBmaWxlcyBjaGFuZ2VkLCAxNzUgaW5zZXJ0
+aW9ucygrKSwgNTEgZGVsZXRpb25zKC0pCgotLSAKMi4xMS4wCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
