@@ -1,10 +1,10 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 02/25] argo: Introduce the Kconfig option to
- govern inclusion of Argo
-Date: Mon, 03 Dec 2018 08:51:01 -0700
-Message-ID: <5C0550E5020000780020251A@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 04/25] argo: define argo_dprintk for
+ subsystem debugging
+Date: Mon, 03 Dec 2018 08:59:39 -0700
+Message-ID: <5C0552EB0200007800202533@prv1-mh.provo.novell.com>
 References: <1543627984-21394-1-git-send-email-christopher.w.clark@gmail.com>
- <1543627984-21394-3-git-send-email-christopher.w.clark@gmail.com>
+ <1543627984-21394-5-git-send-email-christopher.w.clark@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <srs0=czp0=om=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gTqV0-0001Yi-W5
- for xen-devel@lists.xenproject.org; Mon, 03 Dec 2018 15:51:07 +0000
-In-Reply-To: <1543627984-21394-3-git-send-email-christopher.w.clark@gmail.com>
+ id 1gTqdO-0001oC-LX
+ for xen-devel@lists.xenproject.org; Mon, 03 Dec 2018 15:59:46 +0000
+In-Reply-To: <1543627984-21394-5-git-send-email-christopher.w.clark@gmail.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,15 +29,24 @@ Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei L
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDAxLjEyLjE4IGF0IDAyOjMyLCA8Y2hyaXN0b3BoZXIudy5jbGFya0BnbWFpbC5jb20+
-IHdyb3RlOgo+IC0tLSBhL3hlbi9jb21tb24vS2NvbmZpZwo+ICsrKyBiL3hlbi9jb21tb24vS2Nv
-bmZpZwo+IEBAIC0yMDAsNiArMjAwLDI2IEBAIGNvbmZpZyBMQVRFX0hXRE9NCj4gIAo+ICAJICBJ
-ZiB1bnN1cmUsIHNheSBOLgo+ICAKPiArY29uZmlnIEFSR08KPiArICAgIGJvb2wgIkFyZ286IGh5
-cGVydmlzb3ItbWVkaWF0ZWQgaW50ZXJkb21haW4gY29tbXVuaWNhdGlvbiIKPiArICAgIGRlZmF1
-bHQgeQoKVW50aWwgb3VyIHBvbGljeSBjaGFuZ2VzIGFzIHRvIHdpZGVyIGNvbmZpZ3VyYWJpbGl0
-eSwgb3B0aW9ucyBub3QKZGVwZW5kaW5nIG9uIEVYUEVSVCBzaG91bGQgYmUgYWNjb21wYW5pZWQg
-YnkgYSByZWFzb24uIEkKYWxzbyBkb24ndCB0aGluayB0aGF0IHdlIHdhbnQgdGhpcyB0byBkZWZh
-dWx0IHRvIGVuYWJsZWQgZnJvbQp0aGUgdmVyeSBiZWdpbm5pbmcuIEZpbmFsbHkgcGxlYXNlIGNv
-cnJlY3QgaW5kZW50YXRpb24uCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+IHdyb3RlOgo+IEEgY29udmVuaWVuY2UgZm9yIHdvcmtpbmcgb24gZGV2ZWxvcG1lbnQgb2YgdGhl
+IGFyZ28gc3Vic3lzdGVtOgo+IHRvZ2dsaW5nIGEgbG9jYWwgI2RlZmluZSB2YXJpYWJsZSB0dXJu
+cyBvbiBqdXN0IHRoZSBkZWJ1ZyBtZXNzYWdlcwo+IGluIHRoaXMgc3Vic3lzdGVtLgoKSSdtIGFm
+cmFpZCBJIGRvbid0IHNlZSB0aGUgI2RlZmluZSB2YXJpYWJsZSB0byB0b2dnbGUuIEkgYXNzdW1l
+IGl0J3MKQVJHT19ERUJVRywgYnV0IHRoZXJlJ3Mgbm8gI2RlZmluZSBsaW5lIGZvciBpdCBhbnl3
+aGVyZSBoZXJlLgoKPiAgIHByaW50aygiYXJnbzogIiBmb3JtYXQsICMjIGFyZ3MgKQoKV2FzIHRo
+aXMgbGluZSBtaXNwbGFjZWQgaGVyZT8gSXQgZG9lc24ndCBsb29rIHJlbGF0ZWQgdG8gdGhlIHJl
+c3Qgb2YgdGhlCmRlc2NyaXB0aW9uLgoKPiAtLS0gYS94ZW4vY29tbW9uL2FyZ28uYwo+ICsrKyBi
+L3hlbi9jb21tb24vYXJnby5jCj4gQEAgLTE5LDYgKzE5LDE5IEBACj4gICNpbmNsdWRlIDx4ZW4v
+ZXJybm8uaD4KPiAgI2luY2x1ZGUgPHhlbi9ndWVzdF9hY2Nlc3MuaD4KPiAgCj4gKy8qCj4gKyAq
+IERlYnVncwo+ICsgKi8KPiArCj4gKyNpZmRlZiBBUkdPX0RFQlVHCj4gKyNkZWZpbmUgYXJnb19k
+cHJpbnRrKGZvcm1hdCwgYXJncy4uLikgICAgICAgICAgICBcCj4gKyAgICBkbyB7ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcCj4gKyAgICAgICAgcHJpbnRrKCJhcmdv
+OiAiIGZvcm1hdCwgIyMgYXJncyApOyAgICAgICBcCj4gKyAgICB9IHdoaWxlICggMSA9PSAwICkK
+CldoYXQgd3Jvbmcgd2l0aAoKI2RlZmluZSBhcmdvX2RwcmludGsoZm9ybWF0LCBhcmdzLi4uKSBw
+cmludGsoImFyZ286ICIgZm9ybWF0LCAjIyBhcmdzICkKCj8KCj4gKyNlbHNlCj4gKyNkZWZpbmUg
+YXJnb19kcHJpbnRrKGZvcm1hdCwgLi4uICkgKHZvaWQpMAoKUGxlYXNlIGZ1bGx5IHBhcmVudGhl
+c2l6ZSBtYWNybyBleHBhbnNpb25zLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
