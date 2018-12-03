@@ -1,22 +1,16 @@
-From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH 2/2] xen-pciback: Allow enabling/disabling
- expansion ROM
-Date: Mon, 3 Dec 2018 15:47:38 +0100
-Message-ID: <20181203144738.GQ781__42612.8991567113$1543848391$gmane$org@mail-itl>
-References: <cover.55c0e31b75e2fbdf4206cc39c2fd7581793ae7ae.1543772656.git-series.marmarek@invisiblethingslab.com>
- <cover.55c0e31b75e2fbdf4206cc39c2fd7581793ae7ae.1543772656.git-series.marmarek@invisiblethingslab.com>
- <a05e3cf451d692dc4b1c81c8b5d66fc75d1fa325.1543772656.git-series.marmarek@invisiblethingslab.com>
- <5C050CF3020000780020223F@prv1-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 130897: regressions - FAIL
+Date: Mon, 03 Dec 2018 14:56:14 +0000
+Message-ID: <osstest-130897-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2616467087599527543=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=xo7p=OM=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gTpVg-0003tm-ID
- for xen-devel@lists.xenproject.org; Mon, 03 Dec 2018 14:47:44 +0000
-In-Reply-To: <5C050CF3020000780020223F@prv1-mh.provo.novell.com>
+ <srs0=/2fw=om=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gTpdw-0004hJ-K1
+ for xen-devel@lists.xenproject.org; Mon, 03 Dec 2018 14:56:16 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,84 +19,84 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Dwayne Litzenberger <dlitz@dlitz.net>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2616467087599527543==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="YPYi+6JBnn8IjLOH"
-Content-Disposition: inline
-
-
---YPYi+6JBnn8IjLOH
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Dec 03, 2018 at 04:01:07AM -0700, Jan Beulich wrote:
-> >>> On 02.12.18 at 18:47, <marmarek@invisiblethingslab.com> wrote:
-> > From: Dwayne Litzenberger <dlitz@dlitz.net>
-> >=20
-> > Newer AMD GPUs store their initialization routines as bytecode on the
-> > ROM.  This fixes the following initialization error inside the VM when
-> > doing PCI passthrough:
-> >=20
-> >     radeon 0000:00:05.0: Invalid PCI ROM header signature: expecting 0x=
-aa55, got 0xffff
-> >     radeon 0000:00:05.0: Invalid PCI ROM header signature: expecting 0x=
-aa55, got 0xffff
-> >     [drm:radeon_get_bios [radeon]] *ERROR* Unable to locate a BIOS ROM
-> >     radeon 0000:00:05.0: Fatal error during GPU init
->=20
-> Isn't it that qemu is supposed to surface the ROM image to guests,
-> making it unnecessary to allow guests control over the physical
-> enable bit?=20
-
-Unless that qemu is in stubdomain, where it use pciback to access
-everything about the device...
-
-> Also why would allowing to alter the bit depend on
-> whether the address portion of the value is non-zero?
-
-That's a good question. According to commit message I think it should be
-a ROM presence check instead. If needed at this point at all - is this
-function even called if there is no ROM?
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---YPYi+6JBnn8IjLOH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlwFQgoACgkQ24/THMrX
-1yzHOwgAlmyX8AwWoWYIW87CGtuTbVpBXQmaYjhCULHvRQaHsxW2b2xeviyuAScY
-cC3TKViZwgtFEHkH/mODR96Dn0KDxabDMxIym/FAXu179KS5lPpFZQhNo1oDNaL6
-072FLHQ1xOXxqHVUp4AQOc9gBnXmFGXBG+WXqOyCT0/PiJDeymucnsQuu1jdVRgb
-5pU2gsB8bYbyy6ZXfpbLLm/mQR8i6k8SR0TBmNHK5H43SR4eUDDPZQqOCwyWTBUn
-hMfSw2zUyNJllugBbclxxXEFZM+Vq8ZAiriqND/xLWl4wrlpqT654E2aymSD6qTU
-djuJIkiQ15nhaZe7UecjCpyRyegojA==
-=IdtU
------END PGP SIGNATURE-----
-
---YPYi+6JBnn8IjLOH--
-
-
---===============2616467087599527543==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2616467087599527543==--
+ZmxpZ2h0IDEzMDg5NyBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzA4OTcvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
+Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAgIDYgeGVu
+LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtaTM4NiAg
+ICAgICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
+cy4gMTI5NDc1CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
+ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAg
+ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
+VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAx
+IGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiBidWlsZC1hbWQ2NC1saWJ2
+aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9h
+CiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
+ICAgICAgICAgICAgICAgYmNmMmE5ZGIxZjhlZjQ0NWQzMjUzNjBjM2NhMzQ0ZTk5YTI2ZWU0Mwpi
+YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
+NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
+LTExLTA1IDIxOjEzOjExIFogICAyNyBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
+MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgMjYgZGF5cyAgMTQ0IGF0dGVtcHRzClRlc3Rpbmcgc2Ft
+ZSBzaW5jZSAgIDEzMDg5NyAgMjAxOC0xMi0wMSAxNjoyODozOCBaICAgIDEgZGF5cyAgICAxIGF0
+dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFj
+aGluIEd1cHRhIDxhY2hpbi5ndXB0YUBhcm0uY29tPgogIEFyZCBCaWVzaGV1dmVsIDxhcmQuYmll
+c2hldXZlbEBsaW5hcm8ub3JnPgogIEJvYkNGIDxib2IuYy5mZW5nQGludGVsLmNvbT4KICBDaGFz
+ZWwgQ2hpdSA8Y2hhc2VsLmNoaXVAaW50ZWwuY29tPgogIENoYXNlbCwgQ2hpdSA8Y2hhc2VsLmNo
+aXVAaW50ZWwuY29tPgogIERhbmRhbiBCaSA8ZGFuZGFuLmJpQGludGVsLmNvbT4KICBEYXZpZCBX
+ZWkgPGRhdmlkLndlaUBpbnRlbC5jb20+CiAgRXJpYyBEb25nIDxlcmljLmRvbmdAaW50ZWwuY29t
+PgogIEZlbmcsIEJvYiBDIDxib2IuYy5mZW5nQGludGVsLmNvbT4KICBGdSBTaXl1YW4gPHNpeXVh
+bi5mdUBpbnRlbC5jb20+CiAgR2FyeSBMaW4gPGdsaW5Ac3VzZS5jb20+CiAgSGFvIFd1IDxoYW8u
+YS53dUBpbnRlbC5jb20+CiAgSmVmZiBCcmFzZW4gPGpicmFzZW5AbnZpZGlhLmNvbT4KICBKaWFu
+IEogV2FuZyA8amlhbi5qLndhbmdAaW50ZWwuY29tPgogIEppYXhpbiBXdSA8SmlheGluLnd1QGlu
+dGVsLmNvbT4KICBKaWV3ZW4gWWFvIDxqaWV3ZW4ueWFvQGludGVsLmNvbT4KICBMYXN6bG8gRXJz
+ZWsgPGxlcnNla0ByZWRoYXQuY29tPgogIExlaWYgTGluZGhvbG0gPGxlaWYubGluZGhvbG1AbGlu
+YXJvLm9yZz4KICBMaW1pbmcgR2FvIDxsaW1pbmcuZ2FvQGludGVsLmNvbT4KICBMaXUgWXUgPHBl
+ZHJvYS5saXVAb3V0bG9vay5jb20+CiAgTWFyYyBaeW5naWVyIDxtYXJjLnp5bmdpZXJAYXJtLmNv
+bT4KICBNYXJjaW4gV29qdGFzIDxtd0BzZW1paGFsZi5jb20+CiAgTWluZyBIdWFuZyA8bWluZy5o
+dWFuZ0BsaW5hcm8ub3JnPgogIFBlZHJvYSBMaXUgPHBlZHJvYS5saXVAb3V0bG9vay5jb20+CiAg
+UnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVsLmNvbT4KICBzaGVuZ2xlaSA8c2hlbmdsZWkuemhhbmdA
+aW50ZWwuY29tPgogIFNoZW5nbGVpIFpoYW5nIDxzaGVuZ2xlaS56aGFuZ0BpbnRlbC5jb20+CiAg
+U3RhciBaZW5nIDxzdGFyLnplbmdAaW50ZWwuY29tPgogIFN1Z2hvc2ggR2FudSA8c3VnaG9zaC5n
+YW51QGFybS5jb20+CiAgU3VuLCBaYWlsaWFuZyA8L289SW50ZWwvb3U9RXhjaGFuZ2UgQWRtaW5p
+c3RyYXRpdmUgR3JvdXAgKEZZRElCT0hGMjNTUERMVCkvY249UmVjaXBpZW50cy9jbj1TdW4sIFph
+aWxpYW5nZjVkPgogIFRob21hcyBBYnJhaGFtIDx0aG9tYXMuYWJyYWhhbUBhcm0uY29tPgogIFRv
+bWFzeiBNaWNoYWxlYyA8dG1Ac2VtaWhhbGYuY29tPgogIFZpamF5ZW50aGlyYW4gU3VicmFtYW5p
+YW0gPHZpamF5ZW50aGlyYW4uc3VicmFtYW5pYW1AYXJtLmNvbT4KICBXYW5nIEJpblggQSA8Ymlu
+eC5hLndhbmdAaW50ZWwuY29tPgogIFd1IEppYXhpbiA8amlheGluLnd1QGludGVsLmNvbT4KICB5
+dWNoZW5saW4gPHl1Y2hlbmxpbkBzeW5vbG9neS5jb20+CiAgWmFpbGlhbmcgU3VuIDx6YWlsaWFu
+Zy5zdW5AaW50ZWwuY29tPgogIFpoYW5nLCBDaGFvIEIgPGNoYW8uYi56aGFuZ0BpbnRlbC5jb20+
+CiAgendlaTQgPGRhdmlkLndlaUBpbnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWls
+ZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ZmFpbCAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1aWxk
+LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBi
+bG9ja2VkIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
+cWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1h
+bWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGJs
+b2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9q
+ZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoK
+TG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dz
+LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhl
+c2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94
+ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFp
+bDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3Qu
+Z2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBm
+b3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDth
+PXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxkIGJlIDIz
+NDggbGluZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
