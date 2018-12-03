@@ -1,14 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: Xen support on ARM64
-Date: Mon, 3 Dec 2018 13:57:10 +0000
-Message-ID: <d2dd6717-de9d-1fbf-08db-f013cca5207c@arm.com>
-References: <CAKPiPDrgwFCM4ic=O1uUaHgN-WoYMwuOtxtgLSWzhy3d2MYr2A@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2] xen/pt: Fix a xen passthrough failure
+Date: Mon, 3 Dec 2018 14:12:58 +0000
+Message-ID: <f056b5d1-02c2-2ee7-3e37-bc5e4869f0cb@citrix.com>
+References: <20181203050438.6034-1-yan.y.zhao@intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <CAKPiPDrgwFCM4ic=O1uUaHgN-WoYMwuOtxtgLSWzhy3d2MYr2A@mail.gmail.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=rGkI=OM=citrix.com=prvs=868a16509=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gTp0k-0001LP-1a
+ for xen-devel@lists.xenproject.org; Mon, 03 Dec 2018 14:15:46 +0000
+In-Reply-To: <20181203050438.6034-1-yan.y.zhao@intel.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,20 +23,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Omkar Bolla <omkar062@gmail.com>, xen-devel@lists.xen.org
+To: Zhao Yan <yan.y.zhao@intel.com>, anthony.perard@citrix.com, sstabellini@kernel.org, roger.pau@citrix.com, JBeulich@suse.com, qemu-devel@nongnu.org
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyOS8xMS8yMDE4IDA3OjM5LCBPbWthciBCb2xsYSB3cm90ZToKPiBIaSwKCkhlbGxvLAoK
-PiBJIGp1c3Qgd2FudGVkIHRvIHJ1biB4ZW4gaHlwZXJ2aXNvciBvbiBBUk12OCBhcmNoaXRlY3R1
-cmUsIEkgdHJpZWQgb24gSGlrZXk5NjAgCj4gcGxhdGZvcm0gd2hpY2ggaGFzIGFybXY4LCBidXQg
-bGF0ZXN0IHhlbiBnaXZpbmcgY3B1IGVycm9ycy4KPiAKPiBDb3VsZCB5b3UgcGxlYXNlIHRlbGwg
-bWUsIG9uIHdoaWNoIHBsYXRmb3JtcyBsYXRlc3QgeGVuIGlzIHdvcmtpbmc/CgpJZiB5b3VyIHBs
-YXRmb3JtIHN1cHBvcnRzIHZpcnR1YWxpemF0aW9uLiBUaGVuIHRoZXJlIGFyZSBhIGdvb2QgY2hh
-bmNlIGZvciBYZW4gCnRvIGJvb3Qgb24gaXQgb3V0LW9mLWJveC4gU28gd2hhdCBwbGF0Zm9ybSBh
-cmUgeW91IGxvb2tpbmcgYXQ/CgpSZWdhcmRpbmcgdGhlIGhpa2V5OTYwLCB0aGVyZSBhcmUgcGF0
-Y2hlcyBvbiB0aGUgTUwgdG8gZml4IGJvb3QuIFNlZSBbMV0uCgpDaGVlcnMsCgpbMV0gaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTExL21z
-ZzAzMzYwLmh0bWwKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDMvMTIvMjAxOCAwNTowNCwgWmhhbyBZYW4gd3JvdGU6Cj4gRm9yIHNvbWUgcGNpIGRldmlj
+ZSwgZXZlbiBpdHMgUENJX0lOVEVSUlVQVF9QSU4gaXMgbm90IDAsIGl0IGFjdHVhbGx5Cj4gZG9l
+c24ndCBzdXBwb3J0IElOVHggbW9kZSwgc28gaXRzIG1hY2hpbmUgaXJxIHJlYWQgZnJvbSBob3N0
+IHN5c2ZzIGlzIDAuCj4gSW4gdGhhdCBjYXNlLCByZXBvcnQgUENJX0lOVEVSUlVQVF9QSU4gYXMg
+MCB0byBndWVzdCBhbmQgbGV0IHBhc3N0aHJvdWdoCj4gY29udGludWUuCgpXaGF0IGNhdXNlcyB0
+aGlzIHByb2JsZW0/wqAgSXQgaXQgYSBub24tUENJIGNvbXBsaWFudCBkZXZpY2U/wqAgSXMgaXQg
+YQpkZXZpY2Ugd2hpY2ggaGFzIGxlZ2FjeSBsaW5lcyBwcm9oaWJpdGVkPwoKfkFuZHJldwoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
