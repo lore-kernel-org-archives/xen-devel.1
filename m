@@ -1,19 +1,17 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: Xen and Inter-VM-Communications
-Date: Mon, 3 Dec 2018 11:12:16 +0000
-Message-ID: <20181203111216.g47bta6hselipxuv@zion.uk.xensource.com>
-References: <ab737a9c-b8be-f194-b5ce-976a4d6e2eba@roadtech.co.uk>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/2] x86/hvm: Corrections to RDTSCP
+ intercept handling
+Date: Mon, 3 Dec 2018 11:13:40 +0000
+Message-ID: <cd7fe068-e127-6ac2-bd23-2b0dba47ec36@citrix.com>
+References: <1543597640-28870-1-git-send-email-andrew.cooper3@citrix.com>
+ <1543597640-28870-3-git-send-email-andrew.cooper3@citrix.com>
+ <2b5424fdc1be4a73b4ede017f4a9f34f@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=xmbd=om=citrix.com=prvs=868792d82=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gTm9E-0000fX-1p
- for xen-devel@lists.xenproject.org; Mon, 03 Dec 2018 11:12:20 +0000
-Content-Disposition: inline
-In-Reply-To: <ab737a9c-b8be-f194-b5ce-976a4d6e2eba@roadtech.co.uk>
+In-Reply-To: <2b5424fdc1be4a73b4ede017f4a9f34f@AMSPEX02CL03.citrite.net>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,17 +20,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ben Clewett <ben.clewett@roadtech.co.uk>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Paul Durrant <Paul.Durrant@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Jun Nakajima <jun.nakajima@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBOb3YgMjMsIDIwMTggYXQgMTE6NTc6MTBBTSArMDAwMCwgQmVuIENsZXdldHQgd3Jv
-dGU6Cj4gSGkgR3V5cywKPiAKPiBJIGFtIGludGVyZXN0ZWQgaW4gdXNpbmcgSW50ZXItVk0tQ29t
-bXVuaWNhdGlvbnMgKElWTUMpIHRvIGVuaGFuY2UgcGVyZm9ybWFuY2UKPiBiZXR3ZWVuIFRDUCBz
-ZXJ2ZXIvYXBwbGljYXRpb25zIHJ1bm5pbmcgb24gdGhlIHNhbWUgSHlwZXJ2aXNvci4KCklmIGl0
-IGlzIHNvY2tldCBBUEkgdGhhdCB5b3Ugd2FudCwgbWF5YmUgcHZjYWxscyBmaXRzIHlvdXIgbmVl
-ZD8KCmh0dHBzOi8vYmxvZy54ZW5wcm9qZWN0Lm9yZy8yMDE2LzA4LzMwL3B2LWNhbGxzLWEtbmV3
-LXBhcmF2aXJ0dWFsaXplZC1wcm90b2NvbC1mb3ItcG9zaXgtc3lzY2FsbHMvCgpXZWkuCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDMvMTIvMjAxOCAwOToxNywgUGF1bCBEdXJyYW50IHdyb3RlOgo+PiBkaWZmIC0tZ2l0IGEv
+eGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwo+
+PiBpbmRleCAzNjVlZWIyLi5hOWY5YjliIDEwMDY0NAo+PiAtLS0gYS94ZW4vYXJjaC94ODYvaHZt
+L3ZteC92bXguYwo+PiArKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwo+PiBAQCAtMzU4
+OSw2ICszNTg5LDcgQEAgdm9pZCB2bXhfdm1leGl0X2hhbmRsZXIoc3RydWN0IGNwdV91c2VyX3Jl
+Z3MgKnJlZ3MpCj4+ICAgICAgdW5zaWduZWQgbG9uZyBleGl0X3F1YWxpZmljYXRpb24sIGV4aXRf
+cmVhc29uLCBpZHR2X2luZm8sIGludHJfaW5mbyA9Cj4+IDA7Cj4+ICAgICAgdW5zaWduZWQgaW50
+IHZlY3RvciA9IDAsIG1vZGU7Cj4+ICAgICAgc3RydWN0IHZjcHUgKnYgPSBjdXJyZW50Owo+PiAr
+ICAgIHN0cnVjdCBkb21haW4gKmN1cnJkID0gdi0+ZG9tYWluOwo+IC4uLiBmb2xsb3dpbmcgdGhl
+IHVzdWFsIHJ1bGVzLCB5b3Ugc2hvdWxkIG5vdyBjb252ZXJ0IGFsbCB1c2VzIG9mIHYtPmRvbWFp
+biBpbiB0aGlzIGZ1bmN0aW9uIHRvIHVzZSBjdXJyZC4KCklmIHRoaXMgd2VyZSBuZXcgZGV2ZWxv
+cG1lbnQgd29yayB0aGVuIHBlcmhhcHMgKGFsdGhvdWdoIGl0IHdvdWxkIHRha2UgYQpzZXJpZXMg
+dG8gY2xlYW4gdm14X3ZtZXhpdF9oYW5kbGVyKCkgdXAgdG8gc3R5bGUpLgoKSW4gdGhpcyBjYXNl
+IGhvd2V2ZXIsIHRoZSBwYXRjaCBuZWVkcyBiYWNrcG9ydGluZyB0byBhbGwgdGhlIHN0YWJsZQp0
+cmVlcywgYXQgd2hpY2ggcG9pbnQgbWluaW11bSBwZXJ0dXJiYW5jZSBpcyB0aGUgbW9zdCBpbXBv
+cnRhbnQgYXNwZWN0LgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
