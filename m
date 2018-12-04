@@ -1,21 +1,21 @@
-From: Christopher Clark <christopher.w.clark@gmail.com>
-Subject: Re: HVM driver domains do not appear to be usable with
- stubdomains
-Date: Tue, 4 Dec 2018 11:03:32 -0800
-Message-ID: <CACMJ4GZbFV2X6Q36Uf-zYEbJD24B6wz7rDaEvMg+q_66a4Qt_A@mail.gmail.com>
-References: <874lbt2mdt.fsf@prgmr.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [RFC 09/16] xen/arm: p2m: Introduce a function to
+ resolve translation fault
+Date: Tue, 4 Dec 2018 11:13:39 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1812041113330.527@sstabellini-ThinkPad-X260>
+References: <20181008183352.16291-1-julien.grall@arm.com>
+ <20181008183352.16291-10-julien.grall@arm.com>
+ <alpine.DEB.2.10.1811021531060.18518@sstabellini-ThinkPad-X260>
+ <ecb491ab-313d-de21-bc97-6e578aa6df77@arm.com>
+ <alpine.DEB.2.10.1811050934140.18518@sstabellini-ThinkPad-X260>
+ <21a4b3d5-b054-f215-2839-2a9f8fbaa01a@arm.com>
+ <bada26b6-ca13-35eb-30aa-77356f114e4d@arm.com>
+ <alpine.DEB.2.10.1811121533510.8259@sstabellini-ThinkPad-X260>
+ <ab2327ac-166c-b067-7fad-dc0ab24465c3@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1116671542-1543950820=:527"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=3zo+=on=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
- id 1gUFz1-0001zK-SR
- for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 19:03:47 +0000
-Received: by mail-lf1-x132.google.com with SMTP id a16so12814814lfg.3
- for <xen-devel@lists.xenproject.org>; Tue, 04 Dec 2018 11:03:46 -0800 (PST)
-In-Reply-To: <874lbt2mdt.fsf@prgmr.com>
+In-Reply-To: <ab2327ac-166c-b067-7fad-dc0ab24465c3@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,36 +24,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: cmb@prgmr.com
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, andre.przywara@linaro.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBEZWMgNCwgMjAxOCBhdCAxMDoxMSBBTSBDaHJpcyBCcmFubm9uIDxjbWJAcHJnbXIu
-Y29tPiB3cm90ZToKPgo+IEhpLAo+IEkgc2V0IHVwIGEgbmV0d29yayBkcml2ZXIgZG9tYWluIGZv
-ciBhIGRvbTA7IGl0IHVzZXMgSFZNCj4gdmlydHVhbGl6YXRpb24uICBJdCB3b3JrZWQgdmVyeSB3
-ZWxsIHdoZW4gbm90IHVzaW5nIGEgZGV2aWNlIG1vZGVsCj4gc3R1YmRvbWFpbiwgYnV0IHdoZW4g
-SSByZXF1ZXN0ZWQgdGhlIHVzZSBvZiBhIGRldmljZSBtb2RlbCBzdHViZG9tYWluIGluCj4gbXkg
-eGwuY2ZnIGZpbGUsIHRoZSBkb21VIHJlZnVzZWQgdG8gYm9vdC4gIEl0IGdhdmUgdGhlIGZvbGxv
-d2luZyBlcnJvcgo+IG1lc3NhZ2UuCj4KPiBbNzY1OTQuMTk1NDA0XSB4ZW5fcGNpYmFjazogdnBj
-aTogMDAwMDowNTowMC4wOiBhc3NpZ24gdG8gdmlydHVhbCBzbG90IDAKPiBbNzY1OTQuMTk1OTI3
-XSBwY2liYWNrIDAwMDA6MDU6MDAuMDogcmVnaXN0ZXJpbmcgZm9yIDM1Cj4gWzc2NTk0LjIzMDU5
-Ml0geGVuLXBjaWJhY2sgcGNpLTM0LTA6IDIyIENvdWxkbid0IGxvY2F0ZSBQQ0kgZGV2aWNlCj4g
-ICAgICgwMDAwOjA1OjAwLjApISBwZXJoYXBzIGFscmVhZHkgaW4tdXNlPwo+Cj4gSXQgc2VlbXMg
-dG8gbWUgdGhhdCBYZW4gaXMgdHJ5aW5nIHRvIHBhc3MgdGhlIFBDSSBkZXZpY2UgdG8gYm90aCB0
-aGUKPiBkb21VIGFuZCB0aGUgc3R1YmRvbWFpbiwgYW5kIHRoYXQgaXMgd2h5IGl0IGlzIGZhaWxp
-bmcuICBIYXMgYW55b25lCj4gbWFuYWdlZCB0byBnZXQgYW4gSFZNIGRyaXZlciBkb21haW4gcnVu
-bmluZyB3aXRoIGEgc3R1YmRvbWFpbj8gIElmIHNvLAo+IGhvdyBkaWQgeW91IGRvIGl0PyAgT3Ig
-aXMgaXQgZXhwZWN0ZWQgdGhhdCBIVk0gZHJpdmVyIGRvbWFpbnMgd29uJ3Qgd29yawo+IHdpdGgg
-c3R1YmRvbWFpbnM/CgpPcGVuWFQgdXNlcyBhIEhWTSBkcml2ZXIgZG9tYWluIHdpdGggYSBzdHVi
-ZG9tYWluIGZvciB0aGUgbmV0d29yawpkZXZpY2UgZHJpdmVyLCB1c2luZyBMaW51eCBzdHViZG9t
-YWlucyB3aXRoIGNvZGUgdmVyeSBzaW1pbGFyIHRvIHRoYXQKTWFyZWsgaGFzIHBvc3RlZCBvbiB0
-aGlzIGxpc3QuCgpUaGVzZSBwdWxsIHJlcXVlc3RzIG1heSBiZSBhIGdvb2QgcGxhY2UgdG8gc3Rh
-cnQgbG9va2luZy4KaHR0cHM6Ly9naXRodWIuY29tL09wZW5YVC9vcGVueHQvcHVsbC8zMTEKYW5k
-Cmh0dHBzOi8vZ2l0aHViLmNvbS9PcGVuWFQveGVuY2xpZW50LW9lL3B1bGwvOTEyCndoaWNoIGlu
-Y2x1ZGVzIHRoaXMgcGF0Y2ggdG8gcWVtdSAob3JpZ2luYWxseSBmcm9tIFF1YmVzLCByZWZlcmVu
-Y2luZzoKaHR0cHM6Ly9naXRodWIuY29tL1F1YmVzT1MvcXViZXMtaXNzdWVzL2lzc3Vlcy8yODQ5
-KSAtOgpodHRwczovL2dpdGh1Yi5jb20vT3BlblhUL3hlbmNsaWVudC1vZS9wdWxsLzkxMi9maWxl
-cyNkaWZmLTE0Nzc0Y2JjMDEzYzA3YTFlNzQwOWIwZGIxY2MzMzU5CgpDaHJpc3RvcGhlcgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1116671542-1543950820=:527
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 4 Dec 2018, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 11/12/18 11:36 PM, Stefano Stabellini wrote:
+> > On Mon, 12 Nov 2018, Julien Grall wrote:
+> > > Hi Stefano,
+> > > 
+> > > On 11/6/18 2:20 PM, Julien Grall wrote:
+> > > > On 05/11/2018 17:56, Stefano Stabellini wrote:
+> > > > > On Mon, 5 Nov 2018, Julien Grall wrote:
+> > > > > > On 02/11/2018 23:27, Stefano Stabellini wrote:
+> > > > > > > On Mon, 8 Oct 2018, Julien Grall wrote:
+> > > > > > > 
+> > > > > > > > +    /*
+> > > > > > > > +     * Now that the work on the entry is done, set the valid
+> > > > > > > > bit to
+> > > > > > > > prevent
+> > > > > > > > +     * another fault on that entry.
+> > > > > > > > +     */
+> > > > > > > > +    resolved = true;
+> > > > > > > > +    entry.p2m.valid = 1;
+> > > > > > > > +
+> > > > > > > > +    p2m_write_pte(table + offsets[level], entry,
+> > > > > > > > p2m->clean_pte);
+> > > > > > > > +
+> > > > > > > > +    /*
+> > > > > > > > +     * No need to flush the TLBs as the modified entry had the
+> > > > > > > > valid bit
+> > > > > > > > +     * unset.
+> > > > > > > > +     */
+> > > > > > > > +
+> > > > > > > > +out_unmap:
+> > > > > > > > +    unmap_domain_page(table);
+> > > > > > > > +
+> > > > > > > > +out:
+> > > > > > > > +    p2m_write_unlock(p2m);
+> > > > > > > > +
+> > > > > > > > +    return resolved;
+> > > > > > > > +}
+> > > > > > > > +
+> > > > > > > >     static inline int p2m_insert_mapping(struct domain *d,
+> > > > > > > >                                          gfn_t start_gfn,
+> > > > > > > >                                          unsigned long nr,
+> > > > > 
+> > > > > 
+> > > > > We probably want to update the comment on top of the call to
+> > > > > p2m_resolve_translation_fault:
+> > > > 
+> > > > Whoops. I will fix it.
+> > > 
+> > > Looking at this again. I think the comment on top of the call to
+> > > p2m_resolve_translation_fault still makes sense. Feel free to suggest an
+> > > update of the comment if you think it is not enough.
+> > 
+> >          /*
+> >           * The PT walk may have failed because someone was playing with
+> >           * the Stage-2 page table or because the valid bit was left
+> >           * unset to track memory accesses. In these cases, we want to
+> >           * return to the guest.
+> >           */
+> 
+> Thank you for the suggestion. Thinking a bit more,  I would not be surprised
+> we decide to expand p2m_resolve_translation_fault in the future. So I decided
+> to go for a more generic comment to avoid stale comment:
+> 
+>        /*
+>     	* First check if the translation fault can be resolved by the
+> 	* P2M subsystem. If that's the case nothing else to do.
+
+OK
+--8323329-1116671542-1543950820=:527
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1116671542-1543950820=:527--
