@@ -1,13 +1,22 @@
-From: "Woods, Brian" <Brian.Woods@amd.com>
-Subject: [PATCH] AMD IOMMU: fix debug console IOMMU intremap
- output
-Date: Tue, 4 Dec 2018 21:47:21 +0000
-Message-ID: <20181204214717.59978-1-brian.woods@amd.com>
+From: Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH 01/23] dma-mapping: provide a generic
+ DMA_MAPPING_ERROR
+Date: Tue, 4 Dec 2018 23:33:55 +0100
+Message-ID: <20181204223355.GA12534__6590.58387759632$1543962799$gmane$org@lst.de>
+References: <20181130132231.16512-1-hch@lst.de>
+ <20181130132231.16512-2-hch@lst.de>
+ <653ca801-63a1-3c19-ee09-ade19fa2bbb8@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=72me=on=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1gUJGv-0003QG-2D
+ for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 22:34:29 +0000
+Content-Disposition: inline
+In-Reply-To: <653ca801-63a1-3c19-ee09-ade19fa2bbb8@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,49 +25,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Cc: Paul Durrant <paul.durrant@citrix.com>, "Woods,
- Brian" <Brian.Woods@amd.com>, "Suthikulpanit,
- Suravee" <Suravee.Suthikulpanit@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Robin Murphy <robin.murphy@arm.com>
+Cc: linux-arch@vger.kernel.org, linux-ia64@vger.kernel.org, linux-parisc@vger.kernel.org, David Woodhouse <dwmw2@infradead.org>, x86@kernel.org, linux-kernel@vger.kernel.org, iommu@lists.linux-foundation.org, linux-alpha@vger.kernel.org, xen-devel@lists.xenproject.org, Linus Torvalds <torvalds@linux-foundation.org>, Christoph Hellwig <hch@lst.de>, linux-arm-kernel@lists.infradead.org
 List-Id: xen-devel@lists.xenproject.org
 
-V2hlbiB1c2luZyB0aGUgWGVuIGRlYnVnIGNvbnNvbGUgYW5kIHByaW50aW5nIHRoZSBJT01NVSBp
-bnRyZW1hcCB0YWJsZXMsCml0IHByaW50cyBldmVyeXRoaW5nIGluIHRoZSBJVlJTIHJhbmdlIHJl
-Z2FyZGxlc3MgaWYgaXQgaGFzIGFuIGludHIKcmVtYXAgb3Igbm90LiAgQWRkIHNvbWUgbG9naWMg
-dG8gY2F1c2UgYW4gZW50cnkgdG8gb25seSBiZSBwcmludGVkIGlmCnRoZSBpbnRyIHJlbWFwIHRh
-YmxlIGlzbid0IGVtcHR5LgoKU2lnbmVkLW9mZi1ieTogQnJpYW4gV29vZHMgPGJyaWFuLndvb2Rz
-QGFtZC5jb20+Ci0tLQpDQzogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4K
-Q0M6IFJvZ2VyIFBhdSBNb25uZSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgogeGVuL2RyaXZlcnMv
-cGFzc3Rocm91Z2gvYW1kL2lvbW11X2ludHIuYyB8IDM0ICsrKysrKysrKysrKysrKysrKysrKysr
-KysrLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMo
-LSkKCmRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hbWQvaW9tbXVfaW50ci5j
-IGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL2lvbW11X2ludHIuYwppbmRleCBkYWQyZDFl
-NWFiLi5lODYzMDBiNTdmIDEwMDY0NAotLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hbWQv
-aW9tbXVfaW50ci5jCisrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2FtZC9pb21tdV9pbnRy
-LmMKQEAgLTY2NSw2ICs2NjUsMjQgQEAgaW50IF9faW5pdCBhbWRfc2V0dXBfaHBldF9tc2koc3Ry
-dWN0IG1zaV9kZXNjICptc2lfZGVzYykKICAgICByZXR1cm4gcmM7CiB9CiAKKworc3RhdGljIGJv
-b2wgaW50cmVtYXBfdGFibGVfZW1wdHkoY29uc3QgdTMyICp0YWJsZSkKK3sKKyAgICB1MzIgY291
-bnQ7CisKKyAgICBpZiAoICF0YWJsZSApCisgICAgICAgIHJldHVybiB0cnVlOworCisgICAgZm9y
-ICggY291bnQgPSAwOyBjb3VudCA8IElOVFJFTUFQX0VOVFJJRVM7IGNvdW50KysgKQorICAgIHsK
-KyAgICAgICAgaWYgKCB0YWJsZVtjb3VudF0gKQorICAgICAgICAgICAgcmV0dXJuIGZhbHNlOwor
-ICAgIH0KKyAgICByZXR1cm4gdHJ1ZTsKK30KKworCisKIHN0YXRpYyB2b2lkIGR1bXBfaW50cmVt
-YXBfdGFibGUoY29uc3QgdTMyICp0YWJsZSkKIHsKICAgICB1MzIgY291bnQ7CkBAIC02ODcsMTMg
-KzcwNSwxNyBAQCBzdGF0aWMgaW50IGR1bXBfaW50cmVtYXBfbWFwcGluZyh1MTYgc2VnLCBzdHJ1
-Y3QgaXZyc19tYXBwaW5ncyAqaXZyc19tYXBwaW5nKQogICAgIGlmICggIWl2cnNfbWFwcGluZyAp
-CiAgICAgICAgIHJldHVybiAwOwogCi0gICAgcHJpbnRrKCIgICUwNHg6JTAyeDolMDJ4OiV1Olxu
-Iiwgc2VnLAotICAgICAgICAgICBQQ0lfQlVTKGl2cnNfbWFwcGluZy0+ZHRlX3JlcXVlc3Rvcl9p
-ZCksCi0gICAgICAgICAgIFBDSV9TTE9UKGl2cnNfbWFwcGluZy0+ZHRlX3JlcXVlc3Rvcl9pZCks
-Ci0gICAgICAgICAgIFBDSV9GVU5DKGl2cnNfbWFwcGluZy0+ZHRlX3JlcXVlc3Rvcl9pZCkpOwot
-CiAgICAgc3Bpbl9sb2NrX2lycXNhdmUoJihpdnJzX21hcHBpbmctPmludHJlbWFwX2xvY2spLCBm
-bGFncyk7Ci0gICAgZHVtcF9pbnRyZW1hcF90YWJsZShpdnJzX21hcHBpbmctPmludHJlbWFwX3Rh
-YmxlKTsKKworICAgIGlmICggIWludHJlbWFwX3RhYmxlX2VtcHR5KGl2cnNfbWFwcGluZy0+aW50
-cmVtYXBfdGFibGUpICkgeworICAgICAgICBwcmludGsoIiAgJTA0eDolMDJ4OiUwMng6JXU6XG4i
-LCBzZWcsCisgICAgICAgICAgICAgICBQQ0lfQlVTKGl2cnNfbWFwcGluZy0+ZHRlX3JlcXVlc3Rv
-cl9pZCksCisgICAgICAgICAgICAgICBQQ0lfU0xPVChpdnJzX21hcHBpbmctPmR0ZV9yZXF1ZXN0
-b3JfaWQpLAorICAgICAgICAgICAgICAgUENJX0ZVTkMoaXZyc19tYXBwaW5nLT5kdGVfcmVxdWVz
-dG9yX2lkKSk7CisKKyAgICAgICAgZHVtcF9pbnRyZW1hcF90YWJsZShpdnJzX21hcHBpbmctPmlu
-dHJlbWFwX3RhYmxlKTsKKyAgICB9CisKICAgICBzcGluX3VubG9ja19pcnFyZXN0b3JlKCYoaXZy
-c19tYXBwaW5nLT5pbnRyZW1hcF9sb2NrKSwgZmxhZ3MpOwogCiAgICAgcmV0dXJuIDA7Ci0tIAoy
-LjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gVHVlLCBEZWMgMDQsIDIwMTggYXQgMDQ6NDE6MzRQTSArMDAwMCwgUm9iaW4gTXVycGh5IHdy
+b3RlOgo+IEknZCBoYXZlIGJlZW4gaW5jbGluZWQgdG8gcHV0IHRoZSBkZWZhdWx0IGNoZWNrIGhl
+cmUsIGkuZS4KPgo+IC0JcmV0dXJuIDAKPiArCXJldHVybiBkbWFfYWRkciA9PSBETUFfTUFQUElO
+R19FUlJPUgo+Cj4gc3VjaCB0aGF0IHRoZSBjYWxsYmFjayByZXRhaW5zIGZ1bGwgcHJlY2VkZW5j
+ZSBhbmQgd2UgZG9uJ3QgaGF2ZSB0byBkZWFsIAo+IHdpdGggdGhlIG5vbi10cml2aWFsIHJlbW92
+YWxzIGltbWVkaWF0ZWx5IGlmIGl0IGNvbWVzIHRvIGl0LiBOb3QgdGhhdCBpdCAKPiBtYWtlcyBh
+IHZhc3QgZGlmZmVyZW5jZSB0aG91Z2gsIHNvIGVpdGhlciB3YXksCgpPaywgSSd2ZSBzd2l0Y2hl
+ZCBpdCBhcm91bmQuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
