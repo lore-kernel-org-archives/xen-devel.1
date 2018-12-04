@@ -1,17 +1,16 @@
-From: "Woods, Brian" <Brian.Woods@amd.com>
-Subject: Re: [PATCH 5/9] x86/amd: Probe for legacy SSBD
- interfaces on boot
-Date: Tue, 4 Dec 2018 16:15:53 +0000
-Message-ID: <20181204161550.GB13738@amd.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 1/9] x86/spec-ctrl: Drop the bti= command
+ line option
+Date: Tue, 04 Dec 2018 09:19:38 -0700
+Message-ID: <5C06A91A0200007800202CD5@prv1-mh.provo.novell.com>
 References: <1543853902-6257-1-git-send-email-andrew.cooper3@citrix.com>
- <1543853902-6257-6-git-send-email-andrew.cooper3@citrix.com>
+ <1543853902-6257-2-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1543853902-6257-6-git-send-email-andrew.cooper3@citrix.com>
-Content-Language: en-US
-Content-ID: <092B2B18FCCDCD468A6623B59C5CF90A@namprd12.prod.outlook.com>
+In-Reply-To: <1543853902-6257-2-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,15 +20,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "Woods, Brian" <Brian.Woods@amd.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBEZWMgMDMsIDIwMTggYXQgMDQ6MTg6MThQTSArMDAwMCwgQW5keSBDb29wZXIgd3Jv
-dGU6Cj4gSW50cm9kdWNlIGEgbmV3IHN5bnRoZXRpYyBMRUdBQ1lfU1NCRCBmZWF0dXJlIGFuZCBz
-ZXQgaXQgaWYgd2UgZmluZAo+IFZJUlRfU1BFQ19DVFJMIG9mZmVyZWQgYnkgb3VyIGh5cGVydmlz
-b3IsIG9yIGlmIHdlIGZpbmQgYSB3b3JraW5nIGJpdCBpbiBhbgo+IExTX0NGRyByZWdpc3Rlci4K
-PiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgoKUmV2aWV3ZC1ieTogQnJpYW4gV29vZHMgPGJyaWFuLndvb2RzQGFtZC5jb20+CgotLSAK
-QnJpYW4gV29vZHMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDAzLjEyLjE4IGF0IDE3OjE4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gYnRpPSB3YXMgaW50cm9kdWNlZCB3aXRoIHRoZSBvcmlnaW5hbCBTcGVjdHJlIGZpeGVz
+IChKYW4gMjAxOCksIGJ1dCBieSB0aGUKPiB0aW1lIFNwZWN1bGF0aXZlIFN0b3JlIEJ5cGFzcyBj
+YW1lIGFsb25nIChNYXkgMjAxOCksIGl0IHdhcyBzdXBlcmNlZWRlZCBieSB0aGUKPiBtb3JlIGdl
+bmVyaWMgc3BlYy1jdHJsPS4KPiAKPiBTaW5jZSB0aGVuLCB3ZSd2ZSBoYWQgTGF6eUZQVSAoSnVu
+ZSAyMDE4KSBhbmQgTDFURiAoQXVndXN0IDIwMTgpLCB3aGljaCBtZWFucwo+IG5vb25lIHdpbGwg
+YmUgdXNpbmcgdGhlIG9wdGlvbi4gIFJlbW92ZSBpdCBlbnRpcmVseSAtIGFueW9uZSB3aG8gaGFw
+cGVucyB0bwo+IGFjY2lkZW50aWFsbHkgYmUgdXNpbmcgaXQgbWlnaHQgbm93IHNwb3QgWGVuIGNv
+bXBsYWluaW5nIGFib3V0IGFuIG9wdGlvbiBpdAo+IGRvZXNuJ3QgdW5kZXJzdGFuZC4KPiAKPiBT
+aWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoK
+QWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
