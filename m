@@ -1,18 +1,13 @@
-From: Wen Yang <wen.yang99@zte.com.cn>
-Subject: [PATCH v5] pvcalls-front: Avoid
- get_free_pages(GFP_KERNEL) under spinlock
-Date: Tue, 4 Dec 2018 15:15:57 +0800
-Message-ID: <1543907757-21647-1-git-send-email-wen.yang99__20787.3360639953$1543907596$gmane$org@zte.com.cn>
+From: Omkar Bolla <omkar062@gmail.com>
+Subject: Re: Xen support on ARM64
+Date: Tue, 4 Dec 2018 12:50:52 +0530
+Message-ID: <CAKPiPDqu9nbNk6gNQVw4ao29GKk_+m2WwCS=5bhaBi_Gmawaww@mail.gmail.com>
+References: <CAKPiPDrgwFCM4ic=O1uUaHgN-WoYMwuOtxtgLSWzhy3d2MYr2A@mail.gmail.com>
+ <d2dd6717-de9d-1fbf-08db-f013cca5207c@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8137123950361767286=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Kls0=ON=zte.com.cn=wen.yang99@srs-us1.protection.inumbo.net>)
- id 1gU4uU-00075D-9I
- for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 07:14:22 +0000
+In-Reply-To: <d2dd6717-de9d-1fbf-08db-f013cca5207c@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,113 +16,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: boris.ostrovsky@oracle.com
-Cc: jgross@suse.com, wang.yi59@zte.com.cn, sstabellini@kernel.org, zhong.weidong@zte.com.cn, linux-kernel@vger.kernel.org, Julia Lawall <julia.lawall@lip6.fr>, xen-devel@lists.xenproject.org, Wen Yang <wen.yang99@zte.com.cn>
+To: julien.grall@arm.com
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHByb2JsZW0gaXMgdGhhdCB3ZSBjYWxsIHRoaXMgd2l0aCBhIHNwaW4gbG9jayBoZWxkLgpU
-aGUgY2FsbCB0cmVlIGlzOgpwdmNhbGxzX2Zyb250X2FjY2VwdCgpIGhvbGRzIGJlZGF0YS0+c29j
-a2V0X2xvY2suCiAgICAtPiBjcmVhdGVfYWN0aXZlKCkKICAgICAgICAtPiBfX2dldF9mcmVlX3Bh
-Z2VzKCkgdXNlcyBHRlBfS0VSTkVMCgpUaGUgY3JlYXRlX2FjdGl2ZSgpIGZ1bmN0aW9uIGlzIG9u
-bHkgY2FsbGVkIGZyb20gcHZjYWxsc19mcm9udF9hY2NlcHQoKQp3aXRoIGEgc3Bpbl9sb2NrIGhl
-bGQsIFRoZSBhbGxvY2F0aW9uIGlzIG5vdCBhbGxvd2VkIHRvIHNsZWVwIGFuZApHRlBfS0VSTkVM
-IGlzIG5vdCBzdWZmaWNpZW50LgoKVGhpcyBpc3N1ZSB3YXMgZGV0ZWN0ZWQgYnkgdXNpbmcgdGhl
-IENvY2NpbmVsbGUgc29mdHdhcmUuCgp2MjogQWRkIGEgZnVuY3Rpb24gZG9pbmcgdGhlIGFsbG9j
-YXRpb25zIHdoaWNoIGlzIGNhbGxlZAogICAgb3V0c2lkZSB0aGUgbG9jayBhbmQgcGFzc2luZyB0
-aGUgYWxsb2NhdGVkIGRhdGEgdG8KICAgIGNyZWF0ZV9hY3RpdmUoKS4KCnYzOiBVc2UgdGhlIG1h
-dGNoaW5nIGRlYWxsb2NhdG9ycyBpLmUuLCBmcmVlX3BhZ2UoKQogICAgYW5kIGZyZWVfcGFnZXMo
-KSwgcmVzcGVjdGl2ZWx5LgoKdjQ6IEl0IHdvdWxkIGJlIGJldHRlciB0byBwcmUtcG9wdWxhdGUg
-bWFwIChzdHJ1Y3Qgc29ja19tYXBwaW5nKSwKICAgIHJhdGhlciB0aGFuIGludHJvZHVjaW5nIG9u
-ZSBtb3JlIG5ldyBzdHJ1Y3QuCgp2NTogU2luY2UgYWxsb2NhdGluZyB0aGUgZGF0YSBvdXRzaWRl
-IG9mIHRoaXMgY2FsbCBpdCBzaG91bGQgYWxzbwogICAgYmUgZnJlZWQgb3V0c2lkZSwgd2hlbiBj
-cmVhdGVfYWN0aXZlKCkgZmFpbHMuCiAgICBNb3ZlIGt6YWxsb2Moc2l6ZW9mKCptYXAyKSwgR0ZQ
-X0FUT01JQykgb3V0c2lkZSBzcGlubG9jayBhbmQKICAgIHVzZSBHRlBfS0VSTkVMIGluc3RlYWQu
-CgpTdWdnZXN0ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KU3VnZ2VzdGVk
-LWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgpTdWdnZXN0
-ZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KU2lnbmVk
-LW9mZi1ieTogV2VuIFlhbmcgPHdlbi55YW5nOTlAenRlLmNvbS5jbj4KQ0M6IEp1bGlhIExhd2Fs
-bCA8anVsaWEubGF3YWxsQGxpcDYuZnI+CkNDOiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJv
-dnNreUBvcmFjbGUuY29tPgpDQzogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgpDQzog
-U3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgpDQzogeGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCkNDOiBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3JnCi0t
-LQogZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jIHwgODMgKysrKysrKysrKysrKysrKysrKysr
-KysrKysrLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDYxIGluc2VydGlvbnMoKyksIDIyIGRl
-bGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYyBiL2Ry
-aXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYwppbmRleCA3NzIyNGQ4ZjNlNmYuLjVmZDc2NGE3Yjg3
-OSAxMDA2NDQKLS0tIGEvZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jCisrKyBiL2RyaXZlcnMv
-eGVuL3B2Y2FsbHMtZnJvbnQuYwpAQCAtMzM1LDYgKzMzNSw0MSBAQCBpbnQgcHZjYWxsc19mcm9u
-dF9zb2NrZXQoc3RydWN0IHNvY2tldCAqc29jaykKIAlyZXR1cm4gcmV0OwogfQogCitzdGF0aWMg
-dm9pZCBmcmVlX2FjdGl2ZV9yaW5nKHN0cnVjdCBzb2NrX21hcHBpbmcgKm1hcCkKK3sKKwlmcmVl
-X3BhZ2VzKCh1bnNpZ25lZCBsb25nKW1hcC0+YWN0aXZlLmRhdGEuaW4sCisJCQltYXAtPmFjdGl2
-ZS5yaW5nLT5yaW5nX29yZGVyKTsKKwlmcmVlX3BhZ2UoKHVuc2lnbmVkIGxvbmcpbWFwLT5hY3Rp
-dmUucmluZyk7Cit9CisKK3N0YXRpYyBpbnQgYWxsb2NfYWN0aXZlX3Jpbmcoc3RydWN0IHNvY2tf
-bWFwcGluZyAqbWFwKQoreworCXZvaWQgKmJ5dGVzOworCisJbWFwLT5hY3RpdmUucmluZyA9IE5V
-TEw7CisJbWFwLT5hY3RpdmUuZGF0YS5pbiA9IE5VTEw7CisJbWFwLT5hY3RpdmUucmluZyA9IChz
-dHJ1Y3QgcHZjYWxsc19kYXRhX2ludGYgKikKKwkJZ2V0X3plcm9lZF9wYWdlKEdGUF9LRVJORUwp
-OworCWlmICghbWFwLT5hY3RpdmUucmluZykKKwkJZ290byBvdXQ7CisKKwltYXAtPmFjdGl2ZS5y
-aW5nLT5yaW5nX29yZGVyID0gUFZDQUxMU19SSU5HX09SREVSOworCWJ5dGVzID0gKHZvaWQgKilf
-X2dldF9mcmVlX3BhZ2VzKEdGUF9LRVJORUwgfCBfX0dGUF9aRVJPLAorCQkJCQlQVkNBTExTX1JJ
-TkdfT1JERVIpOworCWlmICghYnl0ZXMpCisJCWdvdG8gb3V0OworCisJbWFwLT5hY3RpdmUuZGF0
-YS5pbiA9IGJ5dGVzOworCW1hcC0+YWN0aXZlLmRhdGEub3V0ID0gYnl0ZXMgKworCQlYRU5fRkxF
-WF9SSU5HX1NJWkUoUFZDQUxMU19SSU5HX09SREVSKTsKKworCXJldHVybiAwOworCitvdXQ6CisJ
-ZnJlZV9hY3RpdmVfcmluZyhtYXApOworCXJldHVybiAtRU5PTUVNOworfQorCiBzdGF0aWMgaW50
-IGNyZWF0ZV9hY3RpdmUoc3RydWN0IHNvY2tfbWFwcGluZyAqbWFwLCBpbnQgKmV2dGNobikKIHsK
-IAl2b2lkICpieXRlczsKQEAgLTM0MywxNSArMzc4LDcgQEAgc3RhdGljIGludCBjcmVhdGVfYWN0
-aXZlKHN0cnVjdCBzb2NrX21hcHBpbmcgKm1hcCwgaW50ICpldnRjaG4pCiAJKmV2dGNobiA9IC0x
-OwogCWluaXRfd2FpdHF1ZXVlX2hlYWQoJm1hcC0+YWN0aXZlLmluZmxpZ2h0X2Nvbm5fcmVxKTsK
-IAotCW1hcC0+YWN0aXZlLnJpbmcgPSAoc3RydWN0IHB2Y2FsbHNfZGF0YV9pbnRmICopCi0JCV9f
-Z2V0X2ZyZWVfcGFnZShHRlBfS0VSTkVMIHwgX19HRlBfWkVSTyk7Ci0JaWYgKG1hcC0+YWN0aXZl
-LnJpbmcgPT0gTlVMTCkKLQkJZ290byBvdXRfZXJyb3I7Ci0JbWFwLT5hY3RpdmUucmluZy0+cmlu
-Z19vcmRlciA9IFBWQ0FMTFNfUklOR19PUkRFUjsKLQlieXRlcyA9ICh2b2lkICopX19nZXRfZnJl
-ZV9wYWdlcyhHRlBfS0VSTkVMIHwgX19HRlBfWkVSTywKLQkJCQkJUFZDQUxMU19SSU5HX09SREVS
-KTsKLQlpZiAoYnl0ZXMgPT0gTlVMTCkKLQkJZ290byBvdXRfZXJyb3I7CisJYnl0ZXMgPSBtYXAt
-PmFjdGl2ZS5kYXRhLmluOwogCWZvciAoaSA9IDA7IGkgPCAoMSA8PCBQVkNBTExTX1JJTkdfT1JE
-RVIpOyBpKyspCiAJCW1hcC0+YWN0aXZlLnJpbmctPnJlZltpXSA9IGdudHRhYl9ncmFudF9mb3Jl
-aWduX2FjY2VzcygKIAkJCXB2Y2FsbHNfZnJvbnRfZGV2LT5vdGhlcmVuZF9pZCwKQEAgLTM2MSwx
-MCArMzg4LDYgQEAgc3RhdGljIGludCBjcmVhdGVfYWN0aXZlKHN0cnVjdCBzb2NrX21hcHBpbmcg
-Km1hcCwgaW50ICpldnRjaG4pCiAJCXB2Y2FsbHNfZnJvbnRfZGV2LT5vdGhlcmVuZF9pZCwKIAkJ
-cGZuX3RvX2dmbih2aXJ0X3RvX3Bmbigodm9pZCAqKW1hcC0+YWN0aXZlLnJpbmcpKSwgMCk7CiAK
-LQltYXAtPmFjdGl2ZS5kYXRhLmluID0gYnl0ZXM7Ci0JbWFwLT5hY3RpdmUuZGF0YS5vdXQgPSBi
-eXRlcyArCi0JCVhFTl9GTEVYX1JJTkdfU0laRShQVkNBTExTX1JJTkdfT1JERVIpOwotCiAJcmV0
-ID0geGVuYnVzX2FsbG9jX2V2dGNobihwdmNhbGxzX2Zyb250X2RldiwgZXZ0Y2huKTsKIAlpZiAo
-cmV0KQogCQlnb3RvIG91dF9lcnJvcjsKQEAgLTM4NSw4ICs0MDgsNiBAQCBzdGF0aWMgaW50IGNy
-ZWF0ZV9hY3RpdmUoc3RydWN0IHNvY2tfbWFwcGluZyAqbWFwLCBpbnQgKmV2dGNobikKIG91dF9l
-cnJvcjoKIAlpZiAoKmV2dGNobiA+PSAwKQogCQl4ZW5idXNfZnJlZV9ldnRjaG4ocHZjYWxsc19m
-cm9udF9kZXYsICpldnRjaG4pOwotCWZyZWVfcGFnZXMoKHVuc2lnbmVkIGxvbmcpbWFwLT5hY3Rp
-dmUuZGF0YS5pbiwgUFZDQUxMU19SSU5HX09SREVSKTsKLQlmcmVlX3BhZ2UoKHVuc2lnbmVkIGxv
-bmcpbWFwLT5hY3RpdmUucmluZyk7CiAJcmV0dXJuIHJldDsKIH0KIApAQCAtNDA2LDE3ICs0Mjcs
-MjQgQEAgaW50IHB2Y2FsbHNfZnJvbnRfY29ubmVjdChzdHJ1Y3Qgc29ja2V0ICpzb2NrLCBzdHJ1
-Y3Qgc29ja2FkZHIgKmFkZHIsCiAJCXJldHVybiBQVFJfRVJSKG1hcCk7CiAKIAliZWRhdGEgPSBk
-ZXZfZ2V0X2RydmRhdGEoJnB2Y2FsbHNfZnJvbnRfZGV2LT5kZXYpOworCXJldCA9IGFsbG9jX2Fj
-dGl2ZV9yaW5nKG1hcCk7CisJaWYgKHJldCA8IDApIHsKKwkJcHZjYWxsc19leGl0X3NvY2soc29j
-ayk7CisJCXJldHVybiByZXQ7CisJfQogCiAJc3Bpbl9sb2NrKCZiZWRhdGEtPnNvY2tldF9sb2Nr
-KTsKIAlyZXQgPSBnZXRfcmVxdWVzdChiZWRhdGEsICZyZXFfaWQpOwogCWlmIChyZXQgPCAwKSB7
-CiAJCXNwaW5fdW5sb2NrKCZiZWRhdGEtPnNvY2tldF9sb2NrKTsKKwkJZnJlZV9hY3RpdmVfcmlu
-ZyhtYXApOwogCQlwdmNhbGxzX2V4aXRfc29jayhzb2NrKTsKIAkJcmV0dXJuIHJldDsKIAl9CiAJ
-cmV0ID0gY3JlYXRlX2FjdGl2ZShtYXAsICZldnRjaG4pOwogCWlmIChyZXQgPCAwKSB7CiAJCXNw
-aW5fdW5sb2NrKCZiZWRhdGEtPnNvY2tldF9sb2NrKTsKKwkJZnJlZV9hY3RpdmVfcmluZyhtYXAp
-OwogCQlwdmNhbGxzX2V4aXRfc29jayhzb2NrKTsKIAkJcmV0dXJuIHJldDsKIAl9CkBAIC03ODAs
-MjUgKzgwOCwzNiBAQCBpbnQgcHZjYWxsc19mcm9udF9hY2NlcHQoc3RydWN0IHNvY2tldCAqc29j
-aywgc3RydWN0IHNvY2tldCAqbmV3c29jaywgaW50IGZsYWdzKQogCQl9CiAJfQogCi0Jc3Bpbl9s
-b2NrKCZiZWRhdGEtPnNvY2tldF9sb2NrKTsKLQlyZXQgPSBnZXRfcmVxdWVzdChiZWRhdGEsICZy
-ZXFfaWQpOwotCWlmIChyZXQgPCAwKSB7CisJbWFwMiA9IGt6YWxsb2Moc2l6ZW9mKCptYXAyKSwg
-R0ZQX0tFUk5FTCk7CisJaWYgKG1hcDIgPT0gTlVMTCkgewogCQljbGVhcl9iaXQoUFZDQUxMU19G
-TEFHX0FDQ0VQVF9JTkZMSUdIVCwKIAkJCSAgKHZvaWQgKikmbWFwLT5wYXNzaXZlLmZsYWdzKTsK
-LQkJc3Bpbl91bmxvY2soJmJlZGF0YS0+c29ja2V0X2xvY2spOworCQlwdmNhbGxzX2V4aXRfc29j
-ayhzb2NrKTsKKwkJcmV0dXJuIC1FTk9NRU07CisJfQorCXJldCA9IGFsbG9jX2FjdGl2ZV9yaW5n
-KG1hcDIpOworCWlmIChyZXQgPCAwKSB7CisJCWNsZWFyX2JpdChQVkNBTExTX0ZMQUdfQUNDRVBU
-X0lORkxJR0hULAorCQkJCSh2b2lkICopJm1hcC0+cGFzc2l2ZS5mbGFncyk7CisJCWtmcmVlKG1h
-cDIpOwogCQlwdmNhbGxzX2V4aXRfc29jayhzb2NrKTsKIAkJcmV0dXJuIHJldDsKIAl9Ci0JbWFw
-MiA9IGt6YWxsb2Moc2l6ZW9mKCptYXAyKSwgR0ZQX0FUT01JQyk7Ci0JaWYgKG1hcDIgPT0gTlVM
-TCkgeworCXNwaW5fbG9jaygmYmVkYXRhLT5zb2NrZXRfbG9jayk7CisJcmV0ID0gZ2V0X3JlcXVl
-c3QoYmVkYXRhLCAmcmVxX2lkKTsKKwlpZiAocmV0IDwgMCkgewogCQljbGVhcl9iaXQoUFZDQUxM
-U19GTEFHX0FDQ0VQVF9JTkZMSUdIVCwKIAkJCSAgKHZvaWQgKikmbWFwLT5wYXNzaXZlLmZsYWdz
-KTsKIAkJc3Bpbl91bmxvY2soJmJlZGF0YS0+c29ja2V0X2xvY2spOworCQlmcmVlX2FjdGl2ZV9y
-aW5nKG1hcDIpOworCQlrZnJlZShtYXAyKTsKIAkJcHZjYWxsc19leGl0X3NvY2soc29jayk7Ci0J
-CXJldHVybiAtRU5PTUVNOworCQlyZXR1cm4gcmV0OwogCX0KKwogCXJldCA9IGNyZWF0ZV9hY3Rp
-dmUobWFwMiwgJmV2dGNobik7CiAJaWYgKHJldCA8IDApIHsKKwkJZnJlZV9hY3RpdmVfcmluZyht
-YXAyKTsKIAkJa2ZyZWUobWFwMik7CiAJCWNsZWFyX2JpdChQVkNBTExTX0ZMQUdfQUNDRVBUX0lO
-RkxJR0hULAogCQkJICAodm9pZCAqKSZtYXAtPnBhc3NpdmUuZmxhZ3MpOwotLSAKMi4xOS4xCgoK
+--===============8137123950361767286==
+Content-Type: multipart/alternative; boundary="000000000000b525d0057c2d1b1d"
+
+--000000000000b525d0057c2d1b1d
+Content-Type: text/plain; charset="UTF-8"
+
+Hi Julien,
+
+Awesome, after applying those patches in latest xen, hikey960 able to
+enable 4 CPUs and other four CPUs are giving error -5.
+And after using "hmp-unsafe" in xen command line, all CPUs got enabled
+successfully.
+
+Thank you,
+Omkar B
+
+On Mon, Dec 3, 2018 at 7:27 PM Julien Grall <julien.grall@arm.com> wrote:
+
+>
+>
+> On 29/11/2018 07:39, Omkar Bolla wrote:
+> > Hi,
+>
+> Hello,
+>
+> > I just wanted to run xen hypervisor on ARMv8 architecture, I tried on
+> Hikey960
+> > platform which has armv8, but latest xen giving cpu errors.
+> >
+> > Could you please tell me, on which platforms latest xen is working?
+>
+> If your platform supports virtualization. Then there are a good chance for
+> Xen
+> to boot on it out-of-box. So what platform are you looking at?
+>
+> Regarding the hikey960, there are patches on the ML to fix boot. See [1].
+>
+> Cheers,
+>
+> [1]
+> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03360.html
+>
+> --
+> Julien Grall
+>
+
+--000000000000b525d0057c2d1b1d
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div>Hi Julien,</div><div><br></div><div>=
+<div>Awesome, after applying those patches in latest xen, hikey960 able to =
+enable 4 CPUs and other four CPUs are giving error -5.</div></div><div>And =
+after using &quot;hmp-unsafe&quot; in xen command line, all CPUs got enable=
+d successfully.</div><div><br></div><div>Thank you,</div><div>Omkar B<br></=
+div></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Mon, Dec=
+ 3, 2018 at 7:27 PM Julien Grall &lt;<a href=3D"mailto:julien.grall@arm.com=
+">julien.grall@arm.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
+uote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1e=
+x"><br>
+<br>
+On 29/11/2018 07:39, Omkar Bolla wrote:<br>
+&gt; Hi,<br>
+<br>
+Hello,<br>
+<br>
+&gt; I just wanted to run xen hypervisor on ARMv8 architecture, I tried on =
+Hikey960 <br>
+&gt; platform which has armv8, but latest xen giving cpu errors.<br>
+&gt; <br>
+&gt; Could you please tell me, on which platforms latest xen is working?<br=
+>
+<br>
+If your platform supports virtualization. Then there are a good chance for =
+Xen <br>
+to boot on it out-of-box. So what platform are you looking at?<br>
+<br>
+Regarding the hikey960, there are patches on the ML to fix boot. See [1].<b=
+r>
+<br>
+Cheers,<br>
+<br>
+[1] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
+/msg03360.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
+ct.org/archives/html/xen-devel/2018-11/msg03360.html</a><br>
+<br>
+-- <br>
+Julien Grall<br>
+</blockquote></div>
+
+--000000000000b525d0057c2d1b1d--
+
+
+--===============8137123950361767286==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8137123950361767286==--
