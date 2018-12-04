@@ -1,17 +1,18 @@
-From: Spencer Michaels <spmichaels.work@gmail.com>
-Subject: Mapping discontiguous virtual memory ranges
-Date: Mon, 3 Dec 2018 23:05:08 -0800
-Message-ID: <CAAd-cWON2fo8RnrHsjw8HYg8ZqAe+3cwK0ZUywcJDmcN7CFcGw@mail.gmail.com>
+From: Wen Yang <wen.yang99@zte.com.cn>
+Subject: [PATCH v5] pvcalls-front: Avoid
+ get_free_pages(GFP_KERNEL) under spinlock
+Date: Tue, 4 Dec 2018 15:15:57 +0800
+Message-ID: <1543907757-21647-1-git-send-email-wen.yang99__20787.3360639953$1543907596$gmane$org@zte.com.cn>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0819173545141113048=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=jlmu=on=gmail.com=spmichaels.work@srs-us1.protection.inumbo.net>)
- id 1gU4lm-0006Ht-7F
- for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 07:05:22 +0000
-Received: by mail-yw1-xc32.google.com with SMTP id x2so6526691ywc.9
- for <xen-devel@lists.xenproject.org>; Mon, 03 Dec 2018 23:05:20 -0800 (PST)
+ <SRS0=Kls0=ON=zte.com.cn=wen.yang99@srs-us1.protection.inumbo.net>)
+ id 1gU4uU-00075D-9I
+ for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 07:14:22 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,121 +21,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: boris.ostrovsky@oracle.com
+Cc: jgross@suse.com, wang.yi59@zte.com.cn, sstabellini@kernel.org, zhong.weidong@zte.com.cn, linux-kernel@vger.kernel.org, Julia Lawall <julia.lawall@lip6.fr>, xen-devel@lists.xenproject.org, Wen Yang <wen.yang99@zte.com.cn>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0819173545141113048==
-Content-Type: multipart/alternative; boundary="0000000000007273b6057c2ce394"
-
---0000000000007273b6057c2ce394
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hello,
-
-I'm currently attempting to add guard pages to a Xen-based unikernel. These
-are memory regions that cannot be read, written, or executed, could be
-potentially ones up to 1MB in size, and would, for instance, separate the
-stack and the heap to prevent buffer overflows and stack clashes.
-
-Ideally, since the guard pages can't be accessed in any way, I'd like to
-avoid taking up as much "physical" memory as would be necessary to
-accommodate the guard pages. The best way I can think of to implement this,
-then, is to make the sections to be guarded discontiguous =E2=80=94 much li=
-ke how
-the Linux kernel is placed at a very high address in memory, far from the
-other memory regions it manages.
-
-In order to do this, I need some way to map discontiguous virtual address
-regions to contiguous physical memory: for instance, to map 0x0-0x20000 to
-PFNs 0 through 20, and 0x40000-0x80000 to PFNs 20 through 60. I know this
-is possible, as Linux is able to do this on Xen, but I have so far been
-unable to figure it out. Apologies if I sound a bit confused here, as
-documentation is rather scarce, but I'll try to detail as best I can what
-I've tried so far, which primarily revolves around two functions, namely:
-
-- HYPERVISOR_update_va_mapping, which sounds like the right function, but
-which returns the errno for "invalid argument" when the virtual address I
-pass as its first argument is outside the range of what the VAs would be if
-they mapped one-to-one to PFNs. For instance, if PFNs 0x0-0x4000 are
-actually available to my guest, I would expect to be able to map the VA
-that _would_ correspond to PFN 0x4001 in a one-to-one mapping to, say, PFN
-0x0. This is not the case, and I'm not sure why. I have not been able to
-find substantial documentation on this function.
-
-- HYPERVISOR_mmu_update, which as it understand it takes a struct with the
-machine address of the page table entry to modify, and the new contents of
-that PTE. However, it looks like Xen gives me a fixed page table size (in
-start_info) baed on the actual amount of memory allocated to the guest, so
-I'm not sure if there's room on the page table for an entry corresponding
-to an arbitrarily high address. That aside, even if that weren't an issue I
-don't know how to _get_ the machine address of the PTE to modify, since as
-far as I know, translating a VA to a machine address requires that the p2m
-table to contain an entry corresponding to that VA, and in this specific
-case where I _don't_ want a one-to-one linear mapping, that's not the case.
-I'm probably missing something about the address conversion, but have been
-unable to find an explanation of how this function is typically used.
-
-If someone here is familiar with these APIs and can point me in the right
-direction, that would be greatly appreciated.
-
---0000000000007273b6057c2ce394
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Hello,<div><br></div><div>I&#39;m current=
-ly attempting to add guard pages to a Xen-based unikernel. These are memory=
- regions that cannot be read, written, or executed, could be potentially on=
-es up to 1MB in size, and would, for instance, separate the stack and the h=
-eap to prevent=C2=A0buffer overflows and stack clashes.</div><div><br></div=
-><div>Ideally, since the guard pages can&#39;t be accessed in any way, I&#3=
-9;d like to avoid taking up as much &quot;physical&quot; memory as would be=
- necessary to accommodate the guard pages. The best way I can think of to i=
-mplement this, then, is to make the sections to be guarded discontiguous =
-=E2=80=94 much like how the Linux kernel is placed at a very high address i=
-n memory, far from the other memory regions it manages.</div><div><br></div=
-><div>In order to do this, I need some way to map discontiguous virtual add=
-ress regions to contiguous physical memory: for instance, to map 0x0-0x2000=
-0 to PFNs 0 through 20, and 0x40000-0x80000 to PFNs 20 through 60. I know t=
-his is possible, as Linux is able to do this on Xen, but I have so far been=
- unable to figure it out. Apologies if I sound a bit confused here, as docu=
-mentation is rather scarce, but I&#39;ll try to detail as best I can what I=
-&#39;ve tried so far, which primarily revolves around two functions, namely=
-:</div><div><br></div><div>-=C2=A0HYPERVISOR_update_va_mapping, which sound=
-s like the right function, but which returns the errno for &quot;invalid ar=
-gument&quot; when the virtual address I pass as its first argument is outsi=
-de the range of what the VAs would be if they mapped one-to-one to PFNs. Fo=
-r instance, if PFNs 0x0-0x4000 are actually available to my guest, I would =
-expect to be able to map the VA that _would_ correspond to PFN 0x4001 in a =
-one-to-one mapping to, say, PFN 0x0. This is not the case, and I&#39;m not =
-sure why. I have not been able to find substantial documentation on this fu=
-nction.</div><div><br></div><div>- HYPERVISOR_mmu_update, which as it under=
-stand it takes a struct with the machine address of the page table entry to=
- modify, and the new contents of that PTE. However, it looks like Xen gives=
- me a fixed page table size (in start_info) baed on the actual amount of me=
-mory allocated to the guest, so I&#39;m not sure if there&#39;s room on the=
- page table for an entry corresponding to an arbitrarily high address. That=
- aside, even if that weren&#39;t an issue I don&#39;t know how to _get_ the=
- machine address of the PTE to modify, since as far as I know, translating =
-a VA to a machine address requires that the p2m table to contain an entry c=
-orresponding to that VA, and in this specific case where I _don&#39;t_ want=
- a one-to-one linear mapping, that&#39;s not the case. I&#39;m probably mis=
-sing something about the address conversion, but have been unable to find a=
-n explanation of how this function is typically used.</div><div><br></div><=
-div>If someone here is familiar with these APIs and can point me in the rig=
-ht direction, that would be greatly appreciated.<br></div></div></div>
-
---0000000000007273b6057c2ce394--
-
-
---===============0819173545141113048==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+VGhlIHByb2JsZW0gaXMgdGhhdCB3ZSBjYWxsIHRoaXMgd2l0aCBhIHNwaW4gbG9jayBoZWxkLgpU
+aGUgY2FsbCB0cmVlIGlzOgpwdmNhbGxzX2Zyb250X2FjY2VwdCgpIGhvbGRzIGJlZGF0YS0+c29j
+a2V0X2xvY2suCiAgICAtPiBjcmVhdGVfYWN0aXZlKCkKICAgICAgICAtPiBfX2dldF9mcmVlX3Bh
+Z2VzKCkgdXNlcyBHRlBfS0VSTkVMCgpUaGUgY3JlYXRlX2FjdGl2ZSgpIGZ1bmN0aW9uIGlzIG9u
+bHkgY2FsbGVkIGZyb20gcHZjYWxsc19mcm9udF9hY2NlcHQoKQp3aXRoIGEgc3Bpbl9sb2NrIGhl
+bGQsIFRoZSBhbGxvY2F0aW9uIGlzIG5vdCBhbGxvd2VkIHRvIHNsZWVwIGFuZApHRlBfS0VSTkVM
+IGlzIG5vdCBzdWZmaWNpZW50LgoKVGhpcyBpc3N1ZSB3YXMgZGV0ZWN0ZWQgYnkgdXNpbmcgdGhl
+IENvY2NpbmVsbGUgc29mdHdhcmUuCgp2MjogQWRkIGEgZnVuY3Rpb24gZG9pbmcgdGhlIGFsbG9j
+YXRpb25zIHdoaWNoIGlzIGNhbGxlZAogICAgb3V0c2lkZSB0aGUgbG9jayBhbmQgcGFzc2luZyB0
+aGUgYWxsb2NhdGVkIGRhdGEgdG8KICAgIGNyZWF0ZV9hY3RpdmUoKS4KCnYzOiBVc2UgdGhlIG1h
+dGNoaW5nIGRlYWxsb2NhdG9ycyBpLmUuLCBmcmVlX3BhZ2UoKQogICAgYW5kIGZyZWVfcGFnZXMo
+KSwgcmVzcGVjdGl2ZWx5LgoKdjQ6IEl0IHdvdWxkIGJlIGJldHRlciB0byBwcmUtcG9wdWxhdGUg
+bWFwIChzdHJ1Y3Qgc29ja19tYXBwaW5nKSwKICAgIHJhdGhlciB0aGFuIGludHJvZHVjaW5nIG9u
+ZSBtb3JlIG5ldyBzdHJ1Y3QuCgp2NTogU2luY2UgYWxsb2NhdGluZyB0aGUgZGF0YSBvdXRzaWRl
+IG9mIHRoaXMgY2FsbCBpdCBzaG91bGQgYWxzbwogICAgYmUgZnJlZWQgb3V0c2lkZSwgd2hlbiBj
+cmVhdGVfYWN0aXZlKCkgZmFpbHMuCiAgICBNb3ZlIGt6YWxsb2Moc2l6ZW9mKCptYXAyKSwgR0ZQ
+X0FUT01JQykgb3V0c2lkZSBzcGlubG9jayBhbmQKICAgIHVzZSBHRlBfS0VSTkVMIGluc3RlYWQu
+CgpTdWdnZXN0ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KU3VnZ2VzdGVk
+LWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgpTdWdnZXN0
+ZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KU2lnbmVk
+LW9mZi1ieTogV2VuIFlhbmcgPHdlbi55YW5nOTlAenRlLmNvbS5jbj4KQ0M6IEp1bGlhIExhd2Fs
+bCA8anVsaWEubGF3YWxsQGxpcDYuZnI+CkNDOiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJv
+dnNreUBvcmFjbGUuY29tPgpDQzogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgpDQzog
+U3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgpDQzogeGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCkNDOiBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3JnCi0t
+LQogZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jIHwgODMgKysrKysrKysrKysrKysrKysrKysr
+KysrKysrLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDYxIGluc2VydGlvbnMoKyksIDIyIGRl
+bGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYyBiL2Ry
+aXZlcnMveGVuL3B2Y2FsbHMtZnJvbnQuYwppbmRleCA3NzIyNGQ4ZjNlNmYuLjVmZDc2NGE3Yjg3
+OSAxMDA2NDQKLS0tIGEvZHJpdmVycy94ZW4vcHZjYWxscy1mcm9udC5jCisrKyBiL2RyaXZlcnMv
+eGVuL3B2Y2FsbHMtZnJvbnQuYwpAQCAtMzM1LDYgKzMzNSw0MSBAQCBpbnQgcHZjYWxsc19mcm9u
+dF9zb2NrZXQoc3RydWN0IHNvY2tldCAqc29jaykKIAlyZXR1cm4gcmV0OwogfQogCitzdGF0aWMg
+dm9pZCBmcmVlX2FjdGl2ZV9yaW5nKHN0cnVjdCBzb2NrX21hcHBpbmcgKm1hcCkKK3sKKwlmcmVl
+X3BhZ2VzKCh1bnNpZ25lZCBsb25nKW1hcC0+YWN0aXZlLmRhdGEuaW4sCisJCQltYXAtPmFjdGl2
+ZS5yaW5nLT5yaW5nX29yZGVyKTsKKwlmcmVlX3BhZ2UoKHVuc2lnbmVkIGxvbmcpbWFwLT5hY3Rp
+dmUucmluZyk7Cit9CisKK3N0YXRpYyBpbnQgYWxsb2NfYWN0aXZlX3Jpbmcoc3RydWN0IHNvY2tf
+bWFwcGluZyAqbWFwKQoreworCXZvaWQgKmJ5dGVzOworCisJbWFwLT5hY3RpdmUucmluZyA9IE5V
+TEw7CisJbWFwLT5hY3RpdmUuZGF0YS5pbiA9IE5VTEw7CisJbWFwLT5hY3RpdmUucmluZyA9IChz
+dHJ1Y3QgcHZjYWxsc19kYXRhX2ludGYgKikKKwkJZ2V0X3plcm9lZF9wYWdlKEdGUF9LRVJORUwp
+OworCWlmICghbWFwLT5hY3RpdmUucmluZykKKwkJZ290byBvdXQ7CisKKwltYXAtPmFjdGl2ZS5y
+aW5nLT5yaW5nX29yZGVyID0gUFZDQUxMU19SSU5HX09SREVSOworCWJ5dGVzID0gKHZvaWQgKilf
+X2dldF9mcmVlX3BhZ2VzKEdGUF9LRVJORUwgfCBfX0dGUF9aRVJPLAorCQkJCQlQVkNBTExTX1JJ
+TkdfT1JERVIpOworCWlmICghYnl0ZXMpCisJCWdvdG8gb3V0OworCisJbWFwLT5hY3RpdmUuZGF0
+YS5pbiA9IGJ5dGVzOworCW1hcC0+YWN0aXZlLmRhdGEub3V0ID0gYnl0ZXMgKworCQlYRU5fRkxF
+WF9SSU5HX1NJWkUoUFZDQUxMU19SSU5HX09SREVSKTsKKworCXJldHVybiAwOworCitvdXQ6CisJ
+ZnJlZV9hY3RpdmVfcmluZyhtYXApOworCXJldHVybiAtRU5PTUVNOworfQorCiBzdGF0aWMgaW50
+IGNyZWF0ZV9hY3RpdmUoc3RydWN0IHNvY2tfbWFwcGluZyAqbWFwLCBpbnQgKmV2dGNobikKIHsK
+IAl2b2lkICpieXRlczsKQEAgLTM0MywxNSArMzc4LDcgQEAgc3RhdGljIGludCBjcmVhdGVfYWN0
+aXZlKHN0cnVjdCBzb2NrX21hcHBpbmcgKm1hcCwgaW50ICpldnRjaG4pCiAJKmV2dGNobiA9IC0x
+OwogCWluaXRfd2FpdHF1ZXVlX2hlYWQoJm1hcC0+YWN0aXZlLmluZmxpZ2h0X2Nvbm5fcmVxKTsK
+IAotCW1hcC0+YWN0aXZlLnJpbmcgPSAoc3RydWN0IHB2Y2FsbHNfZGF0YV9pbnRmICopCi0JCV9f
+Z2V0X2ZyZWVfcGFnZShHRlBfS0VSTkVMIHwgX19HRlBfWkVSTyk7Ci0JaWYgKG1hcC0+YWN0aXZl
+LnJpbmcgPT0gTlVMTCkKLQkJZ290byBvdXRfZXJyb3I7Ci0JbWFwLT5hY3RpdmUucmluZy0+cmlu
+Z19vcmRlciA9IFBWQ0FMTFNfUklOR19PUkRFUjsKLQlieXRlcyA9ICh2b2lkICopX19nZXRfZnJl
+ZV9wYWdlcyhHRlBfS0VSTkVMIHwgX19HRlBfWkVSTywKLQkJCQkJUFZDQUxMU19SSU5HX09SREVS
+KTsKLQlpZiAoYnl0ZXMgPT0gTlVMTCkKLQkJZ290byBvdXRfZXJyb3I7CisJYnl0ZXMgPSBtYXAt
+PmFjdGl2ZS5kYXRhLmluOwogCWZvciAoaSA9IDA7IGkgPCAoMSA8PCBQVkNBTExTX1JJTkdfT1JE
+RVIpOyBpKyspCiAJCW1hcC0+YWN0aXZlLnJpbmctPnJlZltpXSA9IGdudHRhYl9ncmFudF9mb3Jl
+aWduX2FjY2VzcygKIAkJCXB2Y2FsbHNfZnJvbnRfZGV2LT5vdGhlcmVuZF9pZCwKQEAgLTM2MSwx
+MCArMzg4LDYgQEAgc3RhdGljIGludCBjcmVhdGVfYWN0aXZlKHN0cnVjdCBzb2NrX21hcHBpbmcg
+Km1hcCwgaW50ICpldnRjaG4pCiAJCXB2Y2FsbHNfZnJvbnRfZGV2LT5vdGhlcmVuZF9pZCwKIAkJ
+cGZuX3RvX2dmbih2aXJ0X3RvX3Bmbigodm9pZCAqKW1hcC0+YWN0aXZlLnJpbmcpKSwgMCk7CiAK
+LQltYXAtPmFjdGl2ZS5kYXRhLmluID0gYnl0ZXM7Ci0JbWFwLT5hY3RpdmUuZGF0YS5vdXQgPSBi
+eXRlcyArCi0JCVhFTl9GTEVYX1JJTkdfU0laRShQVkNBTExTX1JJTkdfT1JERVIpOwotCiAJcmV0
+ID0geGVuYnVzX2FsbG9jX2V2dGNobihwdmNhbGxzX2Zyb250X2RldiwgZXZ0Y2huKTsKIAlpZiAo
+cmV0KQogCQlnb3RvIG91dF9lcnJvcjsKQEAgLTM4NSw4ICs0MDgsNiBAQCBzdGF0aWMgaW50IGNy
+ZWF0ZV9hY3RpdmUoc3RydWN0IHNvY2tfbWFwcGluZyAqbWFwLCBpbnQgKmV2dGNobikKIG91dF9l
+cnJvcjoKIAlpZiAoKmV2dGNobiA+PSAwKQogCQl4ZW5idXNfZnJlZV9ldnRjaG4ocHZjYWxsc19m
+cm9udF9kZXYsICpldnRjaG4pOwotCWZyZWVfcGFnZXMoKHVuc2lnbmVkIGxvbmcpbWFwLT5hY3Rp
+dmUuZGF0YS5pbiwgUFZDQUxMU19SSU5HX09SREVSKTsKLQlmcmVlX3BhZ2UoKHVuc2lnbmVkIGxv
+bmcpbWFwLT5hY3RpdmUucmluZyk7CiAJcmV0dXJuIHJldDsKIH0KIApAQCAtNDA2LDE3ICs0Mjcs
+MjQgQEAgaW50IHB2Y2FsbHNfZnJvbnRfY29ubmVjdChzdHJ1Y3Qgc29ja2V0ICpzb2NrLCBzdHJ1
+Y3Qgc29ja2FkZHIgKmFkZHIsCiAJCXJldHVybiBQVFJfRVJSKG1hcCk7CiAKIAliZWRhdGEgPSBk
+ZXZfZ2V0X2RydmRhdGEoJnB2Y2FsbHNfZnJvbnRfZGV2LT5kZXYpOworCXJldCA9IGFsbG9jX2Fj
+dGl2ZV9yaW5nKG1hcCk7CisJaWYgKHJldCA8IDApIHsKKwkJcHZjYWxsc19leGl0X3NvY2soc29j
+ayk7CisJCXJldHVybiByZXQ7CisJfQogCiAJc3Bpbl9sb2NrKCZiZWRhdGEtPnNvY2tldF9sb2Nr
+KTsKIAlyZXQgPSBnZXRfcmVxdWVzdChiZWRhdGEsICZyZXFfaWQpOwogCWlmIChyZXQgPCAwKSB7
+CiAJCXNwaW5fdW5sb2NrKCZiZWRhdGEtPnNvY2tldF9sb2NrKTsKKwkJZnJlZV9hY3RpdmVfcmlu
+ZyhtYXApOwogCQlwdmNhbGxzX2V4aXRfc29jayhzb2NrKTsKIAkJcmV0dXJuIHJldDsKIAl9CiAJ
+cmV0ID0gY3JlYXRlX2FjdGl2ZShtYXAsICZldnRjaG4pOwogCWlmIChyZXQgPCAwKSB7CiAJCXNw
+aW5fdW5sb2NrKCZiZWRhdGEtPnNvY2tldF9sb2NrKTsKKwkJZnJlZV9hY3RpdmVfcmluZyhtYXAp
+OwogCQlwdmNhbGxzX2V4aXRfc29jayhzb2NrKTsKIAkJcmV0dXJuIHJldDsKIAl9CkBAIC03ODAs
+MjUgKzgwOCwzNiBAQCBpbnQgcHZjYWxsc19mcm9udF9hY2NlcHQoc3RydWN0IHNvY2tldCAqc29j
+aywgc3RydWN0IHNvY2tldCAqbmV3c29jaywgaW50IGZsYWdzKQogCQl9CiAJfQogCi0Jc3Bpbl9s
+b2NrKCZiZWRhdGEtPnNvY2tldF9sb2NrKTsKLQlyZXQgPSBnZXRfcmVxdWVzdChiZWRhdGEsICZy
+ZXFfaWQpOwotCWlmIChyZXQgPCAwKSB7CisJbWFwMiA9IGt6YWxsb2Moc2l6ZW9mKCptYXAyKSwg
+R0ZQX0tFUk5FTCk7CisJaWYgKG1hcDIgPT0gTlVMTCkgewogCQljbGVhcl9iaXQoUFZDQUxMU19G
+TEFHX0FDQ0VQVF9JTkZMSUdIVCwKIAkJCSAgKHZvaWQgKikmbWFwLT5wYXNzaXZlLmZsYWdzKTsK
+LQkJc3Bpbl91bmxvY2soJmJlZGF0YS0+c29ja2V0X2xvY2spOworCQlwdmNhbGxzX2V4aXRfc29j
+ayhzb2NrKTsKKwkJcmV0dXJuIC1FTk9NRU07CisJfQorCXJldCA9IGFsbG9jX2FjdGl2ZV9yaW5n
+KG1hcDIpOworCWlmIChyZXQgPCAwKSB7CisJCWNsZWFyX2JpdChQVkNBTExTX0ZMQUdfQUNDRVBU
+X0lORkxJR0hULAorCQkJCSh2b2lkICopJm1hcC0+cGFzc2l2ZS5mbGFncyk7CisJCWtmcmVlKG1h
+cDIpOwogCQlwdmNhbGxzX2V4aXRfc29jayhzb2NrKTsKIAkJcmV0dXJuIHJldDsKIAl9Ci0JbWFw
+MiA9IGt6YWxsb2Moc2l6ZW9mKCptYXAyKSwgR0ZQX0FUT01JQyk7Ci0JaWYgKG1hcDIgPT0gTlVM
+TCkgeworCXNwaW5fbG9jaygmYmVkYXRhLT5zb2NrZXRfbG9jayk7CisJcmV0ID0gZ2V0X3JlcXVl
+c3QoYmVkYXRhLCAmcmVxX2lkKTsKKwlpZiAocmV0IDwgMCkgewogCQljbGVhcl9iaXQoUFZDQUxM
+U19GTEFHX0FDQ0VQVF9JTkZMSUdIVCwKIAkJCSAgKHZvaWQgKikmbWFwLT5wYXNzaXZlLmZsYWdz
+KTsKIAkJc3Bpbl91bmxvY2soJmJlZGF0YS0+c29ja2V0X2xvY2spOworCQlmcmVlX2FjdGl2ZV9y
+aW5nKG1hcDIpOworCQlrZnJlZShtYXAyKTsKIAkJcHZjYWxsc19leGl0X3NvY2soc29jayk7Ci0J
+CXJldHVybiAtRU5PTUVNOworCQlyZXR1cm4gcmV0OwogCX0KKwogCXJldCA9IGNyZWF0ZV9hY3Rp
+dmUobWFwMiwgJmV2dGNobik7CiAJaWYgKHJldCA8IDApIHsKKwkJZnJlZV9hY3RpdmVfcmluZyht
+YXAyKTsKIAkJa2ZyZWUobWFwMik7CiAJCWNsZWFyX2JpdChQVkNBTExTX0ZMQUdfQUNDRVBUX0lO
+RkxJR0hULAogCQkJICAodm9pZCAqKSZtYXAtPnBhc3NpdmUuZmxhZ3MpOwotLSAKMi4xOS4xCgoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0819173545141113048==--
