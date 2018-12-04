@@ -1,22 +1,23 @@
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Subject: Re: [PATCH 1/2] xen/link: Link proc_info_list in .data
- instead of .init.data
-Date: Tue, 4 Dec 2018 19:34:58 +0200
-Message-ID: <CAPD2p-mQ7HHtyGYxn-DMUphBpNn-JVWZAS6zHqOD2mUfmMTRpQ@mail.gmail.com>
-References: <1543923745-29877-1-git-send-email-olekstysh@gmail.com>
- <1543923745-29877-2-git-send-email-olekstysh@gmail.com>
- <5d6df477-e159-85c6-781e-f3af73f345cd@arm.com>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH 03/18] xen: introduce 'xen-qdisk'
+Date: Tue, 4 Dec 2018 17:14:01 +0000
+Message-ID: <ff67fbfdb62e49b1bd28ed70cdb461ca__20810.9889099889$1543944887$gmane$org@AMSPEX02CL03.citrite.net>
+References: <20181121151211.15997-1-paul.durrant@citrix.com>
+ <20181121151211.15997-4-paul.durrant@citrix.com>
+ <20181129160541.GG14786@perard.uk.xensource.com>
+ <311937f3c787461686f2ebf68a70a326@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0488743108003025419=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <srs0=es3t=on=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1gUEbH-0003DN-68
- for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 17:35:11 +0000
-Received: by mail-it1-x136.google.com with SMTP id o19so16703050itg.5
- for <xen-devel@lists.xenproject.org>; Tue, 04 Dec 2018 09:35:10 -0800 (PST)
-In-Reply-To: <5d6df477-e159-85c6-781e-f3af73f345cd@arm.com>
+ <SRS0=Jzt/=ON=citrix.com=prvs=869b801c3=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1gUEcA-0003Gg-Lj
+ for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 17:36:06 +0000
+In-Reply-To: <311937f3c787461686f2ebf68a70a326@AMSPEX02CL03.citrite.net>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,157 +26,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Mirela Simonovic <mirela.simonovic@aggios.com>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+To: Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Max Reitz <mreitz@redhat.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0488743108003025419==
-Content-Type: multipart/alternative; boundary="000000000000e2b96b057c35af38"
-
---000000000000e2b96b057c35af38
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, Dec 4, 2018 at 7:13 PM Julien Grall <julien.grall@arm.com> wrote:
-
-> Hi,
->
-Hi, Julien
-
-
->
-> Title: xen/arm: link: ...
->
-ok
-
-
->
-> On 12/4/18 11:42 AM, Oleksandr Tyshchenko wrote:
-> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> >
-> > To be able to use it for the hot pluged CPUs as well.
->
-> s/hot pluged/hot-plugged/
->
-ok
-
-
->
-> >
-> > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> > ---
-> >   xen/arch/arm/xen.lds.S | 10 ++++++----
-> >   1 file changed, 6 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
-> > index 245a0e0..003301a 100644
-> > --- a/xen/arch/arm/xen.lds.S
-> > +++ b/xen/arch/arm/xen.lds.S
-> > @@ -88,6 +88,12 @@ SECTIONS
-> >          . = ALIGN(PAGE_SIZE);
-> >          *(.data.page_aligned)
-> >          *(.data)
-> > +
-> > +       . = ALIGN(POINTER_ALIGN);
-> > +       __proc_info_start = .;
-> > +       *(.init.proc.info)
->
-> This is a bit odd to see .init.* section in .data. So I think we want to
-> rename it.
->
-indeed, will rename
-
-
->
-> Cheers,
->
-> --
-> Julien Grall
->
-
-
--- 
-Regards,
-
-Oleksandr Tyshchenko
-
---000000000000e2b96b057c35af38
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Tue=
-, Dec 4, 2018 at 7:13 PM Julien Grall &lt;<a href=3D"mailto:julien.grall@ar=
-m.com">julien.grall@arm.com</a>&gt; wrote:<br></div><blockquote class=3D"gm=
-ail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-le=
-ft:1ex">Hi,<br></blockquote><div>Hi, Julien</div><div>=C2=A0</div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
-lid;padding-left:1ex">
-<br>
-Title: xen/arm: link: ...<br></blockquote><div>ok</div><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
-ccc solid;padding-left:1ex">
-<br>
-On 12/4/18 11:42 AM, Oleksandr Tyshchenko wrote:<br>
-&gt; From: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_tyshchenko@=
-epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<br>
-&gt; <br>
-&gt; To be able to use it for the hot pluged CPUs as well.<br>
-<br>
-s/hot pluged/hot-plugged/<br></blockquote><div>ok</div><div>=C2=A0</div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
-ccc solid;padding-left:1ex">
-<br>
-&gt; <br>
-&gt; Signed-off-by: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_ty=
-shchenko@epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<=
-br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0xen/arch/arm/xen.lds.S | 10 ++++++----<br>
-&gt;=C2=A0 =C2=A01 file changed, 6 insertions(+), 4 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S<br>
-&gt; index 245a0e0..003301a 100644<br>
-&gt; --- a/xen/arch/arm/xen.lds.S<br>
-&gt; +++ b/xen/arch/arm/xen.lds.S<br>
-&gt; @@ -88,6 +88,12 @@ SECTIONS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 . =3D ALIGN(PAGE_SIZE);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data.page_aligned)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data)<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0. =3D ALIGN(POINTER_ALIGN);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0__proc_info_start =3D .;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0*(.<a href=3D"http://init.proc.info" rel=
-=3D"noreferrer" target=3D"_blank">init.proc.info</a>)<br>
-<br>
-This is a bit odd to see .init.* section in .data. So I think we want to <b=
-r>
-rename it.<br></blockquote><div>indeed, will rename</div><div>=C2=A0</div><=
-blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
- #ccc solid;padding-left:1ex">
-<br>
-Cheers,<br>
-<br>
--- <br>
-Julien Grall<br>
-</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
- class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"l=
-tr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><span style=3D"background-c=
-olor:rgb(255,255,255)"><font size=3D"2"><span style=3D"color:rgb(51,51,51);=
-font-family:Arial,sans-serif">Regards,</span></font></span></div><div dir=
-=3D"ltr"><br></div><div dir=3D"ltr"><div><span style=3D"background-color:rg=
-b(255,255,255)"><font size=3D"2">Oleksandr Tyshchenko</font></span></div></=
-div></div></div></div></div></div></div>
-
---000000000000e2b96b057c35af38--
-
-
---===============0488743108003025419==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0488743108003025419==--
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IFFlbXUtZGV2ZWwgW21haWx0bzpx
+ZW11LWRldmVsLQo+IGJvdW5jZXMrcGF1bC5kdXJyYW50PWNpdHJpeC5jb21Abm9uZ251Lm9yZ10g
+T24gQmVoYWxmIE9mIFBhdWwgRHVycmFudAo+IFNlbnQ6IDA0IERlY2VtYmVyIDIwMTggMTU6MjAK
+PiBUbzogQW50aG9ueSBQZXJhcmQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+Cj4gQ2M6IEtl
+dmluIFdvbGYgPGt3b2xmQHJlZGhhdC5jb20+OyBTdGVmYW5vIFN0YWJlbGxpbmkKPiA8c3N0YWJl
+bGxpbmlAa2VybmVsLm9yZz47IHFlbXUtYmxvY2tAbm9uZ251Lm9yZzsgcWVtdS1kZXZlbEBub25n
+bnUub3JnOwo+IE1heCBSZWl0eiA8bXJlaXR6QHJlZGhhdC5jb20+OyB4ZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKPiBTdWJqZWN0OiBSZTogW1FlbXUtZGV2ZWxdIFtQQVRDSCAwMy8xOF0g
+eGVuOiBpbnRyb2R1Y2UgJ3hlbi1xZGlzaycKPiAKPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
+LS0tCj4gPiBGcm9tOiBBbnRob255IFBFUkFSRCBbbWFpbHRvOmFudGhvbnkucGVyYXJkQGNpdHJp
+eC5jb21dCj4gPiBTZW50OiAyOSBOb3ZlbWJlciAyMDE4IDE2OjA2Cj4gPiBUbzogUGF1bCBEdXJy
+YW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4KPiA+IENjOiBxZW11LWJsb2NrQG5vbmdudS5v
+cmc7IHFlbXUtZGV2ZWxAbm9uZ251Lm9yZzsgeGVuLQo+ID4gZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmc7IEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5jb20+OyBNYXggUmVpdHoKPiA+IDxtcmVp
+dHpAcmVkaGF0LmNvbT47IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9y
+Zz4KPiA+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMDMvMThdIHhlbjogaW50cm9kdWNlICd4ZW4tcWRp
+c2snCj4gPgo+ID4gT24gV2VkLCBOb3YgMjEsIDIwMTggYXQgMDM6MTE6NTZQTSArMDAwMCwgUGF1
+bCBEdXJyYW50IHdyb3RlOgo+ID4gPiBUaGlzIHBhdGNoIGFkZHMgYSBuZXcgWGVuRGV2aWNlOiAn
+eGVuLXFkaXNrJyBbMV0uIFRoaXMgd2lsbCBldmVudHVhbGx5Cj4gPiA+IHJlcGxhY2UgdGhlICd4
+ZW5fZGlzaycgbGVnYWN5IFBWIGJhY2tlbmQgYnV0IGl0IGlzIGlsbHVzdHJhdGl2ZSB0bwo+IGJ1
+aWxkCj4gPiA+IHVwIHRoZSBpbXBsZW1lbnRhdGlvbiBpbmNyZW1lbnRhbGx5LCBhbG9uZyB3aXRo
+IHRoZSBYZW5CdXMvWGVuRGV2aWNlCj4gPiA+IGZyYW1ld29yay4gU3Vic2VxdWVudCBwYXRjaGVz
+IHdpbGwgdGhlcmVmb3JlIGFkZCB0byB0aGlzIGRldmljZSdzCj4gPiA+IGltcGxlbWVudGF0aW9u
+IGFzIG5ldyBmZWF0dXJlcyBhcmUgYWRkZWQgdG8gdGhlIGZyYW1ld29yay4KPiA+ID4KPiA+ID4g
+QWZ0ZXIgdGhpcyBwYXRjaCBoYXMgYmVlbiBhcHBsaWVkIGl0IGlzIHBvc3NpYmxlIHRvIGluc3Rh
+bnRpYXRlIGEgbmV3Cj4gPiA+ICd4ZW4tcWRpc2snIGRldmljZSB3aXRoIGEgc2luZ2xlICd2ZGV2
+JyBwYXJhbWV0ZXIsIHdoaWNoIGFjY2VwdHMKPiB2YWx1ZXMKPiA+ID4gYWRoZXJpbmcgdG8gdGhl
+IFhlbiBWQkQgbmFtaW5nIHNjaGVtZSBbMl0uIEZvciBleGFtcGxlLCBhIGNvbW1hbmQtbGluZQo+
+ID4gPiBpbnN0YW50aWF0aW9uIG9mIGEgeGVuLXFkaXNrIGNhbiBiZSBkb25lIHdpdGggYW4gYXJn
+dW1lbnQgc2ltaWxhciB0bwo+IHRoZQo+ID4gPiBmb2xsb3dpbmc6Cj4gPiA+Cj4gPiA+IC1kZXZp
+Y2UgeGVuLXFkaXNrLHZkZXY9aGRhCj4gPgo+ID4gVGhhdCB3b3JrcyB3aGVuIFFFTVUgYm9vdCwg
+YnV0IGRvaW5nIHRoZSBzYW1lIHRoaW5nIG9uY2UgdGhlIGd1ZXN0IGhhdmUKPiA+IGJvb3RlZCwg
+dmlhIFFNUCwgZG9lc24ndC4gSGVyZSBpcyB0aGUgcmVzdWx0ICh0ZXN0ZWQgaW4gcW1wLXNoZWxs
+KToKPiA+Cj4gPiAoUUVNVSkgZGV2aWNlX2FkZCBkcml2ZXI9eGVuLXFkaXNrIHZkZXY9aGRhCj4g
+PiB7Cj4gPiAgICAgImVycm9yIjogewo+ID4gICAgICAgICAiY2xhc3MiOiAiR2VuZXJpY0Vycm9y
+IiwKPiA+ICAgICAgICAgImRlc2MiOiAiQnVzICd4ZW4tYnVzLjAnIGRvZXMgbm90IHN1cHBvcnQg
+aG90cGx1Z2dpbmciCj4gPiAgICAgfQo+ID4gfQo+ID4KPiA+IFRoYXQncyBwcm9iYWJseSB3aHkg
+SSd2ZSBhc2tlZCBhYm91dCB0aGUgaG90cGx1ZyBjYXBhYmlsaXR5IG9uIHRoZQo+ID4gcHJldmlv
+dXMgcGF0Y2guCj4gPgo+IAo+IE9rLiBJJ3ZlIGFkZGVkIHRoZSBob3RwbHVnIG5vdyBzbyBJJ2xs
+IG1ha2Ugc3VyZSBRTVAgRFRSVC4KPiAKPiA+ID4gVGhlIGltcGxlbWVudGF0aW9uIG9mIHRoZSB2
+ZGV2IHBhcmFtZXRlciBmb3JtdWxhdGVzIHRoZSBhcHByb3ByaWF0ZQo+IFZCRAo+ID4gPiBudW1i
+ZXIgZm9yIHVzZSBpbiB0aGUgUFYgcHJvdG9jb2wuCj4gPiA+Cj4gPiA+IFsxXSBUaGUgbmFtZSAn
+cWRpc2snIGFzIGFsd2F5cyBiZWVuIHRoZSBuYW1lIGdpdmVuIHRvIHRoZSBRRU1VCj4gPiA+ICAg
+ICBpbXBsZW1lbnRhdGlvbiBvZiB0aGUgWGVuIFBWIGJsb2NrIHByb3RvY29sIGJhY2tlbmQgaW1w
+bGVtZW50YXRpb24KPiA+ID4gWzJdIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhl
+bi5naXQ7YT1ibG9iO2Y9ZG9jcy9tYW4veGVuLQo+IHZiZC0KPiA+IGludGVyZmFjZS5tYXJrZG93
+bi43Cj4gPgo+ID4gTWF5YmUgYSBsaW5rIHRvIHRoZSBnZW5lcmF0ZWQgZG9jcyB3b3VsZCBiZSBi
+ZXR0ZXI6Cj4gPiBodHRwczovL3hlbmJpdHMueGVuLm9yZy9kb2NzL3Vuc3RhYmxlL21hbi94ZW4t
+dmJkLWludGVyZmFjZS43Lmh0bWwKPiA+Cj4gCj4gT2suCj4gCj4gPiBBbHNvLCBpdCB3b3VsZCBi
+ZSB1c2VmdWwgdG8gaGF2ZSB0aGUgc2FtZSBsaW5rIGluIHRoZSBzb3VyY2UgY29kZS4KPiA+Cj4g
+Cj4gWWVzLCBJJ2xsIGFkZCBhIGNvbW1lbnQuCj4gCj4gPiA+IGRpZmYgLS1naXQgYS9ody9ibG9j
+ay94ZW4tcWRpc2suYyBiL2h3L2Jsb2NrL3hlbi1xZGlzay5jCj4gPiA+IG5ldyBmaWxlIG1vZGUg
+MTAwNjQ0Cj4gPiA+IGluZGV4IDAwMDAwMDAwMDAuLjcyMTIyMDczZjcKPiA+ID4gLS0tIC9kZXYv
+bnVsbAo+ID4gPiArKysgYi9ody9ibG9jay94ZW4tcWRpc2suYwo+ID4gWy4uLl0KPiA+ID4gK3N0
+YXRpYyBjaGFyICpkaXNrX3RvX3ZiZF9uYW1lKHVuc2lnbmVkIGludCBkaXNrKQo+ID4gPiArewo+
+ID4gPiArICAgIHVuc2lnbmVkIGludCBsZW4gPSBESVZfUk9VTkRfVVAoZGlzaywgMjYpOwo+ID4g
+PiArICAgIGNoYXIgKm5hbWUgPSBnX21hbGxvYzAobGVuICsgMSk7Cj4gPiA+ICsKPiA+ID4gKyAg
+ICBkbyB7Cj4gPiA+ICsgICAgICAgIG5hbWVbbGVuLS1dID0gJ2EnICsgKGRpc2sgJSAyNik7Cj4g
+PiA+ICsgICAgICAgIGRpc2sgLz0gMjY7Cj4gPiA+ICsgICAgfSB3aGlsZSAoZGlzayAhPSAwKTsK
+PiA+ID4gKyAgICBhc3NlcnQobGVuID09IDApOwo+ID4gPiArCj4gPiA+ICsgICAgcmV0dXJuIG5h
+bWU7Cj4gPiA+ICt9Cj4gPgo+ID4gVGhhdCBmdW5jdGlvbiBkb2Vzbid0IHdvcmsuCj4gPgo+ID4g
+Rm9yIGEgc2ltcGxlIHh2ZHAsIChzbyBkaXNrPT0xNSksIGl0IHJldHVybiAiIiwgSSBtZWFuICJc
+MHAiLgo+ID4KPiA+IEZvciBhIG1vcmUgY29tcGxpY2F0ZWQgJ3h2ZGJod3phJywgd2UgaGF2ZSBs
+ZW4gPT0gMjI5MDEuIEFuZCB0aGUgYXNzZXJ0Cj4gPiBmYWlsZWQuCj4gPgo+ID4gTWF5YmUgdGhl
+IHJlY3Vyc2luZyBhbGdvIGluIGxpYnhsIHdvdWxkIGJlIGZpbmUsIHdpdGggYSBidWZmZXIgdGhh
+dCBpcwo+ID4gYmlnIGVub3VnaCwgYW5kIGNvdWxkIHByb2JhYmx5IGJlIG9uIHRoZSBzdGFjayAo
+aW4gX2dldF92ZGV2KS4KPiAKPiBJIHVzZWQgbGlieGxfX2RldmljZV9kaXNrX2Rldl9udW1iZXIo
+KSBhcyBteSBtb2RlbCAoYXMgd2VsbCBhcyBjcm9zcy0KPiBjaGVja2luZyB3aXRoIHRoZSBzcGVj
+KSwgYnV0IEkgZ3Vlc3MgYSByZWN1cnNpbmcgYWxnb3JpdGhtIHdvdWxkIGJlCj4gbmVhdGVyLgo+
+IAo+ID4KPiA+ID4gKwo+ID4gPiArICAgIHN3aXRjaCAodmRldi0+dHlwZSkgewo+ID4gPiArICAg
+IGNhc2UgWEVOX1FESVNLX1ZERVZfVFlQRV9EUDoKPiA+ID4gKyAgICBjYXNlIFhFTl9RRElTS19W
+REVWX1RZUEVfWFZEOgo+ID4gPiArICAgICAgICBpZiAodmRldi0+ZGlzayA8ICgxIDw8IDQpICYm
+IHZkZXYtPnBhcnRpdGlvbiA8ICgxIDw8IDQpKSB7Cj4gPiA+ICsgICAgICAgICAgICB2ZGV2LT5u
+dW1iZXIgPSAoMjAyIDw8IDgpIHwgKHZkZXYtPmRpc2sgPDwgNCkgfAo+ID4gPiArICAgICAgICAg
+ICAgICAgIHZkZXYtPnBhcnRpdGlvbjsKPiA+ID4gKyAgICAgICAgfSBlbHNlIGlmICh2ZGV2LT5k
+aXNrIDwgKDEgPDwgMjApICYmIHZkZXYtPnBhcnRpdGlvbiA8ICgxIDw8Cj4gPiA4KSkgewo+ID4g
+PiArICAgICAgICAgICAgdmRldi0+bnVtYmVyID0gKDEgPDwgMjgpIHwgKHZkZXYtPmRpc2sgPDwg
+OCkgfAo+ID4gPiArICAgICAgICAgICAgICAgIHZkZXYtPnBhcnRpdGlvbjsKPiA+ID4gKyAgICAg
+ICAgfSBlbHNlIHsKPiA+ID4gKyAgICAgICAgICAgIGdvdG8gaW52YWxpZDsKPiA+ID4gKyAgICAg
+ICAgfQo+ID4gPiArICAgICAgICBicmVhazsKPiA+ID4gKwo+ID4gPiArICAgIGNhc2UgWEVOX1FE
+SVNLX1ZERVZfVFlQRV9IRDoKPiA+ID4gKyAgICAgICAgaWYgKCh2ZGV2LT5kaXNrID09IDAgfHwg
+dmRldi0+ZGlzayA9PSAxKSAmJgo+ID4gPiArICAgICAgICAgICAgdmRldi0+cGFydGl0aW9uIDwg
+KDEgPDwgNCkpIHsKPiA+Cj4gPiBJIHRoaW5rIHRoYXQgc2hvdWxkIGJlOgo+ID4KPiA+ICAgICB2
+ZGV2LT5wYXJ0aXRpb24gPCAoMSA8PCA2KQo+ID4KPiA+IEJlY2F1c2UgaGQgZGlzayBoYXZlIDAu
+LjYzIHBhcnRpdGlvbnMuCj4gCj4gWWVzLCBJIG11c3QgaGF2ZSB0eXBvLWVkIGl0Li4uCj4gCj4g
+Pgo+ID4gPiArICAgICAgICAgICAgdmRldi0+bnVtYmVyID0gKDMgPDwgOCkgfCAodmRldi0+ZGlz
+ayA8PCA2KSB8IHZkZXYtCj4gPiA+cGFydGl0aW9uOwo+ID4gPiArICAgICAgICB9IGVsc2UgaWYg
+KCh2ZGV2LT5kaXNrID09IDIgfHwgdmRldi0+ZGlzayA9PSAzKSAmJgo+ID4gPiArICAgICAgICAg
+ICAgICAgICAgIHZkZXYtPnBhcnRpdGlvbiA8ICgxIDw8IDQpKSB7Cj4gPgo+ID4gc2FtZSBoZXJl
+Lgo+IAo+IC4uLmFuZCB0aGVuIGN1dCduJ3Bhc3RlZC4KPiAKPiA+Cj4gPiA+ICsgICAgICAgICAg
+ICB2ZGV2LT5udW1iZXIgPSAoMjIgPDwgOCkgfCAoKHZkZXYtPmRpc2sgLSAyKSA8PCA2KSB8Cj4g
+PiA+ICsgICAgICAgICAgICAgICAgdmRldi0+cGFydGl0aW9uOwo+ID4gPiArICAgICAgICB9IGVs
+c2Ugewo+ID4gPiArICAgICAgICAgICAgZ290byBpbnZhbGlkOwo+ID4gPiArICAgICAgICB9Cj4g
+PiA+ICsgICAgICAgIGJyZWFrOwo+ID4gPiArCj4gPiA+ICsgICAgY2FzZSBYRU5fUURJU0tfVkRF
+Vl9UWVBFX1NEOgo+ID4gPiArICAgICAgICBpZiAodmRldi0+ZGlzayA8ICgxIDw8IDQpICYmIHZk
+ZXYtPnBhcnRpdGlvbiA8ICgxIDw8IDQpKSB7Cj4gPiA+ICsgICAgICAgICAgICB2ZGV2LT5udW1i
+ZXIgPSAoOCA8PCA4KSB8ICh2ZGV2LT5kaXNrIDw8IDQpIHwgdmRldi0KPiA+ID5wYXJ0aXRpb247
+Cj4gPiA+ICsgICAgICAgIH0gZWxzZSB7Cj4gPiA+ICsgICAgICAgICAgICBnb3RvIGludmFsaWQ7
+Cj4gPiA+ICsgICAgICAgIH0KPiA+ID4gKyAgICAgICAgYnJlYWs7Cj4gPiA+ICsKPiA+ID4gKyAg
+ICBkZWZhdWx0Ogo+ID4gPiArICAgICAgICBnb3RvIGludmFsaWQ7Cj4gPiA+ICsgICAgfQo+ID4g
+PiArCj4gPiA+ICsgICAgZ19mcmVlKHN0cik7Cj4gPiA+ICsgICAgdmRldi0+dmFsaWQgPSB0cnVl
+Owo+ID4gPiArICAgIHJldHVybjsKPiA+ID4gKwo+ID4gPiAraW52YWxpZDoKPiA+ID4gKyAgICBl
+cnJvcl9zZXRnKGVycnAsICJpbnZhbGlkIHZpcnR1YWwgZGlzayBzcGVjaWZpZXIiKTsKPiA+ID4g
+KyAgICBnX2ZyZWUoc3RyKTsKPiA+Cj4gPiA6KCwgZ19mcmVlIGlzIGNhbGxlZCB0d2ljZS4KPiAK
+PiBPb3BzLiBHb29kIGNhdGNoLgoKT2gsIEkgdGhvdWdodCB5b3UnZCBmb3VuZCBhIGRvdWJsZSBm
+cmVlLi4uCgo+IAo+ID4KPiA+IG1heWJlIHdlIGNvdWxkIGhhdmU6Cj4gPiAgICAgdmRldi0+dmFs
+aWQ9dHJ1ZTsKPiA+ICAgICBvdXQ6Cj4gPiAgICAgICBpZiAoIXZkZXYtPnZhbGlkKQo+ID4gICAg
+ICAgICBlcnJvcl9zZXRnKC4uLik7Cj4gPiAgICAgICBnX2ZyZWU7CgpObywgdGhhdCdzIHF1aXRl
+IGNvbnZvbHV0ZWQuIEkgcHJlZmVyIHNlcGFyYXRlICdmYWlsJyBhbmQgJ3N1Y2Nlc3MnIHBhdGhz
+LCBldmVuIGlmIHRoZXkgYm90aCBuZWVkIHRvIGNhbGwgZ19mcmVlKCkuCgogIFBhdWwKCj4gPgo+
+ID4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9ody94ZW4veGVuLXFkaXNrLmggYi9pbmNsdWRlL2h3
+L3hlbi94ZW4tcWRpc2suaAo+ID4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+ID4gPiBpbmRleCAw
+MDAwMDAwMDAwLi5hZGUwODY2MDM3Cj4gPiA+IC0tLSAvZGV2L251bGwKPiA+ID4gKysrIGIvaW5j
+bHVkZS9ody94ZW4veGVuLXFkaXNrLmgKPiA+ID4gQEAgLTAsMCArMSwzOCBAQAo+ID4gPiArLyoK
+PiA+ID4gKyAqIENvcHlyaWdodCAoYykgQ2l0cml4IFN5c3RlbXMgSW5jLgo+ID4gPiArICogQWxs
+IHJpZ2h0cyByZXNlcnZlZC4KPiA+ID4gKyAqLwo+ID4gPiArCj4gPiA+ICsjaWZuZGVmIEhXX1hF
+Tl9RRElTS19ICj4gPiA+ICsjZGVmaW5lIEhXX1hFTl9RRElTS19ICj4gPiA+ICsKPiA+ID4gKyNp
+bmNsdWRlICJody94ZW4veGVuLWJ1cy5oIgo+ID4gPiArCj4gPiA+ICt0eXBlZGVmIGVudW0gWGVu
+UWRpc2tWZGV2VHlwZSB7Cj4gPiA+ICsgICAgWEVOX1FESVNLX1ZERVZfVFlQRV9EUCwKPiA+Cj4g
+PiBNYXliZSB3ZSBjb3VsZCBzZXQgdHlwZV9kcCB2YWx1ZSB0byAxLCBzbyB0aGF0LCB3aGVuIHZk
+ZXYtPnR5cGUgaXNuJ3QKPiA+IHNldCwgd2UgY2FuIGRldGVjdCBpdCBsYXRlci4KPiAKPiBSYXRo
+ZXIgdGhhbiBoYXZpbmcgdGhlICd2YWxpZCcgYm9vbD8gWWVzLCB0aGF0IHdvdWxkIHdvcmsuCj4g
+Cj4gICBQYXVsCj4gCj4gPgo+ID4KPiA+ID4gKyAgICBYRU5fUURJU0tfVkRFVl9UWVBFX1hWRCwK
+PiA+ID4gKyAgICBYRU5fUURJU0tfVkRFVl9UWVBFX0hELAo+ID4gPiArICAgIFhFTl9RRElTS19W
+REVWX1RZUEVfU0QsCj4gPiA+ICsgICAgWEVOX1FESVNLX1ZERVZfVFlQRV9fTUFYCj4gPiA+ICt9
+IFhlblFkaXNrVmRldlR5cGU7Cj4gPgo+ID4gVGhhbmtzLAo+ID4KPiA+IC0tCj4gPiBBbnRob255
+IFBFUkFSRAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
