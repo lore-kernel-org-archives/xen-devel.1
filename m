@@ -1,25 +1,21 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: PVH Whitelist Results / Windows Dom0
-Date: Tue, 4 Dec 2018 18:50:14 +0100
-Message-ID: <20181204175014.l3uhqsfanezwxwp5@mac>
-References: <CANmpu8Vg2m0-iWq+H6Z-xSw287vO6W9wogFM0HbcEoGPUiZAMw@mail.gmail.com>
- <20181203114246.ku7rvsctqsmrx72k@mac>
- <CANmpu8WymmVznMW=UMkOeFaSS7RvZoh01r8r4GrrXyucSzCbJw@mail.gmail.com>
- <20181203170412.xyxaemafv27bgfmn@mac>
- <CANmpu8Vk3thW0Zmm9MjoCQ28rK1pQmdwB1P2MnGu7wsuAuU5UQ@mail.gmail.com>
- <lnkXeUdIou5TUPE2f2Vc_Eo_Z8w6JezLcMOIznTNLDKNsrGN9y6cRITcXP87JOalZ5jj8tG9LX4ZSiXX5i70_NxvXLCKS87UhjqM5_PU1GQ=@pm.me>
+From: Chris Brannon <cmb@prgmr.com>
+Subject: HVM driver domains do not appear to be usable with
+ stubdomains
+Date: Tue, 04 Dec 2018 10:10:54 -0800
+Message-ID: <874lbt2mdt.fsf@prgmr.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HNzE=ON=citrix.com=prvs=869b7dada=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gUF89-0005ln-TH
- for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 18:09:09 +0000
-Content-Disposition: inline
-In-Reply-To: <lnkXeUdIou5TUPE2f2Vc_Eo_Z8w6JezLcMOIznTNLDKNsrGN9y6cRITcXP87JOalZ5jj8tG9LX4ZSiXX5i70_NxvXLCKS87UhjqM5_PU1GQ=@pm.me>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <srs0=v2ks=on=prgmr.com=cmb@srs-us1.protection.inumbo.net>)
+ id 1gUF9u-0006Pz-2p
+ for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 18:10:58 +0000
+Received: from localhost (97-115-118-92.ptld.qwest.net [97.115.118.92])
+ (Authenticated sender: cmb)
+ by mail.prgmr.com (Postfix) with ESMTPSA id F34F628C00E
+ for <xen-devel@lists.xenproject.org>; Tue,  4 Dec 2018 17:11:18 -0500 (EST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,24 +24,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Connor Davis <connojd@pm.me>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "rianquinn@gmail.com" <rianquinn@gmail.com>
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBEZWMgMDQsIDIwMTggYXQgMDU6NDY6MzhBTSArMDAwMCwgQ29ubm9yIERhdmlzIHdy
-b3RlOgo+ID4+PiA+ID4gLSAweDcwCj4gPj4+ID4gPiAtIDB4NzEKPiAKPiBUaGVzZSBhcmUgYWNj
-ZXNzZWQgZnJvbSByZWFzc2VydF9ubWkuIFRoaXMgaXMgb25seSBjYWxsZWQgZnJvbSBkZWZhdWx0
-X2RvX25taQo+IGluIHRoZSB2ZXJzaW9uIHRoZSBndWVzdCBpcyBiYXNlZCBvbiAoNC4yMC1yYzIp
-LgoKT3BzLCBmb3Jnb3QgdG8gYW5zd2VyIHRoaXMgb25lLgoKWGVuIHNldHMgdGhlICdDTU9TIFJU
-QyBOb3QgUHJlc2VudCcgZmxhZyBpbiB0aGUgSUEtUEMgYm9vdGZsYWdzLCB0aG9zZQpyZWdpc3Rl
-cnMgaG93ZXZlciBhcmUgc2hhcmVkIHdpdGggdGhlIENNT1MgUkFNLgoKSSBoYXZlIHRvIGFkbWl0
-IEknbSBub3Qgc3VyZSBob3cgdGhpcyBDTU9TIFJUQyBmbGFnIGlzIGV4cGVjdGVkIHRvCmJlaGF2
-ZSwgc2luY2UgdGhlIENNT1MgUlRDIC8gUkFNIGltcGxlbWVudGF0aW9uIHNlZW1zIHRvIGJlIGNv
-bXBsZXRlbHkKaW50ZXJ0d2luZWQuIElNTyBpdCB3b3VsZCBtYWtlIHNlbnNlIHRvIGhhdmUgYSBm
-bGFnIHRvIGRpc2FibGUgQ01PUwpjb21wbGV0ZWx5LCBidXQgdGhlbiB0aGVyZSBhcmUgTk1JIHJl
-bGF0ZWQgcmVnaXN0ZXJzIGluIHRob3NlIElPCnBvcnRzLCBzbyBJJ20gYWZyYWlkIHRoZXJlIGlz
-bid0IG11Y2ggdGhhdCBjYW4gYmUgZG9uZSBoZXJlLCBhcGFydApmcm9tIG1ha2luZyBzdXJlIHRo
-ZSBub24tUlRDIGZ1bmN0aW9uYWxpdHkgaXMgZ29vZCBlbm91Z2ggZm9yCmd1ZXN0cy4KClJvZ2Vy
-LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCkkgc2V0IHVwIGEgbmV0d29yayBkcml2ZXIgZG9tYWluIGZvciBhIGRvbTA7IGl0IHVzZXMg
+SFZNCnZpcnR1YWxpemF0aW9uLiAgSXQgd29ya2VkIHZlcnkgd2VsbCB3aGVuIG5vdCB1c2luZyBh
+IGRldmljZSBtb2RlbApzdHViZG9tYWluLCBidXQgd2hlbiBJIHJlcXVlc3RlZCB0aGUgdXNlIG9m
+IGEgZGV2aWNlIG1vZGVsIHN0dWJkb21haW4gaW4KbXkgeGwuY2ZnIGZpbGUsIHRoZSBkb21VIHJl
+ZnVzZWQgdG8gYm9vdC4gIEl0IGdhdmUgdGhlIGZvbGxvd2luZyBlcnJvcgptZXNzYWdlLgoKWzc2
+NTk0LjE5NTQwNF0geGVuX3BjaWJhY2s6IHZwY2k6IDAwMDA6MDU6MDAuMDogYXNzaWduIHRvIHZp
+cnR1YWwgc2xvdCAwCls3NjU5NC4xOTU5MjddIHBjaWJhY2sgMDAwMDowNTowMC4wOiByZWdpc3Rl
+cmluZyBmb3IgMzUKWzc2NTk0LjIzMDU5Ml0geGVuLXBjaWJhY2sgcGNpLTM0LTA6IDIyIENvdWxk
+bid0IGxvY2F0ZSBQQ0kgZGV2aWNlCiAgICAoMDAwMDowNTowMC4wKSEgcGVyaGFwcyBhbHJlYWR5
+IGluLXVzZT8KCkl0IHNlZW1zIHRvIG1lIHRoYXQgWGVuIGlzIHRyeWluZyB0byBwYXNzIHRoZSBQ
+Q0kgZGV2aWNlIHRvIGJvdGggdGhlCmRvbVUgYW5kIHRoZSBzdHViZG9tYWluLCBhbmQgdGhhdCBp
+cyB3aHkgaXQgaXMgZmFpbGluZy4gIEhhcyBhbnlvbmUKbWFuYWdlZCB0byBnZXQgYW4gSFZNIGRy
+aXZlciBkb21haW4gcnVubmluZyB3aXRoIGEgc3R1YmRvbWFpbj8gIElmIHNvLApob3cgZGlkIHlv
+dSBkbyBpdD8gIE9yIGlzIGl0IGV4cGVjdGVkIHRoYXQgSFZNIGRyaXZlciBkb21haW5zIHdvbid0
+IHdvcmsKd2l0aCBzdHViZG9tYWlucz8KCi0tIENocmlzCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
