@@ -1,15 +1,15 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v5 4/7] xen: introduce mfn_init macro
-Date: Tue, 04 Dec 2018 03:25:55 -0700
-Message-ID: <5C0656330200007800202993@prv1-mh.provo.novell.com>
-References: <alpine.DEB.2.10.1812031302070.13706@sstabellini-ThinkPad-X260>
- <1543871021-315-4-git-send-email-sstabellini@kernel.org>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2] always clear the X2APIC_ENABLE bit for
+ PV guest
+Date: Tue, 4 Dec 2018 11:29:30 +0100
+Message-ID: <9eeadf62-1f1f-82f0-bd57-4dfd5655ed1d@suse.com>
+References: <20181204102540.1299-1-xin.li@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1543871021-315-4-git-send-email-sstabellini@kernel.org>
-Content-Disposition: inline
+In-Reply-To: <20181204102540.1299-1-xin.li@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,24 +18,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: edgar.iglesias@xilinx.com, Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <stefanos@xilinx.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xen.org, Julien Grall <julien.grall@arm.com>, saeed.nowshadi@xilinx.com
+To: Xin Li <talons.lee@gmail.com>, xen-devel@lists.xen.org
+Cc: Talons Lee <xin.li@citrix.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Igor Druzhinin <igor.druzhinin@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAzLjEyLjE4IGF0IDIyOjAzLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
-Cj4gVG8gYmUgdXNlZCBpbiBjb25zdGFudCBpbml0aWFsaXphdGlvbnMgb2YgbWZuX3QgdmFyaWFi
-bGVzLCBzdWNoIGFzOgo+IAo+IHN0YXRpYyBtZm5fdCBub2RlID0gbWZuX2luaXQoTU1fQUREUik7
-Cj4gCj4gSXQgaXMgbmVjZXNzYXJ5IGJlY2F1c2Ugc3RhdGljIGlubGluZSBmdW5jdGlvbnMgY2Fu
-bm90IGJlIHVzZWQgYXMgc3RhdGljCj4gaW5pdGlhbGl6ZXJzLgoKV2UgaGFkIGJlZW4gYXQgdGhp
-cyBwb2ludCBvbmNlIChxdWl0ZSBzb21lIHRpbWUgYWdvKSwgYW5kIGdvdAphd2F5IHdpdGhvdXQg
-c3VjaCBhbiBhZGRpdGlvbi4gRGlkIHlvdSB0cnkgdG8gZmluZCB0aGF0IG9sZApkaXNjdXNzaW9u
-PyBBcmUgdGhlcmUgYW55IG5ldyByZWFzb25zIHRvIGhhdmUgc3VjaCBhIGNvbnN0cnVjdD8KRG8g
-eW91IG5lZWQgdGhpcyBmb3Igb3RoZXIgdGhhbiBzZXR0aW5nIGEgdmFsdWUgdG8gSU5WQUxJRF9N
-Rk4sCmluIHdoaWNoIGNhc2UgSU5WQUxJRF9NRk5fSU5JVElBTElaRVIgb3VnaHQgdG8gYmUgc3Vp
-dGFibGU/CgpUaGlzIGlzIG5vdCB0byBzYXkgSSdtIGVudGlyZWx5IG9wcG9zZWQuCgpJZiB3ZSB3
-ZXJlIHRvIGhhdmUgc3VjaCBhIGNvbnN0cnVjdCwgSSB3b25kZXIgdGhvdWdoIHdoZXRoZXIKbWZu
-X2luaXQoKSBpcyBzdWl0YWJsZSBhcyBhIG5hbWUuIFNpbXBseSBNRk4oKSBwZXJoYXBzLCBhbmQg
-dGhlbgphbHNvIGNvbnNpc3RlbnRseSBoYXZlIEdGTigpIGFuZCBERk4oKT8KCkphbgoKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDQvMTIvMjAxOCAxMToyNSwgWGluIExpIHdyb3RlOgo+IEZyb206IFRhbG9ucyBMZWUgPHhp
+bi5saUBjaXRyaXguY29tPgo+IAo+IENvbW1pdCBlNjU3ZmNjIGNsZWFycyBjcHUgY2FwYWJpbGl0
+eSBiaXQgaW5zdGVhZCBvZiB1c2luZyBmYWtlIGNwdWlkCj4gdmFsdWUsIHRoZSBFWElEIHNob3Vs
+ZCBhbHdheXMgYmUgb2ZmIGZvciBQViBndWVzdCB3aXRob3V0IGRlcGVuZGluZwo+IG9uIGNwdWlk
+IHZhbHVlLiBTbyByZW1vdmUgdGhlIGNwdWlkIGNoZWNrIGluIHhlbl9yZWFkX21zcl9zYWZlKCkg
+dG8KPiBhbHdheXMgY2xlYXIgdGhlIFgyQVBJQ19FTkFCTEUgYml0Lgo+IAo+IFNpZ25lZC1vZmYt
+Ynk6IFRhbG9ucyBMZWUgPHhpbi5saUBjaXRyaXguY29tPgo+IAo+IC0tLQo+IENDOiBJZ29yIERy
+dXpoaW5pbiA8aWdvci5kcnV6aGluaW5AY2l0cml4LmNvbT4KPiBDQzogU2VyZ2V5IER5YXNsaSA8
+c2VyZ2V5LmR5YXNsaUBjaXRyaXguY29tPgo+IENDOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29v
+cGVyM0BjaXRyaXguY29tPgo+IENDOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4g
+Cj4gdjI6Cj4gZG9uJ3QgdXNlIGZha2UgY3B1aWQgdG8gY2hlYXQgeGVuX3JlYWRfbXNyX3NhZmUo
+KSwganVzdCBhbHdheXMgY2xlYXIKPiB0aGUgRVhJVCBiaXQuCj4gLS0tCj4gIGFyY2gveDg2L3hl
+bi9lbmxpZ2h0ZW5fcHYuYyB8IDMgLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAzIGRlbGV0aW9ucygt
+KQo+IAo+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMgYi9hcmNoL3g4
+Ni94ZW4vZW5saWdodGVuX3B2LmMKPiBpbmRleCA0YjIwMDgyLi42YWQzMTJkIDEwMDY0NAo+IC0t
+LSBhL2FyY2gveDg2L3hlbi9lbmxpZ2h0ZW5fcHYuYwo+ICsrKyBiL2FyY2gveDg2L3hlbi9lbmxp
+Z2h0ZW5fcHYuYwo+IEBAIC05MDAsOSArOTAwLDYgQEAgc3RhdGljIHU2NCB4ZW5fcmVhZF9tc3Jf
+c2FmZSh1bnNpZ25lZCBpbnQgbXNyLCBpbnQgKmVycikKPiAgCXZhbCA9IG5hdGl2ZV9yZWFkX21z
+cl9zYWZlKG1zciwgZXJyKTsKPiAgCXN3aXRjaCAobXNyKSB7Cj4gIAljYXNlIE1TUl9JQTMyX0FQ
+SUNCQVNFOgo+IC0jaWZkZWYgQ09ORklHX1g4Nl9YMkFQSUMKPiAtCQlpZiAoIShjcHVpZF9lY3go
+MSkgJiAoMSA8PCAoWDg2X0ZFQVRVUkVfWDJBUElDICYgMzEpKSkpCj4gLSNlbmRpZgo+ICAJCQl2
+YWwgJj0gflgyQVBJQ19FTkFCTEU7CgpDb3VsZCB5b3UgcGxlYXNlIGNvcnJlY3QgaW5kZW50YXRp
+b24/CgpXaXRoIHRoYXQgYWRkcmVzc2VkIHlvdSBjYW4gaGF2ZSBteQoKUmV2aWV3ZWQtYnk6IEp1
+ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2VuCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
