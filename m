@@ -1,13 +1,20 @@
-From: Omkar Bolla <omkar062@gmail.com>
-Subject: Re: Xen support on ARM64
-Date: Tue, 4 Dec 2018 12:50:52 +0530
-Message-ID: <CAKPiPDqu9nbNk6gNQVw4ao29GKk_+m2WwCS=5bhaBi_Gmawaww@mail.gmail.com>
-References: <CAKPiPDrgwFCM4ic=O1uUaHgN-WoYMwuOtxtgLSWzhy3d2MYr2A@mail.gmail.com>
- <d2dd6717-de9d-1fbf-08db-f013cca5207c@arm.com>
+From: Zhao Yan <yan.y.zhao@intel.com>
+Subject: Re: [PATCH v2] xen/pt: Fix a xen passthrough failure
+Date: Tue, 4 Dec 2018 02:32:38 -0500
+Message-ID: <20181204073238.GA8671__49036.8231818595$1543909031$gmane$org@joy-OptiPlex-7040>
+References: <20181203050438.6034-1-yan.y.zhao@intel.com>
+ <20181203112030.lcgcqnck3pppwsfh@mac>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8137123950361767286=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <d2dd6717-de9d-1fbf-08db-f013cca5207c@arm.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=z+b2=on=intel.com=yan.y.zhao@srs-us1.protection.inumbo.net>)
+ id 1gU5GT-0000Je-1O
+ for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 07:37:05 +0000
+Content-Disposition: inline
+In-Reply-To: <20181203112030.lcgcqnck3pppwsfh@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,111 +23,60 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: julien.grall@arm.com
-Cc: xen-devel@lists.xen.org
+To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, qemu-devel@nongnu.org, JBeulich@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============8137123950361767286==
-Content-Type: multipart/alternative; boundary="000000000000b525d0057c2d1b1d"
-
---000000000000b525d0057c2d1b1d
-Content-Type: text/plain; charset="UTF-8"
-
-Hi Julien,
-
-Awesome, after applying those patches in latest xen, hikey960 able to
-enable 4 CPUs and other four CPUs are giving error -5.
-And after using "hmp-unsafe" in xen command line, all CPUs got enabled
-successfully.
-
-Thank you,
-Omkar B
-
-On Mon, Dec 3, 2018 at 7:27 PM Julien Grall <julien.grall@arm.com> wrote:
-
->
->
-> On 29/11/2018 07:39, Omkar Bolla wrote:
-> > Hi,
->
-> Hello,
->
-> > I just wanted to run xen hypervisor on ARMv8 architecture, I tried on
-> Hikey960
-> > platform which has armv8, but latest xen giving cpu errors.
-> >
-> > Could you please tell me, on which platforms latest xen is working?
->
-> If your platform supports virtualization. Then there are a good chance for
-> Xen
-> to boot on it out-of-box. So what platform are you looking at?
->
-> Regarding the hikey960, there are patches on the ML to fix boot. See [1].
->
-> Cheers,
->
-> [1]
-> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03360.html
->
-> --
-> Julien Grall
->
-
---000000000000b525d0057c2d1b1d
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div>Hi Julien,</div><div><br></div><div>=
-<div>Awesome, after applying those patches in latest xen, hikey960 able to =
-enable 4 CPUs and other four CPUs are giving error -5.</div></div><div>And =
-after using &quot;hmp-unsafe&quot; in xen command line, all CPUs got enable=
-d successfully.</div><div><br></div><div>Thank you,</div><div>Omkar B<br></=
-div></div></div><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Mon, Dec=
- 3, 2018 at 7:27 PM Julien Grall &lt;<a href=3D"mailto:julien.grall@arm.com=
-">julien.grall@arm.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_q=
-uote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1e=
-x"><br>
-<br>
-On 29/11/2018 07:39, Omkar Bolla wrote:<br>
-&gt; Hi,<br>
-<br>
-Hello,<br>
-<br>
-&gt; I just wanted to run xen hypervisor on ARMv8 architecture, I tried on =
-Hikey960 <br>
-&gt; platform which has armv8, but latest xen giving cpu errors.<br>
-&gt; <br>
-&gt; Could you please tell me, on which platforms latest xen is working?<br=
->
-<br>
-If your platform supports virtualization. Then there are a good chance for =
-Xen <br>
-to boot on it out-of-box. So what platform are you looking at?<br>
-<br>
-Regarding the hikey960, there are patches on the ML to fix boot. See [1].<b=
-r>
-<br>
-Cheers,<br>
-<br>
-[1] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
-/msg03360.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
-ct.org/archives/html/xen-devel/2018-11/msg03360.html</a><br>
-<br>
--- <br>
-Julien Grall<br>
-</blockquote></div>
-
---000000000000b525d0057c2d1b1d--
-
-
---===============8137123950361767286==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8137123950361767286==--
+T24gTW9uLCBEZWMgMDMsIDIwMTggYXQgMTI6MjA6MzBQTSArMDEwMCwgUm9nZXIgUGF1IE1vbm7D
+qSB3cm90ZToKPiBIZWxsbywKPiAKPiBUaGFua3MgZm9yIHRoZSBwYXRjaC4KPiAKPiBUaGUgc3Vi
+amVjdCBzaG91bGQgYmUgbW9yZSBkZXNjcmlwdGl2ZSwgIkZpeCBhIHhlbiBwYXNzdGhyb3VnaAo+
+IGZhaWx1cmUiIGlzIHRvbyBnZW5lcmljLiBIb3cgYWJvdXQ6ICJhbGxvdyBwYXNzdGhyb3VnaCBv
+ZiBkZXZpY2VzIHdpdGgKPiBib2d1cyBpbnRlcnJ1cHQgcGluIiBvciBzb21ldGhpbmcgc2ltaWxh
+ci4KcmlnaHQsIHRoYW5rcyBmb3IgeW91ciBzdWdnZXN0aW9uLiBJJ2xsIGNoYW5nZSB0aGUgc3Vi
+amVjdCB0byB0aGlzIG9uZS4KCj4gCj4gT24gTW9uLCBEZWMgMDMsIDIwMTggYXQgMTI6MDQ6MzhB
+TSAtMDUwMCwgWmhhbyBZYW4gd3JvdGU6Cj4gPiBGb3Igc29tZSBwY2kgZGV2aWNlLCBldmVuIGl0
+cyBQQ0lfSU5URVJSVVBUX1BJTiBpcyBub3QgMCwgaXQgYWN0dWFsbHkKPiA+IGRvZXNuJ3Qgc3Vw
+cG9ydCBJTlR4IG1vZGUsIHNvIGl0cyBtYWNoaW5lIGlycSByZWFkIGZyb20gaG9zdCBzeXNmcyBp
+cyAwLgo+ID4gSW4gdGhhdCBjYXNlLCByZXBvcnQgUENJX0lOVEVSUlVQVF9QSU4gYXMgMCB0byBn
+dWVzdCBhbmQgbGV0IHBhc3N0aHJvdWdoCj4gPiBjb250aW51ZS4KPiA+IAo+ID4gdjI6IGZpeCBz
+b21lIGNvZGluZyBzdHlsZSBpc3N1ZQo+IAo+IFRoZSBjaGFuZ2Vsb2cgYmV0d2VlbiB2ZXJzaW9u
+cyBzaG91bGQgYmUgYmVsb3cgdGhlICctLS0nLgo+IApnb3QgaXQuIHRoYW5rcyA6KQoKPiA+IAo+
+ID4gQ2M6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgo+ID4gQ2M6IEph
+biBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4KPiA+IFNpZ25lZC1vZmYtYnk6IFpoYW8gWWFu
+IDx5YW4ueS56aGFvQGludGVsLmNvbT4KPiA+IC0tLQo+ID4gIGh3L3hlbi94ZW5fcHQuYyAgICAg
+ICAgICAgICB8IDUgKysrKysKPiA+ICBody94ZW4veGVuX3B0X2NvbmZpZ19pbml0LmMgfCA4ICsr
+KysrKystCj4gPiAgMiBmaWxlcyBjaGFuZ2VkLCAxMiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9u
+KC0pCj4gPiAKPiA+IGRpZmYgLS1naXQgYS9ody94ZW4veGVuX3B0LmMgYi9ody94ZW4veGVuX3B0
+LmMKPiA+IGluZGV4IGYxZjNhMzcyN2MuLmQ2MDFjOTk3OWMgMTAwNjQ0Cj4gPiAtLS0gYS9ody94
+ZW4veGVuX3B0LmMKPiA+ICsrKyBiL2h3L3hlbi94ZW5fcHQuYwo+ID4gQEAgLTg0Nyw2ICs4NDcs
+MTEgQEAgc3RhdGljIHZvaWQgeGVuX3B0X3JlYWxpemUoUENJRGV2aWNlICpkLCBFcnJvciAqKmVy
+cnApCj4gPiAgICAgIH0KPiA+ICAKPiA+ICAgICAgbWFjaGluZV9pcnEgPSBzLT5yZWFsX2Rldmlj
+ZS5pcnE7Cj4gPiArICAgIGlmIChtYWNoaW5lX2lycSA9PSAwKSB7Cj4gPiArICAgICAgICBYRU5f
+UFRfTE9HKGQsICJtYWNoaW5lIGlycSBpcyAwXG4iKTsKPiAKPiBJIHdvdWxkIG1heWJlIGNvbnNp
+ZGVyIGRpc2FibGluZyBJTlRYIGFzc2VydGlvbiBoZXJlIG9uIHRoZSBjb21tYW5kCj4gcmVnaXN0
+ZXIuCj4gCm9rLCBJJ2xsIGFkZCB0aGF0LgpBY3R1YWxseSBJIHdhcyB2YWNpbGxhdGluZyBvbiB3
+aGV0aGVyIHRvIGFkZCB0aGUgZGlzYWJsaW5nIG9mIElOVHgKYXNzZXJ0aW9uLCBhcyBJIHRob3Vn
+aHQgUENJX0lOVEVSUlVQVF9QSU4gd2FzIGFscmVhZHkgcmVwb3J0ZWQgMC4gCkJ1dCBhZGRpbmcg
+dGhlIGRpc2FibGluZyBpcyBiZXR0ZXIuCgoKPiA+ICsgICAgICAgIGdvdG8gb3V0Owo+ID4gKyAg
+ICB9Cj4gPiArCj4gPiAgICAgIHJjID0geGNfcGh5c2Rldl9tYXBfcGlycSh4ZW5feGMsIHhlbl9k
+b21pZCwgbWFjaGluZV9pcnEsICZwaXJxKTsKPiA+ICAgICAgaWYgKHJjIDwgMCkgewo+ID4gICAg
+ICAgICAgZXJyb3Jfc2V0Z19lcnJubyhlcnJwLCBlcnJubywgIk1hcHBpbmcgbWFjaGluZSBpcnEg
+JXUgdG8iCj4gPiBkaWZmIC0tZ2l0IGEvaHcveGVuL3hlbl9wdF9jb25maWdfaW5pdC5jIGIvaHcv
+eGVuL3hlbl9wdF9jb25maWdfaW5pdC5jCj4gPiBpbmRleCA0N2Y5MDEwYzc1Li4xMDA3YjZjOTc3
+IDEwMDY0NAo+ID4gLS0tIGEvaHcveGVuL3hlbl9wdF9jb25maWdfaW5pdC5jCj4gPiArKysgYi9o
+dy94ZW4veGVuX3B0X2NvbmZpZ19pbml0LmMKPiA+IEBAIC0zMDAsNyArMzAwLDEzIEBAIHN0YXRp
+YyBpbnQgeGVuX3B0X2lycXBpbl9yZWdfaW5pdChYZW5QQ0lQYXNzdGhyb3VnaFN0YXRlICpzLAo+
+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBYZW5QVFJlZ0luZm8gKnJlZywg
+dWludDMyX3QgcmVhbF9vZmZzZXQsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHVpbnQzMl90ICpkYXRhKQo+ID4gIHsKPiA+IC0gICAgKmRhdGEgPSB4ZW5fcHRfcGNpX3Jl
+YWRfaW50eChzKTsKPiA+ICsgICAgaWYgKHMtPnJlYWxfZGV2aWNlLmlycSkKPiA+ICsgICAgICAg
+ICpkYXRhID0geGVuX3B0X3BjaV9yZWFkX2ludHgocyk7Cj4gPiArICAgIGVsc2Ugewo+ID4gKyAg
+ICAgICAgWEVOX1BUX0xPRygmcy0+ZGV2LAo+ID4gKyAgICAgICAgICAgICJtYWNoaW5lIGlycSBp
+cyAwLCBpbml0IGd1ZXN0IFBDSV9JTlRFUlJVUFRfUElOIHRvIDBcbiIpOwo+ID4gKyAgICAgICAg
+KmRhdGEgPSAwOwo+IAo+IFRoZSBkZWZhdWx0IHZhbHVlIGZvciB0aGUgcmVnaXN0ZXIgaXMgYWxy
+ZWFkeSB6ZXJvLCBzbyB5b3UgY291bGQgZHJvcAo+IHRoZSBlbHNlIGJyYW5jaCBBRkFJQ1QuCm9r
+LCBJJ2xsIGRyb3AgdGhlIGVsc2UgYnJhbmNoLiB0aGFua3MgZm9yIHlvdXIgcmV2aWV3IDopCgoK
+PiBUaGFua3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
