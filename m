@@ -1,25 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 3/4] iommu: elide flushing for higher
- order map/unmap operations
-Date: Tue, 04 Dec 2018 10:20:18 -0700
-Message-ID: <5C06B7520200007800202D7B@prv1-mh.provo.novell.com>
-References: <20181203174017.11956-1-paul.durrant@citrix.com>
- <20181203174017.11956-4-paul.durrant@citrix.com>
- <5C069A650200007800202BFD@prv1-mh.provo.novell.com>
- <0d6a78307bb5438582dd7e8e55a449db@AMSPEX02CL03.citrite.net>
- <5C06A4E60200007800202C98@prv1-mh.provo.novell.com>
- <ad36b7431b004ce89a6de1700a399a75@AMSPEX02CL03.citrite.net>
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+Subject: Re: [PATCH 1/2] xen/link: Link proc_info_list in .data
+ instead of .init.data
+Date: Tue, 4 Dec 2018 19:34:58 +0200
+Message-ID: <CAPD2p-mQ7HHtyGYxn-DMUphBpNn-JVWZAS6zHqOD2mUfmMTRpQ@mail.gmail.com>
+References: <1543923745-29877-1-git-send-email-olekstysh@gmail.com>
+ <1543923745-29877-2-git-send-email-olekstysh@gmail.com>
+ <5d6df477-e159-85c6-781e-f3af73f345cd@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0488743108003025419=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <srs0=uzs+=on=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gUEMz-0002Ls-Df
- for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 17:20:25 +0000
-In-Reply-To: <ad36b7431b004ce89a6de1700a399a75@AMSPEX02CL03.citrite.net>
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <srs0=es3t=on=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1gUEbH-0003DN-68
+ for xen-devel@lists.xenproject.org; Tue, 04 Dec 2018 17:35:11 +0000
+Received: by mail-it1-x136.google.com with SMTP id o19so16703050itg.5
+ for <xen-devel@lists.xenproject.org>; Tue, 04 Dec 2018 09:35:10 -0800 (PST)
+In-Reply-To: <5d6df477-e159-85c6-781e-f3af73f345cd@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,47 +25,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, george.dunlap@citrix.com, Julien Grall <julien.grall@arm.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@citrix.com>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Mirela Simonovic <mirela.simonovic@aggios.com>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA0LjEyLjE4IGF0IDE3OjUzLCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
-Ogo+PiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5w
-cm9qZWN0Lm9yZ10gT24gQmVoYWxmCj4+IE9mIEphbiBCZXVsaWNoCj4+IFNlbnQ6IDA0IERlY2Vt
-YmVyIDIwMTggMTY6MDIKPj4gCj4+ID4+PiBPbiAwNC4xMi4xOCBhdCAxNjozNiwgPFBhdWwuRHVy
-cmFudEBjaXRyaXguY29tPiB3cm90ZToKPj4gPj4gRnJvbTogSmFuIEJldWxpY2ggW21haWx0bzpK
-QmV1bGljaEBzdXNlLmNvbV0KPj4gPj4gU2VudDogMDQgRGVjZW1iZXIgMjAxOCAxNToxNwo+PiA+
-Pgo+PiA+PiA+Pj4gT24gMDMuMTIuMTggYXQgMTg6NDAsIDxwYXVsLmR1cnJhbnRAY2l0cml4LmNv
-bT4gd3JvdGU6Cj4+ID4+ID4gLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11
-LmMKPj4gPj4gPiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYwo+PiA+
-PiA+IEBAIC02MzMsMTEgKzYzMywxNCBAQCBzdGF0aWMgaW50IF9fbXVzdF9jaGVjawo+PiBpb21t
-dV9mbHVzaF9pb3RsYihzdHJ1Y3QKPj4gPj4gZG9tYWluICpkLCBkZm5fdCBkZm4sCj4+ID4+ID4K
-Pj4gPj4gPiAgc3RhdGljIGludCBfX211c3RfY2hlY2sgaW9tbXVfZmx1c2hfaW90bGJfcGFnZXMo
-c3RydWN0IGRvbWFpbiAqZCwKPj4gPj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgZGZuX3QgZGZuLAo+PiA+PiA+IC0gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQKPj4gPj4gcGFnZV9jb3Vu
-dCkKPj4gPj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgdW5zaWduZWQgaW50Cj4+ID4+IHBhZ2VfY291bnQsCj4+ID4+ID4gKyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGludAo+PiA+PiBmbHVz
-aF9mbGFncykKPj4gPj4gPiAgewo+PiA+PiA+ICAgICAgQVNTRVJUKHBhZ2VfY291bnQgJiYgIWRm
-bl9lcShkZm4sIElOVkFMSURfREZOKSk7Cj4+ID4+ID4gKyAgICBBU1NFUlQoZmx1c2hfZmxhZ3Mp
-Owo+PiA+PiA+Cj4+ID4+ID4gLSAgICByZXR1cm4gaW9tbXVfZmx1c2hfaW90bGIoZCwgZGZuLCAx
-LCBwYWdlX2NvdW50KTsKPj4gPj4gPiArICAgIHJldHVybiBpb21tdV9mbHVzaF9pb3RsYihkLCBk
-Zm4sIGZsdXNoX2ZsYWdzICYKPj4gPj4gSU9NTVVfRkxVU0hGX21vZGlmaWVkLAo+PiA+PiA+ICsg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhZ2VfY291bnQpOwo+PiA+Pgo+PiA+PiBXaHkg
-dGhlIHJlc3RyaWN0aW9uIHRvICJtb2RpZmllZCI/Cj4+ID4KPj4gPiBUaGUgcGFyYW1ldGVyIGlz
-IGEgYm9vbCB3aGljaCBzaG91bGQgYmUgdHJ1ZSBpZiBhbiBleGlzdGluZyBQVEUgd2FzCj4+IG1v
-ZGlmaWVkCj4+ID4gb3IgZmFsc2Ugb3RoZXJ3aXNlLiBJIGNhbiBtYWtlIHRoaXMgISEoZmx1c2hf
-ZmxhZ3MgJgo+PiBJT01NVV9GTFVTSEZfbW9kaWZpZWQpIGlzCj4+ID4geW91IHByZWZlci4KPj4g
-Cj4+IE5vLCB0aGF0IHdhc24ndCBteSBwb2ludC4gVGhlIHF1ZXN0aW9uIGlzIHdoeSB0aGlzIGlz
-bid0IGp1c3QKPj4gImZsdXNoX2ZsYWdzIiwgd2l0aG91dCBhbnkgbWFza2luZy4gSWlyYyB0aGVy
-ZSBhcmUgcHJlY2F1dGlvbnMKPj4gaW4gdGhlIFZULWQgY29kZSB0byBkZWFsIHdpdGggaGFyZHdh
-cmUgd2hpY2ggbWF5IGNhY2hlCj4+IG5vbi1wcmVzZW50IGVudHJpZXMuIEluIHRoYXQgY2FzZSAi
-YWRkZWQiIHJlcXVpcmVzIGZsdXNoaW5nIHRvby4KPj4gCj4gCj4gSSBkb24ndCB1bmRlcnN0YW5k
-LiBpb21tdV9mbHVzaF9pb3RsYigpJ3MgdGhpcmQgYXJndW1lbnQgaXMgCj4gJ2RtYV9vbGRfcHRl
-X3ByZXNlbnQnIHNvIHRoYXQgc2hvdWxkIGJlIHRydWUgaWZmIElPTU1VX0ZMVVNIRl9tb2RpZmll
-ZCBpcyAKPiBzZXQuIElPTU1VX0ZMVVNIRl9hZGRlZCBpcyBpcnJlbGV2YW50IHRvIHRoZSBpbXBs
-ZW1lbnRhdGlvbi4KCk9oLCB5b3UncmUgcmlnaHQuIEknbSBzb3JyeSBmb3IgdGhlIG5vaXNlIHRo
-ZW4uCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============0488743108003025419==
+Content-Type: multipart/alternative; boundary="000000000000e2b96b057c35af38"
+
+--000000000000e2b96b057c35af38
+Content-Type: text/plain; charset="UTF-8"
+
+On Tue, Dec 4, 2018 at 7:13 PM Julien Grall <julien.grall@arm.com> wrote:
+
+> Hi,
+>
+Hi, Julien
+
+
+>
+> Title: xen/arm: link: ...
+>
+ok
+
+
+>
+> On 12/4/18 11:42 AM, Oleksandr Tyshchenko wrote:
+> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> >
+> > To be able to use it for the hot pluged CPUs as well.
+>
+> s/hot pluged/hot-plugged/
+>
+ok
+
+
+>
+> >
+> > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> > ---
+> >   xen/arch/arm/xen.lds.S | 10 ++++++----
+> >   1 file changed, 6 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+> > index 245a0e0..003301a 100644
+> > --- a/xen/arch/arm/xen.lds.S
+> > +++ b/xen/arch/arm/xen.lds.S
+> > @@ -88,6 +88,12 @@ SECTIONS
+> >          . = ALIGN(PAGE_SIZE);
+> >          *(.data.page_aligned)
+> >          *(.data)
+> > +
+> > +       . = ALIGN(POINTER_ALIGN);
+> > +       __proc_info_start = .;
+> > +       *(.init.proc.info)
+>
+> This is a bit odd to see .init.* section in .data. So I think we want to
+> rename it.
+>
+indeed, will rename
+
+
+>
+> Cheers,
+>
+> --
+> Julien Grall
+>
+
+
+-- 
+Regards,
+
+Oleksandr Tyshchenko
+
+--000000000000e2b96b057c35af38
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Tue=
+, Dec 4, 2018 at 7:13 PM Julien Grall &lt;<a href=3D"mailto:julien.grall@ar=
+m.com">julien.grall@arm.com</a>&gt; wrote:<br></div><blockquote class=3D"gm=
+ail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-le=
+ft:1ex">Hi,<br></blockquote><div>Hi, Julien</div><div>=C2=A0</div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
+lid;padding-left:1ex">
+<br>
+Title: xen/arm: link: ...<br></blockquote><div>ok</div><div>=C2=A0</div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
+ccc solid;padding-left:1ex">
+<br>
+On 12/4/18 11:42 AM, Oleksandr Tyshchenko wrote:<br>
+&gt; From: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_tyshchenko@=
+epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<br>
+&gt; <br>
+&gt; To be able to use it for the hot pluged CPUs as well.<br>
+<br>
+s/hot pluged/hot-plugged/<br></blockquote><div>ok</div><div>=C2=A0</div><bl=
+ockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #=
+ccc solid;padding-left:1ex">
+<br>
+&gt; <br>
+&gt; Signed-off-by: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_ty=
+shchenko@epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<=
+br>
+&gt; ---<br>
+&gt;=C2=A0 =C2=A0xen/arch/arm/xen.lds.S | 10 ++++++----<br>
+&gt;=C2=A0 =C2=A01 file changed, 6 insertions(+), 4 deletions(-)<br>
+&gt; <br>
+&gt; diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S<br>
+&gt; index 245a0e0..003301a 100644<br>
+&gt; --- a/xen/arch/arm/xen.lds.S<br>
+&gt; +++ b/xen/arch/arm/xen.lds.S<br>
+&gt; @@ -88,6 +88,12 @@ SECTIONS<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 . =3D ALIGN(PAGE_SIZE);<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data.page_aligned)<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data)<br>
+&gt; +<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0. =3D ALIGN(POINTER_ALIGN);<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0__proc_info_start =3D .;<br>
+&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0*(.<a href=3D"http://init.proc.info" rel=
+=3D"noreferrer" target=3D"_blank">init.proc.info</a>)<br>
+<br>
+This is a bit odd to see .init.* section in .data. So I think we want to <b=
+r>
+rename it.<br></blockquote><div>indeed, will rename</div><div>=C2=A0</div><=
+blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px=
+ #ccc solid;padding-left:1ex">
+<br>
+Cheers,<br>
+<br>
+-- <br>
+Julien Grall<br>
+</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
+ class=3D"gmail_signature" data-smartmail=3D"gmail_signature"><div dir=3D"l=
+tr"><div><div dir=3D"ltr"><div><div dir=3D"ltr"><span style=3D"background-c=
+olor:rgb(255,255,255)"><font size=3D"2"><span style=3D"color:rgb(51,51,51);=
+font-family:Arial,sans-serif">Regards,</span></font></span></div><div dir=
+=3D"ltr"><br></div><div dir=3D"ltr"><div><span style=3D"background-color:rg=
+b(255,255,255)"><font size=3D"2">Oleksandr Tyshchenko</font></span></div></=
+div></div></div></div></div></div></div>
+
+--000000000000e2b96b057c35af38--
+
+
+--===============0488743108003025419==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0488743108003025419==--
