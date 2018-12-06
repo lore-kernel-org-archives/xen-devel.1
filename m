@@ -1,11 +1,12 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v8 0/7] KVM: x86: Allow Qemu/KVM to use PVH
- entry point
-Date: Thu, 6 Dec 2018 16:58:44 -0500
-Message-ID: <147cc043-b0af-74e9-5259-8c7854f82d8b__45691.9787139215$1544133517$gmane$org@oracle.com>
-References: <1544076152-21637-1-git-send-email-maran.wilson@oracle.com>
- <e8ed34e7-f82a-2314-9919-185d48510715@redhat.com>
- <20181206213752.GL3986@zn.tnic>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH for-4.12 v2 04/17] xen/arm: p2m: Introduce
+ p2m_is_valid and use it
+Date: Thu, 6 Dec 2018 14:02:12 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1812061401310.18779@sstabellini-ThinkPad-X260>
+References: <20181204202651.8836-1-julien.grall@arm.com>
+ <20181204202651.8836-5-julien.grall@arm.com>
+ <alpine.DEB.2.10.1812041549250.527@sstabellini-ThinkPad-X260>
+ <4838e4b5-51a5-5fbf-2fa3-1ce539ec3e74@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -13,11 +14,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PAb1=OP=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1gV1gF-0004P0-GN
- for xen-devel@lists.xenproject.org; Thu, 06 Dec 2018 21:59:35 +0000
-In-Reply-To: <20181206213752.GL3986@zn.tnic>
-Content-Language: en-US
+ <SRS0=Ba80=OP=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gV1ip-00057F-8D
+ for xen-devel@lists.xenproject.org; Thu, 06 Dec 2018 22:02:15 +0000
+In-Reply-To: <4838e4b5-51a5-5fbf-2fa3-1ce539ec3e74@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,21 +26,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Borislav Petkov <bp@alien8.de>, Paolo Bonzini <pbonzini@redhat.com>
-Cc: kvm@vger.kernel.org, rkrcmar@redhat.com, dave.hansen@linux.intel.com, hpa@zytor.com, x86@kernel.org, hch@infradead.org, mingo@redhat.com, xen-devel@lists.xenproject.org, bp@suse.de, thomas.lendacky@amd.com, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, mchehab@kernel.org, jgross@suse.com, Maran Wilson <maran.wilson@oracle.com>, gregkh@linuxfoundation.org, rdunlap@infradead.org, linux-kernel@vger.kernel.org, davem@davemloft.net, kirill.shutemov@linux.intel.com, roger.pau@citrix.com
+To: Julien Grall <julien.grall@arm.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvNi8xOCA0OjM3IFBNLCBCb3Jpc2xhdiBQZXRrb3Ygd3JvdGU6Cj4gT24gVGh1LCBEZWMg
-MDYsIDIwMTggYXQgMTA6MjE6MTJQTSArMDEwMCwgUGFvbG8gQm9uemluaSB3cm90ZToKPj4gVGhh
-bmtzISAgSSBzaG91bGQgYmUgYWJsZSB0byBwb3N0IGEgVGVzdGVkLWJ5IG5leHQgTW9uZGF5LiAg
-Qm9yaXMsIGFyZQo+PiB5b3UgZ29pbmcgdG8gcGljayBpdCB1cCBmb3IgNC4yMT8KPiBCb3JpcyBt
-ZSBvciBCb3JpcyBPLj8KPgo+IDotKQo+CgpPLiA7LSkKClRoZXJlIGFyZSBzb21lIG1pbm9yIGNo
-YW5nZXMgaW4gbm9uLXhlbiB4ODYgY29kZSBzbyBpdCB3b3VsZCBiZSBnb29kIHRvCmdldCB4ODYg
-bWFpbnRhaW5lcnMnIGFjay4KCkFuZCBhcyBmYXIgYXMgcWVtdS9xYm9vdCBjaGFuZ2VzLCBzaG91
-bGQgd2UgYXNzdW1lIHRoYXQgdGhlIGdlbmVyYWwKYXBwcm9hY2ggaXMgYWNjZXB0YWJsZT8gSSB1
-bmRlcnN0YW5kIHRoYXQgdGhlIHBhdGNoZXMgd2lsbCBwcm9iYWJseSBuZWVkCnRvIGdvIHRocm91
-Z2ggc29tZSBpdGVyYXRpb25zIGJ1dCBJIHdhbnQgdG8gbWFrZSBzdXJlIHdlIGhhdmUgYSBwYXRo
-CmZvcndhcmQgdGhlcmUuCgoKLWJvcmlzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gV2VkLCA1IERlYyAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGkgU3RlZmFubywKPiAK
+PiBPbiAwNC8xMi8yMDE4IDIzOjUwLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiBPbiBU
+dWUsIDQgRGVjIDIwMTgsIEp1bGllbiBHcmFsbCB3cm90ZToKPiA+ID4gVGhlIExQQUUgZm9ybWF0
+IGFsbG93cyB0byBzdG9yZSBpbmZvcm1hdGlvbiBpbiBhbiBlbnRyeSBldmVuIHdpdGggdGhlCj4g
+PiA+IHZhbGlkIGJpdCB1bnNldC4gSW4gYSBmb2xsb3ctdXAgcGF0Y2gsIHdlIHdpbGwgdGFrZSBh
+ZHZhbnRhZ2Ugb2YgdGhpcwo+ID4gPiBmZWF0dXJlIHRvIHJlLXB1cnBvc2UgdGhlIHZhbGlkIGJp
+dCBmb3IgZ2VuZXJhdGluZyBhIHRyYW5zbGF0aW9uIGZhdWx0Cj4gPiA+IGV2ZW4gaWYgYW4gZW50
+cnkgY29udGFpbnMgdmFsaWQgaW5mb3JtYXRpb24uCj4gPiA+IAo+ID4gPiBTbyB3ZSBuZWVkIGEg
+ZGlmZmVyZW50IHdheSB0byBrbm93IHdoZXRoZXIgYW4gZW50cnkgY29udGFpbnMgdmFsaWQKPiA+
+ID4gaW5mb3JtYXRpb24uIEl0IGlzIHBvc3NpYmxlIHRvIHVzZSB0aGUgaW5mb3JtYXRpb24gaG9s
+ZCBpbiB0aGUgcDJtX3R5cGUKPiA+ID4gdG8ga25vdyBmb3IgdGhhdCBwdXJwb3NlLiBJbmRlZWQg
+YWxsIGVudHJpZXMgY29udGFpbmluZyB2YWxpZAo+ID4gPiBpbmZvcm1hdGlvbiB3aWxsIGhhdmUg
+YSB2YWxpZCBwMm0gdHlwZSAoaS5lIHAybV90eXBlICE9IHAybV9pbnZhbGlkKS4KPiA+ID4gCj4g
+PiA+IFRoaXMgcGF0Y2ggaW50cm9kdWNlcyBhIG5ldyBoZWxwZXIgcDJtX2lzX3ZhbGlkLCB3aGlj
+aCBpbXBsZW1lbnRzIHRoYXQKPiA+ID4gaWRlYSwgYW5kIHJlcGxhY2UgbW9zdCBvZiBscGFlX2lz
+X3ZhbGlkIGNhbGwgd2l0aCB0aGUgbmV3IGhlbHBlci4gVGhlIG9uZXMKPiA+ID4gcmVtYWluaW5n
+IGFyZSBmb3IgVExCcyBoYW5kbGluZyBhbmQgZW50cmllcyBhY2NvdW50aW5nLgo+ID4gPiAKPiA+
+ID4gV2l0aCB0aGUgcmVuYW1pbmcgdGhlcmUgYXJlIDIgb3RoZXJzIGNoYW5nZXMgcmVxdWlyZWQ6
+Cj4gPiA+ICAgICAgLSBHZW5lcmF0ZSB0YWJsZSBlbnRyeSB3aXRoIGEgdmFsaWQgcDJtIHR5cGUK
+PiA+ID4gICAgICAtIERldGVjdCBuZXcgbWFwcGluZyBmb3IgcHJvcGVyIHN0YXRzIGFjY291bnRp
+bmcKPiA+ID4gCj4gPiA+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxs
+QGFybS5jb20+Cj4gPiAKPiA+IFJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFi
+ZWxsaW5pQGtlcm5lbC5vcmc+Cj4gPiAKPiA+IChUaGlzIHBhdGNoIGRvZXNuJ3QgYXBwbHkgdG8g
+bWFzdGVyLCBwbGVhc2UgcmViYXNlKQo+IAo+IFdoeSBhcmUgeW91IHRyeWluZyB0byBhcHBseSB0
+byBtYXN0ZXI/IFRoaXMgc2VyaWVzIChhcyBtb3N0IG9mIG15IHNlcmllcykgYXJlCj4gYmFzZWQg
+b24gc3RhZ2luZyBhdCB0aGUgdGltZSBpdCB3YXMgc2VudC4gSSB0cmllZCB0byBhcHBseSB0aGlz
+IHBhdGNoIHRvZGF5IG9uCj4gc3RhZ2luZyBhbmQgSSBkaWRuJ3QgZmluZCBhbnkgaXNzdWUuCgpO
+byBwcm9ibGVtcyB0aGVuLCBJIHRob3VnaHQgdGhlIHNlcmllcyB3YXMgYmFzZWQgb24gYW4gb2xk
+ZXIgdHJlZSwgYnV0Cmluc3RlYWQgaXQgd2FzIG9uIHN0ZXAgYWhlYWQuCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
