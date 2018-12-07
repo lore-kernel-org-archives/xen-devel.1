@@ -1,15 +1,15 @@
-From: Matthew Wilcox <willy@infradead.org>
-Subject: Re: [PATCH v3 1/9] mm: Introduce new vm_insert_range API
-Date: Fri, 7 Dec 2018 09:11:16 -0800
-Message-ID: <20181207171116.GA29923__14099.2561974146$1544202676$gmane$org@bombadil.infradead.org>
-References: <20181206183945.GA20932@jordon-HP-15-Notebook-PC>
- <53bbc095-c9f5-5d6a-6e50-6e060d17eb68@arm.com>
+From: Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH v5] devicetree, xen: add xen,
+ shared-memory binding
+Date: Fri, 7 Dec 2018 11:27:54 -0600
+Message-ID: <20181207172754.GA623@bogus>
+References: <1543875969-10472-1-git-send-email-sstabellini@kernel.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <53bbc095-c9f5-5d6a-6e50-6e060d17eb68@arm.com>
+In-Reply-To: <1543875969-10472-1-git-send-email-sstabellini@kernel.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,22 +18,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Robin Murphy <robin.murphy@arm.com>
-Cc: mhocko@suse.com, heiko@sntech.de, peterz@infradead.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux1394-devel@lists.sourceforge.net, m.szyprowski@samsung.com, sfr@canb.auug.org.au, oleksandr_andrushchenko@epam.com, joro@8bytes.org, linux@armlinux.org.uk, iommu@lists.linux-foundation.org, airlied@linux.ie, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, treding@nvidia.com, linux-media@vger.kernel.org, keescook@chromium.org, pawel@osciak.com, riel@surriel.com, rppt@linux.vnet.ibm.com, boris.ostrovsky@oracle.com, mchehab@kernel.org, iamjoonsoo.kim@lge.com, vbabka@suse.cz, jgross@suse.com, hjc@rock-chips.com, xen-devel@lists.xen.org, kyungmin.park@samsung.com, stefanr@s5r6.in-berlin.de, Souptick Joarder <jrdr.linux@gmail.com>, akpm@linux-foundation.org, kirill.shutemov@linux.intel.com
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: mark.rutland@arm.com, Stefano Stabellini <stefanos@xilinx.com>, julien.grall@arm.com, devicetree@vger.kernel.org, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBEZWMgMDcsIDIwMTggYXQgMDM6MzQ6NTZQTSArMDAwMCwgUm9iaW4gTXVycGh5IHdy
-b3RlOgo+ID4gK2ludCB2bV9pbnNlcnRfcmFuZ2Uoc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEs
-IHVuc2lnbmVkIGxvbmcgYWRkciwKPiA+ICsJCQlzdHJ1Y3QgcGFnZSAqKnBhZ2VzLCB1bnNpZ25l
-ZCBsb25nIHBhZ2VfY291bnQpCj4gPiArewo+ID4gKwl1bnNpZ25lZCBsb25nIHVhZGRyID0gYWRk
-cjsKPiA+ICsJaW50IHJldCA9IDAsIGk7Cj4gCj4gU29tZSBvZiB0aGUgc2l0ZXMgYmVpbmcgcmVw
-bGFjZWQgd2VyZSBlZmZlY3RpdmVseSBlbnN1cmluZyB0aGF0IHZtYSBhbmQKPiBwYWdlcyB3ZXJl
-IG11dHVhbGx5IGNvbXBhdGlibGUgYXMgYW4gaW5pdGlhbCBjb25kaXRpb24gLSB3b3VsZCBpdCBi
-ZSB3b3J0aAo+IGFkZGluZyBzb21ldGhpbmcgaGVyZSBmb3Igcm9idXN0bmVzcywgZS5nLjoKPiAK
-PiArCWlmIChwYWdlX2NvdW50ICE9IHZtYV9wYWdlcyh2bWEpKQo+ICsJCXJldHVybiAtRU5YSU87
-CgpJIHRoaW5rIHdlIHdhbnQgdG8gYWxsb3cgdGhpcyB0byBiZSB1c2VkIHRvIHBvcHVsYXRlIHBh
-cnQgb2YgYSBWTUEuClNvIHBlcmhhcHM6CgoJaWYgKHBhZ2VfY291bnQgPiB2bWFfcGFnZXModm1h
-KSkKCQlyZXR1cm4gLUVOWElPOwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+T24gTW9uLCBEZWMgMDMsIDIwMTggYXQgMDI6MjY6MDlQTSAtMDgwMCwgU3RlZmFubyBTdGFiZWxs
+aW5pIHdyb3RlOgo+IEZyb206IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNv
+bT4KPiAKPiBJbnRyb2R1Y2UgYSBkZXZpY2UgdHJlZSBiaW5kaW5nIGZvciBYZW4gcmVzZXJ2ZWQt
+bWVtb3J5IHJlZ2lvbnMuIFRoZXkKPiBhcmUgdXNlZCB0byBzaGFyZSBtZW1vcnkgYWNyb3NzIFZN
+cyBmcm9tIHRoZSBWTSBjb25maWcgZmlsZXMuIChTZWUKPiBzdGF0aWNfc2htIGNvbmZpZyBvcHRp
+b24uKQo+IAo+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGls
+aW54LmNvbT4KPiBDYzoganVsaWVuLmdyYWxsQGFybS5jb20KPiBDYzogZGV2aWNldHJlZUB2Z2Vy
+Lmtlcm5lbC5vcmcKPiBDYzogcm9iaCtkdEBrZXJuZWwub3JnCj4gQ2M6IG1hcmsucnV0bGFuZEBh
+cm0uY29tCj4gQ2M6IHhlbi1kZXZlbEBsaXN0cy54ZW4ub3JnCj4gLS0tCj4gQ2hhbmdlcyBpbiB2
+NToKPiAtcmVuYW1lIG9mZnNldCB0byB4ZW4sb2Zmc2V0Cj4gCj4gQ2hhbmdlcyBpbiB2NDoKPiAt
+IGFkZCBvZmZzZXQgcHJvcGVydHkKPiAKPiBDaGFuZ2VzIGluIHYzOgo+IC0gcmVtb3ZlIGZhbGxi
+YWNrIHZlcnNpb24KPiAKPiBDaGFuZ2VzIGluIHYyOgo+IC0gZml4IEF1dGhvciBsaW5lCj4gLSBh
+ZGQgdmVyc2lvbmluZwo+IC0geGVuLGlkIGluc3RlYWQgb2YgaWQKPiAtLS0KPiAgLi4uL2JpbmRp
+bmdzL3Jlc2VydmVkLW1lbW9yeS94ZW4sc2hhcmVkLW1lbW9yeS50eHQgfCAyNCArKysrKysrKysr
+KysrKysrKysrKysrCj4gIDEgZmlsZSBjaGFuZ2VkLCAyNCBpbnNlcnRpb25zKCspCj4gIGNyZWF0
+ZSBtb2RlIDEwMDY0NCBEb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmluZGluZ3MvcmVzZXJ2ZWQt
+bWVtb3J5L3hlbixzaGFyZWQtbWVtb3J5LnR4dAoKQXBwbGllZCwgdGhhbmtzLgoKUm9iCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
