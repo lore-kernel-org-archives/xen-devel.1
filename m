@@ -1,22 +1,24 @@
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH v2 1/2] xen/arm: link: Link proc_info_list
  in .data instead of .init.data
-Date: Fri, 7 Dec 2018 12:32:11 +0200
-Message-ID: <CAPD2p-nCwEfm3T7MeErL8kyJ9K6Ym31MhmLGDGicfpD25EHF-Q@mail.gmail.com>
+Date: Fri, 7 Dec 2018 10:34:59 +0000
+Message-ID: <67c109bd-17a1-baea-40af-53c60d520c6b@arm.com>
 References: <1544175931-17047-1-git-send-email-olekstysh@gmail.com>
  <1544175931-17047-2-git-send-email-olekstysh@gmail.com>
  <5a524560-109e-55b2-922f-36d9449adab1@arm.com>
+ <CAPD2p-nCwEfm3T7MeErL8kyJ9K6Ym31MhmLGDGicfpD25EHF-Q@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8491397781482598907=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PsOz=OQ=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1gVDQm-0007ob-VE
- for xen-devel@lists.xenproject.org; Fri, 07 Dec 2018 10:32:25 +0000
-Received: by mail-io1-xd43.google.com with SMTP id l14so2863084ioj.5
- for <xen-devel@lists.xenproject.org>; Fri, 07 Dec 2018 02:32:23 -0800 (PST)
-In-Reply-To: <5a524560-109e-55b2-922f-36d9449adab1@arm.com>
+ <SRS0=IgRO=OQ=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gVDTL-0007vI-5o
+ for xen-devel@lists.xenproject.org; Fri, 07 Dec 2018 10:35:03 +0000
+In-Reply-To: <CAPD2p-nCwEfm3T7MeErL8kyJ9K6Ym31MhmLGDGicfpD25EHF-Q@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,309 +27,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
+To: Oleksandr Tyshchenko <olekstysh@gmail.com>
 Cc: xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Mirela Simonovic <mirela.simonovic@aggios.com>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8491397781482598907==
-Content-Type: multipart/alternative; boundary="0000000000006af316057c6c21e5"
-
---0000000000006af316057c6c21e5
-Content-Type: text/plain; charset="UTF-8"
-
-On Fri, Dec 7, 2018 at 12:05 PM Julien Grall <julien.grall@arm.com> wrote:
-
-> Hi Oleksandr,
->
-Hi Julien
-
-
->
-> On 07/12/2018 09:45, Oleksandr Tyshchenko wrote:
-> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> >
-> > To be able to use it for the hot-plugged CPUs as well.
->
-> You need to explain in the commit message why you rename .init.proc.info.
->
-ok
-
-
->
-> >
-> > Signed-off-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-> >
-> > ---
-> >      Changes in v2:
-> >          - Fix typoes
-> >          - Rename ".init.proc.info" to ".data.proc.info"
-> > ---
-> >   xen/arch/arm/arm32/proc-v7.S |  6 +++---
-> >   xen/arch/arm/xen.lds.S       | 10 ++++++----
-> >   2 files changed, 9 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/arm32/proc-v7.S b/xen/arch/arm/arm32/proc-v7.S
-> > index 80a250d..a0c0c9e 100644
-> > --- a/xen/arch/arm/arm32/proc-v7.S
-> > +++ b/xen/arch/arm/arm32/proc-v7.S
-> > @@ -30,7 +30,7 @@ brahma15mp_init:
-> >           mcr   CP32(r0, ACTLR)
-> >           mov   pc, lr
-> >
-> > -        .section ".init.proc.info", #alloc, #execinstr
-> > +        .section ".data.proc.info", #alloc, #execinstr
->
-> NIT: .proc.info would be sufficient. This would avoid to rename again the
-> section if we decide to move it in a separate section.
->
-ok
-
-
->
-> >           .type __v7_ca15mp_proc_info, #object
-> >   __v7_ca15mp_proc_info:
-> >           .long 0x410FC0F0             /* Cortex-A15 */
-> > @@ -39,7 +39,7 @@ __v7_ca15mp_proc_info:
-> >           .long caxx_processor
-> >           .size __v7_ca15mp_proc_info, . - __v7_ca15mp_proc_info
-> >
-> > -        .section ".init.proc.info", #alloc, #execinstr
-> > +        .section ".data.proc.info", #alloc, #execinstr
-> >           .type __v7_ca7mp_proc_info, #object
-> >   __v7_ca7mp_proc_info:
-> >           .long 0x410FC070             /* Cortex-A7 */
-> > @@ -48,7 +48,7 @@ __v7_ca7mp_proc_info:
-> >           .long caxx_processor
-> >           .size __v7_ca7mp_proc_info, . - __v7_ca7mp_proc_info
-> >
-> > -        .section ".init.proc.info", #alloc, #execinstr
-> > +        .section ".data.proc.info", #alloc, #execinstr
-> >           .type __v7_brahma15mp_proc_info, #object
-> >   __v7_brahma15mp_proc_info:
-> >           .long 0x420F00F0             /* Broadcom Brahma-B15 */
-> > diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
-> > index 245a0e0..624da9b 100644
-> > --- a/xen/arch/arm/xen.lds.S
-> > +++ b/xen/arch/arm/xen.lds.S
-> > @@ -88,6 +88,12 @@ SECTIONS
-> >          . = ALIGN(PAGE_SIZE);
-> >          *(.data.page_aligned)
-> >          *(.data)
-> > +
-> > +       . = ALIGN(POINTER_ALIGN);
-> > +       __proc_info_start = .;
-> > +       *(.data.proc.info)
-> > +       __proc_info_end = .;
->
-> Sorry I haven't noticed it in the previous version. proc.info should
-> never
-> modified, right? So it should be in rodata in that case.
->
-agree, will link it in rodata.
-
-May I resend just this patch after address your comments?
-
-
->
-> > +
-> >          . = ALIGN(8);
-> >          __start_schedulers_array = .;
-> >          *(.data.schedulers)
-> > @@ -151,10 +157,6 @@ SECTIONS
-> >          *(.init.setup)
-> >          __setup_end = .;
-> >
-> > -       __proc_info_start = .;
-> > -       *(.init.proc.info)
-> > -       __proc_info_end = .;
-> > -
-> >          __initcall_start = .;
-> >          *(.initcallpresmp.init)
-> >          __presmp_initcall_end = .;
-> >
->
-> Cheers,
->
-> --
-> Julien Grall
->
-
-
--- 
-Regards,
-
-Oleksandr Tyshchenko
-
---0000000000006af316057c6c21e5
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br><br><div class=3D"gmail_quote"><div d=
-ir=3D"ltr">On Fri, Dec 7, 2018 at 12:05 PM Julien Grall &lt;<a href=3D"mail=
-to:julien.grall@arm.com">julien.grall@arm.com</a>&gt; wrote:<br></div><bloc=
-kquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:=
-1px solid rgb(204,204,204);padding-left:1ex">Hi Oleksandr,<br></blockquote>=
-<div>Hi Julien</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">
-<br>
-On 07/12/2018 09:45, Oleksandr Tyshchenko wrote:<br>
-&gt; From: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_tyshchenko@=
-epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<br>
-&gt; <br>
-&gt; To be able to use it for the hot-plugged CPUs as well.<br>
-<br>
-You need to explain in the commit message why you rename .<a href=3D"http:/=
-/init.proc.info" rel=3D"noreferrer" target=3D"_blank">init.proc.info</a>.<b=
-r></blockquote><div>ok</div><div>=C2=A0</div><blockquote class=3D"gmail_quo=
-te" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204=
-);padding-left:1ex">
-<br>
-&gt; <br>
-&gt; Signed-off-by: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_ty=
-shchenko@epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<=
-br>
-&gt; <br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 Changes in v2:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - Fix typoes<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 - Rename &quot;.<a href=3D"http://in=
-it.proc.info" rel=3D"noreferrer" target=3D"_blank">init.proc.info</a>&quot;=
- to &quot;.<a href=3D"http://data.proc.info" rel=3D"noreferrer" target=3D"_=
-blank">data.proc.info</a>&quot;<br>
-&gt; ---<br>
-&gt;=C2=A0 =C2=A0xen/arch/arm/arm32/proc-v7.S |=C2=A0 6 +++---<br>
-&gt;=C2=A0 =C2=A0xen/arch/arm/xen.lds.S=C2=A0 =C2=A0 =C2=A0 =C2=A0| 10 ++++=
-++----<br>
-&gt;=C2=A0 =C2=A02 files changed, 9 insertions(+), 7 deletions(-)<br>
-&gt; <br>
-&gt; diff --git a/xen/arch/arm/arm32/proc-v7.S b/xen/arch/arm/arm32/proc-v7=
-.S<br>
-&gt; index 80a250d..a0c0c9e 100644<br>
-&gt; --- a/xen/arch/arm/arm32/proc-v7.S<br>
-&gt; +++ b/xen/arch/arm/arm32/proc-v7.S<br>
-&gt; @@ -30,7 +30,7 @@ brahma15mp_init:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0mcr=C2=A0 =C2=A0CP32(r0, ACTLR=
-)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0mov=C2=A0 =C2=A0pc, lr<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 .section &quot;.<a href=3D"http://init.pr=
-oc.info" rel=3D"noreferrer" target=3D"_blank">init.proc.info</a>&quot;, #al=
-loc, #execinstr<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .section &quot;.<a href=3D"http://data.pr=
-oc.info" rel=3D"noreferrer" target=3D"_blank">data.proc.info</a>&quot;, #al=
-loc, #execinstr<br>
-<br>
-NIT: .<a href=3D"http://proc.info" rel=3D"noreferrer" target=3D"_blank">pro=
-c.info</a> would be sufficient. This would avoid to rename again the <br>
-section if we decide to move it in a separate section.<br></blockquote><div=
->ok</div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
->
-<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.type __v7_ca15mp_proc_info, #=
-object<br>
-&gt;=C2=A0 =C2=A0__v7_ca15mp_proc_info:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.long 0x410FC0F0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Cortex-A15 */<br>
-&gt; @@ -39,7 +39,7 @@ __v7_ca15mp_proc_info:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.long caxx_processor<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.size __v7_ca15mp_proc_info, .=
- - __v7_ca15mp_proc_info<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 .section &quot;.<a href=3D"http://init.pr=
-oc.info" rel=3D"noreferrer" target=3D"_blank">init.proc.info</a>&quot;, #al=
-loc, #execinstr<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .section &quot;.<a href=3D"http://data.pr=
-oc.info" rel=3D"noreferrer" target=3D"_blank">data.proc.info</a>&quot;, #al=
-loc, #execinstr<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.type __v7_ca7mp_proc_info, #o=
-bject<br>
-&gt;=C2=A0 =C2=A0__v7_ca7mp_proc_info:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.long 0x410FC070=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Cortex-A7 */<br>
-&gt; @@ -48,7 +48,7 @@ __v7_ca7mp_proc_info:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.long caxx_processor<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.size __v7_ca7mp_proc_info, . =
-- __v7_ca7mp_proc_info<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0 .section &quot;.<a href=3D"http://init.pr=
-oc.info" rel=3D"noreferrer" target=3D"_blank">init.proc.info</a>&quot;, #al=
-loc, #execinstr<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 .section &quot;.<a href=3D"http://data.pr=
-oc.info" rel=3D"noreferrer" target=3D"_blank">data.proc.info</a>&quot;, #al=
-loc, #execinstr<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.type __v7_brahma15mp_proc_inf=
-o, #object<br>
-&gt;=C2=A0 =C2=A0__v7_brahma15mp_proc_info:<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0.long 0x420F00F0=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* Broadcom Brahma-B15 */<br>
-&gt; diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S<br>
-&gt; index 245a0e0..624da9b 100644<br>
-&gt; --- a/xen/arch/arm/xen.lds.S<br>
-&gt; +++ b/xen/arch/arm/xen.lds.S<br>
-&gt; @@ -88,6 +88,12 @@ SECTIONS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 . =3D ALIGN(PAGE_SIZE);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data.page_aligned)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data)<br>
-&gt; +<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0. =3D ALIGN(POINTER_ALIGN);<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0__proc_info_start =3D .;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0*(.<a href=3D"http://data.proc.info" rel=
-=3D"noreferrer" target=3D"_blank">data.proc.info</a>)<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0__proc_info_end =3D .;<br>
-<br>
-Sorry I haven&#39;t noticed it in the previous version. <a href=3D"http://p=
-roc.info" rel=3D"noreferrer" target=3D"_blank">proc.info</a> should never <=
-br>
-modified, right? So it should be in rodata in that case.<br></blockquote><d=
-iv>agree, will link it in=C2=A0rodata.</div><div><br></div><div>May I resen=
-d just this patch after address your comments?</div><div>=C2=A0</div><block=
-quote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1=
-px solid rgb(204,204,204);padding-left:1ex">
-<br>
-&gt; +<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 . =3D ALIGN(8);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __start_schedulers_array =3D .;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.data.schedulers)<br>
-&gt; @@ -151,10 +157,6 @@ SECTIONS<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.init.setup)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __setup_end =3D .;<br>
-&gt;=C2=A0 =C2=A0<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0__proc_info_start =3D .;<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0*(.<a href=3D"http://init.proc.info" rel=
-=3D"noreferrer" target=3D"_blank">init.proc.info</a>)<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0 =C2=A0__proc_info_end =3D .;<br>
-&gt; -<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __initcall_start =3D .;<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.initcallpresmp.init)<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 __presmp_initcall_end =3D .;<br>
-&gt; <br>
-<br>
-Cheers,<br>
-<br>
--- <br>
-Julien Grall<br>
-</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
- class=3D"gmail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><div><div=
- dir=3D"ltr"><span style=3D"background-color:rgb(255,255,255)"><font size=
-=3D"2"><span style=3D"color:rgb(51,51,51);font-family:Arial,sans-serif">Reg=
-ards,</span></font></span></div><div dir=3D"ltr"><br></div><div dir=3D"ltr"=
-><div><span style=3D"background-color:rgb(255,255,255)"><font size=3D"2">Ol=
-eksandr Tyshchenko</font></span></div></div></div></div></div></div></div><=
-/div></div>
-
---0000000000006af316057c6c21e5--
-
-
---===============8491397781482598907==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8491397781482598907==--
+SGkgT2xla3NhbmRyLAoKUGxlYXNlIGNvbmZpZ3VyZSB5b3VyIGNsaWVudCB0byBxdW90ZSB3aXRo
+ID4gcmF0aGVyIHRoYW4gaW5kZW50YXRpb24uIEJlbG93IGlzIAphbiBleGFtcGxlIGhvdyBpdCBj
+YW4gZ2V0IG1lc3N5IGluIGp1c3QgMyBhbnN3ZXJzLCBJIGxldCB5b3UgaW1hZ2luZSB3aXRoIGxv
+bmdlciAKdGhyZWFkIDopLgoKVGhpcyBpcyBhIGdlbmVyYWwgaXNzdWUgd2l0aCBnbWFpbCB3ZWIt
+aW50ZXJmYWNlIHRoYXQgcXVvdGUgdXNpbmcgdGFidWxhdGlvbi4gSXQgCndvdWxkIGJlIGJlc3Qg
+aWYgeW91IHVzZSBhbiBleHRlcm5hbCBtYWlsIGNsaWVudCAoZS5nIHRodW5kZXJiaXJkLCBtdXRl
+Li4uKS4KCk9uIDA3LzEyLzIwMTggMTA6MzIsIE9sZWtzYW5kciBUeXNoY2hlbmtvIHdyb3RlOgo+
+IAo+IAo+IE9uIEZyaSwgRGVjIDcsIDIwMTggYXQgMTI6MDUgUE0gSnVsaWVuIEdyYWxsIDxqdWxp
+ZW4uZ3JhbGxAYXJtLmNvbSAKPiA8bWFpbHRvOmp1bGllbi5ncmFsbEBhcm0uY29tPj4gd3JvdGU6
+Cj4gCj4gICAgIEhpIE9sZWtzYW5kciwKPiAKPiBIaSBKdWxpZW4KPiAKPiAKPiAgICAgT24gMDcv
+MTIvMjAxOCAwOTo0NSwgT2xla3NhbmRyIFR5c2hjaGVua28gd3JvdGU6Cj4gICAgICA+IEZyb206
+IE9sZWtzYW5kciBUeXNoY2hlbmtvIDxvbGVrc2FuZHJfdHlzaGNoZW5rb0BlcGFtLmNvbQo+ICAg
+ICA8bWFpbHRvOm9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29tPj4KPiAgICAgID4KPiAgICAg
+ID4gVG8gYmUgYWJsZSB0byB1c2UgaXQgZm9yIHRoZSBob3QtcGx1Z2dlZCBDUFVzIGFzIHdlbGwu
+Cj4gCj4gICAgIFlvdSBuZWVkIHRvIGV4cGxhaW4gaW4gdGhlIGNvbW1pdCBtZXNzYWdlIHdoeSB5
+b3UgcmVuYW1lIC5pbml0LnByb2MuaW5mbwo+ICAgICA8aHR0cDovL2luaXQucHJvYy5pbmZvPi4K
+PiAKPiBvawo+IAo+IAo+ICAgICAgPgo+ICAgICAgPiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIg
+VHlzaGNoZW5rbyA8b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5jb20KPiAgICAgPG1haWx0bzpv
+bGVrc2FuZHJfdHlzaGNoZW5rb0BlcGFtLmNvbT4+Cj4gICAgICA+Cj4gICAgICA+IC0tLQo+ICAg
+ICAgPsKgIMKgIMKgIENoYW5nZXMgaW4gdjI6Cj4gICAgICA+wqAgwqAgwqAgwqAgwqAgLSBGaXgg
+dHlwb2VzCj4gICAgICA+wqAgwqAgwqAgwqAgwqAgLSBSZW5hbWUgIi5pbml0LnByb2MuaW5mbyA8
+aHR0cDovL2luaXQucHJvYy5pbmZvPiIgdG8KPiAgICAgIi5kYXRhLnByb2MuaW5mbyA8aHR0cDov
+L2RhdGEucHJvYy5pbmZvPiIKPiAgICAgID4gLS0tCj4gICAgICA+wqAgwqB4ZW4vYXJjaC9hcm0v
+YXJtMzIvcHJvYy12Ny5TIHzCoCA2ICsrKy0tLQo+ICAgICAgPsKgIMKgeGVuL2FyY2gvYXJtL3hl
+bi5sZHMuU8KgIMKgIMKgIMKgfCAxMCArKysrKystLS0tCj4gICAgICA+wqAgwqAyIGZpbGVzIGNo
+YW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKPiAgICAgID4KPiAgICAgID4g
+ZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9hcm0zMi9wcm9jLXY3LlMgYi94ZW4vYXJjaC9hcm0v
+YXJtMzIvcHJvYy12Ny5TCj4gICAgICA+IGluZGV4IDgwYTI1MGQuLmEwYzBjOWUgMTAwNjQ0Cj4g
+ICAgICA+IC0tLSBhL3hlbi9hcmNoL2FybS9hcm0zMi9wcm9jLXY3LlMKPiAgICAgID4gKysrIGIv
+eGVuL2FyY2gvYXJtL2FybTMyL3Byb2MtdjcuUwo+ICAgICAgPiBAQCAtMzAsNyArMzAsNyBAQCBi
+cmFobWExNW1wX2luaXQ6Cj4gICAgICA+wqAgwqAgwqAgwqAgwqAgwqBtY3LCoCDCoENQMzIocjAs
+IEFDVExSKQo+ICAgICAgPsKgIMKgIMKgIMKgIMKgIMKgbW92wqAgwqBwYywgbHIKPiAgICAgID4K
+PiAgICAgID4gLcKgIMKgIMKgIMKgIC5zZWN0aW9uICIuaW5pdC5wcm9jLmluZm8gPGh0dHA6Ly9p
+bml0LnByb2MuaW5mbz4iLCAjYWxsb2MsCj4gICAgICNleGVjaW5zdHIKPiAgICAgID4gK8KgIMKg
+IMKgIMKgIC5zZWN0aW9uICIuZGF0YS5wcm9jLmluZm8gPGh0dHA6Ly9kYXRhLnByb2MuaW5mbz4i
+LCAjYWxsb2MsCj4gICAgICNleGVjaW5zdHIKPiAKPiAgICAgTklUOiAucHJvYy5pbmZvIDxodHRw
+Oi8vcHJvYy5pbmZvPiB3b3VsZCBiZSBzdWZmaWNpZW50LiBUaGlzIHdvdWxkIGF2b2lkIHRvCj4g
+ICAgIHJlbmFtZSBhZ2FpbiB0aGUKPiAgICAgc2VjdGlvbiBpZiB3ZSBkZWNpZGUgdG8gbW92ZSBp
+dCBpbiBhIHNlcGFyYXRlIHNlY3Rpb24uCj4gCj4gb2sKPiAKPiAKPiAgICAgID7CoCDCoCDCoCDC
+oCDCoCDCoC50eXBlIF9fdjdfY2ExNW1wX3Byb2NfaW5mbywgI29iamVjdAo+ICAgICAgPsKgIMKg
+X192N19jYTE1bXBfcHJvY19pbmZvOgo+ICAgICAgPsKgIMKgIMKgIMKgIMKgIMKgLmxvbmcgMHg0
+MTBGQzBGMMKgIMKgIMKgIMKgIMKgIMKgIMKgLyogQ29ydGV4LUExNSAqLwo+ICAgICAgPiBAQCAt
+MzksNyArMzksNyBAQCBfX3Y3X2NhMTVtcF9wcm9jX2luZm86Cj4gICAgICA+wqAgwqAgwqAgwqAg
+wqAgwqAubG9uZyBjYXh4X3Byb2Nlc3Nvcgo+ICAgICAgPsKgIMKgIMKgIMKgIMKgIMKgLnNpemUg
+X192N19jYTE1bXBfcHJvY19pbmZvLCAuIC0gX192N19jYTE1bXBfcHJvY19pbmZvCj4gICAgICA+
+Cj4gICAgICA+IC3CoCDCoCDCoCDCoCAuc2VjdGlvbiAiLmluaXQucHJvYy5pbmZvIDxodHRwOi8v
+aW5pdC5wcm9jLmluZm8+IiwgI2FsbG9jLAo+ICAgICAjZXhlY2luc3RyCj4gICAgICA+ICvCoCDC
+oCDCoCDCoCAuc2VjdGlvbiAiLmRhdGEucHJvYy5pbmZvIDxodHRwOi8vZGF0YS5wcm9jLmluZm8+
+IiwgI2FsbG9jLAo+ICAgICAjZXhlY2luc3RyCj4gICAgICA+wqAgwqAgwqAgwqAgwqAgwqAudHlw
+ZSBfX3Y3X2NhN21wX3Byb2NfaW5mbywgI29iamVjdAo+ICAgICAgPsKgIMKgX192N19jYTdtcF9w
+cm9jX2luZm86Cj4gICAgICA+wqAgwqAgwqAgwqAgwqAgwqAubG9uZyAweDQxMEZDMDcwwqAgwqAg
+wqAgwqAgwqAgwqAgwqAvKiBDb3J0ZXgtQTcgKi8KPiAgICAgID4gQEAgLTQ4LDcgKzQ4LDcgQEAg
+X192N19jYTdtcF9wcm9jX2luZm86Cj4gICAgICA+wqAgwqAgwqAgwqAgwqAgwqAubG9uZyBjYXh4
+X3Byb2Nlc3Nvcgo+ICAgICAgPsKgIMKgIMKgIMKgIMKgIMKgLnNpemUgX192N19jYTdtcF9wcm9j
+X2luZm8sIC4gLSBfX3Y3X2NhN21wX3Byb2NfaW5mbwo+ICAgICAgPgo+ICAgICAgPiAtwqAgwqAg
+wqAgwqAgLnNlY3Rpb24gIi5pbml0LnByb2MuaW5mbyA8aHR0cDovL2luaXQucHJvYy5pbmZvPiIs
+ICNhbGxvYywKPiAgICAgI2V4ZWNpbnN0cgo+ICAgICAgPiArwqAgwqAgwqAgwqAgLnNlY3Rpb24g
+Ii5kYXRhLnByb2MuaW5mbyA8aHR0cDovL2RhdGEucHJvYy5pbmZvPiIsICNhbGxvYywKPiAgICAg
+I2V4ZWNpbnN0cgo+ICAgICAgPsKgIMKgIMKgIMKgIMKgIMKgLnR5cGUgX192N19icmFobWExNW1w
+X3Byb2NfaW5mbywgI29iamVjdAo+ICAgICAgPsKgIMKgX192N19icmFobWExNW1wX3Byb2NfaW5m
+bzoKPiAgICAgID7CoCDCoCDCoCDCoCDCoCDCoC5sb25nIDB4NDIwRjAwRjDCoCDCoCDCoCDCoCDC
+oCDCoCDCoC8qIEJyb2FkY29tIEJyYWhtYS1CMTUgKi8KPiAgICAgID4gZGlmZiAtLWdpdCBhL3hl
+bi9hcmNoL2FybS94ZW4ubGRzLlMgYi94ZW4vYXJjaC9hcm0veGVuLmxkcy5TCj4gICAgICA+IGlu
+ZGV4IDI0NWEwZTAuLjYyNGRhOWIgMTAwNjQ0Cj4gICAgICA+IC0tLSBhL3hlbi9hcmNoL2FybS94
+ZW4ubGRzLlMKPiAgICAgID4gKysrIGIveGVuL2FyY2gvYXJtL3hlbi5sZHMuUwo+ICAgICAgPiBA
+QCAtODgsNiArODgsMTIgQEAgU0VDVElPTlMKPiAgICAgID7CoCDCoCDCoCDCoCDCoCAuID0gQUxJ
+R04oUEFHRV9TSVpFKTsKPiAgICAgID7CoCDCoCDCoCDCoCDCoCAqKC5kYXRhLnBhZ2VfYWxpZ25l
+ZCkKPiAgICAgID7CoCDCoCDCoCDCoCDCoCAqKC5kYXRhKQo+ICAgICAgPiArCj4gICAgICA+ICvC
+oCDCoCDCoCDCoC4gPSBBTElHTihQT0lOVEVSX0FMSUdOKTsKPiAgICAgID4gK8KgIMKgIMKgIMKg
+X19wcm9jX2luZm9fc3RhcnQgPSAuOwo+ICAgICAgPiArwqAgwqAgwqAgwqAqKC5kYXRhLnByb2Mu
+aW5mbyA8aHR0cDovL2RhdGEucHJvYy5pbmZvPikKPiAgICAgID4gK8KgIMKgIMKgIMKgX19wcm9j
+X2luZm9fZW5kID0gLjsKPiAKPiAgICAgU29ycnkgSSBoYXZlbid0IG5vdGljZWQgaXQgaW4gdGhl
+IHByZXZpb3VzIHZlcnNpb24uIHByb2MuaW5mbwo+ICAgICA8aHR0cDovL3Byb2MuaW5mbz4gc2hv
+dWxkIG5ldmVyCj4gICAgIG1vZGlmaWVkLCByaWdodD8gU28gaXQgc2hvdWxkIGJlIGluIHJvZGF0
+YSBpbiB0aGF0IGNhc2UuCj4gCj4gYWdyZWUsIHdpbGwgbGluayBpdCBpbsKgcm9kYXRhLgo+IAo+
+IE1heSBJIHJlc2VuZCBqdXN0IHRoaXMgcGF0Y2ggYWZ0ZXIgYWRkcmVzcyB5b3VyIGNvbW1lbnRz
+PwoKWWVzIHBsZWFzZS4gSSB3aWxsIGNvbW1pdCB0aGUgb3RoZXIgc29vbi4KCkNoZWVycywKCi0t
+IApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
