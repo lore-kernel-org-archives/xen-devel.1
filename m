@@ -1,13 +1,22 @@
-From: Thierry Reding <thierry.reding@gmail.com>
-Subject: Re: [PATCH 7/7] drm: Split out drm_probe_helper.h
-Date: Mon, 10 Dec 2018 11:24:26 +0100
-Message-ID: <20181210102426.GG15154__15590.4950494461$1544437405$gmane$org@ulmo>
-References: <20181210100359.22507-1-daniel.vetter@ffwll.ch>
- <20181210101133.5364-1-daniel.vetter@ffwll.ch>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v2 2/2] x86/dom0: improve paging memory
+ usage calculations
+Date: Mon, 10 Dec 2018 11:33:28 +0100
+Message-ID: <20181210103328.pcahadza7dqustrq@mac>
+References: <20181205145500.11989-1-roger.pau@citrix.com>
+ <20181205145500.11989-3-roger.pau@citrix.com>
+ <20181206124215.ofcmc4litd4l4753@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6103288223293831552=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181210101133.5364-1-daniel.vetter@ffwll.ch>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=chBw=OT=citrix.com=prvs=875ba99a8=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1gWIsd-0000ny-3V
+ for xen-devel@lists.xenproject.org; Mon, 10 Dec 2018 10:33:39 +0000
+Content-Disposition: inline
+In-Reply-To: <20181206124215.ofcmc4litd4l4753@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,296 +25,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Cc: linux-samsung-soc@vger.kernel.org, nouveau@lists.freedesktop.org, Daniel Vetter <daniel.vetter@intel.com>, linux-arm-msm@vger.kernel.org, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, etnaviv@lists.freedesktop.org, amd-gfx@lists.freedesktop.org, virtualization@lists.linux-foundation.org, linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, linux-mediatek@lists.infradead.org, DRI Development <dri-devel@lists.freedesktop.org>, linux-amlogic@lists.infradead.org, linux-tegra@vger.kernel.org, spice-devel@lists.freedesktop.org, xen-devel@lists.xen.org, freedreno@lists.freedesktop.org, linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, andrei.semenov@bertin.fr, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6103288223293831552==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="5UGlQXeG3ziZS81+"
-Content-Disposition: inline
-
-
---5UGlQXeG3ziZS81+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Dec 10, 2018 at 11:11:33AM +0100, Daniel Vetter wrote:
-> Having the probe helper stuff (which pretty much everyone needs) in
-> the drm_crtc_helper.h file (which atomic drivers should never need) is
-> confusing. Split them out.
->=20
-> To make sure I actually achieved the goal here I went through all
-> drivers. And indeed, all atomic drivers are now free of
-> drm_crtc_helper.h includes.
->=20
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: linux-arm-kernel@lists.infradead.org
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: etnaviv@lists.freedesktop.org
-> Cc: linux-samsung-soc@vger.kernel.org
-> Cc: intel-gfx@lists.freedesktop.org
-> Cc: linux-mediatek@lists.infradead.org
-> Cc: linux-amlogic@lists.infradead.org
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: freedreno@lists.freedesktop.org
-> Cc: nouveau@lists.freedesktop.org
-> Cc: spice-devel@lists.freedesktop.org
-> Cc: amd-gfx@lists.freedesktop.org
-> Cc: linux-renesas-soc@vger.kernel.org
-> Cc: linux-rockchip@lists.infradead.org
-> Cc: linux-stm32@st-md-mailman.stormreply.com
-> Cc: linux-tegra@vger.kernel.org
-> Cc: xen-devel@lists.xen.org
-> ---
->  .../gpu/drm/amd/amdgpu/amdgpu_connectors.c    |  2 +-
->  drivers/gpu/drm/amd/amdgpu/amdgpu_device.c    |  2 +-
->  drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c       |  2 +-
->  drivers/gpu/drm/amd/amdgpu/amdgpu_mode.h      |  1 +
->  .../amd/display/amdgpu_dm/amdgpu_dm_helpers.c |  2 +-
->  .../amd/display/amdgpu_dm/amdgpu_dm_pp_smu.c  |  2 +-
->  .../display/amdgpu_dm/amdgpu_dm_services.c    |  2 +-
->  drivers/gpu/drm/arc/arcpgu_crtc.c             |  2 +-
->  drivers/gpu/drm/arc/arcpgu_drv.c              |  2 +-
->  drivers/gpu/drm/arc/arcpgu_sim.c              |  2 +-
->  drivers/gpu/drm/arm/hdlcd_crtc.c              |  2 +-
->  drivers/gpu/drm/arm/hdlcd_drv.c               |  2 +-
->  drivers/gpu/drm/arm/malidp_crtc.c             |  2 +-
->  drivers/gpu/drm/arm/malidp_drv.c              |  2 +-
->  drivers/gpu/drm/arm/malidp_mw.c               |  2 +-
->  drivers/gpu/drm/armada/armada_510.c           |  2 +-
->  drivers/gpu/drm/armada/armada_crtc.c          |  2 +-
->  drivers/gpu/drm/armada/armada_drv.c           |  2 +-
->  drivers/gpu/drm/armada/armada_fb.c            |  2 +-
->  drivers/gpu/drm/ast/ast_drv.c                 |  1 +
->  drivers/gpu/drm/ast/ast_mode.c                |  1 +
->  .../gpu/drm/atmel-hlcdc/atmel_hlcdc_crtc.c    |  2 +-
->  drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_dc.h  |  2 +-
->  drivers/gpu/drm/bochs/bochs_drv.c             |  1 +
->  drivers/gpu/drm/bochs/bochs_kms.c             |  1 +
->  drivers/gpu/drm/bridge/adv7511/adv7511.h      |  2 +-
->  drivers/gpu/drm/bridge/analogix-anx78xx.c     |  3 +-
->  .../drm/bridge/analogix/analogix_dp_core.c    |  2 +-
->  drivers/gpu/drm/bridge/cdns-dsi.c             |  2 +-
->  drivers/gpu/drm/bridge/dumb-vga-dac.c         |  2 +-
->  .../bridge/megachips-stdpxxxx-ge-b850v3-fw.c  |  2 +-
->  drivers/gpu/drm/bridge/nxp-ptn3460.c          |  2 +-
->  drivers/gpu/drm/bridge/panel.c                |  2 +-
->  drivers/gpu/drm/bridge/parade-ps8622.c        |  2 +-
->  drivers/gpu/drm/bridge/sii902x.c              |  2 +-
->  drivers/gpu/drm/bridge/synopsys/dw-hdmi.c     |  2 +-
->  drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.c |  2 +-
->  drivers/gpu/drm/bridge/tc358764.c             |  2 +-
->  drivers/gpu/drm/bridge/tc358767.c             |  2 +-
->  drivers/gpu/drm/bridge/ti-sn65dsi86.c         |  2 +-
->  drivers/gpu/drm/bridge/ti-tfp410.c            |  2 +-
->  drivers/gpu/drm/cirrus/cirrus_drv.c           |  1 +
->  drivers/gpu/drm/cirrus/cirrus_mode.c          |  1 +
->  drivers/gpu/drm/drm_atomic_helper.c           |  1 -
->  drivers/gpu/drm/drm_dp_mst_topology.c         |  2 +-
->  drivers/gpu/drm/drm_modeset_helper.c          |  2 +-
->  drivers/gpu/drm/drm_probe_helper.c            |  2 +-
->  drivers/gpu/drm/drm_simple_kms_helper.c       |  2 +-
->  drivers/gpu/drm/etnaviv/etnaviv_drv.h         |  1 -
->  drivers/gpu/drm/exynos/exynos_dp.c            |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_crtc.c      |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_dpi.c       |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_drv.c       |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_dsi.c       |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_fb.c        |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_fbdev.c     |  2 +-
->  drivers/gpu/drm/exynos/exynos_drm_vidi.c      |  2 +-
->  drivers/gpu/drm/exynos/exynos_hdmi.c          |  2 +-
->  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_crtc.c    |  2 +-
->  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_drv.c     |  2 +-
->  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_kms.c     |  2 +-
->  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_plane.c   |  2 +-
->  drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_rgb.c     |  2 +-
->  drivers/gpu/drm/gma500/psb_intel_drv.h        |  1 +
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_de.c    |  2 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |  2 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_fbdev.c |  2 +-
->  .../gpu/drm/hisilicon/hibmc/hibmc_drm_vdac.c  |  2 +-
->  drivers/gpu/drm/hisilicon/kirin/dw_drm_dsi.c  |  2 +-
->  .../gpu/drm/hisilicon/kirin/kirin_drm_ade.c   |  2 +-
->  .../gpu/drm/hisilicon/kirin/kirin_drm_drv.c   |  2 +-
->  drivers/gpu/drm/i2c/ch7006_priv.h             |  2 +-
->  drivers/gpu/drm/i2c/sil164_drv.c              |  2 +-
->  drivers/gpu/drm/i2c/tda998x_drv.c             |  2 +-
->  drivers/gpu/drm/i915/i915_drv.c               |  2 +-
->  drivers/gpu/drm/i915/intel_crt.c              |  2 +-
->  drivers/gpu/drm/i915/intel_display.c          |  2 +-
->  drivers/gpu/drm/i915/intel_dp.c               |  2 +-
->  drivers/gpu/drm/i915/intel_dp_mst.c           |  2 +-
->  drivers/gpu/drm/i915/intel_drv.h              |  2 +-
->  drivers/gpu/drm/imx/dw_hdmi-imx.c             |  2 +-
->  drivers/gpu/drm/imx/imx-drm-core.c            |  2 +-
->  drivers/gpu/drm/imx/imx-ldb.c                 |  2 +-
->  drivers/gpu/drm/imx/imx-tve.c                 |  2 +-
->  drivers/gpu/drm/imx/ipuv3-crtc.c              |  2 +-
->  drivers/gpu/drm/imx/parallel-display.c        |  2 +-
->  drivers/gpu/drm/mediatek/mtk_dpi.c            |  2 +-
->  drivers/gpu/drm/mediatek/mtk_drm_crtc.c       |  2 +-
->  drivers/gpu/drm/mediatek/mtk_drm_drv.c        |  2 +-
->  drivers/gpu/drm/mediatek/mtk_drm_fb.c         |  2 +-
->  drivers/gpu/drm/mediatek/mtk_dsi.c            |  2 +-
->  drivers/gpu/drm/mediatek/mtk_hdmi.c           |  2 +-
->  drivers/gpu/drm/meson/meson_crtc.c            |  2 +-
->  drivers/gpu/drm/meson/meson_drv.c             |  2 +-
->  drivers/gpu/drm/meson/meson_dw_hdmi.c         |  2 +-
->  drivers/gpu/drm/meson/meson_venc_cvbs.c       |  2 +-
->  drivers/gpu/drm/mgag200/mgag200_mode.c        |  1 +
->  drivers/gpu/drm/msm/disp/dpu1/dpu_crtc.c      |  2 +-
->  drivers/gpu/drm/msm/disp/dpu1/dpu_encoder.c   |  2 +-
->  drivers/gpu/drm/msm/disp/mdp4/mdp4_crtc.c     |  2 +-
->  .../gpu/drm/msm/disp/mdp4/mdp4_dsi_encoder.c  |  2 +-
->  .../gpu/drm/msm/disp/mdp4/mdp4_dtv_encoder.c  |  2 +-
->  .../gpu/drm/msm/disp/mdp4/mdp4_lcdc_encoder.c |  2 +-
->  .../gpu/drm/msm/disp/mdp5/mdp5_cmd_encoder.c  |  2 +-
->  drivers/gpu/drm/msm/disp/mdp5/mdp5_crtc.c     |  2 +-
->  drivers/gpu/drm/msm/disp/mdp5/mdp5_encoder.c  |  2 +-
->  drivers/gpu/drm/msm/msm_drv.h                 |  2 +-
->  drivers/gpu/drm/msm/msm_fb.c                  |  2 +-
->  drivers/gpu/drm/mxsfb/mxsfb_crtc.c            |  2 +-
->  drivers/gpu/drm/mxsfb/mxsfb_drv.c             |  2 +-
->  drivers/gpu/drm/mxsfb/mxsfb_out.c             |  2 +-
->  drivers/gpu/drm/nouveau/dispnv04/tvnv17.c     |  1 +
->  drivers/gpu/drm/nouveau/dispnv50/disp.c       |  2 +-
->  drivers/gpu/drm/nouveau/nouveau_connector.c   |  1 +
->  drivers/gpu/drm/nouveau/nouveau_display.c     |  1 +
->  drivers/gpu/drm/omapdrm/omap_connector.c      |  2 +-
->  drivers/gpu/drm/omapdrm/omap_crtc.c           |  2 +-
->  drivers/gpu/drm/omapdrm/omap_drv.c            |  2 +-
->  drivers/gpu/drm/omapdrm/omap_drv.h            |  2 +-
->  drivers/gpu/drm/omapdrm/omap_encoder.c        |  2 +-
->  drivers/gpu/drm/omapdrm/omap_fb.c             |  2 +-
->  drivers/gpu/drm/pl111/pl111_drv.c             |  2 +-
->  drivers/gpu/drm/qxl/qxl_display.c             |  2 +-
->  drivers/gpu/drm/qxl/qxl_drv.c                 |  3 +-
->  drivers/gpu/drm/qxl/qxl_fb.c                  |  2 +-
->  drivers/gpu/drm/qxl/qxl_kms.c                 |  2 +-
->  drivers/gpu/drm/radeon/radeon_acpi.c          |  1 +
->  drivers/gpu/drm/radeon/radeon_connectors.c    |  1 +
->  drivers/gpu/drm/radeon/radeon_device.c        |  1 +
->  drivers/gpu/drm/radeon/radeon_display.c       |  1 +
->  drivers/gpu/drm/radeon/radeon_dp_mst.c        |  1 +
->  drivers/gpu/drm/radeon/radeon_drv.c           |  1 +
->  drivers/gpu/drm/radeon/radeon_irq_kms.c       |  1 +
->  drivers/gpu/drm/rcar-du/rcar_du_crtc.c        |  2 +-
->  drivers/gpu/drm/rcar-du/rcar_du_drv.c         |  2 +-
->  drivers/gpu/drm/rcar-du/rcar_du_encoder.c     |  2 +-
->  drivers/gpu/drm/rcar-du/rcar_du_kms.c         |  2 +-
->  drivers/gpu/drm/rcar-du/rcar_du_plane.c       |  2 +-
->  drivers/gpu/drm/rcar-du/rcar_du_vsp.c         |  2 +-
->  drivers/gpu/drm/rcar-du/rcar_lvds.c           |  2 +-
->  .../gpu/drm/rockchip/analogix_dp-rockchip.c   |  2 +-
->  drivers/gpu/drm/rockchip/cdn-dp-core.c        |  2 +-
->  drivers/gpu/drm/rockchip/cdn-dp-core.h        |  2 +-
->  drivers/gpu/drm/rockchip/dw_hdmi-rockchip.c   |  2 +-
->  drivers/gpu/drm/rockchip/inno_hdmi.c          |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_drv.c   |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_fb.c    |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_fbdev.c |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_psr.c   |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_drm_vop.c   |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_lvds.c      |  2 +-
->  drivers/gpu/drm/rockchip/rockchip_rgb.c       |  2 +-
->  drivers/gpu/drm/sti/sti_crtc.c                |  2 +-
->  drivers/gpu/drm/sti/sti_drv.c                 |  2 +-
->  drivers/gpu/drm/sti/sti_dvo.c                 |  2 +-
->  drivers/gpu/drm/sti/sti_hda.c                 |  2 +-
->  drivers/gpu/drm/sti/sti_hdmi.c                |  2 +-
->  drivers/gpu/drm/sti/sti_tvout.c               |  2 +-
->  drivers/gpu/drm/stm/drv.c                     |  2 +-
->  drivers/gpu/drm/stm/ltdc.c                    |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_backend.c         |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_crtc.c            |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_drv.c             |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_hdmi_enc.c        |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_lvds.c            |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_rgb.c             |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_tcon.c            |  2 +-
->  drivers/gpu/drm/sun4i/sun4i_tv.c              |  2 +-
->  drivers/gpu/drm/sun4i/sun6i_mipi_dsi.c        |  2 +-
->  drivers/gpu/drm/sun4i/sun8i_dw_hdmi.c         |  2 +-
->  drivers/gpu/drm/sun4i/sun8i_mixer.c           |  2 +-
->  drivers/gpu/drm/sun4i/sun8i_ui_layer.c        |  2 +-
->  drivers/gpu/drm/sun4i/sun8i_vi_layer.c        |  2 +-
->  drivers/gpu/drm/tegra/drm.h                   |  2 +-
->  drivers/gpu/drm/tegra/hdmi.c                  |  2 +-
->  drivers/gpu/drm/tegra/hub.c                   |  2 +-
->  drivers/gpu/drm/tinydrm/core/tinydrm-core.c   |  2 +-
->  drivers/gpu/drm/tinydrm/core/tinydrm-pipe.c   |  2 +-
->  drivers/gpu/drm/tve200/tve200_drv.c           |  2 +-
->  drivers/gpu/drm/udl/udl_connector.c           |  1 +
->  drivers/gpu/drm/udl/udl_drv.c                 |  1 +
->  drivers/gpu/drm/udl/udl_main.c                |  1 +
->  drivers/gpu/drm/vc4/vc4_crtc.c                |  2 +-
->  drivers/gpu/drm/vc4/vc4_dpi.c                 |  2 +-
->  drivers/gpu/drm/vc4/vc4_dsi.c                 |  2 +-
->  drivers/gpu/drm/vc4/vc4_hdmi.c                |  2 +-
->  drivers/gpu/drm/vc4/vc4_kms.c                 |  2 +-
->  drivers/gpu/drm/vc4/vc4_txp.c                 |  2 +-
->  drivers/gpu/drm/vc4/vc4_vec.c                 |  2 +-
->  drivers/gpu/drm/virtio/virtgpu_display.c      |  2 +-
->  drivers/gpu/drm/virtio/virtgpu_drv.h          |  2 +-
->  drivers/gpu/drm/vkms/vkms_crtc.c              |  2 +-
->  drivers/gpu/drm/vkms/vkms_drv.c               |  2 +-
->  drivers/gpu/drm/vkms/vkms_output.c            |  2 +-
->  drivers/gpu/drm/vmwgfx/vmwgfx_kms.h           |  2 +-
->  drivers/gpu/drm/xen/xen_drm_front.c           |  2 +-
->  drivers/gpu/drm/xen/xen_drm_front_conn.c      |  2 +-
->  drivers/gpu/drm/xen/xen_drm_front_gem.c       |  2 +-
->  drivers/gpu/drm/xen/xen_drm_front_kms.c       |  2 +-
->  drivers/gpu/drm/zte/zx_drm_drv.c              |  2 +-
->  drivers/gpu/drm/zte/zx_hdmi.c                 |  2 +-
->  drivers/gpu/drm/zte/zx_tvenc.c                |  2 +-
->  drivers/gpu/drm/zte/zx_vga.c                  |  2 +-
->  drivers/gpu/drm/zte/zx_vou.c                  |  2 +-
->  drivers/staging/vboxvideo/vbox_irq.c          |  2 +-
->  drivers/staging/vboxvideo/vbox_mode.c         |  2 +-
->  include/drm/drm_crtc_helper.h                 | 16 ------
->  include/drm/drm_probe_helper.h                | 50 +++++++++++++++++++
->  208 files changed, 256 insertions(+), 200 deletions(-)
->  create mode 100644 include/drm/drm_probe_helper.h
-
-Looks good to me:
-
-Acked-by: Thierry Reding <treding@nvidia.com>
-
---5UGlQXeG3ziZS81+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAlwOPtoACgkQ3SOs138+
-s6FjgxAAv4Px+LYOIfaEush22dtJ6p25QYNu587a0AoOcxpfNGVOW5yPiHpVQayr
-EDjK676jszSUAMyIvAuGTFqr4CPVCS/+crzorwE/kebJBpYNVcCQRzG/CzVtYpvZ
-ehsaTNaynGORa9YAM9DKonMK43BG3FqV9hdluHcXWjWMgdGrCKSpDA/odsVkeOW2
-c2/zcbDDp9G2w22A0/oP6KaZc8iBcpAtgFHvKKLbH76oJreDe1rD0Gy6kntwb6x4
-MmaDOY9PQUMsBOUM10kIFmaIFaJWtymD7VsOLIm4bd42n8eXuui+MrFkBH9Qx7rZ
-X66pRPDDX68+0kkBXKUm7TdGoGT9rnqj7Hh84oNZ1vM90FWfpKlxxa8QXg8JND4D
-hN5turzIwCCzU7S98wDLh+kAjXy1r0ymkAedfTtRYdHY7DdxFGY3yD/8WbeQGse1
-4Pyx8RjiiL/nsXB0qWkQF2ELGWJTUYhawYihC8GO6Kr+En9HH93pghN8lN91xEXo
-61pDxNb3gVTtyVHQgJzkEU7WtOoPEleSZshzDGz0A89X7MdtcdqgfEVWvRoYFZ+Z
-uyeJXxM7z1aPcCKOkaYApsVodXjqgzOzw/8rVGeqmNzhUeGkK237Sg0sIhpXB0Ni
-unh1SkebIx7oX7bWiX0ZKquZKgY9RWegTeryawHw8MZJjX9dcS0=
-=bfFN
------END PGP SIGNATURE-----
-
---5UGlQXeG3ziZS81+--
-
-
---===============6103288223293831552==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6103288223293831552==--
+T24gVGh1LCBEZWMgMDYsIDIwMTggYXQgMTI6NDI6MTVQTSArMDAwMCwgV2VpIExpdSB3cm90ZToK
+PiBPbiBXZWQsIERlYyAwNSwgMjAxOCBhdCAwMzo1NTowMFBNICswMTAwLCBSb2dlciBQYXUgTW9u
+bmUgd3JvdGU6Cj4gPiBDdXJyZW50IGFwcHJveGltYXRpb24gb2YgcGFnaW5nIG1lbW9yeSB1c2Fn
+ZSBpcyBiYXNlZCBvbiB0aGUgcmVxdWlyZWQKPiA+IGFtb3VudCB3aGVuIHJ1bm5pbmcgaW4gc2hh
+ZG93IG1vZGUgYW5kIGRvZXNuJ3QgdGFrZSBpbnRvIGFjY291bnQgdGhlCj4gPiBtZW1vcnkgcmVx
+dWlyZWQgYnkgdGhlIElPTU1VIHBhZ2UgdGFibGVzLgo+ID4gCj4gPiBGaXggdGhpcyBieSBpbnRy
+b2R1Y2luZyBhIGZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSB0aGUgYW1vdW50IG9mIG1lbW9yeQo+ID4g
+cmVxdWlyZWQgYnkgSEFQL0lPTU1VIHBhZ2UgdGFibGVzLiBUaGUgZm9ybXVsYSB1c2VkIHRvIGNh
+bGN1bGF0ZSBzdWNoCj4gPiBhcHByb3hpbWF0aW9uIGlzIGJhc2VkIG9uIHRoZSBwZXNzaW1pc3Rp
+YyBhcHByb2FjaCB0aGF0IGVhY2ggNEtCCj4gPiBtZW1vcnkgY2h1bmsgd2lsbCB1c2UgOCBieXRl
+cyBvZiBwYWdlIHRhYmxlIG1lbW9yeS4gTm90ZSB0aGF0IHRoaXMKPiA+IGFwcHJveGltYXRpb24g
+bWlnaHQgbmVlZCBmdXJ0aGVyIHR1bmluZyBiYXNlZCBvbiB0ZXN0aW5nIG9uIGRpZmZlcmVudAo+
+ID4gc3lzdGVtcy4KPiA+IAo+ID4gQWxzbyBmaXggdGhlIGNhbGN1bGF0aW9uIG9mIHRoZSByZXF1
+aXJlZCBwYWdpbmcgcmVsYXRlZCBtZW1vcnkgaW4KPiA+IGRvbTBfY29tcHV0ZV9ucl9wYWdlcyB0
+byB0YWtlIGludG8gYWNjb3VudCB0aGUgcGFnaW5nIGltcGxlbWVudGF0aW9uCj4gPiAoc2hhZG93
+IG9yIEhBUCkgYW5kIHdoZXRoZXIgdGhlIElPTU1VIHBhZ2VzIHRhYmxlcyBhcmUgc2hhcmVkIHdp
+dGggdGhlCj4gPiBIQVAgcGFnZSB0YWJsZXMuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFJvZ2Vy
+IFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgo+ID4gLS0tCj4gPiBDYzogSmFuIEJl
+dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+ID4gQ2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5j
+b29wZXIzQGNpdHJpeC5jb20+Cj4gPiBDYzogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4K
+PiA+IENjOiBhbmRyZWkuc2VtZW5vdkBiZXJ0aW4uZnIKPiA+IC0tLQo+ID4gIHhlbi9hcmNoL3g4
+Ni9kb20wX2J1aWxkLmMgICAgICAgIHwgMzEgKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0t
+LQo+ID4gIHhlbi9hcmNoL3g4Ni9odm0vZG9tMF9idWlsZC5jICAgIHwgIDYgKysrKy0tCj4gPiAg
+eGVuL2luY2x1ZGUvYXNtLXg4Ni9kb20wX2J1aWxkLmggfCAgMiArKwo+ID4gIDMgZmlsZXMgY2hh
+bmdlZCwgMzMgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkKPiA+IAo+ID4gZGlmZiAtLWdp
+dCBhL3hlbi9hcmNoL3g4Ni9kb20wX2J1aWxkLmMgYi94ZW4vYXJjaC94ODYvZG9tMF9idWlsZC5j
+Cj4gPiBpbmRleCBiYTlhYTg1NjExLi4zYThlMTM4ZjIzIDEwMDY0NAo+ID4gLS0tIGEveGVuL2Fy
+Y2gveDg2L2RvbTBfYnVpbGQuYwo+ID4gKysrIGIveGVuL2FyY2gveDg2L2RvbTBfYnVpbGQuYwo+
+ID4gQEAgLTI2Nyw2ICsyNjcsMjUgQEAgdW5zaWduZWQgbG9uZyBfX2luaXQgZG9tMF9zaGFkb3df
+cGFnZXMoY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwKPiA+ICAgICAgcmV0dXJuICgobWVta2IgKyAx
+MDIzKSAvIDEwMjQpIDw8ICgyMCAtIFBBR0VfU0hJRlQpOwo+ID4gIH0KPiA+ICAKPiA+ICt1bnNp
+Z25lZCBsb25nIF9faW5pdCBkb20wX2hhcF9wYWdlcyhjb25zdCBzdHJ1Y3QgZG9tYWluICpkLAo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgbnJf
+cGFnZXMpCj4gPiArewo+ID4gKyAgICAvKgo+ID4gKyAgICAgKiBBdHRlbXB0IHRvIGFjY291bnQg
+Zm9yIGF0IGxlYXN0IHNvbWUgb2YgdGhlIE1NSU8gcmVnaW9ucyBieSBhZGRpbmcgdGhlCj4gPiAr
+ICAgICAqIHNpemUgb2YgdGhlIGhvbGVzIGluIHRoZSBtZW1vcnkgbWFwIHRvIHRoZSBhbW91bnQg
+b2YgcGFnZXMgdG8gbWFwLiBOb3RlCj4gPiArICAgICAqIHRoaXMgd2lsbCBvYnZpb3VzbHkgbm90
+IGFjY291bnQgZm9yIE1NSU8gcmVnaW9ucyB0aGF0IGFyZSBwYXN0IHRoZSBsYXN0Cj4gPiArICAg
+ICAqIFJBTSByYW5nZSBpbiB0aGUgbWVtb3J5IG1hcC4KPiA+ICsgICAgICovCj4gPiArICAgIG5y
+X3BhZ2VzICs9IG1heF9wYWdlIC0gdG90YWxfcGFnZXM7Cj4gCj4gRG8gdGhvc2UgcmVnaW9ucyBw
+YXN0IGVuZCBvZiBSQU0gcmFuZ2Ugc2hvdyB1cCBpbiBFODIwIG1hcD8KCk5vLCBCQVJzIGZvciBl
+eGFtcGxlIGRvbid0IG5lZWQgdG8gYmUgaW4gcmVzZXJ2ZWQgcmVnaW9ucy4gSSd2ZSBnb3QKb25l
+IGJveCB3aXRoIGEgMTZHQiBUZXNsYSBjYXJkIHRoYXQgaGFzIHRoZSAxNkdCIEJBUiBwbGFjZWQg
+d2F5IHBhc3QKdGhlIGxhc3QgZW50cnkgaW4gdGhlIG1lbW9yeSBtYXAsIHdpdGhvdXQgYW55IHJl
+c2VydmVkIHJlZ2lvbi4KClNvIHdoaWxlIHRoaXMgYXBwcm9hY2ggaXMgbm90IHBlcmZlY3QsIGl0
+J3MgYmV0dGVyIHRoYW4gd2hhdCB3ZQpjdXJyZW50bHkgZG8sIGFuZCB3ZSBjYW4gYWx3YXlzIGlt
+cHJvdmUgZnJvbSB0aGVyZSBpZiBpdCdzIGNsZWFyIHdoYXQKbGltaXRhdGlvbnMgd2UgY3VycmVu
+dGx5IGhhdmUuCgpUaGFua3MsIFJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
