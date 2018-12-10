@@ -1,15 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/VT-x: Don't activate VMCS Shadowing
- outside of nested vmx mode
-Date: Mon, 10 Dec 2018 09:01:31 -0700
-Message-ID: <5C0E8DDB0200007800204C69@prv1-mh.provo.novell.com>
-References: <1544213231-27836-1-git-send-email-andrew.cooper3@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH] net: xenbus: convert to
+ DEFINE_SHOW_ATTRIBUTE
+Date: Mon, 10 Dec 2018 16:00:47 +0000
+Message-ID: <20181210160047.xwu2kvvyq5zl3uc7__14054.585414897$1544457625$gmane$org@zion.uk.xensource.com>
+References: <20181210155329.20608-1-tiny.windzz@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1544213231-27836-1-git-send-email-andrew.cooper3@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=rxBF=OT=citrix.com=prvs=87591bb9c=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gWNzX-0003Pp-62
+ for xen-devel@lists.xenproject.org; Mon, 10 Dec 2018 16:01:07 +0000
 Content-Disposition: inline
+In-Reply-To: <20181210155329.20608-1-tiny.windzz@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,35 +23,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Yangtao Li <tiny.windzz@gmail.com>
+Cc: wei.liu2@citrix.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org, paul.durrant@citrix.com, xen-devel@lists.xenproject.org, davem@davemloft.net
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA3LjEyLjE4IGF0IDIxOjA3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gQnkgZGVmYXVsdCBvbiBjYXBhYmxlIGhhcmR3YXJlLCBTRUNPTkRBUllfRVhFQ19FTkFC
-TEVfVk1DU19TSEFET1dJTkcgaXMKPiBhY3RpdmF0ZWQgdW5pbGF0ZXJhbGx5LiAgVGhlIFZNQ1Mg
-TGluayBwb2ludGVyIGlzIGluaXRpYWxpc2VkIHRvIH4wLCBidXQgdGhlCj4gVk1SRUFEL1ZNV1JJ
-VEUgYml0bWFwIHBvaW50ZXJzIGFyZSBub3QuCj4gCj4gVGhpcyBjYXVzZXMgdGhlIDE2Yml0IElW
-VCBhbmQgQmlvcyBEYXRhIEFyZWEgZ2V0IGludGVycHJldGVkIGFzIHRoZSByZWFkL3dyaXRlCj4g
-cGVybWlzc2lvbiBiaXRtYXAgZm9yIGd1ZXN0cyB3aGljaCBibGluZGx5IGV4ZWN1dGUgVk1SRUFE
-L1ZNV1JJVEUKPiBpbnN0cnVjdGlvbnMuCj4gCj4gVGhpcyBpcyBub3QgYSBzZWN1cml0eSBpc3N1
-ZSBiZWNhdXNlIHRoZSBWTUNTIExpbmsgcG9pbnRlciBiZWluZyB+MCBjYXVzZXMKPiBWTVJFQUQv
-Vk1XUklURSB0byBjb21wbGV0ZSB3aXRoIFZNRmFpbEludmFsaWQgKHJhdGhlciB0aGFuIG1vZGlm
-eWluZyBhCj4gcG90ZW50aWFsIHNoYWRvdyBWTUNTKSwgYW5kIHRoZSBjb250ZW50cyBvZiBNRk4g
-MCBoYXMgYWxyZWFkeSBiZWVuIGRldGVybWluZWQKPiBub3QgdG8gY29udGFpbiBhbnkgaW50ZXJl
-c3RpbmcgZGF0YSBiZWNhdXNlIG9mIEwxVEYncyBhYmlsaXR5IHRvIHJlYWQgdGhhdCA0awo+IGZy
-YW1lLgo+IAo+IExlYXZlIFZNQ1MgU2hhZG93aW5nIGRpc2FibGVkIGJ5IGRlZmF1bHQsIGFuZCB0
-b2dnbGUgaXQgaW4KPiBudm14X3tzZXQsY2xlYXJ9X3ZtY3NfcG9pbnRlcigpLiAgVGhpcyBpc24n
-dCB0aGUgbW9zdCBlZmZpY2llbnQgY291cnNlIG9mCj4gYWN0aW9uLCBidXQgaXQgaXMgdGhlIG1v
-c3Qgc2ltcGxlIHdheSBvZiBsZWF2aW5nIG5lc3RlZC12aXJ0IHdvcmtpbmcgYXMgaXQgZGlkCj4g
-YmVmb3JlLgo+IAo+IFdoaWxlIGVkaXRpbmcgY29uc3RydWN0X3ZtY3MoKSwgY29sbGVjdCBhbGwg
-ZGVmYXVsdCBzZWNvbmRhcnlfZXhlY19jb250cm9sCj4gbW9kaWZpY2F0aW9ucyB0b2dldGhlci4g
-IFRoZSBkaXNhYmxpbmcgb2YgUE1MIGlzIGxhdGVudGx5IGJ1Z2d5IGJlY2F1c2UgaXQKPiBoYXBw
-ZW5zIGFmdGVyIHNlY29uZGFyeV9leGVjX2NvbnRyb2wgYXJlIHdyaXR0ZW4gaW50byB0aGUgVk1D
-UywgYWx0aG91Z2ggdGhlcmUKPiBpcyBhbiB1bmNvbmRpdGlvbmFsIHVwZGF0ZSBsYXRlciB3aGlj
-aCB3cml0ZXMgdGhlIGNvcnJlY3QgdmFsdWUgaW50byAKPiBoYXJkd2FyZS4KPiAKPiBTaWduZWQt
-b2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKUmV2aWV3
-ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gTW9uLCBEZWMgMTAsIDIwMTggYXQgMTA6NTM6MjlBTSAtMDUwMCwgWWFuZ3RhbyBMaSB3cm90
+ZToKPiBVc2UgREVGSU5FX1NIT1dfQVRUUklCVVRFIG1hY3JvIHRvIHNpbXBsaWZ5IHRoZSBjb2Rl
+Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IFlhbmd0YW8gTGkgPHRpbnkud2luZHp6QGdtYWlsLmNvbT4K
+CkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKVGhhbmtzIGZvciB0aGUg
+cGF0Y2guCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
