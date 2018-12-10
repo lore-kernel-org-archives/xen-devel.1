@@ -1,16 +1,24 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] x86emul: permit SAE for V{,U}COMIS{S,D}
-Date: Mon, 10 Dec 2018 04:32:41 -0700
-Message-ID: <5C0E4ED902000078002049CB@prv1-mh.provo.novell.com>
+Subject: Re: Xen stable-4.11 crash when trying to start a VM on
+ fedora 29
+Date: Mon, 10 Dec 2018 04:41:42 -0700
+Message-ID: <5C0E50F602000078002049E0@prv1-mh.provo.novell.com>
+References: <141iAKOMS78aTtc5NNHFk6GVJglW_gZhWtlSThWd1BhnzTWHhU9LnS-hgEJzEpL24Qj8HZ_lKRaw6g-vUpv1uIaQZC-sDtzIW7kxxmY6Vb0=@protonmail.com>
+ <5BFFC7000200007800201222@prv1-mh.provo.novell.com>
+ <DnfOb0qr2qIxRtFZtH3FMkb1kNJ907ckaV3QACBxbfguMuVCi8WkYVTWocyswLNubbrVfIji5mEpgige9L5tQFakeXMlB4o-uMuPmNzA_oA=@protonmail.com>
+ <5C0A3EED0200007800203F3B@prv1-mh.provo.novell.com>
+ <0MIsy-pGK5SPEXb-bEY_hLE-vJmoZEPKiPHUyFAy9isVDTnzpjBzARsWfCaKP7hGgpS_ZYbTmVrucxwE2YEEji8vdTPa4Dy4JVe1XR4Zm8w=@protonmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=lbjb=OT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gWJnr-0006XH-2F
- for xen-devel@lists.xenproject.org; Mon, 10 Dec 2018 11:32:47 +0000
+ id 1gWJwc-0007Yx-2I
+ for xen-devel@lists.xenproject.org; Mon, 10 Dec 2018 11:41:50 +0000
+In-Reply-To: <0MIsy-pGK5SPEXb-bEY_hLE-vJmoZEPKiPHUyFAy9isVDTnzpjBzARsWfCaKP7hGgpS_ZYbTmVrucxwE2YEEji8vdTPa4Dy4JVe1XR4Zm8w=@protonmail.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,20 +28,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Mathieu Tarral <mathieu.tarral@protonmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIGF2eDUxMl92bGVuX2NoZWNrKCkgaW52b2NhdGlvbiBuZWVkcyB0byBiZSBjb25kaXRpb25h
-bC4KClNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCi0tLSBh
-L3hlbi9hcmNoL3g4Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5jCisrKyBiL3hlbi9hcmNoL3g4
-Ni94ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5jCkBAIC02MTc5LDcgKzYxNzksOCBAQCB4ODZfZW11
-bGF0ZSgKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBldmV4LncgIT0gZXZleC5wZngp
-LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRVhDX1VEKTsKICAgICAgICAgaG9zdF9h
-bmRfdmNwdV9tdXN0X2hhdmUoYXZ4NTEyZik7Ci0gICAgICAgIGF2eDUxMl92bGVuX2NoZWNrKHRy
-dWUpOworICAgICAgICBpZiAoICFldmV4LmJyICkKKyAgICAgICAgICAgIGF2eDUxMl92bGVuX2No
-ZWNrKHRydWUpOwogICAgICAgICBnZXRfZnB1KFg4NkVNVUxfRlBVX3ptbSk7CiAKICAgICAgICAg
-b3BjID0gaW5pdF9ldmV4KHN0dWIpOwoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+Pj4+IE9uIDA4LjEyLjE4IGF0IDAyOjAxLCA8bWF0aGlldS50YXJyYWxAcHJvdG9ubWFpbC5jb20+
+IHdyb3RlOgo+PiA+ID4gV2l0aG91dCBhIGZ1bGwgaHlwZXJ2aXNvciBsb2cgdGhpcyBpcyBnb2lu
+ZyB0byByZW1haW4gZ3Vlc3N3b3JrLCBidXQKPj4gPiA+IGNvdWxkIHlvdSBjaGVjayB3aGV0aGVy
+ICJwY2lkPW5vIiBhbmQvb3IgInB2LWwxdGY9bm8iIG9uIHRoZSBYZW4KPj4gPiA+IGJvb3QgY29t
+bWFuZCBsaW5lIGhlbHA/Cj4+ID4KPj4gPiBbdmFncmFudEBsb2NhbGhvc3Qgfl0kIGNhdCAvcHJv
+Yy9jbWRsaW5lCj4+ID4gcGxhY2Vob2xkZXIgcm9vdD1VVUlEPWY0ZGNiN2U2LWU0MzAtNGI4Yi04
+ZTgzLTVkZWIzNTIyYzg4YiBybyBub190aW1lcl9jaGVjawo+PiA+IGNvbnNvbGU9dHR5MSBjb25z
+b2xlPXR0eVMwLDExNTIwMG44IG5ldC5pZm5hbWVzPTAgYmlvc2Rldm5hbWU9MAo+PiA+IEkgaG9w
+ZSB0aGF0IGhlbHBzLgo+Pgo+PiBJJ20gYWZyYWlkIEknbSBlbnRpcmVseSBsb3N0IGFzIHRvIHdo
+YXQgeW91J3JlIHRyeWluZyB0byB0ZWxsIG1lLCB0aGUKPj4gbW9yZSBpbiBhIHByaXZhdGUgbWFp
+bC4gSSd2ZSBhc2tlZCB5b3UgdG8gdHJ5IG91dCBleHRyYSBoeXBlcnZpc29yCj4+IGNvbW1hbmQg
+bGluZSBvcHRpb25zLCBhbmQgeW91IHJlcGx5IHdpdGggd2hhdCBzb21lIHJhbmRvbQo+PiBrZXJu
+ZWwgY29tbWFuZCBsaW5lIG9mIHlvdXJzIGxvb2tzIGxpa2UuCj4gCj4gSSBhcG9sb2dpemUsIEkg
+cmVhZCB5b3VyIHJlcGx5IHRvbyBmYXN0IGxhc3QgdGltZSAvb1wKPiAKPiBTbyBJIHRyeSBhZGRp
+bmcgInBjaWQ9bm8iLCAicHYtbHQxZj1ubyIgYW5kIHRoZW4gInBjaWQ9bm8gcHYtbHQxZj1ubyIg
+aW4KPiAvZXRjL3N5c2NvbmZpZy9ncnViIEdSVUJfQ01ETElORV9YRU4sIFhlbiBpdCBzdGlsbCBj
+cmFzaGluZywgbm90aGluZyBpbiAKPiBkbWVzZy4KCldpdGhvdXQgYSBsb2cgSSBjYW4ndCB0ZWxs
+IHdoZXRoZXIgdGhlIG9wdGlvbnMgd2VyZSBhY3R1YWxseSBpbiBlZmZlY3QuCgo+IEFyZSB5b3Ug
+aW50ZXJlc3RlZCBpbiBpbnZlc3RpZ2F0aW5nIHRoaXMgYnVnID8KCklmICJ5b3UiIHN0YW5kcyBm
+b3IgdGhlIGNvbW11bml0eSwgdGhlbiB5ZXMuIFBlcnNvbmFsbHkgSSBjYW4ndApwcm9taXNlIEkg
+aGF2ZSB0aGUgY3ljbGVzIHRvIGRvIHNvLCBlc3BlY2lhbGx5IGFzIGxvbmcgYXMgdGhlcmUncwpu
+ZWl0aGVyIGEgc2ltcGxlIGFuZCBjbGVhciByZXBybyBub3IgYXQgdGhlIHZlcnkgbGVhc3QgYSBo
+eXBlcnZpc29yCmxvZyBjb3ZlcmluZyB0aGUgY3Jhc2guCgo+IFRvIG1lIGFueXRoaW5nIHRoYXQg
+Y3Jhc2hlcyBYZW4gaXMgd29ydGggbG9va2luZyBhdC4KCk9mIGNvdXJzZSwgYnV0IHdlIG5lZWQg
+c29tZSBkYXRhIHRvIHdvcmsgZnJvbS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
