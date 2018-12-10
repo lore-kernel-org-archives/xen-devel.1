@@ -1,35 +1,15 @@
-From: Julien Grall <julien.grall@gmail.com>
-Subject: Re: Xen optimization
-Date: Mon, 10 Dec 2018 12:54:49 +0100
-Message-ID: <CAF3u54BcT=-wnGKaDY1c3AvaDrV7eiiiedjaqbsavsQ4YaDWug@mail.gmail.com>
-References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
- <CADJ6SV2891kOd_Ga8jjXdtKdjPAoWtADhizuS+kjSZNNOPMK+w@mail.gmail.com>
- <alpine.DEB.2.10.1810221037270.31582@sstabellini-ThinkPad-X260>
- <CADJ6SV0gUvRv_4Kp=Vz5n4WSQ3kgQrC=+gPz1QjrBzdFOoJwPA@mail.gmail.com>
- <alpine.DEB.2.10.1810231005040.31582@sstabellini-ThinkPad-X260>
- <d5769cb9-9d87-3db4-e23d-414242692a89@arm.com>
- <alpine.DEB.2.10.1810250915030.25937@sstabellini-ThinkPad-X260>
- <94c08d07-b028-8eb1-7e94-21a416cd8007@arm.com>
- <alpine.DEB.2.10.1810261340530.32521@sstabellini-ThinkPad-X260>
- <CADJ6SV174NdceJ4kWCWYJ-UaNp1AAisb28V5tgKz14N+-pBVEg@mail.gmail.com>
- <67f6ece7-0a26-e29c-b20b-acf83a01f6eb@arm.com>
- <CADJ6SV22eAxR0s0ocpGNRRefo+FmsMz9KsEeXw+cME1sSM-ssg@mail.gmail.com>
- <a5eab71a-f301-67ae-cc22-8cf10715fdcd@arm.com>
- <alpine.DEB.2.10.1811011320050.7220@sstabellini-ThinkPad-X260>
- <35b44b61-9d2d-60d0-97ee-5b8c00e8be6d@gmail.com>
- <alpine.DEB.2.10.1811271320170.4577@sstabellini-ThinkPad-X260>
- <bb88ca15-381c-014c-2f6c-e5de33b4b15a@gmail.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: Ongoing/future speculative mitigation work
+Date: Mon, 10 Dec 2018 12:12:34 +0000
+Message-ID: <3e7b96cf-fe5f-604f-75f8-4919737d7e63@citrix.com>
+References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
+ <20181207184051.l6owpsjvecog6zhx@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6914374047596334542=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Y+im=OT=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gWK9R-0000pg-Bz
- for xen-devel@lists.xenproject.org; Mon, 10 Dec 2018 11:55:05 +0000
-Received: by mail-vs1-xe31.google.com with SMTP id x1so6414805vsc.10
- for <xen-devel@lists.xenproject.org>; Mon, 10 Dec 2018 03:55:04 -0800 (PST)
-In-Reply-To: <bb88ca15-381c-014c-2f6c-e5de33b4b15a@gmail.com>
+In-Reply-To: <20181207184051.l6owpsjvecog6zhx@zion.uk.xensource.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -38,262 +18,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>
-Cc: nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, Milan Boberic <milanboberic94@gmail.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <stefano.stabellini@xilinx.com>
+To: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Martin Pohlack <mpohlack@amazon.de>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Joao Martins <joao.m.martins@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Anthony Liguori <aliguori@amazon.com>, "Dannowski, Uwe" <uwed@amazon.de>, Lars Kurth <lars.kurth@citrix.com>, Konrad Wilk <konrad.wilk@oracle.com>, Ross Philipson <ross.philipson@oracle.com>, Dario Faggioli <dfaggioli@suse.com>, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <JGross@suse.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Xen-devel List <xen-devel@lists.xen.org>, =?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>, "Woodhouse,
+ David" <dwmw@amazon.co.uk>, Roger Pau Monne <roger.pau@citri>
 List-Id: xen-devel@lists.xenproject.org
 
---===============6914374047596334542==
-Content-Type: multipart/alternative; boundary="000000000000a6eaf1057ca9a272"
-
---000000000000a6eaf1057ca9a272
-Content-Type: text/plain; charset="UTF-8"
-
-(sorry for the formatting)
-
-On Mon, 10 Dec 2018, 12:00 Andrii Anisov, <andrii.anisov@gmail.com> wrote:
-
-> Hello All,
->
-> On 27.11.18 23:27, Stefano Stabellini wrote:
-> > See the following:
-> >
-> > https://marc.info/?l=xen-devel&m=148668817704668
-> So I did port that stuff to the current staging [1].
-> Also, the correspondent tbm, itself is here [2].
-> Having 4 big cores on my SoC I run XEN with the following command line:
->
->      dom0_mem=3G console=dtuart dtuart=serial0 dom0_max_vcpus=2
-> bootscrub=0 loglvl=all cpufreq=none tbuf_size=8192 loglvl=all/none
-> guest_loglvl=all/none
->
-> The TBM's domain configuration file is as following:
->
->      seclabel='system_u:system_r:domU_t'
->      name = "DomP"
->      kernel = "/home/root/ctest-bare.bin"
->      extra = "console=hvc0 rw"
->      memory = 128
->      vcpus = 1
->      cpus = "3"
->
-> This gives me setup where Domain-0 runs on cores 0 and 1 solely and TBM
-> runs exclusively on core 3. So that we can rely that it shows us a pure IRQ
-> latency of hypervisor.
-> My board is Renesas Salvator-X with H3 ES3.0 SoC and 8GB RAM. Generic
-> timer runs at 8.333 MHz freq, what gives my 120ns resolution for
-> measurements.
-> XEN hypervisor is build without debug and TBM does wfi in the idle loop
-> for all experiments.
-> With that setup IRQ latency numbers are (in ns):
->
-
-What are the numbers without Xen? Which version of Xen are you using?
-
-
-
-> Old vgic:
->                          AVG     MIN     MAX     WARM MAX
-> credit, vwfi=trap       7706    7560    9480    8400
-> credit, vwfi=native     2908    2880    3120    4800
-> credit2, vwfi=trap      7221    7200    9240    7440
-> credit2, vwfi=native    2906    2880    3120    5040
->
-> New vgic:
->                          AVG     MIN     MAX     WARM MAX
-> credit, vwfi=trap       8481    8040    10200   8880
-> credit, vwfi=native     4115    3960    4800    4200
-> credit2, vwfi=trap      8425    8400    9600    9000
-> credit2, vwfi=native    4227    3960    5040    4680
->
-> Here we can see that the new vgic underperforms the old one in a trivial
-> use-case modeled with TBM.
->
-
-The vwfi=trap does not look so bad (10%) but indeed the vwfi=native adds a
-bigger overhead.
-This also tells you that in the trap case the vGIC is not the bigger
-overhead.
-
-I am pretty sure that this can be optimized because we mostly focused on
-reliability and specification compliance for the first draft.
-
-So yes the old vGIC performs better but at the price of unreliability and
-non-compliance.
-
-
-> Old vgic with optimizations [3] (without [4], because it breaks the setup):
->                          AVG     MIN     MAX     WARM MAX
-> credit, vwfi=trap       7309    7080    8760    7680
-> credit, vwfi=native     3007    3000    4320    3120
-> credit2, vwfi=trap      6877    6720    8880    7200
-> credit2, vwfi=native    2680    2640    4440    2880
->
-
-This is with all your series applied but [4], correct? Did you try to see
-the perfomance improvement patch by patch?
-
-Cheers
-
-
-
->
->
-> [1] https://github.com/aanisov/xen/tree/4tbm
-> [2] https://github.com/aanisov/tbm/commits/4xen
-> [3]
-> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03328.html
-> [4]
-> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03288.html
->
-> --
-> Sincerely,
-> Andrii Anisov.
->
-> _______________________________________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-devel
-
---000000000000a6eaf1057ca9a272
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<span>(sorry for the formatting)</span><br><br><div class=3D"gmail_quote"><=
-div dir=3D"ltr">On Mon, 10 Dec 2018, 12:00 Andrii Anisov, &lt;<a href=3D"ma=
-ilto:andrii.anisov@gmail.com">andrii.anisov@gmail.com</a>&gt; wrote:<br></d=
-iv><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left=
-:1px #ccc solid;padding-left:1ex">Hello All,<br>
-<br>
-On 27.11.18 23:27, Stefano Stabellini wrote:<br>
-&gt; See the following:<br>
-&gt; <br>
-&gt; <a href=3D"https://marc.info/?l=3Dxen-devel&amp;m=3D148668817704668" r=
-el=3D"noreferrer" target=3D"_blank">https://marc.info/?l=3Dxen-devel&amp;m=
-=3D148668817704668</a><br>
-So I did port that stuff to the current staging [1].<br>
-Also, the correspondent tbm, itself is here [2].<br>
-Having 4 big cores on my SoC I run XEN with the following command line:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0dom0_mem=3D3G console=3Ddtuart dtuart=3Dserial0 dom0_ma=
-x_vcpus=3D2 bootscrub=3D0 loglvl=3Dall cpufreq=3Dnone tbuf_size=3D8192 logl=
-vl=3Dall/none guest_loglvl=3Dall/none<br>
-<br>
-The TBM&#39;s domain configuration file is as following:<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0seclabel=3D&#39;system_u:system_r:domU_t&#39;<br>
-=C2=A0 =C2=A0 =C2=A0name =3D &quot;DomP&quot;<br>
-=C2=A0 =C2=A0 =C2=A0kernel =3D &quot;/home/root/ctest-bare.bin&quot;<br>
-=C2=A0 =C2=A0 =C2=A0extra =3D &quot;console=3Dhvc0 rw&quot;<br>
-=C2=A0 =C2=A0 =C2=A0memory =3D 128<br>
-=C2=A0 =C2=A0 =C2=A0vcpus =3D 1<br>
-=C2=A0 =C2=A0 =C2=A0cpus =3D &quot;3&quot;<br>
-<br>
-This gives me setup where Domain-0 runs on cores 0 and 1 solely and TBM run=
-s exclusively on core 3. So that we can rely that it shows us a pure IRQ la=
-tency of hypervisor.<br>
-My board is Renesas Salvator-X with H3 ES3.0 SoC and 8GB RAM. Generic timer=
- runs at 8.333 MHz freq, what gives my 120ns resolution for measurements.<b=
-r>
-XEN hypervisor is build without debug and TBM does wfi in the idle loop for=
- all experiments.<br>
-With that setup IRQ latency numbers are (in ns):<br></blockquote></div><div=
-><br></div><div>What are the numbers without Xen? Which version of Xen are =
-you using?</div><div><br></div><div><br></div><div class=3D"gmail_quote"><b=
-lockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px =
-#ccc solid;padding-left:1ex">
-<br>
-Old vgic:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0AVG=C2=A0 =C2=A0 =C2=A0MIN=C2=A0 =C2=A0 =C2=A0MAX=C2=A0 =
-=C2=A0 =C2=A0WARM MAX<br>
-credit, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 =C2=A07706=C2=A0 =C2=A0 7560=C2=A0 =
-=C2=A0 9480=C2=A0 =C2=A0 8400<br>
-credit, vwfi=3Dnative=C2=A0 =C2=A0 =C2=A02908=C2=A0 =C2=A0 2880=C2=A0 =C2=
-=A0 3120=C2=A0 =C2=A0 4800<br>
-credit2, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 7221=C2=A0 =C2=A0 7200=C2=A0 =C2=
-=A0 9240=C2=A0 =C2=A0 7440<br>
-credit2, vwfi=3Dnative=C2=A0 =C2=A0 2906=C2=A0 =C2=A0 2880=C2=A0 =C2=A0 312=
-0=C2=A0 =C2=A0 5040<br>
-<br>
-New vgic:<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0AVG=C2=A0 =C2=A0 =C2=A0MIN=C2=A0 =C2=A0 =C2=A0MAX=C2=A0 =
-=C2=A0 =C2=A0WARM MAX<br>
-credit, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 =C2=A08481=C2=A0 =C2=A0 8040=C2=A0 =
-=C2=A0 10200=C2=A0 =C2=A08880<br>
-credit, vwfi=3Dnative=C2=A0 =C2=A0 =C2=A04115=C2=A0 =C2=A0 3960=C2=A0 =C2=
-=A0 4800=C2=A0 =C2=A0 4200<br>
-credit2, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 8425=C2=A0 =C2=A0 8400=C2=A0 =C2=
-=A0 9600=C2=A0 =C2=A0 9000<br>
-credit2, vwfi=3Dnative=C2=A0 =C2=A0 4227=C2=A0 =C2=A0 3960=C2=A0 =C2=A0 504=
-0=C2=A0 =C2=A0 4680<br>
-<br>
-Here we can see that the new vgic underperforms the old one in a trivial us=
-e-case modeled with TBM.<br></blockquote></div><div><br></div><div>The vwfi=
-=3Dtrap does not look so bad (10%) but indeed the vwfi=3Dnative adds a bigg=
-er overhead.</div><div>This also tells you that in the trap case the vGIC i=
-s not the bigger overhead.</div><div><br></div><div>I am pretty sure that t=
-his can be optimized because we mostly focused on reliability and specifica=
-tion compliance for the first draft.</div><div><br></div><div>So yes the ol=
-d vGIC performs better but at the price of unreliability and non-compliance=
-.</div><div><br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex"><br>
-Old vgic with optimizations [3] (without [4], because it breaks the setup):=
-<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0AVG=C2=A0 =C2=A0 =C2=A0MIN=C2=A0 =C2=A0 =C2=A0MAX=C2=A0 =
-=C2=A0 =C2=A0WARM MAX<br>
-credit, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 =C2=A07309=C2=A0 =C2=A0 7080=C2=A0 =
-=C2=A0 8760=C2=A0 =C2=A0 7680<br>
-credit, vwfi=3Dnative=C2=A0 =C2=A0 =C2=A03007=C2=A0 =C2=A0 3000=C2=A0 =C2=
-=A0 4320=C2=A0 =C2=A0 3120<br>
-credit2, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 6877=C2=A0 =C2=A0 6720=C2=A0 =C2=
-=A0 8880=C2=A0 =C2=A0 7200<br>
-credit2, vwfi=3Dnative=C2=A0 =C2=A0 2680=C2=A0 =C2=A0 2640=C2=A0 =C2=A0 444=
-0=C2=A0 =C2=A0 2880<br></blockquote></div><div><br></div><div>This is with =
-all your series applied but [4], correct? Did you try to see the perfomance=
- improvement patch by patch?</div><div><br></div><div>Cheers</div><div><br>=
-</div><div><br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_=
-quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
-ex">
-<br>
-<br>
-<br>
-[1] <a href=3D"https://github.com/aanisov/xen/tree/4tbm" rel=3D"noreferrer"=
- target=3D"_blank">https://github.com/aanisov/xen/tree/4tbm</a><br>
-[2] <a href=3D"https://github.com/aanisov/tbm/commits/4xen" rel=3D"noreferr=
-er" target=3D"_blank">https://github.com/aanisov/tbm/commits/4xen</a><br>
-[3] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
-/msg03328.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
-ct.org/archives/html/xen-devel/2018-11/msg03328.html</a><br>
-[4] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
-/msg03288.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
-ct.org/archives/html/xen-devel/2018-11/msg03288.html</a><br>
-<br>
--- <br>
-Sincerely,<br>
-Andrii Anisov.<br>
-<br>
-_______________________________________________<br>
-Xen-devel mailing list<br>
-<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
-el@lists.xenproject.org</a><br>
-<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
-noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
-/xen-devel</a></blockquote></div>
-
---000000000000a6eaf1057ca9a272--
-
-
---===============6914374047596334542==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6914374047596334542==--
+T24gMTIvNy8xOCA2OjQwIFBNLCBXZWkgTGl1IHdyb3RlOgo+IE9uIFRodSwgT2N0IDE4LCAyMDE4
+IGF0IDA2OjQ2OjIyUE0gKzAxMDAsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+IEhlbGxvLAo+Pgo+
+PiBUaGlzIGlzIGFuIGFjY3VtdWxhdGlvbiBhbmQgc3VtbWFyeSBvZiB2YXJpb3VzIHRhc2tzIHdo
+aWNoIGhhdmUgYmVlbgo+PiBkaXNjdXNzZWQgc2luY2UgdGhlIHJldmVsYXRpb24gb2YgdGhlIHNw
+ZWN1bGF0aXZlIHNlY3VyaXR5IGlzc3VlcyBpbgo+PiBKYW51YXJ5LCBhbmQgYWxzbyBhbiBpbnZp
+dGF0aW9uIHRvIGRpc2N1c3MgYWx0ZXJuYXRpdmUgaWRlYXMuwqAgVGhleSBhcmUKPj4geDg2IHNw
+ZWNpZmljLCBidXQgYSBsb3Qgb2YgdGhlIHByaW5jaXBsZXMgYXJlIGFyY2hpdGVjdHVyZS1hZ25v
+c3RpYy4KPj4KPj4gMSkgQSBzZWNyZXRzLWZyZWUgaHlwZXJ2aXNvci4KPj4KPj4gQmFzaWNhbGx5
+IGV2ZXJ5IGh5cGVyY2FsbCBjYW4gYmUgKGFiKXVzZWQgYnkgYSBndWVzdCwgYW5kIHVzZWQgYXMg
+YW4KPj4gYXJiaXRyYXJ5IGNhY2hlLWxvYWQgZ2FkZ2V0LsKgIExvZ2ljYWxseSwgdGhpcyBpcyB0
+aGUgZmlyc3QgaGFsZiBvZiBhCj4+IFNwZWN0cmUgU1AxIGdhZGdldCwgYW5kIGlzIHVzdWFsbHkg
+dGhlIGZpcnN0IHN0ZXBwaW5nIHN0b25lIHRvCj4+IGV4cGxvaXRpbmcgb25lIG9mIHRoZSBzcGVj
+dWxhdGl2ZSBzaWRlY2hhbm5lbHMuCj4+Cj4+IFNob3J0IG9mIGNvbXBpbGluZyBYZW4gd2l0aCBM
+TFZNJ3MgU3BlY3VsYXRpdmUgTG9hZCBIYXJkZW5pbmcgKHdoaWNoIGlzCj4+IHN0aWxsIGV4cGVy
+aW1lbnRhbCwgYW5kIGNvbWVzIHdpdGggYSB+MzAlIHBlcmYgaGl0IGluIHRoZSBjb21tb24gY2Fz
+ZSksCj4+IHRoaXMgaXMgdW5hdm9pZGFibGUuwqAgRnVydGhlcm1vcmUsIHRocm93aW5nIGEgZmV3
+IGFycmF5X2luZGV4X25vc3BlYygpCj4+IGludG8gdGhlIGNvZGUgaXNuJ3QgYSB2aWFibGUgc29s
+dXRpb24gdG8gdGhlIHByb2JsZW0uCj4+Cj4+IEFuIGFsdGVybmF0aXZlIG9wdGlvbiBpcyB0byBo
+YXZlIGxlc3MgZGF0YSBtYXBwZWQgaW50byBYZW4ncyB2aXJ0dWFsCj4+IGFkZHJlc3Mgc3BhY2Ug
+LSBpZiBhIHBpZWNlIG9mIG1lbW9yeSBpc24ndCBtYXBwZWQsIGl0IGNhbid0IGJlIGxvYWRlZAo+
+PiBpbnRvIHRoZSBjYWNoZS4KPj4KPj4gQW4gZWFzeSBmaXJzdCBzdGVwIGhlcmUgaXMgdG8gcmVt
+b3ZlIFhlbidzIGRpcmVjdG1hcCwgd2hpY2ggd2lsbCBtZWFuCj4+IHRoYXQgZ3Vlc3RzIGdlbmVy
+YWwgUkFNIGlzbid0IG1hcHBlZCBieSBkZWZhdWx0IGludG8gWGVuJ3MgYWRkcmVzcwo+PiBzcGFj
+ZS7CoCBUaGlzIHdpbGwgY29tZSB3aXRoIHNvbWUgcGVyZm9ybWFuY2UgaGl0LCBhcyB0aGUKPj4g
+bWFwX2RvbWFpbl9wYWdlKCkgaW5mcmFzdHJ1Y3R1cmUgd2lsbCBub3cgaGF2ZSB0byBhY3R1YWxs
+eQo+PiBjcmVhdGUvZGVzdHJveSBtYXBwaW5ncywgYnV0IHJlbW92aW5nIHRoZSBkaXJlY3RtYXAg
+d2lsbCBjYXVzZSBhbgo+PiBpbXByb3ZlbWVudCBmb3Igbm9uLXNwZWN1bGF0aXZlIHNlY3VyaXR5
+IGFzIHdlbGwgKE5vIHBvc3NpYmlsaXR5IG9mCj4+IHJldDJkaXIgYXMgYW4gZXhwbG9pdCB0ZWNo
+bmlxdWUpLgo+Pgo+PiBCZXlvbmQgdGhlIGRpcmVjdG1hcCwgdGhlcmUgYXJlIHBsZW50eSBvZiBv
+dGhlciBpbnRlcmVzdGluZyBzZWNyZXRzIGluCj4+IHRoZSBYZW4gaGVhcCBhbmQgb3RoZXIgbWFw
+cGluZ3MsIHN1Y2ggYXMgdGhlIHN0YWNrcyBvZiB0aGUgb3RoZXIgcGNwdXMuwqAKPj4gRml4aW5n
+IHRoaXMgcmVxdWlyZXMgbW92aW5nIFhlbiB0byBoYXZpbmcgYSBub24tdW5pZm9ybSBtZW1vcnkg
+bGF5b3V0LAo+PiBhbmQgdGhpcyBpcyBtdWNoIGhhcmRlciB0byBjaGFuZ2UuwqAgSSBhbHJlYWR5
+IGV4cGVyaW1lbnRlZCB3aXRoIHRoaXMgYXMKPj4gYSBtZWx0ZG93biBtaXRpZ2F0aW9uIGFyb3Vu
+ZCBhYm91dCBhIHllYXIgYWdvLCBhbmQgcG9zdGVkIHRoZSByZXN1bHRpbmcKPj4gc2VyaWVzIG9u
+IEphbiA0dGgsCj4+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94
+ZW4tZGV2ZWwvMjAxOC0wMS9tc2cwMDI3NC5odG1sLAo+PiBzb21lIHRyaXZpYWwgYml0cyBvZiB3
+aGljaCBoYXZlIGFscmVhZHkgZm91bmQgdGhlaXIgd2F5IHVwc3RyZWFtLgo+Pgo+PiBUbyBoYXZl
+IGEgbm9uLXVuaWZvcm0gbWVtb3J5IGxheW91dCwgWGVuIG1heSBub3Qgc2hhcmUgTDQgcGFnZXRh
+Ymxlcy7CoAo+PiBpLmUuIFhlbiBtdXN0IG5ldmVyIGhhdmUgdHdvIHBjcHVzIHdoaWNoIHJlZmVy
+ZW5jZSB0aGUgc2FtZSBwYWdldGFibGUgaW4KPj4gJWNyMy4KPj4KPj4gVGhpcyBwcm9wZXJ0eSBh
+bHJlYWR5IGhvbGRzIGZvciAzMmJpdCBQViBndWVzdHMsIGFuZCBhbGwgSFZNIGd1ZXN0cywgYnV0
+Cj4+IDY0Yml0IFBWIGd1ZXN0cyBhcmUgdGhlIHN0aWNraW5nIHBvaW50LsKgIEJlY2F1c2UgTGlu
+dXggaGFzIGEgZmxhdCBtZW1vcnkKPj4gbGF5b3V0LCB3aGVuIGEgNjRiaXQgUFYgZ3Vlc3Qgc2No
+ZWR1bGVzIHR3byB0aHJlYWRzIGZyb20gdGhlIHNhbWUKPj4gcHJvY2VzcyBvbiBzZXBhcmF0ZSB2
+Y3B1cywgdGhvc2UgdHdvIHZjcHVzIGhhdmUgdGhlIHNhbWUgdmlydHVhbCAlY3IzLAo+PiBhbmQg
+Y3VycmVudGx5LCBYZW4gcHJvZ3JhbXMgdGhlIHNhbWUgcmVhbCAlY3IzIGludG8gaGFyZHdhcmUu
+Cj4+Cj4+IElmIHdlIHdhbnQgWGVuIHRvIGhhdmUgYSBub24tdW5pZm9ybSBsYXlvdXQsIGFyZSB0
+d28gb3B0aW9ucyBhcmU6Cj4+ICogRml4IExpbnV4IHRvIGhhdmUgdGhlIHNhbWUgbm9uLXVuaWZv
+cm0gbGF5b3V0IHRoYXQgWGVuIHdhbnRzCj4+IChCYWNrd2FyZHMgY29tcGF0aWJpbGl0eSBmb3Ig
+b2xkZXIgNjRiaXQgUFYgZ3Vlc3RzIGNhbiBiZSBhY2hpZXZlZCB3aXRoCj4+IHhlbi1zaGltKS4K
+Pj4gKiBNYWtlIHVzZSBYUFRJIGFsZ29yaXRobSAoc3BlY2lmaWNhbGx5LCB0aGUgcGFnZXRhYmxl
+IHN5bmMvY29weSBwYXJ0KQo+PiBmb3JldmVyIG1vcmUgaW4gdGhlIGZ1dHVyZS4KPj4KPj4gT3B0
+aW9uIDIgaXNuJ3QgZ3JlYXQgKGVzcGVjaWFsbHkgZm9yIHBlcmYgb24gZml4ZWQgaGFyZHdhcmUp
+LCBidXQgZG9lcwo+PiBrZWVwIGFsbCB0aGUgbmVjZXNzYXJ5IGNoYW5nZXMgaW4gWGVuLsKgIE9w
+dGlvbiAxIGxvb2tzIHRvIGJlIHRoZSBiZXR0ZXIKPj4gb3B0aW9uIGxvbmd0ZXJtLgo+Pgo+PiBB
+cyBhbiBpbnRlcmVzdGluZyBwb2ludCB0byBub3RlLsKgIFRoZSAzMmJpdCBQViBBQkkgcHJvaGli
+aXRzIHNoYXJpbmcgb2YKPj4gTDMgcGFnZXRhYmxlcywgYmVjYXVzZSBiYWNrIGluIHRoZSAzMmJp
+dCBoeXBlcnZpc29yIGRheXMsIHdlIHVzZWQgdG8KPj4gaGF2ZSBsaW5lYXIgbWFwcGluZ3MgaW4g
+dGhlIFhlbiB2aXJ0dWFsIHJhbmdlLsKgIFRoaXMgY2hlY2sgaXMgc3RhbGUKPj4gKGZyb20gYSBm
+dW5jdGlvbmFsaXR5IHBvaW50IG9mIHZpZXcpLCBidXQgc3RpbGwgcHJlc2VudCBpbiBYZW4uwqAg
+QQo+PiBjb25zZXF1ZW5jZSBvZiB0aGlzIGlzIHRoYXQgMzJiaXQgUFYgZ3Vlc3RzIGRlZmluaXRl
+bHkgZG9uJ3Qgc2hhcmUKPj4gdG9wLWxldmVsIHBhZ2V0YWJsZXMgYWNyb3NzIHZjcHVzLgo+IAo+
+IENvcnJlY3Rpb246IDMyYml0IFBWIEFCSSBwcm9oaWJpdHMgc2hhcmluZyBvZiBMMiBwYWdldGFi
+bGVzLCBidXQgTDMKPiBwYWdldGFibGVzIGNhbiBiZSBzaGFyZWQuIFNvIGd1ZXN0cyB3aWxsIHNj
+aGVkdWxlIHRoZSBzYW1lIHRvcC1sZXZlbAo+IHBhZ2V0YWJsZXMgYWNyb3NzIHZjcHVzLiA+Cj4g
+QnV0LCA2NGJpdCBYZW4gY3JlYXRlcyBhIG1vbml0b3IgdGFibGUgZm9yIDMyYml0IFBBRSBndWVz
+dCBhbmQgcHV0IHRoZQo+IENSMyBwcm92aWRlZCBieSBndWVzdCB0byB0aGUgZmlyc3Qgc2xvdCwg
+c28gcGNwdXMgZG9uJ3Qgc2hhcmUgdGhlIHNhbWUKPiBMNCBwYWdldGFibGVzLiBUaGUgcHJvcGVy
+dHkgd2Ugd2FudCBzdGlsbCBob2xkcy4KCkFoLCByaWdodCAtLSBidXQgWGVuIGNhbiBnZXQgYXdh
+eSB3aXRoIHRoaXMgYmVjYXVzZSBpbiBQQUUgbW9kZSwgIkwzIiBpcwpqdXN0IDQgZW50cmllcyB0
+aGF0IGFyZSBsb2FkZWQgb24gQ1IzLXN3aXRjaCBhbmQgbm90IGF1dG9tYXRpY2FsbHkga2VwdApp
+biBzeW5jIGJ5IHRoZSBoYXJkd2FyZTsgaS5lLiwgdGhlIE9TIGFscmVhZHkgbmVlZHMgdG8gZG8g
+aXRzIG93bgoibWFudWFsIHN5bmNpbmciIGlmIGl0IHVwZGF0ZXMgYW55IG9mIHRoZSBMMyBlbnRp
+cmVzOyBzbyBpdCdzIHRoZSBzYW1lCmZvciBYZW4uCgo+PiBKdWVyZ2VuL0JvcmlzOiBEbyB5b3Ug
+aGF2ZSBhbnkgaWRlYSBpZi9ob3cgZWFzeSB0aGlzIGluZnJhc3RydWN0dXJlCj4+IHdvdWxkIGJl
+IHRvIGltcGxlbWVudCBmb3IgNjRiaXQgUFYgZ3Vlc3RzIGFzIHdlbGw/wqAgSWYgYSBQViBndWVz
+dCBjYW4KPj4gYWR2ZXJ0aXNlIHZpYSBFbGZub3RlIHRoYXQgaXQgd29uJ3Qgc2hhcmUgdG9wLWxl
+dmVsIHBhZ2V0YWJsZXMsIHRoZW4gd2UKPj4gY2FuIGF1ZGl0IHRoaXMgdHJpdmlhbGx5IGluIFhl
+bi4KPj4KPiAKPiBBZnRlciByZWFkaW5nIExpbnV4IGtlcm5lbCBjb2RlLCBJIHRoaW5rIGl0IGlz
+IG5vdCBnb2luZyB0byBiZSB0cml2aWFsLgo+IEFzIG5vdyB0aHJlYWRzIGluIExpbnV4IHNoYXJl
+IG9uZSBwYWdldGFibGUgKGFzIGl0IHNob3VsZCBiZSkuCj4gCj4gSW4gb3JkZXIgdG8gbWFrZSBl
+YWNoIHRocmVhZCBoYXMgaXRzIG93biBwYWdldGFibGUgd2hpbGUgc3RpbGwgbWFpbnRhaW4KPiB0
+aGUgaWxsdXNpb24gb2Ygb25lIGFkZHJlc3Mgc3BhY2UsIHRoZXJlIG5lZWRzIHRvIGJlIHN5bmNo
+cm9uaXNhdGlvbgo+IHVuZGVyIHRoZSBob29kLgo+IAo+IFRoZXJlIGlzIGNvZGUgaW4gTGludXgg
+dG8gc3luY2hyb25pc2Ugdm1hbGxvYywgYnV0IHRoYXQncyBvbmx5IGZvciB0aGUKPiBrZXJuZWwg
+cG9ydGlvbi4gVGhlIGluZnJhc3RydWN0dXJlIHRvIHN5bmNocm9uaXNlIHVzZXJzcGFjZSBwb3J0
+aW9uIGlzCj4gbWlzc2luZy4KPiAKPiBPbmUgaWRlYSBpcyB0byBmb2xsb3cgdGhlIHNhbWUgbW9k
+ZWwgYXMgdm1hbGxvYyAtLSBtYWludGFpbiBhIHJlZmVyZW5jZQo+IHBhZ2V0YWJsZSBpbiBzdHJ1
+Y3QgbW0gYW5kIGEgbGlzdCBvZiBwYWdldGFibGVzIGZvciB0aHJlYWRzLCB0aGVuCj4gc3luY2hy
+b25pc2UgdGhlIHBhZ2V0YWJsZXMgaW4gdGhlIHBhZ2UgZmF1bHQgaGFuZGxlci4gQnV0IHRoaXMg
+aXMKPiBwcm9iYWJseSBhIGJpdCBoYXJkIHRvIHNlbGwgdG8gTGludXggbWFpbnRhaW5lcnMgYmVj
+YXVzZSBpdCB3aWxsIHRvdWNoIGEKPiBsb3Qgb2YgdGhlIG5vbi1YZW4gY29kZSwgaW5jcmVhc2Ug
+Y29tcGxleGl0eSBhbmQgZGVjcmVhc2UgcGVyZm9ybWFuY2UuCgpTb3JyeSAtLSB3aGF0IGRvIHlv
+dSBtZWFuICJzeW5jaHJvbml6ZSB2bWFsbG9jIj8gIElmIGV2ZXJ5IHRocmVhZCBoYXMgYQpkaWZm
+ZXJlbnQgdmlldyBvZiB0aGUga2VybmVsJ3Mgdm1hbGxvYyBhcmVhLCB0aGVuIGV2ZXJ5IHRocmVh
+ZCBtdXN0IGhhdmUKYSBkaWZmZXJlbnQgTDQgdGFibGUsIHJpZ2h0PyAgQW5kIGlmIGV2ZXJ5IHRo
+cmVhZCBoYXMgYSBkaWZmZXJlbnQgTDQKdGFibGUsIHRoZW4gd2UndmUgYWxyZWFkeSBnb3QgdGhl
+IG1haW4gdGhpbmcgd2UgbmVlZCBmcm9tIExpbnV4LCBkb24ndCB3ZT8KCiAtR2VvcmdlCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
