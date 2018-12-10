@@ -1,11 +1,13 @@
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 Subject: [PATCH 7/7] drm: Split out drm_probe_helper.h
-Date: Mon, 10 Dec 2018 11:10:51 +0100
-Message-ID: <20181210101052.5267-1-daniel.vetter__15400.9384838448$1544436604$gmane$org@ffwll.ch>
+Date: Mon, 10 Dec 2018 11:11:33 +0100
+Message-ID: <20181210101133.5364-1-daniel.vetter__5514.6153471016$1544436645$gmane$org@ffwll.ch>
+References: <20181210100359.22507-1-daniel.vetter@ffwll.ch>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <20181210100359.22507-1-daniel.vetter@ffwll.ch>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
