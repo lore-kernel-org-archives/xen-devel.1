@@ -1,11 +1,35 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/svm: Fixes to nested-svm MSR handing
-Date: Mon, 10 Dec 2018 11:52:02 +0000
-Message-ID: <1544442722-22245-1-git-send-email-andrew.cooper3@citrix.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: Xen optimization
+Date: Mon, 10 Dec 2018 12:54:49 +0100
+Message-ID: <CAF3u54BcT=-wnGKaDY1c3AvaDrV7eiiiedjaqbsavsQ4YaDWug@mail.gmail.com>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <CADJ6SV2891kOd_Ga8jjXdtKdjPAoWtADhizuS+kjSZNNOPMK+w@mail.gmail.com>
+ <alpine.DEB.2.10.1810221037270.31582@sstabellini-ThinkPad-X260>
+ <CADJ6SV0gUvRv_4Kp=Vz5n4WSQ3kgQrC=+gPz1QjrBzdFOoJwPA@mail.gmail.com>
+ <alpine.DEB.2.10.1810231005040.31582@sstabellini-ThinkPad-X260>
+ <d5769cb9-9d87-3db4-e23d-414242692a89@arm.com>
+ <alpine.DEB.2.10.1810250915030.25937@sstabellini-ThinkPad-X260>
+ <94c08d07-b028-8eb1-7e94-21a416cd8007@arm.com>
+ <alpine.DEB.2.10.1810261340530.32521@sstabellini-ThinkPad-X260>
+ <CADJ6SV174NdceJ4kWCWYJ-UaNp1AAisb28V5tgKz14N+-pBVEg@mail.gmail.com>
+ <67f6ece7-0a26-e29c-b20b-acf83a01f6eb@arm.com>
+ <CADJ6SV22eAxR0s0ocpGNRRefo+FmsMz9KsEeXw+cME1sSM-ssg@mail.gmail.com>
+ <a5eab71a-f301-67ae-cc22-8cf10715fdcd@arm.com>
+ <alpine.DEB.2.10.1811011320050.7220@sstabellini-ThinkPad-X260>
+ <35b44b61-9d2d-60d0-97ee-5b8c00e8be6d@gmail.com>
+ <alpine.DEB.2.10.1811271320170.4577@sstabellini-ThinkPad-X260>
+ <bb88ca15-381c-014c-2f6c-e5de33b4b15a@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6914374047596334542=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Y+im=OT=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gWK9R-0000pg-Bz
+ for xen-devel@lists.xenproject.org; Mon, 10 Dec 2018 11:55:05 +0000
+Received: by mail-vs1-xe31.google.com with SMTP id x1so6414805vsc.10
+ for <xen-devel@lists.xenproject.org>; Mon, 10 Dec 2018 03:55:04 -0800 (PST)
+In-Reply-To: <bb88ca15-381c-014c-2f6c-e5de33b4b15a@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,206 +38,262 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, Milan Boberic <milanboberic94@gmail.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <stefano.stabellini@xilinx.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIGludGVudGlvbiBvZiB0aGlzIHBhdGNoIHdhcyB0byByZW1vdmUgdGhlIGNhbGxzIHRvIG5z
-dm1fe3JkLHdyfW1zcigpIGZyb20KdGhlIGRlZmF1bHQgY2FzZXMgb2Ygc3ZtX21zcl97cmVhZCx3
-cml0ZX1faW50ZXJjZXB0KCksIGJ1dCBpdCBoYXMgdHVybmVkIGludG8KYSBtb3JlIGNvcnJlY3Rp
-dmUgcGF0Y2ggdGhhbiBqdXN0IGNvZGUgbW90aW9uLgoKRmlyc3QsIGNvbGxlY3QgdGhlIFZNX0NS
-IGJpdCBkZWZpbml0aW9ucyBuZXh0IHRvIHRoZSBtYWluIGRlZmluZSwgYW5kIHNpbXBsaWZ5CnRo
-ZSBuYW1pbmcuICBUaGUgU1ZNIE1TUnMgc2hvdWxkIGJlIGVudGlyZWx5IHVuYXZhaWxhYmxlIHdo
-ZW4gU1ZNIGlzbid0CmVudW1lcmF0ZWQgaW4gQ1BVSUQuCgpXaGVuIFNWTSBpcyBhdmFpbGFibGUs
-IFhlbiBvbmx5IHN1cHBvcnRzIHRoZSAiRW5hYmxlZCIgbW9kZSBhcyBkZXNjcmliZWQgaW4KdGhl
-IEJLR0QvUFBScywgd2hpY2ggbWVhbnMgVk1fQ1IuTE9DSyBzaG91bGQgYmUgc2V0LiAgVGhpcyBp
-biB0dXJuIG1lYW5zIHRoZQpNU1JfU1ZNX0xPQ0tfS0VZIHNob3VsZCBiZSBpbXBsZW1lbnRlZC4g
-IEl0IGlzIHJlYWQtYXMtMC93cml0ZS1kaXNjYXJkIGFzIFhlbgpkb2Vzbid0IGltcGxlbWVudCB0
-aGUgImRpc2FibGVkIHdpdGggdXNlciBzdXBwbGllZCBrZXkiIG1vZGUuCgpUaGUgY29ycmVjdCBy
-ZXNldCB2YWx1ZSBmb3IgdGhlIEhTQVZFIGFkZHJlc3MgaXMgMCwgbm90IH4wLiAgWGVuIGRvZXNu
-J3QgdXNlCnRoZSBndWVzdCBmcmFtZSBmb3IgYW55dGhpbmcsIGFuZCBkb2Vzbid0IGltcGxlbWVu
-dCBUU0VHL0FTRUcvSHlwZXJUcmFuc3BvcnQKaW4gdGhlIGd1ZXN0IHBoeXNpY2FsIGFkZHJlc3Mg
-c3BhY2UuICBEcm9wIHRoZSBhcmJpdHJhcnkgdXBwZXIgYm91bmRzIGNoZWNrCndoaWNoIGFwcGVh
-cnMgdG8gYmUgYW4gaW5jb3JyZWN0IGF0dGVtcHQgdG8gZXhjbHVkZSB0aGUgSFQgcmFuZ2UgYmVs
-b3cgdGhlIDRHCmJvdW5kYXJ5LCBhbmQgYWNjZXB0IGFueSBmcmFtZSB3aXRoaW4gTUFYUEhZU0FE
-RFIuICBXaGVuIHdlIGdldCBhIHVzYWJsZQpwaHlzbWFwIGxheW91dCBpbiBYZW4sIHRoaXMgc2hv
-dWxkIGJlIHJlc3RyaWN0ZWQgdG8gUkFNIHBhZ2VzLgoKUmVtb3ZlIHRoZSBub3ctdW51c2VkIHJl
-dCB2YXJpYWJsZXMgZnJvbSB0aGUgaW50ZXJjZXB0IGZ1bmN0aW9ucywgYXMgd2VsbCBhcwp0aGUg
-dW5uZWNlc3NhcnkgcmVzdWx0IHZhcmlhYmxlIGluIHN2bV9tc3Jfd3JpdGVfaW50ZXJjZXB0KCku
-CgpTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-PgotLS0KQ0M6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9yYWNsZS5jb20+CkND
-OiBTdXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgpD
-QzogQnJpYW4gV29vZHMgPGJyaWFuLndvb2RzQGFtZC5jb20+CkNDOiBKYW4gQmV1bGljaCA8SkJl
-dWxpY2hAc3VzZS5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDQzogUm9n
-ZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Ci0tLQogeGVuL2FyY2gveDg2L2h2
-bS9zdm0vbmVzdGVkc3ZtLmMgICAgICAgIHwgNzkgKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQogeGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMgICAgICAgICAgICAgIHwgODIgKysrKysr
-KysrKysrKysrKysrKysrKysrKy0tLS0tLS0tCiB4ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0v
-bmVzdGVkc3ZtLmggfCAgNCAtLQogeGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3ItaW5kZXguaCAgICAg
-ICAgIHwgMTMgKysrLS0tCiA0IGZpbGVzIGNoYW5nZWQsIDcyIGluc2VydGlvbnMoKyksIDEwNiBk
-ZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3N2bS9uZXN0ZWRzdm0u
-YyBiL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL25lc3RlZHN2bS5jCmluZGV4IDk2NjAyMDIuLjYzNTdi
-ZWEgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vc3ZtL25lc3RlZHN2bS5jCisrKyBiL3hl
-bi9hcmNoL3g4Ni9odm0vc3ZtL25lc3RlZHN2bS5jCkBAIC00NywyMiArNDcsNiBAQCBuZXN0ZWRz
-dm1fdmNwdV9zdGdpKHN0cnVjdCB2Y3B1ICp2KQogICAgIGxvY2FsX2V2ZW50X2RlbGl2ZXJ5X2Vu
-YWJsZSgpOyAvKiB1bm1hc2sgZXZlbnRzIGZvciBQViBkcml2ZXJzICovCiB9CiAKLXN0YXRpYyBp
-bnQKLW5lc3RlZHN2bV92bWNiX2lzdmFsaWQoc3RydWN0IHZjcHUgKnYsIHVpbnQ2NF90IHZtY3hh
-ZGRyKQotewotICAgIC8qIEFkZHJlc3MgbXVzdCBiZSA0ayBhbGlnbmVkICovCi0gICAgaWYgKCAo
-dm1jeGFkZHIgJiB+UEFHRV9NQVNLKSAhPSAwICkKLSAgICAgICAgcmV0dXJuIDA7Ci0KLSAgICAv
-KiBNYXhpbXVtIHZhbGlkIHBoeXNpY2FsIGFkZHJlc3MuCi0gICAgICogU2VlIEFNRCBCS0RHIGZv
-ciBIU0FWRV9QQSBNU1IuCi0gICAgICovCi0gICAgaWYgKCB2bWN4YWRkciA+IDB4ZmQwMDAwMDAw
-MFVMTCApCi0gICAgICAgIHJldHVybiAwOwotCi0gICAgcmV0dXJuIDE7Ci19Ci0KIGludCBuZXN0
-ZWRzdm1fdm1jYl9tYXAoc3RydWN0IHZjcHUgKnYsIHVpbnQ2NF90IHZtY2JhZGRyKQogewogICAg
-IHN0cnVjdCBuZXN0ZWR2Y3B1ICpudiA9ICZ2Y3B1X25lc3RlZGh2bSh2KTsKQEAgLTE2NCw3ICsx
-NDgsNyBAQCBpbnQgbnN2bV92Y3B1X3Jlc2V0KHN0cnVjdCB2Y3B1ICp2KQogewogICAgIHN0cnVj
-dCBuZXN0ZWRzdm0gKnN2bSA9ICZ2Y3B1X25lc3RlZHN2bSh2KTsKIAotICAgIHN2bS0+bnNfbXNy
-X2hzYXZlcGEgPSBJTlZBTElEX1BBRERSOworICAgIHN2bS0+bnNfbXNyX2hzYXZlcGEgPSAwOwog
-ICAgIHN2bS0+bnNfb3Z2bWNiX3BhID0gSU5WQUxJRF9QQUREUjsKIAogICAgIHN2bS0+bnNfdHNj
-cmF0aW8gPSBERUZBVUxUX1RTQ19SQVRJTzsKQEAgLTEyNjcsNjcgKzEyNTEsNiBAQCBlbnVtIGh2
-bV9pbnRibGsgbnN2bV9pbnRyX2Jsb2NrZWQoc3RydWN0IHZjcHUgKnYpCiAgICAgcmV0dXJuIGh2
-bV9pbnRibGtfbm9uZTsKIH0KIAotLyogTVNSIGhhbmRsaW5nICovCi1pbnQgbnN2bV9yZG1zcihz
-dHJ1Y3QgdmNwdSAqdiwgdW5zaWduZWQgaW50IG1zciwgdWludDY0X3QgKm1zcl9jb250ZW50KQot
-ewotICAgIHN0cnVjdCBuZXN0ZWRzdm0gKnN2bSA9ICZ2Y3B1X25lc3RlZHN2bSh2KTsKLSAgICBp
-bnQgcmV0ID0gMTsKLQotICAgICptc3JfY29udGVudCA9IDA7Ci0KLSAgICBzd2l0Y2ggKG1zcikg
-ewotICAgIGNhc2UgTVNSX0s4X1ZNX0NSOgotICAgICAgICBicmVhazsKLSAgICBjYXNlIE1TUl9L
-OF9WTV9IU0FWRV9QQToKLSAgICAgICAgKm1zcl9jb250ZW50ID0gc3ZtLT5uc19tc3JfaHNhdmVw
-YTsKLSAgICAgICAgYnJlYWs7Ci0gICAgY2FzZSBNU1JfQU1ENjRfVFNDX1JBVElPOgotICAgICAg
-ICAqbXNyX2NvbnRlbnQgPSBzdm0tPm5zX3RzY3JhdGlvOwotICAgICAgICBicmVhazsKLSAgICBk
-ZWZhdWx0OgotICAgICAgICByZXQgPSAwOwotICAgICAgICBicmVhazsKLSAgICB9Ci0KLSAgICBy
-ZXR1cm4gcmV0OwotfQotCi1pbnQgbnN2bV93cm1zcihzdHJ1Y3QgdmNwdSAqdiwgdW5zaWduZWQg
-aW50IG1zciwgdWludDY0X3QgbXNyX2NvbnRlbnQpCi17Ci0gICAgaW50IHJldCA9IDE7Ci0gICAg
-c3RydWN0IG5lc3RlZHN2bSAqc3ZtID0gJnZjcHVfbmVzdGVkc3ZtKHYpOwotCi0gICAgc3dpdGNo
-IChtc3IpIHsKLSAgICBjYXNlIE1TUl9LOF9WTV9DUjoKLSAgICAgICAgLyogaWdub3JlIHdyaXRl
-LiBoYW5kbGUgYWxsIGJpdHMgYXMgcmVhZC1vbmx5LiAqLwotICAgICAgICBicmVhazsKLSAgICBj
-YXNlIE1TUl9LOF9WTV9IU0FWRV9QQToKLSAgICAgICAgaWYgKCFuZXN0ZWRzdm1fdm1jYl9pc3Zh
-bGlkKHYsIG1zcl9jb250ZW50KSkgewotICAgICAgICAgICAgZ2RwcmludGsoWEVOTE9HX0VSUiwK
-LSAgICAgICAgICAgICAgICAiTVNSX0s4X1ZNX0hTQVZFX1BBIHZhbHVlIGludmFsaWQgJSMiUFJJ
-eDY0IlxuIiwgbXNyX2NvbnRlbnQpOwotICAgICAgICAgICAgcmV0ID0gLTE7IC8qIGluamVjdCAj
-R1AgKi8KLSAgICAgICAgICAgIGJyZWFrOwotICAgICAgICB9Ci0gICAgICAgIHN2bS0+bnNfbXNy
-X2hzYXZlcGEgPSBtc3JfY29udGVudDsKLSAgICAgICAgYnJlYWs7Ci0gICAgY2FzZSBNU1JfQU1E
-NjRfVFNDX1JBVElPOgotICAgICAgICBpZiAoKG1zcl9jb250ZW50ICYgflRTQ19SQVRJT19SU1ZE
-X0JJVFMpICE9IG1zcl9jb250ZW50KSB7Ci0gICAgICAgICAgICBnZHByaW50ayhYRU5MT0dfRVJS
-LAotICAgICAgICAgICAgICAgICJyZXNlcnZlZCBiaXRzIHNldCBpbiBNU1JfQU1ENjRfVFNDX1JB
-VElPICUjIlBSSXg2NCJcbiIsCi0gICAgICAgICAgICAgICAgbXNyX2NvbnRlbnQpOwotICAgICAg
-ICAgICAgcmV0ID0gLTE7IC8qIGluamVjdCAjR1AgKi8KLSAgICAgICAgICAgIGJyZWFrOwotICAg
-ICAgICB9Ci0gICAgICAgIHN2bS0+bnNfdHNjcmF0aW8gPSBtc3JfY29udGVudDsKLSAgICAgICAg
-YnJlYWs7Ci0gICAgZGVmYXVsdDoKLSAgICAgICAgcmV0ID0gMDsKLSAgICAgICAgYnJlYWs7Ci0g
-ICAgfQotCi0gICAgcmV0dXJuIHJldDsKLX0KLQogLyogVk1FWElUIGVtdWxhdGlvbiAqLwogdm9p
-ZAogbmVzdGVkc3ZtX3ZtZXhpdF9kZWZlcihzdHJ1Y3QgdmNwdSAqdiwKZGlmZiAtLWdpdCBhL3hl
-bi9hcmNoL3g4Ni9odm0vc3ZtL3N2bS5jIGIveGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKaW5k
-ZXggYjlhODkwMC4uZmNlZGYzZCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L2h2bS9zdm0vc3Zt
-LmMKKysrIGIveGVuL2FyY2gveDg2L2h2bS9zdm0vc3ZtLmMKQEAgLTE2NzUsOCArMTY3NSw4IEBA
-IHN0YXRpYyBpbnQgX3N2bV9jcHVfdXAoYm9vbCBic3ApCiAgICAgY29uc3Qgc3RydWN0IGNwdWlu
-Zm9feDg2ICpjID0gJmNwdV9kYXRhW2NwdV07CiAgCiAgICAgLyogQ2hlY2sgd2hldGhlciBTVk0g
-ZmVhdHVyZSBpcyBkaXNhYmxlZCBpbiBCSU9TICovCi0gICAgcmRtc3JsKE1TUl9LOF9WTV9DUiwg
-bXNyX2NvbnRlbnQpOwotICAgIGlmICggbXNyX2NvbnRlbnQgJiBLOF9WTUNSX1NWTUVfRElTQUJM
-RSApCisgICAgcmRtc3JsKE1TUl9WTV9DUiwgbXNyX2NvbnRlbnQpOworICAgIGlmICggbXNyX2Nv
-bnRlbnQgJiBWTV9DUl9TVk1FX0RJU0FCTEUgKQogICAgIHsKICAgICAgICAgcHJpbnRrKCJDUFUl
-ZDogQU1EIFNWTSBFeHRlbnNpb24gaXMgZGlzYWJsZWQgaW4gQklPUy5cbiIsIGNwdSk7CiAgICAg
-ICAgIHJldHVybiAtRUlOVkFMOwpAQCAtMTY4OCw3ICsxNjg4LDcgQEAgc3RhdGljIGludCBfc3Zt
-X2NwdV91cChib29sIGJzcCkKICAgICB3cml0ZV9lZmVyKHJlYWRfZWZlcigpIHwgRUZFUl9TVk1F
-KTsKIAogICAgIC8qIEluaXRpYWxpemUgdGhlIEhTQSBmb3IgdGhpcyBjb3JlLiAqLwotICAgIHdy
-bXNybChNU1JfSzhfVk1fSFNBVkVfUEEsIHBlcl9jcHUoaHNhLCBjcHUpKTsKKyAgICB3cm1zcmwo
-TVNSX1ZNX0hTQVZFX0FERFIsIHBlcl9jcHUoaHNhLCBjcHUpKTsKIAogICAgIC8qIGNoZWNrIGZv
-ciBlcnJhdHVtIDM4MyAqLwogICAgIHN2bV9pbml0X2VycmF0dW1fMzgzKGMpOwpAQCAtMTg5OCwx
-MCArMTg5OCwxMSBAQCBzdGF0aWMgdm9pZCBzdm1fZHJfYWNjZXNzKHN0cnVjdCB2Y3B1ICp2LCBz
-dHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykKIAogc3RhdGljIGludCBzdm1fbXNyX3JlYWRfaW50
-ZXJjZXB0KHVuc2lnbmVkIGludCBtc3IsIHVpbnQ2NF90ICptc3JfY29udGVudCkKIHsKLSAgICBp
-bnQgcmV0OwogICAgIHN0cnVjdCB2Y3B1ICp2ID0gY3VycmVudDsKICAgICBjb25zdCBzdHJ1Y3Qg
-ZG9tYWluICpkID0gdi0+ZG9tYWluOwogICAgIHN0cnVjdCB2bWNiX3N0cnVjdCAqdm1jYiA9IHYt
-PmFyY2guaHZtLnN2bS52bWNiOworICAgIGNvbnN0IHN0cnVjdCBuZXN0ZWRzdm0gKm5zdm0gPSAm
-dmNwdV9uZXN0ZWRzdm0odik7CisgICAgY29uc3Qgc3RydWN0IGNwdWlkX3BvbGljeSAqY3AgPSBk
-LT5hcmNoLmNwdWlkOwogCiAgICAgc3dpdGNoICggbXNyICkKICAgICB7CkBAIC0yMDI4LDYgKzIw
-MjksMzQgQEAgc3RhdGljIGludCBzdm1fbXNyX3JlYWRfaW50ZXJjZXB0KHVuc2lnbmVkIGludCBt
-c3IsIHVpbnQ2NF90ICptc3JfY29udGVudCkKICAgICAgICAgICAgIGdvdG8gZ3BmOwogICAgICAg
-ICBicmVhazsKIAorICAgIGNhc2UgTVNSX1ZNX0NSOgorICAgICAgICBpZiAoICFjcC0+ZXh0ZC5z
-dm0gKQorICAgICAgICAgICAgZ290byBncGY7CisKKyAgICAgICAgKm1zcl9jb250ZW50ID0gVk1f
-Q1JfTE9DSzsKKyAgICAgICAgYnJlYWs7CisKKyAgICBjYXNlIE1TUl9WTV9IU0FWRV9BRERSOgor
-ICAgICAgICBpZiAoICFjcC0+ZXh0ZC5zdm0gKQorICAgICAgICAgICAgZ290byBncGY7CisKKyAg
-ICAgICAgKm1zcl9jb250ZW50ID0gbnN2bS0+bnNfbXNyX2hzYXZlcGE7CisgICAgICAgIGJyZWFr
-OworCisgICAgY2FzZSBNU1JfU1ZNX0xPQ0tfS0VZOgorICAgICAgICBpZiAoICFjcC0+ZXh0ZC5z
-dm0gKQorICAgICAgICAgICAgZ290byBncGY7CisKKyAgICAgICAgKm1zcl9jb250ZW50ID0gMDsK
-KyAgICAgICAgYnJlYWs7CisKKyAgICBjYXNlIE1TUl9BTUQ2NF9UU0NfUkFUSU86CisgICAgICAg
-IGlmICggIWNwLT5leHRkLnN2bSApCisgICAgICAgICAgICBnb3RvIGdwZjsKKworICAgICAgICAq
-bXNyX2NvbnRlbnQgPSBuc3ZtLT5uc190c2NyYXRpbzsKKyAgICAgICAgYnJlYWs7CisKICAgICBj
-YXNlIE1TUl9BTURfT1NWV19JRF9MRU5HVEg6CiAgICAgY2FzZSBNU1JfQU1EX09TVldfU1RBVFVT
-OgogICAgICAgICBpZiAoICFkLT5hcmNoLmNwdWlkLT5leHRkLm9zdncgKQpAQCAtMjAzNiwxMiAr
-MjA2NSw2IEBAIHN0YXRpYyBpbnQgc3ZtX21zcl9yZWFkX2ludGVyY2VwdCh1bnNpZ25lZCBpbnQg
-bXNyLCB1aW50NjRfdCAqbXNyX2NvbnRlbnQpCiAgICAgICAgIGJyZWFrOwogCiAgICAgZGVmYXVs
-dDoKLSAgICAgICAgcmV0ID0gbnN2bV9yZG1zcih2LCBtc3IsIG1zcl9jb250ZW50KTsKLSAgICAg
-ICAgaWYgKCByZXQgPCAwICkKLSAgICAgICAgICAgIGdvdG8gZ3BmOwotICAgICAgICBlbHNlIGlm
-ICggcmV0ICkKLSAgICAgICAgICAgIGJyZWFrOwotCiAgICAgICAgIGlmICggcmRtc3Jfc2FmZSht
-c3IsICptc3JfY29udGVudCkgPT0gMCApCiAgICAgICAgICAgICBicmVhazsKIApAQCAtMjA3MCwx
-MCArMjA5MywxMSBAQCBzdGF0aWMgaW50IHN2bV9tc3JfcmVhZF9pbnRlcmNlcHQodW5zaWduZWQg
-aW50IG1zciwgdWludDY0X3QgKm1zcl9jb250ZW50KQogCiBzdGF0aWMgaW50IHN2bV9tc3Jfd3Jp
-dGVfaW50ZXJjZXB0KHVuc2lnbmVkIGludCBtc3IsIHVpbnQ2NF90IG1zcl9jb250ZW50KQogewot
-ICAgIGludCByZXQsIHJlc3VsdCA9IFg4NkVNVUxfT0tBWTsKICAgICBzdHJ1Y3QgdmNwdSAqdiA9
-IGN1cnJlbnQ7CiAgICAgc3RydWN0IGRvbWFpbiAqZCA9IHYtPmRvbWFpbjsKICAgICBzdHJ1Y3Qg
-dm1jYl9zdHJ1Y3QgKnZtY2IgPSB2LT5hcmNoLmh2bS5zdm0udm1jYjsKKyAgICBzdHJ1Y3QgbmVz
-dGVkc3ZtICpuc3ZtID0gJnZjcHVfbmVzdGVkc3ZtKHYpOworICAgIGNvbnN0IHN0cnVjdCBjcHVp
-ZF9wb2xpY3kgKmNwID0gZC0+YXJjaC5jcHVpZDsKIAogICAgIHN3aXRjaCAoIG1zciApCiAgICAg
-ewpAQCAtMjIwNCw2ICsyMjI4LDM0IEBAIHN0YXRpYyBpbnQgc3ZtX21zcl93cml0ZV9pbnRlcmNl
-cHQodW5zaWduZWQgaW50IG1zciwgdWludDY0X3QgbXNyX2NvbnRlbnQpCiAgICAgICAgICAgICBn
-b3RvIGdwZjsKICAgICAgICAgYnJlYWs7CiAKKyAgICBjYXNlIE1TUl9WTV9DUjoKKyAgICAgICAg
-LyogWGVuIGFsd2F5cyBzZXRzIHRoZSBMb2NrIGJpdCwgbWFraW5nIHRoaXMgTVNSIHJlYWQtb25s
-eS4gKi8KKyAgICAgICAgZ290byBncGY7CisKKyAgICBjYXNlIE1TUl9WTV9IU0FWRV9BRERSOgor
-ICAgICAgICBpZiAoICFjcC0+ZXh0ZC5zdm0gfHwgKG1zcl9jb250ZW50ICYgflBBR0VfTUFTSykg
-fHwKKyAgICAgICAgICAgICAhZ2ZuX3ZhbGlkKGQsIGdhZGRyX3RvX2dmbihtc3JfY29udGVudCkp
-ICkKKyAgICAgICAgICAgIGdvdG8gZ3BmOworICAgICAgICAvKgorICAgICAgICAgKiBYZW4gZG9l
-c24ndCBhY3R1YWxseSB1c2UgdGhlIGd1ZXN0LXByb3ZpZGVkIEhTQVZFIGFyZWEgZm9yCisgICAg
-ICAgICAqIGFueXRoaW5nLiAgSnVzdCByZW1lbWJlciB3aGF0IHRoZSBndWVzdCB3cm90ZS4KKyAg
-ICAgICAgICovCisgICAgICAgIG5zdm0tPm5zX21zcl9oc2F2ZXBhID0gbXNyX2NvbnRlbnQ7Cisg
-ICAgICAgIGJyZWFrOworCisgICAgY2FzZSBNU1JfU1ZNX0xPQ0tfS0VZOgorICAgICAgICBpZiAo
-ICFjcC0+ZXh0ZC5zdm0gKQorICAgICAgICAgICAgZ290byBncGY7CisgICAgICAgIC8qIFdyaXRl
-IGRpc2NhcmQuIFNWTS1Mb2NrIG5vdCBpbXBsZW1lbnRlZC4gKi8KKyAgICAgICAgYnJlYWs7CisK
-KyAgICBjYXNlIE1TUl9BTUQ2NF9UU0NfUkFUSU86CisgICAgICAgIGlmICggIWNwLT5leHRkLnN2
-bSB8fCAobXNyX2NvbnRlbnQgJiBUU0NfUkFUSU9fUlNWRF9CSVRTKSApCisgICAgICAgICAgICBn
-b3RvIGdwZjsKKworICAgICAgICBuc3ZtLT5uc190c2NyYXRpbyA9IG1zcl9jb250ZW50OworICAg
-ICAgICBicmVhazsKKwogICAgIGNhc2UgTVNSX0lBMzJfTUN4X01JU0MoNCk6IC8qIFRocmVzaG9s
-ZCByZWdpc3RlciAqLwogICAgIGNhc2UgTVNSX0YxMF9NQzRfTUlTQzEgLi4uIE1TUl9GMTBfTUM0
-X01JU0MzOgogICAgICAgICAvKgpAQCAtMjIyMSwxMiArMjI3Myw2IEBAIHN0YXRpYyBpbnQgc3Zt
-X21zcl93cml0ZV9pbnRlcmNlcHQodW5zaWduZWQgaW50IG1zciwgdWludDY0X3QgbXNyX2NvbnRl
-bnQpCiAgICAgICAgIGJyZWFrOwogCiAgICAgZGVmYXVsdDoKLSAgICAgICAgcmV0ID0gbnN2bV93
-cm1zcih2LCBtc3IsIG1zcl9jb250ZW50KTsKLSAgICAgICAgaWYgKCByZXQgPCAwICkKLSAgICAg
-ICAgICAgIGdvdG8gZ3BmOwotICAgICAgICBlbHNlIGlmICggcmV0ICkKLSAgICAgICAgICAgIGJy
-ZWFrOwotCiAgICAgICAgIC8qIE1hdGNoIHVwIHdpdGggdGhlIFJETVNSIHNpZGU7IHVsdGltYXRl
-bHkgdGhpcyBzaG91bGQgZ28gYXdheS4gKi8KICAgICAgICAgaWYgKCByZG1zcl9zYWZlKG1zciwg
-bXNyX2NvbnRlbnQpID09IDAgKQogICAgICAgICAgICAgYnJlYWs7CkBAIC0yMjM0LDcgKzIyODAs
-NyBAQCBzdGF0aWMgaW50IHN2bV9tc3Jfd3JpdGVfaW50ZXJjZXB0KHVuc2lnbmVkIGludCBtc3Is
-IHVpbnQ2NF90IG1zcl9jb250ZW50KQogICAgICAgICBnb3RvIGdwZjsKICAgICB9CiAKLSAgICBy
-ZXR1cm4gcmVzdWx0OworICAgIHJldHVybiBYODZFTVVMX09LQVk7CiAKICBncGY6CiAgICAgcmV0
-dXJuIFg4NkVNVUxfRVhDRVBUSU9OOwpkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9o
-dm0vc3ZtL25lc3RlZHN2bS5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL25lc3RlZHN2
-bS5oCmluZGV4IDMxZmI0YmYuLjA4NzM2OTggMTAwNjQ0Ci0tLSBhL3hlbi9pbmNsdWRlL2FzbS14
-ODYvaHZtL3N2bS9uZXN0ZWRzdm0uaAorKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0v
-bmVzdGVkc3ZtLmgKQEAgLTExOCwxMCArMTE4LDYgQEAgYm9vbF90IG5zdm1fdm1jYl9ndWVzdF9p
-bnRlcmNlcHRzX2V2ZW50KAogYm9vbF90IG5zdm1fdm1jYl9oYXBfZW5hYmxlZChzdHJ1Y3QgdmNw
-dSAqdik7CiBlbnVtIGh2bV9pbnRibGsgbnN2bV9pbnRyX2Jsb2NrZWQoc3RydWN0IHZjcHUgKnYp
-OwogCi0vKiBNU1JzICovCi1pbnQgbnN2bV9yZG1zcihzdHJ1Y3QgdmNwdSAqdiwgdW5zaWduZWQg
-aW50IG1zciwgdWludDY0X3QgKm1zcl9jb250ZW50KTsKLWludCBuc3ZtX3dybXNyKHN0cnVjdCB2
-Y3B1ICp2LCB1bnNpZ25lZCBpbnQgbXNyLCB1aW50NjRfdCBtc3JfY29udGVudCk7Ci0KIC8qIElu
-dGVycnVwdHMsIHZHSUYgKi8KIHZvaWQgc3ZtX3ZtZXhpdF9kb19jbGdpKHN0cnVjdCBjcHVfdXNl
-cl9yZWdzICpyZWdzLCBzdHJ1Y3QgdmNwdSAqdik7CiB2b2lkIHN2bV92bWV4aXRfZG9fc3RnaShz
-dHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncywgc3RydWN0IHZjcHUgKnYpOwpkaWZmIC0tZ2l0IGEv
-eGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3ItaW5kZXguaCBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNy
-LWluZGV4LmgKaW5kZXggMjRkNzgzYS4uNGY0M2ExNiAxMDA2NDQKLS0tIGEveGVuL2luY2x1ZGUv
-YXNtLXg4Ni9tc3ItaW5kZXguaAorKysgYi94ZW4vaW5jbHVkZS9hc20teDg2L21zci1pbmRleC5o
-CkBAIC0xOTksOCArMTk5LDEzIEBACiAjZGVmaW5lIE1TUl9LOF9QU1RBVEU2CQkJMHhjMDAxMDA2
-QQogI2RlZmluZSBNU1JfSzhfUFNUQVRFNwkJCTB4YzAwMTAwNkIKICNkZWZpbmUgTVNSX0s4X0VO
-QUJMRV9DMUUJCTB4YzAwMTAwNTUKLSNkZWZpbmUgTVNSX0s4X1ZNX0NSCQkJMHhjMDAxMDExNAot
-I2RlZmluZSBNU1JfSzhfVk1fSFNBVkVfUEEJCTB4YzAwMTAxMTcKKworI2RlZmluZSBNU1JfVk1f
-Q1IgICAgICAgICAgICAgICAgICAgICAgIDB4YzAwMTAxMTQKKyNkZWZpbmUgIFZNX0NSX0xPQ0sg
-ICAgICAgICAgICAgICAgICAgICAoX0FDKDEsIFVMTCkgPDwgMykKKyNkZWZpbmUgIFZNX0NSX1NW
-TUVfRElTQUJMRSAgICAgICAgICAgICAoX0FDKDEsIFVMTCkgPDwgNCkKKworI2RlZmluZSBNU1Jf
-Vk1fSFNBVkVfQUREUiAgICAgICAgICAgICAgIDB4YzAwMTAxMTcKKyNkZWZpbmUgTVNSX1NWTV9M
-T0NLX0tFWSAgICAgICAgICAgICAgICAweGMwMDEwMTE4CiAKICNkZWZpbmUgTVNSX0FNRF9GQU0x
-NUhfRVZOVFNFTDAJCTB4YzAwMTAyMDAKICNkZWZpbmUgTVNSX0FNRF9GQU0xNUhfUEVSRkNUUjAJ
-CTB4YzAwMTAyMDEKQEAgLTIyMCwxMCArMjI1LDYgQEAKICNkZWZpbmUgTVNSX0s4X0ZFQVRVUkVf
-TUFTSwkJMHhjMDAxMTAwNAogI2RlZmluZSBNU1JfSzhfRVhUX0ZFQVRVUkVfTUFTSwkJMHhjMDAx
-MTAwNQogCi0vKiBNU1JfSzhfVk1fQ1IgYml0czogKi8KLSNkZWZpbmUgX0s4X1ZNQ1JfU1ZNRV9E
-SVNBQkxFCQk0Ci0jZGVmaW5lIEs4X1ZNQ1JfU1ZNRV9ESVNBQkxFCQkoMSA8PCBfSzhfVk1DUl9T
-Vk1FX0RJU0FCTEUpCi0KIC8qIEFNRDY0IE1TUnMgKi8KICNkZWZpbmUgTVNSX0FNRDY0X05CX0NG
-RwkJMHhjMDAxMDAxZgogI2RlZmluZSBBTUQ2NF9OQl9DRkdfQ0Y4X0VYVF9FTkFCTEVfQklUCTQ2
-Ci0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============6914374047596334542==
+Content-Type: multipart/alternative; boundary="000000000000a6eaf1057ca9a272"
+
+--000000000000a6eaf1057ca9a272
+Content-Type: text/plain; charset="UTF-8"
+
+(sorry for the formatting)
+
+On Mon, 10 Dec 2018, 12:00 Andrii Anisov, <andrii.anisov@gmail.com> wrote:
+
+> Hello All,
+>
+> On 27.11.18 23:27, Stefano Stabellini wrote:
+> > See the following:
+> >
+> > https://marc.info/?l=xen-devel&m=148668817704668
+> So I did port that stuff to the current staging [1].
+> Also, the correspondent tbm, itself is here [2].
+> Having 4 big cores on my SoC I run XEN with the following command line:
+>
+>      dom0_mem=3G console=dtuart dtuart=serial0 dom0_max_vcpus=2
+> bootscrub=0 loglvl=all cpufreq=none tbuf_size=8192 loglvl=all/none
+> guest_loglvl=all/none
+>
+> The TBM's domain configuration file is as following:
+>
+>      seclabel='system_u:system_r:domU_t'
+>      name = "DomP"
+>      kernel = "/home/root/ctest-bare.bin"
+>      extra = "console=hvc0 rw"
+>      memory = 128
+>      vcpus = 1
+>      cpus = "3"
+>
+> This gives me setup where Domain-0 runs on cores 0 and 1 solely and TBM
+> runs exclusively on core 3. So that we can rely that it shows us a pure IRQ
+> latency of hypervisor.
+> My board is Renesas Salvator-X with H3 ES3.0 SoC and 8GB RAM. Generic
+> timer runs at 8.333 MHz freq, what gives my 120ns resolution for
+> measurements.
+> XEN hypervisor is build without debug and TBM does wfi in the idle loop
+> for all experiments.
+> With that setup IRQ latency numbers are (in ns):
+>
+
+What are the numbers without Xen? Which version of Xen are you using?
+
+
+
+> Old vgic:
+>                          AVG     MIN     MAX     WARM MAX
+> credit, vwfi=trap       7706    7560    9480    8400
+> credit, vwfi=native     2908    2880    3120    4800
+> credit2, vwfi=trap      7221    7200    9240    7440
+> credit2, vwfi=native    2906    2880    3120    5040
+>
+> New vgic:
+>                          AVG     MIN     MAX     WARM MAX
+> credit, vwfi=trap       8481    8040    10200   8880
+> credit, vwfi=native     4115    3960    4800    4200
+> credit2, vwfi=trap      8425    8400    9600    9000
+> credit2, vwfi=native    4227    3960    5040    4680
+>
+> Here we can see that the new vgic underperforms the old one in a trivial
+> use-case modeled with TBM.
+>
+
+The vwfi=trap does not look so bad (10%) but indeed the vwfi=native adds a
+bigger overhead.
+This also tells you that in the trap case the vGIC is not the bigger
+overhead.
+
+I am pretty sure that this can be optimized because we mostly focused on
+reliability and specification compliance for the first draft.
+
+So yes the old vGIC performs better but at the price of unreliability and
+non-compliance.
+
+
+> Old vgic with optimizations [3] (without [4], because it breaks the setup):
+>                          AVG     MIN     MAX     WARM MAX
+> credit, vwfi=trap       7309    7080    8760    7680
+> credit, vwfi=native     3007    3000    4320    3120
+> credit2, vwfi=trap      6877    6720    8880    7200
+> credit2, vwfi=native    2680    2640    4440    2880
+>
+
+This is with all your series applied but [4], correct? Did you try to see
+the perfomance improvement patch by patch?
+
+Cheers
+
+
+
+>
+>
+> [1] https://github.com/aanisov/xen/tree/4tbm
+> [2] https://github.com/aanisov/tbm/commits/4xen
+> [3]
+> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03328.html
+> [4]
+> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03288.html
+>
+> --
+> Sincerely,
+> Andrii Anisov.
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--000000000000a6eaf1057ca9a272
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<span>(sorry for the formatting)</span><br><br><div class=3D"gmail_quote"><=
+div dir=3D"ltr">On Mon, 10 Dec 2018, 12:00 Andrii Anisov, &lt;<a href=3D"ma=
+ilto:andrii.anisov@gmail.com">andrii.anisov@gmail.com</a>&gt; wrote:<br></d=
+iv><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left=
+:1px #ccc solid;padding-left:1ex">Hello All,<br>
+<br>
+On 27.11.18 23:27, Stefano Stabellini wrote:<br>
+&gt; See the following:<br>
+&gt; <br>
+&gt; <a href=3D"https://marc.info/?l=3Dxen-devel&amp;m=3D148668817704668" r=
+el=3D"noreferrer" target=3D"_blank">https://marc.info/?l=3Dxen-devel&amp;m=
+=3D148668817704668</a><br>
+So I did port that stuff to the current staging [1].<br>
+Also, the correspondent tbm, itself is here [2].<br>
+Having 4 big cores on my SoC I run XEN with the following command line:<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0dom0_mem=3D3G console=3Ddtuart dtuart=3Dserial0 dom0_ma=
+x_vcpus=3D2 bootscrub=3D0 loglvl=3Dall cpufreq=3Dnone tbuf_size=3D8192 logl=
+vl=3Dall/none guest_loglvl=3Dall/none<br>
+<br>
+The TBM&#39;s domain configuration file is as following:<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0seclabel=3D&#39;system_u:system_r:domU_t&#39;<br>
+=C2=A0 =C2=A0 =C2=A0name =3D &quot;DomP&quot;<br>
+=C2=A0 =C2=A0 =C2=A0kernel =3D &quot;/home/root/ctest-bare.bin&quot;<br>
+=C2=A0 =C2=A0 =C2=A0extra =3D &quot;console=3Dhvc0 rw&quot;<br>
+=C2=A0 =C2=A0 =C2=A0memory =3D 128<br>
+=C2=A0 =C2=A0 =C2=A0vcpus =3D 1<br>
+=C2=A0 =C2=A0 =C2=A0cpus =3D &quot;3&quot;<br>
+<br>
+This gives me setup where Domain-0 runs on cores 0 and 1 solely and TBM run=
+s exclusively on core 3. So that we can rely that it shows us a pure IRQ la=
+tency of hypervisor.<br>
+My board is Renesas Salvator-X with H3 ES3.0 SoC and 8GB RAM. Generic timer=
+ runs at 8.333 MHz freq, what gives my 120ns resolution for measurements.<b=
+r>
+XEN hypervisor is build without debug and TBM does wfi in the idle loop for=
+ all experiments.<br>
+With that setup IRQ latency numbers are (in ns):<br></blockquote></div><div=
+><br></div><div>What are the numbers without Xen? Which version of Xen are =
+you using?</div><div><br></div><div><br></div><div class=3D"gmail_quote"><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px =
+#ccc solid;padding-left:1ex">
+<br>
+Old vgic:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0AVG=C2=A0 =C2=A0 =C2=A0MIN=C2=A0 =C2=A0 =C2=A0MAX=C2=A0 =
+=C2=A0 =C2=A0WARM MAX<br>
+credit, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 =C2=A07706=C2=A0 =C2=A0 7560=C2=A0 =
+=C2=A0 9480=C2=A0 =C2=A0 8400<br>
+credit, vwfi=3Dnative=C2=A0 =C2=A0 =C2=A02908=C2=A0 =C2=A0 2880=C2=A0 =C2=
+=A0 3120=C2=A0 =C2=A0 4800<br>
+credit2, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 7221=C2=A0 =C2=A0 7200=C2=A0 =C2=
+=A0 9240=C2=A0 =C2=A0 7440<br>
+credit2, vwfi=3Dnative=C2=A0 =C2=A0 2906=C2=A0 =C2=A0 2880=C2=A0 =C2=A0 312=
+0=C2=A0 =C2=A0 5040<br>
+<br>
+New vgic:<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0AVG=C2=A0 =C2=A0 =C2=A0MIN=C2=A0 =C2=A0 =C2=A0MAX=C2=A0 =
+=C2=A0 =C2=A0WARM MAX<br>
+credit, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 =C2=A08481=C2=A0 =C2=A0 8040=C2=A0 =
+=C2=A0 10200=C2=A0 =C2=A08880<br>
+credit, vwfi=3Dnative=C2=A0 =C2=A0 =C2=A04115=C2=A0 =C2=A0 3960=C2=A0 =C2=
+=A0 4800=C2=A0 =C2=A0 4200<br>
+credit2, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 8425=C2=A0 =C2=A0 8400=C2=A0 =C2=
+=A0 9600=C2=A0 =C2=A0 9000<br>
+credit2, vwfi=3Dnative=C2=A0 =C2=A0 4227=C2=A0 =C2=A0 3960=C2=A0 =C2=A0 504=
+0=C2=A0 =C2=A0 4680<br>
+<br>
+Here we can see that the new vgic underperforms the old one in a trivial us=
+e-case modeled with TBM.<br></blockquote></div><div><br></div><div>The vwfi=
+=3Dtrap does not look so bad (10%) but indeed the vwfi=3Dnative adds a bigg=
+er overhead.</div><div>This also tells you that in the trap case the vGIC i=
+s not the bigger overhead.</div><div><br></div><div>I am pretty sure that t=
+his can be optimized because we mostly focused on reliability and specifica=
+tion compliance for the first draft.</div><div><br></div><div>So yes the ol=
+d vGIC performs better but at the price of unreliability and non-compliance=
+.</div><div><br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail=
+_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
+1ex"><br>
+Old vgic with optimizations [3] (without [4], because it breaks the setup):=
+<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0AVG=C2=A0 =C2=A0 =C2=A0MIN=C2=A0 =C2=A0 =C2=A0MAX=C2=A0 =
+=C2=A0 =C2=A0WARM MAX<br>
+credit, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 =C2=A07309=C2=A0 =C2=A0 7080=C2=A0 =
+=C2=A0 8760=C2=A0 =C2=A0 7680<br>
+credit, vwfi=3Dnative=C2=A0 =C2=A0 =C2=A03007=C2=A0 =C2=A0 3000=C2=A0 =C2=
+=A0 4320=C2=A0 =C2=A0 3120<br>
+credit2, vwfi=3Dtrap=C2=A0 =C2=A0 =C2=A0 6877=C2=A0 =C2=A0 6720=C2=A0 =C2=
+=A0 8880=C2=A0 =C2=A0 7200<br>
+credit2, vwfi=3Dnative=C2=A0 =C2=A0 2680=C2=A0 =C2=A0 2640=C2=A0 =C2=A0 444=
+0=C2=A0 =C2=A0 2880<br></blockquote></div><div><br></div><div>This is with =
+all your series applied but [4], correct? Did you try to see the perfomance=
+ improvement patch by patch?</div><div><br></div><div>Cheers</div><div><br>=
+</div><div><br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_=
+quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1=
+ex">
+<br>
+<br>
+<br>
+[1] <a href=3D"https://github.com/aanisov/xen/tree/4tbm" rel=3D"noreferrer"=
+ target=3D"_blank">https://github.com/aanisov/xen/tree/4tbm</a><br>
+[2] <a href=3D"https://github.com/aanisov/tbm/commits/4xen" rel=3D"noreferr=
+er" target=3D"_blank">https://github.com/aanisov/tbm/commits/4xen</a><br>
+[3] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
+/msg03328.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
+ct.org/archives/html/xen-devel/2018-11/msg03328.html</a><br>
+[4] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
+/msg03288.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
+ct.org/archives/html/xen-devel/2018-11/msg03288.html</a><br>
+<br>
+-- <br>
+Sincerely,<br>
+Andrii Anisov.<br>
+<br>
+_______________________________________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
+el@lists.xenproject.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
+/xen-devel</a></blockquote></div>
+
+--000000000000a6eaf1057ca9a272--
+
+
+--===============6914374047596334542==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6914374047596334542==--
