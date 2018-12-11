@@ -1,24 +1,19 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 13/25] argo: implement the register op
-Date: Tue, 11 Dec 2018 13:51:58 +0000
-Message-ID: <8771a56d-42c0-e6ce-3543-82fba610621a@arm.com>
-References: <1543627984-21394-1-git-send-email-christopher.w.clark@gmail.com>
- <1543627984-21394-14-git-send-email-christopher.w.clark@gmail.com>
- <6c9074fa-eb9a-350b-1019-93c35803e0e1@arm.com>
- <CACMJ4GaXTzB3GXtm8KYT=2Ycqp+QEG8ejAsnk38ErV8j5913dA@mail.gmail.com>
- <b9a16986-42e9-68e3-47ce-806a1d4595a6@arm.com>
- <CACMJ4Gby+0nV+45w9397Qbgn2xUF8sZ-j44GgZ0_VFFGuD3rmw@mail.gmail.com>
+From: Stefan Hajnoczi <stefanha@redhat.com>
+Subject: Re: [RFC 1/3] pvh: Add x86/HVM direct boot ABI header
+ file
+Date: Tue, 11 Dec 2018 14:01:24 +0000
+Message-ID: <20181211140124.GA23460@stefanha-x1.localdomain>
+References: <1544049446-6359-1-git-send-email-liam.merwick@oracle.com>
+ <1544049446-6359-2-git-send-email-liam.merwick@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6005589342263656223=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Pqn2=OU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gWiSD-0000Od-1v
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 13:52:05 +0000
-In-Reply-To: <CACMJ4Gby+0nV+45w9397Qbgn2xUF8sZ-j44GgZ0_VFFGuD3rmw@mail.gmail.com>
-Content-Language: en-US
+ <SRS0=6Yfv=OU=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
+ id 1gWibK-0001QT-Vb
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:01:31 +0000
+In-Reply-To: <1544049446-6359-2-git-send-email-liam.merwick@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,84 +22,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christopher Clark <christopher.w.clark@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, James McKenzie <voreekf@madingley.org>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Rich Persaud <persaur@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, nd@arm.com, eric chanudet <eric.chanudet@gmail.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Liam Merwick <liam.merwick@oracle.com>
+Cc: ehabkost@redhat.com, mst@redhat.com, maran.wilson@oracle.com, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, pbonzini@redhat.com, rth@twiddle.net, sgarzare@redhat.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQ2hyaXN0b2ZmZXIsCgpPbiAwNS8xMi8yMDE4IDIyOjM1LCBDaHJpc3RvcGhlciBDbGFyayB3
-cm90ZToKPiBPbiBXZWQsIERlYyA1LCAyMDE4IGF0IDk6MjAgQU0gSnVsaWVuIEdyYWxsIDxqdWxp
-ZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IE9uIDA0LzEyLzIwMTggMDk6MDgsIENocmlzdG9w
-aGVyIENsYXJrIHdyb3RlOgo+Pj4gT24gU3VuLCBEZWMgMiwgMjAxOCBhdCAxMjoxMSBQTSBKdWxp
-ZW4gR3JhbGwgPEp1bGllbi5HcmFsbEBhcm0uY29tPiB3cm90ZToKPj4+PiBPbiAwMS8xMi8yMDE4
-IDAxOjMyLCBDaHJpc3RvcGhlciBDbGFyayB3cm90ZToKPj4+Pj4gZGlmZiAtLWdpdCBhL3hlbi9p
-bmNsdWRlL3B1YmxpYy9hcmdvLmggYi94ZW4vaW5jbHVkZS9wdWJsaWMvYXJnby5oCj4+Pj4+IC4u
-Lgo+Pj4+PiArLyogcGZuIHR5cGU6IDY0LWJpdCBvbiBhbGwgYXJjaGl0ZWN0dXJlcyB0byBhaWQg
-YXZvaWRpbmcgYSBjb21wYXQgQUJJICovCj4+Pj4+ICt0eXBlZGVmIHVpbnQ2NF90IGFyZ29fcGZu
-X3Q7Cj4+Pj4KPj4+PiBBcyB5b3UgYWx3YXlzIHVzZSA2NC1iaXQsIGNhbiB3ZSBqdXN0IHVzZSBh
-biBhZGRyZXNzPyBUaGlzIHdvdWxkIG1ha2UKPj4+PiB0aGUgQUJJIGFnbm9zdGljIHRvIHRoZSBo
-eXBlcnZpc29yIHBhZ2UgZ3JhbnVsYXJpdHkuCj4+Cj4+IEJ5IGFkZHJlc3MgSSBtZWFudCBndWVz
-dCBwaHlzaWNhbCBhZGRyZXNzIChhbmQgbm90IGd1ZXN0IHZpcnR1YWwgYWRkcmVzcykuCj4+Cj4+
-IEFybSBwcm9jZXNzb3JzIG1heSBzdXBwb3J0IG11bHRpcGxlIHBhZ2UgZ3JhbnVsYXJpdHkgKDRL
-QiwgMTZLQiwgNjRLQikuIFRoZQo+PiBzb2Z0d2FyZSBpcyBhbGxvd2VkIHRvIHVzZSBkaWZmZXJl
-bnQgZ3JhbnVsYXJpdHkgYXQgZGlmZmVyZW50IGxldmVsLiBUaGlzIG1lYW5zCj4+IHRoYXQgdGhl
-IGh5cGVydmlzb3IgY291bGQgdXNlIDRLQiBwYWdlIHdoaWxlIHRoZSBndWVzdCBrZXJuZWwgd291
-bGQgdXNlIDY0S0IKPj4gcGFnZSAoYW5kIHZpY2UgdmVyc2EpLiBTb21lIGRpc3Ryb3MgbWFkZSB0
-aGUgY2hvaWNlIHRvIG9ubHkgc3VwcG9ydCBvbmUgdHlwZSBvZgo+PiBwYWdlIGdyYW51bGFyaXR5
-IChpLmUgNjRLQiBmb3IgUkVITCwgNEtCIGZvciBEZWJpYW4uLi4pLgo+Pgo+PiBBdCB0aGUgbW9t
-ZW50IHRoZSBoeXBlcmNhbGwgaW50ZXJmYWNlIGlzIGJhc2VkIG9uIHRoZSBoeXBlcnZpc29yIHBh
-Z2UKPj4gZ3JhbnVsYXJpdHkuIEJlY2F1c2UgWGVuIGhhcyBhbHdheXMgc3VwcG9ydGVkIDRLQiBw
-YWdlLWdyYW51bGFyaXR5LCB0aGlzCj4+IGFzc3VtcHRpb24gd2FzIGFsc28gaGFyZGNvZGVkIGlu
-IHRoZSBrZXJuZWwuCj4+Cj4+IFdoYXQgcHJldmVudCB1cyB0byBnZXQgNjRLQiBwYWdlIHN1cHBv
-cnQgaW4gWGVuIChhbmQgdGhlcmVmb3JlIHN1cHBvcnQgZm9yCj4+IDUyLWJpdCBhZGRyZXNzKSBp
-cyB0aGUgaHlwZXJjYWxsIEFCSS4gSWYgeW91IHVwZ3JhZGUgWGVuIHRvIDY0S0IgdGhlbiB0aGUK
-Pj4gaHlwZXJjYWxsIGludGVyZmFjZSB3b3VsZCBkZWZhY3QgdXNlIDY0S0IgZnJhbWUuIFRoaXMg
-d291bGQgYnJlYWsgYW55IGN1cnJlbnQKPj4gZ3Vlc3QuIEl0IGlzIGFsc28gbm90IHBvc3NpYmxl
-IHRvIGtlZXAgNEtCIHBhZ2VzIGV2ZXJ5d2hlcmUgYmVjYXVzZSB5b3UgY2FuIG9ubHkKPj4gbWFw
-IDY0S0IgaW4gWGVuLiBTbyB5b3UgbWF5IG1hcCBhIGJpdCB0b28gbXVjaCBmcm9tIGFub3RoZXIg
-Z3Vlc3QuCj4+Cj4+IFRoaXMgbWFrZXMgbWUgdGhpbmsgdGhhdCB0aGUgZnJhbWUgaXMgcHJvYmFi
-bHkgbm90IHRoZSBiZXN0IGluIHRoYXQgc2l0dWF0aW9uLgo+PiBJbnN0ZWFkIGEgcGFpciBvZiBh
-ZGRyZXNzL3NpemUgd291bGQgYmUgbW9yZSBzdWl0YWJsZS4KPj4KPj4gVGhlIHByb2JsZW0gaXMg
-bXVjaCBsYXJnZXIgdGhhbiB0aGlzIHNlcmllcy4gQnV0IEkgdGhvdWdodCBJIHdvdWxkIGF0dGVt
-cHQgdG8KPj4gY29udmluY2UgdGhlIGNvbW11bml0eSB1c2luZyBndWVzdCBwaHlzaWNhbCBhZGRy
-ZXNzIG92ZXIgZ3Vlc3QgZnJhbWUgYWRkcmVzcwo+PiB3aGVuZXZlciBpdCBpcyBwb3NzaWJsZS4K
-PiAKPiBUaGFua3MsIEp1bGllbiAtLSB0aGF0IGV4cGxhbmF0aW9uIGlzIHZlcnkgaGVscGZ1bCBh
-bmQgeW91ciByZXF1ZXN0IG1ha2VzIHNlbnNlLgo+IAo+IFNvIGluIGNvbmNyZXRlIHRlcm1zLCB3
-aXRoIHRoZSBjaGFuZ2UgdGhhdCB5b3UncmUgYWR2b2NhdGluZyBmb3IgdG8KPiB0aGlzIHBhdGNo
-LCB0aGUgNjQtYml0IHZhbHVlIHRoYXQgaXMgc3VwcGxpZWQgYnkgdGhlIGd1ZXN0IGluIHRoZQo+
-IGFycmF5IHBhc3NlZCBhcyBhbiBhcmd1bWVudCB0byByZWdpc3Rlcl9yaW5nIHdvdWxkIGVuY29k
-ZSB0aGUgc2FtZQo+IGd1ZXN0IHBoeXNpY2FsIGZyYW1lIG51bWJlciBhcyBpdCBjdXJyZW50bHkg
-ZG9lcyBpbiB0aGUgcGF0Y2ggdmVyc2lvbgo+IHByZXNlbnRlZCBpbiB0aGlzIHRocmVhZCwgYnV0
-IGl0IHdvdWxkIGJlIGJpdC1zaGlmdGVkIHRvIHRoZSBwb3NpdGlvbgo+IHVzZWQgaW4gYSBwaHlz
-aWNhbCBhZGRyZXNzLgo+IAo+IEluIGFkZGl0aW9uIHRvIHRoYXQgY2hhbmdlLCBhIHBhZ2Ugc2l6
-ZSBpbmRpY2F0b3Igd291bGQgYmUgc3VwcGxpZWQKPiB0b28gLS0gZm9yIGV2ZXJ5IHBhZ2UgYWRk
-cmVzcyBzdXBwbGllZCBpbiB0aGUgY2FsbC4KPiAKPiBJcyB0aGVyZSBhIG1ldGhvZCBjdXJyZW50
-bHkgdXNlZCB3aXRoaW4gWGVuIChvciByZWxldmFudCBwbGFjZXMKPiBlbHNld2hlcmUpIGZvciBl
-bmNvZGluZyBib3RoIHRoZSBwYWdlIGFkZHJlc3MgYW5kIHNpemUgKGllLiA0S0IsIDE2S0IKPiBv
-ciA2NEtCKSB3aXRoaW4gdGhlIHNhbWUgNjQtYml0cz8KPiBpZS4gS25vd2luZyB0aGF0IHRoZSBz
-bWFsbGVzdCBncmFudWxhcml0eSBvZiBwYWdlIGlzIDRLQiwgYW5kIHRoYXQgYWxsCj4gcGFnZXMg
-YXJlIGFsaWduZWQgdG8gYXQgbGVhc3QgYSA0S0IgYm91bmRhcnksIHRoZXJlIGFyZSBsb3cgYml0
-cyBpbgo+IHRoZSBhZGRyZXNzIHRoYXQgYXJlIGtub3duIHRvIGJlIHplcm8sIGFuZCB0aG9zZSBj
-b3VsZCBiZSB1c2VkIHRvCj4gaW5kaWNhdGUgdGhlIHBhZ2Ugc2l6ZSB3aGVuIHN1cHBsaWVkIHRv
-IHRoaXMgY2FsbC4gSXQgc2VlbXMgbGlrZSBzdWNoCj4gYW4gZW5jb2Rpbmcgd291bGQgYWxsb3cg
-Zm9yIGF2b2lkaW5nIGRvdWJsaW5nIHRoZSBzaXplIG9mIHRoZSBhcmd1bWVudAo+IGFycmF5LCBi
-dXQgSSdtIG5vdCBzdXJlIGhvdyBpbmNvbnZlbmllbnQgaXQgd291bGQgYmUgdG8gd29yayB3aXRo
-IGluCj4gcHJhY3RpY2UuCj4gCj4gSWYgc28sIHN1Y2ggYW4gaW50ZXJmYWNlIGNoYW5nZSBsb29r
-cyBtYW5hZ2VhYmxlIGFuZCBob3BlZnVsbHkgaXQKPiB3b3VsZCBiZSBhY2NlcHRhYmxlIHRvIG9u
-bHkgc3VwcG9ydCA0S0IgcGFnZXMgaW4gdGhlIGN1cnJlbnQKPiBpbXBsZW1lbnRhdGlvbiBiZWhp
-bmQgdGhhdCBuZXcgQUJJIGZvciB0aGUgdGltZSBiZWluZy4gTGV0IG1lIGtub3cKPiB3aGF0IHlv
-dSB0aGluay4KCklmIHlvdSBsZXQgdGhlIHVzZXIgdGhlIGNob2ljZSBvZiB0aGUgZ3JhbnVsYXJp
-dHksIHRoZW4sIEkgYmVsaWV2ZSwgeW91IHdpbGwgCnByZXZlbnQgdGhlIGh5cGVydmlzb3IgdG8g
-ZG8gc29tZSBvcHRpbWl6YXRpb24uCgpGb3IgaW5zdGFuY2UsIGlmIHRoZSBndWVzdCBzdXBwbGll
-cyBvbmx5IDRLQiBwYWdlIGJ1dCB0aGUgaHlwZXJ2aXNvciBpcyA2NEtCLiAKVGhlcmUgYXJlIG5v
-IHdheSB0byBlYXNpbHkgbWFwIHRoZW0gY29udGlndW91c2x5IGluIHRoZSBoeXBlcnZpc29yIChl
-LmcgdXNpbmcgdm1hcCkuCgpJcyB0aGVyZSBhIHBhcnRpY3VsYXIgcmVhc29uIHRvIGFsbG93IHRo
-ZSByaW5nIGJ1ZmZlciB0byBiZSBub24tY29udGlndW91cyBpbiAKdGhlIGd1ZXN0IHBoeXNpY2Fs
-IGFkZHJlc3M/CgpEZXBlbmRpbmcgb24gdGhlIGFuc3dlciwgdGhlcmUgYXJlIGRpZmZlcmVudCB3
-YXkgdG8gaGFuZGxlIHRoYXQ6CgkxKSBSZXF1ZXN0IHRoZSBndWVzdCB0byBhbGxvY2F0ZSBtZW1v
-cnkgdXNpbmcgNjRLQiAob24gQXJtKSBjaHVuayBhbmQgcGFzcyB0aGUgCmJhc2UgYWRkcmVzcyBm
-b3IgZWFjaCBjaHVuawoJMikgUmVxdWVzdCB0aGUgZ3Vlc3QgdG8gYWxsb2NhdGUgY29udGlndW91
-c2x5IHRoZSBidWZmZXIgYW5kIHBhc3MgdGhlIGJhc2UgCmFkZHJlc3MgYW5kIHNpemUKCkNoZWVy
-cywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+
+--===============6005589342263656223==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="LQksG6bCIzRHxTLp"
+Content-Disposition: inline
+
+
+--LQksG6bCIzRHxTLp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 05, 2018 at 10:37:24PM +0000, Liam Merwick wrote:
+> From: Liam Merwick <Liam.Merwick@oracle.com>
+>=20
+> The x86/HVM direct boot ABI permits Qemu to be able to boot directly
+> into the uncompressed Linux kernel binary without the need to run firmwar=
+e.
+>=20
+> 	https://xenbits.xen.org/docs/unstable/misc/pvh.html
+>=20
+> This commit adds the header file that defines the start_info struct
+> that needs to be populated in order to use this ABI.
+>=20
+> Signed-off-by: Maran Wilson <Maran.Wilson@oracle.com>
+> Signed-off-by: Liam Merwick <Liam.Merwick@oracle.com>
+> Reviewed-by: Konrad Rzeszutek Wilk <Konrad.Wilk@oracle.com>
+> ---
+>  include/hw/xen/start_info.h | 146 ++++++++++++++++++++++++++++++++++++++=
+++++++
+>  1 file changed, 146 insertions(+)
+>  create mode 100644 include/hw/xen/start_info.h
+
+Does it make sense to bring in Linux
+include/xen/interface/hvm/start_info.h via QEMU's
+include/standard-headers/?
+
+QEMU has a script in scripts/update-linux-header.sh for syncing Linux
+headers into include/standard-headers/.  This makes it easy to keep
+Linux header files up-to-date.  We basically treat files in
+include/standard-headers/ as auto-generated.
+
+If you define start_info.h yourself without using
+include/standard-headers/, then it won't be synced with Linux.
+
+--LQksG6bCIzRHxTLp
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEcBAEBAgAGBQJcD8M0AAoJEJykq7OBq3PIOlMH/0Xf2zqEnnYKUyPXmya3wH6y
+LNjfD5I10PacQClqAaM/ZMBEjX3GNd2fppFZXCdv6ELktHx0Ix5HFTDa0P/ABCMs
+M3HT+tJ4J11rZwh1U0CZod7xbavQnoIMWJhQuPy367KsrscIRCEpoV3eO/4lu4gb
+3vkl+t+4e2GCegs0CWLPCHfv+Qs084prHK/0BoURzQGNLB7il/O5g6FGG1LmZlse
+gKkboRKnN/MiG6ct+Z1RQZhp16+u4s94MYGy+hgtSVI6Q5cNFYZ6UbzA8f5+FTFQ
+rqOQZ+LHqMV2dZ/yRugRkjbvld1AGSPyp3AkiAkDdOC89TVSTSx91+2YQg2i1GQ=
+=Wifw
+-----END PGP SIGNATURE-----
+
+--LQksG6bCIzRHxTLp--
+
+
+--===============6005589342263656223==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6005589342263656223==--
