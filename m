@@ -1,22 +1,19 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 23/25] argo: signal x86 HVM and ARM via VIRQ
-Date: Tue, 11 Dec 2018 14:15:33 +0000
-Message-ID: <dd55f5e1-84c2-8b44-c7c1-fdfeb4495c4f@arm.com>
-References: <1543627984-21394-1-git-send-email-christopher.w.clark@gmail.com>
- <1543627984-21394-24-git-send-email-christopher.w.clark@gmail.com>
- <23042bc2-d74f-ff7d-5e6a-1bd21de2ddb7@arm.com>
- <CACMJ4GaOPCvzVrCThFGQ79qqMs75vbysuVX4ur0EsfMMPPdXUg@mail.gmail.com>
+From: Stefan Hajnoczi <stefanha@redhat.com>
+Subject: Re: [RFC 2/3] pc: Read PVH entry point from ELF note in
+ kernel binary
+Date: Tue, 11 Dec 2018 14:17:32 +0000
+Message-ID: <20181211141732.GB23460__24535.8230699368$1544537850$gmane$org@stefanha-x1.localdomain>
+References: <1544049446-6359-1-git-send-email-liam.merwick@oracle.com>
+ <1544049446-6359-3-git-send-email-liam.merwick@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5997521661412516803=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Pqn2=OU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gWip1-0002WY-Rw
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:15:39 +0000
-In-Reply-To: <CACMJ4GaOPCvzVrCThFGQ79qqMs75vbysuVX4ur0EsfMMPPdXUg@mail.gmail.com>
-Content-Language: en-US
+ <SRS0=6Yfv=OU=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
+ id 1gWiqu-0002fO-4L
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:17:36 +0000
+In-Reply-To: <1544049446-6359-3-git-send-email-liam.merwick@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,79 +22,436 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christopher Clark <christopher.w.clark@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, James McKenzie <voreekf@madingley.org>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Rich Persaud <persaur@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, nd@arm.com, eric chanudet <eric.chanudet@gmail.com>
+To: Liam Merwick <liam.merwick@oracle.com>
+Cc: ehabkost@redhat.com, mst@redhat.com, maran.wilson@oracle.com, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, pbonzini@redhat.com, rth@twiddle.net, sgarzare@redhat.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgQ2hyaXN0b3BoZXIsCgpPbiAwNC8xMi8yMDE4IDA5OjAzLCBDaHJpc3RvcGhlciBDbGFyayB3
-cm90ZToKPiBPbiBTdW4sIERlYyAyLCAyMDE4IGF0IDExOjU1IEFNIEp1bGllbiBHcmFsbCA8SnVs
-aWVuLkdyYWxsQGFybS5jb20+IHdyb3RlOgo+Pgo+PiBIaSwKPj4KPj4gT24gMDEvMTIvMjAxOCAw
-MTozMywgQ2hyaXN0b3BoZXIgQ2xhcmsgd3JvdGU6Cj4+PiAqIHg4NiBQViBkb21haW5zIGFyZSBu
-b3RpZmllZCB2aWEgZXZlbnQgY2hhbm5lbC4KPj4+Cj4+PiBQViBndWVzdHMgYXJlIGtub3duIHRv
-IGhhdmUgdGhlIGV2ZW50IGNoYW5uZWwgc29mdHdhcmUgcHJlc2VudCBpbiB0aGUgZ3Vlc3QKPj4+
-IGtlcm5lbCwgc28gaXQgaXMgZmluZSB0byBkZXBlbmQgb24gYW5kIHVzZSBpdC4KPj4+Cj4+PiAq
-IHg4NiBIVk0gZG9tYWlucyBhbmQgYWxsIEFSTSBkb21haW5zIGFyZSBub3RpZmllZCB2aWEgVklS
-US4KPj4+Cj4+PiBUaGUgaW50ZW50IGlzIHRvIHJlbW92ZSB0aGUgcmVxdWlyZW1lbnQgZm9yIGV2
-ZW50IGNoYW5uZWwgc29mdHdhcmUgdG8gYmUKPj4+IGluc3RhbGxlZCB3aXRoaW4gdGhlc2UgZ3Vl
-c3RzIGluIG9yZGVyIHRvIHVzZSBBcmdvLiBWSVJRIHNpZ25hbGxpbmcgaXMgYWxzbwo+Pj4gdGhl
-IG1ldGhvZCB0aGF0IGhhcyBiZWVuIGluIHVzZSBmb3IgdGhlIGxvbmdlc3QgcGVyaW9kIHdpdGgg
-dGhpcyBoeXBlcmNhbGwKPj4+IGluIGJvdGggWGVuQ2xpZW50IGFuZCBPcGVuWFQuCj4+Cj4+IEkg
-YW0gYSBiaXQgY29uZnVzZWQuIHZJUlFzIGFyZSBiYXNlZCBvbiBldmVudCBjaGFubmVsLCBzbyBo
-b3cgZG8geW91Cj4+IHJlbW92ZSB0aGUgcmVxdWlyZW1lbnQgb24gZXZlbnQgY2hhbm5lbD8KPiAK
-PiBBcmUgVklSUXMgYWx3YXlzIGRlbGl2ZXJlZCB2aWEgZXZlbnRzIGluIGFsbCBjYXNlcz8gSSB3
-YXMgdW5kZXIgdGhlCj4gaW1wcmVzc2lvbiB0aGF0IHdhcyBub3QgbmVjZXNzYXJpbHkgc28gd2l0
-aCBIVk0gZ3Vlc3RzIGJ1dCBJIGhhdmVuJ3QKPiBjaGVja2VkIGFuZCBjb3VsZCB3ZWxsIGJlIGlu
-Y29ycmVjdC4KCkl0IGRlcGVuZHMgb24geW91ciBtZWFuaW5nIG9mIHZJUlFzLiBXZSBzZWVtIHRv
-IHVzZSBpdCBmb3IgdHdvIGNhc2VzIGluIHRoZSAKaHlwZXJ2aXNvci4KCkluIHRoZSBjb250ZXh0
-IG9mIHNlbmRfZ3Vlc3RfZ2xvYmFsX3ZpcnEoKSwgdGhlIGludGVycnVwdCB3aWxsIGJlIApwYXJh
-LXZpcnR1YWxpemVkIGFzIHdlIGRlbGl2ZXJlZCB2aWEgZXZlbnRzLgoKT24gQXJtIG1vc3Qgb2Yg
-dGhlIHZpcnR1YWwgaW50ZXJydXB0cyB3aWxsIGdvZXMgdGhyb3VnaCB0aGUgdmlydHVhbCBpbnRl
-cnJ1cHQgCmNvbnRyb2xsZXIuIFRoZXkgY2FuIGJlIHJhaXNlZCB1c2luZyB2Z2ljX2luamVjdF9p
-cnEoKSBhbmQgZXZlbnQgY2hhbm5lbCBhcmUgCnRoZXJlZm9yZSBub3QgcmVxdWlyZWQuIEkgdGhp
-bmsgdGhpcyBpcyBmYWlybHkgc2ltaWxhciBvbiBQVkgvSFZNIGJ1dCBJIHdpbGwgbGV0IAp0aGUg
-eDg2IGZvbGtzIGNvbmZpcm0gaGVyZS4KCj4gCj4gQSBiaXQgb2YgY29udGV4dCBtaWdodCBoZWxw
-IHdpdGggaG93IHRoaXMgbXVsdGlwbGUtbWV0aG9kIGxvZ2ljIChhcwo+IHN1Ym1pdHRlZCkgd2Fz
-IGFycml2ZWQgYXQ6Cj4gCj4gMSkgQm90aCBYZW5DbGllbnQncyBvcmlnaW5hbCB2ZXJzaW9uIG9m
-IHY0diwgYW5kIHRoYXQgdXNlZCBpbiBPcGVuWFQsCj4gZGVsaXZlciBub3RpZmljYXRpb25zIHRv
-IGd1ZXN0cyB2aWEgVklSUS4KPiBUaGlzIGxvZ2ljIGhhcyBiZWVuIHBlcmZvcm1pbmcgZmluZSBm
-b3Igb3VyIHVzZXMgY2FzZXMsIHNvIHRoZXJlCj4gaGFzbid0IHJlYWxseSBiZWVuIGEgcHVzaCB0
-byBzd2l0Y2ggYXdheSBmcm9tIGl0LgoKIEZyb20gbXkgdW5kZXJzdGFuZGluZywgVklSUSBpcyBq
-dXN0IGEgY29udmVuaWVuY2UgYWxpYXMgZm9yIHRoZSBndWVzdCB0byAKcmVjZWl2ZSB0aGUgYXNz
-b2NpYXRlZCBldmVudC4gVGhlIGd1ZXN0IG9ubHkgbmVlZCB0byBzYXkgIkkgd2FudCB0byBiaW5k
-IFZJUlEgCmZvbyIuIEluIHRoZSBvdGhlciBjYXNlLCB5b3Ugd291bGQgbmVlZCB0byBhbGxvY2F0
-ZSB0aGUgZXZlbnQgY2hhbm5lbCBpbiB0aGUgCmh5cGVydmlzb3IgYW5kIHRoZW4gcGFzcyB0aGUg
-aW5mb3JtYXRpb24gc29tZWhvdyB0byB0aGUgZ3Vlc3QuCgo+IAo+IDIpIFRoZSBsYXN0IHZlcnNp
-b24gb2YgdjR2IHRoYXQgd2FzIHN1Ym1pdHRlZCB0byB4ZW4tZGV2ZWwgZm9yCj4gaXRlcmF0aW9u
-IHdpdGggdGhlIFhlbiBjb21tdW5pdHkgd2FzIGludGVuZGVkIHRvIHVzZSBldmVudCBjaGFubmVs
-cwo+IGluc3RlYWQsIGluIHJlc3BvbnNlIHRvIGEgcmVxdWVzdCBmcm9tIEphbiBhdCB0aGUgdGlt
-ZS4gR2l2ZW4gdGhhdAo+IGV4cHJlc3NlZCBwcmVmZXJlbmNlLCBJJ3ZlIGFkZGVkIHRoYXQsIHBs
-dW1iaW5nIGl0IGluIHRocm91Z2ggdmlhIHRoZQo+IElQSSBldmVudCBtZXRob2QgZXhwb3NlZCBp
-biBwYXRjaCAjMDEsIGFuZCB0aGVuIHVzZWQgaW4gcGF0Y2ggIzA1LCBvZgo+IHRoZSBzdWJtaXR0
-ZWQgc2VyaWVzLgo+IAo+IDMpIEJyb21pdW0ncyB1eGVuIHVzZXMgZGlmZmVyZW50IGxvZ2ljIGZv
-ciBkZWxpdmVyeSBvZiBldmVudHMgdG8KPiBub24tUFYgZ3Vlc3RzOiBhbiBlZGdlLXRyaWdnZXJl
-ZCwgSVNBIElSUSwgYWxvbmcgdGhlc2UgbGluZXM6Cj4gCj4gICAgICAjZGVmaW5lIEFSR09fU0lH
-TkFMX0lTQV9JUlEgOAo+ICAgICAgaHZtX2lzYV9pcnFfYXNzZXJ0KGQsIEFSR09fU0lHTkFMX0lT
-QV9JUlEsIE5VTEwpOwo+ICAgICAgaHZtX2lzYV9pcnFfZGVhc3NlcnQoZCwgQVJHT19TSUdOQUxf
-SVNBX0lSUSk7Cj4gCj4gSSdtIHRvbGQgdGhhdCB0aGlzIGF2b2lkcyB0aGUgbmVlZCB0byBFT0kg
-aW4gdGhlIGd1ZXN0LCByZWR1Y2luZyB0aGUKPiBWTUVYSVQgbG9hZCwgYW5kIHVzaW5nIGFuIElT
-QSBJUlEgYXZvaWRzIHNvbWUgbG9naWMgaW4gV2luZG93cyB0aGF0Cj4gcmVxdWlyZXMgdGhhdCBh
-IGRldmljZSBiZSBkZXRlY3RlZC4gSSBicmllZmx5IGxvb2tlZCBpbnRvIGFkZGluZyB0aGlzCj4g
-dG8gQXJnbywgYnV0IExpbnV4IHdhc24ndCBpbW1lZGlhdGVseSBoYXBweSBhbmQgSSBoYXZlbid0
-IGhhZCB0aW1lIHRvCj4gbG9vayBpbnRvIGl0IGZ1cnRoZXIgZ2l2ZW4gdGhlIHByb3hpbWl0eSBv
-ZiB0aGUgNC4xMiByZWxlYXNlLCB3aXRoCj4gb3RoZXIgd29yayBzdGlsbCB0byBjb21wbGV0ZS4K
-PiAKPiBBbnl3YXk6IHNpbmNlIG1ldGhvZCAzIGlzbid0IHJlYWR5IHRvIHN1Ym1pdCwgYW5kIGlm
-IFZJUlFzIGRvbid0IGhhdmUKPiBhbiBhZHZhbnRhZ2Ugb3ZlciB1c2luZyBldmVudCBjaGFubmVs
-cyBkaXJlY3RseSB3cnQuIHRvIG5lZWRpbmcKPiBpbi1ndWVzdCBzdXBwb3J0IHRvIGZ1bmN0aW9u
-LCB0aGVuIEkgY2FuIGRyb3AgdGhpcyBwYXRjaCAoIzIzKSBhbmQKPiBzaW1wbGlmeSB0aGUgZ2V0
-X2NvbmZpZyBvcCAoIzI1KSwgd2hpY2ggd2lsbCBsZWF2ZSBhbGwgbm90aWZpY2F0aW9ucwo+IGJl
-aW5nIGRlbGl2ZXJlZCBhcyBldmVudHMuCj4gCj4gQWx0ZXJuYXRpdmVseSwgaWYgdGhpcyBpcyBh
-Ym91dCB3aGljaCBpcyB0aGUgcmlnaHQgZGVsaXZlcnkgbWV0aG9kIGZvcgo+IEFSTSwgd2l0aCBz
-b21lIHZhbGlkIHJlYXNvbiB0byByZXRhaW4gdXNlIG9mIFZJUlEgZm9yIEhWTSB4ODYsIHRoZW4K
-PiBJJ20gaGFwcHkgdG8gc3dpdGNoIEFSTSBvdmVyIHRvIGRlbGl2ZXIgYnkgdGhlIGV2ZW50IG1l
-dGhvZCByYXRoZXIKPiB0aGFuIFZJUlEgaWYgdGhhdCBtYWtlcyBtb3JlIHNlbnNlLgoKRm9yIEFy
-bSwgMykgd291bGQgbG9vayB0aGUgcmlnaHQgYXBwcm9hY2ggaWYgeW91IHdhbnQgdG8gYXZvaWQg
-dGhlIGRlcGVuZGVuY2llcyAKb24gdGhlIGV2ZW50IGNoYW5uZWwgZHJpdmVyLgoKQ2hlZXJzLAoK
-LS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+
+--===============5997521661412516803==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BwCQnh7xodEAoBMC"
+Content-Disposition: inline
+
+
+--BwCQnh7xodEAoBMC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Dec 05, 2018 at 10:37:25PM +0000, Liam Merwick wrote:
+> From: Liam Merwick <Liam.Merwick@oracle.com>
+>=20
+> Add support to read the PVH Entry address from an ELF note in the
+> uncompressed kernel binary (as defined by the x86/HVM direct boot ABI).
+> This 32-bit entry point will be used by QEMU to load the kernel in the
+> guest and jump into the kernel entry point.
+>=20
+> For now, a call to this function is added in pc_memory_init() to read the
+> address - a future patch will use the entry point.
+>=20
+> Signed-off-by: Liam Merwick <Liam.Merwick@oracle.com>
+> ---
+>  hw/i386/pc.c  | 272 ++++++++++++++++++++++++++++++++++++++++++++++++++++=
++++++-
+>  include/elf.h |  10 +++
+>  2 files changed, 281 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+> index f095725dbab2..056aa46d99b9 100644
+> --- a/hw/i386/pc.c
+> +++ b/hw/i386/pc.c
+> @@ -109,6 +109,9 @@ static struct e820_entry *e820_table;
+>  static unsigned e820_entries;
+>  struct hpet_fw_config hpet_cfg =3D {.count =3D UINT8_MAX};
+> =20
+> +/* Physical Address of PVH entry point read from kernel ELF NOTE */
+> +static size_t pvh_start_addr;
+> +
+>  void gsi_handler(void *opaque, int n, int level)
+>  {
+>      GSIState *s =3D opaque;
+> @@ -834,6 +837,267 @@ struct setup_data {
+>      uint8_t data[0];
+>  } __attribute__((packed));
+> =20
+> +/*
+> + * Search through the ELF Notes for an entry with the given
+> + * ELF Note type
+> + */
+> +static void *get_elf_note_type(void *ehdr, void *phdr, bool elf_is64,
+> +    size_t elf_note_type)
+
+Generic ELF code.  Can you put it in hw/core/loader.c?
+
+> +{
+> +    void *nhdr =3D NULL;
+> +    size_t nhdr_size =3D elf_is64 ? sizeof(Elf64_Nhdr) : sizeof(Elf32_Nh=
+dr);
+> +    size_t elf_note_entry_sz =3D 0;
+> +    size_t phdr_off;
+> +    size_t phdr_align;
+> +    size_t phdr_memsz;
+> +    size_t nhdr_namesz;
+> +    size_t nhdr_descsz;
+> +    size_t note_type;
+
+The macro tricks used by hw/core/loader.c are nasty, but I think they
+get the types right.  Here the Elf64 on 32-bit host case is definitely
+broken due to using size_t.  Perhaps 64-on-32 isn't supported, but
+getting the types right is worth discussing.
+
+> +
+> +    phdr_off =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_offset : ((Elf32_Phdr *)phdr)->p_offset;
+> +    phdr_align =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_align : ((Elf32_Phdr *)phdr)->p_align;
+> +    phdr_memsz =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_memsz : ((Elf32_Phdr *)phdr)->p_memsz;
+> +
+> +    nhdr =3D ehdr + phdr_off;
+
+The ELF file is untrusted.  All inputs must be validated.  phdr_off
+could be an bogus/malicious value.
+
+> +    note_type =3D elf_is64 ?
+> +        ((Elf64_Nhdr *)nhdr)->n_type : ((Elf32_Nhdr *)nhdr)->n_type;
+> +    nhdr_namesz =3D elf_is64 ?
+> +        ((Elf64_Nhdr *)nhdr)->n_namesz : ((Elf32_Nhdr *)nhdr)->n_namesz;
+> +    nhdr_descsz =3D elf_is64 ?
+> +        ((Elf64_Nhdr *)nhdr)->n_descsz : ((Elf32_Nhdr *)nhdr)->n_descsz;
+> +
+> +    while (note_type !=3D elf_note_type) {
+> +        elf_note_entry_sz =3D nhdr_size +
+> +            QEMU_ALIGN_UP(nhdr_namesz, phdr_align) +
+> +            QEMU_ALIGN_UP(nhdr_descsz, phdr_align);
+> +
+> +        /*
+> +         * Verify that we haven't exceeded the end of the ELF Note secti=
+on.
+> +         * If we have, then there is no note of the given type present
+> +         * in the ELF Notes.
+> +         */
+> +        if (phdr_off + phdr_memsz < ((nhdr - ehdr) + elf_note_entry_sz))=
+ {
+> +            error_report("Note type (0x%lx) not found in ELF Note sectio=
+n",
+> +                elf_note_type);
+> +            return NULL;
+> +        }
+> +
+> +        /* skip to the next ELF Note entry */
+> +        nhdr +=3D elf_note_entry_sz;
+> +        note_type =3D elf_is64 ?
+> +            ((Elf64_Nhdr *)nhdr)->n_type : ((Elf32_Nhdr *)nhdr)->n_type;
+> +        nhdr_namesz =3D elf_is64 ?
+> +            ((Elf64_Nhdr *)nhdr)->n_namesz : ((Elf32_Nhdr *)nhdr)->n_nam=
+esz;
+> +        nhdr_descsz =3D elf_is64 ?
+> +            ((Elf64_Nhdr *)nhdr)->n_descsz : ((Elf32_Nhdr *)nhdr)->n_des=
+csz;
+> +    }
+> +
+> +    return nhdr;
+> +}
+> +
+> +/*
+> + * The entry point into the kernel for PVH boot is different from
+> + * the native entry point.  The PVH entry is defined by the x86/HVM
+> + * direct boot ABI and is available in an ELFNOTE in the kernel binary.
+> + * This function reads the ELF headers of the binary specified on the
+> + * command line by -kernel (path contained in 'filename') and discovers
+> + * the PVH entry address from the appropriate ELF Note.
+> + *
+> + * The address of the PVH entry point is saved to the 'pvh_start_addr'
+> + * global variable. The ELF class of the binary is returned via 'elfclas=
+s'
+> + * (although the entry point is 32-bit, the kernel binary can be either
+> + * 32-bit or 64-bit).
+> + */
+> +static bool read_pvh_start_addr_elf_note(const char *filename,
+> +    unsigned char *elfclass)
+> +{
+
+Can this be integrated into ELF loading?  For example, could the elf
+loader take a function pointer to perform additional logic (e.g.
+extracting the PVH entry point)?  That avoids reparsing the input file.
+
+> +    void *ehdr =3D NULL; /* Cast to Elf64_Ehdr or Elf32_Ehdr */
+> +    void *phdr =3D NULL; /* Cast to Elf64_Phdr or Elf32_Phdr */
+> +    void *nhdr =3D NULL; /* Cast to Elf64_Nhdr or Elf32_Nhdr */
+> +    struct stat statbuf;
+> +    size_t ehdr_size;
+> +    size_t phdr_size;
+> +    size_t nhdr_size;
+> +    size_t elf_note_data_addr;
+> +    /* Ehdr fields */
+> +    size_t ehdr_poff;
+> +    /* Phdr fields */
+> +    size_t phdr_off;
+> +    size_t phdr_align;
+> +    size_t phdr_memsz;
+> +    size_t phdr_type;
+> +    /* Nhdr fields */
+> +    size_t nhdr_namesz;
+> +    size_t nhdr_descsz;
+> +    bool elf_is64;
+> +    FILE *file;
+> +    union {
+> +        Elf32_Ehdr h32;
+> +        Elf64_Ehdr h64;
+> +    } elf_header;
+> +    Error *err =3D NULL;
+> +
+> +    pvh_start_addr =3D 0;
+> +
+> +    if (filename =3D=3D NULL) {
+> +        return false;
+> +    }
+> +
+> +    file =3D fopen(filename, "rb");
+> +    if (file =3D=3D NULL) {
+> +        error_report("fopen(%s) failed", filename);
+> +        return false;
+> +    }
+> +
+> +    if (fstat(fileno(file), &statbuf) < 0) {
+> +        error_report("fstat() failed on file (%s)", filename);
+> +        return false;
+> +    }
+> +
+> +    load_elf_hdr(filename, &elf_header, &elf_is64, &err);
+> +    if (err) {
+> +        error_free(err);
+> +        fclose(file);
+> +        return false;
+> +    }
+> +
+> +    *elfclass =3D elf_is64 ?
+> +        elf_header.h64.e_ident[EI_CLASS] : elf_header.h32.e_ident[EI_CLA=
+SS];
+> +    if (*elfclass =3D=3D ELFCLASSNONE) {
+> +        error_report("kernel binary (%s) is ELFCLASSNONE", filename);
+> +        fclose(file);
+> +        return false;
+> +    }
+> +
+> +    ehdr_size =3D elf_is64 ? sizeof(Elf64_Ehdr) : sizeof(Elf32_Ehdr);
+> +    phdr_size =3D elf_is64 ? sizeof(Elf64_Phdr) : sizeof(Elf32_Phdr);
+> +    nhdr_size =3D elf_is64 ? sizeof(Elf64_Nhdr) : sizeof(Elf32_Nhdr);
+> +
+> +    /* We have already validated the ELF header when calling elf_load_hd=
+r() */
+> +
+> +    ehdr =3D mmap(0, statbuf.st_size,
+> +        PROT_READ | PROT_WRITE, MAP_PRIVATE, fileno(file), 0);
+> +    if (ehdr =3D=3D MAP_FAILED) {
+> +        error_report("Failed to mmap kernel binary (%s)", filename);
+> +        goto done;
+> +    }
+> +
+> +    /*
+> +     * Search through the program execution header for the
+> +     * ELF Note section.
+> +     */
+> +
+> +    ehdr_poff =3D elf_is64 ?
+> +        ((Elf64_Ehdr *)(ehdr))->e_phoff : ((Elf32_Ehdr *)(ehdr))->e_phof=
+f;
+> +    if (statbuf.st_size < (ehdr_size + ehdr_poff)) {
+> +        error_report("ELF NOTE section exceeds file (%s) size",
+> +            filename);
+> +        goto done;
+> +    }
+> +
+> +    phdr =3D ehdr + ehdr_poff;
+> +    phdr_type =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_type : ((Elf32_Phdr *)phdr)->p_type;
+> +    while (phdr !=3D NULL && phdr_type !=3D PT_NOTE) {
+> +        if (statbuf.st_size < ((phdr - ehdr) + phdr_size)) {
+> +            error_report("ELF Program headers in file (%s) too short",
+> +                filename);
+> +            goto done;
+> +        }
+> +        phdr +=3D phdr_size;
+> +        phdr_type =3D elf_is64 ?
+> +            ((Elf64_Phdr *)phdr)->p_type : ((Elf32_Phdr *)phdr)->p_type;
+> +    }
+> +
+> +    phdr_off =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_offset : ((Elf32_Phdr *)phdr)->p_offset;
+> +    phdr_align =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_align : ((Elf32_Phdr *)phdr)->p_align;
+> +    phdr_memsz =3D elf_is64 ?
+> +        ((Elf64_Phdr *)phdr)->p_memsz : ((Elf32_Phdr *)phdr)->p_memsz;
+> +
+> +    /*
+> +     * check that the start of the ELF Note section is within the bounds
+> +     * of the kernel ELF binary
+> +     */
+> +    if (statbuf.st_size < (ehdr_poff + phdr_size + phdr_off)) {
+> +        error_report("Start of ELF note section outside of file (%s) bou=
+nds",
+> +            filename);
+> +        goto done;
+> +    }
+> +    /*
+> +     * check that the end of the ELF Note section is within the bounds
+> +     * of the kernel ELF binary
+> +     */
+> +    if (statbuf.st_size < (phdr_off + phdr_memsz)) {
+> +        error_report("End of ELF note section outside of file (%s) bound=
+s",
+> +            filename);
+> +        goto done;
+> +    }
+> +
+> +    /*
+> +     * Search through the ELF Notes for an entry with the
+> +     * Physical Address (PA) of the PVH entry point.
+> +     */
+> +    nhdr =3D get_elf_note_type(ehdr, phdr, elf_is64, XEN_ELFNOTE_PHYS32_=
+ENTRY);
+> +    if (nhdr =3D=3D NULL) {
+> +        error_report("No PVH Entry details in kernel (%s) ELF Note secti=
+on",
+> +            filename);
+> +        goto done;
+> +    }
+> +
+> +    /*
+> +     * Verify that the returned ELF Note header doesn't exceed the
+> +     * end of the kernel file
+> +     */
+> +    if (statbuf.st_size < ((nhdr - ehdr))) {
+> +        error_report("ELF Nhdr offset (0x%lx) exceeds file (%s) bounds (=
+%ld)",
+> +            (nhdr - ehdr), filename, statbuf.st_size);
+> +        goto done;
+> +    }
+> +
+> +    nhdr_namesz =3D elf_is64 ?
+> +        ((Elf64_Nhdr *)nhdr)->n_namesz : ((Elf32_Nhdr *)nhdr)->n_namesz;
+> +    nhdr_descsz =3D elf_is64 ?
+> +        ((Elf64_Nhdr *)nhdr)->n_descsz : ((Elf32_Nhdr *)nhdr)->n_descsz;
+> +
+> +    /*
+> +     * Verify that the ELF Note contents don't exceed the end of the
+> +     * kernel file
+> +     */
+> +    if (statbuf.st_size < ((nhdr - ehdr)) + nhdr_size +
+> +        QEMU_ALIGN_UP(nhdr_namesz, phdr_align) +
+> +        QEMU_ALIGN_UP(nhdr_descsz, phdr_align)) {
+> +        error_report("ELF Nhdr contents (0x%lx) exceeds file bounds (%ld=
+)",
+> +            (nhdr - ehdr) + nhdr_size + QEMU_ALIGN_UP(nhdr_namesz, phdr_=
+align) +
+> +            QEMU_ALIGN_UP(nhdr_descsz, phdr_align), statbuf.st_size);
+> +        goto done;
+> +    }
+> +
+> +    elf_note_data_addr =3D
+> +        (size_t)nhdr + nhdr_size + QEMU_ALIGN_UP(nhdr_namesz, phdr_align=
+);
+> +
+> +    pvh_start_addr =3D *(size_t *)elf_note_data_addr;
+> +
+> +    /*
+> +     * Verify that the PVH Entry point address does not exceed the
+> +     * bounds of the kernel file.
+> +     */
+> +    if (statbuf.st_size < pvh_start_addr) {
+> +        error_report("PVH ELF note addr (0x%lx) exceeds file (%s) bounds=
+ (%ld)",
+> +            (elf_note_data_addr - (size_t)ehdr), filename, statbuf.st_si=
+ze);
+> +        pvh_start_addr =3D 0;
+> +        goto done;
+> +    }
+> +
+> +done:
+> +    (void) munmap(ehdr, statbuf.st_size);
+> +    return pvh_start_addr !=3D 0;
+> +}
+> +
+>  static void load_linux(PCMachineState *pcms,
+>                         FWCfgState *fw_cfg)
+>  {
+> @@ -1334,9 +1598,11 @@ void pc_memory_init(PCMachineState *pcms,
+>      int linux_boot, i;
+>      MemoryRegion *ram, *option_rom_mr;
+>      MemoryRegion *ram_below_4g, *ram_above_4g;
+> -    FWCfgState *fw_cfg;
+> +    FWCfgState *fw_cfg =3D NULL;
+> +    unsigned char class =3D ELFCLASSNONE;
+>      MachineState *machine =3D MACHINE(pcms);
+>      PCMachineClass *pcmc =3D PC_MACHINE_GET_CLASS(pcms);
+> +    const char *kernel_filename =3D machine->kernel_filename;
+> =20
+>      assert(machine->ram_size =3D=3D pcms->below_4g_mem_size +
+>                                  pcms->above_4g_mem_size);
+> @@ -1418,6 +1684,10 @@ void pc_memory_init(PCMachineState *pcms,
+>                                      &machine->device_memory->mr);
+>      }
+> =20
+> +    if (linux_boot) {
+> +        read_pvh_start_addr_elf_note(kernel_filename, &class);
+> +    }
+> +
+>      /* Initialize PC system firmware */
+>      pc_system_firmware_init(rom_memory, !pcmc->pci_enabled);
+> =20
+> diff --git a/include/elf.h b/include/elf.h
+> index c151164b63da..1f82c7a7124b 100644
+> --- a/include/elf.h
+> +++ b/include/elf.h
+> @@ -1585,6 +1585,16 @@ typedef struct elf64_shdr {
+>  #define NT_ARM_HW_WATCH 0x403           /* ARM hardware watchpoint regis=
+ters */
+>  #define NT_ARM_SYSTEM_CALL      0x404   /* ARM system call number */
+> =20
+> +/*
+> + * Physical entry point into the kernel.
+> + *
+> + * 32bit entry point into the kernel. When requested to launch the
+> + * guest kernel, use this entry point to launch the guest in 32-bit
+> + * protected mode with paging disabled.
+> + *
+> + * [ Corresponding definition in Linux kernel: include/xen/interface/elf=
+note.h ]
+> + */
+> +#define XEN_ELFNOTE_PHYS32_ENTRY    18  /* 0x12 */
+> =20
+>  /* Note header in a PT_NOTE section */
+>  typedef struct elf32_note {
+> --=20
+> 1.8.3.1
+>=20
+
+--BwCQnh7xodEAoBMC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEcBAEBAgAGBQJcD8b8AAoJEJykq7OBq3PIF4kIAIr6zrp7Bdvs03IMDjuwvLxO
+LX4kOdKogu7o+jQ/T/lrDS4YLccPBdlUII54jRGe5sPYtVN9eINBs8QpW+12O3Gc
+6Dz5by+RQBj278Um6bphg9aNlfGeJcXeODq2WHrfV953mQUlzss4gd76dxZaDlHy
+EeQxGsXJDHHUyzdwhDUOdic50vUIvN8GcdY0l/F/p9ponR3vSYGmOyGcOIBrOatz
+9PadTd+ZqR5qTTm4/kHIXkMXwAgnKUlLPBVAq2z50CUmVgurFykl+inNJt0raKBO
+OGad4hVjGKto3NJgg6Jo7TRknq0v/LZerKWTQn4IxqfZL6ml3CMI550f+2SNe3A=
+=Beil
+-----END PGP SIGNATURE-----
+
+--BwCQnh7xodEAoBMC--
+
+
+--===============5997521661412516803==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5997521661412516803==--
