@@ -1,19 +1,22 @@
-From: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [RFC 1/3] pvh: Add x86/HVM direct boot ABI header
- file
-Date: Tue, 11 Dec 2018 14:01:24 +0000
-Message-ID: <20181211140124.GA23460@stefanha-x1.localdomain>
-References: <1544049446-6359-1-git-send-email-liam.merwick@oracle.com>
- <1544049446-6359-2-git-send-email-liam.merwick@oracle.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 23/25] argo: signal x86 HVM and ARM via VIRQ
+Date: Tue, 11 Dec 2018 14:15:33 +0000
+Message-ID: <dd55f5e1-84c2-8b44-c7c1-fdfeb4495c4f@arm.com>
+References: <1543627984-21394-1-git-send-email-christopher.w.clark@gmail.com>
+ <1543627984-21394-24-git-send-email-christopher.w.clark@gmail.com>
+ <23042bc2-d74f-ff7d-5e6a-1bd21de2ddb7@arm.com>
+ <CACMJ4GaOPCvzVrCThFGQ79qqMs75vbysuVX4ur0EsfMMPPdXUg@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6005589342263656223=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=6Yfv=OU=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
- id 1gWibK-0001QT-Vb
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:01:31 +0000
-In-Reply-To: <1544049446-6359-2-git-send-email-liam.merwick@oracle.com>
+ <SRS0=Pqn2=OU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gWip1-0002WY-Rw
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:15:39 +0000
+In-Reply-To: <CACMJ4GaOPCvzVrCThFGQ79qqMs75vbysuVX4ur0EsfMMPPdXUg@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,80 +25,79 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Liam Merwick <liam.merwick@oracle.com>
-Cc: ehabkost@redhat.com, mst@redhat.com, maran.wilson@oracle.com, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, pbonzini@redhat.com, rth@twiddle.net, sgarzare@redhat.com
+To: Christopher Clark <christopher.w.clark@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, James McKenzie <voreekf@madingley.org>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Rich Persaud <persaur@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, nd@arm.com, eric chanudet <eric.chanudet@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6005589342263656223==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="LQksG6bCIzRHxTLp"
-Content-Disposition: inline
-
-
---LQksG6bCIzRHxTLp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Dec 05, 2018 at 10:37:24PM +0000, Liam Merwick wrote:
-> From: Liam Merwick <Liam.Merwick@oracle.com>
->=20
-> The x86/HVM direct boot ABI permits Qemu to be able to boot directly
-> into the uncompressed Linux kernel binary without the need to run firmwar=
-e.
->=20
-> 	https://xenbits.xen.org/docs/unstable/misc/pvh.html
->=20
-> This commit adds the header file that defines the start_info struct
-> that needs to be populated in order to use this ABI.
->=20
-> Signed-off-by: Maran Wilson <Maran.Wilson@oracle.com>
-> Signed-off-by: Liam Merwick <Liam.Merwick@oracle.com>
-> Reviewed-by: Konrad Rzeszutek Wilk <Konrad.Wilk@oracle.com>
-> ---
->  include/hw/xen/start_info.h | 146 ++++++++++++++++++++++++++++++++++++++=
-++++++
->  1 file changed, 146 insertions(+)
->  create mode 100644 include/hw/xen/start_info.h
-
-Does it make sense to bring in Linux
-include/xen/interface/hvm/start_info.h via QEMU's
-include/standard-headers/?
-
-QEMU has a script in scripts/update-linux-header.sh for syncing Linux
-headers into include/standard-headers/.  This makes it easy to keep
-Linux header files up-to-date.  We basically treat files in
-include/standard-headers/ as auto-generated.
-
-If you define start_info.h yourself without using
-include/standard-headers/, then it won't be synced with Linux.
-
---LQksG6bCIzRHxTLp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEcBAEBAgAGBQJcD8M0AAoJEJykq7OBq3PIOlMH/0Xf2zqEnnYKUyPXmya3wH6y
-LNjfD5I10PacQClqAaM/ZMBEjX3GNd2fppFZXCdv6ELktHx0Ix5HFTDa0P/ABCMs
-M3HT+tJ4J11rZwh1U0CZod7xbavQnoIMWJhQuPy367KsrscIRCEpoV3eO/4lu4gb
-3vkl+t+4e2GCegs0CWLPCHfv+Qs084prHK/0BoURzQGNLB7il/O5g6FGG1LmZlse
-gKkboRKnN/MiG6ct+Z1RQZhp16+u4s94MYGy+hgtSVI6Q5cNFYZ6UbzA8f5+FTFQ
-rqOQZ+LHqMV2dZ/yRugRkjbvld1AGSPyp3AkiAkDdOC89TVSTSx91+2YQg2i1GQ=
-=Wifw
------END PGP SIGNATURE-----
-
---LQksG6bCIzRHxTLp--
-
-
---===============6005589342263656223==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6005589342263656223==--
+SGkgQ2hyaXN0b3BoZXIsCgpPbiAwNC8xMi8yMDE4IDA5OjAzLCBDaHJpc3RvcGhlciBDbGFyayB3
+cm90ZToKPiBPbiBTdW4sIERlYyAyLCAyMDE4IGF0IDExOjU1IEFNIEp1bGllbiBHcmFsbCA8SnVs
+aWVuLkdyYWxsQGFybS5jb20+IHdyb3RlOgo+Pgo+PiBIaSwKPj4KPj4gT24gMDEvMTIvMjAxOCAw
+MTozMywgQ2hyaXN0b3BoZXIgQ2xhcmsgd3JvdGU6Cj4+PiAqIHg4NiBQViBkb21haW5zIGFyZSBu
+b3RpZmllZCB2aWEgZXZlbnQgY2hhbm5lbC4KPj4+Cj4+PiBQViBndWVzdHMgYXJlIGtub3duIHRv
+IGhhdmUgdGhlIGV2ZW50IGNoYW5uZWwgc29mdHdhcmUgcHJlc2VudCBpbiB0aGUgZ3Vlc3QKPj4+
+IGtlcm5lbCwgc28gaXQgaXMgZmluZSB0byBkZXBlbmQgb24gYW5kIHVzZSBpdC4KPj4+Cj4+PiAq
+IHg4NiBIVk0gZG9tYWlucyBhbmQgYWxsIEFSTSBkb21haW5zIGFyZSBub3RpZmllZCB2aWEgVklS
+US4KPj4+Cj4+PiBUaGUgaW50ZW50IGlzIHRvIHJlbW92ZSB0aGUgcmVxdWlyZW1lbnQgZm9yIGV2
+ZW50IGNoYW5uZWwgc29mdHdhcmUgdG8gYmUKPj4+IGluc3RhbGxlZCB3aXRoaW4gdGhlc2UgZ3Vl
+c3RzIGluIG9yZGVyIHRvIHVzZSBBcmdvLiBWSVJRIHNpZ25hbGxpbmcgaXMgYWxzbwo+Pj4gdGhl
+IG1ldGhvZCB0aGF0IGhhcyBiZWVuIGluIHVzZSBmb3IgdGhlIGxvbmdlc3QgcGVyaW9kIHdpdGgg
+dGhpcyBoeXBlcmNhbGwKPj4+IGluIGJvdGggWGVuQ2xpZW50IGFuZCBPcGVuWFQuCj4+Cj4+IEkg
+YW0gYSBiaXQgY29uZnVzZWQuIHZJUlFzIGFyZSBiYXNlZCBvbiBldmVudCBjaGFubmVsLCBzbyBo
+b3cgZG8geW91Cj4+IHJlbW92ZSB0aGUgcmVxdWlyZW1lbnQgb24gZXZlbnQgY2hhbm5lbD8KPiAK
+PiBBcmUgVklSUXMgYWx3YXlzIGRlbGl2ZXJlZCB2aWEgZXZlbnRzIGluIGFsbCBjYXNlcz8gSSB3
+YXMgdW5kZXIgdGhlCj4gaW1wcmVzc2lvbiB0aGF0IHdhcyBub3QgbmVjZXNzYXJpbHkgc28gd2l0
+aCBIVk0gZ3Vlc3RzIGJ1dCBJIGhhdmVuJ3QKPiBjaGVja2VkIGFuZCBjb3VsZCB3ZWxsIGJlIGlu
+Y29ycmVjdC4KCkl0IGRlcGVuZHMgb24geW91ciBtZWFuaW5nIG9mIHZJUlFzLiBXZSBzZWVtIHRv
+IHVzZSBpdCBmb3IgdHdvIGNhc2VzIGluIHRoZSAKaHlwZXJ2aXNvci4KCkluIHRoZSBjb250ZXh0
+IG9mIHNlbmRfZ3Vlc3RfZ2xvYmFsX3ZpcnEoKSwgdGhlIGludGVycnVwdCB3aWxsIGJlIApwYXJh
+LXZpcnR1YWxpemVkIGFzIHdlIGRlbGl2ZXJlZCB2aWEgZXZlbnRzLgoKT24gQXJtIG1vc3Qgb2Yg
+dGhlIHZpcnR1YWwgaW50ZXJydXB0cyB3aWxsIGdvZXMgdGhyb3VnaCB0aGUgdmlydHVhbCBpbnRl
+cnJ1cHQgCmNvbnRyb2xsZXIuIFRoZXkgY2FuIGJlIHJhaXNlZCB1c2luZyB2Z2ljX2luamVjdF9p
+cnEoKSBhbmQgZXZlbnQgY2hhbm5lbCBhcmUgCnRoZXJlZm9yZSBub3QgcmVxdWlyZWQuIEkgdGhp
+bmsgdGhpcyBpcyBmYWlybHkgc2ltaWxhciBvbiBQVkgvSFZNIGJ1dCBJIHdpbGwgbGV0IAp0aGUg
+eDg2IGZvbGtzIGNvbmZpcm0gaGVyZS4KCj4gCj4gQSBiaXQgb2YgY29udGV4dCBtaWdodCBoZWxw
+IHdpdGggaG93IHRoaXMgbXVsdGlwbGUtbWV0aG9kIGxvZ2ljIChhcwo+IHN1Ym1pdHRlZCkgd2Fz
+IGFycml2ZWQgYXQ6Cj4gCj4gMSkgQm90aCBYZW5DbGllbnQncyBvcmlnaW5hbCB2ZXJzaW9uIG9m
+IHY0diwgYW5kIHRoYXQgdXNlZCBpbiBPcGVuWFQsCj4gZGVsaXZlciBub3RpZmljYXRpb25zIHRv
+IGd1ZXN0cyB2aWEgVklSUS4KPiBUaGlzIGxvZ2ljIGhhcyBiZWVuIHBlcmZvcm1pbmcgZmluZSBm
+b3Igb3VyIHVzZXMgY2FzZXMsIHNvIHRoZXJlCj4gaGFzbid0IHJlYWxseSBiZWVuIGEgcHVzaCB0
+byBzd2l0Y2ggYXdheSBmcm9tIGl0LgoKIEZyb20gbXkgdW5kZXJzdGFuZGluZywgVklSUSBpcyBq
+dXN0IGEgY29udmVuaWVuY2UgYWxpYXMgZm9yIHRoZSBndWVzdCB0byAKcmVjZWl2ZSB0aGUgYXNz
+b2NpYXRlZCBldmVudC4gVGhlIGd1ZXN0IG9ubHkgbmVlZCB0byBzYXkgIkkgd2FudCB0byBiaW5k
+IFZJUlEgCmZvbyIuIEluIHRoZSBvdGhlciBjYXNlLCB5b3Ugd291bGQgbmVlZCB0byBhbGxvY2F0
+ZSB0aGUgZXZlbnQgY2hhbm5lbCBpbiB0aGUgCmh5cGVydmlzb3IgYW5kIHRoZW4gcGFzcyB0aGUg
+aW5mb3JtYXRpb24gc29tZWhvdyB0byB0aGUgZ3Vlc3QuCgo+IAo+IDIpIFRoZSBsYXN0IHZlcnNp
+b24gb2YgdjR2IHRoYXQgd2FzIHN1Ym1pdHRlZCB0byB4ZW4tZGV2ZWwgZm9yCj4gaXRlcmF0aW9u
+IHdpdGggdGhlIFhlbiBjb21tdW5pdHkgd2FzIGludGVuZGVkIHRvIHVzZSBldmVudCBjaGFubmVs
+cwo+IGluc3RlYWQsIGluIHJlc3BvbnNlIHRvIGEgcmVxdWVzdCBmcm9tIEphbiBhdCB0aGUgdGlt
+ZS4gR2l2ZW4gdGhhdAo+IGV4cHJlc3NlZCBwcmVmZXJlbmNlLCBJJ3ZlIGFkZGVkIHRoYXQsIHBs
+dW1iaW5nIGl0IGluIHRocm91Z2ggdmlhIHRoZQo+IElQSSBldmVudCBtZXRob2QgZXhwb3NlZCBp
+biBwYXRjaCAjMDEsIGFuZCB0aGVuIHVzZWQgaW4gcGF0Y2ggIzA1LCBvZgo+IHRoZSBzdWJtaXR0
+ZWQgc2VyaWVzLgo+IAo+IDMpIEJyb21pdW0ncyB1eGVuIHVzZXMgZGlmZmVyZW50IGxvZ2ljIGZv
+ciBkZWxpdmVyeSBvZiBldmVudHMgdG8KPiBub24tUFYgZ3Vlc3RzOiBhbiBlZGdlLXRyaWdnZXJl
+ZCwgSVNBIElSUSwgYWxvbmcgdGhlc2UgbGluZXM6Cj4gCj4gICAgICAjZGVmaW5lIEFSR09fU0lH
+TkFMX0lTQV9JUlEgOAo+ICAgICAgaHZtX2lzYV9pcnFfYXNzZXJ0KGQsIEFSR09fU0lHTkFMX0lT
+QV9JUlEsIE5VTEwpOwo+ICAgICAgaHZtX2lzYV9pcnFfZGVhc3NlcnQoZCwgQVJHT19TSUdOQUxf
+SVNBX0lSUSk7Cj4gCj4gSSdtIHRvbGQgdGhhdCB0aGlzIGF2b2lkcyB0aGUgbmVlZCB0byBFT0kg
+aW4gdGhlIGd1ZXN0LCByZWR1Y2luZyB0aGUKPiBWTUVYSVQgbG9hZCwgYW5kIHVzaW5nIGFuIElT
+QSBJUlEgYXZvaWRzIHNvbWUgbG9naWMgaW4gV2luZG93cyB0aGF0Cj4gcmVxdWlyZXMgdGhhdCBh
+IGRldmljZSBiZSBkZXRlY3RlZC4gSSBicmllZmx5IGxvb2tlZCBpbnRvIGFkZGluZyB0aGlzCj4g
+dG8gQXJnbywgYnV0IExpbnV4IHdhc24ndCBpbW1lZGlhdGVseSBoYXBweSBhbmQgSSBoYXZlbid0
+IGhhZCB0aW1lIHRvCj4gbG9vayBpbnRvIGl0IGZ1cnRoZXIgZ2l2ZW4gdGhlIHByb3hpbWl0eSBv
+ZiB0aGUgNC4xMiByZWxlYXNlLCB3aXRoCj4gb3RoZXIgd29yayBzdGlsbCB0byBjb21wbGV0ZS4K
+PiAKPiBBbnl3YXk6IHNpbmNlIG1ldGhvZCAzIGlzbid0IHJlYWR5IHRvIHN1Ym1pdCwgYW5kIGlm
+IFZJUlFzIGRvbid0IGhhdmUKPiBhbiBhZHZhbnRhZ2Ugb3ZlciB1c2luZyBldmVudCBjaGFubmVs
+cyBkaXJlY3RseSB3cnQuIHRvIG5lZWRpbmcKPiBpbi1ndWVzdCBzdXBwb3J0IHRvIGZ1bmN0aW9u
+LCB0aGVuIEkgY2FuIGRyb3AgdGhpcyBwYXRjaCAoIzIzKSBhbmQKPiBzaW1wbGlmeSB0aGUgZ2V0
+X2NvbmZpZyBvcCAoIzI1KSwgd2hpY2ggd2lsbCBsZWF2ZSBhbGwgbm90aWZpY2F0aW9ucwo+IGJl
+aW5nIGRlbGl2ZXJlZCBhcyBldmVudHMuCj4gCj4gQWx0ZXJuYXRpdmVseSwgaWYgdGhpcyBpcyBh
+Ym91dCB3aGljaCBpcyB0aGUgcmlnaHQgZGVsaXZlcnkgbWV0aG9kIGZvcgo+IEFSTSwgd2l0aCBz
+b21lIHZhbGlkIHJlYXNvbiB0byByZXRhaW4gdXNlIG9mIFZJUlEgZm9yIEhWTSB4ODYsIHRoZW4K
+PiBJJ20gaGFwcHkgdG8gc3dpdGNoIEFSTSBvdmVyIHRvIGRlbGl2ZXIgYnkgdGhlIGV2ZW50IG1l
+dGhvZCByYXRoZXIKPiB0aGFuIFZJUlEgaWYgdGhhdCBtYWtlcyBtb3JlIHNlbnNlLgoKRm9yIEFy
+bSwgMykgd291bGQgbG9vayB0aGUgcmlnaHQgYXBwcm9hY2ggaWYgeW91IHdhbnQgdG8gYXZvaWQg
+dGhlIGRlcGVuZGVuY2llcyAKb24gdGhlIGV2ZW50IGNoYW5uZWwgZHJpdmVyLgoKQ2hlZXJzLAoK
+LS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
