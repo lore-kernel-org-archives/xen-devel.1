@@ -1,15 +1,23 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: memory leak in block/xen_disk in qemu-3.x
-Date: Tue, 11 Dec 2018 16:30:47 +0100
-Message-ID: <20181211153047.GB18447@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 1/2] x86/dom0: rename paging function
+Date: Tue, 11 Dec 2018 08:33:08 -0700
+Message-ID: <5C0FD8B40200007800205267@prv1-mh.provo.novell.com>
+References: <20181205145500.11989-1-roger.pau@citrix.com>
+ <20181205145500.11989-2-roger.pau@citrix.com>
+ <5C0FD3030200007800205203@prv1-mh.provo.novell.com>
+ <20181211151936.yr6s3dokmmpkgt5w@mac>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5066653322325258320=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=t2nM=OU=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gWjzr-0002W2-7H
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 15:30:55 +0000
+ (envelope-from <SRS0=lHSZ=OU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gWk28-0002iZ-HG
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 15:33:16 +0000
+In-Reply-To: <20181211151936.yr6s3dokmmpkgt5w@mac>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,59 +26,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, qemu-devel@nongnu.org
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, andrei.semenov@bertin.fr, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5066653322325258320==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="R3G7APHDIzY6R/pk"
-Content-Disposition: inline
-
-
---R3G7APHDIzY6R/pk
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-
-What are the live time rules of ioreq->buf?
-
-In my testing the memory usage of qemu is constantly growing from about
-250MB to several GB after a few days.
-
-Some debugging shows that ioreq_runio_qemu_aio() overwrites ioreq->buf,
-which contributes to the leak. In addition, ioreq_reset() also just
-globbers iorew->buf. While this was observed with a backport of xen_disk
-changes to qemu-2.9, the code in xen_disk.c did not change in this
-regard. I changed the code to call qemu_vfree(ioreq->buf) in the few
-places that globber the pointer, that fixes the leak for me.
-
-Right now neither qemu-3.0 nor 3.1 for me, so I can not test
-qemu.git#master if it eventually behaves different than
-qemu.git#stable-2.9+backport.
-
-Olaf
-
---R3G7APHDIzY6R/pk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXA/YJQAKCRBdQqD6ppg2
-flJmAKCgJg3Pwe/+iJOGnJ+k7JBe/ZRmTACeIqEF7lhpQ2PtBti0q4o6q0XRVMA=
-=ds9E
------END PGP SIGNATURE-----
-
---R3G7APHDIzY6R/pk--
-
-
---===============5066653322325258320==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5066653322325258320==--
+Pj4+IE9uIDExLjEyLjE4IGF0IDE2OjE5LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IE9uIFR1ZSwgRGVjIDExLCAyMDE4IGF0IDA4OjA4OjUxQU0gLTA3MDAsIEphbiBCZXVsaWNoIHdy
+b3RlOgo+PiA+Pj4gT24gMDUuMTIuMTggYXQgMTU6NTQsIDxyb2dlci5wYXVAY2l0cml4LmNvbT4g
+d3JvdGU6Cj4+ID4gVG8gbm90ZSBpdCdzIGNhbGN1bGF0aW5nIHRoZSBhcHByb3hpbWF0ZSBhbW91
+bnQgb2YgbWVtb3J5IHJlcXVpcmVkIGJ5Cj4+ID4gc2hhZG93IHBhZ2luZy4KPj4gCj4+IEkgZG9u
+J3QgdW5kZXJzdGFuZCB0aGlzIGxvZ2ljLCBhbmQgLi4uCj4+IAo+PiA+IEBAIC0zMjUsNyArMzI1
+LDcgQEAgdW5zaWduZWQgbG9uZyBfX2luaXQgZG9tMF9jb21wdXRlX25yX3BhZ2VzKAo+PiA+ICAg
+ICAgICAgICAgICBicmVhazsKPj4gPiAgCj4+ID4gICAgICAgICAgLyogUmVzZXJ2ZSBtZW1vcnkg
+Zm9yIHNoYWRvdyBvciBIQVAuICovCj4+ID4gLSAgICAgICAgYXZhaWwgLT0gZG9tMF9wYWdpbmdf
+cGFnZXMoZCwgbnJfcGFnZXMpOwo+PiA+ICsgICAgICAgIGF2YWlsIC09IGRvbTBfc2hhZG93X3Bh
+Z2VzKGQsIG5yX3BhZ2VzKTsKPj4gPiAgICAgIH0KPj4gCj4+IC4uLiB0aGUgY29tbWVudCBoZXJl
+IChhbmQgbGFjayBvZiBjb25kaXRpb25hbCByZXN0cmljdGluZyB0aGUKPj4gY29kZSB0byBzaGFk
+b3cgbW9kZSkgYXBwZWFyIHRvIHN1cHBvcnQgbWU6IEhhdmUgeW91Cj4+IGJlZW4gbWlzbGVhZCBi
+eSB0aGUgZnVuY3Rpb24gaGF2aW5nIGEgY29tbWVudCByZWZlcnJpbmcKPj4gdG8gbGlieGxfZ2V0
+X3JlcXVpcmVkX3NoYWRvd19tZW1vcnkoKT8gSSB0aGluayBpZiBhbnl0aGluZwo+PiB0aGF0IGxp
+YnhsIGZ1bmN0aW9uIHdvdWxkIHdhbnQgdG8gYmUgcmVuYW1lZCAodG8gcmVwbGFjZQo+PiAic2hh
+ZG93IiBieSBzb21ldGhpbmcgbW9yZSBnZW5lcmljIGluIGl0cyBuYW1lKS4KPiAKPiBCdXQgdGhl
+IGxvZ2ljIGluIGRvbTBfc2hhZG93X3BhZ2VzIHRvIGNhbGN1bGF0ZSB0aGUgc2l6ZSBvZiB0aGUg
+cGFnaW5nCj4gbWVtb3J5IHBvb2wgaXMgc3BlY2lmaWNhbGx5IGZvciBzaGFkb3cgQUZBSUNULCBJ
+IGRvbid0IHRoaW5rIEhBUCBuZWVkcwo+IHRvIHRha2UgdGhlIG51bWJlciBvZiB2Q1BVcyBpbnRv
+IGFjY291bnQsIHNpbmNlIHRoZXJlJ3Mgb25seSBhCj4gc2luZ2xlIHAybSBmb3IgdGhlIHdob2xl
+IGRvbWFpbi4gT1RPSCBzaGFkb3cgbmVlZHMgdG8gdGFrZSB0aGUgbnVtYmVyCj4gb2YgdkNQVXMg
+aW50byBhY2NvdW50IGJlY2F1c2UgZWFjaCBvbmUgd2lsbCBoYXZlIGEgZGlmZmVyZW50IHNoYWRv
+dy4KClllcywgdGhlIHZDUFUgY291bnQgYXNwZWN0IGlzIGluZGVlZCBzaGFkb3cgc3BlY2lmaWMu
+IEhvd2V2ZXIsCmFzIHNhaWQgaW4gcmVwbHkgdG8gdGhlIG90aGVyIHBhdGNoLCB0aGUgY2FsY3Vs
+YXRpb24gaGVyZSB3YXMgYXQKbGVhc3Qgc3VwcG9zZWQgdG8gYWxzbyB0YWtlIGludG8gYWNjb3Vu
+dCB0aGUgUDJNIHBhcnQgb2YgdGhlCm5lZWRlZCBhbGxvY2F0aW9ucy4gWWV0IHRoZSBQMk0gcGFy
+dCBvdWdodCB0byBiZSBzaW1pbGFyIGJldHdlZW4KYm90aCBtb2Rlcy4KCj4gTm90ZSB0aGF0IHBh
+dGNoIDIgaW4gdGhpcyBzZXJpZXMgYWRkcyBhIGZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSB0aGUgc2l6
+ZQo+IG9mIHRoZSBwYWdpbmcgbWVtb3J5IHBvb2wgZm9yIEhBUCwgYW5kIGEgY29uZGl0aW9uYWwg
+aXMgYWRkZWQgdG8gdGhlCj4gZXhwcmVzc2lvbiBhYm92ZSB0aGF0IHRha2VzIGludG8gYWNjb3Vu
+dCB3aGV0aGVyIHNoYWRvdyBvciBIQVAgaXMgaW4KPiB1c2Ugd2hlbiBzdWJ0cmFjdGluZyBmcm9t
+IHRoZSBhbW91bnQgb2YgYXZhaWxhYmxlIG1lbW9yeS4KCldlbGwsIGFzc3VtaW5nIHdlIGNhbiBz
+ZXR0bGUgb24gd2hhdCBzaGFwZSBwYXRjaCAyIHNob3VsZCB0YWtlCkkgY2FuIHNlZSB0aGUgcG9p
+bnQgaW4gZG9pbmcgdGhlIHJlbmFtZSBoZXJlLCBidXQgdGhlbiB3aXRoIGFuCmFkanVzdGVkIGRl
+c2NyaXB0aW9uOiBFc3BlY2lhbGx5IGluIGxpZ2h0IG9mIHRoZSBjb2RlIGNvbW1lbnQgc3RpbGwK
+dmlzaWJsZSBhYm92ZSB5b3UnbGwgd2FudCB0byBwb2ludCBvdXQgdGhhdCB0aGUgcmVuYW1lIGlz
+IGluCnByZXBhcmF0aW9uIG9mIHNwbGl0dGluZyB0aGUgY2FsY3VsYXRpb25zLiBTaW5jZSBJIHF1
+ZXN0aW9uIHRoZSBzcGxpdCwKdGhvdWdoLCB0aGUgcmVuYW1lIChpbiBhIHNlcGFyYXRlIHBhdGNo
+KSBpcyBxdWVzdGlvbmFibGUgdG8gbWUKdG9vLiBJZiB3ZSB1c2VkIHVuaWZvcm0gUDJNIGNhbGN1
+bGF0aW9ucyBhbmQgYWRkZWQganVzdCBzaGFkb3cncwpwZXItdkNQVSBleHRyYSBvbiB0b3AsIG5v
+IHJlbmFtZSBpbiBhIHNlcGFyYXRlIHBhdGNoIHdvdWxkCnNlZW0gd2FycmFudGVkLgoKSmFuCgoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
