@@ -1,18 +1,24 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: memory leak in block/xen_disk in qemu-3.x
-Date: Tue, 11 Dec 2018 17:07:52 +0100
-Message-ID: <20181211160752.GD18447@aepfle.de>
-References: <20181211153047.GB18447@aepfle.de>
- <74c1c30c147444cea915ee1befa56cf6@AMSPEX02CL03.citrite.net>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH for-4.12 v2 15/17] xen/arm: p2m: Add support
+ for preemption in p2m_cache_flush_range
+Date: Tue, 11 Dec 2018 16:11:26 +0000
+Message-ID: <bb791d1e-9238-158c-93bb-d8202b68a60d@arm.com>
+References: <20181204202651.8836-1-julien.grall@arm.com>
+ <20181204202651.8836-16-julien.grall@arm.com>
+ <alpine.DEB.2.10.1812061516050.18779@sstabellini-ThinkPad-X260>
+ <2c917b48-9205-11f8-b9ac-313f242c7f97@arm.com>
+ <alpine.DEB.2.10.1812071311200.18779@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7736515679904603336=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=t2nM=OU=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gWkZm-0000qp-9n
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:08:02 +0000
-In-Reply-To: <74c1c30c147444cea915ee1befa56cf6@AMSPEX02CL03.citrite.net>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Pqn2=OU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gWkd8-0001g2-Ii
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:11:30 +0000
+In-Reply-To: <alpine.DEB.2.10.1812071311200.18779@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,64 +27,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7736515679904603336==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pZs/OQEoSSbxGlYw"
-Content-Disposition: inline
-
-
---pZs/OQEoSSbxGlYw
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Dec 11, Paul Durrant wrote:
-
-> > -----Original Message-----
-> > From: Xen-devel [mailto:xen-devel-bounces@lists.xenproject.org] On Beha=
-lf
-> > Of Olaf Hering
-> > Sent: 11 December 2018 15:31
-> > To: xen-devel@lists.xenproject.org; qemu-devel@nongnu.org
-> > Subject: [Xen-devel] memory leak in block/xen_disk in qemu-3.x
-> >=20
-> > What are the live time rules of ioreq->buf?
-> > In my testing the memory usage of qemu is constantly growing from about
-> > 250MB to several GB after a few days.
-> Are you perhaps running into the problem addressed by this patch?
-> https://lists.gnu.org/archive/html/qemu-devel/2018-11/msg00244.html
-
-This looks like a fix, rather than an improvement.
-More than a month passed already, why is it not yet in qemu.git#master?
-
-Olaf
-
---pZs/OQEoSSbxGlYw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXA/g1QAKCRBdQqD6ppg2
-fhfgAJ9RbUUcFAEtEsrsGiJTIS7yNgRGfACg8QiXSJxRrueSFhGycacns2r8BUg=
-=cLnZ
------END PGP SIGNATURE-----
-
---pZs/OQEoSSbxGlYw--
-
-
---===============7736515679904603336==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7736515679904603336==--
+SGksCgpPbiAwNy8xMi8yMDE4IDIyOjExLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gT24g
+RnJpLCA3IERlYyAyMDE4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+Pj4gQEAgLTE1NDcsNiArMTU1
+MSwyNSBAQCBpbnQgcDJtX2NhY2hlX2ZsdXNoX3JhbmdlKHN0cnVjdCBkb21haW4gKmQsIGdmbl90
+Cj4+Pj4gc3RhcnQsIGdmbl90IGVuZCkKPj4+PiAgICAgICAgICB3aGlsZSAoIGdmbl94KHN0YXJ0
+KSA8IGdmbl94KGVuZCkgKQo+Pj4+ICAgICAgICB7Cj4+Pj4gKyAgICAgICAvKgo+Pj4+ICsgICAg
+ICAgICAqIENsZWFuaW5nIHRoZSBjYWNoZSBmb3IgdGhlIFAyTSBtYXkgdGFrZSBhIGxvbmcgdGlt
+ZS4gU28gd2UKPj4+PiArICAgICAgICAgKiBuZWVkIHRvIGJlIGFibGUgdG8gcHJlZW1wdC4gV2Ug
+d2lsbCBhcmJpdHJhcmlseSBwcmVlbXB0IGV2ZXJ5Cj4+Pj4gKyAgICAgICAgICogdGltZSBjb3Vu
+dCByZWFjaCA1MTIgb3IgYWJvdmUuCj4+Pj4gKwo+Pj4+ICsgICAgICAgICAqCj4+Pj4gKyAgICAg
+ICAgICogVGhlIGNvdW50IHdpbGwgYmUgaW5jcmVtZW50ZWQgYnk6Cj4+Pj4gKyAgICAgICAgICog
+IC0gMSBvbiByZWdpb24gc2tpcHBlZAo+Pj4+ICsgICAgICAgICAqICAtIDEwIGZvciBlYWNoIHBh
+Z2UgcmVxdWlyaW5nIGEgZmx1c2gKPj4+Cj4+PiBXaHkgdGhpcyBjaG9pY2U/IEEgcGFnZSBmbHVz
+aCBzaG91bGQgY29zdCBtdWNoIG1vcmUgdGhhbiAxMHggYSByZWdpb24KPj4+IHNraXBwZWQsIG1v
+cmUgbGlrZSAxMDB4IG9yIDEwMDB4LiBJbiBmYWN0LCBkb2luZyB0aGUgZnVsbCBsb29wIHdpdGhv
+dXQKPj4+IGNhbGxpbmcgZmx1c2hfcGFnZV90b19yYW0gc2hvdWxkIGJlIGNoZWFwIGFuZCBmYXN0
+LCByaWdodD8uCj4+Cj4+IEl0IGlzIGNoZWFwZXIgdGhhbiBhIGZsdXNoIG9mIHRoZSBwYWdlIGJ1
+dCBpdCBzdGlsbCBoYXMgYSBjb3N0LiBZb3UgaGF2ZSB0bwo+PiB3YWxrIHRoZSBzdGFnZS0yIGlu
+IHNvZnR3YXJlIHRoYXQgd2lsbCByZXF1aXJlIHRvIG1hcCB0aGUgdGFibGVzLiBBcyBhbGwgdGhl
+Cj4+IG1lbW9yeSBpcyBub3QgbWFwcGVkIGluIHRoZSBoeXBlcnZpc29yIG9uIGFybTMyIHRoaXMg
+d2lsbCByZXF1aXJlIGEgbWFwL3VubWFwCj4+IG9wZXJhdGlvbi4gT24gYXJtNjQsIHNvIGZhciB0
+aGUgZnVsbCBtZW1vcnkgaXMgbWFwcGVkLCBzbyB0aGUgbWFwL3VubWFwIGlzCj4+IHByZXR0eSBt
+dWNoIGEgTk9QLgo+IAo+IEdvb2QgcG9pbnQsIGFjdHVhbGx5IHRoZSBjb3N0IG9mIGFuICJlbXB0
+eSIgaXRlcmF0aW9uIGlzIHNpZ25pZmljYW50bHkKPiBkaWZmZXJlbnQgb24gYXJtMzIgYW5kIGFy
+bTY0Lgo+IAo+IAo+Pj4gSSB3b3VsZDoKPj4+Cj4+PiAtIG5vdCBpbmNyZWFzZSBjb3VudCBvbiBy
+ZWdpb24gc2tpcHBlZCBhdCBhbGwKPj4+IC0gaW5jcmVhc2UgaXQgYnkgMSBvbiBlYWNoIHBhZ2Ug
+cmVxdWlyaW5nIGEgZmx1c2gKPj4+IC0gc2V0IHRoZSBsaW1pdCBsb3dlciwgaWYgd2UgZ28gd2l0
+aCB5b3VyIHByb3Bvc2FsIGl0IHdvdWxkIGJlIGFib3V0IDUwLAo+Pj4gICAgIEkgYW0gbm90IHN1
+cmUgd2hhdCB0aGUgbGltaXQgc2hvdWxkIGJlIHRob3VnaAo+PiBJIGRvbid0IHRoaW5rIHlvdSBj
+YW4gYXZvaWQgaW5jcmVtZW50aW5nIGNvdW50IG9uIHJlZ2lvbiBza2lwcGVkLiBXaGlsZSBvbmUK
+Pj4gbG9va3VwIGlzIHByZXR0eSBjaGVhcCwgYWxsIHRoZSBsb29rdXBzIGZvciBob2xlIGFkZGVk
+IHRvZ2V0aGVyIG1heSByZXN1bHQgdG8KPj4gYSBwcmV0dHkgbG9uZyB0aW1lLgo+IAo+IFRoaW5r
+aW5nIG9mIHRoZSBhcm0zMiBjYXNlIHdoZXJlIG1hcC91bm1hcCBuZWVkIHRvIGJlIGRvbmUsIHlv
+dSBhcmUKPiByaWdodC4KPiAKPiAKPj4gRXZlbiBpZiBzdGFnZS0yIG1hcHBpbmdzIGFyZSBoYW5k
+bGVkIGJ5IHRoZSBoeXBlcnZpc29yLCB0aGUgZ3Vlc3QgaXMgc3RpbGwKPj4gc29tZXdoYXQgaW4g
+Y29udHJvbCBvZiBpdCBiZWNhdXNlIGl0IGNhbiBiYWxsb29uIGluL291dCBwYWdlcy4gVGhlIG9w
+ZXJhdGlvbgo+PiBtYXkgcmVzdWx0IHRvIHNoYXR0ZXIgc3RhZ2UtMiBtYXBwaW5ncy4KPj4KPj4g
+SXQgd291bGQgYmUgZmVhc2libGUgZm9yIGEgZ3Vlc3QgdG8gc2hhdHRlciAxR0Igb2YgbWVtb3J5
+IGluIDRLQiBtYXBwaW5ncyBpbgo+PiBzdGFnZS0yIGVudHJpZXMgYW5kIHRoZW4gcmVtb3ZlIGFs
+bCB0aGUgZW50cmllcy4gVGhpcyBtZWFucyB0aGUgc3RhZ2UtMiB3b3VsZAo+PiBjb250YWlucyAy
+NjIxNDQgaG9sZXMuIFRoaXMgd291bGQgcmVzdWx0IHRvIDI2MjE0NCBpdGVyYXRpb25zLCBzbyBu
+byBtYXR0ZXIKPj4gaG93IGNoZWFwIGl0IGlzIHRoZSByZXN1bHRpbmcgdGltZSBzcGVudCB3aXRo
+b3V0IHByZWVtcHRpb24gaXMgZ29pbmcgdG8gYmUKPj4gcXVpdGUgaW1wb3J0YW50Lgo+IAo+IE9L
+Cj4gCj4gCj4+IFRoZSBjaG9pY2UgaW4gdGhlIG51bWJlcnMgMSB2cyAxMCBpcyBwcmV0dHkgbXVj
+aCByYW5kb20uIFRoZSBxdWVzdGlvbiBpcyBob3cKPj4gb2Z0ZW4gd2Ugd2FudCB0byBjaGVjayBm
+b3IgcGVuZGluZyBzb2Z0aXJxLiBUaGUgY2hlY2sgaXMgcHJldHR5IG11Y2ggdHJpdmlhbCwKPj4g
+eWV0IGl0IGhhcyBhIGNvc3QgdG8gcHJlZW1wdC4gV2l0aCB0aGUgY3VycmVudCBzb2x1dGlvbiwg
+d2UgY2hlY2sgcHJlZW1wdGlvbgo+PiBldmVyeSA1MTIgaG9sZXMgb3IgNTEgcGFnZXMgZmx1c2hl
+ZCAofjIwNEtCIGZsdXNoZWQpLgo+Pgo+PiBUaGlzIHNvdW5kcyBvayB0byBtZS4gRmVlbCBmcmVl
+IHRvIHN1Z2dlc3QgYmV0dGVyIG51bWJlci4KPiAKPiBPbmUgc3VnZ2VzdGlvbiBpcyB0aGF0IHdl
+IG1pZ2h0IHdhbnQgdG8gdHJlYXQgdGhlIGFybTMyIGNhc2UgZGlmZmVyZW50bHkKPiBmcm9tIHRo
+ZSBhcm02NCBjYXNlLCBnaXZlbiB0aGUgZGlmZmVyZW50IGNvc3Qgb2YgbWFwcGluZy91bm1hcHBp
+bmcgcGFnZXMKPiBkdXJpbmcgdGhlIHdhbGsuIFdvdWxkIGl0IGJlIGZhaXIgdG8gc2F5IHRoYXQg
+aWYgYW4gYXJtNjQgZW1wdHkKPiBpdGVyYXRpb24gaXMgd29ydGggIjEiIHVuaXQgb2Ygd29yaywg
+dGhlbiBhbiBhcm0zMiBlbXB0eSBpdGVyYXRpb24gaXMKPiB3b3J0aCBhdCBsZWFzdCAiMiIgdW5p
+dCBvZiB3b3JrPyBPciBtb3JlPyBNeSBndXQgZmVlbGluZyBpcyB0aGF0IGl0IGlzCj4gbW9yZSBs
+aWtlOgoKSSBkb24ndCB3YW50IHRvIHRyZWF0IGFybTMyIGFuZCBhcm02NCBkaWZmZXJlbnQuIFRo
+YXQncyBhIGNhbGwgdG8gb3BlbiB1cCBhIApzZWN1cml0eSBob2xlIGluIFhlbiBpZiB3ZSBldmVy
+IGRlY2lkZSB0byBzZXBhcmF0ZSBkb21haW4gaGVhcCBhbmQgeGVuIGhlYXAgb24gCmFybTY0LgoK
+PiAKPiBlbXB0eSBhcm02NDogICAgICAgMQo+IGVtcHR5IGFybTMyOiAgICAgICA1Cj4gZmx1c2gg
+YXJtMzIvYXJtNjQ6IDEwCj4gCj4gT3IgZXZlbjoKPiAKPiBlbXB0eSBhcm02NDogICAgICAgMQo+
+IGVtcHR5IGFybTMyOiAgICAgICAxMAo+IGZsdXNoIGFybTMyL2FybTY0OiAyMAoKQmVhciBpbiBt
+aW5kIHRoYXQgaW4gdGhlIGZsdXNoIGNhc2Ugb24gYXJtMzIsIHlvdSBhbHNvIG5lZWQgdG8gbWFw
+L3VubWFwIHRoZSAKcGFnZS4gU28gdGhpcyBpcyBtb3JlIGxpa2UgMTAvMzAgaGVyZS4KCj4gCj4g
+YW5kIHRoZSBvdmVyYWxsIGxpbWl0cyBmb3IgY2hlY2tzIGNvdWxkIGJlIDUxMiBvciAxMDI0IGxp
+a2UgeW91Cj4gc3VnZ2VzdGVkLgoKV2hhdCBJIGNhbiBzdWdnZXN0IGlzOgoJZW1wdHk6IDEKCWZs
+dXNoOiAzCgpMaW1pdDogMTIwCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
