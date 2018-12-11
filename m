@@ -1,19 +1,21 @@
-From: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [RFC 2/3] pc: Read PVH entry point from ELF note in
- kernel binary
-Date: Tue, 11 Dec 2018 14:17:32 +0000
-Message-ID: <20181211141732.GB23460__24535.8230699368$1544537850$gmane$org@stefanha-x1.localdomain>
-References: <1544049446-6359-1-git-send-email-liam.merwick@oracle.com>
- <1544049446-6359-3-git-send-email-liam.merwick@oracle.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [RFC 05/16] gic-vgic: Drop an excessive clear_lrs
+Date: Tue, 11 Dec 2018 14:33:52 +0000
+Message-ID: <ef5e171c-22a6-84a4-abcb-94eb843a68eb@arm.com>
+References: <1543440731-21947-1-git-send-email-andrii.anisov@gmail.com>
+ <1543440731-21947-6-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5997521661412516803=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=6Yfv=OU=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
- id 1gWiqu-0002fO-4L
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:17:36 +0000
-In-Reply-To: <1544049446-6359-3-git-send-email-liam.merwick@oracle.com>
+ <SRS0=Pqn2=OU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gWj6i-0004QA-Hp
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 14:33:56 +0000
+In-Reply-To: <1543440731-21947-6-git-send-email-andrii.anisov@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,436 +24,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Liam Merwick <liam.merwick@oracle.com>
-Cc: ehabkost@redhat.com, mst@redhat.com, maran.wilson@oracle.com, qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, pbonzini@redhat.com, rth@twiddle.net, sgarzare@redhat.com
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5997521661412516803==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="BwCQnh7xodEAoBMC"
-Content-Disposition: inline
-
-
---BwCQnh7xodEAoBMC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Dec 05, 2018 at 10:37:25PM +0000, Liam Merwick wrote:
-> From: Liam Merwick <Liam.Merwick@oracle.com>
->=20
-> Add support to read the PVH Entry address from an ELF note in the
-> uncompressed kernel binary (as defined by the x86/HVM direct boot ABI).
-> This 32-bit entry point will be used by QEMU to load the kernel in the
-> guest and jump into the kernel entry point.
->=20
-> For now, a call to this function is added in pc_memory_init() to read the
-> address - a future patch will use the entry point.
->=20
-> Signed-off-by: Liam Merwick <Liam.Merwick@oracle.com>
-> ---
->  hw/i386/pc.c  | 272 ++++++++++++++++++++++++++++++++++++++++++++++++++++=
-+++++-
->  include/elf.h |  10 +++
->  2 files changed, 281 insertions(+), 1 deletion(-)
->=20
-> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-> index f095725dbab2..056aa46d99b9 100644
-> --- a/hw/i386/pc.c
-> +++ b/hw/i386/pc.c
-> @@ -109,6 +109,9 @@ static struct e820_entry *e820_table;
->  static unsigned e820_entries;
->  struct hpet_fw_config hpet_cfg =3D {.count =3D UINT8_MAX};
-> =20
-> +/* Physical Address of PVH entry point read from kernel ELF NOTE */
-> +static size_t pvh_start_addr;
-> +
->  void gsi_handler(void *opaque, int n, int level)
->  {
->      GSIState *s =3D opaque;
-> @@ -834,6 +837,267 @@ struct setup_data {
->      uint8_t data[0];
->  } __attribute__((packed));
-> =20
-> +/*
-> + * Search through the ELF Notes for an entry with the given
-> + * ELF Note type
-> + */
-> +static void *get_elf_note_type(void *ehdr, void *phdr, bool elf_is64,
-> +    size_t elf_note_type)
-
-Generic ELF code.  Can you put it in hw/core/loader.c?
-
-> +{
-> +    void *nhdr =3D NULL;
-> +    size_t nhdr_size =3D elf_is64 ? sizeof(Elf64_Nhdr) : sizeof(Elf32_Nh=
-dr);
-> +    size_t elf_note_entry_sz =3D 0;
-> +    size_t phdr_off;
-> +    size_t phdr_align;
-> +    size_t phdr_memsz;
-> +    size_t nhdr_namesz;
-> +    size_t nhdr_descsz;
-> +    size_t note_type;
-
-The macro tricks used by hw/core/loader.c are nasty, but I think they
-get the types right.  Here the Elf64 on 32-bit host case is definitely
-broken due to using size_t.  Perhaps 64-on-32 isn't supported, but
-getting the types right is worth discussing.
-
-> +
-> +    phdr_off =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_offset : ((Elf32_Phdr *)phdr)->p_offset;
-> +    phdr_align =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_align : ((Elf32_Phdr *)phdr)->p_align;
-> +    phdr_memsz =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_memsz : ((Elf32_Phdr *)phdr)->p_memsz;
-> +
-> +    nhdr =3D ehdr + phdr_off;
-
-The ELF file is untrusted.  All inputs must be validated.  phdr_off
-could be an bogus/malicious value.
-
-> +    note_type =3D elf_is64 ?
-> +        ((Elf64_Nhdr *)nhdr)->n_type : ((Elf32_Nhdr *)nhdr)->n_type;
-> +    nhdr_namesz =3D elf_is64 ?
-> +        ((Elf64_Nhdr *)nhdr)->n_namesz : ((Elf32_Nhdr *)nhdr)->n_namesz;
-> +    nhdr_descsz =3D elf_is64 ?
-> +        ((Elf64_Nhdr *)nhdr)->n_descsz : ((Elf32_Nhdr *)nhdr)->n_descsz;
-> +
-> +    while (note_type !=3D elf_note_type) {
-> +        elf_note_entry_sz =3D nhdr_size +
-> +            QEMU_ALIGN_UP(nhdr_namesz, phdr_align) +
-> +            QEMU_ALIGN_UP(nhdr_descsz, phdr_align);
-> +
-> +        /*
-> +         * Verify that we haven't exceeded the end of the ELF Note secti=
-on.
-> +         * If we have, then there is no note of the given type present
-> +         * in the ELF Notes.
-> +         */
-> +        if (phdr_off + phdr_memsz < ((nhdr - ehdr) + elf_note_entry_sz))=
- {
-> +            error_report("Note type (0x%lx) not found in ELF Note sectio=
-n",
-> +                elf_note_type);
-> +            return NULL;
-> +        }
-> +
-> +        /* skip to the next ELF Note entry */
-> +        nhdr +=3D elf_note_entry_sz;
-> +        note_type =3D elf_is64 ?
-> +            ((Elf64_Nhdr *)nhdr)->n_type : ((Elf32_Nhdr *)nhdr)->n_type;
-> +        nhdr_namesz =3D elf_is64 ?
-> +            ((Elf64_Nhdr *)nhdr)->n_namesz : ((Elf32_Nhdr *)nhdr)->n_nam=
-esz;
-> +        nhdr_descsz =3D elf_is64 ?
-> +            ((Elf64_Nhdr *)nhdr)->n_descsz : ((Elf32_Nhdr *)nhdr)->n_des=
-csz;
-> +    }
-> +
-> +    return nhdr;
-> +}
-> +
-> +/*
-> + * The entry point into the kernel for PVH boot is different from
-> + * the native entry point.  The PVH entry is defined by the x86/HVM
-> + * direct boot ABI and is available in an ELFNOTE in the kernel binary.
-> + * This function reads the ELF headers of the binary specified on the
-> + * command line by -kernel (path contained in 'filename') and discovers
-> + * the PVH entry address from the appropriate ELF Note.
-> + *
-> + * The address of the PVH entry point is saved to the 'pvh_start_addr'
-> + * global variable. The ELF class of the binary is returned via 'elfclas=
-s'
-> + * (although the entry point is 32-bit, the kernel binary can be either
-> + * 32-bit or 64-bit).
-> + */
-> +static bool read_pvh_start_addr_elf_note(const char *filename,
-> +    unsigned char *elfclass)
-> +{
-
-Can this be integrated into ELF loading?  For example, could the elf
-loader take a function pointer to perform additional logic (e.g.
-extracting the PVH entry point)?  That avoids reparsing the input file.
-
-> +    void *ehdr =3D NULL; /* Cast to Elf64_Ehdr or Elf32_Ehdr */
-> +    void *phdr =3D NULL; /* Cast to Elf64_Phdr or Elf32_Phdr */
-> +    void *nhdr =3D NULL; /* Cast to Elf64_Nhdr or Elf32_Nhdr */
-> +    struct stat statbuf;
-> +    size_t ehdr_size;
-> +    size_t phdr_size;
-> +    size_t nhdr_size;
-> +    size_t elf_note_data_addr;
-> +    /* Ehdr fields */
-> +    size_t ehdr_poff;
-> +    /* Phdr fields */
-> +    size_t phdr_off;
-> +    size_t phdr_align;
-> +    size_t phdr_memsz;
-> +    size_t phdr_type;
-> +    /* Nhdr fields */
-> +    size_t nhdr_namesz;
-> +    size_t nhdr_descsz;
-> +    bool elf_is64;
-> +    FILE *file;
-> +    union {
-> +        Elf32_Ehdr h32;
-> +        Elf64_Ehdr h64;
-> +    } elf_header;
-> +    Error *err =3D NULL;
-> +
-> +    pvh_start_addr =3D 0;
-> +
-> +    if (filename =3D=3D NULL) {
-> +        return false;
-> +    }
-> +
-> +    file =3D fopen(filename, "rb");
-> +    if (file =3D=3D NULL) {
-> +        error_report("fopen(%s) failed", filename);
-> +        return false;
-> +    }
-> +
-> +    if (fstat(fileno(file), &statbuf) < 0) {
-> +        error_report("fstat() failed on file (%s)", filename);
-> +        return false;
-> +    }
-> +
-> +    load_elf_hdr(filename, &elf_header, &elf_is64, &err);
-> +    if (err) {
-> +        error_free(err);
-> +        fclose(file);
-> +        return false;
-> +    }
-> +
-> +    *elfclass =3D elf_is64 ?
-> +        elf_header.h64.e_ident[EI_CLASS] : elf_header.h32.e_ident[EI_CLA=
-SS];
-> +    if (*elfclass =3D=3D ELFCLASSNONE) {
-> +        error_report("kernel binary (%s) is ELFCLASSNONE", filename);
-> +        fclose(file);
-> +        return false;
-> +    }
-> +
-> +    ehdr_size =3D elf_is64 ? sizeof(Elf64_Ehdr) : sizeof(Elf32_Ehdr);
-> +    phdr_size =3D elf_is64 ? sizeof(Elf64_Phdr) : sizeof(Elf32_Phdr);
-> +    nhdr_size =3D elf_is64 ? sizeof(Elf64_Nhdr) : sizeof(Elf32_Nhdr);
-> +
-> +    /* We have already validated the ELF header when calling elf_load_hd=
-r() */
-> +
-> +    ehdr =3D mmap(0, statbuf.st_size,
-> +        PROT_READ | PROT_WRITE, MAP_PRIVATE, fileno(file), 0);
-> +    if (ehdr =3D=3D MAP_FAILED) {
-> +        error_report("Failed to mmap kernel binary (%s)", filename);
-> +        goto done;
-> +    }
-> +
-> +    /*
-> +     * Search through the program execution header for the
-> +     * ELF Note section.
-> +     */
-> +
-> +    ehdr_poff =3D elf_is64 ?
-> +        ((Elf64_Ehdr *)(ehdr))->e_phoff : ((Elf32_Ehdr *)(ehdr))->e_phof=
-f;
-> +    if (statbuf.st_size < (ehdr_size + ehdr_poff)) {
-> +        error_report("ELF NOTE section exceeds file (%s) size",
-> +            filename);
-> +        goto done;
-> +    }
-> +
-> +    phdr =3D ehdr + ehdr_poff;
-> +    phdr_type =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_type : ((Elf32_Phdr *)phdr)->p_type;
-> +    while (phdr !=3D NULL && phdr_type !=3D PT_NOTE) {
-> +        if (statbuf.st_size < ((phdr - ehdr) + phdr_size)) {
-> +            error_report("ELF Program headers in file (%s) too short",
-> +                filename);
-> +            goto done;
-> +        }
-> +        phdr +=3D phdr_size;
-> +        phdr_type =3D elf_is64 ?
-> +            ((Elf64_Phdr *)phdr)->p_type : ((Elf32_Phdr *)phdr)->p_type;
-> +    }
-> +
-> +    phdr_off =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_offset : ((Elf32_Phdr *)phdr)->p_offset;
-> +    phdr_align =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_align : ((Elf32_Phdr *)phdr)->p_align;
-> +    phdr_memsz =3D elf_is64 ?
-> +        ((Elf64_Phdr *)phdr)->p_memsz : ((Elf32_Phdr *)phdr)->p_memsz;
-> +
-> +    /*
-> +     * check that the start of the ELF Note section is within the bounds
-> +     * of the kernel ELF binary
-> +     */
-> +    if (statbuf.st_size < (ehdr_poff + phdr_size + phdr_off)) {
-> +        error_report("Start of ELF note section outside of file (%s) bou=
-nds",
-> +            filename);
-> +        goto done;
-> +    }
-> +    /*
-> +     * check that the end of the ELF Note section is within the bounds
-> +     * of the kernel ELF binary
-> +     */
-> +    if (statbuf.st_size < (phdr_off + phdr_memsz)) {
-> +        error_report("End of ELF note section outside of file (%s) bound=
-s",
-> +            filename);
-> +        goto done;
-> +    }
-> +
-> +    /*
-> +     * Search through the ELF Notes for an entry with the
-> +     * Physical Address (PA) of the PVH entry point.
-> +     */
-> +    nhdr =3D get_elf_note_type(ehdr, phdr, elf_is64, XEN_ELFNOTE_PHYS32_=
-ENTRY);
-> +    if (nhdr =3D=3D NULL) {
-> +        error_report("No PVH Entry details in kernel (%s) ELF Note secti=
-on",
-> +            filename);
-> +        goto done;
-> +    }
-> +
-> +    /*
-> +     * Verify that the returned ELF Note header doesn't exceed the
-> +     * end of the kernel file
-> +     */
-> +    if (statbuf.st_size < ((nhdr - ehdr))) {
-> +        error_report("ELF Nhdr offset (0x%lx) exceeds file (%s) bounds (=
-%ld)",
-> +            (nhdr - ehdr), filename, statbuf.st_size);
-> +        goto done;
-> +    }
-> +
-> +    nhdr_namesz =3D elf_is64 ?
-> +        ((Elf64_Nhdr *)nhdr)->n_namesz : ((Elf32_Nhdr *)nhdr)->n_namesz;
-> +    nhdr_descsz =3D elf_is64 ?
-> +        ((Elf64_Nhdr *)nhdr)->n_descsz : ((Elf32_Nhdr *)nhdr)->n_descsz;
-> +
-> +    /*
-> +     * Verify that the ELF Note contents don't exceed the end of the
-> +     * kernel file
-> +     */
-> +    if (statbuf.st_size < ((nhdr - ehdr)) + nhdr_size +
-> +        QEMU_ALIGN_UP(nhdr_namesz, phdr_align) +
-> +        QEMU_ALIGN_UP(nhdr_descsz, phdr_align)) {
-> +        error_report("ELF Nhdr contents (0x%lx) exceeds file bounds (%ld=
-)",
-> +            (nhdr - ehdr) + nhdr_size + QEMU_ALIGN_UP(nhdr_namesz, phdr_=
-align) +
-> +            QEMU_ALIGN_UP(nhdr_descsz, phdr_align), statbuf.st_size);
-> +        goto done;
-> +    }
-> +
-> +    elf_note_data_addr =3D
-> +        (size_t)nhdr + nhdr_size + QEMU_ALIGN_UP(nhdr_namesz, phdr_align=
-);
-> +
-> +    pvh_start_addr =3D *(size_t *)elf_note_data_addr;
-> +
-> +    /*
-> +     * Verify that the PVH Entry point address does not exceed the
-> +     * bounds of the kernel file.
-> +     */
-> +    if (statbuf.st_size < pvh_start_addr) {
-> +        error_report("PVH ELF note addr (0x%lx) exceeds file (%s) bounds=
- (%ld)",
-> +            (elf_note_data_addr - (size_t)ehdr), filename, statbuf.st_si=
-ze);
-> +        pvh_start_addr =3D 0;
-> +        goto done;
-> +    }
-> +
-> +done:
-> +    (void) munmap(ehdr, statbuf.st_size);
-> +    return pvh_start_addr !=3D 0;
-> +}
-> +
->  static void load_linux(PCMachineState *pcms,
->                         FWCfgState *fw_cfg)
->  {
-> @@ -1334,9 +1598,11 @@ void pc_memory_init(PCMachineState *pcms,
->      int linux_boot, i;
->      MemoryRegion *ram, *option_rom_mr;
->      MemoryRegion *ram_below_4g, *ram_above_4g;
-> -    FWCfgState *fw_cfg;
-> +    FWCfgState *fw_cfg =3D NULL;
-> +    unsigned char class =3D ELFCLASSNONE;
->      MachineState *machine =3D MACHINE(pcms);
->      PCMachineClass *pcmc =3D PC_MACHINE_GET_CLASS(pcms);
-> +    const char *kernel_filename =3D machine->kernel_filename;
-> =20
->      assert(machine->ram_size =3D=3D pcms->below_4g_mem_size +
->                                  pcms->above_4g_mem_size);
-> @@ -1418,6 +1684,10 @@ void pc_memory_init(PCMachineState *pcms,
->                                      &machine->device_memory->mr);
->      }
-> =20
-> +    if (linux_boot) {
-> +        read_pvh_start_addr_elf_note(kernel_filename, &class);
-> +    }
-> +
->      /* Initialize PC system firmware */
->      pc_system_firmware_init(rom_memory, !pcmc->pci_enabled);
-> =20
-> diff --git a/include/elf.h b/include/elf.h
-> index c151164b63da..1f82c7a7124b 100644
-> --- a/include/elf.h
-> +++ b/include/elf.h
-> @@ -1585,6 +1585,16 @@ typedef struct elf64_shdr {
->  #define NT_ARM_HW_WATCH 0x403           /* ARM hardware watchpoint regis=
-ters */
->  #define NT_ARM_SYSTEM_CALL      0x404   /* ARM system call number */
-> =20
-> +/*
-> + * Physical entry point into the kernel.
-> + *
-> + * 32bit entry point into the kernel. When requested to launch the
-> + * guest kernel, use this entry point to launch the guest in 32-bit
-> + * protected mode with paging disabled.
-> + *
-> + * [ Corresponding definition in Linux kernel: include/xen/interface/elf=
-note.h ]
-> + */
-> +#define XEN_ELFNOTE_PHYS32_ENTRY    18  /* 0x12 */
-> =20
->  /* Note header in a PT_NOTE section */
->  typedef struct elf32_note {
-> --=20
-> 1.8.3.1
->=20
-
---BwCQnh7xodEAoBMC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEcBAEBAgAGBQJcD8b8AAoJEJykq7OBq3PIF4kIAIr6zrp7Bdvs03IMDjuwvLxO
-LX4kOdKogu7o+jQ/T/lrDS4YLccPBdlUII54jRGe5sPYtVN9eINBs8QpW+12O3Gc
-6Dz5by+RQBj278Um6bphg9aNlfGeJcXeODq2WHrfV953mQUlzss4gd76dxZaDlHy
-EeQxGsXJDHHUyzdwhDUOdic50vUIvN8GcdY0l/F/p9ponR3vSYGmOyGcOIBrOatz
-9PadTd+ZqR5qTTm4/kHIXkMXwAgnKUlLPBVAq2z50CUmVgurFykl+inNJt0raKBO
-OGad4hVjGKto3NJgg6Jo7TRknq0v/LZerKWTQn4IxqfZL6ml3CMI550f+2SNe3A=
-=Beil
------END PGP SIGNATURE-----
-
---BwCQnh7xodEAoBMC--
-
-
---===============5997521661412516803==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5997521661412516803==--
+SGkgQW5kcmlpLAoKT24gMjgvMTEvMjAxOCAyMTozMiwgQW5kcmlpIEFuaXNvdiB3cm90ZToKPiBG
+cm9tOiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgo+IAo+IFRoaXMgYWN0
+aW9uIGlzIGV4Y2Vzc2l2ZSBiZWNhdXNlIGZvciBhbiBpbnZhbGlkIExSIHRoZXJlIGlzIG5vIG5l
+ZWQKPiB0byB3cml0ZSBhbm90aGVyIGludmFsaWQgdmFsdWUgdG8gYSByZWdpc3Rlci4gU28gd2Ug
+Y2FuIHNraXAgaXQgaGVyZSwKPiBzYXZpbmcgYSBwZXJpcGhlcmFsIHJlZ2lzdGVyIGFjY2Vzcy4K
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29t
+Pgo+IC0tLQo+ICAgeGVuL2FyY2gvYXJtL2dpYy12Z2ljLmMgfCAxIC0KPiAgIDEgZmlsZSBjaGFu
+Z2VkLCAxIGRlbGV0aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9naWMtdmdp
+Yy5jIGIveGVuL2FyY2gvYXJtL2dpYy12Z2ljLmMKPiBpbmRleCA4Njk5ODdhLi40ZTE4MTY5IDEw
+MDY0NAo+IC0tLSBhL3hlbi9hcmNoL2FybS9naWMtdmdpYy5jCj4gKysrIGIveGVuL2FyY2gvYXJt
+L2dpYy12Z2ljLmMKPiBAQCAtMjI3LDcgKzIyNyw2IEBAIHN0YXRpYyB2b2lkIGdpY191cGRhdGVf
+b25lX2xyKHN0cnVjdCB2Y3B1ICp2LCBpbnQgaSkKPiAgICAgICB9Cj4gICAgICAgZWxzZQo+ICAg
+ICAgIHsKPiAtICAgICAgICBnaWNfaHdfb3BzLT5jbGVhcl9scihpKTsKCkkgd291bGQgYWN0dWFs
+bHkgcHJlZmVyIHRvIGtlZXAgdGhpcyBjb2RlIGZvciBkZWJ1ZyBidWlsZC4gVGhpcyBtYWtlcyBl
+YXNpZXIgdG8gCnJlYWQgdGhlIGR1bXBlZCBMUnMgYXMgeW91IGRvbid0IGhhdmUgdG8gd29ycnkg
+YWJvdXQgaW52YWxpZCBvbmUuCgpXaXRoICNpZm5kZWYgTkRFQlVHIGFuZCB0aGUgYXBwcm9wcmlh
+dGUgY29tbWVudDoKClJldmlld2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0u
+Y29tPgoKRmVlbCBmcmVlIHRvIHJlc2VudCBpdCBhbG9uZSBzbyBpdCBjYW4gYmUgbWVyZ2VkIHRv
+IFhlbiA0LjEyLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
