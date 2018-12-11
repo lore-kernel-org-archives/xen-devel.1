@@ -1,19 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/2] xen: clean up common/page_alloc.c
-Date: Tue, 11 Dec 2018 09:44:04 -0700
-Message-ID: <5C0FE9540200007800205373@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 2/2] xen: simplify {check,poison}_one_page
+Date: Tue, 11 Dec 2018 09:45:51 -0700
+Message-ID: <5C0FE9BF020000780020538C@prv1-mh.provo.novell.com>
 References: <20181211115631.5133-1-wei.liu2@citrix.com>
- <20181211115631.5133-2-wei.liu2@citrix.com>
+ <20181211115631.5133-3-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=lHSZ=OU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gWl8m-0005Hm-B1
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:44:12 +0000
-In-Reply-To: <20181211115631.5133-2-wei.liu2@citrix.com>
+ id 1gWlAU-0005QU-R8
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:45:58 +0000
+In-Reply-To: <20181211115631.5133-3-wei.liu2@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,10 +29,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.w
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDExLjEyLjE4IGF0IDEyOjU2LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-UmVtb3ZlIHRyYWlsaW5nIHdoaXRlc3BhY2VzLiBUdXJuIGJvb2xfdCBpbnRvIGJvb2wuIEFubm90
-YXRlIGEgc2VjdGlvbgo+IGZvciBDT05GSUdfU0VQQVJBVEVfWEVOSEVBUC4KPiAKPiBTaWduZWQt
-b2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKQWNrZWQtYnk6IEphbiBCZXVs
-aWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+VXNlIF9fbWFwX2RvbWFpbl9wYWdlIG1hY3JvIHRvIGRlYWwgd2l0aCBwYWdlX2luZm8gZGlyZWN0
+bHkuCj4gCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
