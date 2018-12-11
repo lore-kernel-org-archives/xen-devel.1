@@ -1,18 +1,23 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v10] new config option vtsc_tolerance_khz to
- avoid TSC emulation
-Date: Tue, 11 Dec 2018 16:40:59 +0100
-Message-ID: <20181211154059.GC18447@aepfle.de>
-References: <20181207085122.14171-1-olaf@aepfle.de>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH v3 07/18] xen: add event channel interface
+ for XenDevice-s
+Date: Tue, 11 Dec 2018 15:43:52 +0000
+Message-ID: <7a3465bbcbd441638ebe1eec7623599c@AMSPEX02CL03.citrite.net>
+References: <1544525238-3527-1-git-send-email-paul.durrant@citrix.com>
+ <1544525238-3527-8-git-send-email-paul.durrant@citrix.com>
+ <20181211152455.GT18875@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5062784094935090937=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=t2nM=OU=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gWkA5-0003zV-2R
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 15:41:29 +0000
-In-Reply-To: <20181207085122.14171-1-olaf@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=yaMN=OU=citrix.com=prvs=87697dac6=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1gWkCv-0004Gq-Id
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 15:44:25 +0000
+In-Reply-To: <20181211152455.GT18875@perard.uk.xensource.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,85 +26,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Anthony Perard <anthony.perard@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5062784094935090937==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JWEK1jqKZ6MHAcjA"
-Content-Disposition: inline
-
-
---JWEK1jqKZ6MHAcjA
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Dec 07, Olaf Hering wrote:
-
-> [ the math added to xen-tscmode.7 suggests that a domU should see a time
->   drift, which ntpd corrects. But the actual correction reported in
->   ntp.drift is entirely different than the one calculated in the
->   example. To me it is unclear why the example is wrong, more research
->   must be done. I'm sending this out just to get feedback about how
->   exactly the per-host knob must be implemented. ]
->=20
-> Add a knob to control when vTSC emulation will be activated for a domU
-> with tsc_mode=3Ddefault. Without such option each TSC access from domU
-> will be emulated, which causes a significant perfomance drop for
-> workloads that make use of rdtsc.
-
-I wonder why this needs to be a config option at all.
-
-
-I think that if a domU uses TSC as clocksoure it also must run NTP in
-some way to avoid the potential drift what will most likely happen,
-independent of any migration. And if it must do that, NTP will handle a
-drift up to 500 PPM. This means 500us. But if a domU is moved from a
-2.3GHz host to a 2.4GHz host the expected drift is much larger. The
-clock will run slower, the amount of ticks representing a second happen
-within a timespan of 0.958333 seonds. Adding the drift to that number
-means an NTPd could correct up to 0.958833 seconds. This is out of
-bounds either way.
-
-If Xen already bases its decision to emulate TSC on bogus numbers,
-shouldnt it automatically allow some tolerance for tsc_mode=3Ddefault?
-Xen itself can not know if the estimated value in cpu_khz is at the edge
-or in the middle of the range of possible freqencies. If we assume the
-total range is 200 KHz, and up to 500 PPM can be corrected, a possible
-default tolerance would be like: [insert math here]
-
-
-So I think the suggested vtsc_tolerance_khz should in fact add a local
-static vtsc_tolerance_khz into xen/arch/x86/time.c, and tsc_set_info
-should base the decision on this variable like it is already done in the
-suggested patch. No admin tuning of this value is required IMO.
-
-Olaf
-
---JWEK1jqKZ6MHAcjA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXA/aiAAKCRBdQqD6ppg2
-frCoAKCIrX0Lg2YlYFOGZkHMqiLcVjFWSACfU4NbVr0i2oFhRBg6KFhUJji+3ug=
-=oyyK
------END PGP SIGNATURE-----
-
---JWEK1jqKZ6MHAcjA--
-
-
---===============5062784094935090937==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5062784094935090937==--
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEFudGhvbnkgUEVSQVJEIFttYWls
+dG86YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbV0KPiBTZW50OiAxMSBEZWNlbWJlciAyMDE4IDE1
+OjI1Cj4gVG86IFBhdWwgRHVycmFudCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+Cj4gQ2M6IHFl
+bXUtZGV2ZWxAbm9uZ251Lm9yZzsgcWVtdS1ibG9ja0Bub25nbnUub3JnOyB4ZW4tCj4gZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKPiBTdWJqZWN0OiBSZTogW1BBVENIIHYzIDA3LzE4XSB4ZW46
+IGFkZCBldmVudCBjaGFubmVsIGludGVyZmFjZSBmb3IKPiBYZW5EZXZpY2Utcwo+IAo+IE9uIFR1
+ZSwgRGVjIDExLCAyMDE4IGF0IDEwOjQ3OjA3QU0gKzAwMDAsIFBhdWwgRHVycmFudCB3cm90ZToK
+PiA+IFRoZSBsZWdhY3kgUFYgYmFja2VuZCBpbmZyYXN0cnVjdHVyZSBwcm92aWRlcyBmdW5jdGlv
+bnMgdG8gYmluZCwgdW5iaW5kCj4gPiBhbmQgc2VuZCBub3RpZmljYXRpb25zIHRvIGV2ZW50IGNo
+YW5ubmVscy4gU2ltaWxhciBmdW5jdGlvbmFsaXR5IHdpbGwgYmUKPiA+IHJlcXVpcmVkIGJ5IFhl
+bkRldmljZSBpbXBsZW1lbnRhdGlvbnMgc28gdGhpcyBwYXRjaCBhZGRzIHRoZSBuZWNlc3NhcnkK
+PiA+IHN1cHBvcnQuCj4gPgo+ID4gU2lnbmVkLW9mZi1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1
+cnJhbnRAY2l0cml4LmNvbT4KPiA+IFJldmlld2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNz
+dGFiZWxsaW5pQGtlcm5lbC5vcmc+Cj4gCj4gV2hlbiBhbmQgd2hlcmUgZGlkIHRoaXMgcmV2aWV3
+IGhhcHBlbmQ/IEkgY2FuIG9ubHkgZmluZCBteSByZXZpZXctYnkgdGFnCj4gb24gdjIsIHdoaWNo
+IGlzIG1pc3NpbmcgaGVyZS4KPiAKCk9oLCB0aGF0IG11c3QgaGF2ZSBiZWVuIG15IG1pc3Rha2Uu
+Li4gSSBjdXQnbidwYXN0ZWQgdGhlIHdyb25nIGxpbmUuIEFwb2xvZ2llcyB0byBTdGVmYW5vIGFu
+ZCB5b3Vyc2VsZi4uLiBJJ2xsIGZpeCBpdCBpbiB2NC4KCiAgUGF1bAoKPiAtLQo+IEFudGhvbnkg
+UEVSQVJECgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
