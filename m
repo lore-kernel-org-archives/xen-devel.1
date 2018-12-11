@@ -1,17 +1,17 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] x86emul: work around SandyBridge errata
-Date: Tue, 11 Dec 2018 01:50:02 -0700
-Message-ID: <5C0F7A3A0200007800204F66@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] xen: preserve COMPAT in CFLAGS
+Date: Tue, 11 Dec 2018 10:24:08 +0100
+Message-ID: <20181211092408.GA18447__30666.6619879708$1544520199$gmane$org@aepfle.de>
+References: <20181026101016.28584-1-olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6077755539747924858=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=lHSZ=OU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gWdjz-00032L-8R
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 08:50:07 +0000
-Content-Disposition: inline
+ (envelope-from <SRS0=t2nM=OU=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gWeH5-0005vt-FZ
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 09:24:20 +0000
+In-Reply-To: <20181026101016.28584-1-olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,36 +20,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: qemu-devel@nongnu.org
+Cc: Anthony Perard <anthony.perard@citrix.com>, "open list:X86" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlcmUgYXJlIGEgbnVtYmVyIG9mIGV4Y2VwdGlvbiBjb25kaXRpb24gcmVsYXRlZCBlcnJhdGEg
-b24gU2FuZHlCcmlkZ2UKQ1BVcywgc29tZSBvZiB3aGljaCBhcmUgdW5leHBlY3RlZCAjVUQgKG90
-aGVycywgb2Ygbm8gaW50ZXJlc3QgaGVyZSwgYXJlCmxhY2sgb2YgbWFuZGF0ZWQgZXhjZXB0aW9u
-cywgb3IgZXhjZXB0aW9ucyBvZiB1bmV4cGVjdGVkIHR5cGUpLiBBbm5vdGF0ZQp0aGUgb25lIHdv
-cmthcm91bmQgd2UgYWxyZWFkeSBoYXZlLCBhbmQgYWRkIHR3byBtb3JlLgoKRHVlIHRvIHRoZSBl
-eGNlcHRpb24gcmVjb3Zlcnkgd2UgaGF2ZSBpbiBwbGFjZSBmb3Igc3R1YiBpbnZvY2F0aW9ucwp0
-aGVzZSBhcmVuJ3Qgc2VjdXJpdHkgaXNzdWVzLgoKU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2gg
-PGpiZXVsaWNoQHN1c2UuY29tPgoKLS0tIGEveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlL3g4Nl9l
-bXVsYXRlLmMKKysrIGIveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlL3g4Nl9lbXVsYXRlLmMKQEAg
-LTYwNzgsOSArNjA3OCwxMSBAQCB4ODZfZW11bGF0ZSgKICAgICAgICAgZWxzZQogICAgICAgICB7
-CiAgICAgICAgICAgICBnZW5lcmF0ZV9leGNlcHRpb25faWYodmV4LnJlZyAhPSAweGYsIEVYQ19V
-RCk7Ci0gICAgICAgICAgICB2ZXgubCA9IDA7CiAgICAgICAgICAgICBob3N0X2FuZF92Y3B1X211
-c3RfaGF2ZShhdngpOwogICAgICAgICAgICAgZ2V0X2ZwdShYODZFTVVMX0ZQVV95bW0pOworCisg
-ICAgICAgICAgICAvKiBXb3JrIGFyb3VuZCBlcnJhdHVtIEJUMjMwLiAqLworICAgICAgICAgICAg
-dmV4LmwgPSAwOwogICAgICAgICB9CiAKICAgICAgICAgb3BjID0gaW5pdF9wcmVmaXhlcyhzdHVi
-KTsKQEAgLTY5ODMsNiArNjk4NSw5IEBAIHg4Nl9lbXVsYXRlKAogICAgICAgICAgICAgZ2V0X2Zw
-dShYODZFTVVMX0ZQVV9tbXgpOwogICAgICAgICB9CiAKKyAgICAgICAgLyogV29yayBhcm91bmQg
-ZXJyYXR1bSBCVDM2LiAqLworICAgICAgICB2ZXgudyA9IDA7CisKICAgICAgICAgb3BjID0gaW5p
-dF9wcmVmaXhlcyhzdHViKTsKICAgICAgICAgb3BjWzBdID0gYjsKICAgICAgICAgaW5zbl9ieXRl
-cyA9IFBGWF9CWVRFUyArIDE7CkBAIC04ODE1LDYgKzg4MjAsMTEgQEAgeDg2X2VtdWxhdGUoCiAg
-ICAgICAgIGdlbmVyYXRlX2V4Y2VwdGlvbl9pZih2ZXgubCB8fCB2ZXgucmVnICE9IDB4ZiwgRVhD
-X1VEKTsKICAgICAgICAgaG9zdF9hbmRfdmNwdV9tdXN0X2hhdmUoYXZ4KTsKICAgICAgICAgZ2V0
-X2ZwdShYODZFTVVMX0ZQVV95bW0pOworCisgICAgICAgIC8qIFdvcmsgYXJvdW5kIGVycmF0dW0g
-QlQ0MS4gKi8KKyAgICAgICAgaWYgKCAhbW9kZV82NGJpdCgpICkKKyAgICAgICAgICAgIHZleC53
-ID0gMDsKKwogICAgICAgICBvcGMgPSBpbml0X3ByZWZpeGVzKHN0dWIpOwogICAgICAgICBnb3Rv
-IHBleHRyOwogCgoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+
+--===============6077755539747924858==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="82I3+IH0IqGh5yIs"
+Content-Disposition: inline
+
+
+--82I3+IH0IqGh5yIs
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Ping?
+
+
+On Fri, Oct 26, Olaf Hering wrote:
+
+> A given Qemu version can not predict what version of Xen it will run on.
+> There are some checks in configure to decide what Xen libraries and
+> functions are available. How exactly these functions must be accessed
+> has to be decided by configure and the user who is compiling Qemu.
+> In no way some random header file must override this decision.
+>=20
+> Remove the breakage introduced by commit 5eeb39c24b, which would always
+> hide the libxc interfaces the given version of Qemu knows about.
+>=20
+> The current symptom of such breakage is a build failure with qemu-2.9
+> and older, in combination with Xen 4.12.
+>=20
+> Fixes: 5eeb39c24b7d4da5d129bfdd9c4fd21cfb3d28d6
+> Signed-off-by: Olaf Hering <olaf@aepfle.de>
+> ---
+>  include/hw/xen/xen_common.h | 9 ---------
+>  1 file changed, 9 deletions(-)
+>=20
+> diff --git a/include/hw/xen/xen_common.h b/include/hw/xen/xen_common.h
+> index 5f1402b494..33fa2d3497 100644
+> --- a/include/hw/xen/xen_common.h
+> +++ b/include/hw/xen/xen_common.h
+> @@ -1,15 +1,6 @@
+>  #ifndef QEMU_HW_XEN_COMMON_H
+>  #define QEMU_HW_XEN_COMMON_H
+> =20
+> -/*
+> - * If we have new enough libxenctrl then we do not want/need these compat
+> - * interfaces, despite what the user supplied cflags might say. They
+> - * must be undefined before including xenctrl.h
+> - */
+> -#undef XC_WANT_COMPAT_EVTCHN_API
+> -#undef XC_WANT_COMPAT_GNTTAB_API
+> -#undef XC_WANT_COMPAT_MAP_FOREIGN_API
+> -
+>  #include <xenctrl.h>
+>  #include <xenstore.h>
+>  #include <xen/io/xenbus.h>
+>=20
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--82I3+IH0IqGh5yIs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXA+CNQAKCRBdQqD6ppg2
+fka9AJsGrS4R//U2ZidLGIWIfJ0hKPiQRgCeKO7jAH2uT5roxC7VXY4AI2ZNrBg=
+=7f5M
+-----END PGP SIGNATURE-----
+
+--82I3+IH0IqGh5yIs--
+
+
+--===============6077755539747924858==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6077755539747924858==--
