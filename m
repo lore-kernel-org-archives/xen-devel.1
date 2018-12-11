@@ -1,21 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 2/2] xen: simplify {check,poison}_one_page
-Date: Tue, 11 Dec 2018 09:45:51 -0700
-Message-ID: <5C0FE9BF020000780020538C@prv1-mh.provo.novell.com>
-References: <20181211115631.5133-1-wei.liu2@citrix.com>
- <20181211115631.5133-3-wei.liu2@citrix.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v4 14/18] xen: add implementations of
+ xen-block connect and disconnect functions...
+Date: Tue, 11 Dec 2018 16:50:19 +0000
+Message-ID: <20181211165019.GV18875@perard.uk.xensource.com>
+References: <1544543862-9997-1-git-send-email-paul.durrant@citrix.com>
+ <1544543862-9997-15-git-send-email-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=lHSZ=OU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gWlAU-0005QU-R8
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:45:58 +0000
-In-Reply-To: <20181211115631.5133-3-wei.liu2@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=P5G6=OU=citrix.com=prvs=8761f1f8f=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1gWlEr-0006Kj-08
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:50:29 +0000
 Content-Disposition: inline
+In-Reply-To: <1544543862-9997-15-git-send-email-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,14 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDExLjEyLjE4IGF0IDEyOjU2LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-VXNlIF9fbWFwX2RvbWFpbl9wYWdlIG1hY3JvIHRvIGRlYWwgd2l0aCBwYWdlX2luZm8gZGlyZWN0
-bHkuCj4gCj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogV2VpIExp
-dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
-c3VzZS5jb20+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBEZWMgMTEsIDIwMTggYXQgMDM6NTc6MzhQTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IC4uLmFuZCB3aXJlIGluIHRoZSBkYXRhcGxhbmUuCj4gCj4gVGhpcyBwYXRjaCBhZGRz
+IHRoZSByZW1haW5pbmcgY29kZSB0byBtYWtlIHRoZSB4ZW4tYmxvY2sgWGVuRGV2aWNlCj4gZnVu
+Y3Rpb25hbC4gVGhlIHBhcmFtZXRlcnMgdGhhdCBhIGJsb2NrIGZyb250ZW5kIGV4cGVjdHMgdG8g
+ZmluZCBhcmUKPiBwb3B1bGF0ZWQgaW4gdGhlIGJhY2tlbmQgeGVuc3RvcmUgYXJlYSwgYW5kIHRo
+ZSAncmluZy1yZWYnIGFuZAo+ICdldmVudC1jaGFubmVsJyB2YWx1ZXMgc3BlY2lmaWVkIGluIHRo
+ZSBmcm9udGVuZCB4ZW5zdG9yZSBhcmVhIGFyZQo+IG1hcHBlZC9ib3VuZCBhbmQgdXNlZCB0byBz
+ZXQgdXAgdGhlIGRhdGFwbGFuZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBh
+dWwuZHVycmFudEBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEFudGhvbnkgUEVSQVJEIDxhbnRo
+b255LnBlcmFyZEBjaXRyaXguY29tPgoKLS0gCkFudGhvbnkgUEVSQVJECgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
