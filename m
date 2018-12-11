@@ -1,10 +1,10 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: memory leak in block/xen_disk in qemu-3.x
-Date: Tue, 11 Dec 2018 16:15:10 +0000
-Message-ID: <2abf113b34c0478d853810ee1605a015@AMSPEX02CL03.citrite.net>
-References: <20181211153047.GB18447@aepfle.de>
- <74c1c30c147444cea915ee1befa56cf6@AMSPEX02CL03.citrite.net>
- <20181211160752.GD18447@aepfle.de>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v3 14/18] xen: add implementations of
+ xen-block connect and disconnect functions...
+Date: Tue, 11 Dec 2018 16:17:10 +0000
+Message-ID: <20181211161710.GU18875@perard.uk.xensource.com>
+References: <1544525238-3527-1-git-send-email-paul.durrant@citrix.com>
+ <1544525238-3527-15-git-send-email-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,11 +12,11 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=yaMN=OU=citrix.com=prvs=87697dac6=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gWkiR-00022O-QI
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:16:59 +0000
-In-Reply-To: <20181211160752.GD18447@aepfle.de>
-Content-Language: en-US
+ <SRS0=P5G6=OU=citrix.com=prvs=8761f1f8f=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1gWkiw-00025P-LQ
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 16:17:30 +0000
+Content-Disposition: inline
+In-Reply-To: <1544525238-3527-15-git-send-email-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,33 +25,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Olaf Hering' <olaf@aepfle.de>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBPbGFmIEhlcmluZyBbbWFpbHRv
-Om9sYWZAYWVwZmxlLmRlXQ0KPiBTZW50OiAxMSBEZWNlbWJlciAyMDE4IDE2OjA4DQo+IFRvOiBQ
-YXVsIER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPg0KPiBDYzogeGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnOyBxZW11LWRldmVsQG5vbmdudS5vcmcNCj4gU3ViamVjdDogUmU6
-IFtYZW4tZGV2ZWxdIG1lbW9yeSBsZWFrIGluIGJsb2NrL3hlbl9kaXNrIGluIHFlbXUtMy54DQo+
-IA0KPiBPbiBUdWUsIERlYyAxMSwgUGF1bCBEdXJyYW50IHdyb3RlOg0KPiANCj4gPiA+IC0tLS0t
-T3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gPiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4ZW4t
-ZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24NCj4gQmVoYWxmDQo+ID4gPiBP
-ZiBPbGFmIEhlcmluZw0KPiA+ID4gU2VudDogMTEgRGVjZW1iZXIgMjAxOCAxNTozMQ0KPiA+ID4g
-VG86IHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZzsgcWVtdS1kZXZlbEBub25nbnUub3Jn
-DQo+ID4gPiBTdWJqZWN0OiBbWGVuLWRldmVsXSBtZW1vcnkgbGVhayBpbiBibG9jay94ZW5fZGlz
-ayBpbiBxZW11LTMueA0KPiA+ID4NCj4gPiA+IFdoYXQgYXJlIHRoZSBsaXZlIHRpbWUgcnVsZXMg
-b2YgaW9yZXEtPmJ1Zj8NCj4gPiA+IEluIG15IHRlc3RpbmcgdGhlIG1lbW9yeSB1c2FnZSBvZiBx
-ZW11IGlzIGNvbnN0YW50bHkgZ3Jvd2luZyBmcm9tDQo+IGFib3V0DQo+ID4gPiAyNTBNQiB0byBz
-ZXZlcmFsIEdCIGFmdGVyIGEgZmV3IGRheXMuDQo+ID4gQXJlIHlvdSBwZXJoYXBzIHJ1bm5pbmcg
-aW50byB0aGUgcHJvYmxlbSBhZGRyZXNzZWQgYnkgdGhpcyBwYXRjaD8NCj4gPiBodHRwczovL2xp
-c3RzLmdudS5vcmcvYXJjaGl2ZS9odG1sL3FlbXUtZGV2ZWwvMjAxOC0xMS9tc2cwMDI0NC5odG1s
-DQo+IA0KPiBUaGlzIGxvb2tzIGxpa2UgYSBmaXgsIHJhdGhlciB0aGFuIGFuIGltcHJvdmVtZW50
-Lg0KPiBNb3JlIHRoYW4gYSBtb250aCBwYXNzZWQgYWxyZWFkeSwgd2h5IGlzIGl0IG5vdCB5ZXQg
-aW4gcWVtdS5naXQjbWFzdGVyPw0KPiANCg0KSXQgd2FzIG5hY2tlZCBvbiB0aGUgYmFzaXMgdGhh
-dCB4ZW5fZGlzayBpcyBsZWdhY3kuIEkgaGF2ZSByZS1iYXNlZCBpdCBvbiBteSBzZXJpZXMgcmUt
-d29ya2luZyB4ZW5fZGlzayBhbmQsIGFzIHNvb24gYXMgdGhhdCBpcyBhbGwgYWNrZWQsIEkgd2ls
-bCBwb3N0IHRoZSByZS1iYXNlZCBwYXRjaC4NCg0KICBQYXVsDQoNCj4gT2xhZg0KX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gVHVlLCBEZWMgMTEsIDIwMTggYXQgMTA6NDc6MTRBTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IC4uLmFuZCB3aXJlIGluIHRoZSBkYXRhcGxhbmUuCj4gCj4gVGhpcyBwYXRjaCBhZGRz
+IHRoZSByZW1haW5pbmcgY29kZSB0byBtYWtlIHRoZSB4ZW4tYmxvY2sgWGVuRGV2aWNlCj4gZnVu
+Y3Rpb25hbC4gVGhlIHBhcmFtZXRlcnMgdGhhdCBhIGJsb2NrIGZyb250ZW5kIGV4cGVjdHMgdG8g
+ZmluZCBhcmUKPiBwb3B1bGF0ZWQgaW4gdGhlIGJhY2tlbmQgeGVuc3RvcmUgYXJlYSwgYW5kIHRo
+ZSAncmluZy1yZWYnIGFuZAo+ICdldmVudC1jaGFubmVsJyB2YWx1ZXMgc3BlY2lmaWVkIGluIHRo
+ZSBmcm9udGVuZCB4ZW5zdG9yZSBhcmVhIGFyZQo+IG1hcHBlZC9ib3VuZCBhbmQgdXNlZCB0byBz
+ZXQgdXAgdGhlIGRhdGFwbGFuZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBh
+dWwuZHVycmFudEBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEFudGhvbnkgUEVSQVJEIDxhbnRo
+b255LnBlcmFyZEBjaXRyaXguY29tPgoKLS0gCkFudGhvbnkgUEVSQVJECgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
