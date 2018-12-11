@@ -1,25 +1,18 @@
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-Subject: Re: [Qemu-devel] [RFC 1/3] pvh: Add x86/HVM direct boot
- ABI header file
-Date: Tue, 11 Dec 2018 15:03:11 +0000
-Message-ID: <20181211150311.GL921@redhat.com>
-References: <1544049446-6359-1-git-send-email-liam.merwick@oracle.com>
- <1544049446-6359-2-git-send-email-liam.merwick@oracle.com>
- <20181211140124.GA23460@stefanha-x1.localdomain>
- <83b577e6-691e-08b3-e9e4-90651e988ff2@oracle.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: qemu assert in staging during HVM live migration
+Date: Tue, 11 Dec 2018 16:07:35 +0100
+Message-ID: <20181211160735.4e583d6e.olaf@aepfle.de>
+References: <20181122100344.GA13748@aepfle.de>
+ <20181123155449.GB6902@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3055835105542796116=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=tgyX=OU=redhat.com=berrange@srs-us1.protection.inumbo.net>)
- id 1gWjZG-0007Tp-9X
- for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 15:03:26 +0000
-Content-Disposition: inline
-In-Reply-To: <83b577e6-691e-08b3-e9e4-90651e988ff2@oracle.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=t2nM=OU=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gWjdT-0007l5-CL
+ for xen-devel@lists.xenproject.org; Tue, 11 Dec 2018 15:07:48 +0000
+In-Reply-To: <20181123155449.GB6902@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,53 +21,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Liam Merwick <liam.merwick@oracle.com>
-Cc: ehabkost@redhat.com, maran.wilson@oracle.com, mst@redhat.com, qemu-devel@nongnu.org, George Kennedy <george.kennedy@oracle.com>, Stefan Hajnoczi <stefanha@redhat.com>, pbonzini@redhat.com, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, sgarzare@redhat.com, rth@twiddle.net
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBEZWMgMTEsIDIwMTggYXQgMDI6NTc6MjlQTSArMDAwMCwgTGlhbSBNZXJ3aWNrIHdy
-b3RlOgo+IAo+IAo+IE9uIDExLzEyLzIwMTggMTQ6MDEsIFN0ZWZhbiBIYWpub2N6aSB3cm90ZToK
-PiA+IE9uIFdlZCwgRGVjIDA1LCAyMDE4IGF0IDEwOjM3OjI0UE0gKzAwMDAsIExpYW0gTWVyd2lj
-ayB3cm90ZToKPiA+ID4gRnJvbTogTGlhbSBNZXJ3aWNrIDxMaWFtLk1lcndpY2tAb3JhY2xlLmNv
-bT4KPiA+ID4gCj4gPiA+IFRoZSB4ODYvSFZNIGRpcmVjdCBib290IEFCSSBwZXJtaXRzIFFlbXUg
-dG8gYmUgYWJsZSB0byBib290IGRpcmVjdGx5Cj4gPiA+IGludG8gdGhlIHVuY29tcHJlc3NlZCBM
-aW51eCBrZXJuZWwgYmluYXJ5IHdpdGhvdXQgdGhlIG5lZWQgdG8gcnVuIGZpcm13YXJlLgo+ID4g
-PiAKPiA+ID4gCWh0dHBzOi8veGVuYml0cy54ZW4ub3JnL2RvY3MvdW5zdGFibGUvbWlzYy9wdmgu
-aHRtbAo+ID4gPiAKPiA+ID4gVGhpcyBjb21taXQgYWRkcyB0aGUgaGVhZGVyIGZpbGUgdGhhdCBk
-ZWZpbmVzIHRoZSBzdGFydF9pbmZvIHN0cnVjdAo+ID4gPiB0aGF0IG5lZWRzIHRvIGJlIHBvcHVs
-YXRlZCBpbiBvcmRlciB0byB1c2UgdGhpcyBBQkkuCj4gPiA+IAo+ID4gPiBTaWduZWQtb2ZmLWJ5
-OiBNYXJhbiBXaWxzb24gPE1hcmFuLldpbHNvbkBvcmFjbGUuY29tPgo+ID4gPiBTaWduZWQtb2Zm
-LWJ5OiBMaWFtIE1lcndpY2sgPExpYW0uTWVyd2lja0BvcmFjbGUuY29tPgo+ID4gPiBSZXZpZXdl
-ZC1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxLb25yYWQuV2lsa0BvcmFjbGUuY29tPgo+ID4g
-PiAtLS0KPiA+ID4gICBpbmNsdWRlL2h3L3hlbi9zdGFydF9pbmZvLmggfCAxNDYgKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPiA+ID4gICAxIGZpbGUgY2hhbmdl
-ZCwgMTQ2IGluc2VydGlvbnMoKykKPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9o
-dy94ZW4vc3RhcnRfaW5mby5oCj4gPiAKPiA+IERvZXMgaXQgbWFrZSBzZW5zZSB0byBicmluZyBp
-biBMaW51eAo+ID4gaW5jbHVkZS94ZW4vaW50ZXJmYWNlL2h2bS9zdGFydF9pbmZvLmggdmlhIFFF
-TVUncwo+ID4gaW5jbHVkZS9zdGFuZGFyZC1oZWFkZXJzLz8KPiA+IAo+ID4gUUVNVSBoYXMgYSBz
-Y3JpcHQgaW4gc2NyaXB0cy91cGRhdGUtbGludXgtaGVhZGVyLnNoIGZvciBzeW5jaW5nIExpbnV4
-Cj4gPiBoZWFkZXJzIGludG8gaW5jbHVkZS9zdGFuZGFyZC1oZWFkZXJzLy4gIFRoaXMgbWFrZXMg
-aXQgZWFzeSB0byBrZWVwCj4gPiBMaW51eCBoZWFkZXIgZmlsZXMgdXAtdG8tZGF0ZS4gIFdlIGJh
-c2ljYWxseSB0cmVhdCBmaWxlcyBpbgo+ID4gaW5jbHVkZS9zdGFuZGFyZC1oZWFkZXJzLyBhcyBh
-dXRvLWdlbmVyYXRlZC4KPiA+IAo+ID4gSWYgeW91IGRlZmluZSBzdGFydF9pbmZvLmggeW91cnNl
-bGYgd2l0aG91dCB1c2luZwo+ID4gaW5jbHVkZS9zdGFuZGFyZC1oZWFkZXJzLywgdGhlbiBpdCB3
-b24ndCBiZSBzeW5jZWQgd2l0aCBMaW51eC4KPiA+IAo+IAo+IFRoYXQgZG9lcyBzZWVtIGJldHRl
-ci4gIEkgd2lsbCBtYWtlIHRoYXQgY2hhbmdlLgo+IAo+IE9uZSBhIHJlbGF0ZWQgbm90ZSwgSSdt
-IHRyeWluZyB0byBmaXggdGhlIG1pbmd3IGNvbXBpbGF0aW9uIGVycm9ycyBbMV0gaW4KPiB0aGlz
-IHNlcmllcyBhbHNvLiAgSSBjYW4gZml4IHRoZSBmb3JtYXQgaXNzdWVzIHdpdGggUFJJeDY0LCBl
-dGMgYnV0IEkgY2FuJ3QKPiBzZWVtIHRvIGZpbmQgYW4gaW5jbHVkZSBmaWxlIHRvIHByb3ZpZGUg
-YSBkZWNsYXJhdGlvbiBvZiBtbWFwKCkgZXQuIGFsLiAtCj4gaGFzIHRoaXMgYmVlbiByZXNvbHZl
-ZCBiZWZvcmU/IEEgcG9pbnRlciB0byBzb21ldGhpbmcgc2ltaWxhciB0byBpbnZlc3RpZ2F0ZQo+
-IHdvdWxkIGJlIHZlcnkgd2VsY29tZS4KClRoZXJlIGlzIG5vIG1tYXAoKSBvbiBtaW5ndywgc28g
-eW91J2xsIGhhdmUgdG8gbWFrZSBzdXJlIHRoYXQgY29kZSBpcwpjb25kaXRpb25hbGx5IGNvbXBp
-bGVkIHdpdGggICNpZm5kZWYgV0lOMzIgd2hlcmUgYXBwcm9wcmlhdGUuCgo+IFsxXSBodHRwOi8v
-cGF0Y2hldy5vcmcvbG9ncy8xNTQ0MDQ5NDQ2LTYzNTktMS1naXQtc2VuZC1lbWFpbC1saWFtLm1l
-cndpY2tAb3JhY2xlLmNvbS90ZXN0aW5nLmRvY2tlci1taW5nd0BmZWRvcmEvP3R5cGU9bWVzc2Fn
-ZQo+IAoKUmVnYXJkcywKRGFuaWVsCi0tIAp8OiBodHRwczovL2JlcnJhbmdlLmNvbSAgICAgIC1v
-LSAgICBodHRwczovL3d3dy5mbGlja3IuY29tL3Bob3Rvcy9kYmVycmFuZ2UgOnwKfDogaHR0cHM6
-Ly9saWJ2aXJ0Lm9yZyAgICAgICAgIC1vLSAgICAgICAgICAgIGh0dHBzOi8vZnN0b3AxMzguYmVy
-cmFuZ2UuY29tIDp8Cnw6IGh0dHBzOi8vZW50YW5nbGUtcGhvdG8ub3JnICAgIC1vLSAgICBodHRw
-czovL3d3dy5pbnN0YWdyYW0uY29tL2RiZXJyYW5nZSA6fAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============3055835105542796116==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/7LawByRU8NwtiJuhDw3kZX6"; protocol="application/pgp-signature"
+
+--Sig_/7LawByRU8NwtiJuhDw3kZX6
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 23 Nov 2018 15:54:49 +0000
+schrieb Anthony PERARD <anthony.perard@citrix.com>:
+
+> On Thu, Nov 22, 2018 at 11:03:45AM +0100, Olaf Hering wrote:
+> > qemu-system-i386: block/block-backend.c:903: blk_get_attached_dev_id: A=
+ssertion `!blk->legacy_dev' failed.
+> xen-disk (qdisk) is currently using legacy stuff in QEMU, and this
+> legacy stuff is going to disappear. Paul have a patch series to
+> modernise it:
+
+This assert triggers also without migration.
+
+Do we want to get this fixed for qemu-3.1.0 and perhaps qemu-3.0.1, or shal=
+l we declare both broken until the mentioned series is eventually applied?
+
+Olaf
+
+--Sig_/7LawByRU8NwtiJuhDw3kZX6
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXA/StwAKCRBdQqD6ppg2
+fptnAJ0WOHtlFYRafjPBk4zXY1tM5AfibwCbBTjhCGaqY6sly9wNqSQSaZIsZ+Q=
+=sdpR
+-----END PGP SIGNATURE-----
+
+--Sig_/7LawByRU8NwtiJuhDw3kZX6--
+
+
+--===============3055835105542796116==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3055835105542796116==--
