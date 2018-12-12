@@ -1,24 +1,21 @@
-From: =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@gmail.com>
-Subject: Re: [Qemu-devel] [PATCH for-3.2 v5 07/19] hw: apply
- accel compat properties without touching globals
-Date: Wed, 12 Dec 2018 16:00:06 +0400
-Message-ID: <CAJ+F1CJ55pcq6OZdnSBVNGQwRSE=gQD0swPeHw_Roj2qVOnxSA@mail.gmail.com>
-References: <20181204142023.15982-1-marcandre.lureau@redhat.com>
- <20181204142023.15982-8-marcandre.lureau@redhat.com>
- <20181210174522.04b21215@Igors-MacBook-Pro.local>
- <20181210175441.7d6e0dcd@Igors-MacBook-Pro.local>
+From: Kevin Wolf <kwolf@redhat.com>
+Subject: Re: xen_disk qdevification (was: [PATCH 0/3]
+ Performance improvements for xen_disk v2)
+Date: Wed, 12 Dec 2018 13:03:22 +0100
+Message-ID: <20181212120322.GA5415__43585.911152377$1544616129$gmane$org@linux.fritz.box>
+References: <154115285434.11300.8459925605672823399.stgit@dhcp-3-135.uk.xensource.com>
+ <20181102110412.GD7521@dhcp-200-186.str.redhat.com>
+ <20181212085951.GA7604@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0549453645388623633=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=VKZa=OV=gmail.com=marcandre.lureau@srs-us1.protection.inumbo.net>)
- id 1gX3Bd-00079N-MG
- for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 12:00:21 +0000
-Received: by mail-wr1-x444.google.com with SMTP id j10so17413608wru.4
- for <xen-devel@lists.xenproject.org>; Wed, 12 Dec 2018 04:00:20 -0800 (PST)
-In-Reply-To: <20181210175441.7d6e0dcd@Igors-MacBook-Pro.local>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=UI0V=OV=redhat.com=kwolf@srs-us1.protection.inumbo.net>)
+ id 1gX3Ee-0007NF-4K
+ for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 12:03:28 +0000
+In-Reply-To: <20181212085951.GA7604@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,84 +24,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Igor Mammedov <imammedo@redhat.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Eduardo Habkost <ehabkost@redhat.com>, QEMU <qemu-devel@nongnu.org>, xen-devel@lists.xenproject.org, Anthony Perard <anthony.perard@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, =?UTF-8?Q?Andreas_F=C3=A4rber?= <afaerber@suse.de>
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, Tim Smith <tim.smith@citrix.com>, armbru@redhat.com, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkKT24gTW9uLCBEZWMgMTAsIDIwMTggYXQgODo1NSBQTSBJZ29yIE1hbW1lZG92IDxpbWFtbWVk
-b0ByZWRoYXQuY29tPiB3cm90ZToKPgo+IE9uIE1vbiwgMTAgRGVjIDIwMTggMTc6NDU6MjIgKzAx
-MDAKPiBJZ29yIE1hbW1lZG92IDxpbWFtbWVkb0ByZWRoYXQuY29tPiB3cm90ZToKPgo+ID4gT24g
-VHVlLCAgNCBEZWMgMjAxOCAxODoyMDoxMSArMDQwMAo+ID4gTWFyYy1BbmRyw6kgTHVyZWF1IDxt
-YXJjYW5kcmUubHVyZWF1QHJlZGhhdC5jb20+IHdyb3RlOgo+ID4KPiA+ID4gSW5zdGVhZCBvZiBy
-ZWdpc3RlcmluZyBjb21wYXQgcHJvcGVydGllcyBhcyBnbG9iYWxzLCBsZXQncyBrZWVwIHRoZW0K
-PiA+ID4gaW4gdGhlaXIgb3duIGFycmF5LCB0byBhdm9pZCBtaXhpbmcgd2l0aCB1c2VyIGdsb2Jh
-bHMuCj4gPiA+Cj4gPiA+IEludHJvZHVjZSBvYmplY3RfYXBwbHlfZ2xvYmFsX3Byb3BzKCkgZnVu
-Y3Rpb24sIHRvIGFwcGx5IGNvbXBhdGliaWxpdHkKPiA+ID4gcHJvcGVydGllcyBmcm9tIGEgR1B0
-ckFycmF5Lgo+ID4gPgo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBNYXJjLUFuZHLDqSBMdXJlYXUgPG1h
-cmNhbmRyZS5sdXJlYXVAcmVkaGF0LmNvbT4KPiA+ID4gLS0tCj4gPiA+ICBpbmNsdWRlL2h3L3Fk
-ZXYtY29yZS5oIHwgMTAgKysrKysrKysrKwo+ID4gPiAgaW5jbHVkZS9xb20vb2JqZWN0LmggICB8
-ICAzICsrKwo+ID4gPiAgaW5jbHVkZS9zeXNlbXUvYWNjZWwuaCB8ICA0ICstLS0KPiA+ID4gIGFj
-Y2VsL2FjY2VsLmMgICAgICAgICAgfCAxMiAtLS0tLS0tLS0tLS0KPiA+ID4gIGh3L2NvcmUvcWRl
-di5jICAgICAgICAgfCAgOSArKysrKysrKysKPiA+ID4gIGh3L3hlbi94ZW4tY29tbW9uLmMgICAg
-fCAgOSArKysrKystLS0KPiA+ID4gIHFvbS9vYmplY3QuYyAgICAgICAgICAgfCAyNSArKysrKysr
-KysrKysrKysrKysrKysrKysrCj4gPiA+ICB2bC5jICAgICAgICAgICAgICAgICAgIHwgIDEgLQo+
-ID4gPiAgOCBmaWxlcyBjaGFuZ2VkLCA1NCBpbnNlcnRpb25zKCspLCAxOSBkZWxldGlvbnMoLSkK
-PiA+ID4KPiA+IFsuLi5dCj4gPiA+IGRpZmYgLS1naXQgYS9ody94ZW4veGVuLWNvbW1vbi5jIGIv
-aHcveGVuL3hlbi1jb21tb24uYwo+ID4gPiBpbmRleCA2ZWMxNGM3M2NhLi40NTMyYWE4NjMyIDEw
-MDY0NAo+ID4gPiAtLS0gYS9ody94ZW4veGVuLWNvbW1vbi5jCj4gPiA+ICsrKyBiL2h3L3hlbi94
-ZW4tY29tbW9uLmMKPiA+ID4gQEAgLTE3NCwxOCArMTc0LDIxIEBAIHN0YXRpYyBHbG9iYWxQcm9w
-ZXJ0eSB4ZW5fY29tcGF0X3Byb3BzW10gPSB7Cj4gPiA+ICAgICAgICAgIC5kcml2ZXIgPSAibWln
-cmF0aW9uIiwKPiA+ID4gICAgICAgICAgLnByb3BlcnR5ID0gInNlbmQtc2VjdGlvbi1mb290ZXIi
-LAo+ID4gPiAgICAgICAgICAudmFsdWUgPSAib2ZmIiwKPiA+ID4gLSAgICB9LAo+ID4gPiAtICAg
-IHsgLyogZW5kIG9mIGxpc3QgKi8gfSwKPiA+ID4gKyAgICB9Cj4gPiA+ICB9Owo+ID4gPgo+ID4g
-PiAgc3RhdGljIHZvaWQgeGVuX2FjY2VsX2NsYXNzX2luaXQoT2JqZWN0Q2xhc3MgKm9jLCB2b2lk
-ICpkYXRhKQo+ID4gPiAgewo+ID4gPiAgICAgIEFjY2VsQ2xhc3MgKmFjID0gQUNDRUxfQ0xBU1Mo
-b2MpOwo+ID4gPiArCj4gPiA+ICAgICAgYWMtPm5hbWUgPSAiWGVuIjsKPiA+ID4gICAgICBhYy0+
-aW5pdF9tYWNoaW5lID0geGVuX2luaXQ7Cj4gPiA+ICAgICAgYWMtPnNldHVwX3Bvc3QgPSB4ZW5f
-c2V0dXBfcG9zdDsKPiA+ID4gICAgICBhYy0+YWxsb3dlZCA9ICZ4ZW5fYWxsb3dlZDsKPiA+ID4g
-LSAgICBhYy0+Z2xvYmFsX3Byb3BzID0geGVuX2NvbXBhdF9wcm9wczsKPiA+ID4gKyAgICBhYy0+
-Y29tcGF0X3Byb3BzID0gZ19wdHJfYXJyYXlfbmV3KCk7Cj4gPiB3aGVyZSBpcyBtYXRjaGluZyBm
-cmVlIGZvciB0aGF0Pwo+IGNhbiB3ZSBhdCBsZWFzdCBhbm5vdGF0ZSBpdCBzb21laG93IHNvIHRo
-YXQgdmFsZ3JpbmQgd29uJ3QgY29tcGxhaW4gYWJvdXQgdGhpcyBsZWFrPwoKSWYgeW91IGNoZWNr
-IG15IGNvbW1pdHMgb24gcWVtdSwgeW91IHNob3VsZCBzZWUgdGhhdCBJIGRvIGNhcmUgKHRvbwpt
-dWNoPykgYWJvdXQgbGVha3MgOikKCkluIHRoaXMgY2FzZSB0aG91Z2gsIEkgZG9uJ3Qgc2VlIHZh
-bGdyaW5kIG9yIGFzYW4gY29tcGxhaW5pbmcsIEkgZ3Vlc3MKaXQncyBzdGlsbCBhIHJlYWNoYWJs
-ZSByZWZlcmVuY2UuCkRvIHlvdSB0aGluayBhIEZJWE1FIGNvbW1lbnQgd291bGQgYmUgaGVscGZ1
-bD8KCigvbWUgd2lzaCB3ZSBoYWQgYSBwcm9wZXIgb2JqZWN0IHN5c3RlbSwgR09iamVjdCwgYnV0
-IHRoYXQgc2hpcCBhcwpsb25nIHNhaWxlZC4uKQoKPgo+ID4KPiA+ID4gKwo+ID4gPiArICAgIGNv
-bXBhdF9wcm9wc19hZGQoYWMtPmNvbXBhdF9wcm9wcywKPiA+ID4gKyAgICAgICAgICAgICAgICAg
-ICAgIHhlbl9jb21wYXRfcHJvcHMsIEdfTl9FTEVNRU5UUyh4ZW5fY29tcGF0X3Byb3BzKSk7Cj4g
-PiA+ICB9Cj4gPiA+Cj4gPiA+ICAjZGVmaW5lIFRZUEVfWEVOX0FDQ0VMIEFDQ0VMX0NMQVNTX05B
-TUUoInhlbiIpCj4gPiA+IGRpZmYgLS1naXQgYS9xb20vb2JqZWN0LmMgYi9xb20vb2JqZWN0LmMK
-PiA+ID4gaW5kZXggMTc5MjFjMGE3MS4uZGJkYWIwYWVhZCAxMDA2NDQKPiA+ID4gLS0tIGEvcW9t
-L29iamVjdC5jCj4gPiA+ICsrKyBiL3FvbS9vYmplY3QuYwo+ID4gPiBAQCAtMzcwLDYgKzM3MCwz
-MSBAQCBzdGF0aWMgdm9pZCBvYmplY3RfcG9zdF9pbml0X3dpdGhfdHlwZShPYmplY3QgKm9iaiwg
-VHlwZUltcGwgKnRpKQo+ID4gPiAgICAgIH0KPiA+ID4gIH0KPiA+ID4KPiA+ID4gK3ZvaWQgb2Jq
-ZWN0X2FwcGx5X2dsb2JhbF9wcm9wcyhPYmplY3QgKm9iaiwgY29uc3QgR1B0ckFycmF5ICpwcm9w
-cywgRXJyb3IgKiplcnJwKQo+ID4gPiArewo+ID4gPiArICAgIEVycm9yICplcnIgPSBOVUxMOwo+
-ID4gPiArICAgIGludCBpOwo+ID4gPiArCj4gPiA+ICsgICAgaWYgKCFwcm9wcykgewo+ID4gPiAr
-ICAgICAgICByZXR1cm47Cj4gPiA+ICsgICAgfQo+ID4gPiArCj4gPiA+ICsgICAgZm9yIChpID0g
-MDsgaSA8IHByb3BzLT5sZW47IGkrKykgewo+ID4gPiArICAgICAgICBHbG9iYWxQcm9wZXJ0eSAq
-cCA9IGdfcHRyX2FycmF5X2luZGV4KHByb3BzLCBpKTsKPiA+ID4gKwo+ID4gPiArICAgICAgICBp
-ZiAob2JqZWN0X2R5bmFtaWNfY2FzdChvYmosIHAtPmRyaXZlcikgPT0gTlVMTCkgewo+ID4gPiAr
-ICAgICAgICAgICAgY29udGludWU7Cj4gPiA+ICsgICAgICAgIH0KPiA+ID4gKyAgICAgICAgcC0+
-dXNlZCA9IHRydWU7Cj4gPiA+ICsgICAgICAgIG9iamVjdF9wcm9wZXJ0eV9wYXJzZShvYmosIHAt
-PnZhbHVlLCBwLT5wcm9wZXJ0eSwgJmVycik7Cj4gPiA+ICsgICAgICAgIGlmIChlcnIgIT0gTlVM
-TCkgewo+ID4gPiArICAgICAgICAgICAgZXJyb3JfcHJlcGVuZCgmZXJyLCAiY2FuJ3QgYXBwbHkg
-Z2xvYmFsICVzLiVzPSVzOiAiLAo+ID4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICBwLT5k
-cml2ZXIsIHAtPnByb3BlcnR5LCBwLT52YWx1ZSk7Cj4gPiA+ICsgICAgICAgICAgICBlcnJvcl9w
-cm9wYWdhdGUoZXJycCwgZXJyKTsKPiA+ID4gKyAgICAgICAgfQo+ID4gPiArICAgIH0KPiA+ID4g
-K30KPiA+ID4gKwo+ID4gPiAgc3RhdGljIHZvaWQgb2JqZWN0X2luaXRpYWxpemVfd2l0aF90eXBl
-KHZvaWQgKmRhdGEsIHNpemVfdCBzaXplLCBUeXBlSW1wbCAqdHlwZSkKPiA+ID4gIHsKPiA+ID4g
-ICAgICBPYmplY3QgKm9iaiA9IGRhdGE7Cj4gPiA+IGRpZmYgLS1naXQgYS92bC5jIGIvdmwuYwo+
-ID4gPiBpbmRleCBhNWFlNWYyM2QyLi44OGJhNjU4NTcyIDEwMDY0NAo+ID4gPiAtLS0gYS92bC5j
-Cj4gPiA+ICsrKyBiL3ZsLmMKPiA+ID4gQEAgLTI5NjgsNyArMjk2OCw2IEBAIHN0YXRpYyB2b2lk
-IHVzZXJfcmVnaXN0ZXJfZ2xvYmFsX3Byb3BzKHZvaWQpCj4gPiA+ICAgKi8KPiA+ID4gIHN0YXRp
-YyB2b2lkIHJlZ2lzdGVyX2dsb2JhbF9wcm9wZXJ0aWVzKE1hY2hpbmVTdGF0ZSAqbXMpCj4gPiA+
-ICB7Cj4gPiA+IC0gICAgYWNjZWxfcmVnaXN0ZXJfY29tcGF0X3Byb3BzKG1zLT5hY2NlbGVyYXRv
-cik7Cj4gPiA+ICAgICAgbWFjaGluZV9yZWdpc3Rlcl9jb21wYXRfcHJvcHMobXMpOwo+ID4gPiAg
-ICAgIHVzZXJfcmVnaXN0ZXJfZ2xvYmFsX3Byb3BzKCk7Cj4gPiA+ICB9Cj4gPgo+ID4KPgo+CgoK
-LS0gCk1hcmMtQW5kcsOpIEx1cmVhdQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+
+--===============0549453645388623633==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="C7zPtVaVf+AK4Oqc"
+Content-Disposition: inline
+
+
+--C7zPtVaVf+AK4Oqc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Am 12.12.2018 um 09:59 hat Olaf Hering geschrieben:
+> On Fri, Nov 02, Kevin Wolf wrote:
+>=20
+> > A while ago, a downstream patch review found out that there are some QMP
+> > commands that would immediately crash if a xen_disk device were present
+> > because of the lacking qdevification. This is not the code quality
+> > standard I envision for QEMU. It's time for non-qdev devices to go.
+>=20
+> Do you have that backwards by any chance? IMO the presence of assert()
+> contributes to bad code quality, not the drivers that trigger those
+> asserts.
+
+You like shooting the messenger, it seems? Bugs aren't bad, only
+catching them is?
+
+But anyway, in this case, I seem to remember it was a plain old
+segfault, not a failed assertion.
+
+Kevin
+
+--C7zPtVaVf+AK4Oqc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJcEPkKAAoJEH8JsnLIjy/WfOkP/ilV8ovJG80SyTXbBf5iGlTf
+92OkHNDm8N+VfVuMFTCXiaIkkwCFbtvDKfI3LYUngh7PgIevZCYJWgjOQRJl7pZi
+ki4Fptcei2B7kLgtKBCECQEpPUaycTHpqVlSsPBBJ7q8EMH7by7DEs8oH7AvxJNx
+tfdbhESKNQKrj4igZuq6VwpwyqOOyrl//CKkGon8Wsz5NiHmww9e4jxcH3gIjx+U
+BFwaB7NP8XjsbDncHzp9Z+p4G3wasbymy9Hq8GM9ujyg/XJwgBGfAEcm6VzGCaO2
+ufUumuxkHlu8HCqtaG3Yw2RHzGtzMJ92GUJj2k4apuXQf5sZnE1OYxq0djN7JGrm
+Y/ie86jw+jONwFNn1CVC/h9UCFOrkaPNvxstes2UxBb3jESpRnUtEdIEsWRyNPfH
+Cw9DC35Qww3o52R6sjoy6HlN3xeu6jEnc+cP8WDVONYwmpePXZQ7Lg0BWArAgkrS
+FyWUWnGZKUVeTcI4/SthtN5Jw3UTsF3KFklDPvVm7TQ/3YxVHjtsSdOaVPzCT5pH
+xc9TBuso6i827+WRre6hGSgQw5E15wjORT4/xaD8tEy8vz4HwUQ5bKyQDTGXouOt
+fKJGQjPwszI1RQddoZdNpJdBLLxTs54vxtGEZXbX6o02HfwqAoQBEhOJlBhNKSuY
+BmN8CKru3jSU5bvKKyVX
+=795z
+-----END PGP SIGNATURE-----
+
+--C7zPtVaVf+AK4Oqc--
+
+
+--===============0549453645388623633==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0549453645388623633==--
