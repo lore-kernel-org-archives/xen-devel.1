@@ -1,29 +1,34 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 1/2] x86/dom0: rename paging function
-Date: Wed, 12 Dec 2018 18:05:19 +0100
-Message-ID: <20181212170519.remicvdevdl6r65n@mac>
-References: <20181205145500.11989-2-roger.pau@citrix.com>
- <5C0FD3030200007800205203@prv1-mh.provo.novell.com>
- <20181211151936.yr6s3dokmmpkgt5w@mac>
- <5C0FD8B40200007800205267@prv1-mh.provo.novell.com>
- <20181212091455.xziv2gbsswljlur2@mac>
- <5C10DA96020000780020560C@prv1-mh.provo.novell.com>
- <20181212100407.j5hg4vqi2l4kjvsk@mac>
- <5C10E3D5020000780020564D@prv1-mh.provo.novell.com>
- <20181212155608.nujhjevz2yyqfjdw@mac>
- <5C11340D02000078002058FA@prv1-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: Xen optimization
+Date: Wed, 12 Dec 2018 18:10:10 +0100
+Message-ID: <a2365222cf2beec45fc64a0da90f4249b58cc6fe.camel@suse.com>
+References: <CADJ6SV1__ZWDhGWoW7u=W54zG1STSnchkg0enyQoPyEB9YGXPg@mail.gmail.com>
+ <d5769cb9-9d87-3db4-e23d-414242692a89@arm.com>
+ <alpine.DEB.2.10.1810250915030.25937@sstabellini-ThinkPad-X260>
+ <94c08d07-b028-8eb1-7e94-21a416cd8007@arm.com>
+ <alpine.DEB.2.10.1810261340530.32521@sstabellini-ThinkPad-X260>
+ <CADJ6SV174NdceJ4kWCWYJ-UaNp1AAisb28V5tgKz14N+-pBVEg@mail.gmail.com>
+ <67f6ece7-0a26-e29c-b20b-acf83a01f6eb@arm.com>
+ <CADJ6SV22eAxR0s0ocpGNRRefo+FmsMz9KsEeXw+cME1sSM-ssg@mail.gmail.com>
+ <a5eab71a-f301-67ae-cc22-8cf10715fdcd@arm.com>
+ <alpine.DEB.2.10.1811011320050.7220@sstabellini-ThinkPad-X260>
+ <35b44b61-9d2d-60d0-97ee-5b8c00e8be6d@gmail.com>
+ <alpine.DEB.2.10.1811271320170.4577@sstabellini-ThinkPad-X260>
+ <bb88ca15-381c-014c-2f6c-e5de33b4b15a@gmail.com>
+ <CAF3u54BcT=-wnGKaDY1c3AvaDrV7eiiiedjaqbsavsQ4YaDWug@mail.gmail.com>
+ <b5315a79-26a9-7542-2c73-740883280275@gmail.com>
+ <1ca5735f-638a-6949-6a15-2fe4aa665114@arm.com>
+ <a53d1bd000d3c6af44ed02997d0484405875aab2.camel@suse.com>
+ <4dcdf98b-aed4-8b5a-ced8-9c982b5ee7dd@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2236752124387123297=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=9xWB=OV=citrix.com=prvs=87720dd39=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gX803-00076i-43
- for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 17:08:43 +0000
-Content-Disposition: inline
-In-Reply-To: <5C11340D02000078002058FA@prv1-mh.provo.novell.com>
+ <SRS0=SVFL=OV=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gX815-0007AT-5h
+ for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 17:09:47 +0000
+In-Reply-To: <4dcdf98b-aed4-8b5a-ced8-9c982b5ee7dd@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,51 +37,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, andrei.semenov@bertin.fr, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Andrii Anisov <andrii.anisov@gmail.com>, Julien Grall <julien.grall@arm.com>, Julien Grall <julien.grall@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com, Stefano Stabellini <stefano.stabellini@xilinx.com>, Milan Boberic <milanboberic94@gmail.com>, Meng Xu <xumengpanda@gmail.com>, xen-devel@lists.xenproject.org, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBEZWMgMTIsIDIwMTggYXQgMDk6MTU6MDlBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDEyLjEyLjE4IGF0IDE2OjU2LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
-b3RlOgo+ID4gT24gV2VkLCBEZWMgMTIsIDIwMTggYXQgMDM6MzI6NTNBTSAtMDcwMCwgSmFuIEJl
-dWxpY2ggd3JvdGU6Cj4gPj4gPj4+IE9uIDEyLjEyLjE4IGF0IDExOjA0LCA8cm9nZXIucGF1QGNp
-dHJpeC5jb20+IHdyb3RlOgo+ID4+ID4gWW91IG1lbnRpb25lZCB0aGVyZSdzIHNvbWUgY29kZSAo
-Zm9yIFBWPykgdG8gY2FsY3VsYXRlIHRoZSBzaXplIG9mIHRoZQo+ID4+ID4gcGFnZSB0YWJsZXMg
-YnV0IEknbSBoYXZpbmcgdHJvdWJsZSBmaW5kaW5nIGl0IChtYWlubHkgYmVjYXVzZSBJJ20gbm90
-Cj4gPj4gPiB0aGF0IGZhbWlsaWFyIHdpdGggUFYpLCBjb3VsZCB5b3UgcG9pbnQgbWUgdG8gaXQ/
-Cj4gPj4gCj4gPj4gSW4gZG9tMF9jb25zdHJ1Y3RfcHYoKSB5b3UnbGwgZmluZCBhIGxvb3Agc3Rh
-cnRpbmcgd2l0aAo+ID4+ICJmb3IgKCBucl9wdF9wYWdlcyA9IDI7IDsgbnJfcHRfcGFnZXMrKyAp
-Ii4gSXQncyBub3QgdGhlIG5lYXRlc3QsCj4gPj4gYnV0IGF0IGxlYXN0IHdlJ3ZlIG5ldmVyIGhh
-ZCByZXBvcnRzIG9mIGZhaWx1cmUuCj4gPiAKPiA+IFRoYXQgc2VlbXMgcXVpdGUgY29tcGxpY2F0
-ZWQsIHdoYXQgYWJvdXQgdXNpbmcgdGhlIGZvcm11bGEgYmVsb3c6Cj4gPiAKPiA+IC8qCj4gPiAg
-KiBBcHByb3hpbWF0ZSB0aGUgbWVtb3J5IHJlcXVpcmVkIGZvciB0aGUgSEFQL0lPTU1VIHBhZ2Ug
-dGFibGVzIGJ5Cj4gPiAgKiBwZXNzaW1pc3RpY2FsbHkgYXNzdW1pbmcgZXZlcnkgZ3Vlc3QgcGFn
-ZSB3aWxsIHVzZSBhIHAybSBwYWdlIHRhYmxlCj4gPiAgKiBlbnRyeS4KPiA+ICAqLwo+ID4gcmV0
-dXJuIERJVl9ST1VORF9VUCgoCj4gPiAgICAgLyogQWNjb3VudCBmb3Igb25lIGVudHJ5IGluIHRo
-ZSBMMSBwZXIgcGFnZS4gKi8KPiA+ICAgICBucl9wYWdlcyArCj4gPiAgICAgLyogQWNjb3VudCBm
-b3Igb25lIGVudHJ5IGluIHRoZSBMMiBwZXIgNTEyIHBhZ2VzLiAqLwo+ID4gICAgIERJVl9ST1VO
-RF9VUChucl9wYWdlcywgNTEyKSArCj4gPiAgICAgLyogQWNjb3VudCBmb3Igb25lIGVudHJ5IGlu
-IHRoZSBMMyBwZXIgNTEyXjIgcGFnZXMuICovCj4gPiAgICAgRElWX1JPVU5EX1VQKG5yX3BhZ2Vz
-LCA1MTIgKiA1MTIpICsKPiA+ICAgICAvKiBBY2NvdW50IGZvciBvbmUgZW50cnkgaW4gdGhlIEw0
-IHBlciA1MTJeMyBwYWdlcy4gKi8KPiA+ICAgICBESVZfUk9VTkRfVVAobnJfcGFnZXMsIDUxMiAq
-IDUxMiAqIDUxMikgKwo+ID4gICAgICkgKiA4LCBQQUdFX1NJWkUgPDwgUEFHRV9PUkRFUl80Syk7
-Cj4gPiAKPiA+IFRoYXQgdGFrZXMgaW50byBhY2NvdW50IGhpZ2hlciBsZXZlbCBwYWdlIHRhYmxl
-IHN0cnVjdHVyZXMuCj4gCj4gVGhhdCdzIGEgZmFpciBhcHByb3hpbWF0aW9uIHdpdGhvdXQgMk0g
-YW5kIDFHIHBhZ2VzIGF2YWlsYWJsZS4gSSdtCj4gdW5jb252aW5jZWQgd2Ugd2FudCB0byBvdmVy
-LWVzdGltYXRlIHRoaXMgaGVhdmlseSBpbiB0aGUgbW9yZQo+IGNvbW1vbiBjYXNlIG9mIGxhcmdl
-IHBhZ2UgbWFwcGluZ3MgYmVpbmcgYXZhaWxhYmxlLiBPdG9oIHRoaXMKPiBwcm92aWRlcyBlbm91
-Z2ggcmVzb3VyY2VzIHRvIGxhdGVyIGFsc28gZGVhbCB3aXRoIHNoYXR0ZXJpbmcgb2YKPiBsYXJn
-ZSBwYWdlcy4KPiAKPiBUaGUgTU1JTyBzaWRlIG9mIHRoaW5ncyBvZiBjb3Vyc2Ugc3RpbGwgcmVt
-YWlucyB1bmNsZWFyLgoKUmlnaHQsIGZvciB0aGUgTU1JTyBhbmQgdGhlIGhhbmRsaW5nIG9mIGdy
-YW50IGFuZCBmb3JlaWduIG1hcHBpbmdzIGl0J3MKbm90IGNsZWFyIGhvdyB3ZSB3YW50IHRvIHBy
-b2NlZWQuCgpNYXliZSBhY2NvdW50IGZvciBhbGwgaG9zdCBSQU0gKHRvdGFsX3BhZ2VzKSBwbHVz
-IE1NSU8gQkFScz8KCj4gV2hhdCBJIGRvbid0IHVuZGVyc3RhbmQgaW4gYW55IGNhc2UgdGhvdWdo
-IGlzCj4gIlBBR0VfU0laRSA8PCBQQUdFX09SREVSXzRLIi4gVGhpcyBpcyB4ODYgY29kZSAtIHdo
-eSBub3QKPiBqdXN0IFBBR0VfU0laRT8KCk9oLCBJJ3ZlIGRvbmUgaXQgbGlrZSB0aGF0IGJlY2F1
-c2UgdGhpcyBpcyByZWxhdGVkIHRvIHAybSBjb2RlLCB3aGljaAp1c2VzIHRoaXMgd2F5IHRvIGdl
-dCB0aGUgcGFnZSBzaXplLiBJSVJDIHlvdSB0b2xkIG1lIHRvIHVzZSB0aGlzIGZvcgp0aGluZ3Mg
-bGlrZSBwdmhfc2V0dXBfZTgyMC4gSSBkb24ndCBtaW5kIHN3aXRjaGluZyB0byBqdXN0IFBBR0Vf
-U0laRS4KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+
+--===============2236752124387123297==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-iEi05gP7Mc3lLpFjZyu2"
+
+
+--=-iEi05gP7Mc3lLpFjZyu2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2018-12-12 at 11:39 +0200, Andrii Anisov wrote:
+> Hello Dario,
+>=20
+Hi,
+
+> On 11.12.18 18:56, Dario Faggioli wrote:
+> > Also, what about Xen numbers, sched=3Dnull.
+> Didn't check, will put on the list.
+>=20
+:-)
+
+> > I don't expect much improvement, considering pinning is in-place
+> > already.
+> Actually, I faced a strange issue with explicit pinning of Dom0.
+> Didn't sort out the cause yet. And Julien says it is not reproducible
+> on his desk.
+>
+Ah, yes... I've seen the thread. I haven't commented, as it is really,
+really weird, and I don't know what to think/say.
+
+I think only bisection could shed some light on this. And it would be
+wonderful if you could do that, but I understand that it takes time. :-
+/
+
+> But yes, with VCPU number less than PCPUs - there is no migration of
+> Dom0 VCPUs.
+>=20
+Are you absolutely sure about that? That is, are you "just" assuming
+the scheduler won't move stuff, or have you put some debugging or
+printing in place to verify that to be the case?=20
+
+I'm asking because, yet, in theory that is what one would expect. But,
+as I think you know very well, although in theory there is no
+difference between theory and practice, in practice, there is. :-)
+
+Regards,
+Dario
+
+> [1]https://lists.xenproject.org/archives/html/xen-devel/2018-12/msg00435.=
+html
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-iEi05gP7Mc3lLpFjZyu2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlwRQPIACgkQFkJ4iaW4
+c+7Xnw/+LQTHE6wQRDwD6vtP2TQk7PtJ0kDf4kO3QAkisDJ3w0IdI27G+ArioeUG
+6VwRuJzYA0aY3QDV0jAbxc1OfF2mg4wBkQoRXFfi5To5Bdcv6RyJXCQhmMFwJ6SX
+tvKOAT33dZfVfZisUfao+FDnUovjmqlwjngiEBaP5t5HXRqQMA8D7W6jAOJv5xf7
+D51Tq30emZYOVc3CxJBj6Jv7zlIzzwisqrl5nqmx9N8o+EX+V37ISpyl7t2qJllS
+hMICl51yqNOhu++DSn6x4Vw5q8l4/xBwd8GcpHbMPgvNeT3D6vQ/IXUaYaTMFWC6
+aJE0+qlXcUDg71n1mxyYgxgN9h5yAkVSwN2m4VYebesoIjMBZCSXTP3utvffV25g
+JsPlaj3uavv/VBkf5MgTnxh/QocdTzWML8fxP4VJue/qTKh4E2pQDF7JrSI/j2fj
+NQjVaqp4zeH9m/xW2nI7lKSOtKrjapjhU7HzAfvARRny3JujID6vLDwcObS+Itmd
+4nhUt+c3PSogzfLPz1+MYqROSuEK5vozT3S3m//stjsofd1havettW2S5retAdUw
+CyGVk61gQyQwIUN83g3sdpMLvY9xHs73QS8+K5HHmC1epcoRU+iXrCcWsqW8eshf
+k7AUDg9lTP41h9RyA1qO8wEyxjcnuaWvp3fFGfjL9Tzk1TqrzYA=
+=zahY
+-----END PGP SIGNATURE-----
+
+--=-iEi05gP7Mc3lLpFjZyu2--
+
+
+
+--===============2236752124387123297==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2236752124387123297==--
