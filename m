@@ -1,21 +1,22 @@
-From: Kevin Wolf <kwolf@redhat.com>
-Subject: Re: xen_disk qdevification (was: [PATCH 0/3]
- Performance improvements for xen_disk v2)
-Date: Wed, 12 Dec 2018 13:03:22 +0100
-Message-ID: <20181212120322.GA5415__43585.911152377$1544616129$gmane$org@linux.fritz.box>
+From: Markus Armbruster <armbru@redhat.com>
+Subject: Re: [Qemu-devel]  xen_disk qdevification
+Date: Wed, 12 Dec 2018 13:04:04 +0100
+Message-ID: <87y38vhryj.fsf__17886.9033269168$1544616167$gmane$org@dusky.pond.sub.org>
 References: <154115285434.11300.8459925605672823399.stgit@dhcp-3-135.uk.xensource.com>
  <20181102110412.GD7521@dhcp-200-186.str.redhat.com>
  <20181212085951.GA7604@aepfle.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0549453645388623633=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=UI0V=OV=redhat.com=kwolf@srs-us1.protection.inumbo.net>)
- id 1gX3Ee-0007NF-4K
- for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 12:03:28 +0000
-In-Reply-To: <20181212085951.GA7604@aepfle.de>
+ (envelope-from <SRS0=7QV9=OV=redhat.com=armbru@srs-us1.protection.inumbo.net>)
+ id 1gX3FJ-0007R1-LT
+ for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 12:04:09 +0000
+In-Reply-To: <20181212085951.GA7604@aepfle.de> (Olaf Hering's message of "Wed,
+ 12 Dec 2018 09:59:51 +0100")
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,72 +26,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Olaf Hering <olaf@aepfle.de>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, Tim Smith <tim.smith@citrix.com>, armbru@redhat.com, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, Tim Smith <tim.smith@citrix.com>, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0549453645388623633==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="C7zPtVaVf+AK4Oqc"
-Content-Disposition: inline
-
-
---C7zPtVaVf+AK4Oqc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Am 12.12.2018 um 09:59 hat Olaf Hering geschrieben:
-> On Fri, Nov 02, Kevin Wolf wrote:
->=20
-> > A while ago, a downstream patch review found out that there are some QMP
-> > commands that would immediately crash if a xen_disk device were present
-> > because of the lacking qdevification. This is not the code quality
-> > standard I envision for QEMU. It's time for non-qdev devices to go.
->=20
-> Do you have that backwards by any chance? IMO the presence of assert()
-> contributes to bad code quality, not the drivers that trigger those
-> asserts.
-
-You like shooting the messenger, it seems? Bugs aren't bad, only
-catching them is?
-
-But anyway, in this case, I seem to remember it was a plain old
-segfault, not a failed assertion.
-
-Kevin
-
---C7zPtVaVf+AK4Oqc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIcBAEBAgAGBQJcEPkKAAoJEH8JsnLIjy/WfOkP/ilV8ovJG80SyTXbBf5iGlTf
-92OkHNDm8N+VfVuMFTCXiaIkkwCFbtvDKfI3LYUngh7PgIevZCYJWgjOQRJl7pZi
-ki4Fptcei2B7kLgtKBCECQEpPUaycTHpqVlSsPBBJ7q8EMH7by7DEs8oH7AvxJNx
-tfdbhESKNQKrj4igZuq6VwpwyqOOyrl//CKkGon8Wsz5NiHmww9e4jxcH3gIjx+U
-BFwaB7NP8XjsbDncHzp9Z+p4G3wasbymy9Hq8GM9ujyg/XJwgBGfAEcm6VzGCaO2
-ufUumuxkHlu8HCqtaG3Yw2RHzGtzMJ92GUJj2k4apuXQf5sZnE1OYxq0djN7JGrm
-Y/ie86jw+jONwFNn1CVC/h9UCFOrkaPNvxstes2UxBb3jESpRnUtEdIEsWRyNPfH
-Cw9DC35Qww3o52R6sjoy6HlN3xeu6jEnc+cP8WDVONYwmpePXZQ7Lg0BWArAgkrS
-FyWUWnGZKUVeTcI4/SthtN5Jw3UTsF3KFklDPvVm7TQ/3YxVHjtsSdOaVPzCT5pH
-xc9TBuso6i827+WRre6hGSgQw5E15wjORT4/xaD8tEy8vz4HwUQ5bKyQDTGXouOt
-fKJGQjPwszI1RQddoZdNpJdBLLxTs54vxtGEZXbX6o02HfwqAoQBEhOJlBhNKSuY
-BmN8CKru3jSU5bvKKyVX
-=795z
------END PGP SIGNATURE-----
-
---C7zPtVaVf+AK4Oqc--
-
-
---===============0549453645388623633==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0549453645388623633==--
+T2xhZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPiB3cml0ZXM6Cgo+IE9uIEZyaSwgTm92IDAyLCBL
+ZXZpbiBXb2xmIHdyb3RlOgo+Cj4+IEEgd2hpbGUgYWdvLCBhIGRvd25zdHJlYW0gcGF0Y2ggcmV2
+aWV3IGZvdW5kIG91dCB0aGF0IHRoZXJlIGFyZSBzb21lIFFNUAo+PiBjb21tYW5kcyB0aGF0IHdv
+dWxkIGltbWVkaWF0ZWx5IGNyYXNoIGlmIGEgeGVuX2Rpc2sgZGV2aWNlIHdlcmUgcHJlc2VudAo+
+PiBiZWNhdXNlIG9mIHRoZSBsYWNraW5nIHFkZXZpZmljYXRpb24uIFRoaXMgaXMgbm90IHRoZSBj
+b2RlIHF1YWxpdHkKPj4gc3RhbmRhcmQgSSBlbnZpc2lvbiBmb3IgUUVNVS4gSXQncyB0aW1lIGZv
+ciBub24tcWRldiBkZXZpY2VzIHRvIGdvLgo+Cj4gRG8geW91IGhhdmUgdGhhdCBiYWNrd2FyZHMg
+YnkgYW55IGNoYW5jZT8gSU1PIHRoZSBwcmVzZW5jZSBvZiBhc3NlcnQoKQo+IGNvbnRyaWJ1dGVz
+IHRvIGJhZCBjb2RlIHF1YWxpdHksIG5vdCB0aGUgZHJpdmVycyB0aGF0IHRyaWdnZXIgdGhvc2UK
+PiBhc3NlcnRzLiBJdCBpcyBiYWQgZW5vdWdoIHRoYXQgdHdvIFFFTVUgcmVsZWFzZXMgd2VudCBv
+dXQgd2hpbGUgYmVpbmcgaW4KPiBiYWQgc2hhcGUuCgpDb252ZXJ0aW5nIGJsb2NrIGRldmljZXMg
+dG8gdGhlIHFkZXYgaW5mcmFzdHJ1Y3R1cmUgKGludHJvZHVjZWQgaW4gMjAwOSkKaGFzIGJlZW4g
+YSBsb25nd2luZGVkIGFmZmFpci4gIFdlJ3ZlIHJlcGVhdGVkbHkgcmVtaW5kZWQgcGVvcGxlIGlu
+CmNoYXJnZSBvZiB0aGUgc3RyYWdnbGVycyB0byB1cGRhdGUgdGhlaXIgY29kZS4KCk5lZ2xlY3Rp
+bmcgdG8gdXBkYXRlIGNvZGUgdG8gY3VycmVudCBpbmZyYXN0cnVjdHVyZSBjcmVhdGVzIGEgYnVy
+ZGVuIGFuZAphIHJpc2suICBUaGUgYnVyZGVuIGlzIG9uIHRoZSBtYWludGFpbmVycyBvZiB0aGUg
+aW5mcmFzdHJ1Y3R1cmU6IHRoZXkKZ2V0IHRvIGRyYWcgYWxvbmcgb3V0bW9kZWQgaW5mcmFzdHJ1
+Y3R1cmUuICBUaGUgcmlzayBpcyBvbiB0aGUgdXNlcnMgb2YKdGhlIGNvZGU6IGl0IGJlY29tZXMg
+YSBzcGVjaWFsIGNhc2UsIGFuZCBldmVudHVhbGx5IGFjcXVpcmVzIGl0cyBzcGVjaWFsCmJ1Z3Mu
+CgpQdXR0aW5nIHRoZSBibGFtZSBmb3IgdGhlbSBlbnRpcmVseSBvbiB0aGUgbWFpbnRhaW5lcnMg
+b2YgdGhlCmluZnJhc3RydWN0dXJlIGlzIG5vdCBmYWlyLgoKPiBBbnl3YXksIGhvcGVmdWxseSBQ
+YXVsIG9yIHdob2V2ZXIgd2lsbCBmaW5kIHRoZSB0aW1lIGFuZCBlbmVyZ3kgdG8KPiBjb252ZXJ0
+IHRoZSBjb2RlIGF0IHNvbWUgcG9pbnQuCgpZZXMsIFBhdWwncyB0YWtpbmcgY2FyZSBvZiBpdC4g
+IE11Y2ggYXBwcmVjaWF0ZWQuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
