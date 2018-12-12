@@ -1,23 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] xen: xen-pciback: Reset MSI-X state when
- exposing a device
-Date: Wed, 12 Dec 2018 01:51:01 -0700
-Message-ID: <5C10CBF50200007800205596__27.0853554413364$1544604603$gmane$org@prv1-mh.provo.novell.com>
-References: <1543976357-1053-1-git-send-email-chao.gao@intel.com>
- <20181205093223.dncg4nq4dh6xmrhk@mac>
- <c27236d3-6125-4049-6268-3d9c93cf3ef2@oracle.com>
- <20181212070654.GA13411@gao-cwp>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: xen_disk qdevification (was: [PATCH 0/3]
+ Performance improvements for xen_disk v2)
+Date: Wed, 12 Dec 2018 09:59:51 +0100
+Message-ID: <20181212085951.GA7604__26250.2542617314$1544605141$gmane$org@aepfle.de>
+References: <154115285434.11300.8459925605672823399.stgit@dhcp-3-135.uk.xensource.com>
+ <20181102110412.GD7521@dhcp-200-186.str.redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0551161872194564193=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=KCT2=OV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gX0EV-0002LP-Jk
- for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 08:51:07 +0000
-In-Reply-To: <20181212070654.GA13411@gao-cwp>
-Content-Disposition: inline
+ (envelope-from <SRS0=dC9x=OV=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gX0N6-0002i5-2P
+ for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 09:00:00 +0000
+In-Reply-To: <20181102110412.GD7521@dhcp-200-186.str.redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,68 +22,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Chao Gao <chao.gao@intel.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org, Jia-Ju Bai <baijiaju1990@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Kevin Wolf <kwolf@redhat.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, Tim Smith <tim.smith@citrix.com>, armbru@redhat.com, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEyLjEyLjE4IGF0IDA4OjA2LCA8Y2hhby5nYW9AaW50ZWwuY29tPiB3cm90ZToKPiBP
-biBXZWQsIERlYyAwNSwgMjAxOCBhdCAwOTowMTozM0FNIC0wNTAwLCBCb3JpcyBPc3Ryb3Zza3kg
-d3JvdGU6Cj4+T24gMTIvNS8xOCA0OjMyIEFNLCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOgo+Pj4g
-T24gV2VkLCBEZWMgMDUsIDIwMTggYXQgMTA6MTk6MTdBTSArMDgwMCwgQ2hhbyBHYW8gd3JvdGU6
-Cj4+Pj4gSSBmaW5kIHNvbWUgcGFzcy10aHJ1IGRldmljZXMgZG9uJ3Qgd29yayBhbnkgbW9yZSBh
-Y3Jvc3MgZ3Vlc3QgcmVib290Lgo+Pj4+IEFzc2lnbmluZyBpdCB0byBhbm90aGVyIGd1ZXN0IGFs
-c28gbWVldHMgdGhlIHNhbWUgaXNzdWUuIEFuZCB0aGUgb25seQo+Pj4+IHdheSB0byBtYWtlIGl0
-IHdvcmsgYWdhaW4gaXMgdW4tYmluZGluZyBhbmQgYmluZGluZyBpdCB0byBwY2liYWNrLgo+Pj4+
-IFNvbWVvbmUgcmVwb3J0ZWQgdGhpcyBpc3N1ZSBvbmUgeWVhciBhZ28gWzFdLiBNb3JlIGRldGFp
-bCBhbHNvIGNhbiBiZQo+Pj4+IGZvdW5kIGluIFsyXS4KPj4+Pgo+Pj4+IFRoZSByb290LWNhdXNl
-IGlzIFhlbidzIGludGVybmFsIE1TSS1YIHN0YXRlIGlzbid0IHJlc2V0IHByb3Blcmx5Cj4+Pj4g
-ZHVyaW5nIHJlYm9vdCBvciByZS1hc3NpZ25tZW50LiBJbiB0aGUgYWJvdmUgY2FzZSwgWGVuIHNl
-dCBtYXNrYWxsIGJpdAo+Pj4+IHRvIG1hc2sgYWxsIE1TSSBpbnRlcnJ1cHRzIGFmdGVyIGl0IGRl
-dGVjdGVkIGEgcG90ZW50aWFsIHNlY3VyaXR5Cj4+Pj4gaXNzdWUuIEV2ZW4gYWZ0ZXIgZGV2aWNl
-IHJlc2V0LCBYZW4gZGlkbid0IHJlc2V0IGl0cyBpbnRlcm5hbCBtYXNrYWxsCj4+Pj4gYml0LiBB
-cyBhIHJlc3VsdCwgbWFza2FsbCBiaXQgd291bGQgYmUgc2V0IGFnYWluIGluIG5leHQgd3JpdGUg
-dG8KPj4+PiBNU0ktWCBtZXNzYWdlIGNvbnRyb2wgcmVnaXN0ZXIuCj4+Pj4KPj4+PiBHaXZlbiB0
-aGF0IFBIWVNERVZPUFNfcHJlcGFyZV9tc2l4KCkgYWxzbyB0cmlnZ2VycyBYZW4gcmVzZXR0aW5n
-IE1TSS1YCj4+Pj4gaW50ZXJuYWwgc3RhdGUgb2YgYSBkZXZpY2UsIHdlIGVtcGxveSBpdCB0byBm
-aXggdGhpcyBpc3N1ZSByYXRoZXIgdGhhbgo+Pj4+IGludHJvZHVjaW5nIGFub3RoZXIgZGVkaWNh
-dGVkIHN1Yi1oeXBlcmNhbGwuCj4+Pj4KPj4+PiBOb3RlIHRoYXQgUEhZU0RFVk9QU19yZWxlYXNl
-X21zaXgoKSB3aWxsIGZhaWwgaWYgdGhlIG1hcHBpbmcgYmV0d2Vlbgo+Pj4+IHRoZSBkZXZpY2Un
-cyBtc2l4IGFuZCBwaXJxIGhhcyBiZWVuIGNyZWF0ZWQuIFRoaXMgbGltaXRhdGlvbiBwcmV2ZW50
-cwo+Pj4+IHVzIGNhbGxpbmcgdGhpcyBmdW5jdGlvbiB3aGVuIGRldGFjaGluZyBhIGRldmljZSBm
-cm9tIGEgZ3Vlc3QgZHVyaW5nCj4+Pj4gZ3Vlc3Qgc2h1dGRvd24uIFRodXMgaXQgaXMgY2FsbGVk
-IHJpZ2h0IGJlZm9yZSBjYWxsaW5nCj4+Pj4gUEhZU0RFVk9QU19wcmVwYXJlX21zaXgoKS4KPj4+
-IHMvUEhZU0RFVk9QUy9QSFlTREVWT1AvIChubyBmaW5hbCBTKS4gQW5kIHRoZW4gSSB3b3VsZCBh
-bHNvIGRyb3AgdGhlCj4+PiAoKSBhdCB0aGUgZW5kIG9mIHRoZSBoeXBlcmNhbGwgbmFtZSBzaW5j
-ZSBpdCdzIG5vdCBhIGZ1bmN0aW9uLgo+Pj4KPj4+IEknbSBhbHNvIHdvbmRlcmluZyB3aHkgdGhl
-IHJlbGVhc2UgY2FuJ3QgYmUgZG9uZSB3aGVuIHRoZSBkZXZpY2UgaXMKPj4+IGRldGFjaGVkIGZy
-b20gdGhlIGd1ZXN0IChvciB0aGUgZ3Vlc3QgaGFzIGJlZW4gc2h1dCBkb3duKS4gVGhpcyBtYWtl
-cwo+Pj4gbWUgd29ycnkgYWJvdXQgdGhlIHJhY2luZXNzIG9mIHRoZSBhdHRhY2gvZGV0YWNoIHBy
-b2NlZHVyZTogaWYgdGhlcmUncwo+Pj4gYSBzdGF0ZSB3aGVyZSBwY2liYWNrIGFzc3VtZXMgdGhl
-IGRldmljZSBoYXMgYmVlbiBkZXRhY2hlZCBmcm9tIHRoZQo+Pj4gZ3Vlc3QsIGJ1dCB0aGVyZSBh
-cmUgc3RpbGwgcGlycXMgYm91bmQsIGFuIGF0dGVtcHQgdG8gYXR0YWNoIHRvCj4+PiBhbm90aGVy
-IGd1ZXN0IGluIHN1Y2ggc3RhdGUgd2lsbCBmYWlsLgo+Pgo+Pkkgd29uZGVyIHdoZXRoZXIgdGhp
-cyBhZGRpdGlvbmFsIHJlc2V0IGZ1bmN0aW9uYWxpdHkgY291bGQgYmUgZG9uZSBvdXQKPj5vZiB4
-ZW5fcGNpYmtfeGVuYnVzX3JlbW92ZSgpLiBXZSBmaXJzdCBkbyBhIChiZXN0IGVmZm9ydCkgZGV2
-aWNlIHJlc2V0Cj4+YW5kIHRoZW4gZG8gdGhlIGV4dHJhIHRoaW5ncyB0aGF0IGFyZSBub3QgcHJv
-cGVybHkgZG9uZSB0aGVyZS4KPiAKPiBOby4gSXQgY2Fubm90IGJlIGRvbmUgaW4geGVuX3BjaWJr
-X3hlbmJ1c19yZW1vdmUoKSB3aXRob3V0IG1vZGlmeWluZwo+IHRoZSBoYW5kbGVyIG9mIFBIWVNE
-RVZPUF9yZWxlYXNlX21zaXguIFRvIGRvIGEgc3VjY2Vzc2Z1bCBYZW4gaW50ZXJuYWwKPiBNU0kt
-WCBzdGF0ZSByZXNldCwgUEhZU0RFVk9QX3tyZWxlYXNlLCBwcmVwYXJlfV9tc2l4IHNob3VsZCBi
-ZSBmaW5pc2hlZAo+IHdpdGhvdXQgZXJyb3IuIEJ1dCBBVE0sIHhlbiBleHBlY3RzIHRoYXQgbm8g
-bXNpIGlzIGJvdW5kIHRvIHBpcnEgd2hlbgo+IGRvaW5nIFBIWVNERVZPUF9yZWxlYXNlX21zaXgu
-IE90aGVyd2lzZSBpdCBmYWlscyB3aXRoIGVycm9yIGNvZGUgLUVCVVNZLgo+IEhvd2V2ZXIsIHRo
-ZSBleHBlY3RhdGlvbiBpc24ndCBndWFyYW50ZWVkIGluIHhlbl9wY2lia194ZW5idXNfcmVtb3Zl
-KCkuCj4gSW4gc29tZSBjYXNlcywgaWYgcWVtdSBmYWlscyB0byB1bm1hcCBNU0lzLCBNU0lzIGFy
-ZSB1bm1hcHBlZCBieSBYZW4KPiBhdCBsYXN0IG1pbnV0ZSwgd2hpY2ggaGFwcGVucyBhZnRlciBk
-ZXZpY2UgcmVzZXQgaW4gCj4geGVuX3BjaWJrX3hlbmJ1c19yZW1vdmUoKS4KCkJ1dCB0aGF0IG1h
-eSBuZWVkIHRha2luZyBjYXJlIG9mOiBJIGRvbid0IHRoaW5rIGl0IGlzIGEgZ29vZCBpZGVhIHRv
-IGhhdmUKYW55dGhpbmcgbGVmdCBmcm9tIHRoZSBwcmlvciBvd25pbmcgZG9tYWluIHdoZW4gdGhl
-IGRldmljZSBnZXRzIHJlc2V0LgpJLmUuIGxlZnQgb3ZlciBJUlEgYmluZGluZ3Mgc2hvdWxkIHBl
-cmhhcHMgYmUgZm9yY2libHkgY2xlYXJlZCBiZWZvcmUKaW52b2tpbmcgdGhlIHJlc2V0OyBpbiBm
-YWN0IEknZCBleHBlY3QgdGhpcyB0byBoYXBwZW4gaW4gdGhlIGNvdXJzZSBvZgpkb21haW4gZGVz
-dHJ1Y3Rpb24sIGFuZCBJJ2QgZXhwZWN0IHRoZSBkZXZpY2UgcmVzZXQgdG8gY29tZSBhZnRlciB0
-aGUKZG9tYWluIHdhcyBjbGVhbmVkIHVwLiBQZXJoYXBzIHNpbXBseSBhbiBvcmRlcmluZyBpc3N1
-ZSBpbiB0aGUgdG9vbApzdGFjaz8KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+
+--===============0551161872194564193==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="6TrnltStXW4iwmi0"
+Content-Disposition: inline
+
+
+--6TrnltStXW4iwmi0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Fri, Nov 02, Kevin Wolf wrote:
+
+> A while ago, a downstream patch review found out that there are some QMP
+> commands that would immediately crash if a xen_disk device were present
+> because of the lacking qdevification. This is not the code quality
+> standard I envision for QEMU. It's time for non-qdev devices to go.
+
+Do you have that backwards by any chance? IMO the presence of assert()
+contributes to bad code quality, not the drivers that trigger those
+asserts. It is bad enough that two QEMU releases went out while being in
+bad shape.
+
+Anyway, hopefully Paul or whoever will find the time and energy to
+convert the code at some point.
+
+Olaf
+
+--6TrnltStXW4iwmi0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXBDOBAAKCRBdQqD6ppg2
+flgGAJ9WXSO2VhOaGfhsfJ9KkXKAyXmKPACeK/AMD6NcJF0i7xTcABZXPyfNRaI=
+=eLgW
+-----END PGP SIGNATURE-----
+
+--6TrnltStXW4iwmi0--
+
+
+--===============0551161872194564193==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0551161872194564193==--
