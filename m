@@ -1,24 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH for-4.12 v2 16/17] xen/arm: Implement
- Set/Way operations
-Date: Wed, 12 Dec 2018 18:49:21 +0100
-Message-ID: <fb57e74bce733e5dc305f87070165db35526e7ae.camel@suse.com>
-References: <20181204202651.8836-1-julien.grall@arm.com>
- <20181204202651.8836-17-julien.grall@arm.com>
- <alpine.DEB.2.10.1812061445190.18779@sstabellini-ThinkPad-X260>
- <9540568a-bcd3-bd33-d036-25d8470140f5@arm.com>
- <alpine.DEB.2.10.1812071311540.18779@sstabellini-ThinkPad-X260>
- <851b26ab-be32-3d08-302f-3a49cb26c785@arm.com>
- <alpine.DEB.2.10.1812120925120.12259@sstabellini-ThinkPad-X260>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 2/2] arm/irq: skip action avalability check
+ for non-debug build
+Date: Wed, 12 Dec 2018 17:49:01 +0000
+Message-ID: <46211378-e63d-86bb-6ce9-d739b986b777@arm.com>
+References: <1544633725-7243-1-git-send-email-andrii.anisov@gmail.com>
+ <1544633725-7243-3-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7438437267862729942=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=SVFL=OV=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gX8dJ-0003Q1-DL
- for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 17:49:17 +0000
-In-Reply-To: <alpine.DEB.2.10.1812120925120.12259@sstabellini-ThinkPad-X260>
+ <SRS0=jH0D=OV=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gX8d7-0003OF-Py
+ for xen-devel@lists.xenproject.org; Wed, 12 Dec 2018 17:49:05 +0000
+In-Reply-To: <1544633725-7243-3-git-send-email-andrii.anisov@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,109 +24,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7438437267862729942==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-mKUfQ4FdnhAjIF0NFTM7"
-
-
---=-mKUfQ4FdnhAjIF0NFTM7
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2018-12-12 at 09:25 -0800, Stefano Stabellini wrote:
-> On Wed, 12 Dec 2018, Julien Grall wrote:
-> > > For Dario: basically we have a long running operation to perform,
-> we
-> > > thought that the best place for it would be on the path returning
-> to
-> > > guest (leave_hypervisor_tail). The operation can interrupt itself
-> > > checking sotfirq_pending() once in a while to avoid blocking the
-> pcpu
-> > > for too long.
-> > >=20
-> > > The question is: is it better to check sotfirq_pending() even
-> before
-> > > starting? Or every so often during the operating is good enough?
-> Does it
-> > > even matter?
-> > I am not sure to understand what is your concern here. Checking for
-> > softirq_pending() often is not an issue. The issue is when we
-> happen to not
-> > check it. At the moment, I would prefer to be over cautious until
-> we figure
-> > out whether this is a real issue.
-> >=20
-> > If you are concerned about the performance impact, this is only
-> called when a
-> > guest is using set/way.
->=20
-> Actually, I have no concerns, as I think it should make no
-> difference,
-> but I just wanted a second opinion.
->
-Yeah, sorry. I saw the email on Monday, but then got distracted.
-
-So, in this case, I personally don't think either solution is so much
-better (or so much worse) of the other one.
-
-In general, what's best may vary on a case-by-case basis (e.g., how
-long have we been non-preemptable already, when we entering the long
-running operation?).
-
-Therefore, if I'd want to be on the safe side, I think I would check
-before entering the loop (or whatever the long running op is
-implemented).
-
-The performance impact of just one more softirq_pending() check itself
-should really be negligible (even considering cache effects).
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-mKUfQ4FdnhAjIF0NFTM7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlwRSiEACgkQFkJ4iaW4
-c+7/JRAAn1m1IPcBU0F03AVv4bpuHTaGEnEME9y0o9B8NqfyHOi9scVdSRoL7M2z
-qb85TYlAKEIpmXdFNZQZdTNa5ZuwsZQfeWvarJCCHab70JBcgO1hDpUOp/jyVVu0
-3jeNekIvOWHtgmJKfumrqWL2tkuwT+NrMPq2/ZQyUwfzJFszU3rSlobcbiCvrFOh
-9A+hl0Yizvtueaa2J7/43E6rJP/WJszXV8rfiaGZjrs7bR4MLdn5pr2sjQZFmq6q
-cD1hXTNz6SK4ID2BK8S3D1FdELjYcH03CNSy/fRjwe7eXtQE7GKEIDC4KFU8w86Z
-Tw+791zWGFQWm2GSn3CGvHk5IVsxshBVBCiofqIj/T/vDw43zbJ9EhegxgUTkHO3
-hqEgiFuIrM38jVezg0nHl+ufoU/VabuWmvKOpVj6yRoW9A/Y4o71VBniB9F4VBpD
-9Z2aWxyj7CcMG+cfU6E3kz+c7GvTixoZLmvfqsvbwY7bV9TNjxLnrdZ7/lJkyWHg
-jXPlRLpAzg9be65G7CYpsgUTWTVZ1hZlt/boW3pXj8HvMvCARu19WyFFoF7ony75
-hntpGRYAXqeBYjGy5aCjMyxUKwOjbajfnoU97K5coNn4XsfWMH/mUuw17JWK4oZI
-tN5HfI1Fr635GB2Iefjx6XSNVqykF1gI2QkKHYt/GRLRdk9KHeQ=
-=tc4v
------END PGP SIGNATURE-----
-
---=-mKUfQ4FdnhAjIF0NFTM7--
-
-
-
---===============7438437267862729942==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7438437267862729942==--
+VGl0bGU6IHMvYXZhbGFiaWxpdHkvYXZhaWxhYmlsaXR5LwoKT24gMTIvMTIvMjAxOCAxNjo1NSwg
+QW5kcmlpIEFuaXNvdiB3cm90ZToKPiBGcm9tOiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292
+QGVwYW0uY29tPgo+IAo+IEFuIElSUSB3aXRoIF9JUlFfR1VFU1QgZmxhZyBzZXQgYWx3YXlzIGhh
+cyBhbiBhY3Rpb24uCj4gQW4gSVJRIHdpdGggX0lSUV9ESVNBQkxFRCBmbGFnIGNsZWFyZWQgYWx3
+YXlzIGhhdmUgYW4gYWN0aW9uLgoKcy9oYXZlL2hhcy8KClRob3NlIGNvbmRpdGlvbnMgYXJlIG5v
+dCBzdWZmaWNpZW50IHRvIGVuc3VyZSBkZXNjLT5hY3Rpb24gaXMgbm90IE5VTEwuIFlvdSBhbHNv
+IApuZWVkIHRvIHRha2UgdGhlIHNwaW5sb2NrLgoKV2hpbGUgbG9va2luZyBhdCB0aGUgY29kZSwg
+SSBub3RpY2VkIGFuIGludGVyZXN0aW5nIHJhY2Ugd2l0aCB0aGUgcmVsZWFzZSBjb2RlLiAKR3Vl
+c3QgSVJRIGFyZSByZWxlYXNlZCB1c2luZyB0aGUgZnVuY3Rpb24gZ2ljX3JlbW92ZV9pcnFfdG9f
+Z3Vlc3QuIFRoZSBzZXF1ZW5jZSAKaXMgcm91Z2hseToKCjEpIHNwaW5fbG9jayhkZXNjLT5sb2Nr
+KTsKMikgd3JpdGVsKGRlc2MtPmlycSwgSUNFTkFCTEVSKTsKMykgc2V0X2JpdChfSVJRX0RJU0FC
+TEVELCAmZGVzYy0+c3RhdHVzKTsKNCkgY2xlYXJfYml0KF9JUlFfR1VFUywgJmRlc2MtPnN0YXR1
+cyk7CjUpIGRlc2MtPmhhbmRsZXIgPSAmbm9faXJxX3R5cGU7CjYpIHNwaW5fdW5sb2NrKGRlc2Mt
+PmxvY2spOwoKRXZlbiBpZiAyKSB3aWxsIGRpc2FibGUgdGhlIGludGVycnVwdCBpbiB0aGUgaGFy
+ZHdhcmUsIHRoZSBpbnRlcnJ1cHQgbWF5IGhhdmUgCmJlZW4gcmVjZWl2ZWQgZWFybGllciBvbiBh
+bm90aGVyIENQVSBhbmQgd2FpdGluZyBvbiB0aGUgbG9jay4gQXMgc29vbiBhcyB0aGUgCmxvY2sg
+aXMgdGFrZW4sIHRoZSBjb2RlIHdpbGwgbm90aWNlIHRoZSBpcnEgZGlzYWJsZWQgKHRoYW5rcyB0
+byAzKSkgYW5kIHdpbGwgCnRoZW4gZW5kIHRoZSBpbnRlcnJ1cHQuIFRoZSBjYWxsYmFrIGVuZCBm
+b3Igbm9faXJxX3R5cGUgaXMgYSBOT1AsIHRoZXJlZm9yZSB0aGUgCmludGVycnVwdCB3aWxsIHN0
+YXkgYWN0aXZlIGFuZCB0aGUgcHJpb3JpdHkgd2lsbCBub3QgYmUgZHJvcHBlZC4KCkJlY2F1c2Ug
+b2YgdGhhdCwgdGhlIENQVSB3aWxsIG5ldmVyIGJlIGFibGUgdG8gcmVjZWl2ZSBpbnRlcnJ1cHQg
+Zm9yIGd1ZXN0IAphbnltb3JlLiBBRkFJQ1QsIHRoaXMgY2FuIG9ubHkgaGFwcGVuIGlmIGFuIGlu
+dGVycnVwdCBpcyByZWNlaXZlZCB3aGlsZSAKZGVzdHJveWluZyB0aGUgYXNzaWduZWQgZG9tYWlu
+LgoKSSB0aGluayA1KSBzaG91bGQgYmUgcmVwbGFjZWQgd2l0aAoKZGVzYy0+aGFuZGxlciA9IGdp
+Y19od19vcHMtPmdpY19ob3N0X2lycV90eXBlOwoKT3Igd2UgcG90ZW50aWFsbHkgbmVlZCB0byB1
+cGRhdGUgbm9faXJxX3R5cGUgYW5kIEVPSSAic3B1cmlvdXMgaW50ZXJydXB0Ii4KCkkgYW0gbm90
+IGVudGlyZWx5IHN1cmUgd2hpY2ggd2F5IGlzIHRoZSBiZXN0IHRvIGFkZHJlc3MgdGhlIHJhY2Uu
+IEFueSBvcGluaW9ucz8KCgo+IFRob3NlIGZsYWdzIGNoZWNrcyBjb3ZlciBhbGwgYWNjZXNzZXMg
+dG8gZGVzYy0+YWN0aW9uIGluIGRvX0lSUSwgPiBzbyB3ZSBjYW4gc2tpcCBkZXNjLT5hY3Rpb24g
+Y2hlY2suCgoiaW4gbm9uLWRlYnVnIGJ1aWxkIi4KCj4gU3RpbGwga2VlcCBpdCBpbiBwbGFjZSBm
+b3IgZGVidWcgYnVpbGQuCgoiS2VlcCBpbiBwbGFjZSBmb3IgZGVidWcgYnVpbGQgdG8gaGVscCBk
+aWFnbm9zdGljcyBwb3RlbnRpYWwgbWlzY29uZmlndXJhdGlvbiIuCgo+IAo+IFNpZ25lZC1vZmYt
+Ynk6IEFuZHJpaSBBbmlzb3YgPGFuZHJpaV9hbmlzb3ZAZXBhbS5jb20+Cj4gUmV2aWV3ZWQtYnk6
+IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CgpQbGVhc2UgZG9uJ3QgYWRkIGEg
+cmV2aWV3ZWQtYnkgdGFnIHVudGlsIGl0IHdhcyBleHBsaWNpdGx5IHdyaXR0ZW4gYnkgdGhlIHJl
+dmlld2VyLgoKPiAtLS0KPiAgIHhlbi9hcmNoL2FybS9pcnEuYyB8IDIgKysKPiAgIDEgZmlsZSBj
+aGFuZ2VkLCAyIGluc2VydGlvbnMoKykKPiAKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL2ly
+cS5jIGIveGVuL2FyY2gvYXJtL2lycS5jCj4gaW5kZXggZDZhMDI3My4uNGEwMmNjMSAxMDA2NDQK
+PiAtLS0gYS94ZW4vYXJjaC9hcm0vaXJxLmMKPiArKysgYi94ZW4vYXJjaC9hcm0vaXJxLmMKPiBA
+QCAtMjA5LDEyICsyMDksMTQgQEAgdm9pZCBkb19JUlEoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJl
+Z3MsIHVuc2lnbmVkIGludCBpcnEsIGludCBpc19maXEpCj4gICAgICAgc3Bpbl9sb2NrKCZkZXNj
+LT5sb2NrKTsKPiAgICAgICBkZXNjLT5oYW5kbGVyLT5hY2soZGVzYyk7Cj4gICAKPiArI2lmbmRl
+ZiBOREVCVUcKPiAgICAgICBpZiAoICFkZXNjLT5hY3Rpb24gKQo+ICAgICAgIHsKPiAgICAgICAg
+ICAgcHJpbnRrKCJVbmtub3duICVzICUjMy4zeFxuIiwKPiAgICAgICAgICAgICAgICAgIGlzX2Zp
+cSA/ICJGSVEiIDogIklSUSIsIGlycSk7Cj4gICAgICAgICAgIGdvdG8gb3V0Owo+ICAgICAgIH0K
+PiArI2VuZGlmCj4gICAKPiAgICAgICBpZiAoIHRlc3RfYml0KF9JUlFfR1VFU1QsICZkZXNjLT5z
+dGF0dXMpICkKPiAgICAgICB7Cj4gCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
