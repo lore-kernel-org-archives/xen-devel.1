@@ -1,28 +1,19 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH V2] x86/vm_event: block interrupt injection
- for sync vm_events
-Date: Thu, 13 Dec 2018 10:03:45 +0200
-Message-ID: <7fd8e5fe-9fbd-07c3-c27c-1bdec37d078e@bitdefender.com>
-References: <1544457709-24302-1-git-send-email-rcojocaru@bitdefender.com>
- <20181210164938.lcfmhamgdxxc2zbn@mac>
- <7408c2bf-c22e-dfb0-11e8-d7264f2df4e7@bitdefender.com>
- <a8b7b007-1270-b000-b076-757efa338788@bitdefender.com>
- <20181211101450.gmnjax3gnobby3cq@mac>
- <7ea634cc-1683-fa37-6adc-2fd79f28d5c9@bitdefender.com>
- <c30a8dbd-8ff7-bec6-e718-bdadcdef6352@arm.com>
- <a28c6276-0191-1f14-6cb6-b2212c245ef0@bitdefender.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D19BE9F208@SHSMSX101.ccr.corp.intel.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v11] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Thu, 13 Dec 2018 09:18:45 +0100
+Message-ID: <20181213091845.54212b83.olaf@aepfle.de>
+References: <20181212152056.20480-1-olaf@aepfle.de>
+ <5C1139BD0200007800205934@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7354939789655921864=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PwXp=OW=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gXLyN-0001GE-VD
- for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 08:03:55 +0000
-In-Reply-To: <AADFC41AFE54684AB9EE6CBC0274A5D19BE9F208@SHSMSX101.ccr.corp.intel.com>
-Content-Language: en-US-large
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=AwXq=OW=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gXMCv-0002k1-25
+ for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 08:18:57 +0000
+In-Reply-To: <5C1139BD0200007800205934@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,26 +22,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Tian, Kevin" <kevin.tian@intel.com>, Julien Grall <julien.grall@arm.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>
-Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "Nakajima,
- Jun" <jun.nakajima@intel.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "brian.woods@amd.com" <brian.woods@amd.com>, "suravee.suthikulpanit@amd.com" <suravee.suthikulpanit@amd.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvMTMvMTggODo1NCBBTSwgVGlhbiwgS2V2aW4gd3JvdGU6Cj4+IEZyb206IFJhenZhbiBD
-b2pvY2FydSBbbWFpbHRvOnJjb2pvY2FydUBiaXRkZWZlbmRlci5jb21dCj4+IFNlbnQ6IFR1ZXNk
-YXksIERlY2VtYmVyIDExLCAyMDE4IDg6MzMgUE0KPj4KPj4+IEluIGFueSBjYXNlLCBJIHRoaW5r
-IHlvdSB3YW50IHRvIHJlbmFtZSB0aGUgZnVuY3Rpb24gYW5kL29yIGRvY3VtZW50Cj4+PiBtb3Jl
-IHRoYXQgZXhwZWN0ZWQgYmVoYXZpb3IuCj4+Cj4+IFlvdSdyZSByaWdodCwgSSBzaG91bGQgcHJv
-YmFibHkgcmVuYW1lIHRoYXQgZnVuY3Rpb24gLyB2YXJpYWJsZSB0bwo+PiBiZXR0ZXIgcmVmbGVj
-dCB3aGF0IGl0IHNpZ25pZmllcyAtIHRoYXQgc3luYyB2bV9ldmVudCBwcm9jZXNzaW5nIGlzIGlu
-Cj4+IHByb2dyZXNzLiBGb3IgVk1YIGFuZCBTVk0sIHRoYXQgc2ltcGx5IG1lYW5zIHRoYXQgaW50
-ZXJydXB0cyB3aWxsIGJlCj4+IGJsb2NrZWQsIGFuZCB0aGUgdmFsdWUgb2YgdGhlIHZhcmlhYmxl
-IHdpbGwgYmUgY29ycmVjdCBhbmQgcG9zc2libHkKPj4gdXNlZnVsIGZvciBBUk0gYXMgd2VsbC4K
-Pj4KPiAKPiB3aGF0IGFib3V0IHZtX2V2ZW50X2Jsb2NrX2ludGVycnVwdF9pbmplY3Rpb24/IGlu
-IHRoYXQgY2FzZQo+IGl0J3MgaW5qZWN0aW9uIGluc3RlYWQgb2YgaW50ZXJydXB0IGl0c2VsZiBi
-ZWluZyBibG9ja2VkLiBibG9ja2luZwo+IGluamVjdGlvbiBzaG91bGQgbWVhbiBzYW1lIHRoaW5n
-IGNyb3NzIGFyY2hzPwoKT2YgY291cnNlLCBpZiBKdWxpZW4gYWdyZWVzIHdpdGggdGhlIGNoYW5n
-ZSBJJ2xsIHJlbmFtZSBpdCBhcyBzdWdnZXN0ZWQuCgoKVGhhbmtzLApSYXp2YW4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============7354939789655921864==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/QjVwDJn4wpwjR=xi+bu8d6B"; protocol="application/pgp-signature"
+
+--Sig_/QjVwDJn4wpwjR=xi+bu8d6B
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 12 Dec 2018 09:39:25 -0700
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> >>> On 12.12.18 at 16:20, <olaf@aepfle.de> wrote: =20
+> > If a domU uses TSC as clocksoure it also must run NTP in some way to
+> > avoid the potential drift what will most likely happen, independent of
+> > any migration. =20
+> Which drift? While anyone's well advised to run NTP, a completely
+> isolated set of systems may have no need to, if their interactions don't
+> depend on exactly matching time.
+
+If these hosts do not sync time to some reference host, the advancing of ti=
+me
+is undefined before and after my change.
+
+> > The calculation of the drift is based on the time
+> > returned by remote servers versus how fast the local clock advances. NTP
+> > can handle a drift up to 500PPM. This means the local clocksource can
+> > run up to 500us slower or faster. This calculation is based on the TSC
+> > frequency of the host where the domU was started. Once a domU is
+> > migrated to a host of a different class, like from "2.3GHz" to "2.4GHz",
+> > the TSC frequency changes, but the domU kernel may not recalibrate
+> > itself. =20
+>=20
+> That's why we switch to emulated (or hardware scaling) mode in that
+> case. It's anyway not really clear to me what this entire ...
+>=20
+> > As a result, the drift will be larger and might be outside of
+> > the 500 PPM range. In addition, the kernel may notice the change of
+> > speed in which the TSC advances and could change the clocksource. All
+> > this depends of course on the type of OS that is running in the domU. =
+=20
+>=20
+> ... (up to here) paragraph is supposed to tell the reader.
+>=20
+> > @@ -1885,6 +1888,16 @@ void __init early_time_init(void)
+> >      printk("Detected %lu.%03lu MHz processor.\n",=20
+> >             cpu_khz / 1000, cpu_khz % 1000);
+> > =20
+> > +    tmp =3D 1000 * 1000;
+> > +    tmp +=3D VTSC_NTP_PPM_TOLERANCE;
+> > +    tmp *=3D cpu_khz;
+> > +    tmp /=3D 1000 * 1000;
+> > +    tmp -=3D cpu_khz;
+> > +    if (tmp >=3D VTSC_JITTER_RANGE_KHZ)
+> > +        tmp -=3D VTSC_JITTER_RANGE_KHZ; =20
+>=20
+> Besides the style issue in the if() - how can this be correct? This
+> clearly introduces a discontinuity (just consider the case where
+> tmp is exactly VTSC_JITTER_RANGE_KHZ before the if()). And
+> I also can't see how it guarantees the resulting value to be
+> below VTSC_JITTER_RANGE_KHZ. Did you perhaps mean to
+> cap the value (i.e. =3D instead of -=3D )?
+
+This is supposed to make sure the value of Hz for 500us is always larger
+than the assumed jitter. So for a 2GHz host, with a theoretical tolerance
+of 1000, the actual tolerance is set to 800. tmp will be larger than the
+assumed jitter for cpu_khz > 400.
+
+> > +    vtsc_tolerance_khz =3D (unsigned int)tmp; =20
+> Stray cast.
+
+Copy&paste from the cpu_khz assignment, perhaps a remainder from i386 suppo=
+rt?
+
+> > +    printk("Tolerating vtsc jitter for domUs: %u kHz.\n", vtsc_toleran=
+ce_khz); =20
+> Please omit the full stop; the printk() in context above shouldn't
+> have one either.
+
+You mean the trailing dot, or what means "full stop" in this context?
+
+> > +            disable_vtsc =3D khz_diff <=3D vtsc_tolerance_khz;
+> > +
+> > +            printk(XENLOG_G_INFO "d%d: host has %lu kHz,"
+> > +                   " domU expects %u kHz,"
+> > +                   " difference of %ld is %s tolerance of %u\n",
+> > +                   d->domain_id, cpu_khz, gtsc_khz, khz_diff,
+> > +                   disable_vtsc ? "within" : "outside",
+> > +                   vtsc_tolerance_khz);
+> > +        }
+> > +
+> >          if ( tsc_mode =3D=3D TSC_MODE_DEFAULT && host_tsc_is_safe() &&
+> > -             (d->arch.tsc_khz =3D=3D cpu_khz ||
+> > +             (disable_vtsc ||
+> >                (is_hvm_domain(d) &&
+> >                 hvm_get_tsc_scaling_ratio(d->arch.tsc_khz))) )
+> >          { =20
+>=20
+> In any event I don't follow why all of the sudden this becomes
+> an always-on mode, with not even a boot command line override.
+
+Perhaps I failed to explain why there is no need to make this a knob.
+
+If a domU uses TSC as its timesource, and if it also uses NTP to make
+sure the time advances correctly, then this change will make sure the
+advancing of time will be withing the bounds that NTP can correct.
+If it does use TSC, but does not use NTP then the advancing will be
+undefined before and after my change.
+
+
+Olaf
+
+--Sig_/QjVwDJn4wpwjR=xi+bu8d6B
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXBIV5QAKCRBdQqD6ppg2
+fkoCAJ9tZiYvEZLMhB0Q+97lCs7rvsM7xACePtiy1LOP6N2XwX1Jlom+bYLT+wM=
+=rFsF
+-----END PGP SIGNATURE-----
+
+--Sig_/QjVwDJn4wpwjR=xi+bu8d6B--
+
+
+--===============7354939789655921864==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7354939789655921864==--
