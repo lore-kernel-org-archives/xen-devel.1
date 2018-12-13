@@ -1,19 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v11] tolerate jitter in cpu_khz calculation
- to avoid TSC emulation
-Date: Thu, 13 Dec 2018 09:18:45 +0100
-Message-ID: <20181213091845.54212b83.olaf@aepfle.de>
-References: <20181212152056.20480-1-olaf@aepfle.de>
- <5C1139BD0200007800205934@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [linux-3.18 bisection] complete
+ test-amd64-amd64-pair
+Date: Thu, 13 Dec 2018 01:26:24 -0700
+Message-ID: <5C1217B00200007800205B9B@prv1-mh.provo.novell.com>
+References: <E1gXCFy-0001M8-IL@osstest.test-lab.xenproject.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7354939789655921864=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=AwXq=OW=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gXMCv-0002k1-25
- for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 08:18:57 +0000
-In-Reply-To: <5C1139BD0200007800205934@prv1-mh.provo.novell.com>
+ (envelope-from <SRS0=79tL=OW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gXMKD-0003Ve-SQ
+ for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 08:26:29 +0000
+In-Reply-To: <E1gXCFy-0001M8-IL@osstest.test-lab.xenproject.org>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,143 +24,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Sasha Levin <sashal@kernel.org>, osstest service owner <osstest-admin@xenproject.org>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7354939789655921864==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/QjVwDJn4wpwjR=xi+bu8d6B"; protocol="application/pgp-signature"
-
---Sig_/QjVwDJn4wpwjR=xi+bu8d6B
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed, 12 Dec 2018 09:39:25 -0700
-schrieb "Jan Beulich" <JBeulich@suse.com>:
-
-> >>> On 12.12.18 at 16:20, <olaf@aepfle.de> wrote: =20
-> > If a domU uses TSC as clocksoure it also must run NTP in some way to
-> > avoid the potential drift what will most likely happen, independent of
-> > any migration. =20
-> Which drift? While anyone's well advised to run NTP, a completely
-> isolated set of systems may have no need to, if their interactions don't
-> depend on exactly matching time.
-
-If these hosts do not sync time to some reference host, the advancing of ti=
-me
-is undefined before and after my change.
-
-> > The calculation of the drift is based on the time
-> > returned by remote servers versus how fast the local clock advances. NTP
-> > can handle a drift up to 500PPM. This means the local clocksource can
-> > run up to 500us slower or faster. This calculation is based on the TSC
-> > frequency of the host where the domU was started. Once a domU is
-> > migrated to a host of a different class, like from "2.3GHz" to "2.4GHz",
-> > the TSC frequency changes, but the domU kernel may not recalibrate
-> > itself. =20
->=20
-> That's why we switch to emulated (or hardware scaling) mode in that
-> case. It's anyway not really clear to me what this entire ...
->=20
-> > As a result, the drift will be larger and might be outside of
-> > the 500 PPM range. In addition, the kernel may notice the change of
-> > speed in which the TSC advances and could change the clocksource. All
-> > this depends of course on the type of OS that is running in the domU. =
-=20
->=20
-> ... (up to here) paragraph is supposed to tell the reader.
->=20
-> > @@ -1885,6 +1888,16 @@ void __init early_time_init(void)
-> >      printk("Detected %lu.%03lu MHz processor.\n",=20
-> >             cpu_khz / 1000, cpu_khz % 1000);
-> > =20
-> > +    tmp =3D 1000 * 1000;
-> > +    tmp +=3D VTSC_NTP_PPM_TOLERANCE;
-> > +    tmp *=3D cpu_khz;
-> > +    tmp /=3D 1000 * 1000;
-> > +    tmp -=3D cpu_khz;
-> > +    if (tmp >=3D VTSC_JITTER_RANGE_KHZ)
-> > +        tmp -=3D VTSC_JITTER_RANGE_KHZ; =20
->=20
-> Besides the style issue in the if() - how can this be correct? This
-> clearly introduces a discontinuity (just consider the case where
-> tmp is exactly VTSC_JITTER_RANGE_KHZ before the if()). And
-> I also can't see how it guarantees the resulting value to be
-> below VTSC_JITTER_RANGE_KHZ. Did you perhaps mean to
-> cap the value (i.e. =3D instead of -=3D )?
-
-This is supposed to make sure the value of Hz for 500us is always larger
-than the assumed jitter. So for a 2GHz host, with a theoretical tolerance
-of 1000, the actual tolerance is set to 800. tmp will be larger than the
-assumed jitter for cpu_khz > 400.
-
-> > +    vtsc_tolerance_khz =3D (unsigned int)tmp; =20
-> Stray cast.
-
-Copy&paste from the cpu_khz assignment, perhaps a remainder from i386 suppo=
-rt?
-
-> > +    printk("Tolerating vtsc jitter for domUs: %u kHz.\n", vtsc_toleran=
-ce_khz); =20
-> Please omit the full stop; the printk() in context above shouldn't
-> have one either.
-
-You mean the trailing dot, or what means "full stop" in this context?
-
-> > +            disable_vtsc =3D khz_diff <=3D vtsc_tolerance_khz;
-> > +
-> > +            printk(XENLOG_G_INFO "d%d: host has %lu kHz,"
-> > +                   " domU expects %u kHz,"
-> > +                   " difference of %ld is %s tolerance of %u\n",
-> > +                   d->domain_id, cpu_khz, gtsc_khz, khz_diff,
-> > +                   disable_vtsc ? "within" : "outside",
-> > +                   vtsc_tolerance_khz);
-> > +        }
-> > +
-> >          if ( tsc_mode =3D=3D TSC_MODE_DEFAULT && host_tsc_is_safe() &&
-> > -             (d->arch.tsc_khz =3D=3D cpu_khz ||
-> > +             (disable_vtsc ||
-> >                (is_hvm_domain(d) &&
-> >                 hvm_get_tsc_scaling_ratio(d->arch.tsc_khz))) )
-> >          { =20
->=20
-> In any event I don't follow why all of the sudden this becomes
-> an always-on mode, with not even a boot command line override.
-
-Perhaps I failed to explain why there is no need to make this a knob.
-
-If a domU uses TSC as its timesource, and if it also uses NTP to make
-sure the time advances correctly, then this change will make sure the
-advancing of time will be withing the bounds that NTP can correct.
-If it does use TSC, but does not use NTP then the advancing will be
-undefined before and after my change.
-
-
-Olaf
-
---Sig_/QjVwDJn4wpwjR=xi+bu8d6B
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXBIV5QAKCRBdQqD6ppg2
-fkoCAJ9tZiYvEZLMhB0Q+97lCs7rvsM7xACePtiy1LOP6N2XwX1Jlom+bYLT+wM=
-=rFsF
------END PGP SIGNATURE-----
-
---Sig_/QjVwDJn4wpwjR=xi+bu8d6B--
-
-
---===============7354939789655921864==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7354939789655921864==--
+Pj4+IE9uIDEyLjEyLjE4IGF0IDIyOjQxLCA8b3NzdGVzdC1hZG1pbkB4ZW5wcm9qZWN0Lm9yZz4g
+d3JvdGU6Cj4gYnJhbmNoIHhlbi11bnN0YWJsZQo+IHhlbmJyYW5jaCB4ZW4tdW5zdGFibGUKPiBq
+b2IgdGVzdC1hbWQ2NC1hbWQ2NC1wYWlyCj4gdGVzdGlkIHhlbi1ib290L3NyY19ob3N0Cj4gCj4g
+VHJlZTogbGludXggCj4gZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwv
+Z2l0L3N0YWJsZS9saW51eC1zdGFibGUuZ2l0Cj4gVHJlZTogbGludXhmaXJtd2FyZSBnaXQ6Ly94
+ZW5iaXRzLnhlbi5vcmcvb3NzdGVzdC9saW51eC1maXJtd2FyZS5naXQKPiBUcmVlOiBxZW11IGdp
+dDovL3hlbmJpdHMueGVuLm9yZy9xZW11LXhlbi10cmFkaXRpb25hbC5naXQKPiBUcmVlOiBxZW11
+dSBnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcvcWVtdS14ZW4uZ2l0Cj4gVHJlZTogeGVuIGdpdDovL3hl
+bmJpdHMueGVuLm9yZy94ZW4uZ2l0Cj4gCj4gKioqIEZvdW5kIGFuZCByZXByb2R1Y2VkIHByb2Js
+ZW0gY2hhbmdlc2V0ICoqKgo+IAo+ICAgQnVnIGlzIGluIHRyZWU6ICBsaW51eCBnaXQ6Ly9naXQu
+a2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQvc3RhYmxlL2xpbnV4LXN0YWJsZS5n
+aXQKPiAgIEJ1ZyBpbnRyb2R1Y2VkOiAgN2I4MDUyZTE5MzA0ODY1NDc3ZTAzYTAwNDcwNjJkOTc3
+MzA5YTIyZgo+ICAgQnVnIG5vdCBwcmVzZW50OiBkMjU1ZDE4YTM0YThkNTNjY2M0YTAxOWRjMDdl
+MTdiNmU4Y2Y2YmQxCj4gICBMYXN0IGZhaWwgcmVwcm86IGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
+bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzEyNzgvIAo+IAo+IAo+ICAgY29tbWl0IDdiODA1
+MmUxOTMwNDg2NTQ3N2UwM2EwMDQ3MDYyZDk3NzMwOWEyMmYKPiAgIEF1dGhvcjogSmFuIEJldWxp
+Y2ggPEpCZXVsaWNoQHN1c2UuY29tPgo+ICAgRGF0ZTogICBNb24gT2N0IDE5IDA0OjIzOjI5IDIw
+MTUgLTA2MDAKPiAgIAo+ICAgICAgIGlnYjogZml4IE5VTEwgZGVyZWZzIGR1ZSB0byBza2lwcGVk
+IFNSLUlPViBlbmFibGluZwoKX1ZlcnlfIGludGVyZXN0aW5nLiBBbiBvdmVyIHRocmVlIHllYXJz
+IG9sZCBjb21taXQgd2FzIGRldGVybWluZWQKdG8gY2F1c2Ugd2hhdGV2ZXIgcmVncmVzc2lvbiBp
+dCBpcy4gQnV0IHdhaXQgLSB0aGF0J3MgdGhlIGRhdGUgb2YgdGhlCm1haW5saW5lIGNvbW1pdCwg
+bm90IHRoYXQgb2YgdGhlIGJhY2twb3J0ICh3aGljaCB3YXMgZG9uZSBhIG1vbnRoCmFnbykuIEkg
+bm90aWNlIHRoYXQgb2YgdGhlIHR3byBvcmlnaW5hbCBjb21taXRzIHRoZSBjb21iaW5hdGlvbiBv
+Zgp3aGljaCB0aGUgb25lIGhlcmUgaXMgc3VwcG9zZWQgdG8gZml4LCBvbmx5IG9uZSBhY3R1YWxs
+eSBnb3QKYmFja3BvcnRlZC4gSGVuY2UgSSB3b25kZXIgd2hldGhlciBiYWNrcG9ydGluZyB0aGUg
+b25lIGhlcmUKd2FzIGFjdHVhbGx5IGFwcHJvcHJpYXRlLgoKSmFuCgoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
