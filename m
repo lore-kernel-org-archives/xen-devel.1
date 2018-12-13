@@ -1,32 +1,23 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH V2] x86/vm_event: block interrupt injection
- for sync vm_events
-Date: Thu, 13 Dec 2018 15:18:53 +0200
-Message-ID: <07005fdc-9b5d-5bad-611b-c0c0966ecfca@bitdefender.com>
-References: <1544457709-24302-1-git-send-email-rcojocaru@bitdefender.com>
- <20181210164938.lcfmhamgdxxc2zbn@mac>
- <7408c2bf-c22e-dfb0-11e8-d7264f2df4e7@bitdefender.com>
- <a8b7b007-1270-b000-b076-757efa338788@bitdefender.com>
- <20181211101450.gmnjax3gnobby3cq@mac>
- <7ea634cc-1683-fa37-6adc-2fd79f28d5c9@bitdefender.com>
- <c30a8dbd-8ff7-bec6-e718-bdadcdef6352@arm.com>
- <a28c6276-0191-1f14-6cb6-b2212c245ef0@bitdefender.com>
- <AADFC41AFE54684AB9EE6CBC0274A5D19BE9F208@SHSMSX101.ccr.corp.intel.com>
- <7fd8e5fe-9fbd-07c3-c27c-1bdec37d078e@bitdefender.com>
- <312c012d-9db5-b5e7-30b2-44bc2d54b576@arm.com>
- <b561518a-3ba3-8a31-35e7-4f481f3802e4@bitdefender.com>
- <746ecf9f-4aeb-1d7f-7ba5-367f1b1488d7@arm.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v11] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Thu, 13 Dec 2018 14:25:59 +0100
+Message-ID: <20181213142559.78a19242.olaf@aepfle.de>
+References: <20181212152056.20480-1-olaf@aepfle.de>
+ <5C1139BD0200007800205934@prv1-mh.provo.novell.com>
+ <20181213091845.54212b83.olaf@aepfle.de>
+ <5C121C330200007800205BC8@prv1-mh.provo.novell.com>
+ <20181213100442.3510b91b.olaf@aepfle.de>
+ <5C1237680200007800205C8C@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8908011377290823766=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PwXp=OW=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gXQtK-0004Ov-Jp
- for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 13:19:02 +0000
-In-Reply-To: <746ecf9f-4aeb-1d7f-7ba5-367f1b1488d7@arm.com>
-Content-Language: en-US-large
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=AwXq=OW=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gXR0E-0005Fo-DI
+ for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 13:26:11 +0000
+In-Reply-To: <5C1237680200007800205C8C@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -35,109 +26,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, "Tian, Kevin" <kevin.tian@intel.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, "tamas@tklengyel.com" <tamas@tklengyel.com>
-Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "Nakajima,
- Jun" <jun.nakajima@intel.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "brian.woods@amd.com" <brian.woods@amd.com>, "suravee.suthikulpanit@amd.com" <suravee.suthikulpanit@amd.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvMTMvMTggMjozOSBQTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9uIDEy
-LzEzLzE4IDEyOjE1IFBNLCBSYXp2YW4gQ29qb2NhcnUgd3JvdGU6Cj4+IE9uIDEyLzEzLzE4IDI6
-MDQgUE0sIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+IEhpLAo+Pj4KPj4+IE9uIDEyLzEzLzE4IDg6
-MDMgQU0sIFJhenZhbiBDb2pvY2FydSB3cm90ZToKPj4+PiBPbiAxMi8xMy8xOCA4OjU0IEFNLCBU
-aWFuLCBLZXZpbiB3cm90ZToKPj4+Pj4+IEZyb206IFJhenZhbiBDb2pvY2FydSBbbWFpbHRvOnJj
-b2pvY2FydUBiaXRkZWZlbmRlci5jb21dCj4+Pj4+PiBTZW50OiBUdWVzZGF5LCBEZWNlbWJlciAx
-MSwgMjAxOCA4OjMzIFBNCj4+Pj4+Pgo+Pj4+Pj4+IEluIGFueSBjYXNlLCBJIHRoaW5rIHlvdSB3
-YW50IHRvIHJlbmFtZSB0aGUgZnVuY3Rpb24gYW5kL29yIGRvY3VtZW50Cj4+Pj4+Pj4gbW9yZSB0
-aGF0IGV4cGVjdGVkIGJlaGF2aW9yLgo+Pj4+Pj4KPj4+Pj4+IFlvdSdyZSByaWdodCwgSSBzaG91
-bGQgcHJvYmFibHkgcmVuYW1lIHRoYXQgZnVuY3Rpb24gLyB2YXJpYWJsZSB0bwo+Pj4+Pj4gYmV0
-dGVyIHJlZmxlY3Qgd2hhdCBpdCBzaWduaWZpZXMgLSB0aGF0IHN5bmMgdm1fZXZlbnQgcHJvY2Vz
-c2luZwo+Pj4+Pj4gaXMgaW4KPj4+Pj4+IHByb2dyZXNzLiBGb3IgVk1YIGFuZCBTVk0sIHRoYXQg
-c2ltcGx5IG1lYW5zIHRoYXQgaW50ZXJydXB0cyB3aWxsIGJlCj4+Pj4+PiBibG9ja2VkLCBhbmQg
-dGhlIHZhbHVlIG9mIHRoZSB2YXJpYWJsZSB3aWxsIGJlIGNvcnJlY3QgYW5kIHBvc3NpYmx5Cj4+
-Pj4+PiB1c2VmdWwgZm9yIEFSTSBhcyB3ZWxsLgo+Pj4+Pj4KPj4+Pj4KPj4+Pj4gd2hhdCBhYm91
-dCB2bV9ldmVudF9ibG9ja19pbnRlcnJ1cHRfaW5qZWN0aW9uPyBpbiB0aGF0IGNhc2UKPj4+Pj4g
-aXQncyBpbmplY3Rpb24gaW5zdGVhZCBvZiBpbnRlcnJ1cHQgaXRzZWxmIGJlaW5nIGJsb2NrZWQu
-IGJsb2NraW5nCj4+Pj4+IGluamVjdGlvbiBzaG91bGQgbWVhbiBzYW1lIHRoaW5nIGNyb3NzIGFy
-Y2hzPwo+Pj4KPj4+IFdoeSB3b3VsZCB5b3Ugd2FudCB0byBibG9jayBhbGwgaW50ZXJydXB0cyBp
-bmplY3Rpb25zPyBXaGVuIEkgbG9va2VkIGF0Cj4+PiB0aGUgZGV0YWlscywgaXQgZmVlbHMgbW9y
-ZSB5b3Ugd2FudCB0byBibG9jayBleGNlcHRpb25zLgo+Pj4KPj4+IEkgY2FuIHNlZSB1c2UgZm9y
-IGJsb2NraW5nIGV4Y2VwdGlvbiBvbiBBcm0sIGJsb2NraW5nIGFsbCB0aGUgaW50ZXJydXB0cwo+
-Pj4gaXMgbGlrZWx5IGdvaW5nIHRvIGJyaW5nIG1vcmUgaXNzdWVzIHRoYW4gc29sdmluZyBhbnl0
-aGluZy4KPj4+Cj4+PiBTbyBhIGJldHRlciBuYW1lIHdvdWxkIGJlIHZtX2V2ZW50X2Jsb2NrX2V4
-Y2VwdGlvbl9pbmplY3Rpb24uCj4+Cj4+IEknZCBsaWtlIHRvIGJsb2NrIHRoZSB3cml0aW5nIG9m
-IGFueXRoaW5nLCBieSB2bXhfaW50cl9hc3Npc3QoKSwgaW50bwo+PiBWTV9FTlRSWV9JTlRSX0lO
-Rk8sIGJlY2F1c2UgYW4gZW11bGF0aW9uIGF0dGVtcHQgdGhhdCBoYXBwZW5zCj4+IHBvc3Qtdm14
-X2ludHJfYXNzaXN0KCkgKGJlY2F1c2UgdGhlIHZtX2V2ZW50IGNsaWVudCBhcHBsaWNhdGlvbiBo
-YXMKPj4gcmVxdWVzdGVkIGl0KSBtYXkgd3JpdGUgYW4gZXhjZXB0aW9uIG9mIGl0cyBvd24gdGhl
-cmUuCj4+Cj4+IFNpbmNlIHZteF9pbnRyX2Fzc2lzdCgpIGlzIGNhbGxlZCBvbiBWTVggYmV0d2Vl
-biB0aGUgdGltZSBvZiBzZW5kaW5nIG91dAo+PiB0aGUgdm1fZXZlbnQgYW5kIHRoZSBlbXVsYXRp
-b24gKHdoaWNoIGhhcHBlbnMgaW4KPj4gaHZtX3ZtX2V2ZW50X2RvX3Jlc3VtZSgpKSwgd2Ugd2Fu
-dCB0byBibG9jayBldmVyeXRoaW5nIHRoYXQgaXQgbWF5IHdyaXRlCj4+IGluIHRoZSBWTUNTIHVu
-dGlsIHRoZSBlbXVsYXRpb24gaXMgZG9uZS4gSSB0aGluayB0aGF0J3MgbW9yZSB0aGFuIGp1c3QK
-Pj4gZXhjZXB0aW9ucy4KPiAKPiBJIGRvbid0IGtub3cgaW4gZGV0YWlscyBob3cgeDg2IHZpcnR1
-YWxpemF0aW9uIHdvcmtzLCBzbyBpdCBpcyBhIGJpdAo+IGhhcmQgdG8gY29tbWVudCBvbiB0aGF0
-LiBIb3dldmVyLCBpdCBmZWVscyB0byBtZSB0aGF0IHlvdSBhcmUKPiBpbnRyb2R1Y2luZyBpbiBj
-b21tb24gY29kZSBhIGZ1bmN0aW9uIHRoYXQgd2lsbCB3b3JrYXJvdW5kIGFuCj4gYXJjaGl0ZWN0
-dXJlIHNwZWNpZmljIHByb2JsZW0uCj4gCj4gQ2FuIHlvdSB0cnkgdG8gZXhwbGFpbiBpdCBpbiBh
-Z25vc3RpYyB3b3JkPwoKSSdsbCBjZXJ0YWlubHkgZG8gbXkgYmVzdC4gOikKCkFzc3VtZSB0aGUg
-Zm9sbG93aW5nIHNjZW5hcmlvOgoKMS4gQSBndWVzdCBpbnN0cnVjdGlvbiB0cmllcyB0byB3cml0
-ZSBpbnRvIHJlYWQtb25seSBtZW1vcnkgKGFzIHNldCBpbgp0aGUgRVBUKSwgd2l0aCBtb25pdG9y
-aW5nIGFjdGl2ZSBmb3IgdGhlIGRvbWFpbi4KCjIuIEFuIEVQVCB2aW9sYXRpb24gZXhpdCBvY2N1
-cnMsIGFuZCBpbiB0aGUgY291cnNlIG9mIGl0LCB0aGUgVkNQVSB0aGF0CndhcyBydW5uaW5nIHRo
-ZSBjb2RlIHRoYXQgcHJvZHVjZWQgdGhlIHZpb2xhdGlvbiBpcyBwYXVzZWQgYW5kIGEKdm1fZXZl
-bnQgaXMgc2VudCB0byBhbiBpbnRyb3NwZWN0aW9uIGFwcGxpY2F0aW9uLgoKMy4gVGhlIGludHJv
-c3BlY3Rpb24gYXBwbGljYXRpb24gaXMgcHJvY2Vzc2luZyB0aGUgdm1fZXZlbnQuIER1cmluZyB0
-aGlzCnRpbWUsIHNvbWUgZXZlbnQgbWF5IG9jY3VyICh3aGljaCB3aWxsIHJlbWFpbiBwZW5kaW5n
-KS4KCjQuIFRoZSBpbnRyb3NwZWN0aW9uIGFnZW50IHJlcGxpZXMgd2l0aCAicGxlYXNlIGVtdWxh
-dGUiIHRoZSBjdXJyZW50Cmluc3RydWN0aW9uIC0gc2luY2UgdGhlIGVtdWxhdG9yIChjdXJyZW50
-bHkpIGRvZXMgbm90IGNhcmUgYWJvdXQgRVBUCnJlc3RyaWN0aW9ucywgc28gdGhpcyBpcyBhIGNo
-ZWFwIHdheSBvZiBwcm9jZWVkaW5nIHdpdGhvdXQgbGlmdGluZyB0aGVtLgoKNS4gV2l0aCB4ODYs
-IHdlIGhhdmUge3ZteCxzdm19X2ludHJfYXNzaXN0KCksIHdoaWNoIGlzIGd1YXJhbnRlZWQgdG8g
-YmUKY2FsbGVkIF9iZWZvcmVfIHRoZSBWQ1BVIGlzIHdva2VuIHVwIGFnYWluLiBUaGlzIGlzIHRo
-ZSBkZXNpZ25hdGVkICJwaWNrCnVwIHBlbmRpbmcgaW50ZXJydXB0cyIgZnVuY3Rpb24gb24geDg2
-LiBQZXJoYXBzIHRoaXMgKHJlYWwtbGlmZSkKYmFja3RyYWNlIGlzIGhlbHBmdWw6CgooWEVOKSBY
-ZW4gY2FsbCB0cmFjZToKKFhFTikgICAgWzxmZmZmODJkMDgwMzFiNTVkPl0gdm14LmMjX192bXhf
-aW5qZWN0X2V4Y2VwdGlvbisweGExLzB4ZGEKKFhFTikgICAgWzxmZmZmODJkMDgwMzFlYjVjPl0g
-dm14X2luamVjdF9leHRpbnQrMHg5NC8weDlmCihYRU4pICAgIFs8ZmZmZjgyZDA4MDMxNWEwYT5d
-IHZteF9pbnRyX2Fzc2lzdCsweDRlZS8weDVhZAooWEVOKSAgICBbPGZmZmY4MmQwODAzMjU4ZmY+
-XSB2bXhfYXNtX3ZtZXhpdF9oYW5kbGVyKzB4ZmYvMHgyNzAKCk9uIHg4NiwgdGhlcmUgY2FuIChj
-dXJyZW50bHkpIGJlIG9ubHkgb25lIHNjaGVkdWxlZCBpbnRlcnJ1cHQgLwpleGNlcHRpb24sIGFu
-ZCB0aGF0IGlzIHdyaXR0ZW4gaW50byBWTV9FTlRSWV9JTlRSX0lORk8gaW4gdGhlIFZNQ1Mgb24g
-SW50ZWwuCgo2LiBfQWZ0ZXJfIHZteF9pbnRyX2Fzc2lzdCgpIGhhcyBydW4sIHdlIGFyZSBub3cg
-dHJ5aW5nIHRvIGVtdWxhdGUgdGhlCmN1cnJlbnQgaW5zdHJ1Y3Rpb24sIHdoaWNoIG1heSBjYXVz
-ZSBhbiBleGNlcHRpb24sIHdoaWNoIHdpbGwgb3ZlcndyaXRlCnRoZSBwZW5kaW5nIGludGVycnVw
-dC4KClNvLCBsb25nIHN0b3J5IHNob3J0LCBvbiBWTVggd2UgZmlyc3Qgc2VuZCBvdXQgdGhlIHZt
-X2V2ZW50LCB3aGlsZQpwcm9jZXNzaW5nIGl0IGFuIGludGVycnVwdCAvIGV4Y2VwdGlvbiBtYXkg
-YmVjb21lIHBlbmRpbmcsIGJlZm9yZQpyZXN1bWluZyB0aGUgVkNQVSB0aGF0IGhhcyBzZW50IG91
-dCB0aGUgdm1fZXZlbnQgdGhlcmUncyBhIFhlbiBmdW5jdGlvbgp0aGF0IHBpY2tzIHVwIHRoZSBw
-ZW5kaW5nIGludGVycnVwdCBhbmQgc2NoZWR1bGVzIGl0ICh3cml0ZXMgaXQgaW4gdGhlClZNQ1Mp
-LCBhbmQgb25seSB0aGVuIHdlIGF0dGVtcHQgdGhlIGVtdWxhdGlvbiwgd2hpY2ggbWF5IG92ZXJ3
-cml0ZSBpdAooYmVjYXVzZSB0aGVyZSdzIG9ubHkgb25lIHBsYWNlIHdlIGNhbiB3cml0ZSB0byBz
-Y2hlZHVsZSBpbnRlcnJ1cHRzIC8KZXhjZXB0aW9ucykuCgo+IFRvIGV4cGFuZCB3aGF0IEkgc2Fp
-ZCBhYm92ZSwgSSB0aGluayBpdCBpcyByZWFzb25hYmxlIHRvIHJlcXVlc3QKPiBibG9ja2luZyBl
-eGNlcHRpb24gKGUuZyBwYWdlLWZhdWx0Li4uKSBiZWNhdXNlIHRoZXkgY2FuIGJlIGdlbmVyYXRl
-ZCBieQo+IGFuIGluc3RydWN0aW9uLiBIb3dldmVyLCBhbGwgaW50ZXJydXB0cyBnZW5lcmF0ZWQg
-YnkgdGhlIGludGVycnVwdAo+IGNvbnRyb2xsZXIgKGUuZyBkZXZpY2UsIElQSS4uKSBzaG91bGQg
-bm90IGJlIGJsb2NrZWQuCj4gCj4gQUZBSVUgeW91ciBkZXNjcmlwdGlvbiwgaXQgaXMgdGhlIHNh
-bWUgcGF0aCB0byBoYW5kbGUgdGhlIHR3byBvbiB4ODYsCj4gcmlnaHQ/CgpQcmV0dHkgbXVjaCwg
-eWVzLiBUZWNobmljYWxseSBzcGVha2luZyB0aGVyZSBhcmUgdHdvIHRoYXQgSSBhbSBhd2FyZSBv
-ZiwKdGhlIHNlY29uZCBvZiB0aGVtIGJlaW5nIHRoZSBJRFQgdmVjdG9yaW5nIGNhc2UganVzdCBi
-ZWZvcmUgdGhlIEVQVApmYXVsdCBleGl0IC0gYnV0IHRoYXQncyBvdXRzaWRlIHRoZSBzY29wZSBv
-ZiB0aGlzIHBhdGNoLiBKdXN0IG1lbnRpb25pbmcKaXQgZm9yIGNvbXBsZXRlbmVzcy4KCkFsc28s
-IGl0IGlzIHdvcnRoIG1lbnRpb25pbmcgdGhhdDoKCjEuIFRoaXMgaXMgdGhlIGV4YWN0IHNhbWUg
-c3RyYXRlZ3kgZW1wbG95ZWQgYnkgdGhlIHNpbmdsZS1zdGVwcGluZwpmdW5jdGlvbmFsaXR5IG9u
-IFZNWCAvIEludGVsLiBJbiBmYWN0LCBpZiB5b3UgbG9vayBhdAp4ZW4vYXJjaC94ODYvaHZtL3Zt
-eC9pbnRyLmMsIGluIHZteF9pbnRyX2Fzc2lzdCgpLCB5b3UnbGwgc2VlIGFuIGVhcmx5CnJldHVy
-biBibG9ja2luZyBpbmplY3Rpb24gb2YgaW50ZXJydXB0cyBmb3IgdGhlIGR1cmF0aW9uIG9mIHNp
-bmdsZQpzdGVwcGluZyAoImlmICggdW5saWtlbHkodi0+YXJjaC5odm0uc2luZ2xlX3N0ZXApICki
-KS4KCjIuIEludGVycnVwdHMgYXJlIG5vdCBibG9ja2VkIGluZGVmaW5pdGVseSAtIG9ubHkgdW50
-aWwgdGhlIGVtdWxhdGlvbiBpcwpkb25lLiBJdCBjb3VsZCBiZSBhcmd1ZWQgdGhhdCB0aGF0J3Mg
-cmVhbGx5IHRoZSBwcm9wZXIgcGxhY2UgZm9yIHRoZW0gdG8KYmUgcHJvY2Vzc2VkIGFueXdheSAt
-IG9uIGFuIGluc3RydWN0aW9uIGJvdW5kYXJ5LCBfYWZ0ZXJfIHRoZQppbi1wcm9ncmVzcyBpbnN0
-cnVjdGlvbiBoYXMgZmluaXNoZWQgZXhlY3V0aW5nLiBJdCdzIGp1c3QgdGhhdCB3aXRoIHRoZQp2
-bV9ldmVudCBpbnRyb3NwZWN0aW9uIHRoaW5nIHlvdSBjb3VsZCBzYXkgdGhhdCBleGVjdXRpbmcg
-dGhlIGN1cnJlbnQKaW5zdHJ1Y3Rpb24gbWF5IHRha2UgYSBiaXQgbG9uZ2VyLgoKSSBob3BlIEkn
-dmUgYmVlbiBhYmxlIHRvIGV4cGxhaW4gaXQgYmV0dGVyIHRoaXMgdGltZS4gOikKCgpUaGFua3Ms
-ClJhenZhbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8908011377290823766==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/CEtqqQt=kBNVZ7ikfKyAUxN"; protocol="application/pgp-signature"
+
+--Sig_/CEtqqQt=kBNVZ7ikfKyAUxN
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 13 Dec 2018 03:41:44 -0700
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> And further argumentation that everyone is using NTP anyway
+> doesn't make it any better, when it's no-where written down that
+> Xen is unusable with NTP running in all guests (I'm exaggerating
+> here just to get the point over). Don't forget that e.g. with
+> XenoLinux'es independent-wallclock setting defaulting to false, we've
+> been suggesting that people _don't_ need to use NTP inside their
+> (admittedly PV) guests. IOW - your change may not break people
+> not using NTP. Hence I don't think the mode you introduce can be
+> a default-on one, which in turn means a per-domain or at least
+> global enable control is needed (as over previous iterations we
+> seem to have been agreeing).
+
+Regarding the possible unexpected drift if NTP is not used, and the domU
+uses TSC as clocksource anyway: If one host is on one edge of the assumed
+cpu_khz value and the other host is on the opposite edge, and the range
+will be 200 as it is in my patch, the daily drift on a 2.3GHz host would
+be 7.4seconds per day. This number is based on the fact that 200kz happen
+within a time span of 86us, which I think is correct.
+
+The question is, how much drift can be tolerated even without my patch.
+Looking through 5 different hosts I use, the range is between -11 and +22,
+and it happens to be +56 on my Laptop. So even that host with a calculated
+drift of +22 would be off by 2 seconds per day if ntpd would not run.
+
+
+Olaf
+
+--Sig_/CEtqqQt=kBNVZ7ikfKyAUxN
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXBJd6AAKCRBdQqD6ppg2
+fqSYAJ9rkHmAUVlKF5YURzD1lPOA9/F8mQCfegTNB29bxY2TSplWLrjEoBvW+IQ=
+=p2ns
+-----END PGP SIGNATURE-----
+
+--Sig_/CEtqqQt=kBNVZ7ikfKyAUxN--
+
+
+--===============8908011377290823766==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8908011377290823766==--
