@@ -1,23 +1,23 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v11] tolerate jitter in cpu_khz calculation
- to avoid TSC emulation
-Date: Thu, 13 Dec 2018 11:47:40 +0100
-Message-ID: <20181213114740.183827d7.olaf@aepfle.de>
-References: <20181212152056.20480-1-olaf@aepfle.de>
- <5C1139BD0200007800205934@prv1-mh.provo.novell.com>
- <20181213091845.54212b83.olaf@aepfle.de>
- <5C121C330200007800205BC8@prv1-mh.provo.novell.com>
- <20181213100442.3510b91b.olaf@aepfle.de>
- <5C1237680200007800205C8C@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH for-4.12] dt: fix integer check in
+ dt_device_is_compatible
+Date: Thu, 13 Dec 2018 10:47:57 +0000
+Message-ID: <33444cf6-39a0-94eb-5a38-0882f62f2d2d@arm.com>
+References: <1544553966-30776-1-git-send-email-sstabellini@kernel.org>
+ <dac85357-c66f-29eb-6d01-b655250e1111@arm.com>
+ <alpine.DEB.2.10.1812121541050.12259@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8848236106315002825=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=AwXq=OW=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gXOX3-0003JB-7D
- for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 10:47:53 +0000
-In-Reply-To: <5C1237680200007800205C8C@prv1-mh.provo.novell.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=M0om=OW=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gXOXB-0003KG-TK
+ for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 10:48:01 +0000
+In-Reply-To: <alpine.DEB.2.10.1812121541050.12259@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,61 +26,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <stefanos@xilinx.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8848236106315002825==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/R0IiP1qfZk3oz+x+y3t4cLR"; protocol="application/pgp-signature"
-
---Sig_/R0IiP1qfZk3oz+x+y3t4cLR
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 13 Dec 2018 03:41:44 -0700
-schrieb "Jan Beulich" <JBeulich@suse.com>:
-
-> In a second step, let's consider what impact errors in calibration have.
-> Between two systems with exactly the same hardware crystal
-> frequency there of course is going to be some drift. The problem
-> though is - between the two calibrated clock values from two systems
-> you can't easily tell what part of the difference is a result of the
-> calibration being imprecise, and what part of it is because of the
-> crystals not providing the exact same frequency. Without knowing
-> the possible range of both errors, the argumentation of _one of
-> them_ being tolerable within a certain range to consider _both_
-> systems sufficiently equal is at least questionable.
-
-We already have a knob for that, if a reference clock can not be provided:
- tsc_mode=3Dalways_emulate
-This would exactly cover the case there the assumed frequency that is
-available during the start of domU will be used after migration.
-
-Olaf
-
---Sig_/R0IiP1qfZk3oz+x+y3t4cLR
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXBI4zAAKCRBdQqD6ppg2
-frsvAKDPJIOa1Rofgsye7aGGUCZzNt9zvwCg6wexlagVZ8IoyLKTj4ZBAY7UU/I=
-=eF2k
------END PGP SIGNATURE-----
-
---Sig_/R0IiP1qfZk3oz+x+y3t4cLR--
-
-
---===============8848236106315002825==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8848236106315002825==--
+SGkgU3RlZmFubywKCk9uIDEyLzEyLzE4IDExOjUzIFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3Jv
+dGU6Cj4gT24gV2VkLCAxMiBEZWMgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiBIaSBTdGVm
+YW5vLAo+Pgo+PiBPbiAxMS8xMi8yMDE4IDE4OjQ2LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
+Cj4+PiBjcGxlbiBpcyB1bnNpZ25lZCwgdGh1cywgaXQgY2FuIG5ldmVyIGJlIDwgMC4gVXNlIGEg
+c2lnbmVkIGludGVnZXIgbG9jYWwKPj4+IHZhcmlhYmxlIGluc3RlYWQuCj4+Cj4+IFRoZSBjdXJy
+ZW50IGNvZGUgY2hlY2tzID4gMC4gTG9va2luZyBhdCB0aGUgY29kZSBJIGRvbid0IHRoaW5rIGl0
+IGNhbiBldmVyIGJlCj4+IG5lZ2F0aXZlLiBTbyBjYW4geW91IGRldGFpbHMgd2hhdCBpcyB0aGUg
+cHJvYmxlbSB5b3UgYXJlIHRyeWluZyB0byByZXNvbHZlPwo+IAo+IFllcywgaXQgY2FuIGJlICJu
+ZWdhdGl2ZSIgKG5vdCBhY3R1YWxseSBuZWdhdGl2ZSBiZWNhdXNlIGl0IGlzIGRlZmluZWQKPiBh
+cyB1bnNpZ25lZCksIGluIGZhY3QgaXQgaGFwcGVucyB3aXRoIHRoZSBub2RlcyBhZGRlZCBkeW5h
+bWljYWxseSBieSBncnViCj4gYXQgYm9vdC4gVGhpcyBwYXRjaGVzIGZpeGVzIGJvb3RpbmcgZnJv
+bSBncnViLgo+IAo+IFNwZWNpZmljYWxseSBpbGVuIGlzIGluaXRpYWxlZCB0byAxNiwgYnV0IHN0
+cmxlbisxIGlzIDE3LCBzbyBsZW5ndGgKPiBiZWNvbWVzIC0xLiBUaGUgbGVuZ3RoIG9mIHRoZSBw
+cm9wZXJ0eSBnZW5lcmF0ZWQgYnkgZ3J1YiBzZWVtcyB0byBiZQo+IHNob3J0IGJ5IDEuClN1Y2gg
+ZXhwbGFuYXRpb24gc2hvdWxkIGhhdmUgYmVlbiBpbiB0aGUgY29tbWl0IG1lc3NhZ2UsIGl0IGhl
+bHBzIHRvIApkaWFnbm9zdGljcyB3aGVyZSB0aGUgcHJvYmxlbSBpcyBjb21pbmcgZnJvbS4KCkxv
+b2tpbmcgYXQgdGhlIHNwZWNpZmljYXRpb24gWzFdIHNlY3Rpb24gMi4zLjEsIGEgY29tcGF0aWJs
+ZSBwcm9wZXJ0eSBpcyAKYSBjb25jYXRlbmF0ZWQgbGlzdCBvZiBudWxsIHRlcm1pbmF0ZWQgc3Ry
+aW5ncy4gU28gdGhlIGN1cnJlbnQgY29kZSBpcyAKYWN0dWFsbHkgY29ycmVjdCBhbmQgdGhlcmUg
+aXMgYSBidWcgaW4gR1JVQi4KClRoaXMgYnVnIHdhcyBhY3R1YWxseSBmaXhlZCBieSBjb21taXQg
+YWU1ODE3ZjFkICJhcm02NC94ZW5fYm9vdDogRml4IFhlbiAKYm9vdCB1c2luZyBHUlVCMiBvbiBB
+QVJDSDY0Ii4KCkkgYXNzdW1lIHlvdSBhcmUgdXNpbmcgR3J1YiAyLjAyIHdoaWNoIGRvZXMgbm90
+IGNvbnRhaW4gdGhlIGZ1bGwgc3VwcG9ydCAKZm9yIFhlbi4gU28gSSB3b3VsZCBub3QgZXZlbiBj
+b25zaWRlciB0byB3b3JrLWFyb3VuZCBpdCBpbiBYZW4uCgpJbnN0ZWFkLCBJIHdvdWxkIHJlY29t
+bWVuZCB5b3UgdG8gdXBncmFkZSB0byBhIG1vcmUgcmVjZW50IEdSVUIuIEl0IAp3b3VsZCBiZSBt
+b3JlIGxpa2VseSBzdGFnaW5nIGFzIHRoZXJlIGFyZSBubyBuZXcgR1JVQiB2ZXJzaW9uLgoKQW5v
+dGhlciBzb2x1dGlvbiBpcyB0byB1c2UgY2hhaW5sb2FkaW5nLgoKQ2hlZXJzLAoKWzFdIApodHRw
+czovL2dpdGh1Yi5jb20vZGV2aWNldHJlZS1vcmcvZGV2aWNldHJlZS1zcGVjaWZpY2F0aW9uL3Jl
+bGVhc2VzL3RhZy92MC4yCgoKPiAKPj4+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGlu
+aSA8c3RlZmFub3NAeGlsaW54LmNvbT4KPj4+IC0tLQo+Pj4gICAgeGVuL2NvbW1vbi9kZXZpY2Vf
+dHJlZS5jIHwgNyArKysrKy0tCj4+PiAgICAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCsp
+LCAyIGRlbGV0aW9ucygtKQo+Pj4KPj4+IGRpZmYgLS1naXQgYS94ZW4vY29tbW9uL2RldmljZV90
+cmVlLmMgYi94ZW4vY29tbW9uL2RldmljZV90cmVlLmMKPj4+IGluZGV4IDhmYzQwMWQuLmRmMjc0
+Y2MgMTAwNjQ0Cj4+PiAtLS0gYS94ZW4vY29tbW9uL2RldmljZV90cmVlLmMKPj4+ICsrKyBiL3hl
+bi9jb21tb24vZGV2aWNlX3RyZWUuYwo+Pj4gQEAgLTIxMywxNyArMjEzLDIwIEBAIGJvb2xfdCBk
+dF9kZXZpY2VfaXNfY29tcGF0aWJsZShjb25zdCBzdHJ1Y3QKPj4+IGR0X2RldmljZV9ub2RlICpk
+ZXZpY2UsCj4+PiAgICB7Cj4+PiAgICAgICAgY29uc3QgY2hhciogY3A7Cj4+PiAgICAgICAgdTMy
+IGNwbGVuLCBsOwo+Pj4gKyAgICBzNjQgaWxlbjsKPj4+ICAgICAgICAgIGNwID0gZHRfZ2V0X3By
+b3BlcnR5KGRldmljZSwgImNvbXBhdGlibGUiLCAmY3BsZW4pOwo+Pj4gICAgICAgIGlmICggY3Ag
+PT0gTlVMTCApCj4+PiAgICAgICAgICAgIHJldHVybiAwOwo+Pj4gLSAgICB3aGlsZSAoIGNwbGVu
+ID4gMCApCj4+PiArCj4+PiArICAgIGlsZW4gPSBjcGxlbjsKPj4+ICsgICAgd2hpbGUgKCBpbGVu
+ID4gMCApCj4+PiAgICAgICAgewo+Pj4gICAgICAgICAgICBpZiAoIGR0X2NvbXBhdF9jbXAoY3As
+IGNvbXBhdCkgPT0gMCApCj4+PiAgICAgICAgICAgICAgICByZXR1cm4gMTsKPj4+ICAgICAgICAg
+ICAgbCA9IHN0cmxlbihjcCkgKyAxOwo+Pj4gICAgICAgICAgICBjcCArPSBsOwo+Pj4gLSAgICAg
+ICAgY3BsZW4gLT0gbDsKPj4+ICsgICAgICAgIGlsZW4gLT0gbDsKPj4+ICAgICAgICB9Cj4+PiAg
+ICAgICAgICByZXR1cm4gMDsKPj4+Cj4+Cj4+IC0tIAo+PiBKdWxpZW4gR3JhbGwKPj4KCi0tIApK
+dWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
