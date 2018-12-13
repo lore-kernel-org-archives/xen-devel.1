@@ -1,10 +1,10 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 21/25] argo: add array_index_nospec to guard
- the result of the hash func
-Date: Thu, 13 Dec 2018 07:10:45 -0700
-Message-ID: <5C1268650200007800205DC3@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH 22/25] xen/evtchn: expose
+ send_guest_global_virq for use within Xen
+Date: Thu, 13 Dec 2018 07:12:51 -0700
+Message-ID: <5C1268E30200007800205DC6@prv1-mh.provo.novell.com>
 References: <1543627984-21394-1-git-send-email-christopher.w.clark@gmail.com>
- <1543627984-21394-22-git-send-email-christopher.w.clark@gmail.com>
+ <1543627984-21394-23-git-send-email-christopher.w.clark@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -13,9 +13,9 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=79tL=OW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gXRhT-0002J5-7A
- for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 14:10:51 +0000
-In-Reply-To: <1543627984-21394-22-git-send-email-christopher.w.clark@gmail.com>
+ id 1gXRjV-0002Rf-3W
+ for xen-devel@lists.xenproject.org; Thu, 13 Dec 2018 14:12:57 +0000
+In-Reply-To: <1543627984-21394-23-git-send-email-christopher.w.clark@gmail.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -30,14 +30,13 @@ Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei L
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDAxLjEyLjE4IGF0IDAyOjMzLCA8Y2hyaXN0b3BoZXIudy5jbGFya0BnbWFpbC5jb20+
-IHdyb3RlOgo+IFRoaXMgaXMgb3V0IG9mIGFuIGFidW5kYW5jZSBvZiBjYXV0aW9uLCBzaW5jZSB0
-aGlzIGlzIGEgdmVyeSBiYXNpYyBoYXNoCj4gZnVuY3Rpb24sIGNob3NlbiBtb3JlIGZvciBpdHMg
-YnVja2V0IGRpc3RyaWJ1dGlvbiBwcm9wZXJ0aWVzIHRvIGNsdXN0ZXIgcmVsYXRlZAo+IHJpbmdz
-IHJhdGhlciB0aGFuIGZvciBjcnlwdG9ncmFwaGljIHN0cmVuZ3RoIG9yIGFueSB1bmlmb3JtbmVz
-cyBvZiBvdXRwdXQsCj4gYW5kIGl0IG9wZXJhdGVzIHVwb24gdmFsdWVzIHN1cHBsaWVkIGJ5IHRo
-ZSBndWVzdCBqdXN0IGJlZm9yZSBiZWluZyB1c2VkIGFzIGFuCj4gYXJyYXkgaW5kZXguCgpTYW1l
-IGhlcmU6IEJldHRlciB0byBwdXQgdGhpcyBpbiBwbGFjZSByaWdodCBhd2F5IGZvciBuZXcgY29k
-ZQp0aGFuIHRvIGluY3JlbWVudGFsbHkgYWRkIGl0IGxhdGVyLgoKSmFuCgoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+IHdyb3RlOgo+IFRvIGJlIHVzZWQgYnkgQXJnbyBmb3IgZGVsaXZlcnkgb2Ygbm90aWZpY2F0aW9u
+cyB0byBzb21lIGd1ZXN0cy4KCkJldHRlciBub3QgdG8gbWFrZSB0aGlzIGEgc2VwYXJhdGUgcGF0
+Y2g6IEJ5IGZvbGRpbmcgaXQgaW50byB3aGVyZSBpdCdzCm5lZWRlZCBpdCBpcyBlYXNpZXIgZm9y
+IGV2ZXJ5b25lIHRvIGp1ZGdlIHdoZXRoZXIgdGhlIGV4cG9zdXJlIGlzCmluZGVlZCBuZWNlc3Nh
+cnksIGFuZCBpdCBhbHNvIGVsaW1pbmF0ZXMgdGhlIHJpc2sgb2YgdGhlIHNlcmllcyBnZXR0aW5n
+CmNvbW1pdHRlZCB1cCB0byBoZXJlLCBhbmQgdGhlIGZ1bmN0aW9uIHRoZW4gYmVpbmcgcG9pbnRs
+ZXNzbHkgbm9uLQpzdGF0aWMgZm9yIGFuIGV4dGVuZGVkIHBlcmlvZCBvZiB0aW1lLgoKSmFuCgoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
