@@ -1,23 +1,20 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH v4 16/18] xen: automatically create
- XenBlockDevice-s
-Date: Fri, 14 Dec 2018 14:50:24 +0000
-Message-ID: <6291f3bff540494a9f1b2e7ce72570ac@AMSPEX02CL02.citrite.net>
-References: <1544543862-9997-1-git-send-email-paul.durrant@citrix.com>
- <1544543862-9997-17-git-send-email-paul.durrant@citrix.com>
- <20181213115152.GA5427@linux.fritz.box>
+From: Stefan Hajnoczi <stefanha@redhat.com>
+Subject: Re: [PATCH 2/2] avoid TABs in files that only contain a
+ few
+Date: Fri, 14 Dec 2018 15:16:11 +0000
+Message-ID: <20181214151611.GC3882__45798.9686321982$1544800529$gmane$org@stefanha-x1.localdomain>
+References: <20181213223737.11793-1-pbonzini@redhat.com>
+ <20181213223737.11793-3-pbonzini@redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4739609091518522587=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=KWVA=OX=citrix.com=prvs=8792ba347=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gXonM-0003Mc-9L
- for xen-devel@lists.xenproject.org; Fri, 14 Dec 2018 14:50:28 +0000
-In-Reply-To: <20181213115152.GA5427@linux.fritz.box>
-Content-Language: en-US
+ <SRS0=JYc0=OX=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
+ id 1gXpCX-0005Tv-Rn
+ for xen-devel@lists.xenproject.org; Fri, 14 Dec 2018 15:16:29 +0000
+In-Reply-To: <20181213223737.11793-3-pbonzini@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,41 +23,297 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Kevin Wolf' <kwolf@redhat.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>, Max Reitz <mreitz@redhat.com>
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Dmitry Fleytman <dmitry.fleytman@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, qemu-devel@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Fam Zheng <famz@redhat.com>, Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, "open list:bochs" <qemu-block@nongnu.org>, Stefan Markovic <smarkovic@wavecomp.com>, Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>, Magnus Damm <magnus.damm@gmail.com>, =?iso-8859-1?Q?Herv=E9?= Poussineau <hpoussin@reactos.org>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Anthony Perard <anthony.perard@citrix.com>, =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>, David Gibson <david@gibson.dropbear.id.au>, Andrzej Zaborowski <balrogg@gmail.com>, Thomas Huth <thuth@redhat.c>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQpbc25pcF0KPiA+ICsKPiA+ICsgICAgYmxvY2tk
-ZXYtPmF1dG9faW90aHJlYWQgPSBpb3RocmVhZDsKPiA+ICsKPiA+ICsgICAgb2JqZWN0X3Byb3Bl
-cnR5X3NldF9ib29sKE9CSkVDVChkZXYpLCB0cnVlLCAicmVhbGl6ZWQiLAo+ICZsb2NhbF9lcnIp
-Owo+ID4gKyAgICBpZiAobG9jYWxfZXJyKSB7Cj4gPiArICAgICAgICBlcnJvcl9wcm9wYWdhdGVf
-cHJlcGVuZChlcnJwLCBsb2NhbF9lcnIsCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAiaW5pdGlhbGl6YXRpb24gb2YgZGV2aWNlICVzIGZhaWxlZDogIiwKPiA+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHR5cGUpOwo+ID4gKyAgICAgICAgZ290byB1bnJlZjsK
-PiA+ICsgICAgfQo+ID4gKwo+ID4gKyAgICBibG9ja2Rldl9tYXJrX2F1dG9fZGVsKGJsayk7Cj4g
-Cj4gWW91IGRvbid0IG5lZWQgdGhpcyBvbmUgYW55IG1vcmUgdGhlbiAoaWYgeW91IGxvb2sgaW50
-byB0aGUgZGV0YWlscywKPiBpdCdzIG9uZSBvZiB0aGUgbW9yZSBjb25mdXNpbmcgcGFydHMgb2Yg
-dGhlIGRyaXZlXyooKSBtYWdpYywgc28gaXQncwo+IGdvb2QgdG8gZ2V0IHJpZCBvZiBpdCkuIFdo
-ZW4geW91IHVzZSB0aGUgYW5vbnltb3VzIEJsb2NrQmFja2VuZCBjcmVhdGVkCj4gYnkgdGhlIHFk
-ZXYgZHJpdmUgcHJvcGVydHkgKGJlY2F1c2UgeW91IHBhc3NlZCBpdCBhIG5vZGUtbmFtZSByYXRo
-ZXIKPiB0aGFuIGEgQmxvY2tCYWNrZW5kIG5hbWUpIG1lYW5zIHRoYXQgdGhlIEJsb2NrQmFja2Vu
-ZCBkaXNhcHBlYXJzCj4gdG9nZXRoZXIgd2l0aCB0aGUgZHJpdmUuCj4gCj4gTm90ZSB0aGF0IGV4
-cGxpY2l0bHkgY3JlYXRlZCBibG9jayBub2RlcyBtdXN0IGFsc28gYmUgdW5yZWZlcmVuY2VkCj4g
-ZXhwbGljaXRseSAoYmRydl9vcGVuKCkgc2hvdWxkIGJlIHBhaXJlZCB3aXRoIGJkcnZfdW5yZWYo
-KSBhbmQKPiBxbXBfYmxvY2tkZXZfYWRkKCkgd2l0aCBxbXBfYmxvY2tkZXZfZGVsKCkpLiBNYXli
-ZSBYZW5CYWNrZW5kSW5mbyBuZWVkcwo+IGEgLmRlc3Ryb3kgY2FsbGJhY2sgc28gd2UgY2FuIGRv
-IGRlc3RydWN0aW9uIHN5bW1ldHJpY2FsbHkgdG8gZGV2aWNlCj4gY3JlYXRpb24/Cj4gCgpJIGhh
-dmUgc29tZXRoaW5nIGltcGxlbWVudGVkIHVzaW5nIHFtcF9ibG9ja2Rldl9hZGQoKSBub3cgYW5k
-IGl0IHNlZW1zIHRvIHdvcmssIGJ1dCB3aGVuIEkgY2FsbCBpbnRvIHFtcF9ibG9ja2Rldl9kZWwo
-KSAocGFzc2luZyBpbiB0aGUgbm9kZS1uYW1lIEkgdXNlZCB0byB0aGUgc2V0IHRoZSAiZHJpdmUi
-IHBhcmFtZXRlcikgZHVyaW5nIHVucmVhbGl6ZSB0aGVuIGl0IHRlbGxzIG1lIHRoYXQgdGhlIGRl
-dmljZSBpcyBpbiB1c2UuIERvIEkgbmVlZCBhIGNhbGxiYWNrIHRoYXQgcnVucyBhZnRlciB1bnJl
-YWxpemUgb2YgdGhlIGRldmljZT8KCiAgUGF1bCAKCj4gPiArICAgIHJldHVybjsKPiA+ICsKPiA+
-ICt1bnJlZjoKPiA+ICsgICAgaWYgKGRldikgewo+ID4gKyAgICAgICAgb2JqZWN0X3VucGFyZW50
-KE9CSkVDVChkZXYpKTsKPiA+ICsgICAgfQo+ID4gKwo+ID4gKyAgICBpZiAoaW90aHJlYWQpIHsK
-PiA+ICsgICAgICAgIGlvdGhyZWFkX2Rlc3Ryb3koaW90aHJlYWQpOwo+ID4gKyAgICB9Cj4gPiAr
-Cj4gPiArICAgIGlmIChibGspIHsKPiA+ICsgICAgICAgIG1vbml0b3JfcmVtb3ZlX2JsayhibGsp
-Owo+ID4gKyAgICAgICAgYmxrX3VucmVmKGJsayk7Cj4gPiArICAgIH0KPiA+ICt9Cj4gCj4gS2V2
-aW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============4739609091518522587==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="H8ygTp4AXg6deix2"
+Content-Disposition: inline
+
+
+--H8ygTp4AXg6deix2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Dec 13, 2018 at 11:37:37PM +0100, Paolo Bonzini wrote:
+> Most files that have TABs only contain a handful of them.  Change
+> them to spaces so that we don't confuse people.
+>=20
+> disas, standard-headers, linux-headers and libdecnumber are imported
+> from other projects and probably should be exempted from the check.
+> Outside those, after this patch the following files still contain both
+> 8-space and TAB sequences at the beginning of the line.  Many of them
+> have a majority of TABs, or were initially committed with all tabs.
+>=20
+>     bsd-user/i386/target_syscall.h
+>     bsd-user/x86_64/target_syscall.h
+>     crypto/aes.c
+>     hw/audio/fmopl.c
+>     hw/audio/fmopl.h
+>     hw/block/tc58128.c
+>     hw/display/cirrus_vga.c
+>     hw/display/xenfb.c
+>     hw/dma/etraxfs_dma.c
+>     hw/intc/sh_intc.c
+>     hw/misc/mst_fpga.c
+>     hw/net/pcnet.c
+>     hw/sh4/sh7750.c
+>     hw/timer/m48t59.c
+>     hw/timer/sh_timer.c
+>     include/crypto/aes.h
+>     include/disas/bfd.h
+>     include/hw/sh4/sh.h
+>     libdecnumber/decNumber.c
+>     linux-headers/asm-generic/unistd.h
+>     linux-headers/linux/kvm.h
+>     linux-user/alpha/target_syscall.h
+>     linux-user/arm/nwfpe/double_cpdo.c
+>     linux-user/arm/nwfpe/fpa11_cpdt.c
+>     linux-user/arm/nwfpe/fpa11_cprt.c
+>     linux-user/arm/nwfpe/fpa11.h
+>     linux-user/flat.h
+>     linux-user/flatload.c
+>     linux-user/i386/target_syscall.h
+>     linux-user/ppc/target_syscall.h
+>     linux-user/sparc/target_syscall.h
+>     linux-user/syscall.c
+>     linux-user/syscall_defs.h
+>     linux-user/x86_64/target_syscall.h
+>     slirp/cksum.c
+>     slirp/if.c
+>     slirp/ip.h
+>     slirp/ip_icmp.c
+>     slirp/ip_icmp.h
+>     slirp/ip_input.c
+>     slirp/ip_output.c
+>     slirp/mbuf.c
+>     slirp/misc.c
+>     slirp/sbuf.c
+>     slirp/socket.c
+>     slirp/socket.h
+>     slirp/tcp_input.c
+>     slirp/tcpip.h
+>     slirp/tcp_output.c
+>     slirp/tcp_subr.c
+>     slirp/tcp_timer.c
+>     slirp/tftp.c
+>     slirp/udp.c
+>     slirp/udp.h
+>     target/cris/cpu.h
+>     target/cris/mmu.c
+>     target/cris/op_helper.c
+>     target/sh4/helper.c
+>     target/sh4/op_helper.c
+>     target/sh4/translate.c
+>     tcg/sparc/tcg-target.inc.c
+>     tests/tcg/cris/check_addo.c
+>     tests/tcg/cris/check_moveq.c
+>     tests/tcg/cris/check_swap.c
+>     tests/tcg/multiarch/test-mmap.c
+>     ui/vnc-enc-hextile-template.h
+>     ui/vnc-enc-zywrle.h
+>     util/envlist.c
+>     util/readline.c
+>=20
+> The following have only TABs:
+>=20
+>     bsd-user/i386/target_signal.h
+>     bsd-user/sparc64/target_signal.h
+>     bsd-user/sparc64/target_syscall.h
+>     bsd-user/sparc/target_signal.h
+>     bsd-user/sparc/target_syscall.h
+>     bsd-user/x86_64/target_signal.h
+>     crypto/desrfb.c
+>     hw/audio/intel-hda-defs.h
+>     hw/core/uboot_image.h
+>     hw/sh4/sh7750_regnames.c
+>     hw/sh4/sh7750_regs.h
+>     include/hw/cris/etraxfs_dma.h
+>     linux-user/alpha/termbits.h
+>     linux-user/arm/nwfpe/fpopcode.h
+>     linux-user/arm/nwfpe/fpsr.h
+>     linux-user/arm/syscall_nr.h
+>     linux-user/arm/target_signal.h
+>     linux-user/cris/target_signal.h
+>     linux-user/i386/target_signal.h
+>     linux-user/linux_loop.h
+>     linux-user/m68k/target_signal.h
+>     linux-user/microblaze/target_signal.h
+>     linux-user/mips64/target_signal.h
+>     linux-user/mips/target_signal.h
+>     linux-user/mips/target_syscall.h
+>     linux-user/mips/termbits.h
+>     linux-user/ppc/target_signal.h
+>     linux-user/sh4/target_signal.h
+>     linux-user/sh4/termbits.h
+>     linux-user/sparc64/target_syscall.h
+>     linux-user/sparc/target_signal.h
+>     linux-user/x86_64/target_signal.h
+>     linux-user/x86_64/termbits.h
+>     pc-bios/optionrom/optionrom.h
+>     slirp/mbuf.h
+>     slirp/misc.h
+>     slirp/sbuf.h
+>     slirp/tcp.h
+>     slirp/tcp_timer.h
+>     slirp/tcp_var.h
+>     target/i386/svm.h
+>     target/sparc/asi.h
+>     target/xtensa/core-dc232b/xtensa-modules.inc.c
+>     target/xtensa/core-dc233c/xtensa-modules.inc.c
+>     target/xtensa/core-de212/core-isa.h
+>     target/xtensa/core-de212/xtensa-modules.inc.c
+>     target/xtensa/core-fsf/xtensa-modules.inc.c
+>     target/xtensa/core-sample_controller/core-isa.h
+>     target/xtensa/core-sample_controller/xtensa-modules.inc.c
+>     target/xtensa/core-test_kc705_be/core-isa.h
+>     target/xtensa/core-test_kc705_be/xtensa-modules.inc.c
+>     tests/tcg/cris/check_abs.c
+>     tests/tcg/cris/check_addc.c
+>     tests/tcg/cris/check_addcm.c
+>     tests/tcg/cris/check_addoq.c
+>     tests/tcg/cris/check_bound.c
+>     tests/tcg/cris/check_ftag.c
+>     tests/tcg/cris/check_int64.c
+>     tests/tcg/cris/check_lz.c
+>     tests/tcg/cris/check_openpf5.c
+>     tests/tcg/cris/check_sigalrm.c
+>     tests/tcg/cris/crisutils.h
+>     tests/tcg/cris/sys.c
+>     tests/tcg/i386/test-i386-ssse3.c
+>     ui/vgafont.h
+>=20
+> Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+> ---
+>  block/bochs.c                              | 22 ++---
+>  block/file-posix.c                         |  2 +-
+>  block/file-win32.c                         |  8 +-
+>  block/linux-aio.c                          |  4 +-
+>  block/qcow2-cluster.c                      |  2 +-
+>  block/vpc.c                                |  2 +-
+>  bsd-user/elfload.c                         |  2 +-
+>  contrib/elf2dmp/main.c                     |  2 +-
+>  hw/alpha/typhoon.c                         | 12 +--
+>  hw/arm/stellaris.c                         |  2 +-
+>  hw/arm/virt.c                              |  2 +-
+>  hw/char/sh_serial.c                        | 18 ++---
+>  hw/char/virtio-serial-bus.c                |  2 +-
+>  hw/char/xen_console.c                      | 58 ++++++-------
+>  hw/core/loader.c                           | 28 +++----
+>  hw/display/tc6393xb.c                      |  6 +-
+>  hw/display/vga.c                           |  8 +-
+>  hw/display/virtio-gpu-3d.c                 |  6 +-
+>  hw/dma/pxa2xx_dma.c                        |  4 +-
+>  hw/dma/soc_dma.c                           |  2 +-
+>  hw/gpio/max7310.c                          |  2 +-
+>  hw/i386/xen/xen-hvm.c                      |  4 +-
+>  hw/ide/core.c                              | 94 +++++++++++-----------
+>  hw/input/lm832x.c                          |  2 +-
+>  hw/input/pckbd.c                           |  2 +-
+>  hw/input/tsc210x.c                         |  2 +-
+>  hw/intc/apic.c                             |  2 +-
+>  hw/mips/gt64xxx_pci.c                      |  6 +-
+>  hw/mips/mips_r4k.c                         |  4 +-
+>  hw/misc/max111x.c                          |  6 +-
+>  hw/misc/omap_l4.c                          |  4 +-
+>  hw/net/mipsnet.c                           | 16 ++--
+>  hw/net/ne2000.c                            | 44 +++++-----
+>  hw/net/rocker/rocker.c                     |  2 +-
+>  hw/net/virtio-net.c                        |  4 +-
+>  hw/net/vmxnet3.c                           |  6 +-
+>  hw/pci/msix.c                              |  2 +-
+>  hw/pci/pci.c                               | 44 +++++-----
+>  hw/pci/pci_bridge.c                        |  2 +-
+>  hw/ppc/ppc405_uc.c                         |  2 +-
+>  hw/ppc/prep.c                              |  4 +-
+>  hw/scsi/lsi53c895a.c                       |  6 +-
+>  hw/sh4/r2d.c                               | 16 ++--
+>  hw/usb/dev-bluetooth.c                     |  2 +-
+>  hw/usb/dev-hid.c                           |  6 +-
+>  hw/usb/dev-hub.c                           | 14 ++--
+>  hw/xen/xen_devconfig.c                     |  2 +-
+>  hw/xenpv/xen_domainbuild.c                 |  8 +-
+>  include/elf.h                              | 10 +--
+>  include/hw/acpi/acpi.h                     | 14 ++--
+>  include/hw/elf_ops.h                       |  2 +-
+>  include/hw/ide/internal.h                  |  2 +-
+>  include/hw/sh4/sh_intc.h                   | 20 ++---
+>  include/hw/xen/io/ring.h                   |  4 +-
+>  include/qemu/acl.h                         | 14 ++--
+>  include/qemu/iov.h                         |  2 +-
+>  include/scsi/constants.h                   |  2 +-
+>  include/sysemu/balloon.h                   |  2 +-
+>  linux-user/linuxload.c                     | 14 ++--
+>  linux-user/main.c                          |  4 +-
+>  linux-user/mmap.c                          | 10 +--
+>  linux-user/qemu.h                          |  4 +-
+>  linux-user/signal.c                        | 16 ++--
+>  linux-user/strace.c                        |  4 +-
+>  linux-user/uaccess.c                       |  2 +-
+>  linux-user/vm86.c                          |  2 +-
+>  nbd/client.c                               |  2 +-
+>  net/checksum.c                             |  2 +-
+>  qtest.c                                    |  4 +-
+>  target/alpha/translate.c                   |  2 +-
+>  target/cris/helper.c                       |  2 +-
+>  target/cris/mmu.h                          | 10 +--
+>  target/cris/translate_v10.inc.c            |  2 +-
+>  target/i386/translate.c                    | 12 +--
+>  target/mips/translate.c                    |  2 +-
+>  target/tilegx/translate.c                  |  2 +-
+>  tcg/i386/tcg-target.inc.c                  |  4 +-
+>  tests/tcg/alpha/test-cond.c                |  4 +-
+>  tests/tcg/arm/hello-arm.c                  | 20 ++---
+>  tests/tcg/cris/check_glibc_kernelversion.c |  8 +-
+>  tests/tcg/cris/check_mmap3.c               |  2 +-
+>  tests/tcg/cris/check_openpf1.c             |  2 +-
+>  tests/tcg/cris/check_settls1.c             |  2 +-
+>  tests/tcg/i386/hello-i386.c                | 14 ++--
+>  tests/tcg/mips/hello-mips.c                | 10 +--
+>  tests/tcg/multiarch/sha1.c                 | 12 +--
+>  tests/vhost-user-test.c                    |  4 +-
+>  ui/keymaps.h                               |  4 +-
+>  ui/qemu-pixman.c                           |  2 +-
+>  ui/vnc-enc-zywrle-template.c               |  4 +-
+>  ui/vnc.c                                   |  4 +-
+>  util/bitops.c                              |  4 +-
+>  util/osdep.c                               |  4 +-
+>  util/qemu-sockets.c                        |  4 +-
+>  94 files changed, 388 insertions(+), 388 deletions(-)
+
+Block parts:
+
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+
+--H8ygTp4AXg6deix2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEcBAEBAgAGBQJcE8k7AAoJEJykq7OBq3PIllsH/jeHnhoXQNzsW/s1Lfdw1dF9
+XQceJGlfbYuejNEJ0NUw3EWjyWkcAfq539GBQX3nRyhA3AtLWW9eBYrUc90Ec0F0
+Oh+WVUHNcCT/lO92Y3toCGuH6HXNJ5mESZ+ZTgDwvZ9xG6c+YlZDEfqdzVXjwl/b
+IT2SAfffSJG1wARCeKWL3uu4G3tN1dABICNMN0hne8hOT3C19lNvLjruprMkkqrB
+p50L1WJ13E8ckcp+ITjQmSCZznmANKmvCUbmGOnRO/jUkKwoaS64okIfUVc1biPd
+NrbBiJKZIWuRhXVHisU5TRj4K5o4nZXnYva8R19qgj2jmGRa20y65kCYoalTOd4=
+=uq7T
+-----END PGP SIGNATURE-----
+
+--H8ygTp4AXg6deix2--
+
+
+--===============4739609091518522587==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4739609091518522587==--
