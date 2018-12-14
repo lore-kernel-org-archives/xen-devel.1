@@ -1,18 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH for-4.12 v2 2/2] xen/arm: Stop relocating Xen
-Date: Fri, 14 Dec 2018 18:04:13 +0000
-Message-ID: <84968c09-b197-5194-53f2-b0c3837ec414@arm.com>
-References: <20181214114455.5841-1-julien.grall@arm.com>
- <20181214114455.5841-3-julien.grall@arm.com>
- <90f45fb8-3ff7-492e-3773-c8d3bd2906bc@gmail.com>
- <d0e0d122-b389-8fa0-df24-80cb1fe926c7@arm.com>
- <9850ed66-1a28-4af4-7306-6c0922900ce1@gmail.com>
+From: Jason Long <hack3rcon@yahoo.com>
+Subject: Xen Project type-2 version.
+Date: Fri, 14 Dec 2018 18:18:54 +0000 (UTC)
+Message-ID: <1293859477.4450844.1544811534430@mail.yahoo.com>
+References: <1293859477.4450844.1544811534430.ref@mail.yahoo.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6392539277704032924=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <9850ed66-1a28-4af4-7306-6c0922900ce1@gmail.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=yUyH=OX=yahoo.com=hack3rcon@srs-us1.protection.inumbo.net>)
+ id 1gXs38-0001DW-Ow
+ for Xen-devel@lists.xenproject.org; Fri, 14 Dec 2018 18:18:59 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,40 +20,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-Cc: Matthew Daley <mattd@bugfuzz.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
+To: "Xen-devel@lists.xenproject.org" <Xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxNC8xMi8yMDE4IDE3OjQ2LCBBbmRyaWkgQW5pc292IHdyb3RlOgo+PiBIb3cgd2Vy
-ZSB5b3Ugc3dpdGNoaW5nIGJldHdlZW4gdGhlIHBhZ2UtdGFibGVzPyBBIHByb3BlciBzb2x1dGlv
-biB3b3VsZCByZXF1aXJlCj4+IHRvIHN3aXRjaCBiZXR3ZWVuIHBhZ2UtdGFibGVzIHVzaW5nIGFu
-IGlkZW50aWZ5IG1hcHBpbmdzLiBUaGlzIGlzIGZhciBtb3JlCj4+IGNvbXBsaWNhdGUgdGhhbiB3
-aGF0IGlzIHdvcnRoIGhlcmUuCj4gCj4gU29ycnkgZm9yIG15IGlnbm9yYW5jZSwgd2hhdCAiaWRl
-bnRpZnkgbWFwcGluZ3MiIHN0YW5kcyBmb3I/CgpJIG1lYW50IGlkZW50aXR5IG1hcHBpbmcgc29y
-cnkuCgo+IEFueSBsaW5rcyBmb3IgdGhlIAo+IHByb2JsZW0gZGVzY3JpcHRpb24/CgpIYXZlIGEg
-bG9vayBhdCAiVXNpbmcgYnJlYWstYmVmb3JlLW1ha2Ugd2hlbiB1cGRhdGluZyB0cmFuc2xhdGlv
-biB0YWJsZSBlbnRyaWVzIiAKRDUtMjUxNiBpbiBBUk0gRERJIDA0ODdELmEuIFRoZSB1bmRlcmx5
-aW5nIGlzc3VlIGlzIHlvdSBjYW4ndCBjaGFuZ2UgdGhlIG1hcHBpbmcgCndpdGggZ29pbmcgdGhy
-b3VnaCBhbiBpbnZhbGlkIHN0YXRlLiBTbyBpZiB5b3Ugc3dpdGNoIGJldHdlZW4gMiBwYWdlLXRh
-YmxlcyB5b3UgCm5lZWQgcm91Z2hseSB0bzoKCS0gRGlzYWJsZSBNTVUKCS0gRmx1c2ggVExCcwoJ
-LSBTd2l0Y2ggcGFnZS10YWJsZXMKCS0gRW5hYmxlIE1NVQoKVGhlIG5ldyBzZXQgb2YgcGFnZS10
-YWJsZXMgbmVlZHMgdG8gY29udGFpbiBhbiBpZGVudGl0eSBtYXBwaW5nIGNvcnJlc3BvbmRpbmcg
-dG8gCndoZXJlIFhlbiBpcyBsb2FkZWQgaW4gbWVtb3J5LiBTdWNoIG1hcHBpbmcgaXMgcXVpdGUg
-ZGlmZmljdWx0IHRvIGhhdmUgb24gWGVuIApiZWNhdXNlIHRoZSBtZW1vcnkgbGF5b3V0IGlzIHN0
-YXRpYy4KCkp1c3QgaW4gY2FzZSwgSSBrbm93IHRoYXQgWGVuIGRvZXMgbm90IHJlc3BlY3QgdGhh
-dCB0b2RheS4gV2UgYXJlIHF1aXRlIGx1Y2t5IHNvIApmYXIgdGhhdCB0aGlzIGRpZG4ndCByZXN1
-bHQgdG8gd2VpcmQgYmVoYXZpb3Igd2hlbiBydW5uaW5nIFhlbi4gQWx0aG91Z2gsIEkgYW0gCnN0
-YXJ0aW5nIHRvIHNlZSBtb3JlIHJlcG9ydCBvZiBpbnRlcmVzdGluZyBjcmFzaCB3aXRoIG5ld2Vy
-IHByb2Nlc3Nvci4gUmVtb3ZpbmcgCnRoZSByZWxvY2F0aW9uIGlzIGEgZmlyc3Qgc3RlcCB0b3dh
-cmRzIGF2b2lkaW5nIHRvIHN3aXRjaCBiZXR3ZWVuIHBhZ2UtdGFibGVzLgoKPj4gWGVuIGlzIGZy
-ZWUgdG8gYWxsb2NhdGUgYW55dGhpbmcgYmVsb3cgNEdCLiBUaGlzIGlzIG5vdGhpbmcgbmV3LiBC
-dXQgeW91IHNob3VsZAo+PiBub3QgaGF2ZSB0d28gMTI4TUIgY2h1bmtzIHN0b2xlbiBiZWNhdXNl
-IG9mIG1vZHVsZXMgaGVyZS4gSWYgdGhhdCdzIHRoZSBjYXNlCj4+IHRoZW4gdGhlcmUgaXMgYSBi
-dWcgaW4gWGVuIHRoYXQgc2hvdWxkIGJlIGZpeGVkLgo+IAo+IFRoZXkgYXJlIHN0b2xlbiBmcm9t
-IDE6MSBtZW1vcnkgYWxsb2NhdGlvbiBiZWNhdXNlIG9mIGBhbGxvY2F0ZV9tZW1vcnlfMTEoKWAg
-Cj4gZGVzaWduIGFuZCBpbXBsZW1lbnRhdGlvbi4KClRoZW4gdGhlIGNvZGUgbmVlZHMgdG8gYmUg
-Zml4ZWQuLi4gSXQgd291bGQgYmUgbmljZSB0byBnZXQgc29tZSBoZWxwcyBoZXJlIGFzIEkgCmNh
-bid0IHNjYWxlLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============6392539277704032924==
+Content-Type: multipart/alternative;
+	boundary="----=_Part_4450843_395324755.1544811534429"
+Content-Length: 657
+
+------=_Part_4450843_395324755.1544811534429
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hello.Can we see a small version of Xen in the future? Something like type-2.
+Thanks.
+------=_Part_4450843_395324755.1544811534429
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<html><head></head><body>Hello.<div class="ydp922fe50byahoo-style-wrap" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;"></div><div>Can we see a small version of Xen in the future? Something like type-2.</div><div><br></div><div>Thanks.</div></body></html>
+------=_Part_4450843_395324755.1544811534429--
+
+
+--===============6392539277704032924==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6392539277704032924==--
