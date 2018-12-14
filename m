@@ -1,15 +1,21 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH for-4.12 v2 1/2] xen/arm: mm: Use
- pte_xen_addr when creating xen entries
-Date: Fri, 14 Dec 2018 13:44:16 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1812141344060.14554@sstabellini-ThinkPad-X260>
-References: <20181214114455.5841-1-julien.grall@arm.com>
- <20181214114455.5841-2-julien.grall@arm.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v9 0/7] KVM: x86: Allow Qemu/KVM to use PVH
+ entry point
+Date: Fri, 14 Dec 2018 18:13:10 -0500
+Message-ID: <f7578f80-9bfb-3c90-69fe-11514209db7f__24414.3621334389$1544829198$gmane$org@oracle.com>
+References: <1544468734-32763-1-git-send-email-maran.wilson@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181214114455.5841-2-julien.grall@arm.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=CtUr=OX=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1gXwel-0006fI-6f
+ for xen-devel@lists.xenproject.org; Fri, 14 Dec 2018 23:14:07 +0000
+In-Reply-To: <1544468734-32763-1-git-send-email-maran.wilson@oracle.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,34 +24,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: sstabellini@kernel.org, xen-devel@lists.xen.org
+To: Maran Wilson <maran.wilson@oracle.com>, x86@kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, pbonzini@redhat.com, jgross@suse.com
+Cc: thomas.lendacky@amd.com, mchehab@kernel.org, hpa@zytor.com, rkrcmar@redhat.com, gregkh@linuxfoundation.org, dave.hansen@linux.intel.com, hch@infradead.org, mingo@redhat.com, rdunlap@infradead.org, luto@kernel.org, jpoimboe@redhat.com, tglx@linutronix.de, bp@suse.de, davem@davemloft.net, kirill.shutemov@linux.intel.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAxNCBEZWMgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZSBoZWxwZXIgcHRl
-X3hlbl9hZGRyIGNvbXB1dGVzIHRoZSBNRk4gYmFzZWQgb24gdGhlIHZpcnR1YWwKPiBhZGRyZXNz
-IGFuZCBnZW5lcmF0ZXMgdGhlIFBURS4gVGhpcyBjYW4gYmUgcgo+IAo+IEF0IHRoZSBzYW1lIHRp
-bWUsIG1ha2UgdmEgYSB2YWRkcl90IHRvIG1ha2UgY2xlYXIgaXQgaG9sZHMgdmlydHVhbCBhZGRy
-ZXNzLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5j
-b20+CgpBY2tlZC1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3Jn
-PgoKPiAtLS0KPiAgICAgQ2hhbmdlcyBpbiB2MjoKPiAgICAgICAgIC0gTmV3IHBhdGNoCj4gLS0t
-Cj4gIHhlbi9hcmNoL2FybS9tbS5jIHwgNSArKy0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMiBpbnNl
-cnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0v
-bW0uYyBiL3hlbi9hcmNoL2FybS9tbS5jCj4gaW5kZXggMjU1NmU1N2E5OS4uOTFmM2FlZjkzYyAx
-MDA2NDQKPiAtLS0gYS94ZW4vYXJjaC9hcm0vbW0uYwo+ICsrKyBiL3hlbi9hcmNoL2FybS9tbS5j
-Cj4gQEAgLTY1MiwxMiArNjUyLDExIEBAIHZvaWQgX19pbml0IHNldHVwX3BhZ2V0YWJsZXModW5z
-aWduZWQgbG9uZyBib290X3BoeXNfb2Zmc2V0LCBwYWRkcl90IHhlbl9wYWRkcikKPiAgICAgIC8q
-IEJyZWFrIHVwIHRoZSBYZW4gbWFwcGluZyBpbnRvIDRrIHBhZ2VzIGFuZCBwcm90ZWN0IHRoZW0g
-c2VwYXJhdGVseS4gKi8KPiAgICAgIGZvciAoIGkgPSAwOyBpIDwgTFBBRV9FTlRSSUVTOyBpKysg
-KQo+ICAgICAgewo+IC0gICAgICAgIG1mbl90IG1mbiA9IG1mbl9hZGQobWFkZHJfdG9fbWZuKHhl
-bl9wYWRkciksIGkpOwo+IC0gICAgICAgIHVuc2lnbmVkIGxvbmcgdmEgPSBYRU5fVklSVF9TVEFS
-VCArIChpIDw8IFBBR0VfU0hJRlQpOwo+ICsgICAgICAgIHZhZGRyX3QgdmEgPSBYRU5fVklSVF9T
-VEFSVCArIChpIDw8IFBBR0VfU0hJRlQpOwo+ICAKPiAgICAgICAgICBpZiAoICFpc19rZXJuZWwo
-dmEpICkKPiAgICAgICAgICAgICAgYnJlYWs7Cj4gLSAgICAgICAgcHRlID0gbWZuX3RvX3hlbl9l
-bnRyeShtZm4sIE1UX05PUk1BTCk7Cj4gKyAgICAgICAgcHRlID0gcHRlX29mX3hlbmFkZHIodmEp
-Owo+ICAgICAgICAgIHB0ZS5wdC50YWJsZSA9IDE7IC8qIDRrIG1hcHBpbmdzIGFsd2F5cyBoYXZl
-IHRoaXMgYml0IHNldCAqLwo+ICAgICAgICAgIGlmICggaXNfa2VybmVsX3RleHQodmEpIHx8IGlz
-X2tlcm5lbF9pbml0dGV4dCh2YSkgKQo+ICAgICAgICAgIHsKPiAtLSAKPiAyLjExLjAKPiAKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTIvMTAvMTggMjowNSBQTSwgTWFyYW4gV2lsc29uIHdyb3RlOgo+IEZvciBjZXJ0YWluIGFw
+cGxpY2F0aW9ucyBpdCBpcyBkZXNpcmFibGUgdG8gcmFwaWRseSBib290IGEgS1ZNIHZpcnR1YWwK
+PiBtYWNoaW5lLiBJbiBjYXNlcyB3aGVyZSBsZWdhY3kgaGFyZHdhcmUgYW5kIHNvZnR3YXJlIHN1
+cHBvcnQgd2l0aGluIHRoZQo+IGd1ZXN0IGlzIG5vdCBuZWVkZWQsIFFlbXUgc2hvdWxkIGJlIGFi
+bGUgdG8gYm9vdCBkaXJlY3RseSBpbnRvIHRoZQo+IHVuY29tcHJlc3NlZCBMaW51eCBrZXJuZWwg
+YmluYXJ5IHdpdGhvdXQgdGhlIG5lZWQgdG8gcnVuIGZpcm13YXJlLgo+Cj4gVGhlcmUgYWxyZWFk
+eSBleGlzdHMgYW4gQUJJIHRvIGFsbG93IHRoaXMgZm9yIFhlbiBQVkggZ3Vlc3RzIGFuZCB0aGUg
+QUJJCj4gaXMgc3VwcG9ydGVkIGJ5IExpbnV4IGFuZCBGcmVlQlNEOgo+Cj4gICAgaHR0cHM6Ly94
+ZW5iaXRzLnhlbi5vcmcvZG9jcy91bnN0YWJsZS9taXNjL3B2aC5odG1sCj4KPiBUaGlzIHBhdGNo
+IHNlcmllcyB3b3VsZCBlbmFibGUgUWVtdSB0byB1c2UgdGhhdCBzYW1lIGVudHJ5IHBvaW50IGZv
+cgo+IGJvb3RpbmcgS1ZNIGd1ZXN0cy4KPgoKCkFwcGxpZWQgdG8gZm9yLWxpbnVzLTQuMjEKCgot
+Ym9yaXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
