@@ -1,22 +1,22 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: Race condition on device add hanling in xl devd
-Date: Mon, 17 Dec 2018 13:23:15 +0100
-Message-ID: <20181217122315.GC23474@mail-itl>
-References: <20181216014743.GA5040@mail-itl>
- <20181217094059.rvoptuzp6im52jyp@mac>
- <20181217120001.GB23474@mail-itl>
- <20181217121855.zsrn6fvliz4f5yul@mac>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v5 09/18] xen: remove unnecessary code from
+ dataplane/xen-block.c
+Date: Mon, 17 Dec 2018 12:28:20 +0000
+Message-ID: <20181217122820.GA5866@perard.uk.xensource.com>
+References: <1545046848-14891-1-git-send-email-paul.durrant@citrix.com>
+ <1545046848-14891-10-git-send-email-paul.durrant@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3860142941642220811=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=XHFb=O2=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gYrve-0006qs-4Q
- for xen-devel@lists.xenproject.org; Mon, 17 Dec 2018 12:23:22 +0000
-In-Reply-To: <20181217121855.zsrn6fvliz4f5yul@mac>
+ <SRS0=M9if=O2=citrix.com=prvs=882e40eea=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1gYs0k-000721-Mt
+ for xen-devel@lists.xenproject.org; Mon, 17 Dec 2018 12:28:38 +0000
+Content-Disposition: inline
+In-Reply-To: <1545046848-14891-10-git-send-email-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,92 +25,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3860142941642220811==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="vEao7xgI/oilGqZ+"
-Content-Disposition: inline
-
-
---vEao7xgI/oilGqZ+
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Dec 17, 2018 at 01:18:55PM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Mon, Dec 17, 2018 at 01:00:01PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Mon, Dec 17, 2018 at 10:40:59AM +0100, Roger Pau Monn=C3=A9 wrote:
-> > > On Sun, Dec 16, 2018 at 02:47:43AM +0100, Marek Marczykowski-G=C3=B3r=
-ecki wrote:
-> > > > A workaround could be implemented in hotplug script itself - wait f=
-or
-> > > > the device there. I'm not sure how proper solution could look like.=
- Some
-> > > > synchronization between xl devd and the kernel (like xl devd monito=
-ring
-> > > > uevents)?
-> > >=20
-> > > There's already a synchronization mechanism, libxl waits for the
-> > > backend to switch to state 2 (XenbusStateInitWait) before running the
-> > > hotplug scripts [0].
-> > >=20
-> > > Maybe netback sets state 2 before creating the backend device?
-> > >=20
-> > > It looks to me like the backend needs to be sure everything needed by
-> > > the hotplug script is in place before switching to state 2.
-> >=20
-> > I've done some more tests and I think that's something else. I've added
-> > a loop waiting for /sys/class/net/$vif to a hotplug script, but it timed
-> > out (5s). I don't see _any_ kernel messages related to the device.
-> >=20
-> > It may be some bug in nested virtualization in KVM...
->=20
-> In your message you said you have also observed this behavior when
-> running on bare metal, so it's likely not related to nested
-> virtualization?
-
-Yes, but on bare metal is so hard to reproduce (like 0.1% or even less
-startups), I'm not really sure if that was the same problem, as the
-problem doesn't leave that much logs...
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---vEao7xgI/oilGqZ+
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlwXlTMACgkQ24/THMrX
-1yw+8QgAmef6WfNQHXjwJ0MVb4JiS1Mu0aitChIVXanbiEvhxFl5S0y2NM4dYXmO
-cJL3IIfo9m0TGOq7zL0qfIQ/7c50klDgyRG0xT1aUrCILdr3cbtI8W1sapqKcA9+
-DNzjV+PFL/P9/3cyj3KoQhS+N40jWFWLu3h49Y9TgtIaL5PEEJWF0oz7f84YOS8M
-+GTHzHbH3t5k5gYBr74i05MfB3cKgbKk9mxBH2W2GzXbp6HECnb1lT6njR1kqwBg
-atn+rCp9HZGXf87hHW+/eMXe+i7v0vE58nr5FIq4vEWOuKf6OIcbkuqJmxUCUDP9
-wvu56lWB9xSWE+nOuLfiGSxLPJhJCg==
-=Ufej
------END PGP SIGNATURE-----
-
---vEao7xgI/oilGqZ+--
-
-
---===============3860142941642220811==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3860142941642220811==--
+T24gTW9uLCBEZWMgMTcsIDIwMTggYXQgMTE6NDA6MzlBTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IE5vdCBhbGwgb2YgdGhlIGNvZGUgZHVwbGljYXRlZCBmcm9tIHhlbl9kaXNrLmMgaXMg
+cmVxdWlyZWQgYXMgdGhlIGJhc2lzIGZvcgo+IHRoZSBuZXcgZGF0YXBsYW5lIGltcGxlbWVudGF0
+aW9uIHNvIHRoaXMgcGF0Y2ggcmVtb3ZlcyBleHRyYW5lb3VzIGNvZGUsCj4gYWxvbmcgd2l0aCB0
+aGUgbGVnYWN5ICNpbmNsdWRlcyBhbmQgY2FsbHMgdG8gdGhlIGxlZ2FjeSB4ZW5fcHZfcHJpbnRm
+KCkKPiBmdW5jdGlvbi4gRXJyb3IgbWVzc2FnZXMgYXJlIGNoYW5nZWQgdG8gYmUgcmVwb3J0ZWQg
+dXNpbmcgZXJyb3JfcmVwb3J0KCkuCj4gCj4gTk9URTogVGhlIGNvZGUgaXMgc3RpbGwgbm90IHll
+dCBidWlsdC4gRnVydGhlciB0cmFuc2Zvcm1hdGlvbnMgd2lsbCBiZQo+ICAgICAgIHJlcXVpcmVk
+IHRvIG1ha2UgaXQgY29ycmVjdGx5IGludGVyZmFjZSB0byB0aGUgbmV3IFhlbkJ1cy9YZW5EZXZp
+Y2UKPiAgICAgICBmcmFtZXdvcmsuIFRoZXkgd2lsbCBiZSBkZWxpdmVyZWQgaW4gYSBzdWJzZXF1
+ZW50IHBhdGNoLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50
+QGNpdHJpeC5jb20+Cj4gQWNrZWQtYnk6IEFudGhvbnkgUGVyYXJkIDxhbnRob255LnBlcmFyZEBj
+aXRyaXguY29tPgo+IC0tLQo+IENjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtl
+cm5lbC5vcmc+Cj4gQ2M6IFN0ZWZhbiBIYWpub2N6aSA8c3RlZmFuaGFAcmVkaGF0LmNvbT4KPiBD
+YzogS2V2aW4gV29sZiA8a3dvbGZAcmVkaGF0LmNvbT4KPiBDYzogTWF4IFJlaXR6IDxtcmVpdHpA
+cmVkaGF0LmNvbT4KPiAKPiB2MjoKPiAgLSBMZWF2ZSBleGlzdGluZyBib2lsZXJwbGF0ZSBhbG9u
+ZSwgb3RoZXIgdGhhbiByZW1vdmluZyB0aGUgbm93LWluY29ycmVjdAo+ICAgIGRlc2NyaXB0aW9u
+Cj4gLS0tCj4gIGh3L2Jsb2NrL2RhdGFwbGFuZS94ZW4tYmxvY2suYyB8IDQwOSArKy0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgMTYgaW5z
+ZXJ0aW9ucygrKSwgMzkzIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9ody9ibG9jay9k
+YXRhcGxhbmUveGVuLWJsb2NrLmMgYi9ody9ibG9jay9kYXRhcGxhbmUveGVuLWJsb2NrLmMKPiBp
+bmRleCA5ZmFlNTA1Li45OGY5ODdkIDEwMDY0NAo+IC0tLSBhL2h3L2Jsb2NrL2RhdGFwbGFuZS94
+ZW4tYmxvY2suYwo+ICsrKyBiL2h3L2Jsb2NrL2RhdGFwbGFuZS94ZW4tYmxvY2suYwo+IEBAIC0x
+LDYgKzEsNCBAQAo+ICAvKgo+IC0gKiAgeGVuIHBhcmF2aXJ0IGJsb2NrIGRldmljZSBiYWNrZW5k
+Cj4gLSAqCj4gICAqICAoYykgR2VyZCBIb2ZmbWFubiA8a3JheGVsQHJlZGhhdC5jb20+Cj4gICAq
+Cj4gICAqICBUaGlzIHByb2dyYW0gaXMgZnJlZSBzb2Z0d2FyZTsgeW91IGNhbiByZWRpc3RyaWJ1
+dGUgaXQgYW5kL29yIG1vZGlmeQo+IEBAIC0xOSwyNiArMTcsMTIgQEAKPiAgICogIEdOVSBHUEws
+IHZlcnNpb24gMiBvciAoYXQgeW91ciBvcHRpb24pIGFueSBsYXRlciB2ZXJzaW9uLgo+ICAgKi8K
+PiAgCj4gLSNpbmNsdWRlICJxZW11L29zZGVwLmgiCj4gLSNpbmNsdWRlICJxZW11L3VuaXRzLmgi
+Cj4gLSNpbmNsdWRlIDxzeXMvaW9jdGwuaD4KPiAtI2luY2x1ZGUgPHN5cy91aW8uaD4KPiAtCj4g
+LSNpbmNsdWRlICJody9ody5oIgo+IC0jaW5jbHVkZSAiaHcveGVuL3hlbl9iYWNrZW5kLmgiCj4g
+LSNpbmNsdWRlICJ4ZW5fYmxraWYuaCIKPiAtI2luY2x1ZGUgInN5c2VtdS9ibG9ja2Rldi5oIgo+
+IC0jaW5jbHVkZSAic3lzZW11L2lvdGhyZWFkLmgiCj4gLSNpbmNsdWRlICJzeXNlbXUvYmxvY2st
+YmFja2VuZC5oIgo+IC0jaW5jbHVkZSAicWFwaS9lcnJvci5oIgo+IC0jaW5jbHVkZSAicWFwaS9x
+bXAvcWRpY3QuaCIKPiAtI2luY2x1ZGUgInFhcGkvcW1wL3FzdHJpbmcuaCIKPiAtI2luY2x1ZGUg
+InRyYWNlLmgiCj4gLQo+IC0vKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICovCj4gLQo+IC0jZGVmaW5lIEJMT0NLX1NJWkUgIDUx
+Mgo+IC0jZGVmaW5lIElPQ0JfQ09VTlQgIChCTEtJRl9NQVhfU0VHTUVOVFNfUEVSX1JFUVVFU1Qg
+KyAyKQo+ICsvKgo+ICsgKiBDb3B5cmlnaHQgKGMpIDIwMTggIENpdHJpeCBTeXN0ZW1zIEluYy4K
+PiArICoKPiArICogVGhpcyB3b3JrIGlzIGxpY2Vuc2VkIHVuZGVyIHRoZSB0ZXJtcyBvZiB0aGUg
+R05VIEdQTCwgdmVyc2lvbiAyIG9yIGxhdGVyLgo+ICsgKiBTZWUgdGhlIENPUFlJTkcgZmlsZSBp
+biB0aGUgdG9wLWxldmVsIGRpcmVjdG9yeS4KPiArICovCgpUaGlzIHBhdGNoIG9idmlvdXNseSBj
+b21lcyBmcm9tIHYzIG9mIHRoZSBwYXRjaCBzZXJpZXMuIHY0IHdhcyBmaW5lLgpQbGVhc2UgY2hl
+Y2sgY29tbWVudHMgb24gdjEgdjIgYW5kIHYzLgoKVGhhbmtzLAoKLS0gCkFudGhvbnkgUEVSQVJE
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
