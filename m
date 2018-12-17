@@ -1,21 +1,24 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: intel_pstate driver patches by Wei Wang from 2015
-Date: Mon, 17 Dec 2018 13:19:00 +0000
-Message-ID: <ad8bf58a-172c-0f82-6edc-ce0b4afb25c1@citrix.com>
-References: <20181214141654.GF989@mail-itl> <5C176180.3090200@intel.com>
- <20181217110927.GA23474@mail-itl>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: Race condition on device add hanling in xl devd
+Date: Mon, 17 Dec 2018 14:23:41 +0100
+Message-ID: <20181217132341.GB5040@mail-itl>
+References: <20181216014743.GA5040@mail-itl>
+ <20181217094059.rvoptuzp6im52jyp@mac>
+ <20181217120001.GB23474@mail-itl>
+ <20181217121855.zsrn6fvliz4f5yul@mac>
+ <20181217122315.GC23474@mail-itl>
+ <20181217130534.6sdlcywutzcwzw2d@mac>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7611970391719932543=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=kJdr=O2=citrix.com=prvs=882bfab70=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1gYsnY-00036U-PV
- for xen-devel@lists.xenproject.org; Mon, 17 Dec 2018 13:19:04 +0000
-In-Reply-To: <20181217110927.GA23474@mail-itl>
-Content-Language: en-GB
+ <SRS0=XHFb=O2=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gYss8-0003oV-AO
+ for xen-devel@lists.xenproject.org; Mon, 17 Dec 2018 13:23:48 +0000
+In-Reply-To: <20181217130534.6sdlcywutzcwzw2d@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,39 +27,146 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Wang <wei.w.wang@intel.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, wei.liu2@citrix.com, =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, jbeulich@suse.com
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTcvMTIvMjAxOCAxMTowOSwgTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIHdyb3RlOgo+
-IE9uIE1vbiwgRGVjIDE3LCAyMDE4IGF0IDA0OjQyOjQwUE0gKzA4MDAsIFdlaSBXYW5nIHdyb3Rl
-Ogo+PiBPbiAxMi8xNC8yMDE4IDEwOjE2IFBNLCBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kg
-d3JvdGU6Cj4+PiBIaSwKPj4+Cj4+PiBJIHdvbmRlciB3aGF0IGhhcHBlbmVkIHRvIGludGVsX3Bz
-dGF0ZSBwYXRjaCBzZXJpZXNbMV0gYmFjayBpbiAyMDE1Pwo+Pj4gSSd2ZSBzZWVuIHRoZXJlIHdh
-cyBzb21lIHJldmlldyBmZWVkYmFja1syXVszXVs0XVs1XVs2XVs3XSBvbiB2NiwKPj4+IHBhdGNo
-ZXMgNC82IGFuZCA2LzYgd2VyZSBhY2tlZC4gV2VyZSB0aGUgcmV2aWV3IGNvbW1lbnRzIGV2ZXIg
-YWRkcmVzc2VkCj4+PiAoY2FuJ3QgZmluZCBpdCk/ICBPciBtYXliZSB0aGVyZSBpcyBzb21lIG90
-aGVyIG1lY2hhbmlzbSBpbiBwbGFjZSBmb3IgcHJvcGVyCj4+PiBwb3dlciBtYW5hZ2VtZW50IG9u
-IHJlY2VudCBJbnRlbCBDUFVzPyBBcHBhcmVudGx5IGFjcGktY3B1ZnJlcSBkcml2ZXIKPj4+IG5v
-dCBhbHdheXMgZG9lcyBpdHMgam9iIHdlbGxbOF0uCj4+Pgo+Pj4gWzFdIGh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxNS0xMC9tc2cwMzA0OC5o
-dG1sCj4+PiBbMl0gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hl
-bi1kZXZlbC8yMDE1LTExL21zZzAyMDQzLmh0bWwKPj4+IFszXSBodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTUtMTEvbXNnMDI0MTAuaHRtbAo+
-Pj4gWzRdIGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2
-ZWwvMjAxNS0xMS9tc2cwMjQzMC5odG1sCj4+PiBbNV0gaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE1LTExL21zZzAyNDQzLmh0bWwKPj4+IFs2
-XSBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIw
-MTUtMTEvbXNnMDI0NTYuaHRtbAo+Pj4gWzddIGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-YXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxNS0xMC9tc2cwMzA4Ni5odG1sCj4+PiBbOF0gaHR0
-cHM6Ly9naXRodWIuY29tL1F1YmVzT1MvcXViZXMtaXNzdWVzL2lzc3Vlcy80NjA0I2lzc3VlY29t
-bWVudC00NDY4MTY1MzYKPj4+Cj4+IEhpIE1hcmVrLAo+Pgo+PiBJdCB3YXMgcGF1c2VkIGJlY2F1
-c2UgdGhlcmUgd2FzIG5vIHVzZXJzIGluIHRoZSBjbG91ZHMgLSBwZW9wbGUgdXN1YWxseSBoYXZl
-Cj4+IFAtc3RhdGUgZGlzYWJsZWQuCj4gSSBzZWUuIEZXSVcgWGVuIGhhdmUgYWxzbyBub24tY2xv
-dWQgdXNlIGNhc2VzLCBsaWtlIFF1YmVzIE9TLgoKV2hlcmUgaGFzIHRoZSBjbGFpbSBhYm91dCAi
-bm8gdXNlcnMgaW4gY2xvdWRzIHVzZSBwc3RhdGVzIiBjb21lIGZyb20/wqAKSSd2ZSBnb3Qgc2V2
-ZXJhbCBjdXN0b21lcnMgd2hvIGFyZSBwdWJsaWMgY2xvdWRzIHlvdSdkIGRlZmluaXRlbHkKcmVj
-b2duaXNlIHdobyB0ZW5kIHRvIG5vdGljZSB3aGVuIHBzdGF0ZXMvdHVyYm8gZ2V0cyBicm9rZW4u
-Cgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============7611970391719932543==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="aVD9QWMuhilNxW9f"
+Content-Disposition: inline
+
+
+--aVD9QWMuhilNxW9f
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Dec 17, 2018 at 02:05:34PM +0100, Roger Pau Monn=C3=A9 wrote:
+> On Mon, Dec 17, 2018 at 01:23:15PM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Mon, Dec 17, 2018 at 01:18:55PM +0100, Roger Pau Monn=C3=A9 wrote:
+> > > On Mon, Dec 17, 2018 at 01:00:01PM +0100, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > On Mon, Dec 17, 2018 at 10:40:59AM +0100, Roger Pau Monn=C3=A9 wrot=
+e:
+> > > > > On Sun, Dec 16, 2018 at 02:47:43AM +0100, Marek Marczykowski-G=C3=
+=B3recki wrote:
+> > > > > > A workaround could be implemented in hotplug script itself - wa=
+it for
+> > > > > > the device there. I'm not sure how proper solution could look l=
+ike. Some
+> > > > > > synchronization between xl devd and the kernel (like xl devd mo=
+nitoring
+> > > > > > uevents)?
+> > > > >=20
+> > > > > There's already a synchronization mechanism, libxl waits for the
+> > > > > backend to switch to state 2 (XenbusStateInitWait) before running=
+ the
+> > > > > hotplug scripts [0].
+> > > > >=20
+> > > > > Maybe netback sets state 2 before creating the backend device?
+> > > > >=20
+> > > > > It looks to me like the backend needs to be sure everything neede=
+d by
+> > > > > the hotplug script is in place before switching to state 2.
+> > > >=20
+> > > > I've done some more tests and I think that's something else. I've a=
+dded
+> > > > a loop waiting for /sys/class/net/$vif to a hotplug script, but it =
+timed
+> > > > out (5s). I don't see _any_ kernel messages related to the device.
+> > > >=20
+> > > > It may be some bug in nested virtualization in KVM...
+> > >=20
+> > > In your message you said you have also observed this behavior when
+> > > running on bare metal, so it's likely not related to nested
+> > > virtualization?
+> >=20
+> > Yes, but on bare metal is so hard to reproduce (like 0.1% or even less
+> > startups), I'm not really sure if that was the same problem, as the
+> > problem doesn't leave that much logs...
+>=20
+> I'm not very familiar with netback, but I think it's indeed possible
+> for netback to switch to state 2 without having created the vif.
+> Netback switching from state 1 -> 2 seems to be solely controlled by
+> the frontend state (see frontend_changed).
+
+Isn't frontend_changed guaranteed to be called after netback_probe?
+
+> I think the patch below could solve this issue, but I haven't even
+> compile tested it, could you give it a spin?
+>=20
+> I would also like to hear the opinion of netback maintainers, since I
+> might be completely wrong.
+>=20
+> Thanks, Roger.
+> ---8<---
+> diff --git a/drivers/net/xen-netback/xenbus.c b/drivers/net/xen-netback/x=
+enbus.c
+> index cd51492ae6c2..791c2c0b788f 100644
+> --- a/drivers/net/xen-netback/xenbus.c
+> +++ b/drivers/net/xen-netback/xenbus.c
+> @@ -427,6 +427,10 @@ static int netback_probe(struct xenbus_device *dev,
+>  	if (err)
+>  		goto fail;
+> =20
+> +	err =3D xenbus_switch_state(dev, XenbusStateInitWait);
+> +	if (err)
+> +		goto fail;
+> +
+>  	return 0;
+> =20
+>  abort_transaction:
+> @@ -650,7 +654,10 @@ static void frontend_changed(struct xenbus_device *d=
+ev,
+> =20
+>  	switch (frontend_state) {
+>  	case XenbusStateInitialising:
+> -		set_backend_state(be, XenbusStateInitWait);
+> +		if (dev->state =3D=3D XenbusStateClosed) {
+> +			pr_info("%s: prepare for reconnect\n", dev->nodename);
+> +			set_backend_state(be, XenbusStateInitWait);
+> +		}
+>  		break;
+> =20
+>  	case XenbusStateInitialised:
+>=20
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--aVD9QWMuhilNxW9f
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlwXo14ACgkQ24/THMrX
+1yw/sAf/bkTGQkI79oaKD56PqYhuhWuwP+wv9FQXlB0v3iN7Z+vXp1okcl7y4570
+2DrwvWdwOG1hG+lLbHP6r8wLxitH+cihPCo9Xb2GrUhzozY22Gj0XgzHSqy/DDCQ
+ye7GwZK8QakYfsF3OZVz4N14gP3oTnMLGyUBn56FUuim5KXKqNkpn5lU8xpBg8PZ
+2U+BmgSR9ihtyMzC69952JwCS6npwM7GSY3gRWzUavodzTuccuofJVg/WvIfTfTr
+oWJjPkVZPpDkaGQt/IPz4WVyzPJCyYOVTYDhWqpcSG3EBHWifB9YLJnIhNLhzrxY
+05h15fntsIT9+ZxQ0imOT5wM5I6k6w==
+=xDAg
+-----END PGP SIGNATURE-----
+
+--aVD9QWMuhilNxW9f--
+
+
+--===============7611970391719932543==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7611970391719932543==--
