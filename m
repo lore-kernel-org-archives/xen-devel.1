@@ -1,20 +1,19 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: intel_pstate driver patches by Wei Wang from 2015
-Date: Mon, 17 Dec 2018 12:09:27 +0100
-Message-ID: <20181217110927.GA23474@mail-itl>
-References: <20181214141654.GF989@mail-itl>
- <5C176180.3090200@intel.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH for-4.12 v2 2/2] xen/arm: Stop relocating Xen
+Date: Mon, 17 Dec 2018 11:11:59 +0000
+Message-ID: <be8d0091-94e5-1a70-558f-0e6eb0907fcd@arm.com>
+References: <20181214114455.5841-1-julien.grall@arm.com>
+ <20181214114455.5841-3-julien.grall@arm.com>
+ <90f45fb8-3ff7-492e-3773-c8d3bd2906bc@gmail.com>
+ <d0e0d122-b389-8fa0-df24-80cb1fe926c7@arm.com>
+ <aa624e20-5daa-afa9-1578-cbd7ca225972@gmail.com>
+ <15da577e-ce5a-293b-446d-316a728fd7de@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8729145802176403541=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=XHFb=O2=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gYqmD-0006ka-V9
- for xen-devel@lists.xenproject.org; Mon, 17 Dec 2018 11:09:34 +0000
-In-Reply-To: <5C176180.3090200@intel.com>
+In-Reply-To: <15da577e-ce5a-293b-446d-316a728fd7de@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,93 +22,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Wang <wei.w.wang@intel.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, wei.liu2@citrix.com, jbeulich@suse.com
+To: Andrii Anisov <andrii.anisov@gmail.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Matthew Daley <mattd@bugfuzz.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8729145802176403541==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ikeVEW9yuYc//A+q"
-Content-Disposition: inline
-
-
---ikeVEW9yuYc//A+q
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Dec 17, 2018 at 04:42:40PM +0800, Wei Wang wrote:
-> On 12/14/2018 10:16 PM, Marek Marczykowski-G=C3=B3recki wrote:
-> > Hi,
-> >=20
-> > I wonder what happened to intel_pstate patch series[1] back in 2015?
-> > I've seen there was some review feedback[2][3][4][5][6][7] on v6,
-> > patches 4/6 and 6/6 were acked. Were the review comments ever addressed
-> > (can't find it)?  Or maybe there is some other mechanism in place for p=
-roper
-> > power management on recent Intel CPUs? Apparently acpi-cpufreq driver
-> > not always does its job well[8].
-> >=20
-> > [1] https://lists.xenproject.org/archives/html/xen-devel/2015-10/msg030=
-48.html
-> > [2] https://lists.xenproject.org/archives/html/xen-devel/2015-11/msg020=
-43.html
-> > [3] https://lists.xenproject.org/archives/html/xen-devel/2015-11/msg024=
-10.html
-> > [4] https://lists.xenproject.org/archives/html/xen-devel/2015-11/msg024=
-30.html
-> > [5] https://lists.xenproject.org/archives/html/xen-devel/2015-11/msg024=
-43.html
-> > [6] https://lists.xenproject.org/archives/html/xen-devel/2015-11/msg024=
-56.html
-> > [7] https://lists.xenproject.org/archives/html/xen-devel/2015-10/msg030=
-86.html
-> > [8] https://github.com/QubesOS/qubes-issues/issues/4604#issuecomment-44=
-6816536
-> >=20
->=20
-> Hi Marek,
->=20
-> It was paused because there was no users in the clouds - people usually h=
-ave
-> P-state disabled.
-
-I see. FWIW Xen have also non-cloud use cases, like Qubes OS.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---ikeVEW9yuYc//A+q
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlwXg+cACgkQ24/THMrX
-1yzC/gf/SdDsGGj506XjcTDmfuxoZdGlp5P8kWLMp0NvAql7j/ZVYjE8dmAcwcmk
-YxBDn3CTThQFzV5g3LApws/V3qupsYR+tusTfoGKHvc+UNNLxWvEIqcf9Nf+DnpQ
-hYXJSgu2vWE0rNHV5L8QzZUSIkQSis5vNNaEz/Tq8BOUy7zrhrbIjGKPLiMCADFQ
-wqvtRtN1DYLHo/gNyvEJRa460afq9vJsYqV4HSnf/YDa6/xL91R1V2ZDYXdeVzOg
-aGQF6DH12pHVvw11y3HpGnTPomjyh2Lnt+edvq//7LJtUv0KMSmEYaZojd38FG9E
-b31Lu9ThwHioWRW0tG4862BP/E98AQ==
-=bOGy
------END PGP SIGNATURE-----
-
---ikeVEW9yuYc//A+q--
-
-
---===============8729145802176403541==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8729145802176403541==--
+SGksCgpPbiAxNC8xMi8yMDE4IDE3OjQ4LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gT24gMTQvMTIv
+MjAxOCAxNzoyNCwgQW5kcmlpIEFuaXNvdiB3cm90ZToKPj4gT24gMTQuMTIuMTggMTg6MjYsIEp1
+bGllbiBHcmFsbCB3cm90ZToKPj4+IEkgZG9uJ3QgdW5kZXJzdGFuZCBob3cgeW91IGNhbWUgdXAg
+d2l0aCB0aGUgY29uY2x1c2lvbiB0aGF0IDEyOE1CIHdpbGwgYmUKPj4+IHJlbW92ZWQgZnJvbSBE
+b20wLiBXZSBvbmx5IGhhdmUgdGhlIHJlcXVpcmVtZW50IHRoYXQgdGhlIGZpcnN0IGJhbmsgaXMg
+YXQgbGVhc3QKPj4+IDEyOE1CLiBTbyBjYW4geW91IGV4cGFuZCBpdD8KPj4gSUlSQyBMaW51eCBr
+ZXJuZWwgcmVxdWlyZXMgdGhhdCB0aGUgbWFjaGluZSBSQU0gc3RhcnQgbXVzdCBiZSAxMjhNQiBh
+bGlnbmVkLgo+IAo+IFBsZWFzZSB0cnkgdG8gcmVmZXJlbmNlIHRoZSBkb2N1bWVudGF0aW9uIChv
+ciBjb2RlIGlmIGxhY2sgb2YgZG9jdW1lbnRhdGlvbikgCj4gd2hlbiBtYWtpbmcgc3VjaCBzdGF0
+ZW1lbnQuCj4gCj4gQUZBSUNULCBMaW51eCAzMi1iaXQgWzFdIGltcG9zZXMgdGhlIGtlcm5lbCB0
+byBiZSBsb2FkZWQgaW4gdGhlIGZpcnN0IDEyOE1CIG9mIAo+IFJBTS4gTm90aGluZyBhYm91dCB0
+aGUgMTI4TUIgYWxpZ25lZCBSQU0uIExpbnV4IDY0LWJpdCBbMV0gcmVxdWlyZXMgdG8gYmUgbG9h
+ZGVkIAo+IGF0IGEgMk1CIGFsaWduZWQgYWRkcmVzcy4KPiAKPiBTbyB0ZWNobmljYWxseSBhbGxv
+Y2F0aW5nIHRoZSBSQU0gdXNpbmcgYSAyTUIgYWxpZ25tZW50IHNob3VsZCBiZSBlbm91Z2guIFll
+dCB3ZSAKPiBuZWVkIHRvIG1ha2Ugc3VyZSB0aGUgZmlyc3QgYmFuayBpcyBhdCBsZWFzdCAxMjhN
+Qi4KPiAKPj4gTG9vayBhdCBgYWxsb2NhdGVfbWVtb3J5XzExKClgLCBgbWluX2xvd19vcmRlcmAg
+dmFyaWFibGUgdXNhZ2UuIEl0IGFmZmVjdHMgYWxsIAo+PiBsb3cgbWVtb3J5IDE6MSBhbGxvY2F0
+aW9uIGFuZCBtYWtlcyBhbGwgbG93IG1lbW9yeSBiYW5rcyAxMjhNQiBhbGlnbmVkIGJvdGggCj4+
+IHN0YXJ0IGFuZCBlbmQuCj4+IFNvIHRoYXQgaGF2aW5nIGEgbW9kdWxlIGluIGEgbG93IG1lbW9y
+eSBwb2lzb25zIHRoZSB3aG9sZSAxMjhNQiByZWdpb24uCj4+Cj4gVGhhdCdzIGRlZmluaXRlbHkg
+YW4gdW53YW50ZWQgYmVoYXZpb3IsIGJ1dCB0aGlzIGlzIG5vdCByZWxhdGVkIHRvIHRoZSBwYXRj
+aCAKPiBpdHNlbGYuIEFzIHNvb24gYXMgeW91IGhhbmQgbWVtb3J5IHRvIHRoZSBhbGxvY2F0b3Is
+IG1lbW9yeSBjYW4gYmUgYWxsb2NhdGVkIGF0IAo+IGFueSBwbGFjZSBpbiB0aGUgbWVtb3J5LiBJ
+IGFtIHN0aWxsIHVuc3VyZSB3aGV0aGVyIHRoZSBhbGlnbm1lbnQgaXMgZHVlIHRvIHRoZSAKPiBh
+bGdvcml0aG0gaW4gYWxsb2NhdGVfbWVtb3J5XzExKCkgb3IgYmVjYXVzZSBvZiB0aGUgb3JkZXIg
+d2UgcGFzcyB0byB0aGUgYWxsb2NhdG9yLgo+IAo+IFVudGlsIHdlIGZpeCBpdCwgdGhlIGJlc3Qg
+cmVjb21tZW5kYXRpb24gaXMgdG8ga2VlcCBhbGwgdGhlIG1vZHVsZXMgY2xvc2UgCj4gdG9nZXRo
+ZXIgYXQgdGhlIGJlZ2lubmluZyBvZiB0aGUgUkFNLiBTbyB5b3Ugb25seSAid2FzdGUiIDEyOE1C
+IHJlZ2lvbi4gSSBjYW4gCj4gYWRkIHRoaXMgcmVjb21tZW5kYXRpb24gaW4gdGhlIGNvbW1pdCBt
+ZXNzYWdlIGFuZCBwb3RlbnRpYWxseSBkb2N1bWVudGF0aW9uLgoKQW5zd2VyaW5nIHRvIG15c2Vs
+Zi4gU3RlZmFubyBwb2ludGVkIG91dCBvbiBJUkMgdGhhdCBncnViL1VFRkkgdXNlcnMgYXJlIG5v
+dCBpbiAKY29udHJvbCBvZiB0aGUgbWVtb3J5IGxheW91dCBzbyB0aGlzIG1pZ2h0IGJlIGFuIGlz
+c3VlIGZvciB0aGVtLgoKTG9va2luZyBhdCBteSBHUlVCIHNldHVwLCBhbGwgdGhlIG1vZHVsZXMg
+YXJlIGxvYWRlZCB0b2dldGhlcjoKCihYRU4pIE1PRFVMRVswXTogMDAwMDAwMDBmMmFmYjAwMCAt
+IDAwMDAwMDAwZjJiMDIwMDAgRGV2aWNlIFRyZWUKKFhFTikgTU9EVUxFWzFdOiAwMDAwMDAwMGY2
+OTViMDAwIC0gMDAwMDAwMDBmN2Y2ZmEwMCBLZXJuZWwKKFhFTikgTU9EVUxFWzJdOiAwMDAwMDAw
+MGYyYzIzMDAwIC0gMDAwMDAwMDBmNjk1OTIwMCBSYW1kaXNrCgpbLi4uXQoKKFhFTikgUGxhY2lu
+ZyBYZW4gYXQgMHgwMDAwMDAwOTliZTAwMDAwLTB4MDAwMDAwMDk5YzAwMDAwMAooWEVOKSBVcGRh
+dGUgQk9PVE1PRF9YRU4gZnJvbSAwMDAwMDAwMGYyYjAyMDAwLTAwMDAwMDAwZjJjMjJkODEgPT4g
+MDAwMDAwMDk5YmUwMAoKU28gd2hldGhlciBYZW4gaXMgZ29pbmcgdG8gYmUgcmVsb2NhdGVkIG9y
+IG5vdCBpcyBub3QgZ29pbmcgdG8gbWFrZSBtdWNoIGRpZmZlcmVuY2UuCgpOb3csIGxldCdzIGlt
+YWdlIHRoZSBib290bG9hZGVyIGRlY2lkZXMgdG8gbG9hZCB0aGUgbW9kdWxlcyBpbiBkaWZmZXJl
+bnQgcGxhY2VzIAppbiB0aGUgbWVtb3J5LiBUaGVuIHlvdSB3aWxsIGhhdmUgNCBzbG90cyAocG90
+ZW50aWFsIDUgc2xvdHMpIG9mIDEyOE1CIHVzZWQuIApUaGF0J3MgdXAgdG8gNjQwTUIgb2YgbG93
+IG1lbW9yeSBub3QgYXZhaWxhYmxlIGZvciBEb20wLiBSZWxvY2F0aW5nIFhlbiBtYXkgb3IgCm1h
+eSBub3QgbWFrZSBhdmFpbGFibGUgbW9yZSBsb3cgbWVtb3J5IGZvciBEb20wLiBGb3IgaW5zdGFu
+Y2UsIGluIG15IHVzZSBjYXNlIAphYm92ZSwgdGhpcyBkb2VzIG5vdCBtYWtlIGFueSBjaGFuZ2Uu
+CgpUaGlzIGlzIG9idmlvdXNseSB0aGUgd29yc3QgY2FzZSBzY2VuYXJpby4gSSBhbSBwcmV0dHkg
+c3VyZSBwZW9wbGUgd291bGQgaGF2ZSAKc2VlbiByZXBvcnQgaWYgNjQwTUIgb2YgbG93IG1lbW9y
+eSB3YXMgbm90IGF2YWlsYWJsZSBmb3IgRG9tMCBhbmQgdGhhdCB3YXMgYSAKY29uY2Vybi4KClNv
+LCB0byBiZSBob25lc3QsIEkgdGhpbmsgdGhpcyBpcyBhIG5vbi1pc3N1ZS4gSSBhbSBub3Qgc2F5
+aW5nIHRoaXMgc2hvdWxkIG5vdCAKYmUgZml4ZWQuIEkgYW0gc2F5aW5nIHRoYXQgdGhlIHByaWNl
+IGlzIG1pbmltYWwgY29tcGFyZSB0byBhbGxvdyBYZW4gYm9vdGluZyBvbiAKcGxhdGZvcm0gc3Vj
+aCBhcyB0aGUgSGlrZXkgYW5kIGJyaW5naW5nIG1vcmUgY29tcGxpYW5jZSB3aXRoIHRoZSBBcm0g
+QXJtLgoKQ2hlZXJzLAoKPiAKPiBDaGVlcnMsCj4gCj4gWzFdIERvY3VtZW50YXRpb24vYXJtL0Jv
+b3RpbmcKPiBbMl0gRG9jdW1lbnRhdGlvbi9hcm02NC9ib290aW5nLnR4dAo+IAoKLS0gCkp1bGll
+biBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
