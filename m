@@ -1,18 +1,20 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 2/3] x86/svm: Improve diagnostics when
- svm_get_insn_len() fails
-Date: Mon, 17 Dec 2018 09:01:13 -0700
-Message-ID: <5C17C8490200007800206DED@prv1-mh.provo.novell.com>
-References: <1544732572-29794-1-git-send-email-andrew.cooper3@citrix.com>
- <1544732572-29794-3-git-send-email-andrew.cooper3@citrix.com>
- <5C13831A0200007800206190@prv1-mh.provo.novell.com>
- <023754c3-f2e5-b7ef-9c94-7998524d8d21@citrix.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: [PATCH for-4.12 v2 2/2] xen/arm: Stop relocating Xen
+Date: Mon, 17 Dec 2018 18:02:19 +0200
+Message-ID: <0331f1e4-674a-46da-b01f-9c1882156a5c@gmail.com>
+References: <20181214114455.5841-1-julien.grall@arm.com>
+ <20181214114455.5841-3-julien.grall@arm.com>
+ <90f45fb8-3ff7-492e-3773-c8d3bd2906bc@gmail.com>
+ <d0e0d122-b389-8fa0-df24-80cb1fe926c7@arm.com>
+ <aa624e20-5daa-afa9-1578-cbd7ca225972@gmail.com>
+ <15da577e-ce5a-293b-446d-316a728fd7de@arm.com>
+ <be8d0091-94e5-1a70-558f-0e6eb0907fcd@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <023754c3-f2e5-b7ef-9c94-7998524d8d21@citrix.com>
-Content-Disposition: inline
+In-Reply-To: <be8d0091-94e5-1a70-558f-0e6eb0907fcd@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,35 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Paul Durrant <paul.durrant@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Matthew Daley <mattd@bugfuzz.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE3LjEyLjE4IGF0IDE2OjQzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTQvMTIvMjAxOCAxMDoxNiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDEz
-LjEyLjE4IGF0IDIxOjIyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiAt
-LS0gYS94ZW4vYXJjaC94ODYvaHZtL3N2bS9lbXVsYXRlLmMKPj4+ICsrKyBiL3hlbi9hcmNoL3g4
-Ni9odm0vc3ZtL2VtdWxhdGUuYwo+Pj4gQEAgLTE0Myw4ICsxNDMsMTcgQEAgaW50IHN2bV9nZXRf
-aW5zbl9sZW4oc3RydWN0IHZjcHUgKnYsIGVudW0gCj4gaW5zdHJ1Y3Rpb25faW5kZXggaW5zbikK
-Pj4+ICAgICAgfQo+Pj4gIAo+Pj4gICAgICBnZHByaW50ayhYRU5MT0dfV0FSTklORywKPj4+IC0g
-ICAgICAgICAgICAgIiVzOiBNaXNtYXRjaCBiZXR3ZWVuIGV4cGVjdGVkIGFuZCBhY3R1YWwgaW5z
-dHJ1Y3Rpb246ICIKPj4+IC0gICAgICAgICAgICAgImVpcCA9ICVseFxuIiwgIF9fZnVuY19fLCAo
-dW5zaWduZWQgbG9uZyl2bWNiLT5yaXApOwo+Pj4gKyAgICAgICAgICAgICAiJXM6IE1pc21hdGNo
-IGJldHdlZW4gZXhwZWN0ZWQgYW5kIGFjdHVhbCBpbnN0cnVjdGlvbjpcbiIsCj4+PiArICAgICAg
-ICAgICAgIF9fZnVuY19fKTsKPj4gSXMgX19mdW5jX18gcmVhbGx5IHVzZWZ1bCBpbiBhIGdkcHJp
-bnRrKCk/Cj4gCj4gV2VsbCAtIHlvdSBhcmUgdGhlIGF1dGhvciBvZiB0aGF0IGNvZGUuLi4KCkkn
-dmUgdG91Y2hlZCB0aGUgbmVpZ2hib3JpbmcgbGluZSBhIHdoaWxlIGFnbywgYnV0IEkgZGlkbid0
-IGFkZCBfX2Z1bmNfXwooYW5kIEkgaGFyZGx5IGV2ZXIgZG8sIGR1ZSB0byBub3QgZmluZGluZyBp
-dCBoZWxwZnVsIGluIHRoZSBjb21tb24gY2FzZSkuCgo+Pj4gKyAgICBnZHByaW50ayhYRU5MT0df
-V0FSTklORywKPj4+ICsgICAgICAgICAgICAgIiAgaW5zbl9pbmRleCAlZCwgb3Bjb2RlICUjeCBt
-b2RybSAlI3hcbiIsCj4+PiArICAgICAgICAgICAgIGluc24sIG9wY190YWJbaW5zbl0ub3Bjb2Rl
-LCAoKG9wY190YWJbaW5zbl0ubW9kcm0ucm0gIDw8IDYpIHwKPj4+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAob3BjX3RhYltpbnNuXS5tb2RybS5yZWcgPDwgMykg
-fAo+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChvcGNfdGFi
-W2luc25dLm1vZHJtLm1vZCkpKTsKPj4gVGhpcyBpcyBnb2luZyB0byBiZSBtaXNsZWFkaW5nIHdo
-ZW4gYml0IDMgb2YgbW9kcm0ucmVnIG9yIG1vZHJtLnJtCj4+IGFyZSBzZXQuCj4gCj4gSSdsbCBz
-d2l0Y2ggdG8gMHglMDJ4CgpIb3cncyB0aGF0IGdvaW5nIHRvIGhlbHA/IFlvdSdkIG5lZWQgdG8g
-cHJpbnQgdGhlIGZpZWxkcyBpbmRpdmlkdWFsbHkuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAxNy4xMi4xOCAxMzoxMSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFNvLCB0byBiZSBob25l
+c3QsIEkgdGhpbmsgdGhpcyBpcyBhIG5vbi1pc3N1ZS4gSSBhbSBub3Qgc2F5aW5nIHRoaXMgc2hv
+dWxkIG5vdCBiZSBmaXhlZC4gSSBhbSBzYXlpbmcgdGhhdCB0aGUgcHJpY2UgaXMgbWluaW1hbCBj
+b21wYXJlIHRvIGFsbG93IFhlbiBib290aW5nIG9uIHBsYXRmb3JtIHN1Y2ggYXMgdGhlIEhpa2V5
+IGFuZCBicmluZ2luZyBtb3JlIGNvbXBsaWFuY2Ugd2l0aCB0aGUgQXJtIEFybS4KCkJUVywgSSBo
+b3BlIHlvdSBhbHJlYWR5IG5vdGljZWQgSSd2ZSBwYXNzZWQgbXkgUkIgYW5kIFRCIGZvciB0aGUg
+cGF0Y2guCkkgd291bGQgcHJlZmVyIHlvdSByZWZsZWN0IGxhc3QgZmluZGluZ3MgaW4gdGhlIGNv
+bW1pdCBtZXNzYWdlLCBidXQgaWYgeW91IGRvbid0IGxpa2UgLSBsZXQgaXQgYmUgYXMgaXMuCgot
+LSAKU2luY2VyZWx5LApBbmRyaWkgQW5pc292LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
