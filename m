@@ -1,19 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86emul/test: drop another instance of .byte
-Date: Mon, 17 Dec 2018 15:50:14 +0000
-Message-ID: <218a1413-637b-eebb-a7db-7a76163d818b@citrix.com>
-References: <5C136EDF02000078002060C3@prv1-mh.provo.novell.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: [PATCH for-4.12 v2 2/2] xen/arm: Stop relocating Xen
+Date: Mon, 17 Dec 2018 17:54:17 +0200
+Message-ID: <99fe8b69-7a38-99a9-c2c2-5eb3a52aa7ba@gmail.com>
+References: <20181214114455.5841-1-julien.grall@arm.com>
+ <20181214114455.5841-3-julien.grall@arm.com>
+ <90f45fb8-3ff7-492e-3773-c8d3bd2906bc@gmail.com>
+ <d0e0d122-b389-8fa0-df24-80cb1fe926c7@arm.com>
+ <9850ed66-1a28-4af4-7306-6c0922900ce1@gmail.com>
+ <84968c09-b197-5194-53f2-b0c3837ec414@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=kJdr=O2=citrix.com=prvs=882bfab70=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1gYv9t-0001iq-6A
- for xen-devel@lists.xenproject.org; Mon, 17 Dec 2018 15:50:17 +0000
-In-Reply-To: <5C136EDF02000078002060C3@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <84968c09-b197-5194-53f2-b0c3837ec414@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,16 +22,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Matthew Daley <mattd@bugfuzz.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMTIvMjAxOCAwODo1MCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gTm93IHRoYXQgd2UgcmVx
-dWlyZSB1c2Ugb2YgdGhlIHtldmV4fSBwc2V1ZG8tcHJlZml4LCB3ZSBjYW4gYWxzbyB1c2UKPiB0
-aGUgcS1zdWZmaXhlZCBlbmNvZGluZyBvZiBWUENNUEVTVFJJLCB3aGljaCBpcyBhdmFpbGFibGUg
-YXMgb2YgMi4yOQo+IGp1c3QgbGlrZSB7ZXZleH0gaXMuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4g
-QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTogQW5kcmV3IENvb3BlciA8YW5k
-cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+T24gMTQuMTIuMTggMjA6MDQsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBUaGVuIHRoZSBjb2RlIG5l
+ZWRzIHRvIGJlIGZpeGVkLi4uIEl0IHdvdWxkIGJlIG5pY2UgdG8gZ2V0IHNvbWUgaGVscHMgaGVy
+ZSBhcyBJIGNhbid0IHNjYWxlLgoKSSBjYW4gdGFrZSB0aGlzLgpCdXQgSSB3b3VsZCBsaWtlIHRv
+IGFsaWduIG9uIHRoZSBhbGdvcml0aG0gZmlyc3QuCgotLSAKU2luY2VyZWx5LApBbmRyaWkgQW5p
+c292LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
