@@ -1,21 +1,21 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH V11 3/5] x86/altp2m: fix display frozen when
- switching to a new view early
-Date: Thu, 20 Dec 2018 15:31:20 +0000
-Message-ID: <48448e59-c1fc-d1e0-af10-ad61013f3c2e@citrix.com>
-References: <1544001488-23763-1-git-send-email-rcojocaru@bitdefender.com>
- <1544001488-23763-4-git-send-email-rcojocaru@bitdefender.com>
+From: Christoph Hellwig <hch@infradead.org>
+Subject: Re: [PATCH] drm/xen-front: Make shmem backed display
+ buffer coherent
+Date: Thu, 20 Dec 2018 07:36:46 -0800
+Message-ID: <20181220153646.GA22997__12000.3714495853$1545320126$gmane$org@infradead.org>
+References: <20181127103252.20994-1-andr2000@gmail.com>
+ <17640791-5306-f7e4-8588-dd39c14e975b@tronnes.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=z86S=O5=citrix.com=prvs=885450f5c=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1ga0NG-0001NU-K4
- for xen-devel@lists.xenproject.org; Thu, 20 Dec 2018 15:36:34 +0000
-In-Reply-To: <1544001488-23763-4-git-send-email-rcojocaru@bitdefender.com>
-Content-Language: en-US
+ <SRS0=onL2=O5=bombadil.srs.infradead.org=batv+4320e4c38c4ab4f6f328+5597+infradead.org+hch@srs-us1.protection.inumbo.net>)
+ id 1ga0NU-0001Ok-Lj
+ for xen-devel@lists.xenproject.org; Thu, 20 Dec 2018 15:36:48 +0000
+Content-Disposition: inline
+In-Reply-To: <17640791-5306-f7e4-8588-dd39c14e975b@tronnes.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,31 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Razvan Cojocaru <rcojocaru@bitdefender.com>, xen-devel@lists.xenproject.org
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Noralf =?iso-8859-1?Q?Tr=F8nnes?= <noralf@tronnes.org>
+Cc: jgross@suse.com, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, daniel.vetter@intel.com, xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvNS8xOCA5OjE4IEFNLCBSYXp2YW4gQ29qb2NhcnUgd3JvdGU6Cj4gV2hlbiBhbiBuZXcg
-YWx0cDJtIHZpZXcgaXMgY3JlYXRlZCB2ZXJ5IGVhcmx5IG9uIGd1ZXN0IGJvb3QsIHRoZQo+IGRp
-c3BsYXkgd2lsbCBmcmVlemUgKGFsdGhvdWdoIHRoZSBndWVzdCB3aWxsIHJ1biBub3JtYWxseSku
-IFRoaXMKPiBtYXkgYWxzbyBoYXBwZW4gb24gcmVzaXppbmcgdGhlIGRpc3BsYXkuIFRoZSByZWFz
-b24gaXMgdGhlIHdheQo+IFhlbiBjdXJyZW50bHkgKG1pcyloYW5kbGVzIGxvZ2RpcnR5IFZHQTog
-aXQgaW50ZW50aW9uYWxseQo+IG1pc2NvbmZpZ3VyZXMgVkdBIHBhZ2VzIHNvIHRoYXQgdGhleSB3
-aWxsIGZhdWx0Lgo+IAo+IFRoZSBwcm9ibGVtIGlzIHRoYXQgaXQgb25seSBkb2VzIHRoaXMgaW4g
-dGhlIGhvc3QgcDJtLiBPbmNlIHdlCj4gc3dpdGNoIHRvIGEgbmV3IGFsdHAybSwgdGhlIG1pc2Nv
-bmZpZ3VyZWQgZW50cmllcyB3aWxsIG5vIGxvbmdlcgo+IGZhdWx0LCBzbyB0aGUgZGlzcGxheSB3
-aWxsIG5vdCBiZSB1cGRhdGVkLgo+IAo+IFRoaXMgcGF0Y2g6Cj4gKiB1cGRhdGVzIGVwdF9oYW5k
-bGVfbWlzY29uZmlnKCkgdG8gdXNlIHRoZSBhY3RpdmUgYWx0cDJtIGluc3RlYWQKPiAgIG9mIHRo
-ZSBob3N0cDJtOwo+ICogbW9kaWZpZXMgcDJtX2NoYW5nZV9lbnRyeV90eXBlX2dsb2JhbCgpLAo+
-ICAgcDJtX21lbW9yeV90eXBlX2NoYW5nZWQoKSwgcDJtX2NoYW5nZV90eXBlX3JhbmdlKCkgYW5k
-Cj4gICBwMm1fZmluaXNoX3R5cGVfY2hhbmdlKCkgdG8gcHJvcGFnYXRlIHRoZWlyIGNoYW5nZXMg
-dG8gYWxsCj4gICB2YWxpZCBhbHRwMm1zLgo+IAo+IFdpdGggdGhlIGludHJvZHVjdGlvbiBvZiBh
-bHRwMm0gZmllbGRzIGluIHAybV9tZW1vcnlfdHlwZV9jaGFuZ2VkKCkKPiB0aGUgd2hvbGUgZnVu
-Y3Rpb24gaGFzIGJlZW4gcHV0IHVuZGVyIENPTkZJR19IVk0uCj4gCj4gU3VnZ2VzdGVkLWJ5OiBH
-ZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+Cj4gU2lnbmVkLW9mZi1ieTog
-UmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgo+IFRlc3RlZC1ieTog
-VGFtYXMgSyBMZW5neWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29tPgoKQWNrZWQtYnk6IEdlb3JnZSBE
-dW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBEZWMgMTgsIDIwMTggYXQgMDg6MjA6MjJQTSArMDEwMCwgTm9yYWxmIFRyw7hubmVz
+IHdyb3RlOgo+ID4gKwlpZiAoIWRtYV9tYXBfc2coZGV2LT5kZXYsIHhlbl9vYmotPnNndC0+c2ds
+LCB4ZW5fb2JqLT5zZ3QtPm5lbnRzLAo+ID4gKwkJCURNQV9CSURJUkVDVElPTkFMKSkgewo+IAo+
+IAo+IEFyZSB5b3UgdXNpbmcgdGhlIERNQSBzdHJlYW1pbmcgQVBJIGFzIGEgd2F5IHRvIGZsdXNo
+IHRoZSBjYWNoZXM/CgpUaGlzIGxvb2tzIHJhdGhlciBicm9rZW4uICBQbGVhc2Ugc2VuZCB0aGUg
+d2hvbGUgcGF0Y2ggc2VyaWVzIHRvCnRoZSBpb21tdSBsaXN0IGZvciBwcm9wZXIgcmV2aWV3LgoK
+PiBEb2VzIHRoaXMgbWVhbiB0aGF0IEdGUF9VU0VSIGlzbid0IG1ha2luZyB0aGUgYnVmZmVyIGNv
+aGVyZW50PwoKSG93IGNvdWxkIEdGUF9VU0VSIG1ha2UgbWVtb3J5IGNvaGVyZW50IGluIGFueSB3
+YXk/CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
