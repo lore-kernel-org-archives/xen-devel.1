@@ -1,21 +1,23 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v7 04/14] libxl: Add wrapper around
- libxl__json_object_to_json JSON
-Date: Fri, 21 Dec 2018 14:33:35 +0000
-Message-ID: <23580.63935.597487.694026@mariner.uk.xensource.com>
-References: <20181123135355.6001-1-anthony.perard@citrix.com>
- <20181123135355.6001-5-anthony.perard@citrix.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: [PATCH for-4.12 1/8] xen/arm: Only set necessary
+ flags when initializing HCR_EL2
+Date: Fri, 21 Dec 2018 16:33:38 +0200
+Message-ID: <7624cece-4fd1-6ea7-e425-79f31c1cf872@gmail.com>
+References: <20181128164939.8329-1-julien.grall@arm.com>
+ <20181128164939.8329-2-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=CRbA=O6=citrix.com=prvs=886b937d6=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gaLrw-0001Nu-Pm
- for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 14:33:40 +0000
-In-Reply-To: <20181123135355.6001-5-anthony.perard@citrix.com>
+ <SRS0=/5Gq=O6=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1gaLrz-0001Oa-KP
+ for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 14:33:43 +0000
+Received: by mail-lj1-x244.google.com with SMTP id v15-v6so4900588ljh.13
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Dec 2018 06:33:42 -0800 (PST)
+In-Reply-To: <20181128164939.8329-2-julien.grall@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,16 +26,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+Cc: andre.przywara@arm.com, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1BBVENIIHY3IDA0LzE0XSBsaWJ4bDogQWRkIHdyYXBw
-ZXIgYXJvdW5kIGxpYnhsX19qc29uX29iamVjdF90b19qc29uIEpTT04iKToKPiBUaGF0IHdyYXBw
-ZXIgaXMgZ29pbmcgdG8gYmUgdXNlZCB0byBzYWZlbHkgbG9nIGEganNvbl9vYmplY3QsIGFzCj4g
-bGlieGxfX2pzb25fb2JqZWN0X3RvX2pzb24gcmV0dXJuIE5VTEwgb24gZXJyb3IuIEluIHRoZSBl
-cnJvciBjYXNlLAo+IEpTT04oKSB3aWxsIHJldHVybiBhbiBpbnZhbGlkIGpzb24gc3RyaW5nLgoK
-QWNrZWQtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAyOC4xMS4xOCAxODo0OSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IE9ubHkge0EsRixJfU1P
+IGFyZSBuZWNlc3NhcnkgdG8gcmVjZWl2ZSBpbnRlcnJ1cHRzIHVudGlsIGEgZ3Vlc3QgdkNQVSBp
+cwo+IGxvYWRlZC4KPiAKPiBUaGUgcmVzdCBoYXZlIG5vIGVmZmVjdCBvbiBYZW4gYW5kIGl0IGlz
+IGJldHRlciB0byBhdm9pZCBzZXR0aW5nIHRoZW0uCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVsaWVu
+IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiAtLS0KPiAgIHhlbi9hcmNoL2FybS90cmFw
+cy5jIHwgOCArKysrKystLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0aW9ucygrKSwgMiBk
+ZWxldGlvbnMoLSkKClJldmlld2VkLWJ5OiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292QGVw
+YW0uY29tPgoKLS0gClNpbmNlcmVseSwKQW5kcmlpIEFuaXNvdi4KCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
