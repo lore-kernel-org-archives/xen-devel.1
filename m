@@ -1,20 +1,20 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: [PATCH v4 11/11] dm_depriv: Mark `UID cleanup` as
- completed
-Date: Fri, 21 Dec 2018 18:12:23 +0000
-Message-ID: <20181221181223.9899-11-george.dunlap@citrix.com>
-References: <20181221181223.9899-1-george.dunlap@citrix.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: [PATCH] gic-vgic: skip irqs locking in
+ gic_restore_pending_irqs()
+Date: Fri, 21 Dec 2018 18:31:30 +0000
+Message-ID: <CAF3u54DJvdvMGGCio2_dPoRXkZpV3XjzeN+2GHJr+_QsAzAzrw@mail.gmail.com>
+References: <1545416195-23917-1-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0522753432514096180=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ebt8=O6=citrix.com=prvs=886f074fc=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1gaPaO-0006hr-Qi
- for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 18:31:48 +0000
-In-Reply-To: <20181221181223.9899-1-george.dunlap@citrix.com>
+ <SRS0=1+vS=O6=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gaPaL-0006gy-MA
+ for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 18:31:45 +0000
+Received: by mail-ua1-x944.google.com with SMTP id e16so2007914uam.12
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Dec 2018 10:31:44 -0800 (PST)
+In-Reply-To: <1545416195-23917-1-git-send-email-andrii.anisov@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,56 +23,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U2lnbmVkLW9mZi1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgpB
-Y2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0tLQpDQzog
-SWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGNpdHJpeC5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1
-MkBjaXRyaXguY29tPgotLS0KIGRvY3MvZGVzaWducy9xZW11LWRlcHJpdmlsZWdlLm1kIHwgNDAg
-KysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyMCBpbnNl
-cnRpb25zKCspLCAyMCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kb2NzL2Rlc2lnbnMvcWVt
-dS1kZXByaXZpbGVnZS5tZCBiL2RvY3MvZGVzaWducy9xZW11LWRlcHJpdmlsZWdlLm1kCmluZGV4
-IGY3NDQ0YTQzNGQuLjgxYTVmNWMwNWQgMTAwNjQ0Ci0tLSBhL2RvY3MvZGVzaWducy9xZW11LWRl
-cHJpdmlsZWdlLm1kCisrKyBiL2RvY3MvZGVzaWducy9xZW11LWRlcHJpdmlsZWdlLm1kCkBAIC0x
-MjgsMjYgKzEyOCw2IEBAIGFyZSBzcGVjaWZpZWQ7IHRoaXMgZG9lcyBub3QgYXBwbHkgdG8gUUVN
-VSBydW5uaW5nIGFzIGEgWGVuIERNLgogCiAnJydUZXN0ZWQnJyc6IE5vdCB0ZXN0ZWQKIAotIyBS
-ZXN0cmljdGlvbnMgLyBpbXByb3ZlbWVudHMgc3RpbGwgdG8gZG8KLQotVGhpcyBsaXN0cyBwb3Rl
-bnRpYWwgcmVzdHJpY3Rpb25zIHN0aWxsIHRvIGRvLiAgSXQgaXMgbWVhbnQgdG8gYmUKLWxpc3Rl
-ZCBpbiBvcmRlciBvZiBlYXNlIG9mIGltcGxlbWVudGF0aW9uLCB3aXRoIGxvdy1oYW5naW5nIGZy
-dWl0Ci1maXJzdC4KLQotIyMjIEZ1cnRoZXIgUkxJTUlUcwotCi1STElNSVRfQVMgbGltaXRzIHRo
-ZSB0b3RhbCBhbW91bnQgb2YgbWVtb3J5OyBidXQgdGhpcyBpbmNsdWRlcyB0aGUKLXZpcnR1YWwg
-bWVtb3J5IHdoaWNoIFFFTVUgdXNlcyBhcyBhIG1hcGNhY2hlLiAgeGVuLW1hcGNhY2hlLmMgYWxy
-ZWFkeQotZmlkZGxlcyB3aXRoIHRoaXM7IGl0IHdvdWxkIGJlIHN0cmFpZ2h0Zm9yd2FyZCB0byBt
-YWtlIGl0ICpzZXQqIHRoZQotcmxpbWl0IHRvIHdoYXQgaXQgdGhpbmtzIGEgc2Vuc2libGUgbGlt
-aXQgaXMuCi0KLVJMSU1JVF9OUFJPQyBsaW1pdHMgdG90YWwgbnVtYmVyIG9mIHByb2Nlc3NlcyBv
-ciB0aHJlYWRzLiAgUUVNVSB1c2VzCi10aHJlYWRzIGZvciBzb21lIGRldmljZXMsIHNvIHRoaXMg
-d291bGQgcmVxdWlyZSBzb21lIHRob3VnaHQuCi0KLU90aGVyIHRoaW5ncyB0aGF0IHdvdWxkIHRh
-a2Ugc29tZSBjbGV2ZXJuZXNzIC8gY2hhbmdlcyB0byBRRU1VIHRvCi11dGlsaXplIGR1ZSB0byBv
-cmRlcmluZyBjb25zdHJhbnRzOgotIC0gUkxJTUlUX05PRklMRVMgKGFmdGVyIGFsbCBuZWNlc3Nh
-cnkgZmlsZXMgYXJlIG9wZW5lZCkKLQogIyMjIGxpYnhsIFVJRCBjbGVhbnVwCiAKICcnJ0Rlc2Ny
-aXB0aW9uJycnOiBEb21haW4gSURzIGFyZSByZXVzZWQsIGFuZCB0aHVzIHJlc3RyaWN0ZWQgVUlE
-cyBhcmUKQEAgLTIyMyw2ICsyMDMsMjYgQEAgU2luY2UgdGhpcyB3aWxsIGtpbGwgYWxsIG90aGVy
-IGByZWFwZXJfdWlkYCBwcm9jZXNzZXMgYXMgd2VsbCwgd2UgbXVzdAogZWl0aGVyIGFsbG9jYXRl
-IGEgc2VwYXJhdGUgYHJlYXBlcl91aWRgIHBlciBkb21haW4sIG9yIHVzZSBsb2NraW5nIHRvCiBl
-bnN1cmUgdGhhdCBvbmx5IG9uZSBraWxsaW5nIHByb2Nlc3MgaXMgYWN0aXZlIGF0IGEgdGltZS4K
-IAorIyBSZXN0cmljdGlvbnMgLyBpbXByb3ZlbWVudHMgc3RpbGwgdG8gZG8KKworVGhpcyBsaXN0
-cyBwb3RlbnRpYWwgcmVzdHJpY3Rpb25zIHN0aWxsIHRvIGRvLiAgSXQgaXMgbWVhbnQgdG8gYmUK
-K2xpc3RlZCBpbiBvcmRlciBvZiBlYXNlIG9mIGltcGxlbWVudGF0aW9uLCB3aXRoIGxvdy1oYW5n
-aW5nIGZydWl0CitmaXJzdC4KKworIyMjIEZ1cnRoZXIgUkxJTUlUcworCitSTElNSVRfQVMgbGlt
-aXRzIHRoZSB0b3RhbCBhbW91bnQgb2YgbWVtb3J5OyBidXQgdGhpcyBpbmNsdWRlcyB0aGUKK3Zp
-cnR1YWwgbWVtb3J5IHdoaWNoIFFFTVUgdXNlcyBhcyBhIG1hcGNhY2hlLiAgeGVuLW1hcGNhY2hl
-LmMgYWxyZWFkeQorZmlkZGxlcyB3aXRoIHRoaXM7IGl0IHdvdWxkIGJlIHN0cmFpZ2h0Zm9yd2Fy
-ZCB0byBtYWtlIGl0ICpzZXQqIHRoZQorcmxpbWl0IHRvIHdoYXQgaXQgdGhpbmtzIGEgc2Vuc2li
-bGUgbGltaXQgaXMuCisKK1JMSU1JVF9OUFJPQyBsaW1pdHMgdG90YWwgbnVtYmVyIG9mIHByb2Nl
-c3NlcyBvciB0aHJlYWRzLiAgUUVNVSB1c2VzCit0aHJlYWRzIGZvciBzb21lIGRldmljZXMsIHNv
-IHRoaXMgd291bGQgcmVxdWlyZSBzb21lIHRob3VnaHQuCisKK090aGVyIHRoaW5ncyB0aGF0IHdv
-dWxkIHRha2Ugc29tZSBjbGV2ZXJuZXNzIC8gY2hhbmdlcyB0byBRRU1VIHRvCit1dGlsaXplIGR1
-ZSB0byBvcmRlcmluZyBjb25zdHJhbnRzOgorIC0gUkxJTUlUX05PRklMRVMgKGFmdGVyIGFsbCBu
-ZWNlc3NhcnkgZmlsZXMgYXJlIG9wZW5lZCkKKwogIyMgbGlieGw6IFRyZWF0IFFNUCBjb25uZWN0
-aW9uIGFzIHVudHJ1c3RlZAogCiAnJydEZXNjcmlwdGlvbicnJzogQ3VycmVudGx5IGxpYnhsIHRh
-bGtzIHdpdGggUUVNVSB2aWEgUU1QOyBidXQgaXRzCi0tIAoyLjE5LjIKCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============0522753432514096180==
+Content-Type: multipart/alternative; boundary="0000000000007dbe64057d8c75f2"
+
+--0000000000007dbe64057d8c75f2
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+Sorry for the formatting.
+
+Please address my comments from the previous version.
+
+Cheers,
+
+
+On Fri, 21 Dec 2018, 18:18 Andrii Anisov, <andrii.anisov@gmail.com> wrote:
+
+> From: Andrii Anisov <andrii_anisov@epam.com>
+>
+> This function is called under IRQs disabled already, so drop additional
+> flags save and restore.
+>
+> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
+>
+> ---
+>
+> This is a half of an RFC patch [1] which relies on the already
+> existing code.
+>
+> [1]
+> https://lists.xenproject.org/archives/html/xen-devel/2018-11/msg03293.html
+>
+> ---
+>  xen/arch/arm/gic-vgic.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+>
+> diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
+> index 48922f5..34179c0 100644
+> --- a/xen/arch/arm/gic-vgic.c
+> +++ b/xen/arch/arm/gic-vgic.c
+> @@ -279,11 +279,10 @@ static void gic_restore_pending_irqs(struct vcpu *v)
+>      int lr = 0;
+>      struct pending_irq *p, *t, *p_r;
+>      struct list_head *inflight_r;
+> -    unsigned long flags;
+>      unsigned int nr_lrs = gic_get_nr_lrs();
+>      int lrs = nr_lrs;
+>
+> -    spin_lock_irqsave(&v->arch.vgic.lock, flags);
+> +    spin_lock(&v->arch.vgic.lock);
+>
+>      if ( list_empty(&v->arch.vgic.lr_pending) )
+>          goto out;
+> @@ -327,7 +326,7 @@ found:
+>      }
+>
+>  out:
+> -    spin_unlock_irqrestore(&v->arch.vgic.lock, flags);
+> +    spin_unlock(&v->arch.vgic.lock);
+>  }
+>
+>  void gic_clear_pending_irqs(struct vcpu *v)
+> --
+> 2.7.4
+>
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--0000000000007dbe64057d8c75f2
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,<div><br></div><div>Sorry for the formatting.<br><div dir=3D"auto"><br><=
+/div><div dir=3D"auto">Please address my comments from the previous version=
+.</div><div dir=3D"auto"><br></div><div dir=3D"auto">Cheers,</div><div dir=
+=3D"auto"><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Fri, 21 De=
+c 2018, 18:18 Andrii Anisov, &lt;<a href=3D"mailto:andrii.anisov@gmail.com"=
+>andrii.anisov@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail=
+_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
+1ex">From: Andrii Anisov &lt;<a href=3D"mailto:andrii_anisov@epam.com" targ=
+et=3D"_blank">andrii_anisov@epam.com</a>&gt;<br>
+<br>
+This function is called under IRQs disabled already, so drop additional<br>
+flags save and restore.<br>
+<br>
+Signed-off-by: Andrii Anisov &lt;<a href=3D"mailto:andrii_anisov@epam.com" =
+target=3D"_blank">andrii_anisov@epam.com</a>&gt;<br>
+<br>
+---<br>
+<br>
+This is a half of an RFC patch [1] which relies on the already<br>
+existing code.<br>
+<br>
+[1] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2018-11=
+/msg03293.html" rel=3D"noreferrer" target=3D"_blank">https://lists.xenproje=
+ct.org/archives/html/xen-devel/2018-11/msg03293.html</a><br>
+<br>
+---<br>
+=C2=A0xen/arch/arm/gic-vgic.c | 5 ++---<br>
+=C2=A01 file changed, 2 insertions(+), 3 deletions(-)<br>
+<br>
+diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c<br>
+index 48922f5..34179c0 100644<br>
+--- a/xen/arch/arm/gic-vgic.c<br>
++++ b/xen/arch/arm/gic-vgic.c<br>
+@@ -279,11 +279,10 @@ static void gic_restore_pending_irqs(struct vcpu *v)<=
+br>
+=C2=A0 =C2=A0 =C2=A0int lr =3D 0;<br>
+=C2=A0 =C2=A0 =C2=A0struct pending_irq *p, *t, *p_r;<br>
+=C2=A0 =C2=A0 =C2=A0struct list_head *inflight_r;<br>
+-=C2=A0 =C2=A0 unsigned long flags;<br>
+=C2=A0 =C2=A0 =C2=A0unsigned int nr_lrs =3D gic_get_nr_lrs();<br>
+=C2=A0 =C2=A0 =C2=A0int lrs =3D nr_lrs;<br>
+<br>
+-=C2=A0 =C2=A0 spin_lock_irqsave(&amp;v-&gt;arch.vgic.lock, flags);<br>
++=C2=A0 =C2=A0 spin_lock(&amp;v-&gt;arch.vgic.lock);<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0if ( list_empty(&amp;v-&gt;arch.vgic.lr_pending) )<br>
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0goto out;<br>
+@@ -327,7 +326,7 @@ found:<br>
+=C2=A0 =C2=A0 =C2=A0}<br>
+<br>
+=C2=A0out:<br>
+-=C2=A0 =C2=A0 spin_unlock_irqrestore(&amp;v-&gt;arch.vgic.lock, flags);<br=
+>
++=C2=A0 =C2=A0 spin_unlock(&amp;v-&gt;arch.vgic.lock);<br>
+=C2=A0}<br>
+<br>
+=C2=A0void gic_clear_pending_irqs(struct vcpu *v)<br>
+-- <br>
+2.7.4<br>
+<br>
+<br>
+_______________________________________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
+el@lists.xenproject.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
+/xen-devel</a></blockquote></div></div></div>
+
+--0000000000007dbe64057d8c75f2--
+
+
+--===============0522753432514096180==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0522753432514096180==--
