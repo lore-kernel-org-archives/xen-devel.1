@@ -1,18 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 131486: tolerable all pass -
- PUSHED
-Date: Fri, 21 Dec 2018 09:43:30 +0000
-Message-ID: <osstest-131486-mainreport@xen.org>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v2 0/3] x86/mm-locks: add a bias to control
+ domain lock levels
+Date: Fri, 21 Dec 2018 02:50:26 -0700
+Message-ID: <5C1CB76202000078002086F9@prv1-mh.provo.novell.com>
+References: <20181221094105.83881-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=G4CH=O6=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gaHLC-0005BL-CF
- for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 09:43:34 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=hr/k=O6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gaHRu-0006BQ-LU
+ for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 09:50:30 +0000
+In-Reply-To: <20181221094105.83881-1-roger.pau@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,46 +23,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMTQ4NiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMTQ4Ni8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
-ZzoKIHhlbiAgICAgICAgICAgICAgICAgIDM5NmQ4ZDU0MThlYTkwOGE1ZWY4OGU3ZDdhOWYyMmM3
-MGFkYTQ0YzIKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDcxODNlODZh
-MjljM2ZlMTUwNzhlYjBiOGMxMWQzZTU1NmMyMmVmZmEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEz
-MTQ0NSAgMjAxOC0xMi0xOSAxNDowMDo0MyBaICAgIDEgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2Ug
-ICAxMzE0ODYgIDIwMTgtMTItMjEgMDg6MDA6NDEgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoK
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29v
-cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBz
-dXNlLmNvbT4KICBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCmpvYnM6
-CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3Nz
-dGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2Vz
-OiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFi
-bGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9n
-cwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJh
-bCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0
-O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5v
-cmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3Qg
-aGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9n
-aXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhl
-bmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L3hlbi5naXQKICAgNzE4M2U4NmEyOS4uMzk2ZDhk
-NTQxOCAgMzk2ZDhkNTQxOGVhOTA4YTVlZjg4ZTdkN2E5ZjIyYzcwYWRhNDRjMiAtPiBzbW9rZQoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDIxLjEyLjE4IGF0IDEwOjQxLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IEhlbGxvLAo+IAo+IFRoZSBmb2xsb3dpbmcgc2VyaWVzIGF0dGVtcHRzIHRvIGZpeCBhIG1tIGxv
+Y2sgbGV2ZWwgaXNzdWUgdGhhdCBwcmV2ZW50cwo+IHVzaW5nIHBhZ2luZ19sb2dfZGlydHlfb3Ag
+ZnJvbSBhIHBhZ2luZyBEb20wIChsaWtlIGEgUFZIIERvbTApLiBUaGUKPiBkaXNjdXNzaW9uIHRo
+YXQgbGVhZCB0byB0aGlzIHNlcmllcyBjYW4gYmUgZm91bmQgYXQ6Cj4gCj4gaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE4LTEyL21zZzAxMTk3
+Lmh0bWwgCj4gCj4gUm9nZXIgUGF1IE1vbm5lICgzKToKPiAgIHg4Ni9tbS1sb2NrczogcmVtb3Zl
+IHRyYWlsaW5nIHdoaXRlc3BhY2UKPiAgIHg4Ni9tbS1sb2NrczogY29udmVydCBzb21lIG1hY3Jv
+cyB0byBpbmxpbmUgZnVuY3Rpb25zCgpZb3UgY291bGQgaGF2ZSBjaGVja2VkIHRoZSB0cmVlIGJl
+Zm9yZSBzZW5kaW5nIC0gSSd2ZSBjb21taXR0ZWQKdGhlc2UgdHdvIGluIHRoZSBtb3JuaW5nLgoK
+SmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
