@@ -1,8 +1,8 @@
 From: Andrii Anisov <andrii.anisov@gmail.com>
 Subject: Re: [PATCH for-4.12 5/8] xen/arm: p2m: Only use isb()
  when it is necessary
-Date: Fri, 21 Dec 2018 16:36:38 +0200
-Message-ID: <1d5751f9-4138-7f7e-b1c5-ba17ef0c398b@gmail.com>
+Date: Fri, 21 Dec 2018 16:43:22 +0200
+Message-ID: <f05481f4-d9c2-15be-ca3f-043ad2a9bb92@gmail.com>
 References: <20181128164939.8329-1-julien.grall@arm.com>
  <20181128164939.8329-6-julien.grall@arm.com>
 Mime-Version: 1.0
@@ -12,10 +12,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=/5Gq=O6=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1gaLus-0001ol-KN
- for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 14:36:42 +0000
-Received: by mail-lj1-x241.google.com with SMTP id k15-v6so4921350ljc.8
- for <xen-devel@lists.xenproject.org>; Fri, 21 Dec 2018 06:36:41 -0800 (PST)
+ id 1gaM1O-0002ni-Rx
+ for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 14:43:26 +0000
+Received: by mail-lf1-x144.google.com with SMTP id b20so4051048lfa.12
+ for <xen-devel@lists.xenproject.org>; Fri, 21 Dec 2018 06:43:25 -0800 (PST)
 In-Reply-To: <20181128164939.8329-6-julien.grall@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -30,16 +30,11 @@ To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 Cc: andre.przywara@arm.com, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyOC4xMS4xOCAxODo0OSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZSBFTDEgdHJhbnNs
-YXRpb24gcmVnaW1lIGlzIG91dC1vZi1jb250ZXh0IHdoZW4gcnVubmluZyBhdCBFTDIuIFRoaXMK
-PiBtZWFucyB0aGUgcHJvY2Vzc29yIGNhbm5vdCBzcGVjdWxhdGUgbWVtb3J5IGFjY2Vzc2VzIHVz
-aW5nIHRoZSByZWdpc3RlcnMKPiBhc3NvY2lhdGVkIHRvIHRoYXQgcmVnaW1lLgo+IAo+IEFuIGlz
-YigpIGlzIG9ubHkgbmVlZCBpZiBYZW4gaXMgZ29pbmcgdG8gdXNlIHRoZSB0cmFuc2xhdGlvbiBy
-ZWdpbWUKPiBiZWZvcmUgcmV0dXJuaW5nIHRvIHRoZSBndWVzdCAoZXhjZXB0aW9uIHJldHVybnMg
-d2lsbCBzeW5jaHJvbml6ZWQgdGhlCj4gY29udGV4dCkuCj4gCj4gUmVtb3ZlIHVuZWNlc3Nhcnkg
-aXNiKCkgYW5kIGRvY3VtZW50IHRoZSBvbmVzIGxlZnQuCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVs
-aWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCgpSZXZpZXdlZC1ieTogQW5kcmlpIEFu
-aXNvdiA8YW5kcmlpX2FuaXNvdkBlcGFtLmNvbT4KCi0tIApTaW5jZXJlbHksCkFuZHJpaSBBbmlz
-b3YuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+CgpPbiAyOC4xMS4xOCAxODo0OSwgSnVsaWVuIEdyYWxsIHdyb3RlOgoKPiAgICAgICBpZiAoICps
+YXN0X3ZjcHVfcmFuICE9IElOVkFMSURfVkNQVV9JRCAmJiAqbGFzdF92Y3B1X3JhbiAhPSBuLT52
+Y3B1X2lkICkKPiArICAgIHsKPiAgICAgICAgICAgZmx1c2hfdGxiX2xvY2FsKCk7Cj4gKyAgICB9
+CkJUVywgbWlzc2VkIG1lbnRpb25pbmcgdGhhdCBjdXJseSBicmFjZXMgYWJvdmUgYXJlIG9kZCBi
+eSBjb2Rpbmcgc3R5bGUuCgotLSAKU2luY2VyZWx5LApBbmRyaWkgQW5pc292LgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
