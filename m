@@ -1,20 +1,21 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v7 08/14] libxl: Add init/dispose of for
- libxl__domain_build_state
-Date: Fri, 21 Dec 2018 16:00:14 +0000
-Message-ID: <23581.3598.998962.715531@mariner.uk.xensource.com>
+Subject: Re: [PATCH v7 09/14] libxl_dm: Pre-open QMP socket for
+ QEMU
+Date: Fri, 21 Dec 2018 16:01:13 +0000
+Message-ID: <23581.3657.703601.323575@mariner.uk.xensource.com>
 References: <20181123135355.6001-1-anthony.perard@citrix.com>
- <20181123135355.6001-9-anthony.perard@citrix.com>
+ <20181123135355.6001-10-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=CRbA=O6=citrix.com=prvs=886b937d6=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gaNDr-00039P-Sx
- for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 16:00:23 +0000
-In-Reply-To: <20181123135355.6001-9-anthony.perard@citrix.com>
+ id 1gaNEs-0003Gn-33
+ for xen-devel@lists.xenproject.org; Fri, 21 Dec 2018 16:01:26 +0000
+In-Reply-To: <20181123135355.6001-10-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,13 +28,11 @@ To: Anthony PERARD <anthony.perard@citrix.com>
 Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1BBVENIIHY3IDA4LzE0XSBsaWJ4bDogQWRkIGluaXQv
-ZGlzcG9zZSBvZiBmb3IgbGlieGxfX2RvbWFpbl9idWlsZF9zdGF0ZSIpOgo+IFRoZXNlIHR3byBu
-ZXcgZnVuY3Rpb25zIGxpYnhsX19kb21haW5fYnVpbGRfc3RhdGVfe2luaXQsZGlzcG9zZX0gc2hv
-dWxkCj4gYmUgY2FsbGVkIGV2ZXJ5IHRpbWUgYSBuZXcgbGlieGxfX2RvbWFpbl9idWlsZF9zdGF0
-ZSBjb21lcyB0byBleGlzdGFuY2UuCj4gCj4gVGhlcmUgc2VlbXMgdG8gYmUgdHdvIG9mIHRoZW0s
-IG9uZSB3aXRoIHRoZSBkb21haW4gY3JlYXRpb24gbWFjaGluZXJ5LAo+IGFuZCBvbmUgaW4gdGhl
-IHN0dWJfZG1fc3Bhd24uCgpBY2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNp
-dHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiW1BBVENIIHY3IDA5LzE0XSBsaWJ4bF9kbTogUHJlLW9w
+ZW4gUU1QIHNvY2tldCBmb3IgUUVNVSIpOgo+IFRoaXMgcGF0Y2ggbW92ZXMgdGhlIGNyZWF0aW9u
+IG9mIHRoZSBRTVAgdW5peCBzb2NrZXQgZnJvbSBRRU1VIHRvIGxpYnhsLgo+IEJ1dCBsaWJ4bCBk
+b2Vzbid0IHJlbHkgb24gdGhpcyB5ZXQuCgpBY2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNr
+c29uQGV1LmNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
