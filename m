@@ -1,16 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-coverity test] 131530: all pass - PUSHED
-Date: Sun, 23 Dec 2018 09:54:42 +0000
-Message-ID: <osstest-131530-mainreport@xen.org>
+From: SF Markus Elfring <elfring@users.sourceforge.net>
+Subject: Re: [PATCH 00/20] drop useless LIST_HEAD
+Date: Sun, 23 Dec 2018 13:13:37 +0100
+Message-ID: <d44a1dfe-691e-cfa2-6c8d-56cca6ae4575@users.sourceforge.net>
+References: <1545555435-24576-1-git-send-email-Julia.Lawall@lip6.fr>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=eLR/=PA=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gb0T7-0001I9-KZ
- for xen-devel@lists.xenproject.org; Sun, 23 Dec 2018 09:54:45 +0000
+ <SRS0=rEus=PA=users.sourceforge.net=elfring@srs-us1.protection.inumbo.net>)
+ id 1gb2do-0003nI-CH
+ for xen-devel@lists.xenproject.org; Sun, 23 Dec 2018 12:13:56 +0000
+In-Reply-To: <1545555435-24576-1-git-send-email-Julia.Lawall@lip6.fr>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,43 +22,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Julia Lawall <Julia.Lawall@lip6.fr>, kernel-janitors@vger.kernel.org
+Cc: linux-nfs@vger.kernel.org, Stefano Stabellini <sstabellini@kernel.org>, linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org, netdev@vger.kernel.org, linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org, linux-xfs@vger.kernel.org, linux-arm-kernel@lists.infradead.org, dmaengine@vger.kernel.org, xen-devel@lists.xenproject.org, Dan Williams <dan.j.williams@intel.com>, Andy Shevchenko <andriy.shevchenko@linux.intel.com>, linux-btrfs@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMTUzMCB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
-Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMTUzMC8KClBlcmZlY3Qg
-Oi0pCkFsbCB0ZXN0cyBpbiB0aGlzIGZsaWdodCBwYXNzZWQgYXMgcmVxdWlyZWQKdmVyc2lvbiB0
-YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDdmMjg2NjFmNmE3Y2Uz
-ZDgyZjg4MWI5YWZlZGZlYmNhN2YyY2YxMTYKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAg
-ICAgICAgICAgIGY2MDY1OGM2YWU0N2U3NDc5MmU2Y2M0OGVhMmVmZmFjOGJiNTI4MjYKCkxhc3Qg
-dGVzdCBvZiBiYXNpcyAgIDEzMTQzOCAgMjAxOC0xMi0xOSAwOToxOToxOSBaICAgIDQgZGF5cwpU
-ZXN0aW5nIHNhbWUgc2luY2UgICAxMzE1MzAgIDIwMTgtMTItMjMgMDk6MTg6MzYgWiAgICAwIGRh
-eXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
-dGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEJlbmph
-bWluIFNhbmRhIDxiZW4uc2FuZGFAZG9ybmVyd29ya3MuY29tPgogIEVkZ2FyIEUuIElnbGVzaWFz
-IDxlZGdhci5pZ2xlc2lhc0B4aWxpbnguY29tPgogIEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5s
-YXBAY2l0cml4LmNvbT4KICBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4K
-ICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgSnVsaWVuIEdyYWxsIDxqdWxpZW4u
-Z3JhbGxAYXJtLmNvbT4KICBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5j
-b20+CiAgUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CiAgU3RlZmFubyBT
-dGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgogIFN0ZWZhbm8gU3RhYmVsbGluaSA8
-c3RlZmFub3NAeGlsaW54LmNvbT4KICBUYW1hcyBLIExlbmd5ZWwgPHRhbWFzQHRrbGVuZ3llbC5j
-b20+CiAgV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpvYnM6CiBjb3Zlcml0eS1hbWQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3Jn
-CmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBj
-b25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBv
-cnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMu
-eGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1h
-c3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1i
-bG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0
-CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFy
-eQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQv
-eGVuLmdpdAogICBmNjA2NThjNmFlLi43ZjI4NjYxZjZhICA3ZjI4NjYxZjZhN2NlM2Q4MmY4ODFi
-OWFmZWRmZWJjYTdmMmNmMTE2IC0+IGNvdmVyaXR5LXRlc3RlZC9zbW9rZQoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+PiBEcm9wIExJU1RfSEVBRCB3aGVyZSB0aGUgdmFyaWFibGUgaXQgZGVjbGFyZXMgaXMgbmV2ZXIg
+dXNlZC4KCkRvIHlvdSBrbm93IGFueSBtb3JlIHBsYWNlcyB3aGVyZSBjYWxscyBvZiBvdGhlciBt
+YWNyb3MgY2FuIGJlIGRlbGV0ZWQ/CgpSZWdhcmRzLApNYXJrdXMKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
