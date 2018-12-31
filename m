@@ -1,14 +1,21 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 2/3] x86/svm: Drop enum instruction_index
- and simplify svm_get_insn_len()
-Date: Mon, 31 Dec 2018 11:57:17 +0000
-Message-ID: <0462ac3d-7027-2fc8-272b-5d360018fa8a@citrix.com>
-References: <1546256270-11734-1-git-send-email-andrew.cooper3@citrix.com>
- <1546256270-11734-3-git-send-email-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 0/3] Remove tmem
+Date: Mon, 31 Dec 2018 12:43:39 +0000
+Message-ID: <7c1a8584-9b32-86b9-9154-932089d807cb@citrix.com>
+References: <20181128135806.20201-1-wei.liu2@citrix.com>
+ <23553.28374.811568.188716@mariner.uk.xensource.com>
+ <20181130180157.lz4vaos5zjxlshc4@zion.uk.xensource.com>
+ <5C04FDB50200007800202190@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2284921090493191359=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1546256270-11734-3-git-send-email-andrew.cooper3@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=XH93=PI=citrix.com=prvs=8964ae09f=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gdwv1-00029P-Of
+ for xen-devel@lists.xenproject.org; Mon, 31 Dec 2018 12:43:43 +0000
+In-Reply-To: <5C04FDB50200007800202190@prv1-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -18,123 +25,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Tim Deegan <tim@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2284921090493191359==
-Content-Type: multipart/alternative;
-	boundary="------------9CD0DCA024277FF228A1592D"
-Content-Language: en-GB
-
---------------9CD0DCA024277FF228A1592D
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-On 31/12/2018 11:37, Andrew Cooper wrote:
-> +/*
-> + * Encoding for svm_get_insn_len().  We take X86EMUL_OPC() for the main
-> + * opcode, shifted left to make room for the ModRM byte.
-> + */
-> +#define INSTR_ENC(opc, modrm) (((unsigned int)(opc) << 8) | (modrm))
-> +#define MODRM(mod, reg, rm) (((mod) << 6) | ((reg) << 3) | rm)
-> +
-> +#define INSTR_PAUSE       INSTR_ENC(X86EMUL_OPC_F3(0, 0x90), 0)
-> +#define INSTR_INT3        INSTR_ENC(X86EMUL_OPC(   0, 0xcc), 0)
-> +#define INSTR_ICEBP       INSTR_ENC(X86EMUL_OPC(   0, 0xf1), 0)
-> +#define INSTR_HLT         INSTR_ENC(X86EMUL_OPC(   0, 0xf4), 0)
-> +#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 2, 1))
-> +#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 0))
-> +#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 1))
-> +#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 2))
-> +#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 3))
-> +#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 4))
-> +#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 5))
-> +#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 7))
-> +#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 7, 1))
-
-I'm still tempted to drop the MODRM() macro, and use octal notation
-
-#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0321)
-#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0330)
-#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0331)
-#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0332)
-#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0333)
-#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0334)
-#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0335)
-#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0337)
-#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0371)
-
-Seeing as this is a far more logical way to read x86 instructions.
-
-~Andrew
-
---------------9CD0DCA024277FF228A1592D
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 31/12/2018 11:37, Andrew Cooper
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:1546256270-11734-3-git-send-email-andrew.cooper3@citrix.com">
-      <pre class="moz-quote-pre" wrap="">+/*
-+ * Encoding for svm_get_insn_len().  We take X86EMUL_OPC() for the main
-+ * opcode, shifted left to make room for the ModRM byte.
-+ */
-+#define INSTR_ENC(opc, modrm) (((unsigned int)(opc) &lt;&lt; 8) | (modrm))
-+#define MODRM(mod, reg, rm) (((mod) &lt;&lt; 6) | ((reg) &lt;&lt; 3) | rm)
-+
-+#define INSTR_PAUSE       INSTR_ENC(X86EMUL_OPC_F3(0, 0x90), 0)
-+#define INSTR_INT3        INSTR_ENC(X86EMUL_OPC(   0, 0xcc), 0)
-+#define INSTR_ICEBP       INSTR_ENC(X86EMUL_OPC(   0, 0xf1), 0)
-+#define INSTR_HLT         INSTR_ENC(X86EMUL_OPC(   0, 0xf4), 0)
-+#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 2, 1))
-+#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 0))
-+#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 1))
-+#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 2))
-+#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 3))
-+#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 4))
-+#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 5))
-+#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 7))
-+#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 7, 1))</pre>
-    </blockquote>
-    <br>
-    I'm still tempted to drop the MODRM() macro, and use octal notation<br>
-    <br>
-    <pre>#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0321)
-#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0330)
-#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0331)
-#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0332)
-#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0333)
-#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0334)
-#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0335)
-#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0337)
-#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0371)
-
-</pre>
-    Seeing as this is a far more logical way to read x86 instructions.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------9CD0DCA024277FF228A1592D--
-
-
---===============2284921090493191359==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2284921090493191359==--
+T24gMDMvMTIvMjAxOCAwOTo1NiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMzAuMTEuMTgg
+YXQgMTk6MDEsIDx3ZWkubGl1MkBjaXRyaXguY29tPiB3cm90ZToKPj4gT24gRnJpLCBOb3YgMzAs
+IDIwMTggYXQgMDU6MDk6NDJQTSArMDAwMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4+PiBXZWkgTGl1
+IHdyaXRlcyAoIltQQVRDSCB2MiAwLzNdIFJlbW92ZSB0bWVtIik6Cj4+Pj4gSXQgaXMgYWdyZWVk
+IHRoYXQgdG1lbSBjYW4gYmUgcmVtb3ZlZCBmcm9tIHhlbi5naXQuIFNlZSB0aGUgdGhyZWFkIHN0
+YXJ0aW5nIAo+PiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPj4gICAgIAo+Pj4+IGZyb20gPEQ1RTg2
+NkIyLTk2RjQtNEU4OS05NDFFLTczRjU3OERGMkYxN0BjaXRyaXguY29tPi4KPj4+IFRob3NlIGFy
+ZSBub3RlcyBmcm9tIHNvbWUgcGhvbmUgY2FsbCBhbW9uZ3N0IGluZHVzdHJ5IHN0YWtlaG9sZGVy
+cy4KPj4+IE5vbmUgb2YgdGhlIG1lc3NhZ2VzIGhhdmUgYSBTdWJqZWN0IGxpbmUgbWVudGlvbmlu
+ZyB0bWVtLiAgVGhlcmUgaXMgbm8KPj4+IGV4cGxhbmF0aW9uIG9mIHRoZSBiYXNpcyBmb3IgdGhl
+IGRlY2lzaW9uOyBqdXN0IGEgY29uZmlybWF0aW9uIGZyb20KPj4+IHRoZSBjdXJyZW50IG1haW50
+YWluZXJzIHRoYXQgdGhleSB3aWxsIGFjayB0aGUgcmVtb3ZhbC4KPj4+Cj4+PiBJIHRoaW5rIHRo
+aXMgaXMgbm90IHJlYWxseSBhbiBhcHByb3ByaWF0ZSB3YXkgdG8gY2Fycnkgb24hICBXaGF0IGlm
+Cj4+PiB0aGVyZSBpcyBzb21lb25lIGVsc2Ugd2hvIHdhbnRzIHRvIHN0ZXAgdXAgdG8gbWFpbnRh
+aW4gdGhpcyA/ICBXaGF0Cj4+PiBhYm91dCB1c2VyIGNvbW11bmljYXRpb24gPyAgR29pbmcgc3Ry
+YWlnaHQgZnJvbSBgU3VwcG9ydGVkJyB0bwo+Pj4gYERlbGV0ZWQnIHNlZW1zIHJhdGhlciB2aWdv
+cm91cy4KPj4gU3RlcCB1cCB0byBtYWludGFpbj4gSSB3b3VsZCByYXRoZXIgc2F5IHN0ZXAgdXAg
+dG8gZGV2ZWxvcC4KPj4KPj4gVGhlIHN0YXR1cyBpbiBNQUlOVEFJTkVSUyBpcyB3cm9uZy4gQWNj
+b3JkaW5nIHRvIFNVUFBPUlQubWQsIGl0IGlzIG9ubHkKPj4gZXhwZXJpbWVudGFsLiBPdXIgZGVm
+aW5pdGlvbiBvZiAiZXhwZXJpbWVudGFsIiBpczoKPj4KPj4gICAgRnVuY3Rpb25hbCBjb21wbGV0
+ZW5lc3M6IE5vCj4+ICAgIEZ1bmN0aW9uYWwgc3RhYmlsaXR5OiBIZXJlIGJlIGRyYWdvbnMKPj4g
+ICAgSW50ZXJmYWNlIHN0YWJpbGl0eTogTm90IHN0YWJsZQo+PiAgICBTZWN1cml0eSBzdXBwb3J0
+ZWQ6IE5vCj4gRXhhY3RseS4gUGx1cyBteSBwcm9wb3NhbCB0byByZW1vdmUgaXQgd2FzIHBvc3Rl
+ZCB0byB4ZW4tZGV2ZWwKPiBvbiBBdWcgMzB0aC4gSSBkb24ndCB0aGluayByZW1vdmFsIG9mIGFu
+IGV4cGVyaW1lbnRhbCBmZWF0dXJlCj4gcmVxdWlyZXMgcG9zdGluZyB0byB4ZW4tYW5ub3VuY2Uu
+IElhbiAtIHBsZWFzZSByZWNvbnNpZGVyIHlvdXIKPiBuYWNrLgoKSSBjb25jdXIgd2l0aCBXZWkg
+YW5kIEphbi7CoCBUTUVNIGhhcyBiZWVuIG9mZiBieSBkZWZhdWx0IGR1ZSB0byBiZWluZwpkZWNs
+YXJlZCAiZnVsbCBvZiBzZWN1cml0eSBob2xlcyAtIGRvbid0IHVzZSIgc2luY2UgWFNBLTE1LsKg
+IFRoYXQgd2FzIGluCjIwMTIsIGFuZCBUTUVNIGhhc24ndCBtYWRlIGl0cyB3YXkgYmFjayBpbnRv
+IHNlY3VyaXR5IHN1cHBvcnQgaW4gdGhhdCB0aW1lLgoKSW4gYWRkaXRpb24sIGl0IHdhcyBuZXZl
+ciBmaXhlZCB0byB3b3JrIHdpdGggTWlncmF0aW9uIHYyLsKgIFRoZSBzYXZlCnNpZGUgZG9lc24n
+dCBxdWVyeSBhbnkgVE1FTSBzdGF0ZSwgYW5kIGNvbnZlcnQtbGVnYWN5LXN0cmVhbSByYWlzZXMg
+VE9ETwpvbiBlbmNvdW50ZXJpbmcgbGVnYWN5IFRNRU0gZGF0YS4KCkkgZG9uJ3Qga25vdyBhYm91
+dCBvdGhlciBkaXN0cmlidXRpb25zLCBidXQgaXQgaGFzIGJlZW4gY29tcGlsZWQgb3V0IG9mClhl
+blNlcnZlciBmb3IgYWxsIHZlcnNpb25zIHdoaWNoIGhhdmUgS2NvbmZpZy4KCnRsO2RyIEl0IGRv
+ZXNuJ3Qgd29yaywgYW5kIGF0IHRoaXMgcG9pbnQsIGl0IGxvb2tzIHZlcnkgdW5saWtlbHkgdG8K
+Y2hhbmdlLsKgIFRoZXJlIGlzIGEgbm9uLXplcm8gY29zdCBmb3IgcmV0YWluaW5nIG9ic29sZXRl
+IGZ1bmN0aW9uYWxpdHksCmFuZCB0aGUgaHlwZXJ2aXNvciBtYWludGFpbmVycyB3YW50IGl0IGdv
+bmUgaW4gNC4xMiwgd2hpY2ggd2UgdGhpbmsgaXMKZW50aXJlbHkgcmVhc29uYWJsZSBnaXZlbiB0
+aGUgY2lyY3Vtc3RhbmNlcy4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
