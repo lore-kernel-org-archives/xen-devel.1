@@ -1,16 +1,15 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 131658: regressions - FAIL
-Date: Mon, 31 Dec 2018 11:45:20 +0000
-Message-ID: <osstest-131658-mainreport@xen.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v3 2/3] x86/svm: Drop enum instruction_index
+ and simplify svm_get_insn_len()
+Date: Mon, 31 Dec 2018 11:57:17 +0000
+Message-ID: <0462ac3d-7027-2fc8-272b-5d360018fa8a@citrix.com>
+References: <1546256270-11734-1-git-send-email-andrew.cooper3@citrix.com>
+ <1546256270-11734-3-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2284921090493191359=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=lr3e=PI=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gdw0b-00068p-ST
- for xen-devel@lists.xenproject.org; Mon, 31 Dec 2018 11:45:25 +0000
+In-Reply-To: <1546256270-11734-3-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,95 +18,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMTY1OCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzE2NTgvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
-Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgIDYgeGVu
-LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtaTM4Ni14
-c20gICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTI5NDc1CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgMSBidWlsZC1jaGVjaygxKSAgICAgICAg
-ICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgIDEg
-YnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9hCiBidWlsZC1hbWQ2NC1saWJ2
-aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9h
-CiBidWlsZC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
-ICAgICAgICAgICAgICAgMmJiNGE3Y2E2Mjk5Mjk4Zjg0ZGE0NjU3NTc2YjE0MGYxNzhjNzQ1OApi
-YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
-NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
-LTExLTA1IDIxOjEzOjExIFogICA1NSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
-MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgNTQgZGF5cyAgMjEyIGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEzMTYxMiAgMjAxOC0xMi0yOCAwNjo0MTo0MCBaICAgIDMgZGF5cyAgIDE2IGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFj
-aGluIEd1cHRhIDxhY2hpbi5ndXB0YUBhcm0uY29tPgogIEFyZCBCaWVzaGV1dmVsIDxhcmQuYmll
-c2hldXZlbEBsaW5hcm8ub3JnPgogIEJvYiBGZW5nIDxib2IuYy5mZW5nQGludGVsLmNvbT4KICBi
-b2IuYy5mZW5nQGludGVsLmNvbSA8Ym9iLmMuZmVuZ0BpbnRlbC5jb20+CiAgQm9iQ0YgPGJvYi5j
-LmZlbmdAaW50ZWwuY29tPgogIENoYXNlbCBDaGl1IDxjaGFzZWwuY2hpdUBpbnRlbC5jb20+CiAg
-Q2hhc2VsLCBDaGl1IDxjaGFzZWwuY2hpdUBpbnRlbC5jb20+CiAgQ2hlbiBBIENoZW4gPGNoZW4u
-YS5jaGVuQGludGVsLmNvbT4KICBEYW5kYW4gQmkgPGRhbmRhbi5iaUBpbnRlbC5jb20+CiAgRGF2
-aWQgV2VpIDxkYXZpZC53ZWlAaW50ZWwuY29tPgogIERlcmVrIExpbiA8ZGVyZWsubGluMkBocGUu
-Y29tPgogIEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNvbT4KICBGZW5nLCBCb2IgQyA8Ym9i
-LmMuZmVuZ0BpbnRlbC5jb20+CiAgRnUgU2l5dWFuIDxzaXl1YW4uZnVAaW50ZWwuY29tPgogIEdh
-cnkgTGluIDxnbGluQHN1c2UuY29tPgogIEhhbyBXdSA8aGFvLmEud3VAaW50ZWwuY29tPgogIEph
-YmVuIENhcnNleSA8amFiZW4uY2Fyc2V5QGludGVsLmNvbT4KICBKZWZmIEJyYXNlbiA8amJyYXNl
-bkBudmlkaWEuY29tPgogIEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgSmlh
-eGluIFd1IDxKaWF4aW4ud3VAaW50ZWwuY29tPgogIEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50
-ZWwuY29tPgogIExhc3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgTGVpZiBMaW5kaG9s
-bSA8bGVpZi5saW5kaG9sbUBsaW5hcm8ub3JnPgogIExpbWluZyBHYW8gPGxpbWluZy5nYW9AaW50
-ZWwuY29tPgogIExpdSBZdSA8cGVkcm9hLmxpdUBvdXRsb29rLmNvbT4KICBNYXJjIFp5bmdpZXIg
-PG1hcmMuenluZ2llckBhcm0uY29tPgogIE1hcmNpbiBXb2p0YXMgPG13QHNlbWloYWxmLmNvbT4K
-ICBNaWtlIE1hc2xlbmtpbiA8bWlrZS5tYXNsZW5raW5AZ21haWwuY29tPgogIE1pbmcgSHVhbmcg
-PG1pbmcuaHVhbmdAbGluYXJvLm9yZz4KICBQZWRyb2EgTGl1IDxwZWRyb2EubGl1QG91dGxvb2su
-Y29tPgogIFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRlbC5jb20+CiAgU2FtaSBNdWphd2FyIDxzYW1p
-Lm11amF3YXJAYXJtLmNvbT4KICBzaGVuZ2xlaSA8c2hlbmdsZWkuemhhbmdAaW50ZWwuY29tPgog
-IFNoZW5nbGVpIFpoYW5nIDxzaGVuZ2xlaS56aGFuZ0BpbnRlbC5jb20+CiAgU2l5dWFuIEZ1IDxz
-aXl1YW4uZnVAaW50ZWwuY29tPgogIFN0YXIgWmVuZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICBT
-dWdob3NoIEdhbnUgPHN1Z2hvc2guZ2FudUBhcm0uY29tPgogIFN1bWl0IEdhcmcgPHN1bWl0Lmdh
-cmdAbGluYXJvLm9yZz4KICBTdW4sIFphaWxpYW5nIDwvbz1JbnRlbC9vdT1FeGNoYW5nZSBBZG1p
-bmlzdHJhdGl2ZSBHcm91cCAoRllESUJPSEYyM1NQRExUKS9jbj1SZWNpcGllbnRzL2NuPVN1biwg
-WmFpbGlhbmdmNWQ+CiAgVGhvbWFzIEFicmFoYW0gPHRob21hcy5hYnJhaGFtQGFybS5jb20+CiAg
-VGluZyBZZSA8dGluZy55ZUBpbnRlbC5jb20+CiAgVG9tYXN6IE1pY2hhbGVjIDx0bUBzZW1paGFs
-Zi5jb20+CiAgVmlqYXllbnRoaXJhbiBTdWJyYW1hbmlhbSA8dmlqYXllbnRoaXJhbi5zdWJyYW1h
-bmlhbUBhcm0uY29tPgogIFZsYWRpbWlyIE9sb3Z5YW5uaWtvdiA8dmxhZGltaXIub2xvdnlhbm5p
-a292QGJyb2FkY29tLmNvbT4KICBXYW5nIEJpblggQSA8YmlueC5hLndhbmdAaW50ZWwuY29tPgog
-IFd1IEppYXhpbiA8amlheGluLnd1QGludGVsLmNvbT4KICBZZSBUaW5nIDx0aW5nLnllQGludGVs
-LmNvbT4KICBZb25naG9uZyBaaHUgPHlvbmdob25nLnpodUBpbnRlbC5jb20+CiAgeXVjaGVubGlu
-IDx5dWNoZW5saW5Ac3lub2xvZ3kuY29tPgogIFphaWxpYW5nIFN1biA8emFpbGlhbmcuc3VuQGlu
-dGVsLmNvbT4KICBaaGFuZywgQ2hhbyBCIDxjaGFvLmIuemhhbmdAaW50ZWwuY29tPgogIFpoYW8s
-IFpoaXFpYW5nWCA8emhpcWlhbmd4LnpoYW9AaW50ZWwuY29tPgogIFpoaWp1LkZhbiA8emhpanV4
-LmZhbkBpbnRlbC5jb20+CiAgemhpanVmYW4gPHpoaWp1eC5mYW5AaW50ZWwuY29tPgogIFpoaXFp
-YW5nWCBaaGFvIDx6aGlxaWFuZ3guemhhb0BpbnRlbC5jb20+CiAgendlaTQgPGRhdmlkLndlaUBp
-bnRlbC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFtZDY0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogYnVpbGQtYW1kNjQt
-cHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92
-bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9y
-dC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9s
-b2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBl
-dGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qu
-b3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9z
-c3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2Vi
-Lz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6
-Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTto
-Yj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hl
-bmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGlu
-Zy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxkIGJlIDQ2NzMgbGluZXMgbG9uZy4pCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2284921090493191359==
+Content-Type: multipart/alternative;
+	boundary="------------9CD0DCA024277FF228A1592D"
+Content-Language: en-GB
+
+--------------9CD0DCA024277FF228A1592D
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+On 31/12/2018 11:37, Andrew Cooper wrote:
+> +/*
+> + * Encoding for svm_get_insn_len().  We take X86EMUL_OPC() for the main
+> + * opcode, shifted left to make room for the ModRM byte.
+> + */
+> +#define INSTR_ENC(opc, modrm) (((unsigned int)(opc) << 8) | (modrm))
+> +#define MODRM(mod, reg, rm) (((mod) << 6) | ((reg) << 3) | rm)
+> +
+> +#define INSTR_PAUSE       INSTR_ENC(X86EMUL_OPC_F3(0, 0x90), 0)
+> +#define INSTR_INT3        INSTR_ENC(X86EMUL_OPC(   0, 0xcc), 0)
+> +#define INSTR_ICEBP       INSTR_ENC(X86EMUL_OPC(   0, 0xf1), 0)
+> +#define INSTR_HLT         INSTR_ENC(X86EMUL_OPC(   0, 0xf4), 0)
+> +#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 2, 1))
+> +#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 0))
+> +#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 1))
+> +#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 2))
+> +#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 3))
+> +#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 4))
+> +#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 5))
+> +#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 7))
+> +#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 7, 1))
+
+I'm still tempted to drop the MODRM() macro, and use octal notation
+
+#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0321)
+#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0330)
+#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0331)
+#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0332)
+#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0333)
+#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0334)
+#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0335)
+#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0337)
+#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0371)
+
+Seeing as this is a far more logical way to read x86 instructions.
+
+~Andrew
+
+--------------9CD0DCA024277FF228A1592D
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 31/12/2018 11:37, Andrew Cooper
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:1546256270-11734-3-git-send-email-andrew.cooper3@citrix.com">
+      <pre class="moz-quote-pre" wrap="">+/*
++ * Encoding for svm_get_insn_len().  We take X86EMUL_OPC() for the main
++ * opcode, shifted left to make room for the ModRM byte.
++ */
++#define INSTR_ENC(opc, modrm) (((unsigned int)(opc) &lt;&lt; 8) | (modrm))
++#define MODRM(mod, reg, rm) (((mod) &lt;&lt; 6) | ((reg) &lt;&lt; 3) | rm)
++
++#define INSTR_PAUSE       INSTR_ENC(X86EMUL_OPC_F3(0, 0x90), 0)
++#define INSTR_INT3        INSTR_ENC(X86EMUL_OPC(   0, 0xcc), 0)
++#define INSTR_ICEBP       INSTR_ENC(X86EMUL_OPC(   0, 0xf1), 0)
++#define INSTR_HLT         INSTR_ENC(X86EMUL_OPC(   0, 0xf4), 0)
++#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 2, 1))
++#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 0))
++#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 1))
++#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 2))
++#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 3))
++#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 4))
++#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 5))
++#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 3, 7))
++#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), MODRM(3, 7, 1))</pre>
+    </blockquote>
+    <br>
+    I'm still tempted to drop the MODRM() macro, and use octal notation<br>
+    <br>
+    <pre>#define INSTR_XSETBV      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0321)
+#define INSTR_VMRUN       INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0330)
+#define INSTR_VMCALL      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0331)
+#define INSTR_VMLOAD      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0332)
+#define INSTR_VMSAVE      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0333)
+#define INSTR_STGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0334)
+#define INSTR_CLGI        INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0335)
+#define INSTR_INVLPGA     INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0337)
+#define INSTR_RDTSCP      INSTR_ENC(X86EMUL_OPC(0x0f, 0x01), 0371)
+
+</pre>
+    Seeing as this is a far more logical way to read x86 instructions.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------9CD0DCA024277FF228A1592D--
+
+
+--===============2284921090493191359==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2284921090493191359==--
