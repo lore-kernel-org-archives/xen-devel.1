@@ -1,19 +1,12 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH 0/5] pvcalls fixes
-Date: Wed, 2 Jan 2019 11:51:34 -0500
-Message-ID: <72a86306-f6af-aec8-5936-ea14b7a4f97e@oracle.com>
-References: <alpine.DEB.2.10.1812211501280.15901@sstabellini-ThinkPad-X260>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: Command line options of dubious use
+Date: Wed, 2 Jan 2019 17:56:43 +0100
+Message-ID: <20190102165643.GA11513@aepfle.de>
+References: <b442c221-62ff-eed6-4bbc-fc7599187c93@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2544391186892369524=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=oYxk=PK=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1gejkB-00076Q-Qx
- for xen-devel@lists.xenproject.org; Wed, 02 Jan 2019 16:51:47 +0000
-In-Reply-To: <alpine.DEB.2.10.1812211501280.15901@sstabellini-ThinkPad-X260>
-Content-Language: en-US
+In-Reply-To: <b442c221-62ff-eed6-4bbc-fc7599187c93@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,23 +15,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Cc: jgross@suse.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel List <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTIvMjEvMTggNjowNiBQTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+IEhpIGFsbCwK
-Pgo+IFRoaXMgc2VyaWVzIGlzIGEgY29sbGVjdGlvbiBvZiBzbWFsbCBwdmNhbGxzIGZpeGVzLgo+
-Cj4gQ2hlZXJzLAo+Cj4gU3RlZmFubwo+Cj4KPiBTdGVmYW5vIFN0YWJlbGxpbmkgKDUpOgo+ICAg
-ICAgIHB2Y2FsbHMtZnJvbnQ6IHJlYWQgYWxsIGRhdGEgYmVmb3JlIGNsb3NpbmcgdGhlIGNvbm5l
-Y3Rpb24KPiAgICAgICBwdmNhbGxzLWZyb250OiBkb24ndCB0cnkgdG8gZnJlZSB1bmFsbG9jYXRl
-ZCByaW5ncwo+ICAgICAgIHB2Y2FsbHMtZnJvbnQ6IHByb3Blcmx5IGFsbG9jYXRlIHNrCj4gICAg
-ICAgcHZjYWxscy1mcm9udDogZG9uJ3QgcmV0dXJuIGVycm9yIHdoZW4gdGhlIHJpbmcgaXMgZnVs
-bAo+ICAgICAgIHB2Y2FsbHMtYmFjazogc2V0IC1FTk9UQ09OTiBpbiBwdmNhbGxzX2Nvbm5fYmFj
-a19yZWFkCj4KPiAgZHJpdmVycy94ZW4vcHZjYWxscy1iYWNrLmMgIHwgIDcgKysrKy0tLQo+ICBk
-cml2ZXJzL3hlbi9wdmNhbGxzLWZyb250LmMgfCAyMCArKysrKysrKysrKysrLS0tLS0tLQo+ICAy
-IGZpbGVzIGNoYW5nZWQsIDE3IGluc2VydGlvbnMoKyksIDEwIGRlbGV0aW9ucygtKQoKClJldmll
-d2VkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKQXBw
-bGllZCB0byBmb3ItbGludXMtMjEuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+
+--===============2544391186892369524==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="4Ckj6UjgE2iN1+kY"
+Content-Disposition: inline
+
+
+--4Ckj6UjgE2iN1+kY
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+
+On Mon, Dec 31, Andrew Cooper wrote:
+
+> * tbuf_size and tevt_mask
+> Given that xentrace can set them at runtime, and it is debugging
+> functionality, I don't see a plausible use the command line options at all.
+
+'tbuf_size=-1 dom0_mem=N' collects events during boot.
+xenalyze is (or was) unable to properly parse the result, but thats a
+separate issue.
+
+Olaf
+
+--4Ckj6UjgE2iN1+kY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXCztSAAKCRBdQqD6ppg2
+fr6eAJ4kByshphlHH+WdW19d2LE+2ka+7QCg6BOFHnKONJBMXzO8T92HRUsC8YU=
+=H2rz
+-----END PGP SIGNATURE-----
+
+--4Ckj6UjgE2iN1+kY--
+
+
+--===============2544391186892369524==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2544391186892369524==--
