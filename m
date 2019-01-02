@@ -1,19 +1,18 @@
 From: Stefan Hajnoczi <stefanha@redhat.com>
-Subject: Re: [RFC v2 1/4] elf: Add optional function ptr to
- load_elf() to parse ELF notes
-Date: Wed, 2 Jan 2019 13:06:50 +0000
-Message-ID: <20190102130650.GM24009__43638.2430293181$1546434354$gmane$org@stefanha-x1.localdomain>
+Subject: Re: [RFC v2 2/4] elf-ops.h: Add get_elf_note_type()
+Date: Wed, 2 Jan 2019 13:12:34 +0000
+Message-ID: <20190102131234.GN24009@stefanha-x1.localdomain>
 References: <1545422632-24444-1-git-send-email-liam.merwick@oracle.com>
- <1545422632-24444-2-git-send-email-liam.merwick@oracle.com>
+ <1545422632-24444-3-git-send-email-liam.merwick@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3495126587354426507=="
+Content-Type: multipart/mixed; boundary="===============1809771901900827353=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=/c71=PK=redhat.com=stefanha@srs-us1.protection.inumbo.net>)
- id 1gegEc-00031f-0T
- for xen-devel@lists.xenproject.org; Wed, 02 Jan 2019 13:06:58 +0000
-In-Reply-To: <1545422632-24444-2-git-send-email-liam.merwick@oracle.com>
+ id 1gegK5-0003pv-Lk
+ for xen-devel@lists.xenproject.org; Wed, 02 Jan 2019 13:12:37 +0000
+In-Reply-To: <1545422632-24444-3-git-send-email-liam.merwick@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,83 +26,87 @@ Cc: ehabkost@redhat.com, mst@redhat.com, maran.wilson@oracle.com, qemu-devel@non
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============3495126587354426507==
+--===============1809771901900827353==
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="DXTueXWT3Da08pik"
+	protocol="application/pgp-signature"; boundary="b1ERR0FXR0PvNIRE"
 Content-Disposition: inline
 
 
---DXTueXWT3Da08pik
+--b1ERR0FXR0PvNIRE
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 21, 2018 at 08:03:49PM +0000, Liam Merwick wrote:
-> diff --git a/include/hw/elf_ops.h b/include/hw/elf_ops.h
-> index 74679ff8da3a..37d20a3800c1 100644
-> --- a/include/hw/elf_ops.h
-> +++ b/include/hw/elf_ops.h
-> @@ -266,6 +266,7 @@ fail:
->  }
-> =20
+On Fri, Dec 21, 2018 at 08:03:50PM +0000, Liam Merwick wrote:
+> +    while (note_type !=3D elf_note_type) {
+> +        nhdr_namesz =3D nhdr->n_namesz;
+> +        nhdr_descsz =3D nhdr->n_descsz;
+> +
+> +        elf_note_entry_offset =3D nhdr_size +
+> +            QEMU_ALIGN_UP(nhdr_namesz, phdr_align) +
+> +            QEMU_ALIGN_UP(nhdr_descsz, phdr_align);
+> +
+> +        /* If the offset calculated in this iteration exceeds the
+> +	 * supplied size, we are done and no matching note was found.
+> +	 */
+
+Indentation is off here.  QEMU uses 4-space indentation.
+
+> +        if (elf_note_entry_offset > note_size) {
+> +            return NULL;
+> +        }
+> +
+> +        /* skip to the next ELF Note entry */
+> +        nhdr =3D (void *)nhdr + elf_note_entry_offset;
+> +        note_type =3D nhdr->n_type;
+> +    }
+> +
+> +    return nhdr;
+> +}
+> +
 >  static int glue(load_elf, SZ)(const char *name, int fd,
-> +                              uint64_t (*elf_note_fn)(void *, void *, bo=
+>                                uint64_t (*elf_note_fn)(void *, void *, bo=
 ol),
 >                                uint64_t (*translate_fn)(void *, uint64_t),
->                                void *translate_opaque,
->                                int must_swab, uint64_t *pentry,
-> @@ -496,8 +497,30 @@ static int glue(load_elf, SZ)(const char *name, int =
+> @@ -512,6 +555,13 @@ static int glue(load_elf, SZ)(const char *name, int =
 fd,
->                  high =3D addr + mem_size;
+>                  }
+>              }
 > =20
->              data =3D NULL;
-> +
-> +        } else if (ph->p_type =3D=3D PT_NOTE && elf_note_fn) {
-> +            struct elf_note *nhdr =3D NULL;
-> +
-> +            file_size =3D ph->p_filesz; /* Size of the range of ELF note=
-s */
-> +            data =3D g_malloc0(file_size);
-> +            if (ph->p_filesz > 0) {
-> +                if (lseek(fd, ph->p_offset, SEEK_SET) < 0) {
-> +                    goto fail;
-> +                }
-> +                if (read(fd, data, file_size) !=3D file_size) {
-> +                    goto fail;
-> +                }
-> +            }
-> +
-> +            if (nhdr !=3D NULL) {
-> +                bool is64 =3D
-> +                    sizeof(struct elf_note) =3D=3D sizeof(struct elf64_n=
-ote);
-> +                elf_note_fn((void *)nhdr, (void *)&ph->p_align, is64);
+> +	    /* Search the ELF notes to find one with a type matching the
+> +	     * value passed in via 'translate_opaque'
+> +	     */
+> +            nhdr =3D (struct elf_note *)data;
 
-How does data get used?
+Ah, I see data gets used here!  It would be clearer to move loading of
+data into this patch.
 
-> +            }
-> +            g_free(data);
+> +	    assert(translate_opaque !=3D NULL);
+> +            nhdr =3D glue(get_elf_note_type, SZ)(nhdr, file_size, ph->p_=
+align,
+> +                                               *(uint64_t *)translate_op=
+aque);
 
-Missing data =3D NULL to prevent double free later?
+Indentation is off in this hunk.  QEMU uses 4-space indentation.
 
---DXTueXWT3Da08pik
+--b1ERR0FXR0PvNIRE
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEcBAEBAgAGBQJcLLdqAAoJEJykq7OBq3PIPNUIAMlYfpbNVFsonh226rbJaR3w
-YSt+vscNyY1R2INl6kh2p9zdUi3CEU4jdzTK7s3IhvwIeGi6rsefFl3ugrL7rDGv
-V8oJjii8OE+5P9eteDERVAWExWCzssTu4pc/DCOAUx3u7SR/xgVXTprtmjM2HCkC
-4P2P6YQdILerjRFCVI+CoYGn3lYpGg+6ZFxldZMjtoMzHCwk0b+EXip6v3pIlwoN
-wVbyIcft2sGHqDEXXNHHx6FuXOxba7PK+esv7EKLMtQaFC9mV/WGEOMnyabvICoy
-CZFi9KcL38fOEUtsgkNqpJAisWSFcPqVgjpMr0HsUlw5hjpa3z7V+QFpLjfE1es=
-=FlQZ
+iQEcBAEBAgAGBQJcLLjCAAoJEJykq7OBq3PIZ/EH/ipgOt8ASb7G9HtihUXxltlG
+FpiavcTULh6RYCjIP0k5h/EM78MOZwXCKgG0xZQg5QrqR3WzuBhmVukRfLAnJsPK
+HzrQREc/P7GzkQJtrWjiWDmVIvmw6QrBx7BUOAMCGqx6ewFvyRj3eo65tzMSCVeq
++tc7PYtc7sOP7BR0jrX5y6t+NcuENhEBJVF5oXqoB35Sdyh/xmeOXnHKL/1ltiSr
+q6unzKvvEA/nM/j/m09FUzVyqM1AKQpJDM+uHMlFtZO2llEmMzGLLKJjF3FSiY5C
+tEGQB3xGVAgHjkCjo5Ci5LqbdoGpgB2yyB423WLuqcC9YdzfUwKm7rWJ7bam1eY=
+=zvH5
 -----END PGP SIGNATURE-----
 
---DXTueXWT3Da08pik--
+--b1ERR0FXR0PvNIRE--
 
 
---===============3495126587354426507==
+--===============1809771901900827353==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -113,4 +116,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3495126587354426507==--
+--===============1809771901900827353==--
