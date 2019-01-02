@@ -1,17 +1,16 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 3/4] docs/man: Fix/simplify generation of
- manpages
-Date: Wed, 2 Jan 2019 12:45:50 +0000
-Message-ID: <3a040c3e-775d-066d-cfd2-c0d7f277f0be@citrix.com>
-References: <1546429392-9334-1-git-send-email-andrew.cooper3@citrix.com>
- <1546429392-9334-4-git-send-email-andrew.cooper3@citrix.com>
- <23596.44761.373586.524322@mariner.uk.xensource.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 2/6] x86/feature: Generalise synth and
+ introduce a bug word
+Date: Wed, 2 Jan 2019 12:48:46 +0000
+Message-ID: <20190102124846.xd3ztzme26qywrjf@zion.uk.xensource.com>
+References: <1546000776-23378-1-git-send-email-andrew.cooper3@citrix.com>
+ <1546000776-23378-3-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <23596.44761.373586.524322@mariner.uk.xensource.com>
-Content-Language: en-GB
+Content-Disposition: inline
+In-Reply-To: <1546000776-23378-3-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,43 +19,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDIvMDEvMjAxOSAxMjozMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gQW5kcmV3IENvb3BlciB3
-cml0ZXMgKCJbUEFUQ0ggMy80XSBkb2NzL21hbjogRml4L3NpbXBsaWZ5IGdlbmVyYXRpb24gb2Yg
-bWFucGFnZXMiKToKPj4gVGhlIERPQ19NQU54IGxpc3RzIGFyZSBicm9rZW4uICBUaGV5IGNvbnRh
-aW4gTUFOeFNSQy15IHR3aWNlLCB0aGUgZmlyc3QgaGFsZgo+PiB3aXRoIGEgcGFydGlhbCAlLnBv
-ZCBzdWJzdGl0dWF0aW9uLCBhbmQgdGhlIHNlY29uZCBoYWxmIHdpdGggYSBwYXJ0aWFsCj4+ICUu
-bWFya2Rvd24gc3Vic3RpdHV0aW9uLiAgVGhpcyBpcyBhbHNvIHRoZSByb290IGNhdXNlIGJlaGlu
-ZCB0aGUgZmlsdGVyaW5nCj4+IGFjdGl2aXR5IGluIHRoZSB1bmluc3RhbGwtbWFuJChpKS1wYWdl
-cyBydWxlLgo+IC4uLgo+PiBBcyBmb3IgdGhlIG1ha2VmaWxlOgo+Pgo+PiAxKSBCcmVhayB0aGUg
-TUFOX1NFQ1RJT05TIGxpc3Qgb3V0IG9mIHRoZSBHRU5FUkFURV9NQU5QQUdFX1JVTEVTIGxvb3As
-IGFzIHdlCj4+ICAgIGFyZSBnb2luZyB0byB1c2UgaXQgYSBzZWNvbmQgdGltZS4KPj4gMikgRG8g
-YXdheSB3aXRoIHRoZSBpbmRpdmlkYXVsIE1BTnhTUkMteSB2YXJpYWJsZXMuICBVc2UgYSBzaW5n
-bGUgbGlzdCwKPj4gICAgZGVyaXZlZCBmcm9tIGFsbCAqLnBvZCBhbmQgKi5wYW5kb2MgZmlsZXMs
-IHdpdGggdGhlaXIgZm9ybWF0IHN1ZmZpeGVzCj4+ICAgIHJlbW92ZWQuCj4+IDMpIFVzZSBhICQo
-Zm9yZWFjaCAuLi4pIHRvIGdlbmVyYXRlIHRoZSBET0NfTUFOeCBsaXN0cywgZmlsbGluZyB0aGVt
-IHdpdGggdGhlCj4+ICAgIGNvcnJlY3QgY29udGVudC4KPj4gNCkgVGhlIERPQ19IVE1MIGFuZCBE
-T0NfVFhUIGNhbiBub3cgaW5jbHVkZSBhbGwgbWFucGFnZXMgd2l0aCBhIHNpbmdsZQo+PiAgICBz
-dWJzdGl0dXRpb24sIGFzIHRoZXkgZG9uJ3QgbmVlZCB0byBzZXBhcmF0ZSB0aGUgbWFucGFnZXMg
-YnkKPj4gICAgc2VjdGlvbi1udW1iZXJlZC1kaXJlY3RvcnkuCj4+IDUpIEZpeCB1cCB0aGUgZmls
-ZW5hbWVzIGluIHRoZSBtYW5wYWdlIG1ldGFydWxlIHRvIG1hdGNoIHRoZSByZW5hbWluZy4KPj4K
-Pj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCj4gSG93IGNvbmZpZGVudCBhcmUgeW91IHRoYXQgdGhp
-cyBkb2VzIG5vdCBicmVhayAtai1zYWZldHkgPwo+IEkgdmVyeSBicmllZmx5IGV5ZWJhbGxlZCBp
-dCBhbmQgbm90aGluZyBqdW1wZWQgb3V0IGF0IG1lLiAgSSB3b25kZXIKPiBpZiBJIHNob3VsZCBy
-ZXZpZXcgaXQgcHJvcGVybHkuICBXaGF0IGRvIHlvdSB0aGluayA/CgpJJ20gZmFpcmx5IHN1cmUg
-SSBoYXZlbid0IHRvdWNoZWQgYW55dGhpbmcgd2hpY2ggYWZmZWN0cyAtai1zYWZldHkuCgpUaGUg
-b25seSBjb250ZW50IHdoaWNoIGhhcyBjaGFuZ2VkIGlzIHRvIGxvc2UgdGhlIG1hbC1zdWJzdGl0
-dXRlZCBvcmlnaW4Kc291cmNlIGZpbGVzIGZyb20gRE9DX01BTnguwqAgVGhlc2UgY2F1c2VkIHVu
-bmVjZXNzYXJ5IGRlcGVuZGVuY2llcwpiZXR3ZWVuIG1hbiQoMSktcGFnZXMgYW5kIHRoZSBvcmln
-aW5hbCBzb3VyY2UgZmlsZXMsIHdoaWNoIGhhdmUgbm8gcnVsZQp0byB0cmlnZ2VyLCBhbmQgd2ls
-bCBiZSBjb25zaWRlcmVkIHVwIHRvIGRhdGUuCgpBbGwgdGhlIHByb3Blcmx5IHN1YnN0aXR1dGVk
-IGNvbnRlbnQgaW4gRE9DX01BTnggaXMgaWRlbnRpY2FsIHRvIHdoYXQgaXQKd2FzIGJlZm9yZS7C
-oCBPdGhlciBlYXJsaWVyIGxpc3RzIHdlcmUganVzdCBpbnRlcm1lZGlhdGUgcHJvY2Vzc2luZwpi
-ZXR3ZWVuIHRoZSAkKHdpbGRjYXJkICkgYW5kIHRoZSBET0NfKiBsaXN0cywgYW5kIGFyZSBldmFs
-dWF0ZWQKaW1tZWRpYXRlbHkgd2l0aCA6PS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpLCBEZWMgMjgsIDIwMTggYXQgMTI6Mzk6MzJQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBGdXR1cmUgY2hhbmdlcyBhcmUgZ29pbmcgdG8gd2FudCB0byB1c2UgY3B1X2J1Z18q
+IGluIGEgbWFubm9yIHNpbWlsYXIgdG8KCm1hbm5vciAtPiBtYW5uZXIuCgpXZWkuCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
