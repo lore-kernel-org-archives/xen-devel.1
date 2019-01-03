@@ -1,17 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-linus test] 131687: regressions - FAIL
-Date: Thu, 03 Jan 2019 17:41:52 +0000
-Message-ID: <osstest-131687-mainreport@xen.org>
+From: Artem Mygaiev <Artem_Mygaiev@epam.com>
+Subject: Re: Xen (both x86 and Arm) Community Call: Jan 9 -
+ 16:00 - 17:00 UTC - Call for Agenda Items
+Date: Thu, 3 Jan 2019 17:41:58 +0000
+Message-ID: <DB7PR03MB356453CAD62D1EAC5807D07DF48D0@DB7PR03MB3564.eurprd03.prod.outlook.com>
+References: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>,
+ <alpine.DEB.2.10.1901030915130.800@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6186500560072544490=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PvMN=PL=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gf70G-0001RD-Fs
- for xen-devel@lists.xenproject.org; Thu, 03 Jan 2019 17:41:56 +0000
+ <SRS0=8q3X=PL=epam.com=artem_mygaiev@srs-us1.protection.inumbo.net>)
+ id 1gf70P-0001Rl-HL
+ for xen-devel@lists.xenproject.org; Thu, 03 Jan 2019 17:42:05 +0000
+In-Reply-To: <alpine.DEB.2.10.1901030915130.800@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,251 +23,349 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>, Lars Kurth <lars.kurth.xen@gmail.com>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
+ John" <john.ji@intel.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Matt Spencer <Matt.Spencer@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Jarvis Roach <Jarvis.Roach@dornerworks.c>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMTY4NyBsaW51eC1saW51cyByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTMxNjg3LwoKUmVncmVzc2lvbnMgOi0oCgpU
-ZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRl
-c3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiB0ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4tYW1k
-NjQgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3Qt
-YW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICA3IHhlbi1ib290ICAgICAgICAgICAgICAgIGZhaWwg
-UkVHUi4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1k
-NjQteHNtIDcgeGVuLWJvb3QgZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQtdmhkICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAx
-MjU4OTgKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyA3
-IHhlbi1ib290IGZhaWwgUkVHUi4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0
-aXZjcHUgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBm
-YWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyIDEwIHhl
-bi1ib290L3NyY19ob3N0ICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1h
-bWQ2NC1weWdydWIgICAgICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAxMSB4ZW4tYm9vdC9kc3Rf
-aG9zdCAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3QtYW1kNjQtaTM4Ni1leGFtaW5l
-ICAgICAgIDggcmVib290ICAgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyNTg5OAog
-dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAg
-ZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgIDEwIHhl
-bi1ib290L3NyY19ob3N0ICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3QtYW1kNjQt
-YW1kNjQtcGFpciAgICAgICAgMTEgeGVuLWJvb3QvZHN0X2hvc3QgICAgICAgIGZhaWwgUkVHUi4g
-dnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14c20g
-IDcgeGVuLWJvb3QgZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1
-bi1pMzg2ICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2ICA3IHhlbi1ib290ICAgICAgICAg
-IGZhaWwgUkVHUi4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAgNyB4
-ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0
-LWkzODYtbGlidmlydCAgICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1Iu
-IHZzLiAxMjU4OTgKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1pbnRlbCAgNyB4ZW4t
-Ym9vdCAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV0LWRlYmlhbmh2bS1hbWQ2NCAgNyB4ZW4tYm9vdCAgICAgZmFpbCBSRUdSLiB2cy4gMTI1ODk4
-CiB0ZXN0LWFtZDY0LWkzODYteGwteHNtICAgICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAg
-ICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgMTAg
-eGVuLWJvb3Qvc3JjX2hvc3QgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2
-NC1pMzg2LWxpYnZpcnQtcGFpciAxMSB4ZW4tYm9vdC9kc3RfaG9zdCAgICAgICAgZmFpbCBSRUdS
-LiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICA3IHhlbi1ib290ICAg
-ICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3QtYW1kNjQtaTM4Ni1wYWly
-ICAgICAgICAgMTAgeGVuLWJvb3Qvc3JjX2hvc3QgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyNTg5
-OAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAgICAgICAxMSB4ZW4tYm9vdC9kc3RfaG9zdCAgICAg
-ICAgZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWludGVs
-ICA3IHhlbi1ib290ICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1zaGFkb3cgICAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVH
-Ui4gdnMuIDEyNTg5OAogdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgOCByZWJvb3QgICAg
-ICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWkzODYtcWVt
-dXQtcmhlbDZodm0tYW1kIDEyIGd1ZXN0LXN0YXJ0L3JlZGhhdC5yZXBlYXQgZmFpbCBSRUdSLiB2
-cy4gMTI1ODk4CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICA3IHhl
-bi1ib290ICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKClJlZ3Jlc3Npb25zIHdoaWNoIGFyZSBy
-ZWdhcmRlZCBhcyBhbGxvd2FibGUgKG5vdCBibG9ja2luZyk6CiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXJ0ZHMgICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjU4
-OTgKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDEgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgIGZh
-aWwgYmFzZWxpbmUgdW50ZXN0ZWQKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2
-NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyNTg5OAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxp
-a2UgMTI1ODk4CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAxNyBndWVzdC1z
-dG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMjU4OTgKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyNTg5OAog
-dGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNr
-ICAgIGZhaWwgIGxpa2UgMTI1ODk4CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDE0IHNh
-dmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbGlrZSAxMjU4OTgKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBs
-aWtlIDEyNTg5OAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0
-LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTI1ODk4CiB0ZXN0LWFtZDY0LWkzODYteGwtcHZz
-aGltICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAg
-ICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGVi
-aWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBt
-aWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFl
-bXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQxICAx
-NCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bWhmLWFybWhmLXhsLW11bHRpdmNwdSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDE0IHNhdmVyZXN0
-b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14
-bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVj
-ayAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1h
-cm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUt
-c3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtcnRkcyAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0
-LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIg
-IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdz
-MTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTMgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZl
-ciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1p
-bnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-d2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAg
-ICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogbGludXgg
-ICAgICAgICAgICAgICAgOGUxNDNiOTBlNGQ0NWNjYTNkYzUzNzYwZDNjZmFiOTg4YmM3NDU3MQpi
-YXNlbGluZSB2ZXJzaW9uOgogbGludXggICAgICAgICAgICAgICAgOTQ3MTBjYWMwZWY0ZWUxNzdh
-NjNiNTIyNzY2NGIzOGM5NWJiZjcwMwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI1ODk4ICAyMDE4
-LTA4LTEzIDIxOjIwOjU1IFogIDE0MiBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyNTkyMSAg
-MjAxOC0wOC0xNSAxMzowNjo1NiBaICAxNDEgZGF5cyAgMTEzIGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEzMTY4NyAgMjAxOS0wMS0wMiAxMzo1MjowMyBaICAgIDEgZGF5cyAgICAxIGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KNDA3NCBwZW9wbGUgdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdCwKbm90
-IGxpc3RpbmcgdGhlbSBhbGwKCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmly
-dCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYW1kNjQtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXJ1bXBydW4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZt
-LWFtZDY0LXhzbSAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV0LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20g
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0t
-YW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhz
-bSAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0
-LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2
-Mi1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYtcWVtdXQtcmhlbDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1k
-NjQgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQt
-ZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-b3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXJ1bXBydW4tYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdp
-bjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd3Mx
-Ni1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1o
-Zi14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNr
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV1LWRtcmVzdHJpY3QtYW1kNjQtZG1yZXN0cmljdCAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLWV4YW1pbmUgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1l
-eGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LWZyZWVic2QxMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcnVtcHJ1bi1pMzg2ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAt
-aTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtaW50
-ZWwgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXB2aHYyLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWludGVsICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGli
-dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1wYWly
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0
-LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtaTM4Ni1wdmdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcHlncnVi
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xY293MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
-ICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1yYXcgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1ydGRz
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhm
-LWFybWhmLXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2
-NC1zaGFkb3cgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXNoYWRv
-dyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1zaGFkb3cgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBv
-c3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFn
-ZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWls
-YWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9s
-b2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5l
-cmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5n
-aXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVu
-Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVz
-dCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlz
-aW9uIGxvZzsgaXQgd291bGQgYmUgODA0OTU3IGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============6186500560072544490==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_DB7PR03MB356453CAD62D1EAC5807D07DF48D0DB7PR03MB3564eurp_"
+
+--_000_DB7PR03MB356453CAD62D1EAC5807D07DF48D0DB7PR03MB3564eurp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+Both myself and Alex will be at CES at this time so we won't be able to joi=
+n.
+
+
+ -- Artem
+
+________________________________
+From: Stefano Stabellini <sstabellini@kernel.org>
+Sent: Thursday, January 3, 2019 7:17:02 PM
+To: Lars Kurth
+Cc: xen-devel; committers@xenproject.org; Tamas K Lengyel; intel-xen@intel.=
+com; daniel.kiper@oracle.com; Roger Pau Monne; Christopher Clark; Rich Pers=
+aud; Brian Woods; Stefano Stabellini; Julien Grall; Juergen Gross; Paul Dur=
+rant; Ji, John; Natarajan, Janakarajan; dpsmith@apertussolutions.com; edgar=
+.iglesias@xilinx.com; davorin.mista@aggios.com; robin.randhawa@arm.com; Art=
+em Mygaiev; mirela.simonovic@aggios.com; Stewart Hildebrand; anastassios.na=
+nos@onapp.com; vfachin@de.adit-jv.com; Volodymyr Babchuk; Matt Spencer; Jar=
+vis Roach
+Subject: Re: Xen (both x86 and Arm) Community Call: Jan 9 - 16:00 - 17:00 U=
+TC - Call for Agenda Items
+
+For all the folks used to attending the ARM community calls, I'll be on
+this call. Julien, won't be able to join this time, but he will join in
+the future.
+
+On Thu, 3 Jan 2019, Lars Kurth wrote:
+> Hi all,
+>
+> based on Stefano's and Julien's suggestion that it may make sense to merg=
+e the x86 and arm calls, I am willing to try. It also makes sense this time=
+ in particular because we are approaching freeze time.
+>
+>
+> As per request the meeting is 1 hour later than normal. Also, because the=
+re were NO attendees from China on the last 3 calls. For Chinese attendees:=
+ if you plan to attend, please confirm you are attending and we can discuss=
+ moving the meeting to earlier.
+>
+> @Juergen, @Jan: we can discuss the timing of future meetings going forwar=
+d if 17:00-18:00 is a problem for you.
+>
+> Please propose topics by either editing the running agenda document at ht=
+tps://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI8I0=
+1I/edit# or by replying to the mail. Ideally by next Tuesday!
+>
+>
+> =3D=3D AOB =3D=3D
+>
+> =3D=3D Dial-in Information =3D=3D
+>
+>    ## Future Community Call schedule
+>    Jan 9, Feb 13, Mar 12
+>
+>    ## Meeting time
+>    15:00 - 16:00 UTC
+>     8:00 -  9:00 EDT (San Francisco)
+>    11:00 - 12:00 EDT (New York)
+>    16:00 - 17:00 BST (London)
+>    17:00 - 18:00 CEST (Berlin)
+>    00:00 - 01:00 CST (Beijing)
+>    Further International meeting times:
+>    https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019=
+&month=3D1&day=3D7&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=
+=3D136&p5=3D37&p6=3D33
+>
+>    ## Dial in details
+>    Web: https://www.gotomeet.me/larskurth
+>
+>    You can also dial in using your phone.
+>    Access Code: 906-886-965
+>
+>    China (Toll Free): 4008 811084
+>    Germany: +49 692 5736 7317
+>    Poland (Toll Free): 00 800 1124759
+>    United Kingdom: +44 330 221 0088
+>    United States: +1 (571) 317-3129
+>
+>    More phone numbers
+>    Australia: +61 2 9087 3604
+>    Austria: +43 7 2081 5427
+>    Argentina (Toll Free): 0 800 444 3375
+>    Bahrain (Toll Free): 800 81 111
+>    Belarus (Toll Free): 8 820 0011 0400
+>    Belgium: +32 28 93 7018
+>    Brazil (Toll Free): 0 800 047 4906
+>    Bulgaria (Toll Free): 00800 120 4417
+>    Canada: +1 (647) 497-9391
+>    Chile (Toll Free): 800 395 150
+>    Colombia (Toll Free): 01 800 518 4483
+>     Czech Republic (Toll Free): 800 500448
+>    Denmark: +45 32 72 03 82
+>    Finland: +358 923 17 0568
+>    France: +33 170 950 594
+>    Greece (Toll Free): 00 800 4414 3838
+>    Hong Kong (Toll Free): 30713169
+>    Hungary (Toll Free): (06) 80 986 255
+>    Iceland (Toll Free): 800 7204
+>    India (Toll Free): 18002669272
+>    Indonesia (Toll Free): 007 803 020 5375
+>    Ireland: +353 15 360 728
+>    Israel (Toll Free): 1 809 454 830
+>    Italy: +39 0 247 92 13 01
+>    Japan (Toll Free): 0 120 663 800
+>    Korea, Republic of (Toll Free): 00798 14 207 4914
+>    Luxembourg (Toll Free): 800 85158
+>    Malaysia (Toll Free): 1 800 81 6854
+>    Mexico (Toll Free): 01 800 522 1133
+>    Netherlands: +31 207 941 377
+>    New Zealand: +64 9 280 6302
+>    Norway: +47 21 93 37 51
+>    Panama (Toll Free): 00 800 226 7928
+>    Peru (Toll Free): 0 800 77023
+>    Philippines (Toll Free): 1 800 1110 1661
+>    Portugal (Toll Free): 800 819 575
+>    Romania (Toll Free): 0 800 410 029
+>    Russian Federation (Toll Free): 8 800 100 6203
+>    Saudi Arabia (Toll Free): 800 844 3633
+>    Singapore (Toll Free): 18007231323
+>    South Africa (Toll Free): 0 800 555 447
+>    Spain: +34 932 75 2004
+>    Sweden: +46 853 527 827
+>    Switzerland: +41 225 4599 78
+>    Taiwan (Toll Free): 0 800 666 854
+>    Thailand (Toll Free): 001 800 011 023
+>    Turkey (Toll Free): 00 800 4488 23683
+>    Ukraine (Toll Free): 0 800 50 1733
+>    United Arab Emirates (Toll Free): 800 044 40439
+>    Uruguay (Toll Free): 0004 019 1018
+>    Viet Nam (Toll Free): 122 80 481
+>
+>    First GoToMeeting? Let's do a quick system check:
+>    https://link.gotomeeting.com/system-check
+>
+> Best Regards
+> Lars
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--_000_DB7PR03MB356453CAD62D1EAC5807D07DF48D0DB7PR03MB3564eurp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
+n-bottom:0;} --></style>
+</head>
+<body dir=3D"ltr">
+<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
+-family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
+<p style=3D"margin-top:0;margin-bottom:0">Both myself and Alex will be at C=
+ES at this time so we won't be able to join.</p>
+<p style=3D"margin-top:0;margin-bottom:0"><br>
+</p>
+<p style=3D"margin-top:0;margin-bottom:0">&nbsp;-- Artem</p>
+</div>
+<hr style=3D"display:inline-block;width:98%" tabindex=3D"-1">
+<div id=3D"divRplyFwdMsg" dir=3D"ltr"><font face=3D"Calibri, sans-serif" st=
+yle=3D"font-size:11pt" color=3D"#000000"><b>From:</b> Stefano Stabellini &l=
+t;sstabellini@kernel.org&gt;<br>
+<b>Sent:</b> Thursday, January 3, 2019 7:17:02 PM<br>
+<b>To:</b> Lars Kurth<br>
+<b>Cc:</b> xen-devel; committers@xenproject.org; Tamas K Lengyel; intel-xen=
+@intel.com; daniel.kiper@oracle.com; Roger Pau Monne; Christopher Clark; Ri=
+ch Persaud; Brian Woods; Stefano Stabellini; Julien Grall; Juergen Gross; P=
+aul Durrant; Ji, John; Natarajan,
+ Janakarajan; dpsmith@apertussolutions.com; edgar.iglesias@xilinx.com; davo=
+rin.mista@aggios.com; robin.randhawa@arm.com; Artem Mygaiev; mirela.simonov=
+ic@aggios.com; Stewart Hildebrand; anastassios.nanos@onapp.com; vfachin@de.=
+adit-jv.com; Volodymyr Babchuk;
+ Matt Spencer; Jarvis Roach<br>
+<b>Subject:</b> Re: Xen (both x86 and Arm) Community Call: Jan 9 - 16:00 - =
+17:00 UTC - Call for Agenda Items</font>
+<div>&nbsp;</div>
+</div>
+<div class=3D"BodyFragment"><font size=3D"2"><span style=3D"font-size:11pt;=
+">
+<div class=3D"PlainText">For all the folks used to attending the ARM commun=
+ity calls, I'll be on<br>
+this call. Julien, won't be able to join this time, but he will join in<br>
+the future.<br>
+<br>
+On Thu, 3 Jan 2019, Lars Kurth wrote:<br>
+&gt; Hi all,<br>
+&gt; <br>
+&gt; based on Stefano's and Julien's suggestion that it may make sense to m=
+erge the x86 and arm calls, I am willing to try. It also makes sense this t=
+ime in particular because we are approaching freeze time.<br>
+&gt; <br>
+&gt; <br>
+&gt; As per request the meeting is 1 hour later than normal. Also, because =
+there were NO attendees from China on the last 3 calls. For Chinese attende=
+es: if you plan to attend, please confirm you are attending and we can disc=
+uss moving the meeting to earlier.<br>
+&gt; <br>
+&gt; @Juergen, @Jan: we can discuss the timing of future meetings going for=
+ward if 17:00-18:00 is a problem for you.<br>
+&gt; <br>
+&gt; Please propose topics by either editing the running agenda document at=
+ <a href=3D"https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9A=
+p4Y4srAm4vI8I01I/edit#">
+https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI8=
+I01I/edit#</a> or by replying to the mail. Ideally by next Tuesday!<br>
+&gt; <br>
+&gt; <br>
+&gt; =3D=3D AOB =3D=3D<br>
+&gt; <br>
+&gt; =3D=3D Dial-in Information =3D=3D<br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; ## Future Community Call schedule<br>
+&gt;&nbsp;&nbsp;&nbsp; Jan 9, Feb 13, Mar 12<br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; ## Meeting time<br>
+&gt;&nbsp;&nbsp;&nbsp; 15:00 - 16:00 UTC<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; 8:00 -&nbsp; 9:00 EDT (San Francisco)<br>
+&gt;&nbsp;&nbsp;&nbsp; 11:00 - 12:00 EDT (New York)<br>
+&gt;&nbsp;&nbsp;&nbsp; 16:00 - 17:00 BST (London)<br>
+&gt;&nbsp;&nbsp;&nbsp; 17:00 - 18:00 CEST (Berlin)<br>
+&gt;&nbsp;&nbsp;&nbsp; 00:00 - 01:00 CST (Beijing)<br>
+&gt;&nbsp;&nbsp;&nbsp; Further International meeting times: <br>
+&gt;&nbsp;&nbsp;&nbsp; <a href=3D"https://www.timeanddate.com/worldclock/me=
+etingdetails.html?year=3D2019&amp;month=3D1&amp;day=3D7&amp;hour=3D16&amp;m=
+in=3D0&amp;sec=3D0&amp;p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p=
+5=3D37&amp;p6=3D33">
+https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&amp;=
+month=3D1&amp;day=3D7&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&amp;p1=3D224&am=
+p;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33</a><br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; ## Dial in details<br>
+&gt;&nbsp;&nbsp;&nbsp; Web: <a href=3D"https://www.gotomeet.me/larskurth">h=
+ttps://www.gotomeet.me/larskurth</a><br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; You can also dial in using your phone.<br>
+&gt;&nbsp;&nbsp;&nbsp; Access Code: 906-886-965<br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; China (Toll Free): 4008 811084<br>
+&gt;&nbsp;&nbsp;&nbsp; Germany: &#43;49 692 5736 7317<br>
+&gt;&nbsp;&nbsp;&nbsp; Poland (Toll Free): 00 800 1124759<br>
+&gt;&nbsp;&nbsp;&nbsp; United Kingdom: &#43;44 330 221 0088<br>
+&gt;&nbsp;&nbsp;&nbsp; United States: &#43;1 (571) 317-3129<br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; More phone numbers<br>
+&gt;&nbsp;&nbsp;&nbsp; Australia: &#43;61 2 9087 3604<br>
+&gt;&nbsp;&nbsp;&nbsp; Austria: &#43;43 7 2081 5427<br>
+&gt;&nbsp;&nbsp;&nbsp; Argentina (Toll Free): 0 800 444 3375<br>
+&gt;&nbsp;&nbsp;&nbsp; Bahrain (Toll Free): 800 81 111<br>
+&gt;&nbsp;&nbsp;&nbsp; Belarus (Toll Free): 8 820 0011 0400<br>
+&gt;&nbsp;&nbsp;&nbsp; Belgium: &#43;32 28 93 7018<br>
+&gt;&nbsp;&nbsp;&nbsp; Brazil (Toll Free): 0 800 047 4906<br>
+&gt;&nbsp;&nbsp;&nbsp; Bulgaria (Toll Free): 00800 120 4417<br>
+&gt;&nbsp;&nbsp;&nbsp; Canada: &#43;1 (647) 497-9391<br>
+&gt;&nbsp;&nbsp;&nbsp; Chile (Toll Free): 800 395 150<br>
+&gt;&nbsp;&nbsp;&nbsp; Colombia (Toll Free): 01 800 518 4483<br>
+&gt;&nbsp;&nbsp;&nbsp;&nbsp; Czech Republic (Toll Free): 800 500448<br>
+&gt;&nbsp;&nbsp;&nbsp; Denmark: &#43;45 32 72 03 82<br>
+&gt;&nbsp;&nbsp;&nbsp; Finland: &#43;358 923 17 0568<br>
+&gt;&nbsp;&nbsp;&nbsp; France: &#43;33 170 950 594<br>
+&gt;&nbsp;&nbsp;&nbsp; Greece (Toll Free): 00 800 4414 3838<br>
+&gt;&nbsp;&nbsp;&nbsp; Hong Kong (Toll Free): 30713169<br>
+&gt;&nbsp;&nbsp;&nbsp; Hungary (Toll Free): (06) 80 986 255<br>
+&gt;&nbsp;&nbsp;&nbsp; Iceland (Toll Free): 800 7204<br>
+&gt;&nbsp;&nbsp;&nbsp; India (Toll Free): 18002669272<br>
+&gt;&nbsp;&nbsp;&nbsp; Indonesia (Toll Free): 007 803 020 5375<br>
+&gt;&nbsp;&nbsp;&nbsp; Ireland: &#43;353 15 360 728<br>
+&gt;&nbsp;&nbsp;&nbsp; Israel (Toll Free): 1 809 454 830<br>
+&gt;&nbsp;&nbsp;&nbsp; Italy: &#43;39 0 247 92 13 01<br>
+&gt;&nbsp;&nbsp;&nbsp; Japan (Toll Free): 0 120 663 800<br>
+&gt;&nbsp;&nbsp;&nbsp; Korea, Republic of (Toll Free): 00798 14 207 4914<br=
+>
+&gt;&nbsp;&nbsp;&nbsp; Luxembourg (Toll Free): 800 85158<br>
+&gt;&nbsp;&nbsp;&nbsp; Malaysia (Toll Free): 1 800 81 6854<br>
+&gt;&nbsp;&nbsp;&nbsp; Mexico (Toll Free): 01 800 522 1133<br>
+&gt;&nbsp;&nbsp;&nbsp; Netherlands: &#43;31 207 941 377<br>
+&gt;&nbsp;&nbsp;&nbsp; New Zealand: &#43;64 9 280 6302<br>
+&gt;&nbsp;&nbsp;&nbsp; Norway: &#43;47 21 93 37 51<br>
+&gt;&nbsp;&nbsp;&nbsp; Panama (Toll Free): 00 800 226 7928<br>
+&gt;&nbsp;&nbsp;&nbsp; Peru (Toll Free): 0 800 77023<br>
+&gt;&nbsp;&nbsp;&nbsp; Philippines (Toll Free): 1 800 1110 1661<br>
+&gt;&nbsp;&nbsp;&nbsp; Portugal (Toll Free): 800 819 575<br>
+&gt;&nbsp;&nbsp;&nbsp; Romania (Toll Free): 0 800 410 029<br>
+&gt;&nbsp;&nbsp;&nbsp; Russian Federation (Toll Free): 8 800 100 6203<br>
+&gt;&nbsp;&nbsp;&nbsp; Saudi Arabia (Toll Free): 800 844 3633<br>
+&gt;&nbsp;&nbsp;&nbsp; Singapore (Toll Free): 18007231323<br>
+&gt;&nbsp;&nbsp;&nbsp; South Africa (Toll Free): 0 800 555 447<br>
+&gt;&nbsp;&nbsp;&nbsp; Spain: &#43;34 932 75 2004<br>
+&gt;&nbsp;&nbsp;&nbsp; Sweden: &#43;46 853 527 827<br>
+&gt;&nbsp;&nbsp;&nbsp; Switzerland: &#43;41 225 4599 78<br>
+&gt;&nbsp;&nbsp;&nbsp; Taiwan (Toll Free): 0 800 666 854<br>
+&gt;&nbsp;&nbsp;&nbsp; Thailand (Toll Free): 001 800 011 023<br>
+&gt;&nbsp;&nbsp;&nbsp; Turkey (Toll Free): 00 800 4488 23683<br>
+&gt;&nbsp;&nbsp;&nbsp; Ukraine (Toll Free): 0 800 50 1733<br>
+&gt;&nbsp;&nbsp;&nbsp; United Arab Emirates (Toll Free): 800 044 40439<br>
+&gt;&nbsp;&nbsp;&nbsp; Uruguay (Toll Free): 0004 019 1018<br>
+&gt;&nbsp;&nbsp;&nbsp; Viet Nam (Toll Free): 122 80 481<br>
+&gt; <br>
+&gt;&nbsp;&nbsp;&nbsp; First GoToMeeting? Let's do a quick system check:<br=
+>
+&gt;&nbsp;&nbsp;&nbsp; <a href=3D"https://link.gotomeeting.com/system-check=
+">https://link.gotomeeting.com/system-check</a><br>
+&gt; <br>
+&gt; Best Regards<br>
+&gt; Lars<br>
+&gt; <br>
+&gt; _______________________________________________<br>
+&gt; Xen-devel mailing list<br>
+&gt; Xen-devel@lists.xenproject.org<br>
+&gt; <a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel">ht=
+tps://lists.xenproject.org/mailman/listinfo/xen-devel</a><br>
+</div>
+</span></font></div>
+</body>
+</html>
+
+--_000_DB7PR03MB356453CAD62D1EAC5807D07DF48D0DB7PR03MB3564eurp_--
+
+
+--===============6186500560072544490==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6186500560072544490==--
