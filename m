@@ -1,16 +1,17 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH for-4.12] xen/iommu: fix dev assignment on
- ARM after 91d4eca7
-Date: Fri, 4 Jan 2019 09:46:24 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1901040941510.800@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1901021622550.800@sstabellini-ThinkPad-X260>
- <416d62e8-f977-bca7-2eb9-5ac05051953e@citrix.com>
- <alpine.DEB.2.10.1901031004460.800@sstabellini-ThinkPad-X260>
- <71f5da369f1245b8a85c794a9ae097d9@AMSPEX02CL03.citrite.net>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 131731: regressions - FAIL
+Date: Fri, 04 Jan 2019 19:08:07 +0000
+Message-ID: <osstest-131731-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1816407085-1546623985=:800"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <71f5da369f1245b8a85c794a9ae097d9@AMSPEX02CL03.citrite.net>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Ng1K=PM=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gfUpH-0005bI-Vc
+ for xen-devel@lists.xenproject.org; Fri, 04 Jan 2019 19:08:12 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,120 +20,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, "julien.grall@arm.com" <julien.grall@arm.com>, 'Stefano Stabellini' <sstabellini@kernel.org>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1816407085-1546623985=:800
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Fri, 4 Jan 2019, Paul Durrant wrote:
-> > -----Original Message-----
-> > From: Stefano Stabellini [mailto:sstabellini@kernel.org]
-> > Sent: 03 January 2019 18:20
-> > To: Andrew Cooper <Andrew.Cooper3@citrix.com>
-> > Cc: Stefano Stabellini <sstabellini@kernel.org>; xen-devel@lists.xen.org;
-> > julien.grall@arm.com; jbeulich@suse.com; Paul Durrant
-> > <Paul.Durrant@citrix.com>
-> > Subject: Re: [Xen-devel] [PATCH for-4.12] xen/iommu: fix dev assignment on
-> > ARM after 91d4eca7
-> > 
-> > On Thu, 3 Jan 2019, Andrew Cooper wrote:
-> > > On 03/01/2019 00:28, Stefano Stabellini wrote:
-> > > > Fix device assignment on ARM after 91d4eca7 "mm / iommu: split
-> > > > need_iommu() into has_iommu_pt() and need_iommu_pt_sync()".
-> > > >
-> > > > arch_iommu_populate_page_table returns -ENOSYS which causes
-> > > > iommu_construct to return early, although it is not an error.
-> > > >
-> > > > Interestingly, the if ( rc ) was present even before 91d4eca7, but it
-> > was
-> > > > still working before. Now, with the new hd->status field it won't
-> > > > complete the initialization successfully.
-> > > >
-> > > > Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-> > > >
-> > > > diff --git a/xen/drivers/passthrough/iommu.c
-> > b/xen/drivers/passthrough/iommu.c
-> > > > index ac62d7f..a63329b 100644
-> > > > --- a/xen/drivers/passthrough/iommu.c
-> > > > +++ b/xen/drivers/passthrough/iommu.c
-> > > > @@ -269,7 +269,7 @@ int iommu_construct(struct domain *d)
-> > > >          hd->need_sync = true;
-> > > >
-> > > >          rc = arch_iommu_populate_page_table(d);
-> > >
-> > > The comment in ARM's arch_iommu_populate_page_table() says
-> > >
-> > > /* The IOMMU shares the p2m with the CPU */
-> > >
-> > > Which means that iommu_use_hap_pt() (just out of context above this
-> > > hunk) is wrong.  It should return true, which will prevent us entering
-> > > this path during initialisation.
-> > 
-> > iommu_use_hap_pt is implemented by calling has_iommu_pt(d) (also on x86
-> > is part of the implementation), which is implemented as:
-> > 
-> >   (dom_iommu(d)->status != IOMMU_STATUS_disabled)
-> > 
-> > IOMMU_STATUS_disabled is zero in the enum, so status starts as
-> > IOMMU_STATUS_disabled. It is set to IOMMU_STATUS_initializing for dom0
-> > in iommu_hwdom_init, but it is not set to IOMMU_STATUS_initializing for
-> > other domains anywhere, leading to this error.
-> 
-> It is set for other domains... see iommu_construct().
-
-Hi Paul, unfortunately it doesn't work that way. Let me explain:
-
-
-iommu_construct() sets hd->status to IOMMU_STATUS_initializing *after*
-calling iommu_use_hap_pt(d), and specifically inside the if statement:
-
-    if ( !iommu_use_hap_pt(d) )
-    {
-        int rc;
-
-        hd->status = IOMMU_STATUS_initializing;
-        hd->need_sync = true;
-
-        rc = arch_iommu_populate_page_table(d);
-        if ( rc )
-        {
-            if ( rc != -ERESTART )
-            {
-                hd->need_sync = false;
-                hd->status = IOMMU_STATUS_disabled;
-            }
-
-            return rc;
-        }
-    }
-
-However, for iommu_use_hap_pt(d) to return the correct value, which
-should be always true on ARM, status needs to be already set to
-IOMMU_STATUS_initializing.
-
-Because when we enter iommu_construct status is IOMMU_STATUS_disabled,
-iommu_use_hap_pt(d) calls has_iommu_pt(d) which wrongly returns false
-because it is implemented as:
-
-#define has_iommu_pt(d) (dom_iommu(d)->status != IOMMU_STATUS_disabled)
-
-
-I think we need to move the initialization of status to
-IOMMU_STATUS_initializing earlier, specifically to iommu_domain_init.
---8323329-1816407085-1546623985=:800
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1816407085-1546623985=:800--
+ZmxpZ2h0IDEzMTczMSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzE3MzEvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
+aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
+Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgIDYgeGVu
+LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtaTM4Ni14
+c20gICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
+cy4gMTI5NDc1CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
+ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
+ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
+VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgMSBidWlsZC1jaGVjaygxKSAgICAgICAg
+ICAgICBibG9ja2VkIG4vYQogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgMSBidWlsZC1j
+aGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
+bXV1LW92bWYtYW1kNjQgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9h
+CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
+ICAgICAgICAgICAgICAgNjcyNjAxY2ZjYzZmOTkwNWRkNWZlOGNkZDc5NDljZmI3ZjkxZmVkMQpi
+YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
+NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
+LTExLTA1IDIxOjEzOjExIFogICA1OSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
+MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgNTggZGF5cyAgMjM1IGF0dGVtcHRzClRlc3Rpbmcgc2Ft
+ZSBzaW5jZSAgIDEzMTczMSAgMjAxOS0wMS0wNCAwNzo0OTozNyBaICAgIDAgZGF5cyAgICAxIGF0
+dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFj
+aGluIEd1cHRhIDxhY2hpbi5ndXB0YUBhcm0uY29tPgogIEFsZXggSmFtZXMgPHRoZXJhY2VybWFz
+dGVyQGdtYWlsLmNvbT4KICBBcmQgQmllc2hldXZlbCA8YXJkLmJpZXNoZXV2ZWxAbGluYXJvLm9y
+Zz4KICBBc2hpc2ggU2luZ2hhbCA8YXNoaXNoc2luZ2hhQG52aWRpYS5jb20+CiAgQm9iIEZlbmcg
+PGJvYi5jLmZlbmdAaW50ZWwuY29tPgogIGJvYi5jLmZlbmdAaW50ZWwuY29tIDxib2IuYy5mZW5n
+QGludGVsLmNvbT4KICBCb2JDRiA8Ym9iLmMuZmVuZ0BpbnRlbC5jb20+CiAgQ2hhc2VsIENoaXUg
+PGNoYXNlbC5jaGl1QGludGVsLmNvbT4KICBDaGFzZWwsIENoaXUgPGNoYXNlbC5jaGl1QGludGVs
+LmNvbT4KICBDaGVuIEEgQ2hlbiA8Y2hlbi5hLmNoZW5AaW50ZWwuY29tPgogIERhbmRhbiBCaSA8
+ZGFuZGFuLmJpQGludGVsLmNvbT4KICBEYXZpZCBXZWkgPGRhdmlkLndlaUBpbnRlbC5jb20+CiAg
+RGVyZWsgTGluIDxkZXJlay5saW4yQGhwZS5jb20+CiAgRXJpYyBEb25nIDxlcmljLmRvbmdAaW50
+ZWwuY29tPgogIEZlbmcsIEJvYiBDIDxib2IuYy5mZW5nQGludGVsLmNvbT4KICBGdSBTaXl1YW4g
+PHNpeXVhbi5mdUBpbnRlbC5jb20+CiAgR2FyeSBMaW4gPGdsaW5Ac3VzZS5jb20+CiAgSGFvIFd1
+IDxoYW8uYS53dUBpbnRlbC5jb20+CiAgSmFiZW4gQ2Fyc2V5IDxqYWJlbi5jYXJzZXlAaW50ZWwu
+Y29tPgogIEplZmYgQnJhc2VuIDxqYnJhc2VuQG52aWRpYS5jb20+CiAgSmlhbiBKIFdhbmcgPGpp
+YW4uai53YW5nQGludGVsLmNvbT4KICBKaWF4aW4gV3UgPEppYXhpbi53dUBpbnRlbC5jb20+CiAg
+Smlld2VuIFlhbyA8amlld2VuLnlhb0BpbnRlbC5jb20+CiAgTGFzemxvIEVyc2VrIDxsZXJzZWtA
+cmVkaGF0LmNvbT4KICBMZWlmIExpbmRob2xtIDxsZWlmLmxpbmRob2xtQGxpbmFyby5vcmc+CiAg
+TGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+CiAgTGl1IFl1IDxwZWRyb2EubGl1QG91
+dGxvb2suY29tPgogIE1hcmMgWnluZ2llciA8bWFyYy56eW5naWVyQGFybS5jb20+CiAgTWFyY2lu
+IFdvanRhcyA8bXdAc2VtaWhhbGYuY29tPgogIE1pa2UgTWFzbGVua2luIDxtaWtlLm1hc2xlbmtp
+bkBnbWFpbC5jb20+CiAgTWluZyBIdWFuZyA8bWluZy5odWFuZ0BsaW5hcm8ub3JnPgogIFBlZHJv
+YSBMaXUgPHBlZHJvYS5saXVAb3V0bG9vay5jb20+CiAgUnVpeXUgTmkgPHJ1aXl1Lm5pQGludGVs
+LmNvbT4KICBTYW1pIE11amF3YXIgPHNhbWkubXVqYXdhckBhcm0uY29tPgogIHNoZW5nbGVpIDxz
+aGVuZ2xlaS56aGFuZ0BpbnRlbC5jb20+CiAgU2hlbmdsZWkgWmhhbmcgPHNoZW5nbGVpLnpoYW5n
+QGludGVsLmNvbT4KICBTaXl1YW4gRnUgPHNpeXVhbi5mdUBpbnRlbC5jb20+CiAgU3RhciBaZW5n
+IDxzdGFyLnplbmdAaW50ZWwuY29tPgogIFN1Z2hvc2ggR2FudSA8c3VnaG9zaC5nYW51QGFybS5j
+b20+CiAgU3VtaXQgR2FyZyA8c3VtaXQuZ2FyZ0BsaW5hcm8ub3JnPgogIFN1biwgWmFpbGlhbmcg
+PC9vPUludGVsL291PUV4Y2hhbmdlIEFkbWluaXN0cmF0aXZlIEdyb3VwIChGWURJQk9IRjIzU1BE
+TFQpL2NuPVJlY2lwaWVudHMvY249U3VuLCBaYWlsaWFuZ2Y1ZD4KICBUaG9tYXMgQWJyYWhhbSA8
+dGhvbWFzLmFicmFoYW1AYXJtLmNvbT4KICBUaG9tYXMgUnlkbWFuIDx0aG9tYXMuai5yeWRtYW5A
+aW50ZWwuY29tPgogIFRpbmcgWWUgPHRpbmcueWVAaW50ZWwuY29tPgogIFRvbWFzeiBNaWNoYWxl
+YyA8dG1Ac2VtaWhhbGYuY29tPgogIFZpamF5ZW50aGlyYW4gU3VicmFtYW5pYW0gPHZpamF5ZW50
+aGlyYW4uc3VicmFtYW5pYW1AYXJtLmNvbT4KICBWbGFkaW1pciBPbG92eWFubmlrb3YgPHZsYWRp
+bWlyLm9sb3Z5YW5uaWtvdkBicm9hZGNvbS5jb20+CiAgV2FuZyBCaW5YIEEgPGJpbnguYS53YW5n
+QGludGVsLmNvbT4KICBXdSBKaWF4aW4gPGppYXhpbi53dUBpbnRlbC5jb20+CiAgWWUgVGluZyA8
+dGluZy55ZUBpbnRlbC5jb20+CiAgWW9uZ2hvbmcgWmh1IDx5b25naG9uZy56aHVAaW50ZWwuY29t
+PgogIHl1Y2hlbmxpbiA8eXVjaGVubGluQHN5bm9sb2d5LmNvbT4KICBaYWlsaWFuZyBTdW4gPHph
+aWxpYW5nLnN1bkBpbnRlbC5jb20+CiAgWmhhbmcsIENoYW8gQiA8Y2hhby5iLnpoYW5nQGludGVs
+LmNvbT4KICBaaGFvLCBaaGlxaWFuZ1ggPHpoaXFpYW5neC56aGFvQGludGVsLmNvbT4KICBaaGlq
+dS5GYW4gPHpoaWp1eC5mYW5AaW50ZWwuY29tPgogIHpoaWp1ZmFuIDx6aGlqdXguZmFuQGludGVs
+LmNvbT4KICBaaGlxaWFuZ1ggWmhhbyA8emhpcWlhbmd4LnpoYW9AaW50ZWwuY29tPgogIHp3ZWk0
+IDxkYXZpZC53ZWlAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtaTM4Ni14
+c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
+CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1pMzg2LWxp
+YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAK
+IGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92
+bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4
+Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAoK
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcK
+bG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNv
+bmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxh
+Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9y
+dHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54
+ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFz
+dGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJs
+b2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQK
+ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5
+CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24gbG9nOyBpdCB3b3VsZCBiZSA0ODMxIGxpbmVz
+IGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
