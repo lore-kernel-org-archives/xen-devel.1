@@ -1,17 +1,24 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] xen/cmdline: Fix buggy strncmp(s, LITERAL,
- ss - s) construct
-Date: Fri, 04 Jan 2019 09:47:31 -0700
-Message-ID: <5C2F8E23020000780020A52C@prv1-mh.provo.novell.com>
-References: <1546277721-20234-1-git-send-email-andrew.cooper3@citrix.com>
- <5C2F7C8D020000780020A422@prv1-mh.provo.novell.com>
- <bff3c33d-a244-362a-529c-32f91b5f3965@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: status of non-live migration of HVM with libvirt
+Date: Fri, 4 Jan 2019 17:48:31 +0100
+Message-ID: <20190104174831.271161e5.olaf@aepfle.de>
+References: <20190104165755.73674a27.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9132769044600243361=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <bff3c33d-a244-362a-529c-32f91b5f3965@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=14Bd=PM=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gfSeF-0002Bw-N0
+ for xen-devel@lists.xenproject.org; Fri, 04 Jan 2019 16:48:40 +0000
+Received: from sender by smtp.strato.de (RZmta 44.9 AUTH)
+ with ESMTPSA id 20a457v04Gma1yx
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate)
+ for <xen-devel@lists.xenproject.org>;
+ Fri, 4 Jan 2019 17:48:36 +0100 (CET)
+In-Reply-To: <20190104165755.73674a27.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,44 +27,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA0LjAxLjE5IGF0IDE2OjU1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDQvMDEvMjAxOSAxNTozMiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDMx
-LjEyLjE4IGF0IDE4OjM1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiAr
-ICAgIHsKPj4+ICsgICAgICAgIGludCByZXMgPSAoKmZyYWcgLSAqbmFtZSk7Cj4+IFdpdGggdGhl
-IHJlc3VsdCBvZiB0aGlzIGJlaW5nIGltcGxlbWVudGF0aW9uIGRlZmluZWQgKGR1ZSB0byBwbGFp
-bgo+PiBjaGFyJ3MgaW1wbGVtZW50YXRpb24gZGVmaW5lZCAtIG9mdGVuIGNvbW1hbmQgbGluZSBj
-b250cm9sbGVkCj4+IHdpdGggYW4gaW1wbGVtZW50YXRpb24gZGVmaW5lZCBkZWZhdWx0IC0gc2ln
-bmVkbmVzcykgSSB3b25kZXIgaWYKPj4gdGhpcyBmdW5jdGlvbiBjYW4gcmVhbGx5IHVzZWZ1bGx5
-IHJldHVybiAiaW50IiByYXRoZXIgdGhhbiAiYm9vbCIuCj4gCj4gTXkgQ1BVSUQgY29tbWFuZCBs
-aW5lIHBhcnNpbmcgbmVlZHMgdGhpcyB0byB3b3JrIHByb3Blcmx5IGFzIGludCwgZm9yCj4gYmlz
-ZWN0aW5nIGFjcm9zcyBhIHNvcnRlZCBsaXN0Lgo+IAo+IEknbGwgYWRkIGFuIGV4cGxpY2l0IGNh
-c3QgdG8gc2lnbmVkIGNoYXIuICBJJ2xsIGFsc28gZml4IG91dCBsb2NhbCBsaWJjCj4gZnVuY3Rp
-b25zLCB3aGljaCBhcmUgc2ltaWxhcmx5IGJ1Z2d5LgoKV2h5ICJzaWduZWQgY2hhciIgd2hlbiB0
-aGUgc3RhbmRhcmQgc3BlY2lmaWNhbGx5IG1hbmRhdGVzICJ1bnNpZ25lZApjaGFyIj8KCj4+PiAr
-ICAgICAgICBpZiAoIHJlcyB8fCAqbmFtZSA9PSAnXDAnICkKPj4+ICsgICAgICAgIHsKPj4+ICsg
-ICAgICAgICAgICAvKgo+Pj4gKyAgICAgICAgICAgICAqIE5VTCBpbiAnbmFtZScgbWF0Y2hpbmcg
-YSBjb21tYSBvciBjb2xvbiBpbiAnZnJhZycgaW1wbGllcwo+Pj4gKyAgICAgICAgICAgICAqIHN1
-Y2Nlc3MuCj4+PiArICAgICAgICAgICAgICovCj4+PiArICAgICAgICAgICAgaWYgKCAqbmFtZSA9
-PSAnXDAnICYmICgqZnJhZyA9PSAnLCcgfHwgKmZyYWcgPT0gJzonKSApCj4+IFRoZXJlJ3Mgb25s
-eSBhIHNpbmdsZSAodW5yZWxhdGVkKSB1c2Ugb2YgOyBhcyBhIHNlcGFyYXRvciByaWdodAo+PiBu
-b3cgKGFmYWljcyksIGJ1dCBhZGRpbmcgaXQgaGVyZSB3b3VsZCBzZWVtIHF1aXRlIGRlc2lyYWJs
-ZSB0bwo+PiBtZS4KPiAKPiBXaGVyZSBpcyA7IHVzZWQsIG91dCBvZiBpbnRlcmVzdD8gIEknbSBo
-YXBweSB0byBhZGQgaXQsIGJ1dCBJIGRpZG4ndAo+IHNwb3QgaXQgb24gbXkgYXVkaXQuCgpBcyBz
-YWlkLCBpdCdzIGluIHVucmVsYXRlZCAoYnV0IHN0aWxsIGNvbW1hbmQgbGluZSBwYXJzaW5nKSBj
-b2RlLgpTZWUgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2RtYXIuYzpwYXJzZV9ybXJyX3Bh
-cmFtKCkuCgo+PiBBbHNvLCBzcGVha2luZyBvZiAodGhlIGxhY2sgb2YpIHRva2VuaXphdGlvbiBv
-ZiB0aGUgY29tbWFuZCBsaW5lCj4+IGluIHRoZSBjYWxsZXIsIHdvdWxkbid0IGl0IG1ha2Ugc2Vu
-c2UgdG8gYWNjZXB0IHdoaXRlIHNwYWNlIGFzCj4+IHNlcGFyYXRvcnMgaGVyZSB0b28/Cj4gCj4g
-SSdtIG5vdCBzdXJlIGlmIHRoYXQgaXMgd2lzZSBvciBub3QuICBJIGNhbid0IHRoaW5rIG9mIGEg
-c2l0dWF0aW9uIHdoZXJlCj4geW91IHdvdWxkIHdhbnQgdGhhdCBiZWhhdmlvdXIsIHJhdGhlciB0
-aGFuIGZpbmRpbmcgeW91cnNlbGYgd2l0aCBhCj4gcGFyc2luZyBidWcgYW5kIGhhdmluZyB0byBm
-aXggYSBidWcgZWxzZXdoZXJlLgoKV2VsbCwgSSB3YXNuJ3Qgc3VyZSBlaXRoZXIgKGhlbmNlIG1l
-IGhhdmluZyBwaHJhc2VkIGl0IGFzIGEKcXVlc3Rpb24pLCBzbyBsZXQncyBsZWF2ZSBpdCBvdXQg
-KGF0IGxlYXN0IGZvciBub3cpCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+--===============9132769044600243361==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/K=9imv3kp+ma4H5BnSG5sYX"; protocol="application/pgp-signature"
+
+--Sig_/K=9imv3kp+ma4H5BnSG5sYX
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 4 Jan 2019 16:57:55 +0100
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> worth keeping (and fixing) the concept of an "offline migration"
+
+And regarding the fix, it looks like qmp_xen_save_devices_state does not ne=
+ed the concept of "live". Just shutdown the blockdevices and be done with i=
+t?
+
++++ b/migration/savevm.c
+@@ -2293,7 +2293,7 @@ void qmp_xen_save_devices_state(const char *filename,=
+ bool has_live, bool live,
+          * So call bdrv_inactivate_all (release locks) here to let the oth=
+er
+          * side of the migration take controle of the images.
+          */
+-        if (live && !saved_vm_running) {
++        if (!saved_vm_running) {
+             ret =3D bdrv_inactivate_all();
+             if (ret) {
+                 error_setg(errp, "%s: bdrv_inactivate_all() failed (%d)",
+
+
+Olaf
+
+--Sig_/K=9imv3kp+ma4H5BnSG5sYX
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXC+OXwAKCRBdQqD6ppg2
+fqlOAJ0QQPqswwGKP0+YXrgQPIryTNEpKwCfYDYksC94kif+V1+AwwgQMdbL730=
+=+7CN
+-----END PGP SIGNATURE-----
+
+--Sig_/K=9imv3kp+ma4H5BnSG5sYX--
+
+
+--===============9132769044600243361==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9132769044600243361==--
