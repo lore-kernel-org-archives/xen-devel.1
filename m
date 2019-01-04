@@ -1,18 +1,20 @@
-From: YueHaibing <yuehaibing@huawei.com>
-Subject: [PATCH -next] xen/pvcalls: remove set but not used
- variable 'intf'
-Date: Fri, 4 Jan 2019 06:03:40 +0000
-Message-ID: <1546581820-123466-1-git-send-email-yuehaibing__29382.9600479969$1546581381$gmane$org@huawei.com>
+From: "hch@lst.de" <hch@lst.de>
+Subject: Re: [PATCH] dma-mapping: remove unused attrs parameter
+ to dma_common_get_sgtable
+Date: Fri, 4 Jan 2019 08:26:51 +0100
+Message-ID: <20190104072651.GA14560__13572.9374982931$1546586761$gmane$org@lst.de>
+References: <HK2PR03MB44183AC87F67594E93F31E75928E0@HK2PR03MB4418.apcprd03.prod.outlook.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=fKie=PM=huawei.com=yuehaibing@srs-us1.protection.inumbo.net>)
- id 1gfITm-0000Lh-4c
- for xen-devel@lists.xenproject.org; Fri, 04 Jan 2019 05:57:10 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=RUgY=PM=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1gfJsd-0007GP-WC
+ for xen-devel@lists.xenproject.org; Fri, 04 Jan 2019 07:26:56 +0000
+Content-Disposition: inline
+In-Reply-To: <HK2PR03MB44183AC87F67594E93F31E75928E0@HK2PR03MB4418.apcprd03.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,27 +23,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org, YueHaibing <yuehaibing@huawei.com>, linux-kernel@vger.kernel.org
+To: Huaisheng HS1 Ye <yehs1@lenovo.com>
+Cc: "jgross@suse.com" <jgross@suse.com>, Huaisheng Ye <yehs2007@zoho.com>, Stefano Stabellini <sstabellini@kernel.org>, "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>, NingTing Cheng <chengnt@lenovo.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "robin.murphy@arm.com" <robin.murphy@arm.com>, "hch@lst.de" <hch@lst.de>, "m.szyprowski@samsung.com" <m.szyprowski@samsung.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Rml4ZXMgZ2NjICctV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlJyB3YXJuaW5nOgoKZHJpdmVycy94
-ZW4vcHZjYWxscy1iYWNrLmM6IEluIGZ1bmN0aW9uICdwdmNhbGxzX3NrX3N0YXRlX2NoYW5nZSc6
-CmRyaXZlcnMveGVuL3B2Y2FsbHMtYmFjay5jOjI4NjoyODogd2FybmluZzoKIHZhcmlhYmxlICdp
-bnRmJyBzZXQgYnV0IG5vdCB1c2VkIFstV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlXQoKSXQgbm90
-IHVzZWQgc2luY2UgZTY1ODdjZGJkNzMyICgicHZjYWxscy1iYWNrOiBzZXQgLUVOT1RDT05OIGlu
-CnB2Y2FsbHNfY29ubl9iYWNrX3JlYWQiKQoKU2lnbmVkLW9mZi1ieTogWXVlSGFpYmluZyA8eXVl
-aGFpYmluZ0BodWF3ZWkuY29tPgotLS0KIGRyaXZlcnMveGVuL3B2Y2FsbHMtYmFjay5jIHwgMiAt
-LQogMSBmaWxlIGNoYW5nZWQsIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy94
-ZW4vcHZjYWxscy1iYWNrLmMgYi9kcml2ZXJzL3hlbi9wdmNhbGxzLWJhY2suYwppbmRleCA3MWI2
-Mjg3Li43YWE2NGQxIDEwMDY0NAotLS0gYS9kcml2ZXJzL3hlbi9wdmNhbGxzLWJhY2suYworKysg
-Yi9kcml2ZXJzL3hlbi9wdmNhbGxzLWJhY2suYwpAQCAtMjgzLDEyICsyODMsMTAgQEAgc3RhdGlj
-IGludCBwdmNhbGxzX2JhY2tfc29ja2V0KHN0cnVjdCB4ZW5idXNfZGV2aWNlICpkZXYsCiBzdGF0
-aWMgdm9pZCBwdmNhbGxzX3NrX3N0YXRlX2NoYW5nZShzdHJ1Y3Qgc29jayAqc29jaykKIHsKIAlz
-dHJ1Y3Qgc29ja19tYXBwaW5nICptYXAgPSBzb2NrLT5za191c2VyX2RhdGE7Ci0Jc3RydWN0IHB2
-Y2FsbHNfZGF0YV9pbnRmICppbnRmOwogCiAJaWYgKG1hcCA9PSBOVUxMKQogCQlyZXR1cm47CiAK
-LQlpbnRmID0gbWFwLT5yaW5nOwogCWF0b21pY19pbmMoJm1hcC0+cmVhZCk7CiAJbm90aWZ5X3Jl
-bW90ZV92aWFfaXJxKG1hcC0+aXJxKTsKIH0KCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpLCBKYW4gMDQsIDIwMTkgYXQgMDE6NDU6MjZBTSArMDAwMCwgSHVhaXNoZW5nIEhTMSBZ
+ZSB3cm90ZToKPiBGcm9tOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5v
+cmc+Cj4gU2VudDogRnJpZGF5LCBKYW51YXJ5IDA0LCAyMDE5IDE6NTUgQU0KPiA+IE9uIFRodSwg
+MyBKYW4gMjAxOSwgSHVhaXNoZW5nIFllIHdyb3RlOgo+ID4gPiBGcm9tOiBIdWFpc2hlbmcgWWUg
+PHllaHMxQGxlbm92by5jb20+Cj4gPiA+Cj4gPiA+IGRtYV9jb21tb25fZ2V0X3NndGFibGUgaGFz
+IHBhcmFtZXRlciBhdHRycyB3aGljaCBpcyBub3QgdXNlZCBhdCBhbGwuCj4gPiA+IFJlbW92ZSBp
+dC4KPiA+ID4KPiA+ID4gU2lnbmVkLW9mZi1ieTogSHVhaXNoZW5nIFllIDx5ZWhzMUBsZW5vdm8u
+Y29tPgo+ID4gCj4gPiBBY2tlZC1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBr
+ZXJuZWwub3JnPgo+ID4gCj4gPiBGWUkgdGhlIHBhdGNoIGRvZXNuJ3QgYXBwbHkgY2xlYW5seSB0
+byBtYXN0ZXIuCj4gCj4gR290IGl0LCBJIHdpbGwgcmViYXNlIGl0IHRvIGJyYW5jaCBtYXN0ZXIg
+YW5kIHJlc2VuZCB0aGUgcGF0Y2ggbGF0ZXIuCgpJIHRoaW5rIHdlIGNhbiBza2lwIGl0LiAgRm9y
+IHRoZSBuZXh0IG1lcmdlIHdpbmRvdyBJIHBsYW4gdG8gcmVtb3ZlCnRoZSBmYWxsYmFja3MgZm9y
+IGdldF9zZ3RhYmxlIGFuZCBtbWFwIGFuZCBpbnN0ZWFkIHdpcmUgZXZlcnl0aGluZyB1cApleHBs
+aWNpdGx5LiAgQW5kIHRvIGJlIGEgcG9zc2libGUgbWV0aG9kIGluc3RhbmNlIGl0IHdpbGwgaGF2
+ZSB0byBtYXRjaAp0aGUgcHJvdG90eXBlIGFuZCB0aHVzIGtlZXAgdGhlIHVudXNlZCBhcmd1bWVu
+dC4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
