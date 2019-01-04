@@ -1,18 +1,17 @@
-From: "LOPEZ, FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>
-Subject: Re: RT Xen on ARM - R-Car series
-Date: Fri, 4 Jan 2019 18:09:48 +0900
-Message-ID: <CACrvCsZyZhrL0eoJ6=VTwfrRPKjqapGObqaixxmGMTXS+ua3aA@mail.gmail.com>
-References: <CACrvCsaeHuwzZzUQTzNYF7fqmgQWNJUVOQZv9D0MnYrXjqzZtQ@mail.gmail.com>
- <AM6PR03MB49199366C64C259BF04157D5E6B90@AM6PR03MB4919.eurprd03.prod.outlook.com>
- <CACrvCsbxLrGXzN8Y8w0ndZ2VLQ=QEtUq+KLAVRLnLYZRpiaqhg@mail.gmail.com>
- <59df6425-f6de-fda1-a1a5-7d2774ff6796@gmail.com>
- <CACrvCsaO1ZNPWNJE9vdE7Th0uMt9BJnx32p2ozwuLvEg9Tpmmw@mail.gmail.com>
- <3aecad20-41f5-4249-46be-bfef80c88ea3@gmail.com>
- <623d0b16-8616-183c-d8d4-559ad81363ed@gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 2/2] xen/dom0: Add a dom0-iommu=none option
+Date: Fri, 04 Jan 2019 02:11:06 -0700
+Message-ID: <5C2F232A020000780020A213@prv1-mh.provo.novell.com>
+References: <1545349252-16401-1-git-send-email-andrew.cooper3@citrix.com>
+ <1545349252-16401-3-git-send-email-andrew.cooper3@citrix.com>
+ <5C1CD8DE0200007800208855@prv1-mh.provo.novell.com>
+ <49b54133-b731-2994-f074-cb7f885b38f4@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4826011483988805888=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <623d0b16-8616-183c-d8d4-559ad81363ed@gmail.com>
+In-Reply-To: <49b54133-b731-2994-f074-cb7f885b38f4@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,97 +20,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>
-Cc: xen-devel@lists.xen.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4826011483988805888==
-Content-Type: multipart/alternative; boundary="0000000000001af510057e9e3eb8"
-
---0000000000001af510057e9e3eb8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Andrii,
-
-Sorry for not responding sooner.
-
-First of all happy new year!
-
-I seriously overlooked the firmware update. I will attempt that next week
-and see if the boot is successful.
-
-Thanks for the help.
-
-Best regards,
-
-Jairo
-
-
-2018=E5=B9=B412=E6=9C=8828=E6=97=A5(=E9=87=91) 17:39 Andrii Anisov <andrii.=
-anisov@gmail.com>:
-
->
->
-> On 28.12.18 10:28, Andrii Anisov wrote:
-> > Please give me some time to find the instruction to update bootloaders
-> on ulcb.
->
-> Here is the instruction for h3ulcb to flash the firmware for Yocto 2.19
-> [1].
-> Yet it is quite old.
->
-> [1] https://elinux.org/index.php?title=3DR-Car/Boards/H3SK&oldid=3D449556
->
-> --
-> Sincerely,
-> Andrii Anisov.
->
-
---0000000000001af510057e9e3eb8
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div>Andrii,</div><div><br></div><div>Sorry for not respon=
-ding sooner.</div><div><br></div><div>First of all happy new year!</div><di=
-v><br></div><div>I seriously overlooked the firmware update. I will attempt=
- that next week and see if the boot is successful.<br></div><div><br></div>=
-<div>Thanks for the help.</div><div><br></div><div>Best regards,</div><div>=
-<br></div><div>Jairo<br></div><div><br></div></div><br><div class=3D"gmail_=
-quote"><div dir=3D"ltr">2018=E5=B9=B412=E6=9C=8828=E6=97=A5(=E9=87=91) 17:3=
-9 Andrii Anisov &lt;<a href=3D"mailto:andrii.anisov@gmail.com">andrii.aniso=
-v@gmail.com</a>&gt;:<br></div><blockquote class=3D"gmail_quote" style=3D"ma=
-rgin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:=
-1ex"><br>
-<br>
-On 28.12.18 10:28, Andrii Anisov wrote:<br>
-&gt; Please give me some time to find the instruction to update bootloaders=
- on ulcb.<br>
-<br>
-Here is the instruction for h3ulcb to flash the firmware for Yocto 2.19 [1]=
-.<br>
-Yet it is quite old.<br>
-<br>
-[1] <a href=3D"https://elinux.org/index.php?title=3DR-Car/Boards/H3SK&amp;o=
-ldid=3D449556" rel=3D"noreferrer" target=3D"_blank">https://elinux.org/inde=
-x.php?title=3DR-Car/Boards/H3SK&amp;oldid=3D449556</a><br>
-<br>
--- <br>
-Sincerely,<br>
-Andrii Anisov.<br>
-</blockquote></div>
-
---0000000000001af510057e9e3eb8--
-
-
---===============4826011483988805888==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4826011483988805888==--
+Pj4+IE9uIDIxLjEyLjE4IGF0IDEzOjU1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMjEvMTIvMjAxOCAxMjoxMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDIx
+LjEyLjE4IGF0IDAwOjQwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBA
+QCAtMjcxLDYgKzI3MiwyNiBAQCBpbnQgcGFyc2VfYm9vbGVhbihjb25zdCBjaGFyICpuYW1lLCBj
+b25zdCBjaGFyICpzLCBjb25zdCBjaGFyICplKQo+Pj4gICAgICByZXR1cm4gLTE7Cj4+PiAgfQo+
+Pj4gIAo+Pj4gK2ludCBjbWRsaW5lX3N0cmNtcChjb25zdCBjaGFyICpmcmFnLCBjb25zdCBjaGFy
+ICpuYW1lKQo+PiBfX2luaXQgPwo+IAo+IEkgdGhpbmsgdGhlcmUgYXJlIHNvbWUgcnVudGltZSBw
+YXJhbWV0ZXJzIGluIG5lZWQgb2Ygc29tZSBmaXhpbmcgYXMgd2VsbC4KCklkZWFsbHkgd2UnZCBk
+cm9wIF9faW5pdCBhdCB0aGUgcG9pbnQgc3VjaCBhIGNoYW5nZSBpbmRlZWQgZ29lcyBpbi4gQXMK
+YSBjb21wcm9taXNlIHlvdSBtYXkgd2FudCB0byBtZW50aW9uIHRoZSByZWFzb24gZm9yIHRoZSBv
+bWlzc2lvbgppbiB0aGUgZGVzY3JpcHRpb24gKHByZWZlcmFibHkgd2l0aCBhIGNvbmNyZXRlIGV4
+YW1wbGUpLgoKPj4+ICt7Cj4+PiArICAgIHdoaWxlICggMSApCj4+PiArICAgIHsKPj4+ICsgICAg
+ICAgIGludCByZXMgPSAoKmZyYWcgLSAqbmFtZSk7Cj4+PiArCj4+PiArICAgICAgICBpZiAoIHJl
+cyB8fCAqbmFtZSA9PSAnXDAnICkKPj4+ICsgICAgICAgIHsKPj4+ICsgICAgICAgICAgICAvKiBO
+VUwgaW4gJ25hbWUnIG1hdGNoaW5nIHB1bmN0dWF0aW9uIGluICdmcmFnJyBpbXBsaWVzIHN1Y2Nl
+c3MuICovCj4+PiArICAgICAgICAgICAgaWYgKCAqbmFtZSA9PSAnXDAnICYmIGlzcHVuY3QoKmZy
+YWcpICkKPj4+ICsgICAgICAgICAgICAgICAgcmVzID0gMDsKPj4gSXNuJ3QgaXNwdW5jdCgpIHRy
+dWUgZm9yIGRhc2hlcyBhbmQgcGVyaGFwcyBhbHNvIHVuZGVyc2NvcmVzPwo+PiBJIGRvbid0IHRo
+aW5rIGl0IGNhbiBiZSB0aGlzIGdlbmVyaWMsIHRoZSBtb3JlIHRoYXQgLi4uCj4+Cj4+PiAtLS0g
+YS94ZW4vaW5jbHVkZS94ZW4vbGliLmgKPj4+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9saWIuaAo+
+Pj4gQEAgLTc5LDYgKzc5LDEzIEBAIGludCBwYXJzZV9ib29sKGNvbnN0IGNoYXIgKnMsIGNvbnN0
+IGNoYXIgKmUpOwo+Pj4gICAqLwo+Pj4gIGludCBwYXJzZV9ib29sZWFuKGNvbnN0IGNoYXIgKm5h
+bWUsIGNvbnN0IGNoYXIgKnMsIGNvbnN0IGNoYXIgKmUpOwo+Pj4gIAo+Pj4gKy8qKgo+Pj4gKyAq
+IFZlcnkgc2ltaWxhciB0byBzdHJjbXAoKSwgYnV0IHdpbGwgZGVjbGFyZSBhIG1hdGNoIGlmIHRo
+ZSBOVUwgaW4gJ25hbWUnCj4+PiArICogbGluZXMgdXAgd2l0aCBwdW5jdHVhdGlvbmluICdmcmFn
+Jy4gIERlc2lnbmVkIGZvciBwaWNraW5nIGV4YWN0IHN0cmluZwo+Pj4gKyAqIG1hdGNoZXMgb3V0
+IG9mIGEgY29tbWEtc2VwYXJhdGVkIGNvbW1hbmQgbGluZSBmcmFnbWVudC4KPj4+ICsgKi8KPj4+
+ICtpbnQgY21kbGluZV9zdHJjbXAoY29uc3QgY2hhciAqZnJhZywgY29uc3QgY2hhciAqbmFtZSk7
+Cj4+IC4uLiB5b3UgdGFsayBvZiBjb21tYXMgb25seSBoZXJlLgo+IAo+IEkgYWN0dWFsbHkgYm9y
+cm93ZWQgdGhpcyBmdW5jdGlvbiBmcm9tIG15IENQVUlEIGNtZGxpbmUgcGF0Y2guICBJbiA5OSUK
+PiBvZiBjYXNlcywgd2Ugb25seSBuZWVkIHRvIG1hdGNoID0gYW5kICwgYnV0IHdlIGhhdmUgc29t
+ZSBvdGhlcgo+IHBhcmFtZXRlcnMgc3VjaCBhcyBwc3I9IHdoaWNoIHVzZSA6IGZvciBkZWxpbWl0
+ZXJzLCBoZW5jZSB0aGUgdXNlIG9mCj4gaXNwdW5jdCgpLgo+IAo+IEFzIGFuIGFsdGVybmF0aXZl
+LCBJIGNvdWxkIHJldmVydCBiYWNrIHRvIGV4cGxpY2l0bHkgY2hlY2tpbmcgdGhlCj4gZXhwZWN0
+ZWQgcHVuY3R1YXRpb24uICBJdCBpcyBub3QgYXMgaWYgdGhpcyBpcyBhIGZhc3RwYXRoLgoKSW1v
+IHRoaXMgd291bGQgYmUgYmV0dGVyIHRoYW4gdHJlYXRpbmcgcHVuY3R1YXRpb24gd2UgZG9uJ3Qg
+d2FudAp0byBjb25zaWRlciBzZXBhcmF0b3JzIHRoZSBzYW1lIGFzIGludGVuZGVkLXRvLWJlLXNl
+cGFyYXRvcnMuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
