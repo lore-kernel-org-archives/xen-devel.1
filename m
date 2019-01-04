@@ -1,21 +1,17 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH -next] xen/pvcalls: remove set but not used
- variable 'intf'
-Date: Fri, 4 Jan 2019 11:10:22 -0500
-Message-ID: <f90e002d-3808-157d-d8a7-a716c461f74c__24643.8480950475$1546618163$gmane$org@oracle.com>
-References: <1546581820-123466-1-git-send-email-yuehaibing@huawei.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] xen/cmdline: Fix buggy strncmp(s, LITERAL,
+ ss - s) construct
+Date: Fri, 4 Jan 2019 16:25:16 +0000
+Message-ID: <3b48ba9a-7271-b450-abe7-60294303f857@citrix.com>
+References: <1546277721-20234-1-git-send-email-andrew.cooper3@citrix.com>
+ <5C2F7C8D020000780020A422@prv1-mh.provo.novell.com>
+ <bff3c33d-a244-362a-529c-32f91b5f3965@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=MJjx=PM=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1gfS3Q-00078B-Ek
- for xen-devel@lists.xenproject.org; Fri, 04 Jan 2019 16:10:36 +0000
-In-Reply-To: <1546581820-123466-1-git-send-email-yuehaibing@huawei.com>
-Content-Language: en-US
+In-Reply-To: <bff3c33d-a244-362a-529c-32f91b5f3965@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +20,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: YueHaibing <yuehaibing@huawei.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMS80LzE5IDE6MDMgQU0sIFl1ZUhhaWJpbmcgd3JvdGU6Cj4gRml4ZXMgZ2NjICctV3VudXNl
-ZC1idXQtc2V0LXZhcmlhYmxlJyB3YXJuaW5nOgo+Cj4gZHJpdmVycy94ZW4vcHZjYWxscy1iYWNr
-LmM6IEluIGZ1bmN0aW9uICdwdmNhbGxzX3NrX3N0YXRlX2NoYW5nZSc6Cj4gZHJpdmVycy94ZW4v
-cHZjYWxscy1iYWNrLmM6Mjg2OjI4OiB3YXJuaW5nOgo+ICB2YXJpYWJsZSAnaW50Zicgc2V0IGJ1
-dCBub3QgdXNlZCBbLVd1bnVzZWQtYnV0LXNldC12YXJpYWJsZV0KPgo+IEl0IG5vdCB1c2VkIHNp
-bmNlIGU2NTg3Y2RiZDczMiAoInB2Y2FsbHMtYmFjazogc2V0IC1FTk9UQ09OTiBpbgo+IHB2Y2Fs
-bHNfY29ubl9iYWNrX3JlYWQiKQo+Cj4gU2lnbmVkLW9mZi1ieTogWXVlSGFpYmluZyA8eXVlaGFp
-YmluZ0BodWF3ZWkuY29tPgoKUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0
-cm92c2t5QG9yYWNsZS5jb20+CgphbmQgYXBwbGllZCB0byBmb3ItbGludXMtNC4yMS4KClRoYW5r
-cy4KLWJvcmlzCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDQvMDEvMjAxOSAxNTo1NSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwNC8wMS8yMDE5
+IDE1OjMyLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+ICsgICAgewo+Pj4gKyAgICAgICAgaW50IHJl
+cyA9ICgqZnJhZyAtICpuYW1lKTsKPj4gV2l0aCB0aGUgcmVzdWx0IG9mIHRoaXMgYmVpbmcgaW1w
+bGVtZW50YXRpb24gZGVmaW5lZCAoZHVlIHRvIHBsYWluCj4+IGNoYXIncyBpbXBsZW1lbnRhdGlv
+biBkZWZpbmVkIC0gb2Z0ZW4gY29tbWFuZCBsaW5lIGNvbnRyb2xsZWQKPj4gd2l0aCBhbiBpbXBs
+ZW1lbnRhdGlvbiBkZWZpbmVkIGRlZmF1bHQgLSBzaWduZWRuZXNzKSBJIHdvbmRlciBpZgo+PiB0
+aGlzIGZ1bmN0aW9uIGNhbiByZWFsbHkgdXNlZnVsbHkgcmV0dXJuICJpbnQiIHJhdGhlciB0aGFu
+ICJib29sIi4KPiBNeSBDUFVJRCBjb21tYW5kIGxpbmUgcGFyc2luZyBuZWVkcyB0aGlzIHRvIHdv
+cmsgcHJvcGVybHkgYXMgaW50LCBmb3IKPiBiaXNlY3RpbmcgYWNyb3NzIGEgc29ydGVkIGxpc3Qu
+Cj4KPiBJJ2xsIGFkZCBhbiBleHBsaWNpdCBjYXN0IHRvIHNpZ25lZCBjaGFyLsKgIEknbGwgYWxz
+byBmaXggb3V0IGxvY2FsIGxpYmMKPiBmdW5jdGlvbnMsIHdoaWNoIGFyZSBzaW1pbGFybHkgYnVn
+Z3kuCgpBbmQgYnkgdGhpcywgSSBhY3R1YWxseSBtZWFuIGFuIGV4cGxpY2l0IHVuc2lnbmVkIGNh
+c3QsIGhhdmluZyBqdXN0CmNyb3NzLWNoZWNrZWQgd2l0aCB0aGUgQyBzcGVjLgoKfkFuZHJldwoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
