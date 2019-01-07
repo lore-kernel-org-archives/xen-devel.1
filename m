@@ -1,19 +1,20 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH for-4.12] xen/iommu: fix dev assignment on
- ARM after 91d4eca7
-Date: Mon, 7 Jan 2019 10:40:58 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1901071039230.800@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1901021622550.800@sstabellini-ThinkPad-X260>
- <416d62e8-f977-bca7-2eb9-5ac05051953e@citrix.com>
- <alpine.DEB.2.10.1901031004460.800@sstabellini-ThinkPad-X260>
- <71f5da369f1245b8a85c794a9ae097d9@AMSPEX02CL03.citrite.net>
- <alpine.DEB.2.10.1901040941510.800@sstabellini-ThinkPad-X260>
- <b5e3db3ae4bc42adb1df40ef047cb5d0@AMSPEX02CL03.citrite.net>
+Subject: Re: [PATCH v5 2/4] xen/arm: use SYMBOL when required
+Date: Mon, 7 Jan 2019 10:54:20 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1901071041440.800@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1901031114230.800@sstabellini-ThinkPad-X260>
+ <1546543191-9206-2-git-send-email-sstabellini@kernel.org>
+ <5C33256F020000780020ABEC@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-484521266-1546886385=:800"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <b5e3db3ae4bc42adb1df40ef047cb5d0@AMSPEX02CL03.citrite.net>
-Content-ID: <alpine.DEB.2.10.1901071040150.800@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=7RMc=PP=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gga2Z-00079z-3J
+ for xen-devel@lists.xenproject.org; Mon, 07 Jan 2019 18:54:23 +0000
+In-Reply-To: <5C33256F020000780020ABEC@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,175 +23,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, "julien.grall@arm.com" <julien.grall@arm.com>, 'Stefano Stabellini' <sstabellini@kernel.org>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Stefano Stabellini <stefanos@xilinx.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-484521266-1546886385=:800
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1901071040151.800@sstabellini-ThinkPad-X260>
-
-On Mon, 7 Jan 2019, Paul Durrant wrote:
-> > -----Original Message-----
-> > From: Stefano Stabellini [mailto:sstabellini@kernel.org]
-> > Sent: 04 January 2019 17:46
-> > To: Paul Durrant <Paul.Durrant@citrix.com>
-> > Cc: 'Stefano Stabellini' <sstabellini@kernel.org>; Andrew Cooper
-> > <Andrew.Cooper3@citrix.com>; xen-devel@lists.xen.org;
-> > julien.grall@arm.com; jbeulich@suse.com
-> > Subject: RE: [Xen-devel] [PATCH for-4.12] xen/iommu: fix dev assignment on
-> > ARM after 91d4eca7
-> > 
-> > On Fri, 4 Jan 2019, Paul Durrant wrote:
-> > > > -----Original Message-----
-> > > > From: Stefano Stabellini [mailto:sstabellini@kernel.org]
-> > > > Sent: 03 January 2019 18:20
-> > > > To: Andrew Cooper <Andrew.Cooper3@citrix.com>
-> > > > Cc: Stefano Stabellini <sstabellini@kernel.org>; xen-
-> > devel@lists.xen.org;
-> > > > julien.grall@arm.com; jbeulich@suse.com; Paul Durrant
-> > > > <Paul.Durrant@citrix.com>
-> > > > Subject: Re: [Xen-devel] [PATCH for-4.12] xen/iommu: fix dev
-> > assignment on
-> > > > ARM after 91d4eca7
-> > > >
-> > > > On Thu, 3 Jan 2019, Andrew Cooper wrote:
-> > > > > On 03/01/2019 00:28, Stefano Stabellini wrote:
-> > > > > > Fix device assignment on ARM after 91d4eca7 "mm / iommu: split
-> > > > > > need_iommu() into has_iommu_pt() and need_iommu_pt_sync()".
-> > > > > >
-> > > > > > arch_iommu_populate_page_table returns -ENOSYS which causes
-> > > > > > iommu_construct to return early, although it is not an error.
-> > > > > >
-> > > > > > Interestingly, the if ( rc ) was present even before 91d4eca7, but
-> > it
-> > > > was
-> > > > > > still working before. Now, with the new hd->status field it won't
-> > > > > > complete the initialization successfully.
-> > > > > >
-> > > > > > Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-> > > > > >
-> > > > > > diff --git a/xen/drivers/passthrough/iommu.c
-> > > > b/xen/drivers/passthrough/iommu.c
-> > > > > > index ac62d7f..a63329b 100644
-> > > > > > --- a/xen/drivers/passthrough/iommu.c
-> > > > > > +++ b/xen/drivers/passthrough/iommu.c
-> > > > > > @@ -269,7 +269,7 @@ int iommu_construct(struct domain *d)
-> > > > > >          hd->need_sync = true;
-> > > > > >
-> > > > > >          rc = arch_iommu_populate_page_table(d);
-> > > > >
-> > > > > The comment in ARM's arch_iommu_populate_page_table() says
-> > > > >
-> > > > > /* The IOMMU shares the p2m with the CPU */
-> > > > >
-> > > > > Which means that iommu_use_hap_pt() (just out of context above this
-> > > > > hunk) is wrong.  It should return true, which will prevent us
-> > entering
-> > > > > this path during initialisation.
-> > > >
-> > > > iommu_use_hap_pt is implemented by calling has_iommu_pt(d) (also on
-> > x86
-> > > > is part of the implementation), which is implemented as:
-> > > >
-> > > >   (dom_iommu(d)->status != IOMMU_STATUS_disabled)
-> > > >
-> > > > IOMMU_STATUS_disabled is zero in the enum, so status starts as
-> > > > IOMMU_STATUS_disabled. It is set to IOMMU_STATUS_initializing for dom0
-> > > > in iommu_hwdom_init, but it is not set to IOMMU_STATUS_initializing
-> > for
-> > > > other domains anywhere, leading to this error.
-> > >
-> > > It is set for other domains... see iommu_construct().
-> > 
-> > Hi Paul, unfortunately it doesn't work that way. Let me explain:
-> > 
-> > 
-> > iommu_construct() sets hd->status to IOMMU_STATUS_initializing *after*
-> > calling iommu_use_hap_pt(d), and specifically inside the if statement:
-> > 
-> >     if ( !iommu_use_hap_pt(d) )
-> >     {
-> >         int rc;
-> > 
-> >         hd->status = IOMMU_STATUS_initializing;
-> >         hd->need_sync = true;
-> > 
-> >         rc = arch_iommu_populate_page_table(d);
-> >         if ( rc )
-> >         {
-> >             if ( rc != -ERESTART )
-> >             {
-> >                 hd->need_sync = false;
-> >                 hd->status = IOMMU_STATUS_disabled;
-> >             }
-> > 
-> >             return rc;
-> >         }
-> >     }
-> > 
-> > However, for iommu_use_hap_pt(d) to return the correct value, which
-> > should be always true on ARM, status needs to be already set to
-> > IOMMU_STATUS_initializing.
-> > 
-> > Because when we enter iommu_construct status is IOMMU_STATUS_disabled,
-> > iommu_use_hap_pt(d) calls has_iommu_pt(d) which wrongly returns false
-> > because it is implemented as:
-> > 
-> > #define has_iommu_pt(d) (dom_iommu(d)->status != IOMMU_STATUS_disabled)
-> > 
-> > 
-> > I think we need to move the initialization of status to
-> > IOMMU_STATUS_initializing earlier, specifically to iommu_domain_init.
-> 
-> The use of iommu_use_hap_pt() here is indeed a problem, but I think it would be sufficient to move the line "hd->status = IOMMU_STATUS_initializing" to just before the if rather than to a completely separate function.
-
-Yes, that works too.
- 
----
-xen/iommu: fix dev assignment on ARM after 91d4eca7
-
-Fix device assignment on ARM after 91d4eca7 "mm / iommu: split
-need_iommu() into has_iommu_pt() and need_iommu_pt_sync()".
-
-arch_iommu_populate_page_table returns -ENOSYS which causes
-iommu_construct to return early, although it is not an error.
-
-hd->status needs to be set to IOMMU_STATUS_initializing before calling
-iommu_use_hap_pt, otherwise iommu_use_hap_pt will return the wrong
-value.
-
-Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-
-diff --git a/xen/drivers/passthrough/iommu.c b/xen/drivers/passthrough/iommu.c
-index ac62d7f..a6f69f4 100644
---- a/xen/drivers/passthrough/iommu.c
-+++ b/xen/drivers/passthrough/iommu.c
-@@ -261,11 +261,11 @@ int iommu_construct(struct domain *d)
-     if ( hd->status == IOMMU_STATUS_initialized )
-         return 0;
- 
-+    hd->status = IOMMU_STATUS_initializing;
-     if ( !iommu_use_hap_pt(d) )
-     {
-         int rc;
- 
--        hd->status = IOMMU_STATUS_initializing;
-         hd->need_sync = true;
- 
-         rc = arch_iommu_populate_page_table(d);
---8323329-484521266-1546886385=:800
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-484521266-1546886385=:800--
+T24gTW9uLCA3IEphbiAyMDE5LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4gT24gMDMuMDEuMTkg
+YXQgMjA6MTksIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiB3cm90ZToKPiA+IFVzZSBTWU1CT0wg
+aW4gY2FzZXMgb2YgY29tcGFyaXNvbnMgYW5kIHN1YnRyYWN0aW9ucyBvZjoKPiA+IAo+ID4gX3N0
+YXJ0LCBfZW5kLCBfX2luaXRfYmVnaW4sIF9faW5pdF9lbmQsICBfXzJNX3RleHRfZW5kLAo+ID4g
+X18yTV9yb2RhdGFfc3RhcnQsIF9fMk1fcm9kYXRhX2VuZCwgX18yTV9pbml0X3N0YXJ0LF9fMk1f
+aW5pdF9lbmQsCj4gPiBfXzJNX3J3ZGF0YV9zdGFydCwgX18yTV9yd2RhdGFfZW5kLCBfc3RleHQs
+IF9ldGV4dCwgX3Nyb2RhdGEsIF9lcm9kYXRhLAo+ID4gX19lbmRfdnBjaV9hcnJheSwgX19zdGFy
+dF92cGNpX2FycmF5LCBfc2luaXR0ZXh0LCBfZWluaXR0ZXh0LAo+ID4gX3N0ZXh0ZW50cnksIF9l
+dGV4dGVudHJ5LCBfX3N0YXJ0X2J1Z19mcmFtZXMsIF9fc3RvcF9idWdfZnJhbWVzXzAsCj4gPiBf
+X3N0b3BfYnVnX2ZyYW1lc18xLCBfX3N0b3BfYnVnX2ZyYW1lc18yLF9fc3RvcF9idWdfZnJhbWVz
+XzMsCj4gPiBfX25vdGVfZ251X2J1aWxkX2lkX3N0YXJ0LCBfX25vdGVfZ251X2J1aWxkX2lkX2Vu
+ZCwgX19zdGFydF9fX2V4X3RhYmxlLAo+ID4gX19zdG9wX19fZXhfdGFibGUsIF9fc3RhcnRfX19w
+cmVfZXhfdGFibGUsIF9fc3RvcF9fX3ByZV9leF90YWJsZSwKPiA+IF9fbG9ja19wcm9maWxlX3N0
+YXJ0LCBfX2xvY2tfcHJvZmlsZV9lbmQsIF9fcGFyYW1fc3RhcnQsCj4gPiBfX3BhcmFtX2VuZCwg
+X19zZXR1cF9zdGFydCwgX19zZXR1cF9lbmQsIF9faW5pdGNhbGxfc3RhcnQsCj4gPiBfX2luaXRj
+YWxsX2VuZCwgX19wcmVzbXBfaW5pdGNhbGxfZW5kLCBfX3RyYW1wb2xpbmVfcmVsX3N0YXJ0LAo+
+ID4gX190cmFtcG9saW5lX3JlbF9zdG9wLCBfX3RyYW1wb2xpbmVfc2VnX3N0YXJ0LCBfX3RyYW1w
+b2xpbmVfc2VnX3N0b3AKPiA+IF9fYWx0X2luc3RydWN0aW9ucywgX19hbHRfaW5zdHJ1Y3Rpb25z
+X2VuZCwgX19jdG9yc19zdGFydCwgX19jdG9yc19lbmQsCj4gPiBfX2VuZF9zY2hlZHVsZXJzX2Fy
+cmF5LCBfX3N0YXJ0X3NjaGVkdWxlcnNfYXJyYXksIF9fYnNzX3N0YXJ0LAo+ID4gX19ic3NfZW5k
+LCBfX3Blcl9jcHVfc3RhcnQsIF9fcGVyX2NwdV9kYXRhX2VuZCwgX3NwbGF0Zm9ybSwgX2VwbGF0
+Zm9ybSwKPiA+IF9zZGV2aWNlLCBfZWRldmljZSwgX2FzZGV2aWNlLCBfYWVkZXZpY2UsIF9fcHJv
+Y19pbmZvX3N0YXJ0LAo+ID4gX19wcm9jX2luZm9fZW5kLCBfc2R0Ygo+IAo+IERpZG4ndCB5b3Ug
+Z28gYSBsaXR0bGUgdG9vIGZhciB3aXRoIGNvcHktYW5kLXBhc3RlIGhlcmU/IEkgZG9uJ3QgdGhp
+bmsKPiBhbGwgb2YgdGhlIHN5bWJvbHMgcmVhbGx5IGV4aXN0IGluIEFybSAoYW5kIHNpbWlsYXJs
+eSBpbiB0aGUgeDg2IGluc3RhbmNlCj4gSSB0aGluayB0aGVyZSBhcmUgc29tZSBBcm0tb25seSBz
+eW1ib2xzKS4KCk9wcywgeW91IGFyZSByaWdodCwgSSdsbCBmaWx0ZXIgdGhlIGxpc3QgaW4gZWFj
+aCBjb21taXQgbWVzc2FnZSB0byBvbmx5CnRoZSBzeW1ib2xzIHRoYXQgbWFrZSBzZW5zZS4KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
