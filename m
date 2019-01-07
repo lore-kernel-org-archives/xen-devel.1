@@ -1,15 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] xen/build-id: Fix xen_build_id_check() to
- be robust against malformed notes
-Date: Mon, 07 Jan 2019 03:36:54 -0700
-Message-ID: <5C332BC6020000780020AC6D@prv1-mh.provo.novell.com>
-References: <1546277665-32720-1-git-send-email-andrew.cooper3@citrix.com>
+From: George Dunlap <George.Dunlap@citrix.com>
+Subject: Re: [PATCH] libxl: get_reaper_lock_and_uid: Document fd
+ handling
+Date: Mon, 7 Jan 2019 10:42:02 +0000
+Message-ID: <D0412FBD-6C60-4DDD-939F-D0942F611526@citrix.com>
+References: <20190102120343.21267-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1546277665-32720-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=IkhC=PP=citrix.com=prvs=90308b1d5=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1ggSMB-000603-3d
+ for xen-devel@lists.xenproject.org; Mon, 07 Jan 2019 10:42:07 +0000
+In-Reply-To: <20190102120343.21267-1-ian.jackson@eu.citrix.com>
+Content-Language: en-US
+Content-ID: <DA0C9A123087074590C7EE8020E1DDE8@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,18 +25,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Ian Jackson <Ian.Jackson@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDMxLjEyLjE4IGF0IDE4OjM0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gQSBOVF9HTlVfQlVJTERfSUQgd2l0aCBuYW1lc3ogbG9uZ2VyIHRoYW4gNCB3aWxsIGNh
-dXNlIHRoZSBzdHJuY21wKCkgdG8gdXNlCj4gYnl0ZXMgaW4gYWRqYWNlbnQgc3RyaW5ndGFibGUg
-ZW50cmllcy4KPiAKPiBJbnN0ZWFkLCBjaGVjayBmb3IgbmFtZXN6IGV4YWN0bHkgZXF1YWwgdG8g
-NCwKCklzIHRoYXQgYSByZXF1aXJlbWVudCBzcGVsbGVkIG91dCBhbnl3aGVyZT8gVGlsbCBub3cg
-SSd2ZSBiZWVuCnVuZGVyIHRoZSBpbXByZXNzaW9uIHRoYXQgZS5nLiA4IGJ5dGVzIG9mIG5hbWUg
-YXJlIGZpbmUgYXMgd2VsbCwKYXMgbG9uZyBhcyB0aGUgZmlyc3QgZm91ciBvZiB0aGVtIGFyZSAi
-R05VXDAiLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+Cgo+IE9uIEphbiAyLCAyMDE5LCBhdCAxMDowMyBQTSwgSWFuIEphY2tzb24gPGlhbi5qYWNrc29u
+QGV1LmNpdHJpeC5jb20+IHdyb3RlOgo+IAo+IENvdmVyaXR5IHVuZGVyc3RhbmRhYmx5IGNvbXBs
+YWlucyB0aGF0IGdldF9yZWFwZXJfbG9ja19hbmRfdWlkIGxlYWtzCj4gdGhlIGZkIGFuZCBoZW5j
+ZSBvcGVuLWZpbGUuICBCdXQgdGhpcyBpcyBpbnRlbnRpb25hbDogdGhlIGxvY2sgYmVjb21lcwo+
+IG93bmVkIGJ5IHRoZSBjaGlsZCBwcm9jZXNzIGFzIGEgd2hvbGUsIHdoaWNoIGlzIGVudGlyZWx5
+IHRoZSBwcm9wZXJ0eQo+IG9mIGxpYnhsLgo+IAo+IChUaGUgY29kaW5nIHN0eWxlIGhlcmUgaW4g
+dGhpcyBzdWJwcm9jZXNzIGlzIGEgYml0IGFub21hbG91cyBidXQgaXQncwo+IHByb2JhYmx5IG5v
+dCB3b3J0aCBpdCB0byBjb252ZXJ0IGdldF9yZWFwZXJfbG9ja19hbmRfdWlkIHRvIGBnb3RvIG91
+dCcKPiBzdHlsZSBhbmQgaGF2ZSBpdCBleHBsaWNpdGx5IHJldHVybiB0aGUgZmQgbnVtYmVyLikK
+PiAKPiBTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNv
+bT4KCkFja2VkLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
