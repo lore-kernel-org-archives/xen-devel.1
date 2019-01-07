@@ -1,8 +1,8 @@
 From: "DeGraaf, Daniel G" <dgdegra@nsa.gov>
-Subject: Re: [PATCH v3 13/15] xsm,
- argo: XSM control for any access to argo by a domain
-Date: Mon, 7 Jan 2019 23:06:45 +0000
-Message-ID: <BA190A75E8413C49BB9E1D2B85D118118CBC92C7@MSMR-GH1-UEA01.corp.nsa.gov>
+Subject: Re: [PATCH v3 14/15] xsm,
+ argo: notify: don't describe rings that cannot be sent to
+Date: Mon, 7 Jan 2019 23:06:58 +0000
+Message-ID: <BA190A75E8413C49BB9E1D2B85D118118CBCC2E5@MSMR-GH1-UEA01.corp.nsa.gov>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,8 +10,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=eyHh=PP=nsa.gov=dgdegra@srs-us1.protection.inumbo.net>)
- id 1ggdyz-00014B-EL
- for xen-devel@lists.xenproject.org; Mon, 07 Jan 2019 23:06:57 +0000
+ id 1ggdzC-00015s-0P
+ for xen-devel@lists.xenproject.org; Mon, 07 Jan 2019 23:07:10 +0000
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,15 +26,18 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, 
 List-Id: xen-devel@lists.xenproject.org
 
 PiBGcm9tOiBDaHJpc3RvcGhlciBDbGFyayA8Y2hyaXN0b3BoZXIudy5jbGFya0BnbWFpbC5jb20+
-DQo+IFN1YmplY3Q6IFtQQVRDSCB2MyAxMy8xNV0geHNtLCBhcmdvOiBYU00gY29udHJvbCBmb3Ig
-YW55IGFjY2VzcyB0byBhcmdvIGJ5IGEgZG9tYWluDQo+IA0KPiBXaWxsIGluaGliaXQgaW5pdGlh
-bGl6YXRpb24gb2YgdGhlIGRvbWFpbidzIGFyZ28gZGF0YSBzdHJ1Y3R1cmUgdG8NCj4gcHJldmVu
-dCByZWNlaXZpbmcgYW55IG1lc3NhZ2VzIG9yIG5vdGlmaWNhdGlvbnMgYW5kIGFjY2VzcyB0byBh
-bnkgb2YNCj4gdGhlIGFyZ28gaHlwZXJjYWxsIG9wZXJhdGlvbnMuDQo+IA0KPiBTaWduZWQtb2Zm
-LWJ5OiBDaHJpc3RvcGhlciBDbGFyayA8Y2hyaXN0b3BoZXIuY2xhcms2QGJhZXN5c3RlbXMuY29t
-Pg0KDQpBY2tlZC1ieTogRGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5zYS5nb3Y+DQoN
-CkNvbW1lbnQgdG8gIzExIGFwcGxpZXMgaGVyZSAoYWRkaW5nIGFuIEFWQyB2ZWN0b3IsIHNob3Vs
-ZCBhbHNvIGNoYW5nZSBkZWZhdWx0IHBvbGljeSkuDQpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+DQo+IFN1YmplY3Q6IFtQQVRDSCB2MyAxNC8xNV0geHNtLCBhcmdvOiBub3RpZnk6IGRvbid0IGRl
+c2NyaWJlIHJpbmdzIHRoYXQgY2Fubm90IGJlIHNlbnQgdG8NCj4gDQo+IFNpZ25lZC1vZmYtYnk6
+IENocmlzdG9waGVyIENsYXJrIDxjaHJpc3RvcGhlci5jbGFyazZAYmFlc3lzdGVtcy5jb20+DQoN
+CkkgaGF2ZSBub3QgY2hlY2tlZCB0byBzZWUgaG93IGNvbW1vbmx5IHRoaXMgZnVuY3Rpb24gaXMg
+Y2FsbGVkLCBidXQgaXQgbG9va3MgbGlrZSBpdCBtYXkgaGF2ZSB0aGUgcG90ZW50aWFsIGZvciBw
+cm9kdWNpbmcgZXhjZXNzaXZlIEFWQyBkZW5pYWxzIHdoZW4ganVzdCBjaGVja2luZy4gIElmIHRo
+aXMgaXMgdGhlIGNhc2UsIHVzaW5nIGFub3RoZXIgWFNNIGhvb2sgKG9yIGFkZGluZyBhIGJvb2wg
+cGFyYW1ldGVyIHRvIHRoZSBleGlzdGluZyBvbmUpIHRvIGRpc3Rpbmd1aXNoIGJldHdlZW4gdGhp
+cyBjYXNlIGFuZCB0aGUgYWN0dWFsIHNlbmQgYXR0ZW1wdCB3b3VsZCBsZXQgeW91IHVzZSBhdmNf
+aGFzX3Blcm1fbm9hdWRpdCBoZXJlIHRvIGF2b2lkIHRoYXQgbG9nIHNwYW0uIElmIHRoaXMgY2Fs
+bCBkb2Vzbid0IGhhcHBlbiBpbiBzb21lIGF1dG9tYXRlZC9jb21tb24gZmFzaGlvbiwgaXQncyBm
+aW5lIGFzLWlzLg0KDQpBY2tlZC1ieTogRGFuaWVsIERlIEdyYWFmIDxkZ2RlZ3JhQHR5Y2hvLm5z
+YS5nb3Y+DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
