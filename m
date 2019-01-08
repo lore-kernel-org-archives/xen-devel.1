@@ -1,20 +1,24 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen (both x86 and Arm) Community Call: Jan 9 -
- 16:00 - 17:00 UTC - Call for Agenda Items
-Date: Tue, 8 Jan 2019 14:34:37 +0000
-Message-ID: <62249D9F-468C-4DE8-98A3-428F146A2DC7@xenproject.org>
-References: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============9101977117524633394=="
+From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
+Subject: Re: [Qemu-devel] [PATCH 2/3] machine: Eliminate
+ unnecessary stringify() usage
+Date: Tue, 8 Jan 2019 15:36:51 +0100
+Message-ID: <11e0ba89-3cb2-1563-8f66-ae68ef2d1b63@redhat.com>
+References: <20190107193020.21744-1-ehabkost@redhat.com>
+ <20190107193020.21744-3-ehabkost@redhat.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=XFSl=PQ=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1ggsSp-0004Fe-6d
- for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 14:34:43 +0000
-Received: by mail-wr1-x42e.google.com with SMTP id l9so4221557wrt.13
- for <xen-devel@lists.xenproject.org>; Tue, 08 Jan 2019 06:34:41 -0800 (PST)
-In-Reply-To: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=3yON=PQ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1ggsUx-0004Oa-Vc
+ for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 14:36:56 +0000
+Received: by mail-wr1-f68.google.com with SMTP id j2so4307176wrw.1
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Jan 2019 06:36:54 -0800 (PST)
+In-Reply-To: <20190107193020.21744-3-ehabkost@redhat.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,102 +27,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>
-Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
- John" <john.ji@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Matt Spencer <Matt.Spencer@arm.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Juergen Gross <jgross@suse.com>
+To: Eduardo Habkost <ehabkost@redhat.com>, qemu-devel@nongnu.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>, Richard Henderson <rth@twiddle.net>, Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, Anthony Perard <anthony.perard@citrix.com>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>, xen-devel@lists.xenproject.org, David Gibson <david@gibson.dropbear.id.au>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============9101977117524633394==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2"
-
-
---Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Hi all,
-
-I noticed that I hadn't updated all the times in the meeting invite =
-block.
-
->=20
-> =3D=3D Dial-in Information =3D=3D
->=20
->   ## Future Community Call schedule
->   Jan 9, Feb 13, Mar 12
->=20
->   ## Meeting time
->   15:00 - 16:00 UTC
-
-This is wrong and should read 16:00 - 17:00
-
->    8:00 -  9:00 EDT (San Francisco)
->   11:00 - 12:00 EDT (New York)
->   16:00 - 17:00 BST (London)
->   17:00 - 18:00 CEST (Berlin)
->   00:00 - 01:00 CST (Beijing)
->   Further International meeting times:=20
->   =
-https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&mon=
-th=3D1&day=3D7&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D13=
-6&p5=3D37&p6=3D33 =
-<https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&mo=
-nth=3D1&day=3D7&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D1=
-36&p5=3D37&p6=3D33>
-
-Regards
-Lars
-
-
---Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><div =
-class=3D"">Hi all,</div><div class=3D""><br class=3D""></div><div =
-class=3D"">I noticed that I hadn't updated all the times in the meeting =
-invite block.</div><br class=3D""><div><blockquote type=3D"cite" =
-class=3D""><div class=3D""><div class=3D""><br class=3D"">=3D=3D Dial-in =
-Information =3D=3D<br class=3D""><br class=3D""> &nbsp;&nbsp;## Future =
-Community Call schedule<br class=3D""> &nbsp;&nbsp;Jan 9, Feb 13, Mar =
-12<br class=3D""><br class=3D""> &nbsp;&nbsp;## Meeting time<br =
-class=3D""> &nbsp;&nbsp;15:00 - 16:00 UTC<br =
-class=3D""></div></div></blockquote><div><br class=3D""></div>This is =
-wrong and should read 16:00 - 17:00</div><div><br class=3D""><blockquote =
-type=3D"cite" class=3D""><div class=3D""><div class=3D""> =
-&nbsp;&nbsp;&nbsp;8:00 - &nbsp;9:00 EDT (San Francisco)<br class=3D""> =
-&nbsp;&nbsp;11:00 - 12:00 EDT (New York)<br class=3D""> =
-&nbsp;&nbsp;16:00 - 17:00 BST (London)<br class=3D""> &nbsp;&nbsp;17:00 =
-- 18:00 CEST (Berlin)<br class=3D""> &nbsp;&nbsp;00:00 - 01:00 CST =
-(Beijing)<br class=3D""> &nbsp;&nbsp;Further International meeting =
-times: <br class=3D""> &nbsp;&nbsp;<a =
-href=3D"https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D=
-2019&amp;month=3D1&amp;day=3D7&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&amp;p=
-1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33" =
-class=3D"">https://www.timeanddate.com/worldclock/meetingdetails.html?year=
-=3D2019&amp;month=3D1&amp;day=3D7&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&am=
-p;p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33</=
-a><br class=3D""></div></div></blockquote><br =
-class=3D""></div><div>Regards</div><div>Lars</div><br =
-class=3D""></body></html>=
-
---Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2--
-
-
---===============9101977117524633394==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============9101977117524633394==--
+T24gMS83LzE5IDg6MzAgUE0sIEVkdWFyZG8gSGFia29zdCB3cm90ZToKPiBzdHJpbmdpZnkoKSBp
+cyB1c2VmdWwgd2hlbiB3ZSBuZWVkIHRvIHVzZSBtYWNyb3MgaW4gY29tcGF0X3Byb3BzCj4gKGxp
+a2Ugd2hlbiB3ZSBzZXQgdmlydGlvLWJhbG9vbi1wY2kuY2xhc3M9UENJX0NMQVNTX01FTU9SWV9S
+QU0gYXQKPiBwY19pNDQwZnhfMV8wX21hY2hpbmVfb3B0aW9ucygpKSwgYnV0IGl0IGlzIHBvaW50
+bGVzcyB3aGVuIHdlIGFyZQo+IGFscmVhZHkgcHJvdmlkaW5nIGEgbnVtYmVyIGxpdGVyYWwuCj4g
+Cj4gUmVwbGFjZSBzdHJpbmdpZnkoKSB3aXRoIHN0cmluZyBsaXRlcmFscyB3aGVuIGFwcHJvcHJp
+YXRlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEVkdWFyZG8gSGFia29zdCA8ZWhhYmtvc3RAcmVkaGF0
+LmNvbT4KPiAtLS0KPiAgaHcvY29yZS9tYWNoaW5lLmMgfCAgOCArKy0tCj4gIGh3L2kzODYvcGMu
+YyAgICAgIHwgOTQgKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0KPiAgaHcvaTM4Ni9wY19waWl4LmMgfCAzMCArKysrKysrLS0tLS0tLS0KPiAgaHcvcHBjL3Nw
+YXByLmMgICAgfCAgMiArLQo+ICA0IGZpbGVzIGNoYW5nZWQsIDY3IGluc2VydGlvbnMoKyksIDY3
+IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9ody9jb3JlL21hY2hpbmUuYyBiL2h3L2Nv
+cmUvbWFjaGluZS5jCj4gaW5kZXggZjg1NjNlZmI4Ni4uNGI0ZDZjMjNkZSAxMDA2NDQKPiAtLS0g
+YS9ody9jb3JlL21hY2hpbmUuYwo+ICsrKyBiL2h3L2NvcmUvbWFjaGluZS5jCj4gQEAgLTEzNSwx
+MSArMTM1LDExIEBAIEdsb2JhbFByb3BlcnR5IGh3X2NvbXBhdF8yXzhbXSA9IHsKPiAgICAgIHsK
+PiAgICAgICAgICAuZHJpdmVyICAgPSAiZndfY2ZnX21lbSIsCj4gICAgICAgICAgLnByb3BlcnR5
+ID0gIngtZmlsZS1zbG90cyIsCj4gLSAgICAgICAgLnZhbHVlICAgID0gc3RyaW5naWZ5KDB4MTAp
+LAo+ICsgICAgICAgIC52YWx1ZSAgICA9ICIweDEwIiwKWy4uLl0KCkxvdmVseS4KClJldmlld2Vk
+LWJ5OiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhpbG1kQHJlZGhhdC5jb20+CgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
