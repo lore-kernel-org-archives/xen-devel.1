@@ -1,23 +1,28 @@
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH 3/3] machine: Use shorter
- format for GlobalProperty arrays
-Date: Tue, 8 Jan 2019 15:38:35 +0100
-Message-ID: <0ec8ca75-88a4-8061-be69-8a30bd0c2b80@redhat.com>
-References: <20190107193020.21744-1-ehabkost@redhat.com>
- <20190107193020.21744-4-ehabkost@redhat.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH v7 16/18] xen: automatically create
+ XenBlockDevice-s
+Date: Tue, 8 Jan 2019 14:41:10 +0000
+Message-ID: <20190108144110.GG1508__20520.992743741$1546958406$gmane$org@perard.uk.xensource.com>
+References: <20181220171439.11159-1-paul.durrant@citrix.com>
+ <20181220171439.11159-17-paul.durrant@citrix.com>
+ <20190104163124.GE1508@perard.uk.xensource.com>
+ <da727b0b8a9a4f9baa47a660298a9cba@AMSPEX02CL03.citrite.net>
+ <20190108125321.GD11492@linux.fritz.box>
+ <904d305f8c0f4aac8e60fb7ea14ebd41@AMSPEX02CL03.citrite.net>
+ <20190108132823.GF1508@perard.uk.xensource.com>
+ <4198c56b893a4539a4d27eea5dad71ec@AMSPEX02CL03.citrite.net>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=3yON=PQ=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1ggsWd-0004Xu-4B
- for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 14:38:39 +0000
-Received: by mail-wr1-f53.google.com with SMTP id s12so4303012wrt.4
- for <xen-devel@lists.xenproject.org>; Tue, 08 Jan 2019 06:38:37 -0800 (PST)
-In-Reply-To: <20190107193020.21744-4-ehabkost@redhat.com>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=lVBS=PQ=citrix.com=prvs=904c6e83a=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1ggsZH-0005Jz-Ga
+ for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 14:41:23 +0000
+Content-Disposition: inline
+In-Reply-To: <4198c56b893a4539a4d27eea5dad71ec@AMSPEX02CL03.citrite.net>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,15 +31,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Eduardo Habkost <ehabkost@redhat.com>, qemu-devel@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>, David Hildenbrand <david@redhat.com>, Richard Henderson <rth@twiddle.net>, Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, qemu-s390x@nongnu.org, qemu-ppc@nongnu.org, Paolo Bonzini <pbonzini@redhat.com>, Anthony Perard <anthony.perard@citrix.com>, =?UTF-8?Q?Marc-Andr=c3=a9_Lureau?= <marcandre.lureau@redhat.com>, xen-devel@lists.xenproject.org, David Gibson <david@gibson.dropbear.id.au>
+To: Paul Durrant <Paul.Durrant@citrix.com>
+Cc: 'Kevin Wolf' <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Max Reitz <mreitz@redhat.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMS83LzE5IDg6MzAgUE0sIEVkdWFyZG8gSGFia29zdCB3cm90ZToKPiBJbnN0ZWFkIG9mIHZl
-cmJvc2UgYXJyYXlzIHdpdGggNCBsaW5lcyBmb3IgZWFjaCBlbnRyeSwgbWFrZSBlYWNoCj4gZW50
-cnkgdGFrZSBvbmx5IG9uZSBsaW5lLiAgVGhpcyBtYWtlcyBsb25nIGFycmF5cyB0aGF0IGNvdWxk
-bid0Cj4gZml0IGluIHRoZSBzY3JlZW4gYmVjb21lIHNob3J0IGFuZCByZWFkYWJsZS4KCkFuZCB3
-ZSdsbCB0aGFuayB5b3UgZm9yIHRoZSBuZXh0IGdpdCBkaWZmIDopCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+PiBJJ3ZlIHRlc3RlZCB5b3VyIHBhdGNoIGFuZCBpdCBkb2VzIHNlZW0gbGlrZSB0aGUgYmVzdCB3
+YXkgZm9yd2FyZC4gSSdsbCBzcXVhc2ggaXQgaW4uIERvIHlvdSB3YW50IG1lIHRvIHB1dCB5b3Vy
+IFMtby1iIG9uIHRoZSBjb21iaW5lZCBwYXRjaD8KCllvdSBjYW4sIEknbGwgaGF2ZSB0byBhZGQg
+aXQgYW55d2F5IHdoZW4gSSdsbCBwcmVwYXJlIHRoZSBwdWxsIHJlcXVlc3QuCgpUaGFua3MsCgot
+LSAKQW50aG9ueSBQRVJBUkQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
