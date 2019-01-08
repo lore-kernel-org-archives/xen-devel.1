@@ -1,19 +1,19 @@
-From: "DeGraaf, Daniel G" <dgdegra@nsa.gov>
-Subject: Re: [PATCH v3 11/15] xsm,
- argo: XSM control for argo register
-Date: Mon, 7 Jan 2019 23:07:27 +0000
-Message-ID: <BA190A75E8413C49BB9E1D2B85D118118CBCC2F6@MSMR-GH1-UEA01.corp.nsa.gov>
+From: David Gibson <david@gibson.dropbear.id.au>
+Subject: Re: [PATCH 2/3] machine: Eliminate unnecessary
+ stringify() usage
+Date: Tue, 8 Jan 2019 11:08:23 +1100
+Message-ID: <20190108000823.GH13339@umbus.fritz.box>
+References: <20190107193020.21744-1-ehabkost@redhat.com>
+ <20190107193020.21744-3-ehabkost@redhat.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3575803063838041121=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=eyHh=PP=nsa.gov=dgdegra@srs-us1.protection.inumbo.net>)
- id 1ggdzZ-0001C6-NV
- for xen-devel@lists.xenproject.org; Mon, 07 Jan 2019 23:07:33 +0000
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=bkeU=PQ=ozlabs.org=dgibson@srs-us1.protection.inumbo.net>)
+ id 1ggf4E-0006yB-NM
+ for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 00:16:27 +0000
+In-Reply-To: <20190107193020.21744-3-ehabkost@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,38 +22,520 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Christopher Clark' <christopher.w.clark@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Rich Persaud <persaur@gmail.com>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, James McKenzie <james@bromium.com>, Eric Chanudet <eric.chanudet@gmail.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Eduardo Habkost <ehabkost@redhat.com>
+Cc: qemu-ppc@nongnu.org, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org, David Hildenbrand <david@redhat.com>, Cornelia Huck <cohuck@redhat.com>, qemu-devel@nongnu.org, Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, qemu-s390x@nongnu.org, "Michael S. Tsirkin" <mst@redhat.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, =?iso-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>, Anthony Perard <anthony.perard@citrix.com>, Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson <rth@twiddle.net>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBDaHJpc3RvcGhlciBDbGFyayA8Y2hyaXN0b3BoZXIudy5jbGFya0BnbWFpbC5jb20+
-DQo+IFN1YmplY3Q6IFtQQVRDSCB2MyAxMS8xNV0geHNtLCBhcmdvOiBYU00gY29udHJvbCBmb3Ig
-YXJnbyByZWdpc3Rlcg0KPiANCj4gWFNNIGNvbnRyb2xzIGZvciBhcmdvIHJpbmcgcmVnaXN0cmF0
-aW9uIHdpdGggdHdvIGRpc3RpbmN0IGNhc2VzLCB3aGVyZQ0KPiB0aGUgcmluZyBiZWluZyByZWdp
-c3RlcmVkIGlzOg0KPiANCj4gMSkgU2luZ2xlIHNvdXJjZTogIHJlZ2lzdGVyaW5nIGEgcmluZyBm
-b3IgY29tbXVuaWNhdGlvbiB0byByZWNlaXZlIG1lc3NhZ2VzDQo+ICAgICAgICAgICAgICAgICAg
-ICBmcm9tIGEgc3BlY2lmaWVkIHNpbmdsZSBvdGhlciBkb21haW4uDQo+ICAgIERlZmF1bHQgcG9s
-aWN5OiBhbGxvdy4NCj4gDQo+IDIpIEFueSBzb3VyY2U6ICAgICByZWdpc3RlcmluZyBhIHJpbmcg
-Zm9yIGNvbW11bmljYXRpb24gdG8gcmVjZWl2ZSBtZXNzYWdlcw0KPiAgICAgICAgICAgICAgICAg
-ICAgZnJvbSBhbnksIG9yIGFsbCwgb3RoZXIgZG9tYWlucyAoaWUuIHdpbGRjYXJkKS4NCj4gICAg
-RGVmYXVsdCBwb2xpY3k6IGRlbnksIHdpdGggcnVudGltZSBwb2xpY3kgY29uZmlndXJhdGlvbiB2
-aWEgYm9vdHBhcmFtLg0KPiANCj4gVGhlIGV4aXN0aW5nIGFyZ28tbWFjIGJvb3QgcGFyYW1ldGVy
-IGluZGljYXRlcyBhZG1pbmlzdHJhdG9yIHByZWZlcmVuY2UgZm9yDQo+IGVpdGhlciBwZXJtaXNz
-aXZlIG9yIHN0cmljdCBhY2Nlc3MgY29udHJvbCwgd2hpY2ggd2lsbCBhbGxvdyBvciBkZW55DQo+
-IHJlZ2lzdHJhdGlvbiBvZiBhbnktc2VuZGVyIHJpbmdzLg0KPiANCj4gVGhpcyBjb21taXQgbW9k
-aWZpZXMgdGhlIHNpZ25hdHVyZSBvZiBjb3JlIFhTTSBob29rIGZ1bmN0aW9ucyBpbiBvcmRlciB0
-bw0KPiBhcHBseSAnY29uc3QnIHRvIGFyZ3VtZW50cywgbmVlZGVkIGluIG9yZGVyIGZvciAnY29u
-c3QnIHRvIGJlIGFjY2VwdGVkIGluDQo+IHNpZ25hdHVyZSBvZiBmdW5jdGlvbnMgdGhhdCBpbnZv
-a2UgdGhlbS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waGVyIENsYXJrIDxjaHJpc3Rv
-cGhlci5jbGFyazZAYmFlc3lzdGVtcy5jb20+DQoNCkFja2VkLWJ5OiBEYW5pZWwgRGUgR3JhYWYg
-PGRnZGVncmFAdHljaG8ubnNhLmdvdj4NCg0KV2hpbGUgaXQgZG9lcyBub3QgbmVlZCB0byBiZSBh
-IHBhcnQgb2YgdGhpcyBwYXRjaCwgc29tZXdoZXJlIGluIHRoZSBzZXJpZXMgeW91IHNob3VsZCBh
-ZGQgYSBydWxlIGFsbG93aW5nIHRoZXNlIGZlYXR1cmVzIHRvIGJlIHVzZWQgYnkgZ3Vlc3RzIGlu
-IHRoZSBkZWZhdWx0IFhTTSBwb2xpY3k7IHRvb2xzL2ZsYXNrL3BvbGljeS9tb2R1bGVzL2d1ZXN0
-X2ZlYXR1cmVzLnRlIGlzIHdoZXJlIGZlYXR1cmVzIGxpa2UgdGhpcyBoYXZlIHByZXZpb3VzbHkg
-YmVlbiBoYW5kbGVkLiAgU2luY2UgeW91J3JlIGFkZGluZyBwZXJtaXNzaW9ucyBvbmUgYXQgYSB0
-aW1lLCB5b3UgY291bGQgYWRkIHRoZSBydWxlcyBhbGwgYXQgb25jZSBvciBhcyBhIHBhcnQgb2Yg
-dGhlIHBhdGNoIGFkZGluZyB0aGUgdmVjdG9yLg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============3575803063838041121==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ik0NlRzMGhMnxrMX"
+Content-Disposition: inline
+
+
+--ik0NlRzMGhMnxrMX
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 07, 2019 at 05:30:19PM -0200, Eduardo Habkost wrote:
+> stringify() is useful when we need to use macros in compat_props
+> (like when we set virtio-baloon-pci.class=3DPCI_CLASS_MEMORY_RAM at
+> pc_i440fx_1_0_machine_options()), but it is pointless when we are
+> already providing a number literal.
+>=20
+> Replace stringify() with string literals when appropriate.
+>=20
+> Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
+
+Reviewed-by: David Gibson <david@gibson.dropbear.id.au>
+
+> ---
+>  hw/core/machine.c |  8 ++--
+>  hw/i386/pc.c      | 94 +++++++++++++++++++++++------------------------
+>  hw/i386/pc_piix.c | 30 +++++++--------
+>  hw/ppc/spapr.c    |  2 +-
+>  4 files changed, 67 insertions(+), 67 deletions(-)
+>=20
+> diff --git a/hw/core/machine.c b/hw/core/machine.c
+> index f8563efb86..4b4d6c23de 100644
+> --- a/hw/core/machine.c
+> +++ b/hw/core/machine.c
+> @@ -135,11 +135,11 @@ GlobalProperty hw_compat_2_8[] =3D {
+>      {
+>          .driver   =3D "fw_cfg_mem",
+>          .property =3D "x-file-slots",
+> -        .value    =3D stringify(0x10),
+> +        .value    =3D "0x10",
+>      },{
+>          .driver   =3D "fw_cfg_io",
+>          .property =3D "x-file-slots",
+> -        .value    =3D stringify(0x10),
+> +        .value    =3D "0x10",
+>      },{
+>          .driver   =3D "pflash_cfi01",
+>          .property =3D "old-multiple-chip-handling",
+> @@ -337,11 +337,11 @@ GlobalProperty hw_compat_2_1[] =3D {
+>      },{
+>          .driver   =3D "usb-mouse",
+>          .property =3D "usb_version",
+> -        .value    =3D stringify(1),
+> +        .value    =3D "1",
+>      },{
+>          .driver   =3D "usb-kbd",
+>          .property =3D "usb_version",
+> -        .value    =3D stringify(1),
+> +        .value    =3D "1",
+>      },{
+>          .driver   =3D "virtio-pci",
+>          .property =3D "virtio-pci-bus-master-bug-migration",
+> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+> index 4952feb476..ff14b6d4df 100644
+> --- a/hw/i386/pc.c
+> +++ b/hw/i386/pc.c
+> @@ -148,11 +148,11 @@ GlobalProperty pc_compat_2_12[] =3D {
+>      },{
+>          .driver   =3D "EPYC-" TYPE_X86_CPU,
+>          .property =3D "xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "EPYC-IBPB-" TYPE_X86_CPU,
+>          .property =3D "xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },
+>  };
+>  const size_t pc_compat_2_12_len =3D G_N_ELEMENTS(pc_compat_2_12);
+> @@ -191,7 +191,7 @@ GlobalProperty pc_compat_2_9[] =3D {
+>      {
+>          .driver   =3D "mch",
+>          .property =3D "extended-tseg-mbytes",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },
+>  };
+>  const size_t pc_compat_2_9_len =3D G_N_ELEMENTS(pc_compat_2_9);
+> @@ -365,75 +365,75 @@ GlobalProperty pc_compat_2_3[] =3D {
+>      },{
+>          .driver   =3D "qemu64" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(4),
+> +        .value    =3D "4",
+>      },{
+>          .driver   =3D "kvm64" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(5),
+> +        .value    =3D "5",
+>      },{
+>          .driver   =3D "pentium3" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "n270" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(5),
+> +        .value    =3D "5",
+>      },{
+>          .driver   =3D "Conroe" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(4),
+> +        .value    =3D "4",
+>      },{
+>          .driver   =3D "Penryn" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(4),
+> +        .value    =3D "4",
+>      },{
+>          .driver   =3D "Nehalem" "-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(4),
+> +        .value    =3D "4",
+>      },{
+>          .driver   =3D "n270" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Penryn" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Conroe" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Nehalem" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Westmere" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "SandyBridge" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "IvyBridge" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Haswell" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Haswell-noTSX" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Broadwell" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver   =3D "Broadwell-noTSX" "-" TYPE_X86_CPU,
+>          .property =3D "min-xlevel",
+> -        .value    =3D stringify(0x8000000a),
+> +        .value    =3D "0x8000000a",
+>      },{
+>          .driver =3D TYPE_X86_CPU,
+>          .property =3D "kvm-no-smi-migration",
+> @@ -566,7 +566,7 @@ GlobalProperty pc_compat_2_0[] =3D {
+>      {
+>          .driver   =3D "apic",
+>          .property =3D "version",
+> -        .value    =3D stringify(0x11),
+> +        .value    =3D "0x11",
+>      },
+>      {
+>          .driver   =3D "nec-usb-xhci",
+> @@ -581,17 +581,17 @@ GlobalProperty pc_compat_2_0[] =3D {
+>      {
+>          .driver   =3D "pci-serial",
+>          .property =3D "prog_if",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },
+>      {
+>          .driver   =3D "pci-serial-2x",
+>          .property =3D "prog_if",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },
+>      {
+>          .driver   =3D "pci-serial-4x",
+>          .property =3D "prog_if",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },
+>      {
+>          .driver   =3D "virtio-net-pci",
+> @@ -629,7 +629,7 @@ GlobalProperty pc_compat_1_7[] =3D {
+>      {
+>          .driver   =3D "hpet",
+>          .property =3D HPET_INTCAP,
+> -        .value    =3D stringify(4),
+> +        .value    =3D "4",
+>      },
+>  };
+>  const size_t pc_compat_1_7_len =3D G_N_ELEMENTS(pc_compat_1_7);
+> @@ -643,19 +643,19 @@ GlobalProperty pc_compat_1_6[] =3D {
+>      },{
+>          .driver   =3D "qemu64-" TYPE_X86_CPU,
+>          .property =3D "model",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "qemu32-" TYPE_X86_CPU,
+>          .property =3D "model",
+> -        .value    =3D stringify(3),
+> +        .value    =3D "3",
+>      },{
+>          .driver   =3D "i440FX-pcihost",
+>          .property =3D "short_root_bus",
+> -        .value    =3D stringify(1),
+> +        .value    =3D "1",
+>      },{
+>          .driver   =3D "q35-pcihost",
+>          .property =3D "short_root_bus",
+> -        .value    =3D stringify(1),
+> +        .value    =3D "1",
+>      },
+>  };
+>  const size_t pc_compat_1_6_len =3D G_N_ELEMENTS(pc_compat_1_6);
+> @@ -665,27 +665,27 @@ GlobalProperty pc_compat_1_5[] =3D {
+>      {
+>          .driver   =3D "Conroe-" TYPE_X86_CPU,
+>          .property =3D "model",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "Conroe-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "Penryn-" TYPE_X86_CPU,
+>          .property =3D "model",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "Penryn-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "Nehalem-" TYPE_X86_CPU,
+>          .property =3D "model",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "Nehalem-" TYPE_X86_CPU,
+>          .property =3D "min-level",
+> -        .value    =3D stringify(2),
+> +        .value    =3D "2",
+>      },{
+>          .driver   =3D "virtio-net-pci",
+>          .property =3D "any_layout",
+> @@ -697,11 +697,11 @@ GlobalProperty pc_compat_1_5[] =3D {
+>      },{
+>          .driver   =3D "i440FX-pcihost",
+>          .property =3D "short_root_bus",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "q35-pcihost",
+>          .property =3D "short_root_bus",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },
+>  };
+>  const size_t pc_compat_1_5_len =3D G_N_ELEMENTS(pc_compat_1_5);
+> @@ -711,36 +711,36 @@ GlobalProperty pc_compat_1_4[] =3D {
+>      {
+>          .driver   =3D "scsi-hd",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "scsi-cd",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "scsi-disk",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "ide-hd",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "ide-cd",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "ide-drive",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "virtio-blk-pci",
+>          .property =3D "discard_granularity",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },{
+>          .driver   =3D "virtio-serial-pci",
+>          .property =3D "vectors",
+>          /* DEV_NVECTORS_UNSPECIFIED as a uint32_t string */
+> -        .value    =3D stringify(0xFFFFFFFF),
+> +        .value    =3D "0xFFFFFFFF",
+>      },{
+>          .driver   =3D "virtio-net-pci",
+>          .property =3D "ctrl_guest_offloads",
+> @@ -768,7 +768,7 @@ GlobalProperty pc_compat_1_4[] =3D {
+>      },{
+>          .driver   =3D "486-" TYPE_X86_CPU,
+>          .property =3D "model",
+> -        .value    =3D stringify(0),
+> +        .value    =3D "0",
+>      },
+>      {
+>          .driver =3D "n270" "-" TYPE_X86_CPU,
+> diff --git a/hw/i386/pc_piix.c b/hw/i386/pc_piix.c
+> index ed6984638e..fd20227af3 100644
+> --- a/hw/i386/pc_piix.c
+> +++ b/hw/i386/pc_piix.c
+> @@ -697,7 +697,7 @@ static void pc_i440fx_1_3_machine_options(MachineClas=
+s *m)
+>          {
+>              .driver   =3D "usb-tablet",
+>              .property =3D "usb_version",
+> -            .value    =3D stringify(1),
+> +            .value    =3D "1",
+>          },{
+>              .driver   =3D "virtio-net-pci",
+>              .property =3D "ctrl_mac_addr",
+> @@ -741,11 +741,11 @@ static void pc_i440fx_1_2_machine_options(MachineCl=
+ass *m)
+>          },{
+>              .driver   =3D "qxl",
+>              .property =3D "revision",
+> -            .value    =3D stringify(3),
+> +            .value    =3D "3",
+>          },{
+>              .driver   =3D "qxl-vga",
+>              .property =3D "revision",
+> -            .value    =3D stringify(3),
+> +            .value    =3D "3",
+>          },{
+>              .driver   =3D "VGA",
+>              .property =3D "mmio",
+> @@ -777,19 +777,19 @@ static void pc_i440fx_1_1_machine_options(MachineCl=
+ass *m)
+>          },{
+>              .driver   =3D "VGA",
+>              .property =3D "vgamem_mb",
+> -            .value    =3D stringify(8),
+> +            .value    =3D "8",
+>          },{
+>              .driver   =3D "vmware-svga",
+>              .property =3D "vgamem_mb",
+> -            .value    =3D stringify(8),
+> +            .value    =3D "8",
+>          },{
+>              .driver   =3D "qxl-vga",
+>              .property =3D "vgamem_mb",
+> -            .value    =3D stringify(8),
+> +            .value    =3D "8",
+>          },{
+>              .driver   =3D "qxl",
+>              .property =3D "vgamem_mb",
+> -            .value    =3D stringify(8),
+> +            .value    =3D "8",
+>          },{
+>              .driver   =3D "virtio-blk-pci",
+>              .property =3D "config-wce",
+> @@ -876,11 +876,11 @@ static void pc_i440fx_0_14_machine_options(MachineC=
+lass *m)
+>          },{
+>              .driver   =3D "qxl",
+>              .property =3D "revision",
+> -            .value    =3D stringify(2),
+> +            .value    =3D "2",
+>          },{
+>              .driver   =3D "qxl-vga",
+>              .property =3D "revision",
+> -            .value    =3D stringify(2),
+> +            .value    =3D "2",
+>          },
+>      };
+> =20
+> @@ -904,19 +904,19 @@ static void pc_i440fx_0_13_machine_options(MachineC=
+lass *m)
+>          },{
+>              .driver   =3D "AC97",
+>              .property =3D "use_broken_id",
+> -            .value    =3D stringify(1),
+> +            .value    =3D "1",
+>          },{
+>              .driver   =3D "virtio-9p-pci",
+>              .property =3D "vectors",
+> -            .value    =3D stringify(0),
+> +            .value    =3D "0",
+>          },{
+>              .driver   =3D "VGA",
+>              .property =3D "rombar",
+> -            .value    =3D stringify(0),
+> +            .value    =3D "0",
+>          },{
+>              .driver   =3D "vmware-svga",
+>              .property =3D "rombar",
+> -            .value    =3D stringify(0),
+> +            .value    =3D "0",
+>          },
+>      };
+> =20
+> @@ -936,11 +936,11 @@ static void pc_i440fx_0_12_machine_options(MachineC=
+lass *m)
+>          {
+>              .driver   =3D "virtio-serial-pci",
+>              .property =3D "max_ports",
+> -            .value    =3D stringify(1),
+> +            .value    =3D "1",
+>          },{
+>              .driver   =3D "virtio-serial-pci",
+>              .property =3D "vectors",
+> -            .value    =3D stringify(0),
+> +            .value    =3D "0",
+>          },{
+>              .driver   =3D "usb-mouse",
+>              .property =3D "serial",
+> diff --git a/hw/ppc/spapr.c b/hw/ppc/spapr.c
+> index bff42f0adb..d7d87b0ae8 100644
+> --- a/hw/ppc/spapr.c
+> +++ b/hw/ppc/spapr.c
+> @@ -4264,7 +4264,7 @@ static void spapr_machine_2_6_class_options(Machine=
+Class *mc)
+>          {
+>              .driver   =3D TYPE_SPAPR_PCI_HOST_BRIDGE,
+>              .property =3D "ddw",
+> -            .value    =3D stringify(off),
+> +            .value    =3D "off",
+>          },
+>      };
+> =20
+
+--=20
+David Gibson			| I'll have my music baroque, and my code
+david AT gibson.dropbear.id.au	| minimalist, thank you.  NOT _the_ _other_
+				| _way_ _around_!
+http://www.ozlabs.org/~dgibson
+
+--ik0NlRzMGhMnxrMX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEdfRlhq5hpmzETofcbDjKyiDZs5IFAlwz6fcACgkQbDjKyiDZ
+s5JihA/+MMEu2dLoAvJEtlAd7YcOMqsA/ZxiiILBfqMC8PMEzRHvkCZvnZyS0e3h
+PWPUZBwOYqBJnF8XnTn2oinl2L59vKBZgxAMhwEVh+VIlHrVtnlV/H/o+E9RXvG0
+6O6KboBBGuedUi2+LgIIA+MOdELJOQclNXUm1BbR3awX7R2mQZ0vPN/KrV31U6Fc
+HSZSpKJIsXDJ0LWuxXCJSyfxJnPS9hNNMqnouLjZp1GZr8vavrDrddVHTUKqfWnJ
+3FdDMtkfhAQstNTakfIf8g3nWxtrEfWqg3dU1uNQ299ZJqF7MpVFcaN6LX+jdrxU
+n1Y/C7OY4FVRe9xN8urVKG/r/T2afuaGYb0fimIVD+xbvznrAT23PN3wg/T+vZUt
+yXH8cNDsfStTChSe28YqmybhMgDspQJq3wo/M2ZYg2khF8z+BiczdMGrDygfqfE9
+9cu8Yzlv39BnVeDEcgXS2fILXlmBz7grv7r5l0FlbZVcZ+zZR5CQa/HvxsTkzyGq
+//cJMtuXQkpGjK22sA7OOAqOfdywJFQie1P1z07LWhDVSfkAMCAmGUQfaXC7+RlM
+vAo7hJ9gKsDN7D7gufr/9+WdNskz6tpCMxvyC1N4EoT2AItbhcU2p8ivv1PV7Yj8
+NI3nI1vWIRCcDWY2uQLu8FirGiA/gzDB6j21eMoxxWnFGkkqKhE=
+=ibsj
+-----END PGP SIGNATURE-----
+
+--ik0NlRzMGhMnxrMX--
+
+
+--===============3575803063838041121==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3575803063838041121==--
