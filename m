@@ -1,27 +1,20 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH v7 16/18] xen: automatically create
- XenBlockDevice-s
-Date: Tue, 8 Jan 2019 14:20:02 +0000
-Message-ID: <3d36565f9e7646d08f9b02bf5b5474d7__20141.3587703884$1546957148$gmane$org@AMSPEX02CL03.citrite.net>
-References: <20181220171439.11159-1-paul.durrant@citrix.com>
- <20181220171439.11159-17-paul.durrant@citrix.com>
- <20190104163124.GE1508@perard.uk.xensource.com>
- <da727b0b8a9a4f9baa47a660298a9cba@AMSPEX02CL03.citrite.net>
- <20190108125321.GD11492@linux.fritz.box>
- <904d305f8c0f4aac8e60fb7ea14ebd41@AMSPEX02CL03.citrite.net>
- <20190108132823.GF1508@perard.uk.xensource.com>
- <cc64da25a6a3418e8d36c6975fe2df45@AMSPEX02CL03.citrite.net>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Xen (both x86 and Arm) Community Call: Jan 9 -
+ 16:00 - 17:00 UTC - Call for Agenda Items
+Date: Tue, 8 Jan 2019 14:34:37 +0000
+Message-ID: <62249D9F-468C-4DE8-98A3-428F146A2DC7@xenproject.org>
+References: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============9101977117524633394=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=vjXc=PQ=citrix.com=prvs=904727a53=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1ggsEt-0003P0-Uf
- for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 14:20:19 +0000
-In-Reply-To: <cc64da25a6a3418e8d36c6975fe2df45@AMSPEX02CL03.citrite.net>
-Content-Language: en-US
+ <SRS0=XFSl=PQ=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1ggsSp-0004Fe-6d
+ for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 14:34:43 +0000
+Received: by mail-wr1-x42e.google.com with SMTP id l9so4221557wrt.13
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Jan 2019 06:34:41 -0800 (PST)
+In-Reply-To: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,91 +23,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <Paul.Durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>
-Cc: 'Kevin Wolf' <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, "qemu-block@nongnu.org" <qemu-block@nongnu.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, Max Reitz <mreitz@redhat.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: xen-devel <xen-devel@lists.xenproject.org>, "committers@xenproject.org" <committers@xenproject.org>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
+ John" <john.ji@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Matt Spencer <Matt.Spencer@arm.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Juergen Gross <jgross@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBYZW4tZGV2ZWwgW21haWx0bzp4
-ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZ10gT24gQmVoYWxmDQo+IE9mIFBh
-dWwgRHVycmFudA0KPiBTZW50OiAwOCBKYW51YXJ5IDIwMTkgMTQ6MTENCj4gVG86IEFudGhvbnkg
-UGVyYXJkIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPg0KPiBDYzogJ0tldmluIFdvbGYnIDxr
-d29sZkByZWRoYXQuY29tPjsgU3RlZmFubyBTdGFiZWxsaW5pDQo+IDxzc3RhYmVsbGluaUBrZXJu
-ZWwub3JnPjsgcWVtdS1ibG9ja0Bub25nbnUub3JnOyBxZW11LWRldmVsQG5vbmdudS5vcmc7DQo+
-IE1heCBSZWl0eiA8bXJlaXR6QHJlZGhhdC5jb20+OyB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcNCj4gU3ViamVjdDogUmU6IFtYZW4tZGV2ZWxdIFtQQVRDSCB2NyAxNi8xOF0geGVuOiBh
-dXRvbWF0aWNhbGx5IGNyZWF0ZQ0KPiBYZW5CbG9ja0RldmljZS1zDQo+IA0KPiA+IC0tLS0tT3Jp
-Z2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogQW50aG9ueSBQRVJBUkQgW21haWx0bzphbnRo
-b255LnBlcmFyZEBjaXRyaXguY29tXQ0KPiA+IFNlbnQ6IDA4IEphbnVhcnkgMjAxOSAxMzoyOA0K
-PiA+IFRvOiBQYXVsIER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPg0KPiA+IENjOiAn
-S2V2aW4gV29sZicgPGt3b2xmQHJlZGhhdC5jb20+OyBxZW11LWRldmVsQG5vbmdudS5vcmc7IHFl
-bXUtDQo+ID4gYmxvY2tAbm9uZ251Lm9yZzsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-OyBNYXggUmVpdHoNCj4gPiA8bXJlaXR6QHJlZGhhdC5jb20+OyBTdGVmYW5vIFN0YWJlbGxpbmkg
-PHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+DQo+ID4gU3ViamVjdDogUmU6IFtQQVRDSCB2NyAxNi8x
-OF0geGVuOiBhdXRvbWF0aWNhbGx5IGNyZWF0ZSBYZW5CbG9ja0RldmljZS1zDQo+ID4NCj4gPiBP
-biBUdWUsIEphbiAwOCwgMjAxOSBhdCAwMTowNzo0OVBNICswMDAwLCBQYXVsIER1cnJhbnQgd3Jv
-dGU6DQo+ID4gPiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gPiA+IEZyb206IEtl
-dmluIFdvbGYgW21haWx0bzprd29sZkByZWRoYXQuY29tXQ0KPiA+ID4gPiBTZW50OiAwOCBKYW51
-YXJ5IDIwMTkgMTI6NTMNCj4gPiA+ID4gVG86IFBhdWwgRHVycmFudCA8UGF1bC5EdXJyYW50QGNp
-dHJpeC5jb20+DQo+ID4gPiA+IENjOiBBbnRob255IFBlcmFyZCA8YW50aG9ueS5wZXJhcmRAY2l0
-cml4LmNvbT47IHFlbXUtDQo+IGRldmVsQG5vbmdudS5vcmc7DQo+ID4gPiA+IHFlbXUtYmxvY2tA
-bm9uZ251Lm9yZzsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnOyBNYXggUmVpdHoNCj4g
-PiA+ID4gPG1yZWl0ekByZWRoYXQuY29tPjsgU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGlu
-aUBrZXJuZWwub3JnPg0KPiA+ID4gPiBTdWJqZWN0OiBSZTogW1BBVENIIHY3IDE2LzE4XSB4ZW46
-IGF1dG9tYXRpY2FsbHkgY3JlYXRlDQo+ID4gWGVuQmxvY2tEZXZpY2Utcw0KPiA+ID4gPg0KPiA+
-ID4gPiBBbSAwNC4wMS4yMDE5IHVtIDE3OjQwIGhhdCBQYXVsIER1cnJhbnQgZ2VzY2hyaWViZW46
-DQo+ID4gPiA+ID4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+ID4gPiA+ID4gRnJv
-bTogQW50aG9ueSBQRVJBUkQgW21haWx0bzphbnRob255LnBlcmFyZEBjaXRyaXguY29tXQ0KPiA+
-ID4gPiA+ID4gU2VudDogMDQgSmFudWFyeSAyMDE5IDE2OjMxDQo+ID4gPiA+ID4gPiBUbzogUGF1
-bCBEdXJyYW50IDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4NCj4gPiA+ID4gPiA+IENjOiBxZW11
-LWRldmVsQG5vbmdudS5vcmc7IHFlbXUtYmxvY2tAbm9uZ251Lm9yZzsgeGVuLQ0KPiA+ID4gPiA+
-ID4gZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc7IEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5j
-b20+OyBNYXgNCj4gPiBSZWl0eg0KPiA+ID4gPiA+ID4gPG1yZWl0ekByZWRoYXQuY29tPjsgU3Rl
-ZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPg0KPiA+ID4gPiA+ID4gU3Vi
-amVjdDogUmU6IFtQQVRDSCB2NyAxNi8xOF0geGVuOiBhdXRvbWF0aWNhbGx5IGNyZWF0ZQ0KPiA+
-ID4gPiBYZW5CbG9ja0RldmljZS1zDQo+ID4gPiA+ID4gPg0KPiA+ID4gPiA+ID4gQWxtb3N0IGRv
-bmUsIHRoZXJlIGlzIG9uZSB0aGluZyBsZWZ0IHdoaWNoIEkgYmVsaWV2ZSBpcyBhbg0KPiBpc3N1
-ZS4NCj4gPiA+ID4gPiA+IFdoZW5ldmVyIEkgYXR0YWNoIGEgcmF3IGZpbGUgdG8gUUVNVSwgaXQg
-cHJpbnQ6DQo+ID4gPiA+ID4gPiAgICAgcWVtdS1zeXN0ZW0taTM4Njogd2FybmluZzogT3Blbmlu
-ZyBhIGJsb2NrIGRldmljZSBhcyBhIGZpbGUNCj4gPiB1c2luZw0KPiA+ID4gPiB0aGUNCj4gPiA+
-ID4gPiA+ICdmaWxlJyBkcml2ZXIgaXMgZGVwcmVjYXRlZA0KPiA+ID4gPiA+DQo+ID4gPiA+ID4g
-T2gsIEknZCBub3Qgbm90aWNlZCB0aGF0Li4uIGJ1dCB0aGVuIEkgb25seSB1c2UgcmF3IGZpbGVz
-DQo+ID4gb2NjYXNpb25hbGx5Lg0KPiA+ID4gPg0KPiA+ID4gPiBTdHJpY3RseSBzcGVha2luZywg
-dGhpcyBpcyBub3QgYWJvdXQgcmF3IChyZWd1bGFyKSBmaWxlcywgYnV0IHJhdw0KPiA+IGJsb2Nr
-DQo+ID4gPiA+IGRldmljZXMuICdmaWxlJyBpcyBmaW5lIGZvciBhY3R1YWwgcmVndWxhciBmaWxl
-cywgYnV0IHRoZSBwcm90b2NvbA0KPiA+ID4gPiBkcml2ZXIgZm9yIGJsb2NrIGRldmljZXMgaXMg
-J2hvc3RfZGV2aWNlJy4NCj4gPiA+ID4NCj4gPiA+ID4gPiA+IHJhdyBmaWxlcyBzaG91bGQgdXNl
-IHRoZSAicmF3IiBkcml2ZXIsIHNvIHdlIGFyZW4ndCBkb25lIHlldC4NCj4gPiA+ID4gPg0KPiA+
-ID4gPiA+IE9rLiBIYXZpbmcgYSBzdHJpY3RseSAyLWxheWVyIHN0YWNrIGFjdHVhbGx5IG1ha2Vz
-IHRoaW5ncyBzaW1wbGVyDQo+ID4gYW55d2F5DQo+ID4gPiA+IDotKQ0KPiA+ID4gPg0KPiA+ID4g
-PiBVc2luZyAncmF3JyB0aGVyZSB3aWxsIG1ha2UgdGhlIGJsb2NrIGxheWVyIGF1dG8tZGV0ZWN0
-IHRoZSByaWdodA0KPiA+ID4gPiBwcm90b2NvbCBsYXllciwgc28gdGhpcyB3b3Jrcy4gSWYgeW91
-IHdhbnQgdG8gYXZvaWQgdGhlIHNlY29uZA0KPiBsYXllciwNCj4gPiA+ID4geW91J2QgaGF2ZSB0
-byBmaWd1cmUgb3V0IG1hbnVhbGx5IHdoZXRoZXIgdG8gdXNlICdmaWxlJyBvcg0KPiA+ID4gPiAn
-aG9zdF9kZXZpY2UnLg0KPiA+ID4NCj4gPiA+IFRoYW5rcyBmb3IgdGhlIGV4cGxhbmF0aW9uLiBJ
-J2xsIGdpdmUgaXQgYSBzcGluIHVzaW5nIGEgZGV2aWNlLi4uIEkndmUNCj4gPiBwb3N0ZWQgdjgg
-YnV0LCBnaXZlbiB3aGF0IHlvdSBzYXksIEknbSBzdGlsbCBub3Qgc3VyZSBJIGhhdmUgaXQgcmln
-aHQuDQo+ID4NCj4gPiBJbmRlZWQsIGluIHY4LCBldmVuIHdpdGggdGhlIGV4dHJhICdyYXcnIGxh
-eWVyLCB0aGUgd2FybmluZyBpcyBzdGlsbA0KPiA+IHRoZXJlLiBJIHdhcyB0cnlpbmcgdG8gdW5k
-ZXJzdGFuZCB3aHksIGFuZCBJIG9ubHkgZm91bmQgb3V0IHRvZGF5IHRoYXQNCj4gPiB3ZSB3b3Vs
-ZCBuZWVkIHRvIHVzZSB0aGUgJ2hvc3RfZGV2aWNlJyBkcml2ZXIgYXMgZXhwbGFpbiBieSBLZXZp
-bi4NCj4gPg0KPiA+DQo+ID4gQlRXIFBhdWwsIHdlIGNhbiBzaW1wbGlmeSB0aGUgY29kZSB0aGF0
-IG1hbmFnZSBsYXllcnMsIGJ5IG5vdCBtYW5hZ2luZw0KPiA+IHRoZW0uDQo+ID4gSW5zdGVhZCBv
-ZiAoaW4gSlNPTiAvIFFNUCB0ZXJtKToNCj4gPiAgICAgeyAnZHJpdmVyJzogJ2ZpbGUnLCAnZmls
-ZW5hbWUnOiAnL2ZpbGUnLCAnbm9kZS1uYW1lJzogJ25vZGUtZmlsZScgfQ0KPiA+ICAgICB7ICdk
-cml2ZXInOiAncWNvdzInLCAnZmlsZSc6ICdub2RlLWZpbGUnLCAnbm9kZS1uYW1lJzogJ25vZGUt
-cWNvdzInDQo+IH0NCj4gPiB3ZSBjYW4gaGF2ZToNCj4gPiAgICAgeyAnZHJpdmVyJzogJ3Fjb3cy
-JywgJ25vZGUtbmFtZSc6ICdub2RlLXFjb3cyJywNCj4gPiAgICAgICAnZmlsZSc6IHsgJ2RyaXZl
-cic6ICdmaWxlJywgJ2ZpbGVuYW1lJzogJy9maWxlJyB9IH0NCj4gPg0KPiANCj4gSSBraW5kIG9m
-IGxpa2UgdGhlIGNsZWFuIHNlcGFyYXRpb24gdGhvdWdoLi4uIEZyb20gd2hhdCBLZXZpbiBzYWlk
-LCBpdA0KPiBzb3VuZHMgbGlrZSB0aGUgbG93ZXN0IGxheWVyIHNob3VsZCB1c2UgJ3JhdycgaW5z
-dGVhZCBvZiAnZmlsZScgdG8gRFRSVCwNCj4gYW5kIHRoZW4gd2Ugc2hvdWxkIGJlIGJhY2sgdG8g
-b25seSBuZWVkaW5nIHRoZSBzaW5nbGUgbGF5ZXIgaW4gdGhhdCBjYXNlLg0KPiBJJ2xsIHJldmVy
-dCBiYWNrIHRvIHY3IGFuZCBnaXZlIGl0IGEgdHJ5Lg0KDQpObywgdGhhdCBkb2Vzbid0IHdvcmsg
-YXMgd2UgY2FuJ3QgZGVhbCB3aXRoIGxvY2tpbmcgY29ycmVjdGx5IHVubGVzcyB3ZSB1c2UgZHJp
-dmVyPWZpbGUgc28gbWF5YmUgSSBtaXN1bmRlcnN0b29kLg0KDQogIFBhdWwNCg0KPiANCj4gICBQ
-YXVsDQo+IA0KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Xw0KPiBYZW4tZGV2ZWwgbWFpbGluZyBsaXN0DQo+IFhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZw0KPiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVsDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
-ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
-czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============9101977117524633394==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2"
+
+
+--Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Hi all,
+
+I noticed that I hadn't updated all the times in the meeting invite =
+block.
+
+>=20
+> =3D=3D Dial-in Information =3D=3D
+>=20
+>   ## Future Community Call schedule
+>   Jan 9, Feb 13, Mar 12
+>=20
+>   ## Meeting time
+>   15:00 - 16:00 UTC
+
+This is wrong and should read 16:00 - 17:00
+
+>    8:00 -  9:00 EDT (San Francisco)
+>   11:00 - 12:00 EDT (New York)
+>   16:00 - 17:00 BST (London)
+>   17:00 - 18:00 CEST (Berlin)
+>   00:00 - 01:00 CST (Beijing)
+>   Further International meeting times:=20
+>   =
+https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&mon=
+th=3D1&day=3D7&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D13=
+6&p5=3D37&p6=3D33 =
+<https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&mo=
+nth=3D1&day=3D7&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D1=
+36&p5=3D37&p6=3D33>
+
+Regards
+Lars
+
+
+--Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><div =
+class=3D"">Hi all,</div><div class=3D""><br class=3D""></div><div =
+class=3D"">I noticed that I hadn't updated all the times in the meeting =
+invite block.</div><br class=3D""><div><blockquote type=3D"cite" =
+class=3D""><div class=3D""><div class=3D""><br class=3D"">=3D=3D Dial-in =
+Information =3D=3D<br class=3D""><br class=3D""> &nbsp;&nbsp;## Future =
+Community Call schedule<br class=3D""> &nbsp;&nbsp;Jan 9, Feb 13, Mar =
+12<br class=3D""><br class=3D""> &nbsp;&nbsp;## Meeting time<br =
+class=3D""> &nbsp;&nbsp;15:00 - 16:00 UTC<br =
+class=3D""></div></div></blockquote><div><br class=3D""></div>This is =
+wrong and should read 16:00 - 17:00</div><div><br class=3D""><blockquote =
+type=3D"cite" class=3D""><div class=3D""><div class=3D""> =
+&nbsp;&nbsp;&nbsp;8:00 - &nbsp;9:00 EDT (San Francisco)<br class=3D""> =
+&nbsp;&nbsp;11:00 - 12:00 EDT (New York)<br class=3D""> =
+&nbsp;&nbsp;16:00 - 17:00 BST (London)<br class=3D""> &nbsp;&nbsp;17:00 =
+- 18:00 CEST (Berlin)<br class=3D""> &nbsp;&nbsp;00:00 - 01:00 CST =
+(Beijing)<br class=3D""> &nbsp;&nbsp;Further International meeting =
+times: <br class=3D""> &nbsp;&nbsp;<a =
+href=3D"https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D=
+2019&amp;month=3D1&amp;day=3D7&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&amp;p=
+1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33" =
+class=3D"">https://www.timeanddate.com/worldclock/meetingdetails.html?year=
+=3D2019&amp;month=3D1&amp;day=3D7&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&am=
+p;p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33</=
+a><br class=3D""></div></div></blockquote><br =
+class=3D""></div><div>Regards</div><div>Lars</div><br =
+class=3D""></body></html>=
+
+--Apple-Mail=_CE75EA1D-512D-4B84-8512-60A50E0C60A2--
+
+
+--===============9101977117524633394==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9101977117524633394==--
