@@ -1,16 +1,22 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 131796: regressions - FAIL
-Date: Tue, 08 Jan 2019 12:28:02 +0000
-Message-ID: <osstest-131796-mainreport@xen.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Xen (both x86 and Arm) Community Call: Jan 9 -
+ 16:00 - 17:00 UTC - Call for Agenda Items
+Date: Tue, 8 Jan 2019 12:29:05 +0000
+Message-ID: <7B0D908C-5214-428D-8318-F6E879D53849@gmail.com>
+References: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
+ <b0d70001-d8b4-f17f-63a6-8e992c87e32a@suse.com>
+ <alpine.DEB.2.10.1901071030060.800@sstabellini-ThinkPad-X260>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============8079480560519179516=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=JK1d=PQ=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1ggqUI-0002bh-GW
- for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 12:28:06 +0000
+ <SRS0=XFSl=PQ=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1ggqVM-0002fw-EA
+ for xen-devel@lists.xenproject.org; Tue, 08 Jan 2019 12:29:12 +0000
+Received: by mail-wr1-x429.google.com with SMTP id t27so3857333wra.6
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Jan 2019 04:29:10 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.10.1901071030060.800@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,99 +25,318 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
+ John" <john.ji@intel.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Matt Spencer <Matt.Spencer@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMTc5NiBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzE3OTYvCgpSZWdyZXNzaW9ucyA6LSgKClRlc3RzIHdo
-aWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVzdHMgd2hp
-Y2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgIDYgeGVu
-LWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQogYnVpbGQtaTM4Ni14
-c20gICAgICAgICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2
-cy4gMTI5NDc1CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAg
-ICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMjk0NzUKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
-ICAgICAgIDYgeGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEyOTQ3NQoK
-VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIGJ1aWxk
-LWkzODYtbGlidmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
-bG9ja2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgMSBidWls
-ZC1jaGVjaygxKSAgICAgICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LW92bWYtYW1kNjQgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgIGJsb2NrZWQgbi9h
-CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
-ICAgICAgYmxvY2tlZCAgbi9hCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogb3ZtZiAg
-ICAgICAgICAgICAgICAgYTUzYTg4OGRlOGY1ZmE4ZGJmNzVhMzgxZTI4ZjI1YTU0OTc1NzJmMQpi
-YXNlbGluZSB2ZXJzaW9uOgogb3ZtZiAgICAgICAgICAgICAgICAgNWFlMzE4NGQ4YzU5ZjdiYmI4
-NGJhZDQ4MmRmNmI4MDIwYmE1ODE4OAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTI5NDc1ICAyMDE4
-LTExLTA1IDIxOjEzOjExIFogICA2MyBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEyOTUyNiAg
-MjAxOC0xMS0wNiAyMDo0OToyNiBaICAgNjIgZGF5cyAgMjUyIGF0dGVtcHRzClRlc3Rpbmcgc2Ft
-ZSBzaW5jZSAgIDEzMTc5NiAgMjAxOS0wMS0wOCAwODowNjoyNiBaICAgIDAgZGF5cyAgICAxIGF0
-dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFj
-aGluIEd1cHRhIDxhY2hpbi5ndXB0YUBhcm0uY29tPgogIEFsZXggSmFtZXMgPHRoZXJhY2VybWFz
-dGVyQGdtYWlsLmNvbT4KICBBcmQgQmllc2hldXZlbCA8YXJkLmJpZXNoZXV2ZWxAbGluYXJvLm9y
-Zz4KICBBc2hpc2ggU2luZ2hhbCA8YXNoaXNoc2luZ2hhQG52aWRpYS5jb20+CiAgQm9iIEZlbmcg
-PGJvYi5jLmZlbmdAaW50ZWwuY29tPgogIGJvYi5jLmZlbmdAaW50ZWwuY29tIDxib2IuYy5mZW5n
-QGludGVsLmNvbT4KICBCb2JDRiA8Ym9iLmMuZmVuZ0BpbnRlbC5jb20+CiAgQ2hhc2VsIENoaXUg
-PGNoYXNlbC5jaGl1QGludGVsLmNvbT4KICBDaGFzZWwsIENoaXUgPGNoYXNlbC5jaGl1QGludGVs
-LmNvbT4KICBDaGVuIEEgQ2hlbiA8Y2hlbi5hLmNoZW5AaW50ZWwuY29tPgogIENodSwgTWFnZ2ll
-IDxtYWdnaWUuY2h1QGludGVsLmNvbT4KICBEYW5kYW4gQmkgPGRhbmRhbi5iaUBpbnRlbC5jb20+
-CiAgRGF2aWQgV2VpIDxkYXZpZC53ZWlAaW50ZWwuY29tPgogIERlcmVrIExpbiA8ZGVyZWsubGlu
-MkBocGUuY29tPgogIEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNvbT4KICBGZW5nLCBCb2Ig
-QyA8Ym9iLmMuZmVuZ0BpbnRlbC5jb20+CiAgRnUgU2l5dWFuIDxzaXl1YW4uZnVAaW50ZWwuY29t
-PgogIEdhcnkgTGluIDxnbGluQHN1c2UuY29tPgogIEhhbyBXdSA8aGFvLmEud3VAaW50ZWwuY29t
-PgogIEphYmVuIENhcnNleSA8amFiZW4uY2Fyc2V5QGludGVsLmNvbT4KICBKYWdhZGVlc2ggVWpq
-YSA8amFnYWRlZXNoLnVqamFAYXJtLmNvbT4KICBKZWZmIEJyYXNlbiA8amJyYXNlbkBudmlkaWEu
-Y29tPgogIEppYW4gSiBXYW5nIDxqaWFuLmoud2FuZ0BpbnRlbC5jb20+CiAgSmlheGluIFd1IDxK
-aWF4aW4ud3VAaW50ZWwuY29tPgogIEppZXdlbiBZYW8gPGppZXdlbi55YW9AaW50ZWwuY29tPgog
-IExhc3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CiAgTGVpZiBMaW5kaG9sbSA8bGVpZi5s
-aW5kaG9sbUBsaW5hcm8ub3JnPgogIExpbWluZyBHYW8gPGxpbWluZy5nYW9AaW50ZWwuY29tPgog
-IExpdSBZdSA8cGVkcm9hLmxpdUBvdXRsb29rLmNvbT4KICBNYWdnaWUgQ2h1IDxtYWdnaWUuY2h1
-QGludGVsLmNvbT4KICBNYXJjIFp5bmdpZXIgPG1hcmMuenluZ2llckBhcm0uY29tPgogIE1hcmNp
-biBXb2p0YXMgPG13QHNlbWloYWxmLmNvbT4KICBNaWtlIE1hc2xlbmtpbiA8bWlrZS5tYXNsZW5r
-aW5AZ21haWwuY29tPgogIE1pbmcgSHVhbmcgPG1pbmcuaHVhbmdAbGluYXJvLm9yZz4KICBQZWRy
-b2EgTGl1IDxwZWRyb2EubGl1QG91dGxvb2suY29tPgogIFJ1aXl1IE5pIDxydWl5dS5uaUBpbnRl
-bC5jb20+CiAgU2FtaSBNdWphd2FyIDxzYW1pLm11amF3YXJAYXJtLmNvbT4KICBzaGVuZ2xlaSA8
-c2hlbmdsZWkuemhhbmdAaW50ZWwuY29tPgogIFNoZW5nbGVpIFpoYW5nIDxzaGVuZ2xlaS56aGFu
-Z0BpbnRlbC5jb20+CiAgU2l5dWFuIEZ1IDxzaXl1YW4uZnVAaW50ZWwuY29tPgogIFN0YXIgWmVu
-ZyA8c3Rhci56ZW5nQGludGVsLmNvbT4KICBTdWdob3NoIEdhbnUgPHN1Z2hvc2guZ2FudUBhcm0u
-Y29tPgogIFN1bWl0IEdhcmcgPHN1bWl0LmdhcmdAbGluYXJvLm9yZz4KICBTdW4sIFphaWxpYW5n
-IDwvbz1JbnRlbC9vdT1FeGNoYW5nZSBBZG1pbmlzdHJhdGl2ZSBHcm91cCAoRllESUJPSEYyM1NQ
-RExUKS9jbj1SZWNpcGllbnRzL2NuPVN1biwgWmFpbGlhbmdmNWQ+CiAgVGhvbWFzIEFicmFoYW0g
-PHRob21hcy5hYnJhaGFtQGFybS5jb20+CiAgVGhvbWFzIFJ5ZG1hbiA8dGhvbWFzLmoucnlkbWFu
-QGludGVsLmNvbT4KICBUaW5nIFllIDx0aW5nLnllQGludGVsLmNvbT4KICBUb21hc3ogTWljaGFs
-ZWMgPHRtQHNlbWloYWxmLmNvbT4KICBWaWpheWVudGhpcmFuIFN1YnJhbWFuaWFtIDx2aWpheWVu
-dGhpcmFuLnN1YnJhbWFuaWFtQGFybS5jb20+CiAgVmxhZGltaXIgT2xvdnlhbm5pa292IDx2bGFk
-aW1pci5vbG92eWFubmlrb3ZAYnJvYWRjb20uY29tPgogIFdhbmcgQmluWCBBIDxiaW54LmEud2Fu
-Z0BpbnRlbC5jb20+CiAgV3UgSmlheGluIDxqaWF4aW4ud3VAaW50ZWwuY29tPgogIFllIFRpbmcg
-PHRpbmcueWVAaW50ZWwuY29tPgogIFlvbmdob25nIFpodSA8eW9uZ2hvbmcuemh1QGludGVsLmNv
-bT4KICB5dWNoZW5saW4gPHl1Y2hlbmxpbkBzeW5vbG9neS5jb20+CiAgWmFpbGlhbmcgU3VuIDx6
-YWlsaWFuZy5zdW5AaW50ZWwuY29tPgogIFpoYW5nLCBDaGFvIEIgPGNoYW8uYi56aGFuZ0BpbnRl
-bC5jb20+CiAgWmhhbywgWmhpcWlhbmdYIDx6aGlxaWFuZ3guemhhb0BpbnRlbC5jb20+CiAgWmhp
-anUuRmFuIDx6aGlqdXguZmFuQGludGVsLmNvbT4KICB6aGlqdWZhbiA8emhpanV4LmZhbkBpbnRl
-bC5jb20+CiAgWmhpcWlhbmdYIFpoYW8gPHpoaXFpYW5neC56aGFvQGludGVsLmNvbT4KICB6d2Vp
-NCA8ZGF2aWQud2VpQGludGVsLmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWkzODYt
-eHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogYnVpbGQtaTM4Ni1s
-aWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQg
-CiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1v
-dm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAK
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3Jn
-CmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBj
-b25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBv
-cnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMu
-eGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1h
-c3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1i
-bG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0
-CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFy
-eQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9uIGxvZzsgaXQgd291bGQgYmUgNTY3NyBsaW5l
-cyBsb25nLikKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============8079480560519179516==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_5B9935B5-2908-4779-95F3-5A364E80CE8F"
+
+
+--Apple-Mail=_5B9935B5-2908-4779-95F3-5A364E80CE8F
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Did anyone have any agenda items *NOT* related to 4.12?=20
+As an aside: I added the following to the agenda
+* 4.12 what headline features made it
+* Face 2 face to discuss a plan and implications for safety =
+certification (separate e-mail will follow today)
+
+Regards
+Lars
+
+> On 7 Jan 2019, at 18:33, Stefano Stabellini <sstabellini@kernel.org> =
+wrote:
+>=20
+> On Mon, 7 Jan 2019, Juergen Gross wrote:
+>> On 03/01/2019 15:28, Lars Kurth wrote:
+>>> Hi all,
+>>>=20
+>>> based on Stefano's and Julien's suggestion that it may make sense to =
+merge the x86 and arm calls, I am willing to try. It also makes sense =
+this time in particular because we are approaching freeze time.
+>>>=20
+>>>=20
+>>> As per request the meeting is 1 hour later than normal. Also, =
+because there were NO attendees from China on the last 3 calls. For =
+Chinese attendees: if you plan to attend, please confirm you are =
+attending and we can discuss moving the meeting to earlier.
+>>>=20
+>>> @Juergen, @Jan: we can discuss the timing of future meetings going =
+forward if 17:00-18:00 is a problem for you.
+>>>=20
+>>> Please propose topics by either editing the running agenda document =
+at =
+https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI=
+8I01I/edit# or by replying to the mail. Ideally by next Tuesday!
+>>=20
+>> I'd like to discuss status of the current pending patch series:
+>>=20
+>> Series                               Author                 Status
+>> Per-cpu tasklet                      Konrad Rzeszutek Wilk  ->4.13?
+>> Improvements to domain creation (v2) Andrew Cooper          ?
+>> Argo (inter-VM communication) (v3)   Christopher Clark      ?
+>> Core aware sched (RFC v1)            Dario Faggioli         ->4.13?
+>> Core aware sched credit2 (RFC v1)    Dario Faggioli         ->4.13?
+>> x86 instr emulator add AVX512 (v7)   Jan Beulich            finished?
+>> HVM guest CPU topology support (RFC) Chao Gao               ->4.13?
+>> Intel Trace virt. enabling (v1)      Luwei Kang             ->4.13?
+>> Linux stub domains (RFC v2)          Marek Marczykowski-G.  ->4.13?
+>> qemu deprivilege (v4)                George Dunlap          finished?
+>> Improve late microcode loading (v4)  Chao Gao               ?
+>> Fixes to #DB injection               Andrew Cooper          ->4.13?
+>> CPUID/MSR Xen/toolstack improvements Andrew Cooper          ->4.13?
+>> Improvements to domain_crash()       Andrew Cooper          ->4.13?
+>> Fix VGA logdirty with altp2m (v11)   Razvan Cojocaru        ?
+>> dom0less (v4)                        Stefano Stabellini     ?
+>=20
+> Dom0less is already in. "Dom0less device assignment" missed the window
+> by only a couple of days (I forgot to send it in time -- too bad.)
+>=20
+> I have another outstanding series for 4.12: "misc safety certification
+> fixes".
+>=20
+>=20
+>> Implement Set/Way operations (RFC)   Julien Grall           ?
+>=20
+> Also already committed
+>=20
+>=20
+>> TEE mediator support in XEN (v2)     Volodymyr Babchuk      ?
+
+
+--Apple-Mail=_5B9935B5-2908-4779-95F3-5A364E80CE8F
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Did =
+anyone have any agenda items *NOT* related to 4.12?&nbsp;<div =
+class=3D"">As an aside: I added the following to the agenda</div><div =
+class=3D"">* 4.12 what headline features made it</div><div =
+class=3D"">*&nbsp;Face 2 face to discuss a plan and implications for =
+safety certification (separate e-mail will follow today)</div><div =
+class=3D""><br class=3D""></div><div class=3D"">Regards</div><div =
+class=3D"">Lars<br class=3D""><div><br class=3D""><blockquote =
+type=3D"cite" class=3D""><div class=3D"">On 7 Jan 2019, at 18:33, =
+Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" =
+class=3D"">sstabellini@kernel.org</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On Mon, 7 Jan =
+2019, Juergen Gross wrote:</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">On 03/01/2019 15:28, Lars Kurth =
+wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">Hi all,<br =
+class=3D""><br class=3D"">based on Stefano's and Julien's suggestion =
+that it may make sense to merge the x86 and arm calls, I am willing to =
+try. It also makes sense this time in particular because we are =
+approaching freeze time.<br class=3D""><br class=3D""><br class=3D"">As =
+per request the meeting is 1 hour later than normal. Also, because there =
+were NO attendees from China on the last 3 calls. For Chinese attendees: =
+if you plan to attend, please confirm you are attending and we can =
+discuss moving the meeting to earlier.<br class=3D""><br =
+class=3D"">@Juergen, @Jan: we can discuss the timing of future meetings =
+going forward if 17:00-18:00 is a problem for you.<br class=3D""><br =
+class=3D"">Please propose topics by either editing the running agenda =
+document at <a =
+href=3D"https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y=
+4srAm4vI8I01I/edit#" =
+class=3D"">https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9A=
+p4Y4srAm4vI8I01I/edit#</a> or by replying to the mail. Ideally by next =
+Tuesday!<br class=3D""></blockquote><br class=3D"">I'd like to discuss =
+status of the current pending patch series:<br class=3D""><br =
+class=3D"">Series =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;Status<br class=3D"">Per-cpu tasklet =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Konrad Rzeszutek =
+Wilk &nbsp;-&gt;4.13?<br class=3D"">Improvements to domain creation (v2) =
+Andrew Cooper &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?<br =
+class=3D"">Argo (inter-VM communication) (v3) &nbsp;&nbsp;Christopher =
+Clark &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?<br class=3D"">Core aware sched =
+(RFC v1) =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dario =
+Faggioli &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;4.13?<br =
+class=3D"">Core aware sched credit2 (RFC v1) &nbsp;&nbsp;&nbsp;Dario =
+Faggioli &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;4.13?<br =
+class=3D"">x86 instr emulator add AVX512 (v7) &nbsp;&nbsp;Jan Beulich =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finished=
+?<br class=3D"">HVM guest CPU topology support (RFC) Chao Gao =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;-&gt;4.13?<br class=3D"">Intel Trace virt. enabling (v1) =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Luwei Kang =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&=
+gt;4.13?<br class=3D"">Linux stub domains (RFC v2) =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marek =
+Marczykowski-G. &nbsp;-&gt;4.13?<br class=3D"">qemu deprivilege (v4) =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;George Dunlap =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;finished?<br =
+class=3D"">Improve late microcode loading (v4) &nbsp;Chao Gao =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;?<br class=3D"">Fixes to #DB injection =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;Andrew Cooper =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;4.13?<br =
+class=3D"">CPUID/MSR Xen/toolstack improvements Andrew Cooper =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;4.13?<br =
+class=3D"">Improvements to domain_crash() =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andrew Cooper =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;4.13?<br =
+class=3D"">Fix VGA logdirty with altp2m (v11) &nbsp;&nbsp;Razvan =
+Cojocaru &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?<br =
+class=3D"">dom0less (v4) =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stefano =
+Stabellini &nbsp;&nbsp;&nbsp;&nbsp;?<br class=3D""></blockquote><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">Dom0less is =
+already in. "Dom0less device assignment" missed the window</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">by only a =
+couple of days (I forgot to send it in time -- too bad.)</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">I have =
+another outstanding series for 4.12: "misc safety =
+certification</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" =
+class=3D"">fixes".</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">Implement Set/Way operations (RFC) =
+&nbsp;&nbsp;Julien Grall =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?<br =
+class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">Also already committed</span><br style=3D"caret-color: rgb(0, =
+0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">TEE mediator support in XEN (v2) =
+&nbsp;&nbsp;&nbsp;&nbsp;Volodymyr Babchuk =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?</blockquote></div></blockquote></div><br =
+class=3D""></div></body></html>=
+
+--Apple-Mail=_5B9935B5-2908-4779-95F3-5A364E80CE8F--
+
+
+--===============8079480560519179516==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8079480560519179516==--
