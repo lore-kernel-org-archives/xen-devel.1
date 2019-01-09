@@ -1,21 +1,22 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: [PATCH v9 16/18] xen: automatically create
- XenBlockDevice-s
-Date: Wed, 9 Jan 2019 12:09:16 +0000
-Message-ID: <20190109120916.GI1508__4156.15586466647$1547035699$gmane$org@perard.uk.xensource.com>
-References: <20190108144903.8249-1-paul.durrant@citrix.com>
- <20190108144903.8249-17-paul.durrant@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [RFC PATCH v2 11/17] xenconsoled: add support for
+ consoles using 'state' xenstore entry
+Date: Wed, 9 Jan 2019 13:21:12 +0100
+Message-ID: <20190109122112.GF29536@mail-itl>
+References: <cover.f20f4d9289206c83fc15e632ed8ec76ac4e8c8cd.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <ba81fc5252f1f05771995920220daf1e4348bc6e.1533608042.git-series.marmarek@invisiblethingslab.com>
+ <23515.13859.675144.207575@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3347592142718179983=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=zjQe=PR=citrix.com=prvs=905b6060a=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1ghCfg-0002RC-Di
- for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 12:09:20 +0000
-Content-Disposition: inline
-In-Reply-To: <20190108144903.8249-17-paul.durrant@citrix.com>
+ <SRS0=qfCy=PR=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1ghCrI-0003pg-O4
+ for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 12:21:20 +0000
+In-Reply-To: <23515.13859.675144.207575@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,53 +25,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, xen-devel@lists.xenproject.org
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBKYW4gMDgsIDIwMTkgYXQgMDI6NDk6MDFQTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+IFRoaXMgcGF0Y2ggYWRkcyBjcmVhdGUgYW5kIGRlc3Ryb3kgZnVuY3Rpb24gZm9yIFhl
-bkJsb2NrRGV2aWNlLXMgc28gdGhhdAo+IHRoZXkgY2FuIGJlIGNyZWF0ZWQgYXV0b21hdGljYWxs
-eSB3aGVuIHRoZSBYZW4gdG9vbHN0YWNrIGluc3RhbnRpYXRlcyBhIG5ldwo+IFBWIGJhY2tlbmQg
-dmlhIHhlbnN0b3JlLiBXaGVuIHRoZSBYZW5CbG9ja0RldmljZSBpcyBjcmVhdGVkIHRoaXMgd2F5
-IGl0IGlzCj4gYWxzbyBuZWNlc3NhcnkgdG8gY3JlYXRlIGEgJ2RyaXZlJyB3aGljaCBtYXRjaGVz
-IHRoZSBjb25maWd1cmF0aW9uIHRoYXQgdGhlCj4gWGVuIHRvb2xzdGFjayBoYXMgd3JpdHRlbiBp
-bnRvIHhlbnN0b3JlLiBUaGlzIGlzIGRvbmUgYnkgZm9ybXVsYXRpbmcgdGhlCj4gcGFyYW1ldGVy
-cyBuZWNlc3NhcnkgZm9yIGVhY2ggJ2Jsb2NrZGV2JyBsYXllciBvZiB0aGUgZHJpdmUgYW5kIHRo
-ZW4gdXNpbmcKPiBxbXBfYmxvY2tkZXZfYWRkKCkgdG8gY3JlYXRlIHRoZSBsYXllcnMuIEFsc28s
-IGZvciBjb21wYXRpYmlsaXR5IHdpdGggdGhlCj4gbGVnYWN5ICd4ZW5fZGlzaycgaW1wbGVtZW50
-YXRpb24sIGFuIGlvdGhyZWFkIGlzIGF1dG9tYXRpY2FsbHkgY3JlYXRlZCBmb3IKPiB0aGUgbmV3
-IFhlbkJsb2NrRGV2aWNlLiBUaGlzLCBsaWtlIHRoZSBkcml2ZXIgbGF5ZXJzLCB3aWxsIGJlIGRl
-c3Ryb3llZAo+IGFmdGVyIHRoZSBYZW5CbG9ja0RldmljZSBpcyB1bnJlYWxpemVkLgo+IAo+IFRo
-ZSBsZWdhY3kgYmFja2VuZCBzY2FuIGZvciAncWRpc2snIGlzIHJlbW92ZWQgYnkgdGhpcyBwYXRj
-aCwgd2hpY2ggbWFrZXMKPiB0aGUgJ3hlbl9kaXNrJyBjb2RlIGlzIHJlZHVuZGFudC4gVGhlIGNv
-ZGUgd2lsbCBiZSByZW1vdmVkIGJ5IGEgc3Vic2VxdWVudAo+IHBhdGNoLgo+IAo+IFNpZ25lZC1v
-ZmYtYnk6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+Cj4gU2lnbmVkLW9m
-Zi1ieTogQW50aG9ueSBQZXJhcmQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+Cj4gLS0tCgo+
-IGRpZmYgLS1naXQgYS9ody9ibG9jay94ZW4tYmxvY2suYyBiL2h3L2Jsb2NrL3hlbi1ibG9jay5j
-Cj4gaW5kZXggYTdjMzdjMTg1YS4uYzZlYzFkOTU0MyAxMDA2NDQKPiAtLS0gYS9ody9ibG9jay94
-ZW4tYmxvY2suYwo+ICsrKyBiL2h3L2Jsb2NrL3hlbi1ibG9jay5jCj4gQEAgLTcsMTIgKzcsMjAg
-QEAKLi4uCgo+ICtzdGF0aWMgWGVuQmxvY2tEcml2ZSAqeGVuX2Jsb2NrX2RyaXZlX2NyZWF0ZShj
-b25zdCBjaGFyICppZCwKPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgY29uc3QgY2hhciAqZGV2aWNlX3R5cGUsCj4gKyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIFFEaWN0ICpvcHRzLCBFcnJvciAqKmVycnApCj4gK3sKLi4u
-Cj4gKyAgICBFcnJvciAqbG9jYWxfZXJyID0gTlVMTDsKLi4uCj4gKyAgICBpZiAoIWZpbGVuYW1l
-KSB7Cj4gKyAgICAgICAgZXJyb3Jfc2V0ZyhlcnJwLCAibm8gZmlsZW5hbWUiKTsKPiArICAgICAg
-ICBnb3RvIGRvbmU7Cj4gKyAgICB9Ci4uLgo+ICsgICAgZHJpdmUtPm5vZGVfbmFtZSA9IHhlbl9i
-bG9ja19ibG9ja2Rldl9hZGQoZHJpdmUtPmlkLCBkcml2ZXJfbGF5ZXIsCj4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmbG9jYWxfZXJyKTsKPiArCj4gK2Rv
-bmU6Cj4gKyAgICBnX2ZyZWUoZHJpdmVyKTsKPiArICAgIGdfZnJlZShmaWxlbmFtZSk7Cj4gKwo+
-ICsgICAgaWYgKGxvY2FsX2VycikgewoKV2hlbiB4ZW5fYmxvY2tfYmxvY2tkZXZfYWRkIGZhaWxl
-ZCwgaXQgc2V0cyBsb2NhbF9lcnIsIGJ1dCBub3RoaW5nIGFmdGVyCnNldHMgZXJycC4gSSdtIGdv
-aW5nIHRvIGFkZCB0aGlzIHdoaWxlIHByZXBhcmluZyB0aGUgcHVsbCByZXF1ZXN0OgoKICAgIGVy
-cm9yX3Byb3BhZ2F0ZShlcnJwLCBsb2NhbF9lcnIpOwoKSXMgdGhpcyBmaW5lIHdpdGggeW91PwoK
-V2l0aCB0aGF0IGZpeCwgSSB0aGluayB0aGUgc2VyaWVzIGlzIHJlYWR5LCBzbzoKUmV2aWV3ZWQt
-Ynk6IEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgoKPiArICAgICAg
-ICB4ZW5fYmxvY2tfZHJpdmVfZGVzdHJveShkcml2ZSwgTlVMTCk7Cj4gKyAgICAgICAgcmV0dXJu
-IE5VTEw7Cj4gKyAgICB9Cj4gKwo+ICsgICAgcmV0dXJuIGRyaXZlOwo+ICt9CgpUaGVyZSBpcyBz
-dGlsbCB0aGUgd2FybmluZyBhYm91dCB1c2luZyB0aGUgJ2ZpbGUnIGRyaXZlciB3aGVuCidob3N0
-X2RldmljZScgc2hvdWxkIGJlIHVzZSwgYnV0IEkgdGhpbmsgd2UgY2FuIHRyeSB0byBmaXggdGhh
-dCBsYXRlci4KClRoYW5rcywKCi0tIApBbnRob255IFBFUkFSRAoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3347592142718179983==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="eNMatiwYGLtwo1cJ"
+Content-Disposition: inline
+
+
+--eNMatiwYGLtwo1cJ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [RFC PATCH v2 11/17] xenconsoled: add support for consoles using
+ 'state' xenstore entry
+
+On Thu, Nov 01, 2018 at 05:21:39PM +0000, Ian Jackson wrote:
+> Marek Marczykowski-G=C3=B3recki writes ("[RFC PATCH v2 11/17] xenconsoled=
+: add support for consoles using 'state' xenstore entry"):
+> > Add support for standard xenbus initialization protocol using 'state'
+> > xenstore entry. It will be necessary for secondary consoles.
+> > For consoles supporting it, read 'state' entry on the frontend and
+> > proceed accordingly - either init console or close it. When closing,
+> > make sure all the in-transit data is flushed (both from shared ring and
+> > from local buffer), if possible. This is especially important for
+> > MiniOS-based qemu stubdomain, which closes console just after writing
+> > device model state to it.
+> > For consoles without 'state' field behavior is unchanged - on any watch
+> > event try to connect console, as long as domain is alive.
+>=20
+> I'm not opposed to the introduction of this state field.  The code
+> looks plausible.
+>=20
+> But:
+>=20
+> Firstly, you have put the protocol description in your commit
+> message (and it seems rather informal).  Can you please provide
+> a comprehensive protocol specification in-tree ?  You need to patch
+>    docs/misc/console.txt
+> I think.
+>=20
+> I say `comprehensive' because your text is not particularly clearly
+> about who is supposed to `flush' which data exactly when.  Nor what
+> `flushing' means (does it ever mean discarding?)
+>=20
+> Secondly: what about backwards compatibility ?  I think we need to at
+> least think about the possibility that there are some guest frontends
+> out there which may look for a `state' node and do something
+> undesirable with it.  I think this possibility is remote but it should
+> be mentioned in the commit message.
+
+Note that this commit _does not_ invent any new protocol at all. It merely
+add support for the protocol that is used by additional consoles. The
+backend side was implemented by qemu only before, now I add support for
+it to xenconsoled.
+
+This is about (additional) consoles living in
+/local/domain/$DOMID/device/console/$DEVID, not the special-kind-of-thing
+living in /local/domain/$DOMID/console. Is there any protocol specification
+for it already anywhere? I can't see it xen/include/public/io/ as it's
+for other device types - console.h have only struct xencons_interface
+declaration without any comment. I can't find it in other places either.
+If there is one, it should be added to docs/misc/console.txt and/or
+xen/include/public/io/console.h. Otherwise I can add some basic spec to
+docs/misc/console.txt.
+
+> What about the possibility that one or the other end of the connection
+> may be replaced by a different implementation, so that the peer
+> appears to gain or lose support for `state' ?
+
+Actually, I'm doing similar thing here ;) previously xenconsoled didn't
+know anything about 'state' field and it was one of the reason it
+couldn't handle multiple consoles per domain.
+
+> I'll be able to review the code more effectively when there is a
+> formal protocol spec to compare it to...
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--eNMatiwYGLtwo1cJ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlw15zgACgkQ24/THMrX
+1yyKIAgAmU4aJRPcfNxV1X8q49Xxey/ZXYnbVmrHD1qoJeYJZuSfy4RUxjjL0D/Q
+vEbnUI8L9vfl/q6/Cip7zuVQRkjDbUcuXjlwwdp8jc0zA56ydBiT8pZWWMLtn2k2
+mAD11vpbM4ZZ0PQbqlTSSJsGA27EVTpAxXyjyi6uQpPAcFjmdzCtxXITqUk8W1sR
+8DGZ+w8SlJRzQk5ixBK+GSP7faFLuog9gAMvv4LlaQG0pGQG3WYtz8rZFuITCkR1
+x0MIKZ808LG0skbVyzsV4LLbBXJ/XuP/7USUFJB7+hxl7Z3ckEx7lBsNTyDgTJc7
+FcQmAsvbxjLpjR1/tlWced4oNJMbbw==
+=8HkA
+-----END PGP SIGNATURE-----
+
+--eNMatiwYGLtwo1cJ--
+
+
+--===============3347592142718179983==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3347592142718179983==--
