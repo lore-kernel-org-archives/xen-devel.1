@@ -1,22 +1,24 @@
-From: Jason Andryuk <jandryuk@gmail.com>
-Subject: Re: [PATCH v3 09/15] argo: implement the sendv op;
- evtchn: expose send_guest_global_virq
-Date: Wed, 9 Jan 2019 13:05:03 -0500
-Message-ID: <CAKf6xpshbOH38zwfy8THHy2_8r97qO8MR+-SdmLDmUfQePVoWA@mail.gmail.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: [PATCH v3 07/15] argo: implement the register op
+Date: Wed, 9 Jan 2019 13:13:54 -0500
+Message-ID: <CAF3u54DhGuXNLSeO+t0gRe_JXQRjQn5kdP3MXTNsaCuGP7b-4A@mail.gmail.com>
 References: <1546846968-7372-1-git-send-email-christopher.w.clark@gmail.com>
- <1546846968-7372-10-git-send-email-christopher.w.clark@gmail.com>
+ <1546846968-7372-8-git-send-email-christopher.w.clark@gmail.com>
+ <20190109155553.72gpxyvwisg4xhag@zion.uk.xensource.com>
+ <CACMJ4GbCRYvC9ph8ZCfCX-T=eCk-MO26pzi_6yoqKSoqrZsC8A@mail.gmail.com>
+ <CAF3u54DvKpvx8fbL0NSMeEhzieo-fw8v9q6MFe8w+viMeJDF3A@mail.gmail.com>
+ <alpine.DEB.2.10.1901090907300.800@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3866243341509984462=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2rAm=PR=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1ghIEA-00008G-KW
- for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 18:05:18 +0000
-Received: by mail-lj1-x243.google.com with SMTP id x85-v6so7308943ljb.2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 10:05:16 -0800 (PST)
-In-Reply-To: <1546846968-7372-10-git-send-email-christopher.w.clark@gmail.com>
+ <SRS0=eEKV=PR=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1ghIMk-00013Y-59
+ for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 18:14:10 +0000
+Received: by mail-vs1-xe44.google.com with SMTP id y27so5372171vsi.1
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 10:14:07 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.10.1901090907300.800@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,114 +27,340 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christopher Clark <christopher.w.clark@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Rich Persaud <persaur@gmail.com>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, James McKenzie <james@bromium.com>, Eric Chanudet <eric.chanudet@gmail.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Tim Deegan <tim@xen.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Jason Andryuk <jandryuk@gmail.com>, Daniel Smith <dpsmith@apertussolutions.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, James McKenzie <james@bromium.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Eric Chanudet <eric.chanudet@gmail.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBKYW4gNywgMjAxOSBhdCAyOjQzIEFNIENocmlzdG9waGVyIENsYXJrCjxjaHJpc3Rv
-cGhlci53LmNsYXJrQGdtYWlsLmNvbT4gd3JvdGU6Cgo8c25pcD4KCj4gQEAgLTM0Miw2ICszNTcs
-NDEzIEBAIHVwZGF0ZV90eF9wdHIoc3RydWN0IGFyZ29fcmluZ19pbmZvICpyaW5nX2luZm8sIHVp
-bnQzMl90IHR4X3B0cikKPiAgICAgIHNtcF93bWIoKTsKPiAgfQo+Cj4gK3N0YXRpYyBpbnQKPiAr
-bWVtY3B5X3RvX2d1ZXN0X3Jpbmcoc3RydWN0IGFyZ29fcmluZ19pbmZvICpyaW5nX2luZm8sIHVp
-bnQzMl90IG9mZnNldCwKPiArICAgICAgICAgICAgICAgICAgICAgY29uc3Qgdm9pZCAqc3JjLCBY
-RU5fR1VFU1RfSEFORExFKHVpbnQ4X3QpIHNyY19obmQsCj4gKyAgICAgICAgICAgICAgICAgICAg
-IHVpbnQzMl90IGxlbikKPiArewo+ICsgICAgdW5zaWduZWQgaW50IG1mbnNfaW5kZXggPSBvZmZz
-ZXQgPj4gUEFHRV9TSElGVDsKPiArICAgIHZvaWQgKmRzdDsKPiArICAgIGludCByZXQ7Cj4gKyAg
-ICB1bnNpZ25lZCBpbnQgc3JjX29mZnNldCA9IDA7Cj4gKwo+ICsgICAgQVNTRVJUKHNwaW5faXNf
-bG9ja2VkKCZyaW5nX2luZm8tPmxvY2spKTsKPiArCj4gKyAgICBvZmZzZXQgJj0gflBBR0VfTUFT
-SzsKPiArCj4gKyAgICBpZiAoIChsZW4gPiBYRU5fQVJHT19NQVhfUklOR19TSVpFKSB8fCAob2Zm
-c2V0ID4gWEVOX0FSR09fTUFYX1JJTkdfU0laRSkgKQo+ICsgICAgICAgIHJldHVybiAtRUZBVUxU
-Owo+ICsKPiArICAgIHdoaWxlICggKG9mZnNldCArIGxlbikgPiBQQUdFX1NJWkUgKQo+ICsgICAg
-ewo+ICsgICAgICAgIHVuc2lnbmVkIGludCBoZWFkX2xlbiA9IFBBR0VfU0laRSAtIG9mZnNldDsK
-CkkgdGhpbmsgdGhpcyB3aGlsZSBsb29wIGNvdWxkIGJlIHJlLXdyaXR0ZW4gYXMKd2hpbGUgKGxl
-bikgewogICAgaGVhZF9sZW4gPSBsZW4gPiBQQUdFX1NJWkUgPyBQQUdFX1NJWkUgLSBvZmZzZXQ6
-IGxlbjsKCmFuZCB0aGVuIHRoZSBleHRyYSBjb3B5aW5nIGJlbG93IG91dHNpZGUgdGhlIGxvb3Ag
-Y291bGQgYmUgZHJvcHBlZC4KClRoZSBmaXJzdCBsb29wIGRvZXMgYSBwYXJ0aWFsIGNvcHkgYXQg
-b2Zmc2V0IGFuZCB0aGVuIHNldHMgb2Zmc2V0PTAuClRoZSBuZXh0IE4gbG9vcHMgY29weSBleGFj
-dGx5IFBBR0VfU0laRS4KVGhlIEZpbmFsIGNvcHkgZG9lcyB0aGUgcmVtYWluaW5nIGxlbiBieXRl
-cy4KCj4gKwo+ICsgICAgICAgIHJldCA9IHJpbmdfbWFwX3BhZ2UocmluZ19pbmZvLCBtZm5zX2lu
-ZGV4LCAmZHN0KTsKPiArICAgICAgICBpZiAoIHJldCApCj4gKyAgICAgICAgICAgIHJldHVybiBy
-ZXQ7Cj4gKwo+ICsgICAgICAgIGlmICggc3JjICkKPiArICAgICAgICB7Cj4gKyAgICAgICAgICAg
-IG1lbWNweShkc3QgKyBvZmZzZXQsIHNyYyArIHNyY19vZmZzZXQsIGhlYWRfbGVuKTsKPiArICAg
-ICAgICAgICAgc3JjX29mZnNldCArPSBoZWFkX2xlbjsKPiArICAgICAgICB9Cj4gKyAgICAgICAg
-ZWxzZQo+ICsgICAgICAgIHsKPiArICAgICAgICAgICAgcmV0ID0gY29weV9mcm9tX2d1ZXN0KGRz
-dCArIG9mZnNldCwgc3JjX2huZCwgaGVhZF9sZW4pID8KPiArICAgICAgICAgICAgICAgICAgICAt
-RUZBVUxUIDogMDsKPiArICAgICAgICAgICAgaWYgKCByZXQgKQo+ICsgICAgICAgICAgICAgICAg
-cmV0dXJuIHJldDsKPiArCj4gKyAgICAgICAgICAgIGd1ZXN0X2hhbmRsZV9hZGRfb2Zmc2V0KHNy
-Y19obmQsIGhlYWRfbGVuKTsKPiArICAgICAgICB9Cj4gKwo+ICsgICAgICAgIG1mbnNfaW5kZXgr
-KzsKPiArICAgICAgICBsZW4gLT0gaGVhZF9sZW47Cj4gKyAgICAgICAgb2Zmc2V0ID0gMDsKPiAr
-ICAgIH0KPiArCj4gKyAgICByZXQgPSByaW5nX21hcF9wYWdlKHJpbmdfaW5mbywgbWZuc19pbmRl
-eCwgJmRzdCk7Cj4gKyAgICBpZiAoIHJldCApCj4gKyAgICB7Cj4gKyAgICAgICAgYXJnb19kcHJp
-bnRrKCJhcmdvOiByaW5nICh2bSV1OiV4IHZtJWQpICVwIGF0dGVtcHRlZCB0byBtYXAgcGFnZSIK
-PiArICAgICAgICAgICAgICAgICAgICAgIiAlZCBvZiAlZFxuIiwgcmluZ19pbmZvLT5pZC5kb21h
-aW5faWQsIHJpbmdfaW5mby0+aWQucG9ydCwKPiArICAgICAgICAgICAgICAgICAgICAgcmluZ19p
-bmZvLT5pZC5wYXJ0bmVyX2lkLCByaW5nX2luZm8sIG1mbnNfaW5kZXgsCj4gKyAgICAgICAgICAg
-ICAgICAgICAgIHJpbmdfaW5mby0+bm1mbnMpOwo+ICsgICAgICAgIHJldHVybiByZXQ7Cj4gKyAg
-ICB9Cj4gKwo+ICsgICAgaWYgKCBzcmMgKQo+ICsgICAgICAgIG1lbWNweShkc3QgKyBvZmZzZXQs
-IHNyYyArIHNyY19vZmZzZXQsIGxlbik7Cj4gKyAgICBlbHNlCj4gKyAgICAgICAgcmV0ID0gY29w
-eV9mcm9tX2d1ZXN0KGRzdCArIG9mZnNldCwgc3JjX2huZCwgbGVuKSA/IC1FRkFVTFQgOiAwOwo+
-ICsKPiArICAgIHJldHVybiByZXQ7Cj4gK30KCjxzbmlwPgoKPiArCj4gKy8qCj4gKyAqIGlvdl9j
-b3VudCByZXR1cm5zIGl0cyBjb3VudCBvbiBzdWNjZXNzIHZpYSBhbiBvdXQgdmFyaWFibGUgdG8g
-YXZvaWQKPiArICogcG90ZW50aWFsIGZvciBhIG5lZ2F0aXZlIHJldHVybiB2YWx1ZSB0byBiZSB1
-c2VkIGluY29ycmVjdGx5Cj4gKyAqIChlZy4gY29lcmNlZCBpbnRvIGFuIHVuc2lnbmVkIHZhcmlh
-YmxlIHJlc3VsdGluZyBpbiBhIGxhcmdlIGluY29ycmVjdCB2YWx1ZSkKPiArICovCj4gK3N0YXRp
-YyBpbnQKPiAraW92X2NvdW50KGNvbnN0IHhlbl9hcmdvX2lvdl90ICpwaW92LCB1bnNpZ25lZCBs
-b25nIG5pb3YsIHVpbnQzMl90ICpjb3VudCkKPiArewo+ICsgICAgdWludDMyX3Qgc3VtX2lvdl9s
-ZW5zID0gMDsKPiArCj4gKyAgICBpZiAoIG5pb3YgPiBYRU5fQVJHT19NQVhJT1YgKQo+ICsgICAg
-ICAgIHJldHVybiAtRUlOVkFMOwo+ICsKPiArICAgIHdoaWxlICggbmlvdi0tICkKPiArICAgIHsK
-PiArICAgICAgICAvKiB2YWxpZCBpb3ZzIG11c3QgaGF2ZSB0aGUgcGFkZGluZyBmaWVsZCBzZXQg
-dG8gemVybyAqLwo+ICsgICAgICAgIGlmICggcGlvdi0+cGFkICkKPiArICAgICAgICB7Cj4gKyAg
-ICAgICAgICAgIGFyZ29fZHByaW50aygiaW52YWxpZCBpb3Y6IHBhZGRpbmcgaXMgbm90IHplcm9c
-biIpOwo+ICsgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiArICAgICAgICB9Cj4gKwo+ICsg
-ICAgICAgIC8qIGNoZWNrIGVhY2ggdG8gcHJvdGVjdCBzdW0gYWdhaW5zdCBpbnRlZ2VyIG92ZXJm
-bG93ICovCj4gKyAgICAgICAgaWYgKCBwaW92LT5pb3ZfbGVuID4gWEVOX0FSR09fTUFYX1JJTkdf
-U0laRSApCgpTaG91bGQgdGhpcyBiZSBNQVhfQVJHT19NRVNTQUdFX1NJWkU/ICBNQVhfQVJHT19N
-RVNTQUdFX1NJWkUgaXMgbGVzcwp0aGFuIFhFTl9BUkdPX01BWF9SSU5HX1NJWkUsIHNvIHdlIGNh
-biBwYXNzIHRoaXMgY2hlY2sgYW5kIHRoZW4ganVzdApmYWlsIHRoZSBvbmUgYmVsb3cuCgo+ICsg
-ICAgICAgIHsKPiArICAgICAgICAgICAgYXJnb19kcHJpbnRrKCJpbnZhbGlkIGlvdl9sZW46IHRv
-byBiaWcgKCV1KT4lbGx1XG4iLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgcGlvdi0+aW92
-X2xlbiwgWEVOX0FSR09fTUFYX1JJTkdfU0laRSk7Cj4gKyAgICAgICAgICAgIHJldHVybiAtRUlO
-VkFMOwo+ICsgICAgICAgIH0KPiArCj4gKyAgICAgICAgc3VtX2lvdl9sZW5zICs9IHBpb3YtPmlv
-dl9sZW47Cj4gKwo+ICsgICAgICAgIC8qCj4gKyAgICAgICAgICogQWdhaW4gcHJvdGVjdCBzdW0g
-ZnJvbSBpbnRlZ2VyIG92ZXJmbG93Cj4gKyAgICAgICAgICogYW5kIGVuc3VyZSB0b3RhbCBtc2cg
-c2l6ZSB3aWxsIGJlIHdpdGhpbiBib3VuZHMuCj4gKyAgICAgICAgICovCj4gKyAgICAgICAgaWYg
-KCBzdW1faW92X2xlbnMgPiBNQVhfQVJHT19NRVNTQUdFX1NJWkUgKQo+ICsgICAgICAgIHsKPiAr
-ICAgICAgICAgICAgYXJnb19kcHJpbnRrKCJpbnZhbGlkIGlvdiBzZXJpZXM6IHRvdGFsIG1lc3Nh
-Z2UgdG9vIGJpZ1xuIik7Cj4gKyAgICAgICAgICAgIHJldHVybiAtRU1TR1NJWkU7Cj4gKyAgICAg
-ICAgfQo+ICsKPiArICAgICAgICBwaW92Kys7Cj4gKyAgICB9Cj4gKwo+ICsgICAgKmNvdW50ID0g
-c3VtX2lvdl9sZW5zOwo+ICsKPiArICAgIHJldHVybiAwOwo+ICt9Cj4gKwoKPHNuaXA+Cgo+IEBA
-IC0xMDczLDYgKzE2ODMsNDkgQEAgZG9fYXJnb19vcCh1bnNpZ25lZCBpbnQgY21kLCBYRU5fR1VF
-U1RfSEFORExFX1BBUkFNKHZvaWQpIGFyZzEsCj4gICAgICAgICAgYnJlYWs7Cj4gICAgICB9Cj4K
-PiArICAgIGNhc2UgWEVOX0FSR09fT1Bfc2VuZHY6Cj4gKyAgICB7Cj4gKyAgICAgICAgeGVuX2Fy
-Z29fc2VuZF9hZGRyX3Qgc2VuZF9hZGRyOwo+ICsKPiArICAgICAgICBYRU5fR1VFU1RfSEFORExF
-X1BBUkFNKHhlbl9hcmdvX3NlbmRfYWRkcl90KSBzZW5kX2FkZHJfaG5kID0KPiArICAgICAgICAg
-ICAgZ3Vlc3RfaGFuZGxlX2Nhc3QoYXJnMSwgeGVuX2FyZ29fc2VuZF9hZGRyX3QpOwo+ICsgICAg
-ICAgIFhFTl9HVUVTVF9IQU5ETEVfUEFSQU0oeGVuX2FyZ29faW92X3QpIGlvdnNfaG5kID0KPiAr
-ICAgICAgICAgICAgZ3Vlc3RfaGFuZGxlX2Nhc3QoYXJnMiwgeGVuX2FyZ29faW92X3QpOwo+ICsg
-ICAgICAgIC8qIGFyZzMgaXMgbmlvdiAqLwo+ICsgICAgICAgIC8qIGFyZzQgaXMgbWVzc2FnZV90
-eXBlLiBNdXN0IGJlIGEgMzItYml0IHZhbHVlLiAqLwo+ICsKPiArICAgICAgICByYyA9IGNvcHlf
-ZnJvbV9ndWVzdCgmc2VuZF9hZGRyLCBzZW5kX2FkZHJfaG5kLCAxKSA/IC1FRkFVTFQgOiAwOwo+
-ICsgICAgICAgIGlmICggcmMgKQo+ICsgICAgICAgICAgICBicmVhazsKPiArCj4gKyAgICAgICAg
-aWYgKCBzZW5kX2FkZHIuc3JjLmRvbWFpbl9pZCA9PSBYRU5fQVJHT19ET01JRF9BTlkgKQo+ICsg
-ICAgICAgICAgICBzZW5kX2FkZHIuc3JjLmRvbWFpbl9pZCA9IGN1cnJkLT5kb21haW5faWQ7Cj4g
-Kwo+ICsgICAgICAgIC8qIE5vIGRvbWFpbiBpcyBjdXJyZW50bHkgYXV0aG9yaXplZCB0byBzZW5k
-IG9uIGJlaGFsZiBvZiBhbm90aGVyICovCj4gKyAgICAgICAgaWYgKCB1bmxpa2VseShzZW5kX2Fk
-ZHIuc3JjLmRvbWFpbl9pZCAhPSBjdXJyZC0+ZG9tYWluX2lkKSApCj4gKyAgICAgICAgewo+ICsg
-ICAgICAgICAgICByYyA9IC1FUEVSTTsKPiArICAgICAgICAgICAgYnJlYWs7Cj4gKyAgICAgICAg
-fQo+ICsKPiArICAgICAgICAvKiBSZWplY3QgbmlvdiBvciBtZXNzYWdlX3R5cGUgdmFsdWVzIHRo
-YXQgYXJlIG91dHNpZGUgMzIgYml0IHJhbmdlLiAqLwo+ICsgICAgICAgIGlmICggdW5saWtlbHko
-KGFyZzMgPiBYRU5fQVJHT19NQVhJT1YpIHx8IChhcmc0ICYgfjB4ZmZmZmZmZmZVTCkpICkKPiAr
-ICAgICAgICB7Cj4gKyAgICAgICAgICAgIHJjID0gLUVJTlZBTDsKPiArICAgICAgICAgICAgYnJl
-YWs7Cj4gKyAgICAgICAgfQoKVGhpcyBuZWVkcyB0byBjaGVjayBzZW5kX2FkZHIuc3JjLnBhZCBh
-bmQgc2VuZF9hZGRyLmRzdC5wYWQgPT0gMC4Kc2VuZHYoKSBkb2VzIG5vdCBjaGVjayB0aGUgcGFk
-ZGluZyBlaXRoZXIuCgpSZWdhcmRzLApKYXNvbgoKPiArCj4gKyAgICAgICAgLyoKPiArICAgICAg
-ICAgKiBDaGVjayBhY2Nlc3MgdG8gdGhlIHdob2xlIGFycmF5IGhlcmUgc28gd2UgY2FuIHVzZSB0
-aGUgZmFzdGVyIF9fY29weQo+ICsgICAgICAgICAqIG9wZXJhdGlvbnMgdG8gcmVhZCBlYWNoIGVs
-ZW1lbnQgbGF0ZXIuCj4gKyAgICAgICAgICovCj4gKyAgICAgICAgaWYgKCB1bmxpa2VseSghZ3Vl
-c3RfaGFuZGxlX29rYXkoaW92c19obmQsIGFyZzMpKSApCj4gKyAgICAgICAgICAgIGJyZWFrOwo+
-ICsKPiArICAgICAgICByYyA9IHNlbmR2KGN1cnJkLCAmc2VuZF9hZGRyLnNyYywgJnNlbmRfYWRk
-ci5kc3QsIGlvdnNfaG5kLCBhcmczLCBhcmc0KTsKPiArICAgICAgICBicmVhazsKPiArICAgIH0K
-PiArCj4gICAgICBkZWZhdWx0Ogo+ICAgICAgICAgIHJjID0gLUVPUE5PVFNVUFA7Cj4gICAgICAg
-ICAgYnJlYWs7CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============3866243341509984462==
+Content-Type: multipart/alternative; boundary="0000000000007a95bf057f0a6d0c"
+
+--0000000000007a95bf057f0a6d0c
+Content-Type: text/plain; charset="UTF-8"
+
+Ki
+
+On Wed, 9 Jan 2019, 12:18 Stefano Stabellini, <sstabellini@kernel.org>
+wrote:
+
+> On Wed, 9 Jan 2019, Julien Grall wrote:
+> > Hi,
+> > Sorry for the formatting. Sending it from my phone.
+> >
+> > On Wed, 9 Jan 2019, 11:03 Christopher Clark, <
+> christopher.w.clark@gmail.com> wrote:
+> >       On Wed, Jan 9, 2019 at 7:56 AM Wei Liu <wei.liu2@citrix.com>
+> wrote:
+> >       >
+> >       > On Sun, Jan 06, 2019 at 11:42:40PM -0800, Christopher Clark
+> wrote:
+> >       > > The register op is used by a domain to register a region of
+> memory for
+> >       > > receiving messages from either a specified other domain, or,
+> if specifying a
+> >       > > wildcard, any domain.
+> >       > >
+> >       > > This operation creates a mapping within Xen's private address
+> space that
+> >       > > will remain resident for the lifetime of the ring. In
+> subsequent commits,
+> >       > > the hypervisor will use this mapping to copy data from a
+> sending domain into
+> >       > > this registered ring, making it accessible to the domain that
+> registered the
+> >       > > ring to receive data.
+> >       > >
+> >       > > Wildcard any-sender rings are default disabled and
+> registration will be
+> >       > > refused with EPERM unless they have been specifically enabled
+> with the
+> >       > > argo-mac boot option introduced here. The reason why the
+> default for
+> >       > > wildcard rings is 'deny' is that there is currently no means
+> to protect the
+> >       > > ring from DoS by a noisy domain spamming the ring, affecting
+> other domains
+> >       > > ability to send to it. This will be addressed with XSM policy
+> controls in
+> >       > > subsequent work.
+> >       > >
+> >       > > Since denying access to any-sender rings is a significant
+> functional
+> >       > > constraint, a new bootparam is provided to enable overriding
+> this:
+> >       > >  "argo-mac" variable has allowed values: 'permissive' and
+> 'enforcing'.
+> >       > > Even though this is a boolean variable, use these descriptive
+> strings in
+> >       > > order to make it obvious to an administrator that this has
+> potential
+> >       > > security impact.
+> >       > >
+> >       > > The p2m type of the memory supplied by the guest for the ring
+> must be
+> >       > > p2m_ram_rw and the memory will be pinned as PGT_writable_page
+> while the ring
+> >       > > is registered.
+> >       > >
+> >       > > xen_argo_page_descr_t type is introduced as a page descriptor,
+> to convey
+> >       > > both the physical address of the start of the page and its
+> granularity. The
+> >       > > smallest granularity page is assumed to be 4096 bytes and the
+> lower twelve
+> >       > > bits of the type are used to indicate the size of page of
+> memory supplied.
+> >       > > The implementation of the hypercall op currently only supports
+> 4K pages.
+> >       > >
+> >       >
+> >       > What is the resolution for the Arm issues mentioned by Julien? I
+> read
+> >       > the conversation in previous thread. A solution seemed to have
+> been
+> >       > agreed upon, but the changelog doesn't say anything about it.
+> >
+> >       I made the interface changes that Julien had asked for. The
+> register
+> >       op now takes arguments that can describe the granularitity of the
+> >       pages supplied, though only support for 4K pages is accepted in the
+> >       current implementation. I believe it meets Julien's requirements.
+> >
+> >
+> > I still don't think allowing 4K or 64K is the right solution to go. You
+> are adding unnecessary burden in the hypervisor and would
+> > prevent optimization i the hypervisor and unwanted side effect.
+> >
+> > For instance a 64K hypervisor will always map 64K even when the guest is
+> passing 4K. You also can't map everything contiguously
+> > in Xen (if you ever wanted to).
+> >
+> > We need to stick on a single chunk size. That could be different between
+> Arm and x86. For Arm it would need to be 64KB.
+>
+> Hi Julien!
+>
+> I don't think we should force 64K as the only granularity on ARM. It
+> causes unnecessary overhead and confusion on 4K-only deployments that
+> are almost all our use-cases today.
+
+
+Why a confusion? People should read the documentation when writing a
+driver...
+
+
+> One option is to make the granularity configurable at the guest side,
+> like Christopher did, letting the guest specifying the granularity. The
+> hypervisor could return -ENOSYS if the specified granularity is not
+> supported.
+>
+> The other option is having the hypervisor export the granularity it
+> supports for this interface: Xen would say "I support only 4K".
+> Tomorrow, it could change and Xen could say "I support only 64K". Then,
+> it would be up to the guest passing a page of the right granularity to
+> the hypervisor. I think this is probably the best option, but it would
+> require the addition of one hypercall to retrieve the supported
+> granularity from Xen.
+
+
+I would recommend to read my initial answers on the first series to
+understand why allowing 4K is an issue.
+
+AFAIK virtio and UEFI has restrictions to allow a guest running
+agnostically of the hypervisor page-granularity. An example is to mandate
+64K chunk or 64KB aligned address.
+
+With your suggestion you are going to break many use-cases if the
+hypervisor is moving to 64KB. At worst it could introduce security issues.
+At best preventing optimization in the hypervisor or prevent guest running
+(bad for backward compatibility).
+
+Actually, this is not going to help moving towards 64K in Argo because you
+would still have to modify the kernel. So this does not meet my
+requirements.
+
+I don't think requiring 64K chunk is going to be a major issue nor a
+concern. Unless you expect small ring... Christoffer, what is the expected
+size?
+
+Another solution was to require contiguous guest physical memory. That
+would solve quite a few problem on Arm. But Christoffer had some convincing
+point to not implement this.
+
+As I said before, I know this is not going to be the only place with that
+issue. I merely wanted to start tackling the problem. However, IHMO, this
+interface is not more suitable than what we have currently. So this raise
+the question on whether we should just use the usual Xen interface if 64K
+is not an option...
+
+Cheers,
+
+--0000000000007a95bf057f0a6d0c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<span>Ki</span><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Wed, =
+9 Jan 2019, 12:18 Stefano Stabellini, &lt;<a href=3D"mailto:sstabellini@ker=
+nel.org">sstabellini@kernel.org</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padd=
+ing-left:1ex">On Wed, 9 Jan 2019, Julien Grall wrote:<br>
+&gt; Hi,<br>
+&gt; Sorry for the formatting. Sending it from my phone.<br>
+&gt; <br>
+&gt; On Wed, 9 Jan 2019, 11:03 Christopher Clark, &lt;<a href=3D"mailto:chr=
+istopher.w.clark@gmail.com" target=3D"_blank">christopher.w.clark@gmail.com=
+</a>&gt; wrote:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0On Wed, Jan 9, 2019 at 7:56 AM Wei Liu &lt;<=
+a href=3D"mailto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citrix.com=
+</a>&gt; wrote:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; On Sun, Jan 06, 2019 at 11:42:40PM -080=
+0, Christopher Clark wrote:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; The register op is used by a domai=
+n to register a region of memory for<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; receiving messages from either a s=
+pecified other domain, or, if specifying a<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; wildcard, any domain.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; This operation creates a mapping w=
+ithin Xen&#39;s private address space that<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; will remain resident for the lifet=
+ime of the ring. In subsequent commits,<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; the hypervisor will use this mappi=
+ng to copy data from a sending domain into<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; this registered ring, making it ac=
+cessible to the domain that registered the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; ring to receive data.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; Wildcard any-sender rings are defa=
+ult disabled and registration will be<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; refused with EPERM unless they hav=
+e been specifically enabled with the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; argo-mac boot option introduced he=
+re. The reason why the default for<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; wildcard rings is &#39;deny&#39; i=
+s that there is currently no means to protect the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; ring from DoS by a noisy domain sp=
+amming the ring, affecting other domains<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; ability to send to it. This will b=
+e addressed with XSM policy controls in<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; subsequent work.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; Since denying access to any-sender=
+ rings is a significant functional<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; constraint, a new bootparam is pro=
+vided to enable overriding this:<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;=C2=A0 &quot;argo-mac&quot; variabl=
+e has allowed values: &#39;permissive&#39; and &#39;enforcing&#39;.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; Even though this is a boolean vari=
+able, use these descriptive strings in<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; order to make it obvious to an adm=
+inistrator that this has potential<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; security impact.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; The p2m type of the memory supplie=
+d by the guest for the ring must be<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; p2m_ram_rw and the memory will be =
+pinned as PGT_writable_page while the ring<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; is registered.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; xen_argo_page_descr_t type is intr=
+oduced as a page descriptor, to convey<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; both the physical address of the s=
+tart of the page and its granularity. The<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; smallest granularity page is assum=
+ed to be 4096 bytes and the lower twelve<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; bits of the type are used to indic=
+ate the size of page of memory supplied.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt; The implementation of the hypercal=
+l op currently only supports 4K pages.<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; &gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt;<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; What is the resolution for the Arm issu=
+es mentioned by Julien? I read<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; the conversation in previous thread. A =
+solution seemed to have been<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0&gt; agreed upon, but the changelog doesn&#3=
+9;t say anything about it.<br>
+&gt; <br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0I made the interface changes that Julien had=
+ asked for. The register<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0op now takes arguments that can describe the=
+ granularitity of the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0pages supplied, though only support for 4K p=
+ages is accepted in the<br>
+&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0current implementation. I believe it meets J=
+ulien&#39;s requirements.<br>
+&gt; <br>
+&gt; <br>
+&gt; I still don&#39;t think allowing 4K or 64K is the right solution to go=
+. You are adding unnecessary burden in the hypervisor and would<br>
+&gt; prevent optimization i the hypervisor and unwanted side effect.<br>
+&gt; <br>
+&gt; For instance a 64K hypervisor will always map 64K even when the guest =
+is passing 4K. You also can&#39;t map everything contiguously<br>
+&gt; in Xen (if you ever wanted to).<br>
+&gt; <br>
+&gt; We need to stick on a single chunk size. That could be different betwe=
+en Arm and x86. For Arm it would need to be 64KB.<br>
+<br>
+Hi Julien!<br>
+<br>
+I don&#39;t think we should force 64K as the only granularity on ARM. It<br=
+>
+causes unnecessary overhead and confusion on 4K-only deployments that<br>
+are almost all our use-cases today.</blockquote></div><div><br></div><div>W=
+hy a confusion? People should read the documentation when writing a driver.=
+..</div><div><br></div><div class=3D"gmail_quote"></div><div class=3D"gmail=
+_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border=
+-left:1px #ccc solid;padding-left:1ex">
+<br>
+One option is to make the granularity configurable at the guest side,<br>
+like Christopher did, letting the guest specifying the granularity. The<br>
+hypervisor could return -ENOSYS if the specified granularity is not<br>
+supported.<br>
+<br>
+The other option is having the hypervisor export the granularity it<br>
+supports for this interface: Xen would say &quot;I support only 4K&quot;.<b=
+r>
+Tomorrow, it could change and Xen could say &quot;I support only 64K&quot;.=
+ Then,<br>
+it would be up to the guest passing a page of the right granularity to<br>
+the hypervisor. I think this is probably the best option, but it would<br>
+require the addition of one hypercall to retrieve the supported<br>
+granularity from Xen.</blockquote></div><div><br></div><div>I would recomme=
+nd to read my initial answers on the first series to understand why allowin=
+g 4K is an issue.<br></div><div><br></div><div>AFAIK virtio and UEFI has re=
+strictions to allow a guest running agnostically of the hypervisor page-gra=
+nularity. An example is to mandate 64K chunk or 64KB aligned address.</div>=
+<div><br></div><div>With your suggestion you are going to break many use-ca=
+ses if the hypervisor is moving to 64KB. At worst it could introduce securi=
+ty issues. At best preventing optimization in the hypervisor or prevent gue=
+st running (bad for backward compatibility).</div><div><br></div><div>Actua=
+lly, this is not going to help moving towards 64K in Argo because you would=
+ still have to modify the kernel. So this does not meet my requirements.<br=
+><br>I don&#39;t think requiring 64K chunk is going to be a major issue nor=
+ a concern. Unless you expect small ring... Christoffer, what is the expect=
+ed size?<br><br>Another solution was to require contiguous guest physical m=
+emory. That would solve quite a few problem on Arm. But Christoffer had som=
+e convincing point to not implement this.<br></div><div><br></div><div>As I=
+ said before, I know this is not going to be the only place with that issue=
+. I merely wanted to start tackling the problem. However, IHMO, this interf=
+ace is not more suitable than what we have currently. So this raise the que=
+stion on whether we should just use the usual Xen interface if 64K is not a=
+n option...</div><div><br></div><div>Cheers,</div><div><br></div><div><br><=
+/div><div class=3D"gmail_quote"></div>
+
+--0000000000007a95bf057f0a6d0c--
+
+
+--===============3866243341509984462==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3866243341509984462==--
