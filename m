@@ -1,22 +1,23 @@
-From: Rich Persaud <persaur@gmail.com>
-Subject: Re: Xen (both x86 and Arm) Community Call: Jan 9 -
- 16:00 - 17:00 UTC - Call for Agenda Items
-Date: Wed, 9 Jan 2019 11:03:51 -0500
-Message-ID: <04E9EEF8-CE6D-4BFD-8657-CF9A7AECC0A1@gmail.com>
-References: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
- <62249D9F-468C-4DE8-98A3-428F146A2DC7@xenproject.org>
- <C3331077-3BB1-47BA-B9B1-33F2373863C8@xenproject.org>
-Mime-Version: 1.0 (1.0)
-Content-Type: multipart/mixed; boundary="===============5800536733381958494=="
+From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+Subject: Re: [PATCH] tools/firmware: update OVMF Makefile
+Date: Wed, 9 Jan 2019 09:03:25 -0700
+Message-ID: <CABfawhkjWsdFyVoKzVkRUX+yxV2bgCYOy2mX9ojznYXtEfBfKw@mail.gmail.com>
+References: <20181128174333.15672-1-wei.liu2@citrix.com>
+ <CABfawhnuXGDzUdJ9me0kVjmPynA4Q8eEN0yEWTdL371L9BY80g@mail.gmail.com>
+ <CABfawhnKBZ42EMtp9_GreQPJQmcqWKLDZbFp9NrdVZUT46AMjw@mail.gmail.com>
+ <20190109154625.GJ1508@perard.uk.xensource.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=9Jfy=PR=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1ghGKh-0006CN-Am
- for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 16:03:55 +0000
-Received: by mail-qt1-x82f.google.com with SMTP id y20so8808804qtm.13
- for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 08:03:53 -0800 (PST)
-In-Reply-To: <C3331077-3BB1-47BA-B9B1-33F2373863C8@xenproject.org>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=W+9z=PR=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1ghGKq-0006DH-Pq
+ for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 16:04:04 +0000
+Received: by mail-wr1-x432.google.com with SMTP id p4so8220946wrt.7
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 08:04:03 -0800 (PST)
+In-Reply-To: <20190109154625.GJ1508@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,52 +26,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>
-Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
- John" <john.ji@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, Matt Spencer <Matt.Spencer@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, "intel-xen@intel.com" <intel-xen@intel.c>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5800536733381958494==
-Content-Type: multipart/alternative;
-	boundary=Apple-Mail-9EF0E9A8-61BA-4479-9429-79C7CFA4FFC5
-Content-Transfer-Encoding: 7bit
-
-
---Apple-Mail-9EF0E9A8-61BA-4479-9429-79C7CFA4FFC5
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-On Jan 9, 2019, at 10:46, Lars Kurth <lars.kurth.xen@gmail.com> wrote:
->=20
-> Quick note: the meeting is in 15 minutes - the agenda is at https://docs.g=
-oogle.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI8I01I/edit=20
-
-On the topic of 4.12, I would like to propose moving the merge date by one w=
-eek, since about 50% of Xen  maintainers who can review the Argo patch serie=
-s for 4.12 are unavailable this week.
-
-Rich=
-
---Apple-Mail-9EF0E9A8-61BA-4479-9429-79C7CFA4FFC5
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body dir="auto"><div dir="ltr"></div><div dir="ltr">On Jan 9, 2019, at 10:46, Lars Kurth &lt;<a href="mailto:lars.kurth.xen@gmail.com">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><div dir="ltr"><br></div><blockquote type="cite"><div dir="ltr"><meta http-equiv="Content-Type" content="text/html; charset=us-ascii">Quick note: the meeting is in 15 minutes - the agenda is at&nbsp;<a href="https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI8I01I/edit" class="">https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI8I01I/edit</a>&nbsp;<br class=""></div></blockquote><br><div>On the topic of 4.12, I would like to propose moving the merge date by one week, since about 50
- % of Xen &nbsp;maintainers who can review the Argo patch series for 4.12 are unavailable this week.</div><div><br></div><div>Rich</div></body></html>
---Apple-Mail-9EF0E9A8-61BA-4479-9429-79C7CFA4FFC5--
-
-
---===============5800536733381958494==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5800536733381958494==--
+T24gV2VkLCBKYW4gOSwgMjAxOSBhdCA4OjQ2IEFNIEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBl
+cmFyZEBjaXRyaXguY29tPiB3cm90ZToKPgo+IE9uIFdlZCwgSmFuIDA5LCAyMDE5IGF0IDA3OjU2
+OjU5QU0gLTA3MDAsIFRhbWFzIEsgTGVuZ3llbCB3cm90ZToKPiA+IE9uIFdlZCwgSmFuIDksIDIw
+MTkgYXQgNzo1NiBBTSBUYW1hcyBLIExlbmd5ZWwKPiA+IDx0YW1hcy5rLmxlbmd5ZWxAZ21haWwu
+Y29tPiB3cm90ZToKPiA+ID4KPiA+ID4gT24gV2VkLCBOb3YgMjgsIDIwMTggYXQgMTA6NDQgQU0g
+V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiA+ID4KPiA+ID4gPiBPVk1G
+IGhhcyBiZWNvbWUgZGVwZW5kZW50IG9uIE9wZW5TU0wsIHdoaWNoIGl0IGlzIGluY2x1ZGVkIGFz
+IGEgc3VibW9kdWxlLgo+ID4gPiA+IEluaXRpYWxpc2Ugc3VibW9kdWxlcyBiZWZvcmUgYnVpbGRp
+bmcuCj4gPiA+Cj4gPiA+IElmIHlvdSBhcmUgdXBkYXRpbmcgdGhlIG92bWYgbWFrZWZpbGUsIGNv
+dWxkIHlvdSBieSBhbnkgY2hhbmNlIGFsc28KPiA+ID4gbWFrZSB0aGUgZGVidWcgYnVpbGQgb2Yg
+aXQgbW9yZSB1c2VmdWwgb24gWGVuIGJ5IG1ha2luZyBpdCBwcmludCB0bwo+ID4gPiB0aGUgWGVu
+IGNvbnNvbGU/IE5lZWRzIHRoZSAtRCBERUJVR19PTl9TRVJJQUxfUE9SVCBmbGFnIGFkZGVkIGFu
+ZCB0aGUKPiA+ID4gZm9sbG93aW5nIG9uZS1saW5lciB0byBjaGFuZ2UgaXQgdG8gY29ycmVjdCBw
+b3J0Ogo+ID4gPgo+ID4gPiBzZWQgLWkgJ3MvUGNkRGVidWdJb1BvcnR8MHhlOS9QY2REZWJ1Z0lv
+UG9ydHwweDQwMi9nJyBPdm1mUGtnL092bWZQa2cuZGVjCj4gPiA+Cj4gPgo+ID4gV2hvcHMsIGFj
+dHVhbGx5IHRoZSBvdGhlciB3YXkgYXJvdW5kIGZvciBzZWQ6Cj4gPgo+ID4gc2VkIC1pICdzL1Bj
+ZERlYnVnSW9Qb3J0fDB4NDAyL1BjZERlYnVnSW9Qb3J0fDB4ZTkvZycgT3ZtZlBrZy9Pdm1mUGtn
+LmRlYwo+Cj4gWW91IGNhbiBhY3R1YWxseSBoYXZlIE9WTUYgZGVidWcgb3V0cHV0IHdpdGhvdXQg
+cmVidWlsZGluZyBpdCwgYWRkIHRoaXMKPiB0byBvdXIgVk0gY29uZmlnOgo+IGRldmljZV9tb2Rl
+bF9hcmdzX2h2bSA9IFsKPiAgICMgRGVidWcgT1ZNRgo+ICAgJy1jaGFyZGV2JywgJ2ZpbGUsaWQ9
+ZGVidWdjb24sbXV4PW9uLHBhdGg9L3Zhci9sb2cveGVuL3FlbXUtZG0tb3ZtZi5sb2cuZGVidWdj
+b24sJywKPiAgICctZGV2aWNlJywgJ2lzYS1kZWJ1Z2Nvbixpb2Jhc2U9MHg0MDIsY2hhcmRldj1k
+ZWJ1Z2NvbicsCj4gXQo+Cj4gVGhhdCB3YXkgT1ZNRiBib290IGlzbid0IHNsb3cgZG93biBieSB3
+cml0aW5nIHRvIGFuIGlvcG9ydCBpZiB0aGVyZQo+IGlzbid0IHNvbWVvbmUgdG8gY2FyZS4KPgo+
+IFRoZSB3YXkgeW91IHN1Z2dlc3Qgd2lsbCBoYXZlIE9WTUYgd3JpdGUgdG8gYW4gaW9wb3J0IHRo
+YXQgdGhlIFhlbgo+IGh5cGVydmlzb3Igd2lsbCB0aGVuIHdyaXRlIHRvIGl0J3MgY29uc29sZSAo
+b3IgeGwgZG1lc2cpIGFuZCB3aXRoIHRoZQo+IGFtb3VudCBvZiBkZWJ1ZyB0aGF0IG92bWYgd3Jp
+dGUsIHRoaXMgaXMgcXVpdGUgc2xvdy4gQW5kIHdvcnNlLCB0aGF0Cj4gaXNuJ3QgZ29pbmcgdG8g
+d29yayBhbnltb3JlIHdpdGggdXBzdHJlYW0gT1ZNRiBhcyBpdCBub3cgY2hlY2sgaWYgdGhlcmUK
+PiBpcyBzb21ldGhpbmcgdG8gbGlzdGVuIG9uIHRoZSBvdGhlciBzaWRlIG9mIHRoZSBpb3BvcnQs
+IFhlbiBpc24ndCBnb2luZwo+IGFuc3dlciB0aGUgcmlnaHQgdGhpbmdzIGFuZCBPVk1GIHdpbGwg
+c3RheSBzaWxlbmNlLiAoVGhhdCBwYXJhZ3JhcGggaXMKPiBhYm91dCB0aGUgY2hhbmdlIG9mIFBj
+ZERlYnVnSW9Qb3J0LikKPgo+IEkgZG9uJ3Qga25vdyBpZiBERUJVR19PTl9TRVJJQUxfUE9SVCBp
+cyBnb2luZyB0byB3b3JrLCBhbmQgaG93IGl0IHdvcmtzLAo+IGJ1dCBpdCBjZXJ0YWlubHkgZG9u
+J3QgdXNlIFBjZERlYnVnSW9Qb3J0LiBVc2luZyBhIHNlcmlhbCBwb3J0IGluc3RlYWQKPiBvZiBh
+biBJTyBwb3J0IGlzIGV2ZW4gZ29pbmcgdG8gYmUgc2xvd2VyLiBTbyBJIGRvbid0IGtub3cgaWYg
+aXQgd291bGQgYmUKPiB1c2VmdWwgdG8gaGF2ZS4KCkFoLCB0aGFua3MgZm9yIHRoYXQgaW5mbyEg
+V2Ugc2hvdWxkIHByb2JhYmx5IHB1dCB0aGF0IG9uIHRoZSB3aWtpIHRvbyA7KQoKVGFtYXMKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
