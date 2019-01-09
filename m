@@ -1,34 +1,22 @@
-From: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <royger@gmail.com>
-Subject: Re: [PATCH 13/25] argo: implement the register op
-Date: Wed, 9 Jan 2019 17:59:52 +0100
-Message-ID: <CAPLaKK68W40=rZhAQKugQfZbhv7dtouJiX7=aLKBGrz9tpT-ag@mail.gmail.com>
-References: <1543627984-21394-1-git-send-email-christopher.w.clark@gmail.com>
- <1543627984-21394-14-git-send-email-christopher.w.clark@gmail.com>
- <20181212164721.hag6gc3akcm2gvhd@mac>
- <CACMJ4GZRAck4oYtXJpV3c_tGer0n+EUuWjXCtcjLbySOs0W78w@mail.gmail.com>
- <20181220125218.75t3cr3ehc6e4u6n@mac.citrite.net>
- <CACMJ4GaG8kZBkcFiEWMi_ENdJ4uX=c2YxFpgu_sKjUab7618dA@mail.gmail.com>
- <20190104085704.ga7wsqonhbzpv5as@mac.bytemobile.com>
- <5C2F5E0B020000780020A37A@prv1-mh.provo.novell.com>
- <20190104153555.cfjx5mofw6mjbudh@mac.bytemobile.com>
- <5C2F7FF8020000780020A495@prv1-mh.provo.novell.com>
- <20190107085912.gd5bp6y35drjg5gr@mac>
- <CABfawhmfhYkHreJ3A4xnmhJjW3581Zt0L5-Vsswz93ZZTMrFQw@mail.gmail.com>
- <CAPLaKK4nijCrfATvUXNf8MR8cfFHCA0Zk9mYmp0kYj96c4V9Qg@mail.gmail.com>
- <d71b17a9-0ff9-5c48-db96-33bef501d3e0@bitdefender.com>
- <CABfawhnA1-7DjCQTY_7Ddy32nB4wDQZV35oSm567kt+tmnDkCQ@mail.gmail.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: [PATCH v3 07/15] argo: implement the register op
+Date: Wed, 9 Jan 2019 12:02:34 -0500
+Message-ID: <CAF3u54DvKpvx8fbL0NSMeEhzieo-fw8v9q6MFe8w+viMeJDF3A@mail.gmail.com>
+References: <1546846968-7372-1-git-send-email-christopher.w.clark@gmail.com>
+ <1546846968-7372-8-git-send-email-christopher.w.clark@gmail.com>
+ <20190109155553.72gpxyvwisg4xhag@zion.uk.xensource.com>
+ <CACMJ4GbCRYvC9ph8ZCfCX-T=eCk-MO26pzi_6yoqKSoqrZsC8A@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1216001526230547438=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=fPtS=PR=gmail.com=royger@srs-us1.protection.inumbo.net>)
- id 1ghHD3-00034Y-Ql
- for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 17:00:05 +0000
-Received: by mail-oi1-x243.google.com with SMTP id x23so6868445oix.3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 09:00:04 -0800 (PST)
-In-Reply-To: <CABfawhnA1-7DjCQTY_7Ddy32nB4wDQZV35oSm567kt+tmnDkCQ@mail.gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=eEKV=PR=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1ghHFh-0003Gl-3O
+ for xen-devel@lists.xenproject.org; Wed, 09 Jan 2019 17:02:49 +0000
+Received: by mail-vk1-xa41.google.com with SMTP id v70so1819555vkv.7
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 09:02:47 -0800 (PST)
+In-Reply-To: <CACMJ4GbCRYvC9ph8ZCfCX-T=eCk-MO26pzi_6yoqKSoqrZsC8A@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -37,66 +25,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Tamas K Lengyel <tamas@tklengyel.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Ross Philipson <ross.philipson@gmail.com>, Jason Andryuk <jandryuk@gmail.com>, Daniel Smith <dpsmith@apertussolutions.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Tim Deegan <tim@xen.org>, Christopher Clark <christopher.w.clark@gmail.com>, James McKenzie <voreekf@madingley.org>, George Dunlap <George.Dunlap@eu.citrix.com>, Rich Persaud <persaur@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>, eric chanudet <eric.chanudet@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: Christopher Clark <christopher.w.clark@gmail.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Jason Andryuk <jandryuk@gmail.com>, Daniel Smith <dpsmith@apertussolutions.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Rich Persaud <persaur@gmail.com>, James McKenzie <james@bromium.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Eric Chanudet <eric.chanudet@gmail.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gOSwgMjAxOSBhdCA1OjUxIFBNIFRhbWFzIEsgTGVuZ3llbCA8dGFtYXNAdGts
-ZW5neWVsLmNvbT4gd3JvdGU6Cj4KPiBPbiBXZWQsIEphbiA5LCAyMDE5IGF0IDk6NDggQU0gUmF6
-dmFuIENvam9jYXJ1Cj4gPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+ID4KPiA+
-IE9uIDEvOS8xOSA2OjM0IFBNLCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOgo+ID4gPj4+Pj4gTWF5
-YmUgdGhpcyBpcyB1c2UtY2FzZSBpcyBkaWZmZXJlbnQsIGJ1dCBob3cgZG9lcyBpbnRyb3NwZWN0
-aW9uIGhhbmRsZQo+ID4gPj4+Pj4gYWNjZXNzZXMgdG8gdGhlIHNoYXJlZCBpbmZvIHBhZ2Ugb3Ig
-dGhlIHJ1bnN0YXRlIGluZm8gZm9yIGV4YW1wbGU/Cj4gPiA+Pj4+Pgo+ID4gPj4+Pj4gSSB3b3Vs
-ZCBjb25zaWRlciBhcmdvIHRvIGJlIHRoZSBzYW1lIGluIHRoaXMgcmVnYXJkLgo+ID4gPj4+Pgo+
-ID4gPj4+PiBOb3QgZXhhY3RseTogVGhlIHNoYXJlZCBpbmZvIHBhZ2UgaXMgc3BlY2lhbCBpbiBh
-bnkgZXZlbnQuIEZvcgo+ID4gPj4+PiBydW5zdGF0ZSBpbmZvIChhbmQgYWxpa2UgLSB0aGVyZSdz
-IGFsc28gc3RydWN0IHZjcHVfdGltZV9pbmZvKQo+ID4gPj4+PiBJJ2QgcXVlc3Rpb24gY29ycmVj
-dG5lc3Mgb2YgdGhlIGN1cnJlbnQgaGFuZGxpbmcuIElmIHRoYXQncwo+ID4gPj4+PiB3cm9uZyBh
-bHJlYWR5LCBJJ2QgcHJlZmVyIGlmIHRoZSBpc3N1ZSB3YXNuJ3Qgc3ByZWFkLgo+ID4gPj4+Cj4g
-PiA+Pj4gVGhlcmUgYXJlIGFsc28gZ3JhbnRzLCB3aGljaCB3aGVuIHVzZWQgdG9nZXRoZXIgd2l0
-aCBhbm90aGVyIGd1ZXN0IG9uCj4gPiA+Pj4gdGhlIHNhbWUgaG9zdCBjb3VsZCBhbGxvdyB0byBi
-eXBhc3MgaW50cm9zcGVjdGlvbiBBRkFJQ1Q/ICh1bmxlc3MKPiA+ID4+PiB0aGVyZSdzIHNvbWUg
-cG9saWN5IGFwcGxpZWQgdGhhdCBsaW1pdCBncmFudCBzaGFyaW5nIHRvIHRydXN0ZWQKPiA+ID4+
-PiBkb21haW5zKQo+ID4gPj4+Cj4gPiA+Pj4gVEJIIEknbSBub3Qgc3VyZSBob3cgdG8gaGFuZGxl
-IGh5cG9lcnZpc29yIGFjY2Vzc2VzIHdpdGgKPiA+ID4+PiBpbnRyb3NwZWN0aW9uLiAgTXkga25v
-d2xlZGdlIG9mIGludHJvc3BlY3Rpb24gaXMgZmFpcmx5IGxpbWl0ZWQsIGJ1dAo+ID4gPj4+IGl0
-IHBhdXNlcyB0aGUgZ3Vlc3QgYW5kIHNlbmRzIGEgbm90aWZpY2F0aW9uIHRvIGFuIGluIGd1ZXN0
-IGFnZW50LiBJJ20KPiA+ID4+PiBub3Qgc3VyZSB0aGlzIGlzIGFwcGxpY2FibGUgdG8gaHlwZXJ2
-aXNvciB3cml0ZXMsIHNpbmNlIGl0J3Mgbm90Cj4gPiA+Pj4gcG9zc2libGUgdG8gcGF1c2UgaHlw
-ZXJ2aXNvciBleGVjdXRpb24gYW5kIHdhaXQgZm9yIGEgcmVzcG9uc2UgZnJvbSBhCj4gPiA+Pj4g
-Z3Vlc3QgYWdlbnQuCj4gPiA+Pj4KPiA+ID4+Cj4gPiA+PiBJbnRyb3NwZWN0aW9uIGFwcGxpY2F0
-aW9ucyBvbmx5IGNhcmUgYWJvdXQgbWVtb3J5IGFjY2Vzc2VzIHBlcmZvcm1lZAo+ID4gPj4gYnkg
-dGhlIGd1ZXN0LiBIeXBlcnZpc29yIGFjY2Vzc2VzIHRvIG1vbml0b3JlZCBwYWdlcyBhcmUgbm90
-IGluY2x1ZGVkCj4gPiA+PiB3aGVuIG1vbml0b3JpbmcgLSBpdCBpcyBhY3R1YWxseSBhIGZlYXR1
-cmUgd2hlbiB1c2luZyB0aGUgZW11bGF0b3IgaW4KPiA+ID4+IFhlbiB0byBjb250aW51ZSBndWVz
-dCBleGVjdXRpb24gYmVjYXVzZSB0aGUgaHlwZXJ2aXNvciBpZ25vcmVzIEVQVAo+ID4gPj4gbWVt
-b3J5IHBlcm1pc3Npb25zIHRoYXQgdHJpcCB0aGUgZ3Vlc3QgZm9yIGludHJvc3BlY3Rpb24uIFNv
-IGhhdmluZwo+ID4gPj4gdGhlIGh5cGVydmlzb3IgYWNjZXNzIG1lbW9yeSBvciBhIGdyYW50LXNo
-YXJlZCBwYWdlIGJlaW5nIGFjY2Vzc2VkIGluCj4gPiA+PiBhbm90aGVyIGRvbWFpbiBhcmUgbm90
-IGEgcHJvYmxlbSBmb3IgaW50cm9zcGVjdGlvbi4KPiA+ID4KPiA+ID4gQ2FuJ3QgdGhlbiB0d28g
-Z3Vlc3RzIHJ1bm5pbmcgb24gdGhlIHNhbWUgaG9zdCBiZSBhYmxlIHRvIGNvbXBsZXRlbHkKPiA+
-ID4gYnlwYXNzIGludHJvc3BlY3Rpb24/IEkgZ3Vlc3MgeW91IHByZXZlbnQgdGhpcyBieSBsaW1p
-dGluZyB0byB3aGljaAo+ID4gPiBndWVzdHMgcGFnZXMgY2FuIGJlIHNoYXJlZD8KPiA+Cj4gPiBX
-b3VsZCB0aGVzZSB0d28gZ3Vlc3RzIGJlIEhWTSBndWVzdHM/IEludHJvc3BlY3Rpb24gb25seSB3
-b3JrcyBmb3IgSFZNCj4gPiBndWVzdHMuIEknbSBub3Qgc3VyZSBJIGZvbGxvdyB5b3VyIHNjZW5h
-cmlvIHRob3VnaC4gSG93IHdvdWxkIHRoZXNlCj4gPiBndWVzdHMgY29sbGFib3JhdGUgdG8gZXNj
-YXBlIGludHJvc3BlY3Rpb24gdmlhIGdyYW50cz8KPgo+IElmIHRoZXJlIGFyZSB0d28gZG9tYWlu
-cyBhY3RpbmcgbWFsaWNpb3VzbHkgaW4gY29uY2VydCB0byBieXBhc3MKPiBtb25pdG9yaW5nIG9m
-IG1lbW9yeSB3cml0ZXMgdGhleSBjb3VsZCBhY2hpZXZlIHRoYXQgd2l0aCBncmFudHMsIHllcy4K
-PiBTYXkgYSB3cml0ZS1tb25pdG9yZWQgcGFnZSBpcyBncmFudC1zaGFyZWQgdG8gYW5vdGhlciBk
-b21haW4sIHdoaWNoCj4gdGhlbiBkb2VzIHRoZSB3cml0ZSBvbiBiZWhhbGYgb2YgdGhlIGZpcnN0
-LiBJIHdvdWxkbid0IHNheSB0aGF0J3MKPiAiY29tcGxldGVseSBieXBhc3NpbmcgaW50cm9zcGVj
-dGlvbiIgdGhvdWdoLCB0aGVyZSBhcmUgbWFueSB0eXBlcyBvZgo+IGV2ZW50cyB0aGF0IGNhbiBi
-ZSBtb25pdG9yZWQsIHdyaXRlLWFjY2Vzc2VzIGFyZSBvbmx5IG9uZS4gSSdtIG5vdAo+IGF3YXJl
-IG9mIGFueSBtZWNoYW5pc20gdGhhdCBjYW4gYmUgdXNlZCB0byBsaW1pdCB3aGljaCBwYWdlcyBj
-YW4gYmUKPiBzaGFyZWQgYnV0IHlvdSBjYW4gdXNlIFhTTSB0byByZXN0cmljdCB3aGljaCBkb21h
-aW5zIGNhbiBzaGFyZSBwYWdlcwo+IHRvIGJlZ2luIHdpdGguIFRoYXQncyBub3JtYWxseSBlbm91
-Z2guCgpZZXMsIEkgYXNzdW1lZCB0aGF0IHdvdWxkIGJlIHRoZSB3YXkgdG8gcHJvdGVjdCBhZ2Fp
-bnN0IHN1Y2ggYXR0YWNrcywKaWU6IGxpbWl0aW5nIHRvIHdoaWNoIGd1ZXN0cyBwYWdlcyBjYW4g
-YmUgc2hhcmVkLiBJIHRoaW5rIGp1c3QgbWFraW5nCnN1cmUgdGhlIHJpZ2h0IGFjY2VzcyBjaGVj
-a3MgYXJlIHBsYWNlZCBpbiBYU00gKGp1c3QgbGlrZSB0aGV5IGFyZSBmb3IKZ3JhbnRzKSBzaG91
-bGQgYmUgZW5vdWdoLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--===============1216001526230547438==
+Content-Type: multipart/alternative; boundary="0000000000005c322a057f096e6b"
+
+--0000000000005c322a057f096e6b
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+Sorry for the formatting. Sending it from my phone.
+
+On Wed, 9 Jan 2019, 11:03 Christopher Clark, <christopher.w.clark@gmail.com>
+wrote:
+
+> On Wed, Jan 9, 2019 at 7:56 AM Wei Liu <wei.liu2@citrix.com> wrote:
+> >
+> > On Sun, Jan 06, 2019 at 11:42:40PM -0800, Christopher Clark wrote:
+> > > The register op is used by a domain to register a region of memory for
+> > > receiving messages from either a specified other domain, or, if
+> specifying a
+> > > wildcard, any domain.
+> > >
+> > > This operation creates a mapping within Xen's private address space
+> that
+> > > will remain resident for the lifetime of the ring. In subsequent
+> commits,
+> > > the hypervisor will use this mapping to copy data from a sending
+> domain into
+> > > this registered ring, making it accessible to the domain that
+> registered the
+> > > ring to receive data.
+> > >
+> > > Wildcard any-sender rings are default disabled and registration will be
+> > > refused with EPERM unless they have been specifically enabled with the
+> > > argo-mac boot option introduced here. The reason why the default for
+> > > wildcard rings is 'deny' is that there is currently no means to
+> protect the
+> > > ring from DoS by a noisy domain spamming the ring, affecting other
+> domains
+> > > ability to send to it. This will be addressed with XSM policy controls
+> in
+> > > subsequent work.
+> > >
+> > > Since denying access to any-sender rings is a significant functional
+> > > constraint, a new bootparam is provided to enable overriding this:
+> > >  "argo-mac" variable has allowed values: 'permissive' and 'enforcing'.
+> > > Even though this is a boolean variable, use these descriptive strings
+> in
+> > > order to make it obvious to an administrator that this has potential
+> > > security impact.
+> > >
+> > > The p2m type of the memory supplied by the guest for the ring must be
+> > > p2m_ram_rw and the memory will be pinned as PGT_writable_page while
+> the ring
+> > > is registered.
+> > >
+> > > xen_argo_page_descr_t type is introduced as a page descriptor, to
+> convey
+> > > both the physical address of the start of the page and its
+> granularity. The
+> > > smallest granularity page is assumed to be 4096 bytes and the lower
+> twelve
+> > > bits of the type are used to indicate the size of page of memory
+> supplied.
+> > > The implementation of the hypercall op currently only supports 4K
+> pages.
+> > >
+> >
+> > What is the resolution for the Arm issues mentioned by Julien? I read
+> > the conversation in previous thread. A solution seemed to have been
+> > agreed upon, but the changelog doesn't say anything about it.
+>
+> I made the interface changes that Julien had asked for. The register
+> op now takes arguments that can describe the granularitity of the
+> pages supplied, though only support for 4K pages is accepted in the
+> current implementation. I believe it meets Julien's requirements.
+
+
+I still don't think allowing 4K or 64K is the right solution to go. You are
+adding unnecessary burden in the hypervisor and would prevent optimization
+i the hypervisor and unwanted side effect.
+
+For instance a 64K hypervisor will always map 64K even when the guest is
+passing 4K. You also can't map everything contiguously in Xen (if you ever
+wanted to).
+
+We need to stick on a single chunk size. That could be different between
+Arm and x86. For Arm it would need to be 64KB.
+
+Cheers,
+
+
+> thanks,
+>
+> Christopher
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--0000000000005c322a057f096e6b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<span>Hi,</span><div><br></div><div>Sorry for the formatting. Sending it fr=
+om my phone.</div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr">On W=
+ed, 9 Jan 2019, 11:03 Christopher Clark, &lt;<a href=3D"mailto:christopher.=
+w.clark@gmail.com">christopher.w.clark@gmail.com</a>&gt; wrote:<br></div><b=
+lockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px =
+#ccc solid;padding-left:1ex">On Wed, Jan 9, 2019 at 7:56 AM Wei Liu &lt;<a =
+href=3D"mailto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citrix.com</=
+a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Sun, Jan 06, 2019 at 11:42:40PM -0800, Christopher Clark wrote:<br>
+&gt; &gt; The register op is used by a domain to register a region of memor=
+y for<br>
+&gt; &gt; receiving messages from either a specified other domain, or, if s=
+pecifying a<br>
+&gt; &gt; wildcard, any domain.<br>
+&gt; &gt;<br>
+&gt; &gt; This operation creates a mapping within Xen&#39;s private address=
+ space that<br>
+&gt; &gt; will remain resident for the lifetime of the ring. In subsequent =
+commits,<br>
+&gt; &gt; the hypervisor will use this mapping to copy data from a sending =
+domain into<br>
+&gt; &gt; this registered ring, making it accessible to the domain that reg=
+istered the<br>
+&gt; &gt; ring to receive data.<br>
+&gt; &gt;<br>
+&gt; &gt; Wildcard any-sender rings are default disabled and registration w=
+ill be<br>
+&gt; &gt; refused with EPERM unless they have been specifically enabled wit=
+h the<br>
+&gt; &gt; argo-mac boot option introduced here. The reason why the default =
+for<br>
+&gt; &gt; wildcard rings is &#39;deny&#39; is that there is currently no me=
+ans to protect the<br>
+&gt; &gt; ring from DoS by a noisy domain spamming the ring, affecting othe=
+r domains<br>
+&gt; &gt; ability to send to it. This will be addressed with XSM policy con=
+trols in<br>
+&gt; &gt; subsequent work.<br>
+&gt; &gt;<br>
+&gt; &gt; Since denying access to any-sender rings is a significant functio=
+nal<br>
+&gt; &gt; constraint, a new bootparam is provided to enable overriding this=
+:<br>
+&gt; &gt;=C2=A0 &quot;argo-mac&quot; variable has allowed values: &#39;perm=
+issive&#39; and &#39;enforcing&#39;.<br>
+&gt; &gt; Even though this is a boolean variable, use these descriptive str=
+ings in<br>
+&gt; &gt; order to make it obvious to an administrator that this has potent=
+ial<br>
+&gt; &gt; security impact.<br>
+&gt; &gt;<br>
+&gt; &gt; The p2m type of the memory supplied by the guest for the ring mus=
+t be<br>
+&gt; &gt; p2m_ram_rw and the memory will be pinned as PGT_writable_page whi=
+le the ring<br>
+&gt; &gt; is registered.<br>
+&gt; &gt;<br>
+&gt; &gt; xen_argo_page_descr_t type is introduced as a page descriptor, to=
+ convey<br>
+&gt; &gt; both the physical address of the start of the page and its granul=
+arity. The<br>
+&gt; &gt; smallest granularity page is assumed to be 4096 bytes and the low=
+er twelve<br>
+&gt; &gt; bits of the type are used to indicate the size of page of memory =
+supplied.<br>
+&gt; &gt; The implementation of the hypercall op currently only supports 4K=
+ pages.<br>
+&gt; &gt;<br>
+&gt;<br>
+&gt; What is the resolution for the Arm issues mentioned by Julien? I read<=
+br>
+&gt; the conversation in previous thread. A solution seemed to have been<br=
+>
+&gt; agreed upon, but the changelog doesn&#39;t say anything about it.<br>
+<br>
+I made the interface changes that Julien had asked for. The register<br>
+op now takes arguments that can describe the granularitity of the<br>
+pages supplied, though only support for 4K pages is accepted in the<br>
+current implementation. I believe it meets Julien&#39;s requirements.</bloc=
+kquote></div></div><div></div><div><div class=3D"gmail_quote"><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;=
+padding-left:1ex"></blockquote></div></div><div><br></div><div>I still don&=
+#39;t think allowing 4K or 64K is the right solution to go. You are adding =
+unnecessary burden in the hypervisor and would prevent optimization i the h=
+ypervisor and unwanted side effect.</div><div><br></div><div>For instance a=
+ 64K hypervisor will always map 64K even when the guest is passing 4K. You =
+also can&#39;t map everything contiguously in Xen (if you ever wanted to).<=
+/div><div><br></div><div>We need to stick on a single chunk size. That coul=
+d be different between Arm and x86. For Arm it would need to be 64KB.</div>=
+<div><br></div><div>Cheers,</div><div><br></div><div><div class=3D"gmail_qu=
+ote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-le=
+ft:1px #ccc solid;padding-left:1ex">
+<br>
+thanks,<br>
+<br>
+Christopher<br>
+<br>
+_______________________________________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
+el@lists.xenproject.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
+/xen-devel</a></blockquote></div></div>
+
+--0000000000005c322a057f096e6b--
+
+
+--===============1216001526230547438==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1216001526230547438==--
