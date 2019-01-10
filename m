@@ -1,20 +1,23 @@
-From: Julien Grall <julien.grall@gmail.com>
-Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
-Date: Wed, 9 Jan 2019 21:40:50 -0500
-Message-ID: <CAF3u54A9soG-fjO0ys3hcgcZwXa_KmwrnW_yRDKuiWPaGx2ysQ@mail.gmail.com>
-References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
- <1547077324-9705-1-git-send-email-sstabellini@kernel.org>
+From: Christopher Clark <christopher.w.clark@gmail.com>
+Subject: Re: [PATCH v3 09/15] argo: implement the sendv op;
+ evtchn: expose send_guest_global_virq
+Date: Wed, 9 Jan 2019 19:09:43 -0800
+Message-ID: <CACMJ4GaAW+V9JFNBP=O7ae_fsnJN-SzZU_t=Ry1rgPDkx4NpXw@mail.gmail.com>
+References: <1546846968-7372-1-git-send-email-christopher.w.clark@gmail.com>
+ <1546846968-7372-10-git-send-email-christopher.w.clark@gmail.com>
+ <CAPLaKK4_Uw=g8LtkKhfCG3uTKEiCuJgcp9M_amWgch-N4+zSng@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2597167114017476526=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=KFn8=PS=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1ghQHJ-0005v6-Mh
- for xen-devel@lists.xenproject.org; Thu, 10 Jan 2019 02:41:05 +0000
-Received: by mail-ua1-x941.google.com with SMTP id d21so3125452uap.9
- for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 18:41:03 -0800 (PST)
-In-Reply-To: <1547077324-9705-1-git-send-email-sstabellini@kernel.org>
+ <SRS0=gkqY=PS=gmail.com=christopher.w.clark@srs-us1.protection.inumbo.net>)
+ id 1ghQjI-0007be-09
+ for xen-devel@lists.xenproject.org; Thu, 10 Jan 2019 03:10:00 +0000
+Received: by mail-lj1-x242.google.com with SMTP id v1-v6so8376457ljd.0
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Jan 2019 19:09:57 -0800 (PST)
+In-Reply-To: <CAPLaKK4_Uw=g8LtkKhfCG3uTKEiCuJgcp9M_amWgch-N4+zSng@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,231 +26,238 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, wei.liu2@citrix.com, andrew.cooper3@citrix.com, julien.grall@arm.com, JBeulich@suse.com, xen-devel@lists.xenproject.org
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <royger@freebsd.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Rich Persaud <persaur@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, James McKenzie <james@bromium.com>, Eric Chanudet <eric.chanudet@gmail.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2597167114017476526==
-Content-Type: multipart/alternative; boundary="0000000000006c42b0057f1182f0"
-
---0000000000006c42b0057f1182f0
-Content-Type: text/plain; charset="UTF-8"
-
-Hi,
-
-Sorry for the formatting.
-
-On Wed, 9 Jan 2019, 18:43 Stefano Stabellini, <sstabellini@kernel.org>
-wrote:
-
-> Introduce a macro, SYMBOL, which is similar to RELOC_HIDE, but it is
-> meant to be used everywhere symbols such as _stext and _etext are used
-> in the code. It can take an array type as a parameter, and it returns
-> the same type.
->
-> SYMBOL is needed when accessing symbols such as _stext and _etext
-> because the C standard forbids for both comparisons and substraction
-> (see C Standard, 6.5.6 [ISO/IEC 9899:2011] and [1]) between pointers
-> pointing to different objects. _stext, _etext, etc. are all pointers to
-> different objects from ANCI C point of view.
->
-
-This does not make sense because you still return a pointer and therefore
-the undefined behavior is still present.
-
-I really don't believe this patch is going to make the MISRA tool happy.
-Furthermore, IIRC, Linux to returns unsigned long. So I would like to
-understand why the trick is no needed for us...
-
-At that stage, we should probably involve MlSRA folks (PRQA) to have a
-better understanding on what is expected.
-
-Cheers,
-
-
-> To work around potential C compiler issues (which have actually
-> been found, see the comment on top of RELOC_HIDE in Linux), and to help
-> with certifications, let's introduce some syntactic sugar to be used in
-> following patches.
-
-
-> [1]
-> https://wiki.sei.cmu.edu/confluence/display/c/ARR36-C.+Do+not+subtract+or+compare+two+pointers+that+do+not+refer+to+the+same+array
->
-> Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-> CC: JBeulich@suse.com
-> CC: andrew.cooper3@citrix.com
-> CC: wei.liu2@citrix.com
-> ---
-> Changes in v6:
-> - drop acks
-> - don't use RELOC_HIDE for the implementation
-> - return native type from SYMBOL
->
-> Changes in v4:
-> - add acked-bys
-> - remove unneeded parenthesis
->
-> Changes in v3:
-> - improve commit message
-> - rename __symbol to SYMBOL to avoid name space violations
->
-> Changes in v2:
-> - do not cast return to char*
-> - move to common header
-> ---
->  xen/include/xen/compiler.h | 10 ++++++++++
->  1 file changed, 10 insertions(+)
->
-> diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
-> index ff6c0f5..d4c856c 100644
-> --- a/xen/include/xen/compiler.h
-> +++ b/xen/include/xen/compiler.h
-> @@ -99,6 +99,16 @@
->      __asm__ ("" : "=r"(__ptr) : "0"(ptr));      \
->      (typeof(ptr)) (__ptr + (off)); })
->
-> +/*
-> + * Similar to RELOC_HIDE, but written to be used with symbols such as
-> + * _stext and _etext to avoid undefined behavior comparing pointers to
-> + * different objects. It can handle array types.
-> + */
-> +#define SYMBOL(ptr)                               \
-> +  ({ unsigned long __ptr;                       \
-> +    __asm__ ("" : "=r"(__ptr) : "0"(ptr));      \
-> +    (typeof(*(ptr)) *) (__ptr); })
-> +
->  #ifdef __GCC_ASM_FLAG_OUTPUTS__
->  # define ASM_FLAG_OUT(yes, no) yes
->  #else
-> --
-> 1.9.1
->
->
-> _______________________________________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org
-> https://lists.xenproject.org/mailman/listinfo/xen-devel
-
---0000000000006c42b0057f1182f0
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Hi,<div><br></div><div>Sorry for the formatting.<br><br><div class=3D"gmail=
-_quote"><div dir=3D"ltr">On Wed, 9 Jan 2019, 18:43 Stefano Stabellini, &lt;=
-<a href=3D"mailto:sstabellini@kernel.org">sstabellini@kernel.org</a>&gt; wr=
-ote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;=
-border-left:1px #ccc solid;padding-left:1ex">Introduce a macro, SYMBOL, whi=
-ch is similar to RELOC_HIDE, but it is<br>
-meant to be used everywhere symbols such as _stext and _etext are used<br>
-in the code. It can take an array type as a parameter, and it returns<br>
-the same type.<br>
-<br>
-SYMBOL is needed when accessing symbols such as _stext and _etext<br>
-because the C standard forbids for both comparisons and substraction<br>
-(see C Standard, 6.5.6 [ISO/IEC 9899:2011] and [1]) between pointers<br>
-pointing to different objects. _stext, _etext, etc. are all pointers to<br>
-different objects from ANCI C point of view.<br></blockquote></div></div><d=
-iv><br></div><div>This does not make sense because you still return a point=
-er and therefore the undefined behavior is still present.</div><div><br></d=
-iv><div>I really don&#39;t believe this patch is going to make the MISRA to=
-ol happy. Furthermore, IIRC, Linux to returns unsigned long. So I would lik=
-e to understand why the trick is no needed for us...</div><div><br></div><d=
-iv>At that stage, we should probably involve MlSRA folks (PRQA) to have a b=
-etter understanding on what is expected.</div><div><br></div><div>Cheers,<b=
-r><br></div><div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quot=
-e" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-<br>
-To work around potential C compiler issues (which have actually<br>
-been found, see the comment on top of RELOC_HIDE in Linux), and to help<br>
-with certifications, let&#39;s introduce some syntactic sugar to be used in=
-<br>
-following patches.</blockquote></div></div><div><div class=3D"gmail_quote">=
-<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
-x #ccc solid;padding-left:1ex"><br>
-[1] <a href=3D"https://wiki.sei.cmu.edu/confluence/display/c/ARR36-C.+Do+no=
-t+subtract+or+compare+two+pointers+that+do+not+refer+to+the+same+array" rel=
-=3D"noreferrer" target=3D"_blank">https://wiki.sei.cmu.edu/confluence/displ=
-ay/c/ARR36-C.+Do+not+subtract+or+compare+two+pointers+that+do+not+refer+to+=
-the+same+array</a><br>
-<br>
-Signed-off-by: Stefano Stabellini &lt;<a href=3D"mailto:stefanos@xilinx.com=
-" target=3D"_blank">stefanos@xilinx.com</a>&gt;<br>
-CC: <a href=3D"mailto:JBeulich@suse.com" target=3D"_blank">JBeulich@suse.co=
-m</a><br>
-CC: <a href=3D"mailto:andrew.cooper3@citrix.com" target=3D"_blank">andrew.c=
-ooper3@citrix.com</a><br>
-CC: <a href=3D"mailto:wei.liu2@citrix.com" target=3D"_blank">wei.liu2@citri=
-x.com</a><br>
----<br>
-Changes in v6:<br>
-- drop acks<br>
-- don&#39;t use RELOC_HIDE for the implementation<br>
-- return native type from SYMBOL<br>
-<br>
-Changes in v4:<br>
-- add acked-bys<br>
-- remove unneeded parenthesis<br>
-<br>
-Changes in v3:<br>
-- improve commit message<br>
-- rename __symbol to SYMBOL to avoid name space violations<br>
-<br>
-Changes in v2:<br>
-- do not cast return to char*<br>
-- move to common header<br>
----<br>
-=C2=A0xen/include/xen/compiler.h | 10 ++++++++++<br>
-=C2=A01 file changed, 10 insertions(+)<br>
-<br>
-diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h<br>
-index ff6c0f5..d4c856c 100644<br>
---- a/xen/include/xen/compiler.h<br>
-+++ b/xen/include/xen/compiler.h<br>
-@@ -99,6 +99,16 @@<br>
-=C2=A0 =C2=A0 =C2=A0__asm__ (&quot;&quot; : &quot;=3Dr&quot;(__ptr) : &quot=
-;0&quot;(ptr));=C2=A0 =C2=A0 =C2=A0 \<br>
-=C2=A0 =C2=A0 =C2=A0(typeof(ptr)) (__ptr + (off)); })<br>
-<br>
-+/*<br>
-+ * Similar to RELOC_HIDE, but written to be used with symbols such as<br>
-+ * _stext and _etext to avoid undefined behavior comparing pointers to<br>
-+ * different objects. It can handle array types.<br>
-+ */<br>
-+#define SYMBOL(ptr)=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-+=C2=A0 ({ unsigned long __ptr;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\<br>
-+=C2=A0 =C2=A0 __asm__ (&quot;&quot; : &quot;=3Dr&quot;(__ptr) : &quot;0&qu=
-ot;(ptr));=C2=A0 =C2=A0 =C2=A0 \<br>
-+=C2=A0 =C2=A0 (typeof(*(ptr)) *) (__ptr); })<br>
-+<br>
-=C2=A0#ifdef __GCC_ASM_FLAG_OUTPUTS__<br>
-=C2=A0# define ASM_FLAG_OUT(yes, no) yes<br>
-=C2=A0#else<br>
--- <br>
-1.9.1<br>
-<br>
-<br>
-_______________________________________________<br>
-Xen-devel mailing list<br>
-<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
-el@lists.xenproject.org</a><br>
-<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
-noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
-/xen-devel</a></blockquote></div></div>
-
---0000000000006c42b0057f1182f0--
-
-
---===============2597167114017476526==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2597167114017476526==--
+VGhhbmtzIGZvciB0aGUgcmV2aWV3LCBSb2dlci4gUmVwbGllcyBpbmxpbmUgYmVsb3cuCgpPbiBX
+ZWQsIEphbiA5LCAyMDE5IGF0IDEwOjU3IEFNIFJvZ2VyIFBhdSBNb25uw6kgPHJveWdlckBmcmVl
+YnNkLm9yZz4gd3JvdGU6Cj4KPiAgdG8uT24gTW9uLCBKYW4gNywgMjAxOSBhdCA4OjQ0IEFNIENo
+cmlzdG9waGVyIENsYXJrCj4gPGNocmlzdG9waGVyLncuY2xhcmtAZ21haWwuY29tPiB3cm90ZToK
+PiA+Cj4gPiBzZW5kdiBvcGVyYXRpb24gaXMgaW52b2tlZCB0byBwZXJmb3JtIGEgc3luY2hyb25v
+dXMgc2VuZCBvZiBidWZmZXJzCj4gPiBjb250YWluZWQgaW4gaW92cyB0byBhIHJlbW90ZSBkb21h
+aW4ncyByZWdpc3RlcmVkIHJpbmcuCj4gPgo+ID4gZGlmZiAtLWdpdCBhL3hlbi9jb21tb24vYXJn
+by5jIGIveGVuL2NvbW1vbi9hcmdvLmMKPiA+IGluZGV4IDU5Y2U4YzQuLjQ1NDg0MzUgMTAwNjQ0
+Cj4gPiAtLS0gYS94ZW4vY29tbW9uL2FyZ28uYwo+ID4gKysrIGIveGVuL2NvbW1vbi9hcmdvLmMK
+Cj4gPgo+ID4gK3N0YXRpYyBpbnQKPiA+ICttZW1jcHlfdG9fZ3Vlc3RfcmluZyhzdHJ1Y3QgYXJn
+b19yaW5nX2luZm8gKnJpbmdfaW5mbywgdWludDMyX3Qgb2Zmc2V0LAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgIGNvbnN0IHZvaWQgKnNyYywgWEVOX0dVRVNUX0hBTkRMRSh1aW50OF90KSBzcmNf
+aG5kLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHVpbnQzMl90IGxlbikKPiA+ICt7Cj4gPiAr
+ICAgIHVuc2lnbmVkIGludCBtZm5zX2luZGV4ID0gb2Zmc2V0ID4+IFBBR0VfU0hJRlQ7Cj4gPiAr
+ICAgIHZvaWQgKmRzdDsKPiA+ICsgICAgaW50IHJldDsKPiA+ICsgICAgdW5zaWduZWQgaW50IHNy
+Y19vZmZzZXQgPSAwOwo+ID4gKwo+ID4gKyAgICBBU1NFUlQoc3Bpbl9pc19sb2NrZWQoJnJpbmdf
+aW5mby0+bG9jaykpOwo+ID4gKwo+ID4gKyAgICBvZmZzZXQgJj0gflBBR0VfTUFTSzsKPiA+ICsK
+PiA+ICsgICAgaWYgKCAobGVuID4gWEVOX0FSR09fTUFYX1JJTkdfU0laRSkgfHwgKG9mZnNldCA+
+IFhFTl9BUkdPX01BWF9SSU5HX1NJWkUpICkKPiA+ICsgICAgICAgIHJldHVybiAtRUZBVUxUOwo+
+ID4gKwo+ID4gKyAgICB3aGlsZSAoIChvZmZzZXQgKyBsZW4pID4gUEFHRV9TSVpFICkKPgo+IEkg
+dGhpbmsgeW91IGNvdWxkIG1hcCB0aGUgd2hvbGUgcmluZyBpbiBjb250aWd1b3VzIHZpcnR1YWwg
+YWRkcmVzcwo+IHNwYWNlIGFuZCB0aGVuIHdyaXRpbmcgdG8gaXQgd291bGQgYmUgbXVjaCBtb3Jl
+IGVhc3ksIHlvdSB3b3VsZG4ndAo+IG5lZWQgdG8gaXRlcmF0ZSB3aXRoIG1lbWNweSBvciBjb3B5
+X2Zyb21fZ3Vlc3QsIHRha2UgYSBsb29rIGF0IF9fdm1hcC4KPiBZb3UgY291bGQgbGlrZWx5IG1h
+cCB0aGlzIHdoZW4gdGhlIHJpbmcgZ2V0cyBzZXR1cCBhbmQga2VlcCBpdCBtYXBwZWQKPiBmb3Ig
+dGhlIGxpZmV0aW1lIG9mIHRoZSByaW5nLgoKWW91J3JlIHJpZ2h0IGFib3V0IHRoYXQsIGJlY2F1
+c2UgbWFwX2RvbWFpbl9wYWdlX2dsb2JhbCwgd2hpY2ggdGhlCmN1cnJlbnQgY29kZSB1c2VzLCB1
+c2VzIHZtYXAgaXRzZWxmLiBJIHRoaW5rIHRoZXJlJ3MgYSBjb3VwbGUgb2YKcmVhc29ucyB3aHkg
+dGhlIGNvZGUgaGFzIGJlZW4gaW1wbGVtZW50ZWQgdGhlIGl0ZXJhdGl2ZSB3YXkgdGhvdWdoLgoK
+VGhlIGZpcnN0IGlzIHRoYXQgSSB0aGluayByaW5nIHJlc2l6ZSBoYXMgYmVlbiBhIGNvbnNpZGVy
+YXRpb246IGl0J3MKdXNlZnVsIHRvIGJlIGFibGUgdG8gaW5jcmVhc2UgdGhlIHNpemUgb2YgYSBs
+aXZlIGFuZCBhY3RpdmUgcmluZyB0aGF0CmlzIHVuZGVyIGxvYWQgd2l0aG91dCBoYXZpbmcgdG8g
+dGVhciBkb3duIHRoZSBtYXBwaW5ncywgZmluZCBhIG5ldwp2aXJ0dWFsIGFkZHJlc3MgcmVnaW9u
+IG9mIHRoZSByaWdodCBzaXplIGFuZCB0aGVuIHJlbWFwIGl0OiB5b3UgY2FuCmp1c3Qgc3VwcGx5
+IHNvbWUgbW9yZSBtZW1vcnkgYW5kIG1hcCB0aG9zZSBwYWdlcyBvbnRvIHRoZSBlbmQgb2YgdGhl
+CnJpbmcsIGFuZCBlbnN1cmUgYm90aCBzaWRlcyBrbm93IGFib3V0IHRoZSBuZXcgcmluZyBzaXpl
+LiBTaW1pbGFybHksCnNocmlua2luZyBhIHF1aWV0IHJpbmcgY2FuIGJlIHVzZWZ1bC4KSG93ZXZl
+ciwgdGhlICJnZm4gcmFjZSIgdGhhdCB5b3UgKGNvcnJlY3RseSkgcG9pbnRlZCBvdXQgaW4gYW4g
+ZWFybGllcgpyZXZpZXcsIGFuZCBKYW4ncyByZWxhdGVkIHJlcXVlc3QgdG8gZHJvcCB0aGUgInJl
+dmFsaWRhdGUgYW4gZXhpc3RpbmcKbWFwcGluZyBvbiByaW5nIHJlcmVnaXN0ZXIiIG1vdGl2YXRl
+ZCByZW1vdmFsIG9mIGEgc2VjdGlvbiBvZiB0aGUgY29kZQppbnZvbHZlZCwgYW5kIHRoZW4gaW4g
+djMgb2YgdGhlIHNlcmllcywgSSd2ZSBhY3R1YWxseSBqdXN0IGJsb2NrZWQKcmluZyByZXNpemUg
+YmVjYXVzZSBpdCdzIG1pc3NpbmcgYSB3YWxrIHRocm91Z2ggdGhlIHBlbmRpbmcKbm90aWZpY2F0
+aW9ucyB0byBmaW5kIGFueSB0aGF0IGhhdmUgYmVjb21lIHVudHJpZ2dlcmFibGUgd2l0aCB0aGUg
+bmV3CnJpbmcgc2l6ZSB3aGVuIGEgcmluZyBpcyBzaHJ1bmsgYW5kIEknZCBsaWtlIHRvIGRlZmVy
+IGltcGxlbWVudGluZwp0aGF0IGZvciBub3cuIFNvIHRoZSByaW5nIHJlc2l6ZSByZWFzb24gaXMg
+bW9yZSBvZiBhIGNvbnNpZGVyYXRpb24gZm9yCmEgcG9zc2libGUgbGF0ZXIgdmVyc2lvbiBvZiBB
+cmdvIHRoYW4gdGhlIGN1cnJlbnQgb25lLgoKVGhlIHNlY29uZCByZWFzb24gaXMgYWJvdXQgYXZv
+aWRpbmcgZXhwb3NpbmcgdGhlIFhlbiB2aXJ0dWFsIG1lbW9yeQphbGxvY2F0b3IgZGlyZWN0bHkg
+dG8gZnJlcXVlbnQgZ3Vlc3Qtc3VwcGxpZWQgc2l6ZSByZXF1ZXN0cyBmb3IKY29udGlndW91cyBy
+ZWdpb25zIChvZiB1cCB0byAxNkdCKS4gV2l0aCBzaW5nbGUtcGFnZSBhbGxvY2F0aW9ucyB0bwpi
+dWlsZCBhIHJpbmcsIGZyYWdtZW50YXRpb24gaXMgbm90IGEgcHJvYmxlbSwgYW5kIG1pc2NoaWVm
+IGJ5IGEgZ3Vlc3QKc2VlbXMgZGlmZmljdWx0LiBDaGFuZ2luZyBpdCB0byBpc3N1ZSByZXF1ZXN0
+cyBmb3IgY29udGlndW91cyByZWdpb25zLAp3aXRoIHZhcmlhYmxlIHJpbmcgc2l6ZXMgdXAgdG8g
+dGhlIG1heGltdW0gb2YgMTZHQiwgaXQgc2VlbXMgbGlrZQpzaWduaWZpY2FudCBmcmFnbWVudGF0
+aW9uIG1heSBiZSBhY2hpZXZhYmxlLiBJIGRvbid0IGtub3cgdGhlCnByYWN0aWNhbCBpbXBhY3Qg
+b2YgdGhhdCBidXQgaXQgc2VlbXMgd29ydGggYXZvaWRpbmcuIEFyZSB0aGUgb3RoZXIKdXNlcnMg
+b2YgX192bWFwIChvciB2bWFwKSBmb3IgbXVsdGktZ2lnYWJ5dGUgcmVnaW9ucyBvbmx5IGVpdGhl
+cgpib290LXRpbWUsIGluZnJlcXVlbnQgb3BlcmF0aW9ucyAobGl2ZXBhdGNoKSwgb3IgZm9yIGFj
+dGlvbnMgYnkKcHJpdmlsZWdlZCAoaWUuIHNvbWV3aGF0IHRydXN0ZWQpIGRvbWFpbnMgKGlvcmVt
+YXApLCBvciBpcyBpdCBhbHJlYWR5CmEgZnJlcXVlbnQgb3BlcmF0aW9uIHNvbWV3aGVyZSBlbHNl
+PwoKR2l2ZW4gdGhlIGNvbnRleHQgYWJvdmUsIGFuZCBKYXNvbidzIHNpbXBsaWZpY2F0aW9uIHRv
+IHRoZQptZW1jcHlfdG9fZ3Vlc3RfcmluZyBmdW5jdGlvbiwgcGx1cyB0aGUgaW1taW5lbnQgbWVy
+Z2UgZnJlZXplCmRlYWRsaW5lLCBhbmQgdGhlIHVuZGVyc3RhbmRpbmcgdGhhdCB0aGlzIGxvb3Ag
+YW5kIHRoZSByZWxhdGVkIGRhdGEKc3RydWN0dXJlcyBzdXBwb3J0aW5nIGl0IGhhdmUgYmVlbiB0
+ZXN0ZWQgYW5kIGFyZSB3b3JraW5nLCB3b3VsZCBpdCBiZQphY2NlcHRhYmxlIHRvIG9taXQgbWFr
+aW5nIHRoaXMgY29udGlndW91cyBtYXBwaW5nIGNoYW5nZSBmcm9tIHRoaXMKY3VycmVudCBzZXJp
+ZXM/Cgo+Cj4gPiArICAgIHsKPiA+ICsgICAgICAgIHVuc2lnbmVkIGludCBoZWFkX2xlbiA9IFBB
+R0VfU0laRSAtIG9mZnNldDsKPiA+ICsKPiA+ICsgICAgICAgIHJldCA9IHJpbmdfbWFwX3BhZ2Uo
+cmluZ19pbmZvLCBtZm5zX2luZGV4LCAmZHN0KTsKPiA+ICsgICAgICAgIGlmICggcmV0ICkKPiA+
+ICsgICAgICAgICAgICByZXR1cm4gcmV0Owo+ID4gKwo+ID4gKyAgICAgICAgaWYgKCBzcmMgKQo+
+ID4gKyAgICAgICAgewo+ID4gKyAgICAgICAgICAgIG1lbWNweShkc3QgKyBvZmZzZXQsIHNyYyAr
+IHNyY19vZmZzZXQsIGhlYWRfbGVuKTsKPiA+ICsgICAgICAgICAgICBzcmNfb2Zmc2V0ICs9IGhl
+YWRfbGVuOwo+ID4gKyAgICAgICAgfQo+ID4gKyAgICAgICAgZWxzZQo+ID4gKyAgICAgICAgewo+
+ID4gKyAgICAgICAgICAgIHJldCA9IGNvcHlfZnJvbV9ndWVzdChkc3QgKyBvZmZzZXQsIHNyY19o
+bmQsIGhlYWRfbGVuKSA/Cj4gPiArICAgICAgICAgICAgICAgICAgICAtRUZBVUxUIDogMDsKPiA+
+ICsgICAgICAgICAgICBpZiAoIHJldCApCj4gPiArICAgICAgICAgICAgICAgIHJldHVybiByZXQ7
+Cj4KPiBZb3UgY2FuIHNpbXBsaWZ5IHRoaXMgdG86Cj4KPiBpZiAoIGNvcHlfZnJvbV9ndWVzdCgu
+Li4pICkKPiAgICAgcmV0dXJuIC1FRkFVTFQ7Cgp5ZXMhIGFjayAtIHRoYW5rcwoKPHNuaXA+Cj4g
+PiArLyoKPiA+ICsgKiBnZXRfc2FuaXRpemVkX3JpbmcgY3JlYXRlcyBhIG1vZGlmaWVkIGNvcHkg
+b2YgdGhlIHJpbmcgcG9pbnRlcnMgd2hlcmUKPiA+ICsgKiB0aGUgcnhfcHRyIGlzIHJvdW5kZWQg
+dXAgdG8gZW5zdXJlIGl0IGlzIGFsaWduZWQsIGFuZCB0aGVuIHJpbmcKPiA+ICsgKiB3cmFwIGlz
+IGhhbmRsZWQuIFNpbXBsaWZpZXMgc2FmZSB1c2Ugb2YgdGhlIHJ4X3B0ciBmb3IgYXZhaWxhYmxl
+Cj4gPiArICogc3BhY2UgY2FsY3VsYXRpb24uCj4gPiArICovCj4gPiArc3RhdGljIGludAo+ID4g
+K2dldF9zYW5pdGl6ZWRfcmluZyh4ZW5fYXJnb19yaW5nX3QgKnJpbmcsIHN0cnVjdCBhcmdvX3Jp
+bmdfaW5mbyAqcmluZ19pbmZvKQo+ID4gK3sKPiA+ICsgICAgdWludDMyX3QgcnhfcHRyOwo+ID4g
+KyAgICBpbnQgcmV0Owo+ID4gKwo+ID4gKyAgICByZXQgPSBnZXRfcnhfcHRyKHJpbmdfaW5mbywg
+JnJ4X3B0cik7Cj4gPiArICAgIGlmICggcmV0ICkKPiA+ICsgICAgICAgIHJldHVybiByZXQ7Cj4g
+PiArCj4gPiArICAgIHJpbmctPnR4X3B0ciA9IHJpbmdfaW5mby0+dHhfcHRyOwo+ID4gKwo+ID4g
+KyAgICByeF9wdHIgPSBST1VORFVQX01FU1NBR0UocnhfcHRyKTsKPiA+ICsgICAgaWYgKCByeF9w
+dHIgPj0gcmluZ19pbmZvLT5sZW4gKQo+ID4gKyAgICAgICAgcnhfcHRyID0gMDsKPiA+ICsKPiA+
+ICsgICAgcmluZy0+cnhfcHRyID0gcnhfcHRyOwo+Cj4gTmV3bGluZS4KCmFjaywgdGhhbmtzCgo8
+c25pcD4KPiA+ICsvKgo+ID4gKyAqIGlvdl9jb3VudCByZXR1cm5zIGl0cyBjb3VudCBvbiBzdWNj
+ZXNzIHZpYSBhbiBvdXQgdmFyaWFibGUgdG8gYXZvaWQKPiA+ICsgKiBwb3RlbnRpYWwgZm9yIGEg
+bmVnYXRpdmUgcmV0dXJuIHZhbHVlIHRvIGJlIHVzZWQgaW5jb3JyZWN0bHkKPiA+ICsgKiAoZWcu
+IGNvZXJjZWQgaW50byBhbiB1bnNpZ25lZCB2YXJpYWJsZSByZXN1bHRpbmcgaW4gYSBsYXJnZSBp
+bmNvcnJlY3QgdmFsdWUpCj4gPiArICovCj4gPiArc3RhdGljIGludAo+ID4gK2lvdl9jb3VudChj
+b25zdCB4ZW5fYXJnb19pb3ZfdCAqcGlvdiwgdW5zaWduZWQgbG9uZyBuaW92LCB1aW50MzJfdCAq
+Y291bnQpCj4gPiArewo+ID4gKyAgICB1aW50MzJfdCBzdW1faW92X2xlbnMgPSAwOwo+ID4gKwo+
+ID4gKyAgICBpZiAoIG5pb3YgPiBYRU5fQVJHT19NQVhJT1YgKQo+ID4gKyAgICAgICAgcmV0dXJu
+IC1FSU5WQUw7Cj4gPiArCj4gPiArICAgIHdoaWxlICggbmlvdi0tICkKPgo+IEkgd291bGQgdXNl
+IGEgZm9yIGxvb3AgaGVyZSwgdGhhdCB3b3VsZCByZW1vdmUgdGhlIG5lZWQgdG8gcGlvdisrLCBp
+Zgo+IHlvdSB3YW50IHRvIGtlZXAgaXQgcXVpdGUgc2ltaWxhcjoKPgo+IGZvciAoIDsgbmlvdi0t
+OyBwaW92KysgKQo+IHsKClllcywgdGhhdCBpcyBiZXR0ZXIgLSB0aGFua3MsIGFwcGxpZWQuCgo8
+c25pcD4KPiA+ICsKPiA+ICtzdGF0aWMgaW50Cj4gPiArcmluZ2J1Zl9pbnNlcnQoc3RydWN0IGRv
+bWFpbiAqZCwgc3RydWN0IGFyZ29fcmluZ19pbmZvICpyaW5nX2luZm8sCj4gPiArICAgICAgICAg
+ICAgICAgY29uc3Qgc3RydWN0IGFyZ29fcmluZ19pZCAqc3JjX2lkLAo+ID4gKyAgICAgICAgICAg
+ICAgIFhFTl9HVUVTVF9IQU5ETEVfUEFSQU0oeGVuX2FyZ29faW92X3QpIGlvdnNfaG5kLAo+ID4g
+KyAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgbmlvdiwgdWludDMyX3QgbWVzc2FnZV90eXBl
+LAo+ID4gKyAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgKm91dF9sZW4pCj4gPiArewo+ID4g
+KyAgICB4ZW5fYXJnb19yaW5nX3QgcmluZzsKPiA+ICsgICAgc3RydWN0IHhlbl9hcmdvX3Jpbmdf
+bWVzc2FnZV9oZWFkZXIgbWggPSB7IDAgfTsKPgo+IE5vIG5lZWQgZm9yIHRoZSAwLCB7IH0gd2ls
+bCBhY2hpZXZlIGV4YWN0bHkgdGhlIHNhbWUuCgphY2ssIGFwcGxpZWQKCj4KPiA+ICsgICAgaW50
+MzJfdCBzcDsKPiA+ICsgICAgaW50MzJfdCByZXQ7Cj4gPiArICAgIHVpbnQzMl90IGxlbiA9IDA7
+Cj4gPiArICAgIHhlbl9hcmdvX2lvdl90IGlvdnNbWEVOX0FSR09fTUFYSU9WXTsKPgo+IFRoaXMg
+c2VlbXMgc2xpZ2h0bHkgZGFuZ2Vyb3VzLCBhIGNoYW5nZSBvZiB0aGUgbWF4aW11bSBjb3VsZCBj
+YXVzZQo+IHN0YWNrIG92ZXJmbG93IGRlcGVuZGluZyBvbiB0aGUgc2l6ZSBvZiB4ZW5fYXJnb19p
+b3ZfdC4gSSB0aGluayB5b3UKPiBuZWVkIHNvbWUgY29tbWVudCBuZXh0IHRvIGRlZmluaXRpb24g
+b2YgWEVOX0FSR09fTUFYSU9WIHRvIG5vdGUgdGhhdAo+IGluY3JlYXNpbmcgdGhpcyBjb3VsZCBj
+YXVzZSBpc3N1ZXMuCgpUaGF0IG1ha2VzIHNlbnNlLCB3aWxsIGRvLgoKPHNuaXA+Cj4gPiArICAg
+IC8qCj4gPiArICAgICAqIEZpcnN0IGRhdGEgd3JpdGUgaW50byB0aGUgZGVzdGluYXRpb24gcmlu
+ZzogZml4ZWQgc2l6ZSwgbWVzc2FnZSBoZWFkZXIuCj4gPiArICAgICAqIFRoaXMgY2Fubm90IG92
+ZXJydW4gYmVjYXVzZSB0aGUgYXZhaWxhYmxlIGZyZWUgc3BhY2UgKHZhbHVlIGluICdzcCcpCj4g
+PiArICAgICAqIGlzIGNoZWNrZWQgYWJvdmUgYW5kIG11c3QgYmUgYXQgbGVhc3QgdGhpcyBzaXpl
+Lgo+ID4gKyAgICAgKi8KPiA+ICsgICAgcmV0ID0gbWVtY3B5X3RvX2d1ZXN0X3JpbmcocmluZ19p
+bmZvLCByaW5nLnR4X3B0ciArIHNpemVvZih4ZW5fYXJnb19yaW5nX3QpLAo+ID4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAmbWgsIE5VTExfaG5kLCBzaXplb2YobWgpKTsKPiA+ICsg
+ICAgaWYgKCByZXQgKQo+ID4gKyAgICB7Cj4gPiArICAgICAgICBncHJpbnRrKFhFTkxPR19FUlIs
+Cj4gPiArICAgICAgICAgICAgICAgICJhcmdvOiBmYWlsZWQgdG8gd3JpdGUgbWVzc2FnZSBoZWFk
+ZXIgdG8gcmluZyAodm0ldToleCB2bSVkKVxuIiwKPiA+ICsgICAgICAgICAgICAgICAgcmluZ19p
+bmZvLT5pZC5kb21haW5faWQsIHJpbmdfaW5mby0+aWQucG9ydCwKPiA+ICsgICAgICAgICAgICAg
+ICAgcmluZ19pbmZvLT5pZC5wYXJ0bmVyX2lkKTsKPiA+ICsKPiA+ICsgICAgICAgIGdvdG8gb3V0
+Owo+ID4gKyAgICB9Cj4gPiArCj4gPiArICAgIHJpbmcudHhfcHRyICs9IHNpemVvZihtaCk7Cj4g
+PiArICAgIGlmICggcmluZy50eF9wdHIgPT0gcmluZ19pbmZvLT5sZW4gKQo+ID4gKyAgICAgICAg
+cmluZy50eF9wdHIgPSAwOwo+ID4gKwo+ID4gKyAgICBwaW92ID0gaW92czsKPiA+ICsKPiA+ICsg
+ICAgd2hpbGUgKCBuaW92LS0gKQo+Cj4gQUZBSUNUIHVzaW5nIGEgZm9yIGxvb3Agd291bGQgcmVt
+b3ZlIHRoZSBuZWVkIHRvIGFsc28gZG8gYSBwaW92KysgYXQKPiBlYWNoIGl0ZXJhdGlvbi4KCmFj
+aywgYXBwbGllZC4KCjxzbmlwPgo+ID4gKyAgICAgICAgICogQ2FzZSAyOiByaW5nLXRhaWwtd3Jh
+cC13cml0ZSBhYm92ZSB3YXMgbm90IHBlcmZvcm1lZAo+ID4gKyAgICAgICAgICogICAgLT4gc28g
+aW92X2xlbiBpcyB0aGUgZ3Vlc3Qtc3VwcGxpZWQgdmFsdWUgYW5kOiAoaW92X2xlbiA8PSBzcCkK
+PiA+ICsgICAgICAgICAqICAgIGllLiBsZXNzIHRoYW4gYXZhaWxhYmxlIHNwYWNlIGF0IHRoZSB0
+YWlsIG9mIHRoZSByaW5nOgo+ID4gKyAgICAgICAgICogICAgICAgIHNvIHRoaXMgd3JpdGUgY2Fu
+bm90IG92ZXJydW4uCj4gPiArICAgICAgICAgKi8KPiA+ICsgICAgICAgIHJldCA9IG1lbWNweV90
+b19ndWVzdF9yaW5nKHJpbmdfaW5mbywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHJpbmcudHhfcHRyICsgc2l6ZW9mKHhlbl9hcmdvX3JpbmdfdCksCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOVUxMLCBidWZfaG5kLCBpb3ZfbGVuKTsKPiA+
+ICsgICAgICAgIGlmICggcmV0ICkKPiA+ICsgICAgICAgIHsKPiA+ICsgICAgICAgICAgICBncHJp
+bnRrKFhFTkxPR19FUlIsCj4gPiArICAgICAgICAgICAgICAgICAgICAiYXJnbzogZmFpbGVkIHRv
+IGNvcHkgWyVwLCAlIlBSSXgzMiJdICh2bSV1OiV4IHZtJWQpXG4iLAo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgYnVmX2huZC5wLCBpb3ZfbGVuLCByaW5nX2luZm8tPmlkLmRvbWFpbl9pZCwKPiA+
+ICsgICAgICAgICAgICAgICAgICAgIHJpbmdfaW5mby0+aWQucG9ydCwgcmluZ19pbmZvLT5pZC5w
+YXJ0bmVyX2lkKTsKPiA+ICsKPiA+ICsgICAgICAgICAgICBnb3RvIG91dDsKPiA+ICsgICAgICAg
+IH0KPiA+ICsKPiA+ICsgICAgICAgIHJpbmcudHhfcHRyICs9IGlvdl9sZW47Cj4gPiArCj4gPiAr
+ICAgICAgICBpZiAoIHJpbmcudHhfcHRyID09IHJpbmdfaW5mby0+bGVuICkKPiA+ICsgICAgICAg
+ICAgICByaW5nLnR4X3B0ciA9IDA7Cj4gPiArCj4gPiArICAgICAgICBwaW92Kys7Cj4gPiArICAg
+IH0KPiA+ICsKPiA+ICsgICAgcmluZy50eF9wdHIgPSBST1VORFVQX01FU1NBR0UocmluZy50eF9w
+dHIpOwo+ID4gKwo+ID4gKyAgICBpZiAoIHJpbmcudHhfcHRyID49IHJpbmdfaW5mby0+bGVuICkK
+PiA+ICsgICAgICAgIHJpbmcudHhfcHRyIC09IHJpbmdfaW5mby0+bGVuOwo+ID4gKwo+ID4gKyAg
+ICB1cGRhdGVfdHhfcHRyKHJpbmdfaW5mbywgcmluZy50eF9wdHIpOwo+ID4gKwo+ID4gKyBvdXQ6
+Cj4KPiBEbyB5b3UgcmVhbGx5IG5lZWQgdG8gb3V0IGxhYmVsPyAqb3V0X2xlbiBpdCdzIG9ubHkg
+c2V0IGluIHRoZSBzdWNjZXNzCj4gY2FzZSwgc28gYWxsIHRoZSBlcnJvciBjYXNlcyB0aGF0IHVz
+ZSBhICdnb3RvIG91dCcgY291bGQgYmUgcmVwbGFjZWQKPiBieSAncmV0dXJuIHJldDsnLgoKYWNr
+LCB0aGFua3MgLS0gZG9uZS4KCjxzbmlwPgo+ID4gK3N0YXRpYyBpbnQKPiA+ICtwZW5kaW5nX3F1
+ZXVlKHN0cnVjdCBhcmdvX3JpbmdfaW5mbyAqcmluZ19pbmZvLCBkb21pZF90IHNyY19pZCwKPiA+
+ICsgICAgICAgICAgICAgIHVuc2lnbmVkIGludCBsZW4pCj4gPiArewo+ID4gKyAgICBzdHJ1Y3Qg
+cGVuZGluZ19lbnQgKmVudDsKPiA+ICsKPiA+ICsgICAgQVNTRVJUKHNwaW5faXNfbG9ja2VkKCZy
+aW5nX2luZm8tPmxvY2spKTsKPiA+ICsKPiA+ICsgICAgaWYgKCByaW5nX2luZm8tPm5wZW5kaW5n
+ID49IE1BWF9QRU5ESU5HX1BFUl9SSU5HICkKPiA+ICsgICAgICAgIHJldHVybiAtRU5PU1BDOwo+
+ID4gKwo+ID4gKyAgICBlbnQgPSB4bWFsbG9jKHN0cnVjdCBwZW5kaW5nX2VudCk7Cj4gPiArCj4K
+PiBFeHRyYSBuZXdsaW5lLgoKYWNrCgo8c25pcD4KPiA+Cj4gPiArc3RhdGljIGxvbmcKPiA+ICtz
+ZW5kdihzdHJ1Y3QgZG9tYWluICpzcmNfZCwgY29uc3QgeGVuX2FyZ29fYWRkcl90ICpzcmNfYWRk
+ciwKPiA+ICsgICAgICBjb25zdCB4ZW5fYXJnb19hZGRyX3QgKmRzdF9hZGRyLAo+ID4gKyAgICAg
+IFhFTl9HVUVTVF9IQU5ETEVfUEFSQU0oeGVuX2FyZ29faW92X3QpIGlvdnNfaG5kLCB1bnNpZ25l
+ZCBsb25nIG5pb3YsCj4gPiArICAgICAgdWludDMyX3QgbWVzc2FnZV90eXBlKQo+ID4gK3sKPiA+
+ICsgICAgc3RydWN0IGRvbWFpbiAqZHN0X2QgPSBOVUxMOwo+ID4gKyAgICBzdHJ1Y3QgYXJnb19y
+aW5nX2lkIHNyY19pZDsKPiA+ICsgICAgc3RydWN0IGFyZ29fcmluZ19pbmZvICpyaW5nX2luZm87
+Cj4gPiArICAgIGludCByZXQgPSAwOwo+ID4gKyAgICB1bnNpZ25lZCBsb25nIGxlbiA9IDA7Cj4g
+PiArCj4gPiArICAgIEFTU0VSVChzcmNfZC0+ZG9tYWluX2lkID09IHNyY19hZGRyLT5kb21haW5f
+aWQpOwo+ID4gKwo+ID4gKyAgICBhcmdvX2RwcmludGsoInNlbmR2OiAoJWQ6JXgpLT4oJWQ6JXgp
+IG5pb3Y6JWx1IGlvdjolcCB0eXBlOiV1XG4iLAo+ID4gKyAgICAgICAgICAgICAgICAgc3JjX2Fk
+ZHItPmRvbWFpbl9pZCwgc3JjX2FkZHItPnBvcnQsCj4gPiArICAgICAgICAgICAgICAgICBkc3Rf
+YWRkci0+ZG9tYWluX2lkLCBkc3RfYWRkci0+cG9ydCwKPiA+ICsgICAgICAgICAgICAgICAgIG5p
+b3YsIGlvdnNfaG5kLnAsIG1lc3NhZ2VfdHlwZSk7Cj4gPiArCj4gPiArICAgIHJlYWRfbG9jaygm
+YXJnb19sb2NrKTsKPiA+ICsKPiA+ICsgICAgaWYgKCAhc3JjX2QtPmFyZ28gKQo+ID4gKyAgICB7
+Cj4gPiArICAgICAgICByZXQgPSAtRU5PREVWOwo+ID4gKyAgICAgICAgZ290byBvdXRfdW5sb2Nr
+Owo+ID4gKyAgICB9Cj4gPiArCj4gPiArICAgIHNyY19pZC5wb3J0ID0gc3JjX2FkZHItPnBvcnQ7
+Cj4gPiArICAgIHNyY19pZC5kb21haW5faWQgPSBzcmNfZC0+ZG9tYWluX2lkOwo+ID4gKyAgICBz
+cmNfaWQucGFydG5lcl9pZCA9IGRzdF9hZGRyLT5kb21haW5faWQ7Cj4gPiArCj4gPiArICAgIGRz
+dF9kID0gZ2V0X2RvbWFpbl9ieV9pZChkc3RfYWRkci0+ZG9tYWluX2lkKTsKPiA+ICsgICAgaWYg
+KCAhZHN0X2QgKQo+ID4gKyAgICB7Cj4gPiArICAgICAgICBhcmdvX2RwcmludGsoIiFkc3RfZCwg
+RVNSQ0hcbiIpOwo+ID4gKyAgICAgICAgcmV0ID0gLUVTUkNIOwo+ID4gKyAgICAgICAgZ290byBv
+dXRfdW5sb2NrOwo+ID4gKyAgICB9Cj4gPiArCj4gPiArICAgIGlmICggIWRzdF9kLT5hcmdvICkK
+PiA+ICsgICAgewo+ID4gKyAgICAgICAgYXJnb19kcHJpbnRrKCIhZHN0X2QtPmFyZ28sIEVDT05O
+UkVGVVNFRFxuIik7Cj4gPiArICAgICAgICByZXQgPSAtRUNPTk5SRUZVU0VEOwo+ID4gKyAgICAg
+ICAgZ290byBvdXRfdW5sb2NrOwo+Cj4gVGhlIHVzYWdlIG9mIG91dF91bmxvY2sgaGVyZSBhbmQg
+aW4gdGhlIGNvbmRpdGlvbiBhYm92ZSBpcyB3cm9uZywKPiBzaW5jZSBpdCB3aWxsIHVuY29uZGl0
+aW9uYWxseSBjYWxsIHJlYWRfdW5sb2NrKCZhcmdvX2xvY2spOyB3aGljaCBpcwo+IHdyb25nIGhl
+cmUgYmVjYXVzZSB0aGUgbG9jayBoYXMgbm90IHlldCBiZWVuIGFjcXVpcmVkLgoKU29ycnksIEkg
+ZG9uJ3QgdGhpbmsgdGhhdCdzIHF1aXRlIHJpZ2h0IC0tIGlmIHlvdSBzY3JvbGwgdXAgYSBiaXQK
+aGVyZSwgeW91IGNhbiBzZWUgd2hlcmUgYXJnb19sb2NrIGlzIHRha2VuIHVuY29uZGl0aW9uYWxs
+eSwganVzdCBhZnRlcgp0aGUgZHByaW50ayBhbmQgYmVmb3JlIGNoZWNraW5nIHdoZXRoZXIgc3Jj
+X2QgaXMgYXJnbyBlbmFibGVkLiBUaGUKc2Vjb25kIGxvY2sgaGFzbid0IGJlZW4gdGFrZW4geWV0
+IC0gYnV0IHRoYXQncyBub3QgdGhlIG9uZSBiZWluZwp1bmxvY2tlZCBvbiB0aGF0IG91dF91bmxv
+Y2sgcGF0aC4KCj4KPiA+ICsgICAgfQo+ID4gKwo+ID4gKyAgICByZWFkX2xvY2soJmRzdF9kLT5h
+cmdvLT5sb2NrKTsKPiA+ICsKPiA+ICsgICAgcmluZ19pbmZvID0gcmluZ19maW5kX2luZm9fYnlf
+bWF0Y2goZHN0X2QsIGRzdF9hZGRyLT5wb3J0LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBzcmNfYWRkci0+ZG9tYWluX2lkKTsKPiA+ICsgICAgaWYgKCAhcmlu
+Z19pbmZvICkKPiA+ICsgICAgewo+ID4gKyAgICAgICAgZ3ByaW50ayhYRU5MT0dfRVJSLAo+ID4g
+KyAgICAgICAgICAgICAgICAiYXJnbzogdm0ldSBjb25uZWN0aW9uIHJlZnVzZWQsIHNyYyAodm0l
+dToleCkgZHN0ICh2bSV1OiV4KVxuIiwKPiA+ICsgICAgICAgICAgICAgICAgY3VycmVudC0+ZG9t
+YWluLT5kb21haW5faWQsIHNyY19pZC5kb21haW5faWQsIHNyY19pZC5wb3J0LAo+ID4gKyAgICAg
+ICAgICAgICAgICBkc3RfYWRkci0+ZG9tYWluX2lkLCBkc3RfYWRkci0+cG9ydCk7Cj4gPiArCj4g
+PiArICAgICAgICByZXQgPSAtRUNPTk5SRUZVU0VEOwo+ID4gKyAgICAgICAgZ290byBvdXRfdW5s
+b2NrMjsKPiA+ICsgICAgfQo+ID4gKwo+ID4gKyAgICBzcGluX2xvY2soJnJpbmdfaW5mby0+bG9j
+ayk7Cj4gPiArCj4gPiArICAgIHJldCA9IHJpbmdidWZfaW5zZXJ0KGRzdF9kLCByaW5nX2luZm8s
+ICZzcmNfaWQsIGlvdnNfaG5kLCBuaW92LAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICBt
+ZXNzYWdlX3R5cGUsICZsZW4pOwo+ID4gKyAgICBpZiAoIHJldCA9PSAtRUFHQUlOICkKPiA+ICsg
+ICAgewo+ID4gKyAgICAgICAgYXJnb19kcHJpbnRrKCJhcmdvX3JpbmdidWZfc2VuZHYgZmFpbGVk
+LCBFQUdBSU5cbiIpOwo+ID4gKyAgICAgICAgLyogcmVxdWV1ZSB0byBpc3N1ZSBhIG5vdGlmaWNh
+dGlvbiB3aGVuIHNwYWNlIGlzIHRoZXJlICovCj4gPiArICAgICAgICByZXQgPSBwZW5kaW5nX3Jl
+cXVldWUocmluZ19pbmZvLCBzcmNfYWRkci0+ZG9tYWluX2lkLCBsZW4pOwo+ID4gKyAgICB9Cj4g
+PiArCj4gPiArICAgIHNwaW5fdW5sb2NrKCZyaW5nX2luZm8tPmxvY2spOwo+ID4gKwo+ID4gKyAg
+ICBpZiAoIHJldCA+PSAwICkKPiA+ICsgICAgICAgIHNpZ25hbF9kb21haW4oZHN0X2QpOwo+ID4g
+Kwo+ID4gKyBvdXRfdW5sb2NrMjoKPgo+IFRoZXJlJ3Mgb25seSBhIHNpbmdsZSB1c2VyIG9mIHRo
+ZSBvdXRfdW5sb2NrMiBsYWJlbCwgYXQgd2hpY2ggcG9pbnQgaXQKPiBtaWdodCBiZSBlYXNpZXIg
+dG8gcmVhZCB0byBqdXN0IHB1dCB0aGUgcmVhZF91bmxvY2sgdGhlcmUgYW5kIGp1c3QgdXNlCj4g
+dGhlIGV4aXN0aW5nIG91dF91bmxvY2sgbGFiZWwuCgphY2ssIHdpbGwgY2hhbmdlIHRoYXQuCgpU
+aGFua3MgYWdhaW4sCgpDaHJpc3RvcGhlcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
