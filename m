@@ -1,23 +1,23 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: Julien Grall <julien.grall@gmail.com>
 Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
-Date: Thu, 10 Jan 2019 11:03:10 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1901101052500.27759@sstabellini-ThinkPad-X260>
+Date: Thu, 10 Jan 2019 14:24:26 -0500
+Message-ID: <CAF3u54A-1_cum6u-nXm4m+60=7tFF=Y1vnR-0+fEKg2y6_68rw@mail.gmail.com>
 References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
  <1547077324-9705-1-git-send-email-sstabellini@kernel.org>
  <CAF3u54A9soG-fjO0ys3hcgcZwXa_KmwrnW_yRDKuiWPaGx2ysQ@mail.gmail.com>
  <5C37013C020000780020C17D@prv1-mh.provo.novell.com>
  <alpine.DEB.2.10.1901100924400.15373@sstabellini-ThinkPad-X260>
- <c35526c8589d49ba9f4200220e44581c@dornerworks.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8070969217683429021=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=GXHB=PS=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1ghfbk-0003wn-3G
- for xen-devel@lists.xenproject.org; Thu, 10 Jan 2019 19:03:12 +0000
-In-Reply-To: <c35526c8589d49ba9f4200220e44581c@dornerworks.com>
+ <SRS0=KFn8=PS=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1ghfwX-0005UI-9V
+ for xen-devel@lists.xenproject.org; Thu, 10 Jan 2019 19:24:41 +0000
+Received: by mail-vs1-xe43.google.com with SMTP id b74so7722107vsd.9
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Jan 2019 11:24:39 -0800 (PST)
+In-Reply-To: <alpine.DEB.2.10.1901100924400.15373@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,100 +26,182 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@gmail.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCAxMCBKYW4gMjAxOSwgU3Rld2FydCBIaWxkZWJyYW5kIHdyb3RlOgo+IE9uIFRodXJz
-ZGF5LCBKYW51YXJ5IDEwLCAyMDE5IDEyOjMwIFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
-Cj4gPiBPbiBUaHUsIDEwIEphbiAyMDE5LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+ID4gPj4+IE9u
-IDEwLjAxLjE5IGF0IDAzOjQwLCA8anVsaWVuLmdyYWxsQGdtYWlsLmNvbT4gd3JvdGU6Cj4gPiA+
-ID4gT24gV2VkLCA5IEphbiAyMDE5LCAxODo0MyBTdGVmYW5vIFN0YWJlbGxpbmksIDxzc3RhYmVs
-bGluaUBrZXJuZWwub3JnPgo+ID4gPiA+IHdyb3RlOgo+ID4gPiA+Cj4gPiA+ID4+IEludHJvZHVj
-ZSBhIG1hY3JvLCBTWU1CT0wsIHdoaWNoIGlzIHNpbWlsYXIgdG8gUkVMT0NfSElERSwgYnV0IGl0
-IGlzCj4gPiA+ID4+IG1lYW50IHRvIGJlIHVzZWQgZXZlcnl3aGVyZSBzeW1ib2xzIHN1Y2ggYXMg
-X3N0ZXh0IGFuZCBfZXRleHQgYXJlIHVzZWQKPiA+ID4gPj4gaW4gdGhlIGNvZGUuIEl0IGNhbiB0
-YWtlIGFuIGFycmF5IHR5cGUgYXMgYSBwYXJhbWV0ZXIsIGFuZCBpdCByZXR1cm5zCj4gPiA+ID4+
-IHRoZSBzYW1lIHR5cGUuCj4gPiA+ID4+Cj4gPiA+ID4+IFNZTUJPTCBpcyBuZWVkZWQgd2hlbiBh
-Y2Nlc3Npbmcgc3ltYm9scyBzdWNoIGFzIF9zdGV4dCBhbmQgX2V0ZXh0Cj4gPiA+ID4+IGJlY2F1
-c2UgdGhlIEMgc3RhbmRhcmQgZm9yYmlkcyBmb3IgYm90aCBjb21wYXJpc29ucyBhbmQgc3Vic3Ry
-YWN0aW9uCj4gPiA+ID4+IChzZWUgQyBTdGFuZGFyZCwgNi41LjYgW0lTTy9JRUMgOTg5OToyMDEx
-XSBhbmQgWzFdKSBiZXR3ZWVuIHBvaW50ZXJzCj4gPiA+ID4+IHBvaW50aW5nIHRvIGRpZmZlcmVu
-dCBvYmplY3RzLiBfc3RleHQsIF9ldGV4dCwgZXRjLiBhcmUgYWxsIHBvaW50ZXJzIHRvCj4gPiA+
-ID4+IGRpZmZlcmVudCBvYmplY3RzIGZyb20gQU5DSSBDIHBvaW50IG9mIHZpZXcuCj4gPiA+ID4+
-Cj4gPiA+ID4KPiA+ID4gPiBUaGlzIGRvZXMgbm90IG1ha2Ugc2Vuc2UgYmVjYXVzZSB5b3Ugc3Rp
-bGwgcmV0dXJuIGEgcG9pbnRlciBhbmQgdGhlcmVmb3JlCj4gPiA+ID4gdGhlIHVuZGVmaW5lZCBi
-ZWhhdmlvciBpcyBzdGlsbCBwcmVzZW50Lgo+ID4gPiA+Cj4gPiA+ID4gSSByZWFsbHkgZG9uJ3Qg
-YmVsaWV2ZSB0aGlzIHBhdGNoIGlzIGdvaW5nIHRvIG1ha2UgdGhlIE1JU1JBIHRvb2wgaGFwcHku
-Cj4gPiA+Cj4gPiA+IFdlbGwsIHRpbGwgbm93IEkndmUgYmVlbiBhc3N1bWluZyB0aGF0IG5vIHZl
-cnNpb24gb2YgdGhpcyBzZXJpZXMgd2FzCj4gPiA+IHBvc3RlZCB3aXRob3V0IGJlaW5nIGNlcnRh
-aW4gdGhlIGNoYW5nZXMgYWNoaWV2ZSB0aGUgZ29hbCAob2YKPiA+ID4gbWFraW5nIHRoYXQgdG9v
-bCBoYXBweSkuCj4gPiAKPiA+IE5vLCBKYW46IHVuZm9ydHVuYXRlbHkgd2UgY2Fubm90IHJlLXJ1
-biB0aGUgc2Nhbm5pbmcgdG9vbCBhZ2FpbnN0IGFueQo+ID4gdmVyc2lvbiBvZiBYZW4gd2Ugd2lz
-aCB0byA6LSgKPiA+IAo+ID4gV2UgY2Fubm90IGtub3cgaW4gYWR2YW5jZSBpZiBhIHNldCBvZiBj
-aGFuZ2VzIHdpbGwgbWFrZSB0aGUgdG9vbCBoYXBweQo+ID4gb3Igbm90Lgo+IAo+IFBsYXlpbmcg
-ZGV2aWwncyBhZHZvY2F0ZTogZXZlbiB3aXRoIGFsbCBzb3J0cyBvZiBjYXN0aW5nIGFuZCBpbmxp
-bmUgYXNzZW1ibHkKPiB0byBzdXBwcmVzcyBzdGF0aWMgYW5hbHlzaXMgdG9vbCB3YXJuaW5ncywg
-d2UncmUgc3RpbGwgbm90IGFkZHJlc3NpbmcgdGhlCj4gdW5kZXJseWluZyBydWxlIHZpb2xhdGlv
-bi4gQSBwb2ludGVyIHZhbHVlIGNhc3RlZCBvciBmZWQgdGhyb3VnaCBzb21lIGlubGluZQo+IGFz
-c2VtYmx5IGF0IHRoZSBlbmQgb2YgdGhlIGRheSBpcyBzdGlsbCBhIHZhbHVlIHRoYXQgcmVwcmVz
-ZW50cyBhbiBhZGRyZXNzCj4gaW4gYW4gb2JqZWN0LiBBbmQgYXMgc29vbiBhcyB3ZSBzdWJ0cmFj
-dCBvciBjb21wYXJlIHRoYXQgdmFsdWUgdG8gb25lCj4gdGhhdCByZXByZXNlbnRzIGFub3RoZXIg
-b2JqZWN0IHdlIHN0YXJ0IHZpb2xhdGluZyB0aGUgTUlTUkEgcnVsZXMgKHRoaXMgaXMKPiBteSBv
-d24gcmF0aGVyIHN0cmljdCBpbnRlcnByZXRhdGlvbiBmb3IgdGhlIHB1cnBvc2Ugb2YgbWFraW5n
-IGEgcG9pbnQgLSAKPiBwbGVhc2UgZmVlbCBmcmVlIHRvIGRpc2FncmVlKS4gCgpZZXMsIHRoaXMg
-c2VlbXMgdG8gYmUgSmFuJ3MgcG9pbnQgb2YgdmlldyB0b28sIGJ1dCBJIGRpc2FncmVlOiBfc3Rh
-cnQgaXMKbm90IGEgcG9udGllciB0byBhbiBvYmplY3QgLS0gaXQgaXMgYSBsaW5rZXItc2V0IG1l
-bW9yeSBhZGRyZXNzLiBBbHNvLAppZiB0aGVyZSBhbnkgZG91YnRzLCBjZXJ0YWlubHkgaXQgaXMg
-bm90IGEgcG9pbnRlciB0byBhbiBvYmplY3QgYWZ0ZXIKYmVpbmcgY29udmVydGVkIHRvIHVuc2ln
-bmVkIGxvbmcgaW4gYXNzZW1ibHkuIEkgZG9uJ3QgdGhpbmsgQyBjb21wbGlhbmNlCmNvdWxkL3No
-b3VsZCBtYWtlIGFueSBhc3N1bXB0aW9ucyBvciBndWVzc2VzIG9uIGFzbSByZXR1cm5lZCB2YWx1
-ZXMuIEJ1dApJIGFtIGxlc3MgY29udmluY2VkIG9mIHRoaXMgYXJndW1lbnQgaWYgd2UgY29udmVy
-dCBpdCBiYWNrIHRvIGFub3RoZXIKQyBwb2ludGVyLCB3aGljaCBpcyB3aGF0IHRoZSBjdXJyZW50
-IGltcGxlbWVudGF0aW9uIGRvZXMuCgpCVFcsIGluIGNhc2UgSmFuJ3MgY2hhbmdlcyBoaXMgbWlu
-ZCwgdGhpcyBpcyBhbiBhbHRlcm5hdGl2ZSB2ZXJzaW9uIG9mCnY3IHdpdGggU1lNQk9MX0hJREUg
-cmV0dXJuaW5nIHVuc2lnbmVkIGxvbmc6CgpodHRwOi8veGVuYml0cy54ZW5wcm9qZWN0Lm9yZy9n
-aXQtaHR0cC9wZW9wbGUvc3N0YWJlbGxpbmkveGVuLXVuc3RhYmxlLmdpdCBjZXJ0aWZpY2F0aW9u
-LTctdW5zaWduZWRfbG9uZwoKCj4gSWYgYWxsIHdlIHJlYWxseSBjYXJlIGFib3V0IGlzIG1ha2lu
-ZyBQUlFBIGhhcHB5LCBJIGJlbGlldmUgaXQgZG9lcyBzdXBwb3J0Cj4gc29tZSBzb3J0IG9mIGNv
-bW1lbnQtYmFzZWQgc3VwcHJlc3Npb24uIEkndmUgc2VlbiBjb21tZW50cyBsaWtlCj4gLyogUFJR
-QSBTIDA0ODcgKi8gb3IgLyogUFJRQSBTIDA0ODggKi8gaW4gdmFyaW91cyBjb2RlYmFzZXMsIEkn
-bSBndWVzc2luZwo+IGNvbW1lbnRzIGxpa2UgdGhpcyBoYXZlIHNvbWV0aGluZyB0byBkbyB3aXRo
-IHN1cHByZXNzaW5nIHRoZXNlIHR5cGVzIG9mCj4gd2FybmluZ3MuCgpJbnRlcmVzdGluZyAuLi4g
-c29tZXRoaW5nIHRvIGludmVzdGlnYXRlLgoKCj4gPiBJZiBJIGtuZXcgdGhhdCBTWU1CT0wgcmV0
-dXJuaW5nIHRoZSBuYXRpdmUgcG9pbnQgdHlwZSBhcyBpbiB2NiBpcwo+ID4gc3VmZmljaWVudCB0
-byBtYWtlIHRoZSB0b29sIGhhcHB5LCBJIHdvdWxkbid0IGJlIGhlcmUgYXJndWluZy4gV2UgY2Fu
-bm90Cj4gPiBrbm93IGZvciBzdXJlIHVudGlsIHdlIGNvbW1pdCB0aGUgY2hhbmdlcywgdGhlbiB3
-ZSBhc2sgUFJRQSB0byByZS1zY2FuCj4gPiBhZ2FpbnN0IGEgbW9yZSByZWNlbnQgdmVyc2lvbiBv
-ZiBYZW4uIEl0IGlzIGFuIGhlYXZ5IHByb2Nlc3MgYW5kIGZvcgo+ID4gdGhpcyByZWFzb24gSSBw
-cmVmZXJyZWQgdGhlIHNhZmVyIG9mIHRoZSB0d28gYXBwcm9hY2hlcy4KPiA+IAo+ID4gQW55d2F5
-LCBJIHdvdWxkIHJhdGhlciBnZXQgc29tZXRoaW5nIGluLCBldmVuIGlmIGluc3VmZmljaWVudCwg
-dGhhbgo+ID4gbm90aGluZy4gU28gSSdsbCBhZGRyZXNzIGFsbCB5b3VyIGNvbW1lbnRzIGJhc2Vk
-IG9uIHJldHVybmluZyB0aGUKPiA+IHBvaW50ZXIgdHlwZSwgYW5kIHN1Ym1pdCBhIG5ldyB2ZXJz
-aW9uLiBUaGUgYm90aGVyc29tZSBjaGFuZ2VzIGFyZSB0aGUKPiA+IG9uZXMgdG8gdGhlIGNhbGwg
-c2l0ZXMsIGFuZCBJIHdvdWxkIGxpa2UgdG8gZ2V0IHRob3NlIGluIG5vIG1hdHRlciB0aGUKPiA+
-IGltcGxlbWVudGF0aW9uIG9mIFNZTUJPTC4KPiAKPiBJIGFncmVlLCBpdCB3b3VsZCBiZSBuaWNl
-IHRvIGhpZ2hsaWdodCBldmVyeXdoZXJlIHdlIHRoaW5rIHdlJ3JlIGluIHZpb2xhdGlvbgo+IG9m
-IHRoZSAicG9pbnRlcnMgdG8gZGlmZmVyZW50IG9iamVjdHMiIHJ1bGVzLiBQZXJoYXBzIGl0IHdv
-dWxkIG1ha2UgaXQgY2xlYXJlcgo+IGlmIHdlIGFkZGVkIGEgY29tbWVudCBpbiB0aGUgY29kZWJh
-c2UgdG8gc3BlbGwgb3V0IHRoZSBpbnRlbnQsIHdoaWNoIEknbQo+IGludGVycHJldGluZyBhcyBy
-b3VnaGx5ICJUaGlzIHZpb2xhdGVzIE1JU1JBIFJ1bGUgMTguMSwgMTguMiwgb3IgMTguMy4gV2Ug
-Cj4gbmVlZCB0byByZXZpc2l0IHRoaXMgaW4gdGhlIGZ1dHVyZSB0byBldmFsdWF0ZSBpZiB3ZSBj
-YW4gYXZvaWQgdmlvbGF0aW5nIHRoZXNlCj4gcnVsZXMuIgoKWWVhaCwgdGhhdCBiYXNpY2FsbHkg
-d2h5IEkgd291bGQgbGlrZSB0aGUgc2VyaWVzIHRvIGdvIGluLiBFdmVuIGlmIGl0CmRvZXNuJ3Qg
-bWFrZSB0aGUgY29kZSBjb21wbGlhbnQsIGF0IGxlYXN0IFNZTUJPTF9ISURFIGNsZWFybHkgbWFy
-ayB0aGUKbm9uLWNvbXBsaWFudCBzaXRlcy4KCgo+IE9yIHBlcmhhcHMgaXQgd291bGQgbWFrZSBp
-dCBjbGVhcmVyIHRvIGZvcmdldCBhYm91dCBTWU1CT0wgYWx0b2dldGhlciBhbmQKPiBpbnN0ZWFk
-IGp1c3QgYWRkIHN1cHByZXNzaW9uIGNvbW1lbnRzLgoKV2Ugc3RpbGwgbmVlZCBTWU1CT0wgYmVj
-YXVzZSBvZiBwb3RlbnRpYWwgd2VpcmQgY29tcGlsZXIgaXNzdWVzLCBzZWUgdGhlCmNvbW1lbnQg
-b24gdG9wIG9mIFJFTE9DX0hJREUgaW4gdGhlIExpbnV4IGtlcm5lbC4KCgo+IEZ1cnRoZXIsIGlm
-IHdlIGRlY2lkZSBpbiBhbiBpbnN0YW5jZSB0aGF0IHdlIGhhdmUgbm8gY2hvaWNlIGJ1dCB0bwo+
-IHN1YnRyYWN0L2NvbXBhcmUgcG9pbnRlcnMgdG8gZGlmZmVyZW50IG9iamVjdHMsIHRoZW4gdGhl
-IE1JU1JBIHJ1bGVzIEkKPiBtZW50aW9uZWQgYXJlIG9ubHkgKnJlcXVpcmVkKiBydWxlcyAobm90
-ICptYW5kYXRvcnkqKSwgd2hpY2ggbWVhbnMgd2UKPiBhcmUgT0sgdG8gdmlvbGF0ZSB0aGVtIGFz
-IGxvbmcgYXMgd2Ugd3JpdGUgdXAgYSBkZXZpYXRpb24gd2l0aCB0aGUgYXBwcm9wcmlhdGUKPiBq
-dXN0aWZpY2F0aW9uIGFuZCBleHBsYW5hdGlvbiBvZiBhbnkgdW5kZWZpbmVkIGJlaGF2aW9yIGFu
-ZCB3aHkgaXQncyBPSyB0byByZWx5Cj4gb24gc2FpZCB1bmRlZmluZWQgYmVoYXZpb3IuCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8070969217683429021==
+Content-Type: multipart/alternative; boundary="00000000000097a27a057f1f878b"
+
+--00000000000097a27a057f1f878b
+Content-Type: text/plain; charset="UTF-8"
+
+On Thu, 10 Jan 2019, 12:29 Stefano Stabellini, <sstabellini@kernel.org>
+wrote:
+
+> On Thu, 10 Jan 2019, Jan Beulich wrote:
+> > >>> On 10.01.19 at 03:40, <julien.grall@gmail.com> wrote:
+> > > On Wed, 9 Jan 2019, 18:43 Stefano Stabellini, <sstabellini@kernel.org>
+> > > wrote:
+> > >
+> > >> Introduce a macro, SYMBOL, which is similar to RELOC_HIDE, but it is
+> > >> meant to be used everywhere symbols such as _stext and _etext are used
+> > >> in the code. It can take an array type as a parameter, and it returns
+> > >> the same type.
+> > >>
+> > >> SYMBOL is needed when accessing symbols such as _stext and _etext
+> > >> because the C standard forbids for both comparisons and substraction
+> > >> (see C Standard, 6.5.6 [ISO/IEC 9899:2011] and [1]) between pointers
+> > >> pointing to different objects. _stext, _etext, etc. are all pointers
+> to
+> > >> different objects from ANCI C point of view.
+> > >>
+> > >
+> > > This does not make sense because you still return a pointer and
+> therefore
+> > > the undefined behavior is still present.
+> > >
+> > > I really don't believe this patch is going to make the MISRA tool
+> happy.
+> >
+> > Well, till now I've been assuming that no version of this series was
+> > posted without being certain the changes achieve the goal (of
+> > making that tool happy).
+>
+> No, Jan: unfortunately we cannot re-run the scanning tool against any
+> version of Xen we wish to :-(
+>
+> We cannot know in advance if a set of changes will make the tool happy
+> or not.
+>
+> If I knew that SYMBOL returning the native point type as in v6 is
+> sufficient to make the tool happy, I wouldn't be here arguing. We cannot
+> know for sure until we commit the changes, then we ask PRQA to re-scan
+> against a more recent version of Xen. It is an heavy process and for
+> this reason I preferred the safer of the two approaches.
+>
+
+
+> Anyway, I would rather get something in, even if insufficient, than
+> nothing. So I'll address all your comments based on returning the
+> pointer type, and submit a new version. The bothersome changes are the
+> ones to the call sites, and I would like to get those in no matter the
+> implementation of SYMBOL.
+
+
+It is not only insufficient but wrong when you read the commit message. You
+also were not convinced about this approach.
+
+I understand that we need to commit so we can get the result from the PRQA
+tool. However, we should have talked with people knowing MISRA to
+understand whether it could work.
+
+You also didn't address my point on why Linux needs to go through unsigned
+long.
+
+So I don't think it is right to merge it without more ground.
+
+On that basis:
+
+Nacked-by: Julien Grall <julien.grall@arm.com>
+
+Cheers,
+
+>
+
+--00000000000097a27a057f1f878b
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Thu, 10 Jan 2019, 12=
+:29 Stefano Stabellini, &lt;<a href=3D"mailto:sstabellini@kernel.org">sstab=
+ellini@kernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote"=
+ style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On=
+ Thu, 10 Jan 2019, Jan Beulich wrote:<br>
+&gt; &gt;&gt;&gt; On 10.01.19 at 03:40, &lt;<a href=3D"mailto:julien.grall@=
+gmail.com" target=3D"_blank">julien.grall@gmail.com</a>&gt; wrote:<br>
+&gt; &gt; On Wed, 9 Jan 2019, 18:43 Stefano Stabellini, &lt;<a href=3D"mail=
+to:sstabellini@kernel.org" target=3D"_blank">sstabellini@kernel.org</a>&gt;=
+<br>
+&gt; &gt; wrote:<br>
+&gt; &gt; <br>
+&gt; &gt;&gt; Introduce a macro, SYMBOL, which is similar to RELOC_HIDE, bu=
+t it is<br>
+&gt; &gt;&gt; meant to be used everywhere symbols such as _stext and _etext=
+ are used<br>
+&gt; &gt;&gt; in the code. It can take an array type as a parameter, and it=
+ returns<br>
+&gt; &gt;&gt; the same type.<br>
+&gt; &gt;&gt;<br>
+&gt; &gt;&gt; SYMBOL is needed when accessing symbols such as _stext and _e=
+text<br>
+&gt; &gt;&gt; because the C standard forbids for both comparisons and subst=
+raction<br>
+&gt; &gt;&gt; (see C Standard, 6.5.6 [ISO/IEC 9899:2011] and [1]) between p=
+ointers<br>
+&gt; &gt;&gt; pointing to different objects. _stext, _etext, etc. are all p=
+ointers to<br>
+&gt; &gt;&gt; different objects from ANCI C point of view.<br>
+&gt; &gt;&gt;<br>
+&gt; &gt; <br>
+&gt; &gt; This does not make sense because you still return a pointer and t=
+herefore<br>
+&gt; &gt; the undefined behavior is still present.<br>
+&gt; &gt; <br>
+&gt; &gt; I really don&#39;t believe this patch is going to make the MISRA =
+tool happy.<br>
+&gt; <br>
+&gt; Well, till now I&#39;ve been assuming that no version of this series w=
+as<br>
+&gt; posted without being certain the changes achieve the goal (of<br>
+&gt; making that tool happy).<br>
+<br>
+No, Jan: unfortunately we cannot re-run the scanning tool against any<br>
+version of Xen we wish to :-(<br>
+<br>
+We cannot know in advance if a set of changes will make the tool happy<br>
+or not.<br>
+<br>
+If I knew that SYMBOL returning the native point type as in v6 is<br>
+sufficient to make the tool happy, I wouldn&#39;t be here arguing. We canno=
+t<br>
+know for sure until we commit the changes, then we ask PRQA to re-scan<br>
+against a more recent version of Xen. It is an heavy process and for<br>
+this reason I preferred the safer of the two approaches.<br></blockquote></=
+div><div><br></div><div class=3D"gmail_quote"><blockquote class=3D"gmail_qu=
+ote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex=
+">
+<br>
+Anyway, I would rather get something in, even if insufficient, than<br>
+nothing. So I&#39;ll address all your comments based on returning the<br>
+pointer type, and submit a new version. The bothersome changes are the<br>
+ones to the call sites, and I would like to get those in no matter the<br>
+implementation of SYMBOL.</blockquote></div><div><br></div><div>It is not o=
+nly insufficient but wrong when you read the commit message. You also were =
+not convinced about this approach.=C2=A0</div><div><br></div><div>I underst=
+and that we need to commit so we can get the result from the PRQA tool. How=
+ever, we should have talked with people knowing MISRA to understand whether=
+ it could work.</div><div><br></div><div>You also didn&#39;t address my poi=
+nt on why Linux needs to go through unsigned long.</div><div><br></div><div=
+>So I don&#39;t think it is right to merge it without more ground.</div><di=
+v><br></div><div>On that basis:</div><div><br></div><div>Nacked-by: Julien =
+Grall &lt;<a href=3D"mailto:julien.grall@arm.com">julien.grall@arm.com</a>&=
+gt;</div><div><br></div><div>Cheers,</div><div class=3D"gmail_quote"><block=
+quote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc=
+ solid;padding-left:1ex">
+</blockquote></div>
+
+--00000000000097a27a057f1f878b--
+
+
+--===============8070969217683429021==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8070969217683429021==--
