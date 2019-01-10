@@ -1,26 +1,21 @@
-From: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <royger@freebsd.org>
-Subject: Re: [PATCH RFC v1] x86/emulate: Send vm_event form
- emulate
-Date: Thu, 10 Jan 2019 17:52:45 +0100
-Message-ID: <CAPLaKK7-OaY2S5Oq4jezMSErHpau80=Fcu8MWEFEbGo9CxbyFw@mail.gmail.com>
-References: <20190107130952.27449-1-aisaila@bitdefender.com>
- <CAPLaKK6+iD1kU5cFc=gEYVR0YeFhf12L89CSGC1BHRLha-r5Dg@mail.gmail.com>
- <3c65f142-63e0-5d9d-eba3-63c4da4df048@bitdefender.com>
- <CAPLaKK6tnwUVZaMvnBeu5F2PP9YgkcEOuYFFgYgmRYOeZGVW+A@mail.gmail.com>
- <7819fabe-5394-73d8-9542-869200ab47af@bitdefender.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH] xen: Fix x86 sched_clock() interface for xen
+Date: Thu, 10 Jan 2019 12:17:20 -0500
+Message-ID: <21d24fe0-f9bd-c312-7773-b43a8ff39ef1__35898.2969927185$1547140599$gmane$org@oracle.com>
+References: <20190110100722.11216-1-jgross@suse.com>
+ <e7ea12ca-93f1-2421-702b-b55806eb20bd@oracle.com>
+ <e98d244f-1257-ed23-26f4-8909900590b4@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=5H7G=PS=gmail.com=royger@srs-us1.protection.inumbo.net>)
- id 1ghdZj-0001Rv-52
- for xen-devel@lists.xenproject.org; Thu, 10 Jan 2019 16:52:59 +0000
-Received: by mail-oi1-f195.google.com with SMTP id x23so9821533oix.3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Jan 2019 08:52:57 -0800 (PST)
-In-Reply-To: <7819fabe-5394-73d8-9542-869200ab47af@bitdefender.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=o8hk=PS=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1ghdxd-000349-5x
+ for xen-devel@lists.xenproject.org; Thu, 10 Jan 2019 17:17:41 +0000
+In-Reply-To: <e98d244f-1257-ed23-26f4-8909900590b4@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,32 +24,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
-Cc: "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "paul.durrant@citrix.com" <paul.durrant@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "roger.pau@citrix.com" <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
+Cc: sstabellini@kernel.org, stable@vger.kernel.org, hans@knorrie.org, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKYW4gMTAsIDIwMTkgYXQgNTo0MCBQTSBBbGV4YW5kcnUgU3RlZmFuIElTQUlMQQo8
-YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+Cj4KPiA+Pj4KPiA+Pj4gTmV3bGluZS4K
-PiA+Pj4KPiA+Pj4+ICsgICAgZGVmYXVsdDoKPiA+Pj4+ICsgICAgICAgIHJldHVybiBmYWxzZTsK
-PiA+Pj4+ICsgICAgfQo+ID4+Pgo+ID4+PiBJJ20gbm90IHN1cmUgdGhlIHN3aXRjaCBpcyBuZWVk
-ZWQsIHlvdSBjYW4ndCBoYXZlIGEgUEZFQ193cml0ZV9hY2Nlc3MKPiA+Pj4gZm9yIGV4YW1wbGUg
-aWYgdGhlIHAybSB0eXBlIGlzIHAybV9hY2Nlc3NfdyBvciBwMm1fYWNjZXNzX3J3LCBoZW5jZSBp
-dAo+ID4+PiBzZWVtcyBsaWtlIGl0IGNvdWxkIGJlIHNpbXBsaWZpZWQgdG8gb25seSB0YWtlIHRo
-ZSBwZmVjIGludG8gYWNjb3VudD8KPiA+Pgo+ID4+IEl0IGlzIHBvc3NpYmxlIHRvIGhhdmUgUEZF
-Q193cml0ZV9hY2Nlc3MgYW5kIHAybV9hY2Nlc3NfdyBidXQgdGhlbiB0aGVyZQo+ID4+IGlzIG5v
-IHZpb2xhdGlvbiBhbmQgdGhlIGV2ZW50IHdpbGwgbm90IGJlIHNlbnQuCj4gPgo+ID4gSSdtIG5v
-dCBzdXJlIEkgZm9sbG93LiBQRkVDIGlzIGEgd2F5IHRvIHNpZ25hbCBhIHBhZ2UgZmF1bHQsIGhl
-bmNlIGl0Cj4gPiB3b3VsZCBtYWtlIG5vIHNlbnNlIHRvIGZvciBleGFtcGxlIGdldCBQRkVDX3dy
-aXRlX2FjY2VzcyBpZiB0aGUgYWNjZXNzCj4gPiBpcyBwMm1fYWNjZXNzX3c/Cj4gPgo+IFllcywg
-bm9ybWFsbHkgcGZlYyAocGFnZSBmYXVsdCBlcnJvciBjb2RlKSBkb2VzIHdoYXQgdGhlIG5hbWUg
-aW1wbGllcwo+IGJ1dCBpbiB0aGlzIGNhc2UgdGhlIHBmZWMgdmFyIGlzIGNvbnN0cnVjdGVkIGlu
-IHRoZSBjYWxsZXIgZnVuY3Rpb24uCj4KPiBMZXQncyB0YWtlIGZvciBleGFtcGxlIGh2bWVtdWxf
-d3JpdGUoKSBwZmVjIGhlcmUgaGFzIGFsd2F5cwo+IFBGRUNfd3JpdGVfYWNjZXNzIHNvIGV2ZXJ5
-IGVtdWxhdGVkIHdyaXRlIHdpbGwgaGF2ZSB0aGlzIG5vIG1hdHRlciBpZiBpcwo+IGEgZmF1bHQg
-b3Igbm90IGFuZCB0aGF0IGlzIHdoYXQgSSBhbSBjaGVja2luZy4gSWYgaW4gZmFjdCB0aGVyZSBp
-cyBhCj4gZmF1bHQgdGhlbiB0aGUgZXZlbnQgaXMgc2VudC4KCk9LLCB0aGlzIHNlZW1zIHdlaXJk
-IGJ1dCB5b3UgYXJlIHJpZ2h0IHRoYXQgaHZtZW11bF93cml0ZSB3aWxsIGFsd2F5cwpwYXNzIFBG
-RUNfd3JpdGVfYWNjZXNzIHRvIGh2bWVtdWxfbWFwX2xpbmVhcl9hZGRyLgoKUm9nZXIuCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMS8xMC8xOSAxMToxNCBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBPbiAxMC8wMS8yMDE5
+IDE2OjM0LCBCb3JpcyBPc3Ryb3Zza3kgd3JvdGU6Cj4+IE9uIDEvMTAvMTkgNTowNyBBTSwgSnVl
+cmdlbiBHcm9zcyB3cm90ZToKPj4+ICAKPj4+ICt2b2lkIHhlbl9jbG9ja3NvdXJjZV9zdXNwZW5k
+KHZvaWQpCj4+PiArewo+Pj4gKwl4ZW5fY2xvY2tfdmFsdWVfc2F2ZWQgPSB4ZW5fY2xvY2tzb3Vy
+Y2VfcmVhZCgpIC0geGVuX3NjaGVkX2Nsb2NrX29mZnNldDsKPj4KPj4geGVuX2Nsb2NrX3ZhbHVl
+X3NhdmVkID0geGVuX3NjaGVkX2Nsb2NrKCkgbWF5YmU/IAo+IEkgd2FudGVkIHhlbl9jbG9ja3Nv
+dXJjZV9zdXNwZW5kKCkgYW5kIHhlbl9jbG9ja3NvdXJjZV9yZXN1bWUoKSB0bwo+IGJlIHN5bW1l
+dHJpY2FsIHRvIGVhY2ggb3RoZXIuCgpPSy4KClJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kg
+PGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgoKPgo+IEluIGNhc2UgeW91IGFyZSBmZWVsaW5n
+IHN0cm9uZyBhYm91dCB0aGF0LCBJJ20gbm90LiA6LSkgU28gaW4gY2FzZQo+IHlvdSBpbnNpc3Qg
+b24gaXQgSSBjYW4gY2hhbmdlIGl0LiBPciB5b3UgY2FuIGRvIHNvIHdoaWxlIGNvbW1pdHRpbmcu
+CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
