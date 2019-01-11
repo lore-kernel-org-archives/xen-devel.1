@@ -1,12 +1,9 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH 2/2] libxl: fix build (missing CLONE_NEWIPC)
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: [PATCH v2 2/2] libxl: fix build (missing CLONE_NEWIPC)
  on astonishingly old systems
-Date: Fri, 11 Jan 2019 19:21:10 +0000
-Message-ID: <23608.60582.225422.236530@mariner.uk.xensource.com>
-References: <23608.54527.696432.275991@mariner.uk.xensource.com>
- <20190111181211.24073-1-ian.jackson@eu.citrix.com>
- <20190111181211.24073-2-ian.jackson@eu.citrix.com>
- <20190111182706.GA2199@perard.uk.xensource.com>
+Date: Fri, 11 Jan 2019 19:23:28 +0000
+Message-ID: <20190111192328.25242-1-ian.jackson@eu.citrix.com>
+References: <20190111182706.GA2199@perard.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -15,8 +12,8 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Ayr2=PT=citrix.com=prvs=9077728fb=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gi2Mm-0005V8-6P
- for xen-devel@lists.xenproject.org; Fri, 11 Jan 2019 19:21:16 +0000
+ id 1gi2P0-0005ew-TU
+ for xen-devel@lists.xenproject.org; Fri, 11 Jan 2019 19:23:34 +0000
 In-Reply-To: <20190111182706.GA2199@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,16 +23,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>
+To: xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QW50aG9ueSBQRVJBUkQgd3JpdGVzICgiUmU6IFtYZW4tZGV2ZWxdIFtQQVRDSCAyLzJdIGxpYnhs
-OiBmaXggYnVpbGQgKG1pc3NpbmcgQ0xPTkVfTkVXSVBDKSBvbiBhc3RvbmlzaGluZ2x5IG9sZCBz
-eXN0ZW1zIik6Cj4gT24gRnJpLCBKYW4gMTEsIDIwMTkgYXQgMDY6MTI6MTFQTSArMDAwMCwgSWFu
-IEphY2tzb24gd3JvdGU6Cj4gPiArI2lmbmRlZiBDTE9ORV9YTkVXSVBDIC8qIEF2YWlsYWJsZSBh
-cyBvZiBMaW51eCAyLjYuMTkgLyBnbGliYyAyLjggKi8KPiAKPiBUaGVyZSdzIGEgc3RyYW5nZSBY
-IGhlcmUsIGJ1dCBub3QgYmVsb3cuCgpFcmssIHRoYXQncyB3cm9uZy4KCklhbi4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Q0xPTkVfTkVXSVBDIHdhcyBpbnRyb2R1Y2VkIGluIExpbnV4IDIuNi4xOSwgb24gdGhlIDI5dGgg
+b2YgTm92ZW1iZXIKMjAwNiwgd2hpY2ggd2FzIDEyIHllYXJzLCAxIG1vbnRoLCBhbmQgMTQgZGF5
+cyBhZ28uCgpOZXZlcnRoZWxlc3MgYXBwYXJlbnRseSBzb21lIHBlb3BsZSBhcmUgdHJ5aW5nIHRv
+IGJ1aWxkIFhlbiBvbiBzeXN0ZW1zCndob3NlIGtlcm5lbCBoZWFkZXJzIGFyZSB0aGF0IG9sZC4g
+IFBsYWNhdGUgdGhlc2UgcGVvcGxlIGJ5IHByb3ZpZGluZwphIGZhbGxiYWNrICNkZWZpbmUgZm9y
+IENMT05FX05FV0lQQy4KClRoZSBhY3R1YWwgYmluYXJ5IHZhbHVlIHdpbGwgb2YgY291cnNlIHJl
+bWFpbiBjb25zdGFudCwgYmVjYXVzZSBvZiB0aGUKa2VybmVsIEFQSSBwcm9taXNlLCBzbyB0aGlz
+IGlzIGFuZCB3aWxsIGJlIGNvcnJlY3Qgb24gYWxsIHBsYXRmb3Jtcwp3aGVyZSB0aGUgQ0xPTkVf
+TkVXSVBDIGlzIHN1cHBvcnRlZC4gIChFdmVuIGlmIGZvciBzb21lIHJlYXNvbiB3ZSBtaXNzCnRo
+ZSByaWdodCAjaW5jbHVkZXMuKQoKT2YgY291cnNlIGF0IHJ1bnRpbWUgdGhpcyB2YWx1ZSB3aWxs
+IG5vdCB3b3JrIG9uIG9sZGVyIGtlcm5lbHMuICBJdAp3aWxsIGJlIHJlamVjdGVkIGFzIHVua25v
+d24uICBIb3dldmVyIG9uIHRob3NlIGtlcm5lbHMgd2UgZG8gbm90IHdhbnQKdG8gc3VwcG9ydCBk
+bV9yZXN0cmljdCwgYW5kIGFuIGF0dGVtcHQgdG8gdXNlIGl0IHdpbGwgZmFpbC4gIEl0IGlzIE9L
+CmZvciB0aGUgZmFpbHVyZSB0byBiZSBhIG1lc3N5IEVJTlZBTCBzeXNjYWxsIGZhaWx1cmUuICAo
+VGhlIElQQwpuYW1lc3BhY2UgdW5zaGFyZSBpcyBuZWNlc3NhcnkgdG8gYXZvaWQgYSBzdWJvcm5l
+ZCBkZXByaXZpbGVnZWQgcWVtdQpmcm9tIGNhdXNpbmcgdHJvdWJsZSB3aXRoIHNobSwgc2VtLCBl
+dGMuKQoKQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkNDOiBKdWVyZ2VuIEdyb3Nz
+IDxqZ3Jvc3NAc3VzZS5jb20+CkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+ClNp
+Z25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKLS0t
+CnYyOiBHZXQgcmlkIG9mIHNwdXJpb3VzIFgKLS0tCiB0b29scy9saWJ4bC9saWJ4bF9saW51eC5j
+IHwgOCArKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdp
+dCBhL3Rvb2xzL2xpYnhsL2xpYnhsX2xpbnV4LmMgYi90b29scy9saWJ4bC9saWJ4bF9saW51eC5j
+CmluZGV4IDY0NzVjY2E2NGIuLjU5ZGQ5NDViYzEgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xp
+YnhsX2xpbnV4LmMKKysrIGIvdG9vbHMvbGlieGwvbGlieGxfbGludXguYwpAQCAtMTgsNiArMTgs
+MTQgQEAKICNpbmNsdWRlIDxzeXMvcmVzb3VyY2UuaD4KICNpbmNsdWRlICJsaWJ4bF9pbnRlcm5h
+bC5oIgogCisKKy8qIFdvcmthcm91bmRzIGZvciBMaW51eC1zcGVjaWZpYyBsYWNrcyBjYW4gZ28g
+aGVyZTogKi8KKworI2lmbmRlZiBDTE9ORV9ORVdJUEMgLyogQXZhaWxhYmxlIGFzIG9mIExpbnV4
+IDIuNi4xOSAvIGdsaWJjIDIuOCAqLworIyBkZWZpbmUgQ0xPTkVfTkVXSVBDIDB4MDgwMDAwMDAK
+KyNlbmRpZgorCisKIGludCBsaWJ4bF9fdHJ5X3BoeV9iYWNrZW5kKG1vZGVfdCBzdF9tb2RlKQog
+ewogICAgIGlmIChTX0lTQkxLKHN0X21vZGUpIHx8IFNfSVNSRUcoc3RfbW9kZSkpIHsKLS0gCjIu
+MTEuMAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
