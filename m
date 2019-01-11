@@ -1,21 +1,30 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH] xen: Fix event channel interface for
- XenDevice-s
-Date: Fri, 11 Jan 2019 20:16:53 +0000
-Message-ID: <8861ed81327240a5b93048763b6e5044__35720.1410145082$1547237757$gmane$org@AMSPEX02CL03.citrite.net>
-References: <20190111180941.6198-1-anthony.perard@citrix.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
+Date: Fri, 11 Jan 2019 14:35:45 -0600
+Message-ID: <CAF3u54AAmx0rBVPscfvqcx5f0ezYNCkrsagJgZb3v2GqfB9TEw@mail.gmail.com>
+References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
+ <1547077324-9705-1-git-send-email-sstabellini@kernel.org>
+ <CAF3u54A9soG-fjO0ys3hcgcZwXa_KmwrnW_yRDKuiWPaGx2ysQ@mail.gmail.com>
+ <5C37013C020000780020C17D@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1901100924400.15373@sstabellini-ThinkPad-X260>
+ <CAF3u54A-1_cum6u-nXm4m+60=7tFF=Y1vnR-0+fEKg2y6_68rw@mail.gmail.com>
+ <alpine.DEB.2.10.1901101311110.27759@sstabellini-ThinkPad-X260>
+ <CAF3u54Cfx3fGXY-bg2fYb+i_5kOA8qjrzOtK3sFF8j9bHQve8A@mail.gmail.com>
+ <alpine.DEB.2.10.1901101745560.27759@sstabellini-ThinkPad-X260>
+ <5C387472020000780020C9A7@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1901110911310.27759@sstabellini-ThinkPad-X260>
+ <a3743bd4b2d54188890945322e92fc1b@dornerworks.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8959297556768217140=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Iy3g=PT=citrix.com=prvs=9072536af=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gi3Eg-00016h-DX
- for xen-devel@lists.xenproject.org; Fri, 11 Jan 2019 20:16:58 +0000
-In-Reply-To: <20190111180941.6198-1-anthony.perard@citrix.com>
-Content-Language: en-US
+ <SRS0=d089=PT=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gi3X5-0002ds-Tt
+ for xen-devel@lists.xenproject.org; Fri, 11 Jan 2019 20:35:59 +0000
+Received: by mail-ua1-x935.google.com with SMTP id v24so5166760uap.13
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Jan 2019 12:35:58 -0800 (PST)
+In-Reply-To: <a3743bd4b2d54188890945322e92fc1b@dornerworks.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,76 +33,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-Cc: Anthony Perard <anthony.perard@citrix.com>, "open list:X86" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+To: Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEFudGhvbnkgUEVSQVJEIFttYWls
-dG86YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbV0KPiBTZW50OiAxMSBKYW51YXJ5IDIwMTkgMTg6
-MTAKPiBUbzogcWVtdS1kZXZlbEBub25nbnUub3JnCj4gQ2M6IEFudGhvbnkgUGVyYXJkIDxhbnRo
-b255LnBlcmFyZEBjaXRyaXguY29tPjsgU3RlZmFubyBTdGFiZWxsaW5pCj4gPHNzdGFiZWxsaW5p
-QGtlcm5lbC5vcmc+OyBQYXVsIER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPjsgb3Bl
-bgo+IGxpc3Q6WDg2IDx4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+Cj4gU3ViamVjdDog
-W1BBVENIXSB4ZW46IEZpeCBldmVudCBjaGFubmVsIGludGVyZmFjZSBmb3IgWGVuRGV2aWNlLXMK
-PiAKPiBQYXRjaCAieGVuOiBhZGQgZXZlbnQgY2hhbm5lbCBpbnRlcmZhY2UgZm9yIFhlbkRldmlj
-ZS1zIiBtYWtlcyB1c2Ugb2YKPiB0aGUgdHlwZSB4ZW5ldnRjaG5fcG9ydF9vcl9lcnJvcl90LCBi
-dXQgdGhpcyBpc24ndCBhdmFpYWJsZSBiZWZvcmUgWGVuCj4gNC43LiBBbHNvIHRoZSBmdW5jdGlv
-biB4ZW5fZGV2aWNlX2JpbmRfZXZlbnRfY2hhbm5lbCBhc3NpZ24gdGhlIHJldHVybgo+IHZhbHVl
-IG9mIHhlbmV2dGNobl9iaW5kX2ludGVyZG9tYWluIHRvIGNoYW5uZWwtPmxvY2FsX3BvcnQgYnV0
-IGNoZWNrIHRoZQo+IHJlc3VsdCBmb3IgZXJyb3Igd2l0aCB4ZW5kZXYtPmxvY2FsX3BvcnQuCj4g
-Cj4gRml4IGJ5Ogo+IC0gcmVtb3ZpbmcgbG9jYWxfcG9ydCBmcm9tIHN0cnVjdCBYZW5EZXZpY2Ug
-YXMgaXQgaXNuJ3QgdXNlIGFueXdlcmUuCj4gLSBhZGRpbmcgYSBjb21wYXRpYmlsaXR5IHR5cGVk
-ZWYgZm9yIHhlbmV2dGNobl9wb3J0X29yX2Vycm9yX3QgZm9yIFhlbgo+ICAgNC42IGFuZCBlYXJs
-aWVyLgo+IAo+IEFzIGV4dHJhLCByZXBsYWNlIHRoZSB0eXBlIG9mIFhlbkV2ZW50Q2hhbm5lbC0+
-bG9jYWxfcG9ydCBieQo+IGV2dGNobl9wb3J0X3QuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW50aG9u
-eSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgpSZXZpZXdlZC1ieTogUGF1bCBE
-dXJyYW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4KCj4gLS0tCj4gIGh3L3hlbi94ZW4tYnVz
-LmMgICAgICAgICAgICB8IDEyICsrKysrKystLS0tLQo+ICBpbmNsdWRlL2h3L3hlbi94ZW4tYnVz
-LmggICAgfCAgMSAtCj4gIGluY2x1ZGUvaHcveGVuL3hlbl9jb21tb24uaCB8ICAxICsKPiAgMyBm
-aWxlcyBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAt
-LWdpdCBhL2h3L3hlbi94ZW4tYnVzLmMgYi9ody94ZW4veGVuLWJ1cy5jCj4gaW5kZXggZjkwYmNm
-MjM0Mi4uM2FlY2NlYzY5YyAxMDA2NDQKPiAtLS0gYS9ody94ZW4veGVuLWJ1cy5jCj4gKysrIGIv
-aHcveGVuL3hlbi1idXMuYwo+IEBAIC05MTcsNyArOTE3LDcgQEAgdm9pZCB4ZW5fZGV2aWNlX2Nv
-cHlfZ3JhbnRfcmVmcyhYZW5EZXZpY2UgKnhlbmRldiwKPiBib29sIHRvX2RvbWFpbiwKPiAgfQo+
-IAo+ICBzdHJ1Y3QgWGVuRXZlbnRDaGFubmVsIHsKPiAtICAgIHVuc2lnbmVkIGludCBsb2NhbF9w
-b3J0Owo+ICsgICAgZXZ0Y2huX3BvcnRfdCBsb2NhbF9wb3J0Owo+ICAgICAgWGVuRXZlbnRIYW5k
-bGVyIGhhbmRsZXI7Cj4gICAgICB2b2lkICpvcGFxdWU7Cj4gICAgICBOb3RpZmllciBub3RpZmll
-cjsKPiBAQCAtOTM5LDE3ICs5MzksMTkgQEAgWGVuRXZlbnRDaGFubmVsCj4gKnhlbl9kZXZpY2Vf
-YmluZF9ldmVudF9jaGFubmVsKFhlbkRldmljZSAqeGVuZGV2LAo+ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKm9wYXF1ZSwgRXJyb3IKPiAqKmVy
-cnApCj4gIHsKPiAgICAgIFhlbkV2ZW50Q2hhbm5lbCAqY2hhbm5lbCA9IGdfbmV3MChYZW5FdmVu
-dENoYW5uZWwsIDEpOwo+ICsgICAgeGVuZXZ0Y2huX3BvcnRfb3JfZXJyb3JfdCBsb2NhbF9wb3J0
-Owo+IAo+IC0gICAgY2hhbm5lbC0+bG9jYWxfcG9ydCA9IHhlbmV2dGNobl9iaW5kX2ludGVyZG9t
-YWluKHhlbmRldi0+eGVoLAo+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHhlbmRldi0+ZnJvbnRlbmRfaWQsCj4gLSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcG9ydCk7Cj4gLSAgICBpZiAoeGVu
-ZGV2LT5sb2NhbF9wb3J0IDwgMCkgewo+ICsgICAgbG9jYWxfcG9ydCA9IHhlbmV2dGNobl9iaW5k
-X2ludGVyZG9tYWluKHhlbmRldi0+eGVoLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHhlbmRldi0+ZnJvbnRlbmRfaWQsCj4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcG9ydCk7Cj4gKyAgICBpZiAobG9jYWxfcG9ydCA8
-IDApIHsKPiAgICAgICAgICBlcnJvcl9zZXRnX2Vycm5vKGVycnAsIGVycm5vLCAieGVuZXZ0Y2hu
-X2JpbmRfaW50ZXJkb21haW4KPiBmYWlsZWQiKTsKPiAKPiAgICAgICAgICBnX2ZyZWUoY2hhbm5l
-bCk7Cj4gICAgICAgICAgcmV0dXJuIE5VTEw7Cj4gICAgICB9Cj4gCj4gKyAgICBjaGFubmVsLT5s
-b2NhbF9wb3J0ID0gbG9jYWxfcG9ydDsKPiAgICAgIGNoYW5uZWwtPmhhbmRsZXIgPSBoYW5kbGVy
-Owo+ICAgICAgY2hhbm5lbC0+b3BhcXVlID0gb3BhcXVlOwo+ICAgICAgY2hhbm5lbC0+bm90aWZp
-ZXIubm90aWZ5ID0gZXZlbnRfbm90aWZ5Owo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2h3L3hlbi94
-ZW4tYnVzLmggYi9pbmNsdWRlL2h3L3hlbi94ZW4tYnVzLmgKPiBpbmRleCBlNTVhNWRlNWYxLi4z
-MTgzZjEwZTNjIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvaHcveGVuL3hlbi1idXMuaAo+ICsrKyBi
-L2luY2x1ZGUvaHcveGVuL3hlbi1idXMuaAo+IEBAIC0yOSw3ICsyOSw2IEBAIHR5cGVkZWYgc3Ry
-dWN0IFhlbkRldmljZSB7Cj4gICAgICB4ZW5nbnR0YWJfaGFuZGxlICp4Z3RoOwo+ICAgICAgYm9v
-bCBmZWF0dXJlX2dyYW50X2NvcHk7Cj4gICAgICB4ZW5ldnRjaG5faGFuZGxlICp4ZWg7Cj4gLSAg
-ICB4ZW5ldnRjaG5fcG9ydF9vcl9lcnJvcl90IGxvY2FsX3BvcnQ7Cj4gICAgICBOb3RpZmllckxp
-c3QgZXZlbnRfbm90aWZpZXJzOwo+ICB9IFhlbkRldmljZTsKPiAKPiBkaWZmIC0tZ2l0IGEvaW5j
-bHVkZS9ody94ZW4veGVuX2NvbW1vbi5oIGIvaW5jbHVkZS9ody94ZW4veGVuX2NvbW1vbi5oCj4g
-aW5kZXggMmI5MWQxOTlhMS4uOWE4MTU1ZTE3MiAxMDA2NDQKPiAtLS0gYS9pbmNsdWRlL2h3L3hl
-bi94ZW5fY29tbW9uLmgKPiArKysgYi9pbmNsdWRlL2h3L3hlbi94ZW5fY29tbW9uLmgKPiBAQCAt
-MzIsNiArMzIsNyBAQCBleHRlcm4geGNfaW50ZXJmYWNlICp4ZW5feGM7Cj4gIHR5cGVkZWYgeGNf
-aW50ZXJmYWNlIHhlbmZvcmVpZ25tZW1vcnlfaGFuZGxlOwo+ICB0eXBlZGVmIHhjX2V2dGNobiB4
-ZW5ldnRjaG5faGFuZGxlOwo+ICB0eXBlZGVmIHhjX2dudHRhYiB4ZW5nbnR0YWJfaGFuZGxlOwo+
-ICt0eXBlZGVmIGV2dGNobl9wb3J0X29yX2Vycm9yX3QgeGVuZXZ0Y2huX3BvcnRfb3JfZXJyb3Jf
-dDsKPiAKPiAgI2RlZmluZSB4ZW5ldnRjaG5fb3BlbihsLCBmKSB4Y19ldnRjaG5fb3BlbihsLCBm
-KTsKPiAgI2RlZmluZSB4ZW5ldnRjaG5fY2xvc2UoaCkgeGNfZXZ0Y2huX2Nsb3NlKGgpCj4gLS0K
-PiBBbnRob255IFBFUkFSRAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+--===============8959297556768217140==
+Content-Type: multipart/alternative; boundary="00000000000078205b057f34a472"
+
+--00000000000078205b057f34a472
+Content-Type: text/plain; charset="UTF-8"
+
+On Fri, 11 Jan 2019, 12:53 Stewart Hildebrand, <
+Stewart.Hildebrand@dornerworks.com> wrote:
+
+>
+> Why don't we change the type of _start so it's not a pointer type?
+
+
+Can you suggest a type that would be suitable?
+
+Cheers,
+
+--00000000000078205b057f34a472
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Fri, 11 Jan 2019, 12=
+:53 Stewart Hildebrand, &lt;<a href=3D"mailto:Stewart.Hildebrand@dornerwork=
+s.com">Stewart.Hildebrand@dornerworks.com</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc so=
+lid;padding-left:1ex">=C2=A0<br>
+Why don&#39;t we change the type of _start so it&#39;s not a pointer type?<=
+/blockquote></div><div><br></div><div>Can you suggest a type that would be =
+suitable?</div><div><br></div><div>Cheers,</div><div><br></div>
+
+--00000000000078205b057f34a472--
+
+
+--===============8959297556768217140==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8959297556768217140==--
