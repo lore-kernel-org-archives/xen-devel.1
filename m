@@ -1,19 +1,20 @@
-From: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Subject: Two xen-devel mailing list addresses mentioned in
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: Two xen-devel mailing list addresses mentioned in
  MAINTAINERS
-Date: Sat, 12 Jan 2019 07:50:16 +0100
-Message-ID: <CAKXUXMw2tKdt6QA6cOTBR6EbUm9sutp7_zv=sck9d-Sjb7gNtg@mail.gmail.com>
+Date: Sat, 12 Jan 2019 08:19:20 +0100
+Message-ID: <a69ab314-021b-224b-a2f3-c14e1f43f475@suse.com>
+References: <CAKXUXMw2tKdt6QA6cOTBR6EbUm9sutp7_zv=sck9d-Sjb7gNtg@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=vbOp=PU=gmail.com=lukas.bulwahn@srs-us1.protection.inumbo.net>)
- id 1giD7l-0006eB-Dm
- for xen-devel@lists.xenproject.org; Sat, 12 Jan 2019 06:50:29 +0000
-Received: by mail-it1-x12d.google.com with SMTP id c9so5902261itj.1
- for <xen-devel@lists.xenproject.org>; Fri, 11 Jan 2019 22:50:27 -0800 (PST)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=rWtG=PU=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1giDZk-0008Th-TX
+ for xen-devel@lists.xenproject.org; Sat, 12 Jan 2019 07:19:24 +0000
+In-Reply-To: <CAKXUXMw2tKdt6QA6cOTBR6EbUm9sutp7_zv=sck9d-Sjb7gNtg@mail.gmail.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,20 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org, xen-devel@lists.xenproject.org
+To: Lukas Bulwahn <lukas.bulwahn@gmail.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-RGVhciB4ZW4tZGV2ZWwgbWFpbGluZyBsaXN0LAoKKEkga25vdyBJIGFtIG5vdCBzdWJzY3JpYmVk
-OyBzbyB0aGlzIG11c3QgYmUgbGV0IHRocm91Z2ggYnkgYSBtb2RlcmF0b3IuKQoKSW4gdGhlIGxp
-bnV4IGtlcm5lbCBNQUlOVEFJTkVSUyBmaWxlLCBsYXJnZWx5Cnhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZyAobW9kZXJhdGVkIGZvciBub24tc3Vic2NyaWJlcnMpIGlzCm1lbnRpb25lZCBh
-cyB0aGUgeGVuLWRldmVsIG1haWxpbmcgbGlzdC4KCkhvd2V2ZXIsIHRoZSBEUk0gRFJJVkVSUyBG
-T1IgWEVOIG1lbnRpb25zIHhlbi1kZXZlbEBsaXN0cy54ZW4ub3JnIGluc3RlYWQuCgpUaGF0IGlz
-IG5vdCBhbm90aGVyIG1haWxpbmcgbGlzdCwgYnV0IGp1c3QgYW5vdGhlciAob2xkKSBhZGRyZXNz
-IGZvcgp0aGUgc2FtZSBsaXN0LCByaWdodD8KCklmIHNvbWVib2R5IGNhbiBjb25maXJtIHRoYXQs
-IEkgd2lsbCBwcm92aWRlIGEgcGF0Y2ggdG8gdXBkYXRlIHRoZSBEUk0KRFJJVkVSUyBGT1IgWEVO
-IGVudHJ5IGluIHRoZSBNQUlOVEFJTkVSUyBmaWxlIHRvIG1ha2UgdGhhdCBjb25zaXN0ZW50LgoK
-QmVzdCByZWdhcmRzLAoKTHVrYXMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+T24gMTIvMDEvMjAxOSAwNzo1MCwgTHVrYXMgQnVsd2FobiB3cm90ZToKPiBEZWFyIHhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QsCj4gCj4gKEkga25vdyBJIGFtIG5vdCBzdWJzY3JpYmVkOyBzbyB0aGlz
+IG11c3QgYmUgbGV0IHRocm91Z2ggYnkgYSBtb2RlcmF0b3IuKQo+IAo+IEluIHRoZSBsaW51eCBr
+ZXJuZWwgTUFJTlRBSU5FUlMgZmlsZSwgbGFyZ2VseQo+IHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZyAobW9kZXJhdGVkIGZvciBub24tc3Vic2NyaWJlcnMpIGlzCj4gbWVudGlvbmVkIGFz
+IHRoZSB4ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Lgo+IAo+IEhvd2V2ZXIsIHRoZSBEUk0gRFJJVkVS
+UyBGT1IgWEVOIG1lbnRpb25zIHhlbi1kZXZlbEBsaXN0cy54ZW4ub3JnIGluc3RlYWQuCj4gCj4g
+VGhhdCBpcyBub3QgYW5vdGhlciBtYWlsaW5nIGxpc3QsIGJ1dCBqdXN0IGFub3RoZXIgKG9sZCkg
+YWRkcmVzcyBmb3IKPiB0aGUgc2FtZSBsaXN0LCByaWdodD8KPiAKPiBJZiBzb21lYm9keSBjYW4g
+Y29uZmlybSB0aGF0LCBJIHdpbGwgcHJvdmlkZSBhIHBhdGNoIHRvIHVwZGF0ZSB0aGUgRFJNCj4g
+RFJJVkVSUyBGT1IgWEVOIGVudHJ5IGluIHRoZSBNQUlOVEFJTkVSUyBmaWxlIHRvIG1ha2UgdGhh
+dCBjb25zaXN0ZW50LgoKWWVzLCBwbGVhc2Ugc2VuZCB0aGF0IHBhdGNoLgoKClRoYW5rcywKCkp1
+ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
