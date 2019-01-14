@@ -1,21 +1,18 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH] arch/arm/xen: Remove duplicate header
-Date: Mon, 14 Jan 2019 12:38:53 +0200
-Message-ID: <eab5c59d-cfb4-bd2a-de07-7db827830472__38690.8066379421$1547462272$gmane$org@gmail.com>
-References: <20190107173719.GA30197@jordon-HP-15-Notebook-PC>
+From: "Xen Mann" <xensemann@gmx.de>
+Subject: getting started: Implementing a new TAP
+Date: Mon, 14 Jan 2019 11:42:00 +0100
+Message-ID: <trinity-33f5c39c-3a3f-497c-a5a2-0d02f6ffe948-1547462520157@3c-app-gmx-bs74>
+References: <osstest-131939-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=yxtf=PW=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1gizdx-00088O-Hu
- for xen-devel@lists.xenproject.org; Mon, 14 Jan 2019 10:38:57 +0000
-Received: by mail-lj1-x243.google.com with SMTP id n18-v6so18538807lji.7
- for <xen-devel@lists.xenproject.org>; Mon, 14 Jan 2019 02:38:56 -0800 (PST)
-In-Reply-To: <20190107173719.GA30197@jordon-HP-15-Notebook-PC>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=4tig=PW=gmx.de=xensemann@srs-us1.protection.inumbo.net>)
+ id 1gizh7-0000Od-GW
+ for xen-devel@lists.xenproject.org; Mon, 14 Jan 2019 10:42:13 +0000
+In-Reply-To: <osstest-131939-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,22 +21,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Souptick Joarder <jrdr.linux@gmail.com>, sstabellini@kernel.org, linux@armlinux.org.uk
-Cc: xen-devel@lists.xenproject.org, brajeswar.linux@gmail.com, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, sabyasachi.linux@gmail.com
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMS83LzE5IDc6MzcgUE0sIFNvdXB0aWNrIEpvYXJkZXIgd3JvdGU6Cj4gUmVtb3ZlIGR1cGxp
-Y2F0ZSBoZWFkZXIgd2hpY2ggaXMgaW5jbHVkZWQgdHdpY2UuCj4KPiBTaWduZWQtb2ZmLWJ5OiBT
-b3VwdGljayBKb2FyZGVyIDxqcmRyLmxpbnV4QGdtYWlsLmNvbT4KUmV2aWV3ZWQtYnk6IE9sZWtz
-YW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPiAt
-LS0KPiAgIGFyY2gvYXJtL3hlbi9tbS5jIHwgMSAtCj4gICAxIGZpbGUgY2hhbmdlZCwgMSBkZWxl
-dGlvbigtKQo+Cj4gZGlmZiAtLWdpdCBhL2FyY2gvYXJtL3hlbi9tbS5jIGIvYXJjaC9hcm0veGVu
-L21tLmMKPiBpbmRleCBjYjQ0YWEyLi5lMWQ0NGI5IDEwMDY0NAo+IC0tLSBhL2FyY2gvYXJtL3hl
-bi9tbS5jCj4gKysrIGIvYXJjaC9hcm0veGVuL21tLmMKPiBAQCAtNyw3ICs3LDYgQEAKPiAgICNp
-bmNsdWRlIDxsaW51eC9vZl9hZGRyZXNzLmg+Cj4gICAjaW5jbHVkZSA8bGludXgvc2xhYi5oPgo+
-ICAgI2luY2x1ZGUgPGxpbnV4L3R5cGVzLmg+Cj4gLSNpbmNsdWRlIDxsaW51eC9kbWEtbWFwcGlu
-Zy5oPgo+ICAgI2luY2x1ZGUgPGxpbnV4L3ZtYWxsb2MuaD4KPiAgICNpbmNsdWRlIDxsaW51eC9z
-d2lvdGxiLmg+Cj4gICAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+CkhleSB0aGVyZSEKwqAKSSdtIGdvaW5nIHRvIGV4dGVuZCBvcGVuT0NELiBUaGVyZSBpcyBhIG5l
+dyBsaWdodHdpZ2h0IFRBUCBBSEItQ29udHJvbGxlciAoQUhCTCkgZnJvbSBIaWxzY2hlciBDb21w
+YW5ueS4gRGVwZW5kaW5nIG9uIHRoZSBjaGlwIHRocmUgaXMgYSBBUk05IChuZXRYNTApLCBhIFJJ
+U0NWKG5ldElPTCksIG9yIOKApiBiZWxvdyBpdC4KwqAKSSdtIGdvaW5nIHRvIGFkZCBzdXBwb3J0
+IHRvIG9wZW5PQ0QgZm9yIHRoaXMgVEFQLURldmljZS4gSeKAmW0gbmV3IHRvIG9wZW5PQ0QgY29k
+ZWJhc2UuCkkgd2FzIGxvb2tpbmcgZm9yIGEgQVBJLURlc2NyaXB0aW9uIG9mIHRoZSBUQVAtRGV2
+aWNlIGluIG9wZW5PQ0Qgd2l0aCBubyBzdWNjZXNzLgpGaW5hbGx5IG15IGNvZGUgY29tcGlsZXMs
+IEkgY2FuIHJlYWQgdGhlIElELCBpdCBpcyBleGNlcHRlZCBieSB0aGUgY29kZS1zY3JpcHQuIFll
+YSEKwqAKc3RydWN0IHRhcmdldF90eXBlIGhpbmV0aW9sX3RhcmdldCA9IHsKIC5uYW1lID0gVEFS
+R0VUX05BTUUsCiAuZXhhbWluZSA9IGhpbG5ldGlvbF9leGFtaW5lX3RhcmdldCwgLy8gc2F5cyBo
+ZWxsbyB0byBUQVAKIC5pbml0X3RhcmdldCA9IG5ldGlvbF9pbml0X3RhcmdldCwgLy8gZG9lcyBu
+b3RoaW5nIGZvciBub3cKIC5wb2xsID0gbmV0aW9sX3BvbGwsIC8vIGR1bW15Cn07CgpRdWVzdGlv
+bjoKSXMgdGhlcmUgYSB0dXRvcmlhbCAvIGd1aWRsaW5lIC8gaGVhZHN1cCwg4oCmIGZvciB0aGlz
+IHdvcmsgSeKAmHZlIGRvbmUgc28gZmFyZSBhbmQgZm9yIGZ1dHVyZSBzdGVwcz8gTWF5YmUgc29t
+ZSBsaW5lcyBkZXNjcmliaW5nIHRoZSBpbnRlcmZhY2VzIG9yIE1BQ1JPUywgc29tZSBpZGVhcyBi
+ZWhpbmQgdGhlIHN0cnVjdHVyZSBvZiB0aGUgcHJvamVjdD8KSG93IGFyZSB0aGUgbmFtaW5nIGNv
+bnZlbnRpb25zPyBXaGljaCBjb2RlIGhhcyB0byBiZSBwbGFjZWQgaW4gd2hpY2ggZmlsZS4gUmln
+aHQgbm93IGl0IGxvb2tzIGEgYml0IHJhbmRvbSB0byBtZS4gVGhlIEFSTSBzdGFjayBpcyBodWdl
+LCBjb250cm9sbGVycyBhcmUgZGVzY3JpYmVkIGFsb25nIHNldmVyYWwgY29tcG9zZWQgZmlsZXMg
+YW5kIHN0cnVjdHVyZXMuIE90aGVycyBhcmUgZGlmZmVyZW50LCBidXQgSSBjYW7igJh0IHJlYWxs
+eSBmaWd1cmUgb3V0IHJ1bGVzIGhvdyB0byBpbXBsZW1lbnQgaXQuIElzIHRoZXJlIGEgbWluaW1h
+bCBEdW1teSB0YXJnZXQ/CsKgCkFmdGVyIEnigJhtIGRvbmUsIEkgd29sZCBsaWtlIHRvIHdyaXRl
+IHN1Y2ggYSBndWlkZWxpbmUgaWYgbm90IGV4aXN0aW5nLiBXaGVyZSB0byBjb21taXQgaXQsIHdo
+byB3aWxsIGhhdmUgYSByZXZpZXcgb2YgaXQ/Cgp0aHggWGVuc2VtYW5uCgrCoAoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
