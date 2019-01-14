@@ -1,15 +1,21 @@
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Subject: Re: [PATCH v2 ] always clear the X2APIC_ENABLE bit for
- PV guest
-Date: Mon, 14 Jan 2019 12:43:46 +0000
-Message-ID: <aed90386-6909-c7c7-faa1-a7475a0ab805@citrix.com>
-References: <20181210100300.3680-1-xin.li@citrix.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH v2] xen: Fix x86 sched_clock() interface for
+ xen
+Date: Mon, 14 Jan 2019 13:43:00 +0100
+Message-ID: <21fbef84-e84c-cdd0-ae1a-856c38a39cf3__38870.3838376843$1547469776$gmane$org@suse.com>
+References: <20190111120805.24852-1-jgross@suse.com>
+ <f0b7963a-049f-e89e-a9cb-9e0f18f771a3@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20181210100300.3680-1-xin.li@citrix.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=neJr=PW=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1gj1b2-00022Y-BJ
+ for xen-devel@lists.xenproject.org; Mon, 14 Jan 2019 12:44:04 +0000
+In-Reply-To: <f0b7963a-049f-e89e-a9cb-9e0f18f771a3@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,34 +24,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xen.org, Juergen Gross <jgross@suse.com>
-Cc: Xin Li <talons.lee@gmail.com>, Talons Lee <xin.li@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Sergey Dyasli <sergey.dyasli@citrix.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org
+Cc: sstabellini@kernel.org, stable@vger.kernel.org, hans@knorrie.org, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
-cGluZz8KCk9uIDEwLzEyLzIwMTggMTA6MDMsIFhpbiBMaSB3cm90ZToKPiBGcm9tOiBUYWxvbnMg
-TGVlIDx4aW4ubGlAY2l0cml4LmNvbT4KPiAKPiBDb21taXQgZTY1N2ZjYyBjbGVhcnMgY3B1IGNh
-cGFiaWxpdHkgYml0IGluc3RlYWQgb2YgdXNpbmcgZmFrZSBjcHVpZAo+IHZhbHVlLCB0aGUgRVhU
-RCBzaG91bGQgYWx3YXlzIGJlIG9mZiBmb3IgUFYgZ3Vlc3Qgd2l0aG91dCBkZXBlbmRpbmcKPiBv
-biBjcHVpZCB2YWx1ZS4gU28gcmVtb3ZlIHRoZSBjcHVpZCBjaGVjayBpbiB4ZW5fcmVhZF9tc3Jf
-c2FmZSgpIHRvCj4gYWx3YXlzIGNsZWFyIHRoZSBYMkFQSUNfRU5BQkxFIGJpdC4KPiAKPiBTaWdu
-ZWQtb2ZmLWJ5OiBUYWxvbnMgTGVlIDx4aW4ubGlAY2l0cml4LmNvbT4KPiBSZXZpZXdlZC1ieTog
-SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgo+IAo+IC0tLQo+IENDOiBJZ29yIERydXpo
-aW5pbiA8aWdvci5kcnV6aGluaW5AY2l0cml4LmNvbT4KPiBDQzogU2VyZ2V5IER5YXNsaSA8c2Vy
-Z2V5LmR5YXNsaUBjaXRyaXguY29tPgo+IENDOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVy
-M0BjaXRyaXguY29tPgo+IENDOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4gCj4g
-djI6Cj4gZG9uJ3QgdXNlIGZha2UgY3B1aWQgdG8gY2hlYXQgeGVuX3JlYWRfbXNyX3NhZmUoKSwg
-anVzdCBhbHdheXMgY2xlYXIKPiB0aGUgRVhURCBiaXQuCj4gLS0tCj4gIGFyY2gveDg2L3hlbi9l
-bmxpZ2h0ZW5fcHYuYyB8IDUgKy0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCsp
-LCA0IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS9hcmNoL3g4Ni94ZW4vZW5saWdodGVu
-X3B2LmMgYi9hcmNoL3g4Ni94ZW4vZW5saWdodGVuX3B2LmMKPiBpbmRleCA0YjIwMDgyLi4xN2Nm
-OTJiIDEwMDY0NAo+IC0tLSBhL2FyY2gveDg2L3hlbi9lbmxpZ2h0ZW5fcHYuYwo+ICsrKyBiL2Fy
-Y2gveDg2L3hlbi9lbmxpZ2h0ZW5fcHYuYwo+IEBAIC05MDAsMTAgKzkwMCw3IEBAIHN0YXRpYyB1
-NjQgeGVuX3JlYWRfbXNyX3NhZmUodW5zaWduZWQgaW50IG1zciwgaW50ICplcnIpCj4gIAl2YWwg
-PSBuYXRpdmVfcmVhZF9tc3Jfc2FmZShtc3IsIGVycik7Cj4gIAlzd2l0Y2ggKG1zcikgewo+ICAJ
-Y2FzZSBNU1JfSUEzMl9BUElDQkFTRToKPiAtI2lmZGVmIENPTkZJR19YODZfWDJBUElDCj4gLQkJ
-aWYgKCEoY3B1aWRfZWN4KDEpICYgKDEgPDwgKFg4Nl9GRUFUVVJFX1gyQVBJQyAmIDMxKSkpKQo+
-IC0jZW5kaWYKPiAtCQkJdmFsICY9IH5YMkFQSUNfRU5BQkxFOwo+ICsJCXZhbCAmPSB+WDJBUElD
-X0VOQUJMRTsKPiAgCQlicmVhazsKPiAgCX0KPiAgCXJldHVybiB2YWw7Cj4gCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTEvMDEvMjAxOSAyMTozNSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDEvMTEvMTkg
+NzowOCBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4gQEAgLTQyMSw2ICs0MjQsMTEgQEAgdm9p
+ZCB4ZW5fcmVzdG9yZV90aW1lX21lbW9yeV9hcmVhKHZvaWQpCj4+ICAJaWYgKHJldCAhPSAwKQo+
+PiAgCQlwcl9ub3RpY2UoIkNhbm5vdCByZXN0b3JlIHNlY29uZGFyeSB2Y3B1X3RpbWVfaW5mbyAo
+ZXJyICVkKSIsCj4+ICAJCQkgIHJldCk7Cj4+ICsKPj4gK291dDoKPj4gKwkvKiBOZWVkIHB2Y2xv
+Y2tfcmVzdW1lKCkgYmVmb3JlIHVzaW5nIHhlbl9jbG9ja3NvdXJjZV9yZWFkKCkuICovCj4+ICsJ
+cHZjbG9ja19yZXN1bWUoKTsKPiAKPiBEbyB3ZSB3YW50IHRvIGRyb3AgaXQgZnJvbSB4ZW5fdGlt
+ZXJfcmVzdW1lIHRoZW4/CgpZZXMuIFYzIG9uIGl0cyB3YXkuLi4KCgpKdWVyZ2VuCgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
