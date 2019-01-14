@@ -1,20 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [XEN][ARM64]: Qemu unhandled level 1 translation
- fault and p2m failure
-Date: Mon, 14 Jan 2019 17:11:24 +0000
-Message-ID: <e341dc16-29ec-951e-8663-61fb8805004e@arm.com>
-References: <CAFR-8FESDXiqKt9-jcnCLbhd_nJU24CjgTBWB7vq_oizx0aDzQ@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: PING ARM [PATCH v2] xen/cmdline: Fix buggy
+ strncmp(s, LITERAL, ss - s) construct
+Date: Mon, 14 Jan 2019 16:59:58 +0000
+Message-ID: <5d7290c3-02e2-c54d-9a65-cc8b8019a4cc@citrix.com>
+References: <1546622255-9324-1-git-send-email-andrew.cooper3@citrix.com>
+ <8161196e-b6ff-2ab1-eaa8-cdb5341ae178@citrix.com>
+ <4f1859e5-c901-3e3e-ffc2-0e7233d1c794@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=0cWC=PW=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gj5ln-0003pd-J5
- for xen-devel@lists.xenproject.org; Mon, 14 Jan 2019 17:11:27 +0000
-In-Reply-To: <CAFR-8FESDXiqKt9-jcnCLbhd_nJU24CjgTBWB7vq_oizx0aDzQ@mail.gmail.com>
-Content-Language: en-US
+In-Reply-To: <4f1859e5-c901-3e3e-ffc2-0e7233d1c794@arm.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,32 +20,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "vikram k.s." <vikram.ks123@gmail.com>, xen-devel@lists.xenproject.org, "Andrushchenko, Oleksandr" <andr2000@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Julien Grall <julien.grall@arm.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-KCsgU3RlZmFubyBhbmQgT2xla3NhbmRyKQoKT24gMDkvMDEvMjAxOSAwNjo1NCwgdmlrcmFtIGsu
-cy4gd3JvdGU6Cj4gSGVsbG8sCgpIZWxsbywKCkkgaGF2ZSBzZWVuIHRoaXMgZS1tYWlsIHBvc3Rl
-ZCBhIGNvdXBsZSBvZiB0aW1lcy4gSSB3aWxsIG9ubHkgYW5zd2VyIHRvIHRoaXMgZS1tYWlsLgoK
-Rmlyc3Qgb2YgYWxsLCBJIHdvdWxkIHJlY29tbWVuZCB0byBDQyBwZW9wbGUgdGhhdCBtaWdodCBi
-ZSBpbnRlcmVzdGVkIHdpdGggdGhlIAp0b3BpYywgc28gdGhlIHRocmVhZCBnZXQgZmxhZ2dlZCBp
-biBvdXIgaW5ib3guIE90aGVyd2lzZSwgeW91IG1heSBoYXZlIHRvIHdhaXQgCmxvbmdlciBmb3Ig
-YW4gYW5zd2VyLiBEb24ndCB3b3JyeSBpZiB5b3UgZG9uJ3QgZ2V0IHRoZSByaWdodCBwZW9wbGUs
-IHRoZXkgd2lsbCAKQ0MgcmVsZXZhbnQgcGVvcGxlLgoKPiAKPiAgICogV2UgYXJlIHVzaW5nIFhF
-Ti00LjEyLgoKWGVuIDQuMTIgaXMgbm90IHlldCByZWxlYXNlZC4gU28gd2hhdCBpcyB0aGUgY29t
-bWl0IHVzZWQ/Cgo+ICAgKiBMaW51eCA0LjE0IGFzIGRvbTAgYW5kIExpbnV4NC4xOSBhcyBkb21V
-LgoKUGxlYXNlIHByb3ZpZGUgbW9yZSBkZXRhaWxzIHN1Y2ggYXMgdGhlIGhhcmR3YXJlIHlvdSB1
-c2UsIHRoZSBndWVzdCAKY29uZmlndXJhdGlvbiwgdGhlIGZ1bGwgbG9nIChYZW4gKyBEb20wICsg
-RG9tVSkuCgo+IAo+IFdoZW4gZG9tVSBpcyBjcmVhdGUgZ2V0dGluZyBiZWxvdyBsb2cuCj4gcWVt
-dS1zeXN0ZW0taTM4WzM0NzhdOiB1bmhhbmRsZWQgbGV2ZWwgMSB0cmFuc2xhdGlvbiBmYXVsdCAo
-MTEpIGF0IDB4MDAwMDAwMTAsIAo+IGVzciAweDkyMDAwMDA1LCBpbiBsaWJ4ZW5nbnR0YWIuc28u
-MS4yWzdmYWY5Y2QwMDArMzAwMF0KCldoYXQgUFYgZHJpdmVycyBhcmUgeW91IHVzaW5nPwoKPiAK
-PiBBbHNvwqAgcDJtIGlzIGZhaWxpbmcgLgo+IChYRU4pIHAybS5jOjE0NTY6IGQydjQ6IGd2aXJ0
-X3RvX21hZGRyIGZhaWxlZCB2YT0weGZmZmY4MDAwMWRmYTEwOTAgZmxhZ3M9MHgxIAo+IHBhcj0w
-eDgwCgpJIHRoaW5rIHRoaXMgaXMgdW5yZWxhdGVkLCB0aGlzIGlzIG1vcmUgbGlrZWx5IHJlbGF0
-ZWQgdG8gS1BUSSBhbmQgYSBrbm93biBpc3N1ZSAKdGhhdCBuZWVkcyB0byBiZSBmaXhlZC4gSXQg
-aXMgaW4gbXkgVE9ETyBsaXN0LCBub3Qgc3VyZSB3aGVuIGl0IGlzIGdvaW5nIHRvIGJlIApyZXNv
-bHZlZCB0aG91Z2guIEFueSBoZWxwIHdvdWxkIGJlIHdlbGNvbWVkIGhlcmUuCgpCZXN0IHJlZ2Fy
-ZHMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gMTQvMDEvMjAxOSAxNjowNywgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIEFuZHJldywKPgo+
+IE9uIDE0LzAxLzIwMTkgMTU6MTcsIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+PiBkaWZmIC0tZ2l0
+IGEveGVuL2FyY2gvYXJtL2VmaS9lZmktYm9vdC5oIGIveGVuL2FyY2gvYXJtL2VmaS9lZmktYm9v
+dC5oCj4+PiBpbmRleCBjYTY1NWZmLi4yMmE4NmVjIDEwMDY0NAo+Pj4gLS0tIGEveGVuL2FyY2gv
+YXJtL2VmaS9lZmktYm9vdC5oCj4+PiArKysgYi94ZW4vYXJjaC9hcm0vZWZpL2VmaS1ib290LmgK
+Pj4+IEBAIC0yMTIsNyArMjEyLDcgQEAgRUZJX1NUQVRVUyBfX2luaXQKPj4+IGZkdF9hZGRfdWVm
+aV9ub2RlcyhFRklfU1lTVEVNX1RBQkxFICpzeXNfdGFibGUsCj4+PiDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCBicmVhazsKPj4+IMKgIMKgwqDCoMKgwqDCoMKgwqDCoCB0eXBlID0gZmR0X2dl
+dHByb3AoZmR0LCBub2RlLCAiZGV2aWNlX3R5cGUiLCAmbGVuKTsKPj4+IC3CoMKgwqDCoMKgwqDC
+oCBpZiAoIHR5cGUgJiYgc3RybmNtcCh0eXBlLCAibWVtb3J5IiwgbGVuKSA9PSAwICkKPj4+ICvC
+oMKgwqDCoMKgwqDCoCBpZiAoIHR5cGUgJiYgbGVuID09IDYgJiYgc3RybmNtcCh0eXBlLCAibWVt
+b3J5IiwgNikgPT0gMCApCj4KPiBzdHJpbmcgcHJvcGVydHkgdGVybWluYXRlcyB3aXRoIE5VTCBh
+bmQgaXMgaW5jbHVkZWQgaW4gdGhlIGxlbi4gU28gSQo+IGRvbid0IHRoaW5rIHRoaXMgY2hhbmdl
+IGlzIGNvcnJlY3QuCgpBcmUgeW91IHNheWluZyB0aGF0IGxlbiBpcyA3IGhlcmUgdGhlbj8KCn5B
+bmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
+bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
+Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
