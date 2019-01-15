@@ -1,17 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 4/5] xen/arm: use the physical number of gic
- lines for boot domains
-Date: Tue, 15 Jan 2019 12:56:42 +0000
-Message-ID: <0c948ed9-5986-09c0-59ba-5d4e694c8ec4@arm.com>
-References: <alpine.DEB.2.10.1812050923160.527@sstabellini-ThinkPad-X260>
- <1544030891-11906-4-git-send-email-sstabellini@kernel.org>
- <8519371e-894b-88a3-ac71-b8367d93d9d3@arm.com>
- <alpine.DEB.2.10.1901031104000.800@sstabellini-ThinkPad-X260>
+From: Pu Wen <puwen@hygon.cn>
+Subject: Re: [PATCH 04/15] x86/cpu/mce: Add Hygon Dhyana support
+ to the MCA infrastructure
+Date: Tue, 15 Jan 2019 20:52:15 +0800
+Message-ID: <37d7079f-f91f-a24e-972f-885d54211108@hygon.cn>
+References: <cover.1545284932.git.puwen@hygon.cn>
+ <b495fe7a40b55c4de42607fabf12bce10b636515.1545284932.git.puwen@hygon.cn>
+ <5C3CB76E020000780020D6C3@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1901031104000.800@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=N85w=PX=hygon.cn=puwen@srs-us1.protection.inumbo.net>)
+ id 1gjOHc-0001Ck-P1
+ for xen-devel@lists.xenproject.org; Tue, 15 Jan 2019 12:57:32 +0000
+In-Reply-To: <5C3CB76E020000780020D6C3@prv1-mh.provo.novell.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -21,31 +25,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Stefano Stabellini <stefanos@xilinx.com>, Achin.Gupta@arm.com, andrii_anisov@epam.com, xen-devel@lists.xen.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywKCk9uIDEvMy8xOSA3OjA3IFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6
-Cj4gT24gTW9uLCAyNCBEZWMgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiBIaSwKPj4KPj4g
-T24gMTIvNS8xOCA1OjI4IFBNLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+PiBXZSBkb24n
-dCBoYXZlIGEgY2xlYXIgd2F5IHRvIGtub3cgaG93IG1hbnkgdmlydHVhbCBTUElzIHdlIG5lZWQg
-Zm9yIHRoZQo+Pj4gYm9vdCBkb21haW5zLiBGb3Igc2ltcGxpY2l0eSwgYWxsb2NhdGUgYXMgbWFu
-eSBhcyBuYXRpdmVseSBzdXBwb3J0ZWQsCj4+PiBqdXN0IGxpa2UgZm9yIGRvbTAuCj4+Cj4+IFRo
-aXMgd2lsbCBwb3RlbnRpYWxseSBhbGxvY2F0ZSBhIGxvdCBvZiB1bnVzZWQgaW50ZXJydXB0cyBh
-bmQgYSB3YXN0ZSBvZgo+PiBtZW1vcnkuIFNvIGlzIGl0IHRoZSBjb3JyZWN0IHNvbHV0aW9uPwo+
-Pgo+PiBGb3IgaW5zdGFuY2UsIHdlIHdvdWxkIHJlcXVlc3QgdGhlIHVzZXIgdG8gcHJvdmlkZSB0
-aGUgbnVtYmVyIG9mIGludGVycnVwdHMuCj4gCj4gVW5mb3J0dW5hdGVseSwgdGhpcyBoYXMgdG8g
-aGFwcGVuIG11Y2ggZWFybGllciB0aGFuIHdoZW4gd2UgcGFyc2UgdXNlcgo+IHN1cHBsaWVkIGRl
-dmljZSB0cmVlIG9wdGlvbnMuIFdlIGNvdWxkIG1ha2UgaXQgYW4gaHlwZXJ2aXNvciBjb21tYW5k
-Cj4gbGluZSBwYXJhbWV0ZXIgYnV0IGl0IHdvdWxkIGJlIG5hc3R5LgoKV2h5IGRvZXMgdGhpcyB2
-YWx1ZSBuZWVkcyB0byBiZSBpbiB0aGUgc3VwcGxpZWQgZGV2aWNlLXRyZWUuIENhbid0IGl0IGJl
-IApwYXJ0IG9mIHRoZSBub2RlIGluIHRoZSBob3N0IERUPwoKPiAKPiBHaXZlbiB0aGF0IHRoaXMg
-ZmVhdHVyZSBpcyBhaW1lZCBhdCBwYXJ0aXRpb25pbmcgc2NlbmFyaW9zIHdoZXJlIHRoZQo+IG51
-bWJlciBvZiBWTXMgaXMgbG93LCB0aGUgaW5jcmVhc2VkIG1lbW9yeSBvdmVyaGVhZCBpcyBub3Qg
-YSBiaWcgaXNzdWUuCgpQbGVhc2Ugd3JpdGUgaXQgZG93biBpbiB0aGUgY29tbWl0IG1lc3NhZ2Uu
-CgoKPiAKPiAoSWYgeW91IHJlY2FsbCB3ZSBicmllZmx5IGRpc2N1c3NlZCB0aGlzIHRvcGljIGF0
-IHRoZSBsYXN0IExpbmFybwo+IENvbm5lY3QsIHRoaXMgd2FzIHRoZSBjb25jbHVzaW9uLikKPiAK
-CkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+T24gMjAxOS8xLzE1IDA6NDcsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIwLjEyLjE4IGF0
+IDE0OjEyLCA8cHV3ZW5AaHlnb24uY24+IHdyb3RlOgo+PiAtLS0gYS94ZW4vYXJjaC94ODYvY3B1
+L21jaGVjay9tY2VfYW1kLmMKPj4gKysrIGIveGVuL2FyY2gveDg2L2NwdS9tY2hlY2svbWNlX2Ft
+ZC5jCj4+IEBAIC0xNjIsNyArMTYyLDggQEAgbWNlcXVpcmtfbG9va3VwX2FtZF9xdWlya2RhdGEo
+c3RydWN0IGNwdWluZm9feDg2ICpjKQo+PiAgIHsKPj4gICAgICAgaW50IGk7Cj4+ICAgCj4+IC0g
+ICAgQlVHX09OKGMtPng4Nl92ZW5kb3IgIT0gWDg2X1ZFTkRPUl9BTUQpOwo+PiArICAgIGlmIChj
+LT54ODZfdmVuZG9yICE9IFg4Nl9WRU5ET1JfQU1EKQo+PiArICAgICAgICByZXR1cm4gMDsKPiAK
+PiBQbGVhc2UgY2FuIHlvdSBsZWF2ZSB0aGlzIHVudG91Y2hlZCBhbmQgY2hhbmdlIHRoZSBzaW5n
+bGUKPiBjYWxsZXIgaW5zdGVhZD8gSWYgbmVlZCBiZSBkb3duIHRoZSByb2FkIChidXQgb2YgY291
+cnNlIHlvdSdsbAo+IG5ldmVyIGludHJvZHVjZSBxdWlya3kgYmVoYXZpb3IpLCB3ZSdkIHRoZW4g
+YWRkCj4gbWNlcXVpcmtfbG9va3VwX2h5Z29uX3F1aXJrZGF0YSgpLgoKWWVzLCBJIGNhbiBsZWF2
+ZSB0aGlzIGZ1bmN0aW9uIHVudG91Y2hlZC4gQW5kIGNoYW5nZSB0aGUgc2luZ2xlIGNhbGxlcgph
+bWRfbWNoZWNrX2luaXQoKToKLSAgICBlbnVtIG1jZXF1aXJrX2FtZF9mbGFncyBxdWlya2ZsYWcg
+PSBtY2VxdWlya19sb29rdXBfYW1kX3F1aXJrZGF0YShjaSk7CisgICAgZW51bSBtY2VxdWlya19h
+bWRfZmxhZ3MgcXVpcmtmbGFnID0gMDsKKworICAgIGlmIChjaS0+eDg2X3ZlbmRvciAhPSBYODZf
+VkVORE9SX0hZR09OKQorICAgICAgICBxdWlya2ZsYWcgPSBtY2VxdWlya19sb29rdXBfYW1kX3F1
+aXJrZGF0YShjaSk7CgpJcyB0aGUgbW9kaWZpY2F0aW9uIE9LPwoKQWxzbyBhZGQgbWNlcXVpcmtf
+bG9va3VwX2h5Z29uX3F1aXJrZGF0YSgpIGlzIGFub3RoZXIgc29sdXRpb24sIGV2ZW4KdGhvdWdo
+IGl0IHdpbGwgZG8gbm90aGluZyBhdCB0aGUgbW9tZW50LgoKLS0gClJlZ2FyZHMsClB1IFdlbgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
