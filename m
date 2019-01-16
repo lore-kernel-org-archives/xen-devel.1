@@ -1,21 +1,20 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v2 1/4] libxl: do not attach xen-pciback to
- HVM domain, if stubdomain is in use
-Date: Wed, 16 Jan 2019 18:00:33 +0100
-Message-ID: <20190116170033.GO1205@mail-itl>
-References: <cover.f56cb3033143af6e9a0aeeaf33eb912fa5761983.1547566486.git-series.marmarek@invisiblethingslab.com>
- <84045f5ed399411217c2ac8f3763add0c541a073.1547566486.git-series.marmarek@invisiblethingslab.com>
- <20190116164719.aevcvhzotblpnbzw@mac>
+From: David Miller <davem@davemloft.net>
+Subject: Re: [PATCH 15/21] sparc: add checks for the return
+ value of memblock_alloc*()
+Date: Wed, 16 Jan 2019 09:21:47 -0800 (PST)
+Message-ID: <20190116.092147.2222967221278304230.davem__45967.139179311$1547659252$gmane$org@davemloft.net>
+References: <1547646261-32535-1-git-send-email-rppt@linux.ibm.com>
+ <1547646261-32535-16-git-send-email-rppt@linux.ibm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0053077264438543979=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ChaH=PY=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gjoaa-0003bF-0U
- for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 17:02:52 +0000
-In-Reply-To: <20190116164719.aevcvhzotblpnbzw@mac>
+ <SRS0=5WqY=PY=davemloft.net=davem@srs-us1.protection.inumbo.net>)
+ id 1gjosz-0005Bt-5O
+ for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 17:21:53 +0000
+In-Reply-To: <1547646261-32535-16-git-send-email-rppt@linux.ibm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,117 +23,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+To: rppt@linux.ibm.com
+Cc: dalias@libc.org, linux-ia64@vger.kernel.org, devicetree@vger.kernel.org, catalin.marinas@arm.com, heiko.carstens@de.ibm.com, x86@kernel.org, linux-mips@vger.kernel.org, jcmvbkbc@gmail.com, guoren@kernel.org, sparclinux@vger.kernel.org, hch@lst.de, linux-s390@vger.kernel.org, linux-c6x-dev@linux-c6x.org, ysato@users.sourceforge.jp, richard@nod.at, linux-sh@vger.kernel.org, linux@armlinux.org.uk, kasan-dev@googlegroups.com, geert@linux-m68k.org, msalter@redhat.com, dennis@kernel.org, mattst88@gmail.com, linux-snps-arc@lists.infradead.org, uclinux-h8-devel@lists.sourceforge.jp, pmladek@suse.com, linux-xtensa@linux-xtensa.org, linux-alpha@vger.kernel.org, linux-um@lists.infradead.org, linux-m68k@lists.linux-m68k.org, robh+dt@kernel.org, green.hu@gmail.com, xen-devel@lists.xenproject.org, shorne@gmail.com, gxt@pku.edu.cn, linux-arm-kernel@lists.infradead.org, monstr@monstr.eu
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0053077264438543979==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="NGIwU0kFl1Z1A3An"
-Content-Disposition: inline
-
-
---NGIwU0kFl1Z1A3An
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Xen-devel] [PATCH v2 1/4] libxl: do not attach xen-pciback to
- HVM domain, if stubdomain is in use
-
-On Wed, Jan 16, 2019 at 05:47:19PM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Tue, Jan 15, 2019 at 04:36:28PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > HVM domains use IOMMU and device model assistance for communicating with
-> > PCI devices, xen-pcifront/pciback is used only in PV domains.
->=20
-> You still need pciback in order to reset the device when it's
-> deassigned from the guest, so it's functionality is not only used by
-> PV guests.
-
-Right, I'll update the commit message to match v2 code.
-
-> > When HVM domain has device model in stubdomain, attaching xen-pciback to
-> > the target domain itself is not only useless, but also may prevent
-> > attaching xen-pciback to the stubdomain, effectively breaking PCI
-> > passthrough.
->=20
-> Right. When doing passthrough with a stubdomain you want the target
-> domain to have the memory and IO regions mapped, and the stubdomain to
-> handle the rest.
->=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > ---
-> > Changes in v2:
-> >  - previously called "libxl: attach xen-pciback only to PV domains"
-> >  - instead of excluding all HVMs, change the condition to what actually
-> >    matters here - check if stubdomain is in use; this way xen-pciback is
-> >    always in use (either for the target domain, or it's stubdomain),
-> >    fixing PCI reset by xen-pciback concerns
-> > ---
-> >  tools/libxl/libxl_pci.c | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/tools/libxl/libxl_pci.c b/tools/libxl/libxl_pci.c
-> > index 87afa03..3b6b23c 100644
-> > --- a/tools/libxl/libxl_pci.c
-> > +++ b/tools/libxl/libxl_pci.c
-> > @@ -1106,7 +1106,7 @@ out:
-> >          }
-> >      }
-> > =20
-> > -    if (!starting)
-> > +    if (!starting && !libxl_get_stubdom_id(CTX, domid))
->=20
-> This change seems to assume that both libxl_domain_config for the
-> target and the stubdomain will have the assigned pci devices in the
-> pcidevs field.=20
-
-Not really. libxl__device_pci_add() calls do_pci_add() for both stubdomain
-(if applicable) and target domain.
-
-> Yet I cannot see where the stubdomain
-> libxl_domain_config will get the pci devices from the target domain
-> assigned, I've looked in libxl__spawn_stub_dm but there doesn't seem
-> to be any copy from the target to the stubdom of the list of pci
-> devices. I guess I'm missing something.
->=20
-> Thanks, Roger.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---NGIwU0kFl1Z1A3An
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlw/YzEACgkQ24/THMrX
-1yz55AgAgR5sv3J4/vYMa8NmqZABzJ84UHpdMfZnF+GLtmOdqA59pk916/x6ZWdo
-aZ9hT+BU1r32VRagNwzk2STmZsdhCCxbhRZ8nySFI0KtfZtzIXsi+qQrY2v9szfw
-WZGAhMme/9L/KLAiwWklKXvAtE63f0OI05juHW6lUnTDUaSt9iadE9n0+3TNPNLt
-qJkqr2EetBMb6ZEsEeDaEJVrd5sJqP5VZONlBE5CxIOuvHkaqwPWKAhmAmsaCk7N
-OXTjk1lR2M0Mzrr+EteLt5oWr/Y4OGR3MzEW+1tlkHGYpAj6YvvYoNTLlULJaN+J
-n9DMuQVCzIyNlNSanrlAMt5sWEDBgQ==
-=aOrk
------END PGP SIGNATURE-----
-
---NGIwU0kFl1Z1A3An--
-
-
---===============0053077264438543979==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0053077264438543979==--
+RnJvbTogTWlrZSBSYXBvcG9ydCA8cnBwdEBsaW51eC5pYm0uY29tPgpEYXRlOiBXZWQsIDE2IEph
+biAyMDE5IDE1OjQ0OjE1ICswMjAwCgo+IEFkZCBwYW5pYygpIGNhbGxzIGlmIG1lbWJsb2NrX2Fs
+bG9jKigpIHJldHVybnMgTlVMTC4KPiAKPiBNb3N0IG9mIHRoZSBjaGFuZ2VzIGFyZSBzaW1wbHkg
+YWRkaXRpb24gb2YKPiAKPiAgICAgICAgIGlmKCFwdHIpCj4gICAgICAgICAgICAgICAgIHBhbmlj
+KCk7Cj4gCj4gc3RhdGVtZW50cyBhZnRlciB0aGUgY2FsbHMgdG8gbWVtYmxvY2tfYWxsb2MqKCkg
+dmFyaWFudHMuCj4gCj4gRXhjZXB0aW9ucyBhcmUgcGNwdV9wb3B1bGF0ZV9wdGUoKSBhbmQga2Vy
+bmVsX21hcF9yYW5nZSgpIHRoYXQgd2VyZQo+IHNsaWdodGx5IHJlZmFjdG9yZWQgdG8gYWNjb21t
+b2RhdGUgdGhlIGNoYW5nZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBNaWtlIFJhcG9wb3J0IDxycHB0
+QGxpbnV4LmlibS5jb20+CgpBY2tlZC1ieTogRGF2aWQgUy4gTWlsbGVyIDxkYXZlbUBkYXZlbWxv
+ZnQubmV0PgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
