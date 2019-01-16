@@ -1,32 +1,23 @@
-From: Mike Rapoport <rppt@linux.ibm.com>
-Subject: [PATCH 14/21] ia64: add checks for the return value of
- memblock_alloc*()
-Date: Wed, 16 Jan 2019 15:44:14 +0200
-Message-ID: <1547646261-32535-15-git-send-email-rppt__13644.0554088496$1547646399$gmane$org@linux.ibm.com>
-References: <1547646261-32535-1-git-send-email-rppt@linux.ibm.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2 4/4] xen/x86: Allow stubdom access to irq
+ created for msi.
+Date: Wed, 16 Jan 2019 14:49:14 +0100
+Message-ID: <20190116134914.GN1205@mail-itl>
+References: <cover.f56cb3033143af6e9a0aeeaf33eb912fa5761983.1547566486.git-series.marmarek@invisiblethingslab.com>
+ <8ea00e9347ae7859a37ea421e658263a44a375fb.1547566486.git-series.marmarek@invisiblethingslab.com>
+ <20190116092129.jz2cts5pwd5ckh34@mac>
+ <20190116105218.GM1205@mail-itl>
+ <20190116122004.byvr2bttwkttofqs@mac>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7109963091862079423=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=kth2=PY=linux.ibm.com=rppt@srs-us1.protection.inumbo.net>)
- id 1gjlXw-0008Eu-TW
- for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 13:47:56 +0000
-Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.0.22/8.16.0.22) with SMTP id
- x0GDfhqa089451
- for <xen-devel@lists.xenproject.org>; Wed, 16 Jan 2019 08:46:55 -0500
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
- by mx0a-001b2d01.pphosted.com with ESMTP id 2q22dms96r-1
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Wed, 16 Jan 2019 08:46:36 -0500
-Received: from localhost
- by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
- Violators will be prosecuted
- for <xen-devel@lists.xenproject.org> from <rppt@linux.ibm.com>;
- Wed, 16 Jan 2019 13:45:47 -0000
-In-Reply-To: <1547646261-32535-1-git-send-email-rppt@linux.ibm.com>
+ <SRS0=ChaH=PY=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gjlZM-0000GP-3L
+ for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 13:49:24 +0000
+In-Reply-To: <20190116122004.byvr2bttwkttofqs@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -35,152 +26,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: linux-mm@kvack.org
-Cc: Rich Felker <dalias@libc.org>, linux-ia64@vger.kernel.org, devicetree@vger.kernel.org, Catalin Marinas <catalin.marinas@arm.com>, Heiko Carstens <heiko.carstens@de.ibm.com>, x86@kernel.org, linux-mips@vger.kernel.org, Max Filippov <jcmvbkbc@gmail.com>, Guo Ren <guoren@kernel.org>, sparclinux@vger.kernel.org, Christoph Hellwig <hch@lst.de>, linux-s390@vger.kernel.org, linux-c6x-dev@linux-c6x.org, Yoshinori Sato <ysato@users.sourceforge.jp>, Richard Weinberger <richard@nod.at>, linux-sh@vger.kernel.org, Russell King <linux@armlinux.org.uk>, kasan-dev@googlegroups.com, Mike Rapoport <rppt@linux.ibm.com>, Geert Uytterhoeven <geert@linux-m68k.org>, Mark Salter <msalter@redhat.com>, Dennis Zhou <dennis@kernel.org>, Matt Turner <mattst88@gmail.com>, linux-snps-arc@lists.infradead.org, uclinux-h8-devel@lists.sourceforge.jp, Petr Mladek <pmladek@suse.com>, linux-xtensa@linux-xten
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QWRkIHBhbmljKCkgY2FsbHMgaWYgbWVtYmxvY2tfYWxsb2MqKCkgcmV0dXJucyBOVUxMLgoKTW9z
-dCBvZiB0aGUgY2hhbmdlcyBhcmUgc2ltcGx5IGFkZGl0aW9uIG9mCgoJaWYoIXB0cikKCQlwYW5p
-YygpOwoKc3RhdGVtZW50cyBhZnRlciB0aGUgY2FsbHMgdG8gbWVtYmxvY2tfYWxsb2MqKCkgdmFy
-aWFudHMuCgpFeGNlcHRpb25zIGFyZSBjcmVhdGVfbWVtX21hcF9wYWdlX3RhYmxlKCkgYW5kIGlh
-NjRfbG9nX2luaXQoKSB0aGF0IHdlcmUKc2xpZ2h0bHkgcmVmYWN0b3JlZCB0byBhY2NvbW1vZGF0
-ZSB0aGUgY2hhbmdlLgoKU2lnbmVkLW9mZi1ieTogTWlrZSBSYXBvcG9ydCA8cnBwdEBsaW51eC5p
-Ym0uY29tPgotLS0KIGFyY2gvaWE2NC9rZXJuZWwvbWNhLmMgICAgICAgICAgfCAyMCArKysrKysr
-KysrKysrKy0tLS0tLQogYXJjaC9pYTY0L21tL2NvbnRpZy5jICAgICAgICAgICB8ICA4ICsrKysr
-Ky0tCiBhcmNoL2lhNjQvbW0vZGlzY29udGlnLmMgICAgICAgIHwgIDQgKysrKwogYXJjaC9pYTY0
-L21tL2luaXQuYyAgICAgICAgICAgICB8IDM4ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-Ky0tLS0tLS0tCiBhcmNoL2lhNjQvbW0vdGxiLmMgICAgICAgICAgICAgIHwgIDYgKysrKysrCiBh
-cmNoL2lhNjQvc24va2VybmVsL2lvX2NvbW1vbi5jIHwgIDMgKysrCiBhcmNoL2lhNjQvc24va2Vy
-bmVsL3NldHVwLmMgICAgIHwgMTIgKysrKysrKysrKystCiA3IGZpbGVzIGNoYW5nZWQsIDc0IGlu
-c2VydGlvbnMoKyksIDE3IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2FyY2gvaWE2NC9rZXJu
-ZWwvbWNhLmMgYi9hcmNoL2lhNjQva2VybmVsL21jYS5jCmluZGV4IDM3MGJjMzQuLjVjYWJiM2Yg
-MTAwNjQ0Ci0tLSBhL2FyY2gvaWE2NC9rZXJuZWwvbWNhLmMKKysrIGIvYXJjaC9pYTY0L2tlcm5l
-bC9tY2EuYwpAQCAtMzU5LDExICszNTksNiBAQCB0eXBlZGVmIHN0cnVjdCBpYTY0X3N0YXRlX2xv
-Z19zCiAKIHN0YXRpYyBpYTY0X3N0YXRlX2xvZ190IGlhNjRfc3RhdGVfbG9nW0lBNjRfTUFYX0xP
-R19UWVBFU107CiAKLSNkZWZpbmUgSUE2NF9MT0dfQUxMT0NBVEUoaXQsIHNpemUpIFwKLQl7aWE2
-NF9zdGF0ZV9sb2dbaXRdLmlzbF9sb2dbSUE2NF9MT0dfQ1VSUl9JTkRFWChpdCldID0gXAotCQko
-aWE2NF9lcnJfcmVjX3QgKiltZW1ibG9ja19hbGxvYyhzaXplLCBTTVBfQ0FDSEVfQllURVMpOyBc
-Ci0JaWE2NF9zdGF0ZV9sb2dbaXRdLmlzbF9sb2dbSUE2NF9MT0dfTkVYVF9JTkRFWChpdCldID0g
-XAotCQkoaWE2NF9lcnJfcmVjX3QgKiltZW1ibG9ja19hbGxvYyhzaXplLCBTTVBfQ0FDSEVfQllU
-RVMpO30KICNkZWZpbmUgSUE2NF9MT0dfTE9DS19JTklUKGl0KSBzcGluX2xvY2tfaW5pdCgmaWE2
-NF9zdGF0ZV9sb2dbaXRdLmlzbF9sb2NrKQogI2RlZmluZSBJQTY0X0xPR19MT0NLKGl0KSAgICAg
-IHNwaW5fbG9ja19pcnFzYXZlKCZpYTY0X3N0YXRlX2xvZ1tpdF0uaXNsX2xvY2ssIHMpCiAjZGVm
-aW5lIElBNjRfTE9HX1VOTE9DSyhpdCkgICAgc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgmaWE2NF9z
-dGF0ZV9sb2dbaXRdLmlzbF9sb2NrLHMpCkBAIC0zNzgsNiArMzczLDE5IEBAIHN0YXRpYyBpYTY0
-X3N0YXRlX2xvZ190IGlhNjRfc3RhdGVfbG9nW0lBNjRfTUFYX0xPR19UWVBFU107CiAjZGVmaW5l
-IElBNjRfTE9HX0NVUlJfQlVGRkVSKGl0KSAgICh2b2lkICopKChpYTY0X3N0YXRlX2xvZ1tpdF0u
-aXNsX2xvZ1tJQTY0X0xPR19DVVJSX0lOREVYKGl0KV0pKQogI2RlZmluZSBJQTY0X0xPR19DT1VO
-VChpdCkgICAgICAgICBpYTY0X3N0YXRlX2xvZ1tpdF0uaXNsX2NvdW50CiAKK3N0YXRpYyBpbmxp
-bmUgdm9pZCBpYTY0X2xvZ19hbGxvY2F0ZShpbnQgaXQsIHU2NCBzaXplKQoreworCWlhNjRfc3Rh
-dGVfbG9nW2l0XS5pc2xfbG9nW0lBNjRfTE9HX0NVUlJfSU5ERVgoaXQpXSA9CisJCShpYTY0X2Vy
-cl9yZWNfdCAqKW1lbWJsb2NrX2FsbG9jKHNpemUsIFNNUF9DQUNIRV9CWVRFUyk7CisJaWYgKCFp
-YTY0X3N0YXRlX2xvZ1tpdF0uaXNsX2xvZ1tJQTY0X0xPR19DVVJSX0lOREVYKGl0KV0pCisJCXBh
-bmljKCIlczogRmFpbGVkIHRvIGFsbG9jYXRlICVsbHUgYnl0ZXNcbiIsIF9fZnVuY19fLCBzaXpl
-KTsKKworCWlhNjRfc3RhdGVfbG9nW2l0XS5pc2xfbG9nW0lBNjRfTE9HX05FWFRfSU5ERVgoaXQp
-XSA9CisJCShpYTY0X2Vycl9yZWNfdCAqKW1lbWJsb2NrX2FsbG9jKHNpemUsIFNNUF9DQUNIRV9C
-WVRFUyk7CisJaWYgKCFpYTY0X3N0YXRlX2xvZ1tpdF0uaXNsX2xvZ1tJQTY0X0xPR19ORVhUX0lO
-REVYKGl0KV0pCisJCXBhbmljKCIlczogRmFpbGVkIHRvIGFsbG9jYXRlICVsbHUgYnl0ZXNcbiIs
-IF9fZnVuY19fLCBzaXplKTsKK30KKwogLyoKICAqIGlhNjRfbG9nX2luaXQKICAqCVJlc2V0IHRo
-ZSBPUyBpYTY0IGxvZyBidWZmZXIKQEAgLTM5OSw3ICs0MDcsNyBAQCBpYTY0X2xvZ19pbml0KGlu
-dCBzYWxfaW5mb190eXBlKQogCQlyZXR1cm47CiAKIAkvLyBzZXQgdXAgT1MgZGF0YSBzdHJ1Y3R1
-cmVzIHRvIGhvbGQgZXJyb3IgaW5mbwotCUlBNjRfTE9HX0FMTE9DQVRFKHNhbF9pbmZvX3R5cGUs
-IG1heF9zaXplKTsKKwlpYTY0X2xvZ19hbGxvY2F0ZShzYWxfaW5mb190eXBlLCBtYXhfc2l6ZSk7
-CiB9CiAKIC8qCmRpZmYgLS1naXQgYS9hcmNoL2lhNjQvbW0vY29udGlnLmMgYi9hcmNoL2lhNjQv
-bW0vY29udGlnLmMKaW5kZXggNmU0NDcyMy4uZDI5ZmI2YiAxMDA2NDQKLS0tIGEvYXJjaC9pYTY0
-L21tL2NvbnRpZy5jCisrKyBiL2FyY2gvaWE2NC9tbS9jb250aWcuYwpAQCAtODQsOSArODQsMTMg
-QEAgdm9pZCAqcGVyX2NwdV9pbml0KHZvaWQpCiBzdGF0aWMgaW5saW5lIHZvaWQKIGFsbG9jX3Bl
-cl9jcHVfZGF0YSh2b2lkKQogewotCWNwdV9kYXRhID0gbWVtYmxvY2tfYWxsb2NfZnJvbShQRVJD
-UFVfUEFHRV9TSVpFICogbnVtX3Bvc3NpYmxlX2NwdXMoKSwKLQkJCQkgICAgICAgUEVSQ1BVX1BB
-R0VfU0laRSwKKwlzaXplX3Qgc2l6ZSA9IFBFUkNQVV9QQUdFX1NJWkUgKiBudW1fcG9zc2libGVf
-Y3B1cygpOworCisJY3B1X2RhdGEgPSBtZW1ibG9ja19hbGxvY19mcm9tKHNpemUsIFBFUkNQVV9Q
-QUdFX1NJWkUsCiAJCQkJICAgICAgIF9fcGEoTUFYX0RNQV9BRERSRVNTKSk7CisJaWYgKCFjcHVf
-ZGF0YSkKKwkJcGFuaWMoIiVzOiBGYWlsZWQgdG8gYWxsb2NhdGUgJWx1IGJ5dGVzIGFsaWduPSVs
-eCBmcm9tPSVseFxuIiwKKwkJICAgICAgX19mdW5jX18sIHNpemUsIFBFUkNQVV9QQUdFX1NJWkUs
-IF9fcGEoTUFYX0RNQV9BRERSRVNTKSk7CiB9CiAKIC8qKgpkaWZmIC0tZ2l0IGEvYXJjaC9pYTY0
-L21tL2Rpc2NvbnRpZy5jIGIvYXJjaC9pYTY0L21tL2Rpc2NvbnRpZy5jCmluZGV4IGY5YzM2NzUu
-LjA1NDkwZGQgMTAwNjQ0Ci0tLSBhL2FyY2gvaWE2NC9tbS9kaXNjb250aWcuYworKysgYi9hcmNo
-L2lhNjQvbW0vZGlzY29udGlnLmMKQEAgLTQ1NCw2ICs0NTQsMTAgQEAgc3RhdGljIHZvaWQgX19p
-bml0ICptZW1vcnlfbGVzc19ub2RlX2FsbG9jKGludCBuaWQsIHVuc2lnbmVkIGxvbmcgcGVybm9k
-ZXNpemUpCiAJCQkJICAgICBfX3BhKE1BWF9ETUFfQUREUkVTUyksCiAJCQkJICAgICBNRU1CTE9D
-S19BTExPQ19BQ0NFU1NJQkxFLAogCQkJCSAgICAgYmVzdG5vZGUpOworCWlmICghcHRyKQorCQlw
-YW5pYygiJXM6IEZhaWxlZCB0byBhbGxvY2F0ZSAlbHUgYnl0ZXMgYWxpZ249MHglbHggbmlkPSVk
-IGZyb209JWx4XG4iLAorCQkgICAgICBfX2Z1bmNfXywgcGVybm9kZXNpemUsIFBFUkNQVV9QQUdF
-X1NJWkUsIGJlc3Rub2RlLAorCQkgICAgICBfX3BhKE1BWF9ETUFfQUREUkVTUykpOwogCiAJcmV0
-dXJuIHB0cjsKIH0KZGlmZiAtLWdpdCBhL2FyY2gvaWE2NC9tbS9pbml0LmMgYi9hcmNoL2lhNjQv
-bW0vaW5pdC5jCmluZGV4IDI5ZDg0MTUuLmU0OTIwMGUgMTAwNjQ0Ci0tLSBhL2FyY2gvaWE2NC9t
-bS9pbml0LmMKKysrIGIvYXJjaC9pYTY0L21tL2luaXQuYwpAQCAtNDQ0LDIzICs0NDQsNDUgQEAg
-aW50IF9faW5pdCBjcmVhdGVfbWVtX21hcF9wYWdlX3RhYmxlKHU2NCBzdGFydCwgdTY0IGVuZCwg
-dm9pZCAqYXJnKQogCiAJZm9yIChhZGRyZXNzID0gc3RhcnRfcGFnZTsgYWRkcmVzcyA8IGVuZF9w
-YWdlOyBhZGRyZXNzICs9IFBBR0VfU0laRSkgewogCQlwZ2QgPSBwZ2Rfb2Zmc2V0X2soYWRkcmVz
-cyk7Ci0JCWlmIChwZ2Rfbm9uZSgqcGdkKSkKLQkJCXBnZF9wb3B1bGF0ZSgmaW5pdF9tbSwgcGdk
-LCBtZW1ibG9ja19hbGxvY19ub2RlKFBBR0VfU0laRSwgUEFHRV9TSVpFLCBub2RlKSk7CisJCWlm
-IChwZ2Rfbm9uZSgqcGdkKSkgeworCQkJcHVkID0gbWVtYmxvY2tfYWxsb2Nfbm9kZShQQUdFX1NJ
-WkUsIFBBR0VfU0laRSwgbm9kZSk7CisJCQlpZiAoIXB1ZCkKKwkJCQlnb3RvIGVycl9hbGxvYzsK
-KwkJCXBnZF9wb3B1bGF0ZSgmaW5pdF9tbSwgcGdkLCBwdWQpOworCQl9CiAJCXB1ZCA9IHB1ZF9v
-ZmZzZXQocGdkLCBhZGRyZXNzKTsKIAotCQlpZiAocHVkX25vbmUoKnB1ZCkpCi0JCQlwdWRfcG9w
-dWxhdGUoJmluaXRfbW0sIHB1ZCwgbWVtYmxvY2tfYWxsb2Nfbm9kZShQQUdFX1NJWkUsIFBBR0Vf
-U0laRSwgbm9kZSkpOworCQlpZiAocHVkX25vbmUoKnB1ZCkpIHsKKwkJCXBtZCA9IG1lbWJsb2Nr
-X2FsbG9jX25vZGUoUEFHRV9TSVpFLCBQQUdFX1NJWkUsIG5vZGUpOworCQkJaWYgKCFwbWQpCisJ
-CQkJZ290byBlcnJfYWxsb2M7CisJCQlwdWRfcG9wdWxhdGUoJmluaXRfbW0sIHB1ZCwgcG1kKTsK
-KwkJfQogCQlwbWQgPSBwbWRfb2Zmc2V0KHB1ZCwgYWRkcmVzcyk7CiAKLQkJaWYgKHBtZF9ub25l
-KCpwbWQpKQotCQkJcG1kX3BvcHVsYXRlX2tlcm5lbCgmaW5pdF9tbSwgcG1kLCBtZW1ibG9ja19h
-bGxvY19ub2RlKFBBR0VfU0laRSwgUEFHRV9TSVpFLCBub2RlKSk7CisJCWlmIChwbWRfbm9uZSgq
-cG1kKSkgeworCQkJcHRlID0gbWVtYmxvY2tfYWxsb2Nfbm9kZShQQUdFX1NJWkUsIFBBR0VfU0la
-RSwgbm9kZSk7CisJCQlpZiAoIXB0ZSkKKwkJCQlnb3RvIGVycl9hbGxvYzsKKwkJCXBtZF9wb3B1
-bGF0ZV9rZXJuZWwoJmluaXRfbW0sIHBtZCwgcHRlKTsKKwkJfQogCQlwdGUgPSBwdGVfb2Zmc2V0
-X2tlcm5lbChwbWQsIGFkZHJlc3MpOwogCi0JCWlmIChwdGVfbm9uZSgqcHRlKSkKLQkJCXNldF9w
-dGUocHRlLCBwZm5fcHRlKF9fcGEobWVtYmxvY2tfYWxsb2Nfbm9kZShQQUdFX1NJWkUsIFBBR0Vf
-U0laRSwgbm9kZSkpID4+IFBBR0VfU0hJRlQsCisJCWlmIChwdGVfbm9uZSgqcHRlKSkgeworCQkJ
-dm9pZCAqcGFnZSA9IG1lbWJsb2NrX2FsbG9jX25vZGUoUEFHRV9TSVpFLCBQQUdFX1NJWkUsCisJ
-CQkJCQkJIG5vZGUpOworCQkJaWYgKCFwYWdlKQorCQkJCWdvdG8gZXJyX2FsbG9jOworCQkJc2V0
-X3B0ZShwdGUsIHBmbl9wdGUoX19wYShwYWdlKSA+PiBQQUdFX1NISUZULAogCQkJCQkgICAgIFBB
-R0VfS0VSTkVMKSk7CisJCX0KIAl9CiAJcmV0dXJuIDA7CisKK2Vycl9hbGxvYzoKKwlwYW5pYygi
-JXM6IEZhaWxlZCB0byBhbGxvY2F0ZSAlbHUgYnl0ZXMgYWxpZ249MHglbHggbmlkPSVkXG4iLAor
-CSAgICAgIF9fZnVuY19fLCBQQUdFX1NJWkUsIFBBR0VfU0laRSwgbm9kZSk7CisJcmV0dXJuIC1F
-Tk9NRU07CiB9CiAKIHN0cnVjdCBtZW1tYXBfaW5pdF9jYWxsYmFja19kYXRhIHsKZGlmZiAtLWdp
-dCBhL2FyY2gvaWE2NC9tbS90bGIuYyBiL2FyY2gvaWE2NC9tbS90bGIuYwppbmRleCA5MzQwYmNi
-Li41ZmM4OWFhIDEwMDY0NAotLS0gYS9hcmNoL2lhNjQvbW0vdGxiLmMKKysrIGIvYXJjaC9pYTY0
-L21tL3RsYi5jCkBAIC02MSw4ICs2MSwxNCBAQCBtbXVfY29udGV4dF9pbml0ICh2b2lkKQogewog
-CWlhNjRfY3R4LmJpdG1hcCA9IG1lbWJsb2NrX2FsbG9jKChpYTY0X2N0eC5tYXhfY3R4ICsgMSkg
-Pj4gMywKIAkJCQkJIFNNUF9DQUNIRV9CWVRFUyk7CisJaWYgKCFpYTY0X2N0eC5iaXRtYXApCisJ
-CXBhbmljKCIlczogRmFpbGVkIHRvIGFsbG9jYXRlICV1IGJ5dGVzXG4iLCBfX2Z1bmNfXywKKwkJ
-ICAgICAgKGlhNjRfY3R4Lm1heF9jdHggKyAxKSA+PiAzKTsKIAlpYTY0X2N0eC5mbHVzaG1hcCA9
-IG1lbWJsb2NrX2FsbG9jKChpYTY0X2N0eC5tYXhfY3R4ICsgMSkgPj4gMywKIAkJCQkJICAgU01Q
-X0NBQ0hFX0JZVEVTKTsKKwlpZiAoIWlhNjRfY3R4LmZsdXNobWFwKQorCQlwYW5pYygiJXM6IEZh
-aWxlZCB0byBhbGxvY2F0ZSAldSBieXRlc1xuIiwgX19mdW5jX18sCisJCSAgICAgIChpYTY0X2N0
-eC5tYXhfY3R4ICsgMSkgPj4gMyk7CiB9CiAKIC8qCmRpZmYgLS1naXQgYS9hcmNoL2lhNjQvc24v
-a2VybmVsL2lvX2NvbW1vbi5jIGIvYXJjaC9pYTY0L3NuL2tlcm5lbC9pb19jb21tb24uYwppbmRl
-eCA4ZGYxM2QwLi5kNDY4NDczIDEwMDY0NAotLS0gYS9hcmNoL2lhNjQvc24va2VybmVsL2lvX2Nv
-bW1vbi5jCisrKyBiL2FyY2gvaWE2NC9zbi9rZXJuZWwvaW9fY29tbW9uLmMKQEAgLTM5NCw2ICsz
-OTQsOSBAQCB2b2lkIF9faW5pdCBodWJkZXZfaW5pdF9ub2RlKG5vZGVwZGFfdCAqIG5wZGEsIGNu
-b2RlaWRfdCBub2RlKQogCWh1YmRldl9pbmZvID0gKHN0cnVjdCBodWJkZXZfaW5mbyAqKW1lbWJs
-b2NrX2FsbG9jX25vZGUoc2l6ZSwKIAkJCQkJCQkJU01QX0NBQ0hFX0JZVEVTLAogCQkJCQkJCQlu
-b2RlKTsKKwlpZiAoIWh1YmRldl9pbmZvKQorCQlwYW5pYygiJXM6IEZhaWxlZCB0byBhbGxvY2F0
-ZSAlZCBieXRlcyBhbGlnbj0weCV4IG5pZD0lZFxuIiwKKwkJICAgICAgX19mdW5jX18sIHNpemUs
-IFNNUF9DQUNIRV9CWVRFUywgbm9kZSk7CiAKIAlucGRhLT5wZGluZm8gPSAodm9pZCAqKWh1YmRl
-dl9pbmZvOwogfQpkaWZmIC0tZ2l0IGEvYXJjaC9pYTY0L3NuL2tlcm5lbC9zZXR1cC5jIGIvYXJj
-aC9pYTY0L3NuL2tlcm5lbC9zZXR1cC5jCmluZGV4IGE2ZDQwYTIuLmU2YTUwNDkgMTAwNjQ0Ci0t
-LSBhL2FyY2gvaWE2NC9zbi9rZXJuZWwvc2V0dXAuYworKysgYi9hcmNoL2lhNjQvc24va2VybmVs
-L3NldHVwLmMKQEAgLTUxMyw2ICs1MTMsMTAgQEAgc3RhdGljIHZvaWQgX19pbml0IHNuX2luaXRf
-cGRhcyhjaGFyICoqY21kbGluZV9wKQogCQlub2RlcGRhaW5kcltjbm9kZV0gPQogCQkgICAgbWVt
-YmxvY2tfYWxsb2Nfbm9kZShzaXplb2Yobm9kZXBkYV90KSwgU01QX0NBQ0hFX0JZVEVTLAogCQkJ
-CQljbm9kZSk7CisJCWlmICghbm9kZXBkYWluZHJbY25vZGVdKQorCQkJcGFuaWMoIiVzOiBGYWls
-ZWQgdG8gYWxsb2NhdGUgJWx1IGJ5dGVzIGFsaWduPTB4JXggbmlkPSVkXG4iLAorCQkJICAgICAg
-X19mdW5jX18sIHNpemVvZihub2RlcGRhX3QpLCBTTVBfQ0FDSEVfQllURVMsCisJCQkgICAgICBj
-bm9kZSk7CiAJCW1lbXNldChub2RlcGRhaW5kcltjbm9kZV0tPnBoeXNfY3B1aWQsIC0xLAogCQkg
-ICAgc2l6ZW9mKG5vZGVwZGFpbmRyW2Nub2RlXS0+cGh5c19jcHVpZCkpOwogCQlzcGluX2xvY2tf
-aW5pdCgmbm9kZXBkYWluZHJbY25vZGVdLT5wdGNfbG9jayk7CkBAIC01MjEsOSArNTI1LDE1IEBA
-IHN0YXRpYyB2b2lkIF9faW5pdCBzbl9pbml0X3BkYXMoY2hhciAqKmNtZGxpbmVfcCkKIAkvKgog
-CSAqIEFsbG9jYXRlICYgaW5pdGlhbGl6ZSBub2RlcGRhIGZvciBUSU9zLiAgRm9yIG5vdywgcHV0
-IHRoZW0gb24gbm9kZSAwLgogCSAqLwotCWZvciAoY25vZGUgPSBudW1fb25saW5lX25vZGVzKCk7
-IGNub2RlIDwgbnVtX2Nub2RlczsgY25vZGUrKykKKwlmb3IgKGNub2RlID0gbnVtX29ubGluZV9u
-b2RlcygpOyBjbm9kZSA8IG51bV9jbm9kZXM7IGNub2RlKyspIHsKIAkJbm9kZXBkYWluZHJbY25v
-ZGVdID0KIAkJICAgIG1lbWJsb2NrX2FsbG9jX25vZGUoc2l6ZW9mKG5vZGVwZGFfdCksIFNNUF9D
-QUNIRV9CWVRFUywgMCk7CisJCWlmICghbm9kZXBkYWluZHJbY25vZGVdKQorCQkJcGFuaWMoIiVz
-OiBGYWlsZWQgdG8gYWxsb2NhdGUgJWx1IGJ5dGVzIGFsaWduPTB4JXggbmlkPSVkXG4iLAorCQkJ
-ICAgICAgX19mdW5jX18sIHNpemVvZihub2RlcGRhX3QpLCBTTVBfQ0FDSEVfQllURVMsCisJCQkg
-ICAgICBjbm9kZSk7CisJfQorCiAKIAkvKgogCSAqIE5vdyBjb3B5IHRoZSBhcnJheSBvZiBub2Rl
-cGRhIHBvaW50ZXJzIHRvIGVhY2ggbm9kZXBkYS4KLS0gCjIuNy40CgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7109963091862079423==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="KuLpqunXa7jZSBt+"
+Content-Disposition: inline
+
+
+--KuLpqunXa7jZSBt+
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v2 4/4] xen/x86: Allow stubdom access to irq created for
+ msi.
+
+On Wed, Jan 16, 2019 at 01:20:04PM +0100, Roger Pau Monn=C3=A9 wrote:
+> On Wed, Jan 16, 2019 at 11:52:18AM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Wed, Jan 16, 2019 at 10:21:29AM +0100, Roger Pau Monn=C3=A9 wrote:
+> > > On Tue, Jan 15, 2019 at 04:36:31PM +0100, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > From: Simon Gaiser <simon@invisiblethingslab.com>
+> > > >=20
+> > > > Stubdomains need to be given sufficient privilege over the guest wh=
+ich it
+> > > > provides emulation for in order for PCI passthrough to work correct=
+ly.
+> > > > When a HVM domain try to enable MSI, QEMU in stubdomain calls
+> > > > PHYSDEVOP_map_pirq, but later it needs to call XEN_DOMCTL_bind_pt_i=
+rq as
+> > > > part of xc_domain_update_msi_irq. Allow for that as part of
+> > > > PHYSDEVOP_map_pirq.
+> > >=20
+> > > I see, that's not a problem AFAICT for PCI INTx because the IRQ in
+> > > that case is known beforehand, and the stubdomain is given permissions
+> > > over this IRQ by libxl__device_pci_add (there's a do_pci_add against
+> > > the stubdomain).
+> >=20
+> > Exactly.
+>=20
+> I would maybe consider adding something like this to the commit
+> message, so it's clear why PCI INTx works but not MSI interrupts.
+>=20
+> >=20
+> > > >=20
+> > > > Based on https://github.com/OpenXT/xenclient-oe/blob/5e0e7304a5a3c7=
+5ef01240a1e3673665b2aaf05e/recipes-extended/xen/files/stubdomain-msi-irq-ac=
+cess.patch by Eric Chanudet <chanudete@ainfosec.com>.
+> > > >=20
+> > > > Signed-off-by: Simon Gaiser <simon@invisiblethingslab.com>
+> > > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblet=
+hingslab.com>
+> > > > ---
+> > > > This is only one part of fixing MSI with QEMU in stubdomain. The ot=
+her
+> > > > part is allowing stubdomain to actually enable MSI in PCI config sp=
+ace.
+> > > > QEMU does that through pcifront/back connected to the stubdomain (s=
+ee
+> > > > hw/xen/xen_pt_msi.c:msi_msix_enable()), but pciback by default refu=
+se
+> > > > write to that register.
+> > > > Easy, less safe solution: enable permissive mode for the device.
+> > > > Safer solution - enable access to this register for stubdomain only
+> > > > (pciback patch that add such flag + libxl patch to set it for relev=
+ant
+> > > >  devices)
+> > > > The whole story:
+> > > > https://www.qubes-os.org/news/2017/10/18/msi-support/
+> > > >=20
+> > > > Any other ideas? Which one is preferred upstream?
+> > >=20
+> > > IMO, and please correct me if I'm wrong, QEMU in the stubdomain will
+> > > receive the PCI config space write to enable MSI, and since this
+> > > stub-QEMU runs in PV mode I think it should use the PV way to enable
+> > > MSI, ie: the same that Linux pcifront uses to enable MSI for
+> > > passed-through devices.
+> > >=20
+> > > Is this something that sounds sensible?
+> >=20
+> > We've considered this option too. Let me quote Simon on that (from the
+> > link above):
+> >=20
+> >     The enable command that pcifront sends is intended for the normal P=
+V use
+> >     case where the device is passed to the VM itself (via pcifront) rat=
+her
+> >     than to the stub domain target. While the command is called enable_=
+msi,
+> >     pciback does much more than simply setting the enable flag. It also
+> >     configures IRQ handling in the dom0 kernel, adapts the MSI masking,=
+ and
+> >     more. This makes sense in the PV case, but in the HVM case, the MSI
+> >     configuration is done by QEMU, so this most likely won=E2=80=99t wo=
+rk correctly.
+>=20
+> Oh great, that's unfortunate. Both pciback functions end up calling
+> into msi_capability_init in the Linux kernel, which does indeed more
+> than just toggling the PCI config space enable bit.
+>=20
+> OTOH adding a bypass to pciback so the stubdom is able to write to the
+> PCI register in order to toggle the enable bit seems quite clumsy. Not
+> to mention that you would be required to update Dom0 kernel in order to
+> fix the issue.
+>=20
+> Do you think it makes sense to add a domctl to enable/disable MSI(X)?
+>=20
+> This way the bug could be fixed by just updating Xen (and the
+> stubdomain).
+
+Indeed in case of stubdomain, that would make sens, as other PCI passthrough
+related operations already bypass pcifront/back anyway.
+
+And I agree with Jan, that physdevop makes more sense, if going this way.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--KuLpqunXa7jZSBt+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlw/NloACgkQ24/THMrX
+1yyIWggAhgClvb4ahR8Yrqz02QTqm6pAZRSNFxhHtuvZU4Rx8kgUbrHVDvhnk2Ny
+UCPa3JL8mP9G9xDobKnUig2gVu+1pP0NpF6t06g/7Al3dniKsuqoLalCzNug9OIv
+lmI/+PNlc8SZ5g03Y4JjioIHIcMiTBxDfuxjl+mQRM85LA913GDppmEqFwL0ixQO
+uMz2W15MSLuqfa6AisaZT5b80gpC5kVJM2fERkQyYYeaduNjCUv4nr6G3Rt/bpg3
+nuswS7B1u8zP8i9683XZbh/6XoaR1R+vPaXCQebFzJNgnnlxR1FUPXKdF/mg3EtQ
+R4UjTb4Tf2ekXqxcGIrUC26zdE0mYQ==
+=jw8F
+-----END PGP SIGNATURE-----
+
+--KuLpqunXa7jZSBt+--
+
+
+--===============7109963091862079423==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7109963091862079423==--
