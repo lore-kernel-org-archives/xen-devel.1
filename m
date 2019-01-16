@@ -1,23 +1,17 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v3] xen: Fix x86 sched_clock() interface for
- xen
-Date: Wed, 16 Jan 2019 10:07:54 -0500
-Message-ID: <71f7d41b-1822-d0b5-a28a-b10172bc5746__31280.4516092458$1547651221$gmane$org@oracle.com>
-References: <20190114124413.3742-1-jgross@suse.com>
- <ebfc24e3-21a0-6cc6-ae68-5c13c1e66b9a@knorrie.org>
- <4808225b-e413-2ec1-77a1-15999c18583f@suse.com>
- <20190116131703.GB2793@localhost.localdomain>
- <efaf168e-feca-2c09-96e1-3f58be9853bf@suse.com>
+From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
+Subject: [PATCH v1] x86/mm: Clean up p2m_finish_type_change
+ return value
+Date: Wed, 16 Jan 2019 15:13:05 +0000
+Message-ID: <20190116151231.10210-1-aisaila@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HFAl=PY=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1gjmne-0007uK-KM
- for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 15:08:14 +0000
-In-Reply-To: <efaf168e-feca-2c09-96e1-3f58be9853bf@suse.com>
+ <SRS0=bGbE=PY=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
+ id 1gjmsQ-0000Fx-8P
+ for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 15:13:10 +0000
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,26 +21,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: sstabellini@kernel.org, x86@kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org, Hans van Kranenburg <hans@knorrie.org>, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, xen-devel@lists.xenproject.org, tglx@linutronix.de
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, Alexandru Stefan ISAILA <aisaila@bitdefender.com>, "roger.pau@citrix.com" <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMS8xNi8xOSA5OjMzIEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IE9uIDE2LzAxLzIwMTkg
-MTQ6MTcsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPj4gT24gV2VkLCBKYW4gMTYsIDIwMTkgYXQg
-MDg6NTA6MTNBTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4KPj4+IEBAIC0xNjUwLDEz
-ICsxNjUwLDE0IEBAIHZvaWQgeGVuX2NhbGxiYWNrX3ZlY3Rvcih2b2lkKQo+Pj4gICAgICAgICAg
-ICAgICAgICAgICAgICAgeGVuX2hhdmVfdmVjdG9yX2NhbGxiYWNrID0gMDsKPj4+ICAgICAgICAg
-ICAgICAgICAgICAgICAgIHJldHVybjsKPj4+ICAgICAgICAgICAgICAgICB9Cj4+PiAtICAgICAg
-ICAgICAgICAgcHJfaW5mbygiWGVuIEhWTSBjYWxsYmFjayB2ZWN0b3IgZm9yIGV2ZW50IGRlbGl2
-ZXJ5IGlzCj4+PiBlbmFibGVkXG4iKTsKPj4+ICsgICAgICAgICAgICAgICBpZiAoIXNpbGVudCkK
-Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgIHByX2luZm8oIlhlbiBIVk0gY2FsbGJhY2sgdmVj
-dG9yIGZvciBldmVudAo+Pj4gZGVsaXZlcnkgaXMgZW5hYmxlZFxuIik7Cj4+IEhvdyBhYm91dCBy
-ZXBsYWNpbmcgcHJfaW5mbygpIHdpdGggcHJfaW5mb19vbmNlKCk/Cj4gV2hhdCBhIG5pY2UgYW5k
-IHNpbXBsZSBpZGVhIQo+Cj4gRXh0cmEgcGF0Y2ggb3IgVjQ/Cj4KCgpJIGNhbiBhZGQgdGhpcyB3
-aGlsZSBjb21taXR0aW5nLCBJIGRvbid0IHRoaW5rIGl0J3Mgd29ydGggYSB3aG9sZSBuZXcgcGF0
-Y2guCgpPbmUgb3V0c3RhbmRpbmcgcXVlc3Rpb24gSSBoYXZlIGlzIHdoZXRoZXIgYW55dGhpbmcg
-bmVlZHMgdG8gYmUgYWRkZWQgdG8KdGhlIGNvbW1pdCBtZXNzYWdlIChUaG9tYXMgaGFkIHNvbWUg
-cXVlc3Rpb25zKQoKCi1ib3JpcwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+Q2hhbmdlZCB0aGUgcmV0dXJuIHZhbHVlIG9mIDEgdG8gMCBzbyBub3cgcDJtX2ZpbmlzaF90eXBl
+X2NoYW5nZSByZXR1cm5zCjAgZm9yIHN1Y2Nlc3Mgb3IgPDAgZm9yIGVycm9yLgoKU2lnbmVkLW9m
+Zi1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+Ci0tLQogeGVu
+L2FyY2gveDg2L21tL3AybS5jIHwgMTIgKysrKy0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgNCBp
+bnNlcnRpb25zKCspLCA4IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9t
+bS9wMm0uYyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0uYwppbmRleCBkMTRjZTU3ZGQ1Li5hZTY0NTlm
+YTUzIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0vcDJtLmMKKysrIGIveGVuL2FyY2gveDg2
+L21tL3AybS5jCkBAIC0xMTc4LDYgKzExNzgsNyBAQCBpbnQgcDJtX2ZpbmlzaF90eXBlX2NoYW5n
+ZShzdHJ1Y3QgZG9tYWluICpkLAogCiAgICAgaWYgKCByYyA8IDAgKQogICAgICAgICBnb3RvIG91
+dDsKKyAgICByYyA9IDA7CiAKICNpZmRlZiBDT05GSUdfSFZNCiAgICAgaWYgKCB1bmxpa2VseShh
+bHRwMm1fYWN0aXZlKGQpKSApCkBAIC0xMTg4LDE5ICsxMTg5LDE0IEBAIGludCBwMm1fZmluaXNo
+X3R5cGVfY2hhbmdlKHN0cnVjdCBkb21haW4gKmQsCiAgICAgICAgICAgICBpZiAoIGQtPmFyY2gu
+YWx0cDJtX2VwdHBbaV0gIT0gbWZuX3goSU5WQUxJRF9NRk4pICkKICAgICAgICAgICAgIHsKICAg
+ICAgICAgICAgICAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqYWx0cDJtID0gZC0+YXJjaC5hbHRwMm1f
+cDJtW2ldOwotICAgICAgICAgICAgICAgIGludCByYzE7CiAKICAgICAgICAgICAgICAgICBwMm1f
+bG9jayhhbHRwMm0pOwotICAgICAgICAgICAgICAgIHJjMSA9IGZpbmlzaF90eXBlX2NoYW5nZShh
+bHRwMm0sIGZpcnN0X2dmbiwgbWF4X25yKTsKKyAgICAgICAgICAgICAgICByYyA9IGZpbmlzaF90
+eXBlX2NoYW5nZShhbHRwMm0sIGZpcnN0X2dmbiwgbWF4X25yKTsKICAgICAgICAgICAgICAgICBw
+Mm1fdW5sb2NrKGFsdHAybSk7CiAKLSAgICAgICAgICAgICAgICBpZiAoIHJjMSA8IDAgKQotICAg
+ICAgICAgICAgICAgIHsKLSAgICAgICAgICAgICAgICAgICAgcmMgPSByYzE7CisgICAgICAgICAg
+ICAgICAgaWYgKCByYyA8IDAgKQogICAgICAgICAgICAgICAgICAgICBnb3RvIG91dDsKLSAgICAg
+ICAgICAgICAgICB9Ci0KLSAgICAgICAgICAgICAgICByYyB8PSByYzE7CisgICAgICAgICAgICAg
+ICAgcmMgPSAwOwogICAgICAgICAgICAgfQogICAgIH0KICNlbmRpZgotLSAKMi4xNy4xCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
