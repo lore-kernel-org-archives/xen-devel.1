@@ -1,22 +1,19 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v3] xen: Fix x86 sched_clock() interface for
+From: Sasha Levin <sashal@kernel.org>
+Subject: Re: [PATCH v2] xen: Fix x86 sched_clock() interface for
  xen
-Date: Wed, 16 Jan 2019 08:17:03 -0500
-Message-ID: <20190116131703.GB2793__40863.1637263626$1547644570$gmane$org@localhost.localdomain>
-References: <20190114124413.3742-1-jgross@suse.com>
- <ebfc24e3-21a0-6cc6-ae68-5c13c1e66b9a@knorrie.org>
- <4808225b-e413-2ec1-77a1-15999c18583f@suse.com>
+Date: Wed, 16 Jan 2019 13:35:47 +0000
+Message-ID: <20190116133547.E246820859@mail.kernel.org>
+References: <20190111120805.24852-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HFAl=PY=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1gjl4P-0003vF-Sw
- for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 13:17:25 +0000
-Content-Disposition: inline
-In-Reply-To: <4808225b-e413-2ec1-77a1-15999c18583f@suse.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=LCoz=PY=kernel.org=sashal@srs-us1.protection.inumbo.net>)
+ id 1gjlMD-0005P6-OO
+ for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 13:35:49 +0000
+In-Reply-To: <20190111120805.24852-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,19 +22,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: sstabellini@kernel.org, x86@kernel.org, linux-kernel@vger.kernel.org, stable@vger.kernel.org, Hans van Kranenburg <hans@knorrie.org>, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, xen-devel@lists.xenproject.org, tglx@linutronix.de
+To: Sasha Levin <sashal@kernel.org>, Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org
+Cc: boris.ostrovsky@oracle.com, sstabellini@kernel.org, stable@vger.kernel.org, hpa@zytor.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBKYW4gMTYsIDIwMTkgYXQgMDg6NTA6MTNBTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
-cm90ZToKCj4gQEAgLTE2NTAsMTMgKzE2NTAsMTQgQEAgdm9pZCB4ZW5fY2FsbGJhY2tfdmVjdG9y
-KHZvaWQpCj4gICAgICAgICAgICAgICAgICAgICAgICAgeGVuX2hhdmVfdmVjdG9yX2NhbGxiYWNr
-ID0gMDsKPiAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm47Cj4gICAgICAgICAgICAgICAg
-IH0KPiAtICAgICAgICAgICAgICAgcHJfaW5mbygiWGVuIEhWTSBjYWxsYmFjayB2ZWN0b3IgZm9y
-IGV2ZW50IGRlbGl2ZXJ5IGlzCj4gZW5hYmxlZFxuIik7Cj4gKyAgICAgICAgICAgICAgIGlmICgh
-c2lsZW50KQo+ICsgICAgICAgICAgICAgICAgICAgICAgIHByX2luZm8oIlhlbiBIVk0gY2FsbGJh
-Y2sgdmVjdG9yIGZvciBldmVudAo+IGRlbGl2ZXJ5IGlzIGVuYWJsZWRcbiIpOwoKSG93IGFib3V0
-IHJlcGxhY2luZyBwcl9pbmZvKCkgd2l0aCBwcl9pbmZvX29uY2UoKT8KCi1ib3JpcwoKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGksCgpbVGhpcyBpcyBhbiBhdXRvbWF0ZWQgZW1haWxdCgpUaGlzIGNvbW1pdCBoYXMgYmVlbiBw
+cm9jZXNzZWQgYmVjYXVzZSBpdCBjb250YWlucyBhICJGaXhlczoiIHRhZywKZml4aW5nIGNvbW1p
+dDogZjk0YzhkMTE2OTk3IHNjaGVkL2Nsb2NrLCB4ODYvdHNjOiBSZXdvcmsgdGhlIHg4NiAndW5z
+dGFibGUnIHNjaGVkX2Nsb2NrKCkgaW50ZXJmYWNlLgoKVGhlIGJvdCBoYXMgdGVzdGVkIHRoZSBm
+b2xsb3dpbmcgdHJlZXM6IHY0LjIwLjIsIHY0LjE5LjE1LCB2NC4xNC45My4KCnY0LjIwLjI6IEJ1
+aWxkIE9LIQp2NC4xOS4xNTogQnVpbGQgT0shCnY0LjE0LjkzOiBGYWlsZWQgdG8gYXBwbHkhIFBv
+c3NpYmxlIGRlcGVuZGVuY2llczoKICAgIDIyMjlmNzBiNWJiYiAoIng4Ni94ZW4vdGltZTogc2V0
+dXAgdmNwdSAwIHRpbWUgaW5mbyBwYWdlIikKICAgIGI4ODg4MDgwOTMxMSAoIng4Ni94ZW4vdGlt
+ZTogc2V0IHB2Y2xvY2sgZmxhZ3Mgb24geGVuX3RpbWVfaW5pdCgpIikKCgpIb3cgc2hvdWxkIHdl
+IHByb2NlZWQgd2l0aCB0aGlzIHBhdGNoPwoKLS0KVGhhbmtzLApTYXNoYQoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
