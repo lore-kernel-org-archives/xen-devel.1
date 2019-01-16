@@ -1,7 +1,7 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: [PATCH-for-4.11] correct release note link in SUPPORT.md
-Date: Wed, 16 Jan 2019 10:42:24 +0100
-Message-ID: <20190116094224.30837-1-jgross@suse.com>
+Subject: [PATCH-for-4.10] correct release note link in SUPPORT.md
+Date: Wed, 16 Jan 2019 10:46:19 +0100
+Message-ID: <20190116094619.31188-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -9,8 +9,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=JTqL=PY=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gjhjO-0001bP-Vj
- for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 09:43:31 +0000
+ id 1gjhmB-0001pV-Nb
+ for xen-devel@lists.xenproject.org; Wed, 16 Jan 2019 09:46:23 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,14 +27,14 @@ VGhlIHN5bnRheCBmb3IgdGhlIHJlbGVhc2Ugbm90ZSBsaW5rIGluIFNVUFBPUlQubWQgaXMgd3Jv
 bmcuIENvcnJlY3QKdGhhdC4KClNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0Bz
 dXNlLmNvbT4KLS0tCiBTVVBQT1JULm1kIHwgNCArKystCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNl
 cnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvU1VQUE9SVC5tZCBiL1NVUFBP
-UlQubWQKaW5kZXggOThhYjUyZWRhOS4uZGUzODhkMGFmYSAxMDA2NDQKLS0tIGEvU1VQUE9SVC5t
+UlQubWQKaW5kZXggNmQ0MTdhNjE4ZS4uMmVjNzdiZjJjYyAxMDA2NDQKLS0tIGEvU1VQUE9SVC5t
 ZAorKysgYi9TVVBQT1JULm1kCkBAIC0xMyw3ICsxMyw5IEBAIGZvciB0aGUgZGVmaW5pdGlvbnMg
 b2YgdGhlIHN1cHBvcnQgc3RhdHVzIGxldmVscyBldGMuCiAgICAgSW5pdGlhbC1SZWxlYXNlOiAy
-MDE4LTA3LTEwCiAgICAgU3VwcG9ydGVkLVVudGlsOiAyMDIwLTAxLTEwCiAgICAgU2VjdXJpdHkt
-U3VwcG9ydC1VbnRpbDogMjAyMS0wNy0xMAotICAgIFJlbGVhc2UtTm90ZXM6IDxhIGhyZWY9Imh0
-dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1hlbl9Qcm9qZWN0XzQuMTFfUmVsZWFzZV9O
+MDE3LTEyLTEzCiAgICAgU3VwcG9ydGVkLVVudGlsOiAyMDE5LTA2LTEzCiAgICAgU2VjdXJpdHkt
+U3VwcG9ydC1VbnRpbDogMjAyMC0xMi0xMwotICAgIFJlbGVhc2UtTm90ZXM6IDxhIGhyZWY9Imh0
+dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1hlbl9Qcm9qZWN0XzQuMTBfUmVsZWFzZV9O
 b3RlcyI+Uk48L2E+CisKK1JlbGVhc2UtTm90ZXMKKzogPGEgaHJlZj0iaHR0cHM6Ly93aWtpLnhl
-bnByb2plY3Qub3JnL3dpa2kvWGVuX1Byb2plY3RfNC4xMV9SZWxlYXNlX05vdGVzIj5STjwvYT4K
+bnByb2plY3Qub3JnL3dpa2kvWGVuX1Byb2plY3RfNC4xMF9SZWxlYXNlX05vdGVzIj5STjwvYT4K
 IAogIyBGZWF0dXJlIFN1cHBvcnQKIAotLSAKMi4xNi40CgoKX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
 ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
