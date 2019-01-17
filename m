@@ -1,16 +1,23 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 6/7] xen/dom0: Drop iommu_hwdom_inclusive
- entirely
-Date: Thu, 17 Jan 2019 06:32:01 -0700
-Message-ID: <5C4083D1020000780020EB07@prv1-mh.provo.novell.com>
-References: <1547629250-1405-1-git-send-email-andrew.cooper3@citrix.com>
- <1547629250-1405-7-git-send-email-andrew.cooper3@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2 1/4] libxl: do not attach xen-pciback to
+ HVM domain, if stubdomain is in use
+Date: Thu, 17 Jan 2019 14:32:24 +0100
+Message-ID: <20190117133224.GP1205@mail-itl>
+References: <cover.f56cb3033143af6e9a0aeeaf33eb912fa5761983.1547566486.git-series.marmarek@invisiblethingslab.com>
+ <84045f5ed399411217c2ac8f3763add0c541a073.1547566486.git-series.marmarek@invisiblethingslab.com>
+ <20190116164719.aevcvhzotblpnbzw@mac>
+ <20190116170033.GO1205@mail-itl>
+ <20190117092134.5jkayufjoerleybm@mac>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3689962005010437675=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1547629250-1405-7-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=1Kg0=PZ=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gk7mZ-00021X-Lw
+ for xen-devel@lists.xenproject.org; Thu, 17 Jan 2019 13:32:31 +0000
+In-Reply-To: <20190117092134.5jkayufjoerleybm@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,39 +26,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjAxLjE5IGF0IDEwOjAwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gVGhpcyBvcHRpb24gaXMgdW5pcXVlIHRvIHg4NiBQViBkb20wJ3MsIGJ1dCBpdCBpcyBu
-b3Qgc2Vuc2libGUgdG8gaGF2ZSBhCj4gY2F0Y2gtYWxsIHdoaWNoIGJsaW5kbHkgbWFwcyBhbGwg
-bm9uLVJBTSByZWdpb25zIGludG8gdGhlIElPTU1VLgo+IAo+IFRoZSBtYXAtcmVzZXJ2ZWQgb3B0
-aW9uIHJlbWFpbnMsIGFuZCBjb3ZlcnMgYWxsIHRoZSBidWdneSBmaXJtd2FyZSBpc3N1ZXMgdGhh
-dAo+IEkgYW0gYXdhcmUgb2YuCgpUaGUgZmluYWwgcGFydCBvZiB0aGlzIHNlbnRlbmNlIGlzIHRo
-ZSBtYWluIGN1bHByaXQsIHJlc3VsdGluZyBpbiBtZQpiZWluZyB1bmNlcnRhaW4gYWJvdXQgdGhp
-cyBtb3ZlLiBJJ20gbm90IG91dHJpZ2h0IG9wcG9zZWQsIHNpbmNlCkkgYWdyZWUgd2l0aCB0aGUg
-ImlzIG5vdCBzZW5zaWJsZSIgcGFydCBhYm92ZS4gQnV0IHRoZXJlIHN1cmVseQp3YXMgYSByZWFz
-b24gd2h5IHRoZSBvcHRpb24gd2FzIGludHJvZHVjZWQuIE1heSBJIHN1Z2dlc3QgYXMKYW4gYWx0
-ZXJuYXRpdmUgdG8gdGFrZSBhbiBpbnRlcm1lZGlhdGUgc3RlcCBmb3IgYXQgbGVhc3Qgb25lCnJl
-bGVhc2UgY3ljbGUsIGFuZCBhdHRhY2ggYSB3YXJuaW5nX2FkZCgpIHRvIGFueSB1c2Ugb2YgdGhp
-cwpvcHRpb24/Cgo+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL3g4Ni9pb21tdS5jCj4g
-KysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gveDg2L2lvbW11LmMKPiBAQCAtMTcyLDEwICsx
-NzIsMTAgQEAgc3RhdGljIGJvb2wgX19od2RvbV9pbml0IGh3ZG9tX2lvbW11X21hcChjb25zdCBz
-dHJ1Y3QgZG9tYWluICpkLAo+ICAgICAgZGVmYXVsdDoKPiAgICAgICAgICBpZiAoIHR5cGUgJiBS
-QU1fVFlQRV9SRVNFUlZFRCApCj4gICAgICAgICAgewo+IC0gICAgICAgICAgICBpZiAoICFpb21t
-dV9od2RvbV9pbmNsdXNpdmUgJiYgIWlvbW11X2h3ZG9tX3Jlc2VydmVkICkKPiArICAgICAgICAg
-ICAgaWYgKCAhaW9tbXVfaHdkb21fcmVzZXJ2ZWQgKQo+ICAgICAgICAgICAgICAgICAgcmV0dXJu
-IGZhbHNlOwo+ICAgICAgICAgIH0KPiAtICAgICAgICBlbHNlIGlmICggaXNfaHZtX2RvbWFpbihk
-KSB8fCAhaW9tbXVfaHdkb21faW5jbHVzaXZlIHx8IHBmbiA+IG1heF9wZm4gKQo+ICsgICAgICAg
-IGVsc2UgaWYgKCBpc19odm1fZG9tYWluKGQpIHx8IHBmbiA+IG1heF9wZm4gKQo+ICAgICAgICAg
-ICAgICByZXR1cm4gZmFsc2U7Cj4gICAgICB9CgpSZW1vdmFsIG9mIHRoaXMgb3B0aW9uIGNvdWxk
-IGJlIGltYWdpbmVkIHRha2luZyBhbiBpbnRlcm1lZGlhdGUKc3RlcCB3aGVyZSB0aGUgdmFyaWFi
-bGUgcmVzb2x2ZXMgdG8gY29uc3RhbnQgZmFsc2UuIFRoaXMgc3VnZ2VzdHMKdG8gbWUgdGhhdCB0
-aGUgZmlyc3Qgb2YgdGhlc2UgdHdvIGNoYW5nZXMgaXMgY29ycmVjdCwgYnV0IHRoZQpzZWNvbmQg
-aXMgbm90LiBJbnN0ZWFkIHRoZSAiZWxzZSBpZigpIiBvdWdodCB0byBjb2xsYXBzZSB0byBqdXN0
-CiJlbHNlIiwgd2hpY2ggaW4gdHVybiB3b3VsZCBzdWdnZXN0IHRvIGNvbnNpZGVyIGZvbGRpbmcg
-aWYoKS9lbHNlCmludG8gYSBzaW5nbGUgaWYoKS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============3689962005010437675==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="NPukt5Otb9an/u20"
+Content-Disposition: inline
+
+
+--NPukt5Otb9an/u20
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Xen-devel] [PATCH v2 1/4] libxl: do not attach xen-pciback to
+ HVM domain, if stubdomain is in use
+
+On Thu, Jan 17, 2019 at 10:21:34AM +0100, Roger Pau Monn=C3=A9 wrote:
+> OK. From an architectural PoV I think it would make more sense to copy
+> the list of pci devices to the stubdom config in libxl__spawn_stub_dm,
+> but I'm not that familiar with pci handling in libxl, so there might
+> be a reason why things are done like this currently.
+
+libxl would refuse to attach the same device to two domains and also
+will perform some operations twice (as for example device reset). As you
+can see even right now some things needs to be disabled for stubdomain
+or target domain, because of this. If device would be included in the
+config for both target domain and its stubdomain, the code would need
+some more exceptions, which I think would be even worse.
+
+Other thing is the current code attach PCI devices when device-model is
+already running (regardless of its version or using stubdomain). I guess
+qemu doesn't setup those devices otherwise (there is nothing on qemu
+command line about it and none of libxl part generate such options). I'm
+not really sure if that couldn't be done differently, but I'm kind of
+afraid changing to much in PCI passthrough related code...
+
+> The change LGTM, albeit I found the pci handling code quite hard to
+> follow. I'm also not sure whether certain parts of the code are
+> correct, for example the PCI INTx seems to be mapped to both the
+> stubdomain and the target domain, when it's only the target domain the
+> one that actually uses it.
+
+That's true. Generally, I think stubdomain needs only config space
+access for its own, other things should be done for the target domain.
+This include mapping interrupts of any kind. Stubdomain is given
+permission to them only to be able to map them to the target domain.
+
+This also may be the reason why PCI devices are not included in
+stubdomain's config, but only do_pci_add() is called. It may be that in
+the past some more parts of the device setup was skipped this way.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--NPukt5Otb9an/u20
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxAg+gACgkQ24/THMrX
+1ywJeAf+O41hPhvgq3Lb1yJsj3E01k41g9GXTKfT8wh3c6FPi8UwB3OF42faZZ2E
+xoBrXbJ/qHmNhC1tQgrOb5eJ5f7ejLTu9BGcO8cwYOU7Tqx1HvCRJqf09ZW3w1tl
+ws6yH2HvKoZYP88uMNsXmZYjXd7ersscGQW/scmzAYoXHFbTiwkWA3ZIM7WwezaT
+PBo3K4eFeatKRrRA0iSlML9dpPjnW142JJe649Ws8H9TqQHS5JBQLVkEyyu8lmuK
+bJSk6DfU4HqtcLOEd2YhEVMlEAhCtAThgTyWD4l4L5DzSxwX2uqCJBr2Wn6HilDS
+ipTAQDEnLhUkfetve+UE9P1eOK6ZdQ==
+=wJ42
+-----END PGP SIGNATURE-----
+
+--NPukt5Otb9an/u20--
+
+
+--===============3689962005010437675==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3689962005010437675==--
