@@ -1,17 +1,40 @@
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH] cr-try-bisect: When bisection is done,
- keep the old mro as mro.done
-Date: Thu, 17 Jan 2019 11:44:25 +0000
-Message-ID: <20190117114425.27755-1-ian.jackson@eu.citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
+Date: Thu, 17 Jan 2019 04:46:40 -0700
+Message-ID: <5C406B20020000780020E9FD@prv1-mh.provo.novell.com>
+References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
+ <5C387472020000780020C9A7@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1901110911310.27759@sstabellini-ThinkPad-X260>
+ <a3743bd4b2d54188890945322e92fc1b@dornerworks.com>
+ <CAF3u54AAmx0rBVPscfvqcx5f0ezYNCkrsagJgZb3v2GqfB9TEw@mail.gmail.com>
+ <0e731cbd10b64a2faac309c04c2030e2@dornerworks.com>
+ <alpine.DEB.2.10.1901111331490.27759@sstabellini-ThinkPad-X260>
+ <3cc0862e5f0442d49c33c08f21b423ab@dornerworks.com>
+ <5C3C63E0020000780020D22C@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1901141030300.27759@sstabellini-ThinkPad-X260>
+ <1CACC1FB020000D800417A66@prv1-mh.provo.novell.com>
+ <5C3D97FE020000780020D9F3@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1901151043440.18561@sstabellini-ThinkPad-X260>
+ <1CACC1FB020000D800417A66@prv1-mh.provo.novell.com>
+ <5C3D97FE020000780020D9F3@prv1-mh.provo.novell.com>
+ <2EA6D6FD0200001F00417A66@prv1-mh.provo.novell.com>
+ <5C3F06B5020000780020E322@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1901161638300.18561@sstabellini-ThinkPad-X260>
+ <5C3D97FE020000780020D9F3@prv1-mh.provo.novell.com>
+ <2EA6D6FD0200001F00417A66@prv1-mh.provo.novell.com>
+ <5C3F06B5020000780020E322@prv1-mh.provo.novell.com>
+ <4EA2F2F90200004D00417A66@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=/zvk=PZ=citrix.com=prvs=91335fb6d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gk663-0008HW-5W
- for xen-devel@lists.xenproject.org; Thu, 17 Jan 2019 11:44:31 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=SW9P=PZ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gk687-0008Rj-Fk
+ for xen-devel@lists.xenproject.org; Thu, 17 Jan 2019 11:46:39 +0000
+In-Reply-To: <4EA2F2F90200004D00417A66@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,18 +43,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <stefanos@xilinx.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@gmail.com>, Julien Grall <julien.grall@arm.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyB3aWxsIGhlbHAgd2l0aCBkZWJ1Z2dpbmcsIG9yIGlmIHdlIHdhbnQgdG8gbWFudWFsbHkg
-cmVzZXQvcmVzdGFydAp0aGluZ3MuCgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmph
-Y2tzb25AZXUuY2l0cml4LmNvbT4KLS0tCiBjci10cnktYmlzZWN0IHwgMiArLQogMSBmaWxlIGNo
-YW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvY3ItdHJ5
-LWJpc2VjdCBiL2NyLXRyeS1iaXNlY3QKaW5kZXggZDYxM2MzNDguLmEyYjc3YjlhIDEwMDc1NQot
-LS0gYS9jci10cnktYmlzZWN0CisrKyBiL2NyLXRyeS1iaXNlY3QKQEAgLTEwNiw2ICsxMDYsNiBA
-QCBkb25lCiAKIGVjaG8gbm90aGluZyB0byBkbwogcm0gLWYgJHN0YXJ0c3RhbXAKLXJtICRtcm9m
-CittdiAtZiAkbXJvZiAkbXJvZi5kb25lCiAKIGV4aXQgMAotLSAKMi4xMS4wCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDE3LjAxLjE5IGF0IDAxOjQxLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6
+Cj4gSSBhbSBoYXBweSB0byBtYWtlIHRoaXMgY2hhbmdlIGFuZCBhbHNvIHdvcmsgb24geW91ciBz
+dWdnZXN0aW9uIGFib3ZlCj4gYWJvdXQgdXNpbmcgLnN0YXJ0b2YuIC8gLnNpemVvZi4gaW4gdmFy
+LlMsIGlmIHdlIGFncmVlIG9uIHRoaXMgYXBwcm9hY2guCgpCdXQgc2FkbHkgd2UgbG9vayB0byBi
+ZSBxdWl0ZSBmYXIgZnJvbSBhZ3JlZWluZyBvbiBhbnl0aGluZyB5ZXQuCgpKYW4KCgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
