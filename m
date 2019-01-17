@@ -1,21 +1,21 @@
-From: Dongli Zhang <dongli.zhang@oracle.com>
-Subject: Re: [PATCH 1/1] xen-blkback: do not wake up shutdown_wq
- after xen_blkif_schedule() is stopped
-Date: Thu, 17 Jan 2019 10:10:00 +0800
-Message-ID: <30770f68-34e0-d707-b087-c43f0b51cd81@oracle.com>
-References: <1547646461-29803-1-git-send-email-dongli.zhang@oracle.com>
- <20190116145215.igakzdkklc6f7h6k@mac>
+From: "LOPEZ, FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Thu, 17 Jan 2019 11:08:56 +0900
+Message-ID: <CACrvCsba0MgPgFx7YRS0vC0XsOPwLrb95UzBbDRBdRUS6jynag@mail.gmail.com>
+References: <CACrvCsaeHuwzZzUQTzNYF7fqmgQWNJUVOQZv9D0MnYrXjqzZtQ@mail.gmail.com>
+ <AM6PR03MB49199366C64C259BF04157D5E6B90@AM6PR03MB4919.eurprd03.prod.outlook.com>
+ <CACrvCsbxLrGXzN8Y8w0ndZ2VLQ=QEtUq+KLAVRLnLYZRpiaqhg@mail.gmail.com>
+ <59df6425-f6de-fda1-a1a5-7d2774ff6796@gmail.com>
+ <CACrvCsaO1ZNPWNJE9vdE7Th0uMt9BJnx32p2ozwuLvEg9Tpmmw@mail.gmail.com>
+ <3aecad20-41f5-4249-46be-bfef80c88ea3@gmail.com>
+ <623d0b16-8616-183c-d8d4-559ad81363ed@gmail.com>
+ <CACrvCsZyZhrL0eoJ6=VTwfrRPKjqapGObqaixxmGMTXS+ua3aA@mail.gmail.com>
+ <CACrvCsZH1-KCrPhfBYoji14KjXEk0hkdkRD4+1AKiXeJhTMNrA@mail.gmail.com>
+ <4aaa4db8-93d5-50fe-1884-ff82db35ea6b@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4766247638336004297=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=oNiz=PZ=oracle.com=dongli.zhang@srs-us1.protection.inumbo.net>)
- id 1gjx5v-0003Yv-Bg
- for xen-devel@lists.xenproject.org; Thu, 17 Jan 2019 02:07:47 +0000
-In-Reply-To: <20190116145215.igakzdkklc6f7h6k@mac>
-Content-Language: en-US
+In-Reply-To: <4aaa4db8-93d5-50fe-1884-ff82db35ea6b@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,58 +24,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: linux-block@vger.kernel.org, xen-devel@lists.xenproject.org, konrad.wilk@oracle.com, axboe@kernel.dk, linux-kernel@vger.kernel.org
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgUm9nZXIsCgpPbiAyMDE5LzEvMTYg5LiL5Y2IMTA6NTIsIFJvZ2VyIFBhdSBNb25uw6kgd3Jv
-dGU6Cj4gT24gV2VkLCBKYW4gMTYsIDIwMTkgYXQgMDk6NDc6NDFQTSArMDgwMCwgRG9uZ2xpIFpo
-YW5nIHdyb3RlOgo+PiBUaGVyZSBpcyBubyBuZWVkIHRvIHdha2UgdXAgeGVuX2Jsa2lmX3NjaGVk
-dWxlKCkgYXMga3RocmVhZF9zdG9wKCkgaXMgYWJsZQo+PiB0byBhbHJlYWR5IHdha2UgdXAgdGhl
-IGtlcm5lbCB0aHJlYWQuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IERvbmdsaSBaaGFuZyA8ZG9uZ2xp
-LnpoYW5nQG9yYWNsZS5jb20+Cj4+IC0tLQo+PiAgZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay94
-ZW5idXMuYyB8IDQgKy0tLQo+PiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAzIGRl
-bGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay94
-ZW5idXMuYyBiL2RyaXZlcnMvYmxvY2sveGVuLWJsa2JhY2sveGVuYnVzLmMKPj4gaW5kZXggYTRi
-Yzc0ZS4uMzdhYzU5ZSAxMDA2NDQKPj4gLS0tIGEvZHJpdmVycy9ibG9jay94ZW4tYmxrYmFjay94
-ZW5idXMuYwo+PiArKysgYi9kcml2ZXJzL2Jsb2NrL3hlbi1ibGtiYWNrL3hlbmJ1cy5jCj4+IEBA
-IC0yNTQsMTAgKzI1NCw4IEBAIHN0YXRpYyBpbnQgeGVuX2Jsa2lmX2Rpc2Nvbm5lY3Qoc3RydWN0
-IHhlbl9ibGtpZiAqYmxraWYpCj4+ICAJCWlmICghcmluZy0+YWN0aXZlKQo+PiAgCQkJY29udGlu
-dWU7Cj4+ICAKPj4gLQkJaWYgKHJpbmctPnhlbmJsa2QpIHsKPj4gKwkJaWYgKHJpbmctPnhlbmJs
-a2QpCj4+ICAJCQlrdGhyZWFkX3N0b3AocmluZy0+eGVuYmxrZCk7Cj4+IC0JCQl3YWtlX3VwKCZy
-aW5nLT5zaHV0ZG93bl93cSk7Cj4gCj4gSSd2ZSBub3cgcmVhbGl6ZWQgdGhhdCBzaHV0ZG93bl93
-cSBpcyBiYXNpY2FsbHkgdXNlbGVzcywgYW5kIHNob3VsZCBiZQo+IHJlbW92ZWQsIGNvdWxkIHlv
-dSBwbGVhc2UgZG8gaXQgaW4gdGhpcyBwYXRjaD8KCkkgZG8gbm90IHRoaW5rIHNodXRkb3duX3dx
-IGlzIHVzZWxlc3MuCgpJdCBpcyB1c2VkIHRvIGhhbHQgdGhlIHhlbl9ibGtpZl9zY2hlZHVsZSgp
-IGt0aHJlYWQgd2hlbgpSSU5HX1JFUVVFU1RfUFJPRF9PVkVSRkxPVygpIHJldHVybnMgdHJ1ZSBp
-biBfX2RvX2Jsb2NrX2lvX29wKCk6CgoxMTIxIHN0YXRpYyBpbnQKMTEyMiBfX2RvX2Jsb2NrX2lv
-X29wKHN0cnVjdCB4ZW5fYmxraWZfcmluZyAqcmluZykKLi4uIC4uLgoxMTM0ICAgICAgICAgaWYg
-KFJJTkdfUkVRVUVTVF9QUk9EX09WRVJGTE9XKCZibGtfcmluZ3MtPmNvbW1vbiwgcnApKSB7CjEx
-MzUgICAgICAgICAgICAgICAgIHJjID0gYmxrX3JpbmdzLT5jb21tb24ucnNwX3Byb2RfcHZ0Owox
-MTM2ICAgICAgICAgICAgICAgICBwcl93YXJuKCJGcm9udGVuZCBwcm92aWRlZCBib2d1cyByaW5n
-IHJlcXVlc3RzICglZCAtICVkID0KJWQpLiBIYWx0aW5nIHJpbmcgcHJvY2Vzc2luZyBvbiBkZXY9
-JTA0eFxuIiwKMTEzNyAgICAgICAgICAgICAgICAgICAgICAgICBycCwgcmMsIHJwIC0gcmMsIHJp
-bmctPmJsa2lmLT52YmQucGRldmljZSk7CjExMzggICAgICAgICAgICAgICAgIHJldHVybiAtRUFD
-Q0VTOwoxMTM5ICAgICAgICAgfQoKCklmIHRoZXJlIGlzIGJvZ3VzL2ludmFsaWQgcmluZyByZXF1
-ZXN0cywgX19kb19ibG9ja19pb19vcCgpIHdvdWxkIHJldHVybiAtRUFDQ0VTCndpdGhvdXQgbW9k
-aWZ5aW5nIHByb2QvY29ucyBpbmRleC4KCldpdGhvdXQgc2h1dGRvd25fd3EgKGp1c3Qgc2ltcGx5
-IGFzc3VtaW5nIHdlIHJlbW92ZSB0aGUgYmVsb3cgY29kZSB3aXRob3V0CmhhbmRsaW5nIC1FQUND
-RVMgaW4geGVuX2Jsa2lmX3NjaGVkdWxlKCkpLCB0aGUga2VybmVsIHRocmVhZCB3b3VsZCBjb250
-aW51ZSB0aGUKd2hpbGUgbG9vcC4KCjY0OCAgICAgICAgICAgICAgICAgaWYgKHJldCA9PSAtRUFD
-Q0VTKQo2NDkgICAgICAgICAgICAgICAgICAgICAgICAgd2FpdF9ldmVudF9pbnRlcnJ1cHRpYmxl
-KHJpbmctPnNodXRkb3duX3dxLAo2NTAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGt0aHJlYWRfc2hvdWxkX3N0b3AoKSk7CgoKSWYgeGVuX2Jsa2lmX2Jl
-X2ludCgpIGlzIHRyaWdnZXJlZCBhZ2FpbiAobGV0J3MgYXNzdW1lIHRoZXJlIGlzIG5vIG9wdGlt
-aXphdGlvbgpvbiBndWVzdCBwYXJ0IGFuZCBndWVzdCB3b3VsZCBzZW5kIGV2ZW50IGZvciBldmVy
-eSByZXF1ZXN0IGl0IHB1dHMgb24gcmluZwpidWZmZXIpLCB3ZSBtYXkgY29tZSB0byBkb19ibG9j
-a19pb19vcCgpIGFnYWluLgoKCkFzIHRoZSBwcm9kL2NvbnMgaW5kZXggYXJlIG5vdCBtb2RpZmll
-ZCBsYXN0IHRpbWUgdGhlIGNvZGUgcnVucyBpbnRvCmRvX2Jsb2NrX2lvX29wKCkgdG8gcHJvY2Vz
-cyBib2d1cyByZXF1ZXN0LCB3ZSB3b3VsZCBoaXQgdGhlIGJvZ3VzIHJlcXVlc3QgaXNzdWUKYWdh
-aW4uCgoKV2l0aCBzaHV0ZG93bl93cSwgdGhlIGtlcm5lbCBrdGhyZWFkIGlzIGJsb2NrZWQgZm9y
-ZXZlciB1bnRpbCBzdWNoIHF1ZXVlL3JpbmcgaXMKZGVzdHJveWVkLiBJZiB3ZSByZW1vdmUgc2h1
-dGRvd25fd3EsIHdlIGFyZSBjaGFuZ2luZyB0aGUgcG9saWN5IHRvIGhhbmRsZSBib2d1cwpyZXF1
-ZXN0cyBvbiByaW5nIGJ1ZmZlcj8KClBsZWFzZSBjb3JyZWN0IG1lIGlmIG15IHVuZGVyc3RhbmRp
-bmcgaXMgd3JvbmcuCgpUaGFuayB5b3UgdmVyeSBtdWNoIQoKRG9uZ2xpIFpoYW5nCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============4766247638336004297==
+Content-Type: multipart/alternative; boundary="0000000000004a4364057f9de163"
+
+--0000000000004a4364057f9de163
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Andrii,
+
+2019=E5=B9=B41=E6=9C=8816=E6=97=A5(=E6=B0=B4) 16:40=E3=80=81Andrii Anisov =
+=E3=81=95=E3=82=93=EF=BC=88andrii.anisov@gmail.com=EF=BC=89=E3=81=AE=E3=83=
+=A1=E3=83=83=E3=82=BB=E3=83=BC=E3=82=B8:
+
+> Hello Jairo,
+>
+> On 08.01.19 19:04, LOPEZ, FUENTES NACARINO Jairo Eduardo wrote:
+>
+> > I have noticed that the uboot date has not changed from 2015.04
+> It is not a u-boot date, but upstream version. Renesas derived u-boot fro=
+m
+> mainline version 2015.04 and put their patches on top of it.
+>
+> > although the build date is from the last time I ran a bitbake command.
+> So it should be ok.
+>
+> > Are there any other modifications that I can attempt?
+> I'm pretty sure you faced the issue, which is discussed here [1].
+> You should merge memory nodes in your device tree, as it is done here [2]=
+.
+>
+> Actually the proper way to sort out the root cause is to build XEN with
+> debug and earlyprintk enabled. But it is quite tricky while building XEN
+> using Yocto.
+> You should pass build command line options for debug build and
+> earlyprintk, but in Yocto command lines are buried in recipes.
+>
+> BTW, I've got an idea that it would be good to make debug build option as
+> well as earlyprintk configurable through .config only.
+>
+> [1]
+> https://lists.xenproject.org/archives/html/xen-devel/2017-07/msg02479.htm=
+l
+> [2]
+> https://github.com/xen-troops/meta-demo/blob/master/meta-rcar-gen3-xen/re=
+cipes-kernel/linux/linux-renesas/r8a7795-salvator-x-xen.dts#L61
+>
+> --
+> Sincerely,
+> Andrii Anisov.
+>
+
+When I sent that mail I was using the Yocto 2.23 instructions.
+
+Since I didn't get any new information and since I had apparently been able
+to safely upgrade the firmware, I attempted to up the version of everything=
+.
+
+I understand that the current yocto environment might be unfriendly to
+enable debugging information but I am willing to help in implementing it if
+you have an idea. There is nothing more frustrating than being met with a
+completely blank output.
+
+When using the Yocto 2.23 instructions I did not come across the issues you
+pointed out, so I will take those into consideration should I need to
+downgrade the versions again.
+
+Thanks for all the help.
+
+Best regards,
+
+Jairo
+
+>
+
+--0000000000004a4364057f9de163
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div>Andrii,<br><br><div class=3D"gmail_quote"><div dir=
+=3D"ltr">2019=E5=B9=B41=E6=9C=8816=E6=97=A5(=E6=B0=B4) 16:40=E3=80=81Andrii=
+ Anisov =E3=81=95=E3=82=93=EF=BC=88<a href=3D"mailto:andrii.anisov@gmail.co=
+m">andrii.anisov@gmail.com</a>=EF=BC=89=E3=81=AE=E3=83=A1=E3=83=83=E3=82=BB=
+=E3=83=BC=E3=82=B8:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hello Jairo,<br=
+>
+<br>
+On 08.01.19 19:04, LOPEZ, FUENTES NACARINO Jairo Eduardo wrote:<br>
+<br>
+&gt; I have noticed that the uboot date has not changed from 2015.04<br>
+It is not a u-boot date, but upstream version. Renesas derived u-boot from =
+mainline version 2015.04 and put their patches on top of it.<br>
+<br>
+&gt; although the build date is from the last time I ran a bitbake command.=
+<br>
+So it should be ok.<br>
+<br>
+&gt; Are there any other modifications that I can attempt?<br>
+I&#39;m pretty sure you faced the issue, which is discussed here [1].<br>
+You should merge memory nodes in your device tree, as it is done here [2].<=
+br>
+<br>
+Actually the proper way to sort out the root cause is to build XEN with deb=
+ug and earlyprintk enabled. But it is quite tricky while building XEN using=
+ Yocto.<br>
+You should pass build command line options for debug build and earlyprintk,=
+ but in Yocto command lines are buried in recipes.<br>
+<br>
+BTW, I&#39;ve got an idea that it would be good to make debug build option =
+as well as earlyprintk configurable through .config only.<br>
+<br>
+[1] <a href=3D"https://lists.xenproject.org/archives/html/xen-devel/2017-07=
+/msg02479.html" rel=3D"noreferrer noreferrer" target=3D"_blank">https://lis=
+ts.xenproject.org/archives/html/xen-devel/2017-07/msg02479.html</a><br>
+[2] <a href=3D"https://github.com/xen-troops/meta-demo/blob/master/meta-rca=
+r-gen3-xen/recipes-kernel/linux/linux-renesas/r8a7795-salvator-x-xen.dts#L6=
+1" rel=3D"noreferrer noreferrer" target=3D"_blank">https://github.com/xen-t=
+roops/meta-demo/blob/master/meta-rcar-gen3-xen/recipes-kernel/linux/linux-r=
+enesas/r8a7795-salvator-x-xen.dts#L61</a><br>
+<br>
+-- <br>
+Sincerely,<br>
+Andrii Anisov.<br></blockquote></div></div><div dir=3D"auto"><br></div><div=
+ dir=3D"auto">When I sent that mail I was using the Yocto 2.23 instructions=
+.</div><div dir=3D"auto"><br></div><div dir=3D"auto">Since I didn&#39;t get=
+ any new information and since I had apparently been able to safely upgrade=
+ the firmware, I attempted to up the version of everything.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">I understand that the current yocto e=
+nvironment might be unfriendly to enable debugging information but I am wil=
+ling to help in implementing it if you have an idea. There is nothing more =
+frustrating than being met with a completely blank output.</div><div dir=3D=
+"auto"><br></div><div dir=3D"auto">When using the Yocto 2.23 instructions I=
+ did not come across the issues you pointed out, so I will take those into =
+consideration should I need to downgrade the versions again.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">Thanks for all the help.</div><div di=
+r=3D"auto"><br></div><div dir=3D"auto">Best regards,</div><div dir=3D"auto"=
+><br></div><div dir=3D"auto">Jairo</div><div dir=3D"auto"><div class=3D"gma=
+il_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bord=
+er-left:1px #ccc solid;padding-left:1ex">
+</blockquote></div></div></div>
+
+--0000000000004a4364057f9de163--
+
+
+--===============4766247638336004297==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4766247638336004297==--
