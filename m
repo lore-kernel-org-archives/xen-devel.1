@@ -1,23 +1,19 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v3 07/11] optee: add support for RPC SHM
- buffers
-Date: Fri, 18 Jan 2019 15:38:41 +0000
-Message-ID: <2b2a2976-d8f1-1aa1-5e6f-5ac93a211ddb@arm.com>
-References: <20181218211126.6886-1-volodymyr_babchuk@epam.com>
- <20181218211126.6886-8-volodymyr_babchuk@epam.com>
- <9708e645-7dcc-789d-c97c-a385106113d7@arm.com> <87r2dbt690.fsf@epam.com>
- <fa0111a6-1080-933b-c645-e7511e575650@arm.com> <87munzt2v0.fsf@epam.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [RFC PATCH 2/2] xen: credit2: cached attribute for
+ next runqueue entry
+Date: Fri, 18 Jan 2019 16:45:47 +0100
+Message-ID: <db96a6b66a1ef2f6a6297d7c4ac7e498fc2cbf2a.camel@suse.com>
+References: <20181223142134.7857-1-kpraveen.lkml@gmail.com>
+ <20181223142134.7857-3-kpraveen.lkml@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8610783481978562885=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Yjae=P2=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gkWEm-0005rA-0t
- for xen-devel@lists.xenproject.org; Fri, 18 Jan 2019 15:39:16 +0000
-In-Reply-To: <87munzt2v0.fsf@epam.com>
-Content-Language: en-US
+ <SRS0=c7wu=P2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gkWKq-0006Zw-PM
+ for xen-devel@lists.xenproject.org; Fri, 18 Jan 2019 15:45:32 +0000
+In-Reply-To: <20181223142134.7857-3-kpraveen.lkml@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,85 +22,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: Volodymyr Babchuk <vlad.babchuk@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, "tee-dev@lists.linaro.org" <tee-dev@lists.linaro.org>
+To: Praveen Kumar <kpraveen.lkml@gmail.com>, xen-devel@lists.xenproject.org
+Cc: george.dunlap@eu.citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAxNy8wMS8yMDE5IDIxOjAxLCBWb2xvZHlteXIgQmFiY2h1ayB3cm90ZToKPiAKPiBIaSwK
-CkhpIFZvbG9keW15ciwKCj4gSnVsaWVuIEdyYWxsIHdyaXRlczoKPiAKPj4gSEksCj4+Cj4+IE9u
-IDEvMTcvMTkgNzo0OCBQTSwgVm9sb2R5bXlyIEJhYmNodWsgd3JvdGU6Cj4+Pgo+Pj4gSnVsaWVu
-IEdyYWxsIHdyaXRlczoKPj4+Cj4+Pj4gSGkgVm9sb2R5bXlyLAo+Pj4+Cj4+Pj4gT24gMTgvMTIv
-MjAxOCAyMToxMSwgVm9sb2R5bXlyIEJhYmNodWsgd3JvdGU6Cj4+Pj4+IEZyb206IFZvbG9keW15
-ciBCYWJjaHVrIDx2bGFkLmJhYmNodWtAZ21haWwuY29tPgo+Pj4+Pgo+IFsuLi5dCj4+Pj4+Cj4+
-Pj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vdGVlL29wdGVlLmMgYi94ZW4vYXJjaC9hcm0v
-dGVlL29wdGVlLmMKPj4+Pj4gaW5kZXggZGM5MGUyZWQ4ZS4uNzcxMTQ4ZTk0MCAxMDA2NDQKPj4+
-Pj4gLS0tIGEveGVuL2FyY2gvYXJtL3RlZS9vcHRlZS5jCj4+Pj4+ICsrKyBiL3hlbi9hcmNoL2Fy
-bS90ZWUvb3B0ZWUuYwo+Pj4+PiBAQCAtMzAsNiArMzAsMTIgQEAKPj4+Pj4gICAgICAqIE9QLVRF
-RSBzcGF3bnMgYSB0aHJlYWQgZm9yIGV2ZXJ5IHN0YW5kYXJkIGNhbGwuCj4+Pj4+ICAgICAgKi8K
-Pj4+Pj4gICAgICNkZWZpbmUgTUFYX1NURF9DQUxMUyAgIDE2Cj4+Pj4+ICsvKgo+Pj4+PiArICog
-TWF4aW1hbCBudW1iZXIgb2YgcHJlLWFsbG9jYXRlZCBTSE0gYnVmZmVycy4gT1AtVEVFIGdlbmVy
-YWxseSBhc2tzCj4+Pj4+ICsgKiBmb3Igb25lIFNITSBidWZmZXIgcGVyIHRocmVhZCwgc28gdGhp
-cyBhbHNvIGNvcnJlc3BvbmRzIHRvIE9QLVRFRQo+Pj4+PiArICogb3B0aW9uIENGR19OVU1fVEhS
-RUFEUwo+Pj4+PiArICovCj4+Pj4KPj4+PiBTYW1lIGFzIHBhdGNoICM2IHJlZ2FyZGluZyBDRkdf
-TlVNX1RIUkVBRFMuCj4+PiBSaWdodCBub3cgT1AtVEVFIHdpbGwgbm90IGFsbG9jYXRlIG1vcmUg
-dGhhbiBvbmUgYnVmZmVyIHBlciBPUC1URUUKPj4+IHRocmVhZC4gQW5kIEkgY2FuIHNlZSBubyBy
-ZWFzb24gd2h5IGl0IHdvdWxkIGNoYW5nZS4gU28sIGJhc2ljYWxseSBJIGNhbgo+Pj4gcmVtb3Zl
-IHRoaXMgTUFYX1JQQ19TSE1TIGF0IGFsbCBhbmQgdXNlIE1BWF9TVERfQ0FMTFMgaW5zdGVhZC4g
-QnV0IHRoZW4KPj4+IGl0IHdpbGwgYmUgbm90IHNvIG9idmlvdXMsIHdoeSBJIGNvbXBhcmUgbnVt
-YmVyIG9mIFNITSBidWZmZXJzIHdpdGgKPj4+IG51bWJlciBvZiBzdGQgY2FsbHMuIFRodXMsIEkg
-dGhpbmsgaXQgaXMgZ29vZCB0byBoYXZlIHNlcGFyYXRlCj4+PiBkZWZpbmUgYW5kIGNvbW1lbnQu
-Cj4+Cj4+IEkgYW0gbm90IGFnYWluc3QgaGF2ZSB0aGUgMiBkZWZpbmVzLCB3aGF0IEkgd2FzIHBv
-aW50ZWQgb3V0IHdpdGggdGhlCj4+IGRvY3VtZW50YXRpb24gb24gdG9wIGlzIGluY29ycmVjdCBh
-cyBwYXRjaCAjNi4KPiBJJ20gc29ycnksIEkgZG9uJ3QgcXVpdGUgdW5kZXJzdGFuZC4gSW4gcGF0
-Y2ggIzYgeW91ciBjb25jZXJuIHdhcyB0aGF0Cj4gQ0ZHX05VTV9USFJFQURTIGRlcGVuZHMgb24g
-cGxhdGZvcm0sIHJpZ2h0PwoKTXkgZmlyc3QgY29uY2VybiB3YXMgdGhlIGRvY3VtZW50YXRpb24g
-ZG9lcyBub3QgcmVmbGVjdCB0aGUgcmVhbGl0eSBiZWNhdXNlIApDRkdfTlVNX1RIUkVBRFMgaXMg
-bm90IGFsd2F5cyBlcXVhbCB0byAxNi4KCklkZWFsbHkgd2Ugc2hvdWxkIGJlIGFibGUgdG8ga25v
-dyB0aGUgbnVtYmVyIG9mIHRocmVhZHMgc3VwcG9ydGVkLiBCdXQgdGhhdCAKY291bGQgYmUgYSBm
-b2xsb3ctdXAgcGF0Y2ggKG9yIHBvdGVudGlhbGx5IGlnbm9yZWQpIGlmIG5vdGhpbmcgYmFkIGNh
-biBoYXBwZW4gCndoZW4gWGVuIGhhbmRsZXMgbW9yZSB0aHJlYWQgdGhhbiBPUC1URUUgZG9lcy4K
-CkluIGFueSBjYXNlLCB0aGUgZG9jdW1lbnRhdGlvbiBpbiBYZW4gc2hvdWxkIHJlZmxlY3QgdGhl
-IHJlYWxpdHkuCgo+IAo+PiBJZiB5b3UgaGFwcGVuIHRvIG1ha2UgTUFYX1NURF9DQUxMUyBkeW5h
-bWljLCB0aGVuIHRoaXMgc2hvdWxkIGFsc28gYmUKPj4gZHluYW1pYy4KPiBPZiBjb3Vyc2UuCj4g
-Cj4gWy4uLl0KPj4+Pj4gICAgICtzdGF0aWMgdm9pZCBoYW5kbGVfcnBjX2Z1bmNfYWxsb2Moc3Ry
-dWN0IG9wdGVlX2RvbWFpbiAqY3R4LAo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQo+Pj4+PiArewo+Pj4+PiArICAgIHBh
-ZGRyX3QgcHRyID0gZ2V0X3VzZXJfcmVnKHJlZ3MsIDEpIDw8IDMyIHwgZ2V0X3VzZXJfcmVnKHJl
-Z3MsIDIpOwo+Pj4+PiArCj4+Pj4+ICsgICAgaWYgKCBwdHIgJiAoT1BURUVfTVNHX05PTkNPTlRJ
-R19QQUdFX1NJWkUgLSAxKSApCj4+Pj4+ICsgICAgICAgIGdwcmludGsoWEVOTE9HX1dBUk5JTkcs
-ICJEb21haW4gcmV0dXJuZWQgaW52YWxpZCBSUEMgY29tbWFuZCBidWZmZXJcbiIpOwo+Pj4+Cj4+
-Pj4gU2hvdWxkIG5vdCB5b3UgYmFpbC1vdXQgaW4gdGhhdCBjYXNlPyBBbHNvLCBJIHdvdWxkIHR1
-cm4gaXQgdG8gYSBnZHByaW50ay4KPj4+IE9QLVRFRSBkb2VzIG93biBjaGVja3MgYW5kIHRoYXQg
-Y2hlY2sgd2lsbCBmYWlsIGFsc28uIFRoZW4gT1AtVEVFIHdpbGwKPj4+IGlzc3VlIHJlcXVlc3Qg
-dG8gZnJlZSB0aGlzIFNITS4KPj4KPj4gSSB0aGluayBpdCBpcyBiZXR0ZXIgaWYgd2UgZ28gb24g
-dGhlIHNhZmUtc2lkZS4gSS5lIGlmIHdlIGtub3cgdGhlcmUKPj4gd291bGQgYmUgYW4gZXJyb3Ig
-KGxpa2UgaGVyZSksIHRoZW4geW91IG5lZWQgdG8gcmV0dXJuIGFuIGVycm9yIGluCj4+IGZyb20g
-WGVuIHJhdGhlciB0aGFuIGNhbGxpbmcgT1AtVEVFLiBPdGhlcndpc2UsIHlvdSBtYXkgZW5kIHVw
-IHRvCj4+IG5hc3R5IHByb2JsZW0uCj4gQWN0dWFsbHksIEkgZG9uJ3Qgc2VlIGhvdyBJIGNhbiBk
-byB0aGlzLiBUaGlzIGlzIGFuIFJQQyByZXNwb25zZS4gSQo+IGNhbid0IHJldHVybiBlcnJvciB0
-byBSUEMgcmVzcG9uc2UuIEFsbCBJIGNhbiBkbyBpcyB0byBtYW5nbGUgUlBDCj4gcmVzcG9uc2Ug
-aW4gYSBzdWNoIHdheSwgdGhhdCBPUC1URUUgc3VyZWx5IHdpbGwgdHJlYXQgaXQgYXMgYW4gZXJy
-b3IgYW5kCj4gYWN0IGFjY29yZGluZ2x5LgoKSSBhbSBub3Qgc3VyZSB0byB1bmRlcnN0YW5kIHdo
-YXQgeW91IG1lYW4gaGVyZS4gU3VyZWx5IGlmIHRoZSBhZGRyZXNzIGlzIG5vdCAKYWxpZ25lZCwg
-dGhlbiBPUC1URUUgd2lsbCByZXR1cm4gYW4gZXJyb3IgdG9vLCByaWdodD8gU28gY2FuJ3QgeW91
-IGVtdWxhdGUgCk9QLVRFRSBiZWhhdmlvciBpbiB0aGF0IGNhc2U/Cgo+IAo+PiBBbHNvLCBJIHRo
-aW5rIHlvdSB3YW50IGEgY29tbWVudCAobWF5YmUgaW4gdGhlIGNvbW1pdCBtZXNzYWdlKQo+PiBl
-eHBsYWluaW5nIHRoYXQgT1BURUVfTVNHX05PTkNPTlRJR19QQUdFX1NJWkUgd2lsbCBhbHdheXMg
-YmUgZXF1YWwgdG8KPj4gUEFHRV9TSVpFLgo+IEl0IGlzIGFsd2F5cyBlcXVhbCB0byA0MDk2IGJ5
-dGVzLiBCdXQsIEFGQUlLLCBYRU4gY2FuIHdvcmsgd2l0aCBvdGhlcgo+IFBBR0VfU0laRXMsIGlz
-bid0PyBBY3R1YWxseSwgbGludXggZHJpdmVyIHN1cHBvcnQgb3RoZXIgcGFnZSBzaXplcywgaXQK
-PiBqdXN0IHNwbGl0cyB0aG9zZSBwYWdlcyBpbnRvIDRrIGNodW5rcy4gVGhlIHNhbWUgY2FuIGJl
-IGRvbmUgaW4gWEVOLCBidXQKPiBJIGRvbid0IHdhbnQgdG8gaW50cm9kdWNlIHRoaXMgbG9naWMg
-cmlnaHQgbm93LiBUaGUgcGF0Y2hlcyBhcmUgY29tcGxleAo+IGVub3VnaC4gUmlnaHQgbm93IHdl
-IGhhdmUKPiBCVUlMRF9CVUdfT04oUEFHRV9TSVpFICE9IE9QVEVFX01TR19OT05DT05USUdfUEFH
-RV9TSVpFKSBhbmQgdGhpcyBpcwo+IGVub3VnaCwgSSBob3BlLgoKWGVuIG9ubHkgc3VwcG9ydCA0
-S0IgcGFnZSwgYnV0IEkgd291bGRuJ3QgYmV0IHRoYXQgaW4gdGhlIGZ1dHVyZSBvbiBBcm0gYXMg
-d2UgCndpbGwgcmVxdWlyZSA2NEtCIHBhZ2UgZm9yIHNvbWUgZmVhdHVyZXMgKGkuZSA1Mi1iaXQg
-c3VwcG9ydCkuCgpJIHdhc24ndCBhc2tpbmcgeW91IHRvIGhhbmRsZSBhIGRpZmZlcmVudCBQQUdF
-X1NJWkUsIGp1c3QgdG8gY2xhcmlmeSBpbiBhIApjb21tZW50IG9uIHRvcCB0aGF0IHlvdSBleHBl
-Y3QgdGhlIGJvdGggZGVmaW5lZCB0byBiZSB2YWxpZC4gQW5vdGhlciAKQlVJTERfQlVHX09OIGlz
-IG5vdCBuZWNlc3NhcnkgYXNzdW1pbmcgeW91IGFkZCB0aGUgb25lIGluIHBhdGNoICM2LgoKQ2hl
-ZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+
+--===============8610783481978562885==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-OvlE9VSIoVBO5GELSk++"
+
+
+--=-OvlE9VSIoVBO5GELSk++
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, 2018-12-23 at 19:51 +0530, Praveen Kumar wrote:
+> --- a/xen/common/sched_credit2.c
+> +++ b/xen/common/sched_credit2.c
+> @@ -473,6 +473,7 @@ struct csched2_runqueue_data {
+>      spinlock_t lock;           /* Lock for this
+> runqueue                     */
+> =20
+>      struct rb_root runq;       /* Runqueue is an
+> rbtree                      */
+> +    struct rb_node *next_elem; /* Cached entry to run
+> next                   */
+>
+I don't like the name much. IIRC, in Linux, the field was called
+'rb_leftmost'. So we can call it rb_rightmost.
+
+Or maybe something like rq_rightmost, or rq_first (or runq_first).
+
+And in the comment, I'd say something like, "vcpu with highest credits
+in the runq"
+
+> @@ -1301,6 +1302,7 @@ runq_insert(const struct scheduler *ops, struct
+> csched2_vcpu *svc)
+>  {
+>      unsigned int cpu =3D svc->vcpu->processor;
+>      struct rb_root *runq =3D &c2rqd(ops, cpu)->runq;
+> +    struct csched2_runqueue_data *rqd =3D svc->rqd;
+>      int pos =3D 0;
+> =20
+>      ASSERT(spin_is_locked(per_cpu(schedule_data,
+> cpu).schedule_lock));
+> @@ -1314,6 +1316,7 @@ runq_insert(const struct scheduler *ops, struct
+> csched2_vcpu *svc)
+>      ASSERT(!(svc->flags & CSFLAG_scheduled));
+> =20
+>      rb_runq_insert(runq, svc, &pos);
+> +    rqd->next_elem =3D rb_last(runq);
+> =20
+Ah, ok, yes, using rb_last() here (and in runq_remove()) is indeed
+better than doing it int runq_candidate().
+
+Still not what I had in mind, though.
+
+In fact, the whole point of this "let's cache the rightmost element"
+would be to avoid having to call rb_last() pretty much at all.
+
+How? Well, basically, inside the while() that you're adding here in
+runq_insert(), you make a note about whether the new vcpu has been
+inserted in the righmost spot of the tree. And if it was, you update
+the cache.
+
+Similarly, when removing a vcpu, you check whether you are removing the
+rightmost element of the tree. And if you are, you update the cache.
+
+
+For instance, see how they've been doing this in CFS (before the rb-
+tree cached helpers were introduced), when inserting a task in the
+runqueue:
+
+https://elixir.bootlin.com/linux/v3.15/source/kernel/sched/fair.c#L490
+
+and when removing it:
+
+https://elixir.bootlin.com/linux/v3.15/source/kernel/sched/fair.c#L526
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-OvlE9VSIoVBO5GELSk++
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxB9KsACgkQFkJ4iaW4
+c+50vA//asJIRMob8CU/QvZkTZbwx6k5dlKZFQVJmXTFCbW65xRTLk66y4+Ihx3i
+A2tOgsTkLyzpI/WAw2yEgnz+nqDeQAacvDLj8/DOLX93yoRYhLrYl1CuCyc8Er6z
+xoJKq29chOonfHxzaM+b6lTCCN7XFmWVgMpIpW9tXM+v5CYMgcPLJXdFVBeZtLuh
+jSEilFAtxYfBcQbx/3BJoXXoPHl4A4u33IGA4Kr30dNYavO4PiBNNF005OxVqSi5
+g4PIk6GTfHUenPSqDY8Ux1uHqFXJMs/8jtVMDKuyFwenC+M6ZxEXnYcq1cSpPtrf
+2z0ShjGISIqt72SK5AJUZAaEzbuxo8XjsWPb4lKHyv5RZexHBNCL9IyisXiUFS0B
+adn6mrmRJGZP5J14NhvNm0UBXqF2XkhdrlBW6QmDTe/+gN4CmfE8Lo9DOWfZfEel
+9+AFPEVIOEu8gmcIYtD27NSMtaX7BM2Z/Uikut9ro7u2VKFoU6EBmOYCXnv6DzWf
+L2Tafi2tyqqxPM50SawU18vsYm3SLHd0ixcfELdmNy5lU2nKxiHDrLnNxxL8dAEv
+eZLExpGEo4PwJGfAt9HUyv3jgWSWAuGH1UI2dmREnuH1Hq+mh4rlboa0+k1LaYJm
+/bDffdJQM0pY6kHMmggbBD461hW1rHXrKWYactBdWD0moQUXD7o=
+=cIho
+-----END PGP SIGNATURE-----
+
+--=-OvlE9VSIoVBO5GELSk++--
+
+
+
+--===============8610783481978562885==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8610783481978562885==--
