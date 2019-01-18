@@ -1,22 +1,18 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: Xen-unstable PVHdom0: Assertion
- 'IS_ALIGNED(dfn_x(dfn), (1ul << page_order))' failed at iommu.c:324
-Date: Fri, 18 Jan 2019 18:56:38 +0100
-Message-ID: <20190118175638.u7snykyof4awzirf@mac>
-References: <cafa45db-e775-b212-ad12-90236f151bb5@eikelenboom.it>
- <20190118125058.4old2fc2zvzyue6f@mac>
- <afe9a3e2-5f4d-367a-7f16-02a4f4797e70@eikelenboom.it>
+From: pr-tracker-bot@kernel.org
+Subject: Re: [GIT PULL] xen: fixes for 5.0-rc3
+Date: Fri, 18 Jan 2019 18:05:02 +0000
+Message-ID: <154783470278.23992.869219643981363146.pr-tracker-bot__23325.25449242$1547834638$gmane$org@kernel.org>
+References: <20190118095713.3192-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=cEJC=P2=citrix.com=prvs=914b546e2=roger.pau@srs-us1.protection.inumbo.net>)
- id 1gkYOq-0001HU-NT
- for xen-devel@lists.xenproject.org; Fri, 18 Jan 2019 17:57:48 +0000
-Content-Disposition: inline
-In-Reply-To: <afe9a3e2-5f4d-367a-7f16-02a4f4797e70@eikelenboom.it>
+ <SRS0=4CFk=P2=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
+ id 1gkYVs-0002FZ-Cf
+ for xen-devel@lists.xenproject.org; Fri, 18 Jan 2019 18:05:04 +0000
+In-Reply-To: <20190118095713.3192-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,48 +21,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Sander Eikelenboom <linux@eikelenboom.it>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Paul Durrant <Paul.Durrant@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, torvalds@linux-foundation.org, linux-kernel@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBKYW4gMTgsIDIwMTkgYXQgMDM6MTc6NTdQTSArMDEwMCwgU2FuZGVyIEVpa2VsZW5i
-b29tIHdyb3RlOgo+IE9uIDE4LzAxLzIwMTkgMTM6NTAsIFJvZ2VyIFBhdSBNb25uw6kgd3JvdGU6
-Cj4gPiBPbiBGcmksIEphbiAxOCwgMjAxOSBhdCAwMTowMzowNFBNICswMTAwLCBTYW5kZXIgRWlr
-ZWxlbmJvb20gd3JvdGU6Cj4gPj4gSGkgUm9nZXIsCj4gPj4KPiA+PiBJIGdhdmUgUFZIIGRvbTAg
-YSBzcGluLCBzZWUgaG93IGZhciBJIHdvdWxkIGdldC4KPiA+IAo+ID4gVGhhbmtzIQo+ID4gCj4g
-Pj4gV2l0aCBjdXJyZW50IHhlbi11bnN0YWJsZSB1bmZvcnR1bmF0ZWx5IG5vdCB0aGF0IGZhciwg
-aSBnb3QgdGhlIHNwbGF0IGJlbG93Lgo+ID4gCj4gPiBZZXMsIHRoaXMgd2FzIGFscmVhZHkgcmVw
-b3J0ZWQ6Cj4gPiAKPiA+IGh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRt
-bC94ZW4tZGV2ZWwvMjAxOS0wMS9tc2cwMTAzMC5odG1sCj4gPj4gSWYgeW91IG5lZWQgbW9yZSBp
-bmZvLCB3b3VsZCBsaWtlIG1lIHRvIHRlc3QgYSBwYXRjaCAob3Igc29tZSBvdGhlciBnaXQgdHJl
-ZS9icmFuY2gpLCAKPiA+PiBJIHdpbGwgYmUgaGFwcHkgdG8gZ2l2ZSBpdCBhIHNwaW4gIQo+ID4g
-Cj4gPiBQYXVsIGlzIHdvcmtpbmcgb24gYSBmaXgsIGJ1dCBpbiB0aGUgbWVhbnRpbWUganVzdCBy
-ZW1vdmluZyB0aGUKPiA+IGFzc2VydGlvbnMgc2hvdWxkIGJlIGZpbmU6Cj4gPiAKPiA+IC0tLTg8
-LS0tCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9tbXUuYyBiL3hl
-bi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2lvbW11LmMKPiA+IGluZGV4IGJkMWFmMzVhMTMuLjk4ZTZm
-YzM1ZTIgMTAwNjQ0Cj4gPiAtLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jCj4g
-PiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jCj4gPiBAQCAtMzIxLDkgKzMy
-MSw2IEBAIGludCBpb21tdV9tYXAoc3RydWN0IGRvbWFpbiAqZCwgZGZuX3QgZGZuLCBtZm5fdCBt
-Zm4sCj4gPiAgICAgIGlmICggIWlvbW11X2VuYWJsZWQgfHwgIWhkLT5wbGF0Zm9ybV9vcHMgKQo+
-ID4gICAgICAgICAgcmV0dXJuIDA7Cj4gPiAgCj4gPiAtICAgIEFTU0VSVChJU19BTElHTkVEKGRm
-bl94KGRmbiksICgxdWwgPDwgcGFnZV9vcmRlcikpKTsKPiA+IC0gICAgQVNTRVJUKElTX0FMSUdO
-RUQobWZuX3gobWZuKSwgKDF1bCA8PCBwYWdlX29yZGVyKSkpOwo+ID4gLQo+ID4gICAgICBmb3Ig
-KCBpID0gMDsgaSA8ICgxdWwgPDwgcGFnZV9vcmRlcik7IGkrKyApCj4gPiAgICAgIHsKPiA+ICAg
-ICAgICAgIHJjID0gaGQtPnBsYXRmb3JtX29wcy0+bWFwX3BhZ2UoZCwgZGZuX2FkZChkZm4sIGkp
-LCBtZm5fYWRkKG1mbiwgaSksCj4gPiAKPiAKPiBJIGdhdmUgdGhhdCBhIHNwaW4gYW5kIGkgbm93
-IGdldCBhIHNlZW1pbmdseSBlbmRsZXNzIHN0cmVhbSBvZiBJT19QQUdFX0ZBVUxUcwoKWW91IHNo
-b3VsZG4ndCBnZXQgdGhvc2UgcGFnZSBmYXVsdHMgc2luY2UgdGhleSBhcmUgZm9yIGFkZHJlc3Nl
-cyB0aGF0CmJlbG9uZyB0byBhIHJlc2VydmVkIHJlZ2lvbiwgYW5kIHRoYXQgc2hvdWxkIGJlIG1h
-cHBlZCBpbnRvIHRoZSBwMm0uCkkndmUganVzdCB0ZXN0ZWQgb24gbXkgQU1EIGJveCBhbmQgSSdt
-IGFsc28gc2VlaW5nIGVycm9ycyAoYWxiZWl0CmRpZmZlcmVudCBvbmVzKSwgc28gSSBndWVzcyBz
-b21ldGhpbmcgYnJva2Ugc2luY2UgSSBsYXN0IGZpeGVkIFBWSApEb20wIHRvIGJvb3Qgb24gQU1E
-IGhhcmR3YXJlLgoKSSd2ZSBhbHNvIHRlc3RlZCBjb21taXQ6Cgpjb21taXQgZmFkNmJhNjRhOGM5
-OGJlYmI5Mzc0ZjM5MGNjMjU1ZmFjMDUyMzdhYiAoSEVBRCkKQXV0aG9yOiBSb2dlciBQYXUgTW9u
-bsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KRGF0ZTogICBGcmkgTm92IDMwIDEyOjEwOjAwIDIw
-MTggKzAxMDAKYW1kL2lvbW11OiBza2lwIGhvc3QgYnJpZGdlIGRldmljZXMgd2hlbiB1cGRhdGlu
-ZyBJT01NVSBwYWdlIHRhYmxlcwoKQW5kIGl0IHdvcmtzIG9uIG15IEFNRCBib3ggYW5kIEknbSBh
-YmxlIHRvIGJvb3QgYXMgYSBQVkggRG9tMC4gQ2FuIHlvdQpnaXZlIHRoaXMgY29tbWl0IGEgc3Bp
-bj8KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+VGhlIHB1bGwgcmVxdWVzdCB5b3Ugc2VudCBvbiBGcmksIDE4IEphbiAyMDE5IDEwOjU3OjEzICsw
+MTAwOgoKPiBnaXQ6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQveGVu
+L3RpcC5naXQgZm9yLWxpbnVzLTUuMC1yYzMtdGFnCgpoYXMgYmVlbiBtZXJnZWQgaW50byB0b3J2
+YWxkcy9saW51eC5naXQ6Cmh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvdG9ydmFsZHMvYy9lNmVjMmZk
+YTJkNDY0OTM4OTg5ZWNkNzcwYmU5MmU0OTJhY2UzYWUxCgpUaGFuayB5b3UhCgotLSAKRGVldC1k
+b290LWRvdCwgSSBhbSBhIGJvdC4KaHR0cHM6Ly9rb3JnLndpa2kua2VybmVsLm9yZy91c2VyZG9j
+L3BydHJhY2tlcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
