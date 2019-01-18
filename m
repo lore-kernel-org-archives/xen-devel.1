@@ -1,19 +1,20 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [RFC PATCH v2 0/2] xen: credit2: rb-tree for
- runqueues
-Date: Fri, 18 Jan 2019 08:00:50 +0100
-Message-ID: <dc59c26edbc30533fb298ebf4d7111ede017ae2a.camel@suse.com>
-References: <20181223142134.7857-1-kpraveen.lkml@gmail.com>
- <CABcWhv4njWab=ikYOM0fSWV6PJug4tfttwQVquCJKdSNqB7qJA@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH RFC for next] xen: make grant table
+ configurable
+Date: Fri, 18 Jan 2019 00:48:42 -0700
+Message-ID: <5C4184DA020000780020EEA6@prv1-mh.provo.novell.com>
+References: <20190117123054.809-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0204591175818072209=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=c7wu=P2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gkOB9-0005FL-FG
- for xen-devel@lists.xenproject.org; Fri, 18 Jan 2019 07:02:59 +0000
-In-Reply-To: <CABcWhv4njWab=ikYOM0fSWV6PJug4tfttwQVquCJKdSNqB7qJA@mail.gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=tHc6=P2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gkOtP-0008QE-4j
+ for xen-devel@lists.xenproject.org; Fri, 18 Jan 2019 07:48:43 +0000
+In-Reply-To: <20190117123054.809-1-wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,97 +23,28 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Praveen Kumar <kpraveen.lkml@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0204591175818072209==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-WisqG4TYFz7wryZ2WKbD"
-
-
---=-WisqG4TYFz7wryZ2WKbD
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2019-01-18 at 11:14 +0530, Praveen Kumar wrote:
-> Hi All,
->=20
-Hi Praveen,
-
-> On Fri, Jan 4, 2019 at 3:21 PM Praveen Kumar <kpraveen.lkml@gmail.com
-> > wrote:
-> > Hi All,
-> >=20
-> > This is the continued work with respect to rb-tree usage in
-> > Credit2, as
-> > mentioned in previous conversations
-> >=20
-> > https://lists.xen.org/archives/html/xen-devel/2017-06/msg01968.html
-> > https://lists.xen.org/archives/html/xen-devel/2018-04/msg00119.html
-> >=20
-> > The patch optimized the Credit2 runqueue from sorted queue to rb-
-> > tree.
-> > This will help in performance and scalability, when we have huge
-> > number of
-> > vCPUs.
-> >=20
-> > Please provide your comments over the changes done.
-> >=20
->=20
-> Please provide your comments on the changes.
-> Thanks in advance.
->=20
-Yes, I am actually looking at this series right now.
-
-Sorry it's taking a bit, but you hit the combination of Winter vacation
-and freeze for the next Xen release. :-P
-
-I'll let you have my comments latter today.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-WisqG4TYFz7wryZ2WKbD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxBeaIACgkQFkJ4iaW4
-c+4PLQ//SByTaMn3KiPHJgBRJKqcNLn6TiiOi3ckkXXl/dOzmREiVGAsBqorbfSG
-8mpUV7JAAJEsG+thUlEEA/10OzO7r6J6lg3TQPApvWL9R4ofLpjorrlBExV1ynxt
-q4Nq1FCNm7nP7V0sL+VChKfMjPPmvRTy4E1a8l80ZyJV9qjVYgMRvnqJGrkzktrY
-a241DEjTxUSfcEt+bdz8vgls2VkL7eMda12IL6OTkGssiwLlpoPJmhwHwtinFOYF
-IrNS4lwuN7utMDCzs5by/aVVZk5wovw6H/Oa0IC/CIc+PUvBVdVDeEhMsyMj5LMf
-iXJ9IWCoHVPXFypmH3zOADwIWBZlPEAmpebp9NuKZI0M1NSY/fQXhj+Xr+JN5hm8
-Drh7YFSweY500PDYM+a9L8mOnXymlCGYUHbe59+a5pYH9g3pQnB26p4AFhM2U6/0
-G8sKQsLnv/eglD4E2BKXhHGQrwL4PsxHIjGlJ8OeHwCxefN1JsC20kejKeQNWo2U
-ianvVzdmbX27TjJVzb+LD1x0NNHdMIuzSZsO1Hme9kFHrcdhM0VJyAdLLEQOSEYN
-ggbPOCHi1Qu2v7aKl1Za6xLoPoHiT0rOQedPPDHgneOjiU0EEXGosFhjvZrhDhT0
-I2jiXaSFXqjDp+GVVdU7mPrpqPAoDpTUcge0LSztvv6Szm6ifnE=
-=mh9/
------END PGP SIGNATURE-----
-
---=-WisqG4TYFz7wryZ2WKbD--
-
-
-
---===============0204591175818072209==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0204591175818072209==--
+Pj4+IE9uIDE3LjAxLjE5IGF0IDEzOjMwLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+LS0tIGEveGVuL2NvbW1vbi9LY29uZmlnCj4gKysrIGIveGVuL2NvbW1vbi9LY29uZmlnCj4gQEAg
+LTExLDYgKzExLDE3IEBAIGNvbmZpZyBDT01QQVQKPiAgY29uZmlnIENPUkVfUEFSS0lORwo+ICAJ
+Ym9vbAo+ICAKPiArY29uZmlnIEdSQU5UX1RBQkxFCj4gKwlib29sICJHcmFudCB0YWJsZSBzdXBw
+b3J0Igo+ICsJZGVmYXVsdCB5Cj4gKwktLS1oZWxwLS0tCj4gKwkgIEdyYW50IHRhYmxlIHByb3Zp
+ZGVzIGEgZ2VuZXJpYyBtZWNoYW5pc20gdG8gbWVtb3J5IHNoYXJpbmcKPiArCSAgYmV0d2VlbiBk
+b21haW5zLiBUaGlzIHNoYXJlZCBtZW1vcnkgaW50ZXJmYWNlIHVuZGVycGlucyB0aGUKPiArCSAg
+c3BsaXQgZGV2aWNlIGRyaXZlcnMgZm9yIGJsb2NrIGFuZCBuZXR3b3JrIElPIGluIGEgY2xhc3Np
+Ywo+ICsJICBYZW4gc2V0dXAuCgpJIGNhbiBzZWUgcmVhc29ucyB3aHkgb25lIG1heSB3YW50IHRo
+aXMgKGFsb25nIHRoZSBsaW5lcyBvZiBTSUxPCm1vZGUpLCBidXQgaXQnbGwgcHJvZHVjZSBhbiBl
+bnRpcmVseSBBQkktaW5jb21wYXRpYmxlIGh5cGVydmlzb3IuCk1vc3QgZnJvbnQtL2JhY2tlbmQg
+ZHJpdmVyIHBhaXJzIHdvbid0IHdvcmsgd2l0aG91dCBpdC4gSSdtIG5vdApzdXJlIHRoZSB0b29s
+IHN0YWNrIGlzIHByZXBhcmVkIHRvIGFjdCBvbiBzdWNoIGEgaHlwZXJ2aXNvci4gSSdtCnByZXR0
+eSBzdXJlIGF0IGxlYXN0IFhlbm9MaW51eCBkZXJpdmF0aXZlcyBCVUcoKSB1cG9uIGVycm9yCnJl
+dHVybnMgZnJvbSBjZXJ0YWluIGdudHRhYiBoeXBlcmNhbGxzLgoKQXMgc3VjaCBhcyB3ZWxsIGFz
+IHRvIGJlIHdpdGhpbiBvdXIgZ2VuZXJhbCBsaW5lIG9mIHdoYXQgS2NvbmZpZwpvcHRpb25zIHdl
+IHBlcm1pdCwgSSB0aGluayBmb3IgdGhlIHRpbWUgYmVpbmcgdGhlIHByb21wdCBuZWVkcwp0byBk
+ZXBlbmQgb24gRVhQRVJUID0gInkiLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
