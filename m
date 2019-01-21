@@ -1,23 +1,21 @@
-From: Ed Vielmetti <ed@packet.com>
-Subject: Re: [PATCH RFC for next] xen: make grant table
- configurable
-Date: Mon, 21 Jan 2019 10:55:19 -0500
-Message-ID: <CA+Gavy6v1n3uYyOOD-Q07zV4q5XSXm0wmcCv0ka0_2UrwQS16g@mail.gmail.com>
-References: <20190117123054.809-1-wei.liu2@citrix.com>
- <alpine.DEB.2.10.1901170936190.18561@sstabellini-ThinkPad-X260>
- <20190117173807.fvmvakv2j7hqttkr@zion.uk.xensource.com>
- <alpine.DEB.2.10.1901170939280.18561@sstabellini-ThinkPad-X260>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: [PATCH 2/2] xen/arm: domain_build: Don't expose IOMMU
+ specific properties to the guest
+Date: Mon, 21 Jan 2019 19:04:07 +0200
+Message-ID: <1548090247-20078-3-git-send-email-andrii.anisov@gmail.com>
+References: <1548090247-20078-1-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3619954663533259951=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=fgM5=P5=packet.com=ed@srs-us1.protection.inumbo.net>)
- id 1glbvb-0001hV-1o
- for xen-devel@lists.xenproject.org; Mon, 21 Jan 2019 15:55:59 +0000
-Received: by mail-vk1-xa44.google.com with SMTP id j23so4672182vke.13
- for <xen-devel@lists.xenproject.org>; Mon, 21 Jan 2019 07:55:57 -0800 (PST)
-In-Reply-To: <alpine.DEB.2.10.1901170939280.18561@sstabellini-ThinkPad-X260>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=8+6Q=P5=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1glczh-0007rE-0l
+ for xen-devel@lists.xenproject.org; Mon, 21 Jan 2019 17:04:17 +0000
+Received: by mail-lf1-x144.google.com with SMTP id a8so16024940lfk.5
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Jan 2019 09:04:15 -0800 (PST)
+In-Reply-To: <1548090247-20078-1-git-send-email-andrii.anisov@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,112 +24,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, Edward Vielmetti <ed@packet.net>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3619954663533259951==
-Content-Type: multipart/alternative; boundary="0000000000006f5377057ff9e56a"
-
---0000000000006f5377057ff9e56a
-Content-Type: text/plain; charset="UTF-8"
-
-Yes! I'd love to hear more about what you did, to help me further promote
-Xen as a Works on Arm supported project. Also, I'd love to hear more
-details about the Gitlab integration, as I am working diligently to get
-arm64 support into their mainline roadmap.
-
-thanks
-
-Ed
-
-On Thu, Jan 17, 2019 at 12:41 PM Stefano Stabellini <sstabellini@kernel.org>
-wrote:
-
-> On Thu, 17 Jan 2019, Wei Liu wrote:
-> > On Thu, Jan 17, 2019 at 09:36:57AM -0800, Stefano Stabellini wrote:
-> > > On Thu, 17 Jan 2019, Wei Liu wrote:
-> > > > Introduce CONFIG_GRANT_TABLE. Provide stubs and make sure x86 and arm
-> > > > hypervisors build with grant table disabled.
-> > >
-> > > Looks like a good idea.
-> > >
-> > >
-> > > > Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-> > > > ---
-> > > > I did this when I worked on splitting PV and HVM and thought this
-> > > > might be useful and it was simple enough to get done.
-> > > >
-> > > > RFC because I can envisage some configurations in the distant future
-> > > > do away with grant table and event channel. There is small a benefit
-> > > > to consider accepting this patch now so that Gitlab's randconf build
-> > > > can start testing with grant table turned off right away.
-> > >
-> > > Can Gitlab do Arm hypervisor builds?
-> >
-> > Yes. I hooked up a box from WorksOnArm for Arm64 builds.
->
-> Very nice!! You should write a blog post or something about it.
->
-
---0000000000006f5377057ff9e56a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Yes! I&#39;d love to hear more about what you did, to help=
- me further promote Xen as a Works on Arm supported project. Also, I&#39;d =
-love to hear more details about the Gitlab integration, as I am working dil=
-igently to get arm64 support into their mainline roadmap.<div><br></div><di=
-v>thanks</div><div><br></div><div>Ed</div></div><br><div class=3D"gmail_quo=
-te"><div dir=3D"ltr" class=3D"gmail_attr">On Thu, Jan 17, 2019 at 12:41 PM =
-Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org">sstabellin=
-i@kernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" styl=
-e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
-g-left:1ex">On Thu, 17 Jan 2019, Wei Liu wrote:<br>
-&gt; On Thu, Jan 17, 2019 at 09:36:57AM -0800, Stefano Stabellini wrote:<br=
->
-&gt; &gt; On Thu, 17 Jan 2019, Wei Liu wrote:<br>
-&gt; &gt; &gt; Introduce CONFIG_GRANT_TABLE. Provide stubs and make sure x8=
-6 and arm<br>
-&gt; &gt; &gt; hypervisors build with grant table disabled.<br>
-&gt; &gt; <br>
-&gt; &gt; Looks like a good idea.<br>
-&gt; &gt; <br>
-&gt; &gt; <br>
-&gt; &gt; &gt; Signed-off-by: Wei Liu &lt;<a href=3D"mailto:wei.liu2@citrix=
-.com" target=3D"_blank">wei.liu2@citrix.com</a>&gt;<br>
-&gt; &gt; &gt; ---<br>
-&gt; &gt; &gt; I did this when I worked on splitting PV and HVM and thought=
- this<br>
-&gt; &gt; &gt; might be useful and it was simple enough to get done.<br>
-&gt; &gt; &gt; <br>
-&gt; &gt; &gt; RFC because I can envisage some configurations in the distan=
-t future<br>
-&gt; &gt; &gt; do away with grant table and event channel. There is small a=
- benefit<br>
-&gt; &gt; &gt; to consider accepting this patch now so that Gitlab&#39;s ra=
-ndconf build<br>
-&gt; &gt; &gt; can start testing with grant table turned off right away.<br=
->
-&gt; &gt; <br>
-&gt; &gt; Can Gitlab do Arm hypervisor builds?<br>
-&gt; <br>
-&gt; Yes. I hooked up a box from WorksOnArm for Arm64 builds.<br>
-<br>
-Very nice!! You should write a blog post or something about it.<br>
-</blockquote></div>
-
---0000000000006f5377057ff9e56a--
-
-
---===============3619954663533259951==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3619954663533259951==--
+RnJvbTogT2xla3NhbmRyIFR5c2hjaGVua28gPG9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29t
+PgoKV2UgZG9uJ3QgcGFzc3Rocm91Z2ggSU9NTVUgZGV2aWNlIHRvIERPTTAgZXZlbiBpZiBpdCBp
+cyBub3QgdXNlZCBieQpYZW4uIFRoZXJlZm9yZSBleHBvc2luZyB0aGUgcHJvcGVydGllcyB0aGF0
+IGRlc2NyaWJlIHJlbGF0aW9uc2hpcApiZXR3ZWVuIG1hc3RlciBkZXZpY2VzIGFuZCBJT01NVXMg
+ZG9lcyBub3QgbWFrZSBhbnkgc2Vuc2UuCgpBY2NvcmRpbmcgdG8gdGhlOgoxLiBEb2N1bWVudGF0
+aW9uL2RldmljZXRyZWUvYmluZGluZ3MvaW9tbXUvaW9tbXUudHh0CjIuIERvY3VtZW50YXRpb24v
+ZGV2aWNldHJlZS9iaW5kaW5ncy9wY2kvcGNpLWlvbW11LnR4dAoKU2lnbmVkLW9mZi1ieTogT2xl
+a3NhbmRyIFR5c2hjaGVua28gPG9sZWtzYW5kcl90eXNoY2hlbmtvQGVwYW0uY29tPgpBY2tlZC1i
+eTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KLS0tCiB4ZW4vYXJjaC9hcm0v
+ZG9tYWluX2J1aWxkLmMgfCAxMCArKysrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgMTAgaW5zZXJ0
+aW9ucygrKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9kb21haW5fYnVpbGQuYyBiL3hlbi9h
+cmNoL2FybS9kb21haW5fYnVpbGQuYwppbmRleCBkMmM2M2E4Li4xNWEwOGQ2IDEwMDY0NAotLS0g
+YS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKKysrIGIveGVuL2FyY2gvYXJtL2RvbWFpbl9i
+dWlsZC5jCkBAIC01NDAsNiArNTQwLDE2IEBAIHN0YXRpYyBpbnQgX19pbml0IHdyaXRlX3Byb3Bl
+cnRpZXMoc3RydWN0IGRvbWFpbiAqZCwgc3RydWN0IGtlcm5lbF9pbmZvICpraW5mbywKICAgICAg
+ICAgICAgIGNvbnRpbnVlOwogICAgICAgICB9CiAKKyAgICAgICAgLyogRG9uJ3QgZXhwb3NlIElP
+TU1VIHNwZWNpZmljIHByb3BlcnRpZXMgdG8gdGhlIGd1ZXN0ICovCisgICAgICAgIGlmICggZHRf
+cHJvcGVydHlfbmFtZV9pc19lcXVhbChwcm9wLCAiaW9tbXVzIikgKQorICAgICAgICAgICAgY29u
+dGludWU7CisKKyAgICAgICAgaWYgKCBkdF9wcm9wZXJ0eV9uYW1lX2lzX2VxdWFsKHByb3AsICJp
+b21tdS1tYXAiKSApCisgICAgICAgICAgICBjb250aW51ZTsKKworICAgICAgICBpZiAoIGR0X3By
+b3BlcnR5X25hbWVfaXNfZXF1YWwocHJvcCwgImlvbW11LW1hcC1tYXNrIikgKQorICAgICAgICAg
+ICAgY29udGludWU7CisKICAgICAgICAgcmVzID0gZmR0X3Byb3BlcnR5KGtpbmZvLT5mZHQsIHBy
+b3AtPm5hbWUsIHByb3BfZGF0YSwgcHJvcF9sZW4pOwogCiAgICAgICAgIGlmICggcmVzICkKLS0g
+CjIuNy40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
