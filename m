@@ -1,20 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: Unable to boot Linux with master EDK2
-Date: Mon, 21 Jan 2019 10:36:45 +0000
-Message-ID: <1532cb35-7af2-a76a-75f1-fe8b858da959@arm.com>
-References: <cb47bed5-4326-9966-8f95-b80c7310a79a@arm.com>
- <3C0D5C461C9E904E8F62152F6274C0BB40B84976@SHSMSX104.ccr.corp.intel.com>
+From: Stefan Hajnoczi <stefanha@gmail.com>
+Subject: Re: [Qemu-devel] [PATCH v3 0/4] QEMU changes to do PVH
+ boot
+Date: Mon, 21 Jan 2019 10:54:24 +0000
+Message-ID: <20190121105424.GH30536@stefanha-x1.localdomain>
+References: <154803791641.5550.15254007790773130906@2d3111e9616b>
+ <7979bbc2-2713-4043-291b-79b7132634c0@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0468365322248336879=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=rLzG=P5=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1glWwj-000803-0E
- for xen-devel@lists.xenproject.org; Mon, 21 Jan 2019 10:36:49 +0000
-In-Reply-To: <3C0D5C461C9E904E8F62152F6274C0BB40B84976@SHSMSX104.ccr.corp.intel.com>
-Content-Language: en-US
+ <SRS0=Cdle=P5=gmail.com=stefanha@srs-us1.protection.inumbo.net>)
+ id 1glXDp-00015L-Al
+ for xen-devel@lists.xenproject.org; Mon, 21 Jan 2019 10:54:29 +0000
+Received: by mail-wr1-x441.google.com with SMTP id t27so22756504wra.6
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Jan 2019 02:54:27 -0800 (PST)
+In-Reply-To: <7979bbc2-2713-4043-291b-79b7132634c0@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,16 +24,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Bi, Dandan" <dandan.bi@intel.com>, edk2-devel-01 <edk2-devel@lists.01.org>, "Gao, Liming" <liming.gao@intel.com>
-Cc: "Kinney, Michael D" <michael.d.kinney@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Laszlo Ersek <lersek@redhat.com>, Leif Lindholm <leif.lindholm@linaro.org>, Ard Biesheuvel <ard.biesheuvel@linaro.org>
+To: Liam Merwick <liam.merwick@oracle.com>
+Cc: fam@euphon.net, ehabkost@redhat.com, maran.wilson@oracle.com, mst@redhat.com, qemu-devel@nongnu.org, george.kennedy@oracle.com, stefanha@redhat.com, xen-devel@lists.xenproject.org, pbonzini@redhat.com, boris.ostrovsky@oracle.com, rth@twiddle.net, sgarzare@redhat.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgRGFuZGFuLAoKT24gMjEvMDEvMjAxOSAwMjoyMywgQmksIERhbmRhbiB3cm90ZToKPiBJIGhh
-dmUgY29tbWl0dGVkIHRoZSBmaXggcGF0Y2guCj4gaHR0cHM6Ly9naXRodWIuY29tL3RpYW5vY29y
-ZS9lZGsyL2NvbW1pdC9lYjc2Yjc2MjE4ZDViYWM4Njc0MTRlMmZmNmRkMDljNmU3YzcwMGRkCj4g
-Cj4gUGxlYXNlIHRyeWluZyB0aGUgbGF0ZXN0IEVESzIgbWFzdGVyLgoKSSBoYXZlIHRyaWVkIEVE
-SzIgbWFzdGVyIGFuZCBnb3QgYSBndWVzdCBib290aW5nIHdpdGggVUVGSS4gVGhhbmsgeW91IGZv
-ciAKbWVyZ2luZyBpdCEKCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0468365322248336879==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="lrvsYIebpInmECXG"
+Content-Disposition: inline
+
+
+--lrvsYIebpInmECXG
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 21, 2019 at 08:19:03AM +0000, Liam Merwick wrote:
+> On 21/01/2019 02:31, no-reply@patchew.org wrote:
+> > Patchew URL: https://patchew.org/QEMU/1547554687-12687-1-git-send-email=
+-liam.merwick@oracle.com/
+> ...>
+> >    CC      dma-helpers.o
+> >    CC      vl.o
+> > /tmp/qemu-test/src/block/sheepdog.c: In function 'find_vdi_name':
+> > /tmp/qemu-test/src/block/sheepdog.c:1239:5: error: 'strncpy' specified =
+bound 256 equals destination size [-Werror=3Dstringop-truncation]
+> >       strncpy(buf + SD_MAX_VDI_LEN, tag, SD_MAX_VDI_TAG_LEN);
+> >       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > cc1: all warnings being treated as errors
+> >=20
+>=20
+>=20
+> Given the PVH patch series was posted 5 days ago and the following change
+> was committed 3 days ago, I'm assuming this is not related to the PVH
+> changes (which do not touch this file).
+>=20
+> commit 97b583f46c435aaa40942ca73739d79190776b7f
+> Author: Philippe Mathieu-Daud=E9 <philmd@redhat.com>
+> Date:   Thu Jan 3 09:56:35 2019 +0100
+>=20
+>     block/sheepdog: Use QEMU_NONSTRING for non NUL-terminated arrays
+
+Yes, don't worry, it's a false positive.
+
+Stefan
+
+--lrvsYIebpInmECXG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEcBAEBAgAGBQJcRaTgAAoJEJykq7OBq3PIyqEIAKTn3nBUrMCGFIo7UyaD93oQ
+SdGjt0xqouk7nGmnvV71C/vPUSLzR78EF3yvseHSkJv+hpBA2WN+p+jQAyIWz3BP
+ajszz66vHPKzte3Tpo1PBFuwgFSkTCgub+q2pna23g2QPharBhm/61QHsmcQ0eVs
+P+NuHBZXfFBe0iZ1ykXR4OwmJ5Wmw+HBlTGUXMkJy3NV5+VU7Tlh+6Ek6hgfm+36
+MLxONoXfQzXSJPHhrxPE8uGPrgAv5yAKiiO2AX7G/1n2dncicN/XKU/3Dy5AJ4z1
+3pm9X0McNX4d9dv+k6CWSKc6Zku3xv2peTG6fe06xX0KjAwoibVejih3s0YoPc4=
+=755q
+-----END PGP SIGNATURE-----
+
+--lrvsYIebpInmECXG--
+
+
+--===============0468365322248336879==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0468365322248336879==--
