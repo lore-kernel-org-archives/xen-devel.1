@@ -1,17 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-linus test] 132227: regressions - FAIL
-Date: Tue, 22 Jan 2019 12:30:04 +0000
-Message-ID: <osstest-132227-mainreport@xen.org>
+From: "Security Developer" <security.developer@emailn.de>
+Subject: GFX passthrough of primary graphics card
+Date: Tue, 22 Jan 2019 13:41:12 +0100
+Message-ID: <ecc2f811264194dc2c54f30adad9fbfb@mail.emailn.de>
+Reply-To: Security Developer <security.developer@emailn.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2218221585183000816=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=+Ga5=P6=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1glvBw-0003id-MK
- for xen-devel@lists.xenproject.org; Tue, 22 Jan 2019 12:30:08 +0000
+ <SRS0=9PSJ=P6=emailn.de=security.developer@srs-us1.protection.inumbo.net>)
+ id 1glvMi-0004ZA-0R
+ for xen-devel@lists.xenproject.org; Tue, 22 Jan 2019 12:41:16 +0000
+Received: from mail.emailn.de (46.182.20.122 [46.182.20.122])
+ by mail.emailn.de (b1gMailServer) with ESMTP id 2AB9ED16
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Jan 2019 13:41:12 +0100 (CET)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,210 +23,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMjIyNyBsaW51eC1saW51cyByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTMyMjI3LwoKUmVncmVzc2lvbnMgOi0oCgpU
-ZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRl
-c3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAg
-MTkgZ3Vlc3Qtc3RhcnQvZGViaWFuLnJlcGVhdCBmYWlsIFJFR1IuIHZzLiAxMjU4OTgKClRlc3Rz
-IHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwg
-bGlrZSAxMjU4OTgKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUt
-c3VwcG9ydC1jaGVjayAgICBmYWlsICBsaWtlIDEyNTg5OAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTI1ODk4
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAg
-ICAgICAgIGZhaWwgbGlrZSAxMjU4OTgKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFt
-ZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEyNTg5OAogdGVzdC1hcm1o
-Zi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwg
-IGxpa2UgMTI1ODk4CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vl
-c3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMjU4OTgKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEyNTg5
-OAogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAxMiBndWVzdC1zdGFydCAgICAgICAgICAg
-ICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtaTM4Ni1saWJ2aXJ0LXhzbSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
-YnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBh
-c3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDEx
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1s
-aWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRl
-Ymlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZj
-cHUgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLWNyZWRpdDEgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
-Zi14bC1jcmVkaXQxICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgMTMgbWlncmF0ZS1zdXBwb3J0
-LWNoZWNrICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0
-cnVjayAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVy
-ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQt
-cmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZl
-cmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
-LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTMgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBu
-ZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93
-cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
-ICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4
-NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFy
-Z2V0ZWQgZm9yIHRlc3Rpbmc6CiBsaW51eCAgICAgICAgICAgICAgICA0OWE1Nzg1N2FlZWEwNmNh
-ODMxMDQzYWNiYjBmYTVlMGY1MDYwMmZkCmJhc2VsaW5lIHZlcnNpb246CiBsaW51eCAgICAgICAg
-ICAgICAgICA5NDcxMGNhYzBlZjRlZTE3N2E2M2I1MjI3NjY0YjM4Yzk1YmJmNzAzCgpMYXN0IHRl
-c3Qgb2YgYmFzaXMgICAxMjU4OTggIDIwMTgtMDgtMTMgMjE6MjA6NTUgWiAgMTYxIGRheXMKRmFp
-bGluZyBzaW5jZSAgICAgICAgMTI1OTIxICAyMDE4LTA4LTE1IDEzOjA2OjU2IFogIDE1OSBkYXlz
-ICAxMjggYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTMyMjI3ICAyMDE5LTAxLTIxIDAw
-OjM0OjM4IFogICAgMSBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo0MjE3IHBlb3BsZSB0b3VjaGVk
-IHJldmlzaW9ucyB1bmRlciB0ZXN0LApub3QgbGlzdGluZyB0aGVtIGFsbAoKam9iczoKIGJ1aWxk
-LWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-aTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1h
-bWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5o
-dm0tYW1kNjQteHNtICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQt
-cWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlh
-bmh2bS1hbWQ2NC14c20gICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQt
-c3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2
-aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGVi
-aWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjct
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14
-bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2NC1kbXJl
-c3RyaWN0ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRtcmVzdHJp
-Y3QtYW1kNjQtZG1yZXN0cmljdCAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWV4
-YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1w
-cnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4
-NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVs
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUt
-cmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVs
-dGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1o
-Zi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
-LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hp
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1y
-YXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1k
-ZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhk
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcK
-bG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNv
-bmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxh
-Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9y
-dHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54
-ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFz
-dGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJs
-b2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQK
-ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5
-CgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24gbG9nOyBpdCB3b3VsZCBiZSA4NDI0MTggbGlu
-ZXMgbG9uZy4pCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2218221585183000816==
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Disposition: inline
+
+<html><font face="Arial" size="2">Hi there, I'm trying to pass through my primary graphics card, but I have trouble getting it to work. I posted already on xen-users, but no one replied. So I try again on the developers list.</font><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2">I have the latest xen-unstable, and as Dom0 kernel I run 4.20 (also latest from upstream).</font></div><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2">I have the following scenario:</font></div><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2">I want to set up my laptop in "kiosk mode" where there is absolutely no graphics in Dom0 and all hardware sits directly in my VM. This VM is Windows at the moment.</font></d
+ iv><div><font face="Arial" size="2">I have a laptop with an Intel HD graphics card (so just a single
+one for the whole platform). I want to hand over this graphics card to the VM as its primary graphics card (no emulation of hardware).</font></div><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2">I have configured to hide the card from Dom0 and switch off the use of graphics in Dom0 (kernel command line):</font></div><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2">xen_pciback.hide=(00:02.0) quiet video=vesafb:off,efifb:off</font></div><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2">My configuration file has the following parameters set:</font></div><div><font face="Arial" size="2"><br></font></div><div><font face="Arial" size="2"><div>vga = "none"</div><div>nographic = 1</div><div>builde
+ r = "hvm"</div><div>gfx_passthru=1</div><div>pci=['00:02.0']</div><div><br></div><div>When I boot the
+VM, I see the following errors in dmesg:</div><div><br></div></font></div><div><font face="Arial" size="2"><div>[&nbsp; 291.884273] resource sanity check: requesting [mem 0x000c0000-0x000dffff], which spans more than PCI Bus 0000:00 [mem 0x000c0000-0x000c3fff window]</div><div>[&nbsp; 291.884278] caller pci_map_rom+0x6a/0x1b0 mapping multiple BARs</div><div>[&nbsp; 291.884290] pciback 0000:00:02.0: Invalid PCI ROM header signature: expecting 0xaa55, got 0xffff</div><div>[&nbsp; 291.934147] xen_pciback: vpci: 0000:00:02.0: assign to virtual slot 0</div><div>[&nbsp; 291.934275] pciback 0000:00:02.0: registering for 2</div><div><br></div><div>In xl dmesg I see the following:</div><div><br></div><div><div>(XEN) d11: bind: m_gsi=16 g_gsi=28 dev=00.00.3 intx=0</div><div>(d11) HVM Loader</div><di
+ v>(d11) Detected Xen v4.12.0-rc</div><div>(d11) Xenbus rings @0xfeffc000, event channel 1</div><div>(d11)
+System requested SeaBIOS</div><div>(d11) CPU speed is 2712 MHz</div><div>(d11) Relocating guest memory for lowmem MMIO space disabled</div><div>(XEN) irq.c:374: Dom11 PCI link 0 changed 0 -&gt; 5</div><div>(d11) PCI-ISA link 0 routed to IRQ5</div><div>(XEN) irq.c:374: Dom11 PCI link 1 changed 0 -&gt; 10</div><div>(d11) PCI-ISA link 1 routed to IRQ10</div><div>(XEN) irq.c:374: Dom11 PCI link 2 changed 0 -&gt; 11</div><div>(d11) PCI-ISA link 2 routed to IRQ11</div><div>(XEN) irq.c:374: Dom11 PCI link 3 changed 0 -&gt; 5</div><div>(d11) PCI-ISA link 3 routed to IRQ5</div><div>(d11) pci dev 01:3 INTA-&gt;IRQ10</div><div>(d11) pci dev 02:0 INTA-&gt;IRQ11</div><div>(XEN) memory_map:add: dom11 gfn=fdffc mfn=8ff4f nr=3</div><div>(d11) pci dev 03:0 INTA-&gt;IRQ5</div><div>(d11) RAM in high memory; 
+ setting high_mem resource base to 166000000</div><div>(d11) pci dev 03:0 bar 18 size 010000000: 0e000000c</div><div>(d11)
+pci dev 02:0 bar 14 size 001000000: 0f0000008</div><div>(XEN) memory_map:add: dom11 gfn=f1000 mfn=eb000 nr=1000</div><div>(d11) pci dev 03:0 bar 10 size 001000000: 0f1000004</div><div>(d11) pci dev 03:0 bar 30 size 000020000: 0f2000000</div><div>(d11) pci dev 02:0 bar 10 size 000000100: 00000c001</div><div>(d11) pci dev 03:0 bar 20 size 000000040: 00000c101</div><div>(XEN) ioport_map:add: dom11 gport=c100 mport=e000 nr=40</div><div>(d11) pci dev 01:1 bar 20 size 000000010: 00000c141</div><div>(d11) Multiprocessor initialisation:</div><div>(d11)&nbsp; - CPU0 ... 39-bit phys ... fixed MTRRs ... var MTRRs [1/8] ... done.</div><div>(d11)&nbsp; - CPU1 ... 39-bit phys ... fixed MTRRs ... var MTRRs [1/8] ... done.</div><div>(d11) Testing HVM environment:</div><div>(d11) Using scratch memory at 40
+ 0000</div><div>(d11)&nbsp; - REP INSB across page boundaries ... passed</div><div>(d11)&nbsp; - REP INSW
+across page boundaries ... passed</div><div>(d11)&nbsp; - GS base MSRs and SWAPGS ... passed</div><div>(d11) Passed 3 of 3 tests</div><div>(d11) Writing SMBIOS tables ...</div><div>(d11) Loading SeaBIOS ...</div><div>(d11) Creating MP tables ...</div><div>(d11) Loading ACPI ...</div><div>(d11) vm86 TSS at fc00a680</div><div>(d11) BIOS map:</div><div>(d11)&nbsp; 10000-100e3: Scratch space</div><div>(d11)&nbsp; c0000-fffff: Main BIOS</div><div>(d11) E820 table:</div><div>(d11)&nbsp; [00]: 00000000:00000000 - 00000000:000a0000: RAM</div><div>(d11)&nbsp; HOLE: 00000000:000a0000 - 00000000:000c0000</div><div>(d11)&nbsp; [01]: 00000000:000c0000 - 00000000:00100000: RESERVED</div><div>(d11)&nbsp; [02]: 00000000:00100000 - 00000000:9a000000: RAM</div><div>(d11)&nbsp; [03]: 00000000:9a000000 - 0000
+ 0000:9c800000: RESERVED</div><div>(d11)&nbsp; HOLE: 00000000:9c800000 - 00000000:fc000000</div><div>(d11)&nbsp;
+[04]: 00000000:fc000000 - 00000000:fdffc000: RESERVED</div><div>(d11)&nbsp; [05]: 00000000:fdffc000 - 00000000:fdfff000: NVS</div><div>(d11)&nbsp; [06]: 00000000:fdfff000 - 00000001:00000000: RESERVED</div><div>(d11)&nbsp; [07]: 00000001:00000000 - 00000001:66000000: RAM</div><div>(d11) Invoking SeaBIOS ...</div><div>(d11) SeaBIOS (version rel-1.12.0-0-ga698c89-Xen)</div><div>(d11) BUILD: gcc: (GCC) 8.2.1 20181215 (Red Hat 8.2.1-6) binutils: version 2.31.1-15.fc29</div><div>(d11)&nbsp;</div><div>(d11) Found Xen hypervisor signature at 40000000</div><div>(d11) Running on QEMU (i440fx)</div><div>(d11) xen: copy e820...</div><div>(d11) Relocating init from 0x000d87c0 to 0x99fac360 (size 80896)</div><div>(d11) Found 6 PCI devices (max PCI bus is 00)</div><div>(d11) Allocated Xen hypercall page
+  at 99fff000</div><div>(d11) Detected Xen v4.12.0-rc</div><div>(d11) xen: copy BIOS tables...</div><div>(d11)
+Copying SMBIOS entry point from 0x00010020 to 0x000f5be0</div><div>(d11) Copying MPTABLE from 0xfc001180/fc001190 to 0x000f5ae0</div><div>(d11) Copying PIR from 0x00010040 to 0x000f5a60</div><div>(d11) Copying ACPI RSDP from 0x000100c0 to 0x000f5a30</div><div>(d11) Using pmtimer, ioport 0xb008</div><div>(d11) WARNING - Timeout at wait_reg8:81!</div><div>(d11) Scan for VGA option rom</div><div>(XEN) memory_map:add: dom11 gfn=f2000 mfn=c0 nr=20</div><div>(XEN) memory_map:remove: dom11 gfn=f2000 mfn=c0 nr=20</div><div>(d11) Turning on vga text mode console</div><div>(d11) SeaBIOS (version rel-1.12.0-0-ga698c89-Xen)</div><div>(d11) Machine UUID 894a9246-73b7-4496-9b1b-e43839ec2621</div><div>(d11) ATA controller 1 at 1f0/3f4/c140 (irq 14 dev 9)</div><div>(d11) ATA controller 2 at 170/374/c148 (
+ irq 15 dev 9)</div><div>(d11) Found 0 lpt ports</div><div>(d11) Found 1 serial ports</div><div>(d11)
+PS2 keyboard initialized</div><div>(d11) ata0-0: QEMU HARDDISK ATA-7 Hard-Disk (20480 MiBytes)</div><div>(d11) Searching bootorder for: /pci@i0cf8/*@1,1/drive@0/disk@0</div><div>(d11) DVD/CD [ata1-0: QEMU DVD-ROM ATAPI-4 DVD/CD]</div><div>(d11) Searching bootorder for: /pci@i0cf8/*@1,1/drive@1/disk@0</div><div>(d11) All threads complete.</div><div>(d11) Scan for option roms</div><div>(d11)&nbsp;</div><div>(d11) Press ESC for boot menu.</div><div>(d11)&nbsp;</div><div>(d11) Searching bootorder for: HALT</div><div>(d11) drive 0x000f59c0: PCHS=16383/16/63 translation=lba LCHS=1024/255/63 s=41943040</div><div>(d11) Space available for UMB: c0000-eb000, f5400-f5960</div><div>(d11) Returned 258048 bytes of ZoneHigh</div><div>(d11) e820 map has 9 items:</div><div>(d11)&nbsp; &nbsp;0: 000000000000
+ 0000 - 000000000009fc00 = 1 RAM</div><div>(d11)&nbsp; &nbsp;1: 000000000009fc00 - 00000000000a0000 =
+2 RESERVED</div><div>(d11)&nbsp; &nbsp;2: 00000000000f0000 - 0000000000100000 = 2 RESERVED</div><div>(d11)&nbsp; &nbsp;3: 0000000000100000 - 0000000099fff000 = 1 RAM</div><div>(d11)&nbsp; &nbsp;4: 0000000099fff000 - 000000009c800000 = 2 RESERVED</div><div>(d11)&nbsp; &nbsp;5: 00000000fc000000 - 00000000fdffc000 = 2 RESERVED</div><div>(d11)&nbsp; &nbsp;6: 00000000fdffc000 - 00000000fdfff000 = 4 NVS</div><div>(d11)&nbsp; &nbsp;7: 00000000fdfff000 - 0000000100000000 = 2 RESERVED</div><div>(d11)&nbsp; &nbsp;8: 0000000100000000 - 0000000166000000 = 1 RAM</div><div>(d11) enter handle_19:</div><div>(d11)&nbsp; &nbsp;NULL</div><div>(d11) Booting from DVD/CD...</div><div>(d11) Booting from 0000:7c00</div><div>(XEN) irq.c:374: Dom11 PCI link 0 changed 5 -&gt; 0</div><div>(XEN) irq.c:374: Dom11 PCI l
+ ink 1 changed 10 -&gt; 0</div><div>(XEN) irq.c:374: Dom11 PCI link 2 changed 11 -&gt; 0</div><div>(XEN)
+irq.c:374: Dom11 PCI link 3 changed 5 -&gt; 0</div><div>(XEN) memory_map:remove: dom11 gfn=f1000 mfn=eb000 nr=1000</div><div>(XEN) ioport_map:remove: dom11 gport=c100 mport=e000 nr=40</div><div>(XEN) memory_map:add: dom11 gfn=f1000 mfn=eb000 nr=1000</div><div>(XEN) ioport_map:add: dom11 gport=c100 mport=e000 nr=40</div><div>(XEN) memory_map:remove: dom11 gfn=f1000 mfn=eb000 nr=1000</div><div>(XEN) ioport_map:remove: dom11 gport=c100 mport=e000 nr=40</div><div>(XEN) memory_map:add: dom11 gfn=f1000 mfn=eb000 nr=1000</div><div>(XEN) ioport_map:add: dom11 gport=c100 mport=e000 nr=40</div></div><div><br></div><div>The screen remains black.&nbsp;</div><div><br></div><div>Can anyone help with this scenario? Is it not supported to pass through the primary graphics card? Is the problem maybe that t
+ he card is still used by Dom0 somehow?</div><div>What do these "Invalid PCI ROM header signature" errors
+mean?</div></font></div><br /><br />
+<hr /><br />
+Versendet mit <a href="https://www.emailn.de/">Emailn.de</a> - Freemail
+<br /><br />
+* Unbegrenzt Speicherplatz<br />
+* Eigenes Online-Büro<br />
+* 24h besten Mailempfang<br />
+* Spamschutz, Adressbuch <br /><br /></html>
+
+
+
+
+--===============2218221585183000816==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2218221585183000816==--
