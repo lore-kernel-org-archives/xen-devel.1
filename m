@@ -1,17 +1,18 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 7/7] xen/dom0: Add a dom0-iommu=none
- option
-Date: Tue, 22 Jan 2019 01:06:16 -0700
-Message-ID: <5C46CEF8020000780020FFBF@prv1-mh.provo.novell.com>
-References: <1547629250-1405-1-git-send-email-andrew.cooper3@citrix.com>
- <1547629250-1405-8-git-send-email-andrew.cooper3@citrix.com>
- <5C4084B7020000780020EB1D@prv1-mh.provo.novell.com>
- <2d2838b7-4628-3e8c-0b78-07fc1c8eeefb@citrix.com>
+Subject: Re: [PATCH] iommu: Eliminate an odd local variable
+Date: Tue, 22 Jan 2019 01:20:41 -0700
+Message-ID: <5C46D259020000780020FFDB@prv1-mh.provo.novell.com>
+References: <1548086648-8102-1-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <2d2838b7-4628-3e8c-0b78-07fc1c8eeefb@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=3rQ9=P6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1glrIc-0007cg-LR
+ for xen-devel@lists.xenproject.org; Tue, 22 Jan 2019 08:20:46 +0000
+In-Reply-To: <1548086648-8102-1-git-send-email-andrii.anisov@gmail.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -21,39 +22,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: andrii.anisov@gmail.com
+Cc: xen-devel <xen-devel@lists.xenproject.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjAxLjE5IGF0IDE5OjA4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMTcvMDEvMjAxOSAxMzozNSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDE2
-LjAxLjE5IGF0IDEwOjAwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBA
-QCAtNzA5LDYgKzcwOSwxMiBAQCBDb250cm9scyBmb3IgdGhlIGRvbTAgSU9NTVUgc2V0dXAuCj4+
-PiAgICAgIFRoaXMgb3B0aW9uIGlzIGVuYWJsZWQgYnkgZGVmYXVsdCBvbiB4ODYgc3lzdGVtcywg
-YW5kIGludmFsaWQgb24gQVJNCj4+PiAgICAgIHN5c3RlbXMuCj4+PiAgCj4+PiArKiAgIFRoZSBg
-bm9uZWAgb3B0aW9uIGlzIGludGVuZGVkIGZvciBkZXZlbG9wbWVudCBwdXJwb3NlcyBvbmx5LCBh
-bmQgc2tpcHMKPj4+ICsgICAgY2VydGFpbiBzYWZldHkgY2hlY2tzIHBlcnRhaW5pbmcgdG8gdGhl
-IGNvcnJlY3QgSU9NTVUgY29uZmlndXJhdGlvbiBmb3IKPj4+ICsgICAgZG9tMCB0byBib290Lgo+
-PiBXb3VsZCB5b3UgbWluZCBpbnNlcnRpbmcgIlBWSCIgYWhlYWQgb2YgImRvbTAiPwo+IAo+IFRo
-YXQgd291bGQgcmVzdWx0IGluIGFuIGluYWNjdXJhdGUgZGVzY3JpcHRpb24gb2YgdGhlIGZ1bmN0
-aW9uYWxpdHkuIAo+IGNoZWNrX2h3ZG9tX3JlcXMoKSBpcyBub3Qgc3BlY2lmaWMgdG8gUFZIIGd1
-ZXN0cy4KCkhvdyBpcyB0aGUgcGFnaW5nX21vZGVfdHJhbnNsYXRlKCkgY2hlY2sgeW91ciBwYXRj
-aCBhY3R1YWxseQphbWVuZHMgbm90IG1ha2luZyB0aGlzIGZ1bmN0aW9uIGVmZmVjdGl2ZWx5IFBW
-SC1zcGVjaWZpYz8gT3IKYXJlIHlvdSBtZWFuaW5nIHRvIGltcGx5IHRoYXQgc29tZSBoeXBvdGhl
-dGljYWwgZnV0dXJlIGFkZGl0aW9uCnRvIHRoZSBjaGVja3MgYWZmZWN0aW5nIFBWIERvbTAgaXMg
-dG8gYmUgY292ZXJlZCBoZXJlIGFzIHdlbGw/Cgo+Pj4gQEAgLTE1Niw3ICsxNTksNyBAQCBpbnQg
-aW9tbXVfZG9tYWluX2luaXQoc3RydWN0IGRvbWFpbiAqZCkKPj4+ICAKPj4+ICBzdGF0aWMgdm9p
-ZCBfX2h3ZG9tX2luaXQgY2hlY2tfaHdkb21fcmVxcyhzdHJ1Y3QgZG9tYWluICpkKQo+Pj4gIHsK
-Pj4+IC0gICAgaWYgKCAhcGFnaW5nX21vZGVfdHJhbnNsYXRlKGQpICkKPj4+ICsgICAgaWYgKCBp
-b21tdV9od2RvbV9ub25lIHx8ICFwYWdpbmdfbW9kZV90cmFuc2xhdGUoZCkgKQo+Pj4gICAgICAg
-ICAgcmV0dXJuOwo+PiBTZWVpbmcgdGhlIF9faHdkb21faW5pdCwgd291bGRuJ3QgaXQgYmUgYmV0
-dGVyIHRvIHJlc3RyaWN0IHRoaXMKPj4gcmVsYXhhdGlvbiB0byBYZW4gYm9vdCB0aW1lIGNyZWF0
-ZWQgRG9tMD8KPiAKPiBObywgSSBkb24ndCB0aGluayBzby4KPiAKPiBUaGF0IHdvdWxkIGNvbXBs
-aWNhdGUgdGhlIGNoYW5nZSAod2hpY2ggaXMgYWxyZWFkeSBvbmx5IGZvciB1c2UgYnkKPiBkZXZl
-bG9wZXJzKSwgYW5kIHVubmVjZXNzYXJpbHkgcHJvaGliaXQgdGVzdGluZyBvZiB0aGUgbGF0ZSBo
-d2RvbSBwYXRocy4KCldlbGwsIEkgZG9uJ3QgZnVsbHkgYWdyZWUsIGJ1dCBva2F5IHRoZW4uIFRo
-ZXJlZm9yZSBpZiB0aGUgYW5zd2VyCnRvIHRoZSBzZWNvbmQgcXVlc3Rpb24gYWJvdmUgaXMgInll
-cyIsIHRoZW4KQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkphbgoK
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDIxLjAxLjE5IGF0IDE3OjA0LCA8YW5kcmlpLmFuaXNvdkBnbWFpbC5jb20+IHdyb3Rl
+Ogo+IFdpcGUgb3V0IGV4Y2Vzc2l2ZSBsaW5lcyBmcm9tIGFuIGlvbW11X3VubWFwKCksIGFuZCBh
+bGlnbiBpdCB3aXRoIGFuCj4gaW9tbXVfbWFwKCkgY29kZS4KCldoYXQncyBleGNlc3NpdmUgdGhl
+cmU/IEhvdyBjb21lIHlvdSBhbHRlciB0aGUgZnVuY3Rpb24ncwpyZXR1cm4gdmFsdWUgd2l0aG91
+dCBzYXlpbmcgd2h5PyBUaGUgbW9yZSB0aGF0IHlvdSBtYWtlCml0IHBvdGVudGlhbGx5IHJldHVy
+biBzdWNjZXNzIHdoZW4gdGhlcmUgd2FzIGFuIGVycm9yLgoKSmFuCgoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
