@@ -1,20 +1,23 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH for-4.12 5/8] xen/arm: p2m: Only use isb()
- when it is necessary
-Date: Wed, 23 Jan 2019 15:42:46 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1901231533060.17936@sstabellini-ThinkPad-X260>
-References: <20181128164939.8329-1-julien.grall@arm.com>
- <20181128164939.8329-6-julien.grall@arm.com>
+Subject: Re: [RFC] virtio_ring: check dma_mem for xen_domain
+Date: Wed, 23 Jan 2019 15:43:45 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1901231427010.17936__11879.4635914796$1548287079$gmane$org@sstabellini-ThinkPad-X260>
+References: <20190121050056.14325-1-peng.fan@nxp.com>
+ <alpine.DEB.2.10.1901221113410.17936@sstabellini-ThinkPad-X260>
+ <20190123071232.GA20526@infradead.org>
+ <alpine.DEB.2.10.1901230935280.17936@sstabellini-ThinkPad-X260>
+ <20190123211405.GA4971@infradead.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1172143826-1548282487=:17936"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=3kqX=P7=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gmSAS-0000oD-Rw
- for xen-devel@lists.xenproject.org; Wed, 23 Jan 2019 23:42:48 +0000
-In-Reply-To: <20181128164939.8329-6-julien.grall@arm.com>
+ id 1gmSBP-0000sR-Vt
+ for xen-devel@lists.xenproject.org; Wed, 23 Jan 2019 23:43:48 +0000
+In-Reply-To: <20190123211405.GA4971@infradead.org>
+Content-ID: <alpine.DEB.2.10.1901231428550.17936@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,59 +26,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, andre.przywara@arm.com
+To: "hch@infradead.org" <hch@infradead.org>
+Cc: jgross@suse.com, Peng Fan <peng.fan@nxp.com>, Stefano Stabellini <sstabellini@kernel.org>, "mst@redhat.com" <mst@redhat.com>, "jasowang@redhat.com" <jasowang@redhat.com>, "linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "virtualization@lists.linux-foundation.org" <virtualization@lists.linux-foundation.org>, jliang@xilinx.com, luto@kernel.org, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, boris.ostrovsky@oracle.com, bjorn.andersson@linaro.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCAyOCBOb3YgMjAxOCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZSBFTDEgdHJhbnNs
-YXRpb24gcmVnaW1lIGlzIG91dC1vZi1jb250ZXh0IHdoZW4gcnVubmluZyBhdCBFTDIuIFRoaXMK
-PiBtZWFucyB0aGUgcHJvY2Vzc29yIGNhbm5vdCBzcGVjdWxhdGUgbWVtb3J5IGFjY2Vzc2VzIHVz
-aW5nIHRoZSByZWdpc3RlcnMKPiBhc3NvY2lhdGVkIHRvIHRoYXQgcmVnaW1lLgo+IAo+IEFuIGlz
-YigpIGlzIG9ubHkgbmVlZCBpZiBYZW4gaXMgZ29pbmcgdG8gdXNlIHRoZSB0cmFuc2xhdGlvbiBy
-ZWdpbWUKICAgICAgICAgICAgICAgICAgIF4gbmVlZGVkCgoKPiBiZWZvcmUgcmV0dXJuaW5nIHRv
-IHRoZSBndWVzdCAoZXhjZXB0aW9uIHJldHVybnMgd2lsbCBzeW5jaHJvbml6ZWQgdGhlCiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXiBzeW5j
-aHJvbml6ZQoKPiBjb250ZXh0KS4KPiAKPiBSZW1vdmUgdW5lY2Vzc2FyeSBpc2IoKSBhbmQgZG9j
-dW1lbnQgdGhlIG9uZXMgbGVmdC4KICAgICAgICAgXiB1bm5lY2Vzc2FyeQoKCgo+IFNpZ25lZC1v
-ZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4gLS0tCj4gIHhlbi9h
-cmNoL2FybS9wMm0uYyB8IDE5ICsrKysrKysrKysrKystLS0tLS0KPiAgMSBmaWxlIGNoYW5nZWQs
-IDEzIGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9h
-cmNoL2FybS9wMm0uYyBiL3hlbi9hcmNoL2FybS9wMm0uYwo+IGluZGV4IGU4YmFjYWI5ZDIuLjg0
-NDgzM2M0YzMgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gvYXJtL3AybS5jCj4gKysrIGIveGVuL2Fy
-Y2gvYXJtL3AybS5jCj4gQEAgLTExMiwyMiArMTEyLDI4IEBAIHZvaWQgcDJtX3Jlc3RvcmVfc3Rh
-dGUoc3RydWN0IHZjcHUgKm4pCj4gICAgICAgICAgcmV0dXJuOwo+ICAKPiAgICAgIFdSSVRFX1NZ
-U1JFRzY0KHAybS0+dnR0YnIsIFZUVEJSX0VMMik7Cj4gLSAgICBpc2IoKTsKPiAtCj4gICAgICBX
-UklURV9TWVNSRUcobi0+YXJjaC5zY3RsciwgU0NUTFJfRUwxKTsKPiAtICAgIGlzYigpOwo+IC0K
-PiAgICAgIFdSSVRFX1NZU1JFRyhuLT5hcmNoLmhjcl9lbDIsIEhDUl9FTDIpOwo+IC0gICAgaXNi
-KCk7Cj4gIAo+ICAgICAgbGFzdF92Y3B1X3JhbiA9ICZwMm0tPmxhc3RfdmNwdV9yYW5bc21wX3By
-b2Nlc3Nvcl9pZCgpXTsKPiAgCj4gICAgICAvKgo+ICsgICAgICogV2hpbGUgd2UgYXJlIHJlc3Rv
-cmluZyBhbiBvdXQtb2YtY29udGV4dCB0cmFuc2xhdGlvbiByZWdpbWUKPiArICAgICAqIHdlIHN0
-aWxsIG5lZWQgdG8gZW5zdXJlOgo+ICsgICAgICogIC0gVlRUQlJfRUwyIGlzIHN5bmNocm9uaXpl
-ZCBiZWZvcmUgZmx1c2hpbmcgdGhlIFRMQnMKPiArICAgICAqICAtIEFsbCByZWdpc3RlcnMgZm9y
-IEVMMSBhcmUgc3luY2hyb25pemVkIGJlZm9yZSBleGVjdXRpbmcgYW4gQVQKPiArICAgICAqICBp
-bnN0cnVjdGlvbnMgdGFyZ2V0aW5nIFMxL1MyLgo+ICsgICAgICovCj4gKyAgICBpc2IoKTsKClRo
-aXMgZXhwbGFuYXRpb24gbWFrZXMgc2Vuc2UgdG8gbWUKCgo+ICsgICAgLyoKPiAgICAgICAqIEZs
-dXNoIGxvY2FsIFRMQiBmb3IgdGhlIGRvbWFpbiB0byBwcmV2ZW50IHdyb25nIFRMQiB0cmFuc2xh
-dGlvbgo+ICAgICAgICogd2hlbiBydW5uaW5nIG11bHRpcGxlIHZDUFUgb2YgdGhlIHNhbWUgZG9t
-YWluIG9uIGEgc2luZ2xlIHBDUFUuCj4gICAgICAgKi8KPiAgICAgIGlmICggKmxhc3RfdmNwdV9y
-YW4gIT0gSU5WQUxJRF9WQ1BVX0lEICYmICpsYXN0X3ZjcHVfcmFuICE9IG4tPnZjcHVfaWQgKQo+
-ICsgICAgewo+ICAgICAgICAgIGZsdXNoX3RsYl9sb2NhbCgpOwo+ICsgICAgfQoKU3B1cmlvdXMg
-Y2hhbmdlPwoKCj4gICAgICAqbGFzdF92Y3B1X3JhbiA9IG4tPnZjcHVfaWQ7Cj4gIH0KPiBAQCAt
-MTUzLDYgKzE1OSw3IEBAIHN0YXRpYyB2b2lkIHAybV9mb3JjZV90bGJfZmx1c2hfc3luYyhzdHJ1
-Y3QgcDJtX2RvbWFpbiAqcDJtKQo+ICAgICAgewo+ICAgICAgICAgIGxvY2FsX2lycV9zYXZlKGZs
-YWdzKTsKPiAgICAgICAgICBXUklURV9TWVNSRUc2NChwMm0tPnZ0dGJyLCBWVFRCUl9FTDIpOwo+
-ICsgICAgICAgIC8qIEVuc3VyZSBWVFRCUl9FTDIgaXMgc3luY2hyb25pemVkIGJlZm9yZSBmbHVz
-aGluZyB0aGUgVExCcyAqLwo+ICAgICAgICAgIGlzYigpOwo+ICAgICAgfQo+ICAKPiBAQCAtMTYx
-LDYgKzE2OCw3IEBAIHN0YXRpYyB2b2lkIHAybV9mb3JjZV90bGJfZmx1c2hfc3luYyhzdHJ1Y3Qg
-cDJtX2RvbWFpbiAqcDJtKQo+ICAgICAgaWYgKCBvdnR0YnIgIT0gUkVBRF9TWVNSRUc2NChWVFRC
-Ul9FTDIpICkKPiAgICAgIHsKPiAgICAgICAgICBXUklURV9TWVNSRUc2NChvdnR0YnIsIFZUVEJS
-X0VMMik7Cj4gKyAgICAgICAgLyogRW5zdXJlIFZUVEJSX0VMMiBpcyBiYWNrIGluIHBsYWNlIGJl
-Zm9yZSBjb250aW51aW5nLiAqLwo+ICAgICAgICAgIGlzYigpOwo+ICAgICAgICAgIGxvY2FsX2ly
-cV9yZXN0b3JlKGZsYWdzKTsKPiAgICAgIH0KPiBAQCAtMTQ5Niw3ICsxNTA0LDYgQEAgc3RhdGlj
-IHVpbnQzMl90IF9fcmVhZF9tb3N0bHkgdnRjcjsKPiAgc3RhdGljIHZvaWQgc2V0dXBfdmlydF9w
-YWdpbmdfb25lKHZvaWQgKmRhdGEpCj4gIHsKPiAgICAgIFdSSVRFX1NZU1JFRzMyKHZ0Y3IsIFZU
-Q1JfRUwyKTsKPiAtICAgIGlzYigpOwo+ICB9Cj4gIAo+ICB2b2lkIF9faW5pdCBzZXR1cF92aXJ0
-X3BhZ2luZyh2b2lkKQo+IC0tIAo+IDIuMTEuMAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1172143826-1548282487=:17936
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1901231428551.17936@sstabellini-ThinkPad-X260>
+
+On Wed, 23 Jan 2019, hch@infradead.org wrote:
+> On Wed, Jan 23, 2019 at 01:04:33PM -0800, Stefano Stabellini wrote:
+> > If vring_use_dma_api is actually supposed to return true when
+> > dma_dev->dma_mem is set, then both Peng's patch and the patch I wrote
+> > are not fixing the real issue here.
+> > 
+> > I don't know enough about remoteproc to know where the problem actually
+> > lies though.
+> 
+> The problem is the following:
+> 
+> Devices can declare a specific memory region that they want to use when
+> the driver calls dma_alloc_coherent for the device, this is done using
+> the shared-dma-pool DT attribute, which comes in two variants that
+> would be a little to much to explain here.
+> 
+> remoteproc makes use of that because apparently the device can
+> only communicate using that region.  But it then feeds back memory
+> obtained with dma_alloc_coherent into the virtio code.  For that
+> it calls vmalloc_to_page on the dma_alloc_coherent, which is a huge
+> no-go for the ĐMA API and only worked accidentally on a few platform,
+> and apparently arm64 just changed a few internals that made it stop
+> working for remoteproc.
+> 
+> The right answer is to not use the DMA API to allocate memory from
+> a device-speficic region, but to tie the driver directly into the
+> DT reserved memory API in a way that allows it to easilt obtain
+> a struct device for it.
+
+If I understand correctly, Peng should be able to reproduce the problem
+on native Linux without any Xen involvement simply by forcing
+vring_use_dma_api to return true. Peng, can you confirm?
+
+And the right fix is not to call vmalloc_to_page on a dma_alloc_coherent
+buffer -- I don't know about the recent changes on arm64, but that's not
+going to work with arm32 either AFAIK. Given that I don't have a repro,
+I'll leave it to Peng and/or others to send the appropriate patch for
+remoteproc.
+
+
+> This is orthogonal to another issue, and that is that hardware
+> virtio devices really always need to use the DMA API, otherwise
+> we'll bypass such features as the device specific DMA pools,
+> DMA offsets, cache flushing, etc, etc.
+
+I understand, I'll drop my patch.
+--8323329-1172143826-1548282487=:17936
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1172143826-1548282487=:17936--
