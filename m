@@ -1,17 +1,14 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 1/3] x86/pvh-dom0: Remove unnecessary
- function pointer call from modify_identity_mmio()
-Date: Wed, 23 Jan 2019 04:22:06 -0700
-Message-ID: <5C484E5E0200007800210528@prv1-mh.provo.novell.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH for-4.12 0/3] x86/pvh: Misc fixes and cleanup
+Date: Wed, 23 Jan 2019 12:27:44 +0100
+Message-ID: <8a444dd1-bb38-9488-3139-4948cd0529b2@suse.com>
 References: <1548085041-23786-1-git-send-email-andrew.cooper3@citrix.com>
- <1548085041-23786-2-git-send-email-andrew.cooper3@citrix.com>
- <20190121155233.h32aari3tvmzziy7@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20190121155233.h32aari3tvmzziy7@zion.uk.xensource.com>
-Content-Disposition: inline
+In-Reply-To: <1548085041-23786-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,19 +17,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjAxLjE5IGF0IDE2OjUyLCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
-T24gTW9uLCBKYW4gMjEsIDIwMTkgYXQgMDM6Mzc6MTlQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPj4gRnVuY3Rpb24gcG9pbnRlciBjYWxscyBhcmUgZmFyIG1vcmUgZXhwZW5zaXZlIGlu
-IGEgcG9zdC1TcGVjdHJlIHdvcmxkLCBhbmQKPj4gdGhpcyBvbmUgZG9lc24ndCBuZWVkIHRvIGJl
-Lgo+PiAKPj4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCj4+IAo+PiBTaWduZWQtb2ZmLWJ5OiBBbmRy
-ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+IAo+IFJldmlld2VkLWJ5OiBX
-ZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KCkFyZ3VhYmx5IGEgY29tcGlsZXIgY291bGQgYmUgaW50ZWxsaWdlbnQg
-ZW5vdWdoIHRvIHVzZSBkaXJlY3QgY2FsbHMKZGVzcGl0ZSB0aGUgPzogY29uc3RydWN0LCB0aG91
-Z2guCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMjEvMDEvMjAxOSAxNjozNywgQW5kcmV3IENvb3BlciB3cm90ZToKPiBUaGVzZSBhcmUgYWxs
+IG1pbm9yIGZpeGVzIGZyb20gc29tZSByZWNlbnQgUFZIIHdvcmsuICBUaGV5IGFyZSBhbGwgbGlt
+aXRlZCB0bwo+IHRoZSBib290IHBhdGgsIGFuZCBsb3ctcmlzayBuaWNlLXRvLWhhdmUncyBmb3Ig
+NC4xMi4KPiAKPiBBbmRyZXcgQ29vcGVyICgzKToKPiAgIHg4Ni9wdmgtZG9tMDogUmVtb3ZlIHVu
+bmVjZXNzYXJ5IGZ1bmN0aW9uIHBvaW50ZXIgY2FsbCBmcm9tIG1vZGlmeV9pZGVudGl0eV9tbWlv
+KCkKPiAgIHg4Ni9wdmg6IEZpeGVzIHRvIGNvbnZlcnRfcHZoX2luZm8oKQo+ICAgeDg2L3B2aDog
+UHJpbnQgdGhlIFBWSCBzdGFydCBpbmZvIG1vcmUgY29uY2lzZWx5Cj4gCj4gIHhlbi9hcmNoL3g4
+Ni9ndWVzdC9wdmgtYm9vdC5jIHwgNDggKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLS0t
+LS0tLS0tLS0tLQo+ICB4ZW4vYXJjaC94ODYvaHZtL2RvbTBfYnVpbGQuYyB8ICA0ICsrLS0KPiAg
+MiBmaWxlcyBjaGFuZ2VkLCAzMCBpbnNlcnRpb25zKCspLCAyMiBkZWxldGlvbnMoLSkKPiAKCkZv
+ciB0aGUgc2VyaWVzOgoKUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
+c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
