@@ -1,32 +1,20 @@
-From: Kees Cook <keescook@chromium.org>
-Subject: Re: [Intel-gfx] [PATCH 1/3] treewide: Lift switch
+From: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Subject: Re: [Intel-wired-lan] [PATCH 1/3] treewide: Lift switch
  variables out of switches
-Date: Thu, 24 Jan 2019 07:55:51 +1300
-Message-ID: <CAGXu5jJUxHtFq0rBJ9FwzMcZDWnusPUauC_=MaOz7H0_PF25jQ__7447.78808891482$1548269833$gmane$org@mail.gmail.com>
+Date: Wed, 23 Jan 2019 08:51:38 -0800
+Message-ID: <7d8a6120ea335d74c41a5fba3754518ea60e936e.camel__15694.4410804257$1548270672$gmane$org@intel.com>
 References: <20190123110349.35882-1-keescook@chromium.org>
  <20190123110349.35882-2-keescook@chromium.org>
- <20190123115829.GA31385@kroah.com> <874l9z31c5.fsf@intel.com>
- <000001d4b32a$845e06e0$8d1a14a0$@211mainstreet.net> <87va2f1int.fsf@intel.com>
+Reply-To: jeffrey.t.kirsher@intel.com
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4140681827188902563=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=a/mT=P7=chromium.org=keescook@srs-us1.protection.inumbo.net>)
- id 1gmNh3-0000yp-PF
- for xen-devel@lists.xenproject.org; Wed, 23 Jan 2019 18:56:09 +0000
-Received: by mail-vk1-xa43.google.com with SMTP id o130so730664vke.10
- for <xen-devel@lists.xenproject.org>; Wed, 23 Jan 2019 10:56:07 -0800 (PST)
-Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com.
- [209.85.222.43])
- by smtp.gmail.com with ESMTPSA id j95sm26974399uad.6.2019.01.23.10.56.05
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 23 Jan 2019 10:56:05 -0800 (PST)
-Received: by mail-ua1-f43.google.com with SMTP id t8so1103539uap.0
- for <xen-devel@lists.xenproject.org>; Wed, 23 Jan 2019 10:56:05 -0800 (PST)
-In-Reply-To: <87va2f1int.fsf@intel.com>
+ <SRS0=i3t/=P7=intel.com=jeffrey.t.kirsher@srs-us1.protection.inumbo.net>)
+ id 1gmLja-0006bh-Bv
+ for xen-devel@lists.xenproject.org; Wed, 23 Jan 2019 16:50:38 +0000
+In-Reply-To: <20190123110349.35882-2-keescook@chromium.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -35,48 +23,95 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: dev@openvswitch.org, xen-devel <xen-devel@lists.xenproject.org>, Ard Biesheuvel <ard.biesheuvel@linaro.org>, Edwin Zimmerman <edwin@211mainstreet.net>, intel-gfx@lists.freedesktop.org, linux-usb@vger.kernel.org, Greg KH <gregkh@linuxfoundation.org>, Maling list - DRI developers <dri-devel@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>, Linux-MM <linux-mm@kvack.org>, linux-security-module <linux-security-module@vger.kernel.org>, intel-wired-lan@lists.osuosl.org, Network Development <netdev@vger.kernel.org>, Kernel Hardening <kernel-hardening@lists.openwall.com>, "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, Laura Abbott <labbott@redhat.com>, linux-kbuild <linux-kbuild@vger.kernel.org>, Alexander Popov <alex.popov@linux.com>
+To: Kees Cook <keescook@chromium.org>, linux-kernel@vger.kernel.org
+Cc: dev@openvswitch.org, Ard Biesheuvel <ard.biesheuvel@linaro.org>, netdev@vger.kernel.org, intel-gfx@lists.freedesktop.org, linux-usb@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, intel-wired-lan@lists.osuosl.org, xen-devel@lists.xenproject.org, kernel-hardening@lists.openwall.com, linux-fsdevel@vger.kernel.org, Laura Abbott <labbott@redhat.com>, linux-kbuild@vger.kernel.org, Alexander Popov <alex.popov@linux.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKYW4gMjQsIDIwMTkgYXQgNDo0NCBBTSBKYW5pIE5pa3VsYSA8amFuaS5uaWt1bGFA
-bGludXguaW50ZWwuY29tPiB3cm90ZToKPgo+IE9uIFdlZCwgMjMgSmFuIDIwMTksIEVkd2luIFpp
-bW1lcm1hbiA8ZWR3aW5AMjExbWFpbnN0cmVldC5uZXQ+IHdyb3RlOgo+ID4gT24gV2VkLCAyMyBK
-YW4gMjAxOSwgSmFuaSBOaWt1bGEgPGphbmkubmlrdWxhQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6
-Cj4gPj4gT24gV2VkLCAyMyBKYW4gMjAxOSwgR3JlZyBLSCA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlv
-bi5vcmc+IHdyb3RlOgo+ID4+ID4gT24gV2VkLCBKYW4gMjMsIDIwMTkgYXQgMDM6MDM6NDdBTSAt
-MDgwMCwgS2VlcyBDb29rIHdyb3RlOgo+ID4+ID4+IFZhcmlhYmxlcyBkZWNsYXJlZCBpbiBhIHN3
-aXRjaCBzdGF0ZW1lbnQgYmVmb3JlIGFueSBjYXNlIHN0YXRlbWVudHMKPiA+PiA+PiBjYW5ub3Qg
-YmUgaW5pdGlhbGl6ZWQsIHNvIG1vdmUgYWxsIGluc3RhbmNlcyBvdXQgb2YgdGhlIHN3aXRjaGVz
-Lgo+ID4+ID4+IEFmdGVyIHRoaXMsIGZ1dHVyZSBhbHdheXMtaW5pdGlhbGl6ZWQgc3RhY2sgdmFy
-aWFibGVzIHdpbGwgd29yawo+ID4+ID4+IGFuZCBub3QgdGhyb3cgd2FybmluZ3MgbGlrZSB0aGlz
-Ogo+ID4+ID4+Cj4gPj4gPj4gZnMvZmNudGwuYzogSW4gZnVuY3Rpb24g4oCYc2VuZF9zaWdpb190
-b190YXNr4oCZOgo+ID4+ID4+IGZzL2ZjbnRsLmM6NzM4OjEzOiB3YXJuaW5nOiBzdGF0ZW1lbnQg
-d2lsbCBuZXZlciBiZSBleGVjdXRlZCBbLVdzd2l0Y2gtdW5yZWFjaGFibGVdCj4gPj4gPj4gICAg
-c2lnaW5mb190IHNpOwo+ID4+ID4+ICAgICAgICAgICAgICBefgo+ID4+ID4KPiA+PiA+IFRoYXQn
-cyBhIHBhaW4sIHNvIHRoaXMgbWVhbnMgd2UgY2FuJ3QgaGF2ZSBhbnkgbmV3IHZhcmlhYmxlcyBp
-biB7IH0KPiA+PiA+IHNjb3BlIGV4Y2VwdCBmb3IgYXQgdGhlIHRvcCBvZiBhIGZ1bmN0aW9uPwoK
-SnVzdCBpbiBjYXNlIHRoaXMgd2Fzbid0IGNsZWFyOiBubywgaXQncyBqdXN0IHRoZSBzd2l0Y2gg
-c3RhdGVtZW50CmJlZm9yZSB0aGUgZmlyc3QgImNhc2UiLiBJIGNhbm5vdCBpbWFnaW5lIGhvdyBi
-YWQgaXQgd291bGQgYmUgaWYgd2UKY291bGRuJ3QgaGF2ZSBibG9jay1zY29wZWQgdmFyaWFibGVz
-ISBIZWguIDopCgo+ID4+ID4KPiA+PiA+IFRoYXQncyBnb2luZyB0byBiZSBhIGhhcmQgdGhpbmcg
-dG8ga2VlcCBmcm9tIGhhcHBlbmluZyBvdmVyIHRpbWUsIGFzCj4gPj4gPiB0aGlzIGlzIHZhbGlk
-IEMgOigKPiA+Pgo+ID4+IE5vdCBhbGwgdmFsaWQgQyBpcyBtZWFudCB0byBiZSB1c2VkISA7KQo+
-ID4KPiA+IFZlcnkgdHJ1ZS4gIFRoZSBvdGhlciB0aGluZyB0byBrZWVwIGluIG1pbmQgaXMgdGhl
-IGJ1cmRlbiBvZiBlbmZvcmNpbmcKPiA+IGEgcHJvaGliaXRpb24gb24gYSB2YWxpZCBDIGNvbnN0
-cnVjdCBsaWtlIHRoaXMuICBJdCBzZWVtcyB0byBtZSB0aGF0Cj4gPiBwYXRjaCByZXZpZXdlcnMg
-YW5kIG1haW50YWluZXJzIGhhdmUgZW5vdWdoIHRvIGRvIHdpdGhvdXQgZm9yY2luZyB0aGVtCj4g
-PiB0byB3YXRjaCBmb3IgdmFyaWFibGUgZGVjbGFyYXRpb25zIGluIHN3aXRjaCBzdGF0ZW1lbnRz
-LiAgQXV0b21hdGluZwo+ID4gdGhpcyBwcm9oaWJpdGlvbiwgc2hvdWxkIGl0IGJlIGFjY2VwdGVk
-LCBzZWVtcyBsaWtlIGEgZ29vZCBpZGVhIHRvIG1lLgo+Cj4gQ29uc2lkZXJpbmcgdGhhdCB0aGUg
-dHJlZXdpZGUgZGlmZnN0YXQgdG8gZml4IHRoaXMgaXM6Cj4KPiAgMTggZmlsZXMgY2hhbmdlZCwg
-NDUgaW5zZXJ0aW9ucygrKSwgNDYgZGVsZXRpb25zKC0pCj4KPiBhbmQgdXNpbmcgdGhlIGdjYyBw
-bHVnaW4gaW4gcXVlc3Rpb24gd2lsbCB0cmlnZ2VyIHRoZSBzd2l0Y2gtdW5yZWFjaGFibGUKPiB3
-YXJuaW5nLCBJIHRoaW5rIHdlJ3JlIGdvb2QuIFRoZXJlJ2xsIHByb2JhYmx5IGJlIHRoZSBvY2Nh
-c2lvbmFsCj4gZGVjbGFyYXRpb25zIHRoYXQgcGFzcyB0aHJvdWdoLCBhbmQgd2lsbCBnZXQgZml4
-ZWQgYWZ0ZXJ3YXJkcy4KClllYWgsIHRoYXQgd2FzIG15IHRoaW5raW5nIGFzIHdlbGw6IGl0J3Mg
-YSByYXJlIHVzZSwgYW5kIHdlIGdldCBhCndhcm5pbmcgd2hlbiBpdCBjb21lcyB1cC4KClRoYW5r
-cyEKCi0tIApLZWVzIENvb2sKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+
+--===============4140681827188902563==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-ckUn9AFZsnGNoWsnxDog"
+
+
+--=-ckUn9AFZsnGNoWsnxDog
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2019-01-23 at 03:03 -0800, Kees Cook wrote:
+> Variables declared in a switch statement before any case statements
+> cannot be initialized, so move all instances out of the switches.
+> After this, future always-initialized stack variables will work
+> and not throw warnings like this:
+>=20
+> fs/fcntl.c: In function =E2=80=98send_sigio_to_task=E2=80=99:
+> fs/fcntl.c:738:13: warning: statement will never be executed [-
+> Wswitch-unreachable]
+>    siginfo_t si;
+>              ^~
+>=20
+> Signed-off-by: Kees Cook <keescook@chromium.org>
+
+Acked-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+
+For the e1000 changes.
+
+> ---
+>  arch/x86/xen/enlighten_pv.c                   |  7 ++++---
+>  drivers/char/pcmcia/cm4000_cs.c               |  2 +-
+>  drivers/char/ppdev.c                          | 20 ++++++++---------
+> --
+>  drivers/gpu/drm/drm_edid.c                    |  4 ++--
+>  drivers/gpu/drm/i915/intel_display.c          |  2 +-
+>  drivers/gpu/drm/i915/intel_pm.c               |  4 ++--
+>  drivers/net/ethernet/intel/e1000/e1000_main.c |  3 ++-
+>  drivers/tty/n_tty.c                           |  3 +--
+>  drivers/usb/gadget/udc/net2280.c              |  5 ++---
+>  fs/fcntl.c                                    |  3 ++-
+>  mm/shmem.c                                    |  5 +++--
+>  net/core/skbuff.c                             |  4 ++--
+>  net/ipv6/ip6_gre.c                            |  4 ++--
+>  net/ipv6/ip6_tunnel.c                         |  4 ++--
+>  net/openvswitch/flow_netlink.c                |  7 +++----
+>  security/tomoyo/common.c                      |  3 ++-
+>  security/tomoyo/condition.c                   |  7 ++++---
+>  security/tomoyo/util.c                        |  4 ++--
+>  18 files changed, 45 insertions(+), 46 deletions(-)
+
+
+--=-ckUn9AFZsnGNoWsnxDog
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiTyZWz+nnTrOJ1LZ5W/vlVpL7c4FAlxIm5oACgkQ5W/vlVpL
+7c6nHA/+I5AUD+yELZtkueGqZrZ0E/i+TX7+2pxKNRieTprDcNtILryQEfP4XrvX
+r7X4QwfM9Rfmrlr1WcZrQW2LVn+uuflivdbtCmE0ZX4iBnIhAoeguyZ6+hInlbDY
+oN+TzAFm96uYB70bOnyqutGVBKfMkazDXiVtqzbu+7HAMWFnQFFzKX6/o+eL0/Np
+1qBQP1okUj2dM/ujfQKLxWQu8IupAI5nDeucqFsscZO1Yh/g9IjOyClDUGSXAyBO
+Xr67/lCCAt1/Z0GkqN+HElzbtjokp0xitLFF9MyOkmrHiHKcvD62I4OJ97OXlFuF
+YXvwIg6/9NfVhGgh/k8z6xAAB9JDIZ0rb5yezcdu1FqSYVrAyzI4tmD+l3fS7zyr
+AnHaQ4tTzsmj0T70bz1wooR2oOnyA2MhVhGUfPXNER24TaApApki5eqydsVPpsMk
+3gukrduJogzBL2AVMTp780UAj2WnHYsJhso62fYOPT0huDhAsIWaqcuVi5Fs0o94
+b9t84vtQG5NHFEBmaaaVdFhB9+Tw3sOHh+nglVzHm3UZNHcFi+lEgxjtV6cTcm0C
+1oIX6J17KkZPxkOf0ENU8Cj/gnvNRF/ZhkDPe0r1bMYnL8w0WxB/rCSPQfWD/F5r
+bdTuBQbV5MKBc4evjKtB1mFUYD9WrOMIbPjMo9pkJ0XQuttdthc=
+=MB+1
+-----END PGP SIGNATURE-----
+
+--=-ckUn9AFZsnGNoWsnxDog--
+
+
+
+--===============4140681827188902563==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4140681827188902563==--
