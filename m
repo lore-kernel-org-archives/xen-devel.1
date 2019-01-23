@@ -1,22 +1,20 @@
-From: Jani Nikula <jani.nikula@linux.intel.com>
-Subject: Re: [Intel-gfx] [PATCH 1/3] treewide: Lift switch
- variables out of switches
-Date: Wed, 23 Jan 2019 16:23:39 +0200
-Message-ID: <871s53311w.fsf__22430.6620120601$1548253392$gmane$org@intel.com>
-References: <20190123110349.35882-1-keescook@chromium.org>
- <20190123110349.35882-2-keescook@chromium.org>
- <20190123115829.GA31385@kroah.com> <874l9z31c5.fsf@intel.com>
-Mime-Version: 1.0
+From: William Kucharski <william.kucharski@oracle.com>
+Subject: Re: [PATCH 1/2] x86: respect memory size limiting via
+ mem= parameter
+Date: Wed, 23 Jan 2019 07:35:28 -0700
+Message-ID: <69D0866F-77A7-4529-A01E-12395106E22D__19383.3441169531$1548254222$gmane$org@oracle.com>
+References: <20190122080628.7238-1-jgross@suse.com>
+ <20190122080628.7238-2-jgross@suse.com>
+Mime-Version: 1.0 (Mac OS X Mail 12.2 \(3445.102.3\))
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Jywi=P7=intel.com=jani.nikula@srs-us1.protection.inumbo.net>)
- id 1gmJPn-0001BK-ES
- for xen-devel@lists.xenproject.org; Wed, 23 Jan 2019 14:22:03 +0000
-In-Reply-To: <874l9z31c5.fsf@intel.com>
+ <SRS0=IlMb=P7=oracle.com=william.kucharski@srs-us1.protection.inumbo.net>)
+ id 1gmJdG-0002AV-MU
+ for xen-devel@lists.xenproject.org; Wed, 23 Jan 2019 14:35:58 +0000
+In-Reply-To: <20190122080628.7238-2-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,42 +23,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Greg KH <gregkh@linuxfoundation.org>, Kees Cook <keescook@chromium.org>
-Cc: dev@openvswitch.org, Ard Biesheuvel <ard.biesheuvel@linaro.org>, netdev@vger.kernel.org, intel-gfx@lists.freedesktop.org, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, linux-security-module@vger.kernel.org, intel-wired-lan@lists.osuosl.org, xen-devel@lists.xenproject.org, kernel-hardening@lists.openwall.com, linux-fsdevel@vger.kernel.org, Laura Abbott <labbott@redhat.com>, linux-kbuild@vger.kernel.org, Alexander Popov <alex.popov@linux.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: sstabellini@kernel.org, "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>, kernel list <linux-kernel@vger.kernel.org>, Linux-MM <linux-mm@kvack.org>, mingo@redhat.com, bp@alien8.de, hpa@zytor.com, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCAyMyBKYW4gMjAxOSwgSmFuaSBOaWt1bGEgPGphbmkubmlrdWxhQGxpbnV4LmludGVs
-LmNvbT4gd3JvdGU6Cj4gT24gV2VkLCAyMyBKYW4gMjAxOSwgR3JlZyBLSCA8Z3JlZ2toQGxpbnV4
-Zm91bmRhdGlvbi5vcmc+IHdyb3RlOgo+PiBPbiBXZWQsIEphbiAyMywgMjAxOSBhdCAwMzowMzo0
-N0FNIC0wODAwLCBLZWVzIENvb2sgd3JvdGU6Cj4+PiBWYXJpYWJsZXMgZGVjbGFyZWQgaW4gYSBz
-d2l0Y2ggc3RhdGVtZW50IGJlZm9yZSBhbnkgY2FzZSBzdGF0ZW1lbnRzCj4+PiBjYW5ub3QgYmUg
-aW5pdGlhbGl6ZWQsIHNvIG1vdmUgYWxsIGluc3RhbmNlcyBvdXQgb2YgdGhlIHN3aXRjaGVzLgo+
-Pj4gQWZ0ZXIgdGhpcywgZnV0dXJlIGFsd2F5cy1pbml0aWFsaXplZCBzdGFjayB2YXJpYWJsZXMg
-d2lsbCB3b3JrCj4+PiBhbmQgbm90IHRocm93IHdhcm5pbmdzIGxpa2UgdGhpczoKPj4+IAo+Pj4g
-ZnMvZmNudGwuYzogSW4gZnVuY3Rpb24g4oCYc2VuZF9zaWdpb190b190YXNr4oCZOgo+Pj4gZnMv
-ZmNudGwuYzo3Mzg6MTM6IHdhcm5pbmc6IHN0YXRlbWVudCB3aWxsIG5ldmVyIGJlIGV4ZWN1dGVk
-IFstV3N3aXRjaC11bnJlYWNoYWJsZV0KPj4+ICAgIHNpZ2luZm9fdCBzaTsKPj4+ICAgICAgICAg
-ICAgICBefgo+Pgo+PiBUaGF0J3MgYSBwYWluLCBzbyB0aGlzIG1lYW5zIHdlIGNhbid0IGhhdmUg
-YW55IG5ldyB2YXJpYWJsZXMgaW4geyB9Cj4+IHNjb3BlIGV4Y2VwdCBmb3IgYXQgdGhlIHRvcCBv
-ZiBhIGZ1bmN0aW9uPwo+Pgo+PiBUaGF0J3MgZ29pbmcgdG8gYmUgYSBoYXJkIHRoaW5nIHRvIGtl
-ZXAgZnJvbSBoYXBwZW5pbmcgb3ZlciB0aW1lLCBhcwo+PiB0aGlzIGlzIHZhbGlkIEMgOigKPgo+
-IE5vdCBhbGwgdmFsaWQgQyBpcyBtZWFudCB0byBiZSB1c2VkISA7KQo+Cj4gQW55d2F5LCBJIHRo
-aW5rIHlvdSdyZSBtaXN0YWtpbmcgdGhlIGxpbWl0YXRpb24gdG8gYXJiaXRyYXJ5IGJsb2Nrcwo+
-IHdoaWxlIGl0J3Mgb25seSBhYm91dCB0aGUgc3dpdGNoIGJsb2NrIElJVUMuCj4KPiBDYW4ndCBo
-YXZlOgo+Cj4gCXN3aXRjaCAoaSkgewo+IAkJaW50IGo7Cj4gCWNhc2UgMDoKPiAgICAgICAgIAkv
-KiAuLi4gKi8KPiAJfQo+Cj4gYmVjYXVzZSBpdCBjYW4ndCBiZSB0dXJuZWQgaW50bzoKPgo+IAlz
-d2l0Y2ggKGkpIHsKPiAJCWludCBqID0gMDsgLyogbm90IHZhbGlkIEMgKi8KPiAJY2FzZSAwOgo+
-ICAgICAgICAgCS8qIC4uLiAqLwo+IAl9Cj4KPiBidXQgY2FuIGhhdmUgZS5nLjoKPgo+IAlzd2l0
-Y2ggKGkpIHsKPiAJY2FzZSAwOgo+IAkJewo+IAkJCWludCBqID0gMDsKPiAJICAgICAgICAJLyog
-Li4uICovCj4gCQl9Cj4gCX0KPgo+IEkgdGhpbmsgS2VlcycgYXBwcm9hY2ggb2YgbW92aW5nIHN1
-Y2ggdmFyaWFibGUgZGVjbGFyYXRpb25zIHRvIHRoZQo+IGVuY2xvc2luZyBibG9jayBzY29wZSBp
-cyBiZXR0ZXIgdGhhbiBhZGRpbmcgYW5vdGhlciBuZXN0aW5nIGJsb2NrLgoKUFMuIFRoZSBwYXRj
-aCBpcwoKUmV2aWV3ZWQtYnk6IEphbmkgTmlrdWxhIDxqYW5pLm5pa3VsYUBpbnRlbC5jb20+Cgph
-bmQgdGhlIGRyaXZlcnMvZ3B1L2RybS9pOTE1LyogcGFydHMgYXJlCgpBY2tlZC1ieTogSmFuaSBO
-aWt1bGEgPGphbmkubmlrdWxhQGludGVsLmNvbT4KCmZvciBtZXJnaW5nIHZpYSB3aGljaGV2ZXIg
-dHJlZSBpcyBhcHByb3ByaWF0ZS4gKFRoZXJlJ2xsIGJlIG1pbm9yCmNvbmZsaWN0cyB3aXRoIGlu
-LWZsaWdodCB3b3JrIGluIG91ciAtbmV4dCB0cmVlLCBidXQgbm8gYmlnZ2llLikKCgotLSAKSmFu
-aSBOaWt1bGEsIEludGVsIE9wZW4gU291cmNlIEdyYXBoaWNzIENlbnRlcgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Cgo+IE9uIEphbiAyMiwgMjAxOSwgYXQgMTowNiBBTSwgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
+c2UuY29tPiB3cm90ZToKPiAKPiBkaWZmIC0tZ2l0IGEvbW0vbWVtb3J5X2hvdHBsdWcuYyBiL21t
+L21lbW9yeV9ob3RwbHVnLmMKPiBpbmRleCBiOWE2NjdkMzZjNTUuLjdmYzJhODcxMTBhMyAxMDA2
+NDQKPiAtLS0gYS9tbS9tZW1vcnlfaG90cGx1Zy5jCj4gKysrIGIvbW0vbWVtb3J5X2hvdHBsdWcu
+Ywo+IEBAIC05NiwxMCArOTYsMTYgQEAgdm9pZCBtZW1faG90cGx1Z19kb25lKHZvaWQpCj4gCWNw
+dXNfcmVhZF91bmxvY2soKTsKPiB9Cj4gCj4gK3U2NCBtYXhfbWVtX3NpemUgPSAtMTsKClRoaXMg
+bWF5IGJlIHBlZGFudGljLCBidXQgSSdkIHJhdGhlciBzZWUgVTY0X01BWCB1c2VkIGhlcmUuCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
