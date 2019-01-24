@@ -1,22 +1,16 @@
-From: Eric Blake <eblake@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH] configure: Don't add Xen's
- libs to LDFLAGS
-Date: Thu, 24 Jan 2019 11:40:39 -0600
-Message-ID: <9a1725c3-1119-886d-2d9d-11369ea5f207__38868.4351740935$1548351716$gmane$org@redhat.com>
-References: <20190121144841.24467-1-anthony.perard@citrix.com>
- <CAFEAcA_ytAb-K-HB3wL5baMBDkY71ksBK8hsUSFxuUeqVDFyHQ@mail.gmail.com>
- <804f8429-d3f6-dc1a-4980-fc5a44a6b3c5@msgid.tls.msk.ru>
- <87fttijvfm.fsf@dusky.pond.sub.org>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: [PATCH-for-4.12] docs: Fix dm_restrict documentation
+Date: Thu, 24 Jan 2019 17:48:27 +0000
+Message-ID: <20190124174827.15902-1-george.dunlap@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0369823113172413356=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=I+KM=QA=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1gmizc-0006Gs-1m
- for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 17:40:44 +0000
-In-Reply-To: <87fttijvfm.fsf@dusky.pond.sub.org>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=e+wX=QA=citrix.com=prvs=920ce3e41=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gmj7C-0006Te-Ob
+ for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 17:48:34 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,87 +19,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Markus Armbruster <armbru@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>
-Cc: Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>, QEMU Developers <qemu-devel@nongnu.org>, Paul Durrant <paul.durrant@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, "open list:X86" <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony Perard <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Juergen Gross <jgross@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============0369823113172413356==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="EZMrlU14vgKzwnjOGYDndQImM3kxp6W7t"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---EZMrlU14vgKzwnjOGYDndQImM3kxp6W7t
-Content-Type: multipart/mixed; boundary="zJKZviSdD9hGhEQLYTITgfTFgbIEPGSsK";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- QEMU Developers <qemu-devel@nongnu.org>,
- Paul Durrant <paul.durrant@citrix.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- "open list:X86" <xen-devel@lists.xenproject.org>
-Message-ID: <9a1725c3-1119-886d-2d9d-11369ea5f207@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH] configure: Don't add Xen's libs to LDFLAGS
-References: <20190121144841.24467-1-anthony.perard@citrix.com>
- <CAFEAcA_ytAb-K-HB3wL5baMBDkY71ksBK8hsUSFxuUeqVDFyHQ@mail.gmail.com>
- <804f8429-d3f6-dc1a-4980-fc5a44a6b3c5@msgid.tls.msk.ru>
- <87fttijvfm.fsf@dusky.pond.sub.org>
-In-Reply-To: <87fttijvfm.fsf@dusky.pond.sub.org>
-
---zJKZviSdD9hGhEQLYTITgfTFgbIEPGSsK
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 1/24/19 2:45 AM, Markus Armbruster wrote:
-
->> Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
->> Revieved-by: Michael Tokarev <mjt@tls.msk.ru>
->=20
-> Typo in Reviewed-by.
-
-Should we tighten checkpatch.pl to flag suspicious-looking 'xxx-by:'
-tags, to catch instances of typos?
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---zJKZviSdD9hGhEQLYTITgfTFgbIEPGSsK--
-
---EZMrlU14vgKzwnjOGYDndQImM3kxp6W7t
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlxJ+JcACgkQp6FrSiUn
-Q2rIUQf6A4gzFoPMRvjHDslsPb4H+ZRXfMdW2IHug5577b+c7+S23SPRHAV+yZvl
-kxzCIiVo3/Qq8MwPjSgJAIQ4xXxTYCr+/VPsUWB3QkPGjMI+m3WdDnPL4L2PO1Eb
-eMUePef4z+/LZMtD5FBwFAiMTol8ie3OSpjW67m/081s9ljQrbiCE9x8S5UfQyms
-M9p/Z3UES89dq0AqXIvZcJ0KltruA/8+bDHUegKdlTZqnADQLCNBz+AkEEPTw1Hi
-5kzVJBPTwHUy1XfBDKDshlNy2dFLWobKVS3+u4IsqDizPeLGFTkuBAxaEF2HN8di
-Kt5220nYHXSIKf5+a4e16K6gk3+lmg==
-=a84x
------END PGP SIGNATURE-----
-
---EZMrlU14vgKzwnjOGYDndQImM3kxp6W7t--
-
-
---===============0369823113172413356==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0369823113172413356==--
+UmVtb3ZlICJjaGF0dHkiIGFuZCByZWR1bmRhbnQgaW5mb3JtYXRpb24gZnJvbSB0aGUgeGwgbWFu
+IHBhZ2U7CnJlc3RyaWN0IGl0IHRvIGZ1bmN0aW9uYWwgZGVzY3JpcHRpb25zIG9ubHksIGFuZCBw
+b2ludCBpbnN0ZWFkIHRvCnFlbXUtZGVwcml2LnBhbmRvYyBhbmQgU1VQUE9SVC5tZCBhcyBsb2Nh
+dGlvbnMgZm9yICJjYW5vbmljYWwiCmluZm9ybWF0aW9uLgoKQWRkIGEgbWFuIHBhZ2UgZW50cnkg
+Zm9yIGRldmljZV9tb2RlbF91c2VyLgoKVXBkYXRlIHFlbXUtZGVwcml2aWxlZ2UucGFuZG9jOgoK
+Q2hhbmdlcyBpbiBtaXNzaW5nIGZlYXR1cmUgbGlzdDoKLSBNaWdyYXRpb24gaXMgZnVuY3Rpb25h
+bAotIEJ1dCBxZGlzayBiYWNrZW5kcyBhcmUgbm90CgpBZGQgYSBtaXNzaW5nIHJlc3RyaWN0aW9u
+IGxpc3QuCgpUaGUgZm9sbG93aW5nIHN0YXRlbWVudHMgZnJvbSB0aGUgbWFuIHBhZ2UgYXJlIGRy
+b3BwZWQ6Ci0gTWVudGlvbmluZyBQVjsgUFYgZ3Vlc3RzIG5ldmVyIGhhdmUgYSBkZXZpY2UgbW9k
+ZWwuCi0gRHJvcCB0aGUgY29uZnVzaW5nIHN0YXRlbWVudCBhYm91dCBzdGR2Z2EgYW5kIGNpcnJ1
+cyB2Z2Egb3B0aW9ucy4KLSBSZS11c2VkIGRvbWFpbiBJRHMgYXJlIG5vdyBoYW5kbGVkLgotIERl
+dmljZSBtb2RlbHMgc2hvdWxkIG5vIGxvbmdlciBiZSBhYmxlIHRvIGNyZWF0ZSB3b3JsZC1yZWFk
+YWJsZQogIGZpbGVzIG9uIGRvbTAncyBmaWxlc3lzdGVtLgoKU2lnbmVkLW9mZi1ieTogR2Vvcmdl
+IER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgotLS0KUkZDOiBJIGRvbid0IGtub3cg
+d2hhdCB0aGUgJ3ZnYScgbGltaXRhdGlvbiB0aGluZyB3YXMgYWJvdXQgLS0gSSB0cmllZApib3Ro
+ICdkZWZhdWx0JyBhbmQgJ3N0Z3ZnYScgd2l0aCBkbV9yZXN0cmljdCBhbmQgdGhleSB3b3JrZWQg
+ZmluZS4KCkZyZWV6ZSBleGNlcHRpb24ganVzdGlmaWNhdGlvbjoKLSBGaXhpbmcgYSAiYnVnIiBp
+biB0aGUgZG9jcwotIE5vIGZ1bmN0aW9uYWwgY2hhbmdlCgpDQzogSWFuIEphY2tzb24gPGlhbi5q
+YWNrc29uQGNpdHJpeC5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDQzog
+QW50aG9ueSBQZXJhcmQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CkNDOiBKdWVyZ2VuIEdy
+b3NzIDxqZ3Jvc3NAc3VzZS5jb20+Ci0tLQogZG9jcy9mZWF0dXJlcy9xZW11LWRlcHJpdmlsZWdl
+LnBhbmRvYyB8ICAxMiArKy0tCiBkb2NzL21hbi94bC5jZmcuNS5wb2QuaW4gICAgICAgICAgICAg
+IHwgMTAwICsrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiAyIGZpbGVzIGNoYW5nZWQsIDE2IGlu
+c2VydGlvbnMoKyksIDk2IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RvY3MvZmVhdHVyZXMv
+cWVtdS1kZXByaXZpbGVnZS5wYW5kb2MgYi9kb2NzL2ZlYXR1cmVzL3FlbXUtZGVwcml2aWxlZ2Uu
+cGFuZG9jCmluZGV4IDIwZDZhYzIxODkuLmNmZTUyOGIxZDMgMTAwNjQ0Ci0tLSBhL2RvY3MvZmVh
+dHVyZXMvcWVtdS1kZXByaXZpbGVnZS5wYW5kb2MKKysrIGIvZG9jcy9mZWF0dXJlcy9xZW11LWRl
+cHJpdmlsZWdlLnBhbmRvYwpAQCAtMTEwLDEwICsxMTAsMTQgQEAgU2VlIGRvY3MvZGVzaWduL3Fl
+bXUtZGVwcml2aWxlZ2UubWQgZm9yIHRlY2huaWNhbCBkZXRhaWxzLgogCiBUaGUgZm9sbG93aW5n
+IGZlYXR1cmVzIHN0aWxsIG5lZWQgdG8gYmUgaW1wbGVtZW50ZWQ6CiAgKiBJbnNlcnRpbmcgYSBu
+ZXcgY2Ryb20gd2hpbGUgdGhlIGd1ZXN0IGlzIHJ1bm5pbmcgKHhsIGNkcm9tLWluc2VydCkKLSAq
+IE1pZ3JhdGlvbiAvIHNhdmUgLyByZXN0b3JlCi0KLWRtX3Jlc3RyaWN0IGlzIHRvdGFsbHkgdW5z
+dXBwb3J0ZWQgYW5kIG1heSBoYXZlIHVuZXhwZWN0ZWQgc2VjdXJpdHkKLXByb2JsZW1zIGlmIHVz
+ZWQgd2l0aCBhIGRvbTAgTGludXgga2VybmVsIGVhcmxpZXIgdGhhbiAyLjYuMTguCisgKiBTdXBw
+b3J0IGZvciBxZGlzayBiYWNrZW5kcworCitBIG51bWJlciBvZiByZXN0cmljdGlvbnMgc3RpbGwg
+bmVlZCB0byBiZSBpbXBsZW1lbnRlZC4gIEEgY29tcHJvbWlzZWQKK2RldmljZSBtb2RlbCBtYXkg
+YmUgYWJsZSB0byBkbyB0aGUgZm9sbG93aW5nOgorICogRGVsYXkgb3IgZXhwbG9pdCB3ZWFrbmVz
+c2VzIGluIHRoZSB0b29sc3RhY2sKKyAqIExhdW5jaCAiZm9yayBib21icyIgb3Igb3RoZXIgcmVz
+b3VyY2UgZXhoYXVzdGlvbiBhdHRhY2tzCisgKiBNYWtlIG5ldHdvcmsgY29ubmVjdGlvbnMgb24g
+dGhlIG1hbmFnZW1lbnQgbmV0d29yaworICogQnJlYWsgb3V0IG9mIHRoZSByZXN0cmljdGlvbnMg
+YWZ0ZXIgbWlncmF0aW9uCiAKIEFkZGl0aW9uYWxseSwgZ2V0dGluZyBQQ0kgcGFzc3Rocm91Z2gg
+dG8gd29yayBzZWN1cmVseSB3b3VsZCByZXF1aXJlIGEKIHNpZ25pZmljYW50IHJld29yayBvZiBo
+b3cgcGFzc3Rocm91Z2ggd29ya3MgYXQgdGhlIG1vbWVudC4gIEl0IG1heSBiZQpkaWZmIC0tZ2l0
+IGEvZG9jcy9tYW4veGwuY2ZnLjUucG9kLmluIGIvZG9jcy9tYW4veGwuY2ZnLjUucG9kLmluCmlu
+ZGV4IDNiOTJmMzlkOGQuLmFkODFhZjFlZDggMTAwNjQ0Ci0tLSBhL2RvY3MvbWFuL3hsLmNmZy41
+LnBvZC5pbgorKysgYi9kb2NzL21hbi94bC5jZmcuNS5wb2QuaW4KQEAgLTEzMTYsMTA0ICsxMzE2
+LDIwIEBAIGNvbm5lY3RvcnM9aWQwOjE5MjB4MTA4MDtpZDE6ODAweDYwMDtpZDI6NjQweDQ4MAog
+UmVzdHJpY3QgdGhlIGRldmljZSBtb2RlbCBhZnRlciBzdGFydHVwLAogdG8gbGltaXQgdGhlIGNv
+bnNlcXVlbmNlc2Ugb2Ygc2VjdXJpdHkgdnVsbmVyYWJpbGl0aWVzIGluIHFlbXUuCiAKLVdpdGgg
+dGhpcyBmZWF0dXJlIGVuYWJsZWQsCi1hIGNvbXByb21pc2Ugb2YgdGhlIGRldmljZSBtb2RlbCwK
+LXZpYSBzdWNoIGEgdnVsbmVyYWJpbGl0eSwKLXdpbGwgbm90IHByb3ZpZGUgYSBwcml2aWxlZ2Ug
+ZXNjYWxhdGlvbiBhdHRhY2sgb24gdGhlIHdob2xlIHN5c3RlbS4KK1NlZSBkb2NzL2ZlYXR1cmVz
+L3FlbXUtZGVwcml2LnBhbmRvYyBmb3IgbW9yZSBpbmZvcm1hdGlvbgorb24gTGludXggYW5kIFFF
+TVUgdmVyc2lvbiByZXF1aXJlbWVudHMsIGRldmljZSBtb2RlbCB1c2VyIHNldHVwLAorYW5kIGN1
+cnJlbnQgbGltaXRhdGlvbnMuCiAKIFRoaXMgZmVhdHVyZSBpcyBhIEI8dGVjaG5vbG9neSBwcmV2
+aWV3Pi4KLVRoZXJlIGFyZSBzb21lIHNpZ25pZmljYW50IGxpbWl0YXRpb25zOgorU2VlIFNVUFBP
+UlQubWQgZm9yIGEgc2VjdXJpdHkgc3VwcG9ydCBzdGF0ZW1lbnQuCiAKLT1vdmVyIDQKLQotPWl0
+ZW0KLQotVGhpcyBpcyBub3QgbGlrZWx5IHRvIHdvcmsgYXQgYWxsIGZvciBQViBndWVzdHMKLW5v
+ciBndWVzdHMgdXNpbmcgcWRpc2sgYmFja2VuZHMgZm9yIHRoZWlyIGJsb2NrIGRldmljZXMuCi0K
+LT1pdGVtCi0KLVlvdSBtdXN0IGhhdmUgYSBuZXcgZW5vdWdoIHFlbXUuCi1JbiBwYXJ0aWN1bGFy
+LAotaWYgeW91ciBxZW11IGRvZXMgbm90IGhhdmUgdGhlIGNvbW1pdAotQjx4ZW46IHJlc3RyaWN0
+OiB1c2UgeGVudG9vbGNvcmVfcmVzdHJpY3RfYWxsPgotdGhlIHJlc3RyaWN0aW9uIHJlcXVlc3Qg
+d2lsbCBiZSBzaWxlbnRseSBpbmVmZmVjdGl2ZSEKLQotPWl0ZW0KLQotVGhlIG1lY2hhbmlzbXMg
+dXNlZCBhcmUgbm90IGVmZmVjdGl2ZSBhZ2FpbnN0Ci1kZW5pYWwgb2Ygc2VydmljZSBwcm9ibGVt
+cy4KLUEgY29tcHJvbWlzZWQgcWVtdSBjYW4gcHJvYmFibHkgc3RpbGwgaW1wYWlyCi1vciBwZXJo
+YXBzIGV2ZW4gcHJldmVudAotdGhlIHByb3BlciBmdW5jdGlvbmluZyBvZiB0aGUgd2hvbGUgc3lz
+dGVtLAotKGF0IHRoZSB2ZXJ5IGxlYXN0LCBidXQgbm90IGxpbWl0ZWQgdG8sCi10aHJvdWdoIHJl
+c291cmNlIGV4aGF1c3Rpb24pLgotCi09aXRlbQotCi1JdCBpcyBub3Qga25vd24gd2hldGhlciB0
+aGUgcHJvdGVjdGlvbiBpcwotZWZmZWN0aXZlIHdoZW4gYSBkb21haW4gaXMgbWlncmF0ZWQuCi0K
+LT1pdGVtCi0KLVNvbWUgZG9tYWluIG1hbmFnZW1lbnQgZnVuY3Rpb25zIGRvIG5vdCB3b3JrLgot
+Rm9yIGV4YW1wbGUsIGNkcm9tIGluc2VydCB3aWxsIGZhaWwuCi0KLT1pdGVtCis9aXRlbSBCPGRl
+dmljZV9tb2RlbF91c2VyPVVTRVJOQU1FPgogCi1Zb3Ugc2hvdWxkIHNheSBDPHZnYT0ibm9uZSI+
+LgotRG9tYWlucyB3aXRoIHN0ZHZnYSBncmFwaGljcyBjYXJkcyB0byBub3Qgd29yay4KLURvbWFp
+bnMgd2l0aCBjaXJydXMgdmdhIG1heSBzZWVtIHRvIHdvcmsuCitXaGVuIHJ1bm5pbmcgZG1fcmVz
+dHJpY3QsIHJ1biB0aGUgZGV2aWNlIG1vZGVsIGFzIHRoaXMgdXNlci4KIAotPWl0ZW0KK05PVEU6
+IEVhY2ggZG9tYWluIE1VU1QgaGF2ZSBhIFNFUEFSQVRFIHVzZXJuYW1lLgogCi1Zb3UgbXVzdCBj
+cmVhdGUgdXNlcihzKSBmb3IgcWVtdSB0byBydW4gYXMuCi0KLUlkZWFsbHksIHNldCBhc2lkZSBh
+IHJhbmdlIG9mIDMyNzUyIHVpZHMKLShmcm9tIE4gdG8gTiszMjc1MSkKLWFuZCBjcmVhdGUgYSB1
+c2VyCi13aG9zZSBuYW1lIGlzIEI8eGVuLXFlbXV1c2VyLXJhbmdlLWJhc2U+Ci1hbmQgd2hvc2Ug
+dWlkIGlzIE4KLWFuZCB3aG9zZSBnaWQgaXMgYSBwbGFpbiB1bnByaXZpbGVnZWQgZ2lkLgotbGli
+eGwgd2lsbCB1c2Ugb25lIHN1Y2ggdXNlciBmb3IgZWFjaCBkb21pZC4KLQotQWx0ZXJuYXRpdmVs
+eSwgZWl0aGVyIGNyZWF0ZQotQjx4ZW4tcWVtdXVzZXItZG9taWQkZG9taWQ+Ci1mb3IgZXZlcnkg
+JGRvbWlkIGZyb20gMSB0byAzMjc1MSBpbmNsdXNpdmUsCi1vcgotQjx4ZW4tcWVtdXVzZXItc2hh
+cmVkPgotKGluIHdoaWNoIGNhc2UgZGlmZmVyZW50IGd1ZXN0cyB3aWxsIG5vdAotYmUgcHJvdGVj
+dGVkIGFnYWluc3QgZWFjaCBvdGhlcikuCi0KLT1pdGVtCi0KLVRoZXJlIGFyZSBubyBjb3VudGVy
+bWVhc3VyZXMgdGFrZW4gYWdhaW5zdCByZXVzZQotb2YgdGhlIHNhbWUgdW5peCB1c2VyICh1aWQp
+Ci1mb3Igc3Vic2VxdWVudCBkb21haW5zLAotZXZlbiBpZiB0aGUgQjx4ZW4tcWVtdXVzZXItZG9t
+aWQkZG9taWQ+IHVzZXJzIGFyZSBjcmVhdGVkLgotU28gYSBwYXN0IGRvbWFpbiB3aXRoIHRoZSBz
+YW1lIGRvbWlkIG1heSBiZSBhYmxlIHRvCi1pbnRlcmZlcmVyIHdpdGggZnV0dXJlIGRvbWFpbnMu
+Ci1Qb3NzaWJseSwgZXZlbiBhZnRlciBhIHJlYm9vdC4KLQotPWl0ZW0KLQotQSBjb21wcm9taXNl
+ZCBxZW11IHdpbGwgYmUgYWJsZSB0byByZWFkIHdvcmxkLXJlYWRhYmxlCi1maWxlcyBpbiB0aGUg
+ZG9tMCBvcGVyYXRpbmcgc3lzdGVtLgotCi09aXRlbQotCi1CZWNhdXNlIG9mIHRoZXNlIGxpbWl0
+YXRpb25zLCB0aGlzIGZ1bmN0aW9uYWxpdHksCi13aGlsZSBpdCBtYXkgZW5oYW5jZSB5b3VyIHNl
+Y3VyaXR5LAotc2hvdWxkIG5vdCBiZSByZWxpZWQgb24uCi1BbnkgZnVydGhlciBsaW1pdGF0aW9u
+cyBkaXNjb3ZlcmVkIGluIHRoZSBjdXJyZW50IHZlcnNpb24KLXdpbGwgQjxub3Q+IGJlIGhhbmRs
+ZWQgdmlhIHRoZSBYZW4gUHJvamVjdCBTZWN1cml0eSBQcm9jZXNzLgotCi09aXRlbQotCi1JbiB0
+aGUgZnV0dXJlIGFzIHdlIGVuaGFuY2UgdGhpcyBmZWF0dXJlIHRvIGltcHJvdmUgdGhlIHNlY3Vy
+aXR5LAotd2UgbWF5IGJyZWFrIGJhY2t3YXJkIGNvbXBhdGliaWxpdHkuCi0KLT1iYWNrCitTZWUg
+ZG9jcy9mZWF0dXJlcy9xZW11LWRlcHJpdi5wYW5kb2MgZm9yIG1vcmUgaW5mb3JtYXRpb24uCiAK
+ID1pdGVtIEI8dnNuZD1bIFZDQVJEX1NQRUMsIFZDQVJEX1NQRUMsIC4uLiBdPgogCi0tIAoyLjIw
+LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
