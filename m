@@ -1,21 +1,20 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: [PATCH for-4.12] iommu: fix order of arguments in
  iommu_map call at iommu_hwdom_init
-Date: Thu, 24 Jan 2019 09:35:55 +0000
-Message-ID: <eb4b31f3b79440c09b9d6b68c71106d6@AMSPEX02CL03.citrite.net>
+Date: Thu, 24 Jan 2019 02:41:05 -0700
+Message-ID: <5C4988310200007800210B94@prv1-mh.provo.novell.com>
 References: <20190123180818.78684-1-roger.pau@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=nt2y=QA=citrix.com=prvs=920cfe6d7=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gmbQW-0002KW-Gf
- for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 09:36:00 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=uQw9=QA=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gmbVW-0003AB-RY
+ for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 09:41:10 +0000
 In-Reply-To: <20190123180818.78684-1-roger.pau@citrix.com>
-Content-Language: en-US
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,38 +23,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBSb2dlciBQYXUgTW9ubmUgW21h
-aWx0bzpyb2dlci5wYXVAY2l0cml4LmNvbV0NCj4gU2VudDogMjMgSmFudWFyeSAyMDE5IDE4OjA4
-DQo+IFRvOiB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcNCj4gQ2M6IFJvZ2VyIFBhdSBN
-b25uZSA8cm9nZXIucGF1QGNpdHJpeC5jb20+OyBKYW4gQmV1bGljaA0KPiA8amJldWxpY2hAc3Vz
-ZS5jb20+OyBQYXVsIER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPg0KPiBTdWJqZWN0
-OiBbUEFUQ0ggZm9yLTQuMTJdIGlvbW11OiBmaXggb3JkZXIgb2YgYXJndW1lbnRzIGluIGlvbW11
-X21hcCBjYWxsDQo+IGF0IGlvbW11X2h3ZG9tX2luaXQNCj4gDQo+IFRoZSBvcmRlciBvZiB0aGUg
-cGFnZV9vcmRlciBhbmQgdGhlIGZsYWdzIHBhcmFtZXRlcnMgYXJlIGludmVydGVkIGluDQo+IHRo
-ZSBjYWxsIHRvIGlvbW11X21hcCBtYWRlIGluIGlvbW11X2h3ZG9tX2luaXQuDQo+IA0KPiBGaXhl
-czogZThhZmUxMTI0Y2MxICgiaW9tbXU6IGVsaWRlIGZsdXNoaW5nIGZvciBoaWdoZXIgb3JkZXIg
-bWFwL3VubWFwDQo+IG9wZXJhdGlvbnMiKQ0KPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9u
-bsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4NCg0KR29vZCBncmllZi4gSSB3YXMgY2xlYXJseSBo
-YXZpbmcgYSBiYWQgZGF5Lg0KDQpSZXZpZXdlZC1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJh
-bnRAY2l0cml4LmNvbT4NCg0KPiAtLS0NCj4gQ2M6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
-LmNvbT4NCj4gQ2M6IFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+DQo+IC0t
-LQ0KPiAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9tbXUuYyB8IDIgKy0NCj4gIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPiANCj4gZGlmZiAtLWdpdCBh
-L3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2lvbW11LmMNCj4gYi94ZW4vZHJpdmVycy9wYXNzdGhy
-b3VnaC9pb21tdS5jDQo+IGluZGV4IDk4ZTZmYzM1ZTIuLmFjZDE3YWMyZGMgMTAwNjQ0DQo+IC0t
-LSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2lvbW11LmMNCj4gKysrIGIveGVuL2RyaXZlcnMv
-cGFzc3Rocm91Z2gvaW9tbXUuYw0KPiBAQCAtMjI2LDcgKzIyNiw3IEBAIHZvaWQgX19od2RvbV9p
-bml0IGlvbW11X2h3ZG9tX2luaXQoc3RydWN0IGRvbWFpbiAqZCkNCj4gICAgICAgICAgICAgICAg
-ICAgID09IFBHVF93cml0YWJsZV9wYWdlKSApDQo+ICAgICAgICAgICAgICAgICAgbWFwcGluZyB8
-PSBJT01NVUZfd3JpdGFibGU7DQo+IA0KPiAtICAgICAgICAgICAgcmV0ID0gaW9tbXVfbWFwKGQs
-IF9kZm4oZGZuKSwgX21mbihtZm4pLCBtYXBwaW5nLCAwLA0KPiArICAgICAgICAgICAgcmV0ID0g
-aW9tbXVfbWFwKGQsIF9kZm4oZGZuKSwgX21mbihtZm4pLCAwLCBtYXBwaW5nLA0KPiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICZmbHVzaF9mbGFncyk7DQo+IA0KPiAgICAgICAgICAgICAg
-aWYgKCAhcmMgKQ0KPiAtLQ0KPiAyLjIwLjENCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDIzLjAxLjE5IGF0IDE5OjA4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IFRoZSBvcmRlciBvZiB0aGUgcGFnZV9vcmRlciBhbmQgdGhlIGZsYWdzIHBhcmFtZXRlcnMgYXJl
+IGludmVydGVkIGluCj4gdGhlIGNhbGwgdG8gaW9tbXVfbWFwIG1hZGUgaW4gaW9tbXVfaHdkb21f
+aW5pdC4KPiAKPiBGaXhlczogZThhZmUxMTI0Y2MxICgiaW9tbXU6IGVsaWRlIGZsdXNoaW5nIGZv
+ciBoaWdoZXIgb3JkZXIgbWFwL3VubWFwIG9wZXJhdGlvbnMiKQo+IFNpZ25lZC1vZmYtYnk6IFJv
+Z2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCklmIHlvdSBkb24ndCBtaW5kIEknZCBjb252ZXJ0
+IHRvIFBBR0VfT1JERVJfNEsgd2hpbGUgY29tbWl0dGluZy4KCkphbgoKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
