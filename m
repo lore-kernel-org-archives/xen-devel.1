@@ -1,20 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH for-4.12] automation: introduce a QEMU smoke
- test for PVH Dom0
-Date: Thu, 24 Jan 2019 15:33:38 +0000
-Message-ID: <20190124153338.c4fg4zhloowmmjqu@zion.uk.xensource.com>
-References: <20190124152411.20304-1-wei.liu2@citrix.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: Reducing or removing direct map from xen (was Re:
+ Ongoing/future speculative mitigation work)
+Date: Thu, 24 Jan 2019 16:00:47 +0000
+Message-ID: <1b54d971-d8cd-293b-7bc9-217d25f0fcb3@citrix.com>
+References: <e3219697-0759-39fc-2486-715cdec1ca9e@citrix.com>
+ <20190124114455.eyke5dvkqsxhklav@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=zGyK=QA=citrix.com=prvs=920e124aa=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gmh0o-0002cC-Bu
- for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 15:33:50 +0000
-Content-Disposition: inline
-In-Reply-To: <20190124152411.20304-1-wei.liu2@citrix.com>
+ <SRS0=e+wX=QA=citrix.com=prvs=920ce3e41=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gmhRH-0005jC-0a
+ for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 16:01:11 +0000
+In-Reply-To: <20190124114455.eyke5dvkqsxhklav@zion.uk.xensource.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,21 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Doug Goldstein <cardoe@cardoe.com>
+To: Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Martin Pohlack <mpohlack@amazon.de>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Joao Martins <joao.m.martins@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Daniel Kiper <daniel.kiper@oracle.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, Anthony Liguori <aliguori@amazon.com>, "Dannowski, Uwe" <uwed@amazon.de>, Lars Kurth <lars.kurth@citrix.com>, Konrad Wilk <konrad.wilk@oracle.com>, Ross Philipson <ross.philipson@oracle.com>, Dario Faggioli <dfaggioli@suse.com>, Matt Wilson <msw@amazon.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <JGross@suse.com>, Sergey Dyasli <sergey.dyasli@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>, "Woodhouse,
+ David" <dwmw@amazon.co.uk>, Roger Pau Monne <roger.pau@citr>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKYW4gMjQsIDIwMTkgYXQgMDM6MjQ6MTFQTSArMDAwMCwgV2VpIExpdSB3cm90ZToK
-PiBNYWtlIHFlbXUtc21va2UteDg2LTY0LnNoIHRha2UgYSB2YXJpYW50IGFyZ3VtZW50LiBNYWtl
-IHR3byBuZXcgdGVzdHMKPiBpbiB0ZXN0LnlhbWwuCj4gCj4gU2lnbmVkLW9mZi1ieTogV2VpIExp
-dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiAtLS0KPiBTaW5jZSB0aGUgbmV3IG9wdGlvbiBpcyBn
-b2luZyB0byBiZSByZWxlYXNlIGluIDQuMTIsIEkgdGhpbmsgaXQgd291bGQgYmUKPiBiZW5lZmlj
-aWFsIHRvIGhhdmUgdGhpcyBwYXRjaCBpbiA0LjEyIGFzIHdlbGwuIFRoZSByaXNrIGlzIHplcm8g
-dG8gZW5kIHVzZXJzLgo+IC0tLQpbLi4uXQo+ICsgICAgLSAvXmNvdmVyaXR5LXRlc3RlZFwvLiov
-Cj4gKyAgICAtIC9ec3RhYmxlLS4qLwo+ICAgICAgLSAvXnN0YWJsZS0uKi8KCkdhaCwgdGhpcyBp
-cyBhbiBvbGQgdmVyc2lvbi4gIFRoZSB1cCB0byBkYXRlIHZlcnNpb24gaGFzIG1vdmVkIHRoaXMg
-bGluZQpiYWNrIHRvIHdoZXJlIGl0J3Mgc3VwcG9zZWQgdG8gYmUuIEkgd29uJ3QgYm90aGVyIHBv
-c3RpbmcgYSBuZXcgdmVyc2lvbi4KCldlaS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+T24gMS8yNC8xOSAxMTo0NCBBTSwgV2VpIExpdSB3cm90ZToKPiBCZWxvdyBpcyBhIHN1bW1hcnkg
+Zm9yIGEgZGlzY3Vzc2lvbiBvbiB0aGlzIHRvcGljIGJldHdlZW4gSmFuIGFuZCBtZS4KCkkndmUg
+c2tpbW1lZCB0aGlzIG92ZXIgYW5kIGl0IGxvb2tzIHJlYXNvbmFibGUuICBUaGFua3MgZm9yIGRv
+aW5nIHRoaXMuCgogLUdlb3JnZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
