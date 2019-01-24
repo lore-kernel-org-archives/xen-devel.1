@@ -1,19 +1,22 @@
-From: Julien Grall <julien.grall@gmail.com>
-Subject: Re: [PATCH for-4.12] gic-vgic: fix assert condition
-Date: Thu, 24 Jan 2019 19:27:43 +0000
-Message-ID: <CAF3u54DxzP=z7P1YE9XK4mMpgQqQxUTi2CT3nmUfucXn1RdO8Q@mail.gmail.com>
-References: <1548354814-23208-1-git-send-email-andrii.anisov@gmail.com>
+From: Norbert Manthey <nmanthey@amazon.de>
+Subject: Re: [PATCH SpectreV1+L1TF v4 08/11] xen/evtchn: block
+ speculative out-of-bound accesses
+Date: Thu, 24 Jan 2019 20:50:29 +0100
+Message-ID: <ea24d08b-7793-94b2-2b20-c55a0339858c@amazon.de>
+References: <1548244285-30813-1-git-send-email-nmanthey@amazon.de>
+ <1548244655-32180-8-git-send-email-nmanthey@amazon.de>
+ <5C49EE5B0200007800210E17@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2791710247981733806=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=aej+=QA=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gmkfO-0001gw-Bo
- for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 19:27:58 +0000
-Received: by mail-ua1-x941.google.com with SMTP id v24so2393445uap.13
- for <xen-devel@lists.xenproject.org>; Thu, 24 Jan 2019 11:27:56 -0800 (PST)
-In-Reply-To: <1548354814-23208-1-git-send-email-andrii.anisov@gmail.com>
+ <SRS0=jkVq=QA=amazon.de=prvs=920ead099=nmanthey@srs-us1.protection.inumbo.net>)
+ id 1gml7T-0004Qm-B5
+ for xen-devel@lists.xenproject.org; Thu, 24 Jan 2019 19:56:59 +0000
+In-Reply-To: <5C49EE5B0200007800210E17@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,106 +25,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Andre Przywara <andre.przywara@arm.com>, Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Martin Pohlack <mpohlack@amazon.de>, Julien Grall <julien.grall@arm.com>, David Woodhouse <dwmw@amazon.co.uk>, "Martin Mazein(amazein)" <amazein@amazon.de>, xen-devel <xen-devel@lists.xenproject.org>, Julian Stecklina <jsteckli@amazon.de>, Bjoern Doebel <doebel@amazon.de>
 List-Id: xen-devel@lists.xenproject.org
 
---===============2791710247981733806==
-Content-Type: multipart/alternative; boundary="00000000000011b89205803935df"
-
---00000000000011b89205803935df
-Content-Type: text/plain; charset="UTF-8"
-
-(sorry for the formatting)
-
-On Thu, 24 Jan 2019, 18:35 Andrii Anisov, <andrii.anisov@gmail.com> wrote:
-
-> From: Andrii Anisov <andrii_anisov@epam.com>
->
-
-Empty commit message should only happen when the title provide enough
-information.
-
-In that case, you should explain how you hit the assert so the reviewers
-can understand the change.
-
-
-Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
-> ---
->  xen/arch/arm/gic-vgic.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c
-> index 48922f5..684f2d1 100644
-> --- a/xen/arch/arm/gic-vgic.c
-> +++ b/xen/arch/arm/gic-vgic.c
-> @@ -443,7 +443,7 @@ int vgic_connect_hw_irq(struct domain *d, storuct vcpu
-> *v, unsigned int virq,
->      int ret = 0;
->
->      /* "desc" is optional when we disconnect an IRQ. */
-> -    ASSERT(connect && desc);
-> +    ASSERT(connect || desc);
-
-
-This looks wrong to me. Now you allow desc to be NULL when connecting an
-IRQ. This does not even match the comment above.
-
-Without a meaningful commit message, this hard to understand the reasoning
-behind the modification.
-
-Cheers,
-
---00000000000011b89205803935df
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<span>(sorry for the formatting)</span><div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr">On Thu, 24 Jan 2019, 18:35 Andrii Anisov, &lt;<a href=3D"m=
-ailto:andrii.anisov@gmail.com">andrii.anisov@gmail.com</a>&gt; wrote:<br></=
-div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-lef=
-t:1px #ccc solid;padding-left:1ex">From: Andrii Anisov &lt;<a href=3D"mailt=
-o:andrii_anisov@epam.com" target=3D"_blank">andrii_anisov@epam.com</a>&gt;<=
-br></blockquote></div></div><div><br></div><div>Empty commit message should=
- only happen when the title provide enough information.</div><div><br></div=
-><div>In that case, you should explain how you hit the assert so the review=
-ers can understand the change.</div><div><br></div><div><br></div><div><div=
- class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 =
-0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
-Signed-off-by: Andrii Anisov &lt;<a href=3D"mailto:andrii_anisov@epam.com" =
-target=3D"_blank">andrii_anisov@epam.com</a>&gt;<br>
----<br>
-=C2=A0xen/arch/arm/gic-vgic.c | 2 +-<br>
-=C2=A01 file changed, 1 insertion(+), 1 deletion(-)<br>
-<br>
-diff --git a/xen/arch/arm/gic-vgic.c b/xen/arch/arm/gic-vgic.c<br>
-index 48922f5..684f2d1 100644<br>
---- a/xen/arch/arm/gic-vgic.c<br>
-+++ b/xen/arch/arm/gic-vgic.c<br>
-@@ -443,7 +443,7 @@ int vgic_connect_hw_irq(struct domain *d, storuct vcpu =
-*v, unsigned int virq,<br>
-=C2=A0 =C2=A0 =C2=A0int ret =3D 0;<br>
-<br>
-=C2=A0 =C2=A0 =C2=A0/* &quot;desc&quot; is optional when we disconnect an I=
-RQ. */<br>
--=C2=A0 =C2=A0 ASSERT(connect &amp;&amp; desc);<br>
-+=C2=A0 =C2=A0 ASSERT(connect || desc);</blockquote></div></div><div><br></=
-div><div>This looks wrong to me. Now you allow desc to be NULL when connect=
-ing an IRQ. This does not even match the comment above.</div><div><br></div=
-><div>Without a meaningful commit message, this hard to understand the reas=
-oning behind the modification.</div><div><br></div><div>Cheers,</div>
-
---00000000000011b89205803935df--
-
-
---===============2791710247981733806==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2791710247981733806==--
+T24gMS8yNC8xOSAxNzo1NiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjMuMDEuMTkgYXQg
+MTI6NTcsIDxubWFudGhleUBhbWF6b24uZGU+IHdyb3RlOgo+PiAtLS0gYS94ZW4vY29tbW9uL2V2
+ZW50X2NoYW5uZWwuYwo+PiArKysgYi94ZW4vY29tbW9uL2V2ZW50X2NoYW5uZWwuYwo+PiBAQCAt
+MzY4LDggKzM2OCwxNCBAQCBpbnQgZXZ0Y2huX2JpbmRfdmlycShldnRjaG5fYmluZF92aXJxX3Qg
+KmJpbmQsIGV2dGNobl9wb3J0X3QgcG9ydCkKPj4gICAgICBpZiAoIHZpcnFfaXNfZ2xvYmFsKHZp
+cnEpICYmICh2Y3B1ICE9IDApICkKPj4gICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4+ICAKPj4g
+KyAgIC8qCj4+ICsgICAgKiBNYWtlIHN1cmUgdGhlIGd1ZXN0IGNvbnRyb2xsZWQgdmFsdWUgdmly
+cSBpcyBib3VuZGVkIGV2ZW4gZHVyaW5nCj4+ICsgICAgKiBzcGVjdWxhdGl2ZSBleGVjdXRpb24u
+Cj4+ICsgICAgKi8KPj4gKyAgICB2aXJxID0gYXJyYXlfaW5kZXhfbm9zcGVjKHZpcnEsIEFSUkFZ
+X1NJWkUodi0+dmlycV90b19ldnRjaG4pKTsKPiBJIHRoaW5rIHRoaXMgd2FudHMgdG8gbW92ZSBh
+aGVhZCBvZiB0aGUgaWYoKSBpbiBjb250ZXh0LCB0byBiZSBpbmRlcGVuZGVudAo+IG9mIHRoZSBw
+YXJ0aWN1bGFyIGltcGxlbWVudGF0aW9uIG9mIHZpcnFfaXNfZ2xvYmFsKCkgKHRoZSBjdXJyZW50
+IHNoYXBlIG9mCj4gd2hpY2ggaXMgbW9zdGx5IGZpbmUsIHBlcmhhcHMgd2l0aCB0aGUgZXhjZXB0
+aW9uIG9mIHRoZSByaXNrIG9mIHRoZSBjb21waWxlcgo+IHRyYW5zbGF0aW5nIHRoZSBzd2l0Y2go
+KSB0aGVyZSBieSB3YXkgb2YgYSBqdW1wIHRhYmxlKS4gVGhpcyBhbHNvIG1vdmVzIGl0Cj4gY2xv
+c2VyIHRvIHRoZSBpZigpIHRoZSBjb25zdHJ1Y3QgaXMgYSBjb21wYW5pb24gdG8uCkkgdW5kZXJz
+dGFuZCB0aGUgY29uY2Vybi4gSG93ZXZlciwgYmVjYXVzZSB0aGUgdmFsdWUgb2YgdmlycSB3b3Vs
+ZCBiZQpjaGFuZ2VkIGJlZm9yZSB0aGUgdmlycV9pc19nbG9iYWwgY2hlY2ssIGNvdWxkbid0IHRo
+YXQgcmVzdWx0IGluCnJldHVybmluZyBhIHdyb25nIGVycm9yIGNvZGU/IFRoZSBwb3RlbnRpYWwg
+b3V0LW9mLWJvdW5kIHZhbHVlIGlzCmJyb3VnaHQgYmFjayBpbnRvIHRoZSB2YWxpZCByYW5nZSwg
+c28gdGhhdCB0aGUgYWJvdmUgY2hlY2sgbWlnaHQgZmlyZQppbmNvcnJlY3RseT8KPgo+PiBAQCAt
+ODE2LDYgKzgyMiwxMiBAQCBpbnQgc2V0X2dsb2JhbF92aXJxX2hhbmRsZXIoc3RydWN0IGRvbWFp
+biAqZCwgdWludDMyX3QgdmlycSkKPj4gICAgICBpZiAoIXZpcnFfaXNfZ2xvYmFsKHZpcnEpKQo+
+PiAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPj4gIAo+PiArICAgLyoKPj4gKyAgICAqIE1ha2Ug
+c3VyZSB0aGUgZ3Vlc3QgY29udHJvbGxlZCB2YWx1ZSB2aXJxIGlzIGJvdW5kZWQgZXZlbiBkdXJp
+bmcKPj4gKyAgICAqIHNwZWN1bGF0aXZlIGV4ZWN1dGlvbi4KPj4gKyAgICAqLwo+PiArICAgIHZp
+cnEgPSBhcnJheV9pbmRleF9ub3NwZWModmlycSwgQVJSQVlfU0laRShnbG9iYWxfdmlycV9oYW5k
+bGVycykpOwo+IFNhbWUgaGVyZSB0aGVuLgo+Cj4+IEBAIC05MzEsNyArOTQzLDggQEAgbG9uZyBl
+dnRjaG5fYmluZF92Y3B1KHVuc2lnbmVkIGludCBwb3J0LCB1bnNpZ25lZCBpbnQgdmNwdV9pZCkK
+Pj4gICAgICBzdHJ1Y3QgZXZ0Y2huICpjaG47Cj4+ICAgICAgbG9uZyAgICAgICAgICAgcmMgPSAw
+Owo+PiAgCj4+IC0gICAgaWYgKCAodmNwdV9pZCA+PSBkLT5tYXhfdmNwdXMpIHx8IChkLT52Y3B1
+W3ZjcHVfaWRdID09IE5VTEwpICkKPj4gKyAgICBpZiAoICh2Y3B1X2lkID49IGQtPm1heF92Y3B1
+cykgfHwKPj4gKyAgICAgICAgIChkLT52Y3B1W2FycmF5X2luZGV4X25vc3BlYyh2Y3B1X2lkLCBk
+LT5tYXhfdmNwdXMpXSA9PSBOVUxMKSApCj4+ICAgICAgICAgIHJldHVybiAtRU5PRU5UOwo+PiAg
+Cj4+ICAgICAgc3Bpbl9sb2NrKCZkLT5ldmVudF9sb2NrKTsKPj4gQEAgLTk2OSw4ICs5ODIsMTAg
+QEAgbG9uZyBldnRjaG5fYmluZF92Y3B1KHVuc2lnbmVkIGludCBwb3J0LCB1bnNpZ25lZCBpbnQg
+dmNwdV9pZCkKPj4gICAgICAgICAgdW5saW5rX3BpcnFfcG9ydChjaG4sIGQtPnZjcHVbY2huLT5u
+b3RpZnlfdmNwdV9pZF0pOwo+PiAgICAgICAgICBjaG4tPm5vdGlmeV92Y3B1X2lkID0gdmNwdV9p
+ZDsKPj4gICAgICAgICAgcGlycV9zZXRfYWZmaW5pdHkoZCwgY2huLT51LnBpcnEuaXJxLAo+PiAt
+ICAgICAgICAgICAgICAgICAgICAgICAgICBjcHVtYXNrX29mKGQtPnZjcHVbdmNwdV9pZF0tPnBy
+b2Nlc3NvcikpOwo+PiAtICAgICAgICBsaW5rX3BpcnFfcG9ydChwb3J0LCBjaG4sIGQtPnZjcHVb
+dmNwdV9pZF0pOwo+PiArICAgICAgICAgICAgICAgICAgICAgICAgICBjcHVtYXNrX29mKGQtPnZj
+cHVbYXJyYXlfaW5kZXhfbm9zcGVjKHZjcHVfaWQsCj4+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZC0+bWF4X3ZjcHVzKV0t
+PnByb2Nlc3NvcikpOwo+PiArICAgICAgICBsaW5rX3BpcnFfcG9ydChwb3J0LCBjaG4sIGQtPnZj
+cHVbYXJyYXlfaW5kZXhfbm9zcGVjKHZjcHVfaWQsCj4+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZC0+bWF4X3ZjcHVzKV0pOwo+
+IFVzaW5nIEFuZHJldydzIG5ldyBkb21haW5fdmNwdSgpIHdpbGwgaW1wcm92ZSByZWFkYWJpbGl0
+eSwgZXNwZWNpYWxseQo+IGFmdGVyIHlvdXIgY2hhbmdlLCBxdWl0ZSBhIGJpdCBoZXJlLiBCdXQg
+b2YgY291cnNlIGNvZGUgZWxzZXdoZXJlIHdpbGwKPiBiZW5lZml0IGFzIHdlbGwuCgpZb3UgbWVh
+biBJIHNob3VsZCB1c2UgdGhlIGRvbWFpbl92Y3B1IGZ1bmN0aW9uIGluIGJvdGggaHVua3MsIGJl
+Y2F1c2UKZHVlIHRvIHRoZSBmaXJzdCBvbmUsIHRoZSBsYXR0ZXIgY2FuIG5ldmVyIHJldHVybiBO
+VUxMPyBJIHdpbGwgcmViYXNlCnRoZSBzZXJpZXMgb24gdG9wIG9mIHRoaXMgZnJlc2ggY2hhbmdl
+LCBhbmQgdXNlIHRoZSBkb21haW5fdmNwdSBmdW5jdGlvbgpmb3IgdGhlIGxvY2F0aW9ucyB3aGVy
+ZSBJIGJvdW5kIGEgdmNwdV9pZC4KCkJlc3QsCk5vcmJlcnQKCj4KPiBKYW4KPgo+CgoKCgpBbWF6
+b24gRGV2ZWxvcG1lbnQgQ2VudGVyIEdlcm1hbnkgR21iSApLcmF1c2Vuc3RyLiAzOAoxMDExNyBC
+ZXJsaW4KR2VzY2hhZWZ0c2Z1ZWhyZXI6IENocmlzdGlhbiBTY2hsYWVnZXIsIFJhbGYgSGVyYnJp
+Y2gKVXN0LUlEOiBERSAyODkgMjM3IDg3OQpFaW5nZXRyYWdlbiBhbSBBbXRzZ2VyaWNodCBDaGFy
+bG90dGVuYnVyZyBIUkIgMTQ5MTczIEIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
