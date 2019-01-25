@@ -1,23 +1,18 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
-Subject: Re: [PATCH for-4.12] gic-vgic: fix assert condition
-Date: Fri, 25 Jan 2019 14:10:11 +0200
-Message-ID: <c6cb57ce-3447-67ee-5629-322ee6207362@gmail.com>
-References: <1548354814-23208-1-git-send-email-andrii.anisov@gmail.com>
- <1548355642.9022.23.camel@amazon.de>
- <CAC1WxdjgOg1Qg4=2Me0nwdEO+CMS4C1WMr7E=pxpi74-ME9uTw@mail.gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 132471: tolerable all pass -
+ PUSHED
+Date: Fri, 25 Jan 2019 12:15:15 +0000
+Message-ID: <osstest-132471-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=qSih=QB=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1gn0JM-0001Mx-VJ
- for xen-devel@lists.xenproject.org; Fri, 25 Jan 2019 12:10:17 +0000
-Received: by mail-lf1-x143.google.com with SMTP id a8so6761575lfk.5
- for <xen-devel@lists.xenproject.org>; Fri, 25 Jan 2019 04:10:15 -0800 (PST)
-In-Reply-To: <CAC1WxdjgOg1Qg4=2Me0nwdEO+CMS4C1WMr7E=pxpi74-ME9uTw@mail.gmail.com>
-Content-Language: en-US
+ <SRS0=QDVF=QB=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gn0OF-0001Wz-Sb
+ for xen-devel@lists.xenproject.org; Fri, 25 Jan 2019 12:15:19 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,13 +21,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "Nuernberger, Stefan" <snu@amazon.de>
-Cc: "jgross@suse.com" <jgross@suse.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, "andre.przywara@arm.com" <andre.przywara@arm.com>, "julien.grall@arm.com" <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-U3RlZmFuLAoKSSBob3BlIHlvdSB3b3VsZCBub3QgbWluZCBpZiBJIHB1dCB5b3VyIFN1Z2dlc3Rl
-ZC1ieSBmb3IgdjI/CgpPbiAyNS4wMS4xOSAwODo1NSwgQW5kcmlpIEFuaXNvdiB3cm90ZToKCj4g
-WW91IGFyZSBhYnNvbHV0ZWx5IGNvcnJlY3QuCi0tIApTaW5jZXJlbHksCkFuZHJpaSBBbmlzb3Yu
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+ZmxpZ2h0IDEzMjQ3MSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMjQ3MS8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
+ZzoKIHhlbiAgICAgICAgICAgICAgICAgIDMzODlhOGRjOGM1NzUzYTNjODQ3NDQ5MjNjZDAxOTMz
+OTVlM2YyYTkKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDllOTJhY2Yx
+Yjc1MmRmZGZiMjk0MjM0YjMyZDFmYTlmNTViZmRjMGYKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEz
+MjQ2MyAgMjAxOS0wMS0yNCAxOTowMDozMiBaICAgIDAgZGF5cwpUZXN0aW5nIHNhbWUgc2luY2Ug
+ICAxMzI0NzEgIDIwMTktMDEtMjUgMDk6MDA6NTAgWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoK
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBSb2dlciBQYXUg
+TW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
+LWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
+cWVtdXUtZGViaWFuaHZtLWkzODYgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9q
+ZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoK
+TG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dz
+LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhl
+c2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94
+ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFp
+bDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3Qu
+Z2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBm
+b3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDth
+PXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94
+ZW4vZ2l0L3hlbi5naXQKICAgOWU5MmFjZjFiNy4uMzM4OWE4ZGM4YyAgMzM4OWE4ZGM4YzU3NTNh
+M2M4NDc0NDkyM2NkMDE5MzM5NWUzZjJhOSAtPiBzbW9rZQoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
