@@ -1,22 +1,35 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [RFC] virtio_ring: check dma_mem for xen_domain
-Date: Fri, 25 Jan 2019 11:18:18 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1901251116490.17936__11567.3957554222$1548443964$gmane$org@sstabellini-ThinkPad-X260>
-References: <20190121050056.14325-1-peng.fan@nxp.com>
- <alpine.DEB.2.10.1901221113410.17936@sstabellini-ThinkPad-X260>
- <20190123071232.GA20526@infradead.org>
- <alpine.DEB.2.10.1901230935280.17936@sstabellini-ThinkPad-X260>
- <20190123211405.GA4971@infradead.org>
- <AM0PR04MB4481F3986CFB6D1EF26FA135889B0@AM0PR04MB4481.eurprd04.prod.outlook.com>
+From: Mike Rapoport <rppt@linux.ibm.com>
+Subject: Re: [PATCH v2 06/21] memblock:
+ memblock_phys_alloc_try_nid(): don't panic
+Date: Fri, 25 Jan 2019 21:32:52 +0200
+Message-ID: <20190125193252.GH31519__27983.7061696284$1548444870$gmane$org@rapoport-lnx>
+References: <1548057848-15136-1-git-send-email-rppt@linux.ibm.com>
+ <1548057848-15136-7-git-send-email-rppt@linux.ibm.com>
+ <20190125174502.GL25901@arrakis.emea.arm.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-143402054-1548443899=:17936"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=36PU=QB=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gn6ze-0000T3-NQ
- for xen-devel@lists.xenproject.org; Fri, 25 Jan 2019 19:18:22 +0000
-In-Reply-To: <AM0PR04MB4481F3986CFB6D1EF26FA135889B0@AM0PR04MB4481.eurprd04.prod.outlook.com>
+ <SRS0=Hnek=QB=linux.ibm.com=rppt@srs-us1.protection.inumbo.net>)
+ id 1gn7E6-0002FS-Uu
+ for xen-devel@lists.xenproject.org; Fri, 25 Jan 2019 19:33:18 +0000
+Received: from pps.filterd (m0098394.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x0PJNgeO084696
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jan 2019 14:33:16 -0500
+Received: from e06smtp05.uk.ibm.com (e06smtp05.uk.ibm.com [195.75.94.101])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2q888x11pg-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Jan 2019 14:33:15 -0500
+Received: from localhost
+ by e06smtp05.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <xen-devel@lists.xenproject.org> from <rppt@linux.ibm.com>;
+ Fri, 25 Jan 2019 19:33:11 -0000
+Content-Disposition: inline
+In-Reply-To: <20190125174502.GL25901@arrakis.emea.arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,69 +38,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Peng Fan <peng.fan@nxp.com>
-Cc: "jgross@suse.com" <jgross@suse.com>, ohad@wizery.com, Stefano Stabellini <sstabellini@kernel.org>, Andy Duan <fugang.duan@nxp.com>, "mst@redhat.com" <mst@redhat.com>, "jasowang@redhat.com" <jasowang@redhat.com>, "linux-remoteproc@vger.kernel.org" <linux-remoteproc@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "virtualization@lists.linux-foundation.org" <virtualization@lists.linux-foundation.org>, "hch@infradead.org" <hch@infradead.org>, "luto@kernel.org" <luto@kernel.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, bjorn.andersson@linaro.org
+To: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Rich Felker <dalias@libc.org>, linux-ia64@vger.kernel.org, devicetree@vger.kernel.org, Heiko Carstens <heiko.carstens@de.ibm.com>, x86@kernel.org, linux-mips@vger.kernel.org, Max Filippov <jcmvbkbc@gmail.com>, Guo Ren <guoren@kernel.org>, sparclinux@vger.kernel.org, Christoph Hellwig <hch@lst.de>, linux-s390@vger.kernel.org, linux-c6x-dev@linux-c6x.org, Yoshinori Sato <ysato@users.sourceforge.jp>, Richard Weinberger <richard@nod.at>, linux-sh@vger.kernel.org, Russell King <linux@armlinux.org.uk>, kasan-dev@googlegroups.com, Geert Uytterhoeven <geert@linux-m68k.org>, Mark Salter <msalter@redhat.com>, Dennis Zhou <dennis@kernel.org>, Matt Turner <mattst88@gmail.com>, linux-snps-arc@lists.infradead.org, uclinux-h8-devel@lists.sourceforge.jp, Petr Mladek <pmladek@suse.com>, linux-xtensa@linux-xtensa.org, linux-alpha@vger.kernel.org, linux-um@lists.infradead.org, linux-m68k@l
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-143402054-1548443899=:17936
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Fri, 25 Jan 2019, Peng Fan wrote:
-> > On Wed, Jan 23, 2019 at 01:04:33PM -0800, Stefano Stabellini wrote:
-> > > If vring_use_dma_api is actually supposed to return true when
-> > > dma_dev->dma_mem is set, then both Peng's patch and the patch I wrote
-> > > are not fixing the real issue here.
-> > >
-> > > I don't know enough about remoteproc to know where the problem
-> > > actually lies though.
-> > 
-> > The problem is the following:
-> > 
-> > Devices can declare a specific memory region that they want to use when the
-> > driver calls dma_alloc_coherent for the device, this is done using the
-> > shared-dma-pool DT attribute, which comes in two variants that would be a
-> > little to much to explain here.
-> > 
-> > remoteproc makes use of that because apparently the device can only
-> > communicate using that region.  But it then feeds back memory obtained
-> > with dma_alloc_coherent into the virtio code.  For that it calls
-> > vmalloc_to_page on the dma_alloc_coherent, which is a huge no-go for the
-> > ĐMA API and only worked accidentally on a few platform, and apparently
-> > arm64 just changed a few internals that made it stop working for remoteproc.
-> > 
-> > The right answer is to not use the DMA API to allocate memory from a
-> > device-speficic region, but to tie the driver directly into the DT reserved
-> > memory API in a way that allows it to easilt obtain a struct device for it.
-> 
-> Just have a question, 
-> 
-> Since vmalloc_to_page is ok for cma area, no need to take cma and per device
-> cma into consideration right? 
-> 
-> we only need to implement a piece code to handle per device specific region
-> using RESERVEDMEM_OF_DECLARE, just like:
-> RESERVEDMEM_OF_DECLARE(rpmsg-dma, "rpmsg-dma-pool", 
-> rmem_rpmsg_dma_setup);
-> And implement the device_init call back and build a map between page and phys.
-> Then in rpmsg driver, scatter list could use page structure, no need vmalloc_to_page
-> for per device dma.
-> 
-> Is this the right way?
-
-I CC'ed the rpmsg maintainers, you want to keep them in the loop on
-this.
---8323329-143402054-1548443899=:17936
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-143402054-1548443899=:17936--
+T24gRnJpLCBKYW4gMjUsIDIwMTkgYXQgMDU6NDU6MDJQTSArMDAwMCwgQ2F0YWxpbiBNYXJpbmFz
+IHdyb3RlOgo+IE9uIE1vbiwgSmFuIDIxLCAyMDE5IGF0IDEwOjAzOjUzQU0gKzAyMDAsIE1pa2Ug
+UmFwb3BvcnQgd3JvdGU6Cj4gPiBkaWZmIC0tZ2l0IGEvYXJjaC9hcm02NC9tbS9udW1hLmMgYi9h
+cmNoL2FybTY0L21tL251bWEuYwo+ID4gaW5kZXggYWUzNGUzYS4uMmM2MWVhNCAxMDA2NDQKPiA+
+IC0tLSBhL2FyY2gvYXJtNjQvbW0vbnVtYS5jCj4gPiArKysgYi9hcmNoL2FybTY0L21tL251bWEu
+Ywo+ID4gQEAgLTIzNyw2ICsyMzcsMTAgQEAgc3RhdGljIHZvaWQgX19pbml0IHNldHVwX25vZGVf
+ZGF0YShpbnQgbmlkLCB1NjQgc3RhcnRfcGZuLCB1NjQgZW5kX3BmbikKPiA+ICAJCXByX2luZm8o
+IkluaXRtZW0gc2V0dXAgbm9kZSAlZCBbPG1lbW9yeS1sZXNzIG5vZGU+XVxuIiwgbmlkKTsKPiA+
+ICAKPiA+ICAJbmRfcGEgPSBtZW1ibG9ja19waHlzX2FsbG9jX3RyeV9uaWQobmRfc2l6ZSwgU01Q
+X0NBQ0hFX0JZVEVTLCBuaWQpOwo+ID4gKwlpZiAoIW5kX3BhKQo+ID4gKwkJcGFuaWMoIkNhbm5v
+dCBhbGxvY2F0ZSAlenUgYnl0ZXMgZm9yIG5vZGUgJWQgZGF0YVxuIiwKPiA+ICsJCSAgICAgIG5k
+X3NpemUsIG5pZCk7Cj4gPiArCj4gPiAgCW5kID0gX192YShuZF9wYSk7Cj4gPiAgCj4gPiAgCS8q
+IHJlcG9ydCBhbmQgaW5pdGlhbGl6ZSAqLwo+IAo+IERvZXMgaXQgbWVhbiB0aGF0IG1lbWJsb2Nr
+X3BoeXNfYWxsb2NfdHJ5X25pZCgpIG5ldmVyIHJldHVybnMgdmFsaWQKPiBwaHlzaWNhbCBtZW1v
+cnkgc3RhcnRpbmcgYXQgMD8KClllcywgaXQgZG9lcy4KbWVtYmxvY2tfZmluZF9pbl9yYW5nZV9u
+b2RlKCkgdGhhdCBpcyB1c2VkIGJ5IGFsbCBhbGxvY2F0aW9uIG1ldGhvZHMKc2tpcHMgdGhlIGZp
+cnN0IHBhZ2UgWzFdLgogClsxXSBodHRwczovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgv
+a2VybmVsL2dpdC90b3J2YWxkcy9saW51eC5naXQvdHJlZS9tbS9tZW1ibG9jay5jI24yNTcKCj4g
+LS0gCj4gQ2F0YWxpbgo+IAoKLS0gClNpbmNlcmVseSB5b3VycywKTWlrZS4KCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
