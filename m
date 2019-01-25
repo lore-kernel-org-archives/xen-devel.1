@@ -1,18 +1,14 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH-for-4.12] docs: Fix dm_restrict documentation
-Date: Fri, 25 Jan 2019 06:47:49 +0100
-Message-ID: <4caab34b-ea69-24d9-790f-d92092760e68@suse.com>
-References: <20190124174827.15902-1-george.dunlap@citrix.com>
+Subject: Re: [PATCH for-4.12] x86/p2m: Drop erroneous
+ #VE-enabled check in ept_set_entry()
+Date: Fri, 25 Jan 2019 06:50:15 +0100
+Message-ID: <9b873ac9-f1da-5444-da73-42b723d37439@suse.com>
+References: <1548354483-5021-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ERP6=QB=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gmuLJ-0006lW-Vx
- for xen-devel@lists.xenproject.org; Fri, 25 Jan 2019 05:47:54 +0000
-In-Reply-To: <20190124174827.15902-1-george.dunlap@citrix.com>
+In-Reply-To: <1548354483-5021-1-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,26 +18,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Anthony Perard <anthony.perard@citrix.com>, Ian Jackson <ian.jackson@citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjQvMDEvMjAxOSAxODo0OCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBSZW1vdmUgImNoYXR0
-eSIgYW5kIHJlZHVuZGFudCBpbmZvcm1hdGlvbiBmcm9tIHRoZSB4bCBtYW4gcGFnZTsKPiByZXN0
-cmljdCBpdCB0byBmdW5jdGlvbmFsIGRlc2NyaXB0aW9ucyBvbmx5LCBhbmQgcG9pbnQgaW5zdGVh
-ZCB0bwo+IHFlbXUtZGVwcml2LnBhbmRvYyBhbmQgU1VQUE9SVC5tZCBhcyBsb2NhdGlvbnMgZm9y
-ICJjYW5vbmljYWwiCj4gaW5mb3JtYXRpb24uCj4gCj4gQWRkIGEgbWFuIHBhZ2UgZW50cnkgZm9y
-IGRldmljZV9tb2RlbF91c2VyLgo+IAo+IFVwZGF0ZSBxZW11LWRlcHJpdmlsZWdlLnBhbmRvYzoK
-PiAKPiBDaGFuZ2VzIGluIG1pc3NpbmcgZmVhdHVyZSBsaXN0Ogo+IC0gTWlncmF0aW9uIGlzIGZ1
-bmN0aW9uYWwKPiAtIEJ1dCBxZGlzayBiYWNrZW5kcyBhcmUgbm90Cj4gCj4gQWRkIGEgbWlzc2lu
-ZyByZXN0cmljdGlvbiBsaXN0Lgo+IAo+IFRoZSBmb2xsb3dpbmcgc3RhdGVtZW50cyBmcm9tIHRo
-ZSBtYW4gcGFnZSBhcmUgZHJvcHBlZDoKPiAtIE1lbnRpb25pbmcgUFY7IFBWIGd1ZXN0cyBuZXZl
-ciBoYXZlIGEgZGV2aWNlIG1vZGVsLgo+IC0gRHJvcCB0aGUgY29uZnVzaW5nIHN0YXRlbWVudCBh
-Ym91dCBzdGR2Z2EgYW5kIGNpcnJ1cyB2Z2Egb3B0aW9ucy4KPiAtIFJlLXVzZWQgZG9tYWluIElE
-cyBhcmUgbm93IGhhbmRsZWQuCj4gLSBEZXZpY2UgbW9kZWxzIHNob3VsZCBubyBsb25nZXIgYmUg
-YWJsZSB0byBjcmVhdGUgd29ybGQtcmVhZGFibGUKPiAgIGZpbGVzIG9uIGRvbTAncyBmaWxlc3lz
-dGVtLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0
-cml4LmNvbT4KClJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNv
-bT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMjQvMDEvMjAxOSAxOToyOCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBDb2RlIGNsZWFyaW5n
+IHRoZSAiU3VwcHJlc3MgVkUiIGJpdCBpbiBhbiBFUFQgZW50cnkgaXNuJ3QgbmVjZWNzc2VyaWx5
+IHJ1bm5pbmcKPiBpbiBjdXJyZW50IGNvbnRleHQuICBJbiBBTFRQMk1fZXh0ZXJuYWwgbW9kZSwg
+aXQgZGVmaW5pdGVseSBpcyBub3QsIGFuZCBpbiBQVgo+IGNvbnRleHQsIHZjcHVfYWx0cDJtKGN1
+cnJlbnQpIGFjdHMgdXBvbiB0aGUgSFZNIHVuaW9uLgo+IAo+IEV2ZW4gaWYgd2UgY291bGQgc2Vu
+c2libHkgcmVzb2x2ZSB0aGUgdGFyZ2V0IHZDUFUsIGl0IG1heSBsZWdpdGltYXRlbHkgbm90IGJl
+Cj4gZnVsbHkgc2V0IHVwIGF0IHRoaXMgcG9pbnQsIHNvIHJlamVjdGluZyB0aGUgRVBUIG1vZGlm
+aWNhdGlvbiB3b3VsZCBiZSBidWdneS4KPiAKPiBUaGVyZSBpcyBhIHBhdGggaW4gaHZtX2hhcF9u
+ZXN0ZWRfcGFnZV9mYXVsdCgpIHdoaWNoIGV4cGxpY2l0bHkgZW11bGF0ZXMgI1ZFCj4gaW4gdGhl
+IGNwdV9oYXNfdm14X3ZpcnRfZXhjZXB0aW9ucyBjYXNlLCBzbyB0aGUgLUVPUE5PVFNVUFAgcGFy
+dCBvZiB0aGlzCj4gY29uZGl0aW9uIGlzIGFsc28gd3JvbmcuCj4gCj4gRHJvcCB0aGUgIXN2ZSBj
+aGVjayBlbnRpcmVseS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
+Y29vcGVyM0BjaXRyaXguY29tPgoKUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdy
+b3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
