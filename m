@@ -1,21 +1,22 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v2 2/4] libxl: attach PCI device to qemu
- only after setting pciback/pcifront
-Date: Sat, 26 Jan 2019 03:24:20 +0100
-Message-ID: <20190126022420.GN1429@mail-itl>
-References: <cover.f56cb3033143af6e9a0aeeaf33eb912fa5761983.1547566486.git-series.marmarek@invisiblethingslab.com>
- <43fe7e5e8f5d0d81995188d40ba756090d80f656.1547566486.git-series.marmarek@invisiblethingslab.com>
- <20190117102959.4yghre2psqjsi3x6@mac>
+Subject: [PATCH v3 3/6] libxl: don't try to manipulate json
+ config for stubdomain
+Date: Sat, 26 Jan 2019 03:31:14 +0100
+Message-ID: <74fd5adc7bdb81ee59e0ec4b60acecfad768cb7a.1548469645.git-series.marmarek@invisiblethingslab.com>
+References: <cover.3de8cf7a339b8395cb449f8f3d44fee884ce04fa.1548469645.git-series.marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0031887663901672534=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=/WFd=QC=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gnDdy-00056D-DD
- for xen-devel@lists.xenproject.org; Sat, 26 Jan 2019 02:24:26 +0000
-In-Reply-To: <20190117102959.4yghre2psqjsi3x6@mac>
+ id 1gnDkw-00062a-Ut
+ for xen-devel@lists.xenproject.org; Sat, 26 Jan 2019 02:31:38 +0000
+In-Reply-To: <cover.3de8cf7a339b8395cb449f8f3d44fee884ce04fa.1548469645.git-series.marmarek@invisiblethingslab.com>
+In-Reply-To: <cover.3de8cf7a339b8395cb449f8f3d44fee884ce04fa.1548469645.git-series.marmarek@invisiblethingslab.com>
+References: <cover.3de8cf7a339b8395cb449f8f3d44fee884ce04fa.1548469645.git-series.marmarek@invisiblethingslab.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,111 +25,74 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0031887663901672534==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="lymARMIdFDV9dylT"
-Content-Disposition: inline
-
-
---lymARMIdFDV9dylT
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [Xen-devel] [PATCH v2 2/4] libxl: attach PCI device to qemu only
- after setting pciback/pcifront
-
-On Thu, Jan 17, 2019 at 11:29:59AM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Tue, Jan 15, 2019 at 04:36:29PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > When qemu is running in stubdomain, handling "pci-ins" command will fail
-> > if pcifront is not initialized already. Fix this by sending such command
-> > only after confirming that pciback/front is running.
-> >=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
-> > ---
-> > Changes in v2:
-> > - Fixed code style since previous version.
-> > ---
-> >  tools/libxl/libxl_pci.c |  9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> >=20
-> > diff --git a/tools/libxl/libxl_pci.c b/tools/libxl/libxl_pci.c
-> > index 3b6b23c..1bde537 100644
-> > --- a/tools/libxl/libxl_pci.c
-> > +++ b/tools/libxl/libxl_pci.c
-> > @@ -1191,6 +1191,7 @@ int libxl__device_pci_add(libxl__gc *gc, uint32_t=
- domid, libxl_device_pci *pcide
-> >  {
-> >      libxl_ctx *ctx =3D libxl__gc_owner(gc);
-> >      unsigned int orig_vdev, pfunc_mask;
-> > +    char *be_path;
-> >      libxl_device_pci *assigned;
-> >      int num_assigned, i, rc;
-> >      int stubdomid =3D 0;
-> > @@ -1245,6 +1246,14 @@ int libxl__device_pci_add(libxl__gc *gc, uint32_=
-t domid, libxl_device_pci *pcide
-> >          rc =3D do_pci_add(gc, stubdomid, &pcidev_s, 0);
-> >          if ( rc )
-> >              goto out;
-> > +        /* Wait for the device actually being connected, otherwise dev=
-ice model
-> > +         * running there will fail to find the device. */
-> > +        be_path =3D libxl__sprintf(gc, "%s/backend/pci/%d/0",
-> > +                                 libxl__xs_get_dompath(gc, 0), stubdom=
-id);
-> > +        rc =3D libxl__wait_for_backend(gc, be_path,
-> > +                                     GCSPRINTF("%d", XenbusStateConnec=
-ted));
-> > +        if (rc)
-> > +            goto out;
->=20
-> I think it would be better to use the async libxl functionality here,
-> see libxl__xswait_start. I will leave for the toolstack maintainers to
-> decide. Apart from that the change seems correct.
-
-libxl__device_pci_add() is not async-aware right now and it looks like
-converting it is quite a bit of work. I'd leave it out of scope for this
-patch series...
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---lymARMIdFDV9dylT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxLxNMACgkQ24/THMrX
-1ywN2gf/btmOkNy65x4Co9Ra7knsP06NzfrWHRX1kUk5piFH3I538ypx94CLzqrf
-FKdVXvxC/55Hb2XmSXXeQQTJBbsiZ0zSoRuPkv2Ty9kHNYf+P+CUF7oRWoLln7fx
-vBvVVIEcTFXnENJWyDmPSc+IOq35e1gM+eforsV8njclk0m9xvXFQmL/a24BPv60
-zczLUsZUfkTeqm1fOKn+REfeBGlBzH/jh2FkvpIrkL0Jw6vQxE0W+c18kr9BCZVV
-Ynvl1HqbjWLi1l2NHzvlpPAsrfdNcnvKIAn/MVVV42pDXV/5Vn9eQVB7ezWQ70R2
-T0LYk/QSApSCcBNOuarz3O08i6EKLA==
-=pyoe
------END PGP SIGNATURE-----
-
---lymARMIdFDV9dylT--
-
-
---===============0031887663901672534==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0031887663901672534==--
+U3R1YmRvbWFpbiBkbyBub3QgaGF2ZSBpdCdzIG93biBjb25maWcgZmlsZSAtIGl0cyBjb25maWd1
+cmF0aW9uIGlzCmRlcml2ZWQgZnJvbSB0YXJnZXQgZG9tYWlucy4gRG8gbm90IHRyeSB0byBtYW5p
+cHVsYXRlIGl0IHdoZW4gYXR0YWNoaW5nClBDSSBkZXZpY2UuCgpUaGlzIGJ1ZyBwcmV2ZW50ZWQg
+c3RhcnRpbmcgSFZNIHdpdGggc3R1YmRvbWFpbiBhbmQgUENJIHBhc3N0aHJvdWdoCmRldmljZSBh
+dHRhY2hlZC4KClNpZ25lZC1vZmYtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFy
+bWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4KLS0tCkNoYW5nZXMgaW4gdjM6CiAtIHNraXAg
+bGlieGxfX2RtX2NoZWNrX3N0YXJ0IHRvbywgYXMgc3R1YmRvbWFpbiBpcyBndWFyYW50ZWVkIHRv
+IGJlCiAgIHJ1bm5pbmcgYXQgdGhpcyBzdGFnZSBhbHJlYWR5CiAtIGRvIG5vdCBpbml0IGRfY29u
+ZmlnIGF0IGFsbCwgYXMgaXQgaXMgdXNlZCBvbmx5IGZvciBqc29uIG1hbmlwdWxhdGlvbgotLS0K
+IHRvb2xzL2xpYnhsL2xpYnhsX3BjaS5jIHwgNDggKysrKysrKysrKysrKysrKysrKysrKysrKyst
+LS0tLS0tLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMzAgaW5zZXJ0aW9ucygrKSwgMTggZGVs
+ZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdG9vbHMvbGlieGwvbGlieGxfcGNpLmMgYi90b29scy9s
+aWJ4bC9saWJ4bF9wY2kuYwppbmRleCAxYmRlNTM3Li44ZDE1OWNmIDEwMDY0NAotLS0gYS90b29s
+cy9saWJ4bC9saWJ4bF9wY2kuYworKysgYi90b29scy9saWJ4bC9saWJ4bF9wY2kuYwpAQCAtMTIw
+LDEwICsxMjAsMTQgQEAgc3RhdGljIGludCBsaWJ4bF9fZGV2aWNlX3BjaV9hZGRfeGVuc3RvcmUo
+bGlieGxfX2djICpnYywgdWludDMyX3QgZG9taWQsIGxpYnhsX2QKICAgICBsaWJ4bF9kb21haW5f
+Y29uZmlnIGRfY29uZmlnOwogICAgIGxpYnhsX2RldmljZV9wY2kgcGNpZGV2X3NhdmVkOwogICAg
+IGxpYnhsX19kb21haW5fdXNlcmRhdGFfbG9jayAqbG9jayA9IE5VTEw7CisgICAgYm9vbCBpc19z
+dHViZG9tYWluID0gbGlieGxfaXNfc3R1YmRvbShDVFgsIGRvbWlkLCBOVUxMKTsKIAotICAgIGxp
+YnhsX2RvbWFpbl9jb25maWdfaW5pdCgmZF9jb25maWcpOwotICAgIGxpYnhsX2RldmljZV9wY2lf
+aW5pdCgmcGNpZGV2X3NhdmVkKTsKLSAgICBsaWJ4bF9kZXZpY2VfcGNpX2NvcHkoQ1RYLCAmcGNp
+ZGV2X3NhdmVkLCBwY2lkZXYpOworICAgIC8qIFN0dWJkb21haW4gZG9lc24ndCBoYXZlIG93biBj
+b25maWcuICovCisgICAgaWYgKCFpc19zdHViZG9tYWluKSB7CisgICAgICAgIGxpYnhsX2RvbWFp
+bl9jb25maWdfaW5pdCgmZF9jb25maWcpOworICAgICAgICBsaWJ4bF9kZXZpY2VfcGNpX2luaXQo
+JnBjaWRldl9zYXZlZCk7CisgICAgICAgIGxpYnhsX2RldmljZV9wY2lfY29weShDVFgsICZwY2lk
+ZXZfc2F2ZWQsIHBjaWRldik7CisgICAgfQogCiAgICAgYmVfcGF0aCA9IGxpYnhsX19kb21haW5f
+ZGV2aWNlX2JhY2tlbmRfcGF0aChnYywgMCwgZG9taWQsIDAsCiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBMSUJYTF9fREVWSUNFX0tJTkRfUENJKTsKQEAg
+LTE1MiwyNyArMTU2LDMzIEBAIHN0YXRpYyBpbnQgbGlieGxfX2RldmljZV9wY2lfYWRkX3hlbnN0
+b3JlKGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLCBsaWJ4bF9kCiAgICAgR0NORVcoZGV2
+aWNlKTsKICAgICBsaWJ4bF9fZGV2aWNlX2Zyb21fcGNpZGV2KGdjLCBkb21pZCwgcGNpZGV2LCBk
+ZXZpY2UpOwogCi0gICAgbG9jayA9IGxpYnhsX19sb2NrX2RvbWFpbl91c2VyZGF0YShnYywgZG9t
+aWQpOwotICAgIGlmICghbG9jaykgewotICAgICAgICByYyA9IEVSUk9SX0xPQ0tfRkFJTDsKLSAg
+ICAgICAgZ290byBvdXQ7Ci0gICAgfQorICAgIC8qIFN0dWJkb21haW4gY29uZmlnIGlzIGRlcml2
+ZWQgZnJvbSBpdHMgdGFyZ2V0IGRvbWFpbiwgaXQgZG9lc24ndCBoYXZlCisgICAgICAgaXRzIG93
+biBmaWxlICovCisgICAgaWYgKCFpc19zdHViZG9tYWluKSB7CisgICAgICAgIGxvY2sgPSBsaWJ4
+bF9fbG9ja19kb21haW5fdXNlcmRhdGEoZ2MsIGRvbWlkKTsKKyAgICAgICAgaWYgKCFsb2NrKSB7
+CisgICAgICAgICAgICByYyA9IEVSUk9SX0xPQ0tfRkFJTDsKKyAgICAgICAgICAgIGdvdG8gb3V0
+OworICAgICAgICB9CiAKLSAgICByYyA9IGxpYnhsX19nZXRfZG9tYWluX2NvbmZpZ3VyYXRpb24o
+Z2MsIGRvbWlkLCAmZF9jb25maWcpOwotICAgIGlmIChyYykgZ290byBvdXQ7CisgICAgICAgIHJj
+ID0gbGlieGxfX2dldF9kb21haW5fY29uZmlndXJhdGlvbihnYywgZG9taWQsICZkX2NvbmZpZyk7
+CisgICAgICAgIGlmIChyYykgZ290byBvdXQ7CiAKLSAgICBkZXZpY2VfYWRkX2RvbWFpbl9jb25m
+aWcoZ2MsICZkX2NvbmZpZywgJmxpYnhsX19wY2lkZXZfZGV2dHlwZSwKLSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgJnBjaWRldl9zYXZlZCk7CisgICAgICAgIGRldmljZV9hZGRfZG9tYWlu
+X2NvbmZpZyhnYywgJmRfY29uZmlnLCAmbGlieGxfX3BjaWRldl9kZXZ0eXBlLAorICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgJnBjaWRldl9zYXZlZCk7CiAKLSAgICByYyA9IGxpYnhs
+X19kbV9jaGVja19zdGFydChnYywgJmRfY29uZmlnLCBkb21pZCk7Ci0gICAgaWYgKHJjKSBnb3Rv
+IG91dDsKKyAgICAgICAgcmMgPSBsaWJ4bF9fZG1fY2hlY2tfc3RhcnQoZ2MsICZkX2NvbmZpZywg
+ZG9taWQpOworICAgICAgICBpZiAocmMpIGdvdG8gb3V0OworICAgIH0KIAogICAgIGZvciAoOzsp
+IHsKICAgICAgICAgcmMgPSBsaWJ4bF9feHNfdHJhbnNhY3Rpb25fc3RhcnQoZ2MsICZ0KTsKICAg
+ICAgICAgaWYgKHJjKSBnb3RvIG91dDsKIAotICAgICAgICByYyA9IGxpYnhsX19zZXRfZG9tYWlu
+X2NvbmZpZ3VyYXRpb24oZ2MsIGRvbWlkLCAmZF9jb25maWcpOwotICAgICAgICBpZiAocmMpIGdv
+dG8gb3V0OworICAgICAgICBpZiAobG9jaykgeworICAgICAgICAgICAgcmMgPSBsaWJ4bF9fc2V0
+X2RvbWFpbl9jb25maWd1cmF0aW9uKGdjLCBkb21pZCwgJmRfY29uZmlnKTsKKyAgICAgICAgICAg
+IGlmIChyYykgZ290byBvdXQ7CisgICAgICAgIH0KIAogICAgICAgICBsaWJ4bF9feHNfd3JpdGV2
+KGdjLCB0LCBiZV9wYXRoLCBsaWJ4bF9feHNfa3ZzX29mX2ZsZXhhcnJheShnYywgYmFjaykpOwog
+CkBAIC0xODQsOCArMTk0LDEwIEBAIHN0YXRpYyBpbnQgbGlieGxfX2RldmljZV9wY2lfYWRkX3hl
+bnN0b3JlKGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLCBsaWJ4bF9kCiBvdXQ6CiAgICAg
+bGlieGxfX3hzX3RyYW5zYWN0aW9uX2Fib3J0KGdjLCAmdCk7CiAgICAgaWYgKGxvY2spIGxpYnhs
+X191bmxvY2tfZG9tYWluX3VzZXJkYXRhKGxvY2spOwotICAgIGxpYnhsX2RldmljZV9wY2lfZGlz
+cG9zZSgmcGNpZGV2X3NhdmVkKTsKLSAgICBsaWJ4bF9kb21haW5fY29uZmlnX2Rpc3Bvc2UoJmRf
+Y29uZmlnKTsKKyAgICBpZiAoIWlzX3N0dWJkb21haW4pIHsKKyAgICAgICAgbGlieGxfZGV2aWNl
+X3BjaV9kaXNwb3NlKCZwY2lkZXZfc2F2ZWQpOworICAgICAgICBsaWJ4bF9kb21haW5fY29uZmln
+X2Rpc3Bvc2UoJmRfY29uZmlnKTsKKyAgICB9CiAgICAgcmV0dXJuIHJjOwogfQogCi0tIApnaXQt
+c2VyaWVzIDAuOS4xCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
