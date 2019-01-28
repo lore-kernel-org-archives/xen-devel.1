@@ -1,19 +1,15 @@
-From: Pry Mar <pryorm09@gmail.com>
-Subject: xen-4.12~rc1 in ub1804: no vfb objects in pv domU,
- bug or feature?
-Date: Sun, 27 Jan 2019 14:15:52 -0800
-Message-ID: <CAHnBbQ_69nOP2NsSy0rtzbBocUJRHnBxnJ9AX7yaqH_dTg7FJw@mail.gmail.com>
+From: "Tian, Kevin" <kevin.tian@intel.com>
+Subject: Re: [PATCH for-4.12] x86/p2m: Drop erroneous
+ #VE-enabled check in ept_set_entry()
+Date: Mon, 28 Jan 2019 01:41:12 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19C914F19@SHSMSX104.ccr.corp.intel.com>
+References: <1548354483-5021-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=LZsX=QD=gmail.com=pryorm09@srs-us1.protection.inumbo.net>)
- id 1gnsiZ-0006dz-Dy
- for xen-devel@lists.xenproject.org; Sun, 27 Jan 2019 22:15:55 +0000
-Received: by mail-it1-x141.google.com with SMTP id a6so16788011itl.4
- for <xen-devel@lists.xenproject.org>; Sun, 27 Jan 2019 14:15:53 -0800 (PST)
+In-Reply-To: <1548354483-5021-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,23 +18,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: anthony.perard@citrix.com, sstabellini@kernel.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Juergen Gross <jgross@suse.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, "Nakajima, Jun" <jun.nakajima@intel.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Jan Beulich <JBeulich@suse.com>, =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-cWVtdSBidWlsZCBjb25maWc6Cmh0dHA6Ly9wYXN0ZS5kZWJpYW4ubmV0L3BsYWluLzEwNjI3Nzcv
-Cgpkb21VIHN0YXJ0dXAgdHJhY2U6Cmh0dHA6Ly9wYXN0ZS5kZWJpYW4ubmV0L3BsYWluLzEwNjI3
-NjgvCgpUaGlzIHJlbGVhc2UgdXNlcyBxZW11LTMuMC4wIHdoaWNoIGhhcyBhIGRlcGVuZHMgb24g
-bGlieGVudG9vbGNvcmUuCgpJbiB4ZW4tNC4xMS4xIHdpdGggcWVtdS0yLjExLjIgdmZiIG9iamVj
-dHMgKFZOQykgYWx3YXlzIHdvcmtlZCBpbiBwdgpkb21VLiBPbmx5IG5vdyB3aXRoIHFlbXUtMy54
-IGlzIGl0IGZhaWxpbmc6IHRoZSBkb21VIHN0b3BzIGFuZCBjbG9zZXMuCgpJIHNlZSB0aGV5IGFy
-ZSBwYXRjaGluZyB0b29scy9xZW11LXhlbi9jb25maWd1cmUgaGVyZToKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE5LTAxL21zZzAxNjk2Lmh0
-bWwKCmFuZCB0aGF0IG1pZ2h0IGJlIHJlbGF0ZWQuIEkgaGF2ZSB0aGUgc2FtZSBiYWQgYmVoYXZp
-b3IgZXZlbiB1c2luZyB0aGUKZGViaWFuLXFlbXUgc291cmNlcyBmb3IgcWVtdS0zLjEuMCwgYW5k
-IGV2ZW4gd2hlbiB0aGF0IGlzIHVzZWQgaW4KeGVuLTQuMTEuMS4KCkknbSBidWlsZGluZyBpbiB1
-YjE4MDQgd2l0aCBhIGRlYmlhbiBkZWx0YSB1c2luZyB0aGUgb2xkIHBhY2thZ2luZwpzY2hlbWUs
-IGJ1dCBhIHRhcmdldCBmb3IgcWVtdXUgaXMgaW5jbHVkZWQuCgpQcnlNYXI1NgojI3hlbi1wYWNr
-YWdpbmcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+PiBGcm9tOiBBbmRyZXcgQ29vcGVyIFttYWlsdG86YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbV0N
+Cj4gU2VudDogRnJpZGF5LCBKYW51YXJ5IDI1LCAyMDE5IDI6MjggQU0NCj4gDQo+IENvZGUgY2xl
+YXJpbmcgdGhlICJTdXBwcmVzcyBWRSIgYml0IGluIGFuIEVQVCBlbnRyeSBpc24ndCBuZWNlY3Nz
+ZXJpbHkNCj4gcnVubmluZw0KPiBpbiBjdXJyZW50IGNvbnRleHQuICBJbiBBTFRQMk1fZXh0ZXJu
+YWwgbW9kZSwgaXQgZGVmaW5pdGVseSBpcyBub3QsIGFuZCBpbiBQVg0KPiBjb250ZXh0LCB2Y3B1
+X2FsdHAybShjdXJyZW50KSBhY3RzIHVwb24gdGhlIEhWTSB1bmlvbi4NCj4gDQo+IEV2ZW4gaWYg
+d2UgY291bGQgc2Vuc2libHkgcmVzb2x2ZSB0aGUgdGFyZ2V0IHZDUFUsIGl0IG1heSBsZWdpdGlt
+YXRlbHkgbm90IGJlDQo+IGZ1bGx5IHNldCB1cCBhdCB0aGlzIHBvaW50LCBzbyByZWplY3Rpbmcg
+dGhlIEVQVCBtb2RpZmljYXRpb24gd291bGQgYmUgYnVnZ3kuDQo+IA0KPiBUaGVyZSBpcyBhIHBh
+dGggaW4gaHZtX2hhcF9uZXN0ZWRfcGFnZV9mYXVsdCgpIHdoaWNoIGV4cGxpY2l0bHkgZW11bGF0
+ZXMNCj4gI1ZFDQo+IGluIHRoZSBjcHVfaGFzX3ZteF92aXJ0X2V4Y2VwdGlvbnMgY2FzZSwgc28g
+dGhlIC1FT1BOT1RTVVBQIHBhcnQgb2YgdGhpcw0KPiBjb25kaXRpb24gaXMgYWxzbyB3cm9uZy4N
+Cj4gDQo+IERyb3AgdGhlICFzdmUgY2hlY2sgZW50aXJlbHkuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5
+OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPg0KDQpSZXZpZXdlZC1i
+eTogS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+DQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
