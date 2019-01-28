@@ -1,21 +1,24 @@
-From: Julien Grall <julien.grall@arm.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
 Subject: Re: [PATCH for-4.12] arm/p2m: do not invalidate p2m
  root if it is shared with IOMMU
-Date: Mon, 28 Jan 2019 16:36:32 +0000
-Message-ID: <0aa633d6-e671-8c22-1b73-fa1d47c5f6c5@arm.com>
+Date: Mon, 28 Jan 2019 18:40:01 +0200
+Message-ID: <8cbacbc7-e57c-b0c5-7e0e-ad238f795b5d@gmail.com>
 References: <1548689694-30028-1-git-send-email-andrii.anisov@gmail.com>
  <4ab0408f-edf2-5302-17ee-3c181d5d561e@arm.com>
  <eb581cac-7123-e61d-0680-8f409018fa15@gmail.com>
+ <0aa633d6-e671-8c22-1b73-fa1d47c5f6c5@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=CKwR=QE=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1go9tl-0007OD-Db
- for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 16:36:37 +0000
-In-Reply-To: <eb581cac-7123-e61d-0680-8f409018fa15@gmail.com>
+ <SRS0=M9ZJ=QE=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1go9x8-0008BS-MZ
+ for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 16:40:06 +0000
+Received: by mail-lf1-x144.google.com with SMTP id z13so12320949lfe.11
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Jan 2019 08:40:05 -0800 (PST)
+In-Reply-To: <0aa633d6-e671-8c22-1b73-fa1d47c5f6c5@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,44 +28,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xenproject.org
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAxLzI4LzE5IDQ6MzIgUE0sIEFuZHJpaSBBbmlzb3Ygd3JvdGU6Cj4gSGVsbG8gSnVsaWVu
-LAo+IAo+IEFjdHVhbGx5IEkgd2FzIGdvaW5nIHRvIHNlbmQgdGhpcyBwYXRjaCBhcyBSRkMsIGJ1
-dCBkcm9wcGVkIGl0IGF0IHRoZSAKPiBsYXN0IG1vbWVudC4KPiAKPiBPbiAyOC4wMS4xOSAxNzo1
-NSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiBUaGlzIHdhcyBtaXNzZWQgb24gcHVycG9zZS4gTGV0
-IG1lIGV4cGxhaW4gd2h5LiBUaGUgY2FsbCB0byAKPj4gcDJtX2ludmFsaWRhdGVfcm9vdCgpIGFy
-Y2hfZG9tYWluX2NyZWF0aW9uX2ZpbmlzaGVkIGlzIGNhbGxlZCBieSAqYWxsKiAKPj4gdGhlIGRv
-bWFpbiBhdCBib290IHRvIHRyeSB0byBvcHRpbWl6ZSB0aGUgc2V0L3dheSBjYXNlLgo+Pgo+PiBU
-aGUgY2hlY2sgaW9tbXVfdXNlX2hhcF9wdCBpbiB0aGF0IGNvbnRleHQgaXMgdG8gcHJldmVudCBn
-dWVzdCBub3QgCj4+IHVzaW5nIFNldC9XYXkgdG8gYmVjb21lIHVudXNhYmxlIHVuZGVyIHRoZSBJ
-T01NVSB1c2UtY2FzZS4KPj4KPj4gSW4geW91ciBjYXNlLCB5b3Ugc2VlbSB0byBoYXZlIGEgZ3Vl
-c3QgT1MgdXNpbmcgc2V0L3dheSBhbmQgeWV0IAo+PiBzaGFyaW5nIHRoZSBQMk0gd2l0aCB0aGUg
-SU9NTVUuIFlvdSBoYXZlIHRoZSBjaG9pY2UgYmV0d2VlbjoKPj4gwqDCoMKgwqDCoDEpIENyYXNo
-aW5nIG9uIElPTU1VIGZhdWx0Cj4+IMKgwqDCoMKgwqAyKSBCZWNvbWUgdmVyeSBzbG93IGFuZCBw
-b3RlbnRpYWxseSB1bnVzYWJsZSBiZWNhdXNlIHlvdSBub3cgaGF2ZSAKPj4gdG8gZ28gdGhyb3Vn
-aCB0aGUgZnVsbCBQMk0gZXZlcnkgdGltZSB5b3UgZG8gYSBTZXQvV2F5Lgo+Pgo+PiAxKSB3YXMg
-bXkgZmF2b3JlZCBvcHRpb24gYmVjYXVzZSBTZXQvV2F5IHNob3VsZCByZWFsbHkgbm90IGJlIHVz
-ZWQgYnkgCj4+IHRoZSBndWVzdC4gSXQgd2FzIGltcGxlbWVudGVkIGJ5IGNvdXJ0ZXN5IHRvIHRo
-ZSBndWVzdCBPUyBhbmQgSSB3b3VsZCAKPj4gbm90IHJlbHkgb24gZXZlcnl0aGluZyB3b3JraW5n
-Lgo+Pgo+PiBDYW4geW91IGV4cGxhaW4gd2hhdCBpcyB5b3VyIHVzZS1jYXNlIChPUyB1c2VkLCBJ
-T01NVSwgcGxhdGZvcm0uLi4pCj4gWWVwLCBJJ20gbmVhcmx5IGZpbmlzaGVkIG1vdmluZyBvdXIg
-ZGV2ZWxvcG1lbnQgc2V0dXAgdG8gWEVOIDQuMTItcmMuCj4gVGhlIHBsYXRmb3JtIGlzIFItQ2Fy
-IEdlbjMgKENBNTcrQ0E1MyksIFJlbmVzYXMnZXMgSU9NTVUgbmFtZWQgSVBNTVUgaXMgCj4gdXRp
-bGl6ZWQgZm9yIGFsbCBwZXJpcGhlcmFscyBhc3NpZ25lZCB0byBEb21EIGFuZCBHUFUgc2hhcmVk
-IGJldHdlZW4gCj4gRG9tRCBhbmQgRG9tQS4KPiBUaHJlZSBPUydlcyBhcmUgcnVubmluZyBvbiB0
-aGUgSFc6IEhXLWxlc3MgRG9tMCwgZHJpdmVyIGRvbWFpbiBEb21EIHdpdGggCj4gR1BVIHNoYXJp
-bmcsIEFuZHJvaWQgcnVubmluZyBvbiBQViBkcml2ZXJzIGFuZCBHUFUgc2hhcmluZy4KPiBTbyBv
-biBzeXN0ZW0gc3RhcnQgKERvbUQgYm9vdGluZykgSSBzZWUgZmV3IHRyYW5zbGF0aW9uIGZhdWx0
-cyBmcm9tIERvbUQgCj4gb25seSBhc3NpZ25lZCBwZXJpcGhlcmFscy4gQnV0IHRoZW4gQW5kcm9p
-ZCBzdGFydHMgYW5kIHRoZXJlIGFyZSBsb3Qgb2YgCj4gdHJhbnNsYXRpb24gZmF1bHRzIGZyb20g
-R1BVIHRyeWluZyBhY2Nlc3MgRG9tQSBtZW1vcnkuIFRoZW4gR1BVIEZXIGRpZXMuCgpIb2xkIG9u
-LCBDQTU3IGFuZCBDQTUzIGFyZSBBUk12OCBjb3Jlcy4gU28gYXJlIHlvdSB1c2luZyAzMi1iaXQg
-b3IgCjY0LWJpdCBndWVzdHM/Cgo2NC1iaXQgZ3Vlc3Qgc2hvdWxkIG5vdCBoYXZlIGFueSBTZXQv
-V2F5IG9wZXJhdGlvbnMgdW5sZXNzIHlvdSBhcmUgdXNpbmcgCmEgdmVyeSB2ZXJ5IG9sZCBMaW51
-eC4gU28gd2hhdCBpcyB0aGUgdmVyc2lvbiBvZiBlYWNoIGd1ZXN0PwoKQ2hlZXJzLAoKLS0gCkp1
-bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAyOC4wMS4xOSAxODozNiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhvbGQgb24sIENBNTcg
+YW5kIENBNTMgYXJlIEFSTXY4IGNvcmVzLiBTbyBhcmUgeW91IHVzaW5nIDMyLWJpdCBvciA2NC1i
+aXQgZ3Vlc3RzPwo2NC1iaXQgZ3Vlc3RzLgoKPiA2NC1iaXQgZ3Vlc3Qgc2hvdWxkIG5vdCBoYXZl
+IGFueSBTZXQvV2F5IG9wZXJhdGlvbnMgdW5sZXNzIHlvdSBhcmUgdXNpbmcgYSB2ZXJ5IHZlcnkg
+b2xkIExpbnV4LiBTbyB3aGF0IGlzIHRoZSB2ZXJzaW9uIG9mIGVhY2ggZ3Vlc3Q/CkFsbCBvZiB0
+aGVtIGRlcml2ZWQgZnJvbSA0LjE0LjM1LgoKLS0gClNpbmNlcmVseSwKQW5kcmlpIEFuaXNvdi4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
