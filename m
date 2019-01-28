@@ -1,17 +1,18 @@
 From: <gregkh@linuxfoundation.org>
 Subject: Patch "x86/entry/64/compat: Fix stack switching for XEN
- PV" has been added to the 4.20-stable tree
-Date: Mon, 28 Jan 2019 14:28:23 +0100
-Message-ID: <154868210316854@kroah.com>
+ PV" has been added to the 4.19-stable tree
+Date: Mon, 28 Jan 2019 14:29:07 +0100
+Message-ID: <154868214756138@kroah.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Mfqq=QE=linuxfoundation.org=gregkh@kernel.org>)
- id 1go6yJ-00041u-Bd
- for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 13:29:07 +0000
+ id 1go6z4-00044O-KC
+ for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 13:29:54 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,11 +27,11 @@ List-Id: xen-devel@lists.xenproject.org
 
 ClRoaXMgaXMgYSBub3RlIHRvIGxldCB5b3Uga25vdyB0aGF0IEkndmUganVzdCBhZGRlZCB0aGUg
 cGF0Y2ggdGl0bGVkCgogICAgeDg2L2VudHJ5LzY0L2NvbXBhdDogRml4IHN0YWNrIHN3aXRjaGlu
-ZyBmb3IgWEVOIFBWCgp0byB0aGUgNC4yMC1zdGFibGUgdHJlZSB3aGljaCBjYW4gYmUgZm91bmQg
+ZyBmb3IgWEVOIFBWCgp0byB0aGUgNC4xOS1zdGFibGUgdHJlZSB3aGljaCBjYW4gYmUgZm91bmQg
 YXQ6CiAgICBodHRwOi8vd3d3Lmtlcm5lbC5vcmcvZ2l0Lz9wPWxpbnV4L2tlcm5lbC9naXQvc3Rh
 YmxlL3N0YWJsZS1xdWV1ZS5naXQ7YT1zdW1tYXJ5CgpUaGUgZmlsZW5hbWUgb2YgdGhlIHBhdGNo
 IGlzOgogICAgIHg4Ni1lbnRyeS02NC1jb21wYXQtZml4LXN0YWNrLXN3aXRjaGluZy1mb3IteGVu
-LXB2LnBhdGNoCmFuZCBpdCBjYW4gYmUgZm91bmQgaW4gdGhlIHF1ZXVlLTQuMjAgc3ViZGlyZWN0
+LXB2LnBhdGNoCmFuZCBpdCBjYW4gYmUgZm91bmQgaW4gdGhlIHF1ZXVlLTQuMTkgc3ViZGlyZWN0
 b3J5LgoKSWYgeW91LCBvciBhbnlvbmUgZWxzZSwgZmVlbHMgaXQgc2hvdWxkIG5vdCBiZSBhZGRl
 ZCB0byB0aGUgc3RhYmxlIHRyZWUsCnBsZWFzZSBsZXQgPHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmc+
 IGtub3cgYWJvdXQgaXQuCgoKRnJvbSBmYzI0ZDc1YTdmOTE4MzdkNzkxOGU0MDcxOTU3NTk1MTgy
@@ -63,21 +64,21 @@ bGwuY29tClNpZ25lZC1vZmYtYnk6IEdyZWcgS3JvYWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91
 bmRhdGlvbi5vcmc+CgotLS0KIGFyY2gveDg2L2VudHJ5L2VudHJ5XzY0X2NvbXBhdC5TIHwgICAg
 NiArKysrLS0KIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0p
 CgotLS0gYS9hcmNoL3g4Ni9lbnRyeS9lbnRyeV82NF9jb21wYXQuUworKysgYi9hcmNoL3g4Ni9l
-bnRyeS9lbnRyeV82NF9jb21wYXQuUwpAQCAtMzYxLDcgKzM2MSw4IEBAIEVOVFJZKGVudHJ5X0lO
+bnRyeS9lbnRyeV82NF9jb21wYXQuUwpAQCAtMzU2LDcgKzM1Niw4IEBAIEVOVFJZKGVudHJ5X0lO
 VDgwX2NvbXBhdCkKIAogCS8qIE5lZWQgdG8gc3dpdGNoIGJlZm9yZSBhY2Nlc3NpbmcgdGhlIHRo
 cmVhZCBzdGFjay4gKi8KIAlTV0lUQ0hfVE9fS0VSTkVMX0NSMyBzY3JhdGNoX3JlZz0lcmRpCi0J
 bW92cQklcnNwLCAlcmRpCisJLyogSW4gdGhlIFhlbiBQViBjYXNlIHdlIGFscmVhZHkgcnVuIG9u
 IHRoZSB0aHJlYWQgc3RhY2suICovCisJQUxURVJOQVRJVkUgIm1vdnEgJXJzcCwgJXJkaSIsICJq
 bXAgLkxpbnQ4MF9rZWVwX3N0YWNrIiwgWDg2X0ZFQVRVUkVfWEVOUFYKIAltb3ZxCVBFUl9DUFVf
 VkFSKGNwdV9jdXJyZW50X3RvcF9vZl9zdGFjayksICVyc3AKIAogCXB1c2hxCTYqOCglcmRpKQkJ
-LyogcmVncy0+c3MgKi8KQEAgLTM3MCw4ICszNzEsOSBAQCBFTlRSWShlbnRyeV9JTlQ4MF9jb21w
+LyogcmVncy0+c3MgKi8KQEAgLTM2NSw4ICszNjYsOSBAQCBFTlRSWShlbnRyeV9JTlQ4MF9jb21w
 YXQpCiAJcHVzaHEJMyo4KCVyZGkpCQkvKiByZWdzLT5jcyAqLwogCXB1c2hxCTIqOCglcmRpKQkJ
 LyogcmVncy0+aXAgKi8KIAlwdXNocQkxKjgoJXJkaSkJCS8qIHJlZ3MtPm9yaWdfYXggKi8KLQog
 CXB1c2hxCSglcmRpKQkJCS8qIHB0X3JlZ3MtPmRpICovCisuTGludDgwX2tlZXBfc3RhY2s6CisK
 IAlwdXNocQklcnNpCQkJLyogcHRfcmVncy0+c2kgKi8KIAl4b3JsCSVlc2ksICVlc2kJCS8qIG5v
 c3BlYyAgIHNpICovCiAJcHVzaHEJJXJkeAkJCS8qIHB0X3JlZ3MtPmR4ICovCgoKUGF0Y2hlcyBj
 dXJyZW50bHkgaW4gc3RhYmxlLXF1ZXVlIHdoaWNoIG1pZ2h0IGJlIGZyb20gSkJldWxpY2hAc3Vz
-ZS5jb20gYXJlCgpxdWV1ZS00LjIwL3g4Ni1lbnRyeS02NC1jb21wYXQtZml4LXN0YWNrLXN3aXRj
+ZS5jb20gYXJlCgpxdWV1ZS00LjE5L3g4Ni1lbnRyeS02NC1jb21wYXQtZml4LXN0YWNrLXN3aXRj
 aGluZy1mb3IteGVuLXB2LnBhdGNoCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
 cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
