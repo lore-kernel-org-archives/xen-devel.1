@@ -1,17 +1,21 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [libvirt test] 132511: tolerable all pass - PUSHED
-Date: Mon, 28 Jan 2019 19:48:28 +0000
-Message-ID: <osstest-132511-mainreport@xen.org>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v3 4/6] xen/x86: Allow stubdom access to irq
+ created for msi.
+Date: Mon, 28 Jan 2019 21:30:28 +0100
+Message-ID: <20190128203028.GB21228@mail-itl>
+References: <cover.3de8cf7a339b8395cb449f8f3d44fee884ce04fa.1548469645.git-series.marmarek@invisiblethingslab.com>
+ <05a28a956a23b23b205d38be0f9bf92a485bffde.1548469645.git-series.marmarek@invisiblethingslab.com>
+ <20190128145000.anm6g3svz5adk5fo@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8507111182758066207=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=wu1C=QE=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1goCtT-0008Vs-BM
- for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 19:48:31 +0000
+ <SRS0=sAWr=QE=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1goDYD-0004U6-6J
+ for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 20:30:37 +0000
+In-Reply-To: <20190128145000.anm6g3svz5adk5fo@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,81 +24,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMjUxMSBsaWJ2aXJ0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhl
-bnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzI1MTEvCgpGYWlsdXJlcyA6LS8gYnV0IG5vIHJl
-Z3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9j
-a2luZzoKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICBsaWtlIDEzMjQ2OQogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJh
-dyAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTMyNDY5CiB0ZXN0
-LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2
-NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1x
-ZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5l
-dmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14
-c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0LXZoZCAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmly
-dC1yYXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwoK
-dmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGxpYnZpcnQgICAgICAgICAgICAgIDdjNzAw
-MTA4ZDYyMWEwOWU0NTk1Y2QwOWM4ZDAzMjc3ZDdkNWU4OGMKYmFzZWxpbmUgdmVyc2lvbjoKIGxp
-YnZpcnQgICAgICAgICAgICAgIDQyOWY1NDU0ZDU3MGI1ZmNhNGI0MDMzODUwMmJlYTcyNGUzMWRi
-OTkKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzMjQ2OSAgMjAxOS0wMS0yNSAwNToxMTo0NSBaICAg
-IDMgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzI0OTAgIDIwMTktMDEtMjYgMDY6Mzk6MTIg
-WiAgICAyIGRheXMgICAgMiBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMzI1MTEgIDIw
-MTktMDEtMjcgMTk6NTQ6MjggWiAgICAwIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3
-aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBFcmljIEJsYWtlIDxlYmxha2VAcmVk
-aGF0LmNvbT4KICBKw6FuIFRvbWtvIDxqdG9ta29AcmVkaGF0LmNvbT4KICBMYWluZSBTdHVtcCA8
-bGFpbmVAbGFpbmUub3JnPgogIE1pY2hhbCBQcml2b3puaWsgPG1wcml2b3puQHJlZGhhdC5jb20+
-CiAgUm9tYW4gQm9nb3JvZHNraXkgPGJvZ29yb2Rza2l5QGdtYWlsLmNvbT4KICBUaG9tYXMgSHV0
-aCA8dGh1dGhAcmVkaGF0LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGli
-dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1wdm9w
-cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2
-NC14c20gICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1k
-ZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-bGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxp
-YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxp
-YnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0K
-c2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6
-IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcg
-ZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVu
-cHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBh
-bmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9y
-Zy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3Rlcgog
-ICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9
-UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBo
-dHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1
-c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQvbGlidmly
-dC5naXQKICAgNDI5ZjU0NTRkNS4uN2M3MDAxMDhkNiAgN2M3MDAxMDhkNjIxYTA5ZTQ1OTVjZDA5
-YzhkMDMyNzdkN2Q1ZTg4YyAtPiB4ZW4tdGVzdGVkLW1hc3RlcgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8507111182758066207==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="Clx92ZfkiYIKRjnr"
+Content-Disposition: inline
+
+
+--Clx92ZfkiYIKRjnr
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 28, 2019 at 02:50:00PM +0000, Wei Liu wrote:
+> On Sat, Jan 26, 2019 at 03:31:15AM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > From: Simon Gaiser <simon@invisiblethingslab.com>
+> >=20
+> > Stubdomains need to be given sufficient privilege over the guest which =
+it
+> > provides emulation for in order for PCI passthrough to work correctly.
+> > When a HVM domain try to enable MSI, QEMU in stubdomain calls
+> > PHYSDEVOP_map_pirq, but later it needs to call XEN_DOMCTL_bind_pt_irq as
+> > part of xc_domain_update_msi_irq. Allow for that as part of
+> > PHYSDEVOP_map_pirq.
+> >=20
+> > This is not needed for PCI INTx, because IRQ in that case is known
+> > beforehand and the stubdomain is given permissions over this IRQ by
+> > libxl__device_pci_add (there's a do_pci_add against the stubdomain).
+> >=20
+> > Based on https://github.com/OpenXT/xenclient-oe/blob/5e0e7304a5a3c75ef0=
+1240a1e3673665b2aaf05e/recipes-extended/xen/files/stubdomain-msi-irq-access=
+=2Epatch by Eric Chanudet <chanudete@ainfosec.com>.
+> >=20
+> > Signed-off-by: Simon Gaiser <simon@invisiblethingslab.com>
+> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
+slab.com>
+> > ---
+> > Changes in v3:
+> >  - extend commit message
+> >=20
+> > With this patch, stubdomain will be able to create and map multiple irq
+> > (DoS possibility?), as only target domain is validated in practice. Is
+> > that ok? If not, what additional limits could be applied here?
+> > In INTx case the problem doesn't apply, because toolstack grant access
+> > to particular IRQ and no allocation happen on stubdomain request. But in
+> > MSI case, it isn't that easy as IRQ number isn't known before (as
+> > explained in the commit message).
+> > ---
+> >  xen/arch/x86/irq.c     | 23 +++++++++++++++++++++++
+> >  xen/arch/x86/physdev.c |  9 +++++++++
+> >  2 files changed, 32 insertions(+)
+> >=20
+> > diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+> > index 8b44d6c..67c67d4 100644
+> > --- a/xen/arch/x86/irq.c
+> > +++ b/xen/arch/x86/irq.c
+> > @@ -2674,6 +2674,21 @@ int allocate_and_map_msi_pirq(struct domain *d, =
+int index, int *pirq_p,
+> >          {
+> >      case MAP_PIRQ_TYPE_MULTI_MSI:
+> >              irq =3D create_irq(NUMA_NO_NODE);
+> > +            if ( !(irq < nr_irqs_gsi || irq >=3D nr_irqs) &&
+> > +                    current->domain->target =3D=3D d )
+> > +            {
+> > +                ret =3D irq_permit_access(current->domain, irq);
+> > +                if ( ret ) {
+> > +                    dprintk(XENLOG_G_ERR,
+> > +                            "dom%d: can't grant it's stubdom (%d) acce=
+ss to "
+> > +                            "irq %d for msi: %d!\n",
+> > +                            d->domain_id,
+> > +                            current->domain->domain_id,
+> > +                            irq,
+> > +                            ret);
+> > +                    return ret;
+>=20
+> Don't you need to deallocate the irq before returning?
+
+Yes, indeed.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--Clx92ZfkiYIKRjnr
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxPZmMACgkQ24/THMrX
+1yweHwf/YlplkbBx2AR9ZC69kCGMj0VlRYWq0SxwL2DVMhCu87I9AGf42/jcAG6L
+0RblFme/qVVk1QOZf1Y40BQtWU10jFEx1ftaK8Ed5OzvtqeS7Wg22dXFrDRAyBc/
+MKiG6d8kGz2CyHzbdtD0GWvBXV/dhse7QUAgmGSXqb1H6m928MHZcRzwnlOZ+pIn
+6sbZFHPVAaryTx8KZOzySfDqENAV3tCYYEh5H8Yt5d4Nm4l9ETyTlsH44aAOQ0r6
+P/Svl1BsGdaP+LzhRlzazYJU1JB7vsxd1UyZJQWExM/C4dfD5FPeJNrf+3xTmmp0
+x0MTmSnvfCgW49hCxsOdFrLw7TJlIg==
+=Oa52
+-----END PGP SIGNATURE-----
+
+--Clx92ZfkiYIKRjnr--
+
+
+--===============8507111182758066207==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8507111182758066207==--
