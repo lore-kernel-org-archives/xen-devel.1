@@ -1,25 +1,21 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
-Subject: Re: [PATCH for-4.12] arm/p2m: do not invalidate p2m
- root if it is shared with IOMMU
-Date: Mon, 28 Jan 2019 18:40:01 +0200
-Message-ID: <8cbacbc7-e57c-b0c5-7e0e-ad238f795b5d@gmail.com>
-References: <1548689694-30028-1-git-send-email-andrii.anisov@gmail.com>
- <4ab0408f-edf2-5302-17ee-3c181d5d561e@arm.com>
- <eb581cac-7123-e61d-0680-8f409018fa15@gmail.com>
- <0aa633d6-e671-8c22-1b73-fa1d47c5f6c5@arm.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v5 1/8] microcode/intel: remove redundent
+ check against ucode size
+Date: Mon, 28 Jan 2019 17:40:34 +0100
+Message-ID: <20190128164034.2fr4lzwztef3i6wv@mac>
+References: <1548659210-16870-1-git-send-email-chao.gao@intel.com>
+ <1548659210-16870-2-git-send-email-chao.gao@intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=M9ZJ=QE=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1go9x8-0008BS-MZ
- for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 16:40:06 +0000
-Received: by mail-lf1-x144.google.com with SMTP id z13so12320949lfe.11
- for <xen-devel@lists.xenproject.org>; Mon, 28 Jan 2019 08:40:05 -0800 (PST)
-In-Reply-To: <0aa633d6-e671-8c22-1b73-fa1d47c5f6c5@arm.com>
-Content-Language: en-US
+ <SRS0=E7Vy=QE=citrix.com=prvs=924d4b44a=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1go9xj-0008Hg-Qg
+ for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 16:40:43 +0000
+Content-Disposition: inline
+In-Reply-To: <1548659210-16870-2-git-send-email-chao.gao@intel.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,16 +24,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
+To: Chao Gao <chao.gao@intel.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyOC4wMS4xOSAxODozNiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhvbGQgb24sIENBNTcg
-YW5kIENBNTMgYXJlIEFSTXY4IGNvcmVzLiBTbyBhcmUgeW91IHVzaW5nIDMyLWJpdCBvciA2NC1i
-aXQgZ3Vlc3RzPwo2NC1iaXQgZ3Vlc3RzLgoKPiA2NC1iaXQgZ3Vlc3Qgc2hvdWxkIG5vdCBoYXZl
-IGFueSBTZXQvV2F5IG9wZXJhdGlvbnMgdW5sZXNzIHlvdSBhcmUgdXNpbmcgYSB2ZXJ5IHZlcnkg
-b2xkIExpbnV4LiBTbyB3aGF0IGlzIHRoZSB2ZXJzaW9uIG9mIGVhY2ggZ3Vlc3Q/CkFsbCBvZiB0
-aGVtIGRlcml2ZWQgZnJvbSA0LjE0LjM1LgoKLS0gClNpbmNlcmVseSwKQW5kcmlpIEFuaXNvdi4K
+T24gTW9uLCBKYW4gMjgsIDIwMTkgYXQgMDM6MDY6NDNQTSArMDgwMCwgQ2hhbyBHYW8gd3JvdGU6
+Cj4gVGhpcyBjaGVjayBoYXMgYmVlbiBkb25lIGluIG1pY3JvY29kZV9zYW5pdHlfY2hlY2soKS4g
+TmVlZG4ndCBkbyBpdAo+IGFnYWluIGluIGdldF9tYXRjaGluZ19taWNyb2NvZGUoKS4KPiAKPiBT
+aWduZWQtb2ZmLWJ5OiBDaGFvIEdhbyA8Y2hhby5nYW9AaW50ZWwuY29tPgoKUmV2aWV3ZWQtYnk6
+IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKVGhhbmtzLCBSb2dlci4K
 Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
 bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
 dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
