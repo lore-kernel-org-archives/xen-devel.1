@@ -1,22 +1,21 @@
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: [PATCH v3 06/17] libxl: write qemu arguments into
- separate xenstore keys
-Date: Mon, 28 Jan 2019 22:30:23 +0100
-Message-ID: <38e82f6a138caf9efbce2589954423daf27c44d4.1548710973.git-series.marmarek@invisiblethingslab.com>
-References: <cover.8f900c4839866ee551e8ebf221cfc7b9310cecd6.1548710973.git-series.marmarek@invisiblethingslab.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] arch/arm/xen: Remove duplicate header
+Date: Mon, 28 Jan 2019 14:40:35 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1901281440010.17936__36401.3398926303$1548715311$gmane$org@sstabellini-ThinkPad-X260>
+References: <20190107173719.GA30197@jordon-HP-15-Notebook-PC>
+ <eab5c59d-cfb4-bd2a-de07-7db827830472@gmail.com>
+ <CAFqt6zb0cU3TjAs0LO-DL3Ut98-7=b7cP9+hZ+bUxDLD2EN2vA@mail.gmail.com>
+ <cd855c41-dca0-14dc-6703-886feccd34ea@gmail.com>
+ <d386f867-715f-0667-93bf-b42d728f546a@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-120884440-1548715237=:17936"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=sAWr=QE=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1goEUX-0001oo-2E
- for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 21:30:53 +0000
-In-Reply-To: <cover.8f900c4839866ee551e8ebf221cfc7b9310cecd6.1548710973.git-series.marmarek@invisiblethingslab.com>
-In-Reply-To: <cover.8f900c4839866ee551e8ebf221cfc7b9310cecd6.1548710973.git-series.marmarek@invisiblethingslab.com>
-References: <cover.8f900c4839866ee551e8ebf221cfc7b9310cecd6.1548710973.git-series.marmarek@invisiblethingslab.com>
+ <SRS0=Y4lz=QE=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1goFa2-0001LB-RN
+ for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 22:40:38 +0000
+In-Reply-To: <d386f867-715f-0667-93bf-b42d728f546a@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,61 +24,65 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Cc: Juergen Gross <jgross@suse.com>, sstabellini@kernel.org, Sabyasachi Gupta <sabyasachi.linux@gmail.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, Russell King - ARM Linux <linux@armlinux.org.uk>, linux-kernel@vger.kernel.org, Souptick Joarder <jrdr.linux@gmail.com>, Brajeswar Ghosh <brajeswar.linux@gmail.com>, xen-devel@lists.xenproject.org, linux-arm-kernel@lists.infradead.org
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBhbGxvd3MgdXNpbmcgYXJndW1lbnRzIHdpdGggc3BhY2VzLCBsaWtlIC1hcHBlbmQsIHdp
-dGhvdXQKbm9taW5hdGluZyBhbnkgc3BlY2lhbCAic2VwYXJhdG9yIiBjaGFyYWN0ZXIuCgpTaWdu
-ZWQtb2ZmLWJ5OiBNYXJlayBNYXJjenlrb3dza2ktR8OzcmVja2kgPG1hcm1hcmVrQGludmlzaWJs
-ZXRoaW5nc2xhYi5jb20+Ci0tLQpDaGFuZ2VzIGluIHYzOgogLSBwcmV2aW91cyB2ZXJzaW9uIG9m
-IHRoaXMgcGF0Y2ggImxpYnhsOiB1c2UgXHgxYiB0byBzZXBhcmF0ZSBxZW11CiAgIGFyZ3VtZW50
-cyBmb3IgbGludXggc3R1YmRvbWFpbiIgdXNlZCBzcGVjaWZpYyBub24tcHJpbnRhYmxlCiAgIHNl
-cGFyYXRvciwgYnV0IGl0IHdhcyByZWplY3RlZCBhcyB4ZW5zdG9yZSBkb2Vzbid0IGNvcGUgd2Vs
-bCB3aXRoCiAgIG5vbi1wcmludGFibGUgY2hhcnMKLS0tCiB0b29scy9saWJ4bC9saWJ4bF9kbS5j
-IHwgMzkgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKystCiAxIGZpbGUgY2hh
-bmdlZCwgMzggaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3Rvb2xz
-L2xpYnhsL2xpYnhsX2RtLmMgYi90b29scy9saWJ4bC9saWJ4bF9kbS5jCmluZGV4IDFmYTRmYTgu
-LjZjZmMyNTYgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2RtLmMKKysrIGIvdG9vbHMv
-bGlieGwvbGlieGxfZG0uYwpAQCAtMjA0Nyw2ICsyMDQ3LDQwIEBAIHN0YXRpYyBpbnQgbGlieGxf
-X3ZmYl9hbmRfdmtiX2Zyb21faHZtX2d1ZXN0X2NvbmZpZyhsaWJ4bF9fZ2MgKmdjLAogICAgIHJl
-dHVybiAwOwogfQogCitzdGF0aWMgaW50IGxpYnhsX193cml0ZV9zdHViX2xpbnV4X2RtYXJncyhs
-aWJ4bF9fZ2MgKmdjLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaW50IGRt
-X2RvbWlkLCBpbnQgZ3Vlc3RfZG9taWQsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBjaGFyICoqYXJncykKK3sKKyAgICBsaWJ4bF9jdHggKmN0eCA9IGxpYnhsX19nY19vd25l
-cihnYyk7CisgICAgaW50IGk7CisgICAgY2hhciAqdm1fcGF0aDsKKyAgICBjaGFyICpwYXRoOwor
-ICAgIHN0cnVjdCB4c19wZXJtaXNzaW9ucyByb3Blcm1bMl07CisgICAgeHNfdHJhbnNhY3Rpb25f
-dCB0OworCisgICAgcm9wZXJtWzBdLmlkID0gMDsKKyAgICByb3Blcm1bMF0ucGVybXMgPSBYU19Q
-RVJNX05PTkU7CisgICAgcm9wZXJtWzFdLmlkID0gZG1fZG9taWQ7CisgICAgcm9wZXJtWzFdLnBl
-cm1zID0gWFNfUEVSTV9SRUFEOworCisgICAgdm1fcGF0aCA9IGxpYnhsX194c19yZWFkKGdjLCBY
-QlRfTlVMTCwgR0NTUFJJTlRGKCIvbG9jYWwvZG9tYWluLyVkL3ZtIiwgZ3Vlc3RfZG9taWQpKTsK
-KyAgICBwYXRoID0gR0NTUFJJTlRGKCIlcy9pbWFnZS9kbWFyZ3MiLCB2bV9wYXRoKTsKKworcmV0
-cnlfdHJhbnNhY3Rpb246CisgICAgdCA9IHhzX3RyYW5zYWN0aW9uX3N0YXJ0KGN0eC0+eHNoKTsK
-KyAgICB4c193cml0ZShjdHgtPnhzaCwgdCwgcGF0aCwgIiIsIDApOworICAgIHhzX3NldF9wZXJt
-aXNzaW9ucyhjdHgtPnhzaCwgdCwgcGF0aCwgcm9wZXJtLCBBUlJBWV9TSVpFKHJvcGVybSkpOwor
-ICAgIGkgPSAxOworICAgIGZvciAoaT0xOyBhcmdzW2ldICE9IE5VTEw7IGkrKykKKyAgICAgICAg
-eHNfd3JpdGUoY3R4LT54c2gsIHQsIEdDU1BSSU5URigiJXMvJTAzZCIsIHBhdGgsIGkpLCBhcmdz
-W2ldLCBzdHJsZW4oYXJnc1tpXSkpOworCisgICAgeHNfc2V0X3Blcm1pc3Npb25zKGN0eC0+eHNo
-LCB0LCBHQ1NQUklOVEYoIiVzL3J0Yy90aW1lb2Zmc2V0Iiwgdm1fcGF0aCksIHJvcGVybSwgQVJS
-QVlfU0laRShyb3Blcm0pKTsKKyAgICBpZiAoIXhzX3RyYW5zYWN0aW9uX2VuZChjdHgtPnhzaCwg
-dCwgMCkpCisgICAgICAgIGlmIChlcnJubyA9PSBFQUdBSU4pCisgICAgICAgICAgICBnb3RvIHJl
-dHJ5X3RyYW5zYWN0aW9uOworICAgIHJldHVybiAwOworfQorCiBzdGF0aWMgaW50IGxpYnhsX193
-cml0ZV9zdHViX2RtYXJncyhsaWJ4bF9fZ2MgKmdjLAogICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgaW50IGRtX2RvbWlkLCBpbnQgZ3Vlc3RfZG9taWQsCiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBjaGFyICoqYXJncykKQEAgLTIyNDksNyArMjI4MywxMCBA
-QCB2b2lkIGxpYnhsX19zcGF3bl9zdHViX2RtKGxpYnhsX19lZ2MgKmVnYywgbGlieGxfX3N0dWJf
-ZG1fc3Bhd25fc3RhdGUgKnNkc3MpCiAKICAgICBsaWJ4bF9fc3RvcmVfbGlieGxfZW50cnkoZ2Ms
-IGd1ZXN0X2RvbWlkLCAiZG0tdmVyc2lvbiIsCiAgICAgICAgIGxpYnhsX2RldmljZV9tb2RlbF92
-ZXJzaW9uX3RvX3N0cmluZyhkbV9jb25maWctPmJfaW5mby5kZXZpY2VfbW9kZWxfdmVyc2lvbikp
-OwotICAgIGxpYnhsX193cml0ZV9zdHViX2RtYXJncyhnYywgZG1fZG9taWQsIGd1ZXN0X2RvbWlk
-LCBhcmdzKTsKKyAgICBpZiAobGlieGxfX3N0dWJkb21haW5faXNfbGludXgoJmd1ZXN0X2NvbmZp
-Zy0+Yl9pbmZvKSkKKyAgICAgICAgbGlieGxfX3dyaXRlX3N0dWJfbGludXhfZG1hcmdzKGdjLCBk
-bV9kb21pZCwgZ3Vlc3RfZG9taWQsIGFyZ3MpOworICAgIGVsc2UKKyAgICAgICAgbGlieGxfX3dy
-aXRlX3N0dWJfZG1hcmdzKGdjLCBkbV9kb21pZCwgZ3Vlc3RfZG9taWQsIGFyZ3MpOwogICAgIGxp
-YnhsX194c19wcmludGYoZ2MsIFhCVF9OVUxMLAogICAgICAgICAgICAgICAgICAgICAgR0NTUFJJ
-TlRGKCIlcy9pbWFnZS9kZXZpY2UtbW9kZWwtZG9taWQiLAogICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGxpYnhsX194c19nZXRfZG9tcGF0aChnYywgZ3Vlc3RfZG9taWQpKSwKLS0gCmdp
-dC1zZXJpZXMgMC45LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-120884440-1548715237=:17936
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Mon, 28 Jan 2019, Boris Ostrovsky wrote:
+> On 1/28/19 3:29 AM, Oleksandr Andrushchenko wrote:
+> > +Boris and Juergen who can also help getting it in
+> 
+> I can put this in but I'd like to have Stefano's ack, this being ARM.
+
+The patch is OK. Sorry for not replying earlier, this thread fell off my
+radar somehow.
+
+Acked-by: Stefano Stabellini <sstabellini@kernel.org>
+
+
+> >
+> > On 1/28/19 8:34 AM, Souptick Joarder wrote:
+> >> On Mon, Jan 14, 2019 at 4:08 PM Oleksandr Andrushchenko
+> >> <andr2000@gmail.com> wrote:
+> >>> On 1/7/19 7:37 PM, Souptick Joarder wrote:
+> >>>> Remove duplicate header which is included twice.
+> >>>>
+> >>>> Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
+> >>> Reviewed-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+> >> Can we get this patch in queue for 5.1 ?
+> >>>> ---
+> >>>>    arch/arm/xen/mm.c | 1 -
+> >>>>    1 file changed, 1 deletion(-)
+> >>>>
+> >>>> diff --git a/arch/arm/xen/mm.c b/arch/arm/xen/mm.c
+> >>>> index cb44aa2..e1d44b9 100644
+> >>>> --- a/arch/arm/xen/mm.c
+> >>>> +++ b/arch/arm/xen/mm.c
+> >>>> @@ -7,7 +7,6 @@
+> >>>>    #include <linux/of_address.h>
+> >>>>    #include <linux/slab.h>
+> >>>>    #include <linux/types.h>
+> >>>> -#include <linux/dma-mapping.h>
+> >>>>    #include <linux/vmalloc.h>
+> >>>>    #include <linux/swiotlb.h>
+> >>>>
+> >
+> 
+--8323329-120884440-1548715237=:17936
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-120884440-1548715237=:17936--
