@@ -1,15 +1,14 @@
 From: "Jan Beulich" <jbeulich@suse.com>
-Subject: Re: [RFC v1 1/8] kexec: add kexec_file_load to
- libxenctrl
-Date: Tue, 29 Jan 2019 03:51:49 -0700
-Message-ID: <5C503045020000780014B84C__23867.7957256854$1548759171$gmane$org@prv1-mh.provo.novell.com>
+Subject: Re: [RFC v1 0/8] Prototype for kexec signature
+ verification within Xen
+Date: Tue, 29 Jan 2019 04:04:31 -0700
+Message-ID: <5C50333F020000780014B85A__28289.7282320604$1548759936$gmane$org@prv1-mh.provo.novell.com>
 References: <1547495285-28907-1-git-send-email-eric.devolder@oracle.com>
- <1547495285-28907-2-git-send-email-eric.devolder@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1547495285-28907-2-git-send-email-eric.devolder@oracle.com>
+In-Reply-To: <1547495285-28907-1-git-send-email-eric.devolder@oracle.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,13 +23,20 @@ Cc: boris.ostrovsky@oracle.com, kexec@lists.infradead.org, daniel.kiper@oracle.c
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IEVyaWMgRGVWb2xkZXIgPGVyaWMuZGV2b2xkZXJAb3JhY2xlLmNvbT4gMDEvMTQvMTkgODo0
-OSBQTSA+Pj4KPkBAIC0yMTMsOCArMjE0LDkgQEAgdHlwZWRlZiBzdHJ1Y3QgeGVuX2tleGVjX2xv
-YWQgewo+dWludDY0X3QgX3BhZDsKPn0gc2VnbWVudHM7Cj51aW50NjRfdCBlbnRyeV9tYWRkcjsg
-LyogaW1hZ2UgZW50cnkgcG9pbnQgbWFjaGluZSBhZGRyZXNzLiAqLwo+LX0geGVuX2tleGVjX2xv
-YWRfdDsKPit9IHhlbl9rZXhlY19sb2FkX3QsIHhlbl9rZXhlY19maWxlX2xvYWRfdDsKPkRFRklO
-RV9YRU5fR1VFU1RfSEFORExFKHhlbl9rZXhlY19sb2FkX3QpOwo+K0RFRklORV9YRU5fR1VFU1Rf
-SEFORExFKHhlbl9rZXhlY19maWxlX2xvYWRfdCk7CiAKSSBkb24ndCBzZWUgdGhlIG5lZWQgZm9y
-IHRoaXMgZXh0cmEgdHlwZWRlZiBhbmQgaGFuZGxlLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+OCBQTSA+Pj4KPk9uIEFwcmlsIDIwLCAyMDE4LCBJIHBvc3RlZCB0byB4ZW4tZGV2ZWwgYW4gUkZD
+IGlucXVpcmluZyBhYm91dAo+c3VwcG9ydCBmb3Igc2lnbmF0dXJlIHZlcmlmaWNhdGlvbiBvZiBr
+ZXhlYyB3aXRoaW4gWGVuOgo+Cj5odHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVz
+L2h0bWwveGVuLWRldmVsLzIwMTgtMDQvbXNnMDE2NTUuaHRtbAo+Cj5TaW5jZSB0aGVuLCBJJ3Zl
+IHdvcmtlZCB0b3dhcmRzIGEgc29sdXRpb24uIEZvciB0aGUgcHVycG9zZXMgb2YKPnVuZGVyc3Rh
+bmRpbmcgc2lnbmF0dXJlIHZlcmlmaWNhdGlvbiwgSSBidWlsdCBhIHN0YW5kYWxvbmUgdXRpbGl0
+eSB0bwo+cGFyc2UgdGhlIHhlbi5tYi5lZmkgUEVDT0ZGIGZpbGUsIGhhc2ggaXQgY29udGVudHMs
+IGFuZCBleHRyYWN0IGl0cwo+ZGlnaXRpYWwgY2VydGlmaWNhdGUgYW5kIHBlcmZvcm0gdGhlIEF1
+dGhlbnRpY29kZSBzaWduYXR1cmUKPnZlcmlmaWNhdGlvbi4gT25jZSB0aGlzIHdhcyBhbGwgd29y
+a2luZywgSSBpbnRlZ3JhdGVkIHRoZSBmaWxlcyBpbnRvCj5YZW4uCgpQZXJoYXBzIEknbSBqdXN0
+IGxhY2tpbmcgc29tZSBjb250ZXh0LCBidXQgbmVpdGhlciB0aGUgbWFpbCByZWZlcmVuY2VkCmFi
+b3ZlIG5vciBteSBsb29raW5nIGF0IHRoZSBMaW51eCBjb2RlIHJldmVhbCBhbnkgY29ubmVjdGlv
+biB0byBQRS1DT0ZGLgpIb3cncyB0aGF0IGZpbGUgZm9ybWF0IGJlY29taW5nIG9mIGludGVyZXN0
+IGhlcmUgYWxsIG9mIHRoZSBzdWRkZW4/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
