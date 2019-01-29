@@ -1,12 +1,11 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] x86/pv-shim: Avoid a command line parameter
- warning for CONFIG_PV_SHIM_EXCLUSIVE builds
-Date: Tue, 29 Jan 2019 19:07:50 +0000
-Message-ID: <1548788870-1851-1-git-send-email-andrew.cooper3@citrix.com>
+Subject: [Xen 4.12 bug] HVM/PVH boot confusion
+Date: Tue, 29 Jan 2019 19:49:51 +0000
+Message-ID: <5c7ab977-8b31-4266-188e-e0bb045ca085@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1267455176270907943=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,32 +14,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+To: Xen-devel List <xen-devel@lists.xen.org>
+Cc: Juergen Gross <JGross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-V2hlbiBib290aW5nIGEgZ3Vlc3QgdXNpbmcgInB2c2hpbT0xIiBpbiB0aGUgVk0gY29uZmlndXJh
-dGlvbiBmaWxlLCBsaWJ4bCdzCmRlZmF1bHQgY29tbWFuZCBsaW5lIGlzICJwdi1zaGltIGNvbnNv
-bGU9eGVuLHB2Ii4KCldpdGggYSBDT05GSUdfUFZfU0hJTV9FWENMVVNJVkUgaHlwZXJ2aXNvciwg
-dGhlIGJvb2xlYW5fcGFyYW0oKSBpcyBjb21waWxlZApvdXQsIHJlc3VsdGluZyBpbiBhIGNvbW1h
-bmQgbGluZSBwYXJzaW5nIHdhcm5pbmc6CgogIChkOCkgWyAxNTU2LjMzNDY2NF0gKFhFTikgcGFy
-YW1ldGVyICJwdi1zaGltIiB1bmtub3duIQoKQXZvaWQgdGhlIHdhcm5pbmcgYnkgaW5jbHVkaW5n
-IGEgc2Vjb25kIGJvb2xlYW5fcGFyYW0oKSBmb3IgInB2LXNoaW0iIHdoaWNoCndyaXRlcyBpbnRv
-IGEgdW51c2VkIHZhcmlhYmxlLgoKU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0tCkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5j
-b20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpDQzogUm9nZXIgUGF1IE1vbm7D
-qSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CkNDOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5j
-b20+Ci0tLQogeGVuL2FyY2gveDg2L3B2L3NoaW0uYyB8IDYgKysrKystCiAxIGZpbGUgY2hhbmdl
-ZCwgNSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gv
-eDg2L3B2L3NoaW0uYyBiL3hlbi9hcmNoL3g4Ni9wdi9zaGltLmMKaW5kZXggNjM2YTlkNi4uYzQ1
-ODg1YSAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L3B2L3NoaW0uYworKysgYi94ZW4vYXJjaC94
-ODYvcHYvc2hpbS5jCkBAIC00MCw3ICs0MCwxMSBAQAogI3VuZGVmIHZpcnRfdG9fbWZuCiAjZGVm
-aW5lIHZpcnRfdG9fbWZuKHZhKSBfbWZuKF9fdmlydF90b19tZm4odmEpKQogCi0jaWZuZGVmIENP
-TkZJR19QVl9TSElNX0VYQ0xVU0lWRQorI2lmZGVmIENPTkZJR19QVl9TSElNX0VYQ0xVU0lWRQor
-LyogVG9sZXJhdGUgInB2LXNoaW0iIGJlaW5nIHBhc3NlZCB0byBhIENPTkZJR19QVl9TSElNX0VY
-Q0xVU0lWRSBoeXBlcnZpc29yLiAqLworc3RhdGljIGJvb2wgX2Rpc2NhcmQ7Citib29sZWFuX3Bh
-cmFtKCJwdi1zaGltIiwgX2Rpc2NhcmQpOworI2Vsc2UKIGJvb2wgcHZfc2hpbTsKIGJvb2xlYW5f
-cGFyYW0oInB2LXNoaW0iLCBwdl9zaGltKTsKICNlbmRpZgotLSAKMi4xLjQKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1267455176270907943==
+Content-Type: multipart/alternative;
+	boundary="------------4A9A24F9D43D1E0071E12AD2"
+Content-Language: en-GB
+
+--------------4A9A24F9D43D1E0071E12AD2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Hello,
+
+Given the following vm.cfg file:
+
+name="vm"
+type="hvm"
+
+vcpus=4
+memory=1024
+
+firmware_override="/root/xen-syms"
+
+kernel="/boot/vmlinuz-4.4-xen"
+ramdisk="/boot/initrd-4.4.0+10.img"
+
+cmdline="console=xen,pv dom0=pv --- earlyprintk=xen"
+
+Xen crashes with the following trace:
+
+(d15) (XEN) Xen BUG at pvh-boot.c:82
+(d15) (XEN) ----[ Xen-4.12.0-rc  x86_64  debug=y   Not tainted ]----
+(d15) (XEN) CPU:    0
+(d15) (XEN) RIP:    e008:[<ffff82d0804331f2>] pvh_init+0x27d/0x2fe
+<snip>
+(d15) (XEN) Xen call trace:
+(d15) (XEN)    [<ffff82d0804331f2>] pvh_init+0x27d/0x2fe
+(d15) (XEN)    [<ffff82d080429000>] __start_xen+0x14c/0x28f6
+(d15) (XEN)    [<ffff82d0802000f3>] __high_start+0x53/0x55
+(d15) (XEN)
+(d15) (XEN)
+(d15) (XEN) ****************************************
+(d15) (XEN) Panic on CPU 0:
+(d15) (XEN) Xen BUG at pvh-boot.c:82
+(d15) (XEN) ****************************************
+
+The problem is that Xen is started at its PVH entrypoint (contrary to
+the instructions in the vm config file), and Xen unconditionally expects
+RSDP to be passed.
+
+There are at least two bugs here.
+
+1) RSDP was a late addition to the PVH boot protocol.  Xen's PVH
+entrypoint must not mandate its existence, because there are releases of
+the domain builder which don't provide it.
+
+2) The HVM/PVH boot confusion.  This think this is a still-outstanding
+bug around the broken assumption that the hvmloader binary speaks the
+PVH protocol without advertising itself appropriately (I really regret
+not objecting to those patches before they went in).  At the least, that
+needs fixing by putting a proper ELF note in hvmloader, and the domain
+builder needs to be updated to build all PVH-boot-ABI images consistently.
+
+I don't have time to look into this at the moment, if anyone fancies
+trying to fix these issues.
+
+~Andrew
+
+--------------4A9A24F9D43D1E0071E12AD2
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    Hello,<br>
+    <br>
+    Given the following vm.cfg file:<br>
+    <br>
+    name="vm"<br>
+    type="hvm"<br>
+    <br>
+    vcpus=4<br>
+    memory=1024<br>
+    <br>
+    firmware_override="/root/xen-syms"<br>
+    <br>
+    kernel="/boot/vmlinuz-4.4-xen"<br>
+    ramdisk="/boot/initrd-4.4.0+10.img"<br>
+    <br>
+    cmdline="console=xen,pv dom0=pv --- earlyprintk=xen"<br>
+    <br>
+    Xen crashes with the following trace:<br>
+    <br>
+    <pre>(d15) (XEN) Xen BUG at pvh-boot.c:82
+(d15) (XEN) ----[ Xen-4.12.0-rc  x86_64  debug=y   Not tainted ]----
+(d15) (XEN) CPU:    0
+(d15) (XEN) RIP:    e008:[&lt;ffff82d0804331f2&gt;] pvh_init+0x27d/0x2fe
+&lt;snip&gt;
+(d15) (XEN) Xen call trace:
+(d15) (XEN)    [&lt;ffff82d0804331f2&gt;] pvh_init+0x27d/0x2fe
+(d15) (XEN)    [&lt;ffff82d080429000&gt;] __start_xen+0x14c/0x28f6
+(d15) (XEN)    [&lt;ffff82d0802000f3&gt;] __high_start+0x53/0x55
+(d15) (XEN)
+(d15) (XEN)
+(d15) (XEN) ****************************************
+(d15) (XEN) Panic on CPU 0:
+(d15) (XEN) Xen BUG at pvh-boot.c:82
+(d15) (XEN) ****************************************
+
+</pre>
+    The problem is that Xen is started at its PVH entrypoint (contrary
+    to the instructions in the vm config file), and Xen unconditionally
+    expects RSDP to be passed.<br>
+    <br>
+    There are at least two bugs here.<br>
+    <br>
+    1) RSDP was a late addition to the PVH boot protocol.  Xen's PVH
+    entrypoint must not mandate its existence, because there are
+    releases of the domain builder which don't provide it.<br>
+    <br>
+    2) The HVM/PVH boot confusion.  This think this is a
+    still-outstanding bug around the broken assumption that the
+    hvmloader binary speaks the PVH protocol without advertising itself
+    appropriately (I really regret not objecting to those patches before
+    they went in).  At the least, that needs fixing by putting a proper
+    ELF note in hvmloader, and the domain builder needs to be updated to
+    build all PVH-boot-ABI images consistently.<br>
+    <br>
+    I don't have time to look into this at the moment, if anyone fancies
+    trying to fix these issues.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------4A9A24F9D43D1E0071E12AD2--
+
+
+--===============1267455176270907943==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1267455176270907943==--
