@@ -1,21 +1,20 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Backport candidate for Arm
-Date: Mon, 28 Jan 2019 14:58:30 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1901281448510.17936@sstabellini-ThinkPad-X260>
-References: <80edd4d5-e2b7-bcb5-32ac-9d2c9096299f@arm.com>
- <cc1466b5-fbc3-0e1f-6092-4f559866337c@arm.com>
- <alpine.DEB.2.10.1901251719390.17936@sstabellini-ThinkPad-X260>
- <bc7a2f15-87c2-659a-a0ab-1ac40ef35992@arm.com>
+Subject: Re: [PATCH for-4.12 v2 5/7] xen/arm: p2m: Only use
+ isb() when it is necessary
+Date: Mon, 28 Jan 2019 16:44:07 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1901281644010.17936@sstabellini-ThinkPad-X260>
+References: <20190128115026.3336-1-julien.grall@arm.com>
+ <20190128115026.3336-6-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-20665183-1548716311=:17936"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Y4lz=QE=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1goFrM-0002Pk-Do
- for xen-devel@lists.xenproject.org; Mon, 28 Jan 2019 22:58:32 +0000
-In-Reply-To: <bc7a2f15-87c2-659a-a0ab-1ac40ef35992@arm.com>
+ <SRS0=Vl7d=QF=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1goHVZ-0004AH-SJ
+ for xen-devel@lists.xenproject.org; Tue, 29 Jan 2019 00:44:09 +0000
+In-Reply-To: <20190128115026.3336-6-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,197 +24,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-20665183-1548716311=:17936
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Mon, 28 Jan 2019, Julien Grall wrote:
-> Hi,
-> 
-> On 1/26/19 1:30 AM, Stefano Stabellini wrote:
-> > On Mon, 21 Jan 2019, Julien Grall wrote:
-> > > Hi,
-> > > 
-> > > Ping?
-> > > 
-> > > Cheers,
-> > > 
-> > > On 30/11/2018 17:25, Julien Grall wrote:
-> > > > Hi,
-> > > > 
-> > > > Below a list of backport candidate for Arm.
-> > > > 
-> > > > 
-> > > > For Xen 4.10+ to handle correctly SMC call parameters and result
-> > > > 
-> > > > 35fc608612    xen/arm: smccc-1.1: Make return values unsigned long
-> > > > fa7974f743      xen/arm: smccc-1.1: Handle function result as parameters
-> > > > 
-> > > > For Xen 4.9+ to avoid Dom0 crash when using less vCPUs than pCPUs on
-> > > > GICv3
-> > > > 
-> > > > 703d9d5ec1      xen/arm: vgic-v3: Delay the initialization of the domain
-> > > > information
-> > > > 54ec59f6b0       xen/arm: vgic-v3: Don't create empty re-distributor
-> > > > regions
-> > > > 
-> > > > The following patch is required in Xen 4.11 to avoid breaking the new
-> > > > vGIC
-> > > > after applying the 2 previous patches.
-> > > > 
-> > > > 62aa9e7f1b    xen/arm: Don't build GICv3 with the new vGIC
-> > 
-> > For the moment I skipped 54ec59f6b0 and 62aa9e7f1b because 62aa9e7f1b is
-> > not a trivial backport. Everything else is done.
-> 
-> Thank you for backporting the patches. I think it was a bit odd to apply patch
-> 703d9d5ec1 without the 2 patches. Anyway, below a replacement patch for
-> 62aa9e7f1b.
-> 
-> diff --cc xen/arch/arm/Kconfig
-> index 8174c0c635,581de67b6b..0000000000
-> --- a/xen/arch/arm/Kconfig
-> +++ b/xen/arch/arm/Kconfig
-> @@@ -12,7 -12,6 +12,7 @@@ config ARM_3
->   config ARM_64
->         def_bool y
->         depends on 64BIT
-> -       select HAS_GICV3
-> ++      select HAS_GICV3 if !NEW_VGIC
-> 
->   config ARM
->         def_bool y
-> 
-
-Thank you, and that is fine for 4.11. I did that. However for 4.9 and
-4.10 we also need to make significant changes to 54ec59f6b0, or backport
-a lot more. I went with the former approach -- does the backport commit
-below look good to you for 4.10?
-
-
-commit 316e4426a185efefa078dd087c89a694b2149be8
-Author: Julien Grall <julien.grall@arm.com>
-Date:   Mon Jan 28 14:54:52 2019 -0800
-
-    xen/arm: vgic-v3: Don't create empty re-distributor regions
-    
-    At the moment, Xen is assuming the hardware domain will have the same
-    number of re-distributor regions as the host. However, as the
-    number of CPUs or the stride (e.g on GICv4) may be different we end up
-    exposing regions which does not contain any re-distributors.
-    
-    When booting, Linux will go through all the re-distributor region to
-    check whether a property (e.g vPLIs) is available accross all the
-    re-distributors. This will result to a data abort on empty regions
-    because there are no underlying re-distributor.
-    
-    So we need to limit the number of regions exposed to the hardware
-    domain. The code reworked to only expose the minimun number of regions
-    required by the hardware domain. It is assumed the regions will be
-    populated starting from the first one.
-    
-    Lastly, rename vgic_v3_rdist_count to reflect the value return by the
-    helper.
-    
-    Reported-by: Shameerali Kolothum Thodi <shameerali.kolothum.thodi@huawei.com>
-    Signed-off-by: Julien Grall <julien.grall@arm.com>
-    Tested-by: Shameer Kolothum <shameerali.kolothum.thodi@huawei.com>
-    Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-    (cherry picked from commit 54ec59f6b0b363c34cf1864d5214a05e35ea75ee)
-
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index a0d290b..f8e5354 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1178,6 +1178,8 @@ static int gicv3_make_hwdom_dt_node(const struct domain *d,
-      * GIC has two memory regions: Distributor + rdist regions
-      * CPU interface and virtual cpu interfaces accessesed as System registers
-      * So cells are created only for Distributor and rdist regions
-+     * The hardware domain may not use all the regions. So only copy
-+     * what is necessary.
-      */
-     len = len * (d->arch.vgic.nr_regions + 1);
-     new_cells = xzalloc_bytes(len);
-@@ -1416,6 +1418,10 @@ static int gicv3_make_hwdom_madt(const struct domain *d, u32 offset)
- 
-     /* Add Generic Redistributor */
-     size = sizeof(struct acpi_madt_generic_redistributor);
-+    /*
-+     * The hardware domain may not used all the regions. So only copy
-+     * what is necessary.
-+     */
-     for ( i = 0; i < d->arch.vgic.nr_regions; i++ )
-     {
-         gicr = (struct acpi_madt_generic_redistributor *)(base_ptr + table_len);
-diff --git a/xen/arch/arm/vgic-v3.c b/xen/arch/arm/vgic-v3.c
-index 6a30b4a..f76b0b2 100644
---- a/xen/arch/arm/vgic-v3.c
-+++ b/xen/arch/arm/vgic-v3.c
-@@ -1653,7 +1653,11 @@ static int vgic_v3_vcpu_init(struct vcpu *v)
-     return 0;
- }
- 
--static inline unsigned int vgic_v3_rdist_count(struct domain *d)
-+/*
-+ * Return the maximum number possible of re-distributor regions for
-+ * a given domain.
-+ */
-+static inline unsigned int vgic_v3_max_rdist_count(struct domain *d)
- {
-     return is_hardware_domain(d) ? vgic_v3_hw.nr_rdist_regions :
-                GUEST_GICV3_RDIST_REGIONS;
-@@ -1665,7 +1669,7 @@ static int vgic_v3_real_domain_init(struct domain *d)
-     int rdist_count, i, ret;
- 
-     /* Allocate memory for Re-distributor regions */
--    rdist_count = vgic_v3_rdist_count(d);
-+    rdist_count = vgic_v3_max_rdist_count(d);
- 
-     rdist_regions = xzalloc_array(struct vgic_rdist_region, rdist_count);
-     if ( !rdist_regions )
-@@ -1707,8 +1711,19 @@ static int vgic_v3_real_domain_init(struct domain *d)
-             d->arch.vgic.rdist_regions[i].first_cpu = first_cpu;
- 
-             first_cpu += size / d->arch.vgic.rdist_stride;
-+
-+            if ( first_cpu >= d->max_vcpus )
-+                break;
-         }
- 
-+        /*
-+         * The hardware domain may not use all the re-distributors
-+         * regions (e.g when the number of vCPUs does not match the
-+         * number of pCPUs). Update the number of regions to avoid
-+         * exposing unused region as they will not get emulated.
-+         */
-+        d->arch.vgic.nr_regions = i + 1;
-+
-         d->arch.vgic.intid_bits = vgic_v3_hw.intid_bits;
-     }
-     else
-@@ -1839,7 +1854,7 @@ int vgic_v3_init(struct domain *d, int *mmio_count)
-     }
- 
-     /* GICD region + number of Redistributors */
--    *mmio_count = vgic_v3_rdist_count(d) + 1;
-+    *mmio_count = vgic_v3_max_rdist_count(d) + 1;
- 
-     /* one region per ITS */
-     *mmio_count += vgic_v3_its_count(d);
---8323329-20665183-1548716311=:17936
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-20665183-1548716311=:17936--
+T24gTW9uLCAyOCBKYW4gMjAxOSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZSBFTDEgdHJhbnNs
+YXRpb24gcmVnaW1lIGlzIG91dC1vZi1jb250ZXh0IHdoZW4gcnVubmluZyBhdCBFTDIuIFRoaXMK
+PiBtZWFucyB0aGUgcHJvY2Vzc29yIGNhbm5vdCBzcGVjdWxhdGUgbWVtb3J5IGFjY2Vzc2VzIHVz
+aW5nIHRoZSByZWdpc3RlcnMKPiBhc3NvY2lhdGVkIHRvIHRoYXQgcmVnaW1lLgo+IAo+IEFuIGlz
+YigpIGlzIG9ubHkgbmVlZGVkIGlmIFhlbiBpcyBnb2luZyB0byB1c2UgdGhlIHRyYW5zbGF0aW9u
+IHJlZ2ltZQo+IGJlZm9yZSByZXR1cm5pbmcgdG8gdGhlIGd1ZXN0IChleGNlcHRpb24gcmV0dXJu
+cyB3aWxsIHN5bmNocm9uaXplIHRoZQo+IGNvbnRleHQpLgo+IAo+IFJlbW92ZSB1bm5lY2Vzc2Fy
+eSBpc2IoKSBhbmQgZG9jdW1lbnQgdGhlIG9uZXMgbGVmdC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBK
+dWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgo+IFJldmlld2VkLWJ5OiBBbmRyaWkg
+QW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgoKUmV2aWV3ZWQtYnk6IFN0ZWZhbm8gU3Rh
+YmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KCgo+IC0tLQo+ICAgICBDaGFuZ2VzIGlu
+IHYyOgo+ICAgICAgICAgLSBSZW1vdmUgcG9pbnRsZXNzIHt9Cj4gICAgICAgICAtIEZpeCB0eXBv
+ZXMKPiAgICAgICAgIC0gQWRkIEFuZHJpaSdzIHJldmlld2VkLWJ5Cj4gLS0tCj4gIHhlbi9hcmNo
+L2FybS9wMm0uYyB8IDE3ICsrKysrKysrKysrLS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAxMSBp
+bnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9h
+cm0vcDJtLmMgYi94ZW4vYXJjaC9hcm0vcDJtLmMKPiBpbmRleCA5ODQ0YmZiOTM2Li40NDM5MWE1
+ZjhjIDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL2FybS9wMm0uYwo+ICsrKyBiL3hlbi9hcmNoL2Fy
+bS9wMm0uYwo+IEBAIC0xMDYsMTcgKzEwNiwyMSBAQCB2b2lkIHAybV9yZXN0b3JlX3N0YXRlKHN0
+cnVjdCB2Y3B1ICpuKQo+ICAgICAgICAgIHJldHVybjsKPiAgCj4gICAgICBXUklURV9TWVNSRUc2
+NChwMm0tPnZ0dGJyLCBWVFRCUl9FTDIpOwo+IC0gICAgaXNiKCk7Cj4gLQo+ICAgICAgV1JJVEVf
+U1lTUkVHKG4tPmFyY2guc2N0bHIsIFNDVExSX0VMMSk7Cj4gLSAgICBpc2IoKTsKPiAtCj4gICAg
+ICBXUklURV9TWVNSRUcobi0+YXJjaC5oY3JfZWwyLCBIQ1JfRUwyKTsKPiAtICAgIGlzYigpOwo+
+ICAKPiAgICAgIGxhc3RfdmNwdV9yYW4gPSAmcDJtLT5sYXN0X3ZjcHVfcmFuW3NtcF9wcm9jZXNz
+b3JfaWQoKV07Cj4gIAo+ICAgICAgLyoKPiArICAgICAqIFdoaWxlIHdlIGFyZSByZXN0b3Jpbmcg
+YW4gb3V0LW9mLWNvbnRleHQgdHJhbnNsYXRpb24gcmVnaW1lCj4gKyAgICAgKiB3ZSBzdGlsbCBu
+ZWVkIHRvIGVuc3VyZToKPiArICAgICAqICAtIFZUVEJSX0VMMiBpcyBzeW5jaHJvbml6ZWQgYmVm
+b3JlIGZsdXNoaW5nIHRoZSBUTEJzCj4gKyAgICAgKiAgLSBBbGwgcmVnaXN0ZXJzIGZvciBFTDEg
+YXJlIHN5bmNocm9uaXplZCBiZWZvcmUgZXhlY3V0aW5nIGFuIEFUCj4gKyAgICAgKiAgaW5zdHJ1
+Y3Rpb25zIHRhcmdldGluZyBTMS9TMi4KPiArICAgICAqLwo+ICsgICAgaXNiKCk7Cj4gKwo+ICsg
+ICAgLyoKPiAgICAgICAqIEZsdXNoIGxvY2FsIFRMQiBmb3IgdGhlIGRvbWFpbiB0byBwcmV2ZW50
+IHdyb25nIFRMQiB0cmFuc2xhdGlvbgo+ICAgICAgICogd2hlbiBydW5uaW5nIG11bHRpcGxlIHZD
+UFUgb2YgdGhlIHNhbWUgZG9tYWluIG9uIGEgc2luZ2xlIHBDUFUuCj4gICAgICAgKi8KPiBAQCAt
+MTQ3LDYgKzE1MSw3IEBAIHN0YXRpYyB2b2lkIHAybV9mb3JjZV90bGJfZmx1c2hfc3luYyhzdHJ1
+Y3QgcDJtX2RvbWFpbiAqcDJtKQo+ICAgICAgewo+ICAgICAgICAgIGxvY2FsX2lycV9zYXZlKGZs
+YWdzKTsKPiAgICAgICAgICBXUklURV9TWVNSRUc2NChwMm0tPnZ0dGJyLCBWVFRCUl9FTDIpOwo+
+ICsgICAgICAgIC8qIEVuc3VyZSBWVFRCUl9FTDIgaXMgc3luY2hyb25pemVkIGJlZm9yZSBmbHVz
+aGluZyB0aGUgVExCcyAqLwo+ICAgICAgICAgIGlzYigpOwo+ICAgICAgfQo+ICAKPiBAQCAtMTU1
+LDYgKzE2MCw3IEBAIHN0YXRpYyB2b2lkIHAybV9mb3JjZV90bGJfZmx1c2hfc3luYyhzdHJ1Y3Qg
+cDJtX2RvbWFpbiAqcDJtKQo+ICAgICAgaWYgKCBvdnR0YnIgIT0gUkVBRF9TWVNSRUc2NChWVFRC
+Ul9FTDIpICkKPiAgICAgIHsKPiAgICAgICAgICBXUklURV9TWVNSRUc2NChvdnR0YnIsIFZUVEJS
+X0VMMik7Cj4gKyAgICAgICAgLyogRW5zdXJlIFZUVEJSX0VMMiBpcyBiYWNrIGluIHBsYWNlIGJl
+Zm9yZSBjb250aW51aW5nLiAqLwo+ICAgICAgICAgIGlzYigpOwo+ICAgICAgICAgIGxvY2FsX2ly
+cV9yZXN0b3JlKGZsYWdzKTsKPiAgICAgIH0KPiBAQCAtMTkwNyw3ICsxOTEzLDYgQEAgc3RhdGlj
+IHVpbnQzMl90IF9fcmVhZF9tb3N0bHkgdnRjcjsKPiAgc3RhdGljIHZvaWQgc2V0dXBfdmlydF9w
+YWdpbmdfb25lKHZvaWQgKmRhdGEpCj4gIHsKPiAgICAgIFdSSVRFX1NZU1JFRzMyKHZ0Y3IsIFZU
+Q1JfRUwyKTsKPiAtICAgIGlzYigpOwo+ICB9Cj4gIAo+ICB2b2lkIF9faW5pdCBzZXR1cF92aXJ0
+X3BhZ2luZyh2b2lkKQo+IC0tIAo+IDIuMTEuMAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
