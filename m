@@ -1,24 +1,20 @@
-From: Andy Smith <andy@strugglers.net>
-Subject: Re: 4.10.1 Xen crash and reboot
-Date: Wed, 30 Jan 2019 18:53:32 +0000
-Message-ID: <20190130185332.GB4569@bitfolk.com>
-References: <20181210155841.GR3695@bitfolk.com>
- <20181221185538.GF3695@bitfolk.com>
- <20190101194657.GP3695@bitfolk.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86emul: correct AVX512BW write masking
+ checks
+Date: Wed, 30 Jan 2019 19:04:00 +0000
+Message-ID: <486e3429-c9de-e609-10e8-36a55513cad8@citrix.com>
+References: <5C3C7511020000780020D2BF@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=pDCo=QG=strugglers.net=andy@srs-us1.protection.inumbo.net>)
- id 1gouzP-0007lr-VL
- for xen-devel@lists.xenproject.org; Wed, 30 Jan 2019 18:53:36 +0000
-Received: from andy by mail.bitfolk.com with local (Exim 4.84_2)
- (envelope-from <andy@strugglers.net>) id 1gouzM-0007Gr-Uq
- for xen-devel@lists.xenproject.org; Wed, 30 Jan 2019 18:53:32 +0000
-Content-Disposition: inline
-In-Reply-To: <20190101194657.GP3695@bitfolk.com>
+ <SRS0=QFm2=QG=citrix.com=prvs=926d8012e=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1govCF-0000XI-Bf
+ for xen-devel@lists.xenproject.org; Wed, 30 Jan 2019 19:06:51 +0000
+In-Reply-To: <5C3C7511020000780020D2BF@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,20 +23,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiBUdWUsIEphbiAwMSwgMjAxOSBhdCAwNzo0Njo1N1BNICswMDAwLCBBbmR5IFNtaXRo
-IHdyb3RlOgo+IFRoZSB0ZXN0IGhvc3QgaXMgc2xpZ2h0bHkgZGlmZmVyZW50IGhhcmR3YXJlIHRv
-IHRoZSBvdGhlcnM6IFhlb24KPiBFNS0xNjgwdjQgb24gdGhlcmUgYXMgb3Bwb3NlZCB0byBYZW9u
-IEQtMTU0MCBwcmV2aW91c2x5Lgo+IAo+IFRlc3QgaG9zdCBpcyBub3cgcnVubmluZyB3aXRoIHBj
-aWQ9MCB0byBzZWUgaWYgdGhhdCBoZWxwcy4gVGhlCj4gbG9uZ2VzdCB0aGlzIGd1ZXN0IGhhcyBi
-ZWVuIGFibGUgdG8gcnVuIHNvIGZhciB3aXRob3V0IGNyYXNoaW5nIHRoZQo+IGhvc3QgaXMgMTQg
-ZGF5cy4KCkp1c3QgdG8gbm90ZSwgaXQgaGFzIHNvIGZhciBiZWVuIDI4IGRheXMgYW5kIHRoaXMg
-aG9zdCB1c2luZyBwY2lkPTAKb24gdGhlIGNvbW1hbmQgbGluZSBoYXMgbm90IGNyYXNoZWQgYWdh
-aW4geWV0LgoKSSBzdGlsbCBoYXZlIG5vIHdheSB0byByZXByb2R1Y2UgdGhlIHByb2JsZW0gb24g
-ZGVtYW5kIGJ1dCBpZiBhbnlvbmUKd2FudHMgbWUgbWUgdG8gZG8gYW55IGZ1cnRoZXIgZGVidWdn
-aW5nIHdpdGggcGNpZD0xIEkgY2FuIGRvIHRoYXQuCgpUaGFua3MsCkFuZHkKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTQvMDEvMjAxOSAxMTo0MCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gRm9yIFZQU0FEQlcgdGhp
+cyBsaWtlbHkgd2FzIGEgcmVzdWx0IG9mIGJhZCBjb3B5LWFuZC1wYXN0ZS4KPgo+IEZvciBWUFN7
+TCxSfUxEUSBjb21tZW50IGFuZCBjb2RlIHdlcmUgbm90IGluIGxpbmUsIGJ1dCB0aGVuIGFnYWlu
+IHRoZQo+IGNvbW1lbnQgYWxzbyB3YXNuJ3QgZnVsbHkgdXBkYXRlZCBmcm9tIHRoZSBBVlgyIG9y
+aWdpbmFsIGl0IGdvdCBjbG9uZWQKPiBmcm9tLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxp
+Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSSdtIGd1ZXNzaW5nIHRoYXQgdGhlc2UgYXJlIGNvdmVy
+ZWQgYnkgdGhlIGZpcnN0IHJvdyBvZiB0YWJsZSAyLTQwLCBhbmQKdGhlIGFic2Vuc2Ugb2Yge2sx
+fSBpbiB0aGUgaW5zdHJ1Y3Rpb24gc3BlY2lmaWNhdGlvbnM/Cgp+QW5kcmV3CgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
