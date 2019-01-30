@@ -1,23 +1,15 @@
-From: Pu Wen <puwen@hygon.cn>
-Subject: Re: [PATCH 09/15] x86/pv: Add Hygon Dhyana support to
- emulate MSRs access
-Date: Wed, 30 Jan 2019 17:52:21 +0800
-Message-ID: <fbb2d4f6-75d1-49ad-a037-a2f472ef1754@hygon.cn>
-References: <cover.1545284932.git.puwen@hygon.cn>
- <93aea88af6dcc70b24b8d5195bef026629f52170.1545284932.git.puwen@hygon.cn>
- <5C4B40C602000078002113CA@prv1-mh.provo.novell.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86/pv-shim: Avoid a command line parameter
+ warning for CONFIG_PV_SHIM_EXCLUSIVE builds
+Date: Wed, 30 Jan 2019 02:57:47 -0700
+Message-ID: <5C51751B0200007800212354@prv1-mh.provo.novell.com>
+References: <1548788870-1851-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=N8mM=QG=hygon.cn=puwen@srs-us1.protection.inumbo.net>)
- id 1gomcJ-0005Cm-2n
- for xen-devel@lists.xenproject.org; Wed, 30 Jan 2019 09:57:11 +0000
-In-Reply-To: <5C4B40C602000078002113CA@prv1-mh.provo.novell.com>
-Content-Language: en-US
+In-Reply-To: <1548788870-1851-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,33 +18,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOS8xLzI2IDE6NDgsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+IE9uIDIwLjEyLjE4IGF0
-IDE0OjE0LCA8cHV3ZW5AaHlnb24uY24+IHdyb3RlOgo+PiBUaGUgSHlnb24gRGh5YW5hIENQVSBz
-dXBwb3J0cyBsb3RzIG9mIE1TUnMoc3VjaCBhcyBwZXJmIGV2ZW50IHNlbGVjdCBhbmQKPj4gY291
-bnRlciBNU1JzLCBoYXJkd2FyZSBjb25maWd1cmF0aW9uIE1TUiwgTU1JTyBjb25maWd1cmF0aW9u
-IGJhc2UgYWRkcmVzcwo+PiBNU1IsIE1QRVJGL0FQRVJGIE1TUnMpIGFzIEFNRCBDUFUgZG9lcywg
-c28gYWRkIEh5Z29uIERoeWFuYSBzdXBwb3J0IHRvIHRoZQo+PiBQViBlbXVsYXRpb24gaW5mcmFz
-dHJ1Y3R1cmUgYnkgdXNpbmcgdGhlIGNvZGUgcGF0aCBvZiBBTUQuCj4+Cj4+IEFzIGh5Z29uLmMg
-bmVlZHMgdG8gd3JpdGUgdGhlIGxvYWQtc3RvcmUgY29uZmlndXJhdGlvbihMU19DRkcpIE1TUiwg
-c28gYWRkCj4+IG5ldyBjYXNlIGluIHdyaXRlX21zciB0byBoYW5kbGUgdGhpcyBzaXR1YXRpb24u
-Cj4gCj4gV2hpY2ggaHlnb24uYyBkbyB5b3UgbWVhbiBoZXJlPyBUaGlzIGFkZGl0aW9uLCBpZiB2
-YWxpZCBhdCBhbGwsIGNsZWFybHkKCkkgbWVhbiBoeWdvbi5jIGZyb20gdGhlIGxpbnV4IGtlcm5l
-bC4gQnV0IGluIGZhY3QgaXQncyBzb21lIG90aGVyIGtlcm5lbApwYXJ0IHdpbGwgd3JpdGUgTFNf
-Q0ZHIE1TUi4gU28gdGhlIGRlc2NyaXB0aW9uIHdpbGwgYmUgcmVmaW5lZC4KCj4gbmVlZHMgaXRz
-IG93biBwYXRjaCBhbmQganVzdGlmaWNhdGlvbiwgdGhlIG1vcmUgdGhhdCB5b3UgcGVybWl0IGFj
-Y2VzcwoKVGhpcyBhZGRpdGlvbiBpcyBuZWVkZWQsIG90aGVyd2lzZSB0aGVyZSB3aWxsIGJlIHdh
-cm5pbmdzIGxpa2U6CiIoWEVOKSBlbXVsLXByaXYtb3AuYzoxMTY1OmQwdjEyIERvbWFpbiBhdHRl
-bXB0ZWQgV1JNU1IgYzAwMTEwMjAgZnJvbSAweDAyMDY4MDAwMDAwMDAwMDAgdG8gMHgwMjA2ODAw
-MDAwMDAwNDAwIgoKWW91ciBzdWdnZXN0aW9uIGlzIGZpbmUsIHdpbGwgZGV2ZWxvcCBpdHMgb3du
-IHBhdGNoIGFuZCBqdXN0aWZpY2F0aW9uIGluCm5leHQgdmVyc2lvbiBwYXRjaCBzZXQuCgo+IChl
-dmVuIGlmIG9ubHkgZm9yIERvbTApIG9uIEFNRCBhcyB3ZWxsLgoKQXMgdGhlcmUgd2lsbCBiZSB0
-aGUgc2FtZSB3YXJuaW5ncyBvbiBBTUQgcGxhdGZvcm1zLCBzbyBJIHBlcm1pdCBhY2Nlc3MKZm9y
-IEFNRCBhcyB3ZWxsLiBJIGRvbid0IGtub3cgaWYgaXMgdGhpcyBPSz8gSWYgbm90LCBJJ2xsIHBl
-cm1pdCBhY2Nlc3MKZm9yIEh5Z29uIG9ubHkuCgotLSAKUmVnYXJkcywKUHUgV2VuCgpfX19fX19f
+Pj4+IE9uIDI5LjAxLjE5IGF0IDIwOjA3LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gLS0tIGEveGVuL2FyY2gveDg2L3B2L3NoaW0uYwo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9w
+di9zaGltLmMKPiBAQCAtNDAsNyArNDAsMTEgQEAKPiAgI3VuZGVmIHZpcnRfdG9fbWZuCj4gICNk
+ZWZpbmUgdmlydF90b19tZm4odmEpIF9tZm4oX192aXJ0X3RvX21mbih2YSkpCj4gIAo+IC0jaWZu
+ZGVmIENPTkZJR19QVl9TSElNX0VYQ0xVU0lWRQo+ICsjaWZkZWYgQ09ORklHX1BWX1NISU1fRVhD
+TFVTSVZFCj4gKy8qIFRvbGVyYXRlICJwdi1zaGltIiBiZWluZyBwYXNzZWQgdG8gYSBDT05GSUdf
+UFZfU0hJTV9FWENMVVNJVkUgaHlwZXJ2aXNvci4gKi8KPiArc3RhdGljIGJvb2wgX2Rpc2NhcmQ7
+Cj4gK2Jvb2xlYW5fcGFyYW0oInB2LXNoaW0iLCBfZGlzY2FyZCk7Cj4gKyNlbHNlCj4gIGJvb2wg
+cHZfc2hpbTsKPiAgYm9vbGVhbl9wYXJhbSgicHYtc2hpbSIsIHB2X3NoaW0pOwo+ICAjZW5kaWYK
+Ckl0IHdvdWxkIGVuZCB1cCBiZWluZyBsZXNzIGV4dHJhIGNvZGUgaWYgeW91IGRpZAoKI2lmZGVm
+IENPTkZJR19QVl9TSElNX0VYQ0xVU0lWRQovKiBUb2xlcmF0ZSAicHYtc2hpbSIgYmVpbmcgcGFz
+c2VkIHRvIGEgQ09ORklHX1BWX1NISU1fRVhDTFVTSVZFIGh5cGVydmlzb3IuICovCnN0YXRpYyBi
+b29sIF9faW5pdGRhdGEgcHZfc2hpbTsKI2Vsc2UKYm9vbCBwdl9zaGltOwojZW5kaWYKYm9vbGVh
+bl9wYXJhbSgicHYtc2hpbSIsIHB2X3NoaW0pOwoKQnV0IGF0IHRoZSB2ZXJ5IGxlYXN0IHRoZSBf
+X2luaXRkYXRhIHdhbnRzIGFkZGluZy4gUHJlZmVyYWJseSBpbiB0aGUKc3VnZ2VzdGVkIGZvcm0K
+QWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkphbgoKCgpfX19fX19f
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
 ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
 b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
