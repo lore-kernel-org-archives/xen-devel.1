@@ -1,18 +1,17 @@
-From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-Subject: xen/mem-reservation API and out-of-tree kernel modules
-Date: Thu, 31 Jan 2019 14:02:30 +0000
-Message-ID: <f3ca533d-7f51-c59e-6a96-4e1fba687c8f__47563.5421158344$1548943410$gmane$org@epam.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH 0/4] x86: further L1TF / XSA-289 guards
+Date: Thu, 31 Jan 2019 07:07:37 -0700
+Message-ID: <5C5301290200007800212C6B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=FVHn=QH=epam.com=oleksandr_andrushchenko@srs-us1.protection.inumbo.net>)
- id 1gpCvK-0005iT-5o
- for xen-devel@lists.xenproject.org; Thu, 31 Jan 2019 14:02:34 +0000
-Content-Language: en-US
-Content-ID: <D456D1D2F1A6B1488E9B9C1523D6E918@eurprd03.prod.outlook.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=qOm0=QH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gpD0G-0005vJ-0e
+ for xen-devel@lists.xenproject.org; Thu, 31 Jan 2019 14:07:40 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,36 +20,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "marmarek@invisiblethingslab.com" <marmarek@invisiblethingslab.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, nmanthey@amazon.de, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8sDQoNCkkgYW0gd29ya2luZyBvbiBwb3J0aW5nIGFuIG91dC1vZi10cmVlIGtlcm5lbCBk
-cml2ZXIgdG8gdGhlIGtlcm5lbA0KNS4wIGFuZCB0aGF0IGRyaXZlciB1c2VzIGZ1bmN0aW9uYWxp
-dHkgcHJvdmlkZWQgYnkgDQpkcml2ZXJzL3hlbi9tZW0tcmVzZXJ2YXRpb24uYw0KbW9kdWxlLsKg
-IFNpbmNlIGNvbW1pdCBbMV0gaXQgaXMgbm90IHBvc3NpYmxlIHRvIGJ1aWxkIGEga2VybmVsIG1v
-ZHVsZQ0Kd2hpY2ggdXNlcyBtZW0tcmVzZXJ2YXRpb24gQVBJIGFzIHhlbl9zY3J1Yl9wYWdlcyB2
-YXJpYWJsZSwgd2hpY2ggaXMgDQpjaGVja2VkIGluDQp4ZW5tZW1fcmVzZXJ2YXRpb25fc2NydWJf
-cGFnZSwgYmVjYW1lIGEga2VybmVsIG1vZHVsZSBwYXJhbWV0ZXIgYW5kIGlzIA0Kbm93IG9ubHkN
-CmFjY2Vzc2libGUgZm9yIGJ1aWx0LWluIG1vZHVsZXM6DQoNCnN0YXRpYyBpbmxpbmUgdm9pZCB4
-ZW5tZW1fcmVzZXJ2YXRpb25fc2NydWJfcGFnZShzdHJ1Y3QgcGFnZSAqcGFnZSkNCl5eXl5eXl5e
-Xl5eXl4NCnsNCiDCoMKgwqAgaWYgKHhlbl9zY3J1Yl9wYWdlcykNCiDCoMKgwqDCoMKgwqDCoCBe
-Xl5eXl5eXl5eXl5eXl4NCiDCoMKgwqAgwqDCoMKgIGNsZWFyX2hpZ2hwYWdlKHBhZ2UpOw0KfQ0K
-DQpUaGlzIHJlc3VsdHMgaW4gbGluay10aW1lIHdhcm5pbmc6DQoNCiDCoMKgwqAgV0FSTklORzog
-Inhlbl9zY3J1Yl9wYWdlcyIgW3lvdXJtb2R1bGUua29dIHVuZGVmaW5lZCENCg0KYW5kIHRodXMg
-bm90IGFsbG93aW5nIHRoZSBtb2R1bGUgdG8gcnVuLiBBdCB0aGUgbW9tZW50IEkgY2FuIG9ubHkg
-c2VlIGEgDQpwb3NzaWJsZSBmaXgNCmZvciB0aGlzIGJ5IG1ha2luZyB0aGUgZm9sbG93aW5nIGNo
-YW5nZToNCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMveGVuL21lbS1yZXNlcnZhdGlvbi5jIGIvZHJp
-dmVycy94ZW4vbWVtLXJlc2VydmF0aW9uLmMNCmluZGV4IDM3ODJjZjA3MDMzOC4uODVmZWNmZWM1
-MGUxIDEwMDY0NA0KLS0tIGEvZHJpdmVycy94ZW4vbWVtLXJlc2VydmF0aW9uLmMNCisrKyBiL2Ry
-aXZlcnMveGVuL21lbS1yZXNlcnZhdGlvbi5jDQpAQCAtMTgsNiArMTgsNyBAQA0KDQogwqBib29s
-IF9fcmVhZF9tb3N0bHkgeGVuX3NjcnViX3BhZ2VzID0gDQpJU19FTkFCTEVEKENPTkZJR19YRU5f
-U0NSVUJfUEFHRVNfREVGQVVMVCk7DQogwqBjb3JlX3BhcmFtKHhlbl9zY3J1Yl9wYWdlcywgeGVu
-X3NjcnViX3BhZ2VzLCBib29sLCAwKTsNCitFWFBPUlRfU1lNQk9MKHhlbl9zY3J1Yl9wYWdlcyk7
-DQoNCmJ1dCB0aGlzIGxvb2tzIGEgYml0IHVudXN1YWwgZm9yIHRoZSBrZXJuZWw/DQoNCkkgYW0g
-bG9va2luZyBmb3IgY29tbXVuaXR5IGFkdmljZSBoZXJlIGFuZCBoZWxwDQoNClRoYW5rIHlvdSwN
-Ck9sZWtzYW5kcg0KDQpbMV0gDQpodHRwczovL2dpdC5rZXJuZWwub3JnL3B1Yi9zY20vbGludXgv
-a2VybmVsL2dpdC90b3J2YWxkcy9saW51eC5naXQvY29tbWl0Lz9pZD0xOTdlY2IzODAyYzA0NDk5
-ZDhmZjRmOGNiMjhmNmVmYTAwODA2N2RiDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+VGhpcyBnb2VzIGFsb25nc2lkZSBOb3JiZXJ0J3Mgc2VyaWVzLCBkZWFsaW5nIHdpdGggYSBmZXcg
+bW9yZQpwbGFjZXMgd2hlcmUgSSBoYXBwZW5lZCB0byBrbm93ICh3aXRob3V0IGFueSBhbmFseXNp
+cyB0b29scykKZ3Vlc3QgY29udHJvbGxlZCBhcnJheSBhY2Nlc3NlcyBzaXQuIEkndmUgYWRkaXRp
+b25hbGx5IGFsc28KY2hlY2tlZCBlbXVsLWk4MjU0LmMsIGFuZCBJIHRoaW5rIG5vIGFkanVzdG1l
+bnRzIGFyZSBuZWVkZWQKdGhlcmUgKHRoZXJlIGFyZSBhIGZldyBwb3NzaWJsZSBvdmVycnVucyBi
+eSBvbmUsIGJ1dCBqdXN0IGxpa2UKaXMgdGhlIGNhc2UgaW4gcGF0Y2ggMiBJIGRvbid0IHRoaW5r
+IHRoZXkgYXJlIGFjdHVhbCBpc3N1ZXMpLgoKMTogeDg2ZW11bDogYXZvaWQgc3BlY3VsYXRpdmUg
+b3V0IG9mIGJvdW5kcyBhY2Nlc3NlcwoyOiB4ODYvdk1TSTogYXZvaWQgc3BlY3VsYXRpdmUgb3V0
+IG9mIGJvdW5kcyBhY2Nlc3NlcwozOiB4ODYvdlBJQzogYXZvaWQgc3BlY3VsYXRpdmUgb3V0IG9m
+IGJvdW5kcyBhY2Nlc3Nlcwo0OiB4ODYvdkxBUElDOiBhdm9pZCBzcGVjdWxhdGl2ZSBvdXQgb2Yg
+Ym91bmRzIGFjY2Vzc2VzCgpKw7xyZ2VuLCBJJ3ZlIGNvcGllZCB5b3UgYW55d2F5LCBidXQgSSBh
+c3N1bWUgeW91ciBnZW5lcmFsClJhYi11bnRpbC1SQzMgd291bGQgYXBwbHkgdG8gdGhpcyBzZXJp
+ZXMgKGFuZCBwZXJoYXBzIHRvCmZ1cnRoZXIgb25lcywgc2hvdWxkIGFueW9uZSBmaW5kIHRpbWUp
+IGFzIG11Y2ggYXMgdG8gTm9yYmVydCdzLgoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3hlbi1kZXZlbA==
