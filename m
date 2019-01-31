@@ -1,14 +1,29 @@
-From: Heiko Stuebner <heiko@sntech.de>
-Subject: Re: [PATCHv2 1/9] mm: Introduce new vm_insert_range and
- vm_insert_range_buggy API
-Date: Thu, 31 Jan 2019 13:06:49 +0100
-Message-ID: <1701923.z6LKAITQJA__2183.27845666266$1548936556$gmane$org@phil>
-References: <20190131030812.GA2174@jordon-HP-15-Notebook-PC>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Thu, 31 Jan 2019 12:20:39 +0000
+Message-ID: <4e777fcf-6630-5aff-a8d2-781d3f705123@arm.com>
+References: <CACrvCsaeHuwzZzUQTzNYF7fqmgQWNJUVOQZv9D0MnYrXjqzZtQ@mail.gmail.com>
+ <CACrvCsZuh+tj2ejA2RYh78QnySw0fBBEXxWpam_TcFZAORSCXw@mail.gmail.com>
+ <feb11726-086c-c6ad-9fca-30c7a22e4d9d@gmail.com>
+ <CACrvCsZB-tps6=Vr=1Phf5oo5eUReabMLJzkbO3d2hmNLDOxww@mail.gmail.com>
+ <7e217489-2c1a-c35f-d51f-0969654aa8cc@gmail.com>
+ <CACrvCsaYJ-zGkZwfdV7BXDABW8u_EDQetU3pq+2otRGXWTXagw@mail.gmail.com>
+ <4d078801-b804-06e7-ad5c-8032b1dbaa84@gmail.com>
+ <CACrvCsYb0ANJASKYxeA0V2yg0aqKM0OaKCB=_i1zX9DPLwrNrQ@mail.gmail.com>
+ <28e6dfab-6a3f-7bea-eca9-2d812903d9f7@gmail.com>
+ <CACrvCsbhjtN6gr9-qqUZ2m1WYM3ZexDhngXM3G0rYcyp3BPJrw@mail.gmail.com>
+ <d1cd35de-b278-aad8-49ec-8d77666cbdd5@gmail.com>
+ <CACrvCsaYBv2p2Fsu9+Y8Ewu=qrOY6erOdBBRo+JHvuzqA0f7Zg@mail.gmail.com>
+ <15f42687-9aa6-e9ed-c306-b6b267a16292@arm.com>
+ <78963b40-e8e8-db41-ee16-d4ca64baa37a@gmail.com>
+ <201eb8d4-aa51-9ad3-e655-3f4fa0cee348@arm.com>
+ <c5f1b8c6-df0a-d30a-4ca6-3d9372c7913c@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20190131030812.GA2174@jordon-HP-15-Notebook-PC>
+In-Reply-To: <c5f1b8c6-df0a-d30a-4ca6-3d9372c7913c@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,35 +32,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Souptick Joarder <jrdr.linux@gmail.com>
-Cc: mhocko@suse.com, peterz@infradead.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux1394-devel@lists.sourceforge.net, m.szyprowski@samsung.com, sfr@canb.auug.org.au, oleksandr_andrushchenko@epam.com, joro@8bytes.org, linux@armlinux.org.uk, willy@infradead.org, airlied@linux.ie, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, treding@nvidia.com, linux-media@vger.kernel.org, keescook@chromium.org, pawel@osciak.com, riel@surriel.com, iommu@lists.linux-foundation.org, rppt@linux.vnet.ibm.com, boris.ostrovsky@oracle.com, mchehab@kernel.org, iamjoonsoo.kim@lge.com, vbabka@suse.cz, jgross@suse.com, hjc@rock-chips.com, xen-devel@lists.xen.org, kyungmin.park@samsung.com, stefanr@s5r6.in-berlin.de, akpm@linux-foundation.org, robin.murphy@arm.com, kirill.shutemov@linux.intel.com
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, "LOPEZ,
+ FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-QW0gRG9ubmVyc3RhZywgMzEuIEphbnVhciAyMDE5LCAwNDowODoxMiBDRVQgc2NocmllYiBTb3Vw
-dGljayBKb2FyZGVyOgo+IFByZXZpb3VseSBkcml2ZXJzIGhhdmUgdGhlaXIgb3duIHdheSBvZiBt
-YXBwaW5nIHJhbmdlIG9mCj4ga2VybmVsIHBhZ2VzL21lbW9yeSBpbnRvIHVzZXIgdm1hIGFuZCB0
-aGlzIHdhcyBkb25lIGJ5Cj4gaW52b2tpbmcgdm1faW5zZXJ0X3BhZ2UoKSB3aXRoaW4gYSBsb29w
-Lgo+IAo+IEFzIHRoaXMgcGF0dGVybiBpcyBjb21tb24gYWNyb3NzIGRpZmZlcmVudCBkcml2ZXJz
-LCBpdCBjYW4KPiBiZSBnZW5lcmFsaXplZCBieSBjcmVhdGluZyBuZXcgZnVuY3Rpb25zIGFuZCB1
-c2UgaXQgYWNyb3NzCj4gdGhlIGRyaXZlcnMuCj4gCj4gdm1faW5zZXJ0X3JhbmdlKCkgaXMgdGhl
-IEFQSSB3aGljaCBjb3VsZCBiZSB1c2VkIHRvIG1hcHBlZAo+IGtlcm5lbCBtZW1vcnkvcGFnZXMg
-aW4gZHJpdmVycyB3aGljaCBoYXMgY29uc2lkZXJlZCB2bV9wZ29mZgo+IAo+IHZtX2luc2VydF9y
-YW5nZV9idWdneSgpIGlzIHRoZSBBUEkgd2hpY2ggY291bGQgYmUgdXNlZCB0byBtYXAKPiByYW5n
-ZSBvZiBrZXJuZWwgbWVtb3J5L3BhZ2VzIGluIGRyaXZlcnMgd2hpY2ggaGFzIG5vdCBjb25zaWRl
-cmVkCj4gdm1fcGdvZmYuIHZtX3Bnb2ZmIGlzIHBhc3NlZCBkZWZhdWx0IGFzIDAgZm9yIHRob3Nl
-IGRyaXZlcnMuCj4gCj4gV2UgX2NvdWxkXyB0aGVuIGF0IGEgbGF0ZXIgImZpeCIgdGhlc2UgZHJp
-dmVycyB3aGljaCBhcmUgdXNpbmcKPiB2bV9pbnNlcnRfcmFuZ2VfYnVnZ3koKSB0byBiZWhhdmUg
-YWNjb3JkaW5nIHRvIHRoZSBub3JtYWwgdm1fcGdvZmYKPiBvZmZzZXR0aW5nIHNpbXBseSBieSBy
-ZW1vdmluZyB0aGUgX2J1Z2d5IHN1ZmZpeCBvbiB0aGUgZnVuY3Rpb24KPiBuYW1lIGFuZCBpZiB0
-aGF0IGNhdXNlcyByZWdyZXNzaW9ucywgaXQgZ2l2ZXMgdXMgYW4gZWFzeSB3YXkgdG8gcmV2ZXJ0
-Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IFNvdXB0aWNrIEpvYXJkZXIgPGpyZHIubGludXhAZ21haWwu
-Y29tPgo+IFN1Z2dlc3RlZC1ieTogUnVzc2VsbCBLaW5nIDxsaW51eEBhcm1saW51eC5vcmcudWs+
-Cj4gU3VnZ2VzdGVkLWJ5OiBNYXR0aGV3IFdpbGNveCA8d2lsbHlAaW5mcmFkZWFkLm9yZz4KCmht
-bSwgSSdtIG1pc3NpbmcgYSBjaGFuZ2Vsb2cgaGVyZSBiZXR3ZWVuIHYxIGFuZCB2Mi4KTmV2ZXJ0
-aGVsZXNzIEkgbWFuYWdlZCB0byB0ZXN0IHYxIG9uIFJvY2tjaGlwIGhhcmR3YXJlCmFuZCBkaXNw
-bGF5IGlzIHN0aWxsIHdvcmtpbmcsIGluY2x1ZGluZyB0YWxraW5nIHRvIExpbWEgdmlhIHByaW1l
-LgoKU28gaWYgdGhlcmUgYXJlbid0IGFueSBiaWcgY2hhbmdlcyBmb3IgdjIsIG9uIFJvY2tjaGlw
-ClRlc3RlZC1ieTogSGVpa28gU3R1ZWJuZXIgPGhlaWtvQHNudGVjaC5kZT4KCkhlaWtvCgoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+CgpPbiAzMS8wMS8yMDE5IDEyOjAwLCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IEhlbGxvIEp1bGll
+biwKPiAKPiBPbiAzMS4wMS4xOSAxMzozNywgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4gT24gbXkg
+c2lkZSBJIGp1c3QgY29tbWVudGVkIG91dCB0aGF0IHByaW50aywgYmVjYXVzZSBpdCByZW5kZXJz
+IGEgZGVidWcgYnVpbGQgCj4+PiB1bnVzYWJsZS4KPj4KPj4gLi4uIGlmIGl0IGlzIHVudXNhYmxl
+LCB3aHkgZG9uJ3QgeW91IHRyeSB0byB0YWNrbGUgdGhlIHByb2JsZW0/Cj4gQmVjYXVzZSBvZi4u
+Lgo+IAo+PiBUaGlzIGlzIGluIG15IGxvbmcgZXZlciBncm93aW5nIGxpc3Qgb2YgdGhpbmdzIHRv
+Cj4gCj4gLi4uIGJlIGRvbmUuCj4gCj4gU29tZSBvZiB0aGluZ3MgZ2V0IHNvbHV0aW9ucywgc29t
+ZSBXQXMuCgpJIGNhbid0IHNlZSBhIGdvb2Qgd29ya2Fyb3VuZCBmb3IgdGhpcy4gQXQgc29tZSBw
+b2ludCBzb21lb25lIHdvdWxkIGhhdmUgdG8gcGljayAKaXQgdXAgcmF0aGVyIHRoYW4gYnVpbGRp
+bmcgYSBob3VzZSBvZiBjYXJkcy4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
