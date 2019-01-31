@@ -1,21 +1,18 @@
-From: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Subject: Re: [PATCH v6 00/27] x86: PIE support and option to
- extend KASLR randomization
-Date: Thu, 31 Jan 2019 16:40:38 -0500
-Message-ID: <20190131214038.GI28234__38024.8753399187$1548970939$gmane$org@char.us.oracle.com>
-References: <20190131192533.34130-1-thgarnie@chromium.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: xen/mem-reservation API and out-of-tree kernel
+ modules
+Date: Thu, 31 Jan 2019 13:44:15 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1901311343370.22962__5151.18340715475$1548971115$gmane$org@sstabellini-ThinkPad-X260>
+References: <f3ca533d-7f51-c59e-6a96-4e1fba687c8f@epam.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1499689100-1548971056=:22962"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OC3Y=QH=oracle.com=konrad.wilk@srs-us1.protection.inumbo.net>)
- id 1gpK59-00018Y-Np
- for xen-devel@lists.xenproject.org; Thu, 31 Jan 2019 21:41:11 +0000
-Content-Disposition: inline
-In-Reply-To: <20190131192533.34130-1-thgarnie@chromium.org>
+ <SRS0=FAp4=QH=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gpK8C-0001G4-Qv
+ for xen-devel@lists.xenproject.org; Thu, 31 Jan 2019 21:44:20 +0000
+In-Reply-To: <f3ca533d-7f51-c59e-6a96-4e1fba687c8f@epam.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +21,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Thomas Garnier <thgarnie@chromium.org>
-Cc: kernel-hardening@lists.openwall.com, Jan Kiszka <jan.kiszka@siemens.com>, Pavel Machek <pavel@ucw.cz>, Andrey Ryabinin <aryabinin@virtuozzo.com>, Christoph Lameter <cl@linux.com>, Rafael =?iso-8859-1?Q?=C1vila_de_Esp=EDndola?= <rafael@espindo.la>, linux-arch@vger.kernel.org, Andi Kleen <ak@linux.intel.com>, Michael Ellerman <mpe@ellerman.id.au>, linux-sparse@vger.kernel.org, xen-devel@lists.xenproject.org, Alexander Popov <alex.popov@linux.com>, Len Brown <len.brown@intel.com>, linux-pm@vger.kernel.org, Nicholas Piggin <npiggin@gmail.com>, Cao jin <caoj.fnst@cn.fujitsu.com>, Mike Rapoport <rppt@linux.vnet.ibm.com>, Andy Lutomirski <luto@kernel.org>, Dennis Zhou <dennis@kernel.org>, Thomas Gleixner <tglx@linutronix.de>, nixiaoming <nixiaoming@huawei.com>, Michal Marek <michal.lkml@markovi.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulnier>
+To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "marmarek@invisiblethingslab.com" <marmarek@invisiblethingslab.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBKYW4gMzEsIDIwMTkgYXQgMTE6MjQ6MDdBTSAtMDgwMCwgVGhvbWFzIEdhcm5pZXIg
-d3JvdGU6Cj4gVGhlcmUgaGFzIGJlZW4gbm8gbWFqb3IgY29uY2VybiBpbiB0aGUgbGF0ZXN0IGl0
-ZXJhdGlvbnMuIEkgYW0gaW50ZXJlc3RlZCBvbgo+IHdoYXQgd291bGQgYmUgdGhlIGJlc3Qgd2F5
-IHRvIHNsb3dseSBpbnRlZ3JhdGUgdGhpcyBwYXRjaHNldCB1cHN0cmVhbS4KCk9uZSBxdWVzdGlv
-biB0aGF0IEkgd2FzIHNvbWVob3cgZXhwZWN0ZWQgaW4gdGhpcyBjb3ZlciBsZXR0ZXIgLSB3aGF0
-CmFib3V0IGFsbCB0aG9zZSBsb3ZlbHkgc3BlY3VsYXRpdmUgYnVncz8gQXMgaW4gc2F5IHNvbWUg
-b25lIGhhc24ndAp1cGRhdGVkIHRoZWlyIG1hY2hpbmUgd2l0aCB0aGUgU3BlY3RyZSB2M2EgbWlj
-cm9jb2RlIC0gd291bGRuJ3QgdGhleQpiZSBhYmxlIHRvIGdldCB0aGUga2VybmVsIHZpcnR1YWwg
-YWRkcmVzcyBzcGFjZT8KCkluIGVmZmVjdCByZW5kZXJpbmcgYWxsIHRoaXMgaGFyZC13b3JrIG5v
-dCBuZWVkZWQ/CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
-dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1499689100-1548971056=:22962
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Thu, 31 Jan 2019, Oleksandr Andrushchenko wrote:
+> Hello,
+> 
+> I am working on porting an out-of-tree kernel driver to the kernel
+> 5.0 and that driver uses functionality provided by 
+> drivers/xen/mem-reservation.c
+> module.  Since commit [1] it is not possible to build a kernel module
+> which uses mem-reservation API as xen_scrub_pages variable, which is 
+> checked in
+> xenmem_reservation_scrub_page, became a kernel module parameter and is 
+> now only
+> accessible for built-in modules:
+> 
+> static inline void xenmem_reservation_scrub_page(struct page *page)
+> ^^^^^^^^^^^^^
+> {
+>      if (xen_scrub_pages)
+>          ^^^^^^^^^^^^^^^
+>          clear_highpage(page);
+> }
+> 
+> This results in link-time warning:
+> 
+>      WARNING: "xen_scrub_pages" [yourmodule.ko] undefined!
+> 
+> and thus not allowing the module to run. At the moment I can only see a 
+> possible fix
+> for this by making the following change:
+> 
+> diff --git a/drivers/xen/mem-reservation.c b/drivers/xen/mem-reservation.c
+> index 3782cf070338..85fecfec50e1 100644
+> --- a/drivers/xen/mem-reservation.c
+> +++ b/drivers/xen/mem-reservation.c
+> @@ -18,6 +18,7 @@
+> 
+>   bool __read_mostly xen_scrub_pages = 
+> IS_ENABLED(CONFIG_XEN_SCRUB_PAGES_DEFAULT);
+>   core_param(xen_scrub_pages, xen_scrub_pages, bool, 0);
+> +EXPORT_SYMBOL(xen_scrub_pages);
+> 
+> but this looks a bit unusual for the kernel?
+> 
+> I am looking for community advice here and help
+> 
+> Thank you,
+> Oleksandr
+> 
+> [1] 
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=197ecb3802c04499d8ff4f8cb28f6efa008067db
+
+The alternative would be to turn xenmem_reservation_scrub_page into a
+regular function (not a static inline)?
+--8323329-1499689100-1548971056=:22962
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1499689100-1548971056=:22962--
