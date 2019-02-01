@@ -1,23 +1,17 @@
-From: Christoph Hellwig <hch@infradead.org>
-Subject: Re: xen/mem-reservation API and out-of-tree kernel
- modules
-Date: Fri, 1 Feb 2019 00:45:29 -0800
-Message-ID: <20190201084529.GA28907__23345.3535985731$1549010789$gmane$org@infradead.org>
-References: <f3ca533d-7f51-c59e-6a96-4e1fba687c8f@epam.com>
- <alpine.DEB.2.10.1901311343370.22962@sstabellini-ThinkPad-X260>
- <20190201082710.GA7437@infradead.org>
- <735816a7-897a-61ad-e70b-8d683c94d8ac@epam.com>
+From: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
+Subject: Re: [PATCH -next] drm/xen-front: Drop pointless static
+ qualifier in fb_destroy()
+Date: Fri, 1 Feb 2019 08:55:47 +0000
+Message-ID: <abc50111-8924-dbfa-9f5d-16f102f30cac__46558.8615204737$1549011411$gmane$org@epam.com>
+References: <1548504338-114487-1-git-send-email-yuehaibing@huawei.com>
+ <4c371af3-8856-39a7-d06e-6b55749567e5@epam.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=AOBo=QI=bombadil.srs.infradead.org=batv+eb6389230dcc0ed0984a+5640+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1gpUS3-0001zb-TE
- for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 08:45:31 +0000
-Content-Disposition: inline
-In-Reply-To: <735816a7-897a-61ad-e70b-8d683c94d8ac@epam.com>
+In-Reply-To: <4c371af3-8856-39a7-d06e-6b55749567e5@epam.com>
+Content-Language: en-US
+Content-ID: <627F55A0C668C648BFE3709A3B6726AC@eurprd03.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,24 +20,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "marmarek@invisiblethingslab.com" <marmarek@invisiblethingslab.com>, Christoph Hellwig <hch@infradead.org>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: YueHaibing <yuehaibing@huawei.com>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>
+Cc: "kernel-janitors@vger.kernel.org" <kernel-janitors@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBGZWIgMDEsIDIwMTkgYXQgMDg6Mzg6NDNBTSArMDAwMCwgT2xla3NhbmRyIEFuZHJ1
-c2hjaGVua28gd3JvdGU6Cj4gT24gMi8xLzE5IDEwOjI3IEFNLCBDaHJpc3RvcGggSGVsbHdpZyB3
-cm90ZToKPiA+IE9uIFRodSwgSmFuIDMxLCAyMDE5IGF0IDAxOjQ0OjE1UE0gLTA4MDAsIFN0ZWZh
-bm8gU3RhYmVsbGluaSB3cm90ZToKPiA+PiBUaGUgYWx0ZXJuYXRpdmUgd291bGQgYmUgdG8gdHVy
-biB4ZW5tZW1fcmVzZXJ2YXRpb25fc2NydWJfcGFnZSBpbnRvIGEKPiA+PiByZWd1bGFyIGZ1bmN0
-aW9uIChub3QgYSBzdGF0aWMgaW5saW5lKT8KPiA+IEFsbCB0aGF0IGlzIGEgbW9vdCBwb2ludCB1
-bnRpbCBzYWlkIGN1cnJlbnRseSBvdXQgb2YgdHJlZSBtb2R1bGUgZ2V0cwo+ID4gc3VibWl0dGVk
-IGZvciBpbmNsdXNpb24gYW55d2F5Lgo+IEluZGVlZCB0aGlzIGlzIGEgbW9vdCBwb2ludCwgc28g
-SSBjYW4ndCBhcmd1ZSBoZXJlLgo+IEJ1dCB0aGlzIGlzIGhvdyBpdCBpcyBhbmQgdW5mb3J0dW5h
-dGVseSB3ZSBoYXZlIHRvIGxpdmUKPiB3aXRoIHRob3NlIG1vZHVsZXMgYW5kIGRlcGVuZCBvbiAz
-cmQgcGFydGllcyB3aWxsaW5nIG9yIG5vdAo+IHRvIGRpc2Nsb3NlIHRoZWlyIHNvdXJjZXMgdG8g
-cHVibGljLi4uCgpUaGUgcG9pbnQgaXMgdGhhdCB0aGUga2VybmVsIGRvZXMgZ2VuZXJhbGx5IG5v
-dCBleHBvcnQgaW50ZXJmYWNlcwpub3QgdXNlZCBieSBpbi10cmVlIG1vZHVsZXMuICBTbyB0aGVy
-ZSBpcyBubyByZWFzb24gdG8gY2hhbmdlIGFueXRoaW5nCmhlcmUuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMS8yOC8xOSA4OjM2IEFNLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToNCj4gT24g
+MS8yNi8xOSAyOjA1IFBNLCBZdWVIYWliaW5nIHdyb3RlOg0KPj4gVGhlcmUgaXMgbm8gbmVlZCB0
+byBoYXZlIHRoZSAnc3RydWN0IGRybV9mcmFtZWJ1ZmZlciAqZmInIHZhcmlhYmxlDQo+PiBzdGF0
+aWMgc2luY2UgbmV3IHZhbHVlIGFsd2F5cyBiZSBhc3NpZ25lZCBiZWZvcmUgdXNlIGl0Lg0KPj4N
+Cj4+IFNpZ25lZC1vZmYtYnk6IFl1ZUhhaWJpbmcgPHl1ZWhhaWJpbmdAaHVhd2VpLmNvbT4NCj4g
+R29vZCBjYXRjaCwgdGhhbmsgeW91IQ0KPiBSZXZpZXdlZC1ieTogT2xla3NhbmRyIEFuZHJ1c2hj
+aGVua28gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtvQGVwYW0uY29tPg0KSWYgbm9ib2R5IG9iamVj
+dHMgSSdsbCBhcHBseSB0aGlzIHRvIGRybS1taXNjLWZpeGVzIG5leHQgTW9uZGF5DQo+PiAtLS0N
+Cj4+IMKgIGRyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9rbXMuYyB8IDIgKy0NCj4+
+IMKgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPj4NCj4+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0veGVuL3hlbl9kcm1fZnJvbnRfa21zLmMgDQo+
+PiBiL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2RybV9mcm9udF9rbXMuYw0KPj4gaW5kZXggODYw
+ZGEwNS4uYzI5NTVkMyAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS94ZW4veGVuX2Ry
+bV9mcm9udF9rbXMuYw0KPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3hlbi94ZW5fZHJtX2Zyb250
+X2ttcy5jDQo+PiBAQCAtNTQsNyArNTQsNyBAQCBzdGF0aWMgdm9pZCBmYl9kZXN0cm95KHN0cnVj
+dCBkcm1fZnJhbWVidWZmZXIgKmZiKQ0KPj4gwqDCoMKgwqDCoMKgwqAgY29uc3Qgc3RydWN0IGRy
+bV9tb2RlX2ZiX2NtZDIgKm1vZGVfY21kKQ0KPj4gwqAgew0KPj4gwqDCoMKgwqDCoCBzdHJ1Y3Qg
+eGVuX2RybV9mcm9udF9kcm1faW5mbyAqZHJtX2luZm8gPSBkZXYtPmRldl9wcml2YXRlOw0KPj4g
+LcKgwqDCoCBzdGF0aWMgc3RydWN0IGRybV9mcmFtZWJ1ZmZlciAqZmI7DQo+PiArwqDCoMKgIHN0
+cnVjdCBkcm1fZnJhbWVidWZmZXIgKmZiOw0KPj4gwqDCoMKgwqDCoCBzdHJ1Y3QgZHJtX2dlbV9v
+YmplY3QgKmdlbV9vYmo7DQo+PiDCoMKgwqDCoMKgIGludCByZXQ7DQo+Pg0KPj4NCj4+DQo+Pg0K
+Pj4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
