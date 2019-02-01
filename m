@@ -1,21 +1,23 @@
-From: Juergen Gross <jgross@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: [PATCH for-4.12] automation: introduce a QEMU smoke
  test for PVH Dom0
-Date: Fri, 1 Feb 2019 15:59:58 +0100
-Message-ID: <5cce0402-be4d-efd0-2908-a8cb79d2fef9@suse.com>
+Date: Fri, 1 Feb 2019 15:02:55 +0000
+Message-ID: <20190201150255.rlmlro4jyyhjh62u@zion.uk.xensource.com>
 References: <20190124152411.20304-1-wei.liu2@citrix.com>
  <20190201134204.rj2lbojxtdg7u5yl@doug-macbook.localdomain>
+ <5cce0402-be4d-efd0-2908-a8cb79d2fef9@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ulZE=QI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gpaIT-0002YE-54
- for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 15:00:01 +0000
-In-Reply-To: <20190201134204.rj2lbojxtdg7u5yl@doug-macbook.localdomain>
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=u0/j=QI=citrix.com=prvs=928b35cd2=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1gpaLM-0003GO-Mb
+ for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 15:03:00 +0000
+Content-Disposition: inline
+In-Reply-To: <5cce0402-be4d-efd0-2908-a8cb79d2fef9@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +26,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Juergen Gross <jgross@suse.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDIvMjAxOSAxNDo0MiwgRG91ZyBHb2xkc3RlaW4gd3JvdGU6Cj4gT24gVGh1LCBKYW4g
-MjQsIDIwMTkgYXQgMDM6MjQ6MTFQTSArMDAwMCwgV2VpIExpdSB3cm90ZToKPj4gTWFrZSBxZW11
-LXNtb2tlLXg4Ni02NC5zaCB0YWtlIGEgdmFyaWFudCBhcmd1bWVudC4gTWFrZSB0d28gbmV3IHRl
-c3RzCj4+IGluIHRlc3QueWFtbC4KPj4KPj4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxp
-dTJAY2l0cml4LmNvbT4KPiAKPiBBY2tlZC1ieTogRG91ZyBHb2xkc3RlaW4gPGNhcmRvZUBjYXJk
-b2UuY29tPgo+IAo+IFRoaXMgaXMgYSBnb29kIGltcHJvdmVtZW50IHRvIGluY3JlYXNlIG91ciB0
-ZXN0IGNvdmVyYWdlLiBUaGFua3MgZm9yCj4gZG9pbmcgdGhpcyBXZWkuCgpJJ20gcXVpdGUgaGVz
-aXRhbnQgdG8gYWNjZXB0IHRoYXQgaW4gdGhlIFJDLXBoYXNlIG9mIDQuMTIuIENvdWxkIHlvdSBk
-bwpzb21lIHRlc3Qgcm91bmRzIHRvIGVuc3VyZSB0aGlzIHRlc3Qgd29uJ3QgYmUgYmxvY2tpbmcg
-ZHVlIHRvCmludGVybWl0dGVudCBmYWlsdXJlcz8KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gRnJpLCBGZWIgMDEsIDIwMTkgYXQgMDM6NTk6NThQTSArMDEwMCwgSnVlcmdlbiBHcm9zcyB3
+cm90ZToKPiBPbiAwMS8wMi8yMDE5IDE0OjQyLCBEb3VnIEdvbGRzdGVpbiB3cm90ZToKPiA+IE9u
+IFRodSwgSmFuIDI0LCAyMDE5IGF0IDAzOjI0OjExUE0gKzAwMDAsIFdlaSBMaXUgd3JvdGU6Cj4g
+Pj4gTWFrZSBxZW11LXNtb2tlLXg4Ni02NC5zaCB0YWtlIGEgdmFyaWFudCBhcmd1bWVudC4gTWFr
+ZSB0d28gbmV3IHRlc3RzCj4gPj4gaW4gdGVzdC55YW1sLgo+ID4+Cj4gPj4gU2lnbmVkLW9mZi1i
+eTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiA+IAo+ID4gQWNrZWQtYnk6IERvdWcg
+R29sZHN0ZWluIDxjYXJkb2VAY2FyZG9lLmNvbT4KPiA+IAo+ID4gVGhpcyBpcyBhIGdvb2QgaW1w
+cm92ZW1lbnQgdG8gaW5jcmVhc2Ugb3VyIHRlc3QgY292ZXJhZ2UuIFRoYW5rcyBmb3IKPiA+IGRv
+aW5nIHRoaXMgV2VpLgo+IAo+IEknbSBxdWl0ZSBoZXNpdGFudCB0byBhY2NlcHQgdGhhdCBpbiB0
+aGUgUkMtcGhhc2Ugb2YgNC4xMi4gQ291bGQgeW91IGRvCj4gc29tZSB0ZXN0IHJvdW5kcyB0byBl
+bnN1cmUgdGhpcyB0ZXN0IHdvbid0IGJlIGJsb2NraW5nIGR1ZSB0bwo+IGludGVybWl0dGVudCBm
+YWlsdXJlcz8KClRoaXMgaXNuJ3QgYSBwYXRjaCB0byBvc3N0ZXN0LiBJdCBpcyBhIHBhdGNoIHRv
+IEdpdGxhYiBDSSwgd2hpY2ggZG9lc24ndApibG9jayBvc3N0ZXN0IGluIGFueSB3YXkuCgpJIGFs
+c28gcmFuIGFuIGFkaG9jIHBpcGVsaW5lIHRvIG1ha2Ugc3VyZSBpdCB3b3JrZWQuCgpXZWkuCgo+
+IAo+IAo+IEp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
