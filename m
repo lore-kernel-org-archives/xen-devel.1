@@ -1,20 +1,29 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: Scheduling and the periodic timer
-Date: Fri, 1 Feb 2019 10:59:26 +0100
-Message-ID: <5e3d5840-9b7f-973b-749b-999731a34f45@suse.com>
-References: <2c71ac06-9d04-475b-30bc-9f87c906391a@suse.com>
- <5C5416700200007800213132@suse.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Fri, 1 Feb 2019 12:02:53 +0200
+Message-ID: <b8d58a11-f3f4-b58d-1d45-87767440b343@gmail.com>
+References: <CACrvCsaeHuwzZzUQTzNYF7fqmgQWNJUVOQZv9D0MnYrXjqzZtQ@mail.gmail.com>
+ <CACrvCsZB-tps6=Vr=1Phf5oo5eUReabMLJzkbO3d2hmNLDOxww@mail.gmail.com>
+ <7e217489-2c1a-c35f-d51f-0969654aa8cc@gmail.com>
+ <CACrvCsaYJ-zGkZwfdV7BXDABW8u_EDQetU3pq+2otRGXWTXagw@mail.gmail.com>
+ <4d078801-b804-06e7-ad5c-8032b1dbaa84@gmail.com>
+ <CACrvCsYb0ANJASKYxeA0V2yg0aqKM0OaKCB=_i1zX9DPLwrNrQ@mail.gmail.com>
+ <28e6dfab-6a3f-7bea-eca9-2d812903d9f7@gmail.com>
+ <CACrvCsbhjtN6gr9-qqUZ2m1WYM3ZexDhngXM3G0rYcyp3BPJrw@mail.gmail.com>
+ <d1cd35de-b278-aad8-49ec-8d77666cbdd5@gmail.com>
+ <CACrvCsaYBv2p2Fsu9+Y8Ewu=qrOY6erOdBBRo+JHvuzqA0f7Zg@mail.gmail.com>
+ <15f42687-9aa6-e9ed-c306-b6b267a16292@arm.com>
+ <78963b40-e8e8-db41-ee16-d4ca64baa37a@gmail.com>
+ <201eb8d4-aa51-9ad3-e655-3f4fa0cee348@arm.com>
+ <c5f1b8c6-df0a-d30a-4ca6-3d9372c7913c@gmail.com>
+ <4e777fcf-6630-5aff-a8d2-781d3f705123@arm.com>
+ <alpine.DEB.2.10.1901311345570.22962@sstabellini-ThinkPad-X260>
+ <2a651c5d-3f94-378d-baf9-f52cab0cdc62@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ulZE=QI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gpVbd-0001ys-OJ
- for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 09:59:29 +0000
-In-Reply-To: <5C5416700200007800213132@suse.com>
+In-Reply-To: <2a651c5d-3f94-378d-baf9-f52cab0cdc62@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,35 +33,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>
+To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: "LOPEZ, FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDIvMjAxOSAxMDo1MCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMDEuMDIuMTkg
-YXQgMDg6MjYsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+PiBXaGlsZSB3b3JraW5nIG9uIG15
-IGNvcmUgc2NoZWR1bGluZyBzZXJpZXMgSSBzdHVtYmxlZCBvdmVyIHRoZSBwZXJpb2RpYwo+PiB0
-aW1lci4gQ291bGQgaXQgYmUgdGhpcyB0aW1lciBuZXZlciB3b3JrZWQgY29ycmVjdGx5Pwo+Pgo+
-PiBXaGVuIHRoZSB2Y3B1IHdpdGggYW4gYWN0aXZlIHBlcmlvZGljIHRpbWVyIGlzIHJ1bm5pbmcg
-ZXZlcnl0aGluZyBzZWVtcwo+PiB0byBiZSBmaW5lLiBCdXQgd2hlbiBub3QgcnVubmluZyB0aGUg
-dGltZXIgaXMgc3RvcHBlZCBpbiBzY2hlZHVsZSgpLiBTbwo+PiBhIHZjcHUgZ29pbmcgdG8gaWRs
-ZSByZWx5aW5nIHRvIGJlIHdva2VuIHVwIGJ5IHRoZSBwZXJpb2RpYyB0aW1lciB3aWxsCj4+IHJl
-bWFpbiBzbGVlcGluZyB1bnRpbCBhbm90aGVyIGV2ZW50IGlzIGhhcHBlbmluZy4gVGhlIHBlcmlv
-ZGljIHRpbWVyCj4+IHdvbid0IGZpcmUgYXMgaXQgaXMgc3RvcHBlZC4KPj4KPj4gVGhlIHBlcmlv
-ZGljIHRpbWVyIGlzIHVzZWQgdmlhIFZDUFVPUF9zZXRfcGVyaW9kaWNfdGltZXIgb25seSwgYW5k
-Cj4+IHRvZGF5J3MgTGludXgga2VybmVsIGlzbid0IHVzaW5nIGl0IGF0IGFsbC4gU28gSSBndWVz
-cyB0aGlzIHRpbWVyIG5vdAo+PiByZWFsbHkgd29ya2luZyBhcyBpdCBzaG91bGQgaXMgbm8gYmln
-IGlzc3VlLgo+IAo+IEludGVyZXN0aW5nLiBPdXIga2VybmVscyBoYXZlIGJlZW4gdXNpbmcgaXQg
-dW50aWwgU0xFMTEgU1AxLCBhcwo+IGRpZCB0aGUgb2xkIDIuNi4xOCBvbmUgdGhhdCBhbGwgb2Yg
-b3VyIG9sZCBrZXJuZWxzIHdlcmUgZGVyaXZlZAo+IGZyb20uIFlldCB0aGUgc2FtZSBjb2RlIGlz
-IHByZXNlbnQgYWxyZWFkeSBpbiAzLjIuMCdzIHNjaGVkdWxlKCkuCj4gQXJlIHlvdSBzdXJlIHRo
-aXMgdGltZXIgaXMgbWVhbnQgdG8gd2FrZSB0aGUgdkNQVSBhdCB0aGUgc2V0Cj4gcmF0ZSwgcmF0
-aGVyIHRoYW4ganVzdCBzdXJmYWNpbmcgZXZlbnRzIGlmIHRoZSB2Q1BVIGlzIHJ1bm5pbmc/Cj4g
-TG9va2luZyBhdCB2Y3B1X3BlcmlvZGljX3RpbWVyX3dvcmsoKSdzIGNhbGN1bGF0aW9uIG9mIHRo
-ZQo+IG5leHQgZXZlbnQgdGltZSBhbHNvIHN1Z2dlc3RzIHRvIG1lIHRoYXQgdGhlcmUncyBubyBn
-dWFyYW50ZWUKPiB0aGF0IHRoZSBldmVudCB3aWxsIGluZGVlZCBzdXJmYWNlIGF0IHRoZSBzZXQg
-cmF0ZS4KClRoYXQncyBjb3JyZWN0LiBUaGUgc2V0IHJhdGUganVzdCBpcyB0aGUgbWluaW11bSB0
-aW1lIGJldHdlZW4gdHdvCmludGVycnVwdHMuCgpUaGUgdXNhYmlsaXR5IG9mIHN1Y2ggYSB0aW1l
-ciBpcyBxdWVzdGlvbmFibGUgaW4gdGhlIGJlc3QgY2FzZSBJTU8uCgoKSnVlcmdlbgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAwMS4wMi4xOSAwMToxNCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFdpdGggdGhlIGN1cnJl
+bnQgaW50ZXJmYWNlIHdvcmthcm91bmQsIHdlIGFyZSBzdGlsbCBwbGF5aW5nIHdpdGggZGV2aWwg
+KHNlZSBbMl0pLiBTbyBpdCB3b3VsZCBiZSBuaWNlIHRvIGdldCBhIG5ldyBpbnRlcmZhY2UgdGhh
+dCBkb2VzIG5vdCB1c2UgdmlydHVhbCBhZGRyZXNzLgpJJ20gc29ycnkgZm9yIG15IGlnbm9yYW5j
+ZSwgSSBrbm93IG5lYXJseSBub3RoaW5nIGFib3V0IHJ1bnN0YXRlIGFyZWFzIGltcGxlbWVudGF0
+aW9uLCBidXQgd2h5IG5vdCB0byBzZXR1cCBhIHNoYXJlZCBwYWdlKHMpIGZvciB0aGUgcHVycG9z
+ZT8KCj4gWzJdIDw5ZmE3NzgxNi1hMjVjLWMxOWItY2MyNi1lMGQyOGNjMmUxNjBAY2l0cml4LmNv
+bT4KQ291bGQgeW91IHBsZWFzZSBzdWdnZXN0IGhvdyB0byBmb2xsb3cgdGhhdCBsaW5rPwoKLS0g
+ClNpbmNlcmVseSwKQW5kcmlpIEFuaXNvdi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
