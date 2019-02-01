@@ -1,20 +1,20 @@
-From: Juergen Gross <jgross@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: preparations for 4.10.3 and 4.9.4
-Date: Fri, 1 Feb 2019 12:23:33 +0100
-Message-ID: <ebbaf5e4-0fde-dbdf-bd3d-88538bfab592@suse.com>
+Date: Fri, 01 Feb 2019 04:29:00 -0700
+Message-ID: <5C542D7C02000078002131E0@prv1-mh.provo.novell.com>
 References: <5C542A2A02000078002131B0@prv1-mh.provo.novell.com>
+ <ebbaf5e4-0fde-dbdf-bd3d-88538bfab592@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ulZE=QI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gpWv4-0004CE-Gl
- for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 11:23:38 +0000
-In-Reply-To: <5C542A2A02000078002131B0@prv1-mh.provo.novell.com>
-Content-Language: de-DE
+ (envelope-from <SRS0=zCZR=QI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gpX0H-0004h1-MJ
+ for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 11:29:01 +0000
+In-Reply-To: <ebbaf5e4-0fde-dbdf-bd3d-88538bfab592@suse.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,16 +23,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Anthony Perard <anthony.perard@citrix.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
+To: Ian Jackson <Ian.Jackson@eu.citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDIvMjAxOSAxMjoxNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gQWxsLAo+IAo+IGJvdGgg
-cmVsZWFzZXMgd291bGQgaGF2ZSBiZWVuIGR1ZSBsYXN0IHdlZWsuIFBsZWFzZSBwb2ludCBvdXQK
+Pj4+IE9uIDAxLjAyLjE5IGF0IDEyOjIzLCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBPbiAw
+MS8wMi8yMDE5IDEyOjE0LCBKYW4gQmV1bGljaCB3cm90ZToKPj4gQWxsLAo+PiAKPj4gYm90aCBy
+ZWxlYXNlcyB3b3VsZCBoYXZlIGJlZW4gZHVlIGxhc3Qgd2Vlay4gUGxlYXNlIHBvaW50IG91dAo+
 PiBiYWNrcG9ydHMgeW91IGZpbmQgbWlzc2luZyBmcm9tIHRoZWlyIHJlc3BlY3RpdmUgc3RhZ2lu
-ZyBicmFuY2hlcywKPiBidXQgd2hpY2ggeW91IGNvbnNpZGVyIHJlbGV2YW50LgoKRm9yIDQuMTAu
-MzoKCmh0dHBzOi8vbGlzdHMueGVuLm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZlbC8yMDE5LTAx
-L21zZzAxNDUxLmh0bWwKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+ZyBicmFuY2hlcywKPj4gYnV0IHdoaWNoIHlvdSBjb25zaWRlciByZWxldmFudC4KPiAKPiBGb3Ig
+NC4xMC4zOgo+IAo+IGh0dHBzOi8vbGlzdHMueGVuLm9yZy9hcmNoaXZlcy9odG1sL3hlbi1kZXZl
+bC8yMDE5LTAxL21zZzAxNDUxLmh0bWwgCgpJYW4sIHRoaXMgbG9va3MgdG8gYmUgb25lIGZvciB5
+b3UuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
