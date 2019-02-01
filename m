@@ -1,8 +1,9 @@
-From: "Jan Beulich" <JBeulich@suse.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: Scheduling and the periodic timer
-Date: Fri, 01 Feb 2019 02:50:40 -0700
-Message-ID: <5C5416700200007800213132@prv1-mh.provo.novell.com>
+Date: Fri, 1 Feb 2019 10:52:27 +0100
+Message-ID: <0fd9ec83-8113-0fda-9833-2755941f3440@suse.com>
 References: <2c71ac06-9d04-475b-30bc-9f87c906391a@suse.com>
+ <4a891a96-c2a4-0598-eb0c-0759cbcb8f1c@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,11 +11,14 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=zCZR=QI=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gpVTC-0001CX-CV
- for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 09:50:46 +0000
-In-Reply-To: <2c71ac06-9d04-475b-30bc-9f87c906391a@suse.com>
-Content-Disposition: inline
+ (envelope-from <SRS0=ulZE=QI=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1gpVUs-0001SA-MX
+ for xen-devel@lists.xenproject.org; Fri, 01 Feb 2019 09:52:30 +0000
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id C6AD6AED8
+ for <xen-devel@lists.xenproject.org>; Fri,  1 Feb 2019 09:52:27 +0000 (UTC)
+In-Reply-To: <4a891a96-c2a4-0598-eb0c-0759cbcb8f1c@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,31 +27,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDAxLjAyLjE5IGF0IDA4OjI2LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBXaGls
-ZSB3b3JraW5nIG9uIG15IGNvcmUgc2NoZWR1bGluZyBzZXJpZXMgSSBzdHVtYmxlZCBvdmVyIHRo
-ZSBwZXJpb2RpYwo+IHRpbWVyLiBDb3VsZCBpdCBiZSB0aGlzIHRpbWVyIG5ldmVyIHdvcmtlZCBj
-b3JyZWN0bHk/Cj4gCj4gV2hlbiB0aGUgdmNwdSB3aXRoIGFuIGFjdGl2ZSBwZXJpb2RpYyB0aW1l
-ciBpcyBydW5uaW5nIGV2ZXJ5dGhpbmcgc2VlbXMKPiB0byBiZSBmaW5lLiBCdXQgd2hlbiBub3Qg
-cnVubmluZyB0aGUgdGltZXIgaXMgc3RvcHBlZCBpbiBzY2hlZHVsZSgpLiBTbwo+IGEgdmNwdSBn
-b2luZyB0byBpZGxlIHJlbHlpbmcgdG8gYmUgd29rZW4gdXAgYnkgdGhlIHBlcmlvZGljIHRpbWVy
-IHdpbGwKPiByZW1haW4gc2xlZXBpbmcgdW50aWwgYW5vdGhlciBldmVudCBpcyBoYXBwZW5pbmcu
-IFRoZSBwZXJpb2RpYyB0aW1lcgo+IHdvbid0IGZpcmUgYXMgaXQgaXMgc3RvcHBlZC4KPiAKPiBU
-aGUgcGVyaW9kaWMgdGltZXIgaXMgdXNlZCB2aWEgVkNQVU9QX3NldF9wZXJpb2RpY190aW1lciBv
-bmx5LCBhbmQKPiB0b2RheSdzIExpbnV4IGtlcm5lbCBpc24ndCB1c2luZyBpdCBhdCBhbGwuIFNv
-IEkgZ3Vlc3MgdGhpcyB0aW1lciBub3QKPiByZWFsbHkgd29ya2luZyBhcyBpdCBzaG91bGQgaXMg
-bm8gYmlnIGlzc3VlLgoKSW50ZXJlc3RpbmcuIE91ciBrZXJuZWxzIGhhdmUgYmVlbiB1c2luZyBp
-dCB1bnRpbCBTTEUxMSBTUDEsIGFzCmRpZCB0aGUgb2xkIDIuNi4xOCBvbmUgdGhhdCBhbGwgb2Yg
-b3VyIG9sZCBrZXJuZWxzIHdlcmUgZGVyaXZlZApmcm9tLiBZZXQgdGhlIHNhbWUgY29kZSBpcyBw
-cmVzZW50IGFscmVhZHkgaW4gMy4yLjAncyBzY2hlZHVsZSgpLgpBcmUgeW91IHN1cmUgdGhpcyB0
-aW1lciBpcyBtZWFudCB0byB3YWtlIHRoZSB2Q1BVIGF0IHRoZSBzZXQKcmF0ZSwgcmF0aGVyIHRo
-YW4ganVzdCBzdXJmYWNpbmcgZXZlbnRzIGlmIHRoZSB2Q1BVIGlzIHJ1bm5pbmc/Ckxvb2tpbmcg
-YXQgdmNwdV9wZXJpb2RpY190aW1lcl93b3JrKCkncyBjYWxjdWxhdGlvbiBvZiB0aGUKbmV4dCBl
-dmVudCB0aW1lIGFsc28gc3VnZ2VzdHMgdG8gbWUgdGhhdCB0aGVyZSdzIG5vIGd1YXJhbnRlZQp0
-aGF0IHRoZSBldmVudCB3aWxsIGluZGVlZCBzdXJmYWNlIGF0IHRoZSBzZXQgcmF0ZS4KCkphbgoK
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDEvMDIvMjAxOSAxMDo0MCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwMS8wMi8yMDE5
+IDA3OjI2LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBXaGlsZSB3b3JraW5nIG9uIG15IGNvcmUg
+c2NoZWR1bGluZyBzZXJpZXMgSSBzdHVtYmxlZCBvdmVyIHRoZSBwZXJpb2RpYwo+PiB0aW1lci4g
+Q291bGQgaXQgYmUgdGhpcyB0aW1lciBuZXZlciB3b3JrZWQgY29ycmVjdGx5Pwo+Pgo+PiBXaGVu
+IHRoZSB2Y3B1IHdpdGggYW4gYWN0aXZlIHBlcmlvZGljIHRpbWVyIGlzIHJ1bm5pbmcgZXZlcnl0
+aGluZyBzZWVtcwo+PiB0byBiZSBmaW5lLiBCdXQgd2hlbiBub3QgcnVubmluZyB0aGUgdGltZXIg
+aXMgc3RvcHBlZCBpbiBzY2hlZHVsZSgpLiBTbwo+PiBhIHZjcHUgZ29pbmcgdG8gaWRsZSByZWx5
+aW5nIHRvIGJlIHdva2VuIHVwIGJ5IHRoZSBwZXJpb2RpYyB0aW1lciB3aWxsCj4+IHJlbWFpbiBz
+bGVlcGluZyB1bnRpbCBhbm90aGVyIGV2ZW50IGlzIGhhcHBlbmluZy4gVGhlIHBlcmlvZGljIHRp
+bWVyCj4+IHdvbid0IGZpcmUgYXMgaXQgaXMgc3RvcHBlZC4KPj4KPj4gVGhlIHBlcmlvZGljIHRp
+bWVyIGlzIHVzZWQgdmlhIFZDUFVPUF9zZXRfcGVyaW9kaWNfdGltZXIgb25seSwgYW5kCj4+IHRv
+ZGF5J3MgTGludXgga2VybmVsIGlzbid0IHVzaW5nIGl0IGF0IGFsbC4gU28gSSBndWVzcyB0aGlz
+IHRpbWVyIG5vdAo+PiByZWFsbHkgd29ya2luZyBhcyBpdCBzaG91bGQgaXMgbm8gYmlnIGlzc3Vl
+Lgo+Pgo+PiBJIGp1c3Qgd2FudGVkIHRvIG1lbnRpb24gdGhhdCBmYWN0LCBtYXliZSBzb21lb25l
+IGlzIGtlZW4gcmVwYWlyaW5nCj4+IHRoaXMgaXNzdWUuCj4gCj4gRG8geW91IG1lYW4gdG8gc2F5
+IHRoYXQsIGFmdGVyIHRoZSBuZXh0IHNjaGVkdWxlKCksIGFueSBjb25maWd1cmVkCj4gcGVyaW9k
+aWMgdGltZXIgY2Vhc2VzIHRvIHByb3ZpZGUgZnVydGhlciBpbnRlcnJ1cHRzPwoKTm8sIGl0IGp1
+c3Qgd29uJ3Qgd2FrZSB0aGUgdmNwdSB1cC4gQXMgc29vbiBhcyB0aGUgdmNwdSBpcyBydW5uaW5n
+IHRoZQp0aW1lciB3aWxsIHJ1biBhZ2FpbiBhbmQgaXQgd2lsbCBwcm92aWRlIGludGVycnVwdHMg
+YWdhaW4uIEluIGNhc2UgYW4KaW50ZXJydXB0IHdhcyBkdWUgZHVyaW5nIHRoZSB2Y3B1IHdhcyBu
+b3QgcnVubmluZyB0aGF0IGludGVycnVwdCB3aWxsCmJlIGRlbGl2ZXJlZCBhcyBzb29uIGFzIHRo
+ZSB2Y3B1IHN0YXJ0cyBydW5uaW5nIGFnYWluLgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
