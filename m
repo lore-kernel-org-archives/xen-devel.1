@@ -1,19 +1,19 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: Scheduling and the periodic timer
-Date: Mon, 04 Feb 2019 10:13:10 +0100
-Message-ID: <65e078ba7c511e84decb7ca727c13d28bf9d5d07.camel@suse.com>
-References: <2c71ac06-9d04-475b-30bc-9f87c906391a@suse.com>
- <5C5416700200007800213132@suse.com>
- <5e3d5840-9b7f-973b-749b-999731a34f45@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH for-4.12] x86/svm: Fix handling of ICEBP
+ intercepts
+Date: Mon, 04 Feb 2019 02:16:39 -0700
+Message-ID: <5C5802F702000078002138E4@prv1-mh.provo.novell.com>
+References: <1549032559-9076-1-git-send-email-andrew.cooper3@citrix.com>
+ <5C546CA1020000780021335F@prv1-mh.provo.novell.com>
+ <da8c1a3c-353c-93ad-8637-17d1031ccec9@citrix.com>
+ <5C547A1B02000078002133E6@prv1-mh.provo.novell.com>
+ <9a9b66c9-5fc4-6ed3-585d-7aa5f6d26adb@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6718500229091206321=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=/ws0=QL=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gqaIo-0008Aj-2M
- for xen-devel@lists.xenproject.org; Mon, 04 Feb 2019 09:12:30 +0000
-In-Reply-To: <5e3d5840-9b7f-973b-749b-999731a34f45@suse.com>
+In-Reply-To: <9a9b66c9-5fc4-6ed3-585d-7aa5f6d26adb@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,98 +22,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Xen-devel <xen-devel@lists.xen.org>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6718500229091206321==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-z2rW9UhQ9T7upWDS8MIc"
-
-
---=-z2rW9UhQ9T7upWDS8MIc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2019-02-01 at 10:59 +0100, Juergen Gross wrote:
-> On 01/02/2019 10:50, Jan Beulich wrote:
-> > > > > On 01.02.19 at 08:26, <jgross@suse.com> wrote:
-> > >=20
-> > > The periodic timer is used via VCPUOP_set_periodic_timer only,
-> > > and
-> > > today's Linux kernel isn't using it at all. So I guess this timer
-> > > not
-> > > really working as it should is no big issue.
-> >=20
-> > Interesting. Our kernels have been using it until SLE11 SP1, as
-> > did the old 2.6.18 one that all of our old kernels were derived
-> > from. Yet the same code is present already in 3.2.0's schedule().
-> > Are you sure this timer is meant to wake the vCPU at the set
-> > rate, rather than just surfacing events if the vCPU is running?
-> > Looking at vcpu_periodic_timer_work()'s calculation of the
-> > next event time also suggests to me that there's no guarantee
-> > that the event will indeed surface at the set rate.
->=20
-> That's correct. The set rate just is the minimum time between two
-> interrupts.
->=20
-> The usability of such a timer is questionable in the best case IMO.
->=20
-Yes, I vaguely recall discussing about this with someone, and the
-outcome being <<Well, everyone should be using the single-shot timer
-anyway, these days>>, and then we probably dropped the ball (I can't
-find the thread right now, maybe it was on IRC). :-(
-
-IAC, I do agree that it does not make any sense to stop the timer for
-the vcpu being descheduled. And we really should either fix this... or
-we can get just get rid of the timer entirely, as it's basically
-delivering events at pseudo-random rate! :-O
-
-I can look into that.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-z2rW9UhQ9T7upWDS8MIc
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxYAiYACgkQFkJ4iaW4
-c+77EQ/+PB6s3Ep6feVzW/aKBks//hZWN9DDk0mMXdj04wX3Mr9T8p4Du2Q20pzM
-wFfnPavQmmdBQ38elyKbF68eE1ZtDyBJwQXAgnelpbJkW7Coxa4rlZ2x1nxtHOL5
-wkJOxn0uRjocmldNRMECqWl7TMmvv5XLz4Vs8p7MRrUywuW2U/nVSHTWQgAqEo8A
-dmNbXxWbVEwp8LjH5VmypqdjMX0WioDPmyfuH/TXMXrlV2ngVwMxuxHfYQrwA7KV
-ZbNrjq39sVWNqF9HM5UrLL3fzhpglhyaM/UbsnKqq+jXlHp1fb6APfFZr/0NSc4z
-6LTuU53hCEt3ktUjQ7lLaDypH0asKyPjPp/e5JI7qeeM5fTtjTpT4Vt63vo77+T8
-sII+xt3lL3v44c6XIIZ3thD40ELK0EvZWopwWMEARoH4kFF2AnbGEgyn1mpGsP+I
-ISW5Y6vV+PiYKvIJYweFGu075QwcH/kRpyXDcSECFj8jVmOaXD3W3lNoNsidP3ZV
-mazDpFlRMOvvkBCeBpbBfa3QXmFlvRdNvi4uKp6uycmdX8RTGSXSUCB+luOVWVrM
-0uTfQj9dXjDt1MXFhSD6w/7PF3CF9yznJz4hNOf8ZxCUkBD9mAf8xPgmUI5IjtpL
-XvBGng14HuMlnHD8W57264FTlOvf4GY584CYE21oB+uVIkPGqyw=
-=+MqU
------END PGP SIGNATURE-----
-
---=-z2rW9UhQ9T7upWDS8MIc--
-
-
-
---===============6718500229091206321==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6718500229091206321==--
+Pj4+IE9uIDAxLjAyLjE5IGF0IDE4OjA5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMDEvMDIvMjAxOSAxNjo1NSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDAx
+LjAyLjE5IGF0IDE3OjI1LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBJ
+ZiBpdCB3ZXJlIGp1c3QgZ2V0dGluZyBpbnNuX2xlbiBpbmNvcnJlY3RseSBhcyAwLCB0aGVuIHRo
+ZSBndWVzdCB3b3VsZAo+Pj4gbGl2ZWxvY2sgYXMgd2Ugd291bGRuJ3QgaW5qZWN0IHRoZSAjREIg
+d2l0aCB0cmFwIHNlbWFudGljcyBpdCByZXF1aXJlcywKPj4gSSdtIGNvbmZ1c2VkIGFnYWluOiBX
+aHkgdHJhcCBzZW1hbnRpY3M/IFRoZSBJQ0VCUCBoYXMgZmF1bHQKPj4gc2VtYW50aWNzIGFzIHlv
+dSBjb25maXJtZWQgYWJvdmUuCj4gCj4gVGhlIElDRUJQIGludGVyY2VwdCBoYXMgZmF1bHQgc2Vt
+YW50aWNzLiAgQW4gSUNFQlAgaW5zdHJ1Y3Rpb24gZXhlY3V0aW5nCj4gaW4gdGhlIGd1ZXN0IGhh
+cyB0cmFwIHNlbWFudGljcy4KCk9oLCBva2F5IC0gSSB3YXMgbWlzLXJlbWVtYmVyaW5nIHRoaXMg
+YXNwZWN0LgoKPj4+IGJ1dCBhcyB0aGUgI0dQIGlzIGFscmVhZHkgcmFpc2VkLCB0aGlzIHdpbGwg
+Y29tYmluZSB0byAjREYuCj4+IEhvdyB0aGF0PyAjREIgaXMgYSBiZW5pZ24gZXhjZXB0aW9uLCBz
+byBhY2NvcmRpbmcgdG8gdGhlIHRhYmxlIG9uIHRoZQo+PiAjREYgcGFnZSBpbiB0aGUgU0RNLCB3
+aXRoICNHUCBpdCBzaG91bGRuJ3QgY29tYmluZSB0byAjREYuCj4gCj4gI0dQIGlzIHJhaXNlZCBm
+aXJzdC4gIEl0IGlzIGNvbnRyaWJ1dG9yeS4KPiAKPiBBIHN1YnNlcXVlbnQgI0RCIGdldHRpbmcg
+cmFpc2VkIGNhdXNlcyAjR1AgdG8gdHVybiBpbnRvICNERi4KClRoYXQncyBiYXNlZCBvbiB3aGF0
+PyBUaGUgdGFibGUgb24gdGhlICNERiBwYWdlIGNsZWFybHkgc2F5cwpvdGhlcndpc2UsIGF0IGxl
+YXN0IGFjY29yZGluZyB0byBteSByZWFkaW5nLgoKQnV0IGluIHRoZSBlbmQgdGhlcmUgc2hvdWxk
+bid0IGJlIGFueSBhdHRlbXB0IHRvIGluamVjdCAjREIgYW55d2F5CndoZW4gI0dQIGlzIGFscmVh
+ZHkgcGVuZGluZywgaXJyZXNwZWN0aXZlIG9mIHRoZSBmYWN0IHRoYXQgdGhpcyAjR1AKaXMgbm9u
+LWFyY2hpdGVjdHVyYWwuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
