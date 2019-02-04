@@ -1,24 +1,36 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v5 00/15] Argo: hypervisor-mediated
- interdomain communication
-Date: Mon, 4 Feb 2019 10:22:10 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1902041020360.22962@sstabellini-ThinkPad-X260>
-References: <1548064795-18160-1-git-send-email-christopher.w.clark@gmail.com>
- <20190122141702.h3oxvr25xjxbhjcl@mac>
- <CACMJ4Gbr4dR2B7o=+i_0aCEPiXTA9nF-w477Btvv8vd_B2+mOw@mail.gmail.com>
- <20190131133931.vincqqgf4acywekz@mac>
- <CACMJ4GZ+85Hr4x8Ydt9u8zJWQLnGcDCxnWoHw3WQdqOZaZJ0gQ@mail.gmail.com>
- <20190204100712.idxj4xpvifv7yy6f@mac>
+Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
+Date: Mon, 4 Feb 2019 11:08:53 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1902041057130.22962@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
+ <CAFLBxZYdzV43SxpMiF7X=zcNnxfkJDQq5zkUnuThzE-rBuS=yA@mail.gmail.com>
+ <27086E4A0200006A88BF86FB@prv1-mh.provo.novell.com>
+ <5C3C63E0020000780020D22C@prv1-mh.provo.novell.com>
+ <1CACC1FB020000D800417A66@prv1-mh.provo.novell.com>
+ <5C3D97FE020000780020D9F3@prv1-mh.provo.novell.com>
+ <B4D3ABC30200003B88BF86FB@prv1-mh.provo.novell.com>
+ <5C3F051B020000780020E304@prv1-mh.provo.novell.com>
+ <529ED2F90200004D00417A66@prv1-mh.provo.novell.com>
+ <5C406AEA020000780020E9FA@prv1-mh.provo.novell.com>
+ <76A2DEED0200005600417A66@prv1-mh.provo.novell.com>
+ <5C41A256020000780020EF25@prv1-mh.provo.novell.com>
+ <5A96F2FD0200008D00417A66@prv1-mh.provo.novell.com>
+ <5C4595E6020000780020F93D@prv1-mh.provo.novell.com>
+ <42A2C4FA0200009000417A66@prv1-mh.provo.novell.com>
+ <5C46DF880200007800210061@prv1-mh.provo.novell.com>
+ <95DC675902000028AB59E961@prv1-mh.provo.novell.com>
+ <5C5807DE020000780021390F@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-2005648092-1549304532=:22962"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=JPi9=QL=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gqiso-0004dC-Ci
- for xen-devel@lists.xenproject.org; Mon, 04 Feb 2019 18:22:14 +0000
-In-Reply-To: <20190204100712.idxj4xpvifv7yy6f@mac>
+ id 1gqjc1-0008QT-5r
+ for xen-devel@lists.xenproject.org; Mon, 04 Feb 2019 19:08:57 +0000
+In-Reply-To: <5C5807DE020000780021390F@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,45 +39,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Christopher Clark <christopher.w.clark@gmail.com>, Rich Persaud <persaur@gmail.com>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, James McKenzie <james@bromium.com>, Eric Chanudet <eric.chanudet@gmail.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, lars.kurth.xen@gmail.com, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <dunlapg@umich.edu>, Julien Grall <julien.grall@gmail.com>, Julien Grall <julien.grall@arm.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-2005648092-1549304532=:22962
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Mon, 4 Feb 2019, Roger Pau Monné wrote:
-> > Yes, v7 was sent to address Jan and Julien's review comments in parallel
-> > with our ongoing discussion on v5 macros. v7 also provided a checkpoint
-> > for Argo testers to maximize test coverage as the series converges into
-> > a Xen 4.12 merge candidate for Juergen. It addressed:
-> > 
-> >  - Jan's v6 review comments
-> >  - Julien's v1 review comment
-> >  - most of your xen-devel and offline review comments
-> 
-> I think it will benefit the community to give this review in public,
-> so other reviewers know whats going on. IMO getting this private
-> review makes it harder for me (as a reviewer) to know the motivation
-> of some of the changes between versions, and likely also makes it
-> harder for you since you have to keep track of comments from multiple
-> sources on different channels.
-
-There is one more reason to require public comments which I have only
-learned recently: for safety certifications we need to keep a record of
-all review comments and patches that address them for traceability.
---8323329-2005648092-1549304532=:22962
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-2005648092-1549304532=:22962--
+T24gTW9uLCA0IEZlYiAyMDE5LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4gT24gMDEuMDIuMTkg
+YXQgMTk6NTIsIDxkdW5sYXBnQHVtaWNoLmVkdT4gd3JvdGU6Cj4gCj4gSSdtIG5vdCBnb2luZyB0
+byByZXBseSBpbiBkZXRhaWwgdG8gYWxsIG9mIHdoYXQgeW91IHdyb3RlIGFib3V0IGZhbmF0aWNz
+LAo+IGJ1dCBJIHdvdWxkIGxpa2UgdG8gc2F5IHRoYXQgSSB0aGluayBjb21waWxlciBwZW9wbGUg
+bGVzcyBvZiB0aGF0IHRoYW4KPiB5b3UgYXBwZWFyIHRvIGltcGx5LCBhdCBsZWFzdCB0aGUgb25l
+cyBJIGtub3cuIEluIHBhcnRpY3VsYXIsIHRoZXkgY2FuCj4gYmUgY29udmluY2VkIG9mIHRoZXJl
+IGJlaW5nIGJ1Z3MgYnkgcG9pbnRpbmcgb3V0IHdoYXQgYXNwZWN0IG9mIHRoZQo+IHN0YW5kYXJk
+IHRoZWlyIGltcGxlbWVudGF0aW9uIHZpb2xhdGVzLiAoT2YgY291cnNlIHRoZXJlIGFyZSBhbHNv
+Cj4gZ29pbmcgdG8gYmUgYXJlYXMgd2hlcmUgaW50ZXJwcmV0YXRpb25zIG9mIHRoZSBzdGFuZGFy
+ZCB2YXJ5IHRvbwo+IG11Y2ggdG8gY29tZSB0byBhbiBhZ3JlZW1lbnQuKQo+IAo+ID4gSW1wcm92
+ZW1lbnRzIHRoaXMgc2VyaWVzIHNlZWtzIHRvIG1ha2UsIGFzIEkgdW5kZXJzdGFuZCBpdCwgaW5j
+bHVkZQo+ID4gKGluIG9yZGVyIG9mIHVyZ2VuY3kpOgo+ID4gCj4gPiAxLiBGaXhpbmcgb25lIGNv
+bmNyZXRlIGluc3RhbmNlIG9mICJVQiBoYXphcmQiCj4gCj4gUmlnaHQsIGFuZCB3ZSB3YW50IHRv
+IHdvcmsgYXJvdW5kIGNvbXBpbGVyIGJ1Z3MgaGVyZS4KPiAKPiA+IDIuIE1pbmltaXplIHJpc2sg
+b2YgZnVydGhlciAiVUIgaGF6YXJkIiBpbiB0aGlzIGJpdCBvZiBmdW5jdGlvbmFsaXR5Cj4gPiAz
+LiBSZXRhaW4gdGhlIGVmZm9ydCBTdGVmYW5vIGhhcyBwdXQgaW4gaWRlbnRpZnlpbmcgYWxsIHRo
+ZSBwbGFjZXMKPiA+IHdoZXJlIHN1Y2ggVUIgaGF6YXJkcyBuZWVkIHRvIGJlIGFkZHJlc3NlZC4K
+PiA+IDQuIE1vdmUgdG93YXJkcyBNSVNSQS1DIGNvbXBsaWFuY2UuCj4gPiAKPiA+IEFzIGZhciBh
+cyBJIGNhbiB0ZWxsLCBwcmltYXJ5IG9iamVjdGlvbnMgeW91J3ZlIGxldmVsZWQgYXQgdGhlIG9w
+dGlvbnMKPiA+IHdoaWNoIHRyeSB0byBhZGRyZXNzIDItNCBhcmU6Cj4gPiAKPiA+IGEuICJVQiBo
+YXphcmQiIHN0aWxsIG5vdCB6ZXJvCj4gPiBiLiBNSVNSQSBjb21wbGlhbmN5IG5vIDEwMCUKPiA+
+IGMuIFVnbHkKPiA+IGQuIEluZWZmaWNpZW50Cj4gPiAKPiA+IChPYnZpb3VzbHkgc29tZSBwcm9w
+b3NhbHMgaGF2ZSBoYWQgbW9yZSB0ZWNobmljYWwgZGlzY3Vzc2lvbi4pCj4gPiAKPiA+IEFueXRo
+aW5nIEkgbWlzc2VkPwo+IAo+IEkgZG9uJ3QgdGhpbmsgc28sIGVzcGVjaWFsbHkgc2luY2UgdmFy
+aW91cyBhc3BlY3RzIGNhbiBmYWxsIHVuZGVyICJ1Z2x5Igo+IGFuZC9vciAiaW5lZmZpY2llbnQi
+LiBXaGF0IEknbSBub3Qgc3VyZSBJIHNlZSBpcyB3aGF0IHlvdSBtZWFuIHRvCj4gZXhwcmVzcyB3
+aXRoIGFsbCB5b3Ugd3JvdGUgaW4gdGVybXMgb2YgZmluZGluZyBhIHdheSBvdXQgb2YgdGhlCj4g
+Y3VycmVudCBzaXR1YXRpb24gKGJlc2lkZXMgcmVxdWVzdGluZyBhIHZvdGUpOiBJbXByb3Zpbmcg
+b24gYS4gYW5kCj4gYi4gaXMgbm90IGEgZ29vZCBleGN1c2UgdG8gZXh0ZW5kIGMuLCBhdCBsZWFz
+dCBub3QgdW5lcXVpdm9jYWxseS4KPiBXaGV0aGVyIGQuIGFjdHVhbGx5IG1hdHRlcnMgaXMgYSBz
+ZXBhcmF0ZSBhc3BlY3QsIHBhcnRseSBiZWNhdXNlIGl0Cj4gbWF5IG1lYW4gZGlmZmVyZW50IHRo
+aW5ncyAoaXQgY291bGQgZS5nLiBiZSB0YWtlbiBhcyBhbm90aGVyCj4gd29yZGluZyBmb3IgYS4g
+YW5kIGIuKS4KCkkgd291bGQgYmUgT0sgd2l0aCBhIHZvdGUgKG9yIEp1ZXJnZW4gbWFraW5nIGEg
+ZGVjaXNpb24gZm9yIHVzKSwgYnV0CnRoaXMgaXNzdWUgaXMgbm90IHNvIGZ1bmRhbWVudGFsbHkg
+Y3JpdGljYWwgdGhhdCBJIHdhbnQgdG8gbW92ZSBmb3J3YXJkCndpdGggaXQgYXQgdGhlIGNvc3Qg
+b2YgbWFraW5nIG9uZSBvciBtb3JlIG1haW50YWluZXJzIHVuaGFwcHkuIElkZWFsbHksCkkgd291
+bGQgbGlrZSB0byBmaW5kIGFuIG9wdGlvbiB0aGF0IGlzIGFjY2VwdGFibGUgZm9yIGV2ZXJ5Ym9k
+eS4KVW5mb3J0dW5hdGVseSwgaXQgZG9lc24ndCBsb29rIGxpa2UgaXQncyBwb3NzaWJsZS4KCgo+
+IEFuZCBidHcgLSBJIGNhbid0IGp1ZGdlIG9uIGIuIGFueXdheSwgYXMgSSBzdGlsbCBkb24ndCBr
+bm93IHdoYXQKPiBleGFjdGx5IE1JU1JBIGNvbXBsaWFuY2UgaXMgdG8gbWVhbiwgd2l0aCB0aGUg
+cnVsZXMgdG8gYWRoZXJlIHRvCj4gc3VpdGFibHkganVzdGlmaWVkLgoKSSBjYW4ndCBwcmV0ZW5k
+IHRvIGtub3cgZXhhY3RseSB3aGF0IE1JU1JBQyBjb21wbGlhbmNlIG1lYW5zIGZvciB0aGlzCnNw
+ZWNpZmljIGlzc3VlLCBidXQgd2UgZG8gaGF2ZSB0aGUgcmVjb21tZW5kZWQgd2F5IGZvcndhcmQg
+YnkgdGhlCmNvbXBsaWFuY2UgZXhwZXJ0cywgd2hpY2ggYWxzbyBtYXRjaGVzIHRoZSByb3VnaCB1
+bmRlcnN0YW5kaW5nIG9mIG1vc3QKb2YgdGhlIGVuZ2luZWVycyBpbnZvbHZlZCBpbiB0aGlzIGRp
+c2N1c3Npb24uIFBpY2tpbmcgdGhlIG9wdGlvbgpzdWdnZXN0ZWQgYnkgdGhlIE1JU1JBQyBwZW9w
+bGUsIGNvdWxkIGJlIGEgZGVjZW50IHdheSB0byBzZXR0bGUgdGhpcwpkZWJhdGU/CgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
