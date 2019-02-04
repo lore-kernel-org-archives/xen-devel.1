@@ -1,17 +1,23 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-4.11-testing test] 132779: tolerable FAIL - PUSHED
-Date: Mon, 04 Feb 2019 20:20:14 +0000
-Message-ID: <osstest-132779-mainreport@xen.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Organising a workshop to solve safety certification
+ related questions (March 25/26, Cambridge, UK, Citrix)
+Date: Mon, 4 Feb 2019 20:25:48 +0000
+Message-ID: <077376B5-ACEE-4DA1-ACA7-FC231E3962AD@gmail.com>
+References: <60FE8A49-D6C2-4DBD-A532-3D635C93836E@xenproject.org>
+ <eaf19b34-0ddf-b383-12f6-4f74990567ce@citrix.com>
+ <34B5407E-C0FE-4CB2-8CBD-F8026C833878@gmail.com>
+ <D5958DF1-6424-45F6-9BF8-AAC316B73A7A@gmail.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============3841156717128285853=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=BVLN=QL=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gqkj7-0006uD-3q
- for xen-devel@lists.xenproject.org; Mon, 04 Feb 2019 20:20:21 +0000
+ <SRS0=PIZa=QL=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1gqkoT-0007PN-JE
+ for xen-devel@lists.xenproject.org; Mon, 04 Feb 2019 20:25:53 +0000
+Received: by mail-wm1-x331.google.com with SMTP id a62so1289720wmh.4
+ for <xen-devel@lists.xenproject.org>; Mon, 04 Feb 2019 12:25:51 -0800 (PST)
+In-Reply-To: <D5958DF1-6424-45F6-9BF8-AAC316B73A7A@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,254 +26,291 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel <xen-devel@lists.xenproject.org>, rromoff@linuxfoundation.org, Nancy McGrory <nmcgrory@linuxfoundation.org>
+Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, Stefano Stabellini <stefanos@xilinx.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Richard Bellairs <Richard_Bellairs@prqa.com>, Hisao Munakata <hisao.munakata.vt@renesas.com>, George Dunlap <george.dunlap@citrix.com>, Alex Agizim <Alex_Agizim@epam.com>, Rich Persaud <persaur@gmail.com>, Committers <committers@xenproject.org>, Saraschandra Reddy Madem <sarascha@xilinx.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Giulio Corradi <giulioc@xilinx.com>, Irby Thompson <irby@starlab.io>, Matt Spencer <Matt.Spencer@arm.com>, Oscar Ballan <oballan@xilinx.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMjc3OSB4ZW4tNC4xMS10ZXN0aW5nIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRl
-c3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzI3NzkvCgpGYWlsdXJlcyA6LS8g
-YnV0IG5vIHJlZ3Jlc3Npb25zLgoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJl
-IG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2
-NC1kbXJlc3RyaWN0IDEwIGRlYmlhbi1odm0taW5zdGFsbCBmYWlsIG5ldmVyIHBhc3MKIHRlc3Qt
-YW1kNjQtaTM4Ni14bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgMTAgZGViaWFu
-LWh2bS1pbnN0YWxsIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAg
-ICAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTMgbWlncmF0
-ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02
-NC14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAg
-ICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm02NC1hcm02NC14bC1jcmVkaXQxICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgIDE0IHNhdmVy
-ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4
-Ni1saWJ2aXJ0LXhzbSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQt
-eHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAxMyBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFy
-bTY0LXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwg
-bmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAxMyBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFy
-bmRhbGUgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11
-dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
-ICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFt
-ZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFp
-bCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwt
-bXVsdGl2Y3B1IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIgcGFz
-cwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAg
-ICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1h
-bWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtcnRkcyAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZlcmVzdG9y
-ZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhs
-LWN1YmlldHJ1Y2sgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0
-LWNoZWNrICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQxICAx
-MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bWhmLWFybWhmLXhsLWNyZWRpdDEgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1s
-aWJ2aXJ0ICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
-ayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAg
-MTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-bWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAg
-ZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcg
-Z3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYt
-bGlidmlydC1yYXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
-cGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0
-LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAg
-IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcg
-Z3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV0LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTIgbWlncmF0ZS1zdXBwb3J0LWNo
-ZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAg
-ICAxMyBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAg
-ICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAx
-MCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZl
-ciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWlu
-c3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiB4ZW4gICAgICAgICAgICAgICAgICBlMmUzYTFkNzU3OTg3ODFhODAzMWZlZWMwMDUwZTZl
-MWM5ODE4N2NhCmJhc2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBkZjFkZWJm
-NDk0YWMzOGM5NWFiYjYwMmIyYjMwNTc2MTNkZTA2YjQ3CgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MzI2NDcgIDIwMTktMDEtMzEgMDM6MzI6MDYgWiAgICA0IGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTMyNzM2ICAyMDE5LTAyLTAyIDA1OjQ5OjA5IFogICAgMiBkYXlzICAgIDIgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENv
-b3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hA
-c3VzZS5jb20+CiAgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgogIEp1bGllbiBHcmFs
-bCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5j
-b20+CiAgUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgogIFNlcmdl
-eSBEeWFzbGkgPHNlcmdleS5keWFzbGlAY2l0cml4LmNvbT4KICBUYW1hcyBLIExlbmd5ZWwgPHRh
-bWFzQHRrbGVuZ3llbC5jb20+CiAgVGltIERlZWdhbiA8dGltQHhlbi5vcmc+CiAgV2VpIExpdSA8
-d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14dGYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2
-aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wcmV2ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHJldiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2
-NC0yICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-eHRmLWFtZDY0LWFtZDY0LTMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtNCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC01ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-cm02NC1hcm02NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNt
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFl
-bXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14
-c20gICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtc3R1YmRvbS1kZWJp
-YW5odm0tYW1kNjQteHNtICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02
-NC1hcm02NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC14c20g
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFtZCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1hbWQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhl
-bDZodm0tYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtZGViaWFuaHZtLWFtZDY0
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92
-bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXJ1bXBydW4tYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdp
-bjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd3MxNi1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd3Mx
-Ni1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0
-ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQxICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhm
-LXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2NC1kbXJl
-c3RyaWN0ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXJ1
-bXBydW4taTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1p
-Mzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdmh2Mi1pbnRlbCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0taW50
-ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11
-dS1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saXZl
-cGF0Y2ggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYtbGl2ZXBhdGNoICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbWlncnVwZ3JhZGUgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LW1pZ3J1cGdyYWRlICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLW11
-bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcGFpciAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
-dC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1wdmdydWIgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1wdnNo
-aW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWkzODYteGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQtcHlncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xY293MiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQt
-cmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1ydGRzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1zaGFkb3cgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZo
-ZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3Jn
-CmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBj
-b25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBv
-cnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMu
-eGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1h
-c3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1i
-bG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0
-CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFy
-eQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQv
-eGVuLmdpdAogICBkZjFkZWJmNDk0Li5lMmUzYTFkNzU3ICBlMmUzYTFkNzU3OTg3ODFhODAzMWZl
-ZWMwMDUwZTZlMWM5ODE4N2NhIC0+IHN0YWJsZS00LjExCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============3841156717128285853==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_B580FB58-1BB3-4F8D-9F49-303FBD2982A3"
+
+
+--Apple-Mail=_B580FB58-1BB3-4F8D-9F49-303FBD2982A3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+Hi all,
+
+from my perspective we have enough momentum to move forward, albeit some =
+prospective attendees are still confirming their travel plans. I can =
+accommodate a maximum if 15, but possibly, a few more. With this in =
+Mind, please start booking flights.
+
+Location:
+The Citrix office in Milton, just outside of Cambridge
+Citrix Systems:
+101 Cambridge Science Park Rd, Milton
+Cambridge CB4 0FY
+UK
+
+Timing
+The event will be held on Monday March 25, and ends on the 26th. I =
+expect days to go from 9:00 to 17:00 and some beverages and food will be =
+provided
+EPAM will host an evening event on the 25th
+
+Agenda
+With regards the agenda, I will work selected community members on it.
+The agenda is yours, so please prepare and be specific about the =
+technical, community, process and maybe financial problems we have to =
+solve.
+
+Remote Participation
+I will still need to test this and provide more feedback
+
+Registration
+I will set up an ad-hoc google doc
+
+Getting To Cambridge/Accommodation
+London Stansted is the easiest airport to fly to: there is a direct =
+train that goes frequently and take 30-40 minutes
+You may have to use London Heathrow you come from the US, China or =
+Japan. In that case, you can take a fixed rate taxi: see =
+http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heathrow-Airpor=
+t =
+<http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heathrow-Airpo=
+rt>
+
+The key question you will have to decide upon is whether you stay in the =
+town centre, which is stunning, but it may take 30 mins to the Citrix =
+office, or whether you stay close tp the office. I will provide more =
+info in due time
+
+Regards
+Lars=20
+
+> On 23 Jan 2019, at 10:16, Lars Kurth <lars.kurth.xen@gmail.com> wrote:
+>=20
+> Hi all,
+>=20
+> it looks as if March 25/26 in Frankfurt or Cambridge is the best =
+option. For Matt, this would mean that he can only attend the first day, =
+but I believe this would be OK. Maybe Robin can attend the second day, =
+instead of Matt. Before we finalise the dates, I will need to secure the =
+meeting space. I will be able to do this in the next few days and will =
+send an update as soon as this is done.
+>=20
+> Note that we had a few people on this list which have replied to me =
+privately. Please let me know privately or publicly whether March 25/26 =
+would be suitable for you. We can in parallel work on the agenda.
+> =20
+> Best Regards
+> Lars
+>=20
+>> On 16 Jan 2019, at 13:09, Lars Kurth <lars.kurth.xen@gmail.com =
+<mailto:lars.kurth.xen@gmail.com>> wrote:
+>>=20
+>>=20
+>>=20
+>>> On 16 Jan 2019, at 12:16, George Dunlap <george.dunlap@citrix.com =
+<mailto:george.dunlap@citrix.com>> wrote:
+>>>=20
+>>> On 1/8/19 5:59 PM, Lars Kurth wrote:
+>>>> What I need is=20
+>>>> - Raise your hands if you are interested=20
+>>>> - Let me know of date / location restrictions
+>>>> - We could try and so some of this via video conference: would you =
+be able to attend if we did open the meeting up to some remote =
+participation
+>>>=20
+>>> I'm interested.  All the dates mentioned should work for me.
+>>>=20
+>>> -George
+>>=20
+>> Hi all,
+>>=20
+>> to summarise!
+>>=20
+>> We have a good number of people and organisations interested from =
+pretty one everyone on the list, but it seems the dates won't work for =
+most people.=20
+>> Location wise: Germany (Frankfurt) and/or UK (Cambridge) work for =
+most, except for representatives from Dornerworks and Starlab, who would =
+dial in for some of the meetings=20
+>> There seems to be a slight bias for Cambridge, as we have most of our =
+maintainers there.=20
+>>=20
+>> Automotive vendors would be happy to align with automotive =
+meetings/events (even in Japan), but that won't work for the committers =
+as they won't normally be able to travel.=20
+>> I also have two organisations which could potentially host in =
+Cambridge and one in Germany (Frankfurt). But the venue depends partly =
+on the dates. This tells me, that we should choose either Frankfurt or =
+Cambridge for the event.
+>>=20
+>> In terms of numbers we are roughly looking at 10-12 who could attend =
+physically, but it could be more
+>>=20
+>> To move forward, I thought I would expend the time horizon a little =
+bit via the following doodle poll: =
+https://doodle.com/poll/anvfr2hk2t8gy9a8 =
+<https://doodle.com/poll/anvfr2hk2t8gy9a8>
+>> Note that you can specify suboptimal dates by clicking twice: also, =
+if you have any constraints on location, etc. feel free to make use of =
+the commenting feature.
+>>=20
+>> I will be in the US mid-March and thus excluded these dates. I also =
+excluded March 28/29: because of Brexit, it is possible that there would =
+be some travel chaos at least in the UK.=20
+>>=20
+>> Regards
+>> Lars
+>>=20
+>>=20
+>>=20
+>=20
+
+
+--Apple-Mail=_B580FB58-1BB3-4F8D-9F49-303FBD2982A3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
+all,<div class=3D""><br class=3D""><div class=3D"">from my perspective =
+we have enough momentum to move forward, albeit some prospective =
+attendees are still confirming their travel plans. I can accommodate a =
+maximum if 15, but possibly, a few more. With this in Mind, please start =
+booking flights.</div><div class=3D""><br class=3D""></div><div =
+class=3D""><b class=3D"">Location:</b></div><div class=3D"">The Citrix =
+office in Milton, just outside of Cambridge</div><div class=3D"">Citrix =
+Systems:</div><div class=3D""><div class=3D"">101 Cambridge Science Park =
+Rd, Milton</div><div class=3D"">Cambridge CB4 0FY</div></div><div =
+class=3D"">UK</div><div class=3D""><br class=3D""></div><div class=3D""><b=
+ class=3D"">Timing</b></div><div class=3D""><div class=3D"">The event =
+will be held on Monday March 25, and ends on the 26th. I expect days to =
+go from 9:00 to 17:00 and some beverages and food will be =
+provided</div></div><div class=3D"">EPAM will host an evening event on =
+the 25th</div><div class=3D""><br class=3D""></div><div class=3D""><div =
+class=3D""><b class=3D"">Agenda</b></div></div><div class=3D"">With =
+regards the agenda, I will work selected community members on =
+it.</div><div class=3D"">The agenda is yours, so please prepare and be =
+specific about the technical, community, process and maybe financial =
+problems we have to solve.</div><div class=3D""><br class=3D""></div><div =
+class=3D""><b class=3D"">Remote Participation</b></div><div class=3D"">I =
+will still need to test this and provide more feedback</div><div =
+class=3D""><br class=3D""></div><div class=3D""><b =
+class=3D"">Registration</b></div><div class=3D"">I will set up an ad-hoc =
+google doc</div><div class=3D""><br class=3D""></div><div class=3D""><b =
+class=3D"">Getting To Cambridge/Accommodation</b></div><div =
+class=3D"">London Stansted is the easiest airport to fly to: there is a =
+direct train that goes frequently and take 30-40 minutes</div><div =
+class=3D"">You may have to use London Heathrow you come from the US, =
+China or Japan. In that case, you can take a fixed rate taxi: =
+see&nbsp;<a =
+href=3D"http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heathro=
+w-Airport" =
+class=3D"">http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heat=
+hrow-Airport</a></div><div class=3D""><br class=3D""></div><div =
+class=3D"">The key question you will have to decide upon is whether you =
+stay in the town centre, which is stunning, but it may take 30 mins to =
+the Citrix office, or whether you stay close tp the office. I will =
+provide more info in due time</div><div class=3D""><br =
+class=3D""></div><div class=3D"">Regards</div><div =
+class=3D"">Lars&nbsp;</div><div class=3D""><b class=3D""><br =
+class=3D""></b></div><div class=3D""><div><blockquote type=3D"cite" =
+class=3D""><div class=3D"">On 23 Jan 2019, at 10:16, Lars Kurth &lt;<a =
+href=3D"mailto:lars.kurth.xen@gmail.com" =
+class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><meta =
+http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii" =
+class=3D""><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: =
+space; line-break: after-white-space;" class=3D"">Hi all,<div =
+class=3D""><br class=3D""></div><div class=3D"">it looks as =
+if&nbsp;March 25/26 in Frankfurt or Cambridge is the best option. For =
+Matt, this would mean that he can only attend the first day, but I =
+believe this would be OK. Maybe Robin can attend the second day, instead =
+of Matt. Before we finalise the dates, I will need to secure the meeting =
+space. I will be able to do this in the next few days and will send an =
+update as soon as this is done.</div><div class=3D""><br =
+class=3D""></div><div class=3D"">Note that we had a few people on this =
+list which have replied to me privately. Please let me know privately or =
+publicly whether&nbsp;March 25/26 would be suitable for you. We can in =
+parallel work on the agenda.</div><div class=3D"">&nbsp;</div><div =
+class=3D"">Best Regards</div><div class=3D"">Lars<br class=3D""><div =
+class=3D""><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 16 Jan 2019, at 13:09, Lars Kurth &lt;<a =
+href=3D"mailto:lars.kurth.xen@gmail.com" =
+class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><meta =
+http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii" =
+class=3D""><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: =
+space; line-break: after-white-space;" class=3D""><br class=3D""><div =
+class=3D""><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 16 Jan 2019, at 12:16, George Dunlap &lt;<a =
+href=3D"mailto:george.dunlap@citrix.com" =
+class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><div class=3D"">On =
+1/8/19 5:59 PM, Lars Kurth wrote:<br class=3D""><blockquote type=3D"cite" =
+class=3D"">What I need is <br class=3D"">- Raise your hands if you are =
+interested <br class=3D"">- Let me know of date / location =
+restrictions<br class=3D"">- We could try and so some of this via video =
+conference: would you be able to attend if we did open the meeting up to =
+some remote participation<br class=3D""></blockquote><br class=3D"">I'm =
+interested. &nbsp;All the dates mentioned should work for me.<br =
+class=3D""><br class=3D""> -George<br =
+class=3D""></div></div></blockquote></div><br class=3D""><div =
+class=3D"">Hi all,</div><div class=3D""><br class=3D""></div><div =
+class=3D"">to summarise!</div><div class=3D""><br class=3D""></div><div =
+class=3D"">We have a good number of people and organisations interested =
+from pretty one everyone on the list, but it seems the dates won't work =
+for most people.&nbsp;</div><div class=3D"">Location wise: Germany =
+(Frankfurt) and/or UK (Cambridge) work for most, except for =
+representatives from Dornerworks and Starlab, who would dial in for some =
+of the meetings&nbsp;</div><div class=3D"">There seems to be a slight =
+bias for Cambridge, as we have most of our maintainers =
+there.&nbsp;</div><div class=3D""><br class=3D""></div><div =
+class=3D"">Automotive vendors would be happy to align with automotive =
+meetings/events (even in Japan), but that won't work for the committers =
+as they won't normally be able to travel.&nbsp;</div><div class=3D"">I =
+also have two organisations which could potentially host in Cambridge =
+and one in Germany (Frankfurt). But the venue depends partly on the =
+dates. This tells me, that we should choose either Frankfurt or =
+Cambridge for the event.</div><div class=3D""><br class=3D""></div><div =
+class=3D"">In terms of numbers we are roughly looking at 10-12 who could =
+attend physically, but it could be more</div><div class=3D""><br =
+class=3D""></div><div class=3D"">To move forward, I thought I would =
+expend the time horizon a little bit via the following doodle =
+poll:&nbsp;<a href=3D"https://doodle.com/poll/anvfr2hk2t8gy9a8" =
+class=3D"">https://doodle.com/poll/anvfr2hk2t8gy9a8</a></div><div =
+class=3D"">Note that you can specify suboptimal dates by clicking twice: =
+also, if you have any constraints on location, etc. feel free to make =
+use of the commenting feature.</div><div class=3D""><br =
+class=3D""></div><div class=3D"">I will be in the US mid-March and thus =
+excluded these dates. I also excluded March 28/29: because of Brexit, it =
+is possible that there would be some travel chaos at least in the =
+UK.&nbsp;</div><div class=3D""><br class=3D""></div><div =
+class=3D"">Regards</div><div class=3D"">Lars</div><div class=3D""><br =
+class=3D""></div><div class=3D""><br class=3D""></div><div class=3D""><br =
+class=3D""></div></div></div></blockquote></div><br =
+class=3D""></div></div></div></blockquote></div><br =
+class=3D""></div></div></body></html>=
+
+--Apple-Mail=_B580FB58-1BB3-4F8D-9F49-303FBD2982A3--
+
+
+--===============3841156717128285853==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3841156717128285853==--
