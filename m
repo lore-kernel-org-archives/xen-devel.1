@@ -1,23 +1,20 @@
-From: Eric Blake <eblake@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH] configure: Don't add Xen's
- libs to LDFLAGS
-Date: Mon, 4 Feb 2019 16:11:48 -0600
-Message-ID: <0cbb581b-d945-7aa6-a123-c2c9422d76f9@redhat.com>
-References: <20190121144841.24467-1-anthony.perard@citrix.com>
- <CAFEAcA_ytAb-K-HB3wL5baMBDkY71ksBK8hsUSFxuUeqVDFyHQ@mail.gmail.com>
- <804f8429-d3f6-dc1a-4980-fc5a44a6b3c5@msgid.tls.msk.ru>
- <87fttijvfm.fsf@dusky.pond.sub.org>
- <9a1725c3-1119-886d-2d9d-11369ea5f207@redhat.com>
- <CAFEAcA-qKrCSc0U2hWDzsHyrEaMtPVQ1A6o6FFvtucg0tnaM2A@mail.gmail.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v7 02/15] argo: introduce the argo_op
+ hypercall boilerplate
+Date: Mon, 4 Feb 2019 16:39:26 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1902041608190.22962@sstabellini-ThinkPad-X260>
+References: <1548908900-1128-1-git-send-email-christopher.w.clark@gmail.com>
+ <1548908900-1128-3-git-send-email-christopher.w.clark@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8694774631943976498=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=Mc0N=QL=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1gqmT2-0000bM-Ab
- for xen-devel@lists.xenproject.org; Mon, 04 Feb 2019 22:11:52 +0000
-In-Reply-To: <CAFEAcA-qKrCSc0U2hWDzsHyrEaMtPVQ1A6o6FFvtucg0tnaM2A@mail.gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=fYof=QM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gqolt-0004lS-JR
+ for xen-devel@lists.xenproject.org; Tue, 05 Feb 2019 00:39:29 +0000
+In-Reply-To: <1548908900-1128-3-git-send-email-christopher.w.clark@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,99 +23,39 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Michael Tokarev <mjt@tls.msk.ru>, Markus Armbruster <armbru@redhat.com>, QEMU Developers <qemu-devel@nongnu.org>, Paul Durrant <paul.durrant@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, "open list:X86" <xen-devel@lists.xenproject.org>
+To: Christopher Clark <christopher.w.clark@gmail.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Rich Persaud <persaur@gmail.com>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, James McKenzie <james@bromium.com>, Eric Chanudet <eric.chanudet@gmail.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============8694774631943976498==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="5555Gu7QHl6ypVnidA72ovGCzNhYY3tkG"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---5555Gu7QHl6ypVnidA72ovGCzNhYY3tkG
-Content-Type: multipart/mixed; boundary="wKKy2ozZTzej2pfogCR4nhuX3SnraHp7R";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: Markus Armbruster <armbru@redhat.com>, Michael Tokarev <mjt@tls.msk.ru>,
- Stefano Stabellini <sstabellini@kernel.org>,
- QEMU Developers <qemu-devel@nongnu.org>,
- Paul Durrant <paul.durrant@citrix.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- "open list:X86" <xen-devel@lists.xenproject.org>
-Message-ID: <0cbb581b-d945-7aa6-a123-c2c9422d76f9@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH] configure: Don't add Xen's libs to LDFLAGS
-References: <20190121144841.24467-1-anthony.perard@citrix.com>
- <CAFEAcA_ytAb-K-HB3wL5baMBDkY71ksBK8hsUSFxuUeqVDFyHQ@mail.gmail.com>
- <804f8429-d3f6-dc1a-4980-fc5a44a6b3c5@msgid.tls.msk.ru>
- <87fttijvfm.fsf@dusky.pond.sub.org>
- <9a1725c3-1119-886d-2d9d-11369ea5f207@redhat.com>
- <CAFEAcA-qKrCSc0U2hWDzsHyrEaMtPVQ1A6o6FFvtucg0tnaM2A@mail.gmail.com>
-In-Reply-To: <CAFEAcA-qKrCSc0U2hWDzsHyrEaMtPVQ1A6o6FFvtucg0tnaM2A@mail.gmail.com>
-
---wKKy2ozZTzej2pfogCR4nhuX3SnraHp7R
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 1/24/19 12:29 PM, Peter Maydell wrote:
-> On Thu, 24 Jan 2019 at 17:40, Eric Blake <eblake@redhat.com> wrote:
->>
->> On 1/24/19 2:45 AM, Markus Armbruster wrote:
->>
->>>> Signed-off-by: Michael Tokarev <mjt@tls.msk.ru>
->>>> Revieved-by: Michael Tokarev <mjt@tls.msk.ru>
->>>
->>> Typo in Reviewed-by.
->>
->> Should we tighten checkpatch.pl to flag suspicious-looking 'xxx-by:'
->> tags, to catch instances of typos?
->=20
-> Yes, I would vote for having it whitelist the half a dozen
-> expected ones and complain about the rest. I think we
-> kind of discussed this in the past...
-
-I submitted a patch along those lines:
-https://lists.gnu.org/archive/html/qemu-devel/2019-02/msg00910.html
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---wKKy2ozZTzej2pfogCR4nhuX3SnraHp7R--
-
---5555Gu7QHl6ypVnidA72ovGCzNhYY3tkG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlxYuKQACgkQp6FrSiUn
-Q2rcpwf/c90eDrLuVw5rOxjqQha+5ISQDK/Fr1Q4yxxln/5RIgBDgN9fAW+80Jol
-mfJMK+bSAkL+rOdkJ6veE2aIvZBdU5BLxYhVcGmyEA92uXFjMXMjRKZe8Ew+mUvP
-qWFE3Rh3LF84XSEafm5R8Mb5R+B2PTJGuC4BuUESnqUpm6v5/KiSyV4mTjbS6Nbc
-ghsKXArIjhQSkArWM2cOzQ2AOOlyREsT8AZ/lHte11Qwq2IHhLPHUflrPdXdnO+T
-rxfhQFcr5IQwH1lFma8z8A9vxytF86z4IJsJu7NOPBdggSGqZd/vCzsT6R4yemro
-DRIWwiRgVqEUDtqtowLRPTunTqZB2A==
-=03lY
------END PGP SIGNATURE-----
-
---5555Gu7QHl6ypVnidA72ovGCzNhYY3tkG--
-
-
---===============8694774631943976498==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8694774631943976498==--
+T24gV2VkLCAzMCBKYW4gMjAxOSwgQ2hyaXN0b3BoZXIgQ2xhcmsgd3JvdGU6Cj4gKyNpbmNsdWRl
+IDx4ZW4vZXJybm8uaD4KPiArI2luY2x1ZGUgPHhlbi9ndWVzdF9hY2Nlc3MuaD4KPiArCj4gK2xv
+bmcKPiArZG9fYXJnb19vcCh1bnNpZ25lZCBpbnQgY21kLCBYRU5fR1VFU1RfSEFORExFX1BBUkFN
+KHZvaWQpIGFyZzEsCj4gKyAgICAgICAgICAgWEVOX0dVRVNUX0hBTkRMRV9QQVJBTSh2b2lkKSBh
+cmcyLCB1bnNpZ25lZCBsb25nIGFyZzMsCj4gKyAgICAgICAgICAgdW5zaWduZWQgbG9uZyBhcmc0
+KQo+ICt7Cj4gKyAgICByZXR1cm4gLUVOT1NZUzsKPiArfQo+ICsKPiArI2lmZGVmIENPTkZJR19D
+T01QQVQKPiArbG9uZwo+ICtjb21wYXRfYXJnb19vcCh1bnNpZ25lZCBpbnQgY21kLCBYRU5fR1VF
+U1RfSEFORExFX1BBUkFNKHZvaWQpIGFyZzEsCj4gKyAgICAgICAgICAgICAgIFhFTl9HVUVTVF9I
+QU5ETEVfUEFSQU0odm9pZCkgYXJnMiwgdW5zaWduZWQgbG9uZyBhcmczLAo+ICsgICAgICAgICAg
+ICAgICB1bnNpZ25lZCBsb25nIGFyZzQpCj4gK3sKPiArICAgIHJldHVybiAtRU5PU1lTOwo+ICt9
+Cj4gKyNlbmRpZgoKRnJvbSBhbiBBUk0gcGVyc3BlY3RpdmUsIGl0IGlzIG5vdCBhIGdvb2QgaWRl
+YSB0byB1c2UgdW5zaWduZWQgbG9uZyBhcwpoeXBlcmNhbGwgcGFyYW1ldGVycyBiZWNhdXNlIHRo
+ZXkgYXJlIGdvaW5nIHRvIGJlIG9mIGRpZmZlcmVudCBzaXplIG9uCmFybTMyIGFuZCBhcm02NC4g
+T24gQVJNLCB0aGVyZSBpcyBubyBDT01QQVQgY29kZSwgYW5kIHdlIHRyeSB0byBrZWVwIGEKc2lu
+Z2xlIHN0YWJsZSBBQkkgYWNyb3NzIDMyYml0IGFuZCA2NGJpdCBoeXBlcnZpc29ycyAocG9pbnRl
+cnMgc2l6ZQpiZWluZyB0aGUgb25seSBleGNlcHRpb24gYW5kIHdlIGRlYWwgd2l0aCB0aGF0IHVz
+aW5nClhFTl9HVUVTVF9IQU5ETEVfUEFSQU0pLgoKRm9yIHRoaXMgcmVhc29uLCBnaXZlbiB0aGF0
+IHdlIGRvbid0IG5lZWQgYXJnMyBhbmQgYXJnNCB0byBhY3R1YWxseSBiZQo2NGJpdCwgaXQgd291
+bGQgYmUgYmVzdCB0byB1c2UgZXhwbGljaXRseSBzaXplZCBpbnRlZ2VycyBpbnN0ZWFkLiBJCndv
+dWxkIHVzZSB1aW50MzJfdCBvciB1bnNpZ25lZCBpbnQgZm9yIGFyZzMgYW5kIGFyZzQuIFRoYXQg
+d2F5LCB0aGVyZQphcmUgbm90IGdvaW5nIHRvIGJlIGFueSBBQkkgY29tcGF0aWJpbGl0eSBpc3N1
+ZXMgYmV0d2VlbiBhcm0zMiBhbmQgYXJtNjQKYW5kIHdlIGNvdWxkIHJ1biwgYW5kIGV2ZW4gbWln
+cmF0ZSwgMzJiaXQgZ3Vlc3RzIHRvIGEgNjRiaXQgaHlwZXJ2aXNvcgp3aXRob3V0IHByb2JsZW1z
+LgoKSSBrbm93IHRoYXQgQW5kcmV3IGV4cHJlc3NlZCBjb25jZXJucyBhYm91dCB1c2luZyB1bnNp
+Z25lZCBpbnQgYmVmb3JlLApidXQgZG9uJ3Qgd2UganVzdCBuZWVkIHRvIG1ha2Ugc3VyZSB3ZSBh
+cmUgcHJvcGVybHkgaWdub3JpbmcgdGhlIHRvcAozMmJpdCBvZiBhcmczIGFuZCBhcmc0IHdoZW4g
+dGhlIGh5cGVydmlzb3IgaXMgY29tcGlsZWQgNjRiaXQ/CgpJIGFtIHJlYWxseSBzb3JyeSBmb3Ig
+cG9pbnRpbmcgdGhpcyBvdXQgc28gbGF0ZSBpbiB0aGUgcmV2aWV3IGN5Y2xlLCBidXQKSSBvbmx5
+IHNwb3R0ZWQgaXQgbm93LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
