@@ -1,10 +1,8 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Subject: Re: RT Xen on ARM - R-Car series
-Date: Tue, 5 Feb 2019 11:54:12 +0200
-Message-ID: <2b007959-e8a1-6da7-36f5-ac172b0a2d6f@gmail.com>
-References: <201eb8d4-aa51-9ad3-e655-3f4fa0cee348@arm.com>
- <c5f1b8c6-df0a-d30a-4ca6-3d9372c7913c@gmail.com>
- <4e777fcf-6630-5aff-a8d2-781d3f705123@arm.com>
+Date: Tue, 5 Feb 2019 11:10:30 +0100
+Message-ID: <20190205101030.ii3mdxveiqwlxf6e@mac>
+References: <4e777fcf-6630-5aff-a8d2-781d3f705123@arm.com>
  <alpine.DEB.2.10.1901311345570.22962@sstabellini-ThinkPad-X260>
  <2a651c5d-3f94-378d-baf9-f52cab0cdc62@arm.com>
  <20190201165314.ofuvpddlfpzbc247@mac>
@@ -13,12 +11,13 @@ References: <201eb8d4-aa51-9ad3-e655-3f4fa0cee348@arm.com>
  <fcd6618d-de13-212f-8afb-e2ef0b37396d@arm.com>
  <f045b9a9-2e1a-4d3e-b2ce-51dca97720a8@gmail.com>
  <20190205094518.w7v3bfr67a6k7vtu@mac>
+ <2b007959-e8a1-6da7-36f5-ac172b0a2d6f@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20190205094518.w7v3bfr67a6k7vtu@mac>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <2b007959-e8a1-6da7-36f5-ac172b0a2d6f@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,19 +26,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, "LOPEZ,
- FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, xen-devel@lists.xen.org
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, "LOPEZ, FUENTES NACARINO
+ Jairo Eduardo" <jairo@ruri.waseda.jp>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gUm9nZXIsCgpPbiAwNS4wMi4xOSAxMTo0NSwgUm9nZXIgUGF1IE1vbm7DqSB3cm90ZToK
-PiBZb3Ugc2hvdWxkIHNlZSBhIHJlYXNvbmFibGUgYW1vdW50IG9mIHN0b2xlbiB0aW1lLiBBIHNp
-bXBsZSB0ZXN0IHdvdWxkCj4gYmUgdG8gc3BpbiAyIFZNcyB3aXRoIDEgdkNQVSBlYWNoIGFuZCBw
-aW4gdGhlbSB0byB0aGUgc2FtZSBwaHlzaWNhbAo+IENQVS4gVGhlbiBydW4gYSBDUFUgaW50ZW5z
-aXZlIHdvcmtsb2FkIG9uIGVhY2ggb2YgdGhlbSwgYW5kIHRoZSAnc3QnCj4gdGltZSBzaG93biBp
-biBgdG9wYCBzaG91bGQgYmUgfjUwJSBJIHRoaW5rLgoKTXkgc3lzdGVtLCBidWlsdCB3aXRoIHlv
-Y3RvIGVtcGxveXMgYnVzeWJveCB0b3AuIEl0IGRvZXMgbm90IHNob3cgc3RvbGVuIHRpbWUuIEkg
-Z3Vlc3MgSSBoYXZlIHRvIGJ1aWxkIGFub3RoZXIgdG9wLgoKLS0gClNpbmNlcmVseSwKQW5kcmlp
-IEFuaXNvdi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBGZWIgMDUsIDIwMTkgYXQgMTE6NTQ6MTJBTSArMDIwMCwgQW5kcmlpIEFuaXNvdiB3
+cm90ZToKPiBIZWxsbyBSb2dlciwKPiAKPiBPbiAwNS4wMi4xOSAxMTo0NSwgUm9nZXIgUGF1IE1v
+bm7DqSB3cm90ZToKPiA+IFlvdSBzaG91bGQgc2VlIGEgcmVhc29uYWJsZSBhbW91bnQgb2Ygc3Rv
+bGVuIHRpbWUuIEEgc2ltcGxlIHRlc3Qgd291bGQKPiA+IGJlIHRvIHNwaW4gMiBWTXMgd2l0aCAx
+IHZDUFUgZWFjaCBhbmQgcGluIHRoZW0gdG8gdGhlIHNhbWUgcGh5c2ljYWwKPiA+IENQVS4gVGhl
+biBydW4gYSBDUFUgaW50ZW5zaXZlIHdvcmtsb2FkIG9uIGVhY2ggb2YgdGhlbSwgYW5kIHRoZSAn
+c3QnCj4gPiB0aW1lIHNob3duIGluIGB0b3BgIHNob3VsZCBiZSB+NTAlIEkgdGhpbmsuCj4gCj4g
+TXkgc3lzdGVtLCBidWlsdCB3aXRoIHlvY3RvIGVtcGxveXMgYnVzeWJveCB0b3AuIEl0IGRvZXMg
+bm90IHNob3cgc3RvbGVuIHRpbWUuIEkgZ3Vlc3MgSSBoYXZlIHRvIGJ1aWxkIGFub3RoZXIgdG9w
+LgoKWW91IGNhbiBhbHNvIGdldCB0aGlzIGluZm9ybWF0aW9uIGZyb20gL3Byb2Mvc3RhdCBpbiBh
+IHJhdyBmb3JtLgoKUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
