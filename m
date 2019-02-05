@@ -1,24 +1,29 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH for-4.12] gic-vgic: fix assert condition
-Date: Tue, 5 Feb 2019 11:07:31 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1902051107120.22962@sstabellini-ThinkPad-X260>
-References: <1548354814-23208-1-git-send-email-andrii.anisov@gmail.com>
- <1548355642.9022.23.camel@amazon.de>
- <CAC1WxdjgOg1Qg4=2Me0nwdEO+CMS4C1WMr7E=pxpi74-ME9uTw@mail.gmail.com>
- <c6cb57ce-3447-67ee-5629-322ee6207362@gmail.com>
- <alpine.DEB.2.10.1902041701470.22962@sstabellini-ThinkPad-X260>
- <7c3f413e-826c-d937-54df-f2272bb09c40@gmail.com>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Tue, 5 Feb 2019 11:18:08 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1902051116400.22962@sstabellini-ThinkPad-X260>
+References: <CACrvCsaeHuwzZzUQTzNYF7fqmgQWNJUVOQZv9D0MnYrXjqzZtQ@mail.gmail.com>
+ <d1cd35de-b278-aad8-49ec-8d77666cbdd5@gmail.com>
+ <CACrvCsaYBv2p2Fsu9+Y8Ewu=qrOY6erOdBBRo+JHvuzqA0f7Zg@mail.gmail.com>
+ <15f42687-9aa6-e9ed-c306-b6b267a16292@arm.com>
+ <78963b40-e8e8-db41-ee16-d4ca64baa37a@gmail.com>
+ <201eb8d4-aa51-9ad3-e655-3f4fa0cee348@arm.com>
+ <c5f1b8c6-df0a-d30a-4ca6-3d9372c7913c@gmail.com>
+ <4e777fcf-6630-5aff-a8d2-781d3f705123@arm.com>
+ <alpine.DEB.2.10.1901311345570.22962@sstabellini-ThinkPad-X260>
+ <9c4bc70d-a694-6269-f14a-1d9797dce59f@gmail.com>
+ <9b0fe0b8-48cb-e04d-5d4e-a970f6ce2609@arm.com>
+ <4dc47732-62fb-5782-d7fd-2d1819c49558@gmail.com>
+ <5b9dd69a-1f75-eb3b-4040-822520f0cc08@arm.com>
+ <8355b5ee-ff8d-78b2-86aa-5a2376f33ee5@gmail.com>
+ <3de8170e-fe56-e5a2-d94d-1c024c49cef7@arm.com>
+ <0e9ee915-4c5d-8743-d605-a8f9f7b96a3b@gmail.com>
+ <4f5c623d-ac64-a188-f20b-fa60166183e8@arm.com>
+ <ca035ab4-42c4-f397-c021-e9247761bef3@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-87214066-1549394289=:22962"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=fYof=QM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gr64E-0005YS-3K
- for xen-devel@lists.xenproject.org; Tue, 05 Feb 2019 19:07:34 +0000
-In-Reply-To: <7c3f413e-826c-d937-54df-f2272bb09c40@gmail.com>
+In-Reply-To: <ca035ab4-42c4-f397-c021-e9247761bef3@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,18 +33,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrii Anisov <andrii.anisov@gmail.com>
-Cc: "jgross@suse.com" <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, "andre.przywara@arm.com" <andre.przywara@arm.com>, "Nuernberger,
- Stefan" <snu@amazon.de>, "julien.grall@arm.com" <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, "LOPEZ,
+ FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCA1IEZlYiAyMDE5LCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IEhlbGxvIFN0ZWZhbm8s
-Cj4gCj4gT24gMDUuMDIuMTkgMDM6MDIsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+IFBs
-ZWFzZSBzZW5kIGFuIHVwZGF0ZSBzb29uIGFzIEkgd291bGQgbGlrZSB0byBnZXQgaXQgaW4gNC4x
-Mi4KPiAKPiBJdCBpcyBhbHJlYWR5IHRoZXJlIFsxXSBbMl0uCj4gCj4gWzFdIGh0dHBzOi8vbGlz
-dHMueGVucHJvamVjdC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOS0wMS9tc2cwMjA0
-OC5odG1sCj4gWzJdCj4gaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7
-YT1jb21taXQ7aD04NjM1NDkxNTgxMjlkMzI2YjJlNTg1MGY3MjJiZmRhNjQzMjY0ZjJiCgpPcHMs
-IEkgbWlzc2VkIGl0IDotKSAgRXZlbiBiZXR0ZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-87214066-1549394289=:22962
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 5 Feb 2019, Andrii Anisov wrote:
+> On 05.02.19 00:06, Julien Grall wrote:
+> > > A57+A53.
+> > > 
+> > > I see the following in my log:
+> > > 
+> > >      (XEN) alternatives: Patching with alt table 00000000002c6608 ->
+> > > 00000000002c6c80
+> > >      (XEN) CPU0 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
+> > >      (XEN) CPU2 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
+> > >      (XEN) CPU3 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
+> > >      (XEN) CPU1 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
+> > 
+> > Cortex-A53 should not be affected by spectre v2, so I imagine they are only
+> > for A57?
+> Yes, the log says the workaround is applied to the big cores only. As it
+> should be.
+> 
+> > It is going to be hard to disable the workarounds by default. But we can
+> > consider to provide host-wide or per-guest option to disable them on trusted
+> > environment.
+> We have to get numbers first than decide how to proceed.
+> 
+> > > > Also, when you mean possible, does it mean you haven't looked the
+> > > > performance regression?
+> > > We have a preliminary results about performance drop with xen4.12-unstable
+> > > comparing to a our system with 4.10.
+> > 
+> > A lot of patches have not been backported in Xen 4.10 (including
+> > Spectre/Meltdown) that will definitely fix hole but may have an impact on
+> > the performance. There were not backported because of performance reason but
+> > because of the complexity of the port and seemly lack of interest.
+> I know that story. But customers are customers. And performance drop in the
+> next SW version is always painful for them.
+> So we need a good explanation (which Spectre mitigation might be), or better
+> to show up no performance drop :).
+
+I think it is acceptable to intruduce a "I know what I am doing, just
+disable the fix" option. There might be cases where the user doesn't
+care for Spectre mitigations. I see that Linux is going in this
+direction of offering more disabling options too.
+--8323329-87214066-1549394289=:22962
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-87214066-1549394289=:22962--
