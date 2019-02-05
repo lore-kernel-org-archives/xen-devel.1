@@ -1,29 +1,20 @@
 From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: RT Xen on ARM - R-Car series
-Date: Tue, 5 Feb 2019 11:18:08 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1902051116400.22962@sstabellini-ThinkPad-X260>
-References: <CACrvCsaeHuwzZzUQTzNYF7fqmgQWNJUVOQZv9D0MnYrXjqzZtQ@mail.gmail.com>
- <d1cd35de-b278-aad8-49ec-8d77666cbdd5@gmail.com>
- <CACrvCsaYBv2p2Fsu9+Y8Ewu=qrOY6erOdBBRo+JHvuzqA0f7Zg@mail.gmail.com>
- <15f42687-9aa6-e9ed-c306-b6b267a16292@arm.com>
- <78963b40-e8e8-db41-ee16-d4ca64baa37a@gmail.com>
- <201eb8d4-aa51-9ad3-e655-3f4fa0cee348@arm.com>
- <c5f1b8c6-df0a-d30a-4ca6-3d9372c7913c@gmail.com>
- <4e777fcf-6630-5aff-a8d2-781d3f705123@arm.com>
- <alpine.DEB.2.10.1901311345570.22962@sstabellini-ThinkPad-X260>
- <9c4bc70d-a694-6269-f14a-1d9797dce59f@gmail.com>
- <9b0fe0b8-48cb-e04d-5d4e-a970f6ce2609@arm.com>
- <4dc47732-62fb-5782-d7fd-2d1819c49558@gmail.com>
- <5b9dd69a-1f75-eb3b-4040-822520f0cc08@arm.com>
- <8355b5ee-ff8d-78b2-86aa-5a2376f33ee5@gmail.com>
- <3de8170e-fe56-e5a2-d94d-1c024c49cef7@arm.com>
- <0e9ee915-4c5d-8743-d605-a8f9f7b96a3b@gmail.com>
- <4f5c623d-ac64-a188-f20b-fa60166183e8@arm.com>
- <ca035ab4-42c4-f397-c021-e9247761bef3@gmail.com>
+Subject: Re: [PATCH v3 for-4.12] arm: gic-v3: deactivate
+ interrupts during initialization
+Date: Tue, 5 Feb 2019 11:34:09 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1902051133590.22962@sstabellini-ThinkPad-X260>
+References: <20190205060437.29637-1-peng.fan@nxp.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-87214066-1549394289=:22962"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <ca035ab4-42c4-f397-c021-e9247761bef3@gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=fYof=QM=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gr6Tz-00089J-DY
+ for xen-devel@lists.xenproject.org; Tue, 05 Feb 2019 19:34:11 +0000
+In-Reply-To: <20190205060437.29637-1-peng.fan@nxp.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,67 +23,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>
-Cc: Juergen Gross <jgross@suse.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, "LOPEZ,
- FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, xen-devel@lists.xen.org
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "jgross@suse.com" <jgross@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "julien.grall@arm.com" <julien.grall@arm.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-87214066-1549394289=:22962
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-On Tue, 5 Feb 2019, Andrii Anisov wrote:
-> On 05.02.19 00:06, Julien Grall wrote:
-> > > A57+A53.
-> > > 
-> > > I see the following in my log:
-> > > 
-> > >      (XEN) alternatives: Patching with alt table 00000000002c6608 ->
-> > > 00000000002c6c80
-> > >      (XEN) CPU0 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > >      (XEN) CPU2 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > >      (XEN) CPU3 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > >      (XEN) CPU1 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > 
-> > Cortex-A53 should not be affected by spectre v2, so I imagine they are only
-> > for A57?
-> Yes, the log says the workaround is applied to the big cores only. As it
-> should be.
-> 
-> > It is going to be hard to disable the workarounds by default. But we can
-> > consider to provide host-wide or per-guest option to disable them on trusted
-> > environment.
-> We have to get numbers first than decide how to proceed.
-> 
-> > > > Also, when you mean possible, does it mean you haven't looked the
-> > > > performance regression?
-> > > We have a preliminary results about performance drop with xen4.12-unstable
-> > > comparing to a our system with 4.10.
-> > 
-> > A lot of patches have not been backported in Xen 4.10 (including
-> > Spectre/Meltdown) that will definitely fix hole but may have an impact on
-> > the performance. There were not backported because of performance reason but
-> > because of the complexity of the port and seemly lack of interest.
-> I know that story. But customers are customers. And performance drop in the
-> next SW version is always painful for them.
-> So we need a good explanation (which Spectre mitigation might be), or better
-> to show up no performance drop :).
-
-I think it is acceptable to intruduce a "I know what I am doing, just
-disable the fix" option. There might be cases where the user doesn't
-care for Spectre mitigations. I see that Linux is going in this
-direction of offering more disabling options too.
---8323329-87214066-1549394289=:22962
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-87214066-1549394289=:22962--
+T24gVHVlLCA1IEZlYiAyMDE5LCBQZW5nIEZhbiB3cm90ZToKPiBPbiBpLk1YOCwgd2UgaW1wbGVt
+ZW50ZWQgcGFydGl0aW9uIHJlYm9vdCB3aGljaCBtZWFucyBDb3J0ZXgtQSByZWJvb3QKPiB3aWxs
+IG5vdCBpbXBhY3QgTTQgY29yZXMgYW5kIFN5c3RlbSBjb250cm9sIFVuaXQgY29yZS4gSG93ZXZl
+ciBHSUN2Mwo+IGlzIG5vdCByZXNldCBiZWNhdXNlIHdlIGFsc28gbmVlZCB0byBzdXBwb3J0IEE3
+MiBDbHVzdGVyIHJlYm9vdCB3aXRob3V0Cj4gYWZmZWN0aW5nIEE1MyBDbHVzdGVyLgo+IAo+IFRo
+ZSBnaWMtdjMgY29udHJvbGxlciBpcyBjb25maWd1cmVkIHdpdGggRU9JbW9kZSB0byAxLCBzbyBk
+dXJpbmcgeGVuCj4gcmVib290LCB0aGVyZSBpcyBhIGZ1bmN0aW9uIGNhbGwgInNtcF9jYWxsX2Z1
+bmN0aW9uKGhhbHRfdGhpc19jcHUsIE5VTEwsIDApOyIKPiAsIGJ1dCBoYWx0X3RoaXNfY3B1IG5l
+dmVyIHJldHVybiwgdGhhdCBtZWFucyBvdGhlciBDUFVzIGhhdmUgbm8gY2hhbmNlIHRvCj4gZGVh
+Y3RpdmF0ZSB0aGUgU0dJIGludGVycnVwdCwgYmVjYXVzZSB0aGUgZGVhY3RpdmF0ZV9pcnEgb3Bl
+cmF0aW9uIGlzIGF0Cj4gdGhlIGVuZCBvZiBkb19zZ2kuIER1cmluZyB0aGUgbmV4dCBib290IG9m
+IFhlbiwgQ1BVMCB3aWxsIGlzc3VlCj4gR0lDX1NHSV9DQUxMX0ZVTkNUSU9OIHRvIG90aGVyIENQ
+VXMuIEFzIHRoZSBBY3RpdmUgc3RhdGUgZm9yIFNHSSBpcyBsZWZ0Cj4gdW50b3VjaGVkIGR1cmlu
+ZyB0aGUgcmVib290LCB0aGUgR0lDX1NHSV9DQUxMX0ZVTkNUSU9OIHdpbGwgc3RpbGwgYmUgYWN0
+aXZlCj4gb24gdGhlIG5vbi1ib290IENQVXMuIFRoaXMgbWVhbnMgdGhlIGludGVycnVwdCBjYW5u
+b3QgYmUgdHJpZ2dlcmVkIGFnYWluCj4gdW50aWwgaXQgZ2V0IGRlYWN0aXZhdGVkLgo+IAo+IEFu
+ZCBhY2NvcmRpbmcgdG8gSUhJMDA2OURfZ2ljX2FyY2hpdGVjdHVyZV9zcGVjaWZpY2F0aW9uLCBj
+aGFwdGVyCj4gIjguMTEuMyBHSUNSX0lDQUNUSVZFUjAsIEludGVycnVwdCBDbGVhci1BY3RpdmUg
+UmVnaXN0ZXIgMCIsIHRoZSBSVwo+IGZpZWxkIG9mIEdJQ1JfSUNBQ1RJVkVSMCByZXNldHMgdG8g
+YSB2YWx1ZSB0aGF0IGlzIGFyY2hpdGVjdHVyYWxseSBVTktOT1dOLgo+IFNvIG1ha2Ugc3VyZSBh
+bGwgaW50ZXJydXB0cyBhcmUgZGVhY3RpdmF0ZWQgYXQgZHVyaW5nIGluaXRpYWxpemF0aW9uIGJ5
+Cj4gY2xlYXJpbmcgdGhlIHN0YXRlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IFBlbmcgRmFuIDxwZW5n
+LmZhbkBueHAuY29tPgoKUmV2aWV3ZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxp
+bmlAa2VybmVsLm9yZz4KCgo+IC0tLQo+IAo+IFYzOgo+ICAgU0dJL1BQSS0+aW50ZXJydXB0cy4K
+PiAgIHJlZmluZSBjb21taXQgbG9nLgo+ICAgRGVhY3RpdmF0ZSBTUEkKPiBWMjoKPiAgIHJlZmlu
+ZSBjb21taXQgbG9nCj4gICBkZWFjdGl2YXRlIFNHSS9QUEkuCj4gICBObyBuZWVkIGZvciBTUEks
+IGJlY2F1c2UgU29tZSBvciBhbGwgUlcgZmllbGRzIG9mIHRoaXMgR0lDRF9JQ0FDVElWRVIKPiAg
+IGhhdmUgZGVmaW5lZCByZXNldCB2YWx1ZXMKPiAKPiAgeGVuL2FyY2gvYXJtL2dpYy12My5jIHwg
+MTAgKysrKysrKysrLQo+ICAxIGZpbGUgY2hhbmdlZCwgOSBpbnNlcnRpb25zKCspLCAxIGRlbGV0
+aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9naWMtdjMuYyBiL3hlbi9hcmNo
+L2FybS9naWMtdjMuYwo+IGluZGV4IGM5MjAwZDI0ZTEuLjBmNmNiZjYyMjQgMTAwNjQ0Cj4gLS0t
+IGEveGVuL2FyY2gvYXJtL2dpYy12My5jCj4gKysrIGIveGVuL2FyY2gvYXJtL2dpYy12My5jCj4g
+QEAgLTYyNiw5ICs2MjYsMTIgQEAgc3RhdGljIHZvaWQgX19pbml0IGdpY3YzX2Rpc3RfaW5pdCh2
+b2lkKQo+ICAgICAgICAgIHdyaXRlbF9yZWxheGVkKHByaW9yaXR5LCBHSUNEICsgR0lDRF9JUFJJ
+T1JJVFlSICsgKGkgLyA0KSAqIDQpOwo+ICAgICAgfQo+ICAKPiAtICAgIC8qIERpc2FibGUgYWxs
+IGdsb2JhbCBpbnRlcnJ1cHRzICovCj4gKyAgICAvKiBEaXNhYmxlL2RlYWN0aXZhdGUgYWxsIGds
+b2JhbCBpbnRlcnJ1cHRzICovCj4gICAgICBmb3IgKCBpID0gTlJfR0lDX0xPQ0FMX0lSUVM7IGkg
+PCBucl9saW5lczsgaSArPSAzMiApCj4gKyAgICB7Cj4gICAgICAgICAgd3JpdGVsX3JlbGF4ZWQo
+MHhmZmZmZmZmZiwgR0lDRCArIEdJQ0RfSUNFTkFCTEVSICsgKGkgLyAzMikgKiA0KTsKPiArICAg
+ICAgICB3cml0ZWxfcmVsYXhlZCgweGZmZmZmZmZmLCBHSUNEICsgR0lDRF9JQ0FDVElWRVIgKyAo
+aSAvIDMyKSAqIDQpOwo+ICsgICAgfQo+ICAKPiAgICAgIC8qCj4gICAgICAgKiBDb25maWd1cmUg
+U1BJcyBhcyBub24tc2VjdXJlIEdyb3VwLTEuIFRoaXMgd2lsbCBvbmx5IG1hdHRlcgo+IEBAIC04
+MzQsNiArODM3LDExIEBAIHN0YXRpYyBpbnQgZ2ljdjNfY3B1X2luaXQodm9pZCkKPiAgICAgICAg
+ICB3cml0ZWxfcmVsYXhlZChwcmlvcml0eSwKPiAgICAgICAgICAgICAgICAgIEdJQ0RfUkRJU1Rf
+U0dJX0JBU0UgKyBHSUNSX0lQUklPUklUWVIwICsgKGkgLyA0KSAqIDQpOwo+ICAKPiArICAgIC8q
+Cj4gKyAgICAgKiBUaGUgYWN0aXZhdGUgc3RhdGUgaXMgdW5rbm93biBhdCBib290LCBzbyBtYWtl
+IHN1cmUgYWxsCj4gKyAgICAgKiBTR0lzIGFuZCBQUElzIGFyZSBkZS1hY3RpdmF0ZWQuCj4gKyAg
+ICAgKi8KPiArICAgIHdyaXRlbF9yZWxheGVkKDB4ZmZmZmZmZmYsIEdJQ0RfUkRJU1RfU0dJX0JB
+U0UgKyBHSUNSX0lDQUNUSVZFUjApOwo+ICAgICAgLyoKPiAgICAgICAqIERpc2FibGUgYWxsIFBQ
+SSBpbnRlcnJ1cHRzLCBlbnN1cmUgYWxsIFNHSSBpbnRlcnJ1cHRzIGFyZQo+ICAgICAgICogZW5h
+YmxlZC4KPiAtLSAKPiAyLjE0LjEKPiAKPiAKPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwo+IFhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKPiBYZW4tZGV2ZWxA
+bGlzdHMueGVucHJvamVjdC5vcmcKPiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
