@@ -1,18 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] SVM: make nested page-fault tracing and logging
- consistent
-Date: Wed, 06 Feb 2019 04:22:10 -0700
-Message-ID: <5C5AC36202000078002143D7@prv1-mh.provo.novell.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] VMX: don't ignore P2M setup error
+Date: Wed, 6 Feb 2019 11:42:27 +0000
+Message-ID: <6fd67305-53ad-b310-2fde-8e678fc56784@citrix.com>
+References: <5C5AB5DA020000780021436D@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=F3w5=QN=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1grLHS-000703-Fk
- for xen-devel@lists.xenproject.org; Wed, 06 Feb 2019 11:22:14 +0000
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=su2n=QN=citrix.com=prvs=933dc5b42=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1grLb5-0000G9-6f
+ for xen-devel@lists.xenproject.org; Wed, 06 Feb 2019 11:42:31 +0000
+In-Reply-To: <5C5AB5DA020000780021436D@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,40 +22,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-RG9uJ3QgY2FsbCBfX2dldF9nZm5fdHlwZV9hY2Nlc3MoKSBtb3JlIHRoYW4gb25jZSwgdG8gbWFr
-ZSBzdXJlIGRhdGEKcmVjb3JkZWQgZm9yIHhlbnRyYWNlIG1hdGNoZXMgdXAgd2l0aCB3aGF0IGdl
-dHMgbG9nZ2VkIGluIGNhc2Ugb2YgdGhlCmRvbWFpbiBnZXR0aW5nIGNyYXNoZWQuCgpBcyBhIHNp
-ZGUgZWZmZWN0IHRoaXMgYWxzbyBlbGltaW5hdGVzIGEgdHlwZSBtaXNtYXRjaCByZXBvcnRlZCBi
-eQpOb3JiZXJ0IE1hbnRoZXksIGFzIHRoZSBmaXJzdCBjYWxsIG5vdyBhbHNvIG5lZWRzIHRvIHVw
-ZGF0ZSB0aGUgbG9jYWwKdmFyaWFibGUgInAybXQiLgoKRG8gYSBmZXcgY29zbWV0aWNzIGF0IHRo
-ZSBzYW1lIHRpbWU6IE1vdmUgYSBjb21tZW50IHVwIGEgbGl0dGxlLCBkcm9wCnRoZSBwb2ludGxl
-c3MgImNhc2UgMCIgKHNlZWluZyBpbiBwYXJ0aWN1bGFyIHRoZSBjb21tZW50J3Mgd29yZGluZyks
-CmFuZCBjb3JyZWN0IGZvcm1hdHRpbmcuCgpTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJl
-dWxpY2hAc3VzZS5jb20+CgotLS0gYS94ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYworKysgYi94
-ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYwpAQCAtMTc5OCwxNyArMTc5OCwxOCBAQCBzdGF0aWMg
-dm9pZCBzdm1fZG9fbmVzdGVkX3BnZmF1bHQoc3RydWN0CiAgICAgICAgIH0gX2Q7CiAKICAgICAg
-ICAgcDJtID0gcDJtX2dldF9wMm0odik7CisgICAgICAgIG1mbiA9IF9fZ2V0X2dmbl90eXBlX2Fj
-Y2VzcyhwMm0sIGdmbiwgJnAybXQsICZwMm1hLCAwLCBOVUxMLCAwKTsKKwogICAgICAgICBfZC5n
-cGEgPSBncGE7CiAgICAgICAgIF9kLnF1YWxpZmljYXRpb24gPSAwOwotICAgICAgICBtZm4gPSBf
-X2dldF9nZm5fdHlwZV9hY2Nlc3MocDJtLCBnZm4sICZfZC5wMm10LCAmcDJtYSwgMCwgTlVMTCwg
-MCk7CiAgICAgICAgIF9kLm1mbiA9IG1mbl94KG1mbik7CisgICAgICAgIF9kLnAybXQgPSBwMm10
-OwogICAgICAgICAKICAgICAgICAgX190cmFjZV92YXIoVFJDX0hWTV9OUEYsIDAsIHNpemVvZihf
-ZCksICZfZCk7CiAgICAgfQogCi0gICAgc3dpdGNoIChyZXQpIHsKLSAgICBjYXNlIDA6Ci0gICAg
-ICAgIGJyZWFrOworICAgIHN3aXRjaCAoIHJldCApCisgICAgewogICAgIGNhc2UgMToKICAgICAg
-ICAgcmV0dXJuOwogICAgIGNhc2UgLTE6CkBAIC0xODE4LDEwICsxODE5LDEyIEBAIHN0YXRpYyB2
-b2lkIHN2bV9kb19uZXN0ZWRfcGdmYXVsdChzdHJ1Y3QKICAgICAgICAgcmV0dXJuOwogICAgIH0K
-IAorICAgIC8qIEV2ZXJ5dGhpbmcgZWxzZSBpcyBhbiBlcnJvci4gKi8KICAgICBpZiAoIHAybSA9
-PSBOVUxMICkKKyAgICB7CiAgICAgICAgIHAybSA9IHAybV9nZXRfcDJtKHYpOwotICAgIC8qIEV2
-ZXJ5dGhpbmcgZWxzZSBpcyBhbiBlcnJvci4gKi8KLSAgICBtZm4gPSBfX2dldF9nZm5fdHlwZV9h
-Y2Nlc3MocDJtLCBnZm4sICZwMm10LCAmcDJtYSwgMCwgTlVMTCwgMCk7CisgICAgICAgIG1mbiA9
-IF9fZ2V0X2dmbl90eXBlX2FjY2VzcyhwMm0sIGdmbiwgJnAybXQsICZwMm1hLCAwLCBOVUxMLCAw
-KTsKKyAgICB9CiAgICAgZ2RwcmludGsoWEVOTE9HX0VSUiwKICAgICAgICAgICJTVk0gdmlvbGF0
-aW9uIGdwYSAlIyJQUklwYWRkciIsIG1mbiAlI2x4LCB0eXBlICVpXG4iLAogICAgICAgICAgZ3Bh
-LCBtZm5feChtZm4pLCBwMm10KTsKCgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+T24gMDYvMDIvMjAxOSAxMDoyNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gc2V0X21taW9fcDJtX2Vu
+dHJ5KCkgbWF5IGZhaWwsIGluIHBhcnRpY3VsYXIgd2l0aCAtRU5PTUVNLiBEb24ndCBpZ25vcmUK
+PiBzdWNoIGFuIGVycm9yLCBidXQgaW5zdGVhZCBjYXVzZSBkb21haW4gY3JlYXRpb24gdG8gZmFp
+bCBpbiBzdWNoIGEgY2FzZS4KPgo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGlj
+aEBzdXNlLmNvbT4KCkFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRy
+aXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
