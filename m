@@ -1,14 +1,16 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: [PATCH] x86/pv: Fix construction of 32bit dom0's
-Date: Thu, 7 Feb 2019 13:29:18 +0000
-Message-ID: <c6657a1e-3f1c-3bd4-6d7a-b0ca761fb664@citrix.com>
+Date: Thu, 7 Feb 2019 14:38:41 +0100
+Message-ID: <8835b18e-02c7-7383-d16c-73e9b6f0bce2@suse.com>
 References: <1549485670-9273-1-git-send-email-andrew.cooper3@citrix.com>
  <5C5C2B900200007800214A08@prv1-mh.provo.novell.com>
+ <c6657a1e-3f1c-3bd4-6d7a-b0ca761fb664@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1779225890808848563=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5C5C2B900200007800214A08@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <c6657a1e-3f1c-3bd4-6d7a-b0ca761fb664@citrix.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,247 +19,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1779225890808848563==
-Content-Type: multipart/alternative;
-	boundary="------------45242EE29C68B518179B102F"
-Content-Language: en-GB
-
---------------45242EE29C68B518179B102F
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 07/02/2019 12:58, Jan Beulich wrote:
->>>> On 06.02.19 at 21:41, <andrew.cooper3@citrix.com> wrote:
->> Slightly RFC:
->>
->> 1) I've not worked out exactly what the
->>
->>      v->vcpu_info = (void *)&d->shared_info->compat.vcpu_info[0];
->>
->>    line is supposed to be doing and whether it is needed, but it doesn't
->>    appear to matter.  It is perhaps another redundant opencoding.
-> Afaict this is just to be independent of the fact that the vcpu_info
-> array is first in struct shared_info. I'd be fine with it getting replaced
-> by a respective BUILD_BUG_ON(), but I'd like to ask that it not be
-> dropped without replacement.
-
-There is some ancillary logic with vcpu_info_mfn (which looks not to be
-initialised), which is why I suspect this is some more incorrect
-opencoding to begin with.
-
->
->> 2) The reported
->>
->>      Dom0 alloc.:   000000003e800000->000000003ec00000 (240470 pages to be allocated)
->>
->>    line changes by 1 page because of the alloc_domheap_page() moving ahead of
->>    the printk(), but I'm fairly sure this is benign.  There is a matching
->>    reduction in the length of the constructed m2p which is perhaps less
->>    benign.
-> Well, the M2P of course has to be correctly sized. An off-by-one would
-> likely result in hard to repro bug reports.
-
-The delta in output (with some of my own debugging) is:
-
-@@ -22,13 +22,13 @@
- (XEN)     p2m_base         = 0xffffffffffffffff
- (XEN)  Xen  kernel: 64-bit, lsb, compat32
- (XEN)  Dom0 kernel: 32-bit, PAE, lsb, paddr 0x100000 -> 0x112000
--(XEN) ** nr_pages 241494
-+(XEN) ** nr_pages 241493
- (XEN) PHYSICAL MEMORY ARRANGEMENT:
--(XEN)  Dom0 alloc.:   000000003e800000->000000003ec00000 (240470 pages to be allocated) (tot 1024, nr 241494)
-+(XEN)  Dom0 alloc.:   000000003e800000->000000003ec00000 (240469 pages to be allocated) (tot 1024, nr 241493)
- (XEN) VIRTUAL MEMORY ARRANGEMENT:
- (XEN)  Loaded kernel: 0000000000100000->0000000000112000
- (XEN)  Init. ramdisk: 0000000000112000->0000000000112000
--(XEN)  Phys-Mach map: 0000000000112000->00000000001fdd58
-+(XEN)  Phys-Mach map: 0000000000112000->00000000001fdd54
- (XEN)  Start info:    00000000001fe000->00000000001fe4b4
- (XEN)  Xenstore ring: 0000000000000000->0000000000000000
- (XEN)  Console ring:  0000000000000000->0000000000000000
-
-I meant the P2M rather than M2P, and it is different by 1 entry which is
-expected, given the change by 1 page.  I've positively identified the
-1-page change to be the alloc_domheap_page() for the monitor table moving.
-
->
->> @@ -606,23 +598,14 @@ int __init dom0_construct_pv(struct domain *d,
->>      {
->>          maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l4_page_table;
->>          l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
->> +        clear_page(l4tab);
->> +        init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
->> +                          d, INVALID_MFN, true);
->> +        v->arch.guest_table = pagetable_from_paddr(__pa(l4start));
->>      }
->>      else
->> -    {
->> -        page = alloc_domheap_page(d, MEMF_no_owner | MEMF_no_scrub);
->> -        if ( !page )
->> -            panic("Not enough RAM for domain 0 PML4\n");
->> -        page->u.inuse.type_info = PGT_l4_page_table|PGT_validated|1;
->> -        l4start = l4tab = page_to_virt(page);
->> -        maddr_to_page(mpt_alloc)->u.inuse.type_info = PGT_l3_page_table;
->> -        l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-> This one is lost without replacement, but is needed. Commit
-> 7a9d764630 ("x86/32-on-64: adjust Dom0 initial page table layout")
-> specifically introduced it to make sure the guest-perceived top level
-> page table is allocated first (and hence marks the beginning of the
-> boot page tables, so Dom0 can later put all of them into general use).
-
-I did call this out specifically in the commit message.  I had no idea
-about that commit when editing the code, but I still don't understand
-why it is important that the guests top level needs to be first.
-
-~Andrew
-
---------------45242EE29C68B518179B102F
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 07/02/2019 12:58, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5C5C2B900200007800214A08@prv1-mh.provo.novell.com">
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">On 06.02.19 at 21:41, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
-</pre>
-          </blockquote>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">Slightly RFC:
-
-1) I've not worked out exactly what the
-
-     v-&gt;vcpu_info = (void *)&amp;d-&gt;shared_info-&gt;compat.vcpu_info[0];
-
-   line is supposed to be doing and whether it is needed, but it doesn't
-   appear to matter.  It is perhaps another redundant opencoding.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Afaict this is just to be independent of the fact that the vcpu_info
-array is first in struct shared_info. I'd be fine with it getting replaced
-by a respective BUILD_BUG_ON(), but I'd like to ask that it not be
-dropped without replacement.</pre>
-    </blockquote>
-    <br>
-    There is some ancillary logic with vcpu_info_mfn (which looks not to
-    be initialised), which is why I suspect this is some more incorrect
-    opencoding to begin with.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:5C5C2B900200007800214A08@prv1-mh.provo.novell.com">
-      <pre class="moz-quote-pre" wrap="">
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">2) The reported
-
-     Dom0 alloc.:   000000003e800000-&gt;000000003ec00000 (240470 pages to be allocated)
-
-   line changes by 1 page because of the alloc_domheap_page() moving ahead of
-   the printk(), but I'm fairly sure this is benign.  There is a matching
-   reduction in the length of the constructed m2p which is perhaps less
-   benign.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Well, the M2P of course has to be correctly sized. An off-by-one would
-likely result in hard to repro bug reports.</pre>
-    </blockquote>
-    <br>
-    The delta in output (with some of my own debugging) is:<br>
-    <br>
-    <pre>@@ -22,13 +22,13 @@
- (XEN)     p2m_base         = 0xffffffffffffffff
- (XEN)  Xen  kernel: 64-bit, lsb, compat32
- (XEN)  Dom0 kernel: 32-bit, PAE, lsb, paddr 0x100000 -&gt; 0x112000
--(XEN) ** nr_pages 241494
-+(XEN) ** nr_pages 241493
- (XEN) PHYSICAL MEMORY ARRANGEMENT:
--(XEN)  Dom0 alloc.:   000000003e800000-&gt;000000003ec00000 (240470 pages to be allocated) (tot 1024, nr 241494)
-+(XEN)  Dom0 alloc.:   000000003e800000-&gt;000000003ec00000 (240469 pages to be allocated) (tot 1024, nr 241493)
- (XEN) VIRTUAL MEMORY ARRANGEMENT:
- (XEN)  Loaded kernel: 0000000000100000-&gt;0000000000112000
- (XEN)  Init. ramdisk: 0000000000112000-&gt;0000000000112000
--(XEN)  Phys-Mach map: 0000000000112000-&gt;00000000001fdd58
-+(XEN)  Phys-Mach map: 0000000000112000-&gt;00000000001fdd54
- (XEN)  Start info:    00000000001fe000-&gt;00000000001fe4b4
- (XEN)  Xenstore ring: 0000000000000000-&gt;0000000000000000
- (XEN)  Console ring:  0000000000000000-&gt;0000000000000000
-
-</pre>
-    I meant the P2M rather than M2P, and it is different by 1 entry
-    which is expected, given the change by 1 page.  I've positively
-    identified the 1-page change to be the alloc_domheap_page() for the
-    monitor table moving.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:5C5C2B900200007800214A08@prv1-mh.provo.novell.com">
-      <pre class="moz-quote-pre" wrap="">
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">@@ -606,23 +598,14 @@ int __init dom0_construct_pv(struct domain *d,
-     {
-         maddr_to_page(mpt_alloc)-&gt;u.inuse.type_info = PGT_l4_page_table;
-         l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-+        clear_page(l4tab);
-+        init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
-+                          d, INVALID_MFN, true);
-+        v-&gt;arch.guest_table = pagetable_from_paddr(__pa(l4start));
-     }
-     else
--    {
--        page = alloc_domheap_page(d, MEMF_no_owner | MEMF_no_scrub);
--        if ( !page )
--            panic("Not enough RAM for domain 0 PML4\n");
--        page-&gt;u.inuse.type_info = PGT_l4_page_table|PGT_validated|1;
--        l4start = l4tab = page_to_virt(page);
--        maddr_to_page(mpt_alloc)-&gt;u.inuse.type_info = PGT_l3_page_table;
--        l3start = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-This one is lost without replacement, but is needed. Commit
-7a9d764630 ("x86/32-on-64: adjust Dom0 initial page table layout")
-specifically introduced it to make sure the guest-perceived top level
-page table is allocated first (and hence marks the beginning of the
-boot page tables, so Dom0 can later put all of them into general use).</pre>
-    </blockquote>
-    <br>
-    I did call this out specifically in the commit message.  I had no
-    idea about that commit when editing the code, but I still don't
-    understand why it is important that the guests top level needs to be
-    first.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------45242EE29C68B518179B102F--
-
-
---===============1779225890808848563==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1779225890808848563==--
+T24gMDcvMDIvMjAxOSAxNDoyOSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwNy8wMi8yMDE5
+IDEyOjU4LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gT24gMDYuMDIuMTkgYXQgMjE6NDEsIDxh
+bmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4+IFNsaWdodGx5IFJGQzoKPj4+Cj4+
+PiAxKSBJJ3ZlIG5vdCB3b3JrZWQgb3V0IGV4YWN0bHkgd2hhdCB0aGUKPj4+Cj4+PiAgICAgIHYt
+PnZjcHVfaW5mbyA9ICh2b2lkICopJmQtPnNoYXJlZF9pbmZvLT5jb21wYXQudmNwdV9pbmZvWzBd
+Owo+Pj4KPj4+ICAgIGxpbmUgaXMgc3VwcG9zZWQgdG8gYmUgZG9pbmcgYW5kIHdoZXRoZXIgaXQg
+aXMgbmVlZGVkLCBidXQgaXQgZG9lc24ndAo+Pj4gICAgYXBwZWFyIHRvIG1hdHRlci4gIEl0IGlz
+IHBlcmhhcHMgYW5vdGhlciByZWR1bmRhbnQgb3BlbmNvZGluZy4KPj4gQWZhaWN0IHRoaXMgaXMg
+anVzdCB0byBiZSBpbmRlcGVuZGVudCBvZiB0aGUgZmFjdCB0aGF0IHRoZSB2Y3B1X2luZm8KPj4g
+YXJyYXkgaXMgZmlyc3QgaW4gc3RydWN0IHNoYXJlZF9pbmZvLiBJJ2QgYmUgZmluZSB3aXRoIGl0
+IGdldHRpbmcgcmVwbGFjZWQKPj4gYnkgYSByZXNwZWN0aXZlIEJVSUxEX0JVR19PTigpLCBidXQg
+SSdkIGxpa2UgdG8gYXNrIHRoYXQgaXQgbm90IGJlCj4+IGRyb3BwZWQgd2l0aG91dCByZXBsYWNl
+bWVudC4KPiAKPiBUaGVyZSBpcyBzb21lIGFuY2lsbGFyeSBsb2dpYyB3aXRoIHZjcHVfaW5mb19t
+Zm4gKHdoaWNoIGxvb2tzIG5vdCB0byBiZQo+IGluaXRpYWxpc2VkKSwgd2hpY2ggaXMgd2h5IEkg
+c3VzcGVjdCB0aGlzIGlzIHNvbWUgbW9yZSBpbmNvcnJlY3QKPiBvcGVuY29kaW5nIHRvIGJlZ2lu
+IHdpdGguCj4gCj4+PiAyKSBUaGUgcmVwb3J0ZWQKPj4+Cj4+PiAgICAgIERvbTAgYWxsb2MuOiAg
+IDAwMDAwMDAwM2U4MDAwMDAtPjAwMDAwMDAwM2VjMDAwMDAgKDI0MDQ3MCBwYWdlcyB0byBiZSBh
+bGxvY2F0ZWQpCj4+Pgo+Pj4gICAgbGluZSBjaGFuZ2VzIGJ5IDEgcGFnZSBiZWNhdXNlIG9mIHRo
+ZSBhbGxvY19kb21oZWFwX3BhZ2UoKSBtb3ZpbmcgYWhlYWQgb2YKPj4+ICAgIHRoZSBwcmludGso
+KSwgYnV0IEknbSBmYWlybHkgc3VyZSB0aGlzIGlzIGJlbmlnbi4gIFRoZXJlIGlzIGEgbWF0Y2hp
+bmcKPj4+ICAgIHJlZHVjdGlvbiBpbiB0aGUgbGVuZ3RoIG9mIHRoZSBjb25zdHJ1Y3RlZCBtMnAg
+d2hpY2ggaXMgcGVyaGFwcyBsZXNzCj4+PiAgICBiZW5pZ24uCj4+IFdlbGwsIHRoZSBNMlAgb2Yg
+Y291cnNlIGhhcyB0byBiZSBjb3JyZWN0bHkgc2l6ZWQuIEFuIG9mZi1ieS1vbmUgd291bGQKPj4g
+bGlrZWx5IHJlc3VsdCBpbiBoYXJkIHRvIHJlcHJvIGJ1ZyByZXBvcnRzLgo+IAo+IFRoZSBkZWx0
+YSBpbiBvdXRwdXQgKHdpdGggc29tZSBvZiBteSBvd24gZGVidWdnaW5nKSBpczoKPiAKPiBAQCAt
+MjIsMTMgKzIyLDEzIEBACj4gIChYRU4pICAgICBwMm1fYmFzZSAgICAgICAgID0gMHhmZmZmZmZm
+ZmZmZmZmZmZmCj4gIChYRU4pICBYZW4gIGtlcm5lbDogNjQtYml0LCBsc2IsIGNvbXBhdDMyCj4g
+IChYRU4pICBEb20wIGtlcm5lbDogMzItYml0LCBQQUUsIGxzYiwgcGFkZHIgMHgxMDAwMDAgLT4g
+MHgxMTIwMDAKPiAtKFhFTikgKiogbnJfcGFnZXMgMjQxNDk0Cj4gKyhYRU4pICoqIG5yX3BhZ2Vz
+IDI0MTQ5Mwo+ICAoWEVOKSBQSFlTSUNBTCBNRU1PUlkgQVJSQU5HRU1FTlQ6Cj4gLShYRU4pICBE
+b20wIGFsbG9jLjogICAwMDAwMDAwMDNlODAwMDAwLT4wMDAwMDAwMDNlYzAwMDAwICgyNDA0NzAg
+cGFnZXMgdG8gYmUgYWxsb2NhdGVkKSAodG90IDEwMjQsIG5yIDI0MTQ5NCkKPiArKFhFTikgIERv
+bTAgYWxsb2MuOiAgIDAwMDAwMDAwM2U4MDAwMDAtPjAwMDAwMDAwM2VjMDAwMDAgKDI0MDQ2OSBw
+YWdlcyB0byBiZSBhbGxvY2F0ZWQpICh0b3QgMTAyNCwgbnIgMjQxNDkzKQo+ICAoWEVOKSBWSVJU
+VUFMIE1FTU9SWSBBUlJBTkdFTUVOVDoKPiAgKFhFTikgIExvYWRlZCBrZXJuZWw6IDAwMDAwMDAw
+MDAxMDAwMDAtPjAwMDAwMDAwMDAxMTIwMDAKPiAgKFhFTikgIEluaXQuIHJhbWRpc2s6IDAwMDAw
+MDAwMDAxMTIwMDAtPjAwMDAwMDAwMDAxMTIwMDAKPiAtKFhFTikgIFBoeXMtTWFjaCBtYXA6IDAw
+MDAwMDAwMDAxMTIwMDAtPjAwMDAwMDAwMDAxZmRkNTgKPiArKFhFTikgIFBoeXMtTWFjaCBtYXA6
+IDAwMDAwMDAwMDAxMTIwMDAtPjAwMDAwMDAwMDAxZmRkNTQKPiAgKFhFTikgIFN0YXJ0IGluZm86
+ICAgIDAwMDAwMDAwMDAxZmUwMDAtPjAwMDAwMDAwMDAxZmU0YjQKPiAgKFhFTikgIFhlbnN0b3Jl
+IHJpbmc6IDAwMDAwMDAwMDAwMDAwMDAtPjAwMDAwMDAwMDAwMDAwMDAKPiAgKFhFTikgIENvbnNv
+bGUgcmluZzogIDAwMDAwMDAwMDAwMDAwMDAtPjAwMDAwMDAwMDAwMDAwMDAKPiAKPiBJIG1lYW50
+IHRoZSBQMk0gcmF0aGVyIHRoYW4gTTJQLCBhbmQgaXQgaXMgZGlmZmVyZW50IGJ5IDEgZW50cnkg
+d2hpY2ggaXMKPiBleHBlY3RlZCwgZ2l2ZW4gdGhlIGNoYW5nZSBieSAxIHBhZ2UuwqAgSSd2ZSBw
+b3NpdGl2ZWx5IGlkZW50aWZpZWQgdGhlCj4gMS1wYWdlIGNoYW5nZSB0byBiZSB0aGUgYWxsb2Nf
+ZG9taGVhcF9wYWdlKCkgZm9yIHRoZSBtb25pdG9yIHRhYmxlIG1vdmluZy4KPiAKPj4+IEBAIC02
+MDYsMjMgKzU5OCwxNCBAQCBpbnQgX19pbml0IGRvbTBfY29uc3RydWN0X3B2KHN0cnVjdCBkb21h
+aW4gKmQsCj4+PiAgICAgIHsKPj4+ICAgICAgICAgIG1hZGRyX3RvX3BhZ2UobXB0X2FsbG9jKS0+
+dS5pbnVzZS50eXBlX2luZm8gPSBQR1RfbDRfcGFnZV90YWJsZTsKPj4+ICAgICAgICAgIGw0c3Rh
+cnQgPSBsNHRhYiA9IF9fdmEobXB0X2FsbG9jKTsgbXB0X2FsbG9jICs9IFBBR0VfU0laRTsKPj4+
+ICsgICAgICAgIGNsZWFyX3BhZ2UobDR0YWIpOwo+Pj4gKyAgICAgICAgaW5pdF94ZW5fbDRfc2xv
+dHMobDR0YWIsIF9tZm4odmlydF90b19tZm4obDRzdGFydCkpLAo+Pj4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgICAgZCwgSU5WQUxJRF9NRk4sIHRydWUpOwo+Pj4gKyAgICAgICAgdi0+YXJjaC5n
+dWVzdF90YWJsZSA9IHBhZ2V0YWJsZV9mcm9tX3BhZGRyKF9fcGEobDRzdGFydCkpOwo+Pj4gICAg
+ICB9Cj4+PiAgICAgIGVsc2UKPj4+IC0gICAgewo+Pj4gLSAgICAgICAgcGFnZSA9IGFsbG9jX2Rv
+bWhlYXBfcGFnZShkLCBNRU1GX25vX293bmVyIHwgTUVNRl9ub19zY3J1Yik7Cj4+PiAtICAgICAg
+ICBpZiAoICFwYWdlICkKPj4+IC0gICAgICAgICAgICBwYW5pYygiTm90IGVub3VnaCBSQU0gZm9y
+IGRvbWFpbiAwIFBNTDRcbiIpOwo+Pj4gLSAgICAgICAgcGFnZS0+dS5pbnVzZS50eXBlX2luZm8g
+PSBQR1RfbDRfcGFnZV90YWJsZXxQR1RfdmFsaWRhdGVkfDE7Cj4+PiAtICAgICAgICBsNHN0YXJ0
+ID0gbDR0YWIgPSBwYWdlX3RvX3ZpcnQocGFnZSk7Cj4+PiAtICAgICAgICBtYWRkcl90b19wYWdl
+KG1wdF9hbGxvYyktPnUuaW51c2UudHlwZV9pbmZvID0gUEdUX2wzX3BhZ2VfdGFibGU7Cj4+PiAt
+ICAgICAgICBsM3N0YXJ0ID0gX192YShtcHRfYWxsb2MpOyBtcHRfYWxsb2MgKz0gUEFHRV9TSVpF
+Owo+PiBUaGlzIG9uZSBpcyBsb3N0IHdpdGhvdXQgcmVwbGFjZW1lbnQsIGJ1dCBpcyBuZWVkZWQu
+IENvbW1pdAo+PiA3YTlkNzY0NjMwICgieDg2LzMyLW9uLTY0OiBhZGp1c3QgRG9tMCBpbml0aWFs
+IHBhZ2UgdGFibGUgbGF5b3V0IikKPj4gc3BlY2lmaWNhbGx5IGludHJvZHVjZWQgaXQgdG8gbWFr
+ZSBzdXJlIHRoZSBndWVzdC1wZXJjZWl2ZWQgdG9wIGxldmVsCj4+IHBhZ2UgdGFibGUgaXMgYWxs
+b2NhdGVkIGZpcnN0IChhbmQgaGVuY2UgbWFya3MgdGhlIGJlZ2lubmluZyBvZiB0aGUKPj4gYm9v
+dCBwYWdlIHRhYmxlcywgc28gRG9tMCBjYW4gbGF0ZXIgcHV0IGFsbCBvZiB0aGVtIGludG8gZ2Vu
+ZXJhbCB1c2UpLgo+IAo+IEkgZGlkIGNhbGwgdGhpcyBvdXQgc3BlY2lmaWNhbGx5IGluIHRoZSBj
+b21taXQgbWVzc2FnZS7CoCBJIGhhZCBubyBpZGVhCj4gYWJvdXQgdGhhdCBjb21taXQgd2hlbiBl
+ZGl0aW5nIHRoZSBjb2RlLCBidXQgSSBzdGlsbCBkb24ndCB1bmRlcnN0YW5kCj4gd2h5IGl0IGlz
+IGltcG9ydGFudCB0aGF0IHRoZSBndWVzdHMgdG9wIGxldmVsIG5lZWRzIHRvIGJlIGZpcnN0LgoK
+SW4gdGhlIExpbnV4IGtlcm5lbCBJIGhhdmUgdGhlIGZvbGxvd2luZyBjb21tZW50IGZvciAzMi1i
+aXQgUFYgZ3Vlc3RzOgoKLyoKICogRm9yIDMyIGJpdCBkb21haW5zIHhlbl9zdGFydF9pbmZvLT5w
+dF9iYXNlIGlzIHRoZSBwZ2QgYWRkcmVzcyB3aGljaAptaWdodCBiZQogKiBub3QgdGhlIGZpcnN0
+IHBhZ2UgdGFibGUgaW4gdGhlIHBhZ2UgdGFibGUgcG9vbC4KICogSXRlcmF0ZSB0aHJvdWdoIHRo
+ZSBpbml0aWFsIHBhZ2UgdGFibGVzIHRvIGZpbmQgdGhlIHJlYWwgcGFnZSB0YWJsZSBiYXNlLgog
+Ki8KCkRvZXMgdGhpcyBoZWxwIHNvbWVob3c/CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
