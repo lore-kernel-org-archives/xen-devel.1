@@ -1,53 +1,23 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
-Date: Thu, 07 Feb 2019 07:51:03 -0700
-Message-ID: <5C5C45D70200007800214AE8@prv1-mh.provo.novell.com>
-References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
- <529ED2F90200004D00417A66@prv1-mh.provo.novell.com>
- <5C406AEA020000780020E9FA@prv1-mh.provo.novell.com>
- <76A2DEED0200005600417A66@prv1-mh.provo.novell.com>
- <5C41A256020000780020EF25@prv1-mh.provo.novell.com>
- <5A96F2FD0200008D00417A66@prv1-mh.provo.novell.com>
- <58377FAD0200004688BF86FB@prv1-mh.provo.novell.com>
- <5C4599C2020000780020F9D6@prv1-mh.provo.novell.com>
- <23643.13.22252.324537@mariner.uk.xensource.com>
- <58B0ADFB020000D800417A66@prv1-mh.provo.novell.com>
- <27086E4A0200006A88BF86FB@prv1-mh.provo.novell.com>
- <5C3C63E0020000780020D22C@prv1-mh.provo.novell.com>
- <7A8C0A4F020000EEB8D7C7D4@prv1-mh.provo.novell.com>
- <5C5B09910200007800214659@prv1-mh.provo.novell.com>
- <23643.3403.803290.647664@mariner.uk.xensource.com>
- <08D440470200001BB8D7C7D4@prv1-mh.provo.novell.com>
- <5C5B0F9D0200007800214692@prv1-mh.provo.novell.com>
- <23643.4305.505749.803438@mariner.uk.xensource.com>
- <alpine.DEB.2.10.1902061318050.2723@sstabellini-ThinkPad-X260>
- <23644.6915.12943.72736@mariner.uk.xensource.com>
- <5C3F051B020000780020E304@prv1-mh.provo.novell.com>
- <529ED2F90200004D00417A66@prv1-mh.provo.novell.com>
- <5C406AEA020000780020E9FA@prv1-mh.provo.novell.com>
- <76A2DEED0200005600417A66@prv1-mh.provo.novell.com>
- <5C41A256020000780020EF25@prv1-mh.provo.novell.com>
- <5A96F2FD0200008D00417A66@prv1-mh.provo.novell.com>
- <58377FAD0200004688BF86FB@prv1-mh.provo.novell.com>
- <5C4599C2020000780020F9D6@prv1-mh.provo.novell.com>
- <7A8C0A4F020000EEB8D7C7D4@prv1-mh.provo.novell.com>
- <5C5B09910200007800214659@prv1-mh.provo.novell.com>
- <08D440470200001BB8D7C7D4@prv1-mh.provo.novell.com>
- <5C5B0F9D0200007800214692@prv1-mh.provo.novell.com>
- <C8F95655020000CAB8D7C7D4@prv1-mh.provo.novell.com>
- <5867EFE6020000DB00417A66@prv1-mh.provo.novell.com>
- <DACE7A5F020000B1B8D7C7D4@prv1-mh.provo.novell.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v4 4/6] xen/x86: Allow stubdom access to irq
+ created for msi.
+Date: Thu, 7 Feb 2019 15:52:38 +0100
+Message-ID: <20190207145238.GX21228@mail-itl>
+References: <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
+ <f5bf6b245f91398e0235a7b603ebc08ef64135ab.1549498018.git-series.marmarek@invisiblethingslab.com>
+ <20190207095719.7r6mikq5ahdbw34p@mac>
+ <20190207132124.GW21228@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6574916834754844162=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=OuWe=QO=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1grl1D-0003I7-9Y
- for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 14:51:11 +0000
-In-Reply-To: <DACE7A5F020000B1B8D7C7D4@prv1-mh.provo.novell.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=OOdV=QO=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1grl2l-0003Md-8x
+ for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 14:52:47 +0000
+In-Reply-To: <20190207132124.GW21228@mail-itl>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,62 +26,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@gmail.com>, Julien Grall <julien.grall@arm.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA3LjAyLjE5IGF0IDEyOjQ4LCA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4gd3JvdGU6
-Cj4gU3RlZmFubyBTdGFiZWxsaW5pIHdyaXRlcyAoIlJlOiBbWGVuLWRldmVsXSBbUEFUQ0ggdjYg
-MS80XSB4ZW46IGludHJvZHVjZSAKPiBTWU1CT0wiKToKPj4gSSBhbSBPSyB3aXRoIHRoaXMgYXBw
-cm9hY2guIE1heWJlIG5vdCB0aGUgYmVzdCBJTU8sIGJ1dCBnb29kIGVub3VnaC4gSXQKPj4gc2hv
-dWxkIGFsc28gc2F0aXNmeSB0aGUgTUlTUkFDIGd1eXMsIGFzIHRoZXkgd3JvdGUgImlkZWFsbHkg
-Y2FzdCB0bwo+PiB1aW50cHRyX3Qgb25seSBvbmNlIjogaGVyZSB3ZSB3b3VsZG4ndCBiZSBjYXN0
-aW5nIG9ubHkgb25jZSwgYnV0IGF0Cj4+IGxlYXN0IHdlIHdvdWxkIGRvIGl0IGluc2lkZSBhIHNp
-bmdsZSB3ZWxsLWRlZmluZWQgbWFjcm8uCj4gCj4gUmlnaHQuICBJIHRoaW5rIGl0IG1lZXRzIHRo
-ZSBnb2FscyBvZiBNSVNSQS1DLCBwcm9iYWJseSBiZXR0ZXIgdGhhbgo+IG1vc3Qgb3RoZXIgYXBw
-cm9hY2hlcy4KPiAKPiBGQU9ELCBJIHRoaW5rIHlvdSBzaG91bGQgZXhwZWN0IHBlb3BsZSB0byBk
-ZWNsYXJlIHRoZSBsaW5rZXIgc3ltYm9scwo+IGVpdGhlciBhcyBJIHN1Z2dlc3RlZDoKPiAKPiAg
-ICAgIGV4dGVybiBjb25zdCBzdHJ1Y3Qgd29tYmF0IF93b21iYXRzX3N0YXJ0W107Cj4gICAgICBl
-eHRlcm4gY29uc3Qgc3RydWN0IGFic3RyYWN0X3N5bWJvbCBfd29tYmF0c19lbmRbXTsKPiAKPiAo
-b3IgYWxvbmcgdGhlIGxpbmVzIG9mIEphbidzIHN1Z2dlc3Rpb24sIGJ1dCBmcmFua2x5IEkgdGhp
-bmsgdGhhdCBpcwo+IGdvaW5nIHRvIGJlIHRvbyBoYXJkIHRvIHNvcnQgb3V0IG5vdy4pCgpIbW0s
-IG5vdCBvdmVybHkgZGlmZmljdWx0IChhbmQgYSBtYWNybyBqdXN0IGJlY2F1c2UgdGhlcmUgYXJl
-IG5vCnRlbXBsYXRlcyBpbiBDKToKCiNkZWZpbmUgV0hBVEVWRVIodHlwZSwgbmFtZSwgcGZ4KSBc
-ClwKc3RydWN0IGFic3RyYWN0XyAjIyBuYW1lIHsgXAogICAgdHlwZSBfOyBcCn07IFwKXApleHRl
-cm4gY29uc3QgdHlwZSBwZnggIyMgX3N0YXJ0W107IFwKZXh0ZXJuIGNvbnN0IHN0cnVjdCBhYnN0
-cmFjdF8gIyMgbmFtZSBwZnggIyMgX2VuZFtdOyBcClwKc3RhdGljIGlubGluZSBfQm9vbCBuYW1l
-ICMjIF9sdCh0eXBlIGNvbnN0IHMxW10sIFwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBjb25zdCBzdHJ1Y3QgYWJzdHJhY3RfICMjIG5hbWUgczJbXSkgXAp7IFwKICAgIHJldHVybiAo
-dW5zaWduZWQgbG9uZylzMSA8ICh1bnNpZ25lZCBsb25nKXMyOyBcCn0gXApcCnN0YXRpYyBpbmxp
-bmUgbG9uZyBuYW1lICMjIF9kaWZmKHR5cGUgY29uc3QgczFbXSwgXAogICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgYWJzdHJhY3RfICMjIG5hbWUgczJbXSkgXAp7
-IFwKICAgIHJldHVybiAoKHVuc2lnbmVkIGxvbmcpczIgLSAodW5zaWduZWQgbG9uZylzMSkgLyBz
-aXplb2YoKnMxKTsgXAp9CgpXSEFURVZFUih1bnNpZ25lZCBjaGFyLCB1Y2hhciwgKQpXSEFURVZF
-Uihjb25zdCBzdHJ1Y3Qgc2NoZWR1bGVyICosIHNjaGVkdWxlciwgc2NoZWR1bGVycykKCi8qIEV4
-YW1wbGUgdXNhZ2UgKi8KCnVuc2lnbmVkIGxvbmcgaW1hZ2Vfc2l6ZSh2b2lkKQp7CiAgICByZXR1
-cm4gdWNoYXJfZGlmZihfc3RhcnQsIF9lbmQpOwp9Cgp2b2lkIGl0ZXJhdGVfc2NoZWR1bGVycyh2
-b2lkICgqZnVuYykoY29uc3Qgc3RydWN0IHNjaGVkdWxlciAqKSkKewogICAgY29uc3Qgc3RydWN0
-IHNjaGVkdWxlciAqY29uc3QgKnM7CgogICAgZm9yICggcyA9IHNjaGVkdWxlcnNfc3RhcnQ7IHNj
-aGVkdWxlcl9sdChzLCBzY2hlZHVsZXJzX2VuZCk7ICsrcyApCiAgICAgICAgZnVuYygqcyk7Cn0K
-CkkndmUgaW50ZW50aW9uYWxseSB1c2VkIHVuc2lnbmVkIGxvbmcgYW5kIF9Cb29sIHN1Y2ggdGhh
-dCB0aGUKZXhhbXBsZSB3b3VsZCBjb21waWxlIGNvbXBsZXRlbHkgc3RhbmRhbG9uZS4gVGhpcyBp
-c24ndCBtZWFuIHRvCmJlIHRoYXQgd2F5IGluIHdoYXRldmVyIHdvdWxkIGdvIGludG8gdGhlIGh5
-cGVydmlzb3Igb2YgY291cnNlLgoKQXMgeW91IGNhbiBzZWUgdHlwZSBzYWZldHkgZ2V0cyBhY2hp
-ZXZlZCB3aXRob3V0IGFueQpjb21wYXJpc29ucyBhdCBhbGwsIGhlbmNlIG5vdCBldmVuIHJhaXNp
-bmcgdGhlIFVCLW5lc3MgcXVlc3Rpb24uCkFzIHlvdSBjYW4gZnVydGhlciBzZWUgcGFzc2luZyBh
-cm91bmQgcG9pbnRlcnMgdG8gdGhlCmFic3RyYWN0Xyogc3RydWN0dXJlcyBpcyB3b3JraW5nIHF1
-aXRlIG9rYXksIHdoaWNoIGlzIHdoYXQgSQp3YXMgYWZ0ZXIgd2hlbiB0YWxraW5nIGFib3V0IHRo
-ZSB0eXBlIHNhZmV0eSBhc3BlY3QuCgpXaGV0aGVyIHRoZSBleHRlcm4gYXJyYXkgZGVjbGFyYXRp
-b25zIHdvdWxkIGJlIHBhcnQgb2YgdGhlCm1hY3JvIGlzIHRvIGJlIGRldGVybWluZWQuIE9uIG9u
-ZSBoYW5kIGRvaW5nIHNvIHRpZ2h0bHkgY291cGxlcwpzdGFydCBhbmQgZW5kIHN5bWJvbHMsIGku
-ZS4gdGhleSBjYW4ndCBiZSB1c2VkIGluIG5vbi1tYXRjaGluZwpwYWlycy4gT3RvaCB0aGlzIHRo
-ZW4gcmVxdWlyZXMgdG8gZGVjbGFyZSBhbmQgdXNlIGRpZmZlcmVudAoibmFtZSJzIHdoZW4gbXVs
-dGlwbGUgc3RhcnQvZW5kIHBhaXJzIHNoYXJlIHRoZWlyIGJhc2UgdHlwZXMuCkFuIG9wdGlvbiBt
-aWdodCBiZSB0byBoYXZlIHR3byBtYWNyb3MsIG9uZSB3aXRob3V0IHRoZSBkZWNscwphbmQgdGhl
-IG90aGVyIGhhdmluZyB0aGUgZGVjbHMgYW5kIGludm9raW5nIHRoZSBmaXJzdC4KCkFuZCBJIHRo
-aW5rIHlvdSBjYW4gZ3Vlc3MgdGhhdCBJJ3ZlIHVzZWQgV0hBVEVWRVIgYXMgYSBuYW1lCmJlY2F1
-c2UgSSBjb3VsZG4ndCByZWFsbHkgZmlndXJlIGEgZ29vZCBvbmUgKGFuZCBJIGFsc28gd2Fzbid0
-Cm92ZXJseSBoYXBweSB3aXRoIHZhcmlvdXMgbmFtZXMgSSBoYWQgc2VlbiBzbyBmYXIpLgoKSmFu
-CgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============6574916834754844162==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="+bDoS+V4AJZnUgoC"
+Content-Disposition: inline
+
+
+--+bDoS+V4AJZnUgoC
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 07, 2019 at 02:21:27PM +0100, Marek Marczykowski-G=C3=B3recki w=
+rote:
+> On Thu, Feb 07, 2019 at 10:57:19AM +0100, Roger Pau Monn=C3=A9 wrote:
+> > On Thu, Feb 07, 2019 at 01:07:47AM +0100, Marek Marczykowski-G=C3=B3rec=
+ki wrote:
+> > > From: Simon Gaiser <simon@invisiblethingslab.com>
+> > >=20
+> > > Stubdomains need to be given sufficient privilege over the guest whic=
+h it
+> > > provides emulation for in order for PCI passthrough to work correctly.
+> > > When a HVM domain try to enable MSI, QEMU in stubdomain calls
+> > > PHYSDEVOP_map_pirq, but later it needs to call XEN_DOMCTL_bind_pt_irq=
+ as
+> > > part of xc_domain_update_msi_irq. Allow for that as part of
+> > > PHYSDEVOP_map_pirq.
+> > >=20
+> > > This is not needed for PCI INTx, because IRQ in that case is known
+> > > beforehand and the stubdomain is given permissions over this IRQ by
+> > > libxl__device_pci_add (there's a do_pci_add against the stubdomain).
+> > >=20
+> > > Based on https://github.com/OpenXT/xenclient-oe/blob/5e0e7304a5a3c75e=
+f01240a1e3673665b2aaf05e/recipes-extended/xen/files/stubdomain-msi-irq-acce=
+ss.patch by Eric Chanudet <chanudete@ainfosec.com>.
+> > >=20
+> > > Signed-off-by: Simon Gaiser <simon@invisiblethingslab.com>
+> > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethi=
+ngslab.com>
+> > > ---
+> > > Changes in v3:
+> > >  - extend commit message
+> > > Changes in v4:
+> > >  - add missing destroy_irq on error path
+> > >=20
+> > > With this patch, stubdomain will be able to create and map multiple i=
+rq
+> > > (DoS possibility?), as only target domain is validated in practice. Is
+> > > that ok? If not, what additional limits could be applied here?
+> > > In INTx case the problem doesn't apply, because toolstack grant access
+> > > to particular IRQ and no allocation happen on stubdomain request. But=
+ in
+> > > MSI case, it isn't that easy as IRQ number isn't known before (as
+> > > explained in the commit message).
+> > > ---
+> > >  xen/arch/x86/irq.c     | 24 ++++++++++++++++++++++++
+> > >  xen/arch/x86/physdev.c |  9 +++++++++
+> > >  2 files changed, 33 insertions(+)
+> > >=20
+> > > diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
+> > > index 8b44d6c..5e5dcac 100644
+> > > --- a/xen/arch/x86/irq.c
+> > > +++ b/xen/arch/x86/irq.c
+> > > @@ -2674,6 +2674,22 @@ int allocate_and_map_msi_pirq(struct domain *d=
+, int index, int *pirq_p,
+> > >          {
+> > >      case MAP_PIRQ_TYPE_MULTI_MSI:
+> > >              irq =3D create_irq(NUMA_NO_NODE);
+> > > +            if ( !(irq < nr_irqs_gsi || irq >=3D nr_irqs) &&
+> > > +                    current->domain->target =3D=3D d )
+> > > +            {
+> > > +                ret =3D irq_permit_access(current->domain, irq);
+> > > +                if ( ret ) {
+> > > +                    dprintk(XENLOG_G_ERR,
+> > > +                            "dom%d: can't grant it's stubdom (%d) ac=
+cess to "
+> > > +                            "irq %d for msi: %d!\n",
+> > > +                            d->domain_id,
+> > > +                            current->domain->domain_id,
+> > > +                            irq,
+> > > +                            ret);
+> > > +                    destroy_irq(irq);
+> > > +                    return ret;
+> >=20
+> > I'm afraid his won't work for devices that support multiple MSI vectors.
+> > Note that map_domain_pirq also has a call to create_irq, and you are
+> > not adding the sutbdom permissions there.
+> >=20
+> > IMO, the safer way to fix this would be to modify create_irq and
+> > destroy_irq so that you give permissions to the subtdomain in the same
+> > place that hardware domain permissions are given. Note that you will
+> > have to change the function to take an extra domain parameter
+> > AFAICT.
+>=20
+> That may be a good idea, I'll try.
+
+Hmm, looking at the code, wouldn't it make sense to give device model
+domain access to the IRQ _instead of_ hardware domain? If stubdomain is
+in use, I don't see why dom0 would need access to that irq. Simply
+provide what the device model domain is as parameter - either
+hardware_domain, or stubdomain. Something like:
+
+    create_irq(..., current->domain->target =3D=3D d ? current->domain : ha=
+rdware_domain);
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--+bDoS+V4AJZnUgoC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxcRjYACgkQ24/THMrX
+1ywRBgf/W7fa89VrFbYQwOfYMX8bQpYu6JYgNlEe6ctLvGAiO0HpFt40P2JKhNEH
+gVjPc95rXEJ33JLLVbodPtZzY7Xm0RWNF5rz2UzXEFrYwZ6fTeTu3IM5uxNsEfJ8
+mGXtTxRqnOiURj95rL42R9Qy0BzBG0Cmc/wx9cNO6+7bxWXB6kic6fFsKLcL1XC8
+CkQRGByxvp4ntrTrzuJzFLbUXzTCNV95Y15nRxaBn5coQ1AAJNCGo8xanGIpBI5a
+SkSkwdKKs4WfIfWXj/viNGPlhKvf1zcwFLExwqA6YOvDZFzKMbEr5iZbtTtsGyUD
+89wVH8GcfDjEuCxlHWWhS+TUZc+D1A==
+=d+VH
+-----END PGP SIGNATURE-----
+
+--+bDoS+V4AJZnUgoC--
+
+
+--===============6574916834754844162==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6574916834754844162==--
