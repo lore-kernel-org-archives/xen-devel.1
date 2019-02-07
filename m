@@ -1,10 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] x86emul: avoid speculative out of bounds
- accesses
-Date: Thu, 7 Feb 2019 13:31:39 +0100
-Message-ID: <1788e882-06f5-98e6-c30d-60650fd82849@suse.com>
-References: <FCC26D720200001BB4B78B26@suse.com>
- <5C53056B0200007800212C9B@suse.com> <5C5C19950200007800214961@suse.com>
+Subject: Re: [PATCH] docs: Update credit/credit2 feature docs
+ reflecting new default scheduler
+Date: Thu, 7 Feb 2019 13:36:27 +0100
+Message-ID: <696fdac8-75c7-a731-75cd-0aac460e859a@suse.com>
+References: <20190207120858.32582-1-george.dunlap@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -13,9 +12,9 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=tb4s=QO=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1griqF-0006p9-3i
- for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 12:31:43 +0000
-In-Reply-To: <5C5C19950200007800214961@suse.com>
+ id 1griux-00071h-JV
+ for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 12:36:35 +0000
+In-Reply-To: <20190207120858.32582-1-george.dunlap@citrix.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,22 +24,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Norbert Manthey <nmanthey@amazon.de>, Roger Pau Monne <roger.pau@citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDcvMDIvMjAxOSAxMjo0MiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVGhlcmUgYXJlIGEgZmV3
-IGFycmF5IGFjY2Vzc2VzIGhlcmUgdGhlIGluZGV4ZXMgb2Ygd2hpY2ggYXJlIChhdCBsZWFzdAo+
-IGluZGlyZWN0bHkpIGRyaXZlbiBieSB0aGUgZ3Vlc3QuIFVzZSBhcnJheV9hY2Nlc3Nfbm9zcGVj
-KCkgdG8gYm91bmQKPiBzdWNoIGFjY2Vzc2VzLiBJbiB0aGUgeyxffWRlY29kZV9ncHIoKSBjYXNl
-cyByZXBsYWNlIGV4aXN0aW5nIGd1YXJkaW5nCj4gY29uc3RydWN0cy4KPiAKPiBUbyBkZWFsIHdp
-dGggYW4gb3RoZXJ3aXNlIG9jY3VycmluZyAjaW5jbHVkZSBjeWNsZSwgZHJvcCB0aGUgaW5jbHVz
-aW9uCj4gb2YgYXNtL3g4Nl9lbXVsYXRlLmggZnJvbSBhc20vcHJvY2Vzc29yLmguIFRoaXMgaW5j
-bHVkZSBoYWQgYmVlbgo+IGludHJvZHVjZWQgZm9yIG9idGFpbmluZyB0aGUgc3RydWN0IGNwdWlk
-X2xlYWYgZGVjbGFyYXRpb24sIHdoaWNoIGhhcwo+IHNpbmNlIG1vdmVkIGludG8gdGhlIHg4NiBo
-ZWxwZXIgbGlicmFyeS4KPiAKPiBUaGlzIGlzIHBhcnQgb2YgdGhlIHNwZWN1bGF0aXZlIGhhcmRl
-bmluZyBlZmZvcnQuCj4gCj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1
-c2UuY29tPgoKUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29t
-PgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDcvMDIvMjAxOSAxMzowOCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBTaWduZWQtb2ZmLWJ5
+OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CgpSZWxlYXNlLWFja2Vk
+LWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CgoKSnVlcmdlbgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
