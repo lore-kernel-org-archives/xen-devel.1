@@ -1,24 +1,15 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v4 4/6] xen/x86: Allow stubdom access to irq
- created for msi.
-Date: Thu, 7 Feb 2019 16:41:38 +0100
-Message-ID: <20190207154138.GY21228@mail-itl>
-References: <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
- <f5bf6b245f91398e0235a7b603ebc08ef64135ab.1549498018.git-series.marmarek@invisiblethingslab.com>
- <20190207095719.7r6mikq5ahdbw34p@mac>
- <20190207132124.GW21228@mail-itl> <20190207145238.GX21228@mail-itl>
- <20190207145754.t2pr4mlqjb2ohpqi@mac>
+From: Souptick Joarder <jrdr.linux@gmail.com>
+Subject: Re: [PATCHv2 1/9] mm: Introduce new vm_insert_range and
+ vm_insert_range_buggy API
+Date: Thu, 7 Feb 2019 21:19:47 +0530
+Message-ID: <CAFqt6za9xA_8OKiaaHXcO9go+RtPdjLY5Bz_fgQL+DZbermNhA__49111.727478315$1549554401$gmane$org@mail.gmail.com>
+References: <20190131030812.GA2174@jordon-HP-15-Notebook-PC>
+ <20190131083842.GE28876@rapoport-lnx>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3596729165028866186=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OOdV=QO=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1grloA-00005b-4i
- for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 15:41:46 +0000
-In-Reply-To: <20190207145754.t2pr4mlqjb2ohpqi@mac>
+In-Reply-To: <20190131083842.GE28876@rapoport-lnx>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,179 +18,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+To: Mike Rapoport <rppt@linux.ibm.com>
+Cc: Michal Hocko <mhocko@suse.com>, Heiko Stuebner <heiko@sntech.de>, Peter Zijlstra <peterz@infradead.org>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Linux-MM <linux-mm@kvack.org>, linux1394-devel@lists.sourceforge.net, Marek Szyprowski <m.szyprowski@samsung.com>, Stephen Rothwell <sfr@canb.auug.org.au>, oleksandr_andrushchenko@epam.com, joro@8bytes.org, Russell King - ARM Linux <linux@armlinux.org.uk>, Matthew Wilcox <willy@infradead.org>, airlied@linux.ie, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, treding@nvidia.com, linux-media@vger.kernel.org, Kees Cook <keescook@chromium.org>, pawel@osciak.com, Rik van Riel <riel@surriel.com>, iommu@lists.linux-foundation.org, rppt@linux.vnet.ibm.com, Boris Ostrovsky <boris.ostrovsky@oracle.com>, mchehab@kernel.org, iamjoonsoo.kim@lge.com, vbabka@suse.cz, Juergen Gross <jgross@suse.>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3596729165028866186==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="mvzZjokS1nTZS3h1"
-Content-Disposition: inline
-
-
---mvzZjokS1nTZS3h1
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Feb 07, 2019 at 03:57:54PM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Thu, Feb 07, 2019 at 03:52:38PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Thu, Feb 07, 2019 at 02:21:27PM +0100, Marek Marczykowski-G=C3=B3rec=
-ki wrote:
-> > > On Thu, Feb 07, 2019 at 10:57:19AM +0100, Roger Pau Monn=C3=A9 wrote:
-> > > > On Thu, Feb 07, 2019 at 01:07:47AM +0100, Marek Marczykowski-G=C3=
-=B3recki wrote:
-> > > > > From: Simon Gaiser <simon@invisiblethingslab.com>
-> > > > >=20
-> > > > > Stubdomains need to be given sufficient privilege over the guest =
-which it
-> > > > > provides emulation for in order for PCI passthrough to work corre=
-ctly.
-> > > > > When a HVM domain try to enable MSI, QEMU in stubdomain calls
-> > > > > PHYSDEVOP_map_pirq, but later it needs to call XEN_DOMCTL_bind_pt=
-_irq as
-> > > > > part of xc_domain_update_msi_irq. Allow for that as part of
-> > > > > PHYSDEVOP_map_pirq.
-> > > > >=20
-> > > > > This is not needed for PCI INTx, because IRQ in that case is known
-> > > > > beforehand and the stubdomain is given permissions over this IRQ =
-by
-> > > > > libxl__device_pci_add (there's a do_pci_add against the stubdomai=
-n).
-> > > > >=20
-> > > > > Based on https://github.com/OpenXT/xenclient-oe/blob/5e0e7304a5a3=
-c75ef01240a1e3673665b2aaf05e/recipes-extended/xen/files/stubdomain-msi-irq-=
-access.patch by Eric Chanudet <chanudete@ainfosec.com>.
-> > > > >=20
-> > > > > Signed-off-by: Simon Gaiser <simon@invisiblethingslab.com>
-> > > > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisibl=
-ethingslab.com>
-> > > > > ---
-> > > > > Changes in v3:
-> > > > >  - extend commit message
-> > > > > Changes in v4:
-> > > > >  - add missing destroy_irq on error path
-> > > > >=20
-> > > > > With this patch, stubdomain will be able to create and map multip=
-le irq
-> > > > > (DoS possibility?), as only target domain is validated in practic=
-e. Is
-> > > > > that ok? If not, what additional limits could be applied here?
-> > > > > In INTx case the problem doesn't apply, because toolstack grant a=
-ccess
-> > > > > to particular IRQ and no allocation happen on stubdomain request.=
- But in
-> > > > > MSI case, it isn't that easy as IRQ number isn't known before (as
-> > > > > explained in the commit message).
-> > > > > ---
-> > > > >  xen/arch/x86/irq.c     | 24 ++++++++++++++++++++++++
-> > > > >  xen/arch/x86/physdev.c |  9 +++++++++
-> > > > >  2 files changed, 33 insertions(+)
-> > > > >=20
-> > > > > diff --git a/xen/arch/x86/irq.c b/xen/arch/x86/irq.c
-> > > > > index 8b44d6c..5e5dcac 100644
-> > > > > --- a/xen/arch/x86/irq.c
-> > > > > +++ b/xen/arch/x86/irq.c
-> > > > > @@ -2674,6 +2674,22 @@ int allocate_and_map_msi_pirq(struct domai=
-n *d, int index, int *pirq_p,
-> > > > >          {
-> > > > >      case MAP_PIRQ_TYPE_MULTI_MSI:
-> > > > >              irq =3D create_irq(NUMA_NO_NODE);
-> > > > > +            if ( !(irq < nr_irqs_gsi || irq >=3D nr_irqs) &&
-> > > > > +                    current->domain->target =3D=3D d )
-> > > > > +            {
-> > > > > +                ret =3D irq_permit_access(current->domain, irq);
-> > > > > +                if ( ret ) {
-> > > > > +                    dprintk(XENLOG_G_ERR,
-> > > > > +                            "dom%d: can't grant it's stubdom (%d=
-) access to "
-> > > > > +                            "irq %d for msi: %d!\n",
-> > > > > +                            d->domain_id,
-> > > > > +                            current->domain->domain_id,
-> > > > > +                            irq,
-> > > > > +                            ret);
-> > > > > +                    destroy_irq(irq);
-> > > > > +                    return ret;
-> > > >=20
-> > > > I'm afraid his won't work for devices that support multiple MSI vec=
-tors.
-> > > > Note that map_domain_pirq also has a call to create_irq, and you are
-> > > > not adding the sutbdom permissions there.
-> > > >=20
-> > > > IMO, the safer way to fix this would be to modify create_irq and
-> > > > destroy_irq so that you give permissions to the subtdomain in the s=
-ame
-> > > > place that hardware domain permissions are given. Note that you will
-> > > > have to change the function to take an extra domain parameter
-> > > > AFAICT.
-> > >=20
-> > > That may be a good idea, I'll try.
-> >=20
-> > Hmm, looking at the code, wouldn't it make sense to give device model
-> > domain access to the IRQ _instead of_ hardware domain? If stubdomain is
-> > in use, I don't see why dom0 would need access to that irq. Simply
-> > provide what the device model domain is as parameter - either
-> > hardware_domain, or stubdomain. Something like:
-> >=20
-> >     create_irq(..., current->domain->target =3D=3D d ? current->domain =
-: hardware_domain);
->=20
-> Isn't there some cleanup that likely needs to be done by dom0 if it's
-> not done by the stubdom, or in case the stubdom crashes for some
-> reason?
-
-I don't think toolstack know anything about IRQs allocated by device
-model, looks like it does cleanup only for INTx interrupts.
-
-> Or maybe that's already done on domain destruction by Xen itself, in
-> which case not giving permissions to dom0 would be fine.
-
-There is free_domain_pirqs() call in arch_domain_destroy(). But I don't
-have device model reference there. Is there a way to get target ->
-stubdomain mapping (other than iterating over all the domains)? I see
-also domain->target field, which is the other way around.
-The only thing needed is irq_deny_access() call there (in case of domain
-ID reuse). Since such IRQs are not mapped to stubdomain itself,
-free_domain_pirqs() for stubdomain will not clean this up.
-Or maybe, _if stubdomain is guaranteed to be destroyed before its
-target_, we can iterate over target domain's IRQs during stubdomain
-destruction for this purpose?
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---mvzZjokS1nTZS3h1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxcUbIACgkQ24/THMrX
-1yzb2Qf+P4GkpjABw5+3/0c6830QVPzjpgVNB2IdkmlP69lpUjdyqc7XU88rZ4Yr
-bx2XZTn4k6qP48dy1ob0221915PjuulYb8ytcGY0m4hpETVV9GmM8JQfP4/1kImw
-tuvvwOLxZgZLhodB6eExf8SgHq8vNz/VPDwpZJ8uvI39UTTbxBnPBzc9btfQAFLy
-0jjo0/jJ/3L5GXFjjWYvAQIoUDzB6QEnOY6q9EAj2z30ThdbKIDlPTP9KaV7wOSf
-LoTK/at8XCMJyDkGSkzpYwrQm2Luh3u/ue8DpfD7aEUSJaGb8AxpB//FlNa+bbQh
-ID+NnpjzSrlp+mtGQXbysfKQISKPuQ==
-=EHQc
------END PGP SIGNATURE-----
-
---mvzZjokS1nTZS3h1--
-
-
---===============3596729165028866186==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3596729165028866186==--
+SGkgTWlrZSwKCk9uIFRodSwgSmFuIDMxLCAyMDE5IGF0IDI6MDkgUE0gTWlrZSBSYXBvcG9ydCA8
+cnBwdEBsaW51eC5pYm0uY29tPiB3cm90ZToKPgo+IE9uIFRodSwgSmFuIDMxLCAyMDE5IGF0IDA4
+OjM4OjEyQU0gKzA1MzAsIFNvdXB0aWNrIEpvYXJkZXIgd3JvdGU6Cj4gPiBQcmV2aW91bHkgZHJp
+dmVycyBoYXZlIHRoZWlyIG93biB3YXkgb2YgbWFwcGluZyByYW5nZSBvZgo+ID4ga2VybmVsIHBh
+Z2VzL21lbW9yeSBpbnRvIHVzZXIgdm1hIGFuZCB0aGlzIHdhcyBkb25lIGJ5Cj4gPiBpbnZva2lu
+ZyB2bV9pbnNlcnRfcGFnZSgpIHdpdGhpbiBhIGxvb3AuCj4gPgo+ID4gQXMgdGhpcyBwYXR0ZXJu
+IGlzIGNvbW1vbiBhY3Jvc3MgZGlmZmVyZW50IGRyaXZlcnMsIGl0IGNhbgo+ID4gYmUgZ2VuZXJh
+bGl6ZWQgYnkgY3JlYXRpbmcgbmV3IGZ1bmN0aW9ucyBhbmQgdXNlIGl0IGFjcm9zcwo+ID4gdGhl
+IGRyaXZlcnMuCj4gPgo+ID4gdm1faW5zZXJ0X3JhbmdlKCkgaXMgdGhlIEFQSSB3aGljaCBjb3Vs
+ZCBiZSB1c2VkIHRvIG1hcHBlZAo+ID4ga2VybmVsIG1lbW9yeS9wYWdlcyBpbiBkcml2ZXJzIHdo
+aWNoIGhhcyBjb25zaWRlcmVkIHZtX3Bnb2ZmCj4gPgo+ID4gdm1faW5zZXJ0X3JhbmdlX2J1Z2d5
+KCkgaXMgdGhlIEFQSSB3aGljaCBjb3VsZCBiZSB1c2VkIHRvIG1hcAo+ID4gcmFuZ2Ugb2Yga2Vy
+bmVsIG1lbW9yeS9wYWdlcyBpbiBkcml2ZXJzIHdoaWNoIGhhcyBub3QgY29uc2lkZXJlZAo+ID4g
+dm1fcGdvZmYuIHZtX3Bnb2ZmIGlzIHBhc3NlZCBkZWZhdWx0IGFzIDAgZm9yIHRob3NlIGRyaXZl
+cnMuCj4gPgo+ID4gV2UgX2NvdWxkXyB0aGVuIGF0IGEgbGF0ZXIgImZpeCIgdGhlc2UgZHJpdmVy
+cyB3aGljaCBhcmUgdXNpbmcKPiA+IHZtX2luc2VydF9yYW5nZV9idWdneSgpIHRvIGJlaGF2ZSBh
+Y2NvcmRpbmcgdG8gdGhlIG5vcm1hbCB2bV9wZ29mZgo+ID4gb2Zmc2V0dGluZyBzaW1wbHkgYnkg
+cmVtb3ZpbmcgdGhlIF9idWdneSBzdWZmaXggb24gdGhlIGZ1bmN0aW9uCj4gPiBuYW1lIGFuZCBp
+ZiB0aGF0IGNhdXNlcyByZWdyZXNzaW9ucywgaXQgZ2l2ZXMgdXMgYW4gZWFzeSB3YXkgdG8gcmV2
+ZXJ0Lgo+ID4KPiA+IFNpZ25lZC1vZmYtYnk6IFNvdXB0aWNrIEpvYXJkZXIgPGpyZHIubGludXhA
+Z21haWwuY29tPgo+ID4gU3VnZ2VzdGVkLWJ5OiBSdXNzZWxsIEtpbmcgPGxpbnV4QGFybWxpbnV4
+Lm9yZy51az4KPiA+IFN1Z2dlc3RlZC1ieTogTWF0dGhldyBXaWxjb3ggPHdpbGx5QGluZnJhZGVh
+ZC5vcmc+Cj4gPiAtLS0KPiA+ICBpbmNsdWRlL2xpbnV4L21tLmggfCAgNCArKysKPiA+ICBtbS9t
+ZW1vcnkuYyAgICAgICAgfCA4MSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysKPiA+ICBtbS9ub21tdS5jICAgICAgICAgfCAxNCArKysrKysrKysr
+Cj4gPiAgMyBmaWxlcyBjaGFuZ2VkLCA5OSBpbnNlcnRpb25zKCspCj4gPgo+ID4gZGlmZiAtLWdp
+dCBhL2luY2x1ZGUvbGludXgvbW0uaCBiL2luY2x1ZGUvbGludXgvbW0uaAo+ID4gaW5kZXggODBi
+YjY0MC4uMjU3NTJiMCAxMDA2NDQKPiA+IC0tLSBhL2luY2x1ZGUvbGludXgvbW0uaAo+ID4gKysr
+IGIvaW5jbHVkZS9saW51eC9tbS5oCj4gPiBAQCAtMjU2NSw2ICsyNTY1LDEwIEBAIHVuc2lnbmVk
+IGxvbmcgY2hhbmdlX3Byb3RfbnVtYShzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwKPiA+ICBp
+bnQgcmVtYXBfcGZuX3JhbmdlKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqLCB1bnNpZ25lZCBsb25n
+IGFkZHIsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBwZm4sIHVuc2ln
+bmVkIGxvbmcgc2l6ZSwgcGdwcm90X3QpOwo+ID4gIGludCB2bV9pbnNlcnRfcGFnZShzdHJ1Y3Qg
+dm1fYXJlYV9zdHJ1Y3QgKiwgdW5zaWduZWQgbG9uZyBhZGRyLCBzdHJ1Y3QgcGFnZSAqKTsKPiA+
+ICtpbnQgdm1faW5zZXJ0X3JhbmdlKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hLCBzdHJ1Y3Qg
+cGFnZSAqKnBhZ2VzLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQg
+bG9uZyBudW0pOwo+ID4gK2ludCB2bV9pbnNlcnRfcmFuZ2VfYnVnZ3koc3RydWN0IHZtX2FyZWFf
+c3RydWN0ICp2bWEsIHN0cnVjdCBwYWdlICoqcGFnZXMsCj4gPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICB1bnNpZ25lZCBsb25nIG51bSk7Cj4gPiAgdm1fZmF1bHRfdCB2bWZfaW5zZXJ0
+X3BmbihzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwgdW5zaWduZWQgbG9uZyBhZGRyLAo+ID4g
+ICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcGZuKTsKPiA+ICB2bV9mYXVsdF90
+IHZtZl9pbnNlcnRfcGZuX3Byb3Qoc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsIHVuc2lnbmVk
+IGxvbmcgYWRkciwKPiA+IGRpZmYgLS1naXQgYS9tbS9tZW1vcnkuYyBiL21tL21lbW9yeS5jCj4g
+PiBpbmRleCBlMTFjYTlkLi4wYTRiZjU3IDEwMDY0NAo+ID4gLS0tIGEvbW0vbWVtb3J5LmMKPiA+
+ICsrKyBiL21tL21lbW9yeS5jCj4gPiBAQCAtMTUyMCw2ICsxNTIwLDg3IEBAIGludCB2bV9pbnNl
+cnRfcGFnZShzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwgdW5zaWduZWQgbG9uZyBhZGRyLAo+
+ID4gIH0KPiA+ICBFWFBPUlRfU1lNQk9MKHZtX2luc2VydF9wYWdlKTsKPiA+Cj4gPiArLyoqCj4g
+PiArICogX192bV9pbnNlcnRfcmFuZ2UgLSBpbnNlcnQgcmFuZ2Ugb2Yga2VybmVsIHBhZ2VzIGlu
+dG8gdXNlciB2bWEKPiA+ICsgKiBAdm1hOiB1c2VyIHZtYSB0byBtYXAgdG8KPiA+ICsgKiBAcGFn
+ZXM6IHBvaW50ZXIgdG8gYXJyYXkgb2Ygc291cmNlIGtlcm5lbCBwYWdlcwo+ID4gKyAqIEBudW06
+IG51bWJlciBvZiBwYWdlcyBpbiBwYWdlIGFycmF5Cj4gPiArICogQG9mZnNldDogdXNlcidzIHJl
+cXVlc3RlZCB2bV9wZ29mZgo+ID4gKyAqCj4gPiArICogVGhpcyBhbGxvd3MgZHJpdmVycyB0byBp
+bnNlcnQgcmFuZ2Ugb2Yga2VybmVsIHBhZ2VzIHRoZXkndmUgYWxsb2NhdGVkCj4gPiArICogaW50
+byBhIHVzZXIgdm1hLgo+ID4gKyAqCj4gPiArICogSWYgd2UgZmFpbCB0byBpbnNlcnQgYW55IHBh
+Z2UgaW50byB0aGUgdm1hLCB0aGUgZnVuY3Rpb24gd2lsbCByZXR1cm4KPiA+ICsgKiBpbW1lZGlh
+dGVseSBsZWF2aW5nIGFueSBwcmV2aW91c2x5IGluc2VydGVkIHBhZ2VzIHByZXNlbnQuICBDYWxs
+ZXJzCj4gPiArICogZnJvbSB0aGUgbW1hcCBoYW5kbGVyIG1heSBpbW1lZGlhdGVseSByZXR1cm4g
+dGhlIGVycm9yIGFzIHRoZWlyIGNhbGxlcgo+ID4gKyAqIHdpbGwgZGVzdHJveSB0aGUgdm1hLCBy
+ZW1vdmluZyBhbnkgc3VjY2Vzc2Z1bGx5IGluc2VydGVkIHBhZ2VzLiBPdGhlcgo+ID4gKyAqIGNh
+bGxlcnMgc2hvdWxkIG1ha2UgdGhlaXIgb3duIGFycmFuZ2VtZW50cyBmb3IgY2FsbGluZyB1bm1h
+cF9yZWdpb24oKS4KPiA+ICsgKgo+ID4gKyAqIENvbnRleHQ6IFByb2Nlc3MgY29udGV4dC4KPiA+
+ICsgKiBSZXR1cm46IDAgb24gc3VjY2VzcyBhbmQgZXJyb3IgY29kZSBvdGhlcndpc2UuCj4gPiAr
+ICovCj4gPiArc3RhdGljIGludCBfX3ZtX2luc2VydF9yYW5nZShzdHJ1Y3Qgdm1fYXJlYV9zdHJ1
+Y3QgKnZtYSwgc3RydWN0IHBhZ2UgKipwYWdlcywKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHVuc2lnbmVkIGxvbmcgbnVtLCB1bnNpZ25lZCBsb25nIG9mZnNldCkKPiA+ICt7Cj4g
+PiArICAgICB1bnNpZ25lZCBsb25nIGNvdW50ID0gdm1hX3BhZ2VzKHZtYSk7Cj4gPiArICAgICB1
+bnNpZ25lZCBsb25nIHVhZGRyID0gdm1hLT52bV9zdGFydDsKPiA+ICsgICAgIGludCByZXQsIGk7
+Cj4gPiArCj4gPiArICAgICAvKiBGYWlsIGlmIHRoZSB1c2VyIHJlcXVlc3RlZCBvZmZzZXQgaXMg
+YmV5b25kIHRoZSBlbmQgb2YgdGhlIG9iamVjdCAqLwo+ID4gKyAgICAgaWYgKG9mZnNldCA+IG51
+bSkKPiA+ICsgICAgICAgICAgICAgcmV0dXJuIC1FTlhJTzsKPiA+ICsKPiA+ICsgICAgIC8qIEZh
+aWwgaWYgdGhlIHVzZXIgcmVxdWVzdGVkIHNpemUgZXhjZWVkcyBhdmFpbGFibGUgb2JqZWN0IHNp
+emUgKi8KPiA+ICsgICAgIGlmIChjb3VudCA+IG51bSAtIG9mZnNldCkKPiA+ICsgICAgICAgICAg
+ICAgcmV0dXJuIC1FTlhJTzsKPiA+ICsKPiA+ICsgICAgIGZvciAoaSA9IDA7IGkgPCBjb3VudDsg
+aSsrKSB7Cj4gPiArICAgICAgICAgICAgIHJldCA9IHZtX2luc2VydF9wYWdlKHZtYSwgdWFkZHIs
+IHBhZ2VzW29mZnNldCArIGldKTsKPiA+ICsgICAgICAgICAgICAgaWYgKHJldCA8IDApCj4gPiAr
+ICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHJldDsKPiA+ICsgICAgICAgICAgICAgdWFkZHIg
+Kz0gUEFHRV9TSVpFOwo+ID4gKyAgICAgfQo+ID4gKwo+ID4gKyAgICAgcmV0dXJuIDA7Cj4gPiAr
+fQo+ID4gKwo+ID4gKy8qKgo+ID4gKyAqIHZtX2luc2VydF9yYW5nZSAtIGluc2VydCByYW5nZSBv
+ZiBrZXJuZWwgcGFnZXMgc3RhcnRzIHdpdGggbm9uIHplcm8gb2Zmc2V0Cj4gPiArICogQHZtYTog
+dXNlciB2bWEgdG8gbWFwIHRvCj4gPiArICogQHBhZ2VzOiBwb2ludGVyIHRvIGFycmF5IG9mIHNv
+dXJjZSBrZXJuZWwgcGFnZXMKPiA+ICsgKiBAbnVtOiBudW1iZXIgb2YgcGFnZXMgaW4gcGFnZSBh
+cnJheQo+ID4gKyAqCj4gPiArICogTWFwcyBhbiBvYmplY3QgY29uc2lzdGluZyBvZiBgbnVtJyBg
+cGFnZXMnLCBjYXRlcmluZyBmb3IgdGhlIHVzZXIncwo+ID4gKyAqIHJlcXVlc3RlZCB2bV9wZ29m
+Zgo+ID4gKyAqCj4KPiBUaGUgZWxhYm9yYXRlIGRlc2NyaXB0aW9uIHlvdSd2ZSBhZGRlZCB0byBf
+X3ZtX2luc2VydF9yYW5nZSgpIGlzIGJldHRlciBwdXQKPiBoZXJlLCBhcyB0aGlzIGlzIHRoZSAi
+cHVibGljIiBmdW5jdGlvbi4KPgo+ID4gKyAqIENvbnRleHQ6IFByb2Nlc3MgY29udGV4dC4gQ2Fs
+bGVkIGJ5IG1tYXAgaGFuZGxlcnMuCj4gPiArICogUmV0dXJuOiAwIG9uIHN1Y2Nlc3MgYW5kIGVy
+cm9yIGNvZGUgb3RoZXJ3aXNlLgo+ID4gKyAqLwo+ID4gK2ludCB2bV9pbnNlcnRfcmFuZ2Uoc3Ry
+dWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsIHN0cnVjdCBwYWdlICoqcGFnZXMsCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIG51bSkKPiA+ICt7Cj4gPiArICAg
+ICByZXR1cm4gX192bV9pbnNlcnRfcmFuZ2Uodm1hLCBwYWdlcywgbnVtLCB2bWEtPnZtX3Bnb2Zm
+KTsKPiA+ICt9Cj4gPiArRVhQT1JUX1NZTUJPTCh2bV9pbnNlcnRfcmFuZ2UpOwo+ID4gKwo+ID4g
+Ky8qKgo+ID4gKyAqIHZtX2luc2VydF9yYW5nZV9idWdneSAtIGluc2VydCByYW5nZSBvZiBrZXJu
+ZWwgcGFnZXMgc3RhcnRzIHdpdGggemVybyBvZmZzZXQKPiA+ICsgKiBAdm1hOiB1c2VyIHZtYSB0
+byBtYXAgdG8KPiA+ICsgKiBAcGFnZXM6IHBvaW50ZXIgdG8gYXJyYXkgb2Ygc291cmNlIGtlcm5l
+bCBwYWdlcwo+ID4gKyAqIEBudW06IG51bWJlciBvZiBwYWdlcyBpbiBwYWdlIGFycmF5Cj4gPiAr
+ICoKPiA+ICsgKiBNYXBzIGEgc2V0IG9mIHBhZ2VzLCBhbHdheXMgc3RhcnRpbmcgYXQgcGFnZVsw
+XQo+Cj4gSGVyZSBJJ2QgYWRkIHNvbWV0aGluZyBsaWtlOgo+Cj4gU2ltaWxhciB0byB2bV9pbnNl
+cnRfcmFuZ2UoKSwgZXhjZXB0IHRoYXQgaXQgZXhwbGljaXRseSBzZXRzIEB2bV9wZ29mZiB0bwo+
+IDAuIFRoaXMgZnVuY3Rpb24gaXMgaW50ZW5kZWQgZm9yIHRoZSBkcml2ZXJzIHRoYXQgZGlkIG5v
+dCBjb25zaWRlcgo+IEB2bV9wZ29mZi4KCkp1c3QgdGhvdWdodCB0byB0YWtlIG9waW5pb24gZm9y
+IGRvY3VtZW50YXRpb24gYmVmb3JlIHBsYWNpbmcgaXQgaW4gdjMuCkRvZXMgaXQgbG9va3MgZmlu
+ZSA/CgorLyoqCisgKiBfX3ZtX2luc2VydF9yYW5nZSAtIGluc2VydCByYW5nZSBvZiBrZXJuZWwg
+cGFnZXMgaW50byB1c2VyIHZtYQorICogQHZtYTogdXNlciB2bWEgdG8gbWFwIHRvCisgKiBAcGFn
+ZXM6IHBvaW50ZXIgdG8gYXJyYXkgb2Ygc291cmNlIGtlcm5lbCBwYWdlcworICogQG51bTogbnVt
+YmVyIG9mIHBhZ2VzIGluIHBhZ2UgYXJyYXkKKyAqIEBvZmZzZXQ6IHVzZXIncyByZXF1ZXN0ZWQg
+dm1fcGdvZmYKKyAqCisgKiBUaGlzIGFsbG93IGRyaXZlcnMgdG8gaW5zZXJ0IHJhbmdlIG9mIGtl
+cm5lbCBwYWdlcyBpbnRvIGEgdXNlciB2bWEuCisgKgorICogUmV0dXJuOiAwIG9uIHN1Y2Nlc3Mg
+YW5kIGVycm9yIGNvZGUgb3RoZXJ3aXNlLgorICovCitzdGF0aWMgaW50IF9fdm1faW5zZXJ0X3Jh
+bmdlKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hLCBzdHJ1Y3QgcGFnZSAqKnBhZ2VzLAorICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgbnVtLCB1bnNpZ25lZCBs
+b25nIG9mZnNldCkKCgorLyoqCisgKiB2bV9pbnNlcnRfcmFuZ2UgLSBpbnNlcnQgcmFuZ2Ugb2Yg
+a2VybmVsIHBhZ2VzIHN0YXJ0cyB3aXRoIG5vbiB6ZXJvIG9mZnNldAorICogQHZtYTogdXNlciB2
+bWEgdG8gbWFwIHRvCisgKiBAcGFnZXM6IHBvaW50ZXIgdG8gYXJyYXkgb2Ygc291cmNlIGtlcm5l
+bCBwYWdlcworICogQG51bTogbnVtYmVyIG9mIHBhZ2VzIGluIHBhZ2UgYXJyYXkKKyAqCisgKiBN
+YXBzIGFuIG9iamVjdCBjb25zaXN0aW5nIG9mIGBudW0nIGBwYWdlcycsIGNhdGVyaW5nIGZvciB0
+aGUgdXNlcidzCisgKiByZXF1ZXN0ZWQgdm1fcGdvZmYKKyAqCisgKiBJZiB3ZSBmYWlsIHRvIGlu
+c2VydCBhbnkgcGFnZSBpbnRvIHRoZSB2bWEsIHRoZSBmdW5jdGlvbiB3aWxsIHJldHVybgorICog
+aW1tZWRpYXRlbHkgbGVhdmluZyBhbnkgcHJldmlvdXNseSBpbnNlcnRlZCBwYWdlcyBwcmVzZW50
+LiAgQ2FsbGVycworICogZnJvbSB0aGUgbW1hcCBoYW5kbGVyIG1heSBpbW1lZGlhdGVseSByZXR1
+cm4gdGhlIGVycm9yIGFzIHRoZWlyIGNhbGxlcgorICogd2lsbCBkZXN0cm95IHRoZSB2bWEsIHJl
+bW92aW5nIGFueSBzdWNjZXNzZnVsbHkgaW5zZXJ0ZWQgcGFnZXMuIE90aGVyCisgKiBjYWxsZXJz
+IHNob3VsZCBtYWtlIHRoZWlyIG93biBhcnJhbmdlbWVudHMgZm9yIGNhbGxpbmcgdW5tYXBfcmVn
+aW9uKCkuCisgKgorICogQ29udGV4dDogUHJvY2VzcyBjb250ZXh0LiBDYWxsZWQgYnkgbW1hcCBo
+YW5kbGVycy4KKyAqIFJldHVybjogMCBvbiBzdWNjZXNzIGFuZCBlcnJvciBjb2RlIG90aGVyd2lz
+ZS4KKyAqLworaW50IHZtX2luc2VydF9yYW5nZShzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwg
+c3RydWN0IHBhZ2UgKipwYWdlcywKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNp
+Z25lZCBsb25nIG51bSkKCgorLyoqCisgKiB2bV9pbnNlcnRfcmFuZ2VfYnVnZ3kgLSBpbnNlcnQg
+cmFuZ2Ugb2Yga2VybmVsIHBhZ2VzIHN0YXJ0cyB3aXRoIHplcm8gb2Zmc2V0CisgKiBAdm1hOiB1
+c2VyIHZtYSB0byBtYXAgdG8KKyAqIEBwYWdlczogcG9pbnRlciB0byBhcnJheSBvZiBzb3VyY2Ug
+a2VybmVsIHBhZ2VzCisgKiBAbnVtOiBudW1iZXIgb2YgcGFnZXMgaW4gcGFnZSBhcnJheQorICoK
+KyAqIFNpbWlsYXIgdG8gdm1faW5zZXJ0X3JhbmdlKCksIGV4Y2VwdCB0aGF0IGl0IGV4cGxpY2l0
+bHkgc2V0cyBAdm1fcGdvZmYgdG8KKyAqIDAuIFRoaXMgZnVuY3Rpb24gaXMgaW50ZW5kZWQgZm9y
+IHRoZSBkcml2ZXJzIHRoYXQgZGlkIG5vdCBjb25zaWRlcgorICogQHZtX3Bnb2ZmLgorICoKKyAq
+IENvbnRleHQ6IFByb2Nlc3MgY29udGV4dC4gQ2FsbGVkIGJ5IG1tYXAgaGFuZGxlcnMuCisgKiBS
+ZXR1cm46IDAgb24gc3VjY2VzcyBhbmQgZXJyb3IgY29kZSBvdGhlcndpc2UuCisgKi8KK2ludCB2
+bV9pbnNlcnRfcmFuZ2VfYnVnZ3koc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsIHN0cnVjdCBw
+YWdlICoqcGFnZXMsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgbG9u
+ZyBudW0pCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
