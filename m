@@ -1,22 +1,26 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH 7/8] x86/mm: handle foreign mappings in
- p2m_entry_modify
-Date: Thu, 7 Feb 2019 17:49:16 +0000
-Message-ID: <781554d1-1133-e510-ee69-e18dff1f155c@citrix.com>
-References: <20190130103646.53649-1-roger.pau@citrix.com>
- <20190130103646.53649-8-roger.pau@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v4 4/6] xen/x86: Allow stubdom access to irq
+ created for msi.
+Date: Thu, 7 Feb 2019 18:51:57 +0100
+Message-ID: <20190207175157.GZ21228@mail-itl>
+References: <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
+ <f5bf6b245f91398e0235a7b603ebc08ef64135ab.1549498018.git-series.marmarek@invisiblethingslab.com>
+ <20190207095719.7r6mikq5ahdbw34p@mac>
+ <20190207132124.GW21228@mail-itl> <20190207145238.GX21228@mail-itl>
+ <20190207145754.t2pr4mlqjb2ohpqi@mac>
+ <20190207154138.GY21228@mail-itl>
+ <20190207174016.gij6u5wqhrhckt3a@mac>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1104296392807452262=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=dIWW=QO=citrix.com=prvs=93432fab5=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1grno9-0001o2-7s
- for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 17:49:53 +0000
-In-Reply-To: <20190130103646.53649-8-roger.pau@citrix.com>
-Content-Language: en-US
+ <SRS0=OOdV=QO=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1grnqK-0002ao-1j
+ for xen-devel@lists.xenproject.org; Thu, 07 Feb 2019 17:52:08 +0000
+In-Reply-To: <20190207174016.gij6u5wqhrhckt3a@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,118 +29,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Jun Nakajima <jun.nakajima@intel.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMS8zMC8xOSAxMDozNiBBTSwgUm9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+IFNvIHRoYXQgdGhl
-IHNwZWNpZmljIGhhbmRsaW5nIGNhbiBiZSByZW1vdmVkIGZyb20KPiBhdG9taWNfd3JpdGVfZXB0
-X2VudHJ5IGFuZCBiZSBzaGFyZWQgd2l0aCBucHQgYW5kIHNoYWRvdyBjb2RlLgo+IAo+IFRoaXMg
-Y29tbWl0IGFsc28gcmVtb3ZlcyB0aGUgY2hlY2sgdGhhdCBwcmV2ZW50IG5vbi1lcHQgUFZIIGRv
-bTAgZnJvbQo+IG1hcHBpbmcgZm9yZWlnbiBwYWdlcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBSb2dl
-ciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KPiAtLS0KPiBDYzogR2VvcmdlIER1
-bmxhcCA8Z2VvcmdlLmR1bmxhcEBldS5jaXRyaXguY29tPgo+IENjOiBKYW4gQmV1bGljaCA8amJl
-dWxpY2hAc3VzZS5jb20+Cj4gQ2M6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
-eC5jb20+Cj4gQ2M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gQ2M6IEp1biBOYWth
-amltYSA8anVuLm5ha2FqaW1hQGludGVsLmNvbT4KPiBDYzogS2V2aW4gVGlhbiA8a2V2aW4udGlh
-bkBpbnRlbC5jb20+Cj4gQ2M6IFRpbSBEZWVnYW4gPHRpbUB4ZW4ub3JnPgo+IC0tLQo+ICB4ZW4v
-YXJjaC94ODYvbW0vaGFwL2hhcC5jICAgICAgIHwgICAzICstCj4gIHhlbi9hcmNoL3g4Ni9tbS9w
-Mm0tZXB0LmMgICAgICAgfCAxMDggKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAg
-eGVuL2FyY2gveDg2L21tL3AybS1wdC5jICAgICAgICB8ICAgNyAtLS0KPiAgeGVuL2FyY2gveDg2
-L21tL3NoYWRvdy9jb21tb24uYyB8ICAgMyArLQo+ICB4ZW4vaW5jbHVkZS9hc20teDg2L3AybS5o
-ICAgICAgIHwgIDMwICsrKysrKysrLQo+ICA1IGZpbGVzIGNoYW5nZWQsIDUzIGluc2VydGlvbnMo
-KyksIDk4IGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvbW0vaGFw
-L2hhcC5jIGIveGVuL2FyY2gveDg2L21tL2hhcC9oYXAuYwo+IGluZGV4IGRjNDZkNWUxNGYuLjRm
-NTI2MzliZTUgMTAwNjQ0Cj4gLS0tIGEveGVuL2FyY2gveDg2L21tL2hhcC9oYXAuYwo+ICsrKyBi
-L3hlbi9hcmNoL3g4Ni9tbS9oYXAvaGFwLmMKPiBAQCAtNzM1LDcgKzczNSw4IEBAIGhhcF93cml0
-ZV9wMm1fZW50cnkoc3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQgbG9uZyBnZm4sIGwxX3BnZW50
-cnlfdCAqcCwKPiAgICAgIH0KPiAgCj4gICAgICBwMm1fZW50cnlfbW9kaWZ5KHAybV9nZXRfaG9z
-dHAybShkKSwgcDJtX2ZsYWdzX3RvX3R5cGUobDFlX2dldF9mbGFncyhuZXcpKSwKPiAtICAgICAg
-ICAgICAgICAgICAgICAgcDJtX2ZsYWdzX3RvX3R5cGUob2xkX2ZsYWdzKSwgbGV2ZWwpOwo+ICsg
-ICAgICAgICAgICAgICAgICAgICBwMm1fZmxhZ3NfdG9fdHlwZShvbGRfZmxhZ3MpLCBsMWVfZ2V0
-X21mbihuZXcpLAo+ICsgICAgICAgICAgICAgICAgICAgICBsMWVfZ2V0X21mbigqcCksIGxldmVs
-KTsKPiAgCj4gICAgICBzYWZlX3dyaXRlX3B0ZShwLCBuZXcpOwo+ICAgICAgaWYgKCBvbGRfZmxh
-Z3MgJiBfUEFHRV9QUkVTRU5UICkKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL3AybS1l
-cHQuYyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0tZXB0LmMKPiBpbmRleCAwZWNlNjYwOGNiLi4yYjBj
-M2FiMjY1IDEwMDY0NAo+IC0tLSBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0tZXB0LmMKPiArKysgYi94
-ZW4vYXJjaC94ODYvbW0vcDJtLWVwdC5jCj4gQEAgLTQ1LDY1ICs0NSwxMyBAQCBzdGF0aWMgaW5s
-aW5lIGJvb2xfdCBpc19lcHRlX3ZhbGlkKGVwdF9lbnRyeV90ICplKQo+ICAgICAgcmV0dXJuICgo
-ZS0+ZXB0ZSAmIH4oMXVsIDw8IDYzKSkgIT0gMCAmJiBlLT5zYV9wMm10ICE9IHAybV9pbnZhbGlk
-KTsKPiAgfQo+ICAKPiAtLyogcmV0dXJucyA6IDAgZm9yIHN1Y2Nlc3MsIC1lcnJubyBvdGhlcndp
-c2UgKi8KPiAtc3RhdGljIGludCBhdG9taWNfd3JpdGVfZXB0X2VudHJ5KHN0cnVjdCBwMm1fZG9t
-YWluICpwMm0sCj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlcHRfZW50cnlf
-dCAqZW50cnlwdHIsIGVwdF9lbnRyeV90IG5ldywKPiAtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGludCBsZXZlbCkKPiArc3RhdGljIHZvaWQgYXRvbWljX3dyaXRlX2VwdF9lbnRy
-eShzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtLAo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGVwdF9lbnRyeV90ICplbnRyeXB0ciwgZXB0X2VudHJ5X3QgbmV3LAo+ICsgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGludCBsZXZlbCkKPiAgewo+IC0gICAgaW50IHJj
-Owo+IC0gICAgdW5zaWduZWQgbG9uZyBvbGRtZm4gPSBtZm5feChJTlZBTElEX01GTik7Cj4gLSAg
-ICBib29sX3QgY2hlY2tfZm9yZWlnbiA9IChuZXcubWZuICE9IGVudHJ5cHRyLT5tZm4gfHwKPiAt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5ldy5zYV9wMm10ICE9IGVudHJ5cHRyLT5zYV9w
-Mm10KTsKPiAtCj4gLSAgICBpZiAoIGxldmVsICkKPiAtICAgIHsKPiAtICAgICAgICBBU1NFUlQo
-IWlzX2VwdGVfc3VwZXJwYWdlKCZuZXcpIHx8ICFwMm1faXNfZm9yZWlnbihuZXcuc2FfcDJtdCkp
-Owo+IC0gICAgICAgIHdyaXRlX2F0b21pYygmZW50cnlwdHItPmVwdGUsIG5ldy5lcHRlKTsKPiAt
-ICAgICAgICByZXR1cm4gMDsKPiAtICAgIH0KPiAtCj4gLSAgICBpZiAoIHVubGlrZWx5KHAybV9p
-c19mb3JlaWduKG5ldy5zYV9wMm10KSkgKQo+IC0gICAgewo+IC0gICAgICAgIHJjID0gLUVJTlZB
-TDsKPiAtICAgICAgICBpZiAoICFpc19lcHRlX3ByZXNlbnQoJm5ldykgKQo+IC0gICAgICAgICAg
-ICAgICAgZ290byBvdXQ7Cj4gLQo+IC0gICAgICAgIGlmICggY2hlY2tfZm9yZWlnbiApCj4gLSAg
-ICAgICAgewo+IC0gICAgICAgICAgICBzdHJ1Y3QgZG9tYWluICpmZG9tOwo+IC0KPiAtICAgICAg
-ICAgICAgaWYgKCAhbWZuX3ZhbGlkKF9tZm4obmV3Lm1mbikpICkKPiAtICAgICAgICAgICAgICAg
-IGdvdG8gb3V0Owo+IC0KPiAtICAgICAgICAgICAgcmMgPSAtRVNSQ0g7Cj4gLSAgICAgICAgICAg
-IGZkb20gPSBwYWdlX2dldF9vd25lcihtZm5fdG9fcGFnZShfbWZuKG5ldy5tZm4pKSk7Cj4gLSAg
-ICAgICAgICAgIGlmICggZmRvbSA9PSBOVUxMICkKPiAtICAgICAgICAgICAgICAgIGdvdG8gb3V0
-Owo+IC0KPiAtICAgICAgICAgICAgLyogZ2V0IHJlZmNvdW50IG9uIHRoZSBwYWdlICovCj4gLSAg
-ICAgICAgICAgIHJjID0gLUVCVVNZOwo+IC0gICAgICAgICAgICBpZiAoICFnZXRfcGFnZShtZm5f
-dG9fcGFnZShfbWZuKG5ldy5tZm4pKSwgZmRvbSkgKQo+IC0gICAgICAgICAgICAgICAgZ290byBv
-dXQ7Cj4gLSAgICAgICAgfQo+IC0gICAgfQo+IC0KPiAtICAgIGlmICggdW5saWtlbHkocDJtX2lz
-X2ZvcmVpZ24oZW50cnlwdHItPnNhX3AybXQpKSAmJiBjaGVja19mb3JlaWduICkKPiAtICAgICAg
-ICBvbGRtZm4gPSBlbnRyeXB0ci0+bWZuOwo+IC0KPiAtICAgIHAybV9lbnRyeV9tb2RpZnkocDJt
-LCBuZXcuc2FfcDJtdCwgZW50cnlwdHItPnNhX3AybXQsIGxldmVsKTsKPiAtCj4gKyAgICBwMm1f
-ZW50cnlfbW9kaWZ5KHAybSwgbmV3LnNhX3AybXQsIGVudHJ5cHRyLT5zYV9wMm10LCBfbWZuKG5l
-dy5tZm4pLAo+ICsgICAgICAgICAgICAgICAgICAgICBfbWZuKGVudHJ5cHRyLT5tZm4pLCBsZXZl
-bCk7Cj4gICAgICB3cml0ZV9hdG9taWMoJmVudHJ5cHRyLT5lcHRlLCBuZXcuZXB0ZSk7Cj4gLQo+
-IC0gICAgaWYgKCB1bmxpa2VseShvbGRtZm4gIT0gbWZuX3goSU5WQUxJRF9NRk4pKSApCj4gLSAg
-ICAgICAgcHV0X3BhZ2UobWZuX3RvX3BhZ2UoX21mbihvbGRtZm4pKSk7Cj4gLQo+IC0gICAgcmMg
-PSAwOwo+IC0KPiAtIG91dDoKPiAtICAgIGlmICggcmMgKQo+IC0gICAgICAgIGdkcHJpbnRrKFhF
-TkxPR19FUlIsICJlcHRlIG86JSJQUkl4NjQiIG46JSJQUkl4NjQiIHJjOiVkXG4iLAo+IC0gICAg
-ICAgICAgICAgICAgIGVudHJ5cHRyLT5lcHRlLCBuZXcuZXB0ZSwgcmMpOwo+IC0gICAgcmV0dXJu
-IHJjOwo+ICB9CgpUaGlzIGlzIHByZXR0eSBhd2Vzb21lLiA6LSkKCj4gZGlmZiAtLWdpdCBhL3hl
-bi9pbmNsdWRlL2FzbS14ODYvcDJtLmggYi94ZW4vaW5jbHVkZS9hc20teDg2L3AybS5oCj4gaW5k
-ZXggODM0ZDQ5ZDJkNC4uMWNjOGFjYjNmZSAxMDA2NDQKPiAtLS0gYS94ZW4vaW5jbHVkZS9hc20t
-eDg2L3AybS5oCj4gKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9wMm0uaAo+IEBAIC05MzMsOSAr
-OTMzLDEyIEBAIHN0cnVjdCBodm1faW9yZXFfc2VydmVyICpwMm1fZ2V0X2lvcmVxX3NlcnZlcihz
-dHJ1Y3QgZG9tYWluICpkLAo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgdW5zaWduZWQgaW50ICpmbGFncyk7Cj4gIAo+ICBzdGF0aWMgaW5saW5lIHZvaWQg
-cDJtX2VudHJ5X21vZGlmeShzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtLCBwMm1fdHlwZV90IG50LAo+
-IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwMm1fdHlwZV90IG90LCB1bnNp
-Z25lZCBpbnQgbGV2ZWwpCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHAy
-bV90eXBlX3Qgb3QsIG1mbl90IG5mbiwgbWZuX3Qgb2ZuLAo+ICsgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgbGV2ZWwpCj4gIHsKPiAtICAgIGlmICggbGV2
-ZWwgIT0gMSB8fCBudCA9PSBvdCApCj4gKyAgICBzdHJ1Y3QgcGFnZV9pbmZvICpwZzsKPiArCj4g
-KyAgICBpZiAoIGxldmVsICE9IDEgfHwgKG50ID09IG90ICYmIG1mbl9lcShuZm4sIG9mbikpICkK
-PiAgICAgICAgICByZXR1cm47CgpBcmUgeW91IHN1cmUgdGhhdCBmb3JlaWduIG1hcHBpbmdzIChv
-ciBpb3JlcSBzZXJ2ZXIgcGFnZXMsIGZvciB0aGF0Cm1hdHRlcikgY2FuIG5ldmVyIGJlIGxldmVs
-ID4gMT8KCmlvcmVxIHNlcnZlciBwYWdlcyBtYXkgYmUgcmVsYXRpdmVseSBoYXJtbGVzcyBpZiB3
-ZSBnZXQgb3V0IG9mIHN5bmM7IGJ1dAp0aGUgcmVmZXJlbmNlIGNvdW50IHdpdGggdGhlIGZvcmVp
-Z24gbWFwcGluZyBpcyByZWFsbHkgZGFuZ2Vyb3VzIGlmIGl0CmdldHMgc2NyZXdlZCB1cC4KCkkn
-ZCBiZSB0ZW1wdGVkIHRvIHNheSB0aGF0IHdlIHNob3VsZCBCVUdfT04obGV2ZWwgPiAxICYmIG50
-ID09IGZvcmVpZ24pLgoKPiAgCj4gICAgICBzd2l0Y2ggKCBudCApCj4gQEAgLTk0OCw2ICs5NTEs
-MTcgQEAgc3RhdGljIGlubGluZSB2b2lkIHAybV9lbnRyeV9tb2RpZnkoc3RydWN0IHAybV9kb21h
-aW4gKnAybSwgcDJtX3R5cGVfdCBudCwKPiAgICAgICAgICBwMm0tPmlvcmVxLmVudHJ5X2NvdW50
-Kys7Cj4gICAgICAgICAgYnJlYWs7Cj4gIAo+ICsgICAgY2FzZSBwMm1fbWFwX2ZvcmVpZ246Cj4g
-KyAgICAgICAgcGcgPSBtZm5fdG9fcGFnZShuZm4pOwo+ICsKPiArICAgICAgICBpZiAoICFwZyB8
-fCAhcGFnZV9nZXRfb3duZXJfYW5kX3JlZmVyZW5jZShwZykgKQo+ICsgICAgICAgIHsKPiArICAg
-ICAgICAgICAgQVNTRVJUX1VOUkVBQ0hBQkxFKCk7Cj4gKyAgICAgICAgICAgIHJldHVybjsKPiAr
-ICAgICAgICB9CgpTaW1pbGFybHksIEknZCBiZSB0ZW1wdGVkIHRvIHNheSB3ZSBzaG91bGQgQlVH
-X09OKCkgaGVyZSBpbnN0ZWFkLiAgSWYgYQpyb2d1ZSBndWVzdCBjYW4gdHJpZ2dlciB0aGlzIHBh
-dGgsIGl0IHdvdWxkIGJlIGEgRG9TOyBidXQgdGhlIGFsdGVybmF0ZQp3b3VsZCBiZSB0byBhbGxv
-dyB0aGUgbWZuIHRvIGJlIHB1dCBpbnRvIHRoZSBwMm0gdGFibGUgd2l0aG91dCBhCnJlZmVyZW5j
-ZSwgd2hpY2ggY291bGQgcG90ZW50aWFsbHkgYmUgZmFyIHdvcnNlLgoKVGhlIGFsdGVybmF0ZSB3
-b3VsZCBiZSB0byBoYXZlIHRoaXMgcmV0dXJuIGFuIGVycm9yIHZhbHVlLCB3aGljaCB3b3VsZAox
-KSBjYXVzZSB0aGUgcDJtIHdyaXRlIHRvIGZhaWwsIGFuZCAyKSBiZSBjaGVja2VkIGFsbCB0aGUg
-d2F5IHVwIHRoZSBjaGFpbi4KCkxlc3Mgd29ycmllZCBhYm91dCB0aGUgcmVtb3ZhbCBzaWRlLCBh
-cyAgaWYgd2UgaGF2ZSBCVUdfT04ncyBvbiB0aGUKaW5zZXJ0aW9uIHNpZGUsIHRoZXkgKnJlYWxs
-eSogc2hvdWxkbid0IGhhcHBlbi4KCiAtR2VvcmdlCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============1104296392807452262==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="eu12+zRL7gQwOC+E"
+Content-Disposition: inline
+
+
+--eu12+zRL7gQwOC+E
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 07, 2019 at 06:40:16PM +0100, Roger Pau Monn=C3=A9 wrote:
+> On Thu, Feb 07, 2019 at 04:41:38PM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Thu, Feb 07, 2019 at 03:57:54PM +0100, Roger Pau Monn=C3=A9 wrote:
+> > > On Thu, Feb 07, 2019 at 03:52:38PM +0100, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > Hmm, looking at the code, wouldn't it make sense to give device mod=
+el
+> > > > domain access to the IRQ _instead of_ hardware domain? If stubdomai=
+n is
+> > > > in use, I don't see why dom0 would need access to that irq. Simply
+> > > > provide what the device model domain is as parameter - either
+> > > > hardware_domain, or stubdomain. Something like:
+> > > >=20
+> > > >     create_irq(..., current->domain->target =3D=3D d ? current->dom=
+ain : hardware_domain);
+> > >=20
+> > > Isn't there some cleanup that likely needs to be done by dom0 if it's
+> > > not done by the stubdom, or in case the stubdom crashes for some
+> > > reason?
+> >=20
+> > I don't think toolstack know anything about IRQs allocated by device
+> > model, looks like it does cleanup only for INTx interrupts.
+> >=20
+> > > Or maybe that's already done on domain destruction by Xen itself, in
+> > > which case not giving permissions to dom0 would be fine.
+> >=20
+> > There is free_domain_pirqs() call in arch_domain_destroy(). But I don't
+> > have device model reference there. Is there a way to get target ->
+> > stubdomain mapping (other than iterating over all the domains)? I see
+> > also domain->target field, which is the other way around.
+> > The only thing needed is irq_deny_access() call there (in case of domain
+> > ID reuse). Since such IRQs are not mapped to stubdomain itself,
+> > free_domain_pirqs() for stubdomain will not clean this up.
+> > Or maybe, _if stubdomain is guaranteed to be destroyed before its
+> > target_, we can iterate over target domain's IRQs during stubdomain
+> > destruction for this purpose?
+>=20
+> The list of allowed irqs is stored inside of the domain struct,
+> which means that it goes away when the domain is destroyed, there's no
+> need to do any specific cleanup when the stubdomain is destroyed
+> AFAICT. Now if the target domain is destroyed, those permissions over
+> the irqs must be removed from the stubdomain, because the irqs will be
+> freed and likely reused. The current model assumes that the hardware
+> domain is always the controlling owner of such irqs, but if we allow
+> stubdomains to also be the controlling owner then we need to keep some
+> track of this, or else Xen could be leaking permissions.
+
+This looks to be not a problem, because stubdomain keeps reference to
+its target domain (and there is corresponding put_domain(d->target) on
+domain destroy), so to answer my own question "if stubdomain is
+guaranteed to be destroyed before its target" - yes, it is.
+
+So, if domain destruction also implicitly revoke all _its_ irq
+permissions (because of where they are stored), there is no additional
+cleanup needed here.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--eu12+zRL7gQwOC+E
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxccD4ACgkQ24/THMrX
+1yxZTAf/cCZj1qYa8Tw4iAsFCgSRWGCpROaFpFG77kinwtsIv4rplG3Nx/fpg7Dy
+pdtwecEfL285yuGfzkTcBgifEUOgi5IecSg7aePDGzOE1+hLYrX/9dCeE89mW0bk
+AFWLfyt+NKu0F/ywJMCbtj9RrZ3OvTrzhGwDPALfG9bRo6JEOcu7aB0zo9+saml7
+KQY90EVrY8T+bstRGlBXht0FW8+aIXptYGUWqN2eNIk01jFE9fO+wvpUcTeYL+Vb
+vWar1bvyB/nSLoPPEuEcRJbZGIfX1pqwzhx2rTZkuE0YI1O3HAU/XN/RvMx/gCjP
+K5EMSLEoXHGcT/KEF0riNBVMXppRfQ==
+=qnC0
+-----END PGP SIGNATURE-----
+
+--eu12+zRL7gQwOC+E--
+
+
+--===============1104296392807452262==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1104296392807452262==--
