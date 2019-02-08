@@ -1,17 +1,28 @@
-From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: [PATCH for-4.12] x86/altp2m: fix
- HVMOP_altp2m_set_domain_state race
-Date: Fri,  8 Feb 2019 11:56:15 +0200
-Message-ID: <1549619775-4129-1-git-send-email-rcojocaru@bitdefender.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v4 4/6] xen/x86: Allow stubdom access to irq
+ created for msi.
+Date: Fri, 8 Feb 2019 11:15:59 +0100
+Message-ID: <20190208101559.GA21228@mail-itl>
+References: <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
+ <f5bf6b245f91398e0235a7b603ebc08ef64135ab.1549498018.git-series.marmarek@invisiblethingslab.com>
+ <20190207095719.7r6mikq5ahdbw34p@mac>
+ <20190207132124.GW21228@mail-itl> <20190207145238.GX21228@mail-itl>
+ <20190207145754.t2pr4mlqjb2ohpqi@mac>
+ <20190207154138.GY21228@mail-itl>
+ <20190207174016.gij6u5wqhrhckt3a@mac>
+ <20190207175157.GZ21228@mail-itl>
+ <20190208093537.wzzgkxf7hllrrd4r@mac>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3453972692513130046=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=5uHS=QP=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
- id 1gs2tU-0002SN-2C
- for xen-devel@lists.xenproject.org; Fri, 08 Feb 2019 09:56:24 +0000
+ <SRS0=wKrr=QP=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gs3Ce-0004Gv-7S
+ for xen-devel@lists.xenproject.org; Fri, 08 Feb 2019 10:16:12 +0000
+In-Reply-To: <20190208093537.wzzgkxf7hllrrd4r@mac>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,35 +31,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, wei.liu2@citrix.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, jbeulich@suse.com, roger.pau@citrix.com
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SFZNT1BfYWx0cDJtX3NldF9kb21haW5fc3RhdGUgZG9lcyBub3QgZG9tYWluX3BhdXNlKCksIHBy
-ZXN1bWFibHkKb24gcHVycG9zZSAoYXMgaXQgd2FzIG9yaWdpbmFsbHkgc3VwcG9zZWQgdG8gY2F0
-ZXIgdG8gYSBpbi1ndWVzdAphZ2VudCwgYW5kIGEgZG9tYWluIHBhdXNpbmcgaXRzZWxmIGlzIG5v
-dCBhIGdvb2QgaWRlYSkuCgpUaGlzIGNhbiBsZWFkIHRvIGRvbWFpbiBjcmFzaGVzIGluIHRoZSB2
-bXhfdm1leGl0X2hhbmRsZXIoKSBjb2RlCnRoYXQgY2hlY2tzIGlmIHRoZSBndWVzdCBoYXMgdGhl
-IGFiaWxpdHkgdG8gc3dpdGNoIEVQVFAgd2l0aG91dCBhbgpleGl0LiBUaGF0IGNvZGUgY2FuIF9f
-dm1yZWFkKCkgdGhlIGhvc3QgcDJtJ3MgRVBUX1BPSU5URVIKKGJlZm9yZSBIVk1PUF9hbHRwMm1f
-c2V0X2RvbWFpbl9zdGF0ZSAiZm9yX2VhY2hfdmNwdSgpIiBoYXMgYQpjaGFuY2UgdG8gcnVuIGFs
-dHAybV92Y3B1X2luaXRpYWxpc2UoKSwgYnV0IGFmdGVyCmQtPmFyY2guYWx0cDJtX2FjdGl2ZSBp
-cyBzZXQpLgoKV2hpbGUgdGhlIGluLWd1ZXN0IHNjZW5hcmlvIGNvbnRpbnVlcyB0byBwb3NlIHBy
-b2JsZW1zLCB0aGlzCnBhdGNoIGZpeGVzIHRoZSAiZXh0ZXJuYWwiIGNhc2UuCgpTaWduZWQtb2Zm
-LWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+Ci0tLQogeGVu
-L2FyY2gveDg2L2h2bS9odm0uYyB8IDcgKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0
-aW9ucygrKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vaHZtLmMgYi94ZW4vYXJjaC94
-ODYvaHZtL2h2bS5jCmluZGV4IDIxOTQ0ZTkuLjMzMDM4ZGMgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNo
-L3g4Ni9odm0vaHZtLmMKKysrIGIveGVuL2FyY2gveDg2L2h2bS9odm0uYwpAQCAtNDUzMyw2ICs0
-NTMzLDkgQEAgc3RhdGljIGludCBkb19hbHRwMm1fb3AoCiAgICAgICAgICAgICBicmVhazsKICAg
-ICAgICAgfQogCisgICAgICAgIGlmICggZCAhPSBjdXJyZW50LT5kb21haW4gKQorICAgICAgICAg
-ICAgZG9tYWluX3BhdXNlKGQpOworCiAgICAgICAgIG9zdGF0ZSA9IGQtPmFyY2guYWx0cDJtX2Fj
-dGl2ZTsKICAgICAgICAgZC0+YXJjaC5hbHRwMm1fYWN0aXZlID0gISFhLnUuZG9tYWluX3N0YXRl
-LnN0YXRlOwogCkBAIC00NTUxLDYgKzQ1NTQsMTAgQEAgc3RhdGljIGludCBkb19hbHRwMm1fb3Ao
-CiAgICAgICAgICAgICBpZiAoIG9zdGF0ZSApCiAgICAgICAgICAgICAgICAgcDJtX2ZsdXNoX2Fs
-dHAybShkKTsKICAgICAgICAgfQorCisgICAgICAgIGlmICggZCAhPSBjdXJyZW50LT5kb21haW4g
-KQorICAgICAgICAgICAgZG9tYWluX3VucGF1c2UoZCk7CisKICAgICAgICAgYnJlYWs7CiAgICAg
-fQogCi0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+
+--===============3453972692513130046==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="O9T4zNOkGnr0n+A/"
+Content-Disposition: inline
+
+
+--O9T4zNOkGnr0n+A/
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Feb 08, 2019 at 10:35:37AM +0100, Roger Pau Monn=C3=A9 wrote:
+> What about hot-unplug? The proper flow there would be to ask the
+> stubdomain to detach the device, and only deassign it after the
+> stubdomain has reported successful detach. I think that's already the
+> case.
+
+I think so.
+
+The approach with handling stubdomain permission in {create,destroy}_irq
+seems to work, the patch will follow.=20
+There is one code path where I haven't managed to properly extract
+possible stubdomain in use:
+pci_remove_device()
+ -> pci_cleanup_msi()
+   -> msi_free_irqs()
+     -> msi_free_irq()
+       -> destroy_irq()
+   =20
+For now I've hardcoded hardware_domain there (in msi_free_irqs). Can it
+happen when device is still assigned to some domU?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--O9T4zNOkGnr0n+A/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxdVt8ACgkQ24/THMrX
+1yzcuwf/UZwCIait1vMY6DRlVLtd9jM3QZNcQtWUhO7HXscOQ0PGYJHF1OvkdEdX
+Qzb3IW7dYZE8S01cWDAzzTrR3o96gXlLHR1X5qz4pgHr1HWxvMBsZG/kD0VCtwKu
+jkLlSPqFCVJIVz6LaSzmsr9wA44MK8Db36JY91UAK7v8kFL9cbbFhXi3Mvjme/f2
+C/SAxOXZr77y/ks8mehu3JFK2rs5Rnh1H8Yzm2iJWMSBHiGa7/YQNh8v4H+EiAWR
+qU0PP0Xr3z3JRfZFotVFC8xO2Mh3YBBIbzXigGKWT0DQX80R8TYCTDY069hERBCq
+xw/igZnk8wEeTBFilA0t450LhTAphg==
+=2PUw
+-----END PGP SIGNATURE-----
+
+--O9T4zNOkGnr0n+A/--
+
+
+--===============3453972692513130046==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3453972692513130046==--
