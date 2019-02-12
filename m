@@ -1,25 +1,24 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: arm64,
- laxton[01] (was Re: [xen-unstable-smoke test] 133030: trouble:
- blocked/broken/pass)
-Date: Tue, 12 Feb 2019 19:08:44 +0000
-Message-ID: <23651.6588.41281.256610@mariner.uk.xensource.com>
-References: <osstest-133030-mainreport@xen.org>
- <20190208131416.espkw4gi3pn6fzb5@zion.uk.xensource.com>
- <20190208181219.mhfzzr3oexmqmfpr@zion.uk.xensource.com>
- <23649.23960.966699.466828@mariner.uk.xensource.com>
- <23650.44219.254756.700521@mariner.uk.xensource.com>
- <CAF3u54AJ9pecYZeak4dhHPLjVS++a=ZxiPmhPsfXfm_1OM8=Eg@mail.gmail.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Tue, 12 Feb 2019 20:21:10 +0100
+Message-ID: <CAF3u54DiExsh-wPt-oZV-Gh56AvaLLes3PrvZDAHOxpHBLROQg@mail.gmail.com>
+References: <alpine.DEB.2.10.1901311345570.22962@sstabellini-ThinkPad-X260>
+ <2a651c5d-3f94-378d-baf9-f52cab0cdc62@arm.com>
+ <20190201165314.ofuvpddlfpzbc247@mac>
+ <56b433e0-645e-997d-1bff-de3c4f7fe250@arm.com>
+ <20190204125307.aft4tzkjjrxdd34o@mac>
+ <fcd6618d-de13-212f-8afb-e2ef0b37396d@arm.com>
+ <f045b9a9-2e1a-4d3e-b2ce-51dca97720a8@gmail.com>
+ <6457d3e5-1897-d124-ba49-c6325076b393@gmail.com>
+ <alpine.DEB.2.10.1902061300540.2723@sstabellini-ThinkPad-X260>
+ <ffe52ce4-2fb6-d730-991e-c48c7fc10c5e@gmail.com>
+ <20190207103513.ky7xnftn3pj7r2lf@mac>
+ <CAF3u54ANHMf1-3=W=R3w-25JbK3_bR_mDiM888pU5UzSTKTVPg@mail.gmail.com>
+ <f5c5bfeb-bca3-9601-7825-3d41d7d5e4af@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0639735871274902361=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=xrV+=QT=citrix.com=prvs=939669ee0=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gtdQQ-0005nS-Ae
- for xen-devel@lists.xenproject.org; Tue, 12 Feb 2019 19:08:58 +0000
-In-Reply-To: <CAF3u54AJ9pecYZeak4dhHPLjVS++a=ZxiPmhPsfXfm_1OM8=Eg@mail.gmail.com>
+In-Reply-To: <f5c5bfeb-bca3-9601-7825-3d41d7d5e4af@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,43 +27,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@gmail.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, osstest service owner <osstest-admin@xenproject.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xen.org, "LOPEZ,
+ FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SnVsaWVuIEdyYWxsIHdyaXRlcyAoIlJlOiBbWGVuLWRldmVsXSBhcm02NCwgbGF4dG9uWzAxXSAo
-d2FzIFJlOiBbeGVuLXVuc3RhYmxlLXNtb2tlIHRlc3RdIDEzMzAzMDogdHJvdWJsZTogYmxvY2tl
-ZC9icm9rZW4vcGFzcykiKToKPiBPbiBUdWUsIEZlYiAxMiwgMjAxOSBhdCAxMjoyNiBQTSBJYW4g
-SmFja3NvbiA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiBJIGRvbid0IGhhdmUg
-YSBnb29kIHBsYW4gYWJvdXQgd2hhdCB0byBkbyBuZXh0LiAgSSBndWVzcyBvbmUgdGhpbmcgd2UK
-PiA+IGNvdWxkIGRvIHdvdWxkIGJlIHRvIGFzayBZb2dlc2ggdG8gcmVmbGFzaCB0aGUgZmlybXdh
-cmUgb24gbGF4dG9uMCBhbmQKPiA+IHNlZSBpZiB0aGF0IGhlbHBzLgo+ID4KPiA+IEkgdGhpbmsg
-dGhpcyBpc3N1ZSBpcyBsaWtlbHkgdG8gYmUgYSBwcm90cmFjdGVkIHByb2JsZW0uICBBbnkgaGVs
-cGZ1bAo+ID4gc3VnZ2VzdGlvbnMgZnJvbSBwZW9wbGUgd2l0aCBtb3JlIGV4cGVyaWVuY2Ugb2Yg
-dGhlc2UgcGFydGljdWxhciBib3hlcwo+ID4gd291bGQgYmUgdmVyeSB3ZWxjb21lLi4uCj4gCj4g
-TG9va2luZyBhdCB0aGUgZmlyc3QgZmFpbHVyZSBsb2cgWzFdLCBpdCBzZWVtcyB3ZSBhcmUgdHJ5
-aW5nIHRvIGJvb3QKPiBMaW51eCAzLjE2LiAgU28gdGhlIGZhaWx1cmUgc2VlbXMgbGVnaXQgdG8g
-bWUgYXMgSSBkb24ndCB0aGluayAzLjE2Cj4gc3VwcG9ydHMgU2VhdHRsZS4KClRoaXMgaXMgb2Rk
-LiAgWW91IGhhdmUgZGVmaW5pdGVseSBzcG90dGVkIHNvbWV0aGluZyB3cm9uZy4KCkluCiAgaHR0
-cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMjk3My90ZXN0
-LWFybTY0LWFybTY0LXhsL2luZm8uaHRtbAp3ZSBzZWUgdGhhdCB0aGUgZmFpbGluZyBzdGVwIHN0
-YXJ0ZWQgYXQgMTU6MTM6MzIuICBJbiB0aGUgbG9nCiAgPiBbMV0gaHR0cDovL2xvZ3MudGVzdC1s
-YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMjk3My90ZXN0LWFybTY0LWFybTY0LXhs
-L3NlcmlhbC1sYXh0b24wLmxvZwpJIHNlZSB0aGlzOgoKICBGZWIgNyAxNToxNDo0OS4zNzQ3NzEg
-WyAwLjAwMDAwMF0gTGludXggdmVyc2lvbiA0LjkuMC0wLmJwby4yLWFybTY0CiAgKGRlYmlhbi1r
-ZXJuZWxAbGlzdHMuZGViaWFuLm9yZykgKGdjYyB2ZXJzaW9uIDQuOS4yIChEZWJpYW4vTGluYXJv
-CiAgNC45LjItMTApICkgIzEgU01QIERlYmlhbiA0LjkuMTgtMX5icG84KzEgKDIwMTctMDQtMTAp
-CgpBbmQgdGhhdCBwYXJ0IHdvcmtzLiAgSXQgcnVucyB0aHJvdWdoIGQtaSBhbmQgdGhpbmtzIGl0
-IGhhcyBzdWNjZWVkZWQuCkJ1dCB0aGVuIHdoZW4gdGhlIGhvc3QgcmVib290cyBpdCByZWJvb3Rz
-IGludG8gMy4xNiwgbm90IHRoZSBiYWNrcG9ydHMKa2VybmVsLgoKTG9va2luZyBhdCB0aGUgaW5z
-dGFsbGVyIGxvZzoKCiAgMjAxOS0wMi0wNyAxNToxODozNCBaIDE3Mi4xNi4xNDQuNTI6Mzk4NDMg
-PDEzPkZlYiAgNyAxNToxODozNAogIGJhc2UtaW5zdGFsbGVyOiBpbmZvOiBrZXJuZWwgbGludXgt
-aW1hZ2UtYXJtNjQgdXNhYmxlIG9uIGFybTY0IAoKd2hpY2ggaXMga2luZCBvZiB3ZWlyZC4KCj4g
-U28gSSB0aGluayB3ZSBjYW4gcnVsZSBvdXQgYSBmaXJtd2FyZSBidWcuICBOb3csIEkgYW0gc3Ry
-dWdnbGluZyB0bwo+IHVuZGVyc3RhbmQgd2h5IG9zc3Rlc3QgaXMgc3VkZGVubHkgdXNpbmcgMy4x
-Ni4KPiBXYXMgdGhlcmUgYW55IGNoYW5nZSBpbiBvc3N0ZXN0IG9yIHRoZSBjb25maWd1cmF0aW9u
-PwoKTm8uICBJIHRoaW5rIHNvbWV0aGluZyBtYXkgYmUgd3Jvbmcgd2l0aCB0aGUgd2F5IERlYmlh
-biBpcyBwdWJsaXNoaW5nCnRoZSBiYWNrcG9ydHMga2VybmVscy4gIEkgd2lsbCBhc2suLi4KCklh
-bi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0639735871274902361==
+Content-Type: multipart/alternative; boundary="000000000000e093230581b754bc"
+
+--000000000000e093230581b754bc
+Content-Type: text/plain; charset="UTF-8"
+
+On Tue, 12 Feb 2019, 19:21 Andrii Anisov, <andrii.anisov@gmail.com> wrote:
+
+> Hello Julien,
+>
+
+Hi,
+
+Sorry for the formatting.
+
+
+> On 07.02.19 12:59, Julien Grall wrote:
+> > In that case I would prefer if we don't keep the runstate mapped.
+>
+> Actually I'm going to see runstate update impact on the context switch
+> time. For that I will extend TBM with runstate setup.
+> I really do not like a bunch of `copy_to_guest()` done on each context
+> switch because of runstate.
+
+
+Please provide more meaningful arguments other than "I don't like it". I
+provided potential drawbacks on my previous e-mails that you haven't yet
+addressed.
+
+FWIW, Volodymyr had the same argument on OP-TEE and I requested to avoid
+the global mapping. I haven't seen any concern for performance devredation
+afterwards. Please feel free to come with numbers here.
+
+If you are against runstate mapping, I'd like to fit runstate into a page,
+> than access it directly from the hypervisor.
+
+
+This is not really a policy in Xen. If the guest cares about it, it can
+ensure that the runstate does not cross a page boundary.
+
+Cheers,
+
+
+> --
+> Sincerely,
+> Andrii Anisov.
+>
+
+--000000000000e093230581b754bc
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Tue, 12 Feb 2019, 19=
+:21 Andrii Anisov, &lt;<a href=3D"mailto:andrii.anisov@gmail.com">andrii.an=
+isov@gmail.com</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" st=
+yle=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hello=
+ Julien,<br></blockquote></div><div><br></div><div>Hi,</div><div><br></div>=
+<div>Sorry for the formatting.</div><div><br></div><div class=3D"gmail_quot=
+e"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left=
+:1px #ccc solid;padding-left:1ex">
+<br>
+On 07.02.19 12:59, Julien Grall wrote:<br>
+&gt; In that case I would prefer if we don&#39;t keep the runstate mapped.<=
+br>
+<br>
+Actually I&#39;m going to see runstate update impact on the context switch =
+time. For that I will extend TBM with runstate setup.<br>
+I really do not like a bunch of `copy_to_guest()` done on each context swit=
+ch because of runstate.</blockquote></div><div><br></div><div>Please provid=
+e more meaningful arguments other than &quot;I don&#39;t like it&quot;. I p=
+rovided potential drawbacks on my previous e-mails that you haven&#39;t yet=
+ addressed.</div><div><br></div><div>FWIW, Volodymyr had the same argument =
+on OP-TEE and I requested to avoid the global mapping. I haven&#39;t seen a=
+ny concern for performance devredation afterwards. Please feel free to come=
+ with numbers here.</div><div><br></div><div class=3D"gmail_quote"><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex">
+If you are against runstate mapping, I&#39;d like to fit runstate into a pa=
+ge, than access it directly from the hypervisor.</blockquote></div><div cla=
+ss=3D"gmail_quote"></div><div><br></div><div>This is not really a policy in=
+ Xen. If the guest cares about it, it can ensure that the runstate does not=
+ cross a page boundary.</div><div><br></div><div>Cheers,</div><div><br></di=
+v><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<br>
+-- <br>
+Sincerely,<br>
+Andrii Anisov.<br>
+</blockquote></div>
+
+--000000000000e093230581b754bc--
+
+
+--===============0639735871274902361==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0639735871274902361==--
