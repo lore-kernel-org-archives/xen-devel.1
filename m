@@ -1,37 +1,19 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v6 1/4] xen: introduce SYMBOL
-Date: Tue, 12 Feb 2019 11:31:03 +0000
-Message-ID: <23650.44663.43351.316823@mariner.uk.xensource.com>
-References: <alpine.DEB.2.10.1901091537100.15373@sstabellini-ThinkPad-X260>
- <76A2DEED0200005600417A66@prv1-mh.provo.novell.com>
- <5C41A256020000780020EF25@prv1-mh.provo.novell.com>
- <5A96F2FD0200008D00417A66@prv1-mh.provo.novell.com>
- <58377FAD0200004688BF86FB@prv1-mh.provo.novell.com>
- <5C4599C2020000780020F9D6@prv1-mh.provo.novell.com>
- <23643.13.22252.324537@mariner.uk.xensource.com>
- <58B0ADFB020000D800417A66@prv1-mh.provo.novell.com>
- <27086E4A0200006A88BF86FB@prv1-mh.provo.novell.com>
- <5C3C63E0020000780020D22C@prv1-mh.provo.novell.com>
- <7A8C0A4F020000EEB8D7C7D4@prv1-mh.provo.novell.com>
- <5C5B09910200007800214659@prv1-mh.provo.novell.com>
- <23643.3403.803290.647664@mariner.uk.xensource.com>
- <08D440470200001BB8D7C7D4@prv1-mh.provo.novell.com>
- <5C5B0F9D0200007800214692@prv1-mh.provo.novell.com>
- <23643.4305.505749.803438@mariner.uk.xensource.com>
- <alpine.DEB.2.10.1902061318050.2723@sstabellini-ThinkPad-X260>
- <23644.6915.12943.72736@mariner.uk.xensource.com>
- <alpine.DEB.2.10.1902070954530.28697@sstabellini-ThinkPad-X260>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [linux-3.18 bisection] complete
+ test-amd64-amd64-pair
+Date: Tue, 12 Feb 2019 04:39:21 -0700
+Message-ID: <5C62B0690200007800215DCD@prv1-mh.provo.novell.com>
+References: <E1gtSHm-0005fF-Jc@osstest.test-lab.xenproject.org>
+ <23650.44390.535815.180747@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="=__Part9FA2AC79.3__="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=xrV+=QT=citrix.com=prvs=939669ee0=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1gtWHN-0007Vc-Ox
- for xen-devel@lists.xenproject.org; Tue, 12 Feb 2019 11:31:09 +0000
-In-Reply-To: <alpine.DEB.2.10.1902070954530.28697@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=9SUj=QT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1gtWPQ-0007m3-0L
+ for xen-devel@lists.xenproject.org; Tue, 12 Feb 2019 11:39:28 +0000
+In-Reply-To: <23650.44390.535815.180747@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -40,22 +22,156 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <stefanos@xilinx.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Julien Grall <julien.grall@gmail.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Sasha Levin <sashal@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Aaron Brown <aaron.f.brown@intel.com>, Jeffrey T Kirsher <jeffrey.t.kirsher@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U3RlZmFubyBTdGFiZWxsaW5pIHdyaXRlcyAoIlJlOiBbWGVuLWRldmVsXSBbUEFUQ0ggdjYgMS80
-XSB4ZW46IGludHJvZHVjZSBTWU1CT0wiKToKPiBPbiBUaHUsIDcgRmViIDIwMTksIElhbiBKYWNr
-c29uIHdyb3RlOgo+ID4gRkFPRCwgSSB0aGluayB5b3Ugc2hvdWxkIGV4cGVjdCBwZW9wbGUgdG8g
-ZGVjbGFyZSB0aGUgbGlua2VyIHN5bWJvbHMKPiA+IGVpdGhlciBhcyBJIHN1Z2dlc3RlZDoKPiA+
-IAo+ID4gICAgICBleHRlcm4gY29uc3Qgc3RydWN0IHdvbWJhdCBfd29tYmF0c19zdGFydFtdOwo+
-ID4gICAgICBleHRlcm4gY29uc3Qgc3RydWN0IGFic3RyYWN0X3N5bWJvbCBfd29tYmF0c19lbmRb
-XTsKPiA+IAo+ID4gKG9yIGFsb25nIHRoZSBsaW5lcyBvZiBKYW4ncyBzdWdnZXN0aW9uLCBidXQg
-ZnJhbmtseSBJIHRoaW5rIHRoYXQgaXMKPiA+IGdvaW5nIHRvIGJlIHRvbyBoYXJkIHRvIHNvcnQg
-b3V0IG5vdy4pCj4gCj4gWWVzLCB0aGV5IGFyZSBhbHJlYWR5IGRlY2xhcmVkIHRoaXMgd2F5LCBJ
-IHdvdWxkIHByZWZlciB0byBhdm9pZAo+IGNoYW5naW5nIHRoZSBkZWNsYXJhdGlvbiBhcyBwYXJ0
-IG9mIHRoaXMgc2VyaWVzLgoKSSdtIG5vdCBzdXJlIHdoeSB5b3UgZGlkbid0IENDIG1lIG9uIHlv
-dXIgcmV2aXNlZCB2ZXJzaW9uKHMpID8KCklhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+--=__Part9FA2AC79.3__=
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+>>> On 12.02.19 at 12:26, <ian.jackson@citrix.com> wrote:
+> Jan, are you investigating this regression ?
+
+No, I'm not. I've said what I can say in a reply to an earlier bisection
+report (from Dec 12th), attached again here for reference.
+
+Jan
+
+> osstest service owner writes ("[linux-3.18 bisection] complete=20
+> test-amd64-amd64-pair"):
+>> branch xen-unstable
+>> xenbranch xen-unstable
+>> job test-amd64-amd64-pair
+>> testid xen-boot/dst_host
+>>=20
+>> Tree: linux git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-s=
+table.git
+>> Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+>> Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+>> Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+>> Tree: xen git://xenbits.xen.org/xen.git
+>>=20
+>> *** Found and reproduced problem changeset ***
+>>=20
+>>   Bug is in tree:  linux git://git.kernel.org/pub/scm/linux/kernel/git/s=
+table/linux-stable.git
+>>   Bug introduced:  7b8052e19304865477e03a0047062d977309a22f
+>>   Bug not present: d255d18a34a8d53ccc4a019dc07e17b6e8cf6bd1
+>>   Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/1312=
+78/=20
+>>=20
+>>=20
+>>   commit 7b8052e19304865477e03a0047062d977309a22f
+>>   Author: Jan Beulich <JBeulich@suse.com>
+>>   Date:   Mon Oct 19 04:23:29 2015 -0600
+>>  =20
+>>       igb: fix NULL derefs due to skipped SR-IOV enabling
+>>      =20
+>>       [ Upstream commit be06998f96ecb93938ad2cce46c4289bf7cf45bc ]
+>>      =20
+>>       The combined effect of commits 6423fc3416 ("igb: do not re-init =
+SR-IOV
+>>       during probe") and ceee3450b3 ("igb: make sure SR-IOV init uses =
+the
+>>       right number of queues") causes VFs no longer getting set up, =
+leading
+>>       to NULL pointer dereferences due to the adapter's ->vf_data being =
+NULL
+>>       while ->vfs_allocated_count is non-zero. The first commit not =
+only
+>>       neglected the side effect of igb_sriov_reinit() that the second =
+commit
+>>       tried to account for, but also that of setting IGB_FLAG_HAS_MSIX,
+>>       without which igb_enable_sriov() is effectively a no-op. Calling
+>>       igb_{,re}set_interrupt_capability() as done here seems to address =
+this,
+>>       but I'm not sure whether this is better than sinply reverting the =
+other
+>>       two commits.
+>>      =20
+>>       Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>       Tested-by: Aaron Brown <aaron.f.brown@intel.com>
+>>       Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+>>       Signed-off-by: Sasha Levin <sashal@kernel.org>
+>>=20
+>>=20
+>> For bisection revision-tuple graph see:
+>>   =20
+> http://logs.test-lab.xenproject.org/osstest/results/bisect/linux-3.18/tes=
+t-am=20
+> d64-amd64-pair.xen-boot--dst_host.html
+>> Revision IDs in each graph node refer, respectively, to the Trees =
+above.
+
+
+
+
+--=__Part9FA2AC79.3__=
+Content-Type: message/rfc822
+
+Date: Thu, 13 Dec 2018 01:26:24 -0700
+From: "Jan Beulich" <JBeulich@suse.com>
+To: "Sasha Levin" <sashal@kernel.org>,
+ "osstest service owner" <osstest-admin@xenproject.org>
+Cc: "xen-devel" <xen-devel@lists.xenproject.org>
+Subject: Re: [Xen-devel] [linux-3.18 bisection] complete
+ test-amd64-amd64-pair
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+>>> On 12.12.18 at 22:41, <osstest-admin@xenproject.org> wrote:
+> branch xen-unstable
+> xenbranch xen-unstable
+> job test-amd64-amd64-pair
+> testid xen-boot/src_host
+>=20
+> Tree: linux=20
+> git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+> Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
+> Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+> Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+> Tree: xen git://xenbits.xen.org/xen.git
+>=20
+> *** Found and reproduced problem changeset ***
+>=20
+>   Bug is in tree:  linux git://git.kernel.org/pub/scm/linux/kernel/git/st=
+able/linux-stable.git
+>   Bug introduced:  7b8052e19304865477e03a0047062d977309a22f
+>   Bug not present: d255d18a34a8d53ccc4a019dc07e17b6e8cf6bd1
+>   Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/13127=
+8/=20
+>=20
+>=20
+>   commit 7b8052e19304865477e03a0047062d977309a22f
+>   Author: Jan Beulich <JBeulich@suse.com>
+>   Date:   Mon Oct 19 04:23:29 2015 -0600
+>  =20
+>       igb: fix NULL derefs due to skipped SR-IOV enabling
+
+_Very_ interesting. An over three years old commit was determined
+to cause whatever regression it is. But wait - that's the date of the
+mainline commit, not that of the backport (which was done a month
+ago). I notice that of the two original commits the combination of
+which the one here is supposed to fix, only one actually got
+backported. Hence I wonder whether backporting the one here
+was actually appropriate.
+
+Jan
+
+
+
+--=__Part9FA2AC79.3__=
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--=__Part9FA2AC79.3__=--
