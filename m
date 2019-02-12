@@ -1,19 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [linux-3.18 bisection] complete
- test-amd64-amd64-pair
-Date: Tue, 12 Feb 2019 04:39:21 -0700
-Message-ID: <5C62B0690200007800215DCD@prv1-mh.provo.novell.com>
-References: <E1gtSHm-0005fF-Jc@osstest.test-lab.xenproject.org>
- <23650.44390.535815.180747@mariner.uk.xensource.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: [PATCH for-4.12 V4] x86/altp2m: fix
+ HVMOP_altp2m_set_domain_state race
+Date: Tue, 12 Feb 2019 13:42:14 +0200
+Message-ID: <1549971734-12795-1-git-send-email-rcojocaru@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="=__Part9FA2AC79.3__="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=9SUj=QT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gtWPQ-0007m3-0L
- for xen-devel@lists.xenproject.org; Tue, 12 Feb 2019 11:39:28 +0000
-In-Reply-To: <23650.44390.535815.180747@mariner.uk.xensource.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=8704=QT=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1gtWSH-0008RM-0e
+ for xen-devel@lists.xenproject.org; Tue, 12 Feb 2019 11:42:25 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,156 +21,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Sasha Levin <sashal@kernel.org>, xen-devel <xen-devel@lists.xenproject.org>, Aaron Brown <aaron.f.brown@intel.com>, Jeffrey T Kirsher <jeffrey.t.kirsher@intel.com>
+To: xen-devel@lists.xenproject.org
+Cc: kevin.tian@intel.com, wei.liu2@citrix.com, jbeulich@suse.com, Razvan Cojocaru <rcojocaru@bitdefender.com>, george.dunlap@eu.citrix.com, andrew.cooper3@citrix.com, jun.nakajima@intel.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
---=__Part9FA2AC79.3__=
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
->>> On 12.02.19 at 12:26, <ian.jackson@citrix.com> wrote:
-> Jan, are you investigating this regression ?
-
-No, I'm not. I've said what I can say in a reply to an earlier bisection
-report (from Dec 12th), attached again here for reference.
-
-Jan
-
-> osstest service owner writes ("[linux-3.18 bisection] complete=20
-> test-amd64-amd64-pair"):
->> branch xen-unstable
->> xenbranch xen-unstable
->> job test-amd64-amd64-pair
->> testid xen-boot/dst_host
->>=20
->> Tree: linux git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-s=
-table.git
->> Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
->> Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
->> Tree: qemuu git://xenbits.xen.org/qemu-xen.git
->> Tree: xen git://xenbits.xen.org/xen.git
->>=20
->> *** Found and reproduced problem changeset ***
->>=20
->>   Bug is in tree:  linux git://git.kernel.org/pub/scm/linux/kernel/git/s=
-table/linux-stable.git
->>   Bug introduced:  7b8052e19304865477e03a0047062d977309a22f
->>   Bug not present: d255d18a34a8d53ccc4a019dc07e17b6e8cf6bd1
->>   Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/1312=
-78/=20
->>=20
->>=20
->>   commit 7b8052e19304865477e03a0047062d977309a22f
->>   Author: Jan Beulich <JBeulich@suse.com>
->>   Date:   Mon Oct 19 04:23:29 2015 -0600
->>  =20
->>       igb: fix NULL derefs due to skipped SR-IOV enabling
->>      =20
->>       [ Upstream commit be06998f96ecb93938ad2cce46c4289bf7cf45bc ]
->>      =20
->>       The combined effect of commits 6423fc3416 ("igb: do not re-init =
-SR-IOV
->>       during probe") and ceee3450b3 ("igb: make sure SR-IOV init uses =
-the
->>       right number of queues") causes VFs no longer getting set up, =
-leading
->>       to NULL pointer dereferences due to the adapter's ->vf_data being =
-NULL
->>       while ->vfs_allocated_count is non-zero. The first commit not =
-only
->>       neglected the side effect of igb_sriov_reinit() that the second =
-commit
->>       tried to account for, but also that of setting IGB_FLAG_HAS_MSIX,
->>       without which igb_enable_sriov() is effectively a no-op. Calling
->>       igb_{,re}set_interrupt_capability() as done here seems to address =
-this,
->>       but I'm not sure whether this is better than sinply reverting the =
-other
->>       two commits.
->>      =20
->>       Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>       Tested-by: Aaron Brown <aaron.f.brown@intel.com>
->>       Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
->>       Signed-off-by: Sasha Levin <sashal@kernel.org>
->>=20
->>=20
->> For bisection revision-tuple graph see:
->>   =20
-> http://logs.test-lab.xenproject.org/osstest/results/bisect/linux-3.18/tes=
-t-am=20
-> d64-amd64-pair.xen-boot--dst_host.html
->> Revision IDs in each graph node refer, respectively, to the Trees =
-above.
-
-
-
-
---=__Part9FA2AC79.3__=
-Content-Type: message/rfc822
-
-Date: Thu, 13 Dec 2018 01:26:24 -0700
-From: "Jan Beulich" <JBeulich@suse.com>
-To: "Sasha Levin" <sashal@kernel.org>,
- "osstest service owner" <osstest-admin@xenproject.org>
-Cc: "xen-devel" <xen-devel@lists.xenproject.org>
-Subject: Re: [Xen-devel] [linux-3.18 bisection] complete
- test-amd64-amd64-pair
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
->>> On 12.12.18 at 22:41, <osstest-admin@xenproject.org> wrote:
-> branch xen-unstable
-> xenbranch xen-unstable
-> job test-amd64-amd64-pair
-> testid xen-boot/src_host
->=20
-> Tree: linux=20
-> git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
-> Tree: linuxfirmware git://xenbits.xen.org/osstest/linux-firmware.git
-> Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
-> Tree: qemuu git://xenbits.xen.org/qemu-xen.git
-> Tree: xen git://xenbits.xen.org/xen.git
->=20
-> *** Found and reproduced problem changeset ***
->=20
->   Bug is in tree:  linux git://git.kernel.org/pub/scm/linux/kernel/git/st=
-able/linux-stable.git
->   Bug introduced:  7b8052e19304865477e03a0047062d977309a22f
->   Bug not present: d255d18a34a8d53ccc4a019dc07e17b6e8cf6bd1
->   Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/13127=
-8/=20
->=20
->=20
->   commit 7b8052e19304865477e03a0047062d977309a22f
->   Author: Jan Beulich <JBeulich@suse.com>
->   Date:   Mon Oct 19 04:23:29 2015 -0600
->  =20
->       igb: fix NULL derefs due to skipped SR-IOV enabling
-
-_Very_ interesting. An over three years old commit was determined
-to cause whatever regression it is. But wait - that's the date of the
-mainline commit, not that of the backport (which was done a month
-ago). I notice that of the two original commits the combination of
-which the one here is supposed to fix, only one actually got
-backported. Hence I wonder whether backporting the one here
-was actually appropriate.
-
-Jan
-
-
-
---=__Part9FA2AC79.3__=
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---=__Part9FA2AC79.3__=--
+SFZNT1BfYWx0cDJtX3NldF9kb21haW5fc3RhdGUgZG9lcyBub3QgZG9tYWluX3BhdXNlKCksIHBy
+ZXN1bWFibHkKb24gcHVycG9zZSAoYXMgaXQgd2FzIG9yaWdpbmFsbHkgc3VwcG9zZWQgdG8gY2F0
+ZXIgdG8gYSBpbi1ndWVzdAphZ2VudCwgYW5kIGEgZG9tYWluIHBhdXNpbmcgaXRzZWxmIGlzIG5v
+dCBhIGdvb2QgaWRlYSkuCgpUaGlzIGNhbiBsZWFkIHRvIGRvbWFpbiBjcmFzaGVzIGluIHRoZSB2
+bXhfdm1leGl0X2hhbmRsZXIoKSBjb2RlCnRoYXQgY2hlY2tzIGlmIHRoZSBndWVzdCBoYXMgdGhl
+IGFiaWxpdHkgdG8gc3dpdGNoIEVQVFAgd2l0aG91dCBhbgpleGl0LiBUaGF0IGNvZGUgY2FuIF9f
+dm1yZWFkKCkgdGhlIGhvc3QgcDJtJ3MgRVBUX1BPSU5URVIKKGJlZm9yZSBIVk1PUF9hbHRwMm1f
+c2V0X2RvbWFpbl9zdGF0ZSAiZm9yX2VhY2hfdmNwdSgpIiBoYXMgYQpjaGFuY2UgdG8gcnVuIGFs
+dHAybV92Y3B1X2luaXRpYWxpc2UoKSwgYnV0IGFmdGVyCmQtPmFyY2guYWx0cDJtX2FjdGl2ZSBp
+cyBzZXQpLgoKVGhpcyBwYXRjaCByZW9yZ2FuaXplcyB0aGUgY29kZSBzbyB0aGF0IGQtPmFyY2gu
+YWx0cDJtX2FjdGl2ZQppcyBzZXQgdG8gdHJ1ZSBvbmx5IGFmdGVyIGFsbCB0aGUgaW5pdCB3b3Jr
+IGhhcyBiZWVuIGRvbmUsIGFuZAp0byBmYWxzZSBiZWZvcmUgdGhlIHVuaW5pdCB3b3JrIGJlZ2lu
+cy4gVGhpcyByZXF1aXJlZCBhZGRpbmcKYSBuZXcgYm9vbCBwYXJhbWV0ZXIgYWx0cDJtX3ZjcHVf
+dXBkYXRlX3AybSgpLCB3aGljaCByZWxpZWQKb24gZC0+YXJjaC5hbHRwMm1fYWN0aXZlIGJlaW5n
+IHNldCBiZWZvcmUgaXQncyBjYWxsZWQuCgpXaGlsZSBhdCBpdCwgSSd2ZSBjaGFuZ2VkIGEgY291
+cGxlIG9mIGJvb2xfdCdzIHRvIGJvb2wncy4KClNpZ25lZC1vZmYtYnk6IFJhenZhbiBDb2pvY2Fy
+dSA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KCi0tLQpDaGFuZ2VzIHNpbmNlIFYzOgogLSBS
+ZXZlcnRlZCBwMm1fZ2V0X2FsdHAybSgpIHRvIGl0cyBvcmlnaW5hbCBzdGF0ZS4KIC0gQWRkZWQg
+YW4gYWx0cDJtX2FjdGl2ZSgpIGNoZWNrIHRvIEhWTU9QX2FsdHAybV9zd2l0Y2hfcDJtLgogLSBV
+cGRhdGVkIHBhdGNoIGRlc2NyaXB0aW9uLgotLS0KIHhlbi9hcmNoL3g4Ni9odm0vaHZtLmMgICAg
+ICAgIHwgMjAgKysrKysrKysrKysrKysrKy0tLS0KIHhlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5j
+ICAgIHwgIDQgKystLQogeGVuL2FyY2gveDg2L21tL2FsdHAybS5jICAgICAgfCAgNCArKy0tCiB4
+ZW4vYXJjaC94ODYvbW0vcDJtLmMgICAgICAgICB8ICA0ICsrLS0KIHhlbi9pbmNsdWRlL2FzbS14
+ODYvZG9tYWluLmggIHwgIDIgKy0KIHhlbi9pbmNsdWRlL2FzbS14ODYvaHZtL2h2bS5oIHwgIDYg
+KysrLS0tCiA2IGZpbGVzIGNoYW5nZWQsIDI2IGluc2VydGlvbnMoKyksIDE0IGRlbGV0aW9ucygt
+KQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vaHZtLmMgYi94ZW4vYXJjaC94ODYvaHZt
+L2h2bS5jCmluZGV4IDIxOTQ0ZTkuLjIxZWMwNTkgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9o
+dm0vaHZtLmMKKysrIGIveGVuL2FyY2gveDg2L2h2bS9odm0uYwpAQCAtNDUyNSw3ICs0NTI1LDcg
+QEAgc3RhdGljIGludCBkb19hbHRwMm1fb3AoCiAgICAgY2FzZSBIVk1PUF9hbHRwMm1fc2V0X2Rv
+bWFpbl9zdGF0ZToKICAgICB7CiAgICAgICAgIHN0cnVjdCB2Y3B1ICp2OwotICAgICAgICBib29s
+X3Qgb3N0YXRlOworICAgICAgICBib29sIG9zdGF0ZSwgbnN0YXRlOwogCiAgICAgICAgIGlmICgg
+bmVzdGVkaHZtX2VuYWJsZWQoZCkgKQogICAgICAgICB7CkBAIC00NTM0LDEyICs0NTM0LDE1IEBA
+IHN0YXRpYyBpbnQgZG9fYWx0cDJtX29wKAogICAgICAgICB9CiAKICAgICAgICAgb3N0YXRlID0g
+ZC0+YXJjaC5hbHRwMm1fYWN0aXZlOwotICAgICAgICBkLT5hcmNoLmFsdHAybV9hY3RpdmUgPSAh
+IWEudS5kb21haW5fc3RhdGUuc3RhdGU7CisgICAgICAgIG5zdGF0ZSA9IGEudS5kb21haW5fc3Rh
+dGUuc3RhdGU7CiAKICAgICAgICAgLyogSWYgdGhlIGFsdGVybmF0ZSBwMm0gc3RhdGUgaGFzIGNo
+YW5nZWQsIGhhbmRsZSBhcHByb3ByaWF0ZWx5ICovCi0gICAgICAgIGlmICggZC0+YXJjaC5hbHRw
+Mm1fYWN0aXZlICE9IG9zdGF0ZSAmJgorICAgICAgICBpZiAoIG5zdGF0ZSAhPSBvc3RhdGUgJiYK
+ICAgICAgICAgICAgICAob3N0YXRlIHx8ICEocmMgPSBwMm1faW5pdF9hbHRwMm1fYnlfaWQoZCwg
+MCkpKSApCiAgICAgICAgIHsKKyAgICAgICAgICAgIC8qIEZpcnN0IG1hcmsgYWx0cDJtIGFzIGRp
+c2FibGVkLCB0aGVuIGFsdHAybV92Y3B1X2Rlc3Ryb3koKS4gKi8KKyAgICAgICAgICAgIGQtPmFy
+Y2guYWx0cDJtX2FjdGl2ZSA9IGZhbHNlOworCiAgICAgICAgICAgICBmb3JfZWFjaF92Y3B1KCBk
+LCB2ICkKICAgICAgICAgICAgIHsKICAgICAgICAgICAgICAgICBpZiAoICFvc3RhdGUgKQpAQCAt
+NDU1MCw3ICs0NTUzLDE0IEBAIHN0YXRpYyBpbnQgZG9fYWx0cDJtX29wKAogCiAgICAgICAgICAg
+ICBpZiAoIG9zdGF0ZSApCiAgICAgICAgICAgICAgICAgcDJtX2ZsdXNoX2FsdHAybShkKTsKKwor
+ICAgICAgICAgICAgLyoKKyAgICAgICAgICAgICAqIFdhaXQgdW50aWwgYWx0cDJtX3ZjcHVfaW5p
+dGlhbGlzZSgpIGlzIGRvbmUgYmVmb3JlIG1hcmtpbmcKKyAgICAgICAgICAgICAqIGFsdHAybSBh
+cyBiZWluZyBlbmFibGVkIGZvciB0aGUgZG9tYWluLgorICAgICAgICAgICAgICovCisgICAgICAg
+ICAgICBkLT5hcmNoLmFsdHAybV9hY3RpdmUgPSBuc3RhdGU7CiAgICAgICAgIH0KKwogICAgICAg
+ICBicmVhazsKICAgICB9CiAKQEAgLTQ2MjQsNyArNDYzNCw5IEBAIHN0YXRpYyBpbnQgZG9fYWx0
+cDJtX29wKAogICAgICAgICBicmVhazsKIAogICAgIGNhc2UgSFZNT1BfYWx0cDJtX3N3aXRjaF9w
+Mm06Ci0gICAgICAgIHJjID0gcDJtX3N3aXRjaF9kb21haW5fYWx0cDJtX2J5X2lkKGQsIGEudS52
+aWV3LnZpZXcpOworICAgICAgICByYyA9IC1FT1BOT1RTVVBQOworICAgICAgICBpZiAoIGFsdHAy
+bV9hY3RpdmUoZCkgKQorICAgICAgICAgICAgcmMgPSBwMm1fc3dpdGNoX2RvbWFpbl9hbHRwMm1f
+YnlfaWQoZCwgYS51LnZpZXcudmlldyk7CiAgICAgICAgIGJyZWFrOwogCiAgICAgY2FzZSBIVk1P
+UF9hbHRwMm1fc2V0X3N1cHByZXNzX3ZlOgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS92
+bXgvdm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwppbmRleCA2NGFmOGJmLi5lNTQy
+NTY4IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYworKysgYi94ZW4vYXJj
+aC94ODYvaHZtL3ZteC92bXguYwpAQCAtMjE1MCwxMyArMjE1MCwxMyBAQCBzdGF0aWMgYm9vbF90
+IHZteF9pc19zaW5nbGVzdGVwX3N1cHBvcnRlZCh2b2lkKQogICAgIHJldHVybiAhIWNwdV9oYXNf
+bW9uaXRvcl90cmFwX2ZsYWc7CiB9CiAKLXN0YXRpYyB2b2lkIHZteF92Y3B1X3VwZGF0ZV9lcHRw
+KHN0cnVjdCB2Y3B1ICp2KQorc3RhdGljIHZvaWQgdm14X3ZjcHVfdXBkYXRlX2VwdHAoc3RydWN0
+IHZjcHUgKnYsIGJvb2wgYWx0cDJtX2VuYWJsZWQpCiB7CiAgICAgc3RydWN0IGRvbWFpbiAqZCA9
+IHYtPmRvbWFpbjsKICAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqcDJtID0gTlVMTDsKICAgICBzdHJ1
+Y3QgZXB0X2RhdGEgKmVwdDsKIAotICAgIGlmICggYWx0cDJtX2FjdGl2ZShkKSApCisgICAgaWYg
+KCBhbHRwMm1fZW5hYmxlZCApCiAgICAgICAgIHAybSA9IHAybV9nZXRfYWx0cDJtKHYpOwogICAg
+IGlmICggIXAybSApCiAgICAgICAgIHAybSA9IHAybV9nZXRfaG9zdHAybShkKTsKZGlmZiAtLWdp
+dCBhL3hlbi9hcmNoL3g4Ni9tbS9hbHRwMm0uYyBiL3hlbi9hcmNoL3g4Ni9tbS9hbHRwMm0uYwpp
+bmRleCA5MzBiZGMyLi5jNTEzMDNiIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0vYWx0cDJt
+LmMKKysrIGIveGVuL2FyY2gveDg2L21tL2FsdHAybS5jCkBAIC0zOSw3ICszOSw3IEBAIGFsdHAy
+bV92Y3B1X2luaXRpYWxpc2Uoc3RydWN0IHZjcHUgKnYpCiAgICAgdmNwdV9hbHRwMm0odikucDJt
+aWR4ID0gMDsKICAgICBhdG9taWNfaW5jKCZwMm1fZ2V0X2FsdHAybSh2KS0+YWN0aXZlX3ZjcHVz
+KTsKIAotICAgIGFsdHAybV92Y3B1X3VwZGF0ZV9wMm0odik7CisgICAgYWx0cDJtX3ZjcHVfdXBk
+YXRlX3AybSh2LCB0cnVlKTsKIAogICAgIGlmICggdiAhPSBjdXJyZW50ICkKICAgICAgICAgdmNw
+dV91bnBhdXNlKHYpOwpAQCAtNTgsNyArNTgsNyBAQCBhbHRwMm1fdmNwdV9kZXN0cm95KHN0cnVj
+dCB2Y3B1ICp2KQogCiAgICAgYWx0cDJtX3ZjcHVfcmVzZXQodik7CiAKLSAgICBhbHRwMm1fdmNw
+dV91cGRhdGVfcDJtKHYpOworICAgIGFsdHAybV92Y3B1X3VwZGF0ZV9wMm0odiwgZmFsc2UpOwog
+ICAgIGFsdHAybV92Y3B1X3VwZGF0ZV92bWZ1bmNfdmUodik7CiAKICAgICBpZiAoIHYgIT0gY3Vy
+cmVudCApCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvbW0vcDJtLmMgYi94ZW4vYXJjaC94ODYv
+bW0vcDJtLmMKaW5kZXggZDE0Y2U1Ny4uNmY5OTFmOCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2
+L21tL3AybS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9tbS9wMm0uYwpAQCAtMjMzMiw3ICsyMzMyLDcg
+QEAgYm9vbF90IHAybV9zd2l0Y2hfdmNwdV9hbHRwMm1fYnlfaWQoc3RydWN0IHZjcHUgKnYsIHVu
+c2lnbmVkIGludCBpZHgpCiAgICAgICAgICAgICBhdG9taWNfZGVjKCZwMm1fZ2V0X2FsdHAybSh2
+KS0+YWN0aXZlX3ZjcHVzKTsKICAgICAgICAgICAgIHZjcHVfYWx0cDJtKHYpLnAybWlkeCA9IGlk
+eDsKICAgICAgICAgICAgIGF0b21pY19pbmMoJnAybV9nZXRfYWx0cDJtKHYpLT5hY3RpdmVfdmNw
+dXMpOwotICAgICAgICAgICAgYWx0cDJtX3ZjcHVfdXBkYXRlX3AybSh2KTsKKyAgICAgICAgICAg
+IGFsdHAybV92Y3B1X3VwZGF0ZV9wMm0odiwgdHJ1ZSk7CiAgICAgICAgIH0KICAgICAgICAgcmMg
+PSAxOwogICAgIH0KQEAgLTI1NzMsNyArMjU3Myw3IEBAIGludCBwMm1fc3dpdGNoX2RvbWFpbl9h
+bHRwMm1fYnlfaWQoc3RydWN0IGRvbWFpbiAqZCwgdW5zaWduZWQgaW50IGlkeCkKICAgICAgICAg
+ICAgICAgICBhdG9taWNfZGVjKCZwMm1fZ2V0X2FsdHAybSh2KS0+YWN0aXZlX3ZjcHVzKTsKICAg
+ICAgICAgICAgICAgICB2Y3B1X2FsdHAybSh2KS5wMm1pZHggPSBpZHg7CiAgICAgICAgICAgICAg
+ICAgYXRvbWljX2luYygmcDJtX2dldF9hbHRwMm0odiktPmFjdGl2ZV92Y3B1cyk7Ci0gICAgICAg
+ICAgICAgICAgYWx0cDJtX3ZjcHVfdXBkYXRlX3AybSh2KTsKKyAgICAgICAgICAgICAgICBhbHRw
+Mm1fdmNwdV91cGRhdGVfcDJtKHYsIHRydWUpOwogICAgICAgICAgICAgfQogCiAgICAgICAgIHJj
+ID0gMDsKZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL2FzbS14ODYvZG9tYWluLmggYi94ZW4vaW5j
+bHVkZS9hc20teDg2L2RvbWFpbi5oCmluZGV4IDI3N2Y5OWYuLmE0ZThmNWEgMTAwNjQ0Ci0tLSBh
+L3hlbi9pbmNsdWRlL2FzbS14ODYvZG9tYWluLmgKKysrIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9k
+b21haW4uaApAQCAtMzM3LDcgKzMzNyw3IEBAIHN0cnVjdCBhcmNoX2RvbWFpbgogICAgIG1tX2xv
+Y2tfdCBuZXN0ZWRfcDJtX2xvY2s7CiAKICAgICAvKiBhbHRwMm06IGFsbG93IG11bHRpcGxlIGNv
+cGllcyBvZiBob3N0IHAybSAqLwotICAgIGJvb2xfdCBhbHRwMm1fYWN0aXZlOworICAgIGJvb2wg
+YWx0cDJtX2FjdGl2ZTsKICAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqYWx0cDJtX3AybVtNQVhfQUxU
+UDJNXTsKICAgICBtbV9sb2NrX3QgYWx0cDJtX2xpc3RfbG9jazsKICAgICB1aW50NjRfdCAqYWx0
+cDJtX2VwdHA7CmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9odm0uaCBiL3hl
+bi9pbmNsdWRlL2FzbS14ODYvaHZtL2h2bS5oCmluZGV4IDBhMTBiNTEuLmRlMDk2OWIgMTAwNjQ0
+Ci0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvaHZtL2h2bS5oCisrKyBiL3hlbi9pbmNsdWRlL2Fz
+bS14ODYvaHZtL2h2bS5oCkBAIC0yMTQsNyArMjE0LDcgQEAgc3RydWN0IGh2bV9mdW5jdGlvbl90
+YWJsZSB7CiAgICAgYm9vbF90ICgqaXNfc2luZ2xlc3RlcF9zdXBwb3J0ZWQpKHZvaWQpOwogCiAg
+ICAgLyogQWx0ZXJuYXRlIHAybSAqLwotICAgIHZvaWQgKCphbHRwMm1fdmNwdV91cGRhdGVfcDJt
+KShzdHJ1Y3QgdmNwdSAqdik7CisgICAgdm9pZCAoKmFsdHAybV92Y3B1X3VwZGF0ZV9wMm0pKHN0
+cnVjdCB2Y3B1ICp2LCBib29sIGFsdHAybV9lbmFibGVkKTsKICAgICB2b2lkICgqYWx0cDJtX3Zj
+cHVfdXBkYXRlX3ZtZnVuY192ZSkoc3RydWN0IHZjcHUgKnYpOwogICAgIGJvb2xfdCAoKmFsdHAy
+bV92Y3B1X2VtdWxhdGVfdmUpKHN0cnVjdCB2Y3B1ICp2KTsKICAgICBpbnQgKCphbHRwMm1fdmNw
+dV9lbXVsYXRlX3ZtZnVuYykoY29uc3Qgc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MpOwpAQCAt
+NjM5LDEwICs2MzksMTAgQEAgc3RhdGljIGlubGluZSBib29sIGh2bV9hbHRwMm1fc3VwcG9ydGVk
+KHZvaWQpCiB9CiAKIC8qIHVwZGF0ZXMgdGhlIGN1cnJlbnQgaGFyZHdhcmUgcDJtICovCi1zdGF0
+aWMgaW5saW5lIHZvaWQgYWx0cDJtX3ZjcHVfdXBkYXRlX3AybShzdHJ1Y3QgdmNwdSAqdikKK3N0
+YXRpYyBpbmxpbmUgdm9pZCBhbHRwMm1fdmNwdV91cGRhdGVfcDJtKHN0cnVjdCB2Y3B1ICp2LCBi
+b29sIGFsdHAybV9lbmFibGVkKQogewogICAgIGlmICggaHZtX2Z1bmNzLmFsdHAybV92Y3B1X3Vw
+ZGF0ZV9wMm0gKQotICAgICAgICBodm1fZnVuY3MuYWx0cDJtX3ZjcHVfdXBkYXRlX3AybSh2KTsK
+KyAgICAgICAgaHZtX2Z1bmNzLmFsdHAybV92Y3B1X3VwZGF0ZV9wMm0odiwgYWx0cDJtX2VuYWJs
+ZWQpOwogfQogCiAvKiB1cGRhdGVzIFZNQ1MgZmllbGRzIHJlbGF0ZWQgdG8gVk1GVU5DIGFuZCAj
+VkUgKi8KLS0gCjIuNy40CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
+ZXZlbA==
