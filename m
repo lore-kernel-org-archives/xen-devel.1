@@ -1,27 +1,24 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v5 00/15] Argo: hypervisor-mediated
- interdomain communication
-Date: Wed, 13 Feb 2019 14:19:46 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1902131416010.5641@sstabellini-ThinkPad-X260>
-References: <1548064795-18160-1-git-send-email-christopher.w.clark@gmail.com>
- <20190122141702.h3oxvr25xjxbhjcl@mac>
- <CACMJ4Gbr4dR2B7o=+i_0aCEPiXTA9nF-w477Btvv8vd_B2+mOw@mail.gmail.com>
- <20190131133931.vincqqgf4acywekz@mac>
- <CACMJ4GZ+85Hr4x8Ydt9u8zJWQLnGcDCxnWoHw3WQdqOZaZJ0gQ@mail.gmail.com>
- <20190204100712.idxj4xpvifv7yy6f@mac>
- <alpine.DEB.2.10.1902041020360.22962@sstabellini-ThinkPad-X260>
- <57352BCA-A6DC-4536-B839-C2176731DC9C@gmail.com>
+From: Jason Gunthorpe <jgg@ziepe.ca>
+Subject: Re: [PATCH V2 3/7] mm/gup: Change GUP fast to use flags
+ rather than a write 'bool'
+Date: Wed, 13 Feb 2019 16:11:10 -0700
+Message-ID: <20190213231110.GD24692@ziepe.ca>
+References: <20190211201643.7599-1-ira.weiny@intel.com>
+ <20190213230455.5605-1-ira.weiny@intel.com>
+ <20190213230455.5605-4-ira.weiny@intel.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1897628290-1550096270=:5641"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ALhK=QU=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gu2sf-0001Yp-MX
- for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 22:19:49 +0000
-In-Reply-To: <57352BCA-A6DC-4536-B839-C2176731DC9C@gmail.com>
-Content-ID: <alpine.DEB.2.10.1902131418090.5641@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=QzrP=QU=ziepe.ca=jgg@srs-us1.protection.inumbo.net>)
+ id 1gu3gP-0006Fk-H5
+ for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 23:11:13 +0000
+Received: by mail-pl1-x644.google.com with SMTP id b5so1966613plr.4
+ for <xen-devel@lists.xenproject.org>; Wed, 13 Feb 2019 15:11:11 -0800 (PST)
+Content-Disposition: inline
+In-Reply-To: <20190213230455.5605-4-ira.weiny@intel.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,87 +27,31 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Rich Persaud <persaur@gmail.com>
-Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ross Philipson <ross.philipson@gmail.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jason Andryuk <jandryuk@gmail.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Christopher Clark <christopher.w.clark@gmail.com>, Tim Deegan <tim@xen.org>, Daniel Smith <dpsmith@apertussolutions.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Daniel De Graaf <dgdegra@tycho.nsa.gov>, James McKenzie <james@bromium.com>, Eric Chanudet <eric.chanudet@gmail.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+To: ira.weiny@intel.com
+Cc: Martin Brandenburg <martin@omnibond.com>, linux-fbdev@vger.kernel.org, Rich Felker <dalias@libc.org>, kvm@vger.kernel.org, linux-sh@vger.kernel.org, David Airlie <airlied@linux.ie>, linux-fpga@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-mm@kvack.org, Michal Hocko <mhocko@suse.com>, sparclinux@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, devel@driverdev.osuosl.org, linux-s390@vger.kernel.org, rds-devel@oss.oracle.com, Mauro Carvalho Chehab <mchehab@kernel.org>, linux-scsi@vger.kernel.org, linux-rdma@vger.kernel.org, Joerg Roedel <joro@8bytes.org>, David Hildenbrand <david@redhat.com>, Rob Springer <rspringer@google.com>, Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, xen-devel@lists.xenproject.org, Matt Porter <mporter@kernel.crashing.org>, Jason Wang <jasowang@redhat.com>, devel@lists.orangefs.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1897628290-1550096270=:5641
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1902131418091.5641@sstabellini-ThinkPad-X260>
-
-On Wed, 13 Feb 2019, Rich Persaud wrote:
-> On Feb 4, 2019, at 13:22, Stefano Stabellini <sstabellini@kernel.org> wrote:
-> 
->       On Mon, 4 Feb 2019, Roger Pau Monné wrote:
->                   Yes, v7 was sent to address Jan and Julien's review comments in parallel
-> 
->                   with our ongoing discussion on v5 macros. v7 also provided a checkpoint
-> 
->                   for Argo testers to maximize test coverage as the series converges into
-> 
->                   a Xen 4.12 merge candidate for Juergen. It addressed:
-> 
-> 
->                   - Jan's v6 review comments
-> 
->                   - Julien's v1 review comment
-> 
->                   - most of your xen-devel and offline review comments
-> 
-> 
->             I think it will benefit the community to give this review in public,
-> 
->             so other reviewers know whats going on. IMO getting this private
-> 
->             review makes it harder for me (as a reviewer) to know the motivation
-> 
->             of some of the changes between versions, and likely also makes it
-> 
->             harder for you since you have to keep track of comments from multiple
-> 
->             sources on different channels.
-> 
-> 
->       There is one more reason to require public comments which I have only
->       learned recently: for safety certifications we need to keep a record of
->       all review comments and patches that address them for traceability.
-> 
-> 
-> Do you mean:
-> 
-> (A) all _merged_ patches and their review comments
-> 
->  or
-> 
-> (B) all comments and patches (merged or not) that address them
-> 
-> i.e. would the certification process be seeking traceability of safety-impacting patches (code, scenario A) or decisions
-> (including decisions to leave code unchanged, scenario B)?
-
-I meant (A), however, I don't know specifically if anything from (B) is
-also required.
-
-
-> If you mean (B), would we need an update to the Xen Security Problem Response Process [1]?  e.g. public archive of all comments
-> from pre-disclosure discussion, along with content hashes stored immutably?  
-> Rich
-> 
-> [1] https://www.xenproject.org/security-policy.html
-
-I don't think the archives of the pre-disclosure security discussions
-need to be public, but they probably need to be available.
---8323329-1897628290-1550096270=:5641
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1897628290-1550096270=:5641--
+T24gV2VkLCBGZWIgMTMsIDIwMTkgYXQgMDM6MDQ6NTFQTSAtMDgwMCwgaXJhLndlaW55QGludGVs
+LmNvbSB3cm90ZToKPiBGcm9tOiBJcmEgV2VpbnkgPGlyYS53ZWlueUBpbnRlbC5jb20+Cj4gCj4g
+VG8gZmFjaWxpdGF0ZSBhZGRpdGlvbmFsIG9wdGlvbnMgdG8gZ2V0X3VzZXJfcGFnZXNfZmFzdCgp
+IGNoYW5nZSB0aGUKPiBzaW5ndWxhciB3cml0ZSBwYXJhbWV0ZXIgdG8gYmUgZ3VwX2ZsYWdzLgoK
+U28gbm93IHdlIGhhdmU6Cgpsb25nIGdldF91c2VyX3BhZ2VzX3VubG9ja2VkKHVuc2lnbmVkIGxv
+bmcgc3RhcnQsIHVuc2lnbmVkIGxvbmcgbnJfcGFnZXMsCgkJICAgIHN0cnVjdCBwYWdlICoqcGFn
+ZXMsIHVuc2lnbmVkIGludCBndXBfZmxhZ3MpOwoKYW5kIAoKaW50IGdldF91c2VyX3BhZ2VzX2Zh
+c3QodW5zaWduZWQgbG9uZyBzdGFydCwgaW50IG5yX3BhZ2VzLAoJCQl1bnNpZ25lZCBpbnQgZ3Vw
+X2ZsYWdzLCBzdHJ1Y3QgcGFnZSAqKnBhZ2VzKQoKRG9lcyB0aGlzIG1ha2UgYW55IHNlbnNlPyBB
+dCBsZWFzdCB0aGUgYXJndW1lbnRzIHNob3VsZCBiZSBpbiB0aGUgc2FtZQpvcmRlciwgSSB0aGlu
+ay4KCkFsc28gdGhpcyBjb21tZW50OgovKgogKiBnZXRfdXNlcl9wYWdlc191bmxvY2tlZCgpIGlz
+IHN1aXRhYmxlIHRvIHJlcGxhY2UgdGhlIGZvcm06CiAqCiAqICAgICAgZG93bl9yZWFkKCZtbS0+
+bW1hcF9zZW0pOwogKiAgICAgIGdldF91c2VyX3BhZ2VzKHRzaywgbW0sIC4uLiwgcGFnZXMsIE5V
+TEwpOwogKiAgICAgIHVwX3JlYWQoJm1tLT5tbWFwX3NlbSk7CiAqCiAqICB3aXRoOgogKgogKiAg
+ICAgIGdldF91c2VyX3BhZ2VzX3VubG9ja2VkKHRzaywgbW0sIC4uLiwgcGFnZXMpOwogKgogKiBJ
+dCBpcyBmdW5jdGlvbmFsbHkgZXF1aXZhbGVudCB0byBnZXRfdXNlcl9wYWdlc19mYXN0IHNvCiAq
+IGdldF91c2VyX3BhZ2VzX2Zhc3Qgc2hvdWxkIGJlIHVzZWQgaW5zdGVhZCBpZiBzcGVjaWZpYyBn
+dXBfZmxhZ3MKICogKGUuZy4gRk9MTF9GT1JDRSkgYXJlIG5vdCByZXF1aXJlZC4KICovCgpOZWVk
+cyBzb21lIGF0dGVudGlvbiBhcyB0aGUgcmVjb21tZW5kYXRpb24gaXMgbm93IG5vbnNlbnNlLgoK
+SG9uZXN0bHkgYSBwcm9wZXIgZXhwbGFuYXRpb24gb2Ygd2h5IHR3byBmdW5jdGlvbnMgZXhpc3Qg
+d291bGQgYmUKZ3JlYXQgYXQgdGhpcyBwb2ludCA6KQoKSmFzb24KCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
