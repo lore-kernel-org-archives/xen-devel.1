@@ -1,19 +1,17 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re:
- =?utf-8?q?xen=3A_credit2=3A_credit2_can=E2=80=99t_re?=
- =?utf-8?q?ach_the_throughput_as_expected?=
-Date: Wed, 13 Feb 2019 13:44:45 +0100
-Message-ID: <6accd1c20f3ee24920a48e4e3c820019b52aea34.camel@suse.com>
-References: <SG2PR01MB3302E90C28F2EED3F8A6105997650@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 133227: trouble:
+ blocked/broken/pass
+Date: Wed, 13 Feb 2019 12:57:50 +0000
+Message-ID: <osstest-133227-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7044594111039577544=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=sQnB=QU=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1gtttY-0001WL-C0
- for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 12:44:08 +0000
-In-Reply-To: <SG2PR01MB3302E90C28F2EED3F8A6105997650@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
+ <SRS0=1/N/=QU=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gtu6r-0002Wx-K6
+ for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 12:57:53 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,183 +20,204 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?=E9=83=91_=E5=B7=9D?= <jason.zhengchuan@hotmail.com>, "george.dunlap@citrix.com" <george.dunlap@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: "jgross@suse.com" <jgross@suse.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "frank.yangjie@gmail.com" <frank.yangjie@gmail.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7044594111039577544==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-sKgfnBDcmcgZXelLkGxX"
-
-
---=-sKgfnBDcmcgZXelLkGxX
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2019-02-12 at 13:36 +0000, =E9=83=91 =E5=B7=9D wrote:
-> Hi, George,
->=20
-Hi (although I'm not George :-D),
-
-> I found Credit2 can=E2=80=99t reach the throughput as expected under my t=
-est
-> workload, compared to Credit and CFS. It is easy to reproduce, and I
-> think the problem is really exist.
-> It really took me a long time to find out why due to my lack of
-> knowledge, and I cannot find a good way to solve it.
-> Please do help to take a look at it. Thx.
->=20
-Ok, thanks for your testing, and for reporting this to us.
-
-A few questions.
-
-> ***************
-> [How to reproduce]
-> ***************
-> I use openSUSE-Tumbleweed with xen-4.11 version.
-> Here is the test workload like:
-> I have guest_1 with 4 vCPU and guest_2 with 8 vCPU running on 4 pCPU,
-> that is, the relation of pCPU:vCPU is 1:3.
-> Then I add pressure with 20% CPU usage for each vCPU, which results
-> in total 240% pCPU usage.
-> The 20% pressure model is that, I start one process on each vCPU,
-> which runs 20ms indefinitely and then goes to sleep 80ms within the
-> period of 100ms.
-> I use xentop to observe guest cpu usage in dom0, as I expect, the
-> guest cpu usage is 80% and 160% for guest_1 and guest_2 ,
-> respectively.
->=20
-Do you have the sources for this somewhere, so that we can try to
-reproduce it ourself. I'm thinking to the source code for the periodic
-apps (if you used a custom made one), or the repository (if you used
-one from any) or the name of the benchmarking suite --and the parameter
-used to create this scenario?
-
-> **************
-> [Why it happens]
-> **************
-> The test workload likes the polling from the long term to see.
-> As showed in the figure below, the - - - - means the cputime the
-> vcpus is running and the =E2=80=94=E2=80=94=E2=80=94 means the idle.
-> As we can see from Fig.1, if vcpu_1 and vcpu_2 can run staggeredly,
-> the throughput looks fine, however, if vcpu_1 and vcpu_2 runs at the
-> same time, they will compete for pCPU, which results in poor
-> throughput.
->=20
-> vcpu_1        - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94=E2=80=94=E2=80=94  - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=
-=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94 - - - -
-> -
->                   |                |                               |=20
->               |                               |
-> vcpu_2                        - - - - - - - =E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94  - - - - - - -
-> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
->                   |  vcpu1    |   vcpu2   |               |  vcpu1  =20
->  |   vcpu2   |              |  vcpu1
-> cpu usage   - - - - - - - - - - - - -  =E2=80=94=E2=80=94=E2=80=94=E2=80=
-=94- - - - - - - - - - - - -
-> - =E2=80=94=E2=80=94=E2=80=94=E2=80=94 - - - - - - -=20
->                                                            Fig.1
->=20
-> vcpu_1       - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94=E2=80=94=E2=80=94                  - - - - - - -
-> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
->                  |
-> vcpu_2       - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94=E2=80=94=E2=80=94                  - - - - - - -
-> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
->                  |  compete running     |   both
-> sleep         |  compete running    |   both sleep    |       =20
-> cpu usage   - - - - - - - - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=
-=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94 - - - - - - - - - -
-> - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
-=E2=80=94
->                                                            Fig.2
->=20
-Ok, I'm not entirely sure I follow all this, but let's put it aside for
-a second. The question I have is, is this analysis coming from looking
-at actual traces? If yes, can you upload somewhere/share the trace
-files?
-
-> As we do reset_credit() when snext->credit is negative which makes
-> the credit value is too close between each vcpu.
-> As a result, from long term to observe, the time-slice of each vcpu
-> becomes smaller, they compete for pCPU at the same time just like
-> shown in Fig.2 above.
-> Thus, i think the reason why it can't reach the expected throughput
-> is that reset_credit() for all vcpu will make the time-slice smaller
-> which is different from
-> Credit and CFS.
->=20
-Ok, so you're saying this drop of "throughput" can be caused by
-scheduling happening too frequently in Credit2.
-
-Well, I guess that is a possibility, although, as I said above, I'd
-need to think a bit more about this, as well as trying to reproduce it,
-and look at actual traces.
-
-Perhaps, one thing that can be done to try to confirm this analysis,
-would be to make the scheduling less frequent in Credit2 and, on the
-other hand, to make it more frequent in Credit1. In theory, if the
-analysis is correct, you would observe the behavior of this specific
-workload improving on Credit2 and degrading in Credit1, when doing so.
-
-If you fancy trying that, for Credit1, you can play with the
-sched_credit_tslice_ms Xen boot time parameter (e.g., try pushing it
-down to 1ms).
-
-For Credit2, it's a little trickier, as the scheduler does not have a
-real timeslice. So, either you alter CSCHED2_MIN_TIMER, in the code, or
-you "mimic" the timeslice increase by setting sched_ratelimit_us to a
-higher value (like, e.g., 10ms).
-
-It's not a conclusive test, but I think it is a good enough one for
-gaining some more understanding of the issue.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-sKgfnBDcmcgZXelLkGxX
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxkET0ACgkQFkJ4iaW4
-c+5FcRAAgfX9XcN2E1HRDSzQWbtiKGdnT/83bwLgoJ2QfqNHfUpF481VmUsIbgjg
-VReEIyQMNwNr//xs/eh4FmI9VFQxUM0aaPV6AY5sVqf8TAGOgrz7VoftdmVeI18D
-yKigXb8ED1bv8pCMRL9ZobFEwxlvuNwy43x8BnVSJaz18PvSeoy9TMJJCthDx5rQ
-QJnwHYKa3waAus64u6glSowU50ZjNAMlqOAZXY8CY1xVfYlTSF/cK1ZYgl3oErzP
-BnSFoO+ssi1u7vG+jM6I/FtFzlIX/qkyRmZ+HeKAEY+a3QzTXebiIHyiZ+DfpAtI
-Hrj8U7lQYaLYOm0yM1wLju+Qu3k0S7ZdRglmV8fjp6YtB26iNJxLW/1fA4j45+uF
-6+3vBT/f7OJax4IkDdMVNWpX/qXLn4ocu5Ao+TVCA0YqyHiaoyzqcNOJZYe18Hpv
-rAMUm3w7TcvhMKQzK+NpnJxGpqKm1GfFoyl4Y2nnNUwFr3La2o0Me5j8+2aqn+93
-IHHUXCYrSWyO4MyCc64sPu4GMdiw6Pw0H4Urs6b31dFKiFS8IxYOs5kyMnic/9YL
-z10smrM7yn1cCVFKdhKTfDHSAtJKZBArJcuk7EtOUbVxaLKgm8rzTum1lUc1dw+x
-adfZEQ1/djyB4oRTkhJmLv2lZE+fllVbvzOCodJ9CLTGsmuGMgs=
-=6yEa
------END PGP SIGNATURE-----
-
---=-sKgfnBDcmcgZXelLkGxX--
-
-
-
---===============7044594111039577544==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7044594111039577544==--
+ZmxpZ2h0IDEzMzIyNyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMzIyNy8KCkZhaWx1cmVzIGFu
+ZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFu
+ZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgog
+YnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAg
+ICAgIGJyb2tlbgoKUmVncmVzc2lvbnMgd2hpY2ggYXJlIHJlZ2FyZGVkIGFzIGFsbG93YWJsZSAo
+bm90IGJsb2NraW5nKToKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgIDIgaG9zdHMtYWxs
+b2NhdGUgICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDEzMzAwNQoKVGVzdHMgd2hpY2ggZGlkIG5v
+dCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNt
+ICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIGJ1aWxk
+LWFybTY0LXhzbSAgICAgICAgICAgICAgIDMgY2FwdHVyZS1sb2dzICAgICAgICAgIGJyb2tlbiBi
+bG9ja2VkIGluIDEzMzAwNQogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGlu
+ZzoKIHhlbiAgICAgICAgICAgICAgICAgIGYxNzhhMDBjMzAxNzNjMGIyNjhkOTkxNjBlMTlhZDI5
+OWIxODIzYTIKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDQ1NTMwMTcx
+NmUxZmYzNThjYjc5MzY3MjEzMDAzZmJhNzcxZGQ0NjYKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEz
+MzAwNSAgMjAxOS0wMi0wNyAxNDowMDozMiBaICAgIDUgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAg
+ICAxMzMwMTEgIDIwMTktMDItMDcgMTg6MDA6MzYgWiAgICA1IGRheXMgICAzMSBhdHRlbXB0cwpU
+ZXN0aW5nIHNhbWUgc2luY2UgICAxMzMyMDAgIDIwMTktMDItMTIgMTY6MDA6NTYgWiAgICAwIGRh
+eXMgICAgOCBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIg
+dGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEdlb3Jn
+ZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KICBJYW4gSmFja3NvbiA8aWFuLmph
+Y2tzb25AZXUuY2l0cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAg
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgogIEtldmluIFRpYW4gPGtldmluLnRpYW5A
+aW50ZWwuY29tPgogIE1pY2hhZWwgVGF1dHNjaG5pZyA8dGF1dHNjaG5AYW1hem9uLmNvLnVrPgog
+IE5vcmJlcnQgTWFudGhleSA8bm1hbnRoZXlAYW1hem9uLmNvbT4KICBOb3JiZXJ0IE1hbnRoZXkg
+PG5tYW50aGV5QGFtYXpvbi5kZT4KICBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtl
+cm5lbC5vcmc+CiAgU3RlZmFubyBTdGFiZWxsaW5pIDxzdGVmYW5vc0B4aWxpbnguY29tPgogIFRp
+bSBEZWVnYW4gPHRpbUB4ZW4ub3JnPgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpq
+b2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1k
+NjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
+dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
+LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qu
+b3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dz
+LCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVz
+dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSBy
+ZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJp
+dHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hi
+PW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
+YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5k
+IGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3Vt
+bWFyeQoKYnJva2VuLWpvYiBidWlsZC1hcm02NC14c20gYnJva2VuCmJyb2tlbi1zdGVwIGJ1aWxk
+LWFybTY0LXhzbSBob3N0cy1hbGxvY2F0ZQpicm9rZW4tc3RlcCBidWlsZC1hcm02NC14c20gY2Fw
+dHVyZS1sb2dzCgpOb3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgZjE3OGEwMGMzMDE3M2MwYjI2OGQ5
+OTE2MGUxOWFkMjk5YjE4MjNhMgpBdXRob3I6IE5vcmJlcnQgTWFudGhleSA8bm1hbnRoZXlAYW1h
+em9uLmRlPgpEYXRlOiAgIFR1ZSBGZWIgMTIgMTU6MjA6MTUgMjAxOSArMDEwMAoKICAgIHg4Ni9o
+dm06IGJsb2NrIHNwZWN1bGF0aXZlIG91dC1vZi1ib3VuZCBhY2Nlc3NlcwogICAgCiAgICBUaGVy
+ZSBhcmUgbXVsdGlwbGUgYXJyYXlzIGluIHRoZSBIVk0gaW50ZXJmYWNlIHRoYXQgYXJlIGFjY2Vz
+c2VkCiAgICB3aXRoIGluZGljZXMgdGhhdCBhcmUgcHJvdmlkZWQgYnkgdGhlIGd1ZXN0LiBUbyBh
+dm9pZCBzcGVjdWxhdGl2ZQogICAgb3V0LW9mLWJvdW5kIGFjY2Vzc2VzLCB3ZSB1c2UgdGhlIGFy
+cmF5X2luZGV4X25vc3BlYyBtYWNyby4KICAgIAogICAgV2hlbiBibG9ja2luZyBzcGVjdWxhdGl2
+ZSBvdXQtb2YtYm91bmQgYWNjZXNzZXMsIHdlIGNhbiBjbGFzc2lmeSBhcnJheXMKICAgIGludG8g
+ZHluYW1pYyBhcnJheXMgYW5kIHN0YXRpYyBhcnJheXMuIFdoZXJlIHRoZSBmb3JtZXIgYXJlIGFs
+bG9jYXRlZAogICAgZHVyaW5nIHJ1biB0aW1lLCB0aGUgc2l6ZSBvZiB0aGUgbGF0dGVyIGlzIGtu
+b3duIGR1cmluZyBjb21waWxlIHRpbWUuCiAgICBPbiBzdGF0aWMgYXJyYXlzLCBjb21waWxlciBt
+aWdodCBiZSBhYmxlIHRvIGJsb2NrIHNwZWN1bGF0aXZlIGFjY2Vzc2VzCiAgICBpbiB0aGUgZnV0
+dXJlLgogICAgCiAgICBUaGlzIGlzIHBhcnQgb2YgdGhlIHNwZWN1bGF0aXZlIGhhcmRlbmluZyBl
+ZmZvcnQuCiAgICAKICAgIFJlcG9ydGVkLWJ5OiBQYXdlbCBXaWVjem9ya2lld2ljeiA8d2lwYXdl
+bEBhbWF6b24uZGU+CiAgICBTaWduZWQtb2ZmLWJ5OiBOb3JiZXJ0IE1hbnRoZXkgPG5tYW50aGV5
+QGFtYXpvbi5kZT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
+b20+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+
+Cgpjb21taXQgNTZkOGQwMTE5ZDI3MGY4NDZjNmM0OTQzNzEyYjhhMjFmYmU1ZDRkMApBdXRob3I6
+IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KRGF0ZTogICBUdWUgRmViIDEyIDExOjU0
+OjU3IDIwMTkgKzAxMDAKCiAgICBWTVg6IGRvbid0IGlnbm9yZSBQMk0gc2V0dXAgZXJyb3IKICAg
+IAogICAgc2V0X21taW9fcDJtX2VudHJ5KCkgbWF5IGZhaWwsIGluIHBhcnRpY3VsYXIgd2l0aCAt
+RU5PTUVNLiBEb24ndCBpZ25vcmUKICAgIHN1Y2ggYW4gZXJyb3IsIGJ1dCBpbnN0ZWFkIGNhdXNl
+IGRvbWFpbiBjcmVhdGlvbiB0byBmYWlsIGluIHN1Y2ggYSBjYXNlLgogICAgCiAgICBTaWduZWQt
+b2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgICBBY2tlZC1ieTogQW5k
+cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBLZXZp
+biBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJn
+ZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCA4OGI5MmMzODIwY2ZmZWQ0YjRhYmVi
+MTM5ZWRjMmNiZDgyODZjYjEyCkF1dGhvcjogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29t
+PgpEYXRlOiAgIFR1ZSBGZWIgMTIgMTE6NTQ6MDcgMjAxOSArMDEwMAoKICAgIGlvbW11OiBmaXgg
+aW9tbXVfb3BzIGluaXRpYWxpemF0aW9uCiAgICAKICAgIENvbW1pdCAzMmE1ZWEwMGVjNzVlZjUz
+ZSAoIklPTU1VL3g4NjogcmVtb3ZlIGluZGlyZWN0aW9uIGZyb20gY2VydGFpbgogICAgSU9NTVUg
+aG9vayBhY2Nlc3NlcyIpIGludHJvZHVjZWQgaW9tbXVfb3BzIGluaXRpYWxpemVkIGF0IGJvb3Qg
+dGltZQogICAgd2l0aCBkYXRhIGRlY2xhcmVkIGFzIF9faW5pdGNvbnN0cmVsLgogICAgCiAgICBP
+biBJbnRlbCBzeXN0ZW1zIHRoZXJlIGlzIGFub3RoZXIgcGF0aCB3aGVyZSBpb21tdV9vcHMgaXMg
+aW5pdGlhbGl6ZWQKICAgIGFuZCB0aGlzIHBhdGggaXMgcmVsZXZhbnQgb24gcmVzdW1lIGFmdGVy
+IHJldHVybmluZyBmcm9tIHN5c3RlbSBzdXNwZW5kLgogICAgQXMgdGhlIGluaXRpYWxpemF0aW9u
+IGRhdGEgaXMgbm8gbG9uZ2VyIGFjY2Vzc2libGUgaW4gdGhpcyBjYXNlIHRoYXQKICAgIHNlY29u
+ZCBpbml0aWFsaXphdGlvbiBtdXN0IGJlIGRyb3BwZWQgaW4gY2FzZSB0aGUgc3lzdGVtIGlzbid0
+IGp1c3QKICAgIGJvb3RpbmcuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3Mg
+PGpncm9zc0BzdXNlLmNvbT4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hA
+c3VzZS5jb20+CiAgICBBY2tlZC1ieTogS2V2aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+
+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpj
+b21taXQgMDlmYzRkZTRhOGViYjM4OTY0MWI4YjhhNjMyZWZjYjdjYTg4MGUwOApBdXRob3I6IE5v
+cmJlcnQgTWFudGhleSA8bm1hbnRoZXlAYW1hem9uLmNvbT4KRGF0ZTogICBXZWQgRmViIDYgMTU6
+MDk6MzMgMjAxOSArMDEwMAoKICAgIGFzbTogaGFuZGxlIGNvbW1lbnRzIHdoZW4gY3JlYXRpbmcg
+aGVhZGVyIGZpbGUKICAgIAogICAgSW4gdGhlIGVhcmx5IHN0ZXBzIG9mIGNvbXBpbGF0aW9uLCB0
+aGUgYXNtIGhlYWRlciBmaWxlcyBhcmUgY3JlYXRlZCwgc3VjaAogICAgYXMgaW5jbHVkZS9hc20t
+JChUQVJHRVRfQVJDSCkvYXNtLW9mZnNldHMuaC4gVGhlc2UgZmlsZXMgZGVwZW5kIG9uIHRoZQog
+ICAgYXNzZW1ibHkgZmlsZSBhcmNoLyQoVEFSR0VUX0FSQ0gpL2FzbS1vZmZzZXRzLnMsIHdoaWNo
+IGlzIGdlbmVyYXRlZAogICAgYmVmb3JlLiBEZXBlbmRpbmcgb24gdGhlIHVzZWQgdG9vbGNoYWlu
+LCB0aGVyZSBtaWdodCBiZSBjb21tZW50cyBpbiB0aGUKICAgIGFzc2VtYmx5IGZpbGVzLiBFc3Bl
+Y2lhbGx5IHRoZSBnb3RvLWdjYyBjb21waWxlciBvZiB0aGUgYm91bmRlZCBtb2RlbAogICAgY2hl
+Y2tlciBDQk1DIGFkZHMgY29tbWVudHMgdGhhdCBzdGFydCB3aXRoIGEgJyMnIHN5bWJvbCBhdCB0
+aGUgYmVnaW5uaW5nCiAgICBvZiB0aGUgbGluZS4KICAgIAogICAgVGhpcyBjb21taXQgYWRkcyBo
+YW5kbGluZyBjb21tZW50cyBpbiBhc3NlbWJsZXIgZHVyaW5nIHRoZSBjcmVhdGlvbiBvZiB0aGUK
+ICAgIGFzbSBoZWFkZXIgZmlsZXMsIGVzcGVjaWFsbHkgaWdub3JpbmcgbGluZXMgdGhhdCBzdGFy
+dCB3aXRoICcjJywgd2hpY2gKICAgIGluZGljYXRlIGNvbW1lbnRzIGZvciBib3RoIEFSTSBhbmQg
+eDg2IGFzc2VtYmxlci4gVGhlIHVzZWQgdG9vbCBnb3RvLWFzCiAgICBwcm9kdWNlcyBleGFjdGx5
+IGNvbW1lbnRzIG9mIHRoaXMga2luZC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogTm9yYmVydCBN
+YW50aGV5IDxubWFudGhleUBhbWF6b24uZGU+CiAgICBTaWduZWQtb2ZmLWJ5OiBNaWNoYWVsIFRh
+dXRzY2huaWcgPHRhdXRzY2huQGFtYXpvbi5jby51az4KICAgIFJldmlld2VkLWJ5OiBKYW4gQmV1
+bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdy
+b3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQgZDA0YmYxZWI2NTZiZThiMjEzMWQwOGM3ZTMy
+Y2ZmMzQzNTU2Y2ZhOApBdXRob3I6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KRGF0
+ZTogICBNb24gRmViIDExIDA5OjA5OjEzIDIwMTkgKzAxMDAKCiAgICB4ODYvc2hhZG93OiBhZGp1
+c3QgbWluaW11bSBhbGxvY2F0aW9uIGNhbGN1bGF0aW9ucwogICAgCiAgICBBIHByZXZpb3VzbHkg
+YmFkIHNpdHVhdGlvbiBoYXMgYmVjb21lIHdvcnNlIHdpdGggdGhlIGVhcmx5IHNldHRpbmcgb2YK
+ICAgIC0+bWF4X3ZjcHVzOiBUaGUgdmFsdWUgcmV0dXJuZWQgYnkgc2hhZG93X21pbl9hY2NlcHRh
+YmxlX3BhZ2VzKCkgaGFzCiAgICBmdXJ0aGVyIGdyb3duLCBhbmQgaGVuY2Ugbm93IGhvbGRzIGJh
+Y2sgZXZlbiBtb3JlIG1lbW9yeSBmcm9tIHVzZSBmb3IKICAgIHRoZSBwMm0uCiAgICAKICAgIE1h
+a2Ugc2hfbWluX2FsbG9jYXRpb24oKSBhY2NvdW50IGZvciBhbGwgcDJtIG1lbW9yeSBuZWVkZWQg
+Zm9yCiAgICBzaGFkb3dfZW5hYmxlKCkgdG8gc3VjY2VlZCBkdXJpbmcgZG9tYWluIGNyZWF0aW9u
+IChhdCB3aGljaCBwb2ludCB0aGUKICAgIGRvbWFpbiBoYXMgbm8gbWVtb3J5IGF0IGFsbCBhbGxv
+Y2F0ZWQgdG8gaXQgeWV0LCBhbmQgaGVuY2UgdXNlIG9mCiAgICBkLT50b3RfcGFnZXMgaXMgbWVh
+bmluZ2xlc3MpLgogICAgCiAgICBBbHNvIG1ha2Ugc2hhZG93X21pbl9hY2NlcHRhYmxlX3BhZ2Vz
+KCkgbm8gbG9uZ2VyIG5lZWRsZXNzbHkgYWRkIDEgdG8KICAgIHRoZSB2Q1BVIGNvdW50LgogICAg
+CiAgICBGaW5hbGx5IG1ha2UgdGhlIGRlYnVnZ2luZyBwcmludGsoKSBpbiBzaGFkb3dfYWxsb2Nf
+cDJtX3BhZ2UoKSBhIGxpdHRsZQogICAgbW9yZSB1c2VmdWwgYnkgbG9nZ2luZyBzb21lIG9mIHRo
+ZSByZWxldmFudCBkb21haW4gc2V0dGluZ3MuCiAgICAKICAgIFJlcG9ydGVkLWJ5OiBSb2dlciBQ
+YXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KICAgIFNpZ25lZC1vZmYtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIFJldmlld2VkLWJ5OiBSb2dlciBQYXUgTW9u
+bsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBHZW9yZ2UgRHVubGFwIDxn
+ZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTogVGltIERlZWdhbiA8dGltQHhl
+bi5vcmc+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5j
+b20+Cgpjb21taXQgYWNhMjE0NDI0OTljMDRiNzBkODQxNjRiNDY3NDRiMzVlZTdiOGJmNApBdXRo
+b3I6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KRGF0ZTogICBUaHUg
+RmViIDcgMTI6NDE6MTcgMjAxOSArMDAwMAoKICAgIGRvY3M6IGZlYXR1cmVzL3FlbXUtZGVwcml2
+IGZvcm1hdHRpbmcgZml4ZXMKICAgIAogICAgTmVlZCBhIHNwYWNlIGJldHdlZW4gdGhlIHBhcmFn
+cmFwaCBhbmQgdGhlIGxpc3Qgc28gcGFuZG9jIGtub3dzIGl0J3MgYQogICAgbGlzdC4KICAgIAog
+ICAgU2lnbmVkLW9mZi1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29t
+PgogICAgQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+
+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpj
+b21taXQgOWRiNzc3ZGRhMzNiYTkyYzBhMGZlY2E3NmRlNWJiYTU3MzU4ZWJjYwpBdXRob3I6IEdl
+b3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KRGF0ZTogICBUaHUgRmViIDcg
+MTI6MDU6NDMgMjAxOSArMDAwMAoKICAgIGRvY3M6IFVwZGF0ZSBjcmVkaXQvY3JlZGl0MiBmZWF0
+dXJlIGRvY3MgcmVmbGVjdGluZyBuZXcgZGVmYXVsdCBzY2hlZHVsZXIKICAgIAogICAgU2lnbmVk
+LW9mZi1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgogICAgQWNr
+ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIFJlbGVhc2UtYWNrZWQt
+Ynk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCA3YjUyNzhiMjhmOGZi
+Y2Q0NDAyZTQ1MjBkN2E1ZDYwN2Q0YTk5N2E3CkF1dGhvcjogSWFuIEphY2tzb24gPGlhbi5qYWNr
+c29uQGV1LmNpdHJpeC5jb20+CkRhdGU6ICAgVGh1IEZlYiA3IDE1OjAyOjI3IDIwMTkgKzAwMDAK
+CiAgICB0b29sczogaW5pdCBzY3JpcHRzOiBtYWtlIFhFTl9SVU5fRElSIGFuZCBYRU5fTE9DS19E
+SVIgbW9kZSA3MDAKICAgIAogICAgVGhlc2UgZGlyZWN0b3JpZXMgb3VnaHQgbm90IHRvIGJlIGV2
+ZW4gd29ybGQtcmVhZGFibGUuICBJZiB0aGlzIHNjcmlwdAogICAgZm9yIHNvbWUgcmVhc29uIHJ1
+bnMgd2l0aCBhIGxheCB1bWFzayB0aGV5IG1pZ2h0IGJlIGNyZWF0ZWQKICAgIG92ZXJseS13cml0
+ZWFibGUuICBBdm9pZCBhbnkgc3VjaCBidWcgYnkgc2V0dGluZyB0aGUgbW9kZSBleHBsaWNpdGx5
+LgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0
+cml4LmNvbT4KICAgIEFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgogICAg
+UmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKY29tbWl0
+IDBjNGEzOGMwOThmOWJmZmViMzNmOGNmODhhYmRlYTRiMGY5YTkwNzAKQXV0aG9yOiBJYW4gSmFj
+a3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KRGF0ZTogICBUaHUgRmViIDcgMTU6MDI6
+MjYgMjAxOSArMDAwMAoKICAgIHRvb2xzOiBpbml0IHNjcmlwdHM6IHhlbmNvbW1vbnM6IEZpeGVz
+IHRvIERlc2NyaXB0aW9uCiAgICAKICAgIGBuZWVlZGVkJyBpcyBhIHR5cG8uICBBbmQgeGVuZCBp
+cyBsb25nIGdvbmUuCiAgICAKICAgIE5vIGZ1bmN0aW9uYWwgY2hhbmdlLgogICAgCiAgICBTaWdu
+ZWQtb2ZmLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KICAgIEFj
+a2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgogICAgUmVsZWFzZS1hY2tlZC1i
+eTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKY29tbWl0IDAxMDk3ZTAxOTQzMjFk
+MjcyNjI1MTNjZjEyOTFmZGRmZWExNjA2YzMKQXV0aG9yOiBJYW4gSmFja3NvbiA8aWFuLmphY2tz
+b25AZXUuY2l0cml4LmNvbT4KRGF0ZTogICBUaHUgRmViIDcgMTU6MDI6MjUgMjAxOSArMDAwMAoK
+ICAgIHRvb2xzOiBpbml0IHNjcmlwdHM6IHhlbmNvbW1vbnM6IFByb3ZpZGVzIGB4ZW4nCiAgICAK
+ICAgIEl0IGlzIHVzZWZ1bCB0byBoYXZlIGEgc2luZ2xlIGB4ZW4nIGZhY2lsaXR5IChpbiB0aGUg
+TFNCIFByb3ZpZGVzCiAgICBuYW1lc3BhY2UpLiAgVGhhdCBhbGxvd3Mgb3RoZXIgZmFjaWxpdGll
+cyB0byBzcGVjaWZ5IHRoYXQgdGhleSBzaG91bGQKICAgIGdvIGFmdGVyIGB4ZW4nIHdpdGhvdXQg
+bmVlZGluZyB0byBrbm93IHRoZSBpbXBsZW1lbnRhdGlvbiBkZXRhaWxzLgogICAgCiAgICBUaGlz
+IHNlcnZpY2UgbmFtZSBpcyBhbHJlYWR5IFByb3ZpZGUnZCBieSB0aGUgKGZhaXJseSBkaWZmZXJl
+bnQpIGluaXQKICAgIHNjcmlwdHMgdXNlZCBpbiBEZWJpYW4uCiAgICAKICAgIFNpZ25lZC1vZmYt
+Ynk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgogICAgQWNrZWQtYnk6
+IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVy
+Z2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQgYjRkZjczZGU0OTM5NTRjNDRmMjQw
+Zjc4Nzc5YzliZDM3ODJlMTU3MgpBdXRob3I6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxp
+bmlAa2VybmVsLm9yZz4KRGF0ZTogICBUdWUgRmViIDUgMTM6Mzg6NTMgMjAxOSAtMDgwMAoKICAg
+IHhlbi9hcm06IGdpYy12MjogZGVhY3RpdmF0ZSBpbnRlcnJ1cHRzIGR1cmluZyBpbml0aWFsaXph
+dGlvbgogICAgCiAgICBJbnRlcnJ1cHRzIGNvdWxkIGJlIEFDVElWRSBhdCBib290LiBNYWtlIHN1
+cmUgdG8gZGVhY3RpdmF0ZSB0aGVtIGR1cmluZwogICAgaW5pdGlhbGl6YXRpb24uCiAgICAKICAg
+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT4K
+ICAgIFJldmlld2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgogICAg
+Q0M6IGp1bGllbi5ncmFsbEBhcm0uY29tCiAgICBDQzogcGVuZy5mYW5AbnhwLmNvbQogICAgQ0M6
+IGpncm9zc0BzdXNlLmNvbQoocWVtdSBjaGFuZ2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
