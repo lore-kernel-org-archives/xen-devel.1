@@ -1,8 +1,8 @@
 From: ira.weiny@intel.com
-Subject: [PATCH V2 5/7] IB/hfi1: Use the new FOLL_LONGTERM flag
+Subject: [PATCH V2 7/7] IB/mthca: Use the new FOLL_LONGTERM flag
  to get_user_pages_fast()
-Date: Wed, 13 Feb 2019 15:04:53 -0800
-Message-ID: <20190213230455.5605-6-ira.weiny__5740.00924113847$1550123321$gmane$org@intel.com>
+Date: Wed, 13 Feb 2019 15:04:55 -0800
+Message-ID: <20190213230455.5605-8-ira.weiny__33598.08471739$1550123321$gmane$org@intel.com>
 References: <20190211201643.7599-1-ira.weiny@intel.com>
  <20190213230455.5605-1-ira.weiny@intel.com>
 Mime-Version: 1.0
@@ -12,8 +12,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=U1ZV=QU=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1gu3au-0005an-JB
- for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 23:05:32 +0000
+ id 1gu3az-0005bI-AX
+ for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 23:05:37 +0000
 In-Reply-To: <20190213230455.5605-1-ira.weiny@intel.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -30,20 +30,18 @@ List-Id: xen-devel@lists.xenproject.org
 RnJvbTogSXJhIFdlaW55IDxpcmEud2VpbnlAaW50ZWwuY29tPgoKVXNlIHRoZSBuZXcgRk9MTF9M
 T05HVEVSTSB0byBnZXRfdXNlcl9wYWdlc19mYXN0KCkgdG8gcHJvdGVjdCBhZ2FpbnN0CkZTIERB
 WCBwYWdlcyBiZWluZyBtYXBwZWQuCgpTaWduZWQtb2ZmLWJ5OiBJcmEgV2VpbnkgPGlyYS53ZWlu
-eUBpbnRlbC5jb20+Ci0tLQogZHJpdmVycy9pbmZpbmliYW5kL2h3L2hmaTEvdXNlcl9wYWdlcy5j
-IHwgNiArKysrLS0KIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25z
-KC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9pbmZpbmliYW5kL2h3L2hmaTEvdXNlcl9wYWdlcy5j
-IGIvZHJpdmVycy9pbmZpbmliYW5kL2h3L2hmaTEvdXNlcl9wYWdlcy5jCmluZGV4IDc4Y2NhY2Fm
-OTdkMC4uNmE3ZjljZDVhOTRlIDEwMDY0NAotLS0gYS9kcml2ZXJzL2luZmluaWJhbmQvaHcvaGZp
-MS91c2VyX3BhZ2VzLmMKKysrIGIvZHJpdmVycy9pbmZpbmliYW5kL2h3L2hmaTEvdXNlcl9wYWdl
-cy5jCkBAIC0xMDQsOSArMTA0LDExIEBAIGludCBoZmkxX2FjcXVpcmVfdXNlcl9wYWdlcyhzdHJ1
-Y3QgbW1fc3RydWN0ICptbSwgdW5zaWduZWQgbG9uZyB2YWRkciwgc2l6ZV90IG5wCiAJCQkgICAg
-Ym9vbCB3cml0YWJsZSwgc3RydWN0IHBhZ2UgKipwYWdlcykKIHsKIAlpbnQgcmV0OworCXVuc2ln
-bmVkIGludCBndXBfZmxhZ3MgPSB3cml0YWJsZSA/IEZPTExfV1JJVEUgOiAwOwogCi0JcmV0ID0g
-Z2V0X3VzZXJfcGFnZXNfZmFzdCh2YWRkciwgbnBhZ2VzLCB3cml0YWJsZSA/IEZPTExfV1JJVEUg
-OiAwLAotCQkJCSAgcGFnZXMpOworCWd1cF9mbGFncyB8PSBGT0xMX0xPTkdURVJNOworCisJcmV0
-ID0gZ2V0X3VzZXJfcGFnZXNfZmFzdCh2YWRkciwgbnBhZ2VzLCBndXBfZmxhZ3MsIHBhZ2VzKTsK
-IAlpZiAocmV0IDwgMCkKIAkJcmV0dXJuIHJldDsKIAotLSAKMi4yMC4xCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+eUBpbnRlbC5jb20+Ci0tLQogZHJpdmVycy9pbmZpbmliYW5kL2h3L210aGNhL210aGNhX21lbWZy
+ZWUuYyB8IDMgKystCiAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9u
+KC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9pbmZpbmliYW5kL2h3L210aGNhL210aGNhX21lbWZy
+ZWUuYyBiL2RyaXZlcnMvaW5maW5pYmFuZC9ody9tdGhjYS9tdGhjYV9tZW1mcmVlLmMKaW5kZXgg
+MTEyZDJmMzhlMGRlLi44ZmYwZTkwZDc1NjQgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvaW5maW5pYmFu
+ZC9ody9tdGhjYS9tdGhjYV9tZW1mcmVlLmMKKysrIGIvZHJpdmVycy9pbmZpbmliYW5kL2h3L210
+aGNhL210aGNhX21lbWZyZWUuYwpAQCAtNDcyLDcgKzQ3Miw4IEBAIGludCBtdGhjYV9tYXBfdXNl
+cl9kYihzdHJ1Y3QgbXRoY2FfZGV2ICpkZXYsIHN0cnVjdCBtdGhjYV91YXIgKnVhciwKIAkJZ290
+byBvdXQ7CiAJfQogCi0JcmV0ID0gZ2V0X3VzZXJfcGFnZXNfZmFzdCh1YWRkciAmIFBBR0VfTUFT
+SywgMSwgRk9MTF9XUklURSwgcGFnZXMpOworCXJldCA9IGdldF91c2VyX3BhZ2VzX2Zhc3QodWFk
+ZHIgJiBQQUdFX01BU0ssIDEsCisJCQkJICBGT0xMX1dSSVRFIHwgRk9MTF9MT05HVEVSTSwgcGFn
+ZXMpOwogCWlmIChyZXQgPCAwKQogCQlnb3RvIG91dDsKIAotLSAKMi4yMC4xCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
