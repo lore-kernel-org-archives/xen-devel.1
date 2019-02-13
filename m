@@ -1,25 +1,19 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH v4 1/1] cameraif: add ABI for para-virtual
- camera
-Date: Wed, 13 Feb 2019 14:11:34 +0200
-Message-ID: <8b81f1f5-491c-084a-a2b4-b07a48f0d612@gmail.com>
-References: <20190115093853.15495-1-andr2000@gmail.com>
- <20190115093853.15495-2-andr2000@gmail.com>
- <393f824d-e543-476c-777f-402bcc1c0bcb@xs4all.nl>
- <1152536e-9238-4192-653e-b784b34b8a0d@epam.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re:
+ =?utf-8?q?xen=3A_credit2=3A_credit2_can=E2=80=99t_re?=
+ =?utf-8?q?ach_the_throughput_as_expected?=
+Date: Wed, 13 Feb 2019 13:44:45 +0100
+Message-ID: <6accd1c20f3ee24920a48e4e3c820019b52aea34.camel@suse.com>
+References: <SG2PR01MB3302E90C28F2EED3F8A6105997650@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7044594111039577544=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ywtJ=QU=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1gttO8-0007Uh-Fr
- for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 12:11:40 +0000
-Received: by mail-lf1-x136.google.com with SMTP id f5so1558937lfc.13
- for <xen-devel@lists.xenproject.org>; Wed, 13 Feb 2019 04:11:38 -0800 (PST)
-In-Reply-To: <1152536e-9238-4192-653e-b784b34b8a0d@epam.com>
-Content-Language: en-US
+ <SRS0=sQnB=QU=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gtttY-0001WL-C0
+ for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 12:44:08 +0000
+In-Reply-To: <SG2PR01MB3302E90C28F2EED3F8A6105997650@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,94 +22,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>
-Cc: "jgross@suse.com" <jgross@suse.com>, Artem Mygaiev <Artem_Mygaiev@epam.com>, Oleksandr Andrushchenko <Oleksandr_Andrushchenko@epam.com>, "koji.matsuoka.xm@renesas.com" <koji.matsuoka.xm@renesas.com>, Hans Verkuil <hverkuil@xs4all.nl>, "sakari.ailus@linux.intel.com" <sakari.ailus@linux.intel.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>, "mchehab@kernel.org" <mchehab@kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>
+To: =?UTF-8?Q?=E9=83=91_=E5=B7=9D?= <jason.zhengchuan@hotmail.com>, "george.dunlap@citrix.com" <george.dunlap@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "jgross@suse.com" <jgross@suse.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "frank.yangjie@gmail.com" <frank.yangjie@gmail.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-S29ucmFkLCBjb3VsZCB5b3UgcGxlYXNlIHJldmlldz8gU28sIEkgY2FuIHNlbmQgdjUgd2l0aCBI
-YW5zJwpjb21tZW50cyBhZGRyZXNzZWQKClRoYW5rIHlvdSwKT2xla3NhbmRyCgpPbiAxLzIzLzE5
-IDEwOjE0IEFNLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPiBBbnkgY29tbWVudHMg
-ZnJvbSBYZW4gY29tbXVuaXR5Pwo+IEtvbnJhZD8KPgo+IE9uIDEvMTUvMTkgNDo0NCBQTSwgSGFu
-cyBWZXJrdWlsIHdyb3RlOgo+PiBIaSBPbGVrc2FuZHIsCj4+Cj4+IEp1c3QgdHdvIHJlbWFpbmlu
-ZyBjb21tZW50czoKPj4KPj4gT24gMS8xNS8xOSAxMDozOCBBTSwgT2xla3NhbmRyIEFuZHJ1c2hj
-aGVua28gd3JvdGU6Cj4+PiBGcm9tOiBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyA8b2xla3NhbmRy
-X2FuZHJ1c2hjaGVua29AZXBhbS5jb20+Cj4+Pgo+Pj4gVGhpcyBpcyB0aGUgQUJJIGZvciB0aGUg
-dHdvIGhhbHZlcyBvZiBhIHBhcmEtdmlydHVhbGl6ZWQKPj4+IGNhbWVyYSBkcml2ZXIgd2hpY2gg
-ZXh0ZW5kcyBYZW4ncyByZWFjaCBtdWx0aW1lZGlhIGNhcGFiaWxpdGllcyBldmVuCj4+PiBmYXJ0
-aGVyIGVuYWJsaW5nIGl0IGZvciB2aWRlbyBjb25mZXJlbmNpbmcsIEluLVZlaGljbGUgSW5mb3Rh
-aW5tZW50LAo+Pj4gaGlnaCBkZWZpbml0aW9uIG1hcHMgZXRjLgo+Pj4KPj4+IFRoZSBpbml0aWFs
-IGdvYWwgaXMgdG8gc3VwcG9ydCBtb3N0IG5lZWRlZCBmdW5jdGlvbmFsaXR5IHdpdGggdGhlCj4+
-PiBmaW5hbCBpZGVhIHRvIG1ha2UgaXQgcG9zc2libGUgdG8gZXh0ZW5kIHRoZSBwcm90b2NvbCBp
-ZiBuZWVkIGJlOgo+Pj4KPj4+IDEuIFByb3ZpZGUgbWVhbnMgZm9yIGJhc2UgdmlydHVhbCBkZXZp
-Y2UgY29uZmlndXJhdGlvbjoKPj4+ICAgIC0gcGl4ZWwgZm9ybWF0cwo+Pj4gICAgLSByZXNvbHV0
-aW9ucwo+Pj4gICAgLSBmcmFtZSByYXRlcwo+Pj4gMi4gU3VwcG9ydCBiYXNpYyBjYW1lcmEgY29u
-dHJvbHM6Cj4+PiAgICAtIGNvbnRyYXN0Cj4+PiAgICAtIGJyaWdodG5lc3MKPj4+ICAgIC0gaHVl
-Cj4+PiAgICAtIHNhdHVyYXRpb24KPj4+IDMuIFN1cHBvcnQgc3RyZWFtaW5nIGNvbnRyb2wKPj4+
-Cj4+PiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyA8b2xla3NhbmRyX2Fu
-ZHJ1c2hjaGVua29AZXBhbS5jb20+Cj4+PiAtLS0KPj4+ICAgIHhlbi9pbmNsdWRlL3B1YmxpYy9p
-by9jYW1lcmFpZi5oIHwgMTM2NCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKPj4+ICAg
-IDEgZmlsZSBjaGFuZ2VkLCAxMzY0IGluc2VydGlvbnMoKykKPj4+ICAgIGNyZWF0ZSBtb2RlIDEw
-MDY0NCB4ZW4vaW5jbHVkZS9wdWJsaWMvaW8vY2FtZXJhaWYuaAo+Pj4KPj4+IGRpZmYgLS1naXQg
-YS94ZW4vaW5jbHVkZS9wdWJsaWMvaW8vY2FtZXJhaWYuaCBiL3hlbi9pbmNsdWRlL3B1YmxpYy9p
-by9jYW1lcmFpZi5oCj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+Pj4gaW5kZXggMDAwMDAwMDAw
-MDAwLi4yNDZlYjI0NTdmNDAKPj4+IC0tLSAvZGV2L251bGwKPj4+ICsrKyBiL3hlbi9pbmNsdWRl
-L3B1YmxpYy9pby9jYW1lcmFpZi5oCj4+PiBAQCAtMCwwICsxLDEzNjQgQEAKPj4gPHNuaXA+Cj4+
-Cj4+PiArLyoKPj4+ICsgKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqCj4+PiArICogICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBFVkVOVCBDT0RFUwo+Pj4gKyAqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioKPj4+ICsgKi8KPj4+ICsjZGVmaW5lIFhFTkNBTUVSQV9FVlRfRlJBTUVfQVZBSUwgICAgICAw
-eDAwCj4+PiArI2RlZmluZSBYRU5DQU1FUkFfRVZUX0NUUkxfQ0hBTkdFICAgICAgMHgwMQo+Pj4g
-Kwo+Pj4gKy8qIFJlc29sdXRpb24gaGFzIGNoYW5nZWQuICovCj4+PiArI2RlZmluZSBYRU5DQU1F
-UkFfRVZUX0NGR19GTEdfUkVTT0wgICAgKDEgPDwgMCkKPj4gSSB0aGluayB0aGlzIGZsYWcgaXMg
-YSBsZWZ0LW92ZXIgZnJvbSB2MiBhbmQgc2hvdWxkIGJlIHJlbW92ZWQuCj4+Cj4+IDxzbmlwPgo+
-Pgo+Pj4gKyAqIFJlcXVlc3QgbnVtYmVyIG9mIGJ1ZmZlcnMgdG8gYmUgdXNlZDoKPj4+ICsgKiAg
-ICAgICAgIDAgICAgICAgICAgICAgICAgMSAgICAgICAgICAgICAgICAgMiAgICAgICAgICAgICAg
-IDMgICAgICAgIG9jdGV0Cj4+PiArICogKy0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0t
-LSstLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0rCj4+PiArICogfCAgICAgICAgICAg
-ICAgIGlkICAgICAgICAgICAgICAgIHwgX09QX0JVRl9SRVFVRVNUfCAgIHJlc2VydmVkICAgICB8
-IDQKPj4+ICsgKiArLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0t
-LS0tLS0rLS0tLS0tLS0tLS0tLS0tLSsKPj4+ICsgKiB8ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICByZXNlcnZlZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgOAo+Pj4gKyAqICst
-LS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0t
-LS0tLS0tLS0tKwo+Pj4gKyAqIHwgICAgbnVtX2J1ZnMgICAgfCAgICAgICAgICAgICAgICAgICAg
-IHJlc2VydmVkICAgICAgICAgICAgICAgICAgICAgfCAxMgo+Pj4gKyAqICstLS0tLS0tLS0tLS0t
-LS0tKy0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tKwo+
-Pj4gKyAqIHwgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlc2VydmVkICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgfCAxNgo+Pj4gKyAqICstLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0t
-LS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tKwo+Pj4gKyAqIHwvXC9c
-L1wvXC9cL1wvXC9cL1wvXC9cL1wvXC9cL1wvXC9cL1wvXC9cL1wvXC9cL1wvXC9cL1wvXC9cL1wv
-XC9cL1wvfAo+Pj4gKyAqICstLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0rLS0tLS0t
-LS0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tKwo+Pj4gKyAqIHwgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHJlc2VydmVkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCA2NAo+Pj4g
-KyAqICstLS0tLS0tLS0tLS0tLS0tKy0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLS0tLSst
-LS0tLS0tLS0tLS0tLS0tKwo+Pj4gKyAqCj4+PiArICogbnVtX2J1ZnMgLSB1aW50OF90LCBkZXNp
-cmVkIG51bWJlciBvZiBidWZmZXJzIHRvIGJlIHVzZWQuIFRoaXMgaXMKPj4+ICsgKiAgIGxpbWl0
-ZWQgdG8gdGhlIHZhbHVlIGNvbmZpZ3VyZWQgaW4gWGVuU3RvcmUubWF4LWJ1ZmZlcnMuCj4+PiAr
-ICogICBQYXNzaW5nIHplcm8gbnVtX2J1ZnMgaW4gdGhpcyByZXF1ZXN0IChhZnRlciBzdHJlYW1p
-bmcgaGFzIHN0b3BwZWQKPj4+ICsgKiAgIGFuZCBhbGwgYnVmZmVycyBkZXN0cm95ZWQpIHVuYmxv
-Y2tzIGNhbWVyYSBjb25maWd1cmF0aW9uIGNoYW5nZXMuCj4+IEkgdGhpbmsgdGhlIHBocmFzZSAn
-dW5ibG9ja3MgY2FtZXJhIGNvbmZpZ3VyYXRpb24gY2hhbmdlcycgaXMgY29uZnVzaW5nLgo+Pgo+
-PiBJbiB2MyB0aGlzIHNlbnRlbmNlIGNhbWUgYWZ0ZXIgdGhlIHRoaXJkIG5vdGUgYmVsb3csIGFu
-ZCBzbyBpdCBtYWRlIHNlbnNlCj4+IGluIHRoYXQgY29udGV4dCwgYnV0IG5vdyB0aGUgb3JkZXIg
-aGFzIGJlZW4gcmV2ZXJzZWQgYW5kIGl0IGJlY2FtZSBoYXJkIHRvCj4+IHVuZGVyc3RhbmQuCj4+
-Cj4+IEknbSBub3Qgc3VyZSB3aGF0IHRoZSBiZXN0IGFwcHJvYWNoIGlzIHRvIGZpeCB0aGlzLiBP
-bmUgb3B0aW9uIGlzIHRvIHJlbW92ZQo+PiB0aGUgdGhpcmQgbm90ZSBhbmQgaW50ZWdyYXRlIGl0
-IHNvbWVob3cgaW4gdGhlIHNlbnRlbmNlIGFib3ZlLiBPciBwZXJoYXBzCj4+IGRvIGF3YXkgd2l0
-aCB0aGUgJ25vdGVzJyBhdCBhbGwgYW5kIGp1c3Qgd3JpdGUgYSBtb3JlIGV4dGVuc2l2ZSBkb2N1
-bWVudGF0aW9uCj4+IGZvciB0aGlzIG9wLiBJIGxlYXZlIHRoYXQgdXAgdG8geW91Lgo+Pgo+Pj4g
-KyAqCj4+PiArICogU2VlIHJlc3BvbnNlIGZvcm1hdCBmb3IgdGhpcyByZXF1ZXN0Lgo+Pj4gKyAq
-Cj4+PiArICogTm90ZXM6Cj4+PiArICogIC0gZnJvbnRlbmQgbXVzdCBjaGVjayB0aGUgY29ycmVz
-cG9uZGluZyByZXNwb25zZSBpbiBvcmRlciB0byBzZWUKPj4+ICsgKiAgICBpZiB0aGUgdmFsdWVz
-IHJlcG9ydGVkIGJhY2sgYnkgdGhlIGJhY2tlbmQgZG8gbWF0Y2ggdGhlIGRlc2lyZWQgb25lcwo+
-Pj4gKyAqICAgIGFuZCBjYW4gYmUgYWNjZXB0ZWQuCj4+PiArICogIC0gZnJvbnRlbmQgbWF5IHNl
-bmQgbXVsdGlwbGUgWEVOQ0FNRVJBX09QX0JVRl9SRVFVRVNUIHJlcXVlc3RzIGJlZm9yZQo+Pj4g
-KyAqICAgIHNlbmRpbmcgWEVOQ0FNRVJBX09QX1NUUkVBTV9TVEFSVCByZXF1ZXN0IHRvIHVwZGF0
-ZSBvciB0dW5lIHRoZQo+Pj4gKyAqICAgIGNvbmZpZ3VyYXRpb24uCj4+PiArICogIC0gYWZ0ZXIg
-dGhpcyByZXF1ZXN0IGNhbWVyYSBjb25maWd1cmF0aW9uIGNhbm5vdCBiZSBjaGFuZ2VkLCB1bmxl
-c3MKPj4gY2FtZXJhIGNvbmZpZ3VyYXRpb24gLT4gdGhlIGNhbWVyYSBjb25maWd1cmF0aW9uCj4+
-Cj4+PiArICogICAgc3RyZWFtaW5nIGlzIHN0b3BwZWQgYW5kIGJ1ZmZlcnMgZGVzdHJveWVkCj4+
-PiArICovCj4+IFJlZ2FyZHMsCj4+Cj4+IAlIYW5zCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7044594111039577544==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-sKgfnBDcmcgZXelLkGxX"
+
+
+--=-sKgfnBDcmcgZXelLkGxX
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2019-02-12 at 13:36 +0000, =E9=83=91 =E5=B7=9D wrote:
+> Hi, George,
+>=20
+Hi (although I'm not George :-D),
+
+> I found Credit2 can=E2=80=99t reach the throughput as expected under my t=
+est
+> workload, compared to Credit and CFS. It is easy to reproduce, and I
+> think the problem is really exist.
+> It really took me a long time to find out why due to my lack of
+> knowledge, and I cannot find a good way to solve it.
+> Please do help to take a look at it. Thx.
+>=20
+Ok, thanks for your testing, and for reporting this to us.
+
+A few questions.
+
+> ***************
+> [How to reproduce]
+> ***************
+> I use openSUSE-Tumbleweed with xen-4.11 version.
+> Here is the test workload like:
+> I have guest_1 with 4 vCPU and guest_2 with 8 vCPU running on 4 pCPU,
+> that is, the relation of pCPU:vCPU is 1:3.
+> Then I add pressure with 20% CPU usage for each vCPU, which results
+> in total 240% pCPU usage.
+> The 20% pressure model is that, I start one process on each vCPU,
+> which runs 20ms indefinitely and then goes to sleep 80ms within the
+> period of 100ms.
+> I use xentop to observe guest cpu usage in dom0, as I expect, the
+> guest cpu usage is 80% and 160% for guest_1 and guest_2 ,
+> respectively.
+>=20
+Do you have the sources for this somewhere, so that we can try to
+reproduce it ourself. I'm thinking to the source code for the periodic
+apps (if you used a custom made one), or the repository (if you used
+one from any) or the name of the benchmarking suite --and the parameter
+used to create this scenario?
+
+> **************
+> [Why it happens]
+> **************
+> The test workload likes the polling from the long term to see.
+> As showed in the figure below, the - - - - means the cputime the
+> vcpus is running and the =E2=80=94=E2=80=94=E2=80=94 means the idle.
+> As we can see from Fig.1, if vcpu_1 and vcpu_2 can run staggeredly,
+> the throughput looks fine, however, if vcpu_1 and vcpu_2 runs at the
+> same time, they will compete for pCPU, which results in poor
+> throughput.
+>=20
+> vcpu_1        - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
+=E2=80=94=E2=80=94=E2=80=94  - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=
+=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94 - - - -
+> -
+>                   |                |                               |=20
+>               |                               |
+> vcpu_2                        - - - - - - - =E2=80=94=E2=80=94=E2=80=94=
+=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94  - - - - - - -
+> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
+>                   |  vcpu1    |   vcpu2   |               |  vcpu1  =20
+>  |   vcpu2   |              |  vcpu1
+> cpu usage   - - - - - - - - - - - - -  =E2=80=94=E2=80=94=E2=80=94=E2=80=
+=94- - - - - - - - - - - - -
+> - =E2=80=94=E2=80=94=E2=80=94=E2=80=94 - - - - - - -=20
+>                                                            Fig.1
+>=20
+> vcpu_1       - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
+=E2=80=94=E2=80=94=E2=80=94                  - - - - - - -
+> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
+>                  |
+> vcpu_2       - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
+=E2=80=94=E2=80=94=E2=80=94                  - - - - - - -
+> =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
+>                  |  compete running     |   both
+> sleep         |  compete running    |   both sleep    |       =20
+> cpu usage   - - - - - - - - - - - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=
+=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94 - - - - - - - - - -
+> - - - - =E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=
+=E2=80=94
+>                                                            Fig.2
+>=20
+Ok, I'm not entirely sure I follow all this, but let's put it aside for
+a second. The question I have is, is this analysis coming from looking
+at actual traces? If yes, can you upload somewhere/share the trace
+files?
+
+> As we do reset_credit() when snext->credit is negative which makes
+> the credit value is too close between each vcpu.
+> As a result, from long term to observe, the time-slice of each vcpu
+> becomes smaller, they compete for pCPU at the same time just like
+> shown in Fig.2 above.
+> Thus, i think the reason why it can't reach the expected throughput
+> is that reset_credit() for all vcpu will make the time-slice smaller
+> which is different from
+> Credit and CFS.
+>=20
+Ok, so you're saying this drop of "throughput" can be caused by
+scheduling happening too frequently in Credit2.
+
+Well, I guess that is a possibility, although, as I said above, I'd
+need to think a bit more about this, as well as trying to reproduce it,
+and look at actual traces.
+
+Perhaps, one thing that can be done to try to confirm this analysis,
+would be to make the scheduling less frequent in Credit2 and, on the
+other hand, to make it more frequent in Credit1. In theory, if the
+analysis is correct, you would observe the behavior of this specific
+workload improving on Credit2 and degrading in Credit1, when doing so.
+
+If you fancy trying that, for Credit1, you can play with the
+sched_credit_tslice_ms Xen boot time parameter (e.g., try pushing it
+down to 1ms).
+
+For Credit2, it's a little trickier, as the scheduler does not have a
+real timeslice. So, either you alter CSCHED2_MIN_TIMER, in the code, or
+you "mimic" the timeslice increase by setting sched_ratelimit_us to a
+higher value (like, e.g., 10ms).
+
+It's not a conclusive test, but I think it is a good enough one for
+gaining some more understanding of the issue.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-sKgfnBDcmcgZXelLkGxX
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxkET0ACgkQFkJ4iaW4
+c+5FcRAAgfX9XcN2E1HRDSzQWbtiKGdnT/83bwLgoJ2QfqNHfUpF481VmUsIbgjg
+VReEIyQMNwNr//xs/eh4FmI9VFQxUM0aaPV6AY5sVqf8TAGOgrz7VoftdmVeI18D
+yKigXb8ED1bv8pCMRL9ZobFEwxlvuNwy43x8BnVSJaz18PvSeoy9TMJJCthDx5rQ
+QJnwHYKa3waAus64u6glSowU50ZjNAMlqOAZXY8CY1xVfYlTSF/cK1ZYgl3oErzP
+BnSFoO+ssi1u7vG+jM6I/FtFzlIX/qkyRmZ+HeKAEY+a3QzTXebiIHyiZ+DfpAtI
+Hrj8U7lQYaLYOm0yM1wLju+Qu3k0S7ZdRglmV8fjp6YtB26iNJxLW/1fA4j45+uF
+6+3vBT/f7OJax4IkDdMVNWpX/qXLn4ocu5Ao+TVCA0YqyHiaoyzqcNOJZYe18Hpv
+rAMUm3w7TcvhMKQzK+NpnJxGpqKm1GfFoyl4Y2nnNUwFr3La2o0Me5j8+2aqn+93
+IHHUXCYrSWyO4MyCc64sPu4GMdiw6Pw0H4Urs6b31dFKiFS8IxYOs5kyMnic/9YL
+z10smrM7yn1cCVFKdhKTfDHSAtJKZBArJcuk7EtOUbVxaLKgm8rzTum1lUc1dw+x
+adfZEQ1/djyB4oRTkhJmLv2lZE+fllVbvzOCodJ9CLTGsmuGMgs=
+=6yEa
+-----END PGP SIGNATURE-----
+
+--=-sKgfnBDcmcgZXelLkGxX--
+
+
+
+--===============7044594111039577544==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7044594111039577544==--
