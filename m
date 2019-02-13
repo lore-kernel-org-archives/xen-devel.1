@@ -1,8 +1,8 @@
 From: Paul Durrant <paul.durrant@citrix.com>
 Subject: [PATCH] viridian: fix the HvFlushVirtualAddress/List
  hypercall implementation
-Date: Wed, 13 Feb 2019 16:05:33 +0000
-Message-ID: <20190213160533.7726-1-paul.durrant@citrix.com>
+Date: Wed, 13 Feb 2019 15:39:04 +0000
+Message-ID: <20190213153904.2769-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,8 +11,8 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=CK0L=QU=citrix.com=prvs=940746c73=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gtxPl-0004wC-S2
- for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 16:29:37 +0000
+ id 1gtxPj-0004w1-Kn
+ for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 16:29:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -149,7 +149,7 @@ X3QgdmFsdWUsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaWduZWQgaW50IGNyMF9wZyk7
 CiB1bnNpZ25lZCBsb25nIGh2bV9jcjRfZ3Vlc3RfdmFsaWRfYml0cyhjb25zdCBzdHJ1Y3QgZG9t
 YWluICpkLCBib29sIHJlc3RvcmUpOwogCitib29sIGh2bV9mbHVzaF92Y3B1X3RsYihib29sICgq
 Zmx1c2hfdmNwdSkodm9pZCAqY3R4dCwgc3RydWN0IHZjcHUgKnYpLAorICAgICAgICAgICAgICAg
-ICAgICAgICAgdm9pZCAqY3R4dCk7CiAKICNpZmRlZiBDT05GSUdfSFZNCiAKLS0gCjIuMjAuMS4y
-LmdiMjFlYmI2NzEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+ICAgICAgICAgdm9pZCAqY3R4dCk7CiAKICNpZmRlZiBDT05GSUdfSFZNCiAKLS0gCjIuMjAuMQoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
