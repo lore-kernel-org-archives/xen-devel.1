@@ -1,22 +1,22 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen (both x86 and Arm) Community Call: Feb 13 -
- 16:00 - 17:00 UTC - Call for Agenda Items
-Date: Wed, 13 Feb 2019 08:58:19 +0000
-Message-ID: <7F06D81E-D33D-4499-A369-DFC5656F5BEC@gmail.com>
-References: <13380756-2FA8-4F12-ADAC-1AF590578F3E@xenproject.org>
- <75D16A2E-7DA5-403D-8F7B-6F71ED408270@xenproject.org>
- <CAF3u54B_owAmO6s=CoCepkFDp9Wgcxutnj_nSGSWWyaS0TcyYA@mail.gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============6245453416123070097=="
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH 1/2] amd-iommu: use a bitfield for PTE/PDE
+Date: Wed, 13 Feb 2019 09:45:51 +0000
+Message-ID: <26e6512132734f648d4186d0e7a81b62@AMSPEX02CL03.citrite.net>
+References: <20190204111954.11312-1-paul.durrant@citrix.com>
+ <20190204111954.11312-2-paul.durrant@citrix.com>
+ <5b6ce9ab-a600-1b9e-b41b-9fb53c92388b@amd.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=zoSc=QU=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1gtqN8-0007AA-SJ
- for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 08:58:26 +0000
-Received: by mail-wr1-x42a.google.com with SMTP id o17so1548984wrw.3
- for <xen-devel@lists.xenproject.org>; Wed, 13 Feb 2019 00:58:24 -0800 (PST)
-In-Reply-To: <CAF3u54B_owAmO6s=CoCepkFDp9Wgcxutnj_nSGSWWyaS0TcyYA@mail.gmail.com>
+ <SRS0=CK0L=QU=citrix.com=prvs=940746c73=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1gtr78-0002db-HW
+ for xen-devel@lists.xenproject.org; Wed, 13 Feb 2019 09:45:58 +0000
+In-Reply-To: <5b6ce9ab-a600-1b9e-b41b-9fb53c92388b@amd.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,521 +25,396 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@gmail.com>
-Cc: "davorin.mista@aggios.com" <davorin.mista@aggios.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, "dpsmith@apertussolutions.com" <dpsmith@apertussolutions.com>, Rich Persaud <persaur@gmail.com>, "anastassios.nanos@onapp.com" <anastassios.nanos@onapp.com>, Matt Spencer <Matt.Spencer@arm.com>, "edgar.iglesias@xilinx.com" <edgar.iglesias@xilinx.com>, "Ji,
- John" <john.ji@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, "daniel.kiper@oracle.com" <daniel.kiper@oracle.com>, "mirela.simonovic@aggios.com" <mirela.simonovic@aggios.com>, xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, intel-xen
+To: "'Woods, Brian'" <Brian.Woods@amd.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, "Suthikulpanit,
+ Suravee" <Suravee.Suthikulpanit@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6245453416123070097==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_A3496C24-1030-4EF0-A022-E2ECEAADD56A"
-
-
---Apple-Mail=_A3496C24-1030-4EF0-A022-E2ECEAADD56A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Apologies: it is 16:00--17:00 as in the URL, etc. - I had forgotten to =
-update the UTC time
-
-I would like to add an agenda item about the timing of the meeting under =
-AOB
-* Originally the meeting was held 15:00 - 16:00 and Stefano requested it =
-to be moved
-* However, it turns out that normally key people such as Andrew Cooper =
-can't attend.=20
-* To solve this, we may have to pick another day
-
-Also, I came across Daniel's thread called "Enhancing Xen's Kconfig =
-infrastructure to support tailored solutions", which I think would be =
-worthwhile discussing at this meeting (or maybe the next). The overall =
-proposal makes a lot of sense to me
-
-Best Regards
-Lars
-
-> On 13 Feb 2019, at 06:22, Julien Grall <julien.grall@gmail.com> wrote:
->=20
-> Hi Lars,
->=20
-> The title says "16:00 - 17:00 UTC" but the text below says "15:00 - =
-16:00 UTC". Can you confirm what time is the meeting?
->=20
-> Cheers,
->=20
->=20
-> On Mon, 11 Feb 2019, 11:07 Lars Kurth, <lars.kurth.xen@gmail.com =
-<mailto:lars.kurth.xen@gmail.com>> wrote:
-> Hi all,=20
->=20
-> we have the community call for February coming up this Wednesday. My =
-sincere apologies, that I have not asked for agenda items last week. A =
-current agenda (primarily a skeleton) is available at  =
-https://docs.google.com/document/d/15ZLzQcH794jufDZW1oNYVY2D12CnVqxQ-klFAq=
-kd2bU/edit#heading=3Dh.mz1wjb9vekjn =
-<https://docs.google.com/document/d/15ZLzQcH794jufDZW1oNYVY2D12CnVqxQ-klFA=
-qkd2bU/edit#heading=3Dh.mz1wjb9vekjn>
->=20
-> Please propose topics by either editing the running agenda document at =
-https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4vI=
-8I01I/edit# =
-<https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y4srAm4v=
-I8I01I/edit#> or by replying to the mail. Ideally by a few hours before =
-the meeting!
->=20
-> Best Regards
-> Lars
-> =20
->=20
-> =3D=3D Dial-in Information =3D=3D
->=20
->   ## Future Community Call schedule
->   Feb 13, Mar 12
->=20
->   ## Meeting time
->   16:00 - 17:00 UTC
->    8:00 -  9:00 EDT (San Francisco)
->   11:00 - 12:00 EDT (New York)
->   16:00 - 17:00 BST (London)
->   17:00 - 18:00 CEST (Berlin)
->   00:00 - 01:00 CST (Beijing)
->   Further International meeting times:=20
->   =
-https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&mon=
-th=3D2&day=3D13&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D1=
-36&p5=3D37&p6=3D33 =
-<https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D2019&mo=
-nth=3D2&day=3D13&hour=3D16&min=3D0&sec=3D0&p1=3D224&p2=3D24&p3=3D179&p4=3D=
-136&p5=3D37&p6=3D33>=20
->=20
->   ## Dial in details
->   Web: https://www.gotomeet.me/larskurth =
-<https://www.gotomeet.me/larskurth>
->=20
->   You can also dial in using your phone.
->   Access Code: 906-886-965
->=20
->   China (Toll Free): 4008 811084
->   Germany: +49 692 5736 7317
->   Poland (Toll Free): 00 800 1124759
->   United Kingdom: +44 330 221 0088
->   United States: +1 (571) 317-3129
->=20
->   More phone numbers
->   Australia: +61 2 9087 3604
->   Austria: +43 7 2081 5427
->   Argentina (Toll Free): 0 800 444 3375
->   Bahrain (Toll Free): 800 81 111
->   Belarus (Toll Free): 8 820 0011 0400
->   Belgium: +32 28 93 7018
->   Brazil (Toll Free): 0 800 047 4906
->   Bulgaria (Toll Free): 00800 120 4417
->   Canada: +1 (647) 497-9391
->   Chile (Toll Free): 800 395 150
->   Colombia (Toll Free): 01 800 518 4483
->    Czech Republic (Toll Free): 800 500448
->   Denmark: +45 32 72 03 82
->   Finland: +358 923 17 0568
->   France: +33 170 950 594
->   Greece (Toll Free): 00 800 4414 3838
->   Hong Kong (Toll Free): 30713169
->   Hungary (Toll Free): (06) 80 986 255
->   Iceland (Toll Free): 800 7204
->   India (Toll Free): 18002669272
->   Indonesia (Toll Free): 007 803 020 5375
->   Ireland: +353 15 360 728
->   Israel (Toll Free): 1 809 454 830
->   Italy: +39 0 247 92 13 01
->   Japan (Toll Free): 0 120 663 800
->   Korea, Republic of (Toll Free): 00798 14 207 4914
->   Luxembourg (Toll Free): 800 85158
->   Malaysia (Toll Free): 1 800 81 6854
->   Mexico (Toll Free): 01 800 522 1133
->   Netherlands: +31 207 941 377
->   New Zealand: +64 9 280 6302
->   Norway: +47 21 93 37 51
->   Panama (Toll Free): 00 800 226 7928
->   Peru (Toll Free): 0 800 77023
->   Philippines (Toll Free): 1 800 1110 1661
->   Portugal (Toll Free): 800 819 575
->   Romania (Toll Free): 0 800 410 029
->   Russian Federation (Toll Free): 8 800 100 6203
->   Saudi Arabia (Toll Free): 800 844 3633
->   Singapore (Toll Free): 18007231323
->   South Africa (Toll Free): 0 800 555 447
->   Spain: +34 932 75 2004
->   Sweden: +46 853 527 827
->   Switzerland: +41 225 4599 78
->   Taiwan (Toll Free): 0 800 666 854
->   Thailand (Toll Free): 001 800 011 023
->   Turkey (Toll Free): 00 800 4488 23683
->   Ukraine (Toll Free): 0 800 50 1733
->   United Arab Emirates (Toll Free): 800 044 40439
->   Uruguay (Toll Free): 0004 019 1018
->   Viet Nam (Toll Free): 122 80 481
->=20
->   First GoToMeeting? Let's do a quick system check:
->   https://link.gotomeeting.com/system-check =
-<https://link.gotomeeting.com/system-check>_______________________________=
-________________
-> Xen-devel mailing list
-> Xen-devel@lists.xenproject.org <mailto:Xen-devel@lists.xenproject.org>
-> https://lists.xenproject.org/mailman/listinfo/xen-devel =
-<https://lists.xenproject.org/mailman/listinfo/xen-devel>
-
---Apple-Mail=_A3496C24-1030-4EF0-A022-E2ECEAADD56A
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" =
-class=3D"">Apologies: it is 16:00--17:00 as in the URL, etc. - I had =
-forgotten to update the UTC time<div class=3D""><br class=3D""></div><div =
-class=3D"">I would like to add an agenda item about the timing of the =
-meeting under AOB</div><div class=3D"">* Originally the meeting was held =
-15:00 - 16:00 and Stefano requested it to be moved</div><div class=3D"">* =
-However, it turns out that normally key people such as Andrew Cooper =
-can't attend.&nbsp;</div><div class=3D"">* To solve this, we may have to =
-pick another day</div><div class=3D""><br class=3D""></div><div =
-class=3D"">Also, I came across Daniel's thread called "<span =
-style=3D"color: rgba(0, 0, 0, 0.85098); font-family: &quot;Helvetica =
-Neue&quot;;" class=3D"">Enhancing Xen's Kconfig infrastructure to =
-support tailored solutions", which I think would be worthwhile =
-discussing at this meeting (or maybe the next). The overall proposal =
-makes a lot of sense to me</span></div><div class=3D""><br =
-class=3D""></div><div class=3D"">Best Regards</div><div class=3D"">Lars<br=
- class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 13 Feb 2019, at 06:22, Julien Grall &lt;<a =
-href=3D"mailto:julien.grall@gmail.com" =
-class=3D"">julien.grall@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span class=3D"">Hi =
-Lars,</span><div class=3D""><br class=3D""></div><div class=3D"">The =
-title says "16:00 - 17:00 UTC" but the text below says "15:00 - 16:00 =
-UTC". Can you confirm what time is the meeting?</div><div class=3D""><br =
-class=3D""></div><div class=3D"">Cheers,</div><div class=3D""><br =
-class=3D""><br class=3D""><div class=3D"gmail_quote"><div dir=3D"ltr" =
-class=3D"">On Mon, 11 Feb 2019, 11:07 Lars Kurth, &lt;<a =
-href=3D"mailto:lars.kurth.xen@gmail.com" target=3D"_blank" =
-class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:<br =
-class=3D""></div><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 =
-.8ex;border-left:1px #ccc solid;padding-left:1ex"><div =
-style=3D"word-wrap:break-word;line-break:after-white-space" class=3D""><p =
-style=3D"margin:0px 0px 2px 6px;font-stretch:normal;line-height:normal" =
-class=3D""><font color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica =
-Neue" class=3D""><span class=3D"">Hi all,&nbsp;</span></font></p><p =
-style=3D"margin:0px 0px 2px 6px;font-stretch:normal;line-height:normal" =
-class=3D""><font color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica =
-Neue" class=3D""><span class=3D""><br class=3D""></span></font></p><p =
-style=3D"margin:0px 0px 2px 6px;font-stretch:normal;line-height:normal" =
-class=3D""><font face=3D"Helvetica Neue" class=3D""><font color=3D"rgba(0,=
- 0, 0, 0.85098)" class=3D""><span class=3D"">we have the =
-community&nbsp;</span></font><font color=3D"#000085" class=3D""><span =
-class=3D"">call</span></font><font color=3D"rgba(0, 0, 0, 0.85098)" =
-class=3D""><span class=3D"">&nbsp;for February coming up this Wednesday. =
-My sincere apologies, that I have not asked for agenda =
-items&nbsp;</span></font><font color=3D"#000085" class=3D""><span =
-class=3D"">last week. A current agenda (primarily a skeleton) is =
-available at&nbsp;</span></font></font><font face=3D"Helvetica Neue" =
-class=3D""><font color=3D"rgba(0, 0, 0, 0.85098)" class=3D""><span =
-class=3D"">&nbsp;</span></font></font><font color=3D"#000085" =
-face=3D"Helvetica Neue" class=3D""><span class=3D""><a =
-href=3D"https://docs.google.com/document/d/15ZLzQcH794jufDZW1oNYVY2D12CnVq=
-xQ-klFAqkd2bU/edit#heading=3Dh.mz1wjb9vekjn" target=3D"_blank" =
-class=3D"">https://docs.google.com/document/d/15ZLzQcH794jufDZW1oNYVY2D12C=
-nVqxQ-klFAqkd2bU/edit#heading=3Dh.mz1wjb9vekjn</a></span></font></p><div =
-class=3D""><br class=3D""></div><p style=3D"margin:0px 0px 2px =
-6px;font-stretch:normal;line-height:normal" class=3D""><font =
-color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica Neue" class=3D""><span =
-class=3D"">Please propose topics by either editing the running agenda =
-document at <a =
-href=3D"https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9Ap4Y=
-4srAm4vI8I01I/edit#" target=3D"_blank" =
-class=3D"">https://docs.google.com/document/d/1Ufv9XcQO0zIAVeFbFCAHAeEIB9A=
-p4Y4srAm4vI8I01I/edit#</a> or by replying to the mail. Ideally by a few =
-hours before the meeting!</span></font></p><p style=3D"margin:0px 0px =
-2px 6px;font-stretch:normal;line-height:normal" class=3D""><font =
-color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica Neue" class=3D""><span =
-class=3D""><br class=3D""></span></font></p><p style=3D"margin:0px 0px =
-2px 6px;font-stretch:normal;line-height:normal" class=3D""><font =
-color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica Neue" class=3D""><span =
-class=3D"">Best Regards</span></font></p><p style=3D"margin:0px 0px 2px =
-6px;font-stretch:normal;line-height:normal" class=3D""><font =
-color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica Neue" class=3D""><span =
-class=3D"">Lars</span></font></p><div class=3D"">&nbsp;</div><p =
-style=3D"margin:0px 0px 2px 6px;font-stretch:normal;line-height:normal" =
-class=3D""><font color=3D"rgba(0, 0, 0, 0.85098)" face=3D"Helvetica =
-Neue" class=3D""><span class=3D""><br class=3D""></span></font></p><p =
-style=3D"margin:0px 0px 2px 6px;font-stretch:normal;line-height:normal" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">=3D=3D Dial-in Information =3D=3D</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;## Future Community Call schedule</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D"">&nbsp; Feb =
-13, Mar 12</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;## Meeting time</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;16:00 - 17:00 UTC</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;&nbsp;8:00 - &nbsp;9:00 EDT (San =
-Francisco)</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;11:00 - 12:00 EDT (New York)</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;16:00 - 17:00 BST (London)</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;17:00 - 18:00 CEST (Berlin)</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;00:00 - 01:00 CST (Beijing)</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Further International meeting =
-times:&nbsp;</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;</span><font face=3D"Menlo-Regular" =
-class=3D""><span style=3D"font-size:11px" class=3D""><a =
-href=3D"https://www.timeanddate.com/worldclock/meetingdetails.html?year=3D=
-2019&amp;month=3D2&amp;day=3D13&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&amp;=
-p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33" =
-target=3D"_blank" =
-class=3D"">https://www.timeanddate.com/worldclock/meetingdetails.html?year=
-=3D2019&amp;month=3D2&amp;day=3D13&amp;hour=3D16&amp;min=3D0&amp;sec=3D0&a=
-mp;p1=3D224&amp;p2=3D24&amp;p3=3D179&amp;p4=3D136&amp;p5=3D37&amp;p6=3D33<=
-/a>&nbsp;</span></font></p><div class=3D""><br class=3D""></div><p =
-style=3D"margin:0px 0px 2px 6px;font-stretch:normal;line-height:normal" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp; ## Dial in details</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Web:&nbsp;</span><a =
-href=3D"https://www.gotomeet.me/larskurth" =
-style=3D"font-family:Menlo-Regular;font-size:11px" target=3D"_blank" =
-class=3D"">https://www.gotomeet.me/larskurth</a><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;You can also dial in using your phone.</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Access Code: 906-886-965</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;China (Toll Free): 4008 811084</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Germany: +49 692 5736 7317</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Poland (Toll Free): 00 800 1124759</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;United Kingdom: +44 330 221 0088</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;United States: +1 (571) 317-3129</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;More phone numbers</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Australia: +61 2 9087 3604</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Austria: +43 7 2081 5427</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Argentina (Toll Free): 0 800 444 3375</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Bahrain (Toll Free): 800 81 111</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Belarus (Toll Free): 8 820 0011 0400</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Belgium: +32 28 93 7018</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Brazil (Toll Free): 0 800 047 4906</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Bulgaria (Toll Free): 00800 120 4417</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Canada: +1 (647) 497-9391</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Chile (Toll Free): 800 395 150</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Colombia (Toll Free): 01 800 518 4483</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;&nbsp;Czech Republic (Toll Free): 800 =
-500448</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Denmark: +45 32 72 03 82</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Finland: +358 923 17 0568</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;France: +33 170 950 594</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Greece (Toll Free): 00 800 4414 3838</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Hong Kong (Toll Free): 30713169</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Hungary (Toll Free): (06) 80 986 255</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Iceland (Toll Free): 800 7204</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;India (Toll Free): 18002669272</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Indonesia (Toll Free): 007 803 020 5375</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Ireland: +353 15 360 728</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Israel (Toll Free): 1 809 454 830</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Italy: +39 0 247 92 13 01</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Japan (Toll Free): 0 120 663 800</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Korea, Republic of (Toll Free): 00798 14 207 =
-4914</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Luxembourg (Toll Free): 800 85158</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Malaysia (Toll Free): 1 800 81 6854</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Mexico (Toll Free): 01 800 522 1133</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Netherlands: +31 207 941 377</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;New Zealand: +64 9 280 6302</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Norway: +47 21 93 37 51</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Panama (Toll Free): 00 800 226 7928</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Peru (Toll Free): 0 800 77023</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Philippines (Toll Free): 1 800 1110 =
-1661</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Portugal (Toll Free): 800 819 575</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Romania (Toll Free): 0 800 410 029</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Russian Federation (Toll Free): 8 800 100 =
-6203</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Saudi Arabia (Toll Free): 800 844 3633</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Singapore (Toll Free): 18007231323</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;South Africa (Toll Free): 0 800 555 447</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Spain: +34 932 75 2004</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Sweden: +46 853 527 827</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Switzerland: +41 225 4599 78</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Taiwan (Toll Free): 0 800 666 854</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Thailand (Toll Free): 001 800 011 023</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Turkey (Toll Free): 00 800 4488 23683</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Ukraine (Toll Free): 0 800 50 1733</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;United Arab Emirates (Toll Free): 800 044 =
-40439</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Uruguay (Toll Free): 0004 019 1018</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;Viet Nam (Toll Free): 122 80 481</span><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><br =
-style=3D"font-family:Menlo-Regular;font-size:11px" class=3D""><span =
-style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;First GoToMeeting? Let's do a quick system =
-check:</span><br style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D""><span style=3D"font-family:Menlo-Regular;font-size:11px" =
-class=3D"">&nbsp;&nbsp;</span><a =
-href=3D"https://link.gotomeeting.com/system-check" =
-style=3D"font-family:Menlo-Regular;font-size:11px" target=3D"_blank" =
-class=3D"">https://link.gotomeeting.com/system-check</a></p></div>________=
-_______________________________________<br class=3D"">
-Xen-devel mailing list<br class=3D"">
-<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank" =
-class=3D"">Xen-devel@lists.xenproject.org</a><br class=3D"">
-<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" =
-rel=3D"noreferrer" target=3D"_blank" =
-class=3D"">https://lists.xenproject.org/mailman/listinfo/xen-devel</a></bl=
-ockquote></div></div><span class=3D"">
-</span>
-</div></blockquote></div><br class=3D""></div></body></html>=
-
---Apple-Mail=_A3496C24-1030-4EF0-A022-E2ECEAADD56A--
-
-
---===============6245453416123070097==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6245453416123070097==--
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBXb29kcywgQnJpYW4gW21haWx0
+bzpCcmlhbi5Xb29kc0BhbWQuY29tXQ0KPiBTZW50OiAxMiBGZWJydWFyeSAyMDE5IDIwOjE0DQo+
+IFRvOiBQYXVsIER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPjsgeGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnDQo+IENjOiBTdXRoaWt1bHBhbml0LCBTdXJhdmVlIDxTdXJhdmVl
+LlN1dGhpa3VscGFuaXRAYW1kLmNvbT47IEphbiBCZXVsaWNoDQo+IDxqYmV1bGljaEBzdXNlLmNv
+bT47IEFuZHJldyBDb29wZXIgPEFuZHJldy5Db29wZXIzQGNpdHJpeC5jb20+OyBXZWkgTGl1DQo+
+IDx3ZWkubGl1MkBjaXRyaXguY29tPjsgUm9nZXIgUGF1IE1vbm5lIDxyb2dlci5wYXVAY2l0cml4
+LmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSCAxLzJdIGFtZC1pb21tdTogdXNlIGEgYml0Zmll
+bGQgZm9yIFBURS9QREUNCj4gDQo+IE9uIDIvNC8xOSA1OjE5IEFNLCBQYXVsIER1cnJhbnQgd3Jv
+dGU6DQo+ID4gVGhlIGN1cnJlbnQgdXNlIG9mIGdldC9zZXRfZmllbGRfZnJvbS9pbl9yZWdfdTMy
+KCkgaXMgYm90aCBpbmVmZmljaWVudA0KPiBhbmQNCj4gPiByZXF1aXJlcyBzb21lIHVnbHkgY2Fz
+dGluZy4NCj4gPg0KPiA+IFRoaXMgcGF0Y2ggZGVmaW5lcyBhIG5ldyBiaXRmaWVsZCBzdHJ1Y3R1
+cmUgKGFtZF9pb21tdV9wdGUpIGFuZCB1c2VzDQo+IHRoaXMNCj4gPiBzdHJ1Y3R1cmUgaW4gYWxs
+IFBURS9QREUgbWFuaXB1bGF0aW9uLCByZXN1bHRpbmcgaW4gbXVjaCBtb3JlIHJlYWRhYmxlDQo+
+ID4gYW5kIGNvbXBhY3QgY29kZS4NCj4gPg0KPiA+IE5PVEU6IFRoaXMgY29tbWl0IGFsc28gZml4
+ZXMgb25lIG1hbGZvcm1lZCBjb21tZW50IGluDQo+ID4gICAgICAgIHNldF9pb21tdV9wdGVfcHJl
+c2VudCgpLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJh
+bnRAY2l0cml4LmNvbT4NCj4gDQo+IFNvcnJ5IGFib3V0IHRoZSBkZWxheS4NCj4gDQo+IE5pdHBp
+Y2sgaGVyZSwgYnV0IEknZCByYXRoZXIgaGF2ZSAhIUlPTU1VRl97d3JpdGFibGUscmVhZGFibGV9
+IHRoYW4NCj4gdHJ1ZS4NCg0KVGhhdCdzIHByZXR0eSB1Z2x5LiBIb3cgYWJvdXQgSSBwYXNzIGFu
+IE9SIG9mIHRoZSBmbGFncyB0aHJvdWdoIHRvIGxvd2VyIGxldmVsIGZ1bmN0aW9ucyByYXRoZXIg
+dGhhbiBhIHBhaXIgb2YgYm9vbHM/IElmIHlvdSdyZSBvayB3aXRoIHRoYXQgSSdsbCBzZW5kIGEg
+djIuDQoNCiAgUGF1bA0KDQo+ICBOb3Qgd29ydGggYSByZXZpc2lvbiBpZiB0aGVyZSBpc24ndCBh
+bnl0aGluZyBlbHNlIHRob3VnaCAoYW5kIGlzDQo+IGRlYmF0YWJsZSkuDQo+IA0KPiBBY2tlZC1i
+eTogQnJpYW4gV29vZHMgPGJyaWFuLndvb2RzQGFtZC5jb20+DQo+IA0KPiA+IC0tLQ0KPiA+IENj
+OiBTdXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPg0K
+PiA+IENjOiBCcmlhbiBXb29kcyA8YnJpYW4ud29vZHNAYW1kLmNvbT4NCj4gPiBDYzogSmFuIEJl
+dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPg0KPiA+IENjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
+Y29vcGVyM0BjaXRyaXguY29tPg0KPiA+IENjOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29t
+Pg0KPiA+IENjOiAiUm9nZXIgUGF1IE1vbm7DqSIgPHJvZ2VyLnBhdUBjaXRyaXguY29tPg0KPiA+
+IC0tLQ0KPiA+ICAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL2lvbW11X21hcC5jICAgICAg
+IHwgMTQzICsrKystLS0tLS0tLS0tLS0tLQ0KPiA+ICAgeGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gv
+YW1kL3BjaV9hbWRfaW9tbXUuYyAgIHwgIDUwICsrKy0tLQ0KPiA+ICAgeGVuL2luY2x1ZGUvYXNt
+LXg4Ni9odm0vc3ZtL2FtZC1pb21tdS1kZWZzLmggIHwgIDQ3ICsrLS0tLQ0KPiA+ICAgeGVuL2lu
+Y2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL2FtZC1pb21tdS1wcm90by5oIHwgIDE1IC0tDQo+ID4gICA0
+IGZpbGVzIGNoYW5nZWQsIDY0IGluc2VydGlvbnMoKyksIDE5MSBkZWxldGlvbnMoLSkNCj4gPg0K
+PiA+IGRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hbWQvaW9tbXVfbWFwLmMN
+Cj4gYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hbWQvaW9tbXVfbWFwLmMNCj4gPiBpbmRleCA2
+NzMyOWIwYzk1Li41ZmRhNjA2M2RmIDEwMDY0NA0KPiA+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0
+aHJvdWdoL2FtZC9pb21tdV9tYXAuYw0KPiA+ICsrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdo
+L2FtZC9pb21tdV9tYXAuYw0KPiA+IEBAIC0zOCwxMDAgKzM4LDQ1IEBAIHN0YXRpYyB1bnNpZ25l
+ZCBpbnQgcGZuX3RvX3BkZV9pZHgodW5zaWduZWQgbG9uZw0KPiBwZm4sIHVuc2lnbmVkIGludCBs
+ZXZlbCkNCj4gPiAgIHN0YXRpYyB1bnNpZ25lZCBpbnQgY2xlYXJfaW9tbXVfcHRlX3ByZXNlbnQo
+dW5zaWduZWQgbG9uZyBsMV9tZm4sDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgZGZuKQ0KPiA+ICAgew0KPiA+IC0gICAgdWlu
+dDY0X3QgKnRhYmxlLCAqcHRlOw0KPiA+ICsgICAgc3RydWN0IGFtZF9pb21tdV9wdGUgKnRhYmxl
+LCAqcHRlOw0KPiA+ICAgICAgIHVuc2lnbmVkIGludCBmbHVzaF9mbGFnczsNCj4gPg0KPiA+ICAg
+ICAgIHRhYmxlID0gbWFwX2RvbWFpbl9wYWdlKF9tZm4obDFfbWZuKSk7DQo+ID4gKyAgICBwdGUg
+PSAmdGFibGVbcGZuX3RvX3BkZV9pZHgoZGZuLCAxKV07DQo+ID4NCj4gPiAtICAgIHB0ZSA9ICh0
+YWJsZSArIHBmbl90b19wZGVfaWR4KGRmbiwgMSkpOw0KPiA+ICsgICAgZmx1c2hfZmxhZ3MgPSBw
+dGUtPnByID8gSU9NTVVfRkxVU0hGX21vZGlmaWVkIDogMDsNCj4gPiArICAgIG1lbXNldChwdGUs
+IDAsIHNpemVvZigqcHRlKSk7DQo+ID4NCj4gPiAtICAgIGZsdXNoX2ZsYWdzID0gZ2V0X2ZpZWxk
+X2Zyb21fcmVnX3UzMigqcHRlLCBJT01NVV9QVEVfUFJFU0VOVF9NQVNLLA0KPiA+IC0gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1VX1BURV9QUkVTRU5UX1NISUZU
+KSA/DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVf
+RkxVU0hGX21vZGlmaWVkIDogMDsNCj4gPiAtDQo+ID4gLSAgICAqcHRlID0gMDsNCj4gPiAgICAg
+ICB1bm1hcF9kb21haW5fcGFnZSh0YWJsZSk7DQo+ID4NCj4gPiAgICAgICByZXR1cm4gZmx1c2hf
+ZmxhZ3M7DQo+ID4gICB9DQo+ID4NCj4gPiAtc3RhdGljIHVuc2lnbmVkIGludCBzZXRfaW9tbXVf
+cGRlX3ByZXNlbnQodWludDMyX3QgKnBkZSwNCj4gPiArc3RhdGljIHVuc2lnbmVkIGludCBzZXRf
+aW9tbXVfcGRlX3ByZXNlbnQoc3RydWN0IGFtZF9pb21tdV9wdGUgKnB0ZSwNCj4gPiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgbmV4dF9t
+Zm4sDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNp
+Z25lZCBpbnQgbmV4dF9sZXZlbCwNCj4gYm9vbCBpdywNCj4gPiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIGJvb2wgaXIpDQo+ID4gICB7DQo+ID4gLSAgICB1aW50
+NjRfdCBtYWRkcl9uZXh0Ow0KPiA+IC0gICAgdWludDMyX3QgYWRkcl9sbywgYWRkcl9oaSwgZW50
+cnk7DQo+ID4gLSAgICBib29sIG9sZF9wcmVzZW50Ow0KPiA+ICAgICAgIHVuc2lnbmVkIGludCBm
+bHVzaF9mbGFncyA9IElPTU1VX0ZMVVNIRl9hZGRlZDsNCj4gPg0KPiA+IC0gICAgbWFkZHJfbmV4
+dCA9IF9fcGZuX3RvX3BhZGRyKG5leHRfbWZuKTsNCj4gPiAtDQo+ID4gLSAgICBvbGRfcHJlc2Vu
+dCA9IGdldF9maWVsZF9mcm9tX3JlZ191MzIocGRlWzBdLA0KPiBJT01NVV9QVEVfUFJFU0VOVF9N
+QVNLLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1V
+X1BURV9QUkVTRU5UX1NISUZUKTsNCj4gPiAtICAgIGlmICggb2xkX3ByZXNlbnQgKQ0KPiA+IC0g
+ICAgew0KPiA+IC0gICAgICAgIGJvb2wgb2xkX3IsIG9sZF93Ow0KPiA+IC0gICAgICAgIHVuc2ln
+bmVkIGludCBvbGRfbGV2ZWw7DQo+ID4gLSAgICAgICAgdWludDY0X3QgbWFkZHJfb2xkOw0KPiA+
+IC0NCj4gPiAtICAgICAgICBhZGRyX2hpID0gZ2V0X2ZpZWxkX2Zyb21fcmVnX3UzMihwZGVbMV0s
+DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUFRF
+X0FERFJfSElHSF9NQVNLLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIElPTU1VX1BURV9BRERSX0hJR0hfU0hJRlQpOw0KPiA+IC0gICAgICAgIGFkZHJfbG8g
+PSBnZXRfZmllbGRfZnJvbV9yZWdfdTMyKHBkZVswXSwNCj4gPiAtICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBJT01NVV9QVEVfQUREUl9MT1dfTUFTSywNCj4gPiAtICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBJT01NVV9QVEVfQUREUl9MT1df
+U0hJRlQpOw0KPiA+IC0gICAgICAgIG9sZF9sZXZlbCA9IGdldF9maWVsZF9mcm9tX3JlZ191MzIo
+cGRlWzBdLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+SU9NTVVfUERFX05FWFRfTEVWRUxfTUFTSywNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIElPTU1VX1BERV9ORVhUX0xFVkVMX1NISUZUKTsNCj4gPiAtICAg
+ICAgICBvbGRfdyA9IGdldF9maWVsZF9mcm9tX3JlZ191MzIocGRlWzFdLA0KPiA+IC0NCj4gSU9N
+TVVfUFRFX0lPX1dSSVRFX1BFUk1JU1NJT05fTUFTSywNCj4gPiAtDQo+IElPTU1VX1BURV9JT19X
+UklURV9QRVJNSVNTSU9OX1NISUZUKTsNCj4gPiAtICAgICAgICBvbGRfciA9IGdldF9maWVsZF9m
+cm9tX3JlZ191MzIocGRlWzFdLA0KPiA+IC0NCj4gSU9NTVVfUFRFX0lPX1JFQURfUEVSTUlTU0lP
+Tl9NQVNLLA0KPiA+IC0NCj4gSU9NTVVfUFRFX0lPX1JFQURfUEVSTUlTU0lPTl9TSElGVCk7DQo+
+ID4gLQ0KPiA+IC0gICAgICAgIG1hZGRyX29sZCA9ICgodWludDY0X3QpYWRkcl9oaSA8PCAzMikg
+fA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICgodWludDY0X3QpYWRkcl9sbyA8PCBQQUdFX1NI
+SUZUKTsNCj4gPiAtDQo+ID4gLSAgICAgICAgaWYgKCBtYWRkcl9vbGQgIT0gbWFkZHJfbmV4dCB8
+fCBpdyAhPSBvbGRfdyB8fCBpciAhPSBvbGRfciB8fA0KPiA+IC0gICAgICAgICAgICAgb2xkX2xl
+dmVsICE9IG5leHRfbGV2ZWwgKQ0KPiA+ICsgICAgaWYgKCBwdGUtPnByICYmDQo+ID4gKyAgICAg
+ICAgIChwdGUtPm1mbiAhPSBuZXh0X21mbiB8fA0KPiA+ICsgICAgICAgICAgcHRlLT5pdyAhPSBp
+dyB8fA0KPiA+ICsgICAgICAgICAgcHRlLT5pciAhPSBpciB8fA0KPiA+ICsgICAgICAgICAgcHRl
+LT5uZXh0X2xldmVsICE9IG5leHRfbGV2ZWwpICkNCj4gPiAgICAgICAgICAgICAgIGZsdXNoX2Zs
+YWdzIHw9IElPTU1VX0ZMVVNIRl9tb2RpZmllZDsNCj4gPiAtICAgIH0NCj4gPg0KPiA+IC0gICAg
+YWRkcl9sbyA9IG1hZGRyX25leHQgJiBETUFfMzJCSVRfTUFTSzsNCj4gPiAtICAgIGFkZHJfaGkg
+PSBtYWRkcl9uZXh0ID4+IDMyOw0KPiA+IC0NCj4gPiAtICAgIC8qIGVuYWJsZSByZWFkL3dyaXRl
+IHBlcm1pc3Npb25zLHdoaWNoIHdpbGwgYmUgZW5mb3JjZWQgYXQgdGhlIFBURQ0KPiAqLw0KPiA+
+IC0gICAgc2V0X2ZpZWxkX2luX3JlZ191MzIoYWRkcl9oaSwgMCwNCj4gPiAtICAgICAgICAgICAg
+ICAgICAgICAgICAgIElPTU1VX1BERV9BRERSX0hJR0hfTUFTSywNCj4gPiAtICAgICAgICAgICAg
+ICAgICAgICAgICAgIElPTU1VX1BERV9BRERSX0hJR0hfU0hJRlQsICZlbnRyeSk7DQo+ID4gLSAg
+ICBzZXRfZmllbGRfaW5fcmVnX3UzMihpdywgZW50cnksDQo+ID4gLSAgICAgICAgICAgICAgICAg
+ICAgICAgICBJT01NVV9QREVfSU9fV1JJVEVfUEVSTUlTU0lPTl9NQVNLLA0KPiA+IC0gICAgICAg
+ICAgICAgICAgICAgICAgICAgSU9NTVVfUERFX0lPX1dSSVRFX1BFUk1JU1NJT05fU0hJRlQsICZl
+bnRyeSk7DQo+ID4gLSAgICBzZXRfZmllbGRfaW5fcmVnX3UzMihpciwgZW50cnksDQo+ID4gLSAg
+ICAgICAgICAgICAgICAgICAgICAgICBJT01NVV9QREVfSU9fUkVBRF9QRVJNSVNTSU9OX01BU0ss
+DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICBJT01NVV9QREVfSU9fUkVBRF9QRVJNSVNT
+SU9OX1NISUZULCAmZW50cnkpOw0KPiA+IC0NCj4gPiAtICAgIC8qIEZDIGJpdCBzaG91bGQgYmUg
+ZW5hYmxlZCBpbiBQVEUsIHRoaXMgaGVscHMgdG8gc29sdmUgcG90ZW50aWFsDQo+ID4gKyAgICAv
+Kg0KPiA+ICsgICAgICogRkMgYml0IHNob3VsZCBiZSBlbmFibGVkIGluIFBURSwgdGhpcyBoZWxw
+cyB0byBzb2x2ZSBwb3RlbnRpYWwNCj4gPiAgICAgICAgKiBpc3N1ZXMgd2l0aCBBVFMgZGV2aWNl
+cw0KPiA+ICAgICAgICAqLw0KPiA+IC0gICAgaWYgKCBuZXh0X2xldmVsID09IDAgKQ0KPiA+IC0g
+ICAgICAgIHNldF9maWVsZF9pbl9yZWdfdTMyKElPTU1VX0NPTlRST0xfRU5BQkxFRCwgZW50cnks
+DQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUFRFX0ZDX01BU0ssIElP
+TU1VX1BURV9GQ19TSElGVCwNCj4gJmVudHJ5KTsNCj4gPiAtICAgIHBkZVsxXSA9IGVudHJ5Ow0K
+PiANCj4gDQo+ID4gKyAgICBwdGUtPmZjID0gIW5leHRfbGV2ZWw7DQo+ID4NCj4gPiAtICAgIC8q
+IG1hcmsgbmV4dCBsZXZlbCBhcyAncHJlc2VudCcgKi8NCj4gPiAtICAgIHNldF9maWVsZF9pbl9y
+ZWdfdTMyKGFkZHJfbG8gPj4gUEFHRV9TSElGVCwgMCwNCj4gPiAtICAgICAgICAgICAgICAgICAg
+ICAgICAgIElPTU1VX1BERV9BRERSX0xPV19NQVNLLA0KPiA+IC0gICAgICAgICAgICAgICAgICAg
+ICAgICAgSU9NTVVfUERFX0FERFJfTE9XX1NISUZULCAmZW50cnkpOw0KPiA+IC0gICAgc2V0X2Zp
+ZWxkX2luX3JlZ191MzIobmV4dF9sZXZlbCwgZW50cnksDQo+ID4gLSAgICAgICAgICAgICAgICAg
+ICAgICAgICBJT01NVV9QREVfTkVYVF9MRVZFTF9NQVNLLA0KPiA+IC0gICAgICAgICAgICAgICAg
+ICAgICAgICAgSU9NTVVfUERFX05FWFRfTEVWRUxfU0hJRlQsICZlbnRyeSk7DQo+ID4gLSAgICBz
+ZXRfZmllbGRfaW5fcmVnX3UzMihJT01NVV9DT05UUk9MX0VOQUJMRUQsIGVudHJ5LA0KPiA+IC0g
+ICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUERFX1BSRVNFTlRfTUFTSywNCj4gPiAtICAg
+ICAgICAgICAgICAgICAgICAgICAgIElPTU1VX1BERV9QUkVTRU5UX1NISUZULCAmZW50cnkpOw0K
+PiA+IC0gICAgcGRlWzBdID0gZW50cnk7DQo+ID4gKyAgICBwdGUtPm1mbiA9IG5leHRfbWZuOw0K
+PiA+ICsgICAgcHRlLT5pdyA9IGl3Ow0KPiA+ICsgICAgcHRlLT5pciA9IGlyOw0KPiA+ICsgICAg
+cHRlLT5uZXh0X2xldmVsID0gbmV4dF9sZXZlbDsNCj4gPiArICAgIHB0ZS0+cHIgPSAxOw0KPiA+
+DQo+ID4gICAgICAgcmV0dXJuIGZsdXNoX2ZsYWdzOw0KPiA+ICAgfQ0KPiA+IEBAIC0xNDIsMTMg
+Kzg3LDExIEBAIHN0YXRpYyB1bnNpZ25lZCBpbnQgc2V0X2lvbW11X3B0ZV9wcmVzZW50KHVuc2ln
+bmVkDQo+IGxvbmcgcHRfbWZuLA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgaW50IHBkZV9sZXZlbCwNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIGJvb2wgaXcsIGJvb2wgaXIpDQo+ID4gICB7DQo+ID4gLSAgICB1
+aW50NjRfdCAqdGFibGU7DQo+ID4gLSAgICB1aW50MzJfdCAqcGRlOw0KPiA+ICsgICAgc3RydWN0
+IGFtZF9pb21tdV9wdGUgKnRhYmxlLCAqcGRlOw0KPiA+ICAgICAgIHVuc2lnbmVkIGludCBmbHVz
+aF9mbGFnczsNCj4gPg0KPiA+ICAgICAgIHRhYmxlID0gbWFwX2RvbWFpbl9wYWdlKF9tZm4ocHRf
+bWZuKSk7DQo+ID4gLQ0KPiA+IC0gICAgcGRlID0gKHVpbnQzMl90ICopKHRhYmxlICsgcGZuX3Rv
+X3BkZV9pZHgoZGZuLCBwZGVfbGV2ZWwpKTsNCj4gPiArICAgIHBkZSA9ICZ0YWJsZVtwZm5fdG9f
+cGRlX2lkeChkZm4sIHBkZV9sZXZlbCldOw0KPiA+DQo+ID4gICAgICAgZmx1c2hfZmxhZ3MgPSBz
+ZXRfaW9tbXVfcGRlX3ByZXNlbnQocGRlLCBuZXh0X21mbiwgMCwgaXcsIGlyKTsNCj4gPiAgICAg
+ICB1bm1hcF9kb21haW5fcGFnZSh0YWJsZSk7DQo+ID4gQEAgLTMxOSwyNSArMjYyLDYgQEAgdm9p
+ZCBpb21tdV9kdGVfc2V0X2d1ZXN0X2NyMyh1aW50MzJfdCAqZHRlLA0KPiB1aW50MTZfdCBkb21f
+aWQsIHVpbnQ2NF90IGdjcjMsDQo+ID4gICAgICAgZHRlWzFdID0gZW50cnk7DQo+ID4gICB9DQo+
+ID4NCj4gPiAtdWludDY0X3QgYW1kX2lvbW11X2dldF9hZGRyZXNzX2Zyb21fcHRlKHZvaWQgKnB0
+ZSkNCj4gPiAtew0KPiA+IC0gICAgdWludDMyX3QgKmVudHJ5ID0gcHRlOw0KPiA+IC0gICAgdWlu
+dDMyX3QgYWRkcl9sbywgYWRkcl9oaTsNCj4gPiAtICAgIHVpbnQ2NF90IHB0cjsNCj4gPiAtDQo+
+ID4gLSAgICBhZGRyX2xvID0gZ2V0X2ZpZWxkX2Zyb21fcmVnX3UzMihlbnRyeVswXSwNCj4gPiAt
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1VX1BURV9BRERSX0xPV19N
+QVNLLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUFRF
+X0FERFJfTE9XX1NISUZUKTsNCj4gPiAtDQo+ID4gLSAgICBhZGRyX2hpID0gZ2V0X2ZpZWxkX2Zy
+b21fcmVnX3UzMihlbnRyeVsxXSwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIElPTU1VX1BURV9BRERSX0hJR0hfTUFTSywNCj4gPiAtICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIElPTU1VX1BURV9BRERSX0hJR0hfU0hJRlQpOw0KPiA+IC0NCj4g
+PiAtICAgIHB0ciA9ICgodWludDY0X3QpYWRkcl9oaSA8PCAzMikgfA0KPiA+IC0gICAgICAgICAg
+KCh1aW50NjRfdClhZGRyX2xvIDw8IFBBR0VfU0hJRlQpOw0KPiA+IC0gICAgcmV0dXJuIHB0cjsN
+Cj4gPiAtfQ0KPiA+IC0NCj4gPiAgIC8qIFdhbGsgaW8gcGFnZSB0YWJsZXMgYW5kIGJ1aWxkIGxl
+dmVsIHBhZ2UgdGFibGVzIGlmIG5lY2Vzc2FyeQ0KPiA+ICAgICoge1JlLCB1bn1tYXBwaW5nIHN1
+cGVyIHBhZ2UgZnJhbWVzIGNhdXNlcyByZS1hbGxvY2F0aW9uIG9mIGlvDQo+ID4gICAgKiBwYWdl
+IHRhYmxlcy4NCj4gPiBAQCAtMzQ1LDcgKzI2OSw3IEBAIHVpbnQ2NF90IGFtZF9pb21tdV9nZXRf
+YWRkcmVzc19mcm9tX3B0ZSh2b2lkICpwdGUpDQo+ID4gICBzdGF0aWMgaW50IGlvbW11X3BkZV9m
+cm9tX2RmbihzdHJ1Y3QgZG9tYWluICpkLCB1bnNpZ25lZCBsb25nIGRmbiwNCj4gPiAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcHRfbWZuW10pDQo+ID4gICB7
+DQo+ID4gLSAgICB1aW50NjRfdCAqcGRlLCAqbmV4dF90YWJsZV92YWRkcjsNCj4gPiArICAgIHN0
+cnVjdCBhbWRfaW9tbXVfcHRlICpwZGUsICpuZXh0X3RhYmxlX3ZhZGRyOw0KPiA+ICAgICAgIHVu
+c2lnbmVkIGxvbmcgIG5leHRfdGFibGVfbWZuOw0KPiA+ICAgICAgIHVuc2lnbmVkIGludCBsZXZl
+bDsNCj4gPiAgICAgICBzdHJ1Y3QgcGFnZV9pbmZvICp0YWJsZTsNCj4gPiBAQCAtMzcwLDE1ICsy
+OTQsMTMgQEAgc3RhdGljIGludCBpb21tdV9wZGVfZnJvbV9kZm4oc3RydWN0IGRvbWFpbiAqZCwN
+Cj4gdW5zaWduZWQgbG9uZyBkZm4sDQo+ID4gICAgICAgICAgIHB0X21mbltsZXZlbF0gPSBuZXh0
+X3RhYmxlX21mbjsNCj4gPg0KPiA+ICAgICAgICAgICBuZXh0X3RhYmxlX3ZhZGRyID0gbWFwX2Rv
+bWFpbl9wYWdlKF9tZm4obmV4dF90YWJsZV9tZm4pKTsNCj4gPiAtICAgICAgICBwZGUgPSBuZXh0
+X3RhYmxlX3ZhZGRyICsgcGZuX3RvX3BkZV9pZHgoZGZuLCBsZXZlbCk7DQo+ID4gKyAgICAgICAg
+cGRlID0gJm5leHRfdGFibGVfdmFkZHJbcGZuX3RvX3BkZV9pZHgoZGZuLCBsZXZlbCldOw0KPiA+
+DQo+ID4gICAgICAgICAgIC8qIEhlcmUgbWlnaHQgYmUgYSBzdXBlciBwYWdlIGZyYW1lICovDQo+
+ID4gLSAgICAgICAgbmV4dF90YWJsZV9tZm4gPSBhbWRfaW9tbXVfZ2V0X2FkZHJlc3NfZnJvbV9w
+dGUocGRlKSA+Pg0KPiBQQUdFX1NISUZUOw0KPiA+ICsgICAgICAgIG5leHRfdGFibGVfbWZuID0g
+cGRlLT5tZm47DQo+ID4NCj4gPiAgICAgICAgICAgLyogU3BsaXQgc3VwZXIgcGFnZSBmcmFtZSBp
+bnRvIHNtYWxsZXIgcGllY2VzLiovDQo+ID4gLSAgICAgICAgaWYgKCBpb21tdV9pc19wdGVfcHJl
+c2VudCgodWludDMyX3QgKilwZGUpICYmDQo+ID4gLSAgICAgICAgICAgICAoaW9tbXVfbmV4dF9s
+ZXZlbCgodWludDMyX3QgKilwZGUpID09IDApICYmDQo+ID4gLSAgICAgICAgICAgICBuZXh0X3Rh
+YmxlX21mbiAhPSAwICkNCj4gPiArICAgICAgICBpZiAoIHBkZS0+cHIgJiYgIXBkZS0+bmV4dF9s
+ZXZlbCAmJiBuZXh0X3RhYmxlX21mbiApDQo+ID4gICAgICAgICAgIHsNCj4gPiAgICAgICAgICAg
+ICAgIGludCBpOw0KPiA+ICAgICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBtZm4sIHBmbjsNCj4g
+PiBAQCAtMzk4LDEzICszMjAsMTMgQEAgc3RhdGljIGludCBpb21tdV9wZGVfZnJvbV9kZm4oc3Ry
+dWN0IGRvbWFpbiAqZCwNCj4gdW5zaWduZWQgbG9uZyBkZm4sDQo+ID4gICAgICAgICAgICAgICB9
+DQo+ID4NCj4gPiAgICAgICAgICAgICAgIG5leHRfdGFibGVfbWZuID0gbWZuX3gocGFnZV90b19t
+Zm4odGFibGUpKTsNCj4gPiAtICAgICAgICAgICAgc2V0X2lvbW11X3BkZV9wcmVzZW50KCh1aW50
+MzJfdCAqKXBkZSwgbmV4dF90YWJsZV9tZm4sDQo+IG5leHRfbGV2ZWwsDQo+ID4gLSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAhIUlPTU1VRl93cml0YWJsZSwNCj4gISFJT01NVUZf
+cmVhZGFibGUpOw0KPiA+ICsgICAgICAgICAgICBzZXRfaW9tbXVfcGRlX3ByZXNlbnQocGRlLCBu
+ZXh0X3RhYmxlX21mbiwgbmV4dF9sZXZlbCwNCj4gdHJ1ZSwNCj4gPiArICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHRydWUpOw0KPiA+DQo+ID4gICAgICAgICAgICAgICBmb3IgKCBp
+ID0gMDsgaSA8IFBURV9QRVJfVEFCTEVfU0laRTsgaSsrICkNCj4gPiAgICAgICAgICAgICAgIHsN
+Cj4gPiAgICAgICAgICAgICAgICAgICBzZXRfaW9tbXVfcHRlX3ByZXNlbnQobmV4dF90YWJsZV9t
+Zm4sIHBmbiwgbWZuLA0KPiBuZXh0X2xldmVsLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICEhSU9NTVVGX3dyaXRhYmxlLA0KPiAhIUlPTU1VRl9yZWFkYWJsZSk7
+DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJ1ZSwgdHJ1ZSk7
+DQo+ID4gICAgICAgICAgICAgICAgICAgbWZuICs9IHBhZ2Vfc3o7DQo+ID4gICAgICAgICAgICAg
+ICAgICAgcGZuICs9IHBhZ2Vfc3o7DQo+ID4gICAgICAgICAgICAgICAgfQ0KPiA+IEBAIC00MTMs
+NyArMzM1LDcgQEAgc3RhdGljIGludCBpb21tdV9wZGVfZnJvbV9kZm4oc3RydWN0IGRvbWFpbiAq
+ZCwNCj4gdW5zaWduZWQgbG9uZyBkZm4sDQo+ID4gICAgICAgICAgIH0NCj4gPg0KPiA+ICAgICAg
+ICAgICAvKiBJbnN0YWxsIGxvd2VyIGxldmVsIHBhZ2UgdGFibGUgZm9yIG5vbi1wcmVzZW50IGVu
+dHJpZXMgKi8NCj4gPiAtICAgICAgICBlbHNlIGlmICggIWlvbW11X2lzX3B0ZV9wcmVzZW50KCh1
+aW50MzJfdCAqKXBkZSkgKQ0KPiA+ICsgICAgICAgIGVsc2UgaWYgKCAhcGRlLT5wciApDQo+ID4g
+ICAgICAgICAgIHsNCj4gPiAgICAgICAgICAgICAgIGlmICggbmV4dF90YWJsZV9tZm4gPT0gMCAp
+DQo+ID4gICAgICAgICAgICAgICB7DQo+ID4gQEAgLTQyNSw5ICszNDcsOCBAQCBzdGF0aWMgaW50
+IGlvbW11X3BkZV9mcm9tX2RmbihzdHJ1Y3QgZG9tYWluICpkLA0KPiB1bnNpZ25lZCBsb25nIGRm
+biwNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIDE7DQo+ID4gICAgICAgICAgICAg
+ICAgICAgfQ0KPiA+ICAgICAgICAgICAgICAgICAgIG5leHRfdGFibGVfbWZuID0gbWZuX3gocGFn
+ZV90b19tZm4odGFibGUpKTsNCj4gPiAtICAgICAgICAgICAgICAgIHNldF9pb21tdV9wZGVfcHJl
+c2VudCgodWludDMyX3QgKilwZGUsIG5leHRfdGFibGVfbWZuLA0KPiA+IC0gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIG5leHRfbGV2ZWwsICEhSU9NTVVGX3dyaXRhYmxlLA0K
+PiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICEhSU9NTVVGX3JlYWRh
+YmxlKTsNCj4gPiArICAgICAgICAgICAgICAgIHNldF9pb21tdV9wZGVfcHJlc2VudChwZGUsIG5l
+eHRfdGFibGVfbWZuLCBuZXh0X2xldmVsLA0KPiB0cnVlLA0KPiA+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHRydWUpOw0KPiA+ICAgICAgICAgICAgICAgfQ0KPiA+ICAg
+ICAgICAgICAgICAgZWxzZSAvKiBzaG91bGQgbmV2ZXIgcmVhY2ggaGVyZSAqLw0KPiA+ICAgICAg
+ICAgICAgICAgew0KPiA+IEBAIC00NTUsNyArMzc2LDcgQEAgc3RhdGljIGludCB1cGRhdGVfcGFn
+aW5nX21vZGUoc3RydWN0IGRvbWFpbiAqZCwNCj4gdW5zaWduZWQgbG9uZyBkZm4pDQo+ID4gICAg
+ICAgc3RydWN0IGFtZF9pb21tdSAqaW9tbXUgPSBOVUxMOw0KPiA+ICAgICAgIHN0cnVjdCBwYWdl
+X2luZm8gKm5ld19yb290ID0gTlVMTDsNCj4gPiAgICAgICBzdHJ1Y3QgcGFnZV9pbmZvICpvbGRf
+cm9vdCA9IE5VTEw7DQo+ID4gLSAgICB2b2lkICpuZXdfcm9vdF92YWRkcjsNCj4gPiArICAgIHN0
+cnVjdCBhbWRfaW9tbXVfcHRlICpuZXdfcm9vdF92YWRkcjsNCj4gPiAgICAgICB1bnNpZ25lZCBs
+b25nIG9sZF9yb290X21mbjsNCj4gPiAgICAgICBzdHJ1Y3QgZG9tYWluX2lvbW11ICpoZCA9IGRv
+bV9pb21tdShkKTsNCj4gPg0KPiA+IEBAIC00ODQsNyArNDA1LDcgQEAgc3RhdGljIGludCB1cGRh
+dGVfcGFnaW5nX21vZGUoc3RydWN0IGRvbWFpbiAqZCwNCj4gdW5zaWduZWQgbG9uZyBkZm4pDQo+
+ID4gICAgICAgICAgIG5ld19yb290X3ZhZGRyID0gX19tYXBfZG9tYWluX3BhZ2UobmV3X3Jvb3Qp
+Ow0KPiA+ICAgICAgICAgICBvbGRfcm9vdF9tZm4gPSBtZm5feChwYWdlX3RvX21mbihvbGRfcm9v
+dCkpOw0KPiA+ICAgICAgICAgICBzZXRfaW9tbXVfcGRlX3ByZXNlbnQobmV3X3Jvb3RfdmFkZHIs
+IG9sZF9yb290X21mbiwgbGV2ZWwsDQo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICEhSU9NTVVGX3dyaXRhYmxlLCAhIUlPTU1VRl9yZWFkYWJsZSk7DQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHRydWUsIHRydWUpOw0KPiA+ICAgICAgICAgICBsZXZlbCsrOw0K
+PiA+ICAgICAgICAgICBvbGRfcm9vdCA9IG5ld19yb290Ow0KPiA+ICAgICAgICAgICBvZmZzZXQg
+Pj49IFBURV9QRVJfVEFCTEVfU0hJRlQ7DQo+ID4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bh
+c3N0aHJvdWdoL2FtZC9wY2lfYW1kX2lvbW11LmMNCj4gYi94ZW4vZHJpdmVycy9wYXNzdGhyb3Vn
+aC9hbWQvcGNpX2FtZF9pb21tdS5jDQo+ID4gaW5kZXggMzNhMzc5OGYzNi4uZGE2NzQ4MzIwYiAx
+MDA2NDQNCj4gPiAtLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9hbWQvcGNpX2FtZF9pb21t
+dS5jDQo+ID4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL3BjaV9hbWRfaW9tbXUu
+Yw0KPiA+IEBAIC0zNzYsOSArMzc2LDggQEAgc3RhdGljIHZvaWQgZGVhbGxvY2F0ZV9uZXh0X3Bh
+Z2VfdGFibGUoc3RydWN0DQo+IHBhZ2VfaW5mbyAqcGcsIGludCBsZXZlbCkNCj4gPg0KPiA+ICAg
+c3RhdGljIHZvaWQgZGVhbGxvY2F0ZV9wYWdlX3RhYmxlKHN0cnVjdCBwYWdlX2luZm8gKnBnKQ0K
+PiA+ICAgew0KPiA+IC0gICAgdm9pZCAqdGFibGVfdmFkZHIsICpwZGU7DQo+ID4gLSAgICB1NjQg
+bmV4dF90YWJsZV9tYWRkcjsNCj4gPiAtICAgIHVuc2lnbmVkIGludCBpbmRleCwgbGV2ZWwgPSBQ
+Rk5fT1JERVIocGcpLCBuZXh0X2xldmVsOw0KPiA+ICsgICAgc3RydWN0IGFtZF9pb21tdV9wdGUg
+KnRhYmxlX3ZhZGRyOw0KPiA+ICsgICAgdW5zaWduZWQgaW50IGluZGV4LCBsZXZlbCA9IFBGTl9P
+UkRFUihwZyk7DQo+ID4NCj4gPiAgICAgICBQRk5fT1JERVIocGcpID0gMDsNCj4gPg0KPiA+IEBA
+IC0zOTIsMTcgKzM5MSwxNCBAQCBzdGF0aWMgdm9pZCBkZWFsbG9jYXRlX3BhZ2VfdGFibGUoc3Ry
+dWN0IHBhZ2VfaW5mbw0KPiAqcGcpDQo+ID4NCj4gPiAgICAgICBmb3IgKCBpbmRleCA9IDA7IGlu
+ZGV4IDwgUFRFX1BFUl9UQUJMRV9TSVpFOyBpbmRleCsrICkNCj4gPiAgICAgICB7DQo+ID4gLSAg
+ICAgICAgcGRlID0gdGFibGVfdmFkZHIgKyAoaW5kZXggKiBJT01NVV9QQUdFX1RBQkxFX0VOVFJZ
+X1NJWkUpOw0KPiA+IC0gICAgICAgIG5leHRfdGFibGVfbWFkZHIgPSBhbWRfaW9tbXVfZ2V0X2Fk
+ZHJlc3NfZnJvbV9wdGUocGRlKTsNCj4gPiAtICAgICAgICBuZXh0X2xldmVsID0gaW9tbXVfbmV4
+dF9sZXZlbChwZGUpOw0KPiA+ICsgICAgICAgIHN0cnVjdCBhbWRfaW9tbXVfcHRlICpwZGUgPSAm
+dGFibGVfdmFkZHJbaW5kZXhdOw0KPiA+DQo+ID4gLSAgICAgICAgaWYgKCAobmV4dF90YWJsZV9t
+YWRkciAhPSAwKSAmJiAobmV4dF9sZXZlbCAhPSAwKSAmJg0KPiA+IC0gICAgICAgICAgICAgaW9t
+bXVfaXNfcHRlX3ByZXNlbnQocGRlKSApDQo+ID4gKyAgICAgICAgaWYgKCBwZGUtPm1mbiAmJiBw
+ZGUtPm5leHRfbGV2ZWwgJiYgcGRlLT5wciApDQo+ID4gICAgICAgICAgIHsNCj4gPiAgICAgICAg
+ICAgICAgIC8qIFdlIGRvIG5vdCBzdXBwb3J0IHNraXAgbGV2ZWxzIHlldCAqLw0KPiA+IC0gICAg
+ICAgICAgICBBU1NFUlQobmV4dF9sZXZlbCA9PSBsZXZlbCAtIDEpOw0KPiA+IC0gICAgICAgICAg
+ICBkZWFsbG9jYXRlX25leHRfcGFnZV90YWJsZShtYWRkcl90b19wYWdlKG5leHRfdGFibGVfbWFk
+ZHIpLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBuZXh0X2xl
+dmVsKTsNCj4gPiArICAgICAgICAgICAgQVNTRVJUKHBkZS0+bmV4dF9sZXZlbCA9PSBsZXZlbCAt
+IDEpOw0KPiA+ICsgICAgICAgICAgICBkZWFsbG9jYXRlX25leHRfcGFnZV90YWJsZShtZm5fdG9f
+cGFnZShfbWZuKHBkZS0+bWZuKSksDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBkZS0+bmV4dF9sZXZlbCk7DQo+ID4gICAgICAgICAgIH0NCj4gPiAgICAgICB9
+DQo+ID4NCj4gPiBAQCAtNTAwLDEwICs0OTYsOCBAQCBzdGF0aWMgdm9pZCBhbWRfZHVtcF9wMm1f
+dGFibGVfbGV2ZWwoc3RydWN0DQo+IHBhZ2VfaW5mbyogcGcsIGludCBsZXZlbCwNCj4gPiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYWRkcl90IGdwYSwgaW50IGluZGVu
+dCkNCj4gPiAgIHsNCj4gPiAgICAgICBwYWRkcl90IGFkZHJlc3M7DQo+ID4gLSAgICB2b2lkICp0
+YWJsZV92YWRkciwgKnBkZTsNCj4gPiAtICAgIHBhZGRyX3QgbmV4dF90YWJsZV9tYWRkcjsNCj4g
+PiAtICAgIGludCBpbmRleCwgbmV4dF9sZXZlbCwgcHJlc2VudDsNCj4gPiAtICAgIHUzMiAqZW50
+cnk7DQo+ID4gKyAgICBzdHJ1Y3QgYW1kX2lvbW11X3B0ZSAqdGFibGVfdmFkZHI7DQo+ID4gKyAg
+ICBpbnQgaW5kZXg7DQo+ID4NCj4gPiAgICAgICBpZiAoIGxldmVsIDwgMSApDQo+ID4gICAgICAg
+ICAgIHJldHVybjsNCj4gPiBAQCAtNTE4LDQyICs1MTIsMzIgQEAgc3RhdGljIHZvaWQgYW1kX2R1
+bXBfcDJtX3RhYmxlX2xldmVsKHN0cnVjdA0KPiBwYWdlX2luZm8qIHBnLCBpbnQgbGV2ZWwsDQo+
+ID4NCj4gPiAgICAgICBmb3IgKCBpbmRleCA9IDA7IGluZGV4IDwgUFRFX1BFUl9UQUJMRV9TSVpF
+OyBpbmRleCsrICkNCj4gPiAgICAgICB7DQo+ID4gKyAgICAgICAgc3RydWN0IGFtZF9pb21tdV9w
+dGUgKnBkZSA9ICZ0YWJsZV92YWRkcltpbmRleF07DQo+ID4gKw0KPiA+ICAgICAgICAgICBpZiAo
+ICEoaW5kZXggJSAyKSApDQo+ID4gICAgICAgICAgICAgICBwcm9jZXNzX3BlbmRpbmdfc29mdGly
+cXMoKTsNCj4gPg0KPiA+IC0gICAgICAgIHBkZSA9IHRhYmxlX3ZhZGRyICsgKGluZGV4ICogSU9N
+TVVfUEFHRV9UQUJMRV9FTlRSWV9TSVpFKTsNCj4gPiAtICAgICAgICBuZXh0X3RhYmxlX21hZGRy
+ID0gYW1kX2lvbW11X2dldF9hZGRyZXNzX2Zyb21fcHRlKHBkZSk7DQo+ID4gLSAgICAgICAgZW50
+cnkgPSBwZGU7DQo+ID4gLQ0KPiA+IC0gICAgICAgIHByZXNlbnQgPSBnZXRfZmllbGRfZnJvbV9y
+ZWdfdTMyKGVudHJ5WzBdLA0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIElPTU1VX1BERV9QUkVTRU5UX01BU0ssDQo+ID4gLSAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUERFX1BSRVNFTlRfU0hJRlQpOw0KPiA+IC0NCj4g
+PiAtICAgICAgICBpZiAoICFwcmVzZW50ICkNCj4gPiArICAgICAgICBpZiAoICFwZGUtPnByICkN
+Cj4gPiAgICAgICAgICAgICAgIGNvbnRpbnVlOw0KPiA+DQo+ID4gLSAgICAgICAgbmV4dF9sZXZl
+bCA9IGdldF9maWVsZF9mcm9tX3JlZ191MzIoZW50cnlbMF0sDQo+ID4gLSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUERFX05FWFRfTEVWRUxfTUFTSywN
+Cj4gPiAtDQo+IElPTU1VX1BERV9ORVhUX0xFVkVMX1NISUZUKTsNCj4gPiAtDQo+ID4gLSAgICAg
+ICAgaWYgKCBuZXh0X2xldmVsICYmIChuZXh0X2xldmVsICE9IChsZXZlbCAtIDEpKSApDQo+ID4g
+KyAgICAgICAgaWYgKCBwZGUtPm5leHRfbGV2ZWwgJiYgKHBkZS0+bmV4dF9sZXZlbCAhPSAobGV2
+ZWwgLSAxKSkgKQ0KPiA+ICAgICAgICAgICB7DQo+ID4gICAgICAgICAgICAgICBwcmludGsoIklP
+TU1VIHAybSB0YWJsZSBlcnJvci4gbmV4dF9sZXZlbCA9ICVkLCBleHBlY3RlZA0KPiAlZFxuIiwN
+Cj4gPiAtICAgICAgICAgICAgICAgICAgIG5leHRfbGV2ZWwsIGxldmVsIC0gMSk7DQo+ID4gKyAg
+ICAgICAgICAgICAgICAgICBwZGUtPm5leHRfbGV2ZWwsIGxldmVsIC0gMSk7DQo+ID4NCj4gPiAg
+ICAgICAgICAgICAgIGNvbnRpbnVlOw0KPiA+ICAgICAgICAgICB9DQo+ID4NCj4gPiAgICAgICAg
+ICAgYWRkcmVzcyA9IGdwYSArIGFtZF9vZmZzZXRfbGV2ZWxfYWRkcmVzcyhpbmRleCwgbGV2ZWwp
+Ow0KPiA+IC0gICAgICAgIGlmICggbmV4dF9sZXZlbCA+PSAxICkNCj4gPiArICAgICAgICBpZiAo
+IHBkZS0+bmV4dF9sZXZlbCA+PSAxICkNCj4gPiAgICAgICAgICAgICAgIGFtZF9kdW1wX3AybV90
+YWJsZV9sZXZlbCgNCj4gPiAtICAgICAgICAgICAgICAgIG1hZGRyX3RvX3BhZ2UobmV4dF90YWJs
+ZV9tYWRkciksIG5leHRfbGV2ZWwsDQo+ID4gKyAgICAgICAgICAgICAgICBtZm5fdG9fcGFnZShf
+bWZuKHBkZS0+bWZuKSksIHBkZS0+bmV4dF9sZXZlbCwNCj4gPiAgICAgICAgICAgICAgICAgICBh
+ZGRyZXNzLCBpbmRlbnQgKyAxKTsNCj4gPiAgICAgICAgICAgZWxzZQ0KPiA+ICAgICAgICAgICAg
+ICAgcHJpbnRrKCIlKnNkZm46ICUwOGx4ICBtZm46ICUwOGx4XG4iLA0KPiA+ICAgICAgICAgICAg
+ICAgICAgICAgIGluZGVudCwgIiIsDQo+ID4gICAgICAgICAgICAgICAgICAgICAgKHVuc2lnbmVk
+IGxvbmcpUEZOX0RPV04oYWRkcmVzcyksDQo+ID4gLSAgICAgICAgICAgICAgICAgICAodW5zaWdu
+ZWQgbG9uZylQRk5fRE9XTihuZXh0X3RhYmxlX21hZGRyKSk7DQo+ID4gKyAgICAgICAgICAgICAg
+ICAgICAodW5zaWduZWQgbG9uZylQRk5fRE9XTihwZm5fdG9fcGFkZHIocGRlLT5tZm4pKSk7DQo+
+ID4gICAgICAgfQ0KPiA+DQo+ID4gICAgICAgdW5tYXBfZG9tYWluX3BhZ2UodGFibGVfdmFkZHIp
+Ow0KPiA+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0vYW1kLWlvbW11
+LWRlZnMuaA0KPiBiL3hlbi9pbmNsdWRlL2FzbS14ODYvaHZtL3N2bS9hbWQtaW9tbXUtZGVmcy5o
+DQo+ID4gaW5kZXggYTIxNzI0NTI0OS4uYTNhNDlmOTFlYiAxMDA2NDQNCj4gPiAtLS0gYS94ZW4v
+aW5jbHVkZS9hc20teDg2L2h2bS9zdm0vYW1kLWlvbW11LWRlZnMuaA0KPiA+ICsrKyBiL3hlbi9p
+bmNsdWRlL2FzbS14ODYvaHZtL3N2bS9hbWQtaW9tbXUtZGVmcy5oDQo+ID4gQEAgLTQxMywzOCAr
+NDEzLDIxIEBADQo+ID4gICAjZGVmaW5lIElPTU1VX1BBR0VfVEFCTEVfVTMyX1BFUl9FTlRSWQ0K
+PiAJKElPTU1VX1BBR0VfVEFCTEVfRU5UUllfU0laRSAvIDQpDQo+ID4gICAjZGVmaW5lIElPTU1V
+X1BBR0VfVEFCTEVfQUxJR05NRU5UCTQwOTYNCj4gPg0KPiA+IC0jZGVmaW5lIElPTU1VX1BURV9Q
+UkVTRU5UX01BU0sJCQkweDAwMDAwMDAxDQo+ID4gLSNkZWZpbmUgSU9NTVVfUFRFX1BSRVNFTlRf
+U0hJRlQJCQkwDQo+ID4gLSNkZWZpbmUgSU9NTVVfUFRFX05FWFRfTEVWRUxfTUFTSwkJMHgwMDAw
+MEUwMA0KPiA+IC0jZGVmaW5lIElPTU1VX1BURV9ORVhUX0xFVkVMX1NISUZUCQk5DQo+ID4gLSNk
+ZWZpbmUgSU9NTVVfUFRFX0FERFJfTE9XX01BU0sJCQkweEZGRkZGMDAwDQo+ID4gLSNkZWZpbmUg
+SU9NTVVfUFRFX0FERFJfTE9XX1NISUZUCQkxMg0KPiA+IC0jZGVmaW5lIElPTU1VX1BURV9BRERS
+X0hJR0hfTUFTSwkJMHgwMDBGRkZGRg0KPiA+IC0jZGVmaW5lIElPTU1VX1BURV9BRERSX0hJR0hf
+U0hJRlQJCTANCj4gPiAtI2RlZmluZSBJT01NVV9QVEVfVV9NQVNLCQkJMHgwODAwMDAwMA0KPiA+
+IC0jZGVmaW5lIElPTU1VX1BURV9VX1NISUZUCQkJNw0KPiA+IC0jZGVmaW5lIElPTU1VX1BURV9G
+Q19NQVNLCQkJMHgxMDAwMDAwMA0KPiA+IC0jZGVmaW5lIElPTU1VX1BURV9GQ19TSElGVAkJCTI4
+DQo+ID4gLSNkZWZpbmUgSU9NTVVfUFRFX0lPX1JFQURfUEVSTUlTU0lPTl9NQVNLCTB4MjAwMDAw
+MDANCj4gPiAtI2RlZmluZSBJT01NVV9QVEVfSU9fUkVBRF9QRVJNSVNTSU9OX1NISUZUCTI5DQo+
+ID4gLSNkZWZpbmUgSU9NTVVfUFRFX0lPX1dSSVRFX1BFUk1JU1NJT05fTUFTSwkweDQwMDAwMDAw
+DQo+ID4gLSNkZWZpbmUgSU9NTVVfUFRFX0lPX1dSSVRFX1BFUk1JU1NJT05fU0hJRlQJMzANCj4g
+PiAtDQo+ID4gLS8qIEkvTyBQYWdlIERpcmVjdG9yeSAqLw0KPiA+IC0jZGVmaW5lIElPTU1VX1BB
+R0VfRElSRUNUT1JZX0VOVFJZX1NJWkUJCTgNCj4gPiAtI2RlZmluZSBJT01NVV9QQUdFX0RJUkVD
+VE9SWV9BTElHTk1FTlQJCTQwOTYNCj4gPiAtI2RlZmluZSBJT01NVV9QREVfUFJFU0VOVF9NQVNL
+CQkJMHgwMDAwMDAwMQ0KPiA+IC0jZGVmaW5lIElPTU1VX1BERV9QUkVTRU5UX1NISUZUCQkJMA0K
+PiA+IC0jZGVmaW5lIElPTU1VX1BERV9ORVhUX0xFVkVMX01BU0sJCTB4MDAwMDBFMDANCj4gPiAt
+I2RlZmluZSBJT01NVV9QREVfTkVYVF9MRVZFTF9TSElGVAkJOQ0KPiA+IC0jZGVmaW5lIElPTU1V
+X1BERV9BRERSX0xPV19NQVNLCQkJMHhGRkZGRjAwMA0KPiA+IC0jZGVmaW5lIElPTU1VX1BERV9B
+RERSX0xPV19TSElGVAkJMTINCj4gPiAtI2RlZmluZSBJT01NVV9QREVfQUREUl9ISUdIX01BU0sJ
+CTB4MDAwRkZGRkYNCj4gPiAtI2RlZmluZSBJT01NVV9QREVfQUREUl9ISUdIX1NISUZUCQkwDQo+
+ID4gLSNkZWZpbmUgSU9NTVVfUERFX0lPX1JFQURfUEVSTUlTU0lPTl9NQVNLCTB4MjAwMDAwMDAN
+Cj4gPiAtI2RlZmluZSBJT01NVV9QREVfSU9fUkVBRF9QRVJNSVNTSU9OX1NISUZUCTI5DQo+ID4g
+LSNkZWZpbmUgSU9NTVVfUERFX0lPX1dSSVRFX1BFUk1JU1NJT05fTUFTSwkweDQwMDAwMDAwDQo+
+ID4gLSNkZWZpbmUgSU9NTVVfUERFX0lPX1dSSVRFX1BFUk1JU1NJT05fU0hJRlQJMzANCj4gPiAr
+c3RydWN0IGFtZF9pb21tdV9wdGUgew0KPiA+ICsgICAgdWludDY0X3QgcHI6MTsNCj4gPiArICAg
+IHVpbnQ2NF90IGlnbm9yZWQwOjQ7DQo+ID4gKyAgICB1aW50NjRfdCBhOjE7DQo+ID4gKyAgICB1
+aW50NjRfdCBkOjE7DQo+ID4gKyAgICB1aW50NjRfdCBpZ25vcmVkMToyOw0KPiA+ICsgICAgdWlu
+dDY0X3QgbmV4dF9sZXZlbDozOw0KPiA+ICsgICAgdWludDY0X3QgbWZuOjQwOw0KPiA+ICsgICAg
+dWludDY0X3QgcmVzZXJ2ZWQ6NzsNCj4gPiArICAgIHVpbnQ2NF90IHU6MTsNCj4gPiArICAgIHVp
+bnQ2NF90IGZjOjE7DQo+ID4gKyAgICB1aW50NjRfdCBpcjoxOw0KPiA+ICsgICAgdWludDY0X3Qg
+aXc6MTsNCj4gPiArICAgIHVpbnQ2NF90IGlnbm9yZWQyOjE7DQo+ID4gK307DQo+ID4NCj4gPiAg
+IC8qIFBhZ2luZyBtb2RlcyAqLw0KPiA+ICAgI2RlZmluZSBJT01NVV9QQUdJTkdfTU9ERV9ESVNB
+QkxFRAkweDANCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL2Ft
+ZC1pb21tdS1wcm90by5oDQo+IGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL2FtZC1pb21t
+dS1wcm90by5oDQo+ID4gaW5kZXggYzU2OTc1NjVkNi4uMWMxOTcxYmI3YyAxMDA2NDQNCj4gPiAt
+LS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0vYW1kLWlvbW11LXByb3RvLmgNCj4gPiAr
+KysgYi94ZW4vaW5jbHVkZS9hc20teDg2L2h2bS9zdm0vYW1kLWlvbW11LXByb3RvLmgNCj4gPiBA
+QCAtNTcsNyArNTcsNiBAQCBpbnQgX19tdXN0X2NoZWNrIGFtZF9pb21tdV9tYXBfcGFnZShzdHJ1
+Y3QgZG9tYWluICpkLA0KPiBkZm5fdCBkZm4sDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgKmZsdXNoX2ZsYWdzKTsNCj4gPiAgIGludCBfX211
+c3RfY2hlY2sgYW1kX2lvbW11X3VubWFwX3BhZ2Uoc3RydWN0IGRvbWFpbiAqZCwgZGZuX3QgZGZu
+LA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBp
+bnQgKmZsdXNoX2ZsYWdzKTsNCj4gPiAtdWludDY0X3QgYW1kX2lvbW11X2dldF9hZGRyZXNzX2Zy
+b21fcHRlKHZvaWQgKmVudHJ5KTsNCj4gPiAgIGludCBfX211c3RfY2hlY2sgYW1kX2lvbW11X2Fs
+bG9jX3Jvb3Qoc3RydWN0IGRvbWFpbl9pb21tdSAqaGQpOw0KPiA+ICAgaW50IGFtZF9pb21tdV9y
+ZXNlcnZlX2RvbWFpbl91bml0eV9tYXAoc3RydWN0IGRvbWFpbiAqZG9tYWluLA0KPiA+ICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFkZHJfdCBwaHlzX2FkZHIsIHVu
+c2lnbmVkDQo+IGxvbmcgc2l6ZSwNCj4gPiBAQCAtMjgwLDE4ICsyNzksNCBAQCBzdGF0aWMgaW5s
+aW5lIHZvaWQNCj4gaW9tbXVfc2V0X2FkZHJfaGlfdG9fcmVnKHVpbnQzMl90ICpyZWcsIHVpbnQz
+Ml90IGFkZHIpDQo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUkVHX0JBU0Vf
+QUREUl9ISUdIX1NISUZULCByZWcpOw0KPiA+ICAgfQ0KPiA+DQo+ID4gLXN0YXRpYyBpbmxpbmUg
+aW50IGlvbW11X2lzX3B0ZV9wcmVzZW50KGNvbnN0IHUzMiAqZW50cnkpDQo+ID4gLXsNCj4gPiAt
+ICAgIHJldHVybiBnZXRfZmllbGRfZnJvbV9yZWdfdTMyKGVudHJ5WzBdLA0KPiA+IC0gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgSU9NTVVfUERFX1BSRVNFTlRfTUFTSywNCj4gPiAt
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElPTU1VX1BERV9QUkVTRU5UX1NISUZU
+KTsNCj4gPiAtfQ0KPiA+IC0NCj4gPiAtc3RhdGljIGlubGluZSB1bnNpZ25lZCBpbnQgaW9tbXVf
+bmV4dF9sZXZlbChjb25zdCB1MzIgKmVudHJ5KQ0KPiA+IC17DQo+ID4gLSAgICByZXR1cm4gZ2V0
+X2ZpZWxkX2Zyb21fcmVnX3UzMihlbnRyeVswXSwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIElPTU1VX1BERV9ORVhUX0xFVkVMX01BU0ssDQo+ID4gLSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBJT01NVV9QREVfTkVYVF9MRVZFTF9TSElGVCk7DQo+ID4g
+LX0NCj4gPiAtDQo+ID4gICAjZW5kaWYgLyogX0FTTV9YODZfNjRfQU1EX0lPTU1VX1BST1RPX0gg
+Ki8NCj4gPg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
