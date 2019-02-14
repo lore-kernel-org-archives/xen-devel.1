@@ -2,20 +2,19 @@ From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re:
  =?utf-8?q?xen=3A_credit2=3A_credit2_can=E2=80=99t__r?=
  =?utf-8?q?each_the_throughput_as_expected?=
-Date: Thu, 14 Feb 2019 16:04:45 +0100
-Message-ID: <45b285a269e0385ee33ec32f8df7ecaf496cf05a.camel@suse.com>
+Date: Thu, 14 Feb 2019 16:07:06 +0100
+Message-ID: <c38b34d7a97fe4cab961b6db71a5e89ffcb75f01.camel@suse.com>
 References: <0E8924944E28FD4A97A19E5A680D8A82368B95A0@DGGEML521-MBX.china.huawei.com>
+ <SG2PR01MB3302A6419948E232ED234A2497670@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5753717599693587810=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=MESF=QV=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1guIYT-00061I-BS
- for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 15:04:01 +0000
-In-Reply-To: <0E8924944E28FD4A97A19E5A680D8A82368B95A0@DGGEML521-MBX.china.huawei.com>
+ id 1guIaM-0006El-M3
+ for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 15:05:58 +0000
+In-Reply-To: <SG2PR01MB3302A6419948E232ED234A2497670@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,184 +24,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: zheng chuan <jason.zhengchuan@hotmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGV5LCBJIHRoaW5rIHlvdSd2ZSBkcm9wcGVkIHRoZSB4ZW4tZGV2ZWwgbWFpbGluZyBsaXN0LCBp
-biB0aGlzIGFuZCB0aGUKb3RoZXIgcmVwbGllcy4KCkknbGwgZm9yd2FyZCB0aGVtIHRvIHRoZXJl
-LCBzbyB0aGV5IGxlYXZlIHRyYWNlIGluIHRoZSBhcmNoaXZlcy4KUGxlYXNlLCByZS1hZGQgaXQs
-IGFuZCB0cnkgdG8gYXZvaWQgZHJvcHBpbmcgaXQgYWdhaW4uCgpUaGFua3MKLS0tCj4gPiBIaSwg
-R2VvcmdlLAo+ID4KPiBIaSAoYWx0aG91Z2ggSSdtIG5vdCBHZW9yZ2UgOi1EKSwKPgogCkhpLCBE
-YXJpbywKIAo+ID4gSSBmb3VuZCBDcmVkaXQyIGNhbuKAmXQgcmVhY2ggdGhlIHRocm91Z2hwdXQg
-YXMgZXhwZWN0ZWQgdW5kZXIgbXkKdGVzdAo+ID4gd29ya2xvYWQsIGNvbXBhcmVkIHRvIENyZWRp
-dCBhbmQgQ0ZTLiBJdCBpcyBlYXN5IHRvIHJlcHJvZHVjZSwgYW5kCkkKPiA+IHRoaW5rIHRoZSBw
-cm9ibGVtIGlzIHJlYWxseSBleGlzdC4KPiA+IEl0IHJlYWxseSB0b29rIG1lIGEgbG9uZyB0aW1l
-IHRvIGZpbmQgb3V0IHdoeSBkdWUgdG8gbXkgbGFjayBvZgo+ID4ga25vd2xlZGdlLCBhbmQgSSBj
-YW5ub3QgZmluZCBhIGdvb2Qgd2F5IHRvIHNvbHZlIGl0Lgo+ID4gUGxlYXNlIGRvIGhlbHAgdG8g
-dGFrZSBhIGxvb2sgYXQgaXQuIFRoeC4KPiA+Cj4gT2ssIHRoYW5rcyBmb3IgeW91ciB0ZXN0aW5n
-LCBhbmQgZm9yIHJlcG9ydGluZyB0aGlzIHRvIHVzLgo+Cj4gQSBmZXcgcXVlc3Rpb25zLgo+CiAK
-VGhhbmsgeW91IGZvciB5b3VyIHJlcGx5aW5nIDopCiAKPiA+ICoqKioqKioqKioqKioqKgo+ID4g
-W0hvdyB0byByZXByb2R1Y2VdCj4gPiAqKioqKioqKioqKioqKioKPiA+IEkgdXNlIG9wZW5TVVNF
-LVR1bWJsZXdlZWQgd2l0aCB4ZW4tNC4xMSB2ZXJzaW9uLgo+ID4gSGVyZSBpcyB0aGUgdGVzdCB3
-b3JrbG9hZCBsaWtlOgo+ID4gSSBoYXZlIGd1ZXN0XzEgd2l0aCA0IHZDUFUgYW5kIGd1ZXN0XzIg
-d2l0aCA4IHZDUFUgcnVubmluZyBvbiA0CnBDUFUsCj4gPiB0aGF0IGlzLCB0aGUgcmVsYXRpb24g
-b2YgcENQVTp2Q1BVIGlzIDE6My4KPiA+IFRoZW4gSSBhZGQgcHJlc3N1cmUgd2l0aCAyMCUgQ1BV
-IHVzYWdlIGZvciBlYWNoIHZDUFUsIHdoaWNoIHJlc3VsdHMKaW4KPiA+IHRvdGFsIDI0MCUgcENQ
-VSB1c2FnZS4KPiA+IFRoZSAyMCUgcHJlc3N1cmUgbW9kZWwgaXMgdGhhdCwgSSBzdGFydCBvbmUg
-cHJvY2VzcyBvbiBlYWNoIHZDUFUsCj4gPiB3aGljaCBydW5zIDIwbXMgaW5kZWZpbml0ZWx5IGFu
-ZCB0aGVuIGdvZXMgdG8gc2xlZXAgODBtcyB3aXRoaW4gdGhlCj4gPiBwZXJpb2Qgb2YgMTAwbXMu
-Cj4gPiBJIHVzZSB4ZW50b3AgdG8gb2JzZXJ2ZSBndWVzdCBjcHUgdXNhZ2UgaW4gZG9tMCwgYXMg
-SSBleHBlY3QsIHRoZQo+ID4gZ3Vlc3QgY3B1IHVzYWdlIGlzIDgwJSBhbmQgMTYwJSBmb3IgZ3Vl
-c3RfMSBhbmQgZ3Vlc3RfMiAsCj4gPiByZXNwZWN0aXZlbHkuCj4gPgo+IERvIHlvdSBoYXZlIHRo
-ZSBzb3VyY2VzIGZvciB0aGlzIHNvbWV3aGVyZSwgc28gdGhhdCB3ZSBjYW4gdHJ5IHRvCnJlcHJv
-ZHVjZQo+IGl0IG91cnNlbGYuIEknbSB0aGlua2luZyB0byB0aGUgc291cmNlIGNvZGUgZm9yIHRo
-ZSBwZXJpb2RpYyBhcHBzIChpZgp5b3UgdXNlZCBhCj4gY3VzdG9tIG1hZGUgb25lKSwgb3IgdGhl
-IHJlcG9zaXRvcnkgKGlmIHlvdSB1c2VkIG9uZSBmcm9tIGFueSkgb3IgdGhlCm5hbWUKPiBvZiB0
-aGUgYmVuY2htYXJraW5nIHN1aXRlIC0tYW5kIHRoZSBwYXJhbWV0ZXIgdXNlZCB0byBjcmVhdGUg
-dGhpcwpzY2VuYXJpbz8KPgogCkkgaGF2ZSBwdXQgdGhlIHRlc3QgZGVtbyBpbiBhdHRhY2htZW50
-LCBwbGVhc2UgcnVuIGl0IGFzIGZvbGxvd3M6CjEuIGNvbXBpbGUgaXQKICBnY2MgdXByZXNzLmMg
-LW8gdXByZXNzCjIuIGNhbGN1bGF0ZSB0aGUgbG9vcHMgaW4gZG9tMCBmaXJzdAogIC4vdXByZXNz
-IC1sIDEwMAogIEZvciBleGFtcGxlLCB0aGUgb3V0cHV0IGlzCiAgY3B1IGtoeiA6IDIyMDAwMDAK
-ICBjYWxjdWxhdGUgbG9vcHM6IDQ0NzIuCiAgV2UgZ2V0IDQ0NzIuCjMuIGdpdmUgdGhlIDIwJSBw
-cmVzc3VyZSBmb3IgZWFjaCB2Y3B1IGluIGd1ZXN0IGJ5CiAgLi91cHJlc3MgLWwgMjAgLXogNDQ3
-MiAmCiAgSXQgaXMgYmV0dGVyIHRvIGJpbmQgZWFjaCBwcmVzc3VyZSB0YXNrIHRvIHZjcHUgYnkg
-dGFza3NldC4KIAo+ID4gKioqKioqKioqKioqKioKPiA+IFtXaHkgaXQgaGFwcGVuc10KPiA+ICoq
-KioqKioqKioqKioqCj4gPiBUaGUgdGVzdCB3b3JrbG9hZCBsaWtlcyB0aGUgcG9sbGluZyBmcm9t
-IHRoZSBsb25nIHRlcm0gdG8gc2VlLgo+ID4gQXMgc2hvd2VkIGluIHRoZSBmaWd1cmUgYmVsb3cs
-IHRoZSAtIC0gLSAtIG1lYW5zIHRoZSBjcHV0aW1lIHRoZQp2Y3B1cwo+ID4gaXMgcnVubmluZyBh
-bmQgdGhlIOKAlOKAlOKAlCBtZWFucyB0aGUgaWRsZS4KPiA+IEFzIHdlIGNhbiBzZWUgZnJvbSBG
-aWcuMSwgaWYgdmNwdV8xIGFuZCB2Y3B1XzIgY2FuIHJ1biBzdGFnZ2VyZWRseSwKPiA+IHRoZSB0
-aHJvdWdocHV0IGxvb2tzIGZpbmUsIGhvd2V2ZXIsIGlmIHZjcHVfMSBhbmQgdmNwdV8yIHJ1bnMg
-YXQKdGhlCj4gPiBzYW1lIHRpbWUsIHRoZXkgd2lsbCBjb21wZXRlIGZvciBwQ1BVLCB3aGljaCBy
-ZXN1bHRzIGluIHBvb3IKPiA+IHRocm91Z2hwdXQuCj4gPgo+ID4gdmNwdV8xICAgICAgICAtIC0g
-LSAtIC0gLSAtIOKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlCAgLSAtIC0gLSAtIC0gLeKAlOKAlOKA
-lOKAlOKAlOKAlOKAlOKAlCAtIC0gLSAtCj4gPiAtCj4gPiAgICAgICAgICAgICAgICAgICB8ICAg
-ICAgICAgICAgICAgIHwKPiB8Cj4gPiAgICAgICAgICAgICAgIHwgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgfAo+ID4gdmNwdV8yICAgICAgICAgICAgICAgICAgICAgICAgLSAtIC0gLSAt
-IC0gLeKAlOKAlOKAlOKAlOKAlOKAlOKAlOKAlCAgLSAtIC0gLSAtIC0gLQo+ID4g4oCU4oCU4oCU
-4oCU4oCU4oCU4oCU4oCUCj4gPiAgICAgICAgICAgICAgICAgICB8ICB2Y3B1MSAgICB8ICAgdmNw
-dTIgICB8ICAgICAgICAgICAgICAgfAo+IHZjcHUxCj4gPiAgfCAgIHZjcHUyICAgfCAgICAgICAg
-ICAgICAgfCAgdmNwdTEKPiA+IGNwdSB1c2FnZSAgIC0gLSAtIC0gLSAtIC0gLSAtIC0gLSAtIC0g
-IOKAlOKAlOKAlOKAlC0gLSAtIC0gLSAtIC0gLSAtIC0gLSAtCi0KPiA+IC0g4oCU4oCU4oCU4oCU
-IC0gLSAtIC0gLSAtIC0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgRmlnLjEKPiA+Cj4gPiB2Y3B1XzEgICAgICAgLSAtIC0gLSAt
-IC0gLSDigJTigJTigJTigJTigJTigJTigJTigJQgICAgICAgICAgICAgICAgICAtIC0gLSAtIC0g
-LSAtCj4gPiDigJTigJTigJTigJTigJTigJTigJQKPiA+ICAgICAgICAgICAgICAgICAgfAo+ID4g
-dmNwdV8yICAgICAgIC0gLSAtIC0gLSAtIC0g4oCU4oCU4oCU4oCU4oCU4oCU4oCU4oCUICAgICAg
-ICAgICAgICAgICAgLSAtIC0gLSAtIC0gLQo+ID4g4oCU4oCU4oCU4oCU4oCU4oCU4oCUCj4gPiAg
-ICAgICAgICAgICAgICAgIHwgIGNvbXBldGUgcnVubmluZyAgICAgfCAgIGJvdGgKPiA+IHNsZWVw
-ICAgICAgICAgfCAgY29tcGV0ZSBydW5uaW5nICAgIHwgICBib3RoIHNsZWVwICAgIHwKPiA+IGNw
-dSB1c2FnZSAgIC0gLSAtIC0gLSAtIC0gLSAtIC0gLSAtIC0gLeKAlOKAlOKAlOKAlOKAlOKAlOKA
-lOKAlCAtIC0gLSAtIC0gLSAtIC0gLSAtCj4gPiAtIC0gLSAtIOKAlOKAlOKAlOKAlOKAlOKAlOKA
-lOKAlAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBGaWcuMgo+ID4KPiBPaywgSSdtIG5vdCBlbnRpcmVseSBzdXJlIEkgZm9sbG93
-IGFsbCB0aGlzLCBidXQgbGV0J3MgcHV0IGl0IGFzaWRlCmZvciBhIHNlY29uZC4gVGhlCj4gcXVl
-c3Rpb24gSSBoYXZlIGlzLCBpcyB0aGlzIGFuYWx5c2lzIGNvbWluZyBmcm9tIGxvb2tpbmcgYXQg
-YWN0dWFsCnRyYWNlcz8gSWYgeWVzLAo+IGNhbiB5b3UgdXBsb2FkIHNvbWV3aGVyZS9zaGFyZSB0
-aGUgdHJhY2UgZmlsZXM/Cj4KIApTb3JyeSBmb3IgdGhlIG1lc3MgcGljdHVyZSwgeW91IGNhbiBz
-ZWUgdGhlIGZpZ3VyZSBiZWxvdy4KClRoZSBncmVlbiBvbmUgbWVhbnMgdmNwdSBpcyBydW5uaW5n
-IHdoaWxlIHRoZSByZWQgb25lIG1lYW5zIGlkbGUuCkluIEZpZy4xLCB2Y3B1MSBhbmQgdmNwdTIg
-cnVucyBzdGFnZ2VyZWRseSwgaXQgbWVhbnMgdmNwdTEgcnVucyAyMG1zCmFuZCB0aGVuIHZjcHUy
-IHJ1bnMgMjBtcyB3aGlsZSB2Y3B1MSBpcyBzbGVlcGluZy4KSW4gRmlnLjIsIHZjcHUxIGFuZCB2
-Y3B1MiBydW5zIGF0IHRoZSBzYW1lIHRpbWUsIGl0IG1lYW5zIHZjcHUxIGFuZAp2Y3B1MiBjb21w
-ZXRlIGZvciBwQ1BVLCBhbmQgdGhlbiBnbyB0byBzbGVlcCBhdCB0aGUgc2FtZSB0aW1lLgpPYnZp
-b3VzbHksIHRoZSBzbWFsbGVyIHRpbWUtc2xpY2UgaXMsIHRoZSB3b3JzZSBjb21wZXRpdGlvbiBo
-YXBwZW5zLgpBcyB5b3UgbWVudGlvbmVkIHRoYXQgdGhlIENyZWRpdDIgZG9lcyBub3QgaGF2ZSBh
-IHJlYWwgdGltZXNsaWNlLCB0aGUKdmNwdSBjYW4gYmUgcHJlZW1wdGVkIGJ5IHRoZSBkaWZmZXJl
-bmNlIG9mIGNyZWRpdCAoKwpzY2hlZF9yYXRlbGltaXRfdXMpIGR5bmFtaWNhbGx5LgpJZiB0aGUg
-ZGlmZmVyZW5jZSBvZiBjcmVkaXQgaXMgbm90IGVub3VnaCBiZXR3ZWVuIHZjcHVzLCBhcyBhIHJl
-c3VsdCwKdGhlIFNjZW5lcyBpbiBGaWcuMiBoYXBwZW5zIGF0IG1vc3Qgb2YgdGltZSBpbiBteSB0
-ZXN0Y2FzZS4KRmluYWxseSwgaXQgY2FuIG5vdCB1c2UgcENQVSBlZmZlY3RpdmVseS4KIAo+ID4g
-QXMgd2UgZG8gcmVzZXRfY3JlZGl0KCkgd2hlbiBzbmV4dC0+Y3JlZGl0IGlzIG5lZ2F0aXZlIHdo
-aWNoIG1ha2VzCnRoZQo+ID4gY3JlZGl0IHZhbHVlIGlzIHRvbyBjbG9zZSBiZXR3ZWVuIGVhY2gg
-dmNwdS4KPiA+IEFzIGEgcmVzdWx0LCBmcm9tIGxvbmcgdGVybSB0byBvYnNlcnZlLCB0aGUgdGlt
-ZS1zbGljZSBvZiBlYWNoIHZjcHUKPiA+IGJlY29tZXMgc21hbGxlciwgdGhleSBjb21wZXRlIGZv
-ciBwQ1BVIGF0IHRoZSBzYW1lIHRpbWUganVzdCBsaWtlCj4gPiBzaG93biBpbiBGaWcuMiBhYm92
-ZS4KPiA+IFRodXMsIGkgdGhpbmsgdGhlIHJlYXNvbiB3aHkgaXQgY2FuJ3QgcmVhY2ggdGhlIGV4
-cGVjdGVkIHRocm91Z2hwdXQKaXMKPiA+IHRoYXQgcmVzZXRfY3JlZGl0KCkgZm9yIGFsbCB2Y3B1
-IHdpbGwgbWFrZSB0aGUgdGltZS1zbGljZSBzbWFsbGVyCj4gPiB3aGljaCBpcyBkaWZmZXJlbnQg
-ZnJvbSBDcmVkaXQgYW5kIENGUy4KPiA+Cj4gT2ssIHNvIHlvdSdyZSBzYXlpbmcgdGhpcyBkcm9w
-IG9mICJ0aHJvdWdocHV0IiBjYW4gYmUgY2F1c2VkIGJ5CnNjaGVkdWxpbmcKPiBoYXBwZW5pbmcg
-dG9vIGZyZXF1ZW50bHkgaW4gQ3JlZGl0Mi4KPgo+IFdlbGwsIEkgZ3Vlc3MgdGhhdCBpcyBhIHBv
-c3NpYmlsaXR5LCBhbHRob3VnaCwgYXMgSSBzYWlkIGFib3ZlLCBJJ2QKbmVlZCB0byB0aGluayBh
-Cj4gYml0IG1vcmUgYWJvdXQgdGhpcywgYXMgd2VsbCBhcyB0cnlpbmcgdG8gcmVwcm9kdWNlIGl0
-LCBhbmQgbG9vayBhdAphY3R1YWwgdHJhY2VzLgo+Cj4gUGVyaGFwcywgb25lIHRoaW5nIHRoYXQg
-Y2FuIGJlIGRvbmUgdG8gdHJ5IHRvIGNvbmZpcm0gdGhpcyBhbmFseXNpcywKd291bGQgYmUgdG8K
-PiBtYWtlIHRoZSBzY2hlZHVsaW5nIGxlc3MgZnJlcXVlbnQgaW4gQ3JlZGl0MiBhbmQsIG9uIHRo
-ZSBvdGhlciBoYW5kLAp0byBtYWtlCj4gaXQgbW9yZSBmcmVxdWVudCBpbiBDcmVkaXQxLiBJbiB0
-aGVvcnksIGlmIHRoZSBhbmFseXNpcyBpcyBjb3JyZWN0LAp5b3Ugd291bGQKPiBvYnNlcnZlIHRo
-ZSBiZWhhdmlvciBvZiB0aGlzIHNwZWNpZmljIHdvcmtsb2FkIGltcHJvdmluZyBvbiBDcmVkaXQy
-CmFuZAo+IGRlZ3JhZGluZyBpbiBDcmVkaXQxLCB3aGVuIGRvaW5nIHNvLgo+Cj4gSWYgeW91IGZh
-bmN5IHRyeWluZyB0aGF0LCBmb3IgQ3JlZGl0MSwgeW91IGNhbiBwbGF5IHdpdGggdGhlCj4gc2No
-ZWRfY3JlZGl0X3RzbGljZV9tcyBYZW4gYm9vdCB0aW1lIHBhcmFtZXRlciAoZS5nLiwgdHJ5IHB1
-c2hpbmcgaXQKZG93biB0bwo+IDFtcykuCj4KPiBGb3IgQ3JlZGl0MiwgaXQncyBhIGxpdHRsZSB0
-cmlja2llciwgYXMgdGhlIHNjaGVkdWxlciBkb2VzIG5vdCBoYXZlIGEKcmVhbCB0aW1lc2xpY2Uu
-Cj4gU28sIGVpdGhlciB5b3UgYWx0ZXIgQ1NDSEVEMl9NSU5fVElNRVIsIGluIHRoZSBjb2RlLCBv
-ciB5b3UgIm1pbWljIgp0aGUKPiB0aW1lc2xpY2UgaW5jcmVhc2UgYnkgc2V0dGluZyBzY2hlZF9y
-YXRlbGltaXRfdXMgdG8gYSBoaWdoZXIgdmFsdWUKKGxpa2UsIGUuZy4sCj4gMTBtcykuCj4KIApI
-ZXJlIGlzIHRoZSBmdXJ0aGVyIHRlc3QgcmVzdWx0OgppLiAgaXQgaXMgaW50ZXJlc3RpbmcgdGhh
-dCBpdCBzdGlsbCB3b3JrcyB3ZWxsIGlmIEkgbWFrZSBDcmVkaXQxIHRvIDFtcwpieSB4bCBzY2hl
-ZC1jcmVkaXQgLXMgLXQgMQpsaW51eC1zb2R2On4gIyB4bCBzY2hlZC1jcmVkaXQKQ3B1cG9vbCBQ
-b29sLTA6IHRzbGljZT0xbXMgcmF0ZWxpbWl0PTEwMDB1cyBtaWdyYXRpb24tZGVsYXk9MHVzCk5h
-bWUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIElEIFdlaWdodCAgQ2FwCkRvbWFpbi0w
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAwICAgIDI1NiAgICAwClhlbnN0b3JlICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAxICAgIDI1NiAgICAwCmd1ZXN0XzEgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAyICAgIDI1NiAgICAwCmd1ZXN0XzIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAzICAgIDI1NiAgICAwCiAKeGVudG9wIC0gMTM6MzQ6MDIgICBYZW4gNC4xMS4w
-XzAyLTEKNCBkb21haW5zOiAzIHJ1bm5pbmcsIDEgYmxvY2tlZCwgMCBwYXVzZWQsIDAgY3Jhc2hl
-ZCwgMCBkeWluZywgMApzaHV0ZG93bgpNZW06IDY3MDc5Nzk2ayB0b3RhbCwgNjcwNzg5NTZrIHVz
-ZWQsIDg0MGsgZnJlZSAgICBDUFVzOiAzMiBAIDI2MDBNSHoKICAgICAgTkFNRSAgU1RBVEUgICBD
-UFUoc2VjKSBDUFUoJSkgICAgIE1FTShrKSBNRU0oJSkgIE1BWE1FTShrKQpNQVhNRU0oJSkgVkNQ
-VVMgTkVUUyBORVRUWChrKSBORVRSWChrKSBWQkRTICAgVkJEX09PICAgVkJEX1JEICAgVkJEX1dS
-IApWQkRfUlNFQ1QgIFZCRF9XU0VDVCBTU0lECiAgRG9tYWluLTAgLS0tLS1yICAgICAgICAxMjcg
-ICAgMS43ICAgNjQwNTA1MzYgICA5NS41ICAgbm8gbGltaXQgICAgICAKbi9hICAgIDMyICAgIDAg
-ICAgICAgIDAgICAgICAgIDAgICAgMCAgICAgICAgMCAgICAgICAgMCAgICAgICAKMCAgICAgICAg
-ICAwICAgICAgICAgIDAgICAgMAogICBndWVzdF8xIC0tLS0tciAgICAgICAgIDg1ICAgODIuNSAg
-ICAxMDQ4ODMyICAgIDEuNiAgICAxMDQ5NjAwICAgICAgCjEuNiAgICAgNCAgICAxICAgICAgMzQz
-ICAgICAgICAyICAgIDEgICAgICAgIDAgICAgIDQxNDQgICAgIDIxNjggICAgCjE5MTQ2OSAgICAg
-IDEwMzY0ICAgIDAKICAgZ3Vlc3RfMiAtLS0tLXIgICAgICAgIDEzNyAgMTY0LjUgICAgMTA0ODgz
-MiAgICAxLjYgICAgMTA0OTYwMCAgICAgIAoxLjYgICAgIDggICAgMSAgICAgIDI5NyAgICAgICAg
-NCAgICAxICAgICAgICAwICAgICA0MTE1ICAgICAgMjQ2ICAgIAoxOTE2MzcgICAgICAxMDMyMyAg
-ICAwCiAgWGVuc3RvcmUgLS1iLS0tICAgICAgICAgIDAgICAgMC4wICAgICAgMzI3NjAgICAgMC4w
-ICAgICA2NzA3MjAgICAgICAKMS4wICAgICAxICAgIDAgICAgICAgIDAgICAgICAgIDAgICAgMCAg
-ICAgICAgMCAgICAgICAgMCAgICAgICAKMCAgICAgICAgICAwICAgICAgICAgIDAgICAgMAogCmlp
-LiAgaXQgd29ya3Mgd2VsbCBpZiBzY2hlZF9yYXRlbGltaXRfdXMgaXMgc2V0IHVwIHRvIDMwbXMg
-YWJvdmUuCmxpbnV4LXNvZHY6fiAjIHhsIHNjaGVkLWNyZWRpdDIgLXMgLXAgUG9vbC0wCkNwdXBv
-b2wgUG9vbC0wOiByYXRlbGltaXQ9MzAwMDB1cwogCnhlbnRvcCAtIDEzOjU0OjQyICAgWGVuIDQu
-MTEuMF8wMi0xCjQgZG9tYWluczogMiBydW5uaW5nLCAyIGJsb2NrZWQsIDAgcGF1c2VkLCAwIGNy
-YXNoZWQsIDAgZHlpbmcsIDAKc2h1dGRvd24KTWVtOiA2NzA3OTc5NmsgdG90YWwsIDY3MDc4OTY4
-ayB1c2VkLCA4MjhrIGZyZWUgICAgQ1BVczogMzIgQCAyNjAwTUh6CiAgICAgIE5BTUUgIFNUQVRF
-ICAgQ1BVKHNlYykgQ1BVKCUpICAgICBNRU0oaykgTUVNKCUpICBNQVhNRU0oaykKTUFYTUVNKCUp
-IFZDUFVTIE5FVFMgTkVUVFgoaykgTkVUUlgoaykgVkJEUyAgIFZCRF9PTyAgIFZCRF9SRCAgIFZC
-RF9XUiAKVkJEX1JTRUNUICBWQkRfV1NFQ1QgU1NJRAogIERvbWFpbi0wIC0tLS0tciAgICAgICAg
-MTEzICAgIDIuNyAgIDY0MDUwNDUyICAgOTUuNSAgIG5vIGxpbWl0ICAgICAgCm4vYSAgICAzMiAg
-ICAwICAgICAgICAwICAgICAgICAwICAgIDAgICAgICAgIDAgICAgICAgIDAgICAgICAgCjAgICAg
-ICAgICAgMCAgICAgICAgICAwICAgIDAKICAgZ3Vlc3RfMSAtLWItLS0gICAgICAgICA2NiAgIDgy
-LjggICAgMTA0ODgzMiAgICAxLjYgICAgMTA0OTYwMCAgICAgIAoxLjYgICAgIDQgICAgMSAgICAg
-IDQ0OSAgICAgICAgMiAgICAxICAgICAgICAwICAgICA0MDg5ICAgICAyMTc3ICAgIAoxOTIxMzEg
-ICAgICAxMDQ3NiAgICAwCiAgIGd1ZXN0XzIgLS0tLS1yICAgICAgICAgOTcgIDE2NS44ICAgIDEw
-NDg4MzIgICAgMS42ICAgIDEwNDk2MDAgICAgICAKMS42ICAgICA4ICAgIDEgICAgICA0MzggICAg
-ICAgIDUgICAgMSAgICAgICAgMCAgICAgNDE2MCAgICAgMTE0NiAgICAKMTkyMDY4ICAgICAgMTA0
-MDkgICAgMAogCkhvd2V2ZXIsIHRoZSBzY2hlZF9yYXRlbGltaXRfdXMgaXMgbm90IHNvIGVsZWdh
-bnQgYW5kIGZsZXhpYWJsZSB0aGF0IGl0Cmd1YXJhbnRlZXMgdGhlIHNwZWNpZmljIHRpbWUtc2xp
-Y2UgZml4ZWRseS4KSXQgbWF5IHZlcnkgbGlrZWx5IGNhdXNlIGRlZ3JhZGluZyBvZiB0aGUgb3Ro
-ZXIgc2NoZWR1bGVyIGNyaXRlcmlhIGxpa2UKc2NoZWRfbGF0ZW5jeS4KQXMgZmFyIGFzIEkga25v
-dywgQ0ZTIGNvdWxkIGFkanVzdCB0aW1lLXNsaWNlIGFjY29yZGluZyB0byB0aGUgbnJfcXVldWUK
-aW4gcnVucXVldWUgKGluX19zY2hlZF9wZXJpb2QoKSApLgpDb3VsZCBpdCBwb3NzaWJsZSB0aGF0
-IENyZWRpdDIgYWxzbyBoYXZlIHRoZSBzaW1pbGFyIGFiaWxpdHkgdG8gYWRqdXN0CnRpbWUtc2xp
-Y2UgYXV0b21hdGljYWxseT8KIApMb29raW5nIGZvcndhcmQgdG8gaGVhcmluZyB5b3VyIG9waW5p
-b24gb24gdGhpcyBpc3N1ZS4KIApCZXN0IFJlZ2FyZHMuCiAKPiBJdCdzIG5vdCBhIGNvbmNsdXNp
-dmUgdGVzdCwgYnV0IEkgdGhpbmsgaXQgaXMgYSBnb29kIGVub3VnaCBvbmUgZm9yCmdhaW5pbmcg
-c29tZQo+IG1vcmUgdW5kZXJzdGFuZGluZyBvZiB0aGUgaXNzdWUuCj4KPiBSZWdhcmRzLAo+IERh
-cmlvCj4gLS0KPiA8PFRoaXMgaGFwcGVucyBiZWNhdXNlIEkgY2hvb3NlIGl0IHRvIGhhcHBlbiE+
-PiAoUmFpc3RsaW4gTWFqZXJlKQo+IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4gRGFyaW8gRmFnZ2lvbGksIFBoLkQsIGh0
-dHA6Ly9hYm91dC5tZS9kYXJpby5mYWdnaW9saSBTb2Z0d2FyZQpFbmdpbmVlciBAIFNVU0UKPiBo
-dHRwczovL3d3dy5zdXNlLmNvbS8KIAotLSAKPDxUaGlzIGhhcHBlbnMgYmVjYXVzZSBJIGNob29z
-ZSBpdCB0byBoYXBwZW4hPj4gKFJhaXN0bGluIE1hamVyZSkKLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KRGFyaW8gRmFnZ2lv
-bGksIFBoLkQsIGh0dHA6Ly9hYm91dC5tZS9kYXJpby5mYWdnaW9saQpTb2Z0d2FyZSBFbmdpbmVl
-ciBAIFNVU0UgaHR0cHM6Ly93d3cuc3VzZS5jb20vCgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5753717599693587810==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-Uc0yulES8l/2jQo1H7no"
+
+
+--=-Uc0yulES8l/2jQo1H7no
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Forwarding to xen-devel, as it was dropped, and I did not notice.
+---
+On Thu, 2019-02-14 at 07:10 +0000, zheng chuan wrote:=20
+> Hi, Dario,
+> =20
+Hi,
+
+> I have put the test demo in attachment, please run it as follows:
+> 1. compile it
+>   gcc upress.c -o upress
+> 2. calculate the loops in dom0 first
+>   ./upress -l 100
+>   For example, the output is
+>   cpu khz : 2200000
+>   calculate loops: 4472.
+>   We get 4472.
+> 3. give the 20% pressure for each vcpu in guest by
+>   ./upress -l 20 -z 4472 &
+>   It is better to bind each pressure task to vcpu by taskset.
+> =20
+Ok, thanks for the code and the instructions, I will give it a try.
+
+> Sorry for the mess picture, you can see the figure below.
+>=20
+Yeah, that's clearer. However, it is preferred to avoid HTML emails. In
+these cases, you could put the table in some online accessible
+document, and post the link. :-)
+
+Also, let me ask this again, is this coming from actual tracing (like
+with `xentrace` etc)?
+
+> The green one means vcpu is running while the red one means idle.
+> In Fig.1, vcpu1 and vcpu2 runs staggeredly, it means vcpu1 runs 20ms
+> and then vcpu2 runs 20ms while vcpu1 is sleeping.
+>=20
+How do you know it's sleeping and not, for instance, that it has been
+preempted and hence is waiting to run?
+
+My point being that, when you setup a workload like this, and only look
+at the throughput you achieve, it is expected that schedulers with
+longer timeslices do better.
+
+It would be interesting to look at both throughput and latency, though.
+In fact, (assuming the analysis is correct) in the Credit1 case, if two
+vcpus wakes up at about the same time, the one that wins the pcpu runs
+for a full timeslice, or until it blocks, i.e., in this case, for 20ms.
+This means the other vcpu will have to wait for so long, before being
+able to do anything.
+
+> In Fig.2, vcpu1 and vcpu2 runs at the same time, it means vcpu1 and
+> vcpu2 compete for pCPU, and then go to sleep at the same time.
+> Obviously, the smaller time-slice is, the worse competition happens.
+>=20
+But the better the latency. :-D
+
+What I mean is that, achieving best throughput or best latency at the
+same time is often impossible, and the job of a scheduler is to come up
+with a trade-off, as well as with tunables for letting people that
+cares more about either one or the other, to steer it that direction.
+
+Achieving better latency than Credit1 has been a goal of Credit2, since
+design time. However, it's possible that we ended up sacrificing
+throughput too much, or that we lack tunables to let users decide what
+they want.
+
+Of course, this is all assuming that the analysis of the problem that
+you're providing is correct, which I'll be looking into confirming. :-)
+
+> As you mentioned that the Credit2 does not have a real timeslice, the
+> vcpu can be preempted by the difference of credit (+
+> sched_ratelimit_us) dynamically.
+>=20
+Actually, it's:
+
+ difference_of_credit + min(CSCHED2_MIN_TIMER, sched_ratelimit_us)
+
+> > Perhaps, one thing that can be done to try to confirm this
+> analysis, would be to
+> > make the scheduling less frequent in Credit2 and, on the other
+> hand, to make
+> > it more frequent in Credit1.
+> Here is the further test result:
+> i.  it is interesting that it still works well if I make Credit1 to
+> 1ms by xl sched-credit -s -t 1
+> linux-sodv:~ # xl sched-credit
+> Cpupool Pool-0: tslice=3D1ms ratelimit=3D1000us migration-delay=3D0us
+> Name                                ID Weight  Cap
+> Domain-0                             0    256    0
+> Xenstore                             1    256    0
+> guest_1                              2    256    0
+> guest_2                              3    256    0
+> =20
+Hah, yes, it is interesting indeed! It shows us one more time how not
+predictable Credit1 behavior is, because of all the hacks it
+accumulated over time (some of which, are my doing, I know... :-P).
+
+> ii.  it works well if sched_ratelimit_us is set up to 30ms above.
+> linux-sodv:~ # xl sched-credit2 -s -p Pool-0
+> Cpupool Pool-0: ratelimit=3D30000us
+> =20
+Ok, good to know, thanks for doing the experiment.
+
+If you have time, can you try other values? I mean, while still on
+Credit2, try to set ratelimiting to, like, 20, 15, 10, 5, and report
+what happens?
+
+> However, the sched_ratelimit_us is not so elegant and flexiable that
+> it guarantees the specific time-slice fixedly.
+>=20
+Well, I personally never loved it, but it is not completely unrelated
+to what we're seeing and discussing, TBH. It indeed was introduced to
+improve the throughput, in workloads where there was too many wakeups
+(which, in Credit1, also resulted in invoking the scheduler and often
+in context switching, do to boosting).
+
+> It may very likely cause degrading of the other scheduler criteria
+> like sched_latency.
+> As far as I know, CFS could adjust time-slice according to the
+> nr_queue in runqueue (in__sched_period() ).
+> Could it possible that Credit2 also have the similar ability to
+> adjust time-slice automatically?
+> =20
+Well, let's see. Credit2 and CFS are very similar, in principle, but
+the code is actually quite different. But yeah, we may be able to come
+up with something more clever than just plain ratelimiting, for
+adjusting what CFS calls "the granularity".
+
+Thanks and Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-Uc0yulES8l/2jQo1H7no
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxlhBoACgkQFkJ4iaW4
+c+5RpBAAu3GjCeVPnLznVIah37J+nruhGhr4XgOup2Z1ktTWc+Dgc/7j2I/cwX/Z
+2gMxJ8AuSi0GSC2r8GG55hKeJjSVuGCye73/BKI1goDXtDQ7XyqRMVmLapvzofTT
+CN8kUOvBwJTTOhkDtt9m+b/e4XH4vloJVyGJVaY7FXT7XGEpqU55DmsJJreQRVPj
+1gy97ORmMX5xrQ1MZiKomBnAhN6kExMv/vm9hOXg/P8ennWMa5NMs8HBQjbWtDtO
+JVCcohg5Hl+b9akE3J1wR1NSbUloQMv9yYDgmy+3CCm9BmeY42vN3MKlnP8yInhN
+/dMSvwZT7zPQGXKxXNdBFFm1/kWPGmUQcYzRP6q6g74nsyML1T8Gv+GjvQLF21AQ
+IhwI3v2Vf8bKsRQdhrghsd+ERSm+2cwnT01r5ReWWCXgn81qDzT633Srdnz78d0d
+Y4N9zf4adb5p+cUXWUTXV14J1zYaPrDlxweOVvluaixg3dOCK38oysz/Io/di/1M
+sKr6jMPOUH9EpoMTpiKex3qcT8IPiE3izpsnw2oaVq6ggzZQ9SDDf2Y92MGBsN4x
+NZ11T3+vnei1q9Z0+d4G38Fwa46bl8IRli5OjZr9/rYq92NMQDLqdLB8TroCA+r4
+4sdK8FyzgZQUJbDMBCHPYRXgkg3ps/S7nMY3shG2dCZJBUK5fF8=
+=sG44
+-----END PGP SIGNATURE-----
+
+--=-Uc0yulES8l/2jQo1H7no--
+
+
+
+--===============5753717599693587810==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5753717599693587810==--
