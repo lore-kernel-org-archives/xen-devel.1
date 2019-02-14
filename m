@@ -1,22 +1,17 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v3 2/2] x86/xen: dont add memory above max
- allowed allocation
-Date: Thu, 14 Feb 2019 14:41:17 -0500
-Message-ID: <222f5551-0d1f-b0d9-a044-7849f909a802__35700.939739921$1550173376$gmane$org@oracle.com>
-References: <20190214104240.24428-1-jgross@suse.com>
- <20190214104240.24428-3-jgross@suse.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Enhancing Xen's Kconfig infrastructure to support
+ tailored solutions
+Date: Thu, 14 Feb 2019 21:03:24 +0000
+Message-ID: <AB54071B-07B5-4FFC-A1A4-781C24F61D93@gmail.com>
+References: <a49643ec-6bbe-04be-1ae2-b1d731da92cf@gmail.com>
+ <20190213182544.2tguperv3yliejch@zion.uk.xensource.com>
+ <alpine.DEB.2.10.1902131110270.5641@sstabellini-ThinkPad-X260>
+ <5C653AB10200007800216997@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============8338038163610917132=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=kQVa=QV=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1guMtD-0005cK-2s
- for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 19:41:43 +0000
-In-Reply-To: <20190214104240.24428-3-jgross@suse.com>
-Content-Language: en-US
+In-Reply-To: <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,42 +20,529 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org, xen-devel@lists.xenproject.org, x86@kernel.org, linux-mm@kvack.org
-Cc: tglx@linutronix.de, sstabellini@kernel.org, bp@alien8.de, mingo@redhat.com, hpa@zytor.com
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: James McKenzie <james.mckenzie@bromium.com>, robin.randhawa@arm.com, Wei Liu <wei.liu2@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>, Daniel Smith <dpsmith@apertussolutions.com>, Doug Goldstein <cardoe@cardoe.com>, Christopher Clark <christopher.w.clark@gmail.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, "Daniel P.Smith" <dpsmith.dev@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, committers@xenproject.org, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Jun Nakajima <jun.nakajima@intel.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMi8xNC8xOSA1OjQyIEFNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IERvbid0IGFsbG93IG1l
-bW9yeSB0byBiZSBhZGRlZCBhYm92ZSB0aGUgYWxsb3dlZCBtYXhpbXVtIGFsbG9jYXRpb24KPiBs
-aW1pdCBzZXQgYnkgWGVuLgo+Cj4gVHJ5aW5nIHRvIGRvIHNvIHdvdWxkIHJlc3VsdCBpbiBjYXNl
-cyBsaWtlIHRoZSBmb2xsb3dpbmc6Cj4KPiBbICA1ODQuNTU5NjUyXSAtLS0tLS0tLS0tLS1bIGN1
-dCBoZXJlIF0tLS0tLS0tLS0tLS0KPiBbICA1ODQuNTY0ODk3XSBXQVJOSU5HOiBDUFU6IDIgUElE
-OiAxIGF0IC4uL2FyY2gveDg2L3hlbi9tdWx0aWNhbGxzLmM6MTI5IHhlbl9hbGxvY19wdGUrMHgx
-YzcvMHgzOTAoKQo+IFsgIDU4NC41NzUxNTFdIE1vZHVsZXMgbGlua2VkIGluOgo+IFsgIDU4NC41
-Nzg2NDNdIFN1cHBvcnRlZDogWWVzCj4gWyAgNTg0LjU4MTc1MF0gQ1BVOiAyIFBJRDogMSBDb21t
-OiBzd2FwcGVyLzAgTm90IHRhaW50ZWQgNC40LjEyMC05Mi43MC1kZWZhdWx0ICMxCj4gWyAgNTg0
-LjU5MDAwMF0gSGFyZHdhcmUgbmFtZTogQ2lzY28gU3lzdGVtcyBJbmMgVUNTQy1DNDYwLU00L1VD
-U0MtQzQ2MC1NNCwgQklPUyBDNDYwTTQuNC4wLjFiLjAuMDYyOTE4MTQxOSAwNi8yOS8yMDE4Cj4g
-WyAgNTg0LjYwMTg2Ml0gIDAwMDAwMDAwMDAwMDAwMDAgZmZmZmZmZmY4MTMxNzVhMCAwMDAwMDAw
-MDAwMDAwMDAwIGZmZmZmZmZmODE4NDc3N2MKPiBbICA1ODQuNjEwMjAwXSAgZmZmZmZmZmY4MTA3
-ZjRlMSBmZmZmODgwNDg3ZWI3MDAwIGZmZmY4ODAxODYyYjc5YzAgZmZmZjg4MDQ4NjA4ZDI5MAo+
-IFsgIDU4NC42MTg1MzddICAwMDAwMDAwMDAwNDg3ZWI3IGZmZmZlYTAwMDAwMDAyMDEgZmZmZmZm
-ZmY4MTAwOWRlNyBmZmZmZmZmZjgxMDY4NTYxCj4gWyAgNTg0LjYyNjg3Nl0gQ2FsbCBUcmFjZToK
-PiBbICA1ODQuNjI5Njk5XSAgWzxmZmZmZmZmZjgxMDE5YWQ5Pl0gZHVtcF90cmFjZSsweDU5LzB4
-MzQwCj4gWyAgNTg0LjYzNTY0NV0gIFs8ZmZmZmZmZmY4MTAxOWVhYT5dIHNob3dfc3RhY2tfbG9n
-X2x2bCsweGVhLzB4MTcwCj4gWyAgNTg0LjY0MjM5MV0gIFs8ZmZmZmZmZmY4MTAxYWM1MT5dIHNo
-b3dfc3RhY2srMHgyMS8weDQwCj4gWyAgNTg0LjY0ODIzOF0gIFs8ZmZmZmZmZmY4MTMxNzVhMD5d
-IGR1bXBfc3RhY2srMHg1Yy8weDdjCj4gWyAgNTg0LjY1NDA4NV0gIFs8ZmZmZmZmZmY4MTA3ZjRl
-MT5dIHdhcm5fc2xvd3BhdGhfY29tbW9uKzB4ODEvMHhiMAo+IFsgIDU4NC42NjA5MzJdICBbPGZm
-ZmZmZmZmODEwMDlkZTc+XSB4ZW5fYWxsb2NfcHRlKzB4MWM3LzB4MzkwCj4gWyAgNTg0LjY2NzI4
-OV0gIFs8ZmZmZmZmZmY4MTA2NDdmMD5dIHBtZF9wb3B1bGF0ZV9rZXJuZWwuY29uc3Rwcm9wLjYr
-MHg0MC8weDgwCj4gWyAgNTg0LjY3NTI0MV0gIFs8ZmZmZmZmZmY4MTVlY2ZlOD5dIHBoeXNfcG1k
-X2luaXQrMHgyMTAvMHgyNTUKPiBbICA1ODQuNjgxNTg3XSAgWzxmZmZmZmZmZjgxNWVkMjA3Pl0g
-cGh5c19wdWRfaW5pdCsweDFkYS8weDI0Nwo+IFsgIDU4NC42ODc5MzFdICBbPGZmZmZmZmZmODE1
-ZWRiM2I+XSBrZXJuZWxfcGh5c2ljYWxfbWFwcGluZ19pbml0KzB4ZjUvMHgxZDQKPiBbICA1ODQu
-Njk1NjgyXSAgWzxmZmZmZmZmZjgxNWU5YmRkPl0gaW5pdF9tZW1vcnlfbWFwcGluZysweDE4ZC8w
-eDM4MAo+IFsgIDU4NC43MDI2MzFdICBbPGZmZmZmZmZmODEwNjQ2OTk+XSBhcmNoX2FkZF9tZW1v
-cnkrMHg1OS8weGYwCj4KPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
-ZS5jb20+CgpSZXZpZXdlZC1ieTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3Jh
-Y2xlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8338038163610917132==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8"
+
+
+--Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 14 Feb 2019, at 18:32, Stefano Stabellini <sstabellini@kernel.org> =
+wrote:
+>=20
+> On Thu, 14 Feb 2019, Jan Beulich wrote:
+>>>>> On 13.02.19 at 20:11, <sstabellini@kernel.org> wrote:
+>>> On Wed, 13 Feb 2019, Wei Liu wrote:
+>>>> On Tue, Feb 12, 2019 at 09:34:25PM -0500, Daniel P. Smith wrote:
+>>>>> Greetings,
+>>>>>=20
+>>>>> On the 11/14/18 Xen x86 community call a discussion was initiated =
+about
+>>>>> using Kconfig to build minimized versions of Xen for security, =
+safety
+>>>>> and other certification requirements. After some offline =
+discussions
+>>>>> with Xen contributors I realized that a variety of efforts each =
+with
+>>>>> their own respective goals are underway,
+>>>>>=20
+>>>>> - nested virtualization
+>>>>> - mixed criticality architectures
+>>>>> - reducing trusted componentary
+>>>>> - combining hardware protection of virtualization with performance =
+and
+>>>>> ease-of-use of containers
+>>>>>=20
+>>>>> These efforts use hypervisors in different roles, all which Xen is
+>>>>> capable of meeting. Today Xen's utility comes at the expense of =
+carrying
+>>>>> features necessary for one role to be present in another role =
+where it
+>>>>> is not required, e.g. PV interfaces that may not be essential in =
+an ARM
+>>>>> mixed criticality deployment.
+>>>>>=20
+>>>>> The initial focus will be to explore and document the range of =
+possible
+>>>>> use cases that are of interest to the Xen community. This will be =
+the
+>>>>> input to a design document that is crafted in conjunction with the =
+Xen
+>>>>> maintainers, to identify possible approaches to extend the =
+existing
+>>>>> Kconfig infrastructure to produce tailored instances of Xen.
+>>>>>=20
+>>>>> If you are interested in participating in this effort, please =
+reply to
+>>>>> this thread to outline possible use cases, design constraints and =
+other
+>>>>> considerations for improving Xen's Kconfig infrastructure to =
+support
+>>>>> tailoring for specific use cases.
+>>>>>=20
+>>>>=20
+>>>> My impression from the community call is that you want to provide
+>>>> smallish configurations for different use cases.
+>>>>=20
+>>>> The Kconfig infrastructure is already able to do what you want as =
+far as
+>>>> I can tell.  You can easily feed it a base config file -- see files
+>>>> under automation/configs/x86/.  What sort of extension is needed in =
+your
+>>>> opinion?
+>>>>=20
+>>>> As use case goes, it would be a good start if you just submit =
+something
+>>>> you care about.
+>>>=20
+>>> I mentioned on the call that a good first start could be a kconfig =
+that
+>>> allows to build an hypervisor binary with only support for PVH and =
+only
+>>> support for recent Intel machines, with the goal of minimizing the =
+code
+>>> base to less than 100K LOC.
+>>=20
+>> "With only support for PVH" (which really means HVM) we already have.
+>> "With only support for recent Intel machines" would require adding =
+new
+>> Kconfig options first, to control Intel, AMD, etc separately, and to =
+then
+>> further somehow separate "old" from "new" (which may turn out not
+>> very easy to do without a lot of #ifdef-ary or other code churn). I'm
+>> not aware of something like this existing on Linux either - all I'm =
+aware
+>> of there is a means to control what -m<arch> option might be passed
+>> to the compiler, but without disabling any source code from getting
+>> compiled.
+>=20
+> I was thinking along the lines of having options to disable drivers =
+for
+> older timers and older interrupt controllers that are not needed on
+> recent machines.
+>=20
+>=20
+>> And then "with only support for recent Intel machines" could also =
+imply
+>> HAP-only; disabling shadow code (which also is already possible) will
+>> alone save almost 10k LOC (counting .c files only).
+>=20
+> I have just run `make cloc' on x86 with the smallest possible
+> configuration (HVM only):
+>=20
+>=20
+> http://cloc.sourceforge.net <http://cloc.sourceforge.net/> v 1.60  =
+T=3D0.87 s (370.3 files/s, 255808.4 lines/s)
+> =
+--------------------------------------------------------------------------=
+-----
+> Language                     files          blank        comment       =
+    code
+> =
+--------------------------------------------------------------------------=
+-----
+> C                              309          33238          29432       =
+  157001
+> Assembly                        14            466            531       =
+    2435
+> =
+--------------------------------------------------------------------------=
+-----
+> SUM:                           323          33704          29963       =
+  159436
+> =
+--------------------------------------------------------------------------=
+-----
+>=20
+> This is great! The last time I did the count it was above 220K LOC.  =
+We
+> should make more noise about this -- it is a major.
+
+@Wei: the binary size data is not that impressive. Would it be possible =
+to do the make cloc on HVM, PV and mixed?
+I can include this into the PR for 4.12. Sorry for slightly hi-jacking =
+the thread.
+Lars=
+
+--Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 14 Feb 2019, at 18:32, Stefano Stabellini &lt;<a =
+href=3D"mailto:sstabellini@kernel.org" =
+class=3D"">sstabellini@kernel.org</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On Thu, 14 =
+Feb 2019, Jan Beulich wrote:</span><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+class=3D""><blockquote type=3D"cite" class=3D""><blockquote type=3D"cite" =
+class=3D"">On 13.02.19 at 20:11, &lt;<a =
+href=3D"mailto:sstabellini@kernel.org" =
+class=3D"">sstabellini@kernel.org</a>&gt; wrote:<br =
+class=3D""></blockquote></blockquote>On Wed, 13 Feb 2019, Wei Liu =
+wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">On Tue, Feb =
+12, 2019 at 09:34:25PM -0500, Daniel P. Smith wrote:<br =
+class=3D""><blockquote type=3D"cite" class=3D"">Greetings,<br =
+class=3D""><br class=3D"">On the 11/14/18 Xen x86 community call a =
+discussion was initiated about<br class=3D"">using Kconfig to build =
+minimized versions of Xen for security, safety<br class=3D"">and other =
+certification requirements. After some offline discussions<br =
+class=3D"">with Xen contributors I realized that a variety of efforts =
+each with<br class=3D"">their own respective goals are underway,<br =
+class=3D""><br class=3D"">- nested virtualization<br class=3D"">- mixed =
+criticality architectures<br class=3D"">- reducing trusted =
+componentary<br class=3D"">- combining hardware protection of =
+virtualization with performance and<br class=3D"">ease-of-use of =
+containers<br class=3D""><br class=3D"">These efforts use hypervisors in =
+different roles, all which Xen is<br class=3D"">capable of meeting. =
+Today Xen's utility comes at the expense of carrying<br =
+class=3D"">features necessary for one role to be present in another role =
+where it<br class=3D"">is not required, e.g. PV interfaces that may not =
+be essential in an ARM<br class=3D"">mixed criticality deployment.<br =
+class=3D""><br class=3D"">The initial focus will be to explore and =
+document the range of possible<br class=3D"">use cases that are of =
+interest to the Xen community. This will be the<br class=3D"">input to a =
+design document that is crafted in conjunction with the Xen<br =
+class=3D"">maintainers, to identify possible approaches to extend the =
+existing<br class=3D"">Kconfig infrastructure to produce tailored =
+instances of Xen.<br class=3D""><br class=3D"">If you are interested in =
+participating in this effort, please reply to<br class=3D"">this thread =
+to outline possible use cases, design constraints and other<br =
+class=3D"">considerations for improving Xen's Kconfig infrastructure to =
+support<br class=3D"">tailoring for specific use cases.<br class=3D""><br =
+class=3D""></blockquote><br class=3D"">My impression from the community =
+call is that you want to provide<br class=3D"">smallish configurations =
+for different use cases.<br class=3D""><br class=3D"">The Kconfig =
+infrastructure is already able to do what you want as far as<br =
+class=3D"">I can tell. &nbsp;You can easily feed it a base config file =
+-- see files<br class=3D"">under automation/configs/x86/. &nbsp;What =
+sort of extension is needed in your<br class=3D"">opinion?<br =
+class=3D""><br class=3D"">As use case goes, it would be a good start if =
+you just submit something<br class=3D"">you care about.<br =
+class=3D""></blockquote><br class=3D"">I mentioned on the call that a =
+good first start could be a kconfig that<br class=3D"">allows to build =
+an hypervisor binary with only support for PVH and only<br =
+class=3D"">support for recent Intel machines, with the goal of =
+minimizing the code<br class=3D"">base to less than 100K LOC.<br =
+class=3D""></blockquote><br class=3D"">"With only support for PVH" =
+(which really means HVM) we already have.<br class=3D"">"With only =
+support for recent Intel machines" would require adding new<br =
+class=3D"">Kconfig options first, to control Intel, AMD, etc separately, =
+and to then<br class=3D"">further somehow separate "old" from "new" =
+(which may turn out not<br class=3D"">very easy to do without a lot of =
+#ifdef-ary or other code churn). I'm<br class=3D"">not aware of =
+something like this existing on Linux either - all I'm aware<br =
+class=3D"">of there is a means to control what -m&lt;arch&gt; option =
+might be passed<br class=3D"">to the compiler, but without disabling any =
+source code from getting<br class=3D"">compiled.<br =
+class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">I was thinking along the lines of having options to disable =
+drivers for</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">older timers =
+and older interrupt controllers that are not needed on</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">recent =
+machines.</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px; text-decoration: none;" class=3D"">And =
+then "with only support for recent Intel machines" could also imply<br =
+class=3D"">HAP-only; disabling shadow code (which also is already =
+possible) will<br class=3D"">alone save almost 10k LOC (counting .c =
+files only).<br class=3D""></blockquote><br style=3D"caret-color: rgb(0, =
+0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">I have just run `make cloc' on x86 with the smallest =
+possible</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">configuration =
+(HVM only):</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><a href=3D"http://cloc.sourceforge.net/" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" =
+class=3D"">http://cloc.sourceforge.net</a><span style=3D"caret-color: =
+rgb(0, 0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D""><span class=3D"Apple-converted-space">&nbsp;</span>v 1.60 =
+&nbsp;T=3D0.87 s (370.3 files/s, 255808.4 lines/s)</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" =
+class=3D"">---------------------------------------------------------------=
+----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">Language =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blank =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code</span><br=
+ style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" =
+class=3D"">---------------------------------------------------------------=
+----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">C =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;309 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33238 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;29432 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;157001</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">Assembly =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;466 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;531 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2435</span><br=
+ style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" =
+class=3D"">---------------------------------------------------------------=
+----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">SUM: =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;323 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33704 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;29963 =
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;159436</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" =
+class=3D"">---------------------------------------------------------------=
+----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">This is great! The last time I did the count it was above =
+220K LOC. &nbsp;We</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">should make more noise about this -- it is a major.</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""></div></blockquote></div><br class=3D""><div =
+class=3D"">@Wei: the binary size data is not that impressive. Would it =
+be possible to do the make cloc on HVM, PV and mixed?</div><div =
+class=3D"">I can include this into the PR for 4.12. Sorry for slightly =
+hi-jacking the thread.</div><div class=3D"">Lars</div></body></html>=
+
+--Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8--
+
+
+--===============8338038163610917132==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8338038163610917132==--
