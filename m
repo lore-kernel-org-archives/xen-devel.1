@@ -2,19 +2,21 @@ From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re:
  =?utf-8?q?xen=3A_credit2=3A_credit2_can=E2=80=99t__r?=
  =?utf-8?q?each_the_throughput_as_expected?=
-Date: Thu, 14 Feb 2019 16:07:06 +0100
-Message-ID: <c38b34d7a97fe4cab961b6db71a5e89ffcb75f01.camel@suse.com>
-References: <0E8924944E28FD4A97A19E5A680D8A82368B95A0@DGGEML521-MBX.china.huawei.com>
- <SG2PR01MB3302A6419948E232ED234A2497670@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
+Date: Thu, 14 Feb 2019 16:08:09 +0100
+Message-ID: <1de8129dc8723d45f4cceec1670463ec5d354650.camel@suse.com>
+References: <0E8924944E28FD4A97A19E5A680D8A82368B9872@DGGEML521-MBX.china.huawei.com>
+ ,<0E8924944E28FD4A97A19E5A680D8A82368B992D@DGGEML521-MBX.china.huawei.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5753717599693587810=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=MESF=QV=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1guIaM-0006El-M3
- for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 15:05:58 +0000
-In-Reply-To: <SG2PR01MB3302A6419948E232ED234A2497670@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
+ id 1guIbq-0006LR-4I
+ for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 15:07:30 +0000
+In-Reply-To: <0E8924944E28FD4A97A19E5A680D8A82368B992D@DGGEML521-MBX.china.huawei.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,185 +28,160 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5753717599693587810==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Uc0yulES8l/2jQo1H7no"
-
-
---=-Uc0yulES8l/2jQo1H7no
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Forwarding to xen-devel, as it was dropped, and I did not notice.
----
-On Thu, 2019-02-14 at 07:10 +0000, zheng chuan wrote:=20
-> Hi, Dario,
-> =20
-Hi,
-
-> I have put the test demo in attachment, please run it as follows:
-> 1. compile it
->   gcc upress.c -o upress
-> 2. calculate the loops in dom0 first
->   ./upress -l 100
->   For example, the output is
->   cpu khz : 2200000
->   calculate loops: 4472.
->   We get 4472.
-> 3. give the 20% pressure for each vcpu in guest by
->   ./upress -l 20 -z 4472 &
->   It is better to bind each pressure task to vcpu by taskset.
-> =20
-Ok, thanks for the code and the instructions, I will give it a try.
-
-> Sorry for the mess picture, you can see the figure below.
->=20
-Yeah, that's clearer. However, it is preferred to avoid HTML emails. In
-these cases, you could put the table in some online accessible
-document, and post the link. :-)
-
-Also, let me ask this again, is this coming from actual tracing (like
-with `xentrace` etc)?
-
-> The green one means vcpu is running while the red one means idle.
-> In Fig.1, vcpu1 and vcpu2 runs staggeredly, it means vcpu1 runs 20ms
-> and then vcpu2 runs 20ms while vcpu1 is sleeping.
->=20
-How do you know it's sleeping and not, for instance, that it has been
-preempted and hence is waiting to run?
-
-My point being that, when you setup a workload like this, and only look
-at the throughput you achieve, it is expected that schedulers with
-longer timeslices do better.
-
-It would be interesting to look at both throughput and latency, though.
-In fact, (assuming the analysis is correct) in the Credit1 case, if two
-vcpus wakes up at about the same time, the one that wins the pcpu runs
-for a full timeslice, or until it blocks, i.e., in this case, for 20ms.
-This means the other vcpu will have to wait for so long, before being
-able to do anything.
-
-> In Fig.2, vcpu1 and vcpu2 runs at the same time, it means vcpu1 and
-> vcpu2 compete for pCPU, and then go to sleep at the same time.
-> Obviously, the smaller time-slice is, the worse competition happens.
->=20
-But the better the latency. :-D
-
-What I mean is that, achieving best throughput or best latency at the
-same time is often impossible, and the job of a scheduler is to come up
-with a trade-off, as well as with tunables for letting people that
-cares more about either one or the other, to steer it that direction.
-
-Achieving better latency than Credit1 has been a goal of Credit2, since
-design time. However, it's possible that we ended up sacrificing
-throughput too much, or that we lack tunables to let users decide what
-they want.
-
-Of course, this is all assuming that the analysis of the problem that
-you're providing is correct, which I'll be looking into confirming. :-)
-
-> As you mentioned that the Credit2 does not have a real timeslice, the
-> vcpu can be preempted by the difference of credit (+
-> sched_ratelimit_us) dynamically.
->=20
-Actually, it's:
-
- difference_of_credit + min(CSCHED2_MIN_TIMER, sched_ratelimit_us)
-
-> > Perhaps, one thing that can be done to try to confirm this
-> analysis, would be to
-> > make the scheduling less frequent in Credit2 and, on the other
-> hand, to make
-> > it more frequent in Credit1.
-> Here is the further test result:
-> i.  it is interesting that it still works well if I make Credit1 to
-> 1ms by xl sched-credit -s -t 1
-> linux-sodv:~ # xl sched-credit
-> Cpupool Pool-0: tslice=3D1ms ratelimit=3D1000us migration-delay=3D0us
-> Name                                ID Weight  Cap
-> Domain-0                             0    256    0
-> Xenstore                             1    256    0
-> guest_1                              2    256    0
-> guest_2                              3    256    0
-> =20
-Hah, yes, it is interesting indeed! It shows us one more time how not
-predictable Credit1 behavior is, because of all the hacks it
-accumulated over time (some of which, are my doing, I know... :-P).
-
-> ii.  it works well if sched_ratelimit_us is set up to 30ms above.
-> linux-sodv:~ # xl sched-credit2 -s -p Pool-0
-> Cpupool Pool-0: ratelimit=3D30000us
-> =20
-Ok, good to know, thanks for doing the experiment.
-
-If you have time, can you try other values? I mean, while still on
-Credit2, try to set ratelimiting to, like, 20, 15, 10, 5, and report
-what happens?
-
-> However, the sched_ratelimit_us is not so elegant and flexiable that
-> it guarantees the specific time-slice fixedly.
->=20
-Well, I personally never loved it, but it is not completely unrelated
-to what we're seeing and discussing, TBH. It indeed was introduced to
-improve the throughput, in workloads where there was too many wakeups
-(which, in Credit1, also resulted in invoking the scheduler and often
-in context switching, do to boosting).
-
-> It may very likely cause degrading of the other scheduler criteria
-> like sched_latency.
-> As far as I know, CFS could adjust time-slice according to the
-> nr_queue in runqueue (in__sched_period() ).
-> Could it possible that Credit2 also have the similar ability to
-> adjust time-slice automatically?
-> =20
-Well, let's see. Credit2 and CFS are very similar, in principle, but
-the code is actually quite different. But yeah, we may be able to come
-up with something more clever than just plain ratelimiting, for
-adjusting what CFS calls "the granularity".
-
-Thanks and Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-Uc0yulES8l/2jQo1H7no
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxlhBoACgkQFkJ4iaW4
-c+5RpBAAu3GjCeVPnLznVIah37J+nruhGhr4XgOup2Z1ktTWc+Dgc/7j2I/cwX/Z
-2gMxJ8AuSi0GSC2r8GG55hKeJjSVuGCye73/BKI1goDXtDQ7XyqRMVmLapvzofTT
-CN8kUOvBwJTTOhkDtt9m+b/e4XH4vloJVyGJVaY7FXT7XGEpqU55DmsJJreQRVPj
-1gy97ORmMX5xrQ1MZiKomBnAhN6kExMv/vm9hOXg/P8ennWMa5NMs8HBQjbWtDtO
-JVCcohg5Hl+b9akE3J1wR1NSbUloQMv9yYDgmy+3CCm9BmeY42vN3MKlnP8yInhN
-/dMSvwZT7zPQGXKxXNdBFFm1/kWPGmUQcYzRP6q6g74nsyML1T8Gv+GjvQLF21AQ
-IhwI3v2Vf8bKsRQdhrghsd+ERSm+2cwnT01r5ReWWCXgn81qDzT633Srdnz78d0d
-Y4N9zf4adb5p+cUXWUTXV14J1zYaPrDlxweOVvluaixg3dOCK38oysz/Io/di/1M
-sKr6jMPOUH9EpoMTpiKex3qcT8IPiE3izpsnw2oaVq6ggzZQ9SDDf2Y92MGBsN4x
-NZ11T3+vnei1q9Z0+d4G38Fwa46bl8IRli5OjZr9/rYq92NMQDLqdLB8TroCA+r4
-4sdK8FyzgZQUJbDMBCHPYRXgkg3ps/S7nMY3shG2dCZJBUK5fF8=
-=sG44
------END PGP SIGNATURE-----
-
---=-Uc0yulES8l/2jQo1H7no--
-
-
-
---===============5753717599693587810==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5753717599693587810==--
+Rm9yd2FyZGluZyB0byB4ZW4tZGV2ZWwsIGFzIGl0IHdhcyBkcm9wcGVkLgotLS0KSGksIERhcmlv
+LAoKPiBPbiBUaHUsIDIwMTktMDItMTQgYXQgMDc6MTAgKzAwMDAsIHpoZW5nIGNodWFuIHdyb3Rl
+Ogo+ID4gSGksIERhcmlvLAo+ID4KPiBIaSwKPiAKPiA+IEkgaGF2ZSBwdXQgdGhlIHRlc3QgZGVt
+byBpbiBhdHRhY2htZW50LCBwbGVhc2UgcnVuIGl0IGFzIGZvbGxvd3M6Cj4gPiAxLiBjb21waWxl
+IGl0Cj4gPiBnY2MgdXByZXNzLmMgLW8gdXByZXNzCj4gPiAyLiBjYWxjdWxhdGUgdGhlIGxvb3Bz
+IGluIGRvbTAgZmlyc3QKPiA+IC4vdXByZXNzIC1sIDEwMAo+ID4gRm9yIGV4YW1wbGUsIHRoZSBv
+dXRwdXQgaXMKPiA+IGNwdSBraHogOiAyMjAwMDAwCj4gPiBjYWxjdWxhdGUgbG9vcHM6IDQ0NzIu
+Cj4gPiBXZSBnZXQgNDQ3Mi4KPiA+IDMuIGdpdmUgdGhlIDIwJSBwcmVzc3VyZSBmb3IgZWFjaCB2
+Y3B1IGluIGd1ZXN0IGJ5IC4vdXByZXNzIC1sIDIwCi16Cj4gPiA0NDcyICYgSXQgaXMgYmV0dGVy
+IHRvIGJpbmQgZWFjaCBwcmVzc3VyZSB0YXNrIHRvIHZjcHUgYnkgdGFza3NldC4KPiA+Cj4gT2ss
+IHRoYW5rcyBmb3IgdGhlIGNvZGUgYW5kIHRoZSBpbnN0cnVjdGlvbnMsIEkgd2lsbCBnaXZlIGl0
+IGEgdHJ5Lgo+IAoKSWYgeW91IGhhdmUgcXVlc3Rpb25zIGFib3V0IHRoZSB0ZXN0IGNvZGUsIHBs
+ZWFzZSBsZXQgbWUga25vdzopCgo+ID4gU29ycnkgZm9yIHRoZSBtZXNzIHBpY3R1cmUsIHlvdSBj
+YW4gc2VlIHRoZSBmaWd1cmUgYmVsb3cuCj4gPgo+IFllYWgsIHRoYXQncyBjbGVhcmVyLiBIb3dl
+dmVyLCBpdCBpcyBwcmVmZXJyZWQgdG8gYXZvaWQgSFRNTCBlbWFpbHMuCkluIHRoZXNlCj4gY2Fz
+ZXMsIHlvdSBjb3VsZCBwdXQgdGhlIHRhYmxlIGluIHNvbWUgb25saW5lIGFjY2Vzc2libGUgZG9j
+dW1lbnQsCmFuZCBwb3N0Cj4gdGhlIGxpbmsuIDotKQo+IAo+IEFsc28sIGxldCBtZSBhc2sgdGhp
+cyBhZ2FpbiwgaXMgdGhpcyBjb21pbmcgZnJvbSBhY3R1YWwgdHJhY2luZyAobGlrZQp3aXRoCj4g
+YHhlbnRyYWNlYCBldGMpPwo+IAo+ID4gVGhlIGdyZWVuIG9uZSBtZWFucyB2Y3B1IGlzIHJ1bm5p
+bmcgd2hpbGUgdGhlIHJlZCBvbmUgbWVhbnMgaWRsZS4KPiA+IEluIEZpZy4xLCB2Y3B1MSBhbmQg
+dmNwdTIgcnVucyBzdGFnZ2VyZWRseSwgaXQgbWVhbnMgdmNwdTEgcnVucwoyMG1zCj4gPiBhbmQg
+dGhlbiB2Y3B1MiBydW5zIDIwbXMgd2hpbGUgdmNwdTEgaXMgc2xlZXBpbmcuCj4gPgo+IEhvdyBk
+byB5b3Uga25vdyBpdCdzIHNsZWVwaW5nIGFuZCBub3QsIGZvciBpbnN0YW5jZSwgdGhhdCBpdCBo
+YXMgYmVlbgo+IHByZWVtcHRlZCBhbmQgaGVuY2UgaXMgd2FpdGluZyB0byBydW4/Cj4gCgpJdCBp
+cyB0aGUgc2NoZW1hdGljIGRpYWdyYW0gaW4gdGhlb3J5LgpJJ20gc29ycnkgdGhlIHhlbnRyYWNl
+IGhhcyBwcm9ibGVtIG9uIG15IG1hY2hpbmUsIEknbGwgcHV0IHRoZSB0cmFjZSBhcwpzb29uIGFz
+IEkgZml4IGl0LgoKPiBNeSBwb2ludCBiZWluZyB0aGF0LCB3aGVuIHlvdSBzZXR1cCBhIHdvcmts
+b2FkIGxpa2UgdGhpcywgYW5kIG9ubHkKbG9vayBhdCB0aGUKPiB0aHJvdWdocHV0IHlvdSBhY2hp
+ZXZlLCBpdCBpcyBleHBlY3RlZCB0aGF0IHNjaGVkdWxlcnMgd2l0aCBsb25nZXIKdGltZXNsaWNl
+cwo+IGRvIGJldHRlci4KPiAKPiBJdCB3b3VsZCBiZSBpbnRlcmVzdGluZyB0byBsb29rIGF0IGJv
+dGggdGhyb3VnaHB1dCBhbmQgbGF0ZW5jeSwKdGhvdWdoLgo+IEluIGZhY3QsIChhc3N1bWluZyB0
+aGUgYW5hbHlzaXMgaXMgY29ycmVjdCkgaW4gdGhlIENyZWRpdDEgY2FzZSwgaWYKdHdvIHZjcHVz
+Cj4gd2FrZXMgdXAgYXQgYWJvdXQgdGhlIHNhbWUgdGltZSwgdGhlIG9uZSB0aGF0IHdpbnMgdGhl
+IHBjcHUgcnVucyBmb3IKYSBmdWxsCj4gdGltZXNsaWNlLCBvciB1bnRpbCBpdCBibG9ja3MsIGku
+ZS4sIGluIHRoaXMgY2FzZSwgZm9yIDIwbXMuCj4gVGhpcyBtZWFucyB0aGUgb3RoZXIgdmNwdSB3
+aWxsIGhhdmUgdG8gd2FpdCBmb3Igc28gbG9uZywgYmVmb3JlIGJlaW5nCmFibGUgdG8gZG8KPiBh
+bnl0aGluZy4KPiAKPiA+IEluIEZpZy4yLCB2Y3B1MSBhbmQgdmNwdTIgcnVucyBhdCB0aGUgc2Ft
+ZSB0aW1lLCBpdCBtZWFucyB2Y3B1MSBhbmQKPiA+IHZjcHUyIGNvbXBldGUgZm9yIHBDUFUsIGFu
+ZCB0aGVuIGdvIHRvIHNsZWVwIGF0IHRoZSBzYW1lIHRpbWUuCj4gPiBPYnZpb3VzbHksIHRoZSBz
+bWFsbGVyIHRpbWUtc2xpY2UgaXMsIHRoZSB3b3JzZSBjb21wZXRpdGlvbgpoYXBwZW5zLgo+ID4K
+PiBCdXQgdGhlIGJldHRlciB0aGUgbGF0ZW5jeS4gOi1ECj4gCj4gV2hhdCBJIG1lYW4gaXMgdGhh
+dCwgYWNoaWV2aW5nIGJlc3QgdGhyb3VnaHB1dCBvciBiZXN0IGxhdGVuY3kgYXQgdGhlCnNhbWUK
+PiB0aW1lIGlzIG9mdGVuIGltcG9zc2libGUsIGFuZCB0aGUgam9iIG9mIGEgc2NoZWR1bGVyIGlz
+IHRvIGNvbWUgdXAKd2l0aCBhCj4gdHJhZGUtb2ZmLCBhcyB3ZWxsIGFzIHdpdGggdHVuYWJsZXMg
+Zm9yIGxldHRpbmcgcGVvcGxlIHRoYXQgY2FyZXMKbW9yZSBhYm91dAo+IGVpdGhlciBvbmUgb3Ig
+dGhlIG90aGVyLCB0byBzdGVlciBpdCB0aGF0IGRpcmVjdGlvbi4KPiAKPiBBY2hpZXZpbmcgYmV0
+dGVyIGxhdGVuY3kgdGhhbiBDcmVkaXQxIGhhcyBiZWVuIGEgZ29hbCBvZiBDcmVkaXQyLApzaW5j
+ZSBkZXNpZ24KPiB0aW1lLiBIb3dldmVyLCBpdCdzIHBvc3NpYmxlIHRoYXQgd2UgZW5kZWQgdXAg
+c2FjcmlmaWNpbmcgdGhyb3VnaHB1dAp0b28gbXVjaCwKPiBvciB0aGF0IHdlIGxhY2sgdHVuYWJs
+ZXMgdG8gbGV0IHVzZXJzIGRlY2lkZSB3aGF0IHRoZXkgd2FudC4KPiAKPiBPZiBjb3Vyc2UsIHRo
+aXMgaXMgYWxsIGFzc3VtaW5nIHRoYXQgdGhlIGFuYWx5c2lzIG9mIHRoZSBwcm9ibGVtIHRoYXQK
+eW91J3JlCj4gcHJvdmlkaW5nIGlzIGNvcnJlY3QsIHdoaWNoIEknbGwgYmUgbG9va2luZyBpbnRv
+IGNvbmZpcm1pbmcuIDotKQo+IAoKSSBhZ3JlZSB0aGF0IGl0IGlzIGRpZmZpY3VsdCB0byBiYWxh
+bmNlIGJldHdlZW4gdGhlIHRocm91Z2hwdXQgYW5kCnNjaGVkX2xhdGVuY3k6KApJbiBteSB3b3Jr
+bG9hZCwgaWYgd2UgZW5sYXJnZSB0aGUgZGlmZmVyZW5jZSBvZiBjcmVkaXQgYmV0d2VlbiB2Y3B1
+cywKdGhlIHZjcHVzIHdvdWxkIGJlIHJ1biBzdGFnZ2VyZWRseSBmcm9tIHRoZSBsb25nIHRlcm0g
+dG8gc2VlLCAKSSBkb3VidCB0aGUgc2NoZWRfbGF0ZW5jeSBjb3VsZCBiZSBhbHNvIGxvdyBpZiB3
+ZSBzcHJlYWQgcnVubmluZyB2Y3B1cwppbnRvIHBDUFVzIHNpbmNlIHRoZSBwQ1BVcyBhcmUgbm90
+IHVzZWQgdXAgdG8gMTAwJS4KCkkgdXNlZCB0byB0ZXN0IHNjaGVkX2xhdGVuY3kgaW4gQ0ZTIGJ5
+IHBlcmYgd2l0aCB0aGUgc2NoZWR1bGVyCnBhcmFtZXRlcnM6CmxpbnV4LUdNd21taDp+ICMgY2F0
+IC9wcm9jL3N5cy9rZXJuZWwvc2NoZWRfbWluX2dyYW51bGFyaXR5X25zIAozMDAwMDAwCmxpbnV4
+LUdNd21taDp+ICMgY2F0IC9wcm9jL3N5cy9rZXJuZWwvc2NoZWRfbGF0ZW5jeV9ucyAKMjQwMDAw
+MDAKbGludXgtR013bW1oOn4gIwp0aGUgdmNwdSBvZiBzY2hlZF9sYXRlbmN5IGlzIG1heGl1bSB0
+byAyMW1zIGFyb3VuZC4gCgpCdXQgSSBkb24ndCBrbm93IGhvdyB0byBjb21wYXJlIHRoZSBzY2hl
+ZF9sYXRlbmN5IHdpdGggQ3JlZGl0MiBzaW5jZQp0aGUgYW5hbHl6aW5nIHRvb2wgYW5kIHNjaGVk
+dWxlciBhcmUgdG90YWxseSBkaWZmZXJlbnQgOiguCgo+ID4gQXMgeW91IG1lbnRpb25lZCB0aGF0
+IHRoZSBDcmVkaXQyIGRvZXMgbm90IGhhdmUgYSByZWFsIHRpbWVzbGljZSwKdGhlCj4gPiB2Y3B1
+IGNhbiBiZSBwcmVlbXB0ZWQgYnkgdGhlIGRpZmZlcmVuY2Ugb2YgY3JlZGl0ICgrCj4gPiBzY2hl
+ZF9yYXRlbGltaXRfdXMpIGR5bmFtaWNhbGx5Lgo+ID4KPiBBY3R1YWxseSwgaXQnczoKPiAKPiBk
+aWZmZXJlbmNlX29mX2NyZWRpdCArIG1pbihDU0NIRUQyX01JTl9USU1FUiwgc2NoZWRfcmF0ZWxp
+bWl0X3VzKQo+IAoKVGhhbmsgeW91IGZvciBjb3JyZWN0aW5nLgoKPiA+ID4gUGVyaGFwcywgb25l
+IHRoaW5nIHRoYXQgY2FuIGJlIGRvbmUgdG8gdHJ5IHRvIGNvbmZpcm0gdGhpcwo+ID4gYW5hbHlz
+aXMsIHdvdWxkIGJlIHRvCj4gPiA+IG1ha2UgdGhlIHNjaGVkdWxpbmcgbGVzcyBmcmVxdWVudCBp
+biBDcmVkaXQyIGFuZCwgb24gdGhlIG90aGVyCj4gPiBoYW5kLCB0byBtYWtlCj4gPiA+IGl0IG1v
+cmUgZnJlcXVlbnQgaW4gQ3JlZGl0MS4KPiAKPiA+IEhlcmUgaXMgdGhlIGZ1cnRoZXIgdGVzdCBy
+ZXN1bHQ6Cj4gPiBpLiBpdCBpcyBpbnRlcmVzdGluZyB0aGF0IGl0IHN0aWxsIHdvcmtzIHdlbGwg
+aWYgSSBtYWtlIENyZWRpdDEgdG8KPiA+IDFtcyBieSB4bCBzY2hlZC1jcmVkaXQgLXMgLXQgMQo+
+ID4gbGludXgtc29kdjp+ICMgeGwgc2NoZWQtY3JlZGl0Cj4gPiBDcHVwb29sIFBvb2wtMDogdHNs
+aWNlPTFtcyByYXRlbGltaXQ9MTAwMHVzIG1pZ3JhdGlvbi1kZWxheT0wdXMKPiA+IE5hbWUgSUQg
+V2VpZ2h0IENhcAo+ID4gRG9tYWluLTAgMCAyNTYgMAo+ID4gWGVuc3RvcmUgMSAyNTYgMAo+ID4g
+Z3Vlc3RfMSAyIDI1NiAwCj4gPiBndWVzdF8yIDMgMjU2IDAKPiA+Cj4gSGFoLCB5ZXMsIGl0IGlz
+IGludGVyZXN0aW5nIGluZGVlZCEgSXQgc2hvd3MgdXMgb25lIG1vcmUgdGltZSBob3cgbm90Cj4g
+cHJlZGljdGFibGUgQ3JlZGl0MSBiZWhhdmlvciBpcywgYmVjYXVzZSBvZiBhbGwgdGhlIGhhY2tz
+IGl0Cj4gYWNjdW11bGF0ZWQgb3ZlciB0aW1lIChzb21lIG9mIHdoaWNoLCBhcmUgbXkgZG9pbmcs
+IEkga25vdy4uLiA6LVApLgo+IAo+ID4gaWkuIGl0IHdvcmtzIHdlbGwgaWYgc2NoZWRfcmF0ZWxp
+bWl0X3VzIGlzIHNldCB1cCB0byAzMG1zIGFib3ZlLgo+ID4gbGludXgtc29kdjp+ICMgeGwgc2No
+ZWQtY3JlZGl0MiAtcyAtcCBQb29sLTAKPiA+IENwdXBvb2wgUG9vbC0wOiByYXRlbGltaXQ9MzAw
+MDB1cwo+ID4KPiBPaywgZ29vZCB0byBrbm93LCB0aGFua3MgZm9yIGRvaW5nIHRoZSBleHBlcmlt
+ZW50Lgo+IAo+IElmIHlvdSBoYXZlIHRpbWUsIGNhbiB5b3UgdHJ5IG90aGVyIHZhbHVlcz8gSSBt
+ZWFuLCB3aGlsZSBzdGlsbCBvbgo+IENyZWRpdDIsIHRyeSB0byBzZXQgcmF0ZWxpbWl0aW5nIHRv
+LCBsaWtlLCAyMCwgMTUsIDEwLCA1LCBhbmQgcmVwb3J0Cj4gd2hhdCBoYXBwZW5zPwo+IAoKSXQg
+c3RpbGwgaGFzIHByb2JsZW0gaWYgSSBzZXQgcmF0ZWxpbWl0aW5nIGJlbG93IDMwbXMuCjEpOiAy
+MG1zIG5vdCBzdGFibGUsIHNvbWV0aW1lcyBjYW4gdXAgdG8gODAlIGFuZCAxNjAlCnhlbnRvcCAt
+IDIwOjA4OjE0IFhlbiA0LjExLjBfMDItMQo0IGRvbWFpbnM6IDEgcnVubmluZywgMyBibG9ja2Vk
+LCAwIHBhdXNlZCwgMCBjcmFzaGVkLCAwIGR5aW5nLCAwCnNodXRkb3duCk1lbTogNjcwNzk3OTZr
+IHRvdGFsLCA2NzA3ODk2OGsgdXNlZCwgODI4ayBmcmVlIENQVXM6IDMyIEAgMjU5OU1IegpOQU1F
+IFNUQVRFIENQVShzZWMpIENQVSglKSBNRU0oaykgTUVNKCUpIE1BWE1FTShrKSBNQVhNRU0oJSkg
+VkNQVVMgTkVUUwpORVRUWChrKSBORVRSWChrKSBWQkRTIFZCRF9PTyBWQkRfUkQgVkJEX1dSIFZC
+RF9SU0VDVCBWQkRfV1NFQ1QgU1NJRApEb21haW4tMCAtLS0tLXIgMTEyIDMuMCA2NDA1MDQ1MiA5
+NS41IG5vIGxpbWl0IG4vYSAzMiAwIDAgMCAwIDAgMCAwIDAgMAowCmd1ZXN0XzEgLS1iLS0tIDEx
+MCA2Ny4xIDEwNDg4MzIgMS42IDEwNDk2MDAgMS42IDQgMSA2MzYgNCAxIDAgNDA3MiAyMTk1CjE5
+MTQ1MSAxMDk4MyAwCmd1ZXN0XzIgLS1iLS0tIDE4NiAxMzQuOCAxMDQ4ODMyIDEuNiAxMDQ5NjAw
+IDEuNiA4IDEgNjMwIDQgMSAwIDQyMDMKMTE2NiAxOTE2MTkgMTA5MjEgMAoKMik6IDE1IG1zCnhl
+bnRvcCAtIDIwOjEwOjA3IFhlbiA0LjExLjBfMDItMQo0IGRvbWFpbnM6IDIgcnVubmluZywgMiBi
+bG9ja2VkLCAwIHBhdXNlZCwgMCBjcmFzaGVkLCAwIGR5aW5nLCAwCnNodXRkb3duCk1lbTogNjcw
+Nzk3OTZrIHRvdGFsLCA2NzA3ODk2OGsgdXNlZCwgODI4ayBmcmVlIENQVXM6IDMyIEAgMjU5OU1I
+egpOQU1FIFNUQVRFIENQVShzZWMpIENQVSglKSBNRU0oaykgTUVNKCUpIE1BWE1FTShrKSBNQVhN
+RU0oJSkgVkNQVVMgTkVUUwpORVRUWChrKSBORVRSWChrKSBWQkRTIFZCRF9PTyBWQkRfUkQgVkJE
+X1dSIFZCRF9SU0VDVCBWQkRfV1NFQ1QgU1NJRApEb21haW4tMCAtLS0tLXIgMTE2IDIuNyA2NDA1
+MDQ1MiA5NS41IG5vIGxpbWl0IG4vYSAzMiAwIDAgMCAwIDAgMCAwIDAgMAowCmd1ZXN0XzEgLS1i
+LS0tIDE5MyA3My45IDEwNDg4MzIgMS42IDEwNDk2MDAgMS42IDQgMSA5MjcgNSAxIDAgNDA3MiAy
+MTk4CjE5MTQ1MSAxMDk5MiAwCmd1ZXN0XzIgLS0tLS1yIDM1MCAxNDYuNiAxMDQ4ODMyIDEuNiAx
+MDQ5NjAwIDEuNiA4IDEgOTIxIDYgMSAwIDQyMDMKMTE2OSAxOTE2MTkgMTA5MzAgMAoKMyk6IDEw
+IG1zCnhlbnRvcCAtIDIwOjA3OjM1IFhlbiA0LjExLjBfMDItMQo0IGRvbWFpbnM6IDIgcnVubmlu
+ZywgMSBibG9ja2VkLCAwIHBhdXNlZCwgMCBjcmFzaGVkLCAwIGR5aW5nLCAwCnNodXRkb3duCk1l
+bTogNjcwNzk3OTZrIHRvdGFsLCA2NzA3ODk2OGsgdXNlZCwgODI4ayBmcmVlIENQVXM6IDMyIEAg
+MjU5OU1IegpOQU1FIFNUQVRFIENQVShzZWMpIENQVSglKSBNRU0oaykgTUVNKCUpIE1BWE1FTShr
+KSBNQVhNRU0oJSkgVkNQVVMgTkVUUwpORVRUWChrKSBORVRSWChrKSBWQkRTIFZCRF9PTyBWQkRf
+UkQgVkJEX1dSIFZCRF9SU0VDVCBWQkRfV1NFQ1QgU1NJRApEb21haW4tMCAtLS0tLXIgMTExIDMu
+MSA2NDA1MDQ1MiA5NS41IG5vIGxpbWl0IG4vYSAzMiAwIDAgMCAwIDAgMCAwIDAgMAowCmd1ZXN0
+XzEgLS0tLS1yIDgxIDY3LjEgMTA0ODgzMiAxLjYgMTA0OTYwMCAxLjYgNCAxIDU4OCAzIDEgMCA0
+MDcyIDIxOTMKMTkxNDUxIDEwOTgwIDAKZ3Vlc3RfMiAtLS0tLS0gMTMwIDEyNS41IDEwNDg4MzIg
+MS42IDEwNDk2MDAgMS42IDggMSA1ODMgNCAxIDAgNDIwMwoxMTY0IDE5MTYxOSAxMDkxOCAwCgo0
+KTogNSBtcwp4ZW50b3AgLSAyMDowNzoxMiBYZW4gNC4xMS4wXzAyLTEKNCBkb21haW5zOiAzIHJ1
+bm5pbmcsIDEgYmxvY2tlZCwgMCBwYXVzZWQsIDAgY3Jhc2hlZCwgMCBkeWluZywgMApzaHV0ZG93
+bgpNZW06IDY3MDc5Nzk2ayB0b3RhbCwgNjcwNzg5NjhrIHVzZWQsIDgyOGsgZnJlZSBDUFVzOiAz
+MiBAIDI1OTlNSHoKTkFNRSBTVEFURSBDUFUoc2VjKSBDUFUoJSkgTUVNKGspIE1FTSglKSBNQVhN
+RU0oaykgTUFYTUVNKCUpIFZDUFVTIE5FVFMKTkVUVFgoaykgTkVUUlgoaykgVkJEUyBWQkRfT08g
+VkJEX1JEIFZCRF9XUiBWQkRfUlNFQ1QgVkJEX1dTRUNUIFNTSUQKRG9tYWluLTAgLS0tLS1yIDEx
+MCAyLjggNjQwNTA0NTIgOTUuNSBubyBsaW1pdCBuL2EgMzIgMCAwIDAgMCAwIDAgMCAwIDAKMApn
+dWVzdF8xIC0tLS0tciA2NiA2NC41IDEwNDg4MzIgMS42IDEwNDk2MDAgMS42IDQgMSAzODYgMyAx
+IDAgNDA3MiAyMTg3CjE5MTQ1MSAxMDgzNSAwCmd1ZXN0XzIgLS0tLS1yIDEwMSAxMjQuMyAxMDQ4
+ODMyIDEuNiAxMDQ5NjAwIDEuNiA4IDEgMzgxIDMgMSAwIDQyMDMKMTE2MSAxOTE2MTkgMTA4MjIg
+MAoKPiA+IEhvd2V2ZXIsIHRoZSBzY2hlZF9yYXRlbGltaXRfdXMgaXMgbm90IHNvIGVsZWdhbnQg
+YW5kIGZsZXhpYWJsZQp0aGF0Cj4gPiBpdCBndWFyYW50ZWVzIHRoZSBzcGVjaWZpYyB0aW1lLXNs
+aWNlIGZpeGVkbHkuCj4gPgo+IFdlbGwsIEkgcGVyc29uYWxseSBuZXZlciBsb3ZlZCBpdCwgYnV0
+IGl0IGlzIG5vdCBjb21wbGV0ZWx5IHVucmVsYXRlZAo+IHRvIHdoYXQgd2UncmUgc2VlaW5nIGFu
+ZCBkaXNjdXNzaW5nLCBUQkguIEl0IGluZGVlZCB3YXMgaW50cm9kdWNlZCB0bwo+IGltcHJvdmUg
+dGhlIHRocm91Z2hwdXQsIGluIHdvcmtsb2FkcyB3aGVyZSB0aGVyZSB3YXMgdG9vIG1hbnkgd2Fr
+ZXVwcwo+ICh3aGljaCwgaW4gQ3JlZGl0MSwgYWxzbyByZXN1bHRlZCBpbiBpbnZva2luZyB0aGUg
+c2NoZWR1bGVyIGFuZCBvZnRlbgo+IGluIGNvbnRleHQgc3dpdGNoaW5nLCBkbyB0byBib29zdGlu
+ZykuCj4gCj4gPiBJdCBtYXkgdmVyeSBsaWtlbHkgY2F1c2UgZGVncmFkaW5nIG9mIHRoZSBvdGhl
+ciBzY2hlZHVsZXIgY3JpdGVyaWEKPiA+IGxpa2Ugc2NoZWRfbGF0ZW5jeS4KPiA+IEFzIGZhciBh
+cyBJIGtub3csIENGUyBjb3VsZCBhZGp1c3QgdGltZS1zbGljZSBhY2NvcmRpbmcgdG8gdGhlCj4g
+PiBucl9xdWV1ZSBpbiBydW5xdWV1ZSAoaW5fX3NjaGVkX3BlcmlvZCgpICkuCj4gPiBDb3VsZCBp
+dCBwb3NzaWJsZSB0aGF0IENyZWRpdDIgYWxzbyBoYXZlIHRoZSBzaW1pbGFyIGFiaWxpdHkgdG8K
+PiA+IGFkanVzdCB0aW1lLXNsaWNlIGF1dG9tYXRpY2FsbHk/Cj4gPgo+IFdlbGwsIGxldCdzIHNl
+ZS4gQ3JlZGl0MiBhbmQgQ0ZTIGFyZSB2ZXJ5IHNpbWlsYXIsIGluIHByaW5jaXBsZSwgYnV0Cj4g
+dGhlIGNvZGUgaXMgYWN0dWFsbHkgcXVpdGUgZGlmZmVyZW50LiBCdXQgeWVhaCwgd2UgbWF5IGJl
+IGFibGUgdG8KY29tZQo+IHVwIHdpdGggc29tZXRoaW5nIG1vcmUgY2xldmVyIHRoYW4ganVzdCBw
+bGFpbiByYXRlbGltaXRpbmcsIGZvcgo+IGFkanVzdGluZyB3aGF0IENGUyBjYWxscyAidGhlIGdy
+YW51bGFyaXR5Ii4KPiAKClllcywgYnV0IEkgdGhpbmsgaXQgaXMgYSBsaXR0bGUgZGlmZmljdWx0
+IHRvIGRvIHRoZSBzYW1lIHdheSBsaWtlIENGUwpkdWUgdG8gb25lIHF1ZXVlIHBlciBzb2NrZXQg
+c2luY2Ugd2UgY2FuIG5vdCBoYXZlIHRoZSBydW5xdWV1ZSBwZXItY3B1CmFueW1vcmUuCgpCZXN0
+IFJlZ2FyZHMuCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
