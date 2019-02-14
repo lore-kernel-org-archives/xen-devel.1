@@ -1,18 +1,21 @@
-From: Ayush Dosaj <ayushdosaj2313@gmail.com>
-Subject: error installing xen tools on ubuntu 18.10 - make -j4
- dist-tools
-Date: Thu, 14 Feb 2019 14:17:57 +0530
-Message-ID: <CAOCxVi2EznptYn+JgV=RvYzu6GEimcGN_GRO49daQM-92PRdRQ@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: error installing xen tools on ubuntu 18.10 - make
+ -j4 dist-tools
+Date: Thu, 14 Feb 2019 02:27:29 -0700
+Message-ID: <5C6534810200007800216985@prv1-mh.provo.novell.com>
+References: <CAOCxVi2EznptYn+JgV=RvYzu6GEimcGN_GRO49daQM-92PRdRQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7204250474225475261=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=V1KD=QV=gmail.com=ayushdosaj2313@srs-us1.protection.inumbo.net>)
- id 1guCgl-0004gD-OY
- for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 08:48:11 +0000
-Received: by mail-ot1-x333.google.com with SMTP id n71so9182169ota.10
- for <xen-devel@lists.xenproject.org>; Thu, 14 Feb 2019 00:48:09 -0800 (PST)
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=aZUN=QV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1guDIs-0007wX-M5
+ for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 09:27:34 +0000
+In-Reply-To: <CAOCxVi2EznptYn+JgV=RvYzu6GEimcGN_GRO49daQM-92PRdRQ@mail.gmail.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,440 +24,162 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Ayush Dosaj <ayushdosaj2313@gmail.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7204250474225475261==
-Content-Type: multipart/alternative; boundary="000000000000b65e8d0581d6b758"
-
---000000000000b65e8d0581d6b758
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Error Description: https://pastebin.com/rmq6KaPq
-
-Help Needed.
-On running command:
-make -j4 dist-tools
-
-
-Error snap from here:
-make -C x86_instruction_emulator install
-make[6]: Entering directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruc=
-tion_emulator'
-[ -L x86-emulate.h ] || ln -sf
-/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruct=
-ion_emulator/../../../tools/tests/x86_emulator/x86-emulate.h
-[ -L x86_emulate ] || ln -sf
-/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruct=
-ion_emulator/../../../xen/arch/x86/x86_emulate
-[ -L asm ] || ln -sf
-/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruct=
-ion_emulator/../../../xen/include/asm-x86
-asm
-[ -L x86-emulate.c ] || ln -sf
-/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruct=
-ion_emulator/../../../tools/tests/x86_emulator/x86-emulate.c
-gcc  -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -Wall
--Wstrict-prototypes -Wdeclaration-after-statement
--Wno-unused-but-set-variable -Wno-unused-local-typedefs   -O2
--fomit-frame-pointer
--D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF
-.afl-harness.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
- -I/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instr=
-uction_emulator/../../../tools/include
--D__XEN_TOOLS__ -I.  -c -o afl-harness.o afl-harness.c
-[ -L wrappers.c ] || ln -sf
-/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruct=
-ion_emulator/../../../tools/tests/x86_emulator/wrappers.c
-gcc  -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -Wall
--Wstrict-prototypes -Wdeclaration-after-statement
--Wno-unused-but-set-variable -Wno-unused-local-typedefs   -O2
--fomit-frame-pointer
--D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF
-.fuzz-emul.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
- -I/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instr=
-uction_emulator/../../../tools/include
--D__XEN_TOOLS__ -I.  -c -o fuzz-emul.o fuzz-emul.c
-gcc  -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -Wall
--Wstrict-prototypes -Wdeclaration-after-statement
--Wno-unused-but-set-variable -Wno-unused-local-typedefs   -O2
--fomit-frame-pointer
--D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF
-.x86-emulate.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
- -I/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instr=
-uction_emulator/../../../tools/include
--D__XEN_TOOLS__ -I.  -c -o x86-emulate.o x86-emulate.c
-gcc  -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -Wall
--Wstrict-prototypes -Wdeclaration-after-statement
--Wno-unused-but-set-variable -Wno-unused-local-typedefs   -O2
--fomit-frame-pointer
--D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF
-.wrappers.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
- -I/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instr=
-uction_emulator/../../../tools/include
--D__XEN_TOOLS__ -I.  -c -o wrappers.o wrappers.c
-In file included from /usr/include/features.h:424,
-                 from
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:33,
-                 from /usr/include/stdio.h:27,
-                 from wrappers.c:2:
-wrappers.c: In function =E2=80=98emul_memcpy=E2=80=99:
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:31:1: error: inlining
-failed in call to always_inline =E2=80=98memcpy=E2=80=99: target specific o=
-ption mismatch
- __NTH (memcpy (void *__restrict __dest, const void *__restrict __src,
- ^~~~~
-wrappers.c:30:5: note: called from here
-     memcpy(dst, src, sz);
-     ^~~~~~~~~~~~~~~~~~~~
-make[6]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruc=
-tion_emulator/../../../tools/Rules.mk:225:
-wrappers.o] Error 1
-make[6]: *** Waiting for unfinished jobs....
-In file included from /usr/include/features.h:424,
-                 from /usr/include/assert.h:35,
-                 from fuzz-emul.c:1:
-fuzz-emul.c: In function =E2=80=98input_read=E2=80=99:
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:31:1: error: inlining
-failed in call to always_inline =E2=80=98memcpy=E2=80=99: target specific o=
-ption mismatch
- __NTH (memcpy (void *__restrict __dest, const void *__restrict __src,
- ^~~~~
-fuzz-emul.c:67:5: note: called from here
-     memcpy(dst, &s->corpus->data[s->data_index], size);
-     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/features.h:424,
-                 from /usr/include/assert.h:35,
-                 from fuzz-emul.c:1:
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:31:1: error: inlining
-failed in call to always_inline =E2=80=98memcpy=E2=80=99: target specific o=
-ption mismatch
- __NTH (memcpy (void *__restrict __dest, const void *__restrict __src,
- ^~~~~
-fuzz-emul.c:67:5: note: called from here
-     memcpy(dst, &s->corpus->data[s->data_index], size);
-     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-make[6]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruc=
-tion_emulator/../../../tools/Rules.mk:225:
-fuzz-emul.o] Error 1
-In file included from /usr/include/features.h:424,
-                 from /usr/include/assert.h:35,
-                 from x86-emulate.h:1,
-                 from x86-emulate.c:1:
-x86_emulate/x86_emulate.c: In function =E2=80=98protmode_load_seg=E2=80=99:
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:59:1: error: inlining
-failed in call to always_inline =E2=80=98memset=E2=80=99: target specific o=
-ption mismatch
- __NTH (memset (void *__dest, int __ch, size_t __len))
- ^~~~~
-In file included from x86-emulate.c:226:
-x86_emulate/x86_emulate.c:1831:13: note: called from here
-             memset(sreg, 0, sizeof(*sreg));
-             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In file included from /usr/include/features.h:424,
-                 from /usr/include/assert.h:35,
-                 from x86-emulate.h:1,
-                 from x86-emulate.c:1:
-/usr/include/x86_64-linux-gnu/bits/string_fortified.h:59:1: error: inlining
-failed in call to always_inline =E2=80=98memset=E2=80=99: target specific o=
-ption mismatch
- __NTH (memset (void *__dest, int __ch, size_t __len))
- ^~~~~
-In file included from x86-emulate.c:226:
-x86_emulate/x86_emulate.c:1831:13: note: called from here
-             memset(sreg, 0, sizeof(*sreg));
-             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-make[6]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruc=
-tion_emulator/../../../tools/Rules.mk:225:
-x86-emulate.o] Error 1
-make[6]: Leaving directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruc=
-tion_emulator'
-make[5]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/../../tools=
-/Rules.mk:249:
-subdir-install-x86_instruction_emulator] Error 2
-make[5]: Leaving directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz'
-make[4]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/../../tools=
-/Rules.mk:244:
-subdirs-install] Error 2
-make[4]: Leaving directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz'
-make[3]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/../tools/Rules.m=
-k:249:
-subdir-install-fuzz] Error 2
-make[3]: Leaving directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools'
-make[2]: ***
-[/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/../tools/Rules.m=
-k:244:
-subdirs-install] Error 2
-make[2]: Leaving directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools'
-make[1]: *** [Makefile:74: install] Error 2
-make[1]: Leaving directory
-'/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools'
-make: *** [Makefile:127: install-tools] Error 2
-ayush@Dos98:~/Downloads/tklengyel-drakvuf-4328381/xen$
-
-
---=20
-Ayush Dosaj
-VIT Vellore
-
---000000000000b65e8d0581d6b758
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_defa=
-ult" style=3D"font-family:arial,helvetica,sans-serif;font-size:small">Error=
- Description:=C2=A0<a href=3D"https://pastebin.com/rmq6KaPq">https://pasteb=
-in.com/rmq6KaPq</a></div><div class=3D"gmail_default" style=3D"font-family:=
-arial,helvetica,sans-serif;font-size:small"><br></div><div class=3D"gmail_d=
-efault" style=3D"font-family:arial,helvetica,sans-serif;font-size:small">He=
-lp Needed.</div><div class=3D"gmail_default"><div class=3D"gmail_default"><=
-font face=3D"arial, helvetica, sans-serif">On running command:</font></div>=
-<div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">ma=
-ke -j4 dist-tools</font></div><div class=3D"gmail_default"><font face=3D"ar=
-ial, helvetica, sans-serif"><br></font></div><div class=3D"gmail_default"><=
-font face=3D"arial, helvetica, sans-serif"><br></font></div><div class=3D"g=
-mail_default"><font face=3D"arial, helvetica, sans-serif">Error snap from h=
-ere:</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetic=
-a, sans-serif">make -C x86_instruction_emulator install</font></div><div cl=
-ass=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">make[6]: =
-Entering directory &#39;/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen=
-/tools/fuzz/x86_instruction_emulator&#39;</font></div><div class=3D"gmail_d=
-efault"><font face=3D"arial, helvetica, sans-serif">[ -L x86-emulate.h ] ||=
- ln -sf /home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_=
-instruction_emulator/../../../tools/tests/x86_emulator/x86-emulate.h</font>=
-</div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-ser=
-if">[ -L x86_emulate ] || ln -sf /home/ayush/Downloads/tklengyel-drakvuf-43=
-28381/xen/tools/fuzz/x86_instruction_emulator/../../../xen/arch/x86/x86_emu=
-late</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetic=
-a, sans-serif">[ -L asm ] || ln -sf /home/ayush/Downloads/tklengyel-drakvuf=
--4328381/xen/tools/fuzz/x86_instruction_emulator/../../../xen/include/asm-x=
-86 asm</font></div><div class=3D"gmail_default"><font face=3D"arial, helvet=
-ica, sans-serif">[ -L x86-emulate.c ] || ln -sf /home/ayush/Downloads/tklen=
-gyel-drakvuf-4328381/xen/tools/fuzz/x86_instruction_emulator/../../../tools=
-/tests/x86_emulator/x86-emulate.c</font></div><div class=3D"gmail_default">=
-<font face=3D"arial, helvetica, sans-serif">gcc=C2=A0 -m64 -DBUILD_ID -fno-=
-strict-aliasing -std=3Dgnu99 -Wall -Wstrict-prototypes -Wdeclaration-after-=
-statement -Wno-unused-but-set-variable -Wno-unused-local-typedefs=C2=A0 =C2=
-=A0-O2 -fomit-frame-pointer -D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTE=
-RFACE_VERSION__ -MMD -MF .afl-harness.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE6=
-4_SOURCE=C2=A0 =C2=A0-I/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/=
-tools/fuzz/x86_instruction_emulator/../../../tools/include -D__XEN_TOOLS__ =
--I.=C2=A0 -c -o afl-harness.o afl-harness.c=C2=A0</font></div><div class=3D=
-"gmail_default"><font face=3D"arial, helvetica, sans-serif">[ -L wrappers.c=
- ] || ln -sf /home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz=
-/x86_instruction_emulator/../../../tools/tests/x86_emulator/wrappers.c</fon=
-t></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-s=
-erif">gcc=C2=A0 -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu99 -Wall -Ws=
-trict-prototypes -Wdeclaration-after-statement -Wno-unused-but-set-variable=
- -Wno-unused-local-typedefs=C2=A0 =C2=A0-O2 -fomit-frame-pointer -D__XEN_IN=
-TERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF .fuzz-emul.o.=
-d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE=C2=A0 =C2=A0-I/home/ayush/Downl=
-oads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruction_emulator/../.=
-./../tools/include -D__XEN_TOOLS__ -I.=C2=A0 -c -o fuzz-emul.o fuzz-emul.c=
-=C2=A0</font></div><div class=3D"gmail_default"><font face=3D"arial, helvet=
-ica, sans-serif">gcc=C2=A0 -m64 -DBUILD_ID -fno-strict-aliasing -std=3Dgnu9=
-9 -Wall -Wstrict-prototypes -Wdeclaration-after-statement -Wno-unused-but-s=
-et-variable -Wno-unused-local-typedefs=C2=A0 =C2=A0-O2 -fomit-frame-pointer=
- -D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERSION__ -MMD -MF .x=
-86-emulate.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE=C2=A0 =C2=A0-I/hom=
-e/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruction_=
-emulator/../../../tools/include -D__XEN_TOOLS__ -I.=C2=A0 -c -o x86-emulate=
-.o x86-emulate.c=C2=A0</font></div><div class=3D"gmail_default"><font face=
-=3D"arial, helvetica, sans-serif">gcc=C2=A0 -m64 -DBUILD_ID -fno-strict-ali=
-asing -std=3Dgnu99 -Wall -Wstrict-prototypes -Wdeclaration-after-statement =
--Wno-unused-but-set-variable -Wno-unused-local-typedefs=C2=A0 =C2=A0-O2 -fo=
-mit-frame-pointer -D__XEN_INTERFACE_VERSION__=3D__XEN_LATEST_INTERFACE_VERS=
-ION__ -MMD -MF .wrappers.o.d -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE=C2=
-=A0 =C2=A0-I/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/=
-x86_instruction_emulator/../../../tools/include -D__XEN_TOOLS__ -I.=C2=A0 -=
-c -o wrappers.o wrappers.c=C2=A0</font></div><div class=3D"gmail_default"><=
-font face=3D"arial, helvetica, sans-serif">In file included from /usr/inclu=
-de/features.h:424,</font></div><div class=3D"gmail_default"><font face=3D"a=
-rial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0from /usr/include/x86_64-linux-gnu/bits/libc-header-start.=
-h:33,</font></div><div class=3D"gmail_default"><font face=3D"arial, helveti=
-ca, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0from /usr/include/stdio.h:27,</font></div><div class=3D"gmail_default"><=
-font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from wrappers.c:2:</font></div><div class=3D=
-"gmail_default"><font face=3D"arial, helvetica, sans-serif">wrappers.c: In =
-function =E2=80=98emul_memcpy=E2=80=99:</font></div><div class=3D"gmail_def=
-ault"><font face=3D"arial, helvetica, sans-serif">/usr/include/x86_64-linux=
--gnu/bits/string_fortified.h:31:1: error: inlining failed in call to always=
-_inline =E2=80=98memcpy=E2=80=99: target specific option mismatch</font></d=
-iv><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif"=
->=C2=A0__NTH (memcpy (void *__restrict __dest, const void *__restrict __src=
-,</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, =
-sans-serif">=C2=A0^~~~~</font></div><div class=3D"gmail_default"><font face=
-=3D"arial, helvetica, sans-serif">wrappers.c:30:5: note: called from here</=
-font></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, san=
-s-serif">=C2=A0 =C2=A0 =C2=A0memcpy(dst, src, sz);</font></div><div class=
-=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=
-=A0 =C2=A0^~~~~~~~~~~~~~~~~~~~</font></div><div class=3D"gmail_default"><fo=
-nt face=3D"arial, helvetica, sans-serif">make[6]: *** [/home/ayush/Download=
-s/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruction_emulator/../../.=
-./tools/Rules.mk:225: wrappers.o] Error 1</font></div><div class=3D"gmail_d=
-efault"><font face=3D"arial, helvetica, sans-serif">make[6]: *** Waiting fo=
-r unfinished jobs....</font></div><div class=3D"gmail_default"><font face=
-=3D"arial, helvetica, sans-serif">In file included from /usr/include/featur=
-es.h:424,</font></div><div class=3D"gmail_default"><font face=3D"arial, hel=
-vetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0from /usr/include/assert.h:35,</font></div><div class=3D"gmail_defau=
-lt"><font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from fuzz-emul.c:1:</font></div><div cla=
-ss=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">fuzz-emul.=
-c: In function =E2=80=98input_read=E2=80=99:</font></div><div class=3D"gmai=
-l_default"><font face=3D"arial, helvetica, sans-serif">/usr/include/x86_64-=
-linux-gnu/bits/string_fortified.h:31:1: error: inlining failed in call to a=
-lways_inline =E2=80=98memcpy=E2=80=99: target specific option mismatch</fon=
-t></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-s=
-erif">=C2=A0__NTH (memcpy (void *__restrict __dest, const void *__restrict =
-__src,</font></div><div class=3D"gmail_default"><font face=3D"arial, helvet=
-ica, sans-serif">=C2=A0^~~~~</font></div><div class=3D"gmail_default"><font=
- face=3D"arial, helvetica, sans-serif">fuzz-emul.c:67:5: note: called from =
-here</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetic=
-a, sans-serif">=C2=A0 =C2=A0 =C2=A0memcpy(dst, &amp;s-&gt;corpus-&gt;data[s=
--&gt;data_index], size);</font></div><div class=3D"gmail_default"><font fac=
-e=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0^~~~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></div><div class=3D"gmail_default"><fo=
-nt face=3D"arial, helvetica, sans-serif">In file included from /usr/include=
-/features.h:424,</font></div><div class=3D"gmail_default"><font face=3D"ari=
-al, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0from /usr/include/assert.h:35,</font></div><div class=3D"gmai=
-l_default"><font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0=
- =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from fuzz-emul.c:1:</font></div><=
-div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">/us=
-r/include/x86_64-linux-gnu/bits/string_fortified.h:31:1: error: inlining fa=
-iled in call to always_inline =E2=80=98memcpy=E2=80=99: target specific opt=
-ion mismatch</font></div><div class=3D"gmail_default"><font face=3D"arial, =
-helvetica, sans-serif">=C2=A0__NTH (memcpy (void *__restrict __dest, const =
-void *__restrict __src,</font></div><div class=3D"gmail_default"><font face=
-=3D"arial, helvetica, sans-serif">=C2=A0^~~~~</font></div><div class=3D"gma=
-il_default"><font face=3D"arial, helvetica, sans-serif">fuzz-emul.c:67:5: n=
-ote: called from here</font></div><div class=3D"gmail_default"><font face=
-=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0memcpy(dst, &amp;s-&g=
-t;corpus-&gt;data[s-&gt;data_index], size);</font></div><div class=3D"gmail=
-_default"><font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0^=
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></div><div class=3D=
-"gmail_default"><font face=3D"arial, helvetica, sans-serif">make[6]: *** [/=
-home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instructi=
-on_emulator/../../../tools/Rules.mk:225: fuzz-emul.o] Error 1</font></div><=
-div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">In =
-file included from /usr/include/features.h:424,</font></div><div class=3D"g=
-mail_default"><font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from /usr/include/assert.h:35,=
-</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, s=
-ans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fr=
-om x86-emulate.h:1,</font></div><div class=3D"gmail_default"><font face=3D"=
-arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0from x86-emulate.c:1:</font></div><div class=3D"gmail_defa=
-ult"><font face=3D"arial, helvetica, sans-serif">x86_emulate/x86_emulate.c:=
- In function =E2=80=98protmode_load_seg=E2=80=99:</font></div><div class=3D=
-"gmail_default"><font face=3D"arial, helvetica, sans-serif">/usr/include/x8=
-6_64-linux-gnu/bits/string_fortified.h:59:1: error: inlining failed in call=
- to always_inline =E2=80=98memset=E2=80=99: target specific option mismatch=
-</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, s=
-ans-serif">=C2=A0__NTH (memset (void *__dest, int __ch, size_t __len))</fon=
-t></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-s=
-erif">=C2=A0^~~~~</font></div><div class=3D"gmail_default"><font face=3D"ar=
-ial, helvetica, sans-serif">In file included from x86-emulate.c:226:</font>=
-</div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-ser=
-if">x86_emulate/x86_emulate.c:1831:13: note: called from here</font></div><=
-div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">=C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memset(sreg, 0, sizeof(*sreg))=
-;</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, =
-sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0^~~~~~~~~~~~~~~=
-~~~~~~~~~~~~~~~</font></div><div class=3D"gmail_default"><font face=3D"aria=
-l, helvetica, sans-serif">In file included from /usr/include/features.h:424=
-,</font></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, =
-sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0f=
-rom /usr/include/assert.h:35,</font></div><div class=3D"gmail_default"><fon=
-t face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0from x86-emulate.h:1,</font></div><div class=3D"=
-gmail_default"><font face=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0from x86-emulate.c:1:</font=
-></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-se=
-rif">/usr/include/x86_64-linux-gnu/bits/string_fortified.h:59:1: error: inl=
-ining failed in call to always_inline =E2=80=98memset=E2=80=99: target spec=
-ific option mismatch</font></div><div class=3D"gmail_default"><font face=3D=
-"arial, helvetica, sans-serif">=C2=A0__NTH (memset (void *__dest, int __ch,=
- size_t __len))</font></div><div class=3D"gmail_default"><font face=3D"aria=
-l, helvetica, sans-serif">=C2=A0^~~~~</font></div><div class=3D"gmail_defau=
-lt"><font face=3D"arial, helvetica, sans-serif">In file included from x86-e=
-mulate.c:226:</font></div><div class=3D"gmail_default"><font face=3D"arial,=
- helvetica, sans-serif">x86_emulate/x86_emulate.c:1831:13: note: called fro=
-m here</font></div><div class=3D"gmail_default"><font face=3D"arial, helvet=
-ica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0memset(sre=
-g, 0, sizeof(*sreg));</font></div><div class=3D"gmail_default"><font face=
-=3D"arial, helvetica, sans-serif">=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
- =C2=A0^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</font></div><div class=3D"gmail_defau=
-lt"><font face=3D"arial, helvetica, sans-serif">make[6]: *** [/home/ayush/D=
-ownloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/x86_instruction_emulator/=
-../../../tools/Rules.mk:225: x86-emulate.o] Error 1</font></div><div class=
-=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">make[6]: Lea=
-ving directory &#39;/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/too=
-ls/fuzz/x86_instruction_emulator&#39;</font></div><div class=3D"gmail_defau=
-lt"><font face=3D"arial, helvetica, sans-serif">make[5]: *** [/home/ayush/D=
-ownloads/tklengyel-drakvuf-4328381/xen/tools/fuzz/../../tools/Rules.mk:249:=
- subdir-install-x86_instruction_emulator] Error 2</font></div><div class=3D=
-"gmail_default"><font face=3D"arial, helvetica, sans-serif">make[5]: Leavin=
-g directory &#39;/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/=
-fuzz&#39;</font></div><div class=3D"gmail_default"><font face=3D"arial, hel=
-vetica, sans-serif">make[4]: *** [/home/ayush/Downloads/tklengyel-drakvuf-4=
-328381/xen/tools/fuzz/../../tools/Rules.mk:244: subdirs-install] Error 2</f=
-ont></div><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans=
--serif">make[4]: Leaving directory &#39;/home/ayush/Downloads/tklengyel-dra=
-kvuf-4328381/xen/tools/fuzz&#39;</font></div><div class=3D"gmail_default"><=
-font face=3D"arial, helvetica, sans-serif">make[3]: *** [/home/ayush/Downlo=
-ads/tklengyel-drakvuf-4328381/xen/tools/../tools/Rules.mk:249: subdir-insta=
-ll-fuzz] Error 2</font></div><div class=3D"gmail_default"><font face=3D"ari=
-al, helvetica, sans-serif">make[3]: Leaving directory &#39;/home/ayush/Down=
-loads/tklengyel-drakvuf-4328381/xen/tools&#39;</font></div><div class=3D"gm=
-ail_default"><font face=3D"arial, helvetica, sans-serif">make[2]: *** [/hom=
-e/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools/../tools/Rules.mk:244=
-: subdirs-install] Error 2</font></div><div class=3D"gmail_default"><font f=
-ace=3D"arial, helvetica, sans-serif">make[2]: Leaving directory &#39;/home/=
-ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools&#39;</font></div><div c=
-lass=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif">make[1]:=
- *** [Makefile:74: install] Error 2</font></div><div class=3D"gmail_default=
-"><font face=3D"arial, helvetica, sans-serif">make[1]: Leaving directory &#=
-39;/home/ayush/Downloads/tklengyel-drakvuf-4328381/xen/tools&#39;</font></d=
-iv><div class=3D"gmail_default"><font face=3D"arial, helvetica, sans-serif"=
->make: *** [Makefile:127: install-tools] Error 2</font></div><div class=3D"=
-gmail_default"><font face=3D"arial, helvetica, sans-serif">ayush@Dos98:~/Do=
-wnloads/tklengyel-drakvuf-4328381/xen$</font></div></div><div class=3D"gmai=
-l_default" style=3D"font-family:arial,helvetica,sans-serif;font-size:small"=
-><br></div><div class=3D"gmail_default" style=3D"font-family:arial,helvetic=
-a,sans-serif;font-size:small"><br></div>-- <br><div dir=3D"ltr" class=3D"gm=
-ail_signature"><div dir=3D"ltr"><div><div dir=3D"ltr"><div style=3D"text-al=
-ign:left"><div style=3D"font-family:arial,helvetica,sans-serif">Ayush Dosaj=
-</div><div style=3D"font-family:arial,helvetica,sans-serif">VIT Vellore</di=
-v><div><br></div></div></div></div></div></div></div></div></div>
-
---000000000000b65e8d0581d6b758--
-
-
---===============7204250474225475261==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7204250474225475261==--
+Pj4+IE9uIDE0LjAyLjE5IGF0IDA5OjQ3LCA8YXl1c2hkb3NhajIzMTNAZ21haWwuY29tPiB3cm90
+ZToKPiBFcnJvciBEZXNjcmlwdGlvbjogaHR0cHM6Ly9wYXN0ZWJpbi5jb20vcm1xNkthUHEgCj4g
+Cj4gSGVscCBOZWVkZWQuCgpJZiB5b3UgYXNrIGZvciBoZWxwLCBwbGVhc2UgcHJvdmlkZSByZWFz
+b25hYmx5IGNvbXBsZXRlIGRhdGEuIEl0IGlzIGVudGlyZWx5CnVuY2xlYXIgd2hhdCBYZW4gdmVy
+c2lvbiB5b3UncmUgdHJ5aW5nIHRvIGJ1aWxkLiBBbmQgdGhlcmUgd2FzIGEgY2hhbmdlIGEKbGl0
+dGxlIHdoaWxlIGJhY2sgYWN0dWFsbHkgYWRkcmVzc2luZyB0aGlzIG9yIGEgc2ltaWxhciBwcm9i
+bGVtLCBzbyBpdCB3b3VsZCBiZQppbXBvcnRhbnQgdG8ga25vdyB3aGV0aGVyIHlvdXIgdHJlZSBp
+bmNsdWRlcyBjb21taXQgZThkZmJjMjk2Mi4KCkJleW9uZCB0aGF0LCB5b3UgcmVwb3J0aW5nIG9u
+IHhlbi1kZXZlbCByYXRoZXIgdGhhbiB4ZW4tdXNlcnMsIEkgdGhpbmsgaXQKd291bGQgaGF2ZSBi
+ZWVuIG5pY2UgaWYgeW91IGRpZCBhdCBsZWFzdCBhIGxpdHRsZSBiaXQgb2YgaW52ZXN0aWdhdGlv
+biB5b3Vyc2VsZgooYW5kIHRlbGwgdXMgd2hhdCB5b3UndmUgZm91bmQsIHJhdGhlciB0aGFuIGp1
+c3QgZXJyb3Igb3V0cHV0KS4KCkphbgoKPiBPbiBydW5uaW5nIGNvbW1hbmQ6Cj4gbWFrZSAtajQg
+ZGlzdC10b29scwo+IAo+IAo+IEVycm9yIHNuYXAgZnJvbSBoZXJlOgo+IG1ha2UgLUMgeDg2X2lu
+c3RydWN0aW9uX2VtdWxhdG9yIGluc3RhbGwKPiBtYWtlWzZdOiBFbnRlcmluZyBkaXJlY3RvcnkK
+PiAnL2hvbWUvYXl1c2gvRG93bmxvYWRzL3RrbGVuZ3llbC1kcmFrdnVmLTQzMjgzODEveGVuL3Rv
+b2xzL2Z1enoveDg2X2luc3RydWN0Cj4gaW9uX2VtdWxhdG9yJwo+IFsgLUwgeDg2LWVtdWxhdGUu
+aCBdIHx8IGxuIC1zZgo+IC9ob21lL2F5dXNoL0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00
+MzI4MzgxL3hlbi90b29scy9mdXp6L3g4Nl9pbnN0cnVjdGkKPiBvbl9lbXVsYXRvci8uLi8uLi8u
+Li90b29scy90ZXN0cy94ODZfZW11bGF0b3IveDg2LWVtdWxhdGUuaAo+IFsgLUwgeDg2X2VtdWxh
+dGUgXSB8fCBsbiAtc2YKPiAvaG9tZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVsLWRyYWt2dWYt
+NDMyODM4MS94ZW4vdG9vbHMvZnV6ei94ODZfaW5zdHJ1Y3RpCj4gb25fZW11bGF0b3IvLi4vLi4v
+Li4veGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlCj4gWyAtTCBhc20gXSB8fCBsbiAtc2YKPiAvaG9t
+ZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMvZnV6
+ei94ODZfaW5zdHJ1Y3RpCj4gb25fZW11bGF0b3IvLi4vLi4vLi4veGVuL2luY2x1ZGUvYXNtLXg4
+Ngo+IGFzbQo+IFsgLUwgeDg2LWVtdWxhdGUuYyBdIHx8IGxuIC1zZgo+IC9ob21lL2F5dXNoL0Rv
+d25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90b29scy9mdXp6L3g4Nl9pbnN0
+cnVjdGkKPiBvbl9lbXVsYXRvci8uLi8uLi8uLi90b29scy90ZXN0cy94ODZfZW11bGF0b3IveDg2
+LWVtdWxhdGUuYwo+IGdjYyAgLW02NCAtREJVSUxEX0lEIC1mbm8tc3RyaWN0LWFsaWFzaW5nIC1z
+dGQ9Z251OTkgLVdhbGwKPiAtV3N0cmljdC1wcm90b3R5cGVzIC1XZGVjbGFyYXRpb24tYWZ0ZXIt
+c3RhdGVtZW50Cj4gLVduby11bnVzZWQtYnV0LXNldC12YXJpYWJsZSAtV25vLXVudXNlZC1sb2Nh
+bC10eXBlZGVmcyAgIC1PMgo+IC1mb21pdC1mcmFtZS1wb2ludGVyCj4gLURfX1hFTl9JTlRFUkZB
+Q0VfVkVSU0lPTl9fPV9fWEVOX0xBVEVTVF9JTlRFUkZBQ0VfVkVSU0lPTl9fIC1NTUQgLU1GCj4g
+LmFmbC1oYXJuZXNzLm8uZCAtRF9MQVJHRUZJTEVfU09VUkNFIC1EX0xBUkdFRklMRTY0X1NPVVJD
+RQo+ICAKPiAtSS9ob21lL2F5dXNoL0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4Mzgx
+L3hlbi90b29scy9mdXp6L3g4Nl9pbnN0cnVjdAo+IGlvbl9lbXVsYXRvci8uLi8uLi8uLi90b29s
+cy9pbmNsdWRlCj4gLURfX1hFTl9UT09MU19fIC1JLiAgLWMgLW8gYWZsLWhhcm5lc3MubyBhZmwt
+aGFybmVzcy5jCj4gWyAtTCB3cmFwcGVycy5jIF0gfHwgbG4gLXNmCj4gL2hvbWUvYXl1c2gvRG93
+bmxvYWRzL3RrbGVuZ3llbC1kcmFrdnVmLTQzMjgzODEveGVuL3Rvb2xzL2Z1enoveDg2X2luc3Ry
+dWN0aQo+IG9uX2VtdWxhdG9yLy4uLy4uLy4uL3Rvb2xzL3Rlc3RzL3g4Nl9lbXVsYXRvci93cmFw
+cGVycy5jCj4gZ2NjICAtbTY0IC1EQlVJTERfSUQgLWZuby1zdHJpY3QtYWxpYXNpbmcgLXN0ZD1n
+bnU5OSAtV2FsbAo+IC1Xc3RyaWN0LXByb3RvdHlwZXMgLVdkZWNsYXJhdGlvbi1hZnRlci1zdGF0
+ZW1lbnQKPiAtV25vLXVudXNlZC1idXQtc2V0LXZhcmlhYmxlIC1Xbm8tdW51c2VkLWxvY2FsLXR5
+cGVkZWZzICAgLU8yCj4gLWZvbWl0LWZyYW1lLXBvaW50ZXIKPiAtRF9fWEVOX0lOVEVSRkFDRV9W
+RVJTSU9OX189X19YRU5fTEFURVNUX0lOVEVSRkFDRV9WRVJTSU9OX18gLU1NRCAtTUYKPiAuZnV6
+ei1lbXVsLm8uZCAtRF9MQVJHRUZJTEVfU09VUkNFIC1EX0xBUkdFRklMRTY0X1NPVVJDRQo+ICAK
+PiAtSS9ob21lL2F5dXNoL0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90
+b29scy9mdXp6L3g4Nl9pbnN0cnVjdAo+IGlvbl9lbXVsYXRvci8uLi8uLi8uLi90b29scy9pbmNs
+dWRlCj4gLURfX1hFTl9UT09MU19fIC1JLiAgLWMgLW8gZnV6ei1lbXVsLm8gZnV6ei1lbXVsLmMK
+PiBnY2MgIC1tNjQgLURCVUlMRF9JRCAtZm5vLXN0cmljdC1hbGlhc2luZyAtc3RkPWdudTk5IC1X
+YWxsCj4gLVdzdHJpY3QtcHJvdG90eXBlcyAtV2RlY2xhcmF0aW9uLWFmdGVyLXN0YXRlbWVudAo+
+IC1Xbm8tdW51c2VkLWJ1dC1zZXQtdmFyaWFibGUgLVduby11bnVzZWQtbG9jYWwtdHlwZWRlZnMg
+ICAtTzIKPiAtZm9taXQtZnJhbWUtcG9pbnRlcgo+IC1EX19YRU5fSU5URVJGQUNFX1ZFUlNJT05f
+Xz1fX1hFTl9MQVRFU1RfSU5URVJGQUNFX1ZFUlNJT05fXyAtTU1EIC1NRgo+IC54ODYtZW11bGF0
+ZS5vLmQgLURfTEFSR0VGSUxFX1NPVVJDRSAtRF9MQVJHRUZJTEU2NF9TT1VSQ0UKPiAgCj4gLUkv
+aG9tZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMv
+ZnV6ei94ODZfaW5zdHJ1Y3QKPiBpb25fZW11bGF0b3IvLi4vLi4vLi4vdG9vbHMvaW5jbHVkZQo+
+IC1EX19YRU5fVE9PTFNfXyAtSS4gIC1jIC1vIHg4Ni1lbXVsYXRlLm8geDg2LWVtdWxhdGUuYwo+
+IGdjYyAgLW02NCAtREJVSUxEX0lEIC1mbm8tc3RyaWN0LWFsaWFzaW5nIC1zdGQ9Z251OTkgLVdh
+bGwKPiAtV3N0cmljdC1wcm90b3R5cGVzIC1XZGVjbGFyYXRpb24tYWZ0ZXItc3RhdGVtZW50Cj4g
+LVduby11bnVzZWQtYnV0LXNldC12YXJpYWJsZSAtV25vLXVudXNlZC1sb2NhbC10eXBlZGVmcyAg
+IC1PMgo+IC1mb21pdC1mcmFtZS1wb2ludGVyCj4gLURfX1hFTl9JTlRFUkZBQ0VfVkVSU0lPTl9f
+PV9fWEVOX0xBVEVTVF9JTlRFUkZBQ0VfVkVSU0lPTl9fIC1NTUQgLU1GCj4gLndyYXBwZXJzLm8u
+ZCAtRF9MQVJHRUZJTEVfU09VUkNFIC1EX0xBUkdFRklMRTY0X1NPVVJDRQo+ICAKPiAtSS9ob21l
+L2F5dXNoL0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90b29scy9mdXp6
+L3g4Nl9pbnN0cnVjdAo+IGlvbl9lbXVsYXRvci8uLi8uLi8uLi90b29scy9pbmNsdWRlCj4gLURf
+X1hFTl9UT09MU19fIC1JLiAgLWMgLW8gd3JhcHBlcnMubyB3cmFwcGVycy5jCj4gSW4gZmlsZSBp
+bmNsdWRlZCBmcm9tIC91c3IvaW5jbHVkZS9mZWF0dXJlcy5oOjQyNCwKPiAgICAgICAgICAgICAg
+ICAgIGZyb20KPiAvdXNyL2luY2x1ZGUveDg2XzY0LWxpbnV4LWdudS9iaXRzL2xpYmMtaGVhZGVy
+LXN0YXJ0Lmg6MzMsCj4gICAgICAgICAgICAgICAgICBmcm9tIC91c3IvaW5jbHVkZS9zdGRpby5o
+OjI3LAo+ICAgICAgICAgICAgICAgICAgZnJvbSB3cmFwcGVycy5jOjI6Cj4gd3JhcHBlcnMuYzog
+SW4gZnVuY3Rpb24g4oCYZW11bF9tZW1jcHnigJk6Cj4gL3Vzci9pbmNsdWRlL3g4Nl82NC1saW51
+eC1nbnUvYml0cy9zdHJpbmdfZm9ydGlmaWVkLmg6MzE6MTogZXJyb3I6IGlubGluaW5nCj4gZmFp
+bGVkIGluIGNhbGwgdG8gYWx3YXlzX2lubGluZSDigJhtZW1jcHnigJk6IHRhcmdldCBzcGVjaWZp
+YyBvcHRpb24gbWlzbWF0Y2gKPiAgX19OVEggKG1lbWNweSAodm9pZCAqX19yZXN0cmljdCBfX2Rl
+c3QsIGNvbnN0IHZvaWQgKl9fcmVzdHJpY3QgX19zcmMsCj4gIF5+fn5+Cj4gd3JhcHBlcnMuYzoz
+MDo1OiBub3RlOiBjYWxsZWQgZnJvbSBoZXJlCj4gICAgICBtZW1jcHkoZHN0LCBzcmMsIHN6KTsK
+PiAgICAgIF5+fn5+fn5+fn5+fn5+fn5+fn5+Cj4gbWFrZVs2XTogKioqCj4gWy9ob21lL2F5dXNo
+L0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90b29scy9mdXp6L3g4Nl9p
+bnN0cnVjdAo+IGlvbl9lbXVsYXRvci8uLi8uLi8uLi90b29scy9SdWxlcy5tazoyMjU6Cj4gd3Jh
+cHBlcnMub10gRXJyb3IgMQo+IG1ha2VbNl06ICoqKiBXYWl0aW5nIGZvciB1bmZpbmlzaGVkIGpv
+YnMuLi4uCj4gSW4gZmlsZSBpbmNsdWRlZCBmcm9tIC91c3IvaW5jbHVkZS9mZWF0dXJlcy5oOjQy
+NCwKPiAgICAgICAgICAgICAgICAgIGZyb20gL3Vzci9pbmNsdWRlL2Fzc2VydC5oOjM1LAo+ICAg
+ICAgICAgICAgICAgICAgZnJvbSBmdXp6LWVtdWwuYzoxOgo+IGZ1enotZW11bC5jOiBJbiBmdW5j
+dGlvbiDigJhpbnB1dF9yZWFk4oCZOgo+IC91c3IvaW5jbHVkZS94ODZfNjQtbGludXgtZ251L2Jp
+dHMvc3RyaW5nX2ZvcnRpZmllZC5oOjMxOjE6IGVycm9yOiBpbmxpbmluZwo+IGZhaWxlZCBpbiBj
+YWxsIHRvIGFsd2F5c19pbmxpbmUg4oCYbWVtY3B54oCZOiB0YXJnZXQgc3BlY2lmaWMgb3B0aW9u
+IG1pc21hdGNoCj4gIF9fTlRIIChtZW1jcHkgKHZvaWQgKl9fcmVzdHJpY3QgX19kZXN0LCBjb25z
+dCB2b2lkICpfX3Jlc3RyaWN0IF9fc3JjLAo+ICBefn5+fgo+IGZ1enotZW11bC5jOjY3OjU6IG5v
+dGU6IGNhbGxlZCBmcm9tIGhlcmUKPiAgICAgIG1lbWNweShkc3QsICZzLT5jb3JwdXMtPmRhdGFb
+cy0+ZGF0YV9pbmRleF0sIHNpemUpOwo+ICAgICAgXn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+
+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KPiBJbiBmaWxlIGluY2x1ZGVkIGZyb20gL3Vzci9pbmNs
+dWRlL2ZlYXR1cmVzLmg6NDI0LAo+ICAgICAgICAgICAgICAgICAgZnJvbSAvdXNyL2luY2x1ZGUv
+YXNzZXJ0Lmg6MzUsCj4gICAgICAgICAgICAgICAgICBmcm9tIGZ1enotZW11bC5jOjE6Cj4gL3Vz
+ci9pbmNsdWRlL3g4Nl82NC1saW51eC1nbnUvYml0cy9zdHJpbmdfZm9ydGlmaWVkLmg6MzE6MTog
+ZXJyb3I6IGlubGluaW5nCj4gZmFpbGVkIGluIGNhbGwgdG8gYWx3YXlzX2lubGluZSDigJhtZW1j
+cHnigJk6IHRhcmdldCBzcGVjaWZpYyBvcHRpb24gbWlzbWF0Y2gKPiAgX19OVEggKG1lbWNweSAo
+dm9pZCAqX19yZXN0cmljdCBfX2Rlc3QsIGNvbnN0IHZvaWQgKl9fcmVzdHJpY3QgX19zcmMsCj4g
+IF5+fn5+Cj4gZnV6ei1lbXVsLmM6Njc6NTogbm90ZTogY2FsbGVkIGZyb20gaGVyZQo+ICAgICAg
+bWVtY3B5KGRzdCwgJnMtPmNvcnB1cy0+ZGF0YVtzLT5kYXRhX2luZGV4XSwgc2l6ZSk7Cj4gICAg
+ICBefn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fgo+IG1h
+a2VbNl06ICoqKgo+IFsvaG9tZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVsLWRyYWt2dWYtNDMy
+ODM4MS94ZW4vdG9vbHMvZnV6ei94ODZfaW5zdHJ1Y3QKPiBpb25fZW11bGF0b3IvLi4vLi4vLi4v
+dG9vbHMvUnVsZXMubWs6MjI1Ogo+IGZ1enotZW11bC5vXSBFcnJvciAxCj4gSW4gZmlsZSBpbmNs
+dWRlZCBmcm9tIC91c3IvaW5jbHVkZS9mZWF0dXJlcy5oOjQyNCwKPiAgICAgICAgICAgICAgICAg
+IGZyb20gL3Vzci9pbmNsdWRlL2Fzc2VydC5oOjM1LAo+ICAgICAgICAgICAgICAgICAgZnJvbSB4
+ODYtZW11bGF0ZS5oOjEsCj4gICAgICAgICAgICAgICAgICBmcm9tIHg4Ni1lbXVsYXRlLmM6MToK
+PiB4ODZfZW11bGF0ZS94ODZfZW11bGF0ZS5jOiBJbiBmdW5jdGlvbiDigJhwcm90bW9kZV9sb2Fk
+X3NlZ+KAmToKPiAvdXNyL2luY2x1ZGUveDg2XzY0LWxpbnV4LWdudS9iaXRzL3N0cmluZ19mb3J0
+aWZpZWQuaDo1OToxOiBlcnJvcjogaW5saW5pbmcKPiBmYWlsZWQgaW4gY2FsbCB0byBhbHdheXNf
+aW5saW5lIOKAmG1lbXNldOKAmTogdGFyZ2V0IHNwZWNpZmljIG9wdGlvbiBtaXNtYXRjaAo+ICBf
+X05USCAobWVtc2V0ICh2b2lkICpfX2Rlc3QsIGludCBfX2NoLCBzaXplX3QgX19sZW4pKQo+ICBe
+fn5+fgo+IEluIGZpbGUgaW5jbHVkZWQgZnJvbSB4ODYtZW11bGF0ZS5jOjIyNjoKPiB4ODZfZW11
+bGF0ZS94ODZfZW11bGF0ZS5jOjE4MzE6MTM6IG5vdGU6IGNhbGxlZCBmcm9tIGhlcmUKPiAgICAg
+ICAgICAgICAgbWVtc2V0KHNyZWcsIDAsIHNpemVvZigqc3JlZykpOwo+ICAgICAgICAgICAgICBe
+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn4KPiBJbiBmaWxlIGluY2x1ZGVkIGZyb20gL3Vz
+ci9pbmNsdWRlL2ZlYXR1cmVzLmg6NDI0LAo+ICAgICAgICAgICAgICAgICAgZnJvbSAvdXNyL2lu
+Y2x1ZGUvYXNzZXJ0Lmg6MzUsCj4gICAgICAgICAgICAgICAgICBmcm9tIHg4Ni1lbXVsYXRlLmg6
+MSwKPiAgICAgICAgICAgICAgICAgIGZyb20geDg2LWVtdWxhdGUuYzoxOgo+IC91c3IvaW5jbHVk
+ZS94ODZfNjQtbGludXgtZ251L2JpdHMvc3RyaW5nX2ZvcnRpZmllZC5oOjU5OjE6IGVycm9yOiBp
+bmxpbmluZwo+IGZhaWxlZCBpbiBjYWxsIHRvIGFsd2F5c19pbmxpbmUg4oCYbWVtc2V04oCZOiB0
+YXJnZXQgc3BlY2lmaWMgb3B0aW9uIG1pc21hdGNoCj4gIF9fTlRIIChtZW1zZXQgKHZvaWQgKl9f
+ZGVzdCwgaW50IF9fY2gsIHNpemVfdCBfX2xlbikpCj4gIF5+fn5+Cj4gSW4gZmlsZSBpbmNsdWRl
+ZCBmcm9tIHg4Ni1lbXVsYXRlLmM6MjI2Ogo+IHg4Nl9lbXVsYXRlL3g4Nl9lbXVsYXRlLmM6MTgz
+MToxMzogbm90ZTogY2FsbGVkIGZyb20gaGVyZQo+ICAgICAgICAgICAgICBtZW1zZXQoc3JlZywg
+MCwgc2l6ZW9mKCpzcmVnKSk7Cj4gICAgICAgICAgICAgIF5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+
+fn5+fn5+fgo+IG1ha2VbNl06ICoqKgo+IFsvaG9tZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVs
+LWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMvZnV6ei94ODZfaW5zdHJ1Y3QKPiBpb25fZW11bGF0
+b3IvLi4vLi4vLi4vdG9vbHMvUnVsZXMubWs6MjI1Ogo+IHg4Ni1lbXVsYXRlLm9dIEVycm9yIDEK
+PiBtYWtlWzZdOiBMZWF2aW5nIGRpcmVjdG9yeQo+ICcvaG9tZS9heXVzaC9Eb3dubG9hZHMvdGts
+ZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMvZnV6ei94ODZfaW5zdHJ1Y3QKPiBpb25f
+ZW11bGF0b3InCj4gbWFrZVs1XTogKioqCj4gWy9ob21lL2F5dXNoL0Rvd25sb2Fkcy90a2xlbmd5
+ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90b29scy9mdXp6Ly4uLy4uL3Rvb2xzLwo+IFJ1bGVzLm1r
+OjI0OToKPiBzdWJkaXItaW5zdGFsbC14ODZfaW5zdHJ1Y3Rpb25fZW11bGF0b3JdIEVycm9yIDIK
+PiBtYWtlWzVdOiBMZWF2aW5nIGRpcmVjdG9yeQo+ICcvaG9tZS9heXVzaC9Eb3dubG9hZHMvdGts
+ZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMvZnV6eicKPiBtYWtlWzRdOiAqKioKPiBb
+L2hvbWUvYXl1c2gvRG93bmxvYWRzL3RrbGVuZ3llbC1kcmFrdnVmLTQzMjgzODEveGVuL3Rvb2xz
+L2Z1enovLi4vLi4vdG9vbHMvCj4gUnVsZXMubWs6MjQ0Ogo+IHN1YmRpcnMtaW5zdGFsbF0gRXJy
+b3IgMgo+IG1ha2VbNF06IExlYXZpbmcgZGlyZWN0b3J5Cj4gJy9ob21lL2F5dXNoL0Rvd25sb2Fk
+cy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90b29scy9mdXp6Jwo+IG1ha2VbM106ICoq
+Kgo+IFsvaG9tZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4v
+dG9vbHMvLi4vdG9vbHMvUnVsZXMubWsKPiA6MjQ5Ogo+IHN1YmRpci1pbnN0YWxsLWZ1enpdIEVy
+cm9yIDIKPiBtYWtlWzNdOiBMZWF2aW5nIGRpcmVjdG9yeQo+ICcvaG9tZS9heXVzaC9Eb3dubG9h
+ZHMvdGtsZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMnCj4gbWFrZVsyXTogKioqCj4g
+Wy9ob21lL2F5dXNoL0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbi90b29s
+cy8uLi90b29scy9SdWxlcy5tawo+IDoyNDQ6Cj4gc3ViZGlycy1pbnN0YWxsXSBFcnJvciAyCj4g
+bWFrZVsyXTogTGVhdmluZyBkaXJlY3RvcnkKPiAnL2hvbWUvYXl1c2gvRG93bmxvYWRzL3RrbGVu
+Z3llbC1kcmFrdnVmLTQzMjgzODEveGVuL3Rvb2xzJwo+IG1ha2VbMV06ICoqKiBbTWFrZWZpbGU6
+NzQ6IGluc3RhbGxdIEVycm9yIDIKPiBtYWtlWzFdOiBMZWF2aW5nIGRpcmVjdG9yeQo+ICcvaG9t
+ZS9heXVzaC9Eb3dubG9hZHMvdGtsZW5neWVsLWRyYWt2dWYtNDMyODM4MS94ZW4vdG9vbHMnCj4g
+bWFrZTogKioqIFtNYWtlZmlsZToxMjc6IGluc3RhbGwtdG9vbHNdIEVycm9yIDIKPiBheXVzaEBE
+b3M5ODp+L0Rvd25sb2Fkcy90a2xlbmd5ZWwtZHJha3Z1Zi00MzI4MzgxL3hlbiQKPiAKPiAKPiAt
+LSAKPiBBeXVzaCBEb3Nhago+IFZJVCBWZWxsb3JlCgoKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
