@@ -1,17 +1,18 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Enhancing Xen's Kconfig infrastructure to support
- tailored solutions
-Date: Thu, 14 Feb 2019 21:03:24 +0000
-Message-ID: <AB54071B-07B5-4FFC-A1A4-781C24F61D93@gmail.com>
-References: <a49643ec-6bbe-04be-1ae2-b1d731da92cf@gmail.com>
- <20190213182544.2tguperv3yliejch@zion.uk.xensource.com>
- <alpine.DEB.2.10.1902131110270.5641@sstabellini-ThinkPad-X260>
- <5C653AB10200007800216997@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============8338038163610917132=="
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 133254: trouble:
+ blocked/broken/pass
+Date: Thu, 14 Feb 2019 21:45:18 +0000
+Message-ID: <osstest-133254-mainreport@xen.org>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=2cGY=QV=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1guOoy-0007JG-60
+ for xen-devel@lists.xenproject.org; Thu, 14 Feb 2019 21:45:28 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,529 +21,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: James McKenzie <james.mckenzie@bromium.com>, robin.randhawa@arm.com, Wei Liu <wei.liu2@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>, Daniel Smith <dpsmith@apertussolutions.com>, Doug Goldstein <cardoe@cardoe.com>, Christopher Clark <christopher.w.clark@gmail.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, "Daniel P.Smith" <dpsmith.dev@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, committers@xenproject.org, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Jun Nakajima <jun.nakajima@intel.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xen.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8338038163610917132==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8"
-
-
---Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-
-
-> On 14 Feb 2019, at 18:32, Stefano Stabellini <sstabellini@kernel.org> =
-wrote:
->=20
-> On Thu, 14 Feb 2019, Jan Beulich wrote:
->>>>> On 13.02.19 at 20:11, <sstabellini@kernel.org> wrote:
->>> On Wed, 13 Feb 2019, Wei Liu wrote:
->>>> On Tue, Feb 12, 2019 at 09:34:25PM -0500, Daniel P. Smith wrote:
->>>>> Greetings,
->>>>>=20
->>>>> On the 11/14/18 Xen x86 community call a discussion was initiated =
-about
->>>>> using Kconfig to build minimized versions of Xen for security, =
-safety
->>>>> and other certification requirements. After some offline =
-discussions
->>>>> with Xen contributors I realized that a variety of efforts each =
-with
->>>>> their own respective goals are underway,
->>>>>=20
->>>>> - nested virtualization
->>>>> - mixed criticality architectures
->>>>> - reducing trusted componentary
->>>>> - combining hardware protection of virtualization with performance =
-and
->>>>> ease-of-use of containers
->>>>>=20
->>>>> These efforts use hypervisors in different roles, all which Xen is
->>>>> capable of meeting. Today Xen's utility comes at the expense of =
-carrying
->>>>> features necessary for one role to be present in another role =
-where it
->>>>> is not required, e.g. PV interfaces that may not be essential in =
-an ARM
->>>>> mixed criticality deployment.
->>>>>=20
->>>>> The initial focus will be to explore and document the range of =
-possible
->>>>> use cases that are of interest to the Xen community. This will be =
-the
->>>>> input to a design document that is crafted in conjunction with the =
-Xen
->>>>> maintainers, to identify possible approaches to extend the =
-existing
->>>>> Kconfig infrastructure to produce tailored instances of Xen.
->>>>>=20
->>>>> If you are interested in participating in this effort, please =
-reply to
->>>>> this thread to outline possible use cases, design constraints and =
-other
->>>>> considerations for improving Xen's Kconfig infrastructure to =
-support
->>>>> tailoring for specific use cases.
->>>>>=20
->>>>=20
->>>> My impression from the community call is that you want to provide
->>>> smallish configurations for different use cases.
->>>>=20
->>>> The Kconfig infrastructure is already able to do what you want as =
-far as
->>>> I can tell.  You can easily feed it a base config file -- see files
->>>> under automation/configs/x86/.  What sort of extension is needed in =
-your
->>>> opinion?
->>>>=20
->>>> As use case goes, it would be a good start if you just submit =
-something
->>>> you care about.
->>>=20
->>> I mentioned on the call that a good first start could be a kconfig =
-that
->>> allows to build an hypervisor binary with only support for PVH and =
-only
->>> support for recent Intel machines, with the goal of minimizing the =
-code
->>> base to less than 100K LOC.
->>=20
->> "With only support for PVH" (which really means HVM) we already have.
->> "With only support for recent Intel machines" would require adding =
-new
->> Kconfig options first, to control Intel, AMD, etc separately, and to =
-then
->> further somehow separate "old" from "new" (which may turn out not
->> very easy to do without a lot of #ifdef-ary or other code churn). I'm
->> not aware of something like this existing on Linux either - all I'm =
-aware
->> of there is a means to control what -m<arch> option might be passed
->> to the compiler, but without disabling any source code from getting
->> compiled.
->=20
-> I was thinking along the lines of having options to disable drivers =
-for
-> older timers and older interrupt controllers that are not needed on
-> recent machines.
->=20
->=20
->> And then "with only support for recent Intel machines" could also =
-imply
->> HAP-only; disabling shadow code (which also is already possible) will
->> alone save almost 10k LOC (counting .c files only).
->=20
-> I have just run `make cloc' on x86 with the smallest possible
-> configuration (HVM only):
->=20
->=20
-> http://cloc.sourceforge.net <http://cloc.sourceforge.net/> v 1.60  =
-T=3D0.87 s (370.3 files/s, 255808.4 lines/s)
-> =
---------------------------------------------------------------------------=
------
-> Language                     files          blank        comment       =
-    code
-> =
---------------------------------------------------------------------------=
------
-> C                              309          33238          29432       =
-  157001
-> Assembly                        14            466            531       =
-    2435
-> =
---------------------------------------------------------------------------=
------
-> SUM:                           323          33704          29963       =
-  159436
-> =
---------------------------------------------------------------------------=
------
->=20
-> This is great! The last time I did the count it was above 220K LOC.  =
-We
-> should make more noise about this -- it is a major.
-
-@Wei: the binary size data is not that impressive. Would it be possible =
-to do the make cloc on HVM, PV and mixed?
-I can include this into the PR for 4.12. Sorry for slightly hi-jacking =
-the thread.
-Lars=
-
---Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
-class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 14 Feb 2019, at 18:32, Stefano Stabellini &lt;<a =
-href=3D"mailto:sstabellini@kernel.org" =
-class=3D"">sstabellini@kernel.org</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><span =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">On Thu, 14 =
-Feb 2019, Jan Beulich wrote:</span><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><blockquote type=3D"cite" =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; orphans: auto; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; widows: auto; word-spacing: =
-0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><blockquote type=3D"cite" =
-class=3D""><blockquote type=3D"cite" class=3D""><blockquote type=3D"cite" =
-class=3D"">On 13.02.19 at 20:11, &lt;<a =
-href=3D"mailto:sstabellini@kernel.org" =
-class=3D"">sstabellini@kernel.org</a>&gt; wrote:<br =
-class=3D""></blockquote></blockquote>On Wed, 13 Feb 2019, Wei Liu =
-wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">On Tue, Feb =
-12, 2019 at 09:34:25PM -0500, Daniel P. Smith wrote:<br =
-class=3D""><blockquote type=3D"cite" class=3D"">Greetings,<br =
-class=3D""><br class=3D"">On the 11/14/18 Xen x86 community call a =
-discussion was initiated about<br class=3D"">using Kconfig to build =
-minimized versions of Xen for security, safety<br class=3D"">and other =
-certification requirements. After some offline discussions<br =
-class=3D"">with Xen contributors I realized that a variety of efforts =
-each with<br class=3D"">their own respective goals are underway,<br =
-class=3D""><br class=3D"">- nested virtualization<br class=3D"">- mixed =
-criticality architectures<br class=3D"">- reducing trusted =
-componentary<br class=3D"">- combining hardware protection of =
-virtualization with performance and<br class=3D"">ease-of-use of =
-containers<br class=3D""><br class=3D"">These efforts use hypervisors in =
-different roles, all which Xen is<br class=3D"">capable of meeting. =
-Today Xen's utility comes at the expense of carrying<br =
-class=3D"">features necessary for one role to be present in another role =
-where it<br class=3D"">is not required, e.g. PV interfaces that may not =
-be essential in an ARM<br class=3D"">mixed criticality deployment.<br =
-class=3D""><br class=3D"">The initial focus will be to explore and =
-document the range of possible<br class=3D"">use cases that are of =
-interest to the Xen community. This will be the<br class=3D"">input to a =
-design document that is crafted in conjunction with the Xen<br =
-class=3D"">maintainers, to identify possible approaches to extend the =
-existing<br class=3D"">Kconfig infrastructure to produce tailored =
-instances of Xen.<br class=3D""><br class=3D"">If you are interested in =
-participating in this effort, please reply to<br class=3D"">this thread =
-to outline possible use cases, design constraints and other<br =
-class=3D"">considerations for improving Xen's Kconfig infrastructure to =
-support<br class=3D"">tailoring for specific use cases.<br class=3D""><br =
-class=3D""></blockquote><br class=3D"">My impression from the community =
-call is that you want to provide<br class=3D"">smallish configurations =
-for different use cases.<br class=3D""><br class=3D"">The Kconfig =
-infrastructure is already able to do what you want as far as<br =
-class=3D"">I can tell. &nbsp;You can easily feed it a base config file =
--- see files<br class=3D"">under automation/configs/x86/. &nbsp;What =
-sort of extension is needed in your<br class=3D"">opinion?<br =
-class=3D""><br class=3D"">As use case goes, it would be a good start if =
-you just submit something<br class=3D"">you care about.<br =
-class=3D""></blockquote><br class=3D"">I mentioned on the call that a =
-good first start could be a kconfig that<br class=3D"">allows to build =
-an hypervisor binary with only support for PVH and only<br =
-class=3D"">support for recent Intel machines, with the goal of =
-minimizing the code<br class=3D"">base to less than 100K LOC.<br =
-class=3D""></blockquote><br class=3D"">"With only support for PVH" =
-(which really means HVM) we already have.<br class=3D"">"With only =
-support for recent Intel machines" would require adding new<br =
-class=3D"">Kconfig options first, to control Intel, AMD, etc separately, =
-and to then<br class=3D"">further somehow separate "old" from "new" =
-(which may turn out not<br class=3D"">very easy to do without a lot of =
-#ifdef-ary or other code churn). I'm<br class=3D"">not aware of =
-something like this existing on Linux either - all I'm aware<br =
-class=3D"">of there is a means to control what -m&lt;arch&gt; option =
-might be passed<br class=3D"">to the compiler, but without disabling any =
-source code from getting<br class=3D"">compiled.<br =
-class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">I was thinking along the lines of having options to disable =
-drivers for</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">older timers =
-and older interrupt controllers that are not needed on</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">recent =
-machines.</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><blockquote type=3D"cite" style=3D"font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; orphans: auto; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; =
--webkit-text-stroke-width: 0px; text-decoration: none;" class=3D"">And =
-then "with only support for recent Intel machines" could also imply<br =
-class=3D"">HAP-only; disabling shadow code (which also is already =
-possible) will<br class=3D"">alone save almost 10k LOC (counting .c =
-files only).<br class=3D""></blockquote><br style=3D"caret-color: rgb(0, =
-0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">I have just run `make cloc' on x86 with the smallest =
-possible</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">configuration =
-(HVM only):</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><a href=3D"http://cloc.sourceforge.net/" =
-style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; orphans: auto; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; widows: auto; word-spacing: =
-0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" =
-class=3D"">http://cloc.sourceforge.net</a><span style=3D"caret-color: =
-rgb(0, 0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: =
-normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
-normal; text-align: start; text-indent: 0px; text-transform: none; =
-white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D""><span class=3D"Apple-converted-space">&nbsp;</span>v 1.60 =
-&nbsp;T=3D0.87 s (370.3 files/s, 255808.4 lines/s)</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" =
-class=3D"">---------------------------------------------------------------=
-----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">Language =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blank =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code</span><br=
- style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" =
-class=3D"">---------------------------------------------------------------=
-----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">C =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;&nbsp;&nbsp;&nbsp;309 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33238 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;29432 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;157001</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" class=3D"">Assembly =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;466 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;531 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2435</span><br=
- style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" =
-class=3D"">---------------------------------------------------------------=
-----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">SUM: =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
-p;&nbsp;323 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;33704 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;29963 =
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;159436</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
-Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
-normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none; float: none; display: inline !important;" =
-class=3D"">---------------------------------------------------------------=
-----------------</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><br style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">This is great! The last time I did the count it was above =
-220K LOC. &nbsp;We</span><br style=3D"caret-color: rgb(0, 0, 0); =
-font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
-0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
-font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
-text-align: start; text-indent: 0px; text-transform: none; white-space: =
-normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
-text-decoration: none; float: none; display: inline !important;" =
-class=3D"">should make more noise about this -- it is a major.</span><br =
-style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
-font-size: 11px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; =
-word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
-none;" class=3D""></div></blockquote></div><br class=3D""><div =
-class=3D"">@Wei: the binary size data is not that impressive. Would it =
-be possible to do the make cloc on HVM, PV and mixed?</div><div =
-class=3D"">I can include this into the PR for 4.12. Sorry for slightly =
-hi-jacking the thread.</div><div class=3D"">Lars</div></body></html>=
-
---Apple-Mail=_A8EE0A2F-66F4-4E9D-8DE6-9604584B1EC8--
-
-
---===============8338038163610917132==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8338038163610917132==--
+ZmxpZ2h0IDEzMzI1NCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMzI1NC8KCkZhaWx1cmVzIGFu
+ZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFu
+ZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgog
+YnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAg
+ICAgIGJyb2tlbgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwo
+NCkgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMzMDA1CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1
+Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAg
+ICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2
+NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
+ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3Vw
+cG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwg
+ICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFz
+cwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIGYx
+NzhhMDBjMzAxNzNjMGIyNjhkOTkxNjBlMTlhZDI5OWIxODIzYTIKYmFzZWxpbmUgdmVyc2lvbjoK
+IHhlbiAgICAgICAgICAgICAgICAgIDQ1NTMwMTcxNmUxZmYzNThjYjc5MzY3MjEzMDAzZmJhNzcx
+ZGQ0NjYKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzMzAwNSAgMjAxOS0wMi0wNyAxNDowMDozMiBa
+ICAgIDcgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzMwMTEgIDIwMTktMDItMDcgMTg6MDA6
+MzYgWiAgICA3IGRheXMgICA0MiBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMzMyMDAg
+IDIwMTktMDItMTIgMTY6MDA6NTYgWiAgICAyIGRheXMgICAxOSBhdHRlbXB0cwoKLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tClBlb3Bs
+ZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBBbmRyZXcgQ29vcGVyIDxhbmRy
+ZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5sYXBAY2l0
+cml4LmNvbT4KICBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KICBKYW4g
+QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2Uu
+Y29tPgogIEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgogIE1pY2hhZWwgVGF1dHNj
+aG5pZyA8dGF1dHNjaG5AYW1hem9uLmNvLnVrPgogIE5vcmJlcnQgTWFudGhleSA8bm1hbnRoZXlA
+YW1hem9uLmNvbT4KICBOb3JiZXJ0IE1hbnRoZXkgPG5tYW50aGV5QGFtYXpvbi5kZT4KICBTdGVm
+YW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CiAgU3RlZmFubyBTdGFiZWxs
+aW5pIDxzdGVmYW5vc0B4aWxpbnguY29tPgogIFRpbSBEZWVnYW4gPHRpbUB4ZW4ub3JnPgogIFdl
+aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1h
+bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
+cyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
+NjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9j
+a2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBv
+biBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwpp
+bWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2
+YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVz
+dC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBn
+ZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVz
+dC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMu
+eGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoK
+VGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4u
+b3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKYnJva2VuLWpvYiBidWlsZC1hcm02
+NC14c20gYnJva2VuCmJyb2tlbi1zdGVwIGJ1aWxkLWFybTY0LXhzbSBob3N0LWluc3RhbGwoNCkK
+Ck5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBmMTc4YTAwYzMwMTczYzBiMjY4ZDk5MTYwZTE5YWQy
+OTliMTgyM2EyCkF1dGhvcjogTm9yYmVydCBNYW50aGV5IDxubWFudGhleUBhbWF6b24uZGU+CkRh
+dGU6ICAgVHVlIEZlYiAxMiAxNToyMDoxNSAyMDE5ICswMTAwCgogICAgeDg2L2h2bTogYmxvY2sg
+c3BlY3VsYXRpdmUgb3V0LW9mLWJvdW5kIGFjY2Vzc2VzCiAgICAKICAgIFRoZXJlIGFyZSBtdWx0
+aXBsZSBhcnJheXMgaW4gdGhlIEhWTSBpbnRlcmZhY2UgdGhhdCBhcmUgYWNjZXNzZWQKICAgIHdp
+dGggaW5kaWNlcyB0aGF0IGFyZSBwcm92aWRlZCBieSB0aGUgZ3Vlc3QuIFRvIGF2b2lkIHNwZWN1
+bGF0aXZlCiAgICBvdXQtb2YtYm91bmQgYWNjZXNzZXMsIHdlIHVzZSB0aGUgYXJyYXlfaW5kZXhf
+bm9zcGVjIG1hY3JvLgogICAgCiAgICBXaGVuIGJsb2NraW5nIHNwZWN1bGF0aXZlIG91dC1vZi1i
+b3VuZCBhY2Nlc3Nlcywgd2UgY2FuIGNsYXNzaWZ5IGFycmF5cwogICAgaW50byBkeW5hbWljIGFy
+cmF5cyBhbmQgc3RhdGljIGFycmF5cy4gV2hlcmUgdGhlIGZvcm1lciBhcmUgYWxsb2NhdGVkCiAg
+ICBkdXJpbmcgcnVuIHRpbWUsIHRoZSBzaXplIG9mIHRoZSBsYXR0ZXIgaXMga25vd24gZHVyaW5n
+IGNvbXBpbGUgdGltZS4KICAgIE9uIHN0YXRpYyBhcnJheXMsIGNvbXBpbGVyIG1pZ2h0IGJlIGFi
+bGUgdG8gYmxvY2sgc3BlY3VsYXRpdmUgYWNjZXNzZXMKICAgIGluIHRoZSBmdXR1cmUuCiAgICAK
+ICAgIFRoaXMgaXMgcGFydCBvZiB0aGUgc3BlY3VsYXRpdmUgaGFyZGVuaW5nIGVmZm9ydC4KICAg
+IAogICAgUmVwb3J0ZWQtYnk6IFBhd2VsIFdpZWN6b3JraWV3aWN6IDx3aXBhd2VsQGFtYXpvbi5k
+ZT4KICAgIFNpZ25lZC1vZmYtYnk6IE5vcmJlcnQgTWFudGhleSA8bm1hbnRoZXlAYW1hem9uLmRl
+PgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIFJl
+bGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCA1
+NmQ4ZDAxMTlkMjcwZjg0NmM2YzQ5NDM3MTJiOGEyMWZiZTVkNGQwCkF1dGhvcjogSmFuIEJldWxp
+Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgpEYXRlOiAgIFR1ZSBGZWIgMTIgMTE6NTQ6NTcgMjAxOSAr
+MDEwMAoKICAgIFZNWDogZG9uJ3QgaWdub3JlIFAyTSBzZXR1cCBlcnJvcgogICAgCiAgICBzZXRf
+bW1pb19wMm1fZW50cnkoKSBtYXkgZmFpbCwgaW4gcGFydGljdWxhciB3aXRoIC1FTk9NRU0uIERv
+bid0IGlnbm9yZQogICAgc3VjaCBhbiBlcnJvciwgYnV0IGluc3RlYWQgY2F1c2UgZG9tYWluIGNy
+ZWF0aW9uIHRvIGZhaWwgaW4gc3VjaCBhIGNhc2UuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IEph
+biBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICAgIEFja2VkLWJ5OiBBbmRyZXcgQ29vcGVy
+IDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgQWNrZWQtYnk6IEtldmluIFRpYW4gPGtl
+dmluLnRpYW5AaW50ZWwuY29tPgogICAgUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8
+amdyb3NzQHN1c2UuY29tPgoKY29tbWl0IDg4YjkyYzM4MjBjZmZlZDRiNGFiZWIxMzllZGMyY2Jk
+ODI4NmNiMTIKQXV0aG9yOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6ICAg
+VHVlIEZlYiAxMiAxMTo1NDowNyAyMDE5ICswMTAwCgogICAgaW9tbXU6IGZpeCBpb21tdV9vcHMg
+aW5pdGlhbGl6YXRpb24KICAgIAogICAgQ29tbWl0IDMyYTVlYTAwZWM3NWVmNTNlICgiSU9NTVUv
+eDg2OiByZW1vdmUgaW5kaXJlY3Rpb24gZnJvbSBjZXJ0YWluCiAgICBJT01NVSBob29rIGFjY2Vz
+c2VzIikgaW50cm9kdWNlZCBpb21tdV9vcHMgaW5pdGlhbGl6ZWQgYXQgYm9vdCB0aW1lCiAgICB3
+aXRoIGRhdGEgZGVjbGFyZWQgYXMgX19pbml0Y29uc3RyZWwuCiAgICAKICAgIE9uIEludGVsIHN5
+c3RlbXMgdGhlcmUgaXMgYW5vdGhlciBwYXRoIHdoZXJlIGlvbW11X29wcyBpcyBpbml0aWFsaXpl
+ZAogICAgYW5kIHRoaXMgcGF0aCBpcyByZWxldmFudCBvbiByZXN1bWUgYWZ0ZXIgcmV0dXJuaW5n
+IGZyb20gc3lzdGVtIHN1c3BlbmQuCiAgICBBcyB0aGUgaW5pdGlhbGl6YXRpb24gZGF0YSBpcyBu
+byBsb25nZXIgYWNjZXNzaWJsZSBpbiB0aGlzIGNhc2UgdGhhdAogICAgc2Vjb25kIGluaXRpYWxp
+emF0aW9uIG11c3QgYmUgZHJvcHBlZCBpbiBjYXNlIHRoZSBzeXN0ZW0gaXNuJ3QganVzdAogICAg
+Ym9vdGluZy4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
+c2UuY29tPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
+ICAgIEFja2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGludGVsLmNvbT4KICAgIFJlbGVh
+c2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCAwOWZj
+NGRlNGE4ZWJiMzg5NjQxYjhiOGE2MzJlZmNiN2NhODgwZTA4CkF1dGhvcjogTm9yYmVydCBNYW50
+aGV5IDxubWFudGhleUBhbWF6b24uY29tPgpEYXRlOiAgIFdlZCBGZWIgNiAxNTowOTozMyAyMDE5
+ICswMTAwCgogICAgYXNtOiBoYW5kbGUgY29tbWVudHMgd2hlbiBjcmVhdGluZyBoZWFkZXIgZmls
+ZQogICAgCiAgICBJbiB0aGUgZWFybHkgc3RlcHMgb2YgY29tcGlsYXRpb24sIHRoZSBhc20gaGVh
+ZGVyIGZpbGVzIGFyZSBjcmVhdGVkLCBzdWNoCiAgICBhcyBpbmNsdWRlL2FzbS0kKFRBUkdFVF9B
+UkNIKS9hc20tb2Zmc2V0cy5oLiBUaGVzZSBmaWxlcyBkZXBlbmQgb24gdGhlCiAgICBhc3NlbWJs
+eSBmaWxlIGFyY2gvJChUQVJHRVRfQVJDSCkvYXNtLW9mZnNldHMucywgd2hpY2ggaXMgZ2VuZXJh
+dGVkCiAgICBiZWZvcmUuIERlcGVuZGluZyBvbiB0aGUgdXNlZCB0b29sY2hhaW4sIHRoZXJlIG1p
+Z2h0IGJlIGNvbW1lbnRzIGluIHRoZQogICAgYXNzZW1ibHkgZmlsZXMuIEVzcGVjaWFsbHkgdGhl
+IGdvdG8tZ2NjIGNvbXBpbGVyIG9mIHRoZSBib3VuZGVkIG1vZGVsCiAgICBjaGVja2VyIENCTUMg
+YWRkcyBjb21tZW50cyB0aGF0IHN0YXJ0IHdpdGggYSAnIycgc3ltYm9sIGF0IHRoZSBiZWdpbm5p
+bmcKICAgIG9mIHRoZSBsaW5lLgogICAgCiAgICBUaGlzIGNvbW1pdCBhZGRzIGhhbmRsaW5nIGNv
+bW1lbnRzIGluIGFzc2VtYmxlciBkdXJpbmcgdGhlIGNyZWF0aW9uIG9mIHRoZQogICAgYXNtIGhl
+YWRlciBmaWxlcywgZXNwZWNpYWxseSBpZ25vcmluZyBsaW5lcyB0aGF0IHN0YXJ0IHdpdGggJyMn
+LCB3aGljaAogICAgaW5kaWNhdGUgY29tbWVudHMgZm9yIGJvdGggQVJNIGFuZCB4ODYgYXNzZW1i
+bGVyLiBUaGUgdXNlZCB0b29sIGdvdG8tYXMKICAgIHByb2R1Y2VzIGV4YWN0bHkgY29tbWVudHMg
+b2YgdGhpcyBraW5kLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBOb3JiZXJ0IE1hbnRoZXkgPG5t
+YW50aGV5QGFtYXpvbi5kZT4KICAgIFNpZ25lZC1vZmYtYnk6IE1pY2hhZWwgVGF1dHNjaG5pZyA8
+dGF1dHNjaG5AYW1hem9uLmNvLnVrPgogICAgUmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1
+bGljaEBzdXNlLmNvbT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9z
+c0BzdXNlLmNvbT4KCmNvbW1pdCBkMDRiZjFlYjY1NmJlOGIyMTMxZDA4YzdlMzJjZmYzNDM1NTZj
+ZmE4CkF1dGhvcjogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpEYXRlOiAgIE1vbiBG
+ZWIgMTEgMDk6MDk6MTMgMjAxOSArMDEwMAoKICAgIHg4Ni9zaGFkb3c6IGFkanVzdCBtaW5pbXVt
+IGFsbG9jYXRpb24gY2FsY3VsYXRpb25zCiAgICAKICAgIEEgcHJldmlvdXNseSBiYWQgc2l0dWF0
+aW9uIGhhcyBiZWNvbWUgd29yc2Ugd2l0aCB0aGUgZWFybHkgc2V0dGluZyBvZgogICAgLT5tYXhf
+dmNwdXM6IFRoZSB2YWx1ZSByZXR1cm5lZCBieSBzaGFkb3dfbWluX2FjY2VwdGFibGVfcGFnZXMo
+KSBoYXMKICAgIGZ1cnRoZXIgZ3Jvd24sIGFuZCBoZW5jZSBub3cgaG9sZHMgYmFjayBldmVuIG1v
+cmUgbWVtb3J5IGZyb20gdXNlIGZvcgogICAgdGhlIHAybS4KICAgIAogICAgTWFrZSBzaF9taW5f
+YWxsb2NhdGlvbigpIGFjY291bnQgZm9yIGFsbCBwMm0gbWVtb3J5IG5lZWRlZCBmb3IKICAgIHNo
+YWRvd19lbmFibGUoKSB0byBzdWNjZWVkIGR1cmluZyBkb21haW4gY3JlYXRpb24gKGF0IHdoaWNo
+IHBvaW50IHRoZQogICAgZG9tYWluIGhhcyBubyBtZW1vcnkgYXQgYWxsIGFsbG9jYXRlZCB0byBp
+dCB5ZXQsIGFuZCBoZW5jZSB1c2Ugb2YKICAgIGQtPnRvdF9wYWdlcyBpcyBtZWFuaW5nbGVzcyku
+CiAgICAKICAgIEFsc28gbWFrZSBzaGFkb3dfbWluX2FjY2VwdGFibGVfcGFnZXMoKSBubyBsb25n
+ZXIgbmVlZGxlc3NseSBhZGQgMSB0bwogICAgdGhlIHZDUFUgY291bnQuCiAgICAKICAgIEZpbmFs
+bHkgbWFrZSB0aGUgZGVidWdnaW5nIHByaW50aygpIGluIHNoYWRvd19hbGxvY19wMm1fcGFnZSgp
+IGEgbGl0dGxlCiAgICBtb3JlIHVzZWZ1bCBieSBsb2dnaW5nIHNvbWUgb2YgdGhlIHJlbGV2YW50
+IGRvbWFpbiBzZXR0aW5ncy4KICAgIAogICAgUmVwb3J0ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kg
+PHJvZ2VyLnBhdUBjaXRyaXguY29tPgogICAgU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpi
+ZXVsaWNoQHN1c2UuY29tPgogICAgUmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2Vy
+LnBhdUBjaXRyaXguY29tPgogICAgQWNrZWQtYnk6IEdlb3JnZSBEdW5sYXAgPGdlb3JnZS5kdW5s
+YXBAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5OiBUaW0gRGVlZ2FuIDx0aW1AeGVuLm9yZz4KICAg
+IFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1p
+dCBhY2EyMTQ0MjQ5OWMwNGI3MGQ4NDE2NGI0Njc0NGIzNWVlN2I4YmY0CkF1dGhvcjogR2Vvcmdl
+IER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgpEYXRlOiAgIFRodSBGZWIgNyAxMjo0
+MToxNyAyMDE5ICswMDAwCgogICAgZG9jczogZmVhdHVyZXMvcWVtdS1kZXByaXYgZm9ybWF0dGlu
+ZyBmaXhlcwogICAgCiAgICBOZWVkIGEgc3BhY2UgYmV0d2VlbiB0aGUgcGFyYWdyYXBoIGFuZCB0
+aGUgbGlzdCBzbyBwYW5kb2Mga25vd3MgaXQncyBhCiAgICBsaXN0LgogICAgCiAgICBTaWduZWQt
+b2ZmLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CiAgICBBY2tl
+ZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIFJlbGVh
+c2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCA5ZGI3
+NzdkZGEzM2JhOTJjMGEwZmVjYTc2ZGU1YmJhNTczNThlYmNjCkF1dGhvcjogR2VvcmdlIER1bmxh
+cCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgpEYXRlOiAgIFRodSBGZWIgNyAxMjowNTo0MyAy
+MDE5ICswMDAwCgogICAgZG9jczogVXBkYXRlIGNyZWRpdC9jcmVkaXQyIGZlYXR1cmUgZG9jcyBy
+ZWZsZWN0aW5nIG5ldyBkZWZhdWx0IHNjaGVkdWxlcgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBH
+ZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTogSmFu
+IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogICAgUmVsZWFzZS1hY2tlZC1ieTogSnVlcmdl
+biBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKY29tbWl0IDdiNTI3OGIyOGY4ZmJjZDQ0MDJlNDUy
+MGQ3YTVkNjA3ZDRhOTk3YTcKQXV0aG9yOiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0
+cml4LmNvbT4KRGF0ZTogICBUaHUgRmViIDcgMTU6MDI6MjcgMjAxOSArMDAwMAoKICAgIHRvb2xz
+OiBpbml0IHNjcmlwdHM6IG1ha2UgWEVOX1JVTl9ESVIgYW5kIFhFTl9MT0NLX0RJUiBtb2RlIDcw
+MAogICAgCiAgICBUaGVzZSBkaXJlY3RvcmllcyBvdWdodCBub3QgdG8gYmUgZXZlbiB3b3JsZC1y
+ZWFkYWJsZS4gIElmIHRoaXMgc2NyaXB0CiAgICBmb3Igc29tZSByZWFzb24gcnVucyB3aXRoIGEg
+bGF4IHVtYXNrIHRoZXkgbWlnaHQgYmUgY3JlYXRlZAogICAgb3Zlcmx5LXdyaXRlYWJsZS4gIEF2
+b2lkIGFueSBzdWNoIGJ1ZyBieSBzZXR0aW5nIHRoZSBtb2RlIGV4cGxpY2l0bHkuCiAgICAKICAg
+IFNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgog
+ICAgQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CiAgICBSZWxlYXNlLWFj
+a2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQgMGM0YTM4YzA5
+OGY5YmZmZWIzM2Y4Y2Y4OGFiZGVhNGIwZjlhOTA3MApBdXRob3I6IElhbiBKYWNrc29uIDxpYW4u
+amFja3NvbkBldS5jaXRyaXguY29tPgpEYXRlOiAgIFRodSBGZWIgNyAxNTowMjoyNiAyMDE5ICsw
+MDAwCgogICAgdG9vbHM6IGluaXQgc2NyaXB0czogeGVuY29tbW9uczogRml4ZXMgdG8gRGVzY3Jp
+cHRpb24KICAgIAogICAgYG5lZWVkZWQnIGlzIGEgdHlwby4gIEFuZCB4ZW5kIGlzIGxvbmcgZ29u
+ZS4KICAgIAogICAgTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6
+IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgogICAgQWNrZWQtYnk6IFdl
+aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CiAgICBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2Vu
+IEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQgMDEwOTdlMDE5NDMyMWQyNzI2MjUxM2Nm
+MTI5MWZkZGZlYTE2MDZjMwpBdXRob3I6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRy
+aXguY29tPgpEYXRlOiAgIFRodSBGZWIgNyAxNTowMjoyNSAyMDE5ICswMDAwCgogICAgdG9vbHM6
+IGluaXQgc2NyaXB0czogeGVuY29tbW9uczogUHJvdmlkZXMgYHhlbicKICAgIAogICAgSXQgaXMg
+dXNlZnVsIHRvIGhhdmUgYSBzaW5nbGUgYHhlbicgZmFjaWxpdHkgKGluIHRoZSBMU0IgUHJvdmlk
+ZXMKICAgIG5hbWVzcGFjZSkuICBUaGF0IGFsbG93cyBvdGhlciBmYWNpbGl0aWVzIHRvIHNwZWNp
+ZnkgdGhhdCB0aGV5IHNob3VsZAogICAgZ28gYWZ0ZXIgYHhlbicgd2l0aG91dCBuZWVkaW5nIHRv
+IGtub3cgdGhlIGltcGxlbWVudGF0aW9uIGRldGFpbHMuCiAgICAKICAgIFRoaXMgc2VydmljZSBu
+YW1lIGlzIGFscmVhZHkgUHJvdmlkZSdkIGJ5IHRoZSAoZmFpcmx5IGRpZmZlcmVudCkgaW5pdAog
+ICAgc2NyaXB0cyB1c2VkIGluIERlYmlhbi4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSWFuIEph
+Y2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTogV2VpIExpdSA8
+d2VpLmxpdTJAY2l0cml4LmNvbT4KICAgIFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3Mg
+PGpncm9zc0BzdXNlLmNvbT4KCmNvbW1pdCBiNGRmNzNkZTQ5Mzk1NGM0NGYyNDBmNzg3NzljOWJk
+Mzc4MmUxNTcyCkF1dGhvcjogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwu
+b3JnPgpEYXRlOiAgIFR1ZSBGZWIgNSAxMzozODo1MyAyMDE5IC0wODAwCgogICAgeGVuL2FybTog
+Z2ljLXYyOiBkZWFjdGl2YXRlIGludGVycnVwdHMgZHVyaW5nIGluaXRpYWxpemF0aW9uCiAgICAK
+ICAgIEludGVycnVwdHMgY291bGQgYmUgQUNUSVZFIGF0IGJvb3QuIE1ha2Ugc3VyZSB0byBkZWFj
+dGl2YXRlIHRoZW0gZHVyaW5nCiAgICBpbml0aWFsaXphdGlvbi4KICAgIAogICAgU2lnbmVkLW9m
+Zi1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzdGVmYW5vc0B4aWxpbnguY29tPgogICAgUmV2aWV3
+ZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgICBDQzoganVsaWVu
+LmdyYWxsQGFybS5jb20KICAgIENDOiBwZW5nLmZhbkBueHAuY29tCiAgICBDQzogamdyb3NzQHN1
+c2UuY29tCihxZW11IGNoYW5nZXMgbm90IGluY2x1ZGVkKQoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
