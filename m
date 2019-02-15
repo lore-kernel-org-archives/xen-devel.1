@@ -1,24 +1,22 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Organising a workshop to solve safety certification
- related questions (March 25/26, Cambridge, UK, Citrix)
-Date: Fri, 15 Feb 2019 18:38:37 +0000
-Message-ID: <B996BF41-718C-431F-AF98-67A6BF7017A1@gmail.com>
-References: <60FE8A49-D6C2-4DBD-A532-3D635C93836E@xenproject.org>
- <eaf19b34-0ddf-b383-12f6-4f74990567ce@citrix.com>
- <34B5407E-C0FE-4CB2-8CBD-F8026C833878@gmail.com>
- <D5958DF1-6424-45F6-9BF8-AAC316B73A7A@gmail.com>
- <077376B5-ACEE-4DA1-ACA7-FC231E3962AD@gmail.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: multipart/mixed; boundary="===============4724177134165380512=="
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: MCE/EDAC Status/Updating?
+Date: Fri, 15 Feb 2019 18:42:22 +0000
+Message-ID: <613e8bfe-ddcd-6927-67f5-9f3fe247720c@citrix.com>
+References: <20190215042334.GA74835@mattapan.m5p.com>
+ <5C669B690200007800216F34@prv1-mh.provo.novell.com>
+ <20190215182023.GA80175@mattapan.m5p.com>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=K5SY=QW=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1guiNo-0002rr-7L
- for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 18:38:44 +0000
-Received: by mail-wm1-x343.google.com with SMTP id j125so10570452wmj.1
- for <xen-devel@lists.xenproject.org>; Fri, 15 Feb 2019 10:38:41 -0800 (PST)
-In-Reply-To: <077376B5-ACEE-4DA1-ACA7-FC231E3962AD@gmail.com>
+ <SRS0=yVz/=QW=citrix.com=prvs=942cbbc70=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1guiRP-0003di-Oz
+ for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 18:42:27 +0000
+In-Reply-To: <20190215182023.GA80175@mattapan.m5p.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,369 +25,90 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, rromoff@linuxfoundation.org, Nancy McGrory <nmcgrory@linuxfoundation.org>
-Cc: Artem Mygaiev <Artem_Mygaiev@epam.com>, Stefano Stabellini <stefanos@xilinx.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Richard Bellairs <Richard_Bellairs@prqa.com>, Hisao Munakata <hisao.munakata.vt@renesas.com>, George Dunlap <george.dunlap@citrix.com>, Alex Agizim <Alex_Agizim@epam.com>, Rich Persaud <persaur@gmail.com>, Committers <committers@xenproject.org>, Saraschandra Reddy Madem <sarascha@xilinx.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, "vfachin@de.adit-jv.com" <vfachin@de.adit-jv.com>, Giulio Corradi <giulioc@xilinx.com>, Irby Thompson <irby@starlab.io>, Matt Spencer <Matt.Spencer@arm.com>, Oscar Ballan <oballan@xilinx.com>, Jarvis Roach <Jarvis.Roach@dornerworks.com>
+To: Elliott Mitchell <ehem+xen@m5p.com>, Jan Beulich <JBeulich@suse.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4724177134165380512==
-Content-Type: multipart/alternative;
-	boundary="Apple-Mail=_0CE187D8-9D07-4B1E-BF08-5C533C91E14B"
-
-
---Apple-Mail=_0CE187D8-9D07-4B1E-BF08-5C533C91E14B
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain;
-	charset=us-ascii
-
-Hi all,
-
-apologies this took a while. 5 weeks to go to the event!
-I created =
-https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_Safety_Cert=
-ification =
-<https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_Safety_Cer=
-tification> which contains information about the venue, hotels and =
-travel
-
-I also added a registration form: please fill this out if you want to =
-attend (even if just remotely): see =
-https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_Safety_Cert=
-ification#Registration_.28both_in_person_and_for_remote_participation.29 =
-<https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_Safety_Cer=
-tification#Registration_.28both_in_person_and_for_remote_participation.29>=
-
-
-I started to put in some thoughts with regards to the agenda: I will be =
-looking for volunteers to help with some of the content. I am working =
-with EPAM on some of these, but others are welcome to join.
-A scratchpad of ideas which will eventually become an agenda are here: =
-https://docs.google.com/document/d/1aKjxDLkEnPZ_0gHgAv4xy9iPv6hVBkIC_wiA0r=
-ZzRms/edit =
-<https://docs.google.com/document/d/1aKjxDLkEnPZ_0gHgAv4xy9iPv6hVBkIC_wiA0=
-rZzRms/edit>=20
-
-If you need a visa invitation letter, there is a 3 working day =
-turnaround. Please contact me via my Citrix email address as outlined in =
-the Wiki page if you need an invitation letter
-
-Best Regards
-Lars
-
-
-> On 4 Feb 2019, at 20:25, Lars Kurth <lars.kurth.xen@gmail.com> wrote:
->=20
-> Hi all,
->=20
-> from my perspective we have enough momentum to move forward, albeit =
-some prospective attendees are still confirming their travel plans. I =
-can accommodate a maximum if 15, but possibly, a few more. With this in =
-Mind, please start booking flights.
->=20
-> Location:
-> The Citrix office in Milton, just outside of Cambridge
-> Citrix Systems:
-> 101 Cambridge Science Park Rd, Milton
-> Cambridge CB4 0FY
-> UK
->=20
-> Timing
-> The event will be held on Monday March 25, and ends on the 26th. I =
-expect days to go from 9:00 to 17:00 and some beverages and food will be =
-provided
-> EPAM will host an evening event on the 25th
->=20
-> Agenda
-> With regards the agenda, I will work selected community members on it.
-> The agenda is yours, so please prepare and be specific about the =
-technical, community, process and maybe financial problems we have to =
-solve.
->=20
-> Remote Participation
-> I will still need to test this and provide more feedback
->=20
-> Registration
-> I will set up an ad-hoc google doc
->=20
-> Getting To Cambridge/Accommodation
-> London Stansted is the easiest airport to fly to: there is a direct =
-train that goes frequently and take 30-40 minutes
-> You may have to use London Heathrow you come from the US, China or =
-Japan. In that case, you can take a fixed rate taxi: see =
-http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heathrow-Airpor=
-t =
-<http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heathrow-Airpo=
-rt>
->=20
-> The key question you will have to decide upon is whether you stay in =
-the town centre, which is stunning, but it may take 30 mins to the =
-Citrix office, or whether you stay close tp the office. I will provide =
-more info in due time
->=20
-> Regards
-> Lars=20
->=20
->> On 23 Jan 2019, at 10:16, Lars Kurth <lars.kurth.xen@gmail.com =
-<mailto:lars.kurth.xen@gmail.com>> wrote:
->>=20
->> Hi all,
->>=20
->> it looks as if March 25/26 in Frankfurt or Cambridge is the best =
-option. For Matt, this would mean that he can only attend the first day, =
-but I believe this would be OK. Maybe Robin can attend the second day, =
-instead of Matt. Before we finalise the dates, I will need to secure the =
-meeting space. I will be able to do this in the next few days and will =
-send an update as soon as this is done.
->>=20
->> Note that we had a few people on this list which have replied to me =
-privately. Please let me know privately or publicly whether March 25/26 =
-would be suitable for you. We can in parallel work on the agenda.
->> =20
->> Best Regards
->> Lars
->>=20
->>> On 16 Jan 2019, at 13:09, Lars Kurth <lars.kurth.xen@gmail.com =
-<mailto:lars.kurth.xen@gmail.com>> wrote:
->>>=20
->>>=20
->>>=20
->>>> On 16 Jan 2019, at 12:16, George Dunlap <george.dunlap@citrix.com =
-<mailto:george.dunlap@citrix.com>> wrote:
->>>>=20
->>>> On 1/8/19 5:59 PM, Lars Kurth wrote:
->>>>> What I need is=20
->>>>> - Raise your hands if you are interested=20
->>>>> - Let me know of date / location restrictions
->>>>> - We could try and so some of this via video conference: would you =
-be able to attend if we did open the meeting up to some remote =
-participation
->>>>=20
->>>> I'm interested.  All the dates mentioned should work for me.
->>>>=20
->>>> -George
->>>=20
->>> Hi all,
->>>=20
->>> to summarise!
->>>=20
->>> We have a good number of people and organisations interested from =
-pretty one everyone on the list, but it seems the dates won't work for =
-most people.=20
->>> Location wise: Germany (Frankfurt) and/or UK (Cambridge) work for =
-most, except for representatives from Dornerworks and Starlab, who would =
-dial in for some of the meetings=20
->>> There seems to be a slight bias for Cambridge, as we have most of =
-our maintainers there.=20
->>>=20
->>> Automotive vendors would be happy to align with automotive =
-meetings/events (even in Japan), but that won't work for the committers =
-as they won't normally be able to travel.=20
->>> I also have two organisations which could potentially host in =
-Cambridge and one in Germany (Frankfurt). But the venue depends partly =
-on the dates. This tells me, that we should choose either Frankfurt or =
-Cambridge for the event.
->>>=20
->>> In terms of numbers we are roughly looking at 10-12 who could attend =
-physically, but it could be more
->>>=20
->>> To move forward, I thought I would expend the time horizon a little =
-bit via the following doodle poll: =
-https://doodle.com/poll/anvfr2hk2t8gy9a8 =
-<https://doodle.com/poll/anvfr2hk2t8gy9a8>
->>> Note that you can specify suboptimal dates by clicking twice: also, =
-if you have any constraints on location, etc. feel free to make use of =
-the commenting feature.
->>>=20
->>> I will be in the US mid-March and thus excluded these dates. I also =
-excluded March 28/29: because of Brexit, it is possible that there would =
-be some travel chaos at least in the UK.=20
->>>=20
->>> Regards
->>> Lars
->>>=20
->>>=20
->>>=20
->>=20
->=20
-
-
---Apple-Mail=_0CE187D8-9D07-4B1E-BF08-5C533C91E14B
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/html;
-	charset=us-ascii
-
-<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
-charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
--webkit-nbsp-mode: space; line-break: after-white-space;" class=3D"">Hi =
-all,<div class=3D""><br class=3D""></div><div class=3D"">apologies this =
-took a while. 5 weeks to go to the event!</div><div class=3D"">I created =
-<a =
-href=3D"https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_Saf=
-ety_Certification" =
-class=3D"">https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_=
-Safety_Certification</a>&nbsp;which contains information about the =
-venue, hotels and travel</div><div class=3D""><br class=3D""></div><div =
-class=3D"">I also added a registration form: please fill this out if you =
-want to attend (even if just remotely): see&nbsp;<a =
-href=3D"https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_Saf=
-ety_Certification#Registration_.28both_in_person_and_for_remote_participat=
-ion.29" =
-class=3D"">https://wiki.xenproject.org/wiki/Developer_Meeting/March2019_-_=
-Safety_Certification#Registration_.28both_in_person_and_for_remote_partici=
-pation.29</a></div><div class=3D""><br class=3D""></div><div class=3D"">I =
-started to put in some thoughts with regards to the agenda: I will be =
-looking for volunteers to help with some of the content. I am working =
-with EPAM on some of these, but others are welcome to join.</div><div =
-class=3D"">A scratchpad of ideas which will eventually become an agenda =
-are here:&nbsp;<a =
-href=3D"https://docs.google.com/document/d/1aKjxDLkEnPZ_0gHgAv4xy9iPv6hVBk=
-IC_wiA0rZzRms/edit" =
-class=3D"">https://docs.google.com/document/d/1aKjxDLkEnPZ_0gHgAv4xy9iPv6h=
-VBkIC_wiA0rZzRms/edit</a>&nbsp;</div><div class=3D""><br =
-class=3D""></div><div class=3D"">If you need a visa invitation letter, =
-there is a 3 working day turnaround. Please contact me via my Citrix =
-email address as outlined in the Wiki page if you need an invitation =
-letter</div><div class=3D""><br class=3D""></div><div class=3D"">Best =
-Regards</div><div class=3D"">Lars</div><div class=3D""><br =
-class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 4 Feb 2019, at 20:25, Lars Kurth &lt;<a =
-href=3D"mailto:lars.kurth.xen@gmail.com" =
-class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><meta =
-http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii" =
-class=3D""><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: =
-space; line-break: after-white-space;" class=3D"">Hi all,<div =
-class=3D""><br class=3D""><div class=3D"">from my perspective we have =
-enough momentum to move forward, albeit some prospective attendees are =
-still confirming their travel plans. I can accommodate a maximum if 15, =
-but possibly, a few more. With this in Mind, please start booking =
-flights.</div><div class=3D""><br class=3D""></div><div class=3D""><b =
-class=3D"">Location:</b></div><div class=3D"">The Citrix office in =
-Milton, just outside of Cambridge</div><div class=3D"">Citrix =
-Systems:</div><div class=3D""><div class=3D"">101 Cambridge Science Park =
-Rd, Milton</div><div class=3D"">Cambridge CB4 0FY</div></div><div =
-class=3D"">UK</div><div class=3D""><br class=3D""></div><div class=3D""><b=
- class=3D"">Timing</b></div><div class=3D""><div class=3D"">The event =
-will be held on Monday March 25, and ends on the 26th. I expect days to =
-go from 9:00 to 17:00 and some beverages and food will be =
-provided</div></div><div class=3D"">EPAM will host an evening event on =
-the 25th</div><div class=3D""><br class=3D""></div><div class=3D""><div =
-class=3D""><b class=3D"">Agenda</b></div></div><div class=3D"">With =
-regards the agenda, I will work selected community members on =
-it.</div><div class=3D"">The agenda is yours, so please prepare and be =
-specific about the technical, community, process and maybe financial =
-problems we have to solve.</div><div class=3D""><br class=3D""></div><div =
-class=3D""><b class=3D"">Remote Participation</b></div><div class=3D"">I =
-will still need to test this and provide more feedback</div><div =
-class=3D""><br class=3D""></div><div class=3D""><b =
-class=3D"">Registration</b></div><div class=3D"">I will set up an ad-hoc =
-google doc</div><div class=3D""><br class=3D""></div><div class=3D""><b =
-class=3D"">Getting To Cambridge/Accommodation</b></div><div =
-class=3D"">London Stansted is the easiest airport to fly to: there is a =
-direct train that goes frequently and take 30-40 minutes</div><div =
-class=3D"">You may have to use London Heathrow you come from the US, =
-China or Japan. In that case, you can take a fixed rate taxi: =
-see&nbsp;<a =
-href=3D"http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heathro=
-w-Airport" =
-class=3D"">http://www.expressairporttransport.co.uk/Taxi-Cambridge-To-Heat=
-hrow-Airport</a></div><div class=3D""><br class=3D""></div><div =
-class=3D"">The key question you will have to decide upon is whether you =
-stay in the town centre, which is stunning, but it may take 30 mins to =
-the Citrix office, or whether you stay close tp the office. I will =
-provide more info in due time</div><div class=3D""><br =
-class=3D""></div><div class=3D"">Regards</div><div =
-class=3D"">Lars&nbsp;</div><div class=3D""><b class=3D""><br =
-class=3D""></b></div><div class=3D""><div class=3D""><blockquote =
-type=3D"cite" class=3D""><div class=3D"">On 23 Jan 2019, at 10:16, Lars =
-Kurth &lt;<a href=3D"mailto:lars.kurth.xen@gmail.com" =
-class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><meta =
-http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii" =
-class=3D""><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: =
-space; line-break: after-white-space;" class=3D"">Hi all,<div =
-class=3D""><br class=3D""></div><div class=3D"">it looks as =
-if&nbsp;March 25/26 in Frankfurt or Cambridge is the best option. For =
-Matt, this would mean that he can only attend the first day, but I =
-believe this would be OK. Maybe Robin can attend the second day, instead =
-of Matt. Before we finalise the dates, I will need to secure the meeting =
-space. I will be able to do this in the next few days and will send an =
-update as soon as this is done.</div><div class=3D""><br =
-class=3D""></div><div class=3D"">Note that we had a few people on this =
-list which have replied to me privately. Please let me know privately or =
-publicly whether&nbsp;March 25/26 would be suitable for you. We can in =
-parallel work on the agenda.</div><div class=3D"">&nbsp;</div><div =
-class=3D"">Best Regards</div><div class=3D"">Lars<br class=3D""><div =
-class=3D""><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 16 Jan 2019, at 13:09, Lars Kurth &lt;<a =
-href=3D"mailto:lars.kurth.xen@gmail.com" =
-class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><meta =
-http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii" =
-class=3D""><div style=3D"word-wrap: break-word; -webkit-nbsp-mode: =
-space; line-break: after-white-space;" class=3D""><br class=3D""><div =
-class=3D""><br class=3D""><blockquote type=3D"cite" class=3D""><div =
-class=3D"">On 16 Jan 2019, at 12:16, George Dunlap &lt;<a =
-href=3D"mailto:george.dunlap@citrix.com" =
-class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
-class=3D"Apple-interchange-newline"><div class=3D""><div class=3D"">On =
-1/8/19 5:59 PM, Lars Kurth wrote:<br class=3D""><blockquote type=3D"cite" =
-class=3D"">What I need is <br class=3D"">- Raise your hands if you are =
-interested <br class=3D"">- Let me know of date / location =
-restrictions<br class=3D"">- We could try and so some of this via video =
-conference: would you be able to attend if we did open the meeting up to =
-some remote participation<br class=3D""></blockquote><br class=3D"">I'm =
-interested. &nbsp;All the dates mentioned should work for me.<br =
-class=3D""><br class=3D""> -George<br =
-class=3D""></div></div></blockquote></div><br class=3D""><div =
-class=3D"">Hi all,</div><div class=3D""><br class=3D""></div><div =
-class=3D"">to summarise!</div><div class=3D""><br class=3D""></div><div =
-class=3D"">We have a good number of people and organisations interested =
-from pretty one everyone on the list, but it seems the dates won't work =
-for most people.&nbsp;</div><div class=3D"">Location wise: Germany =
-(Frankfurt) and/or UK (Cambridge) work for most, except for =
-representatives from Dornerworks and Starlab, who would dial in for some =
-of the meetings&nbsp;</div><div class=3D"">There seems to be a slight =
-bias for Cambridge, as we have most of our maintainers =
-there.&nbsp;</div><div class=3D""><br class=3D""></div><div =
-class=3D"">Automotive vendors would be happy to align with automotive =
-meetings/events (even in Japan), but that won't work for the committers =
-as they won't normally be able to travel.&nbsp;</div><div class=3D"">I =
-also have two organisations which could potentially host in Cambridge =
-and one in Germany (Frankfurt). But the venue depends partly on the =
-dates. This tells me, that we should choose either Frankfurt or =
-Cambridge for the event.</div><div class=3D""><br class=3D""></div><div =
-class=3D"">In terms of numbers we are roughly looking at 10-12 who could =
-attend physically, but it could be more</div><div class=3D""><br =
-class=3D""></div><div class=3D"">To move forward, I thought I would =
-expend the time horizon a little bit via the following doodle =
-poll:&nbsp;<a href=3D"https://doodle.com/poll/anvfr2hk2t8gy9a8" =
-class=3D"">https://doodle.com/poll/anvfr2hk2t8gy9a8</a></div><div =
-class=3D"">Note that you can specify suboptimal dates by clicking twice: =
-also, if you have any constraints on location, etc. feel free to make =
-use of the commenting feature.</div><div class=3D""><br =
-class=3D""></div><div class=3D"">I will be in the US mid-March and thus =
-excluded these dates. I also excluded March 28/29: because of Brexit, it =
-is possible that there would be some travel chaos at least in the =
-UK.&nbsp;</div><div class=3D""><br class=3D""></div><div =
-class=3D"">Regards</div><div class=3D"">Lars</div><div class=3D""><br =
-class=3D""></div><div class=3D""><br class=3D""></div><div class=3D""><br =
-class=3D""></div></div></div></blockquote></div><br =
-class=3D""></div></div></div></blockquote></div><br =
-class=3D""></div></div></div></div></blockquote></div><br =
-class=3D""></div></body></html>=
-
---Apple-Mail=_0CE187D8-9D07-4B1E-BF08-5C533C91E14B--
-
-
---===============4724177134165380512==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4724177134165380512==--
+T24gMTUvMDIvMjAxOSAxODoyMCwgRWxsaW90dCBNaXRjaGVsbCB3cm90ZToKPiBPbiBGcmksIEZl
+YiAxNSwgMjAxOSBhdCAwMzo1ODo0OUFNIC0wNzAwLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4g
+T24gMTUuMDIuMTkgYXQgMDU6MjMsIDxlaGVtK3hlbkBtNXAuY29tPiB3cm90ZToKPj4+IFRoZSBN
+Q0UvRURBQyBzdXBwb3J0IGNvZGUgYXBwZWFycyB0byBiZSBpbiByYXRoZXIgcG9vciBzaGFwZS4K
+Pj4+Cj4+PiBUaGUgQU1EIGNvZGUgbWVudGlvbnMgRmFtaWx5IDEwaCwgd2hpY2ggbWlnaHQgaGF2
+ZSBiZWVuIGF2YWlsYWJsZSAxMAo+Pj4geWVhcnMgYWdvLiAgVGhleSd2ZSBsaWtlbHkgYmVlbiBm
+aW5kYWJsZSB1c2VkIHdpdGggZGlmZmljdWx0eSBtb3JlCj4+PiByZWNlbnRseSwgYnV0IG5vIGhh
+cmR3YXJlIG1hZGUgaW4gdGhlIHBhc3QgNSB5ZWFycyBtYXRjaGVzIHRoaXMgcHJvZmlsZS4KPj4g
+V2VsbCwgRmFtMTAgaXMgbWVudGlvbmVkIGV4cGxpY2l0bHksIGJ1dCBhcyBwZXIgdGhlIHVzZSBv
+ZiBlLmcuCj4+IG1jaGVja19hbWRfZmFtWFggbmV3ZXIgb25lcyBhcmUgc3VwcG9ydGVkIGJ5IHRo
+aXMgY29kZQo+PiBhcyB3ZWxsLgo+IEluIHRoYXQgY2FzZSBzb21ldGltZSBiZXR3ZWVuIFhlbiA0
+LjEgYW5kIFhlbiA0LjQsIHRoZSBBTUQgTUNFL0VEQUMgY29kZQo+IHdhcyBjb21wbGV0ZWx5IGJy
+b2tlbiBhbmQgaGFzbid0IGJlZW4gZml4ZWQuCgpJIHRha2UgaXQgeW91J3ZlIGdvdCBhIHVzZWNh
+c2Ugd2hpY2ggbm93IGRvZXNuJ3Qgd29yaz8KCj4+PiBHaXZlbiB0aGUgcmVjZW50IHRyZW5kcyBp
+biBYZW4ncyBkZXZlbG9wbWVudCBJJ2QgdGVuZCB0byBzdWdnZXN0IGdvaW5nIGEKPj4+IGRpZmZl
+cmVudCBkaXJlY3Rpb24gZnJvbSB0aGUgZXhpc3RpbmcgY29kZS4gIFRoZSBleGlzdGluZyBjb2Rl
+IHdhcwo+Pj4gYXR0ZW1wdGluZyB0byBoYW5kbGUgTUNFL0VEQUMgZXJyb3JzIGJ5IGVtdWxhdGlu
+ZyB0aGVtIGFuZCBwYXNzaW5nIHRoZW0KPj4+IHRvIHRoZSBlZmZlY3RlZCBkb21haW4uICBJbnN0
+ZWFkIG9mIHRoaXMgYXBwcm9hY2gsIGxldCBEb21haW4gMCBoYW5kbGUKPj4+IHRhbGtpbmcgdG8g
+TUNFL0VEQUMgaGFyZHdhcmUgYW5kIG1lcmVseSBoYXZlIFhlbiBkZWNvZGUgYWRkcmVzc2VzLgo+
+Pj4KPj4+IElmIGVycm9ycy93YXJuaW5ncyBhcmUgb2NjdXJpbmcsIHlvdSBuZWVkIHRob3NlIHJl
+cG9ydHMgY2VudHJhbGl6ZWQsCj4+PiB3aGljaCBwb2ludHMgdG8gaGFuZGxpbmcgdGhlbSBpbiBE
+b21haW4gMC4gIElmIGFuIHVuY29ycmVjdGFibGUgZXJyb3IKPj4+IG9jY3VycywgRG9tYWluIDAg
+c2hvdWxkIGNob29zZSB3aGV0aGVyIHRvIGtpbGwgYSBnaXZlbiBWTSBvciBwYW5pYyB0aGUKPj4+
+IGVudGlyZSBtYWNoaW5lLiAgRWl0aGVyIHdheSwgRG9tYWluIDAgcmVhbGx5IG5lZWRzIHRvIGJl
+IGFsZXJ0ZWQgdGhhdAo+Pj4gaGFyZHdhcmUgaXMgbWlzYmVoYXZpbmcgYW5kIG1heSBuZWVkIHRv
+IGJlIHJlcGxhY2VkLgo+PiBCdXQgdGhlIHBvaW50IG9mIHRoZSB2aXJ0dWFsaXphdGlvbiBpcyB0
+byBhbGxvdyBndWVzdHMgdG8gbW9yZSBvciBsZXNzCj4+IGdyYWNlZnVsbHkgcmVjb3ZlciAoYXQg
+bGVhc3QgYXMgZmFyIGFzIHRoZSB0aGVvcnkgb2YgaXQgZ29lcyksIGUuZy4gYnkKPj4ga2lsbGlu
+ZyBqdXN0IGEgcHJvY2VzcywgcmF0aGVyIHRoYW4gZ2V0dGluZyBibGluZGx5IGtpbGxlZC4KPj4K
+Pj4gQXMgdG8gcGFuaWMtaW5nIHRoZSBlbnRpcmUgbWFjaGluZSAtIGlmIHRoYXQncyBuZWNlc3Nh
+cnksIERvbTAgaXMKPj4gdW5saWtlbHkgdG8gYmUgaW4gdGhlIHJpZ2h0IHBvc2l0aW9uLiBUaGVy
+ZSdzIHdheSB0b28gaGlnaCBhIGNoYW5jZSBmb3IKPj4gZnVydGhlciB0aGluZ3MgdG8gZ28gd3Jv
+bmcgdW50aWwgdGhlIGV2ZW50IGhhcyBldmVuIGp1c3QgYXJyaXZlZCBpbgo+PiBEb20wLCBsZXQg
+YWxvbmUgaXQgaGF2aW5nIHRha2VuIGEgZGVjaXNpb24uCj4gSSdsbCBhZ3JlZSBpdCBkb2VzIG1h
+a2Ugc2Vuc2UgdG8gdHJ5IHNlbmRpbmcgYSBjb3JydXB0ZWQgbWVtb3J5IGFsZXJ0IHRvCj4gdGhl
+IGVmZmVjdGVkIGRvbWFpbiwgcmF0aGVyIHRoYW4gbnVraW5nIHRoZSBlbnRpcmUgVk0uICBBbGVy
+dGluZyB0aGUKPiBvd25lciBvZiB0aGUgaGFyZHdhcmUgdGhvdWdoIHNob3VsZCBiZSBoaWdoZXIg
+cHJpb3JpdHkgYXMgdGhleSB3aWxsIHRoZW4KPiBrbm93IHRoZXkgbmVlZCB0byBzY2hlZHVsZSBh
+IGRvd250aW1lIGFuZCByZXBsYWNlIHRoZSBtb2R1bGUuCj4KPgo+Pj4gVGhlIG90aGVyIHBhcnQg
+aXMgYWxlcnRpbmcgRG9tYWluIDAgaXMgKmZhciogbW9yZSBsaWtlbHkgdG8gZ2V0IHRoZQo+Pj4g
+Y29ycmVjdCB0eXBlIG9mIGF0dGVudGlvbi4gIEEgYnVzaW5lc3Mgb3duaW5nIGEgRG9tYWluIFUg
+b24gYSByYW5kb20KPj4+IG1hY2hpbmUsIG1heSBydW4gYSBrZXJuZWwgd2l0aG91dCBNQ0UvRURB
+QyBzdXBwb3J0IG9yIGNvdWxkIG1pc3MgdGhlCj4+PiBlbnRyaWVzIGluIHRoZWlyIHN5c3RlbSBs
+b2csIG5vciB3b3VsZCB0aGV5IG5lY2Vzc2FyaWx5IGtub3cgdGhlIGNvcnJlY3QKPj4+IHBlcnNv
+bmVsIHRvIGNvbnRhY3QgYWJvdXQgaGFyZHdhcmUgZmFpbGluZy4KPj4gQWxlcnRpbmcgRG9tMCBh
+bG9uZ3NpZGUgdGhlIGFmZmVjdGVkIERvbVUgbWF5IGluZGVlZCBiZSBkZXNpcmFibGUsCj4+IGJ1
+dCBtYWlubHkgZm9yIHRoZSBwdXJwb3NlIG9mIGxvZ2dpbmcsIG9ubHkgYXMgYSBsYXN0IHJlc29y
+dCBmb3IgdGhlCj4+IHB1cnBvc2Ugb2Yga2lsbGluZyBhIGd1ZXN0Lgo+IEkgdGhpbmsgYWxlcnRp
+bmcgRG9tMCBzaG91bGQgYmUgcmF0aGVyIGhpZ2hlciBwcmlvcml0eSB0aGFuIGFsZXJ0aW5nCj4g
+RG9tVXMuICBBIGdpdmVuIERvbVUgbWF5IHNlZSBvbmUgY29ycmVjdGFibGUgbWVtb3J5IGVycm9y
+IHBlciBtb250aCwKPiB3aGljaCBtaWdodCBzZWVtIGhhcm1sZXNzIHVudGlsIHlvdSBmaW5kIHRo
+ZXJlIGFyZSBhIGh1bmRyZWQgRG9tVXMgb24KPiB0aGF0IGhhcmR3YXJlIGFuZCBldmVyeSBvbmUg
+b2YgdGhlbSBpcyBzZWVpbmcgb25lIGVycm9yIHBlciBtb250aC4KPgo+IFRoZSBvbmx5IHJlYWwg
+dXNlZnVsIHBsYWNlIHRvIHJlcG9ydCBjb3JyZWN0YWJsZSBlcnJvcnMgbGlrZSB0aGF0IGlzIHRv
+Cj4gRG9tMC4gIE1lYW53aGlsZSB1bmNvcnJlY3RhYmxlIGVycm9ycyBhcmUgbGlrZWx5IGJldHRl
+ciB0byBzZW5kIGEgUFYKPiBtZXNzYWdlIHRvIHRoZSBEb21VLiAgTGV0IFFFTVUgdHVybiBpdCBp
+bnRvIHNvbWV0aGluZyB3aGljaCBsb29rcyBsaWtlCj4gcmVhbCBoYXJkd2FyZSBpZiBuZWVkZWQu
+ICBNZWFud2hpbGUgRG9tMCBtYXkgaGF2ZSBhIG1vcmUgdXAgdG8gZGF0ZQo+IGRyaXZlciBmb3Ig
+dGhlIGhhcmR3YXJlIHRoYW4gWGVuLgoKSSBkb24ndCB0aGluayBhbnlvbmUgY2FuIGRlZmVuZCB0
+aGUgY3VycmVudCBzdGF0ZSBvZiBNQ0UKaGFuZGxpbmcvcmVwb3J0aW5nIGluIFhlbiwgYW5kIEkg
+d291bGQgY2VydGFpbmx5IGxpa2UgdG8gc2VlIGl0IGltcHJvdmVkLgoKSG93ZXZlciwgaXRzIG5v
+dCBhIHNpbXBsZSBhcyAibGV0IGRvbTAgaGFuZGxlIGV2ZXJ5dGhpbmciLsKgIERvbTAgaXMganVz
+dAphIFZNLCBsaWtlIGFsbCBvdGhlciBkb21haW5zLsKgIEl0IGNhbnQgYWNjZXNzIHRoZSBNQ0Ug
+TVNSIGJhbmtzLCBhbmQKZXZlbiBpZiBpdCBjb3VsZCwgaXQgd291bGQgaGF2ZSBhIHBjcHUgdnMg
+dmNwdSBwcm9ibGVtIHdoZW4gdHJ5aW5nIHRvCmludGVycHJldCB0aGUgZGF0YS4KClhlbiBpcyB0
+aGUgZW50aXR5IHdoaWNoIG5lZWRzIHRvIGhhbmRsZSB0aGUgI01DLCBhbmQgZG8gZmlyc3QtcGFz
+cwpwcm9jZXNzaW5nLsKgIElmIHdlIHdhbnQgdG8gZ2l2ZSBpdCB0byBkb20wIGZvciBmdXJ0aGVy
+IHByb2Nlc3NpbmcsIGl0CmVpdGhlciBoYXMgdG8gYmUgdmlydHVhbGlzZWQgaW4gYW4gYXJjaGl0
+ZWN0dXJhbCBtYW5uZXIsIG9yIHBhc3NlZCB2aWEgYQpwYXJhdmlydCBjaGFubmVsIHNvIGRvbTAg
+ZGVmaW5pdGVseSBrbm93cyBpdCBpcyBkZWFsaW5nIHdpdGggZGF0YSBpbgpkaWZmZXJlbnQgZW51
+bWVyYXRpb24gc3BhY2VzLgoKSSBleHBlY3QgdGhlcmUgYXJlIGFsc28gc29tZSBub24tdHJpdmlh
+bCBBQ1BJIGludGVyYWN0aW9ucyBoZXJlLCB3aGljaAphcmUgYWxzbyBtYWRlIGNvbXBsaWNhdGVk
+IGJ5IHRoZSBYZW4vZG9tMAppbnRlcmZhY2UtdHVybmVkLXVuZG91Y21lbnRlZC1tZXNzLgoKQW5v
+dGhlciBpc3N1ZSB3ZSBzaG91bGQgbG9vayBpbnRvIGlzIGlmIHdlIGFyZSBnb2luZyB0byBtYWtl
+CmltcHJvdmVtZW50cyBoZXJlLCBob3cgZG8gd2UgZ28gYWJvdXQgZW5zdXJpbmcgdGhhdCB3ZSBk
+b24ndCByZWdyZXNzCmJlaGF2aW91ciBhZ2Fpbi7CoCBJIGhhdmUgbm8gZXhwZXJpZW5jZSBpbiB0
+aGlzIGFyZWEgKG90aGVyIHRoYW4KYnVnZml4aW5nIHRoZSAjTUMgaGFuZGxlciB1bnRpbCBpdCBh
+cHBlYXJzIHRvIGJlaGF2ZSBhcyBpdCBkaWQgYmVmb3JlKSwKYnV0IHN1cmVseSB0aGVyZSBhcmUg
+c29tZSB3YXlzIG9mIHRlc3Rpbmc/Cgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
