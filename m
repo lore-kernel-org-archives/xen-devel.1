@@ -1,21 +1,19 @@
-From: Elliott Mitchell <ehem+xen@m5p.com>
-Subject: Re: MCE/EDAC Status/Updating?
-Date: Fri, 15 Feb 2019 10:20:23 -0800
-Message-ID: <20190215182023.GA80175@mattapan.m5p.com>
-References: <20190215042334.GA74835@mattapan.m5p.com>
- <5C669B690200007800216F34@prv1-mh.provo.novell.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: Enhancing Xen's Kconfig infrastructure to support
+ tailored solutions
+Date: Fri, 15 Feb 2019 10:27:47 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1902151020400.5641@sstabellini-ThinkPad-X260>
+References: <a49643ec-6bbe-04be-1ae2-b1d731da92cf@gmail.com>
+ <20190213182544.2tguperv3yliejch@zion.uk.xensource.com>
+ <alpine.DEB.2.10.1902131110270.5641@sstabellini-ThinkPad-X260>
+ <A2C0B65C-32D0-4243-8A14-73B8331AC386@citrix.com>
+ <alpine.DEB.2.10.1902150933330.5641@sstabellini-ThinkPad-X260>
+ <FBD9C394-9197-4805-9A13-5EAA814B0EFC@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1757274377-1550254940=:5641"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=w+qh=QW=m5p.com=ehem@srs-us1.protection.inumbo.net>)
- id 1gui6D-0001Rl-31
- for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 18:20:33 +0000
-Content-Disposition: inline
-In-Reply-To: <5C669B690200007800216F34@prv1-mh.provo.novell.com>
+In-Reply-To: <FBD9C394-9197-4805-9A13-5EAA814B0EFC@citrix.com>
+Content-ID: <alpine.DEB.2.10.1902151022450.5641@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,73 +22,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+To: George Dunlap <George.Dunlap@citrix.com>
+Cc: James McKenzie <james.mckenzie@bromium.com>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, "Suthikulpanit,
+ Suravee" <Suravee.Suthikulpanit@amd.com>, "Daniel P. Smith" <dpsmith@apertussolutions.com>, "robin.randhawa@arm.com" <robin.randhawa@arm.com>, Doug Goldstein <cardoe@cardoe.com>, Christopher Clark <christopher.w.clark@gmail.com>, Xen-devel <xen-devel@lists.xen.org>, "Daniel P. Smith" <dpsmith.dev@gmail.com>, Lars Kurth <lars.kurth.xen@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>, "committers@xenproject.org" <committers@xenproject.org>, Jun Nakajima <jun.nakajima@intel.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCBGZWIgMTUsIDIwMTkgYXQgMDM6NTg6NDlBTSAtMDcwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDE1LjAyLjE5IGF0IDA1OjIzLCA8ZWhlbSt4ZW5AbTVwLmNvbT4gd3JvdGU6
-Cj4gPiBUaGUgTUNFL0VEQUMgc3VwcG9ydCBjb2RlIGFwcGVhcnMgdG8gYmUgaW4gcmF0aGVyIHBv
-b3Igc2hhcGUuCj4gPiAKPiA+IFRoZSBBTUQgY29kZSBtZW50aW9ucyBGYW1pbHkgMTBoLCB3aGlj
-aCBtaWdodCBoYXZlIGJlZW4gYXZhaWxhYmxlIDEwCj4gPiB5ZWFycyBhZ28uICBUaGV5J3ZlIGxp
-a2VseSBiZWVuIGZpbmRhYmxlIHVzZWQgd2l0aCBkaWZmaWN1bHR5IG1vcmUKPiA+IHJlY2VudGx5
-LCBidXQgbm8gaGFyZHdhcmUgbWFkZSBpbiB0aGUgcGFzdCA1IHllYXJzIG1hdGNoZXMgdGhpcyBw
-cm9maWxlLgo+IAo+IFdlbGwsIEZhbTEwIGlzIG1lbnRpb25lZCBleHBsaWNpdGx5LCBidXQgYXMg
-cGVyIHRoZSB1c2Ugb2YgZS5nLgo+IG1jaGVja19hbWRfZmFtWFggbmV3ZXIgb25lcyBhcmUgc3Vw
-cG9ydGVkIGJ5IHRoaXMgY29kZQo+IGFzIHdlbGwuCgpJbiB0aGF0IGNhc2Ugc29tZXRpbWUgYmV0
-d2VlbiBYZW4gNC4xIGFuZCBYZW4gNC40LCB0aGUgQU1EIE1DRS9FREFDIGNvZGUKd2FzIGNvbXBs
-ZXRlbHkgYnJva2VuIGFuZCBoYXNuJ3QgYmVlbiBmaXhlZC4KCgoKPiA+IEdpdmVuIHRoZSByZWNl
-bnQgdHJlbmRzIGluIFhlbidzIGRldmVsb3BtZW50IEknZCB0ZW5kIHRvIHN1Z2dlc3QgZ29pbmcg
-YQo+ID4gZGlmZmVyZW50IGRpcmVjdGlvbiBmcm9tIHRoZSBleGlzdGluZyBjb2RlLiAgVGhlIGV4
-aXN0aW5nIGNvZGUgd2FzCj4gPiBhdHRlbXB0aW5nIHRvIGhhbmRsZSBNQ0UvRURBQyBlcnJvcnMg
-YnkgZW11bGF0aW5nIHRoZW0gYW5kIHBhc3NpbmcgdGhlbQo+ID4gdG8gdGhlIGVmZmVjdGVkIGRv
-bWFpbi4gIEluc3RlYWQgb2YgdGhpcyBhcHByb2FjaCwgbGV0IERvbWFpbiAwIGhhbmRsZQo+ID4g
-dGFsa2luZyB0byBNQ0UvRURBQyBoYXJkd2FyZSBhbmQgbWVyZWx5IGhhdmUgWGVuIGRlY29kZSBh
-ZGRyZXNzZXMuCj4gPiAKPiA+IElmIGVycm9ycy93YXJuaW5ncyBhcmUgb2NjdXJpbmcsIHlvdSBu
-ZWVkIHRob3NlIHJlcG9ydHMgY2VudHJhbGl6ZWQsCj4gPiB3aGljaCBwb2ludHMgdG8gaGFuZGxp
-bmcgdGhlbSBpbiBEb21haW4gMC4gIElmIGFuIHVuY29ycmVjdGFibGUgZXJyb3IKPiA+IG9jY3Vy
-cywgRG9tYWluIDAgc2hvdWxkIGNob29zZSB3aGV0aGVyIHRvIGtpbGwgYSBnaXZlbiBWTSBvciBw
-YW5pYyB0aGUKPiA+IGVudGlyZSBtYWNoaW5lLiAgRWl0aGVyIHdheSwgRG9tYWluIDAgcmVhbGx5
-IG5lZWRzIHRvIGJlIGFsZXJ0ZWQgdGhhdAo+ID4gaGFyZHdhcmUgaXMgbWlzYmVoYXZpbmcgYW5k
-IG1heSBuZWVkIHRvIGJlIHJlcGxhY2VkLgo+IAo+IEJ1dCB0aGUgcG9pbnQgb2YgdGhlIHZpcnR1
-YWxpemF0aW9uIGlzIHRvIGFsbG93IGd1ZXN0cyB0byBtb3JlIG9yIGxlc3MKPiBncmFjZWZ1bGx5
-IHJlY292ZXIgKGF0IGxlYXN0IGFzIGZhciBhcyB0aGUgdGhlb3J5IG9mIGl0IGdvZXMpLCBlLmcu
-IGJ5Cj4ga2lsbGluZyBqdXN0IGEgcHJvY2VzcywgcmF0aGVyIHRoYW4gZ2V0dGluZyBibGluZGx5
-IGtpbGxlZC4KPiAKPiBBcyB0byBwYW5pYy1pbmcgdGhlIGVudGlyZSBtYWNoaW5lIC0gaWYgdGhh
-dCdzIG5lY2Vzc2FyeSwgRG9tMCBpcwo+IHVubGlrZWx5IHRvIGJlIGluIHRoZSByaWdodCBwb3Np
-dGlvbi4gVGhlcmUncyB3YXkgdG9vIGhpZ2ggYSBjaGFuY2UgZm9yCj4gZnVydGhlciB0aGluZ3Mg
-dG8gZ28gd3JvbmcgdW50aWwgdGhlIGV2ZW50IGhhcyBldmVuIGp1c3QgYXJyaXZlZCBpbgo+IERv
-bTAsIGxldCBhbG9uZSBpdCBoYXZpbmcgdGFrZW4gYSBkZWNpc2lvbi4KCkknbGwgYWdyZWUgaXQg
-ZG9lcyBtYWtlIHNlbnNlIHRvIHRyeSBzZW5kaW5nIGEgY29ycnVwdGVkIG1lbW9yeSBhbGVydCB0
-bwp0aGUgZWZmZWN0ZWQgZG9tYWluLCByYXRoZXIgdGhhbiBudWtpbmcgdGhlIGVudGlyZSBWTS4g
-IEFsZXJ0aW5nIHRoZQpvd25lciBvZiB0aGUgaGFyZHdhcmUgdGhvdWdoIHNob3VsZCBiZSBoaWdo
-ZXIgcHJpb3JpdHkgYXMgdGhleSB3aWxsIHRoZW4Ka25vdyB0aGV5IG5lZWQgdG8gc2NoZWR1bGUg
-YSBkb3dudGltZSBhbmQgcmVwbGFjZSB0aGUgbW9kdWxlLgoKCj4gPiBUaGUgb3RoZXIgcGFydCBp
-cyBhbGVydGluZyBEb21haW4gMCBpcyAqZmFyKiBtb3JlIGxpa2VseSB0byBnZXQgdGhlCj4gPiBj
-b3JyZWN0IHR5cGUgb2YgYXR0ZW50aW9uLiAgQSBidXNpbmVzcyBvd25pbmcgYSBEb21haW4gVSBv
-biBhIHJhbmRvbQo+ID4gbWFjaGluZSwgbWF5IHJ1biBhIGtlcm5lbCB3aXRob3V0IE1DRS9FREFD
-IHN1cHBvcnQgb3IgY291bGQgbWlzcyB0aGUKPiA+IGVudHJpZXMgaW4gdGhlaXIgc3lzdGVtIGxv
-Zywgbm9yIHdvdWxkIHRoZXkgbmVjZXNzYXJpbHkga25vdyB0aGUgY29ycmVjdAo+ID4gcGVyc29u
-ZWwgdG8gY29udGFjdCBhYm91dCBoYXJkd2FyZSBmYWlsaW5nLgo+IAo+IEFsZXJ0aW5nIERvbTAg
-YWxvbmdzaWRlIHRoZSBhZmZlY3RlZCBEb21VIG1heSBpbmRlZWQgYmUgZGVzaXJhYmxlLAo+IGJ1
-dCBtYWlubHkgZm9yIHRoZSBwdXJwb3NlIG9mIGxvZ2dpbmcsIG9ubHkgYXMgYSBsYXN0IHJlc29y
-dCBmb3IgdGhlCj4gcHVycG9zZSBvZiBraWxsaW5nIGEgZ3Vlc3QuCgpJIHRoaW5rIGFsZXJ0aW5n
-IERvbTAgc2hvdWxkIGJlIHJhdGhlciBoaWdoZXIgcHJpb3JpdHkgdGhhbiBhbGVydGluZwpEb21V
-cy4gIEEgZ2l2ZW4gRG9tVSBtYXkgc2VlIG9uZSBjb3JyZWN0YWJsZSBtZW1vcnkgZXJyb3IgcGVy
-IG1vbnRoLAp3aGljaCBtaWdodCBzZWVtIGhhcm1sZXNzIHVudGlsIHlvdSBmaW5kIHRoZXJlIGFy
-ZSBhIGh1bmRyZWQgRG9tVXMgb24KdGhhdCBoYXJkd2FyZSBhbmQgZXZlcnkgb25lIG9mIHRoZW0g
-aXMgc2VlaW5nIG9uZSBlcnJvciBwZXIgbW9udGguCgpUaGUgb25seSByZWFsIHVzZWZ1bCBwbGFj
-ZSB0byByZXBvcnQgY29ycmVjdGFibGUgZXJyb3JzIGxpa2UgdGhhdCBpcyB0bwpEb20wLiAgTWVh
-bndoaWxlIHVuY29ycmVjdGFibGUgZXJyb3JzIGFyZSBsaWtlbHkgYmV0dGVyIHRvIHNlbmQgYSBQ
-VgptZXNzYWdlIHRvIHRoZSBEb21VLiAgTGV0IFFFTVUgdHVybiBpdCBpbnRvIHNvbWV0aGluZyB3
-aGljaCBsb29rcyBsaWtlCnJlYWwgaGFyZHdhcmUgaWYgbmVlZGVkLiAgTWVhbndoaWxlIERvbTAg
-bWF5IGhhdmUgYSBtb3JlIHVwIHRvIGRhdGUKZHJpdmVyIGZvciB0aGUgaGFyZHdhcmUgdGhhbiBY
-ZW4uCgoKLS0gCihcX19fKFxfX18oXF9fX19fXyAgICAgICAgICAtLT0+IDgtKSBFSE0gPD0tLSAg
-ICAgICAgICBfX19fX18vKV9fXy8pX19fLykKIFxCUyAoICAgIHwgICAgICAgICBlaGVtK3NpZ21z
-Z0BtNXAuY29tICBQR1AgODcxNDU0NDUgICAgICAgICB8ICAgICkgICAvCiAgXF9DU1wgICB8ICBf
-X19fXyAgLU8gI2luY2x1ZGUgPHN0ZGRpc2NsYWltZXIuaD4gTy0gICBfX19fXyAgfCAgIC8gIF8v
-CjhBMTlcX19fXF98Xy81OEQyIDdFM0QgRERGNCA3QkE2IDwtUEdQLT4gNDFEMSBCMzc1IDM3RDAg
-ODcxNFxffF8vX19fLzU0NDUKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1757274377-1550254940=:5641
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1902151022451.5641@sstabellini-ThinkPad-X260>
+
+On Fri, 15 Feb 2019, George Dunlap wrote:
+> > On Feb 15, 2019, at 5:36 PM, Stefano Stabellini <sstabellini@kernel.org> wrote:
+> > 
+> > On Fri, 15 Feb 2019, George Dunlap wrote:
+> >>> On Feb 13, 2019, at 7:11 PM, Stefano Stabellini <sstabellini@kernel.org> wrote:
+> >>> 
+> >>> On Wed, 13 Feb 2019, Wei Liu wrote:
+> >>>> On Tue, Feb 12, 2019 at 09:34:25PM -0500, Daniel P. Smith wrote:
+> >>>>> Greetings,
+> >>>>> 
+> >>>>> On the 11/14/18 Xen x86 community call a discussion was initiated about
+> >>>>> using Kconfig to build minimized versions of Xen for security, safety
+> >>>>> and other certification requirements. After some offline discussions
+> >>>>> with Xen contributors I realized that a variety of efforts each with
+> >>>>> their own respective goals are underway,
+> >>>>> 
+> >>>>> - nested virtualization
+> >>>>> - mixed criticality architectures
+> >>>>> - reducing trusted componentary
+> >>>>> - combining hardware protection of virtualization with performance and
+> >>>>> ease-of-use of containers
+> >>>>> 
+> >>>>> These efforts use hypervisors in different roles, all which Xen is
+> >>>>> capable of meeting. Today Xen's utility comes at the expense of carrying
+> >>>>> features necessary for one role to be present in another role where it
+> >>>>> is not required, e.g. PV interfaces that may not be essential in an ARM
+> >>>>> mixed criticality deployment.
+> >>>>> 
+> >>>>> The initial focus will be to explore and document the range of possible
+> >>>>> use cases that are of interest to the Xen community. This will be the
+> >>>>> input to a design document that is crafted in conjunction with the Xen
+> >>>>> maintainers, to identify possible approaches to extend the existing
+> >>>>> Kconfig infrastructure to produce tailored instances of Xen.
+> >>>>> 
+> >>>>> If you are interested in participating in this effort, please reply to
+> >>>>> this thread to outline possible use cases, design constraints and other
+> >>>>> considerations for improving Xen's Kconfig infrastructure to support
+> >>>>> tailoring for specific use cases.
+> >>>>> 
+> >>>> 
+> >>>> My impression from the community call is that you want to provide
+> >>>> smallish configurations for different use cases.
+> >>>> 
+> >>>> The Kconfig infrastructure is already able to do what you want as far as
+> >>>> I can tell.  You can easily feed it a base config file -- see files
+> >>>> under automation/configs/x86/.  What sort of extension is needed in your
+> >>>> opinion?
+> >>>> 
+> >>>> As use case goes, it would be a good start if you just submit something
+> >>>> you care about.
+> >>> 
+> >>> I mentioned on the call that a good first start could be a kconfig that
+> >>> allows to build an hypervisor binary with only support for PVH and only
+> >>> support for recent Intel machines, with the goal of minimizing the code
+> >>> base to less than 100K LOC.
+> >> 
+> >> I think one thing that might be helpful is a sort of “feature document” for each defconfig we’re looking at creating.  This would include:
+> >> 
+> >> * What the “target use case” for each defconfig would be
+> >> * The end goal in terms of functionality / LoC / whatever
+> >> * The current state, work items yet to do
+> >> * What potential variations there are (i.e., how to enable shadow if you want, or switch from Intel-only to AMD-only)
+> >> 
+> >> I’ve sort of been using docs/design/qemu-deprivilege.md in this way: Saying where we want to go, and moving things from “to do” to “done” as they get implemented.  That would make it easier to have in-progress things in the tree, make it easier for people to collaborate / enhance defconfigs, and also be a starting point for talking about testing and support status.
+> > 
+> > +1
+> > 
+> > Just to set the expectations right on this thread: I am just trying to
+> > provide feedback from the field, things I know are important to the Xen
+> > on x86 embedded user community. I am not going to take this on as a work
+> > item.  But somebody else might? Daniel Smith, I am looking at you :-)
+> 
+> I tried to make this clear on the call, but just in case, let me try to repeat / expand on what I said:
+> 
+> When creating a brand-new thing like this, the best thing is for each person/org to make exactly the thing that they want.  Daniel shouldn’t be trying to make a defconfig for embedded x86 hypervisors unless that’s specifically what he wants to use: he should be making a defconfig for his specific use case.
+> 
+> When someone else comes along and wants the second instance of whatever this thing is, we can then refactor our system based on two people’s real actual requirements.
+> 
+> The only time to try to sit and plan a General Purpose Thing are:
+> 1. When you already have loads of instances, so you have a clear idea what a General Purpose Thing of this type looks like
+> 2. When you need to worry about backwards compatibility.
+> 
+> I don’t think #1 or #2 are true in this case; so the most efficient thing will be for Daniel to make exactly the thing that he himself wants, spending very little time on attempting to make it a General Purpose Thing that someone else might want.
+
+Daniel started this thread with the following statement:
+
+  If you are interested in participating in this effort, please reply to
+  this thread to outline possible use cases, design constraints and other
+  considerations for improving Xen's Kconfig infrastructure to support
+  tailoring for specific use cases.
+
+That's what I was trying to do :-)
+
+Also, I have already enhanced the build and reduced the total LOC count
+in Xen 4.12 to less than 50K for Xilinx MPSoC. My comment that "I am not
+going to take this on" refers to the x86 side of things. We can
+certainly work together on components that are common.
+
+And from what I understood the x86 embedded use-case I was trying to
+highlight is a decent stepping stone toward Daniel's own kconfig
+enhancement goals.
+--8323329-1757274377-1550254940=:5641
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1757274377-1550254940=:5641--
