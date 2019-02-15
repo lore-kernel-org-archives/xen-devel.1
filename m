@@ -1,19 +1,25 @@
-From: Ira Weiny <ira.weiny@intel.com>
-Subject: Re: [PATCH V2 0/7] Add FOLL_LONGTERM to GUP fast and
- use it
-Date: Fri, 15 Feb 2019 10:29:36 -0800
-Message-ID: <20190215182935.GC26988__34833.5021453508$1550255437$gmane$org@iweiny-DESK2.sc.intel.com>
-Reply-To: 20190211201643.7599-1-ira.weiny@intel.com
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Fri, 15 Feb 2019 19:36:51 +0100
+Message-ID: <CAF3u54DwgQx_DPWEXTGsHf9NOeMG_zjkOhG-NqaV2x-g1z0PWA@mail.gmail.com>
+References: <20190201165314.ofuvpddlfpzbc247@mac>
+ <56b433e0-645e-997d-1bff-de3c4f7fe250@arm.com>
+ <20190204125307.aft4tzkjjrxdd34o@mac>
+ <fcd6618d-de13-212f-8afb-e2ef0b37396d@arm.com>
+ <f045b9a9-2e1a-4d3e-b2ce-51dca97720a8@gmail.com>
+ <6457d3e5-1897-d124-ba49-c6325076b393@gmail.com>
+ <alpine.DEB.2.10.1902061300540.2723@sstabellini-ThinkPad-X260>
+ <ffe52ce4-2fb6-d730-991e-c48c7fc10c5e@gmail.com>
+ <20190207103513.ky7xnftn3pj7r2lf@mac>
+ <316d93d5-7b4d-ace3-9bfa-7680057e92bd@gmail.com>
+ <20190214162909.ylnjnarbkfkrpwyk@mac>
+ <425ca87e-580e-7b9e-f6eb-f231f3b7d3a8@gmail.com>
+ <CAF3u54DpYoKXTC5rHf94nPbXtuOLdFDCik9gNAUhQ_AEKufqqA@mail.gmail.com>
+ <7bd97574-44cf-f749-00cb-f19c492e0550@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2007636141661337420=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=i5f5=QW=intel.com=ira.weiny@srs-us1.protection.inumbo.net>)
- id 1guiF7-0001sL-8n
- for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 18:29:45 +0000
-Content-Disposition: inline
+In-Reply-To: <7bd97574-44cf-f749-00cb-f19c492e0550@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,78 +28,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, kvm-ppc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, sparclinux@vger.kernel.org, kvm@vger.kernel.org, linux-fpga@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-rdma@vger.kernel.org, linux-media@vger.kernel.org, linux-scsi@vger.kernel.org, devel@driverdev.osuosl.org, virtualization@lists.linux-foundation.org, netdev@vger.kernel.org, linux-fbdev@vger.kernel.org, xen-devel@lists.xenproject.org, devel@lists.orangefs.org, linux-mm@kvack.org, ceph-devel@vger.kernel.org, rds-devel@oss.oracle.com
+To: Andrii Anisov <andrii.anisov@gmail.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <xen-devel@lists.xen.org>, "LOPEZ,
+ FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiBOT1RFOiBUaGlzIHNlcmllcyBkZXBlbmRzIG9uIG15IGNsZWFuIHVwIHBhdGNoIHRvIHJlbW92
-ZSB0aGUgd3JpdGUgcGFyYW1ldGVyCj4gZnJvbSBndXBfZmFzdF9wZXJtaXR0ZWQoKVsxXQo+IAo+
-IEhGSTEsIHFpYiwgYW5kIG10aGNhLCB1c2UgZ2V0X3VzZXJfcGFnZXNfZmFzdCgpIGR1ZSB0byBp
-dCBwZXJmb3JtYW5jZQo+IGFkdmFudGFnZXMuICBUaGVzZSBwYWdlcyBjYW4gYmUgaGVsZCBmb3Ig
-YSBzaWduaWZpY2FudCB0aW1lLiAgQnV0Cj4gZ2V0X3VzZXJfcGFnZXNfZmFzdCgpIGRvZXMgbm90
-IHByb3RlY3QgYWdhaW5zdCBtYXBwaW5nIG9mIEZTIERBWCBwYWdlcy4KPiAKPiBJbnRyb2R1Y2Ug
-Rk9MTF9MT05HVEVSTSBhbmQgdXNlIHRoaXMgZmxhZyBpbiBnZXRfdXNlcl9wYWdlc19mYXN0KCkg
-d2hpY2gKPiByZXRhaW5zIHRoZSBwZXJmb3JtYW5jZSB3aGlsZSBhbHNvIGFkZGluZyB0aGUgRlMg
-REFYIGNoZWNrcy4gIFhEUCBoYXMgYWxzbwo+IHNob3duIGludGVyZXN0IGluIHVzaW5nIHRoaXMg
-ZnVuY3Rpb25hbGl0eS5bMl0KPiAKPiBJbiBhZGRpdGlvbiB3ZSBjaGFuZ2UgZ2V0X3VzZXJfcGFn
-ZXMoKSB0byB1c2UgdGhlIG5ldyBGT0xMX0xPTkdURVJNIGZsYWcgYW5kCj4gcmVtb3ZlIHRoZSBz
-cGVjaWFsaXplZCBnZXRfdXNlcl9wYWdlc19sb25ndGVybSBjYWxsLgo+IAo+IFsxXSBodHRwczov
-L2xrbWwub3JnL2xrbWwvMjAxOS8yLzExLzIzNwo+IFsyXSBodHRwczovL2xrbWwub3JnL2xrbWwv
-MjAxOS8yLzExLzE3ODkKCkFueSBjb21tZW50cyBvbiB0aGlzIHNlcmllcz8gIEkndmUgdG91Y2hl
-ZCBhIGxvdCBvZiBzdWJzeXN0ZW1zIHdoaWNoIEkgdGhpbmsKcmVxdWlyZSByZXZpZXcuCgpUaGFu
-a3MsCklyYQoKPiAKPiBJcmEgV2VpbnkgKDcpOgo+ICAgbW0vZ3VwOiBSZXBsYWNlIGdldF91c2Vy
-X3BhZ2VzX2xvbmd0ZXJtKCkgd2l0aCBGT0xMX0xPTkdURVJNCj4gICBtbS9ndXA6IENoYW5nZSB3
-cml0ZSBwYXJhbWV0ZXIgdG8gZmxhZ3MgaW4gZmFzdCB3YWxrCj4gICBtbS9ndXA6IENoYW5nZSBH
-VVAgZmFzdCB0byB1c2UgZmxhZ3MgcmF0aGVyIHRoYW4gYSB3cml0ZSAnYm9vbCcKPiAgIG1tL2d1
-cDogQWRkIEZPTExfTE9OR1RFUk0gY2FwYWJpbGl0eSB0byBHVVAgZmFzdAo+ICAgSUIvaGZpMTog
-VXNlIHRoZSBuZXcgRk9MTF9MT05HVEVSTSBmbGFnIHRvIGdldF91c2VyX3BhZ2VzX2Zhc3QoKQo+
-ICAgSUIvcWliOiBVc2UgdGhlIG5ldyBGT0xMX0xPTkdURVJNIGZsYWcgdG8gZ2V0X3VzZXJfcGFn
-ZXNfZmFzdCgpCj4gICBJQi9tdGhjYTogVXNlIHRoZSBuZXcgRk9MTF9MT05HVEVSTSBmbGFnIHRv
-IGdldF91c2VyX3BhZ2VzX2Zhc3QoKQo+IAo+ICBhcmNoL21pcHMvbW0vZ3VwLmMgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHwgIDExICstCj4gIGFyY2gvcG93ZXJwYy9rdm0vYm9vazNzXzY0X21t
-dV9odi5jICAgICAgICAgfCAgIDQgKy0KPiAgYXJjaC9wb3dlcnBjL2t2bS9lNTAwX21tdS5jICAg
-ICAgICAgICAgICAgICB8ICAgMiArLQo+ICBhcmNoL3Bvd2VycGMvbW0vbW11X2NvbnRleHRfaW9t
-bXUuYyAgICAgICAgIHwgICA0ICstCj4gIGFyY2gvczM5MC9rdm0vaW50ZXJydXB0LmMgICAgICAg
-ICAgICAgICAgICAgfCAgIDIgKy0KPiAgYXJjaC9zMzkwL21tL2d1cC5jICAgICAgICAgICAgICAg
-ICAgICAgICAgICB8ICAxMiArLQo+ICBhcmNoL3NoL21tL2d1cC5jICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHwgIDExICstCj4gIGFyY2gvc3BhcmMvbW0vZ3VwLmMgICAgICAgICAgICAgICAg
-ICAgICAgICAgfCAgIDkgKy0KPiAgYXJjaC94ODYva3ZtL3BhZ2luZ190bXBsLmggICAgICAgICAg
-ICAgICAgICB8ICAgMiArLQo+ICBhcmNoL3g4Ni9rdm0vc3ZtLmMgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHwgICAyICstCj4gIGRyaXZlcnMvZnBnYS9kZmwtYWZ1LWRtYS1yZWdpb24uYyAgICAg
-ICAgICAgfCAgIDIgKy0KPiAgZHJpdmVycy9ncHUvZHJtL3ZpYS92aWFfZG1hYmxpdC5jICAgICAg
-ICAgICB8ICAgMyArLQo+ICBkcml2ZXJzL2luZmluaWJhbmQvY29yZS91bWVtLmMgICAgICAgICAg
-ICAgIHwgICA1ICstCj4gIGRyaXZlcnMvaW5maW5pYmFuZC9ody9oZmkxL3VzZXJfcGFnZXMuYyAg
-ICAgfCAgIDUgKy0KPiAgZHJpdmVycy9pbmZpbmliYW5kL2h3L210aGNhL210aGNhX21lbWZyZWUu
-YyB8ICAgMyArLQo+ICBkcml2ZXJzL2luZmluaWJhbmQvaHcvcWliL3FpYl91c2VyX3BhZ2VzLmMg
-IHwgICA4ICstCj4gIGRyaXZlcnMvaW5maW5pYmFuZC9ody9xaWIvcWliX3VzZXJfc2RtYS5jICAg
-fCAgIDIgKy0KPiAgZHJpdmVycy9pbmZpbmliYW5kL2h3L3VzbmljL3VzbmljX3Vpb20uYyAgICB8
-ICAgOSArLQo+ICBkcml2ZXJzL21lZGlhL3Y0bDItY29yZS92aWRlb2J1Zi1kbWEtc2cuYyAgIHwg
-ICA2ICstCj4gIGRyaXZlcnMvbWlzYy9nZW53cWUvY2FyZF91dGlscy5jICAgICAgICAgICAgfCAg
-IDIgKy0KPiAgZHJpdmVycy9taXNjL3Ztd192bWNpL3ZtY2lfaG9zdC5jICAgICAgICAgICB8ICAg
-MiArLQo+ICBkcml2ZXJzL21pc2Mvdm13X3ZtY2kvdm1jaV9xdWV1ZV9wYWlyLmMgICAgIHwgICA2
-ICstCj4gIGRyaXZlcnMvcGxhdGZvcm0vZ29sZGZpc2gvZ29sZGZpc2hfcGlwZS5jICAgfCAgIDMg
-Ky0KPiAgZHJpdmVycy9yYXBpZGlvL2RldmljZXMvcmlvX21wb3J0X2NkZXYuYyAgICB8ICAgNCAr
-LQo+ICBkcml2ZXJzL3NidXMvY2hhci9vcmFkYXguYyAgICAgICAgICAgICAgICAgIHwgICAyICst
-Cj4gIGRyaXZlcnMvc2NzaS9zdC5jICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDMgKy0K
-PiAgZHJpdmVycy9zdGFnaW5nL2dhc2tldC9nYXNrZXRfcGFnZV90YWJsZS5jICB8ICAgNCArLQo+
-ICBkcml2ZXJzL3RlZS90ZWVfc2htLmMgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstCj4g
-IGRyaXZlcnMvdmZpby92ZmlvX2lvbW11X3NwYXByX3RjZS5jICAgICAgICAgfCAgIDMgKy0KPiAg
-ZHJpdmVycy92ZmlvL3ZmaW9faW9tbXVfdHlwZTEuYyAgICAgICAgICAgICB8ICAgMyArLQo+ICBk
-cml2ZXJzL3Zob3N0L3Zob3N0LmMgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstCj4gIGRy
-aXZlcnMvdmlkZW8vZmJkZXYvcHZyMmZiLmMgICAgICAgICAgICAgICAgfCAgIDIgKy0KPiAgZHJp
-dmVycy92aXJ0L2ZzbF9oeXBlcnZpc29yLmMgICAgICAgICAgICAgICB8ICAgMiArLQo+ICBkcml2
-ZXJzL3hlbi9nbnRkZXYuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstCj4gIGZzL29y
-YW5nZWZzL29yYW5nZWZzLWJ1Zm1hcC5jICAgICAgICAgICAgICAgfCAgIDIgKy0KPiAgaW5jbHVk
-ZS9saW51eC9tbS5oICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxNyArLQo+ICBrZXJuZWwv
-ZnV0ZXguYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICstCj4gIGxpYi9pb3Zf
-aXRlci5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDcgKy0KPiAgbW0vZ3VwLmMg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8IDIyMCArKysrKysrKysrKystLS0t
-LS0tLQo+ICBtbS9ndXBfYmVuY2htYXJrLmMgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA1
-ICstCj4gIG1tL3V0aWwuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDgg
-Ky0KPiAgbmV0L2NlcGgvcGFnZXZlYy5jICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMiAr
-LQo+ICBuZXQvcmRzL2luZm8uYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAyICst
-Cj4gIG5ldC9yZHMvcmRtYS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDMgKy0K
-PiAgNDQgZmlsZXMgY2hhbmdlZCwgMjMyIGluc2VydGlvbnMoKyksIDE4MCBkZWxldGlvbnMoLSkK
-PiAKPiAtLSAKPiAyLjIwLjEKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+--===============2007636141661337420==
+Content-Type: multipart/alternative; boundary="000000000000f0b6e60581f30f20"
+
+--000000000000f0b6e60581f30f20
+Content-Type: text/plain; charset="UTF-8"
+
+Sorry for the formatting.
+
+On Fri, 15 Feb 2019, 18:30 Andrii Anisov, <andrii.anisov@gmail.com> wrote:
+
+> Hello Julien,
+>
+> On 15.02.19 18:31, Julien Grall wrote:
+> > Why? Is it because you want to be cache-aligned?  If so, requiring the
+> > structure to be 64-bytes is not enough.
+>
+> I did not mean caches.
+>
+
+What is the reason then?
+
+> You also want the address to
+> > be 64-bytes aligned.
+>
+> I would keep it as a hint for static/dynamic allocations in VMs, hoping
+> the address would be normally 64 bytes aligned.
+> I hope it might be stronger than, only commenting it should not cross a
+> page boundary. E.g. like `struct vcpu_register_vcpu_info` is commented.
+>
+> I've got this idea after looking at runstate definition as per-cpu in
+> Linux [1]
+>
+
+It is not obvious why it would be 64-bytes alignment from the definition.
+Can you please explain the rationale to impose that alignment?
+
+I really appreciate you suggest ideas/patches but  it would be helpful if
+you provide rationale at the same time. This would avoid a round of e-mails
+just for asking the reasons and delay the interesting bits.
+
+
+> > If an OS cares about it, then it can aligned itself here.
+> I suppose we can hint the OS by structure alignment in the interface
+> header, and require it from OS verifying it on hypercall handling
+
+.
+
+
+> [1]
+> https://elixir.bootlin.com/linux/v5.0-rc6/source/drivers/xen/time.c#L22
+>
+> --
+> Sincerely,
+> Andrii Anisov.
+>
+
+--000000000000f0b6e60581f30f20
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<span>Sorry for the formatting.</span><br><br><div class=3D"gmail_quote"><d=
+iv dir=3D"ltr">On Fri, 15 Feb 2019, 18:30 Andrii Anisov, &lt;<a href=3D"mai=
+lto:andrii.anisov@gmail.com">andrii.anisov@gmail.com</a>&gt; wrote:<br></di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
+1px #ccc solid;padding-left:1ex">Hello Julien,<br>
+<br>
+On 15.02.19 18:31, Julien Grall wrote:<br>
+&gt; Why? Is it because you want to be cache-aligned?=C2=A0 If so, requirin=
+g the<br>
+&gt; structure to be 64-bytes is not enough.<br>
+<br>
+I did not mean caches.<br></blockquote></div><div><br></div><div>What is th=
+e reason then?</div><div><br></div><div class=3D"gmail_quote"><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;=
+padding-left:1ex">
+&gt; You also want the address to<br>
+&gt; be 64-bytes aligned.<br>
+<br>
+I would keep it as a hint for static/dynamic allocations in VMs, hoping the=
+ address would be normally 64 bytes aligned.<br>
+I hope it might be stronger than, only commenting it should not cross a pag=
+e boundary. E.g. like `struct vcpu_register_vcpu_info` is commented.<br>
+<br>
+I&#39;ve got this idea after looking at runstate definition as per-cpu in L=
+inux [1]<br></blockquote></div><div><br></div><div>It is not obvious why it=
+ would be 64-bytes alignment from the definition. Can you please explain th=
+e rationale to impose that alignment?</div><div><br></div><div>I really app=
+reciate you suggest ideas/patches but=C2=A0 it would be helpful if you prov=
+ide rationale at the same time. This would avoid a round of e-mails just fo=
+r asking the reasons and delay the interesting bits.</div><div><br></div><d=
+iv class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:=
+0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<br>
+&gt; If an OS cares about it, then it can aligned itself here.<br>
+I suppose we can hint the OS by structure alignment in the interface header=
+, and require it from OS verifying it on hypercall handling</blockquote></d=
+iv><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"ma=
+rgin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">.</blockquote>=
+</div><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D=
+"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<br>
+[1] <a href=3D"https://elixir.bootlin.com/linux/v5.0-rc6/source/drivers/xen=
+/time.c#L22" rel=3D"noreferrer" target=3D"_blank">https://elixir.bootlin.co=
+m/linux/v5.0-rc6/source/drivers/xen/time.c#L22</a><br>
+<br>
+-- <br>
+Sincerely,<br>
+Andrii Anisov.<br>
+</blockquote></div>
+
+--000000000000f0b6e60581f30f20--
+
+
+--===============2007636141661337420==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2007636141661337420==--
