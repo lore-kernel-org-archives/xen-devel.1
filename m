@@ -1,18 +1,17 @@
 From: Paul Durrant <paul.durrant@citrix.com>
-Subject: [PATCH 2/3] xen-block: remove redundant assignment
-Date: Fri, 15 Feb 2019 16:25:32 +0000
-Message-ID: <20190215162533.19475-3-paul.durrant__32686.9935191766$1550248018$gmane$org@citrix.com>
+Subject: [PATCH 1/3] dataplane/xen-block: remove dead code
+Date: Fri, 15 Feb 2019 16:25:31 +0000
+Message-ID: <20190215162533.19475-2-paul.durrant@citrix.com>
 References: <20190215162533.19475-1-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=skQ2=QW=citrix.com=prvs=9420f6528=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1gugJL-0006Ru-Vw
- for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 16:26:00 +0000
+ id 1gugJL-0006Rp-6d
+ for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 16:25:59 +0000
 In-Reply-To: <20190215162533.19475-1-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,26 +22,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: qemu-devel@nongnu.org, qemu-block@nongnu.org, xen-devel@lists.xenproject.org
-Cc: Kevin Wolf <kwolf@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>, Max Reitz <mreitz@redhat.com>, Paul Durrant <paul.durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>, Max Reitz <mreitz@redhat.com>, Paul Durrant <paul.durrant@citrix.com>, Stefan Hajnoczi <stefanha@redhat.com>, Anthony Perard <anthony.perard@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIGFzc2lnbm1lbnQgdG8gJ3AnIGlzIHVubmVjZXNzYXJ5IGFzIHRoZSBjb2RlIHdpbGwgZWl0
-aGVyIGdvdG8gJ2ludmFsaWQnCm9yIHAgd2lsbCBnZXQgb3ZlcndyaXR0ZW4uCgpTcG90dGVkIGJ5
-IENvdmVyaXR5OiBDSUQgMTM5ODYzOAoKUmVwb3J0ZWQtYnk6IFBldGVyIE1heWRlbGwgPHBldGVy
-Lm1heWRlbGxAbGluYXJvLm9yZz4KU2lnbmVkLW9mZi1ieTogUGF1bCBEdXJyYW50IDxwYXVsLmR1
-cnJhbnRAY2l0cml4LmNvbT4KLS0tCkNjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5p
-QGtlcm5lbC5vcmc+CkNjOiBBbnRob255IFBlcmFyZCA8YW50aG9ueS5wZXJhcmRAY2l0cml4LmNv
-bT4KQ2M6IEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5jb20+CkNjOiBNYXggUmVpdHogPG1yZWl0
-ekByZWRoYXQuY29tPgotLS0KIGh3L2Jsb2NrL3hlbi1ibG9jay5jIHwgMyArLS0KIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9ody9i
-bG9jay94ZW4tYmxvY2suYyBiL2h3L2Jsb2NrL3hlbi1ibG9jay5jCmluZGV4IDUwMTJhZjljYjYu
-LjI5YWZlMjcwM2EgMTAwNjQ0Ci0tLSBhL2h3L2Jsb2NrL3hlbi1ibG9jay5jCisrKyBiL2h3L2Js
-b2NrL3hlbi1ibG9jay5jCkBAIC00MTMsOCArNDEzLDcgQEAgc3RhdGljIHZvaWQgeGVuX2Jsb2Nr
-X3NldF92ZGV2KE9iamVjdCAqb2JqLCBWaXNpdG9yICp2LCBjb25zdCBjaGFyICpuYW1lLAogICAg
-ICAgICB9CiAKICAgICAgICAgaWYgKCplbmQgPT0gJ3AnKSB7Ci0gICAgICAgICAgICBwID0gKGNo
-YXIgKikgKytlbmQ7Ci0gICAgICAgICAgICBpZiAoKmVuZCA9PSAnXDAnKSB7CisgICAgICAgICAg
-ICBpZiAoKigrK2VuZCkgPT0gJ1wwJykgewogICAgICAgICAgICAgICAgIGdvdG8gaW52YWxpZDsK
-ICAgICAgICAgICAgIH0KICAgICAgICAgfQotLSAKMi4yMC4xLjIuZ2IyMWViYjYKCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhlIGlmKCkgc3RhdGVtZW50IGlzIGNsZWFybHkgYm9ndXMgKGRlYWQgY29kZSB3aGljaCBzaG91
+bGQgaGF2ZSBiZWVuCmNsZWFuZWQgdXAgd2hlbiBncmFudCBtYXBwaW5nIHdhcyByZW1vdmVkKS4K
+ClNwb3R0ZWQgYnkgQ292ZXJpdHk6IENJRCAxMzk4NjM1CgpXaGlsZSBpbiB0aGUgbmVpZ2hib3Vy
+aG9vZCwgYWRkIGEgbWlzc2luZyAnZmFsbCB0aHJvdWdoJyBhbm5vdGF0aW9uLgoKUmVwb3J0ZWQt
+Ynk6IFBldGVyIE1heWRlbGwgPHBldGVyLm1heWRlbGxAbGluYXJvLm9yZz4KU2lnbmVkLW9mZi1i
+eTogUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4KLS0tCkNjOiBTdGVmYW4g
+SGFqbm9jemkgPHN0ZWZhbmhhQHJlZGhhdC5jb20+CkNjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNz
+dGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNjOiBBbnRob255IFBlcmFyZCA8YW50aG9ueS5wZXJhcmRA
+Y2l0cml4LmNvbT4KQ2M6IEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5jb20+CkNjOiBNYXggUmVp
+dHogPG1yZWl0ekByZWRoYXQuY29tPgotLS0KIGh3L2Jsb2NrL2RhdGFwbGFuZS94ZW4tYmxvY2su
+YyB8IDUgKy0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgNCBkZWxldGlvbnMo
+LSkKCmRpZmYgLS1naXQgYS9ody9ibG9jay9kYXRhcGxhbmUveGVuLWJsb2NrLmMgYi9ody9ibG9j
+ay9kYXRhcGxhbmUveGVuLWJsb2NrLmMKaW5kZXggYzZhMTVkYTAyNC4uZjE1MjNjNWI0NSAxMDA2
+NDQKLS0tIGEvaHcvYmxvY2svZGF0YXBsYW5lL3hlbi1ibG9jay5jCisrKyBiL2h3L2Jsb2NrL2Rh
+dGFwbGFuZS94ZW4tYmxvY2suYwpAQCAtMjgxLDEwICsyODEsNiBAQCBzdGF0aWMgdm9pZCB4ZW5f
+YmxvY2tfY29tcGxldGVfYWlvKHZvaWQgKm9wYXF1ZSwgaW50IHJldCkKICAgICAgICAgYnJlYWs7
+CiAgICAgY2FzZSBCTEtJRl9PUF9XUklURToKICAgICBjYXNlIEJMS0lGX09QX0ZMVVNIX0RJU0tD
+QUNIRToKLSAgICAgICAgaWYgKCFyZXF1ZXN0LT5yZXEubnJfc2VnbWVudHMpIHsKLSAgICAgICAg
+ICAgIGJyZWFrOwotICAgICAgICB9Ci0gICAgICAgIGJyZWFrOwogICAgIGRlZmF1bHQ6CiAgICAg
+ICAgIGJyZWFrOwogICAgIH0KQEAgLTI5OCw2ICsyOTQsNyBAQCBzdGF0aWMgdm9pZCB4ZW5fYmxv
+Y2tfY29tcGxldGVfYWlvKHZvaWQgKm9wYXF1ZSwgaW50IHJldCkKICAgICAgICAgaWYgKCFyZXF1
+ZXN0LT5yZXEubnJfc2VnbWVudHMpIHsKICAgICAgICAgICAgIGJyZWFrOwogICAgICAgICB9Cisg
+ICAgICAgIC8qIGZhbGwgdGhyb3VnaCAqLwogICAgIGNhc2UgQkxLSUZfT1BfUkVBRDoKICAgICAg
+ICAgaWYgKHJlcXVlc3QtPnN0YXR1cyA9PSBCTEtJRl9SU1BfT0tBWSkgewogICAgICAgICAgICAg
+YmxvY2tfYWNjdF9kb25lKGJsa19nZXRfc3RhdHMoZGF0YXBsYW5lLT5ibGspLCAmcmVxdWVzdC0+
+YWNjdCk7Ci0tIAoyLjIwLjEuMi5nYjIxZWJiNgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
+c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
+aXN0aW5mby94ZW4tZGV2ZWw=
