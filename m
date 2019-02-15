@@ -1,21 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH for-4.12 V4] x86/altp2m: fix
- HVMOP_altp2m_set_domain_state race
-Date: Fri, 15 Feb 2019 06:24:54 -0700
-Message-ID: <5C66BDA60200007800217025@prv1-mh.provo.novell.com>
-References: <1549971734-12795-1-git-send-email-rcojocaru@bitdefender.com>
- <AEB7DEFF-F671-4A5E-AC27-43D314D82741@citrix.com>
+From: Julien Grall <julien.grall@gmail.com>
+Subject: Re: [PATCH V2 0/3] Renesas Stout board support (R-Car
+ Gen2)
+Date: Fri, 15 Feb 2019 14:30:19 +0100
+Message-ID: <CAF3u54BBWhS9N9w5i2zRHsg_uS8FTAHKgoa90oV1AuwfzkgSHQ@mail.gmail.com>
+References: <1549024652-24805-1-git-send-email-olekstysh@gmail.com>
+ <82d6e897-d1b2-9b74-64c8-68f1421733cc@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7656026145369935114=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=Vfmb=QW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1gudU8-0003xV-CT
- for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 13:24:56 +0000
-In-Reply-To: <AEB7DEFF-F671-4A5E-AC27-43D314D82741@citrix.com>
-Content-Disposition: inline
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Q2aB=QW=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1gudZa-0004io-Qc
+ for xen-devel@lists.xenproject.org; Fri, 15 Feb 2019 13:30:34 +0000
+Received: by mail-ua1-x943.google.com with SMTP id v9so3196658uar.11
+ for <xen-devel@lists.xenproject.org>; Fri, 15 Feb 2019 05:30:33 -0800 (PST)
+In-Reply-To: <82d6e897-d1b2-9b74-64c8-68f1421733cc@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,53 +24,239 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: george.dunlap@citrix.com
-Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Oleksandr <olekstysh@gmail.com>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE1LjAyLjE5IGF0IDEzOjUyLCA8R2VvcmdlLkR1bmxhcEBjaXRyaXguY29tPiB3cm90
-ZToKPj4gT24gRmViIDEyLCAyMDE5LCBhdCAxMTo0MiBBTSwgUmF6dmFuIENvam9jYXJ1IDxyY29q
-b2NhcnVAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPj4gCj4+IEhWTU9QX2FsdHAybV9zZXRfZG9t
-YWluX3N0YXRlIGRvZXMgbm90IGRvbWFpbl9wYXVzZSgpLCBwcmVzdW1hYmx5Cj4+IG9uIHB1cnBv
-c2UgKGFzIGl0IHdhcyBvcmlnaW5hbGx5IHN1cHBvc2VkIHRvIGNhdGVyIHRvIGEgaW4tZ3Vlc3QK
-Pj4gYWdlbnQsIGFuZCBhIGRvbWFpbiBwYXVzaW5nIGl0c2VsZiBpcyBub3QgYSBnb29kIGlkZWEp
-Lgo+IAo+IFNvcnJ5IHRvIGNvbWUgaW4gaGVyZSBvbiB2NCBhbmQgc3VnZ2VzdCBjaGFuZ2luZyBl
-dmVyeXRoaW5nLCBidXQgSSBkb27igJl0IAo+IHJlYWxseSBsaWtlIHRoZSBzb2x1dGlvbiB5b3Ug
-aGF2ZSBoZXJlLiAgTm90IHNldHRpbmcgYWx0cDJtIHRvIOKAmGFjdGl2ZeKAmSB1bnRpbCAKPiBh
-ZnRlciB0aGUgdmNwdXMgYXJlIHNldCB1cCBtYWtlcyBzZW5zZTsgYnV0IHBhc3NpbmcgdGhpcyB0
-cnVlL2ZhbHNlIHZhbHVlIGluIAo+IHNlZW1zIHVnbHksIGFuZCBzdGlsbCBzZWVtcyBhIGJpdCBy
-YWN5IChpLmUuLCB3aGF0IGlmIHAybV9hY3RpdmUoKSBpcyAKPiBkaXNhYmxlZCBiZXR3ZWVuIHRo
-ZSBjaGVjayBpbiBIVk1PUF9hbHRwMm1fc3dpdGNoX3AybSBhbmQgdGhlIHRpbWUgd2UgCj4gYWN0
-dWFsbHkgY2FsbCBhbHRwMm1fdmNwdV91cGRhdGVfcDJtKCk/KQo+IAo+IEkgY2VydGFpbmx5IGRv
-buKAmXQgdGhpbmsgZG9tYWluX3BhdXNlKCkgc2hvdWxkIGJlIG91ciBnby10byBzb2x1dGlvbiBm
-b3IgcmFjZSAKPiBhdm9pZGFuY2UsIGJ1dCBpbiB0aGlzIGNhc2UgaXQgcmVhbGx5IHNlZW1zIGxp
-a2Ugc3dpdGNoaW5nIHRoZSBnbG9iYWwgcDJtIGZvciAKPiBldmVyeSB2Y3B1IGF0IG9uY2UgbWFr
-ZXMgdGhlIG1vc3Qgc2Vuc2U7IGFuZCB0cnlpbmcgdG8gc2FmZWx5IGNoYW5nZSB0aGlzIG9uIAo+
-IGFuIHVucGF1c2VkIGRvbWFpbiBpcyBub3Qgb25seSBvdmVybHkgY29tcGxpY2F0ZWQsIGJ1dCBw
-cm9iYWJseSBub3Qgd2hhdCB3ZSAKPiB3YW50ZWQgYW55d2F5Lgo+IAo+IHAybV9hbHRwMm1fZGVz
-dHJveV9ieV9pZCgpIGFuZCBwMm1fc3dpdGNoX2RvbWFpbl9hbHRwMm1fYnlfaWQoKSBhbHJlYWR5
-IHVzZSAKPiBkb21haW5fcGF1c2VfZXhjZXB0X3NlbGYoKTsgc28gaXQgc2VlbXMgbGlrZSBub3Qg
-dXNpbmcgaXQgZm9yIAo+IGFsdHAybV9zZXRfZG9tYWluX3N0YXRlIHdhcyBwcm9iYWJseSBtb3Jl
-IG9mIGFuIG92ZXJzaWdodCB0aGFuIGFuIGludGVudGlvbmFsIAo+IGRlY2lzaW9uLiAgVXNpbmcg
-dGhhdCBoZXJlIHNlZW1zIGxpa2UgYSBtb3JlIHJvYnVzdCBzb2x1dGlvbi4KCkFoLCBJIGRpZG4n
-dCBldmVuIHJlY2FsbCB0aGVyZSB3YXMgc3VjaCBhIGZ1bmN0aW9uLiBBcyB0aGlzIG5vdwphbHNv
-IGFsbG93cyBjb3ZlcmluZyBhIGRvbWFpbiByZXF1ZXN0aW5nIHRoZSBvcGVyYXRpb24gZm9yIGl0
-c2VsZiwKSSBkb24ndCBtaW5kIHRoZSBwYXVzaW5nIGFwcHJvYWNoIGFueW1vcmUuCgo+IFRoZSBv
-bmUgaXNzdWUgaXMgdGhhdCBkb21haW5fcGF1c2VfZXhjZXB0X3NlbGYoKSBjdXJyZW50bHkgaXMg
-YWN0dWFsbHkgYSAKPiBkZWFkbG9jayByaXNrIGlmIHR3byBkaWZmZXJlbnQgdmNwdXMgc3RhcnQg
-aXQgYXQgdGhlIHNhbWUgdGltZS4gIEkgdGhpbmsgdGhlIAo+IGF0dGFjaGVkIHBhdGNoIChjb21w
-aWxlLXRlc3RlZCBvbmx5KSBzaG91bGQgZml4IHRoaXMgaXNzdWU7IGFmdGVyIHRoaXMgcGF0Y2gg
-Cj4geW91IHNob3VsZCBiZSBhYmxlIHRvIHVzZSBkb21haW5fcGF1c2VfZXhjZXB0X3NlbGYoKSBp
-biAKPiBhbHRwMm1fc2V0X2RvbWFpbl9zdGF0ZSBpbnN0ZWFkLgoKVGhlcmUncyBvbmUgdGhpbmcg
-SSBkb24ndCByZWFsbHkgbGlrZSBoZXJlLCB3aGljaCBpcyBhIHJlc3VsdCBvZiB0aGUKKG5lY2Vz
-c2FyeSkgcmUtdXNlIG9mIHRoZSBoeXBlcmNhbGwgZGVhZGxvY2sgbXV0ZXg6IFRoaXMKY2VydGFp
-bmx5IHBvc2VzIHRoZSByaXNrIG9mIGdldHRpbmcgY2FsbGVkIGZyb20gYSBjb250ZXh0IHdoZXJl
-CnRoZSBsb2NrIHdhcyBhbHJlYWR5IGFjcXVpcmVkLiBUaGVyZWZvcmUgSSdkIGxpa2UgdG8gc3Vn
-Z2VzdCB0bwp1c2UgdGhpcyBsb2NrIGluIGEgcmVjdXJzaXZlIHdheSAoaGVyZSBhbmQgZWxzZXdo
-ZXJlKS4KCkFuZCB0d28gY29zbWV0aWMgcmVtYXJrcyAtIHRoZXJlJ3Mgbm8gbmVlZCB0byByZS1z
-cGVjaWZ5Cl9fbXVzdF9jaGVjayBvbiB0aGUgZnVuY3Rpb24gZGVmaW5pdGlvbiwgYXMgdGhlIGZ1
-bmN0aW9uCmRlY2xhcmF0aW9uIG91Z2h0IHRvIGJlIGluIHNjb3BlIGFueXdheS4gQW5kIHRoZXJl
-J3MgYSBzdHJheQpibGFuayBpbnNpZGUgdGhlIGxpa2VseSgpIHlvdSBhZGQuCgpKYW4KCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7656026145369935114==
+Content-Type: multipart/alternative; boundary="0000000000008039ff0581eec72f"
+
+--0000000000008039ff0581eec72f
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 15 Feb 2019, 14:25 Oleksandr, <olekstysh@gmail.com> wrote:
+
+>
+> On 01.02.19 14:37, Oleksandr Tyshchenko wrote:
+> > From: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+> >
+> > Hi, all.
+>
+>
+> Hi, all
+>
+> gentle reminder...
+>
+
+This is in my queue of patches to review. Also, as we are in freeze, I tend
+to prioritize patches for 4.12.
+
+I will try to have a look next week.
+
+Cheers,
+
+
+>
+> >
+> > The purpose of this patch series is to add required support to be able
+> to run
+> > Xen on Renesas Stout board [1] which uses SCIFA compatible UART as a
+> console
+> > interface.
+> >
+> > Actually Xen already has support for SCIF compatible UARTs which are
+> used on
+> > Renesas Lager (R-Car Gen2), Salvator-X, H3ULCB/M3ULCB (R-Car Gen3) and
+> other
+> > development boards. So this patch series extends existing support to be
+> able
+> > to handle both interfaces.
+> >
+> > ----------
+> >
+> > Current patch series is based on the following commit
+> 3389a8dc8c5753a3c84744923cd0193395e3f2a9
+> > and tested on Stout (ARM32) and H3ULCB (ARM64) boards.
+> >
+> > You can find current patch series here:
+> > repo: https://github.com/otyshchenko1/xen.git branch: stout_upstream
+> >
+> > You can find previous discussion here:
+> >
+> https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg21058.html
+> >
+> > Please note, that current patch series doesn=E2=80=99t have the followi=
+ng
+> patches:
+> > - xen/arm: drivers: scif: Remove unused #define-s (already upstreamed)
+> > - xen/arm: Reuse R-Car Gen2 platform code for Stout board (was dropped)
+> > but has new one:
+> > - xen/arm: Clarify usage of earlyprintk for Lager board
+> >
+> > ----------
+> >
+> > In order to run Xen on Stout board you need "PSCI-enabled" U-Boot (not
+> upsteamed yet).
+> > You can find corresponding patches for U-Boot here:
+> >
+> http://u-boot.10912.n7.nabble.com/PATCH-0-3-PSCI-support-for-r8a7790-SoC-=
+Lager-Stout-boards-td357352.html
+> >
+> > Have a plan to update Xen Wiki regarding this board.
+> >
+> > [1] https://elinux.org/R-Car/Boards/Stout
+> >
+> > ----------
+> >
+> > Oleksandr Tyshchenko (3):
+> >    xen/arm: drivers: scif: Add support for SCIFA compatible UARTs
+> >    xen/arm: Clarify usage of earlyprintk for Lager board
+> >    xen/arm: Add SCIFA UART support for early printk
+> >
+> >   docs/misc/arm/early-printk.txt     |   2 +-
+> >   xen/arch/arm/arm32/debug-scifa.inc |  51 ++++++++++++++
+> >   xen/drivers/char/scif-uart.c       | 139
+> +++++++++++++++++++++++++++----------
+> >   xen/include/asm-arm/scif-uart.h    |  44 ++++++++++--
+> >   4 files changed, 194 insertions(+), 42 deletions(-)
+> >   create mode 100644 xen/arch/arm/arm32/debug-scifa.inc
+> >
+> --
+> Regards,
+>
+> Oleksandr Tyshchenko
+>
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--0000000000008039ff0581eec72f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<br><br><div class=3D"gmail_quote"><div dir=3D"ltr">On Fri, 15 Feb 2019, 14=
+:25 Oleksandr, &lt;<a href=3D"mailto:olekstysh@gmail.com">olekstysh@gmail.c=
+om</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex"><br>
+On 01.02.19 14:37, Oleksandr Tyshchenko wrote:<br>
+&gt; From: Oleksandr Tyshchenko &lt;<a href=3D"mailto:oleksandr_tyshchenko@=
+epam.com" target=3D"_blank">oleksandr_tyshchenko@epam.com</a>&gt;<br>
+&gt;<br>
+&gt; Hi, all.<br>
+<br>
+<br>
+Hi, all<br>
+<br>
+gentle reminder...<br></blockquote></div><div><br></div><div>This is in my =
+queue of patches to review. Also, as we are in freeze, I tend to prioritize=
+ patches for 4.12.</div><div><br></div><div>I will try to have a look next =
+week.</div><div><br></div><div>Cheers,</div><div><br></div><div class=3D"gm=
+ail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;bor=
+der-left:1px #ccc solid;padding-left:1ex">
+<br>
+<br>
+&gt;<br>
+&gt; The purpose of this patch series is to add required support to be able=
+ to run<br>
+&gt; Xen on Renesas Stout board [1] which uses SCIFA compatible UART as a c=
+onsole<br>
+&gt; interface.<br>
+&gt;<br>
+&gt; Actually Xen already has support for SCIF compatible UARTs which are u=
+sed on<br>
+&gt; Renesas Lager (R-Car Gen2), Salvator-X, H3ULCB/M3ULCB (R-Car Gen3) and=
+ other<br>
+&gt; development boards. So this patch series extends existing support to b=
+e able<br>
+&gt; to handle both interfaces.<br>
+&gt;<br>
+&gt; ----------<br>
+&gt;<br>
+&gt; Current patch series is based on the following commit 3389a8dc8c5753a3=
+c84744923cd0193395e3f2a9<br>
+&gt; and tested on Stout (ARM32) and H3ULCB (ARM64) boards.<br>
+&gt;<br>
+&gt; You can find current patch series here:<br>
+&gt; repo: <a href=3D"https://github.com/otyshchenko1/xen.git" rel=3D"noref=
+errer" target=3D"_blank">https://github.com/otyshchenko1/xen.git</a> branch=
+: stout_upstream<br>
+&gt;<br>
+&gt; You can find previous discussion here:<br>
+&gt; <a href=3D"https://www.mail-archive.com/xen-devel@lists.xenproject.org=
+/msg21058.html" rel=3D"noreferrer" target=3D"_blank">https://www.mail-archi=
+ve.com/xen-devel@lists.xenproject.org/msg21058.html</a><br>
+&gt;<br>
+&gt; Please note, that current patch series doesn=E2=80=99t have the follow=
+ing patches:<br>
+&gt; - xen/arm: drivers: scif: Remove unused #define-s (already upstreamed)=
+<br>
+&gt; - xen/arm: Reuse R-Car Gen2 platform code for Stout board (was dropped=
+)<br>
+&gt; but has new one:<br>
+&gt; - xen/arm: Clarify usage of earlyprintk for Lager board<br>
+&gt;<br>
+&gt; ----------<br>
+&gt;<br>
+&gt; In order to run Xen on Stout board you need &quot;PSCI-enabled&quot; U=
+-Boot (not upsteamed yet).<br>
+&gt; You can find corresponding patches for U-Boot here:<br>
+&gt; <a href=3D"http://u-boot.10912.n7.nabble.com/PATCH-0-3-PSCI-support-fo=
+r-r8a7790-SoC-Lager-Stout-boards-td357352.html" rel=3D"noreferrer" target=
+=3D"_blank">http://u-boot.10912.n7.nabble.com/PATCH-0-3-PSCI-support-for-r8=
+a7790-SoC-Lager-Stout-boards-td357352.html</a><br>
+&gt;<br>
+&gt; Have a plan to update Xen Wiki regarding this board.<br>
+&gt;<br>
+&gt; [1] <a href=3D"https://elinux.org/R-Car/Boards/Stout" rel=3D"noreferre=
+r" target=3D"_blank">https://elinux.org/R-Car/Boards/Stout</a><br>
+&gt;<br>
+&gt; ----------<br>
+&gt;<br>
+&gt; Oleksandr Tyshchenko (3):<br>
+&gt;=C2=A0 =C2=A0 xen/arm: drivers: scif: Add support for SCIFA compatible =
+UARTs<br>
+&gt;=C2=A0 =C2=A0 xen/arm: Clarify usage of earlyprintk for Lager board<br>
+&gt;=C2=A0 =C2=A0 xen/arm: Add SCIFA UART support for early printk<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0docs/misc/arm/early-printk.txt=C2=A0 =C2=A0 =C2=A0|=C2=A0 =
+=C2=A02 +-<br>
+&gt;=C2=A0 =C2=A0xen/arch/arm/arm32/debug-scifa.inc |=C2=A0 51 ++++++++++++=
+++<br>
+&gt;=C2=A0 =C2=A0xen/drivers/char/scif-uart.c=C2=A0 =C2=A0 =C2=A0 =C2=A0| 1=
+39 +++++++++++++++++++++++++++----------<br>
+&gt;=C2=A0 =C2=A0xen/include/asm-arm/scif-uart.h=C2=A0 =C2=A0 |=C2=A0 44 ++=
+++++++++--<br>
+&gt;=C2=A0 =C2=A04 files changed, 194 insertions(+), 42 deletions(-)<br>
+&gt;=C2=A0 =C2=A0create mode 100644 xen/arch/arm/arm32/debug-scifa.inc<br>
+&gt;<br>
+-- <br>
+Regards,<br>
+<br>
+Oleksandr Tyshchenko<br>
+<br>
+<br>
+_______________________________________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank">Xen-dev=
+el@lists.xenproject.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer" target=3D"_blank">https://lists.xenproject.org/mailman/listinfo=
+/xen-devel</a></blockquote></div>
+
+--0000000000008039ff0581eec72f--
+
+
+--===============7656026145369935114==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7656026145369935114==--
