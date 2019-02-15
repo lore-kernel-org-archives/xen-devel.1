@@ -1,19 +1,26 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Enhancing Xen's Kconfig infrastructure to support
- tailored solutions
-Date: Fri, 15 Feb 2019 09:27:13 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1902150925230.5641@sstabellini-ThinkPad-X260>
-References: <a49643ec-6bbe-04be-1ae2-b1d731da92cf@gmail.com>
- <20190213182544.2tguperv3yliejch@zion.uk.xensource.com>
- <alpine.DEB.2.10.1902131110270.5641@sstabellini-ThinkPad-X260>
- <5C653AB10200007800216997@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
- <5C667DBE0200007800216E51@prv1-mh.provo.novell.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: RT Xen on ARM - R-Car series
+Date: Fri, 15 Feb 2019 19:30:44 +0200
+Message-ID: <7bd97574-44cf-f749-00cb-f19c492e0550@gmail.com>
+References: <20190201165314.ofuvpddlfpzbc247@mac>
+ <56b433e0-645e-997d-1bff-de3c4f7fe250@arm.com>
+ <20190204125307.aft4tzkjjrxdd34o@mac>
+ <fcd6618d-de13-212f-8afb-e2ef0b37396d@arm.com>
+ <f045b9a9-2e1a-4d3e-b2ce-51dca97720a8@gmail.com>
+ <6457d3e5-1897-d124-ba49-c6325076b393@gmail.com>
+ <alpine.DEB.2.10.1902061300540.2723@sstabellini-ThinkPad-X260>
+ <ffe52ce4-2fb6-d730-991e-c48c7fc10c5e@gmail.com>
+ <20190207103513.ky7xnftn3pj7r2lf@mac>
+ <316d93d5-7b4d-ace3-9bfa-7680057e92bd@gmail.com>
+ <20190214162909.ylnjnarbkfkrpwyk@mac>
+ <425ca87e-580e-7b9e-f6eb-f231f3b7d3a8@gmail.com>
+ <CAF3u54DpYoKXTC5rHf94nPbXtuOLdFDCik9gNAUhQ_AEKufqqA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5C667DBE0200007800216E51@prv1-mh.provo.novell.com>
+In-Reply-To: <CAF3u54DpYoKXTC5rHf94nPbXtuOLdFDCik9gNAUhQ_AEKufqqA@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,25 +29,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: James McKenzie <james.mckenzie@bromium.com>, robin.randhawa@arm.com, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Daniel Smith <dpsmith@apertussolutions.com>, Doug Goldstein <cardoe@cardoe.com>, Christopher Clark <christopher.w.clark@gmail.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, "Daniel P.Smith" <dpsmith.dev@gmail.com>, Lars Kurth <lars.kurth.xen@gmail.com>, Stefano Stabellini <sstabellini@kernel.org>, committers@xenproject.org, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, Xen-devel <xen-devel@lists.xen.org>, Paul Durrant <paul.durrant@citrix.com>
+To: Julien Grall <julien.grall@gmail.com>
+Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Xen Devel <xen-devel@lists.xen.org>, "LOPEZ,
+ FUENTES NACARINO Jairo Eduardo" <jairo@ruri.waseda.jp>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gRnJpLCAxNSBGZWIgMjAxOSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPj4+IE9uIDE0LjAyLjE5
-IGF0IDE5OjMyLCA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4gd3JvdGU6Cj4gPiBEbyB5b3UgaGF2
-ZSBhbnkgb3RoZXIgc3VnZ2VzdGlvbnMgYWJvdXQgdGhpbmdzIHRoYXQgY291bGQgYmUgcmVtb3Zl
-ZCB0bwo+ID4gcmVhY2ggZG93biB0byAxMDBLIExPQywgaW4gYWRkaXRpb24gdG8gd2hhdCB5b3Ug
-aGF2ZSBhbHJlYWR5IHdyaXR0ZW4KPiA+IGFib3ZlIChJbnRlbC9BTUQsIHNoYWRvdyk/Cj4gCj4g
-SWYgeW91IG1lYW4gb25lcyB3ZSBhbHJlYWR5IGhhdmUgS2NvbmZpZyBvcHRpb25zIGZvciwgdGhl
-biB5b3UKPiBjb3VsZCBkcm9wIFRCT09ULCB3aGljaCBpbiB0dXJuIGRyb3BzIENSWVBUTywgd2hp
-Y2ggdG9nZXRoZXIKPiBpcyBhYm91dCAzayBMT0MuIFR1cm5pbmcgb2ZmIFhFTk9QUk9GIHdvdWxk
-IHlpZWxkIGFub3RoZXIgMmsuCj4gSSBhc3N1bWUgeW91J3ZlIGFscmVhZHkgcmVzdHJpY3RlZCB5
-b3Vyc2VsZiB0byBqdXN0IHRoZSBudWxsCj4gc2NoZWR1bGVyPyBCdXQgdGhhdCdzIGFib3V0IGl0
-LCBJIHRoaW5rLCB3aXRob3V0IGFjdHVhbCBjb2RlIChvciBhdAo+IGxlYXN0IEtjb25maWcpIGNo
-YW5nZXMuCgpJIG1lYW50IHN1Z2dlc3Rpb25zIGZvciB0aGluZ3MgdGhhdCBjb3VsZCBiZSBkaXNh
-YmxlZCBpbiB0aGUgYnVpbGQsIGJ1dAp3ZSBkb24ndCBoYXZlIGEga2NvbmZpZyBvcHRpb24gZm9y
-IGl0IHlldC4gU3VjaCBhcyBzb21lIG9mIHRoZQpkZWNvbXByZXNzaW9uIGFsZ29yaXRobXMgKGFz
-IFdlaSBwb2ludGVkIG91dCkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+SGVsbG8gSnVsaWVuLAoKT24gMTUuMDIuMTkgMTg6MzEsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBX
+aHk/IElzIGl0IGJlY2F1c2UgeW91IHdhbnQgdG8gYmUgY2FjaGUtYWxpZ25lZD8gIElmIHNvLCBy
+ZXF1aXJpbmcgdGhlCj4gc3RydWN0dXJlIHRvIGJlIDY0LWJ5dGVzIGlzIG5vdCBlbm91Z2guCgpJ
+IGRpZCBub3QgbWVhbiBjYWNoZXMuCgo+IFlvdSBhbHNvIHdhbnQgdGhlIGFkZHJlc3MgdG8KPiBi
+ZSA2NC1ieXRlcyBhbGlnbmVkLgoKSSB3b3VsZCBrZWVwIGl0IGFzIGEgaGludCBmb3Igc3RhdGlj
+L2R5bmFtaWMgYWxsb2NhdGlvbnMgaW4gVk1zLCBob3BpbmcgdGhlIGFkZHJlc3Mgd291bGQgYmUg
+bm9ybWFsbHkgNjQgYnl0ZXMgYWxpZ25lZC4KSSBob3BlIGl0IG1pZ2h0IGJlIHN0cm9uZ2VyIHRo
+YW4sIG9ubHkgY29tbWVudGluZyBpdCBzaG91bGQgbm90IGNyb3NzIGEgcGFnZSBib3VuZGFyeS4g
+RS5nLiBsaWtlIGBzdHJ1Y3QgdmNwdV9yZWdpc3Rlcl92Y3B1X2luZm9gIGlzIGNvbW1lbnRlZC4K
+CkkndmUgZ290IHRoaXMgaWRlYSBhZnRlciBsb29raW5nIGF0IHJ1bnN0YXRlIGRlZmluaXRpb24g
+YXMgcGVyLWNwdSBpbiBMaW51eCBbMV0KCj4gSWYgYW4gT1MgY2FyZXMgYWJvdXQgaXQsIHRoZW4g
+aXQgY2FuIGFsaWduZWQgaXRzZWxmIGhlcmUuCkkgc3VwcG9zZSB3ZSBjYW4gaGludCB0aGUgT1Mg
+Ynkgc3RydWN0dXJlIGFsaWdubWVudCBpbiB0aGUgaW50ZXJmYWNlIGhlYWRlciwgYW5kIHJlcXVp
+cmUgaXQgZnJvbSBPUyB2ZXJpZnlpbmcgaXQgb24gaHlwZXJjYWxsIGhhbmRsaW5nLgoKWzFdIGh0
+dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L3Y1LjAtcmM2L3NvdXJjZS9kcml2ZXJzL3hl
+bi90aW1lLmMjTDIyCgotLSAKU2luY2VyZWx5LApBbmRyaWkgQW5pc292LgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
