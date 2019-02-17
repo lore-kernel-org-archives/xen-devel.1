@@ -1,20 +1,19 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen/pciback: Don't disable PCI_COMMAND on
- PCI device reset.
-Date: Sun, 17 Feb 2019 11:38:57 +0100
-Message-ID: <13930f1a-ccc0-22e6-75a0-4e3044ec648d@suse.com>
-References: <20190213232131.18942-1-prarit@redhat.com>
+Subject: Re: [PATCH 1/2] xen/gntdev: Do not destroy context
+ while dma-bufs are in use
+Date: Sun, 17 Feb 2019 11:39:41 +0100
+Message-ID: <302ff90b-32a9-58dd-ae8f-1b55813fed74__40949.8803013534$1550400034$gmane$org@suse.com>
+References: <20190214142321.1138-1-andr2000@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=myTo=QY=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gvJqk-00081J-JH
- for xen-devel@lists.xenproject.org; Sun, 17 Feb 2019 10:39:06 +0000
-In-Reply-To: <20190213232131.18942-1-prarit@redhat.com>
+ id 1gvJrM-00084z-Ed
+ for xen-devel@lists.xenproject.org; Sun, 17 Feb 2019 10:39:44 +0000
+In-Reply-To: <20190214142321.1138-1-andr2000@gmail.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,38 +23,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Prarit Bhargava <prarit@redhat.com>, xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+To: Oleksandr Andrushchenko <andr2000@gmail.com>, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, boris.ostrovsky@oracle.com
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMDIvMjAxOSAwMDoyMSwgUHJhcml0IEJoYXJnYXZhIHdyb3RlOgo+IEZyb206IEtvbnJh
-ZCBSemVzenV0ZWsgV2lsayA8a29ucmFkLndpbGtAb3JhY2xlLmNvbT4KPiAKPiBUaGlzIHdhcyBz
-dWJtaXR0ZWQgaW4gMjAxNSBoZXJlCj4gCj4gaHR0cHM6Ly9tYXJjLmluZm8vP2w9bGludXgta2Vy
-bmVsJm09MTQyODA3MTMyNTE1OTczJnc9Mgo+IAo+IGFuZCBoYXMgYmVlbiBpbmNsdWRlZCBpbiBG
-ZWRvcmEgYnVpbGRzIGV2ZXIgc2luY2UuICBObyBpc3N1ZXMgaGF2ZSBiZWVuCj4gcmVwb3J0ZWQg
-d2l0aCB0aGUgcGF0Y2guCj4gCj4gUC4KPiAKPiAtLS0tODwtLS0tCj4gCj4gVGhlcmUgaXMgbm8g
-bmVlZCBmb3IgdGhpcyBhdCBhbGwuIFdvcnN0IGl0IG1lYW5zIHRoYXQgaWYKPiB0aGUgZ3Vlc3Qg
-dHJpZXMgdG8gd3JpdGUgdG8gQkFScyBpdCBjb3VsZCBsZWFkIChvbiBjZXJ0YWluCj4gcGxhdGZv
-cm1zKSB0byBQQ0kgU0VSUiBlcnJvcnMuCj4gCj4gUGxlYXNlIG5vdGUgdGhhdCB3aXRoIGFmNmZj
-ODU4YTM1YjkwZTg5ZWE3YTdlZTU4ZTY2NjI4YzU1Yzc3NmIKPiAieGVuLXBjaWJhY2s6IGxpbWl0
-IGd1ZXN0IGNvbnRyb2wgb2YgY29tbWFuZCByZWdpc3RlciIKPiBhIGd1ZXN0IGlzIHN0aWxsIGFs
-bG93ZWQgdG8gZW5hYmxlIHRob3NlIGNvbnRyb2wgYml0cyAoc2FmZWx5KSwgYnV0Cj4gaXMgbm90
-IGFsbG93ZWQgdG8gZGlzYWJsZSB0aGVtIGFuZCB0aGF0IHRoZXJlZm9yZSBhIHdlbGwgYmVoYXZl
-ZAo+IGZyb250ZW5kIHdoaWNoIGVuYWJsZXMgdGhpbmdzIGJlZm9yZSB1c2luZyB0aGVtIHdpbGwg
-c3RpbGwKPiBmdW5jdGlvbiBjb3JyZWN0bHkuCj4gCj4gVGhpcyBpcyBkb25lIHZpYSBhbiB3cml0
-ZSB0byB0aGUgY29uZmlndXJhdGlvbiByZWdpc3RlciAweDQgd2hpY2gKPiB0cmlnZ2VycyBvbiB0
-aGUgYmFja2VuZCBzaWRlOgo+IGNvbW1hbmRfd3JpdGUKPiAgIFwtIHBjaV9lbmFibGVfZGV2aWNl
-Cj4gICAgICBcLSBwY2lfZW5hYmxlX2RldmljZV9mbGFncwo+ICAgICAgICAgXC0gZG9fcGNpX2Vu
-YWJsZV9kZXZpY2UKPiAgICAgICAgICAgIFwtIHBjaWJpb3NfZW5hYmxlX2RldmljZQo+ICAgICAg
-ICAgICAgICAgXC1wY2lfZW5hYmxlX3Jlc291cmNlc3MKPiAgICAgICAgICAgICAgICAgW3doaWNo
-IGVuYWJsZXMgdGhlIFBDSV9DT01NQU5EX01FTU9SWXxQQ0lfQ09NTUFORF9JT10KPiAKPiBIb3dl
-dmVyIGd1ZXN0cyAoYW5kIGRyaXZlcnMpIHdoaWNoIGRvbid0IGRvIHRoaXMgY291bGQgY2F1c2UK
-PiBwcm9ibGVtcywgaW5jbHVkaW5nIHRoZSBzZWN1cml0eSBpc3N1ZXMgd2hpY2ggWFNBLTEyMCBz
-b3VnaHQKPiB0byBhZGRyZXNzLgo+IAo+IFJlcG9ydGVkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxp
-Y2hAc3VzZS5jb20+Cj4gU2lnbmVkLW9mZi1ieTogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25y
-YWQud2lsa0BvcmFjbGUuY29tPgo+IFJldmlld2VkLWJ5OiBQcmFyaXQgQmhhcmdhdmEgPHByYXJp
-dEByZWRoYXQuY29tPgo+IENjOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CgpBcHBs
-aWVkIHRvIHhlbi90aXAuZ2l0IGZvci1saW51cy01LjEKCgpKdWVyZ2VuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTQvMDIvMjAxOSAxNToyMywgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6Cj4gRnJv
+bTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtvQGVwYW0u
+Y29tPgo+IAo+IElmIHRoZXJlIGFyZSBleHBvcnRlZCBETUEgYnVmZmVycyB3aGljaCBhcmUgc3Rp
+bGwgaW4gdXNlIGFuZAo+IGdyYW50IGRldmljZSBpcyBjbG9zZWQgYnkgZWl0aGVyIG5vcm1hbCB1
+c2VyLXNwYWNlIGNsb3NlIG9yIGJ5Cj4gYSBzaWduYWwgdGhpcyBsZWFkcyB0byB0aGUgZ3JhbnQg
+ZGV2aWNlIGNvbnRleHQgdG8gYmUgZGVzdHJveWVkLAo+IHRodXMgbWFraW5nIGl0IG5vdCBwb3Nz
+aWJsZSB0byBjb3JyZWN0bHkgZGVzdHJveSB0aG9zZSBleHBvcnRlZAo+IGJ1ZmZlcnMgd2hlbiB0
+aGV5IGFyZSByZXR1cm5lZCBiYWNrIHRvIGdudGRldiBhbmQgbWFrZXMgdGhlIG1vZHVsZQo+IGNy
+YXNoOgo+IAo+IFsgIDMzOS42MTc1NDBdIFs8ZmZmZjAwMDAwODU0YzBkOD5dIGRtYWJ1Zl9leHBf
+b3BzX3JlbGVhc2UrMHg0MC8weGE4Cj4gWyAgMzM5LjYxNzU2MF0gWzxmZmZmMDAwMDA4NjdhNmU4
+Pl0gZG1hX2J1Zl9yZWxlYXNlKzB4NjAvMHgxOTAKPiBbICAzMzkuNjE3NTc3XSBbPGZmZmYwMDAw
+MDgyMjExZjA+XSBfX2ZwdXQrMHg4OC8weDFkMAo+IFsgIDMzOS42MTc1ODldIFs8ZmZmZjAwMDAw
+ODIyMTM5ND5dIF9fX19mcHV0KzB4Yy8weDE4Cj4gWyAgMzM5LjYxNzYwN10gWzxmZmZmMDAwMDA4
+MGVkNGU0Pl0gdGFza193b3JrX3J1bisweDljLzB4YzAKPiBbICAzMzkuNjE3NjIyXSBbPGZmZmYw
+MDAwMDgwODk3MTQ+XSBkb19ub3RpZnlfcmVzdW1lKzB4ZmMvMHgxMDgKPiAKPiBGaXggdGhpcyBi
+eSByZWZlcmVuY2luZyBnbnRkZXYgb24gZWFjaCBETUEgYnVmZmVyIGV4cG9ydCBhbmQKPiB1bnJl
+ZmVyZW5jaW5nIG9uIGJ1ZmZlciByZWxlYXNlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5k
+ciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KCkFwcGxp
+ZWQgdG8geGVuL3RpcC5naXQgZm9yLWxpbnVzLTUuMQoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
