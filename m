@@ -1,9 +1,10 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 1/2] xen/gntdev: Do not destroy context
- while dma-bufs are in use
-Date: Sun, 17 Feb 2019 11:39:41 +0100
-Message-ID: <302ff90b-32a9-58dd-ae8f-1b55813fed74__40949.8803013534$1550400034$gmane$org@suse.com>
+Subject: Re: [PATCH 2/2] xen/gntdev: Check and release imported
+ dma-bufs on close
+Date: Sun, 17 Feb 2019 11:40:06 +0100
+Message-ID: <24e0b031-1ae1-ad6f-c5e1-73a326e7a515__36937.1584545419$1550400056$gmane$org@suse.com>
 References: <20190214142321.1138-1-andr2000@gmail.com>
+ <20190214142321.1138-2-andr2000@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=myTo=QY=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gvJrM-00084z-Ed
- for xen-devel@lists.xenproject.org; Sun, 17 Feb 2019 10:39:44 +0000
-In-Reply-To: <20190214142321.1138-1-andr2000@gmail.com>
+ id 1gvJrl-0000EE-5s
+ for xen-devel@lists.xenproject.org; Sun, 17 Feb 2019 10:40:09 +0000
+In-Reply-To: <20190214142321.1138-2-andr2000@gmail.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,23 +30,14 @@ List-Id: xen-devel@lists.xenproject.org
 
 T24gMTQvMDIvMjAxOSAxNToyMywgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gd3JvdGU6Cj4gRnJv
 bTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtvQGVwYW0u
-Y29tPgo+IAo+IElmIHRoZXJlIGFyZSBleHBvcnRlZCBETUEgYnVmZmVycyB3aGljaCBhcmUgc3Rp
-bGwgaW4gdXNlIGFuZAo+IGdyYW50IGRldmljZSBpcyBjbG9zZWQgYnkgZWl0aGVyIG5vcm1hbCB1
-c2VyLXNwYWNlIGNsb3NlIG9yIGJ5Cj4gYSBzaWduYWwgdGhpcyBsZWFkcyB0byB0aGUgZ3JhbnQg
-ZGV2aWNlIGNvbnRleHQgdG8gYmUgZGVzdHJveWVkLAo+IHRodXMgbWFraW5nIGl0IG5vdCBwb3Nz
-aWJsZSB0byBjb3JyZWN0bHkgZGVzdHJveSB0aG9zZSBleHBvcnRlZAo+IGJ1ZmZlcnMgd2hlbiB0
-aGV5IGFyZSByZXR1cm5lZCBiYWNrIHRvIGdudGRldiBhbmQgbWFrZXMgdGhlIG1vZHVsZQo+IGNy
-YXNoOgo+IAo+IFsgIDMzOS42MTc1NDBdIFs8ZmZmZjAwMDAwODU0YzBkOD5dIGRtYWJ1Zl9leHBf
-b3BzX3JlbGVhc2UrMHg0MC8weGE4Cj4gWyAgMzM5LjYxNzU2MF0gWzxmZmZmMDAwMDA4NjdhNmU4
-Pl0gZG1hX2J1Zl9yZWxlYXNlKzB4NjAvMHgxOTAKPiBbICAzMzkuNjE3NTc3XSBbPGZmZmYwMDAw
-MDgyMjExZjA+XSBfX2ZwdXQrMHg4OC8weDFkMAo+IFsgIDMzOS42MTc1ODldIFs8ZmZmZjAwMDAw
-ODIyMTM5ND5dIF9fX19mcHV0KzB4Yy8weDE4Cj4gWyAgMzM5LjYxNzYwN10gWzxmZmZmMDAwMDA4
-MGVkNGU0Pl0gdGFza193b3JrX3J1bisweDljLzB4YzAKPiBbICAzMzkuNjE3NjIyXSBbPGZmZmYw
-MDAwMDgwODk3MTQ+XSBkb19ub3RpZnlfcmVzdW1lKzB4ZmMvMHgxMDgKPiAKPiBGaXggdGhpcyBi
-eSByZWZlcmVuY2luZyBnbnRkZXYgb24gZWFjaCBETUEgYnVmZmVyIGV4cG9ydCBhbmQKPiB1bnJl
-ZmVyZW5jaW5nIG9uIGJ1ZmZlciByZWxlYXNlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5k
-ciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KCkFwcGxp
-ZWQgdG8geGVuL3RpcC5naXQgZm9yLWxpbnVzLTUuMQoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Y29tPgo+IAo+IENoZWNrIGlmIHRoZXJlIGFyZSBhbnkgaW1wb3J0ZWQgZG1hLWJ1ZnMgbGVmdCBu
+b3QgcmVsZWFzZWQgYnkKPiB1c2VyLXNwYWNlIHdoZW4gZ3JhbnQgZGV2aWNlJ3MgcmVsZWFzZSBj
+YWxsYmFjayBpcyBjYWxsZWQgYW5kCj4gZnJlZSB0aG9zZSBpZiB0aGlzIGlzIHRoZSBjYXNlLiBU
+aGlzIGNhbiBoYXBwZW4gaWYgdXNlci1zcGFjZQo+IGxlYWtzIHRoZSBidWZmZXJzIGJlY2F1c2Ug
+b2YgYSBidWcgb3IgYXBwbGljYXRpb24gaGFzIGJlZW4KPiB0ZXJtaW5hdGVkIGZvciBhbnkgcmVh
+c29uLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIDxvbGVrc2Fu
+ZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KCkFwcGxpZWQtdG86IHhlbi90aXAuZ2l0IGZvci1s
+aW51cy01LjEKCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
