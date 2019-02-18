@@ -1,9 +1,9 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH for-4.12] xen/arm: psci: Populate
- arm_smccc_res on PSCI_FEATURES call
-Date: Mon, 18 Feb 2019 12:33:52 +0100
-Message-ID: <cc10563e-1de1-f7a4-8acd-f1e29c9717c5@suse.com>
-References: <20190218094227.27176-1-julien.grall@arm.com>
+Subject: Re: [PATCH for-4.12 v2] xen/arm: domain_build: Require
+ the property "cpus" when building a domU
+Date: Mon, 18 Feb 2019 12:34:37 +0100
+Message-ID: <65eff758-4dca-5c40-051d-b1282477dc87@suse.com>
+References: <20190218101436.31127-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +12,9 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=J2Or=QZ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gvhBO-0001ca-Pc
- for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 11:33:58 +0000
-In-Reply-To: <20190218094227.27176-1-julien.grall@arm.com>
+ id 1gvhC5-0001hS-3F
+ for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 11:34:41 +0000
+In-Reply-To: <20190218101436.31127-1-julien.grall@arm.com>
 Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,12 +28,15 @@ To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 Cc: Artem_Mygaiev@epam.com, Oleksandr_Tyshchenko@epam.com, sstabellini@kernel.org, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTgvMDIvMjAxOSAxMDo0MiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IENvbW1pdCAwYmM2YTY4
-ZGE1ICJ4ZW4vYXJtOiBSZXBsYWNlIGNhbGxfc21jIHdpdGggYXJtX3NtY2NjX3NtYyIKPiBtaXN0
-YWtlbmx5IGZvcmdvdCB0byBwb3B1bGF0ZSBhcm1fc21jY2NfcmVzLiBTbyBhIGdhcmJhZ2dlIHZh
-bHVlIHdhcwo+IHVzZWQgYXMgcmV0dXJuIHZhbHVlLgo+IAo+IENvdmVyaXR5LUlEOiAxNDc2ODI3
-Cj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KClJl
-bGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCgpKdWVyZ2Vu
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTgvMDIvMjAxOSAxMToxNCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRoZSAzcmQgYXJndW1l
+bnQgb2YgZnVuY3Rpb24gZHRfcHJvcGVydHlfcmVhZF91MzIoKSBpcyBvbmx5IHZhbGlkIHdoZW4K
+PiB0aGUgY2FsbCBzdWNjZWVkZWQuIFNvIHdlIGNhbm5vdCBhc3N1bWUgdGhlIHZhbHVlIHdpbGwg
+bm90IGJlIG1vZGlmZWQKPiBpbiBjYXNlIG9mIGZhaWx1cmUuCj4gCj4gVGhlIGRvY3VtZW50YXRp
+b24gb2YgRG9tMGxlc3MgZG9lcyBub3QgZ2l2ZSBhIGRlZmF1bHQgdmFsdWUgd2hlbiB0aGUKPiBw
+cm9wZXJ0eSAiY3B1cyIgaXMgbm90IHNldC4gU28gcmVxdWlyZSB0aGUgcHJvcGVydHkgaW4gdGhl
+IGNvbmZpZ3VyYXRpb24uCj4gCj4gQ292ZXJpdHktSUQ6IDE0NzY4MjUKPiBTaWduZWQtb2ZmLWJ5
+OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgoKUmVsZWFzZS1hY2tlZC1ieTog
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
