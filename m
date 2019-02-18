@@ -1,17 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: [PATCH for-4.12 v2] xen/arm: domain_build: Panic
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH for-4.12 v2] xen/arm: domain_build: Panic
  message should end with a newline
-Date: Mon, 18 Feb 2019 10:21:06 +0000
-Message-ID: <20190218102106.32163-1-julien.grall@arm.com>
+Date: Mon, 18 Feb 2019 10:42:43 +0000
+Message-ID: <5e9d4a73-90f7-9092-810b-632ce32d2299@citrix.com>
+References: <20190218102106.32163-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=BVaE=QZ=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gvg33-0002pT-7h
- for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 10:21:17 +0000
+ <SRS0=sLuk=QZ=citrix.com=prvs=94545b475=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gvgNv-0004OL-CU
+ for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 10:42:51 +0000
+In-Reply-To: <20190218102106.32163-1-julien.grall@arm.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,36 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: jgross@suse.com, andrew.cooper3@citrix.com, Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+Cc: jgross@suse.com, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-U2luY2UgY29tbWl0IDI1ZWI1ZWVjNzkgInhlbjogRml4IGluY29uc2lzdGVudCBjYWxsZXJzIG9m
-IHBhbmljKCkiIGFsbAp0aGUgcGFuaWMgbWVzc2FnZSBzaG91bGQgZW5kIHdpdGggYSBuZXdsaW5l
-LiBVbmZvcnR1bmF0ZWx5LCBzb21lCmNvbW1pdHMgcHVzaGVkIGFmdGVyd2FyZHMgZG9lcyBub3Qg
-Zm9sbG93IHRoZSBydWxlLgoKTW9kaWZ5IHRoZSBvZmZlbmRpbmcgcGFuaWMgbWVzc2FnZXMgdG8g
-YXZvaWQgbW9yZSBpbmNvbnNpc3RlbmN5LgoKU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxq
-dWxpZW4uZ3JhbGxAYXJtLmNvbT4KCi0tLQoKQ2M6IGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20K
-LS0tCiB4ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgfCA2ICsrKy0tLQogMSBmaWxlIGNoYW5n
-ZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJj
-aC9hcm0vZG9tYWluX2J1aWxkLmMgYi94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKaW5kZXgg
-YzkyZjhjNmJlMS4uZDk4MzY3NzlkMSAxMDA2NDQKLS0tIGEveGVuL2FyY2gvYXJtL2RvbWFpbl9i
-dWlsZC5jCisrKyBiL3hlbi9hcmNoL2FybS9kb21haW5fYnVpbGQuYwpAQCAtMTU4MCw3ICsxNTgw
-LDcgQEAgc3RhdGljIGludCBfX2luaXQgbWFrZV9naWNfZG9tVV9ub2RlKGNvbnN0IHN0cnVjdCBk
-b21haW4gKmQsIHZvaWQgKmZkdCkKICAgICBjYXNlIEdJQ19WMjoKICAgICAgICAgcmV0dXJuIG1h
-a2VfZ2ljdjJfZG9tVV9ub2RlKGQsIGZkdCk7CiAgICAgZGVmYXVsdDoKLSAgICAgICAgcGFuaWMo
-IlVuc3VwcG9ydGVkIEdJQyB2ZXJzaW9uIik7CisgICAgICAgIHBhbmljKCJVbnN1cHBvcnRlZCBH
-SUMgdmVyc2lvblxuIik7CiAgICAgfQogfQogCkBAIC0yMDg2LDEyICsyMDg2LDEyIEBAIHZvaWQg
-X19pbml0IGNyZWF0ZV9kb21Vcyh2b2lkKQogCiAgICAgICAgIGQgPSBkb21haW5fY3JlYXRlKCsr
-bWF4X2luaXRfZG9taWQsICZkX2NmZywgZmFsc2UpOwogICAgICAgICBpZiAoIElTX0VSUihkKSAp
-Ci0gICAgICAgICAgICBwYW5pYygiRXJyb3IgY3JlYXRpbmcgZG9tYWluICVzIiwgZHRfbm9kZV9u
-YW1lKG5vZGUpKTsKKyAgICAgICAgICAgIHBhbmljKCJFcnJvciBjcmVhdGluZyBkb21haW4gJXNc
-biIsIGR0X25vZGVfbmFtZShub2RlKSk7CiAKICAgICAgICAgZC0+aXNfY29uc29sZSA9IHRydWU7
-CiAKICAgICAgICAgaWYgKCBjb25zdHJ1Y3RfZG9tVShkLCBub2RlKSAhPSAwICkKLSAgICAgICAg
-ICAgIHBhbmljKCJDb3VsZCBub3Qgc2V0IHVwIGRvbWFpbiAlcyIsIGR0X25vZGVfbmFtZShub2Rl
-KSk7CisgICAgICAgICAgICBwYW5pYygiQ291bGQgbm90IHNldCB1cCBkb21haW4gJXNcbiIsIGR0
-X25vZGVfbmFtZShub2RlKSk7CiAKICAgICAgICAgZG9tYWluX3VucGF1c2VfYnlfc3lzdGVtY29u
-dHJvbGxlcihkKTsKICAgICB9Ci0tIAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+T24gMTgvMDIvMjAxOSAxMDoyMSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFNpbmNlIGNvbW1pdCAy
+NWViNWVlYzc5ICJ4ZW46IEZpeCBpbmNvbnNpc3RlbnQgY2FsbGVycyBvZiBwYW5pYygpIiBhbGwK
+PiB0aGUgcGFuaWMgbWVzc2FnZSBzaG91bGQgZW5kIHdpdGggYSBuZXdsaW5lLiBVbmZvcnR1bmF0
+ZWx5LCBzb21lCj4gY29tbWl0cyBwdXNoZWQgYWZ0ZXJ3YXJkcyBkb2VzIG5vdCBmb2xsb3cgdGhl
+IHJ1bGUuCj4KPiBNb2RpZnkgdGhlIG9mZmVuZGluZyBwYW5pYyBtZXNzYWdlcyB0byBhdm9pZCBt
+b3JlIGluY29uc2lzdGVuY3kuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGll
+bi5ncmFsbEBhcm0uY29tPgoKQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
+QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
