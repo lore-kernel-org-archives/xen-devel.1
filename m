@@ -1,17 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Xen 4.12 RC3
-Date: Mon, 18 Feb 2019 16:25:59 +0100
-Message-ID: <5bc56b7c-01da-352a-f59d-876c72f952ef@suse.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH 3/3] xen-block: report error condition from
+ vbd_name_to_disk()
+Date: Mon, 18 Feb 2019 15:43:30 +0000
+Message-ID: <20190218154330.GC1349__33417.4707809993$1550504690$gmane$org@perard.uk.xensource.com>
+References: <20190215162533.19475-1-paul.durrant@citrix.com>
+ <20190215162533.19475-4-paul.durrant@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=J2Or=QZ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gvko0-00074P-AL
- for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 15:26:04 +0000
-Content-Language: de-DE
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=aRWY=QZ=citrix.com=prvs=945ef7921=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1gvl4y-0000Ws-Un
+ for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 15:43:36 +0000
+Content-Disposition: inline
+In-Reply-To: <20190215162533.19475-4-paul.durrant@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,22 +25,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-users <xen-users@lists.xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, xen-announce@lists.xenproject.org
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Peter Maydell <peter.maydell@linaro.org>, Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org, qemu-devel@nongnu.org, Max Reitz <mreitz@redhat.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgYWxsLAoKWGVuIDQuMTIgcmMzIGlzIHRhZ2dlZC4gWW91IGNhbiBjaGVjayB0aGF0IG91dCBm
-cm9tIHhlbi5naXQ6CgpnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcveGVuLmdpdCA0LjEyLjAtcmMzCgpG
-b3IgeW91ciBjb252ZW5pZW5jZSB0aGVyZSBpcyBhbHNvIGEgdGFyYmFsbCBhdDoKaHR0cHM6Ly9k
-b3dubG9hZHMueGVucHJvamVjdC5vcmcvcmVsZWFzZS94ZW4vNC4xMi4wLXJjMy94ZW4tNC4xMi4w
-LXJjMy50YXIuZ3oKCkFuZCB0aGUgc2lnbmF0dXJlIGlzIGF0OgpodHRwczovL2Rvd25sb2Fkcy54
-ZW5wcm9qZWN0Lm9yZy9yZWxlYXNlL3hlbi80LjEyLjAtcmMzL3hlbi00LjEyLjAtcmMzLnRhci5n
-ei5zaWcKClBsZWFzZSBzZW5kIGJ1ZyByZXBvcnRzIGFuZCB0ZXN0IHJlcG9ydHMgdG8geGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnLgpXaGVuIHNlbmRpbmcgYnVnIHJlcG9ydHMsIHBsZWFz
-ZSBDQyByZWxldmFudCBtYWludGFpbmVycyBhbmQgbWUKKGpncm9zc0BzdXNlLmNvbSkuCgpUaGVy
-ZSB3aWxsIGJlIGEgWGVuIFRlc3QgRGF5IG9uIEZlYiAyMHRoLgoKU2VlIGluc3RydWN0aW9ucyBv
-bjoKCmh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1hlbl80LjEyX1JDX3Rlc3RfaW5z
-dHJ1Y3Rpb25zCmh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1hlbl9Qcm9qZWN0X1Rl
-c3RfRGF5cwoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
-Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
-ZGV2ZWw=
+T24gRnJpLCBGZWIgMTUsIDIwMTkgYXQgMDQ6MjU6MzNQTSArMDAwMCwgUGF1bCBEdXJyYW50IHdy
+b3RlOgo+IFRoZSBmdW5jdGlvbiBuZWVkcyB0byBtYWtlIHN1cmUgaXQgaXMgcGFzc2VkIGEgdmFs
+aWQgZGlzayBuYW1lLiBUaGlzIGlzCj4gZWFzaWx5IGRvbmUgYnkgbWFraW5nIHN1cmUgdGhhdCB0
+aGUgcGFyc2luZyBsb29wIHJlc3VsdHMgaW4gYSBub24temVybwo+IHZhbHVlLgo+IAo+IFNwb3R0
+ZWQgYnkgQ292ZXJpdHk6IENJRCAxMzk4NjQwCj4gCj4gUmVwb3J0ZWQtYnk6IFBldGVyIE1heWRl
+bGwgPHBldGVyLm1heWRlbGxAbGluYXJvLm9yZz4KPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJh
+bnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgoKQWNrZWQtYnk6IEFudGhvbnkgUEVSQVJEIDxh
+bnRob255LnBlcmFyZEBjaXRyaXguY29tPgoKVGhhbmtzLAoKLS0gCkFudGhvbnkgUEVSQVJECgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
