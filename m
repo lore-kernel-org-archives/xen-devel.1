@@ -1,26 +1,26 @@
-From: Amit Tomer <amittomer25@gmail.com>
-Subject: Re: XEN on R-CAR H3
-Date: Mon, 18 Feb 2019 18:23:13 +0530
-Message-ID: <CABHD4K91iqMYU-Hm0LaF_uiOt_wPAyk5svd3j34qMHLFt3rwtQ@mail.gmail.com>
-References: <CABHD4K9_hG0deTR4idTz167SN3Ak1EPXr7ck9=dhbwsoGoQhBw@mail.gmail.com>
- <475a03a5-5017-c333-ad32-249960d7f50f@gmail.com>
- <CABHD4K83md1PdVtmUGnHrxEgzBrAPmHeF6wyeSG+3cuTDJ+t+g@mail.gmail.com>
- <CABHD4K9_G__3-u3ma-WGTeiB+DhBW+w4LGLPQJ0JKEDf56_MYw@mail.gmail.com>
- <62049eee-60e5-a770-908a-43b1014f3fea@gmail.com>
- <CABHD4K_4PmGwqK30dQ=7XhBPoVHGk=yizLv5ACaP+tscBcHV3Q@mail.gmail.com>
- <95239898-60f5-e3d3-440d-4c88b5ab7023@gmail.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Enhancing Xen's Kconfig infrastructure to support
+ tailored solutions
+Date: Mon, 18 Feb 2019 12:54:55 +0000
+Message-ID: <E42A3E76-5792-4536-867B-E8FD2A18C594@gmail.com>
+References: <5C653AB10200007800216997@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
+ <AB54071B-07B5-4FFC-A1A4-781C24F61D93@gmail.com>
+ <20190215110807.jtybxyfl523vwo3y@zion.uk.xensource.com>
+ <alpine.DEB.2.10.1902151105580.5641@sstabellini-ThinkPad-X260>
+ <20190218111234.r7ae42wswy2hjo7k@zion.uk.xensource.com>
+ <1636EB19-FE45-42FF-B4D3-8CE8853BD040@gmail.com>
+ <20190218112337.qoyws3pedxav4wmf@zion.uk.xensource.com>
+ <59568551-146c-e0b7-2f94-4f9ee19c5325@citrix.com>
+ <1B830543-1B7B-4DF4-8D1E-FB862FEE836C@gmail.com>
+ <20190218115712.s7os5yx5sxvqq7n4@zion.uk.xensource.com>
+ <a20dd648-286d-c1ec-1ab0-427fae3a145b@citrix.com>
+ <d9d2054f-0241-ca87-d2f4-9d3f3bf562f8@citrix.com>
+ <775bed6a-1c35-3614-9a86-4fcedf84acd4@citrix.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============1421118980940459266=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=qcXO=QZ=gmail.com=amittomer25@srs-us1.protection.inumbo.net>)
- id 1gviQJ-000280-KO
- for xen-devel@lists.xenproject.org; Mon, 18 Feb 2019 12:53:27 +0000
-Received: by mail-ot1-x330.google.com with SMTP id 32so27973129ota.12
- for <xen-devel@lists.xenproject.org>; Mon, 18 Feb 2019 04:53:25 -0800 (PST)
-In-Reply-To: <95239898-60f5-e3d3-440d-4c88b5ab7023@gmail.com>
+In-Reply-To: <775bed6a-1c35-3614-9a86-4fcedf84acd4@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,31 +29,198 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr <olekstysh@gmail.com>
-Cc: xen-devel@lists.xenproject.org, andrii_chepurnyi@epam.com
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: James McKenzie <james.mckenzie@bromium.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, 'Jan Beulich' <JBeulich@suse.com>, Daniel Smith <dpsmith@apertussolutions.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, Christopher Clark <christopher.w.clark@gmail.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, "Daniel P.Smith" <dpsmith.dev@gmail.com>, robin.randhawa@arm.com, committers@xenproject.org, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Jun Nakajima <jun.nakajima@intel.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, xen-devel <xen-devel@lists.xen.org>, Paul Durrant <paul.durrant@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCj4gSSBhbSB3b25kZXJpbmcgd2hhdCBBbmRyb2lkIHZlcnNpb24geW91IGFyZSB1c2luZy4g
-V2hhdCBpcyB5b3VyIHVzZS1jYXNlPwoKV2UgYXJlIHRyeWluZyB3aXRoIEFuZHJvaWQgTyA4LjEg
-dmVyc2lvbi4KCj4gVGhpcyBpcyBvdXIgZGV2ZWxvcG1lbnQgcHJvZHVjdAo+IGh0dHBzOi8vZ2l0
-aHViLmNvbS94ZW4tdHJvb3BzL21ldGEteHQtcHJvZC1kZXZlbAo+IHdoaWNoIGluIGFkZGl0aW9u
-IHRvIExpbnV4IGd1ZXN0IGNvbnRhaW5zIEFuZHJvaWQgUCBndWVzdC4KPgpBZnRlciBtYWtpbmcg
-c29tZSBjaGFuZ2VzIGluIGRvbVUgYm9vdGFyZ3MsIHdlIGNhbiBub3cgc2VlCmNvbnNvbGUgc2Vy
-dmljZSB0cnlpbmcgdG8gc3RhcnQgYnV0IGdvZXMgaW50byBsb29wIHdpdGggbWVzc2FnZToKClsg
-ICAgNi40MzI4NjRdIGluaXQ6IHN0YXJ0aW5nIHNlcnZpY2UgJ2NvbnNvbGUnLi4uClsgICAgNi40
-MzM5NzRdIGluaXQ6IHByb3BlcnR5X3NldCgicm8uYm9vdHRpbWUuY29uc29sZSIsICI2NDMyNDY5
-ODQ4IikKZmFpbGVkOiBwcm9wZXJ0eSBhbHJlYWR5IHNldApbICAgIDYuNDM0NTgwXSBpbml0OiBz
-ZXRwZ2lkIGZhaWxlZCBmb3IgY29uc29sZTogT3BlcmF0aW9uIG5vdCBwZXJtaXR0ZWQKWyAgICA2
-LjQzNDc0M10gaW5pdDogY2Fubm90IHNldGV4ZWNjb24oJ3U6cjpzaGVsbDpzMCcpIGZvciBjb25z
-b2xlOgpQZXJtaXNzaW9uIGRlbmllZApbICAgIDYuNDM1NDM0XSBpbml0OiBTZXJ2aWNlICdjb25z
-b2xlJyAocGlkIDc4MSkga2lsbGVkIGJ5IHNpZ25hbCA2ClsgICAgNi40MzU0ODNdIGluaXQ6IFNl
-bmRpbmcgc2lnbmFsIDkgdG8gc2VydmljZSAnY29uc29sZScgKHBpZCA3ODEpCnByb2Nlc3MgZ3Jv
-dXAuLi4KWyAgICA2LjQzNTYwOF0gaW5pdDogU3VjY2Vzc2Z1bGx5IGtpbGxlZCBwcm9jZXNzIGNn
-cm91cCB1aWQgMjAwMCBwaWQgNzgxIGluIDBtcwoKQWxzbywgb25lIG90aGVyIHF1ZXJ5LiBJbiBv
-cmRlciB0byBnZXQgZ3JhcGhpY3MgYW5kIGF1ZGlvIHVwIGluIGRvbTAKa2VybmVsLCBkbyB3ZQpu
-ZWVkIHRvIGxvYWQgc3BlY2lhbC9wcm9wcmlldGFyeSBncmFwaGljcy9hdWRpbyBkcml2ZXIgd2l0
-aCBtYWlubGluZSBrZXJuZWwKYW5kIFVidW50dSBEZWJpYW4gcm9vdGZzIG9uIEgzIHBsYXRmb3Jt
-PwoKVGhhbmtzCi1BbWl0CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+
+--===============1421118980940459266==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_071A515E-7DF6-470B-A667-BEB211AB7156"
+
+
+--Apple-Mail=_071A515E-7DF6-470B-A667-BEB211AB7156
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 18 Feb 2019, at 12:16, George Dunlap <george.dunlap@citrix.com> =
+wrote:
+>=20
+> On 2/18/19 12:11 PM, George Dunlap wrote:
+>> On 2/18/19 12:01 PM, Andrew Cooper wrote:
+>>> On 18/02/2019 11:57, Wei Liu wrote:
+>>>> On Mon, Feb 18, 2019 at 11:53:15AM +0000, Lars Kurth wrote:
+>>>>>=20
+>>>>>> On 18 Feb 2019, at 11:30, George Dunlap =
+<george.dunlap@citrix.com> wrote:
+>>>>>>=20
+>>>>>> On 2/18/19 11:23 AM, Wei Liu wrote:
+>>>>>>> On Mon, Feb 18, 2019 at 11:17:56AM +0000, Lars Kurth wrote:
+>>>>>>>> Thank you Wei. It's interesting though that the full vs HVM =
+only is almost identical in terms of SLOC's
+>>>>>>>> Lars
+>>>>>>> The cloc target counts the files in the dependency graph =
+generated by
+>>>>>>> make.
+>>>>> Do we know for sure that CLOC counts everything in a file or does =
+it honour the pre-processor settings?
+>>>> We certainly don't feed any preprocessor defines to it. I doubt it
+>>>> understand C to that level of details anyway.
+>>>=20
+>>> LoC isn't a fantastic metric under any circumstance.
+>>>=20
+>>> Bigger code is definitely better, if the reason it is bigger is =
+because
+>>> it is because it is formatted for readability/clarity etc.
+>>>=20
+>>> Attempting to optimise for smaller LoC, other than making entire
+>>> functional areas optional, is usually short sighted.
+>>=20
+>> For instance, we could probably decrease the LoC by nearly 20k by
+>> changing the style not to give the opening bracket its own line:
+>>=20
+>> $ find . -name '*.c' | xargs grep '^[[:space:]]*{' | wc -l
+>> 19896
+>> $ find . -name '*.[ch]' | xargs grep '^[[:space:]]*{' | wc -l
+>> 21847
+>=20
+> This is hypervisor only BTW (run from xen.git/xen).
+>=20
+> It is a bit mind-boggling to think that there are more open brackets =
+in
+> the Xen code base than there is PV-specific code. O_o
+
+As we have the same coding conventions across hypervisor code, that =
+shouldn't make a difference
+
+Lars=
+
+--Apple-Mail=_071A515E-7DF6-470B-A667-BEB211AB7156
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 18 Feb 2019, at 12:16, George Dunlap &lt;<a =
+href=3D"mailto:george.dunlap@citrix.com" =
+class=3D"">george.dunlap@citrix.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On 2/18/19 =
+12:11 PM, George Dunlap wrote:</span><br style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">On 2/18/19 12:01 PM, Andrew Cooper =
+wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">On 18/02/2019 =
+11:57, Wei Liu wrote:<br class=3D""><blockquote type=3D"cite" =
+class=3D"">On Mon, Feb 18, 2019 at 11:53:15AM +0000, Lars Kurth =
+wrote:<br class=3D""><blockquote type=3D"cite" class=3D""><br =
+class=3D""><blockquote type=3D"cite" class=3D"">On 18 Feb 2019, at =
+11:30, George Dunlap &lt;<a href=3D"mailto:george.dunlap@citrix.com" =
+class=3D"">george.dunlap@citrix.com</a>&gt; wrote:<br class=3D""><br =
+class=3D"">On 2/18/19 11:23 AM, Wei Liu wrote:<br class=3D""><blockquote =
+type=3D"cite" class=3D"">On Mon, Feb 18, 2019 at 11:17:56AM +0000, Lars =
+Kurth wrote:<br class=3D""><blockquote type=3D"cite" class=3D"">Thank =
+you Wei. It's interesting though that the full vs HVM only is almost =
+identical in terms of SLOC's<br class=3D"">Lars<br =
+class=3D""></blockquote>The cloc target counts the files in the =
+dependency graph generated by<br class=3D"">make.<br =
+class=3D""></blockquote></blockquote>Do we know for sure that CLOC =
+counts everything in a file or does it honour the pre-processor =
+settings?<br class=3D""></blockquote>We certainly don't feed any =
+preprocessor defines to it. I doubt it<br class=3D"">understand C to =
+that level of details anyway.<br class=3D""></blockquote><br =
+class=3D"">LoC isn't a fantastic metric under any circumstance.<br =
+class=3D""><br class=3D"">Bigger code is definitely better, if the =
+reason it is bigger is because<br class=3D"">it is because it is =
+formatted for readability/clarity etc.<br class=3D""><br =
+class=3D"">Attempting to optimise for smaller LoC, other than making =
+entire<br class=3D"">functional areas optional, is usually short =
+sighted.<br class=3D""></blockquote><br class=3D"">For instance, we =
+could probably decrease the LoC by nearly 20k by<br class=3D"">changing =
+the style not to give the opening bracket its own line:<br class=3D""><br =
+class=3D"">$ find . -name '*.c' | xargs grep '^[[:space:]]*{' | wc -l<br =
+class=3D"">19896<br class=3D"">$ find . -name '*.[ch]' | xargs grep =
+'^[[:space:]]*{' | wc -l<br class=3D"">21847<br =
+class=3D""></blockquote><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">This is hypervisor only BTW (run from xen.git/xen).</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">It is a bit =
+mind-boggling to think that there are more open brackets in</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">the Xen code =
+base than there is PV-specific code. O_o</span><br style=3D"caret-color: =
+rgb(0, 0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""></div></blockquote></div><br =
+class=3D""><div class=3D"">As we have the same coding conventions across =
+hypervisor code, that shouldn't make a difference</div><div class=3D""><br=
+ class=3D""></div><div class=3D"">Lars</div></body></html>=
+
+--Apple-Mail=_071A515E-7DF6-470B-A667-BEB211AB7156--
+
+
+--===============1421118980940459266==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1421118980940459266==--
