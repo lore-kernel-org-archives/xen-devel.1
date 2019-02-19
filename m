@@ -1,15 +1,15 @@
 From: Razvan Cojocaru <rcojocaru@bitdefender.com>
-Subject: Re: [PATCH 2/4] x86/altp2m: Rework #VE enable/disable
- paths
-Date: Wed, 20 Feb 2019 01:10:14 +0200
-Message-ID: <0f1a8d91-082a-fa3a-6c87-5689a6263d52@bitdefender.com>
+Subject: Re: [PATCH 4/4] x86/vmx: Properly flush the TLB when an
+ altp2m is modified
+Date: Wed, 20 Feb 2019 01:20:56 +0200
+Message-ID: <65a38fcf-69a9-63ad-bafc-6aad4c5c3d3c@bitdefender.com>
 References: <1550614715-21161-1-git-send-email-andrew.cooper3@citrix.com>
- <1550614715-21161-3-git-send-email-andrew.cooper3@citrix.com>
+ <1550614715-21161-5-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1550614715-21161-3-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1550614715-21161-5-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,21 +20,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Juergen Gross <jgross@suse.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Jun Nakajima <jun.nakajima@intel.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMi8yMC8xOSAxMjoxOCBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBTcGxpdCBhbHRwMm1f
-dmNwdV97ZW5hYmxlLGRpc2FibGV9X3ZlKCkgb3V0IG9mIHRoZQo+IEhWTU9QX2FsdHAybV92Y3B1
-X3tlbmFibGUsZGlzYWJsZX1fbm90aWZ5IG1hcnNoYWxsaW5nIGxvZ2ljLiAgQSBmdXR1cmUgY2hh
-bmdlCj4gaXMgZ29pbmcgdG8gbmVlZCB0byBjYWxsIGFsdHAybV92Y3B1X2Rpc2FibGVfdmUoKSBm
-cm9tIHRoZSBkb21haW5fa2lsbCgpIHBhdGguCj4gCj4gV2hpbGUgYXQgaXQsIGNsZWFuIHVwIHRo
-ZSBsb2dpYyBpbiBhbHRwMm1fdmNwdV97aW5pdGlhbGlzZSxkZXN0cm95fSgpLgo+IGFsdHAybV92
-Y3B1X3Jlc2V0KCkgaGFzIG5vIGV4dGVybmFsIGNhbGxlcnMsIHNvIGZvbGQgaXQgaW50byBpdHMg
-dHdvCj4gY2FsbHNpdGVzLiAgVGhpcyBpbiB0dXJuIGFsbG93cyBmb3IgYWx0cDJtX3ZjcHVfZGVz
-dHJveSgpIHRvIHJldXNlCj4gYWx0cDJtX3ZjcHVfZGlzYWJsZV92ZSgpIHJhdGhlciB0aGFuIG9w
-ZW5jb2RpbmcgaXQuCj4gCj4gTm8gcHJhY3RpY2FsIGNoYW5nZS4KPiAKPiBTaWduZWQtb2ZmLWJ5
-OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6
-IFJhenZhbiBDb2pvY2FydSA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KCgpUaGFua3MsClJh
-enZhbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMi8yMC8xOSAxMjoxOCBBTSwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBNb2RpZmljYWl0b25z
+IHRvIGFuIGFsdHAybSBtYXJrIHRoZSBwMm0gYXMgbmVlZGluZyBmbHVzaGluZywgYnV0IHRoaXMg
+d2FzCj4gbmV2ZXIgd2lyZWQgdXAgaW4gdGhlIHJldHVybi10by1ndWVzdCBwYXRoLiAgQXMgYSBy
+ZXN1bHQsIHN0YWxlIFRMQiBlbnRyaWVzCj4gY2FuIHJlbWFpbiBhZnRlciByZXN1bWluZyB0aGUg
+Z3Vlc3QuCj4gCj4gSW4gcHJhY3RpY2UsIHRoaXMgbWFuaWZlc3RzIGFzIGEgbWlzc2luZyBFUFRf
+VklPTEFUSU9OIG9yICNWRSBleGNlcHRpb24gd2hlbgo+IHRoZSBndWVzdCBzdWJzZXF1ZW50bHkg
+YWNjZXNzZXMgYSBwYWdlIHdoaWNoIGhhcyBoYWQgaXRzIHBlcm1pc3Npb25zIHJlZHVjZWQuCj4g
+Cj4gdm14X3ZtZW50ZXJfaGVscGVyKCkgbm93IGhhcyAxMSBwMm1zIHRvIHBvdGVudGlhbGx5IGlu
+dmFsaWRhdGUsIGJ1dCBpc3N1aW5nIDExCj4gSU5WRVBUIGluc3RydWN0aW9ucyBpc24ndCBjbGV2
+ZXIuICBJbnN0ZWFkLCBjb3VudCBob3cgbWFueSBjb250ZXh0cyBuZWVkCj4gaW52YWxpZGF0aW5n
+LCBhbmQgdXNlIElOVkVQVF9BTExfQ09OVEVYVCBpZiB0d28gb3IgbW9yZSBhcmUgaW4gbmVlZCBv
+Zgo+IGZsdXNoaW5nLgo+IAo+IFRoaXMgZG9lc24ndCBoYXZlIGFuIFhTQSBiZWNhdXNlIGFsdHAy
+bSBpcyBub3QgeWV0IGEgc2VjdXJpdHktc3VwcG9ydGVkCj4gZmVhdHVyZS4KPiAKPiBTaWduZWQt
+b2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpSZXZpZXdl
+ZC1ieTogUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVmZW5kZXIuY29tPgoKClRoYW5r
+cywKUmF6dmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
