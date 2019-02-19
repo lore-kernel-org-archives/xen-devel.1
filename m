@@ -1,16 +1,28 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [linux-next test] 133298: regressions - FAIL
-Date: Tue, 19 Feb 2019 19:46:36 +0000
-Message-ID: <osstest-133298-mainreport@xen.org>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: P S <pairspace@gmail.com>
+Subject: Re: Enhancing Xen's Kconfig infrastructure to support
+ tailored solutions
+Date: Tue, 19 Feb 2019 16:05:43 -0500
+Message-ID: <91366EC9-9448-43CE-9D80-88401FB48B5B@gmail.com>
+References: <5C653AB10200007800216997@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1902140938160.5641@sstabellini-ThinkPad-X260>
+ <AB54071B-07B5-4FFC-A1A4-781C24F61D93@gmail.com>
+ <20190215110807.jtybxyfl523vwo3y@zion.uk.xensource.com>
+ <alpine.DEB.2.10.1902151105580.5641@sstabellini-ThinkPad-X260>
+ <20190218111234.r7ae42wswy2hjo7k@zion.uk.xensource.com>
+ <1636EB19-FE45-42FF-B4D3-8CE8853BD040@gmail.com>
+ <20190218112337.qoyws3pedxav4wmf@zion.uk.xensource.com>
+ <59568551-146c-e0b7-2f94-4f9ee19c5325@citrix.com>
+ <1B830543-1B7B-4DF4-8D1E-FB862FEE836C@gmail.com>
+ <20190218115712.s7os5yx5sxvqq7n4@zion.uk.xensource.com>
+ <a20dd648-286d-c1ec-1ab0-427fae3a145b@citrix.com>
+ <d9d2054f-0241-ca87-d2f4-9d3f3bf562f8@citrix.com>
+ <775bed6a-1c35-3614-9a86-4fcedf84acd4@citrix.com>
+ <E42A3E76-5792-4536-867B-E8FD2A18C594@gmail.com>
+ <alpine.DEB.2.10.1902191112060.5641@sstabellini-ThinkPad-X260>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============5045514908740122145=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=9SbO=Q2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gwBNo-0007nl-OE
- for xen-devel@lists.xenproject.org; Tue, 19 Feb 2019 19:48:48 +0000
+In-Reply-To: <alpine.DEB.2.10.1902191112060.5641@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,221 +31,275 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: James McKenzie <james.mckenzie@bromium.com>, Christopher Clark <christopher.w.clark@gmail.com>, robin.randhawa@arm.com, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Lars Kurth <lars.kurth.xen@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, Marek Marczykowski <marmarek@invisiblethingslab.com>, George Dunlap <george.dunlap@citrix.com>, "Daniel P.Smith" <dpsmith.dev@gmail.com>, Daniel Smith <dpsmith@apertussolutions.com>, Paul Durrant <paul.durrant@citrix.com>, committers@xenproject.org, Jan Beulich <JBeulich@suse.com>, Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMzI5OCBsaW51eC1uZXh0IHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFi
-LnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzMyOTgvCgpSZWdyZXNzaW9ucyA6LSgKClRl
-c3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcgdGVz
-dHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2
-bS1hbWQgMTIgZ3Vlc3Qtc3RhcnQvcmVkaGF0LnJlcGVhdCBmYWlsIFJFR1IuIHZzLiAxMzMyODAK
-IHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAg
-IGZhaWwgUkVHUi4gdnMuIDEzMzI4MAogYnVpbGQtYXJtNjQtcHZvcHMgICAgICAgICAgICAgNiBr
-ZXJuZWwtYnVpbGQgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTMzMjgwCiB0ZXN0LWFybWhm
-LWFybWhmLXhsICAgICAgICAgICA3IHhlbi1ib290ICAgICAgICAgICAgICAgICBmYWlsIFJFR1Iu
-IHZzLiAxMzMyODAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgIDcgeGVuLWJvb3QgICAg
-ICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzI4MAogdGVzdC1hcm1oZi1hcm1oZi1leGFt
-aW5lICAgICAgOCByZWJvb3QgICAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTMzMjgw
-CiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQtcmF3ICA3IHhlbi1ib290ICAgICAgICAgICAgICAg
-ICBmYWlsIFJFR1IuIHZzLiAxMzMyODAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgIDcg
-eGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzI4MAogdGVzdC1hcm1o
-Zi1hcm1oZi14bC1tdWx0aXZjcHUgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgZmFpbCBSRUdS
-LiB2cy4gMTMzMjgwCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgIDcgeGVuLWJvb3Qg
-ICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMzMyODAKIHRlc3QtYXJtaGYtYXJtaGYteGwt
-Y3JlZGl0MiAgIDcgeGVuLWJvb3QgICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzI4
-MAogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAg
-ICAgZmFpbCBSRUdSLiB2cy4gMTMzMjgwCgpSZWdyZXNzaW9ucyB3aGljaCBhcmUgcmVnYXJkZWQg
-YXMgYWxsb3dhYmxlIChub3QgYmxvY2tpbmcpOgogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAg
-ICAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTMzMjgwCgpUZXN0
-cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hcm02
-NC1hcm02NC14bC14c20gICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2Nr
-ZWQgIG4vYQogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAgMSBidWlsZC1jaGVjaygxKSAg
-ICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQxICAg
-MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm02NC1h
-cm02NC14bC1jcmVkaXQyICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQg
-IG4vYQogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAg
-ICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hcm02NC1hcm02NC1leGFtaW5lICAgICAgMSBi
-dWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1hbWQ2
-NC1ydW1wcnVuLWFtZDY0IDE3IHJ1bXBydW4tZGVtby14ZW5zdG9yZWxzL3hlbnN0b3JlbHMucmVw
-ZWF0IGZhaWwgbGlrZSAxMzMyODAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2
-NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEzMzI4MAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxp
-a2UgMTMzMjgwCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgMTcgZ3Vlc3Qt
-c3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxMzMyODAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11
-dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgZmFpbCBsaWtlIDEzMzI4MAog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAg
-ICAgICBmYWlsIGxpa2UgMTMzMjgwCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRl
-bCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEvbDIgZmFpbCBsaWtlIDEzMzI4MAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWls
-IGxpa2UgMTMzMjgwCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVz
-dC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMzMyODAKIHRlc3QtYW1kNjQtYW1kNjQtbGli
-dmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
-cwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sg
-ICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1k
-NjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3Vw
-cG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1
-LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5z
-dGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhk
-IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAxMiBndWVzdC1z
-dGFydCAgICAgICAgICAgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgICBmYWlsIG5ldmVy
-IHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWlu
-c3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdp
-bjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAg
-ICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAx
-MCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRl
-ZCBmb3IgdGVzdGluZzoKIGxpbnV4ICAgICAgICAgICAgICAgIGNiOTE2ZmM1ZWFiZjg4MzJlMDVm
-NzNjMjQ2ZWI0NjcyNTk4NDZlZjAKYmFzZWxpbmUgdmVyc2lvbjoKIGxpbnV4ICAgICAgICAgICAg
-ICAgIDVkZWQ1ODcxMDMwZWI3NTAxNzYzOTE0OGRhMGE1ODkzMWRmYmZjMjUKCkxhc3QgdGVzdCBv
-ZiBiYXNpcyAgICAgICAgICAgICAgICAgICAgICAgICAgKG5vdCBmb3VuZCkgICAgIApGYWlsaW5n
-IHNpbmNlICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChub3QgZm91bmQpICAgICAKVGVz
-dGluZyBzYW1lIHNpbmNlICAgMTMzMjk4ICAyMDE5LTAyLTE4IDA5OjE4OjU2IFogICAgMSBkYXlz
-ICAgIDEgYXR0ZW1wdHMKCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-aTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkz
-ODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4
-Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hbWQ2NC1ydW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0
-LWFybTY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
-ZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0
-LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0t
-YW1kNjQteHNtICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2
-bS1hbWQ2NC14c20gICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFy
-bTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2
-bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJp
-YW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-cnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFt
-ZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwt
-cWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwt
-Y3JlZGl0MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1j
-dWJpZXRydWNrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV1LWRtcmVzdHJpY3QtYW1kNjQtZG1yZXN0cmljdCAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJp
-Y3QgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1p
-bmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJt
-aGYtYXJtaGYtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVu
-LWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAg
-ICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
-LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAg
-ICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVsICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhl
-bDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2
-Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
-cm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBh
-aXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2
-LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJp
-YW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAoKCi0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9n
-czogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZp
-ZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54
-ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMs
-IGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4u
-b3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVy
-CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7
-Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAg
-IGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoK
-UHVzaCBub3QgYXBwbGljYWJsZS4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+
+--===============5045514908740122145==
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-993D9079-4D0D-426B-B960-DA4FEB92959F
+Content-Transfer-Encoding: 7bit
+
+
+--Apple-Mail-993D9079-4D0D-426B-B960-DA4FEB92959F
+Content-Type: text/plain;
+	charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+
+On Feb 19, 2019, at 14:13, Stefano Stabellini <sstabellini@kernel.org> wrote=
+:
+>=20
+>> On Mon, 18 Feb 2019, Lars Kurth wrote:
+>>      On 18 Feb 2019, at 12:16, George Dunlap <george.dunlap@citrix.com> w=
+rote:
+>>=20
+>> On 2/18/19 12:11 PM, George Dunlap wrote:
+>>      On 2/18/19 12:01 PM, Andrew Cooper wrote:
+>>            On 18/02/2019 11:57, Wei Liu wrote:
+>>                  On Mon, Feb 18, 2019 at 11:53:15AM +0000, Lars Kurth wro=
+te:
+>>=20
+>>                              On 18 Feb 2019, at 11:30, George Dunlap
+>>                              <george.dunlap@citrix.com> wrote:
+>>=20
+>>                              On 2/18/19 11:23 AM, Wei Liu wrote:
+>>                                    On Mon, Feb 18, 2019 at 11:17:56AM +00=
+00, Lars
+>>                                    Kurth wrote:
+>>                                          Thank you Wei. It's interesting t=
+hough
+>>                                          that the full vs HVM only is alm=
+ost
+>>                                          identical in terms of SLOC's
+>>                                          Lars
+>>=20
+>>                                    The cloc target counts the files in th=
+e dependency
+>>                                    graph generated by
+>>                                    make.
+>>=20
+>>                        Do we know for sure that CLOC counts everything in=
+ a file or does it honour
+>>                        the pre-processor settings?
+>>=20
+>>                  We certainly don't feed any preprocessor defines to it. I=
+ doubt it
+>>                  understand C to that level of details anyway.
+>>=20
+>>=20
+>>            LoC isn't a fantastic metric under any circumstance.
+>>=20
+>>            Bigger code is definitely better, if the reason it is bigger i=
+s because
+>>            it is because it is formatted for readability/clarity etc.
+>>=20
+>>            Attempting to optimise for smaller LoC, other than making enti=
+re
+>>            functional areas optional, is usually short sighted.
+>>=20
+>>=20
+>>      For instance, we could probably decrease the LoC by nearly 20k by
+>>      changing the style not to give the opening bracket its own line:
+>>=20
+>>      $ find . -name '*.c' | xargs grep '^[[:space:]]*{' | wc -l
+>>      19896
+>>      $ find . -name '*.[ch]' | xargs grep '^[[:space:]]*{' | wc -l
+>>      21847
+>>=20
+>>=20
+>> This is hypervisor only BTW (run from xen.git/xen).
+>>=20
+>> It is a bit mind-boggling to think that there are more open brackets in
+>> the Xen code base than there is PV-specific code. O_o
+>>=20
+>>=20
+>> As we have the same coding conventions across hypervisor code, that shoul=
+dn't make a difference
+>=20
+> This is amazing, in a terrible kind of way: all our numbers will be
+> inflated by 20K!! For Xen on Arm is almost 50%! I am half-thinking we
+> should add xargs grep '^[[:space:]]*{' to the make cloc target.
+
+UCC (Unified Code Count) [1] can measure/diff logical SLOC for several langu=
+ages.
+
+Rich
+
+[1] Papers=20
+http://csse.usc.edu/TECHRPTS/2007/usc-csse-2007-737/usc-csse-2007-737.pdf
+http://csse.usc.edu/csse/event/2012/COCOMO/presentations/TOR-2010(3906)-72_L=
+ibrary.pdf
+http://www.nguyenvvu.net/wp-content/uploads/2015/07/UCC_Tool_Description.pdf=
+
+
+[2] Source
+http://csse.usc.edu/ucc_new/wordpress/2018/07/26/ucc-version-2018-07/
+
+[3] Build
+g++ ./src/*.cpp -o UCC -std=3Dc++0x -DUNIX -O3
+
+[4] Run
+UCC -dir xen *.c -outdir report
+
+
+--Apple-Mail-993D9079-4D0D-426B-B960-DA4FEB92959F
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"></div><div dir=3D"ltr">On =
+Feb 19, 2019, at 14:13, Stefano Stabellini &lt;<a href=3D"mailto:sstabellini=
+@kernel.org">sstabellini@kernel.org</a>&gt; wrote:</div><div dir=3D"ltr"><br=
+></div><blockquote type=3D"cite"><div dir=3D"ltr"><span>On Mon, 18 Feb 2019,=
+ Lars Kurth wrote:</span><br><blockquote type=3D"cite"><span> &nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;On 18 Feb 2019, at 12:16, George Dunlap &lt;<a href=3D"mailt=
+o:george.dunlap@citrix.com">george.dunlap@citrix.com</a>&gt; wrote:</span><b=
+r></blockquote><blockquote type=3D"cite"><span></span><br></blockquote><bloc=
+kquote type=3D"cite"><span>On 2/18/19 12:11 PM, George Dunlap wrote:</span><=
+br></blockquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;On 2/18/19 12:01 PM, Andrew Cooper wrote:</span><br></blockquote><blockqu=
+ote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;On 18/02/2019 11:57, Wei Liu wrote:</span><br></blockquote><b=
+lockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On Mon, Feb 18, 201=
+9 at 11:53:15AM +0000, Lars Kurth wrote:</span><br></blockquote><blockquote t=
+ype=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><span> &=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;On 18 Feb 2019, at 11:30, George Dunlap</span><br></blo=
+ckquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;<a href=3D=
+"mailto:george.dunlap@citrix.com">george.dunlap@citrix.com</a>&gt; wrote:</s=
+pan><br></blockquote><blockquote type=3D"cite"><span></span><br></blockquote=
+><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On 2/18/19 11:23 AM,=
+ Wei Liu wrote:</span><br></blockquote><blockquote type=3D"cite"><span> &nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;On Mon, Feb 18, 2019 a=
+t 11:17:56AM +0000, Lars</span><br></blockquote><blockquote type=3D"cite"><s=
+pan> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kurth wrote:<=
+/span><br></blockquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Th=
+ank you Wei. It's interesting though</span><br></blockquote><blockquote type=
+=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that the full vs HVM only is almost</span=
+><br></blockquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;identic=
+al in terms of SLOC's</span><br></blockquote><blockquote type=3D"cite"><span=
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;Lars</span><br></blockquote><blockquote type=3D"cite"><s=
+pan></span><br></blockquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The cloc target counts the files i=
+n the dependency</span><br></blockquote><blockquote type=3D"cite"><span> &nb=
+sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;graph generated by</s=
+pan><br></blockquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;make.</span><br></blockquote><blockquote=
+ type=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><span=
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Do we know f=
+or sure that CLOC counts everything in a file or does it honour</span><br></=
+blockquote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the pre-processor settings?</span><br></blockq=
+uote><blockquote type=3D"cite"><span></span><br></blockquote><blockquote typ=
+e=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We certainly don't feed any prep=
+rocessor defines to it. I doubt it</span><br></blockquote><blockquote type=3D=
+"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;understand C to that level of detail=
+s anyway.</span><br></blockquote><blockquote type=3D"cite"><span></span><br>=
+</blockquote><blockquote type=3D"cite"><span></span><br></blockquote><blockq=
+uote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
+bsp;&nbsp;&nbsp;LoC isn't a fantastic metric under any circumstance.</span><=
+br></blockquote><blockquote type=3D"cite"><span></span><br></blockquote><blo=
+ckquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
+;&nbsp;&nbsp;&nbsp;Bigger code is definitely better, if the reason it is big=
+ger is because</span><br></blockquote><blockquote type=3D"cite"><span> &nbsp=
+;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it is because i=
+t is formatted for readability/clarity etc.</span><br></blockquote><blockquo=
+te type=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><sp=
+an> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attemp=
+ting to optimise for smaller LoC, other than making entire</span><br></block=
+quote><blockquote type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;functional areas optional, is usually short sig=
+hted.</span><br></blockquote><blockquote type=3D"cite"><span></span><br></bl=
+ockquote><blockquote type=3D"cite"><span></span><br></blockquote><blockquote=
+ type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For instance, we could p=
+robably decrease the LoC by nearly 20k by</span><br></blockquote><blockquote=
+ type=3D"cite"><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;changing the style not t=
+o give the opening bracket its own line:</span><br></blockquote><blockquote t=
+ype=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><span> &=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ find . -name '*.c' | xargs grep '^[[:space:]]=
+*{' | wc -l</span><br></blockquote><blockquote type=3D"cite"><span> &nbsp;&n=
+bsp;&nbsp;&nbsp;&nbsp;19896</span><br></blockquote><blockquote type=3D"cite"=
+><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ find . -name '*.[ch]' | xargs grep '=
+^[[:space:]]*{' | wc -l</span><br></blockquote><blockquote type=3D"cite"><sp=
+an> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;21847</span><br></blockquote><blockquote t=
+ype=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><span><=
+/span><br></blockquote><blockquote type=3D"cite"><span>This is hypervisor on=
+ly BTW (run from xen.git/xen).</span><br></blockquote><blockquote type=3D"ci=
+te"><span></span><br></blockquote><blockquote type=3D"cite"><span>It is a bi=
+t mind-boggling to think that there are more open brackets in</span><br></bl=
+ockquote><blockquote type=3D"cite"><span>the Xen code base than there is PV-=
+specific code. O_o</span><br></blockquote><blockquote type=3D"cite"><span></=
+span><br></blockquote><blockquote type=3D"cite"><span></span><br></blockquot=
+e><blockquote type=3D"cite"><span>As we have the same coding conventions acr=
+oss hypervisor code, that shouldn't make a difference</span><br></blockquote=
+><span></span><br><span>This is amazing, in a terrible kind of way: all our n=
+umbers will be</span><br><span>inflated by 20K!! For Xen on Arm is almost 50=
+%! I am half-thinking we</span><br><span>should add xargs grep '^[[:space:]]=
+*{' to the make cloc target.</span><br></div></blockquote><div><br></div><di=
+v>UCC (Unified Code Count) [1] can measure/diff logical SLOC for several lan=
+guages.</div><div><br></div>Rich<div><br></div><div>[1] Papers&nbsp;</div><d=
+iv><a href=3D"http://csse.usc.edu/TECHRPTS/2007/usc-csse-2007-737/usc-csse-2=
+007-737.pdf">http://csse.usc.edu/TECHRPTS/2007/usc-csse-2007-737/usc-csse-20=
+07-737.pdf</a></div><div><a href=3D"http://csse.usc.edu/csse/event/2012/COCO=
+MO/presentations/TOR-2010(3906)-72_Library.pdf" style=3D"background-color: r=
+gba(255, 255, 255, 0);"><font color=3D"#000000">http://csse.usc.edu/csse/eve=
+nt/2012/COCOMO/presentations/TOR-2010(3906)-72_Library.pdf</font></a></div><=
+div><div><a href=3D"http://www.nguyenvvu.net/wp-content/uploads/2015/07/UCC_=
+Tool_Description.pdf?i=3D1" style=3D"caret-color: rgb(0, 0, 0); background-c=
+olor: rgba(255, 255, 255, 0);"><font color=3D"#000000">http://www.nguyenvvu.=
+net/wp-content/uploads/2015/07/UCC_Tool_Description.pdf</font></a></div><div=
+></div></div><div><br></div><div>[2] Source</div><div><a href=3D"http://csse=
+.usc.edu/ucc_new/wordpress/2018/07/26/ucc-version-2018-07/">http://csse.usc.=
+edu/ucc_new/wordpress/2018/07/26/ucc-version-2018-07/</a></div><div><br></di=
+v><div>[3] Build</div><div>g++ ./src/*.cpp -o UCC -std=3Dc++0x -DUNIX -O3</d=
+iv><div><br></div><div>[4] Run</div><div>UCC -dir xen *.c -outdir report</di=
+v><div><br></div></body></html>=
+
+--Apple-Mail-993D9079-4D0D-426B-B960-DA4FEB92959F--
+
+
+--===============5045514908740122145==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5045514908740122145==--
