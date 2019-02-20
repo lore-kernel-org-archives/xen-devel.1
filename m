@@ -1,8 +1,8 @@
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH v3 10/25] usb-redir: Verify usbredirparser_write
- get called with positive count
-Date: Wed, 20 Feb 2019 02:02:17 +0100
-Message-ID: <20190220010232.18731-11-philmd@redhat.com>
+Subject: [RFC PATCH v3 13/25] xen: Let buffer_append() return a
+ size_t
+Date: Wed, 20 Feb 2019 02:02:20 +0100
+Message-ID: <20190220010232.18731-14-philmd@redhat.com>
 References: <20190220010232.18731-1-philmd@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=O+CU=Q3=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1gwGKv-0000yN-Bo
- for xen-devel@lists.xenproject.org; Wed, 20 Feb 2019 01:06:09 +0000
+ id 1gwGL3-00013x-Kx
+ for xen-devel@lists.xenproject.org; Wed, 20 Feb 2019 01:06:17 +0000
 In-Reply-To: <20190220010232.18731-1-philmd@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,23 +26,18 @@ To: qemu-devel@nongnu.org, Prasad J Pandit <pjp@fedoraproject.org>, =?UTF-8?q?Ma
 Cc: Corey Minyard <minyard@acm.org>, Stefano Stabellini <sstabellini@kernel.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>, Li Zhijian <lizhijian@cn.fujitsu.com>, Amit Shah <amit@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, qemu-s390x@nongnu.org, Paul Durrant <paul.durrant@citrix.com>, qemu-ppc@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Zhang Chen <zhangckid@gmail.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Stefan Berger <stefanb@linux.ibm.com>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>, David Gibson <david@gibson.dropbear.id.au>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHVzYnJlZGlycGFyc2VyX3dyaXRlIGhhbmRsZXIgc2hvdWxkIG5ldmVyIGJlIGNhbGxlZCB3
-aXRoIGEgbmVnYXRpdmUKc2l6ZSBwYXlsb2FkLCByZXR1cm4gYW4gZXJyb3IgaWYgdGhpcyBpcyBu
-b3QgdGhlIGNhc2UuCk5vdyB0aGF0IHdlIGFyZSBzdXJlIHRoZSAnY291bnQnIHZhbHVlIGlzIHBv
-c2l0aXZlLCBtYWtlIGl0IG9idmlvdXMgYnkKY2FzdGluZyBpdCB0byBhIHNpemVfdC4KClNpZ25l
-ZC1vZmYtYnk6IFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIDxwaGlsbWRAcmVkaGF0LmNvbT4KLS0t
-CiBody91c2IvcmVkaXJlY3QuYyB8IDYgKysrKystCiAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRp
-b25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvaHcvdXNiL3JlZGlyZWN0LmMgYi9o
-dy91c2IvcmVkaXJlY3QuYwppbmRleCAxOGE0MmQxOTM4Li4xMzFlYWUyZTdlIDEwMDY0NAotLS0g
-YS9ody91c2IvcmVkaXJlY3QuYworKysgYi9ody91c2IvcmVkaXJlY3QuYwpAQCAtMjg1LDcgKzI4
-NSwxMSBAQCBzdGF0aWMgaW50IHVzYnJlZGlyX3dyaXRlKHZvaWQgKnByaXYsIHVpbnQ4X3QgKmRh
-dGEsIGludCBjb3VudCkKICAgICAgICAgcmV0dXJuIDA7CiAgICAgfQogCi0gICAgciA9IHFlbXVf
-Y2hyX2ZlX3dyaXRlKCZkZXYtPmNzLCBkYXRhLCBjb3VudCk7CisgICAgaWYgKGNvdW50IDwgMCkg
-eworICAgICAgICBFUlJPUigiSWxsZWdhbCB3cml0ZSBjb3VudDogJWlcbiIsIGNvdW50KTsKKyAg
-ICAgICAgcmV0dXJuIDA7CisgICAgfQorICAgIHIgPSBxZW11X2Nocl9mZV93cml0ZSgmZGV2LT5j
-cywgZGF0YSwgKHNpemVfdCljb3VudCk7CiAgICAgaWYgKHIgPCBjb3VudCkgewogICAgICAgICBp
-ZiAoIWRldi0+d2F0Y2gpIHsKICAgICAgICAgICAgIGRldi0+d2F0Y2ggPSBxZW11X2Nocl9mZV9h
-ZGRfd2F0Y2goJmRldi0+Y3MsIEdfSU9fT1VUIHwgR19JT19IVVAsCi0tIAoyLjIwLjEKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VG8gdGhlIFhlbiB0ZWFtOiB0aGlzIGlzIG5vdCB0cml2aWFsIHRvIG1lIHRvIGRlbW9uc3RyYXRl
+CnRoaXMgYXNzZXJ0aW9uIGNhbiBuZXZlciBoYXBwZW4sIGJ1dCB0aGVuIHRoZSB3aG9sZSBzZXJp
+ZXMKaXMganVzdGlmaWVkIGFuZCBJIGNhbiBjb252ZXJ0IHFlbXVfY2hyX2ZlX3dyaXRlKCkgdG8g
+dXNlCnNpemVfdCBhcmd1bWVudC4KQ2FuIHlvdSBoZWxwIG1lIGhlcmU/CgpTaWduZWQtb2ZmLWJ5
+OiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhpbG1kQHJlZGhhdC5jb20+Ci0tLQogaHcvY2hh
+ci94ZW5fY29uc29sZS5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKCmRp
+ZmYgLS1naXQgYS9ody9jaGFyL3hlbl9jb25zb2xlLmMgYi9ody9jaGFyL3hlbl9jb25zb2xlLmMK
+aW5kZXggMWEzMDAxNGExMS4uNWI2NzJhNWEyNCAxMDA2NDQKLS0tIGEvaHcvY2hhci94ZW5fY29u
+c29sZS5jCisrKyBiL2h3L2NoYXIveGVuX2NvbnNvbGUuYwpAQCAtOTIsNiArOTIsNyBAQCBzdGF0
+aWMgc3NpemVfdCBidWZmZXJfYXBwZW5kKHN0cnVjdCBYZW5Db25zb2xlICpjb24pCiAgICAgfQog
+CiAgb3V0OgorICAgIGFzc2VydChidWZmZXItPnNpemUgPj0gYnVmZmVyLT5jb25zdW1lZCk7CiAg
+ICAgcmV0dXJuIGJ1ZmZlci0+c2l6ZSAtIGJ1ZmZlci0+Y29uc3VtZWQ7CiB9CiAKLS0gCjIuMjAu
+MQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
