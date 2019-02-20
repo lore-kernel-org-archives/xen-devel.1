@@ -1,8 +1,7 @@
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-Subject: [PATCH v3 18/25] s390x/3270: Let
- insert_IAC_escape_char() use size_t
-Date: Wed, 20 Feb 2019 02:02:25 +0100
-Message-ID: <20190220010232.18731-19-philmd@redhat.com>
+Subject: [PATCH v3 21/25] s390x/sclp: Use size_t in process_mdb()
+Date: Wed, 20 Feb 2019 02:02:28 +0100
+Message-ID: <20190220010232.18731-22-philmd@redhat.com>
 References: <20190220010232.18731-1-philmd@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +10,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=O+CU=Q3=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1gwGMa-0001pA-Oe
- for xen-devel@lists.xenproject.org; Wed, 20 Feb 2019 01:07:52 +0000
+ id 1gwGMq-0001yN-Fy
+ for xen-devel@lists.xenproject.org; Wed, 20 Feb 2019 01:08:08 +0000
 In-Reply-To: <20190220010232.18731-1-philmd@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,27 +25,23 @@ To: qemu-devel@nongnu.org, Prasad J Pandit <pjp@fedoraproject.org>, =?UTF-8?q?Ma
 Cc: Corey Minyard <minyard@acm.org>, Stefano Stabellini <sstabellini@kernel.org>, Samuel Thibault <samuel.thibault@ens-lyon.org>, Li Zhijian <lizhijian@cn.fujitsu.com>, Amit Shah <amit@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, qemu-s390x@nongnu.org, Paul Durrant <paul.durrant@citrix.com>, qemu-ppc@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>, Pavel Dovgalyuk <pavel.dovgaluk@ispras.ru>, Zhang Chen <zhangckid@gmail.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Stefan Berger <stefanb@linux.ibm.com>, =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>, David Gibson <david@gibson.dropbear.id.au>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBmdW5jdGlvbiB0YWtlcyBzaXplX3QgYXJndW1lbnQgYW5kIHJldHVybiBhIHNpemVfdC4K
-ClNpZ25lZC1vZmYtYnk6IFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIDxwaGlsbWRAcmVkaGF0LmNv
-bT4KLS0tCiBody9jaGFyL3Rlcm1pbmFsMzI3MC5jIHwgNyArKysrLS0tCiAxIGZpbGUgY2hhbmdl
-ZCwgNCBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2h3L2NoYXIv
-dGVybWluYWwzMjcwLmMgYi9ody9jaGFyL3Rlcm1pbmFsMzI3MC5jCmluZGV4IDM1YjA3OWQ1YzQu
-LjFjYjQ4YTNjNmYgMTAwNjQ0Ci0tLSBhL2h3L2NoYXIvdGVybWluYWwzMjcwLmMKKysrIGIvaHcv
-Y2hhci90ZXJtaW5hbDMyNzAuYwpAQCAtMTk5LDkgKzE5OSwxMCBAQCBzdGF0aWMgaW50IHJlYWRf
-cGF5bG9hZF8zMjcwKEVtdWxhdGVkQ2N3MzI3MERldmljZSAqZGV2KQogfQogCiAvKiBUTjMyNzAg
-dXNlcyBiaW5hcnkgdHJhbnNtaXNzaW9uLCB3aGljaCBuZWVkcyBlc2NhcGUgSUFDIHRvIElBQyBJ
-QUMgKi8KLXN0YXRpYyBpbnQgaW5zZXJ0X0lBQ19lc2NhcGVfY2hhcih1aW50OF90ICpvdXR2LCBp
-bnQgb3V0X2xlbikKK3N0YXRpYyBzaXplX3QgaW5zZXJ0X0lBQ19lc2NhcGVfY2hhcih1aW50OF90
-ICpvdXR2LCBzaXplX3Qgb3V0X2xlbikKIHsKLSAgICBpbnQgSUFDX251bSA9IDAsIG5ld19vdXRf
-bGVuLCBpLCBqOworICAgIHNpemVfdCBuZXdfb3V0X2xlbjsKKyAgICBpbnQgSUFDX251bSA9IDAs
-IGksIGo7CiAKICAgICBmb3IgKGkgPSAwOyBpIDwgb3V0X2xlbjsgaSsrKSB7CiAgICAgICAgIGlm
-IChvdXR2W2ldID09IElBQykgewpAQCAtMjMyLDcgKzIzMyw3IEBAIHN0YXRpYyBpbnQgd3JpdGVf
-cGF5bG9hZF8zMjcwKEVtdWxhdGVkQ2N3MzI3MERldmljZSAqZGV2LCB1aW50OF90IGNtZCkKICAg
-ICBpbnQgY291bnQgPSBjY3dfZHN0cmVhbV9hdmFpbChnZXRfY2RzKHQpKTsKICAgICBpbnQgYm91
-bmQgPSAoT1VUUFVUX0JVRkZFUl9TSVpFIC0gMykgLyAyOwogICAgIGludCBsZW4gPSBNSU4oY291
-bnQsIGJvdW5kKTsKLSAgICBpbnQgb3V0X2xlbiA9IDA7CisgICAgc2l6ZV90IG91dF9sZW4gPSAw
-OwogCiAgICAgaWYgKCF0LT5oYW5kc2hha2VfZG9uZSkgewogICAgICAgICBpZiAoISh0LT5vdXR2
-WzBdID09IElBQyAmJiB0LT5vdXR2WzFdICE9IElBQykpIHsKLS0gCjIuMjAuMQoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+U2luY2UgaXQgaXMgdW5saWtlbHkgd2UgaGF2ZSBzaXplb2YobWRiby0+bXRvLm1lc3NhZ2UpIDwg
+MCwKd2UgY2FuIGNvbnZlcnQgdGhpcyB2YXJpYWJsZSB0byBhbiB1bnNpZ25lZCB0eXBlLgoKU2ln
+bmVkLW9mZi1ieTogUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPHBoaWxtZEByZWRoYXQuY29tPgot
+LS0KIGh3L2NoYXIvc2NscGNvbnNvbGUtbG0uYyB8IDMgKystCiAxIGZpbGUgY2hhbmdlZCwgMiBp
+bnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvaHcvY2hhci9zY2xwY29u
+c29sZS1sbS5jIGIvaHcvY2hhci9zY2xwY29uc29sZS1sbS5jCmluZGV4IDQ5NTQzZTJjODMuLjQ4
+Yzc2ZDg2M2UgMTAwNjQ0Ci0tLSBhL2h3L2NoYXIvc2NscGNvbnNvbGUtbG0uYworKysgYi9ody9j
+aGFyL3NjbHBjb25zb2xlLWxtLmMKQEAgLTIwOCw3ICsyMDgsNyBAQCBzdGF0aWMgaW50IHdyaXRl
+X2NvbnNvbGVfZGF0YShTQ0xQRXZlbnQgKmV2ZW50LCBjb25zdCB1aW50OF90ICpidWYsIGludCBs
+ZW4pCiBzdGF0aWMgaW50IHByb2Nlc3NfbWRiKFNDTFBFdmVudCAqZXZlbnQsIE1EQk8gKm1kYm8p
+CiB7CiAgICAgaW50IHJjOwotICAgIGludCBsZW47CisgICAgdWludDE2X3QgbGVuOwogICAgIHVp
+bnQ4X3QgYnVmZmVyW1NJWkVfQlVGRkVSXTsKICAgICBjb25zdCBzaXplX3QgaGxlbiA9IHNpemVv
+ZihtZGJvLT5sZW5ndGgpCiAgICAgICAgICAgICArIHNpemVvZihtZGJvLT50eXBlKQpAQCAtMjE3
+LDYgKzIxNyw3IEBAIHN0YXRpYyBpbnQgcHJvY2Vzc19tZGIoU0NMUEV2ZW50ICpldmVudCwgTURC
+TyAqbWRibykKICAgICAgICAgICAgICsgc2l6ZW9mKG1kYm8tPm10by5fcmVzZXJ2ZWQpOwogCiAg
+ICAgbGVuID0gYmUxNl90b19jcHUobWRiby0+bGVuZ3RoKTsKKyAgICBhc3NlcnQobGVuID49IGhs
+ZW4pOwogICAgIGxlbiAtPSBobGVuOwogICAgIGFzc2VydChsZW4gPD0gU0laRV9CVUZGRVIpOwog
+Ci0tIAoyLjIwLjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
