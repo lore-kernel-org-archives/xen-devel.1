@@ -1,29 +1,25 @@
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-Subject: Re: XEN on R-CAR H3
-Date: Wed, 20 Feb 2019 23:28:36 +0200
-Message-ID: <CAPD2p-=U3Hfi9g-PhcU6ztAWwAhTES2aoMAJjJ0nY6quj_9m0Q@mail.gmail.com>
-References: <CABHD4K9_hG0deTR4idTz167SN3Ak1EPXr7ck9=dhbwsoGoQhBw@mail.gmail.com>
- <475a03a5-5017-c333-ad32-249960d7f50f@gmail.com>
- <CABHD4K83md1PdVtmUGnHrxEgzBrAPmHeF6wyeSG+3cuTDJ+t+g@mail.gmail.com>
- <CABHD4K9_G__3-u3ma-WGTeiB+DhBW+w4LGLPQJ0JKEDf56_MYw@mail.gmail.com>
- <62049eee-60e5-a770-908a-43b1014f3fea@gmail.com>
- <CABHD4K_4PmGwqK30dQ=7XhBPoVHGk=yizLv5ACaP+tscBcHV3Q@mail.gmail.com>
- <95239898-60f5-e3d3-440d-4c88b5ab7023@gmail.com>
- <CABHD4K91iqMYU-Hm0LaF_uiOt_wPAyk5svd3j34qMHLFt3rwtQ@mail.gmail.com>
- <172f815e-65d1-1f02-5653-0308c5c1604e@gmail.com>
- <CABHD4K_vMN+QRJgxkJjRuZ+_NSGTyXnJC=qvAw5cKGn_nsvV2A@mail.gmail.com>
- <06da3bda-93ba-82a8-d155-02224a79bb8a@arm.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: xen/evtchn and forced threaded irq
+Date: Wed, 20 Feb 2019 16:46:30 -0500
+Message-ID: <1574a7fe-a5ac-4bc2-d3f0-967d8d01e5f1__15696.4963929326$1550699327$gmane$org@oracle.com>
+References: <5e256d9a-572c-e01e-7706-407f99245b00@arm.com>
+ <20190220000209.GA4091@localhost.localdomain>
+ <a872d480-9f1b-6cd7-e507-ac4fcdf705af@arm.com>
+ <21214d47-9c68-e6bf-007a-4047cc2b02f9@oracle.com>
+ <8f7445d7-fa50-f3e9-44f5-cc2aebd020f4@arm.com>
+ <15bc52cb-82d8-4d2c-e5a8-c6ae8de90276@oracle.com>
+ <5df8888a-4a29-fccd-bac2-a9c170244029@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0052757312410077869=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=dYg4=Q3=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1gwZQB-0002t2-4n
- for xen-devel@lists.xenproject.org; Wed, 20 Feb 2019 21:28:51 +0000
-Received: by mail-it1-x142.google.com with SMTP id d125so7578958ith.1
- for <xen-devel@lists.xenproject.org>; Wed, 20 Feb 2019 13:28:49 -0800 (PST)
-In-Reply-To: <06da3bda-93ba-82a8-d155-02224a79bb8a@arm.com>
+ <SRS0=A5C/=Q3=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1gwZiV-0004N4-HC
+ for xen-devel@lists.xenproject.org; Wed, 20 Feb 2019 21:47:47 +0000
+In-Reply-To: <5df8888a-4a29-fccd-bac2-a9c170244029@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,227 +29,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, andrii_chepurnyi@epam.com, amittomer25@gmail.com
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Dave P Martin <dave.martin@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0052757312410077869==
-Content-Type: multipart/alternative; boundary="00000000000022319f05825a0bcc"
-
---00000000000022319f05825a0bcc
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-=D1=81=D1=80, 20 =D1=84=D0=B5=D0=B2=D1=80. 2019 =D0=B3., 22:14 Julien Grall=
- <julien.grall@arm.com>:
-
-> Hi Amit,
-
-
-Hi, Julien, Amit.
-
-Sorry for formatting, writing from my mobile.
-
-If I am not mistaken, the diff between BSP's and mainline device trees is
-in reserved memory area. BSP device tree (1) contains reserved memory
-regions, but the mainline one (2) doesn't.
->From the log you provided, I see that Xen is trying to copy device-tree to
-the address which is located in reserved area (0x58000000). FYI, we always
-remove these reserved area nodes from the device-tree. Maybe that's why we
-didn't face an issue. Julien, what do you think, can this be a reason?
-
-(1)
-https://git.kernel.org/pub/scm/linux/kernel/git/horms/renesas-bsp.git/tree/=
-arch/arm64/boot/dts/renesas/r8a7795-h3ulcb.dts?h=3Dv4.14.75-ltsi/rcar-3.9.3=
-.rc1
-
-(2)
-https://elixir.bootlin.com/linux/v5.0-rc7/source/arch/arm64/boot/dts/renesa=
-s/r8a7795-h3ulcb.dts
-
-
-> Thank you for the report.
->
-> On 2/19/19 4:46 PM, Amit Tomer wrote:
-> > (XEN) CPU7 MIDR (0x410fd034) does not match boot CPU MIDR (0x411fd073),
-> > (XEN) disable cpu (see big.LITTLE.txt under docs/).
-> > (XEN) CPU7 never came online
-> > (XEN) Failed to bring up CPU 7 (error -5)
-> > (XEN) Brought up 4 CPUs
-> > (XEN) P2M: 44-bit IPA with 44-bit PA and 8-bit VMID
-> > (XEN) P2M: 4 levels with order-0 root, VTCR 0x80043594
-> > (XEN) I/O virtualisation disabled
-> > (XEN) build-id: 74f80103afa98953c029eea87d69696bcd5ef69d
-> > (XEN) alternatives: Patching with alt table 00000000002abba8 ->
-> 00000000002ac1f0
-> > (XEN) CPU0 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > (XEN) CPU2 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > (XEN) CPU3 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > (XEN) CPU1 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry
-> > (XEN) *** LOADING DOMAIN 0 ***
-> > (XEN) Loading Domd0 kernel from boot module @ 000000007a000000
-> > (XEN) Allocating 1:1 mappings totalling 512MB for dom0:
-> > (XEN) BANK[0] 0x00000050000000-0x00000070000000 (512MB)
-> > (XEN) Grant table range: 0x00000048000000-0x00000048040000
-> > (XEN) Allocating PPI 16 for event channel interrupt
-> > (XEN) Loading zImage from 000000007a000000 to
-> 0000000050080000-0000000051880000
-> > (XEN) Loading dom0 DTB to 0x0000000058000000-0x0000000058010a48
-> > (XEN)
-> > (XEN) ****************************************
-> > (XEN) Panic on CPU 0:
-> > (XEN) Unable to copy the DTB to dom0 memory (left =3D 68168 bytes)
-> > (XEN) ****************************************
->
-> This is a bit odd. The function copy_to_guest_phys_flush_dcache can
-> only fail when the P2M entry is invalid or it is not a RAM page.
->
-> From the log, it can't even copy the first page. However, this seems
-> to belong to the RAM (see BANK[0] message). Would you mind to apply the
-> following patch and send the log?
->
->
-> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> index d9836779d1..08b9cd2c44 100644
-> --- a/xen/arch/arm/domain_build.c
-> +++ b/xen/arch/arm/domain_build.c
-> @@ -1805,6 +1805,8 @@ static void __init dtb_load(struct kernel_info
-> *kinfo)
->      printk("Loading dom0 DTB to 0x%"PRIpaddr"-0x%"PRIpaddr"\n",
->             kinfo->dtb_paddr, kinfo->dtb_paddr +
-> fdt_totalsize(kinfo->fdt));
->
-> +    dump_p2m_lookup(kinfo->d, kinfo->dtb_paddr);
-> +
->      left =3D copy_to_guest_phys_flush_dcache(kinfo->d, kinfo->dtb_paddr,
->                                             kinfo->fdt,
->                                             fdt_totalsize(kinfo->fdt));
->
-> Cheers,
->
-> --
-> Julien Grall
->
-
---00000000000022319f05825a0bcc
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto"><div><br></div><div dir=3D"auto"><br><div class=3D"gmail_=
-quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmail_attr">=D1=81=D1=80, 20 =
-=D1=84=D0=B5=D0=B2=D1=80. 2019 =D0=B3., 22:14 Julien Grall &lt;<a href=3D"m=
-ailto:julien.grall@arm.com" target=3D"_blank" rel=3D"noreferrer">julien.gra=
-ll@arm.com</a>&gt;:<br></div><blockquote class=3D"gmail_quote" style=3D"mar=
-gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">Hi Amit,</block=
-quote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">Hi, Julien,=
- Amit.</div><div dir=3D"auto"><br></div><div dir=3D"auto">Sorry for formatt=
-ing, writing from my mobile.</div><div dir=3D"auto"><br></div><div dir=3D"a=
-uto">If I am not mistaken, the diff between BSP&#39;s and mainline device t=
-rees is in reserved memory area. BSP device tree (1) contains reserved memo=
-ry regions, but the mainline one (2) doesn&#39;t.</div><div dir=3D"auto">Fr=
-om the log you provided, I see that Xen is trying to copy device-tree to th=
-e address which is located in reserved area (<span style=3D"font-family:san=
-s-serif">0x58000000). FYI, we always remove these reserved area nodes from =
-the device-tree. Maybe that&#39;s why we didn&#39;t face an issue. Julien, =
-what do you think, can this be a reason?</span></div><div dir=3D"auto"><br>=
-</div><div dir=3D"auto">(1)=C2=A0<a href=3D"https://git.kernel.org/pub/scm/=
-linux/kernel/git/horms/renesas-bsp.git/tree/arch/arm64/boot/dts/renesas/r8a=
-7795-h3ulcb.dts?h=3Dv4.14.75-ltsi/rcar-3.9.3.rc1">https://git.kernel.org/pu=
-b/scm/linux/kernel/git/horms/renesas-bsp.git/tree/arch/arm64/boot/dts/renes=
-as/r8a7795-h3ulcb.dts?h=3Dv4.14.75-ltsi/rcar-3.9.3.rc1</a></div><div dir=3D=
-"auto"><br></div><div dir=3D"auto">(2) <a href=3D"https://elixir.bootlin.co=
-m/linux/v5.0-rc7/source/arch/arm64/boot/dts/renesas/r8a7795-h3ulcb.dts">htt=
-ps://elixir.bootlin.com/linux/v5.0-rc7/source/arch/arm64/boot/dts/renesas/r=
-8a7795-h3ulcb.dts</a></div><div dir=3D"auto"><br></div><div dir=3D"auto"></=
-div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail=
-_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:=
-1ex">
-<br>
-Thank you for the report.<br>
-<br>
-On 2/19/19 4:46 PM, Amit Tomer wrote:<br>
-&gt; (XEN) CPU7 MIDR (0x410fd034) does not match boot CPU MIDR (0x411fd073)=
-,<br>
-&gt; (XEN) disable cpu (see big.LITTLE.txt under docs/).<br>
-&gt; (XEN) CPU7 never came online<br>
-&gt; (XEN) Failed to bring up CPU 7 (error -5)<br>
-&gt; (XEN) Brought up 4 CPUs<br>
-&gt; (XEN) P2M: 44-bit IPA with 44-bit PA and 8-bit VMID<br>
-&gt; (XEN) P2M: 4 levels with order-0 root, VTCR 0x80043594<br>
-&gt; (XEN) I/O virtualisation disabled<br>
-&gt; (XEN) build-id: 74f80103afa98953c029eea87d69696bcd5ef69d<br>
-&gt; (XEN) alternatives: Patching with alt table 00000000002abba8 -&gt; 000=
-00000002ac1f0<br>
-&gt; (XEN) CPU0 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry<br=
->
-&gt; (XEN) CPU2 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry<br=
->
-&gt; (XEN) CPU3 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry<br=
->
-&gt; (XEN) CPU1 will call ARM_SMCCC_ARCH_WORKAROUND_1 on exception entry<br=
->
-&gt; (XEN) *** LOADING DOMAIN 0 ***<br>
-&gt; (XEN) Loading Domd0 kernel from boot module @ 000000007a000000<br>
-&gt; (XEN) Allocating 1:1 mappings totalling 512MB for dom0:<br>
-&gt; (XEN) BANK[0] 0x00000050000000-0x00000070000000 (512MB)<br>
-&gt; (XEN) Grant table range: 0x00000048000000-0x00000048040000<br>
-&gt; (XEN) Allocating PPI 16 for event channel interrupt<br>
-&gt; (XEN) Loading zImage from 000000007a000000 to 0000000050080000-0000000=
-051880000<br>
-&gt; (XEN) Loading dom0 DTB to 0x0000000058000000-0x0000000058010a48<br>
-&gt; (XEN)<br>
-&gt; (XEN) ****************************************<br>
-&gt; (XEN) Panic on CPU 0:<br>
-&gt; (XEN) Unable to copy the DTB to dom0 memory (left =3D 68168 bytes)<br>
-&gt; (XEN) ****************************************<br>
-<br>
-This is a bit odd. The function copy_to_guest_phys_flush_dcache can<br>
-only fail when the P2M entry is invalid or it is not a RAM page.<br>
-<br>
->From the log, it can&#39;t even copy the first page. However, this seems <b=
-r>
-to belong to the RAM (see BANK[0] message). Would you mind to apply the<br>
-following patch and send the log?<br>
-<br>
-<br>
-diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c<br>
-index d9836779d1..08b9cd2c44 100644<br>
---- a/xen/arch/arm/domain_build.c<br>
-+++ b/xen/arch/arm/domain_build.c<br>
-@@ -1805,6 +1805,8 @@ static void __init dtb_load(struct kernel_info *kinfo=
-)<br>
-=C2=A0 =C2=A0 =C2=A0printk(&quot;Loading dom0 DTB to 0x%&quot;PRIpaddr&quot=
-;-0x%&quot;PRIpaddr&quot;\n&quot;,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 kinfo-&gt;dtb_paddr, kinfo-&gt;dt=
-b_paddr + fdt_totalsize(kinfo-&gt;fdt));<br>
-<br>
-+=C2=A0 =C2=A0 dump_p2m_lookup(kinfo-&gt;d, kinfo-&gt;dtb_paddr);<br>
-+<br>
-=C2=A0 =C2=A0 =C2=A0left =3D copy_to_guest_phys_flush_dcache(kinfo-&gt;d, k=
-info-&gt;dtb_paddr,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 kinfo-&gt;fdt,<br>
-=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 fdt_totalsize(kinfo-&gt;fdt));<br>
-<br>
-Cheers,<br>
-<br>
--- <br>
-Julien Grall<br>
-</blockquote></div></div></div>
-
---00000000000022319f05825a0bcc--
-
-
---===============0052757312410077869==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0052757312410077869==--
+T24gMi8yMC8xOSAzOjQ2IFBNLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gKCsgQW5kcmV3IGFuZCBK
+YW4gZm9yIGZlZWRiYWNrIG9uIHRoZSBldmVudCBjaGFubmVsIGludGVycnVwdCkKPgo+IEhpIEJv
+cmlzLAo+Cj4gVGhhbmsgeW91IGZvciB0aGUgeW91ciBmZWVkYmFjay4KPgo+IE9uIDIvMjAvMTkg
+ODowNCBQTSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+PiBPbiAyLzIwLzE5IDE6MDUgUE0sIEp1
+bGllbiBHcmFsbCB3cm90ZToKPj4+IEhpLAo+Pj4KPj4+IE9uIDIwLzAyLzIwMTkgMTc6MDcsIEJv
+cmlzIE9zdHJvdnNreSB3cm90ZToKPj4+PiBPbiAyLzIwLzE5IDk6MTUgQU0sIEp1bGllbiBHcmFs
+bCB3cm90ZToKPj4+Pj4gSGkgQm9yaXMsCj4+Pj4+Cj4+Pj4+IFRoYW5rIHlvdSBmb3IgeW91ciBh
+bnN3ZXIuCj4+Pj4+Cj4+Pj4+IE9uIDIwLzAyLzIwMTkgMDA6MDIsIEJvcmlzIE9zdHJvdnNreSB3
+cm90ZToKPj4+Pj4+IE9uIFR1ZSwgRmViIDE5LCAyMDE5IGF0IDA1OjMxOjEwUE0gKzAwMDAsIEp1
+bGllbiBHcmFsbCB3cm90ZToKPj4+Pj4+PiBIaSBhbGwsCj4+Pj4+Pj4KPj4+Pj4+PiBJIGhhdmUg
+YmVlbiBsb29raW5nIGF0IHVzaW5nIExpbnV4IFJUIGluIERvbTAuIE9uY2UgdGhlIGd1ZXN0IGlz
+Cj4+Pj4+Pj4gc3RhcnRlZCwKPj4+Pj4+PiB0aGUgY29uc29sZSBpcyBlbmRpbmcgdG8gaGF2ZSBh
+IGxvdCBvZiB3YXJuaW5nIChzZWUgdHJhY2UgYmVsb3cpLgo+Pj4+Pj4+Cj4+Pj4+Pj4gQWZ0ZXIg
+c29tZSBpbnZlc3RpZ2F0aW9uLCB0aGlzIGlzIGJlY2F1c2UgdGhlIGlycSBoYW5kbGVyIHdpbGwg
+bm93Cj4+Pj4+Pj4gYmUgdGhyZWFkZWQuCj4+Pj4+Pj4gSSBjYW4gcmVwcm9kdWNlIHRoZSBzYW1l
+IGVycm9yIHdpdGggdGhlIHZhbmlsbGEgTGludXggd2hlbiBwYXNzaW5nCj4+Pj4+Pj4gdGhlIG9w
+dGlvbgo+Pj4+Pj4+ICd0aHJlYWRpcnFzJyBvbiB0aGUgY29tbWFuZCBsaW5lICh0aGUgdHJhY2Ug
+YmVsb3cgaXMgZnJvbSA1LjAuMC1yYzcKPj4+Pj4+PiB0aGF0IGhhcwo+Pj4+Pj4+IG5vdCBSVCBz
+dXBwb3J0KS4KPj4+Pj4+Pgo+Pj4+Pj4+IEZXSVcsIHRoZSBpbnRlcnJ1cHQgZm9yIHBvcnQgNiBp
+cyB1c2VkIHRvIGZvciB0aGUgZ3Vlc3QgdG8KPj4+Pj4+PiBjb21tdW5pY2F0ZSB3aXRoCj4+Pj4+
+Pj4geGVuc3RvcmUuCj4+Pj4+Pj4KPj4+Pj4+PiDCoMKgwqBGcm9tIG15IHVuZGVyc3RhbmRpbmcs
+IHRoaXMgaXMgaGFwcGVuaW5nIGJlY2F1c2UgdGhlIGludGVycnVwdAo+Pj4+Pj4+IGhhbmRsZXIg
+aXMgbm93Cj4+Pj4+Pj4gcnVuIGluIGEgdGhyZWFkLiBTbyB3ZSBjYW4gaGF2ZSB0aGUgZm9sbG93
+aW5nIGhhcHBlbmluZy4KPj4+Pj4+Pgo+Pj4+Pj4+IMKgwqDCoMKgwqAgSW50ZXJydXB0IGNvbnRl
+eHTCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgwqDCoCBJbnRlcnJ1cHQgdGhyZWFkCj4+Pj4+
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfAo+Pj4+Pj4+IMKgwqDCoMKgwqAgcmVjZWl2ZSBpbnRlcnJ1cHQgcG9y
+dCA2wqDCoMKgwqAgfAo+Pj4+Pj4+IMKgwqDCoMKgwqAgY2xlYXIgdGhlIGV2dGNobiBwb3J0wqDC
+oMKgwqDCoMKgwqAgfAo+Pj4+Pj4+IMKgwqDCoMKgwqAgc2V0IElSUUZfUlVOVEhSRUFEwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB8Cj4+Pj4+Pj4gwqDCoMKgwqDCoCBraWNrIGludGVycnVwdCB0aHJl
+YWTCoMKgwqDCoMKgwqDCoCB8Cj4+Pj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDCoCBjbGVhciBJUlFG
+X1JVTlRIUkVBRAo+Pj4+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgwqAgY2FsbCBldnRjaG5faW50ZXJy
+dXB0Cj4+Pj4+Pj4gwqDCoMKgwqDCoCByZWNlaXZlIGludGVycnVwdCBwb3J0IDbCoMKgwqDCoCB8
+Cj4+Pj4+Pj4gwqDCoMKgwqDCoCBjbGVhciB0aGUgZXZ0Y2huIHBvcnTCoMKgwqDCoMKgwqDCoCB8
+Cj4+Pj4+Pj4gwqDCoMKgwqDCoCBzZXQgSVJRRl9SVU5USFJFQUTCoMKgwqDCoMKgwqDCoMKgwqDC
+oCB8Cj4+Pj4+Pj4gwqDCoMKgwqDCoCBraWNrIGludGVycnVwdCB0aHJlYWTCoMKgwqDCoMKgwqDC
+oCB8Cj4+Pj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDCoCBkaXNhYmxlIGludGVycnVwdCBwb3J0IDYK
+Pj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIGV2dGNobi0+ZW5hYmxlZCA9IGZhbHNlCj4+Pj4+
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfMKgwqDCoCBbLi4uLl0KPj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8Cj4+Pj4+
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgfMKgwqDCoCAqKiogSGFuZGxpbmcgdGhlIHNlY29uZAo+Pj4+Pj4+IGlu
+dGVycnVwdCAqKioKPj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIGNsZWFyIElSUUZfUlVOVEhS
+RUFECj4+Pj4+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgfMKgwqDCoCBjYWxsIGV2dGNobl9pbnRlcnJ1cHQKPj4+
+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIFdBUk4oLi4uKQo+Pj4+Pj4+Cj4+Pj4+Pj4gSSBhbSBu
+b3QgZW50aXJlbHkgc3VyZSBob3cgdG8gZml4IHRoaXMuIEkgaGF2ZSB0d28gc29sdXRpb25zIGlu
+Cj4+Pj4+Pj4gbWluZDoKPj4+Pj4+Pgo+Pj4+Pj4+IDEpIFByZXZlbnQgdGhlIGludGVycnVwdCBo
+YW5kbGVyIHRvIGJlIHRocmVhZGVkLiBXZSB3b3VsZCBhbHNvCj4+Pj4+Pj4gbmVlZCB0bwo+Pj4+
+Pj4+IHN3aXRjaCBmcm9tIHNwaW5fbG9jayB0byByYXdfc3Bpbl9sb2NrIGFzIHRoZSBmb3JtZXIg
+bWF5IHNsZWVwIG9uCj4+Pj4+Pj4gUlQtTGludXguCj4+Pj4+Pj4KPj4+Pj4+PiAyKSBSZW1vdmUg
+dGhlIHdhcm5pbmcKPj4+Pj4+Cj4+Pj4+PiBJIHRoaW5rIGFjY2VzcyB0byBldnRjaG4tPmVuYWJs
+ZWQgaXMgcmFjeSBzbyAod2l0aCBvciB3aXRob3V0IHRoZQo+Pj4+Pj4gd2FybmluZykgd2UgY2Fu
+J3QgdXNlIGl0IHJlbGlhYmx5Lgo+Pj4+Pgo+Pj4+PiBUaGlua2luZyBhYm91dCBpdCwgaXQgd291
+bGQgbm90IGJlIHRoZSBvbmx5IGlzc3VlLiBUaGUgcmluZyBpcyBzaXplZAo+Pj4+PiB0byBjb250
+YWluIG9ubHkgb25lIGluc3RhbmNlIG9mIHRoZSBzYW1lIGV2ZW50LiBTbyBpZiB5b3UgcmVjZWl2
+ZQo+Pj4+PiB0d2ljZSB0aGUgZXZlbnQsIHlvdSBtYXkgb3ZlcmZsb3cgdGhlIHJpbmcuCj4+Pj4K
+Pj4+PiBIbS4uLiBUaGF0J3MgYW5vdGhlciBhcmd1bWVudCBpbiBmYXZvciBvZiAidW50aHJlYWRp
+bmciIHRoZSBoYW5kbGVyLgo+Pj4KPj4+IEkgZmlyc3QgdGhvdWdodCBpdCB3b3VsZCBiZSBwb3Nz
+aWJsZSB0byB1bnRocmVhZCBpdC4gSG93ZXZlciwKPj4+IHdha2VfdXBfaW50ZXJydXB0aWJsZSBp
+cyB1c2luZyBhIHNwaW5fbG9jay4gT24gUlQgc3Bpbl9sb2NrIGNhbiBzbGVlcCwKPj4+IHNvIHRo
+aXMgY2Fubm90IGJlIHVzZWQgaW4gYW4gaW50ZXJydXB0IGNvbnRleHQuCj4+Pgo+Pj4gU28gSSB0
+aGluayAidW50aHJlYWRpbmciIHRoZSBoYW5kbGVyIGlzIG5vdCBhbiBvcHRpb24gaGVyZS4KPj4K
+Pj4gVGhhdCBzb3VuZHMgbGlrZSBhIGRpZmZlcmVudCBwcm9ibGVtLiBJLmUuIHRoZXJlIGFyZSB0
+d28gaXNzdWVzOgo+PiAqIHRocmVhZGVkIGludGVycnVwdHMgZG9uJ3Qgd29yayBwcm9wZXJseSAo
+cmFjZXMsIHJpbmcgb3ZlcmZsb3cpCj4+ICogZXZ0Y2huX2ludGVycnVwdCgpICh0aHJlYWRlZCBv
+ciBub3QpIGhhcyBzcGluX2xvY2soKSwgd2hpY2ggaXMgbm90Cj4+IGdvaW5nIHRvIHdvcmsgZm9y
+IFJUCj4KPiBJIGFtIGFmcmFpZCB0aGF0J3Mgbm90IGNvcnJlY3QsIHlvdSBjYW4gdXNlIHNwaW5f
+bG9jaygpIGluIHRocmVhZGVkCj4gaW50ZXJydXB0IGhhbmRsZXIuCgpJbiBub24tUlQgaGFuZGxl
+ciAtLSB5ZXMsIGJ1dCBub3QgaW4gYW4gUlQgb25lIChpbiBmYWN0LCBpc24ndCB0aGlzIHdoYXQK
+eW91IHlvdXJzZWxmIHNhaWQgYWJvdmU/KQoKPgo+PiBUaGUgZmlyc3QgY2FuIGJlIGZpeGVkIGJ5
+IHVzaW5nIG5vbi10aHJlYWRlZCBoYW5kbGVycy4KPgo+IFRoZSB0d28gYXJlIHNvbWV3aGF0IHJl
+bGF0ZWQsIGlmIHlvdSB1c2UgYSBub24tdGhyZWFkZWQgaGFuZGxlciB0aGVuCj4geW91IGFyZSBu
+b3QgZ29pbmcgdG8gaGVscCB0aGUgUlQgY2FzZS4KPgo+IEluIGdlbmVyYWwsIHRoZSB1bnRocmVh
+ZGVkIHNvbHV0aW9uIHNob3VsZCBiZSB1c2VkIGluIHRoZSBsYXN0IHJlc29ydC4KPgo+Pj4KPj4+
+Pgo+Pj4+Pgo+Pj4+Pj4KPj4+Pj4+IEFub3RoZXIgYWx0ZXJuYXRpdmUgY291bGQgYmUgdG8gcXVl
+dWUgdGhlIGlycSBpZiAhZXZ0Y2huLT5lbmFibGVkCj4+Pj4+PiBhbmQKPj4+Pj4+IGhhbmRsZSBp
+dCBpbiBldnRjaG5fd3JpdGUoKSAod2hpY2ggaXMgd2hlcmUgaXJxIGlzIHN1cHBvc2VkIHRvIGJl
+Cj4+Pj4+PiByZS1lbmFibGVkKS4KPj4+Pj4gV2hhdCBkbyB5b3UgbWVhbiBieSBxdWV1ZT8gSXMg
+aXQgcXVldWVpbmcgaW4gdGhlIHJpbmc/Cj4+Pj4KPj4+Pgo+Pj4+IE5vLCBJIHdhcyB0aGlua2lu
+ZyBhYm91dCBoYXZpbmcgYSBuZXcgc3RydWN0dXJlIGZvciBkZWZlcnJlZAo+Pj4+IGludGVycnVw
+dHMuCj4+Pgo+Pj4gSG1tbSwgSSBhbSBub3QgZW50aXJlbHkgc3VyZSB3aGF0IHdvdWxkIGJlIHRo
+ZSBzdHJ1Y3R1cmUgaGVyZS4gQ291bGQKPj4+IHlvdSBleHBhbmQgeW91ciB0aGlua2luZz8KPj4K
+Pj4gU29tZSBzb3J0IG9mIGEgRklGTyB0aGF0IHN0b3JlcyB7aXJxLCBkYXRhfSB0dXBsZS4gSXQg
+Y291bGQgb2J2aW91c2x5IGJlCj4+IGltcGxlbWVudGVkIGFzIGEgcmluZyBidXQgbm90IG5lY2Vz
+c2FyaWx5IGFzIFhlbiBzaGFyZWQgcmluZyAoaWYgdGhhdCdzCj4+IHdoYXQgeW91IHdlcmUgcmVm
+ZXJyaW5nIHRvKS4KPgo+IFRoZSB1bmRlcmx5aW5nIHF1ZXN0aW9uIGlzIHdoYXQgaGFwcGVuIGlm
+IHlvdSBtaXNzIGFuIGludGVycnVwdC4gSXMgaXQKPiBnb2luZyB0byBiZSBvaz8KClRoaXMgSSBh
+bSBub3Qgc3VyZSBhYm91dC4gSSB0aG91Z2h0IHllcyBzaW5jZSB3ZSBhcmUgc2lnbmFsaW5nIHRo
+ZQpwcm9jZXNzIG9ubHkgb25jZS4KCi1ib3JpcwoKPiBJZiBubywgdGhlbiB3ZSBoYXZlIHRvIHJl
+Y29yZCBldmVyeXRoaW5nIGFuZCBjYW4ndCBraWxsL3NlbmQgYW4gZXJyb3IKPiB0byB0aGUgdXNl
+ciBhcHAgYmVjYXVzZSBpdCBpcyBub3QgaXRzIGZhdWx0Lgo+Cj4gVGhpcyBtZWFucyBhIEZJRk8g
+d291bGQgbm90IGJlIGEgdmlhYmxlLiBIb3cgZG8geW91IHNpemUgaXQ/IFN0YXRpYwo+IChpLmUg
+cHJlLWRlZmluZWQpIHNpemUgaXMgbm90IGdvaW5nIHRvIGJlIHBvc3NpYmxlIGJlY2F1c2UgeW91
+IGRvbid0Cj4ga25vdyBob3cgbWFueSBpbnRlcnJ1cHQgeW91IGFyZSBnb2luZyB0byByZWNlaXZl
+IGJlZm9yZSB0aGUgdGhyZWFkCj4gaGFuZGxlciBydW5zLiBZb3UgY2FuJ3QgbWFrZSBpdCBncm93
+IGR5bmFtaWNhbGx5IGFzIGl0IG1ha2UgYmVjb21lCj4gcXVpdGUgYmlnIGZvciB0aGUgc2FtZSBy
+ZWFzb24uCj4KPiBEaXNjdXNzaW5nIHdpdGggbXkgdGVhbSwgYSBzb2x1dGlvbiB0aGF0IGNhbWUg
+dXAgd291bGQgYmUgdG8gaW50cm9kdWNlCj4gb25lIGF0b21pYyBmaWVsZCBwZXIgZXZlbnQgdG8g
+cmVjb3JkIHRoZSBudW1iZXIgb2YgZXZlbnQgcmVjZWl2ZWQuIEkKPiB3aWxsIGV4cGxvcmUgdGhh
+dCBzb2x1dGlvbiB0b21vcnJvdy4KPgoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
