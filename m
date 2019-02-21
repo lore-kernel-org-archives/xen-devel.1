@@ -1,21 +1,21 @@
 From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v3 02/17] Document ioemu Linux stubdomain
- protocol
-Date: Thu, 21 Feb 2019 18:08:22 +0100
-Message-ID: <20190221170822.GU21228@mail-itl>
+Subject: Re: [PATCH v3 04/17] libxl: Allow running qemu-xen in
+ stubdomain
+Date: Thu, 21 Feb 2019 18:06:31 +0100
+Message-ID: <20190221170631.GT21228@mail-itl>
 References: <cover.8f900c4839866ee551e8ebf221cfc7b9310cecd6.1548710973.git-series.marmarek@invisiblethingslab.com>
- <27fbf2868a07046d4287a35d2b93483ae4a1f6dd.1548710973.git-series.marmarek@invisiblethingslab.com>
- <20190221153925.rwxv44nrxluq56ne@zion.uk.xensource.com>
+ <0158b07cdae7a2a7bb592f11d5df408285efb7c6.1548710973.git-series.marmarek@invisiblethingslab.com>
+ <20190221160159.m6x443nmeugmhtnw@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8806001794426238762=="
+Content-Type: multipart/mixed; boundary="===============6684724217198294017=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=W4UY=Q4=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gwrpl-0007hF-0k
- for xen-devel@lists.xenproject.org; Thu, 21 Feb 2019 17:08:29 +0000
-In-Reply-To: <20190221153925.rwxv44nrxluq56ne@zion.uk.xensource.com>
+ id 1gwrq2-0007j7-Du
+ for xen-devel@lists.xenproject.org; Thu, 21 Feb 2019 17:08:46 +0000
+In-Reply-To: <20190221160159.m6x443nmeugmhtnw@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,80 +25,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============8806001794426238762==
+--===============6684724217198294017==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="4h5NFqzjLBhle1zP"
+	protocol="application/pgp-signature"; boundary="+yV1/IgJF0cB7ivg"
 Content-Disposition: inline
 
 
---4h5NFqzjLBhle1zP
+--+yV1/IgJF0cB7ivg
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v3 02/17] Document ioemu Linux stubdomain protocol
+Subject: Re: [PATCH v3 04/17] libxl: Allow running qemu-xen in stubdomain
 
-On Thu, Feb 21, 2019 at 03:39:25PM +0000, Wei Liu wrote:
-> On Mon, Jan 28, 2019 at 10:30:19PM +0100, Marek Marczykowski-G=C3=B3recki=
+On Thu, Feb 21, 2019 at 04:01:59PM +0000, Wei Liu wrote:
+> On Mon, Jan 28, 2019 at 10:30:21PM +0100, Marek Marczykowski-G=C3=B3recki=
  wrote:
-> > Add documentation for upcoming Linux stubdomain for qemu-upstream.
+> > Do not prohibit anymore using stubdomain with qemu-xen.
+> > To help distingushing MiniOS and Linux stubdomain, add helper inline
+> > functions libxl__stubdomain_is_linux() and
+> > libxl__stubdomain_is_linux_running(). Those should be used where really
+> > the difference is about MiniOS/Linux, not qemu-xen/qemu-xen-traditional.
 > >=20
 > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
 slab.com>
-> > ---
-> >  docs/misc/stubdom.txt | 50 +++++++++++++++++++++++++++++++++++++++++++=
-+-
-> >  1 file changed, 50 insertions(+)
 > >=20
-> > diff --git a/docs/misc/stubdom.txt b/docs/misc/stubdom.txt
-> > index 4c524f2..9c94c6b 100644
-> > --- a/docs/misc/stubdom.txt
-> > +++ b/docs/misc/stubdom.txt
-> > @@ -75,6 +75,56 @@ Defined commands:
-> >     - "running" - success
+> > ---
+> > Changes in v3:
+> >  - new patch, instead of "libxl: Add "stubdomain_version" to
+> >  domain_build_info"
+> >  - helper functions as suggested by Ian Jackson
+> > ---
+> >  tools/libxl/libxl_create.c   |  9 ---------
+> >  tools/libxl/libxl_internal.h | 17 +++++++++++++++++
+> >  2 files changed, 17 insertions(+), 9 deletions(-)
+> >=20
+(...)
+> > diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
+> > index 459f9bf..b8c698a 100644
+> > --- a/tools/libxl/libxl_internal.h
+> > +++ b/tools/libxl/libxl_internal.h
+> > @@ -2195,6 +2195,23 @@ _hidden int libxl__device_model_version_running(=
+libxl__gc *gc, uint32_t domid);
+> >    /* Return the system-wide default device model */
+> >  _hidden libxl_device_model_version libxl__default_device_model(libxl__=
+gc *gc);
 > > =20
-> > =20
-> > +Toolstack to Linux ioemu stubdomain protocol
-> > +--------------------------------------------
-> > +
-> > +This section describe communication protocol between toolstack and
-> > +qemu-upstream running in Linux stubdomain. The protocol include
-> > +expectations of both stubdomain, and qemu.
-> > +
-> > +Setup (done by toolstack, expected by stubdomain):
-> > + - Block devices for target domain are connected as PV disks to stubdo=
-main,
-> > +   according to configuration order, starting with xvda
-> > + - Network devices for target domain are connected as PV nics to stubd=
-omain,
-> > +   according to configuration order, starting with 0
-> > + - [not implemented] if graphics output is expected, VFB and VKB devic=
-es are set for stubdomain
-> > +   (its backend is responsible for exposing them using appropriate pro=
-tocol
-> > +   like VNC or Spice)
-> > + - other target domain's devices are not connected at this point to st=
-ubdomain
-> > +   (may be hot-plugged later)
-> > + - QEMU command line is stored in
-> > +   /vm/<target-uuid>/image/dmargs xenstore dir, each argument as separ=
-ate key
-> > +   in form /vm/<target-uuid>/image/dmargs/NNN, where NNN is 0-padded a=
-rgument
-> > +   number
-> > + - target domain id is stored in /local/domain/<stubdom-id>/target xen=
-store path
-> > +?? - bios type is stored in /local/domain/<target-id>/hvmloader/bios
+> > +static inline
+> > +bool libxl__stubdomain_is_linux_running(libxl__gc *gc, uint32_t domid)
+> > +{
+> > +    /* same logic as in libxl__stubdomain_is_linux */
+> > +    return libxl__device_model_version_running(gc, domid)
+> > +        =3D=3D LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
 >=20
-> Since you're defining a new protocol here, you have the liberty to
-> eliminate this uncertainty, unless for some reason you want it to be
-> compatible with the old stubdom?
+> I don't think the logic is accurate. You're precluding running
+> qemu-xen in a unikernel as stubdom.
+>=20
+> I think putting an extra key in xenstore with the underlying platform is
+> more desirable.
+>=20
+> > +}
+> > +
+> > +static inline
+> > +bool libxl__stubdomain_is_linux(libxl_domain_build_info *b_info)
+> > +{
+> > +    /* right now qemu-tranditional implies MiniOS stubdomain and qemu-=
+xen
+> > +     * implies Linux stubdomain */
+> > +    return libxl_defbool_val(b_info->device_model_stubdomain) &&
+> > +        b_info->device_model_version =3D=3D LIBXL_DEVICE_MODEL_VERSION=
+_QEMU_XEN;
+>=20
+> Subsequently you will need a new field in b_info.
+>=20
+> What do you think?
 
-I'm not sure who access this xenstore key, since I haven't found how is
-it used in minios based stubdomain. Is it used by qemu?
+This is _exactly_ what was in v2 of this patch and Ian suggested to
+change it:
+https://lists.xenproject.org/archives/html/xen-devel/2018-10/msg01317.html
 
 --=20
 Best Regards,
@@ -107,25 +114,25 @@ Invisible Things Lab
 A: Because it messes up the order in which people normally read text.
 Q: Why is top-posting such a bad thing?
 
---4h5NFqzjLBhle1zP
+--+yV1/IgJF0cB7ivg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxu2wYACgkQ24/THMrX
-1yz/3Af9HK1E0AgldYNH4ygKIaecNCb8nx7mVPro4lbqOJJIezsA3f8nH0gpgoKG
-eC34VzQAWiQxuMVl19mNI9QqiSQuqRIi5x5cSyg5FTr+hEKBF1LDMYymatGwJcLJ
-MUMuNwnlMsTUnKaspXZ2XekTmAduWxMuP+QRRvjnG2JunvQyODh0VsG8LrbaONVq
-ICTKQNxJHA68k/37XjntpU2h3R+6M91P5iknSLyvuU4M783btlSKBGNLr1eDO9sQ
-x+wuozmQu58fLGeA5g/9Fx7eo+T6lTu9Nl1CYVgJzlF4AQwx+xnATvIWDrFcevz+
-3XCVUs71n3Io2+NYPpA9xVsNQOdTJw==
-=8M9N
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxu2pYACgkQ24/THMrX
+1ywvpQf+LGVlGX3re190WuVBV5F2Xorwohq5F6L11Kq0Rww4KMtKHPjoRImiPGPG
+OdAZoEH3vLymqqCr6zV3gZE3XO8Sj25hxWe50LRBGwcaDQWeSJfzGtSMn0ARRqwb
+BAtcIfW5hHPwNJDu9gXkNYy94g04G8fh+jcnzwgw9Cze+XoWUoZNBFv7mANi8q8J
+x/7hm5kKJlOflUu3F2XKqqnwmbscfox2koKvJM3o+NMYpXOeX328lw7akYH07JVe
+i7fPfzGRjE88VUUyXg+E7tGi5DNvgyo8ey78Xxt225FaevwlriVx+XwebrzkIlV3
+Jfjgv/uLqbrC+N8jQf33SP6Avf0tFw==
+=UYFp
 -----END PGP SIGNATURE-----
 
---4h5NFqzjLBhle1zP--
+--+yV1/IgJF0cB7ivg--
 
 
---===============8806001794426238762==
+--===============6684724217198294017==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -135,4 +142,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============8806001794426238762==--
+--===============6684724217198294017==--
