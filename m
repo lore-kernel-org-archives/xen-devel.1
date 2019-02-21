@@ -1,30 +1,23 @@
-From: Amit Tomer <amittomer25@gmail.com>
-Subject: Re: XEN on R-CAR H3
-Date: Thu, 21 Feb 2019 23:45:25 +0530
-Message-ID: <CABHD4K9CKxtoO-k4KapNTodKHJT1Z-yoQWjhqMXwFPaUgSLtdA@mail.gmail.com>
-References: <CABHD4K9_hG0deTR4idTz167SN3Ak1EPXr7ck9=dhbwsoGoQhBw@mail.gmail.com>
- <475a03a5-5017-c333-ad32-249960d7f50f@gmail.com>
- <CABHD4K83md1PdVtmUGnHrxEgzBrAPmHeF6wyeSG+3cuTDJ+t+g@mail.gmail.com>
- <CABHD4K9_G__3-u3ma-WGTeiB+DhBW+w4LGLPQJ0JKEDf56_MYw@mail.gmail.com>
- <62049eee-60e5-a770-908a-43b1014f3fea@gmail.com>
- <CABHD4K_4PmGwqK30dQ=7XhBPoVHGk=yizLv5ACaP+tscBcHV3Q@mail.gmail.com>
- <95239898-60f5-e3d3-440d-4c88b5ab7023@gmail.com>
- <CABHD4K91iqMYU-Hm0LaF_uiOt_wPAyk5svd3j34qMHLFt3rwtQ@mail.gmail.com>
- <172f815e-65d1-1f02-5653-0308c5c1604e@gmail.com>
- <CABHD4K_vMN+QRJgxkJjRuZ+_NSGTyXnJC=qvAw5cKGn_nsvV2A@mail.gmail.com>
- <06da3bda-93ba-82a8-d155-02224a79bb8a@arm.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v3 02/17] Document ioemu Linux stubdomain
+ protocol
+Date: Thu, 21 Feb 2019 19:17:34 +0100
+Message-ID: <20190221181734.GG5348@mail-itl>
+References: <cover.8f900c4839866ee551e8ebf221cfc7b9310cecd6.1548710973.git-series.marmarek@invisiblethingslab.com>
+ <27fbf2868a07046d4287a35d2b93483ae4a1f6dd.1548710973.git-series.marmarek@invisiblethingslab.com>
+ <20190221153925.rwxv44nrxluq56ne@zion.uk.xensource.com>
+ <20190221170822.GU21228@mail-itl>
+ <20190221173154.onisjck5hgk7s67k@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0823955482470738655=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=3Grz=Q4=gmail.com=amittomer25@srs-us1.protection.inumbo.net>)
- id 1gwssk-0006iB-M0
- for xen-devel@lists.xenproject.org; Thu, 21 Feb 2019 18:15:38 +0000
-Received: by mail-oi1-x241.google.com with SMTP id g16so2165128oib.1
- for <xen-devel@lists.xenproject.org>; Thu, 21 Feb 2019 10:15:37 -0800 (PST)
-In-Reply-To: <06da3bda-93ba-82a8-d155-02224a79bb8a@arm.com>
+ <SRS0=W4UY=Q4=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1gwsuk-0006uZ-Hg
+ for xen-devel@lists.xenproject.org; Thu, 21 Feb 2019 18:17:42 +0000
+In-Reply-To: <20190221173154.onisjck5hgk7s67k@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,40 +26,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Oleksandr <olekstysh@gmail.com>, xen-devel@lists.xenproject.org, andrii_chepurnyi@epam.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgYi94ZW4vYXJj
-aC9hcm0vZG9tYWluX2J1aWxkLmMKPiBpbmRleCBkOTgzNjc3OWQxLi4wOGI5Y2QyYzQ0IDEwMDY0
-NAo+IC0tLSBhL3hlbi9hcmNoL2FybS9kb21haW5fYnVpbGQuYwo+ICsrKyBiL3hlbi9hcmNoL2Fy
-bS9kb21haW5fYnVpbGQuYwo+IEBAIC0xODA1LDYgKzE4MDUsOCBAQCBzdGF0aWMgdm9pZCBfX2lu
-aXQgZHRiX2xvYWQoc3RydWN0IGtlcm5lbF9pbmZvICpraW5mbykKPiAgICAgIHByaW50aygiTG9h
-ZGluZyBkb20wIERUQiB0byAweCUiUFJJcGFkZHIiLTB4JSJQUklwYWRkciJcbiIsCj4gICAgICAg
-ICAgICAga2luZm8tPmR0Yl9wYWRkciwga2luZm8tPmR0Yl9wYWRkciArIGZkdF90b3RhbHNpemUo
-a2luZm8tPmZkdCkpOwo+Cj4gKyAgICBkdW1wX3AybV9sb29rdXAoa2luZm8tPmQsIGtpbmZvLT5k
-dGJfcGFkZHIpOwo+ICsKPiAgICAgIGxlZnQgPSBjb3B5X3RvX2d1ZXN0X3BoeXNfZmx1c2hfZGNh
-Y2hlKGtpbmZvLT5kLCBraW5mby0+ZHRiX3BhZGRyLAo+ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAga2luZm8tPmZkdCwKPiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZkdF90b3RhbHNpemUoa2luZm8tPmZkdCkpOwo+ClBsZWFz
-ZSBmaW5kIHRoZSBsb2dzIGFmdGVyIGFwcGx5aW5nIHRoaXMgcGF0Y2g6CgooWEVOKSBDUFUyIHdp
-bGwgY2FsbCBBUk1fU01DQ0NfQVJDSF9XT1JLQVJPVU5EXzEgb24gZXhjZXB0aW9uIGVudHJ5CihY
-RU4pICoqKiBMT0FESU5HIERPTUFJTiAwICoqKgooWEVOKSBMb2FkaW5nIERvbWQwIGtlcm5lbCBm
-cm9tIGJvb3QgbW9kdWxlIEAgMDAwMDAwMDA3YTAwMDAwMAooWEVOKSBBbGxvY2F0aW5nIDE6MSBt
-YXBwaW5ncyB0b3RhbGxpbmcgNTEyTUIgZm9yIGRvbTA6CihYRU4pIEJBTktbMF0gMHgwMDAwMDA1
-MDAwMDAwMC0weDAwMDAwMDcwMDAwMDAwICg1MTJNQikKKFhFTikgR3JhbnQgdGFibGUgcmFuZ2U6
-IDB4MDAwMDAwNDgwMDAwMDAtMHgwMDAwMDA0ODA0MDAwMAooWEVOKSBBbGxvY2F0aW5nIFBQSSAx
-NiBmb3IgZXZlbnQgY2hhbm5lbCBpbnRlcnJ1cHQKKFhFTikgTG9hZGluZyB6SW1hZ2UgZnJvbSAw
-MDAwMDAwMDdhMDAwMDAwIHRvIDAwMDAwMDAwNTAwODAwMDAtMDAwMDAwMDA1MTg4MDAwMAooWEVO
-KSBMb2FkaW5nIGRvbTAgRFRCIHRvIDB4MDAwMDAwMDA1ODAwMDAwMC0weDAwMDAwMDAwNTgwMTBh
-NDQKKFhFTikgZG9tMCBJUEEgMHgwMDAwMDAwMDU4MDAwMDAwCihYRU4pIFAyTSBAIDAwMDAwMDA4
-MGMyM2RjOTAgbWZuOjB4NzNmZjVlCihYRU4pIDBUSFsweDBdID0gMHgwMDgwMDAwNzNmZjVjN2Zm
-CihYRU4pIDFTVFsweDFdID0gMHgwMDgwMDAwNzNmZjNkN2ZmCihYRU4pIDJORFsweGMwXSA9IDB4
-MDJjMDAwMDA1ODAwMDZmZAooWEVOKQooWEVOKSAqKioqKioqKioqKioqKioqKioqKioqKioqKioq
-KioqKioqKioqKioqCihYRU4pIFBhbmljIG9uIENQVSAwOgooWEVOKSBVbmFibGUgdG8gY29weSB0
-aGUgRFRCIHRvIGRvbTAgbWVtb3J5IChsZWZ0ID0gNjgxNjQgYnl0ZXMpCihYRU4pICoqKioqKioq
-KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioKKFhFTikKKFhFTikgUmVib290IGluIGZp
-dmUgc2Vjb25kcy4uLgoKVGhhbmtzCi1BbWl0CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============0823955482470738655==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="iJXiJc/TAIT2rh2r"
+Content-Disposition: inline
+
+
+--iJXiJc/TAIT2rh2r
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Feb 21, 2019 at 05:31:54PM +0000, Wei Liu wrote:
+> On Thu, Feb 21, 2019 at 06:08:22PM +0100, Marek Marczykowski-G=C3=B3recki=
+ wrote:
+> > On Thu, Feb 21, 2019 at 03:39:25PM +0000, Wei Liu wrote:
+> > > On Mon, Jan 28, 2019 at 10:30:19PM +0100, Marek Marczykowski-G=C3=B3r=
+ecki wrote:
+> > > > Add documentation for upcoming Linux stubdomain for qemu-upstream.
+> > > >=20
+> > > > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblet=
+hingslab.com>
+> > > > ---
+> > > >  docs/misc/stubdom.txt | 50 +++++++++++++++++++++++++++++++++++++++=
++++++-
+> > > >  1 file changed, 50 insertions(+)
+> > > >=20
+> > > > diff --git a/docs/misc/stubdom.txt b/docs/misc/stubdom.txt
+> > > > index 4c524f2..9c94c6b 100644
+> > > > --- a/docs/misc/stubdom.txt
+> > > > +++ b/docs/misc/stubdom.txt
+> > > > @@ -75,6 +75,56 @@ Defined commands:
+> > > >     - "running" - success
+> > > > =20
+> > > > =20
+> > > > +Toolstack to Linux ioemu stubdomain protocol
+> > > > +--------------------------------------------
+> > > > +
+> > > > +This section describe communication protocol between toolstack and
+> > > > +qemu-upstream running in Linux stubdomain. The protocol include
+> > > > +expectations of both stubdomain, and qemu.
+> > > > +
+> > > > +Setup (done by toolstack, expected by stubdomain):
+> > > > + - Block devices for target domain are connected as PV disks to st=
+ubdomain,
+> > > > +   according to configuration order, starting with xvda
+> > > > + - Network devices for target domain are connected as PV nics to s=
+tubdomain,
+> > > > +   according to configuration order, starting with 0
+> > > > + - [not implemented] if graphics output is expected, VFB and VKB d=
+evices are set for stubdomain
+> > > > +   (its backend is responsible for exposing them using appropriate=
+ protocol
+> > > > +   like VNC or Spice)
+> > > > + - other target domain's devices are not connected at this point t=
+o stubdomain
+> > > > +   (may be hot-plugged later)
+> > > > + - QEMU command line is stored in
+> > > > +   /vm/<target-uuid>/image/dmargs xenstore dir, each argument as s=
+eparate key
+> > > > +   in form /vm/<target-uuid>/image/dmargs/NNN, where NNN is 0-padd=
+ed argument
+> > > > +   number
+> > > > + - target domain id is stored in /local/domain/<stubdom-id>/target=
+ xenstore path
+> > > > +?? - bios type is stored in /local/domain/<target-id>/hvmloader/bi=
+os
+> > >=20
+> > > Since you're defining a new protocol here, you have the liberty to
+> > > eliminate this uncertainty, unless for some reason you want it to be
+> > > compatible with the old stubdom?
+> >=20
+> > I'm not sure who access this xenstore key, since I haven't found how is
+> > it used in minios based stubdomain. Is it used by qemu?
+>=20
+> It is read by hvmloader afaict.
+
+Ah, in that case I think it should be removed from this (and minios)
+spec, because it is irrelevant to stubdomain.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--iJXiJc/TAIT2rh2r
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlxu6z4ACgkQ24/THMrX
+1ywTlQf/YZr2k9eKj+9umYSmDwe/64Pu18PpoieNhS1h4fOTB82Cao6hHYNIwXbJ
+4Uu0R8mpOp1UiKAm2FgBVVXlxZuI2+99F2szFnOPKHQ4bYibbpkyB0odOzUxvWfX
+oCsUYt/QUls1q9xK4t8ibP/U6WmgGOnZx6OksffGlpV539jSbBMaLOV7hgWfzOwU
+vezjWyv5zdd+yLwUSlnAE9MaHOz8WVl/Q/4GBi8cOvbEfuXdtZbJXqI9/kSo2WDX
+NNL0Zq5Qy8gjsMVGDGUjm1V9rAj/ehbH+4QpoCKPk8rcu4anA5g45LDlrg+mSEpx
+RUtxwOT2XbANFSCUOdVFuzpvIuX/DA==
+=kYqX
+-----END PGP SIGNATURE-----
+
+--iJXiJc/TAIT2rh2r--
+
+
+--===============0823955482470738655==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0823955482470738655==--
