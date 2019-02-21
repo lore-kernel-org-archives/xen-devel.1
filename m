@@ -1,10 +1,9 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v4 3/6] libxl: don't try to manipulate json
- config for stubdomain
-Date: Thu, 21 Feb 2019 16:16:23 +0000
-Message-ID: <20190221161623.bw4hivciq5jipyo7@zion.uk.xensource.com>
-References: <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
- <cf1ed08e622ea8c983bdbc39c98033641cc8330a.1549498018.git-series.marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2] vm_event: Add a new opcode to get
+ VM_EVENT_INTERFACE_VERSION
+Date: Thu, 21 Feb 2019 16:21:36 +0000
+Message-ID: <20190221162136.k7rewgvlpwxn6vkt@zion.uk.xensource.com>
+References: <7c7c1f3911aed2c383013637a7172f639c84ba61.1550153684.git.ppircalabu@bitdefender.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,10 +11,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=y0vM=Q4=citrix.com=prvs=948a3d738=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gwr23-0002Wm-DW
- for xen-devel@lists.xenproject.org; Thu, 21 Feb 2019 16:17:07 +0000
+ id 1gwr8G-0003DV-RX
+ for xen-devel@lists.xenproject.org; Thu, 21 Feb 2019 16:23:32 +0000
 Content-Disposition: inline
-In-Reply-To: <cf1ed08e622ea8c983bdbc39c98033641cc8330a.1549498018.git-series.marmarek@invisiblethingslab.com>
+In-Reply-To: <7c7c1f3911aed2c383013637a7172f639c84ba61.1550153684.git.ppircalabu@bitdefender.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +23,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
-Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Petre Pircalabu <ppircalabu@bitdefender.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBGZWIgMDcsIDIwMTkgYXQgMDE6MDc6NDZBTSArMDEwMCwgTWFyZWsgTWFyY3p5a293
-c2tpLUfDs3JlY2tpIHdyb3RlOgo+IFN0dWJkb21haW4gZG8gbm90IGhhdmUgaXQncyBvd24gY29u
-ZmlnIGZpbGUgLSBpdHMgY29uZmlndXJhdGlvbiBpcwo+IGRlcml2ZWQgZnJvbSB0YXJnZXQgZG9t
-YWlucy4gRG8gbm90IHRyeSB0byBtYW5pcHVsYXRlIGl0IHdoZW4gYXR0YWNoaW5nCj4gUENJIGRl
-dmljZS4KPiAKPiBUaGlzIGJ1ZyBwcmV2ZW50ZWQgc3RhcnRpbmcgSFZNIHdpdGggc3R1YmRvbWFp
-biBhbmQgUENJIHBhc3N0aHJvdWdoCj4gZGV2aWNlIGF0dGFjaGVkLgo+IAo+IFNpZ25lZC1vZmYt
-Ynk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdz
-bGFiLmNvbT4KCkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gVGh1LCBGZWIgMTQsIDIwMTkgYXQgMDQ6MTg6MTFQTSArMDIwMCwgUGV0cmUgUGlyY2FsYWJ1
+IHdyb3RlOgo+IEN1cnJlbnRseSwgdGhlIFZNX0VWRU5UX0lOVEVSRkFDRV9WRVJTSU9OIGlzIGRl
+dGVybWluZWQgYXQgcnVudGltZSwgYnkKPiBpbnNwZWN0aW5nIHRoZSBjb3JyZXNwb25kaW5nIGZp
+ZWxkIGluIGEgdm1fZXZlbnRfcmVxdWVzdC4gVGhpcyBoZWxwZXIKPiBvcGNvZGUgd2lsbCBxdWVy
+eSB0aGUgaHlwZXJ2aXNvciBzdXBwb3J0ZWQgdmVyc2lvbiBiZWZvcmUgdGhlIHZtX2V2ZW50Cj4g
+cmVsYXRlZCBzdHJ1Y3R1cmVzIGFuZCBsYXlvdXQgYXJlIHNldC11cC4KPiAKPiBTaWduZWQtb2Zm
+LWJ5OiBQZXRyZSBQaXJjYWxhYnUgPHBwaXJjYWxhYnVAYml0ZGVmZW5kZXIuY29tPgoKQWNrZWQt
+Ynk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
