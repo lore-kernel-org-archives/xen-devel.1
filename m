@@ -1,17 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 3/4] x86/vmx: Fix security issue when a
- guest balloons out the #VE info page
-Date: Fri, 22 Feb 2019 14:03:50 +0000
-Message-ID: <403ca932-25d4-828f-a191-f73e125561de@citrix.com>
-References: <1550614715-21161-4-git-send-email-andrew.cooper3@citrix.com>
- <1550780337-638-1-git-send-email-andrew.cooper3@citrix.com>
- <5C6FE9FF02000078002191E1@prv1-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: =?utf-8?q?Fwd=3A___xen=3A_credit2=3A_credit2_can?=
+ =?utf-8?q?=E2=80=99t_reach_the_throughput_as_expected?=
+Date: Fri, 22 Feb 2019 15:28:52 +0100
+Message-ID: <a461b35eb82ac1d8c0c4da0501a25144af174d0a.camel@suse.com>
+References: <0E8924944E28FD4A97A19E5A680D8A82368B9F52@DGGEML521-MBX.china.huawei.com>
+ <SG2PR01MB330235FAA52917279AD6587797630@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4901724011016238971=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5C6FE9FF02000078002191E1@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=YHMC=Q5=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1gxBnw-0005l1-Hp
+ for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 14:27:56 +0000
+In-Reply-To: <SG2PR01MB330235FAA52917279AD6587797630@SG2PR01MB3302.apcprd01.prod.exchangelabs.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,66 +22,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Xen-devel <xen-devel@lists.xen.org>, Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: zheng chuan <jason.zhengchuan@hotmail.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: jgross <jgross@suse.com>, "andrew.cooper3" <andrew.cooper3@citrix.com>, "frank.yangjie" <frank.yangjie@gmail.com>, "wei.liu2" <wei.liu2@citrix.com>, "george.dunlap" <george.dunlap@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjIvMDIvMjAxOSAxMjoyNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjEuMDIuMTkg
-YXQgMjE6MTgsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4gVGhlIGxvZ2lj
-IGluIGFsdHAybV92Y3B1X3tlbixkaXN9YWJsZV92ZSgpIGFuZCB2bXhfdmNwdV91cGRhdGVfdm1m
-dW5jX3ZlKCkgaXMKPj4gZGFuZ2Vyb3VzLiAgQWZ0ZXIgI1ZFIGhhcyBiZWVuIHNldCB1cCwgdGhl
-IGd1ZXN0IGNhbiBiYWxsb29uIG91dCBhbmQgZnJlZSB0aGUKPj4gbm9taW5hdGVkIEdGTiwgYWZ0
-ZXIgd2hpY2ggdGhlIHByb2Nlc3NvciBtYXkgd3JpdGUgdG8gaXQuICBBbHNvLCB0aGUgdW5sb2Nr
-ZWQKPj4gR0ZOIHF1ZXJ5IG1lYW5zIHRoZSBNRk4gaXMgc3RhbGUgYnkgdGhlIHRpbWUgaXQgaXMg
-dXNlZC4gIEFsdGVybmF0aXZlbHksIGEKPj4gZ3Vlc3QgY2FuIHJhY2UgdHdvIGRpc2FibGUgY2Fs
-bHMgdG8gY2F1c2Ugb25lIFZNQ1MgdG8gc3RpbGwgcmVmZXJlbmNlIHRoZQo+PiBub21pbmF0ZWQg
-R0ZOIGFmdGVyIHRoZSB0cmFja2luZyBpbmZvcm1hdGlvbiB3YXMgZHJvcHBlZC4KPj4KPj4gUmV3
-b3JrIHRoZSBsb2dpYyBmcm9tIHNjcmF0Y2ggdG8gbWFrZSBpdCBzYWZlLgo+Pgo+PiBIb2xkIGFu
-IGV4dHJhIHBhZ2UgcmVmZXJlbmNlIG9uIHRoZSB1bmRlcmx5aW5nIGZyYW1lLCB0byBhY2NvdW50
-IGZvciB0aGUKPj4gVk1DUydzIHJlZmVyZW5jZS4gIFRoaXMgbWVhbnMgdGhhdCBpZiB0aGUgR0ZO
-IGdldHMgYmFsbG9vbmVkIG91dCwgaXQgaXNuJ3QKPj4gZnJlZWQgYmFjayB0byBYZW4gdW50aWwg
-I1ZFIGlzIGRpc2FibGVkLCBhbmQgdGhlIFZNQ1Mgbm8gbG9uZ2VyIHJlZmVycyB0byB0aGUKPj4g
-cGFnZS4KPj4KPj4gQSBjb25zZXF1ZW5jZSBvZiB0aGlzIGlzIHRoYXQgYWx0cDJtX3ZjcHVfZGlz
-YWJsZV92ZSgpIG5lZWRzIHRvIGJlIGNhbGxlZAo+PiBkdXJpbmcgdGhlIGRvbWFpbl9raWxsKCkg
-cGF0aCwgdG8gZHJvcCB0aGUgcmVmZXJlbmNlIGZvciBkb21haW5zIHdoaWNoIHNodXQKPj4gZG93
-biB3aXRoICNWRSBzdGlsbCBlbmFibGVkLgo+Pgo+PiBGb3IgZG9tYWlucyB1c2luZyBhbHRwMm0s
-IHdlIGV4cGVjdCBhIHNpbmdsZSBlbmFibGUgY2FsbCBhbmQgbm8gZGlzYWJsZSBmb3IKPj4gdGhl
-IHJlbWFpbmluZyBsaWZldGltZSBvZiB0aGUgZG9tYWluLiAgSG93ZXZlciwgdG8gYXZvaWQgcHJv
-YmxlbXMgd2l0aAo+PiBjb25jdXJyZW50IGNhbGxzLCB1c2UgY21weGNoZygpIHRvIGxvY2tsZXNz
-bHkgbWFpbnRhaW4gc2FmZXR5Lgo+Pgo+PiBUaGlzIGRvZXNuJ3QgaGF2ZSBhbiBYU0EgYmVjYXVz
-ZSBhbHRwMm0gaXMgbm90IHlldCBhIHNlY3VyaXR5LXN1cHBvcnRlZAo+PiBmZWF0dXJlLgo+Pgo+
-PiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-Pgo+PiBSZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4g
-UmV2aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KPgo+IEkgd291bGQg
-YXBwcmVjaWF0ZSB0aG91Z2ggaWYgeW91IGNvdWxkIGFkZCBoYWxmIGEgc2VudGVuY2UgY2xhcmlm
-eWluZwo+IHRoYXQgYW5kIHdoeSB5b3UgZGVjaWRlZCBhZ2FpbnN0IG9idGFpbmluZyBhIHdyaXRh
-YmxlIHR5cGUtcmVmLgo+Cj4gQWxzbyAtIEkgdGFrZSBpdCB0aGF0IGFsdHAybSBhbmQgbWlncmF0
-aW9uIGRvbid0IHdvcmsgdG9nZXRoZXI/Cj4gT3RoZXJ3aXNlIHdvdWxkbid0IHlvdSBuZWVkIHRv
-IG1hcmsgdGhlIHBhZ2UgZGlydHkgaW4gbW9yZQo+IGNhc2VzPwoKTm9vbmUgZXZlciBjb25zaWRl
-cnMgbWlncmF0aW9uLCBhbmQgaXQgZGVmaW5pdGVseSBkb2Vzbid0IHdvcmsgYXMgYQpzZWxmLWNv
-bnRhaW5lZCBhY3Rpb24uwqAgRm9yIG9uZSwgbm90aGluZyBwcmVzZXJ2ZXMgdGhlIGFscmVhZHkK
-ZXN0YWJsaXNoZWQgbWVtX2FjY2VzcyAvIGFsdGVybmF0aXZlcyBpbmZvcm1hdGlvbi4KCkZvciBn
-ZW5lcmFsIGxvZ2RpcnR5LCB5b3Ugd2lsbCByZWNhbGwgdGhhdCBSYXp2YW4gc3BlbnQgYSBsb25n
-IHRpbWUKZml4aW5nIHRoYXQgaW4gWGVuIDQuMTIuCgpUaGUgI1ZFLWluZm8gcGFnZSBpdHNlbGYg
-Y2FuIGluIHByaW5jaXBsZSBiZSB0cmFja2VkIHdpdGggUGFnZQpNb2RpZmljYXRpb24gTG9nZ2lu
-ZywgYnV0IFBNTCBpc24ndCBhdmFpbGFibGUgYmVjYXVzZSBFUFQgQS9EIGlzCm11dHVhbGx5IGV4
-Y2x1c2l2ZSB3aXRoIGludHJvc3BlY3Rpb24gaW4gY3VycmVudCBwcm9jZXNzb3JzLsKgIEVuYWJs
-aW5nCkVQVCBBL0QgY2F1c2VzIGFsbCBndWVzdCBwYWdldGFibGUgYWNjZXNzZXMgdG8gYmUgdHJl
-YXRlZCBhcyB3cml0ZXMgZXZlbgp3aGVuIHRoZXkgYXJlbid0IHNldHRpbmcgZ3Vlc3QgQS9EIGJp
-dHMsIG1lYW5pbmcgdGhhdCBpZiB5b3UgdHJ5IGFuZAp3cml0ZSBwcm90ZWN0IGEgcGFnZXRhYmxl
-LCB5b3UgbGl2ZWxvY2sgdGFraW5nIEVQVF9WSU9MQVRJT05zIHdoZW4KdHJ5aW5nIHRvIHBlcmZv
-cm0gYSBUTEIgRmlsbC4KCkhvd2V2ZXIsIHdoYXQgaGFwcGVucyBpbiBwcmFjdGljZSBpcyB0aGF0
-IHlvdSBjYW4ndCBzYWZlbHkgbWlncmF0ZSBWTSdzCndpdGggYW4gYXR0YWNoZWQgdm1ldmVudCBy
-aW5nIGFzIHBhcnQgb2YgdGhlIHAybSAoYXMgdGhlIGd1ZXN0IGtlcm5lbApjYW4gaW50ZXJmZXJl
-KSwgYW5kIHlvdSBtaWdodCBub3RpY2UgdGhhdCB0aGVyZSBpcyBvbmdvaW5nIGVmZm9ydCB0byB1
-c2UKcmVzb3VyY2UgbWFwcGluZyBpbnN0ZWFkLsKgIElJUkMgSW50cm9zcGVjdGlvbiBkZXRhY2hl
-cyBpbiB0aGUgcG9zdC1wYXVzZQpwaGFzZSBvZiBtaWdyYXRlLCBhbmQgKGJ5IGRlc2lnbikgaXMg
-Y2FwYWJsZSBvZiByZS1pbml0aWFsaXNpbmcgYWxsCnByb3RlY3Rpb25zIGZyb20gZmlyc3QgcHJp
-bmNpcGxlcyBhdCB0aGUgZGVzdGluYXRpb24gKHNvIGluZGl2aWR1YWwKaW50cm9zcGVjdGlvbiBh
-Z2VudHMgb24gZWFjaCBzZXJ2ZXIgZG9uJ3QgbmVlZCB0byBjb21tdW5pY2F0ZSBzdGF0ZSkuCgpT
-byBvdmVyYWxsLCBtaWdyYXRpb24gZG9lcyB3b3JrIGF0IGxlYXN0IGluIHRoZSBhbHRwMm1fZXh0
-ZXJuYWwgY2FzZSwKYnV0IG9ubHkgZHVlIHRvIGEgZmFpciBhbW91bnQgb2YgaGVhdnkgbGlmdGlu
-ZyBpbiB0aGUgdG9vbHN0YWNrCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============4901724011016238971==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-t/eYS2vzx8zD9Vo2kl9K"
+
+
+--=-t/eYS2vzx8zD9Vo2kl9K
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2019-02-18 at 14:04 +0000, zheng chuan wrote:
+> Hi, Dario
+>
+Hi,
+
+> [sorry for the html email format, resend by text.]
+>=20
+Thanks! :-)
+
+> > On Fri, 2019-02-15 at 06:15 +0000, zheng chuan wrote:
+> > >=20
+> > Now, can I ask you a favour? Can you rerun with:
+> >=20
+> > sched_credit2_migrate_resist=3D0
+> >=20
+> > added to Xen's boot command line?
+> >=20
+> Unfortunately, sched_credit2_migrate_resist=3D0 seems do not work :(
+> It still around 60% and 120% for guest_1 and guest_2 with
+> ratelimiting of 1ms, respectively
+>=20
+Ok, I was just curios. Thanks for doing the test.
+
+> > But can we actually try to measure latency as well? Because it
+> > looks to me that
+> > we're discussing while having only half of the picture available.
+> >=20
+> Sure, but due to my lack of knowledge, does xen have sched_latency
+> measurement
+> tools like perf sched_latency for CFS ? I will give it try to do it
+> if I get it.
+>=20
+No, we don't have anything like that. When speaking of measuring
+latencies, I was mainly thinking to logging some timestamps from your
+app.
+
+Anyway, I just wanted to let you know that I'm looking into this, but
+it's a few days that I don't feel very well, that's why I wasn't
+replying to emails.
+
+I'll get back to it when I'm better.
+
+> What I am tried is rude and empirical, which is shown as bellow:
+>=20
+> diff --git a/xen/common/sched_credit2.c b/xen/common/sched_credit2.c
+> index 9a3e71f..b781ebe 100644
+> --- a/xen/common/sched_credit2.c
+> +++ b/xen/common/sched_credit2.c
+> @@ -1642,13 +1642,13 @@ static void reset_credit(const struct
+> scheduler *ops, int cpu, s_time_t now,
+> if ( snext->credit < -CSCHED2_CREDIT_INIT )
+> m +=3D (-snext->credit) / CSCHED2_CREDIT_INIT;
+>=20
+> - list_for_each( iter, &rqd->svc )
+> + list_for_each( iter, &rqd->runq )
+> {
+>
+Ok, I see. Well, if we do something like this, we'll have to figure out
+what happens when one of the vcpu which didn't get the credit reset,
+wakes up, and how that influence the algorithm.
+
+I was thinking more to have csched2_runtime() return something
+"clever", but I have no precise idea yet.
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-t/eYS2vzx8zD9Vo2kl9K
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlxwByQACgkQFkJ4iaW4
+c+7rew/8C2BwXQBNo/562S9IXL9zvuMY/6xpYAwltGpws83d+dBM1Qoiel0imsPe
+zUFHeokyutVsEfuQGwXfWpb5qP1Twp35mbH3pMo5A5aXLq8CwJ2szVT/3rw1ATPX
+d7gDOIvzO9SgIPx7jT6Mb+UUHsTSjYQziaBrxLRmh9jG8rMX7rA8ZXwUowniwxIG
+hIn8yIfylUSV9iPENkgMy+Jb6ww+fNhQnP9QRhCy2hK4cjCXkiy8oifXXaSIphov
+ttz6DP4KDNn4e0gLGmNiXOeQxt2FG6LLIDocqWIxG2d+VHpAunjhHMt3WDPzYdso
++VYTfQOU/XhM9ovgq3XOo7godJyA4PIeLAHWb0o1++mPSLV6OVP1Xx7CE/v62LiR
+pcCvYv6Zl3+fFecQWi8+0hCXJCJyEjEA8Y/oBhU9jhy5W8GkiC6s9/oJWQzmwmR4
+4CwZKVOCwFG7tSJ36a63C0oQn/xWaIGeNQzaVpSUV9zTOAi+YW9QtxxgfGHZob9b
+10F3m9NyeCIpf1AImV9PpPOVx8TJNgJB/ropSqtiLOy8l6u6pT2lBtNYI/dWgVVI
+Ee9n1OVRyWBqcK490ZejXAVQ8EaTuUGGIiEQY5CrNDZlnKF2+X7gSaye9uPAE4Q2
++T3l7cuYmBR/QnDrWShBxBeL/jI2ndUsWBGGCzYL0nDML/9pjJ0=
+=EVA1
+-----END PGP SIGNATURE-----
+
+--=-t/eYS2vzx8zD9Vo2kl9K--
+
+
+
+--===============4901724011016238971==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4901724011016238971==--
