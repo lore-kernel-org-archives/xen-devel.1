@@ -1,8 +1,8 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: [RFC PATCH 0/4] Add missing default labels to
  switch statements
-Date: Fri, 22 Feb 2019 14:34:29 -0800 (PST)
-Message-ID: <alpine.DEB.2.10.1902221416190.30151@sstabellini-ThinkPad-X260>
+Date: Fri, 22 Feb 2019 22:34:40 +0000
+Message-ID: <2ca21664-20ff-4b5f-0fde-5bf20ca50374@citrix.com>
 References: <20190222095721.24764-1-andr2000@gmail.com>
  <6e297f93-0c34-18df-63bb-6ef77b0615f3@citrix.com>
  <a30ca582-0993-9652-112e-467f49605405@arm.com>
@@ -15,15 +15,16 @@ References: <20190222095721.24764-1-andr2000@gmail.com>
  <alpine.DEB.2.10.1902221351310.30151@sstabellini-ThinkPad-X260>
  <2e9ced0f-398f-e8c2-d465-195f565c7ff0@arm.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1543738643-1550874206=:30151"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=O0ff=Q5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1gxJPJ-0008B6-SU
- for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 22:35:01 +0000
+ <SRS0=2oW1=Q5=citrix.com=prvs=9494562d8=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gxJQB-0008FV-UC
+ for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 22:35:55 +0000
 In-Reply-To: <2e9ced0f-398f-e8c2-d465-195f565c7ff0@arm.com>
-Content-ID: <alpine.DEB.2.10.1902221424450.30151@sstabellini-ThinkPad-X260>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -32,111 +33,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <Julien.Grall@arm.com>
-Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, "Andrii_Anisov@epam.com" <Andrii_Anisov@epam.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, nd <nd@arm.com>
+To: Julien Grall <Julien.Grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, "Andrii_Anisov@epam.com" <Andrii_Anisov@epam.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, nd <nd@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1543738643-1550874206=:30151
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1902221424451.30151@sstabellini-ThinkPad-X260>
-
-On Fri, 22 Feb 2019, Julien Grall wrote:
-> Hi Stefano,
-> 
-> On 22/02/2019 21:58, Stefano Stabellini wrote:
-> > On Fri, 22 Feb 2019, Andrew Cooper wrote:
-> >> On 22/02/2019 21:00, Stefano Stabellini wrote:
-> >>> On Fri, 22 Feb 2019, Julien Grall wrote:
-> >>>>>>> BTW, I checked the series with -Wswitch-default:
-> >>>>>>> -Wswitch-default
-> >>>>>>> Warn whenever a switch statement does not have a default case.
-> >>>>>>>> Furthermore, using BUG() is a pretty bad idea in switch.
-> >>>>>>> It is and not only in the switch. The reason I put BUG is that I tried
-> >>>>>>> to follow
-> >>>>>>> the existing "error handling" at those places.
-> >>>>>> It is not because BUG() is been used today in some places that we need to
-> >>>>>> continue to spread it.
-> >>>>>>
-> >>>>>>> Use of BUG() itself is another topic which will also need to be
-> >>>>>>> addressed
-> >>>>>> So we should not add more of them...
-> >>>>> Again, I see this as a dedicated change. So, in the current series I think
-> >>>>> it is
-> >>>>> acceptable to use the existing way of error handling if any at all.
-> >>>> That's not how it works in upstream. If you know some constructs are wrong, it
-> >>>> is best to try to address partially the problem directly then having so you
-> >>>> reduce the amounts of change afterwards.
-> >>>>
-> >>>> So please try to not introduce more BUG() in the code base.
-> >>> Hi Oleksandr, Julien,
-> >>>
-> >>> Julien's right that we should not introduce any more BUG()s. In fact,
-> >>> each of them makes the code less safe, not more safe! The purpose of
-> >>> MISRAC 16.4 is "defensive programming": write the code in a way that is
-> >>> more (not less!) resilient to failure.
-> >>>
-> >>> So, I think it is a good idea to introduce a default label because it
-> >>> can help us spot unexpected issues. Instead of calling BUG() in the
-> >>> default handler, which is detrimental, we should return an error when
-> >>> possible, or just print a warning.
-> >>
-> >> domain_crash() is almost always better than BUG().  It is very obvious
-> >> if it gets hit, and wont crash Xen.
-> > 
-> > That's a good suggestion.
-> > 
-> > 
-> >>> As 16.4 clearly state, even a simple comment would be enough to address
-> >>> the rule. We just need to explain why a default label is not needed.
-> >>> Such as:
-> >>>
-> >>>    default:
-> >>>    /* unreachable because blah and blah */
-> >>
-> >> What a simple comment doesn't do is avoid breaking -Wswitch.
-> > 
-> > I don't know how to reconcile 16.4 with -Wswitch. One could argue that
-> > -Wswitch could be a good way to address 16.4, but then we introduce a
-> > compiler specific requirement. Typically gcc is not the compiler of
-> > choice for these environments, unfortunately forcing gcc is not an
-> > option.
-> 
-> Well, you could build with GCC and then build with your custom 
-> compiler... 
-
-This suggestion is problematic: as an individual interested in MISRA-C
-compliance, I only have the MISRA-C rules in my hands. I don't know how
-to deal with suggestions like this one, that don't comply to the Rules,
-but it tries to address the same issue in a different manner.
-
-I cannot rule out that it wouldn't work, but also I cannot be sure that
-it would work. In short, I have no way to make progress or to find out
-how to move forward. I guess as a contributor I would be forced to go
-back to the MISRAC compliance experts and ask for their opinion. (One
-non-technical issue is who is going to pay them for spending their time
-on this.) But what if they say it is not acceptable for compliance?
-
-This is a great topic to discuss in March and decide what to do in these
-situations.
-
-
-> But, GCC is pretty much the only choice for Xen on Arm today 
-> as we don't build with clang and I pretty doubt we can build with compcert.
-
-Obviously, this has to change if we want to make progress on safety
-certifications.
---8323329-1543738643-1550874206=:30151
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1543738643-1550874206=:30151--
+T24gMjIvMDIvMjAxOSAyMjoxMSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpIFN0ZWZhbm8sCj4K
+PiBPbiAyMi8wMi8yMDE5IDIxOjU4LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+IE9uIEZy
+aSwgMjIgRmViIDIwMTksIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+PiBPbiAyMi8wMi8yMDE5IDIx
+OjAwLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+Pj4gT24gRnJpLCAyMiBGZWIgMjAxOSwg
+SnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4+Pj4+PiBCVFcsIEkgY2hlY2tlZCB0aGUgc2VyaWVzIHdp
+dGggLVdzd2l0Y2gtZGVmYXVsdDoKPj4+Pj4+Pj4gLVdzd2l0Y2gtZGVmYXVsdAo+Pj4+Pj4+PiBX
+YXJuIHdoZW5ldmVyIGEgc3dpdGNoIHN0YXRlbWVudCBkb2VzIG5vdCBoYXZlIGEgZGVmYXVsdCBj
+YXNlLgo+Pj4+Pj4+Pj4gRnVydGhlcm1vcmUsIHVzaW5nIEJVRygpIGlzIGEgcHJldHR5IGJhZCBp
+ZGVhIGluIHN3aXRjaC4KPj4+Pj4+Pj4gSXQgaXMgYW5kIG5vdCBvbmx5IGluIHRoZSBzd2l0Y2gu
+IFRoZSByZWFzb24gSSBwdXQgQlVHIGlzIHRoYXQgSSB0cmllZAo+Pj4+Pj4+PiB0byBmb2xsb3cK
+Pj4+Pj4+Pj4gdGhlIGV4aXN0aW5nICJlcnJvciBoYW5kbGluZyIgYXQgdGhvc2UgcGxhY2VzLgo+
+Pj4+Pj4+IEl0IGlzIG5vdCBiZWNhdXNlIEJVRygpIGlzIGJlZW4gdXNlZCB0b2RheSBpbiBzb21l
+IHBsYWNlcyB0aGF0IHdlIG5lZWQgdG8KPj4+Pj4+PiBjb250aW51ZSB0byBzcHJlYWQgaXQuCj4+
+Pj4+Pj4KPj4+Pj4+Pj4gVXNlIG9mIEJVRygpIGl0c2VsZiBpcyBhbm90aGVyIHRvcGljIHdoaWNo
+IHdpbGwgYWxzbyBuZWVkIHRvIGJlCj4+Pj4+Pj4+IGFkZHJlc3NlZAo+Pj4+Pj4+IFNvIHdlIHNo
+b3VsZCBub3QgYWRkIG1vcmUgb2YgdGhlbS4uLgo+Pj4+Pj4gQWdhaW4sIEkgc2VlIHRoaXMgYXMg
+YSBkZWRpY2F0ZWQgY2hhbmdlLiBTbywgaW4gdGhlIGN1cnJlbnQgc2VyaWVzIEkgdGhpbmsKPj4+
+Pj4+IGl0IGlzCj4+Pj4+PiBhY2NlcHRhYmxlIHRvIHVzZSB0aGUgZXhpc3Rpbmcgd2F5IG9mIGVy
+cm9yIGhhbmRsaW5nIGlmIGFueSBhdCBhbGwuCj4+Pj4+IFRoYXQncyBub3QgaG93IGl0IHdvcmtz
+IGluIHVwc3RyZWFtLiBJZiB5b3Uga25vdyBzb21lIGNvbnN0cnVjdHMgYXJlIHdyb25nLCBpdAo+
+Pj4+PiBpcyBiZXN0IHRvIHRyeSB0byBhZGRyZXNzIHBhcnRpYWxseSB0aGUgcHJvYmxlbSBkaXJl
+Y3RseSB0aGVuIGhhdmluZyBzbyB5b3UKPj4+Pj4gcmVkdWNlIHRoZSBhbW91bnRzIG9mIGNoYW5n
+ZSBhZnRlcndhcmRzLgo+Pj4+Pgo+Pj4+PiBTbyBwbGVhc2UgdHJ5IHRvIG5vdCBpbnRyb2R1Y2Ug
+bW9yZSBCVUcoKSBpbiB0aGUgY29kZSBiYXNlLgo+Pj4+IEhpIE9sZWtzYW5kciwgSnVsaWVuLAo+
+Pj4+Cj4+Pj4gSnVsaWVuJ3MgcmlnaHQgdGhhdCB3ZSBzaG91bGQgbm90IGludHJvZHVjZSBhbnkg
+bW9yZSBCVUcoKXMuIEluIGZhY3QsCj4+Pj4gZWFjaCBvZiB0aGVtIG1ha2VzIHRoZSBjb2RlIGxl
+c3Mgc2FmZSwgbm90IG1vcmUgc2FmZSEgVGhlIHB1cnBvc2Ugb2YKPj4+PiBNSVNSQUMgMTYuNCBp
+cyAiZGVmZW5zaXZlIHByb2dyYW1taW5nIjogd3JpdGUgdGhlIGNvZGUgaW4gYSB3YXkgdGhhdCBp
+cwo+Pj4+IG1vcmUgKG5vdCBsZXNzISkgcmVzaWxpZW50IHRvIGZhaWx1cmUuCj4+Pj4KPj4+PiBT
+bywgSSB0aGluayBpdCBpcyBhIGdvb2QgaWRlYSB0byBpbnRyb2R1Y2UgYSBkZWZhdWx0IGxhYmVs
+IGJlY2F1c2UgaXQKPj4+PiBjYW4gaGVscCB1cyBzcG90IHVuZXhwZWN0ZWQgaXNzdWVzLiBJbnN0
+ZWFkIG9mIGNhbGxpbmcgQlVHKCkgaW4gdGhlCj4+Pj4gZGVmYXVsdCBoYW5kbGVyLCB3aGljaCBp
+cyBkZXRyaW1lbnRhbCwgd2Ugc2hvdWxkIHJldHVybiBhbiBlcnJvciB3aGVuCj4+Pj4gcG9zc2li
+bGUsIG9yIGp1c3QgcHJpbnQgYSB3YXJuaW5nLgo+Pj4gZG9tYWluX2NyYXNoKCkgaXMgYWxtb3N0
+IGFsd2F5cyBiZXR0ZXIgdGhhbiBCVUcoKS7CoCBJdCBpcyB2ZXJ5IG9idmlvdXMKPj4+IGlmIGl0
+IGdldHMgaGl0LCBhbmQgd29udCBjcmFzaCBYZW4uCj4+IFRoYXQncyBhIGdvb2Qgc3VnZ2VzdGlv
+bi4KPj4KPj4KPj4+PiBBcyAxNi40IGNsZWFybHkgc3RhdGUsIGV2ZW4gYSBzaW1wbGUgY29tbWVu
+dCB3b3VsZCBiZSBlbm91Z2ggdG8gYWRkcmVzcwo+Pj4+IHRoZSBydWxlLiBXZSBqdXN0IG5lZWQg
+dG8gZXhwbGFpbiB3aHkgYSBkZWZhdWx0IGxhYmVsIGlzIG5vdCBuZWVkZWQuCj4+Pj4gU3VjaCBh
+czoKPj4+Pgo+Pj4+ICAgIGRlZmF1bHQ6Cj4+Pj4gICAgLyogdW5yZWFjaGFibGUgYmVjYXVzZSBi
+bGFoIGFuZCBibGFoICovCj4+PiBXaGF0IGEgc2ltcGxlIGNvbW1lbnQgZG9lc24ndCBkbyBpcyBh
+dm9pZCBicmVha2luZyAtV3N3aXRjaC4KPj4gSSBkb24ndCBrbm93IGhvdyB0byByZWNvbmNpbGUg
+MTYuNCB3aXRoIC1Xc3dpdGNoLiBPbmUgY291bGQgYXJndWUgdGhhdAo+PiAtV3N3aXRjaCBjb3Vs
+ZCBiZSBhIGdvb2Qgd2F5IHRvIGFkZHJlc3MgMTYuNCwgYnV0IHRoZW4gd2UgaW50cm9kdWNlIGEK
+Pj4gY29tcGlsZXIgc3BlY2lmaWMgcmVxdWlyZW1lbnQuIFR5cGljYWxseSBnY2MgaXMgbm90IHRo
+ZSBjb21waWxlciBvZgo+PiBjaG9pY2UgZm9yIHRoZXNlIGVudmlyb25tZW50cywgdW5mb3J0dW5h
+dGVseSBmb3JjaW5nIGdjYyBpcyBub3QgYW4KPj4gb3B0aW9uLgo+IFdlbGwsIHlvdSBjb3VsZCBi
+dWlsZCB3aXRoIEdDQyBhbmQgdGhlbiBidWlsZCB3aXRoIHlvdXIgY3VzdG9tIAo+IGNvbXBpbGVy
+Li4uIEJ1dCwgR0NDIGlzIHByZXR0eSBtdWNoIHRoZSBvbmx5IGNob2ljZSBmb3IgWGVuIG9uIEFy
+bSB0b2RheSAKPiBhcyB3ZSBkb24ndCBidWlsZCB3aXRoIGNsYW5nIGFuZCBJIHByZXR0eSBkb3Vi
+dCB3ZSBjYW4gYnVpbGQgd2l0aCBjb21wY2VydC4KClNvIHRoZSBzdWdnZXN0aW9uIEkgaGFkIHdh
+cyB0byBoYXZlIGFuIG92ZXJhbGwgQ09ORklHX01JU1JBIHdoaWNoIHdlIGNhbgpoaWRlIHNvbWUg
+b2YgdGhpcyBub25zZW5zZSBiZWhpbmQsIGFuZCB0aGVuCgojaWZkZWYgQ09ORklHX01JU1JBCiNk
+ZWZpbmUgTUlTUkFfQkxFX0RFRkFVTFQgZGVmYXVsdDoKI2Vsc2UKI2RlZmluZSBNSVNSQV9CTEVf
+REVGQVVMVAojZW5kaWYKClNvIHdoZW4geW91IGRpc2FibGUgQ09ORklHX01JU1JBLCB5b3VyIGNv
+bXBpbGVyIHN0YXJ0cyBiZWluZyBhYmxlIHRvCmhlbHAgeW91IGFnYWluLgoKVEJILCBpdCB3b3Vs
+ZCBhbHNvIGJlIG5pY2UgdG8gaGlkZSB0aGUgU1lNQk9MIG5vbnNlbnNlIGJlaGluZCwgc28gd2Ug
+Y2FuCmNvbnRpbnVlIGRvaW5nIGl0IHRoZSBlZmZpY2llbnQgd2F5IGZvciB+MTAwJSBvZiB0aGUg
+dGltZS4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
