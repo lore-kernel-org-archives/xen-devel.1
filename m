@@ -1,8 +1,8 @@
 From: Julien Grall <Julien.Grall@arm.com>
 Subject: Re: [RFC PATCH 0/4] Add missing default labels to
  switch statements
-Date: Fri, 22 Feb 2019 23:11:38 +0000
-Message-ID: <c9abf6b0-4875-19ec-e83d-cecbcce7ad2a@arm.com>
+Date: Fri, 22 Feb 2019 23:13:15 +0000
+Message-ID: <cc653ed1-922c-80ac-2eb7-27ce135bf2a8@arm.com>
 References: <20190222095721.24764-1-andr2000@gmail.com>
  <6e297f93-0c34-18df-63bb-6ef77b0615f3@citrix.com>
  <a30ca582-0993-9652-112e-467f49605405@arm.com>
@@ -22,11 +22,11 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=tzxq=Q5=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gxJyp-0003MG-Fx
- for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 23:11:43 +0000
+ id 1gxK0O-0003RC-6f
+ for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 23:13:20 +0000
 In-Reply-To: <alpine.DEB.2.10.1902221416190.30151@sstabellini-ThinkPad-X260>
 Content-Language: en-US
-Content-ID: <27DFC105A200444484E164FBD3788ABD@eurprd08.prod.outlook.com>
+Content-ID: <79541759AA681A4D8A5C3E1BE7FE098B@eurprd08.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -107,16 +107,20 @@ IGJlIGZvcmNlZCB0byBnbw0KPiBiYWNrIHRvIHRoZSBNSVNSQUMgY29tcGxpYW5jZSBleHBlcnRz
 IGFuZCBhc2sgZm9yIHRoZWlyIG9waW5pb24uIChPbmUNCj4gbm9uLXRlY2huaWNhbCBpc3N1ZSBp
 cyB3aG8gaXMgZ29pbmcgdG8gcGF5IHRoZW0gZm9yIHNwZW5kaW5nIHRoZWlyIHRpbWUNCj4gb24g
 dGhpcy4pIEJ1dCB3aGF0IGlmIHRoZXkgc2F5IGl0IGlzIG5vdCBhY2NlcHRhYmxlIGZvciBjb21w
-bGlhbmNlPw0KPiANCj4gVGhpcyBpcyBhIGdyZWF0IHRvcGljIHRvIGRpc2N1c3MgaW4gTWFyY2gg
-YW5kIGRlY2lkZSB3aGF0IHRvIGRvIGluIHRoZXNlDQo+IHNpdHVhdGlvbnMuDQo+IA0KPiANCj4+
-IEJ1dCwgR0NDIGlzIHByZXR0eSBtdWNoIHRoZSBvbmx5IGNob2ljZSBmb3IgWGVuIG9uIEFybSB0
-b2RheQ0KPj4gYXMgd2UgZG9uJ3QgYnVpbGQgd2l0aCBjbGFuZyBhbmQgSSBwcmV0dHkgZG91YnQg
-d2UgY2FuIGJ1aWxkIHdpdGggY29tcGNlcnQuDQo+IA0KPiBPYnZpb3VzbHksIHRoaXMgaGFzIHRv
-IGNoYW5nZSBpZiB3ZSB3YW50IHRvIG1ha2UgcHJvZ3Jlc3Mgb24gc2FmZXR5DQo+IGNlcnRpZmlj
-YXRpb25zLg0KDQpJIGFtIGN1cmlvdXMgdG8ga25vdyB3aGF0IGlzIHBsYW4gZm9yIHRoaXMuIEkg
-bWVhbiB0aGF0IGlmIG5vLW9uZSBpcyANCnBsYW5uaW5nIHRvIG1ha2UgWGVuIGJ1aWxkIHdpdGgg
-b3RoZXIgY29tcGlsZXJzLiBUaGVuIHdoYXQgd291bGQgYmUgdGhlIA0KYmVuZWZpdHMgb2YgdGhp
-cz8NCg0KQ2hlZXJzLA0KDQotLSANCkp1bGllbiBHcmFsbA0KX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+bGlhbmNlPw0KDQpJIGFwcHJlY2lhdGUgcGVvcGxlIG1pZ2h0IHdhbnQgdG8gdXNlIFhlbiB3aXRo
+IE1JU1JBIEMuIEJ1dCBJIGFtIG5vdCANCmNvbnZpbmNlZCB3ZSBzaG91bGQgYmVuZCB0byBzb21l
+IHJ1bGVzIGluIFhlbiBQcm9qZWN0IGZvciB0aGUgc2FrZSBvZiANCm1ha2luZyBNSVNSQSBoYXBw
+eS4gUGVvcGxlIGNvdWxkIGNhcnJ5IHN1Y2ggcGF0Y2ggdGhlbXNlbHZlcyBpZiB0aGV5IA0KY2Fy
+ZSBhYm91dCBpdC4NCg0KPiANCj4gVGhpcyBpcyBhIGdyZWF0IHRvcGljIHRvIGRpc2N1c3MgaW4g
+TWFyY2ggYW5kIGRlY2lkZSB3aGF0IHRvIGRvIGluIHRoZXNlDQo+IHNpdHVhdGlvbnMuDQo+IA0K
+PiANCj4+IEJ1dCwgR0NDIGlzIHByZXR0eSBtdWNoIHRoZSBvbmx5IGNob2ljZSBmb3IgWGVuIG9u
+IEFybSB0b2RheQ0KPj4gYXMgd2UgZG9uJ3QgYnVpbGQgd2l0aCBjbGFuZyBhbmQgSSBwcmV0dHkg
+ZG91YnQgd2UgY2FuIGJ1aWxkIHdpdGggY29tcGNlcnQuDQo+IA0KPiBPYnZpb3VzbHksIHRoaXMg
+aGFzIHRvIGNoYW5nZSBpZiB3ZSB3YW50IHRvIG1ha2UgcHJvZ3Jlc3Mgb24gc2FmZXR5DQo+IGNl
+cnRpZmljYXRpb25zLg0KDQpJIGFtIGN1cmlvdXMgdG8ga25vdyB3aGF0IGlzIHBsYW4gZm9yIHRo
+aXMuIEkgbWVhbiB0aGF0IGlmIG5vLW9uZSBpcyANCnBsYW5uaW5nIHRvIG1ha2UgWGVuIGJ1aWxk
+IHdpdGggb3RoZXIgY29tcGlsZXJzLiBUaGVuIHdoYXQgd291bGQgYmUgdGhlIA0KYmVuZWZpdHMg
+b2YgdGhpcz8NCg0KQ2hlZXJzLA0KDQotLSANCkp1bGllbiBHcmFsbA0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
