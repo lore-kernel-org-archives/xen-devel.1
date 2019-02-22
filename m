@@ -1,8 +1,8 @@
-From: Julien Grall <Julien.Grall@arm.com>
+From: Stefano Stabellini <sstabellini@kernel.org>
 Subject: Re: [RFC PATCH 0/4] Add missing default labels to
  switch statements
-Date: Fri, 22 Feb 2019 22:11:45 +0000
-Message-ID: <2e9ced0f-398f-e8c2-d465-195f565c7ff0@arm.com>
+Date: Fri, 22 Feb 2019 14:34:29 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1902221416190.30151@sstabellini-ThinkPad-X260>
 References: <20190222095721.24764-1-andr2000@gmail.com>
  <6e297f93-0c34-18df-63bb-6ef77b0615f3@citrix.com>
  <a30ca582-0993-9652-112e-467f49605405@arm.com>
@@ -13,18 +13,17 @@ References: <20190222095721.24764-1-andr2000@gmail.com>
  <alpine.DEB.2.10.1902221253050.30151@sstabellini-ThinkPad-X260>
  <b405a7ae-174f-c8d9-41cc-ec511fb69c77@citrix.com>
  <alpine.DEB.2.10.1902221351310.30151@sstabellini-ThinkPad-X260>
+ <2e9ced0f-398f-e8c2-d465-195f565c7ff0@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1543738643-1550874206=:30151"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=tzxq=Q5=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1gxJ2q-0006QW-Uo
- for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 22:11:48 +0000
-In-Reply-To: <alpine.DEB.2.10.1902221351310.30151@sstabellini-ThinkPad-X260>
-Content-Language: en-US
-Content-ID: <5A20466D42E6C945AB6668EBF566AA57@eurprd08.prod.outlook.com>
+ <SRS0=O0ff=Q5=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1gxJPJ-0008B6-SU
+ for xen-devel@lists.xenproject.org; Fri, 22 Feb 2019 22:35:01 +0000
+In-Reply-To: <2e9ced0f-398f-e8c2-d465-195f565c7ff0@arm.com>
+Content-ID: <alpine.DEB.2.10.1902221424450.30151@sstabellini-ThinkPad-X260>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -33,61 +32,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, "Andrii_Anisov@epam.com" <Andrii_Anisov@epam.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, nd <nd@arm.com>
+To: Julien Grall <Julien.Grall@arm.com>
+Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, Stefano Stabellini <sstabellini@kernel.org>, "Andrii_Anisov@epam.com" <Andrii_Anisov@epam.com>, Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Oleksandr Andrushchenko <andr2000@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, nd <nd@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywNCg0KT24gMjIvMDIvMjAxOSAyMTo1OCwgU3RlZmFubyBTdGFiZWxsaW5pIHdy
-b3RlOg0KPiBPbiBGcmksIDIyIEZlYiAyMDE5LCBBbmRyZXcgQ29vcGVyIHdyb3RlOg0KPj4gT24g
-MjIvMDIvMjAxOSAyMTowMCwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOg0KPj4+IE9uIEZyaSwg
-MjIgRmViIDIwMTksIEp1bGllbiBHcmFsbCB3cm90ZToNCj4+Pj4+Pj4gQlRXLCBJIGNoZWNrZWQg
-dGhlIHNlcmllcyB3aXRoIC1Xc3dpdGNoLWRlZmF1bHQ6DQo+Pj4+Pj4+IC1Xc3dpdGNoLWRlZmF1
-bHQNCj4+Pj4+Pj4gV2FybiB3aGVuZXZlciBhIHN3aXRjaCBzdGF0ZW1lbnQgZG9lcyBub3QgaGF2
-ZSBhIGRlZmF1bHQgY2FzZS4NCj4+Pj4+Pj4+IEZ1cnRoZXJtb3JlLCB1c2luZyBCVUcoKSBpcyBh
-IHByZXR0eSBiYWQgaWRlYSBpbiBzd2l0Y2guDQo+Pj4+Pj4+IEl0IGlzIGFuZCBub3Qgb25seSBp
-biB0aGUgc3dpdGNoLiBUaGUgcmVhc29uIEkgcHV0IEJVRyBpcyB0aGF0IEkgdHJpZWQNCj4+Pj4+
-Pj4gdG8gZm9sbG93DQo+Pj4+Pj4+IHRoZSBleGlzdGluZyAiZXJyb3IgaGFuZGxpbmciIGF0IHRo
-b3NlIHBsYWNlcy4NCj4+Pj4+PiBJdCBpcyBub3QgYmVjYXVzZSBCVUcoKSBpcyBiZWVuIHVzZWQg
-dG9kYXkgaW4gc29tZSBwbGFjZXMgdGhhdCB3ZSBuZWVkIHRvDQo+Pj4+Pj4gY29udGludWUgdG8g
-c3ByZWFkIGl0Lg0KPj4+Pj4+DQo+Pj4+Pj4+IFVzZSBvZiBCVUcoKSBpdHNlbGYgaXMgYW5vdGhl
-ciB0b3BpYyB3aGljaCB3aWxsIGFsc28gbmVlZCB0byBiZQ0KPj4+Pj4+PiBhZGRyZXNzZWQNCj4+
-Pj4+PiBTbyB3ZSBzaG91bGQgbm90IGFkZCBtb3JlIG9mIHRoZW0uLi4NCj4+Pj4+IEFnYWluLCBJ
-IHNlZSB0aGlzIGFzIGEgZGVkaWNhdGVkIGNoYW5nZS4gU28sIGluIHRoZSBjdXJyZW50IHNlcmll
-cyBJIHRoaW5rDQo+Pj4+PiBpdCBpcw0KPj4+Pj4gYWNjZXB0YWJsZSB0byB1c2UgdGhlIGV4aXN0
-aW5nIHdheSBvZiBlcnJvciBoYW5kbGluZyBpZiBhbnkgYXQgYWxsLg0KPj4+PiBUaGF0J3Mgbm90
-IGhvdyBpdCB3b3JrcyBpbiB1cHN0cmVhbS4gSWYgeW91IGtub3cgc29tZSBjb25zdHJ1Y3RzIGFy
-ZSB3cm9uZywgaXQNCj4+Pj4gaXMgYmVzdCB0byB0cnkgdG8gYWRkcmVzcyBwYXJ0aWFsbHkgdGhl
-IHByb2JsZW0gZGlyZWN0bHkgdGhlbiBoYXZpbmcgc28geW91DQo+Pj4+IHJlZHVjZSB0aGUgYW1v
-dW50cyBvZiBjaGFuZ2UgYWZ0ZXJ3YXJkcy4NCj4+Pj4NCj4+Pj4gU28gcGxlYXNlIHRyeSB0byBu
-b3QgaW50cm9kdWNlIG1vcmUgQlVHKCkgaW4gdGhlIGNvZGUgYmFzZS4NCj4+PiBIaSBPbGVrc2Fu
-ZHIsIEp1bGllbiwNCj4+Pg0KPj4+IEp1bGllbidzIHJpZ2h0IHRoYXQgd2Ugc2hvdWxkIG5vdCBp
-bnRyb2R1Y2UgYW55IG1vcmUgQlVHKClzLiBJbiBmYWN0LA0KPj4+IGVhY2ggb2YgdGhlbSBtYWtl
-cyB0aGUgY29kZSBsZXNzIHNhZmUsIG5vdCBtb3JlIHNhZmUhIFRoZSBwdXJwb3NlIG9mDQo+Pj4g
-TUlTUkFDIDE2LjQgaXMgImRlZmVuc2l2ZSBwcm9ncmFtbWluZyI6IHdyaXRlIHRoZSBjb2RlIGlu
-IGEgd2F5IHRoYXQgaXMNCj4+PiBtb3JlIChub3QgbGVzcyEpIHJlc2lsaWVudCB0byBmYWlsdXJl
-Lg0KPj4+DQo+Pj4gU28sIEkgdGhpbmsgaXQgaXMgYSBnb29kIGlkZWEgdG8gaW50cm9kdWNlIGEg
-ZGVmYXVsdCBsYWJlbCBiZWNhdXNlIGl0DQo+Pj4gY2FuIGhlbHAgdXMgc3BvdCB1bmV4cGVjdGVk
-IGlzc3Vlcy4gSW5zdGVhZCBvZiBjYWxsaW5nIEJVRygpIGluIHRoZQ0KPj4+IGRlZmF1bHQgaGFu
-ZGxlciwgd2hpY2ggaXMgZGV0cmltZW50YWwsIHdlIHNob3VsZCByZXR1cm4gYW4gZXJyb3Igd2hl
-bg0KPj4+IHBvc3NpYmxlLCBvciBqdXN0IHByaW50IGEgd2FybmluZy4NCj4+DQo+PiBkb21haW5f
-Y3Jhc2goKSBpcyBhbG1vc3QgYWx3YXlzIGJldHRlciB0aGFuIEJVRygpLsKgIEl0IGlzIHZlcnkg
-b2J2aW91cw0KPj4gaWYgaXQgZ2V0cyBoaXQsIGFuZCB3b250IGNyYXNoIFhlbi4NCj4gDQo+IFRo
-YXQncyBhIGdvb2Qgc3VnZ2VzdGlvbi4NCj4gDQo+IA0KPj4+IEFzIDE2LjQgY2xlYXJseSBzdGF0
-ZSwgZXZlbiBhIHNpbXBsZSBjb21tZW50IHdvdWxkIGJlIGVub3VnaCB0byBhZGRyZXNzDQo+Pj4g
-dGhlIHJ1bGUuIFdlIGp1c3QgbmVlZCB0byBleHBsYWluIHdoeSBhIGRlZmF1bHQgbGFiZWwgaXMg
-bm90IG5lZWRlZC4NCj4+PiBTdWNoIGFzOg0KPj4+DQo+Pj4gICAgZGVmYXVsdDoNCj4+PiAgICAv
-KiB1bnJlYWNoYWJsZSBiZWNhdXNlIGJsYWggYW5kIGJsYWggKi8NCj4+DQo+PiBXaGF0IGEgc2lt
-cGxlIGNvbW1lbnQgZG9lc24ndCBkbyBpcyBhdm9pZCBicmVha2luZyAtV3N3aXRjaC4NCj4gDQo+
-IEkgZG9uJ3Qga25vdyBob3cgdG8gcmVjb25jaWxlIDE2LjQgd2l0aCAtV3N3aXRjaC4gT25lIGNv
-dWxkIGFyZ3VlIHRoYXQNCj4gLVdzd2l0Y2ggY291bGQgYmUgYSBnb29kIHdheSB0byBhZGRyZXNz
-IDE2LjQsIGJ1dCB0aGVuIHdlIGludHJvZHVjZSBhDQo+IGNvbXBpbGVyIHNwZWNpZmljIHJlcXVp
-cmVtZW50LiBUeXBpY2FsbHkgZ2NjIGlzIG5vdCB0aGUgY29tcGlsZXIgb2YNCj4gY2hvaWNlIGZv
-ciB0aGVzZSBlbnZpcm9ubWVudHMsIHVuZm9ydHVuYXRlbHkgZm9yY2luZyBnY2MgaXMgbm90IGFu
-DQo+IG9wdGlvbi4NCg0KV2VsbCwgeW91IGNvdWxkIGJ1aWxkIHdpdGggR0NDIGFuZCB0aGVuIGJ1
-aWxkIHdpdGggeW91ciBjdXN0b20gDQpjb21waWxlci4uLiBCdXQsIEdDQyBpcyBwcmV0dHkgbXVj
-aCB0aGUgb25seSBjaG9pY2UgZm9yIFhlbiBvbiBBcm0gdG9kYXkgDQphcyB3ZSBkb24ndCBidWls
-ZCB3aXRoIGNsYW5nIGFuZCBJIHByZXR0eSBkb3VidCB3ZSBjYW4gYnVpbGQgd2l0aCBjb21wY2Vy
-dC4NCg0KQ2hlZXJzLA0KDQotLSANCkp1bGllbiBHcmFsbA0KX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1543738643-1550874206=:30151
+Content-Type: TEXT/PLAIN; CHARSET=UTF-8
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.10.1902221424451.30151@sstabellini-ThinkPad-X260>
+
+On Fri, 22 Feb 2019, Julien Grall wrote:
+> Hi Stefano,
+> 
+> On 22/02/2019 21:58, Stefano Stabellini wrote:
+> > On Fri, 22 Feb 2019, Andrew Cooper wrote:
+> >> On 22/02/2019 21:00, Stefano Stabellini wrote:
+> >>> On Fri, 22 Feb 2019, Julien Grall wrote:
+> >>>>>>> BTW, I checked the series with -Wswitch-default:
+> >>>>>>> -Wswitch-default
+> >>>>>>> Warn whenever a switch statement does not have a default case.
+> >>>>>>>> Furthermore, using BUG() is a pretty bad idea in switch.
+> >>>>>>> It is and not only in the switch. The reason I put BUG is that I tried
+> >>>>>>> to follow
+> >>>>>>> the existing "error handling" at those places.
+> >>>>>> It is not because BUG() is been used today in some places that we need to
+> >>>>>> continue to spread it.
+> >>>>>>
+> >>>>>>> Use of BUG() itself is another topic which will also need to be
+> >>>>>>> addressed
+> >>>>>> So we should not add more of them...
+> >>>>> Again, I see this as a dedicated change. So, in the current series I think
+> >>>>> it is
+> >>>>> acceptable to use the existing way of error handling if any at all.
+> >>>> That's not how it works in upstream. If you know some constructs are wrong, it
+> >>>> is best to try to address partially the problem directly then having so you
+> >>>> reduce the amounts of change afterwards.
+> >>>>
+> >>>> So please try to not introduce more BUG() in the code base.
+> >>> Hi Oleksandr, Julien,
+> >>>
+> >>> Julien's right that we should not introduce any more BUG()s. In fact,
+> >>> each of them makes the code less safe, not more safe! The purpose of
+> >>> MISRAC 16.4 is "defensive programming": write the code in a way that is
+> >>> more (not less!) resilient to failure.
+> >>>
+> >>> So, I think it is a good idea to introduce a default label because it
+> >>> can help us spot unexpected issues. Instead of calling BUG() in the
+> >>> default handler, which is detrimental, we should return an error when
+> >>> possible, or just print a warning.
+> >>
+> >> domain_crash() is almost always better than BUG().  It is very obvious
+> >> if it gets hit, and wont crash Xen.
+> > 
+> > That's a good suggestion.
+> > 
+> > 
+> >>> As 16.4 clearly state, even a simple comment would be enough to address
+> >>> the rule. We just need to explain why a default label is not needed.
+> >>> Such as:
+> >>>
+> >>>    default:
+> >>>    /* unreachable because blah and blah */
+> >>
+> >> What a simple comment doesn't do is avoid breaking -Wswitch.
+> > 
+> > I don't know how to reconcile 16.4 with -Wswitch. One could argue that
+> > -Wswitch could be a good way to address 16.4, but then we introduce a
+> > compiler specific requirement. Typically gcc is not the compiler of
+> > choice for these environments, unfortunately forcing gcc is not an
+> > option.
+> 
+> Well, you could build with GCC and then build with your custom 
+> compiler... 
+
+This suggestion is problematic: as an individual interested in MISRA-C
+compliance, I only have the MISRA-C rules in my hands. I don't know how
+to deal with suggestions like this one, that don't comply to the Rules,
+but it tries to address the same issue in a different manner.
+
+I cannot rule out that it wouldn't work, but also I cannot be sure that
+it would work. In short, I have no way to make progress or to find out
+how to move forward. I guess as a contributor I would be forced to go
+back to the MISRAC compliance experts and ask for their opinion. (One
+non-technical issue is who is going to pay them for spending their time
+on this.) But what if they say it is not acceptable for compliance?
+
+This is a great topic to discuss in March and decide what to do in these
+situations.
+
+
+> But, GCC is pretty much the only choice for Xen on Arm today 
+> as we don't build with clang and I pretty doubt we can build with compcert.
+
+Obviously, this has to change if we want to make progress on safety
+certifications.
+--8323329-1543738643-1550874206=:30151
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1543738643-1550874206=:30151--
