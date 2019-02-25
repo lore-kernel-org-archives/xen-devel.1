@@ -1,20 +1,14 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] x86/shadow: don't use
- map_domain_page_global() on paths that may not fail
-Date: Mon, 25 Feb 2019 21:04:43 +0100
-Message-ID: <d7840065-dfe1-471b-d059-d40f9c7775d9@suse.com>
-References: <5C6D6F11020000780021883E@suse.com>
+From: "Woods, Brian" <Brian.Woods@amd.com>
+Subject: [PATCH 2/3] mwait-idle: add support for AMD processors
+Date: Mon, 25 Feb 2019 20:23:59 +0000
+Message-ID: <20190225202233.68340-3-brian.woods@amd.com>
+References: <20190225202233.68340-1-brian.woods@amd.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=kH8z=RA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1gyMUX-0000xA-I3
- for xen-devel@lists.xenproject.org; Mon, 25 Feb 2019 20:04:45 +0000
-In-Reply-To: <5C6D6F11020000780021883E@suse.com>
-Content-Language: de-DE
+In-Reply-To: <20190225202233.68340-1-brian.woods@amd.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,23 +17,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>
+To: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, "Woods, Brian" <Brian.Woods@amd.com>, Jan Beulich <jbeulich@suse.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAvMDIvMjAxOSAxNjoxNSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVGhlIGFzc3VtcHRpb24g
-KGFjY29yZGluZyB0byBvbmUgY29tbWVudCkgYW5kIGhvcGUgKGFjY29yZGluZyB0bwo+IGFub3Ro
-ZXIpIHRoYXQgbWFwX2RvbWFpbl9wYWdlX2dsb2JhbCgpIGNhbid0IGZhaWwgYXJlIGJvdGggd3Jv
-bmcgb24KPiBsYXJnZSBlbm91Z2ggc3lzdGVtcy4gRG8gYXdheSB3aXRoIHRoZSBndWVzdF92dGFi
-bGUgZmllbGQgYWx0b2dldGhlciwKPiBhbmQgZXN0YWJsaXNoIC8gdGVhciBkb3duIHRoZSBkZXNp
-cmVkIG1hcHBpbmcgYXMgbmVjZXNzYXJ5Lgo+IAo+IFRoZSBhbHRlcm5hdGl2ZXMsIGRpc2NhcmRl
-ZCBhcyBiZWluZyB1bmRlc2lyYWJsZSwgd291bGQgaGF2ZSBiZWVuIHRvCj4gZWl0aGVyIGNyYXNo
-IHRoZSBndWVzdCBpbiBzaF91cGRhdGVfY3IzKCkgd2hlbiB0aGUgbWFwcGluZyBmYWlscywgb3Ig
-dG8KPiBidWJibGUgdXAgYW4gZXJyb3IgaW5kaWNhdG9yLCB3aGljaCB1cHBlciBsYXllcnMgd291
-bGQgaGF2ZSBhIGhhcmQgdGltZQo+IHRvIGRlYWwgd2l0aCAob3RoZXIgdGhhbiBhZ2FpbiBieSBj
-cmFzaGluZyB0aGUgZ3Vlc3QpLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KClJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0Bz
-dXNlLmNvbT4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+TmV3ZXIgQU1EIHByb2Nlc3NvcnMgKEYxN2gpIGhhdmUgbXdhaXQgc3VwcG9ydC4gIEFkZCBzb21l
+IGNoZWNrcyB0byBtYWtlCnN1cmUgdmVuZG9yIHNwZWNpZmljIGNvZGUgaXMgcnVuIGNvcnJlY3Rs
+eSBhbmQgc29tZSBpbmZyYXN0cnVjdHVyZSB0bwpmYWNpbGl0YXRlIGFkZGluZyBBTUQgcHJvY2Vz
+c29ycy4KClNpZ25lZC1vZmYtYnk6IEJyaWFuIFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29tPgot
+LS0KIHhlbi9hcmNoL3g4Ni9jcHUvbXdhaXQtaWRsZS5jIHwgMjUgKysrKysrKysrKysrKysrKysr
+KysrKystLQogMSBmaWxlIGNoYW5nZWQsIDIzIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0p
+CgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2NwdS9td2FpdC1pZGxlLmMgYi94ZW4vYXJjaC94
+ODYvY3B1L213YWl0LWlkbGUuYwppbmRleCBhMDYzZTM5ZDYwLi4xMDM2YzhiMTAxIDEwMDY0NAot
+LS0gYS94ZW4vYXJjaC94ODYvY3B1L213YWl0LWlkbGUuYworKysgYi94ZW4vYXJjaC94ODYvY3B1
+L213YWl0LWlkbGUuYwpAQCAtOTc5LDYgKzk3OSwxMyBAQCBzdGF0aWMgY29uc3Qgc3RydWN0IHg4
+Nl9jcHVfaWQgaW50ZWxfaWRsZV9pZHNbXSBfX2luaXRjb25zdHJlbCA9IHsKIAl7fQogfTsKIAor
+I2RlZmluZSBBQ1BVKGZhbWlseSwgbW9kZWwsIGNwdSkgXAorCXsgWDg2X1ZFTkRPUl9BTUQsIGZh
+bWlseSwgbW9kZWwsIFg4Nl9GRUFUVVJFX0FMV0FZUywgJmlkbGVfY3B1XyMjY3B1fQorCitzdGF0
+aWMgY29uc3Qgc3RydWN0IHg4Nl9jcHVfaWQgYW1kX2lkbGVfaWRzW10gX19pbml0Y29uc3RyZWwg
+PSB7CisJe30KK307CisKIC8qCiAgKiBpdnRfaWRsZV9zdGF0ZV90YWJsZV91cGRhdGUodm9pZCkK
+ICAqCkBAIC0xMTE1LDYgKzExMjIsOSBAQCBzdGF0aWMgdm9pZCBfX2luaXQgc2tsaF9pZGxlX3N0
+YXRlX3RhYmxlX3VwZGF0ZSh2b2lkKQogICovCiBzdGF0aWMgdm9pZCBfX2luaXQgbXdhaXRfaWRs
+ZV9zdGF0ZV90YWJsZV91cGRhdGUodm9pZCkKIHsKKwlpZiAoYm9vdF9jcHVfZGF0YS54ODZfdmVu
+ZG9yID09IFg4Nl9WRU5ET1JfQU1EKQorCQlyZXR1cm47CisKIAlzd2l0Y2ggKGJvb3RfY3B1X2Rh
+dGEueDg2X21vZGVsKSB7CiAJY2FzZSAweDNlOiAvKiBJVlQgKi8KIAkJaXZ0X2lkbGVfc3RhdGVf
+dGFibGVfdXBkYXRlKCk7CkBAIC0xMTI2LDEzICsxMTM2LDI0IEBAIHN0YXRpYyB2b2lkIF9faW5p
+dCBtd2FpdF9pZGxlX3N0YXRlX3RhYmxlX3VwZGF0ZSh2b2lkKQogCWNhc2UgMHg1ZTogLyogU0tM
+LUggKi8KIAkJc2tsaF9pZGxlX3N0YXRlX3RhYmxlX3VwZGF0ZSgpOwogCQlicmVhazsKLSAJfQor
+CX0KIH0KIAogc3RhdGljIGludCBfX2luaXQgbXdhaXRfaWRsZV9wcm9iZSh2b2lkKQogewogCXVu
+c2lnbmVkIGludCBlYXgsIGVieCwgZWN4OwotCWNvbnN0IHN0cnVjdCB4ODZfY3B1X2lkICppZCA9
+IHg4Nl9tYXRjaF9jcHUoaW50ZWxfaWRsZV9pZHMpOworCWNvbnN0IHN0cnVjdCB4ODZfY3B1X2lk
+ICppZDsKKworCXN3aXRjaCAoYm9vdF9jcHVfZGF0YS54ODZfdmVuZG9yKSB7CisJY2FzZSBYODZf
+VkVORE9SX0lOVEVMOgorCQlpZCA9IHg4Nl9tYXRjaF9jcHUoaW50ZWxfaWRsZV9pZHMpOworCQli
+cmVhazsKKwljYXNlIFg4Nl9WRU5ET1JfQU1EOgorCQlpZCA9IHg4Nl9tYXRjaF9jcHUoYW1kX2lk
+bGVfaWRzKTsKKwkJYnJlYWs7CisJZGVmYXVsdDoKKwkJaWQgPSBOVUxMOworCX0KIAogCWlmICgh
+aWQpIHsKIAkJcHJfZGVidWcoUFJFRklYICJkb2VzIG5vdCBydW4gb24gZmFtaWx5ICVkIG1vZGVs
+ICVkXG4iLAotLSAKMi4xMS4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
