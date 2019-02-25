@@ -1,16 +1,32 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 3/3] tools/cpu-policy: Add unit tests and a
- fuzzing harness
-Date: Mon, 25 Feb 2019 11:56:05 +0000
-Message-ID: <f4bf5277-fa83-2a71-ca35-f81e3343f9b7@citrix.com>
-References: <1546616022-32229-1-git-send-email-andrew.cooper3@citrix.com>
- <1546616022-32229-4-git-send-email-andrew.cooper3@citrix.com>
- <5C3335AE020000780020ACBD@prv1-mh.provo.novell.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: Re: [RFC PATCH 0/4] Add missing default labels to
+ switch statements
+Date: Mon, 25 Feb 2019 13:59:13 +0200
+Message-ID: <c73104e1-0847-a7f8-6f40-5f34d989a95c@gmail.com>
+References: <20190222095721.24764-1-andr2000@gmail.com>
+ <6e297f93-0c34-18df-63bb-6ef77b0615f3@citrix.com>
+ <a30ca582-0993-9652-112e-467f49605405@arm.com>
+ <f3438c56-1e7c-88fa-fb0e-b770eccf6d88@gmail.com>
+ <bbc8f1bc-c8dd-6784-fbe4-0667127d37af@arm.com>
+ <63101f28-a1ad-bffd-158a-c7e1380f6e18@gmail.com>
+ <547c3711-02a3-9071-5bb1-494ca45eb4a6@arm.com>
+ <alpine.DEB.2.10.1902221253050.30151@sstabellini-ThinkPad-X260>
+ <a946a3c9-af1d-2a95-ba52-1cb01ecdcb1e@arm.com>
+ <e690b1e9-29e4-452b-a4fb-f796fba5f1b0@gmail.com>
+ <9c562301-c486-2919-c986-7761843e2ba2@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5205316999730317807=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5C3335AE020000780020ACBD@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=jrRo=RA=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1gyEuk-0005mp-1d
+ for xen-devel@lists.xenproject.org; Mon, 25 Feb 2019 11:59:18 +0000
+Received: by mail-lf1-x141.google.com with SMTP id a8so845339lfi.7
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Feb 2019 03:59:16 -0800 (PST)
+In-Reply-To: <9c562301-c486-2919-c986-7761843e2ba2@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,391 +35,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: "Artem_Mygaiev@epam.com" <Artem_Mygaiev@epam.com>, "Andrii_Anisov@epam.com" <Andrii_Anisov@epam.com>, "Oleksandr_Andrushchenko@epam.com" <Oleksandr_Andrushchenko@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, nd <nd@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5205316999730317807==
-Content-Type: multipart/alternative;
-	boundary="------------68C3C4CF66C532EF09D00FB4"
-Content-Language: en-GB
-
---------------68C3C4CF66C532EF09D00FB4
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 07/01/2019 11:19, Jan Beulich wrote:
->>>> On 04.01.19 at 16:33, <andrew.cooper3@citrix.com> wrote:
->> The AFL harness currently notices that there are cases where we optimse the
->> serialised stream by omitting data beyond the various maximum leaves.
->>
->> Both sets of tests will be extended with further libx86 work.
->>
->> Fix the sorting of the CPUID_GUEST_NR_* constants, noticed while writing the
->> unit tests.
->>
->> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> ---
->> CC: Jan Beulich <JBeulich@suse.com>
->> CC: Wei Liu <wei.liu2@citrix.com>
->> CC: Roger Pau Monné <roger.pau@citrix.com>
->> CC: Sergey Dyasli <sergey.dyasli@citrix.com>
->> ---
->>  tools/fuzz/cpu-policy/.gitignore          |   1 +
->>  tools/fuzz/cpu-policy/Makefile            |  27 ++++
->>  tools/fuzz/cpu-policy/afl-policy-fuzzer.c | 117 ++++++++++++++
->>  tools/tests/Makefile                      |   1 +
->>  tools/tests/cpu-policy/.gitignore         |   1 +
-> Did we somehow come to the conclusion that the central .gitignore
-> at the root of the tree is not the way to go in the future?
-
-We've already got several examples in the tree.
-
-andrewcoop@andrewcoop:/local/xen.git$ git ls-files | grep gitignore
-.gitignore
-tools/tests/vhpet/.gitignore
-xen/tools/kconfig/.gitignore
-xen/tools/kconfig/lxdialog/.gitignore
-xen/xsm/flask/.gitignore
-
-As for the pro's of using split ignores, fewer collisions for backported
-changes, and no forgetting to update the root .gitconfig when you move
-directories.
-
->
->> --- /dev/null
->> +++ b/tools/tests/cpu-policy/test-cpu-policy.c
->> @@ -0,0 +1,247 @@
->> +#include <assert.h>
->> +#include <errno.h>
->> +#include <stdbool.h>
->> +#include <stdint.h>
->> +#include <stdio.h>
->> +#include <stdlib.h>
->> +#include <string.h>
->> +
->> +#include <xen-tools/libs.h>
->> +#include <xen/lib/x86/cpuid.h>
->> +#include <xen/lib/x86/msr.h>
->> +#include <xen/domctl.h>
->> +
->> +static void test_cpuid_serialise_success(void)
->> +{
->> +    static const struct test {
->> +        struct cpuid_policy p;
->> +        const char *name;
->> +        unsigned int nr_leaves;
->> +    } tests[] = {
->> +        {
->> +            .name = "empty policy",
->> +            .nr_leaves = 4,
->> +        },
->> +    };
->> +    unsigned int i;
->> +
->> +    printf("Testing CPUID serialise success:\n");
->> +
->> +    for ( i = 0; i < ARRAY_SIZE(tests); ++i )
->> +    {
->> +        const struct test *t = &tests[i];
->> +        unsigned int nr = t->nr_leaves;
->> +        xen_cpuid_leaf_t *leaves = malloc(nr * sizeof(*leaves));
->> +        int rc;
->> +
->> +        if ( !leaves )
->> +            goto test_done;
-> Shouldn't you leave some indication of the test not having got run?
-
-I've swapped this for a hard error.  Its not going to fail in practice.
-
->
->> +static void test_cpuid_deserialise_failure(void)
->> +{
->> +    static const struct test {
->> +        const char *name;
->> +        xen_cpuid_leaf_t leaf;
->> +    } tests[] = {
->> +        {
->> +            .name = "incorrect basic subleaf",
->> +            .leaf = { .leaf = 0, .subleaf = 0 },
->> +        },
->> +        {
->> +            .name = "incorrect hv1 subleaf",
->> +            .leaf = { .leaf = 0x40000000, .subleaf = 0 },
->> +        },
->> +        {
->> +            .name = "incorrect hv2 subleaf",
->> +            .leaf = { .leaf = 0x40000100, .subleaf = 0 },
->> +        },
->> +        {
->> +            .name = "incorrect extd subleaf",
->> +            .leaf = { .leaf = 0x80000000, .subleaf = 0 },
->> +        },
->> +        {
->> +            .name = "OoB basic leaf",
->> +            .leaf = { .leaf = CPUID_GUEST_NR_BASIC },
->> +        },
->> +        {
->> +            .name = "OoB cache leaf",
->> +            .leaf = { .leaf = 0x4, .subleaf = CPUID_GUEST_NR_CACHE },
->> +        },
->> +        {
->> +            .name = "OoB feat leaf",
->> +            .leaf = { .leaf = 0x7, .subleaf = CPUID_GUEST_NR_FEAT },
->> +        },
->> +        {
->> +            .name = "OoB topo leaf",
->> +            .leaf = { .leaf = 0xb, .subleaf = CPUID_GUEST_NR_TOPO },
->> +        },
->> +        {
->> +            .name = "OoB xstate leaf",
->> +            .leaf = { .leaf = 0xd, .subleaf = CPUID_GUEST_NR_XSTATE },
->> +        },
->> +        {
->> +            .name = "OoB extd leaf",
->> +            .leaf = { .leaf = 0x80000000 | CPUID_GUEST_NR_EXTD },
->> +        },
->> +    };
->> +    unsigned int i;
->> +
->> +    printf("Testing CPUID deserialise failure:\n");
->> +
->> +    for ( i = 0; i < ARRAY_SIZE(tests); ++i )
->> +    {
->> +        const struct test *t = &tests[i];
->> +        uint32_t err_leaf = ~0u, err_subleaf = ~0u;
->> +        int rc;
->> +
->> +        rc = x86_cpuid_copy_from_buffer(NULL, &t->leaf, 1,
->> +                                        &err_leaf, &err_subleaf);
->> +
->> +        if ( rc != -ERANGE )
->> +        {
->> +            printf("  Test %s, expected rc %d, got %d\n",
->> +                   t->name, -ERANGE, rc);
->> +            continue;
-> Perhaps drop this? The subsequent test ought to apply regardless
-> of error code.
-
-The common case is no failures at all.  However, once something has gone
-wrong, spewing cascade errors gets in the way, rather than being helpful.
-
-~Andrew
-
---------------68C3C4CF66C532EF09D00FB4
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 07/01/2019 11:19, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5C3335AE020000780020ACBD@prv1-mh.provo.novell.com">
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">On 04.01.19 at 16:33, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
-</pre>
-          </blockquote>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">The AFL harness currently notices that there are cases where we optimse the
-serialised stream by omitting data beyond the various maximum leaves.
-
-Both sets of tests will be extended with further libx86 work.
-
-Fix the sorting of the CPUID_GUEST_NR_* constants, noticed while writing the
-unit tests.
-
-Signed-off-by: Andrew Cooper <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a>
----
-CC: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:JBeulich@suse.com">&lt;JBeulich@suse.com&gt;</a>
-CC: Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:wei.liu2@citrix.com">&lt;wei.liu2@citrix.com&gt;</a>
-CC: Roger Pau Monné <a class="moz-txt-link-rfc2396E" href="mailto:roger.pau@citrix.com">&lt;roger.pau@citrix.com&gt;</a>
-CC: Sergey Dyasli <a class="moz-txt-link-rfc2396E" href="mailto:sergey.dyasli@citrix.com">&lt;sergey.dyasli@citrix.com&gt;</a>
----
- tools/fuzz/cpu-policy/.gitignore          |   1 +
- tools/fuzz/cpu-policy/Makefile            |  27 ++++
- tools/fuzz/cpu-policy/afl-policy-fuzzer.c | 117 ++++++++++++++
- tools/tests/Makefile                      |   1 +
- tools/tests/cpu-policy/.gitignore         |   1 +
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Did we somehow come to the conclusion that the central .gitignore
-at the root of the tree is not the way to go in the future?</pre>
-    </blockquote>
-    <br>
-    We've already got several examples in the tree.<br>
-    <br>
-    <pre><a class="moz-txt-link-abbreviated" href="mailto:andrewcoop@andrewcoop:/local/xen.git$">andrewcoop@andrewcoop:/local/xen.git$</a> git ls-files | grep gitignore
-.gitignore
-tools/tests/vhpet/.gitignore
-xen/tools/kconfig/.gitignore
-xen/tools/kconfig/lxdialog/.gitignore
-xen/xsm/flask/.gitignore
-
-</pre>
-    As for the pro's of using split ignores, fewer collisions for
-    backported changes, and no forgetting to update the root .gitconfig
-    when you move directories.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:5C3335AE020000780020ACBD@prv1-mh.provo.novell.com">
-      <pre class="moz-quote-pre" wrap="">
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">--- /dev/null
-+++ b/tools/tests/cpu-policy/test-cpu-policy.c
-@@ -0,0 +1,247 @@
-+#include &lt;assert.h&gt;
-+#include &lt;errno.h&gt;
-+#include &lt;stdbool.h&gt;
-+#include &lt;stdint.h&gt;
-+#include &lt;stdio.h&gt;
-+#include &lt;stdlib.h&gt;
-+#include &lt;string.h&gt;
-+
-+#include &lt;xen-tools/libs.h&gt;
-+#include &lt;xen/lib/x86/cpuid.h&gt;
-+#include &lt;xen/lib/x86/msr.h&gt;
-+#include &lt;xen/domctl.h&gt;
-+
-+static void test_cpuid_serialise_success(void)
-+{
-+    static const struct test {
-+        struct cpuid_policy p;
-+        const char *name;
-+        unsigned int nr_leaves;
-+    } tests[] = {
-+        {
-+            .name = "empty policy",
-+            .nr_leaves = 4,
-+        },
-+    };
-+    unsigned int i;
-+
-+    printf("Testing CPUID serialise success:\n");
-+
-+    for ( i = 0; i &lt; ARRAY_SIZE(tests); ++i )
-+    {
-+        const struct test *t = &amp;tests[i];
-+        unsigned int nr = t-&gt;nr_leaves;
-+        xen_cpuid_leaf_t *leaves = malloc(nr * sizeof(*leaves));
-+        int rc;
-+
-+        if ( !leaves )
-+            goto test_done;
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Shouldn't you leave some indication of the test not having got run?</pre>
-    </blockquote>
-    <br>
-    I've swapped this for a hard error.  Its not going to fail in
-    practice.<br>
-    <br>
-    <blockquote type="cite"
-      cite="mid:5C3335AE020000780020ACBD@prv1-mh.provo.novell.com">
-      <pre class="moz-quote-pre" wrap="">
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+static void test_cpuid_deserialise_failure(void)
-+{
-+    static const struct test {
-+        const char *name;
-+        xen_cpuid_leaf_t leaf;
-+    } tests[] = {
-+        {
-+            .name = "incorrect basic subleaf",
-+            .leaf = { .leaf = 0, .subleaf = 0 },
-+        },
-+        {
-+            .name = "incorrect hv1 subleaf",
-+            .leaf = { .leaf = 0x40000000, .subleaf = 0 },
-+        },
-+        {
-+            .name = "incorrect hv2 subleaf",
-+            .leaf = { .leaf = 0x40000100, .subleaf = 0 },
-+        },
-+        {
-+            .name = "incorrect extd subleaf",
-+            .leaf = { .leaf = 0x80000000, .subleaf = 0 },
-+        },
-+        {
-+            .name = "OoB basic leaf",
-+            .leaf = { .leaf = CPUID_GUEST_NR_BASIC },
-+        },
-+        {
-+            .name = "OoB cache leaf",
-+            .leaf = { .leaf = 0x4, .subleaf = CPUID_GUEST_NR_CACHE },
-+        },
-+        {
-+            .name = "OoB feat leaf",
-+            .leaf = { .leaf = 0x7, .subleaf = CPUID_GUEST_NR_FEAT },
-+        },
-+        {
-+            .name = "OoB topo leaf",
-+            .leaf = { .leaf = 0xb, .subleaf = CPUID_GUEST_NR_TOPO },
-+        },
-+        {
-+            .name = "OoB xstate leaf",
-+            .leaf = { .leaf = 0xd, .subleaf = CPUID_GUEST_NR_XSTATE },
-+        },
-+        {
-+            .name = "OoB extd leaf",
-+            .leaf = { .leaf = 0x80000000 | CPUID_GUEST_NR_EXTD },
-+        },
-+    };
-+    unsigned int i;
-+
-+    printf("Testing CPUID deserialise failure:\n");
-+
-+    for ( i = 0; i &lt; ARRAY_SIZE(tests); ++i )
-+    {
-+        const struct test *t = &amp;tests[i];
-+        uint32_t err_leaf = ~0u, err_subleaf = ~0u;
-+        int rc;
-+
-+        rc = x86_cpuid_copy_from_buffer(NULL, &amp;t-&gt;leaf, 1,
-+                                        &amp;err_leaf, &amp;err_subleaf);
-+
-+        if ( rc != -ERANGE )
-+        {
-+            printf("  Test %s, expected rc %d, got %d\n",
-+                   t-&gt;name, -ERANGE, rc);
-+            continue;
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Perhaps drop this? The subsequent test ought to apply regardless
-of error code.</pre>
-    </blockquote>
-    <br>
-    The common case is no failures at all.  However, once something has
-    gone wrong, spewing cascade errors gets in the way, rather than
-    being helpful.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------68C3C4CF66C532EF09D00FB4--
-
-
---===============5205316999730317807==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5205316999730317807==--
+T24gMi8yNS8xOSAxOjQ3IFBNLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGksCj4KPiBPbiAyNS8w
+Mi8yMDE5IDEwOjExLCBPbGVrc2FuZHIgQW5kcnVzaGNoZW5rbyB3cm90ZToKPj4gT24gMi8yMy8x
+OSAxMjowOCBBTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4gT24gMjIvMDIvMjAxOSAyMTowMCwg
+U3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+Pj4+IE9uIEZyaSwgMjIgRmViIDIwMTksIEp1bGll
+biBHcmFsbCB3cm90ZToKPj4+Pj4+Pj4gQlRXLCBJIGNoZWNrZWQgdGhlIHNlcmllcyB3aXRoIC1X
+c3dpdGNoLWRlZmF1bHQ6Cj4+Pj4+Pj4+IC1Xc3dpdGNoLWRlZmF1bHQKPj4+PiBBcyAxNi40IGNs
+ZWFybHkgc3RhdGUsIGV2ZW4gYSBzaW1wbGUgY29tbWVudCB3b3VsZCBiZSBlbm91Z2ggdG8gCj4+
+Pj4gYWRkcmVzcwo+Pj4+IHRoZSBydWxlLiBXZSBqdXN0IG5lZWQgdG8gZXhwbGFpbiB3aHkgYSBk
+ZWZhdWx0IGxhYmVsIGlzIG5vdCBuZWVkZWQuCj4+Pj4gU3VjaCBhczoKPj4+Pgo+Pj4+IMKgwqDC
+oCBkZWZhdWx0Ogo+Pj4+IMKgwqDCoCAvKiB1bnJlYWNoYWJsZSBiZWNhdXNlIGJsYWggYW5kIGJs
+YWggKi8KPj4+IC4uLiBhcyB3ZSBhbHJlYWR5IGhhdmUgZGVmZW5zaXZlIGNvZGUuIEluZGVlZCwg
+aW4gbW9zdCBvZiB0aGUgc3dpdGNoIHdlCj4+PiBkZWFsIHdpdGggcG90ZW50aWFsIGlzc3VlIGJ5
+IGluaXRpYWxpemluZyB0aGUgdmFyaWFibGUgYmVmb3JlIHRoZQo+Pj4gc3dpdGNoLiBJZiB5b3Ug
+bG9vayBhdCB0aGUgZmlyc3QgcGF0Y2gsIGEgbG90IG9mICJkZWZhdWx0OiBicmVhazsiIGlzCj4+
+PiBpbnRyb2R1Y2VkLiBTbyB3aGF0J3Mgb3VyIGJlbmVmaXRzPyBIb3cgdGhpcyBjb2RlIGlzIG1v
+cmUgZGVmZW5zaXZlIAo+Pj4gdGhhbgo+Pj4gd2hhdCB3ZSBjdXJyZW50bHkgaGF2ZT8KPj4gLi4u
+YW5kIGlmIHlvdSByZW1vdmUgdGhvc2UgaW5pdGlhbGl6ZWQgdmFyaWFibGVzIGFuZCBmb3JnZXQK
+Pj4gdG8gdXBkYXRlIHRoZSBzd2l0Y2ggd2l0aCBkZWZhdWx0PyBPciBjaGFuZ2UgdGhlIGluaXRp
+YWwgdmFsdWUKPj4gdGhlIHdheSB5b3VyIHByZXZpb3VzIHN3aXRjaCBhc3N1bXB0aW9ucyBkbyBu
+b3Qgd29yayBhbnltb3JlPwo+PiBJIGFtIG5vdCB0cnlpbmcgdG8gZGVmZW5kIE1JU1JBIGhlcmUs
+IGJ1dCB0aGluZ3MgY2hhbmdlIGFuZCB3ZSBhbGwKPj4gbWFrZSBtaXN0YWtlcy4gVGhpcyBpcyB3
+aHkgZGVmZW5zaXZlIHByb2dyYW1taW5nCj4KPiBJIGFtIG5vdCB0b3RhbGx5IGFnYWluc3QgdXNp
+bmcgZGVmYXVsdCBsYWJlbC4gSG93ZXZlciwgaG93IGlzIHRoZSAKPiBmb2xsb3dpbmcgY29kZSBp
+cyBkZWZlbnNpdmU/Cj4KPiBkZWZhdWx0Ogo+IMKgwqAgYnJlYWs7Cj4KPiBUaGlzIGhlYXZpbHkg
+cmVsaWVzIG9uIHRoZSBjb2RlIHN1cnJvdW5kaW5nIGlmIGRlYWxpbmcgY29ycmVjdGx5IHdpdGgg
+Cj4gdGhlIGVycm9yIGFuZCB3aWxsIG5ldmVyIGNoYW5nZS4gSXQgZmVlbHMgdG8gbWUgd2UgYXJl
+IG9ubHkgdHJ5aW5nIHRvIAo+IG1ha2UgTUlTUkEgaGFwcHkuCj4KPiBJZiB3ZSB3ZXJlIHdyaXRp
+bmcgZGVmZW5zaXZlIGNvZGUsIHRoZW4geW91IHdvdWxkIGRlZmluaXRlbHkgbm90IGhhdmUgCj4g
+ZW1wdHkgZGVmYXVsdCBhbmQgd291bGQgYXQgbGVhc3QgY29udGFpbiBhbiBBU1NFUlRfVU5SRUFD
+SEFCTEUgb3IgCj4gZXJyb3IgaGFuZGxpbmcuCj4KPiBCdXQgdGhlbiwgeW91IHN0aWxsIHJlbHkg
+b24gdGhlIGRlZmF1bHQgY2FzZSB0byBkbyB0aGUgcmlnaHQgdGhpbmcgaWYgCj4gdGhlcmUgd2Fz
+IGFuIGVycm9yLiBJIGZhaWwgdG8gdW5kZXJzdGFuZCBob3cgdGhpcyBpcyBiZXR0ZXIgdGhhbiB3
+aGF0IAo+IHdlIGN1cnJlbnRseSBoYXZlLgo+CkkgZG8gYWdyZWUgb24gdGhpcy4gQW5kIHdpbGwg
+c2F5IGl0IGFnYWluIHRoYXQgd2UgYXJlIHRyeWluZyB0byB3b3JrIG91dCBhbgphY2NlcHRhYmxl
+IGFwcHJvYWNoIHRoYXQgKGlmIGV2ZW4gcG9zc2libGUpIGJvdGggc2F0aXNmaWVzIHRoZSBjb21t
+dW5pdHkgYnkKbm90IGJyaW5naW5nIGFydGlmaWNpYWwgY29uc3RydWN0cyBsaWtlIGVtcHR5IGRl
+ZmF1bHRzIGFuZCBzdGlsbCBzYXRpc2ZpZXMKdGhlIGNvcnJlc3BvbmRpbmcgY2VydGlmaWNhdGlv
+biByZXF1aXJlbWVudHMuCj4+PiBGdXJ0aGVybW9yZSwgaG93IHRoaXMgaXMgZ29pbmcgdG8gaGVs
+cCB1cyAodGhhbmtzIHRvIC1Xc3dpdGNoKSBpZiBhbgo+Pj4gZW51bWVyYXRlIGlzIGV4dGVuZGVk
+IGFuZCB3ZSBtaXNzIGEgY2FzZSB0aGF0IHRoZSBjb21waWxlciBkb24ndCBub3RpY2UKPj4+IGFu
+eW1vcmU/Cj4+IEFuZCBpZiB0aGUgc3dpdGNoJ3MgaW5kZXggaXMgbm90IGFuIGVudW1lcmF0aW9u
+LCBidXQgYSBwbGFpbiBpbnRlZ2VyLi4uPwo+Cj4gV2UgaGF2ZSB0byBkaWZmZXJlbnRpYXRlIGVu
+dW0gdnMgcGxhaW4gaW50ZWdlci4KPgo+IEZvciBlbnVtLCBhIGNvbXBpbGVyIHN1cHBvcnRpbmcg
+LVdzd2l0Y2ggY2FuIGhlbHBzIHVzIHRvIGNhdGNoIHdoZW4gd2UgCj4gZm9yZ290IHRvIGhhbmRs
+ZSBhIGVsZW1lbnQgb2YgdGhlIGVudW0uIFRoZSBkZWZhdWx0IGNhc2UgZGVmZWF0cyAKPiAtV3N3
+aXRjaC4gWWV0IGhhdmluZyBhIGRlZmF1bHQgY291bGQgcHJvdGVjdCB1cyBhZ2FpbnN0IGNvZGUg
+ZXJyb3IuIEl0IAo+IGxvb2tzIGxpa2UgdGhhdCBHQ0MgaGF2ZSBhbiBvcHRpb24gLVdzd2l0Y2gt
+ZW51bSB0aGF0IGNvdWxkIGhlbHAgdXMuIAo+IFRoZSBvcHRpb24gd2lsbCBzaW1pbGFyIHRvIC1X
+c3dpdGNoIGV4Y2VwdCBpdCB3aWxsIHdhcm4gZXZlbiB3aGVuIAo+IHRoZXJlIGFyZSBhIGRlZmF1
+bHQgY2FzZS4gSSBhbSBjdXJpb3VzIHRvIHNlZSBpZiB3ZSBjYW4gdXNlIGl0IAo+IHJlbGlhYmx5
+IGluIFhlbi4KPgo+IEZvciBwbGFpbiBpbnRlZ2VyLCB3ZSBpbmRlZWQgbmVlZCB0byBoYXZlIGEg
+KnNlbnNpYmxlKiBkZWZhdWx0IGNhc2UuCj4KT2ssIHNvIGF0IGxlYXN0IHdpdGggZW51bXMgd2Ug
+Y2FuIHVzZSAtV3N3aXRjaC14eHggYXBwcm9hY2gsIGJ1dCBJIApjYW5ub3QgdGVsbAppZiB0aGlz
+IGlzIGVub3VnaCB0byBtYWtlIE1JU1JBIGhhcHB5LiBQcm9iYWJseSB3ZSB3aWxsIG5lZWQgdG8g
+ZG9jdW1lbnQgYWxsCnN1Y2ggY2FzZXMsIHNvIHdlIGhhdmUgYSBkZWRpY2F0ZWQganVzdGlmaWNh
+dGlvbiBmb3IgZXZlcnkgc2luZ2xlIHBsYWNlIAp3ZSBkbyBub3Qgd2FudApkZWZhdWx0cyBtZXNz
+Lgo+IENoZWVycywKPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
