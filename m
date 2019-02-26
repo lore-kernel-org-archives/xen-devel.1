@@ -1,16 +1,16 @@
-From: =?utf-8?B?5pWP?= <lm11986@163.com>
-Subject: =?utf-8?q?xl_create_domu_=EF=BC=9Aunable_to_add_disk_?=
- =?utf-8?q?devices?=
-Date: Tue, 26 Feb 2019 21:20:35 +0800
-Message-ID: <AFBDFBA5-BCFD-4A7C-A0E3-231B5903FD4F@163.com>
-Mime-Version: 1.0 (1.0)
-Content-Type: multipart/mixed; boundary="===============0223443767929556620=="
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-smoke test] 133436: trouble: broken/pass
+Date: Tue, 26 Feb 2019 13:22:47 +0000
+Message-ID: <osstest-133436-mainreport@xen.org>
+Mime-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=uCaw=RB=163.com=lm11986@srs-us1.protection.inumbo.net>)
- id 1gycf2-0006jJ-TT
- for xen-devel@lists.xenproject.org; Tue, 26 Feb 2019 13:20:41 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=1P+S=RB=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gych8-0006od-Dv
+ for xen-devel@lists.xenproject.org; Tue, 26 Feb 2019 13:22:50 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,94 +19,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0223443767929556620==
-Content-Transfer-Encoding: 7bit
-Content-Type: multipart/alternative;
-	boundary=Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234
-
-
---Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-> I am trying to create domainu=EF=BC=88xen on FVP-Base-ReVC-2xAEMv8A=EF=BC=89=
-but there is a issue
-losetup /dev/loop0 /root/domU/rootfs.img
-I run the command xl create domu.cfg
-the domu.cfg=EF=BC=9A
-
-kernel =3D "/root/domU/zImage=20
- memory =3D "128"
-name =3D "domU"=20
- vcpus =3D 1=20
- disk =3D [ 'phy:/dev/loop0,xvda,w' ]
-extra =3D "root=3D/dev/xvda rw console=3D"
-
-libxl:error:libxl_exec.c:118:libxl_report_child_exitstatus:/etc/xen/scripts/=
-block add[1985] exited with error status 127
-libxl:error:libxl_creat.c:1298:domcreat_launch_dm:Domain6:unable to add disk=
- devices=
-
---Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><span></span></div><div di=
-r=3D"ltr"><span></span><blockquote type=3D"cite" preoffsettop=3D"130"><font c=
-olor=3D"#000000"><span style=3D"caret-color: rgb(0, 0, 0); background-color:=
- rgba(255, 255, 255, 0);">I am trying to create domainu=EF=BC=88xen on FVP-B=
-ase-ReVC-2xAEMv8A=EF=BC=89but there is a issue</span></font></blockquote><pr=
-e style=3D"border: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1=
-.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D"white-space: norm=
-al; background-color: rgba(255, 255, 255, 0);">losetup /dev/loop0 /root/domU=
-/rootfs.img</span></font></pre>I run the command xl create domu.cfg</div><di=
-v dir=3D"ltr">the domu.cfg=EF=BC=9A</div><div dir=3D"ltr"><br></div><div dir=
-=3D"ltr"><pre style=3D"border: 1px solid rgb(221, 221, 221); padding: 1em; l=
-ine-height: 1.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D"whit=
-e-space: normal; background-color: rgba(255, 255, 255, 0);">kernel =3D "/roo=
-t/domU/zImage&nbsp;</span></font></pre><pre style=3D"border: 1px solid rgb(2=
-21, 221, 221); padding: 1em; line-height: 1.3em;"><font face=3D"UICTFontText=
-StyleBody"><span style=3D"white-space: normal; background-color: rgba(255, 2=
-55, 255, 0);">&nbsp;memory =3D "128"</span></font></pre><pre style=3D"border=
-: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1.3em;"><font fac=
-e=3D"UICTFontTextStyleBody"><span style=3D"white-space: normal; background-c=
-olor: rgba(255, 255, 255, 0);">name =3D "domU"&nbsp;</span></font></pre><pre=
- style=3D"border: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1=
-.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D"white-space: norm=
-al; background-color: rgba(255, 255, 255, 0);">&nbsp;vcpus =3D 1&nbsp;</span=
-></font></pre><pre style=3D"border: 1px solid rgb(221, 221, 221); padding: 1=
-em; line-height: 1.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D=
-"white-space: normal; background-color: rgba(255, 255, 255, 0);">&nbsp;disk =3D=
- [ 'phy:/dev/loop0,xvda,w' ]</span></font></pre><pre style=3D"border: 1px so=
-lid rgb(221, 221, 221); padding: 1em; line-height: 1.3em;"><pre style=3D"bor=
-der: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1.3em;"><font f=
-ace=3D"UICTFontTextStyleBody"><span style=3D"white-space: normal; background=
--color: rgba(255, 255, 255, 0);">extra =3D "root=3D/dev/xvda rw console=3D"<=
-/span></font></pre></pre><span><br></span></div><div dir=3D"ltr"><span>libxl=
-:error:libxl_exec.c:118:libxl_report_child_exitstatus:/etc/xen/scripts/block=
- add[1985] exited with error status 127</span><br><span>libxl:error:libxl_cr=
-eat.c:1298:domcreat_launch_dm:Domain6:unable to add disk devices</span></div=
-></body></html>=
-
---Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234--
-
-
-
---===============0223443767929556620==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0223443767929556620==--
+ZmxpZ2h0IDEzMzQzNiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMzQzNi8KCkZhaWx1cmVzIGFu
+ZCBwcm9ibGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFu
+ZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgog
+dGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAg
+ICAgIGJyb2tlbgogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgNCBob3N0LWluc3RhbGwo
+NCkgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMzMzgyCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1
+Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAg
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJl
+c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwoKdmVyc2lvbiB0YXJnZXRl
+ZCBmb3IgdGVzdGluZzoKIHhlbiAgICAgICAgICAgICAgICAgIDFjODU4OTI4MDA5YzUxMTc4YTlj
+NmNhYzllNDIzNDNlZTgxZGZlMzcKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAg
+ICAgIGU3MmVjYzc2MTU0MTBlNWJmMWExYzlhNGM3NzcyMzIyYzE2ZWViODIKCkxhc3QgdGVzdCBv
+ZiBiYXNpcyAgIDEzMzM4MiAgMjAxOS0wMi0yMiAyMjowMDozOCBaICAgIDMgZGF5cwpUZXN0aW5n
+IHNhbWUgc2luY2UgICAxMzM0MzAgIDIwMTktMDItMjUgMjM6MDA6NTUgWiAgICAwIGRheXMgICAg
+MyBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoK
+ICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIEp1bGllbiBHcmFs
+bCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cgpqb2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2
+NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIHRlc3QtYXJtNjQt
+YXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBv
+c3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFn
+ZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWls
+YWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9s
+b2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5l
+cmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5n
+aXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVu
+Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVz
+dCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
+L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKYnJva2VuLWpvYiB0ZXN0LWFybWhmLWFy
+bWhmLXhsIGJyb2tlbgpicm9rZW4tc3RlcCB0ZXN0LWFybWhmLWFybWhmLXhsIGhvc3QtaW5zdGFs
+bCg0KQoKTm90IHB1c2hpbmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KY29tbWl0IDFjODU4OTI4MDA5YzUxMTc4YTljNmNhYzll
+NDIzNDNlZTgxZGZlMzcKQXV0aG9yOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29t
+PgpEYXRlOiAgIE1vbiBGZWIgMTggMTA6MjE6MDYgMjAxOSArMDAwMAoKICAgIHhlbi9hcm06IGRv
+bWFpbl9idWlsZDogUGFuaWMgbWVzc2FnZSBzaG91bGQgZW5kIHdpdGggYSBuZXdsaW5lCiAgICAK
+ICAgIFNpbmNlIGNvbW1pdCAyNWViNWVlYzc5ICJ4ZW46IEZpeCBpbmNvbnNpc3RlbnQgY2FsbGVy
+cyBvZiBwYW5pYygpIiBhbGwKICAgIHRoZSBwYW5pYyBtZXNzYWdlIHNob3VsZCBlbmQgd2l0aCBh
+IG5ld2xpbmUuIFVuZm9ydHVuYXRlbHksIHNvbWUKICAgIGNvbW1pdHMgcHVzaGVkIGFmdGVyd2Fy
+ZHMgZG9lcyBub3QgZm9sbG93IHRoZSBydWxlLgogICAgCiAgICBNb2RpZnkgdGhlIG9mZmVuZGlu
+ZyBwYW5pYyBtZXNzYWdlcyB0byBhdm9pZCBtb3JlIGluY29uc2lzdGVuY3kuCiAgICAKICAgIFNp
+Z25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgICBBY2tl
+ZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIFJldmll
+d2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CiAgICBS
+ZWxlYXNlLWFja2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cgpjb21taXQg
+Y2M4NWRlNTcwYzdlZDkxYjMyZjEyM2JlZjM1ZTRhYzI2OTJjYmZlZgpBdXRob3I6IEp1bGllbiBH
+cmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CkRhdGU6ICAgTW9uIEZlYiAxOCAxMDoxNDozNiAy
+MDE5ICswMDAwCgogICAgeGVuL2FybTogZG9tYWluX2J1aWxkOiBSZXF1aXJlIHRoZSBwcm9wZXJ0
+eSAiY3B1cyIgd2hlbiBidWlsZGluZyBhIGRvbVUKICAgIAogICAgVGhlIDNyZCBhcmd1bWVudCBv
+ZiBmdW5jdGlvbiBkdF9wcm9wZXJ0eV9yZWFkX3UzMigpIGlzIG9ubHkgdmFsaWQgd2hlbgogICAg
+dGhlIGNhbGwgc3VjY2VlZGVkLiBTbyB3ZSBjYW5ub3QgYXNzdW1lIHRoZSB2YWx1ZSB3aWxsIG5v
+dCBiZSBtb2RpZmVkCiAgICBpbiBjYXNlIG9mIGZhaWx1cmUuCiAgICAKICAgIFRoZSBkb2N1bWVu
+dGF0aW9uIG9mIERvbTBsZXNzIGRvZXMgbm90IGdpdmUgYSBkZWZhdWx0IHZhbHVlIHdoZW4gdGhl
+CiAgICBwcm9wZXJ0eSAiY3B1cyIgaXMgbm90IHNldC4gU28gcmVxdWlyZSB0aGUgcHJvcGVydHkg
+aW4gdGhlIGNvbmZpZ3VyYXRpb24uCiAgICAKICAgIENvdmVyaXR5LUlEOiAxNDc2ODI1CiAgICBT
+aWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgogICAgUmV2
+aWV3ZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KICAg
+IFJlbGVhc2UtYWNrZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KCmNvbW1p
+dCA4M2JhNjRjM2ViZjBlOGQzODM0ZTNlNWI3OWFjYjJjZWIyY2Q5YmJhCkF1dGhvcjogSnVsaWVu
+IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KRGF0ZTogICBNb24gRmViIDE4IDA5OjQyOjI3
+IDIwMTkgKzAwMDAKCiAgICB4ZW4vYXJtOiBwc2NpOiBQb3B1bGF0ZSBhcm1fc21jY2NfcmVzIG9u
+IFBTQ0lfRkVBVFVSRVMgY2FsbAogICAgCiAgICBDb21taXQgMGJjNmE2OGRhNSAieGVuL2FybTog
+UmVwbGFjZSBjYWxsX3NtYyB3aXRoIGFybV9zbWNjY19zbWMiCiAgICBtaXN0YWtlbmx5IGZvcmdv
+dCB0byBwb3B1bGF0ZSBhcm1fc21jY2NfcmVzLiBTbyBhIGdhcmJhZ2UgdmFsdWUgd2FzCiAgICB1
+c2VkIGFzIHJldHVybiB2YWx1ZS4KICAgIAogICAgQ292ZXJpdHktSUQ6IDE0NzY4MjcKICAgIFNp
+Z25lZC1vZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgICBSZXZp
+ZXdlZC1ieTogU3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgogICAg
+UmVsZWFzZS1hY2tlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPgoocWVtdSBj
+aGFuZ2VzIG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
