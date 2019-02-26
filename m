@@ -1,18 +1,16 @@
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Subject: [PATCH v2] x86/nmi: correctly check MSB of P6
- performance counter MSR in watchdog
-Date: Tue, 26 Feb 2019 13:12:54 +0000
-Message-ID: <1551186774-30858-1-git-send-email-igor.druzhinin@citrix.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: =?utf-8?B?5pWP?= <lm11986@163.com>
+Subject: =?utf-8?q?xl_create_domu_=EF=BC=9Aunable_to_add_disk_?=
+ =?utf-8?q?devices?=
+Date: Tue, 26 Feb 2019 21:20:35 +0800
+Message-ID: <AFBDFBA5-BCFD-4A7C-A0E3-231B5903FD4F@163.com>
+Mime-Version: 1.0 (1.0)
+Content-Type: multipart/mixed; boundary="===============0223443767929556620=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=AghO=RB=citrix.com=prvs=9532012e5=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1gycXg-0005pW-I2
- for xen-devel@lists.xenproject.org; Tue, 26 Feb 2019 13:13:04 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=uCaw=RB=163.com=lm11986@srs-us1.protection.inumbo.net>)
+ id 1gycf2-0006jJ-TT
+ for xen-devel@lists.xenproject.org; Tue, 26 Feb 2019 13:20:41 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,70 +20,93 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: andrew.cooper3@citrix.com, Igor Druzhinin <igor.druzhinin@citrix.com>, wei.liu2@citrix.com, jbeulich@suse.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIGxvZ2ljIGN1cnJlbnRseSB0cmllcyB0byB3b3JrIG91dCBpZiBhIHJlY2VudCBvdmVyZmxv
-dyAodGhhdCBpbmRpY2F0ZXMKdGhhdCBOTUkgY29tZXMgZnJvbSB0aGUgd2F0Y2hkb2cpIGhhcHBl
-bmVkIGJ5IGNoZWNraW5nIE1TQiBvZiBwZXJmb3JtYW5jZQpjb3VudGVyIE1TUiB0aGF0IGlzIGlu
-aXRpYWxseSBzaWduIGV4dGVuZGVkIGZyb20gYSBuZWdhdGl2ZSB2YWx1ZQp0aGF0IHdlIHByb2dy
-YW0gaXQgdG8uIEEgcG9zc2libHkgaW5jb3JyZWN0IGFzc3VtcHRpb24gaGVyZSBpcyB0aGF0Ck1T
-QiBpcyBhbHdheXMgYml0IDMyIHdoaWxlIG9uIG1vZGVybiBoYXJkd2FyZSBpdCdzIHVzdWFsbHkg
-NDcgYW5kCnRoZSBhY3R1YWwgYml0LXdpZHRoIGlzIHJlcG9ydGVkIHRocm91Z2ggQ1BVSUQuIENo
-ZWNraW5nIGJpdCAzMiBmb3IKb3ZlcmZsb3dzIGlzIHVzdWFsbHkgZmluZSBzaW5jZSB3ZSBuZXZl
-ciBwcm9ncmFtIGl0IHRvIGFueXRoaW5nCmV4Y2VlZGluZyAzMi1iaXRzIGFuZCBOTUkgaXMgaGFu
-ZGxlZCBzaG9ydGx5IGFmdGVyIG92ZXJmbG93IG9jY3Vycy4KCkEgcHJvYmxlbWF0aWMgc2NlbmFy
-aW8gdGhhdCB3ZSBzYXcgb2NjdXJzIG9uIHN5c3RlbXMgd2hlcmUgU01JcyB0YWtpbmcKc2lnbmlm
-aWNhbnQgdGltZSBhcmUgcG9zc2libGUuIEluIHRoYXQgY2FzZSwgTk1JIGhhbmRsaW5nIGlzIGRl
-ZmVycmVkIHRvCnRoZSBwb2ludCBmaXJtd2FyZSBleGl0cyBTTUkgd2hpY2ggbWlnaHQgdGFrZSBl
-bm91Z2ggdGltZSBmb3IgdGhlIGNvdW50ZXIKdG8gZ28gdGhyb3VnaCBiaXQgMzIgYW5kIHNldCBp
-dCB0byAxIGFnYWluLiBTbyB0aGUgbG9naWMgZGVzY3JpYmVkIGFib3ZlCndpbGwgbWlzcmVhZCBp
-dCBhbmQgcmVwb3J0IGFuIHVua25vd24gTk1JIGVycm9uZW91c2x5LgoKRm9ydHVuYXRlbHksIHdl
-IGNhbiB1c2UgdGhlIGFjdHVhbCBNU0IsIHdoaWNoIGlzIHVzdWFsbHkgaGlnaGVyIHRoYW4gdGhl
-CmN1cnJlbnRseSBoYXJkY29kZWQgMzIsIGFuZCB0cmVhdCB0aGlzIGNhc2UgY29ycmVjdGx5IGF0
-IGxlYXN0IG9uIG1vZGVybgpoYXJkd2FyZS4KClNpZ25lZC1vZmYtYnk6IElnb3IgRHJ1emhpbmlu
-IDxpZ29yLmRydXpoaW5pbkBjaXRyaXguY29tPgotLS0KQ2hhbmdlcyBpbiB2MjoKKiB0YWtlbiBj
-YXJlIG9mIHRoZSBjYXNlIHdoZXJlIGxlYWYgMHhhIGlzIG1pc3Npbmcgb3Igd2lkdGggaXMgMAoq
-IGFwcGx5IGEgY2FwIGluIGNhc2Ugd2lkdGggaXMgbG93ZXIgdGhhbiB3ZSdyZSBleHBlY3Rpbmcg
-dG8gcHJvZ3JhbQotLS0KIHhlbi9hcmNoL3g4Ni9ubWkuYyB8IDEyICsrKysrKysrKystLQogMSBm
-aWxlIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0
-IGEveGVuL2FyY2gveDg2L25taS5jIGIveGVuL2FyY2gveDg2L25taS5jCmluZGV4IGJmZTk3Nzcu
-LjYzMThlNjQgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9ubWkuYworKysgYi94ZW4vYXJjaC94
-ODYvbm1pLmMKQEAgLTM3LDYgKzM3LDcgQEAgdW5zaWduZWQgaW50IG5taV93YXRjaGRvZyA9IE5N
-SV9OT05FOwogc3RhdGljIHVuc2lnbmVkIGludCBubWlfaHogPSBIWjsKIHN0YXRpYyB1bnNpZ25l
-ZCBpbnQgbm1pX3BlcmZjdHJfbXNyOwkvKiB0aGUgTVNSIHRvIHJlc2V0IGluIE5NSSBoYW5kbGVy
-ICovCiBzdGF0aWMgdW5zaWduZWQgaW50IG5taV9wNF9jY2NyX3ZhbDsKK3N0YXRpYyB1bnNpZ25l
-ZCBpbnQgbm1pX3A2X2V2ZW50X3dpZHRoOwogc3RhdGljIERFRklORV9QRVJfQ1BVKHN0cnVjdCB0
-aW1lciwgbm1pX3RpbWVyKTsKIHN0YXRpYyBERUZJTkVfUEVSX0NQVSh1bnNpZ25lZCBpbnQsIG5t
-aV90aW1lcl90aWNrcyk7CiAKQEAgLTEyMyw3ICsxMjQsOSBAQCBpbnQgbm1pX2FjdGl2ZTsKICNk
-ZWZpbmUgUDZfRVZOVFNFTF9VU1IJCSgxIDw8IDE2KQogI2RlZmluZSBQNl9FVkVOVF9DUFVfQ0xP
-Q0tTX05PVF9IQUxURUQJIDB4NzkKICNkZWZpbmUgQ09SRV9FVkVOVF9DUFVfQ0xPQ0tTX05PVF9I
-QUxURUQgMHgzYwotI2RlZmluZSBQNl9FVkVOVF9XSURUSCAgICAgICAgICAzMgorLyogQml0IHdp
-ZHRoIG9mIElBMzJfUE1DeCBNU1JzIGlzIHJlcG9ydGVkIHVzaW5nIENQVUlELjBBSDpFQVhbMjM6
-MTZdLiAqLworI2RlZmluZSBQNl9FVkVOVF9XSURUSF9NQVNLCSgoKDEgPDwgOCkgLSAxKSA8PCAx
-NikKKyNkZWZpbmUgUDZfRVZFTlRfV0lEVEhfREVGQVVMVAkzMgogCiAjZGVmaW5lIFA0X0VTQ1Jf
-RVZFTlRfU0VMRUNUKE4pCSgoTik8PDI1KQogI2RlZmluZSBQNF9DQ0NSX09WRl9QTUkwCSgxPDwy
-NikKQEAgLTI5Miw2ICsyOTUsNyBAQCBzdGF0aWMgaW5saW5lIHZvaWQgd3JpdGVfd2F0Y2hkb2df
-Y291bnRlcihjb25zdCBjaGFyICpkZXNjcikKICAgICB1NjQgY291bnQgPSAodTY0KWNwdV9raHog
-KiAxMDAwOwogCiAgICAgZG9fZGl2KGNvdW50LCBubWlfaHopOworICAgIGNvdW50ID0gbWluKGNv
-dW50LCAoMVVMIDw8IChubWlfcDZfZXZlbnRfd2lkdGggLSAxKSkgLSAxKTsKICAgICBpZihkZXNj
-cikKICAgICAgICAgRHByaW50aygic2V0dGluZyAlcyB0byAtJSMiUFJJeDY0IlxuIiwgZGVzY3Is
-IGNvdW50KTsKICAgICB3cm1zcmwobm1pX3BlcmZjdHJfbXNyLCAwIC0gY291bnQpOwpAQCAtMzIz
-LDYgKzMyNywxMCBAQCBzdGF0aWMgdm9pZCBzZXR1cF9wNl93YXRjaGRvZyh1bnNpZ25lZCBjb3Vu
-dGVyKQogICAgIHVuc2lnbmVkIGludCBldm50c2VsOwogCiAgICAgbm1pX3BlcmZjdHJfbXNyID0g
-TVNSX1A2X1BFUkZDVFIoMCk7CisgICAgaWYgKCBjdXJyZW50X2NwdV9kYXRhLmNwdWlkX2xldmVs
-ID49IDB4YSApCisgICAgICAgIG5taV9wNl9ldmVudF93aWR0aCA9IE1BU0tfRVhUUihjcHVpZF9l
-YXgoMHhhKSwgUDZfRVZFTlRfV0lEVEhfTUFTSyk7CisgICAgaWYgKCAhbm1pX3A2X2V2ZW50X3dp
-ZHRoICkKKyAgICAgICAgbm1pX3A2X2V2ZW50X3dpZHRoID0gUDZfRVZFTlRfV0lEVEhfREVGQVVM
-VDsKIAogICAgIGNsZWFyX21zcl9yYW5nZShNU1JfUDZfRVZOVFNFTCgwKSwgMik7CiAgICAgY2xl
-YXJfbXNyX3JhbmdlKE1TUl9QNl9QRVJGQ1RSKDApLCAyKTsKQEAgLTUyOSw3ICs1MzcsNyBAQCBi
-b29sIG5taV93YXRjaGRvZ190aWNrKGNvbnN0IHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQog
-ICAgICAgICBlbHNlIGlmICggbm1pX3BlcmZjdHJfbXNyID09IE1TUl9QNl9QRVJGQ1RSKDApICkK
-ICAgICAgICAgewogICAgICAgICAgICAgcmRtc3JsKE1TUl9QNl9QRVJGQ1RSKDApLCBtc3JfY29u
-dGVudCk7Ci0gICAgICAgICAgICBpZiAoIG1zcl9jb250ZW50ICYgKDFVTEwgPDwgUDZfRVZFTlRf
-V0lEVEgpICkKKyAgICAgICAgICAgIGlmICggbXNyX2NvbnRlbnQgJiAoMVVMTCA8PCAobm1pX3A2
-X2V2ZW50X3dpZHRoIC0gMSkpICkKICAgICAgICAgICAgICAgICB3YXRjaGRvZ190aWNrID0gZmFs
-c2U7CiAKICAgICAgICAgICAgIC8qCi0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
-QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
-bi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0223443767929556620==
+Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+	boundary=Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234
+
+
+--Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+> I am trying to create domainu=EF=BC=88xen on FVP-Base-ReVC-2xAEMv8A=EF=BC=89=
+but there is a issue
+losetup /dev/loop0 /root/domU/rootfs.img
+I run the command xl create domu.cfg
+the domu.cfg=EF=BC=9A
+
+kernel =3D "/root/domU/zImage=20
+ memory =3D "128"
+name =3D "domU"=20
+ vcpus =3D 1=20
+ disk =3D [ 'phy:/dev/loop0,xvda,w' ]
+extra =3D "root=3D/dev/xvda rw console=3D"
+
+libxl:error:libxl_exec.c:118:libxl_report_child_exitstatus:/etc/xen/scripts/=
+block add[1985] exited with error status 127
+libxl:error:libxl_creat.c:1298:domcreat_launch_dm:Domain6:unable to add disk=
+ devices=
+
+--Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234
+Content-Type: text/html;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
+utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><span></span></div><div di=
+r=3D"ltr"><span></span><blockquote type=3D"cite" preoffsettop=3D"130"><font c=
+olor=3D"#000000"><span style=3D"caret-color: rgb(0, 0, 0); background-color:=
+ rgba(255, 255, 255, 0);">I am trying to create domainu=EF=BC=88xen on FVP-B=
+ase-ReVC-2xAEMv8A=EF=BC=89but there is a issue</span></font></blockquote><pr=
+e style=3D"border: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1=
+.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D"white-space: norm=
+al; background-color: rgba(255, 255, 255, 0);">losetup /dev/loop0 /root/domU=
+/rootfs.img</span></font></pre>I run the command xl create domu.cfg</div><di=
+v dir=3D"ltr">the domu.cfg=EF=BC=9A</div><div dir=3D"ltr"><br></div><div dir=
+=3D"ltr"><pre style=3D"border: 1px solid rgb(221, 221, 221); padding: 1em; l=
+ine-height: 1.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D"whit=
+e-space: normal; background-color: rgba(255, 255, 255, 0);">kernel =3D "/roo=
+t/domU/zImage&nbsp;</span></font></pre><pre style=3D"border: 1px solid rgb(2=
+21, 221, 221); padding: 1em; line-height: 1.3em;"><font face=3D"UICTFontText=
+StyleBody"><span style=3D"white-space: normal; background-color: rgba(255, 2=
+55, 255, 0);">&nbsp;memory =3D "128"</span></font></pre><pre style=3D"border=
+: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1.3em;"><font fac=
+e=3D"UICTFontTextStyleBody"><span style=3D"white-space: normal; background-c=
+olor: rgba(255, 255, 255, 0);">name =3D "domU"&nbsp;</span></font></pre><pre=
+ style=3D"border: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1=
+.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D"white-space: norm=
+al; background-color: rgba(255, 255, 255, 0);">&nbsp;vcpus =3D 1&nbsp;</span=
+></font></pre><pre style=3D"border: 1px solid rgb(221, 221, 221); padding: 1=
+em; line-height: 1.3em;"><font face=3D"UICTFontTextStyleBody"><span style=3D=
+"white-space: normal; background-color: rgba(255, 255, 255, 0);">&nbsp;disk =3D=
+ [ 'phy:/dev/loop0,xvda,w' ]</span></font></pre><pre style=3D"border: 1px so=
+lid rgb(221, 221, 221); padding: 1em; line-height: 1.3em;"><pre style=3D"bor=
+der: 1px solid rgb(221, 221, 221); padding: 1em; line-height: 1.3em;"><font f=
+ace=3D"UICTFontTextStyleBody"><span style=3D"white-space: normal; background=
+-color: rgba(255, 255, 255, 0);">extra =3D "root=3D/dev/xvda rw console=3D"<=
+/span></font></pre></pre><span><br></span></div><div dir=3D"ltr"><span>libxl=
+:error:libxl_exec.c:118:libxl_report_child_exitstatus:/etc/xen/scripts/block=
+ add[1985] exited with error status 127</span><br><span>libxl:error:libxl_cr=
+eat.c:1298:domcreat_launch_dm:Domain6:unable to add disk devices</span></div=
+></body></html>=
+
+--Apple-Mail-A48EE4E4-9AA5-4AC7-AF22-E40209CC2234--
+
+
+
+--===============0223443767929556620==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0223443767929556620==--
