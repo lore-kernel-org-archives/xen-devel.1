@@ -1,21 +1,21 @@
 From: Marek Marczykowski <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v4 5/6] xen/x86: add PHYSDEVOP_msi_set_enable
-Date: Wed, 27 Feb 2019 16:05:08 +0100
-Message-ID: <20190227150508.GE19265@mail-itl>
-References: <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
- <cover.0268d8ad929f422d7e0142099f5b84dd205f0c2e.1549498018.git-series.marmarek@invisiblethingslab.com>
- <cc240476d615c05925891d33fc83be3e1801b52d.1549498018.git-series.marmarek@invisiblethingslab.com>
- <5C767771020000780021AB12@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH v4.1 4/6] xen/x86: Allow stubdom access to
+ irq created for msi.
+Date: Wed, 27 Feb 2019 16:18:51 +0100
+Message-ID: <20190227151851.GF19265@mail-itl>
+References: <20190208101559.GA21228@mail-itl>
+ <20190208101705.31790-1-marmarek@invisiblethingslab.com>
+ <5C766F8A020000780021AA64@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3356764770209695287=="
+Content-Type: multipart/mixed; boundary="===============8690499268110774848=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=zlFm=RC=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1gz0lr-0007Tg-JM
- for xen-devel@lists.xenproject.org; Wed, 27 Feb 2019 15:05:19 +0000
-In-Reply-To: <5C767771020000780021AB12@prv1-mh.provo.novell.com>
+ id 1gz0z7-0008TB-3Y
+ for xen-devel@lists.xenproject.org; Wed, 27 Feb 2019 15:19:01 +0000
+In-Reply-To: <5C766F8A020000780021AA64@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,158 +25,109 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Daniel de Graaf <dgdegra@tycho.nsa.gov>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Simon Gaiser <simon@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, xen-devel <xen-devel@lists.xenproject.org>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============3356764770209695287==
+--===============8690499268110774848==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="qOrJKOH36bD5yhNe"
+	protocol="application/pgp-signature"; boundary="tmoQ0UElFV5VgXgH"
 Content-Disposition: inline
 
 
---qOrJKOH36bD5yhNe
+--tmoQ0UElFV5VgXgH
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v4 5/6] xen/x86: add PHYSDEVOP_msi_set_enable
+Subject: Re: [PATCH v4.1 4/6] xen/x86: Allow stubdom access to irq created
+ for msi.
 
-On Wed, Feb 27, 2019 at 04:41:37AM -0700, Jan Beulich wrote:
-> >>> On 07.02.19 at 01:07, <marmarek@invisiblethingslab.com> wrote:
-> > --- a/xen/arch/x86/msi.c
-> > +++ b/xen/arch/x86/msi.c
-> > @@ -1474,6 +1474,30 @@ int pci_restore_msi_state(struct pci_dev *pdev)
-> >      return 0;
-> >  }
+On Wed, Feb 27, 2019 at 04:07:54AM -0700, Jan Beulich wrote:
+> >>> On 08.02.19 at 11:17, <marmarek@invisiblethingslab.com> wrote:
+> > There is one code path where I haven't managed to properly extract
+> > possible stubdomain in use:
+> > pci_remove_device()
+> >  -> pci_cleanup_msi()
+> >    -> msi_free_irqs()
+> >      -> msi_free_irq()
+> >        -> destroy_irq()
+> >=20
+> > For now I've hardcoded hardware_domain there (in msi_free_irqs). Can it=
+ happen
+> > when device is still assigned to some domU?
+>=20
+> In case this question is still open: No, it can't with current code,
+> and provided Dom0 behaves correctly.
+
+Thanks for confirmation.
+
+> > @@ -368,13 +369,13 @@ static int __init hpet_assign_irq(struct hpet_eve=
+nt_channel *ch)
+> >  {
+> >      int irq;
 > > =20
-> > +int msi_msix_set_enable(struct pci_dev *pdev, int mode, int enable)
->=20
-> unsigned int mode, bool enable
->=20
-> I'm also not happy about the function name. Perhaps simply msi_enable()
-> or msi_control()?
-
-Ok, will change to msi_control().
-
-> > +{
-> > +    int ret;
-> > +
-> > +    ret =3D xsm_msi_set_enable(XSM_DM_PRIV, pdev->domain,
-> > +                             (pdev->seg << 16) | (pdev->bus << 8) | pd=
-ev->devfn,
-> > +                             mode, enable);
-> > +    if ( ret )
-> > +        return ret;
-> > +
-> > +    switch ( mode )
-> > +    {
-> > +    case PHYSDEVOP_MSI_SET_ENABLE_MSI:
-> > +        msi_set_enable(pdev, enable);
-> > +        break;
-> > +
-> > +    case PHYSDEVOP_MSI_SET_ENABLE_MSIX:
-> > +        msix_set_enable(pdev, enable);
-> > +        break;
-> > +    }
->=20
-> What about a call to pci_intx()?=20
-
-Should pci_intx(dev, !enable) be called in all those cases?
-
-> And what about invocations for
-> the wrong device (e.g. MSI-X request for MSI-X incapable device)?
-
-Looking at msi(x)_set_enable(), it is no-op for incapable devices, but
-if the function would do anything else, indeed such check should be
-added. Is pci_find_cap_offset(..., PCI_CAP_ID_MSI(X)) the correct way
-of doing that?
-
-> > --- a/xen/arch/x86/physdev.c
-> > +++ b/xen/arch/x86/physdev.c
-> > @@ -671,6 +671,30 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_HANDLE_PARA=
-M(void) arg)
-> >          break;
+> > -    if ( (irq =3D create_irq(NUMA_NO_NODE)) < 0 )
+> > +    if ( (irq =3D create_irq(NUMA_NO_NODE, hardware_domain)) < 0 )
+> >          return irq;
+> > =20
+> >      ch->msi.irq =3D irq;
+> >      if ( hpet_setup_msi_irq(ch) )
+> >      {
+> > -        destroy_irq(irq);
+> > +        destroy_irq(irq, hardware_domain);
+> >          return -EINVAL;
 > >      }
-> > =20
-> > +    case PHYSDEVOP_msi_set_enable: {
-> > +        struct physdev_msi_set_enable op;
-> > +        struct pci_dev *pdev;
-> > +
-> > +        ret =3D -EFAULT;
-> > +        if ( copy_from_guest(&op, arg, 1) )
-> > +            break;
-> > +
-> > +        ret =3D -EINVAL;
-> > +        if ( op.mode !=3D PHYSDEVOP_MSI_SET_ENABLE_MSI &&
-> > +             op.mode !=3D PHYSDEVOP_MSI_SET_ENABLE_MSIX )
-> > +            break;
-> > +
-> > +        pcidevs_lock();
-> > +        pdev =3D pci_get_pdev(op.seg, op.bus, op.devfn);
-> > +        if ( pdev )
-> > +            ret =3D msi_msix_set_enable(pdev, op.mode, !!op.enable);
 >=20
-> Unnecessary !! .
->=20
-> > +        else
-> > +            ret =3D -ENODEV;
-> > +        pcidevs_unlock();
-> > +        break;
-> > +
-> > +    }
->=20
-> Stray blank line above here.
->=20
-> > --- a/xen/include/public/physdev.h
-> > +++ b/xen/include/public/physdev.h
-> > @@ -344,6 +344,21 @@ struct physdev_dbgp_op {
-> >  typedef struct physdev_dbgp_op physdev_dbgp_op_t;
-> >  DEFINE_XEN_GUEST_HANDLE(physdev_dbgp_op_t);
-> > =20
-> > +#define PHYSDEVOP_MSI_SET_ENABLE_MSI  0
-> > +#define PHYSDEVOP_MSI_SET_ENABLE_MSIX 1
-> > +
-> > +#define PHYSDEVOP_msi_set_enable   32
-> > +struct physdev_msi_set_enable {
->=20
-> Can this please also be something like msi_control?
+> Why don't you take the opportunity here (and elsewhere) and properly
+> remove hwdom access to such internal-to-Xen IRQs? Simply pass NULL
+> here, and skip permission granting in this case (create_irq() already
+> checks for NULL anyway).
 
-Sure.
+Already queued for v5, per Roger's review.
 
-> > +    /* IN */
-> > +    uint16_t seg;
-> > +    uint8_t bus;
-> > +    uint8_t devfn;
-> > +    uint8_t mode;
-> > +    uint8_t enable;
+> > @@ -190,19 +190,19 @@ int create_irq(nodeid_t node)
+> >          desc->arch.used =3D IRQ_UNUSED;
+> >          irq =3D ret;
+> >      }
+> > -    else if ( hardware_domain )
+> > +    else if ( dm_domain )
+> >      {
+> > -        ret =3D irq_permit_access(hardware_domain, irq);
+> > +        ret =3D irq_permit_access(dm_domain, irq);
 >=20
-> "mode" and "enable" don't really make clear which of the two is the
-> boolean, and which is the operation. I'd anyway prefer a single
-> flags field with descriptive #define-s, which will also make more
-> obvious how to extend this if need be.
+> Doesn't this imply that Dom0 has no way of cleaning up after the
+> guest/stubdom pair? IOW I wonder whether both dm and hwdom
+> should be granted access.
 
-You mean:
+See discussion with Roger on this very patch.
+In short: since permissions are stored in domain struct, not irq, there
+is not much to cleanup after domain destruction. Also, toolstack in dom0
+has no idea about IRQs allocated by stubdomain, so it couldn't do such
+cleanup anyway.
 
-#define PHYSDEVOP_MSI_CONTROL_ENABLE 1
-#define PHYSDEVOP_MSI_CONTROL_MSI    2=20
-#define PHYSDEVOP_MSI_CONTROL_MSIX   4
+> > @@ -2095,7 +2099,9 @@ int map_domain_pirq(
+> >                  irq =3D info->arch.irq;
+> >              }
+> >              msi_desc->irq =3D -1;
+> > -            msi_free_irq(msi_desc);
+> > +            msi_free_irq(msi_desc,
+> > +                         current->domain->target =3D=3D d ? current->d=
+omain
+> > +                                                      : hardware_domai=
+n);
+>=20
+> Note how ->irq gets set to -1 prior to the call (and also in at least
+> one other instance), which will lead to skipping of the destroy_irq()
+> call, and hence skipping of the permission removal. Or wait, that's
+> going to be taken care of in the caller as it seems. If this is also
+> your understanding, then please add a sentence to the description
+> pointing this out. The split logic isn't really helpful here (I know it
+> was me who wrote it, in an attempt to avoid re-writing everything
+> basically from scratch).
 
-Then use PHYSDEVOP_MSI_CONTROL_MSI(X) with or without
-PHYSDEVOP_MSI_CONTROL_ENABLE ?
-
-> > --- a/xen/include/xlat.lst
-> > +++ b/xen/include/xlat.lst
-> > @@ -106,6 +106,7 @@
-> >  ?	physdev_restore_msi		physdev.h
-> >  ?	physdev_set_iopl		physdev.h
-> >  ?	physdev_setup_gsi		physdev.h
-> > +?	physdev_msi_set_enable		physdev.h
->=20
-> Please insert at the alphabetically correct place.
->=20
-> Jan
->=20
->=20
+Yes, that matches my understanding - the caller will call on error
+destroy_irq(), if it called create_irq() before (which may not always be
+the case - and I think this is why it isn't destroyed here).
 
 --=20
 Best Regards,
@@ -185,25 +136,25 @@ Invisible Things Lab
 A: Because it messes up the order in which people normally read text.
 Q: Why is top-posting such a bad thing?
 
---qOrJKOH36bD5yhNe
+--tmoQ0UElFV5VgXgH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlx2pyQACgkQ24/THMrX
-1yxCbAgAlNZcRIy6c/mVRLPKN2djpTCAXpoyUd7TTtlP3qxrJ4/gDKoBPEEFtDdS
-QGj4G/jwBO+uvj1xkHJYdsXGw5DauoaZMXra0BQJalqHx6ZQxOyczUGF2UzQvKhW
-1ORV/BwBbxVBk7jP2ZJ2MU+qB+htu7UWcu2YVJfXPe6eyrQz0gqQDz4WWf6d9Zl2
-Ha0AA5kQPCxcPHCjyh9pzooq+81kf6RNPqkLf4S6nSfR19hL3jaSJ/BiS73ZD4zM
-wf6Kpd9KbzI1aqjcqs80uyGKT6J9IncaO7NEQ43TkWV4pUhenY5xhqXxz9dN/CTc
-xE4BhSRyOJfJVKIYKFtw6MmPlYoPDw==
-=SH6/
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlx2qlsACgkQ24/THMrX
+1yyVqQf/cRycL+h2csGRlslcmV0jTV1ZaZd5ZWxX+F4RYKItzQ2QMAPeRHYVcPSu
+4tlRhywETY4paKaHrtvZVc+hfE/k2R25N0Q2GOPqQ/jgqFKWZPgtyYphiXPMb24f
+jgSo8pLMwZMp3yHXagufpF73my9jmE6gO59gVtSlXDsCoJBh5lMh6Hj1awMMEj5t
+LWxfS1zn7akEy6viSpmUGu8f+wRGMCDL2B+VJAe9RWfqOQylmXpdPXExN3zr6xpt
+Qyclb1ZsvhCpt4YJ3FoJdw3mCBmsrzlgmEyc1Y13mQa6SzJ80TapGbBK+++uk5qF
+Y72hn0uP90g8OCUCo9hzjGK8kUod+w==
+=FfSy
 -----END PGP SIGNATURE-----
 
---qOrJKOH36bD5yhNe--
+--tmoQ0UElFV5VgXgH--
 
 
---===============3356764770209695287==
+--===============8690499268110774848==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -213,4 +164,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============3356764770209695287==--
+--===============8690499268110774848==--
