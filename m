@@ -1,25 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: bogus libxl error handling in
- domcreate_bootloader_done
-Date: Thu, 28 Feb 2019 17:21:59 +0100
-Message-ID: <20190228172159.0f5d0e31.olaf@aepfle.de>
-References: <20190228141718.7740e706.olaf@aepfle.de>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH v2] x86/mm: Clean up p2m_finish_type_change
+ return value
+Date: Thu, 28 Feb 2019 16:30:05 +0000
+Message-ID: <854a0f24-e559-c7fa-5eb3-b321820776e2@citrix.com>
+References: <20190117090635.23731-1-aisaila@bitdefender.com>
+ <802ba74b-40eb-de90-3ff5-de743b3ff78b@bitdefender.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7354964282279396184=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=JJzu=RD=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1gzORo-0006zH-6N
- for xen-devel@lists.xenproject.org; Thu, 28 Feb 2019 16:22:12 +0000
-Received: from sender by smtp.strato.de (RZmta 44.13 AUTH)
- with ESMTPSA id C046b5v1SGM7Gm8
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate)
- for <xen-devel@lists.xenproject.org>;
- Thu, 28 Feb 2019 17:22:07 +0100 (CET)
-In-Reply-To: <20190228141718.7740e706.olaf@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=2BcS=RD=citrix.com=prvs=955e9f503=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gzOa5-00082B-Rh
+ for xen-devel@lists.xenproject.org; Thu, 28 Feb 2019 16:30:45 +0000
+In-Reply-To: <802ba74b-40eb-de90-3ff5-de743b3ff78b@bitdefender.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,79 +25,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Alexandru Stefan ISAILA <aisaila@bitdefender.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>
+Cc: "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, Paul Durrant <Paul.Durrant@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "roger.pau@citrix.com" <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7354964282279396184==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/Cj6Y=Ckh/kY8PsaN=soKLM2"; protocol="application/pgp-signature"
-
---Sig_/Cj6Y=Ckh/kY8PsaN=soKLM2
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 28 Feb 2019 14:17:18 +0100
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> In domcreate_bootloader_done, libxl__build_pre is called.
-> If that function fails, the label 'out:' is called, which goes straight i=
-nto=20
-> domcreate_stream_done. This function uses srs->dcs to set libxl__domain_c=
-reate_state.
-> In my case ->dcs is NULL. The result is a crash in STATE_AO_GC().
-
-This works for me with staging-4.11:
-
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -1099,6 +1099,11 @@ static void domcreate_bootloader_done(libxl__egc *eg=
-c,
-         return;
-     }
-=20
-+    /* Prepare environment for domcreate_stream_done */
-+    dcs->srs.ao =3D ao;
-+    dcs->srs.dcs =3D dcs;
-+    dcs->srs.fd =3D -1;
-+
-     /* Restore */
-     callbacks->restore_results =3D libxl__srm_callout_callback_restore_res=
-ults;
-=20
-@@ -1122,8 +1127,6 @@ static void domcreate_bootloader_done(libxl__egc *egc,
-     if (rc)
-         goto out;
-=20
--    dcs->srs.ao =3D ao;
--    dcs->srs.dcs =3D dcs;
-     dcs->srs.fd =3D restore_fd;
-     dcs->srs.legacy =3D (dcs->restore_params.stream_version =3D=3D 1);
-     dcs->srs.back_channel =3D false;
-
-Olaf
-
---Sig_/Cj6Y=Ckh/kY8PsaN=soKLM2
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXHgKpwAKCRBdQqD6ppg2
-fuOgAJ4/Ai+hsbLQyQ5TCUI1UxN5av9YegCcDHvSZxAJYJrXYLrFfOsb4jl+mws=
-=P2QH
------END PGP SIGNATURE-----
-
---Sig_/Cj6Y=Ckh/kY8PsaN=soKLM2--
-
-
---===============7354964282279396184==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7354964282279396184==--
+T24gMi8yNi8xOSA5OjE3IEFNLCBBbGV4YW5kcnUgU3RlZmFuIElTQUlMQSB3cm90ZToKPiBQaW5n
+LiBJcyB0aGlzIG9rIHdpdGggeW91LCBHZW9yZ2U/CgpTb3JyeSAtLSBzb21laG93IEkgdGhvdWdo
+dCBJJ2QgcmVzcG9uZGVkIHRvIHRoaXMsIGJ1dCBhcHBhcmVudGx5IG5vdC4KCj4gT24gMTcuMDEu
+MjAxOSAxMTowNiwgQWxleGFuZHJ1IFN0ZWZhbiBJU0FJTEEgd3JvdGU6Cj4+IENoYW5nZWQgdGhl
+IHJldHVybiB2YWx1ZSBvZiAxIHRvIDAgc28gbm93IHAybV9maW5pc2hfdHlwZV9jaGFuZ2UgcmV0
+dXJucwo+PiAwIGZvciBzdWNjZXNzIG9yIDwwIGZvciBlcnJvci4KPj4gVGhlIOKAnHJvb3TigJ0g
+Y2FsbGVyIG9mIHAybV9maW5pc2hfdHlwZV9jaGFuZ2UoKSBpcwo+PiBYRU5fRE1PUF9tYXBfbWVt
+X3R5cGVfdG9faW9yZXFfc2VydmVyIGFuZCB0aGlzIGRvZXMgbm90aGluZyB1c2VmdWwgd2l0aAo+
+PiBwb3NpdGl2ZSB2YWx1ZXMuCgpJIHJlYWxpemUgeW91J3JlIGp1c3QgY29weWluZyB3aGF0IEkg
+c2FpZCBpbiB0aGUgZW1haWwgd2hlcmUgSSBzdWdnZXN0ZWQKdGhpcywgYnV0IGFzIEphbiBwb2lu
+dGVkIG91dCBpbiB2MSwgY29tbWl0IG1lc3NhZ2UgbmVlZHMgdG8gYmUgbW9yZQp0aG9yb3VnaCB0
+aGFuIGFuIG9mZi1oYW5kIGNvbW1lbnQgZHVyaW5nIHJldmlldy4gIEkgYWxzbyBhZ3JlZSB3aXRo
+IGhpbQp0aGF0IGl0IG1ha2VzIG1vcmUgc2Vuc2UgdG8gJ3Nhbml0aXplJyBlcHQncyByZWNhbGNf
+ZW50cnkoKSByZXR1cm4gdmFsdWUKaW4gZmluaXNoX3R5cGVfY2hhbmdlKCksIHJhdGhlciB0aGFu
+IGF0IHAybV9maW5pc2hfdHlwZV9jaGFuZ2UoKS4KCkkgdGhpbmsgaXQncyBwcm9iYWJseSBnb29k
+IHRvIGdldCBmZWVkYmFjayBmcm9tIFBhdWwsIHdobyB3cm90ZSB0aGlzCmludGVyZmFjZSAoSUlS
+QykgYW5kIHdvcmtzIHdpdGggb25lIG9mIGl0cyBtYWluIHVzZXJzIChRRU1VKS4KCk15IG5vcm1h
+bCAndGVtcGxhdGUnIGlzICJTaXR1YXRpb24gLyBQcm9ibGVtIC8gU29sdXRpb24iOiBXaGF0J3Mg
+dGhlCmN1cnJlbnQgc2l0dWF0aW9uLCB3aHkgaXMgdGhhdCBhIHByb2JsZW0sIGFuZCBob3cgZG9l
+cyB0aGlzIHBhdGNoIGZpeCBpdC4KCldpdGggdGhhdCBpbiBtaW5kIChhbmQgYWxzbyBicmluZ2lu
+ZyBQYXVsIHVwIHRvIHNwZWVkKSwgSSB0aGluayBJJ2Qgc2F5CnNvbWV0aGluZyBsaWtlIHRoaXM6
+CgotLS0KSW4gdGhlIGNhc2Ugb2YgYW55IGVycm9ycywgZmluaXNoX3R5cGVfY2hhbmdlKCkgcGFz
+c2VzIHZhbHVlcyByZXR1cm5lZApmcm9tIHAybS0+cmVjYWxjKCkgdXAgdGhlIHN0YWNrICh3aXRo
+IHNvbWUgZXhjZXB0aW9ucyBpbiB0aGUgY2FzZSB3aGVyZQphbiBlcnJvciBpcyBleHBlY3RlZCk7
+IHRoaXMgZXZlbnR1YWxseSBlbmRzIHVwIGJlaW5nIHJldHVybmVkIHRvIHRoZQpYRU5fRE9NT1Bf
+bWFwX21lbV90eXBlX3RvX2lvcmVxX3NlcnZlciBoeXBlcmNhbGwuCgpIb3dldmVyLCBvbiBJbnRl
+bCBwcm9jZXNzb3JzIChidXQgbm90IG9uIEFNRCBwcm9jZXNzb3IpLCBwMm0tPnJlY2FsYygpCmNh
+biBhbHNvIHJldHVybiAnMScgYXMgd2VsbCBhcyAnMCcuICBUaGlzIGNhc2UgaXMgaGFuZGxlZCB2
+ZXJ5CmluY29uc2lzdGVudGx5OiBmaW5pc2hfdHlwZV9jaGFuZ2UoKSB3aWxsIHJldHVybiB0aGUg
+dmFsdWUgb2YgdGhlIGZpbmFsCmVudHJ5IGl0IGF0dGVtcHRzLCBkaXNjYXJkaW5nIHJlc3VsdHMg
+Zm9yIG90aGVyIGVudHJpZXM7CnAybV9maW5pc2hfdHlwZV9jaGFuZ2UoKSB3aWxsIGF0dGVtcHQg
+dG8gYWNjdW11bGF0ZSAnMSdzLCBzbyB0aGF0IGl0CnJldHVybnMgJzEnIGlmIGFueSBvZiB0aGUg
+Y2FsbHMgdG8gZmluaXNoX3R5cGVfY2hhbmdlKCkgcmV0dXJucyAnMSc7IGFuZApkbV9vcCgpIHdp
+bGwgYWdhaW4gcmV0dXJuICcxJyBvbmx5IGlmIHRoZSB2ZXJ5IGxhc3QgY2FsbCB0bwpwMm1fZmlu
+aXNoX3R5cGVfY2hhbmdlKCkgcmV0dXJucyAnMScuICBUaGUgcmVzdWx0IGlzIHRoYXQgdGhlClhF
+Tl9ETU9QX21hcF9tZW1fdHlwZV90b19pb3JlcV9zZXJ2ZXIoKSBoeXBlcmNhbGwgd2lsbCBzb21l
+dGltZXMgcmV0dXJuCjAgYW5kIHNvbWV0aW1lcyByZXR1cm4gMSBvbiBzdWNjZXNzLCBpbiBhbiB1
+bnByZWRpY3RhYmxlIG1hbm5lci4KClRoZSBoeXBlcmNhbGwgZG9jdW1lbnRhdGlvbiBkb2Vzbid0
+IG1lbnRpb24gcmV0dXJuIHZhbHVlczsgYnV0IGl0J3Mgbm90CmNsZWFyIHdoYXQgdGhlIGNhbGxl
+ciBjb3VsZCBkbyB3aXRoIHRoZSBpbmZvcm1hdGlvbiBhYm91dCB3aGV0aGVyCmVudHJpZXMgaGFk
+IGJlZW4gY2hhbmdlZCBvciBub3QuICBBdCB0aGUgbW9tZW50IGl0J3MgYWx3YXlzIDAgb24gQU1E
+CmJveGVzLCBhbmQgKnVzdWFsbHkqIDEgb24gSW50ZWwgYm94ZXM7IHNvIG5vdGhpbmcgY2FuIGJl
+IHJlbHlpbmcgb24gYQonMScgcmV0dXJuIHZhbHVlIGZvciBjb3JyZWN0bmVzcyAob3IgaWYgaXQg
+aXMsIGl0J3MgYnJva2VuKS4KCk1ha2UgdGhlIHJldHVybiB2YWx1ZSBvbiBzdWNjZXNzIGNvbnNp
+c3RlbnRseSAnMCcgYnkgb25seSByZXR1cm5pbmcKMC8tRVJST1IgZnJvbSBmaW5pc2hfdHlwZV9j
+aGFuZ2UoKS4gIEFsc28gcmVtb3ZlIHRoZSBhY2N1bXVsYXRpb24gY29kZQpmcm9tIHAybV9maW5p
+c2hfdHlwZV9jaGFuZ2UoKS4KLS0tCgpUaG91Z2h0cz8KCiAtR2VvcmdlCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
