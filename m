@@ -1,15 +1,14 @@
 From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH 2/6] x86/vtd: Rename struct iommu to
- vtd_iommu
-Date: Thu, 28 Feb 2019 05:57:44 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19C96B3D3@SHSMSX104.ccr.corp.intel.com>
+Subject: Re: [PATCH 3/6] x86/vtd: Drop struct qi_ctrl
+Date: Thu, 28 Feb 2019 06:02:40 +0000
+Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19C96B3F9@SHSMSX104.ccr.corp.intel.com>
 References: <1550862806-30236-1-git-send-email-andrew.cooper3@citrix.com>
- <1550862806-30236-3-git-send-email-andrew.cooper3@citrix.com>
+ <1550862806-30236-4-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1550862806-30236-3-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1550862806-30236-4-git-send-email-andrew.cooper3@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -20,20 +19,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Paul Durrant <paul.durrant@citrix.com>, "Nakajima,
- Jun" <jun.nakajima@intel.com>, Jan Beulich <JBeulich@suse.com>
+Cc: Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
 PiBGcm9tOiBBbmRyZXcgQ29vcGVyIFttYWlsdG86YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbV0K
-PiBTZW50OiBTYXR1cmRheSwgRmVicnVhcnkgMjMsIDIwMTkgMzoxMyBBTQo+IAo+IFZULWQncyBs
-b2NhbCBzdHJ1Y3QgaW9tbXUgaXMgYW4gb3Zlcmx5LWdlbmVyaWMgbmFtZSwgZm9yIGEgc3RydWN0
-dXJlIHdoaWNoIGluCj4gcHJhY3RpY2UgbWFwcyAxLXRvLTEgd2l0aCB0aGUgcmVhbCBJT01NVXMg
-aW4gdGhlIHN5c3RlbS4KPiAKPiBBZGRpdGlvbmFsbHksIGFkZHJlc3Mgc3R5bGUgaXNzdWVzIG9u
-IGltcGFjdGVkIGxpbmVzLiAgVGhpcyBpcyBtb3N0bHkKPiBwb3NpdGlvbmluZyBvZiAqIGZvciBw
-b2ludGVycyBhbmQgdW5uZWNlc3NheSBjYXN0cyB3aXRoIHZvaWQgcG9pbnRlcnMuCgp1bm5lY2Vz
-c2FyeQoKPiAKPiBObyBmdW5jdGlvbmFsIGNoYW5nZS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBBbmRy
-ZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKQWNrZWQtYnk6IEtldmluIFRp
-YW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+PiBTZW50OiBTYXR1cmRheSwgRmVicnVhcnkgMjMsIDIwMTkgMzoxMyBBTQo+IAo+IEl0IGlzIHVu
+Y2xlYXIgd2h5IHRoaXMgYWJzdHJhY3Rpb24gZXhpc3RzLCBidXQgaW9tbXVfcWlfY3RybCgpIHJl
+dHVybnMKPiBwb3NzaWJseSBOVUxMIGFuZCBldmVyeSB1c2VyIHVuY29uZGl0aW9uYWxseSBkZXJl
+ZmVyZW5jZXMgdGhlIHJlc3VsdC4gIEluCj4gcHJhY3RpY2UsIEkgY2FuJ3Qgc3BvdCBhIHBhdGgg
+d2hlcmUgaW9tbXUgaXMgTlVMTCwgc28gSSB0aGluayBpdCBpcyBtb3N0bHkKPiBkZWFkLgo+IAo+
+IE1vdmUgdGhlIHNvbGUgbWVtYmVyIGludG8gc3RydWN0IHZ0ZF9pb21tdSwgYW5kIGRlbGV0ZSBp
+b21tdV9xaV9jdHJsKCkuCj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBLZXZpbiBUaWFuIDxrZXZpbi50aWFuQGlu
+dGVsLmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
