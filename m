@@ -1,19 +1,25 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH for-next 5/5] automation: introduce a test to
- build each commit
-Date: Thu, 28 Feb 2019 13:44:48 +0000
-Message-ID: <20190228134448.6097-6-wei.liu2@citrix.com>
-References: <20190228134448.6097-1-wei.liu2@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: bogus libxl error handling in
+ domcreate_bootloader_done
+Date: Thu, 28 Feb 2019 14:59:19 +0100
+Message-ID: <20190228145919.14a2c5ea.olaf@aepfle.de>
+References: <20190228141718.7740e706.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4197335830028287980=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=0So3=RD=citrix.com=prvs=955226cfb=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1gzM03-000731-NM
- for xen-devel@lists.xenproject.org; Thu, 28 Feb 2019 13:45:23 +0000
-In-Reply-To: <20190228134448.6097-1-wei.liu2@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=JJzu=RD=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1gzMDg-0000A3-6G
+ for xen-devel@lists.xenproject.org; Thu, 28 Feb 2019 13:59:28 +0000
+Received: from sender by smtp.strato.de (RZmta 44.13 AUTH)
+ with ESMTPSA id C046b5v1SDxOG78
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate)
+ for <xen-devel@lists.xenproject.org>;
+ Thu, 28 Feb 2019 14:59:24 +0100 (CET)
+In-Reply-To: <20190228141718.7740e706.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,28 +29,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Doug Goldstein <cardoe@cardoe.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBpcyBhZGRlZCB0byB0aGUgdGVzdCBzdGFnZSBzbyB0aGF0IGl0cyBmYWlsdXJlIHdvbid0
-IGJsb2NrIG90aGVyCnRoaW5ncy4KClNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNp
-dHJpeC5jb20+Ci0tLQpOb3RlOiB0aGlzIHBhdGNoIHdpbGwgbG9vayBkaWZmZXJlbnQgd2hlbiBp
-dCBpcyBhcHBsaWVkIHRvIHN0YWdpbmcsCmJ1dCB5b3UgY2FuIHNlZSB0aGUgY29yZSBpZGVhIGhl
-cmUuCi0tLQogYXV0b21hdGlvbi9naXRsYWItY2kvdGVzdC55YW1sIHwgNyArKysrLS0tCiAxIGZp
-bGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBh
-L2F1dG9tYXRpb24vZ2l0bGFiLWNpL3Rlc3QueWFtbCBiL2F1dG9tYXRpb24vZ2l0bGFiLWNpL3Rl
-c3QueWFtbAppbmRleCAxNDBiMTFiODkyLi5iOTU2M2ZlZDFjIDEwMDY0NAotLS0gYS9hdXRvbWF0
-aW9uL2dpdGxhYi1jaS90ZXN0LnlhbWwKKysrIGIvYXV0b21hdGlvbi9naXRsYWItY2kvdGVzdC55
-YW1sCkBAIC0xLDE0ICsxLDE1IEBACiAjIFRlc3Qgam9icwotcWVtdS1zbW9rZS14ODYtNjQtZ2Nj
-OgorYnVpbGQtZWFjaC1jb21taXQtZ2NjOgogICBzdGFnZTogdGVzdAogICBpbWFnZTogcmVnaXN0
-cnkuZ2l0bGFiLmNvbS94ZW4tcHJvamVjdC94ZW4vJHtDT05UQUlORVJ9CiAgIHZhcmlhYmxlczoK
-ICAgICBDT05UQUlORVI6IGRlYmlhbjpzdHJldGNoCisgICAgWEVOX1RBUkdFVF9BUkNIOiB4ODZf
-NjQKKyAgICBDQzogZ2NjCiAgIHNjcmlwdDoKLSAgICAtIC4vYXV0b21hdGlvbi9zY3JpcHRzL3Fl
-bXUtc21va2UteDg2LTY0LnNoIHB2IDI+JjEgfCB0ZWUgcWVtdS1zbW9rZS14ODYtNjQubG9nCisg
-ICAgLSAuL2F1dG9tYXRpb24vZ2l0bGFiLWNpL2J1aWxkLWVhY2gtY29tbWl0LnNoIDI+JjEgfCB0
-ZWUgYnVpbGQtZWFjaC1jb21taXQtZ2NjLmxvZwogICBhcnRpZmFjdHM6CiAgICAgcGF0aHM6Ci0g
-ICAgICAtIHNtb2tlLnNlcmlhbAogICAgICAgLSAnKi5sb2cnCiAgICAgd2hlbjogYWx3YXlzCiAg
-IHRhZ3M6Ci0tIAoyLjExLjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+--===============4197335830028287980==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/l3w+AI_9mL30IHj7echiICp"; protocol="application/pgp-signature"
+
+--Sig_/l3w+AI_9mL30IHj7echiICp
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 28 Feb 2019 14:17:18 +0100
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> In domcreate_bootloader_done, libxl__build_pre is called.
+> If that function fails, the label 'out:' is called, which goes straight i=
+nto=20
+> domcreate_stream_done. This function uses srs->dcs to set libxl__domain_c=
+reate_state.
+> In my case ->dcs is NULL. The result is a crash in STATE_AO_GC().
+
+A reproducer with staging-4.11:
+
+boot hostA with gnttab_max_frames=3D256
+boot hostB with gnttab_max_frames=3D512
+create domU on hostB with 'xl create -cf "$_"  max_grant_frames=3D512'
+xl migrate domU hostA
+migration target: Ready to receive domain.
+Saving to migration stream new xl format (info 0x3/0x0/1374)
+Loading new save file <incoming migration stream> (new xl fmt info 0x3/0x0/=
+1374)
+ Savefile contains xl domain config in JSON format
+Parsing config from <saved>
+xc: info: Saving domain 1, type x86 PV
+libxl: error: libxl_dom.c:363:libxl__build_pre: Couldn't set grant table li=
+mits
+libxl: error: libxl_utils.c:510:libxl_read_exactly: file/stream truncated r=
+eading ipc msg header from domain 1 save/restore helper stdout pipe
+libxl: error: libxl_exec.c:129:libxl_report_child_exitstatus: domain 1 save=
+/restore helper [2211] died due to fatal signal Broken pipe
+migration sender: libxl_domain_suspend failed (rc=3D-3)
+libxl: info: libxl_exec.c:118:libxl_report_child_exitstatus: migration tran=
+sport process [2209] exited with error status 255
+Migration failed, resuming at sender.
+xc: error: Dom 1 not suspended: (shutdown 0, reason 255): Internal error
+libxl: error: libxl_dom_suspend.c:472:libxl__domain_resume: Domain 1:xc_dom=
+ain_resume failed: Invalid argument
+
+Core was generated by `xl -t migrate-receive'.
+Program terminated with signal SIGSEGV, Segmentation fault.
+#0  domcreate_stream_done (egc=3D0x7ffc81d4d9d0, srs=3D0x696560, ret=3D-3) =
+at libxl_create.c:1174
+1174        STATE_AO_GC(dcs->ao);
+
+
+(gdb) bt
+#0  domcreate_stream_done (egc=3D0x7ffc81d4d9d0, srs=3D0x696560, ret=3D-3) =
+at libxl_create.c:1174
+#1  0x00007f5fedf3070f in initiate_domain_create (egc=3Degc@entry=3D0x7ffc8=
+1d4d9d0, dcs=3Ddcs@entry=3D0x694ee0) at libxl_create.c:1005
+#2  0x00007f5fedf309c4 in do_domain_create (ctx=3Dctx@entry=3D0x0, d_config=
+=3Dd_config@entry=3D0x7ffc81d4dbd0, domid=3D0x7ffc81d4dad8, domid@entry=3D0=
+x7ffc81d4da08, restore_fd=3Drestore_fd@entry=3D0,=20
+    send_back_fd=3Dsend_back_fd@entry=3D1, params=3Dparams@entry=3D0x7ffc81=
+d4db30, ao_how=3D0x0, aop_console_how=3D0x0) at libxl_create.c:1705
+#3  0x00007f5fedf30d8c in libxl_domain_create_restore (ctx=3D0x0, d_config=
+=3Dd_config@entry=3D0x7ffc81d4dbd0, domid=3D0x7ffc81d4da08, domid@entry=3D0=
+x7ffc81d4dad8, restore_fd=3Drestore_fd@entry=3D0,=20
+    send_back_fd=3Dsend_back_fd@entry=3D1, params=3Dparams@entry=3D0x7ffc81=
+d4db30, ao_how=3Dao_how@entry=3D0x0, aop_console_how=3Daop_console_how@entr=
+y=3D0x0) at libxl_create.c:1925
+#4  0x0000000000420cd6 in create_domain (dom_info=3Ddom_info@entry=3D0x7ffc=
+81d4e0f0) at xl_vmcontrol.c:913
+#5  0x0000000000422bdf in migrate_receive (send_fd=3D1, recv_fd=3D0, usersp=
+ace_colo_proxy=3Dfalse, colo_proxy_script=3D0x0, checkpointed=3DLIBXL_CHECK=
+POINTED_STREAM_NONE, pause_after_migration=3D0,=20
+    monitor=3D1, daemonize=3D1, debug=3D0) at xl_migrate.c:353
+#6  main_migrate_receive (argc=3D<optimized out>, argv=3D<optimized out>) a=
+t xl_migrate.c:525
+#7  0x0000000000409b1b in main (argc=3D1, argv=3D0x7ffc81d4e378) at xl.c:410
+
+(gdb) p dcs
+$1 =3D (libxl__domain_create_state *) 0x0
+
+*srs is all zero.
+
+
+
+Olaf
+
+--Sig_/l3w+AI_9mL30IHj7echiICp
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXHfpNwAKCRBdQqD6ppg2
+fgVdAKDLKa4+MuxNLLfSpe5pIxwENT8y6wCfYXOY6+twDRybHae1q0TdgEJdw6E=
+=XPTA
+-----END PGP SIGNATURE-----
+
+--Sig_/l3w+AI_9mL30IHj7echiICp--
+
+
+--===============4197335830028287980==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4197335830028287980==--
