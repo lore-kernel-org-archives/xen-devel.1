@@ -1,111 +1,64 @@
-From: Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: linux-next: manual merge of the nvdimm tree with the xen-tip tree
-Date: Fri, 1 Mar 2019 17:06:22 +1100
-Message-ID: <20190301170622.6547961e@canb.auug.org.au>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [ovmf test] 133471: all pass - PUSHED
+Date: Fri, 01 Mar 2019 06:13:41 +0000
+Message-ID: <osstest-133471-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/VOyMZKpg9/519naT73GnYsI"; protocol="application/pgp-signature"
-Return-path: <linux-kernel-owner@vger.kernel.org>
-Sender: linux-kernel-owner@vger.kernel.org
-To: Dan Williams <dan.j.williams@intel.com>, Juergen Gross <jgross@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen Devel <Xen-devel@lists.xensource.com>
-Cc: Linux Next Mailing List <linux-next@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=OeqB=RE=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1gzbQd-0004Fu-6o
+ for xen-devel@lists.xenproject.org; Fri, 01 Mar 2019 06:13:51 +0000
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---Sig_/VOyMZKpg9/519naT73GnYsI
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Hi all,
-
-[Thanks, Dan for the heads up and resolution.]
-
-Today's linux-next merge of the nvdimm tree got a conflict in:
-
-  mm/memory_hotplug.c
-
-between commit:
-
-  357b4da50a62 ("x86: respect memory size limiting via mem=3D parameter")
-
-from the xen-tip tree and commit:
-
-  2794129e902d ("mm/memory-hotplug: Allow memory resources to be children")
-
-from the nvdimm tree.
-
-I fixed it up (see below) and can carry the fix as necessary. This
-is now fixed as far as linux-next is concerned, but any non trivial
-conflicts should be mentioned to your upstream maintainer when your tree
-is submitted for merging.  You may also want to consider cooperating
-with the maintainer of the conflicting tree to minimise any particularly
-complex conflicts.
-
---=20
-Cheers,
-Stephen Rothwell
-
-diff --cc mm/memory_hotplug.c
-index 1f678568ce5c,d2c44146473f..b96a3121b5e9
---- a/mm/memory_hotplug.c
-+++ b/mm/memory_hotplug.c
-@@@ -101,28 -99,21 +101,24 @@@ u64 max_mem_size =3D U64_MAX
-  /* add this memory to iomem resource */
-  static struct resource *register_memory_resource(u64 start, u64 size)
-  {
-- 	struct resource *res, *conflict;
-+ 	struct resource *res;
-+ 	unsigned long flags =3D  IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
-+ 	char *resource_name =3D "System RAM";
- =20
- +	if (start + size > max_mem_size)
- +		return ERR_PTR(-E2BIG);
- +
-- 	res =3D kzalloc(sizeof(struct resource), GFP_KERNEL);
-- 	if (!res)
-- 		return ERR_PTR(-ENOMEM);
--=20
-- 	res->name =3D "System RAM";
-- 	res->start =3D start;
-- 	res->end =3D start + size - 1;
-- 	res->flags =3D IORESOURCE_SYSTEM_RAM | IORESOURCE_BUSY;
-- 	conflict =3D  request_resource_conflict(&iomem_resource, res);
-- 	if (conflict) {
-- 		if (conflict->desc =3D=3D IORES_DESC_DEVICE_PRIVATE_MEMORY) {
-- 			pr_debug("Device unaddressable memory block "
-- 				 "memory hotplug at %#010llx !\n",
-- 				 (unsigned long long)start);
-- 		}
-- 		pr_debug("System RAM resource %pR cannot be added\n", res);
-- 		kfree(res);
-+ 	/*
-+ 	 * Request ownership of the new memory range.  This might be
-+ 	 * a child of an existing resource that was present but
-+ 	 * not marked as busy.
-+ 	 */
-+ 	res =3D __request_region(&iomem_resource, start, size,
-+ 			       resource_name, flags);
-+=20
-+ 	if (!res) {
-+ 		pr_debug("Unable to reserve System RAM region: %016llx->%016llx\n",
-+ 				start, start + size);
-  		return ERR_PTR(-EEXIST);
-  	}
-  	return res;
-
---Sig_/VOyMZKpg9/519naT73GnYsI
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAlx4y94ACgkQAVBC80lX
-0GzieggAmiLoxygKDBJOg/eZMsP5iMc1q6sHmFialsNHFfKQjfEfXWPW5lGTWL7J
-8ze2HzK2kUFBQRUysmk8v9AviXw0zxBW9OeS+0ruzczImdYDiNQkrdi97KzuEDsH
-heVLTV7tUevV5+z83sYdPCFxQ1mTCcndLcbsXsl7QUlJg6mql6HNt4soSIhe9c/Q
-XWvDAq+ADYkGt9NbwslcPGb3agaiganxSh62FjrVSfKuNTlmU5kSmjX5Ee5vIOjt
-bbqwWh8peYkxW0jud4W77hwF4n3/cK9RGB4wY7Q6QVoVgB7Sev427bUK5eFSxhs3
-sIopJXg+8EgeLY6cBfftJYXBdgAxWA==
-=1QDT
------END PGP SIGNATURE-----
-
---Sig_/VOyMZKpg9/519naT73GnYsI--
+ZmxpZ2h0IDEzMzQ3MSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzM0NzEvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
+dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
+bmc6CiBvdm1mICAgICAgICAgICAgICAgICBlY2U0YzFkZTNlN2IyMzQwZDM1MWMyMDU0Yzc5ZWE2
+ODlhOTU0ZWQ2CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICAzYTQ2OTgy
+MDJjZjVjYTgxZDQ0MDFiZGM2YzA5NzQ0MDAwNjRmMzMzCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
+MzM0NjUgIDIwMTktMDItMjggMDQ6MDE6NTMgWiAgICAxIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
+ICAgMTMzNDcxICAyMDE5LTAyLTI4IDE0OjExOjE4IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgU3RhciBaZW5n
+IDxzdGFyLnplbmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14
+c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LWxp
+YnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92
+bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
+Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoK
+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcK
+bG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNv
+bmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxh
+Yi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9y
+dHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54
+ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFz
+dGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJs
+b2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQK
+ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5
+CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5iaXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC9v
+c3N0ZXN0L292bWYuZ2l0CiAgIDNhNDY5ODIwMmMuLmVjZTRjMWRlM2UgIGVjZTRjMWRlM2U3YjIz
+NDBkMzUxYzIwNTRjNzllYTY4OWE5NTRlZDYgLT4geGVuLXRlc3RlZC1tYXN0ZXIKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
