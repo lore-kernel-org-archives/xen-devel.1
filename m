@@ -1,16 +1,20 @@
-From: Lars Kurth <lars.kurth@citrix.com>
-Subject: [PATCH] Minor security policy text changes to avoid
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] Minor security policy text changes to avoid
  ambiguity
-Date: Fri,  1 Mar 2019 13:55:41 +0000
-Message-ID: <e4407aad1d83751dbc7068b32a3c8d5bc242994c.1551448234.git.lars.kurth@citrix.com>
+Date: Fri, 1 Mar 2019 14:03:07 +0000
+Message-ID: <17c625fe-7033-02df-485a-6cea2f89966c@citrix.com>
+References: <e4407aad1d83751dbc7068b32a3c8d5bc242994c.1551448234.git.lars.kurth@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1349815528654976994=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OeqB=RE=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1gzidu-0006Vx-2B
- for xen-devel@lists.xenproject.org; Fri, 01 Mar 2019 13:56:02 +0000
+ <SRS0=1YOw=RE=citrix.com=prvs=956b654bc=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1gzilk-0007HW-1j
+ for xen-devel@lists.xenproject.org; Fri, 01 Mar 2019 14:04:08 +0000
+In-Reply-To: <e4407aad1d83751dbc7068b32a3c8d5bc242994c.1551448234.git.lars.kurth@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,70 +23,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, committers@xenproject.org
+To: Lars Kurth <lars.kurth@citrix.com>, xen-devel@lists.xenproject.org
+Cc: committers@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1349815528654976994==
-Content-Type: text/plain; charset=y
-Content-Transfer-Encoding: 8bit
-
-See http://xenbits.xen.org/gitweb/?p=people/larsk/governance.git;a=summary
-for the repository.
-
-Signed-off-by: Lars Kurth <lars.kurth@citrix.com>
-CC: committers@xenproject.org
----
- security-policy.pandoc | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/security-policy.pandoc b/security-policy.pandoc
-index 8e07384..74d0d8b 100644
---- a/security-policy.pandoc
-+++ b/security-policy.pandoc
-@@ -214,8 +214,9 @@ List members are allowed to make available to their users only the following:
- -   The planned disclosure date
- 
- List members may, if (and only if) the Security Team grants permission, deploy
--fixed versions during the embargo. Permission for deployment, and any
--restrictions, will be stated in the embargoed advisory text.
-+fixed versions to their own public facing service during the embargo. Permission
-+for deployment, and any restrictions, will be stated in the embargoed advisory
-+text.
- 
- The Security Team will normally permit such deployment, even for systems where
- VMs are managed or used by non-members of the predisclosure list. The Security
-@@ -232,6 +233,9 @@ information about the issue (as listed above). This applies whether the
- deployment occurs during the embargo (with permission - see above) or is
- planned for after the end of the embargo.
- 
-+NB: Distribution of updated software is prohibited (except to other members of
-+the predisclosure list).
-+
- *NOTE:* Prior v2.2 of this policy (25 June 2014) it was permitted to also make
- available the allocated CVE number. This is no longer permitted in accordance
- with MITRE policy.[]()
-@@ -408,6 +412,7 @@ Change History {#changelog}
- --------------
- 
- <div class="box-note">
-+-   **v3.22 March 1st 2019:** Minor policy text clarifications
- -   **v3.21 Nov 19th 2018:** Added XCP-ng.org
- -   **v3.20 June 14th 2018:** Added Star Lab
- -   **v3.19 May 9th 2018:** Remove Google and Xen 3.4 stable tree maintainer
--- 
-2.13.0
-
-
-
---===============1349815528654976994==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1349815528654976994==--
+T24gMDEvMDMvMjAxOSAxMzo1NSwgTGFycyBLdXJ0aCB3cm90ZToKPiBTZWUgaHR0cDovL3hlbmJp
+dHMueGVuLm9yZy9naXR3ZWIvP3A9cGVvcGxlL2xhcnNrL2dvdmVybmFuY2UuZ2l0O2E9c3VtbWFy
+eQo+IGZvciB0aGUgcmVwb3NpdG9yeS4KPgo+IFNpZ25lZC1vZmYtYnk6IExhcnMgS3VydGggPGxh
+cnMua3VydGhAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
+Y29vcGVyM0BjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
