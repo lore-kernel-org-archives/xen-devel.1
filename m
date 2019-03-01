@@ -1,8 +1,8 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: George Dunlap <george.dunlap@citrix.com>
 Subject: Re: [PATCH] Minor security policy text changes to avoid
  ambiguity
-Date: Fri, 1 Mar 2019 14:03:07 +0000
-Message-ID: <17c625fe-7033-02df-485a-6cea2f89966c@citrix.com>
+Date: Fri, 1 Mar 2019 14:11:45 +0000
+Message-ID: <66b2ee65-b841-e8c2-747f-141fb1d99350@citrix.com>
 References: <e4407aad1d83751dbc7068b32a3c8d5bc242994c.1551448234.git.lars.kurth@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -10,11 +10,11 @@ Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=1YOw=RE=citrix.com=prvs=956b654bc=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1gzilk-0007HW-1j
- for xen-devel@lists.xenproject.org; Fri, 01 Mar 2019 14:04:08 +0000
+ <SRS0=9Z1W=RE=citrix.com=prvs=95622986d=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1gziti-00085Y-8S
+ for xen-devel@lists.xenproject.org; Fri, 01 Mar 2019 14:12:22 +0000
 In-Reply-To: <e4407aad1d83751dbc7068b32a3c8d5bc242994c.1551448234.git.lars.kurth@citrix.com>
-Content-Language: en-GB
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,11 +27,11 @@ To: Lars Kurth <lars.kurth@citrix.com>, xen-devel@lists.xenproject.org
 Cc: committers@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDMvMjAxOSAxMzo1NSwgTGFycyBLdXJ0aCB3cm90ZToKPiBTZWUgaHR0cDovL3hlbmJp
-dHMueGVuLm9yZy9naXR3ZWIvP3A9cGVvcGxlL2xhcnNrL2dvdmVybmFuY2UuZ2l0O2E9c3VtbWFy
-eQo+IGZvciB0aGUgcmVwb3NpdG9yeS4KPgo+IFNpZ25lZC1vZmYtYnk6IExhcnMgS3VydGggPGxh
-cnMua3VydGhAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gMy8xLzE5IDE6NTUgUE0sIExhcnMgS3VydGggd3JvdGU6Cj4gU2VlIGh0dHA6Ly94ZW5iaXRz
+Lnhlbi5vcmcvZ2l0d2ViLz9wPXBlb3BsZS9sYXJzay9nb3Zlcm5hbmNlLmdpdDthPXN1bW1hcnkK
+PiBmb3IgdGhlIHJlcG9zaXRvcnkuCj4gCj4gU2lnbmVkLW9mZi1ieTogTGFycyBLdXJ0aCA8bGFy
+cy5rdXJ0aEBjaXRyaXguY29tPgo+IENDOiBjb21taXR0ZXJzQHhlbnByb2plY3Qub3JnCgpBY2tl
+ZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
