@@ -1,19 +1,20 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: [PATCH] tools/libfsimage: Add `XEN' to environment
  variable name
-Date: Tue, 5 Mar 2019 15:48:53 +0000
-Message-ID: <20190305154852.GB2300@perard.uk.xensource.com>
+Date: Tue, 5 Mar 2019 15:56:53 +0000
+Message-ID: <20190305155653.ru3geabg2otgnbrx@zion.uk.xensource.com>
 References: <34d7e71d-f3c4-c236-0247-4cc4f132a2e9@suse.com>
  <20190305153730.28523-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PG+m=RI=citrix.com=prvs=960f0ac95=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1h1CJM-0003J0-JB
- for xen-devel@lists.xenproject.org; Tue, 05 Mar 2019 15:48:56 +0000
+ <SRS0=1Y1m=RI=citrix.com=prvs=960e31256=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1h1CRF-00044t-N2
+ for xen-devel@lists.xenproject.org; Tue, 05 Mar 2019 15:57:05 +0000
 Content-Disposition: inline
 In-Reply-To: <20190305153730.28523-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -25,7 +26,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
 T24gVHVlLCBNYXIgMDUsIDIwMTkgYXQgMDM6Mzc6MzBQTSArMDAwMCwgSWFuIEphY2tzb24gd3Jv
@@ -42,10 +43,13 @@ SVInIGFyZSB0aGlzIGdldGVudiwgYW5kIHR3byByZWZlcmVuY2VzIHRvIGEgY29tcGlsZS10aW1l
 Cj4gbWFuaWZlc3QgY29uc3RhbnQgd2hpY2ggcHJvdmlkZXMgdGhlIGRlZmF1bHQgdmFsdWUgKHRo
 ZSAtRCB3aGljaCBzZXRzCj4gaXQsIGFuZCB0aGUgcGxhY2UgaXQgaXMgdXNlZCkuCj4gCj4gSSBo
 YXZlIGFsc28gY2hlY2tlZCB0aGUgY3VycmVudCBEZWJpYW4gWGVuIHBhY2thZ2UgaW4gYnVzdGVy
-IGFuZCB0aGUKPiB2YXJpYWJsZSBpcyBub3Qgc2V0IHRoZXJlIGVpdGhlci4KCkkgaGF2ZSBjaGVj
-a2VkIHRoZSBDZW50T1MgcGtnLCBhbmQgd2UgZG9uJ3Qgc2V0IHRoYXQgdmFyaWFibGUgZWl0aGVy
-LgpzbzoKUmV2aWV3ZWQtYnk6IEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBjaXRyaXgu
-Y29tPgoKLS0gCkFudGhvbnkgUEVSQVJECgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+IGFuZCB0aGUKPiB2YXJpYWJsZSBpcyBub3Qgc2V0IHRoZXJlIGVpdGhlci4KPiAKPiBDQzogQW5k
+cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBDQzogSnVlcmdlbiBHcm9z
+cyA8amdyb3NzQHN1c2UuY29tPgo+IENDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+
+Cj4gQ0M6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gQ0M6IEdlb3JnZSBEdW5sYXAg
+PGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KPiBDQzogQW50aG9ueSBQZXJhcmQgPGFudGhvbnku
+cGVyYXJkQGNpdHJpeC5jb20+Cj4gU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNr
+c29uQGV1LmNpdHJpeC5jb20+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNv
+bT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
