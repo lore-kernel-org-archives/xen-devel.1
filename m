@@ -1,21 +1,20 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH for-next RFC 2/4] libxl: make python scripts
- work with python 2 and 3
-Date: Tue, 5 Mar 2019 17:34:13 +0000
-Message-ID: <58b8082d-1f43-7867-fd34-6cb3b48cc1f8@citrix.com>
+Subject: Re: [PATCH for-next RFC 4/4] pygrub: make it build with
+ python 3
+Date: Tue, 5 Mar 2019 17:42:07 +0000
+Message-ID: <8f0a909e-3cdc-6867-e295-99734e91237c@citrix.com>
 References: <20190305164206.6793-1-wei.liu2@citrix.com>
- <20190305164206.6793-3-wei.liu2@citrix.com>
+ <20190305164206.6793-5-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8421380795406602582=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=rxLf=RI=citrix.com=prvs=96038945f=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h1E1j-00058V-11
- for xen-devel@lists.xenproject.org; Tue, 05 Mar 2019 17:38:51 +0000
-In-Reply-To: <20190305164206.6793-3-wei.liu2@citrix.com>
+ id 1h1E84-0005sH-RO
+ for xen-devel@lists.xenproject.org; Tue, 05 Mar 2019 17:45:24 +0000
+In-Reply-To: <20190305164206.6793-5-wei.liu2@citrix.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,36 +28,113 @@ To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@eu.citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDUvMDMvMjAxOSAxNjo0MiwgV2VpIExpdSB3cm90ZToKPiBBbGwgc2NyaXB0cyBhcmUgdHJh
-bnNmb3JtZWQgYnkgMnRvMy4KPgo+IFRoZSBvbmx5IGFkZGl0aW9uIGlzICJmcm9tIF9fZnV0dXJl
-X18gaW1wb3J0IHByaW50X2Z1bmN0aW9uIiBzbyB0aGF0Cj4gcHJpbnQoIkJMQUgiLCBmaWxlPXN5
-cy5zdGRlcnIpIGNhbiB3b3JrLgo+Cj4gaHR0cHM6Ly9weXRob24tZnV0dXJlLm9yZy9jb21wYXRp
-YmxlX2lkaW9tcy5odG1sCj4KPiBUZXN0ZWQgd2l0aCAyLjcgYW5kIDMuNS4KPgo+IFNpZ25lZC1v
-ZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cj4gLS0tCj4gSSBkb24ndCBoYXZl
-IGVudmlyb25tZW50IHRvIHRlc3QgMi40IC0tIGl0IGlzIGFsbW9zdCAxNSB5ZWFycyBvbGQuIFdl
-Cj4gbWF5IHdhbnQgdG8gY29uc2lkZXIgYnVtcGluZyB0aGUgbWluaW11bSByZXF1aXJlbWVudCB0
-byAyLjc/CgpUaGUgY29tcGF0aWJsZSB3YXkgdG8gZG8gdGhpcyBpc8KgIHN5cy5zdGRlcnIud3Jp
-dGUobXNnICsgIlxuIikgYW5kIHVzaW5nCnByaW50KCkgd2l0aG91dCB0aGUgZnV0dXJlIGltcG9y
-dC4KCj4gQEAgLTI2OSw3ICsyNzEsNyBAQCBjbGFzcyBLZXllZFVuaW9uKEFnZ3JlZ2F0ZSk6Cj4g
-ICAgICAgICAgaWYgbm90IGlzaW5zdGFuY2Uoa2V5dmFyX3R5cGUsIEVudW1lcmF0aW9uKToKPiAg
-ICAgICAgICAgICAgcmFpc2UgVmFsdWVFcnJvcgo+ICAKPiAtICAgICAgICBrdl9rd2FyZ3MgPSBk
-aWN0KFsoeC5sc3RyaXAoJ2tleXZhcl8nKSx5KSBmb3IgKHgseSkgaW4ga3dhcmdzLml0ZW1zKCkg
-aWYgeC5zdGFydHN3aXRoKCdrZXl2YXJfJyldKQo+ICsgICAgICAgIGt2X2t3YXJncyA9IGRpY3Qo
-Wyh4LmxzdHJpcCgna2V5dmFyXycpLHkpIGZvciAoeCx5KSBpbiBsaXN0KGt3YXJncy5pdGVtcygp
-KSBpZiB4LnN0YXJ0c3dpdGgoJ2tleXZhcl8nKV0pCgpUaGlzIHNob3VsZG4ndCBuZWVkIGNoYW5n
-aW5nLsKgIExpc3QgY29tcHJlaGVuc2lvbnMgYXJlIG9uZSBvZiB0aGUgZmV3CnVzZXMgb2YgLml0
-ZW1zKCkgd2hpY2ggaXMgY29tcGF0aWJsZSB3aXRoIG9sZGVyIHZlcnNpb25zIG9mIHB5dGhvbiBJ
-SVJDLgoKPiBAQCAtMzYyLDExICszNjQsMTAgQEAgZGVmIHBhcnNlKGYpOgo+ICAgICAgICAgICAg
-ICBnbG9ic1tuXSA9IHQKPiAgCj4gICAgICB0cnk6Cj4gLSAgICAgICAgZXhlY2ZpbGUoZiwgZ2xv
-YnMsIGxvY3MpCj4gLSAgICBleGNlcHQgU3ludGF4RXJyb3IsZToKPiAtICAgICAgICByYWlzZSBT
-eW50YXhFcnJvciwgXAo+IC0gICAgICAgICAgICAgICJFcnJvcnMgd2VyZSBmb3VuZCBhdCBsaW5l
-ICVkIHdoaWxlIHByb2Nlc3NpbmcgJXM6XG5cdCVzIlwKPiAtICAgICAgICAgICAgICAlKGUubGlu
-ZW5vLGYsZS50ZXh0KQo+ICsgICAgICAgIGV4ZWMoY29tcGlsZShvcGVuKGYpLnJlYWQoKSwgZiwg
-J2V4ZWMnKSwgZ2xvYnMsIGxvY3MpCj4gKyAgICBleGNlcHQgU3ludGF4RXJyb3IgYXMgZToKClRo
-aXMgaXMgdGhlIG9ubHkgcmVhbGx5IGF3a3dhcmQgYml0LCBhbmQgaXNuJ3QgUHkgMi40IGNvbXBh
-dGlibGUuCgpUaGUgb25seSBvcHRpb24gaGVyZSB0byByZXRhaW4gcHJlIDIuNiBjb21wYXRpYmls
-aXR5IGlzOgoKdHJ5OgrCoMKgwqAgLi4uCmV4Y2VwdCBTeW50YXhFcnJvcjoKwqDCoMKgIF8sIGUg
-PSBzeXMuZXhjX2luZm8oKVs6Ml0KwqDCoMKgIC4uLgoKfkFuZHJldwoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8421380795406602582==
+Content-Type: multipart/alternative;
+	boundary="------------9D81265E54E2DD9A20EA9328"
+Content-Language: en-GB
+
+--------------9D81265E54E2DD9A20EA9328
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 05/03/2019 16:42, Wei Liu wrote:
+> With the help of two porting guides and cpython source code:
+>
+> 1. Use PyUnicode to replace PyString counterparts.
+> 2. Use PyVarObject_HEAD_INIT and provide compatibility for 2.5 and
+>    earlier.
+> 3. Remove usage of Py_FindMethod.
+> 4. Use new module initialisation routine.
+>
+> For #3, Py_FindMethod was removed, yet an alternative wasn't
+> documented.  The code is the result of reverse-engineering cpython
+> commit 6116d4a1d1
+>
+> https://docs.python.org/3/howto/cporting.html
+> http://python3porting.com/cextensions.html
+>
+> Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+
+Marek already made the tools/python/* libraries compatible with Py2 and Py3
+
+The following commits are the relevant ones:
+
+* be6b316 - python: handle long type in scripts (2 years ago) <Marek Marczykowski-Górecki>
+* e16c705 - python: adjust module initalization for Python3 (2 years ago) <Marek Marczykowski-Górecki>
+* dd986cd - python: use PyLong_* for constructing 'int' type in Python3 (2 years ago) <Marek Marczykowski-Górecki>
+* 121d9d4 - python: use PyBytes/PyUnicode instead of PyString (2 years ago) <Marek Marczykowski-Górecki>
+* 0c8981f - python: initialize specific fields of PyTypeObject (2 years ago) <Marek Marczykowski-Górecki>
+* 7b1e5f7 - python: use Py_TYPE instead of looking directly into PyObject_HEAD (2 years ago) <Marek Marczykowski-Górecki>
+* 96d1ee6 - python: drop tp_getattr implementation (2 years ago) <Marek Marczykowski-Górecki>
+* 6b28df3 - python: check return value of PyErr_NewException (2 years ago) <Marek Marczykowski-Górecki>
+
+Which in particular handle strings differently in the Py2 case.
+
+~Andrew
+
+--------------9D81265E54E2DD9A20EA9328
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 05/03/2019 16:42, Wei Liu wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20190305164206.6793-5-wei.liu2@citrix.com">
+      <pre class="moz-quote-pre" wrap="">With the help of two porting guides and cpython source code:
+
+1. Use PyUnicode to replace PyString counterparts.
+2. Use PyVarObject_HEAD_INIT and provide compatibility for 2.5 and
+   earlier.
+3. Remove usage of Py_FindMethod.
+4. Use new module initialisation routine.
+
+For #3, Py_FindMethod was removed, yet an alternative wasn't
+documented.  The code is the result of reverse-engineering cpython
+commit 6116d4a1d1
+
+<a class="moz-txt-link-freetext" href="https://docs.python.org/3/howto/cporting.html">https://docs.python.org/3/howto/cporting.html</a>
+<a class="moz-txt-link-freetext" href="http://python3porting.com/cextensions.html">http://python3porting.com/cextensions.html</a>
+
+Signed-off-by: Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:wei.liu2@citrix.com">&lt;wei.liu2@citrix.com&gt;</a></pre>
+    </blockquote>
+    <br>
+    Marek already made the tools/python/* libraries compatible with Py2
+    and Py3<br>
+    <br>
+    The following commits are the relevant ones:<br>
+    <br>
+    <pre>* be6b316 - python: handle long type in scripts (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* e16c705 - python: adjust module initalization for Python3 (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* dd986cd - python: use PyLong_* for constructing 'int' type in Python3 (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* 121d9d4 - python: use PyBytes/PyUnicode instead of PyString (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* 0c8981f - python: initialize specific fields of PyTypeObject (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* 7b1e5f7 - python: use Py_TYPE instead of looking directly into PyObject_HEAD (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* 96d1ee6 - python: drop tp_getattr implementation (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+* 6b28df3 - python: check return value of PyErr_NewException (2 years ago) &lt;Marek Marczykowski-Górecki&gt;
+
+</pre>
+    Which in particular handle strings differently in the Py2 case.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------9D81265E54E2DD9A20EA9328--
+
+
+--===============8421380795406602582==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8421380795406602582==--
