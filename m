@@ -1,15 +1,16 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
 Subject: Re: [PATCH RFC-for-4.12] tools/xen-foreign: Update
  python scripts to be Py3 compatible
-Date: Tue, 5 Mar 2019 11:10:17 +0000
-Message-ID: <20190305111017.f64hrwq3y5xmmkpk@zion.uk.xensource.com>
+Date: Tue, 5 Mar 2019 11:21:22 +0000
+Message-ID: <20190305112122.GA17264@perard.uk.xensource.com>
 References: <1551724308-16813-1-git-send-email-andrew.cooper3@citrix.com>
+ <8449711e-ae04-63e2-0ece-d392da484071@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <1551724308-16813-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <8449711e-ae04-63e2-0ece-d392da484071@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,21 +19,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: George Dunlap <george.dunlap@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXIgMDQsIDIwMTkgYXQgMDY6MzE6NDhQTSArMDAwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBUaGUgaXNzdWVzIGFyZToKPiAgKiBkaWN0Lmhhc19rZXkoKSB3YXMgY29tcGxldGVs
-eSByZW1vdmVkIGluIFB5Mwo+ICAqIGRpY3Qua2V5cygpIGlzIGFuIGl0ZXJhYmxlIHJhdGhlciB0
-aGFuIGxpc3QgaW4gUHkzLCBzbyAuc29ydCgpIGRvZXNuJ3Qgd29yay4KPiAgKiBsaXN0LnNvcnQo
-Y21wPSkgd2FzIGRlcHJlY2F0ZWQgaW4gUHkyLjQgYW5kIHJlbW92ZWQgaW4gUHkzLiAgUmVwbGFj
-ZSBpdAo+ICAgIHdpdGggYSBrZXk9IHNvcnQgaW5zdGVhZC4KPiAKPiBUaGlzIGlzIGFsbCBjb21w
-YXRpYmxlIHdpdGggUHkyLjQgYW5kIGxhdGVyLCB3aGljaCBpcyB3aGVuIHRoZSBzb3J0ZWQoKQo+
-IGJ1aWx0aW4gd2FzIGludHJvZHVjZWQuICBUZXN0ZWQgd2l0aCBQeTIuNyBhbmQgUHkzLjQKPiAK
-PiBSZXBvcnRlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBldS5jaXRyaXguY29t
-Pgo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBNYXIgMDQsIDIwMTkgYXQgMDc6MDA6MTFQTSArMDAwMCwgR2VvcmdlIER1bmxhcCB3
+cm90ZToKPiBjaGVja2luZyBmb3IgUHlBcmdfUGFyc2VUdXBsZSBpbiAtbHB5dGhvbi4uLiBubwo+
+IGNvbmZpZ3VyZTogZXJyb3I6IFVuYWJsZSB0byBmaW5kIGEgc3VpdGFibGUgcHl0aG9uIGRldmVs
+b3BtZW50IGxpYnJhcnkKPiBjb25maWd1cmU6IGVycm9yOiAuL2NvbmZpZ3VyZSBmYWlsZWQgZm9y
+IHRvb2xzCj4gCj4gTm90ZSB0aGUgZXJyb3Igd2l0aCB0aGUgVkVSU0lPTiBhYm92ZTsgdGhhdCBy
+ZXN1bHRzIGluIGxvb2tpbmcgZm9yCj4gYC1scHl0aG9uYCByYXRoZXIgdGhhbiBgLWxweXRob24z
+LjdgLCB3aGljaCByZXN1bHRzIGluIHRoZSBmb2xsb3dpbmcKPiBsaW5lIGJlaW5nIGV4ZWN1dGVk
+OgoKLWxweXRob24zLjcgaXMgYWxzbyB3cm9uZy4gVG8gbWFrZSB0aGluZ3MgbW9yZSBjb21wbGlj
+YXRlZCwgdGhlIGxpYiBpcwotbHB5dGhvbjMuN20gKG5vdGljZSB0aGUgZXh0cmEgY2hhcmFjdGVy
+IGFmdGVyIHRoZSB2ZXJzaW9uIG51bWJlcikuCgpUaGUgQUNfQ0hFQ0tfTElCKCkgaW4gbTQvcHl0
+aG9uX2RldmVsLm00OjMzIGlzIGF0dGVtcHRpbmcgdG8gZ3Vlc3Mgd2hhdAp0aGUgcHl0aG9uIGxp
+YiBuYW1lIHdvdWxkIGJlLCBhbmQgZ3Vlc3NlZCBpdCB3cm9uZy4gSW5zdGVhZCwgY29uZmlndXJl
+CnNob3VsZCBqdXN0IHVzZSB0aGUgYWxyZWFkeSB1cGRhdGVkIExERkxBR1MgKG9uY2UgdGhlIHJ1
+bmUgdG8gZmluZApweXRob24ncyB2ZXJzaW9uIGlzIGZpeGVkKS4KCi0tIApBbnRob255IFBFUkFS
+RAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
