@@ -1,36 +1,23 @@
-From: Oleksandr <olekstysh@gmail.com>
-Subject: Re: XEN on R-CAR H3
-Date: Tue, 5 Mar 2019 21:40:12 +0200
-Message-ID: <0f34ecdc-5ae2-2fcb-90bd-65458b97f681@gmail.com>
-References: <CABHD4K9_hG0deTR4idTz167SN3Ak1EPXr7ck9=dhbwsoGoQhBw@mail.gmail.com>
- <CABHD4K91iqMYU-Hm0LaF_uiOt_wPAyk5svd3j34qMHLFt3rwtQ@mail.gmail.com>
- <172f815e-65d1-1f02-5653-0308c5c1604e@gmail.com>
- <CABHD4K_vMN+QRJgxkJjRuZ+_NSGTyXnJC=qvAw5cKGn_nsvV2A@mail.gmail.com>
- <06da3bda-93ba-82a8-d155-02224a79bb8a@arm.com>
- <CAPD2p-=U3Hfi9g-PhcU6ztAWwAhTES2aoMAJjJ0nY6quj_9m0Q@mail.gmail.com>
- <CABHD4K8f9WPxiLZpAtxyw_kx48=1nNSGrxMq1a5Kgp7VpKWoxQ@mail.gmail.com>
- <edd00c92-af3a-93de-a199-6dfe75e5fa75@gmail.com>
- <49e28f22-e1b6-a8af-fe73-94d926b8de4a@gmail.com>
- <CABHD4K8Qi=1OoZGDt2KPzSObRqSNTP_mY3+wOna+fN_487nXxg@mail.gmail.com>
- <CABHD4K9GHmNpHSQH0uR7Rtf6gJzN-xW_MeARQzY9z89pcXY5ZQ@mail.gmail.com>
- <78c899ed-2b6a-1057-dde0-05f92c3fb81a@gmail.com>
- <a8330e71-fb9c-6415-f9f7-070855d69fdf@gmail.com>
- <CABHD4K-hHvAHZEf=zExBL=pYb2Td_1ceSaC8-5rA0qsVsz7UtQ@mail.gmail.com>
- <198494f5-4d48-b328-2ec5-942c8827a373@gmail.com>
- <CABHD4K8OXfC=K7hOXPLHRk7BTu_ZhhOLFhw1r_sqDX6RGruU_Q@mail.gmail.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH for-next RFC 4/4] pygrub: make it build with
+ python 3
+Date: Tue, 5 Mar 2019 19:17:07 +0100
+Message-ID: <20190305181707.GA19265@mail-itl>
+References: <20190305164206.6793-1-wei.liu2@citrix.com>
+ <20190305164206.6793-5-wei.liu2@citrix.com>
+ <8f0a909e-3cdc-6867-e295-99734e91237c@citrix.com>
+ <20190305174810.o2bfijujqrc3ejpk@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4790160907681931878=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=JmKh=RI=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1h1FvG-00067d-86
- for xen-devel@lists.xenproject.org; Tue, 05 Mar 2019 19:40:18 +0000
-Received: by mail-lj1-x242.google.com with SMTP id q128so8640254ljb.11
- for <xen-devel@lists.xenproject.org>; Tue, 05 Mar 2019 11:40:15 -0800 (PST)
-In-Reply-To: <CABHD4K8OXfC=K7hOXPLHRk7BTu_ZhhOLFhw1r_sqDX6RGruU_Q@mail.gmail.com>
-Content-Language: en-US
+ <SRS0=9feg=RI=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1h1FyB-0006DV-NY
+ for xen-devel@lists.xenproject.org; Tue, 05 Mar 2019 19:43:19 +0000
+In-Reply-To: <20190305174810.o2bfijujqrc3ejpk@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,213 +26,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Amit Tomer <amittomer25@gmail.com>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, andrii_chepurnyi@epam.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Ck9uIDA1LjAzLjE5IDIwOjEwLCBBbWl0IFRvbWVyIHdyb3RlOgo+IEhpLAo+PiBIYXZlIHlvdSB0
-cmllZCB0byBlbmFibGUgZWFybHlfcHJpbms/Cj4gWWVzLCB0aGlzIGlzIGhvdyB3ZSBjb21waWxl
-ZCBpdC4KPgo+IG1ha2UgZGlzdC14ZW4gWEVOX1RBUkdFVF9BUkNIPWFybTY0IGRlYnVnPXkKPiBD
-Uk9TU19DT01QSUxFPWFhcmNoNjQtbGludXgtZ251LQo+IENPTkZJR19FQVJMWV9QUklOVEtfc2Fs
-dmF0b3I9c2NpZiwweGU2ZTg4MDAwIC1qMTYKCk5vLCAiQ09ORklHX0VBUkxZX1BSSU5US19zYWx2
-YXRvcj1zY2lmLDB4ZTZlODgwMDAiIGlzIGluY29ycmVjdCwKCml0IHNob3VsZCBiZSAiQ09ORklH
-X0VBUkxZX1BSSU5USz1zY2lmLDB4ZTZlODgwMDAiLiBQcm9iYWJseSwgdGhpcyBpcyAKd2h5IHlv
-dSBkaWRuJ3Qgc2VlIGFueXRoaW5nIGluIGNvbnNvbGUuCgoKSSBoYXZlIGp1c3QgdHJpZWQgdG8g
-YnVpbGQgKHdpdGggZWFybHlfcHJpbnRrIHN1cHBvcnQpIGFuZCBydW4gdGhhdCBvbGQgClhlbiBi
-cmFuY2ggdG8gc2VlIGl0IGJvb3RpbmcuCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCgpTdGFydGluZyBrZXJuZWwgLi4uCgotIFVBUlQgZW5hYmxlZCAt
-Ci0gQ1BVIDAwMDAwMDAwIGJvb3RpbmcgLQotIEN1cnJlbnQgRUwgMDAwMDAwMDggLQotIFhlbiBz
-dGFydGluZyBhdCBFTDIgLQotIFplcm8gQlNTIC0KLSBTZXR0aW5nIHVwIGNvbnRyb2wgcmVnaXN0
-ZXJzIC0KLSBUdXJuaW5nIG9uIHBhZ2luZyAtCi0gUmVhZHkgLQooWEVOKSBDaGVja2luZyBmb3Ig
-aW5pdHJkIGluIC9jaG9zZW4KKFhFTikgSW5pdHJkIDAwMDAwMDAwNzYwMDAwNDAtMDAwMDAwMDA3
-N2EyMzBmNwooWEVOKSBSQU06IDAwMDAwMDAwNDgwMDAwMDAgLSAwMDAwMDAwMGJmZmZmZmZmCihY
-RU4pIFJBTTogMDAwMDAwMDUwMDAwMDAwMCAtIDAwMDAwMDA1N2ZmZmZmZmYKKFhFTikgUkFNOiAw
-MDAwMDAwNjAwMDAwMDAwIC0gMDAwMDAwMDY3ZmZmZmZmZgooWEVOKSBSQU06IDAwMDAwMDA3MDAw
-MDAwMDAgLSAwMDAwMDAwNzdmZmZmZmZmCihYRU4pCihYRU4pIE1PRFVMRVswXTogMDAwMDAwMDA0
-ODAwMDAwMCAtIDAwMDAwMDAwNDgwMTQwODAgRGV2aWNlIFRyZWUKKFhFTikgTU9EVUxFWzFdOiAw
-MDAwMDAwMDc2MDAwMDQwIC0gMDAwMDAwMDA3N2EyMzBmNyBSYW1kaXNrCihYRU4pIE1PRFVMRVsy
-XTogMDAwMDAwMDA3YTAwMDAwMCAtIDAwMDAwMDAwN2MwMDAwMDAgS2VybmVsCihYRU4pIE1PRFVM
-RVszXTogMDAwMDAwMDA3YzAwMDAwMCAtIDAwMDAwMDAwN2MwMTAwMDAgWFNNCihYRU4pwqAgUkVT
-VkRbMF06IDAwMDAwMDAwNDgwMDAwMDAgLSAwMDAwMDAwMDQ4MDE0MDAwCihYRU4pwqAgUkVTVkRb
-MV06IDAwMDAwMDAwNzYwMDAwNDAgLSAwMDAwMDAwMDc3YTIzMGY3CihYRU4pCihYRU4pIENvbW1h
-bmQgbGluZTogZG9tMF9tZW09MjU2TSBjb25zb2xlPWR0dWFydCBkdHVhcnQ9c2VyaWFsMCAKZG9t
-MF9tYXhfdmNwdXM9NCBib290c2NydWI9MCBsb2dsdmw9YWxsCihYRU4pIFBsYWNpbmcgWGVuIGF0
-IDB4MDAwMDAwMDc3ZmUwMDAwMC0weDAwMDAwMDA3ODAwMDAwMDAKKFhFTikgVXBkYXRlIEJPT1RN
-T0RfWEVOIGZyb20gMDAwMDAwMDA3ODA4MDAwMC0wMDAwMDAwMDc4MWIyZDgxID0+IAowMDAwMDAw
-NzdmZTAwMDAwLTAwMDAwMDA3N2ZmMzJkODEKKFhFTikgRG9tYWluIGhlYXAgaW5pdGlhbGlzZWQK
-KFhFTikgQm9vdGluZyB1c2luZyBEZXZpY2UgVHJlZQooWEVOKSBQbGF0Zm9ybTogR2VuZXJpYyBT
-eXN0ZW0KKFhFTikgTG9va2luZyBmb3IgZHR1YXJ0IGF0ICJzZXJpYWwwIiwgb3B0aW9ucyAiIgoo
-WEVOKSBVbmFibGUgdG8gaW5pdGlhbGl6ZSBkdHVhcnQ6IC05CihYRU4pIEJhZCBjb25zb2xlPSBv
-cHRpb24gJ2R0dWFydCcKIMKgKlhlbiA0LjkuMS1wcmUqCihYRU4pIFhlbiB2ZXJzaW9uIDQuOS4x
-LXByZSAob3R5c2hjaGVua29AKSAoYWFyY2g2NC1wb2t5LWxpbnV4LWdjYyAoR0NDKSAKNy4zLjAp
-IGRlYnVnPXnCoCBUdWUgTWFywqAgNSAyMDo1Nzo1NSBFRVQgMjAxOQooWEVOKSBMYXRlc3QgQ2hh
-bmdlU2V0OiBNb24gTWF5IDggMTM6NDU6MjEgMjAxNyArMDMwMCBnaXQ6YTQzODMxNy1kaXJ0eQoo
-WEVOKSBQcm9jZXNzb3I6IDQxMWZkMDczOiAiQVJNIExpbWl0ZWQiLCB2YXJpYW50OiAweDEsIHBh
-cnQgMHhkMDcsIHJldiAweDMKKFhFTikgNjQtYml0IEV4ZWN1dGlvbjoKKFhFTinCoMKgIFByb2Nl
-c3NvciBGZWF0dXJlczogMDAwMDAwMDAwMDAwMjIyMiAwMDAwMDAwMDAwMDAwMDAwCihYRU4pwqDC
-oMKgwqAgRXhjZXB0aW9uIExldmVsczogRUwzOjY0KzMyIEVMMjo2NCszMiBFTDE6NjQrMzIgRUww
-OjY0KzMyCihYRU4pwqDCoMKgwqAgRXh0ZW5zaW9uczogRmxvYXRpbmdQb2ludCBBZHZhbmNlZFNJ
-TUQKKFhFTinCoMKgIERlYnVnIEZlYXR1cmVzOiAwMDAwMDAwMDEwMzA1MTA2IDAwMDAwMDAwMDAw
-MDAwMDAKKFhFTinCoMKgIEF1eGlsaWFyeSBGZWF0dXJlczogMDAwMDAwMDAwMDAwMDAwMCAwMDAw
-MDAwMDAwMDAwMDAwCihYRU4pwqDCoCBNZW1vcnkgTW9kZWwgRmVhdHVyZXM6IDAwMDAwMDAwMDAw
-MDExMjQgMDAwMDAwMDAwMDAwMDAwMAooWEVOKcKgwqAgSVNBIEZlYXR1cmVzOsKgIDAwMDAwMDAw
-MDAwMTExMjAgMDAwMDAwMDAwMDAwMDAwMAooWEVOKSAzMi1iaXQgRXhlY3V0aW9uOgooWEVOKcKg
-wqAgUHJvY2Vzc29yIEZlYXR1cmVzOiAwMDAwMDEzMTowMDAxMTAxMQooWEVOKcKgwqDCoMKgIElu
-c3RydWN0aW9uIFNldHM6IEFBcmNoMzIgQTMyIFRodW1iIFRodW1iLTIgSmF6ZWxsZQooWEVOKcKg
-wqDCoMKgIEV4dGVuc2lvbnM6IEdlbmVyaWNUaW1lciBTZWN1cml0eQooWEVOKcKgwqAgRGVidWcg
-RmVhdHVyZXM6IDAzMDEwMDY2CihYRU4pwqDCoCBBdXhpbGlhcnkgRmVhdHVyZXM6IDAwMDAwMDAw
-CihYRU4pwqDCoCBNZW1vcnkgTW9kZWwgRmVhdHVyZXM6IDEwMjAxMTA1IDQwMDAwMDAwIDAxMjYw
-MDAwIDAyMTAyMjExCihYRU4pwqAgSVNBIEZlYXR1cmVzOiAwMjEwMTExMCAxMzExMjExMSAyMTIz
-MjA0MiAwMTExMjEzMSAwMDAxMTE0MiAwMDAxMTEyMQooWEVOKSBVc2luZyBQU0NJLTEuMCBmb3Ig
-U01QIGJyaW5ndXAKKFhFTikgU01QOiBBbGxvd2luZyA4IENQVXMKKFhFTikgR2VuZXJpYyBUaW1l
-ciBJUlE6IHBoeXM9MzAgaHlwPTI2IHZpcnQ9MjcgRnJlcTogODMzMyBLSHoKKFhFTikgR0lDdjIg
-aW5pdGlhbGl6YXRpb246CihYRU4pwqDCoMKgwqDCoMKgwqDCoCBnaWNfZGlzdF9hZGRyPTAwMDAw
-MDAwZjEwMTAwMDAKKFhFTinCoMKgwqDCoMKgwqDCoMKgIGdpY19jcHVfYWRkcj0wMDAwMDAwMGYx
-MDIwMDAwCihYRU4pwqDCoMKgwqDCoMKgwqDCoCBnaWNfaHlwX2FkZHI9MDAwMDAwMDBmMTA0MDAw
-MAooWEVOKcKgwqDCoMKgwqDCoMKgwqAgZ2ljX3ZjcHVfYWRkcj0wMDAwMDAwMGYxMDYwMDAwCihY
-RU4pwqDCoMKgwqDCoMKgwqDCoCBnaWNfbWFpbnRlbmFuY2VfaXJxPTI1CihYRU4pIEdJQ3YyOiBB
-ZGp1c3RpbmcgQ1BVIGludGVyZmFjZSBiYXNlIHRvIDB4ZjEwMmYwMDAKKFhFTikgR0lDdjI6IDUx
-MiBsaW5lcywgOCBjcHVzLCBzZWN1cmUgKElJRCAwMjAwMDQzYikuCihYRU4pIFhTTSBGcmFtZXdv
-cmsgdjEuMC4wIGluaXRpYWxpemVkCihYRU4pIHhzbTogUG9saWN5IGxlbiA9IDB4MDAwMDAwMDAw
-MDAxMDAwMCBzdGFydCBhdCAweDAwMDAwMDAwN2MwMDAwMDAKKFhFTikgRmxhc2s6IDEyOCBhdnRh
-YiBoYXNoIHNsb3RzLCAyODAgcnVsZXMuCihYRU4pIEZsYXNrOiAxMjggYXZ0YWIgaGFzaCBzbG90
-cywgMjgwIHJ1bGVzLgooWEVOKSBGbGFzazrCoCA0IHVzZXJzLCAzIHJvbGVzLCAzOCB0eXBlcywg
-MiBib29scwooWEVOKSBGbGFzazrCoCAxMiBjbGFzc2VzLCAyODAgcnVsZXMKKFhFTikgRmxhc2s6
-wqAgU3RhcnRpbmcgaW4gZW5mb3JjaW5nIG1vZGUuCihYRU4pIFVzaW5nIHNjaGVkdWxlcjogU01Q
-IENyZWRpdCBTY2hlZHVsZXIgKGNyZWRpdCkKKFhFTikgQWxsb2NhdGVkIGNvbnNvbGUgcmluZyBv
-ZiA2NCBLaUIuCihYRU4pIEJyaW5naW5nIHVwIENQVTEKLSBDUFUgMDAwMDAwMDEgYm9vdGluZyAt
-Ci0gQ3VycmVudCBFTCAwMDAwMDAwOCAtCi0gWGVuIHN0YXJ0aW5nIGF0IEVMMiAtCi0gU2V0dGlu
-ZyB1cCBjb250cm9sIHJlZ2lzdGVycyAtCi0gVHVybmluZyBvbiBwYWdpbmcgLQotIFJlYWR5IC0K
-KFhFTikgQ1BVIDEgYm9vdGVkLgooWEVOKSBCcmluZ2luZyB1cCBDUFUyCi0gQ1BVIDAwMDAwMDAy
-IGJvb3RpbmcgLQotIEN1cnJlbnQgRUwgMDAwMDAwMDggLQotIFhlbiBzdGFydGluZyBhdCBFTDIg
-LQotIFNldHRpbmcgdXAgY29udHJvbCByZWdpc3RlcnMgLQotIFR1cm5pbmcgb24gcGFnaW5nIC0K
-LSBSZWFkeSAtCihYRU4pIENQVSAyIGJvb3RlZC4KKFhFTikgQnJpbmdpbmcgdXAgQ1BVMwotIENQ
-VSAwMDAwMDAwMyBib290aW5nIC0KLSBDdXJyZW50IEVMIDAwMDAwMDA4IC0KLSBYZW4gc3RhcnRp
-bmcgYXQgRUwyIC0KLSBTZXR0aW5nIHVwIGNvbnRyb2wgcmVnaXN0ZXJzIC0KLSBUdXJuaW5nIG9u
-IHBhZ2luZyAtCi0gUmVhZHkgLQooWEVOKSBDUFUgMyBib290ZWQuCihYRU4pIEJyaW5naW5nIHVw
-IENQVTQKLSBDUFUgMDAwMDAxMDAgYm9vdGluZyAtCi0gQ3VycmVudCBFTCAwMDAwMDAwOCAtCi0g
-WGVuIHN0YXJ0aW5nIGF0IEVMMiAtCi0gU2V0dGluZyB1cCBjb250cm9sIHJlZ2lzdGVycyAtCi0g
-VHVybmluZyBvbiBwYWdpbmcgLQotIFJlYWR5IC0KKFhFTikgQ1BVIDQgYm9vdGVkLgooWEVOKSBC
-cmluZ2luZyB1cCBDUFU1Ci0gQ1BVIDAwMDAwMTAxIGJvb3RpbmcgLQotIEN1cnJlbnQgRUwgMDAw
-MDAwMDggLQotIFhlbiBzdGFydGluZyBhdCBFTDIgLQotIFNldHRpbmcgdXAgY29udHJvbCByZWdp
-c3RlcnMgLQotIFR1cm5pbmcgb24gcGFnaW5nIC0KLSBSZWFkeSAtCihYRU4pIENQVSA1IGJvb3Rl
-ZC4KKFhFTikgQnJpbmdpbmcgdXAgQ1BVNgotIENQVSAwMDAwMDEwMiBib290aW5nIC0KLSBDdXJy
-ZW50IEVMIDAwMDAwMDA4IC0KLSBYZW4gc3RhcnRpbmcgYXQgRUwyIC0KLSBTZXR0aW5nIHVwIGNv
-bnRyb2wgcmVnaXN0ZXJzIC0KLSBUdXJuaW5nIG9uIHBhZ2luZyAtCi0gUmVhZHkgLQooWEVOKSBD
-UFUgNiBib290ZWQuCihYRU4pIEJyaW5naW5nIHVwIENQVTcKLSBDUFUgMDAwMDAxMDMgYm9vdGlu
-ZyAtCi0gQ3VycmVudCBFTCAwMDAwMDAwOCAtCi0gWGVuIHN0YXJ0aW5nIGF0IEVMMiAtCi0gU2V0
-dGluZyB1cCBjb250cm9sIHJlZ2lzdGVycyAtCi0gVHVybmluZyBvbiBwYWdpbmcgLQotIFJlYWR5
-IC0KKFhFTikgQ1BVIDcgYm9vdGVkLgooWEVOKSBCcm91Z2h0IHVwIDggQ1BVcwooWEVOKSBQMk06
-IDQwLWJpdCBJUEEgd2l0aCA0MC1iaXQgUEEgYW5kIDgtYml0IFZNSUQKKFhFTikgUDJNOiAzIGxl
-dmVscyB3aXRoIG9yZGVyLTEgcm9vdCwgVlRDUiAweDgwMDIzNTU4CihYRU4pIGlwbW11OiAvc29j
-L21tdUBlNjdiMDAwMDogcmVnaXN0ZXJlZCByb290IElQTU1VCihYRU4pIGlwbW11OiAvc29jL21t
-dUBlNjdiMDAwMDogZGlzYWJsZSBzaGFyaW5nIFAyTSB0YWJsZSBiZXR3ZWVuIHRoZSAKQ1BVIGFu
-ZCBJUE1NVQooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmViZDAwMDA6IHJlZ2lzdGVyZWQgY2FjaGUg
-SVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlYmQwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNl
-IC9zb2MvdmlkZW9AZTZlZjAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlYmQwMDAwOiBmb3Vu
-ZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdmlkZW9AZTZlZjEwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11
-QGZlYmQwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdmlkZW9AZTZlZjIwMDAKKFhFTikg
-aXBtbXU6IC9zb2MvbW11QGZlYmQwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdmlkZW9A
-ZTZlZjMwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlYmQwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2
-aWNlIC9zb2MvZmNwQGZlYTI3MDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBmZWJkMDAwMDogZm91
-bmQgbWFzdGVyIGRldmljZSAvc29jL2ZjcEBmZWEyZjAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVA
-ZmViZTAwMDA6IHJlZ2lzdGVyZWQgY2FjaGUgSVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZl
-YmUwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdmlkZW9AZTZlZjQwMDAKKFhFTikgaXBt
-bXU6IC9zb2MvbW11QGZlYmUwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdmlkZW9AZTZl
-ZjUwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlYmUwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNl
-IC9zb2MvdmlkZW9AZTZlZjYwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlYmUwMDAwOiBmb3Vu
-ZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdmlkZW9AZTZlZjcwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11
-QGZlYmUwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvZmNwQGZlYTM3MDAwCihYRU4pIGlw
-bW11OiAvc29jL21tdUBmZWJlMDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL2hkbWlAZmVh
-ZDAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlYmUwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNl
-IC9zb2MvaGRtaUBmZWFlMDAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmU5OTAwMDA6IHJlZ2lz
-dGVyZWQgY2FjaGUgSVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlOTkwMDAwOiBmb3VuZCBt
-YXN0ZXIgZGV2aWNlIC9zb2MvdnNwbUBmZTk2MDAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmU5
-OTAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgL3NvYy92c3BtQGZlOWEwMDAwCihYRU4pIGlwbW11
-OiAvc29jL21tdUBmZTk5MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL2ZkcG1AZmU5NDAw
-MDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlOTgwMDAwOiByZWdpc3RlcmVkIGNhY2hlIElQTU1V
-CihYRU4pIGlwbW11OiAvc29jL21tdUBmZTk4MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29j
-L3ZzcG1AZmU5MjAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlOTgwMDAwOiBmb3VuZCBtYXN0
-ZXIgZGV2aWNlIC9zb2MvdnNwbUBmZTliMDAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmU5ODAw
-MDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgL3NvYy9mZHBtQGZlOTQ0MDAwCihYRU4pIGlwbW11OiAv
-c29jL21tdUBmZTZiMDAwMDogcmVnaXN0ZXJlZCBjYWNoZSBJUE1NVQooWEVOKSBpcG1tdTogL3Nv
-Yy9tbXVAZmU2YjAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgL3NvYy9pbXItbHg0QGZlODgwMDAw
-CihYRU4pIGlwbW11OiAvc29jL21tdUBmZTZiMDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29j
-L2ltci1seDRAZmU4OTAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlNmIwMDAwOiBmb3VuZCBt
-YXN0ZXIgZGV2aWNlIC9zb2MvdmNwNEBmZTkwZjAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmU2
-ZjAwMDA6IHJlZ2lzdGVyZWQgY2FjaGUgSVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZlNmYw
-MDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvaW1yLWx4NEBmZTg2MDAwMAooWEVOKSBpcG1t
-dTogL3NvYy9tbXVAZmU2ZjAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgL3NvYy9pbXItbHg0QGZl
-ODcwMDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBmZDgwMDAwMDogcmVnaXN0ZXJlZCBjYWNoZSBJ
-UE1NVQooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmQ4MDAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2Ug
-L3NvYy9nc3hfZG9tZAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmQ4MDAwMDA6IGZvdW5kIG1hc3Rl
-ciBkZXZpY2UgL3NvYy9nc3hfZG9tdQooWEVOKSBpcG1tdTogL3NvYy9tbXVAZmQ5NTAwMDA6IHJl
-Z2lzdGVyZWQgY2FjaGUgSVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGZkOTYwMDAwOiByZWdp
-c3RlcmVkIGNhY2hlIElQTU1VCihYRU4pIGlwbW11OiAvc29jL21tdUBmZDk3MDAwMDogcmVnaXN0
-ZXJlZCBjYWNoZSBJUE1NVQooWEVOKSBpcG1tdTogL3NvYy9tbXVAZTY1NzAwMDA6IHJlZ2lzdGVy
-ZWQgY2FjaGUgSVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGU2NTcwMDAwOiBmb3VuZCBtYXN0
-ZXIgZGV2aWNlIC9zb2MvdXNiQGVlMDAwMDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBlNjU3MDAw
-MDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL3VzYkBlZTAyMDAwMAooWEVOKSBpcG1tdTogL3Nv
-Yy9tbXVAZTY1NzAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgCi9zb2MvZG1hLWNvbnRyb2xsZXJA
-ZTY1YTAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGU2NTcwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2
-aWNlIAovc29jL2RtYS1jb250cm9sbGVyQGU2NWIwMDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBl
-NjU3MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAKL3NvYy9kbWEtY29udHJvbGxlckBlNjQ2MDAw
-MAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZTY1NzAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgCi9z
-b2MvZG1hLWNvbnRyb2xsZXJAZTY0NzAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGU2NTcwMDAw
-OiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdXNiQGVlMDgwMTAwCihYRU4pIGlwbW11OiAvc29j
-L21tdUBlNjU3MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL3VzYkBlZTBhMDEwMAooWEVO
-KSBpcG1tdTogL3NvYy9tbXVAZTY1NzAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgL3NvYy91c2JA
-ZWUwYzAxMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGU2NTcwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2
-aWNlIC9zb2MvdXNiQGVlMGUwMTAwCihYRU4pIGlwbW11OiAvc29jL21tdUBlNjU3MDAwMDogZm91
-bmQgbWFzdGVyIGRldmljZSAvc29jL3VzYkBlZTA4MDAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVA
-ZTY1NzAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgL3NvYy91c2JAZWUwYTAwMDAKKFhFTikgaXBt
-bXU6IC9zb2MvbW11QGU2NTcwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNlIC9zb2MvdXNiQGVlMGMw
-MDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBlNjU3MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAv
-c29jL3VzYkBlZTBlMDAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZWM2NzAwMDA6IHJlZ2lzdGVy
-ZWQgY2FjaGUgSVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGVjNjcwMDAwOiBmb3VuZCBtYXN0
-ZXIgZGV2aWNlIAovc29jL2RtYS1jb250cm9sbGVyQGVjNzAwMDAwCihYRU4pIGlwbW11OiAvc29j
-L21tdUBlYzY3MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAKL3NvYy9kbWEtY29udHJvbGxlckBl
-YzcyMDAwMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZTY3NDAwMDA6IHJlZ2lzdGVyZWQgY2FjaGUg
-SVBNTVUKKFhFTikgaXBtbXU6IC9zb2MvbW11QGU2NzQwMDAwOiBmb3VuZCBtYXN0ZXIgZGV2aWNl
-IAovc29jL2RtYS1jb250cm9sbGVyQGU2NzAwMDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBlNjc0
-MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL2V0aGVybmV0QGU2ODAwMDAwCihYRU4pIGlw
-bW11OiAvc29jL21tdUBlNzc0MDAwMDogcmVnaXN0ZXJlZCBjYWNoZSBJUE1NVQooWEVOKSBpcG1t
-dTogL3NvYy9tbXVAZTc3NDAwMDA6IGZvdW5kIG1hc3RlciBkZXZpY2UgCi9zb2MvZG1hLWNvbnRy
-b2xsZXJAZTczMDAwMDAKKFhFTikgaXBtbXU6IC9zb2MvbW11QGU3NzQwMDAwOiBmb3VuZCBtYXN0
-ZXIgZGV2aWNlIAovc29jL2RtYS1jb250cm9sbGVyQGU3MzEwMDAwCihYRU4pIGlwbW11OiAvc29j
-L21tdUBlNzc0MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL3NkQGVlMTAwMDAwCihYRU4p
-IGlwbW11OiAvc29jL21tdUBlNzc0MDAwMDogZm91bmQgbWFzdGVyIGRldmljZSAvc29jL3NkQGVl
-MTQwMDAwCihYRU4pIGlwbW11OiAvc29jL21tdUBlNzc0MDAwMDogZm91bmQgbWFzdGVyIGRldmlj
-ZSAvc29jL3NkQGVlMTYwMDAwCihYRU4pIEkvTyB2aXJ0dWFsaXNhdGlvbiBlbmFibGVkCihYRU4p
-wqAgLSBEb20wIG1vZGU6IFJlbGF4ZWQKKFhFTikgSW50ZXJydXB0IHJlbWFwcGluZyBlbmFibGVk
-CihYRU4pIGJ1aWxkLWlkOiBmN2JkMDliZjhjOWQ2MGVjOWJmNmM1ZTEzOGU0ZmEzNzRiNGU4NDE5
-CihYRU4pIGFsdGVybmF0aXZlczogUGF0Y2hpbmcgd2l0aCBhbHQgdGFibGUgMDAwMDAwMDA0MDEx
-MTU0MCAtPiAKMDAwMDAwMDA0MDExMTkzMAooWEVOKSBpcG1tdTogL3NvYy9tbXVAZTY3YjAwMDA6
-IGQwOiBTZXQgSVBNTVUgY29udGV4dCAwIChwZ2QgMHg3N2ZkZGYwMDApCihYRU4pICoqKiBMT0FE
-SU5HIERPTUFJTiAwICoqKgooWEVOKSBMb2FkaW5nIGtlcm5lbCBmcm9tIGJvb3QgbW9kdWxlIEAg
-MDAwMDAwMDA3YTAwMDAwMAooWEVOKSBMb2FkaW5nIHJhbWRpc2sgZnJvbSBib290IG1vZHVsZSBA
-IDAwMDAwMDAwNzYwMDAwNDAKKFhFTikgQWxsb2NhdGluZyAxOjEgbWFwcGluZ3MgdG90YWxsaW5n
-IDI1Nk1CIGZvciBkb20wOgooWEVOKSBCQU5LWzBdIDB4MDAwMDAwNTAwMDAwMDAtMHgwMDAwMDA2
-MDAwMDAwMCAoMjU2TUIpCihYRU4pIEdyYW50IHRhYmxlIHJhbmdlOiAweDAwMDAwNzdmZTAwMDAw
-LTB4MDAwMDA3N2ZlN2EwMDAKKFhFTikgTG9hZGluZyB6SW1hZ2UgZnJvbSAwMDAwMDAwMDdhMDAw
-MDAwIHRvIAowMDAwMDAwMDUwMDgwMDAwLTAwMDAwMDAwNTIwODAwMDAKKFhFTikgTG9hZGluZyBk
-b20wIGluaXRyZCBmcm9tIDAwMDAwMDAwNzYwMDAwNDAgdG8gCjB4MDAwMDAwMDA1ODIwMDAwMC0w
-eDAwMDAwMDAwNTljMjMwYjcKKFhFTikgQWxsb2NhdGluZyBQUEkgMTYgZm9yIGV2ZW50IGNoYW5u
-ZWwgaW50ZXJydXB0CihYRU4pIExvYWRpbmcgZG9tMCBEVEIgdG8gMHgwMDAwMDAwMDU4MDAwMDAw
-LTB4MDAwMDAwMDA1ODAxMTQzZAooWEVOKSBTdGQuIExvZ2xldmVsOiBBbGwKKFhFTikgR3Vlc3Qg
-TG9nbGV2ZWw6IEFsbAooWEVOKSAqKiogU2VyaWFsIGlucHV0IC0+IERPTTAgKHR5cGUgJ0NUUkwt
-YScgdGhyZWUgdGltZXMgdG8gc3dpdGNoIAppbnB1dCB0byBYZW4pCihYRU4pIEZyZWVkIDI5MmtC
-IGluaXQgbWVtb3J5LgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLQoKCkFzIGZvciBidWlsZCB3aXRob3V0IGVhcmx5X3ByaW50ayBzdXBwb3J0Li4uCgpJ
-IHNob3VsZCBoYXZlIG1lbnRpb25lZCBhYm91dCBlbmFibGluZyBDT05GSUdfSEFTX1NDSUYgb3B0
-aW9uIGluIGEgY292ZXIgCmxldHRlciAoaW4gb3JkZXIgdG8gaGF2ZSBmdWxsIFVBUlQgc3VwcG9y
-dCkuIFNvcnJ5IGZvciB0aGF0LgoKClJlY2VudCBYZW4gYWxyZWFkeSBlbmFibGVzIGl0IGJ5IGRl
-ZmF1bHQgWzFdCgpbMV0gaHR0cHM6Ly9wYXRjaHdvcmsua2VybmVsLm9yZy9wYXRjaC85ODQ4OTEz
-LwoKCj4KPj4gQUZBSVIsIEkgdGVzdGVkIHRoYXQgYnJhbmNoIChpcG1tdV92MikgYmVmb3JlIHN1
-Ym1pdHRpbmcgUkZDIHBhdGNoCj4+IHNlcmllcyBbMV0gYW5kIGl0IHdhcyBmdW5jdGlvbmFsLgo+
-Pgo+PiBCdXQsIEkgZG9uJ3QgcXVpdGUgcmVtZW1iZXIgd2hhdCB0aGUgQlNQIHZlcnNpb24gKFUt
-Qm9vdC9BUk0tVEYpIEkgaGFkCj4+IGJhc2VkIG9uLgo+IE9rLgo+Cj4gVGhhbmtzCj4gLUFtaXQK
-Ci0tIApSZWdhcmRzLAoKT2xla3NhbmRyIFR5c2hjaGVua28KCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============4790160907681931878==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="iv66pGDkNHRbjGM5"
+Content-Disposition: inline
+
+
+--iv66pGDkNHRbjGM5
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH for-next RFC 4/4] pygrub: make it build with python 3
+
+On Tue, Mar 05, 2019 at 05:48:10PM +0000, Wei Liu wrote:
+> On Tue, Mar 05, 2019 at 05:42:07PM +0000, Andrew Cooper wrote:
+> > On 05/03/2019 16:42, Wei Liu wrote:
+> > > With the help of two porting guides and cpython source code:
+> > >
+> > > 1. Use PyUnicode to replace PyString counterparts.
+> > > 2. Use PyVarObject_HEAD_INIT and provide compatibility for 2.5 and
+> > >    earlier.
+> > > 3. Remove usage of Py_FindMethod.
+> > > 4. Use new module initialisation routine.
+> > >
+> > > For #3, Py_FindMethod was removed, yet an alternative wasn't
+> > > documented.  The code is the result of reverse-engineering cpython
+> > > commit 6116d4a1d1
+> > >
+> > > https://docs.python.org/3/howto/cporting.html
+> > > http://python3porting.com/cextensions.html
+> > >
+> > > Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+> >=20
+> > Marek already made the tools/python/* libraries compatible with Py2 and=
+ Py3
+> >=20
+> > The following commits are the relevant ones:
+> >=20
+> > * be6b316 - python: handle long type in scripts (2 years ago) <Marek Ma=
+rczykowski-G=C3=B3recki>
+> > * e16c705 - python: adjust module initalization for Python3 (2 years ag=
+o) <Marek Marczykowski-G=C3=B3recki>
+> > * dd986cd - python: use PyLong_* for constructing 'int' type in Python3=
+ (2 years ago) <Marek Marczykowski-G=C3=B3recki>
+> > * 121d9d4 - python: use PyBytes/PyUnicode instead of PyString (2 years =
+ago) <Marek Marczykowski-G=C3=B3recki>
+> > * 0c8981f - python: initialize specific fields of PyTypeObject (2 years=
+ ago) <Marek Marczykowski-G=C3=B3recki>
+> > * 7b1e5f7 - python: use Py_TYPE instead of looking directly into PyObje=
+ct_HEAD (2 years ago) <Marek Marczykowski-G=C3=B3recki>
+> > * 96d1ee6 - python: drop tp_getattr implementation (2 years ago) <Marek=
+ Marczykowski-G=C3=B3recki>
+> > * 6b28df3 - python: check return value of PyErr_NewException (2 years a=
+go) <Marek Marczykowski-G=C3=B3recki>
+>=20
+> I knew.
+>=20
+> >=20
+> > Which in particular handle strings differently in the Py2 case.
+>=20
+>=20
+> I am not sure his changes for the string APIs are correct -- they seem
+> to deviate from the official porting guide. But hey, I don't use these
+> bindings myself, so he probably knows better.
+
+That was intentional, because in py2 str type is the same as bytes
+types, and in fact some of those str should really be bytes. It's in the
+commit message:
+
+    python: use PyBytes/PyUnicode instead of PyString
+   =20
+    In Python2 PyBytes is the same as PyString, but in Python3 PyString is
+    gone and 'str' is really PyUnicode in C-API.
+    When handling arbitrary data, use PyBytes - which is the right thing to
+    do in Python3, and pose no API change in Python2. When handling
+    xenstore paths and transaction ids, which have well defined format, use
+    PyUnicode - to ease API usage - no need to prefix all xenstore paths
+    with 'b' when migrating scripts to Python3.
+
+I'm not sure if the same reasoning applies to pygrub, but I guess it
+may. For example fsimage_file_read sounds like handling binary data, not
+really UTF-8 strings. Using PyUnicode for arbitrary binary data may lead
+to various UnicodeDecodeErrors.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--iv66pGDkNHRbjGM5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlx+vSQACgkQ24/THMrX
+1ywEqQgAljsGGyFpFS2AoiBCax36dT7v+8Pg8W55kB02T47CKoS5I4w+wlLS0iwl
+wZnijR5AnjQAl1OOnlqDJ71iv0dmECoJgvyHVnueKiJfCRSlnQLum7B5OTIdhL8k
+dPo/qk4rCGTX/Ssgjt0G8g5EAQr6Z7mjbTVVF6edDhBsVIZ1pW9kMs0SH/yO85d+
+yKWqDCxVLx+J/Xzj7pxoo60Ezugv5I96wHec52k5EglYvKCSmTThs8jjSBMDP5pY
+YMVBEcswekZ8Jo7l2lU6eVQFGGLPo0FBeqnH8jjHZODXceLWG8XuMGy47NW5mGWb
+jL8/SYDvV13uFVybvJHIHTKLyE6hOg==
+=EQos
+-----END PGP SIGNATURE-----
+
+--iv66pGDkNHRbjGM5--
+
+
+--===============4790160907681931878==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4790160907681931878==--
