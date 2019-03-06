@@ -1,18 +1,18 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 133607: tolerable all pass -
- PUSHED
-Date: Wed, 06 Mar 2019 00:53:25 +0000
-Message-ID: <osstest-133607-mainreport@xen.org>
+From: Konrad Rzeszutek Wilk <konrad@darnok.org>
+Subject: [GIT PULL] (xen) stable/for-jens-5.1 to your
+ 'for-5.1/block' branch.
+Date: Tue, 5 Mar 2019 21:25:31 -0500
+Message-ID: <20190306022530.GC25368__26236.8802724936$1551839205$gmane$org@localhost.localdomain>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8500575288788288105=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=T750=RJ=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1h1KoO-0003Gk-IY
- for xen-devel@lists.xenproject.org; Wed, 06 Mar 2019 00:53:32 +0000
+ <SRS0=KL1z=RJ=gmail.com=konrad.r.wilk@srs-us1.protection.inumbo.net>)
+ id 1h1MFT-0008Sj-4G
+ for xen-devel@lists.xenproject.org; Wed, 06 Mar 2019 02:25:35 +0000
+Received: by mail-qt1-x842.google.com with SMTP id d18so11232169qtg.12
+ for <xen-devel@lists.xenproject.org>; Tue, 05 Mar 2019 18:25:34 -0800 (PST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,51 +21,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: linux-kernel@vger.kernel.org, axboe@kernel.dk
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMzYwNyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMzYwNy8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICBlZWIzMWVlNTIyYzdiYjg1NDFlYjRjMDM3YmUyYzQyYmZjZjBhM2MzCmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICA3YjY1M2EyNDVmZmMyNmFjYTY5
-MWYzNDIwNGQ0ZmVmN2FmNDlhMGEwCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMzM1OTkgIDIwMTkt
-MDMtMDUgMTc6MDE6MjggWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTMzNjA0ICAy
-MDE5LTAzLTA1IDE5OjAxOjE0IFogICAgMCBkYXlzICAgIDIgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KICBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cgpq
-b2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1k
-NjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11
-dS1kZWJpYW5odm0taTM4NiAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qu
-b3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dz
-LCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSBy
-ZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJp
-dHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hi
-PW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7
-YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5k
-IGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3Vt
-bWFyeQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9n
-aXQveGVuLmdpdAogICA3YjY1M2EyNDVmLi5lZWIzMWVlNTIyICBlZWIzMWVlNTIyYzdiYjg1NDFl
-YjRjMDM3YmUyYzQyYmZjZjBhM2MzIC0+IHNtb2tlCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============8500575288788288105==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="1ccMZA6j1vT5UqiK"
+Content-Disposition: inline
+
+
+--1ccMZA6j1vT5UqiK
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+Hi Jens,
+
+Apologies for doing it right at the merge window time. This patchset has been brewing
+for quite a while.
+
+git://git.kernel.org/pub/scm/linux/kernel/git/konrad/xen.git stable/for-jens-5.1
+
+This patchset makes the backend more robust by reading a negotiation
+variable only once and not twice.
+
+Thank you!
+
+ drivers/block/xen-blkback/xenbus.c | 99 ++++++++++++++++++++++----------------
+ 1 file changed, 57 insertions(+), 42 deletions(-)
+
+Dongli Zhang (2):
+      xen/blkback: add stack variable 'blkif' in connect_ring()
+      xen/blkback: rework connect_ring() to avoid inconsistent xenstore 'ring-page-order' set by malicious blkfront
+
+
+--1ccMZA6j1vT5UqiK
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIcBAEBAgAGBQJcfy+aAAoJEFKlDoTx2wm/L9EP/1hInhOLDpzp4j9svuArMEtf
+2HbAezkSPcAXhhXr+yXCxrLYqZldxG00ohwQikogxugqDiPWGzR1NU+7FvmkUDg7
+0EJAumsuTT/Ok7vNt0TlrNATKYvE2RQroOJ8KknNFA3vOXaN4WPaT/Qr0KIyJnli
+10PgigQzvLvkbdXg91cZfVHLAcTVWp48FT0r2q/KFI1r0ehiOEzmdrB8bnZ9hxQ8
+yvRFHBNEeHd2UGJpLZ2Cq6KwfDXae4GKW201n03QHN4obgI8tKjlZmDWZS52RK+Q
+C+KaSlCVwISr4CMibWAsOJ3ChL/e/y7TB02MNDyF9EBS8przv3BjdLfPBEE4XUn1
+EpAvNUGiV4TlCR0A4NEaJimcZD0pBBEFpyjX6ja2c1bEBu/iuCK8pgsg34NIze3k
+XPcM/ovxesyOrBgCQ3E/QceiBHULYulTskv+vv67P6/DCie/Jcg2PD2YbxyKLq/M
+DKk6VHJNRMl2CwiKx8EyIBD11vDd8WMWP86i/0GSqqh7ckV8C6MjgT8UtNgZDr21
+wh+Efg3hgsC7d4XfbT9zu9uVMsMhSV+EzF1ajDXTBF1wsGmbwxkoMtqyejziitHZ
+WntO/bAAfkbB3dXpUcS+XLhN4HIUXemfnZdDLCFxy9T2l7VMydswi7X5YlnyaxRt
+ANzNPES7tCHFeNwGr8hW
+=L583
+-----END PGP SIGNATURE-----
+
+--1ccMZA6j1vT5UqiK--
+
+
+--===============8500575288788288105==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8500575288788288105==--
