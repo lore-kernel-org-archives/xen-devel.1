@@ -1,20 +1,22 @@
-From: Ian Jackson <ian.jackson@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: Can someone pls repair patchwork?
-Date: Wed, 6 Mar 2019 16:00:14 +0000
-Message-ID: <23679.61070.586460.991990@mariner.uk.xensource.com>
+Date: Wed, 6 Mar 2019 16:02:42 +0000
+Message-ID: <f395e367-d72a-4deb-e0a2-edaddaad9fcf@arm.com>
 References: <332e7348-d711-2d02-02e0-3d264f2955f6@gmail.com>
  <f6f98db5-ee05-2c11-1b57-dd7c80e7b56f@arm.com>
  <B475E636-2EC8-4659-B3EB-F8CE36451106@citrix.com>
+ <23679.61070.586460.991990@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2euw=RJ=citrix.com=prvs=96185864b=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1h1Yxx-0000Ty-5f
- for xen-devel@lists.xenproject.org; Wed, 06 Mar 2019 16:00:21 +0000
-In-Reply-To: <B475E636-2EC8-4659-B3EB-F8CE36451106@citrix.com>
+ <SRS0=yqT7=RJ=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1h1Z0J-0000dk-06
+ for xen-devel@lists.xenproject.org; Wed, 06 Mar 2019 16:02:47 +0000
+In-Reply-To: <23679.61070.586460.991990@mariner.uk.xensource.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,47 +25,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth@citrix.com>
-Cc: Oleksandr Andrushchenko <andr2000@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>, Florian Schmidt <Florian.Schmidt@neclab.eu>
+To: Ian Jackson <ian.jackson@citrix.com>, Lars Kurth <lars.kurth@citrix.com>
+Cc: Oleksandr Andrushchenko <andr2000@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>, Florian Schmidt <Florian.Schmidt@neclab.eu>
 List-Id: xen-devel@lists.xenproject.org
 
-TGFycyBLdXJ0aCB3cml0ZXMgKCJSZTogW1hlbi1kZXZlbF0gQ2FuIHNvbWVvbmUgcGxzIHJlcGFp
-ciBwYXRjaHdvcms/Iik6Cj4gSGkgYWxsLCAoKyBGbG9yaWFuICYgK0lhbiwgYXMgTkVDIHJ1bnMg
-dGhlaXIgb3duIHBhdGNod29yayBpbnN0YW5jZSBhbmQgbWF5IGhhdmUgc29tZSBpbnNpZ2h0cykK
-PiAKPiBiZWZvcmUgSSBhcHByb2FjaCBJIHdhbnRlZCB0byBhc2sgd2hldGhlciB3ZSBhcmUgc3Vy
-ZSB0aGlzIGhhcyB0byBkbyB3aXRoIHRoZSBsaXN0IGNoYW5nZS4gSSBhbSBhc3N1bWluZyB0aGF0
-IHBhdGNod29yayBnZXRzIG1haWxzIGZyb20gYSByZWdpc3RlcmVkIGFjY291bnQgb24geGVuLWRl
-dmVsLiBTbyBpdCBpcyBub3QgY2xlYXIgd2hldGhlciB0aGUgZG9tYWluIGNoYW5nZSB3b3VsZCBj
-YXVzZSB0aGlzOiBzZWUgaHR0cHM6Ly9wYXRjaHdvcmstZnJlZWRlc2t0b3AucmVhZHRoZWRvY3Mu
-aW8vZW4vbGF0ZXN0L2luc3RhbGxhdGlvbi5odG1sI3N1YnNjcmliZS1hLWxvY2FsLWFkZHJlc3Mt
-dG8tdGhlLW1haWxpbmctbGlzdAo+IAo+IExvb2tpbmcgYXQgcmVnaXN0ZXJlZCBlLW1haWxzIChz
-ZWUgcG5nKSwgdGhlcmUgYXBwZWFyIHRvIGJlIHR3byBwYXRjaHdvcmsgaW5zdGFuY2VzIHJlZ2lz
-dGVyZWQgd2l0aCB4ZW4tZGV2ZWxACj4gKiBwYXRjaHdvcmsteGVuLWRldmVsQHBhdGNod29yay5j
-b2RlYXVyb3JhLm9yZwo+ICogcGF0Y2h3b3JrLXhlbi1kZXZlbEBwYXRjaHdvcmsua2VybmVsLm9y
-ZyAKPiAKPiBOb3RlIHRoYXQgaHR0cHM6Ly9wYXRjaHdvcmsuY29kZWF1cm9yYS5vcmcvcHJvamVj
-dC94ZW4tZGV2ZWwvbGlzdC8gc2VlbXMgdG8gaGF2ZSBicm9rZW4gYXQgdGhlIHNhbWUgdGltZSBh
-cyB0aGUga2VybmVsLm9yZyBvbmUKPiAKPiBASWFuOiBkbyB5b3Uga25vdyB3aGF0IHdlIGRpZCB0
-byB0aGUgbGlzdHMgYW5kL29yIGUtbWFpbCBoYW5kbGluZyBhcm91bmQgdGhhdCB0aW1lPyBDb3Vs
-ZCB0aGlzIGJlIHByaW1hcmlseSBhbiBpc3N1ZSBjYXVzZWQgYnkgc29tZSBpbmZyYXN0cnVjdHVy
-ZSBjaGFuZ2U/CgpJIGRvbid0IHJlbWVtYmVyIGFueSBkYXRlcyBidXQgd2UgZGlkIGNoYW5nZSB0
-aGUgbGlzdHMgZnJvbQpmb29AbGlzdHMueGVuLm9yZyB0byBmb29AbGlzdHMueGVucHJvamVjdC5v
-cmcgZm9yIHNvbWUgY29ycG9yYXRlCnRyYWRtYXJrIGJyYW5kaW5nIGtpbmQgb2YgcmVhc29uLiAg
-SSBkb3VidCB5b3Ugd2FudCB0byByZXZlcnQgdGhhdC4KCj4gSXMgdGhlcmUgYSB3YXkgdG8gY2hl
-Y2sgd2hldGhlciBtYWlscyBhcmUgYWN0dWFsbHkgc2VudCBmcm9tIHhlbi1kZXZlbEAgdG8gdGhl
-IHBhdGNod29yayBpbnN0YW5jZXM/Cj4gSWYgc28sIG1heWJlIGEgQ3JlZGF0aXYgdGlja2V0IGlz
-IG5lZWRlZAoKSSBkb3VidCB0aGlzIGlzIHRoZSBwcm9ibGVtLiAgSSB0aGluayB3aGF0IGlzIG5l
-ZWRlZCBpcyBmb3IgdGhlCnBhdGNod29yayBpbnN0YW5jZSBvd25lcnMgdG8gdXBkYXRlIHRoZWly
-IGNvbmZpZ3VyYXRpb24gZm9yIG91ciBuZXcKbWFpbGluZyBsaXN0IG5hbWUuCgpJZiB5b3UgbG9v
-ayBoZXJlIGF0IHRoaXMgVVJMIEp1bGllbiBwcm92aWRlZAogIGh0dHBzOi8vcGF0Y2h3b3JrLmtl
-cm5lbC5vcmcvcHJvamVjdC94ZW4tZGV2ZWwvCnlvdSBzZWUgdGhhdCBpdCBzYXlzCiAgTGlzdCBh
-ZGRyZXNzICB4ZW4tZGV2ZWxAbGlzdHMueGVuLm9yZwoKVGhhdCBpcyB3aGF0IG5lZWRzIGZpeGlu
-Zy4gIFNpbWlsYXJseSBmb3IgdGhlIGNvZGVhdXJvcmEgb25lIEkKcHJlc3VtZS4KCkkgZG9uJ3Qg
-a25vdyB3aG8gIm93bnMiIHRoaXMgaW5zaWRlIHRoZSBwYXRjaHdvcmsua2VybmVsLm9yZyBzeXN0
-ZW0uCkl0IHNheXMgIk1haW50YWluZXJzIiB3aGljaCBpcyBtYXliZSB0aGUgcGVyc29uIHdobyBj
-YW4gdXBkYXRlIHRoZQpzZXR0aW5ncywgYnV0IGl0IGlzIGJsYW5rLiAgTWF5YmUgdGhlIHRoaW5n
-IGlzIG1hbmFnZWQgYnkgdGhlIHNpdGUKYWRtaW5pc3RyYXRvcnMgdGhlbi4KClVuZm9ydHVuYXRl
-bHkgSSBjb3VsZCBub3QgZmluZCBjb250YWN0IGRldGFpbHMgZm9yIHRoZSBzaXRlIGFkbWlucwpm
-b3IgZWl0aGVyIG9mIHRoZXNlIGFueXdoZXJlIG9uIHRob3NlIHdlYnNpdGVzLgoKSWFuLgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGkgSWFuLAoKT24gMDYvMDMvMjAxOSAxNjowMCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gVW5mb3J0
+dW5hdGVseSBJIGNvdWxkIG5vdCBmaW5kIGNvbnRhY3QgZGV0YWlscyBmb3IgdGhlIHNpdGUgYWRt
+aW5zCj4gZm9yIGVpdGhlciBvZiB0aGVzZSBhbnl3aGVyZSBvbiB0aG9zZSB3ZWJzaXRlcy4KCllv
+dSBjYW4gZmluZCB0aGUgY29udGFjdCBvbiBrZXJuZWwub3JnIChzZWUgWzFdKS4gT2xla3NhbmRy
+IGFscmVhZHkgQ0NlZCB0aGVtIG9uIAphbm90aGVyIGUtbWFpbC4KCkNoZWVycywKClsxXSBodHRw
+czovL3d3dy5rZXJuZWwub3JnL2NhdGVnb3J5L2NvbnRhY3QtdXMuaHRtbAoKPiAKPiBJYW4uCj4g
+CgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
