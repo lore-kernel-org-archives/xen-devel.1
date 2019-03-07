@@ -1,21 +1,19 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] trace: fix build with gcc9
-Date: Thu, 07 Mar 2019 04:50:43 -0700
-Message-ID: <5C810593020000780021C73D@prv1-mh.provo.novell.com>
-References: <5C80F39B020000780021C629@prv1-mh.provo.novell.com>
- <f718d316-1085-81bb-09c9-2998e3008d42@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libxl: prepare environment for
+ domcreate_stream_done
+Date: Thu, 7 Mar 2019 12:53:38 +0100
+Message-ID: <20190307125338.253995f8.olaf@aepfle.de>
+References: <20190307105649.8919-1-olaf@aepfle.de>
+ <20190307110247.xrex66v2z4kvpqdp@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0514188297479611606=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=9kmr=RK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1h1rY4-0007h6-5f
- for xen-devel@lists.xenproject.org; Thu, 07 Mar 2019 11:50:52 +0000
-In-Reply-To: <f718d316-1085-81bb-09c9-2998e3008d42@citrix.com>
-Content-Disposition: inline
+ (envelope-from <SRS0=LPx7=RK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h1rb6-0007nc-5q
+ for xen-devel@lists.xenproject.org; Thu, 07 Mar 2019 11:54:00 +0000
+In-Reply-To: <20190307110247.xrex66v2z4kvpqdp@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,30 +22,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Juergen Gross <jgross@suse.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA3LjAzLjE5IGF0IDEyOjQwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMDcvMDMvMjAxOSAxMDozNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IFdoaWxlIEkn
-dmUgbm90IG9ic2VydmVkIHRoaXMgbXlzZWxmLCBnY2MgOSAoaW1vIHZhbGlkbHkpIHJlcG9ydGVk
-bHkgbWF5Cj4+IGNvbXBsYWluCj4+Cj4+IHRyYWNlLmM6IEluIGZ1bmN0aW9uICdfX3RyYWNlX2h5
-cGVyY2FsbCc6Cj4+IHRyYWNlLmM6ODI2OjE5OiBlcnJvcjogdGFraW5nIGFkZHJlc3Mgb2YgcGFj
-a2VkIG1lbWJlciBvZiAnc3RydWN0IDxhbm9ueW1vdXM+JyBtYXkgcmVzdWx0IGluIGFuIHVuYWxp
-Z25lZCBwb2ludGVyIHZhbHVlCj4+IFstV2Vycm9yPWFkZHJlc3Mtb2YtcGFja2VkLW1lbWJlcl0K
-Pj4gICA4MjYgfCAgICAgdWludDMyX3QgKmEgPSBkLmFyZ3M7Cj4+Cj4+IGFuZCB0aGUgZml4IGlz
-IHJhdGhlciBzaW1wbGUgLSByZW1vdmUgdGhlIF9fcGFja2VkIGF0dHJpYnV0ZS4gSW50cm9kdWNl
-Cj4+IGEgQlVJTERfQlVHX09OKCkgYXMgcmVwbGFjZW1lbnQsIGZvciB0aGUgdW5saWtlbHkgY2Fz
-ZSB0aGF0IFhlbiBtaWdodAo+PiBnZXQgcG9ydGVkIHRvIGFuIGFyY2hpdGVjdHVyZSB3aGVyZSBh
-cnJheSBhbGlnbm1lbnQgaGlnaGVyIHRoYXQgdGhhdCBvZgo+PiBpdHMgZWxlbWVudHMuCj4gCj4g
-SSByZWFsbHkgZG9uJ3QgdGhpbmsgdGhlIEJVSUxEX0JVR19PTigpIGlzIGhlbHBmdWwuCj4gCj4g
-U3VjaCBhIHRoZW9yZXRpY2FsIGFyY2hpdGVjdHVyZSB3aWxsIGFsbW9zdCBjZXJ0YWlubHkgaGF2
-ZSBhIGNvbXBpbGVyCj4gdGhhdCBzcG90cyB0aGUgbWlzYWxpZ25tZW50LCBvciB3aWxsIHRha2Ug
-YSB0cmFwIHRoZSBmaXJzdCB0aW1lIHhlbnRyYWNlCj4gaXMgZXZlciB1c2VkLgoKV2l0aCB0aGUg
-X19wYWNrZWQgZ29uZSB0aGVyZSdzIG5vIG1pc2FsaWdubWVudCB0byBzcG90LiBTdWNoIGEKY29t
-cGlsZXIgd291bGQgaW5zZXJ0IGEgcGFkZGluZyBmaWVsZCBpbnN0ZWFkLiBUaGVyZSB3b3VsZCBh
-bHNvIGJlIG5vCnRyYXAsIHRoZSB0cmFjZSBkYXRhIGNvbnN1bWVyIHNpbXBseSB3b3VsZCB0YWtl
-IDMyIGJpdHMgb2YgZ2FyYmFnZQpmb3IgYWN0dWFsIGRhdGEuCgpKYW4KCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============0514188297479611606==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/+fkz5BASh5AjlFX6dJhASX3"; protocol="application/pgp-signature"
+
+--Sig_/+fkz5BASh5AjlFX6dJhASX3
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 7 Mar 2019 11:02:47 +0000
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> Have you seen the field been set before entering this function? Or is
+> the if () just a precaution?
+
+Sorry, this is not the variant I intended to send.
+The assignment was supposed to be unconditionally.
+
+Today I browsed the code and it was not clear if that backpointer
+is really required. Does anyone know if srs->dcs can ever be something
+else than the dcs which contains that srs?
+
+Olaf
+
+--Sig_/+fkz5BASh5AjlFX6dJhASX3
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIEGQgAKCRBdQqD6ppg2
+fjUbAKCcczmnsSr9LWklCMF4v4FWoQd3rACfbUreA/OSfkWf/htUygvfFenMhI0=
+=18XK
+-----END PGP SIGNATURE-----
+
+--Sig_/+fkz5BASh5AjlFX6dJhASX3--
+
+
+--===============0514188297479611606==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0514188297479611606==--
