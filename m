@@ -1,26 +1,22 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH v4.1 4/6] xen/x86: Allow stubdom access to
- irq created for msi.
-Date: Thu, 7 Mar 2019 23:28:25 +0100
-Message-ID: <20190307222825.GE19265@mail-itl>
-References: <20190208101559.GA21228@mail-itl>
- <20190208101705.31790-1-marmarek@invisiblethingslab.com>
- <20190221164751.hjtyddw63ztmc3yk@Air-de-Roger>
- <20190221174040.GV21228@mail-itl>
- <20190222104222.p7niwzgngaf3uz2k@Air-de-Roger>
- <20190307005004.GC19265@mail-itl>
- <20190307144801.vh6fcvp6mj3e6puj@Air-de-Roger>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v11 9/9] xen: explicit casts when
+ DECLARE_BOUNDS cannot be used [and 1 more messages]
+Date: Thu, 7 Mar 2019 14:55:54 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1903071451180.17248@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1903051433230.17552@sstabellini-ThinkPad-X260>
+ <1551825512-8975-9-git-send-email-sstabellini@kernel.org>
+ <5C810314020000780021C706@prv1-mh.provo.novell.com>
+ <23681.14338.969371.151047@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1037476724035948304=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=043R=RK=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1h21VE-0005E3-4J
- for xen-devel@lists.xenproject.org; Thu, 07 Mar 2019 22:28:36 +0000
-In-Reply-To: <20190307144801.vh6fcvp6mj3e6puj@Air-de-Roger>
+ <SRS0=OI77=RK=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1h21vg-0007Bk-Sm
+ for xen-devel@lists.xenproject.org; Thu, 07 Mar 2019 22:55:56 +0000
+In-Reply-To: <23681.14338.969371.151047@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,206 +25,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Simon Gaiser <simon@invisiblethingslab.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, Brian Woods <brian.woods@amd.com>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <George.Dunlap@citrix.com>, "julien.grall@arm.com" <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1037476724035948304==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="u2SGZJvfJjPItuJA"
-Content-Disposition: inline
-
-
---u2SGZJvfJjPItuJA
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v4.1 4/6] xen/x86: Allow stubdom access to irq created
- for msi.
-
-On Thu, Mar 07, 2019 at 03:48:01PM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Thu, Mar 07, 2019 at 01:50:04AM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Fri, Feb 22, 2019 at 11:42:22AM +0100, Roger Pau Monn=C3=A9 wrote:
-> > > On Thu, Feb 21, 2019 at 06:40:40PM +0100, Marek Marczykowski-G=C3=B3r=
-ecki wrote:
-> > > > On Thu, Feb 21, 2019 at 05:47:51PM +0100, Roger Pau Monn=C3=A9 wrot=
-e:
-> > > > > On Fri, Feb 08, 2019 at 11:17:05AM +0100, Marek Marczykowski-G=C3=
-=B3recki wrote:
-> > > > > >  {
-> > > > > >      int irq, ret;
-> > > > > >      struct irq_desc *desc;
-> > > > > > @@ -190,19 +190,19 @@ int create_irq(nodeid_t node)
-> > > > > >          desc->arch.used =3D IRQ_UNUSED;
-> > > > > >          irq =3D ret;
-> > > > > >      }
-> > > > > > -    else if ( hardware_domain )
-> > > > > > +    else if ( dm_domain )
-> > > > >=20
-> > > > > Can you guarantee that dm_domain is always current->domain?
-> > > >=20
-> > > > No, in some cases it will be hardware_domain.
-> > >=20
-> > > Right, but in that case current->domain =3D=3D hardware_domain I gues=
-s?
-> > >=20
-> > > >=20
-> > > > > I think you need to assert for this, or else take a reference to
-> > > > > dm_domain (get_domain) before accessing it's fields, or else you =
-risk
-> > > > > the domain being destroyed while modifying it's fields.
-> > > >=20
-> > > > Can hardware_domain be destroyed without panicking Xen? If so,
-> > > > get_domain would be indeed needed.
-> > >=20
-> > > What about other callers that are not the hardware_domain? You need to
-> > > make sure those domains are not destroyed while {create/destroy}_irq
-> > > is changing the permissions.
-> > >=20
-> > > If you can guarantee that dm_domain =3D=3D current->domain then you a=
-re
-> > > safe, if not you need to get a reference before modifying any fields
-> > > of the domain struct.
-> > >=20
-> > > So IMO you either need to add an assert or a get_domain depending on
-> > > the answer to the question above.
-> >=20
-> > I've added an assert, and I think I have the answer to the above questi=
-on:
-> >=20
-> >     (XEN) Assertion 'd =3D=3D current->domain' failed at irq.c:232
-> >     (XEN) ----[ Xen-4.12.0-rc  x86_64  debug=3Dy   Not tainted ]----
-> >     (XEN) CPU:    2
-> >     (XEN) RIP:    e008:[<ffff82d08028f545>] destroy_irq+0x126/0x143
-> >     (XEN) RFLAGS: 0000000000010206   CONTEXT: hypervisor
-> > (...)
-> >     (XEN) Xen call trace:
-> >     (XEN)    [<ffff82d08028f545>] destroy_irq+0x126/0x143
-> >     (XEN)    [<ffff82d08028ce1e>] msi_free_irq+0x51/0x1b8
-> >     (XEN)    [<ffff82d0802923e1>] unmap_domain_pirq+0x487/0x4d4
-> >     (XEN)    [<ffff82d08029249f>] free_domain_pirqs+0x71/0x8f
-> >     (XEN)    [<ffff82d0802819e0>] arch_domain_destroy+0x41/0xa1
-> >     (XEN)    [<ffff82d080207d22>] domain.c#complete_domain_destroy+0x86=
-/0x159
-> >     (XEN)    [<ffff82d08022a658>] rcupdate.c#rcu_process_callbacks+0xa5=
-/0x1cc
-> >     (XEN)    [<ffff82d08023c4fa>] softirq.c#__do_softirq+0x78/0x9a
-> >     (XEN)    [<ffff82d08023c566>] do_softirq+0x13/0x15
-> >     (XEN)    [<ffff82d080280532>] domain.c#idle_loop+0x63/0xb9
-> >=20
-> > In this case, current->domain obviously isn't the stubdomain, because at
-> > this point it is already destroyed (it keeps reference to the target
-> > domain, so target domain couldn't be destroyed before its stubdomain).
-> >=20
-> > In fact, in this case get_dm_domain() returns wrong value, since it
-> > isn't called by device model. At the point where stubdomain is already
-> > destroyed, I think it should return NULL, but it returns
-> > hardware_domain. But it isn't that easy, because target domain don't
-> > have any reference to its stubdomain. Especially already destroyed one.
-> >=20
-> > I's defined as:
-> >=20
-> >     static struct domain *get_dm_domain(struct domain *d)
-> >     {
-> >         return current->domain->target =3D=3D d ? current->domain :
-> >                                               hardware_domain;
-> >     }
->=20
-> So get_dm_domain works fine when used by create_irq, because in that
-> case current->domain =3D=3D d AFAICT.
->=20
-> As you pointed out however using the same mechanism for destroy is not
-> suitable, since the stubdomain might be already destroyed, and
-> unmap_domain_pirq called from the idle vCPU.
->=20
-> > Since hardware domain couldn't be destroyed(*) while the system is
-> > running, in practice this wrong return value it isn't a problem.
-> > Hardware didn't have permission over this IRQ (if stubdomain have
-> > created it), so irq_deny_access is a no-op.
-> >=20
-> > So, I would adjust assert in destroy_irq to allow also hardware_domain,
-> > and add a comment that get_dm_domain may return hardware_domain during
-> > domain destruction. Is that ok?
->=20
-> Hm, albeit I agree with your analysis, I feel like this proposed
-> solution is kind of a workaround. Given the context, I think the best
-> way to deal with this issue in destroy_irq is to iterate over the list
-> of domains and make sure no domain has permissions over the destroyed
-> irq. Note that with this proposed solution you will have to drop the
-> domain parameter from destroy_irq.
-
-I'd really like to avoid iterating the whole domain list. Jan, what do
-you think? Code-wise this seems to be the easiest solution.
-
-> Another option would be to store which domains are given permissions
-> over which irqs in a way that's optimized to get the list of domains
-> given an irq (ie: without having to iterate over the list of domains
-> like my proposed solution above).
-
-This may make sense, but if that would be instead of the current
-structure, we'd have another problem: when destroying stubdomain, you'd
-need to get list IRQs it has access to, to explicitly revoke
-stubdomain's access. In theory it could be done by looking at the target
-domain and iterating over its IRQs, but this is getting more and more
-complex.
-
-I think the tricky part is unmap_domain_pirq->msi_free_irq, which can be
-called:
-1. from PHYSDEVOP_unmap_pirq, by stubdomain
-2. from PHYSDEVOP_unmap_pirq, by dom0 when device model runs there
-3. from PHYSDEVOP_unmap_pirq, by dom0 even with device model in
-stubdomain - normally it shouldn't happen for MSI allocated by
-stubdomain, but dom0 is allowed to do so, and it shouldn't cause any
-harm
-4. from free_domain_pirqs, during domain destruction
-5. various error paths
-
-If unmap_domain_pirq would know where device model is running, even if
-not called by it, that would help. What about adding back reference in
-struct domain to a stubdomain? That would help a lot here. The only
-problem is a circular dependency stubdom->target->stubdom. This cycle
-would need to be broken during stubdom teardown. domain_kill(stubdom)
-looks like a good place to break it. Is it guaranteed to be called, or
-is there some other path to destroying a stubdomain?
-
-Can one HVM domain have multiple stubdomains? If so, it should a be
-list, not a single field.
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---u2SGZJvfJjPItuJA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlyBmwgACgkQ24/THMrX
-1ywstQgAl6cASkQ4mCLhhD3HLwn9yyjW8YF54o0Su6+t0gWe2p5TBbgZ1MOCgThL
-zrJxB1Mt+9Aez3wfUdBCUsQMgxn/BzaGK6jtTG2CnAtsDwh1zO1r9T998KUV/Uzs
-s+62Iyqg5lX3obcaRQAAnjf06ejgMVrjTCH4oRqS7mrCneMRDXHvKO/mBmWHxgMF
-fVqRpLnmA77eufCERt77aikjdzZMQePbgNnAOqFyrEMPAvu4Kik8zQjSeJgnpsZp
-PGyY5PYCzNuGh3yX7PkEgrfzKDPjwfQ+n8UWQcf8W2bBYmuv49SqBjpKpP9LWtHA
-cDVBqBv1Zkq/QLGNUQ3ZwYczEf38YQ==
-=bkQx
------END PGP SIGNATURE-----
-
---u2SGZJvfJjPItuJA--
-
-
---===============1037476724035948304==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1037476724035948304==--
+T24gVGh1LCA3IE1hciAyMDE5LCBJYW4gSmFja3NvbiB3cm90ZToKPiBidWdfZnJhbWVzCj4gLS0t
+LS0tLS0tLQo+IAo+IFdoYXQgYXBwZWFycyB0byBiZSBnb2luZyBvbiBpcyB0aGlzOgo+IAo+IHNl
+dHVwX3ZpcnR1YWxfcmVnaW9ucyBjb250YWlucyBhIHN0YXRpYyBjb25zdCBhcnJheSBvZiBwb2lu
+dGVycyB0bwo+IHN0cnVjdCBidWdfZnJhbWUuICBUaGVzZSBzdHJ1Y3QgYnVnX2ZyYW1lKiB2YWx1
+ZXMgYXJlIHRoZW1zZWx2ZXMKPiBsaW5rZXIgc3ltYm9sIHZhbHVlcy4KPiAKPiBCZWNhdXNlIHRo
+ZSBjb21waWxlciBoYXMgdmlzaWJpbGl0eSBvZiBhbGwgb2YgdGhpcywgaXQgaXMgYWxsb3dlZCB0
+bwo+IGFzc3VtZSB0aGF0IHRoZXNlIHZhbHVlcyBkbyBub3QgY2hhbmdlLiAgSXQgd2lsbCB0aGVy
+ZWZvcmUgd3JvbmdseQo+IGFzc3VtZSB0aGF0IHRoZXkgYXJlIGluY29tcGFyYWJsZS4KPiAKPiAo
+QWxsIG9mIHRoaXMgb3VnaHQgdG8gaGF2ZSBiZWVuIGV4cGxhaW5lZCBpbiBjb21tZW50cyBpbiB0
+aGUgY29kZS4KPiBHaXZlbiB0aGF0IGl0IHdhc24ndCwgYSBjb21tZW50IG91Z2h0IHRvIGhhdmUg
+YmVlbiBpbiB5b3VyIHBhdGNoLgo+IEkgc2hvdWxkbid0IGhhdmUgaGFkIHRvIGdvIGFuZCBkaWcg
+aW50byB0aGUgY29kZS4pCj4gCj4gQW5kIEknbSBhZnJhaWQgSSBkbyBub3QgbGlrZSB5b3VyIHBh
+dGNoLiAgVGhlIGRlY2xhcmF0aW9uIGluIGVnCj4geGVuL2luY2x1ZGUvYXNtLWFybS9idWcuaAo+
+IAo+ICAgZXh0ZXJuIGNvbnN0IHN0cnVjdCBidWdfZnJhbWUgX19zdGFydF9idWdfZnJhbWVzW10s
+Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfX3N0b3BfYnVnX2ZyYW1lc18wW10s
+Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfX3N0b3BfYnVnX2ZyYW1lc18xW10s
+Cj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfX3N0b3BfYnVnX2ZyYW1lc18yW107
+Cj4gCj4gaXMgYSBjbGVhciB2aW9sYXRpb24gb2YgdGhlIHJ1bGUgaW4gdGhlIERFQ0xBUkVfQk9V
+TkRTIGNvbW1lbnQ6Cj4gCj4gKyAgKiBUaGVzZSBtYWNyb3MsIG9yIGFuIGFsdGVybmF0aXZlIHRl
+Y2huaXF1ZSwgTVVTVCBiZSB1c2VkIGFueSB0aW1lCj4gKyAgKiBsaW5rZXIgc3ltYm9scyBhcmUg
+aW1wb3J0ZWQgaW50byBDIHZpYSB0aGUgYGV4dGVybiBbXScgaWRpb20uCj4gCj4gSSB0aGluayBh
+biBgYWx0ZXJuYXRpdmUgdGVjaG5pcXVlJyBzaG91bGQgYmUgYXBwbGllZCAqYXQgdGhlIHRpbWUg
+b2YKPiB0aGUgZGVjbGFyYXRpb24qIGFuZCBpdCBzaG91bGQgc3VmZmljZSB0byAqbW9zdGx5IGF2
+b2lkIHRoZSByaXNrIG9mCj4gZGFuZ2Vyb3VzIHVzZXMqLgo+IAo+IEphbiBoYXMgb25lIHN1Z2dl
+c3Rpb24sIHdoaWNoIEkgZG9uJ3QgZnVsbHkgdW5kZXJzdGFuZCAoc2VlIGJlbG93KS4KPiBBbHRl
+cm5hdGl2ZWx5IEkgc3VnZ2VzdCB0aGUgZm9sbG93aW5nIGFkLWhvYyBhcHByb2FjaDoKPiAKPiAg
+ICogUmVuYW1lIF9fc3RhcnRfYnVnX2ZyYW1lcyBldGMuIHRvCj4gICAgICAgX19VQkRBTkdFUl8q
+YnVnX2ZyYW1lKgo+ICAgICAoYW5kIHByb3ZpZGUgYW4gYWNjb21wYW55aW5nIGNvbW1lbnQgc2F5
+aW5nIHdoYXQgdGhlIFVCIGRhbmdlciBpcwo+ICAgICBhbmQgaG93IFVCIG11c3QgYmUgYXZvaWRl
+ZCkuCj4gCj4gICAqIENoYW5nZSB0aGUgZGVmaW5pdGlvbiBvZiBidWdfZnJhbWVzIHRvCj4gICAg
+ICAgc3RhdGljIGNvbnN0IHVpbnRwdHJfdCBfX2luaXRjb25zdHJlbCBidWdfZnJhbWVzW10gLi4u
+Cj4gCj4gICAqIFByb3ZpZGUgYW4gYXJjaC1pbmRlcGVuZGVudCBoZWxwZXIgbWFjcm8gdG8gYm90
+aCBkZWNsYXJlCj4gICAgIF9fVUJEQU5HRVJfKmJ1Z19mcmFtZSosIGNvbnZlcnRpbmcgdGhlIHBv
+aW50ZXJzIHRvCj4gICAgIHVpbnRwdHJfdCwgYW5kIGluaXRpYWxpc2UgdGhlIGFycmF5LgoKSSBk
+b24ndCBmb2xsb3cgd2h5IHRoaXMgbWFjcm8gaXMgbmVlZGVkIGFuZCB3aGF0IG1vcmUgY29uY3Jl
+dGVseSB5b3UKaGF2ZSBpbiBtaW5kIGZvciB0aGUgYXJyYXkgaW5pdGlhbGl6YXRpb24uCgoKPiAg
+ICogSW4gc2V0dXBfdmlydHVhbF9yZWdpb25zLCBjYXN0IHRoZSB1aW50cHRyX3QgdG8gYSBwb2lu
+dGVyLiAgVGhpcwo+ICAgICBuZWVkcyB0byBiZSBhY2NvbXBhbmllZCBieSBhIHN1YnN0YW50aWFs
+IGNvbW1lbnQgZXhwbGFpbmluZyB3aHkKPiAgICAgdGhpcyBpcyBzYWZlLiAgRWxlbWVudHMgb2Yg
+dGhlIHByb29mIGFyZQo+ICAgICAgIC0gc3RhdGluZyB0aGF0IHRoZSB0aGluZyBjYW1lIGZyb20g
+YSBwb2ludGVyIHdoaWNoIGNhbWUKPiAgICAgICAgIGZyb20gYSBsaW5rZXIgc3ltYm9sLCBzbyBp
+dCBpcyBhIHZhbGlkIHBvaW50ZXIgdmFsdWUKPiAgICAgICAtIHNvbWUga2luZCBvZiBhcmd1bWVu
+dCB0aGF0IG5vIGNvZGUgZWxzZXdoZXJlIHdpbGwKPiAgICAgICAgIGNvbXBhcmUgcG9pbnRlcnMg
+ZnJvbSBkaWZmZXJlbnQgY29yZV9pbml0LmZyYW1lCj4gICAgICAgICBhbmQgY29yZV9pbml0LmV4
+IGVudHJpZXMuCj4gICAgIEkgb2JzZXJ2ZSB0aGF0IHdpdGggdGhlIGN1cnJlbnQgY29kZSBJIHRo
+aW5rIG1ha2luZyBzdWNoIGFuCj4gICAgIGFyZ3VtZW50IG1heSBpbnZvbHZlIGRvaW5nIHNvbWV0
+aGluZyBhYm91dCBjb3JlX2luaXQuZXggYW5kCj4gICAgIGNvcmVfaW5pdC5leF9lbmQuICBOb3Qg
+c3VyZS4KCkkgYW0gc3VyZSBpdCB3aWxsIHRha2UgYSBjb3VwbGUgb2YgdHJpZXMgdG8gZ2V0IHRo
+ZSBjb21tZW50IHJpZ2h0LCBidXQgSQpjYW4gZ2l2ZSBhIHRyeSBhdCBhIGZpcnN0IGRyYWZ0LgoK
+Cj4gQW4gYWx0ZXJuYXRpdmUgd291bGQgYmUgdG8gY29uc3RydWN0IHRoaXMgdGFibGUgaW4gYSBk
+aWZmZXJlbnQKPiB0cmFuc2xhdGlvbiB1bml0LCBpbiB3aGljaCBjYXNlIHRoZSBjb21waWxlciBj
+b21waWxpbmcKPiBzZXR1cF92aXJ0dWFsX3JlZ2lvbnMgY2Fubm90IGBwcm92ZScgdGhlIGZhbHNl
+aG9vZCAuICAoTm90ZSB0aGF0IHdlCj4gbXVzdCBiZSBkaXNhYmxpbmcgd2hvbGUtcHJvZ3JhbSBv
+cHRpbWlzYXRpb24uICBJIGhvcGUgd2UgYXJlISkKPiAKPiAKPiBKYW4gd3JpdGVzOgo+IAo+ID4g
+SSBkaXNhZ3JlZSB3aXRoIHRoZSBjb21tZW50LAo+IAo+IEkgYWxzbyBkaXNhZ3JlZSB3aXRoIHRo
+ZSB3b3JkaW5nIG9mIHRoZSBjb21tZW50LiAgSXQgaXMgc2VyaW91c2x5Cj4gbWlzbGVhZGluZy4g
+IFRoZXNlIHN5bWJvbHMgZG8gaW4gZmFjdCByZWZlciB0byB0aGUgc2FtZSBvYmplY3QhCj4gVGhl
+IHByb2JsZW0gaXMgdGhhdCB0aGUgY29tcGlsZXIgdGhpbmtzIG90aGVyd2lzZS4gIFlvdSBuZWVk
+IHdvcmRpbmcKPiBsaWtlIHRoYXQgaW4gREVDTEFSRV9CT1VORFMuICAoT3IgYSByZWZlcmVuY2Ug
+dG8gaXQuKQo+IAo+ID4gYW5kIGlmIHlvdSB0aGluayBpdCBpcyBjb3JyZWN0LCB0aGVuIG5vCj4g
+PiBtYXR0ZXIgd2hhdCB5b3UgZG8gdGhlIGJlaGF2aW9yIGlzIHVuZGVmaW5lZC4gSW5zdGVhZCBJ
+IHZpZXcgdGhlCj4gPiBlbnRpcmV0eSBvZiB0aGUgLmJ1Z19mcmFtZXMuKiBzZWN0aW9ucyBhcyBh
+IHNpbmdsZSBhcnJheSwgd2l0aAo+ID4gbGFiZWxzIHBsYWNlZCBub3Qgb25seSBhdCBzdGFydCBh
+bmQgZW5kLCBidXQgYWxzbyBpbiB0aGUgbWlkZGxlLiBJCj4gPiB0aGluayB0aGUgY29kZSBoZXJl
+IHdvdWxkIGJldHRlciBhbHNvIGJlIHRha2VuIGNhcmUgb2YgYnkgdGhlCj4gPiBERUNMQVJFX0JP
+VU5EUygpIG1hY2hpbmVyeSwgZGl2aWRpbmcgdGhlIHNpbmdsZSBhcnJheSBpbnRvCj4gPiBtdWx0
+aXBsZSBzbWFsbGVyIG9uZXMuCj4gCj4gSmFuLCBJJ20gbm90IHN1cmUgZXhhY3RseSB3aGF0IHlv
+dSBhcmUgc3VnZ2VzdGluZy4gIEN1cnJlbnRseSB0aGUKPiBhcnJheSBoYXMgb25lIHBvaW50ZXIg
+cGVyIGVsZW1lbnQuICBBcmUgeW91IHN1Z2dlc3RpbmcgaXQgc2hvdWxkIGhhdmUKPiB0d28gcG9p
+bnRlcnMgKHN0YXJ0IGFuZCBlbmQpLCB3aXRoIGRpZmZlcmVudCBub3Rpb25hbCB0eXBlcyA/CgpJ
+IGFtIG5vdCBmdWxseSB1bmRlcnN0YW5kaW5nIHRoZSBzdWdnZXN0aW9uIGVpdGhlci4KCkV2ZW4g
+aWYgd2Ugc3BsaXQgaXQgaW50byBtdWx0aXBsZSBzdGFydC1lbmQgcGFpcnMsIHN0aWxsIHdlIHdv
+bid0IGJlCmFibGUgdG8gY29tcGFyZSBzdGFydC9lbmQgb2YgYSBwYWlyIHdpdGggc3RhcnQvZW5k
+IG9mIGRpZmZlcmVudCBwYWlyCndpdGhvdXQgY2FzdHMuCgoKPiBJZiB0aGF0IGlzIE9LIGZyb20g
+YSBwZXJmIHBvaW50IG9mIHZpZXcgdGhlbiBpdCBpcyBhbiBlYXN5IGFuc3dlcgo+IChhbHRob3Vn
+aCBhIGJpdCB0aXJlc29tZSBzaW5jZSBtb3JlIGxpbmtlciBzeW1ib2xzIHdpbGwgaGF2ZSB0byBi
+ZQo+IGdlbmVyYXRlZCkuCj4gCj4gCj4gX19zdGFydF94ZW4KPiAtLS0tLS0tLS0tLQo+IAo+ID4g
+QEAgLTk3Niw3ICs5NzYsOCBAQCB2b2lkIF9faW5pdCBub3JldHVybiBfX3N0YXJ0X3hlbih1bnNp
+Z25lZCBsb25nIG1iaV9wKQo+ID4gICAgICAgICAgICogcmVzcGVjdGl2ZSByZXNlcnZlX2U4MjBf
+cmFtKCkgaW52b2NhdGlvbiBiZWxvdy4KPiA+ICAgICAgICAgICAqLwo+ID4gICAgICAgICAgbW9k
+W21iaS0+bW9kc19jb3VudF0ubW9kX3N0YXJ0ID0gdmlydF90b19tZm4oX3N0ZXh0KTsKPiA+IC0g
+ICAgICAgIG1vZFttYmktPm1vZHNfY291bnRdLm1vZF9lbmQgPSBfXzJNX3J3ZGF0YV9lbmQgLSBf
+c3RleHQ7Cj4gPiArICAgICAgICBtb2RbbWJpLT5tb2RzX2NvdW50XS5tb2RfZW5kID0gKHVpbnRw
+dHJfdClfXzJNX3J3ZGF0YV9lbmQgLQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICh1aW50cHRyX3QpIF9zdGV4dDsKPiAKPiBfXzJNX3J3ZGF0YV9lbmQgYW5kIF9z
+dGV4dCBhcmUgYm90aCBkZWNsYXJlZCBpbiBoZWFkZXIgZmlsZXMgdXNpbmcgdGhlCj4gZGVwcmVj
+YXRlZCBwYXR0ZXJuLgo+IAo+ICAgeGVuL2luY2x1ZGUveGVuL2tlcm5lbC5oOmV4dGVybiBjaGFy
+IF9zdGV4dFtdLCBfZXRleHRbXTsKPiAgIHhlbi9pbmNsdWRlL2FzbS14ODYvc2V0dXAuaDpleHRl
+cm4gY2hhciBfXzJNX3J3ZGF0YV9zdGFydFtdLCBfXzJNX3J3ZGF0YV9lbmRbXTsKPiAKPiBBY2Nv
+cmRpbmcgdG8gdGhlIGNvbW1lbnQgZm9yIERFRklORV9CT1VORFMsIGl0IG91Z2h0IHRvIGJlIHVz
+ZWQgaGVyZSwKPiBvciBzb21lIG90aGVyIG1lY2hhbmlzbS4gIEJ1dCBBRkFJQ1QgaHlvdSBoYXZl
+IG5vdCBjaGFuZ2VkIHRoZQo+IGRlY2xhcmF0aW9ucyA/Cj4gCj4gSWYgeW91IGNoYW5nZWQgdGhl
+IGRlY2xhcmF0aW9ucyB0aGVuIChpKSBtaXN0YWtlcyB3b3VsZCBiZSBhdm9pZGVkCj4gKGlpKSB5
+b3Ugd291bGQgc3RpbGwgaGF2ZSB0byB1c2UgZXhwbGljaXQgY2FzdHMgdG8gY29tcGFyZSB0aGVz
+ZQo+IHBvaW50ZXJzIHRvIGRpZmZlcmVudCBzZWN0aW9ucywgYnV0IHlvdSBjb3VsZCB3cml0ZSBh
+IGNsZWFyCj4gZXhwbGFuYXRpb24gb2YgKGEpIHdoeSB0aGlzIGlzIG5lZWRlZCAoYikgd2h5IGl0
+IGlzIHNhZmUuCj4gCj4gWW91IGhhdmUgZG9uZSBuZWl0aGVyLgo+IAo+IAo+IEkgaG9wZSB0aGlz
+IG1ha2VzIHNlbnNlLgogClRoaXMgbWFrZXMgc2Vuc2UuIEFsc28sIEkgdW5kZXJzdGFuZCBfc3Rl
+eHQgYW5kIF9fMk1fcndkYXRhX2VuZCBiZXR0ZXIKdGhhbiB0aGUgYnVnX2ZyYW1lcyBhbmQgSSBz
+aG91bGQgYmUgYWJsZSB0byB3cml0ZSBhbiBoYWxmLWRlY2VudApleHBsYW5hdGlvbiBoZXJlLiBG
+WUkgX3N0ZXh0IGlzIGFscmVhZHkgY29udmVydGVkIHRvIERFRklORV9CT1VORFMgaW4KdGhpcyBz
+ZXJpZXMsIGJ1dCB5b3UgYXJlIHJpZ2h0IHRoYXQgX18yTV9yd2RhdGFfZW5kIGlzIG5vdC4gSSds
+bCBmaXgKdGhhdC4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
