@@ -1,23 +1,26 @@
-From: David Hildenbrand <david@redhat.com>
-Subject: Re: [PATCH v2] makedumpfile: exclude pages that are
- logically offline
-Date: Thu, 7 Mar 2019 09:41:15 +0100
-Message-ID: <7c9d6d5c-d6cf-00a7-7f23-bf28cbb382af__10858.7117561669$1551948135$gmane$org@redhat.com>
-References: <20181122100627.5189-1-david@redhat.com>
- <20181122100938.5567-1-david@redhat.com>
- <4AE2DC15AC0B8543882A74EA0D43DBEC03561800@BPXM09GP.gisp.nec.co.jp>
+From: Amit Tomer <amittomer25@gmail.com>
+Subject: Re: [PATCH 0/6] iomem cacheability
+Date: Thu, 7 Mar 2019 14:12:42 +0530
+Message-ID: <CABHD4K-Pxq2ZSRpa-Fpiis1gKe8=sVKaxzFcyvcC_awCR9vmrQ@mail.gmail.com>
+References: <alpine.DEB.2.10.1902261501020.20689@sstabellini-ThinkPad-X260>
+ <CABHD4K-UAuyv0Cwmk1d-SBUgGvUarWq-fsAsJATbg3r+ovGLrg@mail.gmail.com>
+ <alpine.DEB.2.10.1903051321390.17552@sstabellini-ThinkPad-X260>
+ <CAF3u54Di61CufwzwJ35sqPrBRVt2ewrmR=siDHPWA8ur29db7Q@mail.gmail.com>
+ <CABHD4K8JQdhi8P4ZbYndUFs90w0eH9QqMAa_XDPJM-QA_yr=QA@mail.gmail.com>
+ <alpine.DEB.2.10.1903061429230.17248@sstabellini-ThinkPad-X260>
+ <7b7c45ee-745f-1ede-1063-7fd66449194b@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=cfS2=RK=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1h1oai-0001KX-OW
- for xen-devel@lists.xenproject.org; Thu, 07 Mar 2019 08:41:24 +0000
-In-Reply-To: <4AE2DC15AC0B8543882A74EA0D43DBEC03561800@BPXM09GP.gisp.nec.co.jp>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=NqUu=RK=gmail.com=amittomer25@srs-us1.protection.inumbo.net>)
+ id 1h1ocC-0001Sc-06
+ for xen-devel@lists.xenproject.org; Thu, 07 Mar 2019 08:42:56 +0000
+Received: by mail-oi1-x243.google.com with SMTP id e7so12255063oia.8
+ for <xen-devel@lists.xenproject.org>; Thu, 07 Mar 2019 00:42:54 -0800 (PST)
+In-Reply-To: <7b7c45ee-745f-1ede-1063-7fd66449194b@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,29 +29,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Kazuhito Hagio <k-hagio@ab.jp.nec.com>
-Cc: "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>, "pv-drivers@vmware.com" <pv-drivers@vmware.com>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, kexec-ml <kexec@lists.infradead.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, "devel@linuxdriverproject.org" <devel@linuxdriverproject.org>
+To: Julien Grall <Julien.Grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@gmail.com>, Jan Beulich <JBeulich@suse.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "ian.jackson@citrix.com" <ian.jackson@citrix.com>, nd <nd@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjcuMTEuMTggMTc6MzIsIEthenVoaXRvIEhhZ2lvIHdyb3RlOgo+PiBMaW51eCBtYXJrcyBw
-YWdlcyB0aGF0IGFyZSBsb2dpY2FsbHkgb2ZmbGluZSB2aWEgYSBwYWdlIGZsYWcgKG1hcCBjb3Vu
-dCkuCj4+IFN1Y2ggcGFnZXMgZS5nLiBpbmNsdWRlIHBhZ2VzIGluZmF0ZWQgYXMgcGFydCBvZiBh
-IGJhbGxvb24gZHJpdmVyIG9yCj4+IHBhZ2VzIHRoYXQgd2VyZSBub3QgYWN0dWFsbHkgb25saW5l
-ZCB3aGVuIG9ubGluaW5nIHRoZSB3aG9sZSBzZWN0aW9uLgo+Pgo+PiBXaGlsZSB0aGUgaHlwZXJ2
-aXNvciB1c3VhbGx5IGFsbG93cyB0byByZWFkIHN1Y2ggaW5mbGF0ZWQgbWVtb3J5LCB3ZQo+PiBi
-YXNpY2FsbHkgcmVhZCBhbmQgZHVtcCBkYXRhIHRoYXQgaXMgY29tcGxldGVseSBpcnJlbGV2YW50
-LiBBbHNvLCB0aGlzCj4+IG1pZ2h0IHJlc3VsdCBpbiBxdWl0ZSBzb21lIG92ZXJoZWFkIGluIHRo
-ZSBoeXBlcnZpc29yLiBJbiBhZGRpdGlvbiwKPj4gd2Ugc2F3IHNvbWUgcHJvYmxlbXMgdW5kZXIg
-SHlwZXItViwgd2hlcmVieSB3ZSBjYW4gY3Jhc2ggdGhlIGtlcm5lbCBieQo+PiBkdW1waW5nLCB3
-aGVuIHJlYWRpbmcgbWVtb3J5IG9mIGEgcGFydGlhbGx5IG9ubGluZWQgbWVtb3J5IHNlZ21lbnQK
-Pj4gKGZvciBtZW1vcnkgYWRkZWQgYnkgdGhlIEh5cGVyLVYgYmFsbG9vbiBkcml2ZXIpLgo+Pgo+
-PiBUaGVyZWZvcmUsIGRvbid0IHJlYWQgYW5kIGR1bXAgcGFnZXMgdGhhdCBhcmUgbWFya2VkIGFz
-IGJlaW5nIGxvZ2ljYWxseQo+PiBvZmZsaW5lLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBEYXZpZCBI
-aWxkZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT4KPiAKPiBUaGFua3MgZm9yIHRoZSB2MiB1cGRh
-dGUuCj4gSSdtIGdvaW5nIHRvIG1lcmdlIHRoaXMgcGF0Y2ggYWZ0ZXIgdGhlIGtlcm5lbCBwYXRj
-aGVzIGFyZSBtZXJnZWQKPiBhbmQgaXQgdGVzdHMgZmluZSB3aXRoIHRoZSBrZXJuZWwuCj4gCj4g
-S2F6dQoKSGkgS2F6dSwKCnRoZSBwYXRjaGVzIGFyZSBub3cgdXBzdHJlYW0uIFRoYW5rcyEKCi0t
-IAoKVGhhbmtzLAoKRGF2aWQgLyBkaGlsZGVuYgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+SGksCgo+IE5vdCByZWFsbHksIHRoZSBEVCBwcm92aWRlZCBieSBBbWl0IGlzIGZvciB0aGUgaG9z
+dC4gVGhlIG1lbW9yeSBub2RlCj4gd2lsbCBiZSByZXdyaXR0ZW4gYnkgWGVuIGZvciBEb20wICBh
+bmQgZG9lcyBub3QgaW5jbHVkZSB0aGUKPiByZXNlcnZlZC1tZW1vcnkgcmVnaW9ucyBzbyBmYXIu
+Cj4KVGhhbmtzIGZvciBwb2ludGluZyB0aGF0IG91dC4KCklzIGl0IGxpa2Ugd2UgbmVlZCB0byBj
+cmVhdGUgInNlcGFyYXRlIiByZXNlcnZlLW1lbW9yeQpub2RlKG1ha2VfcmVzZXJ2ZWQtbWVtb3J5
+X25vZGUpIHdoZW4KbWVtb3J5IG5vZGUgaXMgZW5jb3VudGVyZWQ/CgpUaGFua3MKLUFtaXQKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
