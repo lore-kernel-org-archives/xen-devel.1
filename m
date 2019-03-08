@@ -1,21 +1,19 @@
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Subject: Re: XenGT is still regressed on master
-Date: Fri, 8 Mar 2019 14:25:29 +0000
-Message-ID: <85169b9d-f529-86fa-c1da-678e097ec7a8@citrix.com>
-References: <48ea46fc-12d1-3afe-5a9c-c1b2f21b1b0c@citrix.com>
- <5C825831020000780021CA16@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v2] libxl: prepare environment for
+ domcreate_stream_done
+Date: Fri, 8 Mar 2019 15:43:18 +0100
+Message-ID: <20190308154318.287deb1e.olaf@aepfle.de>
+References: <20190308122415.29972-1-olaf@aepfle.de>
+ <23682.30538.373590.52177@mariner.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6427948533002427993=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=oRtb=RL=citrix.com=prvs=963d37c20=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1h2GRv-0001uA-50
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 14:26:11 +0000
-In-Reply-To: <5C825831020000780021CA16@prv1-mh.provo.novell.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=bKkW=RL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h2Gif-0003DQ-Pa
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 14:43:30 +0000
+In-Reply-To: <23682.30538.373590.52177@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,65 +22,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Ian Jackson <ian.jackson@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDMvMjAxOSAxMTo1NSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gSWYgc28sIG15IGZpcnN0
-IHJlYWN0aW9uIGlzIHRvIGJsYW1lIHRoZSBrZXJuZWwgbW9kdWxlOgo+IE1hY2hpbmUgc3RhdGUg
-KG9mIHRoZSBWTSkgbWF5IG5vdCBjaGFuZ2Ugd2hpbGUgcHJvY2Vzc2luZwo+IGEgd3JpdGUsIG90
-aGVyIHRoYW4gdG8gY2Fycnkgb3V0IHRoZSBfZGlyZWN0XyBlZmZlY3RzIG9mIHRoZSB3cml0ZS4g
-SQo+IGRvbid0IHRoaW5rIGEgcDJtIHR5cGUgY2hhbmdlIGlzIHN1cHBvc2VkIHRvIGJlIG9jY3Vy
-cmluZyBhcyBhIHNpZGUKPiBlZmZlY3QuCgpJIGRpc2FncmVlLiBBbnl0aGluZyBtYXkgY2hhbmdl
-IGR1cmluZyBwcm9jZXNzaW5nIG9mIElPUkVRIGFuZCBpdCdzCmh5cGVydmlzb3IgdGhhdCBzaG91
-bGRuJ3QgbWFrZSBhbnkgYXNzdW1wdGlvbnMgb24gdGhlIG1hY2hpbmUgc3RhdGUKYmVmb3JlIGFu
-ZCBhZnRlciB0aGUgcmVxdWVzdCBnb3Qgc2VudC4KCj4+IFRoZSBidWcgY291bGQgYmUgbWl0aWdh
-dGVkIGJ5IHRoZSBmb2xsb3dpbmcgcGF0Y2ggYnV0IHNpbmNlIGl0J3MgeW91IHdobwo+PiBpbnRy
-b2R1Y2VkIHRoaXMgaGVscGVyIHlvdSBtaWdodCBoYXZlIGJldHRlciBpZGVhcyBob3cgdG8gYXZv
-aWQgdGhlCj4+IHByb2JsZW0gaW4gYSBjbGVhbiB3YXkgaGVyZS4KPj4KPj4gLS0tIGEveGVuL2Fy
-Y2gveDg2L2h2bS9lbXVsYXRlLmMKPj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9lbXVsYXRlLmMK
-Pj4gQEAgLTExMzksMTMgKzExMzksMTEgQEAgc3RhdGljIGludCBsaW5lYXJfd3JpdGUodW5zaWdu
-ZWQgbG9uZyBhZGRyLAo+PiB1bnNpZ25lZCBpbnQgYnl0ZXMsIHZvaWQgKnBfZGF0YSwKPj4gICAg
-ICB7Cj4+ICAgICAgICAgIHVuc2lnbmVkIGludCBvZmZzZXQsIHBhcnQxOwo+Pgo+PiAtICAgIGNh
-c2UgSFZNVFJBTlNfb2theToKPj4gLSAgICAgICAgcmV0dXJuIFg4NkVNVUxfT0tBWTsKPj4gLQo+
-PiAgICAgIGNhc2UgSFZNVFJBTlNfYmFkX2xpbmVhcl90b19nZm46Cj4+ICAgICAgICAgIHg4Nl9l
-bXVsX3BhZ2VmYXVsdChwZmluZm8uZWMsIHBmaW5mby5saW5lYXIsICZodm1lbXVsX2N0eHQtPmN0
-eHQpOwo+PiAgICAgICAgICByZXR1cm4gWDg2RU1VTF9FWENFUFRJT047Cj4+Cj4+ICsgICAgY2Fz
-ZSBIVk1UUkFOU19va2F5Ogo+PiAgICAgIGNhc2UgSFZNVFJBTlNfYmFkX2dmbl90b19tZm46Cj4+
-ICAgICAgICAgIG9mZnNldCA9IGFkZHIgJiB+UEFHRV9NQVNLOwo+PiAgICAgICAgICBpZiAoIG9m
-ZnNldCArIGJ5dGVzIDw9IFBBR0VfU0laRSApCj4gCj4gVGhpcyBpcyAoSSdtIGluY2xpbmVkIHRv
-IHNheSAib2YgY291cnNlIikgbm90IGFuIGFwcHJvcHJpYXRlIGNoYW5nZSBpbgo+IHRoZSBnZW5l
-cmFsIGNhc2U6IEdldHRpbmcgYmFjayBIVk1UUkFOU19va2F5IG1lYW5zIHRoZSB3cml0ZQo+IHdh
-cyBjYXJyaWVkIG91dCwgYW5kIGhlbmNlIGl0IHNob3VsZG4ndCBiZSB0cmllZCB0byBiZSBjYXJy
-aWVkIG91dCBhCj4gMm5kIHRpbWUuCj4gCj4gSSB0YWtlIGl0IHRoYXQgY2hhbmdpbmcgdGhlIGtl
-cm5lbCBkcml2ZXIgd291bGQgYXQgYmVzdCBiZSBzdWItb3B0aW1hbAo+IHRob3VnaCwgc28gYSBo
-eXBlcnZpc29yLW9ubHkgZml4IHdvdWxkIGJlIGJldHRlci4KClllcywgY2hhbmdpbmcgdGhlIGtl
-cm5lbCBtb2R1bGUgaXMgdmVyeSB1bmRlc2lyYWJsZSBmb3IgbWFueSByZWFzb25zLgoKPiBBc3N1
-bWluZyB0aGUgcDJtIHR5cGUgY2hhbmdlIGFycml2ZXMgdmlhIFhFTl9ETU9QX3NldF9tZW1fdHlw
-ZSwKPiBJIHRoaW5rIHdoYXQgd2UgbmVlZCB0byBkbyBpcyBkZWxheSB0aGUgYWN0dWFsIGNoYW5n
-ZSB1bnRpbCBubyBpb3JlcQo+IGlzIHBlbmRpbmcgYW55bW9yZSwga2luZCBvZiBsaWtlIHRoZSBW
-TSBldmVudCBzdWJzeXN0ZW0gZGVsYXlzCj4gY2VydGFpbiBDUiBhbmQgTVNSIHdyaXRlcyB1bnRp
-bCBWTSBlbnRyeSB0aW1lLiBJbiB0aGlzIHNpdHVhdGlvbiB3ZSdkCj4gdGhlbiBmdXJ0aGVyIGhh
-dmUgdG8gcmVzdHJpY3QgdGhlIG51bWJlciBvZiBzdWNoIHBlbmRpbmcgY2hhbmdlcywKPiBiZWNh
-dXNlIHdlIG5lZWQgdG8gcmVjb3JkIHRoZSByZXF1ZXN0KHMpIHNvbWV3aGVyZS4gUXVlc3Rpb24g
-aXMKPiBob3cgbWFueSBvZiBzdWNoIGJ1ZmZlcmFibGUgcmVxdWVzdHMgd291bGQgYmUgZW5vdWdo
-OiBVbmxlc3Mgd2UKPiB3YW50ZWQgdG8gZW5mb3JjZSB0aGF0IG9ubHkgb3JkaW5hcnkgYWxpZ25l
-ZCB3cml0ZXMgKGFuZCBybXctcykgY2FuCj4gZ2V0IHVzIGludG8gdGhpcyBzdGF0ZSwgYXBhcnQg
-ZnJvbSB3cml0ZXMgY3Jvc3NpbmcgcGFnZSBib3VuZGFyaWVzIHdlCj4gbWF5IG5lZWQgdG8gYmUg
-YWJsZSB0byBjb3BlIHdpdGggQVZYNTEyJ3Mgc2NhdHRlciBpbnNucy4KPiAKPiBUaGUgb3RoZXIg
-YWx0ZXJuYXRpdmUgSSBjYW4gdGhpbmsgb2Ygd291bGQgYmUgdG8gcmVjb3JkIHRoZSBzcGVjaWZp
-Ywo+IGZhaWx1cmUgY2FzZSAoZmluZGluZyBwMm1faW9yZXFfc2VydmVyKSBpbiB0aGUgZmlyc3Qg
-cGFzcywgYW5kIGFjdCB1cG9uCj4gaXQgKGluc3RlYWQgb2YgeW91ciBtaXRpZ2F0aW9uIGFib3Zl
-KSBkdXJpbmcgdGhlIHJldHJ5LiBBdCB0aGUgZmlyc3QKPiBnbGFuY2UgaXQgd291bGQgc2VlbSBt
-b3JlIGN1bWJlcnNvbWUgdG8gZG8gdGhlIHJlY29yZGluZyBhdCB0aGF0Cj4gbGF5ZXIgdGhvdWdo
-LgoKSSBsaWtlIHRoZSBsYXR0ZXIgc3VnZ2VzdGlvbiBtb3JlLiBTZWVtcyBsZXNzIGludmFzaXZl
-IGFuZCBwcm9uZSB0bwpyZWdyZXNzaW9ucy4gSSdkIGxpa2UgdG8gdHJ5IHRvIGltcGxlbWVudCBp
-dC4gQWx0aG91Z2ggSSB0aGluayB0aGUKaHlwZXJ2aXNvciBjaGVjayBzaG91bGQgYmUgbW9yZSBn
-ZW5lcmFsOiBsaWtlIGlmIElPUkVRIGlzIGluIHByb2dyZXNzCmRvbid0IHRyeSB0byBnb3QgdGhy
-b3VnaCBmYXN0LXBhdGggYW5kIHJlLWVudGVyIElPUkVRIGNvbXBsZXRpb24gcGF0aC4KCldoYXQg
-aWYgd2UganVzdCBjaGVjayAhaHZtX2lvcmVxX25lZWRzX2NvbXBsZXRpb24oKSBiZWZvcmUgcmV0
-dXJuaW5nClg4NkVNVUxfT0tBWSBpLmUuIGZhbGwgdGhyb3VnaCB0byB0aGUgYmFkX2dmbl90b19t
-Zm4gY2FzZSBpZiB0aGF0IGNoZWNrCmZhaWxzIGFzIFBhdWwgc3VnZ2VzdGVkPwoKSWdvcgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============6427948533002427993==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/Dloj=gwgUAKkGGyvPMgArDs"; protocol="application/pgp-signature"
+
+--Sig_/Dloj=gwgUAKkGGyvPMgArDs
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 8 Mar 2019 14:08:10 +0000
+schrieb Ian Jackson <ian.jackson@citrix.com>:
+
+> In fact this is OK because domcreate_stream_done only reads srs->dcs
+> and then does everything with the obtained dcs.  But there is nothing
+> there to indicate that srs might be mostly uninitialised.  Maybe we
+> could add a comment there, something like:
+>=20
+>   /* NB perhaps only srs->dcs is valid; eg in the case of an
+>    * early branch to domcreate_bootloader_done's `out' block */
+
+I'm find with that. Can this comment be adjusted at commit time?
+
+Olaf
+
+--Sig_/Dloj=gwgUAKkGGyvPMgArDs
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIJ/hgAKCRBdQqD6ppg2
+fomaAKDvec1/AjXCAsdOu5UhFTOiqQ9XOACg2gXIuqvjr02gK3FMra3L0hrgLS8=
+=yG3l
+-----END PGP SIGNATURE-----
+
+--Sig_/Dloj=gwgUAKkGGyvPMgArDs--
+
+
+--===============6427948533002427993==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6427948533002427993==--
