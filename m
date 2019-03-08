@@ -1,26 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v11 5/9] xen/x86: use DECLARE_BOUNDS as
- required
-Date: Fri, 8 Mar 2019 09:55:29 +0100
-Message-ID: <7d678d35-8e4a-7804-3732-3c165dadd978@suse.com>
-References: <alpine.DEB.2.10.1903051433230.17552@sstabellini-ThinkPad-X260>
- <1551825512-8975-5-git-send-email-sstabellini@kernel.org>
- <5C7FE846020000780021C2BA@prv1-mh.provo.novell.com>
- <alpine.DEB.2.10.1903061300510.17248@sstabellini-ThinkPad-X260>
- <23681.9326.135131.521459@mariner.uk.xensource.com>
- <5C822BDC0200007800150189@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libxl: prepare environment for
+ domcreate_stream_done
+Date: Fri, 8 Mar 2019 10:22:18 +0100
+Message-ID: <20190308102218.1276adb8.olaf@aepfle.de>
+References: <20190307105649.8919-1-olaf@aepfle.de>
+ <20190307110247.xrex66v2z4kvpqdp@zion.uk.xensource.com>
+ <20190307125338.253995f8.olaf@aepfle.de>
+ <20190307121820.x5smx4njc4pn6srh@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6705209832969708894=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ygi8=RL=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1h2BI2-0004Mq-Hk
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 08:55:38 +0000
-In-Reply-To: <5C822BDC0200007800150189@prv1-mh.provo.novell.com>
-Content-Language: de-DE
+ (envelope-from <SRS0=bKkW=RL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h2Bi2-0006Jr-Ca
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 09:22:30 +0000
+In-Reply-To: <20190307121820.x5smx4njc4pn6srh@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,63 +24,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <jbeulich@suse.com>, ian.jackson@citrix.com
-Cc: stefanos@xilinx.com, sstabellini@kernel.org, Andrew.Cooper3@citrix.com, George.Dunlap@citrix.com, julien.grall@arm.com, xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDMvMjAxOSAwOTo0NiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gSWFuIEphY2tzb24g
-PGlhbi5qYWNrc29uQGNpdHJpeC5jb20+IDAzLzA3LzE5IDM6MDIgUE0gPj4+Cj4+IFN0ZWZhbm8g
-U3RhYmVsbGluaSB3cml0ZXMgKCJSZTogW1BBVENIIHYxMSA1LzldIHhlbi94ODY6IHVzZSBERUNM
-QVJFX0JPVU5EUyBhcyByZXF1aXJlZCIpOgo+Pj4gT24gV2VkLCA2IE1hciAyMDE5LCBKYW4gQmV1
-bGljaCB3cm90ZToKPj4+PiBJcyB0aGUgbGluZSB3cmFwcGluZyByZWFsbHkgbmVlZGVkIGhlcmU/
-Cj4+Pgo+Pj4gSXQgd291bGQgZW5kIGF0IDgwIGNoYXJhY3RlcnMgZXhhY3RseSBvdGhlcndpc2Uu
-IEkgYW0gaGFwcHkgdG8gZG8gYXMgeW91Cj4+PiBwcmVmZXIuCj4+Cj4+IENlcnRhaW5seSBJIHBy
-ZWZlciBsaW5lcyB0byBlbmQgc3RyaWN0bHkgbGVzcyB0aGFuIDgwIGNoYXJhY3RlcnMgYW5kCj4+
-IHByZWZlcmFibHkgZXZlbiBzaG9ydGVyLiAgTXkgbWFpbGVyL2VkaXRvciBwcm9kdWNlcyB3cmFw
-IGRhbWFnZSBmb3IKPj4gZXhhY3RseS04MC1jaGFyYWN0ZXIgbGluZXMuCj4+Cj4+IEkgdGhpbmsg
-dGhpcyB3cmFwcGluZyB3YXMgaW50cm9kdWNlZCBieSBTdGVmYW5vIGFmdGVyIGEgcHJvbXB0IGZy
-b20KPj4gbWUuCj4+Cj4+IEphbiwgaXQgaXMgcXVpdGUgdW5mb3J0dW5hdGUgdGhhdCB5b3UgYXJl
-IHJlcGx5aW5nIHRvIFN0ZWZhbm8gdG8KPj4gZGlzYWdyZWUgd2l0aCB0aGluZ3MgdGhhdCBTdGVm
-YW5vIGRpZCBiZWNhdXNlIEkgc3VnZ2VzdGVkIHRoZW0sIHJhdGhlcgo+PiB0aGFuIHJlcGx5aW5n
-IHRvIG15IHBhdGNoIGNvbW1lbnRzLiAgV2UgbXVzdCBub3QgcHV0IFN0ZWZhbm8gaW4gdGhlCj4+
-IG1pZGRsZSBvZiBhIGRpc2FncmVlbWVudCBiZXR3ZWVuIGRpZmZlcmVudCBjb21taXR0ZXJzLgo+
-IAo+IEknbSBzb3JyeSwgYnV0IEkgbWF5IGhhdmUgZWFzaWx5IG92ZXJsb29rZWQgdGhpcyBlYXJs
-aWVyIGNvbW1lbnQgb2YgeW91cnMuCj4gQW55d2F5LCBhIGxhdGVyIHJlcGx5IGJ5IFN0ZWZhbm8g
-c3VnZ2VzdHMgdGhhdCB0aGUgbGluZSB3b3VsZCBlbmQgdXAKPiBiZWluZyA3OSBjaGFycywgd2hp
-Y2ggaXMgaW4gbGluZSB3aXRoIC4vQ09ESU5HX1NUWUxFLgo+IAo+IAo+PiBPbiB0aGlzIHN0eWxl
-IHF1ZXN0aW9uLCB3aGlsZSBJIGhhdmUgYW4gb3BpbmlvbiwgSSBkb24ndCBjb25zaWRlcgo+PiBt
-eXNlbGYgYSBtYWludGFpbmVyLCBzbyB0aGUgaHlwZXJ2aXNvciBtYWludGFpbmVycycgYW5zd2Vy
-IGlzCj4+IGRlZmluaXRpdmUuCj4+Cj4+Cj4+IE5ldmVydGhlbGVzcywgSSB3aWxsIGhhdmUgb25l
-IGdvIGF0IHRyeWluZyB0byBjb252aW5jZSBKYW46Cj4+Cj4+IE5vdGUgdGhhdDoKPj4KPj4gLSBX
-aGVuIGNvZGUgaXMgdHVybmVkIGludG8gYSBwYXRjaCwgYW4gZXh0cmEgY2hhcmFjdGVyIGlzIGFk
-ZGVkIGZvcgo+PiB0aGUgZGlmZiArLy0uICBUaGF0IG1lYW5zIHRoYXQgODAtY29sdW1uIGNvZGUg
-YmVjb21lcyA4MSBjb2x1bW5zCj4+IHdpZGUuCj4+Cj4+IC0gV2hlbiBhIHBhdGNoIGlzIHF1b3Rl
-ZCBmb3IgcmV2aWV3IGluIGVtYWlsLCB0d28gKHVzdWFsbHkpIGV4dHJhCj4+IHF1b3RpbmcgY2hh
-cmFjdGVycyBhcmUgYWRkZWQgKCc+ICcpIGZvciBlYWNoIGxldmVsIG9mIHJlcGx5LAo+PiBzbyA4
-MC1jb2x1bW4gY29kZSBiZWNvbWVzIDgzIG9yIDg1IChvciBtb3JlKSBjb2x1bW5zIHdpZGUuCj4+
-Cj4+IC0gT25lIHB1cnBvc2Ugb2YgdGhlIGxpbmUgbGVuZ3RoIGxpbWl0IGlzIHRvIGZpdCB3aXRo
-aW4gYQo+PiBjb252ZW50aW9uYWwgODAtY29sdW1uIHRleHQgdGVybWluYWwgd2luZG93IChvciBh
-dCBsZWFzdCwgdG8KPj4gbWluaW1pc2UgdGhlIG51bWJlciBvZiBsaW5lcyB3aGljaCBvdmVyZmxv
-dyBzdWNoIGEgd2luZG93KQo+Pgo+PiAtIEluIGFuIDgwIGNvbHVtbiBzc2ggc2Vzc2lvbiwgc2lt
-cGxlIHJlcHJlc2VudGF0aW9ucyBhcmUgb25seQo+PiBjYXBhYmxlIG9mIHVuYW1iaWd1b3VzbHkg
-ZGlzcGxheWluZyBsaW5lcyBvZiB1cCB0byA3OSBjaGFyYWN0ZXJzLgo+Pgo+PiAtIFRoZXJlZm9y
-ZSB0aGUgdG90YWwgYXZhaWxhYmxlIGNvZGUgd2lkdGggd2hpY2ggY2FuIGJlIGRpc3BsYXllZAo+
-PiB1bmFtYmlndW91c2x5IGluIGFuIDgwLWNvbHVtbiBzc2ggc2Vzc2lvbiwgd2l0aGluIGEgc2lu
-Z2x5IHF1b3RlZAo+PiBwYXRjaCwgaXMgNzYgY2hhcmFjdGVycy4gIExvbmdlciBsaW5lcyBwcm9k
-dWNlIHdyYXAgZGFtYWdlLgo+Pgo+PiBUbyBtZSB3b3VsZCBzZWVtIHRvIGltcGx5IHRoYXQgYSAq
-Y29kZSogbGluZSBsZW5ndGggbGltaXQgb2YgNzYgb3IgNzQKPj4gY2hhcmFjdGVycyBzaG91bGQg
-YmUgdXN1YWwuICBDZXJ0YWlubHkgaXQgc2VlbXMgY2h1cmxpc2ggdG8gb2JqZWN0IHRvCj4+IHBh
-dGNoZXMgd2hlcmUgdGhlIG5ldyBjb2RlIGlzIHdyYXBwZWQgdG8gYXZvaWQgbGluZXMgPjc2Lgo+
-IAo+IC4vQ09ESU5HX1NUWUxFIGlzIHByZXR0eSBjbGVhciBhYm91dCBpdCBiZWluZyAibGVzcyB0
-aGFuIDgwIGNoYXJhY3RlcnMiLgo+IElmIHlvdSB3YW50IGEgbG93ZXIgbGltaXQsIEkgdGhpbmsg
-eW91J2QgaGF2ZSB0byBwcm9wb3NlIGEgcGF0Y2ggdG8gdGhhdCBmaWxlCj4gKHdoaWNoIEknZCBs
-aWtlbHkgdHJ5IHRvIHByZXZlbnQgZnJvbSBnb2luZyBpbikuIFdyYXBwaW5nIGluIHBhcnRpY3Vs
-YXIgZm9yKDs7KQo+IChhcyB3YXMgdGhlIGNhc2UgaGVyZSBpaXJjKSBpcyBhbHdheXMgd2VpZ2hp
-bmcgbGVuZ3RoIHZzIHJlYWRhYmlsaXR5LiBJIGZvcgo+IG9uZSBjb25zaWRlciBmb3IoOzspIGVh
-c2llciB0byByZWFkIHdoZW4gaXQncyBhbGwgb24gb25lIGxpbmUuIFRoZXJlZm9yZSBJJ2QKPiBw
-cmVmZXIgaWYgbm8gImVhcmx5IiB3cmFwcGluZyB3YXMgZG9uZS4gQnV0IGFzIGFsd2F5cyAtIGlm
-IGEgbWFqb3JpdHkgdGhpbmtzCj4gZGlmZmVyZW50bHksIHNvIGJlIGl0LgoKLTIgZm9yIGxvd2Vy
-aW5nIHRoZSBsaW1pdC4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+--===============6705209832969708894==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/M5V_Qa/72hG4.2rWj=X1mnq"; protocol="application/pgp-signature"
+
+--Sig_/M5V_Qa/72hG4.2rWj=X1mnq
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 7 Mar 2019 12:18:20 +0000
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> That code has been changed quite a bit with migration v2 and COLO. I
+> wouldn't be surprised if some code becomes stale.
+
+Are you ok with just moving that assignment up to avoid the crash?
+This should be backported to at least 4.10, older branches need that too.
+A thoroughly review can still be done later.
+
+Olaf
+
+--Sig_/M5V_Qa/72hG4.2rWj=X1mnq
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXII0SgAKCRBdQqD6ppg2
+fhsWAKCjUnNCa9Kr6M20XD6pR2cVshEzcQCg2MIv9OTuSJP4b5SAVMa8jChyLh4=
+=8iLC
+-----END PGP SIGNATURE-----
+
+--Sig_/M5V_Qa/72hG4.2rWj=X1mnq--
+
+
+--===============6705209832969708894==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6705209832969708894==--
