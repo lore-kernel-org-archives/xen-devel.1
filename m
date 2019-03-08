@@ -1,18 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v12] tolerate jitter in cpu_khz calculation
- to avoid TSC emulation
-Date: Fri, 8 Mar 2019 20:29:07 +0100
-Message-ID: <20190308202907.56f7609a.olaf@aepfle.de>
-References: <20190308192059.24610-1-olaf@aepfle.de>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: SRSL People... [PATCH v11 0/9] misc safety
+ certification fixes
+Date: Fri, 8 Mar 2019 12:14:21 -0800 (PST)
+Message-ID: <alpine.DEB.2.10.1903081206420.17248@sstabellini-ThinkPad-X260>
+References: <alpine.DEB.2.10.1903051433230.17552@sstabellini-ThinkPad-X260>
+ <d0793749-a837-b094-d3b0-8a148bfff400@citrix.com>
+ <5C828E44020000780021CBB9@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8917197907345791135=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=bKkW=RL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1h2LBH-0008At-BJ
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 19:29:19 +0000
-In-Reply-To: <20190308192059.24610-1-olaf@aepfle.de>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=P6mV=RL=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1h2Lsv-0002wd-8G
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 20:14:25 +0000
+In-Reply-To: <5C828E44020000780021CBB9@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,54 +24,56 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, george.dunlap@citrix.com, Julien Grall <julien.grall@arm.com>, ian.jackson@citrix.com, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8917197907345791135==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/C_EgcOe5OEDWTQO58vZv.Bu"; protocol="application/pgp-signature"
-
---Sig_/C_EgcOe5OEDWTQO58vZv.Bu
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Fri,  8 Mar 2019 20:20:59 +0100
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> To reiterate the second paragraph: if a domU uses TSC as primary clock
-> source, it is expected that it runs NTP to cover for the resulting
-> drift. Therefore this change does no need a knob to turn it on or off.
-
-One interesting aspect is: the xenlinux based kernels report clocksource=3D=
-tsc,
-but I think there was no explicit requirement to run NTP in domU.
-There was even that 'independent_wallclock' knob. Why is that?
-
-Olaf
-
---Sig_/C_EgcOe5OEDWTQO58vZv.Bu
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXILCgwAKCRBdQqD6ppg2
-foRNAKDMCS7YMdNmJ9rk54gPrwkqRarCbwCgh31Y2Y91St/C0GKB029DDGjPX88=
-=iyfz
------END PGP SIGNATURE-----
-
---Sig_/C_EgcOe5OEDWTQO58vZv.Bu--
-
-
---===============8917197907345791135==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8917197907345791135==--
+T24gRnJpLCA4IE1hciAyMDE5LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4gT24gMDguMDMuMTkg
+YXQgMTY6MjYsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPiA+IE9uIDA1LzAz
+LzIwMTkgMjI6MzgsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiA+PiBIaSBhbGwsCj4gPj4K
+PiA+PiBUaGlzIHZlcnNpb24gb2YgdGhlIHNlcmllcyBtYWtlcyB1c2Ugb2YgdGhlIG1hY3JvIHN1
+Z2dlc3RlZCBieSBKYW4gd2l0aAo+ID4+IGZldyBtb2RpZmljYXRpb25zLiBTZWUgZWFjaCBwYXRj
+aCBmb3IgYSBkZXNjcmlwdGlvbiBvZiB0aGUgY2hhbmdlcy4KPiA+Pgo+ID4+IFRoZSBmb2xsb3dp
+bmcgY2hhbmdlcyBzaW5jZSBjb21taXQgODA4Y2ZmNGMyYWY2NmFmZDYxOTczNDUxYWViN2U3MDg3
+MzJhYmY5MDoKPiA+Pgo+ID4+ICAgc2NoZWQvY3JlZGl0MjogcmVtb3ZlIHN0YWxlIGNvbW1lbnQg
+KDIwMTktMDEtMDkgMTU6NDY6MDUgKzAxMDApCj4gPj4KPiA+PiBhcmUgYXZhaWxhYmxlIGluIHRo
+ZSBnaXQgcmVwb3NpdG9yeSBhdDoKPiA+Pgo+ID4+ICAgaHR0cDovL3hlbmJpdHMueGVucHJvamVj
+dC5vcmcvZ2l0LWh0dHAvcGVvcGxlL3NzdGFiZWxsaW5pL3hlbi11bnN0YWJsZS5naXQgCj4gPiBj
+ZXJ0aWZpY2F0aW9ucy0xMQo+ID4+Cj4gPj4gZm9yIHlvdSB0byBmZXRjaCBjaGFuZ2VzIHVwIHRv
+IDI2ZmIwMmI1YWU1OWI0OGI1MWNhNzg4YmU5MTUxMGQ4ZGY0OGFiMGE6Cj4gPj4KPiA+PiAgIHhl
+bjogZXhwbGljaXQgY2FzdHMgd2hlbiBERUNMQVJFX0JPVU5EUyBjYW5ub3QgYmUgdXNlZCAoMjAx
+OS0wMy0wNSAKPiA+IDE0OjI5OjUxIC0wODAwKQo+ID4+Cj4gPj4gLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo+ID4+IFN0ZWZh
+bm8gU3RhYmVsbGluaSAoOSk6Cj4gPj4gICAgICAgeGVuOiB1c2UgX19VSU5UUFRSX1RZUEVfXyBm
+b3IgdWludHB0cl90Cj4gPj4gICAgICAgeGVuOiBpbnRyb2R1Y2UgcHRyZGlmZl90Cj4gPj4gICAg
+ICAgeGVuOiBpbnRyb2R1Y2UgREVDTEFSRV9CT1VORFMKPiA+PiAgICAgICB4ZW4vYXJtOiB1c2Ug
+REVDTEFSRV9CT1VORFMgYXMgcmVxdWlyZWQKPiA+PiAgICAgICB4ZW4veDg2OiB1c2UgREVDTEFS
+RV9CT1VORFMgYXMgcmVxdWlyZWQKPiA+PiAgICAgICB4ZW4vY29tbW9uOiB1c2UgREVDTEFSRV9C
+T1VORFMgYXMgcmVxdWlyZWQKPiA+PiAgICAgICB4ZW46IHVzZSBERUNMQVJFX0JPVU5EUyBhcyBy
+ZXF1aXJlZAo+ID4+ICAgICAgIHhlbjogdXNlIERFQ0xBUkVfQk9VTkRTIGluIGFsdGVybmF0aXZl
+LmMKPiA+PiAgICAgICB4ZW46IGV4cGxpY2l0IGNhc3RzIHdoZW4gREVDTEFSRV9CT1VORFMgY2Fu
+bm90IGJlIHVzZWQKPiA+IAo+ID4gU2VyaW91c2x5LiAgRXZlcnlvbmUgdGFrZSBhIHN0ZXAgYmFj
+ayBmcm9tIHRoZWlyIGtleWJvYXJkcyBhbmQgYXBwbHkKPiA+IHNvbWUgY29tbW9uIHNlbnNlLgo+
+ID4gCj4gPiBUaGlzIGFyZ3VtZW50IGhhcyBnb25lIG9uIGZhciBiZXlvbmQgdGhlIG9ubHkgYW5z
+d2VyIHdoaWNoIG1hdHRlcnMuICBXVEYKPiA+IGlzIHN0aWxsIGNvbnRpbnVpbmcgZm9yPyAoVGhp
+cyBpcyBhIHJoZXRvcmljYWwgcXVlc3Rpb24gLSBJIGRvbid0IGV4cGVjdAo+ID4gYW4gYW5zd2Vy
+LikKPiA+IAo+ID4gCj4gPiBUaGUgcmF0aW9uYWwgZm9yIHRoaXMgc2VyaWVzIGlzIHRvIHNhdGlz
+ZnkgTUlTUkEuICBNSVNSQSBoYXZlIHNhaWQgaW4gbm8KPiA+IHVuY2VydGFpbiB0ZXJtcyB0aGF0
+IGFsbCBvZiB0aGVzZSB0cmlja3MgYXJlIHVuYWNjZXB0YWJsZSwgYW5kIGhhdmUKPiA+IGlkZW50
+aWZpZWQgdGhlIG9uZSBhY2NlcHRhYmxlIG9wdGlvbi4gIEJ5IG5vdCBkb2luZyB3aGF0IE1JU1JB
+IHNhaWQsCj4gPiB0aGlzIHNlcmllcyBkb2Vzbid0IG1vdmUgWGVuIGFueSBjbG9zZXIgdG8gcGFz
+c2luZyBjZXJ0aWZpY2F0aW9uLgo+IAo+IElpcmMgdGhleSBzYWlkIHRvIHVzZSBjYXN0cyBpbiBh
+IGNlbnRyYWwgcGxhY2UuIEFtIEkgbWlzcmVtZW1iZXJpbmc/Cj4gQmVjYXVzZSB0aGF0J3Mgd2hh
+dCB0aGUgc2VyaWVzIGRvZXMuCgpZZXMsIHRoZSBhbnN3ZXIgd2FzIGluIGEgcHJpdmF0ZSB0aHJl
+YWQsIGJ1dCBpdCB3YXMgYXMgSmFuIHdyb3RlLiBJbgpzaG9ydCwgdGhleSBzYWlkIHRvIHVzZSBj
+YXN0cyB0byB1aW50cHRyX3QgZm9yIGNvbXBhcmlzb25zL3N1YnRyYWN0aW9ucy4KVGhleSBhbHNv
+IHNhaWQgaWRlYWxseSB0byBkbyB0aGUgY2FzdHMgb25seSBvbmNlLCBiZWNhdXNlIHRoZSBmZXdl
+cgpjYXN0cyB0aGUgYmV0dGVyLiAKClNvLCBhcyBmYXIgYXMgSSB1bmRlcnN0YW5kLCB0aGUgZ2Vu
+ZXJhbCBhcHByb2FjaCB0YWtlbiBieSB0aGlzIHNlcmllcwpzaG91bGQgc2F0aXNmeSBib3RoIEM5
+OSBhbmQgTUlTUkFDLgoKVGhlIHJlbWFpbmluZyBxdWVzdGlvbnMgYXJlIG9uIHRoZSBpbXBsZW1l
+bnRhdGlvbiBkZXRhaWxzLCBzdWNoIGFzIHdoYXQKdG8gZG8gZm9yIHRoZSBmZXcgY2FzZXMgd2hl
+cmUgdGhlIERFQ0xBUkVfQk9VTkRTIGFwcHJvYWNoIGRvZXNuJ3Qgd29yawp3ZWxsIHdpdGhvdXQg
+bW9kaWZpY2F0aW9ucy4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
