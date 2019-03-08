@@ -1,23 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 6/6] x86: introduce dr_mask_idx() helper
- function...
-Date: Fri, 8 Mar 2019 17:10:01 +0000
-Message-ID: <48d42739-27ab-b7a0-2130-a19ffdacfe8d@citrix.com>
-References: <20190107120258.17897-1-paul.durrant@citrix.com>
- <20190107120258.17897-7-paul.durrant@citrix.com>
- <5C829F19020000780021CC80@prv1-mh.provo.novell.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] xen,
+ cpu_hotplug: Prevent an out of bounds access
+Date: Fri, 8 Mar 2019 18:16:38 +0100
+Message-ID: <ca3cd95b-a07d-254d-1e42-5a36686a805d@suse.com>
+References: <20190307054122.GB4517@kadam>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=NONk=RL=citrix.com=prvs=9636e147a=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h2J1c-0007ii-DK
- for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 17:11:12 +0000
-In-Reply-To: <5C829F19020000780021CC80@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=ygi8=RL=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1h2J6x-0007sS-SR
+ for xen-devel@lists.xenproject.org; Fri, 08 Mar 2019 17:16:43 +0000
+In-Reply-To: <20190307054122.GB4517@kadam>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,38 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Paul Durrant <paul.durrant@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Dan Carpenter <dan.carpenter@oracle.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Alex Nixon <alex.nixon@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, kernel-janitors@vger.kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDMvMjAxOSAxNjo1OCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMDcuMDEuMTkg
-YXQgMTM6MDIsIDxwYXVsLmR1cnJhbnRAY2l0cml4LmNvbT4gd3JvdGU6Cj4+IEBAIC0yMDIsMTMg
-KzIwMSwxMCBAQCBpbnQgZ3Vlc3RfcmRtc3Ioc3RydWN0IHZjcHUgKnYsIHVpbnQzMl90IG1zciwg
-dWludDY0X3QgKnZhbCkKPj4gICAgICAgICAgICovCj4+ICAjaWZkZWYgQ09ORklHX0hWTQo+PiAg
-ICAgICAgICBpZiAoIHYgPT0gY3VycmVudCAmJiBpc19odm1fZG9tYWluKGQpICYmIHYtPmFyY2gu
-aHZtLmZsYWdfZHJfZGlydHkgKQo+PiAtICAgICAgICAgICAgcmRtc3JsKG1zciwgKnZhbCk7Cj4+
-IC0gICAgICAgIGVsc2UKPj4gKyAgICAgICAgICAgIHJkbXNybChtc3IsIG1zcnMtPmRyX21hc2tb
-ZHJfbWFza19pZHgobXNyKV0pOwo+PiAgI2VuZGlmCj4+IC0gICAgICAgICAgICAqdmFsID0gbXNy
-cy0+ZHJfbWFza1sKPj4gLSAgICAgICAgICAgICAgICBhcnJheV9pbmRleF9ub3NwZWMoKG1zciA9
-PSBNU1JfQU1ENjRfRFIwX0FERFJFU1NfTUFTSykKPj4gLSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgPyAwIDogKG1zciAtIE1TUl9BTUQ2NF9EUjFfQUREUkVTU19NQVNLICsgMSks
-Cj4+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEFSUkFZX1NJWkUobXNycy0+
-ZHJfbWFzaykpXTsKPj4gKwo+PiArICAgICAgICAqdmFsID0gbXNycy0+ZHJfbWFza1tkcl9tYXNr
-X2lkeChtc3IpXTsKPj4gICAgICAgICAgYnJlYWs7Cj4gV2hpbGUgSSBkb24ndCByZWFsbHkgbWlu
-ZCB0aGlzIGJlaGF2aW9yYWwgY2hhbmdlIChvZiB1cGRhdGluZyAqbXNycyksCj4gSSdkIGxpa2Ug
-dG8gZ2V0IEFuZHJldydzIG9waW5pb24gb24gdGhpcyBmcm9tIGEgY29uY2VwdHVhbCBwb3YuCgpT
-bywgY29uc2lkZXJpbmcuLi4KCj4KPj4gQEAgLTMxNyw2ICszMTgsMjYgQEAgc3RydWN0IHZjcHVf
-bXNycwo+PiAgICAgIH0geHNzOwo+PiAgfTsKPj4gIAo+PiArc3RhdGljIGlubGluZSB1bnNpZ25l
-ZCBpbnQgZHJfbWFza19pZHgodWludDMyX3QgbXNyKQo+PiArewo+PiArICAgIHN3aXRjaCAobXNy
-KQo+IE1pc3NpbmcgYmxhbmtzIGltbWVkaWF0ZWx5IGluc2lkZSB0aGUgcGFyZW50aGVzZXMuCj4K
-Pj4gKyAgICB7Cj4+ICsgICAgZGVmYXVsdDoKPj4gKyAgICAgICAgQVNTRVJUX1VOUkVBQ0hBQkxF
-KCk7Cj4+ICsgICAgICAgIC8qIEZhbGx0aHJvdWdoICovCj4+ICsgICAgY2FzZSBNU1JfQU1ENjRf
-RFIwX0FERFJFU1NfTUFTSzoKPj4gKyAgICAgICAgcmV0dXJuIDA7CgouLi4gdGhpcyByZWludHJv
-ZHVjZXMgYSBoYWxmLVNwZWN0cmUtdjEgZ2FkZ2V0LCBJJ20gLTEgZm9yIHRoZSBjaGFuZ2UuCgpJ
-IGRvbid0IGFudGljaXBhdGUgdGhpcyB0cmFuc2xhdGlvbiBiZWluZyBuZWVkZWQgYW55d2hlcmUg
-ZWxzZSwgd2hpY2ggaXMKd2h5IEkgZGlkbid0IGludHJvZHVjZSBhIGhlbHBlciB0aGUgZmlyc3Qg
-dGltZSBhcm91bmQuCgpJJ2QganVzdCBkcm9wIHRoZSBwYXRjaCBhbmQgbGVhdmUgdGhlIGNvZGUg
-YXMgaXQgaXMuCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+T24gMDcvMDMvMjAxOSAwNjo0MSwgRGFuIENhcnBlbnRlciB3cm90ZToKPiBUaGUgImNwdSIgdmFy
+aWFibGUgY29tZXMgZnJvbSB0aGUgc3NjYW5mKCkgc28gU21hdGNoIG1hcmtzIGl0IGFzCj4gdW50
+cnVzdGVkIGRhdGEuICBXZSBjYW4ndCBwYXNzIGEgaGlnaGVyIHZhbHVlIHRoYW4gIm5yX2NwdV9p
+ZHMiIHRvCj4gY3B1X3Bvc3NpYmxlKCkgb3IgaXQgcmVzdWx0cyBpbiBhbiBvdXQgb2YgYm91bmRz
+IGFjY2Vzcy4KPiAKPiBGaXhlczogZDY4ZDgyYWZkNGM4ICgieGVuOiBpbXBsZW1lbnQgQ1BVIGhv
+dHBsdWdnaW5nIikKPiBTaWduZWQtb2ZmLWJ5OiBEYW4gQ2FycGVudGVyIDxkYW4uY2FycGVudGVy
+QG9yYWNsZS5jb20+CgpQdXNoZWQgdG8geGVuL3RpcC5naXQgZm9yLWxpbnVzLTUuMWEKCgpKdWVy
+Z2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
