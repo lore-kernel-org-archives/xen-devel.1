@@ -1,22 +1,19 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH] x86/HVM: don't crash guest in
- hvmemul_find_mmio_cache()
-Date: Mon, 11 Mar 2019 10:47:43 +0000
-Message-ID: <c8dab935fb3e4c34bb8fde15251afee0@AMSPEX02CL02.citrite.net>
-References: <5C863097020000780021D1CD@prv1-mh.provo.novell.com>
- <c4d5d32e8f8d4662ac1904786e93b2cb@AMSPEX02CL02.citrite.net>
- <5C863C2F020000780021D25E@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v12] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Mon, 11 Mar 2019 11:49:47 +0100
+Message-ID: <20190311114947.1d47e04e.olaf@aepfle.de>
+References: <20190308192059.24610-1-olaf@aepfle.de>
+ <5C863567020000780021D1FE@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7268946082787603129=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=TKYa=RO=citrix.com=prvs=96668afeb=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1h3ITE-0001GR-9C
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 10:47:48 +0000
-In-Reply-To: <5C863C2F020000780021D25E@prv1-mh.provo.novell.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=y/+I=RO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h3IVI-0001Oy-88
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 10:49:56 +0000
+In-Reply-To: <5C863567020000780021D1FE@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,56 +22,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <JBeulich@suse.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
-SkJldWxpY2hAc3VzZS5jb21dCj4gU2VudDogMTEgTWFyY2ggMjAxOSAxMDo0NQo+IFRvOiBQYXVs
-IER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPgo+IENjOiBBbmRyZXcgQ29vcGVyIDxB
-bmRyZXcuQ29vcGVyM0BjaXRyaXguY29tPjsgUm9nZXIgUGF1IE1vbm5lIDxyb2dlci5wYXVAY2l0
-cml4LmNvbT47IFdlaSBMaXUKPiA8d2VpLmxpdTJAY2l0cml4LmNvbT47IHhlbi1kZXZlbCA8eGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnPgo+IFN1YmplY3Q6IFJFOiBbUEFUQ0hdIHg4Ni9I
-Vk06IGRvbid0IGNyYXNoIGd1ZXN0IGluIGh2bWVtdWxfZmluZF9tbWlvX2NhY2hlKCkKPiAKPiA+
-Pj4gT24gMTEuMDMuMTkgYXQgMTE6MTEsIDxQYXVsLkR1cnJhbnRAY2l0cml4LmNvbT4gd3JvdGU6
-Cj4gPj4gIC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tCj4gPj4gRnJvbTogSmFuIEJldWxpY2gg
-W21haWx0bzpKQmV1bGljaEBzdXNlLmNvbV0KPiA+PiBTZW50OiAxMSBNYXJjaCAyMDE5IDA5OjU2
-Cj4gPj4gVG86IHhlbi1kZXZlbCA8eGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnPgo+ID4+
-IENjOiBBbmRyZXcgQ29vcGVyIDxBbmRyZXcuQ29vcGVyM0BjaXRyaXguY29tPjsgUGF1bCBEdXJy
-YW50Cj4gPiA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+OyBSb2dlciBQYXUgTW9ubmUKPiA+PiA8
-cm9nZXIucGF1QGNpdHJpeC5jb20+OyBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgo+ID4+
-IFN1YmplY3Q6IFtQQVRDSF0geDg2L0hWTTogZG9uJ3QgY3Jhc2ggZ3Vlc3QgaW4gaHZtZW11bF9m
-aW5kX21taW9fY2FjaGUoKQo+ID4+Cj4gPj4gQ29tbWl0IDM1YTYxYzA1ZWEgKCJ4ODZlbXVsOiBh
-ZGp1c3QgaGFuZGxpbmcgb2YgQVZYMiBnYXRoZXJzIikgYnVpbGRzCj4gPj4gdXBvbiB0aGUgZmFj
-dCB0aGF0IHRoZSBkb21haW4gd2lsbCBhY3R1YWxseSBzdXJ2aXZlIHJ1bm5pbmcgb3V0IG9mIE1N
-SU8KPiA+PiByZXN1bHQgYnVmZmVyIHNwYWNlLiBEcm9wIHRoZSBkb21haW5fY3Jhc2goKSBpbnZv
-Y2F0aW9uLiBBbHNvIGRlbGF5Cj4gPj4gaW5jcmVtZW50aW5nIG9mIHRoZSB1c2FnZSBjb3VudGVy
-LCBzdWNoIHRoYXQgdGhlIGZ1bmN0aW9uIGNhbid0IHBvc3NpYmx5Cj4gPj4gdXNlL3JldHVybiBh
-biBvdXQtb2YtYm91bmRzIHNsb3QvcG9pbnRlciBpbiBjYXNlIGV4ZWN1dGlvbiBzdWJzZXF1ZW50
-bHkKPiA+PiBtYWtlcyBpdCBpbnRvIHRoZSBmdW5jdGlvbiBhZ2FpbiB3aXRob3V0IGEgcHJpb3Ig
-cmVzZXQgb2Ygc3RhdGUuCj4gPj4KPiA+PiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJl
-dWxpY2hAc3VzZS5jb20+Cj4gPj4KPiA+PiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL2VtdWxhdGUu
-Ywo+ID4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCj4gPj4gQEAgLTk2NiwxMiAr
-OTY2LDExIEBAIHN0YXRpYyBzdHJ1Y3QgaHZtX21taW9fY2FjaGUgKmh2bWVtdWxfZmkKPiA+PiAg
-ICAgICAgICAgICAgcmV0dXJuIGNhY2hlOwo+ID4+ICAgICAgfQo+ID4+Cj4gPj4gLSAgICBpID0g
-dmlvLT5tbWlvX2NhY2hlX2NvdW50Kys7Cj4gPj4gKyAgICBpID0gdmlvLT5tbWlvX2NhY2hlX2Nv
-dW50Owo+ID4+ICAgICAgaWYoIGkgPT0gQVJSQVlfU0laRSh2aW8tPm1taW9fY2FjaGUpICkKPiA+
-PiAtICAgIHsKPiA+PiAtICAgICAgICBkb21haW5fY3Jhc2goY3VycmVudC0+ZG9tYWluKTsKPiA+
-PiAgICAgICAgICByZXR1cm4gTlVMTDsKPiA+PiAtICAgIH0KPiA+PiArCj4gPj4gKyAgICArK3Zp
-by0+bW1pb19jYWNoZV9jb3VudDsKPiA+Cj4gPiBBRkFJQ1QgdGhpcyBpc24ndCBnb2luZyB0byBz
-dG9wIHRoZSBmb3IgbG9vcCBhdCB0aGUgdG9wIG9mIHRoZSBmdW5jdGlvbgo+ID4gYWNjZXNzaW5n
-IG9uZSBlbnRyeSBiZXlvbmQgdGhlIGJvdW5kcyBvZiB0aGUgYXJyYXkuIElmIHlvdSdyZSBnb2lu
-ZyB0byByZW1vdmUKPiA+IHRoZSBkb21haW5fY3Jhc2goKSB0aGVuIEkgdGhpbmsgeW91IGFsc28g
-bmVlZCB0byBtb3ZlIHRoZSBib3VuZHMgY2hlY2sgdG8gdGhlCj4gPiB0b3Agb2YgdGhlIGZ1bmN0
-aW9uLgo+IAo+IEkgZG9uJ3QgZm9sbG93Ogo+IAo+IHN0YXRpYyBzdHJ1Y3QgaHZtX21taW9fY2Fj
-aGUgKmh2bWVtdWxfZmluZF9tbWlvX2NhY2hlKAo+ICAgICBzdHJ1Y3QgaHZtX3ZjcHVfaW8gKnZp
-bywgdW5zaWduZWQgbG9uZyBnbGEsIHVpbnQ4X3QgZGlyKQo+IHsKPiAgICAgdW5zaWduZWQgaW50
-IGk7Cj4gICAgIHN0cnVjdCBodm1fbW1pb19jYWNoZSAqY2FjaGU7Cj4gCj4gICAgIGZvciAoIGkg
-PSAwOyBpIDwgdmlvLT5tbWlvX2NhY2hlX2NvdW50OyBpICsrICkKPiAKPiBUaGlzIGl0ZXJhdGVz
-IHVwIHRvIChidXQgbm90IGluY2x1ZGluZykgdGhlIHJlY29yZGVkIGNvdW50IG9mCj4gcG9wdWxh
-dGVkIGNhY2hlIGVudHJpZXMuCgpTb3JyeSwgeWVzIEkgd2FzIG1pc3JlYWRpbmcuIFRoZSBwYXRj
-aCBpcyBzYWZlIGFzIGl0IHN0YW5kcy4KClJldmlld2VkLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwu
-ZHVycmFudEBjaXRyaXguY29tPgoKPiAKPiBKYW4KPiAKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7268946082787603129==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/4W622DWrJFFGjdrLlXrLk7c"; protocol="application/pgp-signature"
+
+--Sig_/4W622DWrJFFGjdrLlXrLk7c
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 11 Mar 2019 04:16:07 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> >>> On 08.03.19 at 20:20, <olaf@aepfle.de> wrote: =20
+> > To reiterate the second paragraph: if a domU uses TSC as primary clock
+> > source, it is expected that it runs NTP to cover for the resulting
+> > drift. Therefore this change does no need a knob to turn it on or off. =
+=20
+> Did you omit a 't' or a 'w' above? Judging from the patch I think you
+> mean "not", but I don't see how this follows, especially with your
+> subsequent reply validly stating that such a requirement did not
+> exist with the XenoLinux kernels.
+
+This does indeed mean 'does not need a knob'.
+
+I do not see how the HVM domU clock can be without drift if it does not
+sync with an external source. It seems xenlinux based PV drivers lack
+a clocksource, so they would better run ntp. pvops provides a clocksource=
+=3Dxen,
+but apparently with a low resolution.
+
+
+> > +#define VTSC_NTP_PPM_TOLERANCE 500UL  /* Amount of drift NTP will hand=
+le */ =20
+> As per above, "will" is too strong here: I think this wants to be "can", =
+and
+> you want to add "if enabled in the guest".
+
+I will reword this comment.
+
+> > +#define VTSC_JITTER_RANGE_KHZ 200UL   /* Assumed jitter in cpu_khz */ =
+=20
+> I'm struggling to understand the comment: Surely not every single
+> CPU surfaces a jitter of precisely 200kHz?
+
+This is the observed range of frequencies on a large number of hosts.
+The frequencies are expected to be exactly like "2.4GHz", but due to
+inaccurate measurement the value of "cpu_khz" is higher or lower.
+The value of "200" is simple the range of observed frequencies.
+
+I will find a better name for this variable.
+
+
+> > +     *    freq    tolerated freq difference
+> > +     *  ------- =3D -------------------------
+> > +     *  Million         Million + PPM     =20
+> > +     */
+> > +    tmp =3D 1000 * 1000;
+> > +    tmp +=3D VTSC_NTP_PPM_TOLERANCE;
+> > +    tmp *=3D cpu_khz;
+> > +    tmp /=3D 1000 * 1000;
+> > +
+> > +    tmp -=3D cpu_khz;
+> > +
+> > +    /*
+> > +     * Reduce the theoretical upper limit by the assumed measuring ina=
+ccuracy.
+> > +     */
+> > +    if ( tmp >=3D VTSC_JITTER_RANGE_KHZ )
+> > +        tmp -=3D VTSC_JITTER_RANGE_KHZ; =20
+> This could suggest the constant is meant to be an upper bound, but
+> (as said in review of prior versions) subtracting introduce a non-
+> linearity, _and_ it doesn't guarantee the result to be within the
+> assumed bounds.
+
+The upper bound is the PPM value. ntpd in Linux can handle up to 500.
+What is unclear about this formula?
+First PPM is converted into "khz", on a 2GHz system tmp will become 1000.
+Then the inaccuracy has to be handled, Xen can not know if cpu_khz is corre=
+ct.
+As said above, the observed range was 200, so this will be subtracted.
+
+> > +    vtsc_tolerance_khz =3D tmp;
+> > +    printk("Tolerating vtsc jitter for domUs: %u kHz\n", vtsc_toleranc=
+e_khz); =20
+> Could you remind me again how Dom0 remains unaffected here?
+> And if that's indeed the case, why would that be?
+
+A dom0 does not move from one host to another.
+And it better synchronizes with an external clock if domUs are supposed to =
+be migrated in the future.
+
+Olaf
+
+--Sig_/4W622DWrJFFGjdrLlXrLk7c
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIY9SwAKCRBdQqD6ppg2
+fpTUAKDTw8o89iCohIyuieQkjmoWKzHuFACfS+ZejVy1W61kguLpRzZIjv118AY=
+=yvyp
+-----END PGP SIGNATURE-----
+
+--Sig_/4W622DWrJFFGjdrLlXrLk7c--
+
+
+--===============7268946082787603129==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7268946082787603129==--
