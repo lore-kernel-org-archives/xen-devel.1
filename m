@@ -1,21 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 7/7] Arm/atomic: cosmetics
-Date: Mon, 11 Mar 2019 18:19:26 +0000
-Message-ID: <47ef6025-0efc-bd1c-900e-f2bc9aca67ab@arm.com>
-References: <5C869060020000780021D5D4@prv1-mh.provo.novell.com>
- <5C86924E020000780021D652@prv1-mh.provo.novell.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Xen 4.12 RC5
+Date: Mon, 11 Mar 2019 20:17:49 +0100
+Message-ID: <84e9c8ea-2dcb-1cb2-6945-0840c82988e6@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ahZP=RO=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1h3PWM-00048f-VQ
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 18:19:30 +0000
-In-Reply-To: <5C86924E020000780021D652@prv1-mh.provo.novell.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=1Ho2=RO=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1h3QQs-0000EO-76
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 19:17:54 +0000
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +20,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
+To: xen-users <xen-users@lists.xenproject.org>, xen-devel <xen-devel@lists.xenproject.org>, xen-announce@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gMTEvMDMvMjAxOSAxNjo1MiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gQ29ycmVj
-dCBjb2Rpbmcgc3R5bGUgb2YgYXNtKCkgaW52b2NhdGlvbnMuCkNvZGluZyBzdHlsZSBmcm9tIHdo
-ZXJlPyBNb3N0IG9mIHRoZSBBcm0gY29kZSBkb2VzIG5vdCBjb250YWluIHNwYWNlIGJlZm9yZSAo
-IAphbmQgYWZ0ZXIgKSBmb3IgYXNtIGludm9jYXRpb25zLiBJIGFsc28gY2FuJ3QgZmluZCBhbnl3
-aGVyZSBpbiBDT0RJTkdfU1RZTEUgCmltcG9zaW5nIHRoaXMgc3R5bGUuIFNvIHBsZWFzZSByZW1v
-dmUgdGhpcyBjaGFuZ2UuCgo+ICBEcm9wIHJlZHVuZGFudCBjYXN0cy4KPiBVbi1kZWZpbmUgbm8g
-bG9uZ2VyIG5lZWRlZCBtYWNyb3MgYWZ0ZXIgdXNlLgoKSSBhbSBoYXBweSB3aXRoIHRoZSB0aG9z
-ZSB0d28gY2hhbmdlcy4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGkgYWxsLAoKWGVuIDQuMTIgcmM1IGlzIHRhZ2dlZC4gWW91IGNhbiBjaGVjayB0aGF0IG91dCBm
+cm9tIHhlbi5naXQ6CgpnaXQ6Ly94ZW5iaXRzLnhlbi5vcmcveGVuLmdpdCA0LjEyLjAtcmM1CgpG
+b3IgeW91ciBjb252ZW5pZW5jZSB0aGVyZSBpcyBhbHNvIGEgdGFyYmFsbCBhdDoKaHR0cHM6Ly9k
+b3dubG9hZHMueGVucHJvamVjdC5vcmcvcmVsZWFzZS94ZW4vNC4xMi4wLXJjNS94ZW4tNC4xMi4w
+LXJjNS50YXIuZ3oKCkFuZCB0aGUgc2lnbmF0dXJlIGlzIGF0OgpodHRwczovL2Rvd25sb2Fkcy54
+ZW5wcm9qZWN0Lm9yZy9yZWxlYXNlL3hlbi80LjEyLjAtcmM1L3hlbi00LjEyLjAtcmM1LnRhci5n
+ei5zaWcKClBsZWFzZSBzZW5kIGJ1ZyByZXBvcnRzIGFuZCB0ZXN0IHJlcG9ydHMgdG8geGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnLgpXaGVuIHNlbmRpbmcgYnVnIHJlcG9ydHMsIHBsZWFz
+ZSBDQyByZWxldmFudCBtYWludGFpbmVycyBhbmQgbWUKKGpncm9zc0BzdXNlLmNvbSkuCgpUaGVy
+ZSB3aWxsIGJlIGEgWGVuIFRlc3QgRGF5IG9uIE1hciAxM3RoLgoKU2VlIGluc3RydWN0aW9ucyBv
+bjoKCmh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1hlbl80LjEyX1JDX3Rlc3RfaW5z
+dHJ1Y3Rpb25zCmh0dHBzOi8vd2lraS54ZW5wcm9qZWN0Lm9yZy93aWtpL1hlbl9Qcm9qZWN0X1Rl
+c3RfRGF5cwoKCkp1ZXJnZW4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
