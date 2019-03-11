@@ -1,27 +1,20 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: XenGT is still regressed on master
-Date: Mon, 11 Mar 2019 10:21:06 +0000
-Message-ID: <faa63854f0f9421ca40e34f6975b04ee@AMSPEX02CL02.citrite.net>
-References: <48ea46fc-12d1-3afe-5a9c-c1b2f21b1b0c@citrix.com>
- <5C825831020000780021CA16@prv1-mh.provo.novell.com>
- <85169b9d-f529-86fa-c1da-678e097ec7a8@citrix.com>
- <5C828302020000780021CB22@prv1-mh.provo.novell.com>
- <0d37c7f7-2990-1353-63c2-c905764532f7@citrix.com>
- <5C8294E4020000780021CC12@prv1-mh.provo.novell.com>
- <415d38bd-47eb-f64c-1e0a-8e617c29e74f@citrix.com>
- <5C862BCC020000780021D1AD@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v12] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Mon, 11 Mar 2019 11:26:53 +0100
+Message-ID: <20190311112653.0f9997b4.olaf@aepfle.de>
+References: <20190308192059.24610-1-olaf@aepfle.de>
+ <20190308202907.56f7609a.olaf@aepfle.de>
+ <5C863226020000780021D1DB@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8915616584730552162=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=TKYa=RO=citrix.com=prvs=96668afeb=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1h3I3V-0007LM-Oa
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 10:21:13 +0000
-In-Reply-To: <5C862BCC020000780021D1AD@prv1-mh.provo.novell.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=y/+I=RO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h3I98-0007X1-VY
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 10:27:03 +0000
+In-Reply-To: <5C863226020000780021D1DB@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,71 +23,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <JBeulich@suse.com>, Igor Druzhinin <igor.druzhinin@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
-SkJldWxpY2hAc3VzZS5jb21dCj4gU2VudDogMTEgTWFyY2ggMjAxOSAwOTozNQo+IFRvOiBJZ29y
-IERydXpoaW5pbiA8aWdvci5kcnV6aGluaW5AY2l0cml4LmNvbT4KPiBDYzogQW5kcmV3IENvb3Bl
-ciA8QW5kcmV3LkNvb3BlcjNAY2l0cml4LmNvbT47IFBhdWwgRHVycmFudCA8UGF1bC5EdXJyYW50
-QGNpdHJpeC5jb20+OyB4ZW4tZGV2ZWwgPHhlbi0KPiBkZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-Zz47IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KPiBTdWJqZWN0OiBSZTogWGVuR1Qg
-aXMgc3RpbGwgcmVncmVzc2VkIG9uIG1hc3Rlcgo+IAo+ID4+PiBPbiAwOC4wMy4xOSBhdCAxOToz
-NywgPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+IHdyb3RlOgo+ID4gT24gMDgvMDMvMjAxOSAx
-NjoxNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gPj4gT25lIGNhdmVhdCB0aG91Z2g6IFdoYXQgZG8g
-eW91IHN1Z2dlc3QgdG8gZG8gd2l0aCBwYWdlIHN0cmFkZGxpbmcKPiA+PiBhY2Nlc3Nlcz8gVGhl
-IGNvbW1pdCBpbnRyb2R1Y2luZyB0aGVzZSBmdW5jdGlvbnMgd2FzLCBhZnRlciBhbGwgdG8KPiA+
-PiBkZWFsIHdpdGggdGhpcyBzcGVjaWFsIGNhc2UuIFRoZSBpbi1mbGlnaHQgcmVxdWVzdCB3ZSBv
-YnNlcnZlIHRoZXJlCj4gPj4gY291bGQgYmUgZm9yIHRoZSBsZWFkaW5nIG9yIHRyYWlsaW5nIHBh
-cnQgb2YgdGhlIGFjY2VzcyB0aGF0J3MgYmVpbmcKPiA+PiByZS1leGVjdXRlZC4gV2hpbGUgdGhl
-c2UgY291bGQgcGVyaGFwcyBiZSB0b2xkIGFwYXJ0IGJ5IGxvb2tpbmcgYXQKPiA+PiB0aGUgbG93
-IGFkZHJlc3MgYml0cywgc2ltaWxhcmx5IHdoYXQgZG8geW91IGRvIGZvciBtdWx0aS1wYXJ0IChi
-dXQKPiA+PiBwZXJoYXBzIHdlbGwgYWxpZ25lZCkgYWNjZXNzZXMgbGlrZSBjbXBzKiwgdmdhdGhl
-ciosIG9yIHZzY2F0dGVyKj8KPiA+Cj4gPiBJIGRvbid0IHRoaW5rIHRoZXJlIGlzIGEgcHJvYmxl
-bSBoZXJlOiBJT1JFUXMgYXJlIGlzc3VlZCBzZXF1ZW50aWFsbHkKPiA+IGZvciBlYWNoIHBhcnQg
-b2YgdGhlIGFjY2Vzcy4gaHZtZW11bF9saW5lYXJfbW1pb19hY2Nlc3MoKSBtYWtlcyBzdXJlIG9u
-ZQo+ID4gY2h1bmsgb2YgdGhlIGFjY2VzcyBpc24ndCBzdHJhZGRsaW5nIGEgcGFnZSBib3VuZGFy
-eSBhbmQgd2UncmUgZmluaXNoaW5nCj4gPiB0aGUgcmVxdWVzdGVkIHBhcnQgaW1tZWRpYXRlbHkg
-YWZ0ZXIgYW4gSU9SRVEgZm9yIGl0IGdvdCBpc3N1ZWQuIEkgZG9uJ3QKPiA+IHNlZSBob3cgaXQg
-Y291bGQgZW50ZXIgbGluZWFyX3tyZWFkLHdyaXRlfSgpIGZvciBhIHdyb25nIHBhcnQgdW5sZXNz
-IHRoZQo+ID4gZW11bGF0aW9uIGxheWVyIGFib3ZlIGlzIGJyb2tlbi4KPiAKPiBGaXJzdCBvZiBh
-bGwgLSB0aGVyZSdzIG5vIHdheSB0byBieXBhc3MgbGluZWFyX3tyZWFkLHdyaXRlfSgpLiBUaGUK
-PiBxdWVzdGlvbiBpcyB3aGF0IHBhdGggaXMgdG8gYmUgdGFrZW4gaW5zaWRlIHRob3NlIGZ1bmN0
-aW9ucy4KPiAKPiBPZiB0aGUgbXVsdGlwbGUgbWVtb3J5IGFjY2Vzc2VzIChiZXNpZGVzIHRoZSBp
-bnNuIGZldGNoKSB0aGF0IGFuIGluc24KPiBtYXkgZG8sIHNvbWUgbWF5IGFjY2VzcyBSQU0gYW5k
-IHNvbWUgbWF5IGFjY2VzcyBNTUlPLiBTbyBmb3IKPiBjZXJ0YWluIG9mIHRoZSBhY2Nlc3NlcyB3
-ZSBtYXkgX25lZWRfIHRvIGNhbGwKPiBodm1fY29weV97ZnJvbSx0b31fZ3Vlc3RfbGluZWFyKCks
-IHdoaWxlIGZvciBvdGhlcnMgd2UgbWF5IHdhbnQKPiAobmVlZCkgdG8gYnlwYXNzIGl0IGFzIHlv
-dSBoYXZlIG91dGxpbmVkLgo+IAo+IFBlcmhhcHMsIGJlc2lkZXMgdGhlIGV4YW1wbGVzIGdpdmVu
-IGJlZm9yZSwgYSBQVVNIL1BPUCBmcm9tL3RvIE1NSU8KPiBpcyBhbm90aGVyIHJlbGV2YW50IGNh
-c2UgdG8gY29uc2lkZXI6IEluIHRoZSBjb21tb24gY2FzZSB0aGUgc3RhY2sKPiB3b3VsZCBiZSBp
-biBSQU0uCj4gCj4gQW5kIHRoZSBwYWdlIHN0cmFkZGxpbmcgY2hhbmdlIGluIHBhcnRpY3VsYXIg
-d2FzIHRvIGRlYWwgd2l0aCBjYXNlcwo+IHdoZXJlIGFuIGluZGl2aWR1YWwgYWNjZXNzIHdvdWxk
-IGhhdmUgcGFydCBvZiBpdCBtYXAgdG8gUkFNIGFuZAo+IGFub3RoZXIgcGFydCBnbyB0byBNTUlP
-LiBJLmUuIHdlJ2QgYWdhaW4gZ28gYm90aCByb3V0ZXMgd2l0aGluCj4gbGluZWFyX3tyZWFkLHdy
-aXRlfSgpIGluIHRoZSBjb3Vyc2Ugb2YgZW11bGF0aW5nIGEgc2luZ2xlIGluc24uCj4gCj4gVGhl
-IGZhY3QgdGhhdCB3ZSdyZSBpc3N1aW5nIElPUkVRcyBzZXF1ZW50aWFsbHkgZG9lc24ndCBoZWxw
-IHRoZQo+IHNpdHVhdGlvbiAtIHVwb24gcmUtZXhlY3V0aW9uIGFsbCBwcmlvciBtZW1vcnkgYWNj
-ZXNzZXMgd2lsbCBiZSByZS0KPiBwbGF5ZWQuIEl0J3MganVzdCB0aGF0IHByZXZpb3VzbHkgY29t
-cGxldGVkIElPUkVRcyB3b24ndCBiZSByZS0KPiBpc3N1ZWQgdGhlbXNlbHZlcywgZHVlIHRvIHRo
-ZWlyIHJlc3VsdHMgaGF2aW5nIGdvdCByZWNvcmRlZCBpbnRvIHRoZQo+IHN0cnVjdCBodm1fbW1p
-b19jYWNoZSBpbnN0YW5jZXMgaGFuZ2luZyBvZmYgb2Ygc3RydWN0IHZjcHUuIFNlZQo+IGh2bWVt
-dWxfcGh5c19tbWlvX2FjY2VzcygpLCBodm1lbXVsX2ZpbmRfbW1pb19jYWNoZSgpLCBhbmQKPiBo
-dm1lbXVsX2xpbmVhcl9tbWlvX2FjY2VzcygpLgo+IAoKQUlVSSB0aGUgcHJvYmxlbSBpcyBub3Qg
-b25lIG9mIHJlLWlzc3Vpbmcgb3IgY2FjaGluZyBoZXJlLiBUaGUgcHJvYmxlbSBpcyB0aGF0IHNv
-bWV0aGluZyBoYXMgY2hhbmdlZCBmcm9tIE1NSU8gdG8gbWVtb3J5IHdpdGhpbiB0aGUgc2NvcGUg
-b2YgYSBzaW5nbGUgZW11bGF0aW9uIG1lYW5pbmcgdGhhdCB3ZSB0YWtlIHRoZSB3cm9uZyBwYXRo
-IGluIGxpbmVhcl9yZWFkKCkgb3IgbGluZWFyX3dyaXRlKCkuIFRoZSBjcnVjaWFsIHRoaW5nIGlz
-IHRoYXQgaWYgd2Ugc3RhcnQgYW4gTU1JTyBmb3IgYW4gYWNjZXNzIHRoZW4gd2UgbmVlZCB0byBt
-YWtlIHN1cmUgd2UgdHJlYXQgcmUtaXNzdWluZyBvZiB0aGUgc2FtZSBhY2Nlc3MgYXMgTU1JTywg
-ZXZlbiBpZiBSQU0gaGFzIG1hZ2ljYWxseSBhcHBlYXJlZCBpbiB0aGUgUDJNIGluIHRoZSBtZWFu
-dGltZS4KCiAgUGF1bAoKPiBMb29raW5nIGF0IGh2bWVtdWxfZmluZF9tbWlvX2NhY2hlKCkgSSBu
-b3cgcmVhbGl6ZSB0aGF0IGNvbW1pdAo+IDM1YTYxYzA1ZWEgKCJ4ODZlbXVsOiBhZGp1c3QgaGFu
-ZGxpbmcgb2YgQVZYMiBnYXRoZXJzIikgZGlkbid0Cj4gaGF2ZSB0aGUgaW50ZW5kZWQgZWZmZWN0
-LCBkdWUgdG8gdGhlIGRvbWFpbl9jcmFzaCgpIHRoZXJlLgo+IEFwcGFyZW50bHkgKHNlZWluZyB0
-aGUgY29tbWl0J3MgZGVzY3JpcHRpb24pIEkgZGlkIGxvb2sgYXQKPiBodm1lbXVsX2xpbmVhcl9t
-bWlvX2FjY2VzcygpIG9ubHkgYmFjayB0aGVuLgo+IAo+IEphbgo+IAoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============8915616584730552162==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/OJHxtF.oAm19=u_vP1g1STj"; protocol="application/pgp-signature"
+
+--Sig_/OJHxtF.oAm19=u_vP1g1STj
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 11 Mar 2019 04:02:14 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> > One interesting aspect is: the xenlinux based kernels report clocksourc=
+e=3Dtsc, =20
+> I don't think they do - iirc they are hardcoded to clocksource=3Dxen.
+
+For HVM they do:
+
+ # dmesg | grep -Ei '(clock|hz)'
+[    0.000000] hpet clockevent registered
+[    0.000000] tsc: Detected 2000.225 MHz processor
+[    0.142074] smpboot: CPU0: Intel(R) Xeon(R) CPU           E5504  @ 2.00G=
+Hz (fam: 06, model: 1a, stepping: 05)
+[    0.322108] hpet0: 3 comparators, 64-bit 62.500000 MHz counter
+[    0.324095] Switched to clocksource hpet
+[    2.436321] tsc: Refined TSC clocksource calibration: 2000.084 MHz
+[    3.437123] Switched to clocksource tsc
+
+But PV shows just that:
+
+ # dmesg | grep -Ei '(clock|hz)'
+[    0.000000] Xen reported: 2000.084 MHz processor.
+[    0.316671] Switched to clocksource xen
+
+> > There was even that 'independent_wallclock' knob. Why is that? =20
+> Why is what? Are you questioning the presence of the setting in
+> the XenoLinux kernels, or its absence in the pv-ops ones?
+
+I'm just curious why HVM uses tsc, but nothing states that using ntpd would=
+ be a requirement.
+
+However, a brief search suggests that reported "clock issues" are indeed so=
+lved by running ntp in HVM.
+
+Olaf
+
+--Sig_/OJHxtF.oAm19=u_vP1g1STj
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIY37QAKCRBdQqD6ppg2
+fhC1AKD4847zoYrBcZjMgWMhDXdnvSA0jACdH0i3HbwOw81IOuycWOAEJPtCuiY=
+=TJIz
+-----END PGP SIGNATURE-----
+
+--Sig_/OJHxtF.oAm19=u_vP1g1STj--
+
+
+--===============8915616584730552162==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8915616584730552162==--
