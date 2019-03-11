@@ -1,20 +1,21 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v12] tolerate jitter in cpu_khz calculation
- to avoid TSC emulation
-Date: Mon, 11 Mar 2019 11:26:53 +0100
-Message-ID: <20190311112653.0f9997b4.olaf@aepfle.de>
-References: <20190308192059.24610-1-olaf@aepfle.de>
- <20190308202907.56f7609a.olaf@aepfle.de>
- <5C863226020000780021D1DB@prv1-mh.provo.novell.com>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH] x86/hvm: finish IOREQ correctly on
+ completion path
+Date: Mon, 11 Mar 2019 10:30:42 +0000
+Message-ID: <71b6e1dee81b499a90e4b24b1989abf6@AMSPEX02CL02.citrite.net>
+References: <1552080650-9168-1-git-send-email-igor.druzhinin@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8915616584730552162=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=y/+I=RO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1h3I98-0007X1-VY
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 10:27:03 +0000
-In-Reply-To: <5C863226020000780021D1DB@prv1-mh.provo.novell.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=TKYa=RO=citrix.com=prvs=96668afeb=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1h3IDS-0008G3-Tw
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 10:31:30 +0000
+In-Reply-To: <1552080650-9168-1-git-send-email-igor.druzhinin@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,77 +24,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, Igor Druzhinin <igor.druzhinin@citrix.com>, Wei Liu <wei.liu2@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8915616584730552162==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/OJHxtF.oAm19=u_vP1g1STj"; protocol="application/pgp-signature"
-
---Sig_/OJHxtF.oAm19=u_vP1g1STj
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 11 Mar 2019 04:02:14 -0600
-schrieb "Jan Beulich" <JBeulich@suse.com>:
-
-> > One interesting aspect is: the xenlinux based kernels report clocksourc=
-e=3Dtsc, =20
-> I don't think they do - iirc they are hardcoded to clocksource=3Dxen.
-
-For HVM they do:
-
- # dmesg | grep -Ei '(clock|hz)'
-[    0.000000] hpet clockevent registered
-[    0.000000] tsc: Detected 2000.225 MHz processor
-[    0.142074] smpboot: CPU0: Intel(R) Xeon(R) CPU           E5504  @ 2.00G=
-Hz (fam: 06, model: 1a, stepping: 05)
-[    0.322108] hpet0: 3 comparators, 64-bit 62.500000 MHz counter
-[    0.324095] Switched to clocksource hpet
-[    2.436321] tsc: Refined TSC clocksource calibration: 2000.084 MHz
-[    3.437123] Switched to clocksource tsc
-
-But PV shows just that:
-
- # dmesg | grep -Ei '(clock|hz)'
-[    0.000000] Xen reported: 2000.084 MHz processor.
-[    0.316671] Switched to clocksource xen
-
-> > There was even that 'independent_wallclock' knob. Why is that? =20
-> Why is what? Are you questioning the presence of the setting in
-> the XenoLinux kernels, or its absence in the pv-ops ones?
-
-I'm just curious why HVM uses tsc, but nothing states that using ntpd would=
- be a requirement.
-
-However, a brief search suggests that reported "clock issues" are indeed so=
-lved by running ntp in HVM.
-
-Olaf
-
---Sig_/OJHxtF.oAm19=u_vP1g1STj
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIY37QAKCRBdQqD6ppg2
-fhC1AKD4847zoYrBcZjMgWMhDXdnvSA0jACdH0i3HbwOw81IOuycWOAEJPtCuiY=
-=TJIz
------END PGP SIGNATURE-----
-
---Sig_/OJHxtF.oAm19=u_vP1g1STj--
-
-
---===============8915616584730552162==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8915616584730552162==--
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IElnb3IgRHJ1emhpbmluIFttYWls
+dG86aWdvci5kcnV6aGluaW5AY2l0cml4LmNvbV0KPiBTZW50OiAwOCBNYXJjaCAyMDE5IDIxOjMx
+Cj4gVG86IHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwo+IENjOiBQYXVsIER1cnJhbnQg
+PFBhdWwuRHVycmFudEBjaXRyaXguY29tPjsgamJldWxpY2hAc3VzZS5jb207IEFuZHJldyBDb29w
+ZXIKPiA8QW5kcmV3LkNvb3BlcjNAY2l0cml4LmNvbT47IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJp
+eC5jb20+OyBSb2dlciBQYXUgTW9ubmUgPHJvZ2VyLnBhdUBjaXRyaXguY29tPjsKPiBJZ29yIERy
+dXpoaW5pbiA8aWdvci5kcnV6aGluaW5AY2l0cml4LmNvbT4KPiBTdWJqZWN0OiBbUEFUQ0hdIHg4
+Ni9odm06IGZpbmlzaCBJT1JFUSBjb3JyZWN0bHkgb24gY29tcGxldGlvbiBwYXRoCj4gCj4gU2lu
+Y2UgdGhlIGludHJvZHVjdGlvbiBvZiBsaW5lYXJfe3JlYWQsd3JpdGV9KCkgaGVscGVycyBpbiAz
+YmRlYzUzMGE1Cj4gKHg4Ni9IVk06IHNwbGl0IHBhZ2Ugc3RyYWRkbGluZyBlbXVsYXRlZCBhY2Nl
+c3NlcyBpbiBtb3JlIGNhc2VzKSB0aGUKPiBjb21wbGV0aW9uIHBhdGggZm9yIElPUkVRcyBoYXMg
+YmVlbiBicm9rZW46IGlmIHRoZXJlIGlzIGFuIElPUkVRIGluCj4gcHJvZ3Jlc3MgYnV0IGh2bV9j
+b3B5X3t0byxmcm9tfV9ndWVzdF9saW5lYXIoKSByZXR1cm5zIEhWTVRSQU5TX29rYXkKPiAoZS5n
+LiB3aGVuIFAyTSB0eXBlIG9mIHNvdXJjZS9kZXN0aW5hdGlvbiBoYXMgYmVlbiBjaGFuZ2VkIGJ5
+IElPUkVRCj4gaGFuZGxlcikgdGhlIGV4ZWN1dGlvbiB3aWxsIG5ldmVyIHJlLWVudGVyIGh2bWVt
+dWxfZG9faW8oKSB3aGVyZQo+IElPUkVRcyBhcmUgY29tcGxldGVkLiBUaGlzIHVzdWFsbHkgcmVz
+dWx0cyBpbiBhIGRvbWFpbiBjcmFzaCB1cG9uCj4gdGhlIGV4ZWN1dGlvbiBvZiB0aGUgbmV4dCBJ
+T1JFUSBlbnRlcmluZyBodm1lbXVsX2RvX2lvKCkgYW5kIGZpbmRpbmcKPiB0aGUgcmVtbmFudHMg
+b2YgdGhlIHByZXZpb3VzIElPUkVRIGluIHRoZSBzdGF0ZSBtYWNoaW5lLgo+IAo+IFRoaXMgcGFy
+dGljdWxhciBpc3N1ZSBoYXMgYmVlbiBkaXNjb3ZlcmVkIGluIHJlbGF0aW9uIHRvIHAybV9pb3Jl
+cV9zZXJ2ZXIKPiB0eXBlIHdoZXJlIGFuIGVtdWxhdG9yIGNoYW5nZWQgdGhlIG1lbW9yeSB0eXBl
+IGJldHdlZW4gcDJtX2lvcmVxX3NlcnZlcgo+IGFuZCBwMm1fcmFtX3J3IGluIHByb2Nlc3Mgb2Yg
+cmVzcG9uZGluZyB0byBJT1JFUSB3aGljaCBtYWRlIGh2bV9jb3B5Xy4uKCkKPiB0byBiZWhhdmUg
+ZGlmZmVyZW50bHkgb24gdGhlIHdheSBiYWNrLiBCdXQgY291bGQgYmUgYWxzbyBhcHBsaWVkCj4g
+dG8gYSBjYXNlIHdoZXJlIGUuZy4gYW4gZW11bGF0b3IgYmFsbG9vbnMgbWVtb3J5IHRvL2Zyb20g
+dGhlIGd1ZXN0IGluCj4gcmVzcG9uc2UgdG8gTU1JTyByZWFkL3dyaXRlLCBldGMuCj4gCj4gRml4
+IGl0IGJ5IGNoZWNraW5nIGlmIElPUkVRIGNvbXBsZXRpb24gaXMgcmVxdWlyZWQgYmVmb3JlIHRy
+eWluZyB0bwo+IGZpbmlzaCBhIG1lbW9yeSBhY2Nlc3MgaW1tZWRpYXRlbHkgdGhyb3VnaCBodm1f
+Y29weV8uLigpLCByZS1lbnRlcgo+IGh2bWVtdWxfZG9faW8oKSBvdGhlcndpc2UuCj4gCj4gU2ln
+bmVkLW9mZi1ieTogSWdvciBEcnV6aGluaW4gPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+Cj4g
+LS0tCj4gIHhlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jIHwgMjAgKysrKysrKysrKysrKysrKysr
+LS0KPiAgMSBmaWxlIGNoYW5nZWQsIDE4IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCj4g
+Cj4gZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jIGIveGVuL2FyY2gveDg2
+L2h2bS9lbXVsYXRlLmMKPiBpbmRleCA0MWFhYzI4Li4zNmY4ZmVlIDEwMDY0NAo+IC0tLSBhL3hl
+bi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9lbXVsYXRl
+LmMKPiBAQCAtMTA4MCw3ICsxMDgwLDE1IEBAIHN0YXRpYyBpbnQgbGluZWFyX3JlYWQodW5zaWdu
+ZWQgbG9uZyBhZGRyLCB1bnNpZ25lZCBpbnQgYnl0ZXMsIHZvaWQgKnBfZGF0YSwKPiAgICAgICAg
+ICAgICAgICAgICAgICAgICB1aW50MzJfdCBwZmVjLCBzdHJ1Y3QgaHZtX2VtdWxhdGVfY3R4dCAq
+aHZtZW11bF9jdHh0KQo+ICB7Cj4gICAgICBwYWdlZmF1bHRfaW5mb190IHBmaW5mbzsKPiAtICAg
+IGludCByYyA9IGh2bV9jb3B5X2Zyb21fZ3Vlc3RfbGluZWFyKHBfZGF0YSwgYWRkciwgYnl0ZXMs
+IHBmZWMsICZwZmluZm8pOwo+ICsgICAgY29uc3Qgc3RydWN0IGh2bV92Y3B1X2lvICp2aW8gPSAm
+Y3VycmVudC0+YXJjaC5odm0uaHZtX2lvOwo+ICsgICAgaW50IHJjID0gSFZNVFJBTlNfYmFkX2dm
+bl90b19tZm47Cj4gKwo+ICsgICAgLyoKPiArICAgICAqIElmIHRoZSBtZW1vcnkgYWNjZXNzIGNh
+biBiZSBoYW5kbGVkIGltbWVkaWF0ZWx5IC0gZG8gaXQsCj4gKyAgICAgKiBvdGhlcndpc2UgcmUt
+ZW50ZXIgaW9yZXEgY29tcGxldGlvbiBwYXRoIHRvIHByb3Blcmx5IGNvbnN1bWUgaXQuCj4gKyAg
+ICAgKi8KPiArICAgIGlmICggIWh2bV9pb3JlcV9uZWVkc19jb21wbGV0aW9uKCZ2aW8tPmlvX3Jl
+cSkgKQo+ICsgICAgICAgIHJjID0gaHZtX2NvcHlfZnJvbV9ndWVzdF9saW5lYXIocF9kYXRhLCBh
+ZGRyLCBieXRlcywgcGZlYywgJnBmaW5mbyk7CgpJIHRoaW5rIHRoaXMgaXMgdGhlIHJpZ2h0IHRo
+aW5nIHRvIGRvIGJ1dCBjYW4gd2UgY2hhbmdlIHRoZSB0ZXh0IHRvIHNvbWV0aGluZyBsaWtlOgoK
+IklmIHRoZXJlIGlzIHBlbmRpbmcgaW9yZXEgdGhlbiB3ZSBtdXN0IGJlIHJlLWlzc3VpbmcgYW4g
+YWNjZXNzIHRoYXQgd2FzIHByZXZpb3VzbHkgaGFuZGVkIGFzIE1NSU8uIFRodXMgaXQgaXMgaW1w
+ZXJhdGl2ZSB0aGF0IHdlIGhhbmRsZSB0aGlzIGFjY2VzcyBpbiB0aGUgc2FtZSB3YXkgdG8gZ3Vh
+cmFudGVlIGNvbXBsZXRpb24gYW5kIGhlbmNlIGNsZWFuIHVwIGFueSBpbnRlcmltIHN0YXRlLiIK
+CiAgUGF1bAoKPiAKPiAgICAgIHN3aXRjaCAoIHJjICkKPiAgICAgIHsKPiBAQCAtMTEyMyw3ICsx
+MTMxLDE1IEBAIHN0YXRpYyBpbnQgbGluZWFyX3dyaXRlKHVuc2lnbmVkIGxvbmcgYWRkciwgdW5z
+aWduZWQgaW50IGJ5dGVzLCB2b2lkICpwX2RhdGEsCj4gICAgICAgICAgICAgICAgICAgICAgICAg
+IHVpbnQzMl90IHBmZWMsIHN0cnVjdCBodm1fZW11bGF0ZV9jdHh0ICpodm1lbXVsX2N0eHQpCj4g
+IHsKPiAgICAgIHBhZ2VmYXVsdF9pbmZvX3QgcGZpbmZvOwo+IC0gICAgaW50IHJjID0gaHZtX2Nv
+cHlfdG9fZ3Vlc3RfbGluZWFyKGFkZHIsIHBfZGF0YSwgYnl0ZXMsIHBmZWMsICZwZmluZm8pOwo+
+ICsgICAgY29uc3Qgc3RydWN0IGh2bV92Y3B1X2lvICp2aW8gPSAmY3VycmVudC0+YXJjaC5odm0u
+aHZtX2lvOwo+ICsgICAgaW50IHJjID0gSFZNVFJBTlNfYmFkX2dmbl90b19tZm47Cj4gKwo+ICsg
+ICAgLyoKPiArICAgICAqIElmIHRoZSBtZW1vcnkgYWNjZXNzIGNhbiBiZSBoYW5kbGVkIGltbWVk
+aWF0ZWx5IC0gZG8gaXQsCj4gKyAgICAgKiBvdGhlcndpc2UgcmUtZW50ZXIgaW9yZXEgY29tcGxl
+dGlvbiBwYXRoIHRvIHByb3Blcmx5IGNvbnN1bWUgaXQuCj4gKyAgICAgKi8KPiArICAgIGlmICgg
+IWh2bV9pb3JlcV9uZWVkc19jb21wbGV0aW9uKCZ2aW8tPmlvX3JlcSkgKQo+ICsgICAgICAgIHJj
+ID0gaHZtX2NvcHlfdG9fZ3Vlc3RfbGluZWFyKGFkZHIsIHBfZGF0YSwgYnl0ZXMsIHBmZWMsICZw
+ZmluZm8pOwo+IAo+ICAgICAgc3dpdGNoICggcmMgKQo+ICAgICAgewo+IC0tCj4gMi43LjQKCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
