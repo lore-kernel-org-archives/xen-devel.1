@@ -1,9 +1,9 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v3 1/7] Update python requirement
-Date: Mon, 11 Mar 2019 13:08:11 +0000
-Message-ID: <1f307e4b-7ed3-6203-c1b0-ea4efec144f1@citrix.com>
+Subject: Re: [PATCH v3 2/7] pygrub/fsimage: drop unused struct
+Date: Mon, 11 Mar 2019 13:08:48 +0000
+Message-ID: <1cbcd386-e221-bcd4-5ee6-0e7a5adae36f@citrix.com>
 References: <20190311130434.10437-1-wei.liu2@citrix.com>
- <20190311130434.10437-2-wei.liu2@citrix.com>
+ <20190311130434.10437-3-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +11,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=qj7e=RO=citrix.com=prvs=9661cd40b=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h3Kg4-0005Br-5b
- for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 13:09:12 +0000
-In-Reply-To: <20190311130434.10437-2-wei.liu2@citrix.com>
+ id 1h3KgX-0005FP-0V
+ for xen-devel@lists.xenproject.org; Mon, 11 Mar 2019 13:09:41 +0000
+In-Reply-To: <20190311130434.10437-3-wei.liu2@citrix.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,19 +24,12 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMDMvMjAxOSAxMzowNCwgV2VpIExpdSB3cm90ZToKPiBDZW50T1MgNSwgd2hpY2ggd2Fz
-IHRoZSByZWFzb24gb2YgdGhlIDIuNCByZXN0cmljdGlvbiwgaXMgRU9MLiBDZW50T1MKPiA2IHNo
-aXBzIDIuNi4KPgo+IEJ1bXAgdGhlIHZlcnNpb24gdG8gMi42IGluIFJFQURNRS4gTm93IHRoYXQg
-YWxsIHNjcmlwdHMgYXJlIDMKPiBjb21wYXRpYmxlLCByZW1vdmUgdGhlIHJlc3RyaWN0aW9uIG9u
-IHB5dGhvbiAyIGFzIHdlbGwuCgpJIHRoaW5rIHRoZSBQeXRob24gMiByZXN0cmljdGlvbiBuZWVk
-cyB0byBzdGF5IHVudGlsIHRoZSBlbmQgb2YgdGhlIHNlcmllcy4KCkl0cyBmaW5lIHRvIHVwZGF0
-ZSB0aGUgbWluaW11bSB0byAyLjYgYmVmb3JlIHRoZSBjaGFuZ2VzIGFyZSBtYWRlLCBidXQKaXQg
-aXNuJ3QgcmVhbGx5IG9rIHRvIGNsYWltIHRoYXQgZXZlcnl0aGluZyBpcyAzLWNvbXBhdGlibGUg
-YXQgdGhpcyBwb2ludC4KCn5BbmRyZXcKCj4KPiBVcGRhdGUgdGhlIGNoZWNrIGluIGNvbmZpZ3Vy
-ZS5hYy4KPgo+IFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMTEvMDMvMjAxOSAxMzowNCwgV2VpIExpdSB3cm90ZToKPiBTaWduZWQtb2ZmLWJ5OiBXZWkg
+TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFu
+ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpHb29kIHJpZGRhbmNlLgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
