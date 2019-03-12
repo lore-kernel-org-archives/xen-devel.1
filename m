@@ -1,21 +1,20 @@
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Subject: Re: [PATCH 5/6] xen-pt: Hide MSI-X from xen stubdoms
-Date: Tue, 12 Mar 2019 13:38:08 +0100
-Message-ID: <20190312123808.GG1208@mail-itl>
-References: <20190311180216.18811-1-jandryuk@gmail.com>
- <20190311180216.18811-6-jandryuk@gmail.com>
- <20190312120419.2fdqh3atomnafvby@Air-de-Roger>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2] x86: don't allow clearing of
+ TF_kernel_mode for other than 64-bit PV
+Date: Tue, 12 Mar 2019 12:49:24 +0000
+Message-ID: <20190312124924.m5tvt526wekegguw@zion.uk.xensource.com>
+References: <5C868ED8020000780021D5BB@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6615086357452751542=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=VpTG=RP=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1h3gfl-0005lE-Jt
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 12:38:21 +0000
-In-Reply-To: <20190312120419.2fdqh3atomnafvby@Air-de-Roger>
+ <SRS0=7hwM=RP=citrix.com=prvs=967af9503=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1h3gqi-0006ai-2r
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 12:49:40 +0000
+Content-Disposition: inline
+In-Reply-To: <5C868ED8020000780021D5BB@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,71 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: James McKenzie <james.mckenzie@bromium.com>, Stefano Stabellini <sstabellini@kernel.org>, Jason Andryuk <jandryuk@gmail.com>, qemu-devel@nongnu.org, Paul Durrant <paul.durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6615086357452751542==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="kjpMrWxdCilgNbo1"
-Content-Disposition: inline
-
-
---kjpMrWxdCilgNbo1
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Mar 12, 2019 at 01:04:19PM +0100, Roger Pau Monn=C3=A9 wrote:
-> On Mon, Mar 11, 2019 at 02:02:15PM -0400, Jason Andryuk wrote:
-> > MSI-X is not supported in Xen stubdoms, so it must be disabled.  Use the
-> > existing xen_pt_hide_dev_cap to hide when running under -xen-stubdom.
->=20
-> I'm afraid this requires some more context. What's the actual issue
-> that prevents MSI-X from working?
-
-At least missing "Fix PCI passthrough for HVM with stubdomain" series,
-but that's mostly on Xen side (+ one change how QEMU enable MSI-X in
-config space).
-Some of it can be worked around by enabling permissive mode. Jason, did
-you had a chance to test it with any MSI-X device?
-I'm not aware of anything thing particular that breaks MSI-X but not
-MSI. Besides much less devices lying around to test MSI-X...
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---kjpMrWxdCilgNbo1
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlyHqDAACgkQ24/THMrX
-1yzeHwf/XwPA0FMRHQyU0ATNE2XUKqTI+lAsyHxVwkR21yAGdnkYvejhpgZVHeDS
-3y3U6k3k+SMrL8LEqDQn7iwnE07DXElvG3ZDQogs0kFMKQKcXDtQiBv+nIK1tFjy
-Uaa1CRqrs3t0cn+CAuqIB34jvP1K8vM0ikKPnu25CxoNKQKeKMiotzjLReaUuPWw
-5PI0380B0+cvj7PiOgtCVpd3ru7aHVCl/9AJ3TfQXBL4S3m5uT8857q76peQp3Aj
-T6hj5yhvT010LSBxhpTr/ed5vCMMp09XWv/onHHmvdPhBNmghchle6MhZ0k7pg5H
-NYfN2ghhV++qZQG8ye/jOC5WI9JhqA==
-=zGf1
------END PGP SIGNATURE-----
-
---kjpMrWxdCilgNbo1--
-
-
---===============6615086357452751542==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6615086357452751542==--
+T24gTW9uLCBNYXIgMTEsIDIwMTkgYXQgMTA6Mzc6NDRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gVGhlIGZsYWcgaXMgcmVhbGx5IG9ubHkgbWVhbnQgZm9yIHRob3NlLCBib3RoIEhWTSBh
+bmQgMzItYml0IFBWIHRlbGwKPiBrZXJuZWwgZnJvbSB1c2VyIG1vZGUgYmFzZWQgb24gQ1BML1JQ
+TC4gUmVtb3ZlIHRoZSBhbGwtcXVlc3Rpb24tbWFya3MKPiBjb21tZW50IGFuZCBsZXQncyBiZSBv
+biB0aGUgc2FmZSBzaWRlIGhlcmUgYW5kIGFsc28gc3VwcHJlc3MgY2xlYXJpbmcKPiBmb3IgMzIt
+Yml0IFBWICh0aGlzIGlzbid0IGEgZmFzdCBwYXRoIGFmdGVyIGFsbCkuCj4gCj4gUmVtb3ZlIG5v
+IGxvbmdlciBuZWNlc3NhcnkgaXNfcHZfMzJiaXRfKigpIGZyb20gc2hfdXBkYXRlX2NyMygpIGFu
+ZAo+IHNoX3dhbGtfZ3Vlc3RfdGFibGVzKCkuIE5vdGUgdGhhdCBzaGFkb3dfb25lX2JpdF9kaXNh
+YmxlKCkgYWxyZWFkeQo+IGFzc3VtZXMgdGhlIG5ldyBiZWhhdmlvci4KPiAKPiBTaWduZWQtb2Zm
+LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZpZXdlZC1ieTogV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
