@@ -1,19 +1,28 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: Xen ARM smmu questions
-Date: Tue, 12 Mar 2019 12:20:25 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1903121215420.665@sstabellini-ThinkPad-X260>
-References: <tencent_4E03A65ACF45B3490239A3A479F5E64FA506@qq.com>
- <996e86f5-7059-9fb1-1aa1-734ab760f70a@arm.com>
- <59DDCDD7-B6EF-4F90-82F1-256D5AE10B14@qq.com>
+From: David Hildenbrand <david@redhat.com>
+Subject: Re: xen: Can't insert balloon page into VM userspace
+ (WAS Re: [linux-linus bisection] complete test-arm64-arm64-xl-xsm)
+Date: Tue, 12 Mar 2019 20:46:20 +0100
+Message-ID: <6f8aca6c-355b-7862-75aa-68fe566f76fb__37032.3164433771$1552420048$gmane$org@redhat.com>
+References: <E1h3Uiq-0002L6-Ij@osstest.test-lab.xenproject.org>
+ <80211e70-5f54-9421-8e8f-2a4fc758ce39@arm.com>
+ <46118631-61d4-adb6-6ffc-4e7c62ea3da9@arm.com>
+ <20190312171421.GJ19508@bombadil.infradead.org>
+ <e0b64793-260d-5e70-0544-e7290509b605@redhat.com>
+ <45323ea0-2a50-8891-830e-e1f8a8ed23ea@citrix.com>
+ <f4b40d91-9c41-60ed-6b4e-df47af8e5292@oracle.com>
+ <9a40e1ff-7605-e822-a1d2-502a12d0fba7@redhat.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-866366228-1552418426=:665"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=1/Du=RP=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1h3mwu-00013J-FY
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 19:20:28 +0000
-In-Reply-To: <59DDCDD7-B6EF-4F90-82F1-256D5AE10B14@qq.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=+dzC=RP=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1h3nM2-0002iM-5M
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 19:46:26 +0000
+In-Reply-To: <9a40e1ff-7605-e822-a1d2-502a12d0fba7@redhat.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,79 +31,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jinch <jinchen1227@qq.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Matthew Wilcox <willy@infradead.org>, Julien Grall <julien.grall@arm.com>
+Cc: Juergen Gross <jgross@suse.com>, k.khlebnikov@samsung.com, Stefano Stabellini <sstabellini@kernel.org>, Kees Cook <keescook@chromium.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, "VMware,
+ Inc." <pv-drivers@vmware.com>, osstest service owner <osstest-admin@xenproject.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, linux-mm@kvack.org, Julien Freche <jfreche@vmware.com>, Nadav Amit <namit@vmware.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-866366228-1552418426=:665
-Content-Type: TEXT/PLAIN; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
-
-Hi Jinch,
-
-Replies inline below.
-
-
-On Tue, 12 Mar 2019, Jinch wrote:
-> Thank you for your reply,
-> I’m just researching the implementation of the SMMU driver in Xen and dom0 kernel.
-> If my board has SMMU of arm,mmu-500, do you mean that the Xen use the stage 2 of it and the dom0 kernel use stage1?
-
-Yes, that is the idea, however, it is not straightforward to implement
-from what I have been told. For your information, today, only stage2 in
-Xen works -- stage1 cannot be used by dom0 (or anybody else) and would
-be left unused.
-
-
-> And if I want to passthrough some device that use SMMU to domu, how the SMMU working in Xen and the domu kernel?
-
-As I mentioned, today Xen makes use of the SMMU, and nobody else in the
-system can access it, not dom0, not any domUs. I would love to have a
-way to export the SMMU to dom0 and/or a domU. To do that, the easiest
-way would be to introduce support for a paravirtualized IOMMU as Julien
-mentioned: Xen would expose a "fake" SMMU to guests, and based on its
-settings, it would program the real SMMU (it could even use stage1 to do
-it). The "fake" SMMU is not implemented yet.
-
-
-> > 在 2019年3月12日，下午7:42，Julien Grall <julien.grall@arm.com> 写道：
-> > 
-> > 
-> > On 3/12/19 8:58 AM, jinchen wrote:
-> >> Hello xen-devel,
-> > 
-> > Hello,
-> > 
-> >> I'm reading the code of xen arm smmu in drivers/passthrough/arm, and I have some questions that confused me.
-> >> I think if the board use SMMU, xen will take charge of it before dom0 boot, and will not pass the node of SMMU to dom0 in device tree,
-> >> so my question is how dom0 use SMMU? or can dom0 use SMMU? What dom0 use if it wants to use IOMMU?
-> >> What about domU? The SMMU could be passed to domU?
-> > 
-> > Some SMMU are able to provide Stage 1 (Guest VA to Guest PA) and Stage 2 (Guest PA to Host PA) support. In the current configuration, Xen will use the Stage 2 part to isolate device passthrough. Stage 1 is not supported.
-> > 
-> > If you wanted a guest to use the SMMU, you would either need to provide Stage 1 support (requires HW support) or a PV IOMMU.
-> > 
-> > Alternatively, you might be able to give the SMMU to Dom0. I haven't explored it so far. Do you have a use case for using the IOMMU in guest?
-> > 
-> > Cheers,
-> > 
-> > -- 
-> > Julien Grall
-> > 
-> 
-> 
-> 
---8323329-866366228-1552418426=:665
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-866366228-1552418426=:665--
+T24gMTIuMDMuMTkgMTk6MjMsIERhdmlkIEhpbGRlbmJyYW5kIHdyb3RlOgo+IE9uIDEyLjAzLjE5
+IDE5OjAyLCBCb3JpcyBPc3Ryb3Zza3kgd3JvdGU6Cj4+IE9uIDMvMTIvMTkgMToyNCBQTSwgQW5k
+cmV3IENvb3BlciB3cm90ZToKPj4+IE9uIDEyLzAzLzIwMTkgMTc6MTgsIERhdmlkIEhpbGRlbmJy
+YW5kIHdyb3RlOgo+Pj4+IE9uIDEyLjAzLjE5IDE4OjE0LCBNYXR0aGV3IFdpbGNveCB3cm90ZToK
+Pj4+Pj4gT24gVHVlLCBNYXIgMTIsIDIwMTkgYXQgMDU6MDU6MzlQTSArMDAwMCwgSnVsaWVuIEdy
+YWxsIHdyb3RlOgo+Pj4+Pj4gT24gMy8xMi8xOSAzOjU5IFBNLCBKdWxpZW4gR3JhbGwgd3JvdGU6
+Cj4+Pj4+Pj4gSXQgbG9va3MgbGlrZSBhbGwgdGhlIGFybSB0ZXN0IGZvciBsaW51cyBbMV0gYW5k
+IG5leHQgWzJdIHRyZWUKPj4+Pj4+PiBhcmUgbm93IGZhaWxpbmcuIHg4NiBzZWVtcyB0byBiZSBt
+b3N0bHkgb2suCj4+Pj4+Pj4KPj4+Pj4+PiBUaGUgYmlzZWN0b3IgZmluZ2VyZWQgdGhlIGZvbGxv
+d2luZyBjb21taXQ6Cj4+Pj4+Pj4KPj4+Pj4+PiBjb21taXQgMGVlOTMwZTZjYWZhMDQ4YzE5MjU4
+OTNkMGNhODk5MThiMjgxNGYyYwo+Pj4+Pj4+IEF1dGhvcjogTWF0dGhldyBXaWxjb3ggPHdpbGx5
+QGluZnJhZGVhZC5vcmc+Cj4+Pj4+Pj4gRGF0ZTogICBUdWUgTWFyIDUgMTU6NDY6MDYgMjAxOSAt
+MDgwMAo+Pj4+Pj4+Cj4+Pj4+Pj4gICAgICBtbS9tZW1vcnkuYzogcHJldmVudCBtYXBwaW5nIHR5
+cGVkIHBhZ2VzIHRvIHVzZXJzcGFjZQo+Pj4+Pj4+ICAgICAgUGFnZXMgd2hpY2ggdXNlIHBhZ2Vf
+dHlwZSBtdXN0IG5ldmVyIGJlIG1hcHBlZCB0byB1c2Vyc3BhY2UgYXMgaXQgd291bGQKPj4+Pj4+
+PiAgICAgIGRlc3Ryb3kgdGhlaXIgcGFnZSB0eXBlLiAgQWRkIGFuIGV4cGxpY2l0IGNoZWNrIGZv
+ciB0aGlzIGluc3RlYWQgb2YKPj4+Pj4+PiAgICAgIGFzc3VtaW5nIHRoYXQga2VybmVsIGRyaXZl
+cnMgYWx3YXlzIGdldCB0aGlzIHJpZ2h0Lgo+Pj4+PiBPaCBnb29kLCBpdCBmb3VuZCBhIHJlYWwg
+cHJvYmxlbS4KPj4+Pj4KPj4+Pj4+IEl0IHR1cm5zIG91dCB0aGUgcHJvYmxlbSBpcyBiZWNhdXNl
+IHRoZSBiYWxsb29uIGRyaXZlciB3aWxsIGNhbGwKPj4+Pj4+IF9fU2V0UGFnZU9mZmxpbmUoKSBv
+biBhbGxvY2F0ZWQgcGFnZS4gVGhlcmVmb3JlIHRoZSBwYWdlIGhhcyBhIHR5cGUgYW5kCj4+Pj4+
+PiB2bV9pbnNlcnRfcGFnZXMgd2lsbCBkZW55IHRoZSBpbnNlcnRpb24uCj4+Pj4+Pgo+Pj4+Pj4g
+TXkga25vd2xlZGdlIGlzIHF1aXRlIGxpbWl0ZWQgaW4gdGhpcyBhcmVhLiBTbyBJIGFtIG5vdCBz
+dXJlIGhvdyB3ZSBjYW4KPj4+Pj4+IHNvbHZlIHRoZSBwcm9ibGVtLgo+Pj4+Pj4KPj4+Pj4+IEkg
+d291bGQgYXBwcmVjaWF0ZSBpZiBzb21lb25lIGNvdWxkIHByb3ZpZGUgaW5wdXQgb2YgdG8gZml4
+IHRoZSBtYXBwaW5nLgo+Pj4+PiBJIGRvbid0IGtub3cgdGhlIGJhbGxvb24gZHJpdmVyLCBzbyBJ
+IGRvbid0IGtub3cgd2h5IGl0IHdhcyBkb2luZyB0aGlzLAo+Pj4+PiBidXQgd2hhdCBpdCB3YXMg
+ZG9pbmcgd2FzIFdyb25nIGFuZCBoYXMgYmVlbiBzaW5jZSAyMDE0IHdpdGg6Cj4+Pj4+Cj4+Pj4+
+IGNvbW1pdCBkNmQ4NmMwYTdmOGRkYzViMzhjZjA4OTIyMmNiMWQ5NTQwNzYyZGMyCj4+Pj4+IEF1
+dGhvcjogS29uc3RhbnRpbiBLaGxlYm5pa292IDxrLmtobGVibmlrb3ZAc2Ftc3VuZy5jb20+Cj4+
+Pj4+IERhdGU6ICAgVGh1IE9jdCA5IDE1OjI5OjI3IDIwMTQgLTA3MDAKPj4+Pj4KPj4+Pj4gICAg
+IG1tL2JhbGxvb25fY29tcGFjdGlvbjogcmVkZXNpZ24gYmFsbG9vbmVkIHBhZ2VzIG1hbmFnZW1l
+bnQKPj4+Pj4KPj4+Pj4gSWYgYmFsbG9vbmVkIHBhZ2VzIGFyZSBzdXBwb3NlZCB0byBiZSBtYXBw
+ZWQgaW50byB1c2Vyc3BhY2UsIHlvdSBjYW4ndCBtYXJrCj4+Pj4+IHRoZW0gYXMgYmFsbG9vbmVk
+IHBhZ2VzIHVzaW5nIHRoZSBtYXBjb3VudCBmaWVsZC4KPj4+Pj4KPj4+PiBBc2tpbmcgbXlzZWxm
+IHdoeSBhbnlib2R5IHdvdWxkIHdhbnQgdG8gbWFwIGJhbGxvb24gaW5mbGF0ZWQgcGFnZXMgaW50
+bwo+Pj4+IHVzZXIgc3BhY2UgKHRoaXMganVzdCBzb3VuZHMgcGxhaW4gd3JvbmcgYnV0IG15IHVu
+ZGVyc3RhbmRpbmcgdG8gd2hhdAo+Pj4+IFhFTiBiYWxsb29uIGRyaXZlciBkb2VzIG1pZ2h0IGJl
+IGxpbWl0ZWQpLCBidXQgSSBhc3N1bWUgdGhlIGVhc3kgZml4Cj4+Pj4gd291bGQgYmUgdG8gcmV2
+ZXJ0Cj4+PiBJIHN1c3BlY3QgdGhlIGJ1ZyBoZXJlIGlzIHRoYXQgdGhlIGJhbGxvb24gZHJpdmVy
+IGlzIChhYil1c2VkIGZvciBhCj4+PiBzZWNvbmQgcHVycG9zZQo+Pgo+PiBZZXMuIEFuZCBpdHMg
+bmFtZSBpcyBhbGxvY194ZW5iYWxsb29uZWRfcGFnZXMoKS4KPj4KPiAKPiBIYXZlbid0IGhhZCBh
+IGxvb2sgYXQgdGhlIGNvZGUgeWV0LCBidXQgd291bGQgYW5vdGhlciB0ZW1wb3JhcnkgZml4IGJl
+Cj4gdG8gY2xlYXIvc2V0IFBHX29mZmxpbmUgd2hlbiBhbGxvY2F0aW5nL2ZyZWVpbmcgYSBiYWxs
+b29uZWQgcGFnZT8KPiAoYXNzdW1pbmcgaGVyZSB0aGF0IG9ubHkgc3VjaCBwYWdlcyB3aWxsIGJl
+IG1hcHBlZCB0byB1c2VyIHNwYWNlKQo+IAoKSSBndWVzcyBzb21ldGhpbmcgbGlrZSB0aGlzIGNv
+dWxkIGRvIHRoZSB0cmljayBpZiBJIHVuZGVyc3Rvb2QgaXQgY29ycmVjdGx5OgoKZGlmZiAtLWdp
+dCBhL2RyaXZlcnMveGVuL2JhbGxvb24uYyBiL2RyaXZlcnMveGVuL2JhbGxvb24uYwppbmRleCAz
+OWIyMjlmOWUyNTYuLmQzN2RkNWJiN2E4ZiAxMDA2NDQKLS0tIGEvZHJpdmVycy94ZW4vYmFsbG9v
+bi5jCisrKyBiL2RyaXZlcnMveGVuL2JhbGxvb24uYwpAQCAtNjA0LDYgKzYwNCw3IEBAIGludCBh
+bGxvY194ZW5iYWxsb29uZWRfcGFnZXMoaW50IG5yX3BhZ2VzLCBzdHJ1Y3QKcGFnZSAqKnBhZ2Vz
+KQogICAgICAgIHdoaWxlIChwZ25vIDwgbnJfcGFnZXMpIHsKICAgICAgICAgICAgICAgIHBhZ2Ug
+PSBiYWxsb29uX3JldHJpZXZlKHRydWUpOwogICAgICAgICAgICAgICAgaWYgKHBhZ2UpIHsKKyAg
+ICAgICAgICAgICAgICAgICAgICAgX19DbGVhclBhZ2VPZmZsaW5lKHBhZ2UpOwogICAgICAgICAg
+ICAgICAgICAgICAgICBwYWdlc1twZ25vKytdID0gcGFnZTsKICNpZmRlZiBDT05GSUdfWEVOX0hB
+VkVfUFZNTVUKICAgICAgICAgICAgICAgICAgICAgICAgLyoKQEAgLTY0NSw4ICs2NDYsMTAgQEAg
+dm9pZCBmcmVlX3hlbmJhbGxvb25lZF9wYWdlcyhpbnQgbnJfcGFnZXMsIHN0cnVjdApwYWdlICoq
+cGFnZXMpCiAgICAgICAgbXV0ZXhfbG9jaygmYmFsbG9vbl9tdXRleCk7CgogICAgICAgIGZvciAo
+aSA9IDA7IGkgPCBucl9wYWdlczsgaSsrKSB7Ci0gICAgICAgICAgICAgICBpZiAocGFnZXNbaV0p
+CisgICAgICAgICAgICAgICBpZiAocGFnZXNbaV0pIHsKKyAgICAgICAgICAgICAgICAgICAgICAg
+X19TZXRQYWdlT2ZmbGluZShwYWdlc1tpXSk7CiAgICAgICAgICAgICAgICAgICAgICAgIGJhbGxv
+b25fYXBwZW5kKHBhZ2VzW2ldKTsKKyAgICAgICAgICAgICAgIH0KICAgICAgICB9CgogICAgICAg
+IGJhbGxvb25fc3RhdHMudGFyZ2V0X3VucG9wdWxhdGVkIC09IG5yX3BhZ2VzOwoKCkF0IGxlYXN0
+IHRoaXMgd2F5LCB0aGUgcGFnZXMgYWxsb2NhdGVkIChhbmQgdGh1cyBldmVudHVhbGx5IG1hcHBl
+ZCB0bwp1c2VyIHNwYWNlKSB3b3VsZCBub3QgYmUgbWFya2VkLCBidXQgdGhlIG90aGVyIG9uZXMg
+d291bGQgcmVtYWluIG1hcmtlZAphbmQgY291bGQgYmUgZXhjbHVkZWQgYnkgbWFrZWR1bXB0b29s
+LgoKLS0gCgpUaGFua3MsCgpEYXZpZCAvIGRoaWxkZW5iCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
