@@ -1,17 +1,19 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 133698: all pass - PUSHED
-Date: Tue, 12 Mar 2019 09:39:40 +0000
-Message-ID: <osstest-133698-mainreport@xen.org>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v12] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Tue, 12 Mar 2019 11:03:59 +0100
+Message-ID: <20190312110359.56532ab3.olaf@aepfle.de>
+References: <20190308192059.24610-1-olaf@aepfle.de>
+ <5C863567020000780021D1FE@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3562106207932146930=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=LYOW=RP=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1h3dsy-0007Uf-T2
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 09:39:48 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=pQKW=RP=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h3eGW-0001RL-PC
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 10:04:09 +0000
+In-Reply-To: <5C863567020000780021D1FE@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,46 +22,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMzY5OCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzM2OTgvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICA2OTBkNjBjMGFkYTVmZjEzN2M4NDk4MjIyMGIzZmRk
-MTEyNjk3YWEzCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICBhMjRhMzdk
-YmE0MmM0ZjdkYWQ4Nzk0ZjE5OWE4ZWZiODhlNmVjZDhmCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MzM2NzAgIDIwMTktMDMtMDkgMDc6MDk6MzYgWiAgICAzIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTMzNjk4ICAyMDE5LTAzLTExIDAxOjQxOjE0IFogICAgMSBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQXNoaXNoIFNp
-bmdoYWwgPGFzaGlzaHNpbmdoYUBudmlkaWEuY29tPgogIEV1Z2VuZSBDb2hlbiA8ZXVnZW5lQGhw
-LmNvbT4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNtICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wdm9w
-cyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZs
-aWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3Mv
-bG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4g
-YXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcv
-b3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVz
-dCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9
-b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hl
-bmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1h
-c3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNp
-b24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQvb3NzdGVzdC9vdm1mLmdpdAog
-ICBhMjRhMzdkYmE0Li42OTBkNjBjMGFkICA2OTBkNjBjMGFkYTVmZjEzN2M4NDk4MjIyMGIzZmRk
-MTEyNjk3YWEzIC0+IHhlbi10ZXN0ZWQtbWFzdGVyCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+--===============3562106207932146930==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/drmSmmVHiulyLuRHPx40XkG"; protocol="application/pgp-signature"
+
+--Sig_/drmSmmVHiulyLuRHPx40XkG
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 11 Mar 2019 04:16:07 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> >>> On 08.03.19 at 20:20, <olaf@aepfle.de> wrote: =20
+> > To reiterate the second paragraph: if a domU uses TSC as primary clock
+> > source, it is expected that it runs NTP to cover for the resulting
+> > drift. Therefore this change does no need a knob to turn it on or off. =
+=20
+>=20
+> Did you omit a 't' or a 'w' above? Judging from the patch I think you
+> mean "not", but I don't see how this follows, especially with your
+> subsequent reply validly stating that such a requirement did not
+> exist with the XenoLinux kernels. And please don't forget that
+> Linux is not the only possible guest OS. What is or is not a
+> requirement inside the guest depends not only on Xen's behavior,
+> but also on the OS'es. Hence uniformly (and even by default)
+> changing the behavior for everyone is imo not acceptable.
+
+If I interpret the various docs, which are available online, correctly
+there is always a recommendation to sync with an external clocksource,
+IF the system clock has to be somewhat accurate.
+For example the XenServer docs mentions that for Windows, PV and HVM.
+If that external source is a pvclock driver, then it just means the
+syncing has to be done by dom0. I have not verified it, but I think
+NTP in dom0 will sync Xen, which in turn allows pvclock to sync domU.
+
+The change exchanges one sort of inaccuracy with another. In other words,
+it was broken before and will remain broken after migration/restore.
+
+> > +#define VTSC_JITTER_RANGE_KHZ 200UL   /* Assumed jitter in cpu_khz */ =
+=20
+> I'm struggling to understand the comment: Surely not every single
+> CPU surfaces a jitter of precisely 200kHz?
+
+I think that variable describes something like 'range' or 'dispersion'
+of measurement results, of something that can not be measured accurately.
+So VTSC_MEASUREMENT_INACCURACY_RANGE_KHZ may work.
+
+Olaf
+
+--Sig_/drmSmmVHiulyLuRHPx40XkG
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIeEDwAKCRBdQqD6ppg2
+fv+rAKC0i3pyN2q1hH/rpb3wnazg/utiwwCguJBmY73j5+GBzQ6HP2UsavbbbGo=
+=j5R8
+-----END PGP SIGNATURE-----
+
+--Sig_/drmSmmVHiulyLuRHPx40XkG--
+
+
+--===============3562106207932146930==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3562106207932146930==--
