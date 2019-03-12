@@ -1,19 +1,16 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] SVM: fix build after "make nested page-fault
- tracing and logging consistent"
-Date: Tue, 12 Mar 2019 09:24:45 -0600
-Message-ID: <5C87CF3D020000780021DD02@prv1-mh.provo.novell.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [freebsd-master test] 133707: all pass - PUSHED
+Date: Tue, 12 Mar 2019 15:35:09 +0000
+Message-ID: <osstest-133707-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=Rfzp=RP=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1h3jGv-0004sD-SV
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 15:24:53 +0000
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=LYOW=RP=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1h3jQx-0005jo-2P
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 15:35:15 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,21 +19,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Brian Woods <brian.woods@amd.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
 List-Id: xen-devel@lists.xenproject.org
 
-U29tZSBjb21waWxlciB2ZXJzaW9ucyBkb24ndCByZWNvZ25pemUgdGhhdCAibWZuIiBjYW4ndCBy
-ZWFsbHkgYmUgdXNlZAp1bmluaXRpYWxpemVkIGluIHN2bV9kb19uZXN0ZWRfcGdmYXVsdCgpLiBU
-byBiZSBvbiB0aGUgc2FmZSBzaWRlLCBhZGQgYW4KaW5pdGlhbGl6ZXIgZm9yIHAybXQgYXMgd2Vs
-bC4KClJlcG9ydGVkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-PgpTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgotLS0gYS94
-ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0uYworKysgYi94ZW4vYXJjaC94ODYvaHZtL3N2bS9zdm0u
-YwpAQCAtMTc2Miw4ICsxNzYyLDggQEAgc3RhdGljIHZvaWQgc3ZtX2RvX25lc3RlZF9wZ2ZhdWx0
-KHN0cnVjdAogewogICAgIGludCByZXQ7CiAgICAgdW5zaWduZWQgbG9uZyBnZm4gPSBncGEgPj4g
-UEFHRV9TSElGVDsKLSAgICBtZm5fdCBtZm47Ci0gICAgcDJtX3R5cGVfdCBwMm10OworICAgIG1m
-bl90IG1mbiA9IElOVkFMSURfTUZOOworICAgIHAybV90eXBlX3QgcDJtdCA9IHAybV9pbnZhbGlk
-OwogICAgIHAybV9hY2Nlc3NfdCBwMm1hOwogICAgIHN0cnVjdCBwMm1fZG9tYWluICpwMm0gPSBO
-VUxMOwogCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+ZmxpZ2h0IDEzMzcwNyBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
+LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTMzNzA3LwoKUGVyZmVjdCA6LSkKQWxs
+IHRlc3RzIGluIHRoaXMgZmxpZ2h0IHBhc3NlZCBhcyByZXF1aXJlZAp2ZXJzaW9uIHRhcmdldGVk
+IGZvciB0ZXN0aW5nOgogZnJlZWJzZCAgICAgICAgICAgICAgNDU0NWZlODIwYTgzYjY3NTg0NWY5
+MDQ1ZjA2Yzg1NjEyOWI5YzE3YwpiYXNlbGluZSB2ZXJzaW9uOgogZnJlZWJzZCAgICAgICAgICAg
+ICAgNmY0NjI3YzBkYjQ1YzdmZTkxOTcyYmM4OGY1NzA4YTM2Y2M3MGUxMAoKTGFzdCB0ZXN0IG9m
+IGJhc2lzICAgMTMzNjUzICAyMDE5LTAzLTA4IDA5OjE5OjA1IFogICAgNCBkYXlzClRlc3Rpbmcg
+c2FtZSBzaW5jZSAgIDEzMzcwNyAgMjAxOS0wMy0xMSAwOToxOToxOCBaICAgIDEgZGF5cyAgICAx
+IGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0Ogog
+IDBtcCA8MG1wQEZyZWVCU0Qub3JnPgogIGF2b3MgPGF2b3NARnJlZUJTRC5vcmc+CiAgYmNyIDxi
+Y3JARnJlZUJTRC5vcmc+CiAgQnJpYW4gQmVobGVuZG9yZiA8YmVobGVuZG9yZjFAbGxubC5nb3Y+
+CiAgYnogPGJ6QEZyZWVCU0Qub3JnPgogIGRpbSA8ZGltQEZyZWVCU0Qub3JnPgogIGdsZWJpdXMg
+PGdsZWJpdXNARnJlZUJTRC5vcmc+CiAgZ29yZG9uIDxnb3Jkb25ARnJlZUJTRC5vcmc+CiAgaHNl
+bGFza3kgPGhzZWxhc2t5QEZyZWVCU0Qub3JnPgogIGlhbiA8aWFuQEZyZWVCU0Qub3JnPgogIGlt
+cCA8aW1wQEZyZWVCU0Qub3JnPgogIGpoaWJiaXRzIDxqaGliYml0c0BGcmVlQlNELm9yZz4KICBr
+cCA8a3BARnJlZUJTRC5vcmc+CiAgbWFyY2VsIDxtYXJjZWxARnJlZUJTRC5vcmc+CiAgbWFya2og
+PG1hcmtqQEZyZWVCU0Qub3JnPgogIG1hdiA8bWF2QEZyZWVCU0Qub3JnPgogIFJpY2hhcmQgWWFv
+IDxyeWFvQGdlbnRvby5vcmc+CiAgdHJhc3ogPHRyYXN6QEZyZWVCU0Qub3JnPgogIHR1ZXhlbiA8
+dHVleGVuQEZyZWVCU0Qub3JnPgogIHdvc2NoIDx3b3NjaEBGcmVlQlNELm9yZz4KICB3dWxmIDx3
+dWxmQEZyZWVCU0Qub3JnPgoKam9iczoKIGJ1aWxkLWFtZDY0LWZyZWVic2QtYWdhaW4gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtZnJlZWJz
+ZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
+ZC1hbWQ2NC14ZW4tZnJlZWJzZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnBy
+b2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2Vz
+CgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xv
+Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0
+aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDov
+L3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVt
+YWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVz
+dC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJl
+IGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0
+O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8geGVuYml0cy54ZW4ub3JnOi9ob21l
+L3hlbi9naXQvZnJlZWJzZC5naXQKICAgNmY0NjI3YzBkYjQuLjQ1NDVmZTgyMGE4ICA0NTQ1ZmU4
+MjBhODNiNjc1ODQ1ZjkwNDVmMDZjODU2MTI5YjljMTdjIC0+IHRlc3RlZC9tYXN0ZXIKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
