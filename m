@@ -1,22 +1,22 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
 Subject: Re: [PATCH 5/6] xen-pt: Hide MSI-X from xen stubdoms
-Date: Tue, 12 Mar 2019 15:13:31 +0100
-Message-ID: <20190312141331.4v6zyvm3iizd5jgu@Air-de-Roger>
+Date: Tue, 12 Mar 2019 15:29:55 +0100
+Message-ID: <20190312142955.GA1835@mail-itl>
 References: <20190311180216.18811-1-jandryuk@gmail.com>
  <20190311180216.18811-6-jandryuk@gmail.com>
  <20190312120419.2fdqh3atomnafvby@Air-de-Roger>
  <20190312123808.GG1208@mail-itl>
  <CAKf6xpvVBDGCmbcgU0u39Sh5NjFRf95O3UQ=_DmD6uVb-vx-sA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5104105321553298399=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=X81M=RP=citrix.com=prvs=96733c0e6=roger.pau@srs-us1.protection.inumbo.net>)
- id 1h3iMA-0008KW-W5
- for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 14:26:15 +0000
-Content-Disposition: inline
+ <SRS0=VpTG=RP=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1h3iPx-0000d3-ES
+ for xen-devel@lists.xenproject.org; Tue, 12 Mar 2019 14:30:09 +0000
 In-Reply-To: <CAKf6xpvVBDGCmbcgU0u39Sh5NjFRf95O3UQ=_DmD6uVb-vx-sA@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,47 +27,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jason Andryuk <jandryuk@gmail.com>
-Cc: James McKenzie <james.mckenzie@bromium.com>, Stefano Stabellini <sstabellini@kernel.org>, Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>, qemu-devel@nongnu.org, Paul Durrant <paul.durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: James McKenzie <james.mckenzie@bromium.com>, Stefano Stabellini <sstabellini@kernel.org>, qemu-devel@nongnu.org, Paul Durrant <paul.durrant@citrix.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXIgMTIsIDIwMTkgYXQgMDk6NTg6NTZBTSAtMDQwMCwgSmFzb24gQW5kcnl1ayB3
-cm90ZToKPiBPbiBUdWUsIE1hciAxMiwgMjAxOSBhdCA4OjM4IEFNIE1hcmVrIE1hcmN6eWtvd3Nr
-aS1Hw7NyZWNraQo+IDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPiB3cm90ZToKPiA+
-Cj4gPiBPbiBUdWUsIE1hciAxMiwgMjAxOSBhdCAwMTowNDoxOVBNICswMTAwLCBSb2dlciBQYXUg
-TW9ubsOpIHdyb3RlOgo+ID4gPiBPbiBNb24sIE1hciAxMSwgMjAxOSBhdCAwMjowMjoxNVBNIC0w
-NDAwLCBKYXNvbiBBbmRyeXVrIHdyb3RlOgo+ID4gPiA+IE1TSS1YIGlzIG5vdCBzdXBwb3J0ZWQg
-aW4gWGVuIHN0dWJkb21zLCBzbyBpdCBtdXN0IGJlIGRpc2FibGVkLiAgVXNlIHRoZQo+ID4gPiA+
-IGV4aXN0aW5nIHhlbl9wdF9oaWRlX2Rldl9jYXAgdG8gaGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIg
-LXhlbi1zdHViZG9tLgo+ID4gPgo+ID4gPiBJJ20gYWZyYWlkIHRoaXMgcmVxdWlyZXMgc29tZSBt
-b3JlIGNvbnRleHQuIFdoYXQncyB0aGUgYWN0dWFsIGlzc3VlCj4gPiA+IHRoYXQgcHJldmVudHMg
-TVNJLVggZnJvbSB3b3JraW5nPwo+ID4KPiA+IEF0IGxlYXN0IG1pc3NpbmcgIkZpeCBQQ0kgcGFz
-c3Rocm91Z2ggZm9yIEhWTSB3aXRoIHN0dWJkb21haW4iIHNlcmllcywKPiA+IGJ1dCB0aGF0J3Mg
-bW9zdGx5IG9uIFhlbiBzaWRlICgrIG9uZSBjaGFuZ2UgaG93IFFFTVUgZW5hYmxlIE1TSS1YIGlu
-Cj4gPiBjb25maWcgc3BhY2UpLgo+ID4gU29tZSBvZiBpdCBjYW4gYmUgd29ya2VkIGFyb3VuZCBi
-eSBlbmFibGluZyBwZXJtaXNzaXZlIG1vZGUuIEphc29uLCBkaWQKPiA+IHlvdSBoYWQgYSBjaGFu
-Y2UgdG8gdGVzdCBpdCB3aXRoIGFueSBNU0ktWCBkZXZpY2U/Cj4gPiBJJ20gbm90IGF3YXJlIG9m
-IGFueXRoaW5nIHRoaW5nIHBhcnRpY3VsYXIgdGhhdCBicmVha3MgTVNJLVggYnV0IG5vdAo+ID4g
-TVNJLiBCZXNpZGVzIG11Y2ggbGVzcyBkZXZpY2VzIGx5aW5nIGFyb3VuZCB0byB0ZXN0IE1TSS1Y
-Li4uCj4gCj4gT3BlblhUIGFuZCBRdWJlcyBoYXZlIHVzZWQgYSBjb21waWxlIHRpbWUgcGF0Y2gg
-dGhhdCBkaXNhYmxlZCBNU0ktWAo+IGZvciBhIGxvbmcgdGltZS4gIFRoZSBPcGVuWFQgcGF0Y2gg
-ZGVzY3JpcHRpb24gZG9lc24ndCBoZWxwOgo+ICIiIgo+IEN1cnJlbnRseSB3ZSBkbyBub3Qgc3Vw
-cG9ydCBNU0ktWCBzZXR1cCBmb3IgUENJIGRldmljZXMgcGFzc2VkIHRocm91Z2guCj4gCj4gQWx0
-aG91Z2ggdGhlIHNwZWNpZmljYXRpb24gbWVudGlvbnMgdGhhdCBQQ0ktZSBkZXZpY2VzIG1pZ2h0
-IGltcGxlbWVudCBvbmx5Cj4gTVNJLVggdGhlcmUgaXMgbm90IGEgbG90IG9mIHRob3NlIGFuZCBt
-b3N0bHkgbm9uZSB0aGF0IHdlIGhhdmUgZW5jb3VudGVyZWQgeWV0Lgo+IENvbnNpZGVyaW5nIHRo
-YXQsIHdlIGZvcmNlIGRldmljZXMgdG8gdXNlIE1TSSBieSBoaWRpbmcgdGhlIE1TSS1YIGNhcGFi
-aWxpdHkuCj4gIiIiCj4gCj4gVG8gYmUgaG9uZXN0LCBJIGRpZG4ndCBxdWVzdGlvbiB0aGUgcmVh
-c29uaW5nIGFuZCBqdXN0IG1hZGUgdGhlCj4gY29tcGlsZS10aW1lIGRpc2FibGluZyBpbnRvIGEg
-cnVudGltZSBkaXNhYmxpbmcuCj4gCj4gSSB0ZXN0ZWQgd2l0aCBhIE5FQyB1UEQ3MjAyMDAgWEhD
-SSBjb250cm9sbGVyIHN1cHBvcnRpbmcgTVNJLVguICBUaGVyZQo+IHdhcyBhbiBlcnJvciByZWxh
-dGVkIHRvIHNldHRpbmcgdXAgTVNJLVggd2hlbiBJIGZhaWxlZCB0byBwYXNzIHRoZQo+ICIteGVu
-LXN0dWJkb20iIGZsYWcuICBJIGNhbiBwdWxsIHRoYXQgbG9nIHdoZW4gSSBnZXQgYmFjayB0byB0
-aGUKPiBtYWNoaW5lLiAgV2l0aCB0aGlzIHBhdGNoLCBNU0ktWCB3YXMgaGlkZGVuIGluIHRoZSBn
-dWVzdCwgYnV0IGRvbTAKPiBzaG93ZWQgTVNJLVggcHJlc2VudCBidXQgdW51c2VkLgoKR2l2ZW4g
-dGhhdCBNYXJlayBpcyB3b3JraW5nIG9uIGEgc2VyaWVzIHRvIG1ha2UgYm90aCBNU0kgYW5kIE1T
-SS1YCndvcmsgZm9yIHBjaS1wYXNzdGhyb3VnaCBhbmQgc3R1YmRvbWFpbnMgSSdtIG5vdCBzdXJl
-IGhvdyBkaWQgeW91IGV2ZW4KbWFuYWdlIHRvIGdldCBwbGFpbiBNU0kgd29ya2luZy4gSXMgdGhl
-cmUgc29tZXRoaW5nIEknbSBtaXNzaW5nPwoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============5104105321553298399==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="/9DWx/yDrRhgMJTb"
+Content-Disposition: inline
+
+
+--/9DWx/yDrRhgMJTb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Mar 12, 2019 at 09:58:56AM -0400, Jason Andryuk wrote:
+> On Tue, Mar 12, 2019 at 8:38 AM Marek Marczykowski-G=C3=B3recki
+> <marmarek@invisiblethingslab.com> wrote:
+> >
+> > On Tue, Mar 12, 2019 at 01:04:19PM +0100, Roger Pau Monn=C3=A9 wrote:
+> > > On Mon, Mar 11, 2019 at 02:02:15PM -0400, Jason Andryuk wrote:
+> > > > MSI-X is not supported in Xen stubdoms, so it must be disabled.  Us=
+e the
+> > > > existing xen_pt_hide_dev_cap to hide when running under -xen-stubdo=
+m.
+> > >
+> > > I'm afraid this requires some more context. What's the actual issue
+> > > that prevents MSI-X from working?
+> >
+> > At least missing "Fix PCI passthrough for HVM with stubdomain" series,
+> > but that's mostly on Xen side (+ one change how QEMU enable MSI-X in
+> > config space).
+> > Some of it can be worked around by enabling permissive mode. Jason, did
+> > you had a chance to test it with any MSI-X device?
+> > I'm not aware of anything thing particular that breaks MSI-X but not
+> > MSI. Besides much less devices lying around to test MSI-X...
+>=20
+> OpenXT and Qubes have used a compile time patch that disabled MSI-X
+> for a long time.  The OpenXT patch description doesn't help:
+> """
+> Currently we do not support MSI-X setup for PCI devices passed through.
+>=20
+> Although the specification mentions that PCI-e devices might implement on=
+ly
+> MSI-X there is not a lot of those and mostly none that we have encountere=
+d yet.
+> Considering that, we force devices to use MSI by hiding the MSI-X capabil=
+ity.
+> """
+>=20
+> To be honest, I didn't question the reasoning and just made the
+> compile-time disabling into a runtime disabling.
+>=20
+> I tested with a NEC uPD720200 XHCI controller supporting MSI-X.  There
+> was an error related to setting up MSI-X when I failed to pass the
+> "-xen-stubdom" flag.  I can pull that log when I get back to the
+> machine.  With this patch, MSI-X was hidden in the guest, but dom0
+> showed MSI-X present but unused.
+>=20
+> Marek, is "Use xc_physdev_msi_set_enable for enabling MSI..." the QEMU
+> patch you are refer to?  Do you think permissive mode would allow
+> MSI-X to work without that patch?  I could test that out.
+
+Yes, this one. Permissive mode should work around it.
+There is also another patch about IRQ permission, but I believe you
+already have it in OpenXT.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--/9DWx/yDrRhgMJTb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlyHwmMACgkQ24/THMrX
+1ywlAwf+JJK/gwzzZHne8lu20T/YB8NazL8XtD5RQooIlAIwWmHsL14RfQ8bPzhP
+qrmKLzK4mWjAZ/hIoSFgCkWnF6OT8o4VJLxf+X5qTe8wHok5fgd8F99MmQzmG66h
+HHFTJRHta4bpr5wsNDqFSRhYeNijP6u4zqm7VDsQQx0UjtFzcDYepBf5rTRuy9xT
+g0ZB6tHsX2NSfrRFemxX/jGJ3XehRlWL4+8n4nf4zGPIiCwusXvzA41TGMssN849
+4Hc74aRDRWmddWozVpJzxL+VAu0XEoBJB85izX3hb3jOQJQLQiKZb6Usn6AwpsS1
+KhJOs2zel1O2WN/cP4llmaHV5uY3jA==
+=ojjb
+-----END PGP SIGNATURE-----
+
+--/9DWx/yDrRhgMJTb--
+
+
+--===============5104105321553298399==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5104105321553298399==--
