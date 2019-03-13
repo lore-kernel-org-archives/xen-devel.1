@@ -1,21 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH for-next 2/9] xen/x86: Constify the
- parameter "d" in mfn_to_mfn
-Date: Wed, 13 Mar 2019 08:40:05 -0600
-Message-ID: <5C891645020000780021E2D4@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH for-next 3/9] xen/x86: Use mfn_to_gfn rather
+ than mfn_to_gmfn
+Date: Wed, 13 Mar 2019 08:45:56 -0600
+Message-ID: <5C8917A4020000780021E2EE@prv1-mh.provo.novell.com>
 References: <20190218113600.9540-1-julien.grall@arm.com>
- <20190218113600.9540-3-julien.grall@arm.com>
+ <20190218113600.9540-4-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=GbKp=RQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1h453E-0000mr-Vq
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2019 14:40:13 +0000
-In-Reply-To: <20190218113600.9540-3-julien.grall@arm.com>
+ id 1h458r-0000yP-4p
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2019 14:46:01 +0000
+In-Reply-To: <20190218113600.9540-4-julien.grall@arm.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -30,11 +29,18 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@k
 List-Id: xen-devel@lists.xenproject.org
 
 Pj4+IE9uIDE4LjAyLjE5IGF0IDEyOjM1LCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
-IFRoZSBwYXJhbWV0ZXIgImQiIGhvbGRzIHRoZSBkb21haW4gYW5kIGlzIG5vdCBtb2RpZmllZCBi
-eSB0aGUgZnVuY3Rpb24uCj4gU28gY29uc3RpZnkgaXQuCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVs
-aWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCldpdGggdGhlIHN1YmplY3Qgc3VpdGFi
-bHkgY29ycmVjdGVkIHRvIG5hbWUgdGhlIGFjdHVhbCBmdW5jdGlvbgpSZXZpZXdlZC1ieTogSmFu
-IEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+IG1mbl90b19nZm4gYW5kIG1mbl90b19nbWZuIGFyZSBkb2luZyBleGFjdGx5IHRoZSBzYW1lIGV4
+Y2VwdCB0aGUgZm9ybWVyCj4gaXMgdXNpbmcgbWZuX3QuCj4gCj4gRnVydGhlcm1vcmUsIHRoZSBu
+YW1pbmcgb2YgdGhlIGZvcm1lciBpcyBtb3JlIGNvbnNpc3RlbnQgd2l0aCB0aGUKPiBjdXJyZW50
+IG5hbWluZyBzY2hlbWUgKEdGTi9NRk4pLiBTbyB1c2UgcmVwbGFjZSBtZm5fdG9fZ21mbiB3aXRo
+Cj4gbWZuX3RvX2dmbiBpbiB4ODYgY29kZS4KPiAKPiBObyBmdW5jdGlvbmFsIGNoYW5nZXMuCj4g
+Cj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkZ1
+bmRhbWVudGFsbHkgSSdtIGZpbmUgd2l0aCB0aGlzIGNoYW5nZSwgYnV0IGJlZm9yZSBtYWtpbmcg
+aXRzIHVzZQptb3JlIHdpZGUtc3ByZWFkLCB3b3VsZG4ndCBpdCBiZSBiZXR0ZXIgdG8gbWFrZSBt
+Zm5fdG9fZ2ZuKCkKZnVsbHkgdHlwZS1zYWZlLCBpLmUuIGhhdmUgaXQgYWxzbyByZXR1cm4gZ2Zu
+X3Q/IFRoZXJlIGFyZW4ndCB0aGF0Cm1hbnkgdXNlcyBvZiB0aGUgZnVuY3Rpb24ganVzdCB5ZXQs
+IGFuZCBkb2luZyB0aGUgY29udmVyc2lvbiBub3cKd291bGQgc2F2ZSB1cyBmcm9tIGhhdmluZyB0
+byB0b3VjaCBhbGwgcGxhY2VzIHlvdSBub3cgY2hhbmdlCnlldCBhbm90aGVyIHRpbWUuCgpKYW4K
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
