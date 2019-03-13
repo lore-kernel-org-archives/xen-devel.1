@@ -1,19 +1,25 @@
-From: Eric Blake <eblake@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH] xen-block: Replace
- qdict_put_obj() by qdict_put() where appropriate
-Date: Wed, 13 Mar 2019 13:22:15 -0500
-Message-ID: <f40696b1-db2c-6fe3-ba4d-699269c75a0a__1091.1052975402$1552501396$gmane$org@redhat.com>
-References: <20190313174433.12966-1-armbru@redhat.com>
+From: Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH] Revert "swiotlb: remove SWIOTLB_MAP_ERROR"
+Date: Wed, 13 Mar 2019 19:32:54 +0100
+Message-ID: <20190313183254.GC4926__48572.4521496863$1552502044$gmane$org@lst.de>
+References: <20190304195951.1118807-1-arnd@arndb.de>
+ <b0b995a1-3211-870f-01af-ce837c18e8f9@arm.com>
+ <CAK8P3a2KQKTDQCQcFR7ZTFJ+_XhfKpy9W27r+YV=iD6hLVu2xg@mail.gmail.com>
+ <957e168a-2589-89c7-3a72-5071a7b6c65a@arm.com>
+ <20190308152355.GA20230@lst.de>
+ <124f4e49-9eb1-99d9-35f4-c2ef3dff8415@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8998834798140705213=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=k28s=RQ=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1h48WB-0004oQ-EM
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2019 18:22:19 +0000
-In-Reply-To: <20190313174433.12966-1-armbru@redhat.com>
+ (envelope-from <SRS0=Q2nI=RQ=lst.de=hch@srs-us1.protection.inumbo.net>)
+ id 1h48gZ-0005cr-SA
+ for xen-devel@lists.xenproject.org; Wed, 13 Mar 2019 18:33:03 +0000
+Content-Disposition: inline
+In-Reply-To: <124f4e49-9eb1-99d9-35f4-c2ef3dff8415@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,89 +28,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
-Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org, sstabellini@kernel.org, qemu-block@nongnu.org, paul.durrant@citrix.com
+To: Julien Grall <julien.grall@arm.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Arnd Bergmann <arnd@arndb.de>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Mike Rapoport <rppt@linux.ibm.com>, "open list:IOMMU DRIVERS" <iommu@lists.linux-foundation.org>, Joerg Roedel <jroedel@suse.de>, xen-devel <xen-devel@lists.xenproject.org>, Andrew Morton <akpm@linux-foundation.org>, Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>, Marek Szyprowski <m.szyprowski@samsung.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============8998834798140705213==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="LK6TbO3aQFVJHHUaKVqPQeciRoJ1mIOke"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---LK6TbO3aQFVJHHUaKVqPQeciRoJ1mIOke
-Content-Type: multipart/mixed; boundary="VwWUZZivtKdTQHfmEM3HJGQcbkk8KfA02";
- protected-headers="v1"
-From: Eric Blake <eblake@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>, qemu-devel@nongnu.org
-Cc: anthony.perard@citrix.com, xen-devel@lists.xenproject.org,
- sstabellini@kernel.org, qemu-block@nongnu.org, paul.durrant@citrix.com
-Message-ID: <f40696b1-db2c-6fe3-ba4d-699269c75a0a@redhat.com>
-Subject: Re: [Qemu-devel] [PATCH] xen-block: Replace qdict_put_obj() by
- qdict_put() where appropriate
-References: <20190313174433.12966-1-armbru@redhat.com>
-In-Reply-To: <20190313174433.12966-1-armbru@redhat.com>
-
---VwWUZZivtKdTQHfmEM3HJGQcbkk8KfA02
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-On 3/13/19 12:44 PM, Markus Armbruster wrote:
-> Patch created mechanically by rerunning:
->=20
->     $ spatch --sp-file scripts/coccinelle/qobject.cocci \
->              --macro-file scripts/cocci-macro-file.h \
->              --dir hw/block --in-place
->=20
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> ---
->  hw/block/xen-block.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-
-Reviewed-by: Eric Blake <eblake@redhat.com>
-
-Safe for 4.0 softfreeze in my opinion, but also harmless if it slips to 4=
-=2E1.
-
---=20
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
-
-
---VwWUZZivtKdTQHfmEM3HJGQcbkk8KfA02--
-
---LK6TbO3aQFVJHHUaKVqPQeciRoJ1mIOke
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEccLMIrHEYCkn0vOqp6FrSiUnQ2oFAlyJSlcACgkQp6FrSiUn
-Q2qY5Qf9F4Yc6AwZkvyvJgKP5dFYB6Hr9C486zrb+fnXuUbbDREwuWb6lwRqSTQy
-icB7ZlA8fRIQp4Ni02lUzLs8iI7zrfKRaUpllHJrWY9HEB/IgR2TKFoZDaMR3FYx
-qBspZucvKAay+8fCUdSqpN+SOFm02//aNF0bpDYdOhuLiJD2eYSZYHVz8OcYtR3E
-PovWeVlnXGZmoDy8H/JiN8eNOI+Y+GqhHo9dSeqLpysfO3CBALNUuyaDiV/CXLGC
-zeAcnDReza5Sc8U+zMAXpolg2snPjHSt2yeVrbDD8/JUioDgEZqkmpfKRiflZ8i/
-uh7nFzrBLYAV2grivJeME3ZkOtbsnA==
-=j5YI
------END PGP SIGNATURE-----
-
---LK6TbO3aQFVJHHUaKVqPQeciRoJ1mIOke--
-
-
---===============8998834798140705213==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8998834798140705213==--
+T24gRnJpLCBNYXIgMDgsIDIwMTkgYXQgMDU6MjU6NTdQTSArMDAwMCwgSnVsaWVuIEdyYWxsIHdy
+b3RlOgo+IEluIHRoZSBjb21tb24gY2FzZSwgRG9tMCBhbHNvIGNvbnRhaW5zIHRoZSBQViBiYWNr
+ZW5kIGRyaXZlcnMuIFRob3NlIAo+IGRyaXZlcnMgbWF5IGRpcmVjdGx5IHVzZSB0aGUgZ3Vlc3Qg
+YnVmZmVyIGluIHRoZSBETUEgcmVxdWVzdCAoc28gYSBjb3B5IGlzIAo+IGF2b2lkZWQpLiBUbyBh
+dm9pZCB1c2luZyBhIGJvdW5jZSBidWZmZXIgdG9vIG11Y2gsIHhlbi1zd2lvdGxiIHdpbGwgZmlu
+ZCAKPiB0aGUgaG9zdCBwaHlzaWNhbCBhZGRyZXNzIGFzc29jaWF0ZWQgdG8gdGhlIGd1ZXN0IGJ1
+ZmZlciBhbmQgd2lsbCB1c2UgaXQgdG8gCj4gY29tcHV0ZSB0aGUgRE1BIGFkZHJlc3MuCj4KPiBX
+aGlsZSBEb20wIGtlcm5lbCBtYXkgb25seSBkZWFsIHdpdGggMzItYml0IHBoeXNpY2FsIGFkZHJl
+c3MsIHRoZSAKPiBoeXBlcnZpc29yIGNhbiBzdGlsbCBkZWFsIHdpdGggdXAgdG8gNDAtYml0IHBo
+eXNpY2FsIGFkZHJlc3MuIFRoaXMgbWVhbnMgCj4gdGhlIGd1ZXN0IG1lbW9yeSBjYW4gYmUgYWxs
+b2NhdGVkIGFib3ZlIHRoZSA0R0IgdGhyZXNob2xkLiBIZW5jZSB3aHkgdGhlIAo+IGRtYV9hZGRy
+X3QgaXMgYWx3YXlzIDY0LWJpdCB3aXRoIENPTkZJR19YRU49eS4KClRoaXMgYXQgbGVhc3QgbWFr
+ZXMgc29tZSBzZW5zZS4gIEJ1dCBpcyBpdCByZWFsbHkgc28gbXVjaCBiZXR0ZXIgdG8KYXZvaWQg
+aGF2aW5nIGEgNjQtYml0IHBoeXNfYWRkcl90PwoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
