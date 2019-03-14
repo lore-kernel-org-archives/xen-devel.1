@@ -1,22 +1,25 @@
-From: Paul Durrant <Paul.Durrant@citrix.com>
-Subject: Re: [PATCH v6 09/11] viridian: add implementation of
- synthetic interrupt MSRs
-Date: Thu, 14 Mar 2019 14:34:17 +0000
-Message-ID: <5db34092a6d340b3bfa106eedff30a72@AMSPEX02CL02.citrite.net>
-References: <20190314112514.2592-1-paul.durrant@citrix.com>
- <20190314112514.2592-10-paul.durrant@citrix.com>
- <5C8A6130020000780021EAE9@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v13] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Thu, 14 Mar 2019 15:41:55 +0100
+Message-ID: <20190314154155.6cfc6690.olaf@aepfle.de>
+References: <20190313082855.14106-1-olaf@aepfle.de>
+ <5C88CAEF020000780021DFA6@prv1-mh.provo.novell.com>
+ <20190314145003.36695ef4.olaf@aepfle.de>
+ <cfd355b6-da0b-7e02-a484-cc8476a36198@suse.com>
+ <20190314151416.625d8cfa.olaf@aepfle.de>
+ <38e61ca1-7390-a942-8b41-eacca522bcb1@suse.com>
+ <20190314153322.2fcf6808.olaf@aepfle.de>
+ <5C8A66E0020000780021EBD3@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2857956371759157719=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4L16=RR=citrix.com=prvs=9699b3d2b=paul.durrant@srs-us1.protection.inumbo.net>)
- id 1h4RWZ-0005GB-2r
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 14:39:59 +0000
-In-Reply-To: <5C8A6130020000780021EAE9@prv1-mh.provo.novell.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=6KDy=RR=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h4RYW-0005yh-Cx
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 14:42:00 +0000
+In-Reply-To: <5C8A66E0020000780021EBD3@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,85 +28,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQo+IEZyb206IEphbiBCZXVsaWNoIFttYWlsdG86
-SkJldWxpY2hAc3VzZS5jb21dCj4gU2VudDogMTQgTWFyY2ggMjAxOSAxNDoxMgo+IFRvOiBQYXVs
-IER1cnJhbnQgPFBhdWwuRHVycmFudEBjaXRyaXguY29tPgo+IENjOiBKdWxpZW4gR3JhbGwgPGp1
-bGllbi5ncmFsbEBhcm0uY29tPjsgQW5kcmV3IENvb3BlciA8QW5kcmV3LkNvb3BlcjNAY2l0cml4
-LmNvbT47IFJvZ2VyIFBhdSBNb25uZQo+IDxyb2dlci5wYXVAY2l0cml4LmNvbT47IFdlaSBMaXUg
-PHdlaS5saXUyQGNpdHJpeC5jb20+OyBHZW9yZ2UgRHVubGFwIDxHZW9yZ2UuRHVubGFwQGNpdHJp
-eC5jb20+OyBJYW4KPiBKYWNrc29uIDxJYW4uSmFja3NvbkBjaXRyaXguY29tPjsgU3RlZmFubyBT
-dGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPjsgeGVuLWRldmVsIDx4ZW4tCj4gZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmc+OyBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJhZC53
-aWxrQG9yYWNsZS5jb20+OyBUaW0gKFhlbi5vcmcpCj4gPHRpbUB4ZW4ub3JnPgo+IFN1YmplY3Q6
-IFJlOiBbUEFUQ0ggdjYgMDkvMTFdIHZpcmlkaWFuOiBhZGQgaW1wbGVtZW50YXRpb24gb2Ygc3lu
-dGhldGljIGludGVycnVwdCBNU1JzCj4gCj4gPj4+IE9uIDE0LjAzLjE5IGF0IDEyOjI1LCA8cGF1
-bC5kdXJyYW50QGNpdHJpeC5jb20+IHdyb3RlOgo+ID4gQEAgLTEzMSwxMyArMjM4LDY5IEBAIGlu
-dCB2aXJpZGlhbl9zeW5pY19yZG1zcihjb25zdCBzdHJ1Y3QgdmNwdSAqdiwgdWludDMyX3QgaWR4
-LCB1aW50NjRfdCAqdmFsKQo+ID4gICAgICAgICAgKnZhbCA9ICgodWludDY0X3QpaWNyMiA8PCAz
-MikgfCBpY3I7Cj4gPiAgICAgICAgICBicmVhazsKPiA+ICAgICAgfQo+ID4gKwo+ID4gICAgICBj
-YXNlIEhWX1g2NF9NU1JfVFBSOgo+ID4gICAgICAgICAgKnZhbCA9IHZsYXBpY19nZXRfcmVnKHZj
-cHVfdmxhcGljKHYpLCBBUElDX1RBU0tQUkkpOwo+ID4gICAgICAgICAgYnJlYWs7Cj4gPgo+ID4g
-ICAgICBjYXNlIEhWX1g2NF9NU1JfVlBfQVNTSVNUX1BBR0U6Cj4gPiAtICAgICAgICAqdmFsID0g
-di0+YXJjaC5odm0udmlyaWRpYW4tPnZwX2Fzc2lzdC5tc3IucmF3Owo+ID4gKyAgICAgICAgKnZh
-bCA9IHZ2LT52cF9hc3Npc3QubXNyLnJhdzsKPiA+ICsgICAgICAgIGJyZWFrOwo+ID4gKwo+ID4g
-KyAgICBjYXNlIEhWX1g2NF9NU1JfU0NPTlRST0w6Cj4gPiArICAgICAgICBpZiAoICEodmlyaWRp
-YW5fZmVhdHVyZV9tYXNrKGQpICYgSFZNUFZfc3luaWMpICkKPiA+ICsgICAgICAgICAgICByZXR1
-cm4gWDg2RU1VTF9FWENFUFRJT047Cj4gPiArCj4gPiArICAgICAgICAqdmFsID0gdnYtPnNjb250
-cm9sOwo+ID4gKyAgICAgICAgYnJlYWs7Cj4gPiArCj4gPiArICAgIGNhc2UgSFZfWDY0X01TUl9T
-VkVSU0lPTjoKPiA+ICsgICAgICAgIGlmICggISh2aXJpZGlhbl9mZWF0dXJlX21hc2soZCkgJiBI
-Vk1QVl9zeW5pYykgKQo+ID4gKyAgICAgICAgICAgIHJldHVybiBYODZFTVVMX0VYQ0VQVElPTjsK
-PiA+ICsKPiA+ICsgICAgICAgIC8qCj4gPiArICAgICAgICAgKiBUaGUgc3BlY2lmaWNhdGlvbiBz
-YXlzIHRoYXQgdGhlIHZlcnNpb24gbnVtYmVyIGlzIDB4MDAwMDAwMDEKPiA+ICsgICAgICAgICAq
-IGFuZCBzaG91bGQgYmUgaW4gdGhlIGxvd2VyIDMyLWJpdHMgb2YgdGhlIE1TUiwgd2hpbGUgdGhl
-Cj4gPiArICAgICAgICAgKiB1cHBlciAzMi1iaXRzIGFyZSByZXNlcnZlZC4uLiBidXQgaXQgZG9l
-c24ndCBzYXkgd2hhdCB0aGV5Cj4gPiArICAgICAgICAgKiBzaG91bGQgYmUgc2V0IHRvLiBBc3N1
-bWUgZXZlcnl0aGluZyBidXQgdGhlIGJvdHRvbSBiaXQKPiA+ICsgICAgICAgICAqIHNob3VsZCBi
-ZSB6ZXJvLgo+ID4gKyAgICAgICAgICovCj4gPiArICAgICAgICAqdmFsID0gMXVsOwo+ID4gKyAg
-ICAgICAgYnJlYWs7Cj4gPiArCj4gPiArICAgIGNhc2UgSFZfWDY0X01TUl9TSUVGUDoKPiA+ICsg
-ICAgICAgIGlmICggISh2aXJpZGlhbl9mZWF0dXJlX21hc2soZCkgJiBIVk1QVl9zeW5pYykgKQo+
-ID4gKyAgICAgICAgICAgIHJldHVybiBYODZFTVVMX0VYQ0VQVElPTjsKPiA+ICsKPiA+ICsgICAg
-ICAgICp2YWwgPSB2di0+c2llZnA7Cj4gPiArICAgICAgICBicmVhazsKPiA+ICsKPiA+ICsgICAg
-Y2FzZSBIVl9YNjRfTVNSX1NJTVA6Cj4gPiArICAgICAgICBpZiAoICEodmlyaWRpYW5fZmVhdHVy
-ZV9tYXNrKGQpICYgSFZNUFZfc3luaWMpICkKPiA+ICsgICAgICAgICAgICByZXR1cm4gWDg2RU1V
-TF9FWENFUFRJT047Cj4gPiArCj4gPiArICAgICAgICAqdmFsID0gdnYtPnNpbXAubXNyLnJhdzsK
-PiA+ICsgICAgICAgIGJyZWFrOwo+ID4gKwo+ID4gKyAgICBjYXNlIEhWX1g2NF9NU1JfRU9NOgo+
-ID4gKyAgICAgICAgaWYgKCAhKHZpcmlkaWFuX2ZlYXR1cmVfbWFzayhkKSAmIEhWTVBWX3N5bmlj
-KSApCj4gPiArICAgICAgICAgICAgcmV0dXJuIFg4NkVNVUxfRVhDRVBUSU9OOwo+ID4gKwo+ID4g
-KyAgICAgICAgKnZhbCA9IDA7Cj4gPiArICAgICAgICBicmVhazsKPiA+ICsKPiA+ICsgICAgY2Fz
-ZSBIVl9YNjRfTVNSX1NJTlQwIC4uLiBIVl9YNjRfTVNSX1NJTlQxNToKPiA+ICsgICAgewo+ID4g
-KyAgICAgICAgdW5zaWduZWQgaW50IHNpbnR4ID0gaWR4IC0gSFZfWDY0X01TUl9TSU5UMDsKPiA+
-ICsgICAgICAgIGNvbnN0IHVuaW9uIHZpcmlkaWFuX3NpbnRfbXNyICp2cyA9Cj4gPiArICAgICAg
-ICAgICAgJmFycmF5X2FjY2Vzc19ub3NwZWModnYtPnNpbnQsIHNpbnR4KTsKPiA+ICsKPiA+ICsg
-ICAgICAgIGlmICggISh2aXJpZGlhbl9mZWF0dXJlX21hc2soZCkgJiBIVk1QVl9zeW5pYykgKQo+
-ID4gKyAgICAgICAgICAgIHJldHVybiBYODZFTVVMX0VYQ0VQVElPTjsKPiA+ICsKPiA+ICsgICAg
-ICAgICp2YWwgPSB2cy0+cmF3Owo+ID4gICAgICAgICAgYnJlYWs7Cj4gCj4gV2l0aG91dCB0aGlz
-IG5lY2Vzc2FyaWx5IGJlaW5nIGEgcmVxdWVzdCB0byBjaGFuZ2UsIEkgc3RpbGwgZG9uJ3QKPiB1
-bmRlcnN0YW5kIHdoeSB5b3UgZG9uJ3Qgb21pdCB2cyBhcyBhIHZhcmlhYmxlIGFuZCBzaW1wbHkg
-ZG8KPiAKPiAgICAgICAgICp2YWwgPSBhcnJheV9hY2Nlc3Nfbm9zcGVjKHZ2LT5zaW50LCBzaW50
-eCkucmF3Owo+IAoKUGVyc29uYWxseSBJIGZpbmQgaXQgYSBiaXQgdWdseSwgYW5kIEkgZG9uJ3Qg
-aW1hZ2luZSBoYXZpbmcgdGhlIHN0YWNrIHZhcmlhYmxlIHdpbGwgbWFrZSBtdWNoIGRpZmZlcmVu
-Y2UgdG8gdGhlIGdlbmVyYXRlZCBjb2RlLgoKPiA+IEBAIC0xNDksNiArMzEyLDIwIEBAIGludCB2
-aXJpZGlhbl9zeW5pY19yZG1zcihjb25zdCBzdHJ1Y3QgdmNwdSAqdiwgdWludDMyX3QgaWR4LCB1
-aW50NjRfdCAqdmFsKQo+ID4KPiA+ICBpbnQgdmlyaWRpYW5fc3luaWNfdmNwdV9pbml0KGNvbnN0
-IHN0cnVjdCB2Y3B1ICp2KQo+ID4gIHsKPiAKPiBGVFIgd2hpbGUgSSdtIGluIGZhdm9yIG9mIGFk
-ZGluZyBjb25zdCB3aGVyZXZlciBpdCBpcyBwb3NzaWJsZQo+IGFuZCBtYWtlcyBzZW5zZSwgSSBj
-b25zaWRlciBpdCBxdWl0ZSBvZGQgZm9yIGFuIGluaXQgZnVuY3Rpb24KPiB0byB0YWtlIGEgcG9p
-bnRlciB0byBjb25zdC4gUGVyaGFwcyB0aGUgZGVpbml0IG9uZSB3b3VsZCBhbHNvCj4gZmFsbCBp
-bnRvIHRoYXQgY2F0ZWdvcnkuCgpZZXMsIGl0IGRvZXMgbG9vayBhIGxpdHRsZSBvZGQgYnV0IGJl
-Y2F1c2UgdGhlIHZpcmlkaWFuX3ZjcHUgaXMgbm8gbG9uZ2VyIGlubGluZSB0aGUgdmNwdSBjYW4g
-aW5kZWVkIGJlIGNvbnN0LgoKPiAKPiA+IEBAIC0xMzI4LDkgKzEzNDAsMTMgQEAgaW50IHZsYXBp
-Y19oYXNfcGVuZGluZ19pcnEoc3RydWN0IHZjcHUgKnYpCj4gPiAgICAgICAgICAgKGlyciAmIDB4
-ZjApIDw9IChpc3IgJiAweGYwKSApCj4gPiAgICAgIHsKPiA+ICAgICAgICAgIHZpcmlkaWFuX2Fw
-aWNfYXNzaXN0X2NsZWFyKHYpOwo+ID4gLSAgICAgICAgcmV0dXJuIC0xOwo+ID4gKyAgICAgICAg
-aXJyID0gLTE7Cj4gPiAgICAgIH0KPiA+Cj4gPiArb3V0Ogo+IAo+IFRoZSBsYWJlbCBzdGlsbCBs
-YWNrcyBwcm9wZXIgaW5kZW50YXRpb24uIFdpdGggYXQgbGVhc3QgdGhpcyBmaXhlZCAod2hpY2gK
-PiBpcyBmaW5lIHRvIGJlIGRvbmUgd2hpbGUgY29tbWl0dGluZyBpZiB0aGlzIGlzIHRoZSBvbmx5
-IHBpZWNlIHRvIGNoYW5nZSkKPiBSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1
-c2UuY29tPgo+IAoKT2ssIHRoYW5rcy4KCiAgUGF1bAoKPiBKYW4KPiAKCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2857956371759157719==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/PfbETla25_bN_cVxe=I6luf"; protocol="application/pgp-signature"
+
+--Sig_/PfbETla25_bN_cVxe=I6luf
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 14 Mar 2019 08:36:16 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> Well, unless I'm misremembering you had dropped that functionality
+> without anyone having asked to do so.
+
+Yes, based on my view that an external clocksource has to be used if TSC
+is the primary local clocksource.
+
+I will double check what the concern was about v10.
+The change for xen-tscmode(7) needs to be redone, at least.
+
+So before I spam you guys with any more variants, I better ask if any furth=
+er attempt would fly anyway.
+
+Olaf
+
+--Sig_/PfbETla25_bN_cVxe=I6luf
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIpoMwAKCRBdQqD6ppg2
+fmdWAJ4++UdDv78biM87SlkqmSELRK8fNACdGldANC1JLhXgNcDCda2DVjmA3pA=
+=UmGR
+-----END PGP SIGNATURE-----
+
+--Sig_/PfbETla25_bN_cVxe=I6luf--
+
+
+--===============2857956371759157719==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2857956371759157719==--
