@@ -1,7 +1,10 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [ovmf test] 133769: all pass - PUSHED
-Date: Thu, 14 Mar 2019 17:39:47 +0000
-Message-ID: <osstest-133769-mainreport@xen.org>
+From: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [PATCH RESEND 1/3] OvmfPkg/XenSupport: remove usage
+ of prefetchable PCI host bridge aperture
+Date: Thu, 14 Mar 2019 17:41:21 +0000
+Message-ID: <20190314174121.GB11621@perard.uk.xensource.com>
+References: <1551876056-28223-1-git-send-email-igor.druzhinin@citrix.com>
+ <1551876056-28223-2-git-send-email-igor.druzhinin@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -9,9 +12,11 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=FIb3=RR=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1h4UKd-00062c-KX
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 17:39:51 +0000
+ <SRS0=wnlz=RR=citrix.com=prvs=969ce9b1e=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1h4UMJ-0006ge-0z
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 17:41:35 +0000
+Content-Disposition: inline
+In-Reply-To: <1551876056-28223-2-git-send-email-igor.druzhinin@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,46 +25,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Cc: ard.biesheuvel@linaro.org, jordan.l.justen@intel.com, edk2-devel@lists.01.org, julien.grall@arm.com, xen-devel@lists.xenproject.org, lersek@redhat.com
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMzc2OSBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzM3NjkvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICBiMmEwYTRmZmQ0ZDYwMWMyY2VhYzc0ZmM2YzA5MjE1
-MjJmZDY1M2Y3CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICBmYjk0Zjgz
-MTMxZjAzMmNkNWNlMDI3ZWE3MDZjNDU1MTNjMWE3OTllCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-MzM3MzcgIDIwMTktMDMtMTIgMDk6NDE6NTAgWiAgICAyIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTMzNzY5ICAyMDE5LTAzLTEzIDExOjI0OjUxIFogICAgMSBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgRGFuZGFuIEJp
-IDxkYW5kYW4uYmlAaW50ZWwuY29tPgogIFpoaWNoYW8gR2FvIDx6aGljaGFvLmdhb0BpbnRlbC5j
-b20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGln
-aHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xv
-Z3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFy
-ZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29z
-c3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3Qg
-aW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9z
-c3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5i
-aXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0
-ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMu
-eGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9u
-IDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0L29zc3Rlc3Qvb3ZtZi5naXQKICAg
-ZmI5NGY4MzEzMS4uYjJhMGE0ZmZkNCAgYjJhMGE0ZmZkNGQ2MDFjMmNlYWM3NGZjNmMwOTIxNTIy
-ZmQ2NTNmNyAtPiB4ZW4tdGVzdGVkLW1hc3RlcgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+SGksCgpPbiBXZWQsIE1hciAwNiwgMjAxOSBhdCAxMjo0MDo1NFBNICswMDAwLCBJZ29yIERydXpo
+aW5pbiB3cm90ZToKPiBUaGlzIGFwZXJ0dXJlIGRvZXNuJ3QgZXhpc3QgaW4gT1ZNRiBhbmQgdHJ5
+aW5nIHRvIHVzZSBpdCBjYXVzZXMKCkknbSB0cnlpbmcgdG8gdW5kZXJzdGFuZCB3aGF0IHlvdSBt
+ZWFuIGJ5IHdyaXRpbmcgImRvZXNuJ3QgZXhpc3QgaW4KT1ZNRiIuIEFyZSBwcmVmZXRjaGFibGUg
+QkFSIG5vdCBoYW5kbGVkIGJ5IFNjYW5Gb3JSb290QnJpZGdlcygpID8KT3IgaXMgaXQgdGhlIGVt
+dWxhdGlvbiBvZiB0aGUgY29uZmlnIHNwYWNlIHRoYXQgaXNuJ3QgY29ycmVjdD8KTWF5YmUgUUVN
+VSBzaG91bGQgbGllcyBhYm91dCBhIEJBUiBiZWVuIHByZWZldGNoYWJsZT8KClRoaXMgcGF0Y2gg
+ZmVlbHMgbGlrZSBhIHdvcmthcm91bmQsIGJ1dCBtYXliZSBJJ20gd3JvbmcuCgpUaGFua3MuCgo+
+IGZhaWxpbmcgYXNzZXJ0aW9ucyBsYXRlciBpbiBjYXNlcyB0aGVyZSBhcmUgcHJlZmV0Y2hhYmxl
+IGFuZAo+IG5vbi1wcmVmZXRjaGFibGUgQkFScyBmb2xsb3dpbmcgZWFjaCBvdGhlci4gVGhpcyBj
+b25maWd1cmF0aW9uIGlzCj4gcXVpdGUgbGlrZWx5IHdpdGggc29tZSBQQ0kgcGFzc3Rocm91Z2gg
+ZGV2aWNlcy4KCi0tIApBbnRob255IFBFUkFSRAoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
 dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
 c3RpbmZvL3hlbi1kZXZlbA==
