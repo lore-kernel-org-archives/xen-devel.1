@@ -1,19 +1,21 @@
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Subject: [PATCH v3 2/2] x86/hvm: finish IOREQs correctly on
- completion path
-Date: Thu, 14 Mar 2019 22:30:49 +0000
-Message-ID: <1552602649-14358-2-git-send-email-igor.druzhinin@citrix.com>
-References: <1552602649-14358-1-git-send-email-igor.druzhinin@citrix.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: Commit 331b51 breaks live migration on FreeBSD/Xen
+ dom0
+Date: Thu, 14 Mar 2019 23:34:30 +0100
+Message-ID: <20190314223430.GA2014@mail-itl>
+References: <20190314155403.vby5ox6pybajfruu@Air-de-Roger>
+ <1597966e-961e-26af-0381-9b621ddea1b1@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8473098213670500235=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=zbPr=RR=citrix.com=prvs=969963b1b=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1h4YsP-0005pF-Gs
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 22:31:01 +0000
-In-Reply-To: <1552602649-14358-1-git-send-email-igor.druzhinin@citrix.com>
+ <SRS0=kyLN=RR=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1h4Yvu-00067Q-Uv
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 22:34:39 +0000
+In-Reply-To: <1597966e-961e-26af-0381-9b621ddea1b1@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,97 +24,63 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Igor Druzhinin <igor.druzhinin@citrix.com>, wei.liu2@citrix.com, andrew.cooper3@citrix.com, paul.durrant@citrix.com, jbeulich@suse.com, roger.pau@citrix.com
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Cc: xen-devel@lists.xenproject.org, qemu-devel@nongnu.org, Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U2luY2UgdGhlIGludHJvZHVjdGlvbiBvZiBsaW5lYXJfe3JlYWQsd3JpdGV9KCkgaGVscGVycyBp
-biAzYmRlYzUzMGE1Cih4ODYvSFZNOiBzcGxpdCBwYWdlIHN0cmFkZGxpbmcgZW11bGF0ZWQgYWNj
-ZXNzZXMgaW4gbW9yZSBjYXNlcykgdGhlCmNvbXBsZXRpb24gcGF0aCBmb3IgSU9SRVFzIGhhcyBi
-ZWVuIGJyb2tlbjogaWYgdGhlcmUgaXMgYW4gSU9SRVEgaW4KcHJvZ3Jlc3MgYnV0IGh2bV9jb3B5
-X3t0byxmcm9tfV9ndWVzdF9saW5lYXIoKSByZXR1cm5zIEhWTVRSQU5TX29rYXkKKGUuZy4gd2hl
-biBQMk0gdHlwZSBvZiBzb3VyY2UvZGVzdGluYXRpb24gaGFzIGJlZW4gY2hhbmdlZCBieSBJT1JF
-UQpoYW5kbGVyKSB0aGUgZXhlY3V0aW9uIHdpbGwgbmV2ZXIgcmUtZW50ZXIgaHZtZW11bF9kb19p
-bygpIHdoZXJlCklPUkVRcyBhcmUgY29tcGxldGVkLiBUaGlzIHVzdWFsbHkgcmVzdWx0cyBpbiBh
-IGRvbWFpbiBjcmFzaCB1cG9uCnRoZSBleGVjdXRpb24gb2YgdGhlIG5leHQgSU9SRVEgZW50ZXJp
-bmcgaHZtZW11bF9kb19pbygpIGFuZCBmaW5kaW5nCnRoZSByZW1uYW50cyBvZiB0aGUgcHJldmlv
-dXMgSU9SRVEgaW4gdGhlIHN0YXRlIG1hY2hpbmUuCgpUaGlzIHBhcnRpY3VsYXIgaXNzdWUgaGFz
-IGJlZW4gZGlzY292ZXJlZCBpbiByZWxhdGlvbiB0byBwMm1faW9yZXFfc2VydmVyCnR5cGUgd2hl
-cmUgYW4gZW11bGF0b3IgY2hhbmdlZCB0aGUgbWVtb3J5IHR5cGUgYmV0d2VlbiBwMm1faW9yZXFf
-c2VydmVyCmFuZCBwMm1fcmFtX3J3IGluIHByb2Nlc3Mgb2YgcmVzcG9uZGluZyB0byBJT1JFUSB3
-aGljaCBtYWRlCmh2bV9jb3B5Xy4uKCkgdG8gYmVoYXZlIGRpZmZlcmVudGx5IG9uIHRoZSB3YXkg
-YmFjay4KCkZpeCBpdCBmb3Igbm93IGJ5IGNoZWNraW5nIGlmIElPUkVRIGNvbXBsZXRpb24gaXMg
-cmVxdWlyZWQgKHdoaWNoCmNhbiBiZSBpZGVudGlmaWVkIGJ5IHF1ZXJpbmcgTU1JTyBjYWNoZSkg
-YmVmb3JlIHRyeWluZyB0byBmaW5pc2gKYSBtZW1vcnkgYWNjZXNzIGltbWVkaWF0ZWx5IHRocm91
-Z2ggaHZtX2NvcHlfLi4oKSwgcmUtZW50ZXIKaHZtZW11bF9kb19pbygpIG90aGVyd2lzZS4gVGhp
-cyBjaGFuZ2UgYWxvbmUgYWRkcmVzc2VzIElPUkVRCmNvbXBsZXRpb24gaXNzdWUgd2hlcmUgUDJN
-IHR5cGUgaXMgbW9kaWZpZWQgaW4gdGhlIG1pZGRsZSBvZiBlbXVsYXRpb24KYnV0IGlzIG5vdCBl
-bm91Z2ggZm9yIGEgbW9yZSBnZW5lcmFsIGNhc2Ugd2hlcmUgbWFjaGluZSBzdGF0ZQphcmJpdHJh
-cmVseSBjaGFuZ2VzIGJlaGluZCBvdXIgYmFjay4KClNpZ25lZC1vZmYtYnk6IElnb3IgRHJ1emhp
-bmluIDxpZ29yLmRydXpoaW5pbkBjaXRyaXguY29tPgotLS0KQ2hhbmdlcyBpbiB2MzoKKiBtYWRl
-IGl0IG1vcmUgY2xlYXIgdGhhdCBpdCdzIHN0aWxsIGEgcGFydGlhbCBmaXggaW4gdGhlIGNvbW1p
-dCBkZXNjcmlwdGlvbgoqIG90aGVyIG1pbm9yIHN1Z2dlc3Rpb25zCi0tLQogeGVuL2FyY2gveDg2
-L2h2bS9lbXVsYXRlLmMgfCAzMSArKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tCiAxIGZp
-bGUgY2hhbmdlZCwgMjUgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQg
-YS94ZW4vYXJjaC94ODYvaHZtL2VtdWxhdGUuYyBiL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5j
-CmluZGV4IDQ4NzljY2IuLjkyYTliODIgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vZW11
-bGF0ZS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCkBAIC05NTIsNyArOTUyLDcg
-QEAgc3RhdGljIGludCBodm1lbXVsX3BoeXNfbW1pb19hY2Nlc3MoCiAgKiBjYWNoZSBpbmRleGVk
-IGJ5IGxpbmVhciBNTUlPIGFkZHJlc3MuCiAgKi8KIHN0YXRpYyBzdHJ1Y3QgaHZtX21taW9fY2Fj
-aGUgKmh2bWVtdWxfZmluZF9tbWlvX2NhY2hlKAotICAgIHN0cnVjdCBodm1fdmNwdV9pbyAqdmlv
-LCB1bnNpZ25lZCBsb25nIGdsYSwgdWludDhfdCBkaXIpCisgICAgc3RydWN0IGh2bV92Y3B1X2lv
-ICp2aW8sIHVuc2lnbmVkIGxvbmcgZ2xhLCB1aW50OF90IGRpciwgYm9vbCBjcmVhdGUpCiB7CiAg
-ICAgdW5zaWduZWQgaW50IGk7CiAgICAgc3RydWN0IGh2bV9tbWlvX2NhY2hlICpjYWNoZTsKQEAg
-LTk2Niw2ICs5NjYsOSBAQCBzdGF0aWMgc3RydWN0IGh2bV9tbWlvX2NhY2hlICpodm1lbXVsX2Zp
-bmRfbW1pb19jYWNoZSgKICAgICAgICAgICAgIHJldHVybiBjYWNoZTsKICAgICB9CiAKKyAgICBp
-ZiAoICFjcmVhdGUgKQorICAgICAgICByZXR1cm4gTlVMTDsKKwogICAgIGkgPSB2aW8tPm1taW9f
-Y2FjaGVfY291bnQ7CiAgICAgaWYoIGkgPT0gQVJSQVlfU0laRSh2aW8tPm1taW9fY2FjaGUpICkK
-ICAgICAgICAgcmV0dXJuIE5VTEw7CkBAIC0xMDAwLDcgKzEwMDMsNyBAQCBzdGF0aWMgaW50IGh2
-bWVtdWxfbGluZWFyX21taW9fYWNjZXNzKAogewogICAgIHN0cnVjdCBodm1fdmNwdV9pbyAqdmlv
-ID0gJmN1cnJlbnQtPmFyY2guaHZtLmh2bV9pbzsKICAgICB1bnNpZ25lZCBsb25nIG9mZnNldCA9
-IGdsYSAmIH5QQUdFX01BU0s7Ci0gICAgc3RydWN0IGh2bV9tbWlvX2NhY2hlICpjYWNoZSA9IGh2
-bWVtdWxfZmluZF9tbWlvX2NhY2hlKHZpbywgZ2xhLCBkaXIpOworICAgIHN0cnVjdCBodm1fbW1p
-b19jYWNoZSAqY2FjaGUgPSBodm1lbXVsX2ZpbmRfbW1pb19jYWNoZSh2aW8sIGdsYSwgZGlyLCB0
-cnVlKTsKICAgICB1bnNpZ25lZCBpbnQgY2h1bmssIGJ1ZmZlcl9vZmZzZXQgPSAwOwogICAgIHBh
-ZGRyX3QgZ3BhOwogICAgIHVuc2lnbmVkIGxvbmcgb25lX3JlcCA9IDE7CkBAIC0xMDg5LDggKzEw
-OTIsOSBAQCBzdGF0aWMgaW50IGxpbmVhcl9yZWFkKHVuc2lnbmVkIGxvbmcgYWRkciwgdW5zaWdu
-ZWQgaW50IGJ5dGVzLCB2b2lkICpwX2RhdGEsCiAgICAgICAgICAgICAgICAgICAgICAgIHVpbnQz
-Ml90IHBmZWMsIHN0cnVjdCBodm1fZW11bGF0ZV9jdHh0ICpodm1lbXVsX2N0eHQpCiB7CiAgICAg
-cGFnZWZhdWx0X2luZm9fdCBwZmluZm87CisgICAgc3RydWN0IGh2bV92Y3B1X2lvICp2aW8gPSAm
-Y3VycmVudC0+YXJjaC5odm0uaHZtX2lvOwogICAgIHVuc2lnbmVkIGludCBvZmZzZXQgPSBhZGRy
-ICYgflBBR0VfTUFTSzsKLSAgICBpbnQgcmM7CisgICAgaW50IHJjID0gSFZNVFJBTlNfYmFkX2dm
-bl90b19tZm47CiAKICAgICBpZiAoIG9mZnNldCArIGJ5dGVzID4gUEFHRV9TSVpFICkKICAgICB7
-CkBAIC0xMTA0LDcgKzExMDgsMTQgQEAgc3RhdGljIGludCBsaW5lYXJfcmVhZCh1bnNpZ25lZCBs
-b25nIGFkZHIsIHVuc2lnbmVkIGludCBieXRlcywgdm9pZCAqcF9kYXRhLAogICAgICAgICByZXR1
-cm4gcmM7CiAgICAgfQogCi0gICAgcmMgPSBodm1fY29weV9mcm9tX2d1ZXN0X2xpbmVhcihwX2Rh
-dGEsIGFkZHIsIGJ5dGVzLCBwZmVjLCAmcGZpbmZvKTsKKyAgICAvKgorICAgICAqIElmIHRoZXJl
-IGlzIGFuIE1NSU8gY2FjaGUgZW50cnkgZm9yIHRoYXQgYWNjZXNzIHRoZW4gd2UgbXVzdCBiZSBy
-ZS1pc3N1aW5nCisgICAgICogYW4gYWNjZXNzIHRoYXQgd2FzIHByZXZpb3VzbHkgaGFuZGxlZCBh
-cyBNTUlPLiBUaHVzIGl0IGlzIGltcGVyYXRpdmUgdGhhdAorICAgICAqIHdlIGhhbmRsZSB0aGlz
-IGFjY2VzcyBpbiB0aGUgc2FtZSB3YXkgdG8gZ3VhcmFudGVlIGNvbXBsZXRpb24gYW5kIGhlbmNl
-CisgICAgICogY2xlYW4gdXAgYW55IGludGVyaW0gc3RhdGUuCisgICAgICovCisgICAgaWYgKCAh
-aHZtZW11bF9maW5kX21taW9fY2FjaGUodmlvLCBhZGRyLCBJT1JFUV9SRUFELCBmYWxzZSkgKQor
-ICAgICAgICByYyA9IGh2bV9jb3B5X2Zyb21fZ3Vlc3RfbGluZWFyKHBfZGF0YSwgYWRkciwgYnl0
-ZXMsIHBmZWMsICZwZmluZm8pOwogCiAgICAgc3dpdGNoICggcmMgKQogICAgIHsKQEAgLTExMzQs
-OCArMTE0NSw5IEBAIHN0YXRpYyBpbnQgbGluZWFyX3dyaXRlKHVuc2lnbmVkIGxvbmcgYWRkciwg
-dW5zaWduZWQgaW50IGJ5dGVzLCB2b2lkICpwX2RhdGEsCiAgICAgICAgICAgICAgICAgICAgICAg
-ICB1aW50MzJfdCBwZmVjLCBzdHJ1Y3QgaHZtX2VtdWxhdGVfY3R4dCAqaHZtZW11bF9jdHh0KQog
-ewogICAgIHBhZ2VmYXVsdF9pbmZvX3QgcGZpbmZvOworICAgIHN0cnVjdCBodm1fdmNwdV9pbyAq
-dmlvID0gJmN1cnJlbnQtPmFyY2guaHZtLmh2bV9pbzsKICAgICB1bnNpZ25lZCBpbnQgb2Zmc2V0
-ID0gYWRkciAmIH5QQUdFX01BU0s7Ci0gICAgaW50IHJjOworICAgIGludCByYyA9IEhWTVRSQU5T
-X2JhZF9nZm5fdG9fbWZuOwogCiAgICAgaWYgKCBvZmZzZXQgKyBieXRlcyA+IFBBR0VfU0laRSAp
-CiAgICAgewpAQCAtMTE0OSw3ICsxMTYxLDE0IEBAIHN0YXRpYyBpbnQgbGluZWFyX3dyaXRlKHVu
-c2lnbmVkIGxvbmcgYWRkciwgdW5zaWduZWQgaW50IGJ5dGVzLCB2b2lkICpwX2RhdGEsCiAgICAg
-ICAgIHJldHVybiByYzsKICAgICB9CiAKLSAgICByYyA9IGh2bV9jb3B5X3RvX2d1ZXN0X2xpbmVh
-cihhZGRyLCBwX2RhdGEsIGJ5dGVzLCBwZmVjLCAmcGZpbmZvKTsKKyAgICAvKgorICAgICAqIElm
-IHRoZXJlIGlzIGFuIE1NSU8gY2FjaGUgZW50cnkgZm9yIHRoYXQgYWNjZXMgdGhlbiB3ZSBtdXN0
-IGJlIHJlLWlzc3VpbmcKKyAgICAgKiBhbiBhY2Nlc3MgdGhhdCB3YXMgcHJldmlvdXNseSBoYW5k
-bGVkIGFzIE1NSU8uIFRodXMgaXQgaXMgaW1wZXJhdGl2ZSB0aGF0CisgICAgICogd2UgaGFuZGxl
-IHRoaXMgYWNjZXNzIGluIHRoZSBzYW1lIHdheSB0byBndWFyYW50ZWUgY29tcGxldGlvbiBhbmQg
-aGVuY2UKKyAgICAgKiBjbGVhbiB1cCBhbnkgaW50ZXJpbSBzdGF0ZS4KKyAgICAgKi8KKyAgICBp
-ZiAoICFodm1lbXVsX2ZpbmRfbW1pb19jYWNoZSh2aW8sIGFkZHIsIElPUkVRX1dSSVRFLCBmYWxz
-ZSkgKQorICAgICAgICByYyA9IGh2bV9jb3B5X3RvX2d1ZXN0X2xpbmVhcihhZGRyLCBwX2RhdGEs
-IGJ5dGVzLCBwZmVjLCAmcGZpbmZvKTsKIAogICAgIHN3aXRjaCAoIHJjICkKICAgICB7Ci0tIAoy
-LjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============8473098213670500235==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="ZGiS0Q5IWpPtfppv"
+Content-Disposition: inline
+
+
+--ZGiS0Q5IWpPtfppv
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Mar 14, 2019 at 04:07:55PM +0000, Igor Druzhinin wrote:
+> The change was supposed to be platform independent - it relies on the
+> fact addr argument to mmap() works as expected - mmaps at the specified
+> address.=20
+
+You have this guarantee only with MAP_FIXED flag, otherwise the addr
+argument is only a hint.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--ZGiS0Q5IWpPtfppv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlyK1vcACgkQ24/THMrX
+1yy0Bwf/TQ/dFz0i7BnyoWzTR34vCPjWVQ4hivHUV6w3vJyBG3049C5dXSuMGhvx
+dpt1DcltfFAghUo7Ngmtx2k2np8Utze2uimETqGLsoG/ErER/FwanEOMiQmI43Dl
+Xkxc1jMPO4MqVsZjhR/rS2enTQETMsAOe+08DdCVO2JMhGQHNnQwpL/KFwc+HBNQ
+SkeufbsXqCdhmpX+kbGWa5qrNTjGR3och4QYUByOo/FxtW7CaJiQZb+yUcGJ5fRd
+57+uMficYe6Aeo6rXqR8isr4ksyQye800najk2VMsSths7u5UgBaGNNXdeCTJRcP
+97d3BgAii30ltUEUumu7bkBHEvoO4Q==
+=rVas
+-----END PGP SIGNATURE-----
+
+--ZGiS0Q5IWpPtfppv--
+
+
+--===============8473098213670500235==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8473098213670500235==--
