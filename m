@@ -1,22 +1,26 @@
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Subject: Re: [PATCH RESEND 3/3] OvmfPkg/XenSupport: turn off
- address decoding before BAR sizing
-Date: Thu, 14 Mar 2019 20:09:41 +0000
-Message-ID: <da362720-afea-7af5-af48-1136cfd9bd5a@citrix.com>
-References: <1551876056-28223-1-git-send-email-igor.druzhinin@citrix.com>
- <1551876056-28223-4-git-send-email-igor.druzhinin@citrix.com>
- <20190314175527.GD11621@perard.uk.xensource.com>
+From: Thomas Gleixner <tglx@linutronix.de>
+Subject: Re: [PATCH v6 11/12] x86/microcode: Synchronize late
+ microcode loading
+Date: Thu, 14 Mar 2019 13:25:24 -0700 (PDT)
+Message-ID: <alpine.DEB.2.21.1903141306180.1948@nanos.tec.linutronix.de>
+References: <1552291056-20286-1-git-send-email-chao.gao@intel.com>
+ <1552291056-20286-12-git-send-email-chao.gao@intel.com>
+ <20190313000751.GF11608@araj-mobl1.jf.intel.com>
+ <20190313050241.GA24657@gao-cwp>
+ <5C88B746020000780021DF4D@prv1-mh.provo.novell.com>
+ <5C88B92F020000780021DF64@prv1-mh.provo.novell.com>
+ <d55bb90e-5ca4-0544-be5f-bbd0168c060a@citrix.com>
+ <20190314185712.GA20889@araj-mobl1.jf.intel.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; BOUNDARY="8323329-794882336-1552594482=:1948"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=zbPr=RR=citrix.com=prvs=969963b1b=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1h4Wfm-0003J3-Vd
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 20:09:51 +0000
-In-Reply-To: <20190314175527.GD11621@perard.uk.xensource.com>
-Content-Language: en-US
+ <SRS0=Ovmq=RR=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
+ id 1h4Wv9-0004m4-PM
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 20:25:43 +0000
+In-Reply-To: <20190314185712.GA20889@araj-mobl1.jf.intel.com>
+Content-ID: <alpine.DEB.2.21.1903141319300.1948@nanos.tec.linutronix.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,66 +29,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Cc: ard.biesheuvel@linaro.org, jordan.l.justen@intel.com, edk2-devel@lists.01.org, julien.grall@arm.com, xen-devel@lists.xenproject.org, lersek@redhat.com
+To: "Raj, Ashok" <ashok.raj@intel.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Borislav Petkov <bp@suse.de>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, "Mallick,
+ Asit K" <asit.k.mallick@intel.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Peter Zijlstra <peterz@infradead.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Chao Gao <chao.gao@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMDMvMjAxOSAxNzo1NSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4gT24gV2VkLCBNYXIg
-MDYsIDIwMTkgYXQgMTI6NDA6NTZQTSArMDAwMCwgSWdvciBEcnV6aGluaW4gd3JvdGU6Cj4+IE9u
-IFhlbiwgaHZtbG9hZGVyIGZpcm13YXJlIGxlYXZlcyBhZGRyZXNzIGRlY29kaW5nIGVuYWJsZWQg
-Zm9yCj4+IGVudW1lcmF0ZWQgUENJIGRldmljZSBiZWZvcmUganVtcGluZyBpbnRvIE9WTUYuIE9W
-TUYgc2VlbXMgdG8KPj4gZXhwZWN0IGl0IHRvIGJlIGRpc2FibGVkIGFuZCB0cmllcyB0byBzaXpl
-IFBDSSBCQVJzIGluIHNldmVyYWwgcGxhY2VzCj4+IHdpdGhvdXQgZGlzYWJsaW5nIGl0IHdoaWNo
-IGNhdXNlcyBCQVI2NCwgZm9yIGV4YW1wbGUsIGJlaW5nCj4+IGluY29ycmVjdGx5IHBsYWNlZCBi
-eSBRRU1VLgo+Pgo+PiBGaXggaXQgYnkgZGlzYWJsaW5nIFBDSSBhZGRyZXNzIGRlY29kaW5nIGV4
-cGxpY2l0bHkgYmVmb3JlIHRoZQo+PiBmaXJzdCBhdHRlbXB0IHRvIHNpemUgQkFScyBvbiBYZW4u
-Cj4+Cj4+IENvbnRyaWJ1dGVkLXVuZGVyOiBUaWFub0NvcmUgQ29udHJpYnV0aW9uIEFncmVlbWVu
-dCAxLjEKPj4gU2lnbmVkLW9mZi1ieTogSWdvciBEcnV6aGluaW4gPGlnb3IuZHJ1emhpbmluQGNp
-dHJpeC5jb20+Cj4+IC0tLQo+PiAgT3ZtZlBrZy9MaWJyYXJ5L1BjaUhvc3RCcmlkZ2VMaWIvWGVu
-U3VwcG9ydC5jIHwgMzQgKysrKysrKysrKysrKysrKysrKysrKysrKysrCj4+ICAxIGZpbGUgY2hh
-bmdlZCwgMzQgaW5zZXJ0aW9ucygrKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvT3ZtZlBrZy9MaWJyYXJ5
-L1BjaUhvc3RCcmlkZ2VMaWIvWGVuU3VwcG9ydC5jIGIvT3ZtZlBrZy9MaWJyYXJ5L1BjaUhvc3RC
-cmlkZ2VMaWIvWGVuU3VwcG9ydC5jCj4+IGluZGV4IDQwOGZiMjQuLjk5NDAzMzUgMTAwNjQ0Cj4+
-IC0tLSBhL092bWZQa2cvTGlicmFyeS9QY2lIb3N0QnJpZGdlTGliL1hlblN1cHBvcnQuYwo+PiAr
-KysgYi9Pdm1mUGtnL0xpYnJhcnkvUGNpSG9zdEJyaWRnZUxpYi9YZW5TdXBwb3J0LmMKPj4gQEAg
-LTU1LDYgKzU1LDMzIEBAIFBjYXRQY2lSb290QnJpZGdlQmFyRXhpc3RlZCAoCj4+ICAgIEVuYWJs
-ZUludGVycnVwdHMgKCk7Cj4+ICB9Cj4+ICAKPj4gKyNkZWZpbmUgRUZJX1BDSV9DT01NQU5EX0RF
-Q09ERSAoKFVJTlQxNikoRUZJX1BDSV9DT01NQU5EX0lPX1NQQUNFIHwgXAo+PiArICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBFRklfUENJX0NPTU1BTkRfTUVNT1JZX1NQ
-QUNFKSkKPj4gK1NUQVRJQwo+PiArVk9JRAo+PiArUGNhdFBjaVJvb3RCcmlkZ2VEZWNvZGluZyAo
-Cj4+ICsgIElOICBVSU5UTiAgICAgICAgICAgICAgICAgICAgICAgICAgQWRkcmVzcywKPj4gKyAg
-SU4gIEJPT0xFQU4gICAgICAgICAgICAgICAgICAgICAgICBFbmFibGVkLAo+PiArICBPVVQgVUlO
-VDE2ICAgICAgICAgICAgICAgICAgICAgICAgICpPcmlnaW5hbFZhbHVlCj4+ICsgICkKPj4gK3sK
-Pj4gKyAgVUlOVDE2ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFZhbHVlOwo+PiArCj4+ICsg
-IC8vCj4+ICsgIC8vIFByZXNlcnZlIHRoZSBvcmlnaW5hbCB2YWx1ZQo+PiArICAvLwo+PiArICBW
-YWx1ZSA9ICpPcmlnaW5hbFZhbHVlOwo+PiArICAqT3JpZ2luYWxWYWx1ZSA9IFBjaVJlYWQxNiAo
-QWRkcmVzcyk7Cj4+ICsKPj4gKyAgaWYgKCFFbmFibGVkKSB7Cj4+ICsgICAgaWYgKCpPcmlnaW5h
-bFZhbHVlICYgRUZJX1BDSV9DT01NQU5EX0RFQ09ERSkKPj4gKyAgICAgICBQY2lXcml0ZTE2IChB
-ZGRyZXNzLCAqT3JpZ2luYWxWYWx1ZSAmIH5FRklfUENJX0NPTU1BTkRfREVDT0RFKTsKPiAKPiBU
-aGUgZWRrMiBjb2Rpbmcgc3R5bGUgYXNrIHRvIGFsd2F5cyB1c2UgeyB9IHdpdGggaWY6Cj4gaHR0
-cHM6Ly9naXRodWIuY29tL3RpYW5vY29yZS90aWFub2NvcmUuZ2l0aHViLmlvL3dpa2kvQ29kZS1T
-dHlsZS1DCj4gCj4+ICsgIH0gZWxzZSB7Cj4+ICsgICAgaWYgKFZhbHVlICYgRUZJX1BDSV9DT01N
-QU5EX0RFQ09ERSkKPj4gKyAgICAgIFBjaVdyaXRlMTYgKEFkZHJlc3MsIFZhbHVlKTsKPiAKPiBo
-ZXJlIHRvby4KPiAKPj4gKyAgfQo+PiArfQo+PiArCj4+ICBTVEFUSUMKPj4gIFZPSUQKPj4gIFBj
-YXRQY2lSb290QnJpZGdlUGFyc2VCYXJzICgKPj4gQEAgLTc2LDYgKzEwMyw3IEBAIFBjYXRQY2lS
-b290QnJpZGdlUGFyc2VCYXJzICgKPj4gICAgVUlOVDMyICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIFZhbHVlOwo+PiAgICBVSU5UMzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgT3JpZ2lu
-YWxVcHBlclZhbHVlOwo+PiAgICBVSU5UMzIgICAgICAgICAgICAgICAgICAgICAgICAgICAgVXBw
-ZXJWYWx1ZTsKPj4gKyAgVUlOVDE2ICAgICAgICAgICAgICAgICAgICAgICAgICAgIE9yaWdpbmFs
-Q29tbWFuZDsKPj4gICAgVUlOVDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1hc2s7Cj4+
-ICAgIFVJTlROICAgICAgICAgICAgICAgICAgICAgICAgICAgICBPZmZzZXQ7Cj4+ICAgIFVJTlQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICBCYXNlOwo+PiBAQCAtODMsNiArMTExLDEyIEBA
-IFBjYXRQY2lSb290QnJpZGdlUGFyc2VCYXJzICgKPj4gICAgVUlOVDY0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIExpbWl0Owo+PiAgICBQQ0lfUk9PVF9CUklER0VfQVBFUlRVUkUgICAgICAg
-ICAgKk1lbUFwZXJ0dXJlOwo+PiAgCj4+ICsgIC8vIERpc2FibGUgYWRkcmVzcyBkZWNvZGluZyBm
-b3IgZXZlcnkgZGV2aWNlIGJlZm9yZSBPVk1GIHN0YXJ0cyBzaXppbmcgaXQKPj4gKyAgUGNhdFBj
-aVJvb3RCcmlkZ2VEZWNvZGluZyAoCj4+ICsgICAgUENJX0xJQl9BRERSRVNTIChCdXMsIERldmlj
-ZSwgRnVuY3Rpb24sIFBDSV9DT01NQU5EX09GRlNFVCksCj4+ICsgICAgRkFMU0UsICZPcmlnaW5h
-bENvbW1hbmQKPiAKPiBJcyBpdCBvbiBwdXJwb3NlIHRoYXQgdGhlIG9yaWdpbmFsIHJlZ2lzdGVy
-IHZhbHVlIGlzIHN0b3JlZCBpbgo+IE9yaWdpbmFsQ29tbWFuZCwgYnV0IG5ldmVyIHVzZWQgYWdh
-aW4/CgpUaG9zZSBhcmUgcHJvYmFibHkgcmVtbmFudHMgb2YgZXh0ZW5kZWQgcGF0Y2ggdmVyc2lv
-biBmb3IgWGVuU2VydmVyIC0Kd2lsbCByZW1vdmUgdG9nZXRoZXIgd2l0aCBvdGhlciBzdWdnZXN0
-aW9ucyBmcm9tIHlvdSBhbmQgTGFzemxvLgoKSWdvcgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-794882336-1552594482=:1948
+Content-Type: text/plain; CHARSET=ISO-8859-15
+Content-Transfer-Encoding: 8BIT
+Content-ID: <alpine.DEB.2.21.1903141319301.1948@nanos.tec.linutronix.de>
+
+Ashok,
+
+On Thu, 14 Mar 2019, Raj, Ashok wrote:
+> On Thu, Mar 14, 2019 at 12:39:46PM +0000, Andrew Cooper wrote:
+> > On late load failure, we should dump enough information to work out
+> > exactly what went on, to determine how best to proceed, but the server
+> > is effectively lost to us.  On late load success, the proposed new
+> > "version" replaces the current "version".
+> > 
+> > And again - I reiterate the point that I think it is fine to have a
+> > simplifying assumption that we don't have mixed stepping systems to
+> > start with, presuming this is generally in line with Intel's support
+> > statement.  If in practice we find mixed stepping systems which are
+> > supported by an OEM/Intel, we can see about extending the logic.
+> 
+> Checking with Asit he says it is in fact permitted to have 1 step behind
+> even on a multi-socket system. One could be N and other N-1 should be 
+> supported.
+
+That turns into a total disaster if N has an issue fixed ant N-1 requires
+microcode + software workaround.
+
+So if N is on the boot socket, then we fail to enable the workaround
+because CPU0 has the 'Issue fixed' bit set.
+
+If N-1 is on the boot socket, then we go to do the workaround nevertheless
+on N and that might dependend on the issue just be some pointless exercise
+or even try to access some MSR which is not available.
+
+*Shudder*
+
+	tglx
+--8323329-794882336-1552594482=:1948
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-794882336-1552594482=:1948--
