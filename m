@@ -1,21 +1,17 @@
-From: Simon Gaiser <simon@invisiblethingslab.com>
-Subject: Re: [PATCH 6/6] xen-pt: Round pci regions sizes to
- XEN_PAGE_SIZE
-Date: Thu, 14 Mar 2019 21:45:26 +0100
-Message-ID: <a030fb34-6297-753c-c209-e57702eace6a@invisiblethingslab.com>
-References: <20190311180216.18811-1-jandryuk@gmail.com>
- <20190311180216.18811-7-jandryuk@gmail.com>
- <ee0da83d3f054e72ae450437c8834d04@AMSPEX02CL02.citrite.net>
- <CAKf6xpujVs3RPJcb+2vqPZFcYwhdDcjbt=S_+awjPuPFpFHsPw@mail.gmail.com>
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+Subject: [PATCH v3 1/2] x86/hvm: split all linear reads and
+ writes at page boundary
+Date: Thu, 14 Mar 2019 22:30:48 +0000
+Message-ID: <1552602649-14358-1-git-send-email-igor.druzhinin@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2137475905164763978=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4cC9=RR=invisiblethingslab.com=simon@srs-us1.protection.inumbo.net>)
- id 1h4XEV-0006Jy-No
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 20:45:43 +0000
-In-Reply-To: <CAKf6xpujVs3RPJcb+2vqPZFcYwhdDcjbt=S_+awjPuPFpFHsPw@mail.gmail.com>
+ <SRS0=zbPr=RR=citrix.com=prvs=969963b1b=igor.druzhinin@srs-us1.protection.inumbo.net>)
+ id 1h4YsP-0005pD-HF
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 22:31:01 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,142 +20,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jason Andryuk <jandryuk@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>
-Cc: Anthony Perard <anthony.perard@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>, "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "marmarek@invisiblethingslab.com" <marmarek@invisiblethingslab.com>
+To: xen-devel@lists.xenproject.org
+Cc: Igor Druzhinin <igor.druzhinin@citrix.com>, wei.liu2@citrix.com, andrew.cooper3@citrix.com, paul.durrant@citrix.com, jbeulich@suse.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============2137475905164763978==
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature";
- boundary="2sZU9GiB04oIQv7fUDCy0yeOmCJhff6k3"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---2sZU9GiB04oIQv7fUDCy0yeOmCJhff6k3
-Content-Type: multipart/mixed; boundary="OEiFKU6eufhOLawkk43m9h2ESeslOgexa";
- protected-headers="v1"
-From: Simon Gaiser <simon@invisiblethingslab.com>
-To: Jason Andryuk <jandryuk@gmail.com>, Paul Durrant <Paul.Durrant@citrix.com>
-Cc: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "marmarek@invisiblethingslab.com" <marmarek@invisiblethingslab.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony Perard <anthony.perard@citrix.com>
-Message-ID: <a030fb34-6297-753c-c209-e57702eace6a@invisiblethingslab.com>
-Subject: Re: [PATCH 6/6] xen-pt: Round pci regions sizes to XEN_PAGE_SIZE
-References: <20190311180216.18811-1-jandryuk@gmail.com>
- <20190311180216.18811-7-jandryuk@gmail.com>
- <ee0da83d3f054e72ae450437c8834d04@AMSPEX02CL02.citrite.net>
- <CAKf6xpujVs3RPJcb+2vqPZFcYwhdDcjbt=S_+awjPuPFpFHsPw@mail.gmail.com>
-In-Reply-To: <CAKf6xpujVs3RPJcb+2vqPZFcYwhdDcjbt=S_+awjPuPFpFHsPw@mail.gmail.com>
-
---OEiFKU6eufhOLawkk43m9h2ESeslOgexa
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-Jason Andryuk:
-> On Wed, Mar 13, 2019 at 11:09 AM Paul Durrant <Paul.Durrant@citrix.com>=
- wrote:
->>
->>> -----Original Message-----
->>> From: Jason Andryuk [mailto:jandryuk@gmail.com]
->>> Sent: 11 March 2019 18:02
->>> To: qemu-devel@nongnu.org
->>> Cc: xen-devel@lists.xenproject.org; marmarek@invisiblethingslab.com; =
-Simon Gaiser
->>> <simon@invisiblethingslab.com>; Jason Andryuk <jandryuk@gmail.com>; S=
-tefano Stabellini
->>> <sstabellini@kernel.org>; Anthony Perard <anthony.perard@citrix.com>;=
- Paul Durrant
->>> <Paul.Durrant@citrix.com>
->>> Subject: [PATCH 6/6] xen-pt: Round pci regions sizes to XEN_PAGE_SIZE=
-
->>>
->>> From: Simon Gaiser <simon@invisiblethingslab.com>
->>>
->>> If a pci memory region has a size < XEN_PAGE_SIZE it can get located =
-at
->>> an address which is not page aligned.
->>
->> IIRC the PCI spec says that the minimum memory region size should be a=
-t least 4k. Should we even be tolerating BARs smaller than that?
->>
->>   Paul
->>
->=20
-> Hi, Paul.
->=20
-> Simon found this, so it affects a real device.  Simon, do you recall
-> which device was affected?
->=20
-> I think BARs only need to be power-of-two size and aligned, and 4k is
-> not a minimum.  16bytes may be a minimum, but I don't know what the
-> spec says.
->=20
-> On an Ivy Bridge system, here are some of the devices with BARs smaller=
- than 4K:
-> 00:16.0 Communication controller: Intel Corporation 7 Series/C210
-> Series Chipset Family MEI Controller #1 (rev 04)
->    Memory at d0735000 (64-bit, non-prefetchable) [disabled] [size=3D16]=
-
-> 00:1d.0 USB controller: Intel Corporation 7 Series/C210 Series Chipset
-> Family USB Enhanced Host Controller #1 (rev 04) (prog-if 20 [EHCI])
->    Memory at d0739000 (32-bit, non-prefetchable) [disabled] [size=3D1K]=
-
-> 00:1f.3 SMBus: Intel Corporation 7 Series/C210 Series Chipset Family
-> SMBus Controller (rev 04)
->    Memory at d0734000 (64-bit, non-prefetchable) [disabled] [size=3D256=
-]
-> 02:00.0 System peripheral: JMicron Technology Corp. SD/MMC Host
-> Controller (rev 30)
->    Memory at d0503000 (32-bit, non-prefetchable) [disabled] [size=3D256=
-]
->=20
-> These examples are all 4K aligned, so this is not an issue on this mach=
-ine.
-
-I wrote this patch quite some time ago, so I might be misremembering
-something but IIRC the problem was the address qemu allocates with
-memory_region_init_io(). I.e. the address as seen from inside the VM, so
-it does not help if the real address is aligned.
-
-
---OEiFKU6eufhOLawkk43m9h2ESeslOgexa--
-
---2sZU9GiB04oIQv7fUDCy0yeOmCJhff6k3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEE3E8ezGzG3N1CTQ//kO9xfO/xly8FAlyKvWYACgkQkO9xfO/x
-ly8VBBAAupOXjMrmuARGxnfDEzLSVLQEFWm3d7XyZzPNPlSHaNY73kklyJEG5yJD
-V6rzE5eyj5tdn3/TzGZSBQDphc561yx+wZ81ZrbfcnwI5crcVX7orit6WjEiS8gF
-MCWntXnAMq8p8OiTuIM2kzs93ojX+NGtRvcOHcgK9sHeGN5bByz/h1nGTB8CgBGt
-Z/XRvG51h2skaSsuqO1QpOMrA2e+sKqHQwNgDWVq3x65IyZZPmIvY8wckkXgG/Uo
-UK8BzCrBwVEbDAUI6jEcpwE73zdEg3e4FuNChgpZhL6C9nkToXLtl3/llS23BfHK
-fYXN2PV9XnmMrbbixeUbOqzaQi43Q0A1eqCS/epT6ZKeTvoRiwdn0zpHKhrquF+F
-MCyrI/kuIeDON0lnjN5BetMypZur0/roD+a52lV9L6two7co5FbUag1Q20LEs+0v
-1FmFW5rloobtqdqyk+7fjJQKRzhCU/yn4HACKIVnKxaOS1LoNFV5spRSW/GsVK0o
-rPoVXx9Cm0ShAjYxZdD3Ski3ZwcNpNr9iTk8SagOeXzCGUXiA+C7RszUCPV0Pn04
-jOgH33xyTfWFyY413w15tFCepBWkeEZ4caRaw2mhmoxQF8M/+C5s4hB3z0NS+UUW
-6Pz43OX2iBiLpA3pVCjlXFWpYWfzoafP0my3uc/+629BjcNcfbY=
-=0YJK
------END PGP SIGNATURE-----
-
---2sZU9GiB04oIQv7fUDCy0yeOmCJhff6k3--
-
-
---===============2137475905164763978==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2137475905164763978==--
+UnVsaW5nIG91dCBwYWdlIHN0cmFkZGxpbmcgYXQgbGluZWFyIGxldmVsIG1ha2VzIGl0IGVhc2ll
+ciB0bwpkaXN0aW5ndWlzaCBjaHVua3MgdGhhdCByZXF1aXJlIHByb3BlciBoYW5kbGluZyBhcyBN
+TUlPIGFjY2VzcwphbmQgbm90IGNvbXBsZXRlIHRoZW0gYXMgcGFnZSBzdHJhZGRsaW5nIG1lbW9y
+eSB0cmFuc2FjdGlvbnMKcHJlbWF0dXJlbHkuIFRoaXMgZG9lc24ndCBjaGFuZ2UgdGhlIGdlbmVy
+YWwgYmVoYXZpb3IuCgpTaWduZWQtb2ZmLWJ5OiBJZ29yIERydXpoaW5pbiA8aWdvci5kcnV6aGlu
+aW5AY2l0cml4LmNvbT4KLS0tCkNoYW5nZXMgaW4gdjM6CiogbmV3IHBhdGNoIGluIHYzIHRvIGFk
+ZHJlc3MgdGhlIGNvbmNlcm4gb2YgUDJNIHR5cGUgY2hhbmdlIGFsb25nIHdpdGgKICBwYWdlIHN0
+cmFkZGxpbmcKLS0tCiB4ZW4vYXJjaC94ODYvaHZtL2VtdWxhdGUuYyB8IDcyICsrKysrKysrKysr
+KysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAzOCBp
+bnNlcnRpb25zKCspLCAzNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYv
+aHZtL2VtdWxhdGUuYyBiL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCmluZGV4IDc1NGJhZjYu
+LjQ4NzljY2IgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCisrKyBiL3hl
+bi9hcmNoL3g4Ni9odm0vZW11bGF0ZS5jCkBAIC0xMDg5LDEyICsxMDg5LDI1IEBAIHN0YXRpYyBp
+bnQgbGluZWFyX3JlYWQodW5zaWduZWQgbG9uZyBhZGRyLCB1bnNpZ25lZCBpbnQgYnl0ZXMsIHZv
+aWQgKnBfZGF0YSwKICAgICAgICAgICAgICAgICAgICAgICAgdWludDMyX3QgcGZlYywgc3RydWN0
+IGh2bV9lbXVsYXRlX2N0eHQgKmh2bWVtdWxfY3R4dCkKIHsKICAgICBwYWdlZmF1bHRfaW5mb190
+IHBmaW5mbzsKLSAgICBpbnQgcmMgPSBodm1fY29weV9mcm9tX2d1ZXN0X2xpbmVhcihwX2RhdGEs
+IGFkZHIsIGJ5dGVzLCBwZmVjLCAmcGZpbmZvKTsKKyAgICB1bnNpZ25lZCBpbnQgb2Zmc2V0ID0g
+YWRkciAmIH5QQUdFX01BU0s7CisgICAgaW50IHJjOwogCi0gICAgc3dpdGNoICggcmMgKQorICAg
+IGlmICggb2Zmc2V0ICsgYnl0ZXMgPiBQQUdFX1NJWkUgKQogICAgIHsKLSAgICAgICAgdW5zaWdu
+ZWQgaW50IG9mZnNldCwgcGFydDE7CisgICAgICAgIHVuc2lnbmVkIGludCBwYXJ0MSA9IFBBR0Vf
+U0laRSAtIG9mZnNldDsKKworICAgICAgICAvKiBTcGxpdCB0aGUgYWNjZXNzIGF0IHRoZSBwYWdl
+IGJvdW5kYXJ5LiAqLworICAgICAgICByYyA9IGxpbmVhcl9yZWFkKGFkZHIsIHBhcnQxLCBwX2Rh
+dGEsIHBmZWMsIGh2bWVtdWxfY3R4dCk7CisgICAgICAgIGlmICggcmMgPT0gWDg2RU1VTF9PS0FZ
+ICkKKyAgICAgICAgICAgIHJjID0gbGluZWFyX3JlYWQoYWRkciArIHBhcnQxLCBieXRlcyAtIHBh
+cnQxLCBwX2RhdGEgKyBwYXJ0MSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGZlYywg
+aHZtZW11bF9jdHh0KTsKKyAgICAgICAgcmV0dXJuIHJjOworICAgIH0KKworICAgIHJjID0gaHZt
+X2NvcHlfZnJvbV9ndWVzdF9saW5lYXIocF9kYXRhLCBhZGRyLCBieXRlcywgcGZlYywgJnBmaW5m
+byk7CiAKKyAgICBzd2l0Y2ggKCByYyApCisgICAgewogICAgIGNhc2UgSFZNVFJBTlNfb2theToK
+ICAgICAgICAgcmV0dXJuIFg4NkVNVUxfT0tBWTsKIApAQCAtMTEwNiwyMCArMTExOSw5IEBAIHN0
+YXRpYyBpbnQgbGluZWFyX3JlYWQodW5zaWduZWQgbG9uZyBhZGRyLCB1bnNpZ25lZCBpbnQgYnl0
+ZXMsIHZvaWQgKnBfZGF0YSwKICAgICAgICAgaWYgKCBwZmVjICYgUEZFQ19pbnNuX2ZldGNoICkK
+ICAgICAgICAgICAgIHJldHVybiBYODZFTVVMX1VOSEFORExFQUJMRTsKIAotICAgICAgICBvZmZz
+ZXQgPSBhZGRyICYgflBBR0VfTUFTSzsKLSAgICAgICAgaWYgKCBvZmZzZXQgKyBieXRlcyA8PSBQ
+QUdFX1NJWkUgKQotICAgICAgICAgICAgcmV0dXJuIGh2bWVtdWxfbGluZWFyX21taW9fcmVhZChh
+ZGRyLCBieXRlcywgcF9kYXRhLCBwZmVjLAotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBodm1lbXVsX2N0eHQsCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGtub3duX2dsYShhZGRyLCBieXRlcywgcGZlYykpOwotCi0gICAgICAg
+IC8qIFNwbGl0IHRoZSBhY2Nlc3MgYXQgdGhlIHBhZ2UgYm91bmRhcnkuICovCi0gICAgICAgIHBh
+cnQxID0gUEFHRV9TSVpFIC0gb2Zmc2V0OwotICAgICAgICByYyA9IGxpbmVhcl9yZWFkKGFkZHIs
+IHBhcnQxLCBwX2RhdGEsIHBmZWMsIGh2bWVtdWxfY3R4dCk7Ci0gICAgICAgIGlmICggcmMgPT0g
+WDg2RU1VTF9PS0FZICkKLSAgICAgICAgICAgIHJjID0gbGluZWFyX3JlYWQoYWRkciArIHBhcnQx
+LCBieXRlcyAtIHBhcnQxLCBwX2RhdGEgKyBwYXJ0MSwKLSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGZlYywgaHZtZW11bF9jdHh0KTsKLSAgICAgICAgcmV0dXJuIHJjOwotCisgICAgICAg
+IHJldHVybiBodm1lbXVsX2xpbmVhcl9tbWlvX3JlYWQoYWRkciwgYnl0ZXMsIHBfZGF0YSwgcGZl
+YywKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBodm1lbXVsX2N0eHQs
+CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAga25vd25fZ2xhKGFkZHIs
+IGJ5dGVzLCBwZmVjKSk7CiAgICAgY2FzZSBIVk1UUkFOU19nZm5fcGFnZWRfb3V0OgogICAgIGNh
+c2UgSFZNVFJBTlNfZ2ZuX3NoYXJlZDoKICAgICAgICAgcmV0dXJuIFg4NkVNVUxfUkVUUlk7CkBA
+IC0xMTMyLDEyICsxMTM0LDI1IEBAIHN0YXRpYyBpbnQgbGluZWFyX3dyaXRlKHVuc2lnbmVkIGxv
+bmcgYWRkciwgdW5zaWduZWQgaW50IGJ5dGVzLCB2b2lkICpwX2RhdGEsCiAgICAgICAgICAgICAg
+ICAgICAgICAgICB1aW50MzJfdCBwZmVjLCBzdHJ1Y3QgaHZtX2VtdWxhdGVfY3R4dCAqaHZtZW11
+bF9jdHh0KQogewogICAgIHBhZ2VmYXVsdF9pbmZvX3QgcGZpbmZvOwotICAgIGludCByYyA9IGh2
+bV9jb3B5X3RvX2d1ZXN0X2xpbmVhcihhZGRyLCBwX2RhdGEsIGJ5dGVzLCBwZmVjLCAmcGZpbmZv
+KTsKKyAgICB1bnNpZ25lZCBpbnQgb2Zmc2V0ID0gYWRkciAmIH5QQUdFX01BU0s7CisgICAgaW50
+IHJjOwogCi0gICAgc3dpdGNoICggcmMgKQorICAgIGlmICggb2Zmc2V0ICsgYnl0ZXMgPiBQQUdF
+X1NJWkUgKQogICAgIHsKLSAgICAgICAgdW5zaWduZWQgaW50IG9mZnNldCwgcGFydDE7CisgICAg
+ICAgIHVuc2lnbmVkIGludCBwYXJ0MSA9IFBBR0VfU0laRSAtIG9mZnNldDsKIAorICAgICAgICAv
+KiBTcGxpdCB0aGUgYWNjZXNzIGF0IHRoZSBwYWdlIGJvdW5kYXJ5LiAqLworICAgICAgICByYyA9
+IGxpbmVhcl93cml0ZShhZGRyLCBwYXJ0MSwgcF9kYXRhLCBwZmVjLCBodm1lbXVsX2N0eHQpOwor
+ICAgICAgICBpZiAoIHJjID09IFg4NkVNVUxfT0tBWSApCisgICAgICAgICAgICByYyA9IGxpbmVh
+cl93cml0ZShhZGRyICsgcGFydDEsIGJ5dGVzIC0gcGFydDEsIHBfZGF0YSArIHBhcnQxLAorICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGZlYywgaHZtZW11bF9jdHh0KTsKKyAgICAgICAg
+cmV0dXJuIHJjOworICAgIH0KKworICAgIHJjID0gaHZtX2NvcHlfdG9fZ3Vlc3RfbGluZWFyKGFk
+ZHIsIHBfZGF0YSwgYnl0ZXMsIHBmZWMsICZwZmluZm8pOworCisgICAgc3dpdGNoICggcmMgKQor
+ICAgIHsKICAgICBjYXNlIEhWTVRSQU5TX29rYXk6CiAgICAgICAgIHJldHVybiBYODZFTVVMX09L
+QVk7CiAKQEAgLTExNDYsMjAgKzExNjEsOSBAQCBzdGF0aWMgaW50IGxpbmVhcl93cml0ZSh1bnNp
+Z25lZCBsb25nIGFkZHIsIHVuc2lnbmVkIGludCBieXRlcywgdm9pZCAqcF9kYXRhLAogICAgICAg
+ICByZXR1cm4gWDg2RU1VTF9FWENFUFRJT047CiAKICAgICBjYXNlIEhWTVRSQU5TX2JhZF9nZm5f
+dG9fbWZuOgotICAgICAgICBvZmZzZXQgPSBhZGRyICYgflBBR0VfTUFTSzsKLSAgICAgICAgaWYg
+KCBvZmZzZXQgKyBieXRlcyA8PSBQQUdFX1NJWkUgKQotICAgICAgICAgICAgcmV0dXJuIGh2bWVt
+dWxfbGluZWFyX21taW9fd3JpdGUoYWRkciwgYnl0ZXMsIHBfZGF0YSwgcGZlYywKLSAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGh2bWVtdWxfY3R4dCwKLSAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGtub3duX2dsYShhZGRyLCBi
+eXRlcywgcGZlYykpOwotCi0gICAgICAgIC8qIFNwbGl0IHRoZSBhY2Nlc3MgYXQgdGhlIHBhZ2Ug
+Ym91bmRhcnkuICovCi0gICAgICAgIHBhcnQxID0gUEFHRV9TSVpFIC0gb2Zmc2V0OwotICAgICAg
+ICByYyA9IGxpbmVhcl93cml0ZShhZGRyLCBwYXJ0MSwgcF9kYXRhLCBwZmVjLCBodm1lbXVsX2N0
+eHQpOwotICAgICAgICBpZiAoIHJjID09IFg4NkVNVUxfT0tBWSApCi0gICAgICAgICAgICByYyA9
+IGxpbmVhcl93cml0ZShhZGRyICsgcGFydDEsIGJ5dGVzIC0gcGFydDEsIHBfZGF0YSArIHBhcnQx
+LAotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGZlYywgaHZtZW11bF9jdHh0KTsKLSAg
+ICAgICAgcmV0dXJuIHJjOwotCisgICAgICAgIHJldHVybiBodm1lbXVsX2xpbmVhcl9tbWlvX3dy
+aXRlKGFkZHIsIGJ5dGVzLCBwX2RhdGEsIHBmZWMsCisgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGh2bWVtdWxfY3R4dCwKKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAga25vd25fZ2xhKGFkZHIsIGJ5dGVzLCBwZmVjKSk7CiAgICAgY2FzZSBI
+Vk1UUkFOU19nZm5fcGFnZWRfb3V0OgogICAgIGNhc2UgSFZNVFJBTlNfZ2ZuX3NoYXJlZDoKICAg
+ICAgICAgcmV0dXJuIFg4NkVNVUxfUkVUUlk7Ci0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
