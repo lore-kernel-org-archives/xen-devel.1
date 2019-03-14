@@ -1,23 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v7 04/49] x86emul: support AVX512{F, BW,
- DQ} insert insns
-Date: Thu, 14 Mar 2019 15:35:45 +0000
-Message-ID: <3bf6597e-c299-494d-4d41-5234dbb71b82@citrix.com>
-References: <5B6BF83602000078001DC548@prv1-mh.provo.novell.com>
- <5C1A52ED0200007800207865@prv1-mh.provo.novell.com>
- <5C1A579602000078002078A7@prv1-mh.provo.novell.com>
+From: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH v1] xen/balloon: Fix mapping PG_offline
+ pages to user space
+Date: Thu, 14 Mar 2019 16:59:50 +0100
+Message-ID: <2268eedd-65f6-4715-792f-702bfca4659c__45117.1270267636$1552579260$gmane$org@redhat.com>
+References: <20190314154025.21128-1-david@redhat.com>
+ <20190314154907.wcwh5ricj6v7p23v@d104.suse.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Rzje=RR=citrix.com=prvs=969ff7116=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h4SeQ-0004Nc-LB
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 15:52:10 +0000
-In-Reply-To: <5C1A579602000078002078A7@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=mfUP=RR=redhat.com=david@srs-us1.protection.inumbo.net>)
+ id 1h4Slv-0004cY-Ij
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 15:59:55 +0000
+In-Reply-To: <20190314154907.wcwh5ricj6v7p23v@d104.suse.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,14 +24,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Oscar Salvador <osalvador@suse.de>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>, linux-mm@kvack.org, Julien Grall <julien.grall@arm.com>, Nadav Amit <namit@vmware.com>, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>, akpm@linux-foundation.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTkvMTIvMjAxOCAxNDozNywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gQWxzbyBjb3JyZWN0IHRo
-ZSBjb21tZW50IG9mIHRoZSBBVlggZm9ybSBvZiBWSU5TRVJUUFMuCj4KPiBTaWduZWQtb2ZmLWJ5
-OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTogQW5kcmV3IENvb3Bl
-ciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gMTQuMDMuMTkgMTY6NDksIE9zY2FyIFNhbHZhZG9yIHdyb3RlOgo+IE9uIFRodSwgTWFyIDE0
+LCAyMDE5IGF0IDA0OjQwOjI1UE0gKzAxMDAsIERhdmlkIEhpbGRlbmJyYW5kIHdyb3RlOgo+PiBA
+QCAtNjQ2LDYgKzY0Nyw3IEBAIHZvaWQgZnJlZV94ZW5iYWxsb29uZWRfcGFnZXMoaW50IG5yX3Bh
+Z2VzLCBzdHJ1Y3QgcGFnZSAqKnBhZ2VzKQo+PiAgCj4+ICAJZm9yIChpID0gMDsgaSA8IG5yX3Bh
+Z2VzOyBpKyspIHsKPj4gIAkJaWYgKHBhZ2VzW2ldKQo+PiArCQkJX19TZXRQYWdlT2ZmbGluZShw
+YWdlc1tpXSk7Cj4+ICAJCQliYWxsb29uX2FwcGVuZChwYWdlc1tpXSk7Cj4gCj4gZGlkbid0IHlv
+dSBmb3JnZXQge30gdGhlcmU/IDstKQo+IAoKVGhhdCdzIHdoYXQgaGFwcGVucyB3aGVuIHlvdSBz
+dGFzaGVkIHRoZSBvcmlnaW5hbCBwYXRjaCBhbmQgdHJ5IHRvCnJlY3JlYXRlIGl0IHF1aWNrbHkg
+ZnJvbSBhIG1haWwgOykKClRoYW5rcyEKCgotLSAKClRoYW5rcywKCkRhdmlkIC8gZGhpbGRlbmIK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
