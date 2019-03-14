@@ -1,17 +1,25 @@
-From: Tomasz Tuzel <tomasztuzel@gmail.com>
-Subject: UEFI Boot Order Not Respected
-Date: Wed, 13 Mar 2019 15:31:08 -0600
-Message-ID: <CAP-u0V8dn4UzAjZQXPnKDPA0yDAUg7=LBRUC=Ou9JXwdXfezuw@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v6 04/12] microcode: introduce a global
+ cache of ucode patch
+Date: Thu, 14 Mar 2019 01:42:05 -0600
+Message-ID: <5C8A05CD020000780021E62B@prv1-mh.provo.novell.com>
+References: <1552291056-20286-1-git-send-email-chao.gao@intel.com>
+ <1552291056-20286-5-git-send-email-chao.gao@intel.com>
+ <20190312165353.j6fj53ho2y6rcxzr@Air-de-Roger>
+ <5C88B3B9020000780021DF27@prv1-mh.provo.novell.com>
+ <3b84e762-96ff-f1c7-7f37-4af9afb48153@citrix.com>
+ <2fc8ac8c-c784-b2d5-d1f3-b25298ea6c89@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7572589177436114578=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=5eFo=RQ=gmail.com=tomasztuzel@srs-us1.protection.inumbo.net>)
- id 1h4BT7-0002Kz-KH
- for xen-devel@lists.xenproject.org; Wed, 13 Mar 2019 21:31:21 +0000
-Received: by mail-io1-xd32.google.com with SMTP id x4so3103680ion.2
- for <xen-devel@lists.xenproject.org>; Wed, 13 Mar 2019 14:31:20 -0700 (PDT)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=U6t1=RR=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1h4L0F-0004of-7O
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 07:42:11 +0000
+In-Reply-To: <2fc8ac8c-c784-b2d5-d1f3-b25298ea6c89@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,139 +28,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ashok Raj <ashok.raj@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>, Chao Gao <chao.gao@intel.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7572589177436114578==
-Content-Type: multipart/alternative; boundary="000000000000c3470905840086ee"
-
---000000000000c3470905840086ee
-Content-Type: text/plain; charset="UTF-8"
-
-Hi everyone,
-
-We've been running into an issue with boot ordering when using OVMF
-(specifically, with PXE booting). In particular, the issue is the "-boot
-order=ABC" seems to have variable behavior depending on what it receives.
-This is only an issue with UEFI; legacy handles this condition correctly.
-Here's a table documenting several combinations in the HVM guest
-configuration: OS installed || ISO attached || Boot order || Result
----------------------------------------------------- N || N || n || PXE
-boot ---------------------------------------------------- N || Y || n ||
-Prompt for CD boot, if not pressed drop to PXE boot
----------------------------------------------------- Y || N || n || Boot
-from hard drive ---------------------------------------------------- Y || Y
-|| n || Prompt for CD boot, if not pressed drop to hard drive
----------------------------------------------------- N || Y || cd || Prompt
-for CD boot, if not pressed drop to PXE boot
----------------------------------------------------- N || N || cd || PXE
-boot ---------------------------------------------------- Y || N || cd ||
-Boot from hardrive ---------------------------------------------------- Y
-|| Y || cd || Prompt for CD boot, if not pressed drop to hard drive
----------------------------------------------------- N || N || cn || PXE
-boot ---------------------------------------------------- N || Y || cn ||
-Prompt for CD boot, if not pressed drop to PXE boot
----------------------------------------------------- Y || N || cn || Boot
-from hard drive ---------------------------------------------------- Y || Y
-|| cn || Prompt for CD boot, if not pressed drop to hard drive
----------------------------------------------------- N || N || nd || PXE
-boot ---------------------------------------------------- N || Y || nd ||
-Prompt for CD boot, if not pressed drop to PXE boot
----------------------------------------------------- Y || N || nd || Boot
-from hardrive ---------------------------------------------------- Y || Y
-|| nd || Prompt for CD boot, if not pressed drop to hard drive
----------------------------------------------------- My running suspicion
-is that the fw_cfg file is being incorrectly configured. However, I do not
-see what is typically cited as a problem in the QEMU invocation that is
-being tested on our end, namely the conflicting usage of "-boot order=ABC"
-and "-device XYZ,bootindex=N". I don't really see any chatter about this on
-any of the mailing lists that I've dug through, but it was just last week
-that a fix was posted for the issue in which the hvmloader firmware leaves
-address decoding enabled for enumerated PCI devices. Thus, I'm wondering if
-this has simply not shown up on anyone's radar yet. Is this is a known
-issue?
-
-Tomasz
-
---000000000000c3470905840086ee
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hi everyone,<div><br></div><div>We&#39;ve been running int=
-o an issue with boot ordering when using OVMF (specifically, with PXE booti=
-ng). In particular, the issue is the &quot;-boot order=3DABC&quot; seems to=
- have variable behavior depending on what it receives. This is only an issu=
-e with UEFI; legacy handles this condition correctly. Here&#39;s a table do=
-cumenting several combinations in the HVM guest configuration:<span style=
-=3D"color:rgb(51,51,51);font-family:Menlo,Monaco,Consolas,&quot;Courier New=
-&quot;,monospace;font-size:13px;white-space:pre-wrap;background-color:rgb(2=
-48,248,248)">
-
-OS installed || ISO attached || Boot order || Result
-----------------------------------------------------
-N            || N            || n          || PXE boot
-----------------------------------------------------
-N            || Y            || n          || Prompt for CD boot, if not pr=
-essed drop to PXE boot
-----------------------------------------------------
-Y            || N            || n          || Boot from hard drive
-----------------------------------------------------
-Y            || Y            || n          || Prompt for CD boot, if not pr=
-essed drop to hard drive
-----------------------------------------------------
-N            || Y            || cd         || Prompt for CD boot, if not pr=
-essed drop to PXE boot
-----------------------------------------------------
-N            || N            || cd         || PXE boot
-----------------------------------------------------
-Y            || N            || cd         || Boot from hardrive
-----------------------------------------------------
-Y            || Y            || cd         || Prompt for CD boot, if not pr=
-essed drop to hard drive
-----------------------------------------------------
-N            || N            || cn         || PXE boot
-----------------------------------------------------
-N            || Y            || cn         || Prompt for CD boot, if not pr=
-essed drop to PXE boot
-----------------------------------------------------
-Y            || N            || cn         || Boot from hard drive
-----------------------------------------------------
-Y            || Y            || cn         || Prompt for CD boot, if not pr=
-essed drop to hard drive
-----------------------------------------------------
-N            || N            || nd         || PXE boot
-----------------------------------------------------
-N            || Y            || nd         || Prompt for CD boot, if not pr=
-essed drop to PXE boot
-----------------------------------------------------
-Y            || N            || nd         || Boot from hardrive
-----------------------------------------------------
-Y            || Y            || nd         || Prompt for CD boot, if not pr=
-essed drop to hard drive
-----------------------------------------------------
-
-</span>My running suspicion is that the fw_cfg file is being incorrectly co=
-nfigured. However, I do not see what is typically cited as a problem in the=
- QEMU invocation that is being tested on our end, namely the conflicting us=
-age of &quot;-boot order=3DABC&quot; and &quot;-device XYZ,bootindex=3DN&qu=
-ot;. I don&#39;t really see any chatter about this on any of the mailing li=
-sts that I&#39;ve dug through, but it was just last week that a fix was pos=
-ted for the issue in which the hvmloader firmware leaves address decoding e=
-nabled for enumerated PCI devices. Thus, I&#39;m wondering if this has simp=
-ly not shown up on anyone&#39;s radar yet. Is this is a known issue?</div><=
-div><br></div><div>Tomasz<br></div></div>
-
---000000000000c3470905840086ee--
-
-
---===============7572589177436114578==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7572589177436114578==--
+Pj4+IE9uIDEzLjAzLjE5IGF0IDE4OjA0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMTMvMDMvMjAxOSAxMDozMCwgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gT24gMTMv
+MDMvMjAxOSAwNzozOSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+PiBPbiAxMi4wMy4xOSBhdCAx
+Nzo1MywgPHJvZ2VyLnBhdUBjaXRyaXguY29tPiB3cm90ZToKPj4+PiBJSVJDIHdlIGFncmVlZCB0
+aGF0IHN5c3RlbXMgd2l0aCBtaXhlZCBDUFUgdmVyc2lvbnMgYXJlIG5vdCBzdXBwb3J0ZWQsCj4+
+Pj4gaGVuY2UgdGhlIHNhbWUgbWljcm9jb2RlIGJsb2Igc2hvdWxkIGJlIHVzZWQgdG8gdXBkYXRl
+IGFsbCB0aGUKPj4+PiBwb3NzaWJsZSBDUFVzIG9uIHRoZSBzeXN0ZW0sIHNvIGEgbGlzdCBzaG91
+bGQgbm90IGJlIG5lZWRlZCBoZXJlLgo+Pj4gVGhhdCdzIG5vdCB3aGF0IEkgcmVjYWxsLiBXZSBh
+Z3JlZWQgdG8gbm90IHN0b3JlIGV2ZXJ5dGhpbmcsIGJlY2F1c2UKPj4+IG1peGVkLWZhbWlseSAv
+IG1peGVkLW1vZGVsIHN5c3RlbXMgYXJlIGNvbW1vbmx5IG5vdCBzdXBwb3J0ZWQgYnkKPj4+IHRo
+ZSBodyB2ZW5kb3JzLiBCdXQgbWl4ZWQgc3RlcHBpbmcgc3lzdGVtcyBtYXkgd2VsbCBiZS4KPj4g
+VGhlIGRpZmZlcmVuY2UgYmV0d2VlbiBTa3lsYWtlIGFuZCBDYXNjYWRlTGFrZSBzZXJ2ZXIgQ1BV
+cyBpcyBvbmx5IGluCj4+IHRoZSBzdGVwcGluZyAoNCB2cyA2KS4gIFNhbWUgZm9yIEthYnkvQ29m
+ZmVlL1doaXNrZXkvQW1iZXIgbGFrZSAodGhlCj4+IG1vYmlsZSBhbmQgZGVza3RvcCBsaW5lcyBo
+YXZlIGEgbW9kZWwgZWFjaCwgYW5kIG5ld2VyIGdlbmVyYXRpb25zIGFyZQo+PiBqdXN0IG5ldyBz
+dGVwcGluZ3MpLgo+Pgo+PiBJJ2xsIGhhdmUgdG8gZGVmZXIgdG8gSW50ZWwgYXMgdG8gZXhhY3Rs
+eSB3aGF0IGlzIHN1cHBvcnRlZCwgYnV0IHdoZW4gSQo+PiBhc2tlZCB0aGlzIGJlZm9yZSwgdGhl
+IGFuc3dlciB3YXMgdGhhdCBubyBoZXRlcm9nZW5laXR5IHdhcyBzdXBwb3J0ZWQgYXQKPj4gYWxs
+LCBub3QgZXZlbiBhdCB0aGUgc3RlcHBpbmcgbGV2ZWwgb3IgcGxhdGZvcm0gSUQgbGV2ZWwuCj4g
+Cj4gU28sIGFzIGl0IHR1cm5zIG91dCwgWGVuIGluIHByYWN0aWNlIG9ubHkgc3VwcG9ydHMgYSBz
+aW5nbGUgZmlsZXMgd29ydGgKPiBvZiBtaWNyb2NvZGUgZnJvbSAvbGliL2Zpcm13YXJlCj4gCj4g
+VGhpcyBpcyBiZWNhdXNlOgo+IDEpIFRoYXQgaXMgdGhlIG9ubHkgYmVoYXZpb3VyIGRyYWt1dCBo
+YXMsIGFuZAo+IDIpIGRyYWt1dCBoYXMgYmVlbiB0aGUgZGVmYXVsdCBpbml0cmQtZ2VuZXJhdG9y
+IGluIExpbnV4IGRpc3Ryb3MgZm9yIGZhcgo+IGxvbmdlciB0aGFuIFhlbiBoYXMgaGFkIGJvb3Qg
+dGltZSBtaWNyb2NvZGUgbG9hZGluZyBzdXBwb3J0LCBhbmQKCkkgZGlzYWdyZWUuIHB1bGxpbmcg
+dGhlIG1pY3JvY29kZSBibG9iIG91dCBvZiB0aGUgaW5pdHJkIGlzIG9ubHkgYQpzZWNvbmRhcnkg
+b3B0aW9uLCBhcyBmYXIgYXMgWGVuJ3MgaGlzdG9yeSBpcyBjb25jZXJuZWQuIE15Cm9yaWdpbmFs
+IGVhcmx5IGxvYWQgaW1wbGVtZW50YXRpb24gcmVxdWlyZWQgc3BlY2lmeWluZyBhIHNlcGFyYXRl
+Cm1vZHVsZSBpbiB0aGUgZ3J1YiBjb25maWd1cmF0aW9uOyB1Y29kZT1zY2FuIHN1cHBvcnQgd2Fz
+IGFkZGVkCmxhdGVyIGJ5IEtvbnJhZC4gWWV0IHRoZSB1Y29kZT08bnVtPiBsb2dpYyBhbHNvIHN1
+cHBvcnRzIHRoZQpmdWxsIG1pY3JvY29kZS5iaW4gYmxvYiB0byBiZSBsb2FkZWQuIChBbmQgYXMg
+dG8gdGhlIHRpbWVsaW5lLCBJJ20Kbm90IHN1cmUgU0xFIGluIHBhcnRpY3VsYXIgd2FzIHN3aXRj
+aGVkIHRvIGRyYWN1dCBiZWZvcmUgWGVuIGhhZApnYWluZWQgZWFybHkgbG9hZGluZyBzdXBwb3J0
+LikKClRoYXQgc2FpZCAtIEkgYWdyZWUgd2l0aCB5b3UgdGhhdCB0aGUgb3ZlcndoZWxtaW5nIGFt
+b3VudCBvZgp0ZXN0aW5nIGxpa2VseSBjb3ZlcnMgdGhlIGNhc2UgeW91IG1lbnRpb24sIGFuZCBu
+b3RoaW5nIGVsc2UuIFNvCmlmIGZvciBhbGwgcHJhY3RpY2FsIHB1cnBvc2VzIHN1cHBvcnRpbmcg
+anVzdCBhIHNpbmdsZSBmYW1pbHk6bW9kZWw6CnN0ZXBwaW5nIHR1cGxlIGlzIGVub3VnaCAtIGZp
+bmUgd2l0aCBtZS4gR2l2ZW4gbXkgb3RoZXIgcmVwbHkKcmVnYXJkaW5nIGhvdyB0byBkZWFsIHdp
+dGggbG9hZCBmYWlsdXJlIHRob3VnaCwgSSdtIG5vdCBzdXJlIHRoaXMKd291bGQgbWVhbiB3ZSBj
+YW4gcmVzb3J0IGJhY2sgdG8gY2FjaGluZyBqdXN0IGEgc2luZ2xlIGJsb2IuCgpKYW4KCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
