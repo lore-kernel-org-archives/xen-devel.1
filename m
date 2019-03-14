@@ -1,22 +1,19 @@
-From: Oleksandr Andrushchenko <andr2000@gmail.com>
-Subject: Re: [PATCH] xen/netfront: Remove unneeded .resume
- callback
-Date: Thu, 14 Mar 2019 15:50:10 +0200
-Message-ID: <5c8dd6fa-7173-6618-ef4e-018c0be20028__19091.8004069076$1552571471$gmane$org@gmail.com>
-References: <20190314131749.25706-1-andr2000@gmail.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v13] tolerate jitter in cpu_khz calculation
+ to avoid TSC emulation
+Date: Thu, 14 Mar 2019 14:50:03 +0100
+Message-ID: <20190314145003.36695ef4.olaf@aepfle.de>
+References: <20190313082855.14106-1-olaf@aepfle.de>
+ <5C88CAEF020000780021DFA6@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4435298458646806054=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=pql4=RR=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
- id 1h4QkR-0007X5-W7
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 13:50:16 +0000
-Received: by mail-lj1-x244.google.com with SMTP id x9so866772ljc.7
- for <xen-devel@lists.xenproject.org>; Thu, 14 Mar 2019 06:50:14 -0700 (PDT)
-In-Reply-To: <20190314131749.25706-1-andr2000@gmail.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=6KDy=RR=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h4QkQ-0007X0-8f
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 13:50:14 +0000
+In-Reply-To: <5C88CAEF020000780021DFA6@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,55 +22,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: netdev@vger.kernel.org, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org, jgross@suse.com, boris.ostrovsky@oracle.com, sstabellini@kernel.org, davem@davemloft.net
-Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SSBhbSBzdGlsbCBjb25mdXNlZCBhYm91dCBzdXNwZW5kL3Jlc3VtZSBmb3IgdGhlIGZyb250IGRy
-aXZlcnMsCmZvciBpbnN0YW5jZSwgYmxvY2sgZnJvbnQgWzFdIGRvZXMgaW1wbGVtZW50IGZ1bGwv
-cHJvcGVyIHJlY29ubmVjdApvbiAucmVzdW1lLCBidXQgbmV0IGZyb250IG9ubHkgZG9lcyB0aGlz
-IHBhcnRpYWxseS4KCkNvdWxkIGFueW9uZSBwbGVhc2Ugc2hlZCBzb21lIGxpZ2h0IG9uIHN1c3Bl
-bmQvcmVzdW1lIGRlc2lnbj8KClRoYW5rIHlvdSwKT2xla3NhbmRyCgpPbiAzLzE0LzE5IDM6MTcg
-UE0sIE9sZWtzYW5kciBBbmRydXNoY2hlbmtvIHdyb3RlOgo+IEZyb206IE9sZWtzYW5kciBBbmRy
-dXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPgo+IEN1cnJlbnRs
-eSBvbiBkcml2ZXIgcmVzdW1lIHdlIHJlbW92ZSBhbGwgdGhlIG5ldHdvcmsgcXVldWVzIGFuZAo+
-IGRlc3Ryb3kgc2hhcmVkIFR4L1J4IHJpbmdzIGxlYXZpbmcgdGhlIGRyaXZlciBpbiBpdHMgY3Vy
-cmVudCBzdGF0ZQo+IGFuZCBuZXZlciBzaWduYWxpbmcgdGhlIGJhY2tlbmQgb2YgdGhpcyBmcm9u
-dGVuZCdzIHN0YXRlIGNoYW5nZS4KPiBUaGlzIGxlYWRzIHRvIHRoZSBudW1iZXIgb2YgY29uc2Vx
-dWVuY2VzOgo+IC0gd2hlbiBmcm9udGVuZCB3aXRoZHJhd3MgZ3JhbnRlZCByZWZlcmVuY2VzIHRv
-IHRoZSByaW5ncyBldGMuIGl0IGNhbm5vdAo+ICAgIGJlIGNsZWFubHkgZG9uZSBhcyB0aGUgYmFj
-a2VuZCBzdGlsbCBob2xkcyB0aG9zZSAoaXQgd2FzIG5vdCB0b2xkIHRvCj4gICAgZnJlZSB0aGUg
-cmVzb3VyY2VzKQo+IC0gaXQgaXMgbm90IHBvc3NpYmxlIHRvIHJlc3VtZSBkcml2ZXIgb3BlcmF0
-aW9uIGFzIGFsbCB0aGUgY29tbXVuaWNhdGlvbgo+ICAgIG1lYW5zIHdpdGggdGhlIGJhY2tuZWQg
-d2VyZSBkZXN0cm95ZWQgYnkgdGhlIGZyb250ZW5kLCB0aHVzCj4gICAgbWFraW5nIHRoZSBmcm9u
-dGVuZCBhcHBlYXIgdG8gdGhlIGd1ZXN0IE9TIGFzIGZ1bmN0aW9uYWwsIGJ1dAo+ICAgIG5vdCBy
-ZWFsbHkuCj4KPiBGaXggdGhpcyBieSBub3QgZGVzdHJveWluZyBjb21tdW5pY2F0aW9uIGNoYW5u
-ZWxzL3JpbmdzIG9uIGRyaXZlcgo+IHJlc3VtZS4KPgo+IFNpZ25lZC1vZmYtYnk6IE9sZWtzYW5k
-ciBBbmRydXNoY2hlbmtvIDxvbGVrc2FuZHJfYW5kcnVzaGNoZW5rb0BlcGFtLmNvbT4KPiAtLS0K
-PiAgIGRyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jIHwgMTcgLS0tLS0tLS0tLS0tLS0tLS0KPiAg
-IDEgZmlsZSBjaGFuZ2VkLCAxNyBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2ZXJz
-L25ldC94ZW4tbmV0ZnJvbnQuYyBiL2RyaXZlcnMvbmV0L3hlbi1uZXRmcm9udC5jCj4gaW5kZXgg
-YzkxNGMyNGY4ODBiLi4yY2ExNjIwNDhkYTQgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9uZXQveGVu
-LW5ldGZyb250LmMKPiArKysgYi9kcml2ZXJzL25ldC94ZW4tbmV0ZnJvbnQuYwo+IEBAIC0xNDIy
-LDIyICsxNDIyLDYgQEAgc3RhdGljIHZvaWQgeGVubmV0X2Rpc2Nvbm5lY3RfYmFja2VuZChzdHJ1
-Y3QgbmV0ZnJvbnRfaW5mbyAqaW5mbykKPiAgIAl9Cj4gICB9Cj4gICAKPiAtLyoqCj4gLSAqIFdl
-IGFyZSByZWNvbm5lY3RpbmcgdG8gdGhlIGJhY2tlbmQsIGR1ZSB0byBhIHN1c3BlbmQvcmVzdW1l
-LCBvciBhIGJhY2tlbmQKPiAtICogZHJpdmVyIHJlc3RhcnQuICBXZSB0ZWFyIGRvd24gb3VyIG5l
-dGlmIHN0cnVjdHVyZSBhbmQgcmVjcmVhdGUgaXQsIGJ1dAo+IC0gKiBsZWF2ZSB0aGUgZGV2aWNl
-LWxheWVyIHN0cnVjdHVyZXMgaW50YWN0IHNvIHRoYXQgdGhpcyBpcyB0cmFuc3BhcmVudCB0byB0
-aGUKPiAtICogcmVzdCBvZiB0aGUga2VybmVsLgo+IC0gKi8KPiAtc3RhdGljIGludCBuZXRmcm9u
-dF9yZXN1bWUoc3RydWN0IHhlbmJ1c19kZXZpY2UgKmRldikKPiAtewo+IC0Jc3RydWN0IG5ldGZy
-b250X2luZm8gKmluZm8gPSBkZXZfZ2V0X2RydmRhdGEoJmRldi0+ZGV2KTsKPiAtCj4gLQlkZXZf
-ZGJnKCZkZXYtPmRldiwgIiVzXG4iLCBkZXYtPm5vZGVuYW1lKTsKPiAtCj4gLQl4ZW5uZXRfZGlz
-Y29ubmVjdF9iYWNrZW5kKGluZm8pOwo+IC0JcmV0dXJuIDA7Cj4gLX0KPiAtCj4gICBzdGF0aWMg
-aW50IHhlbl9uZXRfcmVhZF9tYWMoc3RydWN0IHhlbmJ1c19kZXZpY2UgKmRldiwgdTggbWFjW10p
-Cj4gICB7Cj4gICAJY2hhciAqcywgKmUsICptYWNzdHI7Cj4gQEAgLTIxODUsNyArMjE2OSw2IEBA
-IHN0YXRpYyBzdHJ1Y3QgeGVuYnVzX2RyaXZlciBuZXRmcm9udF9kcml2ZXIgPSB7Cj4gICAJLmlk
-cyA9IG5ldGZyb250X2lkcywKPiAgIAkucHJvYmUgPSBuZXRmcm9udF9wcm9iZSwKPiAgIAkucmVt
-b3ZlID0geGVubmV0X3JlbW92ZSwKPiAtCS5yZXN1bWUgPSBuZXRmcm9udF9yZXN1bWUsCj4gICAJ
-Lm90aGVyZW5kX2NoYW5nZWQgPSBuZXRiYWNrX2NoYW5nZWQsCj4gICB9Owo+ICAgCgpbMV0gCmh0
-dHBzOi8vZWxpeGlyLmJvb3RsaW4uY29tL2xpbnV4L3Y1LjAuMi9zb3VyY2UvZHJpdmVycy9ibG9j
-ay94ZW4tYmxrZnJvbnQuYyNMMjA3MgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+--===============4435298458646806054==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/rLi/uW=00/4f6cxh2NjjuBS"; protocol="application/pgp-signature"
+
+--Sig_/rLi/uW=00/4f6cxh2NjjuBS
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 13 Mar 2019 03:18:39 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> I'm sorry, but I continue to object to this adjustment getting done
+> both by default _and_ not in a per-guest manner. As said before,
+> you can't demand guests to run NTP, and hence you can't expect
+> them to get along with a few hundred kHz jump in observed TSC
+> frequency. Whether the performance drop due to vTSC use is
+> better or worse is a policy decision, which we should leave to the
+> admin. Hence the feature needs to be off by default, and there
+> needs to be at least a host-wide control to enable it; a per-guest
+> control would be better. IOW I explicitly do not agree with the
+> last sentence of the commit message.
+
+So this seems the be the essential part that prevents moving forward.
+
+Your claim is basically that "we do not know how the workload reacts
+to frequency change".
+My claim is basically "there is enough evidence that syncing with
+external clock is required if the frequency remotely matters".
+
+I think that conflict can not be easily solved.
+
+One way to solve it would be a knob that injects a value into the
+proposed "vtsc_tolerance_khz" variable, leave the calculation to
+the host admin, and leave code in tsc_set_info basically as is.
+
+Maybe "xl set-params" can be the way to change the value, that way
+it can be changed globally at runtime if needed.
+
+In staging the change would affect HVM and PVH. I never ran PVH,
+I have to assume it behaves like HVM in this regard.
+
+
+Olaf
+
+--Sig_/rLi/uW=00/4f6cxh2NjjuBS
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIpcCwAKCRBdQqD6ppg2
+fimdAJ42OPeusFZi2kKW3KrsygQS0gqTvQCdH0bd3NzJjHYtB7BYn1kV88iJ9b8=
+=mqBW
+-----END PGP SIGNATURE-----
+
+--Sig_/rLi/uW=00/4f6cxh2NjjuBS--
+
+
+--===============4435298458646806054==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4435298458646806054==--
