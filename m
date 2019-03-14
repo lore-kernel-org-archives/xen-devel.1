@@ -1,25 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: [PATCH v13] tolerate jitter in cpu_khz calculation
  to avoid TSC emulation
-Date: Thu, 14 Mar 2019 15:24:59 +0100
-Message-ID: <38e61ca1-7390-a942-8b41-eacca522bcb1@suse.com>
+Date: Thu, 14 Mar 2019 15:27:05 +0100
+Message-ID: <20190314152705.074d9cb0.olaf@aepfle.de>
 References: <20190313082855.14106-1-olaf@aepfle.de>
  <5C88CAEF020000780021DFA6@prv1-mh.provo.novell.com>
  <20190314145003.36695ef4.olaf@aepfle.de>
- <cfd355b6-da0b-7e02-a484-cc8476a36198@suse.com>
- <20190314151416.625d8cfa.olaf@aepfle.de>
+ <5C8A632F020000780021EB58@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7005445918298324762=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=X/If=RR=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1h4RI7-0003Vm-Mg
- for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 14:25:03 +0000
-In-Reply-To: <20190314151416.625d8cfa.olaf@aepfle.de>
-Content-Language: de-DE
+ (envelope-from <SRS0=6KDy=RR=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1h4RK9-0003hg-VU
+ for xen-devel@lists.xenproject.org; Thu, 14 Mar 2019 14:27:10 +0000
+In-Reply-To: <5C8A632F020000780021EB58@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,26 +24,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMDMvMjAxOSAxNToxNCwgT2xhZiBIZXJpbmcgd3JvdGU6Cj4gQW0gVGh1LCAxNCBNYXIg
-MjAxOSAxNToxMDoxNiArMDEwMAo+IHNjaHJpZWIgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2Uu
-Y29tPjoKPiAKPj4gVGhpcyB3b3VsZCBiZSB0aGUgbGVhc3QgaW50cnVzaXZlIGNoYW5nZSBhbGxv
-d2luZyBtYXhpbXVtIGZsZXhpYmlsaXR5Cj4+IElNTy4KPiAKPiBJIHRoaW5rIGVhcmxpZXIgYXR0
-ZW1wdHMgZGlkIGFsdGVyIHRoZSB0b29saW5nLgo+IEJ1dCB0aGF0IHdvdWxkIG5vdCBoZWxwIHdp
-dGggZXhpc3RpbmcgZG9tVXMgc3RhcnRlZCBvbiBob3N0cyB0aGF0IGRvIG5vdCBoYXZlIHRoYXQg
-cHJvcGVydHkuCgpZZXMuIFRoaXMgaGFwcGVucyB3aGVuIGludHJvZHVjaW5nIG5ldyBmZWF0dXJl
-cy4KCj4gQSBnbG9iYWwga25vYiB3b3VsZCBoZWxwIHdpdGggdGhhdC4KCkkgYmVsaWV2ZSBhIHBl
-ci1kb21haW4gY29udHJvbGxhYmxlIHZhbHVlIGlzIHRvIGJlIHByZWZlcnJlZC4gRGlmZmVyZW50
-Cmd1ZXN0cyBtaWdodCBoYXZlIGRpZmZlcmVudCBqaXR0ZXIgdG9sZXJhbmNlLgoKQW5kIGV2ZW4g
-dGhlIHRvb2xzIHNpZGUgdmFyaWFudCB3b3VsZCAoaW4gdGhlb3J5KSBhbGxvdyBmb3IgaW5qZWN0
-aW9uCm9mIGEgcGVyLWhvc3QgdmFsdWUgb24gdGhlIHJlY2VpdmluZyBzaWRlLiBOb3Qgc3VyZSB3
-aGV0aGVyIHRoaXMgaXMgYQpnb29kIGlkZWEsIHRob3VnaC4KCkFuZCBrbm93aW5nIHlvdSBhcmUg
-dGFyZ2V0aW5nIGEgc3BlY2lhbCBjdXN0b21lciB5b3UgY291bGQgc3RpbGwgcmVwbGFjZQp0aGUg
-bWlncmF0aW9uIHN0cmVhbSBzZW5kaW5nIHByb2dyYW0gdG8gaW5zZXJ0IHRoZSBqaXR0ZXIgdmFs
-dWUuCgoKSnVlcmdlbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+--===============7005445918298324762==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/O=AcZoYx2lKnH16M5QMWyDX"; protocol="application/pgp-signature"
+
+--Sig_/O=AcZoYx2lKnH16M5QMWyDX
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 14 Mar 2019 08:20:31 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> And again you makie it look as if PV wasn't also going through that
+> same path. Yet all that's there at the top of the function is
+
+I missed the '&&', read it as '||'.
+
+
+Olaf
+
+--Sig_/O=AcZoYx2lKnH16M5QMWyDX
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXIpkuQAKCRBdQqD6ppg2
+fnMLAJsFg1xv4EiPlwX2lafvSX5+Ou+SlwCeLKO+OVrigIUF0K/5Wz7NxCjzcGY=
+=gyax
+-----END PGP SIGNATURE-----
+
+--Sig_/O=AcZoYx2lKnH16M5QMWyDX--
+
+
+--===============7005445918298324762==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7005445918298324762==--
