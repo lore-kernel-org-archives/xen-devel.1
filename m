@@ -1,19 +1,15 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/2] x86/mtrr: fix build with gcc9
-Date: Fri, 15 Mar 2019 16:21:38 +0000
-Message-ID: <7520f3cc-1b62-4616-9f93-e061357efa78@citrix.com>
-References: <5C80F130020000780021C602@prv1-mh.provo.novell.com>
- <5C80F32C020000780021C626@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH] x86/svm: Improve code generation from
+ cpu_has_svm_feature()
+Date: Fri, 15 Mar 2019 16:22:59 +0000
+Message-ID: <229dcab0-f81c-beb0-f23e-e40f71bbc140@citrix.com>
+References: <1552663389-665-1-git-send-email-andrew.cooper3@citrix.com>
+ <835b8a7f-104d-2c9e-f0e5-719477dd04c6@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4272493776245233758=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OIle=RS=citrix.com=prvs=970d66146=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h4pt8-00013l-0X
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 16:40:54 +0000
-In-Reply-To: <5C80F32C020000780021C626@prv1-mh.provo.novell.com>
+In-Reply-To: <835b8a7f-104d-2c9e-f0e5-719477dd04c6@oracle.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,172 +19,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Charles Arnold <CARNOLD@suse.com>, Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Brian Woods <brian.woods@amd.com>, Wei Liu <wei.liu2@citrix.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============4272493776245233758==
-Content-Type: multipart/alternative;
-	boundary="------------C25D6C616C74E039AAFEC904"
-Content-Language: en-GB
-
---------------C25D6C616C74E039AAFEC904
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 07/03/2019 10:32, Jan Beulich wrote:
-> generic.c: In function ‘print_mtrr_state’:
-> generic.c:210:11: error: ‘%0*lx’ directive output between 1 and 1073741823 bytes may cause result to exceed
-> ‘INT_MAX’ [-Werror=format-overflow=]
->   210 |    printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
->       |           ^~~~~~~~~~~~~~~~~
-> generic.c:210:44: note: format string is defined here
->   210 |    printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
-> generic.c:210:11: note: directive argument in the range [0, 4503599627370495]
->   210 |    printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
->       |           ^~~~~~~~~~~~~~~~~
-> generic.c:210:11: note: assuming directive output of 1 byte
->
-> Restrict the width of the variable "width" controlling the number of
-> address digits output.
->
-> Reported-by: Charles Arnold <carnold@suse.com>
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
-This is because GCC doesn't know the value of paddr_bits, and has
-concluded that
-
-width = (paddr_bits - PAGE_SHIFT + 3) / 4;
-
-can result in some insane values, which is true.
-
-However, this logic to unnecessarily complicated for something which is
-only printed in a verbose or error case.
-
-I'd prefer this as an alternative:
-
-diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
-index 8f9cf1b..566396f 100644
---- a/xen/arch/x86/cpu/mtrr/generic.c
-+++ b/xen/arch/x86/cpu/mtrr/generic.c
-@@ -182,7 +182,6 @@ static void __init print_fixed(unsigned int base, unsigned int step,
- static void __init print_mtrr_state(const char *level)
- {
-        unsigned int i;
--       int width;
- 
-        printk("%sMTRR default type: %s\n", level,
-               mtrr_attrib_to_str(mtrr_state.def_type));
-@@ -203,14 +202,13 @@ static void __init print_mtrr_state(const char *level)
-        }
-        printk("%sMTRR variable ranges %sabled:\n", level,
-               mtrr_state.enabled ? "en" : "dis");
--       width = (paddr_bits - PAGE_SHIFT + 3) / 4;
- 
-        for (i = 0; i < num_var_ranges; ++i) {
-                if (mtrr_state.var_ranges[i].mask & MTRR_PHYSMASK_VALID)
--                       printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
-+                       printk("%s  %u base %013"PRIx64"000 mask %013"PRIx64"000 %s\n",
-                               level, i,
--                              width, mtrr_state.var_ranges[i].base >> 12,
--                              width, mtrr_state.var_ranges[i].mask >> 12,
-+                              mtrr_state.var_ranges[i].base >> 12,
-+                              mtrr_state.var_ranges[i].mask >> 12,
-                               mtrr_attrib_to_str(mtrr_state.var_ranges[i].base &
-                                                  MTRR_PHYSBASE_TYPE_MASK));
-                else
-
-
---------------C25D6C616C74E039AAFEC904
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 07/03/2019 10:32, Jan Beulich wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:5C80F32C020000780021C626@prv1-mh.provo.novell.com">
-      <pre class="moz-quote-pre" wrap="">generic.c: In function ‘print_mtrr_state’:
-generic.c:210:11: error: ‘%0*lx’ directive output between 1 and 1073741823 bytes may cause result to exceed
-‘INT_MAX’ [-Werror=format-overflow=]
-  210 |    printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
-      |           ^~~~~~~~~~~~~~~~~
-generic.c:210:44: note: format string is defined here
-  210 |    printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
-generic.c:210:11: note: directive argument in the range [0, 4503599627370495]
-  210 |    printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
-      |           ^~~~~~~~~~~~~~~~~
-generic.c:210:11: note: assuming directive output of 1 byte
-
-Restrict the width of the variable "width" controlling the number of
-address digits output.
-
-Reported-by: Charles Arnold <a class="moz-txt-link-rfc2396E" href="mailto:carnold@suse.com">&lt;carnold@suse.com&gt;</a>
-Signed-off-by: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com">&lt;jbeulich@suse.com&gt;</a></pre>
-    </blockquote>
-    <br>
-    This is because GCC doesn't know the value of paddr_bits, and has
-    concluded that<br>
-    <br>
-    width = (paddr_bits - PAGE_SHIFT + 3) / 4;<br>
-    <br>
-    can result in some insane values, which is true.<br>
-    <br>
-    However, this logic to unnecessarily complicated for something which
-    is only printed in a verbose or error case.<br>
-    <br>
-    I'd prefer this as an alternative:<br>
-    <br>
-    <pre>diff --git a/xen/arch/x86/cpu/mtrr/generic.c b/xen/arch/x86/cpu/mtrr/generic.c
-index 8f9cf1b..566396f 100644
---- a/xen/arch/x86/cpu/mtrr/generic.c
-+++ b/xen/arch/x86/cpu/mtrr/generic.c
-@@ -182,7 +182,6 @@ static void __init print_fixed(unsigned int base, unsigned int step,
- static void __init print_mtrr_state(const char *level)
- {
-        unsigned int i;
--       int width;
- 
-        printk("%sMTRR default type: %s\n", level,
-               mtrr_attrib_to_str(mtrr_state.def_type));
-@@ -203,14 +202,13 @@ static void __init print_mtrr_state(const char *level)
-        }
-        printk("%sMTRR variable ranges %sabled:\n", level,
-               mtrr_state.enabled ? "en" : "dis");
--       width = (paddr_bits - PAGE_SHIFT + 3) / 4;
- 
-        for (i = 0; i &lt; num_var_ranges; ++i) {
-                if (mtrr_state.var_ranges[i].mask &amp; MTRR_PHYSMASK_VALID)
--                       printk("%s  %u base %0*"PRIx64"000 mask %0*"PRIx64"000 %s\n",
-+                       printk("%s  %u base %013"PRIx64"000 mask %013"PRIx64"000 %s\n",
-                               level, i,
--                              width, mtrr_state.var_ranges[i].base &gt;&gt; 12,
--                              width, mtrr_state.var_ranges[i].mask &gt;&gt; 12,
-+                              mtrr_state.var_ranges[i].base &gt;&gt; 12,
-+                              mtrr_state.var_ranges[i].mask &gt;&gt; 12,
-                               mtrr_attrib_to_str(mtrr_state.var_ranges[i].base &amp;
-                                                  MTRR_PHYSBASE_TYPE_MASK));
-                else
-
-</pre>
-  </body>
-</html>
-
---------------C25D6C616C74E039AAFEC904--
-
-
---===============4272493776245233758==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4272493776245233758==--
+T24gMTUvMDMvMjAxOSAxNTo1OSwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDMvMTUvMTkg
+MTE6MjMgQU0sIEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+IFRha2luZyBzdm1fZmVhdHVyZV9mbGFn
+cyBieSBwb2ludGVyIGFuZCB1c2luZyB0ZXN0X2JpdCgpIHJlc3VsdHMgaW4gZ2VuZXJhdGVkCj4+
+IGNvZGUgd2hpY2ggbG9hZHMgc3ZtX2ZlYXR1cmVfZmxhZ3MgaW50byBhIDMyYml0IHJlZ2lzdGVy
+LCB0aGVuIGRvZXMgYSBiaXR3aXNlCj4+IG9wZXJhdGlvbi4KPj4KPj4gVGhlIGxvZ2ljIGNhbiBi
+ZSBleHByZXNzZWQgaW4gdGVybXMgb2YgYSBzdHJhaWdodCBiaXR3aXNlIG9wZXJhdGlvbiwgcmVz
+dWx0aW5nCj4+IGluIHRoZSBmb2xsb3dpbmcgbWlub3IgaW1wcm92ZW1lbnQuCj4+Cj4+ICAgYWRk
+L3JlbW92ZTogMC8wIGdyb3cvc2hyaW5rOiAwLzQgdXAvZG93bjogMC8tMTM2ICgtMTM2KQo+PiAg
+IEZ1bmN0aW9uICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9sZCAgICAgbmV3
+ICAgZGVsdGEKPj4gICBzdm1fbmVzdGVkX2ZlYXR1cmVzX29uX2VmZXJfdXBkYXRlICAgICAgICAg
+ICAyODEgICAgIDI3MyAgICAgIC04Cj4+ICAgc3ZtX2NyZWF0ZV92bWNiICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAxNDA0ICAgIDEzODggICAgIC0xNgo+PiAgIHN2bV92bWV4aXRfaGFuZGxl
+ciAgICAgICAgICAgICAgICAgICAgICAgICAgNjI3MSAgICA2MjM5ICAgICAtMzIKPj4gICBzdGFy
+dF9zdm0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA4MTggICAgIDczOCAgICAg
+LTgwCj4+ICAgVG90YWw6IEJlZm9yZT0zMzQ3NTY5LCBBZnRlcj0zMzQ3NDMzLCBjaGcgLTAuMDAl
+Cj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
+eC5jb20+Cj4gUmV2aWV3ZWQtYnk6IEJvcmlzIE9zdHJvdnNreSA8Ym9yaXMub3N0cm92c2t5QG9y
+YWNlbC5jb20+Cj4KCkkgc3VwcG9zZSB5b3UnZCBsaWtlIG1lIHRvIGZpeCB1cCBPcmFjbGUgb24g
+Y29tbWl0PyA7KQoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
