@@ -1,21 +1,20 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 04/14] x86/cpu/mce: Add Hygon Dhyana
- support to the MCA infrastructure
-Date: Fri, 15 Mar 2019 06:47:31 -0600
-Message-ID: <5C8B9EE3020000780021F43C@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH v2 05/14] x86/spec_ctrl: Add Hygon Dhyana to
+ the respective mitigation machinery
+Date: Fri, 15 Mar 2019 06:47:57 -0600
+Message-ID: <5C8B9EFD020000780021F44D@prv1-mh.provo.novell.com>
 References: <cover.1550647742.git.puwen@hygon.cn>
- <ae3100c6a0e10b34ea7fdd3e1d7a91f2ee20df5c.1550647742.git.puwen@hygon.cn>
+ <b2e0c2402d6170aff5064ef2f7c49c7732b0c3f9.1550647742.git.puwen@hygon.cn>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=64UD=RS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1h4mFO-0003CA-A6
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 12:47:38 +0000
-In-Reply-To: <ae3100c6a0e10b34ea7fdd3e1d7a91f2ee20df5c.1550647742.git.puwen@hygon.cn>
+ id 1h4mFh-0003Eh-P3
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 12:47:57 +0000
+In-Reply-To: <b2e0c2402d6170aff5064ef2f7c49c7732b0c3f9.1550647742.git.puwen@hygon.cn>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -29,12 +28,11 @@ To: Pu Wen <puwen@hygon.cn>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDIxLjAyLjE5IGF0IDEwOjUxLCA8cHV3ZW5AaHlnb24uY24+IHdyb3RlOgo+IFRoZSBt
-YWNoaW5lIGNoZWNrIGFyY2hpdGVjdHVyZSBmb3IgSHlnb24gRGh5YW5hIENQVSBpcyBzaW1pbGFy
-IHRvIHRoZQo+IEFNRCBmYW1pbHkgMTdoIG9uZS4gQWRkIHZlbmRvciBjaGVja2luZyBmb3IgSHln
-b24gRGh5YW5hIHRvIHNoYXJlIHRoZQo+IGNvZGUgcGF0aCBvZiBBTUQgZmFtaWx5IDE3aC4KPiAK
-PiBTaWduZWQtb2ZmLWJ5OiBQdSBXZW4gPHB1d2VuQGh5Z29uLmNuPgoKQWNrZWQtYnk6IEphbiBC
-ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDIxLjAyLjE5IGF0IDEwOjUxLCA8cHV3ZW5AaHlnb24uY24+IHdyb3RlOgo+IFRoZSBI
+eWdvbiBEaHlhbmEgQ1BVIGhhcyB0aGUgc2FtZSBzcGVjdWxhdGl2ZSBleGVjdXRpb24gYXMgQU1E
+IGZhbWlseQo+IDE3aCwgc28gc2hhcmUgQU1EIFJldHBvbGluZSBhbmQgUFRJIG1pdGlnYXRpb24g
+Y29kZSB3aXRoIEh5Z29uIERoeWFuYS4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQdSBXZW4gPHB1d2Vu
+QGh5Z29uLmNuPgoKQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
