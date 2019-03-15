@@ -1,16 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [qemu-mainline test] 133791: regressions - FAIL
-Date: Fri, 15 Mar 2019 21:47:00 +0000
-Message-ID: <osstest-133791-mainreport@xen.org>
+From: "John L. Poole" <jlpoole56@gmail.com>
+Subject: Re: [BUG] Sporadic boot of Xen Kernel 4.12.0,
+ hangs at random EXTInt
+Date: Fri, 15 Mar 2019 14:50:14 -0700
+Message-ID: <84ce2f6e-684b-898b-ea52-273de99b2484@gmail.com>
+References: <48347a1c-add2-2a2a-e8fa-77f26597a31e@gmail.com>
+ <b132cc90-3b02-d740-9389-5445418e35f6@citrix.com>
+ <e36ab4e1-a2b7-f957-34ee-2ee44ca9cb6b@citrix.com>
+Reply-To: jlpoole56@gmail.com
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6567885863671323416=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=0b45=RS=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1h4ufP-0001RM-Mz
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 21:47:03 +0000
+In-Reply-To: <e36ab4e1-a2b7-f957-34ee-2ee44ca9cb6b@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,223 +20,304 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
+Cc: xen@gentoo.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMzc5MSBxZW11LW1haW5saW5lIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3Qt
-bGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzM3OTEvCgpSZWdyZXNzaW9ucyA6LSgK
-ClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcg
-dGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAxNiBndWVzdC1sb2NhbG1pZ3JhdGUveDEwIGZhaWwgUkVHUi4g
-dnMuIDEzMzc1MAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9j
-a2luZzoKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9w
-ICAgICAgICAgICAgZmFpbCBsaWtlIDEzMzc1MAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAg
-ICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTMzNzUwCiB0ZXN0
-LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAg
-IGZhaWwgbGlrZSAxMzM3NTAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICBsaWtlIDEzMzc1MAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2Ug
-MTMzNzUwCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAg
-ICAgICAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAg
-ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJt
-NjQteGwtY3JlZGl0MSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQxICAxNCBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAg
-ICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxMyBtaWdy
-YXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFy
-bTY0LXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gMTMgbWlncmF0ZS1zdXBwb3J0
-LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0
-LXhzbSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2
-ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQt
-eHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-YW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVzdGVkLWFt
-ZCAxNyBkZWJpYW4taHZtLWluc3RhbGwvbDEvbDIgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1o
-Zi1hcm1oZi14bC1hcm5kYWxlICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDE0IHNhdmVyZXN0b3Jl
-LXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGli
-dmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
-cwogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sg
-ICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgIDE0
-IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJt
-aGYtYXJtaGYtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhs
-LW11bHRpdmNwdSAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAx
-NCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bWhmLWFybWhmLXhsLWNyZWRpdDEgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgMTQgc2F2ZXJlc3Rv
-cmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14
-bCAgICAgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcg
-MTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEzIHNhdmVyZXN0
-b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dS13czE2LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0
-YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1
-Y2sgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAg
-IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2IDEw
-IHdpbmRvd3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVk
-IGZvciB0ZXN0aW5nOgogcWVtdXUgICAgICAgICAgICAgICAgODVjZTg0NDg5YTc0ZDRjNjA0NjM0
-NWM3YmFhYzk0ZjBhM2ZmZDg4ZgpiYXNlbGluZSB2ZXJzaW9uOgogcWVtdXUgICAgICAgICAgICAg
-ICAgY2ZjM2ZlZjZiNGU0OTNiZjFhN2VlMTY3OTBhZDU4NGUyMGRmYmJkMQoKTGFzdCB0ZXN0IG9m
-IGJhc2lzICAgMTMzNzUwICAyMDE5LTAzLTEyIDE5OjAzOjE3IFogICAgMyBkYXlzClRlc3Rpbmcg
-c2FtZSBzaW5jZSAgIDEzMzc5MSAgMjAxOS0wMy0xNCAwMzo1MToxNCBaICAgIDEgZGF5cyAgICAx
-IGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0Ogog
-IEFsYmVydG8gR2FyY2lhIDxiZXJ0b0BpZ2FsaWEuY29tPgogIEFsZXggQmVubsOpZSA8YWxleC5i
-ZW5uZWVAbGluYXJvLm9yZz4KICBCYXN0aWFuIEtvcHBlbG1hbm4gPGtiYXN0aWFuQG1haWwudW5p
-LXBhZGVyYm9ybi5kZT4KICBDaGFpIFdlbiA8Y2hhaXdlbkBiYWlkdS5jb20+CiAgRGF2aWQgR2li
-c29uIDxkYXZpZEBnaWJzb24uZHJvcGJlYXIuaWQuYXU+CiAgRGF2aWQgSGlsZGVuYnJhbmQgPGRh
-dmlkQHJlZGhhdC5jb20+CiAgRWR1YXJkbyBIYWJrb3N0IDxlaGFia29zdEByZWRoYXQuY29tPgog
-IEVyaWMgQmxha2UgPGVibGFrZUByZWRoYXQuY29tPgogIEdlcmQgSG9mZm1hbm4gPGtyYXhlbEBy
-ZWRoYXQuY29tPgogIEpvaG4gU25vdyA8anNub3dAcmVkaGF0LmNvbT4KICBLYXNoeWFwIENoYW1h
-cnRoeSA8a2NoYW1hcnRAcmVkaGF0LmNvbT4KICBLZWl0aCBCdXNjaCA8a2VpdGguYnVzY2hAaW50
-ZWwuY29tPgogIEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5jb20+CiAgS251dCBPbWFuZyA8a251
-dC5vbWFuZ0BvcmFjbGUuY29tPgogIExpIFFpYW5nIDxsaXEzZWFAMTYzLmNvbT4KICBMaXUsIFlp
-IEwgPHlpLmwubGl1QGludGVsLmNvbT4KICBNYXJjLUFuZHLDqSBMdXJlYXUgPG1hcmNhbmRyZS5s
-dXJlYXVAcmVkaGF0LmNvbT4KICBNYXJrdXMgQXJtYnJ1c3RlciA8YXJtYnJ1QHJlZGhhdC5jb20+
-CiAgTWljaGFlbCBTLiBUc2lya2luIDxtc3RAcmVkaGF0LmNvbT4KICBOaWVscyBkZSBWb3MgPG5k
-ZXZvc0ByZWRoYXQuY29tPgogIFBldGVyIE1heWRlbGwgPHBldGVyLm1heWRlbGxAbGluYXJvLm9y
-Zz4KICBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8ZjRidWdAYW1zYXQub3JnPgogIFByYXNhbm5h
-IEt1bWFyIEthbGV2ZXIgPHByYXNhbm5hLmthbGV2ZXJAcmVkaGF0LmNvbT4KICBSaWNoYXJkIEhl
-bmRlcnNvbiA8cmljaGFyZC5oZW5kZXJzb25AbGluYXJvLm9yZz4KICBTYW11ZWwgVGhpYmF1bHQg
-PHNhbXVlbC50aGliYXVsdEBlbnMtbHlvbi5vcmc+CiAgU3ZlbiBTY2huZWxsZSA8c3ZlbnNAc3Rh
-Y2tmcmFtZS5vcmc+CiAgVGhvbWFzIEh1dGggPHRodXRoQHJlZGhhdC5jb20+CiAgVmxhZGltaXIg
-U2VtZW50c292LU9naWV2c2tpeSA8dnNlbWVudHNvdkB2aXJ0dW96em8uY29tPgogIFdlaSBXYW5n
-IDx3ZWkudy53YW5nQGludGVsLmNvbT4KICBXZWkgWWFuZyA8cmljaGFyZHcueWFuZ0BsaW51eC5p
-bnRlbC5jb20+CiAgWGllIFlvbmdqaSA8eGlleW9uZ2ppQGJhaWR1LmNvbT4KICBZaSBTdW4gPHlp
-Lnkuc3VuQGxpbnV4LmludGVsLmNvbT4KICBaaGFuZyBZdSA8emhhbmd5dTMxQGJhaWR1LmNvbT4K
-CmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1h
-bWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFt
-ZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1k
-NjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2
-NC14c20gICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1k
-ZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFy
-bTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFt
-ZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni1xZW11dS1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjct
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDEgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQt
-eGwtY3JlZGl0MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hcm1oZi1hcm1oZi14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14
-bC1jcmVkaXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLWN1YmlldHJ1Y2sgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2NC1kbXJl
-c3RyaWN0ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRtcmVzdHJp
-Y3QtYW1kNjQtZG1yZXN0cmljdCAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJl
-ZWJzZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRl
-bCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1wYWlyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcGFpciAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQtbGlidmlydC1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXB2Z3J1YiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1w
-dmdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcHlncnViICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xY293
-MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhm
-LWFybWhmLWxpYnZpcnQtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1ydGRzICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXNoYWRvdyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1zaGFkb3cg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0LXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFi
-LnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3Mv
-aW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0
-cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlv
-biBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAg
-aHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVB
-RE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9
-b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUg
-Y2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rl
-c3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlzaW9uIGxvZzsgaXQgd291
-bGQgYmUgMjE3OSBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+This is a multi-part message in MIME format.
+--===============6567885863671323416==
+Content-Type: multipart/alternative;
+ boundary="------------A7DF9AC5A294EA8913B591B7"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------A7DF9AC5A294EA8913B591B7
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+
+On 3/15/2019 2:30 PM, Andrew Cooper wrote:
+> On 15/03/2019 20:49, Andrew Cooper wrote:
+>> On 15/03/2019 18:35, John L. Poole wrote:
+>>> I have a Supermicro Intel Atom based server with UEFI.  I purchased the
+>>> server in November 2016 intending to run Xen server.  I was able
+>>> to overcome some problem in 2016 with help from the Xen Project and
+>>> I was able to load a xen kernel built in Gentoo for Gentoo VMs manually
+>>> using the EFI command.  At that time, I was told grub2 was not UEFI
+>>> ready.
+>>>
+>>> Now I have been trying to integrate grub2 with Xen using kernel version
+>>> 4.19.23-gentoo.  I am witnessing boot attempts that fail at different
+>>> points just after calls to setup_local_APIC in apic.c. Sometimes I am
+>>> successful in loading the Xen Kernel and then everything goes smoothly
+>>> loading the DOM0 session.  I can then load the VMs and everything
+>>> seems okay.  But most of the time, the boot up hangs in
+>>> between calls to the function setup_local_APIC in apic.c.
+>>>
+>>> I had posted to the XEN Users list and had little, if any, response.
+>>> I have created two bugs within Gentoo's system, differentiated by
+>>> xen kernels:
+>>>
+>>> 4.11.1       athttps://bugs.gentoo.org/679826
+>>> 4.12.0_rc4   athttps://bugs.gentoo.org/680472
+>>>
+>>> What is really vexing is the randomness of results.  For instance, here
+>>> a log from this morning of success vs. failures:
+>>>
+>>> 9:17 AM 3/15/2019   2   (XEN) [2019-03-15 16:17:33] Adding cpu 2 to
+>>> runqueue 0
+>>> 9:18 AM 3/15/2019   5   (XEN) [2019-03-15 16:18:53] Adding cpu 5 to
+>>> runqueue 0
+>>> 9:19 AM 3/15/2019   SUCCESS!!
+>>> after * key in serial port for "diagnostics all", shutdown by watchdog.
+>>> 9:30 AM 3/15/2019   SUCCESS!!
+>>> (XEN) [2019-03-15 16:32:54] Hardware Dom0 shutdown: watchdog rebooting
+>>> machine
+>>> 9:34 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:34:14] HVM: HAP
+>>> page sizes: 4kB, 2MB
+>>> 9:35 AM 3/15/2019   3
+>>> 9:36 AM 3/15/2019   4   (XEN) [2019-03-15 16:37:21] Adding cpu 4 to
+>>> runqueue 0
+>>> 9:37 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:38:33] HVM: HAP
+>>> page sizes: 4kB, 2MB
+>>> 9:39 AM 3/15/2019   SUCCESS!!
+>>>
+>>> My attempt to isolate the failure point has been unsuccessful. I'm
+>>> prepared
+>>> to patch 4.12.0_rc4 if that will help, my previous attempt in 4.11.1 only
+>>> allowed me to conclude that the problem is not within apic.c.
+>> You have a floating serial line, which is simulating you typing characters.
+>>
+>> The '*' key is "run all diagnostic keyhandlers", and later it passes an
+>> 'R' which instructs Xen to reboot.
+>>
+>> The keyhandlers start functioning as soon as we can possibly make them
+>> after enabling interrupts, which is why you see it shortly after
+>> setup_local_APIC()
+>
+> Right - I've done some trawling through your bug tickets.
+>
+> Please please please always start with a full and complete serial log 
+> showing all of Xen's boot up until the point things go wrong.
+>
+> Using the log from https://bugs.gentoo.org/679826#c6 , we get the 
+> following things:
+>
+> (XEN) Xen version 4.11.1 (@[unknown]) (x86_64-pc-linux-gnu-gcc (Gentoo 7.3.0-r3 p1.4) 7.3.0) debug=n  Wed Mar  6 19:34:00 PST 2019
+> (XEN) Latest ChangeSet:
+>
+> Not directly related to your issue, but something is missing the 
+> changeset information in your build, and you typically want to be 
+> using a debug build of Xen for investigations like this.
+>
+> (XEN) Bootloader: GRUB 2.02
+>
+> but
+>
+> (XEN) ACPI Error (tbxfroot-0217): A valid RSDP was not found [20070126]
+>
+> So the first problem is that there aren't any APCI tables to be 
+> found.  You're presumably booting in EFI mode, but either Grub hasn't 
+> handed the SystemTable/etc to Xen, or Xen wasn't built with an 
+> EFI-capable toolchain and isn't capable of receiving them via the 
+> extended multiboot2 protocol.  One way or another, this is the root of 
+> the problem.
+>
+> Xen did however find:
+>
+> (XEN) Intel MultiProcessor Specification v1.4
+> (XEN)     Virtual Wire compatibility mode.
+>
+> Which is the pre-APCI standard for multi-processor systems.  This is 
+> also why we start masking ExtINT, because that is how such systems 
+> were supposed to be set up.  However, it is almost certainly 
+> interfering with some kind of BMC activity, probably an SMI.  I don't 
+> think it is worth investigating, because it is an obsolete mode these 
+> days which the system firmware won't be designed to cope with.
+>
+>
+> For other areas of interest, I see:
+>
+> (XEN) Unrecognised CPU model 0x4d - assuming not reptpoline safe
+>
+> This particular server is Avaton/Rangely which is an Atom based 
+> microserver.  It is almost certainly retpoline-safe, because it was 
+> only Skylake generation systems which weren't, but I'll try and follow 
+> up on this.
+>
+> Anyway - the root of your problem is that Xen can't find the ACPI 
+> tables, which is either going to be a grub or a Xen build 
+> misconfiguration.
+>
+> ~Andrew
+
+Thank you, thank you Andrew.  Your analysis is great news.  I'll work 
+with the Xen Team at Gentoo and see what can be determined about the 
+APCI tables.
+
+-John
+
+--------------A7DF9AC5A294EA8913B591B7
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 3/15/2019 2:30 PM, Andrew Cooper
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:e36ab4e1-a2b7-f957-34ee-2ee44ca9cb6b@citrix.com">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <div class="moz-cite-prefix">On 15/03/2019 20:49, Andrew Cooper
+        wrote:<br>
+      </div>
+      <blockquote type="cite"
+        cite="mid:b132cc90-3b02-d740-9389-5445418e35f6@citrix.com">
+        <pre class="moz-quote-pre" wrap="">On 15/03/2019 18:35, John L. Poole wrote:
+</pre>
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">I have a Supermicro Intel Atom based server with UEFI.  I purchased the
+server in November 2016 intending to run Xen server.  I was able
+to overcome some problem in 2016 with help from the Xen Project and
+I was able to load a xen kernel built in Gentoo for Gentoo VMs manually
+using the EFI command.  At that time, I was told grub2 was not UEFI
+ready.
+
+Now I have been trying to integrate grub2 with Xen using kernel version
+4.19.23-gentoo.  I am witnessing boot attempts that fail at different
+points just after calls to setup_local_APIC in apic.c. Sometimes I am
+successful in loading the Xen Kernel and then everything goes smoothly
+loading the DOM0 session.  I can then load the VMs and everything
+seems okay.  But most of the time, the boot up hangs in
+between calls to the function setup_local_APIC in apic.c.
+
+I had posted to the XEN Users list and had little, if any, response.
+I have created two bugs within Gentoo's system, differentiated by
+xen kernels:
+
+4.11.1       at  <a class="moz-txt-link-freetext" href="https://bugs.gentoo.org/679826" moz-do-not-send="true">https://bugs.gentoo.org/679826</a>
+4.12.0_rc4   at  <a class="moz-txt-link-freetext" href="https://bugs.gentoo.org/680472" moz-do-not-send="true">https://bugs.gentoo.org/680472</a>
+
+What is really vexing is the randomness of results.  For instance, here
+a log from this morning of success vs. failures:
+
+9:17 AM 3/15/2019   2   (XEN) [2019-03-15 16:17:33] Adding cpu 2 to
+runqueue 0
+9:18 AM 3/15/2019   5   (XEN) [2019-03-15 16:18:53] Adding cpu 5 to
+runqueue 0
+9:19 AM 3/15/2019   SUCCESS!!
+after * key in serial port for "diagnostics all", shutdown by watchdog.
+9:30 AM 3/15/2019   SUCCESS!!
+(XEN) [2019-03-15 16:32:54] Hardware Dom0 shutdown: watchdog rebooting
+machine
+9:34 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:34:14] HVM: HAP
+page sizes: 4kB, 2MB
+9:35 AM 3/15/2019   3
+9:36 AM 3/15/2019   4   (XEN) [2019-03-15 16:37:21] Adding cpu 4 to
+runqueue 0
+9:37 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:38:33] HVM: HAP
+page sizes: 4kB, 2MB
+9:39 AM 3/15/2019   SUCCESS!!
+
+My attempt to isolate the failure point has been unsuccessful. I'm
+prepared
+to patch 4.12.0_rc4 if that will help, my previous attempt in 4.11.1 only
+allowed me to conclude that the problem is not within apic.c.
+</pre>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">You have a floating serial line, which is simulating you typing characters.
+
+The '*' key is "run all diagnostic keyhandlers", and later it passes an
+'R' which instructs Xen to reboot.
+
+The keyhandlers start functioning as soon as we can possibly make them
+after enabling interrupts, which is why you see it shortly after
+setup_local_APIC()</pre>
+      </blockquote>
+      <br>
+      Right - I've done some trawling through your bug tickets.<br>
+      <br>
+      Please please please always start with a full and complete serial
+      log showing all of Xen's boot up until the point things go wrong.<br>
+      <br>
+      Using the log from <a class="moz-txt-link-freetext"
+        href="https://bugs.gentoo.org/679826#c6" moz-do-not-send="true">https://bugs.gentoo.org/679826#c6</a>
+      , we get the following things:<br>
+      <br>
+      <pre>(XEN) Xen version 4.11.1 (@[unknown]) (x86_64-pc-linux-gnu-gcc (Gentoo 7.3.0-r3 p1.4) 7.3.0) debug=n  Wed Mar  6 19:34:00 PST 2019
+(XEN) Latest ChangeSet:</pre>
+      <br>
+      Not directly related to your issue, but something is missing the
+      changeset information in your build, and you typically want to be
+      using a debug build of Xen for investigations like this.<br>
+      <br>
+      <pre>(XEN) Bootloader: GRUB 2.02
+
+but
+
+(XEN) ACPI Error (tbxfroot-0217): A valid RSDP was not found [20070126]</pre>
+      <br>
+      So the first problem is that there aren't any APCI tables to be
+      found.  You're presumably booting in EFI mode, but either Grub
+      hasn't handed the SystemTable/etc to Xen, or Xen wasn't built with
+      an EFI-capable toolchain and isn't capable of receiving them via
+      the extended multiboot2 protocol.  One way or another, this is the
+      root of the problem.<br>
+      <br>
+      Xen did however find:<br>
+      <br>
+      <pre>(XEN) Intel MultiProcessor Specification v1.4
+(XEN)     Virtual Wire compatibility mode.</pre>
+      <br>
+      Which is the pre-APCI standard for multi-processor systems.  This
+      is also why we start masking ExtINT, because that is how such
+      systems were supposed to be set up.  However, it is almost
+      certainly interfering with some kind of BMC activity, probably an
+      SMI.  I don't think it is worth investigating, because it is an
+      obsolete mode these days which the system firmware won't be
+      designed to cope with.<br>
+      <br>
+      <br>
+      For other areas of interest, I see:<br>
+      <br>
+      <pre>(XEN) Unrecognised CPU model 0x4d - assuming not reptpoline safe</pre>
+      <br>
+      This particular server is Avaton/Rangely which is an Atom based
+      microserver.  It is almost certainly retpoline-safe, because it
+      was only Skylake generation systems which weren't, but I'll try
+      and follow up on this.<br>
+      <br>
+      Anyway - the root of your problem is that Xen can't find the ACPI
+      tables, which is either going to be a grub or a Xen build
+      misconfiguration.<br>
+      <br>
+      ~Andrew<br>
+    </blockquote>
+    <p>Thank you, thank you Andrew.  Your analysis is great news.  I'll
+      work with the Xen Team at Gentoo and see what can be determined
+      about the APCI tables.<br>
+    </p>
+    <div class="moz-signature"><font size="2"><font face="Verdana">-John</font></font></div>
+  </body>
+</html>
+
+--------------A7DF9AC5A294EA8913B591B7--
+
+
+--===============6567885863671323416==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6567885863671323416==--
