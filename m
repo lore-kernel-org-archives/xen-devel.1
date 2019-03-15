@@ -1,17 +1,23 @@
-From: Jason Long <hack3rcon@yahoo.com>
-Subject: Fundamental of Virtualization.
-Date: Fri, 15 Mar 2019 12:53:20 +0000 (UTC)
-Message-ID: <920579206.5438889.1552654400945@mail.yahoo.com>
-References: <920579206.5438889.1552654400945.ref@mail.yahoo.com>
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+Subject: Re: [PATCH v3 2/2] x86/hvm: finish IOREQs correctly on
+ completion path
+Date: Fri, 15 Mar 2019 13:05:16 +0000
+Message-ID: <83c6b935-6c56-e561-52f2-ecd64cb78679@citrix.com>
+References: <1552602649-14358-1-git-send-email-igor.druzhinin@citrix.com>
+ <1552602649-14358-2-git-send-email-igor.druzhinin@citrix.com>
+ <5C8B9A2E020000780021F3EE@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7048595844847598778=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ISzY=RS=yahoo.com=hack3rcon@srs-us1.protection.inumbo.net>)
- id 1h4mKy-0004Oy-IJ
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 12:53:24 +0000
+ <SRS0=Xy4w=RS=citrix.com=prvs=9700c6573=igor.druzhinin@srs-us1.protection.inumbo.net>)
+ id 1h4mWh-0005WO-2S
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 13:05:31 +0000
+In-Reply-To: <5C8B9A2E020000780021F3EE@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,36 +26,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Xen-users <xen-users@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul.durrant@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7048595844847598778==
-Content-Type: multipart/alternative;
-	boundary="----=_Part_5438888_791945275.1552654400944"
-Content-Length: 1039
-
-------=_Part_5438888_791945275.1552654400944
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-Hello,Excuse me, I know this mailing list is not a good place for this kind of questions but I asked here because most of developers here know Virtualization concept.I want to learn Virtualization from basic and learn its fundamental. Which book is good?
-Thank you.
-------=_Part_5438888_791945275.1552654400944
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<html><head></head><body><div>Hello,</div><div>Excuse me, I know this mailing list is not a good place for this kind of questions but I asked here because most of developers here know Virtualization concept.</div><div>I want to learn Virtualization from basic and learn its fundamental. Which book is good?</div><div><br></div><div>Thank you.</div><div class="ydp61182e32yahoo-style-wrap" style="font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-size:16px;"></div></body></html>
-------=_Part_5438888_791945275.1552654400944--
-
-
---===============7048595844847598778==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7048595844847598778==--
+T24gMTUvMDMvMjAxOSAxMjoyNywgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMTQuMDMuMTkg
+YXQgMjM6MzAsIDxpZ29yLmRydXpoaW5pbkBjaXRyaXguY29tPiB3cm90ZToKPj4gU2luY2UgdGhl
+IGludHJvZHVjdGlvbiBvZiBsaW5lYXJfe3JlYWQsd3JpdGV9KCkgaGVscGVycyBpbiAzYmRlYzUz
+MGE1Cj4+ICh4ODYvSFZNOiBzcGxpdCBwYWdlIHN0cmFkZGxpbmcgZW11bGF0ZWQgYWNjZXNzZXMg
+aW4gbW9yZSBjYXNlcykgdGhlCj4+IGNvbXBsZXRpb24gcGF0aCBmb3IgSU9SRVFzIGhhcyBiZWVu
+IGJyb2tlbjogaWYgdGhlcmUgaXMgYW4gSU9SRVEgaW4KPj4gcHJvZ3Jlc3MgYnV0IGh2bV9jb3B5
+X3t0byxmcm9tfV9ndWVzdF9saW5lYXIoKSByZXR1cm5zIEhWTVRSQU5TX29rYXkKPj4gKGUuZy4g
+d2hlbiBQMk0gdHlwZSBvZiBzb3VyY2UvZGVzdGluYXRpb24gaGFzIGJlZW4gY2hhbmdlZCBieSBJ
+T1JFUQo+PiBoYW5kbGVyKSB0aGUgZXhlY3V0aW9uIHdpbGwgbmV2ZXIgcmUtZW50ZXIgaHZtZW11
+bF9kb19pbygpIHdoZXJlCj4+IElPUkVRcyBhcmUgY29tcGxldGVkLiBUaGlzIHVzdWFsbHkgcmVz
+dWx0cyBpbiBhIGRvbWFpbiBjcmFzaCB1cG9uCj4+IHRoZSBleGVjdXRpb24gb2YgdGhlIG5leHQg
+SU9SRVEgZW50ZXJpbmcgaHZtZW11bF9kb19pbygpIGFuZCBmaW5kaW5nCj4+IHRoZSByZW1uYW50
+cyBvZiB0aGUgcHJldmlvdXMgSU9SRVEgaW4gdGhlIHN0YXRlIG1hY2hpbmUuCj4gCj4gRnJvbSBh
+biBhcmNoZW9sb2dpY2FsIHBvdiBJJ20gbm90IHN1cmUgeW91IHBvaW50IGF0IHRoZSBvZmZlbmRp
+bmcKPiBjb21taXQ6IEknZCByYXRoZXIgZXhwZWN0IGQ3YmZmMmJjMDAgKCJ4ODYvSFZNOiBfX2h2
+bV9jb3B5KCkKPiBzaG91bGQgbm90IHdyaXRlIHRvIHAybV9pb3JlcV9zZXJ2ZXIgcGFnZXMiKSB0
+byBiZSB0aGUgY3VscHJpdCwKPiB3aGljaCB3ZW50IGluIHR3byBtb250aHMgbGF0ZXIuCj4gCj4+
+IFRoaXMgcGFydGljdWxhciBpc3N1ZSBoYXMgYmVlbiBkaXNjb3ZlcmVkIGluIHJlbGF0aW9uIHRv
+IHAybV9pb3JlcV9zZXJ2ZXIKPj4gdHlwZSB3aGVyZSBhbiBlbXVsYXRvciBjaGFuZ2VkIHRoZSBt
+ZW1vcnkgdHlwZSBiZXR3ZWVuIHAybV9pb3JlcV9zZXJ2ZXIKPj4gYW5kIHAybV9yYW1fcncgaW4g
+cHJvY2VzcyBvZiByZXNwb25kaW5nIHRvIElPUkVRIHdoaWNoIG1hZGUKPj4gaHZtX2NvcHlfLi4o
+KSB0byBiZWhhdmUgZGlmZmVyZW50bHkgb24gdGhlIHdheSBiYWNrLgo+Pgo+PiBGaXggaXQgZm9y
+IG5vdyBieSBjaGVja2luZyBpZiBJT1JFUSBjb21wbGV0aW9uIGlzIHJlcXVpcmVkICh3aGljaAo+
+PiBjYW4gYmUgaWRlbnRpZmllZCBieSBxdWVyaW5nIE1NSU8gY2FjaGUpIGJlZm9yZSB0cnlpbmcg
+dG8gZmluaXNoCj4+IGEgbWVtb3J5IGFjY2VzcyBpbW1lZGlhdGVseSB0aHJvdWdoIGh2bV9jb3B5
+Xy4uKCksIHJlLWVudGVyCj4+IGh2bWVtdWxfZG9faW8oKSBvdGhlcndpc2UuIFRoaXMgY2hhbmdl
+IGFsb25lIGFkZHJlc3NlcyBJT1JFUQo+PiBjb21wbGV0aW9uIGlzc3VlIHdoZXJlIFAyTSB0eXBl
+IGlzIG1vZGlmaWVkIGluIHRoZSBtaWRkbGUgb2YgZW11bGF0aW9uCj4+IGJ1dCBpcyBub3QgZW5v
+dWdoIGZvciBhIG1vcmUgZ2VuZXJhbCBjYXNlIHdoZXJlIG1hY2hpbmUgc3RhdGUKPj4gYXJiaXRy
+YXJlbHkgY2hhbmdlcyBiZWhpbmQgb3VyIGJhY2suCj4gCj4gSSdtIGFmcmFpZCB0aGlzIHN0aWxs
+IGNsYWltcyB0byBhZGRyZXNzIGNhc2VzIHdoaWNoIGRvbid0IGdldCBmaXhlZAo+IGhlcmUuIEZv
+ciBleGFtcGxlLCB0YWtlIGEgcGFnZSBjaGFuZ2luZyBfdG9fIHAybV9pb3JlcV9zZXJ2ZXIKPiBi
+ZWhpbmQgb3VyIGJhY2tzOiBZb3Ugd29uJ3QgZmluZCBhbiBNTUlPIGNhY2hlIGVudHJ5IGZvciBp
+dCwKPiBodm1fY29weV90b19ndWVzdF9saW5lYXIoKSB3aWxsIGZhaWwsIGFuZCB5b3UnbGwgdHJ5
+IHRvIGlzc3VlIGFuCj4gTU1JTyB3cml0ZSB3aGVuIGluIHJlYWxpdHkgdGhlIHdyaXRlIHdhcyBh
+bHJlYWR5IGRvbmUgKGVtdWxhdGVkCj4gZm9yIHdoYXRldmVyIG90aGVyIHJlYXNvbiwgZS5nLiBp
+bnRyb3NwZWN0aW9uKS4gVGhpcyBleGFtcGxlCj4gbWF5IGJlIHByZXR0eSBjb250cml2ZWQsIGJ1
+dCBBbmRyZXcncyBiYWxsb29uaW5nIHNjZW5hcmlvIHJlYWxseQo+IGFwcGxpZXMgYm90aCB3YXlz
+IChiYWxsb29uLWluIGFuZCBiYWxsb29uLW91dCksIHdoaWxlIHRoZSBjaGFuZ2UKPiBkZWFscyBv
+bmx5IHdpdGggdGhlIGJhbGxvb24taW4gY2FzZS4KPiAKPiBTbyB3aGlsZSBJJ20gZmluZSB3aXRo
+IHRoZSBjb2RlIGNoYW5nZSwgSSdkIHN0aWxsIGxpa2UgdG8gYXNrIHRvCj4gZnVydGhlciByZWZp
+bmUgdGhlIGRlc2NyaXB0aW9uLgoKVGhhbmtzIGZvciBjbGFyaWZpY2F0aW9uLiBJIGRpc2N1c3Nl
+ZCB3aXRoIFBhdWwgLSB0aGVyZSBpcyBkZWZpbml0ZWx5CnN0aWxsIGEgaG9sZSBpbiBnZW5lcmFs
+IGNhc2Ugd2hlcmUgMXN0IGhhbGYgb2YgdGhlIGluc3RydWN0aW9uIGlzIG1lbW9yeQphbmQgMm5k
+IGhhbGYgaXMgTU1JTyBhbmQgdGhlIDFzdCBoYWxmIGlzIGNoYW5nZWQgKnRvKiBNTUlPLiBCdXQg
+aXQncwpoYXJkIHRvIGRlYWwgd2l0aCB0aGVzZSB0eXBlcyBvZiBhY2Nlc3NlcyB3aXRob3V0IGEg
+Y29tcGxldGUgcmUtd3JpdGUgb2YKTU1JTyBjYWNoZSBpbnRvIGdlbmVyYWwgaW5zbiBhY2Nlc3Mg
+Y2FjaGUgLSBzbyB0byBsaWZ0IGl0IHVwIHRvCmxpbmVhcl97cmVhZCx3cml0ZX0gbGF5ZXIuIEkg
+aG9wZSBteSB1bmRlcnN0YW5kaW5nIGlzIG5vdyBjb3JyZWN0IGFuZApJJ2xsIHB1dCBpbnRvIHRo
+ZSBkZXNjcmlwdGlvbi4gVW50aWwgdGhlbiB0aGUgZml4IHNob3VsZCBkbyBmaW5lIHdpdGgKc2Nl
+bmFyaW9zIHdlJ3JlIHNlZWluZy4KCklnb3IKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
