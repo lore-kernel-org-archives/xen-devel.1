@@ -1,27 +1,22 @@
-From: Thomas Gleixner <tglx@linutronix.de>
-Subject: Re: [PATCH v6 11/12] x86/microcode: Synchronize late
- microcode loading
-Date: Fri, 15 Mar 2019 11:44:16 +0100 (CET)
-Message-ID: <alpine.DEB.2.21.1903151140550.2055@nanos.tec.linutronix.de>
-References: <1552291056-20286-1-git-send-email-chao.gao@intel.com>
- <1552291056-20286-12-git-send-email-chao.gao@intel.com>
- <20190313000751.GF11608@araj-mobl1.jf.intel.com>
- <20190313050241.GA24657@gao-cwp>
- <5C88B746020000780021DF4D@prv1-mh.provo.novell.com>
- <5C88B92F020000780021DF64@prv1-mh.provo.novell.com>
- <d55bb90e-5ca4-0544-be5f-bbd0168c060a@citrix.com>
- <20190314185712.GA20889@araj-mobl1.jf.intel.com>
- <alpine.DEB.2.21.1903141306180.1948@nanos.tec.linutronix.de>
- <c8c5efb3-2126-dd26-37a5-4dff263842b7@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v8 15/50] x86emul: support AVX512F move high/low
+ insns
+Date: Fri, 15 Mar 2019 04:44:56 -0600
+Message-ID: <5C8B8228020000780021F176@prv1-mh.provo.novell.com>
+References: <5B6BF83602000078001DC548@prv1-mh.provo.novell.com>
+ <5C8B7EC0020000780021F10B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="8323329-2015375774-1552646662=:2055"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2VXQ=RS=linutronix.de=tglx@srs-us1.protection.inumbo.net>)
- id 1h4kKF-0004vt-Op
- for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 10:44:31 +0000
-In-Reply-To: <c8c5efb3-2126-dd26-37a5-4dff263842b7@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=64UD=RS=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1h4kKg-00052d-4f
+ for xen-devel@lists.xenproject.org; Fri, 15 Mar 2019 10:44:58 +0000
+In-Reply-To: <5C8B7EC0020000780021F10B@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -30,85 +25,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Borislav Petkov <bp@suse.de>, Wei Liu <wei.liu2@citrix.com>, "Raj,
- Ashok" <ashok.raj@intel.com>, Jun Nakajima <jun.nakajima@intel.com>, "Mallick,
- Asit K" <asit.k.mallick@intel.com>, Peter Zijlstra <peterz@infradead.org>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Chao Gao <chao.gao@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-2015375774-1552646662=:2055
-Content-Type: text/plain; charset=iso-8859-15
-Content-Transfer-Encoding: 8BIT
-
-On Fri, 15 Mar 2019, Andrew Cooper wrote:
-> On 14/03/2019 20:25, Thomas Gleixner wrote:
-> > On Thu, 14 Mar 2019, Raj, Ashok wrote:
-> >> On Thu, Mar 14, 2019 at 12:39:46PM +0000, Andrew Cooper wrote:
-> >>> On late load failure, we should dump enough information to work out
-> >>> exactly what went on, to determine how best to proceed, but the server
-> >>> is effectively lost to us.  On late load success, the proposed new
-> >>> "version" replaces the current "version".
-> >>>
-> >>> And again - I reiterate the point that I think it is fine to have a
-> >>> simplifying assumption that we don't have mixed stepping systems to
-> >>> start with, presuming this is generally in line with Intel's support
-> >>> statement.  If in practice we find mixed stepping systems which are
-> >>> supported by an OEM/Intel, we can see about extending the logic.
-> >> Checking with Asit he says it is in fact permitted to have 1 step behind
-> >> even on a multi-socket system. One could be N and other N-1 should be 
-> >> supported.
-> > That turns into a total disaster if N has an issue fixed ant N-1 requires
-> > microcode + software workaround.
-> >
-> > So if N is on the boot socket, then we fail to enable the workaround
-> > because CPU0 has the 'Issue fixed' bit set.
-> >
-> > If N-1 is on the boot socket, then we go to do the workaround nevertheless
-> > on N and that might dependend on the issue just be some pointless exercise
-> > or even try to access some MSR which is not available.
-> >
-> > *Shudder*
-> 
-> Intel: Are you saying that Skylake (06-55-04) is supported in
-> combination with Cascade Lake B0 (06-55-05) and/or Cascade Lake B1
-> (06-55-06) ?
-> 
-> The most insidious problem is TSX_FORCE_ABORT between the two Cascade
-> Lakes.  There really will be an asymmetric existence of an MSR required
-> for use in one part of the system, and unavailable in the other part of
-> the system.
-> 
-> To a certain degree, what is technically supported by Intel is also
-> tempered by what the major OS/VMM vendors are willing to boot on, as
-> that is ultimately what the customer is paying for.  When the steppings
-> differed only by the errata fixed, and the silicon was otherwise
-> identical from software's point of view, supporting a range of adjacent
-> steppings seems entirely reasonable.
-
-Sure, if the software does not have to worry about the differences then
-supporting that is a no-brainer.
-
-> In this case you've got 3 adjacent steppings, *all* of which offer
-> different architecturally defined features, and will involve software
-> changes to allow mixed systems to function in a safe way.
-
-Let's not go there. We've seen the mess which other architectures created
-with big/little CPUs which expose different feature sets.
-
-Thanks,
-
-	tglx
---8323329-2015375774-1552646662=:2055
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-2015375774-1552646662=:2055--
+Tm8gZXhwbGljaXQgdGVzdCBoYXJuZXNzIGFkZGl0aW9ucyBvdGhlciB0aGFuIHRoZSBvdmVycmlk
+ZXMsIGFzIHRoZQpjb21waWxlciBhbHJlYWR5IG1ha2VzIHVzZSBvZiB0aGUgaW5zbnMuCgpTaWdu
+ZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Ci0tLQp2ODogTm8gbmVl
+ZCB0byBzZXQgZmF1bHRfc3VwcHJlc3Npb24gdG8gZmFsc2UuCnY0OiBOZXcuCgotLS0gYS90b29s
+cy90ZXN0cy94ODZfZW11bGF0b3IvZXZleC1kaXNwOC5jCisrKyBiL3Rvb2xzL3Rlc3RzL3g4Nl9l
+bXVsYXRvci9ldmV4LWRpc3A4LmMKQEAgLTI1Myw2ICsyNTMsMTYgQEAgc3RhdGljIGNvbnN0IHN0
+cnVjdCB0ZXN0IGF2eDUxMmZfMTI4W10gPQogICAgIElOU04oaW5zZXJ0cHMsICA2NiwgMGYzYSwg
+MjEsIGVsLCAgICBkLCBlbCksCiAgICAgSU5TTihtb3YsICAgICAgIDY2LCAgIDBmLCA2ZSwgZWws
+IGRxNjQsIGVsKSwKICAgICBJTlNOKG1vdiwgICAgICAgNjYsICAgMGYsIDdlLCBlbCwgZHE2NCwg
+ZWwpLAorLy8gICAgICAgbW92aGxwcywgICAgICwgICAwZiwgMTIsICAgICAgICBkCisgICAgSU5T
+Tihtb3ZocGQsICAgIDY2LCAgIDBmLCAxNiwgZWwsICAgIHEsIHZsKSwKKyAgICBJTlNOKG1vdmhw
+ZCwgICAgNjYsICAgMGYsIDE3LCBlbCwgICAgcSwgdmwpLAorICAgIElOU04obW92aHBzLCAgICAg
+ICwgICAwZiwgMTYsIGVsXzIsICBkLCB2bCksCisgICAgSU5TTihtb3ZocHMsICAgICAgLCAgIDBm
+LCAxNywgZWxfMiwgIGQsIHZsKSwKKy8vICAgICAgIG1vdmxocHMsICAgICAsICAgMGYsIDE2LCAg
+ICAgICAgZAorICAgIElOU04obW92bHBkLCAgICA2NiwgICAwZiwgMTIsIGVsLCAgICBxLCB2bCks
+CisgICAgSU5TTihtb3ZscGQsICAgIDY2LCAgIDBmLCAxMywgZWwsICAgIHEsIHZsKSwKKyAgICBJ
+TlNOKG1vdmxwcywgICAgICAsICAgMGYsIDEyLCBlbF8yLCAgZCwgdmwpLAorICAgIElOU04obW92
+bHBzLCAgICAgICwgICAwZiwgMTMsIGVsXzIsICBkLCB2bCksCiAgICAgSU5TTihtb3ZxLCAgICAg
+IGYzLCAgIDBmLCA3ZSwgZWwsICAgIHEsIGVsKSwKICAgICBJTlNOKG1vdnEsICAgICAgNjYsICAg
+MGYsIGQ2LCBlbCwgICAgcSwgZWwpLAogfTsKLS0tIGEvdG9vbHMvdGVzdHMveDg2X2VtdWxhdG9y
+L3NpbWQuaAorKysgYi90b29scy90ZXN0cy94ODZfZW11bGF0b3Ivc2ltZC5oCkBAIC0yNjYsNiAr
+MjY2LDEyIEBAIE9WUihtb3ZkKTsKIE9WUihtb3ZxKTsKIE9WUl9TRlAobW92KTsKIE9WUl9WRlAo
+bW92YSk7CitPVlIobW92aGxwcyk7CitPVlIobW92aHBkKTsKK09WUihtb3ZocHMpOworT1ZSKG1v
+dmxocHMpOworT1ZSKG1vdmxwZCk7CitPVlIobW92bHBzKTsKIE9WUl9WRlAobW92bnQpOwogT1ZS
+X1ZGUChtb3Z1KTsKIE9WUl9GUChtdWwpOwotLS0gYS94ZW4vYXJjaC94ODYveDg2X2VtdWxhdGUv
+eDg2X2VtdWxhdGUuYworKysgYi94ZW4vYXJjaC94ODYveDg2X2VtdWxhdGUveDg2X2VtdWxhdGUu
+YwpAQCAtMjg2LDExICsyODYsMTEgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCB0d29ieXRlX3RhYmxl
+IHsKICAgICBbMHgwZl0gPSB7IE1vZFJNfFNyY0ltbUJ5dGUgfSwKICAgICBbMHgxMF0gPSB7IERz
+dEltcGxpY2l0fFNyY01lbXxNb2RSTXxNb3YsIHNpbWRfYW55X2ZwLCBkOHNfdmwgfSwKICAgICBb
+MHgxMV0gPSB7IERzdE1lbXxTcmNJbXBsaWNpdHxNb2RSTXxNb3YsIHNpbWRfYW55X2ZwLCBkOHNf
+dmwgfSwKLSAgICBbMHgxMl0gPSB7IERzdEltcGxpY2l0fFNyY01lbXxNb2RSTXxNb3YsIHNpbWRf
+b3RoZXIgfSwKLSAgICBbMHgxM10gPSB7IERzdE1lbXxTcmNJbXBsaWNpdHxNb2RSTXxNb3YsIHNp
+bWRfb3RoZXIgfSwKKyAgICBbMHgxMl0gPSB7IERzdEltcGxpY2l0fFNyY01lbXxNb2RSTXxNb3Ys
+IHNpbWRfb3RoZXIsIDMgfSwKKyAgICBbMHgxM10gPSB7IERzdE1lbXxTcmNJbXBsaWNpdHxNb2RS
+TXxNb3YsIHNpbWRfb3RoZXIsIDMgfSwKICAgICBbMHgxNCAuLi4gMHgxNV0gPSB7IERzdEltcGxp
+Y2l0fFNyY01lbXxNb2RSTSwgc2ltZF9wYWNrZWRfZnAsIGQ4c192bCB9LAotICAgIFsweDE2XSA9
+IHsgRHN0SW1wbGljaXR8U3JjTWVtfE1vZFJNfE1vdiwgc2ltZF9vdGhlciB9LAotICAgIFsweDE3
+XSA9IHsgRHN0TWVtfFNyY0ltcGxpY2l0fE1vZFJNfE1vdiwgc2ltZF9vdGhlciB9LAorICAgIFsw
+eDE2XSA9IHsgRHN0SW1wbGljaXR8U3JjTWVtfE1vZFJNfE1vdiwgc2ltZF9vdGhlciwgMyB9LAor
+ICAgIFsweDE3XSA9IHsgRHN0TWVtfFNyY0ltcGxpY2l0fE1vZFJNfE1vdiwgc2ltZF9vdGhlciwg
+MyB9LAogICAgIFsweDE4IC4uLiAweDFmXSA9IHsgSW1wbGljaXRPcHN8TW9kUk0gfSwKICAgICBb
+MHgyMCAuLi4gMHgyMV0gPSB7IERzdE1lbXxTcmNJbXBsaWNpdHxNb2RSTSB9LAogICAgIFsweDIy
+IC4uLiAweDIzXSA9IHsgRHN0SW1wbGljaXR8U3JjTWVtfE1vZFJNIH0sCkBAIC02MDMyLDYgKzYw
+MzIsMjUgQEAgeDg2X2VtdWxhdGUoCiAgICAgICAgIG9wX2J5dGVzID0gODsKICAgICAgICAgZ290
+byBzaW1kXzBmX2ZwOwogCisgICAgY2FzZSBYODZFTVVMX09QQ19FVkVYXzY2KDB4MGYsIDB4MTIp
+OiAgIC8qIHZtb3ZscGQgbTY0LHhtbSx4bW0gKi8KKyAgICBDQVNFX1NJTURfUEFDS0VEX0ZQKF9F
+VkVYLCAweDBmLCAweDEzKTogLyogdm1vdmxwe3MsZH0geG1tLG02NCAqLworICAgIGNhc2UgWDg2
+RU1VTF9PUENfRVZFWF82NigweDBmLCAweDE2KTogICAvKiB2bW92aHBkIG02NCx4bW0seG1tICov
+CisgICAgQ0FTRV9TSU1EX1BBQ0tFRF9GUChfRVZFWCwgMHgwZiwgMHgxNyk6IC8qIHZtb3ZocHtz
+LGR9IHhtbSxtNjQgKi8KKyAgICAgICAgZ2VuZXJhdGVfZXhjZXB0aW9uX2lmKGVhLnR5cGUgIT0g
+T1BfTUVNLCBFWENfVUQpOworICAgICAgICAvKiBmYWxsIHRocm91Z2ggKi8KKyAgICBjYXNlIFg4
+NkVNVUxfT1BDX0VWRVgoMHgwZiwgMHgxMik6ICAgICAgLyogdm1vdmxwcyBtNjQseG1tLHhtbSAq
+LworICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvKiB2bW92aGxw
+cyB4bW0seG1tLHhtbSAqLworICAgIGNhc2UgWDg2RU1VTF9PUENfRVZFWCgweDBmLCAweDE2KTog
+ICAgICAvKiB2bW92aHBzIG02NCx4bW0seG1tICovCisgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIC8qIHZtb3ZsaHBzIHhtbSx4bW0seG1tICovCisgICAgICAgIGdl
+bmVyYXRlX2V4Y2VwdGlvbl9pZigoZXZleC5sciB8fCBldmV4Lm9wbXNrIHx8IGV2ZXguYnJzIHx8
+CisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXZleC53ICE9IChldmV4LnBmeCAmIFZF
+WF9QUkVGSVhfRE9VQkxFX01BU0spKSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEVY
+Q19VRCk7CisgICAgICAgIGhvc3RfYW5kX3ZjcHVfbXVzdF9oYXZlKGF2eDUxMmYpOworICAgICAg
+ICBpZiAoIChkICYgRHN0TWFzaykgIT0gRHN0TWVtICkKKyAgICAgICAgICAgIGQgJj0gflR3b09w
+OworICAgICAgICBvcF9ieXRlcyA9IDg7CisgICAgICAgIGdvdG8gc2ltZF96bW07CisKICAgICBj
+YXNlIFg4NkVNVUxfT1BDX0YzKDB4MGYsIDB4MTIpOiAgICAgICAvKiBtb3ZzbGR1cCB4bW0vbTEy
+OCx4bW0gKi8KICAgICBjYXNlIFg4NkVNVUxfT1BDX1ZFWF9GMygweDBmLCAweDEyKTogICAvKiB2
+bW92c2xkdXAge3gseX1tbS9tZW0se3gseX1tbSAqLwogICAgIGNhc2UgWDg2RU1VTF9PUENfRjIo
+MHgwZiwgMHgxMik6ICAgICAgIC8qIG1vdmRkdXAgeG1tL202NCx4bW0gKi8KCgoKCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
