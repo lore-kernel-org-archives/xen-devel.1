@@ -1,17 +1,20 @@
-From: "John L. Poole" <jlpoole56@gmail.com>
-Subject: Re: [BUG] Sporadic boot of Xen Kernel 4.12.0,
- hangs at random EXTInt
-Date: Fri, 15 Mar 2019 14:50:14 -0700
-Message-ID: <84ce2f6e-684b-898b-ea52-273de99b2484@gmail.com>
-References: <48347a1c-add2-2a2a-e8fa-77f26597a31e@gmail.com>
- <b132cc90-3b02-d740-9389-5445418e35f6@citrix.com>
- <e36ab4e1-a2b7-f957-34ee-2ee44ca9cb6b@citrix.com>
-Reply-To: jlpoole56@gmail.com
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 1/2] xen: introduce a cpumask with all bits
+ set
+Date: Sat, 16 Mar 2019 01:52:30 +0100
+Message-ID: <da587c8356dfcd7a9739b5985767a781d485a57d.camel@suse.com>
+References: <20190314095953.11752-1-jgross@suse.com>
+ <20190314095953.11752-2-jgross@suse.com>
+ <3644ab6d-4247-0651-eaf3-7d88263838a7@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6567885863671323416=="
+Content-Type: multipart/mixed; boundary="===============8036628910972981700=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <e36ab4e1-a2b7-f957-34ee-2ee44ca9cb6b@citrix.com>
-Content-Language: en-US
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=KzQf=RT=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1h4xZP-0007TT-18
+ for xen-devel@lists.xenproject.org; Sat, 16 Mar 2019 00:53:03 +0000
+In-Reply-To: <3644ab6d-4247-0651-eaf3-7d88263838a7@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,297 +23,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
-Cc: xen@gentoo.org
+To: George Dunlap <george.dunlap@citrix.com>, Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---===============6567885863671323416==
-Content-Type: multipart/alternative;
- boundary="------------A7DF9AC5A294EA8913B591B7"
-Content-Language: en-US
 
-This is a multi-part message in MIME format.
---------------A7DF9AC5A294EA8913B591B7
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+--===============8036628910972981700==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-OnKJis3IBfuJlD4qHM8L"
 
 
-On 3/15/2019 2:30 PM, Andrew Cooper wrote:
-> On 15/03/2019 20:49, Andrew Cooper wrote:
->> On 15/03/2019 18:35, John L. Poole wrote:
->>> I have a Supermicro Intel Atom based server with UEFI.  I purchased the
->>> server in November 2016 intending to run Xen server.  I was able
->>> to overcome some problem in 2016 with help from the Xen Project and
->>> I was able to load a xen kernel built in Gentoo for Gentoo VMs manually
->>> using the EFI command.  At that time, I was told grub2 was not UEFI
->>> ready.
->>>
->>> Now I have been trying to integrate grub2 with Xen using kernel version
->>> 4.19.23-gentoo.  I am witnessing boot attempts that fail at different
->>> points just after calls to setup_local_APIC in apic.c. Sometimes I am
->>> successful in loading the Xen Kernel and then everything goes smoothly
->>> loading the DOM0 session.  I can then load the VMs and everything
->>> seems okay.  But most of the time, the boot up hangs in
->>> between calls to the function setup_local_APIC in apic.c.
->>>
->>> I had posted to the XEN Users list and had little, if any, response.
->>> I have created two bugs within Gentoo's system, differentiated by
->>> xen kernels:
->>>
->>> 4.11.1       athttps://bugs.gentoo.org/679826
->>> 4.12.0_rc4   athttps://bugs.gentoo.org/680472
->>>
->>> What is really vexing is the randomness of results.  For instance, here
->>> a log from this morning of success vs. failures:
->>>
->>> 9:17 AM 3/15/2019   2   (XEN) [2019-03-15 16:17:33] Adding cpu 2 to
->>> runqueue 0
->>> 9:18 AM 3/15/2019   5   (XEN) [2019-03-15 16:18:53] Adding cpu 5 to
->>> runqueue 0
->>> 9:19 AM 3/15/2019   SUCCESS!!
->>> after * key in serial port for "diagnostics all", shutdown by watchdog.
->>> 9:30 AM 3/15/2019   SUCCESS!!
->>> (XEN) [2019-03-15 16:32:54] Hardware Dom0 shutdown: watchdog rebooting
->>> machine
->>> 9:34 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:34:14] HVM: HAP
->>> page sizes: 4kB, 2MB
->>> 9:35 AM 3/15/2019   3
->>> 9:36 AM 3/15/2019   4   (XEN) [2019-03-15 16:37:21] Adding cpu 4 to
->>> runqueue 0
->>> 9:37 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:38:33] HVM: HAP
->>> page sizes: 4kB, 2MB
->>> 9:39 AM 3/15/2019   SUCCESS!!
->>>
->>> My attempt to isolate the failure point has been unsuccessful. I'm
->>> prepared
->>> to patch 4.12.0_rc4 if that will help, my previous attempt in 4.11.1 only
->>> allowed me to conclude that the problem is not within apic.c.
->> You have a floating serial line, which is simulating you typing characters.
->>
->> The '*' key is "run all diagnostic keyhandlers", and later it passes an
->> 'R' which instructs Xen to reboot.
->>
->> The keyhandlers start functioning as soon as we can possibly make them
->> after enabling interrupts, which is why you see it shortly after
->> setup_local_APIC()
->
-> Right - I've done some trawling through your bug tickets.
->
-> Please please please always start with a full and complete serial log 
-> showing all of Xen's boot up until the point things go wrong.
->
-> Using the log from https://bugs.gentoo.org/679826#c6 , we get the 
-> following things:
->
-> (XEN) Xen version 4.11.1 (@[unknown]) (x86_64-pc-linux-gnu-gcc (Gentoo 7.3.0-r3 p1.4) 7.3.0) debug=n  Wed Mar  6 19:34:00 PST 2019
-> (XEN) Latest ChangeSet:
->
-> Not directly related to your issue, but something is missing the 
-> changeset information in your build, and you typically want to be 
-> using a debug build of Xen for investigations like this.
->
-> (XEN) Bootloader: GRUB 2.02
->
-> but
->
-> (XEN) ACPI Error (tbxfroot-0217): A valid RSDP was not found [20070126]
->
-> So the first problem is that there aren't any APCI tables to be 
-> found.  You're presumably booting in EFI mode, but either Grub hasn't 
-> handed the SystemTable/etc to Xen, or Xen wasn't built with an 
-> EFI-capable toolchain and isn't capable of receiving them via the 
-> extended multiboot2 protocol.  One way or another, this is the root of 
-> the problem.
->
-> Xen did however find:
->
-> (XEN) Intel MultiProcessor Specification v1.4
-> (XEN)     Virtual Wire compatibility mode.
->
-> Which is the pre-APCI standard for multi-processor systems.  This is 
-> also why we start masking ExtINT, because that is how such systems 
-> were supposed to be set up.  However, it is almost certainly 
-> interfering with some kind of BMC activity, probably an SMI.  I don't 
-> think it is worth investigating, because it is an obsolete mode these 
-> days which the system firmware won't be designed to cope with.
->
->
-> For other areas of interest, I see:
->
-> (XEN) Unrecognised CPU model 0x4d - assuming not reptpoline safe
->
-> This particular server is Avaton/Rangely which is an Atom based 
-> microserver.  It is almost certainly retpoline-safe, because it was 
-> only Skylake generation systems which weren't, but I'll try and follow 
-> up on this.
->
-> Anyway - the root of your problem is that Xen can't find the ACPI 
-> tables, which is either going to be a grub or a Xen build 
-> misconfiguration.
->
-> ~Andrew
+--=-OnKJis3IBfuJlD4qHM8L
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thank you, thank you Andrew.  Your analysis is great news.  I'll work 
-with the Xen Team at Gentoo and see what can be determined about the 
-APCI tables.
+On Thu, 2019-03-14 at 10:30 +0000, George Dunlap wrote:
+> On 3/14/19 9:59 AM, Juergen Gross wrote:
+> > There are several places in Xen allocating a cpumask on the stack
+> > and
+> > setting all bits in it just to use it as an initial mask for
+> > allowing
+> > all cpus.
+> >=20
+> > Save the stack space and omit the need for runtime initialization
+> > by
+> > defining a globally accessible cpumask_all variable.
+> >=20
+> > Signed-off-by: Juergen Gross <jgross@suse.com>
+>=20
+> Acked-by: George Dunlap <george.dunlap@citrix.com>
+>=20
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 
--John
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
 
---------------A7DF9AC5A294EA8913B591B7
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+--=-OnKJis3IBfuJlD4qHM8L
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 3/15/2019 2:30 PM, Andrew Cooper
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:e36ab4e1-a2b7-f957-34ee-2ee44ca9cb6b@citrix.com">
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <div class="moz-cite-prefix">On 15/03/2019 20:49, Andrew Cooper
-        wrote:<br>
-      </div>
-      <blockquote type="cite"
-        cite="mid:b132cc90-3b02-d740-9389-5445418e35f6@citrix.com">
-        <pre class="moz-quote-pre" wrap="">On 15/03/2019 18:35, John L. Poole wrote:
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">I have a Supermicro Intel Atom based server with UEFI.  I purchased the
-server in November 2016 intending to run Xen server.  I was able
-to overcome some problem in 2016 with help from the Xen Project and
-I was able to load a xen kernel built in Gentoo for Gentoo VMs manually
-using the EFI command.  At that time, I was told grub2 was not UEFI
-ready.
+-----BEGIN PGP SIGNATURE-----
 
-Now I have been trying to integrate grub2 with Xen using kernel version
-4.19.23-gentoo.  I am witnessing boot attempts that fail at different
-points just after calls to setup_local_APIC in apic.c. Sometimes I am
-successful in loading the Xen Kernel and then everything goes smoothly
-loading the DOM0 session.  I can then load the VMs and everything
-seems okay.  But most of the time, the boot up hangs in
-between calls to the function setup_local_APIC in apic.c.
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyMSM4ACgkQFkJ4iaW4
+c+6NbQ//QjceXctVRQ2Mx8sopa5SRo/DOn1M6nwA6VUxH7pcX4z8CdKgZTscA99f
+fqBjj53ob71Y77HOFrJgCp4LZqYlQu9MAV4svY1uqRPq98BZNbRovpzkXFaasQDx
+Wjt45ryA15YsAQqz8pkGZzEfBQMLwm2mLSQ7lrcMFiagB3prGfr8lexVaOJAfzlh
+IVZXE0iItR4gALyhLNc5HYTqpzji910Pv+EdGBCGYaRNzuFMnjEH0gi57anLaYB5
+PupUiWgN3R1/UitWCi1zlN5V8NqV0+LQAhrEh9z/Glq5HNyDvcNoErP4pl7j59vy
+nkfCkTrjCD4MQ3OsDpU6JN+LM5PeGBFRFKn9CIOsOJTXTE6lzatgiPDjww3NbbLu
+FipOWL3SiwD/JIgfnfg9bektsbCvvlmuqmYvnAOlFRigKuuWdBlkJK7TeXELN5rz
+7d9e2Ux8MHiSUZwO1sf+wG7U3vklqJc3UzPelBXTxI4uFqYKUVjHfwxjHxAZvBOe
++U8prvPbN2mlmsKY9TiVW/1l6j8CBmqyrP9LDJQqqkMl408sYvkOMI5vzs+PYL4f
+a/YG7gtfcdAsk9z8VhSQaEEIG+OKVsClVZlSIUEhCodcstv7e8vDkxzrRmicButX
+bCFRyfDMkxKXTXat7qcTZgfeskBAj5h7Fb/bNpLyN0fm37uaQFo=
+=+WzZ
+-----END PGP SIGNATURE-----
 
-I had posted to the XEN Users list and had little, if any, response.
-I have created two bugs within Gentoo's system, differentiated by
-xen kernels:
-
-4.11.1       at  <a class="moz-txt-link-freetext" href="https://bugs.gentoo.org/679826" moz-do-not-send="true">https://bugs.gentoo.org/679826</a>
-4.12.0_rc4   at  <a class="moz-txt-link-freetext" href="https://bugs.gentoo.org/680472" moz-do-not-send="true">https://bugs.gentoo.org/680472</a>
-
-What is really vexing is the randomness of results.  For instance, here
-a log from this morning of success vs. failures:
-
-9:17 AM 3/15/2019   2   (XEN) [2019-03-15 16:17:33] Adding cpu 2 to
-runqueue 0
-9:18 AM 3/15/2019   5   (XEN) [2019-03-15 16:18:53] Adding cpu 5 to
-runqueue 0
-9:19 AM 3/15/2019   SUCCESS!!
-after * key in serial port for "diagnostics all", shutdown by watchdog.
-9:30 AM 3/15/2019   SUCCESS!!
-(XEN) [2019-03-15 16:32:54] Hardware Dom0 shutdown: watchdog rebooting
-machine
-9:34 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:34:14] HVM: HAP
-page sizes: 4kB, 2MB
-9:35 AM 3/15/2019   3
-9:36 AM 3/15/2019   4   (XEN) [2019-03-15 16:37:21] Adding cpu 4 to
-runqueue 0
-9:37 AM 3/15/2019   Before 1: (XEN) [2019-03-15 16:38:33] HVM: HAP
-page sizes: 4kB, 2MB
-9:39 AM 3/15/2019   SUCCESS!!
-
-My attempt to isolate the failure point has been unsuccessful. I'm
-prepared
-to patch 4.12.0_rc4 if that will help, my previous attempt in 4.11.1 only
-allowed me to conclude that the problem is not within apic.c.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">You have a floating serial line, which is simulating you typing characters.
-
-The '*' key is "run all diagnostic keyhandlers", and later it passes an
-'R' which instructs Xen to reboot.
-
-The keyhandlers start functioning as soon as we can possibly make them
-after enabling interrupts, which is why you see it shortly after
-setup_local_APIC()</pre>
-      </blockquote>
-      <br>
-      Right - I've done some trawling through your bug tickets.<br>
-      <br>
-      Please please please always start with a full and complete serial
-      log showing all of Xen's boot up until the point things go wrong.<br>
-      <br>
-      Using the log from <a class="moz-txt-link-freetext"
-        href="https://bugs.gentoo.org/679826#c6" moz-do-not-send="true">https://bugs.gentoo.org/679826#c6</a>
-      , we get the following things:<br>
-      <br>
-      <pre>(XEN) Xen version 4.11.1 (@[unknown]) (x86_64-pc-linux-gnu-gcc (Gentoo 7.3.0-r3 p1.4) 7.3.0) debug=n  Wed Mar  6 19:34:00 PST 2019
-(XEN) Latest ChangeSet:</pre>
-      <br>
-      Not directly related to your issue, but something is missing the
-      changeset information in your build, and you typically want to be
-      using a debug build of Xen for investigations like this.<br>
-      <br>
-      <pre>(XEN) Bootloader: GRUB 2.02
-
-but
-
-(XEN) ACPI Error (tbxfroot-0217): A valid RSDP was not found [20070126]</pre>
-      <br>
-      So the first problem is that there aren't any APCI tables to be
-      found.  You're presumably booting in EFI mode, but either Grub
-      hasn't handed the SystemTable/etc to Xen, or Xen wasn't built with
-      an EFI-capable toolchain and isn't capable of receiving them via
-      the extended multiboot2 protocol.  One way or another, this is the
-      root of the problem.<br>
-      <br>
-      Xen did however find:<br>
-      <br>
-      <pre>(XEN) Intel MultiProcessor Specification v1.4
-(XEN)     Virtual Wire compatibility mode.</pre>
-      <br>
-      Which is the pre-APCI standard for multi-processor systems.  This
-      is also why we start masking ExtINT, because that is how such
-      systems were supposed to be set up.  However, it is almost
-      certainly interfering with some kind of BMC activity, probably an
-      SMI.  I don't think it is worth investigating, because it is an
-      obsolete mode these days which the system firmware won't be
-      designed to cope with.<br>
-      <br>
-      <br>
-      For other areas of interest, I see:<br>
-      <br>
-      <pre>(XEN) Unrecognised CPU model 0x4d - assuming not reptpoline safe</pre>
-      <br>
-      This particular server is Avaton/Rangely which is an Atom based
-      microserver.  It is almost certainly retpoline-safe, because it
-      was only Skylake generation systems which weren't, but I'll try
-      and follow up on this.<br>
-      <br>
-      Anyway - the root of your problem is that Xen can't find the ACPI
-      tables, which is either going to be a grub or a Xen build
-      misconfiguration.<br>
-      <br>
-      ~Andrew<br>
-    </blockquote>
-    <p>Thank you, thank you Andrew.  Your analysis is great news.  I'll
-      work with the Xen Team at Gentoo and see what can be determined
-      about the APCI tables.<br>
-    </p>
-    <div class="moz-signature"><font size="2"><font face="Verdana">-John</font></font></div>
-  </body>
-</html>
-
---------------A7DF9AC5A294EA8913B591B7--
+--=-OnKJis3IBfuJlD4qHM8L--
 
 
---===============6567885863671323416==
+
+--===============8036628910972981700==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -320,4 +99,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============6567885863671323416==--
+--===============8036628910972981700==--
