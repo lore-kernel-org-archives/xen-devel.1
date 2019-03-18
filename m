@@ -1,18 +1,16 @@
-From: <ramblech@sina.com>
-Subject: =?gbk?b?u9i4tKO6UmU6ICBYZW4gQVJNIEZhdWx0IHJlY292ZXJ5?=
- =?gbk?q?_for_automotive_use_case?=
-Date: Mon, 18 Mar 2019 22:52:33 +0800
-Message-ID: <20190318145233.6A8D218C008A@webmail.sinamail.sina.com.cn>
-Reply-To: ramblech@sina.com
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2] x86/atomic: Improvements and
+ simplifications to assembly constraints
+Date: Mon, 18 Mar 2019 14:49:42 +0000
+Message-ID: <d9bfae5c-cb77-dbed-1535-73af8aabaf10@citrix.com>
+References: <1552908441-31533-1-git-send-email-andrew.cooper3@citrix.com>
+ <5C8F9B14020000780021FE03@prv1-mh.provo.novell.com>
+ <ccb17e4f-2be7-ad19-07e8-9891373badac@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0046495644350331499=="
+Content-Type: multipart/mixed; boundary="===============7352400638286957191=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=qHvw=RV=sina.com=ramblech@srs-us1.protection.inumbo.net>)
- id 1h5td5-0007iY-8v
- for xen-devel@lists.xenproject.org; Mon, 18 Mar 2019 14:52:43 +0000
+In-Reply-To: <ccb17e4f-2be7-ad19-07e8-9891373badac@citrix.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,79 +19,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0046495644350331499==
+--===============7352400638286957191==
 Content-Type: multipart/alternative;
-	 boundary="=-sinamail_alt_45a33a01b42cd703345e3560a0219d6c"
+	boundary="------------589A19EF7F8EE1724E230889"
+Content-Language: en-GB
+
+--------------589A19EF7F8EE1724E230889
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+On 18/03/2019 14:11, Andrew Cooper wrote:
+>
+>>> @@ -63,36 +65,38 @@ static always_inline __uint128_t cmpxchg16b_local_(
+>>>   * If no fault occurs then _o is updated to the value we saw at _p. If this
+>>>   * is the same as the initial value of _o then _n is written to location _p.
+>>>   */
+>>> -#define __cmpxchg_user(_p,_o,_n,_isuff,_oppre,_regtype)                 \
+>>> +#define __cmpxchg_user(_p, _o, _n, _oppre)                              \
+>>>      stac();                                                             \
+>>>      asm volatile (                                                      \
+>>> -        "1: lock; cmpxchg"_isuff" %"_oppre"2,%3\n"                      \
+>>> +        "1: lock cmpxchg %"_oppre"[new], %[ptr]\n"                      \
+>>>          "2:\n"                                                          \
+>>>          ".section .fixup,\"ax\"\n"                                      \
+>>> -        "3:     movl $1,%1\n"                                           \
+>>> +        "3:     movl $1, %[rc]\n"                                       \
+>>>          "       jmp 2b\n"                                               \
+>>>          ".previous\n"                                                   \
+>>>          _ASM_EXTABLE(1b, 3b)                                            \
+>>> -        : "=a" (_o), "=r" (_rc)                                         \
+>>> -        : _regtype (_n), "m" (*__xg((volatile void *)_p)), "0" (_o), "1" (0) \
+>>> +        : "+a" (_o), [rc] "=r" (_rc),                                   \
+>>> +          [ptr] "+m" (*(volatile typeof(*(_p)) *)(_p))                  \
+>>> +        : [new] "r" (_n), "[rc]" (0)                                    \
+>> Wouldn't it further help readability a little if _rc was initialized to zero
+>> right when getting declared, eliminating the last input arg here (the
+>> output then would need to be "+r" of course)?
+> I can do.
+
+I've got the following incremental fix which I intend to fold in.
+
+diff --git a/xen/include/asm-x86/x86_64/system.h b/xen/include/asm-x86/x86_64/system.h
+index 5b6e964..d65562b 100644
+--- a/xen/include/asm-x86/x86_64/system.h
++++ b/xen/include/asm-x86/x86_64/system.h
+@@ -65,7 +65,7 @@ static always_inline __uint128_t cmpxchg16b_local_(
+  * If no fault occurs then _o is updated to the value we saw at _p. If this
+  * is the same as the initial value of _o then _n is written to location _p.
+  */
+-#define __cmpxchg_user(_p, _o, _n, _oppre)                              \
++#define __cmpxchg_user(_p, _o, _n, _rc, _oppre)                         \
+     stac();                                                             \
+     asm volatile (                                                      \
+         "1: lock cmpxchg %"_oppre"[new], %[ptr]\n"                      \
+@@ -75,28 +75,29 @@ static always_inline __uint128_t cmpxchg16b_local_(
+         "       jmp 2b\n"                                               \
+         ".previous\n"                                                   \
+         _ASM_EXTABLE(1b, 3b)                                            \
+-        : "+a" (_o), [rc] "=r" (_rc),                                   \
++        : "+a" (_o), [rc] "+r" (_rc),                                   \
+           [ptr] "+m" (*(volatile typeof(*(_p)) *)(_p))                  \
+-        : [new] "r" (_n), "[rc]" (0)                                    \
++        : [new] "r" (_n)                                                \
+         : "memory");                                                    \
+     clac()
+ 
+ #define cmpxchg_user(_p, _o, _n)                                        \
+ ({                                                                      \
+-    int _rc;                                                            \
++    int _rc = 0;                                                        \
++                                                                        \
+     switch ( sizeof(*(_p)) )                                            \
+     {                                                                   \
+     case 1:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "b");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "b");                           \
+         break;                                                          \
+     case 2:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "w");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "w");                           \
+         break;                                                          \
+     case 4:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "k");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "k");                           \
+         break;                                                          \
+     case 8:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "q");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "q");                           \
+         break;                                                          \
+     }                                                                   \
+     _rc;                                                                \
 
 
---=-sinamail_alt_45a33a01b42cd703345e3560a0219d6c
-Content-Type: text/plain;
-	charset=GBK
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
+--------------589A19EF7F8EE1724E230889
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-PiBPbiAxOC8wMy8yMDE5IDA2OjUwLCByYW1ibGVjaEBzaW5hLmNvbSB3cm90ZToKPiA+IEhlbGxv
-LAo+IEhlbGxvLAo+ID4gSSdtIHJlc2VhcmNoaW5nIHhlbiBmb3IgYXV0b21vdGl2ZSB1c2UgY2Fz
-ZSBhbmQgSSBzZWUgYSBwcmVzZW50YXRpb24gY2FsbGVkOgo+ID4gIkRlc2lnbiBhbmQgSW1wbGVt
-ZW50YXRpb24gb2YgQXV0b21vdGl2ZSBWaXJ0dWFsaXphdGlvbiBCYXNlZCBvbiBYZW4gLSBTdW5n
-LU1pbgo+ID4gTGVlLCBTYW1zdW5nIEVsZWN0cm9uaWNzIgo+ID4gb24gWGVuIERldmVsb3BlciBh
-bmQgRGVzaWduIFN1bW1pdCAyMDE4Lgo+ID4gCj4gPiBJJ20gaW50ZXJlc3RpbmcgaW4gdGhlIG1v
-ZGlmaWNhdGlvbiBvZiBmYXVsdCByZWNvdmVyeSBzY2VuYXJpbyBvbiBQOX5QMTEsIGl0Cj4gPiBp
-bnRyb2R1Y2VkIGEgbmV3IGh5cGVyY2FsbCBjYWxsZWQgWEVOX0RPTUNUTF9zYW1zdW5nX3Jlc2V0
-Lgo+IElmIEkgcmVjYWxsIGNvcnJlY3RseSB0aGUgdGFsaywgWEVOX0RPTUNUTF9zYW1zdW5nX3Jl
-c2V0IGlzIGRvaW5nIGV4YWN0bHkgdGhlCj4gc2FtZSBhcyBYRU5fRE9NQ1RMX3NvZnRfcmVzZXQu
-IFRoZSBsYXRlciBpcyBub3QgeWV0IGltcGxlbWVudGVkIG9uIEFybSwgSSBjYW4KPiBwcm92aWRl
-IGd1aWRlbGluZXMgaWYgeW91IGFyZSBpbnRlcmVzdGVkIHRvIGltcGxlbWVudCBpdC4KVGhhbmsg
-eW91IGZvciB5b3VyIHJlcGx5IUl0IHdpbGwgYmUgdmVyeSB1c2VmdWwgaWYgdGhlcmUgaXMgc29t
-ZSBndWlkZSBmb3IgaW1wbGVtZW50IHRoZSBzb2Z0X3Jlc2V0LkFuZCBhcmUgdGhlcmUgYW55IHBs
-YW4gZm9yIG9mZmljaWFsIGltcGxlbWVudGF0aW9uIG9mIHRoaXMgZnVuY3Rpb24gb24gQVJNPwo+
-IFdoZXJlIGNhbiBJIGZpbmQgc29tZSBjb2RlIG9yIHR1dG9yaWFsIGZvciB0aGlzIG1vZGlmaWNh
-dGlvbj8gSGFzIHRoZSBjb2RlIGJlZW4KPiByZWxlYXNlZD8KPiBZb3VyIGJlc3QgYmV0IHdvdWxk
-IGJlIHRvIGNvbnRhY3QgdGhlIHNwZWFrZXIuCj4gQmVzdCByZWdhcmRzLAo+IC0tID4gSnVsaWVu
-IEdyYWxs
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 18/03/2019 14:11, Andrew Cooper
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:ccb17e4f-2be7-ad19-07e8-9891373badac@citrix.com"><br>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">
+</pre>
+        <blockquote type="cite">
+          <pre class="moz-quote-pre" wrap="">@@ -63,36 +65,38 @@ static always_inline __uint128_t cmpxchg16b_local_(
+  * If no fault occurs then _o is updated to the value we saw at _p. If this
+  * is the same as the initial value of _o then _n is written to location _p.
+  */
+-#define __cmpxchg_user(_p,_o,_n,_isuff,_oppre,_regtype)                 \
++#define __cmpxchg_user(_p, _o, _n, _oppre)                              \
+     stac();                                                             \
+     asm volatile (                                                      \
+-        "1: lock; cmpxchg"_isuff" %"_oppre"2,%3\n"                      \
++        "1: lock cmpxchg %"_oppre"[new], %[ptr]\n"                      \
+         "2:\n"                                                          \
+         ".section .fixup,\"ax\"\n"                                      \
+-        "3:     movl $1,%1\n"                                           \
++        "3:     movl $1, %[rc]\n"                                       \
+         "       jmp 2b\n"                                               \
+         ".previous\n"                                                   \
+         _ASM_EXTABLE(1b, 3b)                                            \
+-        : "=a" (_o), "=r" (_rc)                                         \
+-        : _regtype (_n), "m" (*__xg((volatile void *)_p)), "0" (_o), "1" (0) \
++        : "+a" (_o), [rc] "=r" (_rc),                                   \
++          [ptr] "+m" (*(volatile typeof(*(_p)) *)(_p))                  \
++        : [new] "r" (_n), "[rc]" (0)                                    \
+</pre>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">Wouldn't it further help readability a little if _rc was initialized to zero
+right when getting declared, eliminating the last input arg here (the
+output then would need to be "+r" of course)?
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I can do.</pre>
+    </blockquote>
+    <br>
+    I've got the following incremental fix which I intend to fold in.<br>
+    <br>
+    <pre>diff --git a/xen/include/asm-x86/x86_64/system.h b/xen/include/asm-x86/x86_64/system.h
+index 5b6e964..d65562b 100644
+--- a/xen/include/asm-x86/x86_64/system.h
++++ b/xen/include/asm-x86/x86_64/system.h
+@@ -65,7 +65,7 @@ static always_inline __uint128_t cmpxchg16b_local_(
+  * If no fault occurs then _o is updated to the value we saw at _p. If this
+  * is the same as the initial value of _o then _n is written to location _p.
+  */
+-#define __cmpxchg_user(_p, _o, _n, _oppre)                              \
++#define __cmpxchg_user(_p, _o, _n, _rc, _oppre)                         \
+     stac();                                                             \
+     asm volatile (                                                      \
+         "1: lock cmpxchg %"_oppre"[new], %[ptr]\n"                      \
+@@ -75,28 +75,29 @@ static always_inline __uint128_t cmpxchg16b_local_(
+         "       jmp 2b\n"                                               \
+         ".previous\n"                                                   \
+         _ASM_EXTABLE(1b, 3b)                                            \
+-        : "+a" (_o), [rc] "=r" (_rc),                                   \
++        : "+a" (_o), [rc] "+r" (_rc),                                   \
+           [ptr] "+m" (*(volatile typeof(*(_p)) *)(_p))                  \
+-        : [new] "r" (_n), "[rc]" (0)                                    \
++        : [new] "r" (_n)                                                \
+         : "memory");                                                    \
+     clac()
+ 
+ #define cmpxchg_user(_p, _o, _n)                                        \
+ ({                                                                      \
+-    int _rc;                                                            \
++    int _rc = 0;                                                        \
++                                                                        \
+     switch ( sizeof(*(_p)) )                                            \
+     {                                                                   \
+     case 1:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "b");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "b");                           \
+         break;                                                          \
+     case 2:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "w");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "w");                           \
+         break;                                                          \
+     case 4:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "k");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "k");                           \
+         break;                                                          \
+     case 8:                                                             \
+-        __cmpxchg_user(_p, _o, _n, "q");                                \
++        __cmpxchg_user(_p, _o, _n, _rc, "q");                           \
+         break;                                                          \
+     }                                                                   \
+     _rc;                                                                \
+
+</pre>
+  </body>
+</html>
+
+--------------589A19EF7F8EE1724E230889--
 
 
---=-sinamail_alt_45a33a01b42cd703345e3560a0219d6c
-Content-Type: text/html;
-	charset=GBK
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-Jmd0OyZuYnNwO09uIDE4LzAzLzIwMTkgMDY6NTAsIHJhbWJsZWNoQHNpbmEuY29tIHdyb3RlOjxi
-cj4mZ3Q7Jm5ic3A7Jmd0OyBIZWxsbyw8YnI+Jmd0OyZuYnNwO0hlbGxvLDxicj4mZ3Q7ICZndDsm
-bmJzcDtJJ20gcmVzZWFyY2hpbmcgeGVuIGZvciBhdXRvbW90aXZlIHVzZSBjYXNlIGFuZCBJIHNl
-ZSBhIHByZXNlbnRhdGlvbiBjYWxsZWQ6PGJyPiZndDsgJmd0OyZuYnNwOyJEZXNpZ24gYW5kIElt
-cGxlbWVudGF0aW9uIG9mIEF1dG9tb3RpdmUgVmlydHVhbGl6YXRpb24gQmFzZWQgb24gWGVuIC0g
-U3VuZy1NaW48YnI+Jmd0OyAmZ3Q7Jm5ic3A7TGVlLCBTYW1zdW5nIEVsZWN0cm9uaWNzIjxicj4m
-Z3Q7ICZndDsmbmJzcDtvbiBYZW4gRGV2ZWxvcGVyIGFuZCBEZXNpZ24gU3VtbWl0IDIwMTguPGJy
-PiZndDsgJmd0OyZuYnNwOzxicj4mZ3Q7ICZndDsmbmJzcDtJJ20gaW50ZXJlc3RpbmcgaW4gdGhl
-IG1vZGlmaWNhdGlvbiBvZiBmYXVsdCByZWNvdmVyeSBzY2VuYXJpbyBvbiBQOX5QMTEsIGl0PGJy
-PiZndDsgJmd0OyZuYnNwO2ludHJvZHVjZWQgYSBuZXcgaHlwZXJjYWxsIGNhbGxlZCBYRU5fRE9N
-Q1RMX3NhbXN1bmdfcmVzZXQuPGJyPiZndDsmbmJzcDtJZiBJIHJlY2FsbCBjb3JyZWN0bHkgdGhl
-IHRhbGssIFhFTl9ET01DVExfc2Ftc3VuZ19yZXNldCBpcyBkb2luZyBleGFjdGx5IHRoZTxicj4m
-Z3Q7Jm5ic3A7c2FtZSBhcyBYRU5fRE9NQ1RMX3NvZnRfcmVzZXQuIFRoZSBsYXRlciBpcyBub3Qg
-eWV0IGltcGxlbWVudGVkIG9uIEFybSwgSSBjYW48YnI+PGRpdj4mZ3Q7Jm5ic3A7cHJvdmlkZSBn
-dWlkZWxpbmVzIGlmIHlvdSBhcmUgaW50ZXJlc3RlZCB0byBpbXBsZW1lbnQgaXQuPC9kaXY+PGRp
-dj48YnI+PC9kaXY+PGRpdj5UaGFuayB5b3UgZm9yIHlvdXIgcmVwbHkhPC9kaXY+PGRpdj5JdCB3
-aWxsIGJlIHZlcnkgdXNlZnVsIGlmIHRoZXJlIGlzIHNvbWUgZ3VpZGUgZm9yIGltcGxlbWVudCB0
-aGUgc29mdF9yZXNldC48L2Rpdj48ZGl2PkFuZCBhcmUgdGhlcmUgYW55IHBsYW4gZm9yIG9mZmlj
-aWFsIGltcGxlbWVudGF0aW9uIG9mIHRoaXMgZnVuY3Rpb24gb24gQVJNPzwvZGl2PjxkaXY+PGJy
-PjwvZGl2PiZndDsgV2hlcmUgY2FuIEkgZmluZCBzb21lIGNvZGUgb3IgdHV0b3JpYWwgZm9yIHRo
-aXMgbW9kaWZpY2F0aW9uPyBIYXMgdGhlIGNvZGUgYmVlbjxicj4mZ3Q7IHJlbGVhc2VkPzxicj4m
-Z3Q7Jm5ic3A7WW91ciBiZXN0IGJldCB3b3VsZCBiZSB0byBjb250YWN0IHRoZSBzcGVha2VyLjxi
-cj4mZ3Q7Jm5ic3A7QmVzdCByZWdhcmRzLDxicj48ZGl2IGlkPSJvcmlnYm9keSI+Jmd0OyAtLSA8
-L2Rpdj4mZ3Q7Jm5ic3A7SnVsaWVuIEdyYWxs
-
-
---=-sinamail_alt_45a33a01b42cd703345e3560a0219d6c--
-
-
-
---===============0046495644350331499==
+--===============7352400638286957191==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -103,4 +236,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0046495644350331499==--
+--===============7352400638286957191==--
