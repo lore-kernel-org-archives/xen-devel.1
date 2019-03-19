@@ -1,18 +1,21 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH] x86: drop "depends on X86" for TBOOT Kconfig
- option
-Date: Tue, 19 Mar 2019 13:59:25 +0000
-Message-ID: <20190319135925.26005-1-wei.liu2@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH v3] x86: decouple xen alignment setting from
+ EFI/ELF build
+Date: Tue, 19 Mar 2019 08:00:53 -0600
+Message-ID: <5C90F615020000780022051E@prv1-mh.provo.novell.com>
+References: <20190319135706.25212-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=yczf=RW=citrix.com=prvs=9744cf058=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1h6FH7-0004mB-Qu
- for xen-devel@lists.xenproject.org; Tue, 19 Mar 2019 13:59:29 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=a8QS=RW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1h6FIY-0005X0-Qv
+ for xen-devel@lists.xenproject.org; Tue, 19 Mar 2019 14:00:58 +0000
+In-Reply-To: <20190319135706.25212-1-wei.liu2@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,21 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-R2l2ZW4gdGhhdCB0aGlzIGZpbGUgYWxyZWFkeSByZXNpZGVzIHVuZGVyIGFyY2gveDg2LCB0aGVy
-ZSBpcyBubyBuZWVkCnRvIGhhdmUgdGhlIGRlcGVuZGVuY3kuCgpTaWduZWQtb2ZmLWJ5OiBXZWkg
-TGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgotLS0KIHhlbi9hcmNoL3g4Ni9LY29uZmlnIHwgMSAt
-CiAxIGZpbGUgY2hhbmdlZCwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4
-Ni9LY29uZmlnIGIveGVuL2FyY2gveDg2L0tjb25maWcKaW5kZXggNWMyZDEwNzBiNi4uNzYzOTNm
-ZDIzYSAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L0tjb25maWcKKysrIGIveGVuL2FyY2gveDg2
-L0tjb25maWcKQEAgLTEzMCw3ICsxMzAsNiBAQCBjb25maWcgSFZNX0ZFUAogY29uZmlnIFRCT09U
-CiAJZGVmX2Jvb2wgeQogCXByb21wdCAiWGVuIHRib290IHN1cHBvcnQiIGlmIEVYUEVSVCA9ICJ5
-IgotCWRlcGVuZHMgb24gWDg2CiAJc2VsZWN0IENSWVBUTwogCS0tLWhlbHAtLS0KIAkgIEFsbG93
-cyBzdXBwb3J0IGZvciBUcnVzdGVkIEJvb3QgdXNpbmcgdGhlIEludGVsKFIpIFRydXN0ZWQgRXhl
-Y3V0aW9uCi0tIAoyLjIwLjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+Pj4+IE9uIDE5LjAzLjE5IGF0IDE0OjU3LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3JvdGU6Cj4g
+SW50cm9kdWNlIGEgbmV3IEtjb25maWcgb3B0aW9uIHRvIHBpY2sgdGhlIGFsaWdubWVudCBmb3Ig
+eGVuIGJpbmFyeS4KPiBUbyByZXRhaW4gb3JpZ2luYWwgYmVoYXZpb3VyLCB0aGUgZGVmYXVsdCBw
+aWNrIGZvciBFRkkgYnVpbGQgaXMgMk0gYW5kCj4gRUxGIGJ1aWxkIDRLLgo+IAo+IE1ha2UgdGhl
+IFBWSFNISU0gYnVpbGQgdXNlIDJNIGFsaWdubWVudCBmb3IgcG90ZW50aWFsbHkgYmV0dGVyCj4g
+cGVyZm9ybWFuY2UuCj4gCj4gU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4
+LmNvbT4KClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
