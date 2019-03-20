@@ -1,20 +1,23 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 0/3] docs: User oriented documentation
-Date: Wed, 20 Mar 2019 16:47:43 +0000
-Message-ID: <3a8c7455-e8e8-fb1e-1207-371ea86e1e31@citrix.com>
-References: <1553012407-19885-1-git-send-email-andrew.cooper3@citrix.com>
- <20190320112036.GP14641@zion.uk.xensource.com>
- <7bd031df-b291-e9f9-3566-4fb02844eb06@citrix.com>
- <20190320112835.GQ14641@zion.uk.xensource.com>
- <1eeac531-5d94-a55f-1d53-a13faa4f902e@citrix.com>
- <23698.10415.31507.47727@mariner.uk.xensource.com>
- <7863e7f2-bcb4-d46b-1188-9a6941fdb135@citrix.com>
- <23698.28059.770728.572200@mariner.uk.xensource.com>
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [PATCH v4 09/10] tools/arm: tee: add "tee" option
+ for xl.cfg
+Date: Wed, 20 Mar 2019 17:01:11 +0000
+Message-ID: <87lg198oq1.fsf@epam.com>
+References: <20190307210404.12346-1-volodymyr_babchuk@epam.com>
+ <20190307210404.12346-10-volodymyr_babchuk@epam.com>
+ <5bfba14c-f7ce-04e5-19da-87d3e566240d@arm.com> <87tvfx8t2a.fsf@epam.com>
+ <b096f8cc-4a82-807d-bbd7-43d117e0faa1@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3654251376730275443=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <23698.28059.770728.572200@mariner.uk.xensource.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Jssr=RX=epam.com=volodymyr_babchuk@srs-us1.protection.inumbo.net>)
+ id 1h6eaZ-0001wV-19
+ for xen-devel@lists.xenproject.org; Wed, 20 Mar 2019 17:01:15 +0000
+In-Reply-To: <b096f8cc-4a82-807d-bbd7-43d117e0faa1@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,115 +26,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@citrix.com>
-Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Volodymyr Babchuk <vlad.babchuk@gmail.com>, Achin Gupta <achin.gupta@arm.com>, Ian Jackson <ian.jackson@eu.citrix.com>, "tee-dev@lists.linaro.org" <tee-dev@lists.linaro.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============3654251376730275443==
-Content-Type: multipart/alternative;
-	boundary="------------871BEFAD1BC217DC2C581DD8"
-Content-Language: en-GB
-
---------------871BEFAD1BC217DC2C581DD8
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-On 20/03/2019 16:43, Ian Jackson wrote:
-> Andrew Cooper writes ("Re: [PATCH 0/3] docs: User oriented documentation"):
->> It turns out that I mis-interpreted the compatibility note in
->> https://www.kernel.org/doc/html/latest/doc-guide/sphinx.html# and
->> stretch is probably fine.
-> OK, good.
->
-> Well, I think we could say that to build this documentation you have
-> to have the relevant tools.  sphinx is certainly well-regarded and
-> this is probably a worthwhile upgrade.
->
-> What do the earlier tools do ?  Should we print some warning and
-> disable the build, or will they generate slightly-mangled output, or
-> what ?
-
-conf.py has version check in it.
-
-On Jessie with native packages, the result is:
-
-andrewcoop@andrewcoop:/local/xen.git/xen$ make -C ../docs/ sphinx-html
-make: Entering directory '/local/xen.git/docs'
-sphinx-build -b html . sphinx/html
-Running Sphinx v1.2.3
-
-Sphinx version error:
-This project needs at least Sphinx v1.4 and therefore cannot be built with this version.
-Makefile:55: recipe for target 'sphinx-html' failed
-make: *** [sphinx-html] Error 1
-make: Leaving directory '/local/xen.git/docs'
-
-~Andrew
-
---------------871BEFAD1BC217DC2C581DD8
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 20/03/2019 16:43, Ian Jackson wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:23698.28059.770728.572200@mariner.uk.xensource.com">
-      <pre class="moz-quote-pre" wrap="">Andrew Cooper writes ("Re: [PATCH 0/3] docs: User oriented documentation"):
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">It turns out that I mis-interpreted the compatibility note in
-<a class="moz-txt-link-freetext" href="https://www.kernel.org/doc/html/latest/doc-guide/sphinx.html#">https://www.kernel.org/doc/html/latest/doc-guide/sphinx.html#</a> and
-stretch is probably fine.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-OK, good.
-
-Well, I think we could say that to build this documentation you have
-to have the relevant tools.  sphinx is certainly well-regarded and
-this is probably a worthwhile upgrade.
-
-What do the earlier tools do ?  Should we print some warning and
-disable the build, or will they generate slightly-mangled output, or
-what ?</pre>
-    </blockquote>
-    <br>
-    conf.py has version check in it.<br>
-    <br>
-    On Jessie with native packages, the result is:<br>
-    <br>
-    <pre><a class="moz-txt-link-abbreviated" href="mailto:andrewcoop@andrewcoop:/local/xen.git/xen$">andrewcoop@andrewcoop:/local/xen.git/xen$</a> make -C ../docs/ sphinx-html
-make: Entering directory '/local/xen.git/docs'
-sphinx-build -b html . sphinx/html
-Running Sphinx v1.2.3
-
-Sphinx version error:
-This project needs at least Sphinx v1.4 and therefore cannot be built with this version.
-Makefile:55: recipe for target 'sphinx-html' failed
-make: *** [sphinx-html] Error 1
-make: Leaving directory '/local/xen.git/docs'
-
-</pre>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------871BEFAD1BC217DC2C581DD8--
-
-
---===============3654251376730275443==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3654251376730275443==--
+Ckp1bGllbiBHcmFsbCB3cml0ZXM6Cgo+IE9uIDIwLzAzLzIwMTkgMTU6MjcsIFZvbG9keW15ciBC
+YWJjaHVrIHdyb3RlOgo+Pgo+PiBIZWxsbyBKdWxpZW4sCj4+Cj4+IEp1bGllbiBHcmFsbCB3cml0
+ZXM6Cj4+Cj4+PiBPbiAwNy8wMy8yMDE5IDIxOjA0LCBWb2xvZHlteXIgQmFiY2h1ayB3cm90ZToK
+Pj4+PiBGcm9tOiBWb2xvZHlteXIgQmFiY2h1ayA8dmxhZC5iYWJjaHVrQGdtYWlsLmNvbT4KPj4+
+Pgo+Pj4+IFRoaXMgZW51bWVyYXRpb24gY29udHJvbHMgVEVFIHR5cGUgZm9yIGEgZG9tYWluLiBD
+dXJyZW50bHkgdGhlcmUgaXMKPj4+PiB0d28gcG9zc2libGUgb3B0aW9uczogZWl0aGVyICdub25l
+JyBvciAnbmF0aXZlJy4KPj4+Pgo+Pj4+ICdub25lJyBpcyB0aGUgZGVmYXVsdCB2YWx1ZSBhbmQg
+aXQgYmFzaWNhbGx5IGRpc2FibGVzIFRFRSBzdXBwb3J0IGF0Cj4+Pj4gYWxsLgo+Pj4+Cj4+Pj4g
+J25hdGl2ZScgZW5hYmxlcyBhY2Nlc3MgdG8gYSAicmVhbCIgVEVFIGluc3RhbGxlZCBvbiBhIHBs
+YXRmb3JtLgo+Pj4KPj4+IEkgYW0gYXdhcmUgSSBtYWRlIHRoYXQgc3VnZ2VzdGlvbi4gQnV0IEkg
+dGhpbmsgdGhlIG5hbWluZyBpcyBub3QgaWRlYWwKPj4+IGJldHdlZW4gdGhlIHVzZXIgYW5kIHRo
+ZSB0b29sc3RhY2suIFRoZSBxdWVzdGlvbiBpcyBob3cgdGhpcyBpcyBnb2luZwo+Pj4gdG8gZml0
+IHdpdGggdGhlIFMtRUwyIGZlYXR1cmUgd2hlcmUgbXVsdGlwbGUgVEVFIGNhbiBydW4gdG9nZXRo
+ZXI/Cj4+IFlvdSBzZWUsIHN1cHBvcnQgZm9yIFMtRUwyIG9yIHN1cHBvcnQgZm9yIG11bHRpcGxl
+IFRFRXMgaXMgYSBtdWNoIGJyb2FkZXIKPj4gdG9waWMuIEZvciBtZSwgbmFtaW5nIGZvciBjb25m
+aWd1cmF0aW9uIG9wdGlvbiBpcyB0aGUgbGVhc3QgaW1wb3J0YW50Cj4+IHRoaW5nIGluIHRoaXMg
+Y2FzZSA6LSkKPgo+IE5hbWluZyBleHBvc2VkIHRvIHVzZXJzIGFyZSBoYXJkIHRvIHJlbW92ZS4g
+SWYgdGhlIG5hbWluZyBpcyB0b28KPiBhbWJpZ3VvdXMsIHRoZW4gd2Ugd2lsbCBoYXZlIHRvIGlu
+dHJvZHVjZSBhIG5ldyBvcHRpb24gbGF0ZXIgb24uIFRoaXMKPiBpcyBub3QgdmVyeSBpZGVhbCwg
+c28gaXQgd291bGQgYmUgYmV0dGVyIGlmIHdlIGNhbiBmaW5kIHNvbWV0aGluZwo+IGRpZmZlcmVu
+dC4KPgo+Pgo+PiBSaWdodCB0aGVyZSBpcyBubyBjbGVhciB2aXNpb24gaG93IGl0IHdpbGwgZXZl
+ciB3b3JrLiBJIHNjYW5uZWQgdGhyb3VnaAo+PiBTUENJIHNwZWMgYW5kIEkgYWxyZWFkeSBoYXZl
+IGEgY291cGxlIG9mIHF1ZXN0aW9ucy4gSSBuZWVkIHRvIHN0dWR5IGl0Cj4+IGhhcmRlciB0byBt
+YWtlIHNlcmlvdXMgc3RhdGVtZW50cywgYnV0IEkgYWxyZWFkeSBzZWUgdGhhdCBjdXJyZW50Cj4+
+IG1lZGlhdG9yIGZyYW1ld29yayB3aWxsIGhhcmRseSBmaXQgaW50byBTUENJIHN0dWZmLiBGcmFu
+a2x5LCBJIGhhdmUKPj4gY29uY2VybnMgdGhhdCBPUC1URUUgKG9yIGFueSBvdGhlciBleGlzdGlu
+ZyBURUUpIHdpbGwgYmUgY29tcGF0aWJsZQo+PiB3aXRoIFNQQ0ktZW5hYmxlZCBzeXN0ZW1zIHdp
+dGhvdXQgbWFqb3IgcmV3b3JrLiBTbywgd2Ugd2lsbCBuZWVkIHRvIGRvCj4+IGJpZyBvdmVyaGF1
+bCBhbnl3YXlzLCB3aGVuIHRoZXJlIHdpbGwgYXBwZWFyIGZpcnN0IFNQQ0ktY29tcGF0aWJsZSBU
+RUVzIGFuZAo+PiBzZWN1cmUgaHlwZXJ2aXNvcnMuCj4+Cj4+IEFGQUlLLCB0aGVyZSBpcyBubyBB
+Uk12OC40IHBsYXRmb3Jtcywgbm8gUy1FTDIgaHlwZXJ2aXNvcnMgYW5kIHNvIG9uLiBJdAo+PiB3
+aWxsIHRha2UgYXQgbGVhc3QgY291cGxlIG9mIHllYXJzIGJlZm9yZSBTLUVMMiB3aWxsIGhpdCB0
+aGUgbWFya2V0LiBTbwo+PiBpbiBteSBvcGluaW9uIGl0IGlzIHRvbyBlYXJseSB0byBtYWtlIGFu
+eSBhc3N1bXB0aW9ucyBvbiBob3cgdG8gc3VwcG9ydAo+PiBhbGwgdGhpcyBpbiBYZW4uIExldHMg
+c3RpY2sgdG8gdGhlIGN1cnJlbnQgbWF0dGVycy4KPgo+IEkgYW0gZnVsbHkgYXdhcmUgdGhhdCBt
+b3JlIHdvcmsgd2lsbCBuZWVkIHRvIGJlIGRvbmUgd2l0aCBTLUVMMi4gSSBhbQo+IG5vdCBleHBl
+Y3RpbmcgeW91IChvciBhbnlvbmUgZWxzZSBoZXJlKSB0byBjb21lIHdpdGggdGhlCj4gaW1wbGVt
+ZW50YXRpb24gbm93LiBNeSBwb2ludCBpcyB0aGUgbmFtaW5nIHNob3VsZCBiZSBjaG9zZW4gc28g
+aXQKPiBwcmV2ZW50cyBhbWJpZ3VpdHkgd2l0aCB3aGF0ZXZlciB3ZSBrbm93IHdpbGwgY29tZSB1
+cCBpbiB0aGUgZnV0dXJlLgo+Cj4+Cj4+IEknbSBub3QgaW5zaXN0aW5nIG9uICJuYXRpdmUiLiBC
+dXQgSSBjYW4ndCBpbnZlbnQgc29tZXRoaW5nIGJldHRlciByaWdodAo+PiBub3cuIFByb2JhYmx5
+LCBTUENJLWVuYWJsZWQgVEVFIGFsc28gd2lsbCBiZSBjb25zaWRlcmVkICJuYXRpdmUiIGFzCj4+
+IG9wcG9zZWQgdG8sIHNheSwgImVtdWxhdGVkIi4gPgo+PiBBcyBJIHNhaWQsIEkgY2FuJ3QgY29t
+ZSB3aXRoIGFueXRoaW5nIGJldHRlciB0aGFuICJuYXRpdmUiLiBCdXQgSSdtIG9wZW4KPj4gdG8g
+YW55IHN1Z2dlc3Rpb25zLgo+Cj4gV2VsbCBvbmUgc29sdXRpb24gaXMgdG8gZGl0Y2ggIm5hdGl2
+ZSIgYW5kIG5hbWUgaXQgIm9wdGVlIi4gQnkgZ2l2aW5nCj4gdGhlIG5hbWUgeW91IGF2b2lkIGFt
+YmlndWl0eS4gSWYgd2UgZXZlciBoYXZlIG11bHRpcGxlIG9wLXRlZSBpbnN0YW5jZQo+IHJ1bm5p
+bmcsIHRoZW4gaXQgY291bGQgZWFzaWx5IGJlIGV4dGVuZCB3aXRoIGEgY29tbWEuIFNvIHlvdSBh
+bGxvdwo+IGJhY2t3YXJkIGNvbXBhdGliaWxpdHkuCgpJIGNvbnNpZGVyZWQgdGhpcy4gQnV0IElm
+IEkgcmVtZW1iZXIgcmlnaHQsIGlkZWEgd2FzIHRvIHF1ZXJ5IFhlbiBhYm91dAphdmFpbGFibGUg
+VEVFLCBhbmQgY29uZmlndXJlIGd1ZXN0IGluIHRoZSBhcHByb3ByaWF0ZSB3YXkuIFNvICJuYXRp
+dmUiCihvciBzb21lIG90aGVyIGdlbmVyaWMgd2F5KSBjb3VsZCBiZSB1c2VkIGZvciBPUC1URUUs
+IEdvb2dsZSBUcnVzdHkgb3IKYW55IG90aGVyIFRFRSwgd2l0aG91dCBjaGFuZ2luZyBndWVzdCBj
+b25maWd1cmF0aW9uLgoKVXNpbmcgIm9wdGVlIiB3aWxsIGNhdXNlIGV4cGxpY2l0IGNvbmZpZ3Vy
+YXRpb24gZm9yIE9QLVRFRSBvbmx5LiBJIGNhbid0CnNheSB0aGF0IHRoaXMgaXMgZ29vZCBvciBi
+YWQuIEl0IGp1c3QgZGlmZmVyZW50LiBEbyB5b3UgdGhpbmsgdGhhdCB3b3VsZApiZSBiZXR0ZXIg
+YXBwcm9hY2g/Cgo+Cj4+PiBBRkFJQ1QsIFRFRSBhbHNvIGV4aXN0cyBvbiBvdGhlciBhcmNoaXRl
+Y3R1cmUuIFNvIEkgYW0gd29uZGVyaW5nCj4+PiB3aGV0aGVyIHRoaXMgZmllbGQgc2hvdWxkIGJl
+IG1vdmVkIG91dCBvZiBhcmNoX2FybT8KPj4gSW4gdjMgdGhyZWFkIHlvdSBhc2tlZCBpZiBJIHNl
+ZSBhbnkgdXNlIGZvciB4ODYuIEJlY2F1c2UgaW4gdGhhdCB2ZXJzaW9uCj4+IHRoaXMgb3B0aW9u
+IHdhcyBpbiBjb21tb24gc2VjdGlvbi4gSG9uZXN0bHksIEkgZG9uJ3Qgc2VlIGFueSB1c2UgdGhl
+cmUsCj4+IGJlY2F1c2UgSSBoYXZlIG5vIGlkZWEgaG93IHRoaXMgY2FuIGJlIGltcGxlbWVudGVk
+IG9uIHg4Ni4KPgo+IE9uIHRoZSB2MywgSSBwb2ludGVkIG91dCB0aGF0IHRoZSBkb2N1bWVudGF0
+aW9uIHdhcyBpbiBBcm0gc2VjdGlvbiBidXQKPiB0aGUgY29kZSB3YXMgaW4gY29tbW9uLiBXaGVu
+IEkgYXNrZWQgYSBxdWVzdGlvbiwgaXQgZG9lcyBub3QgbWVhbiBJIGFtCj4gbm90IGhhcHB5IHdp
+dGggaXQuIEl0IG9ubHkgbWVhbnMgSSBhbSB0cnlpbmcgdG8gdW5kZXJzdGFuZCB5b3VyIGNob2lj
+ZQo+IHNvIEkgY2FuIG1ha2UgbXkgbWluZCBvbiBpdC4gU2FkbHksIHlvdSBsZWZ0IGl0IHVuYW5z
+d2VyZWQgdW50aWwgbm93LgoKT2gsIEkgc2VlLiBNeSBpbnRlbnRpb24gd2FzIHRvIHB1dCB0aGlz
+IGludG8gQVJNIHNlY3Rpb24uIFNvLCBJCmRvY3VtZW50ZWQgaXQgaW4gdGhlIHJpZ2h0IHdheSwg
+YnV0IGRpZCBtaXN0YWtlLCBwdXR0aW5nIGl0IGludG8gd3JvbmcKcGxhY2UgaW4gdGhlIHhsL2xp
+YnhsIGNvZGUuIEl0IHdhcyBteSBmaXJzdCBwYXRjaCB0byB0b29sc3RhY2ssIHNvIEkKanVzdCBk
+aWRuJ3Qga25ldyB0aGUgcmlnaHQgcGxhY2UuCgo+IEluIHRoaXMgY29udGV4dCwgSSBhbSBub3Qg
+YXNraW5nIHlvdSBob3cgdGhpcyBpcyBnb2luZyB0byBiZQo+IGltcGxlbWVudGVkIGJ1dCB3aGV0
+aGVyIHRoaXMgb3B0aW9uIGNvdWxkIHBvdGVudGlhbGx5IGJlIHVzZWQgaW4gdGhlCj4gZnV0dXJl
+IGZvciBvdGhlciBhcmNoaXRlY3R1cmUgKGUuZyB4ODYsIFJJU0MtVi4uLikuIEZvciBpbnN0YW5j
+ZSwgdGhlCj4gb3B0aW9uICJkZXZpY2VfdHJlZSIgaXMgcGFydCBmb3IgY29tbW9uIG9wdGlvbnMg
+ZGVzcGl0ZSBpdCBpcyBvbmx5Cj4gaW1wbGVtZW50ZWQgb24gQXJtLgoKSSBiZWxpZXZlIHRvIHlv
+dXIgZXhwZXJpZW5jZSB0aGVyZS4gSWYgeW91IHRoaW5rIGl0IGlzIGJldHRlciB0byBtb3ZlCnRo
+aXMgaW50byBjb21tb24gY29kZSAtIEknbGwgZG8gdGhpcy4KCi0tCkJlc3QgcmVnYXJkcyxWb2xv
+ZHlteXIgQmFiY2h1awpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
