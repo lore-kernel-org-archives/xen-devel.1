@@ -1,17 +1,22 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-4.8-testing test] 133940: regressions - FAIL
-Date: Thu, 21 Mar 2019 20:56:46 +0000
-Message-ID: <osstest-133940-mainreport@xen.org>
+From: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>
+Subject: Re: [Qemu-devel] Maintainers,
+ please tell us how to boot your machines!
+Date: Thu, 21 Mar 2019 22:13:34 +0100
+Message-ID: <CAAdtpL535VGZ5RzHFCH2HpRFhRz67kp8PvjdcAGyQo3yJpWdrw__16057.6538577274$1553202913$gmane$org@mail.gmail.com>
+References: <87d0mwatbu.fsf@dusky.pond.sub.org>
+ <875zsed86y.fsf@dusky.pond.sub.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6224066290063266234=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=o0Xj=RY=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1h74kA-0002wa-38
- for xen-devel@lists.xenproject.org; Thu, 21 Mar 2019 20:56:54 +0000
+ <SRS0=hIAa=RY=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
+ id 1h750X-0004W2-Rk
+ for xen-devel@lists.xenproject.org; Thu, 21 Mar 2019 21:13:49 +0000
+Received: by mail-yw1-f50.google.com with SMTP id q128so232205ywg.8
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Mar 2019 14:13:46 -0700 (PDT)
+In-Reply-To: <875zsed86y.fsf@dusky.pond.sub.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,255 +25,629 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Markus Armbruster <armbru@redhat.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, Anthony Green <green@moxielogic.com>, "qemu-devel@nongnu.org Developers" <qemu-devel@nongnu.org>, sandra@codesourcery.com, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, Guan Xuetao <gxt@mprc.pku.edu.cn>, Marek Vasut <marex@denx.de>, Stefano Stabellini <sstabellini@kernel.org>, Aleksandar Rikalo <arikalo@wavecomp.com>, Alexander Graf <agraf@suse.de>, =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>, Anthony Perard <anthony.perard@citrix.com>, "open list:X86" <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>, Jan Kiszka <jan.kiszka@web.de>, Igor Mitsyanko <i.mitsyanko@gmail.com>, Bastian Koppelmann <kbastian@mail.uni-paderborn.de>, Chris Wulff <crwulff@gmail.com>, Jean-Christophe Dubois <jcd@tribudubois.net>, Andrey Smirnov <andrew.smirnov@gmail.com>, qemu-arm <qemu-arm@nongnu.org>, qemu-ppc@nong
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzMzk0MCB4ZW4tNC44LXRlc3RpbmcgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVz
-dC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzMzk0MC8KClJlZ3Jlc3Npb25zIDot
-KAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGlu
-ZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
-LXBhaXIgMjIgZ3Vlc3QtbWlncmF0ZS9zcmNfaG9zdC9kc3RfaG9zdCBmYWlsIFJFR1IuIHZzLiAx
-MzA5NjUKClRlc3RzIHdoaWNoIGFyZSBmYWlsaW5nIGludGVybWl0dGVudGx5IChub3QgYmxvY2tp
-bmcpOgogdGVzdC14dGYtYW1kNjQtYW1kNjQtMiA1MCB4dGYvdGVzdC1odm02NC1sYnItdHN4LXZt
-ZW50cnkgZmFpbCBpbiAxMzM5MTMgcGFzcyBpbiAxMzM5NDAKIHRlc3QteHRmLWFtZDY0LWFtZDY0
-LTIgNjkgeHRmL3Rlc3QtaHZtNjQteHNhLTI3OCBmYWlsIGluIDEzMzkxMyBwYXNzIGluIDEzMzk0
-MAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQtcGFpciAyMiBndWVzdC1taWdyYXRlL3NyY19ob3N0
-L2RzdF9ob3N0IGZhaWwgcGFzcyBpbiAxMzM2NjIKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTQgICA1
-MCB4dGYvdGVzdC1odm02NC1sYnItdHN4LXZtZW50cnkgZmFpbCBwYXNzIGluIDEzMzkxMwogdGVz
-dC14dGYtYW1kNjQtYW1kNjQtNSAgICAgICA2OSB4dGYvdGVzdC1odm02NC14c2EtMjc4ICAgICBm
-YWlsIHBhc3MgaW4gMTMzOTEzCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBhcmUg
-bm90IGJsb2NraW5nOgogdGVzdC14dGYtYW1kNjQtYW1kNjQtMyA1MCB4dGYvdGVzdC1odm02NC1s
-YnItdHN4LXZtZW50cnkgZmFpbCBpbiAxMzM5MTMgbGlrZSAxMzA5NjUKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtcnRkcyAxNiBndWVzdC1zdGFydC9kZWJpYW4ucmVwZWF0IGZhaWwgaW4gMTMzOTEzIGxp
-a2UgMTMwOTY1CiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC01ICAgICAgNTAgeHRmL3Rlc3QtaHZtNjQt
-bGJyLXRzeC12bWVudHJ5IGZhaWwgbGlrZSAxMzA5NjUKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXQtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBsaWtlIDEzMDk2NQog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjctYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAg
-ICAgICBmYWlsIGxpa2UgMTMwOTY1CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2
-NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxMzA5NjUKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgZmFpbCBs
-aWtlIDEzMDk2NQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qt
-c3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTMwOTY1CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0
-ZHMgICAgIDEwIGRlYmlhbi1pbnN0YWxsICAgICAgICAgICAgICAgZmFpbCAgbGlrZSAxMzA5NjUK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAg
-ICAgICAgZmFpbCBsaWtlIDEzMDk2NQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFt
-ZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTMwOTY1CiB0ZXN0LWFtZDY0
-LWkzODYteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwg
-bGlrZSAxMzA5NjUKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBw
-b3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LWxpYnZp
-cnQgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
-ICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMg
-bWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02
-NC1hcm02NC14bC1jcmVkaXQxICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgIDE0IHNhdmVyZXN0b3Jl
-LXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwt
-Y3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFz
-cwogdGVzdC1hcm02NC1hcm02NC14bC1jcmVkaXQyICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNo
-ZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDEz
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJt
-NjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWls
-ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAxMyBtaWdyYXRlLXN1
-cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LWxp
-YnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBh
-c3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDEx
-IG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1s
-aWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0ZWQtYW1kIDE3IGRl
-Ymlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXZo
-ZCAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTQgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
-Zi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1j
-aGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2
-Y3B1IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDEgIDEzIG1pZ3Jh
-dGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
-aGYteGwtY3JlZGl0MSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2
-ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDEzIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWN1Ymll
-dHJ1Y2sgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQyICAxNCBzYXZl
-cmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLWxpYnZpcnQtcmF3IDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAg
-ICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTMgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1h
-cm1oZi14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBu
-ZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEyIG1pZ3JhdGUtc3VwcG9y
-dC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhk
-ICAgICAgMTMgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwog
-dGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAg
-ICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjEwLWkz
-ODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS13aW4xMC1pMzg2IDEwIHdpbmRvd3MtaW5zdGFsbCAgICAgICAgIGZhaWwg
-bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2IDEwIHdpbmRv
-d3MtaW5zdGFsbCAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0
-ZXN0aW5nOgogeGVuICAgICAgICAgICAgICAgICAgYTFmOGZlMDYyODk5ZGNhMzRmZTIzNTNlYTI3
-YzYzNDhjNWQ3Y2Q3ZApiYXNlbGluZSB2ZXJzaW9uOgogeGVuICAgICAgICAgICAgICAgICAgOTA4
-ZTc2OGZhZTQ5YThkYjAwODllNjgxODg2NTIwNzllM2JmYWE2NgoKTGFzdCB0ZXN0IG9mIGJhc2lz
-ICAgMTMwOTY1ICAyMDE4LTEyLTAzIDA5OjA2OjE5IFogIDEwOCBkYXlzClRlc3Rpbmcgc2FtZSBz
-aW5jZSAgIDEzMzU5OCAgMjAxOS0wMy0wNSAxNTowNjoyMyBaICAgMTYgZGF5cyAgIDExIGF0dGVt
-cHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFuZHJl
-dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAgR2VvcmdlIER1bmxhcCA8Z2Vv
-cmdlLmR1bmxhcEBjaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
-ICBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CiAgTWFudWVsIEJvdXllciA8Ym91eWVy
-QGFudGlvY2hlLmV1Lm9yZz4KICBTZXJnZXkgRHlhc2xpIDxzZXJnZXkuZHlhc2xpQGNpdHJpeC5j
-b20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYteHNtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVp
-bGQtYW1kNjQteHRmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWls
-ZC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZi1saWJ2aXJ0
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxk
-LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYW1kNjQtcHJldiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXByZXYgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0LXB2b3BzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQt
-YXJtNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiBidWlsZC1hcm1oZi1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcnVtcHJ1biAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1p
-Mzg2LXJ1bXBydW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTEgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0z
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QteHRm
-LWFtZDY0LWFtZDY0LTQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtNSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1o
-Zi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWFt
-ZDY0LXhzbSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1k
-NjQteHNtICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14
-c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXFlbXV1LW5lc3RlZC1hbWQgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRl
-Ymlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1k
-NjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYt
-eGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdzMTYt
-YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVkaXQyICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhs
-LWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1w
-cnVuLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dC13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZh
-aWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4
-NiAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
-bXV1LXdpbjEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFz
-cyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1pbnRlbCAgICAgICAgICAgICAg
-ICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWludGVs
-ICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZp
-cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJt
-aGYtYXJtaGYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpdmVwYXRjaCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saXZlcGF0
-Y2ggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC1taWdydXBncmFkZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFtZDY0LWkzODYtbWlncnVwZ3JhZGUgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0
-aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0
-LWFtZDY0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1w
-YWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQt
-YW1kNjQtYW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWNvdzIg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1h
-cm1oZi1saWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFt
-ZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1zaGFkb3cgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtc2hhZG93ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQtbGlidmlydC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54
-ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2lt
-YWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6
-Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24g
-b2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0
-dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURN
-RS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9z
-c3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNh
-biBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0
-LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxk
-IGJlIDQ3NiBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+--===============6224066290063266234==
+Content-Type: multipart/alternative; boundary="000000000000bb1bcb0584a136ae"
+
+--000000000000bb1bcb0584a136ae
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Le mar. 19 mars 2019 19:40, Markus Armbruster <armbru@redhat.com> a =C3=A9c=
+rit :
+
+> Markus Armbruster <armbru@redhat.com> writes:
+>
+> > Dear board code maintainers,
+> >
+> > This is a (rather late) follow-up to the last QEMU summit.  Minutes[*]:
+> >
+> >  * Deprecating unmaintained features (devices, targets, backends) in QE=
+MU
+> >
+> >    QEMU has a mechanism to deprecate features but there remains a lot o=
+f
+> >    old unmaintained code.  Refactoring is hindered by untested legacy
+> >    code, so there is a desire to deprecate unmaintained features more
+> >    often.
+> >
+> >    [...]
+> >
+> >    We should require at least a minimal test for each board; if nobody
+> >    cares enough to come up with one, that board should be deprecated.
+> >
+> >    [...]
+> >
+> >    Also see the qemu-devel discussion about deprecating code:
+> >
+> https://lists.nongnu.org/archive/html/qemu-devel/2018-10/msg05828.html.
+> >
+> > That's a link to "Minutes of KVM Forum BoF on deprecating stuff".
+> > Quote:
+> >
+> >  * One obvious class of candidates for removal is machines we don't kno=
+w
+> >    how to boot, or can't boot, say because we lack required firmware
+> >    and/or OS.
+> >
+> >    Of course, "can boot" should be an automated test.  As a first step
+> >    towards that, we should at least document how to boot each machine.
+> >    We're going to ask machine maintainers to do that.
+> >
+> > Let's get going on this.
+> >
+> > I gathered the machine types, mapped them to source files, which I fed
+> > to get_maintainer.pl.  Results are appended.  If you're cc'ed,
+> > MAINTAINERS fingers you for at least one machine type's source file.
+> > Please tell us for all of them how to to a "meaningful" boot test.
+> >
+> > For now, what's "meaningful" is entirely up to you.  Booting Linux
+> > certainly is.
+> >
+> > Make sure to include a complete QEMU command line.  If your QEMU comman=
+d
+> > line requires resources beyond the QEMU source tree and what we build
+> > from it, please detail them, and provide download URLs as far as
+> > possible.
+> >
+> > Goals for this exercise:
+> >
+> > * Gather information we need to cover more machines in our automated
+> >   testing.
+> >
+> >   Related work:
+> >   [PATCH v4 00/19] Acceptance Tests: target architecture support
+> >   Message-Id: <20190312121150.8638-1-crosa@redhat.com>
+> >   https://lists.gnu.org/archive/html/qemu-devel/2019-03/msg03881.html
+> >
+> > * Maybe identify a few machines we don't know how to boot anymore.
+> >
+> > Thanks in advance for your help!
+>
+> Quite a few maintainers replied, and a few others, too.  Thank you!
+>
+> I still have to fully digest the replies, in particular whether there's
+> enough detail for me to actually boot a guest.
+>
+> I'm still lacking information on 26 machines.  If you're cc'ed, you're
+> considered a possible source of information.  Please help.
+>
+> If you're a supporter or maintainer, but can't help, please consider
+> adjusting MAINTAINERS to S: Odd Fixes for the machine.
+>
+> Machines with at least one supporter:
+>
+>     =3D hw/xenpv/xen_machine_pv.c =3D
+>     Stefano Stabellini <sstabellini@kernel.org> (supporter:X86)
+>     Anthony Perard <anthony.perard@citrix.com> (supporter:X86)
+>     Paul Durrant <paul.durrant@citrix.com> (supporter:X86)
+>     xen-devel@lists.xenproject.org (open list:X86)
+>
+> Machines with no supporter, but at least one maintainer:
+>
+>     =3D hw/arm/integratorcp.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (maintainer:Integrator CP)
+>     qemu-arm@nongnu.org (open list:Integrator CP)
+>
+>     =3D hw/arm/omap_sx1.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (maintainer:OMAP)
+>     qemu-arm@nongnu.org (open list:ARM)
+>
+>     =3D hw/mips/mips_jazz.c =3D
+>     "Herv=C3=A9 Poussineau" <hpoussin@reactos.org> (maintainer:Jazz)
+>     Aleksandar Rikalo <arikalo@wavecomp.com> (reviewer:Jazz)
+>     Aurelien Jarno <aurelien@aurel32.net> (maintainer:MIPS)
+>     Aleksandar Markovic <amarkovic@wavecomp.com> (maintainer:MIPS)
+>
+>     =3D hw/mips/mips_r4k.c =3D
+>     Aurelien Jarno <aurelien@aurel32.net> (maintainer:R4000)
+>     Aleksandar Rikalo <arikalo@wavecomp.com> (reviewer:R4000)
+>     Aleksandar Markovic <amarkovic@wavecomp.com> (maintainer:MIPS)
+>
+>     =3D hw/moxie/moxiesim.c =3D
+>     Anthony Green <green@moxielogic.com> (maintainer:Moxie)
+>
+>     =3D hw/nios2/10m50_devboard.c =3D
+>     Chris Wulff <crwulff@gmail.com> (maintainer:NiosII)
+>     Marek Vasut <marex@denx.de> (maintainer:NiosII)
+>
+>     =3D hw/ppc/virtex_ml507.c =3D
+>     "Edgar E. Iglesias" <edgar.iglesias@gmail.com> (odd
+> fixer:virtex_ml507)
+>     David Gibson <david@gibson.dropbear.id.au> (maintainer:PowerPC)
+>     qemu-ppc@nongnu.org (open list:virtex_ml507)
+>
+>     =3D hw/tricore/tricore_testboard.c =3D
+>     Bastian Koppelmann <kbastian@mail.uni-paderborn.de>
+> (maintainer:TriCore)
+>
+>     =3D hw/unicore32/puv3.c =3D
+>     Guan Xuetao <gxt@mprc.pku.edu.cn> (maintainer:UniCore32)
+>
+> Machines with no maintainer and no supporter:
+>
+>     =3D hw/arm/collie.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:Sharp SL-5500
+> (Co...)
+>     qemu-arm@nongnu.org (open list:Sharp SL-5500 (Co...)
+>
+>     =3D hw/arm/exynos4_boards.c =3D
+>     Igor Mitsyanko <i.mitsyanko@gmail.com> (odd fixer:Exynos)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:Exynos)
+>     qemu-arm@nongnu.org (open list:Exynos)
+>
+>     =3D hw/arm/imx25_pdk.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:i.MX25 PDK)
+>     Jean-Christophe Dubois <jcd@tribudubois.net> (reviewer:i.MX25 PDK)
+>     qemu-arm@nongnu.org (open list:i.MX25 PDK)
+>
+>     =3D hw/arm/mainstone.c =3D
+>     Andrzej Zaborowski <balrogg@gmail.com> (odd fixer:PXA2XX)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:PXA2XX)
+>     qemu-arm@nongnu.org (open list:PXA2XX)
+>
+>     =3D hw/arm/mcimx6ul-evk.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:MCIMX6UL EVK /
+> i....)
+>     Jean-Christophe Dubois <jcd@tribudubois.net> (reviewer:MCIMX6UL EVK /
+> i....)
+>     qemu-arm@nongnu.org (open list:MCIMX6UL EVK / i....)
+>
+>     =3D hw/arm/mcimx7d-sabre.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:MCIMX7D SABRE /
+> i...)
+>     Andrey Smirnov <andrew.smirnov@gmail.com> (reviewer:MCIMX7D SABRE /
+> i...)
+>     qemu-arm@nongnu.org (open list:MCIMX7D SABRE / i...)
+>
+>     =3D hw/arm/musicpal.c =3D
+>     Jan Kiszka <jan.kiszka@web.de> (odd fixer:Musicpal)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:Musicpal)
+>     qemu-arm@nongnu.org (open list:Musicpal)
+>
+>     =3D hw/arm/palm.c =3D
+>     Andrzej Zaborowski <balrogg@gmail.com> (odd fixer:Palm)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:Palm)
+>     qemu-arm@nongnu.org (open list:Palm)
+>
+>     =3D hw/arm/sabrelite.c =3D
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:SABRELITE / i.MX6=
+)
+>     Jean-Christophe Dubois <jcd@tribudubois.net> (reviewer:SABRELITE /
+> i.MX6)
+>     qemu-arm@nongnu.org (open list:SABRELITE / i.MX6)
+>
+>     =3D hw/arm/spitz.c =3D
+>     Andrzej Zaborowski <balrogg@gmail.com> (odd fixer:PXA2XX)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:PXA2XX)
+>     qemu-arm@nongnu.org (open list:PXA2XX)
+>
+>     =3D hw/arm/tosa.c =3D
+>     Andrzej Zaborowski <balrogg@gmail.com> (odd fixer:PXA2XX)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:PXA2XX)
+>     qemu-arm@nongnu.org (open list:PXA2XX)
+>
+>     =3D hw/arm/z2.c =3D
+>     Andrzej Zaborowski <balrogg@gmail.com> (odd fixer:PXA2XX)
+>     Peter Maydell <peter.maydell@linaro.org> (odd fixer:PXA2XX)
+>     qemu-arm@nongnu.org (open list:PXA2XX)
+>
+>     =3D hw/ppc/mpc8544ds.c =3D
+>     David Gibson <david@gibson.dropbear.id.au> (odd fixer:mpc8544ds)
+>     qemu-ppc@nongnu.org (open list:mpc8544ds)
+>     Alexander Graf <agraf@suse.de> (ratted out by David)
+>
+>     =3D hw/ppc/ppc405_boards.c =3D
+>     David Gibson <david@gibson.dropbear.id.au> (odd fixer:ppc4xx)
+>     qemu-ppc@nongnu.org (open list:ppc4xx) (ratted out by David)
+>
+> Machines in danger of being orphaned & deprecated:
+>
+>     =3D hw/lm32/lm32_boards.c =3D
+>     Michael Walle <michael@walle.cc> (maintainer:LM32)
+>
+>     =3D hw/lm32/milkymist.c =3D
+>     Michael Walle <michael@walle.cc> (maintainer:milkymist)
+>
+> Targets where we have received information for *no* machine so far:
+>
+>     lm32
+>     moxie
+>     nios2
+>
+
+Sandra Loosemore seems to use this board.
+
+    tricore
+>     unicore
+>
+>
+
+--000000000000bb1bcb0584a136ae
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div><br><br><div class=3D"gmail_quote"><div dir=3D"ltr">=
+Le mar. 19 mars 2019 19:40, Markus Armbruster &lt;<a href=3D"mailto:armbru@=
+redhat.com">armbru@redhat.com</a>&gt; a =C3=A9crit=C2=A0:<br></div><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex">Markus Armbruster &lt;<a href=3D"mailto:armbru@redha=
+t.com" target=3D"_blank" rel=3D"noreferrer">armbru@redhat.com</a>&gt; write=
+s:<br>
+<br>
+&gt; Dear board code maintainers,<br>
+&gt;<br>
+&gt; This is a (rather late) follow-up to the last QEMU summit.=C2=A0 Minut=
+es[*]:<br>
+&gt;<br>
+&gt;=C2=A0 * Deprecating unmaintained features (devices, targets, backends)=
+ in QEMU<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 QEMU has a mechanism to deprecate features but there rema=
+ins a lot of<br>
+&gt;=C2=A0 =C2=A0 old unmaintained code.=C2=A0 Refactoring is hindered by u=
+ntested legacy<br>
+&gt;=C2=A0 =C2=A0 code, so there is a desire to deprecate unmaintained feat=
+ures more<br>
+&gt;=C2=A0 =C2=A0 often.<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 [...]<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 We should require at least a minimal test for each board;=
+ if nobody<br>
+&gt;=C2=A0 =C2=A0 cares enough to come up with one, that board should be de=
+precated.<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 [...]<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 Also see the qemu-devel discussion about deprecating code=
+:<br>
+&gt;=C2=A0 =C2=A0 <a href=3D"https://lists.nongnu.org/archive/html/qemu-dev=
+el/2018-10/msg05828.html" rel=3D"noreferrer noreferrer" target=3D"_blank">h=
+ttps://lists.nongnu.org/archive/html/qemu-devel/2018-10/msg05828.html</a>.<=
+br>
+&gt;<br>
+&gt; That&#39;s a link to &quot;Minutes of KVM Forum BoF on deprecating stu=
+ff&quot;.<br>
+&gt; Quote:<br>
+&gt;<br>
+&gt;=C2=A0 * One obvious class of candidates for removal is machines we don=
+&#39;t know<br>
+&gt;=C2=A0 =C2=A0 how to boot, or can&#39;t boot, say because we lack requi=
+red firmware<br>
+&gt;=C2=A0 =C2=A0 and/or OS.<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0 Of course, &quot;can boot&quot; should be an automated te=
+st.=C2=A0 As a first step<br>
+&gt;=C2=A0 =C2=A0 towards that, we should at least document how to boot eac=
+h machine.<br>
+&gt;=C2=A0 =C2=A0 We&#39;re going to ask machine maintainers to do that.<br=
+>
+&gt;<br>
+&gt; Let&#39;s get going on this.<br>
+&gt;<br>
+&gt; I gathered the machine types, mapped them to source files, which I fed=
+<br>
+&gt; to <a href=3D"http://get_maintainer.pl" rel=3D"noreferrer noreferrer" =
+target=3D"_blank">get_maintainer.pl</a>.=C2=A0 Results are appended.=C2=A0 =
+If you&#39;re cc&#39;ed,<br>
+&gt; MAINTAINERS fingers you for at least one machine type&#39;s source fil=
+e.<br>
+&gt; Please tell us for all of them how to to a &quot;meaningful&quot; boot=
+ test.<br>
+&gt;<br>
+&gt; For now, what&#39;s &quot;meaningful&quot; is entirely up to you.=C2=
+=A0 Booting Linux<br>
+&gt; certainly is.<br>
+&gt;<br>
+&gt; Make sure to include a complete QEMU command line.=C2=A0 If your QEMU =
+command<br>
+&gt; line requires resources beyond the QEMU source tree and what we build<=
+br>
+&gt; from it, please detail them, and provide download URLs as far as<br>
+&gt; possible.<br>
+&gt;<br>
+&gt; Goals for this exercise:<br>
+&gt;<br>
+&gt; * Gather information we need to cover more machines in our automated<b=
+r>
+&gt;=C2=A0 =C2=A0testing.<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0Related work:<br>
+&gt;=C2=A0 =C2=A0[PATCH v4 00/19] Acceptance Tests: target architecture sup=
+port<br>
+&gt;=C2=A0 =C2=A0Message-Id: &lt;<a href=3D"mailto:20190312121150.8638-1-cr=
+osa@redhat.com" target=3D"_blank" rel=3D"noreferrer">20190312121150.8638-1-=
+crosa@redhat.com</a>&gt;<br>
+&gt;=C2=A0 =C2=A0<a href=3D"https://lists.gnu.org/archive/html/qemu-devel/2=
+019-03/msg03881.html" rel=3D"noreferrer noreferrer" target=3D"_blank">https=
+://lists.gnu.org/archive/html/qemu-devel/2019-03/msg03881.html</a><br>
+&gt;<br>
+&gt; * Maybe identify a few machines we don&#39;t know how to boot anymore.=
+<br>
+&gt;<br>
+&gt; Thanks in advance for your help!<br>
+<br>
+Quite a few maintainers replied, and a few others, too.=C2=A0 Thank you!<br=
+>
+<br>
+I still have to fully digest the replies, in particular whether there&#39;s=
+<br>
+enough detail for me to actually boot a guest.<br>
+<br>
+I&#39;m still lacking information on 26 machines.=C2=A0 If you&#39;re cc&#3=
+9;ed, you&#39;re<br>
+considered a possible source of information.=C2=A0 Please help.<br>
+<br>
+If you&#39;re a supporter or maintainer, but can&#39;t help, please conside=
+r<br>
+adjusting MAINTAINERS to S: Odd Fixes for the machine.<br>
+<br>
+Machines with at least one supporter:<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/xenpv/xen_machine_pv.c =3D<br>
+=C2=A0 =C2=A0 Stefano Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.o=
+rg" target=3D"_blank" rel=3D"noreferrer">sstabellini@kernel.org</a>&gt; (su=
+pporter:X86)<br>
+=C2=A0 =C2=A0 Anthony Perard &lt;<a href=3D"mailto:anthony.perard@citrix.co=
+m" target=3D"_blank" rel=3D"noreferrer">anthony.perard@citrix.com</a>&gt; (=
+supporter:X86)<br>
+=C2=A0 =C2=A0 Paul Durrant &lt;<a href=3D"mailto:paul.durrant@citrix.com" t=
+arget=3D"_blank" rel=3D"noreferrer">paul.durrant@citrix.com</a>&gt; (suppor=
+ter:X86)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:xen-devel@lists.xenproject.org" target=3D"_=
+blank" rel=3D"noreferrer">xen-devel@lists.xenproject.org</a> (open list:X86=
+)<br>
+<br>
+Machines with no supporter, but at least one maintainer:<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/integratorcp.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (mai=
+ntainer:Integrator CP)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:Integrator CP)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/omap_sx1.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (mai=
+ntainer:OMAP)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:ARM)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/mips/mips_jazz.c =3D<br>
+=C2=A0 =C2=A0 &quot;Herv=C3=A9 Poussineau&quot; &lt;<a href=3D"mailto:hpous=
+sin@reactos.org" target=3D"_blank" rel=3D"noreferrer">hpoussin@reactos.org<=
+/a>&gt; (maintainer:Jazz)<br>
+=C2=A0 =C2=A0 Aleksandar Rikalo &lt;<a href=3D"mailto:arikalo@wavecomp.com"=
+ target=3D"_blank" rel=3D"noreferrer">arikalo@wavecomp.com</a>&gt; (reviewe=
+r:Jazz)<br>
+=C2=A0 =C2=A0 Aurelien Jarno &lt;<a href=3D"mailto:aurelien@aurel32.net" ta=
+rget=3D"_blank" rel=3D"noreferrer">aurelien@aurel32.net</a>&gt; (maintainer=
+:MIPS)<br>
+=C2=A0 =C2=A0 Aleksandar Markovic &lt;<a href=3D"mailto:amarkovic@wavecomp.=
+com" target=3D"_blank" rel=3D"noreferrer">amarkovic@wavecomp.com</a>&gt; (m=
+aintainer:MIPS)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/mips/mips_r4k.c =3D<br>
+=C2=A0 =C2=A0 Aurelien Jarno &lt;<a href=3D"mailto:aurelien@aurel32.net" ta=
+rget=3D"_blank" rel=3D"noreferrer">aurelien@aurel32.net</a>&gt; (maintainer=
+:R4000)<br>
+=C2=A0 =C2=A0 Aleksandar Rikalo &lt;<a href=3D"mailto:arikalo@wavecomp.com"=
+ target=3D"_blank" rel=3D"noreferrer">arikalo@wavecomp.com</a>&gt; (reviewe=
+r:R4000)<br>
+=C2=A0 =C2=A0 Aleksandar Markovic &lt;<a href=3D"mailto:amarkovic@wavecomp.=
+com" target=3D"_blank" rel=3D"noreferrer">amarkovic@wavecomp.com</a>&gt; (m=
+aintainer:MIPS)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/moxie/moxiesim.c =3D<br>
+=C2=A0 =C2=A0 Anthony Green &lt;<a href=3D"mailto:green@moxielogic.com" tar=
+get=3D"_blank" rel=3D"noreferrer">green@moxielogic.com</a>&gt; (maintainer:=
+Moxie)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/nios2/10m50_devboard.c =3D<br>
+=C2=A0 =C2=A0 Chris Wulff &lt;<a href=3D"mailto:crwulff@gmail.com" target=
+=3D"_blank" rel=3D"noreferrer">crwulff@gmail.com</a>&gt; (maintainer:NiosII=
+)<br>
+=C2=A0 =C2=A0 Marek Vasut &lt;<a href=3D"mailto:marex@denx.de" target=3D"_b=
+lank" rel=3D"noreferrer">marex@denx.de</a>&gt; (maintainer:NiosII)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/ppc/virtex_ml507.c =3D<br>
+=C2=A0 =C2=A0 &quot;Edgar E. Iglesias&quot; &lt;<a href=3D"mailto:edgar.igl=
+esias@gmail.com" target=3D"_blank" rel=3D"noreferrer">edgar.iglesias@gmail.=
+com</a>&gt; (odd fixer:virtex_ml507)<br>
+=C2=A0 =C2=A0 David Gibson &lt;<a href=3D"mailto:david@gibson.dropbear.id.a=
+u" target=3D"_blank" rel=3D"noreferrer">david@gibson.dropbear.id.au</a>&gt;=
+ (maintainer:PowerPC)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-ppc@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-ppc@nongnu.org</a> (open list:virtex_ml507)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/tricore/tricore_testboard.c =3D<br>
+=C2=A0 =C2=A0 Bastian Koppelmann &lt;<a href=3D"mailto:kbastian@mail.uni-pa=
+derborn.de" target=3D"_blank" rel=3D"noreferrer">kbastian@mail.uni-paderbor=
+n.de</a>&gt; (maintainer:TriCore)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/unicore32/puv3.c =3D<br>
+=C2=A0 =C2=A0 Guan Xuetao &lt;<a href=3D"mailto:gxt@mprc.pku.edu.cn" target=
+=3D"_blank" rel=3D"noreferrer">gxt@mprc.pku.edu.cn</a>&gt; (maintainer:UniC=
+ore32)<br>
+<br>
+Machines with no maintainer and no supporter:<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/collie.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:Sharp SL-5500 (Co...)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:Sharp SL-5500 (Co...)<br=
+>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/exynos4_boards.c =3D<br>
+=C2=A0 =C2=A0 Igor Mitsyanko &lt;<a href=3D"mailto:i.mitsyanko@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">i.mitsyanko@gmail.com</a>&gt; (odd fixe=
+r:Exynos)<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:Exynos)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:Exynos)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/imx25_pdk.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:i.MX25 PDK)<br>
+=C2=A0 =C2=A0 Jean-Christophe Dubois &lt;<a href=3D"mailto:jcd@tribudubois.=
+net" target=3D"_blank" rel=3D"noreferrer">jcd@tribudubois.net</a>&gt; (revi=
+ewer:i.MX25 PDK)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:i.MX25 PDK)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/mainstone.c =3D<br>
+=C2=A0 =C2=A0 Andrzej Zaborowski &lt;<a href=3D"mailto:balrogg@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">balrogg@gmail.com</a>&gt; (odd fixer:PX=
+A2XX)<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:PXA2XX)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:PXA2XX)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/mcimx6ul-evk.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:MCIMX6UL EVK / i....)<br>
+=C2=A0 =C2=A0 Jean-Christophe Dubois &lt;<a href=3D"mailto:jcd@tribudubois.=
+net" target=3D"_blank" rel=3D"noreferrer">jcd@tribudubois.net</a>&gt; (revi=
+ewer:MCIMX6UL EVK / i....)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:MCIMX6UL EVK / i....)<br=
+>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/mcimx7d-sabre.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:MCIMX7D SABRE / i...)<br>
+=C2=A0 =C2=A0 Andrey Smirnov &lt;<a href=3D"mailto:andrew.smirnov@gmail.com=
+" target=3D"_blank" rel=3D"noreferrer">andrew.smirnov@gmail.com</a>&gt; (re=
+viewer:MCIMX7D SABRE / i...)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:MCIMX7D SABRE / i...)<br=
+>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/musicpal.c =3D<br>
+=C2=A0 =C2=A0 Jan Kiszka &lt;<a href=3D"mailto:jan.kiszka@web.de" target=3D=
+"_blank" rel=3D"noreferrer">jan.kiszka@web.de</a>&gt; (odd fixer:Musicpal)<=
+br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:Musicpal)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:Musicpal)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/palm.c =3D<br>
+=C2=A0 =C2=A0 Andrzej Zaborowski &lt;<a href=3D"mailto:balrogg@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">balrogg@gmail.com</a>&gt; (odd fixer:Pa=
+lm)<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:Palm)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:Palm)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/sabrelite.c =3D<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:SABRELITE / i.MX6)<br>
+=C2=A0 =C2=A0 Jean-Christophe Dubois &lt;<a href=3D"mailto:jcd@tribudubois.=
+net" target=3D"_blank" rel=3D"noreferrer">jcd@tribudubois.net</a>&gt; (revi=
+ewer:SABRELITE / i.MX6)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:SABRELITE / i.MX6)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/spitz.c =3D<br>
+=C2=A0 =C2=A0 Andrzej Zaborowski &lt;<a href=3D"mailto:balrogg@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">balrogg@gmail.com</a>&gt; (odd fixer:PX=
+A2XX)<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:PXA2XX)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:PXA2XX)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/tosa.c =3D<br>
+=C2=A0 =C2=A0 Andrzej Zaborowski &lt;<a href=3D"mailto:balrogg@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">balrogg@gmail.com</a>&gt; (odd fixer:PX=
+A2XX)<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:PXA2XX)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:PXA2XX)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/arm/z2.c =3D<br>
+=C2=A0 =C2=A0 Andrzej Zaborowski &lt;<a href=3D"mailto:balrogg@gmail.com" t=
+arget=3D"_blank" rel=3D"noreferrer">balrogg@gmail.com</a>&gt; (odd fixer:PX=
+A2XX)<br>
+=C2=A0 =C2=A0 Peter Maydell &lt;<a href=3D"mailto:peter.maydell@linaro.org"=
+ target=3D"_blank" rel=3D"noreferrer">peter.maydell@linaro.org</a>&gt; (odd=
+ fixer:PXA2XX)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-arm@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-arm@nongnu.org</a> (open list:PXA2XX)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/ppc/mpc8544ds.c =3D<br>
+=C2=A0 =C2=A0 David Gibson &lt;<a href=3D"mailto:david@gibson.dropbear.id.a=
+u" target=3D"_blank" rel=3D"noreferrer">david@gibson.dropbear.id.au</a>&gt;=
+ (odd fixer:mpc8544ds)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-ppc@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-ppc@nongnu.org</a> (open list:mpc8544ds)<br>
+=C2=A0 =C2=A0 Alexander Graf &lt;<a href=3D"mailto:agraf@suse.de" target=3D=
+"_blank" rel=3D"noreferrer">agraf@suse.de</a>&gt; (ratted out by David)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/ppc/ppc405_boards.c =3D<br>
+=C2=A0 =C2=A0 David Gibson &lt;<a href=3D"mailto:david@gibson.dropbear.id.a=
+u" target=3D"_blank" rel=3D"noreferrer">david@gibson.dropbear.id.au</a>&gt;=
+ (odd fixer:ppc4xx)<br>
+=C2=A0 =C2=A0 <a href=3D"mailto:qemu-ppc@nongnu.org" target=3D"_blank" rel=
+=3D"noreferrer">qemu-ppc@nongnu.org</a> (open list:ppc4xx) (ratted out by D=
+avid)<br>
+<br>
+Machines in danger of being orphaned &amp; deprecated:<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/lm32/lm32_boards.c =3D<br>
+=C2=A0 =C2=A0 Michael Walle &lt;michael@walle.cc&gt; (maintainer:LM32)<br>
+<br>
+=C2=A0 =C2=A0 =3D hw/lm32/milkymist.c =3D<br>
+=C2=A0 =C2=A0 Michael Walle &lt;michael@walle.cc&gt; (maintainer:milkymist)=
+<br>
+<br>
+Targets where we have received information for *no* machine so far:<br>
+<br>
+=C2=A0 =C2=A0 lm32<br>
+=C2=A0 =C2=A0 moxie<br>
+=C2=A0 =C2=A0 nios2<br></blockquote></div></div><div dir=3D"auto"><br></div=
+><div dir=3D"auto">Sandra Loosemore seems to use this board.</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquot=
+e class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc sol=
+id;padding-left:1ex">
+=C2=A0 =C2=A0 tricore<br>
+=C2=A0 =C2=A0 unicore<br>
+<br>
+</blockquote></div></div></div>
+
+--000000000000bb1bcb0584a136ae--
+
+
+--===============6224066290063266234==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6224066290063266234==--
