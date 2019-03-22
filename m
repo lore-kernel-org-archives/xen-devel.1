@@ -1,28 +1,15 @@
-From: Amit Tomer <amittomer25@gmail.com>
-Subject: Re: Arm boot regression with Xen 4.12
-Date: Fri, 22 Mar 2019 17:05:46 +0530
-Message-ID: <CABHD4K_1BRuWLpDJEAWmMxqSYXyyE2ToW_dT754q3co5r1EB9w@mail.gmail.com>
-References: <CABHD4K_TGznSkuX8T0tuBpqkcJnyyDtxrfa0YHGvz_t0BE3fAQ@mail.gmail.com>
- <6b603d55-5823-b203-45eb-a0dd61ef81ee@arm.com>
- <CABHD4K_tXgNpWT4UChTbCbu4X8C3HjuFSig1Se0WuMrzMV0tyQ@mail.gmail.com>
- <18d6524d-8dd9-2c0b-34b3-bdb7316bebae@arm.com>
- <CABHD4K9rj354gW=8Q_PAtQ02R+pZdUnhzfwrG3Zq=-XmDE8XfA@mail.gmail.com>
- <a1f50f9c-1f14-9816-88f2-2a11dffdf6db@arm.com>
- <CABHD4K9JGxPCV==0zkA80dZKrrsTvNQXqgwt7nenmayT-hN57Q@mail.gmail.com>
- <15bb0374-f1dc-2392-25a8-c13815ef4a0c@arm.com>
- <ca967222-50be-a402-c5ef-f1662e301905@arm.com>
+From: George Dunlap <george.dunlap@citrix.com>
+Subject: Re: [PATCH for-4.12] passthrough/vtd: Drop the
+ "workaround_bios_bug" logic entirely
+Date: Fri, 22 Mar 2019 11:53:35 +0000
+Message-ID: <6f43d8e0-2444-f4c1-a0e1-58afdf119c98@citrix.com>
+References: <1553199980-9849-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=U1nj=RZ=gmail.com=amittomer25@srs-us1.protection.inumbo.net>)
- id 1h7ISu-0006e5-KV
- for xen-devel@lists.xenproject.org; Fri, 22 Mar 2019 11:36:00 +0000
-Received: by mail-oi1-x22e.google.com with SMTP id j132so1471850oib.2
- for <xen-devel@lists.xenproject.org>; Fri, 22 Mar 2019 04:35:58 -0700 (PDT)
-In-Reply-To: <ca967222-50be-a402-c5ef-f1662e301905@arm.com>
+In-Reply-To: <1553199980-9849-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,15 +18,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org, peng.fan@nxp.com, Stefano Stabellini <sstabellini@kernel.org>, Andre Przywara <andre.przywara@arm.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+Cc: Juergen Gross <jgross@suse.com>, Igor Druzhinin <igor.druzhinin@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jan Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgoKPiBJIGFtIHdvbmRlcmluZyBpZiB5b3UgaGFkIHRpbWUgdG8gYmlzZWN0IHRoZSBpc3N1
-ZT8KPgo+IFdlIGFyZSByZWxlYXNpbmcgWGVuIDQuMTIgc29vbiBzbyB3ZSBuZWVkIHRvIG1ha2Ug
-dGhlIGRlY2lzaW9uIHdoZXRoZXIgdGhpcwo+IHNob3VsZCBiZSBmaXhlZCBhZnRlciAoYW5kIGJh
-Y2twb3J0IGl0KSBvciBiZWZvcmUuCgpJIGFtIHBsYW5uaW5nIHRvIGxvb2sgYXQgaXQgb24gdGhp
-cyB3ZWVrZW5kcyBhbmQgbGV0IHlvdSBrbm93IGlmIEkgZmluZApzb21ldGhpbmcuCgpUaGFua3MK
-LUFtaXQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMy8yMS8xOSA4OjI2IFBNLCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+IEl0IHR1cm5zIG91dCB0
+aGF0IHRoaXMgY29kZSB3YXMgcHJldmlvdXNseSBkZWFkLgo+IAo+IGMvcyBkY2Y0MTc5MCAiIHg4
+Ni9tbWNmZy9kcmhkOiBNb3ZlIGFjcGlfbW1jZmdfaW5pdCgpIGNhbGwgYmVmb3JlIGNhbGxpbmcK
+PiBhY3BpX3BhcnNlX2RtYXIoKSIgcmVzdWx0ZWQgaW4gUENJIHNlZ21lbnQgMCBub3cgaGF2aW5n
+IGJlZW4gaW5pdGlhbGlzZWQKPiBlbm91Z2ggZm9yIGFjcGlfcGFyc2Vfb25lX2RyaGQoKSB0byBu
+b3QgdGFrZSB0aGUKPiAKPiAgIC8qIFNraXAgY2hlY2tpbmcgaWYgc2VnbWVudCBpcyBub3QgYWNj
+ZXNzaWJsZSB5ZXQuICovCj4gCj4gcGF0aCB1bmNvbmRpdGlvbmFsbHkuICBIb3dldmVyLCBzb21l
+IHN5c3RlbXMgaGF2ZSBETUFSIHRhYmxlcyB3aGljaCBsaXN0Cj4gZGV2aWNlcyB3aGljaCBhcmUg
+ZGlzYWJsZWQgYnkgdXNlciBjaG9pY2UgKGluIHBhcnRpY3VsYXIsIERlbGwgUG93ZXJFZGdlIFI3
+NDAKPiB3aXRoIEkvTyBBVCBETUEgZGlzYWJsZWQpLCBhbmQgdHVybmluZyBvZmYgYWxsIElPTU1V
+IGZ1bmN0aW9uYWxpdHkgaW4gdGhpcwo+IGNhc2UgaXMgZW50aXJlbHkgdW5oZWxwZnVsIGJlaGF2
+aW91ci4KPiAKPiBMZWF2ZSB0aGUgd2FybmluZyB3aGljaCBpZGVudGlmaWVzIHRoZSBwcm9ibGVt
+YXRpYyBkZXZpY2VzLCBidXQgZHJvcCB0aGUKPiByZW1haW5pbmcgbG9naWMuICBUaGlzIGxlYXZl
+cyB0aGUgc3lzdGVtIGluIGJldHRlciBvdmVyYWxsIHN0YXRlLCBhbmQgd29ya2luZwo+IGluIHRo
+ZSBzYW1lIHdheSB0aGF0IGl0IGRpZCBpbiBwcmV2aW91cyByZWxlYXNlcy4KPiAKPiBSZXBvcnRl
+ZC1ieTogSWdvciBEcnV6aGluaW4gPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+Cj4gU2lnbmVk
+LW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCkluIHRo
+ZSBtYWludGlhbmVyJ3MgYWJzZW5jZSwgYW5kIGluIGxpZ2h0IG9mIHRoZSBvdGhlciBSLWIncywg
+YW5kIHRoZQp0aW1pbmcsIEkgYXBwcm92ZSB0aGlzIGdvaW5nIGluIHdpdGhvdXQgdGhlIG1haW50
+aWFuZXIncyBhY2s6CgpBY2tlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRy
+aXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
