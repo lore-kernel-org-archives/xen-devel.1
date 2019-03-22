@@ -1,17 +1,18 @@
-From: Diego Alejandro Parra Guzman <daparrag@correo.udistrital.edu.co>
-Subject: Performance Monitor and Profiling tools for ARM64
-Date: Fri, 22 Mar 2019 08:25:28 +0100
-Message-ID: <CAMWmVVANRaJX_Cx6OEHuKYR=v7nNfvPpW738_2hbhB+1s7w4LQ@mail.gmail.com>
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+Subject: [PATCH v6 0/1] cameraif: add ABI for para-virtual camera
+Date: Fri, 22 Mar 2019 09:37:41 +0200
+Message-ID: <20190322073742.14639-1-andr2000@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5912156681001777540=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=y287=RZ=correo.udistrital.edu.co=daparrag@srs-us1.protection.inumbo.net>)
- id 1h7EYh-0001iq-52
- for xen-devel@lists.xenproject.org; Fri, 22 Mar 2019 07:25:43 +0000
-Received: by mail-lf1-x12b.google.com with SMTP id u68so671460lff.7
- for <xen-devel@lists.xenproject.org>; Fri, 22 Mar 2019 00:25:41 -0700 (PDT)
+ <SRS0=5qdr=RZ=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1h7EkT-0002cZ-VL
+ for xen-devel@lists.xenproject.org; Fri, 22 Mar 2019 07:37:54 +0000
+Received: by mail-lf1-x144.google.com with SMTP id r25so678134lfn.13
+ for <xen-devel@lists.xenproject.org>; Fri, 22 Mar 2019 00:37:51 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,208 +21,77 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: xen-devel@lists.xenproject.org, konrad.wilk@oracle.com, jgross@suse.com, boris.ostrovsky@oracle.com, mchehab@kernel.org, linux-media@vger.kernel.org, sakari.ailus@linux.intel.com, koji.matsuoka.xm@renesas.com, hverkuil@xs4all.nl
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5912156681001777540==
-Content-Type: multipart/alternative; boundary="00000000000002b9470584a9c392"
-
---00000000000002b9470584a9c392
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-HI Everyone
-
-
-
-My name is diego. I'm very interesting in extend the XenOprof to ARM64
-based architectures, and also integrate some tools for hypervisor and
-application profiling and performance evaluation.
-
-
-
-I read the documentation for Oprofile a perf which is in the wiki page and
-I noticed that XEN doesn't support ARM64 architectures.  For this reason I
-have two ideas.
-
-
-
-1. Add support for ARM64 architectures to XenOprof  in its current
-implementation.
-
-
-
-2. I found an interesting library called libpfm4 which also work with
-perf_event, and support ARM64 and ARM32 architectures. Well I can tray to
-use this library in order to profile DOM0 and DOMU-VP guest.
-
-
-
-Personally I prefer the option 2 since the  library currently works in
-normal linux OS and I guest could be easy to replicate it on XEN.
-
-
-
-Approaches:
-
-
-
-(hypercalls) from DOM0-DOMU to xen
-
-(direct pass through from DOM0 to PMU counters), and VPMU in DOMU .
-
-
-
-
-
-Here my questions?
-
-
-
-I would like to know if currently DOM0 and DOMU have support to  perf_event
-i.e., they can read directly performance monitoring unit (PMU) counters,
-only DOM0 or none of them?
-
-should I implement some traps in XEN hypervisor ?
-
-someone  currently  is  working on this?
-
-Which is the most efficient way to implement it ?
-
-There is a guide line to do this easily?
-
-
-
-Cheers.
---=20
-Diego Alejandro Parra Guzm=C3=A1n
-Estudiante de ingenier=C3=ADa electr=C3=B3nica
-Universidad distrital FJC
-
---00000000000002b9470584a9c392
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div><p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0=
-cm 0.0001pt;font-size:11pt;font-family:Calibri,sans-serif">HI Everyone</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">My name is diego. I&#39;m very interes=
-ting in extend the
-XenOprof to ARM64 based architectures, and also integrate some tools for
-hypervisor and application profiling and performance evaluation.</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">I read the documentation for Oprofile =
-a perf which is in
-the wiki page and I noticed that XEN doesn&#39;t support ARM64 architecture=
-s.=C2=A0 For this reason I have two ideas.</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">1. Add support for ARM64 architectures=
- to XenOprof=C2=A0 in its current implementation.</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">2. I found an interesting library call=
-ed libpfm4 which
-also work with perf_event, and support ARM64 and ARM32 architectures. Well =
-I
-can tray to use this library in order to profile DOM0 and DOMU-VP guest.</p=
->
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">Personally I prefer the option 2 since=
- the=C2=A0 library currently works in normal linux OS
-and I guest could be easy to replicate it on XEN.</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">Approaches:</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">(hypercalls) from DOM0-DOMU to xen</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">(direct pass through from DOM0 to PMU =
-counters), and VPMU
-in DOMU .</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">Here my questions?</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">I would like to know if currently DOM0=
- and DOMU have
-support to=C2=A0 perf_event i.e., they can
-read directly performance monitoring unit (PMU) counters, only DOM0 or none=
- of
-them?</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">should I implement some traps in XEN h=
-ypervisor ?</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">someone=C2=A0 currently=C2=A0 is=C2=A0
-working on this?</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">Which is the most efficient way to imp=
-lement it ?</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">There is a guide line to do this easil=
-y?</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">=C2=A0</p>
-
-<p class=3D"gmail-MsoPlainText" style=3D"margin:0cm 0cm 0.0001pt;font-size:=
-11pt;font-family:Calibri,sans-serif">Cheers.</p></div>-- <br><div dir=3D"lt=
-r" class=3D"gmail_signature" data-smartmail=3D"gmail_signature">Diego Aleja=
-ndro Parra Guzm=C3=A1n<br>Estudiante de ingenier=C3=ADa electr=C3=B3nica<br=
->Universidad distrital FJC<br></div></div>
-
---00000000000002b9470584a9c392--
-
-
---===============5912156681001777540==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5912156681001777540==--
+RnJvbTogT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtvQGVw
+YW0uY29tPgoKSGVsbG8hCgpBdCB0aGUgbW9tZW50IFhlbiBbMV0gYWxyZWFkeSBzdXBwb3J0cyBz
+b21lIHZpcnR1YWwgbXVsdGltZWRpYQpmZWF0dXJlcyBbMl0gc3VjaCBhcyB2aXJ0dWFsIGRpc3Bs
+YXksIHNvdW5kLiBJdCBzdXBwb3J0cyBrZXlib2FyZHMsCnBvaW50ZXJzIGFuZCBtdWx0aS10b3Vj
+aCBkZXZpY2VzIGFsbCBhbGxvd2luZyBYZW4gdG8gYmUgdXNlZCBpbgphdXRvbW90aXZlIGFwcGxp
+YW5jZXMsIEluLVZlaGljbGUgSW5mb3RhaW5tZW50IChJVkkpIHN5c3RlbXMKYW5kIG1hbnkgbW9y
+ZS4KCkZyb250ZW5kIGltcGxlbWVudGF0aW9uIGlzIGF2YWlsYWJsZSBhdCBbM10gYW5kIHRoZSBj
+b3JyZXNwb25kaW5nCmJhY2tlbmQgYXQgWzRdLiBUaGVzZSBhcmUgd29yayBpbiBwcm9ncmVzcywg
+YnV0IGZyb250ZW5kIGFscmVhZHkKcGFzc2VzIHY0bDItY29tcGxpYW5jZSB0ZXN0IGZvciBWNEwy
+IGRyaXZlcnMuIGxpYnhsIHByZWxpbWluYXJ5CmNoYW5nZXMgYXJlIGF2YWlsYWJsZSBhdCBbNV0u
+CgpUaGlzIHdvcmsgYWRkcyBhIG5ldyBYZW4gcGFyYS12aXJ0dWFsaXplZCBwcm90b2NvbCBmb3Ig
+YSB2aXJ0dWFsCmNhbWVyYSBkZXZpY2Ugd2hpY2ggZXh0ZW5kcyBtdWx0aW1lZGlhIGNhcGFiaWxp
+dGllcyBvZiBYZW4gZXZlbgpmYXJ0aGVyOiB2aWRlbyBjb25mZXJlbmNpbmcsIElWSSwgaGlnaCBk
+ZWZpbml0aW9uIG1hcHMgZXRjLgoKVGhlIGluaXRpYWwgZ29hbCBpcyB0byBzdXBwb3J0IG1vc3Qg
+bmVlZGVkIGZ1bmN0aW9uYWxpdHkgd2l0aCB0aGUKZmluYWwgaWRlYSB0byBtYWtlIGl0IHBvc3Np
+YmxlIHRvIGV4dGVuZCB0aGUgcHJvdG9jb2wgaWYgbmVlZCBiZToKCjEuIFByb3ZpZGUgbWVhbnMg
+Zm9yIGJhc2UgdmlydHVhbCBkZXZpY2UgY29uZmlndXJhdGlvbjoKIC0gcGl4ZWwgZm9ybWF0cwog
+LSByZXNvbHV0aW9ucwogLSBmcmFtZSByYXRlcwoyLiBTdXBwb3J0IGJhc2ljIGNhbWVyYSBjb250
+cm9sczoKIC0gY29udHJhc3QKIC0gYnJpZ2h0bmVzcwogLSBodWUKIC0gc2F0dXJhdGlvbgozLiBT
+dXBwb3J0IHN0cmVhbWluZyBjb250cm9sCgpJIHdvdWxkIGxpa2UgdG8gdGhhbmsgSGFucyBWZXJr
+dWlsIDxodmVya3VpbEB4czRhbGwubmw+IGZvciB2YWx1YWJsZQpjb21tZW50cyBhbmQgaGVscC4K
+ClRoYW5rIHlvdSwKT2xla3NhbmRyIEFuZHJ1c2hjaGVua28KCkNoYW5nZXMgc2luY2UgdjU6Cj09
+PT09PT09PT09PT09PT09CgoxLiBNaW5vciBjbGVhbnVwIG9mIHRoZSBYRU5DQU1FUkFfT1BfQlVG
+X1JFUVVFU1QgZGVzY3JpcHRpb24KCkNoYW5nZXMgc2luY2UgdjQ6Cj09PT09PT09PT09PT09PT09
+CgoxLiBSZW1vdmVkIHVudXNlZCBYRU5DQU1FUkFfRVZUX0NGR19GTEdfUkVTT0wgZmxhZwoyLiBS
+ZS13b3JkZWQgYSBiaXQgZGVzY3JpcHRpb24gZm9yIG51bV9idWZmZXJzCgpDaGFuZ2VzIHNpbmNl
+IHYzOgo9PT09PT09PT09PT09PT09PQoKMS4gQWRkIHRyaW1taW5nIGV4YW1wbGUgZm9yIHNob3J0
+IEZPVVJDQyBsYWJlbHMsIGUuZy4gWTE2IGFuZCBZMTYtQkUKMi4gUmVtb3ZlIGZyb20gWEVOQ0FN
+RVJBX09QX0NPTkZJR19YWFggcmVxdWVzdHMgY29sb3JzcGFjZSwgeGZlcl9mdW5jLAogICB5Y2Jj
+cl9lbmMsIHF1YW50aXphdGlvbiBhbmQgbW92ZSB0aG9zZSBpbnRvIHRoZSBjb3JyZXNwb25kaW5n
+IHJlc3BvbnNlCjMuIEV4dGVuZCBkZXNjcmlwdGlvbiBvZiBYRU5DQU1FUkFfT1BfQlVGX1JFUVVF
+U1QubnVtX2J1ZnM6IGxpbWl0IHRvCiAgIG1heGltdW0gYnVmZmVycyBhbmQgbnVtX2J1ZnMgPT0g
+MCBjYXNlCjQuIEV4dGVuZCBkZWNyaXB0aW9uIG9mIFhFTkNBTUVSQV9PUF9CVUZfQ1JFQVRFLmlu
+ZGV4IGFuZCBzcGVjaWZ5IGl0cwogICByYW5nZQo1LiBNYWtlIFhFTkNBTUVSQV9FVlRfRlJBTUVf
+QVZBSUwuc2VxX251bSAzMi1iaXQgaW5zdGVhZCBvZiA2NC1iaXQKCkNoYW5nZXMgc2luY2UgdjI6
+Cj09PT09PT09PT09PT09PT09CgoxLiBBZGQgIm1heC1idWZmZXJzIiBmcm9udGVuZCBjb25maWd1
+cmF0aW9uIGVudHJ5LCBlLmcuCiAgIHRoZSBtYXhpbXVtIG51bWJlciBvZiBjYW1lcmEgYnVmZmVy
+cyBhIGZyb250ZW5kIG1heSB1c2UuCjIuIEFkZCBiaWctZW5kaWFuIHBpeGVsLWZvcm1hdCBzdXBw
+b3J0OgogLSAiZm9ybWF0cyIgY29uZmlndXJhdGlvbiBzdHJpbmcgbGVuZ3RoIGNoYW5nZWQgZnJv
+bSA0IHRvIDcKICAgb2N0ZXRzLCBzbyB3ZSBjYW4gYWxzbyBtYW5hZ2UgQkUgcGl4ZWwtZm9ybWF0
+cwogLSBhZGQgY29ycmVzcG9uZGluZyBjb21tZW50cyB0byBGT1VSQ0MgbWFwcGluZ3MgZGVzY3Jp
+cHRpb24KMy4gTmV3IGNvbW1hbmRzIGFkZGVkIHRvIHRoZSBwcm90b2NvbCBhbmQgZG9jdW1lbnRl
+ZDoKIC0gWEVOQ0FNRVJBX09QX0NPTkZJR19WQUxJREFURQogLSBYRU5DQU1FUkFfT1BfRlJBTUVf
+UkFURV9TRVQKIC0gWEVOQ0FNRVJBX09QX0JVRl9HRVRfTEFZT1VUCjQuLUFkZCBkZWZhdWx0cyBm
+b3IgY29sb3JzcGFjZSwgeGZlciwgeWNiY3JfZW5jIGFuZCBxdWFudGl6YXRpb24KNS4gUmVtb3Zl
+IFhFTkNBTUVSQV9FVlRfQ09ORklHX0NIQU5HRSBldmVudAo2LiBNb3ZlIHBsYW5lIG9mZnNldHMg
+dG8gWEVOQ0FNRVJBX09QX0JVRl9SRVFVRVNUIGFzIG9mZnNldHMKICAgcmVxdWlyZWQgZm9yIHRo
+ZSBmcm9udGVuZCBtaWdodCBub3QgYmUga25vd24gYXQgdGhlIGNvbmZpZ3VyYXRpb24gdGltZQo3
+LiBDbGVhbiB1cCBhbmQgYWRkcmVzcyBjb21tZW50cyB0byB2MiBvZiB0aGUgcHJvdG9jb2wKCkNo
+YW5nZXMgc2luY2UgdjE6Cj09PT09PT09PT09PT09PT09CgoxLiBBZGRlZCBYZW5TdG9yZSBlbnRy
+aWVzOgogLSBmcmFtZS1yYXRlcwoyLiBEbyBub3QgcmVxdWlyZSB0aGUgRk9VUkNDIGNvZGUgaW4g
+WGVuU3RvcmUgdG8gYmUgdXBwZXIgY2FzZSBvbmx5CjMuIEFkZGVkL2NoYW5nZWQgY29tbWFuZCBz
+ZXQ6CiAtIGNvbmZpZ3VyYXRpb24gZ2V0L3NldAogLSBidWZmZXIgcXVldWUvZGVxdWV1ZQogLSBj
+b250cm9sIGdldAo0LiBBZGRlZCBjb250cm9sIGZsYWdzLCBlLmcuIHJlYWQtb25seSBldGMuCjUu
+IEFkZGVkIGNvbG9yc3BhY2UgY29uZmlndXJhdGlvbiBzdXBwb3J0LCByZWxldmFudCBjb25zdGFu
+dHMKNi4gQWRkZWQgZXZlbnRzOgogLSBjb25maWd1cmF0aW9uIGNoYW5nZQogLSBjb250cm9sIGNo
+YW5nZQo3LiBDaGFuZ2VkIGNvbnRyb2wgdmFsdWVzIHRvIDY0LWJpdAo4LiBBZGRlZCBzZXF1ZW5j
+ZSBudW1iZXIgdG8gZnJhbWUgYXZhaWwgZXZlbnQKOS4gQ29kaW5nIHN0eWxlIGNsZWFudXAKClsx
+XSBodHRwczovL3d3dy54ZW5wcm9qZWN0Lm9yZy8KWzJdIGh0dHBzOi8veGVuYml0cy54ZW4ub3Jn
+L2dpdHdlYi8/cD14ZW4uZ2l0O2E9dHJlZTtmPXhlbi9pbmNsdWRlL3B1YmxpYy9pbwpbM10gaHR0
+cHM6Ly9naXRodWIuY29tL2FuZHIyMDAwL2xpbnV4L3RyZWUvY2FtZXJhX2Zyb250X3YxL2RyaXZl
+cnMvbWVkaWEveGVuCls0XSBodHRwczovL2dpdGh1Yi5jb20vYW5kcjIwMDAvY2FtZXJhX2JlCls1
+XSBodHRwczovL2dpdGh1Yi5jb20vYW5kcjIwMDAveGVuL3RyZWUvdmNhbWVyYQoKT2xla3NhbmRy
+IEFuZHJ1c2hjaGVua28gKDEpOgogIGNhbWVyYWlmOiBhZGQgQUJJIGZvciBwYXJhLXZpcnR1YWwg
+Y2FtZXJhCgogeGVuL2luY2x1ZGUvcHVibGljL2lvL2NhbWVyYWlmLmggfCAxMzc0ICsrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKwogMSBmaWxlIGNoYW5nZWQsIDEzNzQgaW5zZXJ0aW9ucygr
+KQogY3JlYXRlIG1vZGUgMTAwNjQ0IHhlbi9pbmNsdWRlL3B1YmxpYy9pby9jYW1lcmFpZi5oCgot
+LSAKMi4yMS4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
