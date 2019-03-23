@@ -1,18 +1,19 @@
 From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] xen/sched: fix credit2 smt idle handling
-Date: Sat, 23 Mar 2019 03:32:29 +0100
-Message-ID: <2bd3783c9eb5e87a1e0a19acacc193a29fec3120.camel@suse.com>
-References: <20190322090431.28112-1-jgross@suse.com>
+Subject: Re: [PATCH] x86/xen: Add "xen_timer_slop" command line
+ option
+Date: Sat, 23 Mar 2019 03:58:16 +0100
+Message-ID: <52bfeae7c256faec444b69efe58d363ad60c3fc5.camel__4495.11141502939$1553309990$gmane$org@suse.com>
+References: <1553279397-130201-1-git-send-email-ryan.thibodeaux@starlab.io>
+ <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8744364657233918461=="
+Content-Type: multipart/mixed; boundary="===============0368794656853357770=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=MgHg=R2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h7WSn-0006At-5C
- for xen-devel@lists.xenproject.org; Sat, 23 Mar 2019 02:32:49 +0000
-In-Reply-To: <20190322090431.28112-1-jgross@suse.com>
+ id 1h7Wrt-0007xP-NP
+ for xen-devel@lists.xenproject.org; Sat, 23 Mar 2019 02:58:45 +0000
+In-Reply-To: <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,81 +22,44 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@eu.citrix.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, thibodux@gmail.com, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Cc: jgross@suse.com, ryan.thibodeaux@starlab.io, tglx@linutronix.de, luca abeni <luca.abeni@santannapisa.it>, oleksandr_andrushchenko@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============8744364657233918461==
+--===============0368794656853357770==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-w8MYSHuTL9pbRs9iMBv9"
+	protocol="application/pgp-signature"; boundary="=-HnIYLTilu4YL1C/gCxSx"
 
 
---=-w8MYSHuTL9pbRs9iMBv9
+--=-HnIYLTilu4YL1C/gCxSx
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2019-03-22 at 10:04 +0100, Juergen Gross wrote:
-> Credit2's smt_idle_mask_set() and smt_idle_mask_clear() are used to
-> identify idle cores where vcpus can be moved to. A core is thought to
-> be idle when all siblings are known to have the idle vcpu running on
-> them.
+On Fri, 2019-03-22 at 18:10 -0400, Boris Ostrovsky wrote:
+> On 3/22/19 2:29 PM, thibodux@gmail.com wrote:
+> > From: Ryan Thibodeaux <ryan.thibodeaux@starlab.io>
+> >=20
+> > The original timer slop value has not changed since the
+> > introduction
+> > of the Xen-aware Linux kernel code. This commit provides users an
+> > opportunity to tune timer performance given the refinements to
+> > hardware and the Xen event channel processing. It also mirrors
+> > a feature in the Xen hypervisor - the "timer_slop" Xen command line
+> > option.
 >=20
-> Unfortunately the information of a vcpu running on a cpu is per
-> runqueue. So in case not all siblings are in the same runqueue a core
-> will never be regarded to be idle, as the sibling not in the runqueue
-> is never known to run the idle vcpu.
+> Is there any data that shows effects of using this new parameter?
 >=20
-Good catch.
+Yes, I've done some research and experiments on this. I did it together
+with a friend, which I'm Cc-ing, as I'm not sure we're ready/capable to
+share the results, yet (Luca?).
 
-I apparently forgot to take care of this, when introduced the
-possibility of having per single CPU runqueue (which, in an SMT enabled
-system, would mean per-thread runqs).
+What I think I can anticipate is that having such a high value for
+timer slop in the kernel, for the Xen clockevent device is (together
+with the also quite high default value of timer_slop in Xen itself)
+responsible for really high vcpu wakeup latencies.
 
-> This problem can be solved by and-ing the core's sibling cpumask with
-> the runqueue's active mask before doing the idle test.
->=20
-Right. There's one thing, though. Using one runq per CPU, in this
-scheduler, is a really poor choice, and I basically would recommend it
-only for testing or debugging (and this should probably be highlighted
-a lot better in the docs).
-
-Therefore, I'm a bit reluctant at adding another cpumask bitwise
-operation, in hot paths, just for taking care of it.
-
-Note that this also applies to cpupools, i.e., I also consider a very
-poor choice putting two sibling hyperthreads in different pools. If you
-recall, I even sent a patch to forbid doing that (which is still
-blocked on a series of yours for passing parameters from the tools to
-the hypervisor).
-
-The only case I care, is a CPU being off-lined.
-
-So, one thing that we could do is to put credit2_runqueue=3Dcpu inside
-such #ifdef-s too (and I can prepare a patch to that effect myself, if
-you want).
-
-To properly deal with offline CPUs, I think we can change the logic a
-little, i.e., we initialize the smt_idle mask to all-1 (all CPUs idle),
-and we also make sure that we set the CPU bit (instead of learing it)
-in smt_idle, when we remove the CPU from the scheduler.
-
-Does doing these things (negatively) affect the other patch series
-you're working on?
-
-> In order for not having to allocate another cpumask the interfaces of
-> smt_idle_mask_set() and smt_idle_mask_clear() are modified to not
-> take
-> a mask as input, but the runqueue data pointer, as those functions
-> are
-> always called with the same masks as parameters.
->=20
-The interface change, I'm happy with it.
-
-Oh, and the other patches you sent, as you know, I've been travelling
-this week, so I couldn't look at them.
-
-I will let you have my comment ASAP next week.
+Lowering those two values, reduces such latencies dramatically.
 
 Regards,
 Dario
@@ -105,33 +69,33 @@ Dario
 Dario Faggioli, Ph.D, http://about.me/dario.faggioli
 Software Engineer @ SUSE https://www.suse.com/
 
---=-w8MYSHuTL9pbRs9iMBv9
+--=-HnIYLTilu4YL1C/gCxSx
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyVmr0ACgkQFkJ4iaW4
-c+799g//eOew5tpQQ5r0gBaP9Sh1cAKrsUxdvk4IHNMtr7OQvlU9LTP9+Hq9Qn2/
-yXCx2+tYSWz813LQh275l9Ogr06dxT+6paEeK0GBPtchXfLuBRStSH1fFUgnw7L4
-VWkSdYzSr3/Bkn0MLKvo6VEL7aiNQLUssL0/LrOkdzudl2ioKSzePqEKsfiSwJvk
-m59HelzzHp0o8UIDBVr+L5F+kXBPVJbTFItcqwrpb+lAbuUuKGmaecbWLCylvjRT
-Z7Kjv92HRCaoBy/l0bVQ+Hq3yc1eZfvkVRQlfR7JTqctn45QKuyfK30viKGz9PqO
-8Y6Ormvr7tLg/KhnQKKalneN9HUIYneW02Kcd8UkbTBxQsHfkq6Ajp6o615RCBfj
-1OZ90QGM2eoCLaBZwmgeiiMzmAADEuiKoMG5qh0JmoL/wTcODPBvgvDd/E+iw/6X
-n9CrShr+EplEGn+H6oDebtcOiL8Zt0LNpyr9CKCx/Py9HnQX7xPrOUiEMJAj6H5T
-qBWp1q6zBowd92euJ3d/O3gI93FAMvtLi16LWfrrcdBfmFGRHS6fdU+ywxYFtRDj
-X7ZSEc6h7bbrm5o7l38QW4aWQGKVgQh5wZ7t0sgY02D8kP60/Bfn+SSFbBNHKoB8
-dBK8brQA5ldK9Ib101jpzy+U8gJH7DOzG3HQyisjDID83IQIbvc=
-=fsuu
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyVoMgACgkQFkJ4iaW4
+c+52Kg//eFjYf2HKPb7vNVUox18exTWL9qtU97e92MAVB/ikaUUucDfysCqZdSob
+6b2tkrUBpM3D3691Ro4715p0dRhXubMRit08Y91La9UcGuamaXgECnHep0EoN3lw
+CKh6PLUwu4OIfZ5fElhO3ZbMzBW4k2aHTnLCq5h9fZF1DqfOTXhu19K5DREHb+FH
+Qlbok5iT+zIaRdWr+UHU4XJ+pTL8Nj1Pc1VsOq8iyKSA6152xDQ/oCYh9M5MT4UE
+io1s0Kf7xKkF6msKQSQu3iLsLXboxRZmlW0QeTv0pA48MOB2NWQDYqPb23kLVy4v
+W9zGzHAxJcfqT6+RbfFResGfn8W92St2EGsP9PkN/dM4L4ZDZidXYtyXAToNAdqC
+kNwpJ0ezplM7/1x++tGhWRQLAKYNRKgfRTrPuIdMELQz9z1ZD/Mo8nmBeBj6YC+j
+LLyT7n+BqGjE66kdo1Hghl1ZxdTrQYaC9xSH/P0NvaMCNll7HbOPKPSU19WySzZn
+Is+N9yUf9NG2uxNRva/0b8GMGvKZH3DgrOs+O9rEkkCvArTyJZleuZjrC92fU5uf
+kq0BPNPcIMc/d+jaUIsToJetlpB2jFpCiSAE9duEWpPZcsB2JUEEcNsvJkqxluhj
+n2fjWizfFbMYip6wUckcbI4D6BxTcRy6DnjICQLIs5GK4aqyYnM=
+=Ujww
 -----END PGP SIGNATURE-----
 
---=-w8MYSHuTL9pbRs9iMBv9--
+--=-HnIYLTilu4YL1C/gCxSx--
 
 
 
---===============8744364657233918461==
+--===============0368794656853357770==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -141,4 +105,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============8744364657233918461==--
+--===============0368794656853357770==--
