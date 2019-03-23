@@ -1,18 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: [PATCH] xen/sched: fix credit2 smt idle handling
-Date: Sat, 23 Mar 2019 13:34:47 +0100
-Message-ID: <383e43c2e9bff26b55460de58298c4871a34d0d9.camel@suse.com>
+Date: Sat, 23 Mar 2019 14:22:39 +0100
+Message-ID: <9dce8e69-6ebc-85f4-be25-a6d2ee9a5116@suse.com>
 References: <20190322090431.28112-1-jgross@suse.com>
  <2bd3783c9eb5e87a1e0a19acacc193a29fec3120.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8662418254738544163=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=MgHg=R2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h7fs0-0004am-1a
- for xen-devel@lists.xenproject.org; Sat, 23 Mar 2019 12:35:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=MsG/=R2=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1h7gbm-0008VD-Aa
+ for xen-devel@lists.xenproject.org; Sat, 23 Mar 2019 13:22:46 +0000
 In-Reply-To: <2bd3783c9eb5e87a1e0a19acacc193a29fec3120.camel@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,102 +24,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
 Cc: George Dunlap <george.dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============8662418254738544163==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-P/F6JajuGn+MTP5oC9AN"
-
-
---=-P/F6JajuGn+MTP5oC9AN
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, 2019-03-23 at 03:32 +0100, Dario Faggioli wrote:
-> On Fri, 2019-03-22 at 10:04 +0100, Juergen Gross wrote:
-> > This problem can be solved by and-ing the core's sibling cpumask
-> > with
-> > the runqueue's active mask before doing the idle test.
-> >=20
->=20
-> Therefore, I'm a bit reluctant at adding another cpumask bitwise
-> operation, in hot paths, just for taking care of it.
->=20
-> Note that this also applies to cpupools, i.e., I also consider a very
-> poor choice putting two sibling hyperthreads in different pools. If
-> you
-> recall, I even sent a patch to forbid doing that (which is still
-> blocked on a series of yours for passing parameters from the tools to
-> the hypervisor).
->=20
-> The only case I care, is a CPU being off-lined.
->=20
-> So, one thing that we could do is to put credit2_runqueue=3Dcpu inside
-> such #ifdef-s too (and I can prepare a patch to that effect myself,
-> if
-> you want).
->=20
-> To properly deal with offline CPUs, I think we can change the logic a
-> little, i.e., we initialize the smt_idle mask to all-1 (all CPUs
-> idle),
-> and we also make sure that we set the CPU bit (instead of learing it)
-> in smt_idle, when we remove the CPU from the scheduler.
->=20
-Which, thinking more about this, should also serve as a solution for
-the issue addressed by this patch.
-
-We need to check whether all the other places where smt_idle is used
-would be ok with that (I think they are, as we pretty much always end
-up &&-ing it with online or active anyway), or if they need some
-reshuffling (and if yes, how that looks like).
-
-I can check this on Monday.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-P/F6JajuGn+MTP5oC9AN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyWJ+cACgkQFkJ4iaW4
-c+4kPRAAuXLDYMGEnHljwDRw8bMuwld7FAkFNvXdAXJFv7rIVspHA5zpjUqGUW2E
-ey7tXkv20uKK2QdnADB7riM5BUGO/a4xh54Fh4COvjhbcUFGRR99Ij7IYrOxDwt8
-UbTUC2ZlDALnQUx8O9kul8HR640PqHpdMMfIiXLfR/1xxmhQtdGIiGQRBTMBPUh3
-nALLEKT/t6Ozu6ukITs17FoEvbPBR77K1hn3Y2jQWCp8GsgY3g5OnHKAHNT9hUV8
-qbKaCFSqqUHzDqtjlwPOeDcZ5jPMnJLWlu1/NBVwpdLI8vjrGFLZwFrUI4D4Yb5E
-CKwzc7geL9DFjI330XBRxnD+b04rdQ2jgPPJXJj0gDbM295dmnIzVLzUihUGvNux
-IFG4zSEadYTKuWZcPNmoUFHYp8aVGKUKsGTd61DbCeACja1kaXzOVc6ru8uP7RYr
-wdfA9e1ECPyxAtnULLsyzZLdgO/qdXEhXczEGo3A+V3mDkJsZ1DZnGNfBxuOcyna
-FmJ1ZXNQn7xJLcOwfV4sVJ+lAdG6tvUApI22XruXS2B2pyjeF7pLHDChXdtOgz8M
-QYgBxe8Ejr4TljZHYOQMwKB91oRwOoPZ2Doi9VQOvnSVoAaH+5fTrqV5y9NcKfme
-aveRaO25ze/6VAkrwGcpi8lGH9rcz6X8nJVaIDTuhGKTDYr2l0U=
-=yc2F
------END PGP SIGNATURE-----
-
---=-P/F6JajuGn+MTP5oC9AN--
-
-
-
---===============8662418254738544163==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8662418254738544163==--
+T24gMjMvMDMvMjAxOSAwMzozMiwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gRnJpLCAyMDE5
+LTAzLTIyIGF0IDEwOjA0ICswMTAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBDcmVkaXQyJ3Mg
+c210X2lkbGVfbWFza19zZXQoKSBhbmQgc210X2lkbGVfbWFza19jbGVhcigpIGFyZSB1c2VkIHRv
+Cj4+IGlkZW50aWZ5IGlkbGUgY29yZXMgd2hlcmUgdmNwdXMgY2FuIGJlIG1vdmVkIHRvLiBBIGNv
+cmUgaXMgdGhvdWdodCB0bwo+PiBiZSBpZGxlIHdoZW4gYWxsIHNpYmxpbmdzIGFyZSBrbm93biB0
+byBoYXZlIHRoZSBpZGxlIHZjcHUgcnVubmluZyBvbgo+PiB0aGVtLgo+Pgo+PiBVbmZvcnR1bmF0
+ZWx5IHRoZSBpbmZvcm1hdGlvbiBvZiBhIHZjcHUgcnVubmluZyBvbiBhIGNwdSBpcyBwZXIKPj4g
+cnVucXVldWUuIFNvIGluIGNhc2Ugbm90IGFsbCBzaWJsaW5ncyBhcmUgaW4gdGhlIHNhbWUgcnVu
+cXVldWUgYSBjb3JlCj4+IHdpbGwgbmV2ZXIgYmUgcmVnYXJkZWQgdG8gYmUgaWRsZSwgYXMgdGhl
+IHNpYmxpbmcgbm90IGluIHRoZSBydW5xdWV1ZQo+PiBpcyBuZXZlciBrbm93biB0byBydW4gdGhl
+IGlkbGUgdmNwdS4KPj4KPiBHb29kIGNhdGNoLgo+IAo+IEkgYXBwYXJlbnRseSBmb3Jnb3QgdG8g
+dGFrZSBjYXJlIG9mIHRoaXMsIHdoZW4gaW50cm9kdWNlZCB0aGUKPiBwb3NzaWJpbGl0eSBvZiBo
+YXZpbmcgcGVyIHNpbmdsZSBDUFUgcnVucXVldWUgKHdoaWNoLCBpbiBhbiBTTVQgZW5hYmxlZAo+
+IHN5c3RlbSwgd291bGQgbWVhbiBwZXItdGhyZWFkIHJ1bnFzKS4KPiAKPj4gVGhpcyBwcm9ibGVt
+IGNhbiBiZSBzb2x2ZWQgYnkgYW5kLWluZyB0aGUgY29yZSdzIHNpYmxpbmcgY3B1bWFzayB3aXRo
+Cj4+IHRoZSBydW5xdWV1ZSdzIGFjdGl2ZSBtYXNrIGJlZm9yZSBkb2luZyB0aGUgaWRsZSB0ZXN0
+Lgo+Pgo+IFJpZ2h0LiBUaGVyZSdzIG9uZSB0aGluZywgdGhvdWdoLiBVc2luZyBvbmUgcnVucSBw
+ZXIgQ1BVLCBpbiB0aGlzCj4gc2NoZWR1bGVyLCBpcyBhIHJlYWxseSBwb29yIGNob2ljZSwgYW5k
+IEkgYmFzaWNhbGx5IHdvdWxkIHJlY29tbWVuZCBpdAo+IG9ubHkgZm9yIHRlc3Rpbmcgb3IgZGVi
+dWdnaW5nIChhbmQgdGhpcyBzaG91bGQgcHJvYmFibHkgYmUgaGlnaGxpZ2h0ZWQKPiBhIGxvdCBi
+ZXR0ZXIgaW4gdGhlIGRvY3MpLgo+IAo+IFRoZXJlZm9yZSwgSSdtIGEgYml0IHJlbHVjdGFudCBh
+dCBhZGRpbmcgYW5vdGhlciBjcHVtYXNrIGJpdHdpc2UKPiBvcGVyYXRpb24sIGluIGhvdCBwYXRo
+cywganVzdCBmb3IgdGFraW5nIGNhcmUgb2YgaXQuCj4gCj4gTm90ZSB0aGF0IHRoaXMgYWxzbyBh
+cHBsaWVzIHRvIGNwdXBvb2xzLCBpLmUuLCBJIGFsc28gY29uc2lkZXIgYSB2ZXJ5Cj4gcG9vciBj
+aG9pY2UgcHV0dGluZyB0d28gc2libGluZyBoeXBlcnRocmVhZHMgaW4gZGlmZmVyZW50IHBvb2xz
+LiBJZiB5b3UKPiByZWNhbGwsIEkgZXZlbiBzZW50IGEgcGF0Y2ggdG8gZm9yYmlkIGRvaW5nIHRo
+YXQgKHdoaWNoIGlzIHN0aWxsCj4gYmxvY2tlZCBvbiBhIHNlcmllcyBvZiB5b3VycyBmb3IgcGFz
+c2luZyBwYXJhbWV0ZXJzIGZyb20gdGhlIHRvb2xzIHRvCj4gdGhlIGh5cGVydmlzb3IpLgo+IAo+
+IFRoZSBvbmx5IGNhc2UgSSBjYXJlLCBpcyBhIENQVSBiZWluZyBvZmYtbGluZWQuCgpJbiBteSBj
+b3JlIHNjaGVkdWxpbmcgc29sdXRpb24gd2Ugb25seSBldmVyIGhhdmUgb25lIGFjdGl2ZSBzaWJs
+aW5nIHBlcgpjb3JlLgoKPiBTbywgb25lIHRoaW5nIHRoYXQgd2UgY291bGQgZG8gaXMgdG8gcHV0
+IGNyZWRpdDJfcnVucXVldWU9Y3B1IGluc2lkZQo+IHN1Y2ggI2lmZGVmLXMgdG9vIChhbmQgSSBj
+YW4gcHJlcGFyZSBhIHBhdGNoIHRvIHRoYXQgZWZmZWN0IG15c2VsZiwgaWYKPiB5b3Ugd2FudCku
+Cj4gCj4gVG8gcHJvcGVybHkgZGVhbCB3aXRoIG9mZmxpbmUgQ1BVcywgSSB0aGluayB3ZSBjYW4g
+Y2hhbmdlIHRoZSBsb2dpYyBhCj4gbGl0dGxlLCBpLmUuLCB3ZSBpbml0aWFsaXplIHRoZSBzbXRf
+aWRsZSBtYXNrIHRvIGFsbC0xIChhbGwgQ1BVcyBpZGxlKSwKPiBhbmQgd2UgYWxzbyBtYWtlIHN1
+cmUgdGhhdCB3ZSBzZXQgdGhlIENQVSBiaXQgKGluc3RlYWQgb2YgbGVhcmluZyBpdCkKPiBpbiBz
+bXRfaWRsZSwgd2hlbiB3ZSByZW1vdmUgdGhlIENQVSBmcm9tIHRoZSBzY2hlZHVsZXIuCgpIb3cg
+ZG9lcyB0aGF0IGhlbHA/CgpPbmx5IGlmIGFsbCBzaWJsaW5ncyBhcmUgbWFya2VkIGFzIGlkbGUg
+aW4gcnFkLT5pZGxlIHdlIHNldCBhbnkgYml0cwppbiBycWQtPnNtdF9pZGxlIChhbGwgc2libGlu
+Z3MpLgoKT3IgZGlkIHlvdSBtZWFuIHJxZC0+aWRsZSBpbnN0ZWFkPwoKVGhpcyBtaWdodCBiZSBw
+cm9ibGVtYXRpYyBpbiBjYXNlIG9mIHJ1bnF1ZXVlIHBlciBjcHUsIHRob3VnaC4KCkFub3RoZXIg
+aWRlYTogd2UgY291bGQgaW50cm9kdWNlIGEgY3JlZGl0MiBwY3B1IGRhdGEgY3B1bWFzayBwb2lu
+dGVyCmZvciByZXBsYWNlbWVudCBvZiB0aGUgY3B1X3NpYmxpbmdfbWFzay4gRm9yIHJ1bnF1ZXVl
+IHBlciBjcHUgaXQgd291bGQKcG91bnQgdG8gY3B1bWFza19vZihjcHUpLCBmb3IgdGhlICJub3Jt
+YWwgY2FzZSIgaXQgd291bGQgcG9pbnQgdG8gdGhlCmNvcnJlY3QgY3B1X3NpYmxpbmdfbWFzaywg
+YW5kIGZvciBzcGVjaWFsIGNhc2VzIHdlIGNvdWxkIGFsbG9jYXRlIGEKbWFzayBpZiBuZWVkZWQu
+CgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
