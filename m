@@ -1,19 +1,17 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] x86/xen: Add "xen_timer_slop" command line
- option
-Date: Sat, 23 Mar 2019 03:58:16 +0100
-Message-ID: <52bfeae7c256faec444b69efe58d363ad60c3fc5.camel__4495.11141502939$1553309990$gmane$org@suse.com>
-References: <1553279397-130201-1-git-send-email-ryan.thibodeaux@starlab.io>
- <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
+From: Platform Team regression test user <citrix-osstest@xenproject.org>
+Subject: [ovmf baseline-only test] 83774: trouble: blocked/broken
+Date: Sat, 23 Mar 2019 03:49:38 +0000
+Message-ID: <osstest-83774-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0368794656853357770=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=MgHg=R2=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h7Wrt-0007xP-NP
- for xen-devel@lists.xenproject.org; Sat, 23 Mar 2019 02:58:45 +0000
-In-Reply-To: <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
+ <SRS0=M4Yb=R2=xenproject.org=prvs=978d5af0a=citrix-osstest@srs-us1.protection.inumbo.net>)
+ id 1h7XfI-0003W0-L3
+ for xen-devel@lists.xenproject.org; Sat, 23 Mar 2019 03:49:48 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,87 +20,88 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, thibodux@gmail.com, xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
-Cc: jgross@suse.com, ryan.thibodeaux@starlab.io, tglx@linutronix.de, luca abeni <luca.abeni@santannapisa.it>, oleksandr_andrushchenko@epam.com
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============0368794656853357770==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-HnIYLTilu4YL1C/gCxSx"
-
-
---=-HnIYLTilu4YL1C/gCxSx
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 2019-03-22 at 18:10 -0400, Boris Ostrovsky wrote:
-> On 3/22/19 2:29 PM, thibodux@gmail.com wrote:
-> > From: Ryan Thibodeaux <ryan.thibodeaux@starlab.io>
-> >=20
-> > The original timer slop value has not changed since the
-> > introduction
-> > of the Xen-aware Linux kernel code. This commit provides users an
-> > opportunity to tune timer performance given the refinements to
-> > hardware and the Xen event channel processing. It also mirrors
-> > a feature in the Xen hypervisor - the "timer_slop" Xen command line
-> > option.
->=20
-> Is there any data that shows effects of using this new parameter?
->=20
-Yes, I've done some research and experiments on this. I did it together
-with a friend, which I'm Cc-ing, as I'm not sure we're ready/capable to
-share the results, yet (Luca?).
-
-What I think I can anticipate is that having such a high value for
-timer slop in the kernel, for the Xen clockevent device is (together
-with the also quite high default value of timer_slop in Xen itself)
-responsible for really high vcpu wakeup latencies.
-
-Lowering those two values, reduces such latencies dramatically.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-HnIYLTilu4YL1C/gCxSx
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyVoMgACgkQFkJ4iaW4
-c+52Kg//eFjYf2HKPb7vNVUox18exTWL9qtU97e92MAVB/ikaUUucDfysCqZdSob
-6b2tkrUBpM3D3691Ro4715p0dRhXubMRit08Y91La9UcGuamaXgECnHep0EoN3lw
-CKh6PLUwu4OIfZ5fElhO3ZbMzBW4k2aHTnLCq5h9fZF1DqfOTXhu19K5DREHb+FH
-Qlbok5iT+zIaRdWr+UHU4XJ+pTL8Nj1Pc1VsOq8iyKSA6152xDQ/oCYh9M5MT4UE
-io1s0Kf7xKkF6msKQSQu3iLsLXboxRZmlW0QeTv0pA48MOB2NWQDYqPb23kLVy4v
-W9zGzHAxJcfqT6+RbfFResGfn8W92St2EGsP9PkN/dM4L4ZDZidXYtyXAToNAdqC
-kNwpJ0ezplM7/1x++tGhWRQLAKYNRKgfRTrPuIdMELQz9z1ZD/Mo8nmBeBj6YC+j
-LLyT7n+BqGjE66kdo1Hghl1ZxdTrQYaC9xSH/P0NvaMCNll7HbOPKPSU19WySzZn
-Is+N9yUf9NG2uxNRva/0b8GMGvKZH3DgrOs+O9rEkkCvArTyJZleuZjrC92fU5uf
-kq0BPNPcIMc/d+jaUIsToJetlpB2jFpCiSAE9duEWpPZcsB2JUEEcNsvJkqxluhj
-n2fjWizfFbMYip6wUckcbI4D6BxTcRy6DnjICQLIs5GK4aqyYnM=
-=Ujww
------END PGP SIGNATURE-----
-
---=-HnIYLTilu4YL1C/gCxSx--
-
-
-
---===============0368794656853357770==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0368794656853357770==--
+VGhpcyBydW4gaXMgY29uZmlndXJlZCBmb3IgYmFzZWxpbmUgdGVzdHMgb25seS4KCmZsaWdodCA4
+Mzc3NCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9vc3N0ZXN0LnhlbnNvdXJjZS5jb20vb3NzdGVz
+dC9sb2dzLzgzNzc0LwoKRmFpbHVyZXMgYW5kIHByb2JsZW1zIHdpdGggdGVzdHMgOi0oCgpUZXN0
+cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5nIHRlc3Rz
+IHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAg
+IDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2ICAgICAgICAg
+ICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1h
+bWQ2NC1wdm9wcyAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJv
+a2VuCiBidWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIDxqb2Igc3RhdHVzPiAgICAgICAg
+ICAgICAgICAgYnJva2VuCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgIDxqb2Igc3Rh
+dHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAg
+ICAgIDxqb2Igc3RhdHVzPiAgICAgICAgICAgICAgICAgYnJva2VuCgpUZXN0cyB3aGljaCBkaWQg
+bm90IHN1Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
+ZW11dS1vdm1mLWFtZDY0ICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgIGJsb2NrZWQgbi9h
+CiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAg
+ICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAg
+MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWkzODYtbGli
+dmlydCAgICAgICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
+L2EKIGJ1aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAg
+IGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAg
+NCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVzdGVkCiBidWlsZC1p
+Mzg2ICAgICAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICBicm9rZW4gYmFz
+ZWxpbmUgdW50ZXN0ZWQKIGJ1aWxkLWkzODYtcHZvcHMgICAgICAgICAgICAgIDQgaG9zdC1pbnN0
+YWxsKDQpICAgICAgIGJyb2tlbiBiYXNlbGluZSB1bnRlc3RlZAogYnVpbGQtYW1kNjQteHNtICAg
+ICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgYnJva2VuIGJhc2VsaW5lIHVudGVz
+dGVkCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAg
+ICBicm9rZW4gYmFzZWxpbmUgdW50ZXN0ZWQKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6
+CiBvdm1mICAgICAgICAgICAgICAgICBmNGM1MjAwOTI2ZGY4YWE4ZTRlZGUyNGZjY2EyODhiZTIx
+NTBhY2I0CmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA2YzI3YTRkMzM3
+ZDAwMzRjZWNmOWYyYzA1ZDFmMjBjMzQyZDQxZTAxCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAgODM3
+NjkgIDIwMTktMDMtMjIgMDc6MjQ6NDMgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAg
+IDgzNzc0ICAyMDE5LTAzLTIyIDIyOjU0OjMwIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgRXJpYyBEb25nIDxl
+cmljLmRvbmdAaW50ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4Ni14c20g
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBi
+dWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgYnJva2VuICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiBidWlsZC1pMzg2LWxpYnZp
+cnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1
+aWxkLWFtZDY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBicm9rZW4gIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGJyb2tlbiAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYt
+YW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni14
+bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAoKCi0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3QueHMuY2l0cml0ZS5uZXQKbG9nczogL2hvbWUv
+b3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3NzdGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBm
+aWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAgICBodHRwOi8vb3NzdGVzdC54ZW5zb3VyY2Uu
+Y29tL29zc3Rlc3QvbG9ncwoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBo
+dHRwOi8veGVuYml0cy54ZW5zb3VyY2UuY29tL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFy
+eQoKYnJva2VuLWpvYiBidWlsZC1hbWQ2NC14c20gYnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtaTM4
+NiBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1hbWQ2NC1wdm9wcyBicm9rZW4KYnJva2VuLWpvYiBi
+dWlsZC1pMzg2LXhzbSBicm9rZW4KYnJva2VuLWpvYiBidWlsZC1hbWQ2NCBicm9rZW4KYnJva2Vu
+LWpvYiBidWlsZC1pMzg2LXB2b3BzIGJyb2tlbgpicm9rZW4tc3RlcCBidWlsZC1hbWQ2NC1wdm9w
+cyBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAgYnVpbGQtaTM4Ni14c20gaG9zdC1pbnN0YWxs
+KDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWkzODYgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1
+aWxkLWkzODYtcHZvcHMgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1zdGVwIGJ1aWxkLWFtZDY0LXhz
+bSBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAgYnVpbGQtYW1kNjQgaG9zdC1pbnN0YWxsKDQp
+CgpQdXNoIG5vdCBhcHBsaWNhYmxlLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCBmNGM1MjAwOTI2ZGY4YWE4ZTRlZGUy
+NGZjY2EyODhiZTIxNTBhY2I0CkF1dGhvcjogRXJpYyBEb25nIDxlcmljLmRvbmdAaW50ZWwuY29t
+PgpEYXRlOiAgIEZyaSBNYXIgMSAxMDozMzo1NyAyMDE5ICswODAwCgogICAgU2VjdXJpdHlQa2cv
+T3BhbFBhc3N3b3JkOiBGaXggaW5jb3JyZWN0IGxpbmUgZW5kaW5nIGlzc3VlLgogICAgCiAgICBD
+YzogTGltaW5nIEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+CiAgICBDb250cmlidXRlZC11bmRl
+cjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3JlZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5
+OiBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5jb20+CiAgICBSZXZpZXdlZC1ieTogTGltaW5n
+IEdhbyA8bGltaW5nLmdhb0BpbnRlbC5jb20+Cgpjb21taXQgYmIyYzljY2IzMzg4Mzg2YWNkMTdh
+OWQxOGY0M2E0ODA0ZDRjODkyZQpBdXRob3I6IEVyaWMgRG9uZyA8ZXJpYy5kb25nQGludGVsLmNv
+bT4KRGF0ZTogICBUaHUgTWFyIDIxIDA4OjQwOjE5IDIwMTkgKzA4MDAKCiAgICBNZGVNb2R1bGVQ
+a2cvUGlTbW1Db3JlOiBDb250cm9sIFMzIHJlbGF0ZWQgZnVuY3Rpb25hbGl0eSB0aHJvdWdoIGZs
+YWcuCiAgICAKICAgIGh0dHBzOi8vYnVnemlsbGEudGlhbm9jb3JlLm9yZy9zaG93X2J1Zy5jZ2k/
+aWQ9MTU5MAogICAgCiAgICBVc2UgUGNkQWNwaVMzRW5hYmxlIHRvIGNvbnRyb2wgd2hldGhlciBu
+ZWVkIHRvIGVuYWJsZSBTMyByZWxhdGVkCiAgICBmdW5jdGlvbmFsaXR5IGluIFBpIFNNTSBDb3Jl
+LgogICAgCiAgICBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBBZ3Jl
+ZW1lbnQgMS4xCiAgICBTaWduZWQtb2ZmLWJ5OiBFcmljIERvbmcgPGVyaWMuZG9uZ0BpbnRlbC5j
+b20+CiAgICBSZXZpZXdlZC1ieTogSGFvIFd1IDxoYW8uYS53dUBpbnRlbC5jb20+CgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
