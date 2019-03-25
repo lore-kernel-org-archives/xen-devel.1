@@ -1,19 +1,23 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: Juergen Gross <jgross@suse.com>
 Subject: Re: [PATCH 3/6] xen: add new cpu notifier action
  CPU_RESUME_FAILED
-Date: Mon, 25 Mar 2019 13:21:05 +0100
-Message-ID: <37954eb9e9efb9b95c603458b298bc1a51b6354f.camel@suse.com>
+Date: Mon, 25 Mar 2019 13:29:30 +0100
+Message-ID: <ded64901-abf7-ee07-a7d5-105697d60795@suse.com>
 References: <20190318131155.29450-1-jgross@suse.com>
  <20190318131155.29450-4-jgross@suse.com>
+ <37954eb9e9efb9b95c603458b298bc1a51b6354f.camel@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4963492277176228911=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ytoJ=R4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h8Obe-0005LG-Ha
- for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 12:21:34 +0000
-In-Reply-To: <20190318131155.29450-4-jgross@suse.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=zSVc=R4=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1h8OjP-0005dV-ON
+ for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 12:29:35 +0000
+In-Reply-To: <37954eb9e9efb9b95c603458b298bc1a51b6354f.camel@suse.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,102 +26,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4963492277176228911==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-VuhymKjD0SG1VKpyvi77"
-
-
---=-VuhymKjD0SG1VKpyvi77
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2019-03-18 at 14:11 +0100, Juergen Gross wrote:
-> --- a/xen/include/xen/cpu.h
-> +++ b/xen/include/xen/cpu.h
-> @@ -32,23 +32,25 @@ void register_cpu_notifier(struct notifier_block
-> *nb);
->   *  (a) A CPU is going down; or (b) CPU_UP_CANCELED
->   */
->  /* CPU_UP_PREPARE: Preparing to bring CPU online. */
-> -#define CPU_UP_PREPARE   (0x0001 | NOTIFY_FORWARD)
-> +#define CPU_UP_PREPARE    (0x0001 | NOTIFY_FORWARD)
->
-In the comment block before these definitions, there's this:
-
- * Possible event sequences for a given CPU:
- *  CPU_UP_PREPARE -> CPU_UP_CANCELLED           -- failed CPU up
- *  CPU_UP_PREPARE -> CPU_STARTING -> CPU_ONLINE -- successful CPU up
- *  CPU_DOWN_PREPARE -> CPU_DOWN_FAILED          -- failed CPU down
- *  CPU_DOWN_PREPARE -> CPU_DYING -> CPU_DEAD    -- successful CPU down
-
-Shouldn't we add a line for this new hook? Something, IIUIC, like:
-
- CPU_UP_PREPARE -> CPU_UP_CANCELLED -> CPU_RESUME_FAILED --CPU not resuming
-
-With this, FWIW,
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-One more (minor) thing...
-
->  /* CPU_REMOVE: CPU was removed. */
-> -#define CPU_REMOVE       (0x0009 | NOTIFY_REVERSE)
-> +#define CPU_REMOVE        (0x0009 | NOTIFY_REVERSE)
-> +/* CPU_RESUME_FAILED: CPU failed to come up in resume, all other CPUs up=
-. */
-> +#define CPU_RESUME_FAILED (0x000a | NOTIFY_REVERSE)
-> =20
-... technically, when we're dealing with CPU_RESUME_FAILED on one CPU,
-we don't know if _all_ others really went up, so I think I'd remove
-what follows the ','.
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-VuhymKjD0SG1VKpyvi77
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyYx7EACgkQFkJ4iaW4
-c+4LiQ/9FzJVZjL1m6NAsrbXb8RmKyiLiZHrnVzn+RczPC87aRqW6U+Knk4GwHAW
-Vx8t3rS1nvEtZTiNM+NmjV7eMaQUL1AN/GNGtNAjMXiKHGoDJu4lAAiqu2uFaOrx
-GuwNzLkK3e2dEEI5KIOHAWNpf/Yhb3S9kCNKSj3q8PVfrLV/V6f2w8r8SfWk/qnd
-9+Zv0VUMkoCuTkFnVwAp/ItsK6OgMM3iB/R89piZFu0D3Bql5Od3dtSCbXkvViaO
-SN3htrmQcClFu9Wb8Jpx08TCf4VuXx6x58OkhAL9IN+w1Cu9kQxuHXZbjl603mNe
-jmXOJbt5bLUywsMKffzmnFXOwcXnWbJ3znug4lP7KNYuFH1b0NteuYs/kn/WdG9m
-//na1VfDj5NwqIMrZpVY5fP6SKik6KtAGILswoGlAMeQWJ2Z8p7DQEKp3gVkLV7d
-DmG9rCCUdT3lFOT0EJ+BKK60ZLlN3e5yg0UdhJpxEKsE4t13Qk3i/cWGUipELWfb
-MtEhu7HaSlZseDbEKG0R0bFMWplDwM0Or86L5dx9c20M90s+DObKDcSuYtgApeaY
-miIS4iPM0i8kIy/D3JbeWbFrH/jbN/astyJZ7NgT5EUIZsdN8ibLWETBI7Zd6zkt
-VSVoczoTAjh0jAfeCUi2UoeHukZDIHpcYk2m/EhSPmPSb2xIT0U=
-=zytV
------END PGP SIGNATURE-----
-
---=-VuhymKjD0SG1VKpyvi77--
-
-
-
---===============4963492277176228911==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4963492277176228911==--
+T24gMjUvMDMvMjAxOSAxMzoyMSwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gTW9uLCAyMDE5
+LTAzLTE4IGF0IDE0OjExICswMTAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiAtLS0gYS94ZW4v
+aW5jbHVkZS94ZW4vY3B1LmgKPj4gKysrIGIveGVuL2luY2x1ZGUveGVuL2NwdS5oCj4+IEBAIC0z
+MiwyMyArMzIsMjUgQEAgdm9pZCByZWdpc3Rlcl9jcHVfbm90aWZpZXIoc3RydWN0IG5vdGlmaWVy
+X2Jsb2NrCj4+ICpuYik7Cj4+ICAgKiAgKGEpIEEgQ1BVIGlzIGdvaW5nIGRvd247IG9yIChiKSBD
+UFVfVVBfQ0FOQ0VMRUQKPj4gICAqLwo+PiAgLyogQ1BVX1VQX1BSRVBBUkU6IFByZXBhcmluZyB0
+byBicmluZyBDUFUgb25saW5lLiAqLwo+PiAtI2RlZmluZSBDUFVfVVBfUFJFUEFSRSAgICgweDAw
+MDEgfCBOT1RJRllfRk9SV0FSRCkKPj4gKyNkZWZpbmUgQ1BVX1VQX1BSRVBBUkUgICAgKDB4MDAw
+MSB8IE5PVElGWV9GT1JXQVJEKQo+Pgo+IEluIHRoZSBjb21tZW50IGJsb2NrIGJlZm9yZSB0aGVz
+ZSBkZWZpbml0aW9ucywgdGhlcmUncyB0aGlzOgo+IAo+ICAqIFBvc3NpYmxlIGV2ZW50IHNlcXVl
+bmNlcyBmb3IgYSBnaXZlbiBDUFU6Cj4gICogIENQVV9VUF9QUkVQQVJFIC0+IENQVV9VUF9DQU5D
+RUxMRUQgICAgICAgICAgIC0tIGZhaWxlZCBDUFUgdXAKPiAgKiAgQ1BVX1VQX1BSRVBBUkUgLT4g
+Q1BVX1NUQVJUSU5HIC0+IENQVV9PTkxJTkUgLS0gc3VjY2Vzc2Z1bCBDUFUgdXAKPiAgKiAgQ1BV
+X0RPV05fUFJFUEFSRSAtPiBDUFVfRE9XTl9GQUlMRUQgICAgICAgICAgLS0gZmFpbGVkIENQVSBk
+b3duCj4gICogIENQVV9ET1dOX1BSRVBBUkUgLT4gQ1BVX0RZSU5HIC0+IENQVV9ERUFEICAgIC0t
+IHN1Y2Nlc3NmdWwgQ1BVIGRvd24KPiAKPiBTaG91bGRuJ3Qgd2UgYWRkIGEgbGluZSBmb3IgdGhp
+cyBuZXcgaG9vaz8gU29tZXRoaW5nLCBJSVVJQywgbGlrZToKPiAKPiAgQ1BVX1VQX1BSRVBBUkUg
+LT4gQ1BVX1VQX0NBTkNFTExFRCAtPiBDUFVfUkVTVU1FX0ZBSUxFRCAtLUNQVSBub3QgcmVzdW1p
+bmcKCkZpbmUgd2l0aCBtZS4KCj4gCj4gV2l0aCB0aGlzLCBGV0lXLAo+IAo+IFJldmlld2VkLWJ5
+OiBEYXJpbyBGYWdnaW9saSA8ZGZhZ2dpb2xpQHN1c2UuY29tPgo+IAo+IE9uZSBtb3JlIChtaW5v
+cikgdGhpbmcuLi4KPiAKPj4gIC8qIENQVV9SRU1PVkU6IENQVSB3YXMgcmVtb3ZlZC4gKi8KPj4g
+LSNkZWZpbmUgQ1BVX1JFTU9WRSAgICAgICAoMHgwMDA5IHwgTk9USUZZX1JFVkVSU0UpCj4+ICsj
+ZGVmaW5lIENQVV9SRU1PVkUgICAgICAgICgweDAwMDkgfCBOT1RJRllfUkVWRVJTRSkKPj4gKy8q
+IENQVV9SRVNVTUVfRkFJTEVEOiBDUFUgZmFpbGVkIHRvIGNvbWUgdXAgaW4gcmVzdW1lLCBhbGwg
+b3RoZXIgQ1BVcyB1cC4gKi8KPj4gKyNkZWZpbmUgQ1BVX1JFU1VNRV9GQUlMRUQgKDB4MDAwYSB8
+IE5PVElGWV9SRVZFUlNFKQo+PiAgCj4gLi4uIHRlY2huaWNhbGx5LCB3aGVuIHdlJ3JlIGRlYWxp
+bmcgd2l0aCBDUFVfUkVTVU1FX0ZBSUxFRCBvbiBvbmUgQ1BVLAo+IHdlIGRvbid0IGtub3cgaWYg
+X2FsbF8gb3RoZXJzIHJlYWxseSB3ZW50IHVwLCBzbyBJIHRoaW5rIEknZCByZW1vdmUKPiB3aGF0
+IGZvbGxvd3MgdGhlICcsJy4KClRoZSBwb2ludCBpcyB0aGF0IGZvciB0aGUgQ1BVX1JFU1VNRV9G
+QUlMRUQgY2FzZSB3ZSBjYW4gYmUgc3VyZSB0aGF0IG5vCmNwdSB3aWxsIGNvbWUgdXAgZHVlIHRv
+IHJlc3VtZSBqdXN0IGEgbGl0dGxlIGJpdCBsYXRlci4gU28gd2UgY2FuIHRlc3QKZm9yIGUuZy4g
+YSBjcHVwb29sIHN1ZGRlbmx5IGhhdmluZyBubyBtb3JlIGNwdXMgYXZhaWxhYmxlLiBUaGlzIGlz
+IGluCmNvbnRyYXN0IHRvIENQVV9VUF9DQU5DRUxMRUQgYmVpbmcgc2lnbmFsbGVkIGp1c3QgYWZ0
+ZXIgdGhlIG9uZSBjcHUKZmFpbGluZyB0byBjb21lIHVwLCBidXQgYmVmb3JlIHRoZSBuZXh0IGNw
+dSBpcyB0cmlnZ2VyZWQgdG8gY29tZSB1cC4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
