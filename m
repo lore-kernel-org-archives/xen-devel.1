@@ -1,15 +1,15 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH] CI: Add a CentOS 6 container and build jobs
-Date: Mon, 25 Mar 2019 11:33:16 +0000
-Message-ID: <20190325113316.GA14641@zion.uk.xensource.com>
-References: <1553253220-23838-1-git-send-email-andrew.cooper3@citrix.com>
- <20190325112144.GX14641@zion.uk.xensource.com>
+From: Chao Gao <chao.gao@intel.com>
+Subject: Re: [PATCH v1] x86/microcode: always collect_cpu_info()
+ during boot
+Date: Mon, 25 Mar 2019 19:40:45 +0800
+Message-ID: <20190325114043.GA6008@gao-cwp>
+References: <20190325111217.25649-1-sergey.dyasli@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Content-Disposition: inline
-In-Reply-To: <20190325112144.GX14641@zion.uk.xensource.com>
+In-Reply-To: <20190325111217.25649-1-sergey.dyasli@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,22 +18,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Doug Goldstein <cardoe@cardoe.com>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>
+To: Sergey Dyasli <sergey.dyasli@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXIgMjUsIDIwMTkgYXQgMTE6MjE6NDRBTSArMDAwMCwgV2VpIExpdSB3cm90ZToK
-PiBPbiBGcmksIE1hciAyMiwgMjAxOSBhdCAxMToxMzo0MEFNICswMDAwLCBBbmRyZXcgQ29vcGVy
-IHdyb3RlOgo+ID4gQ2VudE9TIDYgaXMgcHJvYmFibHkgdGhlIG1vc3QgZnJlcXVlbnRseSBicm9r
-ZW4gYnVpbGQsIHNvIGFkZGluZyBpdCB0byBDSQo+ID4gd291bGQgYmUgYSB2ZXJ5IGdvb2QgbW92
-ZS4KPiA+IAo+ID4gT25lIHByb2JsZW0gaXMgdGhhdCBDZW50T1MgNiBjb21lcyB3aXRoIFB5dGhv
-biAyLjYsIGFuZCBRZW11IHJlcXVpcmVzIDIuNy4KPiA+IFRoZXJlIGFwcGVhciB0byBiZSBubyBz
-ZW5zaWJsZSB3YXlzIHRvIGdldCBQeXRob24gMi43IGludG8gYSBDZW50T1MgNgo+ID4gZW52aXJv
-bm1lbnRzLCBzbyBtb2RpZnkgdGhlIGJ1aWxkIHNjcmlwdCB0byBza2lwIHRoZSBRZW11IHVwc3Ry
-ZWFtIGJ1aWxkCj4gPiBpbnN0ZWFkLgo+ID4gCj4gPiBTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29v
-cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+IAo+IEFja2VkLWJ5OiBXZWkgTGl1IDx3
-ZWkubGl1MkBjaXRyaXguY29tPgoKSnVzdCBzYXcgeW91ciB0aHJlYWQgb24gc2VhYmlvcyBsaXN0
-IC0tIGRvIHlvdSB3YW50IHRvIGV4Y2x1ZGUgc2VhYmlvcwpidWlsZCBpbiBDZW50T1MgNj8KCldl
-aS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCBNYXIgMjUsIDIwMTkgYXQgMTE6MTI6MTdBTSArMDAwMCwgU2VyZ2V5IER5YXNsaSB3
+cm90ZToKPkN1cnJlbnRseSBjcHVfc2lnIHN0cnVjdCBpcyBub3QgdXBkYXRlZCBkdXJpbmcgYm9v
+dCB3aGVuIGVpdGhlcjoKPgo+ICAgIDEuIHVjb2RlX3NjYW4gaXMgc2V0IHRvIGZhbHNlIChlLmcu
+IG5vICJ1Y29kZT1zY2FuIiBpbiBjbWRsaW5lKQo+ICAgIDIuIGluaXRyZCBkb2VzIG5vdCBjb250
+YWluIGEgbWljcm9jb2RlIGJsb2IKPgo+VGhlc2Ugd2lsbCByZXN1bHQgaW4gY3B1X3NpZy5yZXYg
+YmVpbmcgMCB3aGljaCBhZmZlY3RzIEFQSUMncwo+Y2hlY2tfZGVhZGxpbmVfZXJyYXRhKCkgYW5k
+IHJldHBvbGluZV9zYWZlKCkgZnVuY3Rpb25zLgo+Cj5GaXggdGhpcyBieSBnZXR0aW5nIHVjb2Rl
+IHJldmlzaW9uIGVhcmx5IGR1cmluZyBib290IGFuZCBTTVAgYnJpbmcgdXAuCj5XaGlsZSBhdCBp
+dCwgcHJvdGVjdCBlYXJseV9taWNyb2NvZGVfdXBkYXRlX2NwdSgpIGZvciBjYXNlcyB3aGVuCj5t
+aWNyb2NvZGVfb3BzIGlzIE5VTEwuCj4KPlNpZ25lZC1vZmYtYnk6IFNlcmdleSBEeWFzbGkgPHNl
+cmdleS5keWFzbGlAY2l0cml4LmNvbT4KClJldmlld2VkLWJ5OiBDaGFvIEdhbyA8Y2hhby5nYW9A
+aW50ZWwuY29tPgoKVGhhbmtzCkNoYW8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
