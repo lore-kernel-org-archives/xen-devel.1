@@ -1,17 +1,17 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 134075: regressions -
- trouble: blocked/broken/fail/pass
-Date: Mon, 25 Mar 2019 19:33:12 +0000
-Message-ID: <osstest-134075-mainreport@xen.org>
+From: Danux <danuxx@gmail.com>
+Subject: Xen from Xilinx 2018.3 not recognizing boot arguments
+Date: Mon, 25 Mar 2019 13:54:41 -0700
+Message-ID: <CAL7A2Dxm8eNb3F_HV3FjPGO8Bvgge0JH=eoOa+JKxdCiGKNrGw@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6747818974756809938=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Q7MT=R4=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1h8VLO-0003qQ-Fx
- for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 19:33:14 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=aKhK=R4=gmail.com=danuxx@srs-us1.protection.inumbo.net>)
+ id 1h8WcQ-0001ro-SA
+ for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 20:54:54 +0000
+Received: by mail-io1-xd2e.google.com with SMTP id f6so8877432iop.3
+ for <xen-devel@lists.xenproject.org>; Mon, 25 Mar 2019 13:54:53 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,67 +20,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzNDA3NSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNDA3NS8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQteHNtICAgICAg
-ICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYXJt
-NjQteHNtICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgIGJyb2tlbiBSRUdS
-LiB2cy4gMTMzOTkxCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICA2IHhlbi1idWlsZCAg
-ICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMzM5OTEKClRlc3RzIHdoaWNoIGFyZSBmYWls
-aW5nIGludGVybWl0dGVudGx5IChub3QgYmxvY2tpbmcpOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dS1kZWJpYW5odm0taTM4NiAxNiBndWVzdC1sb2NhbG1pZ3JhdGUveDEwIGZhaWwgcGFzcyBp
-biAxMzQwNjgKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tp
-bmc6CiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAg
-ICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAxIGJ1
-aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhm
-LXhsICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgaW4gMTM0MDY4IG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hl
-Y2sgZmFpbCBpbiAxMzQwNjggbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCgp2ZXJz
-aW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogeGVuICAgICAgICAgICAgICAgICAgMTMxNjM2OWRj
-YTYxMDM1MmNjZTNhYWY3NmU5MGRiMWNjZTc1ZWQ5ZgpiYXNlbGluZSB2ZXJzaW9uOgogeGVuICAg
-ICAgICAgICAgICAgICAgY2I3MGEyNmY3ODg0OGZlNDVmNTkzZjdlYmM5Y2ZhYWM3NjBhNzkxYgoK
-TGFzdCB0ZXN0IG9mIGJhc2lzICAgMTMzOTkxICAyMDE5LTAzLTIyIDE1OjAwOjQ2IFogICAgMyBk
-YXlzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEzNDA2OCAgMjAxOS0wMy0yNSAxMjowMDo1MSBaICAg
-IDAgZGF5cyAgICAyIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1
-bmRlciB0ZXN0OgogIEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CiAg
-V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxk
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1h
-cm02NC1hcm02NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJs
-b2NrZWQgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2ICAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0
-IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dz
-CmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUg
-YXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0
-ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGlu
-IGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
-ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVy
-CgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhl
-bi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFy
-bTY0LXhzbSBicm9rZW4KYnJva2VuLXN0ZXAgYnVpbGQtYXJtNjQteHNtIGhvc3QtaW5zdGFsbCg0
-KQpicm9rZW4tam9iIGJ1aWxkLWFybTY0LXhzbSBicm9rZW4KCk5vdCBwdXNoaW5nLgoKLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCmNv
-bW1pdCAxMzE2MzY5ZGNhNjEwMzUyY2NlM2FhZjc2ZTkwZGIxY2NlNzVlZDlmCkF1dGhvcjogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KRGF0ZTogICBGcmkgTWFyIDIy
-IDExOjEyOjI4IDIwMTkgKzAwMDAKCiAgICBDSTogRml4IGluZGVudGF0aW9uIGluIGNvbnRhaW5l
-cml6ZSBzY3JpcHQKICAgIAogICAgVGhlIHNjcmlwdCBpcyBtb3N0bHkgaW5kZW50ZWQgd2l0aCBz
-cGFjZXMsIGJ1dCB0aGVyZSBhcmUgdGhyZWUgdGFicy4gIEZpeCB0aGVtCiAgICB1cCB0byBiZSBj
-b25zaXN0ZW50LgogICAgCiAgICBObyBmdW5jdGlvbmFsIGNoYW5nZS4KICAgIAogICAgU2lnbmVk
-LW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICAgIEFj
-a2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgoocWVtdSBjaGFuZ2VzIG5vdCBp
-bmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============6747818974756809938==
+Content-Type: multipart/alternative; boundary="00000000000084bdf00584f16a68"
+
+--00000000000084bdf00584f16a68
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+
+When adding altp2m=1 argument to xen,xen-bootargs via DTB, I can see the
+parameter passed via xl info:
+
+xen_commandline        : console=dtuart dtuart=serial0 dom0_mem=1G
+bootscrub=0 maxcpus=1 timer_slop=0* altp2m=1*
+
+However, I got an error like this at booting phase:
+
+(XEN) parameter "*altp2m*" unknown!
+
+Please shed some light on this.
+
+Thanks.
+
+-- 
+DanUx
+
+--00000000000084bdf00584f16a68
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div>Hi=
+,</div><div><br></div><div>When adding altp2m=3D1 argument to xen,xen-boota=
+rgs via DTB, I can see the parameter passed via xl info:</div><div><br></di=
+v><div>xen_commandline=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 : console=
+=3Ddtuart dtuart=3Dserial0 dom0_mem=3D1G bootscrub=3D0 maxcpus=3D1 timer_sl=
+op=3D0<b> altp2m=3D1</b><br></div><div><br></div><div>However, I got an err=
+or like this at booting phase:<br></div><div><br></div><div>(XEN) parameter=
+ &quot;<b>altp2m</b>&quot; unknown!<br></div><div><br></div><div>Please she=
+d some light on this.</div><div><br></div><div>Thanks.<br></div><div><br>--=
+ <br><div dir=3D"ltr" class=3D"gmail_signature">DanUx</div></div></div></di=
+v></div></div>
+
+--00000000000084bdf00584f16a68--
+
+
+--===============6747818974756809938==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6747818974756809938==--
