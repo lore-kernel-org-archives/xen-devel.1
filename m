@@ -1,20 +1,20 @@
-From: Peter Maydell <peter.maydell@linaro.org>
-Subject: Re: [PULL 0/7] Tracing patches
-Date: Mon, 25 Mar 2019 18:09:00 +0000
-Message-ID: <CAFEAcA8vaS3u5wetjpmmaVQRKmVWK3+csQWUMAPd4DVcoExwaA@mail.gmail.com>
-References: <20190325155857.10661-1-stefanha@redhat.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 4/6] xen: don't free percpu areas during
+ suspend
+Date: Mon, 25 Mar 2019 19:14:46 +0100
+Message-ID: <ec8e4e85bd9a6fccc5870d73dea66892122080cf.camel@suse.com>
+References: <20190318131155.29450-1-jgross@suse.com>
+ <20190318131155.29450-5-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7439566409937994500=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=SZ5F=R4=linaro.org=peter.maydell@srs-us1.protection.inumbo.net>)
- id 1h8U25-0004uY-QT
- for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 18:09:13 +0000
-Received: by mail-oi1-x244.google.com with SMTP id v7so7734097oie.8
- for <xen-devel@lists.xenproject.org>; Mon, 25 Mar 2019 11:09:11 -0700 (PDT)
-In-Reply-To: <20190325155857.10661-1-stefanha@redhat.com>
+ <SRS0=ytoJ=R4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1h8U7o-0005kB-2O
+ for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 18:15:08 +0000
+In-Reply-To: <20190318131155.29450-5-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,26 +23,70 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: Fam Zheng <fam@euphon.net>, kvm-devel <kvm@vger.kernel.org>, David Hildenbrand <david@redhat.com>, Jason Wang <jasowang@redhat.com>, Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, QEMU Developers <qemu-devel@nongnu.org>, Michael Roth <mdroth@linux.vnet.ibm.com>, Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>, "open list:X86" <xen-devel@lists.xenproject.org>, Qemu-block <qemu-block@nongnu.org>, Juan Quintela <quintela@redhat.com>, Aleksandar Rikalo <arikalo@wavecomp.com>, Helge Deller <deller@gmx.de>, "Michael S. Tsirkin" <mst@redhat.com>, Markus Armbruster <armbru@redhat.com>, Halil Pasic <pasic@linux.ibm.com>, Christian Borntraeger <borntraeger@de.ibm.com>, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, Anthony Perard <anthony.perard@citrix.com>, =?UTF-8?B?TWFyYy1BbmRyw6kgTHVyZWF1?= <marcandre.lureau@re>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCAyNSBNYXIgMjAxOSBhdCAxNTo1OSwgU3RlZmFuIEhham5vY3ppIDxzdGVmYW5oYUBy
-ZWRoYXQuY29tPiB3cm90ZToKPgo+IFRoZSBmb2xsb3dpbmcgY2hhbmdlcyBzaW5jZSBjb21taXQg
-ZDk3YTM5ZDkwM2ZlMzNjNDViZTgzYWM2OTQzYTJmODJhMzY0OWExMToKPgo+ICAgTWVyZ2UgcmVt
-b3RlLXRyYWNraW5nIGJyYW5jaCAncmVtb3Rlcy9laGFia29zdC90YWdzL3g4Ni1uZXh0LXB1bGwt
-cmVxdWVzdCcgaW50byBzdGFnaW5nICgyMDE5LTAzLTIyIDA5OjM3OjM4ICswMDAwKQo+Cj4gYXJl
-IGF2YWlsYWJsZSBpbiB0aGUgR2l0IHJlcG9zaXRvcnkgYXQ6Cj4KPiAgIGdpdDovL2dpdGh1Yi5j
-b20vc3RlZmFuaGEvcWVtdS5naXQgdGFncy90cmFjaW5nLXB1bGwtcmVxdWVzdAo+Cj4gZm9yIHlv
-dSB0byBmZXRjaCBjaGFuZ2VzIHVwIHRvIGRlYzk3NzYwNDllMzJkNmM4MzAxMjdiMjg2NTMwYzVm
-NTMyNjdlZmY6Cj4KPiAgIHRyYWNlLWV2ZW50czogRml4IGF0dHJpYnV0aW9uIG9mIHRyYWNlIHBv
-aW50cyB0byBzb3VyY2UgKDIwMTktMDMtMjIgMTY6MTg6MDcgKzAwMDApCj4KPiAtLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4g
-UHVsbCByZXF1ZXN0Cj4KPiBDb21waWxhdGlvbiBmaXhlcyBhbmQgY2xlYW51cHMgZm9yIFFFTVUg
-NC4wLjAuCj4KPiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCj4KCkFwcGxpZWQsIHRoYW5rcy4KClBsZWFzZSB1cGRhdGUgdGhl
-IGNoYW5nZWxvZyBhdCBodHRwczovL3dpa2kucWVtdS5vcmcvQ2hhbmdlTG9nLzQuMApmb3IgYW55
-IHVzZXItdmlzaWJsZSBjaGFuZ2VzLgoKLS0gUE1NCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============7439566409937994500==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-+EGluaatIm1h/JeLT0ai"
+
+
+--=-+EGluaatIm1h/JeLT0ai
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2019-03-18 at 14:11 +0100, Juergen Gross wrote:
+> Instead of freeing percpu areas during suspend and allocating them
+> again when resuming keep them. Only free an area in case a cpu didn't
+> come up again when resuming.
+>=20
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-+EGluaatIm1h/JeLT0ai
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyZGpYACgkQFkJ4iaW4
+c+4KohAA5dEXzvrNeo2ruS/pypKAB8uElEk5JAZ9pbzKXdsYrd88RoD8kxqSBYyg
+2EHmrkIVWiDbe/LwHGnyUbpzqbFpmTCJtc4I0yCiUvU85CaLRqozMxuCwpmT8SU6
+DBSmAG4cQsO10Q3b0DEebtBRjBXQ1cGKqJAEwQf5BRKIz75D1GHQrB5cuEaft4DA
++T29G1K0V/0jhALGa/kcWf35M6mOvwmqwaGIL97ZscauP5zWCNBYfx5cnT9a5SaJ
+kpR+5mL61PKO6UqxDeXcssdGkq+2gEAphGbbSlJFYSgywlWXQyqEqahgK/hOXZmW
+njLlUZvAQ4Pu0puUQaPDl5TtHaJj1ekxl7eAgjWiXHhONohZMSJ9QLARhfCvyL99
+Prl5GWnJygObbT5Q4UVfLZ/SFjJJPF93nykPYhetGuicCoaHdEU2h8+FC20BBKxZ
+MKo9bWpJCNhPGuhEVuK2lvLVT8frhyWEBZRf1KKYDOIIQ04YRJDJgitoRNclLSjX
+fcSxeED3Rz+W8Y3nJiRYuXekuM12poOlbrJvhfHmX6maaa/LJTm1S3kP5dv3jz8E
+uiSrDUe594Y5RXN3Hmgpfq5ZI4htTglnvaTXWKz+XYxytV8IyaqT+XvluJ5P3o9Z
+0av4/Czi8Dc6HSojAY6K7sBJrig9RfGth3BmI+CY/RuHI9K9T54=
+=bH+J
+-----END PGP SIGNATURE-----
+
+--=-+EGluaatIm1h/JeLT0ai--
+
+
+
+--===============7439566409937994500==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7439566409937994500==--
