@@ -1,20 +1,25 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 4/6] xen: don't free percpu areas during
- suspend
-Date: Mon, 25 Mar 2019 19:14:46 +0100
-Message-ID: <ec8e4e85bd9a6fccc5870d73dea66892122080cf.camel@suse.com>
-References: <20190318131155.29450-1-jgross@suse.com>
- <20190318131155.29450-5-jgross@suse.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH] x86/xen: Add "xen_timer_slop" command line
+ option
+Date: Mon, 25 Mar 2019 14:31:36 -0400
+Message-ID: <48d80239-08ca-6bd0-84b0-95d0d0ab689c__12917.5629977667$1553538800$gmane$org@oracle.com>
+References: <1553279397-130201-1-git-send-email-ryan.thibodeaux@starlab.io>
+ <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
+ <52bfeae7c256faec444b69efe58d363ad60c3fc5.camel@suse.com>
+ <20190323114151.5cebf31b@sweethome> <20190325130530.56603806@luca64>
+ <69e40698-f7ae-11c3-e4b7-dda4f1fadcf6@oracle.com>
+ <20190325141138.GA44413@centos-dev.localdomain>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7439566409937994500=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ytoJ=R4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h8U7o-0005kB-2O
- for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 18:15:08 +0000
-In-Reply-To: <20190318131155.29450-5-jgross@suse.com>
+ <SRS0=/Brs=R4=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1h8UOJ-0007JY-Pp
+ for xen-devel@lists.xenproject.org; Mon, 25 Mar 2019 18:32:11 +0000
+In-Reply-To: <20190325141138.GA44413@centos-dev.localdomain>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,70 +28,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Ryan Thibodeaux <thibodux@gmail.com>
+Cc: jgross@suse.com, oleksandr_andrushchenko@epam.com, luca abeni <luca.abeni@santannapisa.it>, linux-kernel@vger.kernel.org, Dario Faggioli <dfaggioli@suse.com>, ryan.thibodeaux@starlab.io, xen-devel@lists.xenproject.org, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7439566409937994500==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-+EGluaatIm1h/JeLT0ai"
-
-
---=-+EGluaatIm1h/JeLT0ai
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2019-03-18 at 14:11 +0100, Juergen Gross wrote:
-> Instead of freeing percpu areas during suspend and allocating them
-> again when resuming keep them. Only free an area in case a cpu didn't
-> come up again when resuming.
->=20
-> Signed-off-by: Juergen Gross <jgross@suse.com>
->
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-+EGluaatIm1h/JeLT0ai
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyZGpYACgkQFkJ4iaW4
-c+4KohAA5dEXzvrNeo2ruS/pypKAB8uElEk5JAZ9pbzKXdsYrd88RoD8kxqSBYyg
-2EHmrkIVWiDbe/LwHGnyUbpzqbFpmTCJtc4I0yCiUvU85CaLRqozMxuCwpmT8SU6
-DBSmAG4cQsO10Q3b0DEebtBRjBXQ1cGKqJAEwQf5BRKIz75D1GHQrB5cuEaft4DA
-+T29G1K0V/0jhALGa/kcWf35M6mOvwmqwaGIL97ZscauP5zWCNBYfx5cnT9a5SaJ
-kpR+5mL61PKO6UqxDeXcssdGkq+2gEAphGbbSlJFYSgywlWXQyqEqahgK/hOXZmW
-njLlUZvAQ4Pu0puUQaPDl5TtHaJj1ekxl7eAgjWiXHhONohZMSJ9QLARhfCvyL99
-Prl5GWnJygObbT5Q4UVfLZ/SFjJJPF93nykPYhetGuicCoaHdEU2h8+FC20BBKxZ
-MKo9bWpJCNhPGuhEVuK2lvLVT8frhyWEBZRf1KKYDOIIQ04YRJDJgitoRNclLSjX
-fcSxeED3Rz+W8Y3nJiRYuXekuM12poOlbrJvhfHmX6maaa/LJTm1S3kP5dv3jz8E
-uiSrDUe594Y5RXN3Hmgpfq5ZI4htTglnvaTXWKz+XYxytV8IyaqT+XvluJ5P3o9Z
-0av4/Czi8Dc6HSojAY6K7sBJrig9RfGth3BmI+CY/RuHI9K9T54=
-=bH+J
------END PGP SIGNATURE-----
-
---=-+EGluaatIm1h/JeLT0ai--
-
-
-
---===============7439566409937994500==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7439566409937994500==--
+T24gMy8yNS8xOSAxMDoxMSBBTSwgUnlhbiBUaGlib2RlYXV4IHdyb3RlOgo+IE9uIE1vbiwgTWFy
+IDI1LCAyMDE5IGF0IDA5OjQzOjIwQU0gLTA0MDAsIEJvcmlzIE9zdHJvdnNreSB3cm90ZToKPj4g
+T24gMy8yNS8xOSA4OjA1IEFNLCBsdWNhIGFiZW5pIHdyb3RlOgo+Pj4gSGkgYWxsLAo+Pj4KPj4+
+IE9uIFNhdCwgMjMgTWFyIDIwMTkgMTE6NDE6NTEgKzAxMDAKPj4+IGx1Y2EgYWJlbmkgPGx1Y2Eu
+YWJlbmlAc2FudGFubmFwaXNhLml0PiB3cm90ZToKPj4+IFsuLi5dCj4+Pj4+PiBJcyB0aGVyZSBh
+bnkgZGF0YSB0aGF0IHNob3dzIGVmZmVjdHMgb2YgdXNpbmcgdGhpcyBuZXcgcGFyYW1ldGVyPwo+
+Pj4+Pj4gICAgIAo+Pj4+PiBZZXMsIEkndmUgZG9uZSBzb21lIHJlc2VhcmNoIGFuZCBleHBlcmlt
+ZW50cyBvbiB0aGlzLiBJIGRpZCBpdAo+Pj4+PiB0b2dldGhlciB3aXRoIGEgZnJpZW5kLCB3aGlj
+aCBJJ20gQ2MtaW5nLCBhcyBJJ20gbm90IHN1cmUgd2UncmUKPj4+Pj4gcmVhZHkvY2FwYWJsZSB0
+byBzaGFyZSB0aGUgcmVzdWx0cywgeWV0IChMdWNhPykuICAKPj4+PiBJIHRoaW5rIHdlIGNhbiBl
+YXNpbHkgc2hhcmUgdGhlIGV4cGVyaW1lbnRhbCBkYXRhIChjeWNsaWN0ZXN0IG91dHB1dAo+Pj4+
+IGFuZCBwbG90cykuCj4+Pj4KPj4+PiBNb3Jlb3Zlciwgd2UgY2FuIHNoYXJlIHRoZSBzY3JpcHRz
+IGFuZCB0b29scyBmb3IgcnVubmluZyB0aGUKPj4+PiBleHBlcmltZW50cyAoc28sIGV2ZXJ5b25l
+IGNhbiBlYXNpbHkgcmVwcm9kdWNlIHRoZSBudW1iZXJzIGJ5IHNpbXBseQo+Pj4+IHR5cGluZyAi
+bWFrZSIgYW5kIHdhaXRpbmcgZm9yIHNvbWUgdGltZSA6KQo+Pj4+Cj4+Pj4KPj4+PiBJJ2xsIHRy
+eSB0byBwYWNrYWdlIHRoZSByZXN1bHRzIGFuZCB0aGUgc2NyaXB0cy90b29scyB0aGlzIGV2ZW5p
+bmcsCj4+Pj4gYW5kIEknbGwgc2VuZCB0aGVtLgo+Pj4gU29ycnkgZm9yIHRoZSBkZWxheS4gSSBw
+dXQgc29tZSBxdWljayByZXN1bHRzIGhlcmU6Cj4+PiBodHRwOi8vcmV0aXMuc2FudGFubmFwaXNh
+Lml0L2x1Y2EvWGVuVGltZXJzLwo+Pj4gKHRoZXJlIGFsc28gaXMgYSBsaW5rIHRvIHRoZSBzY3Jp
+cHRzIHRvIGJlIHVzZWQgZm9yIHJlcHJvZHVjaW5nIHRoZQo+Pj4gcmVzdWx0cykuIFRoZSBsYXRl
+bmNpZXMgaGF2ZSBiZWVuIG1lYXN1cmVkIGJ5IHJ1bm5pbmcgY3ljbGljdGVzdCBpbiB0aGUKPj4+
+IGd1ZXN0IChzZWUgdGhlIHNjcmlwdHMgZm9yIGRldGFpbHMpLgo+Pj4KPj4+IFRoZSBwaWN0dXJl
+IHNob3dzIHRoZSBsYXRlbmNpZXMgbWVhc3VyZWQgd2l0aCBhbiB1bnBhdGNoZWQgZ3Vlc3Qga2Vy
+bmVsCj4+PiBhbmQgd2l0aCBhIGd1ZXN0IGtlcm5lbCBoYXZpbmcgVElNRVJfU0xPUCBzZXQgdG8g
+MTAwMCAoYXJiaXRyYXJ5IHNtYWxsCj4+PiB2YWx1ZSA6KS4KPj4+IEFsbCB0aGUgZXhwZXJpbWVu
+dHMgaGF2ZSBiZWVuIHBlcmZvcm1lZCBib290aW5nIHRoZSBoeXBlcnZpc29yIHdpdGggYQo+Pj4g
+c21hbGwgdGltZXJfc2xvcCAodGhlIGh5cGVydmlzb3IncyBvbmUpIHZhbHVlLiBTbywgdGhleSBz
+aG93IHRoYXQKPj4+IGRlY3JlYXNpbmcgdGhlIGh5cGVydmlzb3IncyB0aW1lcl9zbG9wIGlzIG5v
+dCBlbm91Z2ggdG8gbWVhc3VyZSBsb3cKPj4+IGxhdGVuY2llcyB3aXRoIGN5Y2xpY3Rlc3QuCj4+
+Cj4+Cj4+IEkgaGF2ZSBhIGNvdXBsZSBvZiBxdWVzdGlvbnM6Cj4+ICogRG9lcyBpdCBtYWtlIHNl
+bnNlIHRvIG1ha2UgdGhpcyBhIHR1bmFibGUgZm9yIG90aGVyIGNsb2NrZXZlbnQgZGV2aWNlcwo+
+PiBhcyB3ZWxsPwo+IEkgZ2F0aGVyIHRoYXQgd291bGQgYmUgb24gYSBjYXNlLWJ5LWNhc2UgYmFz
+aXMgZm9yIHZlcnkgc3BlY2lmaWMgCj4gb25lcy4KPgo+IEZvciBtYW55IHRpbWVycyBpbiB0aGUg
+a2VybmVsLCB0aGUgbWluaW11bXMgYXJlIGRldGVybWluZWQgYnkgdGhlCj4gYWN0dWFsIGhhcmR3
+YXJlICBiYWNraW5nIHRoZSB0aW1lciwgYW5kIHRoZSBtaW5pbXVtIGNhbiBiZQo+IGFkanVzdGVk
+IGJ5IHRoZSBjbG9ja2V2ZW50IGNvZGUuIFRoaXMgY2FzZSBpcyBzcGVjaWFsIHNpbmNlIGl0IAo+
+IGlzIGVudGlyZWx5IGEgc29mdHdhcmUtYmFzZWQgaW1wbGVtZW50YXRpb24gaW4gdGhlIGtlcm5l
+bCwgd2hlcmUgCj4gdGhlIGFjdHVhbCB0aW1lciBpbXBsZW1lbnRhdGlvbiBpcyBpbiB0aGUgWGVu
+IGh5cGVydmlzb3IuCj4KPj4gKiBUaGlzIHBhdGNoIGFkanVzdHMgbWluIHZhbHVlLiBDb3VsZCBt
+YXggdmFsdWUgKGV2ZXIpIG5lZWQgYSBzaW1pbGFyCj4+IGFkanVzdG1lbnQ/Cj4gSSBjYW5ub3Qg
+dGhpbmsgb2Ygc3VjaCBhIGNhc2Ugd2hlcmUgdGhhdCB3b3VsZCBiZSBoZWxwZnVsLCBidXQgSQo+
+IGNhbm5vdCBydWxlIHRoYXQgb3V0IG9yIHNwZWFrIGFzIGFuIGF1dGhvcml0eS4KCgpJIGFtIGFz
+a2luZyBtb3N0bHkgYmVjYXVzZSB5b3UgYXJlIGludHJvZHVjaW5nIG5ldyBpbnRlcmZhY2UgYW5k
+IEkgZG9uJ3QKd2FudCBpdCB0byBjaGFuZ2UgaW4gdGhlIGZ1dHVyZS4gSSBzdXBwb3NlIGlmIGxh
+dGVyIHdlIGRlY2lkZSB0byBhZGQKY29udHJvbCBmb3IgdGhlIG1heCB2YWx1ZSB3ZSBjb3VsZCBq
+dXN0IGV4cGFuZCB5b3VyIGN1cnJlbnQgcHJvcG9zYWwgdG8KeGVuX3RpbWVyX3Nsb3A9W21pbl0s
+W21heF0gYW5kIGtlZXAgaXQgdG8gYmUgYmFjay1jb21wYXRpYmxlLgoKRm9yIHRoZSBwYXRjaDoK
+ClJldmlld2VkLWJ5OiBCb3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29t
+PgoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
