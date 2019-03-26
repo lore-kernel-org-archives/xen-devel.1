@@ -1,17 +1,23 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH for-4.12] passthrough/vtd: Drop the
- "workaround_bios_bug" logic entirely
-Date: Tue, 26 Mar 2019 03:08:51 -0600
-Message-ID: <5C99EC230200007800221D12@prv1-mh.provo.novell.com>
-References: <1553199980-9849-1-git-send-email-andrew.cooper3@citrix.com>
- <5C98F2A50200007800221B22@prv1-mh.provo.novell.com>
- <5ed95c61-9ede-fd6a-3706-87cab323ac30@citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] x86/xen: Add "xen_timer_slop" command line
+ option
+Date: Tue, 26 Mar 2019 10:13:32 +0100
+Message-ID: <a32c8b1d7866ee3b074b1d674b40e03e51dbd54a.camel__8835.74104388885$1553591682$gmane$org@suse.com>
+References: <1553279397-130201-1-git-send-email-ryan.thibodeaux@starlab.io>
+ <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
+ <52bfeae7c256faec444b69efe58d363ad60c3fc5.camel@suse.com>
+ <20190323114151.5cebf31b@sweethome> <20190325130530.56603806@luca64>
+ <69e40698-f7ae-11c3-e4b7-dda4f1fadcf6@oracle.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3209304780224333442=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5ed95c61-9ede-fd6a-3706-87cab323ac30@citrix.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=yUlD=R5=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1h8i9U-0001aj-Cm
+ for xen-devel@lists.xenproject.org; Tue, 26 Mar 2019 09:13:48 +0000
+In-Reply-To: <69e40698-f7ae-11c3-e4b7-dda4f1fadcf6@oracle.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,136 +26,140 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Igor Druzhinin <igor.druzhinin@citrix.com>, Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Lars Kurth <lars.kurth@xenproject.org>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Ian Jackson <ian.jackson@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, luca abeni <luca.abeni@santannapisa.it>
+Cc: jgross@suse.com, oleksandr_andrushchenko@epam.com, linux-kernel@vger.kernel.org, thibodux@gmail.com, ryan.thibodeaux@starlab.io, xen-devel@lists.xenproject.org, tglx@linutronix.de
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI1LjAzLjE5IGF0IDE4OjM2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gT24gMjUvMDMvMjAxOSAxNToyNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+IE9uIDIx
-LjAzLjE5IGF0IDIxOjI2LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4+PiBJ
-dCB0dXJucyBvdXQgdGhhdCB0aGlzIGNvZGUgd2FzIHByZXZpb3VzbHkgZGVhZC4KPj4gSWYgaXQg
-d2FzIGVudGlyZWx5IGRlYWQsIHdoeSB0aGUgcnVzaCB0byBnZXQgdGhlIGNoYW5nZSBpbnRvIDQu
-MTI/Cj4+IChJIHN1cHBvc2UgdGhlIGxhdGVyIHBhcnRzIG9mIGRlc2NyaXB0aW9uIGFyZSB0aGVu
-IGp1c3RpZnlpbmcgd2h5Cj4+IHRoZSBjb2RlIHdhc24ndCBhY3R1YWxseSBkZWFkLCBhbmQgd2h5
-IGl0IHdhcyBnZXR0aW5nIGluIHRoZSB3YXksCj4+IGJ1dCBJIHRoaW5rIHRoaXMgd2F5IG9mIHB1
-dHRpbmcgaXQgaXMgYXQgbGVhc3QgY29uZnVzaW5nLikKPj4KPj4+IGMvcyBkY2Y0MTc5MCAiIHg4
-Ni9tbWNmZy9kcmhkOiBNb3ZlIGFjcGlfbW1jZmdfaW5pdCgpIGNhbGwgYmVmb3JlIGNhbGxpbmcK
-Pj4+IGFjcGlfcGFyc2VfZG1hcigpIiByZXN1bHRlZCBpbiBQQ0kgc2VnbWVudCAwIG5vdyBoYXZp
-bmcgYmVlbiBpbml0aWFsaXNlZAo+Pj4gZW5vdWdoIGZvciBhY3BpX3BhcnNlX29uZV9kcmhkKCkg
-dG8gbm90IHRha2UgdGhlCj4+Pgo+Pj4gICAvKiBTa2lwIGNoZWNraW5nIGlmIHNlZ21lbnQgaXMg
-bm90IGFjY2Vzc2libGUgeWV0LiAqLwo+Pj4KPj4+IHBhdGggdW5jb25kaXRpb25hbGx5Lgo+PiBP
-ciBhbSBJIG1pc3JlYWRpbmcgdGhlIGluaXRpYWwgc2VudGVuY2UsIGFuZCB5b3UncmUgcmVhbGx5
-IHN1Z2dlc3RpbmcKPj4gdGhhdCBwcmlvciB0byBzYWlkIGNvbW1pdCB0aGUgY29kZSBpbiBxdWVz
-dGlvbiBoYWQgYmVlbiBkZWFkPwo+IAo+IFRoaXMgbG9naWMgKHdoaWNoIGlzIGJlaW5nIGRlbGV0
-ZWQpIHVzZWQgdG8gYmUgZGVhZCwgYW5kIGJlY2FtZSBub24tZGVhZAo+IHdpdGggdGhlIGlkZW50
-aWZpZWQgY29tbWl0Lgo+IAo+IFRoZSBjb2RlLCBub3cgYmVpbmcgcnVuLCBjb25zdGl0dXRlcyBh
-IGZ1bmN0aW9uYWwgcmVncmVzc2lvbiBvbiBzb21lCj4gaGFyZHdhcmUsIHdoaWNoIHdvcmtlZCBm
-aW5lIHdpdGggWGVuIDQuMTEuCj4gCj4+IEhvdydzIHRoYXQgY29tbWl0IHJlbGF0ZWQgdGhlbj8g
-U2VnbWVudCAwIGlzIHZhbGlkIGlycmVzcGVjdGl2ZSBvZiBhbnkKPj4gTU1DRkcgaW5mb3JtYXRp
-b24gZ2FpbmVkIGZyb20gQUNQSSB0YWJsZXMgKHNlZSBwY2lfc2VnbWVudHNfaW5pdCgpKS4KPiAK
-PiBFeGFjdGx5IC0gdGhhdCBpcyB3aHkgaXQgaXMgYSByZWdyZXNzaW9uLgo+IAo+IEJlZm9yZSBw
-Y2lfc2VnbWVudHNfaW5pdCgpICh3aGljaCBpcyB0aGUgZmlyc3QgYWN0aW9uIG9mCj4gYWNwaV9t
-bWNmZ19pbml0KCksIGFuZCBoZW5jZSBpcyBtb3ZlZCBieSB0aGUgbWVudGlvbmVkIGNvbW1pdCks
-Cj4gYWNwaV9wYXJzZV9vbmVfZHJoZCgpJ3MgcXVlcnkgb2Ygc2VnbWVudCB6ZXJvIHJldHVybnMg
-Im5vdCBwcmVzZW50IiwKPiBjYXVzaW5nIHRoZSBjaGVjayB0byBiZSBza2lwcGVkLgo+IAo+Pj4g
-IEhvd2V2ZXIsIHNvbWUgc3lzdGVtcyBoYXZlIERNQVIgdGFibGVzIHdoaWNoIGxpc3QKPj4+IGRl
-dmljZXMgd2hpY2ggYXJlIGRpc2FibGVkIGJ5IHVzZXIgY2hvaWNlIChpbiBwYXJ0aWN1bGFyLCBE
-ZWxsIFBvd2VyRWRnZSBSNzQwCj4+PiB3aXRoIEkvTyBBVCBETUEgZGlzYWJsZWQpLCBhbmQgdHVy
-bmluZyBvZmYgYWxsIElPTU1VIGZ1bmN0aW9uYWxpdHkgaW4gdGhpcwo+Pj4gY2FzZSBpcyBlbnRp
-cmVseSB1bmhlbHBmdWwgYmVoYXZpb3VyLgo+PiBBcyBpbiBtYW55IG90aGVyIGNhc2VzLCB3aGF0
-IGlzIG9yIGlzIG5vdCB1bmhlbHBmdWwgaXMgb2Z0ZW4gYSBtYXR0ZXIKPj4gb2YgcGVyY2VwdGlv
-biBhbmQgaGVuY2UgcG9zc2libHkgc3ViamVjdGl2ZS4gSSBjYW4gc2VlIHlvdXIgcG9pbnQsCj4+
-IGJ1dCBJIGFsc28gY2FuIHNlZSB3aHkgdGhlIGF1dGhvcnMgb2YgdGhlIGNvZGUgY29uc2lkZXJl
-ZCBpdCBhIHJhdGhlcgo+PiBiYWQgc2lnbiBpZiBub24tZXhpc3RpbmcgUENJIGRldmljZXMgZ2V0
-IG5hbWVkIGJ5IGFuIEFDUEkgdGFibGUuCj4+IFdoYXQgaWYgZS5nLiBsYXRlciBhIGRldmljZSBn
-ZXRzIGhvdC1wbHVnZ2VkIGludG8gdGhhdCB2ZXJ5IFNCREY/Cj4gCj4gRXhhY3RseSB0aGUgc2Ft
-ZSBhcyB3aGF0IGhhcHBlbnMgb24gWGVuIDQuMTEgYW5kIGVhcmxpZXIsIHdoYXRldmVyIHRoYXQK
-PiBoYXBwZW5zIHRvIGJlLgo+IAo+Pj4gTGVhdmUgdGhlIHdhcm5pbmcgd2hpY2ggaWRlbnRpZmll
-cyB0aGUgcHJvYmxlbWF0aWMgZGV2aWNlcywgYnV0IGRyb3AgdGhlCj4+PiByZW1haW5pbmcgbG9n
-aWMuICBUaGlzIGxlYXZlcyB0aGUgc3lzdGVtIGluIGJldHRlciBvdmVyYWxsIHN0YXRlLCBhbmQg
-d29ya2luZwo+Pj4gaW4gdGhlIHNhbWUgd2F5IHRoYXQgaXQgZGlkIGluIHByZXZpb3VzIHJlbGVh
-c2VzLgo+PiBJIHdvbmRlciB3aGV0aGVyIHlvdSd2ZSB0YWtlbiB0aGUgdGltZSB0byBsb29rIGF0
-IHRoZSBkZXNjcmlwdGlvbgo+PiBvZiB0aGUgY29tbWl0IGZpcnN0IGludHJvZHVjaW5nIHRoaXMg
-bG9naWMgKGE4MDU5ZmZjZWQgIlZULWQ6IGltcHJvdmUKPj4gUk1SUiB2YWxpZGl0eSBjaGVja2lu
-ZyIpLiBJIGZpbmQgaXQgd29ycnlpbmcgaW4gcGFydGljdWxhciB0bwo+PiBlZmZlY3RpdmVseSBy
-ZXZlcnQgYSBjaGFuZ2Ugd2hpY2ggY2xhaW1zICd0byBhdm9pZCBhbnkgc2VjdXJpdHkKPj4gdnVs
-bmVyYWJpbGl0eSB3aXRoIG1hbGljaW91cyBzL3MgcmUtZW5hYmxpbmcgInN1cHBvc2VkIGRpc2Fi
-bGVkIgo+PiBkZXZpY2VzJyB3aXRob3V0IGFueSBkaXNjdXNzaW9uIG9mIHdoeSB0aGF0IG1heSBo
-YXZlIGJlZW4gYQo+PiB3cm9uZyBwZXJzcGVjdGl2ZSB0byB0YWtlLgo+IAo+IEkgaGFkLCBhbmQg
-YXMgYSBtYWludGFpbmVyLCBJJ2QgcmVqZWN0IGEgcGF0Y2ggbGlrZSB0aGF0IHdlcmUgaXQKPiBw
-cmVzZW50ZWQgdG9kYXkuCgpVbmRlcnN0b29kLiBCdXQgd2hldGhlciB5b3UnZCBhY2NlcHQgaXQg
-d2l0aCBhIGJldHRlciBkZXNjcmlwdGlvbgppcyB1bmtub3duLCBJIGFzc3VtZS4KCj4gVGhlcmUg
-aXMgYSBuZWJ1bG91cyBjbGFpbSBvZiBzZWN1cml0eSwgYnV0IGl0IGlzIGV4YWN0bHkgdGhhdCAt
-Cj4gbmVidWxvdXMuICBUaGVyZSBpc24ndCBlbm91Z2ggaW5mb3JtYXRpb24gdG8gd29yayBvdXQg
-d2hhdCB0aGUgY29uY2Vybgo+IHdhcywgYW5kIGV2ZW4gaWYgdGhlIGNvbmNlcm4gd2FzIHZhbGlk
-LCBkaXNhYmxpbmcgVlQtZCBhY3Jvc3MgdGhlIHN5c3RlbQo+IGlzbid0IGFuIGFwcHJvcHJpYXRl
-IGFjdGlvbiB0byB0YWtlLgoKVGhpcyBoZWF2aWx5IGRlcGVuZHMgb24gdGhlIHBvc2l0aW9uIHRo
-ZSBzeXN0ZW0ncyBhZG1pbiB0YWtlczoKRW5hYmxpbmcgVlQtZCBpbiBhbiBpbmNvbXBsZXRlIGZh
-c2hpb24gbWF5IGFzIHdlbGwgYmUgY29uc2lkZXJlZAp3b3JzZSB0aGFuIG5vdCBlbmFibGluZyBp
-dCBhdCBhbGwuIFRoYXQncyBiZWNhdXNlIHdpdGhvdXQgVlQtZApwYXNzLXRocm91Z2ggb2YgZGV2
-aWNlcyB0byBIVk0gZ3Vlc3RzIHdvbid0IGJlIGFsbG93ZWQgYXQgYWxsLgpXaGVyZWFzIHdpdGgg
-VlQtZCBlbmFibGVkIHBhc3NpbmcgdGhyb3VnaCBhIGRldmljZSBtYXksIGluCnN1Y2ggYSBzaXR1
-YXRpb24sIHB1dCB0aGUgc3lzdGVtIGF0IGhpZ2hlciByaXNrIHRoYW4gdGhlIGFkbWluIGlzCmF3
-YXJlLgoKRnVydGhlcm1vcmUsIGFzIG11Y2ggYXMgdGhlIHNlY3VyaXR5IHJlbGF0ZWQgY2xhaW0g
-dGhlcmUgaXMKbmVidWxvdXMsIHlvdXIgZGVzY3JpcHRpb24gLSBJJ20gc29ycnkgdG8gc2F5IHRo
-YXQgLSBpc24ndCBtdWNoCmJldHRlciwgYXMgeW91IGRvbid0IGNsYXJpZnkgd2h5IHRoZXJlJ3Mg
-X25vXyBzZWN1cml0eSBhc3BlY3QKdGhlcmUuIFN0YXRpbmcgdGhhdCAidGhpcyBsZWF2ZXMgdGhl
-IHN5c3RlbSBpbiBiZXR0ZXIgb3ZlcmFsbApzdGF0ZSIgd2l0aG91dCBtYWtpbmcgY2xlYXIgd2h5
-IHRoYXQgaXMgX2ZvciBldmVyeW9uZV8gaXMgbm90CmhlbHBmdWwgYXQgYWxsLgoKPj4gSSdkIGFs
-c28gYXBwcmVjaWF0ZSBjbGFyaWZpY2F0aW9uIG9uIHlvdSBzYXlpbmcgIndvcmtpbmcgaW4gdGhl
-IHNhbWUKPj4gd2F5IHRoYXQgaXQgZGlkIGluIHByZXZpb3VzIHJlbGVhc2VzIiAtIGl0IHNvdW5k
-cyBhcyBpZiB5b3UgbWlnaHQKPj4gaGF2ZSBzcG90dGVkIGEgcmVncmVzc2lvbiBoZXJlLCBidXQg
-aXQncyBub3QgcmVhbGx5IGJlY29taW5nIGNsZWFyCj4+IHRvIG1lIHdoYXQgdGhhdCByZWdyZXNz
-aW9uIHRoZW4gd291bGQgaGF2ZSBiZWVuLgo+Pgo+Pj4gVGhpcyBpcyBhIGNhbmRpZGF0ZSBmb3Ig
-NC4xMi4gIEdpdmVuIHRoZSBhYnNlbnNlIG9mIEphbiBhcyB0aGUgbWFpbnRhbmVyLCBhbmQKPj4+
-IHRoZSBwcm94aW1pdHkgdG8gdGhlIDQuMTIgcmVsZWFzZSwgSSBwdXQgdGhpcyBwYXRjaCB0byBU
-aGUgUmVzdCBmb3IgYQo+Pj4gaG9wZWZ1bGx5LW1vcmUtdGltZWx5IGRlY2lzaW9uIGFuZCByZXZp
-ZXcuCj4+IFRvIGJlIGhvbmVzdCwgSSBoYXZlIHR3byBwcm9ibGVtcyB3aXRoIHRoaXM6IEZvciBv
-bmUgdGhlIG1haW4KPj4gcGFydCBvZiB5b3VyIGNoYW5nZSBmYWxscyBpbiBLZXZpbidzIHJlYWxt
-LCBub3QgbWluZS4gQW5kIHRoZW4sCj4+IGV2ZW4gaWYgaXQgd291bGQgaGF2ZSBiZWVuIG1haW5s
-eSBtZSB0byBhY2sgdGhlIGNoYW5nZSwgSSB3YXMKPj4gZ29uZSBmb3IgdGhyZWUgZGF5cywgbm90
-IHRocmVlIG1vbnRocy4gWWV0IHRoZSBjb2RlIGhhZCBiZWVuCj4+IHRoaXMgd2F5IGZvciBvdmVy
-IDkgeWVhcnMuIE9uZSB0aGluZyBzZWVtcyBwcmV0dHkgY2xlYXIgdG8gbWU6Cj4+IEl0IGlzIGF0
-IGJlc3Qgbm9uLW9idmlvdXMgdGhhdCB0aGVyZSBpcyBubyByaXNrIG9mIHJlZ3Jlc3Npb25zCj4+
-IGhlcmUuCj4gCj4gVGhlIGNvbW1pdCBtZXNzYWdlIHN0YXRlcyBjbGVhcmx5IHRoZSBjb21taXQg
-d2hpY2ggY2F1c2VkIHRoZSBmdW5jdGlvbgo+IHJlZ3Jlc3Npb24sIGFuZCB0aGUganVzdGlmaWNh
-dGlvbiBmb3Igd2h5IGRlbGV0aW5nIHRoZSBjb2RlIHJlc29sdmVzIHRoZQo+IHJlZ3Jlc3Npb24g
-YnkgbWFraW5nIHRoZSBiZWhhdmlvdXIgaWRlbnRpY2FsIHRvIDQuMTEgYW5kIGVhcmxpZXIuCgpC
-dXQgYXJlIHlvdSBzZXJpb3VzbHkgc3VnZ2VzdGluZyB0aGUgYmVoYXZpb3IgaW4gNC4xMSBhbmQg
-ZWFybGllcgp3YXMgaW50ZW5kZWQ/IEknbSBvZiB0aGUgb3BpbmlvbiB0aGF0IHRoZSBhc3N1bXB0
-aW9uIHdhcyB0aGF0CnBjaV9rbm93bl9zZWdtZW50KCkgd291bGQgdW5jb25kaXRpb25hbGx5IHJl
-dHVybiB0cnVlIGZvcgpzZWdtZW50IDAuIFdoZW4gd3JpdGluZyBteSBvcmlnaW5hbCByZXBseSBp
-dCBkaWRuJ3QgZXZlbiBvY2N1ciB0bwptZSB0aGF0IHRoaXMgY291bGQgbm90IGhhdmUgYmVlbiB0
-aGUgY2FzZS4KCj4gSSdtIG5vdCBzdXJlIHdoYXQgbW9yZSB5b3UgYXJlIGxvb2tpbmcgZm9yLCBi
-dXQgdGhpcyBpcyB2ZXJ5IGNsZWFyIGN1dAo+IGFuZCBzYWZlIGZyb20gbXkgcG9pbnQgb2Ygdmll
-dy4KCldlbGwsIHlvdXIgY2xhaW0gcmVnYXJkaW5nICI0LjExIGFuZCBlYXJsaWVyIiBpcyBjbGVh
-cmx5IHdyb25nLCBhbGJlaXQKaW4gYW5vdGhlciB3YXkgdGhhbiBJIGZpcnN0IHRob3VnaHQ6IExv
-b2tpbmcgYmFjayBmYXIgZW5vdWdoLCBwcmlvcgp0byB0aGUgaW50cm9kdWN0aW9uIG9mIHN1cHBv
-cnQgZm9yIHNlZ21lbnRzIG90aGVyIHRoYW4gMCB0aGUgY29kZQppbiBxdWVzdGlvbiBkaWQgbm90
-IHNraXAgdGhlIGNoZWNraW5nIG9uIHNlZ21lbnQgMC4gT2J2aW91c2x5IGF0CnRoYXQgdGltZSBu
-b3RoaW5nIG90aGVyIHRoYW4gc2VnbWVudCAwIHdvdWxkIGhhdmUgYmVlbiBjaGVja2VkCihhbmQg
-YXMgaXQgc2VlbXMgdGhlIERSSEQncyBzZWdtZW50IHNwZWNpZmljYXRpb24gd2FzIHNpbGVudGx5
-Cmlnbm9yZWQpLgoKSU9XIHRoZXJlIHdhcyBhbiBlYXJsaWVyIHJlZ3Jlc3Npb24gY2F1c2luZyB0
-aGUgY2hlY2tzIHRvIGJlCnNraXBwZWQuIFRoaXMgbG9va3MgdG8gaGF2ZSBiZWVuIG15IGZhdWx0
-IHdpdGggZmQxZTE3MTgzYiAoIlZULWQ6CmRvbid0IHJlamVjdCBwb3NzaWJseSB2YWxpZCBEUkhE
-IG9yIFJNUlIiKSwgbm90IHJlYWxpemluZyB0aGF0IHRoZQpjYWxsIHRvIHB0X3BjaV9pbml0KCkg
-d291bGQgaGF2ZSBoYWQgdG8gaGFwcGVuIGFoZWFkIG9mIHRoYXQgdG8KYWNwaV9ib290X2luaXQo
-KSBpbiBvcmRlciBmb3IgcGNpX2tub3duX3NlZ21lbnQoKSB0byByZXR1cm4gdHJ1ZQpmb3Igc2Vn
-bWVudCAwIGF0IGFsbCB0aW1lcy4KClNvIGFsb25nIHRoZSBsaW5lcyBvZiB3aGF0IEkndmUgYmVl
-biBzYXlpbmcgYmVmb3JlIC0gd2hhdCBJIHdvdWxkCmhhdmUgZXhwZWN0ZWQgaW4gdGhlIGNvbW1p
-dCBtZXNzYWdlIChhbmQgd2hhdCBJIHN0aWxsIGhvcGUgZm9yCmluIGEgcmVwbHkgb2YgeW91cnMp
-IGlzIGEgZGlzY3Vzc2lvbiBvZiB3aHkgZXhhY3RseSB0aGUgb3JpZ2luYWwKY29tbWl0IGFkZGlu
-ZyB0aGUgY2hlY2tpbmcgd2FzIHdyb25nLCB0aGUgbW9yZSB3aXRoIGl0cyBsYXRlcgphbWVuZGlu
-ZyBieSB0aGUgY29tbWFuZCBsaW5lIChzdWItKW9wdGlvbiB5b3UndmUgbm93IHJlbW92ZWQuCkFz
-IHNhaWQgYWJvdmUgLSBpdCBzaG91bGQgYmUgdGhlIGFkbWluJ3MgZGVjaXNpb24gd2hldGhlciB0
-bwplbmFibGUgdGhlIElPTU1VIGRlc3BpdGUgdGhlcmUgYmVpbmcgZmlybXdhcmUgZmxhd3MuIFlv
-dSd2ZQp0YWtlbiBhd2F5IHRoaXMgKHBvbGljeSkgZGVjaXNpb24gZnJvbSB0aGVtLCB1bmlmb3Jt
-bHkgZm9yY2luZyB0aGUKYmVoYXZpb3IgeW91IGNvbnNpZGVyIHRoZSBvbmx5IHBvc3NpYmxlIGdv
-b2Qgb25lIG9udG8gZXZlcnlvbmUuCgpBcyBhbiBhc2lkZSAtIHRoZSBkZXNjcmlwdGlvbiBvZiB5
-b3VyIGNoYW5nZSBhbHNvIG1ha2VzIGl0IHNvdW5kCmFzIGlmIHRoZSBvYnNlcnZlZCBiZWhhdmlv
-ciB3YXMgY29ycmVjdC4gSSBkb3VidCB0aGlzIHRvIGJlIHRoZQpjYXNlOyBJIHRoaW5rIGRldmlj
-ZXMgZGlzYWJsZWQgYnkgdXNlciBjaG9pY2Ugc2hvdWxkIG5vdCBoYXZlCnJlZmVyZW5jZXMgbGVm
-dCBpbiBBQ1BJIHRhYmxlcy4KCkphbgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+
+--===============3209304780224333442==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-ySIvEmEZ+N1iVOye3K9P"
+
+
+--=-ySIvEmEZ+N1iVOye3K9P
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 2019-03-25 at 09:43 -0400, Boris Ostrovsky wrote:
+> On 3/25/19 8:05 AM, luca abeni wrote:
+> >=20
+> > The picture shows the latencies measured with an unpatched guest
+> > kernel
+> > and with a guest kernel having TIMER_SLOP set to 1000 (arbitrary
+> > small
+> > value :).
+> > All the experiments have been performed booting the hypervisor with
+> > a
+> > small timer_slop (the hypervisor's one) value. So, they show that
+> > decreasing the hypervisor's timer_slop is not enough to measure low
+> > latencies with cyclictest.
+>=20
+> I have a couple of questions:
+> * Does it make sense to make this a tunable for other clockevent
+> devices
+> as well?
+>
+So, AFAIUI, the thing is as follows. In clockevents_program_event(), we
+keep the delta between now and the next timer event within
+dev->max_delta_ns and dev->min_delta_ns:
+
+  delta =3D min(delta, (int64_t) dev->max_delta_ns);
+  delta =3D max(delta, (int64_t) dev->min_delta_ns);
+
+For Xen (well, for the Xen clock) we have:
+
+  .max_delta_ns =3D 0xffffffff,
+  .min_delta_ns =3D TIMER_SLOP,
+
+which means a guest can't ask for a timer to fire earlier than 100us
+ahead, which is a bit too coarse, especially on contemporary hardware.
+
+For "lapic_deadline" (which was what was in use in KVM guests, in our
+experiments) we have:
+
+  lapic_clockevent.max_delta_ns =3D clockevent_delta2ns(0x7FFFFF, &lapic_cl=
+ockevent);
+  lapic_clockevent.min_delta_ns =3D clockevent_delta2ns(0xF, &lapic_clockev=
+ent);
+
+Which means max is 0x7FFFFF device ticks, and min is 0xF.
+clockevent_delta2ns() does the conversion from ticks to ns, basing on
+the results of the APIC calibration process. It calls cev_delta2ns()
+which does some scaling, shifting, divs, etc, and, at the very end,
+this:
+
+  /* Deltas less than 1usec are pointless noise */
+  return clc > 1000 ? clc : 1000;
+
+So, as Ryan is also saying, the actual minimum, in this case, depends
+on hardware, with a sanity check of "never below 1us" (which is quite
+smaller than 100us!)
+
+Of course, the actual granularity depends on hardware in the Xen case
+as well, but that is handled in Xen itself. And we have mechanisms in
+place in there to avoid timer interrupt storms (like, ahem, the Xen's
+'timer_slop' boot parameter... :-P)
+
+And this is basically why I was also thinking we can/should lower the
+default value of TIMER_SLOP, here in the Xen clock implementation in
+Linux.
+
+> * This patch adjusts min value. Could max value (ever) need a similar
+> adjustment?
+>=20
+Well, for Xen, it's already 0xffffffff. I don't see use cases when one
+would want a smaller max. Wanting an higher max *might* be of some
+interest,  e.g., for power management, if the first timer event is 1min
+ahead, and you don't want to be woken up every (if my math is right) 4
+secs.
+
+But we'd have to see if that actually works, not to mention that 4 secs
+is already large enough, IMHO, that it's unlikely we'll be really
+sleeping for that much time without having to wake up for one reason or
+another. :-)
+
+Regards,
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-ySIvEmEZ+N1iVOye3K9P
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyZ7TwACgkQFkJ4iaW4
+c+55/RAA2r1QTWiBrvh0X5J9zV7K6fs3sOAIaIs0FYkoDjwkVz8LGxnrlhhKCGKx
+hD3DSAesFH1m2bbGzslm8aqzaUEDA8dypa5DBjkGG5frpPsN81mr/qh6QCY3yFhS
+dq8BwUVyHTArurXk+h9z4t7DS9dCsrcvtjJJ5dDr7m4PHb4reRWAWkxzkO0ErO/Q
+CaM1IkZGPwsG/K4ipaUjwl+mqRVbmxirmkmmjtoZYlJVT709Wa98ByHvbPqqnu5S
+/+VQ2agQ9bEiFYsgTUWfmYiVPDhzYRISyCXy7RSKAaXLJBIvyDUs0CVXRrc6QJgS
+UcSvMM+siXGKg8kVN2Yz+KnjlkoifR84RuQpdCGNRTyAKwKljWg/AzvvdV88DbMC
+PoudqZRg2LOQsHUAUZvvQWNfPACgUJDvwTxx18YhfjgNeSsUi2ot+W5tdKmbEJnh
+PYkSUZwWqZ5l8z7wVxasXN262B3yxf79vAfD6tmLhOF7rRY6VULQmW0zOMgUqOmd
+sg8e+lVOJCbIQXihYZWH1A5iRGNLqOZ8G7WY/r0fRzRSP3Z1wjVb+INoTcH1Y7b6
+JdRhedr3v3wQwIBVbCnasKtM01peGjiiJGpxoEqycN9cpbjQmJQhKOsATd7Dj40p
+Vli0U+dYf4MLP/Hg/oX5o48WQS9sdAiEE3s7KHuvHBv3pWABKI8=
+=UFYQ
+-----END PGP SIGNATURE-----
+
+--=-ySIvEmEZ+N1iVOye3K9P--
+
+
+
+--===============3209304780224333442==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3209304780224333442==--
