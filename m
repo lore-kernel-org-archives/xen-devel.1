@@ -1,17 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/4] x86/cpuid: Drop get_cpu_vendor()
- completely
-Date: Tue, 26 Mar 2019 16:41:36 +0000
-Message-ID: <a2ca8812-2bfa-c9ff-5430-5898b66f6891@citrix.com>
-References: <1553170866-23812-1-git-send-email-andrew.cooper3@citrix.com>
- <1553170866-23812-3-git-send-email-andrew.cooper3@citrix.com>
- <5C9A164B0200007800221E32@prv1-mh.provo.novell.com>
+From: "John L. Poole" <jlpoole56@gmail.com>
+Subject: Re: Xen 4.12.0-rc Hangs Around masked ExtINT on CPU#
+Date: Tue, 26 Mar 2019 10:21:06 -0700
+Message-ID: <25b66cdf-94ad-6af1-de5f-e0f5369ae000@gmail.com>
+References: <77de1587-5683-4ddb-19ca-f71c23e6d7c1@gmail.com>
+ <20190322075941.bdf6i3veheiblwzs@MacBook-Air-de-Roger.local>
+ <9f9c4a21-b426-f0fc-7c09-2f5d392b488c@gmail.com>
+ <5C98F95C0200007800221B56@prv1-mh.provo.novell.com>
+ <9288a3b8-8c59-c80f-68f3-14aaca9272d4@gmail.com>
+ <5C99DD160200007800221D00@prv1-mh.provo.novell.com>
+Reply-To: jlpoole56@gmail.com
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4428894362330771891=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5C9A164B0200007800221E32@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+In-Reply-To: <5C99DD160200007800221D00@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,46 +23,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjYvMDMvMjAxOSAxMjowOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjEuMDMuMTkg
-YXQgMTM6MjEsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4gZ2V0X2NwdV92
-ZW5kb3IoKSB0cmllcyB0byBkbyBhIG51bWJlciBvZiB0aGluZ3MsIGFuZCBlbmRzIHVwIGRvaW5n
-IG5vbmUgb2YKPj4gdGhlbSB3ZWxsLgo+Pgo+PiBGb3IgY2FsY3VsYXRpbmcgdGhlIHZlbmRvciBp
-dHNlbGYsIHVzZSB4ODZfY3B1aWRfbG9va3VwX3ZlbmRvcigpIHdoaWNoIGlzCj4+IGltcGxlbWVu
-dGVkIGluIGEgZmFyIG1vcmUgZWZmaWNpZW50IG1hbm5lciB0aGFuIGxvb3Bpbmcgb3ZlciBjcHVf
-ZGV2c1tdLgo+IFdlbGwsIHllcywgdGhlIG5ldyBsaWJyYXJ5IGZ1bmN0aW9uIGlzIG1vcmUgZWZm
-aWNpZW50LiBUaGUgZG93bnNpZGUgaXMKPiB0aGF0IHRoZSB2ZW5kb3Igc3BlY2lmaWMgaW5mb3Jt
-YXRpb24gbm8gbG9uZ2VyIGxpdmVzIGluIGEgY2VudHJhbCBwbGFjZQo+IChzdHJ1Y3QgY3B1X2Rl
-dikuCgpUaGlzIGlzIGludGVudGlvbmFsLsKgIFRoZSBzZXQgb2YgQ1BVcyB3aGljaCBYZW4gaXMg
-Y29tcGlsZWQgdG8gc3VwcG9ydAppcyBsb2dpY2FsbHkgdW5yZWxhdGVkIHRvIHdoYXQgbGlieDg2
-IG5lZWRzIGZvciB2ZW5kb3Itc3BlY2lmaWMgc2FmZXR5LgoKSSdtIGV4cGVjdGluZyBhbG1vc3Qg
-YWxsIG9mIGNwdV9kZXYgdG8gZGlzYXBwZWFyIGluIHRoZSBsb25nIHRlcm0uCgo+Cj4+IEBAIC0z
-MTMsNyArMjgzLDEzIEBAIHN0YXRpYyB2b2lkIF9faW5pdCBlYXJseV9jcHVfZGV0ZWN0KHZvaWQp
-Cj4+ICAJKih1MzIgKikmYy0+eDg2X3ZlbmRvcl9pZFs4XSA9IGVjeDsKPj4gIAkqKHUzMiAqKSZj
-LT54ODZfdmVuZG9yX2lkWzRdID0gZWR4Owo+PiAgCj4+IC0JYy0+eDg2X3ZlbmRvciA9IGdldF9j
-cHVfdmVuZG9yKGVieCwgZWN4LCBlZHgsIGdjdl9ob3N0KTsKPj4gKwljLT54ODZfdmVuZG9yID0g
-eDg2X2NwdWlkX2xvb2t1cF92ZW5kb3IoZWJ4LCBlY3gsIGVkeCk7Cj4+ICsJaWYgKGMtPng4Nl92
-ZW5kb3IgPCBBUlJBWV9TSVpFKGNwdV9kZXZzKSAmJiBjcHVfZGV2c1tjLT54ODZfdmVuZG9yXSkK
-Pj4gKwkJdGhpc19jcHUgPSBjcHVfZGV2c1tjLT54ODZfdmVuZG9yXTsKPj4gKwllbHNlCj4+ICsJ
-CXByaW50ayhYRU5MT0dfRVJSCj4+ICsJCSAgICAgICAiVW5yZWNvZ25pc2VkIG9yIHVuc3VwcG9y
-dGVkIENQVSB2ZW5kb3IgJyVzJ1xuIiwKPj4gKwkJICAgICAgIGMtPng4Nl92ZW5kb3JfaWQpOwo+
-ICVzIGhhcHBlbnMgdG8gd29yayBiZWNhdXNlIHg4Nl92ZW5kb3JfaWQgaXMgYW4gYXJyYXkgb2Yg
-MTYKPiBjaGFyYWN0ZXJzLiBJJ2QgcHJlZmVyIGlmIHRoZSBjb2RlIGhlcmUgd2Fzbid0IGRlcGVu
-ZGVudCBvbgo+IHRoYXQgcHJvcGVydHkgcGx1cyB0aGUgZmFjdCB0aGF0IHRoZSBsYXN0IDQgY2hh
-cmFjdGVycyBzdGFydCBvdXQKPiBhcyB6ZXJvcyBhbmQgbmV2ZXIgZ2V0IHdyaXR0ZW4gdG8sIGJ5
-IHVzaW5nICUuKnMgaW5zdGVhZC4KClllYWggLSBJIHNwb3R0ZWQgYWxsIG9mIHRoYXQuwqAgSSBj
-aG9zZSBub3QgdG8gZml4IGV2ZXJ5dGhpbmcgd3Jvbmcgd2l0aApYZW4ncyBjcHUgaGFuZGxpbmcg
-aW4gdGhpcyBwYXRjaC4KCkknbGwgc3dpdGNoIHRvICUuMTJzIGhlcmUsIGJ1dC4uLgoKPgo+IFBy
-ZWZlcmFibHkgd2l0aCB0aGlzIHRha2VuIGNhcmUgb2YKPiBSZXZpZXdlZC1ieTogSmFuIEJldWxp
-Y2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+Cj4gVGhlbiBhZ2FpbiBJIHdvbmRlciBpZiB3ZSB3b3Vs
-ZG4ndCBiZXR0ZXIgZHJvcCB4ODZfdmVuZG9yX2lkW10KPiBhbHRvZ2V0aGVyLiBJdCdzIGNsb3Nl
-IHRvIHVudXNlZCwgeWV0IHRha2VzIHVwIE5SX0NQVVMqMTYgYnl0ZXMKPiBvZiBzdG9yYWdlLiBU
-aGUgZmV3IHVzZXMgY291bGQgYmUgcmVwbGFjZWQgYnkgYSByZXZlcnNlIGZ1bmN0aW9uCj4gdG8g
-eDg2X2NwdWlkX2xvb2t1cF92ZW5kb3IoKS4gSSBkb24ndCB0aGluayB3ZSBjYXJlIG11Y2ggdG8g
-YmUKPiBhYmxlIHRvICJjb3JyZWN0bHkiIHJldmVyc2UgWDg2X1ZFTkRPUl9VTktOT1dOLgoKLi4u
-IHRoaXMgd2FudHMgZGVmZXJyaW5nIHRvIGEgbGF0ZXIgY2hhbmdlLgoKfkFuZHJldwoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is a multi-part message in MIME format.
+--===============4428894362330771891==
+Content-Type: multipart/alternative;
+ boundary="------------9C62953E51EE22CA4D5AD393"
+Content-Language: en-US
+
+This is a multi-part message in MIME format.
+--------------9C62953E51EE22CA4D5AD393
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+
+On 3/26/2019 1:04 AM, Jan Beulich wrote:
+>>>> On 25.03.19 at 18:00, <jlpoole56@gmail.com> wrote:
+>> I removed the "maxcpus=1" and attempted seven (7) boots.
+>> There were minor variations, they do not seem to get
+>> past the first additional processor.  Below is a summary.
+> And with "maxcpus=1" in place, is it as stable hanging when trying
+> to bring up the 3rd AP? I find it rather surprising that, with you
+> already having sync_console on the command line, there's such a
+> variation. I wonder whether SMM is somehow getting in the way.
+>
+> The main difference to bare metal Linux is that we enable VMX
+> while they don't (afaict). Since for whatever reason we don't
+> (yet) have a command line option to suppress this, could you
+> re-build Xen with CONFIG_HVM turned off in xen/.config?
+>
+> Jan
+>
+>
+# rem'd out CONFIG_HVM=y
+make clean
+make
+
+7:46 AM 3/26/2019 build of xen w/o HVM
+prompted with:
+HVM support (HVM) [Y/n/?]
+replied: n
+
+cp /boot/efi/gentoo/man_xen.efi /boot/efi/gentoo/man_xen.efi_HVM_yes
+cp /usr/local/src/xen/dist/install/usr/lib64/efi/xen-4.13-unstable.efi 
+/boot/efi/gentoo/man_xen.efi
+
+cp /boot/efi/gentoo/xen-4.13-unstable.gz 
+/boot/efi/gentoo/xen-4.13-unstable.gz_HVM_yes
+cp /usr/local/src/xen/dist/install/boot/xen-4.13-unstable.gz 
+/boot/efi/gentoo/xen-4.13-unstable.gz
+
+zeta /usr/local/src/xen # cat xen/.config |grep CONFIG_HVM
+# CONFIG_HVM is not set
+zeta /usr/local/src/xen #
+
+# tried 2 boot attempts
+log at: https://pastebin.com/nL4BWJ6Y
+
+Hang points at lines:
+298:
+(XEN) [2019-03-26 17:14:01] Setting warm reset code and vector.
+(XEN) [2019-03-26 17:14:01] 1.
+(XEN) [2019-03-26 17:14:01] 2.
+(XEN) [2019-03-26 17:14:01] 3.
+(XEN) [2019-03-26 17:14:01] Asserting INIT.
+(XEN) [2019-03-26 17:14:01] Waiting for send to finish...
+
+599:
+(XEN) [2019-03-26 17:16:30] Setting warm reset code and vector.
+(XEN) [2019-03-26 17:16:30] 1.
+(XEN) [2019-03-26 17:16:30] 2.
+(XEN) [2019-03-26 17:16:30] 3.
+(XEN) [2019-03-26 17:16:30] Asserting INIT.
+(XEN) [2019-03-26 17:16:30] Waiting for send to finish...
+
+--------------9C62953E51EE22CA4D5AD393
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 3/26/2019 1:04 AM, Jan Beulich
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:5C99DD160200007800221D00@prv1-mh.provo.novell.com">
+      <blockquote type="cite">
+        <blockquote type="cite">
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">On 25.03.19 at 18:00, <a class="moz-txt-link-rfc2396E" href="mailto:jlpoole56@gmail.com">&lt;jlpoole56@gmail.com&gt;</a> wrote:
+</pre>
+          </blockquote>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">I removed the "maxcpus=1" and attempted seven (7) boots.
+There were minor variations, they do not seem to get
+past the first additional processor.  Below is a summary.
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+And with "maxcpus=1" in place, is it as stable hanging when trying
+to bring up the 3rd AP? I find it rather surprising that, with you
+already having sync_console on the command line, there's such a
+variation. I wonder whether SMM is somehow getting in the way.
+
+The main difference to bare metal Linux is that we enable VMX
+while they don't (afaict). Since for whatever reason we don't
+(yet) have a command line option to suppress this, could you
+re-build Xen with CONFIG_HVM turned off in xen/.config?
+
+Jan
+
+
+</pre>
+    </blockquote>
+    <div class="moz-signature"><font size="2"><font face="Verdana">#
+          rem'd out CONFIG_HVM=y<br>
+          make clean<br>
+          make<br>
+          <br>
+          7:46 AM 3/26/2019 build of xen w/o HVM<br>
+          prompted with:<br>
+          HVM support (HVM) [Y/n/?] <br>
+          replied: n<br>
+          <br>
+          cp /boot/efi/gentoo/man_xen.efi
+          /boot/efi/gentoo/man_xen.efi_HVM_yes<br>
+          cp
+          /usr/local/src/xen/dist/install/usr/lib64/efi/xen-4.13-unstable.efi
+          /boot/efi/gentoo/man_xen.efi<br>
+          <br>
+          cp /boot/efi/gentoo/xen-4.13-unstable.gz
+          /boot/efi/gentoo/xen-4.13-unstable.gz_HVM_yes<br>
+          cp /usr/local/src/xen/dist/install/boot/xen-4.13-unstable.gz
+          /boot/efi/gentoo/xen-4.13-unstable.gz<br>
+          <br>
+          zeta /usr/local/src/xen # cat xen/.config |grep CONFIG_HVM<br>
+          # CONFIG_HVM is not set<br>
+          zeta /usr/local/src/xen #<br>
+          <br>
+          # tried 2 boot attempts<br>
+          log at: <a class="moz-txt-link-freetext" href="https://pastebin.com/nL4BWJ6Y">https://pastebin.com/nL4BWJ6Y</a><br>
+          <br>
+          Hang points at lines:<br>
+          298:<br>
+          (XEN) [2019-03-26 17:14:01] Setting warm reset code and
+          vector.<br>
+          (XEN) [2019-03-26 17:14:01] 1.<br>
+          (XEN) [2019-03-26 17:14:01] 2.<br>
+          (XEN) [2019-03-26 17:14:01] 3.<br>
+          (XEN) [2019-03-26 17:14:01] Asserting INIT.<br>
+          (XEN) [2019-03-26 17:14:01] Waiting for send to finish...<br>
+          <br>
+          599:<br>
+          (XEN) [2019-03-26 17:16:30] Setting warm reset code and
+          vector.<br>
+          (XEN) [2019-03-26 17:16:30] 1.<br>
+          (XEN) [2019-03-26 17:16:30] 2.<br>
+          (XEN) [2019-03-26 17:16:30] 3.<br>
+          (XEN) [2019-03-26 17:16:30] Asserting INIT.<br>
+          (XEN) [2019-03-26 17:16:30] Waiting for send to finish...</font></font><br>
+    </div>
+  </body>
+</html>
+
+--------------9C62953E51EE22CA4D5AD393--
+
+
+--===============4428894362330771891==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4428894362330771891==--
