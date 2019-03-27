@@ -1,24 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH 4/6] xen: don't free percpu areas during
- suspend
-Date: Wed, 27 Mar 2019 17:52:18 +0100
-Message-ID: <3067f146-bfc4-1f00-64bf-5750b6486ee1@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 1/6] xen/sched: call cpu_disable_scheduler()
+ via cpu notifier
+Date: Wed, 27 Mar 2019 17:51:43 +0100
+Message-ID: <4585c758d5e6928acf5ed714ad5f13bf3991492f.camel@suse.com>
+References: <20190318131155.29450-1-jgross@suse.com>
+ <20190318131155.29450-2-jgross@suse.com>
+ <42e0d691a0e00149ba585382e26494159dbb71f9.camel@suse.com>
+ <7090ec7b-e37b-35d2-67d9-97c32369fe8c@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8170971984141018914=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=BLRb=R6=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1h9Bmp-000061-Gb
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 16:52:23 +0000
-References: =?UTF-8?B?PDIwMTkwMzE4MTMxMTU1LjI5NDUw77+9Me+/vWpncm9zc0BzdXNl?=
- =?UTF-8?B?LmNvbT4gPDIwMTkwMzE4MTMxMTU1LjI5NDUw77+9Ne+/vWpncm9zc0BzdXNlLmNv?=
- =?UTF-8?B?bT4gPGUxMGMxNGNk77+9NTRhY++/vThkOGPvv70yZDVj77+9ZGI0YWRiZDM5ZDA3?=
- =?UTF-8?Q?=40citrix=2ecom=3e_=3caac2efca-8024-485a-4b8f-8565341c305c=40suse?=
- =?UTF-8?Q?=2ecom=3e_=3c5C9BA70E02000078002223A3=40suse=2ecom=3e?=
-Content-Language: de-DE
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=/lXT=R6=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1h9Bmi-00005U-TG
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 16:52:16 +0000
+In-Reply-To: <7090ec7b-e37b-35d2-67d9-97c32369fe8c@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,31 +25,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjcvMDMvMjAxOSAxNzozOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMjcuMDMuMTkg
-YXQgMTc6MTgsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+PiBPbiAyNy8wMy8yMDE5IDE2OjU1
-LCBBbmRyZXcgQ29vcGVyIHdyb3RlOgo+Pj4gT24gMTgvMDMvMjAxOSAxMzoxMSwgSnVlcmdlbiBH
-cm9zcyB3cm90ZToKPj4+PiBJbnN0ZWFkIG9mIGZyZWVpbmcgcGVyY3B1IGFyZWFzIGR1cmluZyBz
-dXNwZW5kIGFuZCBhbGxvY2F0aW5nIHRoZW0KPj4+PiBhZ2FpbiB3aGVuIHJlc3VtaW5nIGtlZXAg
-dGhlbS4gT25seSBmcmVlIGFuIGFyZWEgaW4gY2FzZSBhIGNwdSBkaWRuJ3QKPj4+PiBjb21lIHVw
-IGFnYWluIHdoZW4gcmVzdW1pbmcuCj4+Pj4KPj4+PiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdy
-b3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4+Pgo+Pj4gSG1tIC0gdGhpcyBpcyBzbGlnaHRseSBwcm9i
-bGVtYXRpYywgZ2l2ZW4gdGhlIGR1YWwgbmF0dXJlIG9mIHRoaXMgY29kZS4KPj4+Cj4+PiBJIGFn
-cmVlIHRoYXQgaXQgdGhpcyBjaGFuZ2UgaXMgYmVuZWZpY2lhbCBmb3IgdGhlIHN1c3BlbmQgY2Fz
-ZSwgYnV0IGl0Cj4+PiBpcyBhIHByb2JsZW0gd2hlbiB3ZSBhcmUgcGFya2luZyBhbiBpbmRpdmlk
-dWFsIENQVSBmb3Igc210PTAgb3IKPj4+IHhlbi1ocHRvb2wgcmVhc29ucy4KPj4+Cj4+PiBEbyB3
-ZSBoYXZlIGFueSBoaW50IHdlIGNhbiB1c2Ugd2hlbiB0YWtpbmcgdGhlIENQVSBkb3duIGFzIHRv
-IHdoZXRoZXIKPj4+IHdlJ3JlIGV4cGVjdGluZyBpdCB0byBjb21lIHN0cmFpZ2h0IGJhY2sgdXAg
-YWdhaW4/Cj4+Cj4+IERpZCB5b3UgbG9vayBpbnRvIHRoZSBwYXRjaD8gSSBkaWQgdGhpcyBieSB0
-ZXN0aW5nIHN5c3RlbV9zdGF0ZS4KPiAKPiBJIHRoaW5rIHRoZXJlJ3MgYSB3aWRlciBwcm9ibGVt
-IGhlcmU6IGVuYWJsZV9ub25ib290X2NwdXMoKQo+IG9ubHkgYnJpbmdzIGJhY2sgdXAgdGhlIENQ
-VXMgdGhhdCB3ZXJlIHByZXZpb3VzbHkgb25saW5lLgo+IFBhcmtlZCBvbmVzIHdvdWxkIGJlIGxl
-ZnQgYWxvbmUsIHlldCBhZnRlciByZXN1bWUgdGhleSdkCj4gbmVlZCB0byBiZSBwdXQgYmFjayBp
-bnRvIHBhcmtlZCBzdGF0ZS4KCkkgY2FuIGFkZCB0aGF0IGhhbmRsaW5nIGluIHRoZSByZXNwaW4g
-b2YgdGhlIHNlcmllcy4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+
+--===============8170971984141018914==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-UE4/4Yw3Gv+GEn2ubU+s"
+
+
+--=-UE4/4Yw3Gv+GEn2ubU+s
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2019-03-27 at 17:31 +0100, Juergen Gross wrote:
+> On 27/03/2019 17:24, Dario Faggioli wrote:
+> > On Mon, 2019-03-18 at 14:11 +0100, Juergen Gross wrote:
+> > > cpu_disable_scheduler() is being called from __cpu_disable()
+> > > today.
+> > > There is no need to call it on the cpu just being disabled, so
+> > > use
+> > > the CPU_DEAD case of the cpu notifier chain.
+> > >=20
+> > So, what do you mean with "There is no need to call it on the cpu
+> > just
+> > being disabled"?
+> >=20
+> > Because we still (even after this patch, I mean) call
+> > cpu_disable_scheduler() on all non-boot CPUs, aren't we? It's just
+> > that
+> > right now we call it from __cpu_disable(), with the patch we call
+> > it
+> > slightly later.
+>=20
+> The CPU_DEAD notifier chain is called on the CPU requesting the other
+> one to go down (so on the boot CPU in suspend case). So we call it
+> _for_
+> all non-boot CPUs in the boot CPU.
+>=20
+Mmm... ok, I see what you mean now.
+
+I guess part of "the problem" is that "call func on cpu A" reads, at
+least to me, as both 1) call func so that it acts on and change the
+state of cpu A, and 2) call func in such a way that it executes on cpu
+A.
+
+But I'm no native speaker, so it may very well be that the confusion is
+all and only mine.
+
+Dario
+--=20
+<<This happens because I choose it to happen!>> (Raistlin Majere)
+-----------------------------------------------------------------
+Dario Faggioli, Ph.D, http://about.me/dario.faggioli
+Software Engineer @ SUSE https://www.suse.com/
+
+--=-UE4/4Yw3Gv+GEn2ubU+s
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlybqiAACgkQFkJ4iaW4
+c+4qlRAA3ogen+dPQpgQkAOY6OioVOhPjZ4TXautIETP7P9713aaLPGrUsEXyGvH
+/mHwvXToWbWFMpsU6wKFWqKldKwO8y6lO2yGKFitQ4G3Hm6m9jRRT0q6lCjsfMw3
+8oGZQXxpzpH3z531vrufBdT5+27iFKaK+ONrRlmGfCOrUm9noFwqY9JJnvAYwVlc
+J4vdG8TLA+weFMzzGC5mrOU3WK/r671dRUHmC9x48/PU23crBXm+Vm94cwg/AtD8
+fM0Jk/+EDC1bhsgW/RfVoHsqr2YqBn4hDdXwPHkNdWXucv4nw+99d1ZVw+V+T3wL
+yyhAUhgOS/jK6GGZ7dUfMNmtEwCm90MHUaKRBD7TaExW+SO2eGh/gvPr//qVmi4d
+rFXfwC3Ojyb6hlREjF6+qpf0Ll/nmcirSAGYGP7cz4c6HwiOrU26xQvFCamisPSA
+Cm/xZhw36pNSOpSutRIkrq+986Bs7NDsFJVtABvMwdxq1qqx962MTq/yVwXzTth3
+xuJFRXfuAr+G545nGZxkA/QCyuetKWwa+MYN+o7OL0rgoWKtxMEzEyXliuLIj/84
+MF1FadA1zNlk2g/l208YH+rSYp9a8X37dCjeh9I4XZ1iCinembr5dKk4gPOBuxoU
+KoSV65vIcnY2vTgToZ2h+LOiP5Df+J1PUHLYRMEdfJA+EBWo3EM=
+=/5e5
+-----END PGP SIGNATURE-----
+
+--=-UE4/4Yw3Gv+GEn2ubU+s--
+
+
+
+--===============8170971984141018914==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8170971984141018914==--
