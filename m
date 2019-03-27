@@ -1,22 +1,12 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 06/12] xen/arm64: sysreg: Implement the
- 32-bit helpers using the 64-bit helpers
-Date: Wed, 27 Mar 2019 19:15:39 +0000
-Message-ID: <a74aba5f-823f-c49c-4852-c832dcdb8ecf@citrix.com>
-References: <20190327184531.30986-1-julien.grall@arm.com>
- <20190327184531.30986-7-julien.grall@arm.com>
+Subject: [PATCH] x86/vvmx: Fix debug prints to not have 17
+ unnecessary spaces
+Date: Wed, 27 Mar 2019 19:53:23 +0000
+Message-ID: <1553716403-24334-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=kI0R=R6=citrix.com=prvs=9824fb700=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h9E1c-0005l6-A3
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 19:15:48 +0000
-In-Reply-To: <20190327184531.30986-7-julien.grall@arm.com>
-Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,22 +15,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
-Cc: Artem_Mygaiev@epam.com, Oleksandr_Tyshchenko@epam.com, sstabellini@kernel.org, Andrii_Anisov@epam.com
+To: Xen-devel <xen-devel@lists.xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjcvMDMvMjAxOSAxODo0NSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IENsYW5nIGlzIHBpY2tp
-ZXIgdGhhbiBHQ0MgZm9yIHRoZSByZWdpc3RlciBzaXplIGluIGFzbSBzdGF0ZW1lbnQuIEl0Cj4g
-ZXhwZWN0cyB0aGUgcmVnaXN0ZXIgc2l6ZSB0byBtYXRjaCB0aGUgdmFsdWUgc2l6ZS4KPgo+IFRo
-ZSBpbnN0cnVjdGlvbnMgbXNyL21ycyBhcmUgZXhwZWN0aW5nIGEgNjQtYml0IHJlZ2lzdGVyLiBU
-aGlzIG1lYW5zIHRoZQo+IGltcGxlbWVudGF0aW9uIG9mIHRoZSAzMi1iaXQgaGVscGVycyBpcyBu
-b3QgY29ycmVjdC4gVGhlIGVhc2llc3QKPiBzb2x1dGlvbiBpcyB0byBpbXBsZW1lbnQgdGhlIDMy
-LWJpdCBoZWxwZXJzIHVzaW5nIHRoZSA2NC1iaXQgaGVscGVycy4KPgo+IFNpZ25lZC1vZmYtYnk6
-IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CgooSSBkb24ndCBoYXZlIGFuIG9w
-aW5pb24gb24gaG93IHRvIGZpeCB0aGUgaXNzdWUsIGJ1dCkKCkFyZSBTWVNSRUdTIGFjdHVhbGx5
-IGFsd2F5cyA2NCBiaXRzIGV2ZW4gb24gYXJtMzIsIGFuZCB0aGVzZSBoZWxwZXJzCmp1c3QgYSBz
-aG9ydGhhbmQgZm9yIHRoZSBsb3dlciAzMiBiaXRzLCBvciBpcyB0aGlzIGFuCmVmZmVjdGl2ZWx5
-LXVubmVjZXNzYXJ5IGNvbnN0cmFpbnQgaW1wb3NlZCBieSBDbGFuZz8KCn5BbmRyZXcKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+VGhpcyBoYXMgYmVlbiBwcm9ibGVtYXRpYyBzaW5jZSBpdHMgaW50cm9kdWN0aW9uIGluIFhlbiA0
+LjMKClNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
+b20+Ci0tLQpDQzogSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1c2UuY29tPgpDQzogV2VpIExpdSA8
+d2VpLmxpdTJAY2l0cml4LmNvbT4KQ0M6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRy
+aXguY29tPgpDQzogSnVuIE5ha2FqaW1hIDxqdW4ubmFrYWppbWFAaW50ZWwuY29tPgpDQzogS2V2
+aW4gVGlhbiA8a2V2aW4udGlhbkBpbnRlbC5jb20+Ci0tLQogeGVuL2FyY2gveDg2L2h2bS92bXgv
+dnZteC5jIHwgOCArKysrLS0tLQogMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgNCBk
+ZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMgYi94
+ZW4vYXJjaC94ODYvaHZtL3ZteC92dm14LmMKaW5kZXggNjY0NGVhOS4uMGYxNjY4OCAxMDA2NDQK
+LS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXgvdnZteC5jCisrKyBiL3hlbi9hcmNoL3g4Ni9odm0v
+dm14L3Z2bXguYwpAQCAtOTI0LDggKzkyNCw4IEBAIHN0YXRpYyB2b2lkIHZ2bWNzX3RvX3NoYWRv
+d19idWxrKHN0cnVjdCB2Y3B1ICp2LCB1bnNpZ25lZCBpbnQgbiwKIAogICAgIGlmICggIXZhbHVl
+IHx8IG4gPiBWTUNTX0JVRl9TSVpFICkKICAgICB7Ci0gICAgICAgIGdkcHJpbnRrKFhFTkxPR19E
+RUJVRywgInZtY3Mgc3luYyBmYWxsIGJhY2sgdG8gbm9uLWJ1bGsgbW9kZSwgXAotICAgICAgICAg
+ICAgICAgICBidWZmZXI6ICVwLCBidWZmZXIgc2l6ZTogJWQsIGZpZWxkcyBudW1iZXI6ICVkLlxu
+IiwKKyAgICAgICAgZ2RwcmludGsoWEVOTE9HX0RFQlVHLCAidm1jcyBzeW5jIGZhbGwgYmFjayB0
+byBub24tYnVsayBtb2RlLCAiCisgICAgICAgICAgICAgICAgICJidWZmZXI6ICVwLCBidWZmZXIg
+c2l6ZTogJWQsIGZpZWxkcyBudW1iZXI6ICVkLlxuIiwKICAgICAgICAgICAgICAgICAgdmFsdWUs
+IFZNQ1NfQlVGX1NJWkUsIG4pOwogICAgICAgICBnb3RvIGZhbGxiYWNrOwogICAgIH0KQEAgLTk2
+NCw4ICs5NjQsOCBAQCBzdGF0aWMgdm9pZCBzaGFkb3dfdG9fdnZtY3NfYnVsayhzdHJ1Y3QgdmNw
+dSAqdiwgdW5zaWduZWQgaW50IG4sCiAKICAgICBpZiAoICF2YWx1ZSB8fCBuID4gVk1DU19CVUZf
+U0laRSApCiAgICAgewotICAgICAgICBnZHByaW50ayhYRU5MT0dfREVCVUcsICJ2bWNzIHN5bmMg
+ZmFsbCBiYWNrIHRvIG5vbi1idWxrIG1vZGUsIFwKLSAgICAgICAgICAgICAgICAgYnVmZmVyOiAl
+cCwgYnVmZmVyIHNpemU6ICVkLCBmaWVsZHMgbnVtYmVyOiAlZC5cbiIsCisgICAgICAgIGdkcHJp
+bnRrKFhFTkxPR19ERUJVRywgInZtY3Mgc3luYyBmYWxsIGJhY2sgdG8gbm9uLWJ1bGsgbW9kZSwg
+IgorICAgICAgICAgICAgICAgICAiYnVmZmVyOiAlcCwgYnVmZmVyIHNpemU6ICVkLCBmaWVsZHMg
+bnVtYmVyOiAlZC5cbiIsCiAgICAgICAgICAgICAgICAgIHZhbHVlLCBWTUNTX0JVRl9TSVpFLCBu
+KTsKICAgICAgICAgZ290byBmYWxsYmFjazsKICAgICB9Ci0tIAoyLjEuNAoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
