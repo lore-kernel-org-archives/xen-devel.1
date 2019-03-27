@@ -1,19 +1,20 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v2 0/2] xen-block: fix sector size confusion
-Date: Wed, 27 Mar 2019 18:20:17 +0000
-Message-ID: <3585a316-6349-b89e-99be-799b055594db__36201.0470869549$1553710896$gmane$org@citrix.com>
-References: <20190327173206.9065-1-paul.durrant@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: [PATCH 09/12] xen/arm: guest_walk: Avoid theoritical
+ unitialized value in get_top_bit
+Date: Wed, 27 Mar 2019 18:45:28 +0000
+Message-ID: <20190327184531.30986-10-julien.grall@arm.com>
+References: <20190327184531.30986-1-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=kI0R=R6=citrix.com=prvs=9824fb700=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h9DAC-0008LX-8Z
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 18:20:36 +0000
-In-Reply-To: <20190327173206.9065-1-paul.durrant@citrix.com>
-Content-Language: en-GB
+ <SRS0=h58V=R6=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1h9DYi-0001lA-Rd
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 18:45:56 +0000
+In-Reply-To: <20190327184531.30986-1-julien.grall@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,30 +23,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>, xen-devel@lists.xenproject.org, qemu-block@nongnu.org, qemu-devel@nongnu.org
-Cc: Kevin Wolf <kwolf@redhat.com>, Anthony Perard <anthony.perard@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Stefan Hajnoczi <stefanha@redhat.com>, Max Reitz <mreitz@redhat.com>
+To: xen-devel@lists.xenproject.org
+Cc: Artem_Mygaiev@epam.com, Oleksandr_Tyshchenko@epam.com, Julien Grall <julien.grall@arm.com>, sstabellini@kernel.org, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjcvMDMvMjAxOSAxNzozMiwgUGF1bCBEdXJyYW50IHdyb3RlOgo+IFRoZSBYZW4gYmxraWYg
-cHJvdG9jb2wgaXMgY29uZnVzaW5nIGJ1dCBkaXNjdXNzaW9uIHdpdGggdGhlIG1haW50YWluZXIK
-PiBoYXMgY2xhcmlmaWVkIHRoYXQgc2VjdG9yIGJhc2VkIHF1YW50aXRpZXMgaW4gcmVxdWVzdHMg
-YW5kIHRoZSAnc2VjdG9ycycKPiB2YWx1ZSBhZHZlcnRpemVkIGluIHhlbnN0b3JlIHNob3VsZCBh
-bHdheXMgYmUgaW4gdGVybXMgb2YgNTEyLWJ5dGUKPiB1bml0cyBhbmQgbm90IHRoZSBhZHZlcnRp
-c2VkIGxvZ2ljYWwgJ3NlY3Rvci1zaXplJyB2YWx1ZS4KPgo+IFRoaXMgc2VyaWVzIGZpeGVzIHhl
-bi1ibG9jayB0byBhZGhlcmUgdG8gdGhlIHNwZWMuCgpJIHRob3VnaHQgd2UgYWdyZWVkIHRoYXQg
-aGFyZGNvZGluZyB0aGluZ3MgdG8gNTEyIGJ5dGVzIHdhcyB0aGUgd3JvbmcKdGhpbmcgdG8gZG8u
-CgpJIHdhcyBleHBlY3Rpbmcgc29tZXRoaW5nIGxpa2U6CgoxKSBDbGFyaWZ5IHRoZSBzcGVjIHdp
-dGggdGhlIGludGVuZGVkIG1lYW5pbmcsICh3aGljaCBpcyB3aGF0IHNvbWUKaW1wbGVtZW50YXRp
-b25zIGFjdHVhbGx5IHVzZSBhbHJlYWR5KSBhbmQgd29udCBjcmlwcGxlIDRrIGRhdGFwYXRocy4K
-MikgSW50cm9kdWNlIGEgY29tcGF0aWJpbGl0eSBrZXkgZm9yICJJIGRvbid0IHJlbHkgb24gc2Vj
-dG9yLXNpemUgYmVpbmcKNTEyIiwgd2hpY2ggZml4ZWQgaW1wbGVtZW50YXRpb25zIHNob3VsZCBh
-ZHZlcnRpc2UuCjMpIFNwZWNpZnkgdGhhdCBiZWNhdXNlIG9mIGJ1Z3MgaW4gdGhlIHNwZWMgd2hp
-Y2ggZ290IG91dCBpbnRvIHRoZSB3aWxkLApkcml2ZXJzIHdoaWNoIGRvbid0IGZpbmQgdGhlIGtl
-eSBiZWluZyBhZHZlcnRpc2VkIGJ5IHRoZSBvdGhlciBlbmQKc2hvdWxkIGVtdWxhdGUgc2VjdG9y
-LXNpemU9NTEyIGZvciBjb21wYXRpYmlsaXR5IHdpdGggYnJva2VuCmltcGxlbWVudGF0aW9ucy4K
-CldoYXRldmVyIHRoZSBldmVudHVhbCB3YXkgb3V0LCB0aGUgZmlyc3QgdGhpbmcgd2hpY2ggbmVl
-ZHMgdG8gaGFwcGVuIGlzCmFuIHVwZGF0ZSB0byB0aGUgc3BlYywgYmVmb3JlIGFjdGlvbnMgYXJl
-IHRha2VuIHRvIGFsdGVyIGV4aXN0aW5nCmltcGxlbWVudGF0aW9ucy4KCn5BbmRyZXcKCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Q2xhbmcgOC4wIHRocm93cyBhbiBlcnJvciBpbiB0aGUgZ2V0X3RvcF9iaXQgZnVuY3Rpb246Cgpn
+dWVzdF93YWxrLmM6MzI4OjE1OiBlcnJvcjogdmFyaWFibGUgJ3RvcGJpdCcgaXMgdXNlZCB1bmlu
+aXRpYWxpemVkCndoZW5ldmVyICdpZicgY29uZGl0aW9uIGlzIGZhbHNlIFstV2Vycm9yLC1Xc29t
+ZXRpbWVzLXVuaW5pdGlhbGl6ZWRdCiAgICBlbHNlIGlmICggaXNfNjRiaXRfZG9tYWluKGQpICkK
+ICAgICAgICAgICAgICBefn5+fn5+fn5+fn5+fn5+fn4KClRoaXMgaXMgaGFwcGVuaW5nIGJlY2F1
+c2UgY2xhbmcgdGhpbmtzIHRoYXQgaXNfMzJiaXRfZG9tYWluKGQpIGlzIG5vdAp0aGUgZXhhY3Qg
+aW52ZXJzZSBvZiBpc182NGJpdF9kb21haW4oZCkuIFNvIGl0IGV4cGVjdHMgYSBlbHNlIGNhc2Ug
+dG8KaGFuZGxlIHRoZSBjYXNlIHdoZXJlIHRoZSBsYXR0ZXIgY2FsbCBpcyBmYWxzZS4KCkluIG90
+aGVyIHBhcnQgb2YgdGhlIGNvZGUsIGRlYWxpbmcgd2l0aCBkaWZmZXJlbmNlIGJldHdlZW4gMzIt
+Yml0IGFuZAo2NC1iaXQgZG9tYWluLCB3ZSB1c3VhbGx5IHVzZSBpZiAoIGlzX1hYYml0X2RvbWFp
+biApIC4uLiBlbHNlIC4uLgoKU28gdXNlIHRoZSBzYW1lIHBhdHRlcm4gaGVyZS4KClNpZ25lZC1v
+ZmYtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Ci0tLQogeGVuL2FyY2gv
+YXJtL2d1ZXN0X3dhbGsuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwg
+MSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9ndWVzdF93YWxrLmMgYi94
+ZW4vYXJjaC9hcm0vZ3Vlc3Rfd2Fsay5jCmluZGV4IDdkYjdhNzMyMWIuLjFiZWUxOTg3NzcgMTAw
+NjQ0Ci0tLSBhL3hlbi9hcmNoL2FybS9ndWVzdF93YWxrLmMKKysrIGIveGVuL2FyY2gvYXJtL2d1
+ZXN0X3dhbGsuYwpAQCAtMzI1LDcgKzMyNSw3IEBAIHN0YXRpYyB1bnNpZ25lZCBpbnQgZ2V0X3Rv
+cF9iaXQoc3RydWN0IGRvbWFpbiAqZCwgdmFkZHJfdCBndmEsIHJlZ2lzdGVyX3QgdGNyKQogICAg
+ICAqLwogICAgIGlmICggaXNfMzJiaXRfZG9tYWluKGQpICkKICAgICAgICAgdG9wYml0ID0gMzE7
+Ci0gICAgZWxzZSBpZiAoIGlzXzY0Yml0X2RvbWFpbihkKSApCisgICAgZWxzZQogICAgIHsKICAg
+ICAgICAgaWYgKCAoKGd2YSAmIEJJVF9VTEwoNTUpKSAmJiAodGNyICYgVENSX0VMMV9UQkkxKSkg
+fHwKICAgICAgICAgICAgICAoIShndmEgJiBCSVRfVUxMKDU1KSkgJiYgKHRjciAmIFRDUl9FTDFf
+VEJJMCkpICkKLS0gCjIuMTEuMAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
