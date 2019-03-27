@@ -1,23 +1,20 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH] x86/xen: Add "xen_timer_slop" command line
- option
-Date: Tue, 26 Mar 2019 19:21:31 -0400
-Message-ID: <907547fa-a7e8-8dca-dabf-dd063705f196__15251.4817704045$1553642227$gmane$org@oracle.com>
-References: <1553279397-130201-1-git-send-email-ryan.thibodeaux@starlab.io>
- <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
- <52bfeae7c256faec444b69efe58d363ad60c3fc5.camel@suse.com>
- <20190323114151.5cebf31b@sweethome> <20190325130530.56603806@luca64>
- <69e40698-f7ae-11c3-e4b7-dda4f1fadcf6@oracle.com>
- <a32c8b1d7866ee3b074b1d674b40e03e51dbd54a.camel@suse.com>
+From: Hans van Kranenburg <hans@knorrie.org>
+Subject: Re: python3 issues
+Date: Wed, 27 Mar 2019 01:36:10 +0100
+Message-ID: <0ed3fb56-c19c-fed0-8967-43871c94c699@knorrie.org>
+References: <alpine.LFD.2.21.1903252158090.3080@austen3.home>
+ <20190326131635.GA7043@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8178342033930910577=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=bztm=R5=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1h8vIV-0003j4-90
- for xen-devel@lists.xenproject.org; Tue, 26 Mar 2019 23:15:59 +0000
-In-Reply-To: <a32c8b1d7866ee3b074b1d674b40e03e51dbd54a.camel@suse.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=kgdZ=R6=knorrie.org=hans@srs-us1.protection.inumbo.net>)
+ id 1h8wYB-000218-HW
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 00:36:15 +0000
+In-Reply-To: <20190326131635.GA7043@zion.uk.xensource.com>
+Content-Language: en_US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,150 +23,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>, luca abeni <luca.abeni@santannapisa.it>
-Cc: jgross@suse.com, oleksandr_andrushchenko@epam.com, linux-kernel@vger.kernel.org, thibodux@gmail.com, ryan.thibodeaux@starlab.io, xen-devel@lists.xenproject.org, tglx@linutronix.de
+To: Wei Liu <wei.liu2@citrix.com>, "YOUNG, MICHAEL A." <m.a.young@durham.ac.uk>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============8178342033930910577==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="gJZMH4gN93xMd5pBDv2bQvBrKCkcmeWEw"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---gJZMH4gN93xMd5pBDv2bQvBrKCkcmeWEw
-Content-Type: multipart/mixed; boundary="kpJSbBO0d3C5fDaszESxGLyuhLexno1r4";
- protected-headers="v1"
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-To: Dario Faggioli <dfaggioli@suse.com>,
- luca abeni <luca.abeni@santannapisa.it>
-Cc: thibodux@gmail.com, xen-devel@lists.xenproject.org,
- linux-kernel@vger.kernel.org, oleksandr_andrushchenko@epam.com,
- tglx@linutronix.de, jgross@suse.com, ryan.thibodeaux@starlab.io
-Message-ID: <907547fa-a7e8-8dca-dabf-dd063705f196@oracle.com>
-Subject: Re: [PATCH] x86/xen: Add "xen_timer_slop" command line option
-References: <1553279397-130201-1-git-send-email-ryan.thibodeaux@starlab.io>
- <abf65a68-9463-0f0e-1f51-6eefd3cacc88@oracle.com>
- <52bfeae7c256faec444b69efe58d363ad60c3fc5.camel@suse.com>
- <20190323114151.5cebf31b@sweethome> <20190325130530.56603806@luca64>
- <69e40698-f7ae-11c3-e4b7-dda4f1fadcf6@oracle.com>
- <a32c8b1d7866ee3b074b1d674b40e03e51dbd54a.camel@suse.com>
-In-Reply-To: <a32c8b1d7866ee3b074b1d674b40e03e51dbd54a.camel@suse.com>
-
---kpJSbBO0d3C5fDaszESxGLyuhLexno1r4
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-Content-Language: en-US
-
-On 3/26/19 5:13 AM, Dario Faggioli wrote:
-> On Mon, 2019-03-25 at 09:43 -0400, Boris Ostrovsky wrote:
->> On 3/25/19 8:05 AM, luca abeni wrote:
->>> The picture shows the latencies measured with an unpatched guest
->>> kernel
->>> and with a guest kernel having TIMER_SLOP set to 1000 (arbitrary
->>> small
->>> value :).
->>> All the experiments have been performed booting the hypervisor with
->>> a
->>> small timer_slop (the hypervisor's one) value. So, they show that
->>> decreasing the hypervisor's timer_slop is not enough to measure low
->>> latencies with cyclictest.
->> I have a couple of questions:
->> * Does it make sense to make this a tunable for other clockevent
->> devices
->> as well?
->>
-> So, AFAIUI, the thing is as follows. In clockevents_program_event(), we=
-
-> keep the delta between now and the next timer event within
-> dev->max_delta_ns and dev->min_delta_ns:
->
->   delta =3D min(delta, (int64_t) dev->max_delta_ns);
->   delta =3D max(delta, (int64_t) dev->min_delta_ns);
->
-> For Xen (well, for the Xen clock) we have:
->
->   .max_delta_ns =3D 0xffffffff,
->   .min_delta_ns =3D TIMER_SLOP,
->
-> which means a guest can't ask for a timer to fire earlier than 100us
-> ahead, which is a bit too coarse, especially on contemporary hardware.
->
-> For "lapic_deadline" (which was what was in use in KVM guests, in our
-> experiments) we have:
->
->   lapic_clockevent.max_delta_ns =3D clockevent_delta2ns(0x7FFFFF, &lapi=
-c_clockevent);
->   lapic_clockevent.min_delta_ns =3D clockevent_delta2ns(0xF, &lapic_clo=
-ckevent);
->
-> Which means max is 0x7FFFFF device ticks, and min is 0xF.
-> clockevent_delta2ns() does the conversion from ticks to ns, basing on
-> the results of the APIC calibration process. It calls cev_delta2ns()
-> which does some scaling, shifting, divs, etc, and, at the very end,
-> this:
->
->   /* Deltas less than 1usec are pointless noise */
->   return clc > 1000 ? clc : 1000;
->
-> So, as Ryan is also saying, the actual minimum, in this case, depends
-> on hardware, with a sanity check of "never below 1us" (which is quite
-> smaller than 100us!)
->
-> Of course, the actual granularity depends on hardware in the Xen case
-> as well, but that is handled in Xen itself. And we have mechanisms in
-> place in there to avoid timer interrupt storms (like, ahem, the Xen's
-> 'timer_slop' boot parameter... :-P)
->
-> And this is basically why I was also thinking we can/should lower the
-> default value of TIMER_SLOP, here in the Xen clock implementation in
-> Linux.
-
-What do you think would be a sane value? 10us? Should we then still keep
-this patch?
-
-My concern would be that if we change the current value and it turns out
-to be very wrong we'd then have no recourse.
-
-
--boris
-
-
---kpJSbBO0d3C5fDaszESxGLyuhLexno1r4--
-
---gJZMH4gN93xMd5pBDv2bQvBrKCkcmeWEw
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEExAVKDNg/TOdD61Yyit52kIbKwbIFAlyas/sACgkQit52kIbK
-wbIEZg/+OJRIfk1e3xN7p3LJBgZLSzqkCrBGKYvwLpSvmVuzhwIr1HGSrdW784qK
-3rU0dEPI17OobUk0NmWNDufKzxoeoHHr1pxFMcnFgoPwrkct+yYiQr8dB9L+kQY/
-1MAnHVNQ/npXSvk/LgHHOJPeTK1hS4ks7oE6790WYbKucEI2BDI+g7EYvXSc7sE+
-2tO5MMFMHhNtxDRwaohteKHQXkgc0XQaXItk7GJyL4NBFeb6Tw6xYuFny4PuqDMv
-9GI04LCndYwfHfr39W4iZHjfnSZgrtEXBCN9UblEUGwRkNERrWgO1CLfm8bOoFpb
-LMClMYXm+Iqtmlm0ubBS+kjDsigIVlzeZqcalbuMvwUYf6jkZwRxlF6Xt6fOr/Z3
-b9JUHYLvNVoOU+9+vKkJ+CYfhQPudLtTDuAXnd/6vNeMvOf63OlGIflHbiz05JoI
-kWY0e8thM/0UxUZZtVUgBtMoH4lmlhbRa3bzfGzrwc6A46tEfMNj8zj82ysYR8Oc
-kpPEUxh75OVkDH5hd0qBikcRdZZGXqFNIoHFL+KlFnjiKrJ9mSci85odd8IpZVov
-/z63WQsrHcyeto7CUC2y3lR+o1v7QlSqgWxk69me67svDSpKNzp9schZI+9aXAmN
-knhE/ER166CI6GMErqI7MsGZYnOEymYMdd2IJBc3FZKVcs0GTfQ=
-=tSX3
------END PGP SIGNATURE-----
-
---gJZMH4gN93xMd5pBDv2bQvBrKCkcmeWEw--
-
-
---===============8178342033930910577==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8178342033930910577==--
+T24gMy8yNi8xOSAyOjE2IFBNLCBXZWkgTGl1IHdyb3RlOgo+IE9uIE1vbiwgTWFyIDI1LCAyMDE5
+IGF0IDEwOjIwOjA1UE0gKzAwMDAsIFlPVU5HLCBNSUNIQUVMIEEuIHdyb3RlOgo+PiBbLi4uXQo+
+PiAtLS0geGVuLTQuMTIuMC1yYzYvdG9vbHMvcHlncnViL3NyYy9weWdydWIub3JpZwkyMDE5LTAz
+LTI0IDIyOjQ0OjA1LjUwMzU4MjAyNSArMDAwMAo+PiArKysgeGVuLTQuMTIuMC1yYzYvdG9vbHMv
+cHlncnViL3NyYy9weWdydWIJMjAxOS0wMy0yNCAyMjo0ODoyNC40NDYxMTM4MDkgKzAwMDAKPj4g
+QEAgLTQ1Nyw3ICs0NTcsNyBAQAo+PiAgICAgICAgICAjIGxpbWl0IHJlYWQgc2l6ZSB0byBhdm9p
+ZCBwYXRob2xvZ2ljYWwgY2FzZXMKPj4gICAgICAgICAgYnVmID0gZi5yZWFkKEZTX1JFQURfTUFY
+KQo+PiAgICAgICAgICBkZWwgZgo+PiAtICAgICAgICBzZWxmLmNmLnBhcnNlKGJ1ZikKPj4gKyAg
+ICAgICAgc2VsZi5jZi5wYXJzZShidWYuZGVjb2RlKCkpCj4gCj4gSG1tLi4uIFRoaXMgY291bGQg
+YmUgYSBiaXQgcHJvYmxlbWF0aWMgZm9yIDIgY29tcGF0aWJpbGl0eS4gSSB3aWxsIG5lZWQKPiBz
+b21lIHRpbWUgdG8gY2hlY2sgdGhlIGRvY3VtZW50cy4KClRoZSBleGFjdCBtb21lbnQgd2hlbiB5
+b3UncmUgdHlwaW5nIC5kZWNvZGUoKSBvciAuZW5jb2RlKCkgdG8gdHJ5IGZpeCBhCnB5dGhvbjIv
+MyBwcm9ibGVtLCB5b3UncmUgZW50ZXJpbmcgYSB3b3JsZCBvZiBwYWluICh0bSkuCgpbaW5zZXJ0
+IGJpZyBsZWJvd3NraSB3YWx0ZXIgcG9pbnRpbmcgZ3VuIGdpZiBoZXJlXQoKU29tZSBvZiB0aGUg
+cHl0aG9uIDIgYW5kIDMgY29tcGF0aWJpbGl0eSB0aGluZ3MgY2FuIGJlIGZpeGVkIGVhc2lseSBi
+eQppbXBvcnRpbmcgdGhpbmdzIGZyb20gdGhlIGZ1dHVyZSwgYnV0IHdoZW4gZGVhbGluZyB3aXRo
+IHN0cmluZ3MgYW5kCmJ5dGVzLCB5b3UncmUgZW50ZXJpbmcgdGhlICJpcyBpdCByZWFsbHkgd29y
+dGggaXQiIGRlcGFydG1lbnQuCgpJbiBweXRob24gMiwgc3RyaW5ncyBhcmUgYnl0ZXMsIGFuZCB0
+aGVyZSdzIHNvbWUgYWRkZWQgZHVjdCB0YXBlCmF2YWlsYWJsZSB0byBkbyBzb21ldGhpbmcgd2l0
+aCB1bmljb2RlIGFuZCB1dGYtOC4KCkluIHB5dGhvbiAzLCBzdHJpbmdzIGFyZSB1bmljb2RlIGFu
+ZCBieXRlcyBhcmUgYnl0ZXMsIHdoaWNoIGlzIHNvb29vb29vCm11Y2ggbW9yZSBjb252ZW5pZW50
+LiBJZiB0aGUgc3RyaW5ncyBoYXZlIHRvIGJlIHN0b3JlZCBpbiBzb21lIGxvY2F0aW9uCnRoYXQg
+c3RvcmVzIGJ5dGVzLCB5b3UgY2FuIGVuY29kZSB0aGVtLiBJZiB5b3UgaGF2ZSBzb21lIGluY29t
+aW5nIGJ5dGUKc3RyZWFtLCB5b3UgY2FuIGRlY29kZSBpdC4KCkkgZG9uJ3QgcmVhbGx5IGhhdmUg
+cmVjb21tZW5kYXRpb25zIHRvIG1ha2UgYm90aCBvZiB0aGVtIHdvcmsgd2l0aCB0aGUKc2FtZSBs
+aW5lcyBvZiBjb2RlIHNpbmNlIEkgdHJpZWQgYW5kIGdhdmUgdXAgd2hlbiBkb2luZyBpdCBteXNl
+bGYuCgpXaGF0IHlvdSdyZSBsb29raW5nIGF0IGlzIGhvdyB0aGUgaW4tbWVtb3J5IHN0b3JhZ2Ug
+Zm9yIGEgJ3N0cmluZycgaXMKZG9uZSBhbmQgaG93IHRvIGNvbm5lY3QgaW5wdXQgYW5kIG91dHB1
+dCB0byB0aGF0LCB3aGlsZSBsb29raW5nIGF0CnB5dGhvbiAyIGFuZCAzIGZ1bmN0aW9ucyB3aXRo
+IHRoZSBzYW1lIG5hbWUsIGRvaW5nIGRpZmZlcmVudCB0aGluZ3MgaW4KYSBkaWZmZXJlbnQgY29u
+dGV4dC4gVGhlcmUgaXMgbm8gc2FuZSB3YXkgdG8gZG8gdGhpcyB0aGF0IHdvcmtzIHdpdGgKcHl0
+aG9uIDIgYW5kIDMuCgpIYW5zCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
