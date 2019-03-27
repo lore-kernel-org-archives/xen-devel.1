@@ -1,21 +1,18 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: Xen 4.12.0-rc Hangs Around masked ExtINT on CPU#
-Date: Wed, 27 Mar 2019 08:21:46 -0600
-Message-ID: <5C9B86FA0200007800222232@prv1-mh.provo.novell.com>
-References: <77de1587-5683-4ddb-19ca-f71c23e6d7c1@gmail.com>
- <20190322075941.bdf6i3veheiblwzs@MacBook-Air-de-Roger.local>
- <9f9c4a21-b426-f0fc-7c09-2f5d392b488c@gmail.com>
- <5C98F95C0200007800221B56@prv1-mh.provo.novell.com>
- <9288a3b8-8c59-c80f-68f3-14aaca9272d4@gmail.com>
- <5C99DD160200007800221D00@prv1-mh.provo.novell.com>
- <25b66cdf-94ad-6af1-de5f-e0f5369ae000@gmail.com>
- <5C9B30D002000078002220F5@prv1-mh.provo.novell.com>
- <1fccf915-9d0b-52ac-4d6d-df16194dabb0@gmail.com>
+Subject: Re: xen disk spec and emulation
+Date: Wed, 27 Mar 2019 08:27:08 -0600
+Message-ID: <5C9B883C020000780022223C@prv1-mh.provo.novell.com>
+References: <05b30a1c532e425694122785a678e523@AMSPEX02CL02.citrite.net>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1fccf915-9d0b-52ac-4d6d-df16194dabb0@gmail.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=0tC/=R6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1h99WL-0001V3-CI
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 14:27:13 +0000
+In-Reply-To: <05b30a1c532e425694122785a678e523@AMSPEX02CL02.citrite.net>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,23 +22,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: jlpoole56@gmail.com
-Cc: xen-devel@lists.xen.org
+To: Paul Durrant <paul.durrant@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI3LjAzLjE5IGF0IDE0OjI1LCA8amxwb29sZTU2QGdtYWlsLmNvbT4gd3JvdGU6Cj4g
-T24gMy8yNy8yMDE5IDE6MTQgQU0sIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAyNi4wMy4x
-OSBhdCAxODoyMSwgPGpscG9vbGU1NkBnbWFpbC5jb20+IHdyb3RlOgo+Pj4gemV0YSAvdXNyL2xv
-Y2FsL3NyYy94ZW4gIyBjYXQgeGVuLy5jb25maWcgfGdyZXAgQ09ORklHX0hWTQo+Pj4gIyBDT05G
-SUdfSFZNIGlzIG5vdCBzZXQKPj4+IHpldGEgL3Vzci9sb2NhbC9zcmMveGVuICMKPj4+Cj4+PiAj
-IHRyaWVkIDIgYm9vdCBhdHRlbXB0cwo+Pj4gbG9nIGF0OiBodHRwczovL3Bhc3RlYmluLmNvbS9u
-TDRCV0o2WSAKPj4+Cj4+PiBIYW5nIHBvaW50cyBhdCBsaW5lczoKPj4gVGhhbmtzIGZvciB0cnlp
-bmcgYW55d2F5OyBvbmUgZnVydGhlciBwb3NzaWJpbGl0eSBlbGltaW5hdGVkLiBMb29raW5nCj4+
-IGF0IHRoZSBsb2dzIEkndmUgaGFkIGFub3RoZXIgdGhvdWdodCAod2lsZCBndWVzcyBhZ2Fpbiwg
-c28gbm90IHJlYWxseQo+PiBtdWNoIGhvcGUpOiBDb3VsZCB5b3UgdHJ5ICJtd2FpdC1pZGxlPW5v
-Ij8KPj4KPiBJIG1vZGlmaWVkIG1hbl94ZW4uY2ZnIGJ5IGFkZGluZyBhdCB0aGUgZW5kIHRoZSBr
-ZXJuZWwgcGFyYW1ldGVyOgo+IAo+IG13YWl0LWlkbGU9bm8KPiAKPiBSZWJvb3RlZC4KPiBSZXN1
-bHQ6IGh1bmc6CgpUaGFua3MuIEknbSBhZnJhaWQgSSdtIG91dCBvZiBpZGVhcyBmb3IgdGhlIG1v
-bWVudC4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDI3LjAzLjE5IGF0IDE0OjU0LCA8UGF1bC5EdXJyYW50QGNpdHJpeC5jb20+IHdyb3Rl
+Ogo+ICAgQ3VycmVudGx5LCB3aGVuIHNwZWNpZnlpbmcgYSB2aXJ0dWFsIGRpc2ssIHRoZSBvbmx5
+IHdheSB0byBkZXRlcm1pbmUgdGhlIAo+IGVtdWxhdGlvbiBtb2RlbCB1c2VkIGlzIGJ5IHNlbGVj
+dGluZyBhIHBhcnRpY3VsYXIgJ3ZkZXYnIG51bWJlcmluZyBzY2hlbWUgYXMgCj4gZGV0YWlsZWQg
+aW4geGwtZGlzay1jb25maWd1cmF0aW9uIGluIHRoZSBkb2NzLiBUaGF0IGRvY3VtZW50IHJlZmVy
+cyB0aGUgCj4gcmVhZGVyIHRvIHhlbi12YmQtaW50ZXJmYWNlIHdoaWNoIHNheXM6Cj4gCj4geHZk
+KiAtPiB4ZW4gdmlydHVhbCBkaXNrIChmcm9tIHdoaWNoIG9uZSBpbmZlcnMgUFYtb25seSkKPiBo
+ZCogLT4gSURFIGVtdWxhdGlvbgo+IHNkKiAtPiBTQ1NJIGVtdWxhdGlvbgo+IGQqcCogLT4gdW5r
+bm93biBlbXVsYXRpb24KPiAKPiAgIFRoZSBmaXJzdCBjaG9pY2UgYWN0dWFsbHkgcmVzdWx0cyBp
+biBJREUgZW11bGF0aW9uLCB3aGljaCBpcyBub3Qgc3RhdGVkIAo+IGFueXdoZXJlIEFGQUlLLCBh
+bmQgdGhlIGZvdXJ0aCBjaG9pY2UgYWN0dWFsbHkgcmVzdWx0cyBpbiBubyBlbXVsYXRpb24sIAo+
+IGFsdGhvdWdoIHRoYXQncyBub3Qgc3RhdGVkIGVpdGhlci4gVGhlc2UgdHdvIHRoaW5ncyBjYW4s
+IG9mIGNvdXJzZSwgYmUgZml4ZWQgCj4gaW4gdGhlIGRvY3VtZW50YXRpb24gYnV0IEkgYWxzbyB0
+aGluayB0aGF0IHRoZSBiZWhhdmlvdXIgb2YgdmRldj14dmQqIGlzIAo+IHN1cnByaXNpbmcgYW5k
+IHdyb25nLgoKV2Fzbid0IHRoaXMgYmVoYXZpb3IgaW50ZW5kZWQgdG8gYWxsb3cgYSBndWVzdCB0
+byBiZSBpbnN0YWxsZWQKd2l0aG91dCBQViBkcml2ZXJzLCBidXQgdG8gaGF2ZSB0aGVtIGVuYWJs
+ZWQgb25jZSB0aGV5IGdvdAppbnN0YWxsZWQ/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
