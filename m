@@ -1,20 +1,19 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 6/6] xen/sched: don't disable scheduler on
- cpus during suspend
-Date: Thu, 28 Mar 2019 00:10:07 +0100
-Message-ID: <cd406cd362b1af495d8f84585b8cff1b706203fe.camel@suse.com>
-References: <20190318131155.29450-1-jgross@suse.com>
- <20190318131155.29450-7-jgross@suse.com>
+From: David Howells <dhowells@redhat.com>
+Subject: [RFC PATCH 35/68] vfs: Convert xenfs to use the new
+ mount API
+Date: Wed, 27 Mar 2019 23:44:57 +0000
+Message-ID: <155373029773.7602.5749182816677575121.stgit__44261.1873777182$1553730370$gmane$org@warthog.procyon.org.uk>
+References: <155372999953.7602.13784796495137723805.stgit@warthog.procyon.org.uk>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3352274924928127449=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=/lXT=R6=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h9Hge-0000aM-OE
- for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 23:10:24 +0000
-In-Reply-To: <20190318131155.29450-7-jgross@suse.com>
+ <SRS0=i2YO=R6=redhat.com=dhowells@srs-us1.protection.inumbo.net>)
+ id 1h9IE9-0003FL-HO
+ for xen-devel@lists.xenproject.org; Wed, 27 Mar 2019 23:45:01 +0000
+In-Reply-To: <155372999953.7602.13784796495137723805.stgit@warthog.procyon.org.uk>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,95 +22,50 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@eu.citrix.com>
+To: viro@zeniv.linux.org.uk
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org, dhowells@redhat.com, linux-fsdevel@vger.kernel.org, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3352274924928127449==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-OqqkOF8HG7mRTinrINAF"
-
-
---=-OqqkOF8HG7mRTinrINAF
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2019-03-18 at 14:11 +0100, Juergen Gross wrote:
-> Today there is special handling in cpu_disable_scheduler() for
-> suspend
-> by forcing all vcpus to the boot cpu. In fact there is no need for
-> that
-> as during resume the vcpus are put on the correct cpus again.
->=20
-> So we can just omit the call of cpu_disable_scheduler() when
-> offlining
-> a cpu due to suspend and on resuming we can omit taking the schedule
-> lock for selecting the new processor.
->=20
-> In restore_vcpu_affinity() we should be careful when applying
-> affinity
-> as the cpu might not have come back to life. This in turn enables us
-> to even support affinity_broken across suspend/resume.
->=20
-> Avoid all other scheduler dealloc - alloc dance when doing suspend
-> and
-> resume, too. It is enough to react on cpus failing to come up on
-> resume
-> again.
->=20
-> Signed-off-by: Juergen Gross <jgross@suse.com>
->
-Ok, I think this patch is fine.
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-I guess you have tested both cpu off/on-lining and suspend/resume, or
-do you need help with that? (One of my testboxes that I have here,
-should be able to do suspend)
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-OqqkOF8HG7mRTinrINAF
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlycAs8ACgkQFkJ4iaW4
-c+6SsRAAmt6/WP2ST362ZS89H1j3+eanLMnA4pA79CIXOWtZNrQLtBdZ7WA4cLml
-1b3xTX9/ZIox4dnnKFW/2UrNOxn6n3FlQvmxW9Cva9q/qNHK8UcUUUgJKwPlTKEA
-U0iGhmxHFjngLmt4yePzPMJdGl9sksOBLvq+R65X0N0jQ3Nd1BfHPT6mxrSfDjBP
-yQlEI8MwjDhN2Tvf+XGRH6N20KIqfBJDq9yaruKJrkR1uJo7QsZNuPZk5SYIrU9N
-ldptGnqy+g9GP6BTQwvkS3uo5demMqgghVMBB49O3ayp13SnCuxXItnYgeOTEnZp
-5hSzE97WMWkDVvo3mNZdtGeFdvvAZvKvCNpYzZI5R23ydntFCNZTJv+hrfOo6+TJ
-eDnaubtjP6uPXjZyIodhXjj5h2J7MEEM7nytAJhkLe5/bicK61vP9Mfuylm7/A8o
-WSKXwGmbJYstv17ZoI8HyS2N3K9lqxsAMbt6noKRoCHbQT1h9aJ6wFCF/AMHa+0g
-1uwQdGH0237ndYP7tkNGOGYodpcRyxyGsCwQL8bFRKk3ErVqMziWdT6yh0FIHk/g
-dDqXL5nQqrNydDhz++6U8pJHTeyiiaqnwwZlE+xRtcb9MA+/GMcHhtfArO3t/muj
-q+zCF27D3snT6ivTmE4597HEmyp40/XC/I8DYKbdqTAar362wwg=
-=nFNz
------END PGP SIGNATURE-----
-
---=-OqqkOF8HG7mRTinrINAF--
-
-
-
---===============3352274924928127449==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3352274924928127449==--
+Q29udmVydCB0aGUgeGVuZnMgZmlsZXN5c3RlbSB0byB0aGUgbmV3IGludGVybmFsIG1vdW50IEFQ
+SSBhcyB0aGUgb2xkCm9uZSB3aWxsIGJlIG9ic29sZXRlZCBhbmQgcmVtb3ZlZC4gIFRoaXMgYWxs
+b3dzIGdyZWF0ZXIgZmxleGliaWxpdHkgaW4KY29tbXVuaWNhdGlvbiBvZiBtb3VudCBwYXJhbWV0
+ZXJzIGJldHdlZW4gdXNlcnNwYWNlLCB0aGUgVkZTIGFuZCB0aGUKZmlsZXN5c3RlbS4KClNlZSBE
+b2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL21vdW50X2FwaS50eHQgZm9yIG1vcmUgaW5mb3JtYXRp
+b24uCgpTaWduZWQtb2ZmLWJ5OiBEYXZpZCBIb3dlbGxzIDxkaG93ZWxsc0ByZWRoYXQuY29tPgpj
+YzogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4KY2M6IEp1ZXJn
+ZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KY2M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJl
+bGxpbmlAa2VybmVsLm9yZz4KY2M6IHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwotLS0K
+CiBkcml2ZXJzL3hlbi94ZW5mcy9zdXBlci5jIHwgICAyMSArKysrKysrKysrKysrKystLS0tLS0K
+IDEgZmlsZSBjaGFuZ2VkLCAxNSBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9ucygtKQoKZGlmZiAt
+LWdpdCBhL2RyaXZlcnMveGVuL3hlbmZzL3N1cGVyLmMgYi9kcml2ZXJzL3hlbi94ZW5mcy9zdXBl
+ci5jCmluZGV4IDcxZGRmYjRjZjYxYy4uMmUxNjIxNGU5YzdmIDEwMDY0NAotLS0gYS9kcml2ZXJz
+L3hlbi94ZW5mcy9zdXBlci5jCisrKyBiL2RyaXZlcnMveGVuL3hlbmZzL3N1cGVyLmMKQEAgLTEz
+LDYgKzEzLDcgQEAKICNpbmNsdWRlIDxsaW51eC9lcnJuby5oPgogI2luY2x1ZGUgPGxpbnV4L21v
+ZHVsZS5oPgogI2luY2x1ZGUgPGxpbnV4L2ZzLmg+CisjaW5jbHVkZSA8bGludXgvZnNfY29udGV4
+dC5oPgogI2luY2x1ZGUgPGxpbnV4L21hZ2ljLmg+CiAKICNpbmNsdWRlIDx4ZW4veGVuLmg+CkBA
+IC00Miw3ICs0Myw3IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZmlsZV9vcGVyYXRpb25zIGNhcGFi
+aWxpdGllc19maWxlX29wcyA9IHsKIAkubGxzZWVrID0gZGVmYXVsdF9sbHNlZWssCiB9OwogCi1z
+dGF0aWMgaW50IHhlbmZzX2ZpbGxfc3VwZXIoc3RydWN0IHN1cGVyX2Jsb2NrICpzYiwgdm9pZCAq
+ZGF0YSwgaW50IHNpbGVudCkKK3N0YXRpYyBpbnQgeGVuZnNfZmlsbF9zdXBlcihzdHJ1Y3Qgc3Vw
+ZXJfYmxvY2sgKnNiLCBzdHJ1Y3QgZnNfY29udGV4dCAqZmMpCiB7CiAJc3RhdGljIGNvbnN0IHN0
+cnVjdCB0cmVlX2Rlc2NyIHhlbmZzX2ZpbGVzW10gPSB7CiAJCVsyXSA9IHsgInhlbmJ1cyIsICZ4
+ZW5feGVuYnVzX2ZvcHMsIFNfSVJVU1J8U19JV1VTUiB9LApAQCAtNjcsMTcgKzY4LDI1IEBAIHN0
+YXRpYyBpbnQgeGVuZnNfZmlsbF9zdXBlcihzdHJ1Y3Qgc3VwZXJfYmxvY2sgKnNiLCB2b2lkICpk
+YXRhLCBpbnQgc2lsZW50KQogCQkJeGVuX2luaXRpYWxfZG9tYWluKCkgPyB4ZW5mc19pbml0X2Zp
+bGVzIDogeGVuZnNfZmlsZXMpOwogfQogCi1zdGF0aWMgc3RydWN0IGRlbnRyeSAqeGVuZnNfbW91
+bnQoc3RydWN0IGZpbGVfc3lzdGVtX3R5cGUgKmZzX3R5cGUsCi0JCQkJICBpbnQgZmxhZ3MsIGNv
+bnN0IGNoYXIgKmRldl9uYW1lLAotCQkJCSAgdm9pZCAqZGF0YSkKK3N0YXRpYyBpbnQgeGVuZnNf
+Z2V0X3RyZWUoc3RydWN0IGZzX2NvbnRleHQgKmZjKQogewotCXJldHVybiBtb3VudF9zaW5nbGUo
+ZnNfdHlwZSwgZmxhZ3MsIGRhdGEsIHhlbmZzX2ZpbGxfc3VwZXIpOworCXJldHVybiB2ZnNfZ2V0
+X3N1cGVyKGZjLCB2ZnNfZ2V0X3NpbmdsZV9zdXBlciwgeGVuZnNfZmlsbF9zdXBlcik7Cit9CisK
+K3N0YXRpYyBjb25zdCBzdHJ1Y3QgZnNfY29udGV4dF9vcGVyYXRpb25zIHhlbmZzX2NvbnRleHRf
+b3BzID0geworCS5nZXRfdHJlZQk9IHhlbmZzX2dldF90cmVlLAorfTsKKworc3RhdGljIGludCB4
+ZW5mc19pbml0X2ZzX2NvbnRleHQoc3RydWN0IGZzX2NvbnRleHQgKmZjKQoreworCWZjLT5vcHMg
+PSAmeGVuZnNfY29udGV4dF9vcHM7CisJcmV0dXJuIDA7CiB9CiAKIHN0YXRpYyBzdHJ1Y3QgZmls
+ZV9zeXN0ZW1fdHlwZSB4ZW5mc190eXBlID0gewogCS5vd25lciA9CVRISVNfTU9EVUxFLAogCS5u
+YW1lID0JCSJ4ZW5mcyIsCi0JLm1vdW50ID0JeGVuZnNfbW91bnQsCisJLmluaXRfZnNfY29udGV4
+dCA9IHhlbmZzX2luaXRfZnNfY29udGV4dCwKIAkua2lsbF9zYiA9CWtpbGxfbGl0dGVyX3N1cGVy
+LAogfTsKIE1PRFVMRV9BTElBU19GUygieGVuZnMiKTsKCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
