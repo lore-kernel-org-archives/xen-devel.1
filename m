@@ -1,20 +1,20 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH v2 0/6] xen: simplify suspend/resume handling
-Date: Thu, 28 Mar 2019 15:53:27 +0100
-Message-ID: <6b45be13fc9ae9ee43b07e16148854c114e5545e.camel@suse.com>
-References: <20190328120658.11083-1-jgross@suse.com>
- <CAOcqxo2Jq7GVGPs=tg17_4pHy_W6+SrvGdP5y0AHARUNe7X+fQ@mail.gmail.com>
- <705a456a-15f9-9b24-e0b1-dc373f7d3e99@arm.com>
- <CAOcqxo1KcE_ZE2OJfyPPEvFJk_hZ+DEsKffNzKHbeN4MoH8a8w@mail.gmail.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH 7/7] x86/IOMMU: initialize iommu_ops in
+ vendor-independent code
+Date: Thu, 28 Mar 2019 08:54:31 -0600
+Message-ID: <5C9CE0270200007800222881@prv1-mh.provo.novell.com>
+References: <5C9CDDAF020000780022282A@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7955409435557518277=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=q513=R7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h9WPs-0000Ur-RV
- for xen-devel@lists.xenproject.org; Thu, 28 Mar 2019 14:54:04 +0000
-In-Reply-To: <CAOcqxo1KcE_ZE2OJfyPPEvFJk_hZ+DEsKffNzKHbeN4MoH8a8w@mail.gmail.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=r6Gf=R7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1h9WQR-0000jw-9D
+ for xen-devel@lists.xenproject.org; Thu, 28 Mar 2019 14:54:39 +0000
+In-Reply-To: <5C9CDDAF020000780022282A@prv1-mh.provo.novell.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,77 +23,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Volodymyr Babchuk <vlad.babchuk@gmail.com>, Julien Grall <julien.grall@arm.com>
-Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>, Brian Woods <brian.woods@amd.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============7955409435557518277==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-YSqFTLhGBmlF1KCLZqJJ"
-
-
---=-YSqFTLhGBmlF1KCLZqJJ
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2019-03-28 at 15:56 +0200, Volodymyr Babchuk wrote:
-> On Thu, 28 Mar 2019 at 15:33, Julien Grall <julien.grall@arm.com>
-> wrote:
-> >=20
-> Are the logs below actually a mistaken paste?
-> No, this is what I'm seeing in my serial console.
->=20
-Err, sorry, I'm a bit confused now...
-
-So, if you use the ARM suspend/resume patches + Juergen series +
-Juergen fixup patch in this subthread, do you still have issues or is
-everything allright?
-
-If you still have issues, which splat are you seeing?
-
-Regards,
-Dario
---=20
-<<This happens because I choose it to happen!>> (Raistlin Majere)
------------------------------------------------------------------
-Dario Faggioli, Ph.D, http://about.me/dario.faggioli
-Software Engineer @ SUSE https://www.suse.com/
-
---=-YSqFTLhGBmlF1KCLZqJJ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyc3+cACgkQFkJ4iaW4
-c+6Mww/+IfOUElbGUguf5Wz7fVRYX04ZhTE43IKoPs1PyBKeW0p7u4plmamOaknI
-jpOpu8YiTOsGfzHudGR1CG9dZnLxI+A7nbgeEZwYAN0xSzIlKUrANS6BSeLU1Zi7
-ZZ8ONjqhupb5QuSTQp5rzKbmYaiMyis8h98vv4CpqWt28dC6S/KpVpTtdY+KHJ+Y
-yz3Cw6Tci+jcFxchilOfdusdrN4cJOGAdWe8c/kLTwC2MvfMrWokf7T4h3Ab+qKp
-nROV+QHAO6r+7GxOuYylWMmbLE32vxdLYgRg6VFiKCHLP7icWbad73bAemJFxqxq
-55oQRRPxicVg8omr7M9tWsQIjk7r3hRRGkRo88rr2iBiUPjmAqUiX7fReD5yyl22
-c7KNARXlMb7tw1IpQbDFpQ7fJSxvWI8P2H2irMexrZkIpiV//fJdknY4OaJs1qc8
-tnwezZy+F/pRXHoN39oODu4LyvDBBQ+ckKaQVQbBG+8SuOrXMmmTa8LzSYhimOAw
-3HHTGGC5E+FpfvO1hHCnXfG6LHwePegz0PSJe8esA+cRYhn9N85HdQNOuCqy0huS
-aJGGsJ7SWzgNuPHxZEbAUhrvOn4yoeZIjft5ivskl0l7CtfEGTWyR+sblidr/ggl
-1vYaF3wNfP5Dzfr0B9bjSCgYXEoyZi8rI07jRUd5sw7V2I/Balc=
-=MAHQ
------END PGP SIGNATURE-----
-
---=-YSqFTLhGBmlF1KCLZqJJ--
-
-
-
---===============7955409435557518277==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7955409435557518277==--
+TW92ZSB0aGlzIGludG8gaW9tbXVfaGFyZHdhcmVfc2V0dXAoKSBhbmQgbWFrZSB0aGF0IGZ1bmN0
+aW9uIG5vbi0KaW5saW5lLiBNb3ZlIGl0cyBkZWNsYXJhdGlvbiBpbnRvIGNvbW1vbiBjb2RlLgoK
+U2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKLS0tIGEveGVu
+L2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL3BjaV9hbWRfaW9tbXUuYworKysgYi94ZW4vZHJpdmVy
+cy9wYXNzdGhyb3VnaC9hbWQvcGNpX2FtZF9pb21tdS5jCkBAIC0zMSw3ICszMSw2IEBACiBzdGF0
+aWMgYm9vbF90IF9fcmVhZF9tb3N0bHkgaW5pdF9kb25lOwogCiBzdGF0aWMgY29uc3Qgc3RydWN0
+IGlvbW11X2luaXRfb3BzIF9pb21tdV9pbml0X29wczsKLXN0YXRpYyBjb25zdCBzdHJ1Y3QgaW9t
+bXVfb3BzIGFtZF9pb21tdV9vcHM7CiAKIHN0cnVjdCBhbWRfaW9tbXUgKmZpbmRfaW9tbXVfZm9y
+X2RldmljZShpbnQgc2VnLCBpbnQgYmRmKQogewpAQCAtMTk2LDggKzE5NSw2IEBAIHN0YXRpYyBp
+bnQgX19pbml0IGlvdl9kZXRlY3Qodm9pZCkKICAgICBpZiAoICFpb21tdV9lbmFibGUgJiYgIWlv
+bW11X2ludHJlbWFwICkKICAgICAgICAgcmV0dXJuIDA7CiAKLSAgICBpb21tdV9vcHMgPSBhbWRf
+aW9tbXVfb3BzOwotCiAgICAgaWYgKCBhbWRfaW9tbXVfaW5pdCgpICE9IDAgKQogICAgIHsKICAg
+ICAgICAgcHJpbnRrKCJBTUQtVmk6IEVycm9yIGluaXRpYWxpemF0aW9uXG4iKTsKQEAgLTU4Miw3
+ICs1NzksNyBAQCBzdGF0aWMgdm9pZCBhbWRfZHVtcF9wMm1fdGFibGUoc3RydWN0IGRvCiAgICAg
+YW1kX2R1bXBfcDJtX3RhYmxlX2xldmVsKGhkLT5hcmNoLnJvb3RfdGFibGUsIGhkLT5hcmNoLnBh
+Z2luZ19tb2RlLCAwLCAwKTsKIH0KIAotc3RhdGljIGNvbnN0IHN0cnVjdCBpb21tdV9vcHMgX19p
+bml0Y29uc3RyZWwgYW1kX2lvbW11X29wcyA9IHsKK3N0YXRpYyBjb25zdCBzdHJ1Y3QgaW9tbXVf
+b3BzIF9faW5pdGNvbnN0cmVsIF9pb21tdV9vcHMgPSB7CiAgICAgLmluaXQgPSBhbWRfaW9tbXVf
+ZG9tYWluX2luaXQsCiAgICAgLmh3ZG9tX2luaXQgPSBhbWRfaW9tbXVfaHdkb21faW5pdCwKICAg
+ICAuYWRkX2RldmljZSA9IGFtZF9pb21tdV9hZGRfZGV2aWNlLApAQCAtNjA5LDUgKzYwNiw2IEBA
+IHN0YXRpYyBjb25zdCBzdHJ1Y3QgaW9tbXVfb3BzIF9faW5pdGNvbnMKIH07CiAKIHN0YXRpYyBj
+b25zdCBzdHJ1Y3QgaW9tbXVfaW5pdF9vcHMgX19pbml0Y29uc3RyZWwgX2lvbW11X2luaXRfb3Bz
+ID0geworICAgIC5vcHMgPSAmX2lvbW11X29wcywKICAgICAuc2V0dXAgPSBpb3ZfZGV0ZWN0LAog
+fTsKLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11LmMKKysrIGIveGVuL2Ry
+aXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11LmMKQEAgLTIzMDUsOCArMjMwNSw2IEBAIHN0YXRp
+YyBpbnQgX19pbml0IHZ0ZF9zZXR1cCh2b2lkKQogICAgICAgICBnb3RvIGVycm9yOwogICAgIH0K
+IAotICAgIGlvbW11X29wcyA9IGludGVsX2lvbW11X29wczsKLQogICAgIC8qIFdlIGVuYWJsZSB0
+aGUgZm9sbG93aW5nIGZlYXR1cmVzIG9ubHkgaWYgdGhleSBhcmUgc3VwcG9ydGVkIGJ5IGFsbCBW
+VC1kCiAgICAgICogZW5naW5lczogU25vb3AgQ29udHJvbCwgRE1BIHBhc3N0aHJvdWdoLCBRdWV1
+ZWQgSW52YWxpZGF0aW9uLCBJbnRlcnJ1cHQKICAgICAgKiBSZW1hcHBpbmcsIGFuZCBQb3N0ZWQg
+SW50ZXJydXB0Ci0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL3g4Ni9pb21tdS5jCisrKyBi
+L3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL3g4Ni9pb21tdS5jCkBAIC0yNiw2ICsyNiwxOSBAQAog
+Y29uc3Qgc3RydWN0IGlvbW11X2luaXRfb3BzICpfX2luaXRkYXRhIGlvbW11X2luaXRfb3BzOwog
+c3RydWN0IGlvbW11X29wcyBfX3JlYWRfbW9zdGx5IGlvbW11X29wczsKIAoraW50IF9faW5pdCBp
+b21tdV9oYXJkd2FyZV9zZXR1cCh2b2lkKQoreworICAgIGlmICggIWlvbW11X2luaXRfb3BzICkK
+KyAgICAgICAgcmV0dXJuIC1FTk9ERVY7CisKKyAgICBpZiAoICFpb21tdV9vcHMuaW5pdCApCisg
+ICAgICAgIGlvbW11X29wcyA9ICppb21tdV9pbml0X29wcy0+b3BzOworICAgIGVsc2UKKyAgICAg
+ICAgQVNTRVJUKGlvbW11X29wcy5pbml0ID09IGlvbW11X2luaXRfb3BzLT5vcHMtPmluaXQpOwor
+CisgICAgcmV0dXJuIGlvbW11X2luaXRfb3BzLT5zZXR1cCgpOworfQorCiBpbnQgaW9tbXVfZW5h
+YmxlX3gyYXBpY19JUih2b2lkKQogewogICAgIGlmICggc3lzdGVtX3N0YXRlIDwgU1lTX1NUQVRF
+X2FjdGl2ZSApCi0tLSBhL3hlbi9pbmNsdWRlL2FzbS1hcm0vaW9tbXUuaAorKysgYi94ZW4vaW5j
+bHVkZS9hc20tYXJtL2lvbW11LmgKQEAgLTI2LDggKzI2LDYgQEAgc3RydWN0IGFyY2hfaW9tbXUK
+IGNvbnN0IHN0cnVjdCBpb21tdV9vcHMgKmlvbW11X2dldF9vcHModm9pZCk7CiB2b2lkIGlvbW11
+X3NldF9vcHMoY29uc3Qgc3RydWN0IGlvbW11X29wcyAqb3BzKTsKIAotaW50IGlvbW11X2hhcmR3
+YXJlX3NldHVwKHZvaWQpOwotCiAjZW5kaWYgLyogX19BUkNIX0FSTV9JT01NVV9IX18gKi8KIAog
+LyoKLS0tIGEveGVuL2luY2x1ZGUvYXNtLXg4Ni9pb21tdS5oCisrKyBiL3hlbi9pbmNsdWRlL2Fz
+bS14ODYvaW9tbXUuaApAQCAtNzMsMTEgKzczLDYgQEAgc3RydWN0IGlvbW11X2luaXRfb3BzIHsK
+IAogZXh0ZXJuIGNvbnN0IHN0cnVjdCBpb21tdV9pbml0X29wcyAqaW9tbXVfaW5pdF9vcHM7CiAK
+LXN0YXRpYyBpbmxpbmUgaW50IGlvbW11X2hhcmR3YXJlX3NldHVwKHZvaWQpCi17Ci0gICAgcmV0
+dXJuIGlvbW11X2luaXRfb3BzID8gaW9tbXVfaW5pdF9vcHMtPnNldHVwKCkgOiAtRU5PREVWOwot
+fQotCiAvKiBBcmUgd2UgdXNpbmcgdGhlIGRvbWFpbiBQMk0gdGFibGUgYXMgaXRzIElPTU1VIHBh
+Z2V0YWJsZT8gKi8KICNkZWZpbmUgaW9tbXVfdXNlX2hhcF9wdChkKSBcCiAgICAgKGhhcF9lbmFi
+bGVkKGQpICYmIGhhc19pb21tdV9wdChkKSAmJiBpb21tdV9oYXBfcHRfc2hhcmUpCi0tLSBhL3hl
+bi9pbmNsdWRlL3hlbi9pb21tdS5oCisrKyBiL3hlbi9pbmNsdWRlL3hlbi9pb21tdS5oCkBAIC02
+NSw2ICs2NSw3IEBAIGV4dGVybiBpbnQ4X3QgaW9tbXVfaHdkb21fcmVzZXJ2ZWQ7CiBleHRlcm4g
+dW5zaWduZWQgaW50IGlvbW11X2Rldl9pb3RsYl90aW1lb3V0OwogCiBpbnQgaW9tbXVfc2V0dXAo
+dm9pZCk7CitpbnQgaW9tbXVfaGFyZHdhcmVfc2V0dXAodm9pZCk7CiAKIGludCBpb21tdV9kb21h
+aW5faW5pdChzdHJ1Y3QgZG9tYWluICpkKTsKIHZvaWQgaW9tbXVfaHdkb21faW5pdChzdHJ1Y3Qg
+ZG9tYWluICpkKTsKCgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
