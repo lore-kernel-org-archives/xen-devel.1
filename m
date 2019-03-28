@@ -1,19 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH v2 0/6] xen: simplify suspend/resume handling
-Date: Thu, 28 Mar 2019 14:21:02 +0100
-Message-ID: <eed5e27e-0539-c375-4242-a8eb6bc68c9f@suse.com>
+Date: Thu, 28 Mar 2019 13:23:35 +0000
+Message-ID: <c3726f80-b8bc-9953-cc97-d9964788470a@arm.com>
 References: <20190328120658.11083-1-jgross@suse.com>
  <CAOcqxo2Jq7GVGPs=tg17_4pHy_W6+SrvGdP5y0AHARUNe7X+fQ@mail.gmail.com>
+ <eed5e27e-0539-c375-4242-a8eb6bc68c9f@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="------------4C5F0BAC9DF5A03BCAECD675"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=zgNs=R7=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1h9Uxu-0007QF-BA
- for xen-devel@lists.xenproject.org; Thu, 28 Mar 2019 13:21:06 +0000
-In-Reply-To: <CAOcqxo2Jq7GVGPs=tg17_4pHy_W6+SrvGdP5y0AHARUNe7X+fQ@mail.gmail.com>
-Content-Language: de-DE
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=mKej=R7=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1h9V0R-0007cR-0f
+ for xen-devel@lists.xenproject.org; Thu, 28 Mar 2019 13:23:43 +0000
+In-Reply-To: <eed5e27e-0539-c375-4242-a8eb6bc68c9f@suse.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,106 +24,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Volodymyr Babchuk <vlad.babchuk@gmail.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>, Volodymyr Babchuk <vlad.babchuk@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Dario Faggioli <dfaggioli@suse.com>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-This is a multi-part message in MIME format.
---------------4C5F0BAC9DF5A03BCAECD675
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-On 28/03/2019 14:01, Volodymyr Babchuk wrote:
-> Hello Juergen,
-> 
-> On Thu, 28 Mar 2019 at 14:09, Juergen Gross <jgross@suse.com> wrote:
->>
->> Especially in the scheduler area (schedule.c, cpupool.c) there is a
->> rather complex handling involved when doing suspend and resume.
->>
->> This can be simplified a lot by not performing a complete cpu down and
->> up cycle for the non-boot cpus, but keeping the pure software related
->> state and freeing it only in case a cpu didn't come up again during
->> resume.
->>
->> In summary not only the complexity can be reduced, but the failure
->> tolerance will be even better with this series: With a dedicated hook
->> for failing cpus when resuming it is now possible to survive e.g. a
->> cpupool being left without any cpu after resume by moving its domains
->> to cpupool0.
->>
->> Juergen Gross (6):
->>   xen/sched: call cpu_disable_scheduler() via cpu notifier
->>   xen: add helper for calling notifier_call_chain() to common/cpu.c
->>   xen: add new cpu notifier action CPU_RESUME_FAILED
->>   xen: don't free percpu areas during suspend
->>   xen/cpupool: simplify suspend/resume handling
->>   xen/sched: don't disable scheduler on cpus during suspend
->>
->>  xen/arch/arm/smpboot.c     |   4 -
->>  xen/arch/x86/percpu.c      |   3 +-
->>  xen/arch/x86/smpboot.c     |   3 -
->>  xen/common/cpu.c           |  61 +++++++-------
->>  xen/common/cpupool.c       | 131 ++++++++++++-----------------
->>  xen/common/schedule.c      | 203 +++++++++++++++++++--------------------------
->>  xen/include/xen/cpu.h      |  29 ++++---
->>  xen/include/xen/sched-if.h |   1 -
->>  8 files changed, 190 insertions(+), 245 deletions(-)
->>
-> 
-> I tested your patch series on ARM64 platform. We had issue with hard
-> affinity - there was assertion failure in sched_credit2 code during
-> suspension if one of the vCPUs is pinned to non-0 pCPU.
-> 
-> Seems, your patch series fixes the issue during suspend. But now I'm
-> seeing crash during resume:
-
-Oh, I wasn't aware the suspend/resume is possible on ARM, too.
-
-I need to modify arch/arm/percpu.c like on x86.
-
-Could you test the attached patch if it is working?
-
-
-Juergen
-
---------------4C5F0BAC9DF5A03BCAECD675
-Content-Type: text/x-patch;
- name="arm.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: attachment;
- filename="arm.patch"
-
-diff --git a/xen/arch/arm/percpu.c b/xen/arch/arm/percpu.c
-index 25442c48fe..597027c6c9 100644
---- a/xen/arch/arm/percpu.c
-+++ b/xen/arch/arm/percpu.c
-@@ -58,11 +58,14 @@ static int cpu_percpu_callback(
-     switch ( action )
-     {
-     case CPU_UP_PREPARE:
--        rc = init_percpu_area(cpu);
-+        if ( system_state != SYS_STATE_resume )
-+            rc = init_percpu_area(cpu);
-         break;
-     case CPU_UP_CANCELED:
-     case CPU_DEAD:
--        free_percpu_area(cpu);
-+    case CPU_RESUME_FAILED:
-+        if ( system_state != SYS_STATE_suspend )
-+            free_percpu_area(cpu);
-         break;
-     default:
-         break;
-
---------------4C5F0BAC9DF5A03BCAECD675
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---------------4C5F0BAC9DF5A03BCAECD675--
+CgpPbiAzLzI4LzE5IDE6MjEgUE0sIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6Cj4gT24gMjgvMDMvMjAx
+OSAxNDowMSwgVm9sb2R5bXlyIEJhYmNodWsgd3JvdGU6Cj4+IEhlbGxvIEp1ZXJnZW4sCj4+Cj4+
+IE9uIFRodSwgMjggTWFyIDIwMTkgYXQgMTQ6MDksIEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNl
+LmNvbT4gd3JvdGU6Cj4+Pgo+Pj4gRXNwZWNpYWxseSBpbiB0aGUgc2NoZWR1bGVyIGFyZWEgKHNj
+aGVkdWxlLmMsIGNwdXBvb2wuYykgdGhlcmUgaXMgYQo+Pj4gcmF0aGVyIGNvbXBsZXggaGFuZGxp
+bmcgaW52b2x2ZWQgd2hlbiBkb2luZyBzdXNwZW5kIGFuZCByZXN1bWUuCj4+Pgo+Pj4gVGhpcyBj
+YW4gYmUgc2ltcGxpZmllZCBhIGxvdCBieSBub3QgcGVyZm9ybWluZyBhIGNvbXBsZXRlIGNwdSBk
+b3duIGFuZAo+Pj4gdXAgY3ljbGUgZm9yIHRoZSBub24tYm9vdCBjcHVzLCBidXQga2VlcGluZyB0
+aGUgcHVyZSBzb2Z0d2FyZSByZWxhdGVkCj4+PiBzdGF0ZSBhbmQgZnJlZWluZyBpdCBvbmx5IGlu
+IGNhc2UgYSBjcHUgZGlkbid0IGNvbWUgdXAgYWdhaW4gZHVyaW5nCj4+PiByZXN1bWUuCj4+Pgo+
+Pj4gSW4gc3VtbWFyeSBub3Qgb25seSB0aGUgY29tcGxleGl0eSBjYW4gYmUgcmVkdWNlZCwgYnV0
+IHRoZSBmYWlsdXJlCj4+PiB0b2xlcmFuY2Ugd2lsbCBiZSBldmVuIGJldHRlciB3aXRoIHRoaXMg
+c2VyaWVzOiBXaXRoIGEgZGVkaWNhdGVkIGhvb2sKPj4+IGZvciBmYWlsaW5nIGNwdXMgd2hlbiBy
+ZXN1bWluZyBpdCBpcyBub3cgcG9zc2libGUgdG8gc3Vydml2ZSBlLmcuIGEKPj4+IGNwdXBvb2wg
+YmVpbmcgbGVmdCB3aXRob3V0IGFueSBjcHUgYWZ0ZXIgcmVzdW1lIGJ5IG1vdmluZyBpdHMgZG9t
+YWlucwo+Pj4gdG8gY3B1cG9vbDAuCj4+Pgo+Pj4gSnVlcmdlbiBHcm9zcyAoNik6Cj4+PiAgICB4
+ZW4vc2NoZWQ6IGNhbGwgY3B1X2Rpc2FibGVfc2NoZWR1bGVyKCkgdmlhIGNwdSBub3RpZmllcgo+
+Pj4gICAgeGVuOiBhZGQgaGVscGVyIGZvciBjYWxsaW5nIG5vdGlmaWVyX2NhbGxfY2hhaW4oKSB0
+byBjb21tb24vY3B1LmMKPj4+ICAgIHhlbjogYWRkIG5ldyBjcHUgbm90aWZpZXIgYWN0aW9uIENQ
+VV9SRVNVTUVfRkFJTEVECj4+PiAgICB4ZW46IGRvbid0IGZyZWUgcGVyY3B1IGFyZWFzIGR1cmlu
+ZyBzdXNwZW5kCj4+PiAgICB4ZW4vY3B1cG9vbDogc2ltcGxpZnkgc3VzcGVuZC9yZXN1bWUgaGFu
+ZGxpbmcKPj4+ICAgIHhlbi9zY2hlZDogZG9uJ3QgZGlzYWJsZSBzY2hlZHVsZXIgb24gY3B1cyBk
+dXJpbmcgc3VzcGVuZAo+Pj4KPj4+ICAgeGVuL2FyY2gvYXJtL3NtcGJvb3QuYyAgICAgfCAgIDQg
+LQo+Pj4gICB4ZW4vYXJjaC94ODYvcGVyY3B1LmMgICAgICB8ICAgMyArLQo+Pj4gICB4ZW4vYXJj
+aC94ODYvc21wYm9vdC5jICAgICB8ICAgMyAtCj4+PiAgIHhlbi9jb21tb24vY3B1LmMgICAgICAg
+ICAgIHwgIDYxICsrKysrKystLS0tLS0tCj4+PiAgIHhlbi9jb21tb24vY3B1cG9vbC5jICAgICAg
+IHwgMTMxICsrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tCj4+PiAgIHhlbi9jb21tb24vc2No
+ZWR1bGUuYyAgICAgIHwgMjAzICsrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLQo+Pj4gICB4ZW4vaW5jbHVkZS94ZW4vY3B1LmggICAgICB8ICAyOSArKysrLS0tCj4+
+PiAgIHhlbi9pbmNsdWRlL3hlbi9zY2hlZC1pZi5oIHwgICAxIC0KPj4+ICAgOCBmaWxlcyBjaGFu
+Z2VkLCAxOTAgaW5zZXJ0aW9ucygrKSwgMjQ1IGRlbGV0aW9ucygtKQo+Pj4KPj4KPj4gSSB0ZXN0
+ZWQgeW91ciBwYXRjaCBzZXJpZXMgb24gQVJNNjQgcGxhdGZvcm0uIFdlIGhhZCBpc3N1ZSB3aXRo
+IGhhcmQKPj4gYWZmaW5pdHkgLSB0aGVyZSB3YXMgYXNzZXJ0aW9uIGZhaWx1cmUgaW4gc2NoZWRf
+Y3JlZGl0MiBjb2RlIGR1cmluZwo+PiBzdXNwZW5zaW9uIGlmIG9uZSBvZiB0aGUgdkNQVXMgaXMg
+cGlubmVkIHRvIG5vbi0wIHBDUFUuCj4+Cj4+IFNlZW1zLCB5b3VyIHBhdGNoIHNlcmllcyBmaXhl
+cyB0aGUgaXNzdWUgZHVyaW5nIHN1c3BlbmQuIEJ1dCBub3cgSSdtCj4+IHNlZWluZyBjcmFzaCBk
+dXJpbmcgcmVzdW1lOgo+IAo+IE9oLCBJIHdhc24ndCBhd2FyZSB0aGUgc3VzcGVuZC9yZXN1bWUg
+aXMgcG9zc2libGUgb24gQVJNLCB0b28uCgpXZSBkb24ndCBoYXZlIHN1c3BlbmQvcmVzdW1lIG9u
+IEFybS4uLiBUaGVyZSBhcmUgc2VyaWVzIG9uIHRoZSBNTCBidXQgSSAKd291bGQgbm90IGNvbnNp
+ZGVyIHRoZW4gYnVnIGZyZWUgKHRoZXJlIHdhcyB0aGUgZmlyc3QgcG9zdGluZykuCgpDaGVlcnMs
+CgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
