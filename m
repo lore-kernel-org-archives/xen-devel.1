@@ -1,24 +1,19 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86emul/fuzz: adjust canonicalization in
- sanitize_input()
-Date: Fri, 29 Mar 2019 20:40:15 +0000
-Message-ID: <31f12c74-d990-9c94-5b5c-f091f37be36f@citrix.com>
-References: <5C9E30F40200007800222DDC@prv1-mh.provo.novell.com>
- <8B8E72C2-696B-4C0D-8733-78C7B93B9FB0@citrix.com>
- <5C9E38620200007800222F8B@prv1-mh.provo.novell.com>
- <F2552738-0569-4DC0-A93D-F0D3191C5D5E@citrix.com>
- <5C9E447B0200007800223018@prv1-mh.provo.novell.com>
- <DC8F0A76-5080-40AB-BB46-03298755E295@citrix.com>
+Subject: Re: [PATCH RFC 17/49] xen/sched: move some per-vcpu
+ items to struct sched_item
+Date: Fri, 29 Mar 2019 21:33:20 +0000
+Message-ID: <ad9f514b-7325-0759-0a80-c8195e8c0b64@citrix.com>
+References: <20190329150934.17694-1-jgross@suse.com>
+ <20190329150934.17694-18-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5347585942441903991=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=/vMr=SA=citrix.com=prvs=9848b938e=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1h9yIY-0004OX-Ua
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 20:40:23 +0000
-In-Reply-To: <DC8F0A76-5080-40AB-BB46-03298755E295@citrix.com>
+ id 1h9z7u-0001JJ-MV
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 21:33:26 +0000
+In-Reply-To: <20190329150934.17694-18-jgross@suse.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,223 +23,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjkvMDMvMjAxOSAxOToyMCwgR2VvcmdlIER1bmxhcCB3cm90ZToKPgo+PiBPbiBNYXIgMjks
-IDIwMTksIGF0IDQ6MTQgUE0sIEphbiBCZXVsaWNoIDxKQmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6
-Cj4+Cj4+Pj4+IE9uIDI5LjAzLjE5IGF0IDE2OjQyLCA8R2VvcmdlLkR1bmxhcEBjaXRyaXguY29t
-PiB3cm90ZToKPj4+PiBPbiBNYXIgMjksIDIwMTksIGF0IDM6MjMgUE0sIEphbiBCZXVsaWNoIDxK
-QmV1bGljaEBzdXNlLmNvbT4gd3JvdGU6Cj4+Pj4+Pj4gT24gMjkuMDMuMTkgYXQgMTY6MTQsIDxH
-ZW9yZ2UuRHVubGFwQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4+PiBGQU9EOgo+Pj4+PiAxLiBJIGRv
-buKAmXQgb3Bwb3NlIHRoaXMsIGJ1dAo+Pj4+PiAyLiBJIGRvbuKAmXQgc3VwcG9ydCBpdCBlaXRo
-ZXI7IGhvd2V2ZXIsCj4+Pj4+IDMuIEkgZG9u4oCZdCB0aGluayBteSBBY2sgaXMgbmVjZXNzYXJ5
-Lgo+Pj4+IFdlbGwsIHByZWZlcmFibHkgSSB3b3VsZCBhZGRyZXNzIHlvdXIgY29uY2VybnMgZGVz
-cGl0ZSAzLiBTbyBjb3VsZAo+Pj4+IHlvdSBjbGFyaWZ5IHdoYXQgeW91IHdvdWxkIHN1Z2dlc3Qg
-aW5zdGVhZD8gS2VlcCB0aGluZ3MgYXMgdGhleQo+Pj4+IGFyZT8gRHJvcCBhbGwgY2Fub25pY2Fs
-aXphdGlvbj8gSSd2ZSBiYXNpY2FsbHkgdHJpZWQgdG8gZmluZCBhIG1pZGRsZQo+Pj4+IGdyb3Vu
-ZCBiZXR3ZWVuIHRoZSB0d28gZXh0cmVtZXMuCj4+PiBJIGFwcHJlY2lhdGUgdGhhdC4gOi0pIEJ1
-dCB0aGUgbWFpbiByZWFzb24gSSB3cm90ZSB0aGlzIHdhcyAjMzogSSBkaWRu4oCZdCAKPj4+IHdh
-bnQgbXkgc2lsZW5jZSBpbnRlcnByZXRlZCBhcyBhIG5hY2suCj4+Pgo+Pj4gSSBkb27igJl0IHRo
-aW5rIGl0IHdpbGwgaGVscCBmdXp6aW5nIHRvIHJlbW92ZSBjYW5vbmljYWxpemF0aW9uIG9mIGVi
-cDsgaXQgbWF5IAo+Pj4gaGVscCB0byBoYXZlIGl0IGluLiAgSW4gZmFjdCBJ4oCZZCBwcmVmZXIg
-dG8gQ0FOT05JQ0FMSVpFX01BWUJFKCkgbW9yZSAKPj4+IHJlZ2lzdGVycy4KPj4gQnV0IGNhbm9u
-aWNhbGl6YXRpb24gcmVtb3ZlcyBwb3RlbnRpYWxseSBpbnRlcmVzdGluZyBiaXRzIGZyb20gZnV6
-emVkCj4+IGlucHV0LCB3aGljaCBpcyBsaWFibGUgdG8gYmUgcmVsZXZhbnQgaWYgYSByZWdpc3Rl
-ciBpcyB1c2VkIGZvciBvdGhlciB0aGFuCj4+IGEgYmFzZSBhZGRyZXNzIGluIGFuIGVmZmVjdGl2
-ZSBhZGRyZXNzIGNhbGN1bGF0aW9uLiBBcyBhbiBleGFtcGxlLAo+PiB0YWtlIEJTUjogWW91J2Qg
-cmVtb3ZlIHRoZSBwb3NzaWJpbGl0eSB0byBnZXQgcmVzdWx0cyBpbiB0aGUgcmFuZ2UKPj4gWzQ4
-LDYyXS4gT3IgdGFrZSB0aGUgWFNBLTE5NSBjYXNlOiBUaGUgbWVtb3J5IHJhbmdlIGNvdmVyZWQg
-YnkKPj4gQlR7LEMsUixTfSBpcyBkcmFtYXRpY2FsbHkgbXVjaCBzbWFsbGVyIHdoZW4gdGhlIHJl
-Z2lzdGVyIGhvbGRpbmcgdGhlCj4+IGJpdCBvZmZzZXQgZmlyc3QgZ290IGNhbm9uaWNhbGl6ZWQu
-Cj4+Cj4+IEdyYW50ZWQgdGhlIGNhbm9uaWNhbGl6YXRpb24gaXMgY29uZGl0aW9uYWwsIHNvIGl0
-IHdvdWxkbid0IGJlIG1ha2luZyBpdAo+PiBlbnRpcmVseSBpbXBvc3NpYmxlIHRvIGdldCBpbnRv
-IHN1Y2ggYSBzdGF0ZSwgYnV0IHNpbmNlIGZ1enppbmcgaXMgYWxsCj4+IGFib3V0IGxpa2VsaWhv
-b2QsIHdlJ2QgbGlrZSB0byBhdm9pZCByZWR1Y2luZyBvdXIgY2hhbmNlcyBvZiBoaXR0aW5nCj4+
-IGludGVyZXN0aW5nIGNhc2VzLgo+IE9LLCBzaW5jZSB5b3Ugd2FudCB0byBkaXNjdXNzIGl0LCBs
-ZXTigJlzIGRpc2N1c3MgaXQuIDotKQo+Cj4gSnVzdCB0byBzdW1tYXJpemUgZXZlcnl0aGluZzoK
-Pgo+IOKAnENhbm9uaWNhbOKAnSBhZGRyZXNzZXMgbXVzdCBoYXZlIGJpdHMgNDgtNjMgaWRlbnRp
-Y2FsIHRvIGJpdCA0Ny4gIFRoaXMgbWVhbnMgdGhlIGNoYW5jZSBvZiBhbnkg4oCccmFuZG9t4oCd
-IDY0LWJpdCBudW1iZXIgYmVpbmcgY2Fub25pY2FsIGlzIDEgaW4gNjU1MzYgKDJeMTYpLgoKQXMg
-d2l0aCBldmVyeXRoaW5nLCB0aGlzIGlzIG1vcmUgY29tcGxpY2F0ZWQuwqAgV2l0aCA1LWxldmVs
-IHBhZ2luZwpzdXBwb3J0IGluIEljZUxha2UgaGFyZHdhcmUsIHdlIG5vdyBnZXQgYSBkaWZmZXJl
-bnQgdHlwZSBvZiBjYW5vbmljYWwKYWRkcmVzcywgd2hlcmUgdGhlIHNpZ24gZXh0ZW5zaW9uIGlz
-IGZyb20gYml0IDU3LCByYXRoZXIgdGhhbiA0OC7CoCBJbgpwcmFjdGljZSwgdGhhdCBub3cgbWVh
-bnMgdGhhdCwgZGVwZW5kaW5nIG9uIENSNC5MQTU3ICh3aGljaCBpcyB0aGUKY29udHJvbCBiaXQp
-LCB3ZSBtYXkgaGF2ZSBhIDEgaW4gMl43IGNoYW5jZSBvZiBiZWluZyBjYW5vbmljYWwuCgo+Cj4g
-QSBsYXJnZSBudW1iZXIgb2YgcmVnaXN0ZXJzIChyYXgsIHJicCwgJmMpICpjYW4qIGJlIHVzZWQg
-YXMgbWVtb3J5IGFkZHJlc3NlczsgYSBoYW5kZnVsIG9mIHJlZ2lzdGVycyAoZXNwLCByaXApIGFy
-ZSBkZXNpZ25hdGVkIHRvIGJlIHVzZWQgcHJpbWFyaWx5IGZvciB0aGF0IHB1cnBvc2UuIAo+Cj4g
-SXQgaXMgYXNzZXJ0ZWQgdGhhdCB0aGUgY2Fub25pY2l0eSogb2YgYW55IHJlZ2lzdGVycyBoYXMg
-bm8gZWZmZWN0IG9uIHRoZSBjb2RlcGF0aHMgdGhlIGVtdWxhdG9yIHRha2VzOyBpdCBzaW1wbHkg
-ZG9lcyBjYWxjdWxhdGlvbnMgYW5kIHBhc3NlcyB0aGUgcmVzdWx0cyB0byB2YXJpb3VzIGNhbGxi
-YWNrcyAoZS5nLiwgaW5zbl9mZXRjaCwgcmVhZCwgd3JpdGUsICZjKS4gIEl0IGlzIHRoZXNlIGNh
-bGxiYWNrcyB3aGljaCwgaW4gWGVuLCBjaGVjayB0aGUgY2FsY3VsYXRlZCBsaW5lYXIgYWRkcmVz
-cyBmb3IgY2Fub25pY2l0eSBhbmQgcmV0dXJuIGFuIGVycm9yIGZvciBub24tY2Fub25pY2FsIGFk
-ZHJlc3Nlcy4KCkNvcnJlY3QuwqAgUmVnaXN0ZXJzIGFyZSBqdXN0IG51bWJlcnMgd2l0aG91dCBh
-bnkgc3BlY2lmaWMgbWVhbmluZy7CoCBJdAppcyBvbmx5IHdoZW4gY29uc2lkZXJpbmcgYSByZXN1
-bHRpbmcgbWVtb3J5IG9wZXJhbmQgKHdoaWNoIGNhbiBiZQpkZXJpdmVkIGZyb20gbXVsdGlwbGUg
-cmVnaXN0ZXJzIGFuZCBlbWJlZGRlZCBjb25zdGFudHMpIHRoYXQgY2Fub25pY2l0eSoKaXMgcmVs
-ZXZhbnQuCgpBcyBzYWlkIGJlZm9yZSwgd2UnbGwgc2hvcnRseSBnYWluIGEgc2Vjb25kIHR5cGUg
-b2YgY2Fub25pY2FsIGFkZHJlc3MsCmJ1dCBhdCB0aGUgZW5kIG9mIHRoZSBkYXksIGFsbCBpdCBh
-bW91bnRzIHRvIGlzICJpcyB0aGlzIGEgdmFsaWQgbGluZWFyCmFkZHJlc3Mgb3Igbm90Ii4KCj4g
-WyogVGhpcyBpcyB0aGUgZm9ybSBvZiB0aGlzIHdvcmQgbXkgc3BlbGwtY2hlY2tlciBkb2VzbuKA
-mXQgcmVkLXVuZGVybGluZV0KClsqIE15IHNwZWxsLWNoZWNrZXIgZG9lc24ndCBsaWtlIGl0LCBi
-dXQgbWVoIC0gdGhlIG1lYW5pbmcgaXMgY2xlYXJdCgo+IEhvd2V2ZXIsIHRoZSB3aG9sZSBwb2lu
-dCBvZiB0ZXN0aW5nIGlzIHRvIGZpbmQgcGxhY2VzIHdoZXJlIHlvdXIgYXNzdW1wdGlvbnMgYXJl
-IHZpb2xhdGVkLiAgSWYgdGhlIGVtdWxhdG9yIGV2ZXIgKmRpZCogYmVoYXZlIGRpZmZlcmVudGx5
-IGZvciBjYW5vbmljYWwgYW5kIG5vbi1jYW5vbmljYWwgYWRkcmVzc2VzLCBvciBuZWFyIHRoZSBi
-b3VuZGFyeSBvZiBjYW5vbmljaXR5LCB3ZeKAmWQgd2FudCB0aG9zZSBiZWhhdmlvcnMgdG8gYmUg
-dGVzdGVkLiAgSW4gZmFjdCwgaXTigJlzICpwb3NzaWJsZSogdGhhdCB0aGUgZW11bGF0b3IgYWxy
-ZWFkeSBkb2VzIGhhdmUgdGhpcyBraW5kIG9mIGJlaGF2aW9yIGluIGl0LCBhbmQgd2UganVzdCBo
-YXZlbuKAmXQgcmVhbGl6ZWQgaXQuCgpBY2NlcHRpbmcgdGhpcyBwb2ludCwgd2UgZG8gaGF2ZSBh
-IGNvdXBsZSBvZiBwbGFjZXMgaW4geDg2X2VtdWxhdGUuYwp3aGljaCBjaGVjayBjYW5vbmljaXR5
-LgoKKiB2YWxpZGF0ZV9mYXJfYnJhbmNoKCkKKiBwcm90bW9kZV9sb2FkX3NlZygpCiogTElEVC9M
-R0RUCiogU1lTRVhJVAoqIFdSe0ZTLEdTfUJBU0UKCnZhbGlkYXRlX2Zhcl9icmFuY2goKSBpcyBz
-dHJpY3RseSBvbiAlcmlwLgoKcHJvdG1vZGVfbG9hZF9zZWcoKSBhbmQgTElEVC9MR0RUIGFyZSBi
-b3RoIHRvIGRvIHdpdGggdGhlIGNvbnRlbnQgYWJvdXQKdG8gYmUgbG9hZGVkIGludG8gYSBzeXN0
-ZW0gc2VnbWVudC7CoCBXUntGUyxHU31CQVNFIGlzIGZvciBsb2FkaW5nIGludG8gYQp1c2VyIHNl
-Z21lbnQuwqAgVGhlc2Ugc2hvdWxkIGFyZ3VhYmx5IGJlIGRlZmVycmVkIHRvIHRoZQotPndyaXRl
-X3NlZ21lbnQoKSBob29rLgoKVGhlIHVzZSBpbiBTWVNFWElUIGlzIGV4cGxpY2l0bHkgZG9jdW1l
-bnRlZCBpbiB0aGUgbWFudWFsLCBidXQgdGhleQpzaG91bGRuJ3QgYmUgbmVjZXNzYXJ5LsKgIFRo
-ZSBjaGVjayBmb3IgJXJkeCB3aWxsIGJlIGRvbmUgYXMgcGFydCBvZgp2YWxpZGF0ZV9mYXJfYnJh
-bmNoKCksIHdoZXJlYXMgU1lTRVhJVCBzaG91bGRuJ3QgY2FyZSBhYm91dCAlcmN4LCBhbmQgYmUK
-YWJsZSB0byBsb2FkIGEgbm9uLWNhbm9uaWNhbCAlcnNwLsKgIEluIHNvbWUgY29waW91cyBmcmVl
-IHRpbWUsIEknbGwgdHJ5CnNlZWluZyBob3cgaGFyZHdhcmUgYWN0dWFsbHkgYmVoYXZlcy4KCkFs
-bCBvZiB0aGVzZSB1c2VzIHJlc3VsdCBpbiBhIGRpZmZlcmVuY2UgaW4gYmVoYXZpb3VyIHdoaWNo
-IEFMRiBpcwpsaWFibGUgdG8gcGljayB1cCBvbi4KCkknbSBhZnJhaWQgdGhhdCBJJ20gbm90IHN1
-ZmZpY2llbnRseSBjYWZmZWluYXRlZCB0byB3b3JrIG91dCBpZi9ob3cgdGhpcwphZmZlY3RzIHRo
-ZSByZXN0IG9mIHlvdXIgcmVhc29uaW5nLgoKPiBGdXp6aW5nIGlzIHByb2JhYmlsaXN0aWM7IHRo
-ZW9yZXRpY2FsbHksIGlmIHdlIHJ1biB0aGUgZnV6emVyIGxvbmcgZW5vdWdoLCB3ZeKAmWxsIGhp
-dCBhbGwg4oCcaW50ZXJlc3RpbmfigJ0gaW5wdXRzLiAgIEJ1dCBwcmFjdGljYWxseSBzcGVha2lu
-Zywg4oCcZm9jdXNpbmfigJ0gdGhlIGZ1enppbmcgc3VjaCB0aGF0IOKAnGludGVyZXN0aW5n4oCd
-IGlucHV0cyBhcmUgZm91bmQgbW9yZSBxdWlja2x5IHNlZW1zIGxpa2UgYSBnb29kIGlkZWEuCj4K
-PiBBRkzigJlzIGZ1enppbmcgdGFrZXMgdHdvIG1vZGVzOgo+ICog4oCcRGV0ZXJtaW5pc3RpY+KA
-nSBmdXp6aW5nLCB3aGVyZSBpbmRpdmlkdWFsIGJpdHMgYXJlIGZsaXBwZWQsIGJ5dGVzIC8gd29y
-ZHMgLyAmYyBhcmUgaW5jcmVtZW50ZWQgYW5kIGRlY3JlbWVudGVkLCBieXRlcyAvIHdvcmRzIC8g
-JmMgYXJlIHJlcGxhY2VkIHdpdGgg4oCcaW50ZXJlc3RpbmfigJ0gbnVtYmVycyBsaWtlIDAsIDEs
-IC0xLCBhbmQgc28gb24KPiAqIOKAnFJhbmRvbeKAnSBmdXp6aW5nLCB3aGVyZSBjb21wbGV0ZWx5
-IHJhbmRvbSBjaGFuZ2VzIGFyZSBtYWRlOiByYW5kb20gdmFsdWVzIGFkZGVkLCByYW5kb20gYml0
-cyBvZiB0aGUgZmlsZSByZW1vdmVkLCByYW5kb20gYml0cyBvZiB0aGUgZmlsZSBkdXBsaWNhdGVk
-LCAmYwo+Cj4gQXQgdGhlIG1vbWVudCwgYWxsIHJlZ2lzdGVycyBjYW4gYmUgbW9kaWZpZWQgYXQg
-c3RhcnQgdG8gYW55IHJhbmRvbSA2NC1iaXQgdmFsdWUuICBCdXQgdGhlcmXigJlzIGFsc28gYSBi
-aXRmaWVsZCBuZWFyIHRoZSBiZWdpbm5pbmcgdGhhdCBjb250cm9scyB3aGV0aGVyIHNvbWUgb2Yg
-dGhvc2UgcmVnaXN0ZXJzIChuYW1lbHkgcmlwLCByc3AsIGFuZCByYnApIGFyZSDigJxjYW5vbmlj
-YWxpemVk4oCdOiBJZiB0aGUgcmVnaXN0ZXLigJlzIGJpdGZpZWxkIGlzIDEsIGJpdHMgNDgtNjMg
-d2lsbCBiZSBzZXQgdG8gdGhlIHZhbHVlIG9mIGJpdCA0Nzsgb3RoZXJ3aXNlIHRoZSByZWdpc3Rl
-ciB3aWxsIGJlIGxlZnQgYWxvbmUuICBUaGlzIGFsbG93cyBBRkwgdG8gY2hvb3NlIHdoZXRoZXIg
-dGhlIHJlZ2lzdGVyIHdpbGwgYmUgY2Fub25pY2FsaXplZCBvciBub3QuCj4KPiBFZmZlY3RpdmVs
-eSwgYSDigJxtYXliZSBjYW5vbmljYWxpemVk4oCdIHJlZ2lzdGVyIGhhcyBhIDUwJSBjaGFuY2Ug
-KHBsdXMgY2hhbmdlKSBvZiBiZWluZyDigJxjYW5vbmljYWzigJ0sIGFuZCBhIDUwJSBjaGFuY2Ug
-KG1pbnVzIGEgYml0KSBvZiBiZWluZyBub24tY2Fub25pY2FsLgo+Cj4gVGhpcyBjYW5vbmljYWxp
-emF0aW9uIGhhcyBzZXZlcmFsIGVmZmVjdHMuCj4KPiBGaXJzdCBvZiBhbGwsIGl0IG1lYW5zIHRo
-YXQgYW55IGludGVyZXN0aW5nIOKAnGNhbm9uaWNhbOKAnSBhZGRyZXNzZXMgKGlmIHRoZXkgZXhp
-c3QpIGhhcyBhcHByb3hpbWF0ZWx5IGEgNjU1MzZ4IGhpZ2hlciBjaGFuY2Ugb2YgYmVpbmcgc2Vs
-ZWN0ZWQ7ICBvciB0byBwdXQgaXQgYSBkaWZmZXJlbnQgd2F5LCBBRkwgd2lsbCBmaW5kIGFueSBp
-bnRlcmVzdGluZyDigJxjYW5vbmljYWzigJ0gYWRkcmVzc2VzIDY1NTM2eCBmYXN0ZXIgdGhhbiBv
-dGhlcndpc2UuCj4KPiBPbiB0aGUgb3RoZXIgaGFuZCwgYW55IGludGVyZXN0aW5nIG5vbi1jYW5v
-bmljYWwgYWRkcmVzc2VzIChvciBub24tYWRkcmVzcyB2YWx1ZXMpIGhhdmUgYSA1MCUgbG93ZXIg
-Y2hhbmNlIG9mIGJlaW5nIHNlbGVjdGVkOyBBRkwgd2lsbCB0YWtlIHR3aWNlIGFzIGxvbmcgdG8g
-ZmluZCBhbiBpbnRlcmVzdGluZyDigJxub24tY2Fub25pY2Fs4oCdIC8gbm9uLWFkZHJlc3MgdmFs
-dWVzIGFkZHJlc3MgYXMgaXQgd291bGQgb3RoZXJ3aXNlLgo+Cj4gVGhlIG90aGVyIGVmZmVjdCwg
-YXQgdGhlIG1vbWVudCwgaXMgdG8gYWRkIGFub3RoZXIgYnJhbmNoIHRvIGZ1enotZW11bGF0ZS5j
-LiAgVGhpcyBtZWFucyB0aGF0IHRoZSB2ZXJ5IGFjdCBvZiBhZGRpbmcgYSBzZWxlY3QtYWJsZSBi
-aXQgdG8gY2Fub25pY2FsaXplIChvciBub3QpIGEgcmVnaXN0ZXIgYWRkcyBhbm90aGVyIHBhdGgg
-dGhhdCBBRkwgd2lsbCBjb25zaWRlciDigJxpbnRlcmVzdGluZ+KAnTsgZ2l2ZW4gdHdvIG90aGVy
-d2lzZS1pZGVudGljYWwgaW5wdXRzLCBBIGFuZCBB4oCZLCB3aGVyZSBvbmUgaXMgY2Fub25pY2Fs
-aXplZCBhbmQgdGhlIG90aGVyIG5vdCwgQUZMIHdpbGwgY29uc2lkZXIgdGhlbSB0d28gZGlmZmVy
-ZW50IHRlc3QgY2FzZXMsICpldmVuIGlmIHRoZXkgZ28gdGhyb3VnaCB0aGUgc2FtZSBwYXRocyBp
-biB4ODZfZW11bGF0ZSgpKi4gIEl0IHdpbGwga2VlcCB0aGVtIGJvdGggaW4gaXRzIOKAnHF1ZXVl
-IiwgYW5kIHdpbGwgc3BlbmQgdGltZSBtdXRhdGluZyB0aGVtIGJvdGguCj4KPiBGb3IgcmFuZG9t
-IGZ1enppbmcsIGV2ZW4gaWYgeDg2X2VtdWxhdGUoKSBpcyB0aGUgc2FtZSwgSSBkb27igJl0IHRo
-aW5rIHRoaXMgd2lsbCBiZSB3YXN0ZWQgZWZmb3J0OiA1IHNlY29uZHMgZnV6emluZyBBIGFuZCB0
-aGVuIDUgc2Vjb25kcyBmdXp6aW5nIEHigJkgd2lsbCBiZSB0aGUgc2FtZSBhcyAxMCBzZWNvbmRz
-IG9mIGZ1enppbmcgQS4gIEl0IG1heSBza2V3IEFGTOKAmXMgcHJpb3JpdGllcyBhIGJpdCBieSBm
-dXp6aW5nIHNvbWV0aGluZyBmb3IgMTAgc2Vjb25kcyByYXRoZXIgdGhhbiA1LCBidXQgaXQgc3Rp
-bGwgaGFzIGEgY2hhbmNlIG9mIGZpbmRpbmcgbmV3IGRhdGEuCj4KPiBGb3IgZGV0ZXJtaW5pc3Rp
-YyBmdXp6aW5nLCBpZiB4ODZfZW11bGF0ZSgpIGlzIHRoZSBzYW1lLCB0aGVuIHRoZXJlIGlzIGR1
-cGxpY2F0ZWQgd29yazogdGhlIDUgc2Vjb25kcyBzcGVudCBmdXp6aW5nIEHigJkgd2lsbCBnbyB0
-aHJvdWdoIGV4YWN0bHkgdGhlIHNhbWUgc2V0cyBvZiBtdXRhdGlvbnMgYXMgdGhlIDUgc2Vjb25k
-cyBzcGVudCBmdXp6aW5nIEEuCj4KPiAoSXQgbWF5IGJlIHBvc3NpYmxlIHRvIGV4Y2x1ZGUgZnV6
-ei1lbXVsLmMgZnJvbSBpbnN0cnVtZW50YXRpb24sIGluIHdoaWNoIGNhc2UgdGhpcyBlZmZlY3Qg
-d291bGQgZ28gYXdheS4pCj4KPiBOb3csIHdlIGhhdmUgdHdvIHBvc3NpYmlsaXRpZXM6IEVpdGhl
-ciBjYW5vbmljaXR5IGRvZXMgbm90IGFuZCBuZXZlciB3aWxsIGFmZmVjdCB4ODZfZW11bGF0ZSgp
-OyBvciBpdCBtYXksIGVpdGhlciBub3cgb3IgbGF0ZXIuCj4KPiBBbmQgd2UgaGF2ZSBhIGZldyBj
-aG9pY2VzOiBXZSBtYXliZS1jYW5vbmljYWxpemUgbm8gcmVnaXN0ZXJzOyB3ZSBtYXliZS1jYW5v
-bmljYWxpemUgb25seSByZWdpc3RlcnMgdGhhdCBhcmUgYWxtb3N0IGFsd2F5cyB1c2VkIGFzIGFu
-IGFkZHJlc3M7IG9yIHdlIG1heWJlLWNhbm9uaWNhbGl6ZSBtb3JlIChtYXliZSBhbGwpIHJlZ2lz
-dGVycy4KPgo+IExldCB1cyBjYWxsIHRoZXNlIEMwLCBDMSwgYW5kIEMyIChmb3Ig4oCcY2Fub25p
-Y2l0eSBtYXR0ZXJzLCBhbmQgd2UgY2Fub25pY2FsaXplIG5vbmUsIHNvbWUsIG9yIG1vc3QsIHJl
-c3BlY3RpdmVseSIpLCBhbmQgTjAsIE4xLCBhbmQgTjIgKGZvciDigJxjYW5vbmljaXR5IGRvZXNu
-4oCZdCBtYXRlciwgYW5kIHdlIGNhbm9uaWNhbGl6ZSBub25lLCBzb21lLCBvciBtb3N0IHJlc3Bl
-Y3RpdmVseeKAnSkuICAoQW5kIHJlbWVtYmVyLCBOIHZzIEMgaXMgYSBmYWN0IGFib3V0IHRoZSB3
-b3JsZCB0aGF0IHdlIGRvbuKAmXQga25vdzsgYW5kIDAtMiBhcmUgb3B0aW9ucyB3ZSBjYW4gY2hv
-b3NlLikKPgo+IE4wOiBFdmVyeXRoaW5nIGlzIHRoZSBmYXN0ZXN0OiDigJxpbnRlcmVzdGluZ+KA
-nSBub24tYWRkcmVzcyB2YWx1ZXMgYXJlIGZvdW5kIHRoZSBmYXN0ZXN0LCBBRkwgaXNu4oCZdCBm
-b29sZWQgaW50byBkb3VibGUtcmFuZG9tLWZ1enppbmcgc29tZSBlbnRyaWVzLCBBRkwgZG9lc27i
-gJl0IHdhc3RlIHRpbWUgZG91YmxlLWRldGVybWluaXN0aWMtZnV6emluZyBlbnRyaWVzLgo+Cj4g
-TjE6IOKAnEludGVyZXN0aW5n4oCdIG5vbi1hZGRyZXNzIHZhbHVlcyB0YWtlIHR3aWNlIGFzIGxv
-bmcgdG8gZmluZDsgYnV0IHNpbmNlIHRoZSByZWdpc3RlcnMgaW4gcXVlc3Rpb24gYXJlIHVzZWQg
-YWxtb3N0IGV4Y2x1c2l2ZWx5IGZvciBhZGRyZXNzZXMsIHRoaXMgaXMgbGVzcyBpbXBvcnRhbnQu
-ICBDYW5vbmljaXR5IGhhcyBubyBlZmZlY3QsIHNvIGl0IGRvZXNu4oCZdCBtYXR0ZXIgd2hldGhl
-ciB3ZSBjaG9vc2UgY2Fub25pY2FsIG9yIG5vbi1jYW5vbmljYWwgdmFsdWVzIGZvciB0aGUgcmVn
-aXN0ZXJzLiAgV2UgZG8gc3BlbmQgdHdpY2UgYXMgbG9uZyByYW5kb20tZnV6emluZyBlbnRyaWVz
-IChmb3Igc29tZSBiZW5lZml0KSwgYW5kIHdlIHR3aWNlIGFzIG11Y2ggdGltZSBkZXRlcm1pbmlz
-dGljYWxseSBmdXp6aW5nIHNvbWUgZW50cmllcyB0byBubyBiZW5lZml0OyBidXQgb25seSB3aGVu
-IGZ1enppbmcgdGhlc2UgYWRkcmVzcy1tb3N0bHkgcmVnaXN0ZXJzLgo+Cj4gTjI6IOKAnEludGVy
-ZXN0aW5n4oCdIG5vbi1hZGRyZXNzIHZhbHVlcyB0YWtlIHR3aWNlIGFzIGxvbmcgdG8gZmluZC4g
-IFdlIHNwZW5kIHR3aWNlIGFzIGxvbmcgcmFuZG9tLWZ1enppbmcgZW50cmllcyAodG8gc29tZSBi
-ZW5lZml0KSwgYW5kIHR3aWNlIGFzIGxvbmcgZGV0ZXJtaW5pc3RpY2FsbHkgZnV6emluZyBzb21l
-IGVudHJpZXMgKHRvIG5vIGJlbmVmaXQpLgo+Cj4gQzA6IEZpbmRpbmcg4oCcaW50ZXJlc3Rpbmfi
-gJ0gbm9uLWFkZHJlc3MgdmFsdWVzIGlzIGFzIGZhc3QgYXMgTjAuICBIb3dldmVyLCBmaW5kaW5n
-IOKAnGludGVyZXN0aW5n4oCdIGFkZHJlc3MgdmFsdWVzIHRha2UgNjU1MzYgdGltZXMgYXMgbG9u
-Zy4gIEV4dHJhIHRpbWUgc3BlbnQgZnV6emluZyBmaW5kcyB1c2VmdWwgZGlmZmVyZW5jZXMuCj4K
-PiBDMTog4oCcSW50ZXJlc3RpbmfigJ0gbm9uLWFkZHJlc3MgdmFsdWVzIGZvciBhZGRyZXNzLW1v
-c3RseSByZWdpc3RlcnMgdGFrZSB0d2ljZSBhcyBsb25nIHRvIGZpbmQ7IGJ1dCDigJxpbnRlcmVz
-dGluZ+KAnSBhZGRyZXNzLXZhbHVlcyBmb3IgbW9zdGx5LWFkZHJlc3MgcmVnaXN0ZXJzIHRha2Ug
-YWJvdXQgdGhlIHNhbWUgYW1vdW50IG9mIHRpbWUgdG8gZmluZCAoaS5lLiwgNjU1MzZ4IGZhc3Rl
-ciB0aGFuIEMwKS4gIOKAnEludGVyZXN0aW5n4oCdIGFkZHJlc3MgdmFsdWVzIGZvciBvdGhlciBy
-ZWdpc3RlcnMgdGFrZSA2NTUzNnggdGltZXMgYXMgbG9uZyB0byBmaW5kLiAgQWdhaW4sIGV4dHJh
-IGZ1enppbmcgdGltZSBpcyBzcGVudCB1c2VmdWxseS4KPgo+IEMyOiDigJxJbnRlcmVzdGluZ+KA
-nSBub24tYWRkcmVzcyB2YWx1ZXMgZm9yIGFsbCByZWdpc3RlcnMgdGFrZSB0d2ljZSBhcyBsb25n
-IHRvIGZpbmQ7IGJ1dCDigJxpbnRlcmVzdGluZ+KAnSBhZGRyZXNzIHZhbHVlcyBmb3IgYWxsIHJl
-Z2lzdGVycyB0YWtlIHRoYXQgc2FtZSBhbW91bnQgb2YgdGltZS4gIEFnYWluLCBleHRyYSBmdXp6
-aW5nIHRpbWUgaXMgc3BlbnQgdXNlZnVsbHkuCj4KPiBJZiBOIGlzIHRydWUsIGFuZCB3ZSBnbyB3
-aXRoIG9wdGlvbiAyLCBpdCB3aWxsIHRha2Ugb24gYXZlcmFnZSAyIGhvdXJzIHRvIGZpbmQgYW4g
-4oCcaW50ZXJlc3RpbmciIHZhbHVlIHRoYXQgd291bGQgaGF2ZSB0YWtlbiAxIGhvdXIgd2l0aCBv
-cHRpb24gMC4KPgo+IElmIEMgaXMgdHJ1ZSwgYW5kIHdlIGdvIHdpdGggMCwgaXQgd2lsbCB0YWtl
-IG9uIGF2ZXJhZ2UgNjU1MzYgaG91cnMgKDcuNDggeWVhcnMpIHRvIGZpbmQgYW4g4oCcaW50ZXJl
-c3RpbmfigJ0gdmFsdWUgdGhhdCB3b3VsZCBoYXZlIHRha2VuIDEgaG91ciBpbiBvcHRpb24gMi4K
-Pgo+IEkgdGhpbmsgdGhlIGNoYW5jZXMgb2YgQyBhcmUgbGVzcyB0aGFuIDUwJTsgYnV0IEkgdGhp
-bmsgaXQncyBjZXJ0YWlubHkgaGlnaGVyIHRoYW4gMSBpbiA2NTUzNi4KPgo+IFNvIGdpdmVuIHRo
-YXQgd2UgZG9u4oCZdCBrbm93IHdoZXRoZXIgd2XigJlyZSBpbiBjYXNlIE4gb3IgQywgZnJvbSBh
-IGNvc3QvYmVuZWZpdHMgYW5hbHlzaXMsIEkgdGhpbmsgb3B0aW9uIDEgaXMgYSBtaW5pbXVtOyBh
-bmQgdGhhdCAyIGlzIGFuIG9idmlvdXMgY2hvaWNlIOKAlCBwYXJ0aWN1bGFybHkgaWYgd2UgY2Fu
-IGdldCByaWQgb2YgdGhlIOKAnHdhc3RlZOKAnSBmdXp6aW5nLCBwZXJoYXBzIGJ5IG5vdCBpbnN0
-cnVtZW50aW5nIGZ1enotZW11bC5jLgo+Cj4gT2J2aW91c2x5IHRoZXJl4oCZcyBhIGxvdCBvZiBo
-YW5kLXdhdmluZyBhbmQgZ3Vlc3NpbmcgaGVyZS4gIE15IHVuZGVyc3RhbmRpbmcgaXMgdGhhdCBp
-biBwcmFjdGljZSwgZWJwIGlzICptb3N0bHkqIHVzZWQgYXMgYW4gYWRkcmVzcyBhbmQgbm90IGEg
-Z2VuZXJhbC1wdXJwb3NlIHJlZ2lzdGVyLCB3aGljaCBpcyB3aHkgSSBtYXliZS1jYW5vbmljYWxp
-emVkIGl0IGluIHRoZSBmaXJzdCBwbGFjZSwgYW5kIHdvdWxkIHJhdGhlciBpdCByZW1haW4gc28g
-KG9wdGlvbiAxKS4gIEJ1dCBJIGNhbiBzZWUgdGhlIGFyZ3VtZW50cyBmb3IgY2xhc3NpZnlpbmcg
-aXQgYXMgYSBnZW5lcmFsLXB1cnBvc2UgcmVnaXN0ZXI7IHNvIGFzIGxvbmcgYXMgcmlwIGFuZCBy
-c3AgYXJlIG1heWJlLWNhbm9uaWNhbGl6ZWQsIEkgd29u4oCZdCBzcGVuZCBhIGxvdCBvZiB0aW1l
-IGFyZ3VpbmcgYWdhaW5zdCB0aGlzIHBhdGNoLgoKVGhlcmUgaXMgYSBzZWxlY3Rpb24gYmlhcyBo
-ZXJlLgoKSXQgaXMgdHJ1ZSB0aGF0LCB3aXRoIC1mbm8tb21pdC1mcmFtZS1wb2ludGVyLCAlcmJw
-IGlzIGFsd2F5cyBhbgphZGRyZXNzLCBidXQgd2UgYXJlbid0IGNvbnNpZGVyaW5nIGNvbXBpbGVy
-LWNyYWZ0ZWQgY29kZSBoZXJlLgoKVG8gYSBmaXJzdCBhcHByb3hpbWF0aW9uLCBBRkwgd2lsbCBn
-ZW5lcmF0ZSBpbnN0cnVjdGlvbiBmcmFnbWVudHMgd2l0aCBhCnVuaWZvcm0gcHJvYmFiaWxpdHkg
-b2Ygd2hpY2ggb2YgdGhlIDggcmVnaXN0ZXJzIGFyZSBlbmNvZGVkIChvciAxNiBmb3IKNjRiaXQs
-IGJ1dCBsZXRzIHRha2UgdGhlIHNpbXBsZSBwYXRoIGhlcmUpLsKgIFRoZXJlZm9yZSwgJXJicCB3
-aWxsIGJlCmVuY29kZWQgd2l0aCBhIDEvOHRoIHByb2JhYmlsaXR5LCBhcyB3aWxsICVyc3AsIGFu
-ZCAlcmF4LCBldGMuCgpBdCB0aGlzIHBvaW50LCB3aGF0IG1hdHRlcnMgaXMgaG93IG1hbnkgaW5z
-dHJ1Y3Rpb25zIHVzZSAlcmJwLyVyc3AgYXMgYW4KaW1wbGljaXQgbWVtb3J5IG9wZXJhbmQuwqAg
-JXJzcCBpcyB1c2VkIGJ5IGFsbCBzdGFjayBvcGVyYXRpb25zLCB3aGljaCBpcwphIGxhcmdlIHF1
-YW50aXR5IG9mIHRoZSBlbmNvZGluZyBzcGFjZS4KCkkgY2FuJ3QgdGhpbmsgb2YgYW55IGluc3Ry
-dWN0aW9uIHdoaWNoIHVzZXMgJXJicCBpbiB0aGlzIHdheS7CoApFTlRFUi9MRUFWRS9QVVNIQS9Q
-T1BBIHVzZS9tb2RpZnkgaXQsIGJ1dCBvbmx5IGluIGl0cyBpbnRlZ2VyIGZvcm0gLSBub3QKYXMg
-YSBtZW1vcnkgYWRkcmVzcy4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+--===============5347585942441903991==
+Content-Type: multipart/alternative;
+	boundary="------------005C9E4F4FB67B328ACE50C2"
+Content-Language: en-GB
+
+--------------005C9E4F4FB67B328ACE50C2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 29/03/2019 15:09, Juergen Gross wrote:
+> diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+> index 8d579e2cf9..5d8f3255cb 100644
+> --- a/xen/arch/x86/domain.c
+> +++ b/xen/arch/x86/domain.c
+> @@ -15,6 +15,7 @@
+>  #include <xen/lib.h>
+>  #include <xen/errno.h>
+>  #include <xen/sched.h>
+> +#include <xen/sched-if.h>
+>  #include <xen/domain.h>
+>  #include <xen/smp.h>
+>  #include <xen/delay.h>
+
+I'm afraid that this feels like a step in the wrong direction.
+
+sched-if.h is (per the comments) supposed to be the schedulers
+private.h, with the intention that struct scheduler didn't leak into the
+rest of the codebase.  Also the logic for taking scheduler locks, etc,
+and lastly for cpumask_scratch, which really is unsafe to use outside of
+the scheduler (and has come up in several recent patch series).
+
+Sadly,
+
+andrewcoop@andrewcoop:/local/xen.git/xen$ git grep sched-if
+arch/x86/acpi/cpu_idle.c:41:#include <xen/sched-if.h>
+arch/x86/cpu/mcheck/mce.c:13:#include <xen/sched-if.h>
+arch/x86/cpu/mcheck/mctelem.c:21:#include <xen/sched-if.h>
+arch/x86/dom0_build.c:12:#include <xen/sched-if.h>
+arch/x86/setup.c:6:#include <xen/sched-if.h>
+arch/x86/smpboot.c:28:#include <xen/sched-if.h>
+common/cpupool.c:19:#include <xen/sched-if.h>
+common/domain.c:13:#include <xen/sched-if.h>
+common/domctl.c:14:#include <xen/sched-if.h>
+common/sched_arinc653.c:29:#include <xen/sched-if.h>
+common/sched_credit.c:18:#include <xen/sched-if.h>
+common/sched_credit2.c:21:#include <xen/sched-if.h>
+common/sched_null.c:32:#include <xen/sched-if.h>
+common/sched_rt.c:23:#include <xen/sched-if.h>
+common/schedule.c:26:#include <xen/sched-if.h>
+include/asm-x86/cpuidle.h:7:#include <xen/sched-if.h>
+
+and this change is making the situation worse.
+
+If at all possible, I'd prefer to see about disentangling the bits which
+actually need external use, and putting them in sched.h, and making
+sched-if.h properly private to the schedulers.  I actually even started
+a cleanup series which moved all of the scheduler infrastructure into
+common/sched/, but found a disappointing quantity of sched-if.h being
+referenced externally.
+
+~Andrew
+
+--------------005C9E4F4FB67B328ACE50C2
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 29/03/2019 15:09, Juergen Gross
+      wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:20190329150934.17694-18-jgross@suse.com">
+      <pre class="moz-quote-pre" wrap="">diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 8d579e2cf9..5d8f3255cb 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -15,6 +15,7 @@
+ #include &lt;xen/lib.h&gt;
+ #include &lt;xen/errno.h&gt;
+ #include &lt;xen/sched.h&gt;
++#include &lt;xen/sched-if.h&gt;
+ #include &lt;xen/domain.h&gt;
+ #include &lt;xen/smp.h&gt;
+ #include &lt;xen/delay.h&gt;</pre>
+    </blockquote>
+    <br>
+    I'm afraid that this feels like a step in the wrong direction.<br>
+    <br>
+    sched-if.h is (per the comments) supposed to be the schedulers
+    private.h, with the intention that struct scheduler didn't leak into
+    the rest of the codebase.  Also the logic for taking scheduler
+    locks, etc, and lastly for cpumask_scratch, which really is unsafe
+    to use outside of the scheduler (and has come up in several recent
+    patch series).<br>
+    <br>
+    Sadly,<br>
+    <br>
+    <pre><a class="moz-txt-link-abbreviated" href="mailto:andrewcoop@andrewcoop:/local/xen.git/xen$">andrewcoop@andrewcoop:/local/xen.git/xen$</a> git grep sched-if
+arch/x86/acpi/cpu_idle.c:41:#include &lt;xen/sched-if.h&gt;
+arch/x86/cpu/mcheck/mce.c:13:#include &lt;xen/sched-if.h&gt;
+arch/x86/cpu/mcheck/mctelem.c:21:#include &lt;xen/sched-if.h&gt;
+arch/x86/dom0_build.c:12:#include &lt;xen/sched-if.h&gt;
+arch/x86/setup.c:6:#include &lt;xen/sched-if.h&gt;
+arch/x86/smpboot.c:28:#include &lt;xen/sched-if.h&gt;
+common/cpupool.c:19:#include &lt;xen/sched-if.h&gt;
+common/domain.c:13:#include &lt;xen/sched-if.h&gt;
+common/domctl.c:14:#include &lt;xen/sched-if.h&gt;
+common/sched_arinc653.c:29:#include &lt;xen/sched-if.h&gt;
+common/sched_credit.c:18:#include &lt;xen/sched-if.h&gt;
+common/sched_credit2.c:21:#include &lt;xen/sched-if.h&gt;
+common/sched_null.c:32:#include &lt;xen/sched-if.h&gt;
+common/sched_rt.c:23:#include &lt;xen/sched-if.h&gt;
+common/schedule.c:26:#include &lt;xen/sched-if.h&gt;
+include/asm-x86/cpuidle.h:7:#include &lt;xen/sched-if.h&gt;
+
+</pre>
+    and this change is making the situation worse.<br>
+    <br>
+    If at all possible, I'd prefer to see about disentangling the bits
+    which actually need external use, and putting them in sched.h, and
+    making sched-if.h properly private to the schedulers.  I actually
+    even started a cleanup series which moved all of the scheduler
+    infrastructure into common/sched/, but found a disappointing
+    quantity of sched-if.h being referenced externally.<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------005C9E4F4FB67B328ACE50C2--
+
+
+--===============5347585942441903991==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5347585942441903991==--
