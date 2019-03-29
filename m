@@ -1,23 +1,18 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH RFC 00/49] xen: add core scheduling support
-Date: Fri, 29 Mar 2019 18:00:22 +0100
-Message-ID: <63d8e13a-2dee-916a-61d4-7d69c7bb0a4d@suse.com>
-References: <20190329150934.17694-1-jgross@suse.com>
- <5C9E3C3D0200007800222FB0@suse.com>
- <19e960b1-bcfd-45cb-7993-6af5bd407266@suse.com>
- <2d8735fa29e3c7add47b8e4c467760bfffc90b09.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v2] xen/sched: fix credit2 smt idle handling
+Date: Fri, 29 Mar 2019 18:06:21 +0100
+Message-ID: <d06ee8f0df0df5826f57b4714284d9683eabfca7.camel@suse.com>
+References: <20190328154622.4370-1-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5965387118893875793=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=APY9=SA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1h9urk-0005np-Ac
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 17:00:28 +0000
-In-Reply-To: <2d8735fa29e3c7add47b8e4c467760bfffc90b09.camel@suse.com>
-Content-Language: de-DE
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=V2gX=SA=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1h9uxv-0006G9-Bd
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 17:06:51 +0000
+In-Reply-To: <20190328154622.4370-1-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,63 +21,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Dario Faggioli <dfaggioli@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Robert VanVossen <Robert.VanVossen@dornerworks.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Joshua Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjkvMDMvMjAxOSAxNzo1NiwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gRnJpLCAyMDE5
-LTAzLTI5IGF0IDE2OjQ2ICswMTAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBPbiAyOS8wMy8y
-MDE5IDE2OjM5LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4+IE9uIDI5LjAzLjE5IGF0IDE2OjA4
-LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPj4+PiBUaGlzIGlzIGFjaGlldmVkIGJ5IHN3aXRj
-aGluZyB0aGUgc2NoZWR1bGVyIHRvIG5vIGxvbmdlciBzZWUKPj4+PiB2Y3B1cyBhcwo+Pj4+IHRo
-ZSBwcmltYXJ5IG9iamVjdCB0byBzY2hlZHVsZSwgYnV0ICJzY2hlZHVsZSBpdGVtcyIuIEVhY2gK
-Pj4+PiBzY2hlZHVsZQo+Pj4+IGl0ZW0gY29uc2lzdHMgb2YgYXMgbWFueSB2Y3B1cyBhcyBlYWNo
-IGNvcmUgaGFzIHRocmVhZHMgb24gdGhlCj4+Pj4gY3VycmVudAo+Pj4+IHN5c3RlbS4gVGhlIHZj
-cHUtPml0ZW0gcmVsYXRpb24gaXMgZml4ZWQuCj4+Pgo+Pj4gdGhlIGNhc2UgaWYgeW91IGFycmFu
-Z2VkIHZDUFUtcyBpbnRvIHZpcnR1YWwgdGhyZWFkcywgY29yZXMsCj4+PiBzb2NrZXRzLAo+Pj4g
-YW5kIG5vZGVzLCBidXQgYXQgbGVhc3QgZnJvbSB0aGUgcGF0Y2ggdGl0bGVzIGl0IGRvZXNuJ3Qg
-bG9vayBhcyBpZgo+Pj4geW91Cj4+PiBkaWQgaW4gdGhpcyBzZXJpZXMuIEFyZSB0aGVyZSBvdGhl
-ciByZWFzb25zIHRvIG1ha2UgdGhpcyBhIGZpeGVkCj4+PiByZWxhdGlvbnNoaXA/Cj4+Cj4+IElu
-IGZhY3QgSSdtIGRvaW5nIGl0LCBidXQgb25seSBpbXBsaWNpdGx5IGFuZCB3aXRob3V0IGFkYXB0
-aW5nIHRoZQo+PiBjcHVpZCByZWxhdGVkIGluZm9ybWF0aW9uLiBUaGUgaWRlYSBpcyB0byBwYXNz
-IHRoZSB0b3BvbG9neQo+PiBpbmZvcm1hdGlvbgo+PiBhdCBsZWFzdCBiZWxvdyB0aGUgc2NoZWR1
-bGluZyBncmFudWxhcml0eSB0byB0aGUgZ3Vlc3QgbGF0ZXIuCj4+Cj4+IE5vdCBoYXZpbmcgdGhl
-IGZpeGVkIHJlbGF0aW9uc2hpcCB3b3VsZCByZXN1bHQgaW4gc29tZXRoaW5nIGxpa2UgdGhlCj4+
-IGNvLXNjaGVkdWxpbmcgc2VyaWVzIERhcmlvIGFscmVhZHkgc2VudCwgd2hpY2ggd291bGQgbmVl
-ZCBtb3JlIHRoYW4KPj4gbWVjaGFuaWNhbCBjaGFuZ2VzIGluIGVhY2ggc2NoZWR1bGVyLgo+Pgo+
-IFllcC4gU28sIGp1c3QgZm9yIHRoZSByZWNvcmRzLCB0aG9zZSBzZXJpZXMgYXJlLCB0aGlzIG9u
-ZSBmb3IgQ3JlZGl0MToKPiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVzL2h0
-bWwveGVuLWRldmVsLzIwMTgtMDgvbXNnMDIxNjQuaHRtbAo+IAo+IEFuZCB0aGlzIG9uZSBmb3Ig
-Q3JlZGl0MjoKPiBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVu
-LWRldmVsLzIwMTgtMTAvbXNnMDExMTMuaHRtbAo+IAo+IEJvdGggYXJlIFJGQywgYnV0IHRoZSBD
-cmVkaXQyIG9uZSB3YXMgbXVjaCwgbXVjaCBiZXR0ZXIgKG1vcmUgY29tcGxldGUsCj4gbW9yZSB0
-ZXN0ZWQsIG1vcmUgc3RhYmxlLCBhY2hpZXZpbmcgYmV0dGVyIGZhaXJuZXNzLCBldGMpLgo+IAo+
-IEluIHRoZXNlIHNlcmllcywgdGhlICJyZWxhdGlvbnNoaXAiIGJlaW5nIGRpc2N1c3NlZCBoZXJl
-IGlzIG5vdCBmaXhlZC4KPiBOb3QgcmlnaHQgbm93LCBhdCBsZWFzdCwgYnV0IGl0IGNhbiBiZWNv
-bWUgc28gKEkgZGlkbid0IGRvIGl0IGFzIHdlCj4gY3VycmVudGx5IGxhY2sgdGhlIGluZm8gZm9y
-IGRvaW5nIHRoYXQgcHJvcGVybHkpLgo+IAo+IEl0IGlzL3dhcywgSU1PLCBhIGdvb2QgdGhpbmcg
-dGhhdCBldmVyeXRoaW5nIHdvcmsgYm90aCB3aXRoIG9yIHdpdGhvdXQKPiB0b3BvbG9neSBlbmxp
-Z2h0ZW5tZW50IChldmVuIGZvciBvbmUgd2UnbGwgaGF2ZSBpdCwgaW4gY2FzZSBvbmUsIGZvcgo+
-IHdoYXRldmVyIHJlYXNvbiwgZG9lc24ndCBjYXJlKS4KPiAKPiBBcyBzYWlkIGJ5IEp1ZXJnZW4s
-IHRoZSB0d28gYXBwcm9hY2hlcyAoYW5kIGhlbmNlIHRoZSBzdHJ1Y3R1cmUgb2YgdGhlCj4gc2Vy
-aWVzKSBhcmUgcXVpdGUgZGlmZmVyZW50LiBUaGlzIHNlcmllcyBpcyBtb3JlIGdlbmVyaWMsIGFj
-dHMgb24gdGhlCj4gY29tbW9uIHNjaGVkdWxlciBjb2RlIGFuZCBsb2dpYy4gSXQncyBxdWl0ZSBp
-bnRydXNpdmUsIGFzIHdlIGNhbiBzZWUKPiA6LUQsIGJ1dCBlbmFibGVzIHRoZSBmZWF0dXJlIGZv
-ciBhbGwgdGhlIHNjaGVkdWxlcnMgYWxsIGF0IG9uY2UgKHdlbGwsCj4gdGhleSBhbGwgbmVlZCBj
-aGFuZ2VzLCBidXQgbW9zdGx5IG1lY2hhbmljYWwpLgo+IAo+IE15IHNlcmllcywgT1RPSCwgYWN0
-IG9uIGVhY2ggc2NoZWR1bGVyIHNwZWNpZmljYWxseSAoYW5kIGluIGZhY3QgdGhlcmUKPiBpcyBv
-bmUgZm9yIENyZWRpdCBhbmQgb25lIGZvciBDcmVkaXQyLCBhbmQgdGhlcmUgd291bGQgbmVlZCB0
-byBiZSBvbmUKPiBmb3IgUlREUywgaWYgd2FudGVkLCBldGMpLiBUaGV5J3JlIG11Y2ggbW9yZSBz
-ZWxmIGNvbnRhaW5lZCwgYnV0IGxlc3MKPiBnZW5lcmljOyBhbmQgdGhlIGNoYW5nZXMgbmVjZXNz
-YXJ5IHdpdGhpbiBlYWNoIHNjaGVkdWxlciBhcmUgc3BlY2lmaWMKPiB0byB0aGUgc2NoZWR1bGVy
-IGl0c2VsZiwgYW5kIG5vbi1tZWNoYW5pY2FsLgoKQW5vdGhlciBsaW5lIG9mIHRob3VnaHQ6IGlu
-IGNhc2Ugd2Ugd2FudCBjb3JlIHNjaGVkdWxpbmcgZm9yIHNlY3VyaXR5CnJlYXNvbnMgKHRvIGVu
-c3VyZSBhbHdheXMgdmNwdXMgb2YgdGhlIHNhbWUgZ3Vlc3QgYXJlIHNoYXJpbmcgYSBjb3JlKQp0
-aGUgc2FtZSBtaWdodCBhcHBseSB0byB0aGUgZ3Vlc3QgaXRzZWxmOiBpdCBtaWdodCB3YW50IHRv
-IGVuc3VyZQpvbmx5IHRocmVhZHMgb2YgdGhlIHNhbWUgcHJvY2VzcyBhcmUgc2hhcmluZyBhIGNv
-cmUuIFRoaXMgd291bGQgYmUKcXVpdGUgZWFzeSB3aXRoIG15IHNlcmllcywgYnV0IGltcG9zc2li
-bGUgZm9yIERhcmlvJ3Mgc29sdXRpb24gd2l0aG91dAp0aGUgZml4ZWQgcmVsYXRpb25zaGlwIGJl
-dHdlZW4gZ3Vlc3Qgc2libGluZ3MuCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5965387118893875793==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-jZkVFOdDeLKRd6o7Rk6g"
+
+
+--=-jZkVFOdDeLKRd6o7Rk6g
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2019-03-28 at 16:46 +0100, Juergen Gross wrote:
+> Credit2's smt_idle_mask_set() and smt_idle_mask_clear() are used to
+> identify idle cores where vcpus can be moved to. A core is thought to
+> be idle when all siblings are known to have the idle vcpu running on
+> them.
+>=20
+> Unfortunately the information of a vcpu running on a cpu is per
+> runqueue. So in case not all siblings are in the same runqueue a core
+> will never be regarded to be idle, as the sibling not in the runqueue
+> is never known to run the idle vcpu.
+>=20
+> Use a credit2 specific cpumask of siblings with only those cpus
+> being marked which are in the same runqueue as the cpu in question.
+>=20
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+> V2:
+> - use credit2 per-cpu specific sibling mask
+> ---
+>
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Regards,
+Dario
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+--=-jZkVFOdDeLKRd6o7Rk6g
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyeUI0ACgkQFkJ4iaW4
+c+62WBAAoh80jTcEA6mM6ix/kBE8YtchfoWESZN9HkWB1Z3NAJF1naW4nWbpCiRD
+aCOUFraWOtkbffJxMnNvfJ0GrIo2Otk9Hw1U0aeIbrFkdJWXq3pzg3EM4eFxLZsQ
+9K+kU5WcZGmki582Q56YNgmNbbQ43i401biQRAvxHKGeZ1gAhZY5+RK5hNY2zQpG
+ddlmGKeykWoayuqYoB4tmfJyVUpCGHXvcRv10Y/mSRBh+JNlgKTvqYLIHRXgk0GA
+8bbHDcfEQGmStHb2sj8A8qwsKEopowctCdundRe5hLZejQO7BUlroTZ9aSPs43jY
+51hIUFtNYYb3dMNEQ08wfKc+ZidFnVLKb35cHSmJnZbW/1SpGKMhcsO+uzB/HD+0
+EfawacYb1H1f743u+leLQmCCPVOtki5rnopyROt/0XUHjv8Lj0uTbSV+/sBQjEXp
+4goYsSRJ3QY7zJ9cFWzGXISXkNbANXs+DlOb0g9wfgr1KFUX3+uSOIawc2+dpxOW
+uWZ+Tj+B6t2fXQgIihV26RWAkONktBJqAQHaCveBgMvhqRALDe16GPz1xIQPl5v4
+QkLYkLpNxyPD9fkzHfuk+/dlm8Ww+mEKRjBhOJhGOaszaZrAAPpUoQEbyBSsC+IY
+nghJ/3l3n66fOclGnD8jhzqKGDUzUVlgbPWuH9S0G4OT11sWyEk=
+=w8Me
+-----END PGP SIGNATURE-----
+
+--=-jZkVFOdDeLKRd6o7Rk6g--
+
+
+
+--===============5965387118893875793==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5965387118893875793==--
