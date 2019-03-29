@@ -1,19 +1,20 @@
 From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH v2 2/6] xen: add helper for calling
- notifier_call_chain() to common/cpu.c
-Date: Fri, 29 Mar 2019 18:33:11 +0100
-Message-ID: <c9629b8982c9ac634d8b7d223d1823286202ec4d.camel@suse.com>
+Subject: Re: [PATCH v2 6/6] xen/sched: don't disable scheduler
+ on cpus during suspend
+Date: Fri, 29 Mar 2019 18:36:14 +0100
+Message-ID: <f52c17447e12b939ebbb50d85ee631bc61565dbf.camel@suse.com>
 References: <20190328120658.11083-1-jgross@suse.com>
- <20190328120658.11083-3-jgross@suse.com>
+ <20190328120658.11083-7-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5720679569975248691=="
+Content-Type: multipart/mixed; boundary="===============6261538477065733956=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=V2gX=SA=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1h9vNZ-0000z9-Ig
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 17:33:21 +0000
-In-Reply-To: <20190328120658.11083-3-jgross@suse.com>
+ id 1h9vQU-0001Qd-2o
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 17:36:22 +0000
+In-Reply-To: <20190328120658.11083-7-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,34 +24,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============5720679569975248691==
+--===============6261538477065733956==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Y3KeaAh2UlV8AsxEv0UD"
+	protocol="application/pgp-signature"; boundary="=-HTpZ5WUlOSujg9f6KKGc"
 
 
---=-Y3KeaAh2UlV8AsxEv0UD
+--=-HTpZ5WUlOSujg9f6KKGc
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Thu, 2019-03-28 at 13:06 +0100, Juergen Gross wrote:
-> Add a helper cpu_notifier_call_chain() to call notifier_call_chain()
-> for a cpu with a specified action, returning an errno value.
->=20
-> This avoids coding the same pattern multiple times.
->=20
-> While at it avoid side effects from using BUG_ON() by not using
-> cpu_online(cpu) as a parameter.
+> [...]
+>
+> Avoid all other scheduler dealloc - alloc dance when doing suspend
+> and
+> resume, too. It is enough to react on cpus failing to come up on
+> resume
+> again.
 >=20
 > Signed-off-by: Juergen Gross <jgross@suse.com>
-> ---
-> V2:
-> - add nofail parameter to cpu_notifier_call_chain()
-> - avoid side effects from using BUG_ON() macro (Andrew Cooper)
-> ---
 >
 Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
 
@@ -65,33 +61,33 @@ SUSE Labs, SUSE https://www.suse.com/
 <<This happens because _I_ choose it to happen!>> (Raistlin Majere)
 
 
---=-Y3KeaAh2UlV8AsxEv0UD
+--=-HTpZ5WUlOSujg9f6KKGc
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyeVtcACgkQFkJ4iaW4
-c+58aRAAo+c6iZq28s9XqtTQu6kzAW9MIUZPE7TkYHGUJiVWOhcHqKeayWT6HoME
-PF/7fgtcSH2lRNNs7UIj1dl5s/hJwelSDKgJ/S2jJ/gvFgXQIVHA+KiZHnspTOHy
-SFlTUs6r137wyGFMb1UeedmyfnpTUJ9m9dRojnBhbYTb/YW25E16q3YWvhSikR4e
-Z4iajikH04JhRK2cCHTWkXtylMV3K1U5NtvRWYVt+npI4TXe/BEzZ7xLLto/bLqv
-iRnTrirNv/KAht4T0DOcVoVd5UdvOHqZKx51UsW+zqjV3BbC7vmp/f39W2EyJhyt
-Z4vfW2r+o/gFfH2gYkWMGY157o5tIXJRjIIhgZREqSy0MkIbmzPnTx7tvph1KtMo
-Ipy86UOuvIunML8MUwe/RolsS33uK5B2qAhHhON/MJNb8XbK0pObs9pOYQZ+yJP7
-ujpEjR+FwECqtUSIDCdRn6EDVsGTNf1iEmZ9yvn5mK9YsXUuoejRj0kDx3k72nmC
-iVrZdNNBfXTyNJpGKYf55fTx5f+VNb0syDJmgrIjckwlgXxIJoMH7zOndEYcwNhm
-TEu/Wf2X9dcKXIEbUD0HuyDMjidVXpxGHR51v/s5ECaMEgb94OWEh8vd0Wim2e+y
-IfTOTWs4kNI7Go3kgz6xKzDWUBOpofbGZQ8MKmGaIqnmsik6ooE=
-=oqlg
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyeV44ACgkQFkJ4iaW4
+c+5cxxAAyF4mhD28PhNaZTM+neJL5hGqsKM/ifHH8jRedNogMjJqNh3sGWqJbKfX
++uw3QNV8B6f57FxlKD2GQj8626UQeVUVLpyy8dbD1C/s7kQBMUYCQ28agNTFFcSL
+37Tg3c6ajR2GwAyJVMEc5uD7N/P5iEuZzMGLWrNavvreV9e8HIUh8QXFvIrJ6Acp
+CiET2vzAcDVDx/MYOE1MDk83aEMqy+gwdogM3ktc5WoAUPzIq8GekyQYueqc4Jef
+h12KQalqJVZ9nYZ5xOxS8OsYOBqiLMLO91/MEmiurwn4369I/yTFSeWTpNnYZ6xY
+kdkCMcXc6vom4K4t7ebOZwj02cERACI8U3+hE7gdZ+XNX32nXqOfh2o+9mkHWewO
+5ZIRnVWXg233DDJXBY2GXL7VQuhmfRwMQ+0SkXASaSkN5Xge7rCyj0htZpEVvVlR
+/F3S7IwgIY7LNPlRNMDXQjW6Sws1ig/gciR9HwJ8dB/6yrxNsbTRTmJ4nIqd8zBz
+csva40sTDLs8OESaPpSdbOQAs+KPQlpof7jubnh5zfGs79puGJGO/5SMSoNQnQ/L
+s056Mf1AL1FHivZRs7gjj5Yt9pz9/jQpS0vyW8dvuU7rwLLWu8LWx07caN6fCAf8
+4oYp3s17ZOpZ+AgeAIiXdKFOoWi7R4sjKsKHA99nrrVDVvT9G8Y=
+=mxUW
 -----END PGP SIGNATURE-----
 
---=-Y3KeaAh2UlV8AsxEv0UD--
+--=-HTpZ5WUlOSujg9f6KKGc--
 
 
 
---===============5720679569975248691==
+--===============6261538477065733956==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -101,4 +97,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5720679569975248691==--
+--===============6261538477065733956==--
