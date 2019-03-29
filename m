@@ -1,20 +1,21 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86emul/fuzz: adjust canonicalization in
- sanitize_input()
-Date: Fri, 29 Mar 2019 09:23:14 -0600
-Message-ID: <5C9E38620200007800222F8B@prv1-mh.provo.novell.com>
-References: <5C9E30F40200007800222DDC@prv1-mh.provo.novell.com>
- <8B8E72C2-696B-4C0D-8733-78C7B93B9FB0@citrix.com>
+Subject: Re: [PATCH] x86emul/fuzz: add a state sanitization
+ function
+Date: Fri, 29 Mar 2019 09:25:53 -0600
+Message-ID: <5C9E39010200007800222FA6@prv1-mh.provo.novell.com>
+References: <5C9E31960200007800222DDF@prv1-mh.provo.novell.com>
+ <FB7CACFC-4743-4B74-924D-E42E92EAA7AF@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=NqUC=SA=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1h9tLg-0002NV-Bo
- for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 15:23:16 +0000
-In-Reply-To: <8B8E72C2-696B-4C0D-8733-78C7B93B9FB0@citrix.com>
+ id 1h9tOH-0002rS-2A
+ for xen-devel@lists.xenproject.org; Fri, 29 Mar 2019 15:25:57 +0000
+In-Reply-To: <FB7CACFC-4743-4B74-924D-E42E92EAA7AF@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,20 +29,16 @@ To: george.dunlap@citrix.com
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDI5LjAzLjE5IGF0IDE2OjE0LCA8R2VvcmdlLkR1bmxhcEBjaXRyaXguY29tPiB3cm90
-ZToKCj4gCj4+IE9uIE1hciAyOSwgMjAxOSwgYXQgMjo1MSBQTSwgSmFuIEJldWxpY2ggPEpCZXVs
-aWNoQHN1c2UuY29tPiB3cm90ZToKPj4gCj4+IERyb3AgaXQgZW50aXJlbHkgZm9yICVyYnAgLSB0
-aGlzIHJlZ2lzdGVyIGlzIG5vdCBzcGVjaWFsIHB1cnBvc2UgZW5vdWdoCj4+IHRvIHdhcnJhbnQg
-c3VjaCBzcGVjaWFsIHRyZWF0bWVudC4gQWRkIGEgY29tbWVudCB0byBjbGFyaWZ5IHRoZSBwdXJw
-b3NlCj4+IG9mIHRoZSBjYW5vbmljYWxpemF0aW9uIG9mICVyaXAgYW5kICVyc3AuCj4+IAo+PiBT
-aWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gCj4gRkFPRDoK
-PiAxLiBJIGRvbuKAmXQgb3Bwb3NlIHRoaXMsIGJ1dAo+IDIuIEkgZG9u4oCZdCBzdXBwb3J0IGl0
-IGVpdGhlcjsgaG93ZXZlciwKPiAzLiBJIGRvbuKAmXQgdGhpbmsgbXkgQWNrIGlzIG5lY2Vzc2Fy
-eS4KCldlbGwsIHByZWZlcmFibHkgSSB3b3VsZCBhZGRyZXNzIHlvdXIgY29uY2VybnMgZGVzcGl0
-ZSAzLiBTbyBjb3VsZAp5b3UgY2xhcmlmeSB3aGF0IHlvdSB3b3VsZCBzdWdnZXN0IGluc3RlYWQ/
-IEtlZXAgdGhpbmdzIGFzIHRoZXkKYXJlPyBEcm9wIGFsbCBjYW5vbmljYWxpemF0aW9uPyBJJ3Zl
-IGJhc2ljYWxseSB0cmllZCB0byBmaW5kIGEgbWlkZGxlCmdyb3VuZCBiZXR3ZWVuIHRoZSB0d28g
-ZXh0cmVtZXMuCgpKYW4KCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
-Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
-dmVs
+Pj4+IE9uIDI5LjAzLjE5IGF0IDE2OjEwLCA8R2VvcmdlLkR1bmxhcEBjaXRyaXguY29tPiB3cm90
+ZToKPj4gT24gTWFyIDI5LCAyMDE5LCBhdCAyOjU0IFBNLCBKYW4gQmV1bGljaCA8SkJldWxpY2hA
+c3VzZS5jb20+IHdyb3RlOgo+PiBAQCAtNDI0LDggKzQyNiwxOSBAQCBzdGF0aWMgaW50IGZ1enpf
+d3JpdGVfc2VnbWVudCgKPj4gICAgIHJjID0gbWF5YmVfZmFpbChjdHh0LCAid3JpdGVfc2VnbWVu
+dCIsIHRydWUpOwo+PiAKPj4gICAgIGlmICggcmMgPT0gWDg2RU1VTF9PS0FZICkKPj4gKyAgICB7
+Cj4+ICAgICAgICAgYy0+c2VnbWVudHNbc2VnXSA9ICpyZWc7Cj4+IAo+PiArICAgICAgICBpZiAo
+ICFzYW5pdGl6ZV9zdGF0ZShjdHh0KSApCj4+ICsgICAgICAgIHsKPj4gKyAgICAgICAgICAgIHN0
+cnVjdCBzZWdtZW50X3JlZ2lzdGVyIG9sZCA9IGMtPnNlZ21lbnRzW3NlZ107Cj4gCj4gSSB0aGlu
+ayB5b3UgaGF2ZSB0aGlzIGluIHRoZSB3cm9uZyBwbGFjZS4KCk91Y2guIFRoYW5rcyBmb3Igbm90
+aWNpbmcuCgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
