@@ -1,24 +1,14 @@
-From: Lars Kurth <lars.kurth.xen@gmail.com>
-Subject: Re: Xen Project Community Call March: Poll for the best
- day (originally week of March 11, propose to move to the week of March 17th)
-Date: Mon, 1 Apr 2019 06:29:49 -0600
-Message-ID: <4CB59D02-B416-48D8-A960-052667D8EDC1@gmail.com>
-References: <D6094088-179E-4853-9855-F3F3D33B1062@xenproject.org>
- <0E55EA75-6740-4CED-8FA2-CB6BB8DE71C3@xenproject.org>
- <28A4F8B9-BDBB-41D6-883E-81E4B0EB6A4D@xenproject.org>
- <5C8B699D020000780021EFDB@prv1-mh.provo.novell.com>
-Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] xen/sched: Remove d->is_pinned
+Date: Mon, 1 Apr 2019 13:35:36 +0100
+Message-ID: <06b8d55a-89c1-7456-43d8-c0ccceea524c@citrix.com>
+References: <1554113345-15068-1-git-send-email-andrew.cooper3@citrix.com>
+ <5CA2025B020000780022397B@prv1-mh.provo.novell.com>
+Mime-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============3527928310358509691=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=8oSy=SD=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
- id 1hAw4b-0002Fk-24
- for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 12:29:57 +0000
-Received: by mail-ua1-x942.google.com with SMTP id v7so2982291uak.13
- for <xen-devel@lists.xenproject.org>; Mon, 01 Apr 2019 05:29:56 -0700 (PDT)
-In-Reply-To: <5C8B699D020000780021EFDB@prv1-mh.provo.novell.com>
+In-Reply-To: <5CA2025B020000780022397B@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,23 +17,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: 'Jan Beulich' <jbeulich@suse.com>
-Cc: davorin.mista@aggios.com, Daniel Smith <dpsmith@apertussolutions.com>, Rich Persaud <persaur@gmail.com>, anastassios.nanos@onapp.com, Matt Spencer <Matt.Spencer@arm.com>, edgar.iglesias@xilinx.com, john.ji@intel.com, robin.randhawa@arm.com, Daniel Kiper <daniel.kiper@oracle.com>, mirela.simonovic@aggios.com, xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.com>, Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Christopher Clark <christopher.w.clark@gmail.com>, Paul Durrant <paul.durrant@citrix.com>, committers@xenproject.org, vfachin@de.adit-jv.com, intel-xen@intel.com, Jarvis Roach <Jarvis.Roach@dornerworks.com>, Artem Mygaiev <artem_mygaiev@epam.com>, Brian Woods <brian.woods@amd.com>, Julien Grall <julien.grall@arm.com>, JanakarajanNatarajan <jnataraj@amd.com>, Stefano Stabellini <sstabellini@kernel.org>, Stewart Hildebrand <Stewart.Hildebrand@dorne>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, Dario Faggioli <dfaggioli@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Cgo+IE9uIDE1IE1hciAyMDE5LCBhdCAwMzowMCwgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
-Y29tPiB3cm90ZToKPiAKPj4+PiBPbiAxNC4wMy4xOSBhdCAxODoyMiwgPGxhcnMua3VydGgueGVu
-QGdtYWlsLmNvbT4gd3JvdGU6Cj4+IE9wdGlvbnMgYXJlOiAKPj4gYSkgU29tZW9uZSBzdGVwcyB1
-cCBhbmQgZG9lcyB0aGUgbWVldGluZyBlaXRoZXIgbmV4dCB3ZWVrIG9yIHRoZSB3ZWVrIGFmdGVy
-Cj4+IGIpIFNraXAgdGhlIE1hcmNoIG1lZXRpbmcKPj4gYykgU2tpcCB0aGUgTWFyY2ggbWVldGlu
-ZyBhbmQgcmVzdGFydCBBcHJpbCA0IGFuZCBoYXZlIHRoZSBtZWV0aW5nIHRoZSAxc3QgCj4+IFRo
-dSBvZiBldmVyeSBtb250aCB0aGVyZWFmdGVyCj4+IAo+PiBGb3IgYSwgd291bGQgYSB2b2x1bnRl
-ZXIgcGxlYXNlIHN0ZXAgdXAuIEkgY2FuIGhlbHAgd2l0aCBsb2dpc3RpY3MKPj4gRmFpbGluZyBh
-LCBteSBwcmVmZXJlbmNlIGlzIGMsIHVubGVzcyBzb21lb25lIG9iamVjdHMKPiAKPiBJJ2QgZmF2
-b3IgYyBhcyB3ZWxsLCBmd2l3OyBJJ20gbm90IGdvaW5nIHRvIGJlIGFyb3VuZCBUaHVyIG5leHQg
-d2Vlay4KPiAKPiBKYW4KClRoYXQgbG9va3MgbGlrZSBUaHVyc2RheSBBcHJpbCA0dGggaXMgdGhl
-IGJlc3Qgb3B0aW9uIGFuZCB0aGVuIHRoZSAxc3QgVGh1cnNkYXkgb2YgZWFjaCBtb250aC4gV2ls
-bCBzZW5kIG91dCBtZWV0aW5nIGRldGFpbHMgbGF0ZXIgdG9kYXkKTGFycwoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============3527928310358509691==
+Content-Type: multipart/alternative;
+	boundary="------------EEAA0F3067376E9D889296A9"
+Content-Language: en-GB
+
+--------------EEAA0F3067376E9D889296A9
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+On 01/04/2019 13:21, Jan Beulich wrote:
+>>>> On 01.04.19 at 12:09, <andrew.cooper3@citrix.com> wrote:
+>> 3) cpumask_weight() is a surprisingly expensive function, and we use it all
+>>    over the place.  It will almost certainly benefit from the use of popcnt.
+> FTR this was something I was meaning to possibly do once the BMI2
+> alternatives patching series would have been accepted. It having
+> got rejected (and also the fsgsbase patching one, but that's moot
+> now anyway due to selection of insn having become dependent on a
+> runtime property), I've stopped all considerations towards further
+> alternatives. While there wouldn't be as many helper functions
+> needed here as they were needed there, our basic disagreement
+> as to whether to use per-register helper functions would continue
+> to exist.
+
+The Linux way of fixing this is actually very neat.
+
+Depending on the CPU, there may genuinely be a call to a software
+routine, or a single popcnt instruction.  Therefore, the end result is:
+
+asm (ALTERNATIVE("call __sw_hweight64",
+                 "popcnt %[in], %[out]", X86_FEATURE_POPCNT)
+                 : [out] "=a" (res),
+                 : [in] "=D" (w));
+
+
+etc.  I also note that Linux now has a more optimised sofware version
+for x86 and Arm64, due to the architecture selecting
+CONFIG_ARCH_HAS_FAST_MULTIPLIER
+
+>
+>> --- a/xen/arch/x86/domain.c
+>> +++ b/xen/arch/x86/domain.c
+>> @@ -1229,7 +1229,7 @@ arch_do_vcpu_op(
+>>          struct vcpu_get_physid cpu_id;
+>>  
+>>          rc = -EINVAL;
+>> -        if ( !is_pinned_vcpu(v) )
+>> +        if ( !is_hwdom_pinned_vcpu(v) )
+>>              break;
+> I think the idea here was to allow eventual use of this in a highly
+> disaggregated environment by other than Dom0. But this is not
+> to say that I would mind this change; in fact
+
+I suppose that usecase is fine in principle, but should come with some
+suitable XSM.
+
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Thanks,
+
+~Andrew
+
+--------------EEAA0F3067376E9D889296A9
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body text="#000000" bgcolor="#FFFFFF">
+    <div class="moz-cite-prefix">On 01/04/2019 13:21, Jan Beulich wrote:<br>
+    </div>
+    <blockquote type="cite"
+      cite="mid:5CA2025B020000780022397B@prv1-mh.provo.novell.com">
+      <blockquote type="cite">
+        <blockquote type="cite">
+          <blockquote type="cite">
+            <pre class="moz-quote-pre" wrap="">On 01.04.19 at 12:09, <a class="moz-txt-link-rfc2396E" href="mailto:andrew.cooper3@citrix.com">&lt;andrew.cooper3@citrix.com&gt;</a> wrote:
+</pre>
+          </blockquote>
+        </blockquote>
+        <pre class="moz-quote-pre" wrap="">3) cpumask_weight() is a surprisingly expensive function, and we use it all
+   over the place.  It will almost certainly benefit from the use of popcnt.
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+FTR this was something I was meaning to possibly do once the BMI2
+alternatives patching series would have been accepted. It having
+got rejected (and also the fsgsbase patching one, but that's moot
+now anyway due to selection of insn having become dependent on a
+runtime property), I've stopped all considerations towards further
+alternatives. While there wouldn't be as many helper functions
+needed here as they were needed there, our basic disagreement
+as to whether to use per-register helper functions would continue
+to exist.</pre>
+    </blockquote>
+    <br>
+    The Linux way of fixing this is actually very neat.<br>
+    <br>
+    Depending on the CPU, there may genuinely be a call to a software
+    routine, or a single popcnt instruction.  Therefore, the end result
+    is:<br>
+    <br>
+    <pre>asm (ALTERNATIVE("call __sw_hweight64",
+                 "popcnt %[in], %[out]", X86_FEATURE_POPCNT)
+                 : [out] "=a" (res),
+                 : [in] "=D" (w));
+</pre>
+    <br>
+    etc.  I also note that Linux now has a more optimised sofware
+    version for x86 and Arm64, due to the architecture selecting
+    CONFIG_ARCH_HAS_FAST_MULTIPLIER<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:5CA2025B020000780022397B@prv1-mh.provo.novell.com">
+      <pre class="moz-quote-pre" wrap="">
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -1229,7 +1229,7 @@ arch_do_vcpu_op(
+         struct vcpu_get_physid cpu_id;
+ 
+         rc = -EINVAL;
+-        if ( !is_pinned_vcpu(v) )
++        if ( !is_hwdom_pinned_vcpu(v) )
+             break;
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I think the idea here was to allow eventual use of this in a highly
+disaggregated environment by other than Dom0. But this is not
+to say that I would mind this change; in fact</pre>
+    </blockquote>
+    <br>
+    I suppose that usecase is fine in principle, but should come with
+    some suitable XSM.<br>
+    <br>
+    <blockquote type="cite"
+      cite="mid:5CA2025B020000780022397B@prv1-mh.provo.novell.com">
+      <pre class="moz-quote-pre" wrap="">
+Reviewed-by: Jan Beulich <a class="moz-txt-link-rfc2396E" href="mailto:jbeulich@suse.com">&lt;jbeulich@suse.com&gt;</a></pre>
+    </blockquote>
+    <br>
+    Thanks,<br>
+    <br>
+    ~Andrew<br>
+  </body>
+</html>
+
+--------------EEAA0F3067376E9D889296A9--
+
+
+--===============3527928310358509691==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3527928310358509691==--
