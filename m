@@ -1,19 +1,21 @@
-From: Dario Faggioli <dfaggioli@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: [PATCH RFC 00/49] xen: add core scheduling support
-Date: Mon, 01 Apr 2019 09:10:51 +0200
-Message-ID: <36496b27179ccd23aeb3e051e3ded04fdb493b8c.camel@suse.com>
+Date: Mon, 01 Apr 2019 01:13:16 -0600
+Message-ID: <5CA1BA0C0200007800223659@prv1-mh.provo.novell.com>
 References: <20190329150934.17694-1-jgross@suse.com>
  <5CA1B285020000780022361D@suse.com>
  <10544c22-138e-c993-ca7f-3a3392e03243@suse.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5046273507719280331=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=skML=SD=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hAr67-0003GJ-5l
- for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 07:11:11 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=uvFD=SD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hAr8E-0003Rx-Pz
+ for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 07:13:22 +0000
 In-Reply-To: <10544c22-138e-c993-ca7f-3a3392e03243@suse.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,97 +24,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Robert VanVossen <Robert.VanVossen@dornerworks.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Joshua Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>
+Cc: Tim Deegan <tim@xen.org>, Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Robert VanVossen <Robert.VanVossen@dornerworks.com>, Dario Faggioli <dfaggioli@suse.com>, Paul Durrant <paul.durrant@citrix.com>, Joshua Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jun Nakajima <jun.nakajima@intel.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============5046273507719280331==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-BHfCVXHjuQ+aLcvKYHN0"
-
-
---=-BHfCVXHjuQ+aLcvKYHN0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2019-04-01 at 08:49 +0200, Juergen Gross wrote:
-> On 01/04/2019 08:41, Jan Beulich wrote:
-> > One further general question came to mind: How about also having
-> > "sched-granularity=3Dthread" (or "...=3Dnone") to retain current
-> > behavior, at least to have an easy way to compare effects if
-> > wanted? But perhaps also to allow to deal with potential resources
-> > wasting configurations like having mostly VMs with e.g. an odd
-> > number of vCPU-s.
->=20
-> Fine with me.
->=20
-Mmm... I'm still in the process of looking at the patches, so there
-might be something I'm missing, but, from the descriptions and from
-talking to you (Juergen), I was assuming that to be the case already...
-isn't it so?
-
-> > The other question of course is whether the terms thread, core,
-> > and socket are generic enough to be used in architecture
-> > independent code. Even on x86 it already leaves out / unclear
-> > where / how e.g. AMD's compute units would be classified. I
-> > don't have any good suggestion for abstraction, so possibly
-> > the terms used may want to become arch-specific.
->=20
-> I followed the already known terms from the credit2_runqueue
-> parameter. I think they should match. Which would call for
-> "sched-granularity=3Dcpu" instead of "thread".
->=20
-Yep, I'd go for cpu. Both for, as you said, consistency and also
-because I can envision "granularity=3Dthread" being mistaken/interpreted
-as a form of "thread aware co-scheduling" (i.e., what
-"granularity=3Dcore" actually does! :-O)
-
-Regards,
-Dario
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-BHfCVXHjuQ+aLcvKYHN0
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyhuXsACgkQFkJ4iaW4
-c+6XMxAAumFuqFQKVplWlmFBj0qdreZdRhzdANbB0q9ssLiVjJ6lx1Et7PA7rE2e
-uWIjKGjUn3c+uSZPx+qTM5bbnIQjvf7NdbqgMf1siXKVUQrlTBMiwQAm0PIkobLu
-OmqOvaih3s1TaCgeaxIwt/PW/KPAeuSr9AhNmjMfbGg0LmzVEYWa1kM8NIY5gF2/
-gPwwkUf3uh3NFa7BzvT8ClukR9fsL0hP6DW/Av3ch23WOPmhmT8NO+a2WyZetgv4
-nBkgspPpUaiDQRsxpFGMx2/a+PyGdlCUaMdnw806C3NIsqHadJuWmgVDikJzLPia
-RXTS+2tQ6pwM3CyIJIDsyfCokQgeaZJUGSKOPX1ey42UzM289RyMxFa+W75plEPY
-hP42hsfGWEFqtuJK2OzscIaMIWKKF1kUxu6LGh8PvcGJmZsl059zopv0aS7CUYXP
-o7f3sJslcU1FFTVvSOGY9/86aQ7KjjpdOgN/pGsZJO3bLd3zm0Fl/r4rEf9xH+OT
-nmUI+9c099pH2MNHPJGLX7wl82ds0lQO2b0Svtre1hAOR/WKpSgS0h+qkKH9C+L1
-Akm28WcKFCcgiUimwXowWj3lA4MgoXaO5BUG+PBYqE+nrW7g4ew+KEP0TN5F3kYO
-5e19ywRAq1lGsVK+o1dxPx+g7jovE0PZa5dojYjF0WlsVvzlJWI=
-=jhzR
------END PGP SIGNATURE-----
-
---=-BHfCVXHjuQ+aLcvKYHN0--
-
-
-
---===============5046273507719280331==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5046273507719280331==--
+Pj4+IE9uIDAxLjA0LjE5IGF0IDA4OjQ5LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBPbiAw
+MS8wNC8yMDE5IDA4OjQxLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gT24gMjkuMDMuMTkgYXQg
+MTY6MDgsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+Pj4gVmlhIGJvb3QgcGFyYW1ldGVyIHNj
+aGVkX2dyYW51bGFyaXR5PWNvcmUgKG9yIHNjaGVkX2dyYW51bGFyaXR5PXNvY2tldCkKPj4+IGl0
+IGlzIHBvc3NpYmxlIHRvIGNoYW5nZSB0aGUgc2NoZWR1bGluZyBncmFudWxhcml0eSBmcm9tIHRo
+cmVhZCAodGhlCj4+PiBkZWZhdWx0KSB0byBlaXRoZXIgd2hvbGUgY29yZXMgb3IgZXZlbiBzb2Nr
+ZXRzLgo+PiAKPj4gT25lIGZ1cnRoZXIgZ2VuZXJhbCBxdWVzdGlvbiBjYW1lIHRvIG1pbmQ6IEhv
+dyBhYm91dCBhbHNvIGhhdmluZwo+PiAic2NoZWQtZ3JhbnVsYXJpdHk9dGhyZWFkIiAob3IgIi4u
+Lj1ub25lIikgdG8gcmV0YWluIGN1cnJlbnQKPj4gYmVoYXZpb3IsIGF0IGxlYXN0IHRvIGhhdmUg
+YW4gZWFzeSB3YXkgdG8gY29tcGFyZSBlZmZlY3RzIGlmCj4+IHdhbnRlZD8gQnV0IHBlcmhhcHMg
+YWxzbyB0byBhbGxvdyB0byBkZWFsIHdpdGggcG90ZW50aWFsIHJlc291cmNlcwo+PiB3YXN0aW5n
+IGNvbmZpZ3VyYXRpb25zIGxpa2UgaGF2aW5nIG1vc3RseSBWTXMgd2l0aCBlLmcuIGFuIG9kZAo+
+PiBudW1iZXIgb2YgdkNQVS1zLgo+IAo+IEZpbmUgd2l0aCBtZS4KPiAKPj4gVGhlIG90aGVyIHF1
+ZXN0aW9uIG9mIGNvdXJzZSBpcyB3aGV0aGVyIHRoZSB0ZXJtcyB0aHJlYWQsIGNvcmUsCj4+IGFu
+ZCBzb2NrZXQgYXJlIGdlbmVyaWMgZW5vdWdoIHRvIGJlIHVzZWQgaW4gYXJjaGl0ZWN0dXJlCj4+
+IGluZGVwZW5kZW50IGNvZGUuIEV2ZW4gb24geDg2IGl0IGFscmVhZHkgbGVhdmVzIG91dCAvIHVu
+Y2xlYXIKPj4gd2hlcmUgLyBob3cgZS5nLiBBTUQncyBjb21wdXRlIHVuaXRzIHdvdWxkIGJlIGNs
+YXNzaWZpZWQuIEkKPj4gZG9uJ3QgaGF2ZSBhbnkgZ29vZCBzdWdnZXN0aW9uIGZvciBhYnN0cmFj
+dGlvbiwgc28gcG9zc2libHkKPj4gdGhlIHRlcm1zIHVzZWQgbWF5IHdhbnQgdG8gYmVjb21lIGFy
+Y2gtc3BlY2lmaWMuCj4gCj4gSSBmb2xsb3dlZCB0aGUgYWxyZWFkeSBrbm93biB0ZXJtcyBmcm9t
+IHRoZSBjcmVkaXQyX3J1bnF1ZXVlCj4gcGFyYW1ldGVyLiBJIHRoaW5rIHRoZXkgc2hvdWxkIG1h
+dGNoLiBXaGljaCB3b3VsZCBjYWxsIGZvcgo+ICJzY2hlZC1ncmFudWxhcml0eT1jcHUiIGluc3Rl
+YWQgb2YgInRocmVhZCIuCgoiY3B1IiBpcyBmaW5lIG9mIGNvdXJzZS4gSSB3b25kZXIgdGhvdWdo
+IHdoZXRoZXIgdGhlIG90aGVyIHR3bwp3ZXJlIGEgZ29vZCBjaG9pY2UgZm9yICJjcmVkaXQyX3J1
+bnF1ZXVlIi4gU3RlZmFubywgSnVsaWVuIC0KaXMgdGhpcyB0ZXJtaW5vbG9neSBhdCBsZWFzdCBo
+YWxmIHdheSBzdWl0YWJsZSBmb3IgQXJtPwoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
