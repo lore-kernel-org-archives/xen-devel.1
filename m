@@ -1,41 +1,18 @@
-From: =?UTF-8?Q?H=c3=a5kon_Alstadheim?= <hakon@alstadheim.priv.no>
-Subject: Re: [PATCH v2 0/2] xen-block: fix sector size confusion
-Date: Mon, 1 Apr 2019 21:37:25 +0200
-Message-ID: <b7502004-2c02-bb12-78ce-4c114dc9567c@alstadheim.priv.no>
-References: <20190327173206.9065-1-paul.durrant@citrix.com>
- <3585a316-6349-b89e-99be-799b055594db@citrix.com>
- <f9a7e4fa5b794cf88593a86923142a87@AMSPEX02CL02.citrite.net>
- <20190328114012.GG1420@perard.uk.xensource.com>
- <28bfdf32-916f-fb55-e2ab-13871b5e0fdd@citrix.com>
- <20190328115619.GC4857@localhost.localdomain>
- <b961ee21f8db448fab6b84bb79c37eab@AMSPEX02CL02.citrite.net>
- <20190401093405.GA4935@localhost.localdomain>
+From: "YOUNG, MICHAEL A." <m.a.young@durham.ac.uk>
+Subject: Re: [PATCH 0/4] More python fixes
+Date: Mon, 1 Apr 2019 20:36:44 +0000
+Message-ID: <alpine.LFD.2.21.1904012117030.3030@austen3.home>
+References: <20190401103238.15649-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed;
+ boundary="_002_alpineLFD22119040121170303030austen3home_"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=sCsE=SD=alstadheim.priv.no=hakon@srs-us1.protection.inumbo.net>)
- id 1hB2kP-0001xp-0q
- for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 19:37:33 +0000
-Received: from postfix-relay.alstadheim.priv.no
- (148-252-121.136.3p.ntebredband.no [148.252.121.136])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- (Authenticated sender: hakon.alstadheim@ntebb.no)
- by asav22.altibox.net (Postfix) with ESMTPSA id 98B5320067
- for <xen-devel@lists.xenproject.org>; Mon,  1 Apr 2019 21:37:26 +0200 (CEST)
-Received: from smtps.alstadheim.priv.no (localhost [127.0.0.1])
- by postfix-relay.alstadheim.priv.no (Postfix) with ESMTP id 713CB624E86F
- for <xen-devel@lists.xenproject.org>; Mon,  1 Apr 2019 21:37:26 +0200 (CEST)
-Received: from [192.168.2.201] (unknown [192.168.2.201])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hakon)
- by smtps.alstadheim.priv.no (Postfix) with ESMTPSA id 0DC57241067F
- for <xen-devel@lists.xenproject.org>; Mon,  1 Apr 2019 21:37:26 +0200 (CEST)
-In-Reply-To: <20190401093405.GA4935@localhost.localdomain>
+ <SRS0=Zzay=SD=durham.ac.uk=m.a.young@srs-us1.protection.inumbo.net>)
+ id 1hB3fl-00078u-C2
+ for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 20:36:49 +0000
+In-Reply-To: <20190401103238.15649-1-wei.liu2@citrix.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -45,61 +22,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-CkRlbiAwMS4wNC4yMDE5IDExOjM0LCBza3JldiBLZXZpbiBXb2xmOgo+Cj4gWWVzLCBmb3IgNTEy
-IGFjY2Vzc2VzIG9uIG5hdGl2ZSA0ayBkaXNrcyB3aXRoIE9fRElSRUNULCB0aGUgUUVNVSBibG9j
-awo+IGxheWVyIHBlcmZvcm1zIHRoZSBuZWNlc3NhcnkgUk1XLiBPZiBjb3Vyc2UsIGl0IHN0aWxs
-IGNvbWVzIHdpdGggYQo+IHBlcmZvcm1hbmNlIHBlbmFsdHksIHNvIHlvdSB3YW50IHRvIGF2b2lk
-IHN1Y2ggc2V0dXBzLCBidXQgdGhleSBkbyB3b3JrLgoKSSBzdXNwZWN0IHRoYXQgdGhlIGFwcHJv
-eGltYXRlbHkgMS8xMCAtdGggZGlzay1zcGVlZCBJIHNlZSAoZS5nIDI4Mzg5IAp2c8KgIDI1ODcx
-OSBLL3NlYyBzZXF1ZW50aWFsIGRpc2sgT3V0cHV0KSBpbiBkb21VIGNvbXBhcmVkIHRvIGRvbTAg
-bXVzdCAKYmUgZHVlIHRvIHRoaXMuIEkgaGF2ZSBkb20wIGFuZCBkb21VIGRyaXZlcyBhcyBwYXJ0
-aXRpb25zIG9uIGFuIG1kIApyYWlkNi4gVGhlIHBlcmZvcm1hbmNlIGlzIHN1Yi1vcHRpbWFsIHRv
-IHB1dCBpdCBtaWxkbHkuIEhlcmUgaXMgb25lIApleGFtcGxlIGJvbm5pZSsrIHJ1biBvbiBhIGd1
-ZXN0OgoKVmVyc2lvbsKgIDEuOTfCoMKgwqDCoMKgwqAgLS0tLS0tU2VxdWVudGlhbCBPdXRwdXQt
-LS0tLS0gLS1TZXF1ZW50aWFsIElucHV0LSAKLS1SYW5kb20tCkNvbmN1cnJlbmN5wqDCoCAzwqDC
-oMKgwqAgLVBlciBDaHItIC0tQmxvY2stLSAtUmV3cml0ZS0gLVBlciBDaHItIC0tQmxvY2stLSAK
-LS1TZWVrcy0tCk1hY2hpbmXCoMKgwqDCoMKgwqDCoCBTaXplIEsvc2VjICVDUCBLL3NlYyAlQ1Ag
-Sy9zZWMgJUNQIEsvc2VjICVDUCBLL3NlYyAlQ1DCoCAKL3NlYyAlQ1AKZ3QtY3JlZGl0Mi1vbi1w
-IDE2R8KgIDEwNjLCoCA5MCAyODM4OcKgwqAgMiAyMDIzM8KgwqAgMsKgIDM5NTDCoCA4MiAxOTk2
-MzMgMTDCoCAKMTE5NcKgIDE3CkxhdGVuY3nCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMTkwMDN1
-c8KgwqDCoMKgIDE0MG1zwqDCoMKgwqAgNjUybXPCoMKgIDIwODExdXMgNjAybXPCoMKgIDMzMTg5
-dXMKVmVyc2lvbsKgIDEuOTfCoMKgwqDCoMKgwqAgLS0tLS0tU2VxdWVudGlhbCBDcmVhdGUtLS0t
-LS0gLS0tLS0tLS1SYW5kb20gCkNyZWF0ZS0tLS0tLS0tCmd0LWNyZWRpdDItb24tcHTCoMKgwqAg
-LUNyZWF0ZS0tIC0tUmVhZC0tLSAtRGVsZXRlLS0gLUNyZWF0ZS0tIC0tUmVhZC0tLSAKLURlbGV0
-ZS0tCiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaWxlc8KgIC9zZWMgJUNQwqAgL3NlYyAl
-Q1DCoCAvc2VjICVDUMKgIC9zZWMgJUNQwqAgL3NlYyAlQ1DCoCAKL3NlYyAlQ1AKIMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAxMjcgMzQ0NDXCoCAyNiArKysrKyArKysgNDI0MjTCoCAy
-NyA2NzQxOMKgIDUxICsrKysrICsrKyAKNTI1OTDCoCAzNQpMYXRlbmN5wqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgIDEyOTc5dXPCoMKgwqDCoCAzMjl1c8KgwqDCoCAyOTAzdXPCoMKgwqDCoCAzMDR1
-cyAzOHVzwqDCoMKgwqAgNjY4dXMKMS45NywxLjk3LGd0LWNyZWRpdDItb24tcHQsMywxNTUwOTI4
-MTE0LDE2RywsMTA2Miw5MCwyODM4OSwyLDIwMjMzLDIsMzk1MCw4MiwxOTk2MzMsMTAsMTE5NSwx
-NywxMjcsLCwsLDM0NDQ1LDI2LCsrKysrLCsrKyw0MjQyNCwyNyw2NzQxOCw1MSwrKysrKywrKyss
-NTI1OTAsMzUsMTkwMDN1cywxNDBtcyw2NTJtcywyMDgxMXVzLDYwMm1zLDMzMTg5dXMsMTI5Nzl1
-cywzMjl1cywyOTAzdXMsMzA0dXMsMzh1cyw2Njh1cwoKClNhbWUgb24gZG9tMDoKClZlcnNpb27C
-oCAxLjk3wqDCoMKgwqDCoMKgIC0tLS0tLVNlcXVlbnRpYWwgT3V0cHV0LS0tLS0tIC0tU2VxdWVu
-dGlhbCBJbnB1dC0gCi0tUmFuZG9tLQpDb25jdXJyZW5jecKgwqAgM8KgwqDCoMKgIC1QZXIgQ2hy
-LSAtLUJsb2NrLS0gLVJld3JpdGUtIC1QZXIgQ2hyLSAtLUJsb2NrLS0gCi0tU2Vla3MtLQpNYWNo
-aW5lwqDCoMKgwqDCoMKgwqAgU2l6ZSBLL3NlYyAlQ1AgSy9zZWMgJUNQIEsvc2VjICVDUCBLL3Nl
-YyAlQ1AgSy9zZWMgJUNQwqAgCi9zZWMgJUNQClhFTi00LjEyLURPTTDCoMKgwqDCoMKgwqDCoMKg
-wqAgMTZHwqDCoCA0NzXCoCA5MSAyNTg3MTnCoCAyMCAxNTE1MDjCoCAxOcKgwqAgNTg1IDk5IAoz
-MjQ3MjXCoCAyMiAzOTIuM8KgIDE0CkxhdGVuY3nCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMTYw
-OTN1c8KgwqDCoCAxMDk3bXPCoMKgwqDCoCA0MDZtc8KgwqAgMTgxMzZ1cyAxNjBtc8KgwqDCoMKg
-IDE1NW1zClZlcnNpb27CoCAxLjk3wqDCoMKgwqDCoMKgIC0tLS0tLVNlcXVlbnRpYWwgQ3JlYXRl
-LS0tLS0tIC0tLS0tLS0tUmFuZG9tIApDcmVhdGUtLS0tLS0tLQpYRU4tNC4xMi1ET00wwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqAgLUNyZWF0ZS0tIC0tUmVhZC0tLSAtRGVsZXRlLS0gLUNyZWF0
-ZS0tIAotLVJlYWQtLS0gLURlbGV0ZS0tCiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBmaWxl
-c8KgIC9zZWMgJUNQwqAgL3NlYyAlQ1DCoCAvc2VjICVDUMKgIC9zZWMgJUNQwqAgL3NlYyAlQ1DC
-oCAKL3NlYyAlQ1AKIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgOMKgIDY1NjPC
-oCAxMSArKysrKyArKysgMTM1MjLCoCAyMCAxMDk2OcKgIDE4ICsrKysrICsrK8KgIAo5NTYwwqAg
-MTMKTGF0ZW5jecKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgMTA0dXPCoMKgwqDCoMKgIDY4
-dXPCoMKgIDE4MTc5dXPCoMKgwqDCoCAxMjB1cyAyMHVzwqDCoMKgwqDCoCA2M3VzCjEuOTcsMS45
-NyxYRU4tNC4xMi1ET00wLDMsMTU0Nzk2MTM5NiwxNkcsLDQ3NSw5MSwyNTg3MTksMjAsMTUxNTA4
-LDE5LDU4NSw5OSwzMjQ3MjUsMjIsMzkyLjMsMTQsOCwsLCwsNjU2MywxMSwrKysrKywrKyssMTM1
-MjIsMjAsMTA5NjksMTgsKysrKyssKysrLDk1NjAsMTMsMTYwOTN1cywxMDk3bXMsNDA2bXMsMTgx
-MzZ1cywxNjBtcywxNTVtcywxMDR1cyw2OHVzLDE4MTc5dXMsMTIwdXMsMjB1cyw2M3VzCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--_002_alpineLFD22119040121170303030austen3home_
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <B57194797A020445A3C14A9E3557CCA6@eurprd06.prod.outlook.com>
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 1 Apr 2019, Wei Liu wrote:
+
+> Wei Liu (4):
+>  pygrub: fix message in grub parser
+>  pygrub/grub: always use integer for default entry
+>  pygrub: decode string in Python 3
+>  tools/ocaml: make python scripts 2 and 3 compatible
+>
+> tools/ocaml/libs/xentoollog/genlevels.py |  5 ++++-
+> tools/ocaml/libs/xl/genwrap.py           | 17 ++++++++++-------
+> tools/pygrub/src/GrubConf.py             |  8 ++++++--
+> tools/pygrub/src/pygrub                  |  5 ++++-
+> 4 files changed, 24 insertions(+), 11 deletions(-)
+
+There is a bit missing compared to my original patch which is to convert=20
+the string back to bytes for the final write out and avoid the error
+
+Traceback (most recent call last):
+   File "/tmp/xencode/usr/libexec/xen/bin/pygrub", line 967, in <module>
+     os.write(fd, ostring)
+TypeError: a bytes-like object is required, not 'str'
+
+The attached patch works for me in a quick test on python3 though I=20
+haven't tested it on python2 yet.
+
+ 	Michael Young=
+
+--_002_alpineLFD22119040121170303030austen3home_
+Content-Type: text/plain; name="python3.patch"
+Content-Description: python3.patch
+Content-Disposition: attachment; filename="python3.patch"; size=445;
+	creation-date="Mon, 01 Apr 2019 20:36:43 GMT";
+	modification-date="Mon, 01 Apr 2019 20:36:43 GMT"
+Content-ID: <alpine.LFD.2.21.1904012136350.3030@austen3.home>
+Content-Transfer-Encoding: base64
+
+LS0tIHhlbi00LjEyLjAvdG9vbHMvcHlncnViL3NyYy9weWdydWIub3JpZwkyMDE5LTA0LTAxIDIx
+OjI1OjMzLjIwNjQwNTk5NSArMDEwMA0KKysrIHhlbi00LjEyLjAvdG9vbHMvcHlncnViL3NyYy9w
+eWdydWIJMjAxOS0wNC0wMSAyMToyNzozNi4xNzk5MjkxMDUgKzAxMDANCkBAIC05NjMsNSArOTYz
+LDggQEANCiAgICAgICAgIG9zdHJpbmcgPSBmb3JtYXRfc2ltcGxlKGJvb3RjZmdbImtlcm5lbCJd
+LCBib290Y2ZnWyJyYW1kaXNrIl0sIGFyZ3MsICJcMCIpDQogDQogICAgIHN5cy5zdGRvdXQuZmx1
+c2goKQ0KLSAgICBvcy53cml0ZShmZCwgb3N0cmluZykNCisgICAgaWYgc3lzLnZlcnNpb25faW5m
+b1swXSA8IDM6DQorICAgICAgICBvcy53cml0ZShmZCwgb3N0cmluZykNCisgICAgZWxzZToNCisg
+ICAgICAgIG9zLndyaXRlKGZkLCBvc3RyaW5nLmVuY29kZSgpKQ0KICAgICANCg==
+
+--_002_alpineLFD22119040121170303030austen3home_
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--_002_alpineLFD22119040121170303030austen3home_--
