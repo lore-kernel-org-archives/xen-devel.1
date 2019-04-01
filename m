@@ -1,22 +1,26 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH RFC 08/49] xen/sched: use new sched_item
- instead of vcpu in scheduler interfaces
-Date: Mon, 01 Apr 2019 09:05:50 +0200
-Message-ID: <18bf2961fcb586dc74f1ea972acf62e001ea8c58.camel@suse.com>
-References: <20190329150934.17694-1-jgross@suse.com>
- <20190329150934.17694-9-jgross@suse.com>
- <4570eeac-64a8-f424-28df-883347c69f15@citrix.com>
- <bcbe39bc-fc79-d401-13fc-69bf34ffa17d@suse.com>
- <7c1a66e4-f95e-ba79-e76a-d721cf838a64@suse.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] x86emul/fuzz: adjust canonicalization in
+ sanitize_input()
+Date: Mon, 01 Apr 2019 01:09:52 -0600
+Message-ID: <5CA1B9400200007800223649@prv1-mh.provo.novell.com>
+References: <5C9E30F40200007800222DDC@prv1-mh.provo.novell.com>
+ <8B8E72C2-696B-4C0D-8733-78C7B93B9FB0@citrix.com>
+ <5C9E38620200007800222F8B@prv1-mh.provo.novell.com>
+ <F2552738-0569-4DC0-A93D-F0D3191C5D5E@citrix.com>
+ <5C9E447B0200007800223018@prv1-mh.provo.novell.com>
+ <DC8F0A76-5080-40AB-BB46-03298755E295@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3897755955882842527=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=skML=SD=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hAr1H-0002QA-Hf
- for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 07:06:11 +0000
-In-Reply-To: <7c1a66e4-f95e-ba79-e76a-d721cf838a64@suse.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=uvFD=SD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hAr4y-0002cW-4J
+ for xen-devel@lists.xenproject.org; Mon, 01 Apr 2019 07:10:00 +0000
+In-Reply-To: <DC8F0A76-5080-40AB-BB46-03298755E295@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,92 +29,30 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Robert VanVossen <robert.vanvossen@dornerworks.com>, Julien Grall <julien.grall@arm.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>
+To: george.dunlap@citrix.com
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3897755955882842527==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-zjz4IJpLF2mIVbubwGmv"
-
-
---=-zjz4IJpLF2mIVbubwGmv
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2019-04-01 at 08:06 +0200, Juergen Gross wrote:
-> On 30/03/2019 11:24, Juergen Gross wrote:
-> > I think its is easier to do it myself, as I'm touching nearly all
-> > of
-> > the call sites anyway.
->=20
-> And another thought I had: with RETPOLINE indirect jumps are even
-> more
-> expensive. Would it be a good idea to remove the function pointers
-> from
-> struct scheduler and generate the inline wrappers at build time?
->
-Yep, I was thinking about doing something like that already,
-independently from this feature/series.
-
-At least something that special case the configured default scheduler,
-and let its hooks be called without indirect jumps (i.e., similarly to
-what's being done in Linux, in quite a few places, these days).
-
-> The
-> wrappers could then call the related specific scheduler function
-> based
-> on the scheduler Id using a chain of if ... else if ... statements.=20
->
-I guess we'd have to see how the final code will look, but I like the
-idea, and I think it's well worth a try.
-
-Regards,
-Dario
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-zjz4IJpLF2mIVbubwGmv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyhuE4ACgkQFkJ4iaW4
-c+4ZYBAAj3tCpvUfLHkKB4lOUZgptvWBp7f53ZvYolehKIbJqBumfv6J0qkoY6Su
-GTc3hbiZV7P39omTBJ5T/9yWPHzkxwtGI13UytHClMxiHjAp9crHlu3eshSJxpj1
-q/DNtjfbLWsFQV4czP24q+iuI74tu+MjyxcZl6OkHPASpUK6T7H1CpO24PXYxoKw
-C05u/y/P+UJNEEnElVRsJ/2Kro4s5BD/GNseYDmRKXqXTWvx1GJtCqP9m2zAAAla
-Eur2Iy2t+5wI1Gl3QAfSy8mrL7Q3ifnFf7ad/l63f8Q9MOfQkBrHZmUhq9eVzATG
-tGUPdwAoV/hAWruTRjHqy+hmmMSY1YG5Nk366eXMaooXr7RkgpbBC3qAva3lTh9R
-dzOlaxh7/qklCmHpZpDCO/Cj2aA6G+vUFdj7JoIO1opmlxELHJ3TnlR5bNlqYaBH
-+mt/vTNkJ9wy3rHGH/zXqItIcklP50fKlAZEZWtSDdegOyoOdUAiW6O5sEMBEd/y
-HSXwTJJQSTq22k9k5kSIoWL0LZ7rDQ96xiEGY6oj/LkEQomoxjM3zjhQtmEqpoyb
-Cny+N/Ii0AbrBbLHjCz+oQLM9Grfu+4hAFXcR2WeTfLoDc6fNjL7BEyRt0XBkrP/
-tQKbiMf96MSHOTsQLZu+b7GRaA14tBGXqdqAZjtePjojmRxK0KQ=
-=nFDH
------END PGP SIGNATURE-----
-
---=-zjz4IJpLF2mIVbubwGmv--
-
-
-
---===============3897755955882842527==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3897755955882842527==--
+Pj4+IE9uIDI5LjAzLjE5IGF0IDIwOjIwLCA8R2VvcmdlLkR1bmxhcEBjaXRyaXguY29tPiB3cm90
+ZToKPiBIb3dldmVyLCB0aGUgd2hvbGUgcG9pbnQgb2YgdGVzdGluZyBpcyB0byBmaW5kIHBsYWNl
+cyB3aGVyZSB5b3VyIGFzc3VtcHRpb25zIAo+IGFyZSB2aW9sYXRlZC4gIElmIHRoZSBlbXVsYXRv
+ciBldmVyICpkaWQqIGJlaGF2ZSBkaWZmZXJlbnRseSBmb3IgY2Fub25pY2FsIAo+IGFuZCBub24t
+Y2Fub25pY2FsIGFkZHJlc3Nlcywgb3IgbmVhciB0aGUgYm91bmRhcnkgb2YgY2Fub25pY2l0eSwg
+d2XigJlkIHdhbnQgCj4gdGhvc2UgYmVoYXZpb3JzIHRvIGJlIHRlc3RlZC4KCkluIHRoaXMgY2Fz
+ZSB3b3VsZG4ndCBpdCBiZSBwcmVmZXJhYmxlIHRvIG5vdCBleGFjdGx5IGNhbm9uaWNhbGl6ZQpy
+ZWdpc3RlcnMsIGJ1dCBvbmx5IGFsbW9zdCwgdG8gZ2V0IHRoZW0gbmVhciB0aGUgYm91bmRhcnks
+IGJ1dApib3RoIGFib3ZlIGFuZCBiZWxvdz8KCkFsc28gcGxlYXNlIGxldCdzIG5vdCBmb3JnZXQg
+dGhhdCB0aGVyZSBhcmUgc2V2ZXJhbCBjb25zdGl0dWVudApwYXJ0cyB0byBhIGxpbmVhciBhZGRy
+ZXNzIGNhbGN1bGF0aW9uOiBCYXNlIGFkZHJlc3MgKGFueSBHUFIgb3IKbm9uZSBhdCBhbGwpLCBz
+Y2FsZWQgaW5kZXggKEdQUnMgb3RoZXIgdGhhbiAlcnNwIG9yIG5vbmUgYXQgYWxsLAp3aXRoIEFW
+WCBhbmQgbGF0ZXIgYWxzbyBbWFlaXU1NIHJlZ2lzdGVycyksIGRpc3BsYWNlbWVudAoocG9zc2li
+bHkgemVybyksIGFuZCBzZWdtZW50IHJlZ2lzdGVyIGJhc2UgKHR5cGljYWxseSBidXQgbm90CmFs
+d2F5cyB6ZXJvKS4gV2hhdCBtYXR0ZXJzIChvdXRzaWRlIG9mIHRoZSBzcGVjaWFsIGNhc2VzIHRo
+YXQKQW5kcmV3IGRpZCBlbnVtZXJhdGUsIHdoZXJlIHRoZSBlbXVsYXRvciBjdXJyZW50bHkgZG9l
+cwpjYW5vbmljYWwgY2hlY2tzIG9uIGl0cyBvd24pIGlzIHRoZSByZXN1bHQgb2YgdGhlIGNhbGN1
+bGF0aW9uLCBub3QKdGhlIHZhbHVlKHMpIG9mIGlucHV0IHJlZ2lzdGVycy4gT2YgY291cnNlLCBp
+ZiBhbnkgb2YgdGhlIHBhcnRzCmlzIG5vbi1jYW5vbmljYWwsIHRoZXJlJ3MgYSBnb29kIGNoYW5j
+ZSB0aGF0IHRoZSBjYWxjdWxhdGlvbgpyZXN1bHQgdG9vIHdpbGwgYmUuCgpKYW4KCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
