@@ -1,18 +1,20 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [qemu-mainline test] 134240: regressions - trouble:
- blocked/broken/fail/pass
-Date: Wed, 03 Apr 2019 06:50:19 +0000
-Message-ID: <osstest-134240-mainreport@xen.org>
+From: Diego Alejandro Parra Guzman <daparrag@correo.udistrital.edu.co>
+Subject: Re: Performance Monitor and Profiling tools for ARM64
+Date: Wed, 3 Apr 2019 08:57:07 +0200
+Message-ID: <CAMWmVVAMYMa-csRVL3kz3KcafEzjRnQqz=0F5f_JLxy0_FQJew@mail.gmail.com>
+References: <CAMWmVVANRaJX_Cx6OEHuKYR=v7nNfvPpW738_2hbhB+1s7w4LQ@mail.gmail.com>
+ <7ed4f8ed-2317-5cee-e25c-69debc379fd8@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5283422340906242356=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=gS5C=SF=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hBZjC-0007as-Mo
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2019 06:50:30 +0000
+ <SRS0=04JA=SF=correo.udistrital.edu.co=daparrag@srs-us1.protection.inumbo.net>)
+ id 1hBZpq-0007qi-Ov
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2019 06:57:22 +0000
+Received: by mail-lj1-x22a.google.com with SMTP id l7so13812735ljg.6
+ for <xen-devel@lists.xenproject.org>; Tue, 02 Apr 2019 23:57:20 -0700 (PDT)
+In-Reply-To: <7ed4f8ed-2317-5cee-e25c-69debc379fd8@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,276 +23,384 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzNDI0MCBxZW11LW1haW5saW5lIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3Qt
-bGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xMzQyNDAvCgpSZWdyZXNzaW9ucyA6LSgK
-ClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCBhbmQgYXJlIGJsb2NraW5nLAppbmNsdWRpbmcg
-dGVzdHMgd2hpY2ggY291bGQgbm90IGJlIHJ1bjoKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAg
-ICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1aWxkLWFybTY0LXB2
-b3BzICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAgICBicm9rZW4KIGJ1
-aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgPGpvYiBzdGF0dXM+ICAgICAgICAgICAgICAg
-ICBicm9rZW4KIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQp
-ICAgICAgICBicm9rZW4gUkVHUi4gdnMuIDEzMzkwOQogYnVpbGQtYXJtNjQgICAgICAgICAgICAg
-ICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMzOTA5CiBi
-dWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgYnJv
-a2VuIFJFR1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtYW1kNjQgMTQg
-Z3Vlc3Qtc2F2ZXJlc3RvcmUgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzkwOQogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAxMyBndWVzdC1zYXZlcmVzdG9yZSBmYWlsIFJF
-R1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1kNjQtaTM4Ni1mcmVlYnNkMTAtaTM4NiAxNCBndWVzdC1z
-YXZlcmVzdG9yZSAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzkwOQogdGVzdC1hbWQ2NC1hbWQ2NC14
-bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgMTMgZ3Vlc3Qtc2F2ZXJlc3RvcmUgZmFpbCBSRUdSLiB2
-cy4gMTMzOTA5CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0
-LXhzbSAxMyBndWVzdC1zYXZlcmVzdG9yZSBmYWlsIFJFR1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMyBndWVzdC1zYXZlcmVzdG9y
-ZSBmYWlsIFJFR1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtb3ZtZi1h
-bWQ2NCAxMyBndWVzdC1zYXZlcmVzdG9yZSBmYWlsIFJFR1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAxMyBndWVzdC1zYXZlcmVzdG9yZSBmYWlsIFJF
-R1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0IDEzIGd1
-ZXN0LXNhdmVyZXN0b3JlIGZhaWwgUkVHUi4gdnMuIDEzMzkwOQogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTMgZ3Vlc3Qtc2F2ZXJlc3RvcmUgZmFpbCBSRUdS
-LiB2cy4gMTMzOTA5CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1z
-aGFkb3cgMTMgZ3Vlc3Qtc2F2ZXJlc3RvcmUgZmFpbCBSRUdSLiB2cy4gMTMzOTA5CiB0ZXN0LWFt
-ZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtIDEzIGd1ZXN0LXNhdmVy
-ZXN0b3JlIGZhaWwgUkVHUi4gdnMuIDEzMzkwOQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRl
-Ymlhbmh2bS1hbWQ2NC1zaGFkb3cgMTMgZ3Vlc3Qtc2F2ZXJlc3RvcmUgZmFpbCBSRUdSLiB2cy4g
-MTMzOTA5CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxMyBndWVzdC1zYXZl
-cmVzdG9yZSBmYWlsIFJFR1IuIHZzLiAxMzM5MDkKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-d3MxNi1hbWQ2NCAxMyBndWVzdC1zYXZlcmVzdG9yZSBmYWlsIFJFR1IuIHZzLiAxMzM5MDkKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dS13czE2LWFtZDY0IDEzIGd1ZXN0LXNhdmVyZXN0b3JlIGZh
-aWwgUkVHUi4gdnMuIDEzMzkwOQoKVGVzdHMgd2hpY2ggYXJlIGZhaWxpbmcgaW50ZXJtaXR0ZW50
-bHkgKG5vdCBibG9ja2luZyk6CiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDE1IGd1ZXN0
-LXN0b3AgICAgICAgICAgICAgICAgIGZhaWwgcGFzcyBpbiAxMzQyMTgKClRlc3RzIHdoaWNoIGRp
-ZCBub3Qgc3VjY2VlZCwgYnV0IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFybTY0LWFybTY0LXhs
-LWNyZWRpdDIgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0
-ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAg
-ICAgYmxvY2tlZCAgbi9hCiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICAxIGJ1aWxkLWNo
-ZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZp
-cnQteHNtICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0
-LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgICAgICAgICAg
-YmxvY2tlZCAgbi9hCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAgICAxIGJ1aWxkLWNoZWNr
-KDEpICAgICAgICAgICAgICAgYmxvY2tlZCAgbi9hCiB0ZXN0LWFybWhmLWFybWhmLWxpYnZpcnQg
-ICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgbGlrZSAxMzM5MDkKIHRl
-c3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTMgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAg
-ICBmYWlsICBsaWtlIDEzMzkwOQogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAxMiBndWVz
-dC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkz
-ODYtbGlidmlydC14c20gIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0ICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0
-LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0
-LXhzbSAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0
-ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAg
-ICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC1xZW11dS1kZWJp
-YW5odm0tYW1kNjQteHNtIDExIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayBmYWlsIG5ldmVyIHBhc3MK
-IHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTEgbWln
-cmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11
-dS1uZXN0ZWQtYW1kIDE3IGRlYmlhbi1odm0taW5zdGFsbC9sMS9sMiAgZmFpbCBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkIDEyIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
-ICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgMTMg
-bWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1o
-Zi1hcm1oZi14bC1jcmVkaXQxICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwg
-ICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3Vw
-cG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwt
-bXVsdGl2Y3B1IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgbmV2ZXIgcGFz
-cwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1j
-aGVjayAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDIgIDE0
-IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJt
-aGYtYXJtaGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrIDE0IHNhdmVyZXN0
-b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLWxp
-YnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBh
-c3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNr
-ICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAx
-NCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
-bWhmLWFybWhmLXhsLXJ0ZHMgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFp
-bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTQgc2F2ZXJlc3Rv
-cmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1s
-aWJ2aXJ0LXJhdyAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVj
-ayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJuZGFsZSAg
-MTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEzIHNhdmVyZXN0
-b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcWVtdXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0
-YWxsICAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5n
-OgogcWVtdXUgICAgICAgICAgICAgICAgMjMwY2UxOTgxNGVjYzZiZmY4ZWRhYzNiNWI4NmU3Yzgy
-ZjQyMmM2YwpiYXNlbGluZSB2ZXJzaW9uOgogcWVtdXUgICAgICAgICAgICAgICAgMDgyYzA1NDNi
-YWE2ZjIzNzcwNGM4M2E1MTY1OGJkN2Y2YWUzMTZkNQoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTMz
-OTA5ICAyMDE5LTAzLTE4IDE3OjIwOjUzIFogICAxNSBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAg
-IDEzMzkzOSAgMjAxOS0wMy0yMCAwNDoyMjoxMiBaICAgMTQgZGF5cyAgIDEyIGF0dGVtcHRzClRl
-c3Rpbmcgc2FtZSBzaW5jZSAgIDEzNDIxOCAgMjAxOS0wMy0zMCAxNjowNzoxMSBaICAgIDMgZGF5
-cyAgICAyIGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0
-ZXN0OgogICJDw6lkcmljIExlIEdvYXRlciIgPGNsZ0BrYW9kLm9yZz4KICBBbGJlcnRvIEdhcmNp
-YSA8YmVydG9AaWdhbGlhLmNvbT4KICBBbGV4IEJlbm7DqWUgPGFsZXguYmVubmVlQGxpbmFyby5v
-cmc+CiAgQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPgogIEFuZHJl
-dyBKb25lcyA8ZHJqb25lc0ByZWRoYXQuY29tPgogIEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBl
-cmFyZEBjaXRyaXguY29tPgogIEJBTEFUT04gWm9sdGFuIDxiYWxhdG9uQGVpay5ibWUuaHU+CiAg
-QmVuamFtaW4gSGVycmVuc2NobWlkdCA8YmVuaEBrZXJuZWwuY3Jhc2hpbmcub3JnPgogIEJpbiBN
-ZW5nIDxibWVuZy5jbkBnbWFpbC5jb20+CiAgQmlzaGFyYSBBYnVIYXR0b3VtIDxiaXNoYXJhQGRh
-eW5peC5jb20+CiAgQnJpamVzaCBTaW5naCA8YnJpamVzaC5zaW5naEBhbWQuY29tPgogIENoaWgt
-TWluIENoYW8gPGNoaWhtaW4uY2hhb0BzaWZpdmUuY29tPgogIENsZWJlciBSb3NhIDxjcm9zYUBy
-ZWRoYXQuY29tPgogIEPDqWRyaWMgTGUgR29hdGVyIDxjbGdAa2FvZC5vcmc+CiAgRGFuaWVsIEhl
-bnJpcXVlIEJhcmJvemEgPGRhbmllbGhiNDEzQGdtYWlsLmNvbT4KICBEYW5pZWwgUC4gQmVycmFu
-Z2UgPGJlcnJhbmdlQHJlZGhhdC5jb20+CiAgRGFuaWVsIFAuIEJlcnJhbmfDqSA8YmVycmFuZ2VA
-cmVkaGF0LmNvbT4KICBEYXZpZCBHaWJzb24gPGRhdmlkQGdpYnNvbi5kcm9wYmVhci5pZC5hdT4K
-ICBEYXZpZCBIaWxkZW5icmFuZCA8ZGF2aWRAcmVkaGF0LmNvbT4KICBEci4gRGF2aWQgQWxhbiBH
-aWxiZXJ0IDxkZ2lsYmVydEByZWRoYXQuY29tPgogIEVkdWFyZG8gSGFia29zdCA8ZWhhYmtvc3RA
-cmVkaGF0LmNvbT4KICBFZHVhcmRvIE90dWJvIDxvdHVib0ByZWRoYXQuY29tPgogIEVtaWxpbyBH
-LiBDb3RhIDxjb3RhQGJyYWFwLm9yZz4KICBFcmljIEJsYWtlIDxlYmxha2VAcmVkaGF0LmNvbT4K
-ICBHZXJkIEhvZmZtYW5uIDxrcmF4ZWxAcmVkaGF0LmNvbT4KICBHcmVnIEt1cnogPGdyb3VnQGth
-b2Qub3JnPgogIEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+CiAgSmltIFdpbHNvbiA8
-amltd0BzaWZpdmUuY29tPgogIEpvaG4gU25vdyA8anNub3dAcmVkaGF0LmNvbT4KICBKdWFuIFF1
-aW50ZWxhIDxxdWludGVsYUByZWRoYXQuY29tPgogIEtlbGx5IFByaWNlIDxzdHJyZWR3b2xmQGdt
-YWlsLmNvbT4KICBLZXZpbiBXb2xmIDxrd29sZkByZWRoYXQuY29tPgogIEtpdG8gQ2hlbmcgPGtp
-dG8uY2hlbmdAZ21haWwuY29tPgogIExhdXJlbnQgVml2aWVyIDxsdml2aWVyQHJlZGhhdC5jb20+
-CiAgTGkgUWlhbmcgPGxpcTNlYUBnbWFpbC5jb20+CiAgTGlhbSBNZXJ3aWNrIDxsaWFtLm1lcndp
-Y2tAb3JhY2xlLmNvbT4KICBMdWMgTWljaGVsIDxsdWMubWljaGVsQGdyZWVuc29jcy5jb20+CiAg
-THVrw6HFoSBEb2t0b3IgPGxkb2t0b3JAcmVkaGF0LmNvbT4KICBNYXJjLUFuZHLDqSBMdXJlYXUg
-PG1hcmNhbmRyZS5sdXJlYXVAcmVkaGF0LmNvbT4KICBNYXJrdXMgQXJtYnJ1c3RlciA8YXJtYnJ1
-QHJlZGhhdC5jb20+CiAgTWF0ZWphIE1hcmphbm92aWMgPG1hdGVqYS5tYXJqYW5vdmljQHJ0LXJr
-LmNvbT4KICBNYXR0IEhpbmVzIDxtaGluZXNAc2NhbGVjb21wdXRpbmcuY29tPgogIE1heCBGaWxp
-cHBvdiA8amNtdmJrYmNAZ21haWwuY29tPgogIE1heCBSZWl0eiA8bXJlaXR6QHJlZGhhdC5jb20+
-CiAgTWljaGFlbCBDbGFyayA8bWpjQHNpZml2ZS5jb20+CiAgTWljaGFlbCBSb3RoIDxtZHJvdGhA
-bGludXgudm5ldC5pYm0uY29tPgogIE1pY2hhZWwgUy4gVHNpcmtpbiA8bXN0QHJlZGhhdC5jb20+
-CiAgUGFsbWVyIERhYmJlbHQgPHBhbG1lckBzaWZpdmUuY29tPgogIFBhb2xvIEJvbnppbmkgPHBi
-b256aW5pQHJlZGhhdC5jb20+CiAgUGF1bCBEdXJyYW50IDxwYXVsLmR1cnJhbnRAY2l0cml4LmNv
-bT4KICBQZXRlciBNYXlkZWxsIDxwZXRlci5tYXlkZWxsQGxpbmFyby5vcmc+CiAgUGV0ZXIgWHUg
-PHBldGVyeEByZWRoYXQuY29tPgogIFBoaWxpcHBlIE1hdGhpZXUtRGF1ZMOpIDxwaGlsbWRAcmVk
-aGF0LmNvbT4KICBSaWNoYXJkIEhlbmRlcnNvbiA8cmljaGFyZC5oZW5kZXJzb25AbGluYXJvLm9y
-Zz4KICBSb2dlciBQYXUgTW9ubmUgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgogIFJvZ2VyIFBhdSBN
-b25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgogIFNhbSBFaWRlcm1hbiA8c2htdWVsLmVpZGVy
-bWFuQG9yYWNsZS5jb20+CiAgU2VyZ2lvIExvcGV6IDxzbHBAcmVkaGF0LmNvbT4KICBTaGFuIEdh
-dmluIDxzaGFuLmdhdmluQGdtYWlsLmNvbT4KICBTaG11ZWwgRWlkZXJtYW4gPHNobXVlbC5laWRl
-cm1hbkBvcmFjbGUuY29tPgogIFNpbmdoLCBCcmlqZXNoIDxicmlqZXNoLnNpbmdoQGFtZC5jb20+
-CiAgU3RlZmFuIEhham5vY3ppIDxzdGVmYW5oYUByZWRoYXQuY29tPgogIFN0ZWZhbm8gR2FyemFy
-ZWxsYSA8c2dhcnphcmVAcmVkaGF0LmNvbT4KICBTdXJhaiBKaXRpbmRhciBTaW5naCA8c2ppdGlu
-ZGFyc2luZ2hAZ21haWwuY29tPgogIFRob21hcyBIdXRoIDx0aHV0aEByZWRoYXQuY29tPgogIFZs
-YWRpbWlyIFNlbWVudHNvdi1PZ2lldnNraXkgPHZzZW1lbnRzb3ZAdmlydHVvenpvLmNvbT4KICBX
-YWluZXIgZG9zIFNhbnRvcyBNb3NjaGV0dGEgPHdhaW5lcnNtQHJlZGhhdC5jb20+CiAgeXVjaGVu
-bGluIDx5dWNoZW5saW5Ac3lub2xvZ3kuY29tPgogIFpoYW5nIENoZW4gPGNoZW4uemhhbmdAaW50
-ZWwuY29tPgoKam9iczoKIGJ1aWxkLWFtZDY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1pMzg2LXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogYnVpbGQtYXJtNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2
-aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3Bz
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtYW1kNjQteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14
-bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQt
-eHNtICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFu
-aHZtLWFtZDY0LXhzbSAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWxpYnZpcnQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtNjQtYXJtNjQtbGlidmlydC14c20gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBi
-bG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cHZodjItYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAg
-ICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0t
-YW1kNjQgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LWZyZWVi
-c2QxMC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWFtZDY0LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAg
-ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
-dXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3Jl
-ZGl0MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02
-NC1hcm02NC14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2Nr
-ZWQgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVk
-aXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybWhm
-LWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kbXJlc3RyaWN0LWFt
-ZDY0LWRtcmVzdHJpY3QgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
-ZG1yZXN0cmljdC1hbWQ2NC1kbXJlc3RyaWN0ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni1mcmVlYnNkMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAg
-ICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luMTAtaTM4NiAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcWVtdXUtbmVz
-dGVkLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC14bC1wdmh2Mi1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXBhaXIgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4
-Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtYW1kNjQtcHZncnVi
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1weWdydWIgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXJ0ZHMgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYt
-eGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93ICAgICAgICAgICAg
-IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRv
-dyAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtc2hhZG93ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhs
-LXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3Qu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczogL2hv
-bWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0
-CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MKCkV4
-cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWwsIGlz
-IGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJs
-b2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dp
-dHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhhcm5l
-c3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2Vi
-P3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFybTY0IGJyb2tlbgpi
-cm9rZW4tam9iIGJ1aWxkLWFybTY0LXB2b3BzIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFybTY0
-LXhzbSBicm9rZW4KYnJva2VuLXN0ZXAgYnVpbGQtYXJtNjQteHNtIGhvc3QtaW5zdGFsbCg0KQpi
-cm9rZW4tc3RlcCBidWlsZC1hcm02NCBob3N0LWluc3RhbGwoNCkKYnJva2VuLXN0ZXAgYnVpbGQt
-YXJtNjQtcHZvcHMgaG9zdC1pbnN0YWxsKDQpCmJyb2tlbi1qb2IgYnVpbGQtYXJtNjQtcHZvcHMg
-YnJva2VuCmJyb2tlbi1qb2IgYnVpbGQtYXJtNjQteHNtIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxk
-LWFybTY0IGJyb2tlbgoKTm90IHB1c2hpbmcuCgooTm8gcmV2aXNpb24gbG9nOyBpdCB3b3VsZCBi
-ZSAzOTg5IGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--===============5283422340906242356==
+Content-Type: multipart/alternative; boundary="000000000000ba8e3705859ac3ef"
+
+--000000000000ba8e3705859ac3ef
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello Julien Grall
+
+thank you for your replied,  you have clarified many of my doubts.
+
+I have been implementing some basic functionality for the PMU :
+
+Here small description:
+
+   - getpmuinfo_attr :                             /* @brief  get PMU info,
+   including number of Counters, and control counters */
+   - enable_all_pmu_counters:              /* @brief  Enable the cycle
+   counter register PMCCNTR_EL0, and any implemented event counter
+   PMEVCNTR<n>_EL0 */
+   - disable_all_pmu_counters              /* @brief  Disable the cycle
+   counter register PMCCNTR_EL0, and any implemented event counter
+   PMEVCNTR<n>_EL0. */
+   - reset_all_pmu_counters                  /* @brief  Reset the cycle
+   counter register PMCCNTR_EL0,  and any implemented event counter
+   PMEVCNTR<n>_EL0.*/
+   - enable_user_pmu_access              /* @brief  Enable user-mode access
+   to counters.*/
+
+I think these can be used as primitives for XEN:
+
+Now I have some additional questions about XEN:
+
+   - how can I include that primitives as a driver for ARM64 in XEN?
+
+I've noticed that in linux kernel 4.14 - 4.15  $SOURCE/drivers/perf :
+
+   - there is and implementation for arm_pmu  which is far better than what
+   I've implemented, is it hard to import that driver to XEN ?
+   - again how can I include that primitives as a driver for ARM64 in XEN?
+   - PMU is implemented for each CPU so how to deal with that?
+
+if you answer these questions will be really useful for me.
+thank you.
+BR
+Diego.
+
+
+
+
+
+
+
+On Fri, 22 Mar 2019 at 15:17, Julien Grall <julien.grall@arm.com> wrote:
+
+>
+>
+> On 22/03/2019 07:25, Diego Alejandro Parra Guzman wrote:
+> > HI Everyone
+>
+> Hi Diego,
+>
+> > My name is diego. I'm very interesting in extend the XenOprof to ARM64
+> based
+> > architectures, and also integrate some tools for hypervisor and
+> application
+> > profiling and performance evaluation.
+> >
+> > I read the documentation for Oprofile a perf which is in the wiki page
+> and I
+> > noticed that XEN doesn't support ARM64 architectures.  For this reason =
+I
+> have
+> > two ideas.
+>
+> Thank you for your interest to add perf support in Xen on Arm.
+>
+> >
+> > 1. Add support for ARM64 architectures to XenOprof  in its current
+> implementation.
+> >
+> > 2. I found an interesting library called libpfm4 which also work with
+> > perf_event, and support ARM64 and ARM32 architectures. Well I can tray
+> to use
+> > this library in order to profile DOM0 and DOMU-VP guest.
+> >
+> > Personally I prefer the option 2 since the  library currently works in
+> normal
+> > linux OS and I guest could be easy to replicate it on XEN.
+> >
+> > Approaches:
+> >
+> > (hypercalls) from DOM0-DOMU to xen
+> >
+> > (direct pass through from DOM0 to PMU counters), and VPMU in DOMU .
+>
+> I think there are two (more or less distinct) use cases to take into
+> account:
+>    1) A guest profiling itself
+>    2) The hypervisor profiling the system (i.e guests and itself).
+>
+>  From my understanding, the latter is implemented using XenOprof. For the
+> former, then giving direct access to the PMU counters is probably a bette=
+r
+> approach over a PV solution.
+>
+> >
+> > Here my questions?
+> >
+> > I would like to know if currently DOM0 and DOMU have support to
+> perf_event
+> > i.e., they can read directly performance monitoring unit (PMU) counters=
+,
+> only
+> > DOM0 or none of them?
+>
+> Currently, there are no PMU support for Dom0 and DomU.
+>
+> >
+> > should I implement some traps in XEN hypervisor ?
+>
+> The registers are already trapped (see arch/arm64/vsysregs.c) and
+> implemented as
+> a NOP for now. Depending on your use case, then trapping the registers ma=
+y
+> not
+> be necessary (see more below).
+>
+> >
+> > someone  currently  is working on this?
+>
+> I am not aware of anyone working on it so far.
+>
+> >
+> > Which is the most efficient way to implement it ?
+>
+> I haven't fully thought through. The two use cases I mentioned above are
+> quite
+> distinct in term of implementation. It would probably be easy to implemen=
+t
+> them
+> separately, but would require more thoughts if you want to handle the bot=
+h
+> at
+> the same time.
+>
+> In the case of guest profiling itself, then I think you could just disabl=
+e
+> the
+> traps and context switch the registers. You will also need to forward the
+> PMU
+> interrupts (such as the overflow one) to the domains. For accuracy, you
+> may also
+> need to enable/disable PMU counters (see PMCR_EL0) on each traps so you
+> don't
+> count events in the hypervisor. Unless there are a way to ignore events
+> when at
+> running at EL2 (I haven't explored the spec yet).
+>
+> In the case of the hypervisor profiling system, you would need to
+> implement a
+> PMU drivers in Xen. I don't know much about xenoprofile to be able to giv=
+e
+> more
+> details here.
+>
+> >
+> > There is a guide line to do this easily?
+> I am afraid there are no silver bullet. You would need to read the ARM AR=
+M
+> section about the PMU and look at the xenoprofile code. I would be happy
+> to
+> answer any specific question if you are not understand some part of the
+> code.
+>
+> Cheers,
+>
+> --
+> Julien Grall
+>
+
+
+--=20
+Diego Alejandro Parra Guzm=C3=A1n
+Estudiante de ingenier=C3=ADa electr=C3=B3nica
+Universidad distrital FJC
+
+--000000000000ba8e3705859ac3ef
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div di=
+r=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"lt=
+r"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div dir=3D"ltr"><div=
+><h3 class=3D"m_-6486577282910761618gmail-iw" style=3D"overflow:hidden;whit=
+e-space:nowrap;font-size:0.75rem;font-weight:inherit;margin:inherit;text-ov=
+erflow:ellipsis;font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;l=
+etter-spacing:0.3px;color:rgb(95,99,104);line-height:20px"><span class=3D"m=
+_-6486577282910761618gmail-qu" style=3D"outline:none"><span name=3D"Julien =
+Grall" class=3D"m_-6486577282910761618gmail-gD" style=3D"color:rgb(32,33,36=
+);font-size:0.875rem;font-weight:bold;display:inline;vertical-align:top;let=
+ter-spacing:0.2px;line-height:20px">Hello Julien Grall</span></span></h3></=
+div><div><br></div>thank you for your replied,=C2=A0 you have clarified man=
+y of my doubts.=C2=A0<div><br></div><div>I have been implementing some basi=
+c functionality for the PMU :=C2=A0</div><div><br></div><div>Here small des=
+cription:=C2=A0</div><div><ul><li>getpmuinfo_attr :=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0/* @brief=C2=A0 get PMU info, including number of Counters, and contr=
+ol counters */<br></li><li>enable_all_pmu_counters:=C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 /* @brief=C2=A0 Enable the cycle counter register =
+PMCCNTR_EL0, and any implemented event counter PMEVCNTR&lt;n&gt;_EL0 */=C2=
+=A0=C2=A0<br></li><li>disable_all_pmu_counters=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0
+
+/* @brief=C2=A0 Disable the cycle counter register PMCCNTR_EL0,=C2=A0and an=
+y implemented event counter PMEVCNTR&lt;n&gt;_EL0. */=C2=A0=C2=A0=C2=A0=C2=
+=A0<br></li><li>reset_all_pmu_counters=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 /* @brief=C2=A0 Reset the cycle counter registe=
+r PMCCNTR_EL0,=C2=A0=C2=A0and any implemented event counter PMEVCNTR&lt;n&g=
+t;_EL0.*/=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0</li><li>enable_user_pmu_access=C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* @brief=C2=A0 Enable user-m=
+ode access to counters.*/=C2=A0=C2=A0</li></ul><div>I think these can be us=
+ed as primitives for XEN:=C2=A0</div><div><br></div>Now I have some additio=
+nal questions about XEN:</div><div><ul><li>how can I include that primitive=
+s as a driver for ARM64 in XEN?</li></ul>I&#39;ve noticed that in linux ker=
+nel 4.14 - 4.15=C2=A0 $SOURCE/drivers/perf :</div><div><ul><li>there is and=
+ implementation for arm_pmu=C2=A0 which is far better than what I&#39;ve im=
+plemented, is it hard to import that driver to XEN ?</li><li>again how can =
+I include that primitives as a driver for ARM64 in XEN?</li><li>PMU is impl=
+emented for each CPU so how to deal with that?</li></ul>if you answer these=
+ questions will be really useful for me.=C2=A0</div><div>thank you.</div><d=
+iv>BR</div><div>Diego.=C2=A0</div><div><br></div><div><br></div><div>=C2=A0=
+ =C2=A0 =C2=A0<br></div><div><br></div><div><br></div><div><br></div></div>=
+</div></div></div></div></div></div></div></div></div></div></div></div><br=
+><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, 2=
+2 Mar 2019 at 15:17, Julien Grall &lt;<a href=3D"mailto:julien.grall@arm.co=
+m" target=3D"_blank">julien.grall@arm.com</a>&gt; wrote:<br></div><blockquo=
+te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
+solid rgb(204,204,204);padding-left:1ex"><br>
+<br>
+On 22/03/2019 07:25, Diego Alejandro Parra Guzman wrote:<br>
+&gt; HI Everyone<br>
+<br>
+Hi Diego,<br>
+<br>
+&gt; My name is diego. I&#39;m very interesting in extend the XenOprof to A=
+RM64 based <br>
+&gt; architectures, and also integrate some tools for hypervisor and applic=
+ation <br>
+&gt; profiling and performance evaluation.<br>
+&gt; <br>
+&gt; I read the documentation for Oprofile a perf which is in the wiki page=
+ and I <br>
+&gt; noticed that XEN doesn&#39;t support ARM64 architectures.=C2=A0 For th=
+is reason I have <br>
+&gt; two ideas.<br>
+<br>
+Thank you for your interest to add perf support in Xen on Arm.<br>
+<br>
+&gt; <br>
+&gt; 1. Add support for ARM64 architectures to XenOprof=C2=A0 in its curren=
+t implementation.<br>
+&gt; <br>
+&gt; 2. I found an interesting library called libpfm4 which also work with =
+<br>
+&gt; perf_event, and support ARM64 and ARM32 architectures. Well I can tray=
+ to use <br>
+&gt; this library in order to profile DOM0 and DOMU-VP guest.<br>
+&gt; <br>
+&gt; Personally I prefer the option 2 since the=C2=A0 library currently wor=
+ks in normal <br>
+&gt; linux OS and I guest could be easy to replicate it on XEN.<br>
+&gt; <br>
+&gt; Approaches:<br>
+&gt; <br>
+&gt; (hypercalls) from DOM0-DOMU to xen<br>
+&gt; <br>
+&gt; (direct pass through from DOM0 to PMU counters), and VPMU in DOMU .<br=
+>
+<br>
+I think there are two (more or less distinct) use cases to take into accoun=
+t:<br>
+=C2=A0 =C2=A01) A guest profiling itself<br>
+=C2=A0 =C2=A02) The hypervisor profiling the system (i.e guests and itself)=
+.<br>
+<br>
+=C2=A0From my understanding, the latter is implemented using XenOprof. For =
+the <br>
+former, then giving direct access to the PMU counters is probably a better =
+<br>
+approach over a PV solution.<br>
+<br>
+&gt; <br>
+&gt; Here my questions?<br>
+&gt; <br>
+&gt; I would like to know if currently DOM0 and DOMU have support to=C2=A0 =
+perf_event <br>
+&gt; i.e., they can read directly performance monitoring unit (PMU) counter=
+s, only <br>
+&gt; DOM0 or none of them?<br>
+<br>
+Currently, there are no PMU support for Dom0 and DomU.<br>
+<br>
+&gt; <br>
+&gt; should I implement some traps in XEN hypervisor ?<br>
+<br>
+The registers are already trapped (see arch/arm64/vsysregs.c) and implement=
+ed as <br>
+a NOP for now. Depending on your use case, then trapping the registers may =
+not <br>
+be necessary (see more below).<br>
+<br>
+&gt; <br>
+&gt; someone=C2=A0 currently=C2=A0 is working on this?<br>
+<br>
+I am not aware of anyone working on it so far.<br>
+<br>
+&gt; <br>
+&gt; Which is the most efficient way to implement it ?<br>
+<br>
+I haven&#39;t fully thought through. The two use cases I mentioned above ar=
+e quite <br>
+distinct in term of implementation. It would probably be easy to implement =
+them <br>
+separately, but would require more thoughts if you want to handle the both =
+at <br>
+the same time.<br>
+<br>
+In the case of guest profiling itself, then I think you could just disable =
+the <br>
+traps and context switch the registers. You will also need to forward the P=
+MU <br>
+interrupts (such as the overflow one) to the domains. For accuracy, you may=
+ also <br>
+need to enable/disable PMU counters (see PMCR_EL0) on each traps so you don=
+&#39;t <br>
+count events in the hypervisor. Unless there are a way to ignore events whe=
+n at <br>
+running at EL2 (I haven&#39;t explored the spec yet).<br>
+<br>
+In the case of the hypervisor profiling system, you would need to implement=
+ a <br>
+PMU drivers in Xen. I don&#39;t know much about xenoprofile to be able to g=
+ive more <br>
+details here.<br>
+<br>
+&gt; <br>
+&gt; There is a guide line to do this easily?<br>
+I am afraid there are no silver bullet. You would need to read the ARM ARM =
+<br>
+section about the PMU and look at the xenoprofile code. I would be happy to=
+ <br>
+answer any specific question if you are not understand some part of the cod=
+e.<br>
+<br>
+Cheers,<br>
+<br>
+-- <br>
+Julien Grall<br>
+</blockquote></div><br clear=3D"all"><div><br></div>-- <br><div dir=3D"ltr"=
+ class=3D"gmail-m_-6486577282910761618gmail_signature">Diego Alejandro Parr=
+a Guzm=C3=A1n<br>Estudiante de ingenier=C3=ADa electr=C3=B3nica<br>Universi=
+dad distrital FJC<br></div>
+
+--000000000000ba8e3705859ac3ef--
+
+
+--===============5283422340906242356==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5283422340906242356==--
