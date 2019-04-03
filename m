@@ -1,20 +1,21 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
+From: Wei Liu <wei.liu2@citrix.com>
 Subject: Re: [PATCH] automation: Add a Arch Linux dockerfile
-Date: Wed, 3 Apr 2019 17:26:45 +0100
-Message-ID: <20190403162645.GJ1420@perard.uk.xensource.com>
+Date: Wed, 3 Apr 2019 17:28:48 +0100
+Message-ID: <20190403162848.GC14641@zion.uk.xensource.com>
 References: <20190403160517.28659-1-anthony.perard@citrix.com>
  <20190403161910.GB15054@zion.uk.xensource.com>
+ <20190403162645.GJ1420@perard.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=SsUi=SF=citrix.com=prvs=9892a3524=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1hBiiv-0006cX-4y
- for xen-devel@lists.xenproject.org; Wed, 03 Apr 2019 16:26:49 +0000
+ <SRS0=+Rv1=SF=citrix.com=prvs=9892ef700=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hBil8-0006kK-8x
+ for xen-devel@lists.xenproject.org; Wed, 03 Apr 2019 16:29:06 +0000
 Content-Disposition: inline
-In-Reply-To: <20190403161910.GB15054@zion.uk.xensource.com>
+In-Reply-To: <20190403162645.GJ1420@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,21 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Doug Goldstein <cardoe@cardoe.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBBcHIgMDMsIDIwMTkgYXQgMDU6MTk6MTBQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
-PiBPbiBXZWQsIEFwciAwMywgMjAxOSBhdCAwNTowNToxN1BNICswMTAwLCBBbnRob255IFBFUkFS
-RCB3cm90ZToKPiA+IFNpZ25lZC1vZmYtYnk6IEFudGhvbnkgUEVSQVJEIDxhbnRob255LnBlcmFy
-ZEBjaXRyaXguY29tPgo+IAo+IEhhdmUgeW91IHB1c2hlZCB0aGUgY29udGFpbmVyIHRvIHhlbiBw
-cm9qZWN0J3MgcmVnaXN0cnk/IElmIHNvLCBjYW4geW91CgpJIGhhdmVuJ3QsIG5vLgoKPiBjb25m
-aXJtIGl0IHJ1bnMgb2s/CgpJdCB3b3JrcyBmb3IgbWUgOi0pLiBZb3UnbGwgaGF2ZSB0byBtYWtl
-IHlvdSBvd24gdGVzdHMsIEkgZG9uJ3Qga25vdyBob3cKdGhlIGltYWdlIGlzIHN1cHBvc2VkIHRv
-IGJlIHVzZWQuCgpJJ3ZlIG9ubHkgcnVubmVkIHRoZSBmb2xsb3dpbmcgaW4gYSB4ZW4gd29ya3Ry
-ZWU6CmRvY2tlciBydW4gLXYgYHB3ZGA6L2J1aWxkOnJ3IC10aSAtLXJtIC0tIHJlZ2lzdHJ5Lmdp
-dGxhYi5jb20veGVuLXByb2plY3QveGVuL2FyY2hsaW51eDpjdXJyZW50IGJhc2ggLWMgJy4vY29u
-ZmlndXJlICYmIG1ha2UnCgotLSAKQW50aG9ueSBQRVJBUkQKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBBcHIgMDMsIDIwMTkgYXQgMDU6MjY6NDVQTSArMDEwMCwgQW50aG9ueSBQRVJBUkQg
+d3JvdGU6Cj4gT24gV2VkLCBBcHIgMDMsIDIwMTkgYXQgMDU6MTk6MTBQTSArMDEwMCwgV2VpIExp
+dSB3cm90ZToKPiA+IE9uIFdlZCwgQXByIDAzLCAyMDE5IGF0IDA1OjA1OjE3UE0gKzAxMDAsIEFu
+dGhvbnkgUEVSQVJEIHdyb3RlOgo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBBbnRob255IFBFUkFSRCA8
+YW50aG9ueS5wZXJhcmRAY2l0cml4LmNvbT4KPiA+IAo+ID4gSGF2ZSB5b3UgcHVzaGVkIHRoZSBj
+b250YWluZXIgdG8geGVuIHByb2plY3QncyByZWdpc3RyeT8gSWYgc28sIGNhbiB5b3UKPiAKPiBJ
+IGhhdmVuJ3QsIG5vLgo+IAo+ID4gY29uZmlybSBpdCBydW5zIG9rPwo+IAo+IEl0IHdvcmtzIGZv
+ciBtZSA6LSkuIFlvdSdsbCBoYXZlIHRvIG1ha2UgeW91IG93biB0ZXN0cywgSSBkb24ndCBrbm93
+IGhvdwo+IHRoZSBpbWFnZSBpcyBzdXBwb3NlZCB0byBiZSB1c2VkLgo+IAoKT2gsIHlvdSBjYW4g
+YyZwIGFuIGVudHJ5IGZyb20gYXV0b21hdGlvbi9naXRsYWItY2kvYnVpbGQueWFtbAoKV2VpLgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
