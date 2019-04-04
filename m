@@ -1,19 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/3] x86/sysctl: Clean up
- XEN_SYSCTL_cpu_hotplug
-Date: Thu, 4 Apr 2019 14:31:18 +0100
-Message-ID: <7c6bf7b6-3b4a-6b9d-6fe4-694f9d595025@citrix.com>
-References: <1554235048-3373-1-git-send-email-andrew.cooper3@citrix.com>
- <1554235048-3373-3-git-send-email-andrew.cooper3@citrix.com>
- <5CA474A5020000780022428C@prv1-mh.provo.novell.com>
- <096706af-4199-b028-caf5-9c4a73ed4228@citrix.com>
- <5CA47EFD02000078002242E6@prv1-mh.provo.novell.com>
+From: Pu Wen <puwen@hygon.cn>
+Subject: [PATCH v5 02/15] x86/cpu: Fix common cpuid faulting
+ probing for AMD and Hygon
+Date: Thu, 4 Apr 2019 21:45:42 +0800
+Message-ID: <1a5980e4c873b562ef23c84117f0daa5ad42b122.1554382869.git.puwen@hygon.cn>
+References: <cover.1554382869.git.puwen@hygon.cn>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <5CA47EFD02000078002242E6@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=2cXD=SG=hygon.cn=puwen@srs-us1.protection.inumbo.net>)
+ id 1hC2kA-0007GM-Q9
+ for xen-devel@lists.xenproject.org; Thu, 04 Apr 2019 13:49:26 +0000
+In-Reply-To: <cover.1554382869.git.puwen@hygon.cn>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,31 +22,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Pu Wen <puwen@hygon.cn>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMDQvMjAxOSAxMDozOCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMDMuMDQuMTkg
-YXQgMTE6MDYsIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiB3cm90ZToKPj4gT24gMDMvMDQv
-MjAxOSAwOTo1MywgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4+PiBPbiAwMi4wNC4xOSBhdCAyMTo1
-NywgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+Pj4+IC0tLSBhL3hlbi9hcmNo
-L3g4Ni9zeXNjdGwuYwo+Pj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9zeXNjdGwuYwo+Pj4+IEBAIC0x
-MzcsMjcgKzEzNywzNSBAQCBsb25nIGFyY2hfZG9fc3lzY3RsKAo+Pj4+ICAgICAgY2FzZSBYRU5f
-U1lTQ1RMX2NwdV9ob3RwbHVnOgo+Pj4+ICAgICAgewo+Pj4+ICAgICAgICAgIHVuc2lnbmVkIGlu
-dCBjcHUgPSBzeXNjdGwtPnUuY3B1X2hvdHBsdWcuY3B1Owo+Pj4+ICsgICAgICAgIGJvb2wgcGx1
-ZzsKPj4+PiArICAgICAgICBsb25nICgqZm4pKHZvaWQgKikgPSBOVUxMOwo+Pj4+ICsgICAgICAg
-IHZvaWQgKmhjcHUgPSBOVUxMOwo+Pj4gTWF5IEkgYXNrIHRoYXQgeW91IGNvbnNpc3RlbnRseSBp
-bml0aWFsaXplIChvciBub3QpIGFsbCB0aHJlZSBuZXcKPj4+IHZhcmlhYmxlcyB5b3UgaW50cm9k
-dWNlPwo+PiBJIG5vdGljZWQgdGhpcyB3aGlsZSBwb3N0aW5nLiAgTm90IHdvdWxkIGFsbG93IHRo
-ZSBjb21waWxlciB0byBub3RpY2UKPj4gd2hlbiBmbiB3YXNuJ3Qgc2VsZWN0ZWQsIGJ1dCBodmNw
-dSBpcyBnb2luZyB0byBlbmQgdXAgd2l0aCBhbgo+PiBpbml0aWFsaXNlciBieSB0aGUgbmV4dCBw
-YXRjaC4KPiBSaWdodCwgSSd2ZSBub3RpY2VkIHRoZSBuZWVkIGZvciBoY3B1IHRvIHN0YXkgYXMg
-aXMgd2hpbGUgbG9va2luZyBhdAo+IHBhdGNoIDMuIEJlZm9yZSB5b3UgcmVtb3ZlIHRoZSBvdGhl
-ciBpbml0aWFsaXplciwgdGhvdWdoIC0gYXJlIHlvdQo+IHN1cmUgeW91IGRvbid0IG5lZWQgdG8g
-aW5zdGVhZCBhZGQgb25lLCBmb3Igb2xkZXIgZ2NjIHRvIG5vdCBjaG9rZT8KCkNJIGlzIGhhcHB5
-CgpodHRwczovL2dpdGxhYi5jb20veGVuLXByb2plY3QvcGVvcGxlL2FuZHloaHAveGVuL3BpcGVs
-aW5lcy81NTIxMTkyNgoKKFRoaXMgaXMgc3BlY2lmaWNhbGx5IHdoeSBJIGFkZGVkIHRoZSBDZW50
-T1MgNiBidWlsZCkKCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
-b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
-ZW4tZGV2ZWw=
+VGhlcmUgaXMgbm8gTVNSX0lOVEVMX1BMQVRGT1JNX0lORk8gZm9yIEFNRCBhbmQgSHlnb24gZmFt
+aWxpZXMuIFJlYWQKdGhpcyBNU1Igd2lsbCBzdG9wIHRoZSBYZW4gaW5pdGlhbGl6YXRpb24gcHJv
+Y2VzcyBpbiBzb21lIEh5Z29uCnN5c3RlbXMgb3IgcHJvZHVjZSBHUEYoMCkuIFNvIGRpcmVjdGx5
+IHJldHVybiBmYWxzZSBpbiB0aGUgZnVuY3Rpb24KcHJvYmVfY3B1aWRfZmF1bHRpbmcoKSBpZiAh
+Y3B1X2hhc19oeXBlcnZpc29yLgoKU2lnbmVkLW9mZi1ieTogUHUgV2VuIDxwdXdlbkBoeWdvbi5j
+bj4KQWNrZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KLS0tCiB4ZW4vYXJj
+aC94ODYvY3B1L2NvbW1vbi5jIHwgNSArKysrKwogMSBmaWxlIGNoYW5nZWQsIDUgaW5zZXJ0aW9u
+cygrKQoKZGlmZiAtLWdpdCBhL3hlbi9hcmNoL3g4Ni9jcHUvY29tbW9uLmMgYi94ZW4vYXJjaC94
+ODYvY3B1L2NvbW1vbi5jCmluZGV4IDc0Yzk0MjYuLjFhMDk1ZmMgMTAwNjQ0Ci0tLSBhL3hlbi9h
+cmNoL3g4Ni9jcHUvY29tbW9uLmMKKysrIGIveGVuL2FyY2gveDg2L2NwdS9jb21tb24uYwpAQCAt
+MTE2LDYgKzExNiwxMSBAQCBib29sIF9faW5pdCBwcm9iZV9jcHVpZF9mYXVsdGluZyh2b2lkKQog
+CXVpbnQ2NF90IHZhbDsKIAlpbnQgcmM7CiAKKwlpZiAoKGJvb3RfY3B1X2RhdGEueDg2X3ZlbmRv
+ciA9PSBYODZfVkVORE9SX0hZR09OIHx8CisJICAgICBib290X2NwdV9kYXRhLng4Nl92ZW5kb3Ig
+PT0gWDg2X1ZFTkRPUl9BTUQpICYmCisJICAgICFjcHVfaGFzX2h5cGVydmlzb3IpCisJCXJldHVy
+biBmYWxzZTsKKwogCWlmICgocmMgPSByZG1zcl9zYWZlKE1TUl9JTlRFTF9QTEFURk9STV9JTkZP
+LCB2YWwpKSA9PSAwKQogCQlyYXdfbXNyX3BvbGljeS5wbGFmb3JtX2luZm8uY3B1aWRfZmF1bHRp
+bmcgPQogCQkJdmFsICYgTVNSX1BMQVRGT1JNX0lORk9fQ1BVSURfRkFVTFRJTkc7Ci0tIAoyLjcu
+NAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
+ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
+bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
