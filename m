@@ -1,20 +1,17 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] xen: use struct_size() helper in kzalloc()
-Date: Fri, 5 Apr 2019 08:48:12 +0200
-Message-ID: <ae3a31f9-d254-fd68-2257-2337fbfefa70__8847.48342666484$1554446947$gmane$org@suse.com>
-References: <20190403052636.GC21532@xps-13>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH] AMD/IOMMU: don't open-code for_each_amd_iommu()
+Date: Fri, 05 Apr 2019 01:01:04 -0600
+Message-ID: <5CA6FD300200007800224C43@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=AWOr=SH=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hCIe8-0000P0-O4
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 06:48:16 +0000
-In-Reply-To: <20190403052636.GC21532@xps-13>
-Content-Language: de-DE
+ (envelope-from <SRS0=KiBs=SH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hCIqb-00020y-5b
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 07:01:09 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,16 +20,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrea Righi <andrea.righi@canonical.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDMvMDQvMjAxOSAwNzoyNiwgQW5kcmVhIFJpZ2hpIHdyb3RlOgo+IHN0cnVjdCBwcml2Y21k
-X2J1Zl92bWFfcHJpdmF0ZSBoYXMgYSB6ZXJvLXNpemVkIGFycmF5IGF0IHRoZSBlbmQKPiAocGFn
-ZXMpLCB1c2UgdGhlIG5ldyBzdHJ1Y3Rfc2l6ZSgpIGhlbHBlciB0byBkZXRlcm1pbmUgdGhlIHBy
-b3Blcgo+IGFsbG9jYXRpb24gc2l6ZSBhbmQgYXZvaWQgcG90ZW50aWFsIHR5cGUgbWlzdGFrZXMu
-Cj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmVhIFJpZ2hpIDxhbmRyZWEucmlnaGlAY2Fub25pY2Fs
-LmNvbT4KClB1c2hlZCB0byB4ZW4vdGlwLmdpdCBmb3ItbGludXMtNS4xYgoKCkp1ZXJnZW4KCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+U2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKLS0tIGEveGVu
+L2RyaXZlcnMvcGFzc3Rocm91Z2gvYW1kL2lvbW11X2ludHIuYworKysgYi94ZW4vZHJpdmVycy9w
+YXNzdGhyb3VnaC9hbWQvaW9tbXVfaW50ci5jCkBAIC01MDMsNyArNTAzLDcgQEAgc3RhdGljIHN0
+cnVjdCBhbWRfaW9tbXUgKl9maW5kX2lvbW11X2ZvcgogewogICAgIHN0cnVjdCBhbWRfaW9tbXUg
+KmlvbW11OwogCi0gICAgbGlzdF9mb3JfZWFjaF9lbnRyeSAoIGlvbW11LCAmYW1kX2lvbW11X2hl
+YWQsIGxpc3QgKQorICAgIGZvcl9lYWNoX2FtZF9pb21tdSAoIGlvbW11ICkKICAgICAgICAgaWYg
+KCBpb21tdS0+c2VnID09IHNlZyAmJiBpb21tdS0+YmRmID09IGJkZiApCiAgICAgICAgICAgICBy
+ZXR1cm4gTlVMTDsKIAoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
