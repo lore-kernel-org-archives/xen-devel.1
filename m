@@ -1,20 +1,20 @@
-From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
-Subject: [PATCH v2 2/3] x86/mm: Introduce
- altp2m_set_entry_by_page_order
-Date: Fri, 5 Apr 2019 13:25:40 +0000
-Message-ID: <20190405132521.6630-2-aisaila@bitdefender.com>
-References: <20190405132521.6630-1-aisaila@bitdefender.com>
+From: =?UTF-8?Q?Lukas_J=c3=bcnger?= <lukas.juenger@ice.rwth-aachen.de>
+Subject: Re: [PATCH] arm/dom0: Add check for maximum number of
+ supported vGIC IRQs
+Date: Fri, 5 Apr 2019 15:54:32 +0200
+Message-ID: <d15820dc-5a8d-418b-820f-638453c70878@rwthex-w1-a.rwth-ad.de>
+References: <50fee047-6463-4524-9449-51555ed59277@rwthex-w1-a.rwth-ad.de>
+ <a253ffd9-c71f-ccd5-1d65-5b6a0116d7e9@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3726549670274523185=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=xMyJ=SH=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1hCOqn-0001gr-ED
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 13:25:45 +0000
-In-Reply-To: <20190405132521.6630-1-aisaila@bitdefender.com>
-Content-Language: en-US
+ <SRS0=0G5W=SH=ice.rwth-aachen.de=lukas.juenger@srs-us1.protection.inumbo.net>)
+ id 1hCPIm-0004Fm-TP
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 13:54:40 +0000
+In-Reply-To: <a253ffd9-c71f-ccd5-1d65-5b6a0116d7e9@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,61 +23,229 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: "tamas@tklengyel.com" <tamas@tklengyel.com>, "wei.liu2@citrix.com" <wei.liu2@citrix.com>, "rcojocaru@bitdefender.com" <rcojocaru@bitdefender.com>, "george.dunlap@eu.citrix.com" <george.dunlap@eu.citrix.com>, "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>, "jbeulich@suse.com" <jbeulich@suse.com>, Alexandru Stefan ISAILA <aisaila@bitdefender.com>, "roger.pau@citrix.com" <roger.pau@citrix.com>
+To: Julien Grall <julien.grall@arm.com>, Lukas Juenger <juenger@ice.rwth-aachen.de>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBwYXRjaCBtb3ZlcyBjb21tb24gY29kZSBmcm9tIHAybV9zZXRfYWx0cDJtX21lbV9hY2Nl
-c3MoKSBhbmQKcDJtX2NoYW5nZV9hbHRwMm1fZ2ZuKCkgaW50byBvbmUgZnVuY3Rpb24KClNpZ25l
-ZC1vZmYtYnk6IEFsZXhhbmRydSBJc2FpbGEgPGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPgotLS0K
-IHhlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNzLmMgfCAgNyArKy0tLS0tCiB4ZW4vYXJjaC94ODYv
-bW0vcDJtLmMgICAgICAgIHwgMTIgKystLS0tLS0tLS0tCiB4ZW4vaW5jbHVkZS9hc20teDg2L3Ay
-bS5oICAgIHwgMTEgKysrKysrKysrKysKIDMgZmlsZXMgY2hhbmdlZCwgMTUgaW5zZXJ0aW9ucygr
-KSwgMTUgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL21lbV9hY2Nl
-c3MuYyBiL3hlbi9hcmNoL3g4Ni9tbS9tZW1fYWNjZXNzLmMKaW5kZXggNjA4Zjc0OGE1Ny4uYTI2
-NzI3ZGZlZSAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L21tL21lbV9hY2Nlc3MuYworKysgYi94
-ZW4vYXJjaC94ODYvbW0vbWVtX2FjY2Vzcy5jCkBAIC0yNzUsMTEgKzI3NSw4IEBAIGludCBwMm1f
-c2V0X2FsdHAybV9tZW1fYWNjZXNzKHN0cnVjdCBkb21haW4gKmQsIHN0cnVjdCBwMm1fZG9tYWlu
-ICpocDJtLAogICAgIC8qIElmIHRoaXMgaXMgYSBzdXBlcnBhZ2UsIGNvcHkgdGhhdCBmaXJzdCAq
-LwogICAgIGlmICggcGFnZV9vcmRlciAhPSBQQUdFX09SREVSXzRLICYmIGZvdW5kX2luX2hvc3Rw
-Mm0gKQogICAgIHsKLSAgICAgICAgdW5zaWduZWQgbG9uZyBtYXNrID0gfigoMVVMIDw8IHBhZ2Vf
-b3JkZXIpIC0gMSk7Ci0gICAgICAgIGdmbl90IGdmbjIgPSBfZ2ZuKGdmbl9sICYgbWFzayk7Ci0g
-ICAgICAgIG1mbl90IG1mbjIgPSBfbWZuKG1mbl94KG1mbikgJiBtYXNrKTsKLQotICAgICAgICBy
-YyA9IGFwMm0tPnNldF9lbnRyeShhcDJtLCBnZm4yLCBtZm4yLCBwYWdlX29yZGVyLCB0LCBvbGRf
-YSwgMSk7CisgICAgICAgIHJjID0gYWx0cDJtX3NldF9lbnRyeV9ieV9wYWdlX29yZGVyKGFwMm0s
-IGdmbl9sLCBtZm4sIHBhZ2Vfb3JkZXIsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHQsIG9sZF9hKTsKICAgICAgICAgaWYgKCByYyApCiAgICAgICAgICAgICBy
-ZXR1cm4gcmM7CiAgICAgfQpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL3AybS5jIGIveGVu
-L2FyY2gveDg2L21tL3AybS5jCmluZGV4IGIyYTVjMGM0MmUuLjFmODUyNjk0ZmYgMTAwNjQ0Ci0t
-LSBhL3hlbi9hcmNoL3g4Ni9tbS9wMm0uYworKysgYi94ZW4vYXJjaC94ODYvbW0vcDJtLmMKQEAg
-LTI2NTMsMTcgKzI2NTMsOSBAQCBpbnQgcDJtX2NoYW5nZV9hbHRwMm1fZ2ZuKHN0cnVjdCBkb21h
-aW4gKmQsIHVuc2lnbmVkIGludCBpZHgsCiAKICAgICAvKiBJZiB0aGlzIGlzIGEgc3VwZXJwYWdl
-LCBjb3B5IHRoYXQgZmlyc3QgKi8KICAgICBpZiAoIHBhZ2Vfb3JkZXIgIT0gUEFHRV9PUkRFUl80
-SyAmJiBmb3VuZF9pbl9ob3N0cDJtICkKLSAgICB7Ci0gICAgICAgIGdmbl90IGdmbjsKLSAgICAg
-ICAgdW5zaWduZWQgbG9uZyBtYXNrOwotCi0gICAgICAgIG1hc2sgPSB+KCgxVUwgPDwgcGFnZV9v
-cmRlcikgLSAxKTsKLSAgICAgICAgZ2ZuID0gX2dmbihnZm5feChvbGRfZ2ZuKSAmIG1hc2spOwot
-ICAgICAgICBtZm4gPSBfbWZuKG1mbl94KG1mbikgJiBtYXNrKTsKLQotICAgICAgICBpZiAoIGFw
-Mm0tPnNldF9lbnRyeShhcDJtLCBnZm4sIG1mbiwgcGFnZV9vcmRlciwgdCwgYSwgMSkgKQorICAg
-ICAgICBpZiAoIGFsdHAybV9zZXRfZW50cnlfYnlfcGFnZV9vcmRlcihhcDJtLCBnZm5feChvbGRf
-Z2ZuKSwgbWZuLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YWdlX29yZGVyLCB0LCBhKSApCiAgICAgICAgICAgICBnb3RvIG91dDsKLSAgICB9CiAKICAgICBt
-Zm4gPSBhbHRwMm1fZ2V0X2dmbl90eXBlX2FjY2VzcyhhcDJtLCBuZXdfZ2ZuLCAmdCwgJmEsICZw
-YWdlX29yZGVyLCAmZm91bmRfaW5faG9zdHAybSk7CiAKZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRl
-L2FzbS14ODYvcDJtLmggYi94ZW4vaW5jbHVkZS9hc20teDg2L3AybS5oCmluZGV4IDQyMDY4YjRh
-ZWQuLjhhYzk0Mjc3NDMgMTAwNjQ0Ci0tLSBhL3hlbi9pbmNsdWRlL2FzbS14ODYvcDJtLmgKKysr
-IGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9wMm0uaApAQCAtNDcxLDYgKzQ3MSwxNyBAQCBzdGF0aWMg
-aW5saW5lIG1mbl90IGFsdHAybV9nZXRfZ2ZuX3R5cGVfYWNjZXNzKAogICAgIHJldHVybiBtZm47
-CiB9CiAKK3N0YXRpYyBpbmxpbmUgaW50IGFsdHAybV9zZXRfZW50cnlfYnlfcGFnZV9vcmRlcigK
-KyAgICBzdHJ1Y3QgcDJtX2RvbWFpbiAqYXAybSwgdW5zaWduZWQgbG9uZyBnZm4sICBtZm5fdCBt
-Zm4sCisgICAgdW5zaWduZWQgaW50IHBhZ2Vfb3JkZXIsIHAybV90eXBlX3QgdCwgcDJtX2FjY2Vz
-c190IGEpCit7CisgICAgdW5zaWduZWQgbG9uZyBtYXNrID0gfigoMVVMIDw8IHBhZ2Vfb3JkZXIp
-IC0gMSk7CisgICAgZ2ZuX3QgZ2ZuMiA9IF9nZm4oZ2ZuICYgbWFzayk7CisgICAgbWZuX3QgbWZu
-MiA9IF9tZm4obWZuX3gobWZuKSAmIG1hc2spOworCisgICAgcmV0dXJuIGFwMm0tPnNldF9lbnRy
-eShhcDJtLCBnZm4yLCBtZm4yLCBwYWdlX29yZGVyLCB0LCBhLCAxKTsKK30KKwogLyogU3ludGFj
-dGljIHN1Z2FyOiBtb3N0IGNhbGxlcnMgd2lsbCB1c2Ugb25lIG9mIHRoZXNlLiAqLwogI2RlZmlu
-ZSBnZXRfZ2ZuKGQsIGcsIHQpICAgICAgICAgZ2V0X2dmbl90eXBlKChkKSwgKGcpLCAodCksIFAy
-TV9BTExPQykKICNkZWZpbmUgZ2V0X2dmbl9xdWVyeShkLCBnLCB0KSAgIGdldF9nZm5fdHlwZSgo
-ZCksIChnKSwgKHQpLCAwKQotLSAKMi4xNy4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+--===============3726549670274523185==
+Content-Type: multipart/signed; protocol="application/pkcs7-signature";
+	micalg=sha-256; boundary="------------ms050903000606040805060900"
+
+--------------ms050903000606040805060900
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+On 4/1/19 1:24 PM, Julien Grall wrote:
+> Hi Lukas,
+Hi,
+>=20
+> You sent this patch twice. Is there any difference between the two?
+No, they are the same. I accidentally send it twice.
+>=20
+> On 3/27/19 7:19 AM, Lukas Juenger wrote:
+>> Xen's vGIC implementation supports a maximum number of 992 IRQ lines.
+>=20
+> NIT:=C2=A0 The correct term is Interrupt Lines.
+>=20
+>> GICv2 specification allows for 1020 IRQ lines.
+> This is common code, so we should also take into account the other GIC =
+
+> versions we support.
+>=20
+>=20
+>=20
+>> This commit adds a check for this discrepancy.
+>=20
+> Your commit message should explain why reducing to 992 Interrupts lines=
+=20
+> is fine. How about the following commit title and message?
+>=20
+> "xen/arm: Cap the number interrupts of lines for dom0
+>=20
+> Dom0 vGIC will use the same number interrupt lines as the hardware GIC.=
+=20
+> While the hardware GIC can support up to 1019 interrupt lines, the vGIC=
+=20
+> is only supporting up to 992 interrupt lines.
+>=20
+> This means Xen will not be able to boot on platform where the hardware =
+
+> GIC supports more the 992 interrupt lines.
+>=20
+> While it would make sense to increase the limits in the vGICs, this is =
+
+> not trivial because of the design choices.
+>=20
+> At the moment, only models seem to report the maximum of interrupt=20
+> lines. They also don't have any interrupt wired above the 992 limits.
+> So this would be fine to cap the interrupt for Dom0 to 992 lines.
+> "
+>=20
+>>
+>> Signed-off-by: Lukas Juenger (juenger@ice.rwth-aachen.de)
+>=20
+> We tend to encapsulate the e-mail between <...> and not (...).
+>=20
+I adapted the patch according to your suggestions above.
+>> ---
+>> =C2=A0 xen/arch/arm/setup.c | 8 +++++++-
+>> =C2=A0 1 file changed, 7 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+>> index 444857a967..37b3648a18 100644
+>> --- a/xen/arch/arm/setup.c
+>> +++ b/xen/arch/arm/setup.c
+>> @@ -888,7 +888,13 @@ void __init start_xen(unsigned long=20
+>> boot_phys_offset,
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* Create initial domain 0. */
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /* The vGIC for DOM0 is exactly emulati=
+ng the hardware GIC */
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dom0_cfg.arch.gic_version =3D XEN_DOMCT=
+L_CONFIG_GIC_NATIVE;
+>> -=C2=A0=C2=A0=C2=A0 dom0_cfg.arch.nr_spis =3D gic_number_lines() - 32;=
+
+>> +=C2=A0=C2=A0=C2=A0 /*
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 * Xen vGIC supports a maximum of 992 IRQ lin=
+es.
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 * 32 are substracted to cover local IRQs.
+>> +=C2=A0=C2=A0=C2=A0=C2=A0 */
+>> +=C2=A0=C2=A0=C2=A0 dom0_cfg.arch.nr_spis =3D min(gic_number_lines(), =
+(unsigned int)=20
+>> 992) - 32;
+>> +=C2=A0=C2=A0=C2=A0 if ( gic_number_lines() > 992 )
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 printk(XENLOG_WARNING "Max=
+imum number of vGIC IRQs=20
+>> exceeded.\n");
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dom0_cfg.max_vcpus =3D dom0_max_vcpus()=
+;
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dom0 =3D domain_create(0, &dom0_cfg, tr=
+ue);
+>>
+>=20
+> Cheers,
+>=20
+Thanks for you input,
+Lukas
+
+
+--------------ms050903000606040805060900
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Description: S/MIME Cryptographic Signature
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCC
+EL8wggUSMIID+qADAgECAgkA4wvV+K8l2YEwDQYJKoZIhvcNAQELBQAwgYIxCzAJBgNVBAYT
+AkRFMSswKQYDVQQKDCJULVN5c3RlbXMgRW50ZXJwcmlzZSBTZXJ2aWNlcyBHbWJIMR8wHQYD
+VQQLDBZULVN5c3RlbXMgVHJ1c3QgQ2VudGVyMSUwIwYDVQQDDBxULVRlbGVTZWMgR2xvYmFs
+Um9vdCBDbGFzcyAyMB4XDTE2MDIyMjEzMzgyMloXDTMxMDIyMjIzNTk1OVowgZUxCzAJBgNV
+BAYTAkRFMUUwQwYDVQQKEzxWZXJlaW4genVyIEZvZXJkZXJ1bmcgZWluZXMgRGV1dHNjaGVu
+IEZvcnNjaHVuZ3NuZXR6ZXMgZS4gVi4xEDAOBgNVBAsTB0RGTi1QS0kxLTArBgNVBAMTJERG
+Ti1WZXJlaW4gQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkgMjCCASIwDQYJKoZIhvcNAQEBBQAD
+ggEPADCCAQoCggEBAMtg1/9moUHN0vqHl4pzq5lN6mc5WqFggEcVToyVsuXPztNXS43O+FZs
+FVV2B+pG/cgDRWM+cNSrVICxI5y+NyipCf8FXRgPxJiZN7Mg9mZ4F4fCnQ7MSjLnFp2uDo0p
+eQcAIFTcFV9Kltd4tjTTwXS1nem/wHdN6r1ZB+BaL2w8pQDcNb1lDY9/Mm3yWmpLYgHurDg0
+WUU2SQXaeMpqbVvAgWsRzNI8qIv4cRrKO+KA3Ra0Z3qLNupOkSk9s1FcragMvp0049ENF4N1
+xDkesJQLEvHVaY4l9Lg9K7/AjsMeO6W/VRCrKq4Xl14zzsjz9AkH4wKGMUZrAcUQDBHHWekC
+AwEAAaOCAXQwggFwMA4GA1UdDwEB/wQEAwIBBjAdBgNVHQ4EFgQUk+PYMiba1fFKpZFK4OpL
+4qIMz+EwHwYDVR0jBBgwFoAUv1kgNgB5oKAia4zV8mHSuCzLgkowEgYDVR0TAQH/BAgwBgEB
+/wIBAjAzBgNVHSAELDAqMA8GDSsGAQQBga0hgiwBAQQwDQYLKwYBBAGBrSGCLB4wCAYGZ4EM
+AQICMEwGA1UdHwRFMEMwQaA/oD2GO2h0dHA6Ly9wa2kwMzM2LnRlbGVzZWMuZGUvcmwvVGVs
+ZVNlY19HbG9iYWxSb290X0NsYXNzXzIuY3JsMIGGBggrBgEFBQcBAQR6MHgwLAYIKwYBBQUH
+MAGGIGh0dHA6Ly9vY3NwMDMzNi50ZWxlc2VjLmRlL29jc3ByMEgGCCsGAQUFBzAChjxodHRw
+Oi8vcGtpMDMzNi50ZWxlc2VjLmRlL2NydC9UZWxlU2VjX0dsb2JhbFJvb3RfQ2xhc3NfMi5j
+ZXIwDQYJKoZIhvcNAQELBQADggEBAIcL/z4Cm2XIVi3WO5qYi3FP2ropqiH5Ri71sqQPrhE4
+eTizDnS6dl2e6BiClmLbTDPo3flq3zK9LExHYFV/53RrtCyD2HlrtrdNUAtmB7Xts5et6u5/
+MOaZ/SLick0+hFvu+c+Z6n/XUjkurJgARH5pO7917tALOxrN5fcPImxHhPalR6D90Bo0fa3S
+PXez7vTXTf/D6OWST1k+kEcQSrCFWMBvf/iu7QhCnh7U3xQuTY+8npTD5+32GPg8SecmqKc2
+2CzeIs2LgtjZeOJVEqM7h0S2EQvVDFKvaYwPBt/QolOLV5h7z/0HJPT8vcP9SpIClxvyt7bP
+ZYoaorVyGTkwggWsMIIElKADAgECAgcbY7rQHiw9MA0GCSqGSIb3DQEBCwUAMIGVMQswCQYD
+VQQGEwJERTFFMEMGA1UEChM8VmVyZWluIHp1ciBGb2VyZGVydW5nIGVpbmVzIERldXRzY2hl
+biBGb3JzY2h1bmdzbmV0emVzIGUuIFYuMRAwDgYDVQQLEwdERk4tUEtJMS0wKwYDVQQDEyRE
+Rk4tVmVyZWluIENlcnRpZmljYXRpb24gQXV0aG9yaXR5IDIwHhcNMTYwNTI0MTEzODQwWhcN
+MzEwMjIyMjM1OTU5WjCBjTELMAkGA1UEBhMCREUxRTBDBgNVBAoMPFZlcmVpbiB6dXIgRm9l
+cmRlcnVuZyBlaW5lcyBEZXV0c2NoZW4gRm9yc2NodW5nc25ldHplcyBlLiBWLjEQMA4GA1UE
+CwwHREZOLVBLSTElMCMGA1UEAwwcREZOLVZlcmVpbiBHbG9iYWwgSXNzdWluZyBDQTCCASIw
+DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAJ07eRxH3h+Gy8Zp1xCeOdfZojDbchwFfylf
+S2jxrRnWTOFrG7ELf6Gr4HuLi9gtzm6IOhDuV+UefwRRNuu6cG1joL6WLkDh0YNMZj0cZGnl
+m6Stcq5oOVGHecwX064vXWNxSzl660Knl5BpBb+Q/6RAcL0D57+eGIgfn5mITQ5HjUhfZZkQ
+0tkqSe3BuS0dnxLLFdM/fx5ULzquk1enfnjK1UriGuXtQX1TX8izKvWKMKztFwUkP7agCwf9
+TRqaA1KgNpzeJIdl5Of6x5ZzJBTN0OgbaJ4YWa52fvfRCng8h0uwN89Tyjo4EPPLR22MZD08
+WkVKusqAfLjz56dMTM0CAwEAAaOCAgUwggIBMBIGA1UdEwEB/wQIMAYBAf8CAQEwDgYDVR0P
+AQH/BAQDAgEGMCkGA1UdIAQiMCAwDQYLKwYBBAGBrSGCLB4wDwYNKwYBBAGBrSGCLAEBBDAd
+BgNVHQ4EFgQUazqYi/nyU4na4K2yMh4JH+iqO3QwHwYDVR0jBBgwFoAUk+PYMiba1fFKpZFK
+4OpL4qIMz+EwgY8GA1UdHwSBhzCBhDBAoD6gPIY6aHR0cDovL2NkcDEucGNhLmRmbi5kZS9n
+bG9iYWwtcm9vdC1nMi1jYS9wdWIvY3JsL2NhY3JsLmNybDBAoD6gPIY6aHR0cDovL2NkcDIu
+cGNhLmRmbi5kZS9nbG9iYWwtcm9vdC1nMi1jYS9wdWIvY3JsL2NhY3JsLmNybDCB3QYIKwYB
+BQUHAQEEgdAwgc0wMwYIKwYBBQUHMAGGJ2h0dHA6Ly9vY3NwLnBjYS5kZm4uZGUvT0NTUC1T
+ZXJ2ZXIvT0NTUDBKBggrBgEFBQcwAoY+aHR0cDovL2NkcDEucGNhLmRmbi5kZS9nbG9iYWwt
+cm9vdC1nMi1jYS9wdWIvY2FjZXJ0L2NhY2VydC5jcnQwSgYIKwYBBQUHMAKGPmh0dHA6Ly9j
+ZHAyLnBjYS5kZm4uZGUvZ2xvYmFsLXJvb3QtZzItY2EvcHViL2NhY2VydC9jYWNlcnQuY3J0
+MA0GCSqGSIb3DQEBCwUAA4IBAQCBeEWkTqR/DlXwCbFqPnjMaDWpHPOVnj/z+N9rOHeJLI21
+rT7H8pTNoAauusyosa0zCLYkhmI2THhuUPDVbmCNT1IxQ5dGdfBi5G5mUcFCMWdQ5UnnOR7L
+n8qGSN4IFP8VSytmm6A4nwDO/afr0X9XLchMX9wQEZc+lgQCXISoKTlslPwQkgZ7nu7YRrQb
+tQMMONncsKk/cQYLsgMHM8KNSGMlJTx6e1du94oFOO+4oK4v9NsH1VuEGMGpuEvObJAaguS5
+Pfp38dIfMwK/U+d2+dwmJUFvL6Yb+qQTkPp8ftkLYF3sv8pBoGH7EUkp2KgtdRXYShjqFu9V
+NCIaE40GMIIF9TCCBN2gAwIBAgIMH82llPklWDm75neOMA0GCSqGSIb3DQEBCwUAMIGNMQsw
+CQYDVQQGEwJERTFFMEMGA1UECgw8VmVyZWluIHp1ciBGb2VyZGVydW5nIGVpbmVzIERldXRz
+Y2hlbiBGb3JzY2h1bmdzbmV0emVzIGUuIFYuMRAwDgYDVQQLDAdERk4tUEtJMSUwIwYDVQQD
+DBxERk4tVmVyZWluIEdsb2JhbCBJc3N1aW5nIENBMB4XDTE4MDkyODEzMDkyNloXDTIxMDky
+NzEzMDkyNlowgYMxCzAJBgNVBAYTAkRFMRQwEgYDVQQKDAtSV1RIIEFhY2hlbjFGMEQGA1UE
+Cww9SW5zdGl0dXRlIGZvciBDb21tdW5pY2F0aW9uIFRlY2hub2xvZ2llcyBhbmQgRW1iZWRk
+ZWQgU3lzdGVtczEWMBQGA1UEAwwNTHVrYXMgSnVlbmdlcjCCASIwDQYJKoZIhvcNAQEBBQAD
+ggEPADCCAQoCggEBAMwu1968dVplCQF7E8qcfmH69j4wgk3F8l0dnyrJR44QUGNMQf1Q4Ap8
+yYSr+WcJhlYQric47wcT6Cyd5PiUs6SyGp8p2vZPPpDUb4nw+Z6Y835I4aGUkbh0qSx+0ohN
+sw+zMJC8bZNcQ00/nQy+s3EZ5J+UAmTlYHI57LX08XziB/MzHyEVljh2c/DT8tmGY67StN+G
+dNqYBzZVADKHg/bufR4BenKCx7oX63xB/7tM4aZeMMbvb7f/W1gGOSOA8wMBL3ZVMZkFn2MS
+a/Wl6ANUBKwd1fbP68h3zUM3EzPAzE2SJR4/W2aQwIkP5hcv3AKHKf0ewT6EHR5n20VhLacC
+AwEAAaOCAlswggJXMEAGA1UdIAQ5MDcwDwYNKwYBBAGBrSGCLAEBBDARBg8rBgEEAYGtIYIs
+AQEEAwgwEQYPKwYBBAGBrSGCLAIBBAMIMAkGA1UdEwQCMAAwDgYDVR0PAQH/BAQDAgXgMB0G
+A1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDBDAdBgNVHQ4EFgQUpuj2DlDUOOzcO/iBS+QA
+cUgXmRwwHwYDVR0jBBgwFoAUazqYi/nyU4na4K2yMh4JH+iqO3QwKwYDVR0RBCQwIoEgbHVr
+YXMuanVlbmdlckBpY2Uucnd0aC1hYWNoZW4uZGUwgY0GA1UdHwSBhTCBgjA/oD2gO4Y5aHR0
+cDovL2NkcDEucGNhLmRmbi5kZS9kZm4tY2EtZ2xvYmFsLWcyL3B1Yi9jcmwvY2FjcmwuY3Js
+MD+gPaA7hjlodHRwOi8vY2RwMi5wY2EuZGZuLmRlL2Rmbi1jYS1nbG9iYWwtZzIvcHViL2Ny
+bC9jYWNybC5jcmwwgdsGCCsGAQUFBwEBBIHOMIHLMDMGCCsGAQUFBzABhidodHRwOi8vb2Nz
+cC5wY2EuZGZuLmRlL09DU1AtU2VydmVyL09DU1AwSQYIKwYBBQUHMAKGPWh0dHA6Ly9jZHAx
+LnBjYS5kZm4uZGUvZGZuLWNhLWdsb2JhbC1nMi9wdWIvY2FjZXJ0L2NhY2VydC5jcnQwSQYI
+KwYBBQUHMAKGPWh0dHA6Ly9jZHAyLnBjYS5kZm4uZGUvZGZuLWNhLWdsb2JhbC1nMi9wdWIv
+Y2FjZXJ0L2NhY2VydC5jcnQwDQYJKoZIhvcNAQELBQADggEBACbY4U3kbHN5OvhbAYBCD372
+KyWiuSpSqJvPhKT/PdknlPyHgtCLP4ossyFS8dTsZw7nXa5Dw1YHVVdWTPv8kZrmuWVg1OkU
+yFLTEt6AVtZTl6Hek2cNRbgz4rlxgobN1LOMtJ+ziIvCVPqCfPmCtwWGke7T7rZvVyFZyC7z
+IW4fZAqZo4KAI7cMBOXDRdVSrCQ4PUr0JUdeaSe3kzSo/Dp0dqms1rjHsgG7eAtixGQGGdHB
+xRn4xvgZY3lbJxP1uW9hZM1b+23uqRMvSeVITyV6nct3e0pnD3O8EA/WkUvHJsB5lJGUf8ip
+snejDJ2Y3+d3l/4z14iu2o4qCbfRoAsxggQLMIIEBwIBATCBnjCBjTELMAkGA1UEBhMCREUx
+RTBDBgNVBAoMPFZlcmVpbiB6dXIgRm9lcmRlcnVuZyBlaW5lcyBEZXV0c2NoZW4gRm9yc2No
+dW5nc25ldHplcyBlLiBWLjEQMA4GA1UECwwHREZOLVBLSTElMCMGA1UEAwwcREZOLVZlcmVp
+biBHbG9iYWwgSXNzdWluZyBDQQIMH82llPklWDm75neOMA0GCWCGSAFlAwQCAQUAoIICPTAY
+BgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xOTA0MDUxMzU0MzJa
+MC8GCSqGSIb3DQEJBDEiBCCyQULWX/XpHSyP0BC2sO2GydPbREG2js3oO+atLc1VCjBsBgkq
+hkiG9w0BCQ8xXzBdMAsGCWCGSAFlAwQBKjALBglghkgBZQMEAQIwCgYIKoZIhvcNAwcwDgYI
+KoZIhvcNAwICAgCAMA0GCCqGSIb3DQMCAgFAMAcGBSsOAwIHMA0GCCqGSIb3DQMCAgEoMIGv
+BgkrBgEEAYI3EAQxgaEwgZ4wgY0xCzAJBgNVBAYTAkRFMUUwQwYDVQQKDDxWZXJlaW4genVy
+IEZvZXJkZXJ1bmcgZWluZXMgRGV1dHNjaGVuIEZvcnNjaHVuZ3NuZXR6ZXMgZS4gVi4xEDAO
+BgNVBAsMB0RGTi1QS0kxJTAjBgNVBAMMHERGTi1WZXJlaW4gR2xvYmFsIElzc3VpbmcgQ0EC
+DB/NpZT5JVg5u+Z3jjCBsQYLKoZIhvcNAQkQAgsxgaGggZ4wgY0xCzAJBgNVBAYTAkRFMUUw
+QwYDVQQKDDxWZXJlaW4genVyIEZvZXJkZXJ1bmcgZWluZXMgRGV1dHNjaGVuIEZvcnNjaHVu
+Z3NuZXR6ZXMgZS4gVi4xEDAOBgNVBAsMB0RGTi1QS0kxJTAjBgNVBAMMHERGTi1WZXJlaW4g
+R2xvYmFsIElzc3VpbmcgQ0ECDB/NpZT5JVg5u+Z3jjANBgkqhkiG9w0BAQEFAASCAQAs6m5H
+bUbJ3R4Hkh2miowZItUgRS32EMC/H4SyDkhdUbATUcTm+UdFfJRQT5fIVg6nfrBkGBXImg34
+tmtjXu8C2Xc2oHvXjdB8nilVYUi4kefYUM9Kmyz8jWeZHdap0vD+RIWHvMmzxLjA8o0t0aKR
+rgihLop8WtJKoLlgPPDycPszPvaSvyB3sh/5h5+pYQC0g0MTKE8NNsDGpk8y6XGH6n4ZH7wb
+jRAf1TfPmxcFF9W3VKIOH1kV3mS3LqH1ldK3As5fCsKVV54XsX+uioeh6MFxk0Ban13ItIlr
+NV0QDaMzv2hvf9YCLSWWIGdvRNJWo+sL5yFH20vSJsJg1E7JAAAAAAAA
+--------------ms050903000606040805060900--
+
+
+--===============3726549670274523185==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3726549670274523185==--
