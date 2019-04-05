@@ -1,17 +1,18 @@
-From: Lukas Juenger <juenger@ice.rwth-aachen.de>
-Subject: [PATCH v2] xen/arm: Cap the number of interrupt lines
- for dom0
-Date: Fri, 5 Apr 2019 15:54:04 +0200
-Message-ID: <abc8ea85-fe26-46b6-af1a-dcaaa877fd7d@rwthex-w1-a.rwth-ad.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: [PATCH v2 0/2] x86/AMD: correct certain Fam17 checks
+Date: Fri, 05 Apr 2019 07:55:18 -0600
+Message-ID: <5CA75E460200007800224E23@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=0G5W=SH=ice.rwth-aachen.de=lukas.juenger@srs-us1.protection.inumbo.net>)
- id 1hCPIV-0004Ds-GO
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 13:54:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=KiBs=SH=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hCPJX-0004Mc-9o
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 13:55:27 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,41 +21,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Lukas Juenger <juenger@ice.rwth-aachen.de>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Brian Woods <brian.woods@amd.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-RG9tMCB2R0lDIHdpbGwgdXNlIHRoZSBzYW1lIG51bWJlciBvZiBpbnRlcnJ1cHQgbGluZXMgYXMg
-dGhlIGhhcmR3YXJlIEdJQy4KV2hpbGUgdGhlIGhhcmR3YXJlIEdJQyBjYW4gc3VwcG9ydCB1cCB0
-byAxMDIwIGludGVycnVwdCBsaW5lcywKdGhlIHZHSUMgaXMgb25seSBzdXBwb3J0aW5nIHVwIHRv
-IDk5MiBpbnRlcnJ1cHQgbGluZXMuClRoaXMgbWVhbnMgdGhhdCBYZW4gd2lsbCBub3QgYmUgYWJs
-ZSB0byBib290IG9uIHBsYXRmb3JtcyB3aGVyZSB0aGUgaGFyZHdhcmUKR0lDIHN1cHBvcnRzIG1v
-cmUgdGhhbiA5OTIgaW50ZXJydXB0IGxpbmVzLgpXaGlsZSBpdCB3b3VsZCBtYWtlIHNlbnNlIHRv
-IGluY3JlYXNlIHRoZSBsaW1pdHMgaW4gdGhlIHZHSUNzLCB0aGlzIGlzIG5vdAp0cml2aWFsIGJl
-Y2F1c2Ugb2YgdGhlIGRlc2lnbiBjaG9pY2VzLgpBdCB0aGUgbW9tZW50LCBvbmx5IG1vZGVscyBz
-ZWVtIHRvIHJlcG9ydCB0aGUgbWF4aW11bSBvZiBpbnRlcnJ1cHQgbGluZXMuClRoZXkgYWxzbyBk
-byBub3QgaGF2ZSBhbnkgaW50ZXJydXB0IHdpcmVkIGFib3ZlIHRoZSA5OTIgbGltaXQuClNvIGl0
-IHNob3VsZCBiZSBmaW5lIHRvIGNhcCB0aGUgbnVtYmVyIG9mIGludGVycnVwdCBsaW5lcyBmb3Ig
-ZG9tMCB0byA5OTIgbGluZXMuCgpTaWduZWQtb2ZmLWJ5OiBMdWthcyBKdWVuZ2VyIDxqdWVuZ2Vy
-QGljZS5yd3RoLWFhY2hlbi5kZT4KCi0tLQpDaGFuZ2VkIHNpbmNlIHYxOgotIEFkYXB0ZWQgY29t
-bWl0IG1lc3NhZ2UgYXMgc3VnZ2VzdGVkCi0gQ2hhbmdlZCBjb2RlIGNvbW1lbnQgdG8gcmVmbGVj
-dCBjb3JyZWN0IHRlcm1pbm9sb2d5Ci0tLQogeGVuL2FyY2gvYXJtL3NldHVwLmMgfCA4ICsrKysr
-KystCiAxIGZpbGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZm
-IC0tZ2l0IGEveGVuL2FyY2gvYXJtL3NldHVwLmMgYi94ZW4vYXJjaC9hcm0vc2V0dXAuYwppbmRl
-eCA0NDQ4NTdhOTY3Li5jY2IwZjE4MWVhIDEwMDY0NAotLS0gYS94ZW4vYXJjaC9hcm0vc2V0dXAu
-YworKysgYi94ZW4vYXJjaC9hcm0vc2V0dXAuYwpAQCAtODg4LDcgKzg4OCwxMyBAQCB2b2lkIF9f
-aW5pdCBzdGFydF94ZW4odW5zaWduZWQgbG9uZyBib290X3BoeXNfb2Zmc2V0LAogICAgIC8qIENy
-ZWF0ZSBpbml0aWFsIGRvbWFpbiAwLiAqLwogICAgIC8qIFRoZSB2R0lDIGZvciBET00wIGlzIGV4
-YWN0bHkgZW11bGF0aW5nIHRoZSBoYXJkd2FyZSBHSUMgKi8KICAgICBkb20wX2NmZy5hcmNoLmdp
-Y192ZXJzaW9uID0gWEVOX0RPTUNUTF9DT05GSUdfR0lDX05BVElWRTsKLSAgICBkb20wX2NmZy5h
-cmNoLm5yX3NwaXMgPSBnaWNfbnVtYmVyX2xpbmVzKCkgLSAzMjsKKyAgICAvKgorICAgICAqIFhl
-biB2R0lDIHN1cHBvcnRzIGEgbWF4aW11bSBvZiA5OTIgaW50ZXJydXB0IGxpbmVzLgorICAgICAq
-IDMyIGFyZSBzdWJzdHJhY3RlZCB0byBjb3ZlciBsb2NhbCBJUlFzLgorICAgICAqLworICAgIGRv
-bTBfY2ZnLmFyY2gubnJfc3BpcyA9IG1pbihnaWNfbnVtYmVyX2xpbmVzKCksICh1bnNpZ25lZCBp
-bnQpIDk5MikgLSAzMjsKKyAgICBpZiAoIGdpY19udW1iZXJfbGluZXMoKSA+IDk5MiApCisgICAg
-ICAgIHByaW50ayhYRU5MT0dfV0FSTklORyAiTWF4aW11bSBudW1iZXIgb2YgdkdJQyBJUlFzIGV4
-Y2VlZGVkLlxuIik7CiAgICAgZG9tMF9jZmcubWF4X3ZjcHVzID0gZG9tMF9tYXhfdmNwdXMoKTsK
-IAogICAgIGRvbTAgPSBkb21haW5fY3JlYXRlKDAsICZkb20wX2NmZywgdHJ1ZSk7Ci0tIAoyLjIx
-LjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+MTogY29ycmVjdCBjZXJ0YWluIEZhbTE3IGNoZWNrcwoyOiBsaW1pdCBDMUUgZGlzYWJsZSBmYW1p
+bHkgcmFuZ2UKCnYyOiBGb2xsb3cgQW5kcmV3J3Mgc3VnZ2VzdGlvbiBmb3IgTkJfQ0ZHIGluIHBh
+dGNoIDEuIE5ldyBwYXRjaCAyLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
