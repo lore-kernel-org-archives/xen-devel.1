@@ -1,15 +1,17 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] common/gnttab: Process softirqs while
- dumping grant tables
-Date: Fri, 5 Apr 2019 17:38:40 +0100
-Message-ID: <3066025e-3e7f-35fc-9586-f4dd7a6c2ade@citrix.com>
-References: <1554481990-7569-1-git-send-email-andrew.cooper3@citrix.com>
- <09c1fe49-049c-d893-cd6a-31331f8cdc9c@arm.com>
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+Subject: Re: [BUG] pci: mixed allocation pf and non-pf PCI MEM
+ BAR (OVMF crash)
+Date: Fri, 5 Apr 2019 18:00:10 +0100
+Message-ID: <7db19966-3f23-13a1-92f3-810772df013b@citrix.com>
+References: <alpine.GSO.2.00.1903310940430.7231@dmz.c-home.cz>
+ <5CA1D2ED02000078002237F8@prv1-mh.provo.novell.com>
+ <alpine.GSO.2.00.1904011458001.24233@dmz.c-home.cz>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4691337206732796132=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <09c1fe49-049c-d893-cd6a-31331f8cdc9c@arm.com>
-Content-Language: en-GB
+In-Reply-To: <alpine.GSO.2.00.1904011458001.24233@dmz.c-home.cz>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,123 +20,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, Xen-devel <xen-devel@lists.xen.org>
-Cc: Ian Jackson <Ian.Jackson@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+To: Martin Cerveny <M.Cerveny@computer.org>, Jan Beulich <JBeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============4691337206732796132==
-Content-Type: multipart/alternative;
-	boundary="------------C78F61DC8F758F25A6032249"
-Content-Language: en-GB
-
---------------C78F61DC8F758F25A6032249
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 05/04/2019 17:35, Julien Grall wrote:
-> Hi Andrew,
->
-> On 05/04/2019 17:33, Andrew Cooper wrote:
->> OSSTests upgrade to Jessie has identified that with a sufficiently
->> large grant
->> table, a watchdog timeout can occur.
->>
->> http://logs.test-lab.xenproject.org/osstest/logs/134399/test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow/serial-chardonnay0.log
->>
->
-> OSSTest log usually disappear after a few days. Who it be possible to
-> copy the relevant part of the log instead?
-
-Can do.  Something like:
-
-(XEN) gnttab_usage_print_all [ key 'g' pressed
-Apr  4 20:51:42.779992 (XEN)       -------- active --------       -------- shared --------
-Apr  4 20:51:42.780081 (XEN) [ref] localdom mfn      pin          localdom gmfn     flags
-Apr  4 20:51:42.791855 (XEN) grant-table for remote d0 (v1)
-Apr  4 20:51:42.791915 (XEN)   1 frames (64 max), 11 maptrack frames (1024 max)
-Apr  4 20:51:42.803911 (XEN) no active grant table entries
-Apr  4 20:51:42.803975 (XEN)       -------- active --------       -------- shared --------
-Apr  4 20:51:42.804034 (XEN) [ref] localdom mfn      pin          localdom gmfn     flags
-Apr  4 20:51:42.815923 (XEN) grant-table for remote d1 (v1)
-Apr  4 20:51:42.816040 (XEN)   7 frames (32 max), 0 maptrack frames (1024 max)
-Apr  4 20:51:42.827834 (XEN) [0x000]      0 0x27e306 0x00000002          0 0x0fefff 0x19
-Apr  4 20:51:42.827877 (XEN) [0x009]      0 0x22d9a1 0x00000001          0 0x02f3a1 0x19
-Apr  4 20:51:42.827905 (XEN) [0x00a]      0 0x22d99f 0x00000001          0 0x02f39f 0x19
-<snip masses of output>
-Apr  4 20:51:49.814701 (XEN) [0x8af]      0 0x232f4f 0x00000001          0 0x029d4f 0x19
-Apr  4 20:51:49.826827 (XEN) [0x8b0]      0 0x232f4e 0x00000001          0 0x029(XEN) Watchdog timer detects that CPU0 is stuck!
-Apr  4 20:51:49.826903 (XEN) ----[ Xen-4.13-unstable  x86_64  debug=y   Not tainted ]----
-
-
-~Andrew
-
---------------C78F61DC8F758F25A6032249
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 05/04/2019 17:35, Julien Grall
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-      cite="mid:09c1fe49-049c-d893-cd6a-31331f8cdc9c@arm.com">Hi Andrew,
-      <br>
-      <br>
-      On 05/04/2019 17:33, Andrew Cooper wrote:
-      <br>
-      <blockquote type="cite">OSSTests upgrade to Jessie has identified
-        that with a sufficiently large grant
-        <br>
-        table, a watchdog timeout can occur.
-        <br>
-        <br>
-<a class="moz-txt-link-freetext" href="http://logs.test-lab.xenproject.org/osstest/logs/134399/test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow/serial-chardonnay0.log">http://logs.test-lab.xenproject.org/osstest/logs/134399/test-amd64-amd64-xl-qemuu-debianhvm-amd64-shadow/serial-chardonnay0.log</a>
-        <br>
-      </blockquote>
-      <br>
-      OSSTest log usually disappear after a few days. Who it be possible
-      to copy the relevant part of the log instead?<br>
-    </blockquote>
-    <br>
-    Can do.  Something like:<br>
-    <br>
-    <pre>(XEN) gnttab_usage_print_all [ key 'g' pressed
-Apr  4 20:51:42.779992 (XEN)       -------- active --------       -------- shared --------
-Apr  4 20:51:42.780081 (XEN) [ref] localdom mfn      pin          localdom gmfn     flags
-Apr  4 20:51:42.791855 (XEN) grant-table for remote d0 (v1)
-Apr  4 20:51:42.791915 (XEN)   1 frames (64 max), 11 maptrack frames (1024 max)
-Apr  4 20:51:42.803911 (XEN) no active grant table entries
-Apr  4 20:51:42.803975 (XEN)       -------- active --------       -------- shared --------
-Apr  4 20:51:42.804034 (XEN) [ref] localdom mfn      pin          localdom gmfn     flags
-Apr  4 20:51:42.815923 (XEN) grant-table for remote d1 (v1)
-Apr  4 20:51:42.816040 (XEN)   7 frames (32 max), 0 maptrack frames (1024 max)
-Apr  4 20:51:42.827834 (XEN) [0x000]      0 0x27e306 0x00000002          0 0x0fefff 0x19
-Apr  4 20:51:42.827877 (XEN) [0x009]      0 0x22d9a1 0x00000001          0 0x02f3a1 0x19
-Apr  4 20:51:42.827905 (XEN) [0x00a]      0 0x22d99f 0x00000001          0 0x02f39f 0x19
-&lt;snip masses of output&gt;
-Apr  4 20:51:49.814701 (XEN) [0x8af]      0 0x232f4f 0x00000001          0 0x029d4f 0x19
-Apr  4 20:51:49.826827 (XEN) [0x8b0]      0 0x232f4e 0x00000001          0 0x029(XEN) Watchdog timer detects that CPU0 is stuck!
-Apr  4 20:51:49.826903 (XEN) ----[ Xen-4.13-unstable  x86_64  debug=y   Not tainted ]----</pre>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------C78F61DC8F758F25A6032249--
-
-
---===============4691337206732796132==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4691337206732796132==--
+T24gMDEvMDQvMjAxOSAxOTo0OCwgTWFydGluIENlcnZlbnkgd3JvdGU6Cj4gSGVsbG8uCj4gCj4g
+T24gTW9uLCAxIEFwciAyMDE5LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+Pj4gT24gMzEuMDMuMTkg
+YXQgMTA6MTEsIDxtYXJ0aW5AYy1ob21lLmN6PiB3cm90ZToKPj4+IFRoZXJlIGlzIHByb2JsZW0g
+aW4gUENJIGRldmljZSBhbGxvY2F0aW9uIGFsZ29yaXRobSAocGNpX3NldHVwKCkpLgo+Pj4gQWxn
+b3JpdGhtIGFsbG9jYXRlcyBQQ0kgQkFSIHNvcnRlZCBieSBzaXplIGFuZCB0aGlzIGFsbG93cwo+
+Pj4gbWl4ZWQgYWxsb2NhdGlvbiBvZiBwcmVmZXRjaGFibGUgYW5kIG5vbi1wcmVmZXRjaGFibGUg
+UENJIE1FTSBCQVIuCj4+PiBUaGlzIGxlYWRzIHRvIHdyb25nIGNvbmZpZyBvZiBQQ0kgcm9vdCBw
+b3J0IChzZWUgIlR5cGUgMSBDb25maWd1cmF0aW9uCj4+PiBTcGFjZSBSZWdpc3RlcnMgKFJvb3Qg
+UG9ydHMpIikuCj4+Pgo+Pj4gVGVzdGVkIHdpdGggdmVyc2lvbiB4ZW4gNC4xMS4xICsgImV4cG9y
+dAo+Pj4gT1ZNRl9VUFNUUkVBTV9SRVZJU0lPTj1lZjUyOWU2YWI3YzMxMjkwYTMzMDQ1YmIxZjE4
+Mzc0NDdjYzBlYjU2Igo+Pj4gKGVtYmVkZWQgY29tbWl0IE9WTUYgZG9lcyBub3Qgd29yayAoY3Jh
+c2hlZCBldmVuIGluIFdpbjEwLmlzbyBhbmQKPj4+IHVuY29tcGlsYWJsZSB3aXRoIG5ld2VyIGdj
+YykpLgo+Pj4KPj4+IEF0dGFjaGVkIGFsc28gdGVzdGluZyBwYXRjaC4KPj4KPj4gSSBhZ3JlZSB0
+aGUgcHJvYmxlbSB3YW50cyBhZGRyZXNzaW5nLCBidXQgSSdtIGFmcmFpZCB0aGUgcGF0Y2ggaXMK
+Pj4gaW5jb21wbGV0ZTogQWZhaWN0IGl0IHdvbid0IHdvcmsgaWYgdGhlcmUgaXMgYSBub24tcHJl
+ZmV0Y2hhYmxlIEJBUgo+PiBsYXJnZXIgdGhhbiB0aGUgc21hbGxlc3QgcHJlZmV0Y2hhYmxlIG9u
+ZSwgZHVlIHRvIHRoZSBuZWNlc3NhcnkKPj4gZXh0cmEgcGFkZGluZyB0aGF0IHdvdWxkIG5lZWQg
+aW5zZXJ0aW5nIGJldHdlZW4gdGhlIHR3by4KPiAKPiBJIG1ha2UgdGhpcyBwYXRjaCBhcyBwcm9v
+Zi1vZi1jb25jZXB0IHRvIGdldCBpdCBjb21wYXRpYmxlIHdpdGggT1ZNRi4KPiBCdXQgSSBhbSBu
+b3QgYXdhcmUgaWYgT1ZNRiBpcyBPSyBhbmQgYWxsIG90aGVyIGNvbnNlcXVlbmNlcywgbGlrZToK
+PiAKPiAtIGFsbG9jYXRpb24gYWxpZ25pbmcgYXMgeW91IG1lbnRpb24KPiAtIFBGIHJlZ2lvbiB0
+byBiZSBwbGFjZWQgZmlyc3Qgb3IgbGFzdCBpbiBNTUlPIGhvbGUgLSBzb21lIFBDSSBleHByZXNz
+Cj4gZG9jdW1lbnRzIHNheXMgdGhhdCBhbGwgNjRiaXQgTUVNIEJBUiBtdXN0IGJlIHByZWZldGNo
+YWJsZQo+IFsgQnV0IGlmIEkgYWN0aXZhdGUgInVzYnZlcnNpb249MyIgaXQgZ2VuZXJhdGVzIDY0
+Yml0IE1FTSBCQVIgYnV0Cj4gd2l0aG91dCBwcmVmZXRjaGFibGUgYml0IChzbyBQQ0lfQkFTRV9B
+RERSRVNTX01FTV9QUkVGRVRDSCBpcyBpbXBsaWNpdD8pCj4gYW5kIGFjdHVhbCBjb2RlIGFsbG9j
+YXRlcyBNTUlPIHVuZGVyIDRHLiBCdXQgT1ZNRiByZXF1aXJlcyB0aGF0IDY0Yml0Cj4gTUVNIEJB
+UiBtdXN0IGJlIHBsYWNlZCBvdmVyIDRHIChqdXN0IGFub3RoZXIgcHJvYmxlbS9CVUcpLiBdCj4g
+Cj4gKGV4YW1wbGUgLQo+IGh0dHBzOi8vcmVzb3VyY2VzLmluZm9zZWNpbnN0aXR1dGUuY29tL3N5
+c3RlbS1hZGRyZXNzLW1hcC1pbml0aWFsaXphdGlvbi14ODZ4NjQtYXJjaGl0ZWN0dXJlLXBhcnQt
+Mi1wY2ktZXhwcmVzcy1iYXNlZC1zeXN0ZW1zLwo+ICkKPiAKCkhpIE1hcnRpbiwKCldlJ3JlIGF3
+YXJlIG9mIHRoZSBwcm9ibGVtIGFuZCBpdCBuZWVkcyB0byBiZSBmaXhlZCBvbiBPVk1GIHNpZGUg
+d2hlcmUKWGVuIHNwZWNpZmljIGNvZGUgaW5jb3JyZWN0bHkgdHJpZXMgdG8gaW5pdGlhbGl6ZSBh
+IHByZWZldGNoYWJsZQphcGVydHVyZSB3aGVyZSBpdCBpbiBmYWN0IGRvZXNuJ3QgZXhpc3QgaW4g
+b3VyIHJvb3QgYnJpZGdlLiBJJ20gYWN0aXZlbHkKd29ya2luZyBvbiBhIHNlcmllcyBmb3IgT1ZN
+RiB3aGljaCBhZGRyZXNzZXMgdGhlIHByb2JsZW1zIHRoYXQgeW91Cm1lbnRpb25lZCBbMV0uCgpB
+cyB0byBodm1sb2FkZXIsIGNvZXhpc3Rpbmcgb2YgcHJlZmV0Y2hhYmxlIGFuZCBub24tcHJlZmV0
+Y2hhYmxlIEJBUnMgaW4KYSBzaW5nbGUgYXBlcnR1cmUgaXMgcGVyZmVjdGx5IG5vcm1hbCBmcm9t
+IFBDSSBzcGVjaWZpY2F0aW9uIHBvaW50IG9mCnZpZXcgKGUuZy4gc2VlICJQQ0ktVE8tUENJIEJS
+SURHRSBBUkNISVRFQ1RVUkUgU1BFQ0lGSUNBVElPTiwgUkVWIDEuMiIpLgoKWzFdIGh0dHBzOi8v
+bWFyYy5pbmZvLz9sPXhlbi1kZXZlbCZtPTE1NTE4NzYxMjYyNjY0MCZ3PTIKCklnb3IKCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
