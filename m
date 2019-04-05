@@ -3,38 +3,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-4.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=ham
-	autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 821B1C4360F
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2019 10:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52F63C4360F
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2019 10:38:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5821F20652
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2019 10:30:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5821F20652
+	by mail.kernel.org (Postfix) with ESMTPS id 2BD5921738
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Apr 2019 10:38:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BD5921738
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hCM6v-0004uo-Na; Fri, 05 Apr 2019 10:30:13 +0000
+	id 1hCMEO-0005C4-NU; Fri, 05 Apr 2019 10:37:56 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=zWJI=SH=citrix.com=prvs=991202d17=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1hCM6u-0004uj-RT
- for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 10:30:12 +0000
-X-Inumbo-ID: c8ab0b6a-578d-11e9-9a93-676e8fbf17a7
+ id 1hCMEN-0005Bz-Ln
+ for xen-devel@lists.xenproject.org; Fri, 05 Apr 2019 10:37:55 +0000
+X-Inumbo-ID: dd47526c-578e-11e9-87a6-4fcea21c8ba8
 Received: from SMTP03.CITRIX.COM (unknown [162.221.156.55])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c8ab0b6a-578d-11e9-9a93-676e8fbf17a7;
- Fri, 05 Apr 2019 10:30:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,312,1549929600"; d="scan'208";a="82835421"
+ id dd47526c-578e-11e9-87a6-4fcea21c8ba8;
+ Fri, 05 Apr 2019 10:37:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,312,1549929600"; d="scan'208";a="82836285"
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 References: <5C88F524020000780021E12C@prv1-mh.provo.novell.com>
- <5C88F9C7020000780021E17A@prv1-mh.provo.novell.com>
+ <5C88F9DE020000780021E17D@prv1-mh.provo.novell.com>
 From: George Dunlap <george.dunlap@citrix.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=george.dunlap@citrix.com; prefer-encrypt=mutual; keydata=
@@ -97,14 +97,15 @@ Autocrypt: addr=george.dunlap@citrix.com; prefer-encrypt=mutual; keydata=
  24n3ypeDZ6f5LkdqL1UNp5/0Aqbr3EiN7/ina4YVyscy9754l944kyHnnMRLVykg0v+kakj0
  h0RJ5LbfLAMM8M52KIA3y14g0Fb7kHLcOUMVcgfQ3PrN6chtC+5l6ouDIlSLR3toxH8Aam7E
  rIFfe2Dk+lD9A9BVd2rfoHA=
-Message-ID: <33c97290-3527-f07a-59ed-8f7cc174a50a@citrix.com>
-Date: Fri, 5 Apr 2019 11:30:05 +0100
+Message-ID: <03a56f31-8634-75fc-d432-ec755587aa29@citrix.com>
+Date: Fri, 5 Apr 2019 11:37:49 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.5.1
 MIME-Version: 1.0
-In-Reply-To: <5C88F9C7020000780021E17A@prv1-mh.provo.novell.com>
+In-Reply-To: <5C88F9DE020000780021E17D@prv1-mh.provo.novell.com>
 Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH 2/4] x86: relax a few get_gfn() invocations
+Subject: Re: [Xen-devel] [PATCH 3/4] x86/mm: drop redundant local variable
+ from _get_page_type()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -122,25 +123,13 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190405103005.BlrFDONbp3Ux8purfUNTo-hGKVsBsmaCjaDLYX9-gJo@z>
+Message-ID: <20190405103749.cGkZ-JzjYxROejpf_DDT1_AGeZQNx4LrxlJl8egRNSk@z>
 
-T24gMy8xMy8xOSAxMjozOCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gSW4gYSBmZXcgY2FzZXMg
-b25seSBhIHF1ZXJ5IGlzIGludGVuZGVkLCBpLmUuIHdpdGhvdXQgcG9wdWxhdGluZyBhCj4gcG9z
-c2libGUgUG9EIG9yIHBhZ2VkIG91dCBlbnRyeSwgd2hlbiB0aGUgaW50ZW50aW9uIGlzIHRvIHJl
-cGxhY2UgdGhlCj4gY3VycmVudCBlbnRyeSBhbnl3YXkuIFVzZSBnZXRfZ2ZuX3F1ZXJ5KCkgdGhl
-cmUgaW5zdGVhZC4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
-ZS5jb20+CgpUaGUgZmlyc3Qgb25lIHNob3VsZCBiZSBmaW5lLCBidXQgcHJldHR5IHN1cmUgdGhl
-IHNlY29uZCB0d28gd2lsbAptaXMtZmlyZSBmb3IgUG9EOiBwMm0tPnBvZC5lbnRyeV9jb3VudCB3
-b24ndCBnZXQgdXBkYXRlZC4gIEFzIGl0IGlzLAppdCdzIHNvcnQtb2YgbWlzZmlyaW5nIGFscmVh
-ZHksIHNpbmNlIHRoZSAiZnJlZWQiIG1lbW9yeSB3b24ndCBiZQpyZWNsYWltZWQgZm9yIHRoZSBQ
-b0QgY2FjaGUuCgpXaGljaCBwcm9iYWJseSBtZWFucyBpdCdzIHRpbWUgZm9yIHNvbWUgc2VyaW91
-cyByZWZhY3RvcmluZyB0byBwcmV2ZW50CnRoaXMgc29ydCBvZiBlcnJvciBmcm9tIGNyZWVwaW5n
-IGluLiAgcDJtLT5wb2QuZW50cnlfY291bnQgYWNjb3VudGluZwpzaG91bGQgcHJvYmFibHkgYmUg
-bW92ZWQgaW50byBwMm1fZW50cnlfbW9kaWZ5KCksIGFuZApwMm1fcG9kX2RlY3JlYXNlX3Jlc2Vy
-dmF0aW9uKCkgc2hvdWxkIHByb2JhYmx5IGJlIG1vdmVkIHNvbWV3aGVyZSBlbHNlCi0tIHBlcmhh
-cHMgZ3Vlc3RfcmVtb3ZlX3BhZ2UoKSBvciBzb21ldGhpbmc/ICBBdCBhbnkgcmF0ZSwgYSB3ZSBw
-cm9iYWJseQpuZWVkIHRvIHJldmlldyBvZiB0aGUgbGF5ZXJzIGFuZCB3aGF0IGV2ZXJ5b25lIG5l
-ZWRzIGZyb20gdGhlbSwgYW5kIGRvCnRoaW5ncyBhdCB0aGUgcmlnaHQgbGV2ZWwuCgogLUdlb3Jn
-ZQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMy8xMy8xOSAxMjozOCBQTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gSW5zdGVhZCBvZiB0aGUg
+c2VwYXJhdGUgaW9tbXVfcmV0LCB0aGUgZ2VuZXJhbCByYyBjYW4gYmUgdXNlZCBldmVuIGZvcgo+
+IHRoZSBJT01NVSBvcGVyYXRpb25zLgo+IAo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxq
+YmV1bGljaEBzdXNlLmNvbT4KClJldmlld2VkLWJ5OiBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVu
+bGFwQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
