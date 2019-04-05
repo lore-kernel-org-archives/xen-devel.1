@@ -1,11 +1,14 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: [PATCH] docs/cmdline: Partially revert 3860d5534df4
-Date: Fri, 5 Apr 2019 13:34:42 +0100
-Message-ID: <1554467682-20170-1-git-send-email-andrew.cooper3@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH] docs/cmdline: Partially revert 3860d5534df4
+Date: Fri, 05 Apr 2019 06:42:58 -0600
+Message-ID: <5CA74D520200007800224DE0@prv1-mh.provo.novell.com>
+References: <1554467682-20170-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
+In-Reply-To: <1554467682-20170-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -14,31 +17,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Xen-devel <xen-devel@lists.xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Norbert Manthey <nmanthey@amazon.de>, Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: nmanthey@amazon.de, Xen-devel <xen-devel@lists.xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyBodW5rIG1vZGlmaWVzIHRoZSBjcHVpZD0gZG9jdW1lbnRhdGlvbiwgd2hpY2ggaXMgdW5y
-ZWxhdGVkIHRvIHRoZQpzcGVjLWN0cmw9IHNlY3Rpb24uCgpTaWduZWQtb2ZmLWJ5OiBBbmRyZXcg
-Q29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgotLS0KQ0M6IEphbiBCZXVsaWNoIDxq
-YmV1bGljaEBzdXNlLmNvbT4KQ0M6IE5vcmJlcnQgTWFudGhleSA8bm1hbnRoZXlAYW1hem9uLmRl
-PgotLS0KIGRvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLnBhbmRvYyB8IDYgKysrLS0tCiAxIGZp
-bGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBh
-L2RvY3MvbWlzYy94ZW4tY29tbWFuZC1saW5lLnBhbmRvYyBiL2RvY3MvbWlzYy94ZW4tY29tbWFu
-ZC1saW5lLnBhbmRvYwppbmRleCAxYTY4MWM5Li43ZGNiMjI5IDEwMDY0NAotLS0gYS9kb2NzL21p
-c2MveGVuLWNvbW1hbmQtbGluZS5wYW5kb2MKKysrIGIvZG9jcy9taXNjL3hlbi1jb21tYW5kLWxp
-bmUucGFuZG9jCkBAIC00ODMsOSArNDgzLDkgQEAgYWNjb3VudGluZyBmb3IgaGFyZHdhcmUgY2Fw
-YWJpbGl0aWVzIGFzIGVudW1lcmF0ZWQgdmlhIENQVUlELgogCiBDdXJyZW50bHkgYWNjZXB0ZWQ6
-CiAKLVRoZSBTcGVjdWxhdGlvbiBDb250cm9sIGhhcmR3YXJlIGZlYXR1cmVzIGBpYnJzYmAsIGBz
-dGlicGAsIGBpYnBiYCwgYGwxZC1mbHVzaGAsCi1gbDF0Zi1iYXJyaWVyYCBhbmQgYHNzYmRgIGFy
-ZSB1c2VkIGJ5IGRlZmF1bHQgaWYgYXZhaWxhYmxlIGFuZCBhcHBsaWNhYmxlLiAgVGhleQotY2Fu
-IGJlIGlnbm9yZWQsIGUuZy4gYG5vLWlicnNiYCwgYXQgd2hpY2ggcG9pbnQgWGVuIHdvbid0IHVz
-ZSB0aGVtIGl0c2VsZiwgYW5kCitUaGUgU3BlY3VsYXRpb24gQ29udHJvbCBoYXJkd2FyZSBmZWF0
-dXJlcyBgaWJyc2JgLCBgc3RpYnBgLCBgaWJwYmAsCitgbDFkLWZsdXNoYCBhbmQgYHNzYmRgIGFy
-ZSB1c2VkIGJ5IGRlZmF1bHQgaWYgYXZhaWxhYmxlIGFuZCBhcHBsaWNhYmxlLiAgVGhleSBjYW4K
-K2JlIGlnbm9yZWQsIGUuZy4gYG5vLWlicnNiYCwgYXQgd2hpY2ggcG9pbnQgWGVuIHdvbid0IHVz
-ZSB0aGVtIGl0c2VsZiwgYW5kCiB3b24ndCBvZmZlciB0aGVtIHRvIGd1ZXN0cy4KIAogIyMjIGNw
-dWlkX21hc2tfY3B1Ci0tIAoyLjEuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+Pj4+IE9uIDA1LjA0LjE5IGF0IDE0OjM0LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gVGhpcyBodW5rIG1vZGlmaWVzIHRoZSBjcHVpZD0gZG9jdW1lbnRhdGlvbiwgd2hpY2gg
+aXMgdW5yZWxhdGVkIHRvIHRoZQo+IHNwZWMtY3RybD0gc2VjdGlvbi4KPiAKPiBTaWduZWQtb2Zm
+LWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKQWNrZWQtYnk6
+IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkknbSBzb3JyeSBmb3Igbm90IGhhdmlu
+ZyBub3RpY2VkIHRoaXMgZHVyaW5nIHJldmlldy4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
