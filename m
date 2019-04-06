@@ -1,18 +1,17 @@
-From: Matt Leinhos <matthew.leinhos@gmail.com>
-Subject: Re: Xen 4.11.1: gdbsx fails
-Date: Sat, 6 Apr 2019 16:00:17 -0500
-Message-ID: <CAFLDOk8ihm4xCMX9k99sE-htxbJrMyShQuJgQatOtCSph18CwQ@mail.gmail.com>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: Re: Xen 4.11.1: gdbsx fails - stable backport request
+Date: Sat, 6 Apr 2019 23:07:06 +0200
+Message-ID: <20190406210706.GA1343@mail-itl>
 References: <CAFLDOk90XmXO+HF5evXqHNO48-pckHphNRpoMemx0u4L9NFMQQ@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============8891381806626683677=="
+Content-Type: multipart/mixed; boundary="===============7684679022757623211=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ExVF=SI=gmail.com=matthew.leinhos@srs-us1.protection.inumbo.net>)
- id 1hCsQR-0007qK-DQ
- for xen-devel@lists.xenproject.org; Sat, 06 Apr 2019 21:00:31 +0000
-Received: by mail-wm1-x335.google.com with SMTP id z24so10702280wmi.5
- for <xen-devel@lists.xenproject.org>; Sat, 06 Apr 2019 14:00:30 -0700 (PDT)
+ <SRS0=lmQc=SI=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hCsWv-00084T-8E
+ for xen-devel@lists.xenproject.org; Sat, 06 Apr 2019 21:07:13 +0000
 In-Reply-To: <CAFLDOk90XmXO+HF5evXqHNO48-pckHphNRpoMemx0u4L9NFMQQ@mail.gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -22,221 +21,72 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
+To: Matt Leinhos <matthew.leinhos@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============8891381806626683677==
-Content-Type: multipart/alternative; boundary="000000000000a3216a0585e2e40a"
 
---000000000000a3216a0585e2e40a
-Content-Type: text/plain; charset="UTF-8"
-
-It appears that this is a known issue in gdbsx that was fixed in commit
-0c9821d5c870c35aa38df7bb5e2ff54da2169b5b, as referenced here:
-https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg21769.html
-
-However, that commit is not included in the RELEASE-4.11.1 tag. In fact, I
-show tools/debuggers/gdbsx as being untouched since Apr 2018 in that tag.
-
---Matt
+--===============7684679022757623211==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="tThc/1wpZn/ma/RB"
+Content-Disposition: inline
 
 
-On Fri, Apr 5, 2019 at 4:48 PM Matt Leinhos <matthew.leinhos@gmail.com>
-wrote:
+--tThc/1wpZn/ma/RB
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Apr 05, 2019 at 04:48:16PM -0500, Matt Leinhos wrote:
 > Greetings:
->
-> I've encountered a problem running gdb + gdbsx on Xen 4.11.1, running
-> Linux kernel 4.18.0-15 on Ubuntu 18.04. Pertinent info is below.
->
+>=20
+> I've encountered a problem running gdb + gdbsx on Xen 4.11.1, running Lin=
+ux
+> kernel 4.18.0-15 on Ubuntu 18.04. Pertinent info is below.
+>=20
 > I've observed this behavior with gdb 8.0, 8.1.1 and 8.2. I've also seen it
 > on Xen 4.9.2. In short, something is broken with my system, but I don't
 > know how to investigate.
->
-> Thanks in advance for any help!
->
-> --Matt
->
->
-> Here's my guest config file:
->
-> $ cat xen-vms/ub1804-dev.hvm
-> type = "hvm"
-> name = "ub18-dev-work"
->
-> # Initial and max memory allocation (MB)
-> memory = 2048
-> maxmem = 2048
->
-> vcpus = 1
-> acpi = 1
-> apic = 1
-> # values: disabled, mixed, external, limited
-> altp2m = "mixed"
-> vif = [ 'bridge=xenbr0' ]
-> disk = [ 'phy:/dev/ubuntu-vg/xen_ubuntu_dev,xvda,w'
->
-> ,'file:/home/matt/iso/ubuntu-18.04.1-desktop-amd64.iso,hdc:cdrom,r' ]
-> boot = 'c' # hard disk (c) / cdrom (d)
-> console = 1
-> on_poweroff = "destroy"
-> on_reboot   = "restart"
-> on_crash    = "preserve"
->
->
-> Here are the two usages of gdbsx (both from Dom0). Note that domain 2 is
-> 64 bit.
->
-> # xl list
-> Name                                        ID   Mem VCPUs      State
-> Time(s)
-> Domain-0                                     0 30098     8     r-----
-> 8724.5
-> ub18-dev-work                                2  2040     1     -b----
-> 24.9
->
-> This is a sanity check....
-> # gdbsx -c 2 64 0
-> ===> Context for DOMID:2
->
-> --> VCPU:0
-> rip:ffffffff9b1f52e6 rsp:ffffffff9bc03e10 flags:0000000000000246
-> rax:ffffffff9b1f4ff0 rbx:0000000000000000 rcx:ffffffff9bc6ff60
-> rdx:0000000000066e16 rsi:ffffffff9bc2ebc8 rdi:0000000000000000
-> r08:00000000505563be r09:0000000000000000 r10:0000000000000008
-> r11:0000000000000008 r12:0000000000000000 r13:0000000000000000
-> r14:0000000000000000 r15:0000000000000000 rbp:ffffffff9bc03e10
-> cs:0000000000000010 ds:0000000000000000 fs:0000000000000000
-> gs:0000000000000000
->
-> Call Trace:
->    [ffffffff9b1f52e6]
->    [ffffffff9bc03e38]
->    [ffffffff9b1f5010]
->    [ffffffff9be85ee0]
->    [ffffffff9bc03e48]
->    [ffffffff9a8394c5]
->    [ffffffff9bc03e58]
->    [ffffffff9b1f544c]
->    [ffffffff9bc03ea0]
->    [ffffffff9a8c3c84]
->    [ffffffff9bf8c920]
->
-> This is the actual usage that fails
-> # gdbsx -a 2 64 3333
-> Listening on port 3333
-> Remote debugging from host 127.0.0.1
-> readchar: Got EOF
-> Detaching from guest
-> Exiting.. Remote side has terminated connection
->
->
-> And here's the corresponding usage of gdb that led to the failure in gdbsx
-> (again, from Dom0):
->
-> $ gdb -q
-> Currently logging to "/home/matt/gdb.log".
-> Logs will overwrite the log file.
-> Output will be logged and displayed.
-> gdb> set architecture i386:x86-64
-> The target architecture is assumed to be i386:x86-64
-> gdb> target remote localhost:3333
-> Remote debugging using localhost:3333
-> warning: No executable has been specified and target does not support
-> determining executable automatically.  Try using the "file" command.
+
+(...)
+
 > Truncated register 26 in remote 'g' packet
-> gdb> show version
-> GNU gdb (Ubuntu 8.2-0ubuntu1~18.04) 8.2
-> Copyright (C) 2018 Free Software Foundation, Inc.
->
 
---000000000000a3216a0585e2e40a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+This is already fixed in Xen 4.12:
+https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dcommit;h=3D0c9821d5c870c35a=
+a38df7bb5e2ff54da2169b5b
 
-<div dir=3D"ltr">It appears that this is a known issue in gdbsx that was fi=
-xed in commit=C2=A0<span style=3D"color:rgb(0,0,0);font-family:courier,&quo=
-t;courier new&quot;,monospace;font-size:14px;white-space:pre-wrap">0c9821d5=
-c870c35aa38df7bb5e2ff54da2169b5b</span><span style=3D"color:rgb(0,0,0);font=
--family:courier,&quot;courier new&quot;,monospace;white-space:pre-wrap">, a=
-s referenced here:</span><br><div><a href=3D"https://www.mail-archive.com/x=
-en-devel@lists.xenproject.org/msg21769.html">https://www.mail-archive.com/x=
-en-devel@lists.xenproject.org/msg21769.html</a><span style=3D"color:rgb(0,0=
-,0);font-family:courier,&quot;courier new&quot;,monospace;font-size:14px;wh=
-ite-space:pre-wrap"><br></span></div><div><br></div><div>However, that comm=
-it is not included in the RELEASE-4.11.1 tag. In fact, I show tools/debugge=
-rs/gdbsx as being untouched since Apr 2018 in that tag.</div><div><br></div=
-><div>--Matt</div><div><br></div></div><br><div class=3D"gmail_quote"><div =
-dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 5, 2019 at 4:48 PM Matt Leinho=
-s &lt;<a href=3D"mailto:matthew.leinhos@gmail.com">matthew.leinhos@gmail.co=
-m</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
-:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
-><div dir=3D"ltr">Greetings:<br><br>I&#39;ve encountered a problem running =
-gdb + gdbsx on Xen=20
-4.11.1, running Linux kernel 4.18.0-15 on Ubuntu 18.04. Pertinent info=20
-is below.<br><div><br></div><div>I&#39;ve observed this behavior with gdb 8=
-.0, 8.1.1 and 8.2. I&#39;ve also seen it on Xen 4.9.2. In short, something =
-is broken with my system, but I don&#39;t know how to investigate.<br></div=
-><div><br></div>Thanks in advance for any help!<br><br>--Matt<br><br><br>He=
-re&#39;s my guest config file:<br><br>$ cat xen-vms/ub1804-dev.hvm<br>type =
-=3D &quot;hvm&quot;<br>name =3D &quot;ub18-dev-work&quot;<br><br># Initial =
-and max memory allocation (MB)<br>memory =3D 2048<br>maxmem =3D 2048<br><br=
->vcpus =3D 1<br>acpi =3D 1<br>apic =3D 1<br># values: disabled, mixed, exte=
-rnal, limited<br>altp2m =3D &quot;mixed&quot;=C2=A0 <br>vif =3D [ &#39;brid=
-ge=3Dxenbr0&#39; ]<br>disk =3D [ &#39;phy:/dev/ubuntu-vg/xen_ubuntu_dev,xvd=
-a,w&#39;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ,&#39;file:/home/mat=
-t/iso/ubuntu-18.04.1-desktop-amd64.iso,hdc:cdrom,r&#39; ]<br>boot =3D &#39;=
-c&#39; # hard disk (c) / cdrom (d)<br>console =3D 1<br>on_poweroff =3D &quo=
-t;destroy&quot;<br>on_reboot=C2=A0=C2=A0 =3D &quot;restart&quot;<br>on_cras=
-h=C2=A0=C2=A0=C2=A0 =3D &quot;preserve&quot;<br><br><br>Here are the two us=
-ages of gdbsx (both from Dom0). Note that domain 2 is 64 bit.<br><br># xl l=
-ist<br>Name=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 ID=C2=A0=C2=A0 Mem VCPUs=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 State=C2=A0=C2=A0 Time(s)<br>Domain-0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 30098=C2=A0=C2=A0=C2=A0=C2=A0 8=C2=A0=
-=C2=A0=C2=A0=C2=A0 r-----=C2=A0=C2=A0=C2=A0 8724.5<br>ub18-dev-work=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2=C2=A0 2040=C2=A0=C2=A0=C2=A0=C2=A0 1=C2=A0=
-=C2=A0=C2=A0=C2=A0 -b----=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 24.9<br><div><br></=
-div><div>This is a sanity check....<br></div># gdbsx -c 2 64 0<br>=3D=3D=3D=
-&gt; Context for DOMID:2<br><br>--&gt; VCPU:0<br>rip:ffffffff9b1f52e6 rsp:f=
-fffffff9bc03e10 flags:0000000000000246<br>rax:ffffffff9b1f4ff0 rbx:00000000=
-00000000 rcx:ffffffff9bc6ff60<br>rdx:0000000000066e16 rsi:ffffffff9bc2ebc8 =
-rdi:0000000000000000<br>r08:00000000505563be r09:0000000000000000 r10:00000=
-00000000008<br>r11:0000000000000008 r12:0000000000000000 r13:00000000000000=
-00<br>r14:0000000000000000 r15:0000000000000000 rbp:ffffffff9bc03e10<br>cs:=
-0000000000000010 ds:0000000000000000 fs:0000000000000000 gs:000000000000000=
-0<br><br>Call Trace:<br>=C2=A0=C2=A0 [ffffffff9b1f52e6]<br>=C2=A0=C2=A0 [ff=
-ffffff9bc03e38]<br>=C2=A0=C2=A0 [ffffffff9b1f5010]<br>=C2=A0=C2=A0 [fffffff=
-f9be85ee0]<br>=C2=A0=C2=A0 [ffffffff9bc03e48]<br>=C2=A0=C2=A0 [ffffffff9a83=
-94c5]<br>=C2=A0=C2=A0 [ffffffff9bc03e58]<br>=C2=A0=C2=A0 [ffffffff9b1f544c]=
-<br>=C2=A0=C2=A0 [ffffffff9bc03ea0]<br>=C2=A0=C2=A0 [ffffffff9a8c3c84]<br><=
-div>=C2=A0=C2=A0 [ffffffff9bf8c920]</div><div><br></div><div>This is the ac=
-tual usage that fails<br></div># gdbsx -a 2 64 3333<br>Listening on port 33=
-33<br>Remote debugging from host 127.0.0.1<br>readchar: Got EOF<br>Detachin=
-g from guest<br>Exiting.. Remote side has terminated connection<br><br><br>=
-And here&#39;s the corresponding usage of gdb that led to the failure in gd=
-bsx (again, from Dom0):<br><br>$ gdb -q<br>Currently logging to &quot;/home=
-/matt/gdb.log&quot;.<br>Logs will overwrite the log file.<br>Output will be=
- logged and displayed.<br>gdb&gt; set architecture i386:x86-64<br>The targe=
-t architecture is assumed to be i386:x86-64<br>gdb&gt; target remote localh=
-ost:3333<br>Remote debugging using localhost:3333<br>warning: No executable=
- has been specified and target does not support<br>determining executable a=
-utomatically.=C2=A0 Try using the &quot;file&quot; command.<br>Truncated re=
-gister 26 in remote &#39;g&#39; packet<br>gdb&gt; show version<br>GNU gdb (=
-Ubuntu 8.2-0ubuntu1~18.04) 8.2<br>Copyright (C) 2018 Free Software Foundati=
-on, Inc.</div>
-</blockquote></div>
+I'm proposing this for a backport to stable branches:
+0c9821d5c8 tools/gdbsx: fix 'g' packet response for 64bit guests
 
---000000000000a3216a0585e2e40a--
+It may also be reasonable to backport other gdbsx related commits.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--tThc/1wpZn/ma/RB
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEyBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlypFPgACgkQ24/THMrX
+1yzsGAf1HtpgyJkMtySPhRluGYHUr4NTmHYFVIcIZ4ue1MuL34+rPWvJvMaGHmyM
+HUX1fH8lbwwNbFvy61V0qhaiFuOzGIHwciVbmT97wSiMgr0qlooVXC/BTBlorFE0
+4Y7w73xouOFH5Gw92+GT87QO6P0p9LGnhP0BYCSdPClg2G4JnfPKW1Um1N6pRKBY
+lI0kP0PUh/bXP9qPex8o6kzv3Urn6iyBSaQ2zXvhMKypquyVsSFp2RPlqC5t8o1Z
+M1F61nUyODMhvGwaPeVwOWREo//h8347JOESnOHeeXI/UTdJJB8ZXQ5PGksbpHcd
+PMJ4Wg7GqZwEbEJrqssik4V0Uy+x
+=Bycb
+-----END PGP SIGNATURE-----
+
+--tThc/1wpZn/ma/RB--
 
 
---===============8891381806626683677==
+--===============7684679022757623211==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -246,4 +96,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============8891381806626683677==--
+--===============7684679022757623211==--
