@@ -2,119 +2,73 @@ Return-Path: <SRS0=ef4D=SI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5428C10F06
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Apr 2019 20:19:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A903CC10F06
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Apr 2019 21:00:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 712AE213F2
-	for <xen-devel@archiver.kernel.org>; Sat,  6 Apr 2019 20:19:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 712AE213F2
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 65120213F2
+	for <xen-devel@archiver.kernel.org>; Sat,  6 Apr 2019 21:00:55 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KPzc6n+o"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65120213F2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hCrma-0004Cf-K1; Sat, 06 Apr 2019 20:19:20 +0000
+	id 1hCsQT-0007qP-7w; Sat, 06 Apr 2019 21:00:33 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=D6cl=SI=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hCrmZ-0004CT-Sw
- for xen-devel@lists.xenproject.org; Sat, 06 Apr 2019 20:19:19 +0000
-X-Inumbo-ID: 41414409-58a9-11e9-92d7-bc764e045a96
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=ExVF=SI=gmail.com=matthew.leinhos@srs-us1.protection.inumbo.net>)
+ id 1hCsQR-0007qK-DQ
+ for xen-devel@lists.xenproject.org; Sat, 06 Apr 2019 21:00:31 +0000
+X-Inumbo-ID: 0259aae6-58af-11e9-92d7-bc764e045a96
+Received: from mail-wm1-x335.google.com (unknown [2a00:1450:4864:20::335])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 41414409-58a9-11e9-92d7-bc764e045a96;
- Sat, 06 Apr 2019 20:19:18 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <aliasfile-bounces@xenproject.org>)
- id 1hCrmX-0008TF-AY; Sat, 06 Apr 2019 20:19:17 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1hCrmW-0006Bn-4A; Sat, 06 Apr 2019 20:19:16 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1hCrmW-00029z-3T; Sat, 06 Apr 2019 20:19:16 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-134396-mainreport@xen.org>
+ id 0259aae6-58af-11e9-92d7-bc764e045a96;
+ Sat, 06 Apr 2019 21:00:30 +0000 (UTC)
+Received: by mail-wm1-x335.google.com with SMTP id z24so10702280wmi.5
+ for <xen-devel@lists.xenproject.org>; Sat, 06 Apr 2019 14:00:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+ bh=iwkbrct55KTUSWu4mwTmypT37PP1Jl2hd+YCnW2AJ58=;
+ b=KPzc6n+ofSumB4mTVMuj2LNboFuS8iCfh+tt1quspiRItaY7lWDPKB7m066Jed+TDC
+ M6rdZO8QJC7QRvbfqXP6QgQG4BZR2ksvbXv2OeitVv5/ImNWpPrCz6rCRjaMt10KltHX
+ 4agGx9nmPHwD4//E+DrJinca2VigDAybJxF8gXmMkRSdOqh1lL2uMr7sDM4pZHko/q70
+ IjRTU5WNT/8lrDd0l+tvpgkGbQ8qnuJn21TPwHPvE/PI5ICT2uYODhrBmaXSKBvDq2XN
+ ywPwWhL3RUgyWLjIBC1qvqYOae2b4CMFmdfIn6jKasMwD8qoNIKfe/nTxea1VJxZUDfP
+ EPLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to;
+ bh=iwkbrct55KTUSWu4mwTmypT37PP1Jl2hd+YCnW2AJ58=;
+ b=mn5Lt30LC6IMdy6l4zgIwc8urdfOjJuBO/MNcjbHYRQMfJCPgEd/rBmR4ADBMiA3ql
+ e9/OiFY+fE6tiIg251bYnbyZOjFDJHewL0GRkOiTD9ZlIROG5RUtH3tSKWRI1FWmQOCT
+ T/YGIPBJ7Lr0coIFtqmqjaTLgpIkdtqgCDWBkeGPx6zbay1kuEM2G125VpV5P05mqVIC
+ H9tIpIhXrlInxPHg3A67dH5OYVa24ROmEPxUKKfUCXc0LoTNglxWJSxfejHP7L/mToRi
+ mXgVhjGqy+gj5yAJKxsoE07LgttLHSvgz1ndDzWI/21ubT6dcsaniIqsmzno0eeuijNT
+ evlw==
+X-Gm-Message-State: APjAAAVg4iA1CS52JHK0cQ/O0Wom/MUO+iGh/jhugXYZM5ndO8cA+rMK
+ dOffEbcX8F1Ac2I+6xCXPAGnzJLwNfauqBmjpAYx7tmk
+X-Google-Smtp-Source: APXvYqyplMK6CTVk7QpgRMW58brQ/HmPekmZ4rLAKODCoitKeszgaF/5fzvO0HANWRbRKTzJaU6gp+Oiw5rVyAXqe/o=
+X-Received: by 2002:a7b:c3c9:: with SMTP id t9mr11788302wmj.131.1554584428550; 
+ Sat, 06 Apr 2019 14:00:28 -0700 (PDT)
 MIME-Version: 1.0
-X-Osstest-Failures: linux-4.4:build-arm64-pvops:<job status>:broken:regression
- linux-4.4:build-arm64:<job status>:broken:regression
- linux-4.4:build-arm64-xsm:<job status>:broken:regression
- linux-4.4:build-arm64-xsm:host-install(4):broken:regression
- linux-4.4:build-arm64-pvops:host-install(4):broken:regression
- linux-4.4:build-arm64:host-install(4):broken:regression
- linux-4.4:test-amd64-amd64-xl-multivcpu:guest-start:fail:regression
- linux-4.4:test-amd64-i386-xl-xsm:guest-start:fail:regression
- linux-4.4:test-amd64-amd64-libvirt:guest-start:fail:regression
- linux-4.4:test-amd64-i386-pair:guest-start/debian:fail:regression
- linux-4.4:test-amd64-amd64-pair:guest-start/debian:fail:regression
- linux-4.4:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:guest-start/debianhvm.repeat:fail:regression
- linux-4.4:test-armhf-armhf-libvirt-raw:debian-di-install:fail:regression
- linux-4.4:test-amd64-amd64-xl-rtds:guest-start:fail:allowable
- linux-4.4:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
- linux-4.4:test-arm64-arm64-xl-credit2:build-check(1):blocked:nonblocking
- linux-4.4:test-arm64-arm64-xl:build-check(1):blocked:nonblocking
- linux-4.4:test-arm64-arm64-xl-credit1:build-check(1):blocked:nonblocking
- linux-4.4:test-arm64-arm64-examine:build-check(1):blocked:nonblocking
- linux-4.4:build-arm64-libvirt:build-check(1):blocked:nonblocking
- linux-4.4:test-arm64-arm64-libvirt-xsm:build-check(1):blocked:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemuu-dmrestrict-amd64-dmrestrict:debian-hvm-install:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemuu-dmrestrict-amd64-dmrestrict:debian-hvm-install:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-pvshim:guest-start:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-pvhv2-amd:guest-start:fail:nonblocking
- linux-4.4:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-pvhv2-intel:guest-start:fail:nonblocking
- linux-4.4:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
- linux-4.4:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
- linux-4.4:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
- linux-4.4:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
- linux-4.4:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
- linux-4.4:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
- linux-4.4:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemut-win10-i386:windows-install:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemuu-win10-i386:windows-install:fail:nonblocking
- linux-4.4:test-amd64-i386-xl-qemut-win10-i386:windows-install:fail:nonblocking
- linux-4.4:test-amd64-amd64-xl-qemuu-win10-i386:windows-install:fail:nonblocking
-X-Osstest-Versions-This: linux=12ae58ca7ec42fe23df5d0b0d01bce2ccb728fd5
-X-Osstest-Versions-That: linux=af13f43f01a3e4a11686f5fa4de42ecec8ed71b1
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 06 Apr 2019 20:19:16 +0000
-Subject: [Xen-devel] [linux-4.4 test] 134396: regressions - trouble:
- blocked/broken/fail/pass
+References: <CAFLDOk90XmXO+HF5evXqHNO48-pckHphNRpoMemx0u4L9NFMQQ@mail.gmail.com>
+In-Reply-To: <CAFLDOk90XmXO+HF5evXqHNO48-pckHphNRpoMemx0u4L9NFMQQ@mail.gmail.com>
+From: Matt Leinhos <matthew.leinhos@gmail.com>
+Date: Sat, 6 Apr 2019 16:00:17 -0500
+Message-ID:
+ <CAFLDOk8ihm4xCMX9k99sE-htxbJrMyShQuJgQatOtCSph18CwQ@mail.gmail.com>
+To: xen-devel@lists.xenproject.org
+Subject: Re: [Xen-devel] Xen 4.11.1: gdbsx fails
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -125,260 +79,231 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8891381806626683677=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190406201916.P_Siioo8vVJfIr0Hp0nJhoNqcTxFZsFze5wfgA57wjw@z>
+Message-ID: <20190406210017.bB-xar9LiLxhBCj33MptpQuyk4pCocLccXJQ_DazP0k@z>
 
-ZmxpZ2h0IDEzNDM5NiBsaW51eC00LjQgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNDM5Ni8KClJlZ3Jlc3Npb25zIDotKAoKVGVz
-dHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0
-cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYXJtNjQtcHZvcHMgICAgICAgICAgICAg
-ICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYXJtNjQgICAgICAg
-ICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQt
-YXJtNjQteHNtICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJy
-b2tlbgogYnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAg
-ICAgIGJyb2tlbiBSRUdSLiB2cy4gMTMzNDY4CiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAg
-ICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgYnJva2VuIFJFR1IuIHZzLiAxMzM0NjgKIGJ1aWxk
-LWFybTY0ICAgICAgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICBicm9rZW4g
-UkVHUi4gdnMuIDEzMzQ2OAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1tdWx0aXZjcHUgMTIgZ3Vlc3Qt
-c3RhcnQgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTMzNDY4CiB0ZXN0LWFtZDY0LWkzODYt
-eGwteHNtICAgICAgIDEyIGd1ZXN0LXN0YXJ0ICAgICAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAx
-MzM0NjgKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAg
-ICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzQ2OAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAgICAg
-ICAyMSBndWVzdC1zdGFydC9kZWJpYW4gICAgICAgZmFpbCBSRUdSLiB2cy4gMTMzNDY4CiB0ZXN0
-LWFtZDY0LWFtZDY0LXBhaXIgICAgICAgIDIxIGd1ZXN0LXN0YXJ0L2RlYmlhbiAgICAgICBmYWls
-IFJFR1IuIHZzLiAxMzM0NjgKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2
-bS1hbWQ2NC14c20gMTYgZ3Vlc3Qtc3RhcnQvZGViaWFuaHZtLnJlcGVhdCBmYWlsIFJFR1IuIHZz
-LiAxMzM0NjgKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgMTAgZGViaWFuLWRpLWluc3Rh
-bGwgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzQ2OAoKUmVncmVzc2lvbnMgd2hpY2ggYXJlIHJl
-Z2FyZGVkIGFzIGFsbG93YWJsZSAobm90IGJsb2NraW5nKToKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-cnRkcyAgICAgMTIgZ3Vlc3Qtc3RhcnQgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzMzQ2
-OAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRl
-c3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAg
-ICBibG9ja2VkICBuL2EKIHRlc3QtYXJtNjQtYXJtNjQteGwtY3JlZGl0MiAgIDEgYnVpbGQtY2hl
-Y2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAg
-ICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3Qt
-YXJtNjQtYXJtNjQteGwtY3JlZGl0MSAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBi
-bG9ja2VkICBuL2EKIHRlc3QtYXJtNjQtYXJtNjQtZXhhbWluZSAgICAgIDEgYnVpbGQtY2hlY2so
-MSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIGJ1aWxkLWFybTY0LWxpYnZpcnQgICAgICAg
-ICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBuL2EKIHRlc3QtYXJt
-NjQtYXJtNjQtbGlidmlydC14c20gIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9j
-a2VkICBuL2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZG1yZXN0cmljdC1hbWQ2NC1kbXJl
-c3RyaWN0IDEwIGRlYmlhbi1odm0taW5zdGFsbCBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgMTAgZGViaWFuLWh2bS1p
-bnN0YWxsIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAxMiBn
-dWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0
-LWFtZDY0LXhsLXB2aHYyLWFtZCAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAgIGZhaWwg
-IG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXhzbSAgMTMgbWlncmF0ZS1zdXBw
-b3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1w
-dmh2Mi1pbnRlbCAxMiBndWVzdC1zdGFydCAgICAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNz
-CiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAg
-ICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC14c20gMTMg
-bWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
-NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBv
-cnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgZmFpbCBuZXZlciBw
-YXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1hbWQgMTcgZGViaWFuLWh2bS1pbnN0
-YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydC12aGQg
-MTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm1oZi1hcm1oZi14bC1hcm5kYWxlICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
-aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgIDE0IHNhdmVyZXN0
-b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4Ni14
-bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2ZXIg
-cGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3Ag
-ICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDEg
-IDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBm
-YWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
-LXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQt
-Y2hlY2sgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRy
-dWNrIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLWxpYnZpcnQgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydCAgICAgMTQgc2F2ZXJl
-c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
-Zi14bC1tdWx0aXZjcHUgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBuZXZl
-ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAxNCBzYXZlcmVzdG9yZS1zdXBw
-b3J0LWNoZWNrICAgIGZhaWwgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtcnRkcyAg
-ICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
-dC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAg
-IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LXdpbjctYW1kNjQg
-MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtaTM4
-Ni14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0b3AgICAgICAgICAgICAgIGZhaWwgbmV2
-ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0IDE3IGd1ZXN0LXN0
-b3AgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1
-LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRl
-c3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAg
-ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMyBzYXZl
-cmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFy
-bWhmLXhsLWNyZWRpdDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5l
-dmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3Vw
-cG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0
-LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCiB0
-ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAg
-ICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luMTAtaTM4
-NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1p
-Mzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgMTAgd2luZG93cy1pbnN0YWxsICAgICAgICAgZmFpbCBu
-ZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtd2luMTAtaTM4NiAxMCB3aW5kb3dz
-LWluc3RhbGwgICAgICAgICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVt
-dXUtd2luMTAtaTM4NiAxMCB3aW5kb3dzLWluc3RhbGwgICAgICAgIGZhaWwgbmV2ZXIgcGFzcwoK
-dmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGxpbnV4ICAgICAgICAgICAgICAgIDEyYWU1
-OGNhN2VjNDJmZTIzZGY1ZDBiMGQwMWJjZTJjY2I3MjhmZDUKYmFzZWxpbmUgdmVyc2lvbjoKIGxp
-bnV4ICAgICAgICAgICAgICAgIGFmMTNmNDNmMDFhM2U0YTExNjg2ZjVmYTRkZTQyZWNlYzhlZDcx
-YjEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzMzQ2OCAgMjAxOS0wMi0yOCAwOTo1Nzo1NSBaICAg
-MzcgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzQwMDYgIDIwMTktMDMtMjMgMDg6MTU6NTkg
-WiAgIDE0IGRheXMgICAxMiBhdHRlbXB0cwpUZXN0aW5nIHNhbWUgc2luY2UgICAxMzQzOTYgIDIw
-MTktMDQtMDQgMTY6MTg6NTYgWiAgICAyIGRheXMgICAgMSBhdHRlbXB0cwoKLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCjM5NyBwZW9w
-bGUgdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdCwKbm90IGxpc3RpbmcgdGhlbSBhbGwKCmpv
-YnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2
-NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
-ICAKIGJ1aWxkLWFybTY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBicm9rZW4gIAogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogYnVpbGQtYXJtNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJsb2NrZWQgCiBidWlsZC1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYtbGlidmlydCAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQt
-cHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgYnJva2VuICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1wdm9wcyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1y
-dW1wcnVuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
-IGJ1aWxkLWkzODYtcnVtcHJ1biAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJt
-aGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV0LWRlYmlhbmh2bS1hbWQ2NC14
-c20gICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dC1kZWJp
-YW5odm0tYW1kNjQteHNtICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
-NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYtbGlidmlydC1xZW11dS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAgICAg
-ICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhz
-bSAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlh
-bmh2bS1hbWQ2NC14c20gICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXhsLXFlbXV0LXN0dWJkb20tZGViaWFuaHZtLWFtZDY0LXhzbSAgICAgICAgcGFzcyAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAg
-ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1s
-aWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1x
-ZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ZmFpbCAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFt
-ZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
-YW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZt
-LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVl
-YnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcnVtcHJ1bi1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
-ZW11dC13aW43LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
-ZDY0LWkzODYteGwtcWVtdXQtd2luNy1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luNy1hbWQ2NCAgICAgICAgICAgICAg
-ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjctYW1kNjQg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFl
-bXV0LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
-NjQtaTM4Ni14bC1xZW11dC13czE2LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
-ICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS13czE2LWFtZDY0ICAgICAgICAgICAgICAg
-ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd3MxNi1hbWQ2NCAg
-ICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtYXJu
-ZGFsZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2
-NC1hbWQ2NC14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
-ICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MSAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1jcmVk
-aXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0
-LWFybTY0LXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tl
-ZCAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1jdWJpZXRydWNrICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1
-LWRtcmVzdHJpY3QtYW1kNjQtZG1yZXN0cmljdCAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQt
-aTM4Ni14bC1xZW11dS1kbXJlc3RyaWN0LWFtZDY0LWRtcmVzdHJpY3QgICAgICAgICBmYWlsICAg
-IAogdGVzdC1hbWQ2NC1hbWQ2NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWV4YW1pbmUgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYXJtaGYtYXJtaGYtZXhhbWluZSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
-Mzg2LWV4YW1pbmUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CiB0ZXN0LWFtZDY0LWkzODYtZnJlZWJzZDEwLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1ydW1wcnVuLWkzODYgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13
-aW4xMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkz
-ODYteGwtcWVtdXQtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAK
-IHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtd2luMTAtaTM4NiAgICAgICAgICAgICAgICAgICAg
-ICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdpbjEwLWkzODYgICAgICAg
-ICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3Rl
-ZC1pbnRlbCAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
-NjQteGwtcHZodjItaW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAog
-dGVzdC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1o
-Zi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtbXVsdGl2Y3B1ICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRl
-c3QtYW1kNjQtaTM4Ni1wYWlyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC1wYWlyICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-YW1kNjQtcHZncnViICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1hbWQ2NC1pMzg2LXB2Z3J1YiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1w
-eWdydWIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
-LWFtZDY0LWFtZDY0LXhsLXFjb3cyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-cGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1yYXcgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXJhdyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
-LXJ0ZHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3Qt
-YXJtaGYtYXJtaGYteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBw
-YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQtc2hhZG93
-ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZt
-LWFtZDY0LXNoYWRvdyAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwt
-c2hhZG93ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
-bWQ2NC1pMzg2LXhsLXNoYWRvdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
-c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0
-IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dz
-CmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUg
-YXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0
-ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGlu
-IGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
-ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0
-cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVy
-CgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhl
-bi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5Cgpicm9rZW4tam9iIGJ1aWxkLWFy
-bTY0LXB2b3BzIGJyb2tlbgpicm9rZW4tam9iIGJ1aWxkLWFybTY0IGJyb2tlbgpicm9rZW4tam9i
-IGJ1aWxkLWFybTY0LXhzbSBicm9rZW4KYnJva2VuLXN0ZXAgYnVpbGQtYXJtNjQteHNtIGhvc3Qt
-aW5zdGFsbCg0KQpicm9rZW4tc3RlcCBidWlsZC1hcm02NC1wdm9wcyBob3N0LWluc3RhbGwoNCkK
-YnJva2VuLXN0ZXAgYnVpbGQtYXJtNjQgaG9zdC1pbnN0YWxsKDQpCgpOb3QgcHVzaGluZy4KCihO
-byByZXZpc2lvbiBsb2c7IGl0IHdvdWxkIGJlIDExMjY3IGxpbmVzIGxvbmcuKQoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8891381806626683677==
+Content-Type: multipart/alternative; boundary="000000000000a3216a0585e2e40a"
+
+--000000000000a3216a0585e2e40a
+Content-Type: text/plain; charset="UTF-8"
+
+It appears that this is a known issue in gdbsx that was fixed in commit
+0c9821d5c870c35aa38df7bb5e2ff54da2169b5b, as referenced here:
+https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg21769.html
+
+However, that commit is not included in the RELEASE-4.11.1 tag. In fact, I
+show tools/debuggers/gdbsx as being untouched since Apr 2018 in that tag.
+
+--Matt
+
+
+On Fri, Apr 5, 2019 at 4:48 PM Matt Leinhos <matthew.leinhos@gmail.com>
+wrote:
+
+> Greetings:
+>
+> I've encountered a problem running gdb + gdbsx on Xen 4.11.1, running
+> Linux kernel 4.18.0-15 on Ubuntu 18.04. Pertinent info is below.
+>
+> I've observed this behavior with gdb 8.0, 8.1.1 and 8.2. I've also seen it
+> on Xen 4.9.2. In short, something is broken with my system, but I don't
+> know how to investigate.
+>
+> Thanks in advance for any help!
+>
+> --Matt
+>
+>
+> Here's my guest config file:
+>
+> $ cat xen-vms/ub1804-dev.hvm
+> type = "hvm"
+> name = "ub18-dev-work"
+>
+> # Initial and max memory allocation (MB)
+> memory = 2048
+> maxmem = 2048
+>
+> vcpus = 1
+> acpi = 1
+> apic = 1
+> # values: disabled, mixed, external, limited
+> altp2m = "mixed"
+> vif = [ 'bridge=xenbr0' ]
+> disk = [ 'phy:/dev/ubuntu-vg/xen_ubuntu_dev,xvda,w'
+>
+> ,'file:/home/matt/iso/ubuntu-18.04.1-desktop-amd64.iso,hdc:cdrom,r' ]
+> boot = 'c' # hard disk (c) / cdrom (d)
+> console = 1
+> on_poweroff = "destroy"
+> on_reboot   = "restart"
+> on_crash    = "preserve"
+>
+>
+> Here are the two usages of gdbsx (both from Dom0). Note that domain 2 is
+> 64 bit.
+>
+> # xl list
+> Name                                        ID   Mem VCPUs      State
+> Time(s)
+> Domain-0                                     0 30098     8     r-----
+> 8724.5
+> ub18-dev-work                                2  2040     1     -b----
+> 24.9
+>
+> This is a sanity check....
+> # gdbsx -c 2 64 0
+> ===> Context for DOMID:2
+>
+> --> VCPU:0
+> rip:ffffffff9b1f52e6 rsp:ffffffff9bc03e10 flags:0000000000000246
+> rax:ffffffff9b1f4ff0 rbx:0000000000000000 rcx:ffffffff9bc6ff60
+> rdx:0000000000066e16 rsi:ffffffff9bc2ebc8 rdi:0000000000000000
+> r08:00000000505563be r09:0000000000000000 r10:0000000000000008
+> r11:0000000000000008 r12:0000000000000000 r13:0000000000000000
+> r14:0000000000000000 r15:0000000000000000 rbp:ffffffff9bc03e10
+> cs:0000000000000010 ds:0000000000000000 fs:0000000000000000
+> gs:0000000000000000
+>
+> Call Trace:
+>    [ffffffff9b1f52e6]
+>    [ffffffff9bc03e38]
+>    [ffffffff9b1f5010]
+>    [ffffffff9be85ee0]
+>    [ffffffff9bc03e48]
+>    [ffffffff9a8394c5]
+>    [ffffffff9bc03e58]
+>    [ffffffff9b1f544c]
+>    [ffffffff9bc03ea0]
+>    [ffffffff9a8c3c84]
+>    [ffffffff9bf8c920]
+>
+> This is the actual usage that fails
+> # gdbsx -a 2 64 3333
+> Listening on port 3333
+> Remote debugging from host 127.0.0.1
+> readchar: Got EOF
+> Detaching from guest
+> Exiting.. Remote side has terminated connection
+>
+>
+> And here's the corresponding usage of gdb that led to the failure in gdbsx
+> (again, from Dom0):
+>
+> $ gdb -q
+> Currently logging to "/home/matt/gdb.log".
+> Logs will overwrite the log file.
+> Output will be logged and displayed.
+> gdb> set architecture i386:x86-64
+> The target architecture is assumed to be i386:x86-64
+> gdb> target remote localhost:3333
+> Remote debugging using localhost:3333
+> warning: No executable has been specified and target does not support
+> determining executable automatically.  Try using the "file" command.
+> Truncated register 26 in remote 'g' packet
+> gdb> show version
+> GNU gdb (Ubuntu 8.2-0ubuntu1~18.04) 8.2
+> Copyright (C) 2018 Free Software Foundation, Inc.
+>
+
+--000000000000a3216a0585e2e40a
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">It appears that this is a known issue in gdbsx that was fi=
+xed in commit=C2=A0<span style=3D"color:rgb(0,0,0);font-family:courier,&quo=
+t;courier new&quot;,monospace;font-size:14px;white-space:pre-wrap">0c9821d5=
+c870c35aa38df7bb5e2ff54da2169b5b</span><span style=3D"color:rgb(0,0,0);font=
+-family:courier,&quot;courier new&quot;,monospace;white-space:pre-wrap">, a=
+s referenced here:</span><br><div><a href=3D"https://www.mail-archive.com/x=
+en-devel@lists.xenproject.org/msg21769.html">https://www.mail-archive.com/x=
+en-devel@lists.xenproject.org/msg21769.html</a><span style=3D"color:rgb(0,0=
+,0);font-family:courier,&quot;courier new&quot;,monospace;font-size:14px;wh=
+ite-space:pre-wrap"><br></span></div><div><br></div><div>However, that comm=
+it is not included in the RELEASE-4.11.1 tag. In fact, I show tools/debugge=
+rs/gdbsx as being untouched since Apr 2018 in that tag.</div><div><br></div=
+><div>--Matt</div><div><br></div></div><br><div class=3D"gmail_quote"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr 5, 2019 at 4:48 PM Matt Leinho=
+s &lt;<a href=3D"mailto:matthew.leinhos@gmail.com">matthew.leinhos@gmail.co=
+m</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin=
+:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex"=
+><div dir=3D"ltr">Greetings:<br><br>I&#39;ve encountered a problem running =
+gdb + gdbsx on Xen=20
+4.11.1, running Linux kernel 4.18.0-15 on Ubuntu 18.04. Pertinent info=20
+is below.<br><div><br></div><div>I&#39;ve observed this behavior with gdb 8=
+.0, 8.1.1 and 8.2. I&#39;ve also seen it on Xen 4.9.2. In short, something =
+is broken with my system, but I don&#39;t know how to investigate.<br></div=
+><div><br></div>Thanks in advance for any help!<br><br>--Matt<br><br><br>He=
+re&#39;s my guest config file:<br><br>$ cat xen-vms/ub1804-dev.hvm<br>type =
+=3D &quot;hvm&quot;<br>name =3D &quot;ub18-dev-work&quot;<br><br># Initial =
+and max memory allocation (MB)<br>memory =3D 2048<br>maxmem =3D 2048<br><br=
+>vcpus =3D 1<br>acpi =3D 1<br>apic =3D 1<br># values: disabled, mixed, exte=
+rnal, limited<br>altp2m =3D &quot;mixed&quot;=C2=A0 <br>vif =3D [ &#39;brid=
+ge=3Dxenbr0&#39; ]<br>disk =3D [ &#39;phy:/dev/ubuntu-vg/xen_ubuntu_dev,xvd=
+a,w&#39;<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 ,&#39;file:/home/mat=
+t/iso/ubuntu-18.04.1-desktop-amd64.iso,hdc:cdrom,r&#39; ]<br>boot =3D &#39;=
+c&#39; # hard disk (c) / cdrom (d)<br>console =3D 1<br>on_poweroff =3D &quo=
+t;destroy&quot;<br>on_reboot=C2=A0=C2=A0 =3D &quot;restart&quot;<br>on_cras=
+h=C2=A0=C2=A0=C2=A0 =3D &quot;preserve&quot;<br><br><br>Here are the two us=
+ages of gdbsx (both from Dom0). Note that domain 2 is 64 bit.<br><br># xl l=
+ist<br>Name=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0 ID=C2=A0=C2=A0 Mem VCPUs=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0 State=C2=A0=C2=A0 Time(s)<br>Domain-0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 0 30098=C2=A0=C2=A0=C2=A0=C2=A0 8=C2=A0=
+=C2=A0=C2=A0=C2=A0 r-----=C2=A0=C2=A0=C2=A0 8724.5<br>ub18-dev-work=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 2=C2=A0 2040=C2=A0=C2=A0=C2=A0=C2=A0 1=C2=A0=
+=C2=A0=C2=A0=C2=A0 -b----=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 24.9<br><div><br></=
+div><div>This is a sanity check....<br></div># gdbsx -c 2 64 0<br>=3D=3D=3D=
+&gt; Context for DOMID:2<br><br>--&gt; VCPU:0<br>rip:ffffffff9b1f52e6 rsp:f=
+fffffff9bc03e10 flags:0000000000000246<br>rax:ffffffff9b1f4ff0 rbx:00000000=
+00000000 rcx:ffffffff9bc6ff60<br>rdx:0000000000066e16 rsi:ffffffff9bc2ebc8 =
+rdi:0000000000000000<br>r08:00000000505563be r09:0000000000000000 r10:00000=
+00000000008<br>r11:0000000000000008 r12:0000000000000000 r13:00000000000000=
+00<br>r14:0000000000000000 r15:0000000000000000 rbp:ffffffff9bc03e10<br>cs:=
+0000000000000010 ds:0000000000000000 fs:0000000000000000 gs:000000000000000=
+0<br><br>Call Trace:<br>=C2=A0=C2=A0 [ffffffff9b1f52e6]<br>=C2=A0=C2=A0 [ff=
+ffffff9bc03e38]<br>=C2=A0=C2=A0 [ffffffff9b1f5010]<br>=C2=A0=C2=A0 [fffffff=
+f9be85ee0]<br>=C2=A0=C2=A0 [ffffffff9bc03e48]<br>=C2=A0=C2=A0 [ffffffff9a83=
+94c5]<br>=C2=A0=C2=A0 [ffffffff9bc03e58]<br>=C2=A0=C2=A0 [ffffffff9b1f544c]=
+<br>=C2=A0=C2=A0 [ffffffff9bc03ea0]<br>=C2=A0=C2=A0 [ffffffff9a8c3c84]<br><=
+div>=C2=A0=C2=A0 [ffffffff9bf8c920]</div><div><br></div><div>This is the ac=
+tual usage that fails<br></div># gdbsx -a 2 64 3333<br>Listening on port 33=
+33<br>Remote debugging from host 127.0.0.1<br>readchar: Got EOF<br>Detachin=
+g from guest<br>Exiting.. Remote side has terminated connection<br><br><br>=
+And here&#39;s the corresponding usage of gdb that led to the failure in gd=
+bsx (again, from Dom0):<br><br>$ gdb -q<br>Currently logging to &quot;/home=
+/matt/gdb.log&quot;.<br>Logs will overwrite the log file.<br>Output will be=
+ logged and displayed.<br>gdb&gt; set architecture i386:x86-64<br>The targe=
+t architecture is assumed to be i386:x86-64<br>gdb&gt; target remote localh=
+ost:3333<br>Remote debugging using localhost:3333<br>warning: No executable=
+ has been specified and target does not support<br>determining executable a=
+utomatically.=C2=A0 Try using the &quot;file&quot; command.<br>Truncated re=
+gister 26 in remote &#39;g&#39; packet<br>gdb&gt; show version<br>GNU gdb (=
+Ubuntu 8.2-0ubuntu1~18.04) 8.2<br>Copyright (C) 2018 Free Software Foundati=
+on, Inc.</div>
+</blockquote></div>
+
+--000000000000a3216a0585e2e40a--
+
+
+--===============8891381806626683677==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8891381806626683677==--
+
