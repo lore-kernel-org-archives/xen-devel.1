@@ -1,17 +1,20 @@
-From: FionaLi-oc <fionali-oc@zhaoxin.com>
-Subject: [PATCH] cpupool: fix ASSERT( c != old_pool )
-Date: Mon, 8 Apr 2019 10:40:46 +0800
-Message-ID: <1554691246-7249-1-git-send-email-fionali-oc@zhaoxin.com>
+From: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH] cpupool: fix ASSERT( c != old_pool )
+Date: Mon, 8 Apr 2019 07:09:08 +0200
+Message-ID: <31983788-e4e4-5526-04a1-660c00930d0d@suse.com>
+References: <1554691246-7249-1-git-send-email-fionali-oc@zhaoxin.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=SmQj=SK=zhaoxin.com=fionali-oc@srs-us1.protection.inumbo.net>)
- id 1hDKE1-0000i2-GQ
- for xen-devel@lists.xenproject.org; Mon, 08 Apr 2019 02:41:33 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=CdzU=SK=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1hDMWv-0003ln-Tk
+ for xen-devel@lists.xenproject.org; Mon, 08 Apr 2019 05:09:13 +0000
+In-Reply-To: <1554691246-7249-1-git-send-email-fionali-oc@zhaoxin.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,27 +23,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: jgross@suse.com, cobechen@zhaoxin.com, FionaLi-oc <fionali-oc@zhaoxin.com>, dfaggioli@suse.com
+To: FionaLi-oc <fionali-oc@zhaoxin.com>, xen-devel@lists.xenproject.org
+Cc: cobechen@zhaoxin.com, dfaggioli@suse.com
 List-Id: xen-devel@lists.xenproject.org
 
-QXNzaWduaW5nIGNwdSB0byBjcHVwb29sIG5lZWRuJ3QgdG8gc3dpdGNoIGNwdSBzY2hlZHVsZXIg
-d2hlbgpzeXN0ZW0gc3RhdGUgaXMgcmVzdW1lLCBvdGhlcndpc2UgaXQgd2lsbCBjYXVzZSBBU1NF
-UlQgaW4Kc2NoZWR1bGVfY3B1X3N3aXRjaCgpLgoKU2lnbmVkLW9mZi1ieTogRmlvbmFMaS1vYyA8
-ZmlvbmFsaS1vY0B6aGFveGluLmNvbT4KLS0tCiB4ZW4vY29tbW9uL2NwdXBvb2wuYyB8IDEwICsr
-KysrKystLS0KIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0p
-CgpkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi9jcHVwb29sLmMgYi94ZW4vY29tbW9uL2NwdXBvb2wu
-YwppbmRleCBlODliYjY3Li5hY2M0YTUyIDEwMDY0NAotLS0gYS94ZW4vY29tbW9uL2NwdXBvb2wu
-YworKysgYi94ZW4vY29tbW9uL2NwdXBvb2wuYwpAQCAtMjY4LDkgKzI2OCwxMyBAQCBzdGF0aWMg
-aW50IGNwdXBvb2xfYXNzaWduX2NwdV9sb2NrZWQoc3RydWN0IGNwdXBvb2wgKmMsIHVuc2lnbmVk
-IGludCBjcHUpCiAKICAgICBpZiAoIChjcHVwb29sX21vdmluZ19jcHUgPT0gY3B1KSAmJiAoYyAh
-PSBjcHVwb29sX2NwdV9tb3ZpbmcpICkKICAgICAgICAgcmV0dXJuIC1FQUREUk5PVEFWQUlMOwot
-ICAgIHJldCA9IHNjaGVkdWxlX2NwdV9zd2l0Y2goY3B1LCBjKTsKLSAgICBpZiAoIHJldCApCi0g
-ICAgICAgIHJldHVybiByZXQ7CisKKyAgICBpZiggc3lzdGVtX3N0YXRlICE9IFNZU19TVEFURV9y
-ZXN1bWUgKQorICAgIHsKKyAgICAgICAgcmV0ID0gc2NoZWR1bGVfY3B1X3N3aXRjaChjcHUsIGMp
-OworICAgICAgICBpZiAoIHJldCApCisgICAgICAgICAgICByZXR1cm4gcmV0OworICAgIH0KIAog
-ICAgIGNwdW1hc2tfY2xlYXJfY3B1KGNwdSwgJmNwdXBvb2xfZnJlZV9jcHVzKTsKICAgICBpZiAo
-Y3B1cG9vbF9tb3ZpbmdfY3B1ID09IGNwdSkKLS0gCjEuOC4zLjEKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMDgvMDQvMjAxOSAwNDo0MCwgRmlvbmFMaS1vYyB3cm90ZToKPiBBc3NpZ25pbmcgY3B1IHRv
+IGNwdXBvb2wgbmVlZG4ndCB0byBzd2l0Y2ggY3B1IHNjaGVkdWxlciB3aGVuCj4gc3lzdGVtIHN0
+YXRlIGlzIHJlc3VtZSwgb3RoZXJ3aXNlIGl0IHdpbGwgY2F1c2UgQVNTRVJUIGluCj4gc2NoZWR1
+bGVfY3B1X3N3aXRjaCgpLgoKSSBkb24ndCB0aGluayB0aGlzIHBhdGNoIGlzIG5lZWRlZCBvbiBj
+dXJyZW50IHN0YWdpbmcgdHJlZS4gQ29tbWl0CjY4NzBlYTlkMWZhZDZmYmUyNyBjaGFuZ2VkIHJl
+c3VtZSBoYW5kbGluZyBsZWFkaW5nIHRvCmNwdXBvb2xfYXNzaWduX2NwdV9sb2NrZWQoKSBiZWlu
+ZyBubyBsb25nZXIgY2FsbGVkIHdoZW4gcmVzdW1pbmcuCgoKSnVlcmdlbgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
