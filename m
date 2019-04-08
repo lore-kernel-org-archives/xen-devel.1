@@ -1,20 +1,14 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] cpupool: fix ASSERT( c != old_pool )
-Date: Mon, 08 Apr 2019 03:26:50 -0600
-Message-ID: <5CAB13DA02000078002253F7@prv1-mh.provo.novell.com>
-References: <1554691246-7249-1-git-send-email-fionali-oc@zhaoxin.com>
- <31983788-e4e4-5526-04a1-660c00930d0d@suse.com>
+Subject: Re: [PATCH] common/gnttab: Process softirqs while
+ dumping grant tables
+Date: Mon, 08 Apr 2019 03:34:54 -0600
+Message-ID: <5CAB15BE0200007800225404@prv1-mh.provo.novell.com>
+References: <1554481990-7569-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=OZ3N=SK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hDQYN-0007NI-6I
- for xen-devel@lists.xenproject.org; Mon, 08 Apr 2019 09:26:59 +0000
-In-Reply-To: <31983788-e4e4-5526-04a1-660c00930d0d@suse.com>
+In-Reply-To: <1554481990-7569-1-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,20 +18,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, FionaLi-oc <fionali-oc@zhaoxin.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, cobechen@zhaoxin.com, Dario Faggioli <dfaggioli@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Xen-devel <xen-devel@lists.xen.org>, Julien Grall <julien.grall@arm.com>, IanJackson <Ian.Jackson@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA4LjA0LjE5IGF0IDA3OjA5LCA8amdyb3NzQHN1c2UuY29tPiB3cm90ZToKPiBPbiAw
-OC8wNC8yMDE5IDA0OjQwLCBGaW9uYUxpLW9jIHdyb3RlOgo+PiBBc3NpZ25pbmcgY3B1IHRvIGNw
-dXBvb2wgbmVlZG4ndCB0byBzd2l0Y2ggY3B1IHNjaGVkdWxlciB3aGVuCj4+IHN5c3RlbSBzdGF0
-ZSBpcyByZXN1bWUsIG90aGVyd2lzZSBpdCB3aWxsIGNhdXNlIEFTU0VSVCBpbgo+PiBzY2hlZHVs
-ZV9jcHVfc3dpdGNoKCkuCj4gCj4gSSBkb24ndCB0aGluayB0aGlzIHBhdGNoIGlzIG5lZWRlZCBv
-biBjdXJyZW50IHN0YWdpbmcgdHJlZS4gQ29tbWl0Cj4gNjg3MGVhOWQxZmFkNmZiZTI3IGNoYW5n
-ZWQgcmVzdW1lIGhhbmRsaW5nIGxlYWRpbmcgdG8KPiBjcHVwb29sX2Fzc2lnbl9jcHVfbG9ja2Vk
-KCkgYmVpbmcgbm8gbG9uZ2VyIGNhbGxlZCB3aGVuIHJlc3VtaW5nLgoKQnV0IGlzIGl0IHNvbWV0
-aGluZyB3b3J0aHdoaWxlIHRvIHB1dCBvbnRvIHN0YWJsZSB0cmVlcyAod2l0aCB0aGUKb25lIG1p
-c3NpbmcgYmxhbmsgYWRkZWQpPwoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDA1LjA0LjE5IGF0IDE4OjMzLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT1NTVGVzdHMgdXBncmFkZSB0byBKZXNzaWUgaGFzIGlkZW50aWZpZWQgdGhhdCB3aXRo
+IGEgc3VmZmljaWVudGx5IGxhcmdlIGdyYW50Cj4gdGFibGUsIGEgd2F0Y2hkb2cgdGltZW91dCBj
+YW4gb2NjdXIuCgpIb3cncyB0aGlzIGRlcGVuZGVudCBvbiB0aGUgcHJlY2lzZSBkaXN0cm8gdmVy
+c2lvbj8gSS5lLiBpcyB0aGVyZQpzb21ldGhpbmcgdGhhdCBtYWtlcyB0aGUgbG9nZ2luZyBzbG93
+ZXIgbm93PwoKPiAtLS0gYS94ZW4vY29tbW9uL2dyYW50X3RhYmxlLmMKPiArKysgYi94ZW4vY29t
+bW9uL2dyYW50X3RhYmxlLmMKPiBAQCAtMzk1Niw2ICszOTU2LDkgQEAgc3RhdGljIHZvaWQgZ250
+dGFiX3VzYWdlX3ByaW50KHN0cnVjdCBkb21haW4gKnJkKQo+ICAgICAgICAgIHVpbnQxNl90IHN0
+YXR1czsKPiAgICAgICAgICB1aW50NjRfdCBmcmFtZTsKPiAgCj4gKyAgICAgICAgaWYgKCAhKHJl
+ZiAmIDMxKSApCj4gKyAgICAgICAgICAgIHByb2Nlc3NfcGVuZGluZ19zb2Z0aXJxcygpOwoKSSB0
+aGluayB0aGlzIGlzIGJvdGggcmlza3kgYW5kIG92ZXJseSBlYWdlcjogUmlza3kgYmVjYXVzZSBv
+ZiBoYXBwZW5pbmcKd2l0aCBhIGxvY2sgaGVsZCwgYW5kIG92ZXJseSBlYWdlciBiZWNhdXNlIG5v
+IG91dHB1dCBtYXkgaGF2ZSBiZWVuCmRvbmUgYXQgYWxsIGJldHdlZW4gYW55IHR3byBzdWNoIGNh
+bGxzLiBUaGF0IG5vdHdpdGhzdGFuZGluZwpBY2tlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNo
+QHN1c2UuY29tPgpvbiB0aGUgYmFzaXMgdGhhdCBpdCBpcyBhbiBpbXByb3ZlbWVudCwgYW5kIHRo
+ZSByaXNrIGlzIC0gYWZhaWN0IC0gYSBsYXRlbnQKb25lIG9ubHkuCgpKYW4KCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
