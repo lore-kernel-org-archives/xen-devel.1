@@ -1,21 +1,21 @@
 From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: [PATCH v2] tools/xl: use libxl_domain_info to get
- domain type for vcpu-pin
-Date: Tue, 9 Apr 2019 13:36:37 +0100
-Message-ID: <20190409123637.GI30543@zion.uk.xensource.com>
-References: <1554811318-1931-1-git-send-email-igor.druzhinin@citrix.com>
+Subject: Re: [PATCH 1/3] libxl: Constify libxl_device_*_compare
+ functions
+Date: Tue, 9 Apr 2019 13:38:06 +0100
+Message-ID: <20190409123806.GK30543@zion.uk.xensource.com>
+References: <20190405175811.7446-1-anthony.perard@citrix.com>
+ <20190405175811.7446-2-anthony.perard@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=piA2=SL=citrix.com=prvs=9957968d6=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1hDpzW-0001pP-NY
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 12:36:42 +0000
+ id 1hDq0x-0001zx-3m
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 12:38:11 +0000
 Content-Disposition: inline
-In-Reply-To: <1554811318-1931-1-git-send-email-igor.druzhinin@citrix.com>
+In-Reply-To: <20190405175811.7446-2-anthony.perard@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +24,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Igor Druzhinin <igor.druzhinin@citrix.com>
-Cc: xen-devel@lists.xenproject.org, wei.liu2@citrix.com, ian.jackson@eu.citrix.com
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBcHIgMDksIDIwMTkgYXQgMDE6MDE6NThQTSArMDEwMCwgSWdvciBEcnV6aGluaW4g
-d3JvdGU6Cj4gUGFyc2luZyB0aGUgY29uZmlnIHNlZW1zIHRvIGJlIGFuIG92ZXJraWxsIGZvciB0
-aGlzIHBhcnRpY3VsYXIgdGFzawo+IGFuZCB0aGUgY29uZmlnIG1pZ2h0IHNpbXBseSBiZSBhYnNl
-bnQuIFR5cGUgcmV0dXJuZWQgZnJvbSBsaWJ4bF9kb21haW5faW5mbwo+IHNob3VsZCBiZSBlaXRo
-ZXIgTElCWExfRE9NQUlOX1RZUEVfSFZNIG9yIExJQlhMX0RPTUFJTl9UWVBFX1BWIGJ1dCBpbgo+
-IHRoYXQgY29udGV4dCBkaXN0aW5jdGlvbiBiZXR3ZWVuIFBWSCBhbmQgSFZNIHNob3VsZCBiZSBp
-cnJlbGV2YW50Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IElnb3IgRHJ1emhpbmluIDxpZ29yLmRydXpo
-aW5pbkBjaXRyaXguY29tPgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gRnJpLCBBcHIgMDUsIDIwMTkgYXQgMDY6NTg6MDlQTSArMDEwMCwgQW50aG9ueSBQRVJBUkQg
+d3JvdGU6Cj4gU2lnbmVkLW9mZi1ieTogQW50aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNp
+dHJpeC5jb20+CgpBY2tlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCl9fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
+aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
+cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
