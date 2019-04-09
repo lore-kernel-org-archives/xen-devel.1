@@ -1,21 +1,17 @@
-From: "Tian, Kevin" <kevin.tian@intel.com>
-Subject: Re: [PATCH] VT-d: posted interrupts require interrupt
- remapping
-Date: Tue, 9 Apr 2019 03:09:24 +0000
-Message-ID: <AADFC41AFE54684AB9EE6CBC0274A5D19C9D56B9@SHSMSX104.ccr.corp.intel.com>
-References: <5CA6FD5D0200007800224C46@prv1-mh.provo.novell.com>
+From: FionaLi-oc <fionali-oc@zhaoxin.com>
+Subject: [PATCH 2/2] x86/acpi: Improve suspend and resume
+ process for Zhaoxin CPU
+Date: Tue, 9 Apr 2019 11:09:48 +0800
+Message-ID: <1554779388-3769-1-git-send-email-fionali-oc@zhaoxin.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=X9g6=SL=intel.com=kevin.tian@srs-us1.protection.inumbo.net>)
- id 1hDh8f-0005s8-6y
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 03:09:33 +0000
-In-Reply-To: <5CA6FD5D0200007800224C46@prv1-mh.provo.novell.com>
-Content-Language: en-US
+ <SRS0=iHqD=SL=zhaoxin.com=fionali-oc@srs-us1.protection.inumbo.net>)
+ id 1hDh93-0005u8-Kz
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 03:09:57 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,17 +20,45 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: wei.liu2@citrix.com, andrew.cooper3@citrix.com, cobechen@zhaoxin.com, FionaLi-oc <fionali-oc@zhaoxin.com>, jbeulich@suse.com, roger.pau@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-PiBGcm9tOiBKYW4gQmV1bGljaCBbbWFpbHRvOkpCZXVsaWNoQHN1c2UuY29tXQo+IFNlbnQ6IEZy
-aWRheSwgQXByaWwgNSwgMjAxOSAzOjAyIFBNCj4gCj4gSW5pdGlhbGx5IEkgaGFkIGp1c3Qgbm90
-aWNlZCB0aGUgdW5uZWNlc3NhcnkgaW5kaXJlY3Rpb24gaW4gdGhlIGNhbGwKPiBmcm9tIHBpX3Vw
-ZGF0ZV9pcnRlKCkuIFRoZSBnZW5lcmljIHdyYXBwZXIgaGF2aW5nIGFuIGlvbW11X2ludHJlbWFw
-Cj4gY29uZGl0aW9uYWwgbWFkZSBtZSBsb29rIGF0IHRoZSBzZXR1cCBjb2RlIHRob3VnaC4gU28g
-Zmlyc3Qgb2YgYWxsCj4gZW5mb3JjZSB0aGUgbmVjZXNzYXJ5IGRlcGVuZGVuY3kuCj4gCj4gU2ln
-bmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKQWNrZWQtYnk6IEtl
-dmluIFRpYW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxA
-bGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL3hlbi1kZXZlbA==
+V2hlbiBleGVjdXRpbmcgU1lTRVhJVCBvciBTWVNFTlRSWSBpbiBaaGFveGluIENQVSwgQ1BVIG5l
+ZWRzIHRvCnNhdmUgb3IgcmVzdG9yZSBhIHNldCBvZiBNU1JzLgoKU2lnbmVkLW9mZi1ieTogRmlv
+bmFMaS1vYyA8ZmlvbmFsaS1vY0B6aGFveGluLmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvYWNwaS9z
+dXNwZW5kLmMgfCA2ICsrKystLQogeGVuL2FyY2gveDg2L3g4Nl82NC90cmFwcy5jIHwgMyArKy0K
+IDIgZmlsZXMgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQoKZGlmZiAt
+LWdpdCBhL3hlbi9hcmNoL3g4Ni9hY3BpL3N1c3BlbmQuYyBiL3hlbi9hcmNoL3g4Ni9hY3BpL3N1
+c3BlbmQuYwppbmRleCAwMGU2MDEyLi5iY2ZmNjcyIDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYv
+YWNwaS9zdXNwZW5kLmMKKysrIGIveGVuL2FyY2gveDg2L2FjcGkvc3VzcGVuZC5jCkBAIC0yOCw3
+ICsyOCw4IEBAIHZvaWQgc2F2ZV9yZXN0X3Byb2Nlc3Nvcl9zdGF0ZSh2b2lkKQogICAgIHJkbXNy
+bChNU1JfQ1NUQVIsIHNhdmVkX2NzdGFyKTsKICAgICByZG1zcmwoTVNSX0xTVEFSLCBzYXZlZF9s
+c3Rhcik7CiAgICAgaWYgKCBib290X2NwdV9kYXRhLng4Nl92ZW5kb3IgPT0gWDg2X1ZFTkRPUl9J
+TlRFTCB8fAotICAgICAgICAgYm9vdF9jcHVfZGF0YS54ODZfdmVuZG9yID09IFg4Nl9WRU5ET1Jf
+Q0VOVEFVUiApCisgICAgICAgICBib290X2NwdV9kYXRhLng4Nl92ZW5kb3IgPT0gWDg2X1ZFTkRP
+Ul9DRU5UQVVSIHx8CisgICAgICAgICBib290X2NwdV9kYXRhLng4Nl92ZW5kb3IgPT0gWDg2X1ZF
+TkRPUl9TSEFOR0hBSSApCiAgICAgewogICAgICAgICByZG1zcmwoTVNSX0lBMzJfU1lTRU5URVJf
+RVNQLCBzYXZlZF9zeXNlbnRlcl9lc3ApOwogICAgICAgICByZG1zcmwoTVNSX0lBMzJfU1lTRU5U
+RVJfRUlQLCBzYXZlZF9zeXNlbnRlcl9laXApOwpAQCAtNTMsNyArNTQsOCBAQCB2b2lkIHJlc3Rv
+cmVfcmVzdF9wcm9jZXNzb3Jfc3RhdGUodm9pZCkKICAgICB3cm1zcmwoTVNSX1NIQURPV19HU19C
+QVNFLCBzYXZlZF9rZXJuZWxfZ3NfYmFzZSk7CiAKICAgICBpZiAoIGJvb3RfY3B1X2RhdGEueDg2
+X3ZlbmRvciA9PSBYODZfVkVORE9SX0lOVEVMIHx8Ci0gICAgICAgICBib290X2NwdV9kYXRhLng4
+Nl92ZW5kb3IgPT0gWDg2X1ZFTkRPUl9DRU5UQVVSICkKKyAgICAgICAgIGJvb3RfY3B1X2RhdGEu
+eDg2X3ZlbmRvciA9PSBYODZfVkVORE9SX0NFTlRBVVIgfHwKKyAgICAgICAgIGJvb3RfY3B1X2Rh
+dGEueDg2X3ZlbmRvciA9PSBYODZfVkVORE9SX1NIQU5HSEFJICkKICAgICB7CiAgICAgICAgIC8q
+IFJlY292ZXIgc3lzZW50ZXIgTVNScyAqLwogICAgICAgICB3cm1zcmwoTVNSX0lBMzJfU1lTRU5U
+RVJfRVNQLCBzYXZlZF9zeXNlbnRlcl9lc3ApOwpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3g4
+Nl82NC90cmFwcy5jIGIveGVuL2FyY2gveDg2L3g4Nl82NC90cmFwcy5jCmluZGV4IGJmNzg3MGUu
+LjMwZDcwMTIgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni94ODZfNjQvdHJhcHMuYworKysgYi94
+ZW4vYXJjaC94ODYveDg2XzY0L3RyYXBzLmMKQEAgLTMzNSw3ICszMzUsOCBAQCB2b2lkIHN1YmFy
+Y2hfcGVyY3B1X3RyYXBzX2luaXQodm9pZCkKICAgICBzdHViX3ZhICs9IG9mZnNldDsKIAogICAg
+IGlmICggYm9vdF9jcHVfZGF0YS54ODZfdmVuZG9yID09IFg4Nl9WRU5ET1JfSU5URUwgfHwKLSAg
+ICAgICAgIGJvb3RfY3B1X2RhdGEueDg2X3ZlbmRvciA9PSBYODZfVkVORE9SX0NFTlRBVVIgKQor
+ICAgICAgICAgYm9vdF9jcHVfZGF0YS54ODZfdmVuZG9yID09IFg4Nl9WRU5ET1JfQ0VOVEFVUiB8
+fAorICAgICAgICAgYm9vdF9jcHVfZGF0YS54ODZfdmVuZG9yID09IFg4Nl9WRU5ET1JfU0hBTkdI
+QUkgKQogICAgIHsKICAgICAgICAgLyogU1lTRU5URVIgZW50cnkuICovCiAgICAgICAgIHdybXNy
+bChNU1JfSUEzMl9TWVNFTlRFUl9FU1AsIHN0YWNrX2JvdHRvbSk7Ci0tIAoxLjguMy4xCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
