@@ -6,34 +6,34 @@ X-Spam-Status: No, score=-4.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A947C282CE
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 09:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D9EE7C10F0E
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 09:12:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4F66420651
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 09:11:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F66420651
+	by mail.kernel.org (Postfix) with ESMTPS id AF8A320651
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 09:12:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF8A320651
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hDmmM-0003g4-VF; Tue, 09 Apr 2019 09:10:54 +0000
+	id 1hDmnE-0003lP-9g; Tue, 09 Apr 2019 09:11:48 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=rl/Z=SL=citrix.com=prvs=995435944=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hDmmL-0003fv-AA
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 09:10:53 +0000
-X-Inumbo-ID: 5e09e548-5aa7-11e9-afc9-4360479b0a12
+ id 1hDmnC-0003l8-5a
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 09:11:46 +0000
+X-Inumbo-ID: 7d4b415e-5aa7-11e9-be0e-f74c86a7c809
 Received: from SMTP.EU.CITRIX.COM (unknown [185.25.65.24])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5e09e548-5aa7-11e9-afc9-4360479b0a12;
- Tue, 09 Apr 2019 09:10:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,328,1549929600"; d="scan'208";a="88554600"
+ id 7d4b415e-5aa7-11e9-be0e-f74c86a7c809;
+ Tue, 09 Apr 2019 09:11:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,328,1549929600"; d="scan'208";a="88554668"
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-References: <5CA6FD5D0200007800224C46@prv1-mh.provo.novell.com>
+References: <5CAB2DAA02000078002254F3@prv1-mh.provo.novell.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=andrew.cooper3@citrix.com; prefer-encrypt=mutual; keydata=
@@ -79,17 +79,17 @@ Autocrypt: addr=andrew.cooper3@citrix.com; prefer-encrypt=mutual; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-Message-ID: <1bba74a5-5be0-67c8-930a-2f07db4580f2@citrix.com>
-Date: Tue, 9 Apr 2019 10:10:24 +0100
+Message-ID: <286a0d17-4faf-d6cf-b98e-9accb3615ea0@citrix.com>
+Date: Tue, 9 Apr 2019 10:11:40 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <5CA6FD5D0200007800224C46@prv1-mh.provo.novell.com>
+In-Reply-To: <5CAB2DAA02000078002254F3@prv1-mh.provo.novell.com>
 Content-Language: en-GB
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH] VT-d: posted interrupts require interrupt
- remapping
+Subject: Re: [Xen-devel] [PATCH] x86/IOMMU: abstract Intel-specific
+ adjust_vtd_irq_affinities()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,20 +100,21 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190409091024.zyK8uSgAGdQN2I8L5PLB1w3l1ILj9vBImwu_fazjkiE@z>
+Message-ID: <20190409091140.bYB83zja_9hgm_31oRzj2U87O7wVQRrbEYxur733lXE@z>
 
-T24gMDUvMDQvMjAxOSAwODowMSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gSW5pdGlhbGx5IEkgaGFk
-IGp1c3Qgbm90aWNlZCB0aGUgdW5uZWNlc3NhcnkgaW5kaXJlY3Rpb24gaW4gdGhlIGNhbGwKPiBm
-cm9tIHBpX3VwZGF0ZV9pcnRlKCkuIFRoZSBnZW5lcmljIHdyYXBwZXIgaGF2aW5nIGFuIGlvbW11
-X2ludHJlbWFwCj4gY29uZGl0aW9uYWwgbWFkZSBtZSBsb29rIGF0IHRoZSBzZXR1cCBjb2RlIHRo
-b3VnaC4gU28gZmlyc3Qgb2YgYWxsCj4gZW5mb3JjZSB0aGUgbmVjZXNzYXJ5IGRlcGVuZGVuY3ku
-Cj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpSZXZp
-ZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMDgvMDQvMjAxOSAxMjoxNiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVGhpcyBjYW4ndCBiZSBm
+b2xkZWQgaW50byB0aGUgcmVzdW1lIGhvb2ssIGFzIHRoYXQgcnVucyBiZWZvcmUgYnJpbmdpbgoK
+YnJpbmdpbmcKCj4gYmFjayB1cCBBUHMsIGJ1dCB0aGUgYWZmaW5pdHkgYWRqdXN0bWVudCB3YW50
+cyB0byBoYXBwZW4gd2l0aCBhbGwgQ1BVcwo+IGJhY2sgb25saW5lLiBIZW5jZSBhIHNlcGFyYXRl
+IGhvb2sgaXMgbmVlZGVkIHN1Y2ggdGhhdCBBTUQgY2FuIHRoZW4KPiBsZXZlcmFnZSBpdCBhcyB3
+ZWxsLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoK
+UmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
