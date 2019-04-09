@@ -1,15 +1,22 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH] x86/hvm: Fix altp2m_op hypercall
- continuations
-Date: Tue, 09 Apr 2019 03:38:30 -0600
-Message-ID: <5CAC68160200007800225AFA@prv1-mh.provo.novell.com>
-References: <1554745146-4785-1-git-send-email-andrew.cooper3@citrix.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v2 2/3] xen/arm: Add MESON UART driver for
+ Amlogic Meson SoCs
+Date: Tue, 9 Apr 2019 10:39:55 +0100
+Message-ID: <cd327f36-09db-f322-4675-30140839e159@arm.com>
+References: <1553163935-12862-1-git-send-email-amittomer25@gmail.com>
+ <1553163935-12862-2-git-send-email-amittomer25@gmail.com>
+ <5f956c43-6885-3553-2f37-bb9ce48e981b@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1554745146-4785-1-git-send-email-andrew.cooper3@citrix.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=zDjF=SL=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hDnEV-0006Lo-0z
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 09:39:59 +0000
+In-Reply-To: <5f956c43-6885-3553-2f37-bb9ce48e981b@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -18,24 +25,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Petre Pircalabu <ppircalabu@bitdefender.com>, Xen-devel <xen-devel@lists.xen.org>, Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: =?UTF-8?Q?Andr=c3=a9_Przywara?= <andre.przywara@arm.com>, Amit Singh Tomar <amittomer25@gmail.com>, xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA4LjA0LjE5IGF0IDE5OjM5LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
-dGU6Cj4gYy9zIDkzODNkZTIxMCAieDg2L2FsdHAybTogc3VwcG9ydCBmb3Igc2V0dGluZyByZXN0
-cmljdGlvbnMgZm9yIGFuIGFycmF5IG9mCj4gcGFnZXMiIGludHJvZHVjZWQgdGhpcyBsb2dpYywg
-YnV0IGRvX2h2bV9vcCgpIHdhcyBhbHJlYWR5IGNhcGFibGUgb2YgaGFuZGxpbmcKPiAtRVJFU1RB
-UlQgY29ycmVjdGx5Lgo+IAo+IE1vcmUgcHJvYmxlbWF0aWMgaG93ZXZlciBpcyBhIGNvbnRpbnVh
-dGlvbiBmcm9tIGNvbXBhdF9hbHRwMm1fb3AoKS4gIFRoZSBhcmcKPiB3cml0dGVuIGJhY2sgaW50
-byByZWdpc3RlciBzdGF0ZSBwb2ludHMgaW50byB0aGUgaHlwZXJjYWxsIFhMQVQgYXJlYSwgbm90
-IGF0Cj4gdGhlIG9yaWdpbmFsIHBhcmFtZXRlciBwYXNzZWQgYnkgdGhlIGd1ZXN0LiAgSXQgbWF5
-IGJlIHRydW5jYXRlZCBieSB0aGUKPiB2bWVudHJ5LCBidXQgZGVmaW5pdGVseSB3b24ndCBiZSBj
-b3JyZWN0IG9uIHRoZSBuZXh0IGludm9jYXRpb24uCj4gCj4gRGVsZXRlIHRoZSBoeXBlcmNhbGxf
-Y3JlYXRlX2NvbnRpbnVhdGlvbigpIGNhbGwsIGFuZCByZXR1cm4gLUVSRVNUQVJULCB3aGljaAo+
-IHdpbGwgY2F1c2UgdGhlIGNvbXBhdCBjYXNlIHRvIHN0YXJ0IHdvcmtpbmcgY29ycmVjdGx5Lgo+
-IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+CgpSZXZpZXdlZC1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SGksCgpPbiAwMi8wNC8yMDE5IDIxOjAxLCBBbmRyw6kgUHJ6eXdhcmEgd3JvdGU6Cj4gT24gMjEv
+MDMvMjAxOSAxMDoyNSwgQW1pdCBTaW5naCBUb21hciB3cm90ZToKPj4gVGhpcyBwYXRjaCBhZGRz
+IGRyaXZlciBmb3IgVUFSVCBjb250cm9sbGVyIHByZXNlbnQgb24gQW1sb2dpYyBNZXNvbgo+PiBT
+b0NzIGFuZCBpdCBoYXMgYmVlbiB0ZXN0ZWQgb24gTmFub3BpIEsyIGJvYXJkIGJhc2VkIG9uIFM5
+MDUgU29DLgo+Pgo+PiBDb250cm9sbGVyIHJlZ2lzdGVycyBkZWZpbmF0aW9uIGlzIHRha2VuIGZy
+b20gTGludXggNC4yMC4KPj4gaHR0cHM6Ly9naXRodWIuY29tL3RvcnZhbGRzL2xpbnV4L2Jsb2Iv
+djQuMjAtcmMxL2RyaXZlcnMvdHR5L3NlcmlhbC9tZXNvbl91YXJ0LmMKPj4KPj4gU2lnbmVkLW9m
+Zi1ieTogQW1pdCBTaW5naCBUb21hciA8YW1pdHRvbWVyMjVAZ21haWwuY29tPgo+IAo+IFRoYW5r
+cyBmb3IgdGhlIGNoYW5nZXMhCj4gCj4gUmV2aWV3ZWQtYnk6IEFuZHJlIFByenl3YXJhIDxhbmRy
+ZS5wcnp5d2FyYUBhcm0uY29tPgoKQWNrZWQtYnk6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxs
+QGFybS5jb20+CgpJIGhhdmUgY29tbWl0dGVkIHRoaXMgcGF0Y2ggYW5kIHRoZSBmb2xsb3dpbmcg
+cGF0Y2guIFBsZWFzZSByZXNlbmQgdGhlIGZpcnN0IApwYXRjaCB3aXRoIHRoZSBjb21tZW50cyBh
+ZGRyZXNzZWQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
