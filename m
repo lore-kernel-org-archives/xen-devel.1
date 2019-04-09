@@ -1,19 +1,22 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: status of non-live migration of HVM with libvirt
-Date: Tue, 9 Apr 2019 18:06:42 +0200
-Message-ID: <20190409160642.GA18345@aepfle.de>
-References: <20190104165755.73674a27.olaf@aepfle.de>
- <20190104174831.271161e5.olaf@aepfle.de>
- <20190107110737.1ef0a0ef.olaf@aepfle.de>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH] timers: limit heap size
+Date: Tue, 9 Apr 2019 17:22:37 +0100
+Message-ID: <d19d69ba-2930-c66d-a42e-0ca344e2f923@arm.com>
+References: <5CAC97C30200007800225DED@prv1-mh.provo.novell.com>
+ <08968726-0f4a-f267-b1f7-c1e08893c5a6@citrix.com>
+ <5CACB7900200007800225F17@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4579897145740428844=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=iKuQ=SL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hDtGx-0004em-Ql
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 16:06:56 +0000
-In-Reply-To: <20190107110737.1ef0a0ef.olaf@aepfle.de>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=zDjF=SL=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hDtWE-0006Ai-1y
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 16:22:42 +0000
+In-Reply-To: <5CACB7900200007800225F17@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,75 +25,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============4579897145740428844==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FCuugMFkClbJLl1L"
-Content-Disposition: inline
-
-
---FCuugMFkClbJLl1L
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Anthony,
-
-looks like this fix missed qemu-4.0.
-
-What is your opinion on this fix? I think there was zero reply...
-
-Olaf
-
-On Mon, Jan 07, Olaf Hering wrote:
-
-> Am Fri, 4 Jan 2019 17:48:31 +0100
-> schrieb Olaf Hering <olaf@aepfle.de>:
->=20
-> > Am Fri, 4 Jan 2019 16:57:55 +0100
-> > schrieb Olaf Hering <olaf@aepfle.de>:
-> >=20
-> > > worth keeping (and fixing) the concept of an "offline migration" =20
-> >=20
-> > And regarding the fix, it looks like qmp_xen_save_devices_state does no=
-t need the concept of "live". Just shutdown the blockdevices and be done wi=
-th it?
->=20
-> Anthony, it looks like 5d6c599fe1 ("migration, xen: Fix block image lock =
-issue on live migration") went too far. Why does stopping the disks at the =
-very end of the save/migrate process depend on "live"? During a migration t=
-he disks have to be released either way. During "xl save" the domU may cont=
-inue to run, if '-c' was specified.=20
->=20
-> It seems the 'live' parameter for xen-save-devices-state is not needed.
->=20
-> Olaf
-
-
---FCuugMFkClbJLl1L
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXKzDDgAKCRBdQqD6ppg2
-fqy3AJ42berK3PGBfgU75eiLm2AzTDTnUQCgqZ3uT+4FFs0riZUS4tSDVrIxX0Q=
-=gqiC
------END PGP SIGNATURE-----
-
---FCuugMFkClbJLl1L--
-
-
---===============4579897145740428844==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4579897145740428844==--
+CgpPbiAwOS8wNC8yMDE5IDE2OjE3LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiBPbiAwOS4wNC4x
+OSBhdCAxNTozOCwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+PiBPbiAwOS8w
+NC8yMDE5IDE0OjAxLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+IEBAIC00NjMsOSArNDYzLDE0IEBA
+IHN0YXRpYyB2b2lkIHRpbWVyX3NvZnRpcnFfYWN0aW9uKHZvaWQpCj4+PiAgICAgICBpZiAoIHVu
+bGlrZWx5KHRzLT5saXN0ICE9IE5VTEwpICkKPj4+ICAgICAgIHsKPj4+ICAgICAgICAgICAvKiBv
+bGRfbGltaXQgPT0gKDJebiktMTsgbmV3X2xpbWl0ID09ICgyXihuKzQpKS0xICovCj4+PiAtICAg
+ICAgICBpbnQgb2xkX2xpbWl0ID0gaGVhcF9tZXRhZGF0YShoZWFwKS0+bGltaXQ7Cj4+PiAtICAg
+ICAgICBpbnQgbmV3X2xpbWl0ID0gKChvbGRfbGltaXQgKyAxKSA8PCA0KSAtIDE7Cj4+PiAtICAg
+ICAgICBzdHJ1Y3QgdGltZXIgKipuZXdoZWFwID0geG1hbGxvY19hcnJheShzdHJ1Y3QgdGltZXIg
+KiwgbmV3X2xpbWl0ICsKPj4gMSk7Cj4+PiArICAgICAgICB1bnNpZ25lZCBpbnQgb2xkX2xpbWl0
+ID0gaGVhcF9tZXRhZGF0YShoZWFwKS0+bGltaXQ7Cj4+PiArICAgICAgICB1bnNpZ25lZCBpbnQg
+bmV3X2xpbWl0ID0gKChvbGRfbGltaXQgKyAxKSA8PCA0KSAtIDE7Cj4+PiArICAgICAgICBzdHJ1
+Y3QgdGltZXIgKipuZXdoZWFwID0gTlVMTDsKPj4+ICsKPj4+ICsgICAgICAgIC8qIERvbid0IGdy
+b3cgdGhlIGhlYXAgYmV5b25kIHdoYXQgaXMgcmVwcmVzZW50YWJsZSBpbiBpdHMgbWV0YWRhdGEu
+ICovCj4+PiArICAgICAgICBpZiAoIG5ld19saW1pdCA9PSAodHlwZW9mKGhlYXBfbWV0YWRhdGEo
+aGVhcCktPmxpbWl0KSluZXdfbGltaXQgJiYKPj4+ICsgICAgICAgICAgICAgbmV3X2xpbWl0ICsg
+MSApCj4+PiArICAgICAgICAgICAgbmV3aGVhcCA9IHhtYWxsb2NfYXJyYXkoc3RydWN0IHRpbWVy
+ICosIG5ld19saW1pdCArIDEpOwo+Pgo+PiBJdCB3b3VsZCBwcm9iYWJseSBiZSBoZWxwZnVsIHRv
+IGhhdmUgYSB3YXJuX29uY2UvcHJpbnRfb25jZSBpbiB0aGUgY2FzZQo+PiB0aGF0IHdlIGRvIGhp
+dCB0aGUgbWV0YWRhdGEgbGltaXQKPiAKPiBJIGNhbiBkbyB0aGlzLCBhbGJlaXQgdGhlIGxhY2sg
+b2YgdGhlIGNvbnN0cnVjdHMgeW91IHN1Z2dlc3Qgd2lsbAo+IG1ha2UgdGhpcyBhIGxpdHRsZSB1
+Z2x5LgoKTWFjcm9zIGltcGxlbWVudGluZyBzdWNoIGJlaGF2aW9yIHdvdWxkIGJlIG1vcmUgdGhh
+biB3ZWxjb21lZC4gV2UgdGVuZCB0byAKb3Blbi1jb2RlIFdBUk5fT05DRS9QUklOVF9PTkNFIGxv
+Z2ljIGluIGV2ZXJ5IHBsYWNlIHdoaWNoIGlzIG5vdCB2ZXJ5IG5pY2UuCgpDaGVlcnMsCgotLSAK
+SnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
