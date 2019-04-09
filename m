@@ -2,66 +2,55 @@ Return-Path: <SRS0=7ods=SL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_MUTT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4970C10F0E
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 16:07:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FBBCC10F0E
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 16:23:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A56982084C
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 16:07:18 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="gJ50rvyx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A56982084C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id 1590920833
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Apr 2019 16:23:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1590920833
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hDtGz-0004er-0x; Tue, 09 Apr 2019 16:06:57 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=iKuQ=SL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hDtGx-0004em-Ql
- for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 16:06:56 +0000
-X-Inumbo-ID: 7d556040-5ae1-11e9-92d7-bc764e045a96
-Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:20a:202:5300::3])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 7d556040-5ae1-11e9-92d7-bc764e045a96;
- Tue, 09 Apr 2019 16:06:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1554826012;
- s=strato-dkim-0002; d=aepfle.de;
- h=In-Reply-To:References:Message-ID:Subject:To:From:Date:
- X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
- bh=NtIUSYuC84zFxWuojukTSdBSq7gQmy5Jm/w/ZMIOmM0=;
- b=gJ50rvyxdXf3O9N7J9LJTaOZzLfEGWVs3hSx+MIm7p+UEcQWnrfLvw33MkHjitt+VT
- 4BfBfXwWl0UF77zbPSzRTF4eRnqkez+hcQkfCGW/MJlS8rNtTu6t1Vgvhxh825wN1UOR
- bWsvSL+J8L50/cfCqnLFygN9JvOQkT00hmhKby2RWK12H4IkPRH8hCzg+ZSiDV23Y7rd
- VMbdkJfpxmcEz3brXd7TaktvNArtAeCtZaWCci2c0wT62tBLGToQIpKVMVsa8amtPJVl
- oNFSlnoRl7m6xtscSp/3c4A8XrV/gJqPaPlBoJ1mP+2uCDVSqlGWFNuFX3yTb5YC2MyB
- t4WA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuznKRsvz7yq3NXPy6+NT"
-X-RZG-CLASS-ID: mo00
-Received: from aepfle.de by smtp.strato.de (RZmta 44.18 DYNA|AUTH)
- with ESMTPSA id 60a847v39G6j2Re
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate);
- Tue, 9 Apr 2019 18:06:45 +0200 (CEST)
-Date: Tue, 9 Apr 2019 18:06:42 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@citrix.com>
-Message-ID: <20190409160642.GA18345@aepfle.de>
-References: <20190104165755.73674a27.olaf@aepfle.de>
- <20190104174831.271161e5.olaf@aepfle.de>
- <20190107110737.1ef0a0ef.olaf@aepfle.de>
+	id 1hDtWF-0006An-Qo; Tue, 09 Apr 2019 16:22:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=zDjF=SL=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hDtWE-0006Ai-1y
+ for xen-devel@lists.xenproject.org; Tue, 09 Apr 2019 16:22:42 +0000
+X-Inumbo-ID: b25b4998-5ae3-11e9-a422-b3241dc0ec37
+Received: from foss.arm.com (unknown [217.140.101.70])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id b25b4998-5ae3-11e9-a422-b3241dc0ec37;
+ Tue, 09 Apr 2019 16:22:40 +0000 (UTC)
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.72.51.249])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8982115AB;
+ Tue,  9 Apr 2019 09:22:40 -0700 (PDT)
+Received: from [10.1.196.50] (e108454-lin.cambridge.arm.com [10.1.196.50])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 0D5403F68F;
+ Tue,  9 Apr 2019 09:22:38 -0700 (PDT)
+To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+References: <5CAC97C30200007800225DED@prv1-mh.provo.novell.com>
+ <08968726-0f4a-f267-b1f7-c1e08893c5a6@citrix.com>
+ <5CACB7900200007800225F17@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Message-ID: <d19d69ba-2930-c66d-a42e-0ca344e2f923@arm.com>
+Date: Tue, 9 Apr 2019 17:22:37 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.5.1
 MIME-Version: 1.0
-In-Reply-To: <20190107110737.1ef0a0ef.olaf@aepfle.de>
-User-Agent: Mutt/1.11.4 (20190403T140714.74226f36)
-Subject: Re: [Xen-devel] status of non-live migration of HVM with libvirt
+In-Reply-To: <5CACB7900200007800225F17@prv1-mh.provo.novell.com>
+Content-Language: en-US
+Subject: Re: [Xen-devel] [PATCH] timers: limit heap size
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,78 +61,40 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4579897145740428844=="
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Ian Jackson <Ian.Jackson@eu.citrix.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="UTF-8"; format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190409160642.CQMKonZ3QAgjbogGYPq8AWVLcvqHcVPh3VGg2xpU4nE@z>
+Message-ID: <20190409162237.q7iBKMHPOAjJMyV6iL9bXdN56WuxzdoZRjwsxu0B670@z>
 
-
---===============4579897145740428844==
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="FCuugMFkClbJLl1L"
-Content-Disposition: inline
-
-
---FCuugMFkClbJLl1L
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Anthony,
-
-looks like this fix missed qemu-4.0.
-
-What is your opinion on this fix? I think there was zero reply...
-
-Olaf
-
-On Mon, Jan 07, Olaf Hering wrote:
-
-> Am Fri, 4 Jan 2019 17:48:31 +0100
-> schrieb Olaf Hering <olaf@aepfle.de>:
->=20
-> > Am Fri, 4 Jan 2019 16:57:55 +0100
-> > schrieb Olaf Hering <olaf@aepfle.de>:
-> >=20
-> > > worth keeping (and fixing) the concept of an "offline migration" =20
-> >=20
-> > And regarding the fix, it looks like qmp_xen_save_devices_state does no=
-t need the concept of "live". Just shutdown the blockdevices and be done wi=
-th it?
->=20
-> Anthony, it looks like 5d6c599fe1 ("migration, xen: Fix block image lock =
-issue on live migration") went too far. Why does stopping the disks at the =
-very end of the save/migrate process depend on "live"? During a migration t=
-he disks have to be released either way. During "xl save" the domU may cont=
-inue to run, if '-c' was specified.=20
->=20
-> It seems the 'live' parameter for xen-save-devices-state is not needed.
->=20
-> Olaf
-
-
---FCuugMFkClbJLl1L
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXKzDDgAKCRBdQqD6ppg2
-fqy3AJ42berK3PGBfgU75eiLm2AzTDTnUQCgqZ3uT+4FFs0riZUS4tSDVrIxX0Q=
-=gqiC
------END PGP SIGNATURE-----
-
---FCuugMFkClbJLl1L--
-
-
---===============4579897145740428844==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4579897145740428844==--
-
+CgpPbiAwOS8wNC8yMDE5IDE2OjE3LCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiBPbiAwOS4wNC4x
+OSBhdCAxNTozOCwgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+IHdyb3RlOgo+PiBPbiAwOS8w
+NC8yMDE5IDE0OjAxLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+IEBAIC00NjMsOSArNDYzLDE0IEBA
+IHN0YXRpYyB2b2lkIHRpbWVyX3NvZnRpcnFfYWN0aW9uKHZvaWQpCj4+PiAgICAgICBpZiAoIHVu
+bGlrZWx5KHRzLT5saXN0ICE9IE5VTEwpICkKPj4+ICAgICAgIHsKPj4+ICAgICAgICAgICAvKiBv
+bGRfbGltaXQgPT0gKDJebiktMTsgbmV3X2xpbWl0ID09ICgyXihuKzQpKS0xICovCj4+PiAtICAg
+ICAgICBpbnQgb2xkX2xpbWl0ID0gaGVhcF9tZXRhZGF0YShoZWFwKS0+bGltaXQ7Cj4+PiAtICAg
+ICAgICBpbnQgbmV3X2xpbWl0ID0gKChvbGRfbGltaXQgKyAxKSA8PCA0KSAtIDE7Cj4+PiAtICAg
+ICAgICBzdHJ1Y3QgdGltZXIgKipuZXdoZWFwID0geG1hbGxvY19hcnJheShzdHJ1Y3QgdGltZXIg
+KiwgbmV3X2xpbWl0ICsKPj4gMSk7Cj4+PiArICAgICAgICB1bnNpZ25lZCBpbnQgb2xkX2xpbWl0
+ID0gaGVhcF9tZXRhZGF0YShoZWFwKS0+bGltaXQ7Cj4+PiArICAgICAgICB1bnNpZ25lZCBpbnQg
+bmV3X2xpbWl0ID0gKChvbGRfbGltaXQgKyAxKSA8PCA0KSAtIDE7Cj4+PiArICAgICAgICBzdHJ1
+Y3QgdGltZXIgKipuZXdoZWFwID0gTlVMTDsKPj4+ICsKPj4+ICsgICAgICAgIC8qIERvbid0IGdy
+b3cgdGhlIGhlYXAgYmV5b25kIHdoYXQgaXMgcmVwcmVzZW50YWJsZSBpbiBpdHMgbWV0YWRhdGEu
+ICovCj4+PiArICAgICAgICBpZiAoIG5ld19saW1pdCA9PSAodHlwZW9mKGhlYXBfbWV0YWRhdGEo
+aGVhcCktPmxpbWl0KSluZXdfbGltaXQgJiYKPj4+ICsgICAgICAgICAgICAgbmV3X2xpbWl0ICsg
+MSApCj4+PiArICAgICAgICAgICAgbmV3aGVhcCA9IHhtYWxsb2NfYXJyYXkoc3RydWN0IHRpbWVy
+ICosIG5ld19saW1pdCArIDEpOwo+Pgo+PiBJdCB3b3VsZCBwcm9iYWJseSBiZSBoZWxwZnVsIHRv
+IGhhdmUgYSB3YXJuX29uY2UvcHJpbnRfb25jZSBpbiB0aGUgY2FzZQo+PiB0aGF0IHdlIGRvIGhp
+dCB0aGUgbWV0YWRhdGEgbGltaXQKPiAKPiBJIGNhbiBkbyB0aGlzLCBhbGJlaXQgdGhlIGxhY2sg
+b2YgdGhlIGNvbnN0cnVjdHMgeW91IHN1Z2dlc3Qgd2lsbAo+IG1ha2UgdGhpcyBhIGxpdHRsZSB1
+Z2x5LgoKTWFjcm9zIGltcGxlbWVudGluZyBzdWNoIGJlaGF2aW9yIHdvdWxkIGJlIG1vcmUgdGhh
+biB3ZWxjb21lZC4gV2UgdGVuZCB0byAKb3Blbi1jb2RlIFdBUk5fT05DRS9QUklOVF9PTkNFIGxv
+Z2ljIGluIGV2ZXJ5IHBsYWNlIHdoaWNoIGlzIG5vdCB2ZXJ5IG5pY2UuCgpDaGVlcnMsCgotLSAK
+SnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
