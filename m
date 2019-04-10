@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 29/62] ts-host-install: Put canary in
- 70-persistent-net.rules
-Date: Wed, 10 Apr 2019 15:23:35 +0100
-Message-ID: <20190410142408.22848-30-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 19/62] Debian: Fix http:// url for
+ bugs.xenproject.org
+Date: Wed, 10 Apr 2019 15:23:25 +0100
+Message-ID: <20190410142408.22848-20-ian.jackson@eu.citrix.com>
 References: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=xn7x=SM=citrix.com=prvs=996f5bc6d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hEEAK-0006R4-7v
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:28 +0000
+ id 1hEEAJ-0006Pi-MF
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:27 +0000
 In-Reply-To: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,19 +26,16 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhpcyB3aWxsIGFsbG93IHVzIHRvIHNlZSBpZiB0aGUgaW5pdHJhbWZzJ3MgbmV0d29yayBuYW1l
-cyBhcmUgYmVpbmcKcHJvcGVybHkgY29waWVkIHRvIHRoZSBpbnN0YWxsZWQgc3lzdGVtLiAgSWUs
-IHRoaXMgaXMganVzdCBhIGRlYnVnZ2luZwphaWQuCgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFja3Nv
-biA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KLS0tCiB0cy1ob3N0LWluc3RhbGwgfCA0ICsr
-KysKIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS90cy1ob3N0
-LWluc3RhbGwgYi90cy1ob3N0LWluc3RhbGwKaW5kZXggNzQyM2ViOWIuLmVhMDg3YTI1IDEwMDc1
-NQotLS0gYS90cy1ob3N0LWluc3RhbGwKKysrIGIvdHMtaG9zdC1pbnN0YWxsCkBAIC0yMTgsNiAr
-MjE4LDEwIEBAIFNVQlNZU1RFTT09Im5ldCIsIEFDVElPTj09ImFkZCIsIERSSVZFUlM9PSI/KiIs
-IEFUVFJ7YWRkcmVzc309PSIkaG8tPntFdGhlcn0iLCBBCiBFTkQKICAgICB9CiAKKyAgICBvcGVu
-IENBTkFSWSwgJz4+JywgIiRwZXJzaXN0ZW50X25ldF9ydWxlcyIgb3IgZGllICQhOworICAgIHBy
-aW50IENBTkFSWSAiXG4jIC0gY2FuYXJ5IC0gY2FtZSB2aWEgaW5pdHJhbWZzXG4iIG9yIGRpZSAk
-ITsKKyAgICBjbG9zZSBDQU5BUlkgb3IgZGllICQhOworCiAgICAgbXkgJXhvcHRzOwogCiAgICAg
-ZGlfc3BlY2lhbF9rZXJuZWwoJGhvLCBzdWIgewotLSAKMi4xMS4wCgoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+U2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0t
+LQogT3NzdGVzdC9EZWJpYW4ucG0gfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24o
+KyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9Pc3N0ZXN0L0RlYmlhbi5wbSBiL09zc3Rl
+c3QvRGViaWFuLnBtCmluZGV4IDgwYjRjZjM3Li40MTRjZDg5NyAxMDA2NDQKLS0tIGEvT3NzdGVz
+dC9EZWJpYW4ucG0KKysrIGIvT3NzdGVzdC9EZWJpYW4ucG0KQEAgLTIzOSw3ICsyMzksNyBAQCBF
+TkQKIAkjIERvbTAgc3BlY2lmaWMga2VybmVsIG9wdGlvbnMKIAlteSBAeGVua29wdCA9IEBrb3B0
+OwogCXB1c2ggQHhlbmtvcHQsICR4ZW5rb3B0OwotCSMgaHR0cDovL2J1Z3MueGVucHJvamVjdC5v
+cmcveGVuL2J1Zy80NQorCSMgaHR0cHM6Ly9idWdzLnhlbnByb2plY3Qub3JnL3hlbi9idWcvNDUK
+IAlwdXNoIEB4ZW5rb3B0LCAiY2xrX2lnbm9yZV91bnVzZWQiCiAJICAgIGlmICRoby0+e1N1aXRl
+fSA9fiBtL3doZWV6eXxqZXNzaWV8c3RyZXRjaC87CiAKLS0gCjIuMTEuMAoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
