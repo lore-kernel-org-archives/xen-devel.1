@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 13/62] Extend workaround
- `clk_ignore_unused' to stretch
-Date: Wed, 10 Apr 2019 15:23:19 +0100
-Message-ID: <20190410142408.22848-14-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 41/62] ts-debian-fixup: Use
+ debian_overlays_fixup_cmd
+Date: Wed, 10 Apr 2019 15:23:47 +0100
+Message-ID: <20190410142408.22848-42-ian.jackson@eu.citrix.com>
 References: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=xn7x=SM=citrix.com=prvs=996f5bc6d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hEEAC-0006D0-Rx
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:20 +0000
+ id 1hEEAR-0006ie-Rs
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:35 +0000
 In-Reply-To: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,23 +23,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Julien Grall <julien.grall@linaro.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KClRoaXMgaXMgaHR0cHM6Ly9idWdz
-LnhlbnByb2plY3Qub3JnL3hlbi9idWcvNDUKCldpdGhvdXQgdGhhdCBwYXJhbWV0ZXIgd2UgbG9z
-ZSB1YXJ0IG91dHB1dC4KClNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5j
-b20+CkNDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNDOiBK
-dWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBsaW5hcm8ub3JnPgotLS0KIE9zc3Rlc3QvRGViaWFu
-LnBtIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0p
-CgpkaWZmIC0tZ2l0IGEvT3NzdGVzdC9EZWJpYW4ucG0gYi9Pc3N0ZXN0L0RlYmlhbi5wbQppbmRl
-eCA4MmI1ZmI0MC4uOTFiZmZkZmYgMTAwNjQ0Ci0tLSBhL09zc3Rlc3QvRGViaWFuLnBtCisrKyBi
-L09zc3Rlc3QvRGViaWFuLnBtCkBAIC0yNDEsNyArMjQxLDcgQEAgRU5ECiAJcHVzaCBAeGVua29w
-dCwgJHhlbmtvcHQ7CiAJIyBodHRwOi8vYnVncy54ZW5wcm9qZWN0Lm9yZy94ZW4vYnVnLzQ1CiAJ
-cHVzaCBAeGVua29wdCwgImNsa19pZ25vcmVfdW51c2VkIgotCSAgICBpZiAkaG8tPntTdWl0ZX0g
-PX4gbS93aGVlenl8amVzc2llLzsKKwkgICAgaWYgJGhvLT57U3VpdGV9ID1+IG0vd2hlZXp5fGpl
-c3NpZXxzdHJldGNoLzsKIAogCSR4ZW5rb3B0ID0gam9pbiAnICcsIEB4ZW5rb3B0OwogCWxvZ20o
-IkRvbTAgTGludXggb3B0aW9uczogJHhlbmtvcHQiKTsKLS0gCjIuMTEuMAoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T3RoZXJ3aXNlIHdlIGdldCB0aGUgc2FtZSBlcnJvciBmb3IgZ3Vlc3RzIGFzIHdhcyBwcmV2ZW50
+ZWQgZm9yIGhvc3RzCmJ5ICJwcmVzZWVkX2Jhc2U6IGNobW9kIHNzaCBob3N0IHByaXZhdGUga2V5
+cyB0byBwbGFjYXRlIHNzaGQiLgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNr
+c29uQGV1LmNpdHJpeC5jb20+Ci0tLQogdHMtZGViaWFuLWZpeHVwIHwgNSArKysrKwogMSBmaWxl
+IGNoYW5nZWQsIDUgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL3RzLWRlYmlhbi1maXh1cCBi
+L3RzLWRlYmlhbi1maXh1cAppbmRleCAwZTU1M2Q0Ny4uN2Q5ZDAzOTggMTAwNzU1Ci0tLSBhL3Rz
+LWRlYmlhbi1maXh1cAorKysgYi90cy1kZWJpYW4tZml4dXAKQEAgLTIwNiw3ICsyMDYsMTIgQEAg
+c2F2ZWNmZygpOwogZXRoZXIoKTsKIHRhcmdldF9rZXJua2luZF9jaGVjaygkZ2hvKTsKIGFjY2Vz
+cygpOworCiBkZWJpYW5fb3ZlcmxheXMoJGhvLCBcJm92ZXJsYXkpOwordGFyZ2V0X2NtZF9yb290
+KCRobywgPDxFTkQuZGViaWFuX292ZXJsYXlzX2ZpeHVwX2NtZCgkaG8sICRtb3VudHBvaW50KSk7
+CitzZXQgLWV4CitFTkQKKwogY29uc29sZSgpOwogZmlsZXN5c3RlbXMoKTsKIG90aGVyZml4dXBj
+ZmcoKTsKLS0gCjIuMTEuMAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2pl
+Y3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4t
+ZGV2ZWw=
