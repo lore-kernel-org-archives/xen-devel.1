@@ -1,22 +1,20 @@
-From: Jordan Justen <jordan.l.justen@intel.com>
-Subject: Re: [edk2-devel] [PATCH v2 02/31] OvmfPkg: Create
- platform XenOvmf
-Date: Wed, 10 Apr 2019 11:37:10 -0700
-Message-ID: <155492143006.23894.8253130602441997952@jljusten-skl>
-References: <20190409110844.14746-1-anthony.perard@citrix.com>
- <20190409110844.14746-3-anthony.perard@citrix.com>
- <155488970861.20447.12525571872411959890@jljusten-skl>
- <a3e5b97c-6dc7-788f-99a8-769e37f3a8d5@redhat.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: status of non-live migration of HVM with libvirt
+Date: Wed, 10 Apr 2019 20:42:13 +0200
+Message-ID: <20190410204213.1c71758c.olaf@aepfle.de>
+References: <20190104165755.73674a27.olaf@aepfle.de>
+ <20190104174831.271161e5.olaf@aepfle.de>
+ <20190107110737.1ef0a0ef.olaf@aepfle.de>
+ <20190410162503.GI1435@perard.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1911216236774869344=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=sbnS=SM=intel.com=jordan.l.justen@srs-us1.protection.inumbo.net>)
- id 1hEI6w-0003DS-Ak
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 18:38:14 +0000
-In-Reply-To: <a3e5b97c-6dc7-788f-99a8-769e37f3a8d5@redhat.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=rOu6=SM=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hEIAz-0003ug-EB
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 18:42:26 +0000
+In-Reply-To: <20190410162503.GI1435@perard.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,53 +23,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Anthony PERARD <anthony.perard@citrix.com>, Laszlo Ersek <lersek@redhat.com>, devel@edk2.groups.io
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Ard Biesheuvel <ard.biesheuvel@linaro.org>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjAxOS0wNC0xMCAwNzoyNzoxNSwgTGFzemxvIEVyc2VrIHdyb3RlOgo+IE9uIDA0LzEwLzE5
-IDExOjQ4LCBKb3JkYW4gSnVzdGVuIHdyb3RlOgo+ID4gT24gMjAxOS0wNC0wOSAwNDowODoxNSwg
-QW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4gPj4gVGhpcyBpcyBhIGNvcHkgb2YgT3ZtZlg2NCwgcmVt
-b3ZpbmcgVmlydElPIGFuZCBzb21lIFNNTS4KPiA+Pgo+ID4+IFRoaXMgbmV3IHBsYXRmb3JtIHdp
-bGwgYmUgY2hhbmdlZCB0byBtYWtlIGl0IHdvcmtzIG9uIHR3byB0eXBlcyBvZiBYZW4KPiA+PiBn
-dWVzdDogSFZNIGFuZCBQVkguCj4gPj4KPiA+PiBDb21wYXJlIHRvIE92bWZYNjQsIHRoaXMgcGF0
-Y2g6Cj4gPj4KPiA+PiAtIGNoYW5nZWQ6IFBMQVRGT1JNX0dVSUQsIE9VVFBVVF9ESVJFQ1RPUlks
-IEZMQVNIX0RFRklOSVRJT04KPiA+PiAtIHJlbW92ZWQ6IFZpcnRpb0xpYiBjbGFzcyByZXNvbHV0
-aW9uCj4gPj4gLSByZW1vdmVkOiBhbGwgVUVGSV9EUklWRVIgbW9kdWxlcyBmb3IgdmlydGlvIGRl
-dmljZXMKPiA+PiAtIHJlbW92ZWQ6IERYRV9TTU1fRFJJVkVSIGFuZCBTTU1fQ09SRSBsaWIgY2xh
-c3MgcmVzb2x1dGlvbnMKPiA+PiAtIHJlbW92ZWQ6IERYRV9TTU1fRFJJVkVSIGFuZCBTTU1fQ09S
-RSBGREYgcnVsZXMKPiA+PiAtIHJlbW92ZWQ6IEV2ZXJ5dGhpbmcgcmVsYXRlZCB0byBTTU1fUkVR
-VUlSRT09dHJ1ZQo+ID4+IC0gcmVtb3ZlZDogRXZlcnl0aGluZyByZWxhdGVkIHRvIFNFQ1VSRV9C
-T09UX0VOQUJMRT09dHJ1ZQo+ID4+IC0gcmVtb3ZlZDogRXZlcnl0aGluZyByZWxhdGVkIHRvIFRQ
-TTJfRU5BQkxFPT10cnVlCj4gPj4gLSBjaGFuZ2VkOiBQY2RQY2lEaXNhYmxlQnVzRW51bWVyYXRp
-b24gZHluYW1pYyBkZWZhdWx0IGZsaXBwZWQgdG8gVFJVRQo+ID4+IC0gY2hhbmdlZDogZGVmYXVs
-dCBGRF9TSVpFX0lOX0tCIHRvIDJNLgo+ID4+Cj4gPj4gQ29udHJpYnV0ZWQtdW5kZXI6IFRpYW5v
-Q29yZSBDb250cmlidXRpb24gQWdyZWVtZW50IDEuMQo+ID4+IFNpZ25lZC1vZmYtYnk6IEFudGhv
-bnkgUEVSQVJEIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgo+ID4+IC0tLQo+ID4+ICBPdm1m
-UGtnL3tPdm1mUGtnWDY0LmRzYyA9PiBYZW5Pdm1mLmRzY30gICAgIHwgMjAyICstLS0tLS0tLS0t
-LS0tLS0tLS0tCj4gPiAKPiA+IEkgZ3Vlc3Mgd2UgYWxsIHdhbnQgb3VyIG5hbWUgdG8gYmUgZmly
-c3QgOiksIGJ1dCBPdm1mWGVuIHNlZW1zIG1vcmUKPiA+IGxpa2UgdGhlIHBhdHRlcm4gdGhhdCBl
-ZGsyIHVzZXMgd2hlbiBtYWtpbmcgc3ViLXBsYXRmb3Jtcy4KCkZvciBleGFtcGxlOiBBcm1WaXJ0
-UGtnL0FybVZpcnRYZW4uZHNjCgo+ID4gCj4gPiBBbHNvLCBpbiBzb21lIGNhc2VzIHdlJ3ZlIHVz
-ZWQgIWlmZGVmIHR5cGUgdGhpbmdzIHRvIGtlZXAgZHNjIGFuZCBmZGYKPiA+IGZpbGVzIGNvbW1v
-bi4gV291bGQgdGhhdCBub3QgYmUgd29ya2FibGUgaGVyZT8gTWF5YmUgaXQgd291bGQgZ2V0IHRv
-bwo+ID4gdWdseS4gOlwKPiAKPiBJJ3ZlIGJlZW4gaGFwcHkgd2l0aCBhIHNpbWlsYXIgWGVuPC0+
-UUVNVSBzcGxpdCB1bmRlciBBcm1WaXJ0UGtnLgo+IER1cGxpY2F0aW9ucyBpbiB1cGRhdGVzIGFy
-ZSB1c3VhbGx5IG5vdCBhIGh1Z2UgYnVyZGVuLCBhbmQga2VlcGluZyB0aGUKPiBmaWxlcyBzZXBh
-cmF0ZSBoYXMgcHJvdmVkIHZlcnkgaGVscGZ1bCBmb3IgZGV0ZXJtaW5pbmcKPiBtYWludGFpbmVy
-L3Jldmlld2VyL3Rlc3RlciByZXNwb25zaWJpbGl0eS4KPiAKPiA+IEl0IGNvdWxkIGhlbHAgdG8g
-cHJldmVudCBoYXZpbmcgdG8gc3luYyBkc2MgY2hhbmdlcyBhY3Jvc3MsIGFuZAo+ID4gcHJldmVu
-dCBjaGFuZ2VzIGZyb20gYmVpbmcgb21pdHRlZCBmb3IgWGVuIG9uIGFjY2lkZW50Lgo+IAo+IFRy
-dWUsIGJ1dCBpbiBteSBleHBlcmllbmNlIHRoYXQncyBiZWVuIHRoZSBzbWFsbGVyIHByb2JsZW0u
-IFRoZSBsYXJnZXIKPiBwcm9ibGVtIGhhcyBiZWVuIG1vZGlmeWluZyBYZW4gc3R1ZmYgaW4gdW5p
-bnRlbmRlZCB3YXlzICg9IHJlZ3Jlc3NpbmcKPiBYZW4pLCBiZWNhdXNlIHdlIGNhbid0IHRlc3Qg
-KG9yIGRvbid0IGV2ZW4gbm90aWNlKSB0aGUgWGVuLXNpZGUKPiBpbXBsaWNhdGlvbnMgb2YgY2hh
-bmdlcyBtYWRlIHRvIGNvbW1vbiBzb3VyY2UuCgpEb2VzIHRoYXQgbWVhbiB5b3UgYXZvaWQgY2hh
-bmdpbmcgQXJtVmlydFhlbi5kc2MgZW50aXJlbHksIG9yIHlvdSB0cnkKdG8gdXBkYXRlIGl0IHdo
-ZW4gaXQgc2VlbXMgbGlrZWx5IHRvIG5vdCBjYXVzZSB0cm91YmxlPyBJIGNvdWxkIHNlZQp1bmlu
-dGVuZGVkIGJyZWFrYWdlIGVpdGhlciB3YXkuCgpBbnl3YXksIGl0IHNvdW5kcyBsaWtlIGl0J3Mg
-Z2VuZXJhbGx5IHdvcmtpbmcgb3V0IG9rYXkgd2l0aApBcm1WaXJ0WGVuLCBzbyBpdCBzZWVtcyBv
-a2F5IHRvIGZvbGxvdyB0aGF0IHVuZGVyIE92bWZQa2cuCgotSm9yZGFuCgpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
-Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
-b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1911216236774869344==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/eBv18_mhE8LTGuS7qxs4D+j"; protocol="application/pgp-signature"
+
+--Sig_/eBv18_mhE8LTGuS7qxs4D+j
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 10 Apr 2019 17:25:04 +0100
+schrieb Anthony PERARD <anthony.perard@citrix.com>:
+
+> Because "Snapshots don't need to inactivate images", see:
+> https://lists.xenproject.org/archives/html/xen-devel/2017-10/msg02782.html
+>=20
+> I had to add the `live' parameter to fix the lock issue.
+
+Thanks, I will double check this part.
+
+Olaf
+
+--Sig_/eBv18_mhE8LTGuS7qxs4D+j
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXK45BQAKCRBdQqD6ppg2
+ftVlAJ9LDFF2oJ1IDcFXZNzFGg8QTySiWACgkmSCLCoVfvmOobBHqP6VCmFYh+o=
+=YjKk
+-----END PGP SIGNATURE-----
+
+--Sig_/eBv18_mhE8LTGuS7qxs4D+j--
+
+
+--===============1911216236774869344==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1911216236774869344==--
