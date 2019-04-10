@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 38/62] ts-guests-nbd-mirror: Use
- target_getfile_root_stash
-Date: Wed, 10 Apr 2019 15:23:44 +0100
-Message-ID: <20190410142408.22848-39-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 05/62] ts-xen-install: install some
+ packages on stretch
+Date: Wed, 10 Apr 2019 15:23:11 +0100
+Message-ID: <20190410142408.22848-6-ian.jackson@eu.citrix.com>
 References: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=xn7x=SM=citrix.com=prvs=996f5bc6d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hEEAT-0006nL-S9
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:37 +0000
+ id 1hEEAB-0006C8-Ow
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:19 +0000
 In-Reply-To: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,22 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhhdCByZW1vdmVzIHRoZSByYXRoZXIgYWQtaG9jIG9wZW4tY29kaW5nLgoKU2lnbmVkLW9mZi1i
-eTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0tLQogdHMtZ3Vlc3Rz
-LW5iZC1taXJyb3IgfCA1ICstLS0tCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDQg
-ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvdHMtZ3Vlc3RzLW5iZC1taXJyb3IgYi90cy1ndWVz
-dHMtbmJkLW1pcnJvcgppbmRleCAwNjkwM2FhYS4uMDM2NWM0N2IgMTAwNzU1Ci0tLSBhL3RzLWd1
-ZXN0cy1uYmQtbWlycm9yCisrKyBiL3RzLWd1ZXN0cy1uYmQtbWlycm9yCkBAIC0xNTQsMTAgKzE1
-NCw3IEBAIHN1YiBzaHVmZmxlY29uZmlncyAoKSB7CiAJbXkgJGduPSAkZ25zWyRpXTsKIAlteSAk
-Z2hvPSAkZ2hvc1skaV07CiAJbXkgJGNmZ3BhdGg9ICRyeyAiJGdoby0+e0d1ZXN0fV9jZmdwYXRo
-IiB9OwotCW15ICRmaWxlPSAkY2ZncGF0aDsKLQkkZmlsZT1+IHMsLywtLGc7Ci0JJGZpbGU9ICIk
-c3Rhc2gvIi5ob3N0bmFtZXBhdGgoJGNobykuIi0tJGZpbGUiOwotCXRhcmdldF9nZXRmaWxlX3Jv
-b3QoJHNobywgNjAsICRjZmdwYXRoLCAkZmlsZSk7CisJbXkgJGZpbGUgPSB0YXJnZXRfZ2V0Zmls
-ZV9yb290X3N0YXNoKCRzaG8sIDYwLCAkY2ZncGF0aCk7CiAJdGFyZ2V0X3B1dGZpbGVfcm9vdCgk
-Y2hvLCA2MCwgJGZpbGUsICRjZmdwYXRoKTsKICAgICB9CiB9Ci0tIAoyLjExLjAKCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+RnJvbTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KClRoZSAicm91dGUiIGNvbW1hbmQg
+aXMgbm93IGluIHRoYXQgcGFja2FnZS4KCmxpYm5sIGlzIG5lZWRlZCB3aGVuIHJ1bm5pbmcgeGwu
+CgpTaWduZWQtb2ZmLWJ5OiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpBY2tlZC1ieTog
+SWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+Ci0tLQp2MzogaW52ZXJ0IGNv
+bmRpdGlvbi4KLS0tCiB0cy14ZW4taW5zdGFsbCB8IDMgKysrCiAxIGZpbGUgY2hhbmdlZCwgMyBp
+bnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvdHMteGVuLWluc3RhbGwgYi90cy14ZW4taW5zdGFs
+bAppbmRleCA4ZGU5NGFjMi4uODA5NTI4NTcgMTAwNzU1Ci0tLSBhL3RzLXhlbi1pbnN0YWxsCisr
+KyBiL3RzLXhlbi1pbnN0YWxsCkBAIC01Miw2ICs1Miw5IEBAIHN1YiBwYWNrYWdlcyAoKSB7CiAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGlic2RsMS4yZGViaWFuIGxpYmdsaWIyLjAt
+MCBsaWJsem1hNQogCQkJICAgICAgIHFlbXUtdXRpbHMKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBuZXRjYXQtb3BlbmJzZCkpOworICAgIGlmICgkaG8tPntTdWl0ZX0gIX4gbS9zcXVl
+ZXplfHdoZWV6eXxqZXNzaWUvKSB7CisgICAgICAgIHRhcmdldF9pbnN0YWxsX3BhY2thZ2VzKCRo
+bywgJ25ldC10b29scyBsaWJubC1yb3V0ZS0zLTIwMCcpOworICAgIH0KICAgICBpZiAoJGhvLT57
+U3VpdGV9ID1+IG0vamVzc2llLykgewogICAgICAgICB0YXJnZXRfaW5zdGFsbF9wYWNrYWdlcygk
+aG8sICdsaWJubC1yb3V0ZS0zLTIwMCcpOwogICAgIH0KLS0gCjIuMTEuMAoKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
