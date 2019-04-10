@@ -1,20 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86: fix build race when generating
- temporary object files
-Date: Wed, 10 Apr 2019 13:56:03 +0100
-Message-ID: <6c280652-e0d3-6328-e5cd-641e25ac5bea@citrix.com>
-References: <5CACB2D10200007800225EDC@prv1-mh.provo.novell.com>
+From: Laszlo Ersek <lersek@redhat.com>
+Subject: [PATCH 1/4] OvmfPkg/License.txt: remove XenPvBlkDxe
+ from the MIT licensed dir list
+Date: Wed, 10 Apr 2019 14:58:06 +0200
+Message-ID: <20190410125809.21985-2-lersek@redhat.com>
+References: <20190410125809.21985-1-lersek@redhat.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HBqT=SM=citrix.com=prvs=996c6fe0e=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hECnM-0006Lj-S5
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 12:57:40 +0000
-In-Reply-To: <5CACB2D10200007800225EDC@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=eTPk=SM=redhat.com=lersek@srs-us1.protection.inumbo.net>)
+ id 1hECo6-0006Ss-5w
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 12:58:26 +0000
+In-Reply-To: <20190410125809.21985-1-lersek@redhat.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,26 +22,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: edk2-devel-groups-io <devel@edk2.groups.io>
+Cc: Lars Kurth <lars.kurth@citrix.com>, Ard Biesheuvel <ard.biesheuvel@linaro.org>, Jordan Justen <jordan.l.justen@intel.com>, Julien Grall <julien.grall@arm.com>, Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDkvMDQvMjAxOSAxNTo1NywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVGhlIHJ1bGVzIHRvIGdl
-bmVyYXRlIHhlbi1zeW1zIGFuZCB4ZW4uZWZpIG1heSBydW4gaW4gcGFyYWxsZWwsIGJ1dCBib3Ro
-Cj4gcmVjdXJzaXZlbHkgaW52b2tlICQoTUFLRSkgdG8gYnVpbGQgc3ltYm9sL3JlbG9jYXRpb24g
-dGFibGUgdGVtcG9yYXJ5Cj4gb2JqZWN0IGZpbGVzLiBUaGVzZSByZWN1cnNpdmUgYnVpbGRzIHdv
-dWxkIGJvdGggcmUtZ2VuZXJhdGUgdGhlIC4qLmQyCj4gZmlsZXMgKHdoZXJlIG5lZWRlZCkuIEJv
-dGggd291bGQgaW4gdHVybiBpbnZva2UgdGhlIHNhbWUgcnVsZSwgdGh1cwo+IGFsbG93aW5nIGZv
-ciBhIHJhY2Ugb24gdGhlIC4qLmQyLnRtcCBpbnRlcm1lZGlhdGUgZmlsZXMuCj4KPiBUaGUgZGVw
-ZW5kZW5jeSBmaWxlcyBvZiB0aGUgdGVtcG9yYXJ5IC54ZW4qLm8gZmlsZXMgbGl2ZSBpbiB4ZW4v
-IHJhdGhlcgo+IHRoYW4geGVuL2FyY2gveDg2LyBhbnl3YXksIHNvIHdvbid0IGJlIGluY2x1ZGVk
-IG5vIG1hdHRlciB3aGF0LiBUYWtlIHRoZQo+IG9wcG9ydHVuaXR5IGFuZCBkZWxldGUgdGhlbSwg
-YXMgdGhlIGp1c3QgcmUtZ2VuZXJhdGVkIC54ZW4qLlMgZmlsZXMgd2lsbAo+IHRyaWdnZXIgYSBw
-cm9wZXIgcmUtYnVpbGQgb2YgdGhlIC54ZW4qLm8gb25lcyBhbnl3YXkuCj4KPiBFbXB0eSB0aGUg
-REVQUyB2YXJpYWJsZSBpbiBjYXNlIHRoZSBzZXQgb2YgZ29hbHMgY29uc2lzdHMgb2YganVzdCB0
-aG9zZQo+IHRlbXBvcmFyeSBvYmplY3QgZmlsZXMsIHRodXMgZWxpbWluYXRpbmcgdGhlIHJhY2Uu
-Cj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tl
-ZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+QWxsIGZpbGVzIHVuZGVyICJPdm1mUGtnL1hlblB2QmxrRHhlIiBjYXJyeQoKICBTUERYLUxpY2Vu
+c2UtSWRlbnRpZmllcjogQlNELTItQ2xhdXNlLVBhdGVudAoKTm9uZSBvZiB0aGVtIGFyZSBNSVQt
+bGljZW5zZWQuCgpVcGRhdGUgIk92bWZQa2cvTGljZW5zZS50eHQiIGFjY29yZGluZ2x5LgoKQ2M6
+IEFudGhvbnkgUGVyYXJkIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgpDYzogQXJkIEJpZXNo
+ZXV2ZWwgPGFyZC5iaWVzaGV1dmVsQGxpbmFyby5vcmc+CkNjOiBKb3JkYW4gSnVzdGVuIDxqb3Jk
+YW4ubC5qdXN0ZW5AaW50ZWwuY29tPgpDYzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJt
+LmNvbT4KQ2M6IExhcnMgS3VydGggPGxhcnMua3VydGhAY2l0cml4LmNvbT4KQ2M6IHhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpCdWd6aWxsYTogaHR0cHM6Ly9idWd6aWxsYS50aWFub2Nv
+cmUub3JnL3Nob3dfYnVnLmNnaT9pZD0xNjU0ClNpZ25lZC1vZmYtYnk6IExhc3psbyBFcnNlayA8
+bGVyc2VrQHJlZGhhdC5jb20+Ci0tLQogT3ZtZlBrZy9MaWNlbnNlLnR4dCB8IDEgLQogMSBmaWxl
+IGNoYW5nZWQsIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9Pdm1mUGtnL0xpY2Vuc2UudHh0
+IGIvT3ZtZlBrZy9MaWNlbnNlLnR4dAppbmRleCAwNjY2ZTFiYWM2NWUuLmEyZTAyYTE3OTZhYSAx
+MDA2NDQKLS0tIGEvT3ZtZlBrZy9MaWNlbnNlLnR4dAorKysgYi9Pdm1mUGtnL0xpY2Vuc2UudHh0
+CkBAIC01NCwxMSArNTQsMTAgQEAgUE9TU0lCSUxJVFkgT0YgU1VDSCBEQU1BR0UuCiAKIFNvbWUg
+ZmlsZXMgYXJlIHN1YmplY3QgdG8gdGhlIGZvbGxvd2luZyBsaWNlbnNlLCB0aGUgTUlUIGxpY2Vu
+c2UuIFRob3NlIGZpbGVzCiBhcmUgbG9jYXRlZCBpbjoKIC0gT3ZtZlBrZy9JbmNsdWRlL0luZHVz
+dHJ5U3RhbmRhcmQvWGVuLwogLSBPdm1mUGtnL1hlbkJ1c0R4ZS8KLS0gT3ZtZlBrZy9YZW5QdkJs
+a0R4ZS8KIAogUGVybWlzc2lvbiBpcyBoZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2UsIHRv
+IGFueSBwZXJzb24gb2J0YWluaW5nIGEgY29weQogb2YgdGhpcyBzb2Z0d2FyZSBhbmQgYXNzb2Np
+YXRlZCBkb2N1bWVudGF0aW9uIGZpbGVzICh0aGUgIlNvZnR3YXJlIiksIHRvIGRlYWwKIGluIHRo
+ZSBTb2Z0d2FyZSB3aXRob3V0IHJlc3RyaWN0aW9uLCBpbmNsdWRpbmcgd2l0aG91dCBsaW1pdGF0
+aW9uIHRoZSByaWdodHMKIHRvIHVzZSwgY29weSwgbW9kaWZ5LCBtZXJnZSwgcHVibGlzaCwgZGlz
+dHJpYnV0ZSwgc3VibGljZW5zZSwgYW5kL29yIHNlbGwKLS0gCjIuMTkuMS4zLmczMDI0N2FhNWQy
+MDEKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
