@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 08/62] ts-host-install: don't use the
- new nic naming scheme
-Date: Wed, 10 Apr 2019 15:23:14 +0100
-Message-ID: <20190410142408.22848-9-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 48/62] dm restrict audit: actually
+ install right package for fishdescriptor
+Date: Wed, 10 Apr 2019 15:23:54 +0100
+Message-ID: <20190410142408.22848-49-ian.jackson@eu.citrix.com>
 References: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=xn7x=SM=citrix.com=prvs=996f5bc6d=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hEEA9-0006BC-Pd
- for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:17 +0000
+ id 1hEEAV-0006rp-ED
+ for xen-devel@lists.xenproject.org; Wed, 10 Apr 2019 14:25:39 +0000
 In-Reply-To: <20190410142408.22848-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,24 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Wei Liu <wei.liu2@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-RnJvbTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KClNpZ25lZC1vZmYtYnk6IFdlaSBM
-aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CkFja2VkLWJ5OiBJYW4gSmFja3NvbiA8aWFuLmphY2tz
-b25AZXUuY2l0cml4LmNvbT4KLS0tCiB0cy1ob3N0LWluc3RhbGwgfCA0ICsrKysKIDEgZmlsZSBj
-aGFuZ2VkLCA0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS90cy1ob3N0LWluc3RhbGwgYi90
-cy1ob3N0LWluc3RhbGwKaW5kZXggMjkyNzMzYmEuLjlhYjNkZTYyIDEwMDc1NQotLS0gYS90cy1o
-b3N0LWluc3RhbGwKKysrIGIvdHMtaG9zdC1pbnN0YWxsCkBAIC0yNDQsNiArMjQ0LDEwIEBAIEVO
-RAogICAgICMgd2h5IHRoaXMgaXMgcmVwZWF0ZWQuCiAgICAgcHVzaCBAaG9jbWRsaW5lLCAiY29u
-c29sZT0kY29uc29sZSIgdW5sZXNzICRjb25zb2xlIGVxICJOT05FIjsKIAorICAgICMgRG9uJ3Qg
-dXNlICJQcmVkaWN0YWJsZSBOZXR3b3JrIEludGVyZmFjZSBOYW1lcyIKKyAgICAjIGh0dHBzOi8v
-d3d3LmZyZWVkZXNrdG9wLm9yZy93aWtpL1NvZnR3YXJlL3N5c3RlbWQvUHJlZGljdGFibGVOZXR3
-b3JrSW50ZXJmYWNlTmFtZXMvCisgICAgcHVzaCBAaG9jbWRsaW5lLCAibmV0LmlmbmFtZXM9MCIg
-aWYgJGhvLT57U3VpdGV9ID1+IG0vc3RyZXRjaC87CisKICAgICBwdXNoIEBob2NtZGxpbmUsCiAg
-ICAgICAgIGdldF9ob3N0X3Byb3BlcnR5KCRobywgImxpbnV4LWJvb3QtYXBwZW5kICRoby0+e1N1
-aXRlfSIsICcnKSwKICAgICAgICAgZ2V0X2hvc3RfcHJvcGVydHkoJGhvLCAibGludXgtYm9vdC1h
-cHBlbmQgJGhvLT57U3VpdGV9ICRye2FyY2h9IiwgJycpOwotLSAKMi4xMS4wCgoKX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
-bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
-ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SW4KICBkbSByZXN0cmljdCBhdWRpdDogaW5zdGFsbCBuZXdlciBjaGlhcmstc2NyaXB0cyBmb3Ig
+ZmlzaGRlc2NyaXB0b3IKYSBsb2NhbGx5LXByb3ZpZGVkIGNoaWFyay1zY3JpcHRzXzYuMC4yX2Fs
+bC5kZWIgd2FzIGluc3RhbGxlZCBmb3IKamVzc2llLiAgRm9yIHN0cmV0Y2ggYSBiYWNrcG9ydCB3
+YXMgaW5zdGFsbGVkLCBidXQgbWlzdGFrZW5seQpvZiBjaGlhcmstdXRpbHMtYmluIHJhdGhlciB0
+aGFuIGNoaWFyay1zY3JpcHRzLgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNr
+c29uQGV1LmNpdHJpeC5jb20+Ci0tLQogT3NzdGVzdC9EZWJpYW4ucG0gfCAyICstCiAxIGZpbGUg
+Y2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9Pc3N0
+ZXN0L0RlYmlhbi5wbSBiL09zc3Rlc3QvRGViaWFuLnBtCmluZGV4IDc5Yjc5NjBkLi45YWE4ODgy
+MiAxMDA2NDQKLS0tIGEvT3NzdGVzdC9EZWJpYW4ucG0KKysrIGIvT3NzdGVzdC9EZWJpYW4ucG0K
+QEAgLTEwNjAsNyArMTA2MCw3IEBAIHN1YiBwcmVzZWVkX2NyZWF0ZV9ndWVzdCAoJCQkO0ApIHsK
+ICAgICBpZiAoZ3JlcCB7IG0vX2RtcmVzdHJpY3QkLyAmJiAkcnskX30gfSBrZXlzICVyIGFuZAog
+CSRzdWl0ZSA9fiBtL3N0cmV0Y2gvKSB7CiAJcHJlc2VlZF9iYWNrcG9ydHNfcGFja2FnZXMoJGhv
+LCAkc2Z4LCBcJXhvcHRzLCAkc3VpdGUsCi0JCQkJICAgcXcoY2hpYXJrLXV0aWxzLWJpbikpOwor
+CQkJCSAgIHF3KGNoaWFyay1zY3JpcHRzKSk7CiAgICAgfQogCiAgICAgbXkgJHByZXNlZWRfZmls
+ZT0gcHJlc2VlZF9iYXNlKCRobywgJHNmeCwgJGV4dHJhX3BhY2thZ2VzLCAleG9wdHMpOwotLSAK
+Mi4xMS4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
+cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
