@@ -1,21 +1,21 @@
-From: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: [PATCH v2 1/3] OvmfPkg/XenSupport: remove usage of
- prefetchable PCI host bridge aperture
-Date: Thu, 11 Apr 2019 14:07:32 +0100
-Message-ID: <20190411130732.GK1435@perard.uk.xensource.com>
-References: <1554779560-26204-1-git-send-email-igor.druzhinin@citrix.com>
- <1554779560-26204-2-git-send-email-igor.druzhinin@citrix.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: Re: [PATCH v2] x86/mem-sharing: statically initialize
+ audit list head and lock
+Date: Thu, 11 Apr 2019 07:14:16 -0600
+Message-ID: <CABfawhk3-8RO1m-jMGsMtfDkZQjy14BYj=wG5FzKgJYyuzi2Kw@mail.gmail.com>
+References: <5CAEE3DF0200007800226799@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Xe+J=SN=citrix.com=prvs=9977b2ae1=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1hEZQt-0001Rw-1N
- for xen-devel@lists.xenproject.org; Thu, 11 Apr 2019 13:07:59 +0000
-Content-Disposition: inline
-In-Reply-To: <1554779560-26204-2-git-send-email-igor.druzhinin@citrix.com>
+ <SRS0=O6VX=SN=tklengyel.com=bounce+e181d6.cd840-xen-devel=lists.xenproject.org@srs-us1.protection.inumbo.net>)
+ id 1hEZXc-0002Cs-Sm
+ for xen-devel@lists.xenproject.org; Thu, 11 Apr 2019 13:14:56 +0000
+Received: by mail-wm1-f48.google.com with SMTP id z24so6691458wmi.5
+ for <xen-devel@lists.xenproject.org>; Thu, 11 Apr 2019 06:14:54 -0700 (PDT)
+In-Reply-To: <5CAEE3DF0200007800226799@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,30 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Igor Druzhinin <igor.druzhinin@citrix.com>
-Cc: ard.biesheuvel@linaro.org, jordan.l.justen@intel.com, edk2-devel@lists.01.org, julien.grall@arm.com, xen-devel@lists.xenproject.org, lersek@redhat.com, devel@edk2.groups.io
+To: Jan Beulich <JBeulich@suse.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Tamas K Lengyel <tamas@tklengyel.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBcHIgMDksIDIwMTkgYXQgMDQ6MTI6MzhBTSArMDEwMCwgSWdvciBEcnV6aGluaW4g
-d3JvdGU6Cj4gVGhpcyBhcGVydHVyZSBkb2Vzbid0IGV4aXN0IGluIFFFTVUtWEVOIGFuZCBodm1s
-b2FkZXIgcGxhY2VzIEJBUnMKPiBpbiBhcmJpdHJhcnkgb3JkZXIgZGlzcmVnYXJkaW5nIHByZWZl
-dGNoYWJsZSBiaXQuIFRoaXMgbWFrZXMKPiBwcmVmZXRjaGFibGUgYW5kIG5vbi1wcmVmZXRjaGFi
-bGUgQkFScyB0byBmb2xsb3cgZWFjaCBvdGhlciB0aGF0J3MKPiBxdWl0ZSBsaWtlbHkgd2l0aCBQ
-Q0kgcGFzc3Rocm91Z2ggZGV2aWNlcy4gSW4gdGhhdCBjYXNlLCB0aGUgZXhpc3RpbmcKPiBjb2Rl
-LCB0aGF0IHRyaWVzIHRvIHdvcmsgb3V0IGFwZXJ0dXJlIGJvdW5kYXJpZXMgYnkgcmVhZGluZyBo
-dm1sb2FkZXIKPiBCQVIgcGxhY2VtZW50LCB3aWxsIHJlcG9ydCBhIGJvZ3VzIHByZWZldGNoYWJs
-ZSBhcGVydHVyZSB3aGljaCBvdmVybGFwcwo+IHdpdGggdGhlIHJlZ3VsYXIgb25lLiBJdCB3aWxs
-IGV2ZW50dWFsbHkgdHJpZ2dlciBhbiBhc3NlcnRpb24gaW4KPiBEWEUgUENJIGluaXRpYWxpemF0
-aW9uIGNvZGUuCj4gCj4gRG8gdGhlIHNhbWUgdGhpbmcgYXMgT1ZNRiBvbiBRRU1VLUtWTSBhbmQg
-cGFzcyBhIG5vbi1leGlzdGluZyBhcGVydHVyZQo+IHRoZXJlLiBJdCdzIG5vdCBuZWNlc3Nhcnkg
-dG8gcGFzcyBhZGRpdGlvbmFsIGFsbG9jYXRpb24gZmxhZ3MgYXMgd2Ugc2V0Cj4gUmVzb3VyY2VB
-c3NpZ25lZCBmbGFnIG9uIHRoZSByb290IGJyaWRnZSB3aGljaCBtZWFucyB0aGV5IHdpbGwgYmUg
-aWdub3JlZC4KPiAKPiBDb250cmlidXRlZC11bmRlcjogVGlhbm9Db3JlIENvbnRyaWJ1dGlvbiBB
-Z3JlZW1lbnQgMS4xCj4gU2lnbmVkLW9mZi1ieTogSWdvciBEcnV6aGluaW4gPGlnb3IuZHJ1emhp
-bmluQGNpdHJpeC5jb20+Cj4gLS0tCj4gQ2hhbmdlcyBpbiB2MjoKPiAqIHJlbW92ZSB1c2FnZSBv
-ZiBwcmVmZXRjaGFibGUgYXBlcnR1cmUgZW50aXJlbHkKPiAqIGV4cGxhaW5lZCByYXRpb25hbGUg
-Zm9yIHRoZSBjaGFuZ2UgaW4gdGhlIGRlc2NyaXB0aW9uCj4gLS0tCgpSZXZpZXdlZC1ieTogQW50
-aG9ueSBQRVJBUkQgPGFudGhvbnkucGVyYXJkQGNpdHJpeC5jb20+CgpUaGFua3MsCgotLSAKQW50
-aG9ueSBQRVJBUkQKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBBcHIgMTEsIDIwMTkgYXQgMTI6NTEgQU0gSmFuIEJldWxpY2ggPEpCZXVsaWNoQHN1
+c2UuY29tPiB3cm90ZToKPgo+IFRoZXJlJ3Mgbm8gbmVlZCB0byBleGVjdXRlIGFueSBpbnN0cnVj
+dGlvbnMgZm9yIGRvaW5nIHNvLiBEcm9wIHRoZSB0aGVuCj4gZWZmZWN0aXZlbHkgZW1wdHkgbWVt
+X3NoYXJpbmdfaW5pdCgpIGFsdG9nZXRoZXIuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGlj
+aCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTogVGFtYXMgSyBMZW5neWVsIDx0YW1hc0B0
+a2xlbmd5ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
