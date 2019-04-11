@@ -1,20 +1,24 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH RFC 00/49] xen: add core scheduling support
-Date: Thu, 11 Apr 2019 15:28:25 +0200
-Message-ID: <9897c0cd2e850d303bdb352a620d429717055964.camel@suse.com>
-References: <20190329150934.17694-1-jgross@suse.com>
- <8f88c0017bcd6bace30e485547efe8e982469086.camel@suse.com>
- <59657c28f62cf82860560efaece6d0bfb0983846.camel@suse.com>
- <f3631a2a-f818-c940-8cec-3d2ace741158@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/HVM: correctly deal with benign
+ exceptions when combining two
+Date: Thu, 11 Apr 2019 14:39:21 +0100
+Message-ID: <2845f3ee-e548-33bf-519b-0201562ed559@citrix.com>
+References: <5C5A8F750200007800214217@prv1-mh.provo.novell.com>
+ <f25d83e3-e74d-713a-4601-f2a9aef2aba0@citrix.com>
+ <5C5ABCE202000078002143AE@prv1-mh.provo.novell.com>
+ <c55c91dd-7436-5882-8086-506e2548efed@citrix.com>
+ <5CAEED4902000078002267E4@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6722482676298567991=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=XEB1=SN=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hEZmr-000452-Nt
- for xen-devel@lists.xenproject.org; Thu, 11 Apr 2019 13:30:41 +0000
-In-Reply-To: <f3631a2a-f818-c940-8cec-3d2ace741158@suse.com>
+ <SRS0=YyQZ=SN=citrix.com=prvs=997b111c4=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1hEZvL-0004MI-2J
+ for xen-devel@lists.xenproject.org; Thu, 11 Apr 2019 13:39:27 +0000
+In-Reply-To: <5CAEED4902000078002267E4@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,92 +27,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Jan Beulich <jbeulich@suse.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Robert VanVossen <robert.vanvossen@dornerworks.com>, Julien Grall <julien.grall@arm.com>, Paul Durrant <paul.durrant@citrix.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jun Nakajima <jun.nakajima@intel.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============6722482676298567991==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-MQxOh8v3mg4y8amteefG"
-
-
---=-MQxOh8v3mg4y8amteefG
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2019-04-11 at 09:16 +0200, Juergen Gross wrote:
-> On 11/04/2019 02:34, Dario Faggioli wrote:
-> > Also, it's Phoronix again. I don't especially love it, but I'm
-> > still
-> > working on convincing our own internal automated benchmarking tool
-> > (which I like a lot more :-) ) to be a good friend of Xen. :-P
->=20
-> I think the Phoronix tests as such are not that bad, its the way they
-> are used by Phoronix which is completely idiotic.
->=20
-Sure, that is the main problem.
-
-About the suite itself, the fact that it is kind of a black box, can be
-a very good thing, but also a not so good one.
-
-Opaqueness is, AFAIUI, among its design goals, so I can't possibly
-complain about that. And in fact, that is what makes it so easy and
-quick to play with it. :-)
-
-If you want to tweak the configuration of a benchmark, or change how
-they're run, beside the config options that are pre-defined for each
-benchmark, (e.g., do stuff like adding `numactl blabla` "in front" of
-some), that is a lot less obvious or easy. And yes, this is somewhat
-the case for most, if not all, the benchmarking suite, but I find
-Phoronix makes this _particularly_ tricky.
-
-Anyway... :-D :-D
-
-Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-MQxOh8v3mg4y8amteefG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlyvQPkACgkQFkJ4iaW4
-c+46nw//cA0F8KVg50scdZQSTVPORMNP3YUdWSV27uN/T8e0BFVFbQZhkm433/WS
-rjRHQa3gS2TB0CcIaU9H71gJbKa18CyYSXaJY8L+36IFkZIoddcEE5450Q8B+M+A
-tUmCwkKvbIsvU+VNyOeSA9ij5yEHJwvCmGY97A0L5jEYgxhaIBU9JuI4ZWaAX+va
-7t0CGFloI/E6S1azZ4Th00700LNFbRFikbQ03zebSl2aqTCHHC0BRgJwRg9XzErv
-dtf2E2m/xktLAVvpSocBI2ZQSFk+Q8sTa5yJMh8XUn5Azsr2eChJJfKkr2BatwJo
-n9Kv5mUIYRDK/2zoQiV9xxkw8u21mGTTdL1ROi4X6f13yObrTN5CCdp1NK5RZCQf
-TaQcssBlJNSBRZc4p9SjiAPI71XKLE/q/my2R3QDsRl4XQ6ZU7qpNklpScbzyLVm
-rJ4M8QI4iPWEiwo6S9qxWRf2KbXmaZKL2gW8JKe6WqOszKFGzpl/LPSSoMO99So+
-ITjSM907tz+yPDGlMHYFnfqQrFRKn63VH1O9W8Q/m0e68dAjWKyOupLG2MSdYumP
-3Adl0ROMfb2UrD0J2UNn5+DTzbORQMtf0BG2Jo4b74pDTn8zlpW8meBk6R8Dh6Fs
-GWuZVQsVgiSxo/r6XUtXvdBNzcbv8h6CmXH5yP1aCG7Ri2hNOJw=
-=sWYv
------END PGP SIGNATURE-----
-
---=-MQxOh8v3mg4y8amteefG--
-
-
-
---===============6722482676298567991==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6722482676298567991==--
+T24gMTEvMDQvMjAxOSAwODozMSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4KPj4+IFRoYXQncyBhbHNv
+IHRoZSB3YXkgdGhlIFhTQS0xNTYgYWR2aXNvcnkgZGVzY3JpYmVzIGl0Lgo+PiBYU0EtMTU2IHdh
+cyB3cml0dGVuIGF0IGEgdGltZSB3aGVuIHdlIGJvdGggaGFkIGZhciBsZXNzIGF1dGhvcml0eSB0
+bwo+PiBjb21tZW50IG9uIHRoZSBzcGVjaWZpYyBkZXRhaWxzLiAgQ2VydGFpbmx5IGFzIGZhciBh
+cyBJIGFtIGNvbmNlcm5lZCwKPj4gdGhlIHBhc3QgY291cGxlIG9mIHllYXJzIGhhdmUgbWFkZSBh
+IG1hc3NpdmUgZGlmZmVyZW5jZSwgbm90IGxlYXN0IHRoZQo+PiBzZXZlcmFsIG1vbnRocyBzcGVu
+dCBkZWJ1Z2dpbmcgdGhlIFNUSS9zaW5nbGVzdGVwIGlzc3VlIHdpdGggR2lsLgo+Pgo+PiBUaGUg
+bWlzdGFrZSBpbiBYU0EtMTU2IGlzIHRoZSBkZXNjcmlwdGlvbiBvZiAidXBvbiBjb21wbGV0aW9u
+IG9mIHRoZQo+PiBkZWxpdmVyeSBvZiB0aGUgZmlyc3QgZXhjZXB0aW9uIi4KPj4KPj4gVGhlIGlu
+ZmluaXRlIGxvb3Agb2NjdXJzIGJlY2F1c2UgZGVsaXZlcnkgb2YgdGhlIGZpcnN0ICNEQiBpcyBu
+ZXZlcgo+PiBjb25zaWRlcmVkIGNvbXBsZXRlIChhcyAjREIgaXMgc3RpbGwgY29uc2lkZXJlZCBw
+ZW5kaW5nIG9uY2UgdGhlCj4+IGV4Y2VwdGlvbiBmcmFtZSB3YXMgd3JpdHRlbiwgYmVjYXVzZSBp
+dCB3YXMgdHJpZ2dlcmVkIGluIHRoZSBwcm9jZXNzIG9mCj4+IGRlbGl2ZXJpbmcgdGhlIGV4Y2Vw
+dGlvbiksIGFuZCB0aGVyZWZvcmUgZG9lcyBub3QgbW92ZSBmcm9tIHByaW9yaXR5IDQKPj4gdG8g
+NSwgd2hpY2ggd291bGQgYWxsb3cgYW4gTk1JIHRvIGJyZWFrIHRoZSBjeWNsZS4KPj4KPj4gU2lt
+aWxhcmx5IGZvciB0aGUgI0FDIGNhc2UsIHByaW9yaXR5IG5ldmVyIG1vdmVzIGZyb20gMTAgYmFj
+ayB0byAxLAo+PiBiZWNhdXNlIGRlbGl2ZXJ5IG9mIHRoZSBmaXJzdCAjQUMgaXMgbmV2ZXIgc2Vl
+biB0byBoYXZlIGNvbXBsZXRlZC4KPiBUbyBiZSBob25lc3QsIHRvIG1lIHRoaXMgY29udGludWVz
+IHRvIGJlIGEgKG1pcy0paW1wbGVtZW50YXRpb24KPiBkZXRhaWwuIEEgcHJvcGVyIGFyY2hpdGVj
+dHVyYWwgc3BlY2lmaWNhdGlvbiB3b3VsZCBub3QgYWxsb3cgZm9yIHN1Y2gKPiBwYXRob2xvZ2lj
+YWwgY2FzZXMgaW4gdGhlIGZpcnN0IHBsYWNlLgoKSSdsbCBsZXQgdGhlIGhhcmR3YXJlIHZlbmRv
+cnMgYXJndWUgb3ZlciB0aGUgZGV0YWlscyBvZiBob3cgZXhhY3RseSB0aGUKaGFyZHdhcmUgaXMg
+d3JvbmcsIGJ1dCBldmVyeW9uZSB3aWxsIGFncmVlIHRoYXQgdGhlc2UgcGF0aG9sb2dpY2FsIGNh
+c2VzCm91Z2h0IG5vdCB0byBleGlzdC4KCj4KPj4+Pj4gU2FkbHkgbmVpdGhlciBBTUQgbm9yIElu
+dGVsIHJlYWxseSBkZWZpbmUgd2hhdCBoYXBwZW5zIHdpdGggdHdvIGJlbmlnbgo+Pj4+PiBleGNl
+cHRpb25zIC0gdGhlIHRlcm0gInNlcXVlbnRpYWxseSIgdXNlZCBieSBib3RoIGlzIHBvaXNvbmVk
+IGJ5IGhvdyB0aGUKPj4+Pj4gY29tYmluaW5nIG9mIGJlbmlnbiBhbmQgbm9uLWJlbmlnbiBleGNl
+cHRpb25zIGlzIGRlc2NyaWJlZC4gU2luY2UgTk1JLAo+Pj4+PiAjTUMsIGFuZCBoYXJkd2FyZSBp
+bnRlcnJ1cHRzIGFyZSBhbGwgYmVuaWduIGFuZCAocGVyaGFwcyB3aXRoIHRoZQo+Pj4+PiBleGNl
+cHRpb24gb2YgI01DKSBjYW4ndCBvY2N1ciBzZWNvbmQsIGZhdm9yIHRoZSBmaXJzdCBpbiBvcmRl
+ciB0byBub3QKPj4+Pj4gbG9zZSBpdC4KPj4+PiAjTUMgaGFzIHRoZSBoaWdoZXN0IHByaW9yaXR5
+IHNvIHNob3VsZCBvbmx5IGJlIHJlY29nbmlzZWQgaW1tZWRpYXRlbHkKPj4+PiBhZnRlciBhbiBp
+bnN0cnVjdGlvbiBib3VuZGFyeS4KPj4+IEFyZSB5b3Ugc3VyZT8gV2hhdCBhYm91dCBhbiBpc3N1
+ZSB3aXRoIG9uZSBvZiB0aGUgbWVtb3J5Cj4+PiBhY2Nlc3NlcyBpbnZvbHZlZCBpbiBkZWxpdmVy
+aW5nIGEgcHJldmlvdXNseSByYWlzZWQgZXhjZXB0aW9uPwo+PiAjTUMgaXMgYWJvcnQsIGFuZCBp
+cyBpbXByZWNpc2UuCj4gTWluZCBtZSBjb3JyZWN0aW5nIHRoaXMgdG8gIm1heSBiZSBpbXByZWNp
+c2UiOiBUaGVyZSdzIGEgZmxhZyBhZnRlcgo+IGFsbCB0ZWxsaW5nIHdoZXRoZXIgaW4gZmFjdCBp
+dCBpcy4KCkhtbSBvay7CoCBUaGlzIHdhcyBkb3duIHRvIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4g
+aG93IGl0IGlzIHJlZmVyZW5jZWQgaW4KdGhlIFNETXMsIGJ1dCAibWF5IGJlIGltcHJlY2lzZSIg
+aXMgbW9yZSBhY2N1cmF0ZSBmb3IgYW4gYWJvcnQuCgpUaGUgaW1wb3J0YW50IHBvaW50IGlzIHRo
+YXQgeW91IG11c24ndCBhc3N1bWUgdGhhdCBpdCBpcyBwcmVjaXNlLgoKPj4+PiBJIGRvbid0IGhv
+d2V2ZXIgc2VlIGEgd2F5IG9mIHN0YWNraW5nICNBQywgYmVjYXVzZSB5b3UgY2FuJ3Qga25vdyB0
+aGF0Cj4+Pj4gb25lIGhhcyBvY2N1cmVkIHVudGlsIGxhdGVyIGluIHRoZSBpbnN0cnVjdGlvbiBj
+eWNsZSB0aGFuIGFsbCBvdGhlcgo+Pj4+IHNvdXJjZXMuICBXaGF0IHdvdWxkIGhhcHBlbiBpcyB0
+aGF0IHlvdSdkIHJhaXNlICNBQyBmcm9tIHByZXZpb3VzCj4+Pj4gaW5zdHJ1Y3Rpb24sIGFuZCB0
+aGVuIHJlY29nbmlzZSAjTUMgd2hpbGUgc3RhcnRpbmcgdG8gZXhlY3V0ZSB0aGUgI0FDCj4+Pj4g
+ZW50cnkgcG9pbnQuICAoSSB0aGluaykKPj4+IFdlbGwgLSBzZWUgWFNBLTE1NiBmb3Igd2hhdCBo
+YXJkd2FyZSBkb2VzIGluIHRoYXQgc2l0dWF0aW9uLgo+PiBUaGUgZGV0YWlscyBvZiBYU0EtMTU2
+IGFyZSBpbmFjY3VyYXRlLgo+Pgo+PiAjQUMgY2FuIHN0YWNrLCBidXQgdGhlIHByb2JsZW0gb25s
+eSBtYW5pZmVzdHMgd2hlbiBYZW4gZW11bGF0ZXMgYW4KPj4gaW5qZWN0aW9uLCB3aGljaCBpcyBy
+ZXN0cmljdGVkIHRvIFNWTSBmb3IgdGhlIG1vbWVudC4KPj4KPj4gVGhhdCBzYWlkLCBJJ20gY29u
+c2lkZXJpbmcgbW92aW5nIGl0IGJhY2sgdG8gYmVpbmcgY29tbW9uIHRvIHByb3ZpZGUKPj4gYXJj
+aGl0ZWN0dXJhbCBiZWhhdmlvdXIgZGVzcGl0ZSB0aGUgc2lsaWNvbiBpc3N1ZSB3aGljaCBjYXVz
+ZXMgWFNBLTE3MAo+IFdvdWxkIHlvdSBtaW5kIGhlbHBpbmcgbWUgbWFrZSB0aGUgY29ubmVjdGlv
+biBiZXR3ZWVuICNBQwo+IGRlbGl2ZXJ5IChhbmQgaXRzIGVtdWxhdGlvbikgYW5kIFhTQS0xNzAs
+IGJlaW5nIGFib3V0IFZNIGVudHJ5Cj4gd2l0aCBub24tY2Fub25pY2FsICVyaXA/CgpBaCAtIHRo
+YXQgd2Fzbid0IHRoZSBjb25uZWN0aW9uIEkgd2FzIHRyeWluZyB0byBtYWtlLgoKQmVjYXVzZSBv
+dXIgZW11bGF0aW9uIG9mIGV2ZW50IGRlbGl2ZXJ5IGlzIGN1cnJlbnRseSBzcGVjaWZpYyB0byBT
+Vk0sCmFuZCBkb2Vzbid0IHBlcmZvcm0gYWxpZ25tZW50IGNoZWNraW5nLCBYZW4gd2lsbCBuZXZl
+ciBlbmQgdXAgaW4gYSBjYXNlCndlcmUgI0FDIHdpbGwgYmUgZGVsaXZlcmVkIHNlY29uZC4KCklm
+IHlvdSByZWNhbGwsIHRoZSBpbmplY3Rpb24gc3VwcG9ydCB1c2VkIHRvIGJlIGNvbW1vbiwgdGhl
+biBtb3ZlZCB0bwpiZWluZyBTVk0gc3BlY2lmaWMuwqAgSWYgaXQgd2VyZSB0byBtb3ZlIGJhY2sg
+dG8gYmVpbmcgY29tbW9uLCB3ZSBjb3VsZApmaXggWFNBLTE3MCB3aGlsZSBtYWludGFpbmluZyBh
+cmNoaXRlY3R1cmFsbHkgY29ycmVjdCBiZWhhdmlvdXIsIGJ5CmZ1bGx5IGVtdWxhdGluZyB0aGUg
+ZXZlbnQgaW5qZWN0aW9uLCB3aGljaCB3b3VsZCBieXBhc3MgdGhlIGluY29ycmVjdApWTUVudHJ5
+IGNvbnNpc3RlbmN5IGNoZWNrIHdoaWNoIGNhdXNlcyBYU0EtMTcwIGluIHRoZSBmaXJzdCBwbGFj
+ZS4KCkNlcnRhaW5seSBmb3IgdGhlIFNWTSBjYXNlLCB0aGUgb25seSB3YXkgSSBjYW4gc2VlIHRv
+IGdldCAjREIgaW5qZWN0aW9uCndvcmtpbmcgaW4gYSB2YWd1ZWx5IGFyY2hpdGVjdHVyYWwgd2F5
+IGlzIHRvIGZ1bGx5IGVtdWxhdGUgdGhlIGZpcnN0CmV2ZW50LCBhbmQgcHV0IHRoZSAjREIgaW4g
+dGhlIEVWRU5USU5KIGZpZWxkLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
