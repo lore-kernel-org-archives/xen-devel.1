@@ -1,9 +1,10 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/2] core-parking: adjust data/code placement
-Date: Thu, 11 Apr 2019 20:01:30 +0100
-Message-ID: <9e7a5004-0f14-31a7-301a-5fcc2461ca9a@citrix.com>
+Subject: Re: [PATCH 1/2] core-parking: interact with runtime
+ SMT-disabling
+Date: Thu, 11 Apr 2019 20:06:47 +0100
+Message-ID: <98ae3d6e-7c76-f093-22b4-22568142ac82@citrix.com>
 References: <5CAF2D310200007800226974@prv1-mh.provo.novell.com>
- <5CAF36FF02000078002269C1@prv1-mh.provo.novell.com>
+ <5CAF36E202000078002269BE@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=YyQZ=SN=citrix.com=prvs=997b111c4=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hEeyC-0005Ld-NW
- for xen-devel@lists.xenproject.org; Thu, 11 Apr 2019 19:02:44 +0000
-In-Reply-To: <5CAF36FF02000078002269C1@prv1-mh.provo.novell.com>
+ id 1hEf32-0005X7-FA
+ for xen-devel@lists.xenproject.org; Thu, 11 Apr 2019 19:07:44 +0000
+In-Reply-To: <5CAF36E202000078002269BE@prv1-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,11 +28,18 @@ To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTEvMDQvMjAxOSAxMzo0NSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVXNlIF9faW5pdHtkYXRh
-LH0sIF9fcmVhZF9tb3N0bHksIGFuZCBjb25zdCBhcyBmYXIgYXMgcG9zc2libGUuCj4KPiBUYWtl
-IHRoZSBsaWJlcnR5IGFuZCBhbHNvIHNob3J0ZW4gdGhlIHBvbGljeSBzdHJ1Y3R1cmUncyB0YWcg
-bmFtZS4KPgo+IFNpZ25lZC1vZmYtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4K
-CkFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMTEvMDQvMjAxOSAxMzo0NSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gV2hlbiBkaXNhYmxpbmcg
+U01UIGF0IHJ1bnRpbWUsIHNlY29uZGFyeSB0aHJlYWRzIHNob3VsZCBubyBsb25nZXIgYmUKPiBj
+YW5kaWRhdGVzIGZvciBicmluZ2luZyBiYWNrIHVwIGluIHJlc3BvbnNlIHRvIF9QVUQgQUNQSSBl
+dmVudHMuIFB1cmdlCj4gdGhlbSBmcm9tIHRoZSB0cmFja2luZyBhcnJheS4KPgo+IERvaW5nIHNv
+IGludm9sdmVzIGFkZGluZyBsb2NraW5nIHRvIGd1YXJkIGFjY291bnRpbmcgZGF0YSBpbiB0aGUg
+Y29yZQo+IHBhcmtpbmcgY29kZS4gV2hpbGUgYWRkaW5nIHRoZSBkZWNsYXJhdGlvbiBmb3IgdGhl
+IGxvY2sgdGFrZSB0aGUgbGliZXJ0eQo+IHRvIGRyb3AgdHdvIHVubmVjZXNzYXJ5IGZvcndhcmQg
+ZnVuY3Rpb24gZGVjbGFyYXRpb25zLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpi
+ZXVsaWNoQHN1c2UuY29tPgoKSSBjYW4gY2VydGFpbmx5IGFwcHJlY2lhdGUgdGhlc2UgYXJndW1l
+bnRzLCBidXQgc3VyZWx5IHRoZSBjb252ZXJzZSBpcwp0cnVlLsKgIFdoZW4gU01ULWVuYWJsZSBp
+cyB1c2VkLCB0aGUgbmV3bHktb25saW5lZCB0aHJlYWRzIGFyZSBub3cKZWxpZ2libGUgdG8gYmUg
+cGFya2VkLgoKQXQgdGhlIG1vbWVudCwgdGhpcyBsb29rcyBhc3ltZXRyaWMuCgp+QW5kcmV3Cgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
