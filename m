@@ -2,70 +2,94 @@ Return-Path: <SRS0=MmA3=SR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B800DC10F0E
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Apr 2019 13:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4914EC10F0E
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Apr 2019 13:38:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 834DB20833
-	for <xen-devel@archiver.kernel.org>; Mon, 15 Apr 2019 13:34:27 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jSXmqqe8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 834DB20833
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1A15C20825
+	for <xen-devel@archiver.kernel.org>; Mon, 15 Apr 2019 13:38:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A15C20825
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hG1kW-0000rC-Hl; Mon, 15 Apr 2019 13:34:16 +0000
+	id 1hG1nx-0001A2-9A; Mon, 15 Apr 2019 13:37:49 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HI6c=SR=gmail.com=matthew.leinhos@srs-us1.protection.inumbo.net>)
- id 1hG1kU-0000qn-Fu
- for xen-devel@lists.xenproject.org; Mon, 15 Apr 2019 13:34:14 +0000
-X-Inumbo-ID: 27ce4e94-5f83-11e9-92d7-bc764e045a96
-Received: from mail-wm1-x32b.google.com (unknown [2a00:1450:4864:20::32b])
+ <SRS0=6R5j=SR=citrix.com=prvs=00163ee2b=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1hG1nw-00019x-Ey
+ for xen-devel@lists.xenproject.org; Mon, 15 Apr 2019 13:37:48 +0000
+X-Inumbo-ID: a70b0a61-5f83-11e9-92d7-bc764e045a96
+Received: from SMTP.EU.CITRIX.COM (unknown [185.25.65.24])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 27ce4e94-5f83-11e9-92d7-bc764e045a96;
- Mon, 15 Apr 2019 13:34:13 +0000 (UTC)
-Received: by mail-wm1-x32b.google.com with SMTP id c1so20670109wml.4
- for <xen-devel@lists.xenproject.org>; Mon, 15 Apr 2019 06:34:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=1sADA0ToQMIi1s9yNdCwZ90y1Sj/T02PTUgvrxxLsuw=;
- b=jSXmqqe86gQIXV6THPmUGpPUVyroVaHH9WjdkuLh428M9kFYda4OtE2VhmJNfEZOBS
- a5wsYpl5TWlAPDDvgcKbAuBeiyWpRBfZH5XI/jK6OQpFH2PEOCEAm0bXZHPZAIyp9YNw
- TLx5sTIP85fjsqmAuPi6uF0sld0SktS34yct937QZ84+RLvh4LAcjNUQJyJe+II8Mthi
- 0PYxACmn3fDVtotS+vF05FoiLlJL0L+jD3FiucFD7ZXEW3YU2gfi/F+SlnREeLnX8ShR
- uQhaWRR27hQTdynEOJs/M9/ZEZk1HgsRjZSXnGoWS49HZe/gYb6nPabB3A0RBWtin4Vw
- Xv+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=1sADA0ToQMIi1s9yNdCwZ90y1Sj/T02PTUgvrxxLsuw=;
- b=mb+tfyu8JNxN9cbEvNIR1K2aYxsgMPQJnRUCPHdNzulnT0lbzB0UJfMPcTG94dGNu9
- XNR9qrTaRW73qX5n8NuRcKaaeEfNs2vkoklHsZK1R3GLKKycAIKAMNuMo5V9+ZwqBEdU
- olimseOGrn89QVBK2NUucIzeEAt6jM/qUmBsGSwlyGtbh0tJff/30tPvdAIAfdIu6d4l
- Dw0fUDrvJHDxxwqcagKVyAIzAZd4QU6lQ6ri1YLM1kORclatMoIgfWbGpqMNIxwUI51n
- 8QPbIByg5zG0zG77QBFv+ra3eg6eJBwtOfY5rbbWrjbzBIFVlqv5KpQcv4/nKLJyP9ax
- eGyg==
-X-Gm-Message-State: APjAAAUAYb4oMBAR7F7AfS87Mn7jrTgzUAD1fJOXKYkioK4DSJmM3pZa
- NhQjFZ5bk5tf6nV1q5dLNvTemn41IBjocsQ+uHoYwKsy
-X-Google-Smtp-Source: APXvYqyHg9TJnXiaxObAAO/6vqZWGdLQxw+7U+I482ErJyMuNYUVs6AtiUQFQZpA4KZ6svkARsxkDiJq8TZ0EPMHYN0=
-X-Received: by 2002:a7b:c257:: with SMTP id b23mr21580334wmj.83.1555335251654; 
- Mon, 15 Apr 2019 06:34:11 -0700 (PDT)
+ id a70b0a61-5f83-11e9-92d7-bc764e045a96;
+ Mon, 15 Apr 2019 13:37:47 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,353,1549929600"; d="scan'208";a="88841219"
+To: Anthony PERARD <anthony.perard@citrix.com>, <devel@edk2.groups.io>
+References: <20190409110844.14746-1-anthony.perard@citrix.com>
+ <20190409110844.14746-25-anthony.perard@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=andrew.cooper3@citrix.com; prefer-encrypt=mutual; keydata=
+ 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
+ 6+ahAA==
+Message-ID: <f2d0a2b3-57b0-79d3-ae19-137cf111253d@citrix.com>
+Date: Mon, 15 Apr 2019 14:37:43 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-From: Matt Leinhos <matthew.leinhos@gmail.com>
-Date: Mon, 15 Apr 2019 08:34:00 -0500
-Message-ID:
- <CAFLDOk8Egs_gJmx1Yg386eEkmq4gNcbBxVGkjC7Wofhz8zCe1w@mail.gmail.com>
-To: xen-devel@lists.xenproject.org
-Subject: [Xen-devel] Xen 4.11.1: guest uses altp2m to crash host
+In-Reply-To: <20190409110844.14746-25-anthony.perard@citrix.com>
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
+Subject: Re: [Xen-devel] [PATCH v2 24/31] OvmfPkg/XenPlatformPei: Ignore
+ missing PCI Host Bridge on Xen PVH
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,170 +100,39 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6723911994843986981=="
+Cc: Jordan Justen <jordan.l.justen@intel.com>,
+ Julien Grall <julien.grall@arm.com>, Laszlo Ersek <lersek@redhat.com>,
+ xen-devel@lists.xenproject.org, Ard Biesheuvel <ard.biesheuvel@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190415133400.-clUPqdla1LNttSi4zNvohpT4xBn8-nCD2hHfHTt1_s@z>
+Message-ID: <20190415133743.nNcuXf8uZHjTXhFeKf2vY6DH_OiKv8cGwEQz3Hy_gGY@z>
 
---===============6723911994843986981==
-Content-Type: multipart/alternative; boundary="0000000000002e7aea058691b505"
-
---0000000000002e7aea058691b505
-Content-Type: text/plain; charset="UTF-8"
-
-Greetings,
-
-I've found a way to crash a host from a misbehaving guest, using altp2m.
-This is on a recent Intel core i7 chip. I've crashed two systems running
-4.11.1. This behavior is not exhibited on 4.12, and since altp2m is a tech
-preview in 4.11.1, this is not covered by security support. However, I
-believe that the divergence between software and hardware state, as
-mentioned below, is still present in 4.12.
-
-On Xen 4.11.1 with altp2m enabled, follow these steps in the guest, whose
-config file includes `altp2m = "mixed":
-1. Allocate page P (GFN G)
-2. Enable altp2m
-3. Enable #VE notification, setting to G
-4. Disable altp2m
-5. Enable altp2m
-6. Enable #VE notification, setting to G
-
-At this point the entire system is unresponsive; #6 does not return control
-to the guest. Note that step 3 is required, thus indicating some incomplete
-cleanup after 4 that leads to a crash at 6. I've noticed a problem in the
-Xen source at step 4, where the software and hardware states diverge. See
-below for my notes on pertinent code.
-
-I hope this is helpful and would appreciate it if you could fill me in on
-why the entire host goes down - I suspect Xen is interacting with the VMCS
-incorrectly, but I don't know the details and would like to understand.
-
-1. Allocate page P (GFN G)
-
-2. HVMOP_altp2m_set_domain_state(true)
-    set d->arch.altp2m_active = true
-    if first time:
-       p2m_init_altp2m_by_id()
-    for each vcpu V:
-       altp2m_vcpu_initialise(V)
-          reset (av->p2midx = INVALID_ALTP2M,
-                 av->veinfo_gfn = INVALID_GFN)
-          altp2m_vcpu_update_p2m(V)
-
-3. HVMOP_altp2m_vcpu_enable_notify(G)
-     checks: only toggling between INVALID_GFN and another value is
-permitted
-     set vcpu_altp2m(curr).veinfo_gfn = G
-     altp2m_vcpu_update_vmfunc_ve()
-
-4. HVMOP_altp2m_set_domain_state(false)
-     set d->arch.altp2m_active = false
-     for each vcpu V:
-        altp2m_vcpu_destroy()
-          reset (av->p2midx = INVALID_ALTP2M,
-                 av->veinfo_gfn = INVALID_GFN)
-          altp2m_vcpu_update_p2m(V)
-              ****** Does not update VMCS because altp2m_active() evals to
-false *****
-
-Now the software (Xen) thinks altp2m is disabled, but the hardware has
-these features registered/enabled:
-   VM_FUNCTION_CONTROL
-   EPTP_LIST_ADDR
-   VIRT_EXCEPTION_INFO
-
-5. HVMOP_altp2m_set_domain_state(true)
-      see above
-
-6. HVMOP_altp2m_vcpu_enable_notify(not INVALID_GFN):
-     checks: only toggling between INVALID_GFN and another value is
-permitted
-       -succeeds because reset() was called above
-     set vcpu_altp2m(curr).veinfo_gfn = G
-     altp2m_vcpu_update_vmfunc_ve()
-
-I claim that something in step 6 causes an unhandled exception. Please note
-that the guest does not register a #VE ISR.
-
-Kind regards,
-Matt Leinhos
-
---0000000000002e7aea058691b505
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr">Greetings,</div><div dir=3D"ltr"><br></di=
-v><div dir=3D"ltr">I&#39;ve found a way to crash a host from a misbehaving =
-guest,=20
-using altp2m. This is on a recent Intel core i7 chip. I&#39;ve crashed two=
-=20
-systems running 4.11.1. This behavior is not exhibited on 4.12, and since a=
-ltp2m is a tech preview in 4.11.1, this is not covered by security support.=
- However, I believe that the divergence between software and hardware state=
-, as mentioned below, is still present in 4.12.<br><br>On Xen 4.11.1 with a=
-ltp2m enabled, follow these steps in the guest, whose config file includes =
-`altp2m =3D &quot;mixed&quot;:<br>1. Allocate page P (GFN G)<br>2. Enable a=
-ltp2m<br>3. Enable #VE notification, setting to G<br>4. Disable altp2m<br>5=
-. Enable altp2m<br>6. Enable #VE notification, setting to G<br><br>At
- this point the entire system is unresponsive; #6 does not return=20
-control to the guest. Note that step 3 is required, thus indicating some
- incomplete cleanup after 4 that leads to a crash at 6. I&#39;ve noticed a=
-=20
-problem in the Xen source at step 4, where the software and hardware=20
-states diverge. See below for my notes on pertinent code. <br></div><div di=
-r=3D"ltr"><br></div><div dir=3D"ltr">I
- hope this is helpful and would appreciate it if you could fill me in on
- why the entire host goes down - I suspect Xen is interacting with the=20
-VMCS incorrectly, but I don&#39;t know the details and would like to=20
-understand.<br><br>1. Allocate page P (GFN G)<br><br>2. HVMOP_altp2m_set_do=
-main_state(true)<br>=C2=A0=C2=A0=C2=A0 set d-&gt;arch.altp2m_active =3D tru=
-e<br>=C2=A0=C2=A0=C2=A0 if first time:<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 p2m_init_altp2m_by_id()<br>=C2=A0=C2=A0=C2=A0 for each vcpu V:<br>=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 altp2m_vcpu_initialise(V)<br>=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reset (av-&gt;p2midx =3D INVALID=
-_ALTP2M,<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 av-&gt;veinfo_gfn =3D INVALID_GFN)<br>=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 altp2m_vcpu_update_p2m(=
-V)<br><br>3. HVMOP_altp2m_vcpu_enable_notify(G)<br>=C2=A0=C2=A0=C2=A0=C2=A0=
- checks: only toggling between INVALID_GFN and another value is permitted<b=
-r>=C2=A0=C2=A0=C2=A0=C2=A0 set vcpu_altp2m(curr).veinfo_gfn =3D G<br>=C2=A0=
-=C2=A0=C2=A0=C2=A0 altp2m_vcpu_update_vmfunc_ve()<br><br>4. HVMOP_altp2m_se=
-t_domain_state(false)<br>=C2=A0=C2=A0=C2=A0=C2=A0 set d-&gt;arch.altp2m_act=
-ive =3D false<br>=C2=A0=C2=A0=C2=A0=C2=A0 for each vcpu V:<br>=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 altp2m_vcpu_destroy()<br>=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reset (av-&gt;p2midx =3D INVALID_ALTP2=
-M,<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 av-&gt;veinfo_gfn =3D INVALID_GFN)<br>=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 altp2m_vcpu_update_p2m(V)<br>=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 ****** Does not update VMCS because altp2m_active() evals to false ****=
-*<br><br>Now the software (Xen) thinks altp2m is disabled, but the hardware=
- has these features registered/enabled:<br>=C2=A0=C2=A0 VM_FUNCTION_CONTROL=
-<br>=C2=A0=C2=A0 EPTP_LIST_ADDR<br>=C2=A0=C2=A0 VIRT_EXCEPTION_INFO<br><br>=
-5. HVMOP_altp2m_set_domain_state(true)<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 se=
-e above<br><br>6. HVMOP_altp2m_vcpu_enable_notify(not INVALID_GFN):<br>=C2=
-=A0=C2=A0=C2=A0=C2=A0 checks: only toggling between INVALID_GFN and another=
- value is permitted<br>=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 -succeeds becau=
-se reset() was called above<br>=C2=A0=C2=A0=C2=A0=C2=A0 set vcpu_altp2m(cur=
-r).veinfo_gfn =3D G<br>=C2=A0=C2=A0=C2=A0=C2=A0 altp2m_vcpu_update_vmfunc_v=
-e()<br></div><div dir=3D"ltr"><br></div><div dir=3D"ltr">I claim that somet=
-hing in step 6 causes an unhandled exception. Please note that the guest do=
-es not register a #VE ISR.<br><br></div><div>Kind regards,</div><div>Matt L=
-einhos</div></div>
-
---0000000000002e7aea058691b505--
-
-
---===============6723911994843986981==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6723911994843986981==--
-
+T24gMDkvMDQvMjAxOSAxMjowOCwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4gZGlmZiAtLWdpdCBh
+L092bWZQa2cvSW5jbHVkZS9Pdm1mUGxhdGZvcm1zLmggYi9Pdm1mUGtnL0luY2x1ZGUvT3ZtZlBs
+YXRmb3Jtcy5oCj4gaW5kZXggY2M2N2Y0MGE4OC4uMWNlNzFlMThlYyAxMDA2NDQKPiAtLS0gYS9P
+dm1mUGtnL0luY2x1ZGUvT3ZtZlBsYXRmb3Jtcy5oCj4gKysrIGIvT3ZtZlBrZy9JbmNsdWRlL092
+bWZQbGF0Zm9ybXMuaAo+IEBAIC00Myw0ICs0MywxMCBAQAo+ICAvLwo+ICAjZGVmaW5lIEFDUElf
+VElNRVJfT0ZGU0VUIDB4OAo+ICAKPiArLy8KPiArLy8gV2hlbiBydW5uaW5nIE9WTUYgb24gYSBY
+ZW4gUFZIIGd1ZXN0IHRoZXJlIGlzIG5vIFBDSSwKPiArLy8gc28gLTEgaXMgcmV0dXJuIGZvciB0
+aGUgSG9zdCBCcmlkZ2UgRGV2aWNlIElELgo+ICsvLwo+ICsjZGVmaW5lIFhFTl9QVkhfUENJX0hP
+U1RfQlJJREdFX0RFVklDRV9JRCAweEZGRkYKClRoaXMgaXNuJ3QgYW55dGhpbmcgWGVuIHNwZWNp
+ZmljIC0gaXQgaXMgYSBwcm9wZXJ0eSBvZiBob3cgUENJIGNvbmZpZwpjeWNsZXMgd29yay4KCj4g
+Kwo+ICAjZW5kaWYKPiBkaWZmIC0tZ2l0IGEvT3ZtZlBrZy9YZW5QbGF0Zm9ybVBlaS9QbGF0Zm9y
+bS5jIGIvT3ZtZlBrZy9YZW5QbGF0Zm9ybVBlaS9QbGF0Zm9ybS5jCj4gaW5kZXggNWU2ZDU1M2Fk
+NS4uZDkxY2Q5OGJmNCAxMDA2NDQKPiAtLS0gYS9Pdm1mUGtnL1hlblBsYXRmb3JtUGVpL1BsYXRm
+b3JtLmMKPiArKysgYi9Pdm1mUGtnL1hlblBsYXRmb3JtUGVpL1BsYXRmb3JtLmMKPiBAQCAtMjc4
+LDYgKzI3OCwxMyBAQCBNaXNjSW5pdGlhbGl6YXRpb24gKAo+ICAgICAgICBBY3BpRW5CaXQgID0g
+SUNIOV9BQ1BJX0NOVExfQUNQSV9FTjsKPiAgICAgICAgYnJlYWs7Cj4gICAgICBkZWZhdWx0Ogo+
+ICsgICAgICBpZiAoWGVuUHZoRGV0ZWN0ZWQgKCkpIHsKPiArICAgICAgICAvLwo+ICsgICAgICAg
+IC8vIFRoZXJlIGlzIG5vIFBDSSBidXMgaW4gdGhpcyBjYXNlCj4gKyAgICAgICAgLy8KPiArICAg
+ICAgICBQY2RTZXQxNlMgKFBjZE92bWZIb3N0QnJpZGdlUGNpRGV2SWQsIFhFTl9QVkhfUENJX0hP
+U1RfQlJJREdFX0RFVklDRV9JRCk7CgpUaGlzIGlzIG5vdCBjb3JyZWN0LgoKVGhlcmUgbWF5IGJl
+IG5vIFBDSSBidXMsIGFuZCBPVk1GIG5lZWRzIHRvIGNvcGUgd2l0aCB0aGlzIGNhc2UsIGJ1dAp0
+aGVyZSBtYXkgYWxzbyBiZSBvbmUgKGVzcGVjaWFsbHkgb25jZSB3ZSBnZXQgYXJvdW5kIHRvIG1h
+a2luZyBQQ0kKUGFzc3Rocm91Z2ggd29yayB3aXRoIFBWSCBndWVzdHMpLsKgIFRoYXQgY2FzZSBu
+ZWVkcyB0byB3b3JrIHRvby4KCn5BbmRyZXcKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
