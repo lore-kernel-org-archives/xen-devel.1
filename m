@@ -1,19 +1,26 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: booting domU guest as pvh works in xen-4.11.1 but
- fails in 4.12
-Date: Tue, 16 Apr 2019 14:23:01 +0100
-Message-ID: <293280a7-5011-e5a1-da53-80587b7b9a94@citrix.com>
-References: <CAHnBbQ8u+MywkV4+qmxhkA8216knGhGZjcy1Sz6Ukv3=PJZmXQ@mail.gmail.com>
+From: Oleksandr <olekstysh@gmail.com>
+Subject: Re: [PATCH V3 2/5] xen/arm: drivers: scif: Extend
+ driver to handle other interfaces
+Date: Tue, 16 Apr 2019 16:26:45 +0300
+Message-ID: <bad96170-c27f-c7a7-53b3-65db77a00276@gmail.com>
+References: <1554718489-11318-1-git-send-email-olekstysh@gmail.com>
+ <1554718489-11318-3-git-send-email-olekstysh@gmail.com>
+ <3370f03e-3d4d-7d01-3783-6475b110860c@arm.com>
+ <1c0b4b09-7d7b-97a7-eecd-b809ea79523c@gmail.com>
+ <6ecca59b-48b5-b515-d273-6ab518bdbd00@arm.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1360447192044942743=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=19lK=SS=citrix.com=prvs=002fb28a9=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hGO3U-0007S7-VD
- for xen-devel@lists.xenproject.org; Tue, 16 Apr 2019 13:23:20 +0000
-In-Reply-To: <CAHnBbQ8u+MywkV4+qmxhkA8216knGhGZjcy1Sz6Ukv3=PJZmXQ@mail.gmail.com>
-Content-Language: en-GB
+ <SRS0=GH/2=SS=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
+ id 1hGO6u-0007bl-LX
+ for xen-devel@lists.xenproject.org; Tue, 16 Apr 2019 13:26:52 +0000
+Received: by mail-lf1-x144.google.com with SMTP id w23so15988375lfc.9
+ for <xen-devel@lists.xenproject.org>; Tue, 16 Apr 2019 06:26:51 -0700 (PDT)
+In-Reply-To: <6ecca59b-48b5-b515-d273-6ab518bdbd00@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,138 +29,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Pry Mar <pryorm09@gmail.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: M A Young <m.a.young@durham.ac.uk>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============1360447192044942743==
-Content-Type: multipart/alternative;
-	boundary="------------02201C337423A74AF69E1BD3"
-Content-Language: en-GB
-
---------------02201C337423A74AF69E1BD3
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 16/04/2019 00:18, Pry Mar wrote:
-> Hello,
->
-> https://paste.debian.net/1077718/
->
-> I get a kernel panic as shown in the paste above no matter how I
-> launch pvh, with bootloader (pygrub), kernel direct (4.18+), or
-> pvgrub2 (i386-xen_pvh support).
-
->From the log:
-> traps: modprobe[48] trap invalid opcode ip:7f797dc7bb95 sp:7ffe3099cdb8 error:0 in ld-2.29.so[7f797dc61000+21000]
-
-Can you disassemble ld-2.29.so and find out what that instruction is? 
-It is almost certainly a related factor.
-
-> [    1.127818] Run /init as init process
-> [    1.130195] Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000004
-> [    1.130230] CPU: 0 PID: 1 Comm: init Not tainted 5.0.0-8-generic #9-Ubuntu
-> [    1.130243] Call Trace:
-> [    1.130284]  dump_stack+0x63/0x8a
-> [    1.130296]  panic+0x101/0x2a7
-> [    1.130306]  do_exit.cold.24+0x26/0x75
-> [    1.130315]  do_group_exit+0x43/0xb0
-> [    1.130325]  get_signal+0x139/0x6d0
-> [    1.130336]  do_signal+0x34/0x710
-> [    1.130345]  ? do_trap+0xda/0xe0
-> [    1.130375]  exit_to_usermode_loop+0x8e/0x100
-> [    1.130387]  prepare_exit_to_usermode+0x5a/0x80
-> [    1.130399]  ? invalid_op+0xa/0x20
-> [    1.130408]  retint_user+0x8/0x8
-> [    1.130418] RIP: 0033:0x7feef6fe4b95
-> [    1.130433] Code: Bad RIP value.
-> [    1.130441] RSP: 002b:00007ffdda330e78 EFLAGS: 00010246
-> [    1.130452] RAX: 000000000000000c RBX: 0000000000000001 RCX: 000000000000000b
-> [    1.130466] RDX: 0000000000000042 RSI: 00007feef6fecd75 RDI: 0000000000000000
-> [    1.130479] RBP: 000055c1b07f7040 R08: 0000000000000019 R09: 0000000000000001
-> [    1.130493] R10: 0000000000000000 R11: 000000000000004d R12: 000000000000000b
-> [    1.130507] R13: 00007feef6fcb810 R14: 0000000000000000 R15: 00007ffdda331119
-> [    1.130733] Kernel Offset: 0x2400000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
-
-This looks to be related to the #UD from above, but rather more fatal.
-
-~Andrew
-
---------------02201C337423A74AF69E1BD3
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 16/04/2019 00:18, Pry Mar wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CAHnBbQ8u+MywkV4+qmxhkA8216knGhGZjcy1Sz6Ukv3=PJZmXQ@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">Hello,
-
-<a class="moz-txt-link-freetext" href="https://paste.debian.net/1077718/">https://paste.debian.net/1077718/</a>
-
-I get a kernel panic as shown in the paste above no matter how I
-launch pvh, with bootloader (pygrub), kernel direct (4.18+), or
-pvgrub2 (i386-xen_pvh support).</pre>
-    </blockquote>
-    <br>
-    From the log:<br>
-    <blockquote type="cite">
-      <pre>traps: modprobe[48] trap invalid opcode ip:7f797dc7bb95 sp:7ffe3099cdb8 error:0 in ld-2.29.so[7f797dc61000+21000]</pre>
-    </blockquote>
-    <br>
-    Can you disassemble ld-2.29.so and find out what that instruction
-    is?  It is almost certainly a related factor.<br>
-    <br>
-    <blockquote type="cite">
-      <pre>[    1.127818] Run /init as init process
-[    1.130195] Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000004
-[    1.130230] CPU: 0 PID: 1 Comm: init Not tainted 5.0.0-8-generic #9-Ubuntu
-[    1.130243] Call Trace:
-[    1.130284]  dump_stack+0x63/0x8a
-[    1.130296]  panic+0x101/0x2a7
-[    1.130306]  do_exit.cold.24+0x26/0x75
-[    1.130315]  do_group_exit+0x43/0xb0
-[    1.130325]  get_signal+0x139/0x6d0
-[    1.130336]  do_signal+0x34/0x710
-[    1.130345]  ? do_trap+0xda/0xe0
-[    1.130375]  exit_to_usermode_loop+0x8e/0x100
-[    1.130387]  prepare_exit_to_usermode+0x5a/0x80
-[    1.130399]  ? invalid_op+0xa/0x20
-[    1.130408]  retint_user+0x8/0x8
-[    1.130418] RIP: 0033:0x7feef6fe4b95
-[    1.130433] Code: Bad RIP value.
-[    1.130441] RSP: 002b:00007ffdda330e78 EFLAGS: 00010246
-[    1.130452] RAX: 000000000000000c RBX: 0000000000000001 RCX: 000000000000000b
-[    1.130466] RDX: 0000000000000042 RSI: 00007feef6fecd75 RDI: 0000000000000000
-[    1.130479] RBP: 000055c1b07f7040 R08: 0000000000000019 R09: 0000000000000001
-[    1.130493] R10: 0000000000000000 R11: 000000000000004d R12: 000000000000000b
-[    1.130507] R13: 00007feef6fcb810 R14: 0000000000000000 R15: 00007ffdda331119
-[    1.130733] Kernel Offset: 0x2400000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)</pre>
-    </blockquote>
-    <br>
-    This looks to be related to the #UD from above, but rather more
-    fatal.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------02201C337423A74AF69E1BD3--
-
-
---===============1360447192044942743==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1360447192044942743==--
+Ck9uIDE2LjA0LjE5IDEyOjExLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGkgT2xla3NhbmRyLAoK
+SGkgSnVsaWVuCgoKPgo+IE9uIDQvMTUvMTkgMTI6MzAgUE0sIE9sZWtzYW5kciB3cm90ZToKPj4K
+Pj4gT24gMTQuMDQuMTkgMTk6NTUsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4+IEhpIE9sZWtzYW5k
+ciwKPj4KPj4gSGkgSnVsaWVuCj4+Cj4+Cj4+Pgo+Pj4gT24gNC84LzE5IDExOjE0IEFNLCBPbGVr
+c2FuZHIgVHlzaGNoZW5rbyB3cm90ZToKPj4+PiBGcm9tOiBPbGVrc2FuZHIgVHlzaGNoZW5rbyA8
+b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5jb20+Cj4+Pj4KPj4+PiBFeHRlbmQgZHJpdmVyIHRv
+IGJlIGFibGUgdG8gaGFuZGxlIG90aGVyIFNDSUYoWCkgY29tcGF0aWJsZQo+Pj4+IGludGVyZmFj
+ZXMgYXMgd2VsbC4gVGhlc2UgaW50ZXJmYWNlcyBoYXZlIGxvdCBpbiBjb21tb24sCj4+Pj4gYnV0
+IG1vc3RseSBkaWZmZXIgaW4gb2Zmc2V0cyBhbmQgYml0cyBmb3Igc29tZSByZWdpc3RlcnMuCj4+
+Pgo+Pj4gQ2FuIHlvdSBicmllZmx5IGV4cGxhaW4gaW4gdGhlIGNvbW1pdCBtZXNzYWdlIHdoYXQg
+ZGlmZmVycz8KPj4KPj4gU3VyZQo+Pgo+Pgo+Pj4KPj4+IFsuLi5dCj4+Pgo+Pj4+IEBAIC02NSwx
+MyArMTAwLDE2IEBAIHN0YXRpYyB2b2lkIHNjaWZfdWFydF9pbnRlcnJ1cHQoaW50IGlycSwgdm9p
+ZCAKPj4+PiAqZGF0YSwgc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MpCj4+Pj4gwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgc2VyaWFsX3J4X2ludGVycnVwdChwb3J0LCByZWdzKTsKPj4+PiDC
+oCDCoMKgwqDCoMKgwqDCoMKgwqAgLyogRXJyb3IgSW50ZXJydXB0ICovCj4+Pj4gLcKgwqDCoMKg
+wqDCoMKgIGlmICggc3RhdHVzICYgU0NJRl9FUlJPUlMgKQo+Pj4+IC3CoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgIHNjaWZfd3JpdGV3KHVhcnQsIFNDSUZfU0NGU1IsIH5TQ0lGX0VSUk9SUyk7Cj4+Pj4g
+LcKgwqDCoMKgwqDCoMKgIGlmICggc2NpZl9yZWFkdyh1YXJ0LCBTQ0lGX1NDTFNSKSAmIFNDTFNS
+X09SRVIgKQo+Pj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHNjaWZfd3JpdGV3KHVhcnQsIFND
+SUZfU0NMU1IsIDApOwo+Pj4+ICvCoMKgwqDCoMKgwqDCoCBpZiAoIHN0YXR1cyAmIHBhcmFtcy0+
+ZXJyb3JfbWFzayApCj4+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc2NpZl93cml0ZXcodWFy
+dCwgcGFyYW1zLT5zdGF0dXNfcmVnLCAKPj4+PiB+cGFyYW1zLT5lcnJvcl9tYXNrKTsKPj4+PiAr
+wqDCoMKgwqDCoMKgwqAgaWYgKCBwYXJhbXMtPm92ZXJydW5fcmVnICE9IHBhcmFtcy0+c3RhdHVz
+X3JlZyApCj4+Pgo+Pj4gQmVsb3cgeW91IHdpbGwgd3JpdGUgdGhlIHNhbWUgcmVnaXN0ZXIgdHdp
+Y2UgaWYgb3ZlcnJ1bl9yZWcgPT0gCj4+PiBzdGF0dXNfcmVnIChzZWUgc2NpZl91YXJ0X2luaXRf
+cHJlaXJxKS4gV291bGQgdGhlcmUgYmUgYW55IGlzc3VlIGlmIAo+Pj4geW91IGRvIHRoZSBzYW1l
+IGhlcmU/Cj4+Cj4+IEkgZGlkbid0IGV4cGVjdCBhbnkgaXNzdWUgdG8gd3JpdGUgdGhlIHNhbWUg
+cmVnaXN0ZXIgdHdpY2UgZHVyaW5nIAo+PiBpbml0aWFsaXphdGlvbiB0byBzaW1wbGlmeSB0aGUg
+Y29kZSwgdGhhdCB3aHkgSSBhZ3JlZWQgdG8gcmVtb3ZlIHRoZSAKPj4gY2hlY2sgaW4gVjEuCj4+
+Cj4+IEJ1dCBJIGFtIG5vdCBzdXJlIGFib3V0IGRvaW5nIHNvIGhlcmUuIFdlIGNvdWxkIHNpbXBs
+aWZ5IHRoZSBjb2RlIGJ5IAo+PiBqdXN0IHJlbW92aW5nICJpZiAoIHBhcmFtcy0+b3ZlcnJ1bl9y
+ZWcgIT0gcGFyYW1zLT5zdGF0dXNfcmVnICkiLAo+Pgo+PiBidXQgd2Ugd291bGQgbmVlZCB0byBk
+byBleHRyYSBvcGVyYXRpb24gZm9yIFNDSUZBIHdoaWNoIGhhcyAKPj4gb3ZlcnJ1bl9yZWcgPT0g
+c3RhdHVzX3JlZy4KPj4KPj4gV2hhdCB3YXkgZG8geW91IHByZWZlcj8KPgo+IEl0IGlzIG5vdCBh
+Ym91dCBwcmVmZXJlbmNlLCBpdCBpcyBhYm91dCBjb3JyZWN0bmVzcy4gSW4gbXkgcHJldmlvdXMg
+Cj4gcmVwbHksIEkgcG9pbnRlZCBvdXQgdGhhdCB5b3UgZGVmaW5lIG92ZXJydW5fbWFzayBmb3Ig
+U0NJRkEgYnV0IGl0IAo+IHdpbGwgbmV2ZXIgYmUgdXNlZC4gV2l0aG91dCBhbnkgZXhwbGFuYXRp
+b24sIHRoZSBjb2RlIGxvb2tzIHByZXR0eSB3cm9uZy4KPgo+IExvb2tpbmcgYXQgdGhlIG5leHQg
+cGF0Y2gsIHlvdSBnZXQgYXdheSBmcm9tIGFueSBwcm9ibGVtIHdpdGggU0NJRkEgCj4gYmVjYXVz
+ZSB0aGUgb3ZlcnJ1bl9tYXNrIGlzIGEgc3Vic2V0IG9mIGVycm9yX21hc2suIEJ1dCBJIHN0aWxs
+IGRvbid0IAo+IHNlZSB3aHkgdHJ5aW5nIHRvIHByZXZlbnQgdG8gd3JpdGUgYSBzZWNvbmQgdGlt
+ZSBpcyBhbiBpc3N1ZSwgdGhlIG1vcmUgCj4gdGhlIExpbnV4IGRyaXZlciBkb2VzIG5vdCBzZWVt
+IHRvIGRvIHRoaXMgZGFuY2UuCj4KPiBTbyBhdCBiZXN0LCB5b3UgbmVlZCB0byBleHBsYWluIGlu
+IHRoZSBjb21taXQgbWVzc2FnZSB3aHkgeW91IHRyeSB0byAKPiBza2lwIHRoZSByZWdpc3RlciB3
+aGVuIGl0IGlzIHRoZSBzYW1lLgoKSSBnb3QgeW91ciBwb2ludC4KCgpJIGNhbiBtYWtlIHRoZSBm
+b2xsb3dpbmcgY2hhbmdlczoKCjEuIERyb3AgImlmICggcGFyYW1zLT5vdmVycnVuX3JlZyAhPSBw
+YXJhbXMtPnN0YXR1c19yZWcgKSIgY2hlY2sgZXZlcnl3aGVyZS4KCjIuIFJlbW92ZSBvdmVycnVu
+X2JpdCAoU0NBU1NSX09SRVIpIGZyb20gZXJyb3JfbWFzayBmb3IgU0NJRkEuCgpUaGlzIHdheSB3
+ZSB3aWxsIGdldCBhIG11Y2ggY2xlYW5lciBjb2RlIHdoZXJlIG92ZXJydW5fbWFzayBpcyB1c2Vk
+IGZvciAKYm90aCBpbnRlcmZhY2VzLgoKV2hhdCBkbyB5b3UgdGhpbms/CgoKPgo+IENoZWVycywK
+PgotLSAKUmVnYXJkcywKCk9sZWtzYW5kciBUeXNoY2hlbmtvCgoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
