@@ -1,13 +1,22 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 0/5] dom0less device assignment
-Date: Wed, 17 Apr 2019 13:52:07 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1904171351420.1370@sstabellini-ThinkPad-X260>
-References: <alpine.DEB.2.10.1901031527420.800@sstabellini-ThinkPad-X260>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH 02/12] xen/arm: fix get_cpu_info() when
+ built with clang
+Date: Wed, 17 Apr 2019 22:00:06 +0100
+Message-ID: <be790e9c-75bb-b38b-9a01-8c586580ed1a@arm.com>
+References: <20190327184531.30986-1-julien.grall@arm.com>
+ <20190327184531.30986-3-julien.grall@arm.com>
+ <alpine.DEB.2.10.1904171340390.1370@sstabellini-ThinkPad-X260>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <alpine.DEB.2.10.1901031527420.800@sstabellini-ThinkPad-X260>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Uj5y=ST=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hGrf9-0003wE-Ln
+ for xen-devel@lists.xenproject.org; Wed, 17 Apr 2019 21:00:11 +0000
+In-Reply-To: <alpine.DEB.2.10.1904171340390.1370@sstabellini-ThinkPad-X260>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -17,32 +26,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: julien.grall@arm.com, andrii_anisov@epam.com, Achin.Gupta@arm.com, xen-devel@lists.xen.org
+Cc: Artem_Mygaiev@epam.com, xen-devel@lists.xenproject.org, Andrii_Anisov@epam.com, Oleksandr_Tyshchenko@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-R2VudGxlIHBpbmcuCgpPbiBUaHUsIDMgSmFuIDIwMTksIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90
-ZToKPiBIaSBhbGwsCj4gCj4gVGhpcyBzbWFsbCBwYXRjaCBzZXJpZXMgYWRkcyBkZXZpY2UgYXNz
-aWdubWVudCBzdXBwb3J0IHRvIERvbTBsZXNzLgo+IFRoZSBsYXN0IHBhdGNoIGlzIHRoZSBkb2N1
-bWVudGF0aW9uLgo+IAo+IENoZWVycywKPiAKPiBTdGVmYW5vCj4gCj4gCj4gTWFpbiBjaGFuZ2Vz
-IGluIHYyOgo+IC0gYWRkIGEgbm90ZSBhYm91dCB0aGUgY29kZSBjb21pbmcgZnJvbSBsaWJ4bCBp
-biB0aGUgY29tbWl0IG1lc3NhZ2UKPiAtIGNvcHkgL2FsaWFzZXMKPiAtIHJlbmFtZSAicGF0aCIg
-dG8gInhlbixwYXRoIgo+IC0gaW50cm9kdWNlIGFuZCBwYXJzZSB4ZW4scmVnCj4gLSBzdXBwb3J0
-IG1vcmUgdGhhbiBvbmUgaW50ZXJydXB0IHBlciBkZXZpY2UKPiAtIHNwZWNpZnkgb25seSB0aGUg
-R0lDIGlzIHN1cHBvcnRlZAo+IAo+IAo+IAo+IFN0ZWZhbm8gU3RhYmVsbGluaSAoNSk6Cj4gICAg
-ICAgeGVuL2FybTogY29weSBkdGIgZnJhZ21lbnQgdG8gZ3Vlc3QgZHRiCj4gICAgICAgeGVuL2Fy
-bTogYXNzaWduIGRldmljZXMgdG8gYm9vdCBkb21haW5zCj4gICAgICAgeGVuL2FybTogaGFuZGxl
-ICJtdWx0aWJvb3QsZGV2aWNlLXRyZWUiIGNvbXBhdGlibGUgbm9kZXMKPiAgICAgICB4ZW4vYXJt
-OiB1c2UgdGhlIHBoeXNpY2FsIG51bWJlciBvZiBnaWMgbGluZXMgZm9yIGJvb3QgZG9tYWlucwo+
-ICAgICAgIHhlbi9hcm06IGFkZCBkb20wbGVzcyBkZXZpY2UgYXNzaWdubWVudCBpbmZvIHRvIGRv
-Y3MKPiAKPiAgZG9jcy9taXNjL2FybS9kZXZpY2UtdHJlZS9ib290aW5nLnR4dCB8IDExOCArKysr
-KysrKysrKysrKysrKysrKysKPiAgeGVuL2FyY2gvYXJtL2Jvb3RmZHQuYyAgICAgICAgICAgICAg
-ICB8ICAgNiArLQo+ICB4ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgICAgICAgICAgIHwgMTkw
-ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0KPiAgeGVuL2FyY2gvYXJtL2tlcm5l
-bC5jICAgICAgICAgICAgICAgICB8ICAxMiArKy0KPiAgeGVuL2FyY2gvYXJtL3NldHVwLmMgICAg
-ICAgICAgICAgICAgICB8ICAgMSArCj4gIHhlbi9pbmNsdWRlL2FzbS1hcm0va2VybmVsLmggICAg
-ICAgICAgfCAgIDIgKy0KPiAgeGVuL2luY2x1ZGUvYXNtLWFybS9zZXR1cC5oICAgICAgICAgICB8
-ICAgMSArCj4gIHhlbi9pbmNsdWRlL3hlbi9kZXZpY2VfdHJlZS5oICAgICAgICAgfCAgIDIgKwo+
-ICA4IGZpbGVzIGNoYW5nZWQsIDMyNSBpbnNlcnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQo+IAoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgpPbiA0LzE3LzE5IDk6NDUgUE0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiBPbiBX
+ZWQsIDI3IE1hciAyMDE5LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IENsYW5nIHVuZGVyc3RhbmRz
+IHRoZSBHQ0Npc20gaW4gdXNlIGhlcmUsIGJ1dCBzdGlsbCBjb21wbGFpbnMgdGhhdCBzcCBpcwo+
+PiB1bml0aWFsaXNlZC4gSW4gc3VjaCBjYXNlcywgcmVzb3J0IHRvIHRoZSBvbGRlciB2ZXJzaW9u
+cyBvZiB0aGlzIGNvZGUsCj4+IHdoaWNoIGRpcmVjdGx5IHJlYWQgc3AgaW50byB0aGUgdGVtcG9y
+YXJ5IHZhcmlhYmxlLgo+Pgo+PiBOb3RlIHRoYXQgd2Ugc3RpbGwga2VlcCB0aGUgR0NDaXNtIGlu
+IHRoZSBkZWZhdWx0IGNhc2UsIGFzIGl0IGNhdXNlcyBHQ0MKPj4gdG8gY3JlYXRlIHJhdGhlciBi
+ZXR0ZXIgYXNzZW1ibHkuCj4+Cj4+IFRoaXMgaXMgYmFzZWQgb24gdGhlIHg4NiBjb3VudGVycGFy
+dC4KPiAKPiBJIHVuZGVyc3RhbmQgdGhpcyBpcyBiYXNlZCBvbiBhbiBleGlzdGluZyBhcHByb2Fj
+aCBidXQgd2hhdCBhYm91dCBvdGhlcgo+IGNvbXBpbGVycz8gSSBoYXZlIGEgc3VnZ2VzdGlvbiBi
+ZWxvdy4KCldoYXQgaWYgdGhlIGNvbXBpbGVyIGFjdHVhbGx5IHN1cHBvcnQgbmFtZWQgcmVnaXN0
+ZXJzPyBXaHkgd291bGQgd2UgbWFrZSAKdGhlIGNvZGUgbGVzcyBlZmZpY2llbnQ/CgpDaGVlcnMs
+CgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
