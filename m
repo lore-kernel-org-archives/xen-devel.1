@@ -1,20 +1,21 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH] xen/arm: kernel: Remove Dom prefix when
- using %pd format
-Date: Wed, 17 Apr 2019 17:23:58 +0100
-Message-ID: <a307935d-fdea-abf7-dc2f-7598d51c5bca@arm.com>
-References: <20190319232343.24371-1-julien.grall@arm.com>
- <alpine.DEB.2.10.1904161409220.1370@sstabellini-ThinkPad-X260>
+Subject: Re: [PATCH V4 1/5] xen/arm: Clarify usage of
+ earlyprintk for Lager board
+Date: Wed, 17 Apr 2019 17:26:23 +0100
+Message-ID: <fd856da4-250f-adec-9a66-a3356d47540b@arm.com>
+References: <1555513175-7596-1-git-send-email-olekstysh@gmail.com>
+ <1555513175-7596-2-git-send-email-olekstysh@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Uj5y=ST=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hGnLu-0003uq-HQ
- for xen-devel@lists.xenproject.org; Wed, 17 Apr 2019 16:24:02 +0000
-In-Reply-To: <alpine.DEB.2.10.1904161409220.1370@sstabellini-ThinkPad-X260>
+ id 1hGnOF-00043m-E1
+ for xen-devel@lists.xenproject.org; Wed, 17 Apr 2019 16:26:27 +0000
+In-Reply-To: <1555513175-7596-2-git-send-email-olekstysh@gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,18 +25,21 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
+To: Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAxNi8wNC8yMDE5IDIyOjA5LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gT24g
-VHVlLCAxOSBNYXIgMjAxOSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+PiBUaGUgZm9ybWF0ICVwZCB3
-aWxsIGFscmVhZHkgcHJlZml4IHRoZSBkb21haW4gSUQgd2l0aCAnZCcuIFNvIGF2b2lkIHRvCj4+
-IHByZWZpeCB3aXRoICdEb20nLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1
-bGllbi5ncmFsbEBhcm0uY29tPgo+IAo+IEFja2VkLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNz
-dGFiZWxsaW5pQGtlcm5lbC5vcmc+CgpUaGFuayB5b3UhIEkgaGF2ZSBwdXNoZWQgdG8gbXkgYnJh
-bmNoIG5leHQtNC4xMyBmb3Igbm93LiBJdCB3aWxsIGJlIG1lcmdlZCBvbmNlIAp0aGUgY29tbWl0
-IG1vcmF0b3JpdW0gaXMgbGlmdGVkLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgpPbiAxNy8wNC8yMDE5IDE1OjU5LCBPbGVrc2FuZHIgVHlzaGNoZW5rbyB3cm90ZToKPiBG
+cm9tOiBPbGVrc2FuZHIgVHlzaGNoZW5rbyA8b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5jb20+
+Cj4gCj4gQ3VycmVudCBzZW50ZW5jZSBpcyBub3QgZW50aXJlbHkgY29ycmVjdC4gU2luY2UgU0NJ
+RjAgaW50ZXJmYWNlIGlzCj4gYXBwbGljYWJsZSBmb3IgTGFnZXIgYm9hcmQsIGJ1dCBpcyBub3Qg
+YXBwbGljYWJsZSBmb3IgYWxsIFItQ2FyIEgyCj4gYmFzZWQgYm9hcmRzLiBGb3IgZXhhbXBsZSwg
+U3RvdXQgYm9hcmQgdXNlcyBTQ0lGQTAgaW50ZXJmYWNlLgo+IAo+IFNpZ25lZC1vZmYtYnk6IE9s
+ZWtzYW5kciBUeXNoY2hlbmtvIDxvbGVrc2FuZHJfdHlzaGNoZW5rb0BlcGFtLmNvbSA+IEFja2Vk
+LWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgoKSSBoYXZlIHB1c2hlZCB0
+aGlzIHBhdGNoIHRvIG15IGJyYW5jaCBuZXh0LTQuMTMgZm9yIG5vdy4gSXQgd2lsbCBiZSBtZXJn
+ZWQgb25jZSAKdGhlIGNvbW1pdCBtb3JhdG9yaXVtIGlzIGxpZnRlZC4KCkkgd2lsbCByZXZpZXcg
+dGhlIHJlc3Qgb2YgdGhlIHNlcmllcyBzb29uLgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
