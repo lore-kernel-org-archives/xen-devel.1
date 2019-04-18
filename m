@@ -1,12 +1,17 @@
-From: David Woodhouse <dwmw2@infradead.org>
-Subject: Re: Coreboot + Linux + kexec + Xen
-Date: Thu, 18 Apr 2019 13:23:43 +0100
-Message-ID: <ee9d391a44f7e2c2c3a5b5ecea447db283f4260e.camel@infradead.org>
-References: <20160808185424.GV10849@twosigma.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Xen project CI systems and committer workflow
+Date: Thu, 18 Apr 2019 13:31:59 +0100
+Message-ID: <20190418123159.GD30543@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1389441058548956304=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <20160808185424.GV10849@twosigma.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=TYG2=SU=citrix.com=prvs=00452dca2=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hH6Cy-0006Z5-2F
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2019 12:32:04 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -15,217 +20,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Trammell Hudson <Trammell.Hudson@twosigma.com>, xen-devel@lists.xen.org
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>, Committers <committers@xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Doug Goldstein <cardoe@cardoe.com>, Lars Kurth <lars.kurth@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1389441058548956304==
-Content-Type: multipart/signed; micalg="sha-256";
-	protocol="application/x-pkcs7-signature";
-	boundary="=-9kJPazzYJYJL8pB/9QLD"
-
-
---=-9kJPazzYJYJL8pB/9QLD
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 2016-08-08 at 18:54 +0000, Trammell Hudson wrote:
-> Keir Fraser replied to Ward's follow up question:
->=20
-> > > Is there a significant difference between booting 3.1.4 and
-> > > 3.2.1 with kexec in terms of BIOS requirements?
-> >=20
-> > If you specify no-real-mode in both cases then there
-> > should be no difference.  If Xen does not drop back into
-> > real mode then it cannot make use of any legacy BIOS
-> > services.
->=20
-> After some tracing, I determined that this is not enitrely accurate and
-> likely the cause of Ward's failure to boot 3.2.1 on real hardware.
-> Xen assumes that there is an Extended BIOS Data Area (EBDA), which is
-> not the case for the Linux-as-bootloader configuration.  The parameters
-> have not been parsed at this time in the boot code, so it always trusts
-> that it can find this structure.
->=20
-> Patching xen/arch/x86/boot/head.S to set trampoline_phys to point to
-> the end of MB_mem_lower (as it was done in 3.1.0) and also passing in
-> "no-real-mode" allows 4.6.3 to boot on the Coreboot system with Linux
-> payload.
-
-This appears to be true for the general case of kexec into Xen from
-Linux (or from Xen, once I get round to dealing with the separate
-issues that exist there).
-
-However...
->=20
-> diff --recursive -u /home/hudson/build/clean/xen-4.6.3/xen/arch/x86/boot/=
-head.S ./xen/arch/x86/boot/head.S
-> --- /home/hudson/build/clean/xen-4.6.3/xen/arch/x86/boot/head.S	2016-06-2=
-0 08:08:22.000000000 -0400
-> +++ ./xen/arch/x86/boot/head.S	2016-08-03 17:56:37.511121443 -0400
-> @@ -86,6 +86,8 @@
->          cmp     $MULTIBOOT_BOOTLOADER_MAGIC,%eax
->          jne     not_multiboot
-> =20
-> +#if 0
-> +
->          /* Set up trampoline segment 64k below EBDA */
->          movzwl  0x40e,%eax          /* EBDA segment */
->          cmp     $0xa000,%eax        /* sanity check (high) */
-> @@ -108,6 +110,12 @@
->          shl     $10-4,%edx
->          cmp     %eax,%edx           /* compare with BDA value */
->          cmovb   %edx,%eax           /* and use the smaller */
-> +#else
-> +	// coreboot does not provide an Extended BIOS Data Area pointer
-> +	// just stash things the Multiboot structure, adjusted to bytes
-> +        mov     MB_mem_lower(%ebx),%eax
-> +        shl     $10-4,%eax
-> +#endif
-> =20
->  2:      /* Reserve 64kb for the trampoline */
->          sub     $0x1000,%eax
-
-
-That much is overkill if the page has just been zeroed. This (along
-with "no-real-mode") suffices to get Xen booting for me:
-
---- a/xen/arch/x86/boot/head.S
-+++ b/xen/arch/x86/boot/head.S
-@@ -541,6 +541,8 @@ trampoline_bios_setup:
-         cmp     $0x100,%edx         /* is the multiboot value too small? *=
-/
-         jb      2f                  /* if so, do not use it */
-         shl     $10-4,%edx
-+        or      %ecx,%ecx           /* Don't use the BDA value if it's zer=
-o */
-+        cmovz   %edx, %ecx
-         cmp     %ecx,%edx           /* compare with BDA value */
-         cmovb   %edx,%ecx           /* and use the smaller */
-
-Not sure if we can trust that it's always actually zero, though. Before
-I contrive other options like checking it for sanity as we do for the
-multiboot value, or actually checking (from asm) the command line for
-no-real-mode and avoiding the BDA completely.... what *is* the reason
-we don't trust the multiboot data? Did bootloaders really lie to us?
-
-If I'm about to update kexec to support multiboot2 anyway, because I
-want the relocation support (and I note Xen's MB2 image doesn't provide
-a non-UEFI entry point, so I'll need to work on that too)... perhaps it
-makes sense to trust the information we get from MB2 and never look at
-the BDA in *that* case?
-
-
---=-9kJPazzYJYJL8pB/9QLD
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCECow
-ggUcMIIEBKADAgECAhEA4rtJSHkq7AnpxKUY8ZlYZjANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UE
-BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgG
-A1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhl
-bnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0EwHhcNMTkwMTAyMDAwMDAwWhcNMjIwMTAxMjM1
-OTU5WjAkMSIwIAYJKoZIhvcNAQkBFhNkd213MkBpbmZyYWRlYWQub3JnMIIBIjANBgkqhkiG9w0B
-AQEFAAOCAQ8AMIIBCgKCAQEAsv3wObLTCbUA7GJqKj9vHGf+Fa+tpkO+ZRVve9EpNsMsfXhvFpb8
-RgL8vD+L133wK6csYoDU7zKiAo92FMUWaY1Hy6HqvVr9oevfTV3xhB5rQO1RHJoAfkvhy+wpjo7Q
-cXuzkOpibq2YurVStHAiGqAOMGMXhcVGqPuGhcVcVzVUjsvEzAV9Po9K2rpZ52FE4rDkpDK1pBK+
-uOAyOkgIg/cD8Kugav5tyapydeWMZRJQH1vMQ6OVT24CyAn2yXm2NgTQMS1mpzStP2ioPtTnszIQ
-Ih7ASVzhV6csHb8Yrkx8mgllOyrt9Y2kWRRJFm/FPRNEurOeNV6lnYAXOymVJwIDAQABo4IB0zCC
-Ac8wHwYDVR0jBBgwFoAUgq9sjPjF/pZhfOgfPStxSF7Ei8AwHQYDVR0OBBYEFLfuNf820LvaT4AK
-xrGK3EKx1DE7MA4GA1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUF
-BwMEBggrBgEFBQcDAjBGBgNVHSAEPzA9MDsGDCsGAQQBsjEBAgEDBTArMCkGCCsGAQUFBwIBFh1o
-dHRwczovL3NlY3VyZS5jb21vZG8ubmV0L0NQUzBaBgNVHR8EUzBRME+gTaBLhklodHRwOi8vY3Js
-LmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDbGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWls
-Q0EuY3JsMIGLBggrBgEFBQcBAQR/MH0wVQYIKwYBBQUHMAKGSWh0dHA6Ly9jcnQuY29tb2RvY2Eu
-Y29tL0NPTU9ET1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcnQwJAYI
-KwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmNvbW9kb2NhLmNvbTAeBgNVHREEFzAVgRNkd213MkBpbmZy
-YWRlYWQub3JnMA0GCSqGSIb3DQEBCwUAA4IBAQALbSykFusvvVkSIWttcEeifOGGKs7Wx2f5f45b
-nv2ghcxK5URjUvCnJhg+soxOMoQLG6+nbhzzb2rLTdRVGbvjZH0fOOzq0LShq0EXsqnJbbuwJhK+
-PnBtqX5O23PMHutP1l88AtVN+Rb72oSvnD+dK6708JqqUx2MAFLMevrhJRXLjKb2Mm+/8XBpEw+B
-7DisN4TMlLB/d55WnT9UPNHmQ+3KFL7QrTO8hYExkU849g58Dn3Nw3oCbMUgny81ocrLlB2Z5fFG
-Qu1AdNiBA+kg/UxzyJZpFbKfCITd5yX49bOriL692aMVDyqUvh8fP+T99PqorH4cIJP6OxSTdxKM
-MIIFHDCCBASgAwIBAgIRAOK7SUh5KuwJ6cSlGPGZWGYwDQYJKoZIhvcNAQELBQAwgZcxCzAJBgNV
-BAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAY
-BgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRo
-ZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTE5MDEwMjAwMDAwMFoXDTIyMDEwMTIz
-NTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCASIwDQYJKoZIhvcN
-AQEBBQADggEPADCCAQoCggEBALL98Dmy0wm1AOxiaio/bxxn/hWvraZDvmUVb3vRKTbDLH14bxaW
-/EYC/Lw/i9d98CunLGKA1O8yogKPdhTFFmmNR8uh6r1a/aHr301d8YQea0DtURyaAH5L4cvsKY6O
-0HF7s5DqYm6tmLq1UrRwIhqgDjBjF4XFRqj7hoXFXFc1VI7LxMwFfT6PStq6WedhROKw5KQytaQS
-vrjgMjpICIP3A/CroGr+bcmqcnXljGUSUB9bzEOjlU9uAsgJ9sl5tjYE0DEtZqc0rT9oqD7U57My
-ECIewElc4VenLB2/GK5MfJoJZTsq7fWNpFkUSRZvxT0TRLqznjVepZ2AFzsplScCAwEAAaOCAdMw
-ggHPMB8GA1UdIwQYMBaAFIKvbIz4xf6WYXzoHz0rcUhexIvAMB0GA1UdDgQWBBS37jX/NtC72k+A
-CsaxitxCsdQxOzAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAdBgNVHSUEFjAUBggrBgEF
-BQcDBAYIKwYBBQUHAwIwRgYDVR0gBD8wPTA7BgwrBgEEAbIxAQIBAwUwKzApBggrBgEFBQcCARYd
-aHR0cHM6Ly9zZWN1cmUuY29tb2RvLm5ldC9DUFMwWgYDVR0fBFMwUTBPoE2gS4ZJaHR0cDovL2Ny
-bC5jb21vZG9jYS5jb20vQ09NT0RPUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFp
-bENBLmNybDCBiwYIKwYBBQUHAQEEfzB9MFUGCCsGAQUFBzAChklodHRwOi8vY3J0LmNvbW9kb2Nh
-LmNvbS9DT01PRE9SU0FDbGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWlsQ0EuY3J0MCQG
-CCsGAQUFBzABhhhodHRwOi8vb2NzcC5jb21vZG9jYS5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
-cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAC20spBbrL71ZEiFrbXBHonzhhirO1sdn+X+O
-W579oIXMSuVEY1LwpyYYPrKMTjKECxuvp24c829qy03UVRm742R9Hzjs6tC0oatBF7KpyW27sCYS
-vj5wbal+TttzzB7rT9ZfPALVTfkW+9qEr5w/nSuu9PCaqlMdjABSzHr64SUVy4ym9jJvv/FwaRMP
-gew4rDeEzJSwf3eeVp0/VDzR5kPtyhS+0K0zvIWBMZFPOPYOfA59zcN6AmzFIJ8vNaHKy5QdmeXx
-RkLtQHTYgQPpIP1Mc8iWaRWynwiE3ecl+PWzq4i+vdmjFQ8qlL4fHz/k/fT6qKx+HCCT+jsUk3cS
-jDCCBeYwggPOoAMCAQICEGqb4Tg7/ytrnwHV2binUlYwDQYJKoZIhvcNAQEMBQAwgYUxCzAJBgNV
-BAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAY
-BgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRp
-b24gQXV0aG9yaXR5MB4XDTEzMDExMDAwMDAwMFoXDTI4MDEwOTIzNTk1OVowgZcxCzAJBgNVBAYT
-AkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNV
-BAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50
-aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
-AQEAvrOeV6wodnVAFsc4A5jTxhh2IVDzJXkLTLWg0X06WD6cpzEup/Y0dtmEatrQPTRI5Or1u6zf
-+bGBSyD9aH95dDSmeny1nxdlYCeXIoymMv6pQHJGNcIDpFDIMypVpVSRsivlJTRENf+RKwrB6vcf
-WlP8dSsE3Rfywq09N0ZfxcBa39V0wsGtkGWC+eQKiz4pBZYKjrc5NOpG9qrxpZxyb4o4yNNwTqza
-aPpGRqXB7IMjtf7tTmU2jqPMLxFNe1VXj9XB1rHvbRikw8lBoNoSWY66nJN/VCJv5ym6Q0mdCbDK
-CMPybTjoNCQuelc0IAaO4nLUXk0BOSxSxt8kCvsUtQIDAQABo4IBPDCCATgwHwYDVR0jBBgwFoAU
-u69+Aj36pvE8hI6t7jiY7NkyMtQwHQYDVR0OBBYEFIKvbIz4xf6WYXzoHz0rcUhexIvAMA4GA1Ud
-DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMBEGA1UdIAQKMAgwBgYEVR0gADBMBgNVHR8E
-RTBDMEGgP6A9hjtodHRwOi8vY3JsLmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9u
-QXV0aG9yaXR5LmNybDBxBggrBgEFBQcBAQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9jcnQuY29t
-b2RvY2EuY29tL0NPTU9ET1JTQUFkZFRydXN0Q0EuY3J0MCQGCCsGAQUFBzABhhhodHRwOi8vb2Nz
-cC5jb21vZG9jYS5jb20wDQYJKoZIhvcNAQEMBQADggIBAHhcsoEoNE887l9Wzp+XVuyPomsX9vP2
-SQgG1NgvNc3fQP7TcePo7EIMERoh42awGGsma65u/ITse2hKZHzT0CBxhuhb6txM1n/y78e/4ZOs
-0j8CGpfb+SJA3GaBQ+394k+z3ZByWPQedXLL1OdK8aRINTsjk/H5Ns77zwbjOKkDamxlpZ4TKSDM
-KVmU/PUWNMKSTvtlenlxBhh7ETrN543j/Q6qqgCWgWuMAXijnRglp9fyadqGOncjZjaaSOGTTFB+
-E2pvOUtY+hPebuPtTbq7vODqzCM6ryEhNhzf+enm0zlpXK7q332nXttNtjv7VFNYG+I31gnMrwfH
-M5tdhYF/8v5UY5g2xANPECTQdu9vWPoqNSGDt87b3gXb1AiGGaI06vzgkejL580ul+9hz9D0S0U4
-jkhJiA7EuTecP/CFtR72uYRBcunwwH3fciPjviDDAI9SnC/2aPY8ydehzuZutLbZdRJ5PDEJM/1t
-yZR2niOYihZ+FCbtf3D9mB12D4ln9icgc7CwaxpNSCPt8i/GqK2HsOgkL3VYnwtx7cJUmpvVdZ4o
-gnzgXtgtdk3ShrtOS1iAN2ZBXFiRmjVzmehoMof06r1xub+85hFQzVxZx5/bRaTKTlL8YXLI8nAb
-R9HWdFqzcOoB/hxfEyIQpx9/s81rgzdEZOofSlZHynoSMYIDyjCCA8YCAQEwga0wgZcxCzAJBgNV
-BAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAY
-BgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRo
-ZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA4rtJSHkq7AnpxKUY8ZlYZjANBglghkgB
-ZQMEAgEFAKCCAe0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTkw
-NDE4MTIyMzQzWjAvBgkqhkiG9w0BCQQxIgQgWs/34QfDMLw/7zNCZdWuJBMoJoBeeovwVnUJ9oae
-dpowgb4GCSsGAQQBgjcQBDGBsDCBrTCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIg
-TWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQx
-PTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1h
-aWwgQ0ECEQDiu0lIeSrsCenEpRjxmVhmMIHABgsqhkiG9w0BCRACCzGBsKCBrTCBlzELMAkGA1UE
-BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgG
-A1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhl
-bnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0ECEQDiu0lIeSrsCenEpRjxmVhmMA0GCSqGSIb3
-DQEBAQUABIIBAKzkMmNGg842VxF+CXmdXQ39sV0VqwnS5ENec3MGTaaMhmb9K9TH//8tXs6Ohj4t
-Z/Ag/lzMu/u/Won7nYSJeHuIQ0+lZY1tNCQ4+jxuuQFq+mX9bRZwGuoBhN8K2cYsqIXuUJZYzseb
-RS8KEIc9OmmRLqGYmknrVy4N4qpeZRkuvje6QigMICFmR9aSRiUfI7R0EOYuwPnslDHAtMPRP0ek
-KmZMj/BFA41HH5B9mQMDHtGQqw6/9lVEtczGhsoriXHKyeXiGqkL3/17iNC+1BgQ26K2eikD2pzc
-Z8tqOKJZJQbjMDQUuGhkvVC4Z2X2YagG7SwT+pSI45LKtEwt2y4AAAAAAAA=
-
-
---=-9kJPazzYJYJL8pB/9QLD--
-
-
-
---===============1389441058548956304==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1389441058548956304==--
+SGkgYWxsCgpXZSBub3cgaGF2ZSBHaXRsYWIgQ0kgYXMgYSBjb21wbGVtZW50YXJ5IHN5c3RlbSB0
+byBPc3N0ZXN0IGFuZCBoYXZlIHBsYW5uZWQgdG8KYWRkIGJvdHMuIEl0J3MgaGlnaCB0aW1lIHdl
+IHRoaW5rIGFib3V0IGhvdyB3ZSBpbnRlZ3JhdGUgdGhlbSBhbmQgaG93IGl0IG1heQppbXByb3Zl
+IG91ciB3b3JrZmxvdy4KCiMjIFJlcXVpcmVtZW50cwoKMS4gV2Ugd2FudCB0byBoYXZlIGxpZ2h0
+IHdlaWdodCBidWlsZCB0ZXN0cyBiZWZvcmUgYSBwYXRjaCBzZXJpZXMgaXMgcmV2aWV3ZWQKb3Ig
+Y29tbWl0dGVkLgoKMi4gV2UgZG9uJ3Qgd2FudCB0byBwdXNoIGJyb2tlbiBwYXRjaGVzIHRvIGNl
+bnRyYWwgcmVwb3NpdG9yeSBzdWNoIHRoYXQKZXZlcnlvbmUgaXMgYmxvY2tlZC4KCjMuIFdlIGRv
+bid0IHdhbnQgdG8gc2lnbmlmaWNhbnRseSBjaGFuZ2UgY29tbWl0dGVyIHdvcmtmbG93LgoKUmVx
+dWlyZW1lbnQgMiBtZWFucyB0aGF0IG91ciBjdXJyZW50IGJyYW5jaGluZyBtb2RlbCB3aWxsIG5l
+ZWQgdG8gYmUgY2hhbmdlZC4KRGV0YWlscyB3aWxsIGZvbGxvdy4KCiMjIE92ZXJ2aWV3IG9mIGF1
+dG9tYXRpb24gc3lzdGVtcwoKLSBHaXRsYWIgQ0kKCiAgICBJdCBpcyBjYXBhYmxlIG9mIHJ1bm5p
+bmcgYnVpbGQgdGVzdHMgd2l0aCByZWxhdGl2ZWx5IHNob3J0IHR1cm5hcm91bmQgdGltZS4KCi0g
+Qm90cyBsaWtlIFBhdGNoZXcgYW5kIFBhdGNod29yawoKICAgIFRoZXkgYXJlIGFibGUgdG8gc2x1
+cnAgcGF0Y2hlcyBmcm9tIHhlbi1kZXZlbCBhbmQgbWF5YmUgcnVuIGN1c3RvbWlzZWQKICAgIHNj
+cmlwdHMgb24gdGhvc2UgcGF0Y2hlcy4KCi0gT3NzdGVzdAoKICAgIFB1c2hnYXRlLCBpbnRlZ3Jh
+dGlvbiB0ZXN0IHN5c3RlbS4gSXQgcnVucyBtb3JlIHNvcGhpc3RpY2F0ZWQgdGVzdHMKICAgIGNv
+bXBhcmVkIHRvIEdpdGxhYiBDSS4gVHVybmFyb3VuZCB0aW1lIGlzIGxvbmcuCiAgICAKIyMgTmV3
+IHdvcmxkCgpUaGVyZSB3aWxsIGJlIGFuIHVuaWZpZWQgZW5kcG9pbnQgZm9yIGNvbW1pdHRlcnMg
+YW5kIGJvdHMuIENvbW1pdHRlcnMgYW5kIGJvdHMKd2lsbCBoYXZlIHRoZWlyIGdpdCB0cmVlcy4g
+UGF0Y2hlcyBhcmUgY29tbWl0dGVkIHRvIHRob3NlIHRyZWVzLiBBbiBhdXRvbWF0ZWQKc3lzdGVt
+IHdpbGwgZ2V0IHBhdGNoZXMgZnJvbSB0aG9zZSB0cmVlcyBhbmQgdHJpZ2dlciBDSSBydW5zLgoK
+VGhlIHN5c3RlbSB3aWxsIHBpY2sgdXAgY29tbWl0cyBmcm9tIG9uZSBvZiB0aGUgdHJlZXMsIG1l
+cmdlIHRoZW0gd2l0aCBtYXN0ZXIKYW5kIHNlbmQgdGhlIG1lcmdlIHRvIENJIHN5c3RlbXMuCgpG
+b3IgYm90cywgb25seSBHaXRsYWIgQ0kgYnVpbGQgdGVzdHMgd2lsbCBydW4uIFJlc3VsdHMgYXJl
+IHNlbnQgYmFjayB0bwp4ZW4tZGV2ZWwuCgpGb3IgY29tbWl0dGVycycgdHJlZXMsIGF0IGZpcnN0
+IEdpdGxhYiBDSSBidWlsZCB0ZXN0cyBhcmUgcnVuLCBpZiB0aGUgcmVzdWx0IGlzCnN1Y2Nlc3Nm
+dWwsIHRoZSBtZXJnZSBjb21taXQgaXMgc3VibWl0dGVkIHRvIG9zc3Rlc3QuIElmIG9zc3Rlc3Qg
+ZGVlbXMgdGhlCm1lcmdlIGlzIGdvb2QsIHRoZSBtZXJnZSBpcyBwdXNoZWQgKHB1Ymxpc2hlZCkg
+dG8geGVuLmdpdCwgb3RoZXJ3aXNlIHRoZSBtZXJnZQppcyBkaXNjYXJkZWQuIFRlc3QgcmVzdWx0
+cyBhcmUgc2VudCBiYWNrIHRvIHhlbi1kZXZlbC4KCldpdGggdGhpcyBzeXN0ZW0sIGFsbCBwdWJs
+aXNoZWQgY29tbWl0cyBzaG91bGQgaGF2ZSBhbHJlYWR5IHBhc3NlZCBHaXRsYWIgQ0kKYW5kIG9z
+c3Rlc3QgdGVzdHMuCgojIyBHYXBzCgpUaGUgY29tcG9uZW50IC8gc3lzdGVtIHdoaWNoIG1lcmdl
+cyB0cmVlcyBhbmQgZHJpdmVzIENJIHN5c3RlbXMgaXMgbWlzc2luZy4KClBhdGNoZXcgYW5kIFBh
+dGNod29yayBkb24ndCBkbyBhbGwgdGhlIHRoaW5ncyB3ZSBjYXJlIGFib3V0IHlldC4KCiMjIENv
+bmNlcm5zCgpGb3IgaW5kaXZpZHVhbCBjb21taXR0ZXJzLCB0dXJuYXJvdW5kIHRpbWUgbWF5IGJl
+Y29tZSBsb25nZXIgc2luY2UgeW91IG5lZWQgdG8Kd2FpdCBmb3Igb3RoZXIgdHJlZXMgdG8gYmUg
+cHJvY2Vzc2VkLgoKR2l0bGFiIENJIGRvZXNuJ3QgaGF2ZSBhIHNlbGYgcHVzaGdhdGUuIElmIGl0
+IGlzIGJyb2tlbiBieSBhY2NpZGVudCBPc3N0ZXN0CndpbGwgYmUgYmxvY2tlZC4KCgpUaG91Z2h0
+cyBhbmQgY29tbWVudHM/CgpXZWkuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
