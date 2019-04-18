@@ -2,83 +2,71 @@ Return-Path: <SRS0=LbOi=SU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11E8CC10F14
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 32BB0C10F14
 	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2019 10:07:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CDB222183F
+	by mail.kernel.org (Postfix) with ESMTPS id 004B52184B
 	for <xen-devel@archiver.kernel.org>; Thu, 18 Apr 2019 10:07:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=onedefence.com header.i=@onedefence.com header.b="ODvAvJCO";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=thegrail.co header.i=@thegrail.co header.b="ZKTVIePP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CDB222183F
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=thegrail.co header.i=@thegrail.co header.b="amsvcBOl"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 004B52184B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=thegrail.co
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hH3wc-0001q8-G2; Thu, 18 Apr 2019 10:07:02 +0000
+	id 1hH3wd-0001qK-0u; Thu, 18 Apr 2019 10:07:03 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=htIB=SU=onedefence.com=dylanger@srs-us1.protection.inumbo.net>)
- id 1hH2qm-000417-Ib
- for xen-devel@lists.xen.org; Thu, 18 Apr 2019 08:56:56 +0000
-X-Inumbo-ID: ea50ca79-61b7-11e9-92d7-bc764e045a96
-Received: from mail-wm1-x342.google.com (unknown [2a00:1450:4864:20::342])
+ id 1hH3Ct-0006B0-NK
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2019 09:19:47 +0000
+X-Inumbo-ID: 1bf516a4-61bb-11e9-92d7-bc764e045a96
+Received: from mail-oi1-x242.google.com (unknown [2607:f8b0:4864:20::242])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id ea50ca79-61b7-11e9-92d7-bc764e045a96;
- Thu, 18 Apr 2019 08:56:55 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id 4so1862460wmf.1
- for <xen-devel@lists.xen.org>; Thu, 18 Apr 2019 01:56:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=onedefence.com; s=google;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=rnNg8yB10HP5qigFgaGF2kVI5iBBKotXuN+a391uFeQ=;
- b=ODvAvJCOiGRWpSOCoTrxPLhrQHK9XF/jYkxlpoUWz6XEFnpC1E8MMGusqvwcEI/VwI
- AoLtSV29HJIb5gHGHBERXGLgea/c8oMfnC4yhtdZ7vLrgYPd+teftt9SzjCZGye7HElp
- wsqx18cDqJalQi1KO8VyBzhT6VHH9ZUVKCgBM=
+ id 1bf516a4-61bb-11e9-92d7-bc764e045a96;
+ Thu, 18 Apr 2019 09:19:46 +0000 (UTC)
+Received: by mail-oi1-x242.google.com with SMTP id i21so1054815oib.11
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Apr 2019 02:19:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thegrail.co; s=google;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=rnNg8yB10HP5qigFgaGF2kVI5iBBKotXuN+a391uFeQ=;
- b=ZKTVIePPDVDl9G4nglNyen9dvvARownEQaTAE0WJxqet0FnGgqIixYACSNT/Ksqv8n
- xcgU1tkElamzuxdABqKpZKThwMvZvxCoinPajJjCwc6/mrFdVUvCSDrSgaahrL2Px9sj
- n2uk8o+nE8dYC2mPTdOQ9fQ+yvCopzUAwchgY=
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=GEtFH23t0bP77aPVM0j2pSrZHyntjnDJQaUtXJ0lO9g=;
+ b=amsvcBOlL6aGB1QjwV/M7wv8aAwxcvUmV78s+7p+sKDB1D9FqWXc/BHghnJGjIz5al
+ opCNiifmjPQB0Fv7hx67HQ9nblsjUdGHQbJvmWQJheG6ofCcezoEBY5c6oiBZ6sSf5ya
+ oAplUx2mtud6EZj0ZLXDa4Jp3PHbcSDWfc99U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=rnNg8yB10HP5qigFgaGF2kVI5iBBKotXuN+a391uFeQ=;
- b=FjFj7zJYoXCFQ5cKWuSh54TZ7ASFf0LakJq1lE0f1WJlOfMLd7N8lEbZ3B2PxwnWkd
- fOAlkg/+/byu5x0BN1+K3dnB3KcegJdEFoda5/1x7Wat8bpl7h/CV7BXra227WSvlTa6
- NKKYdoun1bAaio8zOm/EBsoIZ1r0O0joDmhz51Aj17S+er2WfAVzCMp3pWGYYgBNPgYv
- PwZ5am1LWm76nWegSGln2PSw3GkSDRYk/QUj2nHnhZwuteBsHw7tuLf7cW+2Oc/oEKd9
- gElx5MOE0B1LPqKpifaCMR00tc6z3cVTShLDkew6LABz4aIf8+dfrxl/U7CG0qaNwFnl
- Nfrg==
-X-Gm-Message-State: APjAAAUqN+0LgQweEwfcZ0sqPt4rxeLKikL58cD3QKNJcC5mvs9i5hlp
- UIWa0xkFALZXBbxTnys314rPUg==
-X-Google-Smtp-Source: APXvYqxZvxDOh4RhnfIBPuLqAp5sLzDSjGH9L7KbirIdsMNmO+rXe2gVMyiUdX+6rfjra1bBGFhq2Q==
-X-Received: by 2002:a1c:f310:: with SMTP id q16mr2327541wmq.102.1555577813640; 
- Thu, 18 Apr 2019 01:56:53 -0700 (PDT)
-Received: from localhost.localdomain ([81.17.24.202])
- by smtp.gmail.com with ESMTPSA id 67sm1348428wmz.41.2019.04.18.01.56.52
- (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
- Thu, 18 Apr 2019 01:56:52 -0700 (PDT)
-From: Dylanger Daly <dylanger@thegrail.co>
-To: xen-devel@lists.xenproject.org
-Date: Thu, 18 Apr 2019 09:56:34 +0100
-Message-Id: <20190418085634.3629-1-dylanger@thegrail.co>
-X-Mailer: git-send-email 2.20.1
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=GEtFH23t0bP77aPVM0j2pSrZHyntjnDJQaUtXJ0lO9g=;
+ b=SMQStAw8nOFfw3Ynl4MK2zsLb4c20ZKCvLafdF9eiOiIAZwDdA4cxNNW7HLNBb/TnP
+ lWBw9J1FOFDh0MYD/RZE9b91k632DAOmm/Bb1Tsxp0YelCTmoK5d88fh79yMLvuDrSr1
+ NLgfTswNzyU8bvTA+eQt55dvnHJVfeihh19Suqh1FtK5lUn4HPOxPF/46HcIqVCr4c5d
+ tsF0O/fCRZyANUFEMzxHYQfKPdm+QUaciaemVEskGp41NHM/rld6obNFwvzhBR7vASS9
+ pXHHikXeQJNYvq5isaQmPSHYtWTLLWfbKsR7Q3DsIleQGxw0MHwurs6xTEDljdgzYOhE
+ kw/A==
+X-Gm-Message-State: APjAAAWYZo06/m8rpN26tu7GCfjmOV1nNukVCpm/7YTdU71FTltxdgFJ
+ hRM7dHiVlhfmoV0/QIt1GYcOf7fdLG7Ck8VNonQjDw==
+X-Google-Smtp-Source: APXvYqxR02Q71iSmw47SnAlogqP1QrlyBrGI6yQrSsnkcNS7B2mk0Acb4HMSLBuD5qj8Ng3tUxGXKTRSzVxTm7sAWZo=
+X-Received: by 2002:aca:510d:: with SMTP id f13mr1275007oib.174.1555579186311; 
+ Thu, 18 Apr 2019 02:19:46 -0700 (PDT)
 MIME-Version: 1.0
+References: <20190418085634.3629-1-dylanger@thegrail.co>
+ <53b32c69-b0b4-5441-c8e2-299769eabf8f@citrix.com>
+In-Reply-To: <53b32c69-b0b4-5441-c8e2-299769eabf8f@citrix.com>
+From: Dylanger Daly <dylanger@thegrail.co>
+Date: Thu, 18 Apr 2019 10:19:34 +0100
+Message-ID:
+ <CANJ4vQ1nOuFZw0kk0dWEsx4Q0h8YE2H8gRzg422cRf65FAkncg@mail.gmail.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
 X-Mailman-Approved-At: Thu, 18 Apr 2019 10:07:01 +0000
-Subject: [Xen-devel] [PATCH] Add Undervolt MSRs to wrmsr function.
+Subject: Re: [Xen-devel] [PATCH] Add Undervolt MSRs to wrmsr function.
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -89,41 +77,120 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Dylanger Daly <dylanger@thegrail.co>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- xen-devel@lists.xen.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Cc: Dylanger Daly <dylanger@thegrail.co>, xen-devel@lists.xenproject.org,
+ Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+Content-Type: multipart/mixed; boundary="===============7250815228890833043=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190418085634.6K38_qhlHmjQf77CPWrPtxQDAaffi3H92fE0QsxyfHM@z>
+Message-ID: <20190418091934.bypVaFxXhEJt3MtTevr9l5IBJZ3dOX2Xw0GP9OP3S-A@z>
 
-R2l2aW5nIExhcHRvcCBVc2VycyB0aGUgYWJpbGl0eSB0byBVbmRlcnZvbHQgYW5kIGNoYW5nZSBU
-ZW1wIFRocm90dGxlIExpbWl0cy4KClNpZ25lZC1vZmYtYnk6IER5bGFuZ2VyIERhbHkgPGR5bGFu
-Z2VyQHRoZWdyYWlsLmNvPgotLS0KIHhlbi9hcmNoL3g4Ni90cmFwcy5jICAgICAgICAgICAgfCA4
-ICsrKysrKysrCiB4ZW4vaW5jbHVkZS9hc20teDg2L21zci1pbmRleC5oIHwgMiArKwogMiBmaWxl
-cyBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3Ry
-YXBzLmMgYi94ZW4vYXJjaC94ODYvdHJhcHMuYwppbmRleCAxYTIyODk1OTA3Li40NzVhMmE1NzIw
-IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvdHJhcHMuYworKysgYi94ZW4vYXJjaC94ODYvdHJh
-cHMuYwpAQCAtMjY4NCw2ICsyNjg0LDE0IEBAIHN0YXRpYyBpbnQgcHJpdl9vcF93cml0ZV9tc3Io
-dW5zaWduZWQgaW50IHJlZywgdWludDY0X3QgdmFsLAogICAgICAgICAgICAgZ290byBpbnZhbGlk
-OwogICAgICAgICByZXR1cm4gWDg2RU1VTF9PS0FZOwogCisgICAgY2FzZSBNU1JfSUEzMl9WT0xU
-QUdFX09GRlNFVDoKKyAgICBjYXNlIE1TUl9JQTMyX1RFTVBfQ09OVFJPTDoKKyAgICAgICAgaWYg
-KCBib290X2NwdV9kYXRhLng4Nl92ZW5kb3IgIT0gWDg2X1ZFTkRPUl9JTlRFTCApCisgICAgICAg
-ICAgICBicmVhazsKKyAgICAgICAgaWYgKCB3cm1zcl9zYWZlKHJlZywgdmFsKSA9PSAwICkKKyAg
-ICAgICAgICAgIHJldHVybiBYODZFTVVMX09LQVk7CisgICAgICAgIGJyZWFrOworCiAgICAgY2Fz
-ZSBNU1JfSUEzMl9NSVNDX0VOQUJMRToKICAgICAgICAgaWYgKCByZG1zcl9zYWZlKHJlZywgdGVt
-cCkgKQogICAgICAgICAgICAgYnJlYWs7CmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2
-L21zci1pbmRleC5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3ItaW5kZXguaAppbmRleCA3YmIz
-ODJmNDU2Li43NWRhZDNmZTQzIDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L21zci1p
-bmRleC5oCisrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNyLWluZGV4LmgKQEAgLTM0Niw2ICsz
-NDYsOCBAQAogI2RlZmluZSBNU1JfSUEzMl9USEVSTV9JTlRFUlJVUFQJMHgwMDAwMDE5YgogI2Rl
-ZmluZSBNU1JfSUEzMl9USEVSTV9TVEFUVVMJCTB4MDAwMDAxOWMKICNkZWZpbmUgTVNSX0lBMzJf
-TUlTQ19FTkFCTEUJCTB4MDAwMDAxYTAKKyNkZWZpbmUgTVNSX0lBMzJfVk9MVEFHRV9PRkZTRVQJ
-CTB4MDAwMDAxNTAKKyNkZWZpbmUgTVNSX0lBMzJfVEVNUF9DT05UUk9MCQkweDAwMDAwMWEyCiAj
-ZGVmaW5lIE1TUl9JQTMyX01JU0NfRU5BQkxFX1BFUkZfQVZBSUwgICAoMTw8NykKICNkZWZpbmUg
-TVNSX0lBMzJfTUlTQ19FTkFCTEVfQlRTX1VOQVZBSUwgICgxPDwxMSkKICNkZWZpbmUgTVNSX0lB
-MzJfTUlTQ19FTkFCTEVfUEVCU19VTkFWQUlMICgxPDwxMikKLS0gCjIuMjAuMQoKCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============7250815228890833043==
+Content-Type: multipart/alternative; boundary="000000000000d20a3e0586ca80c5"
+
+--000000000000d20a3e0586ca80c5
+Content-Type: text/plain; charset="UTF-8"
+
+No worries Andrew, it was my first patch, thank you for the response.
+
+It's based on Xen 4.8
+
+Dom0 should be controlling it, but I wasn't aware of the Security
+implications.
+
+The scope isn't well documented:
+ https://ressman.org/posts/2018-06-26-voltage-temperature-tdp-thinkpad/
+
+More experimental as it worked with my Laptop.
+
+Thank you for your time
+
+
+On Thu, Apr 18, 2019, 10:09 AM Andrew Cooper <andrew.cooper3@citrix.com>
+wrote:
+
+> On 18/04/2019 09:56, Dylanger Daly wrote:
+> > Giving Laptop Users the ability to Undervolt and change Temp Throttle
+> Limits.
+> >
+> > Signed-off-by: Dylanger Daly <dylanger@thegrail.co>
+>
+> Thankyou for the patch.  Which version of Xen is it against?  It is
+> fairly old, given that the function you patch has now moved to
+> arch/x86/pv/emul-priv-op.c.  Furthermore, this is the legacy path, so
+> the functions this should be added to are guest_{rdmsr,wrmsr}() in
+> arch/x86/msr.c
+>
+> What entity is controlling this?
+>
+> Sadly, there are a number of issues.  You open these MSRs up to
+> unprivileged domUs, and there is a mismatch between the vcpus/pcpus.
+>
+> What is the scope of these MSRs?  I guess dom0 is going to write them on
+> all cores, but as dom0 gets scheduled around, this wont match up with
+> the pcpus across the host.
+>
+> ~Andrew
+>
+
+--000000000000d20a3e0586ca80c5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto">No worries Andrew, it was my first patch, thank you for t=
+he response.<div dir=3D"auto"><br></div><div dir=3D"auto">It&#39;s based on=
+ Xen 4.8</div><div dir=3D"auto"><br></div><div dir=3D"auto">Dom0 should be =
+controlling it, but I wasn&#39;t aware of the Security implications.</div><=
+div dir=3D"auto"><br></div><div dir=3D"auto">The scope isn&#39;t well docum=
+ented:</div><div dir=3D"auto">=C2=A0<a href=3D"https://ressman.org/posts/20=
+18-06-26-voltage-temperature-tdp-thinkpad/">https://ressman.org/posts/2018-=
+06-26-voltage-temperature-tdp-thinkpad/</a></div><div dir=3D"auto"><br></di=
+v><div dir=3D"auto">More experimental as it worked with my Laptop.</div><di=
+v dir=3D"auto"><br></div><div dir=3D"auto">Thank you for your time</div><br=
+><br><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmai=
+l_attr">On Thu, Apr 18, 2019, 10:09 AM Andrew Cooper &lt;<a href=3D"mailto:=
+andrew.cooper3@citrix.com">andrew.cooper3@citrix.com</a>&gt; wrote:<br></di=
+v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
+1px #ccc solid;padding-left:1ex">On 18/04/2019 09:56, Dylanger Daly wrote:<=
+br>
+&gt; Giving Laptop Users the ability to Undervolt and change Temp Throttle =
+Limits.<br>
+&gt;<br>
+&gt; Signed-off-by: Dylanger Daly &lt;<a href=3D"mailto:dylanger@thegrail.c=
+o" target=3D"_blank" rel=3D"noreferrer">dylanger@thegrail.co</a>&gt;<br>
+<br>
+Thankyou for the patch.=C2=A0 Which version of Xen is it against?=C2=A0 It =
+is<br>
+fairly old, given that the function you patch has now moved to<br>
+arch/x86/pv/emul-priv-op.c.=C2=A0 Furthermore, this is the legacy path, so<=
+br>
+the functions this should be added to are guest_{rdmsr,wrmsr}() in<br>
+arch/x86/msr.c<br>
+<br>
+What entity is controlling this?<br>
+<br>
+Sadly, there are a number of issues.=C2=A0 You open these MSRs up to<br>
+unprivileged domUs, and there is a mismatch between the vcpus/pcpus.<br>
+<br>
+What is the scope of these MSRs?=C2=A0 I guess dom0 is going to write them =
+on<br>
+all cores, but as dom0 gets scheduled around, this wont match up with<br>
+the pcpus across the host.<br>
+<br>
+~Andrew<br>
+</blockquote></div></div>
+
+--000000000000d20a3e0586ca80c5--
+
+
+--===============7250815228890833043==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7250815228890833043==--
+
