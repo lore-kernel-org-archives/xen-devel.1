@@ -1,13 +1,18 @@
 From: Dylanger Daly <dylanger@thegrail.co>
-Subject: Re: [PATCH] Add Undervolt MSRs to wrmsr function.
-Date: Thu, 18 Apr 2019 10:19:34 +0100
-Message-ID: <CANJ4vQ1nOuFZw0kk0dWEsx4Q0h8YE2H8gRzg422cRf65FAkncg@mail.gmail.com>
-References: <20190418085634.3629-1-dylanger@thegrail.co>
- <53b32c69-b0b4-5441-c8e2-299769eabf8f@citrix.com>
+Subject: [PATCH] Add Undervolt MSRs to wrmsr function.
+Date: Thu, 18 Apr 2019 09:56:34 +0100
+Message-ID: <20190418085634.3629-1-dylanger@thegrail.co>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3823579359462117102=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <53b32c69-b0b4-5441-c8e2-299769eabf8f@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=htIB=SU=onedefence.com=dylanger@srs-us1.protection.inumbo.net>)
+ id 1hH2qn-00041C-6y
+ for xen-devel@lists.xenproject.org; Thu, 18 Apr 2019 08:56:57 +0000
+Received: by mail-wm1-x344.google.com with SMTP id o25so1832549wmf.5
+ for <xen-devel@lists.xenproject.org>; Thu, 18 Apr 2019 01:56:55 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,116 +21,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Dylanger Daly <dylanger@thegrail.co>, xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
+To: xen-devel@lists.xenproject.org
+Cc: Dylanger Daly <dylanger@thegrail.co>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xen.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============3823579359462117102==
-Content-Type: multipart/alternative; boundary="000000000000d20a3e0586ca80c5"
-
---000000000000d20a3e0586ca80c5
-Content-Type: text/plain; charset="UTF-8"
-
-No worries Andrew, it was my first patch, thank you for the response.
-
-It's based on Xen 4.8
-
-Dom0 should be controlling it, but I wasn't aware of the Security
-implications.
-
-The scope isn't well documented:
- https://ressman.org/posts/2018-06-26-voltage-temperature-tdp-thinkpad/
-
-More experimental as it worked with my Laptop.
-
-Thank you for your time
-
-
-On Thu, Apr 18, 2019, 10:09 AM Andrew Cooper <andrew.cooper3@citrix.com>
-wrote:
-
-> On 18/04/2019 09:56, Dylanger Daly wrote:
-> > Giving Laptop Users the ability to Undervolt and change Temp Throttle
-> Limits.
-> >
-> > Signed-off-by: Dylanger Daly <dylanger@thegrail.co>
->
-> Thankyou for the patch.  Which version of Xen is it against?  It is
-> fairly old, given that the function you patch has now moved to
-> arch/x86/pv/emul-priv-op.c.  Furthermore, this is the legacy path, so
-> the functions this should be added to are guest_{rdmsr,wrmsr}() in
-> arch/x86/msr.c
->
-> What entity is controlling this?
->
-> Sadly, there are a number of issues.  You open these MSRs up to
-> unprivileged domUs, and there is a mismatch between the vcpus/pcpus.
->
-> What is the scope of these MSRs?  I guess dom0 is going to write them on
-> all cores, but as dom0 gets scheduled around, this wont match up with
-> the pcpus across the host.
->
-> ~Andrew
->
-
---000000000000d20a3e0586ca80c5
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"auto">No worries Andrew, it was my first patch, thank you for t=
-he response.<div dir=3D"auto"><br></div><div dir=3D"auto">It&#39;s based on=
- Xen 4.8</div><div dir=3D"auto"><br></div><div dir=3D"auto">Dom0 should be =
-controlling it, but I wasn&#39;t aware of the Security implications.</div><=
-div dir=3D"auto"><br></div><div dir=3D"auto">The scope isn&#39;t well docum=
-ented:</div><div dir=3D"auto">=C2=A0<a href=3D"https://ressman.org/posts/20=
-18-06-26-voltage-temperature-tdp-thinkpad/">https://ressman.org/posts/2018-=
-06-26-voltage-temperature-tdp-thinkpad/</a></div><div dir=3D"auto"><br></di=
-v><div dir=3D"auto">More experimental as it worked with my Laptop.</div><di=
-v dir=3D"auto"><br></div><div dir=3D"auto">Thank you for your time</div><br=
-><br><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"ltr" class=3D"gmai=
-l_attr">On Thu, Apr 18, 2019, 10:09 AM Andrew Cooper &lt;<a href=3D"mailto:=
-andrew.cooper3@citrix.com">andrew.cooper3@citrix.com</a>&gt; wrote:<br></di=
-v><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:=
-1px #ccc solid;padding-left:1ex">On 18/04/2019 09:56, Dylanger Daly wrote:<=
-br>
-&gt; Giving Laptop Users the ability to Undervolt and change Temp Throttle =
-Limits.<br>
-&gt;<br>
-&gt; Signed-off-by: Dylanger Daly &lt;<a href=3D"mailto:dylanger@thegrail.c=
-o" target=3D"_blank" rel=3D"noreferrer">dylanger@thegrail.co</a>&gt;<br>
-<br>
-Thankyou for the patch.=C2=A0 Which version of Xen is it against?=C2=A0 It =
-is<br>
-fairly old, given that the function you patch has now moved to<br>
-arch/x86/pv/emul-priv-op.c.=C2=A0 Furthermore, this is the legacy path, so<=
-br>
-the functions this should be added to are guest_{rdmsr,wrmsr}() in<br>
-arch/x86/msr.c<br>
-<br>
-What entity is controlling this?<br>
-<br>
-Sadly, there are a number of issues.=C2=A0 You open these MSRs up to<br>
-unprivileged domUs, and there is a mismatch between the vcpus/pcpus.<br>
-<br>
-What is the scope of these MSRs?=C2=A0 I guess dom0 is going to write them =
-on<br>
-all cores, but as dom0 gets scheduled around, this wont match up with<br>
-the pcpus across the host.<br>
-<br>
-~Andrew<br>
-</blockquote></div></div>
-
---000000000000d20a3e0586ca80c5--
-
-
---===============3823579359462117102==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3823579359462117102==--
+R2l2aW5nIExhcHRvcCBVc2VycyB0aGUgYWJpbGl0eSB0byBVbmRlcnZvbHQgYW5kIGNoYW5nZSBU
+ZW1wIFRocm90dGxlIExpbWl0cy4KClNpZ25lZC1vZmYtYnk6IER5bGFuZ2VyIERhbHkgPGR5bGFu
+Z2VyQHRoZWdyYWlsLmNvPgotLS0KIHhlbi9hcmNoL3g4Ni90cmFwcy5jICAgICAgICAgICAgfCA4
+ICsrKysrKysrCiB4ZW4vaW5jbHVkZS9hc20teDg2L21zci1pbmRleC5oIHwgMiArKwogMiBmaWxl
+cyBjaGFuZ2VkLCAxMCBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3Ry
+YXBzLmMgYi94ZW4vYXJjaC94ODYvdHJhcHMuYwppbmRleCAxYTIyODk1OTA3Li40NzVhMmE1NzIw
+IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvdHJhcHMuYworKysgYi94ZW4vYXJjaC94ODYvdHJh
+cHMuYwpAQCAtMjY4NCw2ICsyNjg0LDE0IEBAIHN0YXRpYyBpbnQgcHJpdl9vcF93cml0ZV9tc3Io
+dW5zaWduZWQgaW50IHJlZywgdWludDY0X3QgdmFsLAogICAgICAgICAgICAgZ290byBpbnZhbGlk
+OwogICAgICAgICByZXR1cm4gWDg2RU1VTF9PS0FZOwogCisgICAgY2FzZSBNU1JfSUEzMl9WT0xU
+QUdFX09GRlNFVDoKKyAgICBjYXNlIE1TUl9JQTMyX1RFTVBfQ09OVFJPTDoKKyAgICAgICAgaWYg
+KCBib290X2NwdV9kYXRhLng4Nl92ZW5kb3IgIT0gWDg2X1ZFTkRPUl9JTlRFTCApCisgICAgICAg
+ICAgICBicmVhazsKKyAgICAgICAgaWYgKCB3cm1zcl9zYWZlKHJlZywgdmFsKSA9PSAwICkKKyAg
+ICAgICAgICAgIHJldHVybiBYODZFTVVMX09LQVk7CisgICAgICAgIGJyZWFrOworCiAgICAgY2Fz
+ZSBNU1JfSUEzMl9NSVNDX0VOQUJMRToKICAgICAgICAgaWYgKCByZG1zcl9zYWZlKHJlZywgdGVt
+cCkgKQogICAgICAgICAgICAgYnJlYWs7CmRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2
+L21zci1pbmRleC5oIGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9tc3ItaW5kZXguaAppbmRleCA3YmIz
+ODJmNDU2Li43NWRhZDNmZTQzIDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS9hc20teDg2L21zci1p
+bmRleC5oCisrKyBiL3hlbi9pbmNsdWRlL2FzbS14ODYvbXNyLWluZGV4LmgKQEAgLTM0Niw2ICsz
+NDYsOCBAQAogI2RlZmluZSBNU1JfSUEzMl9USEVSTV9JTlRFUlJVUFQJMHgwMDAwMDE5YgogI2Rl
+ZmluZSBNU1JfSUEzMl9USEVSTV9TVEFUVVMJCTB4MDAwMDAxOWMKICNkZWZpbmUgTVNSX0lBMzJf
+TUlTQ19FTkFCTEUJCTB4MDAwMDAxYTAKKyNkZWZpbmUgTVNSX0lBMzJfVk9MVEFHRV9PRkZTRVQJ
+CTB4MDAwMDAxNTAKKyNkZWZpbmUgTVNSX0lBMzJfVEVNUF9DT05UUk9MCQkweDAwMDAwMWEyCiAj
+ZGVmaW5lIE1TUl9JQTMyX01JU0NfRU5BQkxFX1BFUkZfQVZBSUwgICAoMTw8NykKICNkZWZpbmUg
+TVNSX0lBMzJfTUlTQ19FTkFCTEVfQlRTX1VOQVZBSUwgICgxPDwxMSkKICNkZWZpbmUgTVNSX0lB
+MzJfTUlTQ19FTkFCTEVfUEVCU19VTkFWQUlMICgxPDwxMikKLS0gCjIuMjAuMQoKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
