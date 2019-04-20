@@ -6,45 +6,45 @@ X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 55E4EC282DD
-	for <xen-devel@archiver.kernel.org>; Sat, 20 Apr 2019 18:54:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 630C4C282DD
+	for <xen-devel@archiver.kernel.org>; Sat, 20 Apr 2019 21:33:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 23A7A208C0
-	for <xen-devel@archiver.kernel.org>; Sat, 20 Apr 2019 18:54:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 23A7A208C0
+	by mail.kernel.org (Postfix) with ESMTPS id 2FCAA2087B
+	for <xen-devel@archiver.kernel.org>; Sat, 20 Apr 2019 21:33:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2FCAA2087B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hHv7I-0004yW-RI; Sat, 20 Apr 2019 18:53:36 +0000
+	id 1hHxbg-0000kH-CR; Sat, 20 Apr 2019 21:33:08 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Fx+l=SW=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hHv7H-0004yJ-2R
- for xen-devel@lists.xenproject.org; Sat, 20 Apr 2019 18:53:35 +0000
-X-Inumbo-ID: 97c9e658-639d-11e9-92d7-bc764e045a96
+ id 1hHxbe-0000k8-PP
+ for xen-devel@lists.xenproject.org; Sat, 20 Apr 2019 21:33:06 +0000
+X-Inumbo-ID: e1d2403b-63b3-11e9-92d7-bc764e045a96
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 97c9e658-639d-11e9-92d7-bc764e045a96;
- Sat, 20 Apr 2019 18:53:32 +0000 (UTC)
+ id e1d2403b-63b3-11e9-92d7-bc764e045a96;
+ Sat, 20 Apr 2019 21:33:05 +0000 (UTC)
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <aliasfile-bounces@xenproject.org>)
- id 1hHv7D-000386-Cs; Sat, 20 Apr 2019 18:53:31 +0000
+ id 1hHxbc-0006IO-GK; Sat, 20 Apr 2019 21:33:04 +0000
 Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1hHv7D-0004LS-2E; Sat, 20 Apr 2019 18:53:31 +0000
+ id 1hHxbc-0002Qn-4v; Sat, 20 Apr 2019 21:33:04 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1hHv7D-00034O-1f; Sat, 20 Apr 2019 18:53:31 +0000
+ id 1hHxbc-0004Qy-4H; Sat, 20 Apr 2019 21:33:04 +0000
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-135018-mainreport@xen.org>
+Message-ID: <osstest-135022-mainreport@xen.org>
 MIME-Version: 1.0
 X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-i386:debian-hvm-install:fail:regression
  xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
@@ -55,8 +55,8 @@ X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-i386:
 X-Osstest-Versions-This: xen=be3d5b30331d87e177744dbe23138b9ebcdc86f1
 X-Osstest-Versions-That: xen=cb70a26f78848fe45f593f7ebc9cfaac760a791b
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Sat, 20 Apr 2019 18:53:31 +0000
-Subject: [Xen-devel] [xen-unstable-smoke test] 135018: regressions - FAIL
+Date: Sat, 20 Apr 2019 21:33:04 +0000
+Subject: [Xen-devel] [xen-unstable-smoke test] 135022: regressions - FAIL
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,10 +71,10 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190420185331.MklKFiCYPxWNWWU0J-efoBOJ0m4Ufjcm--onpG3EFZM@z>
+Message-ID: <20190420213304.UFSAJl0XpZVuXNJCX_q_biaHWqwqU7tO_-LkmNb1BNc@z>
 
-ZmxpZ2h0IDEzNTAxOCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNTAxOC8KClJlZ3Jlc3Npb25z
+ZmxpZ2h0IDEzNTAyMiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNTAyMi8KClJlZ3Jlc3Npb25z
 IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
 ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
 ZW11dS1kZWJpYW5odm0taTM4NiAxMCBkZWJpYW4taHZtLWluc3RhbGwgZmFpbCBSRUdSLiB2cy4g
@@ -91,8 +91,8 @@ ZTNkNWIzMDMzMWQ4N2UxNzc3NDRkYmUyMzEzOGI5ZWJjZGM4NmYxCmJhc2VsaW5lIHZlcnNpb246
 CiB4ZW4gICAgICAgICAgICAgICAgICBjYjcwYTI2Zjc4ODQ4ZmU0NWY1OTNmN2ViYzljZmFhYzc2
 MGE3OTFiCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMzM5OTEgIDIwMTktMDMtMjIgMTU6MDA6NDYg
 WiAgIDI5IGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTM0MDY4ICAyMDE5LTAzLTI1IDEyOjAw
-OjUxIFogICAyNiBkYXlzICAxNDEgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTM0ODM0
-ICAyMDE5LTA0LTE1IDE5OjAwOjQ4IFogICAgNCBkYXlzICAgMzUgYXR0ZW1wdHMKCi0tLS0tLS0t
+OjUxIFogICAyNiBkYXlzICAxNDIgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTM0ODM0
+ICAyMDE5LTA0LTE1IDE5OjAwOjQ4IFogICAgNSBkYXlzICAgMzYgYXR0ZW1wdHMKCi0tLS0tLS0t
 LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9w
 bGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQWxleGFuZHJ1IElzYWlsYSA8
 YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+CiAgQWxleGFuZHJ1IFN0ZWZhbiBJU0FJTEEgPGFpc2Fp
