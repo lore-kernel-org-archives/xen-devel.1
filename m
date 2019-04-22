@@ -1,17 +1,23 @@
-From: Dongli Zhang <dongli.zhang@oracle.com>
-Subject: [PATCH 1/1] xen/gnttab: print log at level XENLOG_ERR
- before panic
-Date: Mon, 22 Apr 2019 20:39:59 +0800
-Message-ID: <1555936799-15675-1-git-send-email-dongli.zhang@oracle.com>
+From: Pasi =?iso-8859-1?Q?K=E4rkk=E4inen?= <pasik@iki.fi>
+Subject: Re: [PATCH] golang/xenlight: Fixing compilation for go
+ 1.11
+Date: Mon, 22 Apr 2019 16:47:01 +0300
+Message-ID: <20190422134701.GV32745@reaktio.net>
+References: <20190418015203.1636-1-dpsmith@apertussolutions.com>
+ <1cf0e5e9-2109-9517-49d9-88c5251cf156@citrix.com>
+ <6561d58b-3f57-66cd-362e-42c7131825d0@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=NvB3=SY=oracle.com=dongli.zhang@srs-us1.protection.inumbo.net>)
- id 1hIYBR-0001Rf-Ce
- for xen-devel@lists.xenproject.org; Mon, 22 Apr 2019 12:36:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=2DCv=SY=iki.fi=pasik@srs-us1.protection.inumbo.net>)
+ id 1hIZHn-0006l3-Ec
+ for xen-devel@lists.xenproject.org; Mon, 22 Apr 2019 13:47:07 +0000
+Content-Disposition: inline
+In-Reply-To: <6561d58b-3f57-66cd-362e-42c7131825d0@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,24 +26,32 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org, wei.liu2@citrix.com, konrad.wilk@oracle.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, julien.grall@arm.com, jbeulich@suse.com
+To: "Daniel P. Smith" <dpsmith.dev@gmail.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, xen-devel@lists.xenproject.org, George Dunlap <george.dunlap@citrix.com>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-UHJpbnQgbG9nIGF0IGxldmVsIFhFTkxPR19FUlIgKGluc3RlYWQgWEVOTE9HX0lORk8pIGFzIGRv
-bWFpbl9jcmFzaCgpCmluZGljYXRlcyB0aGVyZSBpcyBmYXRhbCBlcnJvci4KClNpZ25lZC1vZmYt
-Ynk6IERvbmdsaSBaaGFuZyA8ZG9uZ2xpLnpoYW5nQG9yYWNsZS5jb20+Ci0tLQogeGVuL2NvbW1v
-bi9ncmFudF90YWJsZS5jIHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAx
-IGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi9ncmFudF90YWJsZS5jIGIveGVu
-L2NvbW1vbi9ncmFudF90YWJsZS5jCmluZGV4IDgwNzI4ZWEuLjcyNWM2MTggMTAwNjQ0Ci0tLSBh
-L3hlbi9jb21tb24vZ3JhbnRfdGFibGUuYworKysgYi94ZW4vY29tbW9uL2dyYW50X3RhYmxlLmMK
-QEAgLTEyODIsNyArMTI4Miw3IEBAIHVubWFwX2NvbW1vbigKICAgICBpZiAoIHVubGlrZWx5KChy
-ZCA9IHJjdV9sb2NrX2RvbWFpbl9ieV9pZChkb20pKSA9PSBOVUxMKSApCiAgICAgewogICAgICAg
-ICAvKiBUaGlzIGNhbiBoYXBwZW4gd2hlbiBhIGdyYW50IGlzIGltcGxpY2l0bHkgdW5tYXBwZWQu
-ICovCi0gICAgICAgIGdkcHJpbnRrKFhFTkxPR19JTkZPLCAiQ291bGQgbm90IGZpbmQgZG9tYWlu
-ICVkXG4iLCBkb20pOworICAgICAgICBnZHByaW50ayhYRU5MT0dfRVJSLCAiQ291bGQgbm90IGZp
-bmQgZG9tYWluICVkXG4iLCBkb20pOwogICAgICAgICBkb21haW5fY3Jhc2gobGQpOyAvKiBuYXVn
-aHR5Li4uICovCiAgICAgICAgIHJldHVybjsKICAgICB9Ci0tIAoyLjcuNAoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gU2F0LCBBcHIgMjAsIDIwMTkgYXQgMDc6Mjc6NTVQTSAtMDQwMCwgRGFuaWVsIFAuIFNtaXRo
+IHdyb3RlOgo+IE9uIDQvMTgvMTkgOToxMSBBTSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiA+IE9u
+IDQvMTgvMTkgMjo1MiBBTSwgRGFuaWVsIFAuIFNtaXRoIHdyb3RlOgo+ID4+IFRoaXMgZGVhbHMg
+d2l0aCB0d28gY2FzdGluZyBpc3N1ZXMgZm9yIGNvbXBpbGluZyB1bmRlciBnbyAxLjExOgo+ID4+
+IC0gZXhwbGljaXRseSBjYXN0IHRvICpDLnhlbnRvb2xsb2dfbG9nZ2VyIGZvciBDdHgubG9nZ2Vy
+IHBvaW50ZXIKPiA+PiAtIGFkZCBjYXN0IHRvIHVuc2FmZS5Qb2ludGVyIGZvciB0aGUgQyBzdHJp
+bmcgY3BhdGgKPiA+Pgo+ID4+IFNpZ25lZC1vZmYtYnk6IERhbmllbCBQLiBTbWl0aCA8ZHBzbWl0
+aEBhcGVydHVzc29sdXRpb25zLmNvbT4KPiA+IAo+ID4gUmV2aWV3ZWQtYnk6IEdlb3JnZSBEdW5s
+YXAgPGdlb3JnZS5kdW5sYXBAY2l0cml4LmNvbT4KPiA+IAo+ID4gQlRXLCBkbyB5b3Uga25vdyBp
+ZiB0aGlzIHdpbGwgY29tcGlsZSBmb3Igb2xkZXIgdmVyc2lvbnMgb2YgZ28/Cj4gCj4gUGVyIHRo
+ZSBzdWdnZXN0aW9uIG9uIElSQywgSSBkaWQgYSB0ZXN0IGNvbXBpbGUgd2l0aCBnb2xhbmcgMS4x
+MC44IGFzCj4gdGhlIHZlcnNpb24gYXZhaWxhYmxlIHdpdGggVWJ1bnR1IDE4LjA0IHdhcyAxLjEw
+LjEuIFNpbmNlIHRoaXMgbWF0dGVycywKPiB0aGUgZW52aXJvbm1lbnQgd2FzIHNldHVwIHdpdGgg
+WGVuIDQuMTIgdG9vbHMuIElmIHRoZXJlIGFyZSBhZGRpdGlvbmFsCj4gdmFyaWF0aW9ucyB5b3Ug
+d291bGQgbGlrZSB0byBzZWUsIHBsZWFzZSBsZXQgbWUga25vdyBhcyBJIGFtIHVzaW5nIGEKPiBk
+b2NrZXIgY29udGFpbmVyIHNldHVwIGZvciByZXByb2R1Y2libGUgYnVpbGQgZW52aXJvbm1lbnRz
+IGFuZCBzaG91bGQgYmUKPiBhYmxlIHRvIHNwaW4gdXAgZGlmZmVyZW50IHZhcmlhdGlvbnMgZmFp
+cmx5IGVhc2lseS4KPgoKVWJ1bnR1IDE2LjA0IExUUyBzZWVtcyB0byBzaGlwIGdvbGFuZyAxLjYg
+YXMgYSBkZWZhdWx0LgoKQ2VudE9TNyB1c2VkIHRvIHNoaXAgZ29sYW5nIDEuOSBpbiBDZW50T1Mg
+Ny41IGFuZCBlYXJsaWVyIChpbiBleHRyYXMgcmVwbyksIGJ1dCBjdXJyZW50bHkgaW4gQ2VudE9T
+IDcuNisgaGFzIGdvbGFuZyAxLjEwIChpbiBTQ0wpIGFuZCAxLjExIChpbiBlcGVsKSBhdmFpbGFi
+bGUuCgoKVGhhbmtzLAoKLS0gUGFzaQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
