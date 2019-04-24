@@ -1,20 +1,20 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH] xenbus: drop useless LIST_HEAD in
- xenbus_write_watch() and xenbus_file_write()
-Date: Wed, 24 Apr 2019 14:50:04 -0400
-Message-ID: <f6ceb91a-394f-21a1-472e-8fb53d2f7cec__15812.6997923077$1556131896$gmane$org@oracle.com>
-References: <20190416040651.186468-1-maowenan@huawei.com>
+From: Mathieu Tarral <mathieu.tarral@protonmail.com>
+Subject: Re: VMI: singlestep event not received
+Date: Wed, 24 Apr 2019 19:11:15 +0000
+Message-ID: <IYKeY3DRbzPwRDUkrYcRwfK9dvmuUB6bSPUj8u_tfJBPFbe0BQo0AZZuTXW5DoIyjWE7A3WVwjjJAkkKW--M3_5sEwJR3krOpp4mH3mztVw=@protonmail.com>
+References: <YOhUr-yh3i9FqDqcdQqL11UtyVP7-YReXRJkQKBvuECQRZNHOrOcihig0vnBkLiEj4StXz6rFVftF7Zl4q14uG-CayajSBtGdke6doinhgI=@protonmail.com>
+ <1556116072.914.54.camel@amazon.de>
+Reply-To: Mathieu Tarral <mathieu.tarral@protonmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=E0+D=S2=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1hJMyf-00011Y-DU
- for xen-devel@lists.xenproject.org; Wed, 24 Apr 2019 18:50:41 +0000
-In-Reply-To: <20190416040651.186468-1-maowenan@huawei.com>
-Content-Language: en-US
+ <SRS0=mXGb=S2=protonmail.com=mathieu.tarral@srs-us1.protection.inumbo.net>)
+ id 1hJNIh-0002hX-7q
+ for xen-devel@lists.xenproject.org; Wed, 24 Apr 2019 19:11:23 +0000
+In-Reply-To: <1556116072.914.54.camel@amazon.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,16 +23,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mao Wenan <maowenan@huawei.com>, jgross@suse.com, sstabellini@kernel.org
-Cc: xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+To: "Nuernberger, Stefan" <snu@amazon.de>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gNC8xNi8xOSAxMjowNiBBTSwgTWFvIFdlbmFuIHdyb3RlOgo+IERyb3AgTElTVF9IRUFEIHdo
-ZXJlIHRoZSB2YXJpYWJsZSBpdCBkZWNsYXJlcyBpcyBuZXZlciB1c2VkLgo+Cj4gVGhlIGRlY2xh
-cmF0aW9ucyB3ZXJlIGludHJvZHVjZWQgd2l0aCB0aGUgZmlsZSwgYnV0IHRoZSBkZWNsYXJlZAo+
-IHZhcmlhYmxlcyB3ZXJlIG5vdCB1c2VkLgo+Cj4gRml4ZXM6IDExMDdiYTg4NWU0NjkoInhlbjog
-YWRkIHhlbmZzIHRvIGFsbG93IHVzZXJtb2RlIDwtPiBYZW4gaW50ZXJhY3Rpb24iKQo+IFNpZ25l
-ZC1vZmYtYnk6IE1hbyBXZW5hbiA8bWFvd2VuYW5AaHVhd2VpLmNvbT4KCgpBcHBsaWVkIHRvIGZv
-ci1saW51cy01LjIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkbmVzZGF5IDI0IEFwcmlsIDIwMTkgMTY6MjcsIE51ZXJuYmVyZ2VyLCBTdGVmYW4gPHNu
+dUBhbWF6b24uZGU+IHdyb3RlOgoKPiBPbiBTdW4sIDIwMTktMDQtMjEgYXQgMjI6MjYgKzAwMDAs
+IE1hdGhpZXUgVGFycmFsIHdyb3RlOgo+Cj4gPiBIaSwKPiA+IEknbSBoYXZpbmcgYW4gaXNzdWUg
+d2l0aCBYZW4ncyBWTUkgc3Vic3lzdGVtLgo+ID4gTXkgZ29hbCBpcyB0byBidWlsZCBhIHNtYWxs
+IGRlYnVnZ2VyIHRoYXQgY2FuIGJyZWFrIGF0IGFuCj4gPiBhcHBsaWNhdGlvbidzIGVudHJ5cG9p
+bnQKPiA+IG9uIFdpbmRvd3MgWFAsIHdoZW4gYSBuZXcgcHJvY2VzcyBpcyBiZWluZyBjcmVhdGVk
+Lgo+Cj4gVGhlcmUgd2FzIGFuIGFubm91bmNlbWVudCBhIHdoaWxlIGJhY2sgb24gdGhpcyBsaXN0
+IG9mIGEgbW9yZSBtb2Rlcm4KPiB4ZW4gZGVidWdnZXIgZm9yIFZNSSBwdXJwb3Nlcy4gTWF5YmUg
+eW91IGFyZSBtb3JlIGx1Y2t5IHdpdGggdGhhdCBvbmU/Cj4KPiBodHRwczovL3d3dy5uY2Nncm91
+cC50cnVzdC91cy9hYm91dC11cy9uZXdzcm9vbS1hbmQtZXZlbnRzL2Jsb2cvMjAxOS9qYQo+IG51
+YXJ5L3hlbmRiZy1hLWZ1bGwtZmVhdHVyZWQtZGVidWdnZXItZm9yLXRoZS14ZW4taHlwZXJ2aXNv
+ci8KPgo+IGh0dHBzOi8vZ2l0aHViLmNvbS9uY2Nncm91cC94ZW5kYmcKPgo+IChJIGhhdmUgbm90
+IHlldCB0cmllZCBpdCwgdGhvdWdoLikKClllcywgSSBoZWFyZCBvZiBpdCB2aWEgVGFtYXMuCkkg
+YWN0dWFsbHkgY29udGFjdGVkIHRoZSBkZXZlbG9wZXIgYW5kIHRyaWVkIHRvIHNlZSBob3cgd2Ug
+Y291bGQgd29yayB0b2dldGhlciBvbiB0aGUgc2FtZSBwcm9qZWN0LgoKSGUgbGlrZXMgdGhlIGlk
+ZWEgb2YgYmVpbmcgaHlwZXJ2aXNvci1hZ25vc3RpYywgYW5kIGJlaW5nIGJ1aWx0IHVwb24gYW4g
+YWJzdHJhY3Rpb24gbGF5ZXIuCgpUaGUgcmVhc29uIGhlIGNob29zZXMgbm90IHRvIHVzZSBMaWJW
+TUkgd2FzIGJlY2F1c2Ugb2YgdGhlIGxhY2sgb2Ygc3VwcG9ydCBmb3IgWGVuIFBWIGd1ZXN0cywg
+SUlSQy4KClBpbmcgQFRhbWFzLCBtYXliZSB5b3UgaGF2ZSBhbiBvcGluaW9uIGhlcmUuCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
