@@ -7,66 +7,64 @@ X-Spam-Status: No, score=-3.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C6DFC10F11
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2019 18:50:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EB1AC10F11
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2019 18:50:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 18A4F208E4
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2019 18:50:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6F5512183E
+	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2019 18:50:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="18swpV5x"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18A4F208E4
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="JrjUkmzf"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F5512183E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hJMyA-0000xM-Vk; Wed, 24 Apr 2019 18:50:10 +0000
+	id 1hJMyg-00011m-9r; Wed, 24 Apr 2019 18:50:42 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=E0+D=S2=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1hJMy9-0000x8-GK
- for xen-devel@lists.xenproject.org; Wed, 24 Apr 2019 18:50:09 +0000
-X-Inumbo-ID: c7d6c3ab-66c1-11e9-92d7-bc764e045a96
-Received: from userp2130.oracle.com (unknown [156.151.31.86])
+ id 1hJMyf-00011Y-DU
+ for xen-devel@lists.xenproject.org; Wed, 24 Apr 2019 18:50:41 +0000
+X-Inumbo-ID: db28aeeb-66c1-11e9-92d7-bc764e045a96
+Received: from userp2120.oracle.com (unknown [156.151.31.85])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id c7d6c3ab-66c1-11e9-92d7-bc764e045a96;
- Wed, 24 Apr 2019 18:50:08 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x3OImU4X096972;
- Wed, 24 Apr 2019 18:49:50 GMT
+ id db28aeeb-66c1-11e9-92d7-bc764e045a96;
+ Wed, 24 Apr 2019 18:50:40 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x3OImhgW115665;
+ Wed, 24 Apr 2019 18:50:34 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=subject : to : cc :
  references : from : message-id : date : mime-version : in-reply-to :
  content-type : content-transfer-encoding; s=corp-2018-07-02;
- bh=Nqh3FmZoiA8fVrGGmXEfdU9rJi41LOWGBbW3qNL97oU=;
- b=18swpV5xSDYeArnkSw0H0LwayU75YG3g/Xc3SyhZQDs82lMMe5fhwMRK4eHNSi4kDaZs
- gWOIinnSTwQpY1L5r4SgVVJb2pBqYLiFwM4nn3yv3y4cbC05qUCJ1L8VEW4wnK1TTcXP
- xjfV5tsjXMGcTYZnS8UM1upTsEs+WMlgVyAx1WY407o685z0/YECeaA4X2SXL0ogDlMP
- X4xi5q9WZpuqN7roqs8sJY8F1lytwHyYMS2qW7ge7ozsmW2qUdXEgGawCTf8MR2DhqGv
- SU8xvMCNxf2o506LPBXX/gzAUHXOhF+jEdNOXgE0q5FcobwKXPIAVM0TtaP1f8J9/jPY vw== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2130.oracle.com with ESMTP id 2rytut4853-1
+ bh=cMMzhTIuWub7MMcDJE3AshDO4gvY2BgAypojZA+DQR4=;
+ b=JrjUkmzfElN4+g1HpXVQ9vcmRpv3uchcjuO1wtM8U9G0/V22/aGTtfPCQ5dMEQuLWb7q
+ c9yrScjhq8rNToKxFSD0E4ULWVTUUhMXRPa94ocifM+AdR1pc8I5r02pxRe8lbWkogWt
+ 6sTwD22QuIQJ1GJ895mrogtRPJjwhuf9+peUmc3s8yZXI0jloFfE43ai1HRdUnl5ZJqF
+ FGo8UKnGYdoUEpIk/BeLQQR8IIBUxjoSEjj/1N9AslQGjFaKmTqvy0ZP3up7zyLUKfNt
+ IiEF3BuHQbpPICEiMf29+RgKOdQoWZr10CGPZDu5qUbZdmbMn123Yl5nyrY7KSy0Wz5K zA== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2120.oracle.com with ESMTP id 2ryv2qc5k5-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 24 Apr 2019 18:49:50 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x3OImToR129127;
- Wed, 24 Apr 2019 18:49:49 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3020.oracle.com with ESMTP id 2s0fv3qvvb-1
+ Wed, 24 Apr 2019 18:50:34 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x3OImmNN056781;
+ Wed, 24 Apr 2019 18:50:34 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by userp3020.oracle.com with ESMTP id 2s0dwf0krm-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 24 Apr 2019 18:49:49 +0000
+ Wed, 24 Apr 2019 18:50:34 +0000
 Received: from abhmp0022.oracle.com (abhmp0022.oracle.com [141.146.116.28])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x3OInm5P021208;
- Wed, 24 Apr 2019 18:49:48 GMT
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x3OIoXkE002565;
+ Wed, 24 Apr 2019 18:50:33 GMT
 Received: from bostrovs-us.us.oracle.com (/10.152.32.65)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Wed, 24 Apr 2019 11:49:48 -0700
-To: "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>, "David S. Miller" <davem@davemloft.net>
-References: <20190415211141.GA1732@embeddedor>
+ with ESMTP ; Wed, 24 Apr 2019 11:50:33 -0700
+To: Mao Wenan <maowenan@huawei.com>, jgross@suse.com, sstabellini@kernel.org
+References: <20190416040651.186468-1-maowenan@huawei.com>
 From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=boris.ostrovsky@oracle.com; prefer-encrypt=mutual; keydata=
@@ -112,30 +110,30 @@ Autocrypt: addr=boris.ostrovsky@oracle.com; prefer-encrypt=mutual; keydata=
  Fm5PY8YtX576DchSP6qJC57/eAAe/9ztZdVAdesQwGb9hZHJc75B+VNm4xrh/PJO6c1THqdQ
  19WVJ+7rDx3PhVncGlbAOiiiE3NOFPJ1OQYxPKtpBUukAlOTnkKE6QcA4zckFepUkfmBV1wM
  Jg6OxFYd01z+a+oL
-Message-ID: <6fd7d2b3-5a02-12cb-bf0e-c35ae535a90d@oracle.com>
-Date: Wed, 24 Apr 2019 14:49:19 -0400
+Message-ID: <f6ceb91a-394f-21a1-472e-8fb53d2f7cec@oracle.com>
+Date: Wed, 24 Apr 2019 14:50:04 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <20190415211141.GA1732@embeddedor>
+In-Reply-To: <20190416040651.186468-1-maowenan@huawei.com>
 Content-Language: en-US
 X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9237
  signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
  malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=826
  adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.0.1-1810050000 definitions=main-1904240135
 X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9237
  signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
  priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=851 adultscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
  definitions=main-1904240135
-Subject: Re: [Xen-devel] [PATCH net-next] xen-netfront: mark expected switch
- fall-through
+Subject: Re: [Xen-devel] [PATCH] xenbus: drop useless LIST_HEAD in
+ xenbus_write_watch() and xenbus_file_write()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -146,28 +144,19 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
- Kees Cook <keescook@chromium.org>, netdev@vger.kernel.org
+Cc: xen-devel@lists.xenproject.org, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gNC8xNS8xOSA1OjExIFBNLCBHdXN0YXZvIEEuIFIuIFNpbHZhIHdyb3RlOgo+IEluIHByZXBh
-cmF0aW9uIHRvIGVuYWJsaW5nIC1XaW1wbGljaXQtZmFsbHRocm91Z2gsIG1hcmsgc3dpdGNoCj4g
-Y2FzZXMgd2hlcmUgd2UgYXJlIGV4cGVjdGluZyB0byBmYWxsIHRocm91Z2guCj4KPiBUaGlzIHBh
-dGNoIGZpeGVzIHRoZSBmb2xsb3dpbmcgd2FybmluZzoKPgo+IGRyaXZlcnMvbmV0L3hlbi1uZXRm
-cm9udC5jOiBJbiBmdW5jdGlvbiDigJhuZXRiYWNrX2NoYW5nZWTigJk6Cj4gZHJpdmVycy9uZXQv
-eGVuLW5ldGZyb250LmM6MjAzODo2OiB3YXJuaW5nOiB0aGlzIHN0YXRlbWVudCBtYXkgZmFsbCB0
-aHJvdWdoIFstV2ltcGxpY2l0LWZhbGx0aHJvdWdoPV0KPiAgICBpZiAoZGV2LT5zdGF0ZSA9PSBY
-ZW5idXNTdGF0ZUNsb3NlZCkKPiAgICAgICBeCj4gZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmM6
-MjA0MToyOiBub3RlOiBoZXJlCj4gICBjYXNlIFhlbmJ1c1N0YXRlQ2xvc2luZzoKPiAgIF5+fn4K
-Pgo+IFdhcm5pbmcgbGV2ZWwgMyB3YXMgdXNlZDogLVdpbXBsaWNpdC1mYWxsdGhyb3VnaD0zCj4K
-PiBOb3RpY2UgdGhhdCwgaW4gdGhpcyBwYXJ0aWN1bGFyIGNhc2UsIHRoZSBjb2RlIGNvbW1lbnQg
-aXMgbW9kaWZpZWQKPiBpbiBhY2NvcmRhbmNlIHdpdGggd2hhdCBHQ0MgaXMgZXhwZWN0aW5nIHRv
-IGZpbmQuCj4KPiBUaGlzIHBhdGNoIGlzIHBhcnQgb2YgdGhlIG9uZ29pbmcgZWZmb3J0cyB0byBl
-bmFibGUKPiAtV2ltcGxpY2l0LWZhbGx0aHJvdWdoLgo+Cj4gU2lnbmVkLW9mZi1ieTogR3VzdGF2
-byBBLiBSLiBTaWx2YSA8Z3VzdGF2b0BlbWJlZGRlZG9yLmNvbT4KCkFwcGxpZWQgdG8gZm9yLWxp
-bnVzLTUuMgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gNC8xNi8xOSAxMjowNiBBTSwgTWFvIFdlbmFuIHdyb3RlOgo+IERyb3AgTElTVF9IRUFEIHdo
+ZXJlIHRoZSB2YXJpYWJsZSBpdCBkZWNsYXJlcyBpcyBuZXZlciB1c2VkLgo+Cj4gVGhlIGRlY2xh
+cmF0aW9ucyB3ZXJlIGludHJvZHVjZWQgd2l0aCB0aGUgZmlsZSwgYnV0IHRoZSBkZWNsYXJlZAo+
+IHZhcmlhYmxlcyB3ZXJlIG5vdCB1c2VkLgo+Cj4gRml4ZXM6IDExMDdiYTg4NWU0NjkoInhlbjog
+YWRkIHhlbmZzIHRvIGFsbG93IHVzZXJtb2RlIDwtPiBYZW4gaW50ZXJhY3Rpb24iKQo+IFNpZ25l
+ZC1vZmYtYnk6IE1hbyBXZW5hbiA8bWFvd2VuYW5AaHVhd2VpLmNvbT4KCgpBcHBsaWVkIHRvIGZv
+ci1saW51cy01LjIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
