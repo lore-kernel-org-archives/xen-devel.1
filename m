@@ -1,4 +1,4 @@
-Return-Path: <SRS0=MKw+=S2=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=w6oi=S3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
@@ -6,45 +6,46 @@ X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BA48CC10F11
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2019 23:44:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA627C10F11
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Apr 2019 01:53:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 906732089F
-	for <xen-devel@archiver.kernel.org>; Wed, 24 Apr 2019 23:44:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 906732089F
+	by mail.kernel.org (Postfix) with ESMTPS id A4EC320675
+	for <xen-devel@archiver.kernel.org>; Thu, 25 Apr 2019 01:53:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4EC320675
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hJRYo-0007JC-IT; Wed, 24 Apr 2019 23:44:18 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+	id 1hJTYs-0007zP-Mi; Thu, 25 Apr 2019 01:52:30 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=mgLR=S2=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hJRYn-0007Io-9o
- for xen-devel@lists.xenproject.org; Wed, 24 Apr 2019 23:44:17 +0000
-X-Inumbo-ID: de6dfe48-66ea-11e9-92d7-bc764e045a96
+ <SRS0=jpZV=S3=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1hJTYs-0007zC-6g
+ for xen-devel@lists.xenproject.org; Thu, 25 Apr 2019 01:52:30 +0000
+X-Inumbo-ID: c4c2f822-66fc-11e9-95a0-9f03c734ebb9
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id de6dfe48-66ea-11e9-92d7-bc764e045a96;
- Wed, 24 Apr 2019 23:44:15 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c4c2f822-66fc-11e9-95a0-9f03c734ebb9;
+ Thu, 25 Apr 2019 01:52:23 +0000 (UTC)
 Received: from host146.205.237.98.conversent.net ([205.237.98.146]
  helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <aliasfile-bounces@xenproject.org>)
- id 1hJRYk-0007uU-Qv; Wed, 24 Apr 2019 23:44:14 +0000
+ id 1hJTYk-0003EP-Gy; Thu, 25 Apr 2019 01:52:22 +0000
 Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
  by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <osstest-admin@xenproject.org>)
- id 1hJRYk-0005Wr-3n; Wed, 24 Apr 2019 23:44:14 +0000
+ id 1hJTYj-0004X6-FK; Thu, 25 Apr 2019 01:52:21 +0000
 Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
  4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1hJRYk-0002on-3B; Wed, 24 Apr 2019 23:44:14 +0000
+ id 1hJTYj-0001K6-Eh; Thu, 25 Apr 2019 01:52:21 +0000
 To: xen-devel@lists.xenproject.org,
     osstest-admin@xenproject.org
-Message-ID: <osstest-135272-mainreport@xen.org>
+Message-ID: <osstest-135277-mainreport@xen.org>
 MIME-Version: 1.0
 X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-i386:debian-hvm-install:fail:regression
  xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
@@ -55,8 +56,8 @@ X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-i386:
 X-Osstest-Versions-This: xen=dc497635d93f6672f82727ad97a55205177be2aa
 X-Osstest-Versions-That: xen=cb70a26f78848fe45f593f7ebc9cfaac760a791b
 From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 24 Apr 2019 23:44:14 +0000
-Subject: [Xen-devel] [xen-unstable-smoke test] 135272: regressions - FAIL
+Date: Thu, 25 Apr 2019 01:52:21 +0000
+Subject: [Xen-devel] [xen-unstable-smoke test] 135277: regressions - FAIL
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,10 +72,10 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190424234414.O4vxtHyx_3UCgSPhPOWapmcOqyCPrMZoTuPklkAqyIs@z>
+Message-ID: <20190425015221.JgxdHQ5Qk8KQ0KlCpY0rw266YiZMCk-trhBMbtQLOi0@z>
 
-ZmxpZ2h0IDEzNTI3MiB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNTI3Mi8KClJlZ3Jlc3Npb25z
+ZmxpZ2h0IDEzNTI3NyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNTI3Ny8KClJlZ3Jlc3Npb25z
 IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
 ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC14bC1x
 ZW11dS1kZWJpYW5odm0taTM4NiAxMCBkZWJpYW4taHZtLWluc3RhbGwgZmFpbCBSRUdSLiB2cy4g
@@ -91,8 +92,8 @@ YzQ5NzYzNWQ5M2Y2NjcyZjgyNzI3YWQ5N2E1NTIwNTE3N2JlMmFhCmJhc2VsaW5lIHZlcnNpb246
 CiB4ZW4gICAgICAgICAgICAgICAgICBjYjcwYTI2Zjc4ODQ4ZmU0NWY1OTNmN2ViYzljZmFhYzc2
 MGE3OTFiCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMzM5OTEgIDIwMTktMDMtMjIgMTU6MDA6NDYg
 WiAgIDMzIGRheXMKRmFpbGluZyBzaW5jZSAgICAgICAgMTM0MDY4ICAyMDE5LTAzLTI1IDEyOjAw
-OjUxIFogICAzMCBkYXlzICAxNzIgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTM1MTk4
-ICAyMDE5LTA0LTIzIDE4OjAwOjM2IFogICAgMSBkYXlzICAgIDkgYXR0ZW1wdHMKCi0tLS0tLS0t
+OjUxIFogICAzMCBkYXlzICAxNzMgYXR0ZW1wdHMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTM1MTk4
+ICAyMDE5LTA0LTIzIDE4OjAwOjM2IFogICAgMSBkYXlzICAgMTAgYXR0ZW1wdHMKCi0tLS0tLS0t
 LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9w
 bGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQWxleGFuZHJ1IElzYWlsYSA8
 YWlzYWlsYUBiaXRkZWZlbmRlci5jb20+CiAgQWxleGFuZHJ1IFN0ZWZhbiBJU0FJTEEgPGFpc2Fp
