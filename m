@@ -1,16 +1,23 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] xen/arm: skip first page when RAM starts at 0x0
-Date: Thu, 25 Apr 2019 10:51:55 -0700
-Message-ID: <1556214715-22030-1-git-send-email-sstabellini@kernel.org>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: [PATCH 3/7] xen/arm: tlbflush: Clarify the TLB
+ helpers name
+Date: Thu, 25 Apr 2019 21:00:56 +0300
+Message-ID: <7c176414-4e3c-d2ed-e50d-2cf5992fa2cd@gmail.com>
+References: <20190417175815.16905-1-julien.grall@arm.com>
+ <20190417175815.16905-4-julien.grall@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=xa9b=S3=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1hJiXP-0005EA-Ni
- for xen-devel@lists.xenproject.org; Thu, 25 Apr 2019 17:51:59 +0000
+ <SRS0=+mKo=S3=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1hJig8-00066u-Ln
+ for xen-devel@lists.xenproject.org; Thu, 25 Apr 2019 18:01:00 +0000
+Received: by mail-lj1-x241.google.com with SMTP id h21so415247ljk.13
+ for <xen-devel@lists.xenproject.org>; Thu, 25 Apr 2019 11:00:59 -0700 (PDT)
+In-Reply-To: <20190417175815.16905-4-julien.grall@arm.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,28 +26,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <stefanos@xilinx.com>, julien.grall@arm.com, sstabellini@kernel.org, 206497@studenti.unimore.it
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+Cc: Oleksandr_Tyshchenko@epam.com, sstabellini@kernel.org, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-WGVuIGFzc3VtZXMgdGhhdCBSQU0gc3RhcnRzIGF0IGFkZHJlc3NlcyBncmVhdGVyIHRoYW4gMHgw
-IGluIGEgZmV3CnBsYWNlcy4gVGhlIFBEWCBjb2RlIGlzIG9uZSBvZiB0aGVtIGJ1dCB0aGVyZSBh
-cmUgbW9yZS4KCkZvciBub3csIHNraXAgdGhlIGZpcnN0IHBhZ2UgaW4gbWVtb3J5IHdoZW4gdGhl
-IHN0YXJ0IGFkZGVzcyBpcyAweDAuCgpTaWduZWQtb2ZmLWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkg
-PHN0ZWZhbm9zQHhpbGlueC5jb20+Ci0tLQogeGVuL2FyY2gvYXJtL2Jvb3RmZHQuYyB8IDcgKysr
-KysrKwogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL3hlbi9h
-cmNoL2FybS9ib290ZmR0LmMgYi94ZW4vYXJjaC9hcm0vYm9vdGZkdC5jCmluZGV4IDg5MWI0YjYu
-LjJhZTQyMzggMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL2FybS9ib290ZmR0LmMKKysrIGIveGVuL2Fy
-Y2gvYXJtL2Jvb3RmZHQuYwpAQCAtMTU3LDYgKzE1NywxMyBAQCBzdGF0aWMgdm9pZCBfX2luaXQg
-cHJvY2Vzc19tZW1vcnlfbm9kZShjb25zdCB2b2lkICpmZHQsIGludCBub2RlLAogICAgICAgICBk
-ZXZpY2VfdHJlZV9nZXRfcmVnKCZjZWxsLCBhZGRyZXNzX2NlbGxzLCBzaXplX2NlbGxzLCAmc3Rh
-cnQsICZzaXplKTsKICAgICAgICAgaWYgKCAhc2l6ZSApCiAgICAgICAgICAgICBjb250aW51ZTsK
-KworICAgICAgICAvKgorICAgICAgICAgKiBYZW4gY2Fubm90IGRlYWwgd2l0aCBtZW1vcnkgc3Rh
-cnRpbmcgYXQgMHgwLiBCdXJuIHRoZSBmaXJzdAorICAgICAgICAgKiBwYWdlLgorICAgICAgICAg
-Ki8KKyAgICAgICAgaWYgKCBzdGFydCA9PSAwICkKKyAgICAgICAgICAgIHN0YXJ0ICs9IFBBR0Vf
-U0laRTsKICAgICAgICAgYm9vdGluZm8ubWVtLmJhbmtbYm9vdGluZm8ubWVtLm5yX2JhbmtzXS5z
-dGFydCA9IHN0YXJ0OwogICAgICAgICBib290aW5mby5tZW0uYmFua1tib290aW5mby5tZW0ubnJf
-YmFua3NdLnNpemUgPSBzaXplOwogICAgICAgICBib290aW5mby5tZW0ubnJfYmFua3MrKzsKLS0g
-CjEuOS4xCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAxNy4wNC4xOSAyMDo1OCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFRMQiBoZWxwZXJzIGlu
+IHRoZSBoZWFkZXJzIHRsYmZsdXNoLmggYXJlIGN1cnJlbnRseSBxdWl0ZSBjb25mdXNpbmcgdG8K
+PiB1c2UgdGhlIG5hbWUgbWF5IGxlYWQgdG8gdGhpbmsgdGhleSBhcmUgZGVhbGluZyB3aXRoIGh5
+cGVydmlzb3JzIFRMQnMKPiB3aGlsZSB0aGV5IGFjdHVhbGx5IGRlYWwgd2l0aCBndWVzdCBUTEJz
+Lgo+IAo+IFJlbmFtZSB0aGVtIHRvIG1ha2UgaXQgY2xlYXJlciB0aGF0IHdlIGFyZSBkZWFsaW5n
+IHdpdGggZ3Vlc3QgVExCcy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGll
+bi5ncmFsbEBhcm0uY29tPgoKUmV2aWV3ZWQtYnk6IEFuZHJpaSBBbmlzb3YgPGFuZHJpaV9hbmlz
+b3ZAZXBhbS5jb20+CgoKCi0tIApTaW5jZXJlbHksCkFuZHJpaSBBbmlzb3YuCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
