@@ -2,66 +2,47 @@ Return-Path: <SRS0=7THE=S4=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3E11C43218
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2019 10:36:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C06B6C43219
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2019 10:58:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 89670206DD
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2019 10:36:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89670206DD
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 93664206E0
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Apr 2019 10:58:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93664206E0
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hJyCu-0002CD-BP; Fri, 26 Apr 2019 10:35:52 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=O+8I=S4=xenproject.org=prvs=01218a860=citrix-osstest@srs-us1.protection.inumbo.net>)
- id 1hJyCt-0002C4-JV
- for xen-devel@lists.xenproject.org; Fri, 26 Apr 2019 10:35:51 +0000
-X-Inumbo-ID: 0c6854c0-680f-11e9-b297-ef78623ab05b
-Received: from SMTP03.CITRIX.COM (unknown [162.221.156.55])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0c6854c0-680f-11e9-b297-ef78623ab05b;
- Fri, 26 Apr 2019 10:35:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,397,1549929600"; d="scan'208";a="84488518"
-To: <xen-devel@lists.xenproject.org>, <osstest-admin@xenproject.org>
-Message-ID: <osstest-84146-mainreport@xen.org>
-MIME-Version: 1.0
-X-Osstest-Failures: distros-debian-jessie:build-armhf-pvops:<job
- status>:broken:regression
- distros-debian-jessie:build-i386:<job status>:broken:regression
- distros-debian-jessie:build-amd64-pvops:<job status>:broken:regression
- distros-debian-jessie:build-armhf:<job status>:broken:regression
- distros-debian-jessie:build-amd64:<job status>:broken:regression
- distros-debian-jessie:build-i386-pvops:<job status>:broken:regression
- distros-debian-jessie:build-armhf-pvops:syslog-server:running:regression
- distros-debian-jessie:build-armhf:syslog-server:running:regression
- distros-debian-jessie:test-amd64-i386-i386-jessie-netboot-pvgrub:build-check(1):blocked:nonblocking
- distros-debian-jessie:test-amd64-i386-amd64-jessie-netboot-pygrub:build-check(1):blocked:nonblocking
- distros-debian-jessie:test-amd64-amd64-i386-jessie-netboot-pygrub:build-check(1):blocked:nonblocking
- distros-debian-jessie:test-armhf-armhf-armhf-jessie-netboot-pygrub:build-check(1):blocked:nonblocking
- distros-debian-jessie:test-amd64-amd64-amd64-jessie-netboot-pvgrub:build-check(1):blocked:nonblocking
- distros-debian-jessie:build-armhf-pvops:host-install(4):broken:nonblocking
- distros-debian-jessie:build-armhf:host-install(4):broken:nonblocking
- distros-debian-jessie:build-amd64:host-install(4):broken:nonblocking
- distros-debian-jessie:build-i386-pvops:host-install(4):broken:nonblocking
- distros-debian-jessie:build-i386:host-install(4):broken:nonblocking
- distros-debian-jessie:build-amd64-pvops:host-install(4):broken:nonblocking
- distros-debian-jessie:build-armhf-pvops:capture-logs:broken:nonblocking
- distros-debian-jessie:build-armhf:capture-logs:broken:nonblocking
-X-Osstest-Versions-That: flight=84037
-From: Platform Team regression test user <citrix-osstest@xenproject.org>
-Date: Fri, 26 Apr 2019 11:35:30 +0100
-Subject: [Xen-devel] [distros-debian-jessie test] 84146: trouble:
- blocked/broken
+	id 1hJyYC-0003nf-6d; Fri, 26 Apr 2019 10:57:52 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=D5Za=S4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hJyYB-0003na-CJ
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2019 10:57:51 +0000
+X-Inumbo-ID: 2101b36d-6812-11e9-843c-bc764e045a96
+Received: from prv1-mh.provo.novell.com (unknown [137.65.248.33])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id 2101b36d-6812-11e9-843c-bc764e045a96;
+ Fri, 26 Apr 2019 10:57:49 +0000 (UTC)
+Received: from INET-PRV1-MTA by prv1-mh.provo.novell.com
+ with Novell_GroupWise; Fri, 26 Apr 2019 04:57:48 -0600
+Message-Id: <5CC2E4260200007800229686@prv1-mh.provo.novell.com>
+X-Mailer: Novell GroupWise Internet Agent 18.1.0 
+Date: Fri, 26 Apr 2019 04:57:42 -0600
+From: "Jan Beulich" <JBeulich@suse.com>
+To: "Andrew Cooper" <andrew.cooper3@citrix.com>
+References: <1556274165-31022-1-git-send-email-andrew.cooper3@citrix.com>
+In-Reply-To: <1556274165-31022-1-git-send-email-andrew.cooper3@citrix.com>
+Mime-Version: 1.0
+Content-Disposition: inline
+Subject: Re: [Xen-devel] [PATCH] x86/cpu: Use cpu_has_sep for configuring
+ the SYSENTER MSRs
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,66 +53,24 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+ FionaLi-oc <fionali-oc@zhaoxin.com>, Wei Liu <wei.liu2@citrix.com>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190426103530.igoVe1L5qeoQJzLcRhD0OrsuP2-cBon_k6p1sVtu6FE@z>
+Message-ID: <20190426105742.Fs_I532yiR-OSC-sD_I_XTPFV_0qPFzNKNaUI268CW4@z>
 
-ZmxpZ2h0IDg0MTQ2IGRpc3Ryb3MtZGViaWFuLWplc3NpZSByZWFsIFtyZWFsXQpodHRwOi8vb3Nz
-dGVzdC54ZW5zb3VyY2UuY29tL29zc3Rlc3QvbG9ncy84NDE0Ni8KCkZhaWx1cmVzIGFuZCBwcm9i
-bGVtcyB3aXRoIHRlc3RzIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUg
-YmxvY2tpbmcsCmluY2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQt
-YXJtaGYtcHZvcHMgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJy
-b2tlbgogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAg
-ICAgICAgICAgIGJyb2tlbgogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICA8am9iIHN0
-YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAg
-ICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVpbGQtYW1kNjQgICAg
-ICAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAgIGJyb2tlbgogYnVp
-bGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICA8am9iIHN0YXR1cz4gICAgICAgICAgICAgICAg
-IGJyb2tlbgogYnVpbGQtYXJtaGYtcHZvcHMgICAgICAgICAgICAgMyBzeXNsb2ctc2VydmVyICAg
-ICAgICAgICAgICAgIHJ1bm5pbmcKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgIDMgc3lz
-bG9nLXNlcnZlciAgICAgICAgICAgICAgICBydW5uaW5nCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1
-Y2NlZWQsIGJ1dCBhcmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1pMzg2LWkzODYtamVzc2ll
-LW5ldGJvb3QtcHZncnViICAxIGJ1aWxkLWNoZWNrKDEpICAgICAgIGJsb2NrZWQgbi9hCiB0ZXN0
-LWFtZDY0LWkzODYtYW1kNjQtamVzc2llLW5ldGJvb3QtcHlncnViICAxIGJ1aWxkLWNoZWNrKDEp
-ICAgICAgYmxvY2tlZCBuL2EKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1qZXNzaWUtbmV0Ym9vdC1w
-eWdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgICBibG9ja2VkIG4vYQogdGVzdC1hcm1oZi1hcm1o
-Zi1hcm1oZi1qZXNzaWUtbmV0Ym9vdC1weWdydWIgIDEgYnVpbGQtY2hlY2soMSkgICAgIGJsb2Nr
-ZWQgbi9hCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LWplc3NpZS1uZXRib290LXB2Z3J1YiAgMSBi
-dWlsZC1jaGVjaygxKSAgICAgYmxvY2tlZCBuL2EKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAg
-ICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlrZSA4NDAzNwogYnVp
-bGQtYXJtaGYgICAgICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkgICAgICAgICAgICAg
-IGJyb2tlbiBsaWtlIDg0MDM3CiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICA0IGhvc3Qt
-aW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgODQwMzcKIGJ1aWxkLWkzODYtcHZv
-cHMgICAgICAgICAgICAgIDQgaG9zdC1pbnN0YWxsKDQpICAgICAgICAgICAgICBicm9rZW4gbGlr
-ZSA4NDAzNwogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgNCBob3N0LWluc3RhbGwoNCkg
-ICAgICAgICAgICAgIGJyb2tlbiBsaWtlIDg0MDM3CiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAg
-ICAgICA0IGhvc3QtaW5zdGFsbCg0KSAgICAgICAgICAgICAgYnJva2VuIGxpa2UgODQwMzcKIGJ1
-aWxkLWFybWhmLXB2b3BzICAgICAgICAgICAgIDUgY2FwdHVyZS1sb2dzICAgICAgICAgICAgICAg
-ICBicm9rZW4gbGlrZSA4NDAzNwogYnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgNSBjYXB0
-dXJlLWxvZ3MgICAgICAgICAgICAgICAgIGJyb2tlbiBsaWtlIDg0MDM3CgpiYXNlbGluZSB2ZXJz
-aW9uOgogZmxpZ2h0ICAgICAgICAgICAgICAgODQwMzcKCmpvYnM6CiBidWlsZC1hbWQ2NCAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1
-aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBicm9rZW4gIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJyb2tlbiAgCiBidWlsZC1hbWQ2NC1wdm9wcyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJva2VuICAKIGJ1aWxkLWFybWhmLXB2b3Bz
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicm9rZW4gIAogYnVp
-bGQtaTM4Ni1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IGJyb2tlbiAgCiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LWplc3NpZS1uZXRib290LXB2Z3J1YiAg
-ICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1kNjQtaTM4Ni1pMzg2LWplc3NpZS1uZXRi
-b290LXB2Z3J1YiAgICAgICAgICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hbWQ2NC1pMzg2LWFt
-ZDY0LWplc3NpZS1uZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0
-LWFybWhmLWFybWhmLWFybWhmLWplc3NpZS1uZXRib290LXB5Z3J1YiAgICAgICAgICAgICAgICAg
-YmxvY2tlZCAKIHRlc3QtYW1kNjQtYW1kNjQtaTM4Ni1qZXNzaWUtbmV0Ym9vdC1weWdydWIgICAg
-ICAgICAgICAgICAgICBibG9ja2VkIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rlc3Qu
-eHMuY2l0cml0ZS5uZXQKbG9nczogL2hvbWUvb3NzdGVzdC9sb2dzCmltYWdlczogL2hvbWUvb3Nz
-dGVzdC9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxlIGF0CiAg
-ICBodHRwOi8vb3NzdGVzdC54ZW5zb3VyY2UuY29tL29zc3Rlc3QvbG9ncwoKVGVzdCBoYXJuZXNz
-IGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW5zb3VyY2UuY29tL2dp
-dHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2ggbm90IGFwcGxpY2FibGUuCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDI2LjA0LjE5IGF0IDEyOjIyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gQ3VycmVudGx5LCBjb25maWd1cmF0aW9uIG9mIHRoZSBTWVNFTlRFUiBNU1JzIGFyZSBi
+ZWhpbmQgYSB2ZW5kb3IgY2hlY2sgZm9yCj4gSW50ZWwgYW5kIENlbnRhdXIsIGJ1dCB0aGlzIG1p
+c3NlcyBaaGFveGluLgo+IAo+IFVzZSB0aGUgZmVhdHVyZSBiaXQsIHJhdGhlciB0aGFuIGEgdmVu
+ZG9yIGNoZWNrLiAgY3B1X2hhc19zZXAgaXMgY2xlYXJlZCBlYXJseQo+IGZvciBBTUQgcHJvY2Vz
+c29ycywgd2hpY2ggY2FuJ3QgdXNlIFNZU0VOVEVSL1NZU0VYSVQgd2hlbiBvcGVyYXRpbmcgaW4g
+bG9uZwo+IG1vZGUuCj4gCj4gU3VnZ2VzdGVkLWJ5OiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3Vz
+ZS5jb20+Cj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
+cml4LmNvbT4KClJldmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
