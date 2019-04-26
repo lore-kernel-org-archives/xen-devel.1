@@ -1,20 +1,28 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 1/2] xen: credit2: avoid using
- cpumask_weight() in hot-paths
-Date: Fri, 26 Apr 2019 15:01:15 +0200
-Message-ID: <49b2fb80a576cff4b26ae09668cc8b5b243a9f9a.camel@suse.com>
-References: <155577364571.25746.11988517450711182732.stgit@wayrath>
- <155577388014.25746.13361382203794112287.stgit@wayrath>
- <c7f0e1c1-f69f-3c53-7147-21e24d4618b1@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [PATCH 2/3] x86/mem_sharing: replace use of
+ page_lock/unlock with our own lock
+Date: Fri, 26 Apr 2019 07:12:22 -0600
+Message-ID: <5CC303B60200007800229748@prv1-mh.provo.novell.com>
+References: <20190425153252.14795-1-tamas@tklengyel.com>
+ <20190425153252.14795-2-tamas@tklengyel.com>
+ <ced3d7b5-e683-f17c-b068-2d372f59c498@citrix.com>
+ <CABfawhn4eS2aB8+aZjo10ixmtzsOrSfugEz7ELMM9uMqC-6dSw@mail.gmail.com>
+ <495a1395-06d4-2ce3-7216-1417ba41fe07@citrix.com>
+ <CABfawhm8KxHwY4PB8u-EBqw0K+G1Hv9S9iTC_RYaqOY15bxX4A@mail.gmail.com>
+ <5CC2CE3D02000078002295C7@prv1-mh.provo.novell.com>
+ <CABfawh=fLVp+b-K_Que5UEDDzMoYysEtVP8itb+cWoXAJdToSA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============2104919476016393453=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=9dDU=S4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hK0Tp-0005oH-1B
- for xen-devel@lists.xenproject.org; Fri, 26 Apr 2019 13:01:29 +0000
-In-Reply-To: <c7f0e1c1-f69f-3c53-7147-21e24d4618b1@citrix.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=D5Za=S4=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hK0eU-0006gi-N1
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2019 13:12:30 +0000
+In-Reply-To: <CABfawh=fLVp+b-K_Que5UEDDzMoYysEtVP8itb+cWoXAJdToSA@mail.gmail.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,112 +31,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
-Cc: George Dunlap <george.dunlap@eu.citrix.com>
+To: Tamas K Lengyel <tamas@tklengyel.com>
+Cc: George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============2104919476016393453==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-8E48eeu5oe0rVn3CWdC+"
-
-
---=-8E48eeu5oe0rVn3CWdC+
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2019-04-23 at 10:44 +0100, Andrew Cooper wrote:
-> On 20/04/2019 16:24, Dario Faggioli wrote:
->
-> Definitely +1 to algorithm changes which avoid its use entirely.
->=20
-> A few cosmetic observations.
->=20
-Ok...
-
-> > diff --git a/xen/common/sched_credit2.c
-> > b/xen/common/sched_credit2.c
-> > index 6958b265fc..7034325243 100644
-> > --- a/xen/common/sched_credit2.c
-> > +++ b/xen/common/sched_credit2.c
-> > @@ -466,6 +466,7 @@ struct csched2_runqueue_data {
-> >      spinlock_t lock;           /* Lock for this
-> > runqueue                     */
-> > =20
-> >      struct list_head runq;     /* Ordered list of runnable
-> > vms               */
-> > +    int nr_cpus;               /* How many CPUs are sharing this
-> > runqueue    */
->=20
-> Unsigned int.
->=20
-Yep.
-
-> > @@ -3944,8 +3951,12 @@ csched2_deinit_pdata(const struct scheduler
-> > *ops, void *pcpu, int cpu)
-> >      __cpumask_clear_cpu(cpu, &rqd->smt_idle);
-> >      __cpumask_clear_cpu(cpu, &rqd->active);
-> > =20
-> > -    if ( cpumask_empty(&rqd->active) )
-> > +    rqd->nr_cpus--;
-> > +    ASSERT(cpumask_weight(&rqd->active) =3D=3D rqd->nr_cpus);
-> > +
-> > +    if ( rqd->nr_cpus =3D=3D 0 )
-> >      {
-> > +	ASSERT(cpumask_empty(&rqd->active));
->=20
-> And here.
->=20
-Right. Not sure how they ended in there. Will remove them.
-
-> Is it really worth having both asserts?  The second is redundant.
->=20
-I think I agree. I'll keep the first one only.
-
-Thanks and Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-8E48eeu5oe0rVn3CWdC+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzDARsACgkQFkJ4iaW4
-c+7n3A//fEy9EInhBvJ/45bn9S7kEYzRk9Y/EcLMAm1Z0ub+oODPHrosYpQuDW1E
-bahe9rTBHCZbu4B+Ml++PwYXVOik9rZSC36Lasjnohq3D1JXvThop4bDH5IWg3vK
-Hi+s3bb8rzG5vXBuDMcAp7FB9Iuao1cVxS3F774VsvQ6uG0EXEydtHdDEgDrLfoI
-5B5qyDFHmPz8O+Od+FNTUmw7f177MEVDngbeAVqBPu/0+JAqZjArCWvpVa72nLfj
-91zO6shwM1Tj+8IBWPxIoqtspqSQMRR6vF2AVHq9Xw+KLv6U0UpFLYsR8on/dhXt
-vPrriECfB6tReTPte1huA3d00ak/SRE9cr4rqx2diGQkGgt7dAFKmO5l0SDDy5D/
-Wxf6Xgz/HSttvFWL0UIbjIHpTwxgtKTRLsZIxS4p7rwug113vGEreGJ+1yj6PQy2
-97a/TyMAwvnnGjs1EMp/nNLkfk857mRzaPO6RUVkhOOEOlmpHvVKI8QqLx+hhaWS
-bibdE86YQs5VnssTm9nN7DvTn4a9xsSBMs3me5cPOe3m4qHbZ4F03w/c9RSA+4CE
-RTulWayKw+KJhfAvTvsr9NzsVro5A+qkOZCdlRsdwPyo9keQENKIZyKnuWu2/JJc
-zDPvlXmFNTFSJS44IRvBvUzXl07nVcaYsWgl1+mifGXhWOQEXOg=
-=p0L4
------END PGP SIGNATURE-----
-
---=-8E48eeu5oe0rVn3CWdC+--
-
-
-
---===============2104919476016393453==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2104919476016393453==--
+Pj4+IE9uIDI2LjA0LjE5IGF0IDE0OjI0LCA8dGFtYXNAdGtsZW5neWVsLmNvbT4gd3JvdGU6Cj4g
+T24gRnJpLCBBcHIgMjYsIDIwMTkgYXQgMzoyNCBBTSBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3Vz
+ZS5jb20+IHdyb3RlOgo+Pgo+PiA+Pj4gT24gMjYuMDQuMTkgYXQgMDI6MTIsIDx0YW1hc0B0a2xl
+bmd5ZWwuY29tPiB3cm90ZToKPj4gPiBJIHdvdWxkIGJlIE9LIHdpdGggcHV0dGluZyB0aGUgd2hv
+bGUgdGhpbmcgYmVoaW5kCj4+ID4gQ09ORklHX0hBU19NRU1fU0hBUklORyBhbmQgaGF2aW5nIHRo
+YXQgYmUgb2ZmIGJ5IGRlZmF1bHQuIElzIHRoYXQgYQo+PiA+IGZlYXNpYmxlIHJvdXRlIGZyb20g
+eW91ciBQT1Y/Cj4+Cj4+IFNvIGlzIHRoZXJlIGFueXRoaW5nIHdyb25nIHdpdGggbXkgZWFybGll
+ciBzdWdnZXN0aW9uIG9mCj4+IHJlLXB1cnBvc2luZyB0aGUgc2hhcmluZyBmaWVsZCB0byBhdHRh
+Y2ggYSBzdHJ1Y3R1cmUgdG8gdGhlIHBhZ2UKPj4gd2hpY2ggY29udGFpbnMgdGhlIG5lY2Vzc2Fy
+eSBsb2NrPyBJLmUuIGluIHRoZSBzaW1wbGVzdCBjYXNlIGJ5Cj4+IGFkZGluZyB0aGUgbG9jayB0
+byBzdHJ1Y3QgcGFnZV9zaGFyaW5nX2luZm8gaXRzZWxmPwo+IAo+IFllcywgdGhhdCB3b24ndCB3
+b3JrIHVuZm9ydHVuYXRlbHkuIFRoZSBsb2NrIGlzIHN1cHBvc2VkIHRvIHByb3RlY3QKPiB1cGRh
+dGVzIG1hZGUgdG8gdGhlIHN0cnVjdHVyZSBidXQgYWxzbyBmcmVlaW5nIGl0LiBJZiB0aGUgbG9j
+ayBsaXZlcwo+IHdpdGhpbiB0aGUgc3RydWN0dXJlIGl0IG9idmlvdXNseSB3b3VsZCBoYXZlIHRv
+IGJlIHVubG9ja2VkIGJlZm9yZSBpdHMKPiBmcmVlZCwgYnV0IGlmIGl0cyB1bmxvY2tlZCBiZWZv
+cmUgZnJlZWQgdGhlbiBhbm90aGVyIHRocmVhZCB3YWl0aW5nIG9uCj4gaXQgY291bGQgY29udGlu
+dWUgd2l0aG91dCByZWFsaXppbmcgaXQgaXMgYmVpbmcgZnJlZWQuCgpDYW4ndCB5b3UgUkNVLWZy
+ZWUgdGhlIHN0cnVjdHVyZSBpbnN0ZWFkLCBhZnRlciBkZXRhY2hpbmcgaXQgZnJvbQp0aGUgbWFp
+biBzdHJ1Y3QgcGFnZV9pbmZvIGluc3RhbmNlPyBPZiBjb3Vyc2UgYWxsIGludm9sdmVkIHBhcnRp
+ZXMKdGhlbiBuZWVkIHRvIGJlIGF3YXJlIHRoYXQgb25jZSB0aGV5J3ZlIGFjcXVpcmVkIHRoZSBs
+b2NrLCB0aGUKcG9pbnRlciBpbiBzdHJ1Y3QgcGFnZV9pbmZvIG1heSBoYXZlIGJlY29tZSBOVUxM
+LCB3aGljaApwcmVzdW1hYmx5IHdvdWxkIGRpcmVjdCB0aGVtIHRvIGRyb3AgdGhlIGxvY2sgYWdh
+aW4gcmlnaHQgYXdheS4KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
