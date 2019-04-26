@@ -1,22 +1,20 @@
 From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 2/2] xen: sched: we never get into
- context_switch() with prev==next
-Date: Fri, 26 Apr 2019 14:58:36 +0200
-Message-ID: <7ef54ef1a0d86efd4499e53789434641955c03db.camel@suse.com>
+Subject: Re: [PATCH 1/2] xen: credit2: avoid using
+ cpumask_weight() in hot-paths
+Date: Fri, 26 Apr 2019 15:01:15 +0200
+Message-ID: <49b2fb80a576cff4b26ae09668cc8b5b243a9f9a.camel@suse.com>
 References: <155577364571.25746.11988517450711182732.stgit@wayrath>
- <155577388740.25746.3780283868034526234.stgit@wayrath>
- <38C4FE16-299B-4726-9BC2-9AC99D6D1F59@citrix.com>
- <14e58f7e-305b-9ed9-9217-2b0b489521c7@suse.com>
+ <155577388014.25746.13361382203794112287.stgit@wayrath>
+ <c7f0e1c1-f69f-3c53-7147-21e24d4618b1@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0324411827998080256=="
+Content-Type: multipart/mixed; boundary="===============2104919476016393453=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=9dDU=S4=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hK0RQ-000576-Rs
- for xen-devel@lists.xenproject.org; Fri, 26 Apr 2019 12:59:00 +0000
-In-Reply-To: <14e58f7e-305b-9ed9-9217-2b0b489521c7@suse.com>
+ id 1hK0Tp-0005oH-1B
+ for xen-devel@lists.xenproject.org; Fri, 26 Apr 2019 13:01:29 +0000
+In-Reply-To: <c7f0e1c1-f69f-3c53-7147-21e24d4618b1@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,64 +23,69 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, George Dunlap <George.Dunlap@citrix.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: George Dunlap <george.dunlap@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 
---===============0324411827998080256==
+--===============2104919476016393453==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-reUegZh3VLsJ3TZLAdMC"
+	protocol="application/pgp-signature"; boundary="=-8E48eeu5oe0rVn3CWdC+"
 
 
---=-reUegZh3VLsJ3TZLAdMC
+--=-8E48eeu5oe0rVn3CWdC+
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2019-04-23 at 11:56 +0200, Juergen Gross wrote:
-> On 23/04/2019 11:50, George Dunlap wrote:
-> >=20
-> > > On Apr 20, 2019, at 4:24 PM, Dario Faggioli <dfaggioli@suse.com>
-> > > wrote:
-> > >=20
-> > > We can, therefore, get rid of all the `if`-s testing prev and
-> > > next being
-> > > different, trading them with an ASSERT() (on ARM, the ASSERT()
-> > > was even
-> > > already there!)
-> >=20
-> > Keeping in mind that ASSERT() is merely a debugging aid: suppose
-> > that testing didn=E2=80=99t discover this, and a bug that violated this
-> > assumption slipped into production.  Would the patched code DTRT?
+On Tue, 2019-04-23 at 10:44 +0100, Andrew Cooper wrote:
+> On 20/04/2019 16:24, Dario Faggioli wrote:
+>
+> Definitely +1 to algorithm changes which avoid its use entirely.
 >=20
-> The unpatched code would already do something wrong: it would clear
-> v->is_running (through context_saved()) for the running vcpu,
-> potentially leading to all sorts of wrong decisions in the scheduling
-> code later.
+> A few cosmetic observations.
 >=20
-Exactly! Which basically means it's quite likely that, if we ever get
-past the call to:
+Ok...
 
-  return continue_running(prev)  (in schedule.c:schedule())
+> > diff --git a/xen/common/sched_credit2.c
+> > b/xen/common/sched_credit2.c
+> > index 6958b265fc..7034325243 100644
+> > --- a/xen/common/sched_credit2.c
+> > +++ b/xen/common/sched_credit2.c
+> > @@ -466,6 +466,7 @@ struct csched2_runqueue_data {
+> >      spinlock_t lock;           /* Lock for this
+> > runqueue                     */
+> > =20
+> >      struct list_head runq;     /* Ordered list of runnable
+> > vms               */
+> > +    int nr_cpus;               /* How many CPUs are sharing this
+> > runqueue    */
+>=20
+> Unsigned int.
+>=20
+Yep.
 
-with next=3D=3Dprev, things will go very wrong, without the `if`-s that
-this patch is killing being of much help.
+> > @@ -3944,8 +3951,12 @@ csched2_deinit_pdata(const struct scheduler
+> > *ops, void *pcpu, int cpu)
+> >      __cpumask_clear_cpu(cpu, &rqd->smt_idle);
+> >      __cpumask_clear_cpu(cpu, &rqd->active);
+> > =20
+> > -    if ( cpumask_empty(&rqd->active) )
+> > +    rqd->nr_cpus--;
+> > +    ASSERT(cpumask_weight(&rqd->active) =3D=3D rqd->nr_cpus);
+> > +
+> > +    if ( rqd->nr_cpus =3D=3D 0 )
+> >      {
+> > +	ASSERT(cpumask_empty(&rqd->active));
+>=20
+> And here.
+>=20
+Right. Not sure how they ended in there. Will remove them.
 
-And, yes, this is (micro) optimizing, but it's also an attempt to
-improve the code, making it clear, for people paying with
-context_switch(), that they don't have to deal with the special case of
-prev and next being equal, while right now they may think they do.
+> Is it really worth having both asserts?  The second is redundant.
+>=20
+I think I agree. I'll keep the first one only.
 
-Even if we decide to keep the `if`-s, I'd still like to have the ASSERT
-() (and a comment explaining why we have both the assertion and the
-checks).
-
-I haven't done archaeology to find out when it was (if ever) that it
-was ok to call context_switch() with next=3D=3Dprev. I can, and see about
-adding what I find in the changelog, if you (George) think it could be
-interesting.
-
-Regards
+Thanks and Regards
 --=20
 Dario Faggioli, Ph.D
 http://about.me/dario.faggioli
@@ -92,33 +95,33 @@ SUSE Labs, SUSE https://www.suse.com/
 <<This happens because _I_ choose it to happen!>> (Raistlin Majere)
 
 
---=-reUegZh3VLsJ3TZLAdMC
+--=-8E48eeu5oe0rVn3CWdC+
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzDAHwACgkQFkJ4iaW4
-c+5o7A//cijtCiBFMAePUPjcnE45UPVFpnXnisSo6m7Oq3TrMHiKmg9BbI+9VrqO
-JFWcsfzewiOke/P7axGB5uCYfIOyEYbGoiWlfkD1l2xr7tbz008htrazh4uhuZQS
-tpfknVa+Wd4m268ub7KnVi4hi+t1YffEooOWiHt6X3WUsmMNH9dEf7ReFpKjc9dk
-tfOmi3B012EhxFS/rJeVo8poZG85X1Osg5a3pPY0Pqzz5m+CUaVU2mi5kqMola7/
-nTtW9Gn5SGOXMGanesraIsr4VYxIn7vpHCdGErx7FswvM7vLrzMS8g5GVZSTXfD5
-N0u+Ib9qF5RjrsKgZl2ziskNfX7UWxb/jdhXeH50DouapAej0zhb7BJzRQLP1ZRM
-ve3GbbIjiq9yZhKFuHixQSPAb57CaIClPtWBHdez8ASUdgrOtv8Rix/r3f+Bipfe
-t0ESny9azfiPPQZyTF+VFoLX0XfFKD/4k1di9mTLvkP7/EfOSSdXn7EkUv5HcfjF
-IV55Rcgf8UOIM4CW51HRAhNa/zy7yqJ3Ngy2+s9LMevqaAZF/7hVlOX3bntb6/3+
-M4KIB4rOnjq2IsXxg1QGaSKkMZbTg4uwISBAxDTxO3fLhXv18+Rn8Lv/bwYMhLvV
-1oyw2+Eau1MF6GhLnbgIzlmB+/C7dMaVU9P7tJdX4k7V4FiVXFE=
-=evnE
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzDARsACgkQFkJ4iaW4
+c+7n3A//fEy9EInhBvJ/45bn9S7kEYzRk9Y/EcLMAm1Z0ub+oODPHrosYpQuDW1E
+bahe9rTBHCZbu4B+Ml++PwYXVOik9rZSC36Lasjnohq3D1JXvThop4bDH5IWg3vK
+Hi+s3bb8rzG5vXBuDMcAp7FB9Iuao1cVxS3F774VsvQ6uG0EXEydtHdDEgDrLfoI
+5B5qyDFHmPz8O+Od+FNTUmw7f177MEVDngbeAVqBPu/0+JAqZjArCWvpVa72nLfj
+91zO6shwM1Tj+8IBWPxIoqtspqSQMRR6vF2AVHq9Xw+KLv6U0UpFLYsR8on/dhXt
+vPrriECfB6tReTPte1huA3d00ak/SRE9cr4rqx2diGQkGgt7dAFKmO5l0SDDy5D/
+Wxf6Xgz/HSttvFWL0UIbjIHpTwxgtKTRLsZIxS4p7rwug113vGEreGJ+1yj6PQy2
+97a/TyMAwvnnGjs1EMp/nNLkfk857mRzaPO6RUVkhOOEOlmpHvVKI8QqLx+hhaWS
+bibdE86YQs5VnssTm9nN7DvTn4a9xsSBMs3me5cPOe3m4qHbZ4F03w/c9RSA+4CE
+RTulWayKw+KJhfAvTvsr9NzsVro5A+qkOZCdlRsdwPyo9keQENKIZyKnuWu2/JJc
+zDPvlXmFNTFSJS44IRvBvUzXl07nVcaYsWgl1+mifGXhWOQEXOg=
+=p0L4
 -----END PGP SIGNATURE-----
 
---=-reUegZh3VLsJ3TZLAdMC--
+--=-8E48eeu5oe0rVn3CWdC+--
 
 
 
---===============0324411827998080256==
+--===============2104919476016393453==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -128,4 +131,4 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============0324411827998080256==--
+--===============2104919476016393453==--
