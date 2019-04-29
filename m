@@ -1,22 +1,16 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [OSSTEST PATCH 11/15] cross builds:
- ts-kernel-build: Support cross target armhf
-Date: Mon, 29 Apr 2019 16:09:20 +0100
-Message-ID: <23751.5024.268350.166114@mariner.uk.xensource.com>
-References: <20190426164002.22381-1-ian.jackson@eu.citrix.com>
- <20190426164002.22381-12-ian.jackson@eu.citrix.com>
- <8ba9d00a-daa1-c09d-4b7b-7556a9d98a7e@arm.com>
- <801bd1ba-1be4-c39c-8842-1d14623ff04e@arm.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [livepatch-build-tools part2 2/6] common: Add
+ is_referenced_section() helper function
+Date: Mon, 29 Apr 2019 16:14:07 +0100
+Message-ID: <3dc69ca8-6c12-65ab-074c-b635bd5bdaeb@citrix.com>
+References: <20190416120716.26269-1-wipawel@amazon.de>
+ <20190416120716.26269-2-wipawel@amazon.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=MPM5=S7=citrix.com=prvs=015b46b47=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hL7uO-0004tM-14
- for xen-devel@lists.xenproject.org; Mon, 29 Apr 2019 15:09:32 +0000
-In-Reply-To: <801bd1ba-1be4-c39c-8842-1d14623ff04e@arm.com>
+In-Reply-To: <20190416120716.26269-2-wipawel@amazon.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,18 +19,40 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+To: Pawel Wieczorkiewicz <wipawel@amazon.de>, xen-devel@lists.xen.org
+Cc: mpohlack@amazon.de, konrad.wilk@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
-SnVsaWVuIEdyYWxsIHdyaXRlcyAoIlJlOiBbT1NTVEVTVCBQQVRDSCAxMS8xNV0gY3Jvc3MgYnVp
-bGRzOiB0cy1rZXJuZWwtYnVpbGQ6IFN1cHBvcnQgY3Jvc3MgdGFyZ2V0IGFybWhmIik6Cj4gT24g
-NC8yNi8xOSAxMDoyMyBQTSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+ID4gTklUOiBIT1NUQ0MgaXMg
-bm90IG5lY2Vzc2FyeS4gSXQgd2lsbCBiZSBkZWZhdWx0IHRvIGdjYyBpZiBub3QgcGFzc2VkLgoK
-SSB3aWxsIGRyb3AgaXQuCgo+ID4gT3RoZXJ3aXNlLCB0aGUgZXhwb3J0IGxvb2tzIHdyaXRlIHRv
-IG1lLgoKVGhhbmtzIGZvciB0aGUgcmV2aWV3LgoKPiBJIGZvcmdvdCB0byBtZW50aW9uIHRoYXQg
-eW91IGNhbiBhZGQgbXkgYWNrIG9uZSBpbiBhbnkgY2FzZToKPiAKPiBBY2tlZC1ieTogSnVsaWVu
-IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCjotKS4KClJlZ2FyZHMsCklhbi4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gNC8xNi8xOSAxOjA3IFBNLCBQYXdlbCBXaWVjem9ya2lld2ljeiB3cm90ZToKPiBUaGlzIGZ1
+bmN0aW9uIGNoZWNrcyBpZiBnaXZlbiBzZWN0aW9uIGhhcyBhbiBpbmNsdWRlZCBjb3JyZXNwb25k
+aW5nCj4gUkVMQSBzZWN0aW9uIGFuZC9vciBhbnkgb2YgdGhlIHN5bWJvbHMgdGFibGUgc3ltYm9s
+cyByZWZlcmVuY2VzIHRoZQo+IHNlY3Rpb24uIFNlY3Rpb24gYXNzb2NpYXRlZCBzeW1ib2xzIGFy
+ZSBpZ25vcmVkIGhlcmUgYXMgdGhlcmUgaXMKPiBhbHdheXMgc3VjaCBhIHN5bWJvbCBmb3IgZXZl
+cnkgc2VjdGlvbi4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBQYXdlbCBXaWVjem9ya2lld2ljeiA8d2lw
+YXdlbEBhbWF6b24uZGU+Cj4gUmV2aWV3ZWQtYnk6IEFuZHJhLUlyaW5hIFBhcmFzY2hpdiA8YW5k
+cmFwcnNAYW1hem9uLmNvbT4KPiBSZXZpZXdlZC1ieTogQmpvZXJuIERvZWJlbCA8ZG9lYmVsQGFt
+YXpvbi5kZT4KPiBSZXZpZXdlZC1ieTogTm9yYmVydCBNYW50aGV5IDxubWFudGhleUBhbWF6b24u
+ZGU+Cj4gLS0tCj4gICBjb21tb24uYyB8IDIyICsrKysrKysrKysrKysrKysrKysrKy0KPiAgIGNv
+bW1vbi5oIHwgIDEgKwo+ICAgMiBmaWxlcyBjaGFuZ2VkLCAyMiBpbnNlcnRpb25zKCspLCAxIGRl
+bGV0aW9uKC0pCj4gCj4gZGlmZiAtLWdpdCBhL2NvbW1vbi5jIGIvY29tbW9uLmMKPiBpbmRleCAx
+ZmIwN2NiLi5jOTY4Mjk5IDEwMDY0NAo+IC0tLSBhL2NvbW1vbi5jCj4gKysrIGIvY29tbW9uLmMK
+PiBAQCAtMTUsNyArMTUsNyBAQAo+ICAgCj4gICBpbnQgaXNfcmVsYV9zZWN0aW9uKHN0cnVjdCBz
+ZWN0aW9uICpzZWMpCj4gICB7Cj4gLQlyZXR1cm4gKHNlYy0+c2guc2hfdHlwZSA9PSBTSFRfUkVM
+QSk7Cj4gKwlyZXR1cm4gc2VjICYmIChzZWMtPnNoLnNoX3R5cGUgPT0gU0hUX1JFTEEpOwo+ICAg
+fQo+ICAgCj4gICBpbnQgaXNfbG9jYWxfc3ltKHN0cnVjdCBzeW1ib2wgKnN5bSkKPiBAQCAtMjcw
+LDYgKzI3MCwyNiBAQCBpbnQgaXNfc3RhbmRhcmRfc2VjdGlvbihzdHJ1Y3Qgc2VjdGlvbiAqc2Vj
+KQo+ICAgCX0KPiAgIH0KPiAgIAo+ICtpbnQgaXNfcmVmZXJlbmNlZF9zZWN0aW9uKGNvbnN0IHN0
+cnVjdCBzZWN0aW9uICpzZWMsIGNvbnN0IHN0cnVjdCBrcGF0Y2hfZWxmICprZWxmKQoKTGV0J3Mg
+a2VlcCB0byA4MCBjaGFycyB3aGVyZSBwcmFjdGljYWwgKGFuZCB0aHJvdWdob3V0IHRoZSByZXN0
+IG9mIHRoZSAKcGF0Y2hlcykuCgo+ICt7Cj4gKwlzdHJ1Y3Qgc3ltYm9sICpzeW07Cj4gKwo+ICsJ
+aWYgKGlzX3JlbGFfc2VjdGlvbihzZWMtPnJlbGEpICYmIHNlYy0+cmVsYS0+aW5jbHVkZSkKPiAr
+CQlyZXR1cm4gdHJ1ZTsKPiArCj4gKwlsaXN0X2Zvcl9lYWNoX2VudHJ5KHN5bSwgJmtlbGYtPnN5
+bWJvbHMsIGxpc3QpIHsKPiArCQlpZiAoIXN5bS0+aW5jbHVkZSB8fCAhc3ltLT5zZWMpCj4gKwkJ
+CWNvbnRpbnVlOwo+ICsJCS8qIElnbm9yZSBzZWN0aW9uIGFzc29jaWF0ZWQgc2VjdGlvbnMgKi8K
+PiArCQlpZiAoc3ltLT50eXBlID09IFNUVF9TRUNUSU9OKQo+ICsJCQljb250aW51ZTsKPiArCQlp
+ZiAoc3ltLT5zZWMtPmluZGV4ID09IHNlYy0+aW5kZXgpCj4gKwkJCXJldHVybiB0cnVlOwoKWW91
+IGNhbiBzaW1wbGlmeSB0aGlzIGNoZWNrIHRvIGBzeW0tPnNlYyA9PSBzZWNgIGxpa2UgdGhlIHJl
+c3Qgb2YgdGhlIApjb2RlIGRvZXMuCgotLSAKUm9zcyBMYWdlcndhbGwKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
