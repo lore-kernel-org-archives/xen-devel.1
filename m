@@ -2,52 +2,61 @@ Return-Path: <SRS0=9ImI=TA=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=3.0 tests=FROM_EXCESS_BASE64,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_NEOMUTT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC6AFC43219
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2019 16:06:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10A96C43219
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2019 16:19:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7F09420652
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2019 16:06:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7F09420652
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id CD10521670
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Apr 2019 16:19:39 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ad2eJ+ea"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD10521670
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hLVGZ-0007zA-Hu; Tue, 30 Apr 2019 16:05:59 +0000
+	id 1hLVTL-0000Yc-Q8; Tue, 30 Apr 2019 16:19:11 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=8rCO=TA=citrix.com=prvs=016a9660e=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hLVGY-0007yN-Nn
- for xen-devel@lists.xenproject.org; Tue, 30 Apr 2019 16:05:58 +0000
-X-Inumbo-ID: d60d6338-6b61-11e9-95fe-cf21b7ab42e3
-Received: from SMTP.EU.CITRIX.COM (unknown [185.25.65.24])
+ <SRS0=8ZiC=TA=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1hLVTK-0000YX-SQ
+ for xen-devel@lists.xenproject.org; Tue, 30 Apr 2019 16:19:10 +0000
+X-Inumbo-ID: aedf8708-6b63-11e9-82e5-a7c886351641
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d60d6338-6b61-11e9-95fe-cf21b7ab42e3;
- Tue, 30 Apr 2019 16:05:56 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,414,1549929600"; d="scan'208";a="89479099"
-Date: Tue, 30 Apr 2019 17:55:05 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Ian Jackson <ian.jackson@citrix.com>
-Message-ID: <20190430155505.gqhdgxzt5ajdt65v@Air-de-Roger>
-References: <23752.18285.3998.815201@mariner.uk.xensource.com>
- <5CC85AF9020000780022A839@prv1-mh.provo.novell.com>
- <23752.23708.661076.214573@mariner.uk.xensource.com>
+ id aedf8708-6b63-11e9-82e5-a7c886351641;
+ Tue, 30 Apr 2019 16:19:09 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id A8FBC20835;
+ Tue, 30 Apr 2019 16:19:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1556641148;
+ bh=4f7gJ1jJN76/b+CXzczSIERRrgqB8aeIxaDzjdCH/uU=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=Ad2eJ+ea57esaySQoIUh+1yL7Hkrlfsb2DteB5l4Zv6N9eNUyDobZ9396vR0+6qt5
+ 505o1wloW9oVPGPhhJFb0CEneJDV4QJPSVSWaYXQqZIanq6cyIZx99bYJd7Tqenlly
+ aUDh/hKKVqOFhVwi0PxswPyV4IJW8z0izpPOz96U=
+Date: Tue, 30 Apr 2019 09:19:08 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-X260
+To: Hillf Danton <hdanton@sina.com>
+In-Reply-To: <20190430053719.45D7621670@mail.kernel.org>
+Message-ID: <alpine.DEB.2.10.1904300916050.27577@sstabellini-ThinkPad-X260>
+References: <20190430053719.45D7621670@mail.kernel.org>
+User-Agent: Alpine 2.10 (DEB 1266 2009-07-14)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <23752.23708.661076.214573@mariner.uk.xensource.com>
-User-Agent: NeoMutt/20180716
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] linux 4.19 xenstore memory allocation failure Re:
- [linux-4.19 test] 135420: regressions - FAIL
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-248116732-1556641148=:27577"
+Subject: Re: [Xen-devel] [patch 1/2] xen/arm: Free p2m entry if fail to add
+ it to RB tree
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -58,49 +67,74 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>,
- Jan Beulich <JBeulich@suse.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "Stefano Stabellini <sstabellini@kernel.org>" <sstabellini@kernel.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190430155505.aNTKFLOFeyfIzZkG9240Nl4-IQ1ZW5AbaMq0sMeCCWY@z>
+Message-ID: <20190430161908.4z_Lps0cxZFE4XdPckkO91DqW0lU9ynnGIGayqReAZ0@z>
 
-T24gVHVlLCBBcHIgMzAsIDIwMTkgYXQgMDM6MzM6MDBQTSArMDEwMCwgSWFuIEphY2tzb24gd3Jv
-dGU6Cj4gSmFuIEJldWxpY2ggd3JpdGVzICgiUmU6IFtYZW4tZGV2ZWxdIGxpbnV4IDQuMTkgeGVu
-c3RvcmUgbWVtb3J5IGFsbG9jYXRpb24gZmFpbHVyZSBSZTogW2xpbnV4LTQuMTkgdGVzdF0gMTM1
-NDIwOiByZWdyZXNzaW9ucyAtIEZBSUwiKToKPiA+IE9uIDMwLjA0LjE5IGF0IDE1OjAyLCA8aWFu
-LmphY2tzb25AY2l0cml4LmNvbT4gd3JvdGU6Cj4gPiA+IElTVE0gdGhhdCB0aGVyZSBhcmUgKnR3
-byogYnVncyBoZXJlOgo+ID4gPiAKPiA+ID4gIDEuIFdoYXRldmVyIGNhdXNlZCB0aGUgbWVtb3J5
-IGFsbG9jYXRpb24gZmFpbHVyZQo+ID4gCj4gPiBBbiBvcmRlci01IGFsbG9jYXRpb24gaXMgc2V0
-IHRvIGZhaWwgYXQgYW55IHRpbWUgKGFmYWljdCkuIEkgZmluZCBpdAo+ID4gc3VycHJpc2luZyB0
-aGF0IHN0cnVjdCBibGtmcm9udF9yaW5nX2luZm8gaW5zdGFuY2VzIChldmVuIGFycmF5cwo+ID4g
-b2YgdGhlbSB3aGVuIHVzaW5nIG11bHRpcGxlIHJpbmdzKSBnZXQgYWxsb2NhdGVkIHVzaW5nIGtj
-YWxsb2MoKQo+ID4gcmF0aGVyIHRoYW4ga3ZjYWxsb2MoKSwgY29uc2lkZXJpbmcgdGhlIHNpemUg
-b2YgdGhlIHN0cnVjdHVyZQo+ID4gKDB4MTQwRTAgYWNjb3JkaW5nIHRvIHRoZSBkaXNhc3NlbWJs
-eSBvZiB0aGUgNS4wLjEgZHJpdmVyIEkKPiA+IGhhZCB0byBoYW5kKS4KPiAKPiBJIHdpbGwgbGVh
-dmUgYW5zd2VyaW5nIHRoaXMgdG8gdGhlIGJsa2Zyb250L2xpbnV4IGZvbGtzLi4uCgpJIHRoaW5r
-IHRob3NlIGFsbG9jYXRpb25zIHVzZWQgdG8gYmUgc21hbGwgZW5vdWdoIHRoYXQga2NhbGxvYyB3
-YXMKbGlrZWx5IGZpbmUuIE5vdyB3aXRoIG11bHRpcGxlIHJpbmdzLCBhbmQgbXVsdGlwbGUgcGFn
-ZXMgcGVyIHJpbmcKdGhvc2UgaGF2ZSBncm93biB0byBhIHBvaW50IHdoZXJlIGtjYWxsb2MgaXMg
-bm90IGZpbmUgYW55bW9yZS4gSSB3aWxsCnByZXBhcmUgYSBwYXRjaCB0byBzd2l0Y2ggdG8ga3Zj
-YWxsb2MuCgo+ID4gPiAgMi4gVGhhdCBhIG1lbW9yeSBhbGxvY2F0aW9uIGZhaWx1cmUgY2FuIGNh
-dXNlIHBlcm1hbmVudCBsb3NzIG9mIGEKPiA+ID4gICAgICB4ZW5zdG9yZSB3YXRjaCBldmVudAo+
-ID4gCj4gPiBXZWxsLCBpc24ndCBpdCBzb3J0IG9mIGV4cGVjdGVkIHRoYXQgYW4gYWxsb2NhdGlv
-biBmYWlsdXJlIHdpbGwgbGVhZAo+ID4gdG8gZnVydGhlciBwcm9ibGVtcz8KPiAKPiBJIHdvdWxk
-IGhhdmUgaG9wZWQgdGhhdCBpdCB3b3VsZCByZXN1bHQgaW4gc29tZXRoaW5nIG90aGVyIHRoYW4g
-YQo+IGhhbmcuICBBdCB3b3JzdCwgYmxrZnJvbnQgb3VnaHQgdG8gZ28gaW50byBhIHN0YXRlIHdo
-ZXJlIGl0ICprbm93cyoKPiB0aGF0IGl0IGlzIHV0dGVybHkgYnJva2VuIGFuZCByZXBvcnRzIHRo
-aXMgcHJvcGVybHkuCgpJIGhhdmVuJ3QgeWV0IGNoZWNrZWQgYWxsIHRoZSBwb3NzaWJsZSBlcnJv
-ciBwYXRocywgYnV0IHRoZSBvbmVzIEkndmUKbG9va2VkIGF0IHVzZSB4ZW5idXNfZGV2X2ZhdGFs
-IHdoaWNoIHN3aXRjaGVzIHRoZSBkZXZpY2Ugc3RhdGUgdG8KY2xvc2luZyBhbmQgd3JpdGVzIHRo
-ZSBlcnJvciBtZXNzYWdlIGludG8geGVuc3RvcmUuIEhvd2V2ZXIgY2xvc2luZwpzdGF0ZSBpcyBu
-b3QgYW4gZXJyb3Igc3RhdGUsIGFuZCBjYW4gYmUgdXNlZCBhcyBwYXJ0IG9mIHRoZSBub3JtYWwK
-ZmxvdyBvZiBhIFBWIGRldmljZSAoZm9yIGV4YW1wbGUgaW4gb3JkZXIgdG8gZm9yY2UgYSByZWNv
-bm5lY3Rpb24pLgoKSSBkb24ndCB0aGluayB0aGVyZSdzIGEgZG9jdW1lbnRlZCB3YXkgb2YgcmVw
-b3J0aW5nIGFuIHVucmVjb3ZlcmFibGUKUFYgZnJvbnRlbmQgZXJyb3IsIGJ1dCBJIG1pZ2h0IGJl
-IG1pc3Rha2VuLgoKUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-248116732-1556641148=:27577
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+Hi Hillf,
+
+Thanks for the patch. Please send emails in plain text, no html. Refer
+to Documentation/process/submitting-patches.rst.
+
+
+On Tue, 30 Apr 2019, Hillf Danton wrote:
+> Release the newly allocated p2m entry if we detect a duplicate in the RB tree.
+
+Space damage aside due to html, the patch looks good.
+  
+ 
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> 
+> Signed-off-by: Hillf Danton <hdanton@sina.com>
+> 
+> ---
+> 
+>  
+> 
+> --- a/arch/arm/xen/p2m.c 2019-04-30 12:32:05.363768200 +0800
+> 
+> +++ b/arch/arm/xen/p2m.c    2019-04-30 12:41:29.774041800 +0800
+> 
+> @@ -156,6 +156,7 @@ bool __set_phys_to_machine_multi(unsigne
+> 
+>        rc = xen_add_phys_to_mach_entry(p2m_entry);
+> 
+>        if (rc < 0) {
+> 
+>              write_unlock_irqrestore(&p2m_lock, irqflags);
+> 
+> +           kfree(p2m_entry);
+> 
+>              return false;
+> 
+>        }
+> 
+>        write_unlock_irqrestore(&p2m_lock, irqflags);
+> 
+> --
+> 
+>  
+> 
+> 
+> 
+--8323329-248116732-1556641148=:27577
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-248116732-1556641148=:27577--
+
