@@ -1,17 +1,21 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: vcpu_block() and do_poll() question
-Date: Tue, 30 Apr 2019 11:13:28 +0200
-Message-ID: <3ce4998b-a8a8-37bd-bb26-9550571709b6@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2] python: Adjust xc_physinfo wrapper for
+ updated virt_caps bits
+Date: Tue, 30 Apr 2019 10:18:33 +0100
+Message-ID: <20190430091833.GT30543@zion.uk.xensource.com>
+References: <20190429224252.29000-1-marmarek@invisiblethingslab.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=9h7v=TA=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hLOpR-0003tO-CH
- for xen-devel@lists.xenproject.org; Tue, 30 Apr 2019 09:13:33 +0000
-Content-Language: en-US
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=nlwX=TA=citrix.com=prvs=016e77c84=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hLOuP-00046F-V5
+ for xen-devel@lists.xenproject.org; Tue, 30 Apr 2019 09:18:41 +0000
+Content-Disposition: inline
+In-Reply-To: <20190429224252.29000-1-marmarek@invisiblethingslab.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,18 +24,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Dario Faggioli <dfaggioli@suse.com>
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SW4geGVuL2NvbW1vbi9zY2hlZHVsZS5jIHRoZXJlIGlzIGEgd2VpcmQgIiNpZm5kZWYgQ09ORklH
-X1g4NiIgaW4KZG9fcG9sbCgpLgoKSXQgd2FzIGludHJvZHVjZWQgd2F5IGJlZm9yZSBhbnlvbmUg
-d291bGQgdGhpbmsgYWJvdXQgQVJNIGJ5IGNvbW1pdAplZjRjNmIwNzljYzU1ZSAoSSBjb3VsZG4n
-dCBmaW5kIGFueSB4ZW4tZGV2ZWwgbWFpbCByZWxhdGVkIHRvIHRoYXQKY29tbWl0KSwgc28gSSBn
-dWVzcyBpdCBpcyByZWxhdGVkIHRvIElBNjQ/CgpRdWVzdGlvbiBpczogY2FuIHdlIGp1c3QgZHJv
-cCBpdCwgb3IgZG9lcyBBUk0gZGVwZW5kIG9uIGl0PyBBbmQgaWYgQVJNCnJlYWxseSBuZWVkcyBp
-dCwgaXMgaXQgdGhlIG1lbW9yeSBiYXJyaWVyIG9ubHk/IEFuZCB3aHkgd291bGRuJ3QgYQpzaW1p
-bGFyIGJhcnJpZXIgYmUgbmVlZGVkIGluIHZjcHVfYmxvY2soKSB0aGVuPwoKCkp1ZXJnZW4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVHVlLCBBcHIgMzAsIDIwMTkgYXQgMTI6NDI6NTJBTSArMDIwMCwgTWFyZWsgTWFyY3p5a293
+c2tpLUfDs3JlY2tpIHdyb3RlOgo+IENvbW1pdCBmMDg5ZmRkZDk0ICJ4ZW46IHJlcG9ydCBQViBj
+YXBhYmlsaXR5IGluIHN5c2N0bCBhbmQgdXNlIGl0IGluCj4gdG9vbHN0YWNrIiBjaGFuZ2VkIG1l
+YW5pbmcgb2YgdmlydF9jYXBzIGJpdCAxIC0gcHJldmlvdXNseSBpdCB3YXMKPiAiZGlyZWN0aW8i
+LCBidXQgd2FzIGNoYW5nZWQgdG8gInB2IiBhbmQgImRpcmVjdGlvIiB3YXMgbW92ZWQgdG8gYml0
+IDIuCj4gQWRqdXN0IHB5dGhvbiB3cmFwcGVyIHRvIHVzZSAjZGVmaW5lcyBmb3IgdGhlIGJpdHMg
+dmFsdWVzLCBhbmQgYWRkCj4gcmVwb3J0aW5nIG9mIGJvdGggInB2X2RpcmVjdGlvIiBhbmQgImh2
+bV9kaXJlY3RpbyIuCj4gCj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgTWFyY3p5a293c2tpLUfDs3Jl
+Y2tpIDxtYXJtYXJla0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgo+IC0tLQoKQWNrZWQtYnk6IFdl
+aSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
