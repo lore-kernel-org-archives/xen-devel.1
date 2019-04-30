@@ -1,21 +1,19 @@
-From: Chao Gao <chao.gao@intel.com>
-Subject: Re: [PATCH] x86/pt: skip setup of posted format IRTE
- when gvec is 0
-Date: Wed, 1 May 2019 00:24:09 +0800
-Message-ID: <20190430162407.GA20660@gao-cwp>
-References: <1556601559-30921-1-git-send-email-chao.gao@intel.com>
- <20190430090854.5vgvu4invvuzgci6@Air-de-Roger>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [patch 2/2] xen/arm: Use p2m entry with lock
+ protection
+Date: Tue, 30 Apr 2019 09:21:05 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1904300920220.27577@sstabellini-ThinkPad-X260>
+References: <20190430053741.F1C0C2080C@mail.kernel.org>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1070403172-1556641266=:27577"
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=vTsw=TA=intel.com=chao.gao@srs-us1.protection.inumbo.net>)
- id 1hLVU6-0000al-O8
- for xen-devel@lists.xenproject.org; Tue, 30 Apr 2019 16:19:58 +0000
-Content-Disposition: inline
-In-Reply-To: <20190430090854.5vgvu4invvuzgci6@Air-de-Roger>
+ <SRS0=8ZiC=TA=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1hLVVD-0001Hc-CF
+ for xen-devel@lists.xenproject.org; Tue, 30 Apr 2019 16:21:07 +0000
+In-Reply-To: <20190430053741.F1C0C2080C@mail.kernel.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,46 +22,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>
+To: Hillf Danton <hdanton@sina.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Stefano Stabellini <sstabellini@kernel.org>" <sstabellini@kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBBcHIgMzAsIDIwMTkgYXQgMTE6MDg6NTRBTSArMDIwMCwgUm9nZXIgUGF1IE1vbm7D
-qSB3cm90ZToKPk9uIFR1ZSwgQXByIDMwLCAyMDE5IGF0IDAxOjE5OjE5UE0gKzA4MDAsIENoYW8g
-R2FvIHdyb3RlOgo+PiBXaGVuIHRlc3Rpbmcgd2l0aCBhbiBVUCBndWVzdCB3aXRoIGEgcGFzcy10
-aHJ1IGRldmljZSB3aXRoIHZ0LWQgcGkKPj4gZW5hYmxlZCBpbiBob3N0LCB3ZSBvYnNlcnZlZCB0
-aGF0IGd1ZXN0IGNvdWxkbid0IHJlY2VpdmUgaW50ZXJydXB0cwo+PiBmcm9tIHRoYXQgcGFzcy10
-aHJ1IGRldmljZS4gRHVtcGluZyBJUlRFLCB3ZSBmb3VuZCB0aGUgY29ycmVzcG9uZGluZwo+PiBJ
-UlRFIGlzIHNldCB0byBwb3N0ZWQgZm9ybWF0IHdpdGggInZlY3RvciIgZmllbGQgYXMgMC4KPj4g
-Cj4+IFdlIHdvdWxkIGZhbGwgaW50byB0aGlzIGlzc3VlIHdoZW4gZ3Vlc3QgdXNlZCB0aGUgcGly
-cSBmb3JtYXQgb2YgTVNJCj4KPkkgdGhpbmsgdGhlIGFib3ZlIHNlbnRlbmNlIGlzIGEgYml0IGNv
-bmZ1c2luZy4gSSB3b3VsZCByYXRoZXIgc2F5IHRoYXQKPnRoZSBndWVzdCBpcyByb3V0aW5nIGlu
-dGVycnVwdHMgZnJvbSBwYXNzdGhyb3VnaCBkZXZpY2VzIG92ZXIgZXZlbnQKPmNoYW5uZWxzIHVz
-aW5nIHBpcnFzLgoKWWVzLiBJdCBpcyBiZXR0ZXIgdGhhbiBpdCB3YXMuCgo+Cj4+IChzZWUgdGhl
-IGNvbW1lbnQgeGVuX21zaV9jb21wb3NlX21zZygpIGluIGxpbnV4IGtlcm5lbCkuIEFzICdkZXN0
-X2lkJwo+PiBpcyByZXB1cnBvc2VkLCBza2lwIG1pZ3JhdGlvbiB3aGljaCBpcyBiYXNlZCBvbiAn
-ZGVzdF9pZCcuCj4KPkxpa2UgSmFuLCBJIHdvbmRlciB3aHkgdGhlIGRldmljZSBtb2RlbCAoSSBh
-c3N1bWUgUUVNVSkgaXNzdWVzIGEKPlhFTl9ET01DVExfYmluZF9wdF9pcnEgaHlwZXJjYWxsIHdo
-ZW4gdGhlIGd1ZXN0IGlzIGF0dGVtcHRpbmcgdG8gcm91dGUKPnRoaXMgaW50ZXJydXB0cyBvdmVy
-IGFuIGV2ZW50IGNoYW5uZWwsIGF0dGVtcHRpbmcgdG8gYmluZCBpdCB0byBhCj52ZWN0b3Igc2Vl
-bXMgbGlrZSBhIGJ1ZyBpbiB0aGUgZGV2aWNlIG1vZGVsLgo+Cj5JIHdvdWxkIGFsc28gY29uc2lk
-ZXIgd2hldGhlciBpdCB3b3VsZCBtYWtlIHNlbnNlIHRvIG5vdCBleHBvc2UgdGhlCj5YRU5GRUFU
-X2h2bV9waXJxcyBmZWF0dXJlIHdoZW4gZG9pbmcgcGFzc3Rocm91Z2ggaWYgcG9zdGVkIGludGVy
-cnVwdHMKPmFyZSBzdXBwb3J0ZWQsIHBlcmZvcm1hbmNlIHdpc2UgaXQncyBiZXR0ZXIgdG8gdXNl
-IHBvc3RlZCBpbnRlcnJ1cHRzCj5yYXRoZXIgdGhhbiByb3V0aW5nIHRoZW0gb3ZlciBldmVudCBj
-aGFubmVscyAod2hpY2ggcmVxdWlyZXMgWGVuCj5pbnRlcmFjdGlvbikuCgpJdCBpcyByZWFzb25h
-YmxlLiBCdXQgSSB0aGluayBjdXJyZW50bHkgZ3Vlc3QgY2FuIGFkZCAieGVuX25vcHYiIHRvIGl0
-cwprZXJuZWwgYm9vdCBvcHRpb25zIHRvIGF2b2lkIHVzaW5nIGV2dGNobi4gVGhlcmUgbWlnaHQg
-YmUgc29tZSBjYXNlcwpldmVuIHdpdGggcGFzcy10aHJ1IGRldmljZXMgKHN1Y2ggYXMsIGd1ZXN0
-IHVzZXMgcG9sbGluZyBtb2RlCmRyaXZlciBmb3IgcGFzcy10aHJ1IGRldmljZXMpLCB3ZSBjYXJl
-IG1vcmUgYWJvdXQgdGhlIGVmZmljaWVuY3kgb2YKZGVsaXZlcmluZyB2aXJ0dWFsIGludGVycnVw
-dHMuIFNvIGEgc2VwYXJhdGUgb3B0aW9uIGZvciBldnRjaG4gaW4gZ3Vlc3QKa2VybmVsIHNlZW1z
-IGxpa2UgYSBiZXR0ZXIgY2hvaWNlLgoKVGhhbmtzCkNoYW8KCj4KPk5vdGUgdGhhdCBJIHRoaW5r
-IHRoaXMgd2hvbGUgWEVORkVBVF9odm1fcGlycXMgaXMgYSBiaWcgaGFjayB3aGljaAo+YWJ1c2Vz
-IGEgaGFyZHdhcmUgaW50ZXJmYWNlLCBhbmQgSSB3b3VsZCBsaWtlIHRvIHNlZSBpdCByZW1vdmVk
-Lgo+Cj5UaGFua3MsIFJvZ2VyLgo+Cj5fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwo+WGVuLWRldmVsIG1haWxpbmcgbGlzdAo+WGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCj5odHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-1070403172-1556641266=:27577
+Content-Type: TEXT/PLAIN; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 30 Apr 2019, Hillf Danton wrote:
+> A new local variable is introduced for accessing p2m entry with lock protection.
+> 
+
+Same comment about html and space damage. But the change looks correct.
+
+
+> 
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> 
+> Signed-off-by: Hillf Danton <hdanton@sina.com>
+> 
+> ---
+> 
+>  
+> 
+> --- a/arch/arm/xen/p2m.c 2019-04-30 12:32:05.363768200 +0800
+> 
+> +++ b/arch/arm/xen/p2m.c    2019-04-30 12:58:19.854334100 +0800
+> 
+> @@ -70,8 +70,9 @@ unsigned long __pfn_to_mfn(unsigned long
+> 
+>              entry = rb_entry(n, struct xen_p2m_entry, rbnode_phys);
+> 
+>              if (entry->pfn <= pfn &&
+> 
+>                            entry->pfn + entry->nr_pages > pfn) {
+> 
+> +                  unsigned long mfn = entry->mfn + (pfn - entry->pfn);
+> 
+>                     read_unlock_irqrestore(&p2m_lock, irqflags);
+> 
+> -                  return entry->mfn + (pfn - entry->pfn);
+> 
+> +                  return mfn;
+> 
+>              }
+> 
+>              if (pfn < entry->pfn)
+> 
+>                     n = n->rb_left;
+> 
+> --
+> 
+>  
+> 
+> 
+> 
+--8323329-1070403172-1556641266=:27577
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-1070403172-1556641266=:27577--
