@@ -1,22 +1,19 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [RFC PATCH 1/7] x86/wakeup: Stop using %fs for
- lidt/lgdt
-Date: Wed, 1 May 2019 17:09:27 +0100
-Message-ID: <eb9f67d6-80d3-5be0-7804-e3178ad00b93@citrix.com>
-References: <cover.1556708225.git.dwmw2@infradead.org>
- <22e1febec473b55fd7e43ffe02fb3a81f70a5e86.1556708226.git.dwmw2@infradead.org>
- <1c3cb13f-cba7-cc6a-36c7-fc156dd41b21@citrix.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [xen-4.10-testing test] 135435: regressions - FAIL
+Date: Wed, 1 May 2019 17:16:16 +0100
+Message-ID: <23753.50768.176226.654128@mariner.uk.xensource.com>
+References: <osstest-135435-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2zDm=TB=citrix.com=prvs=017a1499b=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hLrno-0004Iq-ER
- for xen-devel@lists.xenproject.org; Wed, 01 May 2019 16:09:48 +0000
-In-Reply-To: <1c3cb13f-cba7-cc6a-36c7-fc156dd41b21@citrix.com>
-Content-Language: en-GB
+ <SRS0=9pMH=TB=citrix.com=prvs=01726d3a8=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1hLruA-00057Z-BW
+ for xen-devel@lists.xenproject.org; Wed, 01 May 2019 16:16:22 +0000
+In-Reply-To: <osstest-135435-mainreport@xen.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,20 +22,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: David Woodhouse <dwmw2@infradead.org>, xen-devel@lists.xenproject.org
+To: osstest service owner <osstest-admin@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDEvMDUvMjAxOSAxMzowMiwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwMS8wNS8yMDE5
-IDEyOjE3LCBEYXZpZCBXb29kaG91c2Ugd3JvdGU6Cj4+IEZyb206IERhdmlkIFdvb2Rob3VzZSA8
-ZHdtd0BhbWF6b24uY28udWs+Cj4+Cj4+IFRoZSB3YWtldXAgY29kZSBpcyBub3cgcmVsb2NhdGVk
-IGFsb25nc2lkZSB0aGUgdHJhbXBvbGluZSBjb2RlLCBzbyAlZHMKPj4gaXMganVzdCBmaW5lIGhl
-cmUuCj4gQUZBQ0lULCB0aGlzIGlzIGFzIGEgY29uc2VxdWVuY2Ugb2YgYy9zIGJjNGE2OGYyMWY0
-M2MyICJ4ODY6IG1ha2UKPiBydW4tdGltZSBwYXJ0IG9mIHRyYW1wb2xpbmUgcmVsb2NhdGFibGUi
-ID8KPgo+PiBTaWduZWQtb2ZmLWJ5OiBEYXZpZCBXb29kaG91c2UgPGR3bXdAYW1hem9uLmNvLnVr
-Pgo+IEFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgo+
-Cj4gSSBkb24ndCBoYXZlIGEgc2Vuc2libGUgd2F5IG9mIHRlc3RpbmcgdGhpcyBBVE0sIGJ1dCB0
-aGUgY2hhbmdlIGxvb2tzCj4gY29ycmVjdC4KCkknbSBhZnJhaWQgdGVzdGluZyBzYXlzIG5vLsKg
-IFMzIHdvcmtzIGZpbmUgd2l0aG91dCB0aGlzIGNoYW5nZSwgYW5kCnJlc2V0cyB3aXRoIGl0LgoK
-fkFuZHJldwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+b3NzdGVzdCBzZXJ2aWNlIG93bmVyIHdyaXRlcyAoIlt4ZW4tNC4xMC10ZXN0aW5nIHRlc3RdIDEz
+NTQzNTogcmVncmVzc2lvbnMgLSBGQUlMIik6Cj4gZmxpZ2h0IDEzNTQzNSB4ZW4tNC4xMC10ZXN0
+aW5nIHJlYWwgW3JlYWxdCj4gaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3Nz
+dGVzdC9sb2dzLzEzNTQzNS8KPiAKPiBSZWdyZXNzaW9ucyA6LSgKPiAKPiBUZXN0cyB3aGljaCBk
+aWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKPiBpbmNsdWRpbmcgdGVzdHMgd2hpY2gg
+Y291bGQgbm90IGJlIHJ1bjoKPiAgdGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQteHNtICAyMSBsZWFr
+LWNoZWNrL2NoZWNrICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTM1MDgyCj4gIHRlc3QtYW1kNjQt
+YW1kNjQteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtIDIxIGxlYWstY2hlY2sv
+Y2hlY2sgZmFpbCBSRUdSLiB2cy4gMTM1MDgyCgpUaGlzIGlzIGEgQ0kgc3lzdGVtIGJ1ZzogY3Jv
+biBqb2JzIGFwcGVhcmluZyBpbiB0aGUgbGVhayBjaGVjay4gIFRoaXMKc2VlbXMgdG8gYmUgbW9y
+ZSBjb21tb24gbm93IHdpdGggc3RyZXRjaC4gIEZpeGluZyBpdCBpcyBvbiBteSB0b2RvCmxpc3Qu
+CgpJbiB0aGUgbWVhbnRpbWUgdGhpcyBqdXN0aWZpZXMgYSBmb3JjZSBwdXNoLCBzbyBJIGhhdmUg
+cHVzaGVkIHRoaXM6Cgo+IHZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6Cj4gIHhlbiAgICAg
+ICAgICAgICAgICAgIDVhODFkZTRjNmI2MDM2OTc0ZjI5ZTIzMzBhNDkzZjIzYThmMGMxZjAKPiBi
+YXNlbGluZSB2ZXJzaW9uOgo+ICB4ZW4gICAgICAgICAgICAgICAgICBiMmJiZDM0MjU3NjU3NmVi
+OGExNjVhNmFiZjk1NTlkNzcyZWUyNDJiCgpJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
