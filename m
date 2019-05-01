@@ -1,16 +1,19 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] xen/arm: improve dom0less documentation
-Date: Wed, 1 May 2019 16:30:06 -0700 (PDT)
-Message-ID: <alpine.DEB.2.10.1905011628310.23881@sstabellini-ThinkPad-X260>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Subject: [PATCH v2] x86/vmx: correctly gather gs_shadow value
+ for current vCPU
+Date: Wed,  1 May 2019 17:52:03 -0600
+Message-ID: <20190501235203.1179-1-tamas@tklengyel.com>
 Mime-Version: 1.0
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-239192802-1556753337=:23881"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4/tq=TB=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1hLyfz-0000IJ-AY
- for xen-devel@lists.xenproject.org; Wed, 01 May 2019 23:30:11 +0000
-Content-ID: <alpine.DEB.2.10.1905011629040.23881@sstabellini-ThinkPad-X260>
+ <SRS0=9NrI=TB=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1hLz1K-00022A-Le
+ for xen-devel@lists.xenproject.org; Wed, 01 May 2019 23:52:14 +0000
+Received: by mail-io1-f65.google.com with SMTP id v9so465132iol.10
+ for <xen-devel@lists.xenproject.org>; Wed, 01 May 2019 16:52:12 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -19,106 +22,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: julien.grall@arm.com
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org
+To: xen-devel@lists.xenproject.org
+Cc: Kevin Tian <kevin.tian@intel.com>, Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, Jun Nakajima <jun.nakajima@intel.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-239192802-1556753337=:23881
-Content-Type: TEXT/PLAIN; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.10.1905011629041.23881@sstabellini-ThinkPad-X260>
-
-Improve Dom0-less documentation: include a complete configuration
-example.
-
-Signed-off-by: Stefano Stabellini <stefanos@xilinx.com>
-
-diff --git a/docs/features/dom0less.pandoc b/docs/features/dom0less.pandoc
-index 4e342b7..e076e37 100644
---- a/docs/features/dom0less.pandoc
-+++ b/docs/features/dom0less.pandoc
-@@ -23,6 +23,70 @@ booted and the Xen tools to become available, domains created by Xen
- this way are started right away in parallel. Hence, their boot time is
- typically much shorter.
- 
-+
-+Configuration
-+-------------
-+
-+### Loading binaries into memory ###
-+
-+U-Boot needs to load not just Xen, the device tree binary, the dom0 kernel and
-+ramdisk. It also needs to load the kernel and ramdisk of any additional domains
-+to boot. For example if this is the bootcmd for Xen and Dom0:
-+
-+    tftpb 0x1280000 xen.dtb
-+    tftpb 0x0x80000 xen-Image
-+    tftpb 0x1400000 xen.ub
-+    tftpb 0x9000000 xen-rootfs.cpio.gz.u-boot
-+
-+    bootm 0x1400000 0x9000000 0x1280000
-+
-+If we want to add one DomU with Image-DomU as the DomU kernel
-+and ramdisk-DomU as DomU ramdisk:
-+
-+    tftpb 0x1280000 xen.dtb
-+    tftpb 0x80000 xen-Image
-+    tftpb 0x1400000 xen.ub
-+    tftpb 0x9000000 xen-rootfs.cpio.gz.u-boot
-+
-+    tftpb 0x2000000 Image-DomU
-+    tftpb 0x3000000 ramdisk-DomU
-+
-+    bootm 0x1400000 0x9000000 0x1280000
-+
-+
-+### Device Tree configuration ###
-+
-+In addition to loading the necessary binaries, we also need to advertise
-+the presence of the additional VM and its configuration. It is done via
-+device tree adding a node under /chosen as follows:
-+
-+    domU1 {
-+        compatible = "xen,domain";
-+        memory = <0x20000>;
-+        cpus = 1;
-+        vpl011;
-+
-+        module@2000000 {
-+            compatible = "multiboot,kernel", "multiboot,module";
-+            reg = <0x2000000 0xffffff>;
-+            bootargs = "console=ttyAMA0";
-+        };
-+
-+        module@30000000 {
-+            compatible = "multiboot,ramdisk", "multiboot,module";
-+            reg = <0x3000000 0xffffff>;
-+        };
-+    };
-+
-+Where memory is the memory of the VM in KBs, cpus is the number of
-+cpus. module@2000000 and module@3000000 advertise where the kernel and
-+ramdisk are in memory.
-+
-+See docs/misc/arm/device-tree/booting.txt for more information.
-+
-+Limitations
-+-----------
-+
- Domains started by Xen at boot time currently have the following
- limitations:
- 
---8323329-239192802-1556753337=:23881
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-239192802-1556753337=:23881--
+Q3VycmVudGx5IHRoZSBnc19zaGFkb3cgdmFsdWUgaXMgb25seSBjYWNoZWQgd2hlbiB0aGUgdkNQ
+VSBpcyBiZWluZyBzY2hlZHVsZWQKb3V0IGJ5IFhlbi4gUmVwb3J0aW5nIHRoaXMgKHVzdWFsbHkp
+IHN0YWxlIHZhbHVlIHRocm91Z2ggdm1fZXZlbnQgaXMgaW5jb3JyZWN0LApzaW5jZSBpdCBkb2Vz
+bid0IHJlcHJlc2VudCB0aGUgYWN0dWFsIHN0YXRlIG9mIHRoZSB2Q1BVIGF0IHRoZSB0aW1lIHRo
+ZSBldmVudAp3YXMgcmVjb3JkZWQuIFRoaXMgcHJldmVudHMgdm1fZXZlbnQgc3Vic2NyaWJlcnMg
+ZnJvbSBjb3JyZWN0bHkgZmluZGluZyBrZXJuZWwKc3RydWN0dXJlcyBpbiB0aGUgZ3Vlc3Qgd2hl
+biBpdCBpcyB0cmFwcGVkIHdoaWxlIGluIHJpbmczLgoKUmVmcmVzaCBzaGFkb3dfZ3MgdmFsdWUg
+d2hlbiB0aGUgY29udGV4dCBiZWluZyBzYXZlZCBpcyBmb3IgdGhlIGN1cnJlbnQgdkNQVS4KClNp
+Z25lZC1vZmYtYnk6IFRhbWFzIEsgTGVuZ3llbCA8dGFtYXNAdGtsZW5neWVsLmNvbT4KQ2M6IFJh
+enZhbiBDb2pvY2FydSA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4KQ2M6IEp1biBOYWthamlt
+YSA8anVuLm5ha2FqaW1hQGludGVsLmNvbT4KQ2M6IEtldmluIFRpYW4gPGtldmluLnRpYW5AaW50
+ZWwuY29tPgpDYzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpDYzogQW5kcmV3IENv
+b3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KQ2M6IFdlaSBMaXUgPHdlaS5saXUyQGNp
+dHJpeC5jb20+CkNjOiBSb2dlciBQYXUgTW9ubmUgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgotLS0K
+djI6IG1vdmUgZml4IHRvIGh2bSBzbyB2bV9ldmVudCBkb2Vzbid0IGhhdmUgdG8ga25vdyBzcGVj
+aWZpY3MKLS0tCiB4ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYyB8IDUgKysrKysKIDEgZmlsZSBj
+aGFuZ2VkLCA1IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3Zt
+eC92bXguYyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCmluZGV4IDI4M2ViN2IzNGQuLjUx
+NTRlY2MyYTggMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCisrKyBiL3hl
+bi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCkBAIC03NzksMTIgKzc3OSwxNyBAQCBzdGF0aWMgdm9p
+ZCB2bXhfbG9hZF9jcHVfc3RhdGUoc3RydWN0IHZjcHUgKnYsIHN0cnVjdCBodm1faHdfY3B1ICpk
+YXRhKQogCiBzdGF0aWMgdm9pZCB2bXhfc2F2ZV92bWNzX2N0eHQoc3RydWN0IHZjcHUgKnYsIHN0
+cnVjdCBodm1faHdfY3B1ICpjdHh0KQogeworICAgIGlmICggdiA9PSBjdXJyZW50ICkKKyAgICAg
+ICAgdm14X3NhdmVfZ3Vlc3RfbXNycyh2KTsKKwogICAgIHZteF9zYXZlX2NwdV9zdGF0ZSh2LCBj
+dHh0KTsKICAgICB2bXhfdm1jc19zYXZlKHYsIGN0eHQpOwogfQogCiBzdGF0aWMgaW50IHZteF9s
+b2FkX3ZtY3NfY3R4dChzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0IGh2bV9od19jcHUgKmN0eHQpCiB7
+CisgICAgQVNTRVJUKHYgIT0gY3VycmVudCk7CisKICAgICB2bXhfbG9hZF9jcHVfc3RhdGUodiwg
+Y3R4dCk7CiAKICAgICBpZiAoIHZteF92bWNzX3Jlc3RvcmUodiwgY3R4dCkgKQotLSAKMi4yMC4x
+CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
+dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
+aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
