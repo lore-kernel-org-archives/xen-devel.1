@@ -6,45 +6,51 @@ X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5394C43219
-	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2019 08:36:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31745C43219
+	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2019 08:41:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B67E20873
-	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2019 08:36:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B67E20873
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 08C652075E
+	for <xen-devel@archiver.kernel.org>; Thu,  2 May 2019 08:41:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 08C652075E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=bitdefender.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hM7Cw-0001Ma-NG; Thu, 02 May 2019 08:36:46 +0000
+	id 1hM7Hh-0002A9-BL; Thu, 02 May 2019 08:41:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=oUxd=TC=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hM7Cw-0001MT-1x
- for xen-devel@lists.xenproject.org; Thu, 02 May 2019 08:36:46 +0000
-X-Inumbo-ID: 66e31a16-6cb5-11e9-8002-bbd2cd639da4
-Received: from prv1-mh.provo.novell.com (unknown [137.65.248.33])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=L2Tp=TC=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1hM7Hf-0002A4-OB
+ for xen-devel@lists.xenproject.org; Thu, 02 May 2019 08:41:39 +0000
+X-Inumbo-ID: 14dde40c-6cb6-11e9-9054-c7d57f3341dc
+Received: from mx01.bbu.dsd.mx.bitdefender.com (unknown [91.199.104.161])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 66e31a16-6cb5-11e9-8002-bbd2cd639da4;
- Thu, 02 May 2019 08:36:38 +0000 (UTC)
-Received: from INET-PRV1-MTA by prv1-mh.provo.novell.com
- with Novell_GroupWise; Thu, 02 May 2019 02:36:37 -0600
-Message-Id: <5CCAAC14020000780022B0DC@prv1-mh.provo.novell.com>
-X-Mailer: Novell GroupWise Internet Agent 18.1.0 
-Date: Thu, 02 May 2019 02:36:36 -0600
-From: "Jan Beulich" <JBeulich@suse.com>
-To: "Razvan Cojocaru" <rcojocaru@bitdefender.com>,
- "xen-devel" <xen-devel@lists.xenproject.org>,
- "Tamas K Lengyel" <tamas@tklengyel.com>
+ id 14dde40c-6cb6-11e9-9054-c7d57f3341dc;
+ Thu, 02 May 2019 08:41:30 +0000 (UTC)
+Received: from smtp.bitdefender.com (smtp02.buh.bitdefender.net [10.17.80.76])
+ by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
+ D16BA301AB38; Thu,  2 May 2019 11:41:29 +0300 (EEST)
+Received: from [10.10.196.90] (unknown [195.210.5.22])
+ by smtp.bitdefender.com (Postfix) with ESMTPSA id C8389306E4AC;
+ Thu,  2 May 2019 11:41:29 +0300 (EEST)
+To: Jan Beulich <JBeulich@suse.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ Tamas K Lengyel <tamas@tklengyel.com>
 References: <20190501235203.1179-1-tamas@tklengyel.com>
  <01d02c64-a044-5c6f-d411-ec50abb83408@bitdefender.com>
-In-Reply-To: <01d02c64-a044-5c6f-d411-ec50abb83408@bitdefender.com>
-Mime-Version: 1.0
-Content-Disposition: inline
+ <5CCAAC14020000780022B0DC@prv1-mh.provo.novell.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Message-ID: <2123b118-7309-eed7-9fcb-89d85955a68e@bitdefender.com>
+Date: Thu, 2 May 2019 11:41:18 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
+MIME-Version: 1.0
+In-Reply-To: <5CCAAC14020000780022B0DC@prv1-mh.provo.novell.com>
+Content-Language: en-US-large
 Subject: Re: [Xen-devel] [PATCH v2] x86/vmx: correctly gather gs_shadow
  value for current vCPU
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -60,24 +66,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Kevin Tian <kevin.tian@intel.com>, Wei Liu <wei.liu2@citrix.com>,
  Jun Nakajima <jun.nakajima@intel.com>, Roger Pau Monne <roger.pau@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="UTF-8"; format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190502083636.KgBhfjf9tu9yWrRnNhWVqLafV_D-XSJQyN_4BoYKPuI@z>
+Message-ID: <20190502084118.fHmxib5lJ6NfGsQTDRKNJ7NUfn_kLS5AnilXiUqHOqg@z>
 
-Pj4+IE9uIDAyLjA1LjE5IGF0IDA4OjIwLCA8cmNvam9jYXJ1QGJpdGRlZmVuZGVyLmNvbT4gd3Jv
-dGU6Cj4gT24gNS8yLzE5IDI6NTIgQU0sIFRhbWFzIEsgTGVuZ3llbCB3cm90ZToKPj4gLS0tIGEv
-eGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKPj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS92bXgv
-dm14LmMKPj4gQEAgLTc3OSwxMiArNzc5LDE3IEBAIHN0YXRpYyB2b2lkIHZteF9sb2FkX2NwdV9z
-dGF0ZShzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0IGh2bV9od19jcHUgKmRhdGEpCj4+ICAKPj4gIHN0
-YXRpYyB2b2lkIHZteF9zYXZlX3ZtY3NfY3R4dChzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0IGh2bV9o
-d19jcHUgKmN0eHQpCj4+ICB7Cj4+ICsgICAgaWYgKCB2ID09IGN1cnJlbnQgKQo+PiArICAgICAg
-ICB2bXhfc2F2ZV9ndWVzdF9tc3JzKHYpOwo+IAo+IHZteF9zYXZlX2d1ZXN0X21zcnMoKSBpcyBz
-aW1wbGUgZW5vdWdoIHRoYXQgdGhlIGlmIGlzIHByb2JhYmx5IG5vdAo+IG5lY2Vzc2FyeSBoZXJl
-ICh3ZSBjYW4ganVzdCBjYWxsIHRoZSBmdW5jdGlvbiBkaXJlY3RseSwgcmVnYXJkbGVzcyBvZgo+
-IHdoYXQgdiBob2xkcykuCgpBdm9pZGluZyBhbiBNU1IgYWNjZXNzIGlzIHBlcmhhcHMgd29ydGgg
-dGhlIGNvbmRpdGlvbmFsLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+T24gNS8yLzE5IDExOjM2IEFNLCBKYW4gQmV1bGljaCB3cm90ZToKPj4+PiBPbiAwMi4wNS4xOSBh
+dCAwODoyMCwgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+IHdyb3RlOgo+PiBPbiA1LzIvMTkg
+Mjo1MiBBTSwgVGFtYXMgSyBMZW5neWVsIHdyb3RlOgo+Pj4gLS0tIGEveGVuL2FyY2gveDg2L2h2
+bS92bXgvdm14LmMKPj4+ICsrKyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCj4+PiBAQCAt
+Nzc5LDEyICs3NzksMTcgQEAgc3RhdGljIHZvaWQgdm14X2xvYWRfY3B1X3N0YXRlKHN0cnVjdCB2
+Y3B1ICp2LCBzdHJ1Y3QgaHZtX2h3X2NwdSAqZGF0YSkKPj4+ICAgCj4+PiAgIHN0YXRpYyB2b2lk
+IHZteF9zYXZlX3ZtY3NfY3R4dChzdHJ1Y3QgdmNwdSAqdiwgc3RydWN0IGh2bV9od19jcHUgKmN0
+eHQpCj4+PiAgIHsKPj4+ICsgICAgaWYgKCB2ID09IGN1cnJlbnQgKQo+Pj4gKyAgICAgICAgdm14
+X3NhdmVfZ3Vlc3RfbXNycyh2KTsKPj4KPj4gdm14X3NhdmVfZ3Vlc3RfbXNycygpIGlzIHNpbXBs
+ZSBlbm91Z2ggdGhhdCB0aGUgaWYgaXMgcHJvYmFibHkgbm90Cj4+IG5lY2Vzc2FyeSBoZXJlICh3
+ZSBjYW4ganVzdCBjYWxsIHRoZSBmdW5jdGlvbiBkaXJlY3RseSwgcmVnYXJkbGVzcyBvZgo+PiB3
+aGF0IHYgaG9sZHMpLgo+IAo+IEF2b2lkaW5nIGFuIE1TUiBhY2Nlc3MgaXMgcGVyaGFwcyB3b3J0
+aCB0aGUgY29uZGl0aW9uYWwuCgpGYWlyIGVub3VnaC4KCgpUaGFua3MsClJhenZhbgoKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
+bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
+cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
