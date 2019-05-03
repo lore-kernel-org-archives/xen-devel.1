@@ -1,8 +1,8 @@
 From: Ian Jackson <ian.jackson@eu.citrix.com>
-Subject: [OSSTEST PATCH 08/11] mg-repro-setup: Move flight
- creation up before task creation
-Date: Fri, 3 May 2019 17:59:54 +0100
-Message-ID: <20190503165957.5960-9-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 10/11] mg-repro-setup: Detect options
+ (-...) in wrong place
+Date: Fri, 3 May 2019 17:59:56 +0100
+Message-ID: <20190503165957.5960-11-ian.jackson@eu.citrix.com>
 References: <20190503165957.5960-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -11,8 +11,8 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=lZ0l=TD=citrix.com=prvs=019b86d19=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hMbXk-00086q-3H
- for xen-devel@lists.xenproject.org; Fri, 03 May 2019 17:00:16 +0000
+ id 1hMbXg-00083c-05
+ for xen-devel@lists.xenproject.org; Fri, 03 May 2019 17:00:12 +0000
 In-Reply-To: <20190503165957.5960-1-ian.jackson@eu.citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,20 +26,17 @@ To: xen-devel@lists.xenproject.org
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Tm8gc2lnbmlmaWNhbnQgZnVuY3Rpb25hbCBjaGFuZ2UuCgpTaWduZWQtb2ZmLWJ5OiBJYW4gSmFj
-a3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KLS0tCiBtZy1yZXByby1zZXR1cCB8IDYg
-KysrLS0tCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQoK
-ZGlmZiAtLWdpdCBhL21nLXJlcHJvLXNldHVwIGIvbWctcmVwcm8tc2V0dXAKaW5kZXggZDYzZTI5
-YjYuLjJlMWQzYjg4IDEwMDc1NQotLS0gYS9tZy1yZXByby1zZXR1cAorKysgYi9tZy1yZXByby1z
-ZXR1cApAQCAtMTY3LDYgKzE2Nyw5IEBAIHdoaWxlIFsgJCMgLW5lIDAgXTsgZG8KIAllc2FjCiBk
-b25lCiAKK2ZsaWdodD0kKC4vY3MtYWRqdXN0LWZsaWdodCBuZXc6JGJsZXNzaW5nKQorcHJvZ3Jl
-c3MgIm5ldyBmbGlnaHQgaXMgJGZsaWdodCIKKwogT1NTVEVTVF9UQVNLPSQocGVybCAtZSAnCiAJ
-dXNlIE9zc3Rlc3Q7CiAJdXNlIE9zc3Rlc3Q6OkV4ZWN1dGl2ZTsKQEAgLTE3Niw5ICsxNzksNiBA
-QCBPU1NURVNUX1RBU0s9JChwZXJsIC1lICcKICcpCiBleHBvcnQgT1NTVEVTVF9UQVNLCiAKLWZs
-aWdodD0kKC4vY3MtYWRqdXN0LWZsaWdodCBuZXc6JGJsZXNzaW5nKQotcHJvZ3Jlc3MgIm5ldyBm
-bGlnaHQgaXMgJGZsaWdodCIKLQogaWYgWyAiJHthbGxvY19pZGVudHNbKl19IiBdOyB0aGVuCiAJ
-cHJvZ3Jlc3MgImFsbG9jYXRpbmcgJHthbGxvY19pZGVudHNbKl19IC4uLiIKIAlhbGxvY19vdXRw
-dXQ9dG1wLyRmbGlnaHQuYWxsb2NhdGlvbnMKLS0gCjIuMTEuMAoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+V2l0aG91dCB0aGlzIHRoZXkgdGVuZCB0byBiZSBpbnRlcnByZXRlZCBhcyBIT1NUU1BFQ3MgbGVh
+ZGluZyB0bwpsb3NzYWdlLgoKU2lnbmVkLW9mZi1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29u
+QGV1LmNpdHJpeC5jb20+Ci0tLQp2MjogTmV3IHBhdGNoCi0tLQogbWctcmVwcm8tc2V0dXAgfCA0
+ICsrKysKIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS9tZy1y
+ZXByby1zZXR1cCBiL21nLXJlcHJvLXNldHVwCmluZGV4IDdmMDc1ZjRlLi5kYzZjNWNiYiAxMDA3
+NTUKLS0tIGEvbWctcmVwcm8tc2V0dXAKKysrIGIvbWctcmVwcm8tc2V0dXAKQEAgLTE5Nyw2ICsx
+OTcsMTAgQEAgd2hpbGUgWyAkIyAtbmUgMCBdOyBkbwogICAgICAgICAgICAgICAgIGNvbnRpbnVl
+CiAJCTs7CiAKKyAgICAgICAgLSopCisgICAgICAgICAgICAgICAgYmFkdXNhZ2UgJzogbWlzcGxh
+Y2VkIG9wdGlvbiwgZXhwZWN0ZWQgUkVCVUlMRCBvciBIT1NUU1BFQycKKyAgICAgICAgICAgICAg
+ICA7OworCiAJbm9uZTopCiAJCSMgcHJvdmlkZWQgc28gd2UgY2FuIHJlcHJvIGEgam9iIHdpdGgg
+bm8gaG9zdHMKIAkJOzsKLS0gCjIuMTEuMAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
