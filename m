@@ -1,24 +1,22 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH 06/20] xen/arm: Remove parameter cpuid from
  start_xen
-Date: Fri, 3 May 2019 19:19:30 +0300
-Message-ID: <5d91e08a-d089-379d-ef12-e4a700b220a9@gmail.com>
+Date: Fri, 3 May 2019 17:17:20 +0100
+Message-ID: <5c638139-c643-ce9f-f33c-a72d3c327ed4@arm.com>
 References: <20190422164937.21350-1-julien.grall@arm.com>
  <20190422164937.21350-7-julien.grall@arm.com>
  <da08e713-f660-3207-ec2b-381dfec5631a@gmail.com>
- <5c638139-c643-ce9f-f33c-a72d3c327ed4@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=COEE=TD=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1hMauN-00034V-86
- for xen-devel@lists.xenproject.org; Fri, 03 May 2019 16:19:35 +0000
-Received: by mail-lj1-x241.google.com with SMTP id f23so5733780ljc.0
- for <xen-devel@lists.xenproject.org>; Fri, 03 May 2019 09:19:33 -0700 (PDT)
-In-Reply-To: <5c638139-c643-ce9f-f33c-a72d3c327ed4@arm.com>
+ <SRS0=Vigr=TD=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hMasH-0002fo-Fv
+ for xen-devel@lists.xenproject.org; Fri, 03 May 2019 16:17:25 +0000
+In-Reply-To: <da08e713-f660-3207-ec2b-381dfec5631a@gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,13 +26,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xenproject.org
 Cc: Oleksandr_Tyshchenko@epam.com, sstabellini@kernel.org, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMy4wNS4xOSAxOToxNywgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEkgY2FuIG9mZmVyIHRv
-IHJlc2h1ZmZsZSB0aGUgcGF0Y2hlcyBzbyB0aGlzIG9uZSBpcyBiZWZvcmUgIzUsIGJ1dCBub3Qg
-bWVyZ2UgdGhlbS4KCkdvb2Qgb3B0aW9uLiBJIGxpa2UgaXQuCgotLSAKU2luY2VyZWx5LApBbmRy
-aWkgQW5pc292LgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGksCgpPbiAwMy8wNS8yMDE5IDE2OjU2LCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IE9uIDIyLjA0
+LjE5IDE5OjQ5LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IFRoZSBwYXJhbWV0ZXIgY3B1aWQgaXMg
+bm90IHVzZWQgYnkgc3RhcnRfeGVuLiBTbyByZW1vdmUgaXQuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6
+IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+Cj4+IC0tLQo+PiDCoCB4ZW4vYXJj
+aC9hcm0vYXJtMzIvaGVhZC5TIHwgMSAtCj4+IMKgIHhlbi9hcmNoL2FybS9hcm02NC9oZWFkLlMg
+fCAxIC0KPj4gwqAgeGVuL2FyY2gvYXJtL3NldHVwLmPCoMKgwqDCoMKgIHwgMyArLS0KPj4gwqAg
+MyBmaWxlcyBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgNCBkZWxldGlvbnMoLSkKPj4KPj4gZGlm
+ZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9hcm0zMi9oZWFkLlMgYi94ZW4vYXJjaC9hcm0vYXJtMzIv
+aGVhZC5TCj4+IGluZGV4IGI3MWQ3ZmIxMWQuLjlmNDBmYWNlOTggMTAwNjQ0Cj4+IC0tLSBhL3hl
+bi9hcmNoL2FybS9hcm0zMi9oZWFkLlMKPj4gKysrIGIveGVuL2FyY2gvYXJtL2FybTMyL2hlYWQu
+Uwo+PiBAQCAtNDQ4LDcgKzQ0OCw2IEBAIGxhdW5jaDoKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHRl
+ccKgwqAgcjEyLCAjMAo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgbW92ZXEgcjAsIHIxMMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAvKiBNYXJzaGFsIGFyZ3M6IC0gcGh5c19vZmZzZXQgKi8K
+Pj4gwqDCoMKgwqDCoMKgwqDCoMKgIG1vdmVxIHIxLCByOMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIC8qwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAtIERUQiBhZGRyZXNzICov
+Cj4+IC3CoMKgwqDCoMKgwqDCoCBtb3ZlcSByMiwgcjfCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoCAvKsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgLSBDUFUgSUQgKi8KPiAKPiBJ
+IGRvbid0IHJlYWxseSBsaWtlIG1ha2luZyBjaGFuZ2VzIHdoaWNoIGFyZSB0aGVuIGZpeGVkIGlu
+IG5leHQgcGF0Y2hlcy4KPiBJJ2QgbGlrZSB0byBzZWUgaXQgY291cGxlZCB0aGlzIHdpdGggdGhl
+IHByZXZpb3VzIHBhdGNoLgoKVGhleSBhcmUgdHdvIGRpZmZlcmVudCBjaGFuZ2VzLi4uIG9uZSBk
+ZWFsIHdpdGggc3RhcnRfeGVuIHRoZSBvdGhlciBkZWFsIHdpdGggCnNlY29uZGFyeV9zdGFydC4K
+CkkgY2FuIG9mZmVyIHRvIHJlc2h1ZmZsZSB0aGUgcGF0Y2hlcyBzbyB0aGlzIG9uZSBpcyBiZWZv
+cmUgIzUsIGJ1dCBub3QgbWVyZ2UgdGhlbS4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
