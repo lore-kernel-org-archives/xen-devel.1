@@ -1,22 +1,36 @@
-From: "Elnikety, Eslam" <elnikety@amazon.com>
-Subject: Re: [PATCH] sched/credit: avoid priority boost for
- capped domains when unpark
-Date: Fri, 3 May 2019 19:41:45 +0000
-Message-ID: <562F9814-30CE-467C-8027-8F21FC6C2845@amazon.com>
-References: <20190503153839.19932-1-elnikety@amazon.com>
- <9434ed49fc68a05999e130abfde973663ed41d2d.camel@suse.com>
- <CB078283-0837-4477-A831-564745FD0C76@xenproject.org>
+From: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen/arm: skip first page when RAM starts at
+ 0x0
+Date: Fri, 3 May 2019 13:16:47 -0700 (PDT)
+Message-ID: <alpine.DEB.2.10.1905031147490.3722@sstabellini-ThinkPad-X260>
+References: <1556214715-22030-1-git-send-email-sstabellini@kernel.org>
+ <5CC2CB8C02000078002295AA@prv1-mh.provo.novell.com>
+ <e23e0f33-82c6-c592-06d9-8581c5400761@arm.com>
+ <5CC2D27C02000078002295F6@prv1-mh.provo.novell.com>
+ <43510317-ca8a-ed23-835a-86a28286b919@arm.com>
+ <5CC3283A0200007800229832@prv1-mh.provo.novell.com>
+ <72a0eee1-1d29-2368-3737-d37f7a4926c6@arm.com>
+ <alpine.DEB.2.10.1904261621360.24598@sstabellini-ThinkPad-X260>
+ <5CC6A47E0200007800229D67@prv1-mh.provo.novell.com>
+ <10687f88-fb6b-721c-c6e8-a1ab06023616@arm.com>
+ <5CC72125020000780022A20F@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1904291008070.27577@sstabellini-ThinkPad-X260>
+ <alpine.DEB.2.10.1905011536510.23881@sstabellini-ThinkPad-X260>
+ <5CCA9CAC020000780022B058@prv1-mh.provo.novell.com>
+ <1f9effdd-e920-bf07-d9e1-1b126a409fc0@arm.com>
+ <5CCAB676020000780022B199@prv1-mh.provo.novell.com>
+ <alpine.DEB.2.10.1905021517420.4309@sstabellini-ThinkPad-X260>
+ <5CCBED14020000780022B7FE@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============6978331471066717546=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4jea=TD=amazon.com=prvs=0198f17c6=elnikety@srs-us1.protection.inumbo.net>)
- id 1hMe4T-0007rv-4A
- for xen-devel@lists.xenproject.org; Fri, 03 May 2019 19:42:13 +0000
-In-Reply-To: <CB078283-0837-4477-A831-564745FD0C76@xenproject.org>
-Content-Language: en-US
+ <SRS0=Lar+=TD=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1hMeby-0002ly-Gh
+ for xen-devel@lists.xenproject.org; Fri, 03 May 2019 20:16:50 +0000
+In-Reply-To: <5CCBED14020000780022B7FE@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,202 +39,68 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Lars Kurth <lars.kurth.xen@gmail.com>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Lars Kurth <lars.kurth@xen.org>, Dario Faggioli <dfaggioli@suse.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <stefanos@xilinx.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien.grall@arm.com>, 206497@studenti.unimore.it, xen-devel <xen-devel@lists.xenproject.org>, nd@arm.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============6978331471066717546==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_562F981430CE467C80278F21FC6C2845amazoncom_"
-
---_000_562F981430CE467C80278F21FC6C2845amazoncom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-
-On 3. May 2019, at 20:56, Lars Kurth <lars.kurth.xen@gmail.com<mailto:lars.=
-kurth.xen@gmail.com>> wrote:
-
-
-
-On 3 May 2019, at 10:48, Dario Faggioli <dfaggioli@suse.com<mailto:dfaggiol=
-i@suse.com>> wrote:
-
-On Fri, 2019-05-03 at 15:38 +0000, Eslam Elnikety wrote:
-When unpausing a capped domain, the scheduler currently clears the
-CSCHED_FLAG_VCPU_PARKED flag before vcpu_wake(). This, in turn,
-causes the
-vcpu_wake to set CSCHED_PRI_TS_BOOST, resulting in an unfair credit
-boost. The
-comment around the changed lines already states that clearing the
-flag should
-happen AFTER the unpause. This bug was introduced in commit
-be650750945
-"credit1: Use atomic bit operations for the flags structure".
-
-Original patch author credit: Xi Xiong.
-
-Mmm... I'm not an expert of these things, but doesn't this means we
-need a "Signed-off-by: Xi Xiong <xxx@yyy.zzz<mailto:xxx@yyy.zzz>>" then? Cc=
--ing Lars...
-
-As far as I can tell from a quick search on xen-devel@ Xi Xiong is or
-was an Amazon employee so a signed-off-by is not strictly necessary
-but you may want to say something like.
-
-Original patch author credit: Xi Xiong of Amazon
-
-Lars
-
-Thanks for the prompt responses, Lars and Dario.
-
-Indeed. Xi was with Amazon. I will adjust the commit message accordingly. (=
-I will also omit the additional comment as pointed out by Dario).
-
---_000_562F981430CE467C80278F21FC6C2845amazoncom_
-Content-Type: text/html; charset="us-ascii"
-Content-ID: <6FD7E4F90A5A8D47AE36FE7DB660885E@amazon.com>
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-</head>
-<body style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-lin=
-e-break: after-white-space;" class=3D"">
-<br class=3D"">
-<div>
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">On 3. May 2019, at 20:56, Lars Kurth &lt;<a href=3D"mailto:=
-lars.kurth.xen@gmail.com" class=3D"">lars.kurth.xen@gmail.com</a>&gt; wrote=
-:</div>
-<br class=3D"Apple-interchange-newline">
-<div class=3D""><br style=3D"font-family: Helvetica; font-size: 12px; font-=
-style: normal; font-variant-caps: normal; font-weight: normal; letter-spaci=
-ng: normal; text-align: start; text-indent: 0px; text-transform: none; whit=
-e-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=
-=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<blockquote type=3D"cite" style=3D"font-family: Helvetica; font-size: 12px;=
- font-style: normal; font-variant-caps: normal; font-weight: normal; letter=
--spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-=
-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -web=
-kit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" class=3D"">
-On 3 May 2019, at 10:48, Dario Faggioli &lt;<a href=3D"mailto:dfaggioli@sus=
-e.com" class=3D"">dfaggioli@suse.com</a>&gt; wrote:<br class=3D"">
-<br class=3D"">
-On Fri, 2019-05-03 at 15:38 &#43;0000, Eslam Elnikety wrote:<br class=3D"">
-<blockquote type=3D"cite" class=3D"">When unpausing a capped domain, the sc=
-heduler currently clears the<br class=3D"">
-CSCHED_FLAG_VCPU_PARKED flag before vcpu_wake(). This, in turn,<br class=3D=
-"">
-causes the<br class=3D"">
-vcpu_wake to set CSCHED_PRI_TS_BOOST, resulting in an unfair credit<br clas=
-s=3D"">
-boost. The<br class=3D"">
-comment around the changed lines already states that clearing the<br class=
-=3D"">
-flag should<br class=3D"">
-happen AFTER the unpause. This bug was introduced in commit<br class=3D"">
-be650750945<br class=3D"">
-&quot;credit1: Use atomic bit operations for the flags structure&quot;.<br =
-class=3D"">
-<br class=3D"">
-Original patch author credit: Xi Xiong.<br class=3D"">
-<br class=3D"">
-</blockquote>
-Mmm... I'm not an expert of these things, but doesn't this means we<br clas=
-s=3D"">
-need a &quot;Signed-off-by: Xi Xiong &lt;<a href=3D"mailto:xxx@yyy.zzz" cla=
-ss=3D"">xxx@yyy.zzz</a>&gt;&quot; then? Cc-ing Lars...<br class=3D"">
-</blockquote>
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">As
- far as I can tell from a quick search on xen-devel@ Xi Xiong is or<span cl=
-ass=3D"Apple-converted-space">&nbsp;</span></span><br style=3D"font-family:=
- Helvetica; font-size: 12px; font-style: normal; font-variant-caps: normal;=
- font-weight: normal; letter-spacing: normal; text-align: start; text-inden=
-t: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webk=
-it-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">was
- an Amazon employee so a signed-off-by is not strictly necessary</span><br =
-style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; font-=
-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-ali=
-gn: start; text-indent: 0px; text-transform: none; white-space: normal; wor=
-d-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">but
- you may want to say something like.</span><br style=3D"font-family: Helvet=
-ica; font-size: 12px; font-style: normal; font-variant-caps: normal; font-w=
-eight: normal; letter-spacing: normal; text-align: start; text-indent: 0px;=
- text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text=
--stroke-width: 0px;" class=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">Original
- patch author credit: Xi Xiong of Amazon</span><br style=3D"font-family: He=
-lvetica; font-size: 12px; font-style: normal; font-variant-caps: normal; fo=
-nt-weight: normal; letter-spacing: normal; text-align: start; text-indent: =
-0px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-=
-text-stroke-width: 0px;" class=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">Lars</span></div>
-</blockquote>
-</div>
-<div class=3D""><br class=3D"">
-</div>
-Thanks for the prompt responses, Lars and Dario.
-<div class=3D""><br class=3D"">
-<div class=3D"">Indeed. Xi was with Amazon. I will adjust the commit messag=
-e accordingly. (I will also omit the additional comment as pointed out by D=
-ario).</div>
-</div>
-</body>
-</html>
-
---_000_562F981430CE467C80278F21FC6C2845amazoncom_--
-
-
---===============6978331471066717546==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============6978331471066717546==--
+T24gRnJpLCAzIE1heSAyMDE5LCBKYW4gQmV1bGljaCB3cm90ZToKPiA+Pj4gT24gMDMuMDUuMTkg
+YXQgMDA6MjUsIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPiB3cm90ZToKPiA+IEFsbCByaWdodC4g
+TG9va2luZyBhdCB0aGUgY29tbWVudCBpbiBwZm5fcGR4X2hvbGVfc2V0dXAsIGl0IHNlZW1zIHRo
+YXQKPiA+IGl0IGlzIGludGVuZGluZyB0byBza2lwIHRoZSBmaXJzdCBNQVhfT1JERVIgYml0cywg
+YnV0IGFjdHVhbGx5IGl0IGlzCj4gPiBza2lwcGluZyB0aGUgZmlyc3QgTUFYX09SREVSLTEgYml0
+cywgaWYgbXkgY2FsY3VsYXRpb25zIGFyZSBjb3JyZWN0Lgo+ID4gCj4gPiBNQVhfT1JERVIgaXMg
+MTggb24gQVJNIHdoaWNoIGNvcnJlc3BvbmQgdG8gMUdCLiBXaXRoIHRoZSBjdXJyZW50Cj4gPiBp
+bXBsZW1lbnRhdGlvbiBvZiBwZm5fcGR4X2hvbGVfc2V0dXAsIGlmIEkgcGFzcyBhIG1hc2sgY29y
+cmVzcG9uZGluZyB0bwo+ID4gNTEyTUIsIEkgY2FuIHNlZSAiUEZOIGNvbXByZXNzaW9uIG9uIGJp
+dHMgMTcuLi4xOSIuIFNvIHRoZSByYW5nZQo+ID4gNTEyTUItMUdCIGdldHMgY29tcHJlc3NlZC4K
+PiA+IAo+ID4gU2hvdWxkbid0IGl0IGJlOgo+ID4gCj4gPiBkaWZmIC0tZ2l0IGEveGVuL2NvbW1v
+bi9wZHguYyBiL3hlbi9jb21tb24vcGR4LmMKPiA+IGluZGV4IDUwYzIxYjYuLmIzMzRlYjkgMTAw
+NjQ0Cj4gPiAtLS0gYS94ZW4vY29tbW9uL3BkeC5jCj4gPiArKysgYi94ZW4vY29tbW9uL3BkeC5j
+Cj4gPiBAQCAtODEsNyArODEsNyBAQCB2b2lkIF9faW5pdCBwZm5fcGR4X2hvbGVfc2V0dXAodW5z
+aWduZWQgbG9uZyBtYXNrKQo+ID4gICAgICAgKiBjb250aWd1b3VzIGFsaWduZWQgcmFuZ2VzIG9m
+IDJeTUFYX09SREVSIHBhZ2VzLiBBbW9uZyBvdGhlcnMsIG91cgo+ID4gICAgICAgKiBidWRkeSBh
+bGxvY2F0b3IgcmVsaWVzIG9uIHRoaXMgYXNzdW1wdGlvbi4KPiA+ICAgICAgICovCj4gPiAtICAg
+IGZvciAoIGogPSBNQVhfT1JERVItMTsgOyApCj4gPiArICAgIGZvciAoIGogPSBNQVhfT1JERVI7
+IDsgKQo+ID4gICAgICB7Cj4gPiAgICAgICAgICBpID0gZmluZF9uZXh0X3plcm9fYml0KCZtYXNr
+LCBCSVRTX1BFUl9MT05HLCBqKTsKPiA+ICAgICAgICAgIGogPSBmaW5kX25leHRfYml0KCZtYXNr
+LCBCSVRTX1BFUl9MT05HLCBpKTsgCj4gCj4gWWVzLCBidXQuIE9yaWdpbmFsbHkgd2Ugc3RhcnRl
+ZCBmcm9tIHplcm8gaGVyZS4gQXMgYSB3aWxkIGd1ZXNzLAo+IEkgdGhpbmsgS2VpciBtYXkgaGF2
+ZSB0aG91Z2h0IHRoZSBjcHVtYXNrX25leHQoKSB3YXkgd2hlbgo+IHB1dHRpbmcgdG9nZXRoZXIg
+YmRiNTQzOWMzZiwgd2hlcmUgYW4gYWRqdXN0bWVudCBieSAxIGlzCj4gbmVlZGVkIGluIHRoZSBj
+YWxsIHRvIGZpbmRfbmV4dF9iaXQoKS4gSGVuY2UgaXQgcHJvYmFibHkgd2FzCj4gaW50dWl0aXZl
+IGZvciBoaW0gdG8gaGF2ZSB0aGUgaW5kZXggc3RhcnQgYXQgb25lIGxlc3MuIEkgZG8gdGhpbmss
+Cj4gaG93ZXZlciwgdGhhdCB3aXRoIHRoZSBzd2l0Y2ggYXdheSBmcm9tIHplcm8sIHRoaW5ncyB3
+b3VsZAo+IGJldHRlciBoYXZlIGJlY29tZQo+IAo+ICAgICBmb3IgKCBqID0gTUFYX09SREVSIC0g
+MTsgOyApCj4gICAgIHsKPiAgICAgICAgIGkgPSBmaW5kX25leHRfemVyb19iaXQoJm1hc2ssIEJJ
+VFNfUEVSX0xPTkcsIGogKyAxKTsKPiAgICAgICAgIGogPSBmaW5kX25leHRfYml0KCZtYXNrLCBC
+SVRTX1BFUl9MT05HLCBpICsgMSk7Cj4gCj4gQXMgeW91IGNhbiBzZWUsIHVzaW5nIGogKyAxIHdo
+ZW4gc3RhcnRpbmcgZnJvbSB6ZXJvIHdvdWxkbid0Cj4gcmVhbGx5IGhhdmUgYmVlbiBjb3JyZWN0
+IChhbGJlaXQgd2Ugc3VyZWx5IGRpZG4ndCBleHBlY3QgdG8KPiBjb21wcmVzcyBvbiBiaXQgemVy
+bywgc28gdGhpcyBpcyBtZXJlbHkgYSBtb290IGNvbnNpZGVyYXRpb24pLgo+IAo+IE5vdyB0aGVy
+ZSdzIGEgcG9zc2libGUgY2F2ZWF0IGhlcmU6IFdoaWxlIGZvciBzeW1tZXRyeSBhbHNvCj4gdXNp
+bmcgaSArIDEgaW4gdGhlIHNlY29uZCBjYWxsIHdvdWxkIHNlZW0gZGVzaXJhYmxlLCBJJ20gYWZy
+YWlkCj4gaXQgY2FuJ3QgYmUgdXNlZCBkaXJlY3RseSB0aGF0IHdheSwgYXMgZmluZF97LG5leHRf
+fXplcm9fYml0KCksCj4gb24geDg2IGF0IGxlYXN0LCBhc3N1bWUgdGhlaXIgbGFzdCBhcmd1bWVu
+dCB0byBiZSBsZXNzIHRoYW4KPiB0aGVpciBtaWRkbGUgb25lLiBUaGlzLCBpbiB0dXJuLCBtYXkg
+YWxyZWFkeSBiZSB2aW9sYXRlZCBpbgo+IHRoZSBnZW5lcmFsIGNhc2UgKG5vdyB0aGF0IHRoZSBm
+dW5jdGlvbiBsaXZlcyBpbiBjb21tb24gY29kZSk6Cj4gQW4gYXJjaGl0ZWN0dXJlIHdpdGggYWxs
+IEJJVFNfUEVSX0xPTkcrUEFHRV9TSVpFIGJpdHMgdXNhYmxlCj4gYXMgcGh5c2ljYWwgYWRkcmVz
+cyAoeDg2LTY0IGNhbiB1c2Ugb25seSB1cCB0byA1MiwgYnV0IHg4Ni0zMgo+IGNhbiBpbiBwcmlu
+Y2lwbGUgLSBwb3NzaWJseSB3aXRoIHNvbWUgZXh0cmEgY29uZGl0aW9ucyBsaWtlIHJ1bm5pbmcK
+PiBvbiB0b3Agb2YgYSA2NC1iaXQgaHlwZXJ2aXNvciAtIHVzZSBhbGwgNDQgYml0cykgdGhlIGZp
+cnN0IGNhbGwgbWF5Cj4gYWxyZWFkeSByZXR1cm4gQklUU19QRVJfTE9ORywgYW5kIGhlbmNlIHRo
+ZSBzZWNvbmQgY2FsbAo+IG1pZ2h0IGFscmVhZHkgcHJvZHVjZSBVQi4gQXMgYSByZXN1bHQsIHRv
+IGZpeCB0aGlzIG90aGVyIChsYXRlbnQKPiBvbmx5IGFmYWljdCkgaXNzdWUgYXQgdGhlIHNhbWUg
+dGltZSwgdGhlIGNvZGUgaW1vIG91Z2h0IHRvCj4gYmVjb21lCj4gCj4gICAgIGZvciAoIGogPSBN
+QVhfT1JERVIgLSAxOyA7ICkKPiAgICAgewo+ICAgICAgICAgaSA9IGZpbmRfbmV4dF96ZXJvX2Jp
+dCgmbWFzaywgQklUU19QRVJfTE9ORywgaiArIDEpOwo+ICAgICAgICAgaWYgKCBpID49IEJJVFNf
+UEVSX0xPTkcgKQo+ICAgICAgICAgICAgIGJyZWFrOwo+ICAgICAgICAgaiA9IGZpbmRfbmV4dF9i
+aXQoJm1hc2ssIEJJVFNfUEVSX0xPTkcsIGkgKyAxKTsKPiAgICAgICAgIGlmICggaiA+PSBCSVRT
+X1BFUl9MT05HICkKPiAgICAgICAgICAgICBicmVhazsKPiAKCk1ha2VzIHNlbnNlLiBJIHRyaWVk
+IGl0IGluIG15IHNldHVwIGFuZCBpdCBmaXhlcyB0aGUgbWlzYmVoYXZpb3IgSSB3YXMKc2VlaW5n
+LiBJIGFtIGFkZGluZyB0aGlzIHBhdGNoIHRvIG15IHNob3J0IHNlcmllcyBvZiBQRFggZml4ZXMu
+IEkgYW0KYWRkaW5nIHlvdXIgc2lnbmVkLW9mZi1ieSB0byB0aGUgcGF0Y2gsIGxldCBtZSBrbm93
+IGlmIGl0IGlzIGEgcHJvYmxlbS4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
