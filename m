@@ -1,23 +1,21 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
+From: Julien Grall <julien.grall@arm.com>
 Subject: Re: [PATCH 04/20] xen/arm: Rework HSCTLR_BASE
-Date: Fri, 3 May 2019 19:17:45 +0300
-Message-ID: <0b9442d3-6d3f-9632-862c-9dca202781c0@gmail.com>
+Date: Fri, 3 May 2019 17:10:48 +0100
+Message-ID: <f3491a70-c5c4-024f-235e-e00a842b81d7@arm.com>
 References: <20190422164937.21350-1-julien.grall@arm.com>
  <20190422164937.21350-5-julien.grall@arm.com>
  <baf59ec5-cc0a-5ffc-f637-6bbfd29dd589@gmail.com>
- <f3491a70-c5c4-024f-235e-e00a842b81d7@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=COEE=TD=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1hMasg-0002j5-Fz
- for xen-devel@lists.xenproject.org; Fri, 03 May 2019 16:17:50 +0000
-Received: by mail-lj1-x233.google.com with SMTP id w12so5661957ljh.12
- for <xen-devel@lists.xenproject.org>; Fri, 03 May 2019 09:17:48 -0700 (PDT)
-In-Reply-To: <f3491a70-c5c4-024f-235e-e00a842b81d7@arm.com>
+ <SRS0=Vigr=TD=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hMaly-0002CW-N0
+ for xen-devel@lists.xenproject.org; Fri, 03 May 2019 16:10:54 +0000
+In-Reply-To: <baf59ec5-cc0a-5ffc-f637-6bbfd29dd589@gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -27,16 +25,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xenproject.org
 Cc: Oleksandr_Tyshchenko@epam.com, sstabellini@kernel.org, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAwMy4wNS4xOSAxOToxMCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEkgZG9uJ3QgdW5kZXJz
-dGFuZCB3aGF0IGlzIHlvdXIgInNlY29uZCIuIERvZXMgaXQgbWVhbiB5b3UgYXJlIGhhcHB5IHdp
-dGggdGhlIGlkZWEgb2YgdGhlIHBhdGNoIGJ1dCB3ZSBzaG91bGQgYWdyZWUgb24gdGhlIG5hbWlu
-ZyBmaXJzdD8KClllcywgSSdtIG9rIHdpdGggdGhlIGNoYW5nZS4KQWN0dWFsbHkgSSBsaWtlIHRo
-ZSBwYXJ0IHdpdGggSFNDVExSX0NMRUFSIGFzIGEgY29tcGlsYXRpb24gdGltZSBndWFyZC4KQnV0
-IG5hbWluZyBzaG91bGQgYmUgYWdyZWVkIGZpcnN0LgoKLS0gClNpbmNlcmVseSwKQW5kcmlpIEFu
-aXNvdi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SGksCgpPbiAwMy8wNS8yMDE5IDE2OjU2LCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IE9uIDIyLjA0
+LjE5IDE5OjQ5LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IMKgIC8qIEhDUiBIeXAgQ29uZmlndXJh
+dGlvbiBSZWdpc3RlciAqLwo+PiDCoCAjZGVmaW5lIEhDUl9SV8KgwqDCoMKgwqDCoMKgwqDCoCAo
+X0FDKDEsVUwpPDwzMSkgLyogUmVnaXN0ZXIgV2lkdGgsIEFSTTY0IG9ubHkgKi8KPj4KPiAKPiBS
+ZXNvbHV0aW9uIG9mIHRoZSBkaXNwdXRlIHdpdGggSmFuIGFib3V0IFtQQVRDSCAwMS8yMF0gaXMg
+cmVxdWlyZWQgZmlyc3QuCgpJIGRvbid0IHVuZGVyc3RhbmQgd2hhdCBpcyB5b3VyICJzZWNvbmQi
+LiBEb2VzIGl0IG1lYW4geW91IGFyZSBoYXBweSB3aXRoIHRoZSAKaWRlYSBvZiB0aGUgcGF0Y2gg
+YnV0IHdlIHNob3VsZCBhZ3JlZSBvbiB0aGUgbmFtaW5nIGZpcnN0PwoKQ2hlZXJzLAoKLS0gCkp1
+bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
