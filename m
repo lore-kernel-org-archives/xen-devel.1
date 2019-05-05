@@ -1,17 +1,24 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [freebsd-master test] 135640: regressions - FAIL
-Date: Sun, 05 May 2019 12:28:49 +0000
-Message-ID: <osstest-135640-mainreport@xen.org>
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+Subject: {xen,
+ dom0}_vga_console_info.u.vesa_lfb.lfb_base field too small
+Date: Sun, 5 May 2019 15:27:40 +0200
+Message-ID: <20190505132740.GT1728@mail-itl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3077111936154259749=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=7+Pe=TF=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hNGGQ-0007K2-43
- for xen-devel@lists.xenproject.org; Sun, 05 May 2019 12:29:06 +0000
+ <SRS0=AYeZ=TF=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hNHBN-0004ML-6D
+ for xen-devel@lists.xenproject.org; Sun, 05 May 2019 13:27:57 +0000
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+ by mailout.west.internal (Postfix) with ESMTP id 629EE21D
+ for <xen-devel@lists.xenproject.org>; Sun,  5 May 2019 09:27:44 -0400 (EDT)
+Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 586FEE44B5
+ for <xen-devel@lists.xenproject.org>; Sun,  5 May 2019 09:27:43 -0400 (EDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,59 +27,73 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
+To: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzNTY0MCBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTM1NjQwLwoKUmVncmVzc2lvbnMgOi0o
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5n
-IHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC1mcmVlYnNkLWFnYWlu
-ICAgICA1IGhvc3QtaW5zdGFsbCg1KSAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMzUyMzMKIGJ1
-aWxkLWFtZDY0LXhlbi1mcmVlYnNkICAgICAgIDUgaG9zdC1pbnN0YWxsKDUpICAgICAgICAgIGZh
-aWwgUkVHUi4gdnMuIDEzNTIzMwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGZyZWVi
-c2QgICAgICAgICAgICAgIDkwY2RhYTA2NjViMzM5NTg0Zjg1YmUxY2UzYjVhNGFlNGRiM2ExODUK
-YmFzZWxpbmUgdmVyc2lvbjoKIGZyZWVic2QgICAgICAgICAgICAgIGI1ODMyMTUwNzcwMmExMTI1
-YWVkNThkZGMzMjBiNTYwYjFiZmZjNzEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzNTIzMyAgMjAx
-OS0wNC0yNCAwOToxOTowMyBaICAgMTEgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzUzMTcg
-IDIwMTktMDQtMjYgMDk6MTk6MDYgWiAgICA5IGRheXMgICAgMyBhdHRlbXB0cwpUZXN0aW5nIHNh
-bWUgc2luY2UgICAxMzU2NDAgIDIwMTktMDUtMDMgMDk6MTk6NTEgWiAgICAyIGRheXMgICAgMSBh
-dHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBh
-ZHJpYW4gPGFkcmlhbkBGcmVlQlNELm9yZz4KICBhZSA8YWVARnJlZUJTRC5vcmc+CiAgYW5kcmV3
-IDxhbmRyZXdARnJlZUJTRC5vcmc+CiAgYXNvbWVycyA8YXNvbWVyc0BGcmVlQlNELm9yZz4KICBi
-Y3JhbiA8YmNyYW5ARnJlZUJTRC5vcmc+CiAgYmRlIDxiZGVARnJlZUJTRC5vcmc+CiAgYnIgPGJy
-QEZyZWVCU0Qub3JnPgogIGNlbSA8Y2VtQEZyZWVCU0Qub3JnPgogIGN5IDxjeUBGcmVlQlNELm9y
-Zz4KICBkY2hhZ2luIDxkY2hhZ2luQEZyZWVCU0Qub3JnPgogIGRvdWdtIDxkb3VnbUBGcmVlQlNE
-Lm9yZz4KICBlbWFzdGUgPGVtYXN0ZUBGcmVlQlNELm9yZz4KICBnYWxsYXRpbiA8Z2FsbGF0aW5A
-RnJlZUJTRC5vcmc+CiAgZ2FuYm9sZCA8Z2FuYm9sZEBGcmVlQlNELm9yZz4KICBnamIgPGdqYkBG
-cmVlQlNELm9yZz4KICBnb256byA8Z29uem9ARnJlZUJTRC5vcmc+CiAgaHNlbGFza3kgPGhzZWxh
-c2t5QEZyZWVCU0Qub3JnPgogIGlhbiA8aWFuQEZyZWVCU0Qub3JnPgogIGltcCA8aW1wQEZyZWVC
-U0Qub3JnPgogIGpoYiA8amhiQEZyZWVCU0Qub3JnPgogIGpoaWJiaXRzIDxqaGliYml0c0BGcmVl
-QlNELm9yZz4KICBqb2hhbHVuIDxqb2hhbHVuQEZyZWVCU0Qub3JnPgogIGtldmFucyA8a2V2YW5z
-QEZyZWVCU0Qub3JnPgogIGtpYiA8a2liQEZyZWVCU0Qub3JnPgogIGxldiA8bGV2QEZyZWVCU0Qu
-b3JnPgogIGx1cG9ybCA8bHVwb3JsQEZyZWVCU0Qub3JnPgogIGx3aHN1IDxsd2hzdUBGcmVlQlNE
-Lm9yZz4KICBtYW51IDxtYW51QEZyZWVCU0Qub3JnPgogIG1hcmtqIDxtYXJrakBGcmVlQlNELm9y
-Zz4KICBtYXYgPG1hdkBGcmVlQlNELm9yZz4KICBuZ2llIDxuZ2llQEZyZWVCU0Qub3JnPgogIHJn
-cmltZXMgPHJncmltZXNARnJlZUJTRC5vcmc+CiAgcm1hY2tsZW0gPHJtYWNrbGVtQEZyZWVCU0Qu
-b3JnPgogIHJ3YXRzb24gPHJ3YXRzb25ARnJlZUJTRC5vcmc+CiAgc2h1cmQgPHNodXJkQEZyZWVC
-U0Qub3JnPgogIHRyYXN6IDx0cmFzekBGcmVlQlNELm9yZz4KICB0c29vbWUgPHRzb29tZUBGcmVl
-QlNELm9yZz4KICB0dWV4ZW4gPHR1ZXhlbkBGcmVlQlNELm9yZz4KICB0eWNob24gPHR5Y2hvbkBG
-cmVlQlNELm9yZz4KICB6ZWlzaW5nIDx6ZWlzaW5nQEZyZWVCU0Qub3JnPgoKam9iczoKIGJ1aWxk
-LWFtZDY0LWZyZWVic2QtYWdhaW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
-YWlsICAgIAogYnVpbGQtYW1kNjQtZnJlZWJzZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14ZW4tZnJlZWJzZCAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdo
-dCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9n
-cwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJl
-IGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3Nz
-dGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBp
-biBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3Nz
-dGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJp
-dHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3Rl
-cgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54
-ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5v
-IHJldmlzaW9uIGxvZzsgaXQgd291bGQgYmUgMjAwNiBsaW5lcyBsb25nLikKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============3077111936154259749==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="H88uUF932U8Oj0a6"
+Content-Disposition: inline
+
+
+--H88uUF932U8Oj0a6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: {xen,dom0}_vga_console_info.u.vesa_lfb.lfb_base field too small
+
+Hi,
+
+I have a machine that allocate vesa LFB above 4GB, as reported by UEFI
+GOP. At 0x4000000000 to be specific.
+vga_console_info.u.vesa_lfb.lfb_base is a 32bit field, so it gets
+truncated, leading to all kind of memory corruptions when something
+writes there.
+If that would be only about Xen, that wouldn't be that bad, but
+unfortunately exactly the same structure is used as an interface for
+dom0 start info (at least PV one).
+My only idea is to introduce yet another entry in *_vga_console_info.u
+union (efi_lfb64?) with a 64bit lfb_base field. And mark it in
+video_type (XEN_VGATYPE_EFI_LFB64?). But I'm not sure how non-patched
+Linux (or other supported OSes) would respond to this. xen_init_vga() in
+Linux doesn't seem to bail on unknown video_type, so it may be fragile.
+
+Any better ideas?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--H88uUF932U8Oj0a6
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlzO5MwACgkQ24/THMrX
+1yyWFwf/cajomXTfDGFNaosEYL0lcjpjnx1jBd9aqGKB+6/IU74xtd8ICYygy5V2
+tQfAMYNP8WE+wMe8UnxqFUVH6yQH7diu3MYrOvvUaO69z28bjh7r14skPNyYonMS
+yUpZwMumiuEeFwLm111LGdQKmHbWTwMon45KSY9TDOqxULJtWg+tO/kLBdfpLgVC
+Yl5fY0xWXzchNXy383xh38giaKV89WQQQNZ9He+2miA7zxZQ2Zqbw5/Va/tJz61n
+KtSzHagjEgsi5bMquvpG+w6/236pDhyrUc+5mU6ZiQUZh6xWWaouxJ/hkoKuJUuz
+io41fdVh2urcD9VuV8cQMGDdMBoVrA==
+=weM5
+-----END PGP SIGNATURE-----
+
+--H88uUF932U8Oj0a6--
+
+
+--===============3077111936154259749==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3077111936154259749==--
