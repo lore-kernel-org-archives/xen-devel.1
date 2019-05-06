@@ -1,10 +1,10 @@
 From: Andrii Anisov <andrii.anisov@gmail.com>
-Subject: Re: [PATCH 04/12] xen/arm: mm: Introduce _PAGE_PRESENT
- and _PAGE_POPULATE
-Date: Mon, 6 May 2019 15:48:16 +0300
-Message-ID: <e7bd0a3b-d030-8a2f-2fd6-a7eab540d2bf@gmail.com>
+Subject: Re: [PATCH 05/12] xen/arm: mm: Only increment mfn when
+ valid in xen_pt_update
+Date: Mon, 6 May 2019 15:48:23 +0300
+Message-ID: <fdea6024-d7e1-9233-43b8-4c09a54161e9@gmail.com>
 References: <20190424165955.23718-1-julien.grall@arm.com>
- <20190424165955.23718-5-julien.grall@arm.com>
+ <20190424165955.23718-6-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
@@ -12,11 +12,11 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=aYeK=TG=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1hNd2c-0007Lh-D3
- for xen-devel@lists.xenproject.org; Mon, 06 May 2019 12:48:22 +0000
-Received: by mail-lf1-x141.google.com with SMTP id j11so9055234lfm.0
- for <xen-devel@lists.xenproject.org>; Mon, 06 May 2019 05:48:20 -0700 (PDT)
-In-Reply-To: <20190424165955.23718-5-julien.grall@arm.com>
+ id 1hNd2h-0007OD-NL
+ for xen-devel@lists.xenproject.org; Mon, 06 May 2019 12:48:27 +0000
+Received: by mail-lf1-x144.google.com with SMTP id k18so9023427lfj.13
+ for <xen-devel@lists.xenproject.org>; Mon, 06 May 2019 05:48:26 -0700 (PDT)
+In-Reply-To: <20190424165955.23718-6-julien.grall@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -30,18 +30,15 @@ To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
 Cc: Oleksandr_Tyshchenko@epam.com, sstabellini@kernel.org, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-CgpPbiAyNC4wNC4xOSAxOTo1OSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEF0IHRoZSBtb21lbnQs
-IHRoZSBmbGFncyBhcmUgbm90IGVub3VnaCB0byBkZXNjcmliZSB3aGF0IGtpbmQgb2YgdXBkYXRl
-Cj4gd2lsbCBkb25lIG9uIHRoZSBWQSByYW5nZS4gVGhleSBuZWVkIHRvIGJlIHVzZWQgaW4gY29u
-anVuY3Rpb24gd2l0aCB0aGUKPiBlbnVtIHhlbm1hcF9vcGVyYXRpb24uCj4gCj4gSXQgd291bGQg
-YmUgbW9yZSBjb252ZW5pZW50IHRvIGhhdmUgYWxsIHRoZSBpbmZvcm1hdGlvbiBmb3IgdGhlIHVw
-ZGF0ZQo+IGluIGEgc2luZ2xlIHBsYWNlLgo+IAo+IFR3byBuZXcgZmxhZ3MgYXJlIGFkZGVkIHRv
-IHJlbW92ZSB0aGUgcmVsaWVuY2Ugb24geGVubWFwX29wZXJhdGlvbjoKPiAgICAgIC0gX1BBR0Vf
-UFJFU0VOVDogSW5kaWNhdGUgd2hldGhlciB3ZSBhcmUgYWRkaW5nL3JlbW92aW5nIHRoZSBtYXBw
-aW5nCj4gICAgICAtIF9QQUdFX1BPUFVMQVRFOiBJbmRpY2F0ZSB3aGV0aGVyIHdlIG9ubHkgcG9w
-dWxhdGUgcGFnZS10YWJsZXMKPiAKPiBTaWduZWQtb2ZmLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGll
-bi5ncmFsbEBhcm0uY29tPgoKUmV2aWV3ZWQtYnk6IEFuZHJpaSBBbmlzb3YgPGFuZHJpaV9hbmlz
-b3ZAZXBhbS5jb20+CgotLSAKU2luY2VyZWx5LApBbmRyaWkgQW5pc292LgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAyNC4wNC4xOSAxOTo1OSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEN1cnJlbnRseSwgdGhl
+IE1GTiB3aWxsIGJlIGluY3JlbWVudGVkIGV2ZW4gaWYgaXQgaXMgaW52YWxpZC4gVGhpcyB3aWxs
+Cj4gcmVzdWx0IHRvIGhhdmUgYSB2YWxpZCBNRk4gYWZ0ZXIgdGhlIGZpcnN0IGl0ZXJhdGlvbi4K
+PiAKPiBXaGlsZSB0aGlzIGlzIG5vdCBhIG1ham9yIHByb2JsZW0gdG9kYXksIHRoaXMgd2lsbCBi
+ZSBpbiB0aGUgZnV0dXJlIGlmCj4gdGhlIGNvZGUgZXhwZWN0IGFuIGludmFsaWQgTUZOIGF0IGV2
+ZXJ5IGl0ZXJhdGlvbi4KPiAKPiBTdWNoIGJlaGF2aW9yIGlzIHByZXZlbnRlZCBieSBhdm9pZGlu
+ZyB0byBpbmNyZW1lbnQgYW4gaW52YWxpZCBNRk4uCj4gCj4gU2lnbmVkLW9mZi1ieTogSnVsaWVu
+IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KClJldmlld2VkLWJ5OiBBbmRyaWkgQW5pc292
+IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgoKLS0gClNpbmNlcmVseSwKQW5kcmlpIEFuaXNvdi4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
