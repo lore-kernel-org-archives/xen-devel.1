@@ -2,80 +2,67 @@ Return-Path: <SRS0=pwZ6=TG=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 668C8C04A6B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 May 2019 15:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 13348C04AAD
+	for <xen-devel@archiver.kernel.org>; Mon,  6 May 2019 15:10:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 390222053B
-	for <xen-devel@archiver.kernel.org>; Mon,  6 May 2019 15:04:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D9B192053B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 May 2019 15:10:12 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="cSKbDtpE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 390222053B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="Zs732K0c"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D9B192053B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hNf9d-0004P7-4y; Mon, 06 May 2019 15:03:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=SrHI=TG=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1hNf9c-0004OY-Fc
- for xen-devel@lists.xenproject.org; Mon, 06 May 2019 15:03:44 +0000
-X-Inumbo-ID: 1e4c2b40-7010-11e9-a3f2-8ba326a66064
-Received: from new1-smtp.messagingengine.com (unknown [66.111.4.221])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1e4c2b40-7010-11e9-a3f2-8ba326a66064;
- Mon, 06 May 2019 15:03:38 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
- by mailnew.nyi.internal (Postfix) with ESMTP id CE176137F9;
- Mon,  6 May 2019 11:03:33 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute7.internal (MEProxy); Mon, 06 May 2019 11:03:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-transfer-encoding:content-type
- :date:from:message-id:mime-version:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=sepRne
- Jt2WFjyykYEGq6qWo/yunJWLzp4sDqVnNlNYI=; b=cSKbDtpEFR75wDpHUvMiiZ
- Qrjb+L5A0S5BPhZ2dZf4rXUWjQe3EU4WPQ9GaC/heElU2ONOkQ2rc2OBJiJmPyBs
- W0cHK2lX8KFHyOGpJqtKFjwb2YHJXpdLSPUP9mvXW3lU8YhVUJvwvbZ42pD0V+Wd
- UuypM7izK7Ayfgthje155Vws32U3UGRcqKrUfUoR33Iys9jShBz7WvvvfG0vf+5x
- ttCguY0dzY91XtZDD8xhMEK9NguNG7b99QzSv0kALFGm6YsKtwdl5HtoIG1GJW0b
- HQLYFw6Tpkx0tTAmClS0fJ3fl8mj9dxRkth2DjOAZgwp8am976+vcCxqSrwEhUpA
- ==
-X-ME-Sender: <xms:w0zQXDvAhzl5LAMqHHs4R7vCk4pD2DlgLorPF53EtVceEEU0Rb-1UA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduuddrjeejgdekiecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefhvffufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpeforghrvghkucfo
- rghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhish
- hisghlvghthhhinhhgshhlrggsrdgtohhmqeenucfkphepledurdeihedrfeegrdeffeen
- ucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvth
- hhihhnghhslhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedt
-X-ME-Proxy: <xmx:w0zQXFOqWzwt1VoI0HcI8JJOmc9Sqi7I51mdnljvY7QUYO0qNNdK1w>
- <xmx:w0zQXC42wpuAsiiMEjIzMqP04V52Dpqdw2QPo0YwhicFH-KYFKFuXg>
- <xmx:w0zQXDTczrIIB8Q7ZTjKpGK_BeNJoy80jbFbOOuwmUpn0xLIYfVC9Q>
- <xmx:xUzQXLIxpgRGzyFYoPDE9Mur7QTvNJWXdW-aly0ael_eXBhmjDgrrw>
-Received: from localhost.localdomain (ip5b412221.dynamic.kabel-deutschland.de
- [91.65.34.33])
- by mail.messagingengine.com (Postfix) with ESMTPA id 0E2EB10369;
- Mon,  6 May 2019 11:03:29 -0400 (EDT)
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
+	id 1hNfFa-0005B1-2y; Mon, 06 May 2019 15:09:54 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=Tt3T=TG=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hNfFX-0005Aw-Qc
+ for xen-devel@lists.xenproject.org; Mon, 06 May 2019 15:09:52 +0000
+X-Inumbo-ID: fe48d829-7010-11e9-843c-bc764e045a96
+Received: from mo6-p01-ob.smtp.rzone.de (unknown [2a01:238:20a:202:5301::8])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id fe48d829-7010-11e9-843c-bc764e045a96;
+ Mon, 06 May 2019 15:09:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1557155389;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=8Ddpff26m+o6SJii8NsYjlELxMhj6rAzLVK64b6BBCA=;
+ b=Zs732K0cjMcMO90U0sIQMig6j+oLY4vRjlfkNzuNyRK01HflVFi3MeAU+OruBEIfNd
+ R1LMUZhYhrYsxzIgMPVo3F8Lp4yeGLpFFmTtRv8uC+nrFOIiHJVpWRXXeeGeCYAH1ZfL
+ f0UyWXpYkJY98yHY9DXBThlBqaltfXKUttwKIsLiY8k9y9humdGzmG/LpTu9yu3mZ8OF
+ kBO+gC0iKGOTvuu2xbaq8xeN0+MtJrNGQ5pxX2NuAxX+usYuOG/KYTrRbSZXzpQqYepe
+ KUTsip58dlPWpg0oWJQ7Wcjqvn8ZLfSJEHjmwr670uQFejouCq2GWS1NSdFFjN7BtJuX
+ BFEQ==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QED/SSGq+wjGiUC4AUztn93FPS2dyuaMMK"
+X-RZG-CLASS-ID: mo00
+Received: from sender by smtp.strato.de (RZmta 44.18 DYNA|AUTH)
+ with ESMTPSA id 60a847v46F9LTzL
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate);
+ Mon, 6 May 2019 17:09:21 +0200 (CEST)
+Date: Mon, 6 May 2019 17:09:19 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Marek =?UTF-8?B?TWFyY3p5a293c2tpLUfDs3JlY2tp?=
  <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Date: Mon,  6 May 2019 16:50:16 +0200
-Message-Id:
- <cover.5027956268821f50401d0ecdfad2447cbe4fdd6c.1557154206.git-series.marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.17.2
+Message-ID: <20190506170919.6035d4d9.olaf@aepfle.de>
+In-Reply-To: <a8bebd8db2727b8b95edcee613f39b90fa93daff.1557154206.git-series.marmarek@invisiblethingslab.com>
+References: <cover.5027956268821f50401d0ecdfad2447cbe4fdd6c.1557154206.git-series.marmarek@invisiblethingslab.com>
+ <a8bebd8db2727b8b95edcee613f39b90fa93daff.1557154206.git-series.marmarek@invisiblethingslab.com>
+X-Mailer: Claws Mail 2019.04.26 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH 0/5] Fixes for large framebuffer,
- placed above 4GB
+Subject: Re: [Xen-devel] [PATCH 3/5] drivers/video: Drop framebuffer size
+ constraints
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,40 +73,61 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Olaf Hering <olaf@aepfle.de>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Tim Deegan <tim@xen.org>,
- Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+ Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org
+Content-Type: multipart/mixed; boundary="===============2989303213712202922=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190506145016.gmCrQ2wdCUCUXfFWXnRLGl0eWsj7spAmSi2tjU8vvUs@z>
+Message-ID: <20190506150919.nyxF2doOM8nLCyMF7Sd2lYzk-A5LsyBBE0WoKLRLhFg@z>
 
-QSBidW5jaCBvZiBmaXhlcyBmb3IgYm9vdGluZyBYZW4gb24gVGhpbmtwYWQgUDUyLCB0aHJvdWdo
-IGdydWIyLWVmaSArCm11bHRpYm9vdDIuIE1vc3Qgb2YgdGhlbSBjYW4gYmUgYXBwbGllZCBpbmRl
-cGVuZGVudGx5LgoKLS0tCmNjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXgu
-Y29tPgpjYzogR2VvcmdlIER1bmxhcCA8R2VvcmdlLkR1bmxhcEBldS5jaXRyaXguY29tPgpjYzog
-SWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CmNjOiBKYW4gQmV1bGljaCA8
-amJldWxpY2hAc3VzZS5jb20+CmNjOiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29t
-PgpjYzogS29ucmFkIFJ6ZXN6dXRlayBXaWxrIDxrb25yYWQud2lsa0BvcmFjbGUuY29tPgpjYzog
-U3RlZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgpjYzogVGltIERlZWdh
-biA8dGltQHhlbi5vcmc+CmNjOiBXZWkgTGl1IDx3ZWkubGl1MkBjaXRyaXguY29tPgpjYzogT2xh
-ZiBIZXJpbmcgPG9sYWZAYWVwZmxlLmRlPgoKTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpICg1
-KToKICB4ZW4vYml0bWFwOiBmaXggYml0bWFwX2ZpbGwgd2l0aCB6ZXJvLXNpemVkIGJpdG1hcAog
-IGRyaXZlcnMvdmlkZW86IGRyb3AgdW51c2VkIGxpbWl0cwogIGRyaXZlcnMvdmlkZW86IERyb3Ag
-ZnJhbWVidWZmZXIgc2l6ZSBjb25zdHJhaW50cwogIHhlbjogZml4IGhhbmRsaW5nIGZyYW1lYnVm
-ZmVyIGxvY2F0ZWQgYWJvdmUgNEdCCiAgZHJpdmVycy92aWRlbzogdXNlIHZsZmJfaW5mbyBjb25z
-aXN0ZW50bHkKCiB4ZW4vYXJjaC94ODYvZWZpL2VmaS1ib290LmggfCAgMSArCiB4ZW4vZHJpdmVy
-cy92aWRlby9sZmIuYyAgICAgfCAxMyAtLS0tLS0tLS0tLS0tCiB4ZW4vZHJpdmVycy92aWRlby92
-ZXNhLmMgICAgfCAxNyArKysrKysrKysrKystLS0tLQogeGVuL2luY2x1ZGUvcHVibGljL3hlbi5o
-ICAgIHwgIDIgKysKIHhlbi9pbmNsdWRlL3hlbi9iaXRtYXAuaCAgICB8ICAyICsrCiA1IGZpbGVz
-IGNoYW5nZWQsIDE3IGluc2VydGlvbnMoKyksIDE4IGRlbGV0aW9ucygtKQoKYmFzZS1jb21taXQ6
-IGRjNDk3NjM1ZDkzZjY2NzJmODI3MjdhZDk3YTU1MjA1MTc3YmUyYWEKLS0gCmdpdC1zZXJpZXMg
-MC45LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============2989303213712202922==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/EPC7HSK/YS7rienJN6rsw9+"; protocol="application/pgp-signature"
+
+--Sig_/EPC7HSK/YS7rienJN6rsw9+
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon,  6 May 2019 16:50:19 +0200
+schrieb Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>:
+
+> The limit 1900x1200 do not match real world devices (1900 looks like a
+> typo, should be 1920). But in practice the limits are arbitrary and do
+> not serve any real purpose. As discussed in "Increase framebuffer size
+> to todays standards" thread, drop them completely.
+
+ACK for the idea.
+
+Olaf
+
+--Sig_/EPC7HSK/YS7rienJN6rsw9+
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNBOHwAKCRBdQqD6ppg2
+fqxSAKDVkuA80W3PBX+Gyiezp627IZcpYACdFia4Uau1ggjdqBedMW8tERGtsqU=
+=WOkV
+-----END PGP SIGNATURE-----
+
+--Sig_/EPC7HSK/YS7rienJN6rsw9+--
+
+
+--===============2989303213712202922==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2989303213712202922==--
+
