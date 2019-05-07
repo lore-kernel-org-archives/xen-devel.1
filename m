@@ -1,10 +1,10 @@
 From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH V5 4/4] xen/arm: Add early printk support
- for SCIFA compatible UARTs
-Date: Tue, 7 May 2019 17:01:13 +0100
-Message-ID: <6eacd43d-81e2-8711-ee6a-007a999fcee4@arm.com>
+Subject: Re: [PATCH V5 3/4] xen/arm: Extend SCIF early prink
+ code to handle other interfaces
+Date: Tue, 7 May 2019 17:02:11 +0100
+Message-ID: <06cd7a91-e70b-1eeb-bafb-d59a7f5d4d2b@arm.com>
 References: <1556816422-25185-1-git-send-email-olekstysh@gmail.com>
- <1556816422-25185-5-git-send-email-olekstysh@gmail.com>
+ <1556816422-25185-4-git-send-email-olekstysh@gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
@@ -12,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=qCYz=TH=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hO2Wr-0005hJ-CV
- for xen-devel@lists.xenproject.org; Tue, 07 May 2019 16:01:17 +0000
-In-Reply-To: <1556816422-25185-5-git-send-email-olekstysh@gmail.com>
+ id 1hO2Xn-0005n5-7A
+ for xen-devel@lists.xenproject.org; Tue, 07 May 2019 16:02:15 +0000
+In-Reply-To: <1556816422-25185-4-git-send-email-olekstysh@gmail.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,16 +28,25 @@ To: Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org
 Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, sstabellini@kernel.org
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgT2xla3NhbmRyLAoKT24gNS8yLzE5IDY6MDAgUE0sIE9sZWtzYW5kciBUeXNoY2hlbmtvIHdy
-b3RlOgo+IEZyb206IE9sZWtzYW5kciBUeXNoY2hlbmtvIDxvbGVrc2FuZHJfdHlzaGNoZW5rb0Bl
-cGFtLmNvbT4KPiAKPiBUaGlzIHBhdGNoIG1ha2VzIHBvc3NpYmxlIHRvIHVzZSBleGlzdGluZyBl
-YXJseSBwcmluayBjb2RlCj4gZm9yIFJlbmVzYXMgIlN0b3V0IiBib2FyZCBiYXNlZCBvbiBSLUNh
-ciBIMiBTb0MgKFNDSUZBKS4KPiAKPiBUaGUgIkVBUkxZX1BSSU5US19WRVJTSU9OIiBmb3IgdGhh
-dCBib2FyZCBzaG91bGQgYmUgJ0EnOgo+IENPTkZJR19FQVJMWV9QUklOVEs9c2NpZiwweGU2YzQw
-MDAwLEEKPiAKPiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2FuZHIgVHlzaGNoZW5rbyA8b2xla3NhbmRy
-X3R5c2hjaGVua29AZXBhbS5jb20+Cj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFy
-bS5jb20+CgpBY2tlZC1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkNo
-ZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
-bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
-by94ZW4tZGV2ZWw=
+SGksCgpPbiA1LzIvMTkgNjowMCBQTSwgT2xla3NhbmRyIFR5c2hjaGVua28gd3JvdGU6Cj4gICBk
+b2NzL21pc2MvYXJtL2Vhcmx5LXByaW50ay50eHQgICAgfCAgNSArKysrKwo+ICAgeGVuL2FyY2gv
+YXJtL1J1bGVzLm1rICAgICAgICAgICAgIHwgIDcgKysrKysrKwo+ICAgeGVuL2FyY2gvYXJtL2Fy
+bTMyL2RlYnVnLXNjaWYuaW5jIHwgMTcgKysrKysrKysrKystLS0tLS0KPiAgIDMgZmlsZXMgY2hh
+bmdlZCwgMjMgaW5zZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEv
+ZG9jcy9taXNjL2FybS9lYXJseS1wcmludGsudHh0IGIvZG9jcy9taXNjL2FybS9lYXJseS1wcmlu
+dGsudHh0Cj4gaW5kZXggYjIzYzU0Zi4uODllMDgxZSAxMDA2NDQKPiAtLS0gYS9kb2NzL21pc2Mv
+YXJtL2Vhcmx5LXByaW50ay50eHQKPiArKysgYi9kb2NzL21pc2MvYXJtL2Vhcmx5LXByaW50ay50
+eHQKPiBAQCAtMjcsNiArMjcsMTEgQEAgQ09ORklHX0VBUkxZX1BSSU5USz08SU5DPiw8QkFTRV9B
+RERSRVNTPiw8T1RIRVJfT1BUSU9OUz4KPiAgICAgICAgIElmIDxCQVVEX1JBVEU+IGlzIG5vdCBn
+aXZlbiB0aGVuIHRoZSBjb2RlIHdpbGwgbm90IHRyeSB0bwo+ICAgICAgICAgaW5pdGlhbGl6ZSB0
+aGUgVUFSVCwgc28gdGhhdCBib290bG9hZGVyIG9yIGZpcm13YXJlIHNldHRpbmdzIGNhbgo+ICAg
+ICAgICBiZSB1c2VkIGZvciBtYXhpbXVtIGNvbXBhdGliaWxpdHkuCj4gKyAgLSBzY2lmLDxCQVNF
+X0FERFJFU1M+LDxWRVJTSU9OPgo+ICsgICAgLSBTQ0lGPFZFUlNJT04+IGlzLCBvcHRpb25hbGx5
+LCB0aGUgaW50ZXJmYWNlIHZlcnNpb24gb2YgdGhlIFVBUlQuCj4gKwo+ICsgICAgICBJZiA8VkVS
+U0lPTj4gaXMgbm90IGdpdmVuIHRoZW4gdGhlIGRlZmF1bHQgaW50ZXJmYWNlIHZlcnNpb24gKFND
+SUYpCj4gKyAgICAgIHdpbGwgYmUgdXNlZC4KClRoaXMgcGF0Y2ggbm93IGxvb2tzIGdvb2QuIEkg
+d291bGQgbGlrZSBzb21lIGlucHV0IGZyb20gU3RlZmFubyBvbiB0aGUgCndvcmRpbmcgaGVyZSBi
+ZWZvcmUgaXQgZ2V0cyBtZXJnZWQuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
+ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
+b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
