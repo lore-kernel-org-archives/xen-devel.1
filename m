@@ -1,22 +1,25 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH v2 03/10] xen: extend
- XEN_DOMCTL_memory_mapping to handle memory policy
-Date: Tue, 7 May 2019 17:41:47 +0100
-Message-ID: <a0eaef9c-543f-831c-c856-862f9e20c2f7@arm.com>
-References: <alpine.DEB.2.10.1904301358560.13269@sstabellini-ThinkPad-X260>
- <1556658172-8824-3-git-send-email-sstabellini@kernel.org>
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 4/5] xen: fix handling framebuffer located
+ above 4GB
+Date: Tue, 7 May 2019 18:43:11 +0200
+Message-ID: <20190507164311.GB1502@mail-itl>
+References: <cover.5027956268821f50401d0ecdfad2447cbe4fdd6c.1557154206.git-series.marmarek@invisiblethingslab.com>
+ <dfffbc1faf0884df46f5568cdcf9fa8c2340ae2b.1557154206.git-series.marmarek@invisiblethingslab.com>
+ <7c7a7dcc-ff17-feb7-1e88-96c31b0e72a7@suse.com>
+ <20190506153211.GV1502@mail-itl>
+ <5CD14B6E020000780022C646@prv1-mh.provo.novell.com>
+ <20190507153825.GA1502@mail-itl>
+ <5CD1AE5D020000780022C9AF@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8448316691333705168=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=qCYz=TH=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hO3A9-0001sU-22
- for xen-devel@lists.xenproject.org; Tue, 07 May 2019 16:41:53 +0000
-In-Reply-To: <1556658172-8824-3-git-send-email-sstabellini@kernel.org>
-Content-Language: en-US
+ <SRS0=vvNG=TH=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hO3BZ-0001yQ-Hi
+ for xen-devel@lists.xenproject.org; Tue, 07 May 2019 16:43:21 +0000
+In-Reply-To: <5CD1AE5D020000780022C9AF@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,108 +28,98 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <stefanos@xilinx.com>, JBeulich@suse.com, andrew.cooper3@citrix.com
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgU3RlZmFubywKCk9uIDQvMzAvMTkgMTA6MDIgUE0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90
-ZToKPiBSZXVzZSB0aGUgZXhpc3RpbmcgcGFkZGluZyBmaWVsZCB0byBwYXNzIG1lbW9yeSBwb2xp
-Y3kgaW5mb3JtYXRpb24uICBPbgoKTklUOiBJIGtub3cgdGhhdCBzb21lIGRldmVsb3BwZXIgbGlr
-ZSB1c2luZyB0d28gc3BhY2VzIGFmdGVyIHRoZSBmaW5hbCAKcG9pbnQuIEkgZG9uJ3QgbWluZCBp
-ZiB5b3UgdXNlIGl0IGJ1dCBwbGVhc2UgYmUgYXQgbGVhc3QgY29uc2lzdGVudCAKd2l0aGluIHRo
-ZSBjb21taXQgbWVzc2FnZS4KCj4gQXJtLCB0aGUgY2FsbGVyIGNhbiBzcGVjaWZ5IHdoZXRoZXIg
-dGhlIG1lbW9yeSBzaG91bGQgYmUgbWFwcGVkIGFzCj4gZGV2aWNlIG5HUkUsIHdoaWNoIGlzIHRo
-ZSBkZWZhdWx0IGFuZCB0aGUgb25seSBwb3NzaWJpbGl0eSB0b2RheSwgb3IKCkkgYW0gYWZyYWlk
-IHRoaXMgaXMgbm90IGNvcnJlY3QuIFRoZSBkZWZhdWx0IG9uIGlzIERldmljZS1uR25SRSAoaXQg
-aXMgCmNhbGxlZCBEZXZpY2UgTWVtb3J5IG9uIEFybXY3KS4KCj4gY2FjaGVhYmxlIG1lbW9yeSB3
-cml0ZS1iYWNrLiBPbiB4ODYsIHRoZSBvbmx5IG9wdGlvbiBpcyB1bmNhY2hhYmxlLiBUaGUKPiBj
-dXJyZW50IGJlaGF2aW9yIGJlY29tZXMgdGhlIGRlZmF1bHQgKG51bWVyaWNhbGx5ICcwJykuCj4g
-Cj4gT24gQVJNLCBtYXAgZGV2aWNlIG5HUkUgYXMgcDJtX21taW9fZGlyZWN0X2RldiAoYXMgaXQg
-aXMgYWxyZWFkeSBkb25lCj4gdG9kYXkpIGFuZCBXQiBjYWNoZWFibGUgbWVtb3J5IGFzIHAybV9t
-bWlvX2RpcmVjdF9jLgoKQXMgSSBwb2ludGVkIG91dCBpbiB2MSwgdGhlIHdvcmRpbmcgaXMgY29u
-ZnVzaW5nLiBUaGUgcmVzdWx0aW5nIG1lbW9yeSAKYXR0cmlidXRlIHdpbGwgYmUgYSBjb21iaW5h
-dGlvbiBvZiBzdGFnZS0yIGFuZCBzdGFnZS0yIG1lbW9yeSAKYXR0cmlidXRlcy4gSXQgd2lsbCBh
-Y3R1YWxseSBiZSB3aGF0ZXZlciBpcyB0aGUgc3Ryb25nZXN0IGJldHdlZW4gdGhlIDIgCnN0YWdl
-cyBhdHRyaWJ1dGVzLiBZb3UgY2FuIHNlZSB0aGUgc3RhZ2UtMiBhdHRyaWJ1dGVzIGFzIGEgd2F5
-IHRvIGdpdmUgCm1vcmUgb3IgbGVzcyBmcmVlZG9tIHRvIHRoZSBndWVzdCBmb3IgY29uZmlndXJl
-IHRoZSBhdHRyaWJ1dGVzLgoKVGhlIGNvbW1pdCBtZXNzYWdlIGFuZCBhbGwgZG9jdW1lbnRhdGlv
-biBzaG91bGQgYWN0dWFsbHkgcmVmbGVjdCB0aGF0IHRvIAphdm9pZCBtaXN1c2Ugb2YgdGhlIG5l
-dyBvcHRpb24uCgo+IAo+IE9uIHg4NiwgcmV0dXJuIGVycm9yIGlmIHRoZSBtZW1vcnkgcG9saWN5
-IHJlcXVlc3RlZCBpcyBub3QKPiBNRU1PUllfUE9MSUNZX1g4Nl9VQy4KPiAKPiBTaWduZWQtb2Zm
-LWJ5OiBTdGVmYW5vIFN0YWJlbGxpbmkgPHN0ZWZhbm9zQHhpbGlueC5jb20+Cj4gQ0M6IEpCZXVs
-aWNoQHN1c2UuY29tCj4gQ0M6IGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20KPiAKPiAtLS0KPiBD
-aGFuZ2VzIGluIHYyOgo+IC0gcmViYXNlCj4gLSB1c2UgcDJtX21taW9fZGlyZWN0X2MKPiAtIHVz
-ZSBFT1BOT1RTVVBQCj4gLSByZW5hbWUgY2FjaGVfcG9saWN5IHRvIG1lbW9yeSBwb2xpY3kKPiAt
-IHJlbmFtZSBNRU1PUllfUE9MSUNZX0RFVk1FTSB0byBNRU1PUllfUE9MSUNZX0FSTV9ERVZfbkdS
-RQo+IC0gcmVuYW1lIE1FTU9SWV9QT0xJQ1lfTUVNT1JZIHRvIE1FTU9SWV9QT0xJQ1lfQVJNX01F
-TV9XQgo+IC0gYWRkIE1FTU9SWV9QT0xJQ1lfWDg2X1VDCj4gLSBhZGQgTUVNT1JZX1BPTElDWV9E
-RUZBVUxUIGFuZCB1c2UgaXQKPiAtLS0KPiAgIHhlbi9jb21tb24vZG9tY3RsLmMgICAgICAgICB8
-IDIzICsrKysrKysrKysrKysrKysrKysrKy0tCj4gICB4ZW4vaW5jbHVkZS9wdWJsaWMvZG9tY3Rs
-LmggfCAxNCArKysrKysrKysrKysrLQo+ICAgMiBmaWxlcyBjaGFuZ2VkLCAzNCBpbnNlcnRpb25z
-KCspLCAzIGRlbGV0aW9ucygtKQo+IAo+IGRpZmYgLS1naXQgYS94ZW4vY29tbW9uL2RvbWN0bC5j
-IGIveGVuL2NvbW1vbi9kb21jdGwuYwo+IGluZGV4IDE0MGY5NzkuLjlmNjJlYWQgMTAwNjQ0Cj4g
-LS0tIGEveGVuL2NvbW1vbi9kb21jdGwuYwo+ICsrKyBiL3hlbi9jb21tb24vZG9tY3RsLmMKPiBA
-QCAtOTI4LDYgKzkyOCw3IEBAIGxvbmcgZG9fZG9tY3RsKFhFTl9HVUVTVF9IQU5ETEVfUEFSQU0o
-eGVuX2RvbWN0bF90KSB1X2RvbWN0bCkKPiAgICAgICAgICAgdW5zaWduZWQgbG9uZyBtZm5fZW5k
-ID0gbWZuICsgbnJfbWZucyAtIDE7Cj4gICAgICAgICAgIGludCBhZGQgPSBvcC0+dS5tZW1vcnlf
-bWFwcGluZy5hZGRfbWFwcGluZzsKPiAgICAgICAgICAgcDJtX3R5cGVfdCBwMm10Owo+ICsgICAg
-ICAgIHVpbnQzMl90IG1lbW9yeV9wb2xpY3kgPSBvcC0+dS5tZW1vcnlfbWFwcGluZy5tZW1vcnlf
-cG9saWN5Owo+ICAgCj4gICAgICAgICAgIHJldCA9IC1FSU5WQUw7Cj4gICAgICAgICAgIGlmICgg
-bWZuX2VuZCA8IG1mbiB8fCAvKiB3cmFwPyAqLwo+IEBAIC05NTgsOSArOTU5LDI3IEBAIGxvbmcg
-ZG9fZG9tY3RsKFhFTl9HVUVTVF9IQU5ETEVfUEFSQU0oeGVuX2RvbWN0bF90KSB1X2RvbWN0bCkK
-PiAgICAgICAgICAgaWYgKCBhZGQgKQo+ICAgICAgICAgICB7Cj4gICAgICAgICAgICAgICBwcmlu
-dGsoWEVOTE9HX0dfREVCVUcKPiAtICAgICAgICAgICAgICAgICAgICJtZW1vcnlfbWFwOmFkZDog
-ZG9tJWQgZ2ZuPSVseCBtZm49JWx4IG5yPSVseFxuIiwKPiAtICAgICAgICAgICAgICAgICAgIGQt
-PmRvbWFpbl9pZCwgZ2ZuLCBtZm4sIG5yX21mbnMpOwo+ICsgICAgICAgICAgICAgICAgICAgIm1l
-bW9yeV9tYXA6YWRkOiBkb20lZCBnZm49JWx4IG1mbj0lbHggbnI9JWx4IGNhY2hlPSV1XG4iLAo+
-ICsgICAgICAgICAgICAgICAgICAgZC0+ZG9tYWluX2lkLCBnZm4sIG1mbiwgbnJfbWZucywgbWVt
-b3J5X3BvbGljeSk7Cj4gICAKPiArICAgICAgICAgICAgc3dpdGNoICggbWVtb3J5X3BvbGljeSAp
-Cj4gKyAgICAgICAgICAgIHsKPiArI2lmZGVmIENPTkZJR19BUk0KPiArICAgICAgICAgICAgICAg
-IGNhc2UgTUVNT1JZX1BPTElDWV9BUk1fTUVNX1dCOgo+ICsgICAgICAgICAgICAgICAgICAgIHAy
-bXQgPSBwMm1fbW1pb19kaXJlY3RfYzsKPiArICAgICAgICAgICAgICAgICAgICBicmVhazsKPiAr
-ICAgICAgICAgICAgICAgIGNhc2UgTUVNT1JZX1BPTElDWV9BUk1fREVWX25HUkU6Cj4gKyAgICAg
-ICAgICAgICAgICAgICAgcDJtdCA9IHAybV9tbWlvX2RpcmVjdF9kZXY7Cj4gKyAgICAgICAgICAg
-ICAgICAgICAgYnJlYWs7Cj4gKyNlbmRpZgo+ICsjaWZkZWYgQ09ORklHX1g4Ngo+ICsgICAgICAg
-ICAgICAgICAgY2FzZSBNRU1PUllfUE9MSUNZX1g4Nl9VQzoKPiArICAgICAgICAgICAgICAgICAg
-ICBwMm10ID0gcDJtX21taW9fZGlyZWN0Owo+ICsgICAgICAgICAgICAgICAgICAgIGJyZWFrOwo+
-ICsjZW5kaWYKPiArICAgICAgICAgICAgICAgIGRlZmF1bHQ6Cj4gKyAgICAgICAgICAgICAgICAg
-ICAgcmV0dXJuIC1FT1BOT1RTVVBQOwo+ICsgICAgICAgICAgICB9Cj4gICAgICAgICAgICAgICBy
-ZXQgPSBtYXBfcmVnaW9ucyhkLCBfZ2ZuKGdmbiksIG5yX21mbnMsIF9tZm4obWZuKSwgcDJtdCk7
-Cj4gICAgICAgICAgICAgICBpZiAoIHJldCA8IDAgKQo+ICAgICAgICAgICAgICAgICAgIHByaW50
-ayhYRU5MT0dfR19XQVJOSU5HCj4gZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3B1YmxpYy9kb21j
-dGwuaCBiL3hlbi9pbmNsdWRlL3B1YmxpYy9kb21jdGwuaAo+IGluZGV4IDE5NDg2ZDUuLjkzMzAz
-ODcgMTAwNjQ0Cj4gLS0tIGEveGVuL2luY2x1ZGUvcHVibGljL2RvbWN0bC5oCj4gKysrIGIveGVu
-L2luY2x1ZGUvcHVibGljL2RvbWN0bC5oCj4gQEAgLTU3MSwxMiArNTcxLDI0IEBAIHN0cnVjdCB4
-ZW5fZG9tY3RsX2JpbmRfcHRfaXJxIHsKPiAgICovCj4gICAjZGVmaW5lIERQQ0lfQUREX01BUFBJ
-TkcgICAgICAgICAxCj4gICAjZGVmaW5lIERQQ0lfUkVNT1ZFX01BUFBJTkcgICAgICAwCj4gKy8q
-Cj4gKyAqIERlZmF1bHQgbWVtb3J5IHBvbGljeS4gQ29ycmVzcG9uZHMgdG86Cj4gKyAqIEFybTog
-TUVNT1JZX1BPTElDWV9BUk1fREVWX25HUkUKPiArICogeDg2OiBNRU1PUllfUE9MSUNZX1g4Nl9V
-Qwo+ICsgKi8KPiArI2RlZmluZSBNRU1PUllfUE9MSUNZX0RFRkFVTFQgICAgMAo+ICsvKiB4ODYg
-b25seS4gTWVtb3J5IHR5cGUgVU5DQUNIQUJMRSAqLwo+ICsjZGVmaW5lIE1FTU9SWV9QT0xJQ1lf
-WDg2X1VDICAgICAwCj4gKy8qIEFybSBvbmx5LiBPdXRlciBTaGFyZWFibGUsIERldmljZS1uR1JF
-IG1lbW9yeSAqLwoKRGV2aWNlLW5HUkUgaXMgYW4gQXJtdjggdGVybS4gWW91IG1pZ2h0IHdhbnQg
-dG8gYWxzbyBzcGVjaWZ5IHRoZSBBcm12NyAKbmFtZSBpbiBwYXJlbnRoZXNpcyB0byBoZWxwIHRo
-ZSB1c2VyLgoKPiArI2RlZmluZSBNRU1PUllfUE9MSUNZX0FSTV9ERVZfbkdSRSAgICAgICAwCj4g
-Ky8qIEFybSBvbmx5LiBPdXRlciBTaGFyZWFibGUsIE91dGVyL0lubmVyIFdyaXRlLUJhY2sgQ2Fj
-aGVhYmxlIG1lbW9yeSAqLwo+ICsjZGVmaW5lIE1FTU9SWV9QT0xJQ1lfQVJNX01FTV9XQiAgICAg
-ICAgIDEKCkkgYW0gd29uZGVyaW5nIHdoZXRoZXIgd2Ugc2hvdWxkIHB1dCBBcm0gKHJlc3AuIHg4
-NikgZGVmaW5lcyB1bmRlciBhbiAKaWZkZWYgYXJtIChyZXNwLiB4ODYpLiBEbyB5b3Ugc2VlIGFu
-eSB1c2UgaW4gdGhlIGNvbW1vbiB0b29sc3RhY2sgY29kZSAKb2YgdGhvc2UgI2lmZGVmPwoKPiAg
-IHN0cnVjdCB4ZW5fZG9tY3RsX21lbW9yeV9tYXBwaW5nIHsKPiAgICAgICB1aW50NjRfYWxpZ25l
-ZF90IGZpcnN0X2dmbjsgLyogZmlyc3QgcGFnZSAoaHZtIGd1ZXN0IHBoeXMgcGFnZSkgaW4gcmFu
-Z2UgKi8KPiAgICAgICB1aW50NjRfYWxpZ25lZF90IGZpcnN0X21mbjsgLyogZmlyc3QgcGFnZSAo
-bWFjaGluZSBwYWdlKSBpbiByYW5nZSAqLwo+ICAgICAgIHVpbnQ2NF9hbGlnbmVkX3QgbnJfbWZu
-czsgICAvKiBudW1iZXIgb2YgcGFnZXMgaW4gcmFuZ2UgKD4wKSAqLwo+ICAgICAgIHVpbnQzMl90
-IGFkZF9tYXBwaW5nOyAgICAgICAvKiBhZGQgb3IgcmVtb3ZlIG1hcHBpbmcgKi8KPiAtICAgIHVp
-bnQzMl90IHBhZGRpbmc7ICAgICAgICAgICAvKiBwYWRkaW5nIGZvciA2NC1iaXQgYWxpZ25lZCBz
-dHJ1Y3R1cmUgKi8KPiArICAgIHVpbnQzMl90IG1lbW9yeV9wb2xpY3k7ICAgICAgLyogY2FjaGVh
-YmlsaXR5IG9mIHRoZSBtZW1vcnkgbWFwcGluZyAqLwoKIEZyb20gYSBxdWljayBsb29rIGF0IGxp
-YnhjLCBpdCBzZWVtcyB0aGUgcGFkZGluZyBmaWVsZCB3aWxsIG5vdCBiZSAKaW5pdGlhbGl6ZWQg
-dG8gMCAoYWthIE1FTU9SWV9ERUZBVUxUX1BPTElDWSkuIEFzIHRoZSBsaWJ4YyBzdXBwb3J0IGlz
-IAphZGRlZCBpbiBhIGZvbGxvdy11cCBwYXRjaCwgSSB0aGluayB5b3Ugd2FudCB0byBlbnN1cmUg
-bWVtb3J5X3BvbGljeSBpcyAKZXF1YWwgdG8gTUVNT1JZX0RFRkFVTFRfUE9MSUNZIGluIGxpYnhj
-LiBTbyB0aGVyZSBhcmUgbm8gdW5leHBlY3RlZCAKYmVoYXZpb3IgZHVyaW5nIGJpc2VjdGlvbiBv
-ciB0aGlzIHBhdGNoIGdldHMgYXBwbGllZCBiZWZvcmUgdGhlIHJlc3QuCgpDaGVlcnMsCgotLSAK
-SnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
-ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============8448316691333705168==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="GD0jJf8rm+K0B4Sk"
+Content-Disposition: inline
+
+
+--GD0jJf8rm+K0B4Sk
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, May 07, 2019 at 10:12:13AM -0600, Jan Beulich wrote:
+> >>> On 07.05.19 at 17:38, <marmarek@invisiblethingslab.com> wrote:
+> > What do you think about adding something that could be backported?
+> > Xen is quite insistent on initializing framebuffer, even with
+> > console=3Dcom1 or console=3Dnone. Which means, there is no workaround f=
+or
+> > this problem.
+>=20
+> When the system is in a simple text mode the /basevideo option of
+> xen.efi ought to help, but if it's in an LFB-based mode already (which
+> is the case on the systems I have) then indeed I can't see any
+> workaround.
+>=20
+> > Maybe, as a first step, a change that abort framebuffer initialization
+> > if lfb_base =3D=3D 0 (I assume this is never valid value here, right?)?
+>=20
+> Yes, that would be an option. But it would help only in your specific
+> case, not if the truncation results in a non-zero value. I guess we'd
+> better avoid filling the structure if we'd truncate the value.
+
+Yes, I was thinking about setting lfb_base=3D0 explicitly if it would
+overflow otherwise.
+
+> But what's wrong with backporting your change as is?
+
+If this commit would be backported, what value you'd put in that #ifdef?
+Also, one may argue that ABI changes should not be backported... But
+since there is clear and independent of xen version method of detecting
+it, I don't think this would be a big issue here.
+
+> > If not, then at least abort boot when text console is still there
+> > (blexit before efi_exit_boot). Any preference?
+>=20
+> What's wrong with the text console still active? Or maybe I'm
+> misunderstandint you make...
+
+As soon as you call ExitBootServices(), you can't use
+SIMPLE_TEXT_OUTPUT_INTERFACE anymore. Which means if a) framebuffer
+address didn't fit, and b) you called ExitBootServices() already, you
+don't have any means to tell the user what is wrong. Other than serial
+console of course, if you're lucky enough to have one. So the idea was
+to report the problem before ExitBootServices().
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--GD0jJf8rm+K0B4Sk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlzRtZ4ACgkQ24/THMrX
+1yyyfAgAl8W5xOVYsNwgokMKqMrJ7blZq7xUpiQ9QTjocl56E39f+Wxssd4BN1u7
+QOI3yeDFdm2BZMRFoM+6E2V4XsTosule0wAzQQ0HuhSsvhuHMX5tE6OAKTV6ZS6S
+6X5y8Fc0TZOlrScK+SPsesi3UhlMIypz4YWP7Z3fWitR38T1vsY5D5I8butFap5B
+4SAmf/IZjv9IIP2WH4cCvcAxsg+PWzIUCke6Nwy7lNMWGUjP2baUfWQTLRNBwlSq
+R57z79cR5zbU2f5RxqiOrVGiCMQ6cOaZF47UWpGhMIQh1qIsAfTMn8+vB/Ir/nRj
+RFOtzMrqkqIealG6bWrw9Gzmf2TwvA==
+=yOIa
+-----END PGP SIGNATURE-----
+
+--GD0jJf8rm+K0B4Sk--
+
+
+--===============8448316691333705168==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8448316691333705168==--
