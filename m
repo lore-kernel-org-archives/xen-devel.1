@@ -1,20 +1,27 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH] MAINTAINERS: Add explicit check-in policy
- section
-Date: Wed, 8 May 2019 13:59:46 +0200
-Message-ID: <d56ae8a0-7770-cb30-7996-a0d68d85e073@suse.com>
-References: <20190508113947.11920-1-george.dunlap@citrix.com>
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 4/5] xen: fix handling framebuffer located
+ above 4GB
+Date: Wed, 8 May 2019 14:06:56 +0200
+Message-ID: <20190508120656.GC1502@mail-itl>
+References: <cover.5027956268821f50401d0ecdfad2447cbe4fdd6c.1557154206.git-series.marmarek@invisiblethingslab.com>
+ <dfffbc1faf0884df46f5568cdcf9fa8c2340ae2b.1557154206.git-series.marmarek@invisiblethingslab.com>
+ <7c7a7dcc-ff17-feb7-1e88-96c31b0e72a7@suse.com>
+ <20190506153211.GV1502@mail-itl>
+ <5CD14B6E020000780022C646@prv1-mh.provo.novell.com>
+ <20190507153825.GA1502@mail-itl>
+ <5CD1AE5D020000780022C9AF@prv1-mh.provo.novell.com>
+ <20190507164311.GB1502@mail-itl>
+ <5CD2A765020000780022CBBC@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8009588525908183709=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=d3I2=TI=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hOLEk-0008IC-DT
- for xen-devel@lists.xenproject.org; Wed, 08 May 2019 11:59:50 +0000
-In-Reply-To: <20190508113947.11920-1-george.dunlap@citrix.com>
-Content-Language: de-DE
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=DRUi=TI=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hOLLn-0000n7-5D
+ for xen-devel@lists.xenproject.org; Wed, 08 May 2019 12:07:07 +0000
+In-Reply-To: <5CD2A765020000780022CBBC@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,98 +30,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Lars Kurth <lars.kurth@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Wilk <konrad.wilk@oracle.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDUvMjAxOSAxMzozOSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBUaGUgIm5lc3Rpbmci
-IHNlY3Rpb24gaW4gdGhlIE1BSU5UQUlORVJTIGZpbGUgd2FzIG5vdCBpbml0aWFsbHkKPiBpbnRl
-bmRlZCB0byBkZXNjcmliZSB0aGUgY2hlY2staW4gcG9saWN5IGZvciBwYXRjaGVzLCBidXQgb25s
-eSBob3cKPiBuZXN0aW5nIHdvcmtlZDsgYnV0IHNpbmNlIHRoZXJlIHdhcyBubyBjaGVjay1pbiBw
-b2xpY3ksIGl0IGhhcyBiZWVuCj4gYWN0aW5nIGFzIGEgZGUtZmFjdG8gcG9saWN5Lgo+IAo+IE9u
-ZSBwcm9ibGVtIHdpdGggdGhpcyBpcyB0aGF0IHRoZSBwb2xpY3kgaXMgbm90IGNvbXBsZXRlOiBJ
-dCBkb2Vzbid0Cj4gY292ZXIgb3BlbiBvYmplY3Rpb25zLCB0aW1lIHRvIGNoZWNrLWluLCBvciBz
-byBvbi4gIFRoZSBvdGhlciBwcm9ibGVtCj4gd2l0aCB0aGUgcG9saWN5IGlzIHRoYXQsIGFzIHdy
-aXR0ZW4sIGl0IGRvZXNuJ3QgYWNjb3VudCBmb3IKPiBtYWludGFpbmVycyBzdWJtaXR0aW5nIHBh
-dGNoZXMgdG8gZmlsZXMgd2hpY2ggdGhleSB0aGVtc2VsdmVzCj4gbWFpbnRhaW4uICBUaGlzIGlz
-IGZpbmUgZm9yIHNpdHVhdGlvbnMgd2hlcmUgdGhlcmUgYXJlIGFyZSBtdWx0aXBsZQo+IG1haW50
-YW5pZXJzLCBidXQgbm90IGZvciBzaXR1YXRpb25zIHdoZXJlIHRoZXJlIGlzIG9ubHkgb25lCj4g
-bWFpbnRpYW5lci4KPiAKPiBBZGQgYW4gZXhwbGljaXQgIkNoZWNrLWluIHBvbGljeSIgc2VjdGlv
-biB0byB0aGUgTUFJTlRBSU5FUlMgZG9jdW1lbnQKPiB0byBzZXJ2ZSBhcyB0aGUgY2Fub25pY2Fs
-IHJlZmVyZW5jZSBmb3IgdGhlIGNoZWNrLWluIHBvbGljeS4gIE1vdmUKPiBwYXJhZ3JhcGhzIG5v
-dCBleHBsaWNpdGx5IHJlbGF0ZWQgdG8gbmVzdGluZyBpbnRvIGl0Lgo+IAo+IFdoaWxlIGhlcmUs
-ICJwcm9tb3RlIiB0aGUgIlRoZSBtZWFuaW5nIG9mIG5lc3RpbmciIHNlY3Rpb24gdGl0bGUuCj4g
-Cj4gU2lnbmVkLW9mZi1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29t
-Pgo+IC0tLQo+IENDOiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4KPiBDQzog
-V2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KPiBDQzogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBDQzogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29t
-Pgo+IENDOiBUaW0gRGVlZ2FuIDx0aW1AeGVuLm9yZz4KPiBDQzogS29ucmFkIFdpbGsgPGtvbnJh
-ZC53aWxrQG9yYWNsZS5jb20+Cj4gQ0M6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlA
-a2VybmVsLm9yZz4KPiBDQzogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiBD
-QzogTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgo+IAo+IFRoaXMgaXMgYSBmb2xs
-b3ctdXAgdG8gdGhlIGRpc2N1c3Npb24gaW4gYFtQQVRDSCBmb3ItNC4xMl0KPiBwYXNzdGhyb3Vn
-aC92dGQ6IERyb3AgdGhlICJ3b3JrYXJvdW5kX2Jpb3NfYnVnIiBsb2dpYyBlbnRpcmVseWAsIHNw
-ZWNpZmljYWxseQo+IE1lc3NhZ2UtSUQ6IDw1QzlDRjI1QTAyMDAwMDc4MDAyMjI5MUJAcHJ2MS1t
-aC5wcm92by5ub3ZlbGwuY29tPgo+IAo+IFRoaXMgZW5jb2RlcyBteSB1bmRlcnN0YW5kaW5nIG9m
-IHRoZSBwb2xpY3ksIGFuZCB3aGF0IEkgdGhpbmsgaXMgdGhlCj4gYmVzdCBvbmUuCj4gCj4gQSBz
-ZWNvbmQgYXBwcm9hY2ggd291bGQgYmU6Cj4gCj4gMS4gIEluIG9yZGVyIHRvIGdldCBhIGNoYW5n
-ZSB0byBhIGdpdmVuIGZpbGUgY29tbWl0dGVkLCBpdCBtdXN0IGhhdmUKPiBhbiBBY2sgb3IgUmV2
-aWV3IGZyb20gYXQgbGVhc3Qgb25lIG1haW50YWluZXIgb2YgdGhhdCBmaWxlIG90aGVyIHRoYW4K
-PiB0aGUgc3VibWl0dGVyLgo+IAo+IDIuIEluIHRoZSBjYXNlIHdoZXJlIGEgZmlsZSBoYXMgb25s
-eSBvbmUgbWFpbnRhaW5lciwgaXQgbXVzdCBoYXZlIGFuCj4gQWNrIG9yIFJldmlldyBmcm9tIGEg
-Im5lc3RlZCIgbWFpbnRhaW5lci4KPiAKPiBJLmUuLCBpZiBJIHN1Ym1pdHRlZCBzb21ldGhpbmcg
-dG8geDg2L21tLCBpdCB3b3VsZCByZXF1aXJlIGFuIEFjayBmcm9tCj4gSmFuIG9yIEFuZHksIG9y
-IChpbiBleGNlcHRpb25hbCBjaXJjdW1zdGFuY2VzKSBUaGUgUmVzdDsgYnV0IGFuIEFjayBmcm9t
-Cj4gKHNheSkgUm9nZXIgb3IgSnVlcmdlbiB3b3VsZG4ndCBzdWZmaWNlLgo+IAo+IEEgdGhpcmQg
-YXBwcm9hY2ggd291bGQgYmUgdG8gc2F5IHRoYXQgaW4gdGhlIGNhc2Ugb2YgbXVsdGlwbGUKPiBt
-YWludGFpbmVycywgdGhlIG1haW50YWluZXJzIHRoZW1zZWx2ZXMgY2FuIGRlY2lkZSB0byBtYW5k
-YXRlIHRoZQo+IG90aGVyIG1haW50YWluZXIncyBBY2suICBGb3IgaW5zdGFuY2UsIERhcmlvIGFu
-ZCBJIGNvdWxkIGFncmVlIHRoYXQgd2UKPiBkb24ndCBuZWVkIGVhY2ggb3RoZXJzJyBhY2sgZm9y
-IGNoYW5nZXMgdG8gdGhlIHNjaGVkdWxlciwgYnV0IEFuZHkgYW5kCj4gSmFuIGNvdWxkIGFncmVl
-IHRoYXQgdGhleSBkbyBuZWVkIGVhY2ggb3RoZXIncyBBY2sgZm9yIGNoYW5nZXMgdG8gdGhlCj4g
-eDg2IGNvZGUuCgpXaGF0IGFib3V0IHZhcmlhbnQgMmI6CgoxLiAgSW4gb3JkZXIgdG8gZ2V0IGEg
-Y2hhbmdlIHRvIGEgZ2l2ZW4gZmlsZSBjb21taXR0ZWQsIGl0IG11c3QgaGF2ZQphbiBBY2sgb3Ig
-UmV2aWV3IGZyb20gYXQgbGVhc3Qgb25lIG1haW50YWluZXIgb2YgdGhhdCBmaWxlIG90aGVyIHRo
-YW4KdGhlIHN1Ym1pdHRlci4KCjIuIEluIHRoZSBjYXNlIHRoZSBzdWJtaXR0ZXIgaXMgYSBtYWlu
-dGFpbmVyIG9mIGEgbW9kaWZpZWQgZmlsZSBpdCBtdXN0CmhhdmUgYW4gQWNrIG9yIFJldmlldyBm
-cm9tIGVpdGhlciBhICJuZXN0ZWQiIG1haW50YWluZXIgb3IgYSBEZXNpZ25hdGVkCnJldmlld2Vy
-IG9mIHRoYXQgZmlsZS4KCj4gLS0tCj4gIE1BSU5UQUlORVJTIHwgNDYgKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tLQo+ICAxIGZpbGUgY2hhbmdlZCwgNDAgaW5z
-ZXJ0aW9ucygrKSwgNiBkZWxldGlvbnMoLSkKPiAKPiBkaWZmIC0tZ2l0IGEvTUFJTlRBSU5FUlMg
-Yi9NQUlOVEFJTkVSUwo+IGluZGV4IGU0MzM4OGRkYjAuLjY1YmEzNWYwMmQgMTAwNjQ0Cj4gLS0t
-IGEvTUFJTlRBSU5FUlMKPiArKysgYi9NQUlOVEFJTkVSUwo+IEBAIC05OSw3ICs5OSw0NiBAQCBE
-ZXNjcmlwdGlvbnMgb2Ygc2VjdGlvbiBlbnRyaWVzOgo+ICAJICAgT25lIHJlZ2V4IHBhdHRlcm4g
-cGVyIGxpbmUuICBNdWx0aXBsZSBLOiBsaW5lcyBhY2NlcHRhYmxlLgo+ICAKPiAgCj4gLVRoZSBt
-ZWFuaW5nIG9mIG5lc3Rpbmc6Cj4gKwlDaGVjay1pbiBwb2xpY3kKPiArCT09PT09PT09PT09PT09
-PQo+ICsKPiArSW4gb3JkZXIgZm9yIGEgcGF0Y2ggdG8gYmUgY2hlY2tlZCBpbiwgaW4gZ2VuZXJh
-bCwgc2V2ZXJhbCBjb25kaXRpb25zCj4gK211c3QgYmUgbWV0Ogo+ICsKPiArMS4gSW4gb3JkZXIg
-dG8gZ2V0IGEgY2hhbmdlIHRvIGEgZ2l2ZW4gZmlsZSBjb21taXR0ZWQsIGl0IG11c3QgaGF2ZQo+
-ICsgICB0aGUgYXBwcm92YWwgb2YgYXQgbGVhc3Qgb25lIG1haW50YWluZXIgb2YgdGhhdCBmaWxl
-Lgo+ICsKPiArICAgQSBwYXRjaCBvZiBjb3Vyc2UgbmVlZHMgYWNrcyBmcm9tIHRoZSBtYWludGFp
-bmVycyBvZiBlYWNoIGZpbGUgdGhhdAo+ICsgICBpdCBjaGFuZ2VzOyBzbyBhIHBhdGNoIHdoaWNo
-IGNoYW5nZXMgeGVuL2FyY2gveDg2L3RyYXBzLmMsCj4gKyAgIHhlbi9hcmNoL3g4Ni9tbS9wMm0u
-YywgYW5kIHhlbi9hcmNoL3g4Ni9tbS9zaGFkb3cvbXVsdGkuYyB3b3VsZAo+ICsgICByZXF1aXJl
-IGFuIEFjayBmcm9tIGVhY2ggb2YgdGhlIHRocmVlIHNldHMgb2YgbWFpbnRhaW5lcnMuCj4gKwo+
-ICsgICBTZWUgYmVsb3cgZm9yIHJ1bGVzIG9uIG5lc3RlZCBtYWludGFpbmVyc2hpcC4KPiArCj4g
-KzIuIEl0IG11c3QgaGF2ZSBhbiBBY2tlZC1ieSBvciBhIFJldmlld2VkLWJ5IGZyb20gc29tZW9u
-ZSBvdGhlciB0aGFuCj4gKyAgIHRoZSBzdWJtaXR0ZXIuCj4gKwo+ICszLiBTdWZmaWNpZW50IHRp
-bWUgbXVzdCBoYXZlIGJlZW4gZ2l2ZW4gZm9yIGFueW9uZSB0byByZXNwb25kLiAgVGhpcwo+ICsg
-ICBkZXBlbmRzIGluIGxhcmdlIHBhcnQgdXBvbiB0aGUgdXJnZW5jeSBhbmQgbmF0dXJlIG9mIHRo
-ZSBwYXRjaC4KPiArICAgRm9yIGEgc3RyYWlnaHRmb3J3YXJkIHVuY29udHJvdmVyc2lhbCBwYXRj
-aCwgYSBkYXkgb3IgdHdvIGlzCj4gKyAgIHN1ZmZpY2llbnQ7IGZvciBhIGNvbnRyb3ZlcnNpYWwg
-cGF0Y2gsIGxvbmdlciAobWF5YmUgYSB3ZWVrKSB3b3VsZAo+ICsgICBiZSBiZXR0ZXIuCj4gKwo+
-ICs0LiBUaGVyZSBtdXN0IGJlIG5vICJvcGVuIiBvYmplY3Rpb25zLgo+ICsKPiArSW4gYSBjYXNl
-IHdoZXJlIG9uZSBwZXJzb24gc3VibWl0cyBhIHBhdGNoIGFuZCBhIG1haW50YWluZXIgZ2l2ZXMg
-YW4KPiArQWNrLCB0aGUgQWNrIHN0YW5kcyBpbiBmb3IgYm90aCB0aGUgYXBwcm92YWwgcmVxdWly
-ZW1lbnQgKCMxKSBhbmQgdGhlCj4gK0Fja2VkLWJ5LW5vbi1zdWJtaXR0ZXIgcmVxdWlyZW1lbnQg
-KCMyKS4KPiArCj4gK0luIGEgY2FzZSB3aGVyZSBhIG1haW50YWluZXIgdGhlbXNlbHZlcyBzdWJt
-aXRzIGEgcGF0Y2gsIHRoZQo+ICtTaWduZWQtb2ZmLWJ5IG1lZXRzIHRoZSBhcHByb3ZhbCByZXF1
-cmltZW50ICgjMSk7IHNvIGFuIEFjayBvciBSZXZpZXcKPiArZnJvbSBhbnlvbmUgaW4gdGhlIGNv
-bW11bml0eSBzdWZmaWNlcyBmb3IgcmVxdWlyZW1lbnQgIzIuCj4gKwo+ICtNYWludGFpbmVycyBt
-YXkgY2hvb3NlIHRvIG92ZXJyaWRlIG5vbi1tYWludGFpbmVyIG9iamVjdGlvbnMgaW4gdGhlCj4g
-K2Nhc2UgdGhhdCBjb25zZW5zdXMgY2FuJ3QgYmUgcmVhY2hlZC4KPiArCj4gKyAgICAgICBUaGUg
-bWVhbmluZyBvZiBuZXN0aW5nCj4gKyAgICAgICA9PT09PT09PT09PT09PT09PT09PT09CgpFdmVy
-eXdoZXJlIGVsc2UgdGFicyBhcmUgdXNlZCBmb3IgaW5kZW50aW5nLgoKCkp1ZXJnZW4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============8009588525908183709==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="W302I+VHGNbNYdEm"
+Content-Disposition: inline
+
+
+--W302I+VHGNbNYdEm
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, May 08, 2019 at 03:54:45AM -0600, Jan Beulich wrote:
+> >>> On 07.05.19 at 18:43, <marmarek@invisiblethingslab.com> wrote:
+> > On Tue, May 07, 2019 at 10:12:13AM -0600, Jan Beulich wrote:
+> >> >>> On 07.05.19 at 17:38, <marmarek@invisiblethingslab.com> wrote:
+> >> > What do you think about adding something that could be backported?
+> >> > Xen is quite insistent on initializing framebuffer, even with
+> >> > console=3Dcom1 or console=3Dnone. Which means, there is no workaroun=
+d for
+> >> > this problem.
+> >>=20
+> >> When the system is in a simple text mode the /basevideo option of
+> >> xen.efi ought to help, but if it's in an LFB-based mode already (which
+> >> is the case on the systems I have) then indeed I can't see any
+> >> workaround.
+> >>=20
+> >> > Maybe, as a first step, a change that abort framebuffer initializati=
+on
+> >> > if lfb_base =3D=3D 0 (I assume this is never valid value here, right=
+?)?
+> >>=20
+> >> Yes, that would be an option. But it would help only in your specific
+> >> case, not if the truncation results in a non-zero value. I guess we'd
+> >> better avoid filling the structure if we'd truncate the value.
+> >=20
+> > Yes, I was thinking about setting lfb_base=3D0 explicitly if it would
+> > overflow otherwise.
+> >=20
+> >> But what's wrong with backporting your change as is?
+> >=20
+> > If this commit would be backported, what value you'd put in that #ifdef?
+>=20
+> I'd keep it as is. The field addition happens for 4.13. And as you say ...
+>=20
+> > Also, one may argue that ABI changes should not be backported... But
+> > since there is clear and independent of xen version method of detecting
+> > it, I don't think this would be a big issue here.
+>=20
+> ... there's not really any issue with surfacing this also in older
+> versions.
+
+You mean to keep it without #ifdef then? I'm not following... If you add
+#ifdef __XEN_INTERFACE_VERSION__ >=3D 0x00040d00 there, the field won't be
+available in Xen < 4.13. Which effectively means the patch can't be
+backported as it won't compile with Xen < 4.13. Note also that this
+structure is the place that Xen use to keep that information internally
+(xen_vga_console_info is another name for dom0_vga_console_info), it
+isn't only about passing this information to dom0.
+
+Maybe add #ifdef __XEN_INTERFACE_VERSION__ >=3D 0x00040a00, as the oldest
+fully supported version? This will mitigate one of the issues with the
+lack of #ifdef (potential conflict with gbl_caps with
+__XEN_INTERFACE_VERSION__ < 0x00030206).
+
+Or use some #if meaning Xen interface >=3D 4.13, or Xen internal build?
+
+> >> > If not, then at least abort boot when text console is still there
+> >> > (blexit before efi_exit_boot). Any preference?
+> >>=20
+> >> What's wrong with the text console still active? Or maybe I'm
+> >> misunderstandint you make...
+> >=20
+> > As soon as you call ExitBootServices(), you can't use
+> > SIMPLE_TEXT_OUTPUT_INTERFACE anymore. Which means if a) framebuffer
+> > address didn't fit, and b) you called ExitBootServices() already, you
+> > don't have any means to tell the user what is wrong. Other than serial
+> > console of course, if you're lucky enough to have one. So the idea was
+> > to report the problem before ExitBootServices().
+>=20
+> Oh, so be "text console" you meant the EFI interface, not a
+> console in text mode (which we can drive). Failing to boot in
+> such a case seems worse to me than booting effectively
+> headless.
+
+Yes, if the alternative is booting headless, then indeed it's better
+than refusing to boot with a message. But if the alternative is a
+mysterious crash without any message...
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--W302I+VHGNbNYdEm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlzSxmAACgkQ24/THMrX
+1ywO+gf7BrYBO3rM+lYbashDk6Z/zzpR/02rdX+JjPMvCZ6xrlGApOaolM7VMWQ+
+NuwPRNz/RiOid6G4NG4FDTBvxRnlGJ4X29tgUFHAd8kflf5k0PI94PlIuGzRSzhR
+Sf0/a7W1pdHwkJWuMDbCJaYwzf7ltNEiNmoTC2TA2P0I9lE6lthxXNe9WzEpxhMr
+t4Veue29ZInZ+6RCeUcHXatr7un+fgutjm9Jad1fwAXzo/UUmluKnqx91TyVQlKt
+HjVwpvNE4J4OMPzbjyEkKSwIrsEtJG7bNoiKJeoBvQ4POTBZx6TfVKC474fHJC4u
+WxVDpOFmJD9Fr8lRHI9G16pWS0Lrxg==
+=YSJz
+-----END PGP SIGNATURE-----
+
+--W302I+VHGNbNYdEm--
+
+
+--===============8009588525908183709==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8009588525908183709==--
