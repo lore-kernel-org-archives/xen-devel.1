@@ -1,13 +1,18 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH] xen:arm: we never get into schedule_tail()
- with prev==current
-Date: Wed, 08 May 2019 13:25:00 +0200
-Message-ID: <d4876c22d85f1af7bac22213942c611b1043acf4.camel@suse.com>
-References: <1557309578-6436-1-git-send-email-andrii.anisov@gmail.com>
+From: osstest service owner <osstest-admin@xenproject.org>
+Subject: [xen-unstable-coverity test] 135897: regressions - ALL
+ FAIL
+Date: Wed, 08 May 2019 11:28:53 +0000
+Message-ID: <osstest-135897-mainreport@xen.org>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3476941454164942204=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <1557309578-6436-1-git-send-email-andrii.anisov@gmail.com>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=AgcW=TI=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
+ id 1hOKkv-0005i9-Ca
+ for xen-devel@lists.xenproject.org; Wed, 08 May 2019 11:29:01 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -16,78 +21,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
+To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============3476941454164942204==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-B3cGo6CJPcM9jtUiJUBr"
-
-
---=-B3cGo6CJPcM9jtUiJUBr
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2019-05-08 at 12:59 +0300, Andrii Anisov wrote:
-> From: Andrii Anisov <andrii_anisov@epam.com>
->=20
-> ARM's schedule_tail() is called from two places: context_switch() and
-> continue_new_vcpu(). Both functions are always called with
-> prev!=3Dcurrent. So replace the correspondent check in schedule_tail()
-> with ASSERT() which is the development (debug) build guard.
->=20
-> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
->
-FWIW,
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Thanks and Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-B3cGo6CJPcM9jtUiJUBr
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzSvIwACgkQFkJ4iaW4
-c+6HyQ//WNWoTt6x4vxoZEtTcUMW65jdg8QVAVveLdchZwqrzaq0UBrAVGi0m4xY
-0yk9g6pn09xSgYPUGQEFt+xjwcdeH3xa6GFieOofACSFThMeUjZtTM8qT/NoAOV6
-+dzntraH8f2iiQe+oi+7f517i9E2wx16iNWs10C2DefXE/xOqlT4YeDDHVyCBj+/
-QhwTS5ivXsHjQCjFtDCqPlcebPbinuq+Weob7fazeeFnMK6kY8loTXAo2LfB/gxB
-RuPqnD5HEKAIpkh+nWn1Uffgq/Cf4kvrr7OWpQd09qM9lxKCqWR2xLfP3abadc+O
-d3cQ99z02KEekhy2EaUXCEFARYmaNwT5TXzxcKuZM2188oUD93bueKwIpNbUpM92
-ImX+bb84+s3w9dP5KRx5MO39gMoDo/yFH5PCzMFYTWtuDnJx8i2K5XakklcmxBHO
-89Ku4L9ScWKfTOjfl1opHZInRzvM/8UtClb0yubC8wQOrBCV8EK1m2g93PvzwfY6
-r63yV3KbdVhFW3O8wh7deJYo9yX2HkiU8Ug0XbZuvm1YuxT8wAZxoBWfGbBCA7Kb
-DUrHC8N68kavASrC944ZiKDptRDilrB7pPAo0JGluuY1YWOZFOUbF1Xd1cyi5uX5
-sCxESb4c/Rc1101dK9zpjmG5J4ukhUvu0isB7sT6PIj6hjCYLNU=
-=lyN0
------END PGP SIGNATURE-----
-
---=-B3cGo6CJPcM9jtUiJUBr--
-
-
-
---===============3476941454164942204==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3476941454164942204==--
+ZmxpZ2h0IDEzNTg5NyB4ZW4tdW5zdGFibGUtY292ZXJpdHkgcmVhbCBbcmVhbF0KaHR0cDovL2xv
+Z3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNTg5Ny8KClJlZ3Jlc3Np
+b25zIDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmlu
+Y2x1ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogY292ZXJpdHktYW1kNjQgICAg
+ICAgICAgICAgICAgNyBjb3Zlcml0eS11cGxvYWQgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTMz
+NjE1Cgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogeGVuICAgICAgICAgICAgICAgICAg
+ZTgzMDc3YTNkMTEwNzI3MDhhNWMzOGZhMDlmYTlkMDExOTE0ZTJhMQpiYXNlbGluZSB2ZXJzaW9u
+OgogeGVuICAgICAgICAgICAgICAgICAgZWViMzFlZTUyMmM3YmI4NTQxZWI0YzAzN2JlMmM0MmJm
+Y2YwYTNjMwoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTMzNjE1ICAyMDE5LTAzLTA2IDA5OjE4OjUx
+IFogICA2MyBkYXlzCkZhaWxpbmcgc2luY2UgICAgICAgIDEzMzY4MiAgMjAxOS0wMy0xMCAwOTox
+ODoyOSBaICAgNTkgZGF5cyAgIDE4IGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEzNTg5
+NyAgMjAxOS0wNS0wOCAwOToxODoyNCBaICAgIDAgZGF5cyAgICAxIGF0dGVtcHRzCgotLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVv
+cGxlIHdobyB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIEFsZXhhbmRydSBJc2FpbGEg
+PGFpc2FpbGFAYml0ZGVmZW5kZXIuY29tPgogIEFsZXhhbmRydSBTdGVmYW4gSVNBSUxBIDxhaXNh
+aWxhQGJpdGRlZmVuZGVyLmNvbT4KICBBbWl0IFNpbmdoIFRvbWFyIDxhbWl0dG9tZXIyNUBnbWFp
+bC5jb20+CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KICBBbmRy
+aWkgQW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgogIEFudGhvbnkgUEVSQVJEIDxhbnRo
+b255LnBlcmFyZEBjaXRyaXguY29tPgogIEJyaWFuIFdvb2RzIDxicmlhbi53b29kc0BhbWQuY29t
+PgogIENoYW8gR2FvIDxjaGFvLmdhb0BpbnRlbC5jb20+CiAgQ2hyaXN0aWFuIExpbmRpZyA8Y2hy
+aXN0aWFuLmxpbmRpZ0BjaXRyaXguY29tPgogIERvdWcgR29sZHN0ZWluIDxjYXJkb2VAY2FyZG9l
+LmNvbT4KICBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJpeC5jb20+CiAgSWFuIEph
+Y2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CiAgSWdvciBEcnV6aGluaW4gPGlnb3Iu
+ZHJ1emhpbmluQGNpdHJpeC5jb20+CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tCiAg
+SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogIEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0Bz
+dXNlLmNvbT4KICBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgogIEtldmluIFRp
+YW4gPGtldmluLnRpYW5AaW50ZWwuY29tPgogIEx1a2FzIEp1ZW5nZXIgPGp1ZW5nZXJAaWNlLnJ3
+dGgtYWFjaGVuLmRlPgogIE0gQSBZb3VuZyA8bS5hLnlvdW5nQGR1cmhhbS5hYy51az4KICBOb3Ji
+ZXJ0IE1hbnRoZXkgPG5tYW50aGV5QGFtYXpvbi5kZT4KICBPbGFmIEhlcmluZyA8b2xhZkBhZXBm
+bGUuZGU+CiAgT2xla3NhbmRyIEFuZHJ1c2hjaGVua28gPG9sZWtzYW5kcl9hbmRydXNoY2hlbmtv
+QGVwYW0uY29tPgogIFBhdWwgRHVycmFudCA8cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+CiAgUGF3
+ZWwgV2llY3pvcmtpZXdpY3ogPHdpcGF3ZWxAYW1hem9uLmRlPgogIFBldHJlIFBpcmNhbGFidSA8
+cHBpcmNhbGFidUBiaXRkZWZlbmRlci5jb20+CiAgUHJpdGhhIFNyaXZhc3RhdmEgPHByaXRoYS5z
+cml2YXN0YXZhQGNpdHJpeC5jb20+CiAgUmF6dmFuIENvam9jYXJ1IDxyY29qb2NhcnVAYml0ZGVm
+ZW5kZXIuY29tPgogIFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgogIFJv
+bmFuIEFiaGFtb24gPHJvbmFuLmFiaGFtb25AdmF0ZXMuZnI+CiAgU2VyZ2V5IER5YXNsaSA8c2Vy
+Z2V5LmR5YXNsaUBjaXRyaXguY29tPgogIFRhbWFzIEsgTGVuZ3llbCA8dGFtYXNAdGtsZW5neWVs
+LmNvbT4KICBUaW0gRGVlZ2FuIDx0aW1AeGVuLm9yZz4KICBXZWkgTGl1IDx3ZWkubGl1MkBjaXRy
+aXguY29tPgogIFhpYW9jaGVuIFdhbmcgPHdhbmd4aWFvY2hlbjBAZ21haWwuY29tPgogIFhpbiBM
+aSA8eGluLmxpQGNpdHJpeC5jb20+Cgpqb2JzOgogY292ZXJpdHktYW1kNjQgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCgoKLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9y
+dC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9s
+b2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBl
+dGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qu
+b3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9z
+c3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2Vi
+Lz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6
+Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTto
+Yj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hl
+bmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGlu
+Zy4KCihObyByZXZpc2lvbiBsb2c7IGl0IHdvdWxkIGJlIDMzNDMgbGluZXMgbG9uZy4pCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
