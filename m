@@ -1,17 +1,13 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [freebsd-master test] 135810: regressions - FAIL
-Date: Wed, 08 May 2019 11:17:14 +0000
-Message-ID: <osstest-135810-mainreport@xen.org>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH] xen:arm: we never get into schedule_tail()
+ with prev==current
+Date: Wed, 08 May 2019 13:25:00 +0200
+Message-ID: <d4876c22d85f1af7bac22213942c611b1043acf4.camel@suse.com>
+References: <1557309578-6436-1-git-send-email-andrii.anisov@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3476941454164942204=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=AgcW=TI=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hOKZe-0004bz-Ag
- for xen-devel@lists.xenproject.org; Wed, 08 May 2019 11:17:22 +0000
+In-Reply-To: <1557309578-6436-1-git-send-email-andrii.anisov@gmail.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,61 +16,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org, royger@FreeBSD.org
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzNTgxMCBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTM1ODEwLwoKUmVncmVzc2lvbnMgOi0o
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5n
-IHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC1mcmVlYnNkLWFnYWlu
-ICAgICA1IGhvc3QtaW5zdGFsbCg1KSAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMzUyMzMKIGJ1
-aWxkLWFtZDY0LXhlbi1mcmVlYnNkICAgICAgIDUgaG9zdC1pbnN0YWxsKDUpICAgICAgICAgIGZh
-aWwgUkVHUi4gdnMuIDEzNTIzMwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGZyZWVi
-c2QgICAgICAgICAgICAgIDllOTA0OGUzYzI5NzI2NzhkZjk1YjYzMThjZWFmZjZhMjQ1ZWUyZTIK
-YmFzZWxpbmUgdmVyc2lvbjoKIGZyZWVic2QgICAgICAgICAgICAgIGI1ODMyMTUwNzcwMmExMTI1
-YWVkNThkZGMzMjBiNTYwYjFiZmZjNzEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzNTIzMyAgMjAx
-OS0wNC0yNCAwOToxOTowMyBaICAgMTQgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzUzMTcg
-IDIwMTktMDQtMjYgMDk6MTk6MDYgWiAgIDEyIGRheXMgICAgNCBhdHRlbXB0cwpUZXN0aW5nIHNh
-bWUgc2luY2UgICAxMzU4MTAgIDIwMTktMDUtMDYgMDk6MTk6NDkgWiAgICAyIGRheXMgICAgMSBh
-dHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBh
-ZHJpYW4gPGFkcmlhbkBGcmVlQlNELm9yZz4KICBhZSA8YWVARnJlZUJTRC5vcmc+CiAgYW5kcmV3
-IDxhbmRyZXdARnJlZUJTRC5vcmc+CiAgYXNvbWVycyA8YXNvbWVyc0BGcmVlQlNELm9yZz4KICBi
-Y3JhbiA8YmNyYW5ARnJlZUJTRC5vcmc+CiAgYmRlIDxiZGVARnJlZUJTRC5vcmc+CiAgYnIgPGJy
-QEZyZWVCU0Qub3JnPgogIGNlbSA8Y2VtQEZyZWVCU0Qub3JnPgogIGNzIDxjc0BGcmVlQlNELm9y
-Zz4KICBjeSA8Y3lARnJlZUJTRC5vcmc+CiAgZGNoYWdpbiA8ZGNoYWdpbkBGcmVlQlNELm9yZz4K
-ICBkb3VnbSA8ZG91Z21ARnJlZUJTRC5vcmc+CiAgZW1hc3RlIDxlbWFzdGVARnJlZUJTRC5vcmc+
-CiAgZ2FsbGF0aW4gPGdhbGxhdGluQEZyZWVCU0Qub3JnPgogIGdhbmJvbGQgPGdhbmJvbGRARnJl
-ZUJTRC5vcmc+CiAgZ2piIDxnamJARnJlZUJTRC5vcmc+CiAgZ29uem8gPGdvbnpvQEZyZWVCU0Qu
-b3JnPgogIGhzZWxhc2t5IDxoc2VsYXNreUBGcmVlQlNELm9yZz4KICBpYW4gPGlhbkBGcmVlQlNE
-Lm9yZz4KICBpbXAgPGltcEBGcmVlQlNELm9yZz4KICBqaGIgPGpoYkBGcmVlQlNELm9yZz4KICBq
-aGliYml0cyA8amhpYmJpdHNARnJlZUJTRC5vcmc+CiAgam9oYWx1biA8am9oYWx1bkBGcmVlQlNE
-Lm9yZz4KICBrZXZhbnMgPGtldmFuc0BGcmVlQlNELm9yZz4KICBraWIgPGtpYkBGcmVlQlNELm9y
-Zz4KICBsZXYgPGxldkBGcmVlQlNELm9yZz4KICBsdXBvcmwgPGx1cG9ybEBGcmVlQlNELm9yZz4K
-ICBsd2hzdSA8bHdoc3VARnJlZUJTRC5vcmc+CiAgbWFudSA8bWFudUBGcmVlQlNELm9yZz4KICBt
-YXJraiA8bWFya2pARnJlZUJTRC5vcmc+CiAgbWF2IDxtYXZARnJlZUJTRC5vcmc+CiAgbWNrdXNp
-Y2sgPG1ja3VzaWNrQEZyZWVCU0Qub3JnPgogIG1qZyA8bWpnQEZyZWVCU0Qub3JnPgogIG1tYWN5
-IDxtbWFjeUBGcmVlQlNELm9yZz4KICBuZ2llIDxuZ2llQEZyZWVCU0Qub3JnPgogIHJncmltZXMg
-PHJncmltZXNARnJlZUJTRC5vcmc+CiAgcm1hY2tsZW0gPHJtYWNrbGVtQEZyZWVCU0Qub3JnPgog
-IHJ3YXRzb24gPHJ3YXRzb25ARnJlZUJTRC5vcmc+CiAgc2h1cmQgPHNodXJkQEZyZWVCU0Qub3Jn
-PgogIHRyYXN6IDx0cmFzekBGcmVlQlNELm9yZz4KICB0c29vbWUgPHRzb29tZUBGcmVlQlNELm9y
-Zz4KICB0dWV4ZW4gPHR1ZXhlbkBGcmVlQlNELm9yZz4KICB0eWNob24gPHR5Y2hvbkBGcmVlQlNE
-Lm9yZz4KICB6ZWlzaW5nIDx6ZWlzaW5nQEZyZWVCU0Qub3JnPgoKam9iczoKIGJ1aWxkLWFtZDY0
-LWZyZWVic2QtYWdhaW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogYnVpbGQtYW1kNjQtZnJlZWJzZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14ZW4tZnJlZWJzZCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBv
-c3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFn
-ZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWls
-YWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9s
-b2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5l
-cmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5n
-aXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVu
-Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVz
-dCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlz
-aW9uIGxvZzsgaXQgd291bGQgYmUgMjYyNSBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============3476941454164942204==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-B3cGo6CJPcM9jtUiJUBr"
+
+
+--=-B3cGo6CJPcM9jtUiJUBr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2019-05-08 at 12:59 +0300, Andrii Anisov wrote:
+> From: Andrii Anisov <andrii_anisov@epam.com>
+>=20
+> ARM's schedule_tail() is called from two places: context_switch() and
+> continue_new_vcpu(). Both functions are always called with
+> prev!=3Dcurrent. So replace the correspondent check in schedule_tail()
+> with ASSERT() which is the development (debug) build guard.
+>=20
+> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
+>
+FWIW,
+
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Thanks and Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-B3cGo6CJPcM9jtUiJUBr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzSvIwACgkQFkJ4iaW4
+c+6HyQ//WNWoTt6x4vxoZEtTcUMW65jdg8QVAVveLdchZwqrzaq0UBrAVGi0m4xY
+0yk9g6pn09xSgYPUGQEFt+xjwcdeH3xa6GFieOofACSFThMeUjZtTM8qT/NoAOV6
++dzntraH8f2iiQe+oi+7f517i9E2wx16iNWs10C2DefXE/xOqlT4YeDDHVyCBj+/
+QhwTS5ivXsHjQCjFtDCqPlcebPbinuq+Weob7fazeeFnMK6kY8loTXAo2LfB/gxB
+RuPqnD5HEKAIpkh+nWn1Uffgq/Cf4kvrr7OWpQd09qM9lxKCqWR2xLfP3abadc+O
+d3cQ99z02KEekhy2EaUXCEFARYmaNwT5TXzxcKuZM2188oUD93bueKwIpNbUpM92
+ImX+bb84+s3w9dP5KRx5MO39gMoDo/yFH5PCzMFYTWtuDnJx8i2K5XakklcmxBHO
+89Ku4L9ScWKfTOjfl1opHZInRzvM/8UtClb0yubC8wQOrBCV8EK1m2g93PvzwfY6
+r63yV3KbdVhFW3O8wh7deJYo9yX2HkiU8Ug0XbZuvm1YuxT8wAZxoBWfGbBCA7Kb
+DUrHC8N68kavASrC944ZiKDptRDilrB7pPAo0JGluuY1YWOZFOUbF1Xd1cyi5uX5
+sCxESb4c/Rc1101dK9zpjmG5J4ukhUvu0isB7sT6PIj6hjCYLNU=
+=lyN0
+-----END PGP SIGNATURE-----
+
+--=-B3cGo6CJPcM9jtUiJUBr--
+
+
+
+--===============3476941454164942204==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3476941454164942204==--
