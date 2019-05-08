@@ -2,58 +2,51 @@ Return-Path: <SRS0=jkfT=TI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1D60C04AAD
-	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2019 11:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1D7BC04A6B
+	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2019 11:25:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7DCF42054F
-	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2019 11:17:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DCF42054F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 7BB6221479
+	for <xen-devel@archiver.kernel.org>; Wed,  8 May 2019 11:25:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7BB6221479
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hOKZf-0004cD-FT; Wed, 08 May 2019 11:17:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hOKhR-0005Rh-HX; Wed, 08 May 2019 11:25:25 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=AgcW=TI=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hOKZe-0004bz-Ag
- for xen-devel@lists.xenproject.org; Wed, 08 May 2019 11:17:22 +0000
-X-Inumbo-ID: d77d0d32-7182-11e9-91a5-3b08cfcf8a8e
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d77d0d32-7182-11e9-91a5-3b08cfcf8a8e;
- Wed, 08 May 2019 11:17:18 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <aliasfile-bounces@xenproject.org>)
- id 1hOKZX-0001EO-9J; Wed, 08 May 2019 11:17:15 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1hOKZW-0007pv-Qo; Wed, 08 May 2019 11:17:15 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1hOKZW-0000wW-QC; Wed, 08 May 2019 11:17:14 +0000
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org,
- royger@FreeBSD.org
-Message-ID: <osstest-135810-mainreport@xen.org>
+ <SRS0=UoQP=TI=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1hOKhQ-0005Rc-Qz
+ for xen-devel@lists.xen.org; Wed, 08 May 2019 11:25:24 +0000
+X-Inumbo-ID: f75b95f0-7183-11e9-843c-bc764e045a96
+Received: from smtp.nue.novell.com (unknown [195.135.221.5])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id f75b95f0-7183-11e9-843c-bc764e045a96;
+ Wed, 08 May 2019 11:25:22 +0000 (UTC)
+Received: from emea4-mta.ukb.novell.com ([10.120.13.87])
+ by smtp.nue.novell.com with ESMTP (TLS encrypted);
+ Wed, 08 May 2019 13:25:21 +0200
+Received: from [192.168.0.30] (nwb-a10-snat.microfocus.com [10.120.13.202])
+ by emea4-mta.ukb.novell.com with ESMTP (TLS encrypted);
+ Wed, 08 May 2019 12:25:01 +0100
+Message-ID: <d4876c22d85f1af7bac22213942c611b1043acf4.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+Date: Wed, 08 May 2019 13:25:00 +0200
+In-Reply-To: <1557309578-6436-1-git-send-email-andrii.anisov@gmail.com>
+References: <1557309578-6436-1-git-send-email-andrii.anisov@gmail.com>
+Organization: SUSE
+User-Agent: Evolution 3.32.1 
 MIME-Version: 1.0
-X-Osstest-Failures: freebsd-master:build-amd64-freebsd-again:host-install(5):fail:regression
- freebsd-master:build-amd64-xen-freebsd:host-install(5):fail:regression
-X-Osstest-Versions-This: freebsd=9e9048e3c2972678df95b6318ceaff6a245ee2e2
-X-Osstest-Versions-That: freebsd=b58321507702a1125aed58ddc320b560b1bffc71
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 08 May 2019 11:17:14 +0000
-Subject: [Xen-devel] [freebsd-master test] 135810: regressions - FAIL
+Subject: Re: [Xen-devel] [PATCH] xen:arm: we never get into schedule_tail()
+ with prev==current
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -64,64 +57,84 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Cc: xen-devel@lists.xenproject.org, Julien Grall <julien.grall@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andrii Anisov <andrii_anisov@epam.com>
+Content-Type: multipart/mixed; boundary="===============3476941454164942204=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190508111714.viPzYpYl6MklZd891Y15XVsQSXihU0ucAr3wZppUFeY@z>
+Message-ID: <20190508112500.7lbm9_qc1xsPzVBELdbjZdVuQLCrWK2cIOOsQzy9sbc@z>
 
-ZmxpZ2h0IDEzNTgxMCBmcmVlYnNkLW1hc3RlciByZWFsIFtyZWFsXQpodHRwOi8vbG9ncy50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MvMTM1ODEwLwoKUmVncmVzc2lvbnMgOi0o
-CgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQgYW5kIGFyZSBibG9ja2luZywKaW5jbHVkaW5n
-IHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46CiBidWlsZC1hbWQ2NC1mcmVlYnNkLWFnYWlu
-ICAgICA1IGhvc3QtaW5zdGFsbCg1KSAgICAgICAgICBmYWlsIFJFR1IuIHZzLiAxMzUyMzMKIGJ1
-aWxkLWFtZDY0LXhlbi1mcmVlYnNkICAgICAgIDUgaG9zdC1pbnN0YWxsKDUpICAgICAgICAgIGZh
-aWwgUkVHUi4gdnMuIDEzNTIzMwoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIGZyZWVi
-c2QgICAgICAgICAgICAgIDllOTA0OGUzYzI5NzI2NzhkZjk1YjYzMThjZWFmZjZhMjQ1ZWUyZTIK
-YmFzZWxpbmUgdmVyc2lvbjoKIGZyZWVic2QgICAgICAgICAgICAgIGI1ODMyMTUwNzcwMmExMTI1
-YWVkNThkZGMzMjBiNTYwYjFiZmZjNzEKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzNTIzMyAgMjAx
-OS0wNC0yNCAwOToxOTowMyBaICAgMTQgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzUzMTcg
-IDIwMTktMDQtMjYgMDk6MTk6MDYgWiAgIDEyIGRheXMgICAgNCBhdHRlbXB0cwpUZXN0aW5nIHNh
-bWUgc2luY2UgICAxMzU4MTAgIDIwMTktMDUtMDYgMDk6MTk6NDkgWiAgICAyIGRheXMgICAgMSBh
-dHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoKICBh
-ZHJpYW4gPGFkcmlhbkBGcmVlQlNELm9yZz4KICBhZSA8YWVARnJlZUJTRC5vcmc+CiAgYW5kcmV3
-IDxhbmRyZXdARnJlZUJTRC5vcmc+CiAgYXNvbWVycyA8YXNvbWVyc0BGcmVlQlNELm9yZz4KICBi
-Y3JhbiA8YmNyYW5ARnJlZUJTRC5vcmc+CiAgYmRlIDxiZGVARnJlZUJTRC5vcmc+CiAgYnIgPGJy
-QEZyZWVCU0Qub3JnPgogIGNlbSA8Y2VtQEZyZWVCU0Qub3JnPgogIGNzIDxjc0BGcmVlQlNELm9y
-Zz4KICBjeSA8Y3lARnJlZUJTRC5vcmc+CiAgZGNoYWdpbiA8ZGNoYWdpbkBGcmVlQlNELm9yZz4K
-ICBkb3VnbSA8ZG91Z21ARnJlZUJTRC5vcmc+CiAgZW1hc3RlIDxlbWFzdGVARnJlZUJTRC5vcmc+
-CiAgZ2FsbGF0aW4gPGdhbGxhdGluQEZyZWVCU0Qub3JnPgogIGdhbmJvbGQgPGdhbmJvbGRARnJl
-ZUJTRC5vcmc+CiAgZ2piIDxnamJARnJlZUJTRC5vcmc+CiAgZ29uem8gPGdvbnpvQEZyZWVCU0Qu
-b3JnPgogIGhzZWxhc2t5IDxoc2VsYXNreUBGcmVlQlNELm9yZz4KICBpYW4gPGlhbkBGcmVlQlNE
-Lm9yZz4KICBpbXAgPGltcEBGcmVlQlNELm9yZz4KICBqaGIgPGpoYkBGcmVlQlNELm9yZz4KICBq
-aGliYml0cyA8amhpYmJpdHNARnJlZUJTRC5vcmc+CiAgam9oYWx1biA8am9oYWx1bkBGcmVlQlNE
-Lm9yZz4KICBrZXZhbnMgPGtldmFuc0BGcmVlQlNELm9yZz4KICBraWIgPGtpYkBGcmVlQlNELm9y
-Zz4KICBsZXYgPGxldkBGcmVlQlNELm9yZz4KICBsdXBvcmwgPGx1cG9ybEBGcmVlQlNELm9yZz4K
-ICBsd2hzdSA8bHdoc3VARnJlZUJTRC5vcmc+CiAgbWFudSA8bWFudUBGcmVlQlNELm9yZz4KICBt
-YXJraiA8bWFya2pARnJlZUJTRC5vcmc+CiAgbWF2IDxtYXZARnJlZUJTRC5vcmc+CiAgbWNrdXNp
-Y2sgPG1ja3VzaWNrQEZyZWVCU0Qub3JnPgogIG1qZyA8bWpnQEZyZWVCU0Qub3JnPgogIG1tYWN5
-IDxtbWFjeUBGcmVlQlNELm9yZz4KICBuZ2llIDxuZ2llQEZyZWVCU0Qub3JnPgogIHJncmltZXMg
-PHJncmltZXNARnJlZUJTRC5vcmc+CiAgcm1hY2tsZW0gPHJtYWNrbGVtQEZyZWVCU0Qub3JnPgog
-IHJ3YXRzb24gPHJ3YXRzb25ARnJlZUJTRC5vcmc+CiAgc2h1cmQgPHNodXJkQEZyZWVCU0Qub3Jn
-PgogIHRyYXN6IDx0cmFzekBGcmVlQlNELm9yZz4KICB0c29vbWUgPHRzb29tZUBGcmVlQlNELm9y
-Zz4KICB0dWV4ZW4gPHR1ZXhlbkBGcmVlQlNELm9yZz4KICB0eWNob24gPHR5Y2hvbkBGcmVlQlNE
-Lm9yZz4KICB6ZWlzaW5nIDx6ZWlzaW5nQEZyZWVCU0Qub3JnPgoKam9iczoKIGJ1aWxkLWFtZDY0
-LWZyZWVic2QtYWdhaW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAg
-IAogYnVpbGQtYW1kNjQtZnJlZWJzZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14ZW4tZnJlZWJzZCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBv
-c3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFn
-ZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWls
-YWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9s
-b2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5l
-cmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5n
-aXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVu
-Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVz
-dCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKCk5vdCBwdXNoaW5nLgoKKE5vIHJldmlz
-aW9uIGxvZzsgaXQgd291bGQgYmUgMjYyNSBsaW5lcyBsb25nLikKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============3476941454164942204==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-B3cGo6CJPcM9jtUiJUBr"
+
+
+--=-B3cGo6CJPcM9jtUiJUBr
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2019-05-08 at 12:59 +0300, Andrii Anisov wrote:
+> From: Andrii Anisov <andrii_anisov@epam.com>
+>=20
+> ARM's schedule_tail() is called from two places: context_switch() and
+> continue_new_vcpu(). Both functions are always called with
+> prev!=3Dcurrent. So replace the correspondent check in schedule_tail()
+> with ASSERT() which is the development (debug) build guard.
+>=20
+> Signed-off-by: Andrii Anisov <andrii_anisov@epam.com>
+>
+FWIW,
+
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Thanks and Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-B3cGo6CJPcM9jtUiJUBr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzSvIwACgkQFkJ4iaW4
+c+6HyQ//WNWoTt6x4vxoZEtTcUMW65jdg8QVAVveLdchZwqrzaq0UBrAVGi0m4xY
+0yk9g6pn09xSgYPUGQEFt+xjwcdeH3xa6GFieOofACSFThMeUjZtTM8qT/NoAOV6
++dzntraH8f2iiQe+oi+7f517i9E2wx16iNWs10C2DefXE/xOqlT4YeDDHVyCBj+/
+QhwTS5ivXsHjQCjFtDCqPlcebPbinuq+Weob7fazeeFnMK6kY8loTXAo2LfB/gxB
+RuPqnD5HEKAIpkh+nWn1Uffgq/Cf4kvrr7OWpQd09qM9lxKCqWR2xLfP3abadc+O
+d3cQ99z02KEekhy2EaUXCEFARYmaNwT5TXzxcKuZM2188oUD93bueKwIpNbUpM92
+ImX+bb84+s3w9dP5KRx5MO39gMoDo/yFH5PCzMFYTWtuDnJx8i2K5XakklcmxBHO
+89Ku4L9ScWKfTOjfl1opHZInRzvM/8UtClb0yubC8wQOrBCV8EK1m2g93PvzwfY6
+r63yV3KbdVhFW3O8wh7deJYo9yX2HkiU8Ug0XbZuvm1YuxT8wAZxoBWfGbBCA7Kb
+DUrHC8N68kavASrC944ZiKDptRDilrB7pPAo0JGluuY1YWOZFOUbF1Xd1cyi5uX5
+sCxESb4c/Rc1101dK9zpjmG5J4ukhUvu0isB7sT6PIj6hjCYLNU=
+=lyN0
+-----END PGP SIGNATURE-----
+
+--=-B3cGo6CJPcM9jtUiJUBr--
+
+
+
+--===============3476941454164942204==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3476941454164942204==--
+
+
