@@ -1,23 +1,21 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: [PATCH v2] libxl: fix migration of PV and PVH domUs
  with and without qemu
-Date: Thu, 9 May 2019 17:52:09 +0200
-Message-ID: <20190509155209.tjo2wchlnbkodzij@Air-de-Roger>
+Date: Thu, 9 May 2019 17:54:38 +0200
+Message-ID: <20190509175438.3e2016b8.olaf@aepfle.de>
 References: <20190503094251.16148-1-olaf@aepfle.de>
  <20190503110411.so4kiwmji4en3ugc@Air-de-Roger>
- <20190509155621.20698a9f.olaf@aepfle.de>
- <20190509162956.23c4d6ab.olaf@aepfle.de>
+ <20190503161132.06f85271.olaf@aepfle.de>
+ <20190503152953.xcisr7n2bs4v76mi@Air-de-Roger>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8068243078317855378=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=cqZt=TJ=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hOlLP-0000Sq-0m
- for xen-devel@lists.xenproject.org; Thu, 09 May 2019 15:52:27 +0000
-Content-Disposition: inline
-In-Reply-To: <20190509162956.23c4d6ab.olaf@aepfle.de>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=vYVB=TJ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hOlNg-0000af-0f
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2019 15:54:48 +0000
+In-Reply-To: <20190503152953.xcisr7n2bs4v76mi@Air-de-Roger>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,45 +24,123 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
+To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXkgMDksIDIwMTkgYXQgMDQ6Mjk6NTZQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gQW0gVGh1LCA5IE1heSAyMDE5IDE1OjU2OjIxICswMjAwCj4gc2NocmllYiBPbGFmIEhl
-cmluZyA8b2xhZkBhZXBmbGUuZGU+Ogo+IAo+ID4gQW0gRnJpLCAzIE1heSAyMDE5IDEzOjA0OjEx
-ICswMjAwCj4gPiBzY2hyaWViIFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29t
-PjoKPiA+IAo+ID4gPiBJIHRoaW5rIHRoZSBhYm92ZSBjYWxsIGlzIHdyb25nLCBsaWJ4bF9fbmVl
-ZF94ZW5wdl9xZW11IGV4cGVjdHMgdG8gZ2V0Cj4gPiA+IHRoZSBkb21pZCBvZiB0aGUgdG9vbHN0
-YWNrIGRvbWFpbiAoaWU6IHRoZSBkb21haW4gcnVubmluZyB0aGlzIGNvZGUpLAo+ID4gPiBub3Qg
-dGhlIGRvbWFpbiBiZWluZyBjcmVhdGVkLiAgCj4gPiAKPiA+IFNvLCBob3cgZG8gSSBhY3R1YWxs
-eSB0ZXN0IHN1Y2ggc2V0dXBzPyBJdCBzZWVtcyBhIGRyaXZlciBkb21haW4gaXMKPiA+IHJlcXVp
-cmVkLiBBY2NvcmRpbmcgdG8geGwtZGlzay1jb25maWd1cmF0aW9uKDUpIEkgbWF5IG5lZWQgdG8g
-c3BlY2lmeQo+ID4gYmFja2VuZD0kZG9tVS4gSXMgdGhlcmUgc29tZSBndWlkZSBob3cgdG8gY29u
-ZmlndXJlIHN1Y2ggdGhpbmc/CgpIbSwgSSdtIGFmcmFpZCBJJ20gbm90IGFibGUgdG8gZmluZCBh
-bnl0aGluZywgSSBjb3VsZCBzd2VhciBJJ3ZlCmFkZGVkIHNvbWV0aGluZyB0byB0aGUgd2lraSB3
-aGVuIHRoaXMgd2FzIGltcGxlbWVudGVkLgoKQW55d2F5LCB5b3UgbmVlZCB0byBjcmVhdGUgYSBk
-b21VIGFuZCBhZGQgZHJpdmVyX2RvbWFpbj0xIHRvIHRoZQpkb21haW4geGwuY2ZnLiBJbnNpZGUg
-dGhpcyBkb21VIHlvdSBuZWVkIGB4bCBkZXZkYCBydW5uaW5nLCB0aGVyZSdzIGFuCmluaXQgc2Ny
-aXB0IGZvciBpdC4gTm90ZSB5b3Ugd2lsbCBoYXZlIHRvIGluc3RhbGwgdGhlIFhlbiB0b29sc3Rh
-Y2sKaW5zaWRlIHRoaXMgZG9tVS4gVGhhdCB3b3VsZCBiZSB0aGUgZG9tVSBzZXJ2aW5nIHRoZSBi
-YWNrZW5kcy4KClRoZW4geW91IGNyZWF0ZSBhbm90aGVyIGRvbVUgdGhhdCB3b3VsZCBoYXZlIGEg
-ZGlzayBsaW5lIHdpdGgKYmFja2VuZD08YmFja2VuZCBkb21VPiBhbmQgaGF2ZSB0aGUgZGlzayBp
-bWFnZSBhdmFpbGFibGUgaW4gdGhlCmJhY2tlbmQgZG9tVS4KClRoYXQgc2hvdWxkIGJlIGVub3Vn
-aCB0byBnZXQgaXQgd29ya2luZyBhcyBhIHRlc3QuCgo+IFdoaWxlIG15IHF1ZXN0aW9uIHN0aWxs
-IHN0YW5kcywgSSB3b25kZXIgaWYgdGhlIHN0YXRlbWVudCByZWdhcmRpbmcKPiBsaWJ4bF9fbmVl
-ZF94ZW5wdl9xZW11IGlzIGNvcnJlY3QuCgpIbSwgVEJIIEknbSBub3Qgc3VyZSBsaWJ4bF9fbmVl
-ZF94ZW5wdl9xZW11IGlzIHN0aWxsIHVzZWQgYnkgZHJpdmVyCmRvbWFpbnMgKGRldmQpLiBBRkFJ
-Q1QgdGhlIGRlY2lzaW9uIHdoZXRoZXIgdG8gdXNlIHFkaXNrIG9yIG5vdCBzaG91bGQKYmUgc2V0
-IG9uIHRoZSBkaXNrIGNvbmZpZ3VyYXRpb24gbGluZSBtYW51YWxseSwgYW5kIHRoZW4gdGhlIGRy
-aXZlcgpkb21haW4ganVzdCBsYXVuY2hlcyBhIHFlbXUgaW5zdGFuY2Ugd2hlbiByZXF1aXJlZCAo
-aWU6IHdoZW4gdXNpbmcKcWRpc2spLgoKPiBBcmUgeW91IHNheWluZyB0aGUgY3VycmVudCB1c2Vy
-cyBvZiBsaWJ4bF9fbmVlZF94ZW5wdl9xZW11IChsaWJ4bF9fZG1fY2hlY2tfc3RhcnQsCj4gc3Bh
-d25fc3R1Yl9sYXVuY2hfZG0gYW5kIGRvbWNyZWF0ZV9sYXVuY2hfZG0pIGRvIG5vdCBvbmx5IHJ1
-biBpbiBkb20wLCBidXQKPiBhbHNvIHNvbWV3aGVyZSBlbHNlPwoKbGlieGxfX3NwYXduX3FkaXNr
-X2JhY2tlbmQgY2FuIGluZGVlZCBiZSBjYWxsZWQgZnJvbSBkcml2ZXIgZG9tYWlucwooIT0gZG9t
-MCkuIFNlZSBhZGRfZGV2aWNlIHdoaWNoIGdldHMgY2FsbGVkIGJ5IGJhY2tlbmRfd2F0Y2hfY2Fs
-bGJhY2sKZnJvbSB0aGUgZmxvdyBvZiBgeGwgZGV2ZGAuCgpUaGFua3MsIFJvZ2VyLgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============8068243078317855378==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/FdAqCfT2kv=9aHSrGEWCouQ"; protocol="application/pgp-signature"
+
+--Sig_/FdAqCfT2kv=9aHSrGEWCouQ
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 3 May 2019 17:29:53 +0200
+schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+
+> On Fri, May 03, 2019 at 04:11:32PM +0200, Olaf Hering wrote:
+> > Am Fri, 3 May 2019 13:04:11 +0200
+> > schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+> >  =20
+> > > Wouldn't it be easier to leave libxl__need_xenpv_qemu alone and just
+> > > use the contents of the migration stream to decide whether to launch a
+> > > QEMU for the PV backends or not? ie: just parsing the domain config on
+> > > the migration stream should be enough for the destination side to
+> > > decide whether a QEMU is needed in order to handle the PV backends? =
+=20
+> >=20
+> > I think that is done anyway. How would the receiving side know what to =
+do? =20
+>=20
+> Hm, OK. I will wait for v3 with the domid stuff fixed.
+
+I think it will be as simple as this. In the end b_info.device_model_version
+must be set prior the call to store_libxl_entry.
+
+--- a/tools/libxl/libxl_create.c
++++ b/tools/libxl/libxl_create.c
+@@ -92,9 +92,6 @@ int libxl__domain_build_info_setdefault(
+             } else {
+                 b_info->device_model_version =3D libxl__default_device_mod=
+el(gc);
+             }
+-        } else {
+-            b_info->device_model_version =3D
+-                LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
+         }
+         if (b_info->device_model_version
+                 =3D=3D LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN) {
+@@ -969,6 +966,18 @@ static void initiate_domain_create(libxl
+     dcs->sdss.dm.guest_domid =3D 0; /* means we haven't spawned */
+=20
+     /*
++     * libxl__domain_build_info_setdefault sets this only for HVM
++     * set it before store_libxl_entry()
++     */
++    if (d_config->b_info.device_model_version
++        =3D=3D LIBXL_DEVICE_MODEL_VERSION_UNKNOWN) {
++        ret =3D libxl__need_xenpv_qemu(gc, d_config);
++        if (ret > 0)
++            d_config->b_info.device_model_version =3D
++                LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
++    }
++
++    /*
+      * Set the dm version quite early so that libxl doesn't have to pass t=
+he
+      * build info around just to know if the domain has a device model or =
+not.
+      */
+--- a/tools/libxl/libxl_dom_suspend.c
++++ b/tools/libxl/libxl_dom_suspend.c
+@@ -377,7 +377,9 @@ static void domain_suspend_common_guest_
+     libxl__ev_xswatch_deregister(gc, &dsps->guest_watch);
+     libxl__ev_time_deregister(gc, &dsps->guest_timeout);
+=20
+-    if (dsps->type =3D=3D LIBXL_DOMAIN_TYPE_HVM) {
++    if (dsps->type =3D=3D LIBXL_DOMAIN_TYPE_HVM ||
++        libxl__device_model_version_running(gc, dsps->domid) =3D=3D
++        LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN) {
+         rc =3D libxl__domain_suspend_device_model(gc, dsps);
+         if (rc) {
+             LOGD(ERROR, dsps->domid,
+@@ -460,7 +462,9 @@ int libxl__domain_resume(libxl__gc *gc,
+         goto out;
+     }
+=20
+-    if (type =3D=3D LIBXL_DOMAIN_TYPE_HVM) {
++    if (type =3D=3D LIBXL_DOMAIN_TYPE_HVM ||
++        libxl__device_model_version_running(gc, domid) =3D=3D
++        LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN) {
+         rc =3D libxl__domain_resume_device_model(gc, domid);
+         if (rc) {
+             LOGD(ERROR, domid, "failed to resume device model:%d", rc);
+
+Olaf
+
+--Sig_/FdAqCfT2kv=9aHSrGEWCouQ
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNRNPgAKCRBdQqD6ppg2
+fvebAKDe6FsCsOHkhdHbwMbHgEOpVwkBLwCg95YPnF2rMnKYbHUF7OQdx3CqFrk=
+=F0es
+-----END PGP SIGNATURE-----
+
+--Sig_/FdAqCfT2kv=9aHSrGEWCouQ--
+
+
+--===============8068243078317855378==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8068243078317855378==--
