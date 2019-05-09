@@ -1,23 +1,22 @@
-From: Juergen Gross <jgross@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
 Subject: Re: [PATCH RFC V2 02/45] xen/sched: use new sched_item
  instead of vcpu in scheduler interfaces
-Date: Thu, 9 May 2019 07:36:10 +0200
-Message-ID: <33e39539-2087-3bbb-cc46-a8d309c9d8d2@suse.com>
+Date: Thu, 09 May 2019 07:56:27 +0200
+Message-ID: <54785fa3c24d14de6c00d343046711f25ea28700.camel@suse.com>
 References: <20190506065644.7415-1-jgross@suse.com>
  <20190506065644.7415-3-jgross@suse.com>
  <06d4c89b-202e-bea4-23f9-c41dd8d17d52@citrix.com>
+ <33e39539-2087-3bbb-cc46-a8d309c9d8d2@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6570265802659876982=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=8hXi=TJ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hObj6-0007eV-5V
- for xen-devel@lists.xenproject.org; Thu, 09 May 2019 05:36:16 +0000
-In-Reply-To: <06d4c89b-202e-bea4-23f9-c41dd8d17d52@citrix.com>
-Content-Language: en-US
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Daoc=TJ=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1hOc2p-0000nE-Cv
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2019 05:56:39 +0000
+In-Reply-To: <33e39539-2087-3bbb-cc46-a8d309c9d8d2@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,35 +25,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Robert VanVossen <robert.vanvossen@dornerworks.com>, Dario Faggioli <dfaggioli@suse.com>, Julien Grall <julien.grall@arm.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>
+To: Juergen Gross <jgross@suse.com>, George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Robert VanVossen <robert.vanvossen@dornerworks.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Josh Whitehead <josh.whitehead@dornerworks.com>, Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMDgvMDUvMjAxOSAxODozNSwgR2VvcmdlIER1bmxhcCB3cm90ZToKPiBPbiA1LzYvMTkgNzo1
-NiBBTSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPj4gSW4gb3JkZXIgdG8gcHJlcGFyZSBjb3JlLSBh
-bmQgc29ja2V0LXNjaGVkdWxpbmcgdXNlIGEgbmV3IHN0cnVjdAo+PiBzY2hlZF9pdGVtIGluc3Rl
-YWQgb2Ygc3RydWN0IHZjcHUgZm9yIGludGVyZmFjZXMgb2YgdGhlIGRpZmZlcmVudAo+PiBzY2hl
-ZHVsZXJzLgo+Pgo+PiBSZW5hbWUgdGhlIHBlci1zY2hlZHVsZXIgZnVuY3Rpb25zIGluc2VydF92
-Y3B1IGFuZCByZW1vdmVfdmNwdSB0bwo+PiBpbnNlcnRfaXRlbSBhbmQgcmVtb3ZlX2l0ZW0gdG8g
-cmVmbGVjdCB0aGUgY2hhbmdlIG9mIHRoZSBwYXJhbWV0ZXIuCj4+IEluIHRoZSBzY2hlZHVsZXJz
-IHJlbmFtZSBsb2NhbCBmdW5jdGlvbnMgc3dpdGNoZWQgdG8gc2NoZWRfaXRlbSwgdG9vLgo+Pgo+
-PiBGb3Igbm93IHRoaXMgbmV3IHN0cnVjdCB3aWxsIGNvbnRhaW4gYSB2Y3B1IHBvaW50ZXIgb25s
-eSBhbmQgaXMKPj4gYWxsb2NhdGVkIG9uIHRoZSBzdGFjay4gVGhpcyB3aWxsIGJlIGNoYW5nZWQg
-bGF0ZXIuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNv
-bT4KPiAKPiBPeSwgSSByZWFsaXplIHRoaXMgY29tbWVudCBpcyBnb2luZyB0byBiZSBzb21ld2hh
-dCBwYWluZnVsLCBidXQuLi4KCkkgaG9wZSBJIGRpZG4ndCBzY3JlYW0gb3V0IHRvbyBsb3VkLi4u
-IDstKQoKPiAnaXRlbScgcmVhbGx5IHNlZW1zIGxpa2UgdGhlIHdyb25nIHdvcmQgaGVyZS4gIFRv
-IG1lICdpdGVtJyBhbHdheXMgbWVhbnMKPiBvbmUgdGhpbmc7IHdoZXJlYXMgd2hhdCB5b3UncmUg
-cGxhbm5pbmcgb24gZG9pbmcgaXMgZ3JvdXBpbmcgdG9nZXRoZXIKPiB2Y3B1cyB0byBzY2hlZHVs
-ZSB0b2dldGhlcjsgd2hpY2ggd291bGQgbWVhbiAidW5pdCIgKGFzIGluLCBhIG1pbGl0YXJ5Cj4g
-dW5pdCkuCj4gCj4gSSByZWFsaXplIGNoYW5naW5nIGl0IGhlcmUgcHJvYmFibHkgbWVhbnMgYWxz
-byBjaGFuZ2luZyBpdCBpbiB0aGUgbmV4dAo+IDQzIHBhdGNoZXMgYXMgd2VsbC4KCk9ubHkgYWJv
-dXQgMTAwMCBsaW5lcyB0byBjaGFuZ2UuCgpUQkgsIHJlcGxhY2luZyAiaXRlbSIgd2l0aCAidW5p
-dCIgaXMgZG9hYmxlIHZpYSBzZWQuIERvaW5nIHRoZSBzYW1lIHdpdGgKKGFzIERhcmlvIHN1Z2dl
-c3RlZCkgImVudGl0eSIgaXMgbW9yZSBwYWluZnVsLCBhcyBJIHdvdWxkIG5lZWQgdG8gY2hlY2sK
-Y29kaW5nIHN0eWxlIChsaW5lIGxlbmd0aCwgaW5kZW50YXRpb24pIG1hbnVhbGx5IGFmdGVyd2Fy
-ZHMuIFNvIERhcmlvLAp3b3VsZCB5b3UgYmUgZmluZSB3aXRoICJ1bml0Ij8gVGhpcyBtaWdodCBz
-YXZlIG1lIHNvbWUgaG91cnMgb2Ygd29yay4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============6570265802659876982==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-aUtiyGdMdGlJ1TQPe6/F"
+
+
+--=-aUtiyGdMdGlJ1TQPe6/F
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2019-05-09 at 07:36 +0200, Juergen Gross wrote:
+> On 08/05/2019 18:35, George Dunlap wrote:
+> > On 5/6/19 7:56 AM, Juergen Gross wrote:
+> > >=20
+> > 'item' really seems like the wrong word here.  To me 'item' always
+> > means
+> > one thing; whereas what you're planning on doing is grouping
+> > together
+> > vcpus to schedule together; which would mean "unit" (as in, a
+> > military
+> > unit).
+> >=20
+> > I realize changing it here probably means also changing it in the
+> > next
+> > 43 patches as well.
+>=20
+> Only about 1000 lines to change.
+>=20
+> TBH, replacing "item" with "unit" is doable via sed. Doing the same
+> with
+> (as Dario suggested) "entity" is more painful, as I would need to
+> check
+> coding style (line length, indentation) manually afterwards.=20
+>
+Ah, right, I didn't spot that 'item' and 'unit' are the same length.
+Makes sense.
+
+> So Dario,
+> would you be fine with "unit"? This might save me some hours of work.
+>=20
+I guess I am, yes. I like it more than 'item' too and, as much as I
+like 'entity', I agree it's not worth the extra effort.
+
+Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-aUtiyGdMdGlJ1TQPe6/F
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzTwQsACgkQFkJ4iaW4
+c+4O/g/9Hj44CNgzmgmhjm9Ln2FdgluT05td64h5AiMGNQxbuoG6nnzDZH5vSjGD
+UYpzbEfSikQP4yRqe+fdL7NBm1Hq3OrI6qmbAg1rGwF7ab7SMI5UISfhB5zxwMTA
+t9dYHU0uoxPlnrHdBc665CpYygc2sgDIQJayJgLtRlj7YC0qdgCsGTHwcV7vqQyV
+ADnPMCZLMTeXR29NimTe3BLUI29j6bBdlmA106q9ThLYcdYYBuzFga2tTgTqZOQj
+HKQOyqkxpZs+LHnV4hzgI/Zt76wFF+HBDoA0kVt4DpGr03RDc5ItdKYhLAC84+Sc
+iwqFFk+Rg372YJ8XmsDnUVHO6/i7IXKHPsuQNffrTaOLrWy/rrL8VceuU02cdhL8
+zZaDXurUmeN8PBZ21v7PfDlHm+37YtiL6BA1pz3g7x09qJq5j7enjQWiUQ5ciJ0H
+mYZH9lS0W23f+uT/w+8yAWOk9JaVg8L+lvVfEdpVtUtYo1sdbH8KjQjKnYBTMX98
+w2vjOLi5JSTgQ6NTDSbVluIEA7DoLo5ajKUNTHSvD3e4hmbs7fo73yxvsP47wg9L
+P0FEpDhfwGmsL16XoELTVrwVuJmo+1gjn8zRMvhk9F96ZKQ95d9peHS9BBwMRSm9
+JMpYTpHqkFMThqWluIBncsst7pWQRAyyJLaLL7+VEmZ97FpvLZ0=
+=jWmE
+-----END PGP SIGNATURE-----
+
+--=-aUtiyGdMdGlJ1TQPe6/F--
+
+
+
+--===============6570265802659876982==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6570265802659876982==--
