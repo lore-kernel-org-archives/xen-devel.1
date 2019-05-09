@@ -1,23 +1,20 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v2] libxl: fix migration of PV and PVH domUs
- with and without qemu
-Date: Thu, 9 May 2019 18:19:04 +0200
-Message-ID: <20190509181904.101ac9ef.olaf@aepfle.de>
-References: <20190503094251.16148-1-olaf@aepfle.de>
- <20190503110411.so4kiwmji4en3ugc@Air-de-Roger>
- <20190503161132.06f85271.olaf@aepfle.de>
- <20190503152953.xcisr7n2bs4v76mi@Air-de-Roger>
- <20190509175438.3e2016b8.olaf@aepfle.de>
- <20190509161410.qb7kuokuq7xoyx5t@Air-de-Roger>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: Altp2m use with PML can deadlock Xen
+Date: Thu, 9 May 2019 17:19:40 +0100
+Message-ID: <3e6ecacc-6dcc-6c0d-2b2d-b5179572cb5b@citrix.com>
+References: <CABfawhkp2rODvh1j6AvEEEgc=EheM53sVprRiZWrhHcQ8Ve_+w@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============0911736039960498452=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=vYVB=TJ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hOllI-00038O-UQ
- for xen-devel@lists.xenproject.org; Thu, 09 May 2019 16:19:13 +0000
-In-Reply-To: <20190509161410.qb7kuokuq7xoyx5t@Air-de-Roger>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=GyTO=TJ=citrix.com=prvs=025853ab4=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1hOlln-00039t-8c
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2019 16:19:43 +0000
+In-Reply-To: <CABfawhkp2rODvh1j6AvEEEgc=EheM53sVprRiZWrhHcQ8Ve_+w@mail.gmail.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,52 +23,46 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Tamas K Lengyel <tamas.k.lengyel@gmail.com>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============0911736039960498452==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/HP5jKJPhZjmFnbq=YG6lJXA"; protocol="application/pgp-signature"
-
---Sig_/HP5jKJPhZjmFnbq=YG6lJXA
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 9 May 2019 18:14:10 +0200
-schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
-
-> The patch below looks sensible to me, and it's more like what I was
-> expecting would be needed to solve this issue.
-
-The remaining question is if a new state should be introduced,
-or if LIBXL_DEVICE_MODEL_VERSION_UNKNOWN would be good to state the fact
-that no device model is required.
-
-Olaf
-
---Sig_/HP5jKJPhZjmFnbq=YG6lJXA
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNRS+AAKCRBdQqD6ppg2
-fq1xAKDRfYeZ/VZAlHsrQHMyjGMxx21CygCgqmPBxrtwHGNo35gmGdovQpqS30A=
-=XhgC
------END PGP SIGNATURE-----
-
---Sig_/HP5jKJPhZjmFnbq=YG6lJXA--
-
-
---===============0911736039960498452==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0911736039960498452==--
+T24gMDkvMDUvMjAxOSAxNDozOCwgVGFtYXMgSyBMZW5neWVsIHdyb3RlOgo+IEhpIGFsbCwKPiBJ
+J20gaW52ZXN0aWdhdGluZyBhbiBpc3N1ZSB3aXRoIGFsdHAybSB0aGF0IGNhbiBlYXNpbHkgYmUg
+cmVwcm9kdWNlZAo+IGFuZCBsZWFkcyB0byBhIGh5cGVydmlzb3IgZGVhZGxvY2sgd2hlbiBQTUwg
+aXMgYXZhaWxhYmxlIGluIGhhcmR3YXJlLgo+IEkgaGF2ZW4ndCBiZWVuIGFibGUgdG8gdHJhY2Ug
+ZG93biB3aGVyZSB0aGUgYWN0dWFsIGRlYWRsb2NrIG9jY3Vycy4KPgo+IFRoZSBwcm9ibGVtIHNl
+ZW0gdG8gc3RlbSBmcm9tIGh2bS92bXgvdm1jcy5jOnZteF92Y3B1X2ZsdXNoX3BtbF9idWZmZXIK
+PiB0aGF0IGNhbGxzIHAybV9jaGFuZ2VfdHlwZV9vbmUgb24gYWxsIGdmbnMgdGhhdCB3ZXJlIHJl
+Y29yZGVkIHRoZSBQTUwKPiBidWZmZXIuIFRoZSBwcm9ibGVtIG9jY3VycyB3aGVuIHRoZSBQTUwg
+YnVmZmVyIGZ1bGwgdm1leGl0IGhhcHBlbnMKPiB3aGlsZSB0aGUgYWN0aXZlIHAybSBpcyBhbiBh
+bHRwMm0uIFN3aXRjaGluZyAgcDJtX2NoYW5nZV90eXBlX29uZSB0bwo+IHdvcmsgd2l0aCB0aGUg
+YWx0cDJtIGluc3RlYWQgb2YgdGhlIGhvc3RwMm0gaG93ZXZlciByZXN1bHRzIGluIEVQVAo+IG1p
+c2NvbmZpZ3VyYXRpb24gY3Jhc2hlcy4KPgo+IEFkZGluZyB0byB0aGUgaXNzdWUgaXMgdGhhdCBp
+dCBzZWVtIHRvIG9ubHkgb2NjdXIgd2hlbiB0aGUgYWx0cDJtIGhhcwo+IHJlbWFwcGVkIEdGTnMu
+IFNpbmNlIFBNTCByZWNvcmRzIGVudHJpZXMgYmFzZWQgb24gR0ZOIGxlYWRzIG1lIHRvCj4gcXVl
+c3Rpb24gd2hldGhlciBpdCBpcyBzYWZlIGF0IGFsbCB0byB1c2UgUE1MIHdoZW4gYWx0cDJtIGlz
+IHVzZWQgd2l0aAo+IEdGTiByZW1hcHBpbmcuIEhvd2V2ZXIsIEFGQUlDVCB0aGUgR0ZOcyBpbiB0
+aGUgUE1MIGJ1ZmZlciBhcmUgbm90IHRoZQo+IHJlbWFwcGVkIEdGTnMgYW5kIG15IHVuZGVyc3Rh
+bmRpbmcgaXMgdGhhdCBpdCBzaG91bGQgYmUgc2FmZSBhcyBsb25nCj4gYXMgdGhlIEdGTnMgYmVp
+bmcgdHJhY2tlZCBieSBQTUwgYXJlIG5ldmVyIHRoZSByZW1hcHBlZCBHRk5zLgo+Cj4gQm9vdGlu
+ZyBYZW4gd2l0aCBlcHQ9cG1sPTAgcmVzb2x2ZXMgdGhlIGlzc3VlLgo+Cj4gSWYgYW55b25lIGhh
+cyBhbnkgaW5zaWdodCBpbnRvIHdoYXQgbWlnaHQgYmUgaGFwcGVuaW5nLCBwbGVhc2UgbGV0IG1l
+IGtub3cuCgoKSSBjb3VsZCBoYXZlIHN3b3JuIHRoYXQgR2VvcmdlIHNwb3R0ZWQgYSBwcm9ibGVt
+IGhlcmUgYW5kIGZpeGVkIGl0LsKgIEkKc2hvdWxkbid0IGJlIHN1cnByaXNlZCBpZiB3ZSBoYXZl
+IG1vcmUuCgpUaGUgcHJvYmxlbSB0aGF0IFBNTCBpbnRyb2R1Y2VkIChhbmQgdGhpcyBpcyBtb3N0
+bHkgbXkgZmF1bHQsIGFzIEkKc3VnZ2VzdGVkIHRoZSBidWdneSBzb2x1dGlvbikgaXMgdGhhdCB0
+aGUgdm1leGl0IGhhbmRsZXIgZnJvbSBvbmUgdmNwdQpwYXVzZXMgb3RoZXJzIHRvIGRyYWluIHRo
+ZSBQTUwgcXVldWUgaW50byB0aGUgZGlydHkgYml0bWFwLsKgIE92ZXJhbGwgSQp3YXNuJ3QgaGFw
+cHkgd2l0aCB0aGUgZGVzaWduIGFuZCBJJ3ZlIGdvdCBzb21lIGlkZWFzIHRvIGltcHJvdmUgaXQs
+IGJ1dAp3aXRoaW4gdGhlIHNjb3BlIG9mIGhvdyBhbHRwMm0gd2FzIGVuZ2luZWVyZWQsIEkgcHJv
+cG9zZWQKZG9tYWluX3BhdXNlX2V4Y2VwdF9zZWxmKCkuCgpBcyBpdCB0dXJucyBvdXQsIHRoYXQg
+aXMgdnVsbmVyYWJsZSB0byBkZWFkbG9ja3Mgd2hlbiB5b3UgZ2V0IHR3byB2Y3B1cwp0cnlpbmcg
+dG8gcGF1c2UgZWFjaCBvdGhlciBhbmQgd2FpdGluZyBmb3IgZWFjaCBvdGhlciB0byBiZWNvbWUK
+ZGUtc2NoZWR1bGVkLgoKSSBzZWUgdGhpcyBoYXMgYmVlbiByZXVzZWQgYnkgdGhlIGFsdHAybSBj
+b2RlLCBidXQgaXQgKnNob3VsZCogYmUgc2FmZQp0byBkZWFkbG9ja3Mgbm93IHRoYXQgaXQgdGFr
+ZXMgdGhlIGh5cGVyY2FsbF9kZWFkbG9ja19tdXRleHQuCgpBbnl3YXkgLSBzb3JyeSBmb3Igbm90
+IGJlaW5nIG1vcmUgaGVscCwgYnV0IEkgYmV0IHRoZSBwcm9ibGVtIGlzIGdvaW5nCnRvIGJlIHNv
+bWV3aGVyZSBhcm91bmQgdmNwdSBwYXVzaW5nLgoKfkFuZHJldwoKX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
+ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
+YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
