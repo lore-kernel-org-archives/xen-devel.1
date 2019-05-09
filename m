@@ -7,50 +7,50 @@ X-Spam-Status: No, score=-8.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E232C04AB1
-	for <xen-devel@archiver.kernel.org>; Thu,  9 May 2019 19:49:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A660FC04AB1
+	for <xen-devel@archiver.kernel.org>; Thu,  9 May 2019 19:49:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 60BBD2177E
-	for <xen-devel@archiver.kernel.org>; Thu,  9 May 2019 19:49:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 77FE92177E
+	for <xen-devel@archiver.kernel.org>; Thu,  9 May 2019 19:49:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="nCtuuH2L"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 60BBD2177E
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="6PSQYPKm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77FE92177E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hOp2V-000670-0O; Thu, 09 May 2019 19:49:11 +0000
+	id 1hOp2T-00066k-NM; Thu, 09 May 2019 19:49:09 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=q/9x=TJ=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1hOp2U-00066q-Bt
- for xen-devel@lists.xenproject.org; Thu, 09 May 2019 19:49:10 +0000
-X-Inumbo-ID: 819ffbc4-7293-11e9-93fb-53c225e2bcf5
+ id 1hOp2R-00066V-Ub
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2019 19:49:07 +0000
+X-Inumbo-ID: 7fd02e0e-7293-11e9-8342-97c8c5687abb
 Received: from new1-smtp.messagingengine.com (unknown [66.111.4.221])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 819ffbc4-7293-11e9-93fb-53c225e2bcf5;
- Thu, 09 May 2019 19:49:07 +0000 (UTC)
+ id 7fd02e0e-7293-11e9-8342-97c8c5687abb;
+ Thu, 09 May 2019 19:49:04 +0000 (UTC)
 Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
- by mailnew.nyi.internal (Postfix) with ESMTP id 23724261AE;
- Thu,  9 May 2019 15:49:07 -0400 (EDT)
+ by mailnew.nyi.internal (Postfix) with ESMTP id E3557261C7;
+ Thu,  9 May 2019 15:49:03 -0400 (EDT)
 Received: from mailfrontend2 ([10.202.2.163])
- by compute7.internal (MEProxy); Thu, 09 May 2019 15:49:07 -0400
+ by compute7.internal (MEProxy); Thu, 09 May 2019 15:49:03 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:content-transfer-encoding:content-type
  :date:from:in-reply-to:in-reply-to:message-id:mime-version
  :references:references:subject:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=+SF0FkQdajCUtphJn
- lcTGK89e836Pf6YLxX7ZQjBaA0=; b=nCtuuH2LkHIY5AwIFpmT3wIJNN7GQzC4Z
- ujYpZUnpOPA3KqmbKlDR+RPKoQVLpBBe0AQpjJNE88M/Vnkx/w3SIOJYu/1rp4L3
- 4FCuFY4I/2zNxpvIEVGqblBzHGePbhuJ0mhEcr6L3UmSgMpxjJYh8wpsFksITVtn
- jeW8U1bzkLiCHW7Xn5xgSggXalznFaUygRQNhaZKGXzgNll5Ouc98+66mSBSYWMi
- qAEeXAkGKVHauBYtxbewbNAzWQR6bJ3b+1onoToKGffZ535PW5bkJPKL96bRbKtD
- bWzwqvF4GxsjzYxZXgjnrvN5vvEK6lRodjWYn9Hp+B2n1I6+xGWlA==
-X-ME-Sender: <xms:MoTUXLjgHUyd-uwxptpXAzOVO_jvatkV6ksbcUuBg5hCBPcBW15BVA>
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=/tjdqGMOX9Qb8VVKC
+ c4eaXGteEbLZhiLO6hJR/bn2N4=; b=6PSQYPKmZ8Vr9qmK6jhpKG+u1DvncqCMb
+ /djoLYWvYZcgfUAlzFJawljKQX3izcGEex7871ISMyDl1eeWhez9+4Hwy/cAbJ1L
+ YQ7WLKxEjMliZLJYc8S7mFaCM0Mq9mb9cUsjz7ZjIUMC9CAQt3TsqSyJJ2T0dfb7
+ xtXiywohuJaoQ2oNoWehBZspWpOVm4Rb34vidilc77PsH10/oX/oAKgKjLetK26S
+ ZcWvw7+7mik+WRTcNU3PBxw4CU5emBoUEko6Xn7dhMgCvXx8XeG/gw+Liaam6+OI
+ lmvWJcOkykLkrAezO6LQheEJL4TsINtttKSftQ4eKWvzMZqqH+gZw==
+X-ME-Sender: <xms:L4TUXF8KBNvqJDPW27ZB8vMHyza3Ab3DGE_J7bCROGNG6pa6rEYONg>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduuddrkeeigdekudcutefuodetggdotefrodftvf
  curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
  uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenog
@@ -59,29 +59,29 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduuddrkeeigdekudcutefuodetggdote
  hkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvhhishhisghlvght
  hhhinhhgshhlrggsrdgtohhmqeenucfkphepledurdeihedrfeegrdeffeenucfrrghrrg
  hmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhs
- lhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedu
-X-ME-Proxy: <xmx:M4TUXBVuK96cgP_jeFoHdJG4HX9Swzcutr55Eqs2wp0Ku7VMSiQ-LA>
- <xmx:M4TUXCWMNrWnEq3-mdEX9Iy-NxN2Yf4zl6Sw5JhM90_JPku2xBHQgw>
- <xmx:M4TUXJgIbwGvKBLoQntVQ8Zr9Y6t2lIepevPFw3EDfS_MDltkAbeNQ>
- <xmx:M4TUXIZidZ71yssnLIOx7lq1drdPqC9ESFRAvvfc36DSF52TC3L3hA>
+ lhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedt
+X-ME-Proxy: <xmx:L4TUXAlA_z2D7EPHxyjAq3b2I_Z0_o5fMr1JIB4cpTGo6nXO5QXlCQ>
+ <xmx:L4TUXP_aE5pxZeouXHImt6FTkQ6OFXA8zPqpS_2ZAqeVUaBktWK0gg>
+ <xmx:L4TUXGliHOSDRILbk4LsduIt9J8R5ct7D9u3Es7HaJ-fylz2joWFNg>
+ <xmx:L4TUXGz173_KFBPLw8hjfSixFCEI8sauzNrG4DS60OjrQ6G50DRQFw>
 Received: from localhost.localdomain (ip5b412221.dynamic.kabel-deutschland.de
  [91.65.34.33])
- by mail.messagingengine.com (Postfix) with ESMTPA id 54822103D2;
- Thu,  9 May 2019 15:49:05 -0400 (EDT)
+ by mail.messagingengine.com (Postfix) with ESMTPA id 0CC14103D0;
+ Thu,  9 May 2019 15:49:01 -0400 (EDT)
 From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
  <marmarek@invisiblethingslab.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu,  9 May 2019 21:48:54 +0200
+Date: Thu,  9 May 2019 21:48:52 +0200
 Message-Id:
- <3126f6f2fa19be61319ea922243fddd7ae87e958.1557431250.git-series.marmarek@invisiblethingslab.com>
+ <eddbab0d58a78f10882ea0271d5b38b4e38763d1.1557431250.git-series.marmarek@invisiblethingslab.com>
 X-Mailer: git-send-email 2.17.2
 In-Reply-To: <cover.1ff4fbcf3cedbe34db420b46be69328b299f325e.1557431250.git-series.marmarek@invisiblethingslab.com>
 References: <cover.1ff4fbcf3cedbe34db420b46be69328b299f325e.1557431250.git-series.marmarek@invisiblethingslab.com>
 MIME-Version: 1.0
 In-Reply-To: <cover.1ff4fbcf3cedbe34db420b46be69328b299f325e.1557431250.git-series.marmarek@invisiblethingslab.com>
 References: <cover.1ff4fbcf3cedbe34db420b46be69328b299f325e.1557431250.git-series.marmarek@invisiblethingslab.com>
-Subject: [Xen-devel] [PATCH v2 3/5] drivers/video: Drop framebuffer size
- constraints
+Subject: [Xen-devel] [PATCH v2 1/5] xen/bitmap: fix bitmap_fill with
+ zero-sized bitmap
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -92,8 +92,8 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Olaf Hering <olaf@aepfle.de>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
@@ -104,32 +104,23 @@ Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190509194854.fh3WZXshd1LregqpPuDztu_b-8Kl5fphVVIinVtn0ho@z>
+Message-ID: <20190509194852.iybnkfoXCAbBwmE0h5joqtbBfQDRYNkmhv9UahlXQKE@z>
 
-VGhlIGxpbWl0IDE5MDB4MTIwMCBkbyBub3QgbWF0Y2ggcmVhbCB3b3JsZCBkZXZpY2VzICgxOTAw
-IGxvb2tzIGxpa2UgYQp0eXBvLCBzaG91bGQgYmUgMTkyMCkuIEJ1dCBpbiBwcmFjdGljZSB0aGUg
-bGltaXRzIGFyZSBhcmJpdHJhcnkgYW5kIGRvCm5vdCBzZXJ2ZSBhbnkgcmVhbCBwdXJwb3NlLiBB
-cyBkaXNjdXNzZWQgaW4gIkluY3JlYXNlIGZyYW1lYnVmZmVyIHNpemUKdG8gdG9kYXlzIHN0YW5k
-YXJkcyIgdGhyZWFkLCBkcm9wIHRoZW0gY29tcGxldGVseS4KClRoaXMgZml4ZXMgZ3JhcGhpYyBj
-b25zb2xlIG9uIGRldmljZSB3aXRoIDM4NDB4MjE2MCBuYXRpdmUgcmVzb2x1dGlvbi4KClNpZ25l
-ZC1vZmYtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxl
-dGhpbmdzbGFiLmNvbT4KU3VnZ2VzdGVkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5j
-b20+CkFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgot
-LS0KQ2M6IE9sYWYgSGVyaW5nIDxvbGFmQGFlcGZsZS5kZT4KLS0tCiB4ZW4vZHJpdmVycy92aWRl
-by9sZmIuYyB8IDEwIC0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxMCBkZWxldGlvbnMoLSkK
-CmRpZmYgLS1naXQgYS94ZW4vZHJpdmVycy92aWRlby9sZmIuYyBiL3hlbi9kcml2ZXJzL3ZpZGVv
-L2xmYi5jCmluZGV4IDA0NzVhNjguLjUwMjIxOTUgMTAwNjQ0Ci0tLSBhL3hlbi9kcml2ZXJzL3Zp
-ZGVvL2xmYi5jCisrKyBiL3hlbi9kcml2ZXJzL3ZpZGVvL2xmYi5jCkBAIC0xMCw5ICsxMCw2IEBA
-CiAjaW5jbHVkZSAibGZiLmgiCiAjaW5jbHVkZSAiZm9udC5oIgogCi0jZGVmaW5lIE1BWF9YUkVT
-IDE5MDAKLSNkZWZpbmUgTUFYX1lSRVMgMTIwMAotCiBzdHJ1Y3QgbGZiX3N0YXR1cyB7CiAgICAg
-c3RydWN0IGxmYl9wcm9wIGxmYnA7CiAKQEAgLTE0NiwxMyArMTQzLDYgQEAgdm9pZCBsZmJfY2Fy
-cmlhZ2VfcmV0dXJuKHZvaWQpCiAKIGludCBfX2luaXQgbGZiX2luaXQoc3RydWN0IGxmYl9wcm9w
-ICpsZmJwKQogewotICAgIGlmICggbGZicC0+d2lkdGggPiBNQVhfWFJFUyB8fCBsZmJwLT5oZWln
-aHQgPiBNQVhfWVJFUyApCi0gICAgewotICAgICAgICBwcmludGsoWEVOTE9HX1dBUk5JTkcgIkNv
-dWxkbid0IGluaXRpYWxpemUgYSAldXgldSBmcmFtZWJ1ZmZlciBlYXJseS5cbiIsCi0gICAgICAg
-ICAgICAgICBsZmJwLT53aWR0aCwgbGZicC0+aGVpZ2h0KTsKLSAgICAgICAgcmV0dXJuIC1FSU5W
-QUw7Ci0gICAgfQotCiAgICAgbGZiLmxmYnAgPSAqbGZicDsKIAogICAgIGxmYi5sYnVmID0geG1h
-bGxvY19ieXRlcyhsZmIubGZicC5ieXRlc19wZXJfbGluZSk7Ci0tIApnaXQtc2VyaWVzIDAuOS4x
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+V2hlbiBiaXRtYXBfZmlsbCguLi4sIDApIGlzIGNhbGxlZCwgZG8gbm90IHRyeSB0byB3cml0ZSBh
+bnl0aGluZy4gQmVmb3JlCnRoaXMgcGF0Y2gsIGl0IHRyaWVkIHRvIHdyaXRlIGFsbW9zdCBMT05H
+X01BWCwgc3VyZWx5IG92ZXJ3cml0aW5nCnNvbWV0aGluZy4KClNpZ25lZC1vZmYtYnk6IE1hcmVr
+IE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNvbT4K
+UmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+ClJl
+dmlld2VkLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Ci0tLQogeGVuL2luY2x1
+ZGUveGVuL2JpdG1hcC5oIHwgMiArKwogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQoK
+ZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3hlbi9iaXRtYXAuaCBiL3hlbi9pbmNsdWRlL3hlbi9i
+aXRtYXAuaAppbmRleCBmZTNjNzIwLi4wNDMwYzFjIDEwMDY0NAotLS0gYS94ZW4vaW5jbHVkZS94
+ZW4vYml0bWFwLmgKKysrIGIveGVuL2luY2x1ZGUveGVuL2JpdG1hcC5oCkBAIC0xMjYsNiArMTI2
+LDggQEAgc3RhdGljIGlubGluZSB2b2lkIGJpdG1hcF9maWxsKHVuc2lnbmVkIGxvbmcgKmRzdCwg
+aW50IG5iaXRzKQogCXNpemVfdCBubG9uZ3MgPSBCSVRTX1RPX0xPTkdTKG5iaXRzKTsKIAogCXN3
+aXRjaCAobmxvbmdzKSB7CisJY2FzZSAwOgorCQlicmVhazsKIAlkZWZhdWx0OgogCQltZW1zZXQo
+ZHN0LCAtMSwgKG5sb25ncyAtIDEpICogc2l6ZW9mKHVuc2lnbmVkIGxvbmcpKTsKIAkJLyogZmFs
+bCB0aHJvdWdoICovCi0tIApnaXQtc2VyaWVzIDAuOS4xCgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
+bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
+YW4vbGlzdGluZm8veGVuLWRldmVs
