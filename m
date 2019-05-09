@@ -1,17 +1,20 @@
-From: Mathieu Tarral <mathieu.tarral@protonmail.com>
-Subject: [VMI] How to add support for MOV-TO-DRx events ?
-Date: Thu, 09 May 2019 20:57:27 +0000
-Message-ID: <QEYcx2UUWYxlJ02osYlearQNzGJ8v6MEW5XgfTTtnx2KS5tTQakOF-DTvIEqfClWbQlZYvWoyeWkiOKp3SyWmK1NeEQChNxG5drxloJyjEI=@protonmail.com>
-Reply-To: Mathieu Tarral <mathieu.tarral@protonmail.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [VMI] How to add support for MOV-TO-DRx events ?
+Date: Fri, 10 May 2019 00:10:36 +0300
+Message-ID: <66aeafd6-a87e-2f76-e0a3-6d0ad1e6f35f@bitdefender.com>
+References: <QEYcx2UUWYxlJ02osYlearQNzGJ8v6MEW5XgfTTtnx2KS5tTQakOF-DTvIEqfClWbQlZYvWoyeWkiOKp3SyWmK1NeEQChNxG5drxloJyjEI=@protonmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=NEiW=TJ=protonmail.com=mathieu.tarral@srs-us1.protection.inumbo.net>)
- id 1hOq6i-0004mh-1l
- for xen-devel@lists.xenproject.org; Thu, 09 May 2019 20:57:36 +0000
+ <SRS0=IWQu=TJ=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1hOqJZ-0006GE-Ln
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2019 21:10:53 +0000
+In-Reply-To: <QEYcx2UUWYxlJ02osYlearQNzGJ8v6MEW5XgfTTtnx2KS5tTQakOF-DTvIEqfClWbQlZYvWoyeWkiOKp3SyWmK1NeEQChNxG5drxloJyjEI=@protonmail.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,25 +23,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
+To: Mathieu Tarral <mathieu.tarral@protonmail.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpmb2xsb3dpbmcgYSBwcmV2aW91cyBjb252ZXJzYXRpb24sIGkgd291bGQgbGlrZSB0byBj
-YXRjaCBNT1YtVE8tRFJ4IFZNSSBldmVudHMgdG8gcHJldmVudCB0aGUgZ3Vlc3QgZnJvbSBkaXNh
-YmxpbmcgbXkgaGFyZHdhcmUgYnJlYWtwb2ludHMuCgpAVGFtYXMgcG9pbnRlZCBtZSB0byB0aGlz
-IGhlYWRlcjoKaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1ibG9i
-O2Y9eGVuL2luY2x1ZGUvcHVibGljL3ZtX2V2ZW50Lmg7aD1iMmJhZmMwZDc3Zjk3NThlNDJiMGQ1
-M2MwNWE3ZTZiYjg2Yzg2Njg2O2hiPUhFQUQjbDE1NAoKQW5kLCBhcyBmYXIgYXMgSSBjYW4gdGVs
-bCwgSSBoYXZlIHRvCi0gYWRkIGEgbmV3IFJFQVNPTgojZGVmaW5lIFZNX0VWRU5UX1JFQVNPTl9X
-UklURV9ERUJVR1JFRyAgICAgIDE1CgotIGFkZCBhIG5ldyBzdHJ1Y3QKc3RydWN0IHZtX2V2ZW50
-X3dyaXRlX2RlYnVncmVnIHsKICAgIHVpbnQzMl90IGluZGV4OwogICAgdWludDMyX3QgX3BhZDsK
-ICAgIHVpbnQ2NF90IG5ld192YWx1ZTsKICAgIHVpbnQ2NF90IG9sZF92YWx1ZTsKfTsKCi0gaW5z
-ZXJ0IGl0IGludG8gdGhlIHZtX2V2ZW50X3N0IHVuaW9uCgpDYW4geW91IGdpdmUgbWUgbW9yZSBw
-b2ludGVyIGFuZCBndWlkYW5jZSBob3cgdG8gaW1wbGVtZW50IHRoaXMgaW50byBYZW4gPwpJIGhh
-dmUgbmV2ZXIgc3VibWl0dGVkIGEgcGF0Y2gsIG5vciBsb29rZWQgaW50byBYZW4gc291cmNlIGNv
-ZGUuCgpTaG91bGQgd2UgY3JlYXRlIGEgc2luZ2xlIGV2ZW50IGZvciBNT1YtVE8tUkVHeCBWTUkg
-ZXZlbnRzID8KSXQgd291bGQgdm9pZCBjb3B5IHBhc3RpbmcgYW5kIGR1cGxpY2F0aW5nIGNvZGUu
-CgpUaGFua3MgIQoKClNlbnQgd2l0aCBQcm90b25NYWlsIFNlY3VyZSBFbWFpbC4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gNS85LzE5IDExOjU3IFBNLCBNYXRoaWV1IFRhcnJhbCB3cm90ZToKPiBIaSwKPiAKPiBmb2xs
+b3dpbmcgYSBwcmV2aW91cyBjb252ZXJzYXRpb24sIGkgd291bGQgbGlrZSB0byBjYXRjaCBNT1Yt
+VE8tRFJ4IFZNSSBldmVudHMgdG8gcHJldmVudCB0aGUgZ3Vlc3QgZnJvbSBkaXNhYmxpbmcgbXkg
+aGFyZHdhcmUgYnJlYWtwb2ludHMuCj4gCj4gQFRhbWFzIHBvaW50ZWQgbWUgdG8gdGhpcyBoZWFk
+ZXI6Cj4gaHR0cHM6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1ibG9iO2Y9
+eGVuL2luY2x1ZGUvcHVibGljL3ZtX2V2ZW50Lmg7aD1iMmJhZmMwZDc3Zjk3NThlNDJiMGQ1M2Mw
+NWE3ZTZiYjg2Yzg2Njg2O2hiPUhFQUQjbDE1NAo+IAo+IEFuZCwgYXMgZmFyIGFzIEkgY2FuIHRl
+bGwsIEkgaGF2ZSB0bwo+IC0gYWRkIGEgbmV3IFJFQVNPTgo+ICNkZWZpbmUgVk1fRVZFTlRfUkVB
+U09OX1dSSVRFX0RFQlVHUkVHICAgICAgMTUKPiAKPiAtIGFkZCBhIG5ldyBzdHJ1Y3QKPiBzdHJ1
+Y3Qgdm1fZXZlbnRfd3JpdGVfZGVidWdyZWcgewo+ICAgICB1aW50MzJfdCBpbmRleDsKPiAgICAg
+dWludDMyX3QgX3BhZDsKPiAgICAgdWludDY0X3QgbmV3X3ZhbHVlOwo+ICAgICB1aW50NjRfdCBv
+bGRfdmFsdWU7Cj4gfTsKPiAKPiAtIGluc2VydCBpdCBpbnRvIHRoZSB2bV9ldmVudF9zdCB1bmlv
+bgo+IAo+IENhbiB5b3UgZ2l2ZSBtZSBtb3JlIHBvaW50ZXIgYW5kIGd1aWRhbmNlIGhvdyB0byBp
+bXBsZW1lbnQgdGhpcyBpbnRvIFhlbiA/CgpZb3UgcHJvYmFibHkgd2FudCB0byBjaGFuZ2UgdGhl
+IHdyaXRlX2RlYnVncmVnKCkgbWFjcm8gaW50byBhIGZ1bmN0aW9uCnRoYXQgZG9lcyB3aGF0J3Mg
+Y3VycmVudGx5IGJlaW5nIGRvbmUgKyBzZW5kIG91dCB0aGUgdm1fZXZlbnQuIFlvdSBhbHNvCnBy
+b2JhYmx5IG5lZWQgdG8gdGhpbmsgYWJvdXQgd2hldGhlciB5b3Ugd2FudCB0aGUgd3JpdGUgdG8g
+YmUKcHJlZW1wdGFibGUgb3Igbm90IChJJ20gZ3Vlc3NpbmcgeW91IGRvbid0LCBpbiB3aGljaCBj
+YXNlIGl0J3MgYWxsIHNpbXBsZXIpLgoKPiBJIGhhdmUgbmV2ZXIgc3VibWl0dGVkIGEgcGF0Y2gs
+IG5vciBsb29rZWQgaW50byBYZW4gc291cmNlIGNvZGUuCgpodHRwczovL3dpa2kueGVucHJvamVj
+dC5vcmcvd2lraS9TdWJtaXR0aW5nX1hlbl9Qcm9qZWN0X1BhdGNoZXMKCj4gU2hvdWxkIHdlIGNy
+ZWF0ZSBhIHNpbmdsZSBldmVudCBmb3IgTU9WLVRPLVJFR3ggVk1JIGV2ZW50cyA/Cj4gSXQgd291
+bGQgdm9pZCBjb3B5IHBhc3RpbmcgYW5kIGR1cGxpY2F0aW5nIGNvZGUuCgpJIGRvbid0IHVuZGVy
+c3RhbmQgdGhpcyBxdWVzdGlvbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnBy
+b2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94
+ZW4tZGV2ZWw=
