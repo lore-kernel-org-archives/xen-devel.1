@@ -1,25 +1,23 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: [PATCH v2] libxl: fix migration of PV and PVH domUs
  with and without qemu
-Date: Thu, 9 May 2019 18:14:10 +0200
-Message-ID: <20190509161410.qb7kuokuq7xoyx5t@Air-de-Roger>
+Date: Thu, 9 May 2019 18:19:04 +0200
+Message-ID: <20190509181904.101ac9ef.olaf@aepfle.de>
 References: <20190503094251.16148-1-olaf@aepfle.de>
  <20190503110411.so4kiwmji4en3ugc@Air-de-Roger>
  <20190503161132.06f85271.olaf@aepfle.de>
  <20190503152953.xcisr7n2bs4v76mi@Air-de-Roger>
  <20190509175438.3e2016b8.olaf@aepfle.de>
+ <20190509161410.qb7kuokuq7xoyx5t@Air-de-Roger>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0911736039960498452=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=rkVT=TJ=citrix.com=prvs=025313e5c=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hOlgd-0002wV-GE
- for xen-devel@lists.xenproject.org; Thu, 09 May 2019 16:14:23 +0000
-Content-Disposition: inline
-In-Reply-To: <20190509175438.3e2016b8.olaf@aepfle.de>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=vYVB=TJ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hOllI-00038O-UQ
+ for xen-devel@lists.xenproject.org; Thu, 09 May 2019 16:19:13 +0000
+In-Reply-To: <20190509161410.qb7kuokuq7xoyx5t@Air-de-Roger>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,55 +26,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
+To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXkgMDksIDIwMTkgYXQgMDU6NTQ6MzhQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gQW0gRnJpLCAzIE1heSAyMDE5IDE3OjI5OjUzICswMjAwCj4gc2NocmllYiBSb2dlciBQ
-YXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT46Cj4gCj4gPiBPbiBGcmksIE1heSAwMywg
-MjAxOSBhdCAwNDoxMTozMlBNICswMjAwLCBPbGFmIEhlcmluZyB3cm90ZToKPiA+ID4gQW0gRnJp
-LCAzIE1heSAyMDE5IDEzOjA0OjExICswMjAwCj4gPiA+IHNjaHJpZWIgUm9nZXIgUGF1IE1vbm7D
-qSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Ogo+ID4gPiAgIAo+ID4gPiA+IFdvdWxkbid0IGl0IGJl
-IGVhc2llciB0byBsZWF2ZSBsaWJ4bF9fbmVlZF94ZW5wdl9xZW11IGFsb25lIGFuZCBqdXN0Cj4g
-PiA+ID4gdXNlIHRoZSBjb250ZW50cyBvZiB0aGUgbWlncmF0aW9uIHN0cmVhbSB0byBkZWNpZGUg
-d2hldGhlciB0byBsYXVuY2ggYQo+ID4gPiA+IFFFTVUgZm9yIHRoZSBQViBiYWNrZW5kcyBvciBu
-b3Q/IGllOiBqdXN0IHBhcnNpbmcgdGhlIGRvbWFpbiBjb25maWcgb24KPiA+ID4gPiB0aGUgbWln
-cmF0aW9uIHN0cmVhbSBzaG91bGQgYmUgZW5vdWdoIGZvciB0aGUgZGVzdGluYXRpb24gc2lkZSB0
-bwo+ID4gPiA+IGRlY2lkZSB3aGV0aGVyIGEgUUVNVSBpcyBuZWVkZWQgaW4gb3JkZXIgdG8gaGFu
-ZGxlIHRoZSBQViBiYWNrZW5kcz8gIAo+ID4gPiAKPiA+ID4gSSB0aGluayB0aGF0IGlzIGRvbmUg
-YW55d2F5LiBIb3cgd291bGQgdGhlIHJlY2VpdmluZyBzaWRlIGtub3cgd2hhdCB0byBkbz8gIAo+
-ID4gCj4gPiBIbSwgT0suIEkgd2lsbCB3YWl0IGZvciB2MyB3aXRoIHRoZSBkb21pZCBzdHVmZiBm
-aXhlZC4KPiAKPiBJIHRoaW5rIGl0IHdpbGwgYmUgYXMgc2ltcGxlIGFzIHRoaXMuIEluIHRoZSBl
-bmQgYl9pbmZvLmRldmljZV9tb2RlbF92ZXJzaW9uCj4gbXVzdCBiZSBzZXQgcHJpb3IgdGhlIGNh
-bGwgdG8gc3RvcmVfbGlieGxfZW50cnkuCgpUaGUgcGF0Y2ggYmVsb3cgbG9va3Mgc2Vuc2libGUg
-dG8gbWUsIGFuZCBpdCdzIG1vcmUgbGlrZSB3aGF0IEkgd2FzCmV4cGVjdGluZyB3b3VsZCBiZSBu
-ZWVkZWQgdG8gc29sdmUgdGhpcyBpc3N1ZS4KCj4gCj4gLS0tIGEvdG9vbHMvbGlieGwvbGlieGxf
-Y3JlYXRlLmMKPiArKysgYi90b29scy9saWJ4bC9saWJ4bF9jcmVhdGUuYwo+IEBAIC05Miw5ICs5
-Miw2IEBAIGludCBsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9fc2V0ZGVmYXVsdCgKPiAgICAgICAg
-ICAgICAgfSBlbHNlIHsKPiAgICAgICAgICAgICAgICAgIGJfaW5mby0+ZGV2aWNlX21vZGVsX3Zl
-cnNpb24gPSBsaWJ4bF9fZGVmYXVsdF9kZXZpY2VfbW9kZWwoZ2MpOwo+ICAgICAgICAgICAgICB9
-Cj4gLSAgICAgICAgfSBlbHNlIHsKPiAtICAgICAgICAgICAgYl9pbmZvLT5kZXZpY2VfbW9kZWxf
-dmVyc2lvbiA9Cj4gLSAgICAgICAgICAgICAgICBMSUJYTF9ERVZJQ0VfTU9ERUxfVkVSU0lPTl9R
-RU1VX1hFTjsKPiAgICAgICAgICB9Cj4gICAgICAgICAgaWYgKGJfaW5mby0+ZGV2aWNlX21vZGVs
-X3ZlcnNpb24KPiAgICAgICAgICAgICAgICAgID09IExJQlhMX0RFVklDRV9NT0RFTF9WRVJTSU9O
-X1FFTVVfWEVOKSB7Cj4gQEAgLTk2OSw2ICs5NjYsMTggQEAgc3RhdGljIHZvaWQgaW5pdGlhdGVf
-ZG9tYWluX2NyZWF0ZShsaWJ4bAo+ICAgICAgZGNzLT5zZHNzLmRtLmd1ZXN0X2RvbWlkID0gMDsg
-LyogbWVhbnMgd2UgaGF2ZW4ndCBzcGF3bmVkICovCj4gIAo+ICAgICAgLyoKPiArICAgICAqIGxp
-YnhsX19kb21haW5fYnVpbGRfaW5mb19zZXRkZWZhdWx0IHNldHMgdGhpcyBvbmx5IGZvciBIVk0K
-PiArICAgICAqIHNldCBpdCBiZWZvcmUgc3RvcmVfbGlieGxfZW50cnkoKQo+ICsgICAgICovCj4g
-KyAgICBpZiAoZF9jb25maWctPmJfaW5mby5kZXZpY2VfbW9kZWxfdmVyc2lvbgo+ICsgICAgICAg
-ID09IExJQlhMX0RFVklDRV9NT0RFTF9WRVJTSU9OX1VOS05PV04pIHsKPiArICAgICAgICByZXQg
-PSBsaWJ4bF9fbmVlZF94ZW5wdl9xZW11KGdjLCBkX2NvbmZpZyk7Cj4gKyAgICAgICAgaWYgKHJl
-dCA+IDApCgpTaW5jZSBsaWJ4bF9fbmVlZF94ZW5wdl9xZW11IGNhbiBmYWlsLCB3aGF0IGFib3V0
-IGRvaW5nIHNvbWV0aGluZwpsaWtlOgoKc3dpdGNoICggKHJldCA9IGxpYnhsX19uZWVkX3hlbnB2
-X3FlbXUoZ2MsIGRfY29uZmlnKSkgKSB7CmNhc2UgMToKICAgIGRfY29uZmlnLT5iX2luZm8uZGV2
-aWNlX21vZGVsX3ZlcnNpb24gPQogICAgTElCWExfREVWSUNFX01PREVMX1ZFUlNJT05fUUVNVV9Y
-RU47CiAgICBicmVhazsKCmNhc2UgMDoKICAgIGJyZWFrOwoKZGVmYXVsdDoKICAgIExPR0VWRChF
-UlJPUiwgcmV0LCBkb21pZCwgIlVuYWJsZSB0byBkZXRlcm1pbmUgUUVNVSByZXF1aXNpdGUiKTsK
-ICAgIGdvdG8gZXJyb3Jfb3V0Owp9CgpOb3RlIHRoZSBlcnJvciBtZXNzYWdlIHdvcmRpbmcgaXMg
-bm90IHZlcnkgZ29vZCwgcHJvYmFibHkgYW4gRW5nbGlzaApzcGVha2VyIHdvdWxkIGNvbWUgdXAg
-d2l0aCBhIGJldHRlciBtZXNzYWdlLgoKVGhhbmtzIGZvciBsb29raW5nIGludG8gdGhpcyEKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============0911736039960498452==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/HP5jKJPhZjmFnbq=YG6lJXA"; protocol="application/pgp-signature"
+
+--Sig_/HP5jKJPhZjmFnbq=YG6lJXA
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 9 May 2019 18:14:10 +0200
+schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+
+> The patch below looks sensible to me, and it's more like what I was
+> expecting would be needed to solve this issue.
+
+The remaining question is if a new state should be introduced,
+or if LIBXL_DEVICE_MODEL_VERSION_UNKNOWN would be good to state the fact
+that no device model is required.
+
+Olaf
+
+--Sig_/HP5jKJPhZjmFnbq=YG6lJXA
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNRS+AAKCRBdQqD6ppg2
+fq1xAKDRfYeZ/VZAlHsrQHMyjGMxx21CygCgqmPBxrtwHGNo35gmGdovQpqS30A=
+=XhgC
+-----END PGP SIGNATURE-----
+
+--Sig_/HP5jKJPhZjmFnbq=YG6lJXA--
+
+
+--===============0911736039960498452==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0911736039960498452==--
