@@ -1,24 +1,20 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 4/7] xen/arm: page: Clarify the Xen TLBs
- helpers name
-Date: Fri, 10 May 2019 10:57:43 -0700 (PDT)
-Message-ID: <alpine.DEB.2.21.1905101050260.25766@sstabellini-ThinkPad-T480s>
-References: <20190508161603.21964-1-julien.grall@arm.com>
- <20190508161603.21964-5-julien.grall@arm.com>
- <alpine.DEB.2.21.1905091307080.25766@sstabellini-ThinkPad-T480s>
- <5fe19f3a-e17b-04b5-ff15-5579ebe789eb@arm.com>
- <cc1d2550-794c-842d-26db-178f614f81b3@arm.com>
- <4b1d9bf6-bf3b-a5ec-da06-534618bb34a8@arm.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: [PATCH 2/4] xen/watchdog: Rearrange the logic to fold
+ the timer-arming paths
+Date: Fri, 10 May 2019 19:28:02 +0100
+Message-ID: <1557512884-32395-3-git-send-email-andrew.cooper3@citrix.com>
+References: <1557512884-32395-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-900728133-1557510899=:25766"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=nNyG=TK=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1hP9mF-0004Wt-89
- for xen-devel@lists.xenproject.org; Fri, 10 May 2019 17:57:47 +0000
-In-Reply-To: <4b1d9bf6-bf3b-a5ec-da06-534618bb34a8@arm.com>
-Content-ID: <alpine.DEB.2.21.1905101055100.25766@sstabellini-ThinkPad-T480s>
+ <SRS0=KsvH=TK=citrix.com=prvs=026b205b0=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1hPAFj-0006vy-N7
+ for xen-devel@lists.xenproject.org; Fri, 10 May 2019 18:28:15 +0000
+In-Reply-To: <1557512884-32395-1-git-send-email-andrew.cooper3@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,101 +23,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org, nd@arm.com, Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <Andrii_Anisov@epam.com>, Oleksandr_Tyshchenko@epam.com
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Christian Lindig <christian.lindig@citrix.com>, Pau Ruiz Safont <pau.safont@citrix.com>, Julien Grall <julien.grall@arm.com>, =?UTF-8?q?Edwin=20T=C3=B6r=C3=B6k?= <edvin.torok@citrix.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-900728133-1557510899=:25766
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.21.1905101055101.25766@sstabellini-ThinkPad-T480s>
-
-On Fri, 10 May 2019, Julien Grall wrote:
-> On 09/05/2019 22:46, Julien Grall wrote:
-> > Hi,
-> > 
-> > On 09/05/2019 21:32, Julien Grall wrote:
-> > > Hi,
-> > > 
-> > > On 09/05/2019 21:13, Stefano Stabellini wrote:
-> > > > On Wed, 8 May 2019, Julien Grall wrote:
-> > > > >   /* Release all __init and __initdata ranges to be reused */
-> > > > > diff --git a/xen/include/asm-arm/arm32/page.h
-> > > > > b/xen/include/asm-arm/arm32/page.h
-> > > > > index 40a77daa9d..0b41b9214b 100644
-> > > > > --- a/xen/include/asm-arm/arm32/page.h
-> > > > > +++ b/xen/include/asm-arm/arm32/page.h
-> > > > > @@ -61,12 +61,8 @@ static inline void invalidate_icache_local(void)
-> > > > >       isb();                      /* Synchronize fetched instruction
-> > > > > stream. */
-> > > > >   }
-> > > > > -/*
-> > > > > - * Flush all hypervisor mappings from the data TLB of the local
-> > > > > - * processor. This is not sufficient when changing code mappings or
-> > > > > - * for self modifying code.
-> > > > > - */
-> > > > > -static inline void flush_xen_data_tlb_local(void)
-> > > > > +/* Flush all hypervisor mappings from the TLB of the local processor.
-> > > > > */
-> > > > 
-> > > > I realize that the statement "This is not sufficient when changing code
-> > > > mappings or for self modifying code" is not quite accurate, but I would
-> > > > prefer not to remove it completely. It would be good to retain a warning
-> > > > somewhere about IC been needed when changing Xen's own mappings. Maybe
-> > > > on top of invalidate_icache_local?
-> > > 
-> > > Can you please expand in which circumstance you need to invalid the
-> > > instruction cache when changing Xen's own mappings?
-> > 
-> > Reading the Armv7 (B3.11.2 in ARM DDI 0406C.c) and Armv8 (D5.11.2 in ARM DDI
-> > 0487D.a), most of the instruction caches implement the IVIPT extension. This
-> > means that instruction cache maintenance is required only after write new
-> > data to a PA that holds instructions (see D5-2522 in ARM DDI 0487D.a and
-> > B3.11.2 in ARM DDI 0406C.c).
-> > 
-> > The only one that differs with that behavior is ASID and VMID tagged VIVT
-> > instruction caches which is only present in Armv7 (I can't remember why it
-> > was dropped in Armv8). Instruction cache maintenance can be required when
-> > changing the translation of a virtual address to a physical address.
-> 
-> I thought about this a bit more and chat with my team at Arm. Xen on Arm only
-> support Cortex-A7, Cortex-A15 and Brahma 15 (see the CPU ID check in
-> arm32/head.S).
-> 	
-> None of them are actually using VIVT instruction caches. In general, VIVT
-> caches are more difficult to deal with because they require more flush. So I
-> would be more incline to deny booting Xen on platform where the instruction
-> caches don't support IVIVT extension.
-> 
-> I don't think that will have a major impact on the user because of my point
-> above.
-
-Thanks for looking this up in details. I think there are two interesting
-points here:
-
-1) what to do with VIVT
-2) what to write in the in-code comment
-
-For 1) I think it would be OK to deny booting. For sure we need at least
-a warning. Would you be able to add the warning/boot-denial as part of
-this series, or at least an in-code comment?
-
-For 2) I would like this reasonining to be captured somewhere with a
-in-code comment, if nothing else as a reference to what to search in
-the Arm Arm. I don't know where is the best place for it. If
-invalidate_icache_local is not good place for the comment please suggest
-a better location.
---8323329-900728133-1557510899=:25766
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-900728133-1557510899=:25766--
+QnkgcmVhcnJhbmdpbmcgdGhlIGxvZ2ljLCB0aGUgdGltZXIgYWxsb2NhdGlvbiBsb29wIGNhbiBy
+ZXVzZSB0aGUgY29tbW9uIHRpbWVyCmFybWluZy9jbGVhcmluZyBsb2dpYy4gIFRoaXMgcmVzdWx0
+cyBpbiBlYXNpZXIgdG8gZm9sbG93IGNvZGUsIGFuZCBhIG1vZGVzdApyZWR1Y3Rpb24gaW4gY29t
+cGlsZWQgY29kZSBzaXplICgtNjQsIDI5MCA9PiAyMjYpLgoKRm9yIGRvbWFpbnMgd2hpY2ggdXNl
+IHdhdGNoZG9ncywgdGhlIG92ZXJ3aGVtbGluZyBtYWpvcml5IG9mIGh5cGVyY2FsbHMgd2lsbApi
+ZSByZS1hcm1pbmcgYW4gZXhpc3RpbmcgdGltZXIuICBBcnJhbmdlIHRoZSBmYXN0cGF0aCB0byBt
+YXRjaC4KClRoaXMgZG9lcyBjYXVzZSBvbmUgY2hhbmdlIGluIGJlaGF2aW91ciBmb3IgYSBjb3Ju
+ZXIgY2FzZS4gIFByZXZpb3VzbHksCnNwZWNpZnlpbmcgaWQgPSAwLCB0aW1lb3V0ID0gMCB3b3Vs
+ZCBpbnN0YW50bHkga2lsbCB0aGUgZG9tYWluLCBhcyB0aGUgdGltZXIKd291bGQgZmlyZSBiZWZv
+cmUgcmV0dXJuaW5nIHRvIHRoZSBndWVzdC4gIFRoaXMgY29ybmVyIGNhc2UgaXMgZ29pbmcgdG8g
+YmUKcmV1c2VkIGZvciBhIGRpZmZlcmVudCBwdXJwb3NlIGluIGEgbGF0ZXIgY2hhbmdlLgoKU2ln
+bmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KLS0t
+CkNDOiBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3VzZS5jb20+CkNDOiBXZWkgTGl1IDx3ZWkubGl1
+MkBjaXRyaXguY29tPgpDQzogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+
+CkNDOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5vcmc+CkNDOiBKdWxp
+ZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgpDQzogR2VvcmdlIER1bmxhcCA8Z2Vvcmdl
+LmR1bmxhcEBldS5jaXRyaXguY29tPgpDQzogRWR3aW4gVMO2csO2ayA8ZWR2aW4udG9yb2tAY2l0
+cml4LmNvbT4KQ0M6IENocmlzdGlhbiBMaW5kaWcgPGNocmlzdGlhbi5saW5kaWdAY2l0cml4LmNv
+bT4KQ0M6IFBhdSBSdWl6IFNhZm9udCA8cGF1LnNhZm9udEBjaXRyaXguY29tPgotLS0KIHhlbi9j
+b21tb24vc2NoZWR1bGUuYyB8IDMyICsrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tCiAx
+IGZpbGUgY2hhbmdlZCwgMTggaW5zZXJ0aW9ucygrKSwgMTQgZGVsZXRpb25zKC0pCgpkaWZmIC0t
+Z2l0IGEveGVuL2NvbW1vbi9zY2hlZHVsZS5jIGIveGVuL2NvbW1vbi9zY2hlZHVsZS5jCmluZGV4
+IDQ3ZjVkMDQuLjg5YWJhODggMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vc2NoZWR1bGUuYworKysg
+Yi94ZW4vY29tbW9uL3NjaGVkdWxlLmMKQEAgLTEwNTcsMzUgKzEwNTcsMzkgQEAgc3RhdGljIGxv
+bmcgZG9tYWluX3dhdGNoZG9nKHN0cnVjdCBkb21haW4gKmQsIHVpbnQzMl90IGlkLCB1aW50MzJf
+dCB0aW1lb3V0KQogCiAgICAgc3Bpbl9sb2NrKCZkLT53YXRjaGRvZ19sb2NrKTsKIAotICAgIGlm
+ICggaWQgPT0gMCApCisgICAgaWYgKCBsaWtlbHkoaWQgIT0gMCkgKSAvKiBPcGVyYXRlIG9uIGEg
+c3BlY2lmaWMgdGltZXIuICovCisgICAgeworICAgICAgICBpZCAtPSAxOworICAgICAgICBpZiAo
+ICF0ZXN0X2JpdChpZCwgJmQtPndhdGNoZG9nX2ludXNlX21hcCkgKQorICAgICAgICB7CisgICAg
+ICAgICAgICByYyA9IC1FSU5WQUw7CisgICAgICAgICAgICBnb3RvIHVubG9jazsKKyAgICAgICAg
+fQorICAgIH0KKyAgICBlbHNlIC8qIEFsbG9jYXRlIHRoZSBuZXh0IGF2YWlsYWJsZSB0aW1lci4g
+Ki8KICAgICB7CiAgICAgICAgIGZvciAoIGlkID0gMDsgaWQgPCBOUl9ET01BSU5fV0FUQ0hET0df
+VElNRVJTOyBpZCsrICkKICAgICAgICAgewogICAgICAgICAgICAgaWYgKCB0ZXN0X2FuZF9zZXRf
+Yml0KGlkLCAmZC0+d2F0Y2hkb2dfaW51c2VfbWFwKSApCiAgICAgICAgICAgICAgICAgY29udGlu
+dWU7Ci0gICAgICAgICAgICBzZXRfdGltZXIoJmQtPndhdGNoZG9nX3RpbWVyW2lkXSwgTk9XKCkg
+KyBTRUNPTkRTKHRpbWVvdXQpKTsKICAgICAgICAgICAgIGJyZWFrOwogICAgICAgICB9Ci0gICAg
+ICAgIHJjID0gaWQgPT0gTlJfRE9NQUlOX1dBVENIRE9HX1RJTUVSUyA/IC1FTk9TUEMgOiBpZCAr
+IDE7Ci0gICAgICAgIGdvdG8gdW5sb2NrOwotICAgIH0KLQotICAgIGlkIC09IDE7Ci0gICAgaWYg
+KCAhdGVzdF9iaXQoaWQsICZkLT53YXRjaGRvZ19pbnVzZV9tYXApICkKLSAgICB7Ci0gICAgICAg
+IHJjID0gLUVJTlZBTDsKLSAgICAgICAgZ290byB1bmxvY2s7CisgICAgICAgIGlmICggaWQgPT0g
+TlJfRE9NQUlOX1dBVENIRE9HX1RJTUVSUyApCisgICAgICAgIHsKKyAgICAgICAgICAgIHJjID0g
+LUVOT1NQQzsKKyAgICAgICAgICAgIGdvdG8gdW5sb2NrOworICAgICAgICB9CisgICAgICAgIHJj
+ID0gaWQgKyAxOwogICAgIH0KIAotICAgIGlmICggdGltZW91dCA9PSAwICkKKyAgICAvKiAocmUt
+KWFybSwgb3IgY2xlYXIgYSBzcGVjaWZpYyB0aW1lci4gKi8KKyAgICBpZiAoIHVubGlrZWx5KHRp
+bWVvdXQgPT0gMCkgKQogICAgIHsKICAgICAgICAgc3RvcF90aW1lcigmZC0+d2F0Y2hkb2dfdGlt
+ZXJbaWRdKTsKICAgICAgICAgY2xlYXJfYml0KGlkLCAmZC0+d2F0Y2hkb2dfaW51c2VfbWFwKTsK
+ICAgICB9CiAgICAgZWxzZQotICAgIHsKICAgICAgICAgc2V0X3RpbWVyKCZkLT53YXRjaGRvZ190
+aW1lcltpZF0sIE5PVygpICsgU0VDT05EUyh0aW1lb3V0KSk7Ci0gICAgfQogCiAgdW5sb2NrOgog
+ICAgIHNwaW5fdW5sb2NrKCZkLT53YXRjaGRvZ19sb2NrKTsKLS0gCjIuMS40CgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
