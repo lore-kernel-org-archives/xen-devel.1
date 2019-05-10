@@ -1,25 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 11/14] xen/x86: mm: Re-implement
- set_gpfn_from_mfn() as a static inline function
-Date: Fri, 10 May 2019 07:48:23 -0600
-Message-ID: <5CD58127020000780022D963@prv1-mh.provo.novell.com>
-References: <20190507151458.29350-1-julien.grall@arm.com>
- <20190507151458.29350-12-julien.grall@arm.com>
- <5CD571FE020000780022D826@prv1-mh.provo.novell.com>
- <22eaed55-f714-0c97-385d-72cf796f5936@arm.com>
- <5CD57E04020000780022D8F0@prv1-mh.provo.novell.com>
- <fac9e2db-c746-5f53-bebc-0615fe60e8a4@arm.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v3] libxl: fix migration of PV and PVH domUs
+ with and without qemu
+Date: Fri, 10 May 2019 15:49:20 +0200
+Message-ID: <20190510154920.150b4b37.olaf@aepfle.de>
+References: <20190510100416.16658-1-olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1343591919137417501=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=5pb9=TK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hP5sz-0006U6-3M
- for xen-devel@lists.xenproject.org; Fri, 10 May 2019 13:48:29 +0000
-In-Reply-To: <fac9e2db-c746-5f53-bebc-0615fe60e8a4@arm.com>
-Content-Disposition: inline
+ (envelope-from <SRS0=dG64=TK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hP5uA-0006aU-Bg
+ for xen-devel@lists.xenproject.org; Fri, 10 May 2019 13:49:43 +0000
+In-Reply-To: <20190510100416.16658-1-olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,31 +21,51 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDEwLjA1LjE5IGF0IDE1OjQxLCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
-IE9uIDEwLzA1LzIwMTkgMTQ6MzUsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+PiBPbiAxMC4wNS4x
-OSBhdCAxNToyNywgPGp1bGllbi5ncmFsbEBhcm0uY29tPiB3cm90ZToKPj4+IE9uIDEwLzA1LzIw
-MTkgMTM6NDMsIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4+IE9uIDA3LjA1LjE5IGF0IDE3OjE0
-LCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+Pj4+PiArc3RhdGljIGlubGluZSB2b2lk
-IHNldF9ncGZuX2Zyb21fbWZuKHVuc2lnbmVkIGxvbmcgbWZuLCB1bnNpZ25lZCBsb25nIHBmbikK
-Pj4+Pj4gK3sKPj4+Pj4gKyAgICBzdHJ1Y3QgZG9tYWluICpkID0gcGFnZV9nZXRfb3duZXIobWZu
-X3RvX3BhZ2UoX21mbihtZm4pKSk7Cj4+Pj4+ICsgICAgdW5zaWduZWQgbG9uZyBlbnRyeSA9IChk
-ICYmIChkID09IGRvbV9jb3cpKSA/IFNIQVJFRF9NMlBfRU5UUlkgOiBwZm47Cj4+Pj4KPj4+PiBU
-aGUgJiYgaGVyZSBsb29rcywgZWhtLCBmdW5ueSwgYnV0IEkgZ3Vlc3MgaXQncyBuZWVkZWQgZm9y
-IGVhcmx5IGJvb3Q/Cj4+Pgo+Pj4gSSBoYXZlIG5vIGlkZWEsIHRoaXMgaXMgeDg2IG5vdCBBcm0u
-Li4KPj4+Cj4+Pj4gQnV0IHRoYXQncyBwZXJoYXBzIGEgc2VwYXJhdGUgdGhpbmcgdG8gY2xlYW4g
-dXAuIEhvd2V2ZXIsIGxvb2tpbmcgYXQKPj4+PiB0aGlzIC0gd2h5IGlzIEFybSBzZXR0aW5nIHVw
-IGRvbV9jb3cgaW4gdGhlIGZpcnN0IHBsYWNlPwo+Pj4KPj4+IENvbW1vbiBjb2RlIGlzIHVzaW5n
-IGRvbV9jb3csIHNvIEkgZG9uJ3QgdGhpbmsgd2Ugd2FudCBpdCB0byBiZSBOVUxMIG9uIEFybSB0
-bwo+Pj4gYXZvaWQgd2VpcmQgaXNzdWVzLgo+PiAKPj4gSSBkaWRuJ3QgbWVhbiBpdCB0byByZW1h
-aW4gTlVMTC4gQ29tbW9uIGNvZGUgZG9lc24ndCBkZXJlZmVyZW5jZSBpdAo+PiAoYW5kIGlzbid0
-IHN1cHBvc2VkIHRvKSwgc28gSSdkIGNvbnNpZGVyIGluaXRpYWxpemluZyBpdCB0byBzb21lIGtu
-b3duCj4+IGZhdWx0aW5nIG5vbi1OVUxMIGFkZHJlc3MsIGlmIHRoZXJlIGlzIHN1Y2ggb24gQXJt
-Lgo+IAo+IFBhdGNoZXMgYXJlIHdlbGNvbWVkIDspLgoKU28gaXMgdGhlcmUgc3VjaCBhbiBhZGRy
-ZXNzIG9uIEFybT8KCkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+--===============1343591919137417501==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/B.QbEvAiuWVLK420qJdX20R"; protocol="application/pgp-signature"
+
+--Sig_/B.QbEvAiuWVLK420qJdX20R
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Fri, 10 May 2019 12:04:16 +0200
+schrieb Olaf Hering <olaf@aepfle.de>:
+
+> v3 not runtime tested
+
+The initialization for device_model_stubdomain must be moved to the new fun=
+ction.
+
+
+Olaf
+
+--Sig_/B.QbEvAiuWVLK420qJdX20R
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNWBYAAKCRBdQqD6ppg2
+fk3jAJ9/I+WB4Sj0wWBYieHl+vr33yb+YwCfTr76qioC1THXdaiwrJIDMg/YQAI=
+=ZGtk
+-----END PGP SIGNATURE-----
+
+--Sig_/B.QbEvAiuWVLK420qJdX20R--
+
+
+--===============1343591919137417501==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1343591919137417501==--
