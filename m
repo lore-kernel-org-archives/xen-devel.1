@@ -1,22 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH 09/14] xen: Introduce HAS_M2P config and use
- to protect mfn_to_gmfn call
-Date: Fri, 10 May 2019 06:31:00 -0600
-Message-ID: <5CD56F04020000780022D80B@prv1-mh.provo.novell.com>
-References: <20190507151458.29350-1-julien.grall@arm.com>
- <20190507151458.29350-10-julien.grall@arm.com>
-Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+Subject: Re: Guest Testing in OSSTEST - What distros and
+ versions should we test against
+Date: Fri, 10 May 2019 06:41:13 -0600
+Message-ID: <BADFED47-270A-4F72-BB50-AE9BD6D77A76@gmail.com>
+References: <9FCB2022-A547-4FA2-88E7-91DA3C023438@gmail.com>
+ <5CD52CEA020000780022D6B1@prv1-mh.provo.novell.com>
+Mime-Version: 1.0 (Mac OS X Mail 11.5 \(3445.9.1\))
+Content-Type: multipart/mixed; boundary="===============1584144193327860742=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=5pb9=TK=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hP4g7-0006y8-O4
- for xen-devel@lists.xenproject.org; Fri, 10 May 2019 12:31:07 +0000
-In-Reply-To: <20190507151458.29350-10-julien.grall@arm.com>
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=0ItA=TK=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1hP4q0-0007pF-Fs
+ for xen-devel@lists.xenproject.org; Fri, 10 May 2019 12:41:20 +0000
+Received: by mail-ua1-x92d.google.com with SMTP id e9so1598698uar.9
+ for <xen-devel@lists.xenproject.org>; Fri, 10 May 2019 05:41:19 -0700 (PDT)
+In-Reply-To: <5CD52CEA020000780022D6B1@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,71 +24,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, oleksandr_tyshchenko@epam.com, xen-devel <xen-devel@lists.xenproject.org>, "andrii_anisov@epam.com" <andrii_anisov@epam.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: 'Jan Beulich' <JBeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Paul Durrant <paul.durrant@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Committers <committers@xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDA3LjA1LjE5IGF0IDE3OjE0LCA8anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+
-IFRoaXMgcGF0Y2ggaW50cm9kdWNlcyBhIGNvbmZpZyBvcHRpb24gSEFTX00yUCB0byB0ZWxsIHdo
-ZXRoZXIgYW4KPiBhcmNoaXRlY3R1cmUgaW1wbGVtZW50cyB0aGUgTTJQLgo+ICAgICAtIGlvbW11
-X2h3ZG9tX2luaXQ6IEZvciBub3csIHdlIHJlcXVpcmUgdGhlIE0yUCBzdXBwb3J0IHdoZW4gdGhl
-IElPTU1VCj4gICAgIGlzIG5vdCBzaGFyaW5nIHRoZSBQMk0uCj4gICAgIC0gbWVtb3J5X2V4Y2hh
-bmdlOiBUaGUgaHlwZXJjYWxsIGlzIG1hcmtlZCBhcyBub3Qgc3VwcG9ydGVkIHdoZW4gdGhlCj4g
-ICAgIE0yUCBkb2VzIG5vdCBleGlzdC4KCldhcyBpdCB5b3Ugb3Igc29tZW9uZSBlbHNlIHRvIHN1
-Z2dlc3QgaXQgYmUgcmVzdHJpY3RlZCB0byBub24tdHJhbnNsYXRlZApndWVzdHMgaW4gdGhlIGZp
-cnN0IHBsYWNlPyBJJ2QgcHJlZmVyIHRoaXMgb3ZlciB0aGUgI2lmZGVmLWFyeSB5b3UgYWRkLgoK
-PiAgICAgLSBnZXRkb21haW5pbmZvOiBBIG5ldyBoZWxwZXIgaXMgaW50cm9kdWNlZCB0byB3cmFw
-IHRoZSBjYWxsIHRvCj4gICAgIG1mbl90b19nZm4vbWZuX3RvX2dtZm4uIEZvciBBcm0sIGl0IHJl
-dHVybnMgYW4gaW52YWxpZCBHRk4gc28gdGhlIG1hcHBpbmcKPiAgICAgd2lsbCBmYWlsLgoKVGhl
-cmUncyBubyB1c2Ugb2YgbWZuX3RvX2dtZm4oKSBpbiBlaXRoZXIgb2YgdGhlIHdyYXBwZXJzLCBz
-byB3aHkKbWVudGlvbiB0aGlzIHRvLWJlLXJlbW92ZWQgb25lPwoKPiAtLS0gYS94ZW4vY29tbW9u
-L2RvbWN0bC5jCj4gKysrIGIveGVuL2NvbW1vbi9kb21jdGwuYwo+IEBAIC0yMDUsNyArMjA1LDcg
-QEAgdm9pZCBnZXRkb21haW5pbmZvKHN0cnVjdCBkb21haW4gKmQsIHN0cnVjdCAKPiB4ZW5fZG9t
-Y3RsX2dldGRvbWFpbmluZm8gKmluZm8pCj4gICAgICBpbmZvLT5vdXRzdGFuZGluZ19wYWdlcyA9
-IGQtPm91dHN0YW5kaW5nX3BhZ2VzOwo+ICAgICAgaW5mby0+c2hyX3BhZ2VzICAgICAgICAgPSBh
-dG9taWNfcmVhZCgmZC0+c2hyX3BhZ2VzKTsKPiAgICAgIGluZm8tPnBhZ2VkX3BhZ2VzICAgICAg
-ID0gYXRvbWljX3JlYWQoJmQtPnBhZ2VkX3BhZ2VzKTsKPiAtICAgIGluZm8tPnNoYXJlZF9pbmZv
-X2ZyYW1lID0gbWZuX3RvX2dtZm4oZCwgdmlydF90b19tZm4oZC0+c2hhcmVkX2luZm8pKTsKPiAr
-ICAgIGluZm8tPnNoYXJlZF9pbmZvX2ZyYW1lID0gZ2ZuX3goZG9tYWluX3NoYXJlZF9pbmZvX2dm
-bihkKSk7CgpXaGF0IGlzIHRoZSBpbnRlbmRlZCBiZWhhdmlvciBvbiAzMi1iaXQgQXJtIGhlcmU/
-IERvIHlvdSByZWFsbHkKbWVhbiB0byByZXR1cm4gYSB2YWx1ZSB3aXRoIDMyIGJpdHMgb2Ygb25l
-cyAoaW5zdGVhZCBvZiA2NCBiaXRzIG9mCnRoZW0pIGluIHRoaXMgNjQtYml0IGZpZWxkPwoKPiAt
-LS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jCj4gKysrIGIveGVuL2RyaXZlcnMv
-cGFzc3Rocm91Z2gvaW9tbXUuYwo+IEBAIC0xODgsOSArMTg4LDEwIEBAIHZvaWQgX19od2RvbV9p
-bml0IGlvbW11X2h3ZG9tX2luaXQoc3RydWN0IGRvbWFpbiAqZCkKPiAgICAgIGhkLT5uZWVkX3N5
-bmMgPSBpb21tdV9od2RvbV9zdHJpY3QgJiYgIWlvbW11X3VzZV9oYXBfcHQoZCk7Cj4gICAgICBp
-ZiAoIG5lZWRfaW9tbXVfcHRfc3luYyhkKSApCj4gICAgICB7Cj4gKyAgICAgICAgaW50IHJjID0g
-MDsKPiArI2lmZGVmIENPTkZJR19IQVNfTTJQCj4gICAgICAgICAgc3RydWN0IHBhZ2VfaW5mbyAq
-cGFnZTsKPiAgICAgICAgICB1bnNpZ25lZCBpbnQgaSA9IDAsIGZsdXNoX2ZsYWdzID0gMDsKPiAt
-ICAgICAgICBpbnQgcmMgPSAwOwo+ICAKPiAgICAgICAgICBwYWdlX2xpc3RfZm9yX2VhY2ggKCBw
-YWdlLCAmZC0+cGFnZV9saXN0ICkKPiAgICAgICAgICB7Cj4gQEAgLTIxNyw2ICsyMTgsOSBAQCB2
-b2lkIF9faHdkb21faW5pdCBpb21tdV9od2RvbV9pbml0KHN0cnVjdCBkb21haW4gKmQpCj4gICAg
-ICAgICAgLyogVXNlIHdoaWxlLWJyZWFrIHRvIGF2b2lkIGNvbXBpbGVyIHdhcm5pbmcgKi8KPiAg
-ICAgICAgICB3aGlsZSAoIGlvbW11X2lvdGxiX2ZsdXNoX2FsbChkLCBmbHVzaF9mbGFncykgKQo+
-ICAgICAgICAgICAgICBicmVhazsKPiArI2Vsc2UKPiArICAgICAgICByYyA9IC1FT1BOT1RTVVBQ
-Owo+ICsjZW5kaWYKPiAgCj4gICAgICAgICAgaWYgKCByYyApCj4gICAgICAgICAgICAgIHByaW50
-ayhYRU5MT0dfV0FSTklORyAiZCVkOiBJT01NVSBtYXBwaW5nIGZhaWxlZDogJWRcbiIsCgpXb3Vs
-ZCB5b3UgbWluZCBleHRlbmRpbmcgdGhlIHNjb3BlIG9mIHRoZSAjaWZkZWYgYmV5b25kIHRoaXMg
-cHJpbnRrKCk/Ckl0IHNlZW1zIHByZXR0eSBwb2ludGxlc3MgdG8gbWUgdG8gdW5jb25kaXRpb25h
-bGx5IGVtaXQgYSBsb2cgbWVzc2FnZQpoZXJlLgoKPiAtLS0gYS94ZW4vaW5jbHVkZS9wdWJsaWMv
-ZG9tY3RsLmgKPiArKysgYi94ZW4vaW5jbHVkZS9wdWJsaWMvZG9tY3RsLmgKPiBAQCAtMTE4LDYg
-KzExOCwxMCBAQCBzdHJ1Y3QgeGVuX2RvbWN0bF9nZXRkb21haW5pbmZvIHsKPiAgICAgIHVpbnQ2
-NF9hbGlnbmVkX3Qgb3V0c3RhbmRpbmdfcGFnZXM7Cj4gICAgICB1aW50NjRfYWxpZ25lZF90IHNo
-cl9wYWdlczsKPiAgICAgIHVpbnQ2NF9hbGlnbmVkX3QgcGFnZWRfcGFnZXM7Cj4gKyAgICAvKgo+
-ICsgICAgICogR0ZOIG9mIHNoYXJlZF9pbmZvIHN0cnVjdC4gU29tZSBhcmNoaXRlY3R1cmVzIChl
-LmcgQXJtKSBtYXkgbm90Cj4gKyAgICAgKiBwcm92aWRlIGEgdmFsaWQgR0ZOLgo+ICsgICAgICov
-CgpBbG9uZyB0aGUgbGluZXMgb2Ygd2hhdCBJJ3ZlIHNhaWQgYWJvdmUsIEkgdGhpbmsgeW91IHdh
-bnQgdG8gc3BlbGwgb3V0CmhlcmUgd2hhdCB0aGUgdmFsdWUgaXMgZ29pbmcgdG8gYmUgaW4gdGhp
-cyBjYXNlLgoKPiAtLS0gYS94ZW4vaW5jbHVkZS94ZW4vZG9tYWluLmgKPiArKysgYi94ZW4vaW5j
-bHVkZS94ZW4vZG9tYWluLmgKPiBAQCAtMTE4LDQgKzExOCwxMiBAQCBzdHJ1Y3Qgdm51bWFfaW5m
-byB7Cj4gIAo+ICB2b2lkIHZudW1hX2Rlc3Ryb3koc3RydWN0IHZudW1hX2luZm8gKnZudW1hKTsK
-PiAgCj4gKyNpZmRlZiBDT05GSUdfSEFTX00yUAo+ICsjZGVmaW5lIGRvbWFpbl9zaGFyZWRfaW5m
-b19nZm4oZCkgKHsgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+ICsgICAgY29uc3Qgc3Ry
-dWN0IGRvbWFpbiAqZF8gPSAoZCk7ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXAo+ICsg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgXAo+ICsgICAgbWZuX3RvX2dmbihkXywgX21mbihfX3ZpcnRfdG9fbWZuKGRfLT5zaGFy
-ZWRfaW5mbykpKTsgICAgICAgXAo+ICt9KQo+ICsjZW5kaWYKCkFuZCBhbiBpbmxpbmUgZnVuY3Rp
-b24gZG9lc24ndCB3b3JrIGhlcmU/CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1584144193327860742==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_989C9DD9-FA26-45A3-9BEF-EC79DF18AD3B"
+
+
+--Apple-Mail=_989C9DD9-FA26-45A3-9BEF-EC79DF18AD3B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 10 May 2019, at 01:48, Jan Beulich <JBeulich@suse.com> wrote:
+>>=20
+>> With regards to Windows testing we have some restrictions. We have =
+tried=20
+>> several times to buy additional test licenses, but this never went =
+anywhere=20
+>> (some of the VM licenses are not available for our environment, =
+unless you=20
+>> bulk buy, which is very expensive). The only approach that would =
+allow us to=20
+>> test against different windows versions would be to require everyone =
+who may=20
+>> touch OSSTEST which is not doable.
+>>=20
+>> I can bring this up with the MS open source office, if there are =
+strong=20
+>> feelings about this and try again
+>=20
+> If there's at least a (not overly) small chance of succeeding, I think =
+this
+> may be worth it, unless Rich's suggestion already helps.
+>=20
+
+I will try again. Let's work on the basis that this is possible and see =
+where it goes
+Lars=
+
+--Apple-Mail=_989C9DD9-FA26-45A3-9BEF-EC79DF18AD3B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 10 May 2019, at 01:48, Jan Beulich &lt;<a =
+href=3D"mailto:JBeulich@suse.com" class=3D"">JBeulich@suse.com</a>&gt; =
+wrote:</div><div class=3D""><div style=3D"" class=3D""><blockquote =
+type=3D"cite" style=3D"font-family: Menlo-Regular; font-size: 11px; =
+font-style: normal; font-variant-caps: normal; font-weight: normal; =
+letter-spacing: normal; orphans: auto; text-align: start; text-indent: =
+0px; text-transform: none; white-space: normal; widows: auto; =
+word-spacing: 0px; -webkit-text-size-adjust: auto; =
+-webkit-text-stroke-width: 0px; text-decoration: none;" class=3D""><br =
+class=3D"">With regards to Windows testing we have some restrictions. We =
+have tried<span class=3D"Apple-converted-space">&nbsp;</span><br =
+class=3D"">several times to buy additional test licenses, but this never =
+went anywhere<span class=3D"Apple-converted-space">&nbsp;</span><br =
+class=3D"">(some of the VM licenses are not available for our =
+environment, unless you<span =
+class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">bulk buy, =
+which is very expensive). The only approach that would allow us to<span =
+class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">test against =
+different windows versions would be to require everyone who may<span =
+class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">touch =
+OSSTEST which is not doable.<br class=3D""><br class=3D"">I can bring =
+this up with the MS open source office, if there are strong<span =
+class=3D"Apple-converted-space">&nbsp;</span><br class=3D"">feelings =
+about this and try again<br class=3D""></blockquote><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">If there's at =
+least a (not overly) small chance of succeeding, I think this</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">may be worth =
+it, unless Rich's suggestion already helps.</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><br class=3D""></div></div></blockquote><br =
+class=3D""></div>I will try again. Let's work on the basis that this is =
+possible and see where it goes<div class=3D""><div =
+class=3D"">Lars</div></div></body></html>=
+
+--Apple-Mail=_989C9DD9-FA26-45A3-9BEF-EC79DF18AD3B--
+
+
+--===============1584144193327860742==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1584144193327860742==--
