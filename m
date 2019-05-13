@@ -1,8 +1,8 @@
-From: Julien Grall <julien.grall@arm.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
 Subject: Re: [PATCH v2 0/2] Introduce runstate area registration
  with phys address
-Date: Mon, 13 May 2019 16:45:05 +0100
-Message-ID: <cb7753a4-5e83-ab0c-90c4-b80072685a9b@arm.com>
+Date: Mon, 13 May 2019 19:05:55 +0300
+Message-ID: <104d2f91-73fa-9938-cc3d-3b24eb9c1f02@gmail.com>
 References: <1556007026-31057-1-git-send-email-andrii.anisov@gmail.com>
  <8f8a401d-bdfc-4a40-61bc-4ceb8c518ade@arm.com>
  <9553a5cc-ac8b-04c4-3b89-13b1d92e306e@gmail.com>
@@ -14,11 +14,12 @@ References: <1556007026-31057-1-git-send-email-andrii.anisov@gmail.com>
  <30412929-eae5-a013-5962-8b0874c8a3e2@gmail.com>
  <96bd557f-29c4-f0b7-3ccb-d00664ed9ff0@arm.com>
  <66a079a8-8bab-535c-1795-b831e927ea5d@gmail.com>
+ <cb7753a4-5e83-ab0c-90c4-b80072685a9b@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-In-Reply-To: <66a079a8-8bab-535c-1795-b831e927ea5d@gmail.com>
+In-Reply-To: <cb7753a4-5e83-ab0c-90c4-b80072685a9b@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -28,18 +29,13 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xen.org
 Cc: Andrii Anisov <andrii_anisov@epam.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkuCgpPbiA1LzEzLzE5IDQ6NDIgUE0sIEFuZHJpaSBBbmlzb3Ygd3JvdGU6Cj4gCj4gT24gMTMu
-MDUuMTkgMTg6NDAsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4gwqBGcm9tIG15IHVuZGVyc3RhbmRp
-bmcsIGlmIHlvdSB3YW50IGNvbnNpc3RlbmN5LCB0aGVuIHNldHRpbmcgdGhlIAo+PiBhZmZpbml0
-eSB3aWxsIGRlZmluaXRlbHkgaGVscC4gT3RoZXJ3aXNlLCB5b3UgbWF5IGhhdmUgdGhlIHNjaGVk
-dWxlciAKPj4gdG8ga2ljayB1cCBhbmQgYWxzbyBiYWxhbmNpbmcuCj4gU29ycnksIGRvIHlvdSBt
-ZWFuIHNldHRpbmcgYWZmaW5pdHkgZm9yIGRkIHByb2Nlc3Nlcywgb3IgRG9tMCBWQ1BVcywgb3Ig
-Cj4gYm90aD8KCkkgd2FzIHNwZWFraW5nIGFib3V0IGRkIHByb2Nlc3MuIEJ1dCBEb20wIHZDUFVz
-IG1pZ2h0IGFsc28gYmUgYSBnb29kIGlkZWEuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
-bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
-LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+CgpPbiAxMy4wNS4xOSAxODo0NSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEkgd2FzIHNwZWFraW5n
+IGFib3V0IGRkIHByb2Nlc3MuIEJ1dCBEb20wIHZDUFVzIG1pZ2h0IGFsc28gYmUgYSBnb29kIGlk
+ZWEuCgpJIHNlZS4KCi0tIApTaW5jZXJlbHksCkFuZHJpaSBBbmlzb3YuCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
