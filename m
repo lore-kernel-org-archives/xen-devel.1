@@ -2,54 +2,66 @@ Return-Path: <SRS0=55t9=TN=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=3.0 tests=FROM_EXCESS_BASE64,
+X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_NEOMUTT autolearn=ham autolearn_force=no
-	version=3.4.0
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 50E2EC04AA7
-	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2019 14:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 271A1C04AA7
+	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2019 14:45:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 29FEB2084A
-	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2019 14:45:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 29FEB2084A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id EDA9B2084A
+	for <xen-devel@archiver.kernel.org>; Mon, 13 May 2019 14:45:53 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="tmqasFBx"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDA9B2084A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hQCCp-0003qn-Jg; Mon, 13 May 2019 14:45:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=KEM8=TN=citrix.com=prvs=029c3005f=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hQCCo-0003qi-7U
- for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:45:30 +0000
-X-Inumbo-ID: bf5969bc-758d-11e9-8bf7-8fc6c0f7bbc1
-Received: from SMTP.EU.CITRIX.COM (unknown [185.25.65.24])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id bf5969bc-758d-11e9-8bf7-8fc6c0f7bbc1;
- Mon, 13 May 2019 14:45:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,465,1549929600"; d="scan'208";a="89709283"
-Date: Mon, 13 May 2019 16:45:18 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <JBeulich@suse.com>
-Message-ID: <20190513144518.lrijyr232hjchrvj@Air-de-Roger>
-References: <5CC6DD090200007800229E80@prv1-mh.provo.novell.com>
- <5CD2D2C8020000780022CCF2@prv1-mh.provo.novell.com>
- <5CD2D563020000780022CD40@prv1-mh.provo.novell.com>
- <20190513134821.pomwew6vmtibxvem@Air-de-Roger>
- <5CD97CD8020000780022E2AA@prv1-mh.provo.novell.com>
+	id 1hQCCy-0003sC-Ti; Mon, 13 May 2019 14:45:40 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=RcTn=TN=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hQCCx-0003s1-FV
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:45:40 +0000
+X-Inumbo-ID: c4f380c4-758d-11e9-8980-bc764e045a96
+Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:20a:202:5300::3])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id c4f380c4-758d-11e9-8980-bc764e045a96;
+ Mon, 13 May 2019 14:45:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1557758736;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=Qxlk5rF6UqpXZfsR1OZ5g7te5eP2/+QE7QFjSAHVZqc=;
+ b=tmqasFBxEUxts7C3g0MVwuzwXx+WT70y0V8PASnAimgHE/aaR3457aII/ZgM9jImtk
+ q5TjdmwsQXBxpakszFdjyDK7USSlkhWoK/LmRd6aLpeUrLG+U6k6Ftp93lFhinwPUljQ
+ jrC7uK0dnOpMNi5oiWlOPb8BQfNrqdsYy/f3qo8Xyc6k8328JGOqEqmVYK4a4eEATEeW
+ fWSMtxnKw4lkhH91F3utCYkHm4Bqv4am3wr5HXNqJOIS7bsilTgJIr5xyAN9VhCzw9mM
+ 6N4B9ES0B2SttRyIsMtA8czAzztEWHebTfRcCEkzBmGNZEeqL9Nd28ruAS51PduSxmfD
+ jd0A==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QED/SSGq+wjGiUC4kV1cX92EW4mFvNjTRB"
+X-RZG-CLASS-ID: mo00
+Received: from sender by smtp.strato.de (RZmta 44.20 AUTH)
+ with ESMTPSA id U080cav4DEjW1wz
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate);
+ Mon, 13 May 2019 16:45:32 +0200 (CEST)
+Date: Mon, 13 May 2019 16:45:21 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Message-ID: <20190513164521.19e65e5d.olaf@aepfle.de>
+In-Reply-To: <20190513143733.2xodq4nexe7n6er2@Air-de-Roger>
+References: <20190510152047.17299-1-olaf@aepfle.de>
+ <20190513143733.2xodq4nexe7n6er2@Air-de-Roger>
+X-Mailer: Claws Mail 2019.04.26 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5CD97CD8020000780022E2AA@prv1-mh.provo.novell.com>
-User-Agent: NeoMutt/20180716
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH v2 07/12] x86/IRQ: fix locking around vector
- management
+Subject: Re: [Xen-devel] [PATCH v4] libxl: fix migration of PV and PVH domUs
+ with and without qemu
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,38 +72,61 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>,
- xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+Content-Type: multipart/mixed; boundary="===============1000643487623551867=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190513144518.HJEXZAtb2L6EwsJJSSD8MAqY5FW0jRBug4MPaiTmsdU@z>
+Message-ID: <20190513144521.kEAcoqttjJZoaKLwbKmssWEoPx3ql0eqcvi9jQ7f0YU@z>
 
-T24gTW9uLCBNYXkgMTMsIDIwMTkgYXQgMDg6MTk6MDRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDEzLjA1LjE5IGF0IDE1OjQ4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
-b3RlOgo+ID4gT24gV2VkLCBNYXkgMDgsIDIwMTkgYXQgMDc6MTA6NTlBTSAtMDYwMCwgSmFuIEJl
-dWxpY2ggd3JvdGU6Cj4gPj4gLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11
-LmMKPiA+PiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYwo+ID4+IEBA
-IC0yMTM0LDExICsyMTM0LDE2IEBAIHN0YXRpYyB2b2lkIGFkanVzdF9pcnFfYWZmaW5pdHkoc3Ry
-dWN0IGEKPiA+PiAgICAgIHVuc2lnbmVkIGludCBub2RlID0gcmhzYSA/IHB4bV90b19ub2RlKHJo
-c2EtPnByb3hpbWl0eV9kb21haW4pCj4gPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-OiBOVU1BX05PX05PREU7Cj4gPj4gICAgICBjb25zdCBjcHVtYXNrX3QgKmNwdW1hc2sgPSAmY3B1
-X29ubGluZV9tYXA7Cj4gPj4gKyAgICBzdHJ1Y3QgaXJxX2Rlc2MgKmRlc2M7Cj4gPj4gIAo+ID4+
-ICAgICAgaWYgKCBub2RlIDwgTUFYX05VTU5PREVTICYmIG5vZGVfb25saW5lKG5vZGUpICYmCj4g
-Pj4gICAgICAgICAgIGNwdW1hc2tfaW50ZXJzZWN0cygmbm9kZV90b19jcHVtYXNrKG5vZGUpLCBj
-cHVtYXNrKSApCj4gPj4gICAgICAgICAgY3B1bWFzayA9ICZub2RlX3RvX2NwdW1hc2sobm9kZSk7
-Cj4gPj4gLSAgICBkbWFfbXNpX3NldF9hZmZpbml0eShpcnFfdG9fZGVzYyhkcmhkLT5pb21tdS0+
-bXNpLmlycSksIGNwdW1hc2spOwo+ID4+ICsKPiA+PiArICAgIGRlc2MgPSBpcnFfdG9fZGVzYyhk
-cmhkLT5pb21tdS0+bXNpLmlycSk7Cj4gPj4gKyAgICBzcGluX2xvY2tfaXJxKCZkZXNjLT5sb2Nr
-KTsKPiA+IAo+ID4gSSB3b3VsZCB1c2UgdGhlIGlycXNhdmUvaXJxcmVzdG9yZSB2YXJpYW50cyBo
-ZXJlIGZvciBleHRyYSBzYWZldHkuCj4gCj4gSG1tLCBtYXliZS4gQnV0IEkgdGhpbmsgd2UncmUg
-aW4gYmlnZ2VyIHRyb3VibGUgaWYgSVJRcyBpbmRlZWQKPiBlbmRlZCB1cCBlbmFibGVkIGF0IGFu
-eSBvZiB0aGUgdHdvIHBvaW50cyB3aGVyZSB0aGlzIGZ1bmN0aW9uCj4gZ2V0cyBjYWxsZWQuCgpJ
-IHRoaW5rIEknbSBtaXNyZWFkaW5nIHRoZSBhYm92ZSwgYnV0IGlmIHlvdSBleHBlY3QKYWRqdXN0
-X2lycV9hZmZpbml0eSB0byBhbHdheXMgYmUgY2FsbGVkIHdpdGggaW50ZXJydXB0cyBkaXNhYmxl
-ZCB1c2luZwpzcGluX3VubG9ja19pcnEgaXMgd3JvbmcgYXMgaXQgdW5jb25kaXRpb25hbGx5IGVu
-YWJsZXMgaW50ZXJydXB0cy4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+--===============1000643487623551867==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/hsGsCzkzFuu8CpXta=y_a4m"; protocol="application/pgp-signature"
+
+--Sig_/hsGsCzkzFuu8CpXta=y_a4m
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 13 May 2019 16:37:33 +0200
+schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+
+> FTR I would have preferred a pre-patch that did the move of this chunk
+> of code into libxl__domain_set_device_model without any functional
+> change, and then a second patch that introduces the new functionality.
+
+If that needs to be done, I can do it.
+
+
+What could be done in addition is to add an assert to
+libxl__domain_build_info_setdefault to check if device_model_version
+is really set.
+
+
+Olaf
+
+--Sig_/hsGsCzkzFuu8CpXta=y_a4m
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNmDAQAKCRBdQqD6ppg2
+fr7nAJ9TUxhbo4i/+ug/jAdH6YqN4LmiVwCbBZOrzzzrg44aX/VjQU7dg0IjHKI=
+=Vmz3
+-----END PGP SIGNATURE-----
+
+--Sig_/hsGsCzkzFuu8CpXta=y_a4m--
+
+
+--===============1000643487623551867==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1000643487623551867==--
+
