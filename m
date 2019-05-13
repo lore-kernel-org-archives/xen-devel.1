@@ -1,31 +1,21 @@
-From: Andrii Anisov <andrii.anisov@gmail.com>
-Subject: Re: [PATCH v2 0/2] Introduce runstate area registration
- with phys address
-Date: Mon, 13 May 2019 17:34:25 +0300
-Message-ID: <ee01efbe-d13c-a112-6748-936754765959@gmail.com>
-References: <1556007026-31057-1-git-send-email-andrii.anisov@gmail.com>
- <fa126315-31af-854e-817a-8640b431c82b@arm.com>
- <CAC1WxdiMzAq5hRC-mhRQuFDs7z_Hj5w7VAy52ec87SJQOGmp3w@mail.gmail.com>
- <a28f95a1-d9da-2caf-f4b4-013100176b02@arm.com>
- <090ce8cc-f329-fe54-4894-b7f12e3cd5a6@gmail.com>
- <3d5ccdcb-d777-e75b-f4bd-38d2d470a754@arm.com>
- <0bd113db-7851-df02-90d1-2a79bd4bedaf@gmail.com>
- <98200ea9-c21e-9d58-498d-468764209972@arm.com>
- <b7cb8324-45ae-8840-b73e-c7dd508e954e@gmail.com>
- <e10c8cb6-da7f-1ce3-f5b6-4c68a2d85a95@arm.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH 4/4] INSTALL: remove duplicate sentence
+Date: Mon, 13 May 2019 15:34:34 +0100
+Message-ID: <20190513143434.GP2798@zion.uk.xensource.com>
+References: <20190513134714.3124-1-wei.liu2@citrix.com>
+ <20190513134714.3124-5-wei.liu2@citrix.com>
+ <5CD97F3A020000780022E2E7@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=GA65=TN=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
- id 1hQC29-00024W-U9
- for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:34:29 +0000
-Received: by mail-lf1-x141.google.com with SMTP id x132so9270009lfd.0
- for <xen-devel@lists.xenproject.org>; Mon, 13 May 2019 07:34:28 -0700 (PDT)
-In-Reply-To: <e10c8cb6-da7f-1ce3-f5b6-4c68a2d85a95@arm.com>
-Content-Language: en-US
+ <SRS0=rpFc=TN=citrix.com=prvs=0298122e9=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hQC2N-000260-GZ
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:34:43 +0000
+Content-Disposition: inline
+In-Reply-To: <5CD97F3A020000780022E2E7@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -34,17 +24,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano Stabellini <sstabellini@kernel.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGVsbG8gSnVsaWVuLAoKT24gMTMuMDUuMTkgMTM6NTAsIEp1bGllbiBHcmFsbCB3cm90ZToKPiBB
-bHNvLCB5b3VyIERvbUQgLmNvbmZpZyBoYXMgQ09ORklHX1VOTUFQX0tFUk5FTF9BVF9FTDAuIFNv
-IGhvdyBkbyB5b3UgZGlzYWJsZSBrcHRpPwoKU29ycnkgZm9yIHRoZSBtZXNzLCBJIHdhcyBsb29r
-aW5nIGZvciBhbmQgZGlkIG5vdCBmaW5kICJDT05GSUdfUEFHRV9UQUJMRV9JU09MQVRJT04iLiBX
-aGF0IHdhcyBnb29nbGVkIGJ5IG1lIGFzIGEgS1BUSSBlbmFibGUgY29uZmlnLiBCdXQgaXQgaXMg
-Zm9yIHg4Niwgd2hhdCBJJ3ZlIG92ZXJsb29rZWQuCgpTbyBJIGhhdmUgS1BUSSBlbmFibGVkIGhl
-cmUuIFRoYW5rIHlvdS4KCi0tIApTaW5jZXJlbHksCkFuZHJpaSBBbmlzb3YuCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCBNYXkgMTMsIDIwMTkgYXQgMDg6Mjk6MTRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDEzLjA1LjE5IGF0IDE1OjQ3LCA8d2VpLmxpdTJAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gPiAtLS0gYS9JTlNUQUxMCj4gPiArKysgYi9JTlNUQUxMCj4gPiBAQCAtMjI1LDcgKzIy
+NSw2IEBAIFhFTl9CVUlMRF9USU1FPWhoOm1tOnNzCj4gPiAgU01CSU9TX1JFTF9EQVRFPW1tL2Rk
+L3l5eXkKPiA+ICBWR0FCSU9TX1JFTF9EQVRFPSJkZCBNb24geXl5eSIKPiA+ICAKPiA+IC1EdXJp
+bmcgdG9vbHMgYnVpbGQgZXh0ZXJuYWwgcmVwb3Mgd2lsbCBiZSBjbG9uZWQgaW50byB0aGUgc291
+cmNlIHRyZWUuCj4gPiAgVGhpcyB2YXJpYWJsZSBjYW4gYmUgdXNlZCB0byBwb2ludCB0byBhIGRp
+ZmZlcmVudCBnaXQgYmluYXJ5IHRvIGJlIHVzZWQuCj4gPiAgR0lUPQo+IAo+IFRvIG1lIGl0IHdv
+dWxkIHNlZW0gbW9yZSBsb2dpY2FsIHRvIGRlbGV0ZSB0aGUgb3RoZXIsIGxhdGVyCj4gaW5zdGFu
+Y2Ugb2YgdGhlIHNlbnRlbmNlLiBZb3Ugd291bGRuJ3QgbmVlZCAkKEdJVCkgaWYgdGhlcmUKPiB3
+YXMgbm8gY2xvbmluZy4KCkJ1dCBkZWxldGluZyB0aGF0IG9uZSB3b3VsZCBiZSB3cm9uZyAtLSBp
+dCB3b3VsZCBtYWtlIHRoYXQgcGFyYWdyYXBoCnNlZW1zIHRvIGJlIG9ubHkgYWJvdXQgc3R1YmRv
+bSwgd2hpbGUgaW4gZmFjdCBtb3N0IG9mIHRob3NlIGVudmFycyBhcmUKYWJvdXQgdG9vbHMgYnVp
+bGQuCgpXZWkuCgo+IAo+IEphbgo+IAo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
+eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL3hlbi1kZXZlbA==
