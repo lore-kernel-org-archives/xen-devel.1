@@ -1,19 +1,31 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v4] libxl: fix migration of PV and PVH domUs
- with and without qemu
-Date: Mon, 13 May 2019 16:45:21 +0200
-Message-ID: <20190513164521.19e65e5d.olaf@aepfle.de>
-References: <20190510152047.17299-1-olaf@aepfle.de>
- <20190513143733.2xodq4nexe7n6er2@Air-de-Roger>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: Xen GCC coverage ARM64 testing - Unexpected Trap:
+ Data Abort
+Date: Mon, 13 May 2019 15:52:32 +0100
+Message-ID: <56c37065-b320-0919-2ae8-0156281829cb@arm.com>
+References: <CAOcoXZaMLfHSyLSE04xRFZZY0hLkFcJ5cBqHTdmwDoqwcreD1w@mail.gmail.com>
+ <ff543e3c-0619-5aa6-b36a-e1a8b8cce886@arm.com>
+ <20190503110819.GA5900@zion.uk.xensource.com>
+ <63ea8905-87ca-a419-95bf-ae497bf1ff85@arm.com>
+ <20190503134133.GC5900@zion.uk.xensource.com>
+ <b0947b60-d89a-54a5-a11b-708b64ff8053@arm.com>
+ <20190503141952.GD5900@zion.uk.xensource.com>
+ <CAOcoXZZau01-5Tmab9eCcYKJavzrT_9KdNa_dR+QN5zKmmXMoA@mail.gmail.com>
+ <4fb5058d-9810-7a1b-91f4-db31bad82a85@arm.com>
+ <CAOcoXZbDdX3rXL+nzEwUCT47UUbCDqJPZ7SP-dYn9SYdkm=isg@mail.gmail.com>
+ <20190513104336.GA2798@zion.uk.xensource.com>
+ <CAOcoXZaLGtpe4DsnQoYynR5iFh43EM5q8pj7fKWJZ=odJy46DA@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1000643487623551867=="
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=RcTn=TN=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hQCCx-0003s1-FV
- for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:45:40 +0000
-In-Reply-To: <20190513143733.2xodq4nexe7n6er2@Air-de-Roger>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=nxsn=TN=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hQCJg-0004iI-F5
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:52:36 +0000
+In-Reply-To: <CAOcoXZaLGtpe4DsnQoYynR5iFh43EM5q8pj7fKWJZ=odJy46DA@mail.gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,57 +34,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
+To: Viktor Mitin <viktor.mitin.19@gmail.com>, Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Stefano Stabellini <sstabellini@kernel.org>, Andrii_Anisov@epam.com, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1000643487623551867==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/hsGsCzkzFuu8CpXta=y_a4m"; protocol="application/pgp-signature"
-
---Sig_/hsGsCzkzFuu8CpXta=y_a4m
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Am Mon, 13 May 2019 16:37:33 +0200
-schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
-
-> FTR I would have preferred a pre-patch that did the move of this chunk
-> of code into libxl__domain_set_device_model without any functional
-> change, and then a second patch that introduces the new functionality.
-
-If that needs to be done, I can do it.
-
-
-What could be done in addition is to add an assert to
-libxl__domain_build_info_setdefault to check if device_model_version
-is really set.
-
-
-Olaf
-
---Sig_/hsGsCzkzFuu8CpXta=y_a4m
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNmDAQAKCRBdQqD6ppg2
-fr7nAJ9TUxhbo4i/+ug/jAdH6YqN4LmiVwCbBZOrzzzrg44aX/VjQU7dg0IjHKI=
-=Vmz3
------END PGP SIGNATURE-----
-
---Sig_/hsGsCzkzFuu8CpXta=y_a4m--
-
-
---===============1000643487623551867==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1000643487623551867==--
+SGksCgpPbiA1LzEzLzE5IDM6MzkgUE0sIFZpa3RvciBNaXRpbiB3cm90ZToKPiBIaSBXZWkgYW5k
+IEp1bGllbiwKPiAtLS0KPiBYZW4gNC4xMyBoYXMgbm90IGJlZW4gY2hlY2tlZCB5ZXQgd2l0aCB0
+aGUgcGF0Y2guIEN1cnJlbnRseSwgeGVuIDQuMTMKPiBzdGFnaW5nIGZhaWxzIHRvIGJvb3QgZHVl
+IHRvIHVua25vd24gcmVhc29uLi4uIGl0IHdvcmtlZCBzb21lIGRheXMKPiBhZ28uCj4gSXQgaGFu
+Z3MgYWZ0ZXIgdGhlIG5leHQgbG9nIGN1cnJlbnRseToKPiAoWEVOKSBGYWlsZWQgdG8gYnJpbmcg
+dXAgQ1BVIDcgKGVycm9yIC01KQo+IChYRU4pIEJyb3VnaHQgdXAgNCBDUFVzCj4gKFhFTikgUDJN
+OiA0NC1iaXQgSVBBIHdpdGggNDQtYml0IFBBIGFuZCA4LWJpdCBWTUlECj4gKFhFTikgUDJNOiA0
+IGxldmVscyB3aXRoIG9yZGVyLTAgcm9vdCwgVlRDUiAweDgwMDQzNTk0Cj4gKFhFTikgSS9PIHZp
+cnR1YWxpc2F0aW9uIGRpc2FibGVkCj4gKFhFTikgYnVpbGQtaWQ6IGY0ZWEyYzkzZmYwOTIyNWJl
+ZWQwNWY2MjlhMzgxM2I0ZTMxYzQyMGQKPiAoWEVOKSBhbHRlcm5hdGl2ZXM6IFBhdGNoaW5nIHdp
+dGggYWx0IHRhYmxlIDAwMDAwMDAwMDAzNDNkNTggLT4gMDAwMDAwMDAwMDM0NDQxOAoKV2hpY2gg
+Y29tbWl0IGFyZSB5b3UgdXNpbmc/IERvIHlvdSByZW1lbWJlciB3aGljaCBvbmUgd29ya2VkPyBJ
+ZiBzbywgY2FuIAp5b3UgYmlzZWN0IGl0PwoKPiAtLS0KPiAKPiBKdWxpZW4sIGFyZSB5b3UgZ29p
+bmcgdG8gaW50ZWdyYXRlIHRoZSBwYXRjaD8KCkZvciB0aGF0IHNvbWVvbmUgbmVlZHMgdG8gc2Vu
+ZCBhIHBhdGNoIHNvIGl0IGNhbiBiZSByZXZpZXdlZC4gSSB3YXMgCmhvcGluZyB5b3UgY291bGQg
+ZG8gdGhhdCBhcyB0aGUgcmVwb3J0ZXIgb2YgdGhlIHByb2JsZW0uCgpDaGVlcnMsCgotLSAKSnVs
+aWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
