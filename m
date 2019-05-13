@@ -1,25 +1,19 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH v2 07/12] x86/IRQ: fix locking around vector
- management
-Date: Mon, 13 May 2019 16:45:18 +0200
-Message-ID: <20190513144518.lrijyr232hjchrvj@Air-de-Roger>
-References: <5CC6DD090200007800229E80@prv1-mh.provo.novell.com>
- <5CD2D2C8020000780022CCF2@prv1-mh.provo.novell.com>
- <5CD2D563020000780022CD40@prv1-mh.provo.novell.com>
- <20190513134821.pomwew6vmtibxvem@Air-de-Roger>
- <5CD97CD8020000780022E2AA@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v4] libxl: fix migration of PV and PVH domUs
+ with and without qemu
+Date: Mon, 13 May 2019 16:45:21 +0200
+Message-ID: <20190513164521.19e65e5d.olaf@aepfle.de>
+References: <20190510152047.17299-1-olaf@aepfle.de>
+ <20190513143733.2xodq4nexe7n6er2@Air-de-Roger>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1000643487623551867=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=KEM8=TN=citrix.com=prvs=029c3005f=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hQCCo-0003qi-7U
- for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:45:30 +0000
-Content-Disposition: inline
-In-Reply-To: <5CD97CD8020000780022E2AA@prv1-mh.provo.novell.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=RcTn=TN=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hQCCx-0003s1-FV
+ for xen-devel@lists.xenproject.org; Mon, 13 May 2019 14:45:40 +0000
+In-Reply-To: <20190513143733.2xodq4nexe7n6er2@Air-de-Roger>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,34 +22,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gTW9uLCBNYXkgMTMsIDIwMTkgYXQgMDg6MTk6MDRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gPj4+IE9uIDEzLjA1LjE5IGF0IDE1OjQ4LCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
-b3RlOgo+ID4gT24gV2VkLCBNYXkgMDgsIDIwMTkgYXQgMDc6MTA6NTlBTSAtMDYwMCwgSmFuIEJl
-dWxpY2ggd3JvdGU6Cj4gPj4gLS0tIGEveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvdnRkL2lvbW11
-LmMKPiA+PiArKysgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC92dGQvaW9tbXUuYwo+ID4+IEBA
-IC0yMTM0LDExICsyMTM0LDE2IEBAIHN0YXRpYyB2b2lkIGFkanVzdF9pcnFfYWZmaW5pdHkoc3Ry
-dWN0IGEKPiA+PiAgICAgIHVuc2lnbmVkIGludCBub2RlID0gcmhzYSA/IHB4bV90b19ub2RlKHJo
-c2EtPnByb3hpbWl0eV9kb21haW4pCj4gPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-OiBOVU1BX05PX05PREU7Cj4gPj4gICAgICBjb25zdCBjcHVtYXNrX3QgKmNwdW1hc2sgPSAmY3B1
-X29ubGluZV9tYXA7Cj4gPj4gKyAgICBzdHJ1Y3QgaXJxX2Rlc2MgKmRlc2M7Cj4gPj4gIAo+ID4+
-ICAgICAgaWYgKCBub2RlIDwgTUFYX05VTU5PREVTICYmIG5vZGVfb25saW5lKG5vZGUpICYmCj4g
-Pj4gICAgICAgICAgIGNwdW1hc2tfaW50ZXJzZWN0cygmbm9kZV90b19jcHVtYXNrKG5vZGUpLCBj
-cHVtYXNrKSApCj4gPj4gICAgICAgICAgY3B1bWFzayA9ICZub2RlX3RvX2NwdW1hc2sobm9kZSk7
-Cj4gPj4gLSAgICBkbWFfbXNpX3NldF9hZmZpbml0eShpcnFfdG9fZGVzYyhkcmhkLT5pb21tdS0+
-bXNpLmlycSksIGNwdW1hc2spOwo+ID4+ICsKPiA+PiArICAgIGRlc2MgPSBpcnFfdG9fZGVzYyhk
-cmhkLT5pb21tdS0+bXNpLmlycSk7Cj4gPj4gKyAgICBzcGluX2xvY2tfaXJxKCZkZXNjLT5sb2Nr
-KTsKPiA+IAo+ID4gSSB3b3VsZCB1c2UgdGhlIGlycXNhdmUvaXJxcmVzdG9yZSB2YXJpYW50cyBo
-ZXJlIGZvciBleHRyYSBzYWZldHkuCj4gCj4gSG1tLCBtYXliZS4gQnV0IEkgdGhpbmsgd2UncmUg
-aW4gYmlnZ2VyIHRyb3VibGUgaWYgSVJRcyBpbmRlZWQKPiBlbmRlZCB1cCBlbmFibGVkIGF0IGFu
-eSBvZiB0aGUgdHdvIHBvaW50cyB3aGVyZSB0aGlzIGZ1bmN0aW9uCj4gZ2V0cyBjYWxsZWQuCgpJ
-IHRoaW5rIEknbSBtaXNyZWFkaW5nIHRoZSBhYm92ZSwgYnV0IGlmIHlvdSBleHBlY3QKYWRqdXN0
-X2lycV9hZmZpbml0eSB0byBhbHdheXMgYmUgY2FsbGVkIHdpdGggaW50ZXJydXB0cyBkaXNhYmxl
-ZCB1c2luZwpzcGluX3VubG9ja19pcnEgaXMgd3JvbmcgYXMgaXQgdW5jb25kaXRpb25hbGx5IGVu
-YWJsZXMgaW50ZXJydXB0cy4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+--===============1000643487623551867==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/hsGsCzkzFuu8CpXta=y_a4m"; protocol="application/pgp-signature"
+
+--Sig_/hsGsCzkzFuu8CpXta=y_a4m
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 13 May 2019 16:37:33 +0200
+schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+
+> FTR I would have preferred a pre-patch that did the move of this chunk
+> of code into libxl__domain_set_device_model without any functional
+> change, and then a second patch that introduces the new functionality.
+
+If that needs to be done, I can do it.
+
+
+What could be done in addition is to add an assert to
+libxl__domain_build_info_setdefault to check if device_model_version
+is really set.
+
+
+Olaf
+
+--Sig_/hsGsCzkzFuu8CpXta=y_a4m
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNmDAQAKCRBdQqD6ppg2
+fr7nAJ9TUxhbo4i/+ug/jAdH6YqN4LmiVwCbBZOrzzzrg44aX/VjQU7dg0IjHKI=
+=Vmz3
+-----END PGP SIGNATURE-----
+
+--Sig_/hsGsCzkzFuu8CpXta=y_a4m--
+
+
+--===============1000643487623551867==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1000643487623551867==--
