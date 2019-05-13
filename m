@@ -1,19 +1,25 @@
-From: Juergen Gross <jgross@suse.com>
-Subject: Re: Anyone using blktap2?
-Date: Mon, 13 May 2019 17:44:50 +0200
-Message-ID: <ae6926ad-a761-79c0-6fc1-211e78a69ba2@suse.com>
-References: <20190513153414.GU2798@zion.uk.xensource.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [PATCH v2 0/2] Introduce runstate area registration
+ with phys address
+Date: Mon, 13 May 2019 16:45:05 +0100
+Message-ID: <cb7753a4-5e83-ab0c-90c4-b80072685a9b@arm.com>
+References: <1556007026-31057-1-git-send-email-andrii.anisov@gmail.com>
+ <8f8a401d-bdfc-4a40-61bc-4ceb8c518ade@arm.com>
+ <9553a5cc-ac8b-04c4-3b89-13b1d92e306e@gmail.com>
+ <0e06d98d-f366-ff85-5f19-541c3079012c@arm.com>
+ <539f8230-87af-9ffd-0b9b-4f44a2e26599@gmail.com>
+ <256009a8-c960-5342-ee8e-3e0721af8658@arm.com>
+ <3fcde39c-5cda-b1b6-156c-48bae16a7c83@gmail.com>
+ <449bd563-f256-432f-a542-110d9eae0d73@arm.com>
+ <30412929-eae5-a013-5962-8b0874c8a3e2@gmail.com>
+ <96bd557f-29c4-f0b7-3ccb-d00664ed9ff0@arm.com>
+ <66a079a8-8bab-535c-1795-b831e927ea5d@gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=4Q7J=TN=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hQD8I-0002Hz-BY
- for xen-devel@lists.xenproject.org; Mon, 13 May 2019 15:44:54 +0000
-In-Reply-To: <20190513153414.GU2798@zion.uk.xensource.com>
-Content-Language: de-DE
+In-Reply-To: <66a079a8-8bab-535c-1795-b831e927ea5d@gmail.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,17 +28,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>, Olaf Hering <olaf@aepfle.de>, Alistair Francis <alistair.francis@xilinx.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>
+To: Andrii Anisov <andrii.anisov@gmail.com>, xen-devel@lists.xen.org
+Cc: Andrii Anisov <andrii_anisov@epam.com>, Jan Beulich <JBeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTMvMDUvMjAxOSAxNzozNCwgV2VpIExpdSB3cm90ZToKPiBIZWxsbwo+IAo+IFNlZWluZyB0
-aGF0IHlvdSB3ZXJlIHRoZSBsYXN0IHBlb3BsZSB3aG8gY2hhbmdlZCBibGt0YXAyIGluIGEgbWVh
-bmluZ2Z1bAo+IHdheTogZG8geW91IHVzZSBpdCBhdCBhbGw/CgpOb3QgbWUuIEkgd2FzIG9ubHkg
-Y2hhbmdpbmcgaXQgdG8gY29tcGx5IHdpdGggdGhlIHJlc3Qgb2YgdGhlIGJ1aWxkCihhZGRpbmcg
-cGtnLWNvbmZpZyBmaWxlKS4KCkkgU1VTRSBidWlsZHMgKFNMRSwgb3BlblNVU0UpIGl0IGlzIG5v
-dCBjb25maWd1cmVkLgoKPiBJJ20gdGhpbmtpbmcgYWJvdXQgZHJvcHBpbmcgaXQgKGFnYWluKS4K
-CisxCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
-cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
-bA==
+SGkuCgpPbiA1LzEzLzE5IDQ6NDIgUE0sIEFuZHJpaSBBbmlzb3Ygd3JvdGU6Cj4gCj4gT24gMTMu
+MDUuMTkgMTg6NDAsIEp1bGllbiBHcmFsbCB3cm90ZToKPj4gwqBGcm9tIG15IHVuZGVyc3RhbmRp
+bmcsIGlmIHlvdSB3YW50IGNvbnNpc3RlbmN5LCB0aGVuIHNldHRpbmcgdGhlIAo+PiBhZmZpbml0
+eSB3aWxsIGRlZmluaXRlbHkgaGVscC4gT3RoZXJ3aXNlLCB5b3UgbWF5IGhhdmUgdGhlIHNjaGVk
+dWxlciAKPj4gdG8ga2ljayB1cCBhbmQgYWxzbyBiYWxhbmNpbmcuCj4gU29ycnksIGRvIHlvdSBt
+ZWFuIHNldHRpbmcgYWZmaW5pdHkgZm9yIGRkIHByb2Nlc3Nlcywgb3IgRG9tMCBWQ1BVcywgb3Ig
+Cj4gYm90aD8KCkkgd2FzIHNwZWFraW5nIGFib3V0IGRkIHByb2Nlc3MuIEJ1dCBEb20wIHZDUFVz
+IG1pZ2h0IGFsc28gYmUgYSBnb29kIGlkZWEuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
