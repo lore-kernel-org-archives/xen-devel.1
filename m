@@ -1,20 +1,16 @@
-From: "Elnikety, Eslam" <elnikety@amazon.com>
-Subject: Re: [PATCH v2] libxl: make vkbd tunable for HVM guests
-Date: Tue, 14 May 2019 08:37:29 +0000
-Message-ID: <708DA278-99DE-45C5-BB12-EA66AD3E4859@amazon.com>
-References: <20190507135320.103953-1-elnikety@amazon.com>
- <20190513104855.GB2798@zion.uk.xensource.com>
+From: Eslam Elnikety <elnikety@amazon.com>
+Subject: [PATCH v3] libxl: make vkbd tunable for HVM guests
+Date: Tue, 14 May 2019 08:43:25 +0000
+Message-ID: <20190514084325.43928-1-elnikety@amazon.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5898275173160760648=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=p/Am=TO=amazon.com=prvs=030f3b528=elnikety@srs-us1.protection.inumbo.net>)
- id 1hQSwM-0002Vi-HQ
- for xen-devel@lists.xenproject.org; Tue, 14 May 2019 08:37:38 +0000
-In-Reply-To: <20190513104855.GB2798@zion.uk.xensource.com>
-Content-Language: en-US
+ id 1hQT27-0003Fj-7f
+ for xen-devel@lists.xenproject.org; Tue, 14 May 2019 08:43:35 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,416 +19,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Shah,
- Amit" <aams@amazon.de>, Ian Jackson <ian.jackson@eu.citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Eslam Elnikety <elnikety@amazon.com>, Amit Shah <aams@amazon.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5898275173160760648==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_708DA27899DE45C5BB12EA66AD3E4859amazoncom_"
-
---_000_708DA27899DE45C5BB12EA66AD3E4859amazoncom_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-
-On 13. May 2019, at 12:48, Wei Liu <wei.liu2@citrix.com<mailto:wei.liu2@cit=
-rix.com>> wrote:
-
-On Tue, May 07, 2019 at 01:53:20PM +0000, Eslam Elnikety wrote:
-Each HVM guest currently gets a vkbd frontend/backend pair (c/s ebbd2561b4c=
-).
-This consumes host resources unnecessarily for guests that have no use for
-vkbd. Make this behaviour tunable to allow an administrator to choose. The
-commit retains the current behaviour -- HVM guests still get vkdb unless
-specified otherwise.
-
-Signed-off-by: Eslam Elnikety <elnikety@amazon.com<mailto:elnikety@amazon.c=
-om>>
-
----
-   Changes in v2:
-       - Added a missing hunk / setting vkb_device per config
----
-tools/libxl/libxl_create.c  | 9 ++++++---
-tools/libxl/libxl_types.idl | 1 +
-tools/xl/xl_parse.c         | 1 +
-tools/xl/xl_sxp.c           | 2 ++
-4 files changed, 10 insertions(+), 3 deletions(-)
-
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
-index 89fe80fc9c..03ce166f4f 100644
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -310,6 +310,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
-        libxl_defbool_setdefault(&b_info->u.hvm.vpt_align,          true);
-        libxl_defbool_setdefault(&b_info->u.hvm.altp2m,             false);
-        libxl_defbool_setdefault(&b_info->u.hvm.usb,                false);
-+        libxl_defbool_setdefault(&b_info->u.hvm.vkb_device,         true);
-        libxl_defbool_setdefault(&b_info->u.hvm.xen_platform_pci,   true);
-
-        libxl_defbool_setdefault(&b_info->u.hvm.spice.enable, false);
-@@ -1416,9 +1417,11 @@ static void domcreate_launch_dm(libxl__egc *egc, lib=
-xl__multidev *multidev,
-        libxl__device_console_add(gc, domid, &console, state, &device);
-        libxl__device_console_dispose(&console);
-
--        libxl_device_vkb_init(&vkb);
--        libxl__device_add(gc, domid, &libxl__vkb_devtype, &vkb);
--        libxl_device_vkb_dispose(&vkb);
-+        if (libxl_defbool_val(d_config->b_info.u.hvm.vkb_device)) {
-+            libxl_device_vkb_init(&vkb);
-+            libxl__device_add(gc, domid, &libxl__vkb_devtype, &vkb);
-+            libxl_device_vkb_dispose(&vkb);
-+        }
-
-        dcs->sdss.dm.guest_domid =3D domid;
-        if (libxl_defbool_val(d_config->b_info.device_model_stubdomain))
-diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl
-index b685ac47ac..9a0b92f1d4 100644
---- a/tools/libxl/libxl_types.idl
-+++ b/tools/libxl/libxl_types.idl
-@@ -583,6 +583,7 @@ libxl_domain_build_info =3D Struct("domain_build_info",=
-[
-                                       # - "tablet" for absolute mouse,
-                                       # - "mouse" for PS/2 protocol relati=
-ve mouse
-                                       ("usbdevice",        string),
-+                                       ("vkb_device",       libxl_defbool)=
-,
-                                       ("soundhw",          string),
-                                       ("xen_platform_pci", libxl_defbool),
-                                       ("usbdevice_list",   libxl_string_li=
-st),
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 352cd214dd..e105bda2bb 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -2652,6 +2652,7 @@ skip_usbdev:
-            fprintf(stderr,"xl: Unable to parse usbdevice.\n");
-            exit(-ERROR_FAIL);
-        }
-+        xlu_cfg_get_defbool(config, "vkb_device", &b_info->u.hvm.vkb_devic=
-e, 0);
-        xlu_cfg_replace_string (config, "soundhw", &b_info->u.hvm.soundhw, =
-0);
-        xlu_cfg_get_defbool(config, "xen_platform_pci",
-                            &b_info->u.hvm.xen_platform_pci, 0);
-
-Oh here it is the code which uses the new field -- in that case, you
-also need to document this in xl manpage.
-
-The manpage is docs/man/xl.conf.pod.5.
-
-Sorry for not having mentioned this earlier: we also ask for an
-accompanying macro for the new field in the public interface. See
-various LIBXL_HAVE macros in libxl.h.
-
-Let me know if you have further questions.
-
-Wei.
-
-Thanks for the feedback. Sending v3 now.
-
-Cheers,
-Eslam
-
-
---_000_708DA27899DE45C5BB12EA66AD3E4859amazoncom_
-Content-Type: text/html; charset="us-ascii"
-Content-ID: <50A27953564BC941A861F2EBA857B42E@amazon.com>
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-</head>
-<body style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-lin=
-e-break: after-white-space;" class=3D"">
-<br class=3D"">
-<div>
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">On 13. May 2019, at 12:48, Wei Liu &lt;<a href=3D"mailto:we=
-i.liu2@citrix.com" class=3D"">wei.liu2@citrix.com</a>&gt; wrote:</div>
-<br class=3D"Apple-interchange-newline">
-<div class=3D""><span style=3D"font-family: Helvetica; font-size: 12px; fon=
-t-style: normal; font-variant-caps: normal; font-weight: normal; letter-spa=
-cing: normal; text-align: start; text-indent: 0px; text-transform: none; wh=
-ite-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; float=
-: none; display: inline !important;" class=3D"">On
- Tue, May 07, 2019 at 01:53:20PM &#43;0000, Eslam Elnikety wrote:</span><br=
- style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; font=
--variant-caps: normal; font-weight: normal; letter-spacing: normal; text-al=
-ign: start; text-indent: 0px; text-transform: none; white-space: normal; wo=
-rd-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<blockquote type=3D"cite" style=3D"font-family: Helvetica; font-size: 12px;=
- font-style: normal; font-variant-caps: normal; font-weight: normal; letter=
--spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-=
-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -web=
-kit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;" class=3D"">
-Each HVM guest currently gets a vkbd frontend/backend pair (c/s ebbd2561b4c=
-).<br class=3D"">
-This consumes host resources unnecessarily for guests that have no use for<=
-br class=3D"">
-vkbd. Make this behaviour tunable to allow an administrator to choose. The<=
-br class=3D"">
-commit retains the current behaviour -- HVM guests still get vkdb unless<br=
- class=3D"">
-specified otherwise.<br class=3D"">
-<br class=3D"">
-Signed-off-by: Eslam Elnikety &lt;<a href=3D"mailto:elnikety@amazon.com" cl=
-ass=3D"">elnikety@amazon.com</a>&gt;<br class=3D"">
-<br class=3D"">
----<br class=3D"">
-&nbsp;&nbsp;&nbsp;Changes in v2:<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Added a missing hunk / setting =
-vkb_device per config<br class=3D"">
----<br class=3D"">
-tools/libxl/libxl_create.c &nbsp;| 9 &#43;&#43;&#43;&#43;&#43;&#43;---<br c=
-lass=3D"">
-tools/libxl/libxl_types.idl | 1 &#43;<br class=3D"">
-tools/xl/xl_parse.c &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| 1 &#4=
-3;<br class=3D"">
-tools/xl/xl_sxp.c &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;| 2 &#43;&#43;<br class=3D"">
-4 files changed, 10 insertions(&#43;), 3 deletions(-)<br class=3D"">
-<br class=3D"">
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c<br cla=
-ss=3D"">
-index 89fe80fc9c..03ce166f4f 100644<br class=3D"">
---- a/tools/libxl/libxl_create.c<br class=3D"">
-&#43;&#43;&#43; b/tools/libxl/libxl_create.c<br class=3D"">
-@@ -310,6 &#43;310,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *=
-gc,<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_defbool_setdefault(&a=
-mp;b_info-&gt;u.hvm.vpt_align, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;true);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_defbool_setdefault(&a=
-mp;b_info-&gt;u.hvm.altp2m, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;&nbsp;&nbsp;false);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_defbool_setdefault(&a=
-mp;b_info-&gt;u.hvm.usb, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_defbool_setdefault(&a=
-mp;b_info-&gt;u.hvm.vkb_device, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;true);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_defbool_setdefault(&a=
-mp;b_info-&gt;u.hvm.xen_platform_pci, &nbsp;&nbsp;true);<br class=3D"">
-<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_defbool_setdefault(&a=
-mp;b_info-&gt;u.hvm.spice.enable, false);<br class=3D"">
-@@ -1416,9 &#43;1417,11 @@ static void domcreate_launch_dm(libxl__egc *egc,=
- libxl__multidev *multidev,<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl__device_console_add(g=
-c, domid, &amp;console, state, &amp;device);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl__device_console_dispo=
-se(&amp;console);<br class=3D"">
-<br class=3D"">
-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_device_vkb_init(&amp;vkb)=
-;<br class=3D"">
-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl__device_add(gc, domid, &a=
-mp;libxl__vkb_devtype, &amp;vkb);<br class=3D"">
-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl_device_vkb_dispose(&amp;v=
-kb);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (libxl_defbool_val(d_con=
-fig-&gt;b_info.u.hvm.vkb_device)) {<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lib=
-xl_device_vkb_init(&amp;vkb);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lib=
-xl__device_add(gc, domid, &amp;libxl__vkb_devtype, &amp;vkb);<br class=3D""=
->
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lib=
-xl_device_vkb_dispose(&amp;vkb);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br class=3D"">
-<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dcs-&gt;sdss.dm.guest_domid=
- =3D domid;<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (libxl_defbool_val(d_con=
-fig-&gt;b_info.device_model_stubdomain))<br class=3D"">
-diff --git a/tools/libxl/libxl_types.idl b/tools/libxl/libxl_types.idl<br c=
-lass=3D"">
-index b685ac47ac..9a0b92f1d4 100644<br class=3D"">
---- a/tools/libxl/libxl_types.idl<br class=3D"">
-&#43;&#43;&#43; b/tools/libxl/libxl_types.idl<br class=3D"">
-@@ -583,6 &#43;583,7 @@ libxl_domain_build_info =3D Struct(&quot;domain_bui=
-ld_info&quot;,[<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;# - &quot;tablet&quot; for absolute mouse,<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;# - &quot;mouse&quot; for PS/2 protocol relative mouse<br class=3D=
-"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;(&quot;usbdevice&quot;, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-string),<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;(&quot;vkb_device&quot;, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;libxl=
-_defbool),<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;(&quot;soundhw&quot;, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n=
-bsp;&nbsp;string),<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;(&quot;xen_platform_pci&quot;, libxl_defbool),<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;(&quot;usbdevice_list&quot;, &nbsp;&nbsp;libxl_string_list),<br cl=
-ass=3D"">
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c<br class=3D"">
-index 352cd214dd..e105bda2bb 100644<br class=3D"">
---- a/tools/xl/xl_parse.c<br class=3D"">
-&#43;&#43;&#43; b/tools/xl/xl_parse.c<br class=3D"">
-@@ -2652,6 &#43;2652,7 @@ skip_usbdev:<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fpr=
-intf(stderr,&quot;xl: Unable to parse usbdevice.\n&quot;);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;exi=
-t(-ERROR_FAIL);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xlu_cfg_get_defbool(config,=
- &quot;vkb_device&quot;, &amp;b_info-&gt;u.hvm.vkb_device, 0);<br class=3D"=
-">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xlu_cfg_replace_string (con=
-fig, &quot;soundhw&quot;, &amp;b_info-&gt;u.hvm.soundhw, 0);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xlu_cfg_get_defbool(config,=
- &quot;xen_platform_pci&quot;,<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&amp;b_info-&gt;u.hvm.xen_platform_pci, 0);<br class=3D""=
->
-</blockquote>
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">Oh
- here it is the code which uses the new field -- in that case, you</span><b=
-r style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; fon=
-t-variant-caps: normal; font-weight: normal; letter-spacing: normal; text-a=
-lign: start; text-indent: 0px; text-transform: none; white-space: normal; w=
-ord-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">also
- need to document this in xl manpage.</span><br style=3D"font-family: Helve=
-tica; font-size: 12px; font-style: normal; font-variant-caps: normal; font-=
-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0px=
-; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-tex=
-t-stroke-width: 0px;" class=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">The
- manpage is docs/man/xl.conf.pod.5.</span><br style=3D"font-family: Helveti=
-ca; font-size: 12px; font-style: normal; font-variant-caps: normal; font-we=
-ight: normal; letter-spacing: normal; text-align: start; text-indent: 0px; =
-text-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-=
-stroke-width: 0px;" class=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">Sorry
- for not having mentioned this earlier: we also ask for an</span><br style=
-=3D"font-family: Helvetica; font-size: 12px; font-style: normal; font-varia=
-nt-caps: normal; font-weight: normal; letter-spacing: normal; text-align: s=
-tart; text-indent: 0px; text-transform: none; white-space: normal; word-spa=
-cing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">accompanying
- macro for the new field in the public interface. See</span><br style=3D"fo=
-nt-family: Helvetica; font-size: 12px; font-style: normal; font-variant-cap=
-s: normal; font-weight: normal; letter-spacing: normal; text-align: start; =
-text-indent: 0px; text-transform: none; white-space: normal; word-spacing: =
-0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">various
- LIBXL_HAVE macros in libxl.h.</span><br style=3D"font-family: Helvetica; f=
-ont-size: 12px; font-style: normal; font-variant-caps: normal; font-weight:=
- normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-=
-transform: none; white-space: normal; word-spacing: 0px; -webkit-text-strok=
-e-width: 0px;" class=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">Let
- me know if you have further questions.</span><br style=3D"font-family: Hel=
-vetica; font-size: 12px; font-style: normal; font-variant-caps: normal; fon=
-t-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0=
-px; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-t=
-ext-stroke-width: 0px;" class=3D"">
-<br style=3D"font-family: Helvetica; font-size: 12px; font-style: normal; f=
-ont-variant-caps: normal; font-weight: normal; letter-spacing: normal; text=
--align: start; text-indent: 0px; text-transform: none; white-space: normal;=
- word-spacing: 0px; -webkit-text-stroke-width: 0px;" class=3D"">
-<span style=3D"font-family: Helvetica; font-size: 12px; font-style: normal;=
- font-variant-caps: normal; font-weight: normal; letter-spacing: normal; te=
-xt-align: start; text-indent: 0px; text-transform: none; white-space: norma=
-l; word-spacing: 0px; -webkit-text-stroke-width: 0px; float: none; display:=
- inline !important;" class=3D"">Wei.</span></div>
-</blockquote>
-</div>
-<br class=3D"">
-<div class=3D"">Thanks for the feedback. Sending v3 now.</div>
-<div class=3D""><br class=3D"">
-</div>
-<div class=3D"">Cheers,</div>
-<div class=3D"">Eslam</div>
-<div class=3D""><br class=3D"">
-</div>
-</body>
-</html>
-
---_000_708DA27899DE45C5BB12EA66AD3E4859amazoncom_--
-
-
---===============5898275173160760648==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5898275173160760648==--
+RWFjaCBIVk0gZ3Vlc3QgY3VycmVudGx5IGdldHMgYSB2a2JkIGZyb250ZW5kL2JhY2tlbmQgcGFp
+ciAoYy9zIGViYmQyNTYxYjRjKS4KVGhpcyBjb25zdW1lcyBob3N0IHJlc291cmNlcyB1bm5lY2Vz
+c2FyaWx5IGZvciBndWVzdHMgdGhhdCBoYXZlIG5vIHVzZSBmb3IKdmtiZC4gTWFrZSB0aGlzIGJl
+aGF2aW91ciB0dW5hYmxlIHRvIGFsbG93IGFuIGFkbWluaXN0cmF0b3IgdG8gY2hvb3NlLiBUaGUK
+Y29tbWl0IHJldGFpbnMgdGhlIGN1cnJlbnQgYmVoYXZpb3VyIC0tIEhWTSBndWVzdHMgc3RpbGwg
+Z2V0IHZrZGIgdW5sZXNzCnNwZWNpZmllZCBvdGhlcndpc2UuCgpTaWduZWQtb2ZmLWJ5OiBFc2xh
+bSBFbG5pa2V0eSA8ZWxuaWtldHlAYW1hem9uLmNvbT4KLS0tCiAgICBDaGFuZ2VzIGluIHYyOgog
+ICAgICAgIC0gQWRkZWQgYSBtaXNzaW5nIGh1bmsgLyBzZXR0aW5nIHZrYl9kZXZpY2UgcGVyIGNv
+bmZpZwoKICAgIENoYW5nZXMgaW4gdjM6CiAgICAgICAgLSBBZGRlZCBlbnRyaWVzIGluIGxpYnhs
+LmggYW5kIGluIGRvY3VtZW50YXRpb24KLS0tCiBkb2NzL21hbi94bC5jZmcucG9kLjUuaW4gICAg
+fCA0ICsrKysKIHRvb2xzL2xpYnhsL2xpYnhsLmggICAgICAgICB8IDkgKysrKysrKysrCiB0b29s
+cy9saWJ4bC9saWJ4bF9jcmVhdGUuYyAgfCA5ICsrKysrKy0tLQogdG9vbHMvbGlieGwvbGlieGxf
+dHlwZXMuaWRsIHwgMSArCiB0b29scy94bC94bF9wYXJzZS5jICAgICAgICAgfCAxICsKIHRvb2xz
+L3hsL3hsX3N4cC5jICAgICAgICAgICB8IDIgKysKIDYgZmlsZXMgY2hhbmdlZCwgMjMgaW5zZXJ0
+aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kb2NzL21hbi94bC5jZmcucG9k
+LjUuaW4gYi9kb2NzL21hbi94bC5jZmcucG9kLjUuaW4KaW5kZXggNDdkODgyNDNiMS4uYzM2NDFj
+N2E1NyAxMDA2NDQKLS0tIGEvZG9jcy9tYW4veGwuY2ZnLnBvZC41LmluCisrKyBiL2RvY3MvbWFu
+L3hsLmNmZy5wb2QuNS5pbgpAQCAtMjI4Niw2ICsyMjg2LDEwIEBAIGRldmljZXMgYXJlIGRlZmlu
+ZWQgYnkgdGhlIGRldmljZSBtb2RlbCBjb25maWd1cmF0aW9uLCBwbGVhc2Ugc2VlIHRoZQogQjxx
+ZW11KDEpPiBtYW5wYWdlIGZvciBkZXRhaWxzLiBUaGUgZGVmYXVsdCBpcyBub3QgdG8gZXhwb3J0
+IGFueSBzb3VuZAogZGV2aWNlLgogCis9aXRlbSBCPHZrYl9kZXZpY2U9Qk9PTEVBTj4KKworU3Bl
+Y2lmaWVzIHRoYXQgdGhlIEhWTSBndWVzdCBnZXRzIGEgdmtkYi4gVGhlIGRlZmF1bHQgaXMgdHJ1
+ZSAoMSkuCisKID1pdGVtIEI8dXNiPUJPT0xFQU4+CiAKIEVuYWJsZXMgb3IgZGlzYWJsZXMgYW4g
+ZW11bGF0ZWQgVVNCIGJ1cyBpbiB0aGUgZ3Vlc3QuCmRpZmYgLS1naXQgYS90b29scy9saWJ4bC9s
+aWJ4bC5oIGIvdG9vbHMvbGlieGwvbGlieGwuaAppbmRleCBhMDlkMDY5MzU4Li42ODg0YzE0OTJh
+IDEwMDY0NAotLS0gYS90b29scy9saWJ4bC9saWJ4bC5oCisrKyBiL3Rvb2xzL2xpYnhsL2xpYnhs
+LmgKQEAgLTYxNiw2ICs2MTYsMTUgQEAgdHlwZWRlZiBzdHJ1Y3QgbGlieGxfX2N0eCBsaWJ4bF9j
+dHg7CiAgKi8KICNkZWZpbmUgTElCWExfSEFWRV9CVUlMRElORk9fVkNQVV9BRkZJTklUWV9BUlJB
+WVMgMQogCisvKgorICogTElCWExfSEFWRV9CVUlMRElORk9fVktCX0RFVklDRQorICoKKyAqIElm
+IHRoaXMgaXMgZGVmaW5lZCwgdGhlbiB0aGUgbGlieGxfZG9tYWluX2J1aWxkX2luZm8gc3RydWN0
+dXJlIHdpbGwKKyAqIGNvbnRhaW4gYSBib29sZWFuIGh2bS52a2JfZGV2aWNlIHdoaWNoIGluc3Ry
+dWN0cyBsaWJ4bCB3aGV0aGVyIHRvIGluY2x1ZGUKKyAqIGEgdmtiZCBhdCBidWlsZCB0aW1lIG9y
+IG5vdC4KKyAqLworI2RlZmluZSBMSUJYTF9IQVZFX0JVSUxESU5GT19WS0JfREVWSUNFIDEKKwog
+LyoKICAqIExJQlhMX0hBVkVfQlVJTERJTkZPX1VTQkRFVklDRV9MSVNUCiAgKgpkaWZmIC0tZ2l0
+IGEvdG9vbHMvbGlieGwvbGlieGxfY3JlYXRlLmMgYi90b29scy9saWJ4bC9saWJ4bF9jcmVhdGUu
+YwppbmRleCA1YzlkZDRjZDIxLi44YWVjYjljZmJhIDEwMDY0NAotLS0gYS90b29scy9saWJ4bC9s
+aWJ4bF9jcmVhdGUuYworKysgYi90b29scy9saWJ4bC9saWJ4bF9jcmVhdGUuYwpAQCAtMzA4LDYg
+KzMwOCw3IEBAIGludCBsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9fc2V0ZGVmYXVsdChsaWJ4bF9f
+Z2MgKmdjLAogICAgICAgICBsaWJ4bF9kZWZib29sX3NldGRlZmF1bHQoJmJfaW5mby0+dS5odm0u
+dnB0X2FsaWduLCAgICAgICAgICB0cnVlKTsKICAgICAgICAgbGlieGxfZGVmYm9vbF9zZXRkZWZh
+dWx0KCZiX2luZm8tPnUuaHZtLmFsdHAybSwgICAgICAgICAgICAgZmFsc2UpOwogICAgICAgICBs
+aWJ4bF9kZWZib29sX3NldGRlZmF1bHQoJmJfaW5mby0+dS5odm0udXNiLCAgICAgICAgICAgICAg
+ICBmYWxzZSk7CisgICAgICAgIGxpYnhsX2RlZmJvb2xfc2V0ZGVmYXVsdCgmYl9pbmZvLT51Lmh2
+bS52a2JfZGV2aWNlLCAgICAgICAgIHRydWUpOwogICAgICAgICBsaWJ4bF9kZWZib29sX3NldGRl
+ZmF1bHQoJmJfaW5mby0+dS5odm0ueGVuX3BsYXRmb3JtX3BjaSwgICB0cnVlKTsKIAogICAgICAg
+ICBsaWJ4bF9kZWZib29sX3NldGRlZmF1bHQoJmJfaW5mby0+dS5odm0uc3BpY2UuZW5hYmxlLCBm
+YWxzZSk7CkBAIC0xMzkzLDkgKzEzOTQsMTEgQEAgc3RhdGljIHZvaWQgZG9tY3JlYXRlX2xhdW5j
+aF9kbShsaWJ4bF9fZWdjICplZ2MsIGxpYnhsX19tdWx0aWRldiAqbXVsdGlkZXYsCiAgICAgICAg
+IGxpYnhsX19kZXZpY2VfY29uc29sZV9hZGQoZ2MsIGRvbWlkLCAmY29uc29sZSwgc3RhdGUsICZk
+ZXZpY2UpOwogICAgICAgICBsaWJ4bF9fZGV2aWNlX2NvbnNvbGVfZGlzcG9zZSgmY29uc29sZSk7
+CiAKLSAgICAgICAgbGlieGxfZGV2aWNlX3ZrYl9pbml0KCZ2a2IpOwotICAgICAgICBsaWJ4bF9f
+ZGV2aWNlX2FkZChnYywgZG9taWQsICZsaWJ4bF9fdmtiX2RldnR5cGUsICZ2a2IpOwotICAgICAg
+ICBsaWJ4bF9kZXZpY2VfdmtiX2Rpc3Bvc2UoJnZrYik7CisgICAgICAgIGlmIChsaWJ4bF9kZWZi
+b29sX3ZhbChkX2NvbmZpZy0+Yl9pbmZvLnUuaHZtLnZrYl9kZXZpY2UpKSB7CisgICAgICAgICAg
+ICBsaWJ4bF9kZXZpY2VfdmtiX2luaXQoJnZrYik7CisgICAgICAgICAgICBsaWJ4bF9fZGV2aWNl
+X2FkZChnYywgZG9taWQsICZsaWJ4bF9fdmtiX2RldnR5cGUsICZ2a2IpOworICAgICAgICAgICAg
+bGlieGxfZGV2aWNlX3ZrYl9kaXNwb3NlKCZ2a2IpOworICAgICAgICB9CiAKICAgICAgICAgZGNz
+LT5zZHNzLmRtLmd1ZXN0X2RvbWlkID0gZG9taWQ7CiAgICAgICAgIGlmIChsaWJ4bF9kZWZib29s
+X3ZhbChkX2NvbmZpZy0+Yl9pbmZvLmRldmljZV9tb2RlbF9zdHViZG9tYWluKSkKZGlmZiAtLWdp
+dCBhL3Rvb2xzL2xpYnhsL2xpYnhsX3R5cGVzLmlkbCBiL3Rvb2xzL2xpYnhsL2xpYnhsX3R5cGVz
+LmlkbAppbmRleCAwMWVjMWQxYWZhLi4xZDQzNmFhOGJiIDEwMDY0NAotLS0gYS90b29scy9saWJ4
+bC9saWJ4bF90eXBlcy5pZGwKKysrIGIvdG9vbHMvbGlieGwvbGlieGxfdHlwZXMuaWRsCkBAIC01
+NzEsNiArNTcxLDcgQEAgbGlieGxfZG9tYWluX2J1aWxkX2luZm8gPSBTdHJ1Y3QoImRvbWFpbl9i
+dWlsZF9pbmZvIixbCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIC0g
+InRhYmxldCIgZm9yIGFic29sdXRlIG1vdXNlLAogICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIyAtICJtb3VzZSIgZm9yIFBTLzIgcHJvdG9jb2wgcmVsYXRpdmUgbW91c2UK
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICgidXNiZGV2aWNlIiwgICAg
+ICAgIHN0cmluZyksCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoInZr
+Yl9kZXZpY2UiLCAgICAgICBsaWJ4bF9kZWZib29sKSwKICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICgic291bmRodyIsICAgICAgICAgIHN0cmluZyksCiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoInhlbl9wbGF0Zm9ybV9wY2kiLCBsaWJ4bF9k
+ZWZib29sKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICgidXNiZGV2
+aWNlX2xpc3QiLCAgIGxpYnhsX3N0cmluZ19saXN0KSwKZGlmZiAtLWdpdCBhL3Rvb2xzL3hsL3hs
+X3BhcnNlLmMgYi90b29scy94bC94bF9wYXJzZS5jCmluZGV4IGU2YzU0NDgzZTAuLjM3YmMxM2Jk
+ODMgMTAwNjQ0Ci0tLSBhL3Rvb2xzL3hsL3hsX3BhcnNlLmMKKysrIGIvdG9vbHMveGwveGxfcGFy
+c2UuYwpAQCAtMjI5NSw2ICsyMjk1LDcgQEAgc2tpcF91c2JkZXY6CiAgICAgICAgICAgICBmcHJp
+bnRmKHN0ZGVyciwieGw6IFVuYWJsZSB0byBwYXJzZSB1c2JkZXZpY2UuXG4iKTsKICAgICAgICAg
+ICAgIGV4aXQoLUVSUk9SX0ZBSUwpOwogICAgICAgICB9CisgICAgICAgIHhsdV9jZmdfZ2V0X2Rl
+ZmJvb2woY29uZmlnLCAidmtiX2RldmljZSIsICZiX2luZm8tPnUuaHZtLnZrYl9kZXZpY2UsIDAp
+OwogICAgICAgICB4bHVfY2ZnX3JlcGxhY2Vfc3RyaW5nIChjb25maWcsICJzb3VuZGh3IiwgJmJf
+aW5mby0+dS5odm0uc291bmRodywgMCk7CiAgICAgICAgIHhsdV9jZmdfZ2V0X2RlZmJvb2woY29u
+ZmlnLCAieGVuX3BsYXRmb3JtX3BjaSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJmJf
+aW5mby0+dS5odm0ueGVuX3BsYXRmb3JtX3BjaSwgMCk7CmRpZmYgLS1naXQgYS90b29scy94bC94
+bF9zeHAuYyBiL3Rvb2xzL3hsL3hsX3N4cC5jCmluZGV4IDNlNjExN2QwY2QuLjM1OWEwMDE1NzAg
+MTAwNjQ0Ci0tLSBhL3Rvb2xzL3hsL3hsX3N4cC5jCisrKyBiL3Rvb2xzL3hsL3hsX3N4cC5jCkBA
+IC0xMzgsNiArMTM4LDggQEAgdm9pZCBwcmludGZfaW5mb19zZXhwKGludCBkb21pZCwgbGlieGxf
+ZG9tYWluX2NvbmZpZyAqZF9jb25maWcsIEZJTEUgKmZoKQogICAgICAgICBmcHJpbnRmKGZoLCAi
+XHRcdFx0KGJvb3QgJXMpXG4iLCBiX2luZm8tPnUuaHZtLmJvb3QpOwogICAgICAgICBmcHJpbnRm
+KGZoLCAiXHRcdFx0KHVzYiAlcylcbiIsIGxpYnhsX2RlZmJvb2xfdG9fc3RyaW5nKGJfaW5mby0+
+dS5odm0udXNiKSk7CiAgICAgICAgIGZwcmludGYoZmgsICJcdFx0XHQodXNiZGV2aWNlICVzKVxu
+IiwgYl9pbmZvLT51Lmh2bS51c2JkZXZpY2UpOworICAgICAgICBmcHJpbnRmKGZoLCAiXHRcdFx0
+KHZrYl9kZXZpY2UgJXMpXG4iLAorICAgICAgICAgICAgICAgbGlieGxfZGVmYm9vbF90b19zdHJp
+bmcoYl9pbmZvLT51Lmh2bS52a2JfZGV2aWNlKSk7CiAgICAgICAgIGZwcmludGYoZmgsICJcdFx0
+KVxuIik7CiAgICAgICAgIGJyZWFrOwogICAgIGNhc2UgTElCWExfRE9NQUlOX1RZUEVfUFY6Ci0t
+IAoyLjE1LjMuQU1aTgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
+b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
+ZWw=
