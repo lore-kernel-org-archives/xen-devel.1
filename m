@@ -1,22 +1,20 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
 Subject: Re: [PATCH v5] libxl: fix migration of PV and PVH domUs
  with and without qemu
-Date: Tue, 14 May 2019 15:38:55 +0100
-Message-ID: <20190514143855.GH2798@zion.uk.xensource.com>
+Date: Tue, 14 May 2019 16:44:19 +0200
+Message-ID: <20190514164419.23f9f545.olaf@aepfle.de>
 References: <20190514080558.14540-1-olaf@aepfle.de>
  <20190514101452.10c40b6e.olaf@aepfle.de>
+ <20190514143855.GH2798@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3687344054943145547=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=pH1X=TO=citrix.com=prvs=030624cdf=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1hQYa6-0001Gy-9x
- for xen-devel@lists.xenproject.org; Tue, 14 May 2019 14:39:02 +0000
-Content-Disposition: inline
-In-Reply-To: <20190514101452.10c40b6e.olaf@aepfle.de>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=ZE1V=TO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hQYfP-00023s-K2
+ for xen-devel@lists.xenproject.org; Tue, 14 May 2019 14:44:32 +0000
+In-Reply-To: <20190514143855.GH2798@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,50 +23,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>, Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXkgMTQsIDIwMTkgYXQgMTA6MTQ6NTJBTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gQW0gVHVlLCAxNCBNYXkgMjAxOSAxMDowNTo1OCArMDIwMAo+IHNjaHJpZWIgT2xhZiBI
-ZXJpbmcgPG9sYWZAYWVwZmxlLmRlPjoKPiAKPiA+IEBAIC00NTksNyArNDYxLDkgQEAgaW50IGxp
-YnhsX19kb21haW5fcmVzdW1lKGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkLCBpbnQgc3Vz
-cGVuZF9jYW5jZWwpCj4gPiAgICAgICAgICBnb3RvIG91dDsKPiA+ICAgICAgfQo+ID4gIAo+ID4g
-LSAgICBpZiAodHlwZSA9PSBMSUJYTF9ET01BSU5fVFlQRV9IVk0pIHsKPiA+ICsgICAgaWYgKHR5
-cGUgPT0gTElCWExfRE9NQUlOX1RZUEVfSFZNIHx8Cj4gPiArICAgICAgICBsaWJ4bF9fZGV2aWNl
-X21vZGVsX3ZlcnNpb25fcnVubmluZyhnYywgZG9taWQpID09Cj4gPiArICAgICAgICBMSUJYTF9E
-RVZJQ0VfTU9ERUxfVkVSU0lPTl9RRU1VX1hFTikgewo+ID4gICAgICAgICAgcmMgPSBsaWJ4bF9f
-ZG9tYWluX3Jlc3VtZV9kZXZpY2VfbW9kZWwoZ2MsIGRvbWlkKTsKPiA+ICAgICAgICAgIGlmIChy
-Yykgewo+ID4gICAgICAgICAgICAgIExPR0QoRVJST1IsIGRvbWlkLCAiZmFpbGVkIHRvIHJlc3Vt
-ZSBkZXZpY2UgbW9kZWw6JWQiLCByYyk7Cj4gCj4gSSB0aGluayB0aGlzIGNvdWxkIGJlIGRvbmUg
-bGlrZSB0aGF0IGluc3RlYWQsIHNvIHRoYXQgbGlieGxfX2RldmljZV9tb2RlbF92ZXJzaW9uX3J1
-bm5pbmcKPiBpcyBjYWxsZWQganVzdCBvbmNlOgo+IAo+IC0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhs
-X2RvbV9zdXNwZW5kLmMKPiArKysgYi90b29scy9saWJ4bC9saWJ4bF9kb21fc3VzcGVuZC5jCj4g
-QEAgLTQ0NCw2ICs0NDQsOCBAQCBpbnQgbGlieGxfX2RvbWFpbl9yZXN1bWVfZGV2aWNlX21vZGVs
-KGxpYnhsX19nYyAqZ2MsIHVpbnQzMl90IGRvbWlkKQo+ICAgICAgICAgIGlmIChsaWJ4bF9fcW1w
-X3Jlc3VtZShnYywgZG9taWQpKQo+ICAgICAgICAgICAgICByZXR1cm4gRVJST1JfRkFJTDsKPiAg
-ICAgICAgICBicmVhazsKPiArICAgIGNhc2UgTElCWExfREVWSUNFX01PREVMX1ZFUlNJT05fTk9O
-RToKPiArICAgICAgICBicmVhazsKPiAgICAgIGRlZmF1bHQ6Cj4gICAgICAgICAgcmV0dXJuIEVS
-Uk9SX0lOVkFMOwo+ICAgICAgfQo+IEBAIC00NjEsMTQgKzQ2MywxMCBAQCBpbnQgbGlieGxfX2Rv
-bWFpbl9yZXN1bWUobGlieGxfX2djICpnYywgdWludDMyX3QgZG9taWQsIGludCBzdXNwZW5kX2Nh
-bmNlbCkKPiAgICAgICAgICBnb3RvIG91dDsKPiAgICAgIH0KPiAgCj4gLSAgICBpZiAodHlwZSA9
-PSBMSUJYTF9ET01BSU5fVFlQRV9IVk0gfHwKPiAtICAgICAgICBsaWJ4bF9fZGV2aWNlX21vZGVs
-X3ZlcnNpb25fcnVubmluZyhnYywgZG9taWQpID09Cj4gLSAgICAgICAgTElCWExfREVWSUNFX01P
-REVMX1ZFUlNJT05fUUVNVV9YRU4pIHsKPiAtICAgICAgICByYyA9IGxpYnhsX19kb21haW5fcmVz
-dW1lX2RldmljZV9tb2RlbChnYywgZG9taWQpOwo+IC0gICAgICAgIGlmIChyYykgewo+IC0gICAg
-ICAgICAgICBMT0dEKEVSUk9SLCBkb21pZCwgImZhaWxlZCB0byByZXN1bWUgZGV2aWNlIG1vZGVs
-OiVkIiwgcmMpOwo+IC0gICAgICAgICAgICBnb3RvIG91dDsKPiAtICAgICAgICB9Cj4gKyAgICBy
-YyA9IGxpYnhsX19kb21haW5fcmVzdW1lX2RldmljZV9tb2RlbChnYywgZG9taWQpOwo+ICsgICAg
-aWYgKHJjKSB7Cj4gKyAgICAgICAgTE9HRChFUlJPUiwgZG9taWQsICJmYWlsZWQgdG8gcmVzdW1l
-IGRldmljZSBtb2RlbDolZCIsIHJjKTsKPiArICAgICAgICBnb3RvIG91dDsKPiAgICAgIH0KPiAg
-Cj4gICAgICBpZiAoeGNfZG9tYWluX3Jlc3VtZShDVFgtPnhjaCwgZG9taWQsIHN1c3BlbmRfY2Fu
-Y2VsKSkgewo+IAoKWWVhaCwgZnJvbSB0aGUgbG9vayBvZiBpdCB0aGlzIGlzIGRlZmluaXRlbHkg
-YmV0dGVyLgoKPiAKPiBXaGlsZSBpdCBpcyBlYXN5IGZvciB0aGUgcmVzdW1lIHBhdGgsIGRvaW5n
-IHRoZSBzYW1lIGluIHRoZSBzdXNwZW5kIHBhdGgKPiBuZWVkcyBtb3JlIGNoYW5nZXMuIGxpYnhs
-X19kb21haW5fc3VzcGVuZF9kZXZpY2VfbW9kZWwgd291bGQgbmVlZCB0byByZWNlaXZlCj4gdGhl
-IGNhbGxiYWNrIGFuZCBzZXQgaXQgaWYgYSBkZXZpY2UgbW9kZWwgaXMgYWN0aXZlLgoKV2hhdCBk
-byB5b3UgbWVhbiBoZXJlPyBDYW4ndCB5b3UgaGFuZGxlIHRoZSBOT05FIGNhc2UganVzdCBsaWtl
-IHlvdSBkbwppbiB0aGUgcmVzdW1lIGZ1bmN0aW9uPwoKV2VpLgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============3687344054943145547==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/arOAbLS+/q._=r=CZBn=Sl0"; protocol="application/pgp-signature"
+
+--Sig_/arOAbLS+/q._=r=CZBn=Sl0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 14 May 2019 15:38:55 +0100
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> > While it is easy for the resume path, doing the same in the suspend path
+> > needs more changes. libxl__domain_suspend_device_model would need to re=
+ceive
+> > the callback and set it if a device model is active. =20
+>=20
+> What do you mean here? Can't you handle the NONE case just like you do
+> in the resume function?
+
+It means calling libxl__domain_suspend_device_model unconditionally, and
+let that function decide what to do. Maybe there is no downside to set the
+callback unconditionally, I will check that.
+
+Olaf
+
+--Sig_/arOAbLS+/q._=r=CZBn=Sl0
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNrUQwAKCRBdQqD6ppg2
+fmy1AJ0boCtGS9MWl4atTTKOmLqxeFlrcACgo6CG+mrp+QzCYCMjzLXBE5fvSpk=
+=EsbU
+-----END PGP SIGNATURE-----
+
+--Sig_/arOAbLS+/q._=r=CZBn=Sl0--
+
+
+--===============3687344054943145547==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3687344054943145547==--
