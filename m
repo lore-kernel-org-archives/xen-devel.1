@@ -1,20 +1,35 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH v5] libxl: fix migration of PV and PVH domUs
- with and without qemu
-Date: Tue, 14 May 2019 16:44:19 +0200
-Message-ID: <20190514164419.23f9f545.olaf@aepfle.de>
-References: <20190514080558.14540-1-olaf@aepfle.de>
- <20190514101452.10c40b6e.olaf@aepfle.de>
- <20190514143855.GH2798@zion.uk.xensource.com>
+From: Christian Borntraeger <borntraeger@de.ibm.com>
+Subject: Re: [PATCH v2 1/2] KVM: Start populating
+ /sys/hypervisor with KVM entries
+Date: Tue, 14 May 2019 17:26:36 +0200
+Message-ID: <d03f6be5-d8dc-4389-e14c-295f36a68827__45947.1829862864$1557847669$gmane$org@de.ibm.com>
+References: <1539078879-4372-1-git-send-email-sironi@amazon.de>
+ <1557847002-23519-1-git-send-email-sironi@amazon.de>
+ <1557847002-23519-2-git-send-email-sironi@amazon.de>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============3687344054943145547=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ZE1V=TO=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hQYfP-00023s-K2
- for xen-devel@lists.xenproject.org; Tue, 14 May 2019 14:44:32 +0000
-In-Reply-To: <20190514143855.GH2798@zion.uk.xensource.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=8fNp=TO=de.ibm.com=borntraeger@srs-us1.protection.inumbo.net>)
+ id 1hQZKJ-00057w-5y
+ for xen-devel@lists.xenproject.org; Tue, 14 May 2019 15:26:47 +0000
+Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id
+ x4EFHxiS025208
+ for <xen-devel@lists.xenproject.org>; Tue, 14 May 2019 11:26:44 -0400
+Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 2sfy7u3akv-1
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Tue, 14 May 2019 11:26:43 -0400
+Received: from localhost
+ by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only!
+ Violators will be prosecuted
+ for <xen-devel@lists.xenproject.org> from <borntraeger@de.ibm.com>;
+ Tue, 14 May 2019 16:26:41 +0100
+In-Reply-To: <1557847002-23519-2-git-send-email-sironi@amazon.de>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,57 +38,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Filippo Sironi <sironi@amazon.de>, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, boris.ostrovsky@oracle.com, cohuck@redhat.com, konrad.wilk@oracle.com, xen-devel@lists.xenproject.org, vasu.srinivasan@oracle.com
 List-Id: xen-devel@lists.xenproject.org
 
---===============3687344054943145547==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/arOAbLS+/q._=r=CZBn=Sl0"; protocol="application/pgp-signature"
-
---Sig_/arOAbLS+/q._=r=CZBn=Sl0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Tue, 14 May 2019 15:38:55 +0100
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> > While it is easy for the resume path, doing the same in the suspend path
-> > needs more changes. libxl__domain_suspend_device_model would need to re=
-ceive
-> > the callback and set it if a device model is active. =20
->=20
-> What do you mean here? Can't you handle the NONE case just like you do
-> in the resume function?
-
-It means calling libxl__domain_suspend_device_model unconditionally, and
-let that function decide what to do. Maybe there is no downside to set the
-callback unconditionally, I will check that.
-
-Olaf
-
---Sig_/arOAbLS+/q._=r=CZBn=Sl0
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNrUQwAKCRBdQqD6ppg2
-fmy1AJ0boCtGS9MWl4atTTKOmLqxeFlrcACgo6CG+mrp+QzCYCMjzLXBE5fvSpk=
-=EsbU
------END PGP SIGNATURE-----
-
---Sig_/arOAbLS+/q._=r=CZBn=Sl0--
-
-
---===============3687344054943145547==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3687344054943145547==--
+CgpPbiAxNC4wNS4xOSAxNzoxNiwgRmlsaXBwbyBTaXJvbmkgd3JvdGU6Cj4gU3RhcnQgcG9wdWxh
+dGluZyAvc3lzL2h5cGVydmlzb3Igd2l0aCBLVk0gZW50cmllcyB3aGVuIHdlJ3JlIHJ1bm5pbmcg
+b24KPiBLVk0uIFRoaXMgaXMgdG8gcmVwbGljYXRlIGZ1bmN0aW9uYWxpdHkgdGhhdCdzIGF2YWls
+YWJsZSB3aGVuIHdlJ3JlCj4gcnVubmluZyBvbiBYZW4uCj4gCj4gU3RhcnQgd2l0aCAvc3lzL2h5
+cGVydmlzb3IvdXVpZCwgd2hpY2ggdXNlcnMgcHJlZmVyIG92ZXIKPiAvc3lzL2RldmljZXMvdmly
+dHVhbC9kbWkvaWQvcHJvZHVjdF91dWlkIGFzIGEgd2F5IHRvIHJlY29nbml6ZSBhIHZpcnR1YWwK
+PiBtYWNoaW5lLCBzaW5jZSBpdCdzIGFsc28gYXZhaWxhYmxlIHdoZW4gcnVubmluZyBvbiBYZW4g
+SFZNIGFuZCBvbiBYZW4gUFYKPiBhbmQsIG9uIHRvcCBvZiB0aGF0IGRvZXNuJ3QgcmVxdWlyZSBy
+b290IHByaXZpbGVnZXMgYnkgZGVmYXVsdC4KPiBMZXQncyBjcmVhdGUgYXJjaC1zcGVjaWZpYyBo
+b29rcyBzbyB0aGF0IGRpZmZlcmVudCBhcmNoaXRlY3R1cmVzIGNhbgo+IHByb3ZpZGUgZGlmZmVy
+ZW50IGltcGxlbWVudGF0aW9ucy4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBGaWxpcHBvIFNpcm9uaSA8
+c2lyb25pQGFtYXpvbi5kZT4KPiAtLS0KPiB2MjoKPiAqIG1vdmUgdGhlIHJldHJpZXZhbCBvZiB0
+aGUgVk0gVVVJRCBvdXQgb2YgdXVpZF9zaG93IGFuZCBpbnRvCj4gICBrdm1fcGFyYV9nZXRfdXVp
+ZCwgd2hpY2ggaXMgYSB3ZWFrIGZ1bmN0aW9uIHRoYXQgY2FuIGJlIG92ZXJ3cml0dGVuCj4gCj4g
+IGRyaXZlcnMvS2NvbmZpZyAgICAgICAgICAgICAgfCAgMiArKwo+ICBkcml2ZXJzL01ha2VmaWxl
+ICAgICAgICAgICAgIHwgIDIgKysKPiAgZHJpdmVycy9rdm0vS2NvbmZpZyAgICAgICAgICB8IDE0
+ICsrKysrKysrKysrKysrCj4gIGRyaXZlcnMva3ZtL01ha2VmaWxlICAgICAgICAgfCAgMSArCj4g
+IGRyaXZlcnMva3ZtL3N5cy1oeXBlcnZpc29yLmMgfCAzMCArKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKysKPiAgNSBmaWxlcyBjaGFuZ2VkLCA0OSBpbnNlcnRpb25zKCspCj4gIGNyZWF0ZSBt
+b2RlIDEwMDY0NCBkcml2ZXJzL2t2bS9LY29uZmlnCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2
+ZXJzL2t2bS9NYWtlZmlsZQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9rdm0vc3lzLWh5
+cGVydmlzb3IuYwo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL0tjb25maWcgYi9kcml2ZXJzL0tj
+b25maWcKPiBpbmRleCA0NWY5ZGVjYjk4NDguLjkwZWI4MzVmZTk1MSAxMDA2NDQKPiAtLS0gYS9k
+cml2ZXJzL0tjb25maWcKPiArKysgYi9kcml2ZXJzL0tjb25maWcKPiBAQCAtMTQ2LDYgKzE0Niw4
+IEBAIHNvdXJjZSAiZHJpdmVycy9odi9LY29uZmlnIgo+ICAKPiAgc291cmNlICJkcml2ZXJzL3hl
+bi9LY29uZmlnIgo+ICAKPiArc291cmNlICJkcml2ZXJzL2t2bS9LY29uZmlnIgo+ICsKPiAgc291
+cmNlICJkcml2ZXJzL3N0YWdpbmcvS2NvbmZpZyIKPiAgCj4gIHNvdXJjZSAiZHJpdmVycy9wbGF0
+Zm9ybS9LY29uZmlnIgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL01ha2VmaWxlIGIvZHJpdmVycy9N
+YWtlZmlsZQo+IGluZGV4IGM2MWNkZTU1NDM0MC4uNzljYzkyYTNmNmJmIDEwMDY0NAo+IC0tLSBh
+L2RyaXZlcnMvTWFrZWZpbGUKPiArKysgYi9kcml2ZXJzL01ha2VmaWxlCj4gQEAgLTQ0LDYgKzQ0
+LDggQEAgb2JqLXkJCQkJKz0gc29jLwo+ICBvYmotJChDT05GSUdfVklSVElPKQkJKz0gdmlydGlv
+Lwo+ICBvYmotJChDT05GSUdfWEVOKQkJKz0geGVuLwo+ICAKPiArb2JqLSQoQ09ORklHX0tWTV9H
+VUVTVCkJCSs9IGt2bS8KPiArCj4gICMgcmVndWxhdG9ycyBlYXJseSwgc2luY2Ugc29tZSBzdWJz
+eXN0ZW1zIHJlbHkgb24gdGhlbSB0byBpbml0aWFsaXplCj4gIG9iai0kKENPTkZJR19SRUdVTEFU
+T1IpCQkrPSByZWd1bGF0b3IvCj4gIAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2t2bS9LY29uZmln
+IGIvZHJpdmVycy9rdm0vS2NvbmZpZwo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAw
+MDAwMDAwMDAwLi4zZmMwNDFkZjdjMTEKPiAtLS0gL2Rldi9udWxsCj4gKysrIGIvZHJpdmVycy9r
+dm0vS2NvbmZpZwo+IEBAIC0wLDAgKzEsMTQgQEAKPiArbWVudSAiS1ZNIGRyaXZlciBzdXBwb3J0
+Igo+ICsgICAgICAgIGRlcGVuZHMgb24gS1ZNX0dVRVNUCj4gKwo+ICtjb25maWcgS1ZNX1NZU19I
+WVBFUlZJU09SCj4gKyAgICAgICAgYm9vbCAiQ3JlYXRlIEtWTSBlbnRyaWVzIHVuZGVyIC9zeXMv
+aHlwZXJ2aXNvciIKPiArICAgICAgICBkZXBlbmRzIG9uIFNZU0ZTCj4gKyAgICAgICAgc2VsZWN0
+IFNZU19IWVBFUlZJU09SCj4gKyAgICAgICAgZGVmYXVsdCB5Cj4gKyAgICAgICAgaGVscAo+ICsg
+ICAgICAgICAgQ3JlYXRlIEtWTSBlbnRyaWVzIHVuZGVyIC9zeXMvaHlwZXJ2aXNvciAoZS5nLiwg
+dXVpZCkuIFdoZW4gcnVubmluZwo+ICsgICAgICAgICAgbmF0aXZlIG9yIG9uIGFub3RoZXIgaHlw
+ZXJ2aXNvciwgL3N5cy9oeXBlcnZpc29yIG1heSBzdGlsbCBiZQo+ICsgICAgICAgICAgcHJlc2Vu
+dCwgYnV0IGl0IHdpbGwgaGF2ZSBubyBLVk0gZW50cmllcy4KPiArCj4gK2VuZG1lbnUKPiBkaWZm
+IC0tZ2l0IGEvZHJpdmVycy9rdm0vTWFrZWZpbGUgYi9kcml2ZXJzL2t2bS9NYWtlZmlsZQo+IG5l
+dyBmaWxlIG1vZGUgMTAwNjQ0Cj4gaW5kZXggMDAwMDAwMDAwMDAwLi43M2E0M2ZjOTk0YjkKPiAt
+LS0gL2Rldi9udWxsCj4gKysrIGIvZHJpdmVycy9rdm0vTWFrZWZpbGUKPiBAQCAtMCwwICsxIEBA
+Cj4gK29iai0kKENPTkZJR19LVk1fU1lTX0hZUEVSVklTT1IpICs9IHN5cy1oeXBlcnZpc29yLm8K
+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9rdm0vc3lzLWh5cGVydmlzb3IuYyBiL2RyaXZlcnMva3Zt
+L3N5cy1oeXBlcnZpc29yLmMKPiBuZXcgZmlsZSBtb2RlIDEwMDY0NAo+IGluZGV4IDAwMDAwMDAw
+MDAwMC4uNDNiMWQxYTA5ODA3Cj4gLS0tIC9kZXYvbnVsbAo+ICsrKyBiL2RyaXZlcnMva3ZtL3N5
+cy1oeXBlcnZpc29yLmMKPiBAQCAtMCwwICsxLDMwIEBACj4gKy8qIFNQRFgtTGljZW5zZS1JZGVu
+dGlmaWVyOiBHUEwtMi4wICovCj4gKwo+ICsjaW5jbHVkZSA8YXNtL2t2bV9wYXJhLmg+Cj4gKwo+
+ICsjaW5jbHVkZSA8bGludXgva29iamVjdC5oPgo+ICsjaW5jbHVkZSA8bGludXgvc3lzZnMuaD4K
+PiArCj4gK19fd2VhayBjb25zdCBjaGFyICprdm1fcGFyYV9nZXRfdXVpZCh2b2lkKQo+ICt7Cj4g
+KwlyZXR1cm4gTlVMTDsKPiArfQo+ICsKPiArc3RhdGljIHNzaXplX3QgdXVpZF9zaG93KHN0cnVj
+dCBrb2JqZWN0ICpvYmosCj4gKwkJCSBzdHJ1Y3Qga29ial9hdHRyaWJ1dGUgKmF0dHIsCj4gKwkJ
+CSBjaGFyICpidWYpCj4gK3sKPiArCWNvbnN0IGNoYXIgKnV1aWQgPSBrdm1fcGFyYV9nZXRfdXVp
+ZCgpOwoKSSB3b3VsZCBwcmVmZXIgdG8gaGF2ZSBrdm1fcGFyYV9nZXRfdXVpZCByZXR1cm4gYSB1
+dWlkX3QKYnV0IGNoYXIgKiB3aWxsIHByb2JhYmx5IHdvcmsgb3V0IGFzIHdlbGwuCgoKPiArCXJl
+dHVybiBzcHJpbnRmKGJ1ZiwgIiVzXG4iLCB1dWlkKTsKPiArfQo+ICsKPiArc3RhdGljIHN0cnVj
+dCBrb2JqX2F0dHJpYnV0ZSB1dWlkID0gX19BVFRSX1JPKHV1aWQpOwo+ICsKPiArc3RhdGljIGlu
+dCBfX2luaXQgdXVpZF9pbml0KHZvaWQpCj4gK3sKPiArCWlmICgha3ZtX3BhcmFfYXZhaWxhYmxl
+KCkpCgpJc250IGt2bV9wYXJhX2F2YWlsYWJsZSBhIGZ1bmN0aW9uIHRoYXQgaXMgZGVmaW5lZCBp
+biB0aGUgY29udGV4dCBvZiB0aGUgSE9TVAphbmQgbm90IG9mIHRoZSBndWVzdD8KCj4gKwkJcmV0
+dXJuIDA7Cj4gKwlyZXR1cm4gc3lzZnNfY3JlYXRlX2ZpbGUoaHlwZXJ2aXNvcl9rb2JqLCAmdXVp
+ZC5hdHRyKTsKPiArfQo+ICsKPiArZGV2aWNlX2luaXRjYWxsKHV1aWRfaW5pdCk7Cj4gCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
