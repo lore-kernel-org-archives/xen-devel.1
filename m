@@ -1,8 +1,10 @@
 From: Filippo Sironi <sironi@amazon.de>
-Subject: KVM: Start populating /sys/hypervisor with KVM entries
-Date: Tue, 14 May 2019 17:16:40 +0200
-Message-ID: <1557847002-23519-1-git-send-email-sironi__8854.4800107897$1557847888$gmane$org@amazon.de>
+Subject: [PATCH v2 2/2] KVM: x86: Implement the arch-specific
+ hook to report the VM UUID
+Date: Tue, 14 May 2019 17:16:42 +0200
+Message-ID: <1557847002-23519-3-git-send-email-sironi__2594.01972159452$1557847888$gmane$org@amazon.de>
 References: <1539078879-4372-1-git-send-email-sironi@amazon.de>
+ <1557847002-23519-1-git-send-email-sironi@amazon.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -10,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=jxAo=TO=amazon.com=prvs=030dd7525=sironi@srs-us1.protection.inumbo.net>)
- id 1hQZAo-0004Oe-86
- for xen-devel@lists.xenproject.org; Tue, 14 May 2019 15:16:58 +0000
-In-Reply-To: <1539078879-4372-1-git-send-email-sironi@amazon.de>
+ id 1hQZBh-0004Pl-RT
+ for xen-devel@lists.xenproject.org; Tue, 14 May 2019 15:17:53 +0000
+In-Reply-To: <1557847002-23519-1-git-send-email-sironi@amazon.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,23 +24,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: linux-kernel@vger.kernel.org, kvm@vger.kernel.org, borntraeger@de.ibm.com, boris.ostrovsky@oracle.com, cohuck@redhat.com, konrad.wilk@oracle.com, xen-devel@lists.xenproject.org, vasu.srinivasan@oracle.com
+Cc: Filippo Sironi <sironi@amazon.de>
 List-Id: xen-devel@lists.xenproject.org
 
-TG9uZy10aW1lIFhlbiBIVk0gYW5kIFhlbiBQViB1c2VycyBhcmUgbWlzc2luZyAvc3lzL2h5cGVy
-dmlzb3IgZW50cmllcyB3aGVuCm1vdmluZyB0byBLVk0uICBPbmUgcmVwb3J0IGlzIGFib3V0IGdl
-dHRpbmcgdGhlIFZNIFVVSUQuICBUaGUgVk0gVVVJRCBjYW4KYWxyZWFkeSBiZSByZXRyaWV2ZWQg
-dXNpbmcgL3N5cy9kZXZpY2VzL3ZpcnR1YWwvZG1pL2lkL3Byb2R1Y3RfdXVpZC4gIFRoaXMgaGFz
-CnR3byBkb3duc2lkZXM6ICgxKSBpdCByZXF1aXJlcyByb290IHByaXZpbGVnZXMgYW5kICgyKSBp
-dCBpcyBvbmx5IGF2YWlsYWJsZSBvbgpLVk0gYW5kIFhlbiBIVk0uCgpCeSBleHBvc2luZyAvc3lz
-L2h5cGVydmlzb3IvdXVpZCB3aGVuIHJ1bm5pbmcgb24gS1ZNIGFzIHdlbGwsIHdlIHByb3ZpZGUg
-YW4KaW50ZXJmYWNlIHRoYXQncyBmdW5jdGlvbmFsIGZvciBLVk0sIFhlbiBIVk0sIGFuZCBYZW4g
-UFYuICBMZXQncyBkbyBzbyBieQpwcm92aWRpbmcgYXJjaC1zcGVjaWZpYyBob29rcyBzbyB0aGF0
-IGRpZmZlcmVudCBhcmNoaXRlY3R1cmVzIGNhbiBpbXBsZW1lbnQgdGhlCmhvb2tzIGluIGRpZmZl
-cmVudCB3YXlzLgoKRnVydGhlciB3b3JrIGNhbiBiZSBkb25lIGJ5IGNvbnNvbGlkYXRpbmcgdGhl
-IGNyZWF0aW9uIG9mIHRoZSBiYXNpYwovc3lzL2h5cGVydmlzb3IgYWNyb3NzIGh5cGVydmlzb3Jz
-LgoKRmlsaXBwbyBTaXJvbmkgKDIpOgogICAgICBLVk06IFN0YXJ0IHBvcHVsYXRpbmcgL3N5cy9o
-eXBlcnZpc29yIHdpdGggS1ZNIGVudHJpZXMKICAgICAgS1ZNOiB4ODY6IEltcGxlbWVudCB0aGUg
-YXJjaC1zcGVjaWZpYyBob29rIHRvIHJlcG9ydCB0aGUgVk0gVVVJRAoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24geDg2LCB3ZSByZXBvcnQgdGhlIFVVSUQgaW4gRE1JIFN5c3RlbSBJbmZvcm1hdGlvbiAoaS5l
+LiwgRE1JIFR5cGUgMSkKYXMgVk0gVVVJRC4KClNpZ25lZC1vZmYtYnk6IEZpbGlwcG8gU2lyb25p
+IDxzaXJvbmlAYW1hem9uLmRlPgotLS0KIGFyY2gveDg2L2tlcm5lbC9rdm0uYyB8IDcgKysrKysr
+KwogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL2FyY2gveDg2
+L2tlcm5lbC9rdm0uYyBiL2FyY2gveDg2L2tlcm5lbC9rdm0uYwppbmRleCA1YzkzYTY1ZWUxZTUu
+LjQ0MWNhYjA4YTA5ZCAxMDA2NDQKLS0tIGEvYXJjaC94ODYva2VybmVsL2t2bS5jCisrKyBiL2Fy
+Y2gveDg2L2tlcm5lbC9rdm0uYwpAQCAtMjUsNiArMjUsNyBAQAogI2luY2x1ZGUgPGxpbnV4L2tl
+cm5lbC5oPgogI2luY2x1ZGUgPGxpbnV4L2t2bV9wYXJhLmg+CiAjaW5jbHVkZSA8bGludXgvY3B1
+Lmg+CisjaW5jbHVkZSA8bGludXgvZG1pLmg+CiAjaW5jbHVkZSA8bGludXgvbW0uaD4KICNpbmNs
+dWRlIDxsaW51eC9oaWdobWVtLmg+CiAjaW5jbHVkZSA8bGludXgvaGFyZGlycS5oPgpAQCAtNjk0
+LDYgKzY5NSwxMiBAQCBib29sIGt2bV9wYXJhX2F2YWlsYWJsZSh2b2lkKQogfQogRVhQT1JUX1NZ
+TUJPTF9HUEwoa3ZtX3BhcmFfYXZhaWxhYmxlKTsKIAorY29uc3QgY2hhciAqa3ZtX3BhcmFfZ2V0
+X3V1aWQodm9pZCkKK3sKKwlyZXR1cm4gZG1pX2dldF9zeXN0ZW1faW5mbyhETUlfUFJPRFVDVF9V
+VUlEKTsKK30KK0VYUE9SVF9TWU1CT0xfR1BMKGt2bV9wYXJhX2dldF91dWlkKTsKKwogdW5zaWdu
+ZWQgaW50IGt2bV9hcmNoX3BhcmFfZmVhdHVyZXModm9pZCkKIHsKIAlyZXR1cm4gY3B1aWRfZWF4
+KGt2bV9jcHVpZF9iYXNlKCkgfCBLVk1fQ1BVSURfRkVBVFVSRVMpOwotLSAKMi43LjQKCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
