@@ -2,49 +2,45 @@ Return-Path: <SRS0=qwBA=TO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=3.0 tests=FROM_EXCESS_BASE64,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_NEOMUTT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-6.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9024EC04AB6
-	for <xen-devel@archiver.kernel.org>; Tue, 14 May 2019 10:26:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D6B5C04AB4
+	for <xen-devel@archiver.kernel.org>; Tue, 14 May 2019 10:30:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6ACE120881
-	for <xen-devel@archiver.kernel.org>; Tue, 14 May 2019 10:26:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6ACE120881
+	by mail.kernel.org (Postfix) with ESMTPS id 62F2320881
+	for <xen-devel@archiver.kernel.org>; Tue, 14 May 2019 10:30:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62F2320881
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hQUdn-0003oH-1F; Tue, 14 May 2019 10:26:35 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+	id 1hQUhk-0004aL-Kg; Tue, 14 May 2019 10:30:40 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=O8Y9=TO=citrix.com=prvs=0309661e3=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hQUdm-0003oA-9A
- for xen-devel@lists.xenproject.org; Tue, 14 May 2019 10:26:34 +0000
-X-Inumbo-ID: be52efb7-7632-11e9-8980-bc764e045a96
-Received: from SMTP.EU.CITRIX.COM (unknown [185.25.65.24])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id be52efb7-7632-11e9-8980-bc764e045a96;
- Tue, 14 May 2019 10:26:33 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.60,468,1549929600"; d="scan'208";a="89714695"
-Date: Tue, 14 May 2019 12:26:25 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <JBeulich@suse.com>
-Message-ID: <20190514102625.qca37qnm3fmz3sni@Air-de-Roger>
-References: <5CA6FD300200007800224C43@prv1-mh.provo.novell.com>
+ <SRS0=pH1X=TO=citrix.com=prvs=030624cdf=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hQUhj-0004aG-4b
+ for xen-devel@lists.xenproject.org; Tue, 14 May 2019 10:30:39 +0000
+X-Inumbo-ID: 4ddb4ba6-7633-11e9-a1d9-03ab010e90f5
+Received: from SMTP03.CITRIX.COM (unknown [162.221.156.55])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4ddb4ba6-7633-11e9-a1d9-03ab010e90f5;
+ Tue, 14 May 2019 10:30:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.60,468,1549929600"; d="scan'208";a="85431507"
+From: Wei Liu <wei.liu2@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Date: Tue, 14 May 2019 11:30:30 +0100
+Message-ID: <20190514103030.8393-3-wei.liu2@citrix.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190514103030.8393-1-wei.liu2@citrix.com>
+References: <20190514103030.8393-1-wei.liu2@citrix.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <5CA6FD300200007800224C43@prv1-mh.provo.novell.com>
-User-Agent: NeoMutt/20180716
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH] AMD/IOMMU: don't open-code
- for_each_amd_iommu()
+Subject: [Xen-devel] [PATCH 2/2] Drop blktap2
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -55,20 +51,15 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
- Brian Woods <brian.woods@amd.com>,
- Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190514102625.Jcyo_n5bsXwpfHS9HKiaQ251VX4j96df0IGhVNWEeMY@z>
+Message-ID: <20190514103030.UuZ_7w8YDXGwBT6RFLiWgxGfPY9LUanA2OqeNxeITtc@z>
 
-T24gRnJpLCBBcHIgMDUsIDIwMTkgYXQgMDE6MDE6MDRBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
-dGU6Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKTm90
-IHN1cmUgaWYgaXQncyBvZiBtdWNoIGhlbHAsIGJ1dDoKClJldmlld2VkLWJ5OiBSb2dlciBQYXUg
-TW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KClRoZSBjaGFuZ2UgaXQncyB0cml2aWFsIGFu
-ZCBvYnZpb3VzbHkgY29ycmVjdCB0byBtZS4KClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCkNjOiBJYW4g
+SmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCmdpdCBybSBibGt0YXAyCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
