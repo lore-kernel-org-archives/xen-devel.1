@@ -1,22 +1,22 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: [PATCH 5/5] iommu / pci: re-implement
- XEN_DOMCTL_get_device_group...
-Date: Wed, 15 May 2019 11:06:30 +0200
-Message-ID: <20190515090630.xz7yi4g67uc6hlnn@Air-de-Roger>
-References: <20190508132403.1454-1-paul.durrant@citrix.com>
- <20190508132403.1454-6-paul.durrant@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH v1] libxl: add helper function to set
+ device_model_version
+Date: Wed, 15 May 2019 11:13:34 +0200
+Message-ID: <20190515111334.3804ebb3.olaf@aepfle.de>
+References: <20190514072741.11760-1-olaf@aepfle.de>
+ <20190514101856.6otetd56n72t42bm@Air-de-Roger>
+ <20190514123118.6c9ecbf7.olaf@aepfle.de>
+ <20190514103907.2fc6pf7p64m3c7fh@Air-de-Roger>
+ <20190514143227.GG2798@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============3518132398757661120=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Ez+k=TP=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hQps5-0006m7-Kh
- for xen-devel@lists.xenproject.org; Wed, 15 May 2019 09:06:45 +0000
-Content-Disposition: inline
-In-Reply-To: <20190508132403.1454-6-paul.durrant@citrix.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=YIY1=TP=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hQpys-0007Z1-0Z
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2019 09:13:46 +0000
+In-Reply-To: <20190514143227.GG2798@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,76 +25,55 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Paul Durrant <paul.durrant@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gV2VkLCBNYXkgMDgsIDIwMTkgYXQgMDI6MjQ6MDNQTSArMDEwMCwgUGF1bCBEdXJyYW50IHdy
-b3RlOgo+IC4uLiB1c2luZyB0aGUgbmV3IGlvbW11X2dyb3VwIGluZnJhc3RydWN0dXJlLgo+IAo+
-IEJlY2F1c2UgJ3NpYmxpbmcnIGRldmljZXMgYXJlIG5vdyBtZW1iZXJzIG9mIHRoZSBzYW1lIGlv
-bW11X2dyb3VwLAo+IGltcGxlbWVudCB0aGUgZG9tY3RsIGJ5IGxvb2tpbmcgdXAgdGhlIHJlbGV2
-YW50IGlvbW11X2dyb3VwIGFuZCB3YWxraW5nCj4gdGhlIG1lbWJlcnNoaXAgbGlzdC4KPiAKPiBT
-aWduZWQtb2ZmLWJ5OiBQYXVsIER1cnJhbnQgPHBhdWwuZHVycmFudEBjaXRyaXguY29tPgo+IC0t
-LQo+IENjOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4gLS0tCj4gIHhlbi9kcml2
-ZXJzL3Bhc3N0aHJvdWdoL2lvbW11LmMgfCA2NSArKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKwo+ICB4ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9wY2kuYyAgIHwgNDcgLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgeGVuL2luY2x1ZGUveGVuL2lvbW11LmggICAg
-ICAgICB8ICAyICsrCj4gIDMgZmlsZXMgY2hhbmdlZCwgNjcgaW5zZXJ0aW9ucygrKSwgNDcgZGVs
-ZXRpb25zKC0pCj4gCj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdoL2lvbW11
-LmMgYi94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5jCj4gaW5kZXggMTEzMTlmYmFhZS4u
-NDkxNDBjNjUyZSAxMDA2NDQKPiAtLS0gYS94ZW4vZHJpdmVycy9wYXNzdGhyb3VnaC9pb21tdS5j
-Cj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvaW9tbXUuYwo+IEBAIC03MjksNiArNzI5
-LDcxIEBAIGludCBpb21tdV9ncm91cF9hc3NpZ24oc3RydWN0IHBjaV9kZXYgKnBkZXYpCj4gICAg
-ICByZXR1cm4gMDsKPiAgfQo+ICAKPiArc3RhdGljIHN0cnVjdCBpb21tdV9ncm91cCAqaW9tbXVf
-Z3JvdXBfbG9va3VwKHVpbnQxNl90IHNlZywgdWludDhfdCBidXMsCj4gKyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1aW50OF90IGRldmZuKQoKQ291bGQgeW91
-IHVzZSBwY2lfc2JkZl90IHRvIHBhc3MgdGhlIFNCREY/Cgo+ICt7Cj4gKyAgICB1bnNpZ25lZCBp
-bnQgaWQgPSAwOwo+ICsgICAgc3RydWN0IGlvbW11X2dyb3VwICpncnA7Cj4gKwo+ICsgICAgd2hp
-bGUgKCByYWRpeF90cmVlX2dhbmdfbG9va3VwKCZpb21tdV9ncm91cHMsICh2b2lkICoqKSZncnAs
-IGlkLCAxKSApCj4gKyAgICB7Cj4gKyAgICAgICAgc3RydWN0IHBjaV9kZXYgKnBkZXY7Cj4gKwo+
-ICsgICAgICAgIGxpc3RfZm9yX2VhY2hfZW50cnkgKCBwZGV2LCAmZ3JwLT5kZXZzX2xpc3QsIGdy
-cGRldnNfbGlzdCApCj4gKyAgICAgICAgICAgIGlmICggcGRldi0+c2VnID09IHNlZyAmJiBwZGV2
-LT5idXMgPT0gYnVzICYmCj4gKyAgICAgICAgICAgICAgICAgcGRldi0+ZGV2Zm4gPT0gZGV2Zm4g
-KQo+ICsgICAgICAgICAgICAgICAgcmV0dXJuIGdycDsKPiArCj4gKyAgICAgICAgaWQgPSBncnAt
-PmlkICsgMTsKPiArICAgIH0KPiArCj4gKyAgICByZXR1cm4gTlVMTDsKPiArfQo+ICsKPiAraW50
-IGlvbW11X2dldF9kZXZpY2VfZ3JvdXAoc3RydWN0IGRvbWFpbiAqZCwgdTE2IHNlZywgdTggYnVz
-LCB1OCBkZXZmbiwKClVzaW5nIHBjaV9zYmRmX3Qgd291bGQgYmUgYmV0dGVyIGhlcmUgdG8gcGFz
-cyB0aGUgU0JERiBJTU8sIG9yCnVpbnQ8c2l6ZT5fdCwgb3IganVzdCBwbGFpbiB1bnNpZ25lZCBp
-bnQuCgpBbHNvLCBJIHdvbmRlciBhYm91dCB0aGUgdXNlZnVsbmVzcyBvZiB0aGUgZG9tYWluIHBh
-cmFtZXRlciwgc2hvdWxkbid0CnlvdSBkbyB0aGUgb3duZXJzaGlwIGNoZWNrIHNvbWV3aGVyZSBl
-bHNlIChpZiByZXF1aXJlZCkgYW5kIGhhdmUgdGhpcwpmdW5jdGlvbiBqdXN0IGNoZWNrIHRoZSBJ
-T01NVSBncm91cCBvZiBhIGdpdmVuIFBDSSAgZGV2aWNlPwoKKE5vdGUgeW91IHByb2JhYmx5IHdh
-bnQgdG8gY29uc3RpZnkgdGhlIGRvbWFpbiBwYXJhbWV0ZXIgaWYgaXQgbmVlZHMgdG8Kc3RheSku
-Cgo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICBYRU5fR1VFU1RfSEFORExFXzY0KHVpbnQz
-MikgYnVmLCBpbnQgbWF4X3NkZXZzKQo+ICt7Cj4gKyAgICBzdHJ1Y3QgaW9tbXVfZ3JvdXAgKmdy
-cDsKPiArICAgIHN0cnVjdCBwY2lfZGV2ICpwZGV2Owo+ICsgICAgaW50IGkgPSAwOwoKSXQgc2Vl
-bXMgbGlrZSB0aGlzIHNob3VsZCBiZSB1bnNpZ25lZCBpbnQ/Cgo+ICsKPiArICAgIHBjaWRldnNf
-bG9jaygpOwo+ICsKPiArICAgIGdycCA9IGlvbW11X2dyb3VwX2xvb2t1cChzZWcsIGJ1cywgZGV2
-Zm4pOwo+ICsgICAgaWYgKCAhZ3JwICkKPiArICAgIHsKPiArICAgICAgICBwY2lkZXZzX3VubG9j
-aygpOwo+ICsgICAgICAgIHJldHVybiAwOwo+ICsgICAgfQo+ICsKPiArICAgIGxpc3RfZm9yX2Vh
-Y2hfZW50cnkgKCBwZGV2LCAmZ3JwLT5kZXZzX2xpc3QsIGdycGRldnNfbGlzdCApCj4gKyAgICB7
-Cj4gKyAgICAgICAgdWludDMyX3Qgc2JkZjsKPiArCj4gKyAgICAgICAgaWYgKCBpID49IG1heF9z
-ZGV2cyApCj4gKyAgICAgICAgICAgIGJyZWFrOwo+ICsKPiArICAgICAgICBpZiAoIHBkZXYtPmRv
-bWFpbiAhPSBkICkKPiArICAgICAgICAgICAgY29udGludWU7Cj4gKwo+ICsgICAgICAgIHNiZGYg
-PSBQQ0lfU0JERjMocGRldi0+c2VnLCBwZGV2LT5idXMsIHBkZXYtPmRldmZuKTsKPiArCj4gKyAg
-ICAgICAgaWYgKCB4c21fZ2V0X2RldmljZV9ncm91cChYU01fSE9PSywgc2JkZikgKQo+ICsgICAg
-ICAgICAgICBjb250aW51ZTsKPiArCj4gKyAgICAgICAgaWYgKCB1bmxpa2VseShjb3B5X3RvX2d1
-ZXN0X29mZnNldChidWYsIGksICZzYmRmLCAxKSkgKQo+ICsgICAgICAgIHsKPiArICAgICAgICAg
-ICAgcGNpZGV2c191bmxvY2soKTsKPiArICAgICAgICAgICAgcmV0dXJuIC0xOwoKLUVGQVVMVD8K
-Cj4gKyAgICAgICAgfQo+ICsgICAgICAgIGkrKzsKPiArICAgIH0KPiArCj4gKyAgICBwY2lkZXZz
-X3VubG9jaygpOwo+ICsKPiArICAgIHJldHVybiBpOwo+ICt9Cj4gKwo+ICAjZW5kaWYgLyogQ09O
-RklHX0hBU19QQ0kgKi8KPiAgCj4gIC8qCj4gZGlmZiAtLWdpdCBhL3hlbi9kcml2ZXJzL3Bhc3N0
-aHJvdWdoL3BjaS5jIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvcGNpLmMKPiBpbmRleCA2MjEw
-NDA5NzQxLi42OGIyODgzZWQ2IDEwMDY0NAo+IC0tLSBhL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdo
-L3BjaS5jCj4gKysrIGIveGVuL2RyaXZlcnMvcGFzc3Rocm91Z2gvcGNpLmMKPiBAQCAtMTU1NCw1
-MyArMTU1NCw2IEBAIGludCBkZWFzc2lnbl9kZXZpY2Uoc3RydWN0IGRvbWFpbiAqZCwgdTE2IHNl
-ZywgdTggYnVzLCB1OCBkZXZmbikKPiAgICAgIHJldHVybiByZXQ7Cj4gIH0KPiAgCj4gLXN0YXRp
-YyBpbnQgaW9tbXVfZ2V0X2RldmljZV9ncm91cCgKPiAtICAgIHN0cnVjdCBkb21haW4gKmQsIHUx
-NiBzZWcsIHU4IGJ1cywgdTggZGV2Zm4sCj4gLSAgICBYRU5fR1VFU1RfSEFORExFXzY0KHVpbnQz
-MikgYnVmLCBpbnQgbWF4X3NkZXZzKQoKT2gsIEkgc2VlIHRoaXMgaXMgY29kZSBtb3ZlbWVudCBh
-bmQgY2hhbmdlcyB0byBhbiBleGlzdGluZyBmdW5jdGlvbiwKaGVuY2UgbXkgY29tbWVudHMgYWJv
-dmUgbWlnaHQgYmUgc3RhbGUsIG9yIHdpbGwgcmVxdWlyZSB0byBmaXh1cCB0aGUKY2FsbGVycyB3
-aGljaCBtaWdodCBiZSBjdW1iZXJzb21lLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
-WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
-cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============3518132398757661120==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/gSUegA.XTVd5PNyTVvHcEni"; protocol="application/pgp-signature"
+
+--Sig_/gSUegA.XTVd5PNyTVvHcEni
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Tue, 14 May 2019 15:32:27 +0100
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> Olaf, if you can provide me with an updated version of the commit
+> message I can fold that in while committing. No need to resend this
+> patch.
+
+Maybe just append this paragraph?
+
+The upcoming change needs a full libxl_domain_config, and the existing
+libxl__domain_build_info_setdefault has just a libxl_domain_build_info=20
+to work with.
+
+Olaf
+
+--Sig_/gSUegA.XTVd5PNyTVvHcEni
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNvYPgAKCRBdQqD6ppg2
+fm5yAJ4n0Rfv9KW3rf8FHAlX7K5MhjlE2wCfQv9ny1/AlPW9hHm/8dgGZ6a3ELE=
+=9xzr
+-----END PGP SIGNATURE-----
+
+--Sig_/gSUegA.XTVd5PNyTVvHcEni--
+
+
+--===============3518132398757661120==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3518132398757661120==--
