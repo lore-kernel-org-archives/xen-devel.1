@@ -1,8 +1,8 @@
-From: Wei Liu <wei.liu2@citrix.com>
+From: Anthony PERARD <anthony.perard@citrix.com>
 Subject: Re: [PATCH] libxc: elf_kernel loader: Remove check for
  shstrtab
-Date: Wed, 15 May 2019 13:09:56 +0100
-Message-ID: <20190515120956.GS2798@zion.uk.xensource.com>
+Date: Wed, 15 May 2019 13:55:30 +0100
+Message-ID: <20190515125530.GB1245@perard.uk.xensource.com>
 References: <20190515114015.25492-1-anthony.perard@citrix.com>
  <651154bc-9710-5e03-23a2-d04a894853cc@citrix.com>
 Mime-Version: 1.0
@@ -11,9 +11,9 @@ Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=0eB+=TP=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1hQsjP-0006us-Pl
- for xen-devel@lists.xenproject.org; Wed, 15 May 2019 12:09:59 +0000
+ <SRS0=FtK4=TP=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1hQtRZ-0002K5-Gc
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2019 12:55:37 +0000
 Content-Disposition: inline
 In-Reply-To: <651154bc-9710-5e03-23a2-d04a894853cc@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -25,7 +25,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 T24gV2VkLCBNYXkgMTUsIDIwMTkgYXQgMDE6MDc6MDNQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
@@ -61,10 +61,19 @@ IHNoc3RydGFiIiwgX19GVU5DVElPTl9fKTsKPiA+IC0gICAgICAgIHJjID0gLUVJTlZBTDsKPiA+
 IC0gICAgICAgIGdvdG8gb3V0Owo+ID4gLSAgICB9Cj4gCj4gVGhpcyBtaWdodCBiZSBmaW5lIGZv
 ciBuZXdlciBiaW5hcmllcywgYnV0IHlvdSdsbCBicmVhayBvbGRlciBvbmVzLgo+IAo+IEluc3Rl
 YWQsIHlvdSBzaG91bGQgc2tpcCBzZWFyY2hpbmcgZm9yIHN0cnRhYiBpZiB3ZSd2ZSBhbHJlYWR5
-IGxvY2F0ZWQKPiB0aGUgWGVuIG5vdGVzLgoKQUlVSSBvbGQgYmluYXJpZXMgYWx3YXlzIGhhdmUg
-c2hzdHJ0YWIgd2hpbGUgaXQgaXNuJ3QgYWx3YXlzIHRydWUgZm9yCm5ldyBvbmVzLgoKVW5mb3J0
-dW5hdGVseSBteSBhdHRlbXB0IHRvIGZpZ3VyZSBvdXQgdGhlIGhpc3Rvcnkgb2YgdGhpcyBwaWVj
-ZSBvZiBjb2RlCmlzIGZ1dGlsZS4KCldlaS4KCj4gCj4gfkFuZHJldwoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
-ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+IGxvY2F0ZWQKPiB0aGUgWGVuIG5vdGVzLgoKOi0oLCBtYXliZSBJIHNob3VsZCBoYXZlIGdvbmUg
+ZnV0aGVyIG9uIGV4cGxhaW5pbmcgd2h5IHRoaXMgY2hlY2sgaXMKdXNlbGVzcyAoYW5kIHByb2Jh
+Ymx5IGF0IHRoZSB3cm9uZyBwbGFjZSwgYXQgbGVhc3Qgbm93KS4KClRoZSBuZXh0IHRoaW5nIHRo
+YXQncyBkb25lIGFmdGVyIHRoYXQgY2hlY2sgaXM6CmVsZl9wYXJzZV9iaW5hcnkoKQplbGZfeGVu
+X3BhcnNlKCkKVGhvc2UgYXJlIGxvY2F0ZWQgaW4gInhlbi9jb21tb24vbGliZWxmIiwgYW5kIHRo
+b3NlIGFyZSB0aGUgZnVuY3Rpb25zCnRoYXQgYWN0dWFsbHkgdGFrZXMgY2FyZSBvZiBleHRyYWN0
+aW5nIGRhdGEgZnJvbSB0aGUgZWxmLgoKZWxmX3hlbl9wYXJzZSgpIGZpcnN0IGxvb2sgZm9yIFhl
+biBFTEZOT1RFIGluIHRoZSBwcm9ncmFtIHNlZ21lbnRzCihwaGRyLCBQVF9OT1RFKSBhbmQgc2tp
+cCByZWFkaW5nIHNlY3Rpb24gYW5kIHN0cnRhYiBpZiBmb3VuZC4KClNvLCBsaWJlbGYgYWxyZWFk
+eSBkb2VzIHdoYXQgeW91IGFza2VkIGZvciA7LSkuCgpUaGUgc2hzdHJ0YWIgYXJlIG9ubHkgdXNl
+ZCB0byBsb29rIGZvciBsZWdhY3kgX194ZW5fZ3Vlc3Qgc2VjdGlvbiBuYW1lcy4KU2luY2UgRUxG
+Tk9URXMgd2FzIHVzZWQsIHRoZSBuYW1lIG9mIHNlY3Rpb24gYXJlbid0IGxvb2tlZCBhdC4KCkkg
+aG9wZSB0aGF0IGhlbHAuCgpUaGFua3MsCgotLSAKQW50aG9ueSBQRVJBUkQKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
