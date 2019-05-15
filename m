@@ -1,23 +1,19 @@
-From: Oleksandr <olekstysh@gmail.com>
-Subject: Re: [PATCH v2 01/10] xen: add a p2mt parameter to
- map_mmio_regions
-Date: Wed, 15 May 2019 16:39:27 +0300
-Message-ID: <2d610735-2354-ac4b-980a-7961d689a5af@gmail.com>
-References: <alpine.DEB.2.10.1904301358560.13269@sstabellini-ThinkPad-X260>
- <1556658172-8824-1-git-send-email-sstabellini@kernel.org>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH 0/2] Drop blktap2 from xen
+Date: Wed, 15 May 2019 15:14:01 +0100
+Message-ID: <23772.7849.169649.360026@mariner.uk.xensource.com>
+References: <20190514103030.8393-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OzW7=TP=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1hQu83-0005ex-Ki
- for xen-devel@lists.xenproject.org; Wed, 15 May 2019 13:39:31 +0000
-Received: by mail-lj1-x242.google.com with SMTP id r76so2520320lja.12
- for <xen-devel@lists.xenproject.org>; Wed, 15 May 2019 06:39:30 -0700 (PDT)
-In-Reply-To: <1556658172-8824-1-git-send-email-sstabellini@kernel.org>
-Content-Language: en-US
+ <SRS0=P7lW=TP=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1hQug0-0000Gx-QD
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2019 14:14:36 +0000
+In-Reply-To: <20190514103030.8393-1-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,29 +22,14 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <stefanos@xilinx.com>, julien.grall@arm.com, JBeulich@suse.com, andrew.cooper3@citrix.com
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Ck9uIDAxLjA1LjE5IDAwOjAyLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6CgpIaSwgU3RlZmFu
-bwoKPiBkaWZmIC0tZ2l0IGEveGVuL2RyaXZlcnMvdnBjaS9oZWFkZXIuYyBiL3hlbi9kcml2ZXJz
-L3ZwY2kvaGVhZGVyLmMKPiBpbmRleCBlZmI2Y2E5Li42YWRmYTU1IDEwMDY0NAo+IC0tLSBhL3hl
-bi9kcml2ZXJzL3ZwY2kvaGVhZGVyLmMKPiArKysgYi94ZW4vZHJpdmVycy92cGNpL2hlYWRlci5j
-Cj4gQEAgLTUyLDcgKzUyLDggQEAgc3RhdGljIGludCBtYXBfcmFuZ2UodW5zaWduZWQgbG9uZyBz
-LCB1bnNpZ25lZCBsb25nIGUsIHZvaWQgKmRhdGEsCj4gICAgICAgICAgICAqIC0ge3VufW1hcF9t
-bWlvX3JlZ2lvbnMgZG9lc24ndCBzdXBwb3J0IHByZWVtcHRpb24uCj4gICAgICAgICAgICAqLwo+
-ICAgCj4gLSAgICAgICAgcmMgPSBtYXAtPm1hcCA/IG1hcF9tbWlvX3JlZ2lvbnMobWFwLT5kLCBf
-Z2ZuKHMpLCBzaXplLCBfbWZuKHMpKQo+ICsgICAgICAgIHJjID0gbWFwLT5tYXAgPyBtYXBfbW1p
-b19yZWdpb25zKG1hcC0+ZCwgX2dmbihzKSwgc2l6ZSwgX21mbihzKSwKPiArICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwMm1fbW1pb19kaXJlY3QpCgpOb3QgcmVhbGx5
-IHN1cmUgdGhlIFZQQ0kgaXMgdXNlZCBvbiBBUk0sIGJ1dCB4ZW4vZHJpdmVycy92cGNpLyBsb29r
-cyAKbGlrZSBhIGNvbW1vbiBjb2RlLgoKQnV0LCBhY2NvcmRpbmcgdG8gdGhlIGNvbW1pdCBkZXNj
-cmlwdGlvbiwgd2Ugc2hvdWxkIHBhc3MgCiJwMm1fbW1pb19kaXJlY3QiIG9uIHg4NiBhbmQgInAy
-bV9tbWlvX2RpcmVjdF9kZXYiIG9uIEFSTS4uLgoKPiAgICAgICAgICAgICAgICAgICAgICAgICA6
-IHVubWFwX21taW9fcmVnaW9ucyhtYXAtPmQsIF9nZm4ocyksIHNpemUsIF9tZm4ocykpOwo+ICAg
-ICAgICAgICBpZiAoIHJjID09IDAgKQo+ICAgICAgICAgICB7Cj4gZGlmZiAtLWdpdCBhL3hlbi9p
-bmNsdWRlL2FzbS1hcm0vcDJtLmggYi94ZW4vaW5jbHVkZS9hc20tYXJtL3AybS5oCgotLSAKUmVn
-YXJkcywKCk9sZWtzYW5kciBUeXNoY2hlbmtvCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+V2VpIExpdSB3cml0ZXMgKCJbWGVuLWRldmVsXSBbUEFUQ0ggMC8yXSBEcm9wIGJsa3RhcDIgZnJv
+bSB4ZW4iKToKPiBXZWkgTGl1ICgyKToKPiAgIHRvb2xzOiByZW1vdmUgYmxrdGFwMiByZWxhdGVk
+IGNvZGUgYW5kIGRvY3VtZW50YXRpb24KPiAgIERyb3AgYmxrdGFwMgoKQm90aCBwYXRjaGVzOgoK
+QWNrZWQtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoKSWFuLgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
