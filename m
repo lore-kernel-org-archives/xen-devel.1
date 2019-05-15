@@ -1,21 +1,18 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86emul: add support for missing {,
- V}PMADDWD insns
-Date: Wed, 15 May 2019 11:17:50 +0100
-Message-ID: <ecde9471-17e5-61b8-1c61-67cac1d54fc4@citrix.com>
-References: <5CDBCC89020000780022F1DE@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: how to disable build of pv-shim?
+Date: Wed, 15 May 2019 12:18:04 +0200
+Message-ID: <20190515121804.4e4a2c85.olaf@aepfle.de>
+References: <20190513165321.464fdeaf.olaf@aepfle.de>
+ <20190513152005.jojtolhh5wdguvg6@Air-de-Roger>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5319669497820579235=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Rumq=TP=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hQqz1-0005Bo-7k
- for xen-devel@lists.xenproject.org; Wed, 15 May 2019 10:17:59 +0000
-In-Reply-To: <5CDBCC89020000780022F1DE@prv1-mh.provo.novell.com>
-Content-Language: en-GB
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=YIY1=TP=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hQqzF-0005Cp-SY
+ for xen-devel@lists.xenproject.org; Wed, 15 May 2019 10:18:14 +0000
+In-Reply-To: <20190513152005.jojtolhh5wdguvg6@Air-de-Roger>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,31 +21,49 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Razvan Cojocaru <rcojocaru@bitdefender.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTUvMDUvMjAxOSAwOToyMywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gVGhlaXIgcHJlLUFWWDUx
-MiBpbmNhcm5hdGlvbnMgaGF2ZSBjbGVhcmx5IGJlZW4gb3Zlcmxvb2tlZCBkdXJpbmcgbXVjaAo+
-IGVhcmxpZXIgd29yay4gVGhlaXIgbWVtb3J5IGFjY2VzcyBwYXR0ZXJuIGlzIGVudGlyZWx5IHN0
-YW5kYXJkLCBzbyBubwo+IHNwZWNpZmljIHRlc3RzIGdldCBhZGRlZCB0byB0aGUgaGFybmVzcy4K
-Pgo+IFJlcG9ydGVkLWJ5OiBSYXp2YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5j
-b20+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgo+Cj4g
-LS0tIGEveGVuL2FyY2gveDg2L3g4Nl9lbXVsYXRlL3g4Nl9lbXVsYXRlLmMKPiArKysgYi94ZW4v
-YXJjaC94ODYveDg2X2VtdWxhdGUveDg2X2VtdWxhdGUuYwo+IEBAIC02NjI0LDYgKzY2MjQsOCBA
-QCB4ODZfZW11bGF0ZSgKPiAgICAgIGNhc2UgWDg2RU1VTF9PUENfVkVYXzY2KDB4MGYsIDB4ZjMp
-OiAvKiB2cHNsbHEgeG1tL20xMjgse3gseX1tbSx7eCx5fW1tICovCj4gICAgICBjYXNlIFg4NkVN
-VUxfT1BDXzY2KDB4MGYsIDB4ZjQpOiAgICAgLyogcG11bHVkcSB4bW0vbTEyOCx4bW0gKi8KPiAg
-ICAgIGNhc2UgWDg2RU1VTF9PUENfVkVYXzY2KDB4MGYsIDB4ZjQpOiAvKiB2cG11bHVkcSB7eCx5
-fW1tL21lbSx7eCx5fW1tLHt4LHl9bW0gKi8KPiArICAgIENBU0VfU0lNRF9QQUNLRURfSU5UKDB4
-MGYsIDB4ZjUpOiAgICAvKiBwbWFkZHdkIHsseH1tbS9tZW0seyx4fW1tICovCj4gKyAgICBjYXNl
-IFg4NkVNVUxfT1BDX1ZFWF82NigweDBmLCAweGY1KTogLyogdnBtYWRkd2Qge3gseX1tbS9tZW0s
-e3gseX1tbSx7eCx5fW1tICovCgpOb3RoaW5nIG9uIHRoaXMgcGF0aCBjaGVja3MgZm9yIFNTU0Uz
-LCBBRkFJQ1QuCgp+QW5kcmV3Cgo+ICAgICAgY2FzZSBYODZFTVVMX09QQ182NigweDBmLCAweGY2
-KTogICAgIC8qIHBzYWRidyB4bW0vbTEyOCx4bW0gKi8KPiAgICAgIGNhc2UgWDg2RU1VTF9PUENf
-VkVYXzY2KDB4MGYsIDB4ZjYpOiAvKiB2cHNhZGJ3IHt4LHl9bW0vbWVtLHt4LHl9bW0se3gseX1t
-bSAqLwo+ICAgICAgQ0FTRV9TSU1EX1BBQ0tFRF9JTlQoMHgwZiwgMHhmOCk6ICAgIC8qIHBzdWJi
-IHsseH1tbS9tZW0seyx4fW1tICovCj4KPgoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+--===============5319669497820579235==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/qChXM7uoRAWJeND.16UXxMO"; protocol="application/pgp-signature"
+
+--Sig_/qChXM7uoRAWJeND.16UXxMO
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Am Mon, 13 May 2019 17:20:05 +0200
+schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
+
+> Let me know if that works for you and I will submit it formally.
+
+Yes, it works for me. Thanks.
+
+Olaf
+
+--Sig_/qChXM7uoRAWJeND.16UXxMO
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXNvnXAAKCRBdQqD6ppg2
+fmbwAKDtqyeZSlbQeneUZl8dHUY6BzCSKwCgqZTjaGDLeoeClXC2zt9A7L2pACY=
+=DUjZ
+-----END PGP SIGNATURE-----
+
+--Sig_/qChXM7uoRAWJeND.16UXxMO--
+
+
+--===============5319669497820579235==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5319669497820579235==--
