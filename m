@@ -1,20 +1,12 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: xen/arm: potential bug in advance_pc
-Date: Wed, 15 May 2019 12:35:12 +0100
-Message-ID: <85c16ffa-690f-19a4-348b-55c97e5f0c25@arm.com>
-References: <7f55fb96-0105-4e32-9cbd-1b842ed99509@rwthex-w1-a.rwth-ad.de>
+From: Daniel Kiper <daniel.kiper@oracle.com>
+Subject: Fedora - make BLS configs default - Xen Dom0 boot broken
+Date: Wed, 15 May 2019 13:36:00 +0200
+Message-ID: <20190515113600.m26n2abinki7reg7@tomti.i.net-space.pl>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=E9wX=TP=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hQsBp-0003Vy-7r
- for xen-devel@lists.xenproject.org; Wed, 15 May 2019 11:35:17 +0000
-In-Reply-To: <7f55fb96-0105-4e32-9cbd-1b842ed99509@rwthex-w1-a.rwth-ad.de>
-Content-Language: en-US
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,48 +15,18 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: =?UTF-8?Q?Lukas_J=c3=bcnger?= <lukas.juenger@ice.rwth-aachen.de>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Lukas Juenger <juenger@ice.rwth-aachen.de>
+To: xen-devel@lists.xensource.com, committers@xenproject.org
+Cc: adamwill@fedoraproject.org, marmarek@invisiblethingslab.com, konrad.wilk@oracle.com, lars.kurth.xen@gmail.com, javierm@redhat.com, dfaggioli@suse.com, pjones@redhat.com, m.a.young@durham.ac.uk, ian.jackson@citrix.com
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMTQvMDUvMjAxOSAxNzowMywgTHVrYXMgSsO8bmdlciB3cm90ZToKPiBIZWxsbyBhbGwsCgpI
-ZWxsbywKClRoYW5rIHlvdSBmb3IgdGhlIHJlcG9ydC4KClBsZWFzZSB0cnkgdG8gQ0MgdGhlIG1h
-aW50YWluZXJzIG9mIHRoZSBjb2RlIChpbiB0aGlzIGNhc2UgU3RlZmFubyBhbmQgSSkgd2hlbiAK
-YXNraW5nIGEgcXVlc3Rpb24uIFNvIHlvdXIgZS1tYWlsIGRvbid0IGdldCBsb3N0IGluIHRoZSBu
-b2lzZSBvZiB4ZW4tZGV2ZWwuCgo+IGluIHRoZSBmdW5jdGlvbiBhZHZhbmNlX3BjIGluIHhlbi9h
-cmNoL2FybS90cmFwcy5jIGluIGxpbmUgMTY1NSwxNjU2IHlvdSBjYW4gCj4gZmluZCB0aGUgZm9s
-bG93aW5nIGNvZGU6Cj4gCj4gMTY1NcKgwqDCoMKgIEJVR19PTiggKCFwc3JfbW9kZV9pc18zMmJp
-dChjcHNyKXx8IShjcHNyJlBTUl9USFVNQikpCj4gMTY1NsKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oCAmJiAoY3BzciZQU1JfSVRfTUFTSykgKTsKPiAKPiBUaGlzIGNvZGUgc2VlbXMgdG8gY2hlY2sg
-dGhhdCB3ZSBhcmUgbm90IHJ1bm5pbmcgaW4gdGh1bWIgbW9kZSBhbmQgdGhhdCB0aGUgCj4gUFNS
-X0lUX01BU0sgaXMgbm90IHNldC4KPiBPbiBBUk12OC41LUJUSSBzeXN0ZW1zIGJpdHMgWzExOjEw
-XSBvZiBzcHNyX2VsMiBpbmRpY2F0ZSB0aGUgQlRZUEUgKHNlZSAKPiBodHRwczovL2RldmVsb3Bl
-ci5hcm0uY29tL2RvY3MvZGRpMDU5NS9iL2FhcmNoNjQtc3lzdGVtLXJlZ2lzdGVycy9zcHNyX2Vs
-MikuCj4gSWYgYW4gZXhjZXB0aW9uIGlzIHRha2VuIGluIHRoZSBndWVzdCAoZS5nLiB3cml0ZSB0
-byBzeXN0ZW0gcmVnaXN0ZXIpIGZyb20gCj4gQUFyY2g2NCBzdGF0ZSB0aGVzZSBiaXRzIG1pZ2h0
-IGJlIHNldC4KPiBUaGUgUFNSX0lUX01BU0sgZm9yIHRodW1iIG1vZGUgb3ZlcmxhcHMgd2l0aCB0
-aGVzZSBiaXRzIGFuZCBCVUdfT04gaXMgZXhlY3V0ZWQuCj4gVGhpcyBzZWVtcyB0byBiZSBhIGJ1
-Zy4KClhlbiBjb2RlIGJsaW5kbHkgYXNzdW1lZCB0aGF0IFJFUzAgbWVhbnMgdGhlIGJpdHMgY2Fu
-bm90IGJlIHVzZWQgZm9yIG90aGVyIApwdXJwb3NlIGluIGxhdGVyIHJldmlzaW9uIG9mIHRoZSBh
-cmNoaXRlY3R1cmUuIFNvIHRoaXMgaXMgY2xlYXJseSBhIGJ1Zy4KCj4gSXMgaXQgcmVhbGx5IG5l
-Y2Vzc2FyeSB0byBjaGVjayB0aGUgUFNSX0lUX01BU0sgZm9yIEJVR19PTiBoZXJlPwpObywgYW5k
-IGl0IGlzIGEgcHJldHR5IGJhZCBpZGVhIHRvIGNoZWNrIGd1ZXN0IGFyY2hpdGVjdHVyYWwgYmVo
-YXZpb3Igd2l0aCAKQlVHX09OKCkuIFRoZSBCVUdfT04oKSBuZWVkcyB0byBiZSByZXBsYWNlZCB3
-aXRoIHByb3BlciBjaGVjayBvbiB0aGUgQ1BTUiAoc2VlIApiZWxvdykuCgo+IFdoeSBpcyB0aGUg
-ZXhlY3V0aW9uIG1vZGUgY2hlY2tlZCB0d2ljZSB3aXRoIHBzcl9tb2RlX2lzXzMyYml0IGFuZCAK
-PiBjcHNyJlBTUl9USFVNQiwgYXMgdGhleSBzZWVtIHRvIGRvIHRoZSBzYW1lIHRoaW5nPwoKMzIt
-Yml0IG1vZGUgc3VwcG9ydCB0d28gaW5zdHJ1Y3Rpb24gc2V0OiBBUk0gYW5kIFRodW1iLiBGcm9t
-IG15IHVuZGVyc3RhbmRpbmcgCnRoZSB2YWx1ZSBvZiBJVCBpcyB1bmtub3duIHdoZW4gdXNpbmcg
-dGhlIEFSTSBpbnN0cnVjdGlvbiBzZXQuIEZ1cnRoZXJtb3JlLCB0aGUgCmJpdCA1IG9ubHkgbWVh
-bnMgVGh1bWIgb24gMzItYml0IG1vZGUuIEZvciA2NC1iaXQgbW9kZSwgdGhlIGJpdCBpcyBSRVMw
-LgoKU28gd2Ugd291bGQgbmVlZCB0byBjaGVjayB0aGUgMiBiaXRzLgoKPiBJZiBQU1JfSVRfTUFT
-SyBkb2VzIG5vdCBuZWVkIHRvIGJlIGNoZWNrZWQgZm9yIEJVR19PTiwgdGhlIGlmIHN0YXRlbWVu
-dCBpbiB0aGUgCj4gZm9sbG93aW5nIGxpbmUgc2hvdWxkIGNoZWNrIGZvciB0aHVtYiBtb2RlIGFn
-YWluLCByaWdodD8KClRoZSBjaGVjayBzaG91bGQgYmUgc29tZXRoaW5nIGxpa2U6CgppZiAoIHBz
-cl9tb2RlX2lzXzMyYml0KGNwc3IpICYmIChjcHNyICYgUFNSX1RIVU1CKSAmJiAoY3BzciAmIFBT
-Ul9JVF9NQVNLKSApCnsKfQoKSSBoYXZlIG5vdGljZWQgZmV3IG1vcmUgaXNzdWVzIGluIHRoZSB0
-cmFwcy5jIGNvZGUgcmVnYXJkaW5nIFJFUzAgLiBJIHdpbGwgc2VuZCAKYSBzZXJpZXMgd2l0aCB0
-aGF0IGZpeGVkIGxhdGVyIHRvZGF5LgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGV5LAoKRllJLCBhbm90aGVyIFhlbiBEb20wIGJvb3QgaXNzdWUgb24gRmVkb3JhLi4uCgpQbGVh
+c2UgdGFrZSBhIGxvb2sgYXQgWzFdLiBUaGlzIHdpbGwgYnJlYWsgWGVuIERvbTAgYm9vdCBkdWUg
+dG8gbGFjayBvZgpzdXBwb3J0IGZvciBtdWx0aWJvb3QsIG11bHRpYm9vdDIsIG1vZHVsZSwgYW5k
+IG1vZHVsZTIgY29tbWFuZHMuIElmIHdlCmNhcmUgdGhlbiB0aGlzIGhhcyB0byBiZSBmaXhlZCBz
+b21laG93Li4uCgpBZ2FpbiwgSSBjYW4gY29vcmRpbmF0ZSB3b3JrIGFuZCByZXZpZXcgcGF0Y2hl
+cyBidXQgSSBjYW5ub3QgdGFrZSBhIHN0dWIKYXQgdGhlIGlzc3VlIG15c2VsZi4gU29ycnkgYWJv
+dXQgdGhhdC4KCkRhbmllbAoKWzFdIGh0dHBzOi8vZmVkb3JhcHJvamVjdC5vcmcvd2lraS9DaGFu
+Z2VzL0Jvb3RMb2FkZXJTcGVjQnlEZWZhdWx0CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
