@@ -1,21 +1,18 @@
-From: Olaf Hering <olaf@aepfle.de>
-Subject: Re: [PATCH 1/3] config.sub: Update config.sub to latest
- version
-Date: Thu, 16 May 2019 15:18:19 +0200
-Message-ID: <20190516151819.168c6b36.olaf@aepfle.de>
-References: <20190516000212.13468-1-alistair.francis@wdc.com>
- <5CDD3BF2020000780022F8AD@prv1-mh.provo.novell.com>
- <20190516111330.GA32248@aepfle.de>
- <20190516113902.GZ2798@zion.uk.xensource.com>
+From: Viktor Mitin <viktor.mitin.19@gmail.com>
+Subject: [PATCH v2] coverage: filter out libfdt.o and libelf.o
+Date: Thu, 16 May 2019 16:20:16 +0300
+Message-ID: <20190516132016.8032-1-viktor.mitin.19@gmail.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============5834601083299149723=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ZPM6=TQ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hRGHE-0005KN-DO
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 13:18:29 +0000
-In-Reply-To: <20190516113902.GZ2798@zion.uk.xensource.com>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=BGuO=TQ=gmail.com=viktor.mitin.19@srs-us1.protection.inumbo.net>)
+ id 1hRGKW-00069e-Q7
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 13:21:52 +0000
+Received: by mail-lj1-x243.google.com with SMTP id d15so3075760ljc.7
+ for <xen-devel@lists.xenproject.org>; Thu, 16 May 2019 06:21:51 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,51 +21,38 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: alistair23@gmail.com, Alistair Francis <alistair.francis@wdc.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Viktor Mitin <viktor.mitin.19@gmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============5834601083299149723==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/2XJAvCeX1h5QXBA=J4ahXuy"; protocol="application/pgp-signature"
-
---Sig_/2XJAvCeX1h5QXBA=J4ahXuy
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 16 May 2019 12:39:02 +0100
-schrieb Wei Liu <wei.liu2@citrix.com>:
-
-> autotools shipped in all the distros we care about=20
-
-I see autoconf 2.69 is available practically everywhere, starting
-with openSUSE 12.2, which was released in Q3 2012. SLE11, which
-can not be properly supported anymore, had autoconf 2.63.
-
-Olaf
-
---Sig_/2XJAvCeX1h5QXBA=J4ahXuy
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXN1jGwAKCRBdQqD6ppg2
-fubKAKChsq3XlnmsP9HvITvOqSj+ue8GDwCg2khsEr/Tlq7KqrYzXj3uOI3EfEE=
-=AupZ
------END PGP SIGNATURE-----
-
---Sig_/2XJAvCeX1h5QXBA=J4ahXuy--
-
-
---===============5834601083299149723==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5834601083299149723==--
+VGhlIHBhdGNoIHJlc29sdmVzICd4ZW5jb3YnIGNyYXNoZXMgaW4gY2FzZSBvZiBBYXJjaDY0LgoK
+QWxsIHRoZSAuaW5pdC4qIHNlY3Rpb25zIGFyZSBzdHJpcHBlZCBhZnRlciBib290LAppdCBtZWFu
+cyB0aGF0IGFueXRoaW5nIGluIC5pbml0LmRhdGEgY2Fubm90IGJlIGFjY2Vzc2VkIGFueW1vcmUu
+ClRoZSBidWlsZCBzeXN0ZW0gZXhwbGljaXRseSBjb21waWxlcyBhbnkgLmluaXQgYmluYXJ5IHdp
+dGhvdXQgZ2NvdiBvcHRpb24uClRoZSBwcm9ibGVtIGlzIGNvbWluZyBmcm9tIGxpYmZkdCBhbmQg
+bGliZWxmLgpUaGUgZW50aXJlIGxpYnJhcnkgaXMgbW92ZWQgdG8gLmluaXQgdXNpbmc6CiQoT0JK
+Q09QWSkgJChmb3JlYWNoIHMsJChTRUNUSU9OUyksLS1yZW5hbWUtc2VjdGlvbiAuJChzKT0uaW5p
+dC4kKHMpKSAkPCAkQApTbyB3ZSBuZWVkIHRvIHRlbGwgdGhlIHRvcCBNYWtlZmlsZSB0byBmaWx0
+ZXIgb3V0IGxpYmZkdCBhbmQgbGliZWxmLgoKUmVwb3J0ZWQtYnk6IFZpa3RvciBNaXRpbiA8dmlr
+dG9yLm1pdGluLjE5QGdtYWlsLmNvbT4KU3VnZ2VzdGVkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGll
+bi5ncmFsbEBhcm0uY29tPgpTaWduZWQtb2ZmLWJ5OiBWaWt0b3IgTWl0aW4gPHZpa3Rvci5taXRp
+bi4xOUBnbWFpbC5jb20+CkFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0Bj
+aXRyaXguY29tPgpSZXZpZXdlZC1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KVGVz
+dGVkLWJ5OiBWaWt0b3IgTWl0aW4gPHZpa3Rvci5taXRpbi4xOUBnbWFpbC5jb20+CgotLS0KCkNo
+YW5nZXMgZnJvbSB2MToKCiAtIGNvdmVyYWdlOiBmaWx0ZXJlZCBvdXQgbGliZWxmIGFzIHdlbGwK
+LS0tCiB4ZW4vY29tbW9uL2xpYmVsZi9NYWtlZmlsZSB8IDEgKwogeGVuL2NvbW1vbi9saWJmZHQv
+TWFrZWZpbGUgfCAxICsKIDIgZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCspCgpkaWZmIC0t
+Z2l0IGEveGVuL2NvbW1vbi9saWJlbGYvTWFrZWZpbGUgYi94ZW4vY29tbW9uL2xpYmVsZi9NYWtl
+ZmlsZQppbmRleCA1YmY4Zjc2NGYxLi4zZDllMzhmMjdlIDEwMDY0NAotLS0gYS94ZW4vY29tbW9u
+L2xpYmVsZi9NYWtlZmlsZQorKysgYi94ZW4vY29tbW9uL2xpYmVsZi9NYWtlZmlsZQpAQCAtMSw0
+ICsxLDUgQEAKIG9iai1iaW4teSA6PSBsaWJlbGYubworbm9jb3YteSArPSBsaWJlbGYubwogCiBT
+RUNUSU9OUyA6PSB0ZXh0IGRhdGEgJChTUEVDSUFMX0RBVEFfU0VDVElPTlMpCiAKZGlmZiAtLWdp
+dCBhL3hlbi9jb21tb24vbGliZmR0L01ha2VmaWxlIGIveGVuL2NvbW1vbi9saWJmZHQvTWFrZWZp
+bGUKaW5kZXggZDgxZjU0YjZiOC4uYzA3NWJiZjU0NiAxMDA2NDQKLS0tIGEveGVuL2NvbW1vbi9s
+aWJmZHQvTWFrZWZpbGUKKysrIGIveGVuL2NvbW1vbi9saWJmZHQvTWFrZWZpbGUKQEAgLTMsNiAr
+Myw3IEBAIGluY2x1ZGUgTWFrZWZpbGUubGliZmR0CiBTRUNUSU9OUyA6PSB0ZXh0IGRhdGEgJChT
+UEVDSUFMX0RBVEFfU0VDVElPTlMpCiAKIG9iai15ICs9IGxpYmZkdC5vCitub2Nvdi15ICs9IGxp
+YmZkdC5vCiAKIENGTEFHUyArPSAtSSQoQkFTRURJUikvaW5jbHVkZS94ZW4vbGliZmR0LwogCi0t
+IAoyLjE3LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
