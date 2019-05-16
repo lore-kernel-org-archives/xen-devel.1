@@ -3,38 +3,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
-	autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B89BDC04AB4
-	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2019 08:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7F93C04AB4
+	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2019 08:30:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 93BDE206A3
-	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2019 08:10:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93BDE206A3
+	by mail.kernel.org (Postfix) with ESMTPS id C251A20848
+	for <xen-devel@archiver.kernel.org>; Thu, 16 May 2019 08:30:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C251A20848
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hRBSR-0008IA-Ix; Thu, 16 May 2019 08:09:43 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+	id 1hRBm6-0001RQ-CP; Thu, 16 May 2019 08:30:02 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=xQgL=TQ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hRBSQ-0008I5-VC
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 08:09:43 +0000
-X-Inumbo-ID: f489e89a-77b1-11e9-8980-bc764e045a96
+ id 1hRBm5-0001Ot-GV
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 08:30:01 +0000
+X-Inumbo-ID: c96d3c70-77b4-11e9-b785-c3725d8fb411
 Received: from mx1.suse.de (unknown [195.135.220.15])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id f489e89a-77b1-11e9-8980-bc764e045a96;
- Thu, 16 May 2019 08:09:41 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c96d3c70-77b4-11e9-b785-c3725d8fb411;
+ Thu, 16 May 2019 08:29:57 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 6656DABB1
- for <xen-devel@lists.xenproject.org>; Thu, 16 May 2019 08:09:39 +0000 (UTC)
-To: xen-devel <xen-devel@lists.xenproject.org>, Olaf Hering <ohering@suse.com>
+ by mx1.suse.de (Postfix) with ESMTP id 9D928AE84
+ for <xen-devel@lists.xenproject.org>; Thu, 16 May 2019 08:29:56 +0000 (UTC)
+To: Olaf Hering <ohering@suse.com>
+References: <1ae5e201-04d0-2f78-878f-2e3a3e213b62@suse.com>
+ <20190516102706.4766f2c3.ohering@suse.com>
 From: Juergen Gross <jgross@suse.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=jgross@suse.com; prefer-encrypt=mutual; keydata=
@@ -68,13 +71,15 @@ Autocrypt: addr=jgross@suse.com; prefer-encrypt=mutual; keydata=
  1KQHe2uwXbKlguKPhk5ubZxqwsg/uIHw0qZDk+d0vxjTtO2JD5Jv/CeDgaBX4Emgp0NYs8IC
  UIyKXBtnzwiNv4cX9qKlz2Gyq9b+GdcLYZqMlIBjdCz0yJvgeb3WPNsCOanvbjelDhskx9gd
  6YUUFFqgsLtrKpCNyy203a58g2WosU9k9H+LcheS37Ph2vMVTISMszW9W8gyORSgmw==
-Message-ID: <1ae5e201-04d0-2f78-878f-2e3a3e213b62@suse.com>
-Date: Thu, 16 May 2019 10:09:38 +0200
+Message-ID: <ace62660-f070-27f7-37c5-e8b2d34967d5@suse.com>
+Date: Thu, 16 May 2019 10:29:56 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.6.1
 MIME-Version: 1.0
-Content-Language: en-US
-Subject: [Xen-devel] Regression in xen-unstable due to commit 3802ecbaa9eb36
+In-Reply-To: <20190516102706.4766f2c3.ohering@suse.com>
+Content-Language: de-DE
+Subject: Re: [Xen-devel] Regression in xen-unstable due to commit
+ 3802ecbaa9eb36
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,23 +90,18 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190516080938.NiV7NbYkApwtNZrmaUNkU_BFcMagxow8H9ooVnljbOY@z>
+Message-ID: <20190516082956.nJRM8LJUVgOAy3F8EqXOb6oQaxyjxuf_Q97wm6MCzTM@z>
 
-VGhlIHBhdGNoICJsaWJ4bDogYWRkIGhlbHBlciBmdW5jdGlvbiB0byBzZXQgZGV2aWNlX21vZGVs
-X3ZlcnNpb24iCmJyZWFrcyBjcmVhdGluZyBhbnkgZG9tYWluIGZvciBtZS4KCkNyZWF0aW5nIGEg
-UFYgb3IgSFZNIGd1ZXN0IHdpbGwgdHJpZ2dlciB0aGUgYXNzZXJ0aW9uCgphc3NlcnQoYl9pbmZv
-LT5kZXZpY2VfbW9kZWxfdmVyc2lvbik7CgphZGRlZCBieSB0aGF0IHBhdGNoLiBSZW1vdmluZyB0
-aGlzIGFzc2VydCgpIHdpbGwgdGhlbiB0cmlnZ2VyCgp4bDogbGlieGwuYzozMzk6IGxpYnhsX2Rl
-ZmJvb2xfdmFsOiBBc3NlcnRpb24KYCFsaWJ4bF9kZWZib29sX2lzX2RlZmF1bHQoZGIpJyBmYWls
-ZWQuCgp3aGljaCBpcyBjYWxsZWQgYnkgbGlieGxfX2RvbWFpbl9idWlsZF9pbmZvX3NldGRlZmF1
-bHQoKSBsaW5lIDE0MywKd2hpY2ggaGFzIGJlZW4gYWRkZWQgYnkgdGhlIHNhbWUgcGF0Y2guCgpI
-YXMgdGhpcyBwYXRjaCBldmVyIGJlZW4gdGVzdGVkIHRvIHdvcms/CgpJIGhhdmUgZG9uZSBhIG1h
-a2UgZGlzdGNsZWFuIGFuZCBjb25maWd1cmUsIHNvIEkgZG9uJ3QgdGhpbmsgdGhpcwpzaG91bGQg
-YmUgYSBzeXN0ZW0gc3BlY2lmaWMgcHJvYmxlbS4KCgpKdWVyZ2VuCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gMTYvMDUvMjAxOSAxMDoyNywgT2xhZiBIZXJpbmcgd3JvdGU6Cj4gQW0gVGh1LCAxNiBNYXkg
+MjAxOSAxMDowOTozOCArMDIwMAo+IHNjaHJpZWIgSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2Uu
+Y29tPjoKPiAKPj4gSGFzIHRoaXMgcGF0Y2ggZXZlciBiZWVuIHRlc3RlZCB0byB3b3JrPwo+IAo+
+IFdpdGggUFYgb25seS4gSSB3aWxsIGhhdmUgYSBsb29rLgoKSSBjYW4ndCBldmVuIHN0YXJ0IGEg
+UFYgZG9tVSAobWF5YmUgdGhhdCBpcyBkdWUgdG8gdXNpbmcgcWRpc2s/KS4KCgpKdWVyZ2VuCgoK
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
