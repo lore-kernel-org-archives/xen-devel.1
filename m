@@ -1,24 +1,21 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH V5 0/4] Renesas Stout board support (R-Car
- Gen2)
-Date: Thu, 16 May 2019 16:44:20 +0100
-Message-ID: <7bdd9edc-f14e-decf-60d5-f18efaea6526@arm.com>
-References: <1556816422-25185-1-git-send-email-olekstysh@gmail.com>
- <ec3339b0-6588-2a54-d0db-1e9c157f9259@arm.com>
- <128c02c6-412a-bb65-c665-133c525e506e@gmail.com>
- <08ad173c-2c2c-967c-84fa-6b848ab52659@arm.com>
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v3 1/1] xen: fix handling framebuffer
+ located above 4GB
+Date: Thu, 16 May 2019 17:45:13 +0200
+Message-ID: <20190516154513.GS1502@mail-itl>
+References: <cover.36e828561477c30a5472a8e9213ab0efc5484de8.1558015595.git-series.marmarek@invisiblethingslab.com>
+ <cover.36e828561477c30a5472a8e9213ab0efc5484de8.1558015595.git-series.marmarek@invisiblethingslab.com>
+ <93faeff91ee3e14320b5048818badc38460143e7.1558015595.git-series.marmarek@invisiblethingslab.com>
+ <5CDD7AD8020000780022FC7B@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============0183971947327430213=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Vv4c=TQ=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hRIYR-0004ko-E4
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 15:44:23 +0000
-In-Reply-To: <08ad173c-2c2c-967c-84fa-6b848ab52659@arm.com>
-Content-Language: en-US
+ <SRS0=Eh32=TQ=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hRIZO-0004oX-8B
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 15:45:22 +0000
+In-Reply-To: <5CDD7AD8020000780022FC7B@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,27 +24,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr <olekstysh@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, sstabellini@kernel.org
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwOC8wNS8yMDE5IDE3OjM0LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gCj4gCj4gT24g
-MDgvMDUvMjAxOSAxNzozMCwgT2xla3NhbmRyIHdyb3RlOgo+Pgo+PiBPbiAwOC4wNS4xOSAxOTox
-OSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4gSGkgT2xla3NhbmRyLAo+Pgo+PiBIaSBKdWxpZW4K
-Pj4KPj4KPj4+Cj4+PiBPbiAwMi8wNS8yMDE5IDE4OjAwLCBPbGVrc2FuZHIgVHlzaGNoZW5rbyB3
-cm90ZToKPj4+PiBPbGVrc2FuZHIgVHlzaGNoZW5rbyAoNCk6Cj4+Pj4gwqDCoCB4ZW4vYXJtOiBk
-cml2ZXJzOiBzY2lmOiBFeHRlbmQgZHJpdmVyIHRvIGhhbmRsZSBvdGhlciBpbnRlcmZhY2VzCj4+
-Pj4gwqDCoCB4ZW4vYXJtOiBkcml2ZXJzOiBzY2lmOiBBZGQgc3VwcG9ydCBmb3IgU0NJRkEgY29t
-cGF0aWJsZSBVQVJUcwo+Pj4KPj4+IEkgaGF2ZSBtZXJnZWQgdGhlIGZpcnN0IHR3byBwYXRjaGVz
-IGluIG15IGJyYW5jaCB4ZW4tNC4xMy4gSSB3aWxsIG1lcmdlIHRoZW0gCj4+PiBpbiBzdGFnaW5n
-IG9uIHRoZSB0cmVlIGlzIHJlb3BlbmVkLgo+Pgo+PiBUaGFuayB5b3UhCj4+Cj4+Cj4+IEp1c3Qg
-dG8gY2xhcmlmeToKPj4KPj4gV2UgYXJlIHdhaXRpbmcgZm9yIHRoZSByZXZpZXcgZnJvbSBTdGVm
-YW5vIGZvciB0aGUgZm9sbG93aW5nIHBhdGNoOgo+Pgo+PiAiW1BBVENIIFY1IDMvNF0geGVuL2Fy
-bTogRXh0ZW5kIFNDSUYgZWFybHkgcHJpbmsgY29kZSB0byBoYW5kbGUgb3RoZXIgaW50ZXJmYWNl
-cyIKPj4KPj4KPj4gQW0gSSBjb3JyZWN0Pwo+IAo+IFRoYXQncyBjb3JyZWN0LiBJZiBJIGRvbid0
-IGhlYXIgYW55dGhpbmcgYnkgTW9uZGF5LCBJIHdpbGwgbWVyZ2UgdGhlIHR3byBwYXRjaGVzLgoK
-SSBoYXZlbid0IGhlYXJkIGFueXRoaW5nIGZyb20gU3RlZmFuby4gSSBoYXZlIG5vdyBtZXJnZWQg
-dGhlIHR3byByZW1haW5pbmcgcGF0Y2hlcy4KCj4gCj4gQ2hlZXJzLAo+IAoKLS0gCkp1bGllbiBH
-cmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0183971947327430213==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="4tkssvp36SW1tyIS"
+Content-Disposition: inline
+
+
+--4tkssvp36SW1tyIS
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, May 16, 2019 at 08:59:36AM -0600, Jan Beulich wrote:
+> >>> On 16.05.19 at 16:07, <marmarek@invisiblethingslab.com> wrote:
+> > --- a/xen/drivers/video/vesa.c
+> > +++ b/xen/drivers/video/vesa.c
+> > @@ -40,6 +40,11 @@ static int __init parse_font_height(const char *s)
+> >  }
+> >  custom_param("font", parse_font_height);
+> > =20
+> > +static inline paddr_t lfb_base(void)
+> > +{
+> > +    return (paddr_t)((vlfb_info.ext_lfb_base) << 32) | vlfb_info.lfb_b=
+ase;
+>=20
+> I'm afraid you've misplaced the parentheses here. I wonder if
+> this has worked for you at all.
+
+Indeed it's messed up...
+
+>     return ((paddr_t)vlfb_info.ext_lfb_base << 32) | vlfb_info.lfb_base;
+
+This works fine.
+
+> > --- a/xen/include/public/xen.h
+> > +++ b/xen/include/public/xen.h
+> > @@ -923,6 +923,11 @@ typedef struct dom0_vga_console_info {
+> >              /* Mode attributes (offset 0x0, VESA command 0x4f01). */
+> >              uint16_t mode_attrs;
+> >  #endif
+> > +#if __XEN_INTERFACE_VERSION__ >=3D 0x00040d00
+> > +            uint16_t _pad;
+
+And also compat checker don't like this name. I've changed it to "pad"
+(v4 upcoming).
+
+> > +            /* high 32 bits of lfb_base */
+> > +            uint32_t ext_lfb_base;
+> > +#endif
+>=20
+> Strictly speaking the padding field belongs ahead of the earlier
+> #endif.
+>=20
+> Both aspects can be fixed while committing, but confirmation on
+> the first wrt it working for you would still be nice. With them in
+> place
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--4tkssvp36SW1tyIS
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAlzdhYkACgkQ24/THMrX
+1yzlQQf5AdkV3enTF5zr50XdDaPnFTnE8fRQYAm5w2EXS16kzZCCmi1M3Zc6ccAZ
+8nBknfvFziXafzVNShgMNxKLtPxaOAz6JAu+lTdzYSUOAW5DzVAxkmZkJcRiUpCw
+m6ShTl1rrUEGSKd1gqQSRVv4Qw0RVNTewSQ7Z31T3sNGFvuHQTg2xa+WS6JiWB59
+GfW3Rl8ZXBdBXZGDYLIf7SqeLkmckhONbHI5MhDb6F+AcWer+qSJNPfxVk/NnubF
+jtDko8Nrw9JlWxu6KapfqoP2OHdTDWLhjOd8C29+Am5sX01FqCx6r9cyZUl7nXSj
+4KMisfvuyTCJD6Yp3EF6aRt2NJMzMw==
+=+I7K
+-----END PGP SIGNATURE-----
+
+--4tkssvp36SW1tyIS--
+
+
+--===============0183971947327430213==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0183971947327430213==--
