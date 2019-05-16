@@ -1,26 +1,24 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v2 1/2] KVM: Start populating
- /sys/hypervisor with KVM entries
-Date: Thu, 16 May 2019 11:02:15 -0400
-Message-ID: <92f2f186-2e29-d798-84bd-7209e874f103__43272.8742527374$1558019033$gmane$org@oracle.com>
-References: <1539078879-4372-1-git-send-email-sironi@amazon.de>
- <1557847002-23519-1-git-send-email-sironi@amazon.de>
- <1557847002-23519-2-git-send-email-sironi@amazon.de>
- <e976f31b-2ccd-29ba-6a32-2edde49f867f@amazon.com>
- <7aae3e49-5b1c-96d1-466e-5b061305dc9d@citrix.com>
- <22fadfb1-e48d-ccb6-0e42-c105b7335d7a@amazon.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v1] libxl: fix device_model_version related
+ assert
+Date: Thu, 16 May 2019 16:03:55 +0100
+Message-ID: <20190516150355.GJ2798@zion.uk.xensource.com>
+References: <20190516125000.23559-1-olaf@aepfle.de>
+ <20190516133013.GG2798@zion.uk.xensource.com>
+ <20190516153601.45352e5c.olaf@aepfle.de>
+ <20190516134653.GI2798@zion.uk.xensource.com>
+ <20190516155455.3a97d2fb.olaf@aepfle.de>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=qiPN=TQ=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1hRHuO-0000PP-FT
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 15:03:00 +0000
-In-Reply-To: <22fadfb1-e48d-ccb6-0e42-c105b7335d7a@amazon.com>
-Content-Language: en-US
+ <SRS0=dWcr=TQ=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hRHvK-0000U2-S9
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 15:03:58 +0000
+Content-Disposition: inline
+In-Reply-To: <20190516155455.3a97d2fb.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,16 +27,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Alexander Graf <graf@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Filippo Sironi <sironi@amazon.de>, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, borntraeger@de.ibm.com, cohuck@redhat.com, konrad.wilk@oracle.com, xen-devel@lists.xenproject.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gNS8xNi8xOSAxMDowOCBBTSwgQWxleGFuZGVyIEdyYWYgd3JvdGU6Cj4KPiBNeSBwb2ludCBp
-cyBtb3N0bHkgdGhhdCB3ZSBzaG91bGQgYmUgYXMgY29tbW9uCj4gYXMgcG9zc2libGUgd2hlbiBp
-dCBjb21lcyB0byAvc3lzL2h5cGVydmlzb3IsIHNvIHRoYXQgdG9vbHMgZG9uJ3QgaGF2ZQo+IHRv
-IGNhcmUgYWJvdXQgdGhlIEhWIHRoZXkncmUgd29ya2luZyBhZ2FpbnN0LgoKSXQgbWlnaHQgbWFr
-ZSBzZW5zZSB0byBoYXZlIGEgY29tbW9uIHN5cy1oeXBlcnZpc29yLmMgZmlsZQooZHJpdmVycy9o
-eXBlcnZpc29yL3N5cy1oeXBlcnZpc29yLmMgb3Igc29tZSBzdWNoKSwgd2l0aApoeXBlcnZpc29y
-LXNwZWNpZmljIG9wcy9jYWxsYmFja3MvZXRjLgoKLWJvcmlzCgoKCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBNYXkgMTYsIDIwMTkgYXQgMDM6NTQ6NTVQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
+dGU6Cj4gQW0gVGh1LCAxNiBNYXkgMjAxOSAxNDo0Njo1MyArMDEwMAo+IHNjaHJpZWIgV2VpIExp
+dSA8d2VpLmxpdTJAY2l0cml4LmNvbT46Cj4gCj4gPiBDYW4geW91IGNsYXJpZnk/Cj4gCj4gY3Jl
+YXRlX2RvbWFpbiBoYXMgYSBsaWJ4bF9kb21haW5fY29uZmlnIG9uIGl0cyBzdGFjay4gVGhpcyBp
+cyBwYXNzZWQgdG8KPiBmcmVlbWVtLCBhbmQgbGlieGxfZG9tYWluX25lZWRfbWVtb3J5IG1vZGlm
+aWVzIGl0IGFzIG5lZWRlZC4KPiBUaGUgbW9kaWZpY2F0aW9uIHdpbGwgZ28gdGhyb3VnaCBsaWJ4
+bF9kb21haW5fY3JlYXRlX25ldywgZG9fZG9tYWluX2NyZWF0ZSwKPiBpbml0aWF0ZV9kb21haW5f
+Y3JlYXRlIHRvIGxpYnhsX19kb21haW5fc2V0X2RldmljZV9tb2RlbC4gVGhpcyBmdW5jdGlvbgo+
+IHdpbGwgcmV0dXJuIHJpZ2h0IGF3YXkgYmVjYXVzZSBkZXZpY2VfbW9kZWxfdmVyc2lvbiBpcyBh
+bHJlYWR5IHNldC4KCkFoLCBJIGtub3cgd2hlcmUgdGhlIGNvbmZ1c2lvbiBpcyBub3cuIE5vdGUg
+dGhhdCB0aGUgYl9pbmZvIHVzZWQgaW4KbGlieGxfZG9tYWluX25lZWRfbWVtb3J5IGlzIGEgY29w
+eSwgbm90IHRoZSBvcmlnaW5hbCBvbmUsIHNvIHdoYXRldmVyCm1vZGlmaWNhdGlvbiB5b3UgZG8g
+dG8gaXQgd29uJ3QgZ2V0IHBhc3NlZCBiYWNrIHRvIGl0cyBjYWxsZXIuCgpOb3RpY2UgdGhlIGNh
+bGw6CiAgbGlieGxfZG9tYWluX2J1aWxkX2luZm9fY29weShjdHgsIGJfaW5mbywgYl9pbmZvX2lu
+KTsKCkFuZCB0aGVuIGxhdGVyOgogIGxpYnhsX2RvbWFpbl9idWlsZF9pbmZvX2Rpc3Bvc2UoYl9p
+bmZvKTsKCkRvZXMgdGhpcyBtYWtlIHNlbnNlPwoKV2VpLgoKPiAKPiBPbGFmCgoKCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
