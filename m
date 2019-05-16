@@ -1,20 +1,23 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH] libxl: fix regression introduced in
- 5c883cf036cf
-Date: Thu, 16 May 2019 11:00:01 +0100
-Message-ID: <23773.13473.418042.796038@mariner.uk.xensource.com>
-References: <20190516091153.31502-1-wei.liu2@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: struct vcpu_guest_core_reg stable ABI?
+Date: Thu, 16 May 2019 04:06:33 -0600
+Message-ID: <5CDD3629020000780022F875@prv1-mh.provo.novell.com>
+References: <3c245c5b-51c6-1d0e-ad6c-42414573166f@arm.com>
+ <85205f11-1d5c-1f6d-e987-c238a025658e@citrix.com>
+ <5CDD182B020000780022F768@prv1-mh.provo.novell.com>
+ <93260863-5972-6b27-11f5-8147901ab6e9@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=62Tc=TQ=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hRDBm-0002Io-Kn
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 10:00:38 +0000
-In-Reply-To: <20190516091153.31502-1-wei.liu2@citrix.com>
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=YVeS=TQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hRDHY-0002UJ-7K
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 10:06:36 +0000
+In-Reply-To: <93260863-5972-6b27-11f5-8147901ab6e9@citrix.com>
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -23,20 +26,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-V2VpIExpdSB3cml0ZXMgKCJbUEFUQ0hdIGxpYnhsOiBmaXggcmVncmVzc2lvbiBpbnRyb2R1Y2Vk
-IGluIDVjODgzY2YwMzZjZiIpOgo+IFR3byBsaW5lcyB3ZXJlIGVycm9uZW91c2x5IGRlbGV0ZWQg
-ZHVyaW5nIHJlYmFzZSB3aGljaCBjYXVzZWQgZG9tYWluCj4gZGVzdHJ1Y3Rpb24gdG8gZmFpbC4K
-CkkgaGF2ZSB0YWtlbiB0aGlzIGFzIGEgc2lnbiB0aGF0IEkgc2hvdWxkIGhhdmUgcHJvcGVybHkg
-cmV2aWV3ZWQgd2hhdApiZWNhbWUgNWM4ODNjZjAzNmNmLgoKSGF2aW5nIGRvbmUgc28gSSBoYXZl
-IGFsc28gc3BvdHRlZCB0aGF0OgoKVGhlIG5ld2x5IGludHJvZHVjZWQgRVJST1JfRkFJTCByZXR1
-cm5zIGluIGxpYnhsIHNob3VsZCBiZSBFUlJPUl9OSQooIm5vdCBpbXBsZW1lbnRlZCIpLgoKQnV0
-IEkgZGlkbid0IHNlZSBhbnl0aGluZyBlbHNlLCBvdGhlciB0aGFuIHRoZSByZWJhc2UgZXJyb3Ig
-dGhhdCB5b3UKYXJlIGZpeGluZyBub3cuICBTbyBmb3IgdGhpcyBwYXRjaDoKCkFja2VkLWJ5OiBJ
-YW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCklhbi4KCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+Pj4+IE9uIDE2LjA1LjE5IGF0IDExOjE4LCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gRG8gKmFueSogT1NlcyBhY3R1YWxseSB1c2UgVkNQVU9QX2luaXRpYWxpc2UgZm9yIFBW
+SCBndWVzdHM/ICBJIGNhbid0Cj4gdGhpbmsgb2YgYW55IG9mZmhhbmQuCgpJZiBub25lIGRvZXMs
+IHdoeSB3b3VsZCBhcmNoX3NldF9pbmZvX2h2bV9ndWVzdCgpIGhhdmUgYmVlbgppbnRyb2R1Y2Vk
+LCB0byBjYXJyeSBvdXQgdGhhdCBvcCAodmlhIGFyY2hfaW5pdGlhbGlzZV92Y3B1KCkpPwpYRU5f
+RE9NQ1RMX3NldHZjcHVjb250ZXh0IHVzZXMgYXJjaF9zZXRfaW5mb19ndWVzdCgpCnVuaWZvcm1s
+eSBhZnRlciBhbGwuIChUaGUgcGF0Y2ggZG9pbmcgdGhpcyBldmVuIGhhcyB5b3VyIFMtby1iLikK
+CkphbgoKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
