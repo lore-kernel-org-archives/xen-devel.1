@@ -1,17 +1,22 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: [PATCH] libxl: fix regression introduced in 5c883cf036cf
-Date: Thu, 16 May 2019 10:11:53 +0100
-Message-ID: <20190516091153.31502-1-wei.liu2@citrix.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: domains do not shutdown properly with current staging
+Date: Thu, 16 May 2019 11:15:14 +0200
+Message-ID: <20190516111514.79e72bfc.olaf@aepfle.de>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7530347285053595090=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=dWcr=TQ=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1hRCQo-0006La-DE
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 09:12:06 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=ZPM6=TQ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hRCTw-0006Uf-Qs
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 09:15:21 +0000
+Received: from sender by smtp.strato.de (RZmta 44.20 AUTH)
+ with ESMTPSA id U080cav4G9FGDuO
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
+ 521 ECDH bits, eq. 15360 bits RSA))
+ (Client did not present a certificate)
+ for <xen-devel@lists.xenproject.org>;
+ Thu, 16 May 2019 11:15:16 +0200 (CEST)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,24 +26,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-VHdvIGxpbmVzIHdlcmUgZXJyb25lb3VzbHkgZGVsZXRlZCBkdXJpbmcgcmViYXNlIHdoaWNoIGNh
-dXNlZCBkb21haW4KZGVzdHJ1Y3Rpb24gdG8gZmFpbC4KClNpZ25lZC1vZmYtYnk6IFdlaSBMaXUg
-PHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQpTb3JyeSBteSB1c3VhbCB0ZXN0IHNjcmlwdCBmYWls
-ZWQgdG8gY2F0Y2ggdGhpcy4KLS0tCiB0b29scy9saWJ4bC9saWJ4bF9kZXZpY2UuYyB8IDUgKysr
-KysKIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykKCmRpZmYgLS1naXQgYS90b29scy9s
-aWJ4bC9saWJ4bF9kZXZpY2UuYyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2RldmljZS5jCmluZGV4IGY4
-MzQwYmE4MTUuLmRiNmMwMjAzYjcgMTAwNjQ0Ci0tLSBhL3Rvb2xzL2xpYnhsL2xpYnhsX2Rldmlj
-ZS5jCisrKyBiL3Rvb2xzL2xpYnhsL2xpYnhsX2RldmljZS5jCkBAIC03MzQsNiArNzM0LDExIEBA
-IGludCBsaWJ4bF9fZGV2aWNlX2Rlc3Ryb3kobGlieGxfX2djICpnYywgbGlieGxfX2RldmljZSAq
-ZGV2KQogICAgIHVpbnQzMl90IGRvbWlkOwogICAgIGludCBsaWJ4bF9vbmx5ID0gZGV2LT5iYWNr
-ZW5kX2tpbmQgPT0gTElCWExfX0RFVklDRV9LSU5EX05PTkU7CiAKKyAgICBpZiAoIWxpYnhsX29u
-bHkpIHsKKyAgICAgICAgYmVfcGF0aCA9IGxpYnhsX19kZXZpY2VfYmFja2VuZF9wYXRoKGdjLCBk
-ZXYpOworICAgICAgICBmZV9wYXRoID0gbGlieGxfX2RldmljZV9mcm9udGVuZF9wYXRoKGdjLCBk
-ZXYpOworICAgIH0KKwogICAgIHJjID0gbGlieGxfX2dldF9kb21pZChnYywgJmRvbWlkKTsKICAg
-ICBpZiAocmMpIGdvdG8gb3V0OwogCi0tIAoyLjIwLjEKCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+--===============7530347285053595090==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/iswCVZqbS3LNdAZxP4m.zOx"; protocol="application/pgp-signature"
+
+--Sig_/iswCVZqbS3LNdAZxP4m.zOx
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+While preparing the recent b_info->device_model_version change all my testi=
+ng
+went fine. But now with "2019-05-15 16:19:57 +0100 git:2a556b63a2" all domUs
+(PV/HVM with and without device model) do not finish shutdown:
+
+Name                           ID   Mem VCPUs   State   Time(s)
+Domain-0                        0  3072     4     r-----     253.0
+pv_sle12sp2_c_qcow2             1   888     2     --ps--      82.9
+pv_sle12sp2_c_raw               2   888     2     --ps--      86.8
+fv_sle12sp2_c_raw               3   880     1     --ps--      20.8
+fv_sle12sp2_c_qcow2             4   880     1     --ps--     150.9
+
+Is anyone else seeing that?
+
+Olaf
+
+--Sig_/iswCVZqbS3LNdAZxP4m.zOx
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXN0qIgAKCRBdQqD6ppg2
+fnjzAJ9CC/gYgiymUADH2kanVUWKuR4KIwCeKkx2PALuURjEw53HFKZxT2OSBRc=
+=Sbz4
+-----END PGP SIGNATURE-----
+
+--Sig_/iswCVZqbS3LNdAZxP4m.zOx--
+
+
+--===============7530347285053595090==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7530347285053595090==--
