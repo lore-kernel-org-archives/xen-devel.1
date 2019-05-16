@@ -1,21 +1,23 @@
-From: Olaf Hering <ohering@suse.com>
-Subject: Re: Regression in xen-unstable due to commit
- 3802ecbaa9eb36
-Date: Thu, 16 May 2019 12:57:35 +0200
-Message-ID: <20190516125735.6c1bf1ca.ohering@suse.com>
-References: <1ae5e201-04d0-2f78-878f-2e3a3e213b62@suse.com>
- <20190516110735.67e19d15.ohering@suse.com>
- <20190516104540.7hiqsn6qjeaam2c6@Air-de-Roger>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH 1/4] x86/IRQ: don't keep EOI timer running
+ without need
+Date: Thu, 16 May 2019 13:03:44 +0200
+Message-ID: <20190516110344.mfifufhzrd4cjdlx@Air-de-Roger>
+References: <5CD2CDEC020000780022CC95@prv1-mh.provo.novell.com>
+ <5CD2CFA1020000780022CCA6@prv1-mh.provo.novell.com>
+ <20190516103238.pm6ducegde3xw5wz@Air-de-Roger>
+ <5CDD406E020000780022F906@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1850854028604749198=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ADxN=TQ=suse.com=ohering@srs-us1.protection.inumbo.net>)
- id 1hRE51-00071m-Nk
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 10:57:43 +0000
-In-Reply-To: <20190516104540.7hiqsn6qjeaam2c6@Air-de-Roger>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=wixq=TQ=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1hREB3-0007ot-8U
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 11:03:57 +0000
+Content-Disposition: inline
+In-Reply-To: <5CDD406E020000780022F906@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,54 +26,48 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
---===============1850854028604749198==
-Content-Type: multipart/signed; micalg=pgp-sha1;
- boundary="Sig_/WIdtaROZ2VCemD2o8GefReS"; protocol="application/pgp-signature"
-
---Sig_/WIdtaROZ2VCemD2o8GefReS
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-Am Thu, 16 May 2019 12:45:40 +0200
-schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
-
-> Having a field in build_info with a default value that depends on
-> fields outside of build_info is problematic, since not all callers of
-> libxl__domain_build_info_setdefault have access to libxl_domain_config.
-
-One option would be a new API that gets a libxl_domain_config and which
-calls libxl__domain_set_device_model, libxl__domain_create_info_setdefault
-and libxl__domain_build_info_setdefault. To me it looks like create_domain
-can not build a proper d_config all on its own, it just has not enough info.
-
-Olaf
-
---Sig_/WIdtaROZ2VCemD2o8GefReS
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXN1CHwAKCRBdQqD6ppg2
-fsN0AKDQBG4D/Nyh+IFwIgmk7Yyv3nEGyQCgzCnUzbJ/xeKtLCyVOFDrEE4OZew=
-=nju0
------END PGP SIGNATURE-----
-
---Sig_/WIdtaROZ2VCemD2o8GefReS--
-
-
---===============1850854028604749198==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1850854028604749198==--
+T24gVGh1LCBNYXkgMTYsIDIwMTkgYXQgMDQ6NTA6MjJBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDE2LjA1LjE5IGF0IDEyOjMyLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdy
+b3RlOgo+ID4gT24gV2VkLCBNYXkgMDgsIDIwMTkgYXQgMDY6NDY6MjVBTSAtMDYwMCwgSmFuIEJl
+dWxpY2ggd3JvdGU6Cj4gPj4gVGhlIHRpbWVyIG5lZWRzIHRvIHJlbWFpbiBhY3RpdmUgb25seSB1
+bnRpbCBhbGwgcGVuZGluZyBJUlEgaW5zdGFuY2VzCj4gPj4gaGF2ZSBzZWVuIEVPSXMgZnJvbSB0
+aGVpciByZXNwZWN0aXZlIGRvbWFpbnMuIFN0b3AgaXQgd2hlbiB0aGUgaW4tZmxpZ2h0Cj4gPj4g
+Y291bnQgaGFzIHJlYWNoZWQgemVybyBpbiBkZXNjX2d1ZXN0X2VvaSgpLiBOb3RlIHRoYXQgdGhp
+cyBpcyByYWNlIGZyZWUKPiA+PiAod2l0aCBfX2RvX0lSUV9ndWVzdCgpKSwgYXMgdGhlIElSUSBk
+ZXNjcmlwdG9yIGxvY2sgaXMgYmVpbmcgaGVsZCBhdAo+ID4+IHRoYXQgcG9pbnQuCj4gPj4gCj4g
+Pj4gQWxzbyBwdWxsIHVwIHN0b3BwaW5nIG9mIHRoZSB0aW1lciBpbiBfX2RvX0lSUV9ndWVzdCgp
+IGl0c2VsZjogSW5zdGVhZAo+ID4+IG9mIHN0b3BwaW5nIGl0IGltbWVkaWF0ZWx5IGJlZm9yZSBy
+ZS1zZXR0aW5nLCBzdG9wIGl0IGFzIHNvb24gYXMgd2UndmUKPiA+PiBtYWRlIGl0IHBhc3QgYW55
+IGVhcmx5IHJldHVybnMgZnJvbSB0aGUgZnVuY3Rpb24gKGFuZCBoZW5jZSB3ZSdyZSBzdXJlCj4g
+Pj4gaXQnbGwgZ2V0IHNldCBhZ2FpbikuCj4gPj4gCj4gPj4gRmluYWxseSBiYWlsIGZyb20gdGhl
+IGFjdHVhbCB0aW1lciBoYW5kbGVyIGluIGNhc2Ugd2UgZmluZCB0aGUgdGltZXIKPiA+PiBhbHJl
+YWR5IGFjdGl2ZSBhZ2FpbiBieSB0aGUgdGltZSB3ZSd2ZSBtYW5hZ2VkIHRvIGFjcXVpcmUgdGhl
+IElSUQo+ID4+IGRlc2NyaXB0b3IgbG9jay4gV2l0aG91dCB0aGlzIHdlIG1heSBmb3JjaWJseSBF
+T0kgYW4gSVJRIGltbWVkaWF0ZWx5Cj4gPj4gYWZ0ZXIgaXQgZ290IHNlbnQgdG8gYSBndWVzdC4g
+Rm9yIHRoaXMsIHRpbWVyX2lzX2FjdGl2ZSgpIGdldHMgc3BsaXQgb3V0Cj4gPj4gb2YgYWN0aXZl
+X3RpbWVyKCksIGRlbGliZXJhdGVseSBtb3ZpbmcganVzdCBvbmUgb2YgdGhlIHR3byBBU1NFUlQo
+KXMgKHRvCj4gPj4gYWxsb3cgdGhlIGZ1bmN0aW9uIHRvIGJlIHVzZWQgYWxzbyBvbiBhIG5ldmVy
+IGluaXRpYWxpemVkIHRpbWVyKS4KPiA+IAo+ID4gQUZBSUNUIHRpbWVyX2lzX2FjdGl2ZSBpcyBl
+eGNsdXNpdmVseSB1c2VkIGluIGlycV9ndWVzdF9lb2lfdGltZXJfZm4sCj4gPiB3aGljaCBtdXN0
+IGhhdmUgaW5pdGlhbGl6ZWQgdGhlIHRpbWVyIGluIG9yZGVyIGZvcgo+ID4gaXJxX2d1ZXN0X2Vv
+aV90aW1lcl9mbiB0byBiZSBjYWxsZWQsIGFuZCBoZW5jZSBJJ20gbm90IHN1cmUgd2h5IHlvdQo+
+ID4gbmVlZCB0byBiZSBhYmxlIHRvIGNhbGwgdGltZXJfaXNfYWN0aXZlIHdpdGggYW4gdW5pbml0
+aWFsaXplZCB0aW1lci4KPiAKPiBJdCdzIG5vdCBuZWVkZWQgaGVyZSwgYnV0IEkgY29uc2lkZXIg
+dGhpcyB1c2VmdWwgYmVoYXZpb3Igd2hlbiB1c2VkCj4gb3V0c2lkZSBvZiB0aGUgc3BlY2lmaWMg
+dGltZXIncyBoYW5kbGVyLgo+IAo+ID4gSXMgdGhpcyBtYXliZSB1c2VkIGJ5IG90aGVyIHBhdGNo
+ZXM/Cj4gCj4gTm9uZSB0aGF0IEkgd291bGQgaGF2ZSBpbiB0aGUgd29ya3MuCgpUaGVuIElNTyBJ
+IHdvdWxkIHJhdGhlciBtYWtlIHRpbWVyX2lzX2FjdGl2ZSBhIHJlcGxhY2VtZW50IGZvcgphY3Rp
+dmVfdGltZXIgKG9yIGp1c3QgbW92ZSBhY3RpdmVfdGltZXIgdG8gdGhlIGhlYWRlcikgaWYgdGhl
+cmUncyBubwp1c2VyIHRoYXQgY2FuIGNhbGwgdGltZXJfaXNfYWN0aXZlIHdpdGggYW4gdW5pbml0
+aWFsaXplZCB0aW1lci4gSWU6IEkKd291bGQga2VlcCB0aGUgYXNzZXJ0cyBhcyByZXN0cmljdGl2
+ZSBhcyBwb3NzaWJsZSB1bmxlc3MgdGhlcmUncyBhCnVzZXIgdGhhdCByZXF1aXJlcyBsZXNzIHJl
+c3RyaWN0aXZlIGFzc2VydGlvbnMuCgpBbnl3YXksIHRoZSBjaGFuZ2UgaXMgYW4gaW1wcm92ZW1l
+bnQsIHNvIHdpdGggb3Igd2l0aG91dCB0aGF0IGNoYW5nZWQ6CgpSZXZpZXdlZC1ieTogUm9nZXIg
+UGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CgpUaGFua3MuCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
