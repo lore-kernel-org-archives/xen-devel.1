@@ -1,21 +1,26 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v3 1/1] xen: fix handling framebuffer
- located above 4GB
-Date: Thu, 16 May 2019 08:59:36 -0600
-Message-ID: <5CDD7AD8020000780022FC7B@prv1-mh.provo.novell.com>
-References: <cover.36e828561477c30a5472a8e9213ab0efc5484de8.1558015595.git-series.marmarek@invisiblethingslab.com><cover.36e828561477c30a5472a8e9213ab0efc5484de8.1558015595.git-series.marmarek@invisiblethingslab.com>
- <93faeff91ee3e14320b5048818badc38460143e7.1558015595.git-series.marmarek@invisiblethingslab.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Subject: Re: [PATCH v2 1/2] KVM: Start populating
+ /sys/hypervisor with KVM entries
+Date: Thu, 16 May 2019 11:02:15 -0400
+Message-ID: <92f2f186-2e29-d798-84bd-7209e874f103__43272.8742527374$1558019033$gmane$org@oracle.com>
+References: <1539078879-4372-1-git-send-email-sironi@amazon.de>
+ <1557847002-23519-1-git-send-email-sironi@amazon.de>
+ <1557847002-23519-2-git-send-email-sironi@amazon.de>
+ <e976f31b-2ccd-29ba-6a32-2edde49f867f@amazon.com>
+ <7aae3e49-5b1c-96d1-466e-5b061305dc9d@citrix.com>
+ <22fadfb1-e48d-ccb6-0e42-c105b7335d7a@amazon.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=YVeS=TQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hRHr8-000871-6z
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 14:59:38 +0000
-In-Reply-To: <93faeff91ee3e14320b5048818badc38460143e7.1558015595.git-series.marmarek@invisiblethingslab.com>
-Content-Disposition: inline
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=qiPN=TQ=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1hRHuO-0000PP-FT
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 15:03:00 +0000
+In-Reply-To: <22fadfb1-e48d-ccb6-0e42-c105b7335d7a@amazon.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,32 +29,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Marek Marczykowski <marmarek@invisiblethingslab.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Roger Pau Monne <roger.pau@citrix.com>
+To: Alexander Graf <graf@amazon.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Filippo Sironi <sironi@amazon.de>, linux-kernel@vger.kernel.org, kvm@vger.kernel.org, borntraeger@de.ibm.com, cohuck@redhat.com, konrad.wilk@oracle.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE2LjA1LjE5IGF0IDE2OjA3LCA8bWFybWFyZWtAaW52aXNpYmxldGhpbmdzbGFiLmNv
-bT4gd3JvdGU6Cj4gLS0tIGEveGVuL2RyaXZlcnMvdmlkZW8vdmVzYS5jCj4gKysrIGIveGVuL2Ry
-aXZlcnMvdmlkZW8vdmVzYS5jCj4gQEAgLTQwLDYgKzQwLDExIEBAIHN0YXRpYyBpbnQgX19pbml0
-IHBhcnNlX2ZvbnRfaGVpZ2h0KGNvbnN0IGNoYXIgKnMpCj4gIH0KPiAgY3VzdG9tX3BhcmFtKCJm
-b250IiwgcGFyc2VfZm9udF9oZWlnaHQpOwo+ICAKPiArc3RhdGljIGlubGluZSBwYWRkcl90IGxm
-Yl9iYXNlKHZvaWQpCj4gK3sKPiArICAgIHJldHVybiAocGFkZHJfdCkoKHZsZmJfaW5mby5leHRf
-bGZiX2Jhc2UpIDw8IDMyKSB8IHZsZmJfaW5mby5sZmJfYmFzZTsKCkknbSBhZnJhaWQgeW91J3Zl
-IG1pc3BsYWNlZCB0aGUgcGFyZW50aGVzZXMgaGVyZS4gSSB3b25kZXIgaWYKdGhpcyBoYXMgd29y
-a2VkIGZvciB5b3UgYXQgYWxsLgoKICAgIHJldHVybiAoKHBhZGRyX3QpdmxmYl9pbmZvLmV4dF9s
-ZmJfYmFzZSA8PCAzMikgfCB2bGZiX2luZm8ubGZiX2Jhc2U7Cgo+IC0tLSBhL3hlbi9pbmNsdWRl
-L3B1YmxpYy94ZW4uaAo+ICsrKyBiL3hlbi9pbmNsdWRlL3B1YmxpYy94ZW4uaAo+IEBAIC05MjMs
-NiArOTIzLDExIEBAIHR5cGVkZWYgc3RydWN0IGRvbTBfdmdhX2NvbnNvbGVfaW5mbyB7Cj4gICAg
-ICAgICAgICAgIC8qIE1vZGUgYXR0cmlidXRlcyAob2Zmc2V0IDB4MCwgVkVTQSBjb21tYW5kIDB4
-NGYwMSkuICovCj4gICAgICAgICAgICAgIHVpbnQxNl90IG1vZGVfYXR0cnM7Cj4gICNlbmRpZgo+
-ICsjaWYgX19YRU5fSU5URVJGQUNFX1ZFUlNJT05fXyA+PSAweDAwMDQwZDAwCj4gKyAgICAgICAg
-ICAgIHVpbnQxNl90IF9wYWQ7Cj4gKyAgICAgICAgICAgIC8qIGhpZ2ggMzIgYml0cyBvZiBsZmJf
-YmFzZSAqLwo+ICsgICAgICAgICAgICB1aW50MzJfdCBleHRfbGZiX2Jhc2U7Cj4gKyNlbmRpZgoK
-U3RyaWN0bHkgc3BlYWtpbmcgdGhlIHBhZGRpbmcgZmllbGQgYmVsb25ncyBhaGVhZCBvZiB0aGUg
-ZWFybGllcgojZW5kaWYuCgpCb3RoIGFzcGVjdHMgY2FuIGJlIGZpeGVkIHdoaWxlIGNvbW1pdHRp
-bmcsIGJ1dCBjb25maXJtYXRpb24gb24KdGhlIGZpcnN0IHdydCBpdCB3b3JraW5nIGZvciB5b3Ug
-d291bGQgc3RpbGwgYmUgbmljZS4gV2l0aCB0aGVtIGluCnBsYWNlClJldmlld2VkLWJ5OiBKYW4g
-QmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpKYW4KCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gNS8xNi8xOSAxMDowOCBBTSwgQWxleGFuZGVyIEdyYWYgd3JvdGU6Cj4KPiBNeSBwb2ludCBp
+cyBtb3N0bHkgdGhhdCB3ZSBzaG91bGQgYmUgYXMgY29tbW9uCj4gYXMgcG9zc2libGUgd2hlbiBp
+dCBjb21lcyB0byAvc3lzL2h5cGVydmlzb3IsIHNvIHRoYXQgdG9vbHMgZG9uJ3QgaGF2ZQo+IHRv
+IGNhcmUgYWJvdXQgdGhlIEhWIHRoZXkncmUgd29ya2luZyBhZ2FpbnN0LgoKSXQgbWlnaHQgbWFr
+ZSBzZW5zZSB0byBoYXZlIGEgY29tbW9uIHN5cy1oeXBlcnZpc29yLmMgZmlsZQooZHJpdmVycy9o
+eXBlcnZpc29yL3N5cy1oeXBlcnZpc29yLmMgb3Igc29tZSBzdWNoKSwgd2l0aApoeXBlcnZpc29y
+LXNwZWNpZmljIG9wcy9jYWxsYmFja3MvZXRjLgoKLWJvcmlzCgoKCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
