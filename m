@@ -1,25 +1,21 @@
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Subject: Re: Regression in xen-unstable due to commit
- 3802ecbaa9eb36
-Date: Thu, 16 May 2019 13:42:55 +0200
-Message-ID: <20190516114255.7t6re7yot6wp3mom@Air-de-Roger>
-References: <1ae5e201-04d0-2f78-878f-2e3a3e213b62@suse.com>
- <20190516110735.67e19d15.ohering@suse.com>
- <20190516104540.7hiqsn6qjeaam2c6@Air-de-Roger>
- <20190516125735.6c1bf1ca.ohering@suse.com>
- <20190516112450.GW2798@zion.uk.xensource.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: [PATCH 1/3] config.sub: Update config.sub to latest
+ version
+Date: Thu, 16 May 2019 13:44:32 +0200
+Message-ID: <20190516134432.3029d52a.olaf@aepfle.de>
+References: <20190516000212.13468-1-alistair.francis@wdc.com>
+ <5CDD3BF2020000780022F8AD@prv1-mh.provo.novell.com>
+ <20190516111330.GA32248@aepfle.de>
+ <20190516113902.GZ2798@zion.uk.xensource.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7076955369073338211=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=wixq=TQ=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hREmy-0003ne-QO
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 11:43:08 +0000
-Content-Disposition: inline
-In-Reply-To: <20190516112450.GW2798@zion.uk.xensource.com>
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=ZPM6=TQ=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hREoT-0003tt-Iy
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 11:44:42 +0000
+In-Reply-To: <20190516113902.GZ2798@zion.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -29,41 +25,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Wei Liu <wei.liu2@citrix.com>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Olaf Hering <ohering@suse.com>
+Cc: alistair23@gmail.com, Alistair Francis <alistair.francis@wdc.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXkgMTYsIDIwMTkgYXQgMTI6MjQ6NTBQTSArMDEwMCwgV2VpIExpdSB3cm90ZToK
-PiBPbiBUaHUsIE1heSAxNiwgMjAxOSBhdCAxMjo1NzozNVBNICswMjAwLCBPbGFmIEhlcmluZyB3
-cm90ZToKPiA+IEFtIFRodSwgMTYgTWF5IDIwMTkgMTI6NDU6NDAgKzAyMDAKPiA+IHNjaHJpZWIg
-Um9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+Ogo+ID4gCj4gPiA+IEhhdmlu
-ZyBhIGZpZWxkIGluIGJ1aWxkX2luZm8gd2l0aCBhIGRlZmF1bHQgdmFsdWUgdGhhdCBkZXBlbmRz
-IG9uCj4gPiA+IGZpZWxkcyBvdXRzaWRlIG9mIGJ1aWxkX2luZm8gaXMgcHJvYmxlbWF0aWMsIHNp
-bmNlIG5vdCBhbGwgY2FsbGVycyBvZgo+ID4gPiBsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9fc2V0
-ZGVmYXVsdCBoYXZlIGFjY2VzcyB0byBsaWJ4bF9kb21haW5fY29uZmlnLgo+ID4gCj4gPiBPbmUg
-b3B0aW9uIHdvdWxkIGJlIGEgbmV3IEFQSSB0aGF0IGdldHMgYSBsaWJ4bF9kb21haW5fY29uZmln
-IGFuZCB3aGljaAo+ID4gY2FsbHMgbGlieGxfX2RvbWFpbl9zZXRfZGV2aWNlX21vZGVsLCBsaWJ4
-bF9fZG9tYWluX2NyZWF0ZV9pbmZvX3NldGRlZmF1bHQKPiA+IGFuZCBsaWJ4bF9fZG9tYWluX2J1
-aWxkX2luZm9fc2V0ZGVmYXVsdC4gVG8gbWUgaXQgbG9va3MgbGlrZSBjcmVhdGVfZG9tYWluCj4g
-PiBjYW4gbm90IGJ1aWxkIGEgcHJvcGVyIGRfY29uZmlnIGFsbCBvbiBpdHMgb3duLCBpdCBqdXN0
-IGhhcyBub3QgZW5vdWdoIGluZm8uCj4gCj4gSWYgeW91J3JlIHRhbGtpbmcgYWJvdXQgYWRkaW5n
-IGEgbmV3IF9wdWJsaWNfIEFQSToKPiAKPiBUaGUgcHJvYmxlbSB3aXRoIHRoaXMgYXBwcm9hY2gg
-aXMgdGhhdCBpdCBkb2Vzbid0IGhlbHAgZXhpc3RpbmcgbGlieGwKPiB1c2Vycy4gVGhleSB3aWxs
-IG5lZWQgdG8gYmUgZml4ZWQgYnkgY2FsbGluZyB0aGlzIG5ldyBBUEkuCj4gCj4gV2lsbCBpdCB3
-b3JrIGlmIDEpIHlvdSBtYWtlIGxpYnhsX19kb21haW5fc2V0X2RldmljZV9tb2RlbCBpZGVtcG90
-ZW50Cj4gYW5kIDIpIGNhbGwgaXQgZnJvbSB3aXRoaW4gbGlieGxfX2RvbWFpbl9idWlsZF9pbmZv
-X3NldGRlZmF1bHQgKHdoaWNoCj4gYmFzaWNhbGx5IHJlc3RvcmVzIHRoZSBvcmlnaW5hbCBjb2Rl
-IHBhdGggYmVmb3JlIHlvdXIgcGF0Y2gpPwoKQ2FsbGluZyBsaWJ4bF9fZG9tYWluX3NldF9kZXZp
-Y2VfbW9kZWwgZnJvbQpsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9fc2V0ZGVmYXVsdCB3b3VsZCBy
-ZXF1aXJlIHBhc3NpbmcKZG9tYWluX2NvbmZpZyB0byBsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9f
-c2V0ZGVmYXVsdCwgd2hpY2ggZ2V0cyBiYWNrCnRvIG15IHByb3Bvc2FsLgoKSW4gb3JkZXIgdG8g
-a25vdyBpZiBhIFBWIG9yIFBWSCBkb21haW4gcmVxdWlyZXMgYSBkZXZpY2UgbW9kZWwgKGZvcgp0
-aGUgUFYgYmFja2VuZHMpIGxpYnhsIG5lZWRzIHRvIGxvb2sgYXQgdGhlIGNvbnRlbnRzIG9mIGRv
-bWFpbl9jb25maWcKYmVjYXVzZSB0aGF0J3Mgd2hlcmUgdGhlIGxpc3Qgb2YgZGV2aWNlcyBpcyBz
-dG9yZWQuCgpBbm90aGVyIG9wdGlvbiB3b3VsZCBiZSB0byBkaWZmZXJlbnRpYXRlIGJldHdlZW4g
-ZGV2aWNlIG1vZGVsIGFuZCBQVgpiYWNrZW5kLiBJbiB0aGUgUFYvUFZIIGNhc2UgUUVNVSBpcyBu
-b3QgYWN0aW5nIGFzIGEgZGV2aWNlIG1vZGVsIGJ1dApyYXRoZXIgYXMgYSBQViBiYWNrZW5kLCBo
-ZW5jZSBpdCBjb3VsZCBiZSBzaWduYWxlZCB1c2luZyBhIGRpZmZlcmVudApmaWVsZCwgdGhhdCBj
-b3VsZCBsaXZlIGluIGRvbWFpbl9jb25maWcgaW5zdGVhZCBvZgpkb21haW5fYnVpbGRfaW5mbz8K
-ClJvZ2VyLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-WGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0
-cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============7076955369073338211==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/=4RX5jKKcfGsPVsnTZ_Z+J4"; protocol="application/pgp-signature"
+
+--Sig_/=4RX5jKKcfGsPVsnTZ_Z+J4
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 16 May 2019 12:39:02 +0100
+schrieb Wei Liu <wei.liu2@citrix.com>:
+
+> I guess all I can say at this point is that I haven't done a survey on
+> the differences of the autotools shipped in all the distros we care
+> about (especially the older ones), so I would err on the safe side to
+> keep the in-tree configure script.
+
+Given that all distros for sure did run 'autogen.sh' in a large number
+of packages since years it is easy to guess that in general it just works.
+
+And if Xen decides that a certain autoconf version is is the minimum,
+configure.ac has a knob for that the minimal required tools version.
+As I said, autoools are not runtime dependencies, nor is make|flex|bison.
+
+So, please consider moving these generated files to .gitignore.
+
+Olaf
+
+--Sig_/=4RX5jKKcfGsPVsnTZ_Z+J4
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXN1NIAAKCRBdQqD6ppg2
+fvScAJ0RFYJL8UPWxUkccmZRfaOWWAlQzgCgqDBterXGFwYVKKZafKQz9j+vT58=
+=N9Tl
+-----END PGP SIGNATURE-----
+
+--Sig_/=4RX5jKKcfGsPVsnTZ_Z+J4--
+
+
+--===============7076955369073338211==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7076955369073338211==--
