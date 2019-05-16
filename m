@@ -1,17 +1,26 @@
-From: osstest service owner <osstest-admin@xenproject.org>
-Subject: [xen-unstable-smoke test] 136364: regressions - FAIL
-Date: Thu, 16 May 2019 12:14:36 +0000
-Message-ID: <osstest-136364-mainreport@xen.org>
+From: Olaf Hering <ohering@suse.com>
+Subject: Re: Regression in xen-unstable due to commit
+ 3802ecbaa9eb36
+Date: Thu, 16 May 2019 14:18:05 +0200
+Message-ID: <20190516141805.281f972e.ohering@suse.com>
+References: <1ae5e201-04d0-2f78-878f-2e3a3e213b62@suse.com>
+ <20190516110735.67e19d15.ohering@suse.com>
+ <20190516104540.7hiqsn6qjeaam2c6@Air-de-Roger>
+ <20190516125735.6c1bf1ca.ohering@suse.com>
+ <20190516112450.GW2798@zion.uk.xensource.com>
+ <20190516133857.742e4f13.ohering@suse.com>
+ <20190516115043.GB2798@zion.uk.xensource.com>
+ <20190516140451.06cfcbfe.ohering@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5327555863726489374=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=YOnx=TQ=xenproject.org=aliasfile-bounces@srs-us1.protection.inumbo.net>)
- id 1hRFHa-0007UM-Qk
- for xen-devel@lists.xenproject.org; Thu, 16 May 2019 12:14:46 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=ADxN=TQ=suse.com=ohering@srs-us1.protection.inumbo.net>)
+ id 1hRFKy-0007dL-0F
+ for xen-devel@lists.xenproject.org; Thu, 16 May 2019 12:18:16 +0000
+In-Reply-To: <20190516140451.06cfcbfe.ohering@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,74 +29,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org, osstest-admin@xenproject.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Roger Pau =?UTF-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-ZmxpZ2h0IDEzNjM2NCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNjM2NC8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2
-aXJ0ICAgICAxNSBndWVzdC1zYXZlcmVzdG9yZSAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTM2MzA5
-CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAxMCBkZWJpYW4taHZt
-LWluc3RhbGwgZmFpbCBSRUdSLiB2cy4gMTM2MzA5CiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAg
-ICAgMTYgZ3Vlc3Qtc3RhcnQvZGViaWFuLnJlcGVhdCBmYWlsIFJFR1IuIHZzLiAxMzYzMDkKIHRl
-c3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAxNiBndWVzdC1zdGFydC9kZWJpYW4ucmVwZWF0IGZh
-aWwgUkVHUi4gdnMuIDEzNjMwOQoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJl
-IG5vdCBibG9ja2luZzoKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1z
-dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14
-bC14c20gICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
-YXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
-Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAg
-MTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
-cm1oZi1hcm1oZi14bCAgICAgICAgICAxNCBzYXZlcmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZh
-aWwgICBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdldGVkIGZvciB0ZXN0aW5nOgogeGVuICAgICAg
-ICAgICAgICAgICAgMmE1NTZiNjNhMjJkZDY4Njk3ZmViMzk5NGU2OGRlOTM5ZDAxYTgwNApiYXNl
-bGluZSB2ZXJzaW9uOgogeGVuICAgICAgICAgICAgICAgICAgMDNlNDhiN2IyYWZiMmEwZjIzZGFh
-M2Q1NTdhNjE3YjAzNTIzMDVmZAoKTGFzdCB0ZXN0IG9mIGJhc2lzICAgMTM2MzA5ICAyMDE5LTA1
-LTE1IDE1OjAwOjM2IFogICAgMCBkYXlzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDEzNjMxNyAgMjAx
-OS0wNS0xNSAxODowMDoyOSBaICAgIDAgZGF5cyAgICA2IGF0dGVtcHRzCgotLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdo
-byB0b3VjaGVkIHJldmlzaW9ucyB1bmRlciB0ZXN0OgogIElhbiBKYWNrc29uIDxpYW4uamFja3Nv
-bkBldS5jaXRyaXguY29tPgogIFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Cgpqb2JzOgog
-YnVpbGQtYXJtNjQteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGli
-dmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFybWhmLWFybWhmLXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgZmFpbCAgICAKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJp
-YW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKCgot
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBvc3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxv
-Z3M6IC9ob21lL2xvZ3MvbG9ncwppbWFnZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25m
-aWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWlsYWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIu
-eGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRz
-LCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5lcmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVu
-Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3Rl
-cgogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9i
-O2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVzdCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAg
-ICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoK
-Ck5vdCBwdXNoaW5nLgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tCmNvbW1pdCAyYTU1NmI2M2EyMmRkNjg2OTdmZWIzOTk0ZTY4ZGU5
-MzlkMDFhODA0CkF1dGhvcjogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KRGF0ZTogICBX
-ZWQgTWF5IDE1IDE2OjE5OjU3IDIwMTkgKzAxMDAKCiAgICBEcm9wIGJsa3RhcDIKICAgIAogICAg
-U2lnbmVkLW9mZi1ieTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KICAgIEFja2VkLWJ5
-OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCmNvbW1pdCA1Yzg4M2Nm
-MDM2Y2Y1YWI4YjFiNzkzOTA1NDllMjQ3NWY3YTU2OGRkCkF1dGhvcjogV2VpIExpdSA8d2VpLmxp
-dTJAY2l0cml4LmNvbT4KRGF0ZTogICBNb24gQXVnIDE1IDExOjMyOjU2IDIwMTYgKzAxMDAKCiAg
-ICB0b29sczogcmVtb3ZlIGJsa3RhcDIgcmVsYXRlZCBjb2RlIGFuZCBkb2N1bWVudGF0aW9uCiAg
-ICAKICAgIEJsa3RhcDIgaXMgZWZmZWN0aXZlbHkgZGVhZCBmb3IgYSBmZXcgeWVhcnMuCiAgICAK
-ICAgIE5vdGFibGUgY2hhbmdlcyBpbiB0aGlzIHBhdGNoOgogICAgCiAgICAwLiBVbmhvb2sgYmxr
-dGFwMiBmcm9tIGJ1aWxkIHN5c3RlbQogICAgMS4gbGlieGwgbm8gbG9uZ2VyIHN1cHBvcnRzIFRB
-UCBkaXNrIGJhY2tlbmQsIHdpdGggYXBwcm9wcmlhdGUgYXNzZXJ0aW9ucwogICAgICAgYWRkZWQg
-YW5kIHNvbWUgY29kZSBwYXRocyBub3cgcmV0dXJuIEVSUk9SX0ZBSUwKICAgIDIuIFRhcCBpcyBu
-byBsb25nZXIgYSBzdXBwb3J0ZWQgYmFja2VuZAogICAgMy4gUmVtb3ZlIGJsa3RhcDIgZW50cnkg
-ZnJvbSBNQUlOVEFJTkVSUwogICAgCiAgICBBIHBhdGNoIHRvIHJlbW92ZSBibGt0YXAyIGRpcmVj
-dG9yeSB3aWxsIGNvbWUgbGF0ZXIuCiAgICAKICAgIFNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdl
-aS5saXUyQGNpdHJpeC5jb20+CiAgICBBY2tlZC1ieTogSWFuIEphY2tzb24gPGlhbi5qYWNrc29u
-QGV1LmNpdHJpeC5jb20+CihxZW11IGNoYW5nZXMgbm90IGluY2x1ZGVkKQoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============5327555863726489374==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/s4/ms4yeVkDLgI369EHZpr8"; protocol="application/pgp-signature"
+
+--Sig_/s4/ms4yeVkDLgI369EHZpr8
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Thu, 16 May 2019 14:04:51 +0200
+schrieb Olaf Hering <ohering@suse.com>:
+
+> There are quite a few checks for device_model_version, they would be all
+> wrong if the assert is removed, or changed back to QEMU_XEN. Perhaps we
+> can continue to live with that error. device_model_version could become
+> a local variable. If it is not set, assume the caller just wants the
+> memory size and enforce QEMU_XEN again within that function.
+
+I think that is what should be done, just for the sake of
+libxl_domain_need_memory. If an incomplete b_info is provided, assume
+device_model_version=3DQEMU_XEN, maintain that state in a local variable.
+
+If we want to provide another new public API to fill missing defaults,
+that could still be done in a separate patch.
+
+Olaf
+
+--Sig_/s4/ms4yeVkDLgI369EHZpr8
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXN1U/QAKCRBdQqD6ppg2
+fkffAKCNYh5INArE9YmuocvLyPFhjJvH1gCggi6fEGZWumStTgpQoLk95ed53mM=
+=9o5g
+-----END PGP SIGNATURE-----
+
+--Sig_/s4/ms4yeVkDLgI369EHZpr8--
+
+
+--===============5327555863726489374==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5327555863726489374==--
