@@ -1,21 +1,20 @@
-From: Andrew Cooper <Andrew.Cooper3@citrix.com>
+From: "Jan Beulich" <JBeulich@suse.com>
 Subject: Re: libxc: Casting of xen virtual address type
  xen_vaddr_t to signed int64 type: (int64_t)vaddr
-Date: Fri, 17 May 2019 12:31:50 +0000
-Message-ID: <1558096310831.98741@citrix.com>
+Date: Fri, 17 May 2019 06:32:12 -0600
+Message-ID: <5CDEA9CC020000780023017C@prv1-mh.provo.novell.com>
 References: <CAOcoXZZZbKOXkNQNqFgp9BSRUHnovDqZ4TfV_aMh+h9BcC6Qnw@mail.gmail.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=gdXm=TR=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hRc1k-0007gi-PK
- for xen-devel@lists.xenproject.org; Fri, 17 May 2019 12:31:56 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=mYL4=TR=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hRc23-0007jH-DR
+ for xen-devel@lists.xenproject.org; Fri, 17 May 2019 12:32:15 +0000
 In-Reply-To: <CAOcoXZZZbKOXkNQNqFgp9BSRUHnovDqZ4TfV_aMh+h9BcC6Qnw@mail.gmail.com>
-Content-Language: en-GB
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,32 +23,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Viktor Mitin <viktor.mitin.19@gmail.com>, Juergen Gross <jgross@suse.com>, Wei Liu <wei.liu2@citrix.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Viktor Mitin <viktor.mitin.19@gmail.com>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wei.liu2@citrix.com>, Volodymyr Babchuk <volodymyr_babchuk@epam.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-KEFwb2xvZ2llcyBmb3IgdGhlIHVzZSBvZiBvdXRsb29rIC0gSSdtIGhhdmluZyBlbWFpbCBwcm9i
-bGVtcyBhdG0pLgoKQSBjYW5vbmljYWwgYWRkcmVzcyBpbiB4ODYgaXMgb25lIHdoaWNoIGlzIGNv
-cnJlY3RseSBzaWduIGV4dGVuZGVkIGZyb20gYml0IDQ3IHRvIGJpdCA2My4KCldoYXQgaXMgdW5k
-ZWZpbmVkIGFib3V0IHNoaWZ0aW5nIGludDY0X3QgYnkgNjMgYml0cz8gIFRoZSBhbnN3ZXIgaXMg
-LTEgb3IgMCwgcHJlc2VydmluZyB0aGUgc2lnbiBiaXQgYWxvbmUgKHdoaWNoIGlzIHRoZSBwb2lu
-dCBvZiB0aGUgY29tcGFyaXNvbikuCgp+QW5kcmV3Cl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KRnJvbTogVmlrdG9yIE1pdGluIDx2aWt0b3IubWl0aW4uMTlAZ21haWwu
-Y29tPgpTZW50OiAxNyBNYXkgMjAxOSAxMjoyNQpUbzogSnVlcmdlbiBHcm9zczsgQW5kcmV3IENv
-b3BlcjsgV2VpIExpdTsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCkNjOiBWb2xvZHlt
-eXIgQmFiY2h1awpTdWJqZWN0OiBsaWJ4YzogQ2FzdGluZyBvZiB4ZW4gdmlydHVhbCBhZGRyZXNz
-IHR5cGUgeGVuX3ZhZGRyX3QgdG8gc2lnbmVkIGludDY0IHR5cGU6IChpbnQ2NF90KXZhZGRyCgpI
-aSBBbGwsCgpXaGlsZSBsb29raW5nIGF0IGNvZGUgaW4gdG9vbHMvbGlieGMveGNfc3Jfc2F2ZV94
-ODZfcHYuYywKd2Ugc2VlIHRoYXQgdGhlcmUgaXMgY2FzdGluZyBvZiB4ZW4gdmlydHVhbCBhZGRy
-ZXNzIHR5cGUgeGVuX3ZhZGRyX3QKdG8gc2lnbmVkIGludDY0IHR5cGUuCkluIGNvbW1pdDogN2Jm
-NzQ1ODJiMzQzNjAzY2IwODI2ZDgwOGNkN2RhNDMzMjY0NTJhNQoKKy8qIENoZWNrIGEgNjQgYml0
-IHZpcnR1YWwgYWRkcmVzcyBmb3IgYmVpbmcgY2Fub25pY2FsLiAqLworc3RhdGljIGlubGluZSBi
-b29sIGlzX2Nhbm9uaWNhbF9hZGRyZXNzKHhlbl92YWRkcl90IHZhZGRyKQoreworICAgIHJldHVy
-biAoKGludDY0X3QpdmFkZHIgPj4gNDcpID09ICgoaW50NjRfdCl2YWRkciA+PiA2Myk7Cit9CgpJ
-dCBzZWVtcyB0aGVyZSBpcyBubyBuZWVkIHRvIGNhc3QgdmFkZHIgdmFyaWFibGUuIEl0IGxvb2tz
-IGxpa2UKc2hpZnRpbmcgdmFkZHIgc2lnbmVkIDY0LWJpdCB2YWx1ZSBieSA2MyBiaXRzIGludHJv
-ZHVjZXMgdW5kZWZpbmVkCmJlaGF2aW9yLiBDb3VsZCB5b3UgcGxlYXNlIGRlc2NyaWJlIHdoYXQg
-aXMgdGhlIHJlYXNvbiBmb3IgdGhpcwpjYXN0aW5nPwoKVGhhbmtzCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDE3LjA1LjE5IGF0IDEzOjI1LCA8dmlrdG9yLm1pdGluLjE5QGdtYWlsLmNvbT4gd3Jv
+dGU6Cj4gSGkgQWxsLAo+IAo+IFdoaWxlIGxvb2tpbmcgYXQgY29kZSBpbiB0b29scy9saWJ4Yy94
+Y19zcl9zYXZlX3g4Nl9wdi5jLAo+IHdlIHNlZSB0aGF0IHRoZXJlIGlzIGNhc3Rpbmcgb2YgeGVu
+IHZpcnR1YWwgYWRkcmVzcyB0eXBlIHhlbl92YWRkcl90Cj4gdG8gc2lnbmVkIGludDY0IHR5cGUu
+Cj4gSW4gY29tbWl0OiA3YmY3NDU4MmIzNDM2MDNjYjA4MjZkODA4Y2Q3ZGE0MzMyNjQ1MmE1Cj4g
+Cj4gKy8qIENoZWNrIGEgNjQgYml0IHZpcnR1YWwgYWRkcmVzcyBmb3IgYmVpbmcgY2Fub25pY2Fs
+LiAqLwo+ICtzdGF0aWMgaW5saW5lIGJvb2wgaXNfY2Fub25pY2FsX2FkZHJlc3MoeGVuX3ZhZGRy
+X3QgdmFkZHIpCj4gK3sKPiArICAgIHJldHVybiAoKGludDY0X3QpdmFkZHIgPj4gNDcpID09ICgo
+aW50NjRfdCl2YWRkciA+PiA2Myk7Cj4gK30KPiAKPiBJdCBzZWVtcyB0aGVyZSBpcyBubyBuZWVk
+IHRvIGNhc3QgdmFkZHIgdmFyaWFibGUuIEl0IGxvb2tzIGxpa2UKPiBzaGlmdGluZyB2YWRkciBz
+aWduZWQgNjQtYml0IHZhbHVlIGJ5IDYzIGJpdHMgaW50cm9kdWNlcyB1bmRlZmluZWQKPiBiZWhh
+dmlvci4KCkkgZG9uJ3QgdGhpbmsgc28gLSBhcyBwZXIgbXkgcmVhZGluZyBvZiB0aGUgc3RhbmRh
+cmQgdGV4dCwgVUIKcmVzdWx0cyBvbmx5IHdoZW4gdGhlIHNoaWZ0IGNvdW50IGlzIGdyZWF0ZXIg
+b3IgZXF1YWwgdGhhbiB0aGUKd2lkdGggb2YgdGhlIChwcm9tb3RlZCkgc2hpZnRlZCB2YWx1ZSdz
+IHR5cGUuIFRoZSByZXN1bHRzIG9mCmJvdGggc2hpZnRzIGFib3ZlIGFyZSBpbXBsZW1lbnRhdGlv
+biBkZWZpbmVkIGFmYWljdC4KCj4gQ291bGQgeW91IHBsZWFzZSBkZXNjcmliZSB3aGF0IGlzIHRo
+ZSByZWFzb24gZm9yIHRoaXMgY2FzdGluZz8KCldlbGwsIHdlIHdhbnQgdG8gY2hlY2sgdGhhdCB0
+aGUgdG9wIDE3IGJpdHMgYXJlIGVpdGhlciBhbGwgMXMKb3IgYWxsIDBzLCBwcmVmZXJhYmx5IHdp
+dGgganVzdCBhIHNpbmdsZSBjb21wYXJpc29uLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
