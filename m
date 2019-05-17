@@ -1,14 +1,10 @@
 From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: preparations for 4.11.2
-Date: Fri, 17 May 2019 17:07:08 +0100
-Message-ID: <23774.56364.355028.254597@mariner.uk.xensource.com>
-References: <5C8FC3A4020000780021FF77@prv1-mh.provo.novell.com>
- <2e8dba0b-70ef-dd90-bb5b-fa358f88861e@citrix.com>
- <35203e9e-4a37-9230-f417-68a09ca319e6@citrix.com>
- <e1447c7f-7a8d-b40e-b9a7-9a88c3c7ef51@citrix.com>
- <5CDD7FD9020000780022FCC0@prv1-mh.provo.novell.com>
- <23773.36372.890326.392603@mariner.uk.xensource.com>
- <5CDE5296020000780022FEC9@prv1-mh.provo.novell.com>
+Subject: Re: qcom_scm: Incompatible pointer type build failure
+Date: Fri, 17 May 2019 17:10:17 +0100
+Message-ID: <23774.56553.445601.436491@mariner.uk.xensource.com>
+References: <osstest-135420-mainreport@xen.org>
+ <23752.17186.527512.614163@mariner.uk.xensource.com>
+ <87d9fbc1-5956-2b7b-0b9a-6368e378d0f6@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -16,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=xWi3=TR=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hRfOY-0001Kt-LG
- for xen-devel@lists.xenproject.org; Fri, 17 May 2019 16:07:42 +0000
-In-Reply-To: <5CDE5296020000780022FEC9@prv1-mh.provo.novell.com>
+ id 1hRfRc-00027K-9X
+ for xen-devel@lists.xenproject.org; Fri, 17 May 2019 16:10:52 +0000
+In-Reply-To: <87d9fbc1-5956-2b7b-0b9a-6368e378d0f6@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,24 +23,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "david.brown@linaro.org" <david.brown@linaro.org>, "andy.gross@linaro.org" <andy.gross@linaro.org>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SmFuIEJldWxpY2ggd3JpdGVzICgiUmU6IHByZXBhcmF0aW9ucyBmb3IgNC4xMS4yIik6Cj4gT2th
-eSAtIGFzIGFsc28gaW5kaWNhdGVkIG9uIGlyYywgd2l0aCB0aGUgd2Vla2VuZCBpbiBiZXR3ZWVu
-IGFuZAo+IHdpdGggdGhlIG1vc3QgcmVjZW50IGZsaWdodCBoYXZpbmcgZmFpbGVkIGFueXdheSBp
-dCBzaG91bGRuJ3QgYmUKPiB0b28gbXVjaCBvZiBhbiBleHRyYSBkZWxheS4KClJpZ2h0LiAgT0ss
-IEkgaGF2ZSBwdXNoZWQgbXkgcXVldWUgbm93LgoKPiBZZXQgdG8gYmUgaG9uZXN0IC0gbW9zdCBv
-ciBhbGwgb2YgdGhlc2UKPiBzaG91bGQgaGF2ZSBiZWVuIHJlcXVlc3RlZCBhbmQgY29tbWl0dGVk
-IHNldmVyYWwgd2Vla3MgYWdvLAo+IHNvb24gYWZ0ZXIgdGhlIG1haWwgYXQgdGhlIHJvb3Qgb2Yg
-dGhpcyB0aHJlYWQgd2FzIHNlbnQuIEkgd29uZGVyCj4gaWYgSSBuZWVkIHRvIGFkZCBhIGhhcmQg
-Y3V0LW9mZiBkYXRlIHRvIHRoZXNlIGluaXRpYXRvciBtYWlscyB0aGF0IEkKPiBzZW5kLiBJJ2Qg
-cHJlZmVyIG5vdCB0bywgbm90IHRoZSBsZWFzdCBiZWNhdXNlIG9mIHVuZm9yZXNlZW4KPiBpc3N1
-ZXMgbGlrZSB0aGUgcmVjZW50IG1vbnRoLWxvbmcgKG9yIG1vcmU/KSBvc3N0ZXN0IHN0YWxsLgoK
-SSB0aGluayBzdGF0aW5nIGEgY3V0LW9mZiBkYXRlIHdvdWxkIGJlIGEgdmVyeSBzZW5zaWJsZSBp
-ZGVhLiAgSWYKY2lyY3Vtc3RhbmNlcyBjaGFuZ2UgeW91IGNhbiBhbHdheXMgc2F5ICJiZWNhdXNl
-IG9mIFgsIHRoaXMgZGVhZGxpbmUKaXMgYmVpbmcgd2FpdmVkL2V4dGVuZGVkIi4KCklhbi4KCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+SnVsaWVuIEdyYWxsIHdyaXRlcyAoInFjb21fc2NtOiBJbmNvbXBhdGlibGUgcG9pbnRlciB0eXBl
+IGJ1aWxkIGZhaWx1cmUiKToKPiBUaGFuayB5b3UgZm9yIHRoZSByZXBvcnQuCi4uLj4gCj4gT24g
+MzAvMDQvMjAxOSAxMzo0NCwgSWFuIEphY2tzb24gd3JvdGU6Cj4gPiBvc3N0ZXN0IHNlcnZpY2Ug
+b3duZXIgd3JpdGVzICgiW2xpbnV4LTQuMTkgdGVzdF0gMTM1NDIwOiByZWdyZXNzaW9ucyAtIEZB
+SUwiKToKPiA+ICAgIGRyaXZlcnMvZmlybXdhcmUvcWNvbV9zY20uYzogSW4gZnVuY3Rpb24gw6Li
+gqzLnHFjb21fc2NtX2Fzc2lnbl9tZW3DouKCrOKEojoKPiA+ICAgIGRyaXZlcnMvZmlybXdhcmUv
+cWNvbV9zY20uYzo0Njk6NDc6IGVycm9yOiBwYXNzaW5nIGFyZ3VtZW50IDMgb2Ygw6LigqzLnGRt
+YV9hbGxvY19jb2hlcmVudMOi4oKs4oSiIGZyb20gaW5jb21wYXRpYmxlIHBvaW50ZXIgdHlwZSBb
+LVdlcnJvcj1pbmNvbXBhdGlibGUtcG9pbnRlci10eXBlc10KLi4uCj4gPiBJIHRoaW5rIHRoaXMg
+YnVpbGQgZmFpbHVyZSBpcyBwcm9iYWJseSBhIHJlZ3Jlc3Npb247IHJhdGhlciBpdCBpcyBkdWUK
+PiA+IHRvIHRoZSBzdHJldGNoIHVwZGF0ZSB3aGljaCBicmluZ3MgaW4gYSBuZXcgY29tcGlsZXIu
+Cj4gCj4gVGhlIGJ1ZyBoYXMgYWx3YXlzIGJlZW4gcHJlc2VudCAoYW5kIHN0aWxsIHByZXNlbnQg
+aW4gbWFzdGVyKSwgaXQgaXMgcG9zc2libGUgCj4gdGhlIGNvbXBpbGVyIGJlY2FtZSBzbWFydGVy
+IHdpdGggdGhlIHVwZ3JhZGUgdG8gc3RyZXRjaC4KPiAKPiBUaGUgcHJvYmxlbSBpcyBzaW1pbGFy
+IHRvIFsxXSBhbmQgaGFwcGVuIHdoZW4gdGhlIHNpemUgb2YgcGh5c19hZGRyX3QgaXMgCj4gZGlm
+ZmVyZW50IHRvIGRtYV9hZGRyX3QuCj4gCj4gSSBoYXZlIENDZWQgdGhlIG1haW50YWluZXJzIG9m
+IHRoaXMgZmlsZS4KClRoYXQgd2FzIHNldmVyYWwgd2Vla3MgYWdvIGFuZCBvc3N0ZXN0IGlzIHN0
+aWxsIGJsb2NrZWQgb24gdGhpcy4KQ2FuIHlvdSBwbGVhc2UgYWR2aXNlIHdoYXQgQ09ORklHXyog
+dG8gZGlzYWJsZSB0byB3b3JrIGFyb3VuZCB0aGlzID8KCklhbi4KCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
+LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
+bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
