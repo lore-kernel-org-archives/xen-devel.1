@@ -1,19 +1,21 @@
-From: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH] xen/arm: traps: Avoid using BUG_ON() to
- check guest state in advance_pc()
-Date: Mon, 20 May 2019 11:14:52 -0700 (PDT)
-Message-ID: <alpine.DEB.2.21.1905201109530.23519@sstabellini-ThinkPad-T480s>
-References: <20190515201730.19079-1-julien.grall@arm.com>
+From: "Woods, Brian" <Brian.Woods@amd.com>
+Subject: Re: [PATCH] x86/svm: Drop support for AMD's Lightweight
+ Profiling
+Date: Mon, 20 May 2019 18:43:10 +0000
+Message-ID: <20190520184306.GC23047@amd.com>
+References: <1558347216-19179-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; BOUNDARY="8323329-1592109277-1558375800=:23519"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=rume=TU=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1hSmoJ-00050h-OM
- for xen-devel@lists.xenproject.org; Mon, 20 May 2019 18:14:55 +0000
-In-Reply-To: <20190515201730.19079-1-julien.grall@arm.com>
-Content-ID: <alpine.DEB.2.21.1905201114430.23519@sstabellini-ThinkPad-T480s>
+ <SRS0=8Q6f=TU=amd.com=brian.woods@srs-us1.protection.inumbo.net>)
+ id 1hSnFk-0007fr-Lm
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2019 18:43:16 +0000
+In-Reply-To: <1558347216-19179-1-git-send-email-andrew.cooper3@citrix.com>
+Content-Language: en-US
+Content-ID: <E8ED69DEAAFB0C4ABFA410918182B81F@namprd12.prod.outlook.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,81 +24,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>
-Cc: =?UTF-8?Q?Lukas_J=C3=BCnger?= <lukas.juenger@ice.rwth-aachen.de>, xen-devel@lists.xenproject.org, sstabellini@kernel.org, Andrii_Anisov@epam.com, Oleksandr_Tyshchenko@epam.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wei.liu2@citrix.com>, Jan Beulich <JBeulich@suse.com>, "Suthikulpanit, Suravee" <Suravee.Suthikulpanit@amd.com>, Xen-devel <xen-devel@lists.xenproject.org>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, "Woods,
+ Brian" <Brian.Woods@amd.com>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-  This message is in MIME format.  The first part should be readable text,
-  while the remaining parts are likely unreadable without MIME-aware tools.
-
---8323329-1592109277-1558375800=:23519
-Content-Type: text/plain; CHARSET=UTF-8
-Content-Transfer-Encoding: 8BIT
-Content-ID: <alpine.DEB.2.21.1905201114431.23519@sstabellini-ThinkPad-T480s>
-
-On Wed, 15 May 2019, Julien Grall wrote:
-> The condition of the BUG_ON() in advance_pc() is pretty wrong because
-> the bits [26:25] and [15:10] have a different meaning between AArch32
-> and AArch64 state.
-> 
-> On AArch32, they are used to store PSTATE.IT. On AArch64, they are RES0
-> or used for new feature (e.g ARMv8.0-SSBS, ARMv8.5-BTI).
-> 
-> This means a 64-bit guest will hit the BUG_ON() if it is trying to use
-> any of these features.
-> 
-> More generally, RES0 means that the bits is reserved for future use. So
-> crashing the host is definitely not the right solution.
-> 
-> In this particular case, we only need to know the guest was using 32-bit
-> Mode and the Thumb instructions. So replace the BUG_ON() by a proper
-> check.
-> 
-> Reported-by: Lukas Jünger <lukas.juenger@ice.rwth-aachen.de>
-> Signed-off-by: Julien Grall <julien.grall@arm.com>
-
-Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
-
-> ---
->     This patch needs to be backported as far as possible. Otherwise Xen
->     would not be able to run on processor implementing ARMv8.0-SSBS,
->     ARMv8.5-BTI or ARMv8.5-MemTag. The former is actually the most
->     critical as this is used for controlling mitagion for SSBD (aka
->     Spectre v4) in hardware.
-> ---
->  xen/arch/arm/traps.c | 7 ++-----
->  1 file changed, 2 insertions(+), 5 deletions(-)
-> 
-> diff --git a/xen/arch/arm/traps.c b/xen/arch/arm/traps.c
-> index d8b9a8a0f0..798a3a45a4 100644
-> --- a/xen/arch/arm/traps.c
-> +++ b/xen/arch/arm/traps.c
-> @@ -1650,12 +1650,9 @@ int check_conditional_instr(struct cpu_user_regs *regs, const union hsr hsr)
->  void advance_pc(struct cpu_user_regs *regs, const union hsr hsr)
->  {
->      unsigned long itbits, cond, cpsr = regs->cpsr;
-> +    bool is_thumb = psr_mode_is_32bit(cpsr) && (cpsr & PSR_THUMB);
->  
-> -    /* PSR_IT_MASK bits can only be set for 32-bit processors in Thumb mode. */
-> -    BUG_ON( (!psr_mode_is_32bit(cpsr)||!(cpsr&PSR_THUMB))
-> -            && (cpsr&PSR_IT_MASK) );
-> -
-> -    if ( cpsr&PSR_IT_MASK )
-> +    if ( is_thumb && (cpsr & PSR_IT_MASK) )
->      {
->          /* The ITSTATE[7:0] block is contained in CPSR[15:10],CPSR[26:25]
->           *
-> -- 
-> 2.11.0
-> 
---8323329-1592109277-1558375800=:23519
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---8323329-1592109277-1558375800=:23519--
+T24gTW9uLCBNYXkgMjAsIDIwMTkgYXQgMTE6MTM6MzZBTSArMDEwMCwgQW5keSBDb29wZXIgd3Jv
+dGU6Cj4gTGlnaHR3ZWlnaHQgUHJvZmlsaW5nIHdhcyBpbnRyb2R1Y2VkIGluIEJ1bGxkb3plciAo
+RmFtMTVoKSwgYnV0IHdhcyBkcm9wcGVkCj4gZnJvbSBaZW4gKEZhbTE3aCkgcHJvY2Vzc29ycy4g
+IEZ1cnRoZXJtb3JlLCBMV1Agd2FzIGRyb3BwZWQgZnJvbSBGYW0xNS8xNiBDUFVzCj4gd2hlbiBJ
+QlBCIGZvciBTcGVjdHJlIHYyIHdhcyBpbnRyb2R1Y2VkIGluIG1pY3JvY29kZSwgb3dpbmcgdG8g
+TFdQIG5vdCBiZWluZwo+IHVzZWQgaW4gcHJhY3RpY2UuCj4gCj4gQXMgYSByZXN1bHQsIENQVXMg
+d2hpY2ggYXJlIG9wZXJhdGluZyB3aXRoaW4gc3BlY2lmaWNhdGlvbiAoaS5lLiB3aXRoIHVwIHRv
+Cj4gZGF0ZSBtaWNyb2NvZGUpIG5vIGxvbmdlciBoYXZlIHRoaXMgZmVhdHVyZSwgYW5kIHRoZXJl
+Zm9yZSBhcmUgbm90IHVzaW5nIGl0Lgo+IAo+IERyb3Agc3VwcG9ydCBmcm9tIFhlbi4gIFRoZSBt
+YWluIG1vdGl2YXRpb24gaGVyZSBpcyB0byByZW1vdmUgdW5uZWNlc3NhcnkKPiBjb21wbGV4aXR5
+IGZyb20gQ1BVSUQgaGFuZGxpbmcsIGJ1dCBpdCBhbHNvIHRpZGllcyB1cCB0aGUgU1ZNIGNvZGUg
+bmljZWx5Lgo+IAo+IFNpZ25lZC1vZmYtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
+QGNpdHJpeC5jb20+CkFja2VkLWJ5OiBCcmlhbiBXb29kcyA8YnJpYW4ud29vZHNAYW1kLmNvbT4K
+CkkndmUgY29uZmlybWVkIHdpdGggSFcgZW5naW5lZXJzIHRoYXQgaXQncyBnb2luZyBhd2F5LgoK
+LS0gCkJyaWFuIFdvb2RzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
