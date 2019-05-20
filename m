@@ -1,21 +1,24 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [RFC PATCH 1/2] xen/device-tree: Add
- dt_count_phandle_with_args helper
-Date: Mon, 20 May 2019 12:03:12 +0100
-Message-ID: <ce325872-a19e-2d07-ca88-cd3f0b1bd933@arm.com>
-References: <1556806436-26283-1-git-send-email-olekstysh@gmail.com>
- <1556806436-26283-2-git-send-email-olekstysh@gmail.com>
+From: Viktor Mitin <viktor.mitin.19@gmail.com>
+Subject: Re: [PATCH v2] coverage: filter out libfdt.o and
+ libelf.o
+Date: Mon, 20 May 2019 14:09:15 +0300
+Message-ID: <CAOcoXZbePVees-YE2gnb2ghOzix-qN8uo6F=NRiowguuVb7WQA@mail.gmail.com>
+References: <20190516132016.8032-1-viktor.mitin.19@gmail.com>
+ <37a3a6c6-7de4-e496-5619-00f31e8e338f@arm.com>
+ <20190517064745.GA14853@localhost>
+ <9bc2b400-c65d-3761-869d-4cad2d8959c4@arm.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=DuAc=TU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hSg4a-0004bf-Jg
- for xen-devel@lists.xenproject.org; Mon, 20 May 2019 11:03:16 +0000
-In-Reply-To: <1556806436-26283-2-git-send-email-olekstysh@gmail.com>
-Content-Language: en-US
+ <SRS0=Z/e/=TU=gmail.com=viktor.mitin.19@srs-us1.protection.inumbo.net>)
+ id 1hSgAa-0004sw-LZ
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2019 11:09:28 +0000
+Received: by mail-it1-x12b.google.com with SMTP id e184so22443721ite.1
+ for <xen-devel@lists.xenproject.org>; Mon, 20 May 2019 04:09:27 -0700 (PDT)
+In-Reply-To: <9bc2b400-c65d-3761-869d-4cad2d8959c4@arm.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,17 +27,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Oleksandr Tyshchenko <olekstysh@gmail.com>, xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, sstabellini@kernel.org
+To: Julien Grall <julien.grall@arm.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpPbiAwMi8wNS8yMDE5IDE1OjEzLCBPbGVrc2FuZHIgVHlzaGNoZW5rbyB3cm90ZToKPiBG
-cm9tOiBPbGVrc2FuZHIgVHlzaGNoZW5rbyA8b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5jb20+
-Cj4gCj4gUG9ydCBMaW51eCBoZWxwZXIgb2ZfY291bnRfcGhhbmRsZV93aXRoX2FyZ3MgZm9yIGNv
-dW50aW5nCj4gbnVtYmVyIG9mIHBoYW5kbGVzIGluIGEgcHJvcGVydHkuCgpMaW51eCA1LjEgdXNl
-cyBhIGNvbXBsZXRlbHkgZGlmZmVyZW50IGltcGxlbWVudGF0aW9uIGZvciAKb2ZfY291bnRfcGhh
-bmRsZV93aXRoX2FyZ3MuIFNvIHdoaWNoIHZlcnNpb24gb2YgTGludXggZGlkIHlvdSBwb3J0IGZy
-b20/CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+PiA+IFRoYW5rIHlvdSBmb3IgZGV0YWlsZWQgZGVzY3JpcHRpb24gcHJvdmlkZWQuCj4gPiBXaWxs
+IHRha2UgaW50byBjb25zaWRlcmF0aW9uIGFsbCB0aGUgbm90ZXMuCj4KPiBEb2VzIGl0IG1lYW4g
+eW91IGFyZSBoYXBweSB3aXRoIHRoZSBjb21taXQgbWVzc2FnZSBJIHN1Z2dlc3RlZD8KClllcywg
+SSdtIGhhcHB5IHdpdGggdGhlIGNvbW1pdCBtZXNzYWdlIHlvdSBzdWdnZXN0ZWQuClBsZWFzZSBs
+ZXQgbWUga25vdyBpZiBJIHNob3VsZCByZXNlbmQgdGhlIHVwZGF0ZWQgcGF0Y2guCgpUaGFua3MK
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
