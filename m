@@ -1,24 +1,20 @@
-From: Oleksandr <olekstysh@gmail.com>
-Subject: Re: [RFC PATCH 1/2] xen/device-tree: Add
- dt_count_phandle_with_args helper
-Date: Mon, 20 May 2019 16:48:27 +0300
-Message-ID: <6534c5d0-1164-4076-f22f-6a820eff9c46@gmail.com>
-References: <1556806436-26283-1-git-send-email-olekstysh@gmail.com>
- <1556806436-26283-2-git-send-email-olekstysh@gmail.com>
- <ce325872-a19e-2d07-ca88-cd3f0b1bd933@arm.com>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: [PATCH] libxl: fix libxl_domain_need_memory after
+ 899433f149d
+Date: Mon, 20 May 2019 14:50:32 +0100
+Message-ID: <23778.45224.28897.55507@mariner.uk.xensource.com>
+References: <20190517170555.17423-1-wei.liu2@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=ag2u=TU=gmail.com=olekstysh@srs-us1.protection.inumbo.net>)
- id 1hSieb-0002s4-93
- for xen-devel@lists.xenproject.org; Mon, 20 May 2019 13:48:37 +0000
-Received: by mail-lf1-x144.google.com with SMTP id y13so10356052lfh.9
- for <xen-devel@lists.xenproject.org>; Mon, 20 May 2019 06:48:35 -0700 (PDT)
-In-Reply-To: <ce325872-a19e-2d07-ca88-cd3f0b1bd933@arm.com>
-Content-Language: en-US
+ <SRS0=26W0=TU=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1hSih3-0003fN-67
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2019 13:51:09 +0000
+In-Reply-To: <20190517170555.17423-1-wei.liu2@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,28 +23,24 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, sstabellini@kernel.org
+To: Wei Liu <wei.liu2@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Xen-devel <xen-devel@lists.xenproject.org>, Olaf Hering <olaf@aepfle.de>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Ck9uIDIwLjA1LjE5IDE0OjAzLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSGksCgpIaSwgSnVsaWVu
-CgoKPgo+IE9uIDAyLzA1LzIwMTkgMTU6MTMsIE9sZWtzYW5kciBUeXNoY2hlbmtvIHdyb3RlOgo+
-PiBGcm9tOiBPbGVrc2FuZHIgVHlzaGNoZW5rbyA8b2xla3NhbmRyX3R5c2hjaGVua29AZXBhbS5j
-b20+Cj4+Cj4+IFBvcnQgTGludXggaGVscGVyIG9mX2NvdW50X3BoYW5kbGVfd2l0aF9hcmdzIGZv
-ciBjb3VudGluZwo+PiBudW1iZXIgb2YgcGhhbmRsZXMgaW4gYSBwcm9wZXJ0eS4KPgo+IExpbnV4
-IDUuMSB1c2VzIGEgY29tcGxldGVseSBkaWZmZXJlbnQgaW1wbGVtZW50YXRpb24gZm9yIAo+IG9m
-X2NvdW50X3BoYW5kbGVfd2l0aF9hcmdzLiBTbyB3aGljaCB2ZXJzaW9uIG9mIExpbnV4IGRpZCB5
-b3UgcG9ydCBmcm9tPwoKVGhpcyBwYXRjaCBpcyBleGFjdGx5IHRoZSBzYW1lIG9uZSBbMV0sIEkg
-ZGlkIG1vcmUgdGhhbiAyIHllYXJzIGFnbyBpbiAKdGhlIGNvbnRleHQgb2Ygbm9uLXNoYXJlZCBJ
-T01NVSBwYXRjaCBzZXJpZXMuIExpa2VseSwgSSB3YXMgYmFzZWQgb24gdjQuNC4KClNvcnJ5IGZv
-ciB0aGUgY29uZnVzaW5nIGRlc2NyaXB0aW9uLgoKCllvdSBhcmUgcmlnaHQsIGN1cnJlbnQgaW1w
-bGVtZW50YXRpb24gb2ZfY291bnRfcGhhbmRsZV93aXRoX2FyZ3MgaXMgCmNvbXBsZXRlbHkgZGlm
-ZmVyZW50LCBhbmQgSSBhbSBhZnJhaWQsIGlzIG5vdCBlYXNpbHkgYmFjay1wb3J0YWJsZSB0byBY
-ZW4uCgpJZiB0aGUgaW1wbGVtZW50YXRpb24gInY0LjQiIGxvb2tzIGNvcnJlY3QgYW5kIGZpdHMg
-aW4gY3VycmVudCBYZW4gCmNvZGViYXNlLCBJIGNhbiByZWNvbGxlY3QgYW4gZXhhY3QgdmVyc2lv
-biBhbmQgdXBkYXRlIHRoZSBwYXRjaCAKZGVzY3JpcHRpb24uCgpXaGF0IGRvIHlvdSB0aGluaz8K
-CgpbMV0gaHR0cHM6Ly9wYXRjaHdvcmsua2VybmVsLm9yZy9wYXRjaC85ODYyNTU3LwoKPgo+IENo
-ZWVycywKPgotLSAKUmVnYXJkcywKCk9sZWtzYW5kciBUeXNoY2hlbmtvCgoKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
-dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+V2VpIExpdSB3cml0ZXMgKCJbUEFUQ0hdIGxpYnhsOiBmaXggbGlieGxfZG9tYWluX25lZWRfbWVt
+b3J5IGFmdGVyIDg5OTQzM2YxNDlkIik6Cj4gQWZ0ZXIgODk5NDMzZjE0OWQgbGlieGwgbmVlZHMg
+dG8ga25vdyB0aGUgY29udGVudCBvZiBkX2NvbmZpZyB0bwo+IGRldGVybWluZSB3aGljaCBRRU1V
+IGlzIHVzZWQuIFRoZSBjb2RlIGlzIGNoYW5nZWQgc3VjaCB0aGF0Cj4gbGlieGxfX2RvbWFpbl9z
+ZXRfZGV2aWNlX21vZGVsIG5lZWRzIHRvIGJlIGNhbGxlZCBiZWZvcmUKPiBsaWJ4bF9fZG9tYWlu
+X2J1aWxkX2luZm9fc2V0ZGVmYXVsdC4KPiAKPiBUaGlzIGlzIGZpbmUgZm9yIGxpYnhsIGNvZGUs
+IGJ1dCBpdCBpcyBwcm9ibGVtYXRpYyBmb3IKPiBsaWJ4bF9kb21haW5fbmVlZF9tZW1vcnksIHdo
+aWNoIGlzIHRoZSBvbmx5IHB1YmxpYyBBUEkgdGhhdCB0YWtlcyBhCj4gYnVpbGRfaW5mby4gVG8g
+YXZvaWQgYnJlYWsgaXRzIHVzZXJzLCBwcm92aWRlIGEgY29tcGF0aWJpbGl0eSBzZXR0aW5nCj4g
+aW5zaWRlIHRoYXQgZnVuY3Rpb24uCgpUaGlzIGxvb2tzIHBsYXVzaWJsZSB0byBtZS4gIEkgc2Vl
+IHRoYXQgdGhpcyBmdW5jdGlvbiBhbHJlYWR5IG1ha2VzIGEKY29weSBvZiB0aGUgYl9pbmZvLCBz
+byB3ZSBkbyBub3QgZW5kIHVwIGFjY2lkZW50YWxseSBsZWFraW5nIHRoaXMgbmV3CmRlZmF1bHQg
+c2V0dGluZyB0byB0aGUgY2FsbGVyLgoKQWNrZWQtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3Nv
+bkBldS5jaXRyaXguY29tPgoKVGhhbmtzLApJYW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
