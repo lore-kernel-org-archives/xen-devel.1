@@ -2,57 +2,49 @@ Return-Path: <SRS0=/voU=TU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-8.5 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_MUTT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EE8BC04AAC
-	for <xen-devel@archiver.kernel.org>; Mon, 20 May 2019 15:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72F09C04AAC
+	for <xen-devel@archiver.kernel.org>; Mon, 20 May 2019 15:15:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7ADCD20863
-	for <xen-devel@archiver.kernel.org>; Mon, 20 May 2019 15:15:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7ADCD20863
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5113A20863
+	for <xen-devel@archiver.kernel.org>; Mon, 20 May 2019 15:15:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5113A20863
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=the-dreams.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hSk0I-0003iE-Hu; Mon, 20 May 2019 15:15:06 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=DuAc=TU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hSk0H-0003i1-CA
- for xen-devel@lists.xenproject.org; Mon, 20 May 2019 15:15:05 +0000
-X-Inumbo-ID: 0b1d8f82-7b12-11e9-8980-bc764e045a96
-Received: from foss.arm.com (unknown [217.140.101.70])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTP
- id 0b1d8f82-7b12-11e9-8980-bc764e045a96;
- Mon, 20 May 2019 15:15:03 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.72.51.249])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 747E480D;
- Mon, 20 May 2019 08:15:03 -0700 (PDT)
-Received: from [10.1.196.50] (e108454-lin.cambridge.arm.com [10.1.196.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AA6FF3F575;
- Mon, 20 May 2019 08:15:02 -0700 (PDT)
-To: Stefano Stabellini <sstabellini@kernel.org>
-References: <20190128155909.14289-1-julien.grall@arm.com>
- <alpine.DEB.2.10.1904161444520.1370@sstabellini-ThinkPad-X260>
- <1ba05c55-5449-98a9-713b-d932a1f21b4c@arm.com>
- <alpine.DEB.2.10.1904171006020.1370@sstabellini-ThinkPad-X260>
- <d36567cd-7c3e-3921-0355-77c55559d61b@arm.com>
- <alpine.DEB.2.10.1904171027290.1370@sstabellini-ThinkPad-X260>
-From: Julien Grall <julien.grall@arm.com>
-Message-ID: <8b742d07-d64c-54b1-4cb0-3ae6641c3c2f@arm.com>
-Date: Mon, 20 May 2019 16:15:01 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+	id 1hSk0I-0003i8-7f; Mon, 20 May 2019 15:15:06 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=UVLF=TU=the-dreams.de=wsa@srs-us1.protection.inumbo.net>)
+ id 1hSjql-0002nJ-3U
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2019 15:05:15 +0000
+X-Inumbo-ID: aa39668a-7b10-11e9-a6c7-2302c61fab1f
+Received: from pokefinder.org (unknown [88.99.104.3])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id aa39668a-7b10-11e9-a6c7-2302c61fab1f;
+ Mon, 20 May 2019 15:05:11 +0000 (UTC)
+Received: from localhost (p54B333DA.dip0.t-ipconnect.de [84.179.51.218])
+ by pokefinder.org (Postfix) with ESMTPSA id 3853E2C2761;
+ Mon, 20 May 2019 17:05:11 +0200 (CEST)
+Date: Mon, 20 May 2019 17:05:10 +0200
+From: Wolfram Sang <wsa@the-dreams.de>
+To: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Message-ID: <20190520150510.GA2606@kunai>
+References: <cover.1558362030.git.mchehab+samsung@kernel.org>
+ <4fd1182b4a41feb2447c7ccde4d7f0a6b3c92686.1558362030.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.10.1904171027290.1370@sstabellini-ThinkPad-X260>
-Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH for-next] xen/arm: irq: Don't use
- _IRQ_PENDING when handling host interrupt
+In-Reply-To: <4fd1182b4a41feb2447c7ccde4d7f0a6b3c92686.1558362030.git.mchehab+samsung@kernel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Mailman-Approved-At: Mon, 20 May 2019 15:15:05 +0000
+Subject: Re: [Xen-devel] [PATCH 10/10] docs: fix broken documentation links
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,78 +55,100 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, andre.przywara@arm.com,
- andrii.anisov@gmail.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="UTF-8"; format="flowed"
+Cc: kvm@vger.kernel.org, Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ linux-pci@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+ linux-mm@kvack.org, linux-i2c@vger.kernel.org, linux-kselftest@vger.kernel.org,
+ devel@driverdev.osuosl.org, Jonathan Corbet <corbet@lwn.net>, x86@kernel.org,
+ linux-acpi@vger.kernel.org, xen-devel@lists.xenproject.org,
+ linux-edac@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Mauro Carvalho Chehab <mchehab@infradead.org>,
+ linux-gpio@vger.kernel.org, linux-amlogic@lists.infradead.org,
+ virtualization@lists.linux-foundation.org,
+ linux-arm-kernel@lists.infradead.org, devel@acpica.org, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org
+Content-Type: multipart/mixed; boundary="===============0952740839670666082=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190520151501.Sk0DDnUA9aGGx9A621WLiywdP1PL7q0e0ggf6psHFXs@z>
 
-SGkgU3RlZmFubywKCk9uIDE3LzA0LzIwMTkgMTg6MjcsIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90
-ZToKPiBPbiBXZWQsIDE3IEFwciAyMDE5LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+IEhpLAo+Pgo+
-PiBPbiAxNy8wNC8yMDE5IDE4OjEyLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4+PiBPbiBU
-dWUsIDE2IEFwciAyMDE5LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+Pj4gSGkgU3RlZmFubywKPj4+
-Pgo+Pj4+IE9uIDQvMTYvMTkgMTA6NTEgUE0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPj4+
-Pj4gT24gTW9uLCAyOCBKYW4gMjAxOSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+Pj4+Pj4gV2hpbGUg
-U1BJcyBhcmUgc2hhcmVkIGJldHdlZW4gQ1BVLCBpdCBpcyBub3QgcG9zc2libGUgdG8gcmVjZWl2
-ZSB0aGUKPj4+Pj4+IHNhbWUgaW50ZXJydXB0cyBvbiBhIGRpZmZlcmVudCBDUFUgd2hpbGUgdGhl
-IGludGVycnVwdCBpcyBpbiBhY3RpdmUKPj4+Pj4+IHN0YXRlLiBUaGUgZGVhY3RpdmF0aW9uIG9m
-IHRoZSBpbnRlcnJ1cHQgaXMgZG9uZSBhdCB0aGUgZW5kIG9mIHRoZQo+Pj4+Pj4gaGFuZGxpbmcu
-Cj4+Pj4+Pgo+Pj4+Pj4gVGhpcyBtZWFucyB0aGUgX0lSUV9QRU5ESU5HIGxvZ2ljIGlzIHVuZWNl
-c3Nhcnkgb24gQXJtIGFzIGEgc2FtZQo+Pj4+Pj4gaW50ZXJydXB0IGNhbiBuZXZlciBjb21lIHVw
-IHdoaWxlIGluIHRoZSBsb29wLiBTbyByZW1vdmUgaXQgdG8KPj4+Pj4+IHNpbXBsaWZ5IHRoZSBp
-bnRlcnJ1cHQgaGFuZGxlIGNvZGUuCj4+Pj4+Pgo+Pj4+Pj4gU2lnbmVkLW9mZi1ieTogSnVsaWVu
-IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPj4+Pj4+IC0tLQo+Pj4+Pj4gICAgIHhlbi9h
-cmNoL2FybS9pcnEuYyB8IDMyICsrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0tCj4+Pj4+
-PiAgICAgMSBmaWxlIGNoYW5nZWQsIDEwIGluc2VydGlvbnMoKyksIDIyIGRlbGV0aW9ucygtKQo+
-Pj4+Pj4KPj4+Pj4+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vaXJxLmMgYi94ZW4vYXJjaC9h
-cm0vaXJxLmMKPj4+Pj4+IGluZGV4IGM1MWNmMzMzY2UuLjM4Nzc2NTdhNTIgMTAwNjQ0Cj4+Pj4+
-PiAtLS0gYS94ZW4vYXJjaC9hcm0vaXJxLmMKPj4+Pj4+ICsrKyBiL3hlbi9hcmNoL2FybS9pcnEu
-Ywo+Pj4+Pj4gQEAgLTE5OSw2ICsxOTksNyBAQCBpbnQgcmVxdWVzdF9pcnEodW5zaWduZWQgaW50
-IGlycSwgdW5zaWduZWQgaW50Cj4+Pj4+PiBpcnFmbGFncywKPj4+Pj4+ICAgICB2b2lkIGRvX0lS
-UShzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncywgdW5zaWduZWQgaW50IGlycSwgaW50Cj4+Pj4+
-PiBpc19maXEpCj4+Pj4+PiAgICAgewo+Pj4+Pj4gICAgICAgICBzdHJ1Y3QgaXJxX2Rlc2MgKmRl
-c2MgPSBpcnFfdG9fZGVzYyhpcnEpOwo+Pj4+Pj4gKyAgICBzdHJ1Y3QgaXJxYWN0aW9uICphY3Rp
-b247Cj4+Pj4+PiAgICAgICAgICAgcGVyZmNfaW5jcihpcnFzKTsKPj4+Pj4+ICAgICBAQCAtMjQy
-LDM1ICsyNDMsMjIgQEAgdm9pZCBkb19JUlEoc3RydWN0IGNwdV91c2VyX3JlZ3MgKnJlZ3MsCj4+
-Pj4+PiB1bnNpZ25lZAo+Pj4+Pj4gaW50IGlycSwgaW50IGlzX2ZpcSkKPj4+Pj4+ICAgICAgICAg
-ICAgIGdvdG8gb3V0X25vX2VuZDsKPj4+Pj4+ICAgICAgICAgfQo+Pj4+Pj4gICAgIC0gICAgc2V0
-X2JpdChfSVJRX1BFTkRJTkcsICZkZXNjLT5zdGF0dXMpOwo+Pj4+Pj4gLQo+Pj4+Pj4gLSAgICAv
-Kgo+Pj4+Pj4gLSAgICAgKiBTaW5jZSB3ZSBzZXQgUEVORElORywgaWYgYW5vdGhlciBwcm9jZXNz
-b3IgaXMgaGFuZGxpbmcgYQo+Pj4+Pj4gZGlmZmVyZW50Cj4+Pj4+PiAtICAgICAqIGluc3RhbmNl
-IG9mIHRoaXMgc2FtZSBpcnEsIHRoZSBvdGhlciBwcm9jZXNzb3Igd2lsbCB0YWtlIGNhcmUKPj4+
-Pj4+IG9mCj4+Pj4+PiBpdC4KPj4+Pj4+IC0gICAgICovCj4+Pj4+PiAtICAgIGlmICggdGVzdF9i
-aXQoX0lSUV9ESVNBQkxFRCwgJmRlc2MtPnN0YXR1cykgfHwKPj4+Pj4+IC0gICAgICAgICB0ZXN0
-X2JpdChfSVJRX0lOUFJPR1JFU1MsICZkZXNjLT5zdGF0dXMpICkKPj4+Pj4+ICsgICAgaWYgKCB0
-ZXN0X2JpdChfSVJRX0RJU0FCTEVELCAmZGVzYy0+c3RhdHVzKSApCj4+Pj4+PiAgICAgICAgICAg
-ICBnb3RvIG91dDsKPj4+Pj4KPj4+Pj4gSXQgaXMgYSBnb29kIGlkZWEgdG8gcmVtb3ZlIHRoZSBJ
-UlFfUEVORElORyBsb2dpYywgdGhhdCBpcyBPSy4KPj4+Pj4KPj4+Pj4KPj4+Pj4gSG93ZXZlciwg
-YXJlIHdlIHN1cmUgdGhhdCB3ZSB3YW50IHRvIHJlbW92ZSB0aGUgX0lSUV9JTlBST0dSRVNTIGNo
-ZWNrCj4+Pj4+IHRvbz8gSVJRIGhhbmRsZXJzIHNob3VsZG4ndCBiZSBjYWxsZWQgdHdpY2UgaW4g
-YSByb3cuIEdpdmVuIHRoYXQKPj4+Pj4gX0lSUV9JTlBST0dSRVNTIGNhbiBiZSBzZXQgbWFudWFs
-bHkgKGdpY3YyX3NldF9hY3RpdmVfc3RhdGUpIGl0IHNlZW1zIGl0Cj4+Pj4+IHdvdWxkIGJlIGEg
-Z29vZCBpZGVhIHRvIGtlZXAgdGhlIGNoZWNrIGFueXdheT8KPj4+Pgo+Pj4+IHNldF9hY3RpdmVf
-c3RhdGUgaXMgb25seSB1c2VkIGJ5IHRoZSB2R0lDIHRvIHJlcGxpY2F0ZSBzdGF0ZSBmcm9tIG9m
-IHRoZQo+Pj4+IHZpcnR1YWwgaW50ZXJydXB0IHRvIHRoZSBwaHlzaWNhbCBpbnRlcnJ1cHQuIFdl
-IGRvbid0IGhhdmUgdGhlIHZpcnR1YWwKPj4+PiBpbnRlcnJ1cHQgaW4gdGhpcyBwYXRoIChzZWUg
-YWJvdmUpLgo+Pj4+Cj4+Pj4gQW55IG90aGVyIHVzZXIgKGUuZyBpbnRlcnJ1cHRzIHJvdXRlZCB0
-byBYZW4pIHdvdWxkIGJlIHByZXR0eSBicm9rZW4uIEF0Cj4+Pj4gYmVzdAo+Pj4+IHlvdSB3b3Vs
-ZCBicmVhayB0aGUgaW50ZXJydXB0IGZsb3cuIEF0IHdvcnN0LCB5b3UgbWF5IG5ldmVyIHJlY2Vp
-dmUgdGhlCj4+Pj4gaW50ZXJydXB0IGFnYWluLgo+Pj4+Cj4+Pj4gU28gSSB0aGluayB3ZSBjYW4g
-ZHJvcCBfSVJRX1BST0dSRVNTIGhlcmUuCj4+Pgo+Pj4gSSBnYXZlIGl0IGEgY2xvc2UgbG9vay4g
-WW91IGFyZSByaWdodCwgaXQgaXMgc2FmZSB0byByZW1vdmUgdGhlCj4+PiBfSVJRX1BST0dSRVNT
-IGNoZWNrIGhlcmUuCj4+Pgo+Pj4gUmV2aWV3ZWQtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0
-YWJlbGxpbmlAa2VybmVsLm9yZz4KPj4+Cj4+Pgo+Pj4gVGhlIHRoaW5nIHRoYXQgd29ycmllcyBt
-ZSBhIGJpdCBpcyB0aGF0IHRlY2huaWNhbGx5IHNldF9hY3RpdmVfc3RhdGUgaXMKPj4+IHBhcnQg
-b2YgdGhlIGdpY19od19vcGVyYXRpb25zIGZ1bmN0aW9ucyB3aGljaCBhcmUgbm90IG5lY2Vzc2Fy
-aWx5IGd1ZXN0Cj4+PiBzcGVjaWZpYzogd2UgaGF2ZW4ndCB3cml0dGVuIGRvd24gYW55d2hlcmUg
-dGhhdCBzZXRfYWN0aXZlX3N0YXRlIGNhbm5vdAo+Pj4gYmUgY2FsbGVkIHBhc3Npbmcgb25lIG9m
-IHRoZSB4ZW4gaXJxcyBhcyBwYXJhbWV0ZXIuIEkgYWdyZWUgaXQgd291bGQgYmUKPj4+IGJyb2tl
-biB0byBkbyBzbywgYnV0IHN0aWxsLi4uIE1heWJlIHdlIHNob3VsZCBhZGQgYSBjb21tZW50Pwo+
-Pgo+PiBIb3cgYWJvdXQgYWRkaW5nIGFuIEFTU0VSVCh0ZXN0X2JpdChfSVJRX0dVRVNULCAmZGVz
-Yy0+c3RhdHVzKSkgPwo+IAo+IGV2ZW4gYmV0dGVyCgpEbyB5b3Ugd2FudCB0aGUgY2hhbmdlIHRv
-IGJlIGluIHRoaXMgcGF0Y2ggb3Igc2VwYXJhdGVseT8KCkNoZWVycywKCi0tIApKdWxpZW4gR3Jh
-bGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0952740839670666082==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="6c2NcOVqGQ03X4Wi"
+Content-Disposition: inline
+
+
+--6c2NcOVqGQ03X4Wi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, May 20, 2019 at 11:47:39AM -0300, Mauro Carvalho Chehab wrote:
+> Mostly due to x86 and acpi conversion, several documentation
+> links are still pointing to the old file. Fix them.
+>=20
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+
+Thanks, didn't notice that.
+
+>  Documentation/i2c/instantiating-devices          |  2 +-
+
+=2E..
+
+> diff --git a/Documentation/i2c/instantiating-devices b/Documentation/i2c/=
+instantiating-devices
+> index 0d85ac1935b7..5a3e2f331e8c 100644
+> --- a/Documentation/i2c/instantiating-devices
+> +++ b/Documentation/i2c/instantiating-devices
+> @@ -85,7 +85,7 @@ Method 1c: Declare the I2C devices via ACPI
+>  -------------------------------------------
+> =20
+>  ACPI can also describe I2C devices. There is special documentation for t=
+his
+> -which is currently located at Documentation/acpi/enumeration.txt.
+> +which is currently located at Documentation/firmware-guide/acpi/enumerat=
+ion.rst.
+> =20
+> =20
+>  Method 2: Instantiate the devices explicitly
+
+For this I2C part:
+
+Reviewed-by: Wolfram Sang <wsa@the-dreams.de>
+
+
+--6c2NcOVqGQ03X4Wi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAlziwiIACgkQFA3kzBSg
+Kbb/+hAArOEJ2RcuEqvOP7Ge80J7VxtEVTCR0sWRFg/7cpRGLnwf1qLSAUlfAJYj
+fUhZ9ANfeB4Y4ZltOPwJ34KNtZy/kYzYyoy/WgiNfJUrf+s7auOF+dMXRvBe8VyX
+v/pHpAMzTf8rtNkaESOahPExL1lgrI2dShZa3Mxofm2eb3Kam0OJRr6Cvj7mA/Rq
+PHq1QUlG+Y3hZdvAHjQ6GN6wr+pNnhqeSSAd3BZg5MZQpPRiaK+C4tPkqOD/TNwX
+9+iPJTMPhWsdei4UO1POHGCOclFatxkPOQm9JjsTD1h1lEJK7Afs1cTCd0crwpzW
+nQuj+MSjKTqcOwQ4hF1x6PwlbJm4Hq/+r6b50UsnQYai6pt7Khp9OISmYTxPQhgI
+8aXZbjsMB3k9ebYulULGdF0f3p/IPoqneTUf3yi5OxNbhJ8eyNcQ4l35MP9hEyYb
+H/9a/G4GXP7CLyCtKd53OtNeE1tTF4zGKIhe7v9OInHolA3gLx1R1rxiBeQB+XyA
+NO/4FdEIZ1QWAyl7m1aWBtYpar2uvFyEhZWG3sVhZYsA9dQNBfgzFSu60wus7hy4
+D9FxYijaEnHZvPivrTwfcp8ittAvsIrM3xANcOhWXEU6eC6w0KX15QiiyPQUbssL
+H3fPVUBxQlwicyY98Dvh7eJmnD1WEsMcDmDI5RqrAxhdD/bxbN0=
+=b4+p
+-----END PGP SIGNATURE-----
+
+--6c2NcOVqGQ03X4Wi--
+
+
+--===============0952740839670666082==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0952740839670666082==--
+
