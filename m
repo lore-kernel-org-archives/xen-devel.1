@@ -1,10 +1,9 @@
 From: "Jan Beulich" <JBeulich@suse.com>
-Subject: Re: [PATCH v2 2/2] autotools: Remove the configure
- script and just use autoconf
-Date: Mon, 20 May 2019 02:05:11 -0600
-Message-ID: <5CE25FB70200007800230769@prv1-mh.provo.novell.com>
-References: <20190517223152.29839-1-alistair.francis@wdc.com>
- <20190517223152.29839-2-alistair.francis@wdc.com>
+Subject: Re: [PATCH] x86/spec-ctrl: Knights Landing/Mill are
+ retpoline-safe
+Date: Mon, 20 May 2019 02:10:38 -0600
+Message-ID: <5CE260FE0200007800230789@prv1-mh.provo.novell.com>
+References: <1558119005-30941-1-git-send-email-andrew.cooper3@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -13,9 +12,9 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=gSYI=TU=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hSdIO-0003xG-B8
- for xen-devel@lists.xenproject.org; Mon, 20 May 2019 08:05:20 +0000
-In-Reply-To: <20190517223152.29839-2-alistair.francis@wdc.com>
+ id 1hSdNf-0004lp-VA
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2019 08:10:47 +0000
+In-Reply-To: <1558119005-30941-1-git-send-email-andrew.cooper3@citrix.com>
 Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,38 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>, Alistair Francis <alistair.francis@wdc.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, alistair23@gmail.com
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-Pj4+IE9uIDE4LjA1LjE5IGF0IDAwOjMxLCA8YWxpc3RhaXIuZnJhbmNpc0B3ZGMuY29tPiB3cm90
-ZToKPiBEb24ndCBoYXJkY29kZSBvbGQgdmVyc2lvbnMgb2YgY29uZmlndXJlIGluIHRoZSBzb3Vy
-Y2UgY29kZSwgaW5zdGVhZAo+IGxldCdzIGp1c3QgdXNlIGF1dG9jb25mIHRvIGdlbmVyYXRlIHRo
-ZW0uCj4gCj4gU2lnbmVkLW9mZi1ieTogQWxpc3RhaXIgRnJhbmNpcyA8YWxpc3RhaXIuZnJhbmNp
-c0B3ZGMuY29tPgoKRm9yIHRoZSByZWNvcmQgLSBJIHN0cm9uZ2x5IGRpc2FncmVlIHRvIHRoaXMg
-dW5sZXNzIHRoZXJlJ3MgYSBnZW5lcmFsCm1vdmVtZW50IGluIEdOVSBwcm9qZWN0cyB0b3dhcmRz
-IHN1Y2ggYSBtb2RlbC4gQWxsIHByb2plY3RzIEkgd29yawp3aXRoIGF0IGxlYXN0IGV2ZXJ5IG5v
-dyBhbiB0aGVuIChiaW51dGlscywgZ2RiLCBnY2MsIGdsaWJjLCBhbmQgYSBmZXcKbGVzcyBwcm9t
-aW5lbnQgb3RoZXJzKSBhcmUgbm90LCBhZmFpYSwgbW92aW5nIGludG8gdGhpcyBkaXJlY3Rpb24u
-IChJCm5vdGljZSB0aGF0IGdpdCBhbmQgbWFrZSwgZm9yIGV4YW1wbGUsIGRvbid0IGhhdmUgaXQg
-aW4gdGhlaXIgZ2l0IHRyZWVzLApidXQgZG8gaGF2ZSBpdCBpbiByZWxlYXNlIHRhcmJhbGxzLikK
-CkFzIGFuIGFzaWRlIC0gdGhpcyBkaWZmc3RhdAoKPiAtLS0KPiAgLmdpdGlnbm9yZSAgICAgICAg
-fCAgICAgNSArCj4gIGNvbmZpZ3VyZSAgICAgICAgIHwgIDM2MTggLS0tLS0tLS0tLS0tLS0tCj4g
-IGRvY3MvY29uZmlndXJlICAgIHwgIDM0MjcgLS0tLS0tLS0tLS0tLS0KPiAgc3R1YmRvbS9jb25m
-aWd1cmUgfCAgNDg3MCAtLS0tLS0tLS0tLS0tLS0tLS0tCj4gIHRvb2xzL2NvbmZpZ3VyZSAgIHwg
-MTEwODAgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KPiAgNSBm
-aWxlcyBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDIyOTk1IGRlbGV0aW9ucygtKQoKc2hvd3Mg
-dGhhdCB5b3UgZG9uJ3QgY2FyZSB0byB1cGRhdGUgYW55IG9mIHRoZSBkb2N1bWVudGF0aW9uIGF0
-CmFsbCwgeWV0IEkgdGhpbmsgc3VjaCBhIGNoYW5nZSB3b3VsZCBhbG1vc3QgY2VydGFpbmx5IG5l
-ZWQgdG8gZG8gc28sCmJlc2lkZXMgYWxzbyBtYWtpbmcgc3VyZSB0aGlzIGdldHMgcG9pbnRlZCBv
-dXQgaW4gdGhlIG5leHQgcmVsZWFzZSdzCnJlbGVhc2Ugbm90ZXMuIFRoZXJlIGFyZSBhbHNvIG1h
-a2VmaWxlcyB3aGljaCBwb2ludCBvdXQgdGhhdAouL2NvbmZpZ3VyZSBuZWVkcyBydW5uaW5nIGZp
-cnN0LiBTdWNoIGVycm9yIG1lc3NhZ2VzIHdvdWxkIGFsc28KbmVlZCBtb2RpZmljYXRpb24uCgpB
-biBieSBub3QgdXBkYXRpbmcgZG9jdW1lbnRhdGlvbiBpdCBhbHNvIHJlbWFpbnMgdW5jbGVhcgp3
-aGF0IHRoZSBtaW5pbXVtIGF1dG9jb25mIHZlcnNpb24gd291bGQgYmUgdGhhdCdzIHJlcXVpcmVk
-LiBZZXQKYXMgcG9pbnRlZCBvdXQgaW4gdGhlIGVhcmxpZXIgZGlzY3Vzc2lvbiwgdG8gYmUgYWJs
-ZSB0byBidWlsZCBvbgpvbGRlciBkaXN0cm9zIGl0IGlzIGVzc2VudGlhbCB0byBrbm93IHRoaXMg
-KGkuZS4gd2hldGhlciB0byBmaXJzdCBidWlsZAphIG1vcmUgbW9kZXJuIG9uZSB0aGVyZSkuCgpK
-YW4KCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
-LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
-Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+Pj4+IE9uIDE3LjA1LjE5IGF0IDIwOjUwLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gVGhleSBhcmUgYm90aCBBaXJtb250LWJhc2VkIGFuZCBzaG91bGQgaGF2ZSBiZWVuIGlu
+Y2x1ZGVkIGluIGMvcyAxN2Y3NDI0MmNjZgo+ICJ4ODYvc3BlYy1jdHJsOiBFeHRlbmQgcmVwb2xp
+bmUgc2FmZXkgY2FsY3VhdGlvbnMgZm9yIGVJQlJTIGFuZCBBdG9tIHBhcnRzIi4KPiAKPiBTaWdu
+ZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKQWNr
+ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
