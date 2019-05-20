@@ -1,19 +1,17 @@
-From: Ian Jackson <ian.jackson@citrix.com>
-Subject: Re: [PATCH v2 1/2] autotools: Updage config.guess and
- config.sub
-Date: Mon, 20 May 2019 18:12:49 +0100
-Message-ID: <23778.57361.772390.248245@mariner.uk.xensource.com>
-References: <20190517223152.29839-1-alistair.francis@wdc.com>
+From: Alistair Francis <alistair.francis@wdc.com>
+Subject: [PATCH v2] xen/drivers/char: Don't require vpl011 for
+ all non-x86 archs
+Date: Mon, 20 May 2019 10:13:15 -0700
+Message-ID: <20190520171315.12026-1-alistair.francis@wdc.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=26W0=TU=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1hSlqn-0007wb-Px
- for xen-devel@lists.xenproject.org; Mon, 20 May 2019 17:13:25 +0000
-In-Reply-To: <20190517223152.29839-1-alistair.francis@wdc.com>
+ <SRS0=qpne=TU=wdc.com=prvs=036de673d=alistair.francis@srs-us1.protection.inumbo.net>)
+ id 1hSlsQ-00083B-QN
+ for xen-devel@lists.xenproject.org; Mon, 20 May 2019 17:15:07 +0000
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,22 +20,20 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Alistair Francis <alistair.francis@wdc.com>
-Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, "julien.grall@arm.com" <julien.grall@arm.com>, "jbeulich@suse.com" <jbeulich@suse.com>, "alistair23@gmail.com" <alistair23@gmail.com>, "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: sstabellini@kernel.org, wei.liu2@citrix.com, konrad.wilk@oracle.com, George.Dunlap@eu.citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, julien.grall@arm.com, Alistair Francis <alistair.francis@wdc.com>, jbeulich@suse.com, andrew.cooper3@citrix.com, alistair23@gmail.com
 List-Id: xen-devel@lists.xenproject.org
 
-QWxpc3RhaXIgRnJhbmNpcyB3cml0ZXMgKCJbUEFUQ0ggdjIgMS8yXSBhdXRvdG9vbHM6IFVwZGFn
-ZSBjb25maWcuZ3Vlc3MgYW5kIGNvbmZpZy5zdWIiKToKPiBUaGUgYXV0b2NvbmYgbWFudWFsIFsx
-XSBzcGVjaWZpZXMgdGhhdCBhcyB3ZSBkZWZpbmUgQUNfQ0FOT05JQ0FMX0hPU1Qgd2UKPiBtdXN0
-IHN1cHBseSBjb25maWcuZ3Vlc3MgYW5kIGNvbmZpZy5zdWIuIEluIHdoaWNoIGNhc2UgbGV0J3Mg
-dXBkYXRlIHRoZW0KPiBmcm9tIFsyXSBjb21taXQ6IGI5ODQyNGMyNCAiY29uZmlnLmd1ZXNzOiBS
-ZW1vdmUgc3BhY2UgYWZ0ZXIgIiNlbmRpZiIsIGFzCj4gR251bGliIGFuZCBzb21lIgo+IAo+IFRo
-aXMgYWxsb3dzIHVzIHRvIHN1cHBvcnQgbW9yZSBhY2hpdGVjdHVyZXMgKFJJU0MtVikgYW5kIG90
-aGVyIGdlbmVyYWwKPiBpbXByb3ZlbWVudHMuCgpJIGhhdmUgbm90IHZlcmlmaWVkIHRoZSBjb250
-ZW50cyBvZiB0aHNpIHBhdGNoIGFnYWluc3QgdGhlIGdudWxpYiBnaXQKcmVwb3NpdG9yeS4gIFRo
-YXQgaXMgYSB0aGluZyB0aGF0IHNob3VsZCBiZSBkb25lLiAgQnV0IGl0J3MgcHJvYmFibHkKZWFz
-aWVzdCB0byBkbyB0aGF0IGF0IHRoZSB0aW1lIG9mIGNvbW1pdHRpbmcgdGhpcy4KCkFja2VkLWJ5
-OiBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AZXUuY2l0cml4LmNvbT4KCklhbi4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+TWFrZSB0aGUgYXNtL3ZwbDAxMS5oIGRlcGVuZGVudCBvbiB0aGUgQ09ORklHX1NCU0FfVlVBUlRf
+Q09OU09MRSBkZWZpbmUuCgpTaWduZWQtb2ZmLWJ5OiBBbGlzdGFpciBGcmFuY2lzIDxhbGlzdGFp
+ci5mcmFuY2lzQHdkYy5jb20+Ci0tLQogeGVuL2RyaXZlcnMvY2hhci9jb25zb2xlLmMgfCAyICst
+CiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1n
+aXQgYS94ZW4vZHJpdmVycy9jaGFyL2NvbnNvbGUuYyBiL3hlbi9kcml2ZXJzL2NoYXIvY29uc29s
+ZS5jCmluZGV4IDliYmNiMGY1N2EuLjI0Mjg3ZTU5Y2IgMTAwNjQ0Ci0tLSBhL3hlbi9kcml2ZXJz
+L2NoYXIvY29uc29sZS5jCisrKyBiL3hlbi9kcml2ZXJzL2NoYXIvY29uc29sZS5jCkBAIC0zNiw3
+ICszNiw3IEBACiAjaWZkZWYgQ09ORklHX1g4NgogI2luY2x1ZGUgPHhlbi9jb25zb2xlZC5oPgog
+I2luY2x1ZGUgPGFzbS9ndWVzdC5oPgotI2Vsc2UKKyNlbGlmIENPTkZJR19TQlNBX1ZVQVJUX0NP
+TlNPTEUKICNpbmNsdWRlIDxhc20vdnBsMDExLmg+CiAjZW5kaWYKIAotLSAKMi4yMS4wCgoKX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
+aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
+ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
