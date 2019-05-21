@@ -1,78 +1,45 @@
-From: Kamil Paral <kparal@redhat.com>
-Subject: Re: [Xen-devel] Criteria / validation proposal: drop Xen
-Date: Tue, 21 May 2019 12:30:59 +0200
-Message-ID: <CA+cBOTfqWiEBTv-w8pbpMP3CHwpUp9v9HhLJurEka2zCKBfPpg@mail.gmail.com>
-References: <1499367541.22465.102.camel@fedoraproject.org> <20170706191317.GE21146@char.us.oracle.com>
- <1499370325.22465.107.camel@fedoraproject.org> <06A5F10A-88B7-440F-AADB-56A2F1704A86@xenproject.org>
- <1EA56286-DCCA-4FFA-B8A3-A6D4C956A7CF@gmail.com>
-Reply-To: For testing and quality assurance of Fedora releases <test@lists.fedoraproject.org>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: [PATCH v2 1/2] autotools: Updage config.guess and
+ config.sub
+Date: Tue, 21 May 2019 11:54:28 +0100
+Message-ID: <20190521105428.GF1846@zion.uk.xensource.com>
+References: <20190517223152.29839-1-alistair.francis@wdc.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============4105352965326893288=="
-Return-path: <test-bounces@lists.fedoraproject.org>
-In-Reply-To: <1EA56286-DCCA-4FFA-B8A3-A6D4C956A7CF@gmail.com>
-List-Archive: <https://lists.fedoraproject.org/archives/list/test@lists.fedoraproject.org/>
-List-Help: <mailto:test-request@lists.fedoraproject.org?subject=help>
-List-Post: <mailto:test@lists.fedoraproject.org>
-List-Subscribe: <mailto:test-join@lists.fedoraproject.org>
-List-Unsubscribe: <mailto:test-leave@lists.fedoraproject.org>
-To: For testing and quality assurance of Fedora releases <test@lists.fedoraproject.org>
-Cc: "MICHAEL A. YOUNG" <m.a.young@durham.ac.uk>, xen-devel@lists.xensource.com, Dario Faggioli <dfaggioli@suse.com>, Daniel Kiper <daniel.kiper@oracle.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ian Jackson <Ian.Jackson@citrix.com>, Committers <committers@xenproject.org>, "marmarek@invisiblethingslab.com" <marmarek@invisiblethingslab.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+Return-path: <xen-devel-bounces@lists.xenproject.org>
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=3mDO=TV=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hT2Po-0007g3-Uu
+ for xen-devel@lists.xenproject.org; Tue, 21 May 2019 10:54:40 +0000
+Content-Disposition: inline
+In-Reply-To: <20190517223152.29839-1-alistair.francis@wdc.com>
+List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
+List-Post: <mailto:xen-devel@lists.xenproject.org>
+List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
+List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
+ <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Errors-To: xen-devel-bounces@lists.xenproject.org
+Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
+To: Alistair Francis <alistair.francis@wdc.com>
+Cc: sstabellini@kernel.org, wei.liu2@citrix.com, konrad.wilk@oracle.com, George.Dunlap@eu.citrix.com, andrew.cooper3@citrix.com, ian.jackson@eu.citrix.com, tim@xen.org, julien.grall@arm.com, jbeulich@suse.com, alistair23@gmail.com, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
---===============4105352965326893288==
-Content-Type: multipart/alternative; boundary="000000000000def0270589635954"
-
---000000000000def0270589635954
-Content-Type: text/plain; charset="UTF-8"
-
-On Mon, May 20, 2019 at 7:45 PM Lars Kurth <lars.kurth.xen@gmail.com> wrote:
-
-> @Adam and Fedora Testing & QA:
-> any views on my proposal?
-> Regards
-> Lars
->
-
-Hi Lars,
-thanks for your reply. Adam was on a long vacation and he's probably the
-most qualified person to reply to you, sorry for not telling you sooner.
-Adam is now back, so he should hopefully join the conversation shortly.
-
-Cheers,
-Kamil
-
---000000000000def0270589635954
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
-_attr">On Mon, May 20, 2019 at 7:45 PM Lars Kurth &lt;<a href=3D"mailto:lar=
-s.kurth.xen@gmail.com">lars.kurth.xen@gmail.com</a>&gt; wrote:<br></div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex"><div style=3D"overflow-wrap:=
- break-word;">@Adam and Fedora Testing &amp; QA:<div>any views on my propos=
-al?</div><div>Regards</div><div>Lars<br></div></div></blockquote><div><br><=
-/div>Hi Lars,</div><div class=3D"gmail_quote">thanks for your reply. Adam w=
-as on a long vacation and he&#39;s probably the most qualified person to re=
-ply to you, sorry for not telling you sooner. Adam is now back, so he shoul=
-d hopefully join the conversation shortly.</div><div class=3D"gmail_quote">=
-<br></div><div class=3D"gmail_quote">Cheers,</div><div class=3D"gmail_quote=
-">Kamil</div><div class=3D"gmail_quote"><br></div></div>
-
---000000000000def0270589635954--
-
---===============4105352965326893288==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KdGVzdCBtYWls
-aW5nIGxpc3QgLS0gdGVzdEBsaXN0cy5mZWRvcmFwcm9qZWN0Lm9yZwpUbyB1bnN1YnNjcmliZSBz
-ZW5kIGFuIGVtYWlsIHRvIHRlc3QtbGVhdmVAbGlzdHMuZmVkb3JhcHJvamVjdC5vcmcKRmVkb3Jh
-IENvZGUgb2YgQ29uZHVjdDogaHR0cHM6Ly9nZXRmZWRvcmEub3JnL2NvZGUtb2YtY29uZHVjdC5o
-dG1sCkxpc3QgR3VpZGVsaW5lczogaHR0cHM6Ly9mZWRvcmFwcm9qZWN0Lm9yZy93aWtpL01haWxp
-bmdfbGlzdF9ndWlkZWxpbmVzCkxpc3QgQXJjaGl2ZXM6IGh0dHBzOi8vbGlzdHMuZmVkb3JhcHJv
-amVjdC5vcmcvYXJjaGl2ZXMvbGlzdC90ZXN0QGxpc3RzLmZlZG9yYXByb2plY3Qub3JnCg==
-
---===============4105352965326893288==--
+T24gRnJpLCBNYXkgMTcsIDIwMTkgYXQgMDM6MzE6NTFQTSAtMDcwMCwgQWxpc3RhaXIgRnJhbmNp
+cyB3cm90ZToKPiBUaGUgYXV0b2NvbmYgbWFudWFsIFsxXSBzcGVjaWZpZXMgdGhhdCBhcyB3ZSBk
+ZWZpbmUgQUNfQ0FOT05JQ0FMX0hPU1Qgd2UKPiBtdXN0IHN1cHBseSBjb25maWcuZ3Vlc3MgYW5k
+IGNvbmZpZy5zdWIuIEluIHdoaWNoIGNhc2UgbGV0J3MgdXBkYXRlIHRoZW0KPiBmcm9tIFsyXSBj
+b21taXQ6IGI5ODQyNGMyNCAiY29uZmlnLmd1ZXNzOiBSZW1vdmUgc3BhY2UgYWZ0ZXIgIiNlbmRp
+ZiIsIGFzCj4gR251bGliIGFuZCBzb21lIgo+IAo+IFRoaXMgYWxsb3dzIHVzIHRvIHN1cHBvcnQg
+bW9yZSBhY2hpdGVjdHVyZXMgKFJJU0MtVikgYW5kIG90aGVyIGdlbmVyYWwKPiBpbXByb3ZlbWVu
+dHMuCj4gCj4gMTogaHR0cHM6Ly93d3cuZ251Lm9yZy9zb2Z0d2FyZS9hdXRvY29uZi9tYW51YWwv
+YXV0b2NvbmYuaHRtbCNDYW5vbmljYWxpemluZwo+IDI6IGh0dHBzOi8vZ2l0LnNhdmFubmFoLmdu
+dS5vcmcvY2dpdC9jb25maWcuZ2l0Lwo+IAo+IFNpZ25lZC1vZmYtYnk6IEFsaXN0YWlyIEZyYW5j
+aXMgPGFsaXN0YWlyLmZyYW5jaXNAd2RjLmNvbT4KCkFja2VkLWJ5OiBXZWkgTGl1IDx3ZWkubGl1
+MkBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
