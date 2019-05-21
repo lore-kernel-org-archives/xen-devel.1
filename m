@@ -1,22 +1,22 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH] xen/public: arch-arm: Restrict the
- visibility of struct vcpu_guest_core_regs
-Date: Tue, 21 May 2019 10:55:49 +0100
-Message-ID: <f2f912ac-a1c6-1f07-f708-cf2935c0270f@arm.com>
-References: <20190520181250.17404-1-julien.grall@arm.com>
- <5CE3C45A0200007800230E0E@prv1-mh.provo.novell.com>
- <1c7f43ce-7df2-24c9-ecb2-d8be1afebfa5@arm.com>
- <5CE3C8370200007800230E40@prv1-mh.provo.novell.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Subject: Re: [PATCH MM-PART2 RESEND v2 03/19] xen/arm:
+ processor: Use BIT(.., UL) instead of _AC(1, U) in SCTLR_ defines
+Date: Tue, 21 May 2019 13:01:18 +0300
+Message-ID: <35041df1-0c11-e5a0-037c-c26b2737e8d3@gmail.com>
+References: <20190514122456.28559-1-julien.grall@arm.com>
+ <20190514122456.28559-4-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=YYEG=TV=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hT1Uv-0002Ko-Qx
- for xen-devel@lists.xenproject.org; Tue, 21 May 2019 09:55:53 +0000
-In-Reply-To: <5CE3C8370200007800230E40@prv1-mh.provo.novell.com>
+ <SRS0=wdSZ=TV=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1hT1aF-0003A8-52
+ for xen-devel@lists.xenproject.org; Tue, 21 May 2019 10:01:23 +0000
+Received: by mail-lf1-x144.google.com with SMTP id u27so12584039lfg.10
+ for <xen-devel@lists.xenproject.org>; Tue, 21 May 2019 03:01:22 -0700 (PDT)
+In-Reply-To: <20190514122456.28559-4-julien.grall@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -26,43 +26,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
+Cc: Oleksandr_Tyshchenko@epam.com, Stefano Stabellini <sstabellini@kernel.org>, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gNS8yMS8xOSAxMDo0MyBBTSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24g
-MjEuMDUuMTkgYXQgMTE6MzUsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IE9uIDUv
-MjEvMTkgMTA6MjYgQU0sIEphbiBCZXVsaWNoIHdyb3RlOgo+Pj4+Pj4gT24gMjAuMDUuMTkgYXQg
-MjA6MTIsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+Pj4gICAgICAgQXMgdGhpcyBp
-cyBub3cgWGVuIGFuZCB0b29scyBvbmx5LCBJIGFtIHdvbmRlcmluZyB3aGV0aGVyIHRoZSBjaGVj
-ayBvbgo+Pj4+ICAgICAgIEdOVV9DIGlzIHN0aWxsIG5lY2Vzc2FyeS4gSSBhbSBoYXBweSB0byBz
-ZW5kIGEgZm9sbG93LXVwIHBhdGNoIChvciBmb2xkCj4+Pj4gICAgICAgaW4gdGhpcyBvbmUpIGlm
-IGl0IGNhbiBiZSByZW1vdmVkLgo+Pj4KPj4+IEkgdGhpbmsgdGhpcyBzaG91bGQgYmUgZHJvcHBl
-ZCBpZiBpdCBjYW4gYmUgd2l0aG91dCBicmVha2luZyBhbnkKPj4+IHBhcnQgb2YgdGhlIGJ1aWxk
-Lgo+PiBUaGlzIGlzIGJlY2F1c2UgYWxsIHRoZSB0b29scyBhcmUgcGFydCBvZiB4ZW4uZ2l0LCBy
-aWdodD8KPiAKPiBSaWdodCAtIG5vLW9uZSBlbHNlIGlzIHN1cHBvc2VkIHRvIGRlZmluZSBfX1hF
-Tl9UT09MU19fLCBvcgo+IGlmIGFueW9uZSBkb2VzLCB0aGV5J3JlIG9uIHRoZWlyIG93bi4KClRo
-YW5rcyBmb3IgdGhlIGluZm9ybWF0aW9uLiBJIHdpbGwgZG8gYSBmdWxsIGJ1aWxkIGNoZWNrLgoK
-PiAKPj4+PiAtLS0gYS94ZW4vaW5jbHVkZS9wdWJsaWMvYXJjaC1hcm0uaAo+Pj4+ICsrKyBiL3hl
-bi9pbmNsdWRlL3B1YmxpYy9hcmNoLWFybS5oCj4+Pj4gQEAgLTE5Nyw2ICsxOTcsNyBAQAo+Pj4+
-ICAgICAgICB9IHdoaWxlICggMCApCj4+Pj4gICAgI2RlZmluZSBzZXRfeGVuX2d1ZXN0X2hhbmRs
-ZShobmQsIHZhbCkgc2V0X3hlbl9ndWVzdF9oYW5kbGVfcmF3KGhuZCwgdmFsKQo+Pj4+ICAgIAo+
-Pj4+ICsjaWYgZGVmaW5lZChfX1hFTl9fKSB8fCBkZWZpbmVkKF9fWEVOX1RPT0xTX18pCj4+Pj4g
-ICAgI2lmIGRlZmluZWQoX19HTlVDX18pICYmICFkZWZpbmVkKF9fU1RSSUNUX0FOU0lfXykKPj4+
-PiAgICAvKiBBbm9ueW1vdXMgdW5pb24gaW5jbHVkZXMgYm90aCAzMi0gYW5kIDY0LWJpdCBuYW1l
-cyAoZS5nLiwgcjAveDApLiAqLwo+Pj4+ICAgICMgZGVmaW5lIF9fREVDTF9SRUcobjY0LCBuMzIp
-IHVuaW9uIHsgICAgICAgICAgXAo+Pj4+IEBAIC0yNzIsNiArMjczLDggQEAgREVGSU5FX1hFTl9H
-VUVTVF9IQU5ETEUodmNwdV9ndWVzdF9jb3JlX3JlZ3NfdCk7Cj4+Pj4gICAgCj4+Pj4gICAgI3Vu
-ZGVmIF9fREVDTF9SRUcKPj4+PiAgICAKPj4+PiArI2VuZGlmCj4+Pgo+Pj4gSWYgSSB3YXMgdGhl
-IG1haW50YWluZXIgb2YgdGhpcyBjb2RlLCBJJ2QgYXNrIGZvciB0aGUgc3RydWN0IGRlY2xhcmF0
-aW9uCj4+PiB0byBiZSBtb3ZlZCAoaW50byB0aGUgZXhpc3RpbmcgI2lmKSByYXRoZXIgdGhhbiBh
-ZGRpbmcgYSAybmQgI2lmLgo+Pgo+PiBzLzJuZC8zcmQvIDspCj4+Cj4+IFRoZSByZWFzb24gSSBo
-YXZlbid0IGRvbmUgdGhhdCBpcyBnaXQgd2lsbCBnZW5lcmF0ZSBhIGNvbXBsZXRlbHkKPj4gdW5y
-ZWxhdGVkIGRpZmYuIFNvIGl0IG1ha2VzIHF1aXRlIGRpZmZpY3VsdCB0byB1bmRlcnN0YW5kIHRo
-ZSBwdXJwb3NlIG9mCj4+IHRoZSBwYXRjaC4KPiAKPiBXZWxsLCBhcyBzYWlkIC0geW91J3JlIHRo
-ZSBtYWludGFpbmVyLiBJIHdvdWxkbid0IGJlIGJvdGhlcmVkIG92ZXJseQo+IG11Y2ggYnkgYSBz
-dHJhbmdlIGRpZmYgdGhhdCBtaWdodCByZXN1bHQuCgpJIHdpbGwgd2FpdCBvbiBTdGVmYW5vJ3Mg
-aW5wdXQuCgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+CgpPbiAxNC4wNS4xOSAxNToyNCwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IFVzZSB0aGUgcGF0dGVy
+biBCSVQoLi4uLCBVTCkgdG8gbWFrZSB0aGUgY29kZSBtb3JlIHJlYWRhYmxlLiBOb3RlIHRoYXQK
+PiB1bnNpZ25lZCBsb25nIGlzIHVzZWQgaW5zdGVhZCBvZiB1bnNpZ25lZCBiZWNhdXNlIFNDVExS
+IGlzIHRlY2huaWNhbGx5Cj4gMzItYml0IG9uIEFybTMyIGFuZCA2NC1iaXQgb24gQXJtNjQuCj4g
+Cj4gU2lnbmVkLW9mZi1ieTogSnVsaWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KClJl
+dmlld2VkLWJ5OiBBbmRyaWkgQW5pc292IDxhbmRyaWlfYW5pc292QGVwYW0uY29tPgoKLS0gClNp
+bmNlcmVseSwKQW5kcmlpIEFuaXNvdi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
