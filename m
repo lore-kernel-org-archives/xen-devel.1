@@ -1,21 +1,17 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] xen/arm64: livepatch: Fix build after
- 03957f58db
-Date: Tue, 21 May 2019 15:31:06 +0100
-Message-ID: <a60ec3ba-45a3-3f7a-18f8-3f1624fe748b@citrix.com>
-References: <20190521142913.22394-1-julien.grall@arm.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Unhandle NONE type device model broke QDISK backend
+Date: Tue, 21 May 2019 15:37:02 +0100
+Message-ID: <20190521143702.GH1846@zion.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=6u0k=TV=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hT5nN-0000kt-KU
- for xen-devel@lists.xenproject.org; Tue, 21 May 2019 14:31:13 +0000
-In-Reply-To: <20190521142913.22394-1-julien.grall@arm.com>
-Content-Language: en-GB
+ <SRS0=3mDO=TV=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hT5t5-00010H-MF
+ for xen-devel@lists.xenproject.org; Tue, 21 May 2019 14:37:07 +0000
+Content-Disposition: inline
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +20,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org
+To: Olaf Hering <olaf@aepfle.de>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjEvMDUvMjAxOSAxNToyOSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IENvbW1pdCAwMzk1N2Y1
-OGRiICJ4ZW4vY29uc3Q6IEV4dGVuZCB0aGUgZXhpc3RpbmcgbWFjcm8gQklUIHRvIHRha2UgYQo+
-IHN1ZmZpeCBpbiBwYXJhbWV0ZXIiIGRpZG4ndCBjb252ZXJ0IGFsbCB0aGUgY2FsbGVycyBvZiB0
-aGUgbWFjcm8gQklULgo+Cj4gVGhpcyB3aWxsIHJlc3VsdCB0byBhIGJ1aWxkIGJyZWFrYWdlIHdo
-ZW4gZW5hYmxpbmcgTGl2ZXBhdGNoIG9uIGFybTY0Lgo+Cj4gUmVwb3J0ZWQtYnk6IEFuZHJldyBD
-b29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+Cj4gU2lnbmVkLW9mZi1ieTogSnVsaWVu
-IEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KCkFja2VkLWJ5OiBBbmRyZXcgQ29vcGVyIDxh
-bmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+SGkgT2xhZgoKSXQgYXBwZWFycyB0aGVyZSBpcyBhdCBsZWFzdCBvbmUgaW5zdGFuY2UgdGhhdCdz
+IG5vdCBwcm9wZXJseSBoYW5kbGVkLgoKU2VlIGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2pl
+Y3Qub3JnL29zc3Rlc3QvbG9ncy8xMzY0NDAvdGVzdC1hbWQ2NC1hbWQ2NC14bC1xY293Mi8xMC50
+cy1kZWJpYW4tZGktaW5zdGFsbC5sb2cKCmJ4bDogZGVidWc6IGxpYnhsX2RldmljZS5jOjM4MDps
+aWJ4bF9fZGV2aWNlX2Rpc2tfc2V0X2JhY2tlbmQ6IERpc2sgdmRldj14dmRhIHNwZWMuYmFja2Vu
+ZD1xZGlzawpsaWJ4bDogZGVidWc6IGxpYnhsX2xpbnV4LmM6MjM1OmxpYnhsX19nZXRfaG90cGx1
+Z19zY3JpcHRfaW5mbzogRG9tYWluIDE6YmFja2VuZF9raW5kIDMsIG5vIG5lZWQgdG8gZXhlY3V0
+ZSBzY3JpcHRzCmxpYnhsOiBkZWJ1ZzogbGlieGxfZGV2aWNlLmM6MTE3NDpkZXZpY2VfaG90cGx1
+ZzogRG9tYWluIDE6Tm8gaG90cGx1ZyBzY3JpcHQgdG8gZXhlY3V0ZQpsaWJ4bDogZGVidWc6IGxp
+YnhsX2V2ZW50LmM6Njg5OmxpYnhsX19ldl94c3dhdGNoX2RlcmVnaXN0ZXI6IHdhdGNoIHc9MHg1
+NTZiZTYxNTMzNzA6IGRlcmVnaXN0ZXIgdW5yZWdpc3RlcmVkCmxpYnhsOiBlcnJvcjogbGlieGxf
+ZG0uYzozMjY6bGlieGxfX2RvbWFpbl9kZXZpY2VfbW9kZWw6IGludmFsaWQgZGV2aWNlIG1vZGVs
+IHZlcnNpb24gMwpsaWJ4bDogZXJyb3I6IGxpYnhsX2RtLmM6Mjc0NzpkZXZpY2VfbW9kZWxfc3Bh
+d25fb3V0Y29tZTogRG9tYWluIDE6KG51bGwpOiBzcGF3biBmYWlsZWQgKHJjPS0zKQoKVGhlIHNh
+bWUgdGhpbmcgc2hvd2VkIHVwIGluIHRoZSB2aGQgdGVzdC4gQm90aCB0ZXN0IGNhc2VzIHVzZSBR
+RElTSwpiYWNrZW5kLgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
+amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
+bi1kZXZlbA==
