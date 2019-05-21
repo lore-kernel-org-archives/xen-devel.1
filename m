@@ -1,21 +1,20 @@
-From: Wei Liu <wei.liu2@citrix.com>
-Subject: Re: Unhandle NONE type device model broke QDISK backend
-Date: Tue, 21 May 2019 15:43:15 +0100
-Message-ID: <20190521144315.GI1846@zion.uk.xensource.com>
-References: <20190521143702.GH1846@zion.uk.xensource.com>
- <20190521164122.187e51f6.olaf@aepfle.de>
+From: "Jan Beulich" <JBeulich@suse.com>
+Subject: Re: [xen-4.10-testing test] 136552: regressions - FAIL
+Date: Tue, 21 May 2019 08:51:12 -0600
+Message-ID: <5CE41060020000780023106B@prv1-mh.provo.novell.com>
+References: <osstest-136552-mainreport@xen.org>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=3mDO=TV=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
- id 1hT5z9-0001sS-6U
- for xen-devel@lists.xenproject.org; Tue, 21 May 2019 14:43:23 +0000
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=7C/d=TV=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hT66q-0002hR-4o
+ for xen-devel@lists.xenproject.org; Tue, 21 May 2019 14:51:20 +0000
+In-Reply-To: <osstest-136552-mainreport@xen.org>
 Content-Disposition: inline
-In-Reply-To: <20190521164122.187e51f6.olaf@aepfle.de>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,19 +23,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Olaf Hering <olaf@aepfle.de>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wei.liu2@citrix.com>
+To: osstest service owner <osstest-admin@xenproject.org>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVHVlLCBNYXkgMjEsIDIwMTkgYXQgMDQ6NDE6MjJQTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
-dGU6Cj4gQW0gVHVlLCAyMSBNYXkgMjAxOSAxNTozNzowMiArMDEwMAo+IHNjaHJpZWIgV2VpIExp
-dSA8d2VpLmxpdTJAY2l0cml4LmNvbT46Cj4gCj4gPiBieGw6IGRlYnVnOiBsaWJ4bF9kZXZpY2Uu
-YzozODA6bGlieGxfX2RldmljZV9kaXNrX3NldF9iYWNrZW5kOiBEaXNrIHZkZXY9eHZkYSBzcGVj
-LmJhY2tlbmQ9cWRpc2sKPiA+IGxpYnhsOiBkZWJ1ZzogbGlieGxfbGludXguYzoyMzU6bGlieGxf
-X2dldF9ob3RwbHVnX3NjcmlwdF9pbmZvOiBEb21haW4gMTpiYWNrZW5kX2tpbmQgMywgbm8gbmVl
-ZCB0byBleGVjdXRlIHNjcmlwdHMKPiAKPiBJIHdpbGwgY2hlY2sgd2h5IHFkaXNrIGRvZXMgbm90
-IHRyaWdnZXIgUUVNVV9YRU4uCgpZZWFoLCB0aGF0J3MgaW5kZWVkIHN0cmFuZ2UuIFRoYW5rcyBm
-b3IgaGF2aW5nIGEgbG9vay4KCldlaS4KCj4gCj4gT2xhZgoKCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+Pj4+IE9uIDIxLjA1LjE5IGF0IDE1OjU2LCA8b3NzdGVzdC1hZG1pbkB4ZW5wcm9qZWN0Lm9yZz4g
+d3JvdGU6Cj4gZmxpZ2h0IDEzNjU1MiB4ZW4tNC4xMC10ZXN0aW5nIHJlYWwgW3JlYWxdCj4gaHR0
+cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNjU1Mi8gCj4g
+Cj4gUmVncmVzc2lvbnMgOi0oCj4gCj4gVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBh
+cmUgYmxvY2tpbmcsCj4gaW5jbHVkaW5nIHRlc3RzIHdoaWNoIGNvdWxkIG5vdCBiZSBydW46Cj4g
+IHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgMjMgbGVhay1jaGVjay9jaGVjayAgICAg
+IGZhaWwgUkVHUi4gdnMuIDEzNTgxMwo+ICB0ZXN0LWFtZDY0LWkzODYtcWVtdXQtcmhlbDZodm0t
+aW50ZWwgMTUgbGVhay1jaGVjay9jaGVjayBmYWlsIFJFR1IuIHZzLiAxMzU4MTMKPiAgdGVzdC1h
+bWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC14c20gMTkgbGVhay1jaGVj
+ay9jaGVjayBmYWlsIFJFR1IuIHZzLiAxMzU4MTMKPiAgdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVk
+aXQyICAxOSBsZWFrLWNoZWNrL2NoZWNrICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTM1ODEzCgpJ
+cyB0aGlzIGEgYmFzaXMgZm9yIGEgZm9yY2UgcHVzaCBhZ2Fpbj8KCkphbgoKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
