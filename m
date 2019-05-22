@@ -1,21 +1,22 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 2/3] xen: drop preempt_count() for non-debug
- builds
-Date: Wed, 22 May 2019 11:00:02 +0100
-Message-ID: <34f128f9-190d-fdf7-0082-204ab9ccb31a@citrix.com>
-References: <20190522094549.28397-1-jgross@suse.com>
- <20190522094549.28397-3-jgross@suse.com>
+From: Wei Liu <wei.liu2@citrix.com>
+Subject: Re: libxl assertion failure when creating any kind of
+ guest
+Date: Wed, 22 May 2019 11:01:01 +0100
+Message-ID: <20190522100101.GL1846@zion.uk.xensource.com>
+References: <5CE4F63A0200007800231313@prv1-mh.provo.novell.com>
+ <20190522092544.2d7d835f.olaf@aepfle.de>
+ <5CE50B130200007800231359@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Bu0R=TW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hTO2a-0008S7-Ab
- for xen-devel@lists.xenproject.org; Wed, 22 May 2019 10:00:08 +0000
-In-Reply-To: <20190522094549.28397-3-jgross@suse.com>
-Content-Language: en-GB
+ <SRS0=Clyk=TW=citrix.com=wei.liu2@srs-us1.protection.inumbo.net>)
+ id 1hTO3V-00008h-SV
+ for xen-devel@lists.xenproject.org; Wed, 22 May 2019 10:01:05 +0000
+Content-Disposition: inline
+In-Reply-To: <5CE50B130200007800231359@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,18 +25,43 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Olaf Hering <olaf@aepfle.de>, Wei Liu <wei.liu2@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjIvMDUvMjAxOSAxMDo0NSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBwcmVlbXB0X2NvdW50
-KCkgYW5kIHRoZSBhc3NvY2lhdGVkIHBlci1jcHUgdmFyaWFibGUgX19wcmVlbXB0X2NvdW50Cj4g
-YXJlIHRlc3RlZCBpbiBkZWJ1ZyBidWlsZCBvbmx5LiBTbyBkcm9wIHRoZW0gZm9yIG5vbi1kZWJ1
-ZyBidWlsZHMuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5j
-b20+CgpJJ2QgYmUgdGVtcHRlZCB0byBmb2xkIHBhdGNoZXMgMiBhbmQgMyB0b2dldGhlciwgYmVj
-YXVzZSB0aGV5IGFyZSBib3RoCnRoZSBzYW1lIGNoYW5nZSwgYW5kIGl0IHdvdWxkIHJlZHVjZSB0
-aGUgY2h1cm4uCgpSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
-cml4LmNvbT4sIGlkZWFsbHkgd2l0aCB0aGUKdHdvIGZvbGRlZCBpbnRvIG9uZS4KCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
-IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
-amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gV2VkLCBNYXkgMjIsIDIwMTkgYXQgMDI6NDA6NTFBTSAtMDYwMCwgSmFuIEJldWxpY2ggd3Jv
+dGU6Cj4gPj4+IE9uIDIyLjA1LjE5IGF0IDA5OjI1LCA8b2xhZkBhZXBmbGUuZGU+IHdyb3RlOgo+
+ID4gQW0gV2VkLCAyMiBNYXkgMjAxOSAwMToxMTo1NCAtMDYwMAo+ID4gc2NocmllYiAiSmFuIEJl
+dWxpY2giIDxKQmV1bGljaEBzdXNlLmNvbT46Cj4gPiAKPiA+PiBsaWJ4bF9fZG9tYWluX2J1aWxk
+X2luZm9fc2V0ZGVmYXVsdCAoZ2M9MHg3ZmZmZmZmZmRlZTAsIAo+ID4gYl9pbmZvPTB4N2ZmZmZm
+ZmZkYjgwKQo+ID4+ICAgICBhdCBsaWJ4bF9jcmVhdGUuYzoxNDMKPiA+IAo+ID4gVGhpcyBpcyBs
+aWJ4bF9kZWZib29sX3ZhbChiX2luZm8tPmRldmljZV9tb2RlbF9zdHViZG9tYWluKS4KPiA+IAo+
+ID4gRHVlIHRvIHRoZSBsYWNrIG9mIGEgcHJvcGVyIHdheSB0byBkZXNjcmliZSBhbGwgdGhlIGRl
+cGVuZGVuY2llcyB3aXRoaW4KPiA+IGxpYnhsIEkgc3VnZ2VzdCB0byByZXZlcnQgdGhlc2UgY29t
+bWl0cyBmb3IgdGhlIHRpbWUgYmVpbmc6Cj4gPiAKPiA+IDI3OGM2NDUxOWMgbGlieGw6IGZpeCBs
+aWJ4bF9kb21haW5fbmVlZF9tZW1vcnkgYWZ0ZXIgODk5NDMzZjE0OWQKPiA+IDg5OTQzM2YxNDkg
+bGlieGw6IGZpeCBtaWdyYXRpb24gb2YgUFYgYW5kIFBWSCBkb21VcyB3aXRoIGFuZCB3aXRob3V0
+IHFlbXUKPiA+IDM4MDJlY2JhYTkgbGlieGw6IGFkZCBoZWxwZXIgZnVuY3Rpb24gdG8gc2V0IGRl
+dmljZV9tb2RlbF92ZXJzaW9uCj4gCj4gV2VsbCwgdGhlIGFsdGVybmF0aXZlIGlzIHRoZSBvbmUg
+bGluZSBjaGFuZ2UgYmVsb3cuCj4gCj4gSmFuCj4gCj4gbGlieGw6IGZ1cnRoZXIgZml4IGxpYnhs
+X2RvbWFpbl9uZWVkX21lbW9yeSgpIGFmdGVyIDg5OTQzM2YxNDlkCj4gCj4gQmVzaWRlcyBwcm92
+aWRpbmcgYSBkZXZpY2VfbW9kZWxfdmVyc2lvbiBzZXR0aW5nIChhcyBkb25lIGJ5IDI3OGM2NDUx
+OWMKPiBbImxpYnhsOiBmaXggbGlieGxfZG9tYWluX25lZWRfbWVtb3J5IGFmdGVyIDg5OTQzM2Yx
+NDlkIl0pLCBvbmUgaXMgYWxzbwo+IG5lZWRlZCBmb3IgZGV2aWNlX21vZGVsX3N0dWJkb21haW4s
+IG9yIGVsc2UgdGhlIHJlc3BlY3RpdmUgYXNzZXJ0KCkgaW4KPiBsaWJ4bF9kZWZib29sX3ZhbCgp
+IChjYWxsZWQgZnJvbSBsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9fc2V0ZGVmYXVsdCgpKQo+IHdp
+bGwgdHJpZ2dlci4KPiAKPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
+ZS5jb20+Cj4gCj4gLS0tIHVuc3RhYmxlLm9yaWcvdG9vbHMvbGlieGwvbGlieGxfbWVtLmMKPiAr
+KysgdW5zdGFibGUvdG9vbHMvbGlieGwvbGlieGxfbWVtLmMKPiBAQCAtNDcyLDYgKzQ3Miw3IEBA
+IGludCBsaWJ4bF9kb21haW5fbmVlZF9tZW1vcnkobGlieGxfY3R4ICoKPiAgICAgICAqIGNhbGN1
+bGF0aW9uIGRvZXNuJ3QgcmVhbGx5IGNhcmUgd2hpY2ggUUVNVSBpcyBzZXQgaGVyZSwgc28gd2UK
+PiAgICAgICAqIGdvIHdpdGggdGhlIHVwc3RyZWFtIGRlZmF1bHQuCj4gICAgICAgKi8KPiArICAg
+IGxpYnhsX2RlZmJvb2xfc2V0ZGVmYXVsdCgmYl9pbmZvLT5kZXZpY2VfbW9kZWxfc3R1YmRvbWFp
+biwgZmFsc2UpOwo+ICAgICAgaWYgKCFiX2luZm8tPmRldmljZV9tb2RlbF92ZXJzaW9uKQo+ICAg
+ICAgICAgIGJfaW5mby0+ZGV2aWNlX21vZGVsX3ZlcnNpb24gPSBMSUJYTF9ERVZJQ0VfTU9ERUxf
+VkVSU0lPTl9RRU1VX1hFTjsKPiAgCgpJIGhhdmUgcmV2ZXJ0ZWQgdGhvc2UgcGF0Y2hlcy4gVGhl
+cmUgaXMgb25lIG1vcmUgcmVncmVzc2lvbiB0aGF0J3MgbW9yZQpzZXJpb3VzIGFuZCBpdCBpcyBi
+bG9ja2luZyBvc3N0ZXN0LgoKV2VpLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
+cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L3hlbi1kZXZlbA==
