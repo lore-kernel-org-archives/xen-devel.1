@@ -1,9 +1,10 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH 1/3] xen: drop in_atomic()
-Date: Wed, 22 May 2019 10:58:25 +0100
-Message-ID: <6250d30e-dd9a-4fa9-7934-1f90948d8dad@citrix.com>
+Subject: Re: [PATCH 2/3] xen: drop preempt_count() for non-debug
+ builds
+Date: Wed, 22 May 2019 11:00:02 +0100
+Message-ID: <34f128f9-190d-fdf7-0082-204ab9ccb31a@citrix.com>
 References: <20190522094549.28397-1-jgross@suse.com>
- <20190522094549.28397-2-jgross@suse.com>
+ <20190522094549.28397-3-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -11,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Bu0R=TW=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hTO10-0007k1-Ra
- for xen-devel@lists.xenproject.org; Wed, 22 May 2019 09:58:30 +0000
-In-Reply-To: <20190522094549.28397-2-jgross@suse.com>
+ id 1hTO2a-0008S7-Ab
+ for xen-devel@lists.xenproject.org; Wed, 22 May 2019 10:00:08 +0000
+In-Reply-To: <20190522094549.28397-3-jgross@suse.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -24,19 +25,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjIvMDUvMjAxOSAxMDo0NSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBDdXJyZW50bHkgdGhl
-cmUgaXMgb25seSBvbmUgdXNlciBvZiBpbl9hdG9taWMoKSwgYW5kIHRoYXQgaXMgaW4gYW4KPiAj
-aWZkZWYgMCBzZWN0aW9uLiBUaGlzIGhhcyBiZWVuIHNvIHNpbmNlIFhlbiA0LjEsIHNvIGNoYW5j
-ZXMgYXJlCj4gcmF0aGVyIHNsaW0gd2Ugc3VkZGVubHkgd2FudCB0byBlbmFibGUgaXQgYWdhaW4u
-Cj4KPiBEcm9wcGluZyBpbl9hdG9taWMoKSB3aWxsIHJlbW92ZSB0aGUgbGFzdCB1c2VyIG9mIHBy
-ZWVtcHRfY291bnQoKQo+IGluIG5vbi1kZWJ1ZyBidWlsZHMgZW5hYmxpbmcgZnVydGhlciBvcHRp
-bWl6YXRpb25zLgo+Cj4gU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2Uu
-Y29tPgoKUmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+CgpUaGlzIGNvZGUgaGFzIG5ldmVyIGJlZW4gdXNlZCBhbmQgaXMgb2J2aW91c2x5IG5vdCBk
-b2luZyBhbnl0aGluZyB1c2VmdWwuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+T24gMjIvMDUvMjAxOSAxMDo0NSwgSnVlcmdlbiBHcm9zcyB3cm90ZToKPiBwcmVlbXB0X2NvdW50
+KCkgYW5kIHRoZSBhc3NvY2lhdGVkIHBlci1jcHUgdmFyaWFibGUgX19wcmVlbXB0X2NvdW50Cj4g
+YXJlIHRlc3RlZCBpbiBkZWJ1ZyBidWlsZCBvbmx5LiBTbyBkcm9wIHRoZW0gZm9yIG5vbi1kZWJ1
+ZyBidWlsZHMuCj4KPiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5j
+b20+CgpJJ2QgYmUgdGVtcHRlZCB0byBmb2xkIHBhdGNoZXMgMiBhbmQgMyB0b2dldGhlciwgYmVj
+YXVzZSB0aGV5IGFyZSBib3RoCnRoZSBzYW1lIGNoYW5nZSwgYW5kIGl0IHdvdWxkIHJlZHVjZSB0
+aGUgY2h1cm4uCgpSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
+cml4LmNvbT4sIGlkZWFsbHkgd2l0aCB0aGUKdHdvIGZvbGRlZCBpbnRvIG9uZS4KCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5n
+IGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJv
+amVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
