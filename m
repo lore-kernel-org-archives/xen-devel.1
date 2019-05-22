@@ -1,17 +1,18 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: libxl assertion failure when creating any kind of guest
-Date: Wed, 22 May 2019 01:11:54 -0600
-Message-ID: <5CE4F63A0200007800231313@prv1-mh.provo.novell.com>
+From: Olaf Hering <olaf@aepfle.de>
+Subject: Re: libxl assertion failure when creating any kind of
+ guest
+Date: Wed, 22 May 2019 09:25:44 +0200
+Message-ID: <20190522092544.2d7d835f.olaf@aepfle.de>
+References: <5CE4F63A0200007800231313@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7562584524095899778=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=3DNt=TW=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hTLPq-0002cS-OA
- for xen-devel@lists.xenproject.org; Wed, 22 May 2019 07:11:58 +0000
-Content-Disposition: inline
+ (envelope-from <SRS0=8yeh=TW=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1hTLdV-0003U9-8G
+ for xen-devel@lists.xenproject.org; Wed, 22 May 2019 07:26:05 +0000
+In-Reply-To: <5CE4F63A0200007800231313@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,44 +21,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Ian Jackson <Ian.Jackson@eu.citrix.com>, Olaf Hering <olaf@aepfle.de>, Wei Liu <wei.liu2@citrix.com>
+To: Wei Liu <wei.liu2@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Jan Beulich <JBeulich@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-QWxsLAoKYW0gSSB0aGUgb25seSBvbmUgdG8gc2VlCgp4bDogbGlieGwuYzozMzk6IGxpYnhsX2Rl
-ZmJvb2xfdmFsOiBBc3NlcnRpb24gYCFsaWJ4bF9kZWZib29sX2lzX2RlZmF1bHQoZGIpJyBmYWls
-ZWQuCgpmb3IgYW55IGtpbmQgb2YgKHg4NikgZ3Vlc3QgYmVpbmcgY3JlYXRlZCwgaW5jbHVkaW5n
-IHNpbXBsZSBYVEYgb25lcz8KSSBoYXZlbid0IHRha2VuIGEgY2xvc2VyIGxvb2sgYXQgdGhlIGNv
-ZGUgeWV0LCBidXQgd2l0aCB0aGlzIEkgd29uZGVyCmhvdyBldmVuIGEgc21va2UgcHVzaCBjb3Vs
-ZCBoYXZlIG9jY3VycmVkLiBJJ3ZlIHJlLWJhc2VkIG15IHRyZWUKeWVzdGVyZGF5ICh0byA3NmJh
-OGIxNCwgd2hpY2ggbWVhbnMgaW4gcGFydGljdWxhciB0aGF0IDI3OGM2NDUxOWMKWyJsaWJ4bDog
-Zml4IGxpYnhsX2RvbWFpbl9uZWVkX21lbW9yeSBhZnRlciA4OTk0MzNmMTQ5ZCJdIGlzIGluIHBs
-YWNlKQphZnRlciBhIGNvdXBsZSBvZiB3ZWVrcyBvZiBub3QgaGF2aW5nIGZvdW5kIHRoZSB0aW1l
-IHRvIGRvIHNvLCBzbyB0aGUKcmFuZ2Ugb2YgcG9zc2libGUgY2FuZGlkYXRlIGNvbW1pdHMgaXMg
-cmF0aGVyIGxvbmcuIEluIGEgbWFpbCBvbiB0aGUKMTZ0aCBKw7xyZ2VuIGhhZCBwb2ludGVkIG91
-dCB0aGF0IDM4MDJlY2JhYTkgY2F1c2VzIHRoaXMKYXNzZXJ0aW9uIHRvIHRyaWdnZXIgX2lmXyBh
-bm90aGVyIGFzc2VydGlvbiB0aGlzIGNvbW1pdCBhZGRlZCBnZXRzCnJlbW92ZWQgYWdhaW4sIGJ1
-dCB0aGF0IGFzc2VydCgpIGlzIHN0aWxsIGluIHBsYWNlIGFuZCBkaWQgbm90IHRyaWdnZXIsCnNv
-IEkgYXNzdW1lIHRoZSB0d28gaXNzdWVzIGFyZSBtYXliZSByZWxhdGVkLCBidXQgbm90IGlkZW50
-aWNhbC4KV2hpY2ggYWdhaW4gbGVhdmVzIDg5OTQzM2YxNDkgYXMgdGhlIHByaW1hcnkgc3VzcGVj
-dC4KCkkndmUgbm90IGJlZW4gYWJsZSB0byBmaW5kIGFueSBvdGhlciByZWNlbnQgbWVudGlvbiBv
-ZiBzYWlkIGFzc2VydCgpCnRvIHRyaWdnZXIuIFRoaXMgaXMgdGhlIGNhbGwgc3RhY2ssIGluIGNh
-c2UgaXQgaGVscHM6CgojMCAgMHgwMDAwN2ZmZmY2ZjY3NmQ1IGluIHJhaXNlICgpIGZyb20gL2xp
-YjY0L2xpYmMuc28uNgojMSAgMHgwMDAwN2ZmZmY2ZjY4Y2IxIGluIGFib3J0ICgpIGZyb20gL2xp
-YjY0L2xpYmMuc28uNgojMiAgMHgwMDAwN2ZmZmY2ZjYwNWEwIGluIF9fYXNzZXJ0X2ZhaWwgKCkg
-ZnJvbSAvbGliNjQvbGliYy5zby42CiMzICAweDAwMDA3ZmZmZjc4ZWMxMzIgaW4gbGlieGxfZGVm
-Ym9vbF92YWwgKGRiPS4uLikgYXQgbGlieGwuYzozMzkKIzQgIDB4MDAwMDdmZmZmNzhlZGQ0YSBp
-biBsaWJ4bF9fZG9tYWluX2J1aWxkX2luZm9fc2V0ZGVmYXVsdCAoZ2M9MHg3ZmZmZmZmZmRlZTAs
-IGJfaW5mbz0weDdmZmZmZmZmZGI4MCkKICAgIGF0IGxpYnhsX2NyZWF0ZS5jOjE0MwojNSAgMHgw
-MDAwN2ZmZmY3OTQzZTVmIGluIGxpYnhsX2RvbWFpbl9uZWVkX21lbW9yeSAoY3R4PTB4NjQxMDUw
-LCBiX2luZm9faW49MHg3ZmZmZmZmZmUwYjgsIG5lZWRfbWVta2I9MHg3ZmZmZmZmZmRmNDApCiAg
-ICBhdCBsaWJ4bF9tZW0uYzo0NzgKIzYgIDB4MDAwMDAwMDAwMDQyNWUzYyBpbiBmcmVlbWVtIChk
-b21pZD00Mjk0OTY3Mjk1LCBiX2luZm89MHg3ZmZmZmZmZmUwYjgpIGF0IHhsX3ZtY29udHJvbC5j
-OjMyNQojNyAgMHgwMDAwMDAwMDAwNDI3NGU3IGluIGNyZWF0ZV9kb21haW4gKGRvbV9pbmZvPTB4
-N2ZmZmZmZmZlNjMwKSBhdCB4bF92bWNvbnRyb2wuYzo4ODEKIzggIDB4MDAwMDAwMDAwMDQyODM2
-NyBpbiBtYWluX2NyZWF0ZSAoYXJnYz0zLCBhcmd2PTB4N2ZmZmZmZmZlODEwKSBhdCB4bF92bWNv
-bnRyb2wuYzoxMjQyCiM5ICAweDAwMDAwMDAwMDA0MGIzNDQgaW4gbWFpbiAoYXJnYz0zLCBhcmd2
-PTB4N2ZmZmZmZmZlODEwKSBhdCB4bC5jOjQxMwoKSmFuCgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============7562584524095899778==
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ boundary="Sig_/sQ8m7A.nCf8msNkD/ZrJRvw"; protocol="application/pgp-signature"
+
+--Sig_/sQ8m7A.nCf8msNkD/ZrJRvw
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+Am Wed, 22 May 2019 01:11:54 -0600
+schrieb "Jan Beulich" <JBeulich@suse.com>:
+
+> libxl__domain_build_info_setdefault (gc=3D0x7fffffffdee0, b_info=3D0x7fff=
+ffffdb80)
+>     at libxl_create.c:143
+
+This is libxl_defbool_val(b_info->device_model_stubdomain).
+
+Due to the lack of a proper way to describe all the dependencies within
+libxl I suggest to revert these commits for the time being:
+
+278c64519c libxl: fix libxl_domain_need_memory after 899433f149d
+899433f149 libxl: fix migration of PV and PVH domUs with and without qemu
+3802ecbaa9 libxl: add helper function to set device_model_version
+
+
+Olaf
+
+--Sig_/sQ8m7A.nCf8msNkD/ZrJRvw
+Content-Type: application/pgp-signature
+Content-Description: Digitale Signatur von OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQSkRyP6Rn//f03pRUBdQqD6ppg2fgUCXOT5eAAKCRBdQqD6ppg2
+ftNZAJ43wMY20NHlszA5sZGz0g3YfPf7SQCgxVmf7AiyOLK6xi/I1K/BYZQRSp4=
+=vc+W
+-----END PGP SIGNATURE-----
+
+--Sig_/sQ8m7A.nCf8msNkD/ZrJRvw--
+
+
+--===============7562584524095899778==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7562584524095899778==--
