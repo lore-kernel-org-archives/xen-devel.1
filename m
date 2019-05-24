@@ -1,18 +1,19 @@
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/CPUID: adjust SSEn dependencies
-Date: Fri, 24 May 2019 13:40:13 +0100
-Message-ID: <bbcfce8d-e642-9958-c035-0c9baf2b91eb@citrix.com>
-References: <5CE7E555020000780023204E@prv1-mh.provo.novell.com>
+Subject: Re: [PATCH] vsprintf: constify "end" parameters
+Date: Fri, 24 May 2019 13:44:50 +0100
+Message-ID: <9fdb4627-7606-138f-e0fd-9528670b6704@citrix.com>
+References: <5CE7E5830200007800232051@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=IEXw=TY=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hU9Ug-00041W-Pr
- for xen-devel@lists.xenproject.org; Fri, 24 May 2019 12:40:18 +0000
-In-Reply-To: <5CE7E555020000780023204E@prv1-mh.provo.novell.com>
+ id 1hU9ZA-0004DP-KK
+ for xen-devel@lists.xenproject.org; Fri, 24 May 2019 12:44:56 +0000
+In-Reply-To: <5CE7E5830200007800232051@prv1-mh.provo.novell.com>
 Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -23,18 +24,16 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Jan Beulich <JBeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Cc: Wei Liu <wei.liu2@citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMjQvMDUvMjAxOSAxMzozNiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gQWxvbmcgdGhlIGxpbmVz
-IG9mIGI5ZjYzOTU1OTAgKCJ4ODYvY3B1aWQ6IGFkanVzdCBkZXBlbmRlbmNpZXMgb2YKPiBwb3N0
-LVNTRSBJU0EgZXh0ZW5zaW9ucyIpIGZ1cnRoZXIgY29udmVydCBTU0VuIGRlcGVuZGVuY2llcyB0
-byBiZSBtb3JlCj4gY2hhaW4gbGlrZSwgd2l0aCBlYWNoIHN1Y2Nlc3NvciBhZGRpdGlvbiBkZXBl
-bmRpbmcgb24gaXRzIGltbWVkaWF0ZQo+IHByZWRlY2Vzc29yLiBUaGlzIGlzIG1vcmUgaW4gbGlu
-ZSB3aXRoIGhvdyBoYXJkd2FyZSBoYXMgaW52b2x2ZWQsIGFuZAo+IGhvdyBvdGhlciBwcm9qZWN0
-cyBsaWtlIGdjYyBhbmQgYmludXRpbHMgY29ubmVjdCB0aGluZ3MgdG9nZXRoZXIuCj4KPiBTaWdu
-ZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpBY2tlZC1ieTogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVu
-LWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcv
-bWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMjQvMDUvMjAxOSAxMzozNywgSmFuIEJldWxpY2ggd3JvdGU6Cj4gRXhjZXB0IGluIHRoZSB0
+b3AgbGV2ZWwgZnVuY3Rpb24gd2UgZG9uJ3QgbWVhbiB0byBldmVyIHdyaXRlIHRocm91Z2gKPiAi
+ZW5kIi4gVGhlIHZhcmlhYmxlIGlzIHVzZWQgc29sZWx5IGZvciBwb2ludGVyIGNvbXBhcmlzb24g
+cHVycG9zZXMKPiB0aGVyZS4gQWRkIGNvbnN0IGV2ZXJ5d2hlcmUuCj4KPiBBbHNvIG1ha2UgZnVu
+Y3Rpb24gaGVhZGluZyB3cmFwcGluZyBzdHlsZSB1bmlmb3JtIGFnYWluIGZvciBhbGwgb2YgdGhl
+Cj4gaW52b2x2ZWQgZnVuY3Rpb25zLgo+Cj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpi
+ZXVsaWNoQHN1c2UuY29tPgoKQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIz
+QGNpdHJpeC5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
