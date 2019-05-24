@@ -1,19 +1,21 @@
-From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH] MAINTAINERS: update my email address
-Date: Fri, 24 May 2019 16:52:31 +0100
-Message-ID: <59b39ed3-e0dc-c46a-23cb-b0cc9c2b507b@citrix.com>
-References: <20190524152402.5042-1-wei.liu2@citrix.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Subject: Re: [PATCH v2] xen/vm_event: fix rc check for
+ uninitialized ring
+Date: Fri, 24 May 2019 19:18:01 +0300
+Message-ID: <24756c8f-4505-7ab2-07b6-dd9e6868ff49@bitdefender.com>
+References: <20190524152318.19735-1-jgross@suse.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=KQqo=TY=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1hUCUn-0003OK-70
- for xen-devel@lists.xenproject.org; Fri, 24 May 2019 15:52:37 +0000
-In-Reply-To: <20190524152402.5042-1-wei.liu2@citrix.com>
-Content-Language: en-US
+ <SRS0=aM+Y=TY=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1hUCtW-0005dt-TL
+ for xen-devel@lists.xenproject.org; Fri, 24 May 2019 16:18:10 +0000
+In-Reply-To: <20190524152318.19735-1-jgross@suse.com>
+Content-Language: en-US-large
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,13 +24,19 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Wei Liu <wei.liu2@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Tamas K Lengyel <tamas@tklengyel.com>, Wei Liu <wei.liu2@citrix.com>, George Dunlap <george.dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gNS8yNC8xOSA0OjI0IFBNLCBXZWkgTGl1IHdyb3RlOgo+IFNpZ25lZC1vZmYtYnk6IFdlaSBM
-aXUgPHdlaS5saXUyQGNpdHJpeC5jb20+CgpBY2tlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2Vvcmdl
-LmR1bmxhcEBjaXRyaXguY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+T24gNS8yNC8xOSA2OjIzIFBNLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+IHZtX2V2ZW50X2NsYWlt
+X3Nsb3QoKSByZXR1cm5zIC1FT1BOT1RTVVBQIGZvciBhbiB1bmluaXRpYWxpemVkIHJpbmcKPiBz
+aW5jZSBjb21taXQgMTVlNGRkNWU4NjZiNDNiYmMgKCJjb21tb24vdm1fZXZlbnQ6IEluaXRpYWxp
+emUgdm1fZXZlbnQKPiBsaXN0cyBvbiBkb21haW4gY3JlYXRpb24iKSwgYnV0IHRoZSBjYWxsZXJz
+IHRlc3QgZm9yIC1FTk9TWVMuCj4gCj4gQ29ycmVjdCB0aGUgY2FsbGVycy4KPiAKPiBTaWduZWQt
+b2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4gLS0tCj4gVjI6IGFkZCBi
+bGFuayBsaW5lIChKYW4gQmV1bGljaCkKPiAgICAgcmVwbGFjZSB0d28gZnVydGhlciBFTk9TWVMg
+cmV0dXJucyB3aXRoIEVPUE5PVFNVUFAgKFJhenZhbiBDb2pvY2FydSkKCkFja2VkLWJ5OiBSYXp2
+YW4gQ29qb2NhcnUgPHJjb2pvY2FydUBiaXRkZWZlbmRlci5jb20+CgoKVGhhbmtzLApSYXp2YW4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZl
+bCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlz
+dHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
