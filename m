@@ -1,10 +1,10 @@
 From: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [PATCH 08/14] xen: Convert is_xen_heap_mfn to use
+Subject: Re: [PATCH 07/14] xen: Convert is_xen_fixed_mfn to use
  typesafe MFN
-Date: Fri, 24 May 2019 16:15:39 +0100
-Message-ID: <fe56d15f-cdb4-78f7-32b5-9699486db01d@citrix.com>
+Date: Fri, 24 May 2019 16:16:20 +0100
+Message-ID: <6cedc096-eadf-9df3-9669-ed8d32edb9af@citrix.com>
 References: <20190507151458.29350-1-julien.grall@arm.com>
- <20190507151458.29350-9-julien.grall@arm.com>
+ <20190507151458.29350-8-julien.grall@arm.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -12,9 +12,9 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=KQqo=TY=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1hUBv6-0008BU-KT
- for xen-devel@lists.xenproject.org; Fri, 24 May 2019 15:15:44 +0000
-In-Reply-To: <20190507151458.29350-9-julien.grall@arm.com>
+ id 1hUBvn-0008HA-0C
+ for xen-devel@lists.xenproject.org; Fri, 24 May 2019 15:16:27 +0000
+In-Reply-To: <20190507151458.29350-8-julien.grall@arm.com>
 Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -25,7 +25,7 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: Julien Grall <julien.grall@arm.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Shane Wang <shane.wang@intel.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Gang Wei <gang.wei@intel.com>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
 T24gNS83LzE5IDQ6MTQgUE0sIEp1bGllbiBHcmFsbCB3cm90ZToKPiBObyBmdW5jdGlvbmFsIGNo
