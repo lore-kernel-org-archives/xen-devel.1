@@ -1,7 +1,7 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Tamas K Lengyel <tamas@tklengyel.com>
 Subject: Re: [VMI] Possible race-condition in altp2m APIs
-Date: Tue, 28 May 2019 17:49:33 -0700
-Message-ID: <0b97ca78-81f3-a45e-a651-05d2a420dc83@citrix.com>
+Date: Tue, 28 May 2019 18:34:14 -0700
+Message-ID: <CABfawhm3Qt6PNCHqR=u9_Q=UCGvQmftrcpoMLxa=sdNaPJmEiw@mail.gmail.com>
 References: <f3zRvkN8JOfpv5k6jz7TbWXz-sso4q6CGB-3S05mSco8SuDy0BoN5z5_Lj_-Xnto1FPMCkhE89trkq-_f6itwRZ5F4NI9MKrcqZk8cdT45A=@protonmail.com>
  <76bd924a-34b1-eb7c-d3be-6c33aa7729fc@citrix.com>
  <WL45-Mjyf7to-l_u4XAT3M46R6YcAECvEwl6SDzOWeLE_SOQUyF26Vj2cu0mScD47fS95OaBAWDddX7DL7yujvl03YffFRDoqrpRcFDSnxA=@protonmail.com>
@@ -10,16 +10,19 @@ References: <f3zRvkN8JOfpv5k6jz7TbWXz-sso4q6CGB-3S05mSco8SuDy0BoN5z5_Lj_-Xnto1FP
  <rQKAjmE5sqmoHfveLrCC3tRz7edgAIkDUG5CRgmBhF975OXX_8ZdIsCFturwHzr04jeYiq5MPE5gHG3SeltMz5ZnrIs0XcO0QO_OXeBGhTg=@protonmail.com>
  <cf45071e-19dd-7afb-b9cf-55bb425d0908@citrix.com>
  <VDYDkg9Ke3s5AvTA6Dxcn9OU8vKyA-VlOf0K5B_IRIQs0F9B-XSWYjDPcQ-_TIe3qbVy410qpk5cIcL6KXYJAIr31L2qAr1ryodOkQSiUvk=@protonmail.com>
+ <0b97ca78-81f3-a45e-a651-05d2a420dc83@citrix.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============7111590664273602694=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PiYs=T5=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hVmmj-00087i-9y
- for xen-devel@lists.xenproject.org; Wed, 29 May 2019 00:49:41 +0000
-In-Reply-To: <VDYDkg9Ke3s5AvTA6Dxcn9OU8vKyA-VlOf0K5B_IRIQs0F9B-XSWYjDPcQ-_TIe3qbVy410qpk5cIcL6KXYJAIr31L2qAr1ryodOkQSiUvk=@protonmail.com>
-Content-Language: en-GB
+ <SRS0=YOWO=T5=tklengyel.com=bounce+e181d6.cd840-xen-devel=lists.xenproject.org@srs-us1.protection.inumbo.net>)
+ id 1hVnUV-0002UO-IX
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2019 01:34:55 +0000
+Received: by mail-lj1-f180.google.com with SMTP id j24so778195ljg.1
+ for <xen-devel@lists.xenproject.org>; Tue, 28 May 2019 18:34:52 -0700 (PDT)
+In-Reply-To: <0b97ca78-81f3-a45e-a651-05d2a420dc83@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -28,302 +31,76 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Mathieu Tarral <mathieu.tarral@protonmail.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>, Tamas K Lengyel <tamas@tklengyel.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Mathieu Tarral <mathieu.tarral@protonmail.com>
 List-Id: xen-devel@lists.xenproject.org
 
---===============7111590664273602694==
-Content-Type: multipart/alternative;
-	boundary="------------C88889B6C5BF0B0175138F7E"
-Content-Language: en-GB
-
---------------C88889B6C5BF0B0175138F7E
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-On 28/05/2019 13:33, Mathieu Tarral wrote:
-> Hi Andrew,
->
->>> The bug is still here, so we can exclude a microcode issue.
->> Good - that is one further angle excluded.  Always make sure you are
->> running with up-to-date microcode, but it looks like we back to
->> investigating a logical bug in libvmi or Xen.
->
-> I reimplemented a small test, without the Drakvuf/Libvmi layers, that will inject traps on one API in Windows (NtCreateUserProcess),
-> in the same way that Drakvuf does.
->
-> I did some quick testing yesterday, with a Python script that was repeatedly
-> starting the binary to monitor the API, and at the same time starting Ansible
-> to run "c:\Windows\system32\reg.exe /?" via WinRM, to trigger some process creation.
->
-> The traps are working, I see the software breakpoint hit, switching to the default
-> view for singlestepping, and switching back to the execution view, so that's already good.
->
-> After a series of tests on 1 or 4 VCPUs, my domain end up in 2 possible states:
-> - frozen: the mouse doesn't move: so I would guess the VCPU are blocked.
->
-> I'm calling the xc_(un)pause_domain APIs multiple times when I write to the shadow copies,
-> but It's always synchronous, so I doubt that they interfered and "paused" the domain.
-
-xc_{,un}pause_domain() calls are reference counted.  Calling unpause too
-many times should be safe (from a refcount point of view), and should
-fail the hypercall with -EINVAL.
-
->
-> Also, the log output I have before I detect that Ansible failed to execute is that the resume succeded and
-> Xen is ready to process VMI events.
->
-> - BSOD: that's the second possibility, apparently I'm corrupting critical data structure in the operating system,
-> and the Windbg analysis is inconclusive, so I can't tell much.
->
-> Either way, I can't execute this test sequentially 10 000 times without a crash.
-
-Ok good - this is a far easier place to start debugging from.
-
-> -> Could you look at the implementation, and tell me if I misused the APIs somewhere ?
-> https://gist.github.com/mtarral/d99ce5524cfcfb5290eaa05702c3e8e7
-
-Some observations.
-
-1)  In xen_pause_vm(), you do an xc_domain_getinfo().  First of all, the
-API is crazy, so you also need to check "|| info.domid != domid" in your
-error condition, but that shouldn't be an issue here as the domid isn't
-changing. 
-
-Furthermore, the results of xc_domain_getinfo() are stale before the
-hypercall returns, so it is far less useful than it appears.
-
-I'm afraid that the only safe way to issue pause/unpauses is to know
-that you've reference counted your own correctly.  All entities in dom0
-with privilege can fight over each others references, because there is
-nothing Xen can use to distinguish the requests.
-
-2) You allocate a libxl context but do nothing with it.  That can all
-go, along with the linkage against libxl.  Also, you don't need to
-create a logger like that.  Despite being utterly unacceptable behaviour
-for a library, it is the default by passing NULL in xc_interface_open().
-
-3) A malloc()/memset() pair is more commonly spelt calloc()
-
-
-And some questions.
-
-1) I'm guessing the drakvuf_inject_trap(drakvuf, 0x293e6a0, 0) call is
-specific to the exact windows kernel in use?
-
-2) In vmi_init(), what is the purpose of fmask and zero_page_gfn?  You
-add one extra gfn to the guest, called zero_page, and fill it with 1's
-from fmask.
-
-3) You create two altp2m's, but both have the same default access.  Is
-this deliberate, or a bug?  If deliberate, why?
-
-Finally, and probably the source of the memory corruption...
-
-4) When injecting a trap, you allocate a new gfn, memcpy() the contents
-and insert a 0xcc (so far so good).  You then remap the executable view
-to point at the new gfn with a breakpoint in (fine), and remap the
-readable view to point at the zero_page, which is full of 1's (uh-oh).
-
-What is this final step trying to achieve?  It guarantees that
-patch-guard will eventually notice and BSOD your VM for critical
-structure corruption.  The read-only view needs to point to the original
-gfn with only read permissions, so when Windows reads the gfn back, it
-sees what it expects.  You also need to prohibit writes to either gfn so
-you can spot writes (unlikely in this case but important for general
-introspection) so you can propagate the change to both copies.
-
->
-> I used the compat APIs, like Drakvuf does.
->
-> @Tamas, if you could check the traps implementation.
->
-> You also have stress-test.py, which is the small test suite that I used, and
-> the screenshot showing the stdout preceding a test failure,
-> when Ansible couldn't contact WinRM service because the domain was frozen.
->
-> Note: I stole some code from libvmi, to handle page read/write in Xen.
->
-> PS: in the case where the domain is frozen, and I destroy the domain, a (null) entry will remain
-> in xl list, despite that my stress-test.py process is already dead.
->
-> I have 4 of these entries in my xl list right now.
-
-That's almost certainly a reference not being dropped on a page.  Can
-you run `xl debug-keys q` and paste the resulting analysis which will be
-visible in `xl dmesg`?
-
-It is probably some missing cleanup in the altp2m code.
-
-~Andrew
-
---------------C88889B6C5BF0B0175138F7E
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body text="#000000" bgcolor="#FFFFFF">
-    <div class="moz-cite-prefix">On 28/05/2019 13:33, Mathieu Tarral
-      wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:VDYDkg9Ke3s5AvTA6Dxcn9OU8vKyA-VlOf0K5B_IRIQs0F9B-XSWYjDPcQ-_TIe3qbVy410qpk5cIcL6KXYJAIr31L2qAr1ryodOkQSiUvk=@protonmail.com">
-      <pre class="moz-quote-pre" wrap="">Hi Andrew,
-
-</pre>
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">The bug is still here, so we can exclude a microcode issue.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-Good - that is one further angle excluded.  Always make sure you are
-running with up-to-date microcode, but it looks like we back to
-investigating a logical bug in libvmi or Xen.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-
-I reimplemented a small test, without the Drakvuf/Libvmi layers, that will inject traps on one API in Windows (NtCreateUserProcess),
-in the same way that Drakvuf does.
-
-I did some quick testing yesterday, with a Python script that was repeatedly
-starting the binary to monitor the API, and at the same time starting Ansible
-to run "c:\Windows\system32\reg.exe /?" via WinRM, to trigger some process creation.
-
-The traps are working, I see the software breakpoint hit, switching to the default
-view for singlestepping, and switching back to the execution view, so that's already good.
-
-After a series of tests on 1 or 4 VCPUs, my domain end up in 2 possible states:
-- frozen: the mouse doesn't move: so I would guess the VCPU are blocked.
-
-I'm calling the xc_(un)pause_domain APIs multiple times when I write to the shadow copies,
-but It's always synchronous, so I doubt that they interfered and "paused" the domain.</pre>
-    </blockquote>
-    <br>
-    xc_{,un}pause_domain() calls are reference counted.  Calling unpause
-    too many times should be safe (from a refcount point of view), and
-    should fail the hypercall with -EINVAL.<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:VDYDkg9Ke3s5AvTA6Dxcn9OU8vKyA-VlOf0K5B_IRIQs0F9B-XSWYjDPcQ-_TIe3qbVy410qpk5cIcL6KXYJAIr31L2qAr1ryodOkQSiUvk=@protonmail.com">
-      <pre class="moz-quote-pre" wrap="">
-
-Also, the log output I have before I detect that Ansible failed to execute is that the resume succeded and
-Xen is ready to process VMI events.
-
-- BSOD: that's the second possibility, apparently I'm corrupting critical data structure in the operating system,
-and the Windbg analysis is inconclusive, so I can't tell much.
-
-Either way, I can't execute this test sequentially 10 000 times without a crash.</pre>
-    </blockquote>
-    <br>
-    Ok good - this is a far easier place to start debugging from.<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:VDYDkg9Ke3s5AvTA6Dxcn9OU8vKyA-VlOf0K5B_IRIQs0F9B-XSWYjDPcQ-_TIe3qbVy410qpk5cIcL6KXYJAIr31L2qAr1ryodOkQSiUvk=@protonmail.com">
-      <pre class="moz-quote-pre" wrap="">-&gt; Could you look at the implementation, and tell me if I misused the APIs somewhere ?
-<a class="moz-txt-link-freetext" href="https://gist.github.com/mtarral/d99ce5524cfcfb5290eaa05702c3e8e7">https://gist.github.com/mtarral/d99ce5524cfcfb5290eaa05702c3e8e7</a></pre>
-    </blockquote>
-    <br>
-    Some observations.<br>
-    <br>
-    1)  In xen_pause_vm(), you do an xc_domain_getinfo().  First of all,
-    the API is crazy, so you also need to check "|| info.domid != domid"
-    in your error condition, but that shouldn't be an issue here as the
-    domid isn't changing.  <br>
-    <br>
-    Furthermore, the results of xc_domain_getinfo() are stale before the
-    hypercall returns, so it is far less useful than it appears.<br>
-    <br>
-    I'm afraid that the only safe way to issue pause/unpauses is to know
-    that you've reference counted your own correctly.  All entities in
-    dom0 with privilege can fight over each others references, because
-    there is nothing Xen can use to distinguish the requests.<br>
-    <br>
-    2) You allocate a libxl context but do nothing with it.  That can
-    all go, along with the linkage against libxl.  Also, you don't need
-    to create a logger like that.  Despite being utterly unacceptable
-    behaviour for a library, it is the default by passing NULL in
-    xc_interface_open().<br>
-    <br>
-    3) A malloc()/memset() pair is more commonly spelt calloc()<br>
-    <br>
-    <br>
-    And some questions.<br>
-    <br>
-    1) I'm guessing the <span class="pl-c1">drakvuf_inject_trap</span>(drakvuf,
-    <span class="pl-c1">0x293e6a0</span>, <span class="pl-c1">0</span>)
-    call is specific to the exact windows kernel in use?<br>
-    <br>
-    2) In vmi_init(), what is the purpose of fmask and zero_page_gfn? 
-    You add one extra gfn to the guest, called zero_page, and fill it
-    with 1's from fmask.<br>
-    <br>
-    3) You create two altp2m's, but both have the same default access. 
-    Is this deliberate, or a bug?  If deliberate, why?<br>
-    <br>
-    Finally, and probably the source of the memory corruption...<br>
-    <br>
-    4) When injecting a trap, you allocate a new gfn, memcpy() the
-    contents and insert a 0xcc (so far so good).  You then remap the
-    executable view to point at the new gfn with a breakpoint in (fine),
-    and remap the readable view to point at the zero_page, which is full
-    of 1's (uh-oh).<br>
-    <br>
-    What is this final step trying to achieve?  It guarantees that
-    patch-guard will eventually notice and BSOD your VM for critical
-    structure corruption.  The read-only view needs to point to the
-    original gfn with only read permissions, so when Windows reads the
-    gfn back, it sees what it expects.  You also need to prohibit writes
-    to either gfn so you can spot writes (unlikely in this case but
-    important for general introspection) so you can propagate the change
-    to both copies.<br>
-    <br>
-    <blockquote type="cite"
-cite="mid:VDYDkg9Ke3s5AvTA6Dxcn9OU8vKyA-VlOf0K5B_IRIQs0F9B-XSWYjDPcQ-_TIe3qbVy410qpk5cIcL6KXYJAIr31L2qAr1ryodOkQSiUvk=@protonmail.com">
-      <pre class="moz-quote-pre" wrap="">
-
-I used the compat APIs, like Drakvuf does.
-
-@Tamas, if you could check the traps implementation.
-
-You also have stress-test.py, which is the small test suite that I used, and
-the screenshot showing the stdout preceding a test failure,
-when Ansible couldn't contact WinRM service because the domain was frozen.
-
-Note: I stole some code from libvmi, to handle page read/write in Xen.
-
-PS: in the case where the domain is frozen, and I destroy the domain, a (null) entry will remain
-in xl list, despite that my stress-test.py process is already dead.
-
-I have 4 of these entries in my xl list right now.</pre>
-    </blockquote>
-    <br>
-    That's almost certainly a reference not being dropped on a page. 
-    Can you run `xl debug-keys q` and paste the resulting analysis which
-    will be visible in `xl dmesg`?<br>
-    <br>
-    It is probably some missing cleanup in the altp2m code.<br>
-    <br>
-    ~Andrew<br>
-  </body>
-</html>
-
---------------C88889B6C5BF0B0175138F7E--
-
-
---===============7111590664273602694==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============7111590664273602694==--
+PiBBbmQgc29tZSBxdWVzdGlvbnMuCj4KPiAxKSBJJ20gZ3Vlc3NpbmcgdGhlIGRyYWt2dWZfaW5q
+ZWN0X3RyYXAoZHJha3Z1ZiwgMHgyOTNlNmEwLCAwKSBjYWxsIGlzIHNwZWNpZmljIHRvIHRoZSBl
+eGFjdCB3aW5kb3dzIGtlcm5lbCBpbiB1c2U/Cj4KPiAyKSBJbiB2bWlfaW5pdCgpLCB3aGF0IGlz
+IHRoZSBwdXJwb3NlIG9mIGZtYXNrIGFuZCB6ZXJvX3BhZ2VfZ2ZuPyAgWW91IGFkZCBvbmUgZXh0
+cmEgZ2ZuIHRvIHRoZSBndWVzdCwgY2FsbGVkIHplcm9fcGFnZSwgYW5kIGZpbGwgaXQgd2l0aCAx
+J3MgZnJvbSBmbWFzay4KPgo+IDMpIFlvdSBjcmVhdGUgdHdvIGFsdHAybSdzLCBidXQgYm90aCBo
+YXZlIHRoZSBzYW1lIGRlZmF1bHQgYWNjZXNzLiAgSXMgdGhpcyBkZWxpYmVyYXRlLCBvciBhIGJ1
+Zz8gIElmIGRlbGliZXJhdGUsIHdoeT8KPgo+IEZpbmFsbHksIGFuZCBwcm9iYWJseSB0aGUgc291
+cmNlIG9mIHRoZSBtZW1vcnkgY29ycnVwdGlvbi4uLgo+Cj4gNCkgV2hlbiBpbmplY3RpbmcgYSB0
+cmFwLCB5b3UgYWxsb2NhdGUgYSBuZXcgZ2ZuLCBtZW1jcHkoKSB0aGUgY29udGVudHMgYW5kIGlu
+c2VydCBhIDB4Y2MgKHNvIGZhciBzbyBnb29kKS4gIFlvdSB0aGVuIHJlbWFwIHRoZSBleGVjdXRh
+YmxlIHZpZXcgdG8gcG9pbnQgYXQgdGhlIG5ldyBnZm4gd2l0aCBhIGJyZWFrcG9pbnQgaW4gKGZp
+bmUpLCBhbmQgcmVtYXAgdGhlIHJlYWRhYmxlIHZpZXcgdG8gcG9pbnQgYXQgdGhlIHplcm9fcGFn
+ZSwgd2hpY2ggaXMgZnVsbCBvZiAxJ3MgKHVoLW9oKS4KPgo+IFdoYXQgaXMgdGhpcyBmaW5hbCBz
+dGVwIHRyeWluZyB0byBhY2hpZXZlPyAgSXQgZ3VhcmFudGVlcyB0aGF0IHBhdGNoLWd1YXJkIHdp
+bGwgZXZlbnR1YWxseSBub3RpY2UgYW5kIEJTT0QgeW91ciBWTSBmb3IgY3JpdGljYWwgc3RydWN0
+dXJlIGNvcnJ1cHRpb24uICBUaGUgcmVhZC1vbmx5IHZpZXcgbmVlZHMgdG8gcG9pbnQgdG8gdGhl
+IG9yaWdpbmFsIGdmbiB3aXRoIG9ubHkgcmVhZCBwZXJtaXNzaW9ucywgc28gd2hlbiBXaW5kb3dz
+IHJlYWRzIHRoZSBnZm4gYmFjaywgaXQgc2VlcyB3aGF0IGl0IGV4cGVjdHMuICBZb3UgYWxzbyBu
+ZWVkIHRvIHByb2hpYml0IHdyaXRlcyB0byBlaXRoZXIgZ2ZuIHNvIHlvdSBjYW4gc3BvdCB3cml0
+ZXMgKHVubGlrZWx5IGluIHRoaXMgY2FzZSBidXQgaW1wb3J0YW50IGZvciBnZW5lcmFsIGludHJv
+c3BlY3Rpb24pIHNvIHlvdSBjYW4gcHJvcGFnYXRlIHRoZSBjaGFuZ2UgdG8gYm90aCBjb3BpZXMu
+CgpJIGNhbiBhbnN3ZXIgdGhlc2UgcXVlc3Rpb25zIGJhc2VkIG9uIGhvdyBJJ3ZlIHNldCBpdCB1
+cCBpbiBEUkFLVlVGCihoYXZlbid0IGNoZWNrZWQgTWF0aGl1ZSdzIGltcGxlbWVudGF0aW9uIGFu
+ZCBJIHdvbid0IGJlIGFibGUgZm9yIGEKd2hpbGUgYXMgSSdtIHRyYXZlbGluZyBhdCB0aGUgbW9t
+ZW50KS4gVGhlIHJlYXNvbiB3ZSBoYXZlIG11bHRpcGxlIEVQVAp2aWV3cyBpcyB0byBtYWtlIGl0
+IGFsbCBtdWx0aS12Q1BVIHNhZmUuIFN3YXBwaW5nIHRoZSB2aWV3cyBhcm91bmQgY2FuCmJlIGRv
+bmUgcGVyLXZDUFUgYW5kIHdlIGRvbid0IGhhdmUgdG8gcmVtb3ZlL3JlYXBwbHkgYnJlYWtwb2lu
+dHMgYWxsCnRoZSB0aW1lIGFuZCBwYXVzZSB0aGUgZW50aXJlIGRvbWFpbiB3aGlsZSBkb2luZyBz
+by4KClRoZXJlIGFyZSB0aHJlZSB2aWV3cyBiZWluZyB1c2VkOiB0aGUgZGVmYXVsdCAoaG9zdHAy
+bSk7IHRoZQpleGVjdXRlLXZpZXcgd2hpY2ggaXMgYWN0aXZlIGJ5IGRlZmF1bHQgYW5kIGhhcyB0
+aGUgcmVtYXBwZWQKc2hhZG93LWNvcGllcyBvZiB0aGUgcGFnZXMgd2l0aCBicmVha3BvaW50cyBp
+bmplY3RlZCBhdCB0aGUgdmVyeSBlbmQKb2YgdGhlIGd1ZXN0cycgcGh5c21hcDsgYW5kIHRoZSBy
+ZWFkLW9ubHkgdmlldyB0aGF0IGlzIG9ubHkgdXNlZCB3aGVuCnNvbWVvbmUgaXMgdHJ5aW5nIHRv
+IHJlYWQgdGhlIGFjdHVhbCBhZGRyZXNzIG9mIGEgc2hhZG93LWNvcHkgYXQgdGhlCmVuZCBvZiB0
+aGUgcGh5c21hcCAoaWUuIG5vdCB2aWEgdGhlIHJlbWFwcGVkIGdmbikuCgpUaGUgcmVhZC1vbmx5
+IHZpZXcgaGFzIGFsbCBzaGFkb3ctY29weSBnZm4ncyByZW1hcHBlZCB0byB0aGF0IG9uZSBwYWdl
+CmZ1bGwgb2YgMSdzLCBiZWNhdXNlIGlmIHlvdSByZWFkIHJhbmRvbSBsYXJnZSBnZm4ncyBpbiB0
+aGUgZ3Vlc3RzJwptZW1vcnkgc3BhY2UgdGhhdCdzIHdoYXQgWGVuJ3MgZW11bGF0b3IgcmV0dXJu
+cy4gSXQgaXMgY2FsbGVkCnplcm9fcGFnZSBiZWNhdXNlIEkgb3JpZ2luYWxseSBndWVzc2VkIHRo
+YXQgdGhvc2UgcGFnZXMgc2hvdWxkIGJlIGFsbAowIGJ1dCBpdCB0dXJuZWQgb3V0IEkgd2FzIHdy
+b25nLiBKdXN0IGhhdmVuJ3QgY2hhbmdlIHRoZSBuYW1lIG9mIGl0CnlldC4gVGhpcyBwYWdlIGlz
+IHRoZXJlIGJlY2F1c2Ugd2Ugd2FudCB0byBhdm9pZCBzb21lb25lIGJlaW5nIGFibGUgdG8KZmlu
+ZCBvdXQgdGhhdCB0aGVyZSBhcmUgc2hhZG93IHBhZ2VzIHByZXNlbnQuIEl0IHdvdWxkIGJlIHF1
+aXRlCm9idmlvdXMgc29tZXRoaW5nIGlzICJvZGQiIHdoZW4geW91IGNhbiBmaW5kIGNvcGllcyBv
+ZiB0aGUgV2luZG93cwprZXJuZWwgbWVtb3J5IHBhZ2VzIGF0IHRoZSBlbmQgb2YgdGhlIG1lbW9y
+eSBzcGFjZS4gU28gdGhlIHNoYWRvdwpwYWdlcycgcmVhbCBHRk4gbWVtX2FjY2VzcyBpcyByZXN0
+cmljdGVkIGluIHRoZSBleGVjdXRlIHZpZXcsIHdoaWNoCmFsbG93cyB1cyB0byBzd2l0Y2ggdG8g
+dGhlIHJlYWQtb25seSB2aWV3IHdpdGggTVRGIGVuYWJsZWQgYW5kIHRoZW4KYmFjayBhZnRlcndh
+cmRzLiBUaGF0IHdheSB0aGUgc2hhZG93IHBhZ2VzIGFyZSBub3QgdmlzaWJsZSB0byB0aGUKZ3Vl
+c3QsIGlmIHNvbWVvbmUgdHJpZXMgdG8gcmVhZCB0aGVtIHRoZXkgcmV0dXJuIHRoZSBzYW1lIHZh
+bHVlIGFuZApiZWhhdmUgdGhlIHNhbWUgYXMgYWxsIG90aGVyIHVubWFwcGVkIGdmbidzIGluIHRo
+YXQgbWVtb3J5IHJlZ2lvbi4KClNvIHNpbmNlIHRoZSByZWFkLW9ubHkgdmlldyB3aXRoIGFsbCB0
+aGUgMSdzIGlzIHJhcmVseSB1c2VkLCBsZXQncwp0YWxrIGFib3V0IHdoeSBwYXRjaGd1YXJkIGNh
+bid0IG5vdGljZSBjaGFuZ2VzIHRvIHRoZSBrZXJuZWw6IHRoZQpleGVjdXRlLXZpZXcgaGFzIGFs
+bCBwYWdlcyB0aGF0IHdlcmUgYnJlYWtwb2ludGVkIHJlbWFwcGVkIGFuZCBtYXJrZWQKZXhlY3V0
+ZS1vbmx5LiBXaGVuIHBhdGNoZ3VhcmQgdHJpZXMgdG8gcmVhZCB0aGVzZSBwYWdlcywgdGhlIHZp
+ZXcgaXMKc3dhcHBlZCBiYWNrIHRvIHRoZSBob3N0cDJtIHdpdGggTVRGIGVuYWJsZWQuIFRoZW4g
+aW4gdGhlIE1URiBjYWxsYmFjawp0aGUgdmlldyBpcyBzd2FwcGVkIGJhY2sgdG8gdGhlIGV4ZWN1
+dGUtdmlldy4gVGhpcyBtZWFucyB0aGF0CnBhdGNoZ3VhcmQgb25seSBldmVyIHJlYWRzIHRoZSBv
+cmlnaW5hbCBwYWdlIGZyb20gdGhlIGhvc3RwMm0uIElmIHRoZQpwYWdlIGlzIGJlaW5nIHdyaXR0
+ZW4gdG8sIHRoZSBzYW1lIGRhbmNlIGhhcHBlbnMgd2l0aCB0aGUgYWRkaXRpb24gb2YKdGhlIHdo
+b2xlIHBhZ2UgYmVpbmcgcmUtY29waWVkIHRvIHRoZSBzaGFkb3cgbG9jYXRpb24gYW5kIHRoZQpi
+cmVha3BvaW50cyBiZWluZyByZWFwcGxpZWQgb24gdGhlIHNoYWRvdyBjb3B5LiBUaGlzIGNvcHkg
+aGFwcGVucwp3aGlsZSB0aGUgd2hvbGUgZG9tYWluIGlzIHBhdXNlZCB0byBhdm9pZCByYWNlLWNv
+bmRpdGlvbi4KCkkgaG9wZSB0aGlzIG1ha2VzIHNlbnNlLgoKVGFtYXMKCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QK
+WGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5v
+cmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
