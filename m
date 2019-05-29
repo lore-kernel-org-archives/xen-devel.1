@@ -1,21 +1,17 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH MM-PART3 v2 00/12] xen/arm: Provide a
- generic function to update Xen PT
-Date: Wed, 29 May 2019 18:23:32 +0100
-Message-ID: <74c57ae1-192c-b3dd-4e76-9ac7d6ac2f5c@arm.com>
-References: <20190514123125.29086-1-julien.grall@arm.com>
+From: Hariharasubramanian C S <meetcarey@gmail.com>
+Subject: vTPM2.0 support
+Date: Wed, 29 May 2019 10:29:29 -0700
+Message-ID: <CAD+-4A-jMLuWuqr2VHE2m_PNR1P2VXeF439OxE+XEyG7w0Mg+w@mail.gmail.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1683780643141494559=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=MUVL=T5=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hW2Ib-0007Xf-Og
- for xen-devel@lists.xenproject.org; Wed, 29 May 2019 17:23:37 +0000
-In-Reply-To: <20190514123125.29086-1-julien.grall@arm.com>
-Content-Language: en-US
+ <SRS0=yMcL=T5=gmail.com=meetcarey@srs-us1.protection.inumbo.net>)
+ id 1hW2Ne-0007m9-4n
+ for xen-devel@lists.xenproject.org; Wed, 29 May 2019 17:28:50 +0000
+Received: by mail-io1-xd32.google.com with SMTP id g16so2542912iom.9
+ for <xen-devel@lists.xenproject.org>; Wed, 29 May 2019 10:28:49 -0700 (PDT)
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -25,55 +21,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Oleksandr_Tyshchenko@epam.com, Stefano Stabellini <sstabellini@kernel.org>, Andrii_Anisov@epam.com
 List-Id: xen-devel@lists.xenproject.org
 
-SGksCgpHZW50bGUgcGluZy4uLgoKQ2hlZXJzLAoKT24gMTQvMDUvMjAxOSAxMzozMSwgSnVsaWVu
-IEdyYWxsIHdyb3RlOgo+IEhpIGFsbCwKPiAKPiBUaGlzIGlzIHRoZSB0aGlyZCBwYXJ0IG9mIHRo
-ZSBib290L21lbW9yeSByZXdvcmsgZm9yIFhlbiBvbiBBcm0uIEF0IHRoZQo+IG1vbWVudCwgdGhl
-IHVwZGF0ZSB0byBYZW4gUFQgaXMgc2NhdHRlcmVkIGFsbCBhcm91bmQgbW0uYy4gVGhpcyBtYWtl
-cwo+IGRpZmZpY3VsdCB0byByZXdvcmsgWGVuIG1lbW9yeSBsYXlvdXQgb3IgZXZlbiBlbnN1cmlu
-ZyB3ZSBhcmUgZm9sbG93aW5nIHRoZQo+IEFybSBBcm0gcHJvcGVybHkgKGFuZCB3ZSBhcmUgbm90
-IHNvIGZhciEpLgo+IAo+IFRoaXMgcGFydCBjb250YWlucyBjb2RlIHRvIHByb3ZpZGUgYSBnZW5l
-cmljIGZ1bmN0aW9uIHRvIHVwZGF0ZSBYZW4gUFQuCj4gV2hpbGUgSSBjb3VsZCBoYXZlIHN0YXJ0
-ZWQgZnJvbSBzY3JhdGNoLCBJIGRlY2lkZWQgdG8gYmFzZSB0aGUgbmV3IGZ1bmN0aW9uCj4gb24g
-Y3JlYXRlX3hlbl9lbnRyaWVzKCkgKG5vdyByZW5hbWVkIHhlbl9wdF91cGRhdGUoKSkuIFRoaXMg
-bWFrZXMgc2xpZ2h0bHkKPiBlYXNpZXIgdG8gZm9sbG93IHRoZSBjaGFuZ2VzLgo+IAo+IEluIHRo
-aXMgc2VyaWVzLCB0aGUgbmV3IGdlbmVyaWMgZnVuY3Rpb24gd2lsbCBvbmx5IHN1cHBvcnQgM3Jk
-LWxldmVsIHVwZGF0ZQo+IGFuZCBjYW5ub3QgYmUgdXNlZCBpbiBlYXJseSBib290IChpLmUgYmVj
-YXVzZSB4ZW5oZWFwIGlzIG5vdCBpbml0aWFsaXplZCkuCj4gVGhpcyB3aWxsIGJlIGV4dGVuZGVk
-IGluIGZvbGxvdy11cCBzZXJpZXMgdG8gYWxsb3cgbW9yZSB1c2Ugd2l0aGluIG1tLmMuCj4gCj4g
-VGhlcmUgYXJlIHByb2JhYmx5IHNvbWUgb3B0aW1pemF0aW9uIHBvc3NpYmxlIGFyb3VuZCB0aGUg
-VExCcyBmbHVzaC4gSSBoYXZlbid0Cj4gbG9va2VkIGF0IGl0IHNvIGZhci4KPiAKPiBUaGUgbGFz
-dCB0d28gcGF0Y2hlcyBvZiB0aGlzIHNlcmllcyBpcyB0byBzaG93IGhvdyBleGlzdGluZyBjYWxs
-ZXJzIGNhbiBiZQo+IGNvbnZlcnRlZC4gVGhlcmUgYXJlIG1vcmUgY29udmVyc2lvbiB0byBjb21l
-IGluIGZvbGxvdy11cCBzZXJpZXMuCj4gCj4gVGhpcyBzZXJpZXMgaXMgYmFzZWQgb24gdGhlIGZp
-cnN0IHR3byBwYXJ0cyBzZW50IHNlcGFyYXRlbHkgKHNlZSBbMV0gYW5kIFsyXSkuCj4gCj4gRm9y
-IGNvbnZlbmllbmNlLCBJIHByb3ZpZGVkIGEgYnJhbmNoIHdpdGggYWxsIHRoZSBwYXRjaGVzIGFw
-cGxpZWQgYmFzZWQgb24KPiBzdGFnaW5nOgo+IAo+ICAgICAgZ2l0Oi8veGVuYml0cy54ZW4ub3Jn
-L3Blb3BsZS9qdWxpZW5nL3hlbi11bnN0YWJsZS5naXQgYnJhbmNoIG1tL3BhcnQzL3YyCj4gCj4g
-Q2hlZXJzLAo+IAo+IFsxXSBodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL2FyY2hpdmVzL2h0
-bWwveGVuLWRldmVsLzIwMTktMDUvbXNnMDExMDkuaHRtbAo+IFsyXSBodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL2FyY2hpdmVzL2h0bWwveGVuLWRldmVsLzIwMTktMDUvbXNnMDExNDkuaHRt
-bAo+IAo+IEp1bGllbiBHcmFsbCAoMTIpOgo+ICAgIHhlbi9hcm06IGxwYWU6IEFkZCBhIG1hY3Jv
-IHRvIGdlbmVyYXRlIG9mZnNldHMgZnJvbSBhbiBhZGRyZXNzCj4gICAgeGVuL2FybTogbW06IFJl
-bmFtZSBjcmVhdGVfeGVuX2VudHJpZXMoKSB0byB4ZW5fcHRfdXBkYXRlKCkKPiAgICB4ZW4vYXJt
-OiBtbTogTW92ZSBvdXQgb2YgeGVuX3B0X3VwZGF0ZSgpIHRoZSBsb2dpYyB0byB1cGRhdGUgYW4g
-ZW50cnkKPiAgICB4ZW4vYXJtOiBtbTogT25seSBpbmNyZW1lbnQgbWZuIHdoZW4gdmFsaWQgaW4g
-eGVuX3B0X3VwZGF0ZQo+ICAgIHhlbi9hcm06IG1tOiBJbnRyb2R1Y2UgX1BBR0VfUFJFU0VOVCBh
-bmQgX1BBR0VfUE9QVUxBVEUKPiAgICB4ZW4vYXJtOiBtbTogU2FuaXR5IGNoZWNrIGFueSB1cGRh
-dGUgb2YgWGVuIHBhZ2UgdGFibGVzCj4gICAgeGVuL2FybTogbW06IFJld29yayB4ZW5fcHRfdXBk
-YXRlX2VudHJ5IHRvIGF2b2lkIHVzZSB4ZW5tYXBfb3BlcmF0aW9uCj4gICAgeGVuL2FybTogbW06
-IFJlbW92ZSBlbnVtIHhlbm1hcF9vcGVyYXRpb24KPiAgICB4ZW4vYXJtOiBtbTogVXNlIHssIHVu
-fW1hcF9kb21haW5fcGFnZSgpIHRvIG1hcC91bm1hcCBYZW4gcGFnZS10YWJsZXMKPiAgICB4ZW4v
-YXJtOiBtbTogUmV3b3JrIFhlbiBwYWdlLXRhYmxlcyB3YWxrIGR1cmluZyB1cGRhdGUKPiAgICB4
-ZW4vYXJtOiBtbTogRG9uJ3Qgb3Blbi1jb2RlIFhlbiBQVCB1cGRhdGUgaW4ge3NldCwgY2xlYXJ9
-X2ZpeG1hcCgpCj4gICAgeGVuL2FybTogbW06IFJlbW92ZSBzZXRfcHRlX2ZsYWdzX29uX3Jhbmdl
-KCkKPiAKPiAgIHhlbi9hcmNoL2FybS9tbS5jICAgICAgICAgIHwgNDIxICsrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLQo+ICAgeGVuL2FyY2gvYXJtL3AybS5jICAg
-ICAgICAgfCAgMjMgKy0tCj4gICB4ZW4vaW5jbHVkZS9hc20tYXJtL2xwYWUuaCB8ICAgOSArCj4g
-ICB4ZW4vaW5jbHVkZS9hc20tYXJtL3BhZ2UuaCB8ICAgOSArLQo+ICAgNCBmaWxlcyBjaGFuZ2Vk
-LCAzMDUgaW5zZXJ0aW9ucygrKSwgMTU3IGRlbGV0aW9ucygtKQo+IAoKLS0gCkp1bGllbiBHcmFs
-bAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+--===============1683780643141494559==
+Content-Type: multipart/alternative; boundary="0000000000003a98b0058a0a1da3"
+
+--0000000000003a98b0058a0a1da3
+Content-Type: text/plain; charset="UTF-8"
+
+Hi,
+My understanding is that currently xen hypervisor supports vTPM, but
+supports only vTPM1.2.  i.e. vTPM can work with TPM 2.0 hardware, but vTPM
+as such will support only 1.2 SAPI calls in the frontend-driver. Is that
+right? If yes, can you please share if there is a roadmap for supporting
+2.0 in vTPM instances?
+
+Thanks
+Hari
+
+--0000000000003a98b0058a0a1da3
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:georgia,=
+serif;color:#0000ff"><br clear=3D"all"></div><div><div class=3D"gmail_defau=
+lt" style=3D"font-family:georgia,serif;color:rgb(0,0,255)">Hi,</div><div cl=
+ass=3D"gmail_default" style=3D"font-family:georgia,serif;color:rgb(0,0,255)=
+"></div></div><div class=3D"gmail_default" style=3D"font-family:georgia,ser=
+if;color:rgb(0,0,255)">My understanding is that currently xen hypervisor su=
+pports vTPM, but supports only vTPM1.2.=C2=A0 i.e. vTPM can work with TPM 2=
+.0 hardware, but vTPM as such will support only 1.2 SAPI calls in the front=
+end-driver. Is that right? If yes, can you please share if there is a roadm=
+ap for supporting 2.0 in vTPM instances?</div><div class=3D"gmail_default" =
+style=3D"font-family:georgia,serif;color:rgb(0,0,255)"><br></div><div class=
+=3D"gmail_default" style=3D"font-family:georgia,serif;color:rgb(0,0,255)">T=
+hanks</div><div class=3D"gmail_default" style=3D"font-family:georgia,serif;=
+color:rgb(0,0,255)">Hari</div></div>
+
+--0000000000003a98b0058a0a1da3--
+
+
+--===============1683780643141494559==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1683780643141494559==--
