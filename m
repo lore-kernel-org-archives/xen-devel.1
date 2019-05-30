@@ -1,17 +1,18 @@
-From: Baodong Chen <chenbaodong@mxnavi.com>
-Subject: [PATCH] xen: 'keyhandler' is not used in null scheduler
-Date: Thu, 30 May 2019 13:47:24 +0800
-Message-ID: <1559195244-7692-1-git-send-email-chenbaodong@mxnavi.com>
+From: Vishnu Pajjuri OS <vishnu@os.amperecomputing.com>
+Subject: [PATCH v2] xen/arm: p2m: configure stage-2 page table
+ to support upto 42-bit PA systems
+Date: Thu, 30 May 2019 07:59:46 +0000
+Message-ID: <1559203823-4092-1-git-send-email-vishnu@os.amperecomputing.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=k8x6=T6=mxnavi.com=chenbaodong@srs-us1.protection.inumbo.net>)
- id 1hWDx1-0005jL-Gz
- for xen-devel@lists.xenproject.org; Thu, 30 May 2019 05:50:07 +0000
+ <SRS0=XN+J=T6=os.amperecomputing.com=vishnu@srs-us1.protection.inumbo.net>)
+ id 1hWFyb-0006S1-91
+ for xen-devel@lists.xenproject.org; Thu, 30 May 2019 07:59:53 +0000
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -20,26 +21,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Baodong Chen <chenbaodong@mxnavi.com>, George Dunlap <george.dunlap@eu.citrix.com>, Dario Faggioli <dfaggioli@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Open Source Submission <patches@amperecomputing.com>, "sstabellini@kernel.org" <sstabellini@kernel.org>, Feng Kan OS <fengkan@os.amperecomputing.com>, "julien.grall@arm.com" <julien.grall@arm.com>, Vishnu Pajjuri OS <vishnu@os.amperecomputing.com>
 List-Id: xen-devel@lists.xenproject.org
 
-U28gcmVtb3ZlICdrZXloYW5kbGVyLmgnIGluY2x1ZGUuCkFsc28gYWRkICdzdGF0aWMnIHByZWZp
-eCBmb3IgJ3NjaHVkX2J1bGxfZGVmJwoKU2lnbmVkLW9mZi1ieTogQmFvZG9uZyBDaGVuIDxjaGVu
-YmFvZG9uZ0BteG5hdmkuY29tPgotLS0KIHhlbi9jb21tb24vc2NoZWRfbnVsbC5jIHwgMyArLS0K
-IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkKCmRpZmYgLS1n
-aXQgYS94ZW4vY29tbW9uL3NjaGVkX251bGwuYyBiL3hlbi9jb21tb24vc2NoZWRfbnVsbC5jCmlu
-ZGV4IGE1OWRiYjIuLmM5NzAwZjEgMTAwNjQ0Ci0tLSBhL3hlbi9jb21tb24vc2NoZWRfbnVsbC5j
-CisrKyBiL3hlbi9jb21tb24vc2NoZWRfbnVsbC5jCkBAIC0zMSw3ICszMSw2IEBACiAjaW5jbHVk
-ZSA8eGVuL3NjaGVkLmg+CiAjaW5jbHVkZSA8eGVuL3NjaGVkLWlmLmg+CiAjaW5jbHVkZSA8eGVu
-L3NvZnRpcnEuaD4KLSNpbmNsdWRlIDx4ZW4va2V5aGFuZGxlci5oPgogI2luY2x1ZGUgPHhlbi90
-cmFjZS5oPgogCiAvKgpAQCAtODcxLDcgKzg3MCw3IEBAIHN0YXRpYyB2b2lkIG51bGxfZHVtcChj
-b25zdCBzdHJ1Y3Qgc2NoZWR1bGVyICpvcHMpCiAgICAgc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgm
-cHJ2LT5sb2NrLCBmbGFncyk7CiB9CiAKLWNvbnN0IHN0cnVjdCBzY2hlZHVsZXIgc2NoZWRfbnVs
-bF9kZWYgPSB7CitzdGF0aWMgY29uc3Qgc3RydWN0IHNjaGVkdWxlciBzY2hlZF9udWxsX2RlZiA9
-IHsKICAgICAubmFtZSAgICAgICAgICAgPSAibnVsbCBTY2hlZHVsZXIiLAogICAgIC5vcHRfbmFt
-ZSAgICAgICA9ICJudWxsIiwKICAgICAuc2NoZWRfaWQgICAgICAgPSBYRU5fU0NIRURVTEVSX05V
-TEwsCi0tIAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+WEVOIGNvbmZpZ3VyZXMgc3RhZ2UtMiBwYWdlIHRhYmxlIHRvIGV4cG9zZSA0MCBiaXRzIG9mIElQ
+QQ0KKEludGVybWVkaWF0ZSBQaHlzaWNhbCBBZGRyZXNzKSBiaXRzIGZvciBzeXN0ZW1zIHdpdGgg
+NDIgYml0cyBvZiBQQQ0KKFBoeXNpY2FsIEFkZHJlc3MpLiBUaGlzIHNldHRpbmcgcHJldmVudHMg
+dGhlIDQyLWJpdCBQQSBzeXN0ZW1zIGZyb20gYm9vdGluZw0KRE9NMCdzIGtlcm5lbCBzaW5jZSBh
+Y2Nlc3MgYWJvdmUgNDAgYml0cyByZXN1bHRzIGluIGEgZmF1bHQuDQoNClRoaXMgcGF0Y2ggYWRk
+cyBzdXBwb3J0IGZvciA0Mi1iaXQgc3lzdGVtDQp3aGljaCBoYXMgYSBmdWxsIDQyLWJpdCBhZGRy
+ZXNzIHJhbmdlLg0KDQpUaGUgZml4IHdpbGwgYWxsb2NhdGUgOCBwYWdlcyBmb3Igc3RhZ2UgMiBt
+YXBwaW5nIGZvciBib3RoIERPTTAgYW5kIGd1ZXN0cy4NCkl0IGlzIGEgYml0IHdhc3RlZnVsIGJ1
+dCBub3QgYW4gaXNzdWUgc2luY2UgbW9zdCBvZiB0aGVzZSBzeXN0ZW1zIHNob3VsZCBoYXZlDQpz
+dWZmaWNpZW50bHkgbGFyZ2UgbWVtb3J5IGNhcGFjaXR5Lg0KDQpTaWduZWQtb2ZmLWJ5OiBGZW5n
+IEthbiA8ZmVuZ2thbkBvcy5hbXBlcmVjb21wdXRpbmcuY29tPg0KU2lnbmVkLW9mZi1ieTogVmlz
+aG51IDx2aXNobnVAb3MuYW1wZXJlY29tcHV0aW5nLmNvbT4NCi0tLQ0KIHhlbi9hcmNoL2FybS9w
+Mm0uYyB8IDIgKy0NCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24o
+LSkNCg0KZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9wMm0uYyBiL3hlbi9hcmNoL2FybS9wMm0u
+Yw0KaW5kZXggOTJjMjQxMy4uNzcxMjk5MSAxMDA2NDQNCi0tLSBhL3hlbi9hcmNoL2FybS9wMm0u
+Yw0KKysrIGIveGVuL2FyY2gvYXJtL3AybS5jDQpAQCAtMTk5NSw3ICsxOTk1LDcgQEAgdm9pZCBf
+X2luaXQgc2V0dXBfdmlydF9wYWdpbmcodm9pZCkNCiAgICAgICAgIFswXSA9IHsgMzIsICAgICAg
+MzIvKjMyKi8sICAwLCAgICAgICAgICAxIH0sDQogICAgICAgICBbMV0gPSB7IDM2LCAgICAgIDI4
+LyoyOCovLCAgMCwgICAgICAgICAgMSB9LA0KICAgICAgICAgWzJdID0geyA0MCwgICAgICAyNC8q
+MjQqLywgIDEsICAgICAgICAgIDEgfSwNCi0gICAgICAgIFszXSA9IHsgNDIsICAgICAgMjQvKjIy
+Ki8sICAxLCAgICAgICAgICAxIH0sDQorICAgICAgICBbM10gPSB7IDQyLCAgICAgIDIyLyoyMiov
+LCAgMywgICAgICAgICAgMSB9LA0KICAgICAgICAgWzRdID0geyA0NCwgICAgICAyMC8qMjAqLywg
+IDAsICAgICAgICAgIDIgfSwNCiAgICAgICAgIFs1XSA9IHsgNDgsICAgICAgMTYvKjE2Ki8sICAw
+LCAgICAgICAgICAyIH0sDQogICAgICAgICBbNl0gPSB7IDAgfSwgLyogSW52YWxpZCAqLw0KLS0N
+CjEuOC4zLjENCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
