@@ -1,21 +1,22 @@
-From: Christoph Hellwig <hch@infradead.org>
-Subject: Re: [PATCH v2 3/3] xen/swiotlb: remember having called
- xen_create_contiguous_region()
-Date: Thu, 30 May 2019 02:04:09 -0700
-Message-ID: <20190530090409.GB30428__3986.34224418259$1559207127$gmane$org@infradead.org>
-References: <20190529090407.1225-1-jgross@suse.com>
- <20190529090407.1225-4-jgross@suse.com>
+From: George Dunlap <George.Dunlap@citrix.com>
+Subject: Re: [PATCH] xen: 'keyhandler' is not used in null
+ scheduler
+Date: Thu, 30 May 2019 09:05:08 +0000
+Message-ID: <BBCA5C60-5657-47B6-8B7B-B1206AFA2561@citrix.com>
+References: <1559195244-7692-1-git-send-email-chenbaodong@mxnavi.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=TeU2=T6=bombadil.srs.infradead.org=batv+882e7947623448fb4484+5758+infradead.org+hch@srs-us1.protection.inumbo.net>)
- id 1hWGyz-00048T-Af
- for xen-devel@lists.xenproject.org; Thu, 30 May 2019 09:04:21 +0000
-Content-Disposition: inline
-In-Reply-To: <20190529090407.1225-4-jgross@suse.com>
+ <SRS0=F1hi=T6=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1hWGzw-0004BW-PR
+ for xen-devel@lists.xenproject.org; Thu, 30 May 2019 09:05:20 +0000
+In-Reply-To: <1559195244-7692-1-git-send-email-chenbaodong@mxnavi.com>
+Content-Language: en-US
+Content-ID: <D1A944AC6167354895131DEB2B4DBE3C@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,13 +25,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org, iommu@lists.linux-foundation.org, xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>
+To: Baodong Chen <chenbaodong@mxnavi.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, George Dunlap <George.Dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>
 List-Id: xen-devel@lists.xenproject.org
 
-UGxlYXNlIGRvbid0IGFkZCB5b3VyIHByaXZhdGUgZmxhZyB0byBwYWdlLWZsYWdzLmguICBUaGUg
-d2hvbGUgcG9pbnQgb2YKdGhlIHByaXZhdGUgZmxhZyBpcyB0aGF0IHlvdSBjYW4gdXNlIGl0IGlu
-IGFueSB3YXkgeW91IHdhbnQgd2l0aG91CnRvdWNoaW5nIHRoZSBjb21tb24gY29kZS4KCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+DQo+IE9uIE1heSAzMCwgMjAxOSwgYXQgNjo0NyBBTSwgQmFvZG9uZyBDaGVuIDxjaGVuYmFvZG9u
+Z0BteG5hdmkuY29tPiB3cm90ZToNCj4gDQo+IFNvIHJlbW92ZSAna2V5aGFuZGxlci5oJyBpbmNs
+dWRlLg0KPiBBbHNvIGFkZCAnc3RhdGljJyBwcmVmaXggZm9yICdzY2h1ZF9idWxsX2RlZicNCj4g
+DQo+IFNpZ25lZC1vZmYtYnk6IEJhb2RvbmcgQ2hlbiA8Y2hlbmJhb2RvbmdAbXhuYXZpLmNvbT4N
+Cg0KVGhhbmtzIGZvciB0aGUgcGF0Y2gg4oCUIHRoZXNlIGNoYW5nZXMgbG9vayBnb29kLiAgSSB0
+aGluayB0aGUgdGl0bGUgd291bGQgYmUgYmV0dGVyIHNvbWV0aGluZyBsaWtlOg0KDQp4ZW4vc2No
+ZWRfbnVsbDogU3VwZXJmaWNpYWwgY2xlYW4tdXBzDQoNClRoZW4ganVzdCBsaXN0IGJvdGggaW4g
+YnVsbGV0IHBvaW50czsgc29tZXRoaW5nIGxpa2U6DQoNCiogUmVtb3ZlIHVudXNlZCBkZXBlbmRl
+bmN5IOKAmGtleWhhbmRsZXIu4oCZaA0KKiBNYWtlIHNjaGVkX251bGxfZGVmIHN0YXRpYw0KDQpX
+b3VsZCB5b3UgbWluZCByZS1zZW5kaW5nIHRoZSBwYXRjaD8gIFlvdSBjYW4gYWRkOg0KDQpSZXZp
+ZXdlZC1ieTogR2VvcmdlIER1bmxhcCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPg0KDQpUaGFu
+a3MsDQogLUdlb3JnZQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
