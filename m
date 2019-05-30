@@ -1,11 +1,12 @@
-From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Subject: Re: [PATCH v2 3/3] xen/swiotlb: remember having called
- xen_create_contiguous_region()
-Date: Thu, 30 May 2019 08:46:39 -0400
-Message-ID: <eebb0275-9418-717f-97d7-5e55917f46fd__26202.1939082601$1559220670$gmane$org@oracle.com>
-References: <20190529090407.1225-1-jgross@suse.com>
- <20190529090407.1225-4-jgross@suse.com>
- <20190530090409.GB30428@infradead.org>
+From: Ian Jackson <ian.jackson@citrix.com>
+Subject: Re: Stable trees (4.6 and 4.7), building on stretch,
+ osstest, redux
+Date: Thu, 30 May 2019 13:57:18 +0100
+Message-ID: <23791.54062.185246.825377@mariner.uk.xensource.com>
+References: <23751.6062.590245.436664@mariner.uk.xensource.com>
+ <23751.6297.231034.162861@mariner.uk.xensource.com>
+ <23789.37660.726217.578999@mariner.uk.xensource.com>
+ <23790.28482.572598.843984@mariner.uk.xensource.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -13,11 +14,10 @@ Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4onE=T6=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
- id 1hWKVT-0004zG-I5
- for xen-devel@lists.xenproject.org; Thu, 30 May 2019 12:50:07 +0000
-In-Reply-To: <20190530090409.GB30428@infradead.org>
-Content-Language: en-US
+ <SRS0=uW51=T6=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1hWKd1-0005GP-DN
+ for xen-devel@lists.xenproject.org; Thu, 30 May 2019 12:57:55 +0000
+In-Reply-To: <23790.28482.572598.843984@mariner.uk.xensource.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,18 +26,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Christoph Hellwig <hch@infradead.org>, Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, iommu@lists.linux-foundation.org, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+To: Jan Beulich <JBeulich@suse.com>, Wei Liu <wl@xen.org>, Anthony PERARD <anthony.perard@citrix.com>, Olaf Hering <olaf@aepfle.de>, Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
 List-Id: xen-devel@lists.xenproject.org
 
-T24gNS8zMC8xOSA1OjA0IEFNLCBDaHJpc3RvcGggSGVsbHdpZyB3cm90ZToKPiBQbGVhc2UgZG9u
-J3QgYWRkIHlvdXIgcHJpdmF0ZSBmbGFnIHRvIHBhZ2UtZmxhZ3MuaC4gIFRoZSB3aG9sZSBwb2lu
-dCBvZgo+IHRoZSBwcml2YXRlIGZsYWcgaXMgdGhhdCB5b3UgY2FuIHVzZSBpdCBpbiBhbnkgd2F5
-IHlvdSB3YW50IHdpdGhvdQo+IHRvdWNoaW5nIHRoZSBjb21tb24gY29kZS4KCgpUaGVyZSBpcyBh
-bHJlYWR5IGEgYnVuY2ggb2YgYWxpYXNlcyBmb3IgdmFyaW91cyBzdWItY29tcG9uZW50cwooaW5j
-bHVkaW5nIFhlbikgaW4gcGFnZS1mbGFncy5oIGZvciBwcml2YXRlIGZsYWdzLCB3aGljaCBpcyB3
-aHkgSQpzdWdnZXN0ZWQgd2UgZG8gdGhlIHNhbWUgZm9yIHRoZSBuZXcgdXNlIGNhc2UuIEFkZGlu
-ZyB0aGlzIG5ldyBhbGlhcwp3aWxsIGtlZXAgZmxhZyB1c2FnZSBjb25zaXN0ZW50LgoKLWJvcmlz
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+SWFuIEphY2tzb24gd3JpdGVzICgiUmU6IFN0YWJsZSB0cmVlcyAoNC42IGFuZCA0LjcpLCBidWls
+ZGluZyBvbiBzdHJldGNoLCBvc3N0ZXN0LCByZWR1eCIpOgo+IEkgaGF2ZSBub3cgcHVzaGVkIGFs
+bCBvZiB0aGVzZSB0byA0LjYgYW5kIDQuNyBhbmQgaXQgYnVpbGRzIGZvciBtZS4KPiBJIHdpbGwg
+a2lsbCB0aGUgY3VycmVudCwgZG9vbWVkLCA0LjYgYW5kIDQuNyBmbGlnaHRzLgoKSSBoYXZlIG5v
+dyBhbHNvIGJhY2twb3J0ZWQKICA1ZjI4ZGUwYjBlNDc0ZTAxOTMxYjcxOWZhMjdjYTMwYjhhYTQ0
+NmUwCiAgbGlieGw6IGNvbXBpbGF0aW9uIHdhcm5pbmcgZml4IGZvciBhcm0gJiBhYXJjaDY0CgpJ
+YW4uCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
+ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
+L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
