@@ -1,21 +1,24 @@
-From: Dario Faggioli <dfaggioli@suse.com>
-Subject: Re: [PATCH 54/60] xen/sched: add minimalistic idle
- scheduler for free cpus
-Date: Fri, 31 May 2019 16:15:07 +0200
-Message-ID: <5509cdf7d7fb706e045e4627e1d3e24619e122e6.camel@suse.com>
-References: <20190528103313.1343-1-jgross@suse.com>
- <20190528103313.1343-55-jgross@suse.com>
- <5CED1FDC0200007800233141@prv1-mh.provo.novell.com>
- <5ea454f1-79f7-2974-0736-3262870446ab@suse.com>
+From: Paul Durrant <Paul.Durrant@citrix.com>
+Subject: Re: [PATCH 4/5] iommu: introduce iommu_groups
+Date: Fri, 31 May 2019 14:21:57 +0000
+Message-ID: <effeb9ace857427993a30f5575dc3a27@AMSPEX02CL03.citrite.net>
+References: <20190508132403.1454-1-paul.durrant@citrix.com>
+ <20190508132403.1454-5-paul.durrant@citrix.com>
+ <5CDC1F96020000780022F4BF@prv1-mh.provo.novell.com>
+ <cb3fd070fa6748148dd4af032a7b6edc@AMSPEX02CL03.citrite.net>
+ <5CF1368C02000078002340B4@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
-Content-Type: multipart/mixed; boundary="===============1466069064504856208=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=agGR=T7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hWiJR-0005Om-PS
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 14:15:17 +0000
-In-Reply-To: <5ea454f1-79f7-2974-0736-3262870446ab@suse.com>
+ <SRS0=q4nb=T7=citrix.com=paul.durrant@srs-us1.protection.inumbo.net>)
+ id 1hWiQ2-0006HX-KQ
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 14:22:06 +0000
+In-Reply-To: <5CF1368C02000078002340B4@prv1-mh.provo.novell.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,106 +27,34 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>, Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, WeiLiu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Roger Pau Monne <roger.pau@citrix.com>
+To: 'Jan Beulich' <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wei.liu2@citrix.com>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, George Dunlap <George.Dunlap@citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>, Ian Jackson <Ian.Jackson@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-
---===============1466069064504856208==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-YTBWYxd+05p2oNmujdwO"
-
-
---=-YTBWYxd+05p2oNmujdwO
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2019-05-28 at 13:58 +0200, Juergen Gross wrote:
-> On 28/05/2019 13:47, Jan Beulich wrote:
-> > > > > On 28.05.19 at 12:33, <jgross@suse.com> wrote:
-> > > Instead of having a full blown scheduler running for the free
-> > > cpus
-> > > add a very minimalistic scheduler for that purpose only ever
-> > > scheduling
-> > > the related idle vcpu. This has the big advantage of not needing
-> > > any
-> > > per-cpu, per-domain or per-scheduling unit data for free cpus and
-> > > in
-> > > turn simplifying moving cpus to and from cpupools a lot.
-> >=20
-> > And the null scheduler is not minimalistic enough?
->=20
-> The main disadvantage of the null scheduler are the need for private
-> data (which has to be allocated/freed on scheduler switch), its not
-> yet perfect stability, and its "complexity" (e.g. 900 lines vs. 50).
->=20
-Yes, I absolutely agree with this approach of having an even simpler
-idle scheduler, for the idle vcpus, and not selectable and usable by
-the user for other things.
-
-It would, actually, be rather useful in other ways and places, so I'm
-actually rather happy to see it appearing (I started multiple times
-doing something like this myself, but never finished :-/)
-
-For instance, the fact that we put cpus that are not in any pool in the
-default scheduler, was weird (to say the least) from a conceptual point
-of view, forced us to do some extra checks (in the form of, e.g.,
-cpumask() operations) to avoid actually scheduling vcpus on them and
-was causing accounting issues in Credit1.
-
-Now that the free cpus can go and stay in their own "idle scheduler",
-those things can all be solved, in the (IMO) best and most clean way.
-
-And, yes, it has to be as simple as possible, even simpler than null...
-And I think we can easily see why that's the case, just by looking at
-what code this patch let us remove (e.g., the need for some of the
-checking of `system_state` in cpupool or scheduler code, just to
-mention one).
-
-Thanks and Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-YTBWYxd+05p2oNmujdwO
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzxNusACgkQFkJ4iaW4
-c+6Csg//R7ZvO6oI7I18r/f8gOSJZZE1QMskUKLFB/yOv4O2FOxLomUNb+W07efq
-T1O8LFwLKn4c7rLJSEIYHpKzAWOVLbdvryYrawSD5Swcqw8KCQRaKd2zow9KL525
-SS8dN7VuuwcO9HMIMZnElNGtXEucebt9iIbLKgc+jSLzuqEAnjQrf0wM9i+oCBc2
-oZE5z/qy6BCgOl2g5YlzKBWhFUDBCI+iVD8mwQ7X9PgonCBB1qHp2cDRDUUrAIxV
-uHbh28k7uUFq8LxcsFsuBXi8X2lJh7J+NRYtA0icTIFozFNY22WKx4m9OrzWlMmO
-vIIP8qui84ZWM4zvxAf2blXxuLZgfAyQQvVGik72uDZC9L4Sv2hQC/HfMPRx2Wfe
-U02eime/tb0RJ8GnWp2u5aj7gYPATRBgkDRtveVCTLS8QvzCYCvnAavOEOemHhO+
-1UqBQOOMuKRNuwEVWT4pB3I2kUXHTZ1zLSc7ZGoXd1GL0f5espXOorsheKyKkcM9
-jGEt49Dx8WZmHa0QmOPgaN7kzpg5EmEJuwsseu1CD99tZQJ36d8S7BGZ33UrJMt/
-IelWz/+BNxgU8RoBiMt5VgjhdUv569bVfetAFKrr/+8opVS5MlAjJc9ofrhpSwOS
-KnmqwHI0qGPs1wUut9EPPp7jPAaQT5KNSqVB4Gx6QRlE6tZZ/eU=
-=fhSQ
------END PGP SIGNATURE-----
-
---=-YTBWYxd+05p2oNmujdwO--
-
-
-
---===============1466069064504856208==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1466069064504856208==--
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQpbc25pcF0KPiA+PiA+IC0tLSBhL3hlbi9pbmNs
+dWRlL3hlbi9wY2kuaAo+ID4+ID4gKysrIGIveGVuL2luY2x1ZGUveGVuL3BjaS5oCj4gPj4gPiBA
+QCAtNzUsNiArNzUsOSBAQCBzdHJ1Y3QgcGNpX2RldiB7Cj4gPj4gPiAgICAgIHN0cnVjdCBsaXN0
+X2hlYWQgYWxsZGV2c19saXN0Owo+ID4+ID4gICAgICBzdHJ1Y3QgbGlzdF9oZWFkIGRvbWFpbl9s
+aXN0Owo+ID4+ID4KPiA+PiA+ICsgICAgc3RydWN0IGxpc3RfaGVhZCBncnBkZXZzX2xpc3Q7Cj4g
+Pj4KPiA+PiBEb2VzIHRoaXMgc2VwYXJhdGUgbGlzdCBwcm92aWRlIG11Y2ggdmFsdWU/IFRoZSBk
+ZXZpY2VzIGluIGEgZ3JvdXAKPiA+PiBhcmUgZ29pbmcgdG8gbW92ZSBiZXR3ZWVuIHR3byBkb21h
+aW5fbGlzdC1zIGFsbCBpbiBvbmUgZ28sIHNvCj4gPj4gb25jZSB5b3Uga25vdyB0aGUgZG9tYWlu
+IG9mIG9uZSB5b3UnbGwgYmUgYWJsZSB0byBmaW5kIHRoZSByZXN0IGJ5Cj4gPj4gaXRlcmF0aW5n
+IHRoYXQgZG9tYWluJ3MgbGlzdC4gSXMgdGhlIGZlYXIgdGhhdCBzdWNoIGFuIGl0ZXJhdGlvbiBt
+YXkKPiA+PiBiZSB0ZW5zIG9mIHRob3VzYW5kcyBvZiBlbnRyaWVzIGxvbmcsIGFuZCBoZW5jZSBi
+ZWNvbWUgYW4gaXNzdWUKPiA+PiB3aGVuIHRyYXZlcnNlZD8gSSBoYXZlIG5vIGlkZWEgaG93IG1h
+bnkgUENJIGRldmljZXMgdGhlIGJpZ2dlc3QKPiA+PiBzeXN0ZW1zIHRvZGF5IHdvdWxkIGhhdmUs
+IGJ1dCBpZiB0cmF2ZXJzYWwgd2FzIGFuIGlzc3VlLCB0aGVuIGl0Cj4gPj4gd291bGQgYWxyZWFk
+eSBiZSB3aXRoIHRoZSBjb2RlIHdlJ3ZlIGdvdCBub3cuCj4gPgo+ID4gSSdkIHByZWZlciB0byBr
+ZWVwIGl0Li4uIEl0IG1ha2VzIHRoZSByZS1pbXBsZW1lbnRhdGlvbiBvZiB0aGUgZG9tY3RsIGlu
+IHRoZQo+ID4gbmV4dCBwYXRjaCBtb3JlIHN0cmFpZ2h0Zm9yd2FyZC4KPiAKPiBJIGNhbiBhY2Nl
+cHQgdGhpcyBhcyB0aGUgcG9zaXRpdmUgc2lkZS4gQnV0IHRoZXJlJ3MgZXh0cmEgc3RvcmFnZQo+
+IG5lZWRlZCAobm90IG11Y2gsIGJ1dCBhbnl3YXkpLCBhbmQgdGhlIG1vcmUgKGluZGVwZW5kZW50
+KQo+IGxpc3RzIHdlIGhhdmUgdGhhdCBkZXZpY2VzIGNhbiBiZSBvbiwgdGhlIG1vcmUgbGlrZWx5
+IGl0J2xsIGJlIHRoYXQKPiBvbmUgb2YgdGhlbSBnZXRzIHNjcmV3ZWQgdXAgYXQgc29tZSBwb2lu
+dCAoZS5nLiBieSBmb3JnZXR0aW5nCj4gdG8gcmVtb3ZlIGEgZGV2aWNlIGZyb20gb25lIG9mIHRo
+ZW0gcHJpb3IgdG8gZGUtYWxsb2NhdGlvbikuCgpPaywgSSdsbCBkcm9wIHRoZSBsaXN0IGFuZCBq
+dXN0IG1hdGNoIG9uIHRoZSBncnAgcG9pbnRlci4KCiAgUGF1bAoKPiAKPiBKYW4KPiAKCgpfX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
+bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
+bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
