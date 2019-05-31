@@ -1,19 +1,21 @@
-From: pr-tracker-bot@kernel.org
-Subject: Re: [GIT PULL] xen: fixes for 5.2-rc3
-Date: Fri, 31 May 2019 18:15:15 +0000
-Message-ID: <155932651541.23368.10945746314777442643.pr-tracker-bot__38564.0016103693$1559326575$gmane$org@kernel.org>
-References: <20190531135603.3403-1-jgross@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2] xen: remove on-stack cpumask from
+ stop_machine_run()
+Date: Fri, 31 May 2019 11:21:03 -0700
+Message-ID: <be74c55b-47b8-3334-7d7b-c204869b9c8c@citrix.com>
+References: <20190531115303.16459-1-jgross@suse.com>
+ <5CF126F3020000780023403A@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=UkaS=T7=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
- id 1hWm3g-0001go-G9
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 18:15:16 +0000
-In-Reply-To: <20190531135603.3403-1-jgross@suse.com>
+ <SRS0=zAi+=T7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1hWm9P-0002V1-KT
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 18:21:11 +0000
+In-Reply-To: <5CF126F3020000780023403A@prv1-mh.provo.novell.com>
+Content-Language: en-GB
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -22,16 +24,17 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Juergen Gross <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, torvalds@linux-foundation.org, linux-kernel@vger.kernel.org
+To: Jan Beulich <JBeulich@suse.com>, Juergen Gross <jgross@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, WeiLiu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-VGhlIHB1bGwgcmVxdWVzdCB5b3Ugc2VudCBvbiBGcmksIDMxIE1heSAyMDE5IDE1OjU2OjAzICsw
-MjAwOgoKPiBnaXQ6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQveGVu
-L3RpcC5naXQgZm9yLWxpbnVzLTUuMmItcmMzLXRhZwoKaGFzIGJlZW4gbWVyZ2VkIGludG8gdG9y
-dmFsZHMvbGludXguZ2l0OgpodHRwczovL2dpdC5rZXJuZWwub3JnL3RvcnZhbGRzL2MvODE2NGM1
-NzE5Yjg2NGRhM2JjZmVlOTdhZDhhZjhjZmQ3ZWU1YWQ4YwoKVGhhbmsgeW91IQoKLS0gCkRlZXQt
-ZG9vdC1kb3QsIEkgYW0gYSBib3QuCmh0dHBzOi8va29yZy53aWtpLmtlcm5lbC5vcmcvdXNlcmRv
-Yy9wcnRyYWNrZXIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gMzEvMDUvMjAxOSAwNjowNiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24gMzEuMDUuMTkg
+YXQgMTM6NTMsIDxqZ3Jvc3NAc3VzZS5jb20+IHdyb3RlOgo+PiBUaGUgImFsbGJ1dHNlbGYiIGNw
+dW1hc2sgaW4gc3RvcF9tYWNoaW5lX3J1bigpIGlzIG5vdCBuZWVkZWQuIEluc3RlYWQKPj4gb2Yg
+YWxsb2NhdGluZyBpdCBvbiB0aGUgc3RhY2sgaXQgY2FuIGVhc2lseSBiZSBhdm9pZGVkLgo+Pgo+
+PiBTaWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4gUmV2aWV3
+ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCkxHVE0uwqAgQWNrZWQtYnk6
+IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+CgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
