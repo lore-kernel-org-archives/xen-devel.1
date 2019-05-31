@@ -1,21 +1,21 @@
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Subject: Re: [PATCH v2] automation: add clang and lld 8 tests to
  gitlab
-Date: Fri, 31 May 2019 01:21:15 -0700
-Message-ID: <610891a5-c7a1-9a36-33f2-d3d07a513ddd@citrix.com>
+Date: Fri, 31 May 2019 10:33:25 +0200
+Message-ID: <20190531083325.vtn2yd3yviljrp5n@Air-de-Roger>
 References: <20190531081713.55596-1-roger.pau@citrix.com>
+ <610891a5-c7a1-9a36-33f2-d3d07a513ddd@citrix.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=zAi+=T7=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hWcmy-0005Nm-Re
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 08:21:24 +0000
-In-Reply-To: <20190531081713.55596-1-roger.pau@citrix.com>
-Content-Language: en-GB
+ <SRS0=TvYf=T7=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1hWcyo-0006G6-8a
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 08:33:38 +0000
+Content-Disposition: inline
+In-Reply-To: <610891a5-c7a1-9a36-33f2-d3d07a513ddd@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,30 +24,35 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Doug Goldstein <cardoe@cardoe.com>, Wei Liu <wl@xen.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, Wei Liu <wl@xen.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMzEvMDUvMjAxOSAwMToxNywgUm9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+ICtkZWIgaHR0cDov
-L2FwdC5sbHZtLm9yZy9zdHJldGNoLyBsbHZtLXRvb2xjaGFpbi1zdHJldGNoLTggbWFpbgo+ICtk
-ZWItc3JjIGh0dHA6Ly9hcHQubGx2bS5vcmcvc3RyZXRjaC8gbGx2bS10b29sY2hhaW4tc3RyZXRj
-aC04IG1haW4KPiBkaWZmIC0tZ2l0IGEvYXV0b21hdGlvbi9idWlsZC9kZWJpYW4vc3RyZXRjaC5k
-b2NrZXJmaWxlIGIvYXV0b21hdGlvbi9idWlsZC9kZWJpYW4vc3RyZXRjaC5kb2NrZXJmaWxlCj4g
-aW5kZXggZGFmOGM5ZDM4NC4uMTg5ZGZmMzI3NSAxMDA2NDQKPiAtLS0gYS9hdXRvbWF0aW9uL2J1
-aWxkL2RlYmlhbi9zdHJldGNoLmRvY2tlcmZpbGUKPiArKysgYi9hdXRvbWF0aW9uL2J1aWxkL2Rl
-Ymlhbi9zdHJldGNoLmRvY2tlcmZpbGUKPiBAQCAtNSw2ICs1LDE0IEBAIExBQkVMIG1haW50YWlu
-ZXIubmFtZT0iVGhlIFhlbiBQcm9qZWN0IiBcCj4gIEVOViBERUJJQU5fRlJPTlRFTkQ9bm9uaW50
-ZXJhY3RpdmUKPiAgRU5WIFVTRVIgcm9vdAo+ICAKPiArUlVOIGFwdC1nZXQgdXBkYXRlICYmIFwK
-PiArICAgIGFwdC1nZXQgLS1xdWlldCAtLXllcyBpbnN0YWxsIFwKPiArICAgIHdnZXQgXAo+ICsg
-ICAgZ251cGcKPiArCj4gK1JVTiB3Z2V0IC1PIC0gaHR0cHM6Ly9hcHQubGx2bS5vcmcvbGx2bS1z
-bmFwc2hvdC5ncGcua2V5fGFwdC1rZXkgYWRkIC0KPiArQ09QWSBzdHJldGNoLWxsdm0ubGlzdCAv
-ZXRjL2FwdC9zb3VyY2VzLmxpc3QuZC8KPiArCj4gIFJVTiBta2RpciAvYnVpbGQKPiAgV09SS0RJ
-UiAvYnVpbGQKPiAgCj4gQEAgLTM5LDkgKzQ3LDEwIEBAIFJVTiBhcHQtZ2V0IHVwZGF0ZSAmJiBc
-Cj4gICAgICAgICAgdHJhbnNmaWcgXAo+ICAgICAgICAgIHBhbmRvYyBcCj4gICAgICAgICAgY2hl
-Y2twb2xpY3kgXAo+IC0gICAgICAgIHdnZXQgXAoKWW91IGNhbid0IGRyb3Agd2dldCAoc2FkbHkp
-LCBiZWNhdXNlIHRoaXMgd2lsbCBicmVhayBDSSBvbiBzdGFnaW5nLTQuMTEKb3Igc3RhZ2luZy00
-LjEyICh3aGljaGV2ZXIgaGFkIGdpdGxhYiBDSSBhbmQgdGhlIGxhY2sgb2YgYSBGRVRDSEVSPSB3
-YXMKc3RpbGwgZmF0YWwgdG8gLi9jb25maWd1cmUpCgp+QW5kcmV3CgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gRnJpLCBNYXkgMzEsIDIwMTkgYXQgMDE6MjE6MTVBTSAtMDcwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBPbiAzMS8wNS8yMDE5IDAxOjE3LCBSb2dlciBQYXUgTW9ubmUgd3JvdGU6Cj4gPiAr
+ZGViIGh0dHA6Ly9hcHQubGx2bS5vcmcvc3RyZXRjaC8gbGx2bS10b29sY2hhaW4tc3RyZXRjaC04
+IG1haW4KPiA+ICtkZWItc3JjIGh0dHA6Ly9hcHQubGx2bS5vcmcvc3RyZXRjaC8gbGx2bS10b29s
+Y2hhaW4tc3RyZXRjaC04IG1haW4KPiA+IGRpZmYgLS1naXQgYS9hdXRvbWF0aW9uL2J1aWxkL2Rl
+Ymlhbi9zdHJldGNoLmRvY2tlcmZpbGUgYi9hdXRvbWF0aW9uL2J1aWxkL2RlYmlhbi9zdHJldGNo
+LmRvY2tlcmZpbGUKPiA+IGluZGV4IGRhZjhjOWQzODQuLjE4OWRmZjMyNzUgMTAwNjQ0Cj4gPiAt
+LS0gYS9hdXRvbWF0aW9uL2J1aWxkL2RlYmlhbi9zdHJldGNoLmRvY2tlcmZpbGUKPiA+ICsrKyBi
+L2F1dG9tYXRpb24vYnVpbGQvZGViaWFuL3N0cmV0Y2guZG9ja2VyZmlsZQo+ID4gQEAgLTUsNiAr
+NSwxNCBAQCBMQUJFTCBtYWludGFpbmVyLm5hbWU9IlRoZSBYZW4gUHJvamVjdCIgXAo+ID4gIEVO
+ViBERUJJQU5fRlJPTlRFTkQ9bm9uaW50ZXJhY3RpdmUKPiA+ICBFTlYgVVNFUiByb290Cj4gPiAg
+Cj4gPiArUlVOIGFwdC1nZXQgdXBkYXRlICYmIFwKPiA+ICsgICAgYXB0LWdldCAtLXF1aWV0IC0t
+eWVzIGluc3RhbGwgXAo+ID4gKyAgICB3Z2V0IFwKPiA+ICsgICAgZ251cGcKPiA+ICsKPiA+ICtS
+VU4gd2dldCAtTyAtIGh0dHBzOi8vYXB0Lmxsdm0ub3JnL2xsdm0tc25hcHNob3QuZ3BnLmtleXxh
+cHQta2V5IGFkZCAtCj4gPiArQ09QWSBzdHJldGNoLWxsdm0ubGlzdCAvZXRjL2FwdC9zb3VyY2Vz
+Lmxpc3QuZC8KPiA+ICsKPiA+ICBSVU4gbWtkaXIgL2J1aWxkCj4gPiAgV09SS0RJUiAvYnVpbGQK
+PiA+ICAKPiA+IEBAIC0zOSw5ICs0NywxMCBAQCBSVU4gYXB0LWdldCB1cGRhdGUgJiYgXAo+ID4g
+ICAgICAgICAgdHJhbnNmaWcgXAo+ID4gICAgICAgICAgcGFuZG9jIFwKPiA+ICAgICAgICAgIGNo
+ZWNrcG9saWN5IFwKPiA+IC0gICAgICAgIHdnZXQgXAo+IAo+IFlvdSBjYW4ndCBkcm9wIHdnZXQg
+KHNhZGx5KSwgYmVjYXVzZSB0aGlzIHdpbGwgYnJlYWsgQ0kgb24gc3RhZ2luZy00LjExCj4gb3Ig
+c3RhZ2luZy00LjEyICh3aGljaGV2ZXIgaGFkIGdpdGxhYiBDSSBhbmQgdGhlIGxhY2sgb2YgYSBG
+RVRDSEVSPSB3YXMKPiBzdGlsbCBmYXRhbCB0byAuL2NvbmZpZ3VyZSkKCk9oIG5vLCBJIGhhdmVu
+J3QgZHJvcHBlZCB3Z2V0LCBqdXN0IGluc3RhbGxlZCBpdCBzb29uZXIgc28gaXQgY2FuIGJlCnVz
+ZWQgdG8gZmV0Y2ggdGhlIGxsdm0gYXB0IHJlcG9zaXRvcnkga2V5IChzZWUgdGhlIGFwdC1nZXQg
+YWJvdmUgdGhpcwpvbmUpLgoKVGhhbmtzLCBSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
