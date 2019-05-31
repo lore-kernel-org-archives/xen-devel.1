@@ -1,18 +1,21 @@
-From: "Jan Beulich" <JBeulich@suse.com>
-Subject: [PATCH] AMD/IOMMU: initialize IRQ tasklet only once
-Date: Fri, 31 May 2019 09:52:04 -0600
-Message-ID: <5CF14DA40200007800234108@prv1-mh.provo.novell.com>
+From: Julien Grall <julien.grall@arm.com>
+Subject: Re: [OSSTEST PATCH] ts-kernel-build: Disable
+ CONFIG_ARCH_QCOM in Xen Project CI
+Date: Fri, 31 May 2019 16:52:32 +0100
+Message-ID: <ffd5f689-085a-34f4-d150-5221783c0083__11037.679405284$1559318012$gmane$org@arm.com>
+References: <c78c372a-4cf4-9721-38f2-d173eecee27e@arm.com>
+ <20190530165123.22593-1-ian.jackson@eu.citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=1r68=T7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hWjpH-0005Kr-EO
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 15:52:15 +0000
-Content-Disposition: inline
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=2tza=T7=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hWjpd-0005MV-NU
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 15:52:37 +0000
+In-Reply-To: <20190530165123.22593-1-ian.jackson@eu.citrix.com>
+Content-Language: en-US
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -21,25 +24,36 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: xen-devel <xen-devel@lists.xenproject.org>
-Cc: Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
+To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, Bjorn Andersson <bjorn.andersson@linaro.org>, Andy Gross <agross@kernel.org>, Stephen Boyd <swboyd@chromium.org>, Avaneesh Kumar Dwivedi <akdwived@codeaurora.org>
 List-Id: xen-devel@lists.xenproject.org
 
-RG9uJ3QgZG8gdGhpcyBvbmNlIHBlciBJT01NVSwgbm9yIGFmdGVyIHNldHRpbmcgdXAgdGhlIElP
-TU1VIGludGVycnVwdAood2hpY2ggd2lsbCB3YW50IHRvIHNjaGVkdWxlIHRoaXMgdGFza2xldCku
-IEluIGZhY3QgaXQgY2FuIGJlCmluaXRpYWxpemVkIGF0IGJ1aWxkIHRpbWUuCgpTaWduZWQtb2Zm
-LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgotLS0gYS94ZW4vZHJpdmVycy9w
-YXNzdGhyb3VnaC9hbWQvaW9tbXVfaW5pdC5jCisrKyBiL3hlbi9kcml2ZXJzL3Bhc3N0aHJvdWdo
-L2FtZC9pb21tdV9pbml0LmMKQEAgLTMxLDcgKzMxLDggQEAKIAogc3RhdGljIGludCBfX2luaXRk
-YXRhIG5yX2FtZF9pb21tdXM7CiAKLXN0YXRpYyBzdHJ1Y3QgdGFza2xldCBhbWRfaW9tbXVfaXJx
-X3Rhc2tsZXQ7CitzdGF0aWMgdm9pZCBkb19hbWRfaW9tbXVfaXJxKHVuc2lnbmVkIGxvbmcgZGF0
-YSk7CitzdGF0aWMgREVDTEFSRV9TT0ZUSVJRX1RBU0tMRVQoYW1kX2lvbW11X2lycV90YXNrbGV0
-LCBkb19hbWRfaW9tbXVfaXJxLCAwKTsKIAogdW5zaWduZWQgaW50IF9fcmVhZF9tb3N0bHkgaXZy
-c19iZGZfZW50cmllczsKIHU4IF9fcmVhZF9tb3N0bHkgaXZoZF90eXBlOwpAQCAtMTA1Niw4ICsx
-MDU3LDYgQEAgc3RhdGljIGludCBfX2luaXQgYW1kX2lvbW11X2luaXRfb25lKHN0cgogICAgIHBy
-aW50aygiQU1ELVZpOiBJT01NVSAlZCBFbmFibGVkLlxuIiwgbnJfYW1kX2lvbW11cyApOwogICAg
-IG5yX2FtZF9pb21tdXMrKzsKIAotICAgIHNvZnRpcnFfdGFza2xldF9pbml0KCZhbWRfaW9tbXVf
-aXJxX3Rhc2tsZXQsIGRvX2FtZF9pb21tdV9pcnEsIDApOwotCiAgICAgcmV0dXJuIDA7CiAKIGVy
-cm9yX291dDoKCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+SGkgSWFuLAoKT24gMzAvMDUvMjAxOSAxNzo1MSwgSWFuIEphY2tzb24gd3JvdGU6Cj4gICAgZHJp
+dmVycy9maXJtd2FyZS9xY29tX3NjbS5jOjQ2OTo0NzogZXJyb3I6IHBhc3NpbmcgYXJndW1lbnQg
+MyBvZiBgZG1hX2FsbG9jX2NvaGVyZW50JyBmcm9tIGluY29tcGF0aWJsZSBwb2ludGVyIHR5cGUg
+Wy1XZXJyb3I9aW5jb21wYXRpYmxlLXBvaW50ZXItdHlwZXNdCj4gCj4gVGhpcyBpcyBmaXhlZCBi
+eQo+IAo+ICAgIGZpcm13YXJlOiBxY29tX3NjbTogVXNlIHByb3BlciB0eXBlcyBmb3IgZG1hIG1h
+cHBpbmdzCj4gCj4gYnV0IHRoaXMgaXMgbm90IHByZXNlbnQgaW4gYWxsIHJlbGV2YW50IHN0YWJs
+ZSBicmFuY2hlcy4KPiAKPiBXZSBjdXJyZW50bHkgaGF2ZSBubyBRdWFsY29tbSBoYXJkd2FyZSBp
+biB0aGUgWGVuIFByb2plY3QgdGVzdCBsYWIgc28KPiB3ZSBkbyBub3QgbmVlZCB0aGlzIGVuYWJs
+ZWQuCj4gCj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20KPiBDQzogU3Rl
+ZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+IENDOiBsaW51eC1hcm0t
+bXNtQHZnZXIua2VybmVsLm9yZwo+IENDOiBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3JnCj4g
+Q0M6IFN0ZXBoZW4gQm95ZCA8c3dib3lkQGNocm9taXVtLm9yZz4KPiBDQzogQW5keSBHcm9zcyA8
+YWdyb3NzQGtlcm5lbC5vcmc+Cj4gQ0M6IEJqb3JuIEFuZGVyc3NvbiA8Ympvcm4uYW5kZXJzc29u
+QGxpbmFyby5vcmc+Cj4gQ0M6IEF2YW5lZXNoIEt1bWFyIER3aXZlZGkgPGFrZHdpdmVkQGNvZGVh
+dXJvcmEub3JnPgo+IFNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5j
+aXRyaXguY29tPgoKRldJVzoKCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBh
+cm0uY29tPgoKPiAtLS0KPiAgIHRzLWtlcm5lbC1idWlsZCB8IDQgKysrKwo+ICAgMSBmaWxlIGNo
+YW5nZWQsIDQgaW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS90cy1rZXJuZWwtYnVpbGQg
+Yi90cy1rZXJuZWwtYnVpbGQKPiBpbmRleCBmN2QwNTliMC4uNTUzNjU4NmYgMTAwNzU1Cj4gLS0t
+IGEvdHMta2VybmVsLWJ1aWxkCj4gKysrIGIvdHMta2VybmVsLWJ1aWxkCj4gQEAgLTI3NCw2ICsy
+NzQsMTAgQEAgc2V0b3B0IENPTkZJR19NRElPX1RIVU5ERVI9bQo+ICAgc2V0b3B0IENPTkZJR19J
+MkNfVEhVTkRFUlg9bQo+ICAgc2V0b3B0IENPTkZJR19TUElfVEhVTkRFUlg9bQo+ICAgCj4gKyMg
+U29tZSBMaW51eCBicmFuY2hlcyB3ZSBjYXJlIGFib3V0LCBpbmNsdWRpbmcgNC4xOSwgc3RpbGwg
+bGFjawo+ICsjIGZpcm13YXJlOiBxY29tX3NjbTogVXNlIHByb3BlciB0eXBlcyBmb3IgZG1hIG1h
+cHBpbmdzCj4gK0NPTkZJR19BUkNIX1FDT009bgo+ICsKPiAgICMjIyMKPiAgIAo+ICAgRU5ECj4g
+CgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
