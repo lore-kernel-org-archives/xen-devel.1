@@ -1,28 +1,19 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [PATCH 2/2] dom_cow is needed for mem-sharing only
-Date: Fri, 31 May 2019 14:23:23 +0100
-Message-ID: <60e875e1-a0fa-9c3d-0bfc-55ae567d409f@arm.com>
-References: <5CF0F33A0200007800233D8F@prv1-mh.provo.novell.com>
- <5CF0F5700200007800233DB4@prv1-mh.provo.novell.com>
- <f78f627c-753f-a162-14a1-b193908f673a@arm.com>
- <5CF0F8BE0200007800233DE3@prv1-mh.provo.novell.com>
- <f8edeb03-b223-e723-0b02-9ca565fe8055@arm.com>
- <5CF0FC080200007800233E50@prv1-mh.provo.novell.com>
- <7ca91b27-1c37-70ab-e367-494603e4464d@arm.com>
- <5CF1026F0200007800233ED8@prv1-mh.provo.novell.com>
- <aa27503b-7fcb-dbf0-1f69-6aae35b6f4c1@arm.com>
- <5CF105FD0200007800233F31@prv1-mh.provo.novell.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH v3] schedule: move last_run_time to the
+ credit scheduler privates
+Date: Fri, 31 May 2019 15:24:57 +0200
+Message-ID: <1dd86fe1814a52cb9b521a39511c2c5b70379b03.camel@suse.com>
+References: <1559225751-30736-1-git-send-email-andrii.anisov@gmail.com>
+ <16B40EA2-7781-48E7-94CA-52B328CE197B@citrix.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2528461977636236750=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2tza=T7=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hWhVI-0000i6-AC
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 13:23:28 +0000
-In-Reply-To: <5CF105FD0200007800233F31@prv1-mh.provo.novell.com>
-Content-Language: en-US
+ <SRS0=agGR=T7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1hWhX2-0000oT-TV
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 13:25:16 +0000
+In-Reply-To: <16B40EA2-7781-48E7-94CA-52B328CE197B@citrix.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -31,31 +22,132 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Jan Beulich <JBeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, WeiLiu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Tamas K Lengyel <tamas@tklengyel.com>, xen-devel <xen-devel@lists.xenproject.org>
+To: George Dunlap <George.Dunlap@citrix.com>, Andrii Anisov <andrii.anisov@gmail.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Andrii Anisov <andrii_anisov@epam.com>, Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Andrew Cooper <Andrew.Cooper3@citrix.com>, "Tim (Xen.org)" <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Ian Jackson <Ian.Jackson@citrix.com>, Xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSmFuLAoKT24gMzEvMDUvMjAxOSAxMTo0NiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+Pj4gT24g
-MzEuMDUuMTkgYXQgMTI6MzQsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4gd3JvdGU6Cj4+IE5vIGl0
-IHdhcyBhIG1vcmUgZ2VuZXJpYyBzdGF0ZW1lbnQgb24gdGhlIHN0YW5jZSAiSXQgYWxyZWFkeSBl
-eGlzdHMgaW4KPj4gWGVuIHNvIGl0IGlzIGZpbmUgdG8gc3ByZWFkIHRoZW0gYSBiaXQgbW9yZSIu
-Cj4gCj4gT2gsIEkgc2VlLiBPZiBjb3Vyc2UgSSdtIG1ha2luZyByZW1hcmtzIHdoZW4gd2hhdCdz
-IGluIHRoZSB0cmVlIGlzCj4gYmFkIChhcyBwZXIgZS5nLiBjb2Rpbmcgc3R5bGUsIG9yIGlmIG5v
-dCBtZW50aW9uZWQgdGhlcmUgdGhhbiBpbiBteQo+IHBlcnNvbmFsIG9waW5pb24pLiBBcyBhIHJl
-c3VsdCBJIHRha2Ugbm90ZSBvZiB5b3UgdGhpbmtpbmcgdGhpcyBiZWluZwo+IGJhZCBwcmFjdGlj
-ZSwgYW5kIHRoZSB0d28gb2YgdXMgZGlzYWdyZWVpbmcuIEknbSBjZXJ0YWlubHkgd2lsbGluZyB0
-bwo+IGFkanVzdCBub24tb2J2aW91cyBjb2RlIHRvIGEgbW9yZSBvYnZpb3VzIHNoYXBlIGluIHZh
-cmlvdXMgY2FzZXMsCj4gYnV0IEkgdGhpbmsgdGhlcmUgbmVlZHMgdG8gYmUgYSBsaW1pdCBhcyB0
-byB3aGF0IGxhbmd1YWdlIGZlYXR1cmVzCj4gd2UgZGVjaWRlIHNob3VsZCBub3QgYmUgdXNlZCBp
-biB0aGUgY29kZSBiYXNlLiBPdmVycmlkaW5nCj4gZGVjbGFyYXRpb25zIChhbmQgaW4gc29tZSBj
-YXNlcyBldmVuIGRlZmluaXRpb25zKSBieSBtYWNyb3MgaXMgYQo+IHVzZWZ1bCB0aGluZyBmb3Ig
-Z2VuZXJhbCByZWFkYWJpbGl0eSBpbiBjZXJ0YWluIGNhc2VzIGluIG15IG9waW5pb24sCj4gYW5k
-IHdoaWxlIGl0J3Mgbm90IG1ha2luZyBtdWNoIG9mIGRpZmZlcmVuY2UgaGVyZSBJJ2Qgc3RpbGwg
-cHJlZmVyIGlmCj4gSSB3YXMgYWxsb3dlZCB0byBnZXQgYXdheSB3aXRoIHRoaXMsIHVubGVzcyBh
-IG1ham9yaXR5IHN1cHBvcnRzCj4geW91ciB2aWV3LiBJT1cgLSB5b3VyIGNoYW5nZSByZXF1ZXN0
-IGlzLCBhcyBwZXIgbXkgb3duCj4gcGVyc3BlY3RpdmUsIG1ha2luZyB0aGUgY29kZSBsZXNzIGVh
-c3kgdG8gcmVhZCwgZXZlbiBpZiBub3QgYnkKPiBtdWNoLgoKTGV0IHdpbGwgd2FpdCB0aGUgb3Bp
-bmlvbiBmcm9tIHRoZSBvdGhlcnMgaGVyZS4KCkNoZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============2528461977636236750==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-rRg++k3Q8uzcfIyqhWV6"
+
+
+--=-rRg++k3Q8uzcfIyqhWV6
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2019-05-31 at 10:26 +0000, George Dunlap wrote:
+> > On May 30, 2019, at 3:15 PM, Andrii Anisov <andrii.anisov@gmail.com
+> > > wrote:
+> >=20
+> > From: Andrii Anisov <andrii_anisov@epam.com>
+> >=20
+> > The structure member last_run_time is used by credit scheduler
+> > only.
+> > So move it from a generic vcpu structure to the credit scheduler
+> > private
+> > vcpu definition.
+>=20
+> This seems like a useful change, and the commit message has a lot of
+> good detail, thanks.  But I=E2=80=99m left wondering: Is the main idea he=
+re
+> just to generally reduce code and data usage when not running the
+> credit scheduler, or is there another reason?
+>=20
+Yeah, I also think this change is a good one to have.
+
+Weather or not the main reason is that one, it fixes an (albeit not too
+terrible) layering/encapsulation violation, as things used only by
+Credit, should live in Credit code.
+
+It also makes (although only slightly) `struct vcpu` smaller, if one
+doesn't use Credit at all.
+
+But sure, let's have just a few more words about the motivation for the
+change in the commit message, as George is asking.
+
+> If it=E2=80=99s the first, a quick note to that effect will help put
+> archaeologist=E2=80=99s minds at ease. :-)  This could probably be added =
+on
+> commit.  (I=E2=80=99ll do a full review it in a day or two if Dario doesn=
+=E2=80=99t
+> beat me to it.)
+>=20
+I've looked at it, and there's only one thing that bothers me a little
+bit. In fact, here:
+
+--- a/xen/common/sched_credit.c
++++ b/xen/common/sched_credit.c
+@@ -175,6 +175,9 @@ struct csched_vcpu {
+     atomic_t credit;
+     unsigned int residual;
+=20
++    /* last time when vCPU is scheduled out */
++    s_time_t last_run_time;
++
+ #ifdef CSCHED_STATS
+     struct {
+         int credit_last;
+
+The comment is not accurate. And I'm afraid that it could be misleading
+for someone reading it, but then realizing that the code does something
+slightly different, and hence not being able to tell which one of the
+two things is correct.
+
+So, either we change the comment (but I'm not capable, right now, of
+finding something that is short and, at the same time, clear enough),
+or we change how the variable is using.
+
+Like, e.g., in csched_schedule(), we first set it to 0, and then we
+update it with `now` for `prev` if `prev !=3D next && !is_idle(prev)` (or
+something like that)
+
+The rest of the patch looks fine to me.
+
+Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-rRg++k3Q8uzcfIyqhWV6
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzxKykACgkQFkJ4iaW4
+c+7X/w//en2LDQ0Ncf4C0HLNeUz5r6LjVakBvEuTk/TbUto4hAv/Lg176Zsk1S37
+/KWE8oz2rXNe51cDNmiLIvq0SlVT8GvRXlgJ8TJmFIuzqx/MAT/l8mO6oBYEfEmy
+2i1GoxHHyBtfapXuJi7GBQF+uQ9kCDZrtrwnI9Svo3cDn0dqRtfRcT7e+6iWXdZB
+q7bB87zQNrj5sJW89rUuNirAB1p8839RkqI6RrEys3KlUoZWr8l+x6lHgR3UspzR
+2IG1lJpg2qNZTfnD1Oktl91wkJStHlYPhsFcA1cRurnPu9rGHEoxVwxJWvu4HkB6
+lS/7t4jXyvyf8R3DlAi9xGyquMVh/UtTwKxWzYJFt1hKZogDgNV/kNzJhbKXUXeK
+jl7QsNCK2Tj494aeX5fnRD+nKBCwEXu4tU1TLtI/7tSK4sLCuT9cuWk0DZvkv2+9
+cp5KDTYA4sSnz7Jl+uw6DeY3ZJO/zDqskG2J+tSTVBVJBA6JpQwJB5UhT4+bhTho
+riIAmCtOb00ylLQEafE2/iA6qzCbjA8JVOWuRidrFl+KYQfeDjcz6pH0FAQM/Nbn
+OkO6ddZywDklSESJe/UOWNqYIfXaaQAKwOM60wgqoT54VvV6aRgo6Wb0rRxfnV8l
+6T63uHCQiFmLOZto8AlRUHV/q5G0d+wNfO+phswUBjI3+WvvrJk=
+=VQiP
+-----END PGP SIGNATURE-----
+
+--=-rRg++k3Q8uzcfIyqhWV6--
+
+
+
+--===============2528461977636236750==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2528461977636236750==--
