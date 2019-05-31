@@ -1,23 +1,22 @@
 From: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2 3/3] xen/swiotlb: remember having called
- xen_create_contiguous_region()
-Date: Fri, 31 May 2019 13:38:11 +0200
-Message-ID: <2fbfc6a7-572c-1ce2-3323-802f9a77500e__31690.4999943048$1559302755$gmane$org@suse.com>
-References: <20190529090407.1225-1-jgross@suse.com>
- <20190529090407.1225-4-jgross@suse.com>
- <20190530090409.GB30428@infradead.org>
- <eebb0275-9418-717f-97d7-5e55917f46fd@oracle.com>
+Subject: Re: [stable] xen/pciback: Don't disable PCI_COMMAND on
+ PCI device reset.
+Date: Fri, 31 May 2019 13:46:03 +0200
+Message-ID: <9335b280-3cd2-3071-4139-5cb804849205__29704.5605185971$1559303232$gmane$org@suse.com>
+References: <1559229415.24330.2.camel@codethink.co.uk>
+ <0e6ebb5c-ff43-6d65-bcba-6ac5e60aa472@oracle.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Qdqe=T7=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hWfrT-0007mJ-7K
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 11:38:15 +0000
-In-Reply-To: <eebb0275-9418-717f-97d7-5e55917f46fd@oracle.com>
-Content-Language: en-US
+ id 1hWfz8-0000CI-12
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 11:46:10 +0000
+In-Reply-To: <0e6ebb5c-ff43-6d65-bcba-6ac5e60aa472@oracle.com>
+Content-Language: de-DE
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -26,21 +25,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Boris Ostrovsky <boris.ostrovsky@oracle.com>, Christoph Hellwig <hch@infradead.org>
-Cc: xen-devel@lists.xenproject.org, iommu@lists.linux-foundation.org, Stefano Stabellini <sstabellini@kernel.org>, linux-kernel@vger.kernel.org, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+To: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, Ben Hutchings <ben.hutchings@codethink.co.uk>
+Cc: Prarit Bhargava <prarit@redhat.com>, xen-devel@lists.xenproject.org, stable <stable@vger.kernel.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gMzAvMDUvMjAxOSAxNDo0NiwgQm9yaXMgT3N0cm92c2t5IHdyb3RlOgo+IE9uIDUvMzAvMTkg
-NTowNCBBTSwgQ2hyaXN0b3BoIEhlbGx3aWcgd3JvdGU6Cj4+IFBsZWFzZSBkb24ndCBhZGQgeW91
-ciBwcml2YXRlIGZsYWcgdG8gcGFnZS1mbGFncy5oLiAgVGhlIHdob2xlIHBvaW50IG9mCj4+IHRo
-ZSBwcml2YXRlIGZsYWcgaXMgdGhhdCB5b3UgY2FuIHVzZSBpdCBpbiBhbnkgd2F5IHlvdSB3YW50
-IHdpdGhvdQo+PiB0b3VjaGluZyB0aGUgY29tbW9uIGNvZGUuCj4gCj4gCj4gVGhlcmUgaXMgYWxy
-ZWFkeSBhIGJ1bmNoIG9mIGFsaWFzZXMgZm9yIHZhcmlvdXMgc3ViLWNvbXBvbmVudHMKPiAoaW5j
-bHVkaW5nIFhlbikgaW4gcGFnZS1mbGFncy5oIGZvciBwcml2YXRlIGZsYWdzLCB3aGljaCBpcyB3
-aHkgSQo+IHN1Z2dlc3RlZCB3ZSBkbyB0aGUgc2FtZSBmb3IgdGhlIG5ldyB1c2UgY2FzZS4gQWRk
-aW5nIHRoaXMgbmV3IGFsaWFzCj4gd2lsbCBrZWVwIGZsYWcgdXNhZ2UgY29uc2lzdGVudC4KCldo
-YXQgYWJvdXQgbWUgYWRkaW5nIGFub3RoZXIgcGF0Y2ggbW92aW5nIHRob3NlIFhlbiBwcml2YXRl
-IGFsaWFzZXMKaW50byBhcmNoL3g4Ni9pbmNsdWRlL2FzbS94ZW4vcGFnZS5oID8KCgpKdWVyZ2Vu
-CgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMzEvMDUvMjAxOSAwNDowMiwgS29ucmFkIFJ6ZXN6dXRlayBXaWxrIHdyb3RlOgo+IE9uIDUv
+MzAvMTkgODoxNiBBTSwgQmVuIEh1dGNoaW5ncyB3cm90ZToKPj4gSSdtIGxvb2tpbmcgYXQgQ1ZF
+LTIwMTUtODU1MyB3aGljaCBpcyBmaXhlZCBieToKPj4KPj4gY29tbWl0IDc2ODFmMzFlYzljZGFj
+YWI0ZmQxMDU3MGJlOTI0ZjJjZWY2NjY5YmEKPj4gQXV0aG9yOiBLb25yYWQgUnplc3p1dGVrIFdp
+bGsgPGtvbnJhZC53aWxrQG9yYWNsZS5jb20+Cj4+IERhdGU6wqDCoMKgV2VkIEZlYiAxMyAxODoy
+MTozMSAyMDE5IC0wNTAwCj4+Cj4+IMKgwqDCoMKgwqB4ZW4vcGNpYmFjazogRG9uJ3QgZGlzYWJs
+ZSBQQ0lfQ09NTUFORCBvbiBQQ0kgZGV2aWNlIHJlc2V0Lgo+Pgo+PiBJJ20gYXdhcmUgdGhhdCB0
+aGlzIGNoYW5nZSBpcyBpbmNvbXBhdGlibGUgd2l0aCBxZW11IDwgMi41LCBidXQgdGhhdCdzCj4+
+IG5vdyBxdWl0ZSBvbGQuwqAgRG8geW91IHRoaW5rIGl0IG1ha2VzIHNlbnNlIHRvIGFwcGx5IHRo
+aXMgY2hhbmdlIHRvCj4+IHNvbWUgc3RhYmxlIGJyYW5jaGVzPwo+Pgo+PiBCZW4uCj4+Cj4gCj4g
+SGV5IEJlbiwKPiAKPiA8c2hydWdzPiBNeSBvcGluaW9uIGlzIHRvIGRyb3AgaXQsIGJ1dCBpZiBK
+dWVyZ2VuIHRoaW5rcyBpdCBtYWtlcyBzZW5zZQo+IHRvIGJhY2twb3J0IEkgYW0gbm90IGdvaW5n
+IHRvIGFyZ3VlLgo+IAoKSSdtIHdpdGggS29ucmFkIGhlcmUuCgoKSnVlcmdlbgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
