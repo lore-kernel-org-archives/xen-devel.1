@@ -2,53 +2,50 @@ Return-Path: <SRS0=e+jd=T7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-1.0 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0337EC04AB6
-	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2019 15:53:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5A64C04AB6
+	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2019 16:00:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D023726963
-	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2019 15:53:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D023726963
+	by mail.kernel.org (Postfix) with ESMTPS id 807A4246A8
+	for <xen-devel@archiver.kernel.org>; Fri, 31 May 2019 16:00:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 807A4246A8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hWjpp-0005OU-JW; Fri, 31 May 2019 15:52:49 +0000
+	id 1hWjwU-0005os-GC; Fri, 31 May 2019 15:59:42 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=agGR=T7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1hWjpo-0005OG-48
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 15:52:48 +0000
-X-Inumbo-ID: 21be4d98-83bc-11e9-8ab2-dbabe6b7ec32
-Received: from smtp.nue.novell.com (unknown [195.135.221.5])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=1r68=T7=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hWjwS-0005on-G0
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 15:59:40 +0000
+X-Inumbo-ID: 169b1602-83bd-11e9-86f3-3f73e47780e1
+Received: from prv1-mh.provo.novell.com (unknown [137.65.248.33])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 21be4d98-83bc-11e9-8ab2-dbabe6b7ec32;
- Fri, 31 May 2019 15:52:46 +0000 (UTC)
-Received: from emea4-mta.ukb.novell.com ([10.120.13.87])
- by smtp.nue.novell.com with ESMTP (TLS encrypted);
- Fri, 31 May 2019 17:52:44 +0200
-Received: from [192.168.0.36] (nwb-a10-snat.microfocus.com [10.120.13.201])
- by emea4-mta.ukb.novell.com with ESMTP (TLS encrypted);
- Fri, 31 May 2019 16:52:22 +0100
-Message-ID: <0c912c719f7fe4fcfcc329f90303b7c985c43c34.camel@suse.com>
-From: Dario Faggioli <dfaggioli@suse.com>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Date: Fri, 31 May 2019 17:52:21 +0200
-In-Reply-To: <20190528103313.1343-55-jgross@suse.com>
-References: <20190528103313.1343-1-jgross@suse.com>
- <20190528103313.1343-55-jgross@suse.com>
-Organization: SUSE
-User-Agent: Evolution 3.32.2 
-MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH 54/60] xen/sched: add minimalistic idle
- scheduler for free cpus
+ id 169b1602-83bd-11e9-86f3-3f73e47780e1;
+ Fri, 31 May 2019 15:59:37 +0000 (UTC)
+Received: from INET-PRV1-MTA by prv1-mh.provo.novell.com
+ with Novell_GroupWise; Fri, 31 May 2019 09:59:35 -0600
+Message-Id: <5CF14F650200007800234123@prv1-mh.provo.novell.com>
+X-Mailer: Novell GroupWise Internet Agent 18.1.1 
+Date: Fri, 31 May 2019 09:59:33 -0600
+From: "Jan Beulich" <JBeulich@suse.com>
+To: "Andrew Cooper" <andrew.cooper3@citrix.com>
+References: <5CF0F33A0200007800233D8F@prv1-mh.provo.novell.com>
+ <5CF0F5460200007800233DA8@prv1-mh.provo.novell.com>
+ <a30a6fc9-5c3c-081b-d268-231e89f135be@citrix.com>
+In-Reply-To: <a30a6fc9-5c3c-081b-d268-231e89f135be@citrix.com>
+Mime-Version: 1.0
+Content-Disposition: inline
+Subject: Re: [Xen-devel] [PATCH 1/2] adjust special domain creation (and
+ call it earlier on x86)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,121 +56,51 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, WeiLiu <wl@xen.org>,
  Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
- Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
- Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Content-Type: multipart/mixed; boundary="===============5884021104420686429=="
+ George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Message-ID: <20190531155221.cfBZBA4xx0fe3ckRINEaiLN7FlyX0MSLk6AuxMV_RHo@z>
+Message-ID: <20190531155933.mdPHrlgufq6HNi_nwsbbtbz_pys5vbBr37tG41xVIbs@z>
 
-
---===============5884021104420686429==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-kNvBcORzXAKwl5qWUjaS"
-
-
---=-kNvBcORzXAKwl5qWUjaS
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2019-05-28 at 12:33 +0200, Juergen Gross wrote:
-> Instead of having a full blown scheduler running for the free cpus
-> add a very minimalistic scheduler for that purpose only ever
-> scheduling
-> the related idle vcpu. This has the big advantage of not needing any
-> per-cpu, per-domain or per-scheduling unit data for free cpus and in
-> turn simplifying moving cpus to and from cpupools a lot.
->=20
-> As this new scheduler is not user selectable don't register it as an
-> official scheduler, but just include it in schedule.c.
->=20
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> ---
-> V1: new patch
-> ---
-
-> --- a/xen/common/schedule.c
-> +++ b/xen/common/schedule.c
-> @@ -83,6 +83,57 @@ extern const struct scheduler
-> *__start_schedulers_array[], *__end_schedulers_arr
-> =20
->  static struct scheduler __read_mostly ops;
-> =20
-> [...]
->
-> +static void *
-> +sched_idle_alloc_vdata(const struct scheduler *ops, struct
-> sched_unit *unit,
-> +                       void *dd)
-> +{
-> +    /* Any non-NULL pointer is fine here. */
-> +    return (void *)1UL;
-> +}
-> +
-I think the proper thing to do, here, would be to convert alloc_vdata()
-to PTR_ERR() & IS_ERR().
-
-That's another patch, of course, and given that this series is rather
-big already, I'm not sure about asking for it to be done in the context
-of this work.
-
-I can do it myself, either right now or after this series is merged
-(for the sake of not making rebasing 60 patches more complicated than
-it must be already, for you :-D).
-
-Let me know what you think.
-
-Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-kNvBcORzXAKwl5qWUjaS
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzxTbUACgkQFkJ4iaW4
-c+4DRQ//doxD5a2Lvp/xjTiWd58ngE0fgSJE8xS2BWfjXZ5zD85kbQ+50Iny2QCj
-et2yzbDJGQQ7yOOoJua/z/U2jU9cmDS7FNcewg8fJV+FS+F1DoSLLSvqHV1njSW+
-l0+FjZx0DIdoIudGFks4MirTQofR9VKP63TTBP8ukvOC8+nyHn5H9e6KB7yMFANh
-AbDOoPWf64Lbnfa/klDlNwSNqViwzYH10rmATrbqQ/myFvR539ynypEgU9dMtTzX
-zPm85q9K0fKgbmt05NgE8x7oOuOPFhMKjxyKfnPCUrOmgQBsCF1BHcu/oqB5hiI6
-W72IQlb5GgS6uZ5UJHQPj5miCeAs0O63SGoVP0zojE7Ck/gK19jBA6hHtIGXjGcp
-7gu+XBJweR/Dr+DnTS8WsOK5lD3VvrzNX9K6DG+bLrZbpXbr7eo/fWM9xAdOVIXx
-rO9HErKh/udQzuiepi3BAayVdErAJd0T6/VPDmCgg/hQcskyVVc3ifAauzgdos6d
-OfZsYQjGYWlk8D0u8x0Qal87mDMML+wyNOjkW1Aepd7SnVH1xUJfY67fx1itg7is
-PJLiouFwXZoiaLx3PE9Zkd1paxGc3z1zWlgnFU2KFM8ULFBQov8TAZ2cKj5ZcZVo
-7ovjgDETn15SQmy899mYlVvJIQl0qlpROvJS9FjilVDFfOjDeo8=
-=hiT5
------END PGP SIGNATURE-----
-
---=-kNvBcORzXAKwl5qWUjaS--
-
-
-
---===============5884021104420686429==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5884021104420686429==--
-
-
+Pj4+IE9uIDMxLjA1LjE5IGF0IDE3OjMyLCA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4gd3Jv
+dGU6Cj4gT24gMzEvMDUvMjAxOSAwMjozNSwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IEBAIC01MTYs
+NiArNTIxLDM2IEBAIHN0cnVjdCBkb21haW4gKmRvbWFpbl9jcmVhdGUoZG9taWRfdCBkb20KPj4g
+ICAgICByZXR1cm4gRVJSX1BUUihlcnIpOwo+PiAgfQo+PiAgCj4+ICt2b2lkIF9faW5pdCBzZXR1
+cF9zcGVjaWFsX2RvbWFpbnModm9pZCkKPj4gK3sKPj4gKyAgICAvKgo+PiArICAgICAqIEluaXRp
+YWxpc2Ugb3VyIERPTUlEX1hFTiBkb21haW4uCj4+ICsgICAgICogQW55IFhlbi1oZWFwIHBhZ2Vz
+IHRoYXQgd2Ugd2lsbCBhbGxvdyB0byBiZSBtYXBwZWQgd2lsbCBoYXZlCj4+ICsgICAgICogdGhl
+aXIgZG9tYWluIGZpZWxkIHNldCB0byBkb21feGVuLgo+PiArICAgICAqIEhpZGRlbiBQQ0kgZGV2
+aWNlcyB3aWxsIGFsc28gYmUgYXNzb2NpYXRlZCB3aXRoIHRoaXMgZG9tYWluCj4+ICsgICAgICog
+KGJ1dCBiZSBbcGFydGx5XSBjb250cm9sbGVkIGJ5IERvbTAgbmV2ZXJ0aGVsZXNzKS4KPj4gKyAg
+ICAgKi8KPj4gKyAgICBkb21feGVuID0gZG9tYWluX2NyZWF0ZShET01JRF9YRU4sIE5VTEwsIGZh
+bHNlKTsKPj4gKyAgICBCVUdfT04oSVNfRVJSKGRvbV94ZW4pKTsKPiAKPiBJIGtub3cgdGhpcyBp
+cyBjb3B5aW5nIGNvZGUgbGlrZS1mb3ItbGlrZSwgYnV0IHRoaXMgZXJyb3IgaGFuZGxpbmcgaXMK
+PiB0ZXJyaWJsZSBpbiBwcmFjdGljZS4KPiAKPiBFdmVuIGp1c3Q6Cj4gCj4gaWYgKCBJU19FUlIo
+ZG9tX3hlbikgKQo+ICAgICBwYW5pYygiRmFpbGVkIHRvIGNyZWF0ZSBkb21feGVuOiAlZFxuIiwg
+UFRSX0VSUihkb21feGVuKSk7Cj4gCj4gd291bGQgYmUgYW4gaW1wcm92ZW1lbnQuCgpJJ2xsIGJl
+IGhhcHB5IHRvIGRvIHRoaXM7IEkgZGlkbid0IGp1c3QgYmVjYXVzZSBpdCBkb2Vzbid0IHJlYWxs
+eSBiZWxvbmcKaGVyZS4KCj4+ICsjaWZkZWYgQ09ORklHX0hBU19QQ0kKPj4gKyAgICBJTklUX0xJ
+U1RfSEVBRCgmZG9tX3hlbi0+YXJjaC5wZGV2X2xpc3QpOwo+PiArI2VuZGlmCj4gCj4gVGhlIHBv
+c2l0aW9uIG9mIHRoaXMgaWRlbnRpZmllcyB0aGF0IHdlJ3ZlIGdvdCBvYnZpb3VzbHkgZ290IGJ1
+Z3MKPiAocGVyaGFwcyBsYXRlbnQpIGVsc2V3aGVyZSwgc2VlaW5nIGFzIG90aGVyIHNwZWNpYWwg
+ZG9tYWlucyBkb24ndCBnZXQKPiB3b3JraW5nIGNvbnN0cnVjdHMgc3VjaCBhcyBsaXN0X2VtcHR5
+KCkuCj4gCj4gSW4gdGhlIGNvZGUgd2hpY2ggY3VycmVudGx5IGV4aXN0cywgSSBjYW4ndCBzcG90
+IGl0IGV2ZXIgYmVpbmcgdG91Y2hlZAo+IGZvciBBUk0sIGJ1dCBpdCBpcyBjb25zdHJ1Y3RlZCBm
+b3IgYWxsIG5vbi1zcGVjaWFsIHg4NiBndWVzdHMgYXQgdGhlIHRvcAo+IG9mIGFyY2hfZG9tYWlu
+X2NyZWF0ZSgpLgo+IAo+IEkgdGhpbmsgdGhlIGJlc3Qgb3B0aW9uLCBnaXZlbiB0aGUgI2lmZGVm
+IGhlcmUsIGlzIHRvIHJlcG9zaXRpb24gdGhlCj4gcGRldiBmaWVsZHMgaW50byBzdHJ1Y3QgZG9t
+YWluLCByYXRoZXIgdGhhbiBhcmNoX2RvbWFpbiwgYW5kIGhhdmUgdGhpcwo+IGNvZGUgZnJhZ21l
+bnQgbmVhciB0aGUgdG9wIG9mIGRvbWFpbl9jcmVhdGUoKSB3aGVyZSBzcGVjaWFsIGRvbWFpbnMg
+d2lsbAo+IGFsbCBiZSBjb3ZlcmVkLgoKRXhjZXB0IHRoYXQgaWYgSSBkbyB0aGlzLCB0aGVuIG5v
+dCBieSBzcGVjaWFsIGNhc2luZyBzcGVjaWFsIGRvbWFpbnMuCiJOb3JtYWwiIGRvbWFpbnMgd2Fu
+dCB0aGlzIHRvbyAtIHRoZSBpbml0aWFsaXphdGlvbiBjb3VsZCB0aGVuIGJlCmRyb3BwZWQgKG1v
+dmVkIHRoZXJlKSBmcm9tIHg4Ni1zcGVjaWZpYyBjb2RlLiBCdXQgdGhpcyB3aWxsIHdhbnQgdG8K
+YmUgYSBzZXBhcmF0ZSBwYXRjaCB0aGVuLgoKSmFuCgoKCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
