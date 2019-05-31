@@ -1,21 +1,20 @@
-From: Julien Grall <julien.grall@arm.com>
-Subject: Re: [OSSTEST PATCH] ts-kernel-build: Disable
- CONFIG_ARCH_QCOM in Xen Project CI
-Date: Fri, 31 May 2019 16:52:32 +0100
-Message-ID: <ffd5f689-085a-34f4-d150-5221783c0083__11037.679405284$1559318012$gmane$org@arm.com>
-References: <c78c372a-4cf4-9721-38f2-d173eecee27e@arm.com>
- <20190530165123.22593-1-ian.jackson@eu.citrix.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+Subject: Re: [PATCH 54/60] xen/sched: add minimalistic idle
+ scheduler for free cpus
+Date: Fri, 31 May 2019 17:52:21 +0200
+Message-ID: <0c912c719f7fe4fcfcc329f90303b7c985c43c34.camel@suse.com>
+References: <20190528103313.1343-1-jgross@suse.com>
+ <20190528103313.1343-55-jgross@suse.com>
 Mime-Version: 1.0
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5884021104420686429=="
 Return-path: <xen-devel-bounces@lists.xenproject.org>
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2tza=T7=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hWjpd-0005MV-NU
- for xen-devel@lists.xenproject.org; Fri, 31 May 2019 15:52:37 +0000
-In-Reply-To: <20190530165123.22593-1-ian.jackson@eu.citrix.com>
-Content-Language: en-US
+ <SRS0=agGR=T7=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1hWjpo-0005OG-48
+ for xen-devel@lists.xenproject.org; Fri, 31 May 2019 15:52:48 +0000
+In-Reply-To: <20190528103313.1343-55-jgross@suse.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -24,36 +23,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, Bjorn Andersson <bjorn.andersson@linaro.org>, Andy Gross <agross@kernel.org>, Stephen Boyd <swboyd@chromium.org>, Avaneesh Kumar Dwivedi <akdwived@codeaurora.org>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>, Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 List-Id: xen-devel@lists.xenproject.org
 
-SGkgSWFuLAoKT24gMzAvMDUvMjAxOSAxNzo1MSwgSWFuIEphY2tzb24gd3JvdGU6Cj4gICAgZHJp
-dmVycy9maXJtd2FyZS9xY29tX3NjbS5jOjQ2OTo0NzogZXJyb3I6IHBhc3NpbmcgYXJndW1lbnQg
-MyBvZiBgZG1hX2FsbG9jX2NvaGVyZW50JyBmcm9tIGluY29tcGF0aWJsZSBwb2ludGVyIHR5cGUg
-Wy1XZXJyb3I9aW5jb21wYXRpYmxlLXBvaW50ZXItdHlwZXNdCj4gCj4gVGhpcyBpcyBmaXhlZCBi
-eQo+IAo+ICAgIGZpcm13YXJlOiBxY29tX3NjbTogVXNlIHByb3BlciB0eXBlcyBmb3IgZG1hIG1h
-cHBpbmdzCj4gCj4gYnV0IHRoaXMgaXMgbm90IHByZXNlbnQgaW4gYWxsIHJlbGV2YW50IHN0YWJs
-ZSBicmFuY2hlcy4KPiAKPiBXZSBjdXJyZW50bHkgaGF2ZSBubyBRdWFsY29tbSBoYXJkd2FyZSBp
-biB0aGUgWGVuIFByb2plY3QgdGVzdCBsYWIgc28KPiB3ZSBkbyBub3QgbmVlZCB0aGlzIGVuYWJs
-ZWQuCj4gCj4gQ0M6IEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20KPiBDQzogU3Rl
-ZmFubyBTdGFiZWxsaW5pIDxzc3RhYmVsbGluaUBrZXJuZWwub3JnPgo+IENDOiBsaW51eC1hcm0t
-bXNtQHZnZXIua2VybmVsLm9yZwo+IENDOiBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3JnCj4g
-Q0M6IFN0ZXBoZW4gQm95ZCA8c3dib3lkQGNocm9taXVtLm9yZz4KPiBDQzogQW5keSBHcm9zcyA8
-YWdyb3NzQGtlcm5lbC5vcmc+Cj4gQ0M6IEJqb3JuIEFuZGVyc3NvbiA8Ympvcm4uYW5kZXJzc29u
-QGxpbmFyby5vcmc+Cj4gQ0M6IEF2YW5lZXNoIEt1bWFyIER3aXZlZGkgPGFrZHdpdmVkQGNvZGVh
-dXJvcmEub3JnPgo+IFNpZ25lZC1vZmYtYnk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5j
-aXRyaXguY29tPgoKRldJVzoKCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5ncmFsbEBh
-cm0uY29tPgoKPiAtLS0KPiAgIHRzLWtlcm5lbC1idWlsZCB8IDQgKysrKwo+ICAgMSBmaWxlIGNo
-YW5nZWQsIDQgaW5zZXJ0aW9ucygrKQo+IAo+IGRpZmYgLS1naXQgYS90cy1rZXJuZWwtYnVpbGQg
-Yi90cy1rZXJuZWwtYnVpbGQKPiBpbmRleCBmN2QwNTliMC4uNTUzNjU4NmYgMTAwNzU1Cj4gLS0t
-IGEvdHMta2VybmVsLWJ1aWxkCj4gKysrIGIvdHMta2VybmVsLWJ1aWxkCj4gQEAgLTI3NCw2ICsy
-NzQsMTAgQEAgc2V0b3B0IENPTkZJR19NRElPX1RIVU5ERVI9bQo+ICAgc2V0b3B0IENPTkZJR19J
-MkNfVEhVTkRFUlg9bQo+ICAgc2V0b3B0IENPTkZJR19TUElfVEhVTkRFUlg9bQo+ICAgCj4gKyMg
-U29tZSBMaW51eCBicmFuY2hlcyB3ZSBjYXJlIGFib3V0LCBpbmNsdWRpbmcgNC4xOSwgc3RpbGwg
-bGFjawo+ICsjIGZpcm13YXJlOiBxY29tX3NjbTogVXNlIHByb3BlciB0eXBlcyBmb3IgZG1hIG1h
-cHBpbmdzCj4gK0NPTkZJR19BUkNIX1FDT009bgo+ICsKPiAgICMjIyMKPiAgIAo+ICAgRU5ECj4g
-CgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+
+--===============5884021104420686429==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-kNvBcORzXAKwl5qWUjaS"
+
+
+--=-kNvBcORzXAKwl5qWUjaS
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2019-05-28 at 12:33 +0200, Juergen Gross wrote:
+> Instead of having a full blown scheduler running for the free cpus
+> add a very minimalistic scheduler for that purpose only ever
+> scheduling
+> the related idle vcpu. This has the big advantage of not needing any
+> per-cpu, per-domain or per-scheduling unit data for free cpus and in
+> turn simplifying moving cpus to and from cpupools a lot.
+>=20
+> As this new scheduler is not user selectable don't register it as an
+> official scheduler, but just include it in schedule.c.
+>=20
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+> V1: new patch
+> ---
+
+> --- a/xen/common/schedule.c
+> +++ b/xen/common/schedule.c
+> @@ -83,6 +83,57 @@ extern const struct scheduler
+> *__start_schedulers_array[], *__end_schedulers_arr
+> =20
+>  static struct scheduler __read_mostly ops;
+> =20
+> [...]
+>
+> +static void *
+> +sched_idle_alloc_vdata(const struct scheduler *ops, struct
+> sched_unit *unit,
+> +                       void *dd)
+> +{
+> +    /* Any non-NULL pointer is fine here. */
+> +    return (void *)1UL;
+> +}
+> +
+I think the proper thing to do, here, would be to convert alloc_vdata()
+to PTR_ERR() & IS_ERR().
+
+That's another patch, of course, and given that this series is rather
+big already, I'm not sure about asking for it to be done in the context
+of this work.
+
+I can do it myself, either right now or after this series is merged
+(for the sake of not making rebasing 60 patches more complicated than
+it must be already, for you :-D).
+
+Let me know what you think.
+
+Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-kNvBcORzXAKwl5qWUjaS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAlzxTbUACgkQFkJ4iaW4
+c+4DRQ//doxD5a2Lvp/xjTiWd58ngE0fgSJE8xS2BWfjXZ5zD85kbQ+50Iny2QCj
+et2yzbDJGQQ7yOOoJua/z/U2jU9cmDS7FNcewg8fJV+FS+F1DoSLLSvqHV1njSW+
+l0+FjZx0DIdoIudGFks4MirTQofR9VKP63TTBP8ukvOC8+nyHn5H9e6KB7yMFANh
+AbDOoPWf64Lbnfa/klDlNwSNqViwzYH10rmATrbqQ/myFvR539ynypEgU9dMtTzX
+zPm85q9K0fKgbmt05NgE8x7oOuOPFhMKjxyKfnPCUrOmgQBsCF1BHcu/oqB5hiI6
+W72IQlb5GgS6uZ5UJHQPj5miCeAs0O63SGoVP0zojE7Ck/gK19jBA6hHtIGXjGcp
+7gu+XBJweR/Dr+DnTS8WsOK5lD3VvrzNX9K6DG+bLrZbpXbr7eo/fWM9xAdOVIXx
+rO9HErKh/udQzuiepi3BAayVdErAJd0T6/VPDmCgg/hQcskyVVc3ifAauzgdos6d
+OfZsYQjGYWlk8D0u8x0Qal87mDMML+wyNOjkW1Aepd7SnVH1xUJfY67fx1itg7is
+PJLiouFwXZoiaLx3PE9Zkd1paxGc3z1zWlgnFU2KFM8ULFBQov8TAZ2cKj5ZcZVo
+7ovjgDETn15SQmy899mYlVvJIQl0qlpROvJS9FjilVDFfOjDeo8=
+=hiT5
+-----END PGP SIGNATURE-----
+
+--=-kNvBcORzXAKwl5qWUjaS--
+
+
+
+--===============5884021104420686429==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============5884021104420686429==--
