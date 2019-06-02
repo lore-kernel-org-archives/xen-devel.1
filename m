@@ -1,11 +1,9 @@
 From: Tamas K Lengyel <tamas@tklengyel.com>
-Subject: Re:
-	=?utf-8?b?W1BBVENIIDMvOV0gdm1fZXZlbnQ6IE1ha2Ug4oCY?=
-	=?utf-8?b?bG9jYWzigJkgZnVuY3Rpb25zIOKAmHN0YXRpY+KAmQ==?=
-Date: Sat, 1 Jun 2019 18:36:07 -0600
-Message-ID: <CABfawh=DwxDwAgn0HS7Y9uM4PR8TRtw9ipLOyY-RnWHqBN91ag@mail.gmail.com>
-References: <cover.1559224640.git.ppircalabu@bitdefender.com>
- <c772d59cc1505001555927609351e3ecb849b315.1559224640.git.ppircalabu@bitdefender.com>
+Subject: Re: [PATCH 2/2] dom_cow is needed for mem-sharing only
+Date: Sat, 1 Jun 2019 18:40:23 -0600
+Message-ID: <CABfawhmsNx6L74jJEuPnfcXPXv3w2_q_nXHrcqVbd6TdDjs6pA@mail.gmail.com>
+References: <5CF0F33A0200007800233D8F@prv1-mh.provo.novell.com>
+ <5CF0F5700200007800233DB4@prv1-mh.provo.novell.com>
 Mime-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
@@ -14,11 +12,11 @@ Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=uFtn=UB=tklengyel.com=bounce+e181d6.cd840-xen-devel=lists.xenproject.org@srs-us1.protection.inumbo.net>)
- id 1hXEUV-0000nB-1J
- for xen-devel@lists.xenproject.org; Sun, 02 Jun 2019 00:36:51 +0000
-Received: by mail-lf1-f52.google.com with SMTP id d7so1287544lfb.10
- for <xen-devel@lists.xenproject.org>; Sat, 01 Jun 2019 17:36:44 -0700 (PDT)
-In-Reply-To: <c772d59cc1505001555927609351e3ecb849b315.1559224640.git.ppircalabu@bitdefender.com>
+ id 1hXEYc-0001b1-IR
+ for xen-devel@lists.xenproject.org; Sun, 02 Jun 2019 00:41:06 +0000
+Received: by mail-lf1-f49.google.com with SMTP id a25so10840453lfg.2
+ for <xen-devel@lists.xenproject.org>; Sat, 01 Jun 2019 17:41:00 -0700 (PDT)
+In-Reply-To: <5CF0F5700200007800233DB4@prv1-mh.provo.novell.com>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -27,16 +25,25 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-To: Petre Pircalabu <ppircalabu@bitdefender.com>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Razvan Cojocaru <rcojocaru@bitdefender.com>
+To: Jan Beulich <JBeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, WeiLiu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>, George Dunlap <George.Dunlap@eu.citrix.com>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, Julien Grall <julien.grall@arm.com>, xen-devel <xen-devel@lists.xenproject.org>
 List-Id: xen-devel@lists.xenproject.org
 
-T24gVGh1LCBNYXkgMzAsIDIwMTkgYXQgODoxOCBBTSBQZXRyZSBQaXJjYWxhYnUKPHBwaXJjYWxh
-YnVAYml0ZGVmZW5kZXIuY29tPiB3cm90ZToKPgo+IHZtX2V2ZW50X2dldF9yZXNwb25zZSwgdm1f
-ZXZlbnRfcmVzdW1lLCBhbmQgdm1fZXZlbnRfbWFya19hbmRfcGF1c2UgYXJlCj4gdXNlZCBvbmx5
-IGluIHhlbi9jb21tb24vdm1fZXZlbnQuYy4KPgo+IFNpZ25lZC1vZmYtYnk6IFBldHJlIFBpcmNh
-bGFidSA8cHBpcmNhbGFidUBiaXRkZWZlbmRlci5jb20+CgpBY2tlZC1ieTogVGFtYXMgSyBMZW5n
-eWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29tPgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL3hlbi1kZXZlbA==
+T24gRnJpLCBNYXkgMzEsIDIwMTkgYXQgMzozNSBBTSBKYW4gQmV1bGljaCA8SkJldWxpY2hAc3Vz
+ZS5jb20+IHdyb3RlOgo+Cj4gQSBjb3VwbGUgb2YgYWRqdXN0bWVudHMgYXJlIG5lZWRlZCB0byBj
+b2RlIGNoZWNraW5nIGZvciBkb21fY293LCBidXQKPiBzaW5jZSB0aGVyZSBhcmUgcHJldHR5IGZl
+dyBpdCBpcyBwcm9iYWJseSBiZXR0ZXIgdG8gYWRqdXN0IHRob3NlIHRoYW4KPiB0byBzZXQgdXAg
+YW5kIGtlZXAgYXJvdW5kIGEgbmV2ZXIgdXNlZCBkb21haW4uCj4KPiBUYWtlIHRoZSBvcHBvcnR1
+bml0eSBhbmQgdGlnaHRlbiBhIEJVR19PTigpIGluIGVtdWwtcHJpdi1vcC5jOnJlYWRfY3IoKS4K
+PiAoQXJndWFibHkgdGhpcyBwZXJoYXBzIHNob3VsZG4ndCBiZSBhIEJVR19PTigpIGluIHRoZSBm
+aXJzdCBwbGFjZS4pCj4KPiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
+ZS5jb20+Cj4gLS0tCj4gV2hpbGUgZm9yIG5vdyB0aGlzIGF2b2lkcyBjcmVhdGluZyB0aGUgZG9t
+YWluIG9uIEFybSBvbmx5LCBUYW1hcydlcwo+IHBhdGNoIHN3aXRjaGluZyB0byBDT05GSUdfTUVN
+X1NIQVJJTkcgd2lsbCBtYWtlIHg4NiBsZXZlcmFnZSB0aGlzIHRvby4KCkhpIEphbiwKcGVyaGFw
+cyBpdCB3b3VsZCBiZSBiZXR0ZXIgdG8gaGF2ZSB0aGlzIHBhdGNoIGJlIGFwcGxpZWQgYWZ0ZXIg
+bXkKcGF0Y2g/IFlvdSBhbHJlYWR5IGFja2VkIHRoYXQgb25lIGFuZCBpdCBjb3VsZCBiZSBhcHBs
+aWVkIHNlcGFyYXRlbHkKZnJvbSB0aGUgc2VyaWVzIHRoYXQgSSd2ZSBzZW50IGl0IGFzIHBhcnQg
+b2YuCgpUaGFua3MsClRhbWFzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
