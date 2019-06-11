@@ -2,41 +2,72 @@ Return-Path: <SRS0=31Bo=UK=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2AA41C4321B
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2019 12:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A46A6C4321A
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2019 12:40:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0AE3A2089E
-	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2019 12:32:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0AE3A2089E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 73C7120896
+	for <xen-devel@archiver.kernel.org>; Tue, 11 Jun 2019 12:40:37 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="D8ZgZdA4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 73C7120896
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hafxH-0006Kj-5Q; Tue, 11 Jun 2019 12:32:47 +0000
+	id 1hag4c-0007EJ-0L; Tue, 11 Jun 2019 12:40:22 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=SowN=UK=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hafxF-0006Ka-JY
- for xen-devel@lists.xenproject.org; Tue, 11 Jun 2019 12:32:45 +0000
-X-Inumbo-ID: 02b4a1a5-8c45-11e9-8980-bc764e045a96
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTP
- id 02b4a1a5-8c45-11e9-8980-bc764e045a96;
- Tue, 11 Jun 2019 12:32:43 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A5EB7344;
- Tue, 11 Jun 2019 05:32:43 -0700 (PDT)
-Received: from [10.1.196.50] (e108454-lin.cambridge.arm.com [10.1.196.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 321733F557;
- Tue, 11 Jun 2019 05:32:42 -0700 (PDT)
-To: Andrii Anisov <andrii.anisov@gmail.com>, Jan Beulich <JBeulich@suse.com>
+ <SRS0=XVUa=UK=gmail.com=andrii.anisov@srs-us1.protection.inumbo.net>)
+ id 1hag4b-0007EE-H9
+ for xen-devel@lists.xenproject.org; Tue, 11 Jun 2019 12:40:21 +0000
+X-Inumbo-ID: 12714196-8c46-11e9-8980-bc764e045a96
+Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id 12714196-8c46-11e9-8980-bc764e045a96;
+ Tue, 11 Jun 2019 12:40:20 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id v24so7096137ljg.13
+ for <xen-devel@lists.xenproject.org>; Tue, 11 Jun 2019 05:40:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=f5afrDbi1tlv/IBmiU8bKkJKJOoj8lYyLncmFxO1RAc=;
+ b=D8ZgZdA4jIoBCGPlymNmnWdVB9BcgLOOpP444DUvV3kUo8i8cxV0CNjJ4JZ0GcWPX0
+ nPfH2IqE0M5qNl9LtseF8AHYBQQusvHcnGbyaCcAfqQN3f73KetaGfN8+ayZGv1e36b8
+ ybjwPyE7lx8dk0tJonvuhkixtBcvV1NgXVLP+mOms35Pd20xG0A457+S/U7mL4FZK3Jd
+ tJzYruB+I2+TSiJRhnc2nZr3K/FBTSn/UknVvhmMJ9kC7WtIwRP4ioFCxqpqVZ31Nslj
+ rNghMLzyrE8ncUyrzj1MwdmcB+cglsGGsv9LtRYNpfMCnYbfpW9ZGrTGQvhJGYTm9fW3
+ tuDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=f5afrDbi1tlv/IBmiU8bKkJKJOoj8lYyLncmFxO1RAc=;
+ b=YBGQPOPRbevP/SM5/Sjs9UHhf17t6MfAJOO9tSesOf80hUqIYkuzXWWFbkbkdvcKbp
+ hUYQ8kHf+OE4XWhcv1gMTmglYElrjnWBpixSd1rFu3hZCyRctuPFYj2fb/ywbIoJDf67
+ +XJ8xa5lbOBhjY2DBq8EKnVdMfO5vfmR5nLbMfwAD5pIz+2GrzOtfwpp2fBcKLcXRDuo
+ 32mV5htE+6x0jjUITsQ2HSFaA35lHF0/d4uHW0mLWWWRzUy0/WQGEWjlOOfBq3YRGQVo
+ ZSaczrX8GklRA29x63vsPk/K6r4/evHz/KJIF6z6dDuShqa/WHid1gyKVoBX+ycrjLj5
+ pGEQ==
+X-Gm-Message-State: APjAAAVnKSt+Dg+ogiASbsgp4kGwovID43fkRKjQHiD5SAsSr0Kse6DB
+ Hy1SH3eP6uznFb7go4C80xg=
+X-Google-Smtp-Source: APXvYqxdmLg7CcOZAvwDR8UgE+IS/guefYQ2RcWXIinhdSzk7uWhtw9XM/86C7nPcEpeyiH5lR54DA==
+X-Received: by 2002:a2e:5d9c:: with SMTP id v28mr39212410lje.32.1560256819074; 
+ Tue, 11 Jun 2019 05:40:19 -0700 (PDT)
+Received: from [10.17.180.34] (ll-22.209.223.85.sovam.net.ua. [85.223.209.22])
+ by smtp.gmail.com with ESMTPSA id
+ p29sm2054721ljp.87.2019.06.11.05.40.17
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Tue, 11 Jun 2019 05:40:18 -0700 (PDT)
+To: Julien Grall <julien.grall@arm.com>, Jan Beulich <JBeulich@suse.com>
 References: <1558721577-13958-1-git-send-email-andrii.anisov@gmail.com>
  <1558721577-13958-3-git-send-email-andrii.anisov@gmail.com>
  <5CFA734902000078002364C0@prv1-mh.provo.novell.com>
@@ -45,13 +76,14 @@ References: <1558721577-13958-1-git-send-email-andrii.anisov@gmail.com>
  <92d534ef-082e-58d7-a4ff-c74cf7c23195@gmail.com>
  <b07c98a5-00cc-a51f-2eda-ba4038f0f667@arm.com>
  <4d747a77-408b-56b9-9404-60b3754ceccb@gmail.com>
-From: Julien Grall <julien.grall@arm.com>
-Message-ID: <4af4bd1e-17c1-d128-05af-865c5b79cb88@arm.com>
-Date: Tue, 11 Jun 2019 13:32:41 +0100
+ <4af4bd1e-17c1-d128-05af-865c5b79cb88@arm.com>
+From: Andrii Anisov <andrii.anisov@gmail.com>
+Message-ID: <e30fd795-1f90-5da5-8578-7ce75075d689@gmail.com>
+Date: Tue, 11 Jun 2019 15:40:16 +0300
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-In-Reply-To: <4d747a77-408b-56b9-9404-60b3754ceccb@gmail.com>
+In-Reply-To: <4af4bd1e-17c1-d128-05af-865c5b79cb88@arm.com>
 Content-Language: en-US
 Subject: Re: [Xen-devel] [PATCH v3] xen: introduce
  VCPUOP_register_runstate_phys_memory_area hypercall
@@ -78,18 +110,15 @@ Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-CgpPbiAxMS8wNi8yMDE5IDEzOjI2LCBBbmRyaWkgQW5pc292IHdyb3RlOgo+IAo+IAo+IE9uIDEx
-LjA2LjE5IDE1OjEyLCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4+PiBKdWxpZW4sIEknbSBub3Qgc3Vy
-ZSBJIHVuZGVyc3RhbmQgaG93IHdvcmsgb24gKHA/KUNQVSBjb3VsZCBiZSBkZWxheWVkLiBXZSAK
-Pj4+IGFyZSBoZXJlIHdpdGggaW50ZXJydXB0cyBlbmFibGVkLCBzbyBoZXJlIGd1ZXN0IHdvdWxk
-IGp1c3Qgc3BlbmQgaGlzIG93biB2Y3B1IAo+Pj4gdGltZSBidWRnZXQuIAo+Pgo+PiBYZW4gb25s
-eSBzdXBwb3J0cyBvbmx5IHZvbHVudGFyeSBwcmVlbXB0aW9uLgo+IAo+IE9oLCByZWFsbHk/IExl
-dCBtZSBsb29rIGludG8gaXQgYSBiaXQgY2xvc2VyLgoKRGlkIHlvdSBleHBlY3QgWGVuIHRvIGJl
-IGZ1bGx5IHByZWVtcHRpYmxlPwoKVGhlIGZ1bmN0aW9uIHRvIGRvIHRoZSBzY2hlZHVsaW5nIGlz
-IHNjaGVkdWxlKCkuIFRoaXMgaXMgZWl0aGVyIGNhbGwgZnJvbSBhIApzb2Z0aXJxIG9yIGRpcmVj
-dGx5IGluIGEgZmV3IHBsYWNlcyAoZS5nIHdhaXQoKSkuCgpUaGUgb25seSBwbGFjZSBpbiB0aGlz
-IHBhdGggd2hlcmUgZG9fc29mdGlycSgpIHdpbGwgYmUgY2FsbGVkIGlzIG9uIHJldHVybiB0byAK
-dGhlIGd1ZXN0IChzZWUgbGVhdmVfaHlwZXJ2aXNvcl90YWlsKS4KCkNoZWVycywKCi0tIApKdWxp
-ZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
-dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+CgpPbiAxMS4wNi4xOSAxNTozMiwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IERpZCB5b3UgZXhwZWN0
+IFhlbiB0byBiZSBmdWxseSBwcmVlbXB0aWJsZT8KPiAKPiBUaGUgZnVuY3Rpb24gdG8gZG8gdGhl
+IHNjaGVkdWxpbmcgaXMgc2NoZWR1bGUoKS4gVGhpcyBpcyBlaXRoZXIgY2FsbCBmcm9tIGEgc29m
+dGlycSBvciBkaXJlY3RseSBpbiBhIGZldyBwbGFjZXMgKGUuZyB3YWl0KCkpLgo+IAo+IFRoZSBv
+bmx5IHBsYWNlIGluIHRoaXMgcGF0aCB3aGVyZSBkb19zb2Z0aXJxKCkgd2lsbCBiZSBjYWxsZWQg
+aXMgb24gcmV0dXJuIHRvIHRoZSBndWVzdCAoc2VlIGxlYXZlX2h5cGVydmlzb3JfdGFpbCkuCgpS
+aWdodCB5b3UgYXJlISBJIGZvcmdvdCB0aGF0IGJpdC4gV2Ugd2lsbCBub3QgcGFzcyB0aHJvdWdo
+IGl0IG9uIHNlcnZpbmcgdGltZXIgaXJxIGludGVycnVwdGVkIHVzIGluIGh5cCBtb2RlLgoKLS0g
+ClNpbmNlcmVseSwKQW5kcmlpIEFuaXNvdi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
+LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
+aW5mby94ZW4tZGV2ZWw=
