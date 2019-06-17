@@ -6,49 +6,44 @@ X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D4CFC31E57
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2019 10:15:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 495ECC31E57
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2019 10:29:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F01552087F
-	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2019 10:15:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F01552087F
+	by mail.kernel.org (Postfix) with ESMTPS id 121C72084D
+	for <xen-devel@archiver.kernel.org>; Mon, 17 Jun 2019 10:29:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 121C72084D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hcofA-0005yM-1L; Mon, 17 Jun 2019 10:14:56 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hcosm-00079Q-TU; Mon, 17 Jun 2019 10:29:00 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=wVRv=UQ=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1hcof8-0005yA-6g
- for xen-devel@lists.xenproject.org; Mon, 17 Jun 2019 10:14:54 +0000
-X-Inumbo-ID: bdd6a9b2-90e8-11e9-b20c-07771fddee0f
-Received: from mx1.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id bdd6a9b2-90e8-11e9-b20c-07771fddee0f;
- Mon, 17 Jun 2019 10:14:50 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 115B5AE65;
- Mon, 17 Jun 2019 10:14:50 +0000 (UTC)
-To: Ankur Arora <ankur.a.arora@oracle.com>, linux-kernel@vger.kernel.org,
- xen-devel@lists.xenproject.org
-References: <20190509172540.12398-1-ankur.a.arora@oracle.com>
- <20190509172540.12398-16-ankur.a.arora@oracle.com>
-From: Juergen Gross <jgross@suse.com>
-Message-ID: <8b6cb452-f565-c515-cabb-068300ce3ef5@suse.com>
-Date: Mon, 17 Jun 2019 12:14:49 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
-MIME-Version: 1.0
-In-Reply-To: <20190509172540.12398-16-ankur.a.arora@oracle.com>
-Content-Language: de-DE
-Subject: Re: [Xen-devel] [RFC PATCH 15/16] xen/net: gnttab, evtchn,
- xenbus API changes
+ (envelope-from <SRS0=LqB1=UQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hcosl-00079L-PM
+ for xen-devel@lists.xenproject.org; Mon, 17 Jun 2019 10:28:59 +0000
+X-Inumbo-ID: b6de50a1-90ea-11e9-8980-bc764e045a96
+Received: from prv1-mh.provo.novell.com (unknown [137.65.248.33])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id b6de50a1-90ea-11e9-8980-bc764e045a96;
+ Mon, 17 Jun 2019 10:28:58 +0000 (UTC)
+Received: from INET-PRV1-MTA by prv1-mh.provo.novell.com
+ with Novell_GroupWise; Mon, 17 Jun 2019 04:28:56 -0600
+Message-Id: <5D076B640200007800238C6A@prv1-mh.provo.novell.com>
+X-Mailer: Novell GroupWise Internet Agent 18.1.1 
+Date: Mon, 17 Jun 2019 04:28:52 -0600
+From: "Jan Beulich" <JBeulich@suse.com>
+To: "Roger Pau Monne" <roger.pau@citrix.com>
+References: <20190607092232.83179-1-roger.pau@citrix.com>
+ <20190607092232.83179-13-roger.pau@citrix.com>
+In-Reply-To: <20190607092232.83179-13-roger.pau@citrix.com>
+Mime-Version: 1.0
+Content-Disposition: inline
+Subject: Re: [Xen-devel] [PATCH v3 12/13] pci: switch pci_conf_write32 to
+ use pci_sbdf_t
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,18 +54,25 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: pbonzini@redhat.com, boris.ostrovsky@oracle.com, sstabellini@kernel.org,
- joao.m.martins@oracle.com, konrad.wilk@oracle.com
+Cc: Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, WeiLiu <wl@xen.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <Ian.Jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Julien Grall <julien.grall@arm.com>,
+ Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
+ xen-devel <xen-devel@lists.xenproject.org>, Brian Woods <brian.woods@amd.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMDkuMDUuMTkgMTk6MjUsIEFua3VyIEFyb3JhIHdyb3RlOgo+IEZvciB0aGUgbW9zdCBwYXJ0
-LCB3ZSBub3cgcGFzcyB4ZW5ob3N0X3QgKiBhcyBwYXJhbWV0ZXIuCj4gCj4gQ28tZGV2ZWxvcGVk
-LWJ5OiBKb2FvIE1hcnRpbnMgPGpvYW8ubS5tYXJ0aW5zQG9yYWNsZS5jb20+Cj4gU2lnbmVkLW9m
-Zi1ieTogQW5rdXIgQXJvcmEgPGFua3VyLmEuYXJvcmFAb3JhY2xlLmNvbT4KClNhbWUgYXMgcHJl
-dmlvdXMgcGF0Y2guCgoKSnVlcmdlbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+Pj4+IE9uIDA3LjA2LjE5IGF0IDExOjIyLCA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+
+IFRoaXMgcmVkdWNlcyB0aGUgbnVtYmVyIG9mIHBhcmFtZXRlcnMgb2YgdGhlIGZ1bmN0aW9uIHRv
+IHR3bywgYW5kCj4gc2ltcGxpZmllcyBzb21lIG9mIHRoZSBjYWxsaW5nIHNpdGVzLgo+IAo+IFNp
+Z25lZC1vZmYtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKUmV2
+aWV3ZWQtYnk6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KCgpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0
+Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qu
+b3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
