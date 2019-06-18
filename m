@@ -2,62 +2,76 @@ Return-Path: <SRS0=FpMx=UR=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F8A7C31E5B
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Jun 2019 22:07:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C5701C31E5B
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Jun 2019 22:21:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1A6AD2082C
-	for <xen-devel@archiver.kernel.org>; Tue, 18 Jun 2019 22:07:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A6AD2082C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 8D4C02082C
+	for <xen-devel@archiver.kernel.org>; Tue, 18 Jun 2019 22:21:40 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FkffmOtD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D4C02082C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hdMG9-0006vj-R1; Tue, 18 Jun 2019 22:07:21 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hdMTY-0008SB-ED; Tue, 18 Jun 2019 22:21:12 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=EKPJ=UR=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1hdMG8-0006vP-46
- for xen-devel@lists.xenproject.org; Tue, 18 Jun 2019 22:07:20 +0000
-X-Inumbo-ID: 6df24d06-9215-11e9-b4eb-a3666c2d9b01
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6df24d06-9215-11e9-b4eb-a3666c2d9b01;
- Tue, 18 Jun 2019 22:07:15 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1hdMG2-00012h-FU; Tue, 18 Jun 2019 22:07:14 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1hdMG2-0003dj-0t; Tue, 18 Jun 2019 22:07:14 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1hdMG2-0005pC-0F; Tue, 18 Jun 2019 22:07:14 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-137985-mainreport@xen.org>
+ <SRS0=dhcS=UR=gmail.com=julien.grall@srs-us1.protection.inumbo.net>)
+ id 1hdMTX-0008S6-78
+ for xen-devel@lists.xenproject.org; Tue, 18 Jun 2019 22:21:11 +0000
+X-Inumbo-ID: 5f840bea-9217-11e9-8980-bc764e045a96
+Received: from mail-ua1-x943.google.com (unknown [2607:f8b0:4864:20::943])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id 5f840bea-9217-11e9-8980-bc764e045a96;
+ Tue, 18 Jun 2019 22:21:09 +0000 (UTC)
+Received: by mail-ua1-x943.google.com with SMTP id f20so7724260ual.0
+ for <xen-devel@lists.xenproject.org>; Tue, 18 Jun 2019 15:21:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=8Y+G/dg/rxNAs3OZvpOBmjhH1X4jyL0Q5yVyoy+9BFo=;
+ b=FkffmOtDAKyBZgD3qhj5lh463P1Q1u8vP1FjR/xD4iOb925dSoS8uAiL7nW83zgRNc
+ haiS+tq1ud3K/mpdJV0w5mG8EdWD2wybSLQSD4wzmiy4UV/qxL1zqS1PBRygqTJGR3mD
+ y8ldOYTAyqGTmpeXd75QQSbBGGpf5DiZU/2Id6O/DjRO1wo31ZDBdz/Uz0BPoUv93YSy
+ Em1slB8FDnr4frPWBDBg96MvvhUjcAx4aGCfusSGfDHGSuPSXkTSaER2ilJOOs54XNTI
+ kLHnuSCQcw0FuPg6R2+h+58cDppiIK0ygIAI++QOnHwwmv116r78qBrof5d+8oQvTq/s
+ 3uPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=8Y+G/dg/rxNAs3OZvpOBmjhH1X4jyL0Q5yVyoy+9BFo=;
+ b=Fpq8PN9fbI05VicDSc7ERI5r6lI08DVJ0jZvCdn/bIcSqLjI7JJ1jqHhes95FJvjRO
+ w2/4uZGGADR0RdYdFylpZ7qetkXXOZmJWj8u8h8B0YOUnXCfpJGTPje2UWV0hehjCsD0
+ 2/eYMvntMGc83kh+57SsLBv4dwTP4FjAhtcdwg9zHlurs+sRTDU1CRWyRMaigmov9yQ1
+ ElOK/wjiwRxL2kr/iyF+j32jAUA0zwyghcYJiPq9mRUxFX1ugzg2+zyYFBVSHYjJ0C3w
+ S4khXPJKSQ+zgpr0eVrbo+CA/WtNBAtk55nlwBv51mupLJcPFJiQ4+4I8Fum/MZfFuf5
+ 904w==
+X-Gm-Message-State: APjAAAWZnSKDvutk6VdI/tchYN6kO0WWaa+3npr9Epvhg5wOveSowGXa
+ Mf3JmDq6XXe6r/7k6Gj6cuZP65ZI9GBL+DzVrXY=
+X-Google-Smtp-Source: APXvYqxJg0nr40R9AN8RUqm0wgOr2cVoWdwQytrBAkBaKyscWae7ntzh/riZ+yujl7gxypfcZSS3pOX3/r6buibBLrE=
+X-Received: by 2002:a67:1e01:: with SMTP id e1mr55875817vse.13.1560896469112; 
+ Tue, 18 Jun 2019 15:21:09 -0700 (PDT)
 MIME-Version: 1.0
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=260acc521db4c29df4aa9b7a67f42cf967871fd3
-X-Osstest-Versions-That: xen=6ff560f7f1f214fb89baaf97812c4c943e44a642
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 18 Jun 2019 22:07:14 +0000
-Subject: [Xen-devel] [xen-unstable-smoke test] 137985: tolerable all pass -
- PUSHED
+References: <alpine.DEB.2.10.1904301358560.13269@sstabellini-ThinkPad-X260>
+ <1556658172-8824-5-git-send-email-sstabellini@kernel.org>
+ <bff15c1a-1eaf-4bde-c5dc-a5ada63b4d9f@arm.com>
+ <alpine.DEB.2.21.1906181415510.2072@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.1906181415510.2072@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien.grall@gmail.com>
+Date: Tue, 18 Jun 2019 23:20:56 +0100
+Message-ID: <CAF3u54CHbQo82D18LTOdhbLgq4YfHkVin1c4YDkv0QLuqwUL3Q@mail.gmail.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [Xen-devel] [PATCH v2 05/10] libxl/xl: add memory policy option
+ to iomem
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,52 +82,173 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: xen-devel <xen-devel@lists.xenproject.org>,
+ Julien Grall <julien.grall@arm.com>, ian.jackson@eu.citrix.com,
+ wei.liu2@citrix.com, Stefano Stabellini <stefanos@xilinx.com>
+Content-Type: multipart/mixed; boundary="===============1880288912437783584=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-ZmxpZ2h0IDEzNzk4NSB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzNzk4NS8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICAyNjBhY2M1MjFkYjRjMjlkZjRhYTliN2E2N2Y0MmNmOTY3ODcxZmQzCmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICA2ZmY1NjBmN2YxZjIxNGZiODli
-YWFmOTc4MTJjNGM5NDNlNDRhNjQyCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMzc5NzEgIDIwMTkt
-MDYtMTggMTU6MDA6NDkgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTM3OTg1ICAy
-MDE5LTA2LTE4IDE5OjAzOjQ1IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KCmpvYnM6CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
-YnVpbGQtYXJtaGYgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02
-NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
-ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0IG9uIG9zc3Rl
-c3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dzCmltYWdlczog
-L2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUgYXZhaWxhYmxl
-IGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0ZXN0L2xvZ3MK
-CkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGluIGdlbmVyYWws
-IGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDth
-PWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
-L2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVyCgpUZXN0IGhh
-cm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0
-d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKUHVzaGluZyByZXZpc2lvbiA6CgpUbyB4ZW5i
-aXRzLnhlbi5vcmc6L2hvbWUveGVuL2dpdC94ZW4uZ2l0CiAgIDZmZjU2MGY3ZjEuLjI2MGFjYzUy
-MWQgIDI2MGFjYzUyMWRiNGMyOWRmNGFhOWI3YTY3ZjQyY2Y5Njc4NzFmZDMgLT4gc21va2UKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============1880288912437783584==
+Content-Type: multipart/alternative; boundary="000000000000929bc8058ba087cb"
+
+--000000000000929bc8058ba087cb
+Content-Type: text/plain; charset="UTF-8"
+
+Sorry for the formatting.
+
+On Tue, 18 Jun 2019, 23:09 Stefano Stabellini, <sstabellini@kernel.org>
+wrote:
+
+> On Tue, 18 Jun 2019, Julien Grall wrote:
+> > On 30/04/2019 22:02, Stefano Stabellini wrote:
+> > > diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
+> > > index 89fe80f..a6c5e30 100644
+> > > --- a/tools/libxl/libxl_create.c
+> > > +++ b/tools/libxl/libxl_create.c
+> > > @@ -415,6 +415,21 @@ static void init_console_info(libxl__gc *gc,
+> > >          Only 'channels' when mapped to consoles have a string name. */
+> > >   }
+> > >   +static uint32_t libxl__memory_policy_to_xc(libxl_memory_policy c)
+> > > +{
+> > > +    switch (c) {
+> > > +    case LIBXL_MEMORY_POLICY_ARM_MEM_WB:
+> > > +        return MEMORY_POLICY_ARM_MEM_WB;
+> > > +    case LIBXL_MEMORY_POLICY_ARM_DEV_NGRE:
+> > > +        return MEMORY_POLICY_ARM_DEV_nGRE;
+> > > +    case LIBXL_MEMORY_POLICY_X86_UC:
+> > > +        return MEMORY_POLICY_X86_UC;
+> > > +    case LIBXL_MEMORY_POLICY_DEFAULT:
+> > > +    default:
+> >
+> > Looking at this again, don't we want to bail out if the policy is
+> unknown? My
+> > concern here is the user may configure with something it didn't expect.
+> The
+> > risk is the problem will be hard to debug.
+> >
+> > I also believe this could be part of libxl_{arm,x86}.c allowing us to
+> filter
+> > misuse early.
+>
+> This sounds like a good idea, I can do that. Then, I can also #ifdef the
+> hypercalls defines, although for some reason today libxl doesn't have
+> CONFIG_X86 or CONFIG_ARM set so I would also have to do the following in
+> the libxl Makefile:
+>
+> ifeq ($(CONFIG_X86),y)
+> CFLAGS_LIBXL += -DCONFIG_X86
+> else
+> CFLAGS_LIBXL += -DCONFIG_ARM
+> endif
+>
+
+Or just follow what we do today in other public headers:
+
+#if defined(__arm__) || defined(__aarch64__)
+
+You need to double check the exact syntax as I wrote it by memory.
+
+Cheers,
+
+
+>
+> > Ian, Wei, any opinion?
+>
+> _______________________________________________
+> Xen-devel mailing list
+> Xen-devel@lists.xenproject.org
+> https://lists.xenproject.org/mailman/listinfo/xen-devel
+
+--000000000000929bc8058ba087cb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div>Sorry for the formatting.<br><br><div class=3D"gmail=
+_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Tue, 18 Jun 2019, 23:09 St=
+efano Stabellini, &lt;<a href=3D"mailto:sstabellini@kernel.org">sstabellini=
+@kernel.org</a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=
+=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">On Tue, =
+18 Jun 2019, Julien Grall wrote:<br>
+&gt; On 30/04/2019 22:02, Stefano Stabellini wrote:<br>
+&gt; &gt; diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_creat=
+e.c<br>
+&gt; &gt; index 89fe80f..a6c5e30 100644<br>
+&gt; &gt; --- a/tools/libxl/libxl_create.c<br>
+&gt; &gt; +++ b/tools/libxl/libxl_create.c<br>
+&gt; &gt; @@ -415,6 +415,21 @@ static void init_console_info(libxl__gc *gc,=
+<br>
+&gt; &gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 Only &#39;channels&#39; when ma=
+pped to consoles have a string name. */<br>
+&gt; &gt;=C2=A0 =C2=A0}<br>
+&gt; &gt;=C2=A0 =C2=A0+static uint32_t libxl__memory_policy_to_xc(libxl_mem=
+ory_policy c)<br>
+&gt; &gt; +{<br>
+&gt; &gt; +=C2=A0 =C2=A0 switch (c) {<br>
+&gt; &gt; +=C2=A0 =C2=A0 case LIBXL_MEMORY_POLICY_ARM_MEM_WB:<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMORY_POLICY_ARM_MEM_WB;<br>
+&gt; &gt; +=C2=A0 =C2=A0 case LIBXL_MEMORY_POLICY_ARM_DEV_NGRE:<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMORY_POLICY_ARM_DEV_nGRE;<b=
+r>
+&gt; &gt; +=C2=A0 =C2=A0 case LIBXL_MEMORY_POLICY_X86_UC:<br>
+&gt; &gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 return MEMORY_POLICY_X86_UC;<br>
+&gt; &gt; +=C2=A0 =C2=A0 case LIBXL_MEMORY_POLICY_DEFAULT:<br>
+&gt; &gt; +=C2=A0 =C2=A0 default:<br>
+&gt; <br>
+&gt; Looking at this again, don&#39;t we want to bail out if the policy is =
+unknown? My<br>
+&gt; concern here is the user may configure with something it didn&#39;t ex=
+pect. The<br>
+&gt; risk is the problem will be hard to debug.<br>
+&gt; <br>
+&gt; I also believe this could be part of libxl_{arm,x86}.c allowing us to =
+filter<br>
+&gt; misuse early.<br>
+<br>
+This sounds like a good idea, I can do that. Then, I can also #ifdef the<br=
+>
+hypercalls defines, although for some reason today libxl doesn&#39;t have<b=
+r>
+CONFIG_X86 or CONFIG_ARM set so I would also have to do the following in<br=
+>
+the libxl Makefile:<br>
+<br>
+ifeq ($(CONFIG_X86),y)<br>
+CFLAGS_LIBXL +=3D -DCONFIG_X86<br>
+else<br>
+CFLAGS_LIBXL +=3D -DCONFIG_ARM<br>
+endif<br></blockquote></div></div><div dir=3D"auto"><br></div><div dir=3D"a=
+uto">Or just follow what we do today in other public headers:</div><div dir=
+=3D"auto"><br></div><div dir=3D"auto">#if defined(__arm__) || defined(__aar=
+ch64__)</div><div dir=3D"auto"><br></div><div dir=3D"auto">You need to doub=
+le check the exact syntax as I wrote it by memory.</div><div dir=3D"auto"><=
+br></div><div dir=3D"auto">Cheers,</div><div dir=3D"auto"><br></div><div di=
+r=3D"auto"><div class=3D"gmail_quote"><blockquote class=3D"gmail_quote" sty=
+le=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<br>
+<br>
+&gt; Ian, Wei, any opinion?<br>
+<br>
+_______________________________________________<br>
+Xen-devel mailing list<br>
+<a href=3D"mailto:Xen-devel@lists.xenproject.org" target=3D"_blank" rel=3D"=
+noreferrer">Xen-devel@lists.xenproject.org</a><br>
+<a href=3D"https://lists.xenproject.org/mailman/listinfo/xen-devel" rel=3D"=
+noreferrer noreferrer" target=3D"_blank">https://lists.xenproject.org/mailm=
+an/listinfo/xen-devel</a></blockquote></div></div></div>
+
+--000000000000929bc8058ba087cb--
+
+
+--===============1880288912437783584==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1880288912437783584==--
+
