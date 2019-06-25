@@ -1,66 +1,74 @@
 Return-Path: <SRS0=P3Gq=UY=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	HEXHASH_WORD,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Level: *
+X-Spam-Status: No, score=1.6 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FORGED_YAHOO_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
+	NO_RDNS_DOTCOM_HELO,REPTO_QUOTE_YAHOO,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 452B6C48BD5
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2019 20:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A2E6C48BD5
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2019 20:07:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 216C52063F
-	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2019 20:00:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 216C52063F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 18C4A2080C
+	for <xen-devel@archiver.kernel.org>; Tue, 25 Jun 2019 20:07:45 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b="NdjuiJet"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 18C4A2080C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=yahoo.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hfraw-0004Fg-RT; Tue, 25 Jun 2019 19:59:10 +0000
+	id 1hfriw-00059R-T2; Tue, 25 Jun 2019 20:07:26 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OZ8G=UY=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1hfrav-0004FT-SJ
- for xen-devel@lists.xenproject.org; Tue, 25 Jun 2019 19:59:09 +0000
-X-Inumbo-ID: ac4ddea8-9783-11e9-bddb-2fe251bf19bf
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=lQuY=UY=yahoo.com=hack3rcon@srs-us1.protection.inumbo.net>)
+ id 1hfriw-00059M-4A
+ for xen-devel@lists.xenproject.org; Tue, 25 Jun 2019 20:07:26 +0000
+X-Inumbo-ID: d7a9dc4a-9784-11e9-815c-33911ade8eed
+Received: from sonic310-14.consmr.mail.bf2.yahoo.com (unknown [74.6.135.124])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ac4ddea8-9783-11e9-bddb-2fe251bf19bf;
- Tue, 25 Jun 2019 19:59:00 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1hfral-0002zu-Jb; Tue, 25 Jun 2019 19:58:59 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1hfral-00026K-AP; Tue, 25 Jun 2019 19:58:59 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1hfral-0000Ef-9m; Tue, 25 Jun 2019 19:58:59 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-138497-mainreport@xen.org>
+ id d7a9dc4a-9784-11e9-815c-33911ade8eed;
+ Tue, 25 Jun 2019 20:07:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048;
+ t=1561493241; bh=XnyMPF//1qwgka7BtEVeOIQCpae0/xIDwef/OKmFh5I=;
+ h=Date:From:Reply-To:To:Subject:References:From:Subject;
+ b=NdjuiJetJAy0kPnEREQVgGjC/6T4KdN/yNjw/ZrKZDbhponzo5DH0/YDqNURadqeQOj1ebaLjMuYl4kVQFBdfE0yKk7Z1F4ow69HQRycSsb3XoUDRHM6LMHXOzjoFWycpW8NzcGp5Hfe24RNnV7HJuoI6HqpLd1hzfP2Hr1pVfRAhg5QKuvEjD4aLx2GjF+LQPvGFyjygqB0bwyI/NDr9JvMCDhb0O9WiGcojQYGK4lFeJ4Uf85YosRVEjtrQS2LgyOhDi36XNVx5bF1A5zggSIIdaxurlVVq2pH9mPeDroxBdV5T4M5LR6KtMD2QDwJ5b7ef8S65Gh3DPM/ubqmmQ==
+X-YMail-OSG: AXdbtuQVM1krXejKf4TkQJ1h9BCxmOlC27A9egdGOemw4CWhr39t6ivHz4PsfJ1
+ m4EakirjfmMI0UGo8oM7XhyfiOUCOtN8E0PADoPwDo42FtPUdnwys0Ai0GLMmZ9L_20OvLUCR.Sm
+ f7SLFZe5aTRJfUAAH8_WS.XAomfS2DLjizX_hkiwwJWWWHnru9ElvIjAYeAXchcuiExDfW2DiLvB
+ NsF85Tsebyv7hLIchsao8uDG3sfD1wgOowLLISe8Vqhh4ApW6GZBoERdr5AdO4GndYQRSY3jMiRE
+ fF81FpfC2ASyOu0C2g0xhPDMXNe5yuQlA3_0.84ZobJOQLqA0_3qzONQyWVW13obkcqewV51kVLE
+ j9yaax5ugzuEQ808aAtyjbLT3OvF1.80QlwlaeAoJrONy3sAtGxgzkaTS2KISE_27kxQUP6M8oeX
+ lJ7Q2_EK4.arEsessKYkH9QAKx_UtAHNdSabftffkOtq3tadbg8rEoJvFrgy7nmQMqWbCkD5pB7b
+ IBY0Rw64PNC7MscdXnTnLf2RRc1GuAvy_A2SLUXacSygQLh7wEXYi1lNuGr7__tNdcCYuTE_PB7l
+ RLQ69xsydIu9jWWv7NNyvr.7qojmQLzVAUhEtapPF735XT0W9SYlzxv7TV36x0hNw.U5ToujjELX
+ nlF_2nwimSg.JaYkB1qBWoTCWwb4sAuY0JjboEExDrkqECYgLxQW.n0Rd_1wTGceGwTGkmwijzad
+ ou6z7my5HidQpi3DDRNspAS1_1cHJAbrxN49Egxtf7AGvEiUacUh8k5C4S0u7MyAeXGonC89xmQS
+ .flyDB7Oypg_svE1gLoidxwWT8brf4HQ7VV9qd4wh6o4AI0b9H8kpZoBsLxgMCRVrMWDIlUez7ed
+ f.YsyDgnxqckvOZMJtsl_OMBHEPV0QY6i63DghjkBONi8XktJB32pBkBmqyXNHtwI4l2He2SM8on
+ 2Wk2SQwbyedC9lCn5ceyQMinhHNzt7whaOKF0qsPhswKQE_46L0Luz06.3J9WytiiisZDKlrYGvA
+ A82ghZENy7jhg126UF3Bvbg_X9Io7J0joSbi.ntCQtTIhD.A3d5xJYIyQpGkPkbNEPhWCkcYfNUk
+ yh9h0gcnvi2yyqMbBPjyjuIVVPj37_HN_2hZhqcXEKNrECmUJd.Boh3lijv49KtYDrhGNCNuJK6W
+ o3bwYiN_gWtk7x7X1kljyOZNAjqnclSPIhZL6BrBSqQHOSdr1XaGjaRlizK7pV9NVU3cFDy4qdn7
+ e6D3QQSbdcKoQTBhXXk4NnNpZoBzP.mym9gs-
+Received: from sonic.gate.mail.ne1.yahoo.com by
+ sonic310.consmr.mail.bf2.yahoo.com with HTTP; Tue, 25 Jun 2019 20:07:21 +0000
+Date: Tue, 25 Jun 2019 20:07:19 +0000 (UTC)
+From: Jason Long <hack3rcon@yahoo.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Message-ID: <1411577944.1171584.1561493239215@mail.yahoo.com>
 MIME-Version: 1.0
-X-Osstest-Failures: xen-unstable-smoke:build-amd64:xen-build:fail:regression
- xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
- xen-unstable-smoke:build-armhf:xen-build:fail:regression
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
- xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
- xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
- xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This: xen=1bef4b1efd40b4c8c9e7afcd0155042a47896cb0
-X-Osstest-Versions-That: xen=85fd4f7a09d8aaa783932b8c15b80ddaff0a174d
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Tue, 25 Jun 2019 19:58:59 +0000
-Subject: [Xen-devel] [xen-unstable-smoke test] 138497: regressions -
- trouble: blocked/fail
+References: <1411577944.1171584.1561493239215.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.13837 YahooMailAndroidMobile YMobile/1.0
+ (com.yahoo.mobile.client.android.mail/5.40.1; Android/7.1.1; NMF26F; bbc100;
+ BlackBerry; BBC100-1; 5.16; 1184x720; )
+Subject: [Xen-devel] Xen and embedded.
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,123 +79,41 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Reply-To: "hack3rcon@yahoo.com" <hack3rcon@yahoo.com>
+Content-Type: multipart/mixed; boundary="===============3467997409448716737=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-ZmxpZ2h0IDEzODQ5NyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzODQ5Ny8KClJlZ3Jlc3Npb25z
-IDotKAoKVGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1
-ZGluZyB0ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogYnVpbGQtYW1kNjQgICAgICAgICAg
-ICAgICAgICAgNiB4ZW4tYnVpbGQgICAgICAgICAgICAgICAgZmFpbCBSRUdSLiB2cy4gMTM4NDI0
-CiBidWlsZC1hcm02NC14c20gICAgICAgICAgICAgICA2IHhlbi1idWlsZCAgICAgICAgICAgICAg
-ICBmYWlsIFJFR1IuIHZzLiAxMzg0MjQKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgIDYg
-eGVuLWJ1aWxkICAgICAgICAgICAgICAgIGZhaWwgUkVHUi4gdnMuIDEzODQyNAoKVGVzdHMgd2hp
-Y2ggZGlkIG5vdCBzdWNjZWVkLCBidXQgYXJlIG5vdCBibG9ja2luZzoKIHRlc3QtYXJtNjQtYXJt
-NjQteGwteHNtICAgICAgIDEgYnVpbGQtY2hlY2soMSkgICAgICAgICAgICAgICBibG9ja2VkICBu
-L2EKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAxIGJ1aWxkLWNo
-ZWNrKDEpICAgICAgICBibG9ja2VkIG4vYQogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAg
-MSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQgIG4vYQogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0ICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAgICAgICAgICAgIGJsb2NrZWQg
-IG4vYQogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgMSBidWlsZC1jaGVjaygxKSAgICAg
-ICAgICAgICAgIGJsb2NrZWQgIG4vYQoKdmVyc2lvbiB0YXJnZXRlZCBmb3IgdGVzdGluZzoKIHhl
-biAgICAgICAgICAgICAgICAgIDFiZWY0YjFlZmQ0MGI0YzhjOWU3YWZjZDAxNTUwNDJhNDc4OTZj
-YjAKYmFzZWxpbmUgdmVyc2lvbjoKIHhlbiAgICAgICAgICAgICAgICAgIDg1ZmQ0ZjdhMDlkOGFh
-YTc4MzkzMmI4YzE1YjgwZGRhZmYwYTE3NGQKCkxhc3QgdGVzdCBvZiBiYXNpcyAgIDEzODQyNCAg
-MjAxOS0wNi0yNCAxMTowMDo1MiBaICAgIDEgZGF5cwpGYWlsaW5nIHNpbmNlICAgICAgICAxMzg0
-ODIgIDIwMTktMDYtMjUgMTU6MDA6NDcgWiAgICAwIGRheXMgICAgNSBhdHRlbXB0cwpUZXN0aW5n
-IHNhbWUgc2luY2UgICAxMzg0ODUgIDIwMTktMDYtMjUgMTY6MDA6NTcgWiAgICAwIGRheXMgICAg
-NCBhdHRlbXB0cwoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tClBlb3BsZSB3aG8gdG91Y2hlZCByZXZpc2lvbnMgdW5kZXIgdGVzdDoK
-ICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogIERhbmllbCBEZSBH
-cmFhZiA8ZGdkZWdyYUB0eWNoby5uc2EuZ292PgogIElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBl
-dS5jaXRyaXguY29tPgogIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KICBKdWxpZW4g
-R3JhbGwgPGp1bGllbi5ncmFsbEBhcm0uY29tPgogIFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBh
-dUBjaXRyaXguY29tPgoKam9iczoKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiBidWlsZC1h
-cm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
-bCAgICAKIGJ1aWxkLWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBibG9ja2VkIAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrZWQgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhz
-bSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmxvY2tlZCAKIHRlc3QtYW1k
-NjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBibG9j
-a2VkIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgIGJsb2NrZWQgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0
-LWxhYi54ZW5wcm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9s
-b2dzL2ltYWdlcwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAg
-IGh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFu
-YXRpb24gb2YgdGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQK
-ICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtm
-PVJFQURNRS5lbWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2Vi
-Lz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBj
-b2RlIGNhbiBiZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1v
-c3N0ZXN0LmdpdDthPXN1bW1hcnkKCgpOb3QgcHVzaGluZy4KCi0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjb21taXQgMWJlZjRiMWVm
-ZDQwYjRjOGM5ZTdhZmNkMDE1NTA0MmE0Nzg5NmNiMApBdXRob3I6IEphbiBCZXVsaWNoIDxqYmV1
-bGljaEBzdXNlLmNvbT4KRGF0ZTogICBUdWUgSnVuIDI1IDE3OjM0OjUzIDIwMTkgKzAyMDAKCiAg
-ICBkcm9wIF9fZ2V0X2NwdV92YXIoKSBhbmQgX19nZXRfY3B1X3B0cigpCiAgICAKICAgIHRoaXNf
-Y3B1eyxfcHRyfSgpIGFyZSBzaG9ydGVyLCBhbmQgaGF2ZSBwcmV2aW91c2x5IGJlZW4gbWFya2Vk
-IGFzCiAgICBwcmVmZXJyZWQgaW4gWGVuIGFueXdheS4KICAgIAogICAgU2lnbmVkLW9mZi1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogICAgQWNrZWQtYnk6IEp1bGllbiBHcmFs
-bCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgICBBY2tlZC1ieTogRGFuaWVsIERlIEdyYWFmIDxk
-Z2RlZ3JhQHR5Y2hvLm5zYS5nb3Y+CiAgICBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5k
-cmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCmNvbW1pdCA2MmI4OTQ5ZTlkZGVmYTMxOTE2ODhjY2M1
-NmU2OWFhNjMzMWIwZGExCkF1dGhvcjogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpE
-YXRlOiAgIFR1ZSBKdW4gMjUgMTc6MzQ6MTEgMjAxOSArMDIwMAoKICAgIHg4NjogcmVwbGFjZSBy
-ZW1haW5pbmcgdXNlcyBvZiBfX2dldF9jcHVfdmFyKCkKICAgIAogICAgdGhpc19jcHUoKSBpcyBz
-aG9ydGVyLCBhbmQgd2hlbiB0aGVyZSBhcmUgbXVsdGlwbGUgdXNlcyBpbiBhIGZ1bmN0aW9uCiAg
-ICBwZXJfY3B1KCkgaXQncyBhbHNvIG1vcmUgZWZmaWNpZW50LgogICAgCiAgICBTaWduZWQtb2Zm
-LWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CiAgICBSZXZpZXdlZC1ieTogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCmNvbW1pdCAxOWIyMDA2YTg5
-NTBlYWYxMTYwNmE2ZmMzZGY2NjZmMjk4MjMyMWFkCkF1dGhvcjogSmFuIEJldWxpY2ggPGpiZXVs
-aWNoQHN1c2UuY29tPgpEYXRlOiAgIFR1ZSBKdW4gMjUgMTc6MzM6NDAgMjAxOSArMDIwMAoKICAg
-IHg4Ni9tY2hlY2s6IHJlcGxhY2UgcmVtYWluaW5nIHVzZXMgb2YgX19nZXRfY3B1X3ZhcigpCiAg
-ICAKICAgIHRoaXNfY3B1KCkgaXMgc2hvcnRlciwgYW5kIHdoZW4gdGhlcmUgYXJlIG11bHRpcGxl
-IHVzZXMgaW4gYSBmdW5jdGlvbgogICAgcGVyX2NwdSgpIGl0J3MgYWxzbyBtb3JlIGVmZmljaWVu
-dC4KICAgIAogICAgU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29t
-PgogICAgUmV2aWV3ZWQtYnk6IEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5j
-b20+Cgpjb21taXQgNTYwY2Y0MThjODQ1NWNkOGQ3OWFkMzUzZjZmOTE5M2EyZTI1NTRlNApBdXRo
-b3I6IEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KRGF0ZTogICBUdWUgSnVuIDI1IDE3
-OjMyOjM3IDIwMTkgKzAyMDAKCiAgICB4ODYvbWNoZWNrOiBhbGxvdyB2YXJ5aW5nIGJhbmsgY291
-bnRzIHBlciBDUFUKICAgIAogICAgVXAgdG8gbm93IHdlJ3ZlIGJlZW4gYXNzdW1pbmcgdGhhdCBh
-bGwgQ1BVcyB3b3VsZCBoYXZlIHRoZSBzYW1lIG51bWJlcgogICAgb2YgcmVwb3J0aW5nIGJhbmtz
-LiBIb3dldmVyLCBvbiB1cGNvbWluZyBBTUQgQ1BVcyB0aGlzIGlzbid0IHRoZSBjYXNlLAogICAg
-YW5kIG9uZSBjYW4gb2JzZXJ2ZQogICAgCiAgICAoWEVOKSBtY2UuYzo2NjY6IERpZmZlcmVudCBi
-YW5rIG51bWJlciBvbiBjcHUgPE4+CiAgICAKICAgIGluZGljYXRpbmcgdGhhdCBNYWNoaW5lIENo
-ZWNrIHN1cHBvcnQgd291bGQgbm90IGJlIGVuYWJsZWQgb24gdGhlCiAgICBhZmZlY3RlZCBDUFVz
-LiBDb252ZXJ0IHRoZSBjb3VudCB2YXJpYWJsZSB0byBhIHBlci1DUFUgb25lLCBhbmQgYWRqdXN0
-CiAgICBjb2RlIHdoZXJlIG5lZWRlZCB0byBjb3BlIHdpdGggdGhlIHZhbHVlcyBub3QgYmVpbmcg
-dGhlIHNhbWUuIEluCiAgICBwYXJ0aWN1bGFyIHRoZSBtY2FiYW5rc19hbGxvYygpIGludm9jYXRp
-b25zIGR1cmluZyBBUCBicmluZ3VwIG5lZWQgdG8KICAgIG5vdyBhbGxvY2F0ZSBtYXhpbXVtLXNp
-emUgYml0bWFwcywgYmVjYXVzZSB0aGUgdHJ1bHkgbmVlZGVkIHNpemUgY2FuJ3QKICAgIGJlIGtu
-b3duIHVudGlsIHdlIGFjdHVhbGx5IGV4ZWN1dGUgb24gdGhhdCBDUFUsIHlldCBtY2hlY2tfaW5p
-dCgpIGdldHMKICAgIGNhbGxlZCB0b28gZWFybHkgdG8gZG8gYW55IGFsbG9jYXRpb25zIGl0c2Vs
-Zi4KICAgIAogICAgVGFrZSB0aGUgbGliZXJ0eSBhbmQgYWxzbwogICAgLSBtYWtlIG1jYV9jYXBf
-aW5pdCgpIHN0YXRpYywKICAgIC0gcmVwbGFjZSBzZXZlcmFsIF9fZ2V0X2NwdV92YXIoKSB1c2Vz
-IHdoZW4gYSBsb2NhbCB2YXJpYWJsZSBzdWl0YWJsZQogICAgICBmb3IgdXNlIHdpdGggcGVyX2Nw
-dSgpIGFwcGVhcnMsCiAgICAtIGNvcnJlY3Qgd2hpY2ggQ1BVJ3MgY3B1X2RhdGFbXSBlbnRyeSB4
-ODZfbWNfbXNyaW5qZWN0X3ZlcmlmeSgpIHVzZXMsCiAgICAtIHJlcGxhY2UgYSBCVUcoKSBieSBw
-YW5pYygpLgogICAgCiAgICBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3Vz
-ZS5jb20+CiAgICBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0
-cml4LmNvbT4KCmNvbW1pdCBiNDE2NjZmMmMxN2YwMWM0MzdjODcwMzg5YWI3MTNlZTYyYWUzNTI2
-CkF1dGhvcjogUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CkRhdGU6ICAg
-VHVlIEp1biAyNSAxNTozOTo0NCAyMDE5ICswMjAwCgogICAgY29uZmlnOiBkb24ndCBoYXJkY29k
-ZSB0b29sY2hhaW4gYmluYXJpZXMKICAgIAogICAgQ3VycmVudGx5IHRoZSBuYW1lcyBvZiB0aGUg
-YnVpbGQgdG9vbGNoYWluIGJpbmFyaWVzIGFyZSBoYXJkY29kZWQgaW4KICAgIFN0ZEdOVS5taywg
-YW5kIHRoZSB2YWx1ZXMgZnJvbSB0aGUgZW52aXJvbm1lbnQgYXJlIGlnbm9yZWQuCiAgICAKICAg
-IFN3aXRjaCBTdGRHTlUubWsgdG8gdXNlICc/PScgaW5zdGVhZCBvZiAnPScsIHNvIHRoYXQgdmFs
-dWVzIGZyb20gdGhlCiAgICBlbnZpcm9ubWVudCBhcmUgdXNlZCBpZiBwcmVzZW50LCBlbHNlIGRl
-ZmF1bHQgdG8gdGhlIHZhbHVlcyBwcm92aWRlZAogICAgYnkgdGhlIGNvbmZpZyBmaWxlLgogICAg
-CiAgICBUaGlzIGNoYW5nZSBmaXhlcyB0aGUgZ2l0bGFiIENJIGxvb3AsIHRoYXQgd2FzIHJlbHlp
-bmcgb24gcGFzc2luZwogICAgY3VzdG9tIHZhbHVlcyBpbiB0aGUgZW52aXJvbm1lbnQgdmFyaWFi
-bGVzIGZvciB0aGUgY29tcGlsZXIgYW5kIHRoZQogICAgbGlua2VyLgogICAgCiAgICBTaWduZWQt
-b2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNvbT4KICAgIEFja2Vk
-LWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgogICAgQWNrZWQt
-Ynk6IElhbiBKYWNrc29uIDxpYW4uamFja3NvbkBldS5jaXRyaXguY29tPgoocWVtdSBjaGFuZ2Vz
-IG5vdCBpbmNsdWRlZCkKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+--===============3467997409448716737==
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_1171583_943945067.1561493239214"
+Content-Length: 1115
+
+------=_Part_1171583_943945067.1561493239214
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hello.Is it true that in the next years the Xen hpervisor just run on automitive and embedded devices and not servers?
+Tnx.
+
+Sent from Yahoo Mail on Android
+------=_Part_1171583_943945067.1561493239214
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+Hello.<div id="yMail_cursorElementTracker_1561493129931">Is it true that in the next years the Xen hpervisor just run on automitive and embedded devices and not servers?</div><div id="yMail_cursorElementTracker_1561493207393"><br></div><div id="yMail_cursorElementTracker_1561493207663">Tnx.<br><div id="yMail_cursorElementTracker_1561493127450"><br><div id="ymail_android_signature"><a id="ymail_android_signature_link" href="https://go.onelink.me/107872968?pid=InProduct&amp;c=Global_Internal_YGrowth_AndroidEmailSig__AndroidUsers&amp;af_wl=ym&amp;af_sub1=Internal&amp;af_sub2=Global_YGrowth&amp;af_sub3=EmailSignature">Sent from Yahoo Mail on Android</a></div></div></div>
+------=_Part_1171583_943945067.1561493239214--
+
+
+--===============3467997409448716737==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3467997409448716737==--
+
