@@ -7,76 +7,76 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9BCBAC06514
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jul 2019 17:44:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 31A51C06510
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jul 2019 17:45:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B3E021721
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jul 2019 17:44:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0DB812173E
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jul 2019 17:45:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.b="Nk0MmSHv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B3E021721
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.b="Lo4nNWVM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0DB812173E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hiMpd-0007ma-71; Tue, 02 Jul 2019 17:44:41 +0000
+	id 1hiMpf-0007nQ-5G; Tue, 02 Jul 2019 17:44:43 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=bnvP=U7=wdc.com=prvs=079d4847f=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1hiMnv-0007fe-K0
- for xen-devel@lists.xenproject.org; Tue, 02 Jul 2019 17:42:55 +0000
-X-Inumbo-ID: d1f029fd-9cf0-11e9-8980-bc764e045a96
-Received: from esa3.hgst.iphmx.com (unknown [216.71.153.141])
+ id 1hiMoj-0007lG-ST
+ for xen-devel@lists.xenproject.org; Tue, 02 Jul 2019 17:43:45 +0000
+X-Inumbo-ID: f02b41ad-9cf0-11e9-8980-bc764e045a96
+Received: from esa1.hgst.iphmx.com (unknown [68.232.141.245])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id d1f029fd-9cf0-11e9-8980-bc764e045a96;
- Tue, 02 Jul 2019 17:42:54 +0000 (UTC)
+ id f02b41ad-9cf0-11e9-8980-bc764e045a96;
+ Tue, 02 Jul 2019 17:43:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1562089375; x=1593625375;
+ t=1562089425; x=1593625425;
  h=from:to:cc:subject:date:message-id:in-reply-to: references;
- bh=R+PqGxeqtQ6qQlCqmBxy6Ky2+ZJ1BGLcrhWr65kK1ko=;
- b=Nk0MmSHvjecX3Dg0MS9g5MxEQO8YIvrC1HUmc5u80UNcdYLvowX41r//
- B0qbrsRxY1rvcMnGcxtcYWhqj9Dg17KtyY3ZWluLmNrMUJmd/qUd5wSH+
- R+zm6545AHu5VgHTfiMJ+NBHtH/X9AAaCJKHqTo5QEL46moO5i+HLHQqX
- XAWLNiwfrdFqa1/NzXebO512TdFqQ8YIx1E9wMjR4V/61LZeZIjVe+SRY
- 2+dmsG0WoqMgU5gq/LBvQWy8ibN/rR4fo3IuC1T6WPQFgV+RkHS+sXk8X
- X/u4qgIFKwx/sMSj4WP0ByGa+B7HTLPoLI+bMUy3okMCXgFhOeVXz8/Kg A==;
-IronPort-SDR: zYeUiuQWP0+Gp7rvkQmHTjeoJnXN1zezwOr7YK1ejWPBTI1du2Tc7uUGLkoyf/x2uJJCjM6h8h
- B75/XZOzpMjuJqosLbiaKsF6Cne6wg+3xBuwVCaAtdy/Y38YrgnVc3rx/SrBx1lF6qAlAfNy7b
- WNtbztTGJF/DFtF8noX0w1IJXz6V3NZpUIzhx1lVaEi5HJAPUXgcRShPRGGdZxlMIZKL/YEAEf
- oLduZbtuOcVeBj4b9lSlMQ3XWKDtodQ+5sl7tPoOc5m+EGvYxtNCARn+sRMyMyPpcBL8BX6G2k
- 2ls=
-X-IronPort-AV: E=Sophos;i="5.63,444,1557158400"; d="scan'208";a="116916547"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+ bh=9vWWJtoonwsaTPSwwa0+qd2wOetTCt6y5aKrlPs6UYc=;
+ b=Lo4nNWVM+TaAsAs9slJx39j5yFueysZsaZ5YQywXGAOOx8yk6Gxjjr3X
+ 4+qWgdZ06g+Quu/UShU3Nl/uCYeDasEhr7Anm2Ujq4+HgdByqLyT96wy8
+ e4BtprMJiULolOseOeYx6EnZ2nJ7hvtPADg/DujjrSevhFff6hf2oqjTg
+ LyAIVafsb58p5Y4aWZuEL0ZxD/EytOoxsmeZlcoF0tid2gJrXX9EfNwFv
+ I+QuiUf49xH4LFDJGxehhxdMJ2p9AB3DJLXq2RZchkN4usf3tTIeg1GOn
+ 3yglokAs3Fd+ug8HSD01GqRD23QQ7U8JV/eyu3/TiSdGG/uCvc1QW6YNp Q==;
+IronPort-SDR: MfSUmUDtjeDdHQSsHTzyy0L9Z5CMjLEGqG1egJydV2xkJzXqVB9qf7ZrciJtpY4NkPpKIuyIxy
+ hWl+HjgY6u5DAwgNkU19BVtdKGxSpOolBw81aFwDlogGBG97VXtnijgPTarEwAknOlps6RySJw
+ qXw6ffDGjvAmOG22ob9ZAOdqWUMbkc8kwtVqUpfTBq6RXuQgLt7qd30lY/gFKRwJZMcPHLteKn
+ N54udFK5vPA0e6UNaWHlL/IJ2dHlr4XUo2iqOaJ+UWT/qnutRMiFtF0Hjs5D40GREWVph5uZaM
+ R2o=
+X-IronPort-AV: E=Sophos;i="5.63,444,1557158400"; d="scan'208";a="218460088"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 03 Jul 2019 01:42:54 +0800
-IronPort-SDR: S15OGL3rXeRgUm+JUCxjODYQm9sVk83ljJ6dpPHvu92IgS4qkHbyJxRqj8ONv5Zceu6d2j9jfk
- 3ohZGSci5sM9MOhxqCk52VoC8pVUI75CEjdzYweF0iNKlNQBeqA0H5f6leud4SoYmqQYG+UcZB
- 0v5KmHC7r9M9mZut2h2WcLGHKFDXRXEcDtzaAotma0gN4B4iGHeN7A6mkJUn1BukDihQOOLPQI
- vkHLqeMdR3eo5eZqEsCbN9+pZECqzXqOxlRvcL3XEE15rdqLYdK+W8g6hdfmJchE+38eLG9wuW
- CRLkqPnmKYWzxbNC6GAxWzkq
+ by ob1.hgst.iphmx.com with ESMTP; 03 Jul 2019 01:43:44 +0800
+IronPort-SDR: sjNWu12K9YADpTjhbmPyEVOIW7FK2GLg2dgAP6W0T31O1rLYNXALoU9weNcPnCd3/mg1ORiEiZ
+ i8CToRIp4H1VNH1DKOMiYqDKmZaETpVtSJmzUNbKjBuNujhDK2/tK9JZE9DmeAQIAy9TS8SKt2
+ gi/3NzQZE3rWmQIUQY6M4l45wT8RSDEQf4DLWHY9kpWrokHqhXK++scl93is8npCYt8paLamJ8
+ 0BMB4l9g/KfaTexHWeqqXd1b8FX6v9m634MKIlyG2ESRsl2wfAUtIkjIgpl2NT7/vXbOARe/Ei
+ +5Iqq/ky5uDncuxRdO60Bb2d
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
- by uls-op-cesaep02.wdc.com with ESMTP; 02 Jul 2019 10:41:56 -0700
-IronPort-SDR: G/uLmRGIhR1LMbBkSR/mZvxOZKkvqJRNN5K3dh9qNmMM1fa2KZc+jFQU7q7JOv6WNW6g48l0Kn
- 5v4QxUuHBwr5SzPEAtkc7OyRSK3XTRauZGm59j5ahpw5wmr6DYzqxjFPVdJrrQidjtsBYyV0uM
- yF9FYqoQuzI3uhdGfMdue9EbSVG3fRedIz8rowF8JYCI1n/lvifOaIQVoyvpk1+8dBIPd3rMmT
- MA2y2MtsCtTSTxq5XBpfxTUQW0NqoTMAaz3gHx+pwkKc4o/2IB/j6m8UfbKqKaS/cMputBrwok
- 22Q=
+ by uls-op-cesaep02.wdc.com with ESMTP; 02 Jul 2019 10:42:46 -0700
+IronPort-SDR: ws5rnzCM4RcXwdxe4HASEQFLH1dnYxxAMKAgVbT4JHCN2jgx943DO6rHgKP+swJs4M91iIs/sT
+ gRrZoE1tIOaM6JyLKSoAUUb8hTK+NRvPlUPi1IJhe9ahYwL9curauLL4rf66dnNNMggCfCsFTI
+ 3/Y+IKEv41CBry2zrJeQxThbAE0FA5Lf1EnTSrQvqmPHERsJ+iVZtdFiBfteYsvau3GieAffN7
+ Ri7patlKy/pzZ/QFGhDZFEMvG9Z+F8UK0U8dEwu/NxE5ZVctxdKWEE4Gv1UuEalLIUAzMIkkPs
+ db8=
 Received: from cvenusqemu.hgst.com ([10.202.66.73])
- by uls-op-cesaip02.wdc.com with ESMTP; 02 Jul 2019 10:42:53 -0700
+ by uls-op-cesaip02.wdc.com with ESMTP; 02 Jul 2019 10:43:44 -0700
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-block@vger.kernel.org
-Date: Tue,  2 Jul 2019 10:42:28 -0700
-Message-Id: <20190702174236.3332-3-chaitanya.kulkarni@wdc.com>
+Date: Tue,  2 Jul 2019 10:42:34 -0700
+Message-Id: <20190702174236.3332-9-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20190702174236.3332-1-chaitanya.kulkarni@wdc.com>
 References: <20190702174236.3332-1-chaitanya.kulkarni@wdc.com>
 X-Mailman-Approved-At: Tue, 02 Jul 2019 17:44:39 +0000
-Subject: [Xen-devel] [PATCH V3 2/9] blk-zoned: update blkdev_nr_zones() with
- helper
+Subject: [Xen-devel] [COMPILE TEST ONLY PATCH V3 8/9] target/pscsi: use
+ helper in pscsi_get_blocks()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -99,19 +99,21 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-VGhpcyBwYXRjaCB1cGRhdGVzIHRoZSBibGtkZXZfbnJfem9uZXMoKSB3aXRoIG5ld2x5IGludHJv
-ZHVjZWQgaGVscGVyCmZ1bmN0aW9uIHRvIHJlYWQgdGhlIG5yX3NlY3RzIGZyb20gYmxvY2sgZGV2
-aWNlJ3MgaGRfcGFydHMgd2l0aCB0aGUKaGVscCBpZiBwYXJ0X25yX3NlY3RzX3JlYWQoKS4KClNp
-Z25lZC1vZmYtYnk6IENoYWl0YW55YSBLdWxrYXJuaSA8Y2hhaXRhbnlhLmt1bGthcm5pQHdkYy5j
-b20+Ci0tLQogYmxvY2svYmxrLXpvbmVkLmMgfCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
-cnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9ibG9jay9ibGstem9uZWQuYyBi
-L2Jsb2NrL2Jsay16b25lZC5jCmluZGV4IGFlN2U5MWJkMDYxOC4uNTA1MWRiMzVjM2ZkIDEwMDY0
-NAotLS0gYS9ibG9jay9ibGstem9uZWQuYworKysgYi9ibG9jay9ibGstem9uZWQuYwpAQCAtOTAs
-NyArOTAsNyBAQCB1bnNpZ25lZCBpbnQgYmxrZGV2X25yX3pvbmVzKHN0cnVjdCBibG9ja19kZXZp
-Y2UgKmJkZXYpCiAJaWYgKCFibGtfcXVldWVfaXNfem9uZWQocSkpCiAJCXJldHVybiAwOwogCi0J
-cmV0dXJuIF9fYmxrZGV2X25yX3pvbmVzKHEsIGJkZXYtPmJkX3BhcnQtPm5yX3NlY3RzKTsKKwly
-ZXR1cm4gX19ibGtkZXZfbnJfem9uZXMocSwgYmRldl9ucl9zZWN0cyhiZGV2KSk7CiB9CiBFWFBP
-UlRfU1lNQk9MX0dQTChibGtkZXZfbnJfem9uZXMpOwogCi0tIAoyLjE5LjEKCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhpcyBwYXRjaCB1cGRhdGVzIHRoZSBwc2NzaV9nZXRfYmxvY2tzKCkgd2l0aCBuZXdseSBpbnRy
+b2R1Y2VkIGhlbHBlcgpmdW5jdGlvbiB0byByZWFkIHRoZSBucl9zZWN0cyBmcm9tIGJsb2NrIGRl
+dmljZSdzIGhkX3BhcnRzIHdpdGggdGhlCmhlbHAgb2YgcGFydF9ucl9zZWN0c19yZWFkKCkuCgpT
+aWduZWQtb2ZmLWJ5OiBDaGFpdGFueWEgS3Vsa2FybmkgPGNoYWl0YW55YS5rdWxrYXJuaUB3ZGMu
+Y29tPgotLS0KIGRyaXZlcnMvdGFyZ2V0L3RhcmdldF9jb3JlX3BzY3NpLmMgfCAyICstCiAxIGZp
+bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9k
+cml2ZXJzL3RhcmdldC90YXJnZXRfY29yZV9wc2NzaS5jIGIvZHJpdmVycy90YXJnZXQvdGFyZ2V0
+X2NvcmVfcHNjc2kuYwppbmRleCBjOWQ5MmIzZTc3N2QuLmRhNDgxZWRhYjJkZSAxMDA2NDQKLS0t
+IGEvZHJpdmVycy90YXJnZXQvdGFyZ2V0X2NvcmVfcHNjc2kuYworKysgYi9kcml2ZXJzL3Rhcmdl
+dC90YXJnZXRfY29yZV9wc2NzaS5jCkBAIC0xMDMwLDcgKzEwMzAsNyBAQCBzdGF0aWMgc2VjdG9y
+X3QgcHNjc2lfZ2V0X2Jsb2NrcyhzdHJ1Y3Qgc2VfZGV2aWNlICpkZXYpCiAJc3RydWN0IHBzY3Np
+X2Rldl92aXJ0ICpwZHYgPSBQU0NTSV9ERVYoZGV2KTsKIAogCWlmIChwZHYtPnBkdl9iZCAmJiBw
+ZHYtPnBkdl9iZC0+YmRfcGFydCkKLQkJcmV0dXJuIHBkdi0+cGR2X2JkLT5iZF9wYXJ0LT5ucl9z
+ZWN0czsKKwkJcmV0dXJuIGJkZXZfbnJfc2VjdHMocGR2LT5wZHZfYmQpOwogCiAJcmV0dXJuIDA7
+CiB9Ci0tIAoyLjE5LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRl
+dmVs
