@@ -2,118 +2,88 @@ Return-Path: <SRS0=emI+=VB=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.0 required=3.0 tests=DATE_IN_PAST_12_24,
+	DKIM_INVALID,DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9ED0DC5B578
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jul 2019 00:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A0D79C5B578
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jul 2019 01:16:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 697DF218A0
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jul 2019 00:12:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 690D421882
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jul 2019 01:16:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.b="USXMQmK2";
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=sharedspace.onmicrosoft.com header.i=@sharedspace.onmicrosoft.com header.b="IkMg+OgK"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 697DF218A0
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="PFa7vxlW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 690D421882
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hipLw-0004qf-4n; Thu, 04 Jul 2019 00:11:56 +0000
+	id 1hiqMG-0000Va-If; Thu, 04 Jul 2019 01:16:20 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=0JfK=VB=wdc.com=prvs=081f8cefc=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1hipLt-0004qa-To
- for xen-devel@lists.xenproject.org; Thu, 04 Jul 2019 00:11:54 +0000
-X-Inumbo-ID: 51743388-9df0-11e9-ae81-7bda8ed8fd33
-Received: from esa3.hgst.iphmx.com (unknown [216.71.153.141])
+ <SRS0=pMc9=VB=oracle.com=zhenzhong.duan@srs-us1.protection.inumbo.net>)
+ id 1hiqMF-0000VQ-DL
+ for xen-devel@lists.xenproject.org; Thu, 04 Jul 2019 01:16:19 +0000
+X-Inumbo-ID: 51162028-9df9-11e9-9dcd-fb3fa9e3a810
+Received: from userp2120.oracle.com (unknown [156.151.31.85])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 51743388-9df0-11e9-ae81-7bda8ed8fd33;
- Thu, 04 Jul 2019 00:11:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1562199110; x=1593735110;
- h=from:to:cc:subject:date:message-id:references: mime-version;
- bh=89ZgTdvjd6A7ZHbYqqnF/80zng6OFVR8eQKz4awpUQw=;
- b=USXMQmK2jtnCH0Y8FN6NPsDX3oM+9/xYx0J4gI7T74eDLockSgn0xl1S
- G9HsfvAFLXrsalpAyVpofpXO94zMGZC5sHuLfe1Qi5Y5OddnHCOS73/G+
- WV9CKt+USuX2bh9fg+VMTRHGDNuby1OaJ3fcUSwTz73WX/ARomZiDepVu
- FATXqL9TPpAkathZ9+N1htXFW9QB+oQHCOEaYxo0f+vhL3qJ6ZvLrtGz+
- 92WpkisLmcjwSaXazCMMqE4x1KGWF2z7d8BNFmhCErXFD++dCclzeVtjE
- vZf7lUyDZOM6I1ZyOfciJHynmfGWv1ABGTBxqZ+n4XjRxiIEJk4dWt7Cv g==;
-IronPort-SDR: BI77c5fPdfAZbOsjqqGEE6JaY8TKWOHvpO5ORfcaxZvXz4SzYEDvRb5c2qCFqgRVHupQMI3kde
- KNPLT31ePLREZ+BxF8MfVZBGP7P7sRQWZP6XJArVe5c2ITee0nCUeF1o3uJz3blpKMouqT3sfq
- Jnh+9ACBgFdWyVfr9k45gXorbtJ/lpVe6XPQGqsLaYbZU5JWZBLZ/N3KI1RdJzTuupt/J4nLGM
- jv7h+MooX4mVsKuivKp3hGglZKbBTcFhmCT4dMHw89wF9cwl9YuGToUG6e41sJ5JZ+yvVNnE+z
- o5o=
-X-IronPort-AV: E=Sophos;i="5.63,449,1557158400"; 
- d="scan'208,217";a="117024713"
-Received: from mail-by2nam01lp2050.outbound.protection.outlook.com (HELO
- NAM01-BY2-obe.outbound.protection.outlook.com) ([104.47.34.50])
- by ob1.hgst.iphmx.com with ESMTP; 04 Jul 2019 08:11:49 +0800
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=89ZgTdvjd6A7ZHbYqqnF/80zng6OFVR8eQKz4awpUQw=;
- b=IkMg+OgKKogZQA2IO6jIbsMyL8AdECKadfzJJ/WypdSUVUeEnJK6Xo6K1VD8fQjpmGydMxcBB7e8OJribdfY4CuCQXYvWdhDxeKqFuQg/cmhXriid/PXr3+JIarngdOX5Zw/MgkjjE0hczBrjfeKmov77lljKXfj+SPKE289kA0=
-Received: from BYAPR04MB5749.namprd04.prod.outlook.com (20.179.58.26) by
- BYAPR04MB3974.namprd04.prod.outlook.com (52.135.215.25) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2032.17; Thu, 4 Jul 2019 00:11:48 +0000
-Received: from BYAPR04MB5749.namprd04.prod.outlook.com
- ([fe80::8025:ccea:a0e6:9078]) by BYAPR04MB5749.namprd04.prod.outlook.com
- ([fe80::8025:ccea:a0e6:9078%5]) with mapi id 15.20.2052.010; Thu, 4 Jul 2019
- 00:11:48 +0000
-From: Chaitanya Kulkarni <Chaitanya.Kulkarni@wdc.com>
-To: Bart Van Assche <bvanassche@acm.org>, "linux-block@vger.kernel.org"
- <linux-block@vger.kernel.org>
-Thread-Topic: [PATCH V3 1/9] block: add a helper function to read nr_setcs
-Thread-Index: AQHVMP2RKOODus9yTU+34ZedLdZ1Iw==
-Date: Thu, 4 Jul 2019 00:11:48 +0000
-Message-ID: <BYAPR04MB57492202BACDEE2991620E4D86FA0@BYAPR04MB5749.namprd04.prod.outlook.com>
-References: <20190702174236.3332-1-chaitanya.kulkarni@wdc.com>
- <20190702174236.3332-2-chaitanya.kulkarni@wdc.com>
- <26917678-fd82-b6c8-761e-220bc7d3b179@acm.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Chaitanya.Kulkarni@wdc.com; 
-x-originating-ip: [2605:e000:3e45:f500:b8d2:4d45:f4cb:6e09]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 4a455854-8b4a-4bfb-3aae-08d7001434f6
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
- SRVR:BYAPR04MB3974; 
-x-ms-traffictypediagnostic: BYAPR04MB3974:
-x-microsoft-antispam-prvs: <BYAPR04MB3974BB4CFFFE7818ADEF421486FA0@BYAPR04MB3974.namprd04.prod.outlook.com>
-wdcipoutbound: EOP-TRUE
-x-ms-oob-tlc-oobclassifiers: OLM:2449;
-x-forefront-prvs: 0088C92887
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(366004)(136003)(39860400002)(346002)(376002)(396003)(199004)(189003)(55016002)(2501003)(8936002)(25786009)(6116002)(9686003)(2906002)(68736007)(4326008)(81166006)(5660300002)(33656002)(81156014)(46003)(229853002)(558084003)(54896002)(6436002)(446003)(52536014)(478600001)(102836004)(7696005)(53936002)(86362001)(486006)(7736002)(71190400001)(73956011)(66946007)(76116006)(71200400001)(476003)(66446008)(64756008)(66556008)(66476007)(72206003)(53546011)(6506007)(74316002)(99286004)(186003)(316002)(14454004)(8676002)(6246003)(7416002)(256004)(110136005)(54906003)(76176011);
- DIR:OUT; SFP:1102; SCL:1; SRVR:BYAPR04MB3974;
- H:BYAPR04MB5749.namprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: Ce5/jR8k/NKvsxv+3uEl1OyymL7iiH5L074mPXa5kbS0hvbSP4NGc7XCzvFdAEELalRRXbTKEMJpB+QO5KPjmWS56IgSQWCmnWWb7PmfWR9wo/SlsI+EeSYbEP3yPGtTnZaOE3OaM5ouTPpiM1L64tuf0XsMRIUTWyxMzFMlRPaigNsaZjNC9vTd6MnPshBS1aGtOaujEU2WcqdMdmruIbYl+N0Z3noF1JrbuJjS9apzpyBACqSUUEBBbJaCDgBnv96Y35QizpaSxP1ZBTYZyrYYynaN0NG2aSrnFUB9NS3yzhJxJ4fq83FQY966SWfITSvJ48fdb2UWCDT8GuSfu20DN1uQ8AGUgJ+FViMQq8AqLIGx3wN+5lulAg9j92lRIPwIb2hO8neCuZy28EusT7LUPSc7nl+uu5XU+nklZhg=
-MIME-Version: 1.0
-X-OriginatorOrg: wdc.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4a455854-8b4a-4bfb-3aae-08d7001434f6
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Jul 2019 00:11:48.2623 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Chaitanya.Kulkarni@wdc.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB3974
-Subject: Re: [Xen-devel] [PATCH V3 1/9] block: add a helper function to read
- nr_setcs
+ id 51162028-9df9-11e9-9dcd-fb3fa9e3a810;
+ Thu, 04 Jul 2019 01:16:15 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x641EI9A034007;
+ Thu, 4 Jul 2019 01:15:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : cc :
+ subject : date : message-id; s=corp-2018-07-02;
+ bh=8R30P8/VE15uPa2Cd5dwobgt5Ubg1NVPlqUdVRzGKOg=;
+ b=PFa7vxlW1+CH/aILqZteNTx4bLTRzCCKfxlUc0pO0k9P6N6FzCrBr2ot3WvgURE9f+Ra
+ mpXvtK6hbtuAJrn0CepZRt+szQO2DmQpNdFuyHd3POlkpUne1LAe+EsWKQrLhCX/DQo2
+ LlsU8znXbYYmx2OMPJvKWob3JSGNoXynzfPFS93Lqx/BOdLQPnpjkgETMyneOYUzbojN
+ WEKblRARQYCw9aRAC48uKdNVHzjaXSVFJKCWAMEmHshiNS1AF1rc2fZGLEgI4RKPryIr
+ 1ysZDf1XeyfedeyiA8VNc6PPHjNnfzG/FG6XuEvhwgxd0+aLyyUNX7T2q/7Bwm/0UvdY Fg== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by userp2120.oracle.com with ESMTP id 2te61q46r4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 04 Jul 2019 01:15:59 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x641CfXm100559;
+ Thu, 4 Jul 2019 01:15:58 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+ by userp3020.oracle.com with ESMTP id 2tebbknp7y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 04 Jul 2019 01:15:58 +0000
+Received: from abhmp0004.oracle.com (abhmp0004.oracle.com [141.146.116.10])
+ by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x641FvGL010644;
+ Thu, 4 Jul 2019 01:15:57 GMT
+Received: from z2.cn.oracle.com (/10.182.69.87)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Wed, 03 Jul 2019 18:15:56 -0700
+From: Zhenzhong Duan <zhenzhong.duan@oracle.com>
+To: linux-kernel@vger.kernel.org
+Date: Wed,  3 Jul 2019 09:19:34 +0800
+Message-Id: <1562116778-5846-1-git-send-email-zhenzhong.duan@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9307
+ signatures=668688
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=1
+ malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1810050000 definitions=main-1907040013
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9307
+ signatures=668688
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ suspectscore=1 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1907040014
+Subject: [Xen-devel] [PATCH v5 0/4] misc fixes to PV extentions code
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -124,89 +94,50 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Damien Le Moal <Damien.LeMoal@wdc.com>,
- "linux-btrace@vger.kernel.org" <linux-btrace@vger.kernel.org>,
- "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
- "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>,
- "yuchao0@huawei.com" <yuchao0@huawei.com>, "colyli@suse.de" <colyli@suse.de>,
- "linux-bcache@vger.kernel.org" <linux-bcache@vger.kernel.org>,
- "jaegeuk@kernel.org" <jaegeuk@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "kent.overstreet@gmail.com" <kent.overstreet@gmail.com>,
- "roger.pau@citrix.com" <roger.pau@citrix.com>
-Content-Type: multipart/mixed; boundary="===============8352981984950808594=="
+Cc: jgross@suse.com, sstabellini@kernel.org,
+ Zhenzhong Duan <zhenzhong.duan@oracle.com>, mingo@redhat.com, bp@alien8.de,
+ xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com, tglx@linutronix.de
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============8352981984950808594==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_BYAPR04MB57492202BACDEE2991620E4D86FA0BYAPR04MB5749namp_"
-
---_000_BYAPR04MB57492202BACDEE2991620E4D86FA0BYAPR04MB5749namp_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-On 7/3/19 8:03 AM, Bart Van Assche wrote:
-
-+}
-
-
-Is the comment above bdev_nr_sects() really useful or should it be left out=
-?
-
-Thanks,
-
-Bart.
-
-
-
-Sure, let me send V4 without the comment.
-
---_000_BYAPR04MB57492202BACDEE2991620E4D86FA0BYAPR04MB5749namp_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-</head>
-<body text=3D"#000000" bgcolor=3D"#FFFFFF">
-<div class=3D"moz-cite-prefix">On 7/3/19 8:03 AM, Bart Van Assche wrote:<br=
->
-</div>
-<blockquote type=3D"cite" cite=3D"mid:26917678-fd82-b6c8-761e-220bc7d3b179@=
-acm.org">
-<blockquote type=3D"cite" style=3D"color: #000000;">
-<pre class=3D"moz-quote-pre" wrap=3D"">&#43;}=0A=
-</pre>
-</blockquote>
-<pre class=3D"moz-quote-pre" wrap=3D"">Is the comment above bdev_nr_sects()=
- really useful or should it be left out?=0A=
-=0A=
-Thanks,=0A=
-=0A=
-Bart.=0A=
-=0A=
-</pre>
-</blockquote>
-Sure, let me send V4 without the comment.<br>
-</body>
-</html>
-
---_000_BYAPR04MB57492202BACDEE2991620E4D86FA0BYAPR04MB5749namp_--
-
-
---===============8352981984950808594==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8352981984950808594==--
-
+SGksCgpJbiB2aXJ0dWFsaXphdGlvbiBlbnZpcm9ubWVudCwgUFYgZXh0ZW5zaW9ucyAoZHJpdmVy
+cywgaW50ZXJydXB0cywKdGltZXJzLCBldGMpIGFyZSBlbmFibGVkIGluIHRoZSBtYWpvcml0eSBv
+ZiB1c2UgY2FzZXMgd2hpY2ggaXMgdGhlCmJlc3Qgb3B0aW9uLgoKSG93ZXZlciwgaW4gc29tZSBj
+YXNlcyAoa2V4ZWMgbm90IGZ1bGx5IHdvcmtpbmcsIGJlbmNobWFya2luZywgZXRjKQp3ZSB3YW50
+IHRvIGRpc2FibGUgUFYgZXh0ZW5zaW9ucy4gV2UgaGF2ZSB4ZW5fbm9wdiBmb3IgdGhhdCBwdXJw
+b3NlCmJ1dCBvbmx5IGZvciBYRU4uIEZvciBhIGNvbnNpc3RlbnQgYWRtaW4gZXhwZXJpZW5jZSBh
+IGNvbW1vbiBjb21tYW5kCmxpbmUgcGFyYW1ldGVyIHNldCBhY3Jvc3MgYWxsIFBWIGd1ZXN0IGlt
+cGxlbWVudGF0aW9ucyBpcyBhIGJldHRlcgpjaG9pY2UuCgpUbyBhY2hpZXZlIHRoaXMgaW50cm9k
+dWNlIGEgbmV3ICdub3B2JyBwYXJhbWV0ZXIgd2hpY2ggaXMgdXNhYmxlIGJ5Cm1vc3Qgb2YgUFYg
+Z3Vlc3QgaW1wbGVtZW50YXRpb24uIER1ZSB0byB0aGUgbGltaXRhdGlvbiBvZiBzb21lIFBWCmd1
+ZXN0cyhYRU4gUFYsIFhFTiBQVkggYW5kIGphaWxob3VzZSksICdub3B2JyBpcyBpZ25vcmVkIGZv
+ciBYRU4gUFYKLCBqYWlsaG91c2UgYW5kIFhFTiBQVkggaWYgYm9vdGluZyB2aWEgWGVuLVBWSCBi
+b290IGVudHJ5LiBJZiBib290aW5nCnZpYSBub3JtYWwgYm9vdCBlbnRyeShsaWtlIGdydWIyKSwg
+UFZIIGd1ZXN0IGhhcyB0byBwYW5pYyBpdHNlbGYKY3VycmVudGx5LgoKV2hpbGUgYW5hbHl6aW5n
+IHRoZSBQViBndWVzdCBjb2RlIG9uZSBidWcgd2VyZSBmb3VuZCBhbmQgZml4ZWQuCihQYXRjaGVz
+IDEpLiBJdCBjYW4gYmUgYXBwbGllZCBpbmRlcGVuZGVudCBvZiB0aGUgZnVuY3Rpb25hbApjaGFu
+Z2VzLCBidXQgaXMga2VwdCBpbiB0aGUgc2VyaWVzIGFzIHRoZSBmdW5jdGlvbmFsIGNoYW5nZXMK
+ZGVwZW5kIG9uIHRoZW0uCgpGb3IgY29tcGF0aWJpbGl0eSByZWFzb24sICJ4ZW5fbm9wdiIgaXMg
+a2VlcGVkIGFuZCBtYXBwZWQgdG8gIm5vcHYiLAp0aGlzIHdheSBhbHNvIGF2b2lkcyBhbiBpc3N1
+ZSB3aXRoIHhlbl9ub3B2IHdoZW4gYm9vdGluZyBQVkggZ3Vlc3QuCgpCdWlsZCB0ZXN0IHBhc3Nl
+cyB3aXRoIENPTkZJR19IWVBFUlZJU09SX0dVRVNUIGVuYWJsZSBhbmQgZGlzYWJsZWQuCkkgZGlk
+bid0IGdldCBlbnYgdG8gdGVzdCB3aXRoIGphaWxob3VzZSBhbmQgSHlwZXJ2LCB0aGUgb3RoZXJz
+IHdvcmsKYXMgZXhwZWN0ZWQuCgp2NToKUEFUQ0gyOgp1cGRhdGUgcGF0Y2ggZGVzY3JpcHRpb24g
+cGVyIEJvcmlzCmFkZCBkZWNsYXJhdGlvbiBvZiBub3B2IHZhcmlhYmxlIGluIGFyY2gveDg2L2lu
+Y2x1ZGUvYXNtL2h5cGVydmlzb3IuaAp3aGljaCB3aWxsIGJlIHVzZWQgaW4gUEFUQ0gzIGFuZCBQ
+QVRDSDQKClBBVENIMyB1cGRhdGUgeGVuX3BhcnNlX25vcHYoKSBwZXIgQm9yaXMKUEFUQ0g0IGFk
+ZCBub3B2PWZhbHNlIHBlciBCb3JpcwpDb21iaW5lIFBBVENINSBpbnRvIFBBVENIMwoKCnY0OgpQ
+QVRDSDUgYSBuZXcgcGF0Y2ggdG8gYWRkICd4ZW5fbm9wdicgYmFjayBwZXIgQm9yaXMKCnYzOgpS
+ZW1vdmUgc29tZSB1bnJlbGF0ZWQgcGF0Y2hlcyBmcm9tIHBhdGNoc2V0IGFzIHN1Z2dlc3RlZCBi
+eSBUZ2x4CgpQQVRDSDEgdW5jaGFuZ2VkClBBVENIMiBhZGQgUmV2aWV3ZWQtYnkKUEFUQ0gzIGFk
+ZCBSZXZpZXdlZC1ieQpQQVRDSDQgcmV3cml0ZSB0aGUgcGF0Y2ggYXMgSmdyb3NzIGZvdW5kIGFu
+IGlzc3VlIGluIG9sZCBwYXRjaCwKZGVzY3JpcHRpb24gaXMgYWxzbyB1cGRhdGVkLgoKCgp2MjoK
+UEFUQ0gzIHVzZSAnaWdub3JlX25vcHYnIGZvciBQVkgvUFYgZ3Vlc3QgYXMgc3VnZ2VzdGVkIGJ5
+IEpncm9zcy4KUEFUQ0g1IG5ldyBhZGRlZCBvbmUsIHNwZWNpZmljYWxseSBmb3IgSFZNIGd1ZXN0
+CgpUaGFua3MKWmhlbnpob25nCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
