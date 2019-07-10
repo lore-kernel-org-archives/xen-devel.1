@@ -2,56 +2,54 @@ Return-Path: <SRS0=r7lW=VH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F305C74A21
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jul 2019 15:55:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B4906C74A2B
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jul 2019 16:40:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5CB612064A
-	for <xen-devel@archiver.kernel.org>; Wed, 10 Jul 2019 15:55:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CB612064A
+	by mail.kernel.org (Postfix) with ESMTPS id 929512087F
+	for <xen-devel@archiver.kernel.org>; Wed, 10 Jul 2019 16:40:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 929512087F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hlEvf-0006z0-A9; Wed, 10 Jul 2019 15:54:47 +0000
+	id 1hlFdz-0002KZ-G4; Wed, 10 Jul 2019 16:40:35 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=ELaq=VH=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hlEvd-0006yv-TZ
- for xen-devel@lists.xenproject.org; Wed, 10 Jul 2019 15:54:45 +0000
-X-Inumbo-ID: 0807614e-a32b-11e9-8fb5-83d019088869
+ id 1hlFdx-0002KU-R6
+ for xen-devel@lists.xenproject.org; Wed, 10 Jul 2019 16:40:33 +0000
+X-Inumbo-ID: 6e98fa84-a331-11e9-bbd6-9f3a66bcd058
 Received: from foss.arm.com (unknown [217.140.110.172])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 0807614e-a32b-11e9-8fb5-83d019088869;
- Wed, 10 Jul 2019 15:54:42 +0000 (UTC)
+ id 6e98fa84-a331-11e9-bbd6-9f3a66bcd058;
+ Wed, 10 Jul 2019 16:40:31 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4E77A2B;
- Wed, 10 Jul 2019 08:54:42 -0700 (PDT)
-Received: from [10.119.48.95] (unknown [10.119.48.95])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 142B03F246;
- Wed, 10 Jul 2019 08:54:42 -0700 (PDT)
-To: Oleksandr <olekstysh@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 51418344;
+ Wed, 10 Jul 2019 09:40:31 -0700 (PDT)
+Received: from [10.119.48.3] (unknown [10.119.48.3])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 266E93F246;
+ Wed, 10 Jul 2019 09:40:31 -0700 (PDT)
+To: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <alpine.DEB.2.21.1906211648280.25730@sstabellini-ThinkPad-T480s>
- <20190621235608.2153-3-sstabellini@kernel.org>
- <024a54c3-29b6-92d2-0cf3-e74297282b31@gmail.com>
+ <20190621235608.2153-4-sstabellini@kernel.org>
 From: Julien Grall <julien.grall@arm.com>
-Message-ID: <12f22d4a-0a39-6878-1471-fd2fdbfd54f9@arm.com>
-Date: Wed, 10 Jul 2019 16:54:41 +0100
+Message-ID: <173378d6-a9b7-7be6-9c9e-a58f1a00d984@arm.com>
+Date: Wed, 10 Jul 2019 17:40:30 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.7.2
 MIME-Version: 1.0
-In-Reply-To: <024a54c3-29b6-92d2-0cf3-e74297282b31@gmail.com>
+In-Reply-To: <20190621235608.2153-4-sstabellini@kernel.org>
 Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH v3 3/6] xen/arm: keep track of
- reserved-memory regions
+Subject: Re: [Xen-devel] [PATCH v3 4/6] xen/arm: handle reserved-memory in
+ consider_modules and dt_unreserved_regions
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,25 +66,28 @@ Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGksCgpPbiA3LzgvMTkgODowMiBQTSwgT2xla3NhbmRyIHdyb3RlOgo+IE9uIDIyLjA2LjE5IDAy
-OjU2LCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gSSBoYXZlIHRlc3RlZCB0aGlzIHNlcmll
-cyBhbmQgZ290IHRoZSBzYW1lIGJlaGF2aW9yIGFzIHdpdGggVjIgWzFdLgo+IAo+IFRoZSAibm9u
-LXJlc2VydmVkLW1lbW9yeSIgbm9kZSBpbiBteSBkZXZpY2UtdHJlZSAKPiAoc3JhbUA0N0ZGRjAw
-MC0+c2NwX3NobWVtQDApIGlzIHN0aWxsIGludGVycHJldGVkIGFzIGEgInJlc2VydmVkLW1lbW9y
-eSIuCj4gSSB0aGluaywgdGhpcyB0YWtlcyBwbGFjZSBiZWNhdXNlIGN1cnJlbnQgaW1wbGVtZW50
-YXRpb24gaXRlcmF0ZXMgb3ZlciAKPiBhbGwgZGV2aWNlIHRyZWUgbm9kZXMgc3RhcnRpbmcKPiBm
-cm9tIHJlYWwgInJlc2VydmVkLW1lbW9yeSIgbm9kZSB1cCB0byB0aGUgZW5kIG9mIHRoZSBkZXZp
-Y2UgdHJlZS4gQW5kIAo+IGlmIHRoZXJlIGlzIGF0IGxlYXN0IG9uZSAibm9uLXJlc2VydmVkLW1l
-bW9yeSIgbm9kZSAod2l0aCBhIHN1aXRhYmxlIAo+IGRlcHRoIGFuZCB2YWxpZCAicmVnIiBwcm9w
-ZXJ0eSkKPiBsb2NhdGVkIGRvd24gdGhlIGRldmljZSB0cmVlLCBpdCB3aWxsIGJlIG1pc3Rha2Vu
-bHkgaW5zZXJ0ZWQgdG8gCj4gYm9vdGluZm8ucmVzZXJ2ZWRfbWVtIChhcyBpbiBteSBjYXNlKS4K
-ClRoZSBwcm9ibGVtIGlzIGJlY2F1c2Ugd2UgYXJlIHBhc3NpbmcgdGhlIGRlcHRoIG9mIHRoZSBw
-YXJlbnQuIEJlY2F1c2UgCm9mIHRoYXQsIGl0IHdpbGwgbG9vayBmb3IgYW55dGhpbmcgYXQgdGhl
-IHNhbWUgZGVwdGggKHNlZSB0aGUgY2hlY2sgCmRlcHRoID49IG1pbl9kZXB0aCBpbiBkZXZpY2Vf
-dHJlZV9mb3JfZWFjaF9ub2RlKS4KClRoZSBjb3JyZWN0IHNvbHV0aW9uIGhlcmUsIHdvdWxkIGJl
-IHRvIHVzZSB0aGUgZGVwdGggb2YgdGhlIGNoaWxkIChpLmUgCmRlcHRoICsgMSkgd2hlbiBjYWxs
-aW5nIGRldmljZV90cmVlX2Zvcl9lYWNoX25vZGUgaW4gCnByb2Nlc3NfcmVzZXJ2ZWRfbWVtb3J5
-X25vZGUuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZl
-bEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxt
-YW4vbGlzdGluZm8veGVuLWRldmVs
+SGkgU3RlZmFubywKCk9uIDYvMjIvMTkgMTI6NTYgQU0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90
+ZToKPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvYXJtL3NldHVwLmMgYi94ZW4vYXJjaC9hcm0vc2V0
+dXAuYwo+IGluZGV4IDIxNTc0NmE1YzMuLmQ5Y2ZiMWFhMmYgMTAwNjQ0Cj4gLS0tIGEveGVuL2Fy
+Y2gvYXJtL3NldHVwLmMKPiArKysgYi94ZW4vYXJjaC9hcm0vc2V0dXAuYwo+IEBAIC0yMDYsNiAr
+MjA2LDI4IEBAIHZvaWQgX19pbml0IGR0X3VucmVzZXJ2ZWRfcmVnaW9ucyhwYWRkcl90IHMsIHBh
+ZGRyX3QgZSwKPiAgICAgICAgICAgfQo+ICAgICAgIH0KPiAgIAo+ICsgICAgLyoKPiArICAgICAq
+IGkgaXMgdGhlIGN1cnJlbnQgYm9vdG1vZHVsZSB3ZSBhcmUgZXZhbHVhdGluZyBhY3Jvc3MgYWxs
+IHBvc3NpYmxlCj4gKyAgICAgKiBraW5kcy4KPiArICAgICAqCj4gKyAgICAgKiBXaGVuIHJldHJp
+ZXZpbmcgdGhlIGNvcnJlc3BvbmRpbmcgcmVzZXJ2ZWQtbWVtb3J5IGFkZHJlc3Nlcwo+ICsgICAg
+ICogYmVsb3csIHdlIG5lZWQgdG8gaW5kZXggdGhlIGJvb3RpbmZvLnJlc2VydmVkX21lbSBiYW5r
+IHN0YXJ0aW5nCj4gKyAgICAgKiBmcm9tIDAsIGFuZCBvbmx5IGNvdW50aW5nIHRoZSByZXNlcnZl
+ZC1tZW1vcnkgbW9kdWxlcy4gSGVuY2UsCj4gKyAgICAgKiB3ZSBuZWVkIHRvIHVzZSBpIC0gbnIu
+Cj4gKyAgICAgKi8KPiArICAgIGZvciAoIDsgaSAtIG5yIDwgYm9vdGluZm8ucmVzZXJ2ZWRfbWVt
+Lm5yX2JhbmtzOyBpKysgKQo+ICsgICAgewo+ICsgICAgICAgIHBhZGRyX3Qgcl9zID0gYm9vdGlu
+Zm8ucmVzZXJ2ZWRfbWVtLmJhbmtbaSAtIG5yXS5zdGFydDsKPiArICAgICAgICBwYWRkcl90IHJf
+ZSA9IHJfcyArIGJvb3RpbmZvLnJlc2VydmVkX21lbS5iYW5rW2kgLSBucl0uc2l6ZTsKPiArCj4g
+KyAgICAgICAgaWYgKCBzIDwgcl9lICYmIHJfcyA8IGUgKQo+ICsgICAgICAgIHsKPiArICAgICAg
+ICAgICAgZHRfdW5yZXNlcnZlZF9yZWdpb25zKHJfZSwgZSwgY2IsIGkrMSk7CgpDb2Rpbmcgc3R5
+bGU6IHNwYWNlIGJlZm9yZSBhbmQgYWZ0ZXIgdGhlIG9wZXJhdG9yLiBJZGVhbGx5LCB0aGUgcmVz
+dCBvZgoKPiArICAgICAgICAgICAgZHRfdW5yZXNlcnZlZF9yZWdpb25zKHMsIHJfcywgY2IsIGkr
+MSk7CgpEaXR0by4KCldpdGggdGhhdDoKCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGp1bGllbi5n
+cmFsbEBhcm0uY29tPgoKQ2hlZXJzLAoKLS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApY
+ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9y
+Zy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
