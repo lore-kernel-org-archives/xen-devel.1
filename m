@@ -2,101 +2,89 @@ Return-Path: <SRS0=H2PL=VX=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=FROM_EXCESS_BASE64,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 731CEC7618B
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2019 06:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A55C8C76191
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2019 07:18:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4358B21734
-	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2019 06:53:32 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kpit.com header.i=@kpit.com header.b="g1J811K8"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4358B21734
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=kpit.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8729B21852
+	for <xen-devel@archiver.kernel.org>; Fri, 26 Jul 2019 07:18:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8729B21852
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hqu6R-0005cm-45; Fri, 26 Jul 2019 06:53:19 +0000
+	id 1hquUc-00075X-JL; Fri, 26 Jul 2019 07:18:18 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=V6Fd=VX=kpit.com=raushan.kumar@srs-us1.protection.inumbo.net>)
- id 1hqtgW-0003Ko-0f
- for xen-devel@lists.xenproject.org; Fri, 26 Jul 2019 06:26:32 +0000
-X-Inumbo-ID: 4d21bb45-af6e-11e9-8980-bc764e045a96
-Received: from IND01-MA1-obe.outbound.protection.outlook.com (unknown
- [40.107.138.84]) by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 4d21bb45-af6e-11e9-8980-bc764e045a96;
- Fri, 26 Jul 2019 06:26:30 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PYpPpQpc9nC1FLVhxYsaECPnojKM6NyHKhsFyF3A6WsP0Gcwm/sCyb6FiwDUXoNSkyhbeubVPF0tIXreBkiyn29q27m5EN2Z6a3Z/hz+TfQ3wLBLfazrM2zFcNw8LThfKEwmSx0kB/mxB3yD7GneNvDCWoPe+XKmUgjuEmSQhfTEEqflOw67acNCU9lUOXuX0yojuZQ8JsixcsGG0eGhwWZFMsP4L3zEfyaour+bMB4Z0V02YXMKoxcdtxUb+KFL6UjgaSKp7M6McDDI5PF7WJluEHhflXbGUmHElVzO5OS4oK9iLXbrulWwzY6M/JI54O/NghNyqCT73V9maQlvQw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eRe4P6kUCk0uFaPmxlhLDHkNtAk8l3gVeaO/yy/VNxU=;
- b=fx9qtrLVPjNl2+LZBp+28E0gCMgWzxgPJoPp+y4zZm51yUjhWUBbtEUFAln1fdrSYbAdlf2RAQ+U/7ae+4t2yLEC3BQjC/Esi262+4MgqJYzc3/HY5hc21v+lL9WjEojyndgxWoL9jVZQ+1U8vm1nri+Omms+Joir1rh9D62msU/MyoL7FhaTyGYop9Ue8QxrlHr/3JsJQ7u2M5JdurVyLPHYcBX2+FaFPXa2pim7I6eK2Y0hvE/sM1eo2xAklurUfKXQDfMajdHVouizA1L5OdNGg6Alv+mxQHiLEQywBC7wsmSrFwGU66B7A5kGhIKUxYtHPlZ7bt51J6NlTVkaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
- smtp.mailfrom=kpit.com;dmarc=pass action=none header.from=kpit.com;dkim=pass
- header.d=kpit.com;arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kpit.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eRe4P6kUCk0uFaPmxlhLDHkNtAk8l3gVeaO/yy/VNxU=;
- b=g1J811K89+lVHWeYZoV4dPkCoH3YFJbX40Onrr6cyti7YTzwVhNfXtiDYNRVUZri/DmPdsS0/QYSDioJwGpOkmYMBdhDIoKxrjuQOQpjXQp6tfNsli5rKMv/CxgFNza151t/P1EAwp4Cn5VpTMGOHwDPqHckIYRVfrKtL08cH/o=
-Received: from BMXPR01MB2775.INDPRD01.PROD.OUTLOOK.COM (20.178.170.143) by
- BMXPR01MB2951.INDPRD01.PROD.OUTLOOK.COM (52.133.135.20) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2115.11; Fri, 26 Jul 2019 06:26:25 +0000
-Received: from BMXPR01MB2775.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::7cb7:a3cd:3751:adc7]) by BMXPR01MB2775.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::7cb7:a3cd:3751:adc7%4]) with mapi id 15.20.2094.013; Fri, 26 Jul 2019
- 06:26:25 +0000
-From: Raushan Kumar <Raushan.Kumar@kpit.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Thread-Topic: Assign dedicated CPU to domain
-Thread-Index: AdVDenbAEcdYgDmURkO34xNpwwLmTQ==
-Date: Fri, 26 Jul 2019 06:26:25 +0000
-Message-ID: <BMXPR01MB27756A5FB61F20E8035AE7E58FC00@BMXPR01MB2775.INDPRD01.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=Raushan.Kumar@kpit.com; 
-x-originating-ip: [115.110.69.250]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 91ce457a-5b92-4bc3-7951-08d711922fb4
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);
- SRVR:BMXPR01MB2951; 
-x-ms-traffictypediagnostic: BMXPR01MB2951:
-x-microsoft-antispam-prvs: <BMXPR01MB2951C6EB7C96B02E6D3460C08FC00@BMXPR01MB2951.INDPRD01.PROD.OUTLOOK.COM>
-x-ms-oob-tlc-oobclassifiers: OLM:4941;
-x-forefront-prvs: 01106E96F6
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(4636009)(396003)(346002)(366004)(376002)(39860400002)(136003)(199004)(189003)(6306002)(25786009)(54896002)(9686003)(99286004)(53936002)(55016002)(5640700003)(86362001)(2351001)(4744005)(66066001)(256004)(14444005)(6436002)(68736007)(66476007)(64756008)(66446008)(6916009)(66574012)(66946007)(66556008)(33656002)(8676002)(76116006)(81156014)(81166006)(8936002)(316002)(486006)(71200400001)(478600001)(14454004)(71190400001)(52536014)(7736002)(3846002)(790700001)(74316002)(6116002)(5660300002)(186003)(2906002)(102836004)(26005)(6506007)(2501003)(476003)(7696005);
- DIR:OUT; SFP:1101; SCL:1; SRVR:BMXPR01MB2951;
- H:BMXPR01MB2775.INDPRD01.PROD.OUTLOOK.COM; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: kpit.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: aBGRQ6yYPvaBTznLuIln4yBUsTk3PH2D1tfs02udUfPnpj0Zmt+MZ0sAMylR5BBMbFLQb+kLBiDWzdLsFKFCM4oVDMICMFoqe89vBFqYGRRfm2TfXEvk+rTq3v+Ym0IxQ5Yrf5wjsnn14mKJFZUOSP1uGF9JVja6CeNY3nmDb4enoufGYDPK0CV/swGSKxZ8e7eb4zAtboWE7qanqKsWKUjutibv+s66srZN2nZ3syzK1ezYeavH+jycM6OL7+V//ElQewA5mMajAHoUf/YngvPKuTKik0wWakD1zpdUX20NO0mcKkyuff9HU0gyem6qbSbGgTZ8m7kJBd9y86MXiiLSpwEbKwIvkZyg515OM85NRuRMZAGUrE9bN9FYm+kDX5Y6swt1rlyK0leU6z7mlQsrAz0Iv1tWMFWdTnrlNdk=
+ <SRS0=+y56=VX=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1hquUb-00075S-Cb
+ for xen-devel@lists.xenproject.org; Fri, 26 Jul 2019 07:18:17 +0000
+X-Inumbo-ID: 88c82c45-af75-11e9-8980-bc764e045a96
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id 88c82c45-af75-11e9-8980-bc764e045a96;
+ Fri, 26 Jul 2019 07:18:15 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: M2O28YACQdc7T2KaYp8kh9e3nENZ4ja/+RReStguVJpQ9IYDlZahKCAfOH24MFPpkUzpTdQZyV
+ sDPEMgeVnDV04unvPX6v2RdI+uFSemEcVgwRk3n0Xq/2bMoGd12+yiMgcRPdrlbRpKknOI/wL2
+ NCFP1dNbPeqGrZUJ51O44UEQDvaMl7uatdyGz9PVlGHzo0ceSCSuQWqSp6OvudyP9AJ5CRWJAB
+ At/IkKoPn3mXehYu4ZDurh3H61lZZko7sJMQjMbxoCkCoPGr4bU6bvSw5HJvj66pZp4K8x9f52
+ KsY=
+X-SBRS: 2.7
+X-MesageID: 3560604
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.64,309,1559534400"; 
+   d="scan'208";a="3560604"
+Date: Fri, 26 Jul 2019 09:17:58 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Rich Persaud <persaur@gmail.com>
+Message-ID: <20190726071758.geuxwscfhs2zftfr@Air-de-Roger>
+References: <20190725135112.83569-1-roger.pau@citrix.com>
+ <AC845283-0555-4296-97B4-EDFB6A4C5882@gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: kpit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 91ce457a-5b92-4bc3-7951-08d711922fb4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Jul 2019 06:26:25.4111 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 3539451e-b46e-4a26-a242-ff61502855c7
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: raushank@kpit.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BMXPR01MB2951
-X-Mailman-Approved-At: Fri, 26 Jul 2019 06:53:18 +0000
-Subject: [Xen-devel] Assign dedicated CPU to domain
+Content-Disposition: inline
+In-Reply-To: <AC845283-0555-4296-97B4-EDFB6A4C5882@gmail.com>
+User-Agent: NeoMutt/20180716
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
+Subject: Re: [Xen-devel] [PATCH] tboot: remove maintainers and declare
+ orphaned
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -107,136 +95,73 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0025458577629836521=="
+Cc: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>, Daniel Smith <dpsmith@apertussolutions.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, jun.nakajima@intel.com,
+ Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Lukasz Hawrylko <lukasz.hawrylko@intel.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, tboot-devel@lists.sourceforge.net,
+ Tim Deegan <tim@xen.org>, Lars Kurth <lars.kurth.xen@gmail.com>,
+ Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
+ Shane Wang <shane.wang@intel.com>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============0025458577629836521==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_BMXPR01MB27756A5FB61F20E8035AE7E58FC00BMXPR01MB2775INDP_"
-
---_000_BMXPR01MB27756A5FB61F20E8035AE7E58FC00BMXPR01MB2775INDP_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-Hi team,
-
-I am beginner for XEN platform and curious to know how to assign specific C=
-PU to dom0 and domU?
-Could you please provide me any relevant link for same? I have two CPU ARCH=
- Cortex -A57 and Cortex A-53  and I want to assign dom0 to Cortex -A57 and =
-cross check that Is it assign to same or not?
-
-
-Please provide me link .
-
-Regards,
-Raushan.
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print, retain copy, disseminate, distribute, o=
-r use this message or any part thereof. If you receive this message in erro=
-r, please notify the sender immediately and delete all copies of this messa=
-ge. KPIT Technologies Ltd. does not accept any liability for virus infected=
- mails.
-
---_000_BMXPR01MB27756A5FB61F20E8035AE7E58FC00BMXPR01MB2775INDP_
-Content-Type: text/html; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
->
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:0 0 0 0 0 0 0 0 0 0;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0in;
-	margin-bottom:.0001pt;
-	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-span.EmailStyle17
-	{mso-style-type:personal-compose;
-	font-family:"Calibri","sans-serif";
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-family:"Calibri","sans-serif";}
-@page WordSection1
-	{size:8.5in 11.0in;
-	margin:1.0in 1.0in 1.0in 1.0in;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal">Hi team, <o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">I am beginner for XEN platform and curious to know h=
-ow to assign specific CPU to dom0 and domU?<o:p></o:p></p>
-<p class=3D"MsoNormal">Could you please provide me any relevant link for sa=
-me? I have two CPU ARCH Cortex &#8211;A57 and Cortex A-53&nbsp; and I want =
-to assign dom0 to Cortex &#8211;A57 and cross check that Is it assign to sa=
-me or not?
-<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Please provide me link .<o:p></o:p></p>
-<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
-<p class=3D"MsoNormal">Regards,<br>
-Raushan.<o:p></o:p></p>
-</div>
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Technologies Ltd. It is intended only for the=
- person to whom it is addressed. If you are not the intended recipient, you=
- are not authorized to read, print,
- retain copy, disseminate, distribute, or use this message or any part ther=
-eof. If you receive this message in error, please notify the sender immedia=
-tely and delete all copies of this message. KPIT Technologies Ltd. does not=
- accept any liability for virus
- infected mails.
-</body>
-</html>
-
---_000_BMXPR01MB27756A5FB61F20E8035AE7E58FC00BMXPR01MB2775INDP_--
-
-
---===============0025458577629836521==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0025458577629836521==--
-
+T24gVGh1LCBKdWwgMjUsIDIwMTkgYXQgMDM6MDg6MDdQTSAtMDQwMCwgUmljaCBQZXJzYXVkIHdy
+b3RlOgo+IChjYyBJbnRlbCBhbmQgdGJvb3QtZGV2ZWwpCj4gCj4gSGkgUm9nZXIsCj4gCj4gVGhh
+bmtzIGZvciB5b3VyIGludGVyZXN0IGluIGRvY3VtZW50aW5nIHRoZSBzdGF0dXMgb2YgbWFpbnRl
+bmFuY2UgZm9yIEludGVsIFRYVCBzdXBwb3J0IGluIFhlbi4gIEludGVsIFRYVCBhbmQgWGVuIGFy
+ZSBkZXBsb3llZCBpbiBwcm9kdWN0aW9uIHRvZGF5IGJ5IE9wZW5YVCBhbmQgUXViZXNPUyBmb3Ig
+Ym9vdCBpbnRlZ3JpdHkuICBYZW4gd2FzIGEgcGlvbmVlcmluZyBhZG9wdGVyIG9mIERSVE0sIGFs
+bW9zdCBhIGRlY2FkZSBhZ28sIGJ1dCBtYWluc3RyZWFtIGVudGVycHJpc2UgY29tcHV0aW5nIGlz
+IG5vdyBjYXRjaGluZyB1cCB3aXRoIHRoZSBNYXkgMjAxOSByZWxlYXNlIG9mIFdpbmRvd3MgMTAg
+U3lzdGVtR3VhcmQuICBJdCB3b3VsZCBiZSBuaWNlIHRvIGF2b2lkICJvcnBoYW5pbmciIG9uZSBv
+ZiBYZW4ncyBjb21wZXRpdGl2ZSBhZHZhbnRhZ2VzIGluIDIwMTkuCgpUaGFua3MgZm9yIHRoZSBm
+ZWVkYmFjayEgSnVzdCB0byBiZSBjbGVhciwgdGhpcyBpcyBub3QgYSBwbGFuIHRvCnJlbW92ZSB0
+aGUgdGJvb3QgY29kZSBmcm9tIFhlbiBpbiBhbnkgd2F5LCBpdCdzIGp1c3QgYSBJTU8gbmVlZGVk
+IHN0ZXAKaW4gb3JkZXIgdG8gcmVmbGVjdCB0aGUgY3VycmVudCBtYWludGFpbmVyc2hpcCBzdGF0
+dXMgb2YgdGhlIGNvZGUsIGFuZApsaWtlbHkgYSB3YXkgdG8gbW92ZSBmb3J3YXJkLCBwbGVhc2Ug
+c2VlIGJlbG93LgoKPiA+IE9uIEp1bCAyNSwgMjAxOSwgYXQgMDk6NTEsIFJvZ2VyIFBhdSBNb25u
+ZSA8cm9nZXIucGF1QGNpdHJpeC5jb20+IHdyb3RlOgo+ID4gCj4gPiBHYW5nIFdlaSBJbnRlbCBl
+bWFpbCBhZGRyZXNzIGhhcyBiZWVuIGJvdW5jaW5nIGZvciBzb21lIHRpbWUgbm93LAo+IAo+IEdh
+bmcgV2VpJ3MgcmVwbGFjZW1lbnQgaXMgTHVrYXN6IEhhd3J5bGtvLCB3aG8gcG9zdGVkIG9uIE1h
+cmNoIDYsIDIwMTk6Cj4gaHR0cHM6Ly9saXN0cy5ndC5uZXQveGVuL2RldmVsLzU0NjQwMQo+IAo+
+IENvdWxkIHlvdSBpbmNsdWRlIEx1a2FzeiBwYXRjaCwgYWxvbmcgd2l0aCBKdWxpZW4ncyByZXF1
+ZXN0ZWQgZm9ybWF0dGluZyBjaGFuZ2VzLCBpbiB5b3VyIHVwZGF0ZSB0byB0aGUgTUFJTlRBSU5F
+UlMgZmlsZT8KCkkgdGhpbmsgaXQgd291bGQgYmUgYmV0dGVyIGlmIEx1a2FzeiBjb3VsZCByZXNl
+bmQgaGlzIHBhdGNoLCBub3cgdGhhdAp0aGUgc2VjdGlvbiBlbnRyeSBpcyBvcnBoYW5lZCB3ZSBj
+YW4gYWRkL3JlbW92ZSByZXZpZXdlcnMgYW5kCm1haW50YWluZXJzIHdpdGhvdXQgYmVpbmcgYmxv
+Y2tlZC4KCj4gQXMgYSBuZXcgWGVuIG1haW50YWluZXIgYW5kIGNvbnRyaWJ1dG9yLCBMdWthc3og
+bWF5IG5vdCB5ZXQgYmUgZmFtaWxpYXIgd2l0aCB0aGUgcHJvY2VkdXJlcyBhbmQgcHJhY3RpY2Vz
+IG9mIHRoZSBYZW4gY29tbXVuaXR5LiAgV2UgY2FuIHdlbGNvbWUgaGlzIG5ldyBtYWludGFpbmVy
+c2hpcCByb2xlIHdpdGhvdXQgZHJvcHBpbmcgc3VwcG9ydCBmb3IgYSBmZWF0dXJlLCB0aGF0IChh
+KSBoZSBpcyBtYWludGFpbmluZywgKGIpIGlzIHVzZWQgYnkgWGVuLgoKU3VyZSwgbXkgcGxhbiBp
+cyB0byBkZWNsYXJlIHRoZSBzdXBwb3J0IG9ycGhhbmVkLCBzbyB0aGF0IEx1a2FzeiAob3IKYW55
+b25lIHdobyBoYXMgaW50ZXJlc3QgaW4gdGhpcyBjb2RlKSBjYW4gYmUgYWRkZWQgYXMgYSByZXZp
+ZXdlcgphZnRlcndhcmRzIHdpdGhvdXQgdXMgYmVpbmcgYmxvY2tlZCBvbiBhbiBBY2sgZnJvbSBT
+aGFuZSBXYW5nLCB3aG8gaXMKdW5yZXNwb25zaXZlIChhcyBwZXIgdGhlIHRocmVhZCBwb2ludGVk
+IHRvIGluIHRoZSBjb21taXQgbWVzc2FnZSkuCgo+ID4gYW5kCj4gPiB0aGUgb3RoZXIgbWFpbnRh
+aW5lciBpcyBub24tcmVzcG9uc2l2ZSB0byBwYXRjaGVzIFswXSwgc28gcmVtb3ZlCj4gPiBtYWlu
+dGFpbmVycyBhbmQgZGVjbGFyZSBJTlRFTChSKSBUUlVTVEVEIEVYRUNVVElPTiBURUNITk9MT0dZ
+IChUWFQpCj4gPiBvcnBoYW5lZC4KPiA+IAo+ID4gWzBdIGh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvYXJjaGl2ZXMvaHRtbC94ZW4tZGV2ZWwvMjAxOS0wNS9tc2cwMDU2My5odG1sCj4gCj4g
+U2luY2Ugd2UgaGF2ZSBhdCBsZWFzdCBvbmUgSW50ZWwgbWFpbnRhaW5lciwgTHVrYXN6LCB0aGUg
+ZmVhdHVyZSBuZWVkIG5vdCBiZSBvcnBoYW5lZC4gIElmIFNoYXduIGlzIG5vdCByZXNwb25kaW5n
+IHRvIHRoZSByZXF1ZXN0IHRvIGNvbmZpcm0gTHVrYXN6IGFzIG1haW50YWluZXIsIHRoZSBYZW4g
+Y29tbXVuaXR5IGhhcyBtdWx0aXBsZSBjb21tdW5pY2F0aW9uIGNoYW5uZWxzIHdpdGggSW50ZWwu
+ICBQcmFnbWF0aWNhbGx5LCBhIHJldmlldyBvZiB0aGUgdGJvb3QtZGV2ZWwgYXJjaGl2ZXMgc2hv
+d3MgdGhhdCBMdWthc3ogaXMgd29ya2luZyBvbiB0Ym9vdCBkZXZlbG9wbWVudC4gIAoKVGhlIG9y
+cGhhbmVkIHN0ZXAgaXMgSU1PIG5lZWRlZCBpbiBvcmRlciB0byBtb3ZlIGZvcndhcmQgYW5kIGFk
+ZCBhIG5ldwpyZXZpZXdlci9tYWludGFpbmVyLiBXaXRob3V0IHJlbW92aW5nIHRoZSBjdXJyZW50
+IG1haW50YWluZXJzIGFuZApkZWNsYXJpbmcgaXQgb3JwaGFuZWQgd2Ugd291bGQgYmUgYmxvY2tl
+ZCBvbiBhbiBBY2sgZnJvbSBTaGFuZSBXYW5nIGluCm9yZGVyIHRvIGFkZCBvciByZW1vdmUgbWFp
+bnRhaW5lcnMuIFJlbW92aW5nIGN1cnJlbnQgbWFpbnRhaW5lcnMgYW5kCmFkZGluZyBMdWthc3og
+aW4gdGhlIHNhbWUgcGF0Y2ggd291bGQgc3RpbGwgcmVxdWlyZSBhbiBBY2sgZnJvbSB0aGUKY3Vy
+cmVudCBvd25lcnMuCgpIb3BlIHRoaXMgbWFrZXMgc2Vuc2UsIFJvZ2VyLgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
