@@ -2,114 +2,85 @@ Return-Path: <SRS0=h4f+=V2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-13.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 40108C7618B
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 13:34:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 883D1C433FF
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 13:37:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1AECE206E0
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 13:34:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1AECE206E0
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 58764206DD
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 13:37:24 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="n3j6ChF5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 58764206DD
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hs5nA-0006VQ-1q; Mon, 29 Jul 2019 13:34:20 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=hW4D=V2=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hs5n8-0006VL-PF
- for xen-devel@lists.xenproject.org; Mon, 29 Jul 2019 13:34:18 +0000
-X-Inumbo-ID: 8fc0f6f8-b205-11e9-8980-bc764e045a96
-Received: from m4a0039g.houston.softwaregrp.com (unknown [15.124.2.85])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 8fc0f6f8-b205-11e9-8980-bc764e045a96;
- Mon, 29 Jul 2019 13:34:17 +0000 (UTC)
-Received: FROM m4a0039g.houston.softwaregrp.com (15.120.17.146) BY
- m4a0039g.houston.softwaregrp.com WITH ESMTP; 
- Mon, 29 Jul 2019 13:34:14 +0000
-Received: from M9W0068.microfocus.com (2002:f79:bf::f79:bf) by
- M4W0334.microfocus.com (2002:f78:1192::f78:1192) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Mon, 29 Jul 2019 13:17:31 +0000
-Received: from NAM01-BN3-obe.outbound.protection.outlook.com (15.124.72.10) by
- M9W0068.microfocus.com (15.121.0.191) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Mon, 29 Jul 2019 13:17:30 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hQfdRIcVA2WA3fVykNwjwXN4pmNSR7E1PkFoFF611pvG6yKThL3QD6JgvLQJdUqXfyyh6YpJxtrvXXU1O+DS9QwiR6/nznvpz5kX1q7rJWuTQs0i9QF92GX1YdYorhWeE6gL9G2zDPX1RJgJWmlBdw40jhX6s5sBnQ/9dHwGblhN/jM2lM9UqPje1huZRRnqRnuZsPJdt9idgUgmlEGVIayNqj1EWJZWkSoKjjfBFiD352pwTe1XzshcmCBSpLxpAaHUrBuWO9CFzbVI3FvTom4Ds7RwJ2qc0TQipgBW+JgI3rK+4hLuHSkQYcq0svtAnOR/eGMSaphuHPT2mpZrvA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tt5XUBdvJz1n6bhglTvkGfXvGb4wW3QuvCq6w7zNB3o=;
- b=ZhBRnyjRPqoqKxpPejudgLBleLBDGyORPjO9GWxXOqUOBO/GJIpKCQ3xDrpFX0+JuPtsn+w4uqbV1oGJSrHbK03/XgRLxI0rY3BpFE/hGkEYUay3POLQ9WuUkoX9tZeW/5Z/o+kaoJzcmLG87WWmdI2lP1lqDIo3QB1bIKEFN585/3XFMvo1lL+ICpeCJr8oyn9a/HSFl3KE/J+PRaXdl2Oy9Q8sFVsJJQw1SOhg13Nu1EsYKJjOzzDVQi3yNB3DefQbEh+KyBlQoPLMAWHkIdGRBfauWWWVMsU7uG9bE3Gkr08NU1eOdEMTtdRKb5BRzLT2XyrXh4sLCmUjbnoqJQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
- smtp.mailfrom=suse.com;dmarc=pass action=none header.from=suse.com;dkim=pass
- header.d=suse.com;arc=none
-Received: from BY5PR18MB3394.namprd18.prod.outlook.com (10.255.139.95) by
- BY5PR18MB3187.namprd18.prod.outlook.com (10.255.139.221) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2115.15; Mon, 29 Jul 2019 13:17:29 +0000
-Received: from BY5PR18MB3394.namprd18.prod.outlook.com
- ([fe80::a4f0:4f46:c076:f74b]) by BY5PR18MB3394.namprd18.prod.outlook.com
- ([fe80::a4f0:4f46:c076:f74b%7]) with mapi id 15.20.2115.005; Mon, 29 Jul 2019
- 13:17:29 +0000
-From: Jan Beulich <JBeulich@suse.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Thread-Topic: [Xen-devel] [PATCH v2 1/2] xen/link: Introduce
- .bss.percpu.page_aligned
-Thread-Index: AQHVQ/FyveAxY3hrR029jOQeDtxaXKbhmAYA
-Date: Mon, 29 Jul 2019 13:17:29 +0000
-Message-ID: <a27cfac4-231b-e06c-11a9-5bf8f839fee2@suse.com>
-References: <20190726203222.4833-1-andrew.cooper3@citrix.com>
- <20190726203222.4833-2-andrew.cooper3@citrix.com>
-In-Reply-To: <20190726203222.4833-2-andrew.cooper3@citrix.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: DB8PR06CA0038.eurprd06.prod.outlook.com
- (2603:10a6:10:120::12) To BY5PR18MB3394.namprd18.prod.outlook.com
- (2603:10b6:a03:194::31)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=JBeulich@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [87.234.252.170]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 8e3dbdc4-1ee8-45f2-1bd4-08d714271b88
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
- SRVR:BY5PR18MB3187; 
-x-ms-traffictypediagnostic: BY5PR18MB3187:
-x-microsoft-antispam-prvs: <BY5PR18MB318755311AE04849CEA069FDB3DD0@BY5PR18MB3187.namprd18.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 01136D2D90
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(136003)(346002)(366004)(376002)(39860400002)(396003)(189003)(199004)(6506007)(256004)(25786009)(53546011)(186003)(102836004)(26005)(386003)(6246003)(14444005)(3846002)(8936002)(80792005)(8676002)(81156014)(6116002)(81166006)(4326008)(305945005)(66066001)(486006)(99286004)(31686004)(11346002)(446003)(2616005)(476003)(76176011)(52116002)(68736007)(316002)(6916009)(66946007)(36756003)(54906003)(6436002)(86362001)(6512007)(66476007)(31696002)(229853002)(66556008)(66446008)(64756008)(71190400001)(71200400001)(5660300002)(2906002)(6486002)(7736002)(14454004)(478600001)(53936002)(142923001);
- DIR:OUT; SFP:1102; SCL:1; SRVR:BY5PR18MB3187;
- H:BY5PR18MB3394.namprd18.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: suse.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: Ggt6e3rsGYVcZkMdBi1Ud2mslYjisxpbci7bGSll4rvBSp/dz/WrIz4ZyvsV/+p7iTOeAlP3LCfwn98yTI8RNiWO5qg+CgUwg9jQWnjQdfcHq2vop1S5fIEVYJX6/5rCF6eJ5wTzGISGAEmMbsrAhUSKwZLFt9akpdv5dsRCN8DeJsF7v0jg8THimeQwwLa3bKAYs0dmvaN1Anf1xdcDcHDP1+nfQgIjDLmgUclA6NszvAx/JOqlPKgR9nkldSocv0/DPQTPTLQSjtlJJhjR4K+Eues1SS5KkAO0oCUwkbhCm6cMORX03lJNC3M/L2OH595KroK5P3NjD1cN6S3GzfIC6YTl2B1w7tvvVClKyoYrlJUUhKYxtNlYliehKnDd7zhb5BrBoi3vmWuV1bhd0DshBci1pdWVcOtVO0WyTZI=
-Content-ID: <D0CD0E3C1E6F474E886958F632BE04D0@namprd18.prod.outlook.com>
+	id 1hs5pd-0006dM-LV; Mon, 29 Jul 2019 13:36:53 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=SrOz=V2=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hs5pc-0006dG-S0
+ for xen-devel@lists.xenproject.org; Mon, 29 Jul 2019 13:36:53 +0000
+X-Inumbo-ID: eaf39534-b205-11e9-b2e9-234f5878d7c8
+Received: from new3-smtp.messagingengine.com (unknown [66.111.4.229])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id eaf39534-b205-11e9-b2e9-234f5878d7c8;
+ Mon, 29 Jul 2019 13:36:49 +0000 (UTC)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 954BE25C7;
+ Mon, 29 Jul 2019 09:36:49 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute7.internal (MEProxy); Mon, 29 Jul 2019 09:36:49 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=RyaC16
+ PSTOvq/k1p7u852FYetjzj++iB3xERHs/E83U=; b=n3j6ChF5mFB5vfXvL0hSko
+ nPB4CTDOB9OdwGdBCP4FFTmO0cMekFHcA8p/MRZebqIYuvpmUgZkV/pk/jTEUSZL
+ glzDJO3zNlpQ3lrrbSKvk1yFntvkfhx7DCHNOLKGtWRrYxwM3i/pvJP6ReTAHwLG
+ izN6+aTE5GVADVz3OyEQWznY0+f12C2Ajg+FyVZrn38tR9g7u2YwkVsbIzKaL6zB
+ SAY25nROjsdDjX4uAs8LuyF0f9PAwv3LmAugfXT9mpsDgOIdA9La/wPFBFGkQ2+8
+ /XnuXzNRWWq1nZ5hcFq00019QOL2xybRw3/tzmnR0+HUw8WzdTmgEsYfPMM4owSg
+ ==
+X-ME-Sender: <xms:cPY-XQTpzd_4FH8IQQnDIH5_UnLjHGiZYrFc-o8_DhJ2D8uGYgMbww>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrledugdeiiecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpeffhffvuffkfhggtggujggfsehgtderredtreejnecuhfhrohhmpeforghrvghk
+ ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+ hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucffohhmrghinhepghhithhhuhgs
+ rdgtohhmpdhgrhgrnhhtshdrhhhofienucfkphepledurdeihedrfeegrdeffeenucfrrg
+ hrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhn
+ ghhslhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedt
+X-ME-Proxy: <xmx:cPY-XYjf4ekNALU5d0xR9sr4N-cZt07Q1tYws3mrRSUuK8w9pJtFow>
+ <xmx:cPY-XcssA5KSWNFrorGh0KSoRqS_YuHPGilEryLCzUDJqQCsptJiPg>
+ <xmx:cPY-XazNBPefQNewECx2hzSoCeGN6tj0uV13FS35c56kBRp0pSC25A>
+ <xmx:cfY-XYKf06DFSlRIxrqZvsjkOYRfjFvB7PLHXtA5x1chHcq6AHViIA>
+Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 301DB80061;
+ Mon, 29 Jul 2019 09:36:47 -0400 (EDT)
+Date: Mon, 29 Jul 2019 15:36:42 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+To: Souptick Joarder <jrdr.linux@gmail.com>
+Message-ID: <20190729133642.GQ1250@mail-itl>
+References: <20190215024830.GA26477@jordon-HP-15-Notebook-PC>
+ <20190728180611.GA20589@mail-itl>
+ <CAFqt6zaMDnpB-RuapQAyYAub1t7oSdHH_pTD=f5k-s327ZvqMA@mail.gmail.com>
+ <CAFqt6zY+07JBxAVfMqb+X78mXwFOj2VBh0nbR2tGnQOP9RrNkQ@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8e3dbdc4-1ee8-45f2-1bd4-08d714271b88
-X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Jul 2019 13:17:29.5628 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: JBeulich@suse.com
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR18MB3187
-X-OriginatorOrg: suse.com
-Subject: Re: [Xen-devel] [PATCH v2 1/2] xen/link: Introduce
- .bss.percpu.page_aligned
+In-Reply-To: <CAFqt6zY+07JBxAVfMqb+X78mXwFOj2VBh0nbR2tGnQOP9RrNkQ@mail.gmail.com>
+User-Agent: Mutt/1.12+29 (a621eaed) (2019-06-14)
+Subject: Re: [Xen-devel] [PATCH v4 8/9] xen/gntdev.c: Convert to use
+ vm_map_pages()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -120,57 +91,252 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Julien Grall <julien.grall@arm.com>,
- Xen-devel <xen-devel@lists.xenproject.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Juergen Gross <jgross@suse.com>, Michal Hocko <mhocko@suse.com>,
+ Russell King - ARM Linux <linux@armlinux.org.uk>,
+ Matthew Wilcox <willy@infradead.org>, linux-kernel@vger.kernel.org,
+ Linux-MM <linux-mm@kvack.org>, xen-devel@lists.xenproject.org,
+ Andrew Morton <akpm@linux-foundation.org>, robin.murphy@arm.com,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Content-Type: multipart/mixed; boundary="===============0467873109207320521=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMjYuMDcuMjAxOSAyMjozMiwgQW5kcmV3IENvb3BlciB3cm90ZToNCj4gRnV0dXJlIGNoYW5n
-ZXMgYXJlIGdvaW5nIHRvIG5lZWQgdG8gcGFnZSBhbGlnbiBzb21lIHBlcmNwdSBkYXRhLg0KPiAN
-Cj4gVGhpcyBtZWFucyB0aGF0IHRoZSBwZXJjcHUgYXJlYSBuZWVkcyBzdWl0YWJseSBhbGlnbmlu
-ZyBpbiB0aGUgQlNTIHNvIENQVTAgaGFzDQo+IGNvcnJlY3RseSBhbGlnbmVkIGRhdGEuICBTaHVm
-ZmxlIHRoZSBleGFjdCBsaW5rIG9yZGVyIG9mIGl0ZW1zIHdpdGhpbiB0aGUgQlNTDQo+IHRvIGdp
-dmUgLmJzcy5wZXJjcHUucGFnZV9hbGlnbmVkIGFwcHJvcHJpYXRlIGFsaWdubWVudC4NCj4gDQo+
-IEluIGFkZGl0aW9uLCB3ZSBuZWVkIHRvIGJlIGFibGUgdG8gc3BlY2lmeSBhbiBhbGlnbm1lbnQg
-YXR0cmlidXRlIHRvDQo+IF9fREVGSU5FX1BFUl9DUFUoKS4gIFJld29yayBpdCBzbyB0aGUgY2Fs
-bGVyIHBhc3NlcyBpbiBhbGwgYXR0cmlidXRlcywgYW5kDQo+IGFkanVzdCBERUZJTkVfUEVSX0NQ
-VXssX1JFQURfTU9TVExZfSgpIHRvIG1hdGNoLiAgVGhpcyBoYXMgdGhlIGFkZGVkIGJvbnVzDQo+
-IHRoYXQgaXQgaXMgbm93IHBvc3NpYmxlIHRvIGdyZXAgZm9yIC5ic3MucGVyY3B1IGFuZCBmaW5k
-IGFsbCB0aGUgdXNlcnMuDQoNCkFuZCBpdCBoYXMgdGhlIG1lYW5pbmdmdWwgZG93bnNpZGUgb2Yg
-bm93IGV2ZXJ5IHVzZSBzaXRlIG5lZWRpbmcgdG8gZ2V0DQp0aGluZ3MgcmlnaHQuIFRoaXMgaXMg
-bm90IHJlYWxseSBhIHByb2JsZW0gc29sZWx5IGJlY2F1c2UNCl9fREVGSU5FX1BFUl9DUFUoKSBp
-cyBhIGhlbHBlciBmb3IgYWxsIHRoZSByZWFsIERFRklORV9QRVJfQ1BVKigpLiBUaGUNCmdyZXAt
-aW5nIGFyZ3VtZW50IGlzIG5vdCBhIHJlYWxseSBtZWFuaW5nZnVsIG9uZSBpbW8gYW55d2F5IC0g
-eW91IGNvdWxkDQphcyB3ZWxsIGdyZXAgZm9yIERFRklORV9QRVJfQ1BVLg0KDQpBbnl3YXkgLSB0
-aGlzIGlzIG5vdCBhbiBvYmplY3Rpb24gdG8gdGhlIGNob3NlbiBhcHByb2FjaCwganVzdCBhIHJl
-bWFyay4NCkknZCBsaWtlIHRvIG5vdGUgdGhvdWdoIHRoYXQgeW91IGV4cGxpY2l0bHkgdW5kbyBz
-b21ldGhpbmcgSSBoYWQgZG9uZQ0KKGlpcmMpLCBhbmQgSSBtYXkgZmluZCBvZGQgd2hlbiBydW5u
-aW5nIGludG8gYWdhaW4gZG93biB0aGUgcm9hZCwNCnBvdGVudGlhbGx5IHJlc3VsdGluZyBpbiBh
-biAidW5kby10aGUtdW5kbyIgcGF0Y2guIEkgdGhpbmsgd2UgcmVhbGx5DQpuZWVkIHRvIGZpbmQg
-YSB3YXkgdG8gYXZvaWQgcmUtZG9pbmcgdGhpbmdzIHRoYXQgd2VyZSBkb25lIGludGVudGlvbmFs
-bHkNCmluIGNlcnRhaW4gd2F5cywgd2hlbiB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuIHZhcmlhbnRz
-IGlzIG1lcmVseSBwZXJzb25hbA0KdGFzdGUuDQoNCj4gLS0tIGEveGVuL2FyY2gveDg2L3hlbi5s
-ZHMuUw0KPiArKysgYi94ZW4vYXJjaC94ODYveGVuLmxkcy5TDQo+IEBAIC0yOTMsMTQgKzI5Mywx
-NSBAQCBTRUNUSU9OUw0KPiAgICAgICAgICBfX2Jzc19zdGFydCA9IC47DQo+ICAgICAgICAgICoo
-LmJzcy5zdGFja19hbGlnbmVkKQ0KPiAgICAgICAgICAqKC5ic3MucGFnZV9hbGlnbmVkKikNCj4g
-LSAgICAgICAqKC5ic3MpDQo+IC0gICAgICAgLiA9IEFMSUdOKFNNUF9DQUNIRV9CWVRFUyk7DQo+
-ICAgICAgICAgIF9fcGVyX2NwdV9zdGFydCA9IC47DQo+ICsgICAgICAgKiguYnNzLnBlcmNwdS5w
-YWdlX2FsaWduZWQpDQoNCk5vdyB0aGlzIGlzIGEgY2FzZSB3aGVyZSBJIHRoaW5rIGFuIGV4cGxp
-Y2l0IEFMSUdOKFBBR0VfU0laRSkgd291bGQgYmUNCmRlc2lyYWJsZTogSWYgdGhlIGxhc3QgaXRl
-bSBpbiAuYnNzLnBhZ2VfYWxpZ25lZCB3YXMgbm90IGEgbXVsdGlwbGUgb2YNClBBR0VfU0laRSBp
-biBzaXplLCB0aGVuIF9fcGVyX2NwdV9zdGFydCB3b3VsZCBsaXZlIG5lZWRsZXNzbHkgZWFybHks
-DQpwb3NzaWJseSBpbmNyZWFzaW5nIG91ciBtZW1vcnkgb3ZlcmhlYWQgYnkgYSBwYWdlIHBlciBD
-UFUgZm9yIG5vIGdhaW4NCmF0IGFsbC4NCg0KPiAgICAgICAgICAqKC5ic3MucGVyY3B1KQ0KPiAg
-ICAgICAgICAuID0gQUxJR04oU01QX0NBQ0hFX0JZVEVTKTsNCj4gICAgICAgICAgKiguYnNzLnBl
-cmNwdS5yZWFkX21vc3RseSkNCj4gICAgICAgICAgLiA9IEFMSUdOKFNNUF9DQUNIRV9CWVRFUyk7
-DQo+ICAgICAgICAgIF9fcGVyX2NwdV9kYXRhX2VuZCA9IC47DQo+ICsgICAgICAgKiguYnNzKQ0K
-PiArICAgICAgIC4gPSBBTElHTihTTVBfQ0FDSEVfQllURVMpOw0KPiAgICAgICAgICBfX2Jzc19l
-bmQgPSAuOw0KDQpXaHkgaXMgdGhpcyBsYXN0IEFMSUdOKCkgbmVlZGVkPw0KDQpKYW4NCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWls
-aW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVu
-cHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============0467873109207320521==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="9ZRxqsK4bBEmgNeO"
+Content-Disposition: inline
+
+
+--9ZRxqsK4bBEmgNeO
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jul 29, 2019 at 02:02:54PM +0530, Souptick Joarder wrote:
+> On Mon, Jul 29, 2019 at 1:35 PM Souptick Joarder <jrdr.linux@gmail.com> w=
+rote:
+> >
+> > On Sun, Jul 28, 2019 at 11:36 PM Marek Marczykowski-G=C3=B3recki
+> > <marmarek@invisiblethingslab.com> wrote:
+> > >
+> > > On Fri, Feb 15, 2019 at 08:18:31AM +0530, Souptick Joarder wrote:
+> > > > Convert to use vm_map_pages() to map range of kernel
+> > > > memory to user vma.
+> > > >
+> > > > map->count is passed to vm_map_pages() and internal API
+> > > > verify map->count against count ( count =3D vma_pages(vma))
+> > > > for page array boundary overrun condition.
+> > >
+> > > This commit breaks gntdev driver. If vma->vm_pgoff > 0, vm_map_pages
+> > > will:
+> > >  - use map->pages starting at vma->vm_pgoff instead of 0
+> >
+> > The actual code ignores vma->vm_pgoff > 0 scenario and mapped
+> > the entire map->pages[i]. Why the entire map->pages[i] needs to be mapp=
+ed
+> > if vma->vm_pgoff > 0 (in original code) ?
+
+vma->vm_pgoff is used as index passed to gntdev_find_map_index. It's
+basically (ab)using this parameter for "which grant reference to map".
+
+> > are you referring to set vma->vm_pgoff =3D 0 irrespective of value pass=
+ed
+> > from user space ? If yes, using vm_map_pages_zero() is an alternate
+> > option.
+
+Yes, that should work.
+
+> > >  - verify map->count against vma_pages()+vma->vm_pgoff instead of just
+> > >    vma_pages().
+> >
+> > In original code ->
+> >
+> > diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
+> > index 559d4b7f807d..469dfbd6cf90 100644
+> > --- a/drivers/xen/gntdev.c
+> > +++ b/drivers/xen/gntdev.c
+> > @@ -1084,7 +1084,7 @@ static int gntdev_mmap(struct file *flip, struct
+> > vm_area_struct *vma)
+> > int index =3D vma->vm_pgoff;
+> > int count =3D vma_pages(vma);
+> >
+> > Count is user passed value.
+> >
+> > struct gntdev_grant_map *map;
+> > - int i, err =3D -EINVAL;
+> > + int err =3D -EINVAL;
+> > if ((vma->vm_flags & VM_WRITE) && !(vma->vm_flags & VM_SHARED))
+> > return -EINVAL;
+> > @@ -1145,12 +1145,9 @@ static int gntdev_mmap(struct file *flip,
+> > struct vm_area_struct *vma)
+> > goto out_put_map;
+> > if (!use_ptemod) {
+> > - for (i =3D 0; i < count; i++) {
+> > - err =3D vm_insert_page(vma, vma->vm_start + i*PAGE_SIZE,
+> > - map->pages[i]);
+> >
+> > and when count > i , we end up with trying to map memory outside
+> > boundary of map->pages[i], which was not correct.
+>=20
+> typo.
+> s/count > i / count > map->count
+
+gntdev_find_map_index verifies it. Specifically, it looks for a map matching
+both index and count.
+
+> >
+> > - if (err)
+> > - goto out_put_map;
+> > - }
+> > + err =3D vm_map_pages(vma, map->pages, map->count);
+> > + if (err)
+> > + goto out_put_map;
+> >
+> > With this commit, inside __vm_map_pages(), we have addressed this scena=
+rio.
+> >
+> > +static int __vm_map_pages(struct vm_area_struct *vma, struct page **pa=
+ges,
+> > + unsigned long num, unsigned long offset)
+> > +{
+> > + unsigned long count =3D vma_pages(vma);
+> > + unsigned long uaddr =3D vma->vm_start;
+> > + int ret, i;
+> > +
+> > + /* Fail if the user requested offset is beyond the end of the object =
+*/
+> > + if (offset > num)
+> > + return -ENXIO;
+> > +
+> > + /* Fail if the user requested size exceeds available object size */
+> > + if (count > num - offset)
+> > + return -ENXIO;
+> >
+> > By checking count > num -offset. (considering vma->vm_pgoff !=3D 0 as w=
+ell).
+> > So we will never cross the boundary of map->pages[i].
+> >
+> >
+> > >
+> > > In practice, this breaks using a single gntdev FD for mapping multiple
+> > > grants.
+> >
+> > How ?
+
+gntdev uses vma->vm_pgoff to select which grant entry should be mapped.
+map struct returned by gntdev_find_map_index() describes just the pages
+to be mapped. Specifically map->pages[0] should be mapped at
+vma->vm_start, not vma->vm_start+vma->vm_pgoff*PAGE_SIZE.
+
+When trying to map grant with index (aka vma->vm_pgoff) > 1,
+__vm_map_pages() will refuse to map it because it will expect map->count
+to be at least vma_pages(vma)+vma->vm_pgoff, while it is exactly
+vma_pages(vma).
+
+> > > It looks like vm_map_pages() is not a good fit for this code and IMO =
+it
+> > > should be reverted.
+> >
+> > Did you hit any issue around this code in real time ?
+
+Yes, relevant strace output:
+[pid   857] ioctl(7, IOCTL_GNTDEV_MAP_GRANT_REF, 0x7ffd3407b6d0) =3D 0
+[pid   857] mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_SHARED, 7, 0) =3D 0x=
+777f1211b000
+[pid   857] ioctl(7, IOCTL_GNTDEV_SET_UNMAP_NOTIFY, 0x7ffd3407b710) =3D 0
+[pid   857] ioctl(7, IOCTL_GNTDEV_MAP_GRANT_REF, 0x7ffd3407b6d0) =3D 0
+[pid   857] mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_SHARED, 7, 0x1000) =
+=3D -1 ENXIO (No such device or address)
+
+details here:
+https://github.com/QubesOS/qubes-issues/issues/5199
+
+
+> >
+> >
+> > >
+> > > > Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
+> > > > Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> > > > ---
+> > > >  drivers/xen/gntdev.c | 11 ++++-------
+> > > >  1 file changed, 4 insertions(+), 7 deletions(-)
+> > > >
+> > > > diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
+> > > > index 5efc5ee..5d64262 100644
+> > > > --- a/drivers/xen/gntdev.c
+> > > > +++ b/drivers/xen/gntdev.c
+> > > > @@ -1084,7 +1084,7 @@ static int gntdev_mmap(struct file *flip, str=
+uct vm_area_struct *vma)
+> > > >       int index =3D vma->vm_pgoff;
+> > > >       int count =3D vma_pages(vma);
+> > > >       struct gntdev_grant_map *map;
+> > > > -     int i, err =3D -EINVAL;
+> > > > +     int err =3D -EINVAL;
+> > > >
+> > > >       if ((vma->vm_flags & VM_WRITE) && !(vma->vm_flags & VM_SHARED=
+))
+> > > >               return -EINVAL;
+> > > > @@ -1145,12 +1145,9 @@ static int gntdev_mmap(struct file *flip, st=
+ruct vm_area_struct *vma)
+> > > >               goto out_put_map;
+> > > >
+> > > >       if (!use_ptemod) {
+> > > > -             for (i =3D 0; i < count; i++) {
+> > > > -                     err =3D vm_insert_page(vma, vma->vm_start + i=
+*PAGE_SIZE,
+> > > > -                             map->pages[i]);
+> > > > -                     if (err)
+> > > > -                             goto out_put_map;
+> > > > -             }
+> > > > +             err =3D vm_map_pages(vma, map->pages, map->count);
+> > > > +             if (err)
+> > > > +                     goto out_put_map;
+> > > >       } else {
+> > > >  #ifdef CONFIG_X86
+> > > >               /*
+> > >
+> > > --
+> > > Best Regards,
+> > > Marek Marczykowski-G=C3=B3recki
+> > > Invisible Things Lab
+> > > A: Because it messes up the order in which people normally read text.
+> > > Q: Why is top-posting such a bad thing?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--9ZRxqsK4bBEmgNeO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl0+9mwACgkQ24/THMrX
+1yyp+Qf7BgjpKR5VnF94lyc3cB60I75O5vek4tH7R8v3YrusLm18zU20w/OBv6Dv
+ZScjcJEpqQ9rorNTxSleltLG+zX/qPpv5Aqhh5hWqPKNCml8NqEI8KVQrVORk15x
+c8YZDOGG4lMgONdcQyxwb83jySoRjfy0P9bj4N4impyB0/d4vgPZGsXbyn+EufdO
+Nmfc6DrN7bu2ebW7c2y4DJlBiFj7g/PIdkooFaIpz1yh6XuWTkOotXOI/gt13qvy
+9TWXPOTcRhGZfxTRsyDTcW/7qzp7hQWM8aLFXEEoZu6wdWfMh6i8AXJzpEgfTxeb
+Wgqm5ngGbeXCUyKXVpMv+PYRSoCp6A==
+=9+m6
+-----END PGP SIGNATURE-----
+
+--9ZRxqsK4bBEmgNeO--
+
+
+--===============0467873109207320521==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0467873109207320521==--
+
