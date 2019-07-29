@@ -7,31 +7,30 @@ X-Spam-Status: No, score=-5.2 required=3.0 tests=FROM_EXCESS_BASE64,
 	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 361BDC7618B
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 08:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 446C9C7618B
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 08:57:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E4DF2070D
-	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 08:56:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E4DF2070D
+	by mail.kernel.org (Postfix) with ESMTPS id 1F3C92070D
+	for <xen-devel@archiver.kernel.org>; Mon, 29 Jul 2019 08:57:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1F3C92070D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hs1Rr-0007OL-5i; Mon, 29 Jul 2019 08:56:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hs1Sz-0007Sy-Hl; Mon, 29 Jul 2019 08:57:13 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=vOtp=V2=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1hs1Rq-0007OE-G4
- for xen-devel@lists.xenproject.org; Mon, 29 Jul 2019 08:56:02 +0000
-X-Inumbo-ID: ae0dbf90-b1de-11e9-99ca-334c921585da
+ id 1hs1Sy-0007Ss-Fl
+ for xen-devel@lists.xenproject.org; Mon, 29 Jul 2019 08:57:12 +0000
+X-Inumbo-ID: d9af6253-b1de-11e9-8980-bc764e045a96
 Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ae0dbf90-b1de-11e9-99ca-334c921585da;
- Mon, 29 Jul 2019 08:55:57 +0000 (UTC)
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id d9af6253-b1de-11e9-8980-bc764e045a96;
+ Mon, 29 Jul 2019 08:57:10 +0000 (UTC)
 Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=roger.pau@citrix.com;
@@ -61,31 +60,31 @@ Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  envelope-from="roger.pau@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: IgMeHxEZGYF46+etFAg1yJ/i/1iDkVXK/c1ss6B47ndaOoSujypW+ndgT6j3u+lcSZ93AMG6TO
- TpNF9EpyErb8OEV8mLaNBzEbyST77ZEl2F832x3Cq+D+wogMbzE63L3WOI3P/ORb7BCmvEPiCY
- 9oN7VU4Tg8WiZ+BHNd9YKL7xJPCol/0NFnDdIMVOu0fDyUPWVVKdR3Ddt3dBKRxpdyZ7UOMre9
- uajXt3j3SUfB8EtbFFNYjPv8OMfqaK795oZDAtYBDwuUejR3b6nnvhCysAxc5UMXZLSw/N9J2O
- c/g=
+IronPort-SDR: nA60j4zBW/2EaEA0ssw2A19K6ABk2jYiXw1hMUlt8wApDO3dBOcvHibbCbpO6MZsuBDKW1oX6O
+ TLbe71KJN1NZmqtymnAcLjp67qMCIxGtYD0R5WJTytBJr4qPfpO3lOt37K8Nz3YmAUAlu0pVm5
+ MHVCX0Y62YikkoibBa2ftjrYTRlGGHtUkxqTJE7egVWA33u7GXx9uC7SSP7W/fCEDTEe4P4rpR
+ D1j6vtTKTz8yr8qu9loZkEazZWmN6oHji9FhoBZW1utPbCRSio6H7PEmhwBI3HznotInQek+jL
+ aW4=
 X-SBRS: 2.7
-X-MesageID: 3664848
+X-MesageID: 3664886
 X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
 X-IronPort-AV: E=Sophos;i="5.64,322,1559534400"; 
-   d="scan'208";a="3664848"
-Date: Mon, 29 Jul 2019 10:55:48 +0200
+   d="scan'208";a="3664886"
+Date: Mon, 29 Jul 2019 10:56:57 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <20190729085548.ctmpyyg4la44pqhx@Air-de-Roger>
+Message-ID: <20190729085657.ko4n4l7zkvvpeg7d@Air-de-Roger>
 References: <20190726210854.6408-1-andrew.cooper3@citrix.com>
- <20190726210854.6408-3-andrew.cooper3@citrix.com>
+ <20190726210854.6408-4-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20190726210854.6408-3-andrew.cooper3@citrix.com>
+In-Reply-To: <20190726210854.6408-4-andrew.cooper3@citrix.com>
 User-Agent: NeoMutt/20180716
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH 2/4] xen/percpu: Drop unused xen/percpu.h
+Subject: Re: [Xen-devel] [PATCH 3/4] xen/percpu: Drop unused asm/percpu.h
  includes
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -106,12 +105,13 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gRnJpLCBKdWwgMjYsIDIwMTkgYXQgMTA6MDg6NTJQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
-cm90ZToKPiBOb25lIG9mIHRoZXNlIGhlYWRlcnMgdXNlIGFueSBQRVJfQ1BVKCkgaW5mcmFzdHJ1
-Y3R1cmUuCj4gCj4geGVuL3J3bG9jay5oIGhvd2V2ZXIgZG9lcywgYW5kIHBpY2tlZCBpdCB1cCB0
-cmFuc2l0aXZlbHkgdmlhIHhlbi9zcGlubG9jay5oLAo+IHNvIGluY2x1ZGUgaXQgcHJvcGVybHku
-Cj4gCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4
-LmNvbT4KClJldmlld2VkLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVAY2l0cml4LmNv
-bT4KClRoYW5rcy4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gRnJpLCBKdWwgMjYsIDIwMTkgYXQgMTA6MDg6NTNQTSArMDEwMCwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPiBUaGVzZSBmaWxlcyBlaXRoZXIgZG9uJ3QgdXNlIGFueSBQRVJfQ1BVKCkgaW5mcmFz
+dHJ1Y3R1cmUgYXQgYWxsLCBvciB1c2UKPiBERUZJTkVfUEVSX0NQVV8qKCkuICBUaGlzIGlzIGRl
+Y2xhcmVkIGluIHhlbi9wZXJjcHUuaCwgbm90IGFzbS9wZXJjcHUuaCwgd2hpY2gKPiBtZWFucyB0
+aGF0IHhlbi9wZXJjcHUuaCBpcyBpbmNsdWRlZCB2aWEgYSBkaWZmZXJlbnQgcGF0aC4KPiAKPiBT
+aWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgoK
+UmV2aWV3ZWQtYnk6IFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKVGhh
+bmtzLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVu
+LWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6
+Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
