@@ -2,69 +2,115 @@ Return-Path: <SRS0=0a2y=V3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DCC3C433FF
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 09:18:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9C80C433FF
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 09:21:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFF3620665
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 09:18:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFF3620665
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7D3002087F
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 09:21:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D3002087F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hsOGU-0005yf-MI; Tue, 30 Jul 2019 09:17:50 +0000
+	id 1hsOJU-0006gx-61; Tue, 30 Jul 2019 09:20:56 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=PKz9=V3=intel.com=lukasz.hawrylko@srs-us1.protection.inumbo.net>)
- id 1hsOGT-0005yY-QV
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2019 09:17:49 +0000
-X-Inumbo-ID: e5b214ee-b2aa-11e9-8980-bc764e045a96
-Received: from mga11.intel.com (unknown [192.55.52.93])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=zL4X=V3=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hsOJS-0006gr-8E
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2019 09:20:54 +0000
+X-Inumbo-ID: 50439a1f-b2ab-11e9-8980-bc764e045a96
+Received: from m4a0041g.houston.softwaregrp.com (unknown [15.124.2.87])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id e5b214ee-b2aa-11e9-8980-bc764e045a96;
- Tue, 30 Jul 2019 09:17:48 +0000 (UTC)
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Content-Type: multipart/mixed; boundary="===============4504839366276486366=="
-MIME-Version: 1.0
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 30 Jul 2019 02:17:46 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,326,1559545200"; 
- d="p7s'?scan'208";a="255556305"
-Received: from irsmsx107.ger.corp.intel.com ([163.33.3.99])
- by orsmga001.jf.intel.com with ESMTP; 30 Jul 2019 02:17:44 -0700
-Received: from irsmsx104.ger.corp.intel.com ([169.254.5.40]) by
- IRSMSX107.ger.corp.intel.com ([169.254.10.251]) with mapi id 14.03.0439.000;
- Tue, 30 Jul 2019 10:17:43 +0100
-From: "Hawrylko, Lukasz" <lukasz.hawrylko@intel.com>
-To: "JBeulich@suse.com" <JBeulich@suse.com>, "julien.grall@arm.com"
- <julien.grall@arm.com>
-Thread-Topic: [PATCH] Intel TXT: add reviewer, move to Odd Fixes state
-Thread-Index: AQHVRqQLKu2IE1z0Fk+wHuOLCyyd5abiw9IAgAAG94CAAALxgIAAA4IA
-Date: Tue, 30 Jul 2019 09:17:42 +0000
-Message-ID: <9df036bc31653c2194c232751be013e6ca10b62b.camel@intel.com>
-References: <20190730065637.3802-1-lukasz.hawrylko@intel.com>
- <5e5c945a-6bdb-2776-e2db-b11bbeb74bf5@suse.com>
- <d216b609-353d-e4c7-fdea-e2e63b175bb8@arm.com>
- <6b786dc3-f6d0-8536-0291-4f0de7f673b8@suse.com>
-In-Reply-To: <6b786dc3-f6d0-8536-0291-4f0de7f673b8@suse.com>
+ id 50439a1f-b2ab-11e9-8980-bc764e045a96;
+ Tue, 30 Jul 2019 09:20:52 +0000 (UTC)
+Received: FROM m4a0041g.houston.softwaregrp.com (15.120.17.146) BY
+ m4a0041g.houston.softwaregrp.com WITH ESMTP; 
+ Tue, 30 Jul 2019 09:20:46 +0000
+Received: from M4W0335.microfocus.com (2002:f78:1193::f78:1193) by
+ M4W0334.microfocus.com (2002:f78:1192::f78:1192) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10; Tue, 30 Jul 2019 09:14:08 +0000
+Received: from NAM02-BL2-obe.outbound.protection.outlook.com (15.124.8.13) by
+ M4W0335.microfocus.com (15.120.17.147) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.1591.10 via Frontend Transport; Tue, 30 Jul 2019 09:14:08 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=TDj5UZCE1ZnFavihqa+6CENc2+u9BUS/dDfKYdDZr8LIcc94UpVixjrBB33xwv15lxjEviVLIp52yOAf+/OGrd18qsScPRBIw0mzkK05OhjIi55KpZayVMZ1WjR9IaJaC9So6Al9Ylb2qps3RpjBqbicQZIcAOLmhHbuS7XRmpBAphR7afuYCNJt9h2PQ3cQFrf2cxxLwkD/j7EID3J62u363/M8lRCNXpzo0XfybiPZ/+pACPuYTWMS4HsUPsFZzKrngpNJo0aqHh7e2lRrd0CZt0cx4egthUkWCJkAKeXMnnf0MKl+5eSw0AR6bIaogCqYkL/umdxkecXcsU8dNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6He+XytxQhKUuashEWjYp44OBZM4dzo4Y/63Bq9oTdU=;
+ b=WXivxwzhKaYIRijtseFxNW4xSrY1ENJIlmytkfm5ri1SzqCebjohIXVuD/g43fPGIp7AE0tUXXfWV0MGSvI4Xl2QbazWu7lqHqG11mo0lksTFqXb2IdDJs8N+ig+6mXoVXfY8h25jtdtIGOB9Htm6wNU4X/MCWfYgiQquK/zH3ToMa5k561IcBfy7OxCgc98PnIh/lwFVFc1sSY+XXJGphnvln/uxG19EcobuAhhC5sSPCFstvUpIwvYq4XeHLtcR6IKFhM2QeLIYm7+77RDGVb0PvEsNMYlQTqy1MkNAxR7RTPRBeoptMlrweJT7UJStKT9tCDLNoalO5NmU1RgpQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1;spf=pass
+ smtp.mailfrom=suse.com;dmarc=pass action=none header.from=suse.com;dkim=pass
+ header.d=suse.com;arc=none
+Received: from BY5PR18MB3394.namprd18.prod.outlook.com (10.255.139.95) by
+ BY5PR18MB3267.namprd18.prod.outlook.com (10.255.138.24) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2115.14; Tue, 30 Jul 2019 09:14:07 +0000
+Received: from BY5PR18MB3394.namprd18.prod.outlook.com
+ ([fe80::a4f0:4f46:c076:f74b]) by BY5PR18MB3394.namprd18.prod.outlook.com
+ ([fe80::a4f0:4f46:c076:f74b%7]) with mapi id 15.20.2115.005; Tue, 30 Jul 2019
+ 09:14:07 +0000
+From: Jan Beulich <JBeulich@suse.com>
+To: Brian Woods <brian.woods@amd.com>, Suravee Suthikulpanit
+ <suravee.suthikulpanit@amd.com>
+Thread-Topic: Ping: [PATCH v4 01/12] AMD/IOMMU: use bit field for extended
+ feature register
+Thread-Index: AQHVQuz0h0YSkgZ2V0CykyBnr4e8Mabi6GcA
+Date: Tue, 30 Jul 2019 09:14:06 +0000
+Message-ID: <c5ed12aa-5754-7820-1ef2-e6d4efa7a35a@suse.com>
+References: <b8ae110a-f94a-4ed2-5cf9-c00ff1c0cb81@suse.com>
+ <bc717f3d-a116-c3de-7864-b21e900e9c34@suse.com>
+In-Reply-To: <bc717f3d-a116-c3de-7864-b21e900e9c34@suse.com>
 Accept-Language: en-US
-X-MS-Has-Attach: yes
+Content-Language: en-US
+X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.102.89.27]
+x-clientproxiedby: DBBPR09CA0028.eurprd09.prod.outlook.com
+ (2603:10a6:10:d4::16) To BY5PR18MB3394.namprd18.prod.outlook.com
+ (2603:10b6:a03:194::31)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=JBeulich@suse.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [87.234.252.170]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 4362ee83-56ca-46d4-3cec-08d714ce460a
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);
+ SRVR:BY5PR18MB3267; 
+x-ms-traffictypediagnostic: BY5PR18MB3267:
+x-microsoft-antispam-prvs: <BY5PR18MB3267613A1BEDA759930F6794B3DC0@BY5PR18MB3267.namprd18.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:2733;
+x-forefront-prvs: 0114FF88F6
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(4636009)(346002)(376002)(136003)(396003)(366004)(39860400002)(189003)(199004)(71200400001)(4744005)(66446008)(64756008)(66556008)(66946007)(66476007)(71190400001)(31696002)(68736007)(8936002)(6436002)(31686004)(6486002)(476003)(86362001)(305945005)(7736002)(14454004)(53936002)(446003)(2616005)(6506007)(25786009)(36756003)(11346002)(54906003)(4326008)(66066001)(186003)(102836004)(99286004)(2906002)(80792005)(5660300002)(6116002)(53546011)(81156014)(478600001)(256004)(8676002)(486006)(81166006)(3846002)(76176011)(6512007)(316002)(52116002)(26005)(386003)(110136005);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:BY5PR18MB3267;
+ H:BY5PR18MB3394.namprd18.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: suse.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: mtva3ppmlMqVL9NE0FiVjL9hMZKWgCTtx9uJU/P2wA8b0ey8WtfSnJtVKjkikTKowqICgjoJolY3bnWimCQVerTzsFbU3zXOFqmUXdRXtVNMOkv/NtLnQ0Z25UtgKbGqiHNyCewmHwK9G6KqjfoCyfR6Cc9bEFhJI9io993jn6ldLV9Vz8xioqVFvfJLheMqW/jLXLkH8uvN9D/g2gtG5Zu7ElrnHo30y0tJZ8EtdQ5E8Hdb2B6DtABvRZTLmdD14peL3u+fpcjFZQudsFx3xtuLS+xtczSYvOk5IhHEAvhqEXoDqqco203disq+GCo/CvpOf3WubYIalJotdeHyRPTHH8Lo4T5w4Kb42SKqq+qJ3IpKcAeQPREYl1xbu475akz7Ommk4yS0j0KwITQu9FlcLhjf9wU/5vxi6LXvf1Y=
+Content-ID: <0B45B2577764FA4F8D7B4F15E7EC671B@namprd18.prod.outlook.com>
 MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH] Intel TXT: add reviewer,
- move to Odd Fixes state
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4362ee83-56ca-46d4-3cec-08d714ce460a
+X-MS-Exchange-CrossTenant-originalarrivaltime: 30 Jul 2019 09:14:06.8957 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: JBeulich@suse.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR18MB3267
+X-OriginatorOrg: suse.com
+Subject: [Xen-devel] Ping: [PATCH v4 01/12] AMD/IOMMU: use bit field for
+ extended feature register
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,239 +121,22 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "sstabellini@kernel.org" <sstabellini@kernel.org>,
- "wl@xen.org" <wl@xen.org>, "konrad.wilk@oracle.com" <konrad.wilk@oracle.com>,
- "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>,
- "andrew.cooper3@citrix.com" <andrew.cooper3@citrix.com>,
- "ian.jackson@eu.citrix.com" <ian.jackson@eu.citrix.com>,
- "tim@xen.org" <tim@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============4504839366276486366==
-Content-Language: en-US
-Content-Type: multipart/signed; micalg=sha-1;
-	protocol="application/x-pkcs7-signature"; boundary="=-t9vGGVdrHGUHDHXVTyT8"
-
---=-t9vGGVdrHGUHDHXVTyT8
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-I have sent request to IT how can I disable this disclaimer. It is added
-by server side for all mails that go outside Intel. I didn't see that
-footer when I read my own mail on mailing list.
-
-Lukasz
-
------Original Message-----
-From: Jan Beulich <JBeulich@suse.com>
-To: Julien Grall <julien.grall@arm.com>
-Cc: xen-devel@lists.xenproject.org <xen-devel@lists.xenproject.org>,
-Andrew Cooper <andrew.cooper3@citrix.com>, George Dunlap <
-George.Dunlap@eu.citrix.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
-Lukasz Hawrylko <lukasz.hawrylko@intel.com>, Stefano Stabellini <
-sstabellini@kernel.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-Tim Deegan <tim@xen.org>, Wei Liu <wl@xen.org>
-Subject: Re: [PATCH] Intel TXT: add reviewer, move to Odd Fixes state
-Date: Tue, 30 Jul 2019 09:05:09 +0000
-
-On 30.07.2019 10:54, Julien Grall wrote:
-> On 7/30/19 9:29 AM, Jan Beulich wrote:
-> > On 30.07.2019 08:56, Lukasz Hawrylko wrote:
-> > > Support for Intel TXT has orphaned status right now because
-> > > no active maintainter is listed. Adding myself as reviewer
-> > > and moving it to Odd Fixes state.
-> > >=20
-> > > Signed-off-by: Lukasz Hawrylko <
-> > > lukasz.hawrylko@intel.com
-> > > >
-> > > ---
-> > >    MAINTAINERS | 3 ++-
-> > >    1 file changed, 2 insertions(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > > index 89a01b710b..ca300e87c8 100644
-> > > --- a/MAINTAINERS
-> > > +++ b/MAINTAINERS
-> > > @@ -240,7 +240,8 @@ S:    Maintained
-> > >  F:    tools/golang
-> > >  INTEL(R) TRUSTED EXECUTION TECHNOLOGY (TXT)
-> > > -S:    Orphaned
-> > > +R:    Lukasz Hawrylko <
-> > > lukasz.hawrylko@intel.com
-> > > >
-> > > +S:    Odd Fixes
-> >=20
-> > I guess we should give it a few days for objections to be raised
-> > against this slightly inconsistent state, but I think that's the
-> > best way to express the current state of things (hence my
-> > suggestion to this effect). If no objections turn up, I've queued
-> > this onto my to-be-committed list.
->=20
-> I have some objections regarding the process itself... On the first
-> version of this patch, it was pointed out that the e-mail shouldn't
-> be sent with disclaimer. This is now the third version and the
-> disclaimer is still present.
-
-Okay, I must have missed both earlier requests to this effect. I've
-gone back to the list archives though, and I couldn't find any such
-request either from July or June. Therefore ...
-
-> Technically, no patch should be applied when there are a disclaimer.
-
-... I'd also like to ask for the background of this. It would never
-have occurred to me that I should pay attention to possible
-disclaimers or alike on patch submissions.
-
-Jan
-
---=-t9vGGVdrHGUHDHXVTyT8
-Content-Type: application/x-pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
-
-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
-qaf3z+pX4yJmyPzdHQO5UxfwvHA8hHPUXhX83MDYcYYDjP+aNwVPjwo+m9bLf7GrO/d5e0EVsQID
-AQABo4ICNTCCAjEwHQYDVR0OBBYEFPHUkwveLWwE8tkGA3QLJU3A3VOqMB8GA1UdIwQYMBaAFNpB
-I5xaj3GvV4M+INPjZdsMywvbMGUGA1UdHwReMFwwWqBYoFaGVGh0dHA6Ly93d3cuaW50ZWwuY29t
-L3JlcG9zaXRvcnkvQ1JML0ludGVsJTIwRXh0ZXJuYWwlMjBCYXNpYyUyMElzc3VpbmclMjBDQSUy
-MDRCLmNybDCBnwYIKwYBBQUHAQEEgZIwgY8wIgYIKwYBBQUHMAGGFmh0dHA6Ly9vY3NwLmludGVs
-LmNvbS8waQYIKwYBBQUHMAKGXWh0dHA6Ly93d3cuaW50ZWwuY29tL3JlcG9zaXRvcnkvY2VydGlm
-aWNhdGVzL0ludGVsJTIwRXh0ZXJuYWwlMjBCYXNpYyUyMElzc3VpbmclMjBDQSUyMDRCLmNydDAL
-BgNVHQ8EBAMCB4AwPAYJKwYBBAGCNxUHBC8wLQYlKwYBBAGCNxUIhsOMdYSZ5VGD/YEohY6fU4KR
-wAlngd69OZXwQwIBZAIBCTAfBgNVHSUEGDAWBggrBgEFBQcDBAYKKwYBBAGCNwoDDDApBgkrBgEE
-AYI3FQoEHDAaMAoGCCsGAQUFBwMEMAwGCisGAQQBgjcKAwwwTwYDVR0RBEgwRqApBgorBgEEAYI3
-FAIDoBsMGWx1a2Fzei5oYXdyeWxrb0BpbnRlbC5jb22BGWx1a2Fzei5oYXdyeWxrb0BpbnRlbC5j
-b20wDQYJKoZIhvcNAQEFBQADggEBAG4Dd2NWIH5N3CXQQGWtunka9jgZG0cYpO1uXoBzRliNvmIC
-sjfFEnt6UtzYcJ3i3muLy8vlanT5KF8gHM3I/SwCG9f1LgAV1UgDgoUQuInQEi4llIVJcBeAawXi
-Zo3vp286gOi+Hqlo4On9k+p2QK8+TVNWJVby/CLQwO59HuZ7vevmn3xWJaFW06Z7Brr6rnPUFJsH
-B5zWdoSc3ije0IRrVc7dquyRjfPsdIwShbhc9NgogaQcGYjTG8JfjaALcrE8Gg5dswDn+9bjooAz
-nuQtivo1KlO0nUh36bi3oOd96SR6RfrnnBqmBK8DFyEhra8gDv82ztn/A4AhtvoCkjMxggIXMIIC
-EwIBATCBkDB5MQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFDASBgNVBAcTC1NhbnRhIENsYXJh
-MRowGAYDVQQKExFJbnRlbCBDb3Jwb3JhdGlvbjErMCkGA1UEAxMiSW50ZWwgRXh0ZXJuYWwgQmFz
-aWMgSXNzdWluZyBDQSA0QgITMwAAcfNga0/++LqE0AAAAABx8zAJBgUrDgMCGgUAoF0wGAYJKoZI
-hvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTkwNzMwMDkxNzQyWjAjBgkqhkiG
-9w0BCQQxFgQUf06g5x2TLGOKwPYv0xd/a7ws6SMwDQYJKoZIhvcNAQEBBQAEggEACTepKKovxr6W
-yhYKsxJrtJEPLzo6CIJf0z/F0u1juCIt5xp7o/47yacgNlEsANbBgLT++1IQHB6jY/gLBXeivPA5
-uo2Zk0DtnGMXyg6HfTR14wZQA0y6GhG7gFgPbh3QwSjvXNUByvHSqeVb5AfODFV0jwR4poLVwOHI
-k1sKyTtMthh7BCiydHHIJnEEsF/UE4p7s1ArrPTbdld07PRJd26+Z+o8kKm9cPAaaxPxf7brfS8p
-VHqRd4vixwIq6x4B40N3C6w8lccDc6H/iesNOEmAB5IpfvEEBguTIlEfAcuVI7np+m6i3cmHjLB5
-KRS67ZCsof0XkhGHZUPDFMu1CgAAAAAAAA==
-
-
---=-t9vGGVdrHGUHDHXVTyT8--
-
---===============4504839366276486366==
-Content-Type: multipart/alternative; boundary="===============7288886231433031567=="
-MIME-Version: 1.0
-Content-Disposition: inline
-
---===============7288886231433031567==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-
---------------------------------------------------------------------
-
-Intel Technology Poland sp. z o.o.
-ul. Slowackiego 173 | 80-298 Gdansk | Sad Rejonowy Gdansk Polnoc | VII Wydz=
-ial Gospodarczy Krajowego Rejestru Sadowego - KRS 101882 | NIP 957-07-52-31=
-6 | Kapital zakladowy 200.000 PLN.
-
-Ta wiadomosc wraz z zalacznikami jest przeznaczona dla okreslonego adresata=
- i moze zawierac informacje poufne. W razie przypadkowego otrzymania tej wi=
-adomosci, prosimy o powiadomienie nadawcy oraz trwale jej usuniecie; jakiek=
-olwiek
-przegladanie lub rozpowszechnianie jest zabronione.
-This e-mail and any attachments may contain confidential material for the s=
-ole use of the intended recipient(s). If you are not the intended recipient=
-, please contact the sender and delete all copies; any review or distributi=
-on by
-others is strictly prohibited.
-
---===============7288886231433031567==
-Content-Type: text/html; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-
-<p>---------------------------------------------------------------------<br>
-<strong style=3D"line-height: 11.25pt;"><span  style=3D"font-size: 9pt; col=
-or:
-#595959;"><span style=3D"font-family: 'Arial Narrow', sans-serif;">Intel
-Technology Poland sp. z o.o.<br></span></span></strong><span style=3D"color:
-#595959; font-family: 'Arial Narrow', sans-serif; font-size: 9pt; line-heig=
-ht:
-11.25pt;">ul. S&#322owackiego 173 | 80-298 Gda&#324sk | S&#261d Rejonowy Gd=
-a&#324sk
-P&#243&#322noc
-| VII Wydzia&#322 Gospodarczy Krajowego Rejestru S&#261dowego - KRS 101882 =
-| NIP
-957-07-52-316 | Kapita&#322 zak&#322adowy 200.000 PLN.</span></p><p>
-
-<span style=3D"font-size:8.0pt;font-family:&quot;Arial
-Narrow&quot;,&quot;sans-serif&quot;;
-mso-fareast-font-family:&quot;Times New
-Roman&quot;;mso-bidi-font-family:Arial;
-color:#595959;mso-ansi-language:EN-US;mso-fareast-language:EN-US;mso-bidi-l=
-anguage:
-AR-SA">Ta wiadomo&#347&#263 wraz z za&#322&#261cznikami jest przeznaczona d=
-la okre&#347lonego
-adresata i mo&#380e zawiera&#263 informacje poufne. W razie przypadkowego o=
-trzymania
-tej wiadomo&#347ci, prosimy o powiadomienie nadawcy oraz trwa&#322e jej usu=
-ni&#281cie;
-jakiekolwiek przegl&#261danie lub rozpowszechnianie jest zabronione.<br>
-This e-mail and any attachments may contain confidential material for the s=
-ole
-use of the intended recipient(s). If you are not the intended recipient,
-please
-contact the sender and delete all copies; any review or distribution by oth=
-ers
-is strictly prohibited.</span></p><p class=3D"MsoNormal"><o:p></o:p></p>
-
---===============7288886231433031567==--
-
---===============4504839366276486366==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============4504839366276486366==--
-
+T24gMjUuMDcuMjAxOSAxNToyOSwgSmFuIEJldWxpY2ggd3JvdGU6DQo+IFRoaXMgYWxzbyB0YWtl
+cyBjYXJlIG9mIHNldmVyYWwgb2YgdGhlIHNoaWZ0IHZhbHVlcyB3cm9uZ2x5IGhhdmluZyBiZWVu
+DQo+IHNwZWNpZmllZCBhcyBoZXggcmF0aGVyIHRoYW4gZGVjLg0KPiANCj4gVGFrZSB0aGUgb3Bw
+b3J0dW5pdHkgYW5kDQo+IC0gcmVwbGFjZSBhIHJlYWRsKCkgcGFpciBieSBhIHNpbmdsZSByZWFk
+cSgpLA0KPiAtIGFkZCBmdXJ0aGVyIGZpZWxkcy4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEphbiBC
+ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4NCj4gQWNrZWQtYnk6IEFuZHJldyBDb29wZXIgPGFu
+ZHJldy5jb29wZXIzQGNpdHJpeC5jb20+DQoNCkJyaWFuLCBTdXJhdmVlLA0KDQpnZXR0aW5nIHlv
+dXIgYWNrIGhlcmUgd291bGQgdW5ibG9jayBhIGZhaXIgcGFydCBvZiB0aGUgcmVzdCBvZg0KdGhp
+cyBzZXJpZXMuDQoNClRoYW5rcywgSmFuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
+ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
+Zm8veGVuLWRldmVs
