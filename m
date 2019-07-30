@@ -2,80 +2,62 @@ Return-Path: <SRS0=0a2y=V3=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51876C0650F
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 13:32:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 16951C0650F
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 13:34:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2F7432064A
-	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 13:32:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F7432064A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=ainfosec.com
+	by mail.kernel.org (Postfix) with ESMTPS id E40C22064A
+	for <xen-devel@archiver.kernel.org>; Tue, 30 Jul 2019 13:34:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E40C22064A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hsSEE-0003s6-Rk; Tue, 30 Jul 2019 13:31:46 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+	id 1hsSGo-00046K-GW; Tue, 30 Jul 2019 13:34:26 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=5qpE=V3=ainfosec.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1hsSEE-0003s0-8k
- for xen-devel@lists.xenproject.org; Tue, 30 Jul 2019 13:31:46 +0000
-X-Inumbo-ID: 5f467635-b2ce-11e9-8980-bc764e045a96
-Received: from mail.ainfosec.com (unknown [209.217.208.252])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 5f467635-b2ce-11e9-8980-bc764e045a96;
- Tue, 30 Jul 2019 13:31:44 +0000 (UTC)
-X-ASG-Debug-ID: 1564492304-0dce566a4a2ac9b0001-RNp3Ad
-Received: from AISEX01.ainfosec.com ([10.201.1.88]) by mail.ainfosec.com with
- ESMTP id BC0O1GqYXoGUtx1z (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384
- bits=256 verify=NO); Tue, 30 Jul 2019 09:11:44 -0400 (EDT)
-X-Barracuda-Envelope-From: rosbrookn@ainfosec.com
-Received: from AIS-Mustang.ainfosec.com (10.201.1.188) by AISEX01.ainfosec.com
- (10.201.1.88) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1779.2; Tue, 30
- Jul 2019 09:11:44 -0400
-Received: from AIS-Mustang.ainfosec.com (10.201.1.188) by
- AIS-Mustang.ainfosec.com (10.201.1.188) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.1779.2; Tue, 30 Jul 2019 09:11:44 -0400
-Received: from AIS-Mustang.ainfosec.com ([fe80::dd05:4fde:e2b2:58fb]) by
- AIS-Mustang.ainfosec.com ([fe80::dd05:4fde:e2b2:58fb%3]) with mapi id
- 15.01.1779.002; Tue, 30 Jul 2019 09:11:44 -0400
-From: Nicholas Rosbrook <rosbrookn@ainfosec.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Thread-Topic: [RFC] Generating Go bindings for libxl
-X-ASG-Orig-Subj: [RFC] Generating Go bindings for libxl
-Thread-Index: AQHVRtfLXTQzyEsJNUC34RhhfUYN2g==
-Date: Tue, 30 Jul 2019 13:11:44 +0000
-Message-ID: <5c6f3ed7b2f444918feea4f4b7cec107@ainfosec.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.101.172]
+ <SRS0=goWA=V3=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1hsSGm-000469-JC
+ for xen-devel@lists.xenproject.org; Tue, 30 Jul 2019 13:34:24 +0000
+X-Inumbo-ID: bccdf9a0-b2ce-11e9-85fb-b7ed6ea1653e
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bccdf9a0-b2ce-11e9-85fb-b7ed6ea1653e;
+ Tue, 30 Jul 2019 13:34:21 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1hsSGi-0001z6-T4; Tue, 30 Jul 2019 13:34:20 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1hsSGi-0003Ol-Jg; Tue, 30 Jul 2019 13:34:20 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1hsSGi-0002C2-Iz; Tue, 30 Jul 2019 13:34:20 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-139523-mainreport@xen.org>
 MIME-Version: 1.0
-X-Barracuda-Connect: UNKNOWN[10.201.1.88]
-X-Barracuda-Start-Time: 1564492304
-X-Barracuda-Encrypted: ECDHE-RSA-AES256-SHA384
-X-Barracuda-URL: https://10.69.69.46:443/cgi-mod/mark.cgi
-X-Virus-Scanned: by bsmtpd at ainfosec.com
-X-Barracuda-Scan-Msg-Size: 3187
-X-Barracuda-BRTS-Status: 1
-X-Barracuda-Bayes: INNOCENT GLOBAL 0.5002 1.0000 0.7500
-X-Barracuda-Spam-Score: 0.75
-X-Barracuda-Spam-Status: No, SCORE=0.75 using global scores of TAG_LEVEL=1000.0
- QUARANTINE_LEVEL=1000.0 KILL_LEVEL=9.0 tests=HTML_MESSAGE
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.74645
- Rule breakdown below
- pts rule name              description
- ---- ---------------------- --------------------------------------------------
- 0.00 HTML_MESSAGE           BODY: HTML included in message
-Subject: [Xen-devel] [RFC] Generating Go bindings for libxl
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=850454cf9fa417e079c48a872ead17636a5be44f
+X-Osstest-Versions-That: xen=bec9f9023e941a089b5aaae301743c9f0e14a111
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 30 Jul 2019 13:34:20 +0000
+Subject: [Xen-devel] [xen-unstable-smoke test] 139523: tolerable all pass -
+ PUSHED
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,137 +68,54 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Brendan Kerrigan <kerriganb@ainfosec.com>, "wl@xen.org" <wl@xen.org>,
- "ian.jackson@eu.citrix.com" <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- "anthony.perard@citrix.com" <anthony.perard@citrix.com>,
- Nicolas Belouin <nicolas.belouin@gandi.net>
-Content-Type: multipart/mixed; boundary="===============3510533917460318703=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============3510533917460318703==
-Content-Language: en-US
-Content-Type: multipart/alternative;
-	boundary="_000_5c6f3ed7b2f444918feea4f4b7cec107ainfoseccom_"
-
---_000_5c6f3ed7b2f444918feea4f4b7cec107ainfoseccom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Hello,
-
-As a follow up to the presentation that Brendan Kerrigan and I gave at Xen
-summit earlier this month, "Client Virtualization Toolstack in Go", I would=
- like to open
-a discussion around the development of Go bindings for libxl. George Dunlap=
-,
-Nicolas Belouin and I have had some discussion off-line already.
-
-So far, these are the topics of discussion:
-
-- Code generation: Should the Go bindings be generated from the IDL? Or sho=
-uld
-  an existing cgo generator like c-for-go [1] be leveraged?
-
-- What does the minimal viable Go package look like? IMO it should be able =
-to create
-  and destroy domains, attach and detach network and disk devices, list dom=
-ains,
-  and convert domid to name and vice versa. It is also important that the e=
-xported
-  APIs reflect idiomatic Go.
-
-- Challenges surrounding hypervisor versioning, go modules, etc.
-
-ATM, the code generation piece is the primary concern.
-
-George - could you explain your thoughts on the code generation topic?
-
-The existing bindings that I have been working on are at [2].
-
-Thanks,
-
-- Nick Rosbrook
-
-[1] https://github.com/xlab/c-for-go
-[2] https://github.com/enr0n/xen/tree/libxl-go/tools/golibxl/libxl
-
---_000_5c6f3ed7b2f444918feea4f4b7cec107ainfoseccom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none;"><!-- P {margin-top:0;margi=
-n-bottom:0;} --></style>
-</head>
-<body dir=3D"ltr">
-<div id=3D"divtagdefaultwrapper" style=3D"font-size:12pt;color:#000000;font=
--family:Calibri,Helvetica,sans-serif;" dir=3D"ltr">
-<p><font size=3D"2"><span style=3D"font-size:10pt;">Hello,<br>
-<br>
-As a follow up to the presentation that Brendan Kerrigan and I gave at Xen =
-<br>
-summit earlier this month, &quot;Client Virtualization Toolstack in Go&quot=
-;, I would like to open
-<br>
-a discussion around the development of Go bindings for libxl. George Dunlap=
-,<br>
-Nicolas Belouin and I have had some discussion off-line already.<br>
-<br>
-So far, these are the topics of discussion:<br>
-<br>
-- Code generation: Should the Go bindings be generated from the IDL? Or sho=
-uld<br>
-&nbsp; an existing cgo generator like c-for-go [1] be leveraged?<br>
-<br>
-- What does the minimal viable Go package look like? IMO it should be able =
-to create<br>
-&nbsp; and destroy domains, attach and detach network and disk devices, lis=
-t domains,<br>
-&nbsp; and convert domid to name and vice versa. It is also important that =
-the exported<br>
-&nbsp; APIs reflect idiomatic Go.<br>
-<br>
-- Challenges surrounding hypervisor versioning, go modules, etc.<br>
-<br>
-ATM, the code generation piece is the primary concern.<br>
-<br>
-George - could you explain your thoughts on the code generation topic?<br>
-<br>
-The existing bindings that I have been working on are at [2].<br>
-<br>
-Thanks,<br>
-<br>
-- Nick Rosbrook<br>
-<br>
-[1] <a href=3D"https://github.com/xlab/c-for-go" id=3D"LPlnk229969" preview=
-removed=3D"true">
-https://github.com/xlab/c-for-go</a><br>
-[2] <a href=3D"https://github.com/enr0n/xen/tree/libxl-go/tools/golibxl/lib=
-xl" id=3D"LPlnk217617" previewremoved=3D"true">
-https://github.com/enr0n/xen/tree/libxl-go/tools/golibxl/libxl</a></span></=
-font><br>
-</p>
-</div>
-</body>
-</html>
-
---_000_5c6f3ed7b2f444918feea4f4b7cec107ainfoseccom_--
-
-
---===============3510533917460318703==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3510533917460318703==--
-
+ZmxpZ2h0IDEzOTUyMyB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
+dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzEzOTUyMy8KCkZhaWx1cmVzIDot
+LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
+cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
+LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
+dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bC14c20gICAg
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybTY0LWFybTY0LXhsLXhzbSAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
+ICAgICAgICAgICAgICA4NTA0NTRjZjlmYTQxN2UwNzljNDhhODcyZWFkMTc2MzZhNWJlNDRmCmJh
+c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBiZWM5ZjkwMjNlOTQxYTA4OWI1
+YWFhZTMwMTc0M2M5ZjBlMTRhMTExCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxMzk1MTEgIDIwMTkt
+MDctMzAgMDE6MDU6MDEgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTM5NTIzICAy
+MDE5LTA3LTMwIDExOjAyOjM0IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
+d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgQW5kcmV3IENvb3BlciA8YW5kcmV3
+LmNvb3BlcjNAY2l0cml4LmNvbT4KICBHZW9yZ2UgRHVubGFwIDxnZW9yZ2UuZHVubGFwQGNpdHJp
+eC5jb20+CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgogIFBhdWwgRHVycmFudCA8
+cGF1bC5kdXJyYW50QGNpdHJpeC5jb20+Cgpqb2JzOgogYnVpbGQtYXJtNjQteHNtICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2
+NCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIGJ1aWxkLWFybWhmICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtNjQt
+YXJtNjQteGwteHNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0Kc2ctcmVwb3J0LWZsaWdodCBvbiBv
+c3N0ZXN0LnRlc3QtbGFiLnhlbnByb2plY3Qub3JnCmxvZ3M6IC9ob21lL2xvZ3MvbG9ncwppbWFn
+ZXM6IC9ob21lL2xvZ3MvaW1hZ2VzCgpMb2dzLCBjb25maWcgZmlsZXMsIGV0Yy4gYXJlIGF2YWls
+YWJsZSBhdAogICAgaHR0cDovL2xvZ3MudGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9s
+b2dzCgpFeHBsYW5hdGlvbiBvZiB0aGVzZSByZXBvcnRzLCBhbmQgb2Ygb3NzdGVzdCBpbiBnZW5l
+cmFsLCBpcyBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5n
+aXQ7YT1ibG9iO2Y9UkVBRE1FLmVtYWlsO2hiPW1hc3RlcgogICAgaHR0cDovL3hlbmJpdHMueGVu
+Lm9yZy9naXR3ZWIvP3A9b3NzdGVzdC5naXQ7YT1ibG9iO2Y9UkVBRE1FO2hiPW1hc3RlcgoKVGVz
+dCBoYXJuZXNzIGNvZGUgY2FuIGJlIGZvdW5kIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3Jn
+L2dpdHdlYj9wPW9zc3Rlc3QuZ2l0O2E9c3VtbWFyeQoKClB1c2hpbmcgcmV2aXNpb24gOgoKVG8g
+eGVuYml0cy54ZW4ub3JnOi9ob21lL3hlbi9naXQveGVuLmdpdAogICBiZWM5ZjkwMjNlLi44NTA0
+NTRjZjlmICA4NTA0NTRjZjlmYTQxN2UwNzljNDhhODcyZWFkMTc2MzZhNWJlNDRmIC0+IHNtb2tl
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
+ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
+c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
