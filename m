@@ -2,63 +2,54 @@ Return-Path: <SRS0=7xGv=V6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 29207C433FF
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Aug 2019 14:25:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 79ADBC433FF
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Aug 2019 14:37:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ECA4320679
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Aug 2019 14:25:29 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="G2sxycFA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ECA4320679
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
+	by mail.kernel.org (Postfix) with ESMTPS id 4358C2087E
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Aug 2019 14:37:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4358C2087E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1htYUP-0005TW-KC; Fri, 02 Aug 2019 14:25:01 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+	id 1htYgA-0006EP-0K; Fri, 02 Aug 2019 14:37:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=oFDe=V6=infradead.org=willy@srs-us1.protection.inumbo.net>)
- id 1htYUO-0005TR-0z
- for xen-devel@lists.xenproject.org; Fri, 02 Aug 2019 14:25:00 +0000
-X-Inumbo-ID: 4e454e03-b531-11e9-8980-bc764e045a96
-Received: from bombadil.infradead.org (unknown [2607:7c80:54:e::133])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 4e454e03-b531-11e9-8980-bc764e045a96;
- Fri, 02 Aug 2019 14:24:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
- Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=jvuzp+6FCROkRR+waxcd/xSBD2jk0LdlEwwlmE/QRVo=; b=G2sxycFAx+YSXemaZWFj5rBoO
- L5W+suRd87Fzi03i9UbUkz+K/l4OLA7u4vdCzpFKd8kbKkpNT5POJKTjl3Y9NgF+IfuEQiw+Ya9sZ
- Uz98GhfWAglGYt98RBvfBnca/15T9G/n1hhy4hthNjlrIrfsKUlfX1Lr9suoRAYQ/pICfFJo13kmR
- L+hbvfVY5BZygvFEilaamnzYAdT/2P4dTNkPPWEPWi3WZyJpk4mE3pZYxvO4hCe5QB9xougEB5c3g
- IV0U5HMFOk+fqAqk6ui4QqQV5LiDqQxBtFq8kG3bamWa6AZ5dtGBvDFf6uxZiiuQmelcNvOe6qNsg
- wQg03COuw==;
-Received: from willy by bombadil.infradead.org with local (Exim 4.92 #3 (Red
- Hat Linux)) id 1htYU7-0007La-VU; Fri, 02 Aug 2019 14:24:43 +0000
-Date: Fri, 2 Aug 2019 07:24:43 -0700
-From: Matthew Wilcox <willy@infradead.org>
-To: Jan Kara <jack@suse.cz>
-Message-ID: <20190802142443.GB5597@bombadil.infradead.org>
-References: <20190802022005.5117-1-jhubbard@nvidia.com>
- <20190802091244.GD6461@dhcp22.suse.cz>
- <20190802124146.GL25064@quack2.suse.cz>
+ <SRS0=0bN6=V6=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1htYg8-0006EK-Kn
+ for xen-devel@lists.xenproject.org; Fri, 02 Aug 2019 14:37:08 +0000
+X-Inumbo-ID: ffec9d84-b532-11e9-88f3-ff6ec3d88d6e
+Received: from mx1.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ffec9d84-b532-11e9-88f3-ff6ec3d88d6e;
+ Fri, 02 Aug 2019 14:37:06 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 3F80CB60A;
+ Fri,  2 Aug 2019 14:37:05 +0000 (UTC)
+Message-ID: <c9d9ff506042ed2e8a53e4acca538c793a939869.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Doug Goldstein
+ <cardoe@cardoe.com>, xen-devel@lists.xenproject.org
+Date: Fri, 02 Aug 2019 16:37:04 +0200
+In-Reply-To: <b6b94de3-9fb5-5df4-81b6-60028033f985@citrix.com>
+References: <156413540514.22784.14073005924861814163.stgit@Palanthas>
+ <65d9c6bf-3eec-59d0-a070-8142f34d9e15@cardoe.com>
+ <40213dac0d5d431c4cbc39efdeab23a222ddcc90.camel@suse.com>
+ <b6b94de3-9fb5-5df4-81b6-60028033f985@citrix.com>
+Organization: SUSE
+User-Agent: Evolution 3.32.4 
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20190802124146.GL25064@quack2.suse.cz>
-User-Agent: Mutt/1.11.4 (2019-03-13)
-Subject: Re: [Xen-devel] [PATCH 00/34] put_user_pages(): miscellaneous call
- sites
+Subject: Re: [Xen-devel] [PATCH] ci: install C++ in opensuse-leap CI
+ container
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,59 +60,88 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, kvm@vger.kernel.org,
- Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
- dri-devel@lists.freedesktop.org, Michal Hocko <mhocko@kernel.org>,
- linux-mm@kvack.org, sparclinux@vger.kernel.org,
- Ira Weiny <ira.weiny@intel.com>, Dan Williams <dan.j.williams@intel.com>,
- devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
- linux-rdma@vger.kernel.org, x86@kernel.org, amd-gfx@lists.freedesktop.org,
- Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
- xen-devel@lists.xenproject.org, devel@lists.orangefs.org,
- linux-media@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
- intel-gfx@lists.freedesktop.org, john.hubbard@gmail.com,
- linux-block@vger.kernel.org,
- =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, ceph-devel@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
- netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
- linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6572393698453041602=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gRnJpLCBBdWcgMDIsIDIwMTkgYXQgMDI6NDE6NDZQTSArMDIwMCwgSmFuIEthcmEgd3JvdGU6
-Cj4gT24gRnJpIDAyLTA4LTE5IDExOjEyOjQ0LCBNaWNoYWwgSG9ja28gd3JvdGU6Cj4gPiBPbiBU
-aHUgMDEtMDgtMTkgMTk6MTk6MzEsIGpvaG4uaHViYmFyZEBnbWFpbC5jb20gd3JvdGU6Cj4gPiBb
-Li4uXQo+ID4gPiAyKSBDb252ZXJ0IGFsbCBvZiB0aGUgY2FsbCBzaXRlcyBmb3IgZ2V0X3VzZXJf
-cGFnZXMqKCksIHRvCj4gPiA+IGludm9rZSBwdXRfdXNlcl9wYWdlKigpLCBpbnN0ZWFkIG9mIHB1
-dF9wYWdlKCkuIFRoaXMgaW52b2x2ZXMgZG96ZW5zIG9mCj4gPiA+IGNhbGwgc2l0ZXMsIGFuZCB3
-aWxsIHRha2Ugc29tZSB0aW1lLgo+ID4gCj4gPiBIb3cgZG8gd2UgbWFrZSBzdXJlIHRoaXMgaXMg
-dGhlIGNhc2UgYW5kIGl0IHdpbGwgcmVtYWluIHRoZSBjYXNlIGluIHRoZQo+ID4gZnV0dXJlPyBU
-aGVyZSBtdXN0IGJlIHNvbWUgYXV0b21hZ2ljIHRvIGVuZm9yY2UvY2hlY2sgdGhhdC4gSXQgaXMg
-c2ltcGx5Cj4gPiBub3QgbWFuYWdlYWJsZSB0byBkbyBpdCBldmVyeSBub3cgYW5kIHRoZW4gYmVj
-YXVzZSB0aGVuIDMpIHdpbGwgc2ltcGx5Cj4gPiBiZSBuZXZlciBzYWZlLgo+ID4gCj4gPiBIYXZl
-IHlvdSBjb25zaWRlcmVkIGNvY2NpbmVsZSBvciBzb21lIG90aGVyIHNjcmlwdGVkIHdheSB0byBk
-byB0aGUKPiA+IHRyYW5zaXRpb24/IEkgaGF2ZSBubyBpZGVhIGhvdyB0byBkZWFsIHdpdGggZnV0
-dXJlIGNoYW5nZXMgdGhhdCB3b3VsZAo+ID4gYnJlYWsgdGhlIGJhbGFuY2UgdGhvdWdoLgo+IAo+
-IFllYWgsIHRoYXQncyB3aHkgSSd2ZSBiZWVuIHN1Z2dlc3RpbmcgYXQgTFNGL01NIHRoYXQgd2Ug
-bWF5IG5lZWQgdG8gY3JlYXRlCj4gYSBndXAgd3JhcHBlciAtIHNheSB2YWRkcl9waW5fcGFnZXMo
-KSAtIGFuZCB0cmFjayB3aGljaCBzaXRlcyBkcm9wcGluZwo+IHJlZmVyZW5jZXMgZ290IGNvbnZl
-cnRlZCBieSB1c2luZyB0aGlzIHdyYXBwZXIgaW5zdGVhZCBvZiBndXAuIFRoZQo+IGNvdW50ZXJw
-YXJ0IHdvdWxkIHRoZW4gYmUgbW9yZSBsb2dpY2FsbHkgbmFtZWQgYXMgdW5waW5fcGFnZSgpIG9y
-IHdoYXRldmVyCj4gaW5zdGVhZCBvZiBwdXRfdXNlcl9wYWdlKCkuICBTdXJlIHRoaXMgaXMgbm90
-IGNvbXBsZXRlbHkgZm9vbHByb29mICh5b3UgY2FuCj4gY3JlYXRlIG5ldyBjYWxsc2l0ZSB1c2lu
-ZyB2YWRkcl9waW5fcGFnZXMoKSBhbmQgdGhlbiBqdXN0IGRyb3AgcmVmcyB1c2luZwo+IHB1dF9w
-YWdlKCkpIGJ1dCBJIHN1cHBvc2UgaXQgd291bGQgYmUgYSBoaWdoIGVub3VnaCBiYXJyaWVyIGZv
-ciBtaXNzZWQKPiBjb252ZXJzaW9ucy4uLiBUaG91Z2h0cz8KCkkgdGhpbmsgdGhlIEFQSSB3ZSBy
-ZWFsbHkgbmVlZCBpcyBnZXRfdXNlcl9idmVjKCkgLyBwdXRfdXNlcl9idmVjKCksCmFuZCBJIGtu
-b3cgQ2hyaXN0b3BoIGhhcyBiZWVuIHB1dHRpbmcgc29tZSB3b3JrIGludG8gdGhhdC4gIFRoYXQg
-YXZvaWRzCmRvaW5nIHJlZmNvdW50IG9wZXJhdGlvbnMgb24gaHVuZHJlZHMgb2YgcGFnZXMgaWYg
-dGhlIHBhZ2UgaW4gcXVlc3Rpb24gaXMKYSBodWdlIHBhZ2UuICBPbmNlIHBlb3BsZSBhcmUgc3dp
-dGNoZWQgb3ZlciB0byB0aGF0LCB0aGV5IHdvbid0IGJlIHRlbXB0ZWQKdG8gbWFudWFsbHkgY2Fs
-bCBwdXRfcGFnZSgpIG9uIHRoZSBpbmRpdmlkdWFsIGNvbnN0aXR1ZW50IHBhZ2VzIG9mIGEgYnZl
-Yy4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1k
-ZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8v
-bGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+
+--===============6572393698453041602==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-MsaadYCdKIoMYpTyr/fB"
+
+
+--=-MsaadYCdKIoMYpTyr/fB
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2019-08-02 at 13:11 +0100, Andrew Cooper wrote:
+> On 02/08/2019 13:00, Dario Faggioli wrote:
+> > On Mon, 2019-07-29 at 12:18 -0500, Doug Goldstein wrote:
+> > >=20
+> > > Will you be pushing the rebuilt container or do you need me to do
+> > > that?
+> >
+> > So, I guess someone else, with enough rights, would have to do
+> > that.
+> >=20
+> > Or am I missing some auth step or aomething?
+>=20
+> You need to do a docker login to the registry.
+>=20
+> See https://gitlab.com/help/user/project/container_registry
+>=20
+Ah, that's what I was missing!
+
+> Then the push should work.
+>=20
+Yes, it did work. The updated Leap container is online.
+
+Thanks and Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-MsaadYCdKIoMYpTyr/fB
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl1ESpAACgkQFkJ4iaW4
+c+5iXRAAq7UkbkxbKgmhW6MFhlbiWgyhiCydsALv0rfCn1Zo4Y6NaiqLCeZ/Mit9
+b66v10KuR3yBFMD65BSOxVVmX3oJmICgNTYlu9HU5Nt+K66rZYU+eR/oh+SRr7Qp
+sBgBra3+VINmsTFtuIF5Gv27lyvPyRMZB0KYH9mFkpZ81rcDCUmzr3tmyy46p8xi
+hw8U1wVJ0LxyrdJyyw+gNRQksBKoELNrZEuzxw8o77jVXrKLZs98JvEQwc29/4EC
+3ypLzt4dYsm3E7SgljZ6BdHrZgYK+cJrFgoBxCdW88zD473v/2rBkLXExZki49Ia
+pgIgC4bK95IuU4hBRHV1Z/lYeQr8WKC4BTZrmrU3BfTOBY6junLRhQk8nLal+Xs5
+P0TzKWYgvzwUD4RZ5k5oHyyfOuFVuMUoe0mQ/vjCYW35SWF4n1ZkECWddd8SCRzL
+GK4c8QG8BdJpcqgPO+nuC3OwbZ6pS31gFqqkwJObXn8/reqn0wTmMSTqHgc4Xodc
+UGEe5DL40zqfcp/v70JDfxf+i6W3ai5q8amMZBJpWp9PR8N97hVZnYr3ZA7DlwRm
+Swb6p99Fs9mn6+dPYwe5reaJkoDXNM4kV2ClxRq8MY0zIo9TbzYorrFLeo0+gwdo
+UREaQRnQIKXuce182/i7PXw6HbpN4hLXtLAL9T3rFpC5TsXF4mk=
+=XV4X
+-----END PGP SIGNATURE-----
+
+--=-MsaadYCdKIoMYpTyr/fB--
+
+
+
+--===============6572393698453041602==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6572393698453041602==--
+
+
