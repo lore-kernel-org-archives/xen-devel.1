@@ -2,70 +2,100 @@ Return-Path: <SRS0=jzL+=WC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8E6EC31E40
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Aug 2019 07:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1328DC31E40
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Aug 2019 07:45:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9D3EC20B1F
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Aug 2019 07:00:45 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HsdLxYDH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9D3EC20B1F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id E6F16217D9
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Aug 2019 07:45:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E6F16217D9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hutSE-0002l3-PT; Tue, 06 Aug 2019 07:00:18 +0000
+	id 1huu9t-0005bz-Ic; Tue, 06 Aug 2019 07:45:25 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=v3x5=WC=gmail.com=xenserver.boy@srs-us1.protection.inumbo.net>)
- id 1husF5-00061M-6P
- for xen-devel@lists.xenproject.org; Tue, 06 Aug 2019 05:42:39 +0000
-X-Inumbo-ID: ff39f9a2-b80c-11e9-8980-bc764e045a96
-Received: from mail-oi1-x22c.google.com (unknown [2607:f8b0:4864:20::22c])
+ <SRS0=idZU=WC=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1huu9s-0005bu-CP
+ for xen-devel@lists.xenproject.org; Tue, 06 Aug 2019 07:45:24 +0000
+X-Inumbo-ID: 24d1750b-b81e-11e9-8980-bc764e045a96
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id ff39f9a2-b80c-11e9-8980-bc764e045a96;
- Tue, 06 Aug 2019 05:42:37 +0000 (UTC)
-Received: by mail-oi1-x22c.google.com with SMTP id a127so64778775oii.2
- for <xen-devel@lists.xenproject.org>; Mon, 05 Aug 2019 22:42:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=u2eLEOB5MVV2NjtYDiEkddpztUxMsfLAQWyuvHezVUk=;
- b=HsdLxYDH9uEqONw3OQeL/xMKS+odHOcuHpT81vMeV/T7Zd65Rnx0jn34NJsl+GOM6w
- BA+d9XLfve0wEpfJ/P83cD47bDu09rcb9T84dp94w4ngYyuGRHFJaS+Q/KwLnnETBP2a
- RTd49BR/OJuSSG8Pb3dUyqEKGTOVXbASqCTf9m2nS263i0CZQQn3mnvaeNEQxfRlKQ14
- spgp1APJM+PvwyPDHHHlaE4vw1gDnaNjmtvw7skpRFD4MY8ufYrmuXlzErm1OP59YvhV
- Jf59ThpLsIKG7QnVpyHO0oRw2ELpWESystoLKiakp5NNXxfIYxJdL4JwxAnWZwWfqfoV
- kzlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=u2eLEOB5MVV2NjtYDiEkddpztUxMsfLAQWyuvHezVUk=;
- b=YpIPMS9V/0AJ2zV9tfPjl9B0VVrszhwAgZbyAeMnFRDyajdgGSKcEjZR2cgXLShnjR
- H6ykOacnrIQ1am+A4THJqt3Bk6r1Vlj2CPgtZ3mPaO0Yq+pUmhvgNQNBywTm35NMvOAk
- lO3sX7ALaui/m/2ZSs2GSYORbx2DOvIYMv/6JepWXGRhgA/AbMt0Vwjj4oavUYTVdR1t
- fgvK3LApIGvWrmpgp96mw/laYvX1QTyL0A6UhC4TaveYsbBH82yX0uzBv9HCmUilIQJ8
- BiuIGA0d08BWypzmIrHcYKFOFOjik0KcTaS8e1+An7e2jTnTiHsXMLs7hoB3Oj7ayj9M
- lvQQ==
-X-Gm-Message-State: APjAAAUUNp/b1WdN8Ka+KDSJRXfVb9leRc4g17QmgCnmF34HKRaDPHD5
- VR26SAXYLaVRFI+s8hGTzKRxhzZlSkfFvucKyHIxZhHN
-X-Google-Smtp-Source: APXvYqzTdDRMqzlEf9s5nL82I6Ps4+8KO/o1BpRa69o1VWO4nxRVNu2Sk0tsVCW9tF1vHF/HE53+c7BylxbemFGC5SY=
-X-Received: by 2002:aca:f003:: with SMTP id o3mr558230oih.59.1565070156858;
- Mon, 05 Aug 2019 22:42:36 -0700 (PDT)
+ id 24d1750b-b81e-11e9-8980-bc764e045a96;
+ Tue, 06 Aug 2019 07:45:22 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=George.Dunlap@citrix.com;
+ spf=Pass smtp.mailfrom=George.Dunlap@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ George.Dunlap@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="George.Dunlap@citrix.com";
+ x-sender="George.Dunlap@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ George.Dunlap@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="George.Dunlap@citrix.com";
+ x-sender="George.Dunlap@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="George.Dunlap@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: xaHMzmK9s7F69NGGKi6HieNc6UWjdnaV0VRS2RgxMOvsgLq/24vR7W3rAh/hIRoQ39Ftz/gtOL
+ 8Nz5OIVG7XFrWzGSTHFmZbPPwi+cpPeYvZzPeMNsO1aJ34qhy20SWohKGLhYuTneBT+/TEKkVb
+ cJ0YOXKWLNA7zIvBebOQFALphd2FEKZIz75nZkelNxj9zRKqqqpT9WeL8qLD46HYrNEBgavWYm
+ BzQyhB3aBsk4SbbwaPMTfmuWSgXKlG1wA6CsHJQ5wYf9jQeptoL/ql7eu1XVYf3updf1WnQVoe
+ VNM=
+X-SBRS: 2.7
+X-MesageID: 4030675
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.64,352,1559534400"; 
+   d="scan'208";a="4030675"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Dario Faggioli <dfaggioli@suse.com>
+Thread-Topic: [Xen-devel] [PATCH v2 1/4] xen: sched: refector code around
+ vcpu_deassign() in null scheduler
+Thread-Index: AQHVQ3r7l7jEiRa2CU6PQPK00ehLoqbspLkAgAASh4CAAAcmAIAA7uUA
+Date: Tue, 6 Aug 2019 07:45:18 +0000
+Message-ID: <18B2FF28-BD84-4AAE-A634-786C6802C5AB@citrix.com>
+References: <156412188377.2385.12588508835559819141.stgit@Palanthas>
+ <156412235104.2385.3911161728130674771.stgit@Palanthas>
+ <13f139f6-c39d-f30f-11ae-3338d044a7fe@suse.com>
+ <1b6be92e-6acd-0fd8-fa63-f34c5e0ccc97@citrix.com>
+ <1e165c9cff8827288097eec56f538f4e63771757.camel@suse.com>
+In-Reply-To: <1e165c9cff8827288097eec56f538f4e63771757.camel@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3445.104.11)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-ID: <5DEFA58CD9CC764BA6E431E4F712FAFB@citrix.com>
 MIME-Version: 1.0
-From: Citrix Boy <xenserver.boy@gmail.com>
-Date: Tue, 6 Aug 2019 10:12:25 +0430
-Message-ID: <CAAvJE4Se=CpK1=R1yFhxfYLTuA-JGFwRTx0wf041w7Fqjt219g@mail.gmail.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-X-Mailman-Approved-At: Tue, 06 Aug 2019 07:00:17 +0000
-Subject: [Xen-devel] Developing Xen for beginners.
+Subject: Re: [Xen-devel] [PATCH v2 1/4] xen: sched: refector code around
+ vcpu_deassign() in null scheduler
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,50 +106,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1049398714350293611=="
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Jan Beulich <JBeulich@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============1049398714350293611==
-Content-Type: multipart/alternative; boundary="000000000000bf8cef058f6c4a2e"
-
---000000000000bf8cef058f6c4a2e
-Content-Type: text/plain; charset="UTF-8"
-
-Hello,
-I have a question and I'm sure it is a question of many users. A beginner
-that wants to develop Xen, which skills he/she needed and which file is
-good for start? The Xen Project is a big project and have a lot of files
-and codes. Where is the best point to start? I see that in the "
-xenproject.org" website and part for beginners existed, but it never said
-how we can start or where is the best point.
-
-Thank you.
-
---000000000000bf8cef058f6c4a2e
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr">Hello,<br>I have a question and I&#39;m sure it is a quest=
-ion of many users. A beginner that wants to develop Xen, which skills he/sh=
-e needed and which file is good for start? The Xen Project is a big project=
- and have a lot of files and codes. Where is the best point to start? I see=
- that in the &quot;<a href=3D"http://xenproject.org">xenproject.org</a>&quo=
-t; website and part for beginners existed, but it never said how we can sta=
-rt or where is the best point.<br><br>Thank you.<br></div>
-
---000000000000bf8cef058f6c4a2e--
-
-
---===============1049398714350293611==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1049398714350293611==--
-
+DQoNCj4gT24gQXVnIDUsIDIwMTksIGF0IDY6MzAgUE0sIERhcmlvIEZhZ2dpb2xpIDxkZmFnZ2lv
+bGlAc3VzZS5jb20+IHdyb3RlOg0KPiANCj4gT24gTW9uLCAyMDE5LTA4LTA1IGF0IDE3OjA0ICsw
+MTAwLCBHZW9yZ2UgRHVubGFwIHdyb3RlOg0KPj4gT24gOC81LzE5IDQ6NTggUE0sIEphbiBCZXVs
+aWNoIHdyb3RlOg0KPj4+IE9uIDI2LjA3LjIwMTkgMDg6MjUsIERhcmlvIEZhZ2dpb2xpIHdyb3Rl
+Og0KPj4+PiANCj4+PiAxKSBUaGUgY29tbWl0IGlzIGVtcHR5LCBwcmVzdW1hYmx5IGJlY2F1c2Ug
+SSBkaWQgYXBwbHkgdGhlIHBhdGNoIGENCj4+PiBmZXcNCj4+PiBkYXlzIGFnbyBhbHJlYWR5Lg0K
+Pj4+IA0KPj4+IDIpIFRoZSBjb21taXR0ZXIgaXMgcmVjb3JkZWQgYXMgIlBhdGNoZXcgSW1wb3J0
+ZXIgPA0KPj4+IGltcG9ydGVyQHBhdGNoZXcub3JnPiIuDQo+Pj4gRG8gd2UgcmVhbGx5IHdhbnQg
+dG8gaGlkZSB0aGUgZmFjdCB3aG8gaGFzIGJlZW4gY29tbWl0dGluZyBhIHBhdGNoPw0KPj4+IFdo
+aWxlIGl0J3MgbW9zdGx5IG1lY2hhbmljYWwsIHRoZXJlJ3Mgc3RpbGwgdGhlIGh1bWFuIGRlY2lz
+aW9uIG9mDQo+Pj4gInRoaXMNCj4+PiBpcyByZWFkeSB0byBnbyBpbiIgaW52b2x2ZWQsIHdoaWNo
+IEkgZG9uJ3QgdGhpbmsgYSBib3QgY2FuIHJlbGlhYmx5DQo+Pj4gdGFrZQ0KPj4+IGluIGFsbCBj
+YXNlcy4NCj4+IA0KPj4gQm90aCBvZiB0aGVzZSBhcmUgbWlzdGFrZXMsIGFuZCBkdWUgdG8gdGhl
+IGZhY3QgdGhhdCBJIGBnaXQgZmV0Y2hgZWQNCj4+IHBhdGNoZXcncyBjb21taXQgcmF0aGVyIHRo
+YW4gZG9pbmcgYGdpdCBhbWAgb2YgdGhlIG1ib3ggcHJvdmlkZWQgYnkNCj4+IHBhdGNoZXcuICAo
+QW5kIEkgdXNlZCBwYXRjaGV3J3MgY29tbWl0IGJlY2F1c2Ugc29tZWhvdyA0LzQgZGlkbid0DQo+
+PiByZWFjaA0KPj4gbXkgaW5ib3guKQ0KPj4gDQo+IEFuZCB0aGlzIGxhc3QgcGFydCBpcyBhcHBh
+cmVudGx5IG15IGZhdWx0LCBhcyB5b3VyIGVtYWlsIGFkZHJlc3MgaXMNCj4gYWN0dWFsbHkgd3Jv
+bmcsIGluIHRoZSBDYyBsaW5lIG9mIHRoYXQgcGF0Y2guDQoNClRoYXQgd291bGQgZXhwbGFpbiBp
+dC4gOi0pICBCdXQgdGhhdOKAmXMgYnkgbm8gbWVhbnMgeW91ciDigJxmYXVsdOKAnTogSXTigJlz
+IHZlcnkgY29tbW9uIGZvciBtZSB0byBvbmx5IGJlIEND4oCZZCBvbiBhIHN1YnNldCBvZiBwYXRj
+aGVzIGluIGEgc2VyaWVzIChlLmcuLCBiZWNhdXNlIEnigJltIHRoZSBtYWludGFpbmVyIGZvciBz
+b21lIHBhdGNoZXMgYnV0IG5vdCBvdGhlcnMpLCBzbyDigJxyZWNlaXZpbmcgYSBvbmx5IGEgc3Vi
+c2V0IG9mIHBhdGNoZXPigJ0gaXMgc29tZXRoaW5nIG15IHdvcmtmbG93IHNob3VsZCBoYW5kbGUg
+ZWZmZWN0aXZlbHkgYnV0IGRpZG7igJl0Lg0KDQogLUdlb3JnZQ0KDQpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
+bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
+L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
