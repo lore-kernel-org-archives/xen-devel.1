@@ -5,79 +5,79 @@ X-Spam-Level:
 X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F2E9C606A9
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 01:34:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46615C41530
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 01:34:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 53C2C218A2
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 01:34:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 13B122173C
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 01:34:55 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NDRrGTHq"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53C2C218A2
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="SyrfptYH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13B122173C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvAqO-0000vd-K3; Wed, 07 Aug 2019 01:34:24 +0000
+	id 1hvAqY-0001EL-Jm; Wed, 07 Aug 2019 01:34:34 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=TALv=WD=gmail.com=john.hubbard@srs-us1.protection.inumbo.net>)
- id 1hvAqN-0000tL-90
- for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 01:34:23 +0000
-X-Inumbo-ID: 7b988a5c-b8b3-11e9-8980-bc764e045a96
-Received: from mail-pg1-x543.google.com (unknown [2607:f8b0:4864:20::543])
+ id 1hvAqW-0001A2-MW
+ for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 01:34:32 +0000
+X-Inumbo-ID: 812683e4-b8b3-11e9-8980-bc764e045a96
+Received: from mail-pg1-x541.google.com (unknown [2607:f8b0:4864:20::541])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 7b988a5c-b8b3-11e9-8980-bc764e045a96;
- Wed, 07 Aug 2019 01:34:22 +0000 (UTC)
-Received: by mail-pg1-x543.google.com with SMTP id u17so42543891pgi.6
- for <xen-devel@lists.xenproject.org>; Tue, 06 Aug 2019 18:34:22 -0700 (PDT)
+ id 812683e4-b8b3-11e9-8980-bc764e045a96;
+ Wed, 07 Aug 2019 01:34:32 +0000 (UTC)
+Received: by mail-pg1-x541.google.com with SMTP id w10so42542602pgj.7
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Aug 2019 18:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=6GC3vp7Kgk6wrS2t1aIFSliRmKpmpPmHRVTf1Sq+2hE=;
- b=NDRrGTHqLYH0GVc6uMIRr4mVyV40WfAqYn7w+X7B2+KxadDpBkUoDH1692sptrKq4y
- C2b84L9+UrVSHeZfQfv6N2zieXkMMjWSuutP0ntWCNqq+OA3nS79IQYMOR/Bean1Ukkm
- w7u/RLKab4ibriFSyZKOgsWuNa5tCFv8C2bD6EQGHf8xo4i0ZMfxDnYEz3SYXrEQ1CAQ
- ph6xeZb31fEX0ILajRxBkvT5tnY8c7uU4gyqYPRAJWZF0hsMvVjXdHAtEuwcqejfTPc4
- Etr29q0fUGsdTj13fryfrujh6CCSRKTL9s9VWAxoxYETeOz9px/+oFZuuGBV9dnVGiqV
- vySQ==
+ bh=GAYBkmVoEF3i3+udFKn42Z4HyLG0jAAiACtL32v96bk=;
+ b=SyrfptYHZmeMKLLq8uTuDSlh448/TZCFpG6Zn4FeLZy9cTZZGFbCJ1UNBJPoCIn+aW
+ ygsAzBiAVH0kcipZ4ihTHldNmhfD0znPMjSBKoUKvh0NP49BRvqIlmsIg6DT8KHAwPBe
+ 4kKUVEJdNXvGigLmpKs15CkjDKUzxh1vmFZZWbslFSuyKlpacG3oD1RXF7xFsxcwBIbL
+ 0fmLLMJWYpY6/OBVXor4D0pE1ZvktHc8OSEdcNEszsvYRmiqmzBZ8eGFZOKusFOHPIrj
+ /e89tRQCCSxcnEZ4JUtQARmnCroQo1zfhGtcxjcGVNa5FV+aQSWzJVN76YDHje0qrdo9
+ NXRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=6GC3vp7Kgk6wrS2t1aIFSliRmKpmpPmHRVTf1Sq+2hE=;
- b=IC4MLlXctUMULVZfrA3ZOTYqJDqalo1v5Ub/3pVsuDsCWd57puieYXb/Wsvo3WKYIF
- 6CnWbkwtOoR5sUU5JsiljjAN7CRxIBjMqjgZiXS6Z0ODKdsXb6j0KHtYPASI4X3NzNGu
- zfSfS+1hMmPeG5HJeWCq4AhLLmMdjRZ/8U2otcwaRXRMZ1ifHZjYd+HWvC9tU31lsP7t
- T/XzsZlbBVSRt8rid8SUVsE5+LaCAoJLZKc1Mn/xwUb14ixJk7OaXAzqy/Sa4csbdKgk
- iinYVe4dAI5aS/pia50f8oaawzt5SE9tXyAXG9sNaATWL8dYQw2cfLbea5pu6lIECHsd
- 2VxA==
-X-Gm-Message-State: APjAAAXvOPAMQYTo3j2Hz308W3uMm/duieCUznc3bmeQzdcWIzMdyEn1
- PkuDHhO9Tjh1VqsVW5qXUyQ=
-X-Google-Smtp-Source: APXvYqwBJlH3d0L/1BSxFnL+vLT8aQU3g2pJmlFcXlcqO/GjIhh0NRs5+pZNe4h8FrEWDwW4ivgjRA==
-X-Received: by 2002:a63:124a:: with SMTP id 10mr5554258pgs.254.1565141661706; 
- Tue, 06 Aug 2019 18:34:21 -0700 (PDT)
+ bh=GAYBkmVoEF3i3+udFKn42Z4HyLG0jAAiACtL32v96bk=;
+ b=cv2AqDogDGfLjxfw94PGJSxqB2/UuIksrNQvf+ouykcB6aozBv+Cx4BBPRRHjCc2fR
+ 9/go0TfioKjICJ09odLxGXFJFK6t6kHXC5ZVGZ8n1IxneFetmrtbjSqVKnV9fOzv0eG5
+ at3zZwkCJDsrepmt1AL81eyCxYoV7oBrplAJf7COeQTYD8+EwlqTWWIW+SOFlV8dlg+m
+ csd79437dvQ5ajoekEe5mYK8sTd+AfqcvYfukuQwoodJJxepE79iv9D95/eIMxEpAezF
+ rp/bXPWzQKD1QqTZuvL85Ydbw88ycrC9MywmlmghMcs6pPVOSk7FkaIUVW4NOxz8Lsix
+ tLMQ==
+X-Gm-Message-State: APjAAAWlC/IxI07OMwt0RY77AzmkgqZXZmHeA4E2j6bX7ln8mF5mMGKM
+ j7J2+Qqze0YBZjxnBT1JlNM=
+X-Google-Smtp-Source: APXvYqwmirpRx7sRgblxTdJDdZc3lNLPB7sz+os8JHE4peLsZYES+zILuE4KL76TUaGsLoa8NjKqJA==
+X-Received: by 2002:a62:ae02:: with SMTP id q2mr6578356pff.1.1565141671450;
+ Tue, 06 Aug 2019 18:34:31 -0700 (PDT)
 Received: from blueforge.nvidia.com (searspoint.nvidia.com. [216.228.112.21])
  by smtp.gmail.com with ESMTPSA id
- u69sm111740800pgu.77.2019.08.06.18.34.20
+ u69sm111740800pgu.77.2019.08.06.18.34.29
  (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
- Tue, 06 Aug 2019 18:34:21 -0700 (PDT)
+ Tue, 06 Aug 2019 18:34:30 -0700 (PDT)
 From: john.hubbard@gmail.com
 X-Google-Original-From: jhubbard@nvidia.com
 To: Andrew Morton <akpm@linux-foundation.org>
-Date: Tue,  6 Aug 2019 18:33:22 -0700
-Message-Id: <20190807013340.9706-24-jhubbard@nvidia.com>
+Date: Tue,  6 Aug 2019 18:33:28 -0700
+Message-Id: <20190807013340.9706-30-jhubbard@nvidia.com>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190807013340.9706-1-jhubbard@nvidia.com>
 References: <20190807013340.9706-1-jhubbard@nvidia.com>
 MIME-Version: 1.0
 X-NVConfidentiality: public
-Subject: [Xen-devel] [PATCH v3 23/41] fs/exec.c: convert put_page() to
+Subject: [Xen-devel] [PATCH v3 29/41] mm/memory.c: convert put_page() to
  put_user_page*()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -89,23 +89,28 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: linux-fbdev@vger.kernel.org, Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+Cc: linux-fbdev@vger.kernel.org, Michal Hocko <mhocko@suse.com>,
+ Jan Kara <jack@suse.cz>, kvm@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>, Dave Chinner <david@fromorbit.com>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- sparclinux@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>,
- ceph-devel@vger.kernel.org, devel@driverdev.osuosl.org,
- rds-devel@oss.oracle.com, linux-rdma@vger.kernel.org, x86@kernel.org,
- amd-gfx@lists.freedesktop.org, Christoph Hellwig <hch@infradead.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, xen-devel@lists.xenproject.org,
+ Matthew Wilcox <willy@infradead.org>, sparclinux@vger.kernel.org,
+ Ira Weiny <ira.weiny@intel.com>, ceph-devel@vger.kernel.org,
+ devel@driverdev.osuosl.org, rds-devel@oss.oracle.com,
+ linux-rdma@vger.kernel.org, "Aneesh Kumar K . V" <aneesh.kumar@linux.ibm.com>,
+ x86@kernel.org, amd-gfx@lists.freedesktop.org,
+ Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Huang Ying <ying.huang@intel.com>, xen-devel@lists.xenproject.org,
  devel@lists.orangefs.org, linux-media@vger.kernel.org,
- John Hubbard <jhubbard@nvidia.com>, intel-gfx@lists.freedesktop.org,
- linux-block@vger.kernel.org,
+ Rik van Riel <riel@surriel.com>, John Hubbard <jhubbard@nvidia.com>,
+ intel-gfx@lists.freedesktop.org, linux-block@vger.kernel.org,
  =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
- linux-rpi-kernel@lists.infradead.org, Dan Williams <dan.j.williams@intel.com>,
- linux-arm-kernel@lists.infradead.org, linux-nfs@vger.kernel.org,
- netdev@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+ linux-rpi-kernel@lists.infradead.org, Will Deacon <will.deacon@arm.com>,
+ Dan Williams <dan.j.williams@intel.com>, linux-arm-kernel@lists.infradead.org,
+ linux-nfs@vger.kernel.org, netdev@vger.kernel.org,
+ LKML <linux-kernel@vger.kernel.org>, Souptick Joarder <jrdr.linux@gmail.com>,
  linux-xfs@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, Alexander Viro <viro@zeniv.linux.org.uk>
+ linux-fsdevel@vger.kernel.org
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
@@ -116,17 +121,22 @@ d2VyZSByZXRhaW5lZCB2aWEgZ2V0X3VzZXJfcGFnZXMqKCksIHJlbGVhc2UgdGhvc2UgcGFnZXMK
 dmlhIHRoZSBuZXcgcHV0X3VzZXJfcGFnZSooKSByb3V0aW5lcywgaW5zdGVhZCBvZiB2aWEgcHV0
 X3BhZ2UoKSBvcgpyZWxlYXNlX3BhZ2VzKCkuCgpUaGlzIGlzIHBhcnQgYSB0cmVlLXdpZGUgY29u
 dmVyc2lvbiwgYXMgZGVzY3JpYmVkIGluIGNvbW1pdCBmYzFkOGU3Y2NhMmQKKCJtbTogaW50cm9k
-dWNlIHB1dF91c2VyX3BhZ2UqKCksIHBsYWNlaG9sZGVyIHZlcnNpb25zIikuCgpDYzogQWxleGFu
-ZGVyIFZpcm8gPHZpcm9AemVuaXYubGludXgub3JnLnVrPgpDYzogbGludXgtZnNkZXZlbEB2Z2Vy
-Lmtlcm5lbC5vcmcKU2lnbmVkLW9mZi1ieTogSm9obiBIdWJiYXJkIDxqaHViYmFyZEBudmlkaWEu
-Y29tPgotLS0KIGZzL2V4ZWMuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigr
-KSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2ZzL2V4ZWMuYyBiL2ZzL2V4ZWMuYwppbmRl
-eCBmN2Y2YTE0MDg1NmEuLmVlNDQyMTUxNTgyZiAxMDA2NDQKLS0tIGEvZnMvZXhlYy5jCisrKyBi
-L2ZzL2V4ZWMuYwpAQCAtMjI3LDcgKzIyNyw3IEBAIHN0YXRpYyBzdHJ1Y3QgcGFnZSAqZ2V0X2Fy
-Z19wYWdlKHN0cnVjdCBsaW51eF9iaW5wcm0gKmJwcm0sIHVuc2lnbmVkIGxvbmcgcG9zLAogCiBz
-dGF0aWMgdm9pZCBwdXRfYXJnX3BhZ2Uoc3RydWN0IHBhZ2UgKnBhZ2UpCiB7Ci0JcHV0X3BhZ2Uo
-cGFnZSk7CisJcHV0X3VzZXJfcGFnZShwYWdlKTsKIH0KIAogc3RhdGljIHZvaWQgZnJlZV9hcmdf
-cGFnZXMoc3RydWN0IGxpbnV4X2JpbnBybSAqYnBybSkKLS0gCjIuMjIuMAoKCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
-c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
-dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+dWNlIHB1dF91c2VyX3BhZ2UqKCksIHBsYWNlaG9sZGVyIHZlcnNpb25zIikuCgpDYzogQW5lZXNo
+IEt1bWFyIEsuViA8YW5lZXNoLmt1bWFyQGxpbnV4LmlibS5jb20+CkNjOiBIdWFuZyBZaW5nIDx5
+aW5nLmh1YW5nQGludGVsLmNvbT4KQ2M6IErDqXLDtG1lIEdsaXNzZSA8amdsaXNzZUByZWRoYXQu
+Y29tPgpDYzogTWF0dGhldyBXaWxjb3ggPHdpbGx5QGluZnJhZGVhZC5vcmc+CkNjOiBNaWNoYWwg
+SG9ja28gPG1ob2Nrb0BzdXNlLmNvbT4KQ2M6IFBldGVyIFppamxzdHJhIDxwZXRlcnpAaW5mcmFk
+ZWFkLm9yZz4KQ2M6IFJpayB2YW4gUmllbCA8cmllbEBzdXJyaWVsLmNvbT4KQ2M6IFNvdXB0aWNr
+IEpvYXJkZXIgPGpyZHIubGludXhAZ21haWwuY29tPgpDYzogV2lsbCBEZWFjb24gPHdpbGwuZGVh
+Y29uQGFybS5jb20+ClNpZ25lZC1vZmYtYnk6IEpvaG4gSHViYmFyZCA8amh1YmJhcmRAbnZpZGlh
+LmNvbT4KLS0tCiBtbS9tZW1vcnkuYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
+bigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL21tL21lbW9yeS5jIGIvbW0vbWVtb3J5
+LmMKaW5kZXggZTJiYjUxYjYyNDJlLi44ODcwOTY4NDk2ZWEgMTAwNjQ0Ci0tLSBhL21tL21lbW9y
+eS5jCisrKyBiL21tL21lbW9yeS5jCkBAIC00MzM3LDcgKzQzMzcsNyBAQCBpbnQgX19hY2Nlc3Nf
+cmVtb3RlX3ZtKHN0cnVjdCB0YXNrX3N0cnVjdCAqdHNrLCBzdHJ1Y3QgbW1fc3RydWN0ICptbSwK
+IAkJCQkJCSAgICBidWYsIG1hZGRyICsgb2Zmc2V0LCBieXRlcyk7CiAJCQl9CiAJCQlrdW5tYXAo
+cGFnZSk7Ci0JCQlwdXRfcGFnZShwYWdlKTsKKwkJCXB1dF91c2VyX3BhZ2UocGFnZSk7CiAJCX0K
+IAkJbGVuIC09IGJ5dGVzOwogCQlidWYgKz0gYnl0ZXM7Ci0tIAoyLjIyLjAKCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
