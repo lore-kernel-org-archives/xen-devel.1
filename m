@@ -2,64 +2,59 @@ Return-Path: <SRS0=NT3h=WD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 89A96C32756
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AA7AC4152F
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6668E229F8
+	by mail.kernel.org (Postfix) with ESMTPS id 55E36229F7
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6668E229F8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bt.com
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55E36229F7
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvHMP-0000gx-NR; Wed, 07 Aug 2019 08:31:53 +0000
+	id 1hvHMG-0000en-7u; Wed, 07 Aug 2019 08:31:44 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=DvAo=WD=bt.com=tony.nguyen@srs-us1.protection.inumbo.net>)
- id 1hvHL6-0000d8-BW
- for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:30:32 +0000
-X-Inumbo-ID: 9d1d6914-b8ed-11e9-8980-bc764e045a96
-Received: from smtpe1.intersmtp.com (unknown [213.121.35.80])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=0f/x=WD=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1hvHMF-0000ei-2P
+ for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:31:43 +0000
+X-Inumbo-ID: c796bb78-b8ed-11e9-8980-bc764e045a96
+Received: from mx1.suse.de (unknown [195.135.220.15])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 9d1d6914-b8ed-11e9-8980-bc764e045a96;
- Wed, 07 Aug 2019 08:30:30 +0000 (UTC)
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- BWP09926085.bt.com (10.36.82.116) with Microsoft SMTP Server (version=TLS1_2, 
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
- 2019 09:30:08 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:30:28 +0100
-Received: from tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
- ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:30:28 +0100
-From: <tony.nguyen@bt.com>
-To: <qemu-devel@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v6 13/26] target/mips: Hard code size with
- MO_{8|16|32|64}
-Thread-Index: AQHVTPpe3pO2B8oHbkS8tiFNOyPXPg==
-Date: Wed, 7 Aug 2019 08:30:28 +0000
-Message-ID: <1565166627824.57868@bt.com>
-References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
-In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
-Accept-Language: en-AU, en-GB, en-US
-Content-Language: en-AU
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.187.101.44]
+ id c796bb78-b8ed-11e9-8980-bc764e045a96;
+ Wed, 07 Aug 2019 08:31:41 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 37497AF00;
+ Wed,  7 Aug 2019 08:31:40 +0000 (UTC)
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <20190731083631.63vqxrdr5vyeeswn@Air-de-Roger>
+ <20190731084336.lkpk4n35qg2zo67w@Air-de-Roger>
+ <CAMmSBy89cvwnRRPhorpUucLdc5LEak__Mtyw8ka5XvqP7W+q6A@mail.gmail.com>
+ <d6ba30f8-7959-57bc-3843-e11f48b52766@citrix.com>
+ <CAMmSBy9ZiEU95yAK1ry_41GR0ttWTX9EEJ0bMStZaK=PrzCH7w@mail.gmail.com>
+ <20190801081559.wruxck32h5bum2va@Air-de-Roger>
+ <CAMmSBy9y6hHQfDgcDFmKiRw9QiRSgcxHAq6Qo=o7apTR2EuusA@mail.gmail.com>
+ <20190802080540.r4e3rrv3eit5yebt@Air-de-Roger>
+ <20190806160644.adqzknxdfuwz4qaz@Air-de-Roger>
+ <CAMmSBy91XfNz5DfbaL8OC7v1eYp7n_EKjGgSgAH+YBALh9HM-g@mail.gmail.com>
+ <20190807073534.7uoqo7q7gno2ljyl@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <8a68c4c0-4f50-4e04-786c-7426fdc10db9@suse.com>
+Date: Wed, 7 Aug 2019 10:31:40 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Mailman-Approved-At: Wed, 07 Aug 2019 08:31:48 +0000
-Subject: [Xen-devel] [Qemu-devel] [PATCH v6 13/26] target/mips: Hard code
- size with MO_{8|16|32|64}
+In-Reply-To: <20190807073534.7uoqo7q7gno2ljyl@Air-de-Roger>
+Content-Language: en-US
+Subject: Re: [Xen-devel] [BUG] After upgrade to Xen 4.12.0 iommu=no-igfx
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,175 +65,41 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
- cohuck@redhat.com, sagark@eecs.berkeley.edu, david@redhat.com,
- jasowang@redhat.com, palmer@sifive.com, mark.cave-ayland@ilande.co.uk,
- i.mitsyanko@gmail.com, keith.busch@intel.com, jcmvbkbc@gmail.com,
- frederic.konrad@adacore.com, dmitry.fleytman@gmail.com, kraxel@redhat.com,
- edgar.iglesias@gmail.com, gxt@mprc.pku.edu.cn, pburton@wavecomp.com,
- xiaoguangrong.eric@gmail.com, peter.chubb@nicta.com.au, philmd@redhat.com,
- robh@kernel.org, hare@suse.com, sstabellini@kernel.org, berto@igalia.com,
- chouteau@adacore.com, qemu-block@nongnu.org, arikalo@wavecomp.com,
- jslaby@suse.cz, deller@gmx.de, mst@redhat.com, magnus.damm@gmail.com,
- jcd@tribudubois.net, pasic@linux.ibm.com, borntraeger@de.ibm.com,
- mreitz@redhat.com, hpoussin@reactos.org, joel@jms.id.au,
- anthony.perard@citrix.com, xen-devel@lists.xenproject.org,
- david@gibson.dropbear.id.au, lersek@redhat.com, green@moxielogic.com,
- atar4qemu@gmail.com, antonynpavlov@gmail.com, marex@denx.de, jiri@resnulli.us,
- ehabkost@redhat.com, minyard@acm.org, qemu-s390x@nongnu.org, sw@weilnetz.de,
- alistair@alistair23.me, yuval.shaia@oracle.com, b.galvani@gmail.com,
- eric.auger@redhat.com, alex.williamson@redhat.com, qemu-arm@nongnu.org,
- jan.kiszka@web.de, clg@kaod.org, stefanha@redhat.com,
- marcandre.lureau@redhat.com, shorne@gmail.com, jsnow@redhat.com,
- rth@twiddle.net, kwolf@redhat.com, qemu-riscv@nongnu.org, proljc@gmail.com,
- pbonzini@redhat.com, andrew@aj.id.au, kbastian@mail.uni-paderborn.de,
- crwulff@gmail.com, laurent@vivier.eu, Andrew.Baumann@microsoft.com,
- sundeep.lkml@gmail.com, andrew.smirnov@gmail.com, michael@walle.cc,
- paul.durrant@citrix.com, qemu-ppc@nongnu.org, huth@tuxfamily.org,
- amarkovic@wavecomp.com, imammedo@redhat.com, aurelien@aurel32.net,
- stefanb@linux.ibm.com
-Content-Type: multipart/mixed; boundary="===============3191154361462059724=="
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Roman Shaposhnik <roman@zededa.com>, Paul Durrant <Paul.Durrant@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "boris.ostrovsky@oracle.com" <boris.ostrovsky@oracle.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============3191154361462059724==
-Content-Language: en-AU
-Content-Type: multipart/alternative;
-	boundary="_000_156516662782457868btcom_"
-
---_000_156516662782457868btcom_
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-Temporarily no-op size_memop was introduced to aid the conversion of
-memory_region_dispatch_{read|write} operand "unsigned size" into
-"MemOp op".
-
-Now size_memop is implemented, again hard coded size but with
-MO_{8|16|32|64}. This is more expressive and avoid size_memop calls.
-
-Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
----
- target/mips/op_helper.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/target/mips/op_helper.c b/target/mips/op_helper.c
-index 1c72a00..e79f99d 100644
---- a/target/mips/op_helper.c
-+++ b/target/mips/op_helper.c
-@@ -4741,11 +4741,11 @@ void helper_cache(CPUMIPSState *env, target_ulong a=
-ddr, uint32_t op)
-     if (op =3D=3D 9) {
-         /* Index Store Tag */
-         memory_region_dispatch_write(env->itc_tag, index, env->CP0_TagLo,
--                                     size_memop(8), MEMTXATTRS_UNSPECIFIED=
-);
-+                                     MO_64, MEMTXATTRS_UNSPECIFIED);
-     } else if (op =3D=3D 5) {
-         /* Index Load Tag */
-         memory_region_dispatch_read(env->itc_tag, index, &env->CP0_TagLo,
--                                    size_memop(8), MEMTXATTRS_UNSPECIFIED)=
-;
-+                                    MO_64, MEMTXATTRS_UNSPECIFIED);
-     }
- #endif
- }
---
-1.8.3.1
-
-?
-
-
---_000_156516662782457868btcom_
-Content-Type: text/html; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
-1">
-<style type=3D"text/css" style=3D"display:none"><!-- P { margin-top: 0px; m=
-argin-bottom: 0px; } .EmailQuote { margin-left: 1pt; padding-left: 4pt; bor=
-der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
-0, 0); }--></style>
-</head>
-<body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
-FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
-<p></p>
-<div style=3D"color: rgb(33, 33, 33);"><font size=3D"2"><span style=3D"font=
--size:10pt;">
-<div class=3D"PlainText">
-<div><span style=3D"font-size: 10pt;">Temporarily no-op size_memop was intr=
-oduced to aid the conversion of</span><br>
-</div>
-<div>memory_region_dispatch_{read|write} operand &quot;unsigned size&quot; =
-into</div>
-<div>&quot;MemOp op&quot;.</div>
-<div><br>
-</div>
-<div>Now size_memop is implemented, again hard coded size but with</div>
-<div>MO_{8|16|32|64}. This is more expressive and avoid size_memop calls.</=
-div>
-<div><br>
-</div>
-<div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
-<div>---</div>
-<div>&nbsp;target/mips/op_helper.c | 4 &#43;&#43;--</div>
-<div>&nbsp;1 file changed, 2 insertions(&#43;), 2 deletions(-)</div>
-<div><br>
-</div>
-<div>diff --git a/target/mips/op_helper.c b/target/mips/op_helper.c</div>
-<div>index 1c72a00..e79f99d 100644</div>
-<div>--- a/target/mips/op_helper.c</div>
-<div>&#43;&#43;&#43; b/target/mips/op_helper.c</div>
-<div>@@ -4741,11 &#43;4741,11 @@ void helper_cache(CPUMIPSState *env, targe=
-t_ulong addr, uint32_t op)</div>
-<div>&nbsp; &nbsp; &nbsp;if (op =3D=3D 9) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Index Store Tag */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory_region_dispatch_write(env-&gt=
-;itc_tag, index, env-&gt;CP0_TagLo,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; size_memop(8), ME=
-MTXATTRS_UNSPECIFIED);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MO_64, MEMTXA=
-TTRS_UNSPECIFIED);</div>
-<div>&nbsp; &nbsp; &nbsp;} else if (op =3D=3D 5) {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* Index Load Tag */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory_region_dispatch_read(env-&gt;=
-itc_tag, index, &amp;env-&gt;CP0_TagLo,</div>
-<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
-; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;size_memop(8), MEM=
-TXATTRS_UNSPECIFIED);</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MO_64, MEMTXAT=
-TRS_UNSPECIFIED);</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>&nbsp;#endif</div>
-<div>&nbsp;}</div>
-<div>--&nbsp;</div>
-<div>1.8.3.1</div>
-<div><br>
-&#8203;<br>
-</div>
-<br>
-</div>
-</span></font></div>
-</body>
-</html>
-
---_000_156516662782457868btcom_--
-
-
---===============3191154361462059724==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3191154361462059724==--
-
+T24gMDcuMDguMjAxOSAwOTozNSwgUm9nZXIgUGF1IE1vbm7DqSAgd3JvdGU6Cj4gT24gVHVlLCBB
+dWcgMDYsIDIwMTkgYXQgMDI6NDg6NTFQTSAtMDcwMCwgUm9tYW4gU2hhcG9zaG5payB3cm90ZToK
+Pj4gT24gVHVlLCBBdWcgNiwgMjAxOSBhdCA5OjE4IEFNIFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2Vy
+LnBhdUBjaXRyaXguY29tPiB3cm90ZToKPj4+Cj4+PiBPbiBGcmksIEF1ZyAwMiwgMjAxOSBhdCAx
+MDowNTo0MEFNICswMjAwLCBSb2dlciBQYXUgTW9ubsOpIHdyb3RlOgo+Pj4+IE9uIFRodSwgQXVn
+IDAxLCAyMDE5IGF0IDExOjI1OjA0QU0gLTA3MDAsIFJvbWFuIFNoYXBvc2huaWsgd3JvdGU6Cj4+
+Pj4+IFRoaXMgcGF0Y2ggY29tcGxldGVseSBmaXhlcyB0aGUgcHJvYmxlbSBmb3IgbWUhCj4+Pj4+
+Cj4+Pj4+IFRoYW5rcyBSb2dlciEgSSdkIGxvdmUgdG8gc2VlIHRoaXMgaW4gWGVuIDQuMTMKPj4+
+Pgo+Pj4+IFRoYW5rcyBmb3IgdGVzdGluZyEKPj4+Pgo+Pj4+IEl0J3Mgc3RpbGwgbm90IGNsZWFy
+IHRvIG1lIHdoeSB0aGUgcHJldmlvdXMgYXBwcm9hY2ggZGlkbid0IHdvcmssIGJ1dAo+Pj4+IEkg
+dGhpbmsgdGhpcyBwYXRjaCBpcyBiZXR0ZXIgYmVjYXVzZSBpdCByZW1vdmVzIHRoZSB1c2FnZSBv
+Zgo+Pj4+IHtzZXQvY2xlYXJ9X2lkZW50aXR5X3AybV9lbnRyeSBmcm9tIFBWIGRvbWFpbnMuIEkg
+d2lsbCBzdWJtaXQgdGhpcwo+Pj4+IGZvcm1hbGx5IG5vdy4KPj4+Cj4+PiBTb3JyeSB0byBib3Ro
+ZXIgYWdhaW4sIGJ1dCBzaW5jZSB3ZSBzdGlsbCBkb24ndCB1bmRlcnN0YW5kIHdoeSB0aGUKPj4+
+IHByZXZpb3VzIGZpeCBkaWRuJ3Qgd29yayBmb3IgeW91LCBhbmQgSSBjYW4ndCByZXByb2R1Y2Ug
+dGhpcyB3aXRoIG15Cj4+PiBoYXJkd2FyZSwgY291bGQgeW91IGdpdmUgdGhlIGF0dGFjaGVkIHBh
+dGNoIGEgdHJ5Pwo+Pgo+PiBObyB3b3JyaWVzIC0tIGFuZCB0aGFua3MgZm9yIGhlbHBpbmcgdG8g
+Z2V0IGl0IG92ZXIgdGhlIGZpbmlzaCBsaW5lIC0tCj4+IHRoaXMgaXMgbXVjaCBhcHByZWNpYXRl
+ZCEKPj4KPj4gSSdtIGhhcHB5IHRvIHNheSB0aGF0IHRoaXMgbGF0ZXN0IHBhdGNoIGlzIGFsc28g
+d29ya2luZyBqdXN0IGZpbmUuIFNvCj4+IEkgZ3Vlc3MgdGhpcyBpcyB0aGUgb25lIHRoYXQncyBn
+b2luZyB0byBsYW5kIGluIFhlbiA0LjEzPwo+IAo+IE5vLCBub3QgcmVhbGx5LCBzb3JyeSB0aGlz
+IHdhcyBzdGlsbCBhIGRlYnVnIHBhdGNoLgo+IAo+IFNvIEkgdGhpbmsgdGhlIGJlaGF2aW91ciB5
+b3UgYXJlIHNlZWluZyBjYW4gb25seSBiZSBleHBsYWluZWQgaWYgdGhlCj4gSU9NTVUgaXMgYWxy
+ZWFkeSBlbmFibGVkIGJ5IHRoZSBmaXJtd2FyZSB3aGVuIGJvb3RpbmcgaW50byBYZW4sIGNhbgo+
+IHRoaXMgYmUgdGhlIGNhc2U/CgpFdmVuIHRoZW4gLSB3aHkgd291bGQgdGhlIGV4aXN0aW5nIGZs
+dXNoIG5vdCBzdWZmaWNlIGluIHRoaXMgY2FzZT8KCkphbgoKX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
+ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
+bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
