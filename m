@@ -6,49 +6,48 @@ X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
 	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 349C6C41517
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 58FD5C19759
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0A04D229F7
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0A04D229F7
+	by mail.kernel.org (Postfix) with ESMTPS id 2AB58229F3
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2AB58229F3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bt.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvHMQ-0000h8-28; Wed, 07 Aug 2019 08:31:54 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hvHMO-0000gK-GD; Wed, 07 Aug 2019 08:31:52 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=DvAo=WD=bt.com=tony.nguyen@srs-us1.protection.inumbo.net>)
- id 1hvHLQ-0000dW-9q
- for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:30:52 +0000
-X-Inumbo-ID: a76e59ae-b8ed-11e9-965b-cbb4d1833f23
-Received: from smtpe1.intersmtp.com (unknown [213.121.35.76])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a76e59ae-b8ed-11e9-965b-cbb4d1833f23;
- Wed, 07 Aug 2019 08:30:47 +0000 (UTC)
+ id 1hvHJg-0008TK-8f
+ for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:29:04 +0000
+X-Inumbo-ID: 688360a2-b8ed-11e9-8980-bc764e045a96
+Received: from smtpe1.intersmtp.com (unknown [213.121.35.77])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id 688360a2-b8ed-11e9-8980-bc764e045a96;
+ Wed, 07 Aug 2019 08:29:01 +0000 (UTC)
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- BWP09926081.bt.com (10.36.82.112) with Microsoft SMTP Server (version=TLS1_2, 
+ BWP09926082.bt.com (10.36.82.113) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
- 2019 09:30:24 +0100
+ 2019 09:28:46 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
  tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:30:45 +0100
+ Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:28:59 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:30:45 +0100
+ 09:28:59 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v6 14/26] exec: Hard code size with
- MO_{8|16|32|64}
-Thread-Index: AQHVTPpoMuuROMAgcEKe8DxLFbduJw==
-Date: Wed, 7 Aug 2019 08:30:45 +0000
-Message-ID: <1565166644883.25395@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v6 09/26] exec: Access MemoryRegion with
+ MemOp
+Thread-Index: AQHVTPopl/eCIE+w30qkb8WHjtwBMw==
+Date: Wed, 7 Aug 2019 08:28:59 +0000
+Message-ID: <1565166539442.24361@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -59,8 +58,8 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.44]
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 07 Aug 2019 08:31:48 +0000
-Subject: [Xen-devel] [Qemu-devel] [PATCH v6 14/26] exec: Hard code size with
- MO_{8|16|32|64}
+Subject: [Xen-devel] [Qemu-devel] [PATCH v6 09/26] exec: Access MemoryRegion
+ with MemOp
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,33 +97,67 @@ Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
  paul.durrant@citrix.com, qemu-ppc@nongnu.org, huth@tuxfamily.org,
  amarkovic@wavecomp.com, imammedo@redhat.com, aurelien@aurel32.net,
  stefanb@linux.ibm.com
-Content-Type: multipart/mixed; boundary="===============5576793863668627418=="
+Content-Type: multipart/mixed; boundary="===============7550659809370859858=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============5576793863668627418==
+--===============7550659809370859858==
 Content-Language: en-AU
 Content-Type: multipart/alternative;
-	boundary="_000_156516664488325395btcom_"
+	boundary="_000_156516653944224361btcom_"
 
---_000_156516664488325395btcom_
+--_000_156516653944224361btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Temporarily no-op size_memop was introduced to aid the conversion of
-memory_region_dispatch_{read|write} operand "unsigned size" into
-"MemOp op".
+The memory_region_dispatch_{read|write} operand "unsigned size" is
+being converted into a "MemOp op".
 
-Now size_memop is implemented, again hard coded size but with
-MO_{8|16|32|64}. This is more expressive and avoid size_memop calls.
+Convert interfaces by using no-op size_memop.
+
+After all interfaces are converted, size_memop will be implemented
+and the memory_region_dispatch_{read|write} operand "unsigned size"
+will be converted into a "MemOp op".
+
+As size_memop is a no-op, this patch does not change any behaviour.
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
+ exec.c            |  6 ++++--
  memory_ldst.inc.c | 18 +++++++++---------
- 1 file changed, 9 insertions(+), 9 deletions(-)
+ 2 files changed, 13 insertions(+), 11 deletions(-)
 
+diff --git a/exec.c b/exec.c
+index 3e78de3..9f69197 100644
+--- a/exec.c
++++ b/exec.c
+@@ -3334,7 +3334,8 @@ static MemTxResult flatview_write_continue(FlatView *=
+fv, hwaddr addr,
+             /* XXX: could force current_cpu to NULL to avoid
+                potential bugs */
+             val =3D ldn_p(buf, l);
+-            result |=3D memory_region_dispatch_write(mr, addr1, val, l, at=
+trs);
++            result |=3D memory_region_dispatch_write(mr, addr1, val,
++                                                   size_memop(l), attrs);
+         } else {
+             /* RAM case */
+             ptr =3D qemu_ram_ptr_length(mr->ram_block, addr1, &l, false);
+@@ -3395,7 +3396,8 @@ MemTxResult flatview_read_continue(FlatView *fv, hwad=
+dr addr,
+             /* I/O case */
+             release_lock |=3D prepare_mmio_access(mr);
+             l =3D memory_access_size(mr, l, addr1);
+-            result |=3D memory_region_dispatch_read(mr, addr1, &val, l, at=
+trs);
++            result |=3D memory_region_dispatch_read(mr, addr1, &val,
++                                                  size_memop(l), attrs);
+             stn_p(buf, l, val);
+         } else {
+             /* RAM case */
 diff --git a/memory_ldst.inc.c b/memory_ldst.inc.c
-index 1e8a2fc..de658c4 100644
+index acf865b..1e8a2fc 100644
 --- a/memory_ldst.inc.c
 +++ b/memory_ldst.inc.c
 @@ -38,7 +38,7 @@ static inline uint32_t glue(address_space_ldl_internal, S=
@@ -132,9 +165,9 @@ UFFIX)(ARG1_DECL,
          release_lock |=3D prepare_mmio_access(mr);
 
          /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(4), =
+-        r =3D memory_region_dispatch_read(mr, addr1, &val, 4, attrs);
++        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(4), =
 attrs);
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_32, attrs);
  #if defined(TARGET_WORDS_BIGENDIAN)
          if (endian =3D=3D DEVICE_LITTLE_ENDIAN) {
              val =3D bswap32(val);
@@ -143,9 +176,9 @@ attrs);
          release_lock |=3D prepare_mmio_access(mr);
 
          /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(8), =
+-        r =3D memory_region_dispatch_read(mr, addr1, &val, 8, attrs);
++        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(8), =
 attrs);
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_64, attrs);
  #if defined(TARGET_WORDS_BIGENDIAN)
          if (endian =3D=3D DEVICE_LITTLE_ENDIAN) {
              val =3D bswap64(val);
@@ -153,9 +186,9 @@ attrs);
          release_lock |=3D prepare_mmio_access(mr);
 
          /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(1), =
+-        r =3D memory_region_dispatch_read(mr, addr1, &val, 1, attrs);
++        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(1), =
 attrs);
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_8, attrs);
      } else {
          /* RAM case */
          ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
@@ -164,9 +197,9 @@ attrs);
          release_lock |=3D prepare_mmio_access(mr);
 
          /* I/O case */
--        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(2), =
+-        r =3D memory_region_dispatch_read(mr, addr1, &val, 2, attrs);
++        r =3D memory_region_dispatch_read(mr, addr1, &val, size_memop(2), =
 attrs);
-+        r =3D memory_region_dispatch_read(mr, addr1, &val, MO_16, attrs);
  #if defined(TARGET_WORDS_BIGENDIAN)
          if (endian =3D=3D DEVICE_LITTLE_ENDIAN) {
              val =3D bswap16(val);
@@ -175,9 +208,9 @@ attrs);
      if (l < 4 || !memory_access_is_direct(mr, true)) {
          release_lock |=3D prepare_mmio_access(mr);
 
--        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(4), =
+-        r =3D memory_region_dispatch_write(mr, addr1, val, 4, attrs);
++        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(4), =
 attrs);
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_32, attrs);
      } else {
          ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
          stl_p(ptr, val);
@@ -186,9 +219,9 @@ FIX)(ARG1_DECL,
              val =3D bswap32(val);
          }
  #endif
--        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(4), =
+-        r =3D memory_region_dispatch_write(mr, addr1, val, 4, attrs);
++        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(4), =
 attrs);
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_32, attrs);
      } else {
          /* RAM case */
          ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
@@ -196,9 +229,9 @@ attrs);
      mr =3D TRANSLATE(addr, &addr1, &l, true, attrs);
      if (!memory_access_is_direct(mr, true)) {
          release_lock |=3D prepare_mmio_access(mr);
--        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(1), =
+-        r =3D memory_region_dispatch_write(mr, addr1, val, 1, attrs);
++        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(1), =
 attrs);
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_8, attrs);
      } else {
          /* RAM case */
          ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
@@ -207,9 +240,9 @@ FIX)(ARG1_DECL,
              val =3D bswap16(val);
          }
  #endif
--        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(2), =
+-        r =3D memory_region_dispatch_write(mr, addr1, val, 2, attrs);
++        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(2), =
 attrs);
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_16, attrs);
      } else {
          /* RAM case */
          ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
@@ -218,9 +251,9 @@ G1_DECL,
              val =3D bswap64(val);
          }
  #endif
--        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(8), =
+-        r =3D memory_region_dispatch_write(mr, addr1, val, 8, attrs);
++        r =3D memory_region_dispatch_write(mr, addr1, val, size_memop(8), =
 attrs);
-+        r =3D memory_region_dispatch_write(mr, addr1, val, MO_64, attrs);
      } else {
          /* RAM case */
          ptr =3D qemu_map_ram_ptr(mr->ram_block, addr1);
@@ -230,7 +263,7 @@ attrs);
 ?
 
 
---_000_156516664488325395btcom_
+--_000_156516653944224361btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -249,28 +282,80 @@ FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <div style=3D"color: rgb(33, 33, 33);"><font size=3D"2"><span style=3D"font=
 -size:10pt;">
 <div class=3D"PlainText">
-<div><span style=3D"font-size: 10pt;">Temporarily no-op size_memop was intr=
-oduced to aid the conversion of</span><br>
+<div><span style=3D"font-size: 10pt;">The memory_region_dispatch_{read|writ=
+e} operand &quot;unsigned size&quot; is</span><br>
 </div>
-<div>memory_region_dispatch_{read|write} operand &quot;unsigned size&quot; =
-into</div>
-<div>&quot;MemOp op&quot;.</div>
+<div>being converted into a &quot;MemOp op&quot;.</div>
 <div><br>
 </div>
-<div>Now size_memop is implemented, again hard coded size but with</div>
-<div>MO_{8|16|32|64}. This is more expressive and avoid size_memop calls.</=
-div>
+<div>Convert interfaces by using no-op size_memop.</div>
+<div><br>
+</div>
+<div>After all interfaces are converted, size_memop will be implemented</di=
+v>
+<div>and the memory_region_dispatch_{read|write} operand &quot;unsigned siz=
+e&quot;</div>
+<div>will be converted into a &quot;MemOp op&quot;.</div>
+<div><br>
+</div>
+<div>As size_memop is a no-op, this patch does not change any behaviour.</d=
+iv>
 <div><br>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
+<div>Reviewed-by: Richard Henderson &lt;richard.henderson@linaro.org&gt;</d=
+iv>
 <div>---</div>
+<div>&nbsp;exec.c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| &nbsp;6 &#43;&=
+#43;&#43;&#43;--</div>
 <div>&nbsp;memory_ldst.inc.c | 18 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#43;&=
 #43;---------</div>
-<div>&nbsp;1 file changed, 9 insertions(&#43;), 9 deletions(-)</div>
+<div>&nbsp;2 files changed, 13 insertions(&#43;), 11 deletions(-)</div>
 <div><br>
 </div>
+<div>diff --git a/exec.c b/exec.c</div>
+<div>index 3e78de3..9f69197 100644</div>
+<div>--- a/exec.c</div>
+<div>&#43;&#43;&#43; b/exec.c</div>
+<div>@@ -3334,7 &#43;3334,8 @@ static MemTxResult flatview_write_continue(F=
+latView *fv, hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* XXX: could force cu=
+rrent_cpu to NULL to avoid</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; potential bugs=
+ */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;val =3D ldn_p(buf, l);=
+</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;result |=3D memory_region_d=
+ispatch_write(mr, addr1, val, l, attrs);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;result |=3D memory_regi=
+on_dispatch_write(mr, addr1, val,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; size_memop(l), attrs);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_ram_ptr_l=
+ength(mr-&gt;ram_block, addr1, &amp;l, false);</div>
+<div>@@ -3395,7 &#43;3396,8 @@ MemTxResult flatview_read_continue(FlatView =
+*fv, hwaddr addr,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;release_lock |=3D prep=
+are_mmio_access(mr);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;l =3D memory_access_si=
+ze(mr, l, addr1);</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;result |=3D memory_region_d=
+ispatch_read(mr, addr1, &amp;val, l, attrs);</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;result |=3D memory_regi=
+on_dispatch_read(mr, addr1, &amp;val,</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;size_memop(l), attrs);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;stn_p(buf, l, val);</d=
+iv>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} else {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
 <div>diff --git a/memory_ldst.inc.c b/memory_ldst.inc.c</div>
-<div>index 1e8a2fc..de658c4 100644</div>
+<div>index acf865b..1e8a2fc 100644</div>
 <div>--- a/memory_ldst.inc.c</div>
 <div>&#43;&#43;&#43; b/memory_ldst.inc.c</div>
 <div>@@ -38,7 &#43;38,7 @@ static inline uint32_t glue(address_space_ldl_in=
@@ -280,9 +365,9 @@ s(mr);</div>
 <div>&nbsp;</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, size_memop(4), attrs);</div>
+r1, &amp;val, 4, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_32, attrs);</div>
+ addr1, &amp;val, size_memop(4), attrs);</div>
 <div>&nbsp;#if defined(TARGET_WORDS_BIGENDIAN)</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (endian =3D=3D DEVICE_LITTLE_ENDI=
 AN) {</div>
@@ -295,9 +380,9 @@ s(mr);</div>
 <div>&nbsp;</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, size_memop(8), attrs);</div>
+r1, &amp;val, 8, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_64, attrs);</div>
+ addr1, &amp;val, size_memop(8), attrs);</div>
 <div>&nbsp;#if defined(TARGET_WORDS_BIGENDIAN)</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (endian =3D=3D DEVICE_LITTLE_ENDI=
 AN) {</div>
@@ -310,9 +395,9 @@ s(mr);</div>
 <div>&nbsp;</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, size_memop(1), attrs);</div>
+r1, &amp;val, 1, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_8, attrs);</div>
+ addr1, &amp;val, size_memop(1), attrs);</div>
 <div>&nbsp; &nbsp; &nbsp;} else {</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
@@ -324,9 +409,9 @@ s(mr);</div>
 <div>&nbsp;</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* I/O case */</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, add=
-r1, &amp;val, size_memop(2), attrs);</div>
+r1, &amp;val, 2, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr,=
- addr1, &amp;val, MO_16, attrs);</div>
+ addr1, &amp;val, size_memop(2), attrs);</div>
 <div>&nbsp;#if defined(TARGET_WORDS_BIGENDIAN)</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (endian =3D=3D DEVICE_LITTLE_ENDI=
 AN) {</div>
@@ -340,9 +425,9 @@ ARG1_DECL,</div>
 s(mr);</div>
 <div>&nbsp;</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, size_memop(4), attrs);</div>
+dr1, val, 4, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_32, attrs);</div>
+, addr1, val, size_memop(4), attrs);</div>
 <div>&nbsp; &nbsp; &nbsp;} else {</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
 block, addr1);</div>
@@ -354,9 +439,9 @@ rnal, SUFFIX)(ARG1_DECL,</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
 <div>&nbsp;#endif</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, size_memop(4), attrs);</div>
+dr1, val, 4, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_32, attrs);</div>
+, addr1, val, size_memop(4), attrs);</div>
 <div>&nbsp; &nbsp; &nbsp;} else {</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
@@ -369,9 +454,9 @@ ttrs);</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;release_lock |=3D prepare_mmio_acces=
 s(mr);</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, size_memop(1), attrs);</div>
+dr1, val, 1, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_8, attrs);</div>
+, addr1, val, size_memop(1), attrs);</div>
 <div>&nbsp; &nbsp; &nbsp;} else {</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
@@ -383,9 +468,9 @@ rnal, SUFFIX)(ARG1_DECL,</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
 <div>&nbsp;#endif</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, size_memop(2), attrs);</div>
+dr1, val, 2, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_16, attrs);</div>
+, addr1, val, size_memop(2), attrs);</div>
 <div>&nbsp; &nbsp; &nbsp;} else {</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
@@ -397,9 +482,9 @@ UFFIX)(ARG1_DECL,</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}</div>
 <div>&nbsp;#endif</div>
 <div>- &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, ad=
-dr1, val, size_memop(8), attrs);</div>
+dr1, val, 8, attrs);</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr=
-, addr1, val, MO_64, attrs);</div>
+, addr1, val, size_memop(8), attrs);</div>
 <div>&nbsp; &nbsp; &nbsp;} else {</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* RAM case */</div>
 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ptr =3D qemu_map_ram_ptr(mr-&gt;ram_=
@@ -415,10 +500,10 @@ block, addr1);</div>
 </body>
 </html>
 
---_000_156516664488325395btcom_--
+--_000_156516653944224361btcom_--
 
 
---===============5576793863668627418==
+--===============7550659809370859858==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -428,5 +513,5 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5576793863668627418==--
+--===============7550659809370859858==--
 
