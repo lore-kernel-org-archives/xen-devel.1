@@ -2,78 +2,89 @@ Return-Path: <SRS0=NT3h=WD=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=0.6 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFCB9C32751
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 13:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 443FDC32751
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 13:27:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7363421E6B
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 13:12:10 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 084EA21E6B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 13:27:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="T5ufX736"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7363421E6B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="kwpGucQo"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 084EA21E6B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvLjM-0003IC-Vo; Wed, 07 Aug 2019 13:11:52 +0000
+	id 1hvLyI-00049l-4l; Wed, 07 Aug 2019 13:27:18 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=EA5+=WD=gmail.com=viktor.mitin.19@srs-us1.protection.inumbo.net>)
- id 1hvLjL-0003I7-Vf
- for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 13:11:52 +0000
-X-Inumbo-ID: eade847a-b914-11e9-8980-bc764e045a96
-Received: from mail-ot1-x344.google.com (unknown [2607:f8b0:4864:20::344])
+ <SRS0=dGpx=WD=amazon.com=prvs=115058da6=elnikety@srs-us1.protection.inumbo.net>)
+ id 1hvLyG-00049g-Uc
+ for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 13:27:17 +0000
+X-Inumbo-ID: 1239fe9a-b917-11e9-8980-bc764e045a96
+Received: from smtp-fw-2101.amazon.com (unknown [72.21.196.25])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id eade847a-b914-11e9-8980-bc764e045a96;
- Wed, 07 Aug 2019 13:11:50 +0000 (UTC)
-Received: by mail-ot1-x344.google.com with SMTP id j11so3607421otp.10
- for <xen-devel@lists.xenproject.org>; Wed, 07 Aug 2019 06:11:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=/1gQlrvbrsZlQZOIp58ouva5IZ8f+tfDlikrDHHLn+g=;
- b=T5ufX736sgwJqkhu4dzyK7vWzaFavnLaaGiRZGUNJHIk/UBVtIMFTTcaZ8F8iKNhez
- 2t2GI3JqPoElX+r4H3WgB8DJhDC1+OAeyygVncf8zZV4ARU62F9h+I2SCyOPhs8h7Xfb
- SRUO/6DwXDqZqhUeoq8wJ0/lWo9EiwrjMD8J5wTnx7N2kYpfzDZ4D9yuJX0KFg9HY7mr
- WvFcQH9xRylY+0MnNkk2OmwB9zToOgqnJoXEEpAU+SP5YjkI3ZVpD2KecGfKiV4djQlg
- ffo1kR0B8L6PjNh9PSuiqkHmu6qqvwd1HeQpym70EdHJJq7W3JOtDW0Ka7c2jejU3EiM
- fsjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=/1gQlrvbrsZlQZOIp58ouva5IZ8f+tfDlikrDHHLn+g=;
- b=qEjG8MZvobycLf2GBWI8y3kkhq4yEEtHbYsL+4qKZOaKcnzeehsjUgoRrE1nZPZIGy
- 6/8yiL6Ecbew1uUoCHUMUqbo4R7dAtisL+oFA6+S4dEvRyO2ItiUoUR6w09UK+NxDHFn
- ElSVtRAUZqrYLd4uu2j8fVAvdCEzWiBNyZnsfwHPNezBn+VVmhrOU3Ytoh5gq/G1zThp
- uzt5axyA6AjiwTFWzDQzAuWBFIUf/eu3p7UlD6IdTpEC7+thiGszSk5F3Cdh/sfM91qt
- 3Y4+Cvm5PbjhQxbncghJKzAju6K9OOE1x42I0dGMFxbI5S2TCk501aD6o6F85B8Fl5IO
- 3Kiw==
-X-Gm-Message-State: APjAAAVDlA4oGt8Cz2WF8CGTZH+qvnDpVNmEC3HEzjQL8wEBbZdU7qP4
- 8lsd2l/goo9CcMZk/2cRCbXWjKXNe8zoRGyR3Y4=
-X-Google-Smtp-Source: APXvYqwZL7CEUA9wA562JfwcodUif16XHaGrPtnnFMo55lLWGDb66fj+E58sVFnNBn7DR+d2K2YtvVq2yLGAsVMvKNg=
-X-Received: by 2002:a5e:a70b:: with SMTP id b11mr4704631iod.286.1565183509868; 
- Wed, 07 Aug 2019 06:11:49 -0700 (PDT)
+ id 1239fe9a-b917-11e9-8980-bc764e045a96;
+ Wed, 07 Aug 2019 13:27:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+ t=1565184435; x=1596720435;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:mime-version;
+ bh=6d8YA6REd0jL+TwFjAqpHxb7hIBkZStlsjr6w7ygnZY=;
+ b=kwpGucQoOEXeNrkn1ZQAiWX//v4VJHTvCoFG4Le815NsQTylDY5XV8En
+ c6tUqzIy3p9wR7X6GMY/JwWxGnkJhxaiaYwpQo7KE9uViIVDqUfwaSPKy
+ I/VNNzapDpHLWD4POgTWid4EMsXgiSrBaXweuVjKpTIINp5czJt9CfFyD A=;
+X-IronPort-AV: E=Sophos;i="5.64,357,1559520000"; 
+ d="scan'208,217";a="745606982"
+Received: from iad6-co-svc-p1-lb1-vlan2.amazon.com (HELO
+ email-inbound-relay-1e-57e1d233.us-east-1.amazon.com) ([10.124.125.2])
+ by smtp-border-fw-out-2101.iad2.amazon.com with ESMTP;
+ 07 Aug 2019 13:27:14 +0000
+Received: from EX13MTAUEA001.ant.amazon.com
+ (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
+ by email-inbound-relay-1e-57e1d233.us-east-1.amazon.com (Postfix) with ESMTPS
+ id 3196B141DA8; Wed,  7 Aug 2019 13:27:11 +0000 (UTC)
+Received: from EX13D08UEE003.ant.amazon.com (10.43.62.118) by
+ EX13MTAUEA001.ant.amazon.com (10.43.61.243) with Microsoft SMTP Server (TLS)
+ id 15.0.1367.3; Wed, 7 Aug 2019 13:27:10 +0000
+Received: from EX13D03EUA002.ant.amazon.com (10.43.165.166) by
+ EX13D08UEE003.ant.amazon.com (10.43.62.118) with Microsoft SMTP Server (TLS)
+ id 15.0.1367.3; Wed, 7 Aug 2019 13:27:10 +0000
+Received: from EX13D03EUA002.ant.amazon.com ([10.43.165.166]) by
+ EX13D03EUA002.ant.amazon.com ([10.43.165.166]) with mapi id 15.00.1367.000;
+ Wed, 7 Aug 2019 13:27:09 +0000
+From: "Elnikety, Eslam" <elnikety@amazon.com>
+To: Jan Beulich <jbeulich@suse.com>
+Thread-Topic: [Xen-devel] [PATCH] evtchn: make support for different ABIs
+ tunable
+Thread-Index: AQHVTRIxUNF+eOebUkSjRBUx8cK6Dqbvj84AgAAHUYCAAAPcAIAAEn8A
+Date: Wed, 7 Aug 2019 13:27:09 +0000
+Message-ID: <79556E3F-65AD-42F4-96A0-8EEB99D59398@amazon.com>
+References: <20190807112024.19480-1-elnikety@amazon.com>
+ <0aaa7b3b-fc94-d3fb-7afc-2f670511fea0@citrix.com>
+ <9F89B8B5-D92E-4CA6-ABCF-5F8E9707AE94@amazon.com>
+ <6a5f6fa6-d387-a665-47f1-e5a1b0534a6e@suse.com>
+In-Reply-To: <6a5f6fa6-d387-a665-47f1-e5a1b0534a6e@suse.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.43.164.29]
 MIME-Version: 1.0
-References: <20190807101028.28778-1-viktor.mitin.19@gmail.com>
- <20190807101028.28778-3-viktor.mitin.19@gmail.com>
- <5f7c8f78-42e8-f8d6-8cb1-0b2560099293@arm.com>
-In-Reply-To: <5f7c8f78-42e8-f8d6-8cb1-0b2560099293@arm.com>
-From: Viktor Mitin <viktor.mitin.19@gmail.com>
-Date: Wed, 7 Aug 2019 16:11:38 +0300
-Message-ID: <CAOcoXZZz5qbJhPh8BpJh_90DjLDMUrQZ9PPv5ZsU8obeon5+hw@mail.gmail.com>
-To: Julien Grall <julien.grall@arm.com>
-Subject: Re: [Xen-devel] [PATCH v7 2/2] xen/arm: consolidate make_timer_node
- and make_timer_domU_node
+Precedence: Bulk
+Subject: Re: [Xen-devel] [PATCH] evtchn: make support for different ABIs
+ tunable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -81,165 +92,275 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Viktor Mitin <viktor_mitin@epam.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Julien Grall <julien.grall@arm.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Woodhouse,
+ David" <dwmw@amazon.co.uk>
+Content-Type: multipart/mixed; boundary="===============4884337438182974918=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGkgSnVsaWVuLAoKT24gV2VkLCBBdWcgNywgMjAxOSBhdCA0OjA1IFBNIEp1bGllbiBHcmFsbCA8
-anVsaWVuLmdyYWxsQGFybS5jb20+IHdyb3RlOgo+Cj4KPiBIaSwKPiBPbiAwNy8wOC8yMDE5IDEx
-OjEwLCBWaWt0b3IgTWl0aW4gd3JvdGU6Cj4gPiBGdW5jdGlvbnMgbWFrZV90aW1lcl9ub2RlIGFu
-ZCBtYWtlX3RpbWVyX2RvbVVfbm9kZSBhcmUgcXVpdGUgc2ltaWxhci4KPiA+IFNvIGl0IGlzIGJl
-dHRlciB0byBjb25zb2xpZGF0ZSB0aGVtIHRvIGF2b2lkIGRpc2NyZXBhbmN5Lgo+ID4gVGhlIG1h
-aW4gZGlmZmVyZW5jZSBiZXR3ZWVuIHRoZSBmdW5jdGlvbnMgaXMgdGhlIHRpbWVyIGludGVycnVw
-dHMgdXNlZC4KPiA+Cj4gPiBLZWVwIHRoZSBkb21VIHZlcnNpb24gZm9yIHRoZSBjb21wYXRpYmxl
-IGFzIGl0IGlzIHNpbXBsZXI6Cj4gPiBkbyBub3QgY29weSBwbGF0Zm9ybSdzICdjb21wYXRpYmxl
-JyBwcm9wZXJ0eSBpbnRvIGh3ZG9tIGRldmljZSB0cmVlLAo+ID4gaW5zdGVhZCBzZXQgZWl0aGVy
-IGFybSxhcm12Ny10aW1lciBvciBhcm0sYXJtdjgtdGltZXIsCj4gPiBkZXBlbmRpbmcgb24gdGhl
-IHBsYXRmb3JtIHR5cGUuCj4KPiBJIGFtIGFmcmFpZCB0aGlzIGNvbW1lbnQgZG9lcyBub3QgbWF0
-Y2ggdGhlIGNvZGUgYmVsb3cuIFRoZSBjb21wYXRpYmxlIGlzIHNldAo+IGJhc2VkIG9uIHRoZSBk
-b21haW4gY3JlYXRlZCBub3QgdGhlIHBsYXRmb3JtLgo+Cj4gQWxzbywgSSB0aGluayBpdCB3b3Vs
-ZCBiZSB3b3J0aCBtZW50aW9uaW5nIHdoYXQncyB0aGUgaW1wbGljYXRpb24gb2YgZm9yIGRvbTAg
-YXMKPiB0aGlzIGNoYW5nZSBiZWhhdmlvci4KPgo+ID4KPiA+IEtlZXAgdGhlIGh3IHZlcnNpb24g
-Zm9yIHRoZSBjbG9jayBhcyBpdCBpcyByZWxldmFudCBmb3IgdGhlIGJvdGggY2FzZXMuCj4KPiBJ
-IGd1ZXNzIHlvdSBtZWFuICJkb20wIi8iaHdkb20iIHZlcnNpb24/IEJ1dCB0aGVuIGl0IGlzIG5v
-dCBjbGVhciB3aGF0ICJjbG9jayIKPiBtZWFuIGhlcmUuIERpZCB5b3UgaW50ZW5kIHRvIHJlZmVy
-IHRvICJ0aW1lciBmcmVxdWVuY3kiPwo+Cj4gVGhlIGNvZGUgYmVsb3cgbG9va3MgZ29vZCB0byBt
-ZSBhbmQgdjggKGFjdHVhbGx5IHY5IG5vdy4uLikgZm9yIHN1Y2ggc2VyaWVzIGEKPiBiaXQgdG9v
-IG11Y2guLi4gU28gbGV0J3MgZGlzY3VzcyBhYm91dCB0aGUgY29tbWl0IG1lc3NhZ2UgaGVyZS4K
-Pgo+IEkgd291bGQgc3VnZ2VzdCB0aGUgZm9sbG93aW5nIGNvbW1pdCBtZXNzYWdlOgo+Cj4gIgo+
-IHhlbi9hcm06IGRvbWFpbl9idWlsZDogQ29uc29saWRhdGUgbWFrZV90aW1lcl9ub2RlKCkgYW5k
-IG1ha2VfdGltZXJfZG9tVV9ub2RlKCkKPgo+IEF0IHRoZSBtb21lbnQsIHRoZSBod2RvbSBhbmQg
-ZG9tVXMgYXJlIGNyZWF0aW5nIHRoZSB0aW1lciBub2RlIGRpZmZlcmVudGx5Lgo+Cj4gVGVjaG5p
-Y2FsbHkgdGhlIHRpbWVyIGV4cG9zZWQgdGhlIHNhbWUgd2F5IGZvciBhbnkgZG9tYWluLCB0aGUg
-b25seSBkaWZmZXJlbmNlCj4gc2hvdWxkIGJlIHRoZSBpbnRlcnJ1cHRzIHVzZWQuIFRoZSB0d28g
-Y3VycmVudCBvdGhlciBkaWZmZXJlbmNlcyBhcmU6Cj4gICAgIC0gY29tcGF0aWJsZTogVGhlIGh3
-ZG9tIERUIHdpbGwgdXNlIHRoZSBzYW1lIGFzIHRoZSBvbmUgcHJvdmlkZWQgYnkgdGhlIGhvc3QK
-PiBwcm92aWRlZC4gVGhlIGRvbVVzIERUIHdpbGwgdXNlICJhcm0sYXJtdjctdGltZXIiIGZvciAz
-Mi1iaXQgZG9tYWluIGFuZAo+ICJhcm0sYXJtdjgtdGltZXIiIGZvciA2NC1iaXQgZG9tYWluLiBU
-aGUgbGF0dGVyIG1hdGNoZXMgdGhlIGJlaGF2aW9yIG9mIGxpYnhsCj4gd2hlbiBndWVzdHMgYXJl
-IGNyZWF0ZWQgZnJvbSB1c2Vyc3BhY2UuCj4KPiAgICAgLSBjbG9jay1mcmVxdWVuY3k6IFRoZSBw
-cm9wZXJ0eSBpcyB1c2VkIG9uIHBsYXRmb3JtIHdpdGggYnJva2VuIGZpcm13YXJlIHRvCj4gaW5k
-aWNhdGUgdGhlIGNsb2NrIGZyZXF1ZW5jeS4gVGhpcyBzaG91bGQgYmUgdXNlZCBieSBhbGwgdGhl
-IGRvbWFpbnMsIGhvd2V2ZXIKPiB0aGlzIGlzIG5vdCB5ZXQgdGhlIGNhc2UgZm9yIGRvbVVzIGNy
-ZWF0ZWQgYnkgWGVuLgo+Cj4gVG8gYXZvaWQgbW9yZSBkaXNjcmVwYW5jeSB0aGUgdHdvIGZ1bmN0
-aW9ucyBhcmUgbm93IGNvbnNvbGlkYXRlZCBpbnRvIG9uZSBwbGFjZQo+IG1ha2VfdGltZXJfbm9k
-ZSgpLgo+Cj4gRm9yIHNpbXBsaWNpdHksIHRoZSBjb21wYXRpYmxlIHdpbGwgbm93IGJlIGJhc2Vk
-IG9uIHRoZSBiaXRuZXNzIGV2ZW4gZm9yIHRoZQo+IGh3ZG9tLiBUaGlzIG1lYW5zIHRoZSBjb21w
-YXRpYmxlIGV4cG9zZWQgZm9yIHRoZSBod2RvbSBtYXkgZGlmZmVyLiBUaGlzIHNob3VsZAo+IG9u
-bHkgaGF2ZSBhbiBpbXBhY3Qgb24gMzItYml0IGh3ZG9tIGJvb3Rpbmcgb24gQXJtdjggaGFyZHdh
-cmUuCj4gIgoKRmluZSB3aXRoIG1lLgoKVGhhbmtzCgo+ID4KPiA+IFN1Z2dlc3RlZC1ieTogSnVs
-aWVuIEdyYWxsIDxqdWxpZW4uZ3JhbGxAYXJtLmNvbT4KPiA+IFNpZ25lZC1vZmYtYnk6IFZpa3Rv
-ciBNaXRpbiA8dmlrdG9yX21pdGluQGVwYW0uY29tPgo+ID4gLS0tCj4gPiB2NCB1cGRhdGVzOgo+
-ID4gICAgIHVwZGF0ZWQgIktlZXAgdGhlIGRvbVUgdmVyc2lvbiBmb3IgdGhlIGNvbXBhdGlibGUg
-YXMgaXQgaXMgc2ltcGxlciIKPiA+Cj4gPiB2NSB1cGRhdGVzOgo+ID4gICAgICAtIGNoYW5nZWQg
-J2tlcHQnIHRvICdrZWVwJywgZXRjLgo+ID4gICAgICAtIHJlbW92ZWQgZW1wdHkgbGluZQo+ID4g
-ICAgICAtIHVwZGF0ZWQgaW5kZW50YXRpb24gb2YgcGFyYW1ldGVycyBpbiBmdW5jdGlvbnMgY2Fs
-bHMKPiA+ICAgICAgLSBmaXhlZCBOSVRzCj4gPiAgICAgIC0gdXBkYXRlZCBjb21taXQgbWVzc2Fn
-ZQo+ID4KPiA+IHY2IHVwZGF0ZXM6Cj4gPiAgICAgICAtIG1vdmUgaWYgb3V0IG9mIG91dGVyICJp
-ZiIKPiA+ICAgICAgLSBhZGQgZnVsbCBzdG9wIGF0IHRoZSBlbmQgb2YgdGhlIGxhc3Qgc2VudGVu
-Y2UKPiA+ICAgICAgLSBtaW5vciByZXBocmFzZSBvZiBjb21taXQgbWVzc2FnZQo+ID4KPiA+IHY3
-IHVwZGF0ZXM6Cj4gPiAgICAgIC0gcmVtb3ZlZCBleHRyYSBicmFjZXMgYWNjb3JkaW5nIHRvIENv
-ZGluZyBzdHlsZSBydWxlOgo+ID4gICAgICAgIEJyYWNlcyBzaG91bGQgYmUgb21pdHRlZCBmb3Ig
-YmxvY2tzIHdpdGggYSBzaW5nbGUgc3RhdGVtZW50Lgo+ID4gLS0tCj4gPiAgIHhlbi9hcmNoL2Fy
-bS9kb21haW5fYnVpbGQuYyB8IDk2ICsrKysrKysrKysrKy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0KPiA+ICAgMSBmaWxlIGNoYW5nZWQsIDMxIGluc2VydGlvbnMoKyksIDY1IGRlbGV0aW9ucygt
-KQo+ID4KPiA+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMgYi94ZW4v
-YXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiA+IGluZGV4IDI2Y2QwYWUxMmMuLjRlNTFlMjI5Mjcg
-MTAwNjQ0Cj4gPiAtLS0gYS94ZW4vYXJjaC9hcm0vZG9tYWluX2J1aWxkLmMKPiA+ICsrKyBiL3hl
-bi9hcmNoL2FybS9kb21haW5fYnVpbGQuYwo+ID4gQEAgLTk3MywxMCArOTczLDggQEAgc3RhdGlj
-IGludCBfX2luaXQgbWFrZV90aW1lcl9ub2RlKGNvbnN0IHN0cnVjdCBrZXJuZWxfaW5mbyAqa2lu
-Zm8pCj4gPiAgICAgICAgICAgeyAvKiBzZW50aW5lbCAqLyB9LAo+ID4gICAgICAgfTsKPiA+ICAg
-ICAgIHN0cnVjdCBkdF9kZXZpY2Vfbm9kZSAqZGV2Owo+ID4gLSAgICB1MzIgbGVuOwo+ID4gLSAg
-ICBjb25zdCB2b2lkICpjb21wYXRpYmxlOwo+ID4gICAgICAgaW50IHJlczsKPiA+IC0gICAgdW5z
-aWduZWQgaW50IGlycTsKPiA+ICsgICAgdW5zaWduZWQgaW50IGlycVtNQVhfVElNRVJfUFBJXTsK
-PiA+ICAgICAgIGdpY19pbnRlcnJ1cHRfdCBpbnRyc1szXTsKPiA+ICAgICAgIHUzMiBjbG9ja19m
-cmVxdWVuY3k7Cj4gPiAgICAgICBib29sIGNsb2NrX3ZhbGlkOwo+ID4gQEAgLTk5MCwzNSArOTg4
-LDQzIEBAIHN0YXRpYyBpbnQgX19pbml0IG1ha2VfdGltZXJfbm9kZShjb25zdCBzdHJ1Y3Qga2Vy
-bmVsX2luZm8gKmtpbmZvKQo+ID4gICAgICAgICAgIHJldHVybiAtRkRUX0VSUl9YRU4oRU5PRU5U
-KTsKPiA+ICAgICAgIH0KPiA+Cj4gPiAtICAgIGNvbXBhdGlibGUgPSBkdF9nZXRfcHJvcGVydHko
-ZGV2LCAiY29tcGF0aWJsZSIsICZsZW4pOwo+ID4gLSAgICBpZiAoICFjb21wYXRpYmxlICkKPiA+
-IC0gICAgewo+ID4gLSAgICAgICAgZHByaW50ayhYRU5MT0dfRVJSLCAiQ2FuJ3QgZmluZCBjb21w
-YXRpYmxlIHByb3BlcnR5IGZvciB0aW1lciBub2RlXG4iKTsKPiA+IC0gICAgICAgIHJldHVybiAt
-RkRUX0VSUl9YRU4oRU5PRU5UKTsKPiA+IC0gICAgfQo+ID4gLQo+ID4gICAgICAgcmVzID0gZmR0
-X2JlZ2luX25vZGUoZmR0LCAidGltZXIiKTsKPiA+ICAgICAgIGlmICggcmVzICkKPiA+ICAgICAg
-ICAgICByZXR1cm4gcmVzOwo+ID4KPiA+IC0gICAgcmVzID0gZmR0X3Byb3BlcnR5KGZkdCwgImNv
-bXBhdGlibGUiLCBjb21wYXRpYmxlLCBsZW4pOwo+ID4gKyAgICBpZiAoICFpc182NGJpdF9kb21h
-aW4oa2luZm8tPmQpICkKPiA+ICsgICAgICAgIHJlcyA9IGZkdF9wcm9wZXJ0eV9zdHJpbmcoZmR0
-LCAiY29tcGF0aWJsZSIsICJhcm0sYXJtdjctdGltZXIiKTsKPiA+ICsgICAgZWxzZQo+ID4gKyAg
-ICAgICAgcmVzID0gZmR0X3Byb3BlcnR5X3N0cmluZyhmZHQsICJjb21wYXRpYmxlIiwgImFybSxh
-cm12OC10aW1lciIpOwo+ID4gICAgICAgaWYgKCByZXMgKQo+ID4gICAgICAgICAgIHJldHVybiBy
-ZXM7Cj4gPgo+ID4gLSAgICAvKiBUaGUgdGltZXIgSVJRIGlzIGVtdWxhdGVkIGJ5IFhlbi4gSXQg
-YWx3YXlzIGV4cG9zZXMgYW4gYWN0aXZlLWxvdwo+ID4gLSAgICAgKiBsZXZlbC1zZW5zaXRpdmUg
-aW50ZXJydXB0ICovCj4gPiAtCj4gPiAtICAgIGlycSA9IHRpbWVyX2dldF9pcnEoVElNRVJfUEhZ
-U19TRUNVUkVfUFBJKTsKPiA+IC0gICAgZHRfZHByaW50aygiICBTZWN1cmUgaW50ZXJydXB0ICV1
-XG4iLCBpcnEpOwo+ID4gLSAgICBzZXRfaW50ZXJydXB0KGludHJzWzBdLCBpcnEsIDB4ZiwgRFRf
-SVJRX1RZUEVfTEVWRUxfTE9XKTsKPiA+IC0KPiA+IC0gICAgaXJxID0gdGltZXJfZ2V0X2lycShU
-SU1FUl9QSFlTX05PTlNFQ1VSRV9QUEkpOwo+ID4gLSAgICBkdF9kcHJpbnRrKCIgIE5vbiBzZWN1
-cmUgaW50ZXJydXB0ICV1XG4iLCBpcnEpOwo+ID4gLSAgICBzZXRfaW50ZXJydXB0KGludHJzWzFd
-LCBpcnEsIDB4ZiwgRFRfSVJRX1RZUEVfTEVWRUxfTE9XKTsKPiA+ICsgICAgLyoKPiA+ICsgICAg
-ICogVGhlIHRpbWVyIElSUSBpcyBlbXVsYXRlZCBieSBYZW4uCj4gPiArICAgICAqIEl0IGFsd2F5
-cyBleHBvc2VzIGFuIGFjdGl2ZS1sb3cgbGV2ZWwtc2Vuc2l0aXZlIGludGVycnVwdC4KPiA+ICsg
-ICAgICovCj4gPgo+ID4gLSAgICBpcnEgPSB0aW1lcl9nZXRfaXJxKFRJTUVSX1ZJUlRfUFBJKTsK
-PiA+IC0gICAgZHRfZHByaW50aygiICBWaXJ0IGludGVycnVwdCAldVxuIiwgaXJxKTsKPiA+IC0g
-ICAgc2V0X2ludGVycnVwdChpbnRyc1syXSwgaXJxLCAweGYsIERUX0lSUV9UWVBFX0xFVkVMX0xP
-Vyk7Cj4gPiArICAgIGlmICggaXNfaGFyZHdhcmVfZG9tYWluKGtpbmZvLT5kKSApCj4gPiArICAg
-IHsKPiA+ICsgICAgICAgIGlycVtUSU1FUl9QSFlTX1NFQ1VSRV9QUEldID0gdGltZXJfZ2V0X2ly
-cShUSU1FUl9QSFlTX1NFQ1VSRV9QUEkpOwo+ID4gKyAgICAgICAgaXJxW1RJTUVSX1BIWVNfTk9O
-U0VDVVJFX1BQSV0gPQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRp
-bWVyX2dldF9pcnEoVElNRVJfUEhZU19OT05TRUNVUkVfUFBJKTsKPiA+ICsgICAgICAgIGlycVtU
-SU1FUl9WSVJUX1BQSV0gPSB0aW1lcl9nZXRfaXJxKFRJTUVSX1ZJUlRfUFBJKTsKPiA+ICsgICAg
-fQo+ID4gKyAgICBlbHNlCj4gPiArICAgIHsKPiA+ICsgICAgICAgIGlycVtUSU1FUl9QSFlTX1NF
-Q1VSRV9QUEldID0gR1VFU1RfVElNRVJfUEhZU19TX1BQSTsKPiA+ICsgICAgICAgIGlycVtUSU1F
-Ul9QSFlTX05PTlNFQ1VSRV9QUEldID0gR1VFU1RfVElNRVJfUEhZU19OU19QUEk7Cj4gPiArICAg
-ICAgICBpcnFbVElNRVJfVklSVF9QUEldID0gR1VFU1RfVElNRVJfVklSVF9QUEk7Cj4gPiArICAg
-IH0KPiA+ICsgICAgZHRfZHByaW50aygiICBTZWN1cmUgaW50ZXJydXB0ICV1XG4iLCBpcnFbVElN
-RVJfUEhZU19TRUNVUkVfUFBJXSk7Cj4gPiArICAgIHNldF9pbnRlcnJ1cHQoaW50cnNbMF0sIGly
-cVtUSU1FUl9QSFlTX1NFQ1VSRV9QUEldLAo+ID4gKyAgICAgICAgICAgICAgICAgIDB4ZiwgRFRf
-SVJRX1RZUEVfTEVWRUxfTE9XKTsKPiA+ICsgICAgZHRfZHByaW50aygiICBOb24gc2VjdXJlIGlu
-dGVycnVwdCAldVxuIiwgaXJxW1RJTUVSX1BIWVNfTk9OU0VDVVJFX1BQSV0pOwo+ID4gKyAgICBz
-ZXRfaW50ZXJydXB0KGludHJzWzFdLCBpcnFbVElNRVJfUEhZU19OT05TRUNVUkVfUFBJXSwKPiA+
-ICsgICAgICAgICAgICAgICAgICAweGYsIERUX0lSUV9UWVBFX0xFVkVMX0xPVyk7Cj4gPiArICAg
-IGR0X2RwcmludGsoIiAgVmlydCBpbnRlcnJ1cHQgJXVcbiIsIGlycVtUSU1FUl9WSVJUX1BQSV0p
-Owo+ID4gKyAgICBzZXRfaW50ZXJydXB0KGludHJzWzJdLCBpcnFbVElNRVJfVklSVF9QUEldLCAw
-eGYsIERUX0lSUV9UWVBFX0xFVkVMX0xPVyk7Cj4gPgo+ID4gICAgICAgcmVzID0gZmR0X3Byb3Bl
-cnR5X2ludGVycnVwdHMoa2luZm8sIGludHJzLCAzKTsKPiA+ICAgICAgIGlmICggcmVzICkKPiA+
-IEBAIC0xNjAzLDQ2ICsxNjA5LDYgQEAgc3RhdGljIGludCBfX2luaXQgbWFrZV9naWNfZG9tVV9u
-b2RlKGNvbnN0IHN0cnVjdCBkb21haW4gKmQsIHZvaWQgKmZkdCkKPiA+ICAgICAgIH0KPiA+ICAg
-fQo+ID4KPiA+IC1zdGF0aWMgaW50IF9faW5pdCBtYWtlX3RpbWVyX2RvbVVfbm9kZShjb25zdCBz
-dHJ1Y3QgZG9tYWluICpkLCB2b2lkICpmZHQpCj4gPiAtewo+ID4gLSAgICBpbnQgcmVzOwo+ID4g
-LSAgICBnaWNfaW50ZXJydXB0X3QgaW50cnNbM107Cj4gPiAtCj4gPiAtICAgIHJlcyA9IGZkdF9i
-ZWdpbl9ub2RlKGZkdCwgInRpbWVyIik7Cj4gPiAtICAgIGlmICggcmVzICkKPiA+IC0gICAgICAg
-IHJldHVybiByZXM7Cj4gPiAtCj4gPiAtICAgIGlmICggIWlzXzY0Yml0X2RvbWFpbihkKSApCj4g
-PiAtICAgIHsKPiA+IC0gICAgICAgIHJlcyA9IGZkdF9wcm9wZXJ0eV9zdHJpbmcoZmR0LCAiY29t
-cGF0aWJsZSIsICJhcm0sYXJtdjctdGltZXIiKTsKPiA+IC0gICAgICAgIGlmICggcmVzICkKPiA+
-IC0gICAgICAgICAgICByZXR1cm4gcmVzOwo+ID4gLSAgICB9Cj4gPiAtICAgIGVsc2UKPiA+IC0g
-ICAgewo+ID4gLSAgICAgICAgcmVzID0gZmR0X3Byb3BlcnR5X3N0cmluZyhmZHQsICJjb21wYXRp
-YmxlIiwgImFybSxhcm12OC10aW1lciIpOwo+ID4gLSAgICAgICAgaWYgKCByZXMgKQo+ID4gLSAg
-ICAgICAgICAgIHJldHVybiByZXM7Cj4gPiAtICAgIH0KPiA+IC0KPiA+IC0gICAgc2V0X2ludGVy
-cnVwdChpbnRyc1swXSwgR1VFU1RfVElNRVJfUEhZU19TX1BQSSwgMHhmLCBEVF9JUlFfVFlQRV9M
-RVZFTF9MT1cpOwo+ID4gLSAgICBzZXRfaW50ZXJydXB0KGludHJzWzFdLCBHVUVTVF9USU1FUl9Q
-SFlTX05TX1BQSSwgMHhmLCBEVF9JUlFfVFlQRV9MRVZFTF9MT1cpOwo+ID4gLSAgICBzZXRfaW50
-ZXJydXB0KGludHJzWzJdLCBHVUVTVF9USU1FUl9WSVJUX1BQSSwgMHhmLCBEVF9JUlFfVFlQRV9M
-RVZFTF9MT1cpOwo+ID4gLQo+ID4gLSAgICByZXMgPSBmZHRfcHJvcGVydHkoZmR0LCAiaW50ZXJy
-dXB0cyIsIGludHJzLCBzaXplb2YgKGludHJzWzBdKSAqIDMpOwo+ID4gLSAgICBpZiAoIHJlcyAp
-Cj4gPiAtICAgICAgICByZXR1cm4gcmVzOwo+ID4gLQo+ID4gLSAgICByZXMgPSBmZHRfcHJvcGVy
-dHlfY2VsbChmZHQsICJpbnRlcnJ1cHQtcGFyZW50IiwKPiA+IC0gICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgR1VFU1RfUEhBTkRMRV9HSUMpOwo+ID4gLSAgICBpZiAocmVzKQo+ID4gLSAgICAg
-ICAgcmV0dXJuIHJlczsKPiA+IC0KPiA+IC0gICAgcmVzID0gZmR0X2VuZF9ub2RlKGZkdCk7Cj4g
-PiAtCj4gPiAtICAgIHJldHVybiByZXM7Cj4gPiAtfQo+ID4gLQo+ID4gICAjaWZkZWYgQ09ORklH
-X1NCU0FfVlVBUlRfQ09OU09MRQo+ID4gICBzdGF0aWMgaW50IF9faW5pdCBtYWtlX3ZwbDAxMV91
-YXJ0X25vZGUoY29uc3Qgc3RydWN0IGRvbWFpbiAqZCwgdm9pZCAqZmR0KQo+ID4gICB7Cj4gPiBA
-QCAtMTc0OCw3ICsxNzE0LDcgQEAgc3RhdGljIGludCBfX2luaXQgcHJlcGFyZV9kdGJfZG9tVShz
-dHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3Qga2VybmVsX2luZm8gKmtpbmZvKQo+ID4gICAgICAgaWYg
-KCByZXQgKQo+ID4gICAgICAgICAgIGdvdG8gZXJyOwo+ID4KPiA+IC0gICAgcmV0ID0gbWFrZV90
-aW1lcl9kb21VX25vZGUoZCwga2luZm8tPmZkdCk7Cj4gPiArICAgIHJldCA9IG1ha2VfdGltZXJf
-bm9kZShraW5mbyk7Cj4gPiAgICAgICBpZiAoIHJldCApCj4gPiAgICAgICAgICAgZ290byBlcnI7
-Cj4gPgo+ID4KPgo+IC0tCj4gSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+--===============4884337438182974918==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_79556E3F65AD42F496A08EEB99D59398amazoncom_"
+
+--_000_79556E3F65AD42F496A08EEB99D59398amazoncom_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+
+
+On 7. Aug 2019, at 14:20, Jan Beulich <jbeulich@suse.com<mailto:jbeulich@su=
+se.com>> wrote:
+
+On 07.08.2019 14:07,  Elnikety, Eslam  wrote:
+On 7. Aug 2019, at 13:40, Andrew Cooper <andrew.cooper3@citrix.com<mailto:a=
+ndrew.cooper3@citrix.com>> wrote:
+On 07/08/2019 12:20, Eslam Elnikety wrote:
+Adding support for FIFO event channel ABI was first introduced in Xen 4.4
+(see 88910061ec6). Make this support tunable, since the choice of which
+event channel ABI has implications for hibernation. Consider resuming a
+pre Xen 4.4 hibernated Linux guest. The guest boot kernel defaults to FIFO
+ABI, whereas the resume kernel assumes 2L. This, in turn, results in Xen
+and the resumed kernel talking past each other (due to different protocols
+FIFO vs 2L).
+
+I'm afraid I don't follow.
+
+We have a Linux kernel which knows about FIFO, which was first booted on
+Xen < 4.4, so configured 2L mode.
+
+It is then suspended, and resumed on a newer Xen >=3D 4.4.  The guest now
+has a choice between 2L mode, and FIFO mode.
+
+What is the problem?
+
+When resuming, the guest in question should continue to use 2L mode,
+because that is what it was using previously.
+After resuming (i.e., Linux's software_resume), the guest will indeed conti=
+nue
+to use 2L. However, Xen has already done evtchn_fifo_init_control as part o=
+f
+the boot kernel init (before the guest's software_resume). Then, we reach t=
+he
+point where guest assumes 2L and Xen assumes FIFO.
+
+This involvement of two distinct kernels wasn't obvious at all from
+the initial posting, despite the use of the terms "guest boot kernel"
+and "resumed kernel". In any event - isn't this an issue to be solved
+between the two kernels, without (as far as possible) Xen's
+involvement, and without restricting guest capabilities?
+
+Jan
+
+I think a re-write for the commit message is in order, given that the disti=
+nction between boot and resume kernels was not clear. I will do that, along=
+ with other changes if needed, subject to the maintainers being happy with =
+the patch at a high level.
+
+In principle, we can instruct the boot kernel to not use FIFO. Yet, this wi=
+ll be needed when resuming on Xen >=3D 4.4, but not needed when resuming on=
+ Xen < 4.4. I think this is grounds to introduce the knob.
+
+Thanks,
+Eslam
+
+--_000_79556E3F65AD42F496A08EEB99D59398amazoncom_
+Content-Type: text/html; charset="us-ascii"
+Content-ID: <437AC5A12F351545B9D8D0C162658356@amazon.com>
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+</head>
+<body style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; line-break:=
+ after-white-space;" class=3D"">
+<br class=3D"">
+<div><br class=3D"">
+<blockquote type=3D"cite" class=3D"">
+<div class=3D"">On 7. Aug 2019, at 14:20, Jan Beulich &lt;<a href=3D"mailto=
+:jbeulich@suse.com" class=3D"">jbeulich@suse.com</a>&gt; wrote:</div>
+<br class=3D"Apple-interchange-newline">
+<div class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: Helv=
+etica; font-size: 12px; font-style: normal; font-variant-caps: normal; font=
+-weight: normal; letter-spacing: normal; text-align: start; text-indent: 0p=
+x; text-transform: none; white-space: normal; word-spacing: 0px; -webkit-te=
+xt-stroke-width: 0px; text-decoration: none; float: none; display: inline !=
+important;" class=3D"">On
+ 07.08.2019 14:07, &nbsp;Elnikety, Eslam &nbsp;wrote:</span><br style=3D"ca=
+ret-color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-styl=
+e: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; white-sp=
+ace: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decora=
+tion: none;" class=3D"">
+<blockquote type=3D"cite" style=3D"font-family: Helvetica; font-size: 12px;=
+ font-style: normal; font-variant-caps: normal; font-weight: normal; letter=
+-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-=
+transform: none; white-space: normal; widows: auto; word-spacing: 0px; -web=
+kit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; text-decoration=
+: none;" class=3D"">
+<blockquote type=3D"cite" class=3D"">On 7. Aug 2019, at 13:40, Andrew Coope=
+r &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" class=3D"">andrew.cooper=
+3@citrix.com</a>&gt; wrote:<br class=3D"">
+On 07/08/2019 12:20, Eslam Elnikety wrote:<br class=3D"">
+<blockquote type=3D"cite" class=3D"">Adding support for FIFO event channel =
+ABI was first introduced in Xen 4.4<br class=3D"">
+(see 88910061ec6). Make this support tunable, since the choice of which<br =
+class=3D"">
+event channel ABI has implications for hibernation. Consider resuming a<br =
+class=3D"">
+pre Xen 4.4 hibernated Linux guest. The guest boot kernel defaults to FIFO<=
+br class=3D"">
+ABI, whereas the resume kernel assumes 2L. This, in turn, results in Xen<br=
+ class=3D"">
+and the resumed kernel talking past each other (due to different protocols<=
+br class=3D"">
+FIFO vs 2L).<br class=3D"">
+</blockquote>
+<br class=3D"">
+I'm afraid I don't follow.<br class=3D"">
+<br class=3D"">
+We have a Linux kernel which knows about FIFO, which was first booted on<br=
+ class=3D"">
+Xen &lt; 4.4, so configured 2L mode.<br class=3D"">
+<br class=3D"">
+It is then suspended, and resumed on a newer Xen &gt;=3D 4.4. &nbsp;The gue=
+st now<br class=3D"">
+has a choice between 2L mode, and FIFO mode.<br class=3D"">
+<br class=3D"">
+What is the problem?<br class=3D"">
+<br class=3D"">
+When resuming, the guest in question should continue to use 2L mode,<br cla=
+ss=3D"">
+because that is what it was using previously.<br class=3D"">
+</blockquote>
+After resuming (i.e., Linux's software_resume), the guest will indeed conti=
+nue<br class=3D"">
+to use 2L. However, Xen has already done evtchn_fifo_init_control as part o=
+f<br class=3D"">
+the boot kernel init (before the guest's software_resume). Then, we reach t=
+he<br class=3D"">
+point where guest assumes 2L and Xen assumes FIFO.<br class=3D"">
+</blockquote>
+<br style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size: =
+12px; font-style: normal; font-variant-caps: normal; font-weight: normal; l=
+etter-spacing: normal; text-align: start; text-indent: 0px; text-transform:=
+ none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0=
+px; text-decoration: none;" class=3D"">
+<span style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size=
+: 12px; font-style: normal; font-variant-caps: normal; font-weight: normal;=
+ letter-spacing: normal; text-align: start; text-indent: 0px; text-transfor=
+m: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width:=
+ 0px; text-decoration: none; float: none; display: inline !important;" clas=
+s=3D"">This
+ involvement of two distinct kernels wasn't obvious at all from</span><br s=
+tyle=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px;=
+ font-style: normal; font-variant-caps: normal; font-weight: normal; letter=
+-spacing: normal; text-align: start; text-indent: 0px; text-transform: none=
+; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; t=
+ext-decoration: none;" class=3D"">
+<span style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size=
+: 12px; font-style: normal; font-variant-caps: normal; font-weight: normal;=
+ letter-spacing: normal; text-align: start; text-indent: 0px; text-transfor=
+m: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width:=
+ 0px; text-decoration: none; float: none; display: inline !important;" clas=
+s=3D"">the
+ initial posting, despite the use of the terms &quot;guest boot kernel&quot=
+;</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; fon=
+t-size: 12px; font-style: normal; font-variant-caps: normal; font-weight: n=
+ormal; letter-spacing: normal; text-align: start; text-indent: 0px; text-tr=
+ansform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-=
+width: 0px; text-decoration: none;" class=3D"">
+<span style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size=
+: 12px; font-style: normal; font-variant-caps: normal; font-weight: normal;=
+ letter-spacing: normal; text-align: start; text-indent: 0px; text-transfor=
+m: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width:=
+ 0px; text-decoration: none; float: none; display: inline !important;" clas=
+s=3D"">and
+ &quot;resumed kernel&quot;. In any event - isn't this an issue to be solve=
+d</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; fon=
+t-size: 12px; font-style: normal; font-variant-caps: normal; font-weight: n=
+ormal; letter-spacing: normal; text-align: start; text-indent: 0px; text-tr=
+ansform: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-=
+width: 0px; text-decoration: none;" class=3D"">
+<span style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size=
+: 12px; font-style: normal; font-variant-caps: normal; font-weight: normal;=
+ letter-spacing: normal; text-align: start; text-indent: 0px; text-transfor=
+m: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width:=
+ 0px; text-decoration: none; float: none; display: inline !important;" clas=
+s=3D"">between
+ the two kernels, without (as far as possible) Xen's</span><br style=3D"car=
+et-color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style=
+: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: n=
+ormal; text-align: start; text-indent: 0px; text-transform: none; white-spa=
+ce: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decorat=
+ion: none;" class=3D"">
+<span style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size=
+: 12px; font-style: normal; font-variant-caps: normal; font-weight: normal;=
+ letter-spacing: normal; text-align: start; text-indent: 0px; text-transfor=
+m: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width:=
+ 0px; text-decoration: none; float: none; display: inline !important;" clas=
+s=3D"">involvement,
+ and without restricting guest capabilities?</span><br style=3D"caret-color=
+: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-style: normal=
+; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; t=
+ext-align: start; text-indent: 0px; text-transform: none; white-space: norm=
+al; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: non=
+e;" class=3D"">
+<br style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size: =
+12px; font-style: normal; font-variant-caps: normal; font-weight: normal; l=
+etter-spacing: normal; text-align: start; text-indent: 0px; text-transform:=
+ none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0=
+px; text-decoration: none;" class=3D"">
+<span style=3D"caret-color: rgb(0, 0, 0); font-family: Helvetica; font-size=
+: 12px; font-style: normal; font-variant-caps: normal; font-weight: normal;=
+ letter-spacing: normal; text-align: start; text-indent: 0px; text-transfor=
+m: none; white-space: normal; word-spacing: 0px; -webkit-text-stroke-width:=
+ 0px; text-decoration: none; float: none; display: inline !important;" clas=
+s=3D"">Jan</span></div>
+</blockquote>
+</div>
+<br class=3D"">
+<div class=3D"">
+<div class=3D"">I think a re-write for the commit message is in order, give=
+n that the distinction between boot and resume kernels was not clear. I wil=
+l do that, along with other changes if needed, subject to the maintainers b=
+eing happy with the patch at a high
+ level.</div>
+<div class=3D""><br class=3D"">
+</div>
+<div class=3D"">In principle, we can instruct the boot kernel to not use FI=
+FO. Yet, this will be needed when resuming on Xen &gt;=3D 4.4, but not need=
+ed when resuming on Xen &lt; 4.4. I think this is grounds to introduce the =
+knob.</div>
+<div class=3D""><br class=3D"">
+</div>
+<div class=3D"">Thanks,</div>
+<div class=3D"">Eslam</div>
+</div>
+</body>
+</html>
+
+--_000_79556E3F65AD42F496A08EEB99D59398amazoncom_--
+
+
+--===============4884337438182974918==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4884337438182974918==--
+
