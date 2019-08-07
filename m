@@ -6,48 +6,48 @@ X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
 	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03628C32758
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2E842C41514
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D8BF7229F7
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8BF7229F7
+	by mail.kernel.org (Postfix) with ESMTPS id 0F090229F8
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F090229F8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bt.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvHMN-0000fp-H2; Wed, 07 Aug 2019 08:31:51 +0000
+	id 1hvHMN-0000g0-Rc; Wed, 07 Aug 2019 08:31:51 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=DvAo=WD=bt.com=tony.nguyen@srs-us1.protection.inumbo.net>)
- id 1hvHIx-0008RB-Rb
+ id 1hvHIx-0008RD-SF
  for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:28:19 +0000
-X-Inumbo-ID: 4e920d38-b8ed-11e9-8980-bc764e045a96
-Received: from smtpe1.intersmtp.com (unknown [213.121.35.72])
+X-Inumbo-ID: 4d0fed9c-b8ed-11e9-8980-bc764e045a96
+Received: from smtpe1.intersmtp.com (unknown [213.121.35.75])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 4e920d38-b8ed-11e9-8980-bc764e045a96;
+ id 4d0fed9c-b8ed-11e9-8980-bc764e045a96;
  Wed, 07 Aug 2019 08:28:18 +0000 (UTC)
-Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
- BWP09926077.bt.com (10.36.82.108) with Microsoft SMTP Server (version=TLS1_2, 
+Received: from tpw09926dag18g.domain1.systemhost.net (10.9.212.34) by
+ BWP09926080.bt.com (10.36.82.111) with Microsoft SMTP Server (version=TLS1_2, 
  cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
- 2019 09:27:55 +0100
+ 2019 09:27:23 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:28:16 +0100
+ tpw09926dag18g.domain1.systemhost.net (10.9.212.34) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:27:35 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:28:16 +0100
+ 09:27:35 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v6 07/26] hw/virtio: Access MemoryRegion
- with MemOp
-Thread-Index: AQHVTPoPeg6DwrIkBEWe8eU+OaDygw==
-Date: Wed, 7 Aug 2019 08:28:16 +0000
-Message-ID: <1565166496048.47265@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v6 05/26] hw/s390x: Access MemoryRegion with
+ MemOp
+Thread-Index: AQHVTPn2pBvCxiLKIke2xdwZYbeoVw==
+Date: Wed, 7 Aug 2019 08:27:35 +0000
+Message-ID: <1565166454836.5266@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -58,7 +58,7 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.44]
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 07 Aug 2019 08:31:48 +0000
-Subject: [Xen-devel] [Qemu-devel] [PATCH v6 07/26] hw/virtio: Access
+Subject: [Xen-devel] [Qemu-devel] [PATCH v6 05/26] hw/s390x: Access
  MemoryRegion with MemOp
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -97,16 +97,15 @@ Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
  paul.durrant@citrix.com, qemu-ppc@nongnu.org, huth@tuxfamily.org,
  amarkovic@wavecomp.com, imammedo@redhat.com, aurelien@aurel32.net,
  stefanb@linux.ibm.com
-Content-Type: multipart/mixed; boundary="===============6620410533967626523=="
+Content-Type: multipart/mixed; boundary="===============6444999388871400914=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============6620410533967626523==
+--===============6444999388871400914==
 Content-Language: en-AU
-Content-Type: multipart/alternative;
-	boundary="_000_156516649604847265btcom_"
+Content-Type: multipart/alternative; boundary="_000_15651664548365266btcom_"
 
---_000_156516649604847265btcom_
+--_000_15651664548365266btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -124,52 +123,59 @@ As size_memop is a no-op, this patch does not change any behaviour.
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 ---
- hw/virtio/virtio-pci.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ hw/s390x/s390-pci-inst.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c
-index f6d2223..25875c8 100644
---- a/hw/virtio/virtio-pci.c
-+++ b/hw/virtio/virtio-pci.c
-@@ -17,6 +17,7 @@
-
- #include "qemu/osdep.h"
-
+diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c
+index 0023514..0c958fc 100644
+--- a/hw/s390x/s390-pci-inst.c
++++ b/hw/s390x/s390-pci-inst.c
+@@ -15,6 +15,7 @@
+ #include "cpu.h"
+ #include "s390-pci-inst.h"
+ #include "s390-pci-bus.h"
 +#include "exec/memop.h"
- #include "standard-headers/linux/virtio_pci.h"
- #include "hw/virtio/virtio.h"
- #include "hw/pci/pci.h"
-@@ -550,7 +551,8 @@ void virtio_address_space_write(VirtIOPCIProxy *proxy, =
-hwaddr addr,
-         /* As length is under guest control, handle illegal values. */
-         return;
-     }
--    memory_region_dispatch_write(mr, addr, val, len, MEMTXATTRS_UNSPECIFIE=
-D);
-+    memory_region_dispatch_write(mr, addr, val, size_memop(len),
-+                                 MEMTXATTRS_UNSPECIFIED);
+ #include "exec/memory-internal.h"
+ #include "qemu/error-report.h"
+ #include "sysemu/hw_accel.h"
+@@ -372,7 +373,7 @@ static MemTxResult zpci_read_bar(S390PCIBusDevice *pbde=
+v, uint8_t pcias,
+     mr =3D pbdev->pdev->io_regions[pcias].memory;
+     mr =3D s390_get_subregion(mr, offset, len);
+     offset -=3D mr->addr;
+-    return memory_region_dispatch_read(mr, offset, data, len,
++    return memory_region_dispatch_read(mr, offset, data, size_memop(len),
+                                        MEMTXATTRS_UNSPECIFIED);
  }
 
- static void
-@@ -573,7 +575,8 @@ virtio_address_space_read(VirtIOPCIProxy *proxy, hwaddr=
- addr,
-     /* Make sure caller aligned buf properly */
-     assert(!(((uintptr_t)buf) & (len - 1)));
+@@ -471,7 +472,7 @@ static MemTxResult zpci_write_bar(S390PCIBusDevice *pbd=
+ev, uint8_t pcias,
+     mr =3D pbdev->pdev->io_regions[pcias].memory;
+     mr =3D s390_get_subregion(mr, offset, len);
+     offset -=3D mr->addr;
+-    return memory_region_dispatch_write(mr, offset, data, len,
++    return memory_region_dispatch_write(mr, offset, data, size_memop(len),
+                                         MEMTXATTRS_UNSPECIFIED);
+ }
 
--    memory_region_dispatch_read(mr, addr, &val, len, MEMTXATTRS_UNSPECIFIE=
-D);
-+    memory_region_dispatch_read(mr, addr, &val, size_memop(len),
-+                                MEMTXATTRS_UNSPECIFIED);
-     switch (len) {
-     case 1:
-         pci_set_byte(buf, val);
+@@ -780,7 +781,8 @@ int pcistb_service_call(S390CPU *cpu, uint8_t r1, uint8=
+_t r3, uint64_t gaddr,
+
+     for (i =3D 0; i < len / 8; i++) {
+         result =3D memory_region_dispatch_write(mr, offset + i * 8,
+-                                              ldq_p(buffer + i * 8), 8,
++                                              ldq_p(buffer + i * 8),
++                                              size_memop(8),
+                                               MEMTXATTRS_UNSPECIFIED);
+         if (result !=3D MEMTX_OK) {
+             s390_program_interrupt(env, PGM_OPERAND, 6, ra);
 --
 1.8.3.1
 
 ?
 
 
---_000_156516649604847265btcom_
+--_000_15651664548365266btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -209,53 +215,73 @@ iv>
 <div>Reviewed-by: Richard Henderson &lt;richard.henderson@linaro.org&gt;</d=
 iv>
 <div>---</div>
-<div>&nbsp;hw/virtio/virtio-pci.c | 7 &#43;&#43;&#43;&#43;&#43;--</div>
-<div>&nbsp;1 file changed, 5 insertions(&#43;), 2 deletions(-)</div>
+<div>&nbsp;hw/s390x/s390-pci-inst.c | 8 &#43;&#43;&#43;&#43;&#43;---</div>
+<div>&nbsp;1 file changed, 5 insertions(&#43;), 3 deletions(-)</div>
 <div><br>
 </div>
-<div>diff --git a/hw/virtio/virtio-pci.c b/hw/virtio/virtio-pci.c</div>
-<div>index f6d2223..25875c8 100644</div>
-<div>--- a/hw/virtio/virtio-pci.c</div>
-<div>&#43;&#43;&#43; b/hw/virtio/virtio-pci.c</div>
-<div>@@ -17,6 &#43;17,7 @@</div>
-<div>&nbsp;</div>
-<div>&nbsp;#include &quot;qemu/osdep.h&quot;</div>
-<div>&nbsp;</div>
+<div>diff --git a/hw/s390x/s390-pci-inst.c b/hw/s390x/s390-pci-inst.c</div>
+<div>index 0023514..0c958fc 100644</div>
+<div>--- a/hw/s390x/s390-pci-inst.c</div>
+<div>&#43;&#43;&#43; b/hw/s390x/s390-pci-inst.c</div>
+<div>@@ -15,6 &#43;15,7 @@</div>
+<div>&nbsp;#include &quot;cpu.h&quot;</div>
+<div>&nbsp;#include &quot;s390-pci-inst.h&quot;</div>
+<div>&nbsp;#include &quot;s390-pci-bus.h&quot;</div>
 <div>&#43;#include &quot;exec/memop.h&quot;</div>
-<div>&nbsp;#include &quot;standard-headers/linux/virtio_pci.h&quot;</div>
-<div>&nbsp;#include &quot;hw/virtio/virtio.h&quot;</div>
-<div>&nbsp;#include &quot;hw/pci/pci.h&quot;</div>
-<div>@@ -550,7 &#43;551,8 @@ void virtio_address_space_write(VirtIOPCIProxy=
- *proxy, hwaddr addr,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/* As length is under guest control,=
- handle illegal values. */</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return;</div>
-<div>&nbsp; &nbsp; &nbsp;}</div>
-<div>- &nbsp; &nbsp;memory_region_dispatch_write(mr, addr, val, len, MEMTXA=
-TTRS_UNSPECIFIED);</div>
-<div>&#43; &nbsp; &nbsp;memory_region_dispatch_write(mr, addr, val, size_me=
-mop(len),</div>
-<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MEMTXATTRS_UNSPECIFIED);</d=
-iv>
+<div>&nbsp;#include &quot;exec/memory-internal.h&quot;</div>
+<div>&nbsp;#include &quot;qemu/error-report.h&quot;</div>
+<div>&nbsp;#include &quot;sysemu/hw_accel.h&quot;</div>
+<div>@@ -372,7 &#43;373,7 @@ static MemTxResult zpci_read_bar(S390PCIBusDev=
+ice *pbdev, uint8_t pcias,</div>
+<div>&nbsp; &nbsp; &nbsp;mr =3D pbdev-&gt;pdev-&gt;io_regions[pcias].memory=
+;</div>
+<div>&nbsp; &nbsp; &nbsp;mr =3D s390_get_subregion(mr, offset, len);</div>
+<div>&nbsp; &nbsp; &nbsp;offset -=3D mr-&gt;addr;</div>
+<div>- &nbsp; &nbsp;return memory_region_dispatch_read(mr, offset, data, le=
+n,</div>
+<div>&#43; &nbsp; &nbsp;return memory_region_dispatch_read(mr, offset, data=
+, size_memop(len),</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MEMTX=
+ATTRS_UNSPECIFIED);</div>
 <div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>&nbsp;static void</div>
-<div>@@ -573,7 &#43;575,8 @@ virtio_address_space_read(VirtIOPCIProxy *prox=
-y, hwaddr addr,</div>
-<div>&nbsp; &nbsp; &nbsp;/* Make sure caller aligned buf properly */</div>
-<div>&nbsp; &nbsp; &nbsp;assert(!(((uintptr_t)buf) &amp; (len - 1)));</div>
+<div>@@ -471,7 &#43;472,7 @@ static MemTxResult zpci_write_bar(S390PCIBusDe=
+vice *pbdev, uint8_t pcias,</div>
+<div>&nbsp; &nbsp; &nbsp;mr =3D pbdev-&gt;pdev-&gt;io_regions[pcias].memory=
+;</div>
+<div>&nbsp; &nbsp; &nbsp;mr =3D s390_get_subregion(mr, offset, len);</div>
+<div>&nbsp; &nbsp; &nbsp;offset -=3D mr-&gt;addr;</div>
+<div>- &nbsp; &nbsp;return memory_region_dispatch_write(mr, offset, data, l=
+en,</div>
+<div>&#43; &nbsp; &nbsp;return memory_region_dispatch_write(mr, offset, dat=
+a, size_memop(len),</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+;MEMTXATTRS_UNSPECIFIED);</div>
+<div>&nbsp;}</div>
 <div>&nbsp;</div>
-<div>- &nbsp; &nbsp;memory_region_dispatch_read(mr, addr, &amp;val, len, ME=
-MTXATTRS_UNSPECIFIED);</div>
-<div>&#43; &nbsp; &nbsp;memory_region_dispatch_read(mr, addr, &amp;val, siz=
-e_memop(len),</div>
+<div>@@ -780,7 &#43;781,8 @@ int pcistb_service_call(S390CPU *cpu, uint8_t =
+r1, uint8_t r3, uint64_t gaddr,</div>
+<div>&nbsp;</div>
+<div>&nbsp; &nbsp; &nbsp;for (i =3D 0; i &lt; len / 8; i&#43;&#43;) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;result =3D memory_region_dispatch_wr=
+ite(mr, offset &#43; i * 8,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nb=
+sp; &nbsp; &nbsp;ldq_p(buffer &#43; i * 8), 8,</div>
 <div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
-nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;MEMTXATTRS_UNSPECIFIED);</di=
-v>
-<div>&nbsp; &nbsp; &nbsp;switch (len) {</div>
-<div>&nbsp; &nbsp; &nbsp;case 1:</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;pci_set_byte(buf, val);</div>
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;ldq_p(buffer &#43; i * 8),</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=
+ &nbsp; &nbsp; &nbsp;size_memop(8),</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; =
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp;MEMTXATTRS_UNSPECIFIED);</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (result !=3D MEMTX_OK) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;s390_program_interrupt=
+(env, PGM_OPERAND, 6, ra);</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -266,10 +292,10 @@ v>
 </body>
 </html>
 
---_000_156516649604847265btcom_--
+--_000_15651664548365266btcom_--
 
 
---===============6620410533967626523==
+--===============6444999388871400914==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -279,5 +305,5 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============6620410533967626523==--
+--===============6444999388871400914==--
 
