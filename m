@@ -6,47 +6,48 @@ X-Spam-Status: No, score=-6.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
 	SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EFC7C19759
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 980CEC433FF
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5A51D229F3
+	by mail.kernel.org (Postfix) with ESMTPS id 72D53229F7
 	for <xen-devel@archiver.kernel.org>; Wed,  7 Aug 2019 08:32:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A51D229F3
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 72D53229F7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bt.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvHMM-0000fN-Ik; Wed, 07 Aug 2019 08:31:50 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hvHMO-0000gV-R5; Wed, 07 Aug 2019 08:31:52 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=DvAo=WD=bt.com=tony.nguyen@srs-us1.protection.inumbo.net>)
- id 1hvHHa-0008Q9-LQ
- for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:26:54 +0000
-X-Inumbo-ID: 1a0fc430-b8ed-11e9-9d80-cb7e54fbe3b3
-Received: from smtpe1.intersmtp.com (unknown [62.239.224.235])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1a0fc430-b8ed-11e9-9d80-cb7e54fbe3b3;
- Wed, 07 Aug 2019 08:26:50 +0000 (UTC)
-Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
- RDW083A011ED67.bt.com (10.187.98.37) with Microsoft SMTP Server (TLS) id
- 14.3.439.0; Wed, 7 Aug 2019 09:32:25 +0100
+ id 1hvHK3-0008Te-Lr
+ for xen-devel@lists.xenproject.org; Wed, 07 Aug 2019 08:29:27 +0000
+X-Inumbo-ID: 769ae11d-b8ed-11e9-8980-bc764e045a96
+Received: from smtpe1.intersmtp.com (unknown [213.121.35.72])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id 769ae11d-b8ed-11e9-8980-bc764e045a96;
+ Wed, 07 Aug 2019 08:29:25 +0000 (UTC)
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:26:48 +0100
+ BWP09926077.bt.com (10.36.82.108) with Microsoft SMTP Server (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Wed, 7 Aug
+ 2019 09:29:02 +0100
+Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
+ tpw09926dag18e.domain1.systemhost.net (10.9.212.18) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Wed, 7 Aug 2019 09:29:23 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Wed, 7 Aug 2019
- 09:26:47 +0100
+ 09:29:23 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v6 03/26] memory: Introduce size_memop
-Thread-Index: AQHVTPnaWz9ZrvhuI0myNkwQ3w2mGQ==
-Date: Wed, 7 Aug 2019 08:26:47 +0000
-Message-ID: <1565166407497.21726@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v6 10/26] cputlb: Access MemoryRegion with
+ MemOp
+Thread-Index: AQHVTPo3/fbgDfmaOEuIplRQ5wIAjA==
+Date: Wed, 7 Aug 2019 08:29:23 +0000
+Message-ID: <1565166562774.65589@bt.com>
 References: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <45ec4924e0b34a3d9124e2db06af75b4@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -57,8 +58,8 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.44]
 MIME-Version: 1.0
 X-Mailman-Approved-At: Wed, 07 Aug 2019 08:31:48 +0000
-Subject: [Xen-devel] [Qemu-devel] [PATCH v6 03/26] memory: Introduce
- size_memop
+Subject: [Xen-devel] [Qemu-devel] [PATCH v6 10/26] cputlb: Access
+ MemoryRegion with MemOp
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -96,60 +97,72 @@ Cc: fam@euphon.net, peter.maydell@linaro.org, walling@linux.ibm.com,
  paul.durrant@citrix.com, qemu-ppc@nongnu.org, huth@tuxfamily.org,
  amarkovic@wavecomp.com, imammedo@redhat.com, aurelien@aurel32.net,
  stefanb@linux.ibm.com
-Content-Type: multipart/mixed; boundary="===============5498148654900712646=="
+Content-Type: multipart/mixed; boundary="===============3613753589407682055=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============5498148654900712646==
+--===============3613753589407682055==
 Content-Language: en-AU
 Content-Type: multipart/alternative;
-	boundary="_000_156516640749721726btcom_"
+	boundary="_000_156516656277465589btcom_"
 
---_000_156516640749721726btcom_
+--_000_156516656277465589btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
 The memory_region_dispatch_{read|write} operand "unsigned size" is
 being converted into a "MemOp op".
 
-Introduce no-op size_memop to aid preparatory conversion of
-interfaces.
+Convert interfaces by using no-op size_memop.
 
-Once interfaces are converted, size_memop will be implemented to
-return a MemOp from size in bytes.
+After all interfaces are converted, size_memop will be implemented
+and the memory_region_dispatch_{read|write} operand "unsigned size"
+will be converted into a "MemOp op".
+
+As size_memop is a no-op, this patch does not change any behaviour.
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- include/exec/memop.h | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ accel/tcg/cputlb.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/include/exec/memop.h b/include/exec/memop.h
-index 7262ca3..5c5769e 100644
---- a/include/exec/memop.h
-+++ b/include/exec/memop.h
-@@ -107,4 +107,14 @@ typedef enum MemOp {
-     MO_SSIZE =3D MO_SIZE | MO_SIGN,
- } MemOp;
-
-+/* Size in bytes to MemOp.  */
-+static inline MemOp size_memop(unsigned size)
-+{
-+    /*
-+     * FIXME: No-op to aid conversion of memory_region_dispatch_{read|writ=
-e}
-+     * "unsigned size" operand into a "MemOp op".
-+     */
-+    return size;
-+}
-+
- #endif
+diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c
+index 523be4c..6c83878 100644
+--- a/accel/tcg/cputlb.c
++++ b/accel/tcg/cputlb.c
+@@ -906,8 +906,8 @@ static uint64_t io_readx(CPUArchState *env, CPUIOTLBEnt=
+ry *iotlbentry,
+         qemu_mutex_lock_iothread();
+         locked =3D true;
+     }
+-    r =3D memory_region_dispatch_read(mr, mr_offset,
+-                                    &val, size, iotlbentry->attrs);
++    r =3D memory_region_dispatch_read(mr, mr_offset, &val, size_memop(size=
+),
++                                    iotlbentry->attrs);
+     if (r !=3D MEMTX_OK) {
+         hwaddr physaddr =3D mr_offset +
+             section->offset_within_address_space -
+@@ -947,8 +947,8 @@ static void io_writex(CPUArchState *env, CPUIOTLBEntry =
+*iotlbentry,
+         qemu_mutex_lock_iothread();
+         locked =3D true;
+     }
+-    r =3D memory_region_dispatch_write(mr, mr_offset,
+-                                     val, size, iotlbentry->attrs);
++    r =3D memory_region_dispatch_write(mr, mr_offset, val, size_memop(size=
+),
++                                     iotlbentry->attrs);
+     if (r !=3D MEMTX_OK) {
+         hwaddr physaddr =3D mr_offset +
+             section->offset_within_address_space -
 --
 1.8.3.1
 
 ?
 
 
---_000_156516640749721726btcom_
+--_000_156516656277465589btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -165,62 +178,92 @@ der-left-width: 2px; border-left-style: solid; border-left-color: rgb(128, =
 <body dir=3D"ltr" style=3D"font-size:12pt;color:#000000;background-color:#F=
 FFFFF;font-family:Calibri,Arial,Helvetica,sans-serif;">
 <p></p>
-<div><span style=3D"font-size: 12pt;">The memory_region_dispatch_{read|writ=
+<div style=3D"color: rgb(33, 33, 33);"><font size=3D"2"><span style=3D"font=
+-size:10pt;">
+<div class=3D"PlainText">
+<div><span style=3D"font-size: 10pt;">The memory_region_dispatch_{read|writ=
 e} operand &quot;unsigned size&quot; is</span><br>
 </div>
 <div>being converted into a &quot;MemOp op&quot;.</div>
 <div><br>
 </div>
-<div>Introduce no-op size_memop to aid preparatory conversion of</div>
-<div>interfaces.</div>
+<div>Convert interfaces by using no-op size_memop.</div>
 <div><br>
 </div>
-<div>Once interfaces are converted, size_memop will be implemented to</div>
-<div>return a MemOp from size in bytes.</div>
+<div>After all interfaces are converted, size_memop will be implemented</di=
+v>
+<div>and the memory_region_dispatch_{read|write} operand &quot;unsigned siz=
+e&quot;</div>
+<div>will be converted into a &quot;MemOp op&quot;.</div>
+<div><br>
+</div>
+<div>As size_memop is a no-op, this patch does not change any behaviour.</d=
+iv>
 <div><br>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
 <div>---</div>
-<div>&nbsp;include/exec/memop.h | 10 &#43;&#43;&#43;&#43;&#43;&#43;&#43;&#4=
-3;&#43;&#43;</div>
-<div>&nbsp;1 file changed, 10 insertions(&#43;)</div>
+<div>&nbsp;accel/tcg/cputlb.c | 8 &#43;&#43;&#43;&#43;----</div>
+<div>&nbsp;1 file changed, 4 insertions(&#43;), 4 deletions(-)</div>
 <div><br>
 </div>
-<div>diff --git a/include/exec/memop.h b/include/exec/memop.h</div>
-<div>index 7262ca3..5c5769e 100644</div>
-<div>--- a/include/exec/memop.h</div>
-<div>&#43;&#43;&#43; b/include/exec/memop.h</div>
-<div>@@ -107,4 &#43;107,14 @@ typedef enum MemOp {</div>
-<div>&nbsp; &nbsp; &nbsp;MO_SSIZE =3D MO_SIZE | MO_SIGN,</div>
-<div>&nbsp;} MemOp;</div>
-<div>&nbsp;</div>
-<div>&#43;/* Size in bytes to MemOp. &nbsp;*/</div>
-<div>&#43;static inline MemOp size_memop(unsigned size)</div>
-<div>&#43;{</div>
-<div>&#43; &nbsp; &nbsp;/*</div>
-<div>&#43; &nbsp; &nbsp; * FIXME: No-op to aid conversion of memory_region_=
-dispatch_{read|write}</div>
-<div>&#43; &nbsp; &nbsp; * &quot;unsigned size&quot; operand into a &quot;M=
-emOp op&quot;.</div>
-<div>&#43; &nbsp; &nbsp; */</div>
-<div>&#43; &nbsp; &nbsp;return size;</div>
-<div>&#43;}</div>
-<div>&#43;</div>
-<div>&nbsp;#endif</div>
+<div>diff --git a/accel/tcg/cputlb.c b/accel/tcg/cputlb.c</div>
+<div>index 523be4c..6c83878 100644</div>
+<div>--- a/accel/tcg/cputlb.c</div>
+<div>&#43;&#43;&#43; b/accel/tcg/cputlb.c</div>
+<div>@@ -906,8 &#43;906,8 @@ static uint64_t io_readx(CPUArchState *env, CP=
+UIOTLBEntry *iotlbentry,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&amp;val, size, io=
+tlbentry-&gt;attrs);</div>
+<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_read(mr, mr_offset, &a=
+mp;val, size_memop(size),</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;iotlbentry-&gt=
+;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
+/div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
+hin_address_space -</div>
+<div>@@ -947,8 &#43;947,8 @@ static void io_writex(CPUArchState *env, CPUIO=
+TLBEntry *iotlbentry,</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;qemu_mutex_lock_iothread();</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;locked =3D true;</div>
+<div>&nbsp; &nbsp; &nbsp;}</div>
+<div>- &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset,</div>
+<div>- &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp=
+; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; val, size, iotlbe=
+ntry-&gt;attrs);</div>
+<div>&#43; &nbsp; &nbsp;r =3D memory_region_dispatch_write(mr, mr_offset, v=
+al, size_memop(size),</div>
+<div>&#43; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &=
+nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; iotlbentry-&g=
+t;attrs);</div>
+<div>&nbsp; &nbsp; &nbsp;if (r !=3D MEMTX_OK) {</div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hwaddr physaddr =3D mr_offset &#43;<=
+/div>
+<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;section-&gt;offset_wit=
+hin_address_space -</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
 &#8203;<br>
 </div>
-<p><br>
-</p>
+<br>
+</div>
+</span></font></div>
 </body>
 </html>
 
---_000_156516640749721726btcom_--
+--_000_156516656277465589btcom_--
 
 
---===============5498148654900712646==
+--===============3613753589407682055==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -230,5 +273,5 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============5498148654900712646==--
+--===============3613753589407682055==--
 
