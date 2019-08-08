@@ -2,55 +2,80 @@ Return-Path: <SRS0=JtEA=WE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FC56C0650F
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 09:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A9ADC0650F
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 09:22:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69FED2171F
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 09:13:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69FED2171F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4963E2173C
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 09:22:22 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="Z7WfmLhB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4963E2173C
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hveU5-0003dT-HE; Thu, 08 Aug 2019 09:13:21 +0000
-Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
+	id 1hvecW-0004Tf-Vm; Thu, 08 Aug 2019 09:22:04 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=islG=WE=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hveU4-0003dN-Ll
- for xen-devel@lists.xenproject.org; Thu, 08 Aug 2019 09:13:20 +0000
-X-Inumbo-ID: c2d24227-b9bc-11e9-8980-bc764e045a96
-Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-dfw2.inumbo.com (Halon) with ESMTP
- id c2d24227-b9bc-11e9-8980-bc764e045a96;
- Thu, 08 Aug 2019 09:13:18 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 628711570;
- Thu,  8 Aug 2019 02:13:18 -0700 (PDT)
-Received: from [10.1.196.50] (e108454-lin.cambridge.arm.com [10.1.196.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EB55D3F706;
- Thu,  8 Aug 2019 02:13:16 -0700 (PDT)
-To: Jan Beulich <JBeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20190807194143.1351-1-andrew.cooper3@citrix.com>
- <ad94d279-e53c-b1ae-c333-096944b217dd@suse.com>
- <2e3a40d8-14ec-9f84-6a43-d7389bdbebf8@citrix.com>
- <eba4a457-5be0-ee55-28b5-f25973c743fa@suse.com>
-From: Julien Grall <julien.grall@arm.com>
-Message-ID: <40816d88-b7e2-7d9f-2d7a-bede37a80e99@arm.com>
-Date: Thu, 8 Aug 2019 10:13:15 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+ <SRS0=o++3=WE=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1hvecV-0004Ta-Fz
+ for xen-devel@lists.xenproject.org; Thu, 08 Aug 2019 09:22:03 +0000
+X-Inumbo-ID: fa7224ac-b9bd-11e9-9e85-c3691d5093e5
+Received: from new3-smtp.messagingengine.com (unknown [66.111.4.229])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fa7224ac-b9bd-11e9-9e85-c3691d5093e5;
+ Thu, 08 Aug 2019 09:22:01 +0000 (UTC)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 1DAA41407;
+ Thu,  8 Aug 2019 05:22:01 -0400 (EDT)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute7.internal (MEProxy); Thu, 08 Aug 2019 05:22:01 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=PBE443
+ MFLRAaA0uRjTkD6wPxYICsTLtj/ZmHVJq67fs=; b=Z7WfmLhBRFAvOi6iBOJ0B/
+ ldGsp8u5zw2D0UFLDLttpNbH0FzlyXkzN/vpWxX0lGVIV27Puo43ywgTcmfQ37Ax
+ bO4taxr5ozTLQ78SF6/N32kCXFQ+Mq3n0am6ZJV5UrOyrtVoSv95aUv3eXP5INRj
+ SR/dT1E70/J4Lx2koeHIU3JY14cIcQSv5ATexUXnq8dTInFb5ELqrQ5MzcG+Uq7C
+ OKS3BmwQNiMK2TRS5fUct1llNb7BeH1QQzKL0lXsf++QN7Pu6uncwY8HNkekkBOz
+ T7eQiANTd7IonLn31YngawccgI7dhQgWtFTImtymawNe9PmgKTfqiG/PGPseCzaA
+ ==
+X-ME-Sender: <xms:t-lLXSz-Q8JmheQ2RGoRiKkybK4vvo9Cy97u2XfEyMQ3_oxDzl20Gw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudduhedgudehucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+ cujfgurhepfffhvffukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
+ ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
+ hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucfkphepledurdeihedrfeegrdef
+ feenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslh
+ gvthhhihhnghhslhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedt
+X-ME-Proxy: <xmx:t-lLXVu4sPdHVx4WylcrJ11U9Z4f2sieTL5NoAdRGTV4Xzb9fAErFA>
+ <xmx:t-lLXRtJQk6eb-_HAOiFSHf1mDUvr7kT5LOd0QAfSujdwBasK1TkvQ>
+ <xmx:t-lLXSPmlZchfiI2PKOYqI6Z766b3c38e4ZW8G0wniyTxUrs2Fhw0g>
+ <xmx:uelLXZePlDDy5g_QKY6TF2RpEZ2LFT9EQT5VbeIghxE0obMC8-SmyQ>
+Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 40261380089;
+ Thu,  8 Aug 2019 05:21:58 -0400 (EDT)
+Date: Thu, 8 Aug 2019 11:21:54 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+To: Jan Beulich <JBeulich@suse.com>
+Message-ID: <20190808092154.GG3257@mail-itl>
+References: <20190808003158.5256-1-marmarek@invisiblethingslab.com>
+ <fc039376-dfc6-b281-c00d-3d1d263744c6@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <eba4a457-5be0-ee55-28b5-f25973c743fa@suse.com>
-Content-Language: en-US
-Subject: Re: [Xen-devel] Terminology for "guest" - Was: [PATCH] docs/sphinx:
- Introduction
+In-Reply-To: <fc039376-dfc6-b281-c00d-3d1d263744c6@suse.com>
+Subject: Re: [Xen-devel] [PATCH] EFI: add efi=mapbs option and parse efi=
+ early
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,61 +86,201 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Lars Kurth <lars.kurth@citrix.com>,
- StefanoStabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>,
- Ian Jackson <ian.jackson@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Julien Grall <julien.grall@arm.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Content-Type: multipart/mixed; boundary="===============8747454905077925031=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGkgSmFuLAoKT24gMDgvMDgvMjAxOSAxMDowNCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4gT24gMDgu
-MDguMjAxOSAxMDo0MywgQW5kcmV3IENvb3BlciB3cm90ZToKPj4gT24gMDgvMDgvMjAxOSAwNzoy
-MiwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+PiBPbiAwNy4wOC4yMDE5IDIxOjQxLCBBbmRyZXcgQ29v
-cGVyIHdyb3RlOgo+Pj4+IC0tLSAvZGV2L251bGwKPj4+PiArKysgYi9kb2NzL2dsb3NzYXJ5LnJz
-dAo+Pj4+IEBAIC0wLDAgKzEsMzcgQEAKPj4+PiArR2xvc3NhcnkKPj4+PiArPT09PT09PT0KPj4+
-PiArCj4+Pj4gKy4uIFRlcm1zIHNob3VsZCBhcHBlYXIgaW4gYWxwaGFiZXRpY2FsIG9yZGVyCj4+
-Pj4gKwo+Pj4+ICsuLiBnbG9zc2FyeTo6Cj4+Pj4gKwo+Pj4+ICvCoMKgIGNvbnRyb2wgZG9tYWlu
-Cj4+Pj4gK8KgwqDCoMKgIEEgOnRlcm06YGRvbWFpbmAsIGNvbW1vbmx5IGRvbTAsIHdpdGggdGhl
-IHBlcm1pc3Npb24gYW5kCj4+Pj4gcmVzcG9uc2liaWxpdHkKPj4+PiArwqDCoMKgwqAgdG8gY3Jl
-YXRlIGFuZCBtYW5hZ2Ugb3RoZXIgZG9tYWlucyBvbiB0aGUgc3lzdGVtLgo+Pj4+ICsKPj4+PiAr
-wqDCoCBkb21haW4KPj4+PiArwqDCoMKgwqAgQSBkb21haW4gaXMgWGVuJ3MgdW5pdCBvZiByZXNv
-dXJjZSBvd25lcnNoaXAsIGFuZCBnZW5lcmFsbHkgaGFzCj4+Pj4gYXQgdGhlCj4+Pj4gK8KgwqDC
-oMKgIG1pbmltdW0gc29tZSBSQU0gYW5kIHZpcnR1YWwgQ1BVcy4KPj4+PiArCj4+Pj4gK8KgwqDC
-oMKgIFRoZSB0ZXJtcyA6dGVybTpgZG9tYWluYCBhbmQgOnRlcm06YGd1ZXN0YCBhcmUgY29tbW9u
-bHkgdXNlZAo+Pj4+ICvCoMKgwqDCoCBpbnRlcmNoYW5nZWFibHksIGJ1dCB0aGV5IG1lYW4gc3Vi
-dGx5IGRpZmZlcmVudCB0aGluZ3MuCj4+Pj4gKwo+Pj4+ICvCoMKgwqDCoCBBIGd1ZXN0IGlzIGEg
-c2luZ2xlIHZpcnR1YWwgbWFjaGluZS4KPj4+PiArCj4+Pj4gK8KgwqDCoMKgIENvbnNpZGVyIHRo
-ZSBjYXNlIG9mIGxpdmUgbWlncmF0aW9uIHdoZXJlLCBmb3IgYSBwZXJpb2Qgb2YKPj4+PiB0aW1l
-LCBvbmUKPj4+PiArwqDCoMKgwqAgZ3Vlc3Qgd2lsbCBiZSBjb21wcmlzZWQgb2YgdHdvIGRvbWFp
-bnMsIHdoaWxlIGl0IGlzIGluIHRyYW5zaXQuCj4+Pj4gKwo+Pj4+ICvCoMKgIGRvbWlkCj4+Pj4g
-K8KgwqDCoMKgIFRoZSBudW1lcmljIGlkZW50aWZpZXIgb2YgYSBydW5uaW5nIDp0ZXJtOmBkb21h
-aW5gLsKgIEl0IGlzCj4+Pj4gdW5pcXVlIHRvIGEKPj4+PiArwqDCoMKgwqAgc2luZ2xlIGluc3Rh
-bmNlIG9mIFhlbiwgdXNlZCBhcyB0aGUgaWRlbnRpZmllciBpbiB2YXJpb3VzIEFQSXMsCj4+Pj4g
-YW5kIGlzCj4+Pj4gK8KgwqDCoMKgIHR5cGljYWxseSBhbGxvY2F0ZWQgc2VxdWVudGlhbGx5IGZy
-b20gMC4KPj4+PiArCj4+Pj4gK8KgwqAgZ3Vlc3QKPj4+PiArwqDCoMKgwqAgU2VlIDp0ZXJtOmBk
-b21haW5gCj4+Pgo+Pj4gSSB0aGluayB5b3Ugd2FudCB0byBtZW50aW9uIHRoZSB1c3VhbCBkaXN0
-aW5jdGlvbiBoZXJlOiBEb20wIGlzLAo+Pj4gd2hpbGUgYSBkb21haW4sIGNvbW1vbmx5IG5vdCBj
-b25zaWRlcmVkIGEgZ3Vlc3QuCj4+Cj4+IFRvIGJlIGhvbmVzdCwgSSBoYWQgdG90YWxseSBmb3Jn
-b3R0ZW4gYWJvdXQgdGhhdC7CoCBJIGd1ZXNzIG5vdyBpcyB0aGUKPj4gcHJvcGVyIHRpbWUgdG8g
-cmVoYXNoIGl0IGluIHB1YmxpYy4KPj4KPj4gSSBkb24ndCB0aGluayB0aGUgd2F5IGl0IGN1cnJl
-bnRseSBnZXRzIHVzZWQgaGFzIGEgY2xlYXIgb3IgY29oZXJlbnQgc2V0Cj4+IG9mIHJ1bGVzLCBi
-ZWNhdXNlIEkgY2FuJ3QgdGhpbmsgb2YgYW55IHRvIGRlc2NyaWJlIGhvdyBpdCBkb2VzIGdldCB1
-c2VkLgo+Pgo+PiBFaXRoZXIgdGhlcmUgYXJlIGEgY2xlYXIgYW5kIGNvaGVyZW50IChhbmQgc2lt
-cGxlISkgc2V0IG9mIHJ1bGVzIGZvcgo+PiB3aGF0IHdlIG1lYW4gYnkgImd1ZXN0IiwgYXQgd2hp
-Y2ggcG9pbnQgdGhleSBjYW4gbGl2ZSBoZXJlIGluIHRoZQo+PiBnbG9zc2FyeSwgb3IgdGhlIGZ1
-enp5IHdheSBpdCBpcyBjdXJyZW50IHVzZWQgc2hvdWxkIGNlYXNlLgo+IAo+IFdoYXQncyBmdXp6
-eSBhYm91dCBEb20wIG5vdCBiZWluZyBhIGd1ZXN0IChkdWUgdG8gYmVpbmcgYSBwYXJ0IG9mIHRo
-ZQo+IGhvc3QgaW5zdGVhZCk/CkRvbTAgaXMgbm90IHBhcnQgb2YgdGhlIGhvc3QgaWYgeW91IGFy
-ZSB1c2luZyBhbiBoYXJkd2FyZSBkb21haW4uIEkgYWN0dWFsbHkgCnRob3VnaHQgd2UgcmVuYW1l
-ZCBldmVyeXRoaW5nIGluIFhlbiBmcm9tIERvbTAgdG8gaHdkb20gdG8gYXZvaWQgdGhlIGNvbmZ1
-c2lvbi4KCkkgYWxzbyB3b3VsZCByYXRoZXIgYXZvaWQgdG8gdHJlYXQgImRvbTAiIGFzIG5vdCBh
-IGd1ZXN0LiBJbiBub3JtYWwgc2V0dXAgdGhpcyAKaXMgYSBtb3JlIHByaXZpbGVnZSBndWVzdCwg
-aW4gb3RoZXIgc2V0dXAgdGhpcyBtYXkganVzdCBiZSBhIG5vcm1hbCBndWVzdCAodGhpbmsgCmFi
-b3V0IHBhcnRpdGlvbmluZykuCgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
-aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
-Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============8747454905077925031==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="3xoW37o/FfUZJwQG"
+Content-Disposition: inline
+
+
+--3xoW37o/FfUZJwQG
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Aug 08, 2019 at 08:21:54AM +0000, Jan Beulich wrote:
+> On 08.08.2019 02:31, Marek Marczykowski-G=C3=B3recki  wrote:
+> > When booting Xen via xen.efi, there is /mapbs option to workaround
+> > certain platform issues (added in f36886bdf4 "EFI/early: add /mapbs to
+> > map EfiBootServices{Code,Data}"). Add support for efi=3Dmapbs on Xen
+> > cmdline for the same effect and parse it very early in the
+> > multiboot2+EFI boot path.
+> >=20
+> > Normally cmdline is parsed after relocating MB2 structure, which happens
+> > too late. To have efi=3D parsed early enough, save cmdline pointer in
+> > head.S and pass it as yet another argument to efi_multiboot2(). This
+> > way we avoid introducing yet another MB2 structure parser.
+>=20
+> I can where you're coming from here, but I'm not at all happy to
+> see the amount of assembly code further grow.
+
+I need to add some anyway, because otherwise efi_multiboot2() don't have
+pointer to MB2 structure. But yes, it would probably be less new asm
+code. Just to be clear: do you prefer third MB2 parser instead of adding
+this into the one in head.S?
+
+> > --- a/docs/misc/xen-command-line.pandoc
+> > +++ b/docs/misc/xen-command-line.pandoc
+> > @@ -886,7 +886,7 @@ disable it (edid=3Dno). This option should not norm=
+ally be required
+> >   except for debugging purposes.
+> >  =20
+> >   ### efi
+> > -    =3D List of [ rs=3D<bool>, attr=3Dno|uc ]
+> > +    =3D List of [ rs=3D<bool>, attr=3Dno|uc, mapbs=3D<bool> ]
+> >  =20
+> >   Controls for interacting with the system Extended Firmware Interface.
+> >  =20
+> > @@ -899,6 +899,10 @@ Controls for interacting with the system Extended =
+Firmware Interface.
+> >       leave the memory regions unmapped, while `attr=3Duc` will map the=
+m as fully
+> >       uncacheable.
+> >  =20
+> > +*   The `mapbs=3D` boolean controls whether EfiBootServices{Code,Data}=
+ should
+> > +    remain mapped after Exit() BootServices call. By default those mem=
+ory regions
+> > +    will not be mapped after Exit() BootServices call.
+>=20
+> There are restrictions necessary (see below) which should be
+> mentioned here imo.
+>=20
+> > --- a/xen/arch/x86/efi/efi-boot.h
+> > +++ b/xen/arch/x86/efi/efi-boot.h
+> > @@ -315,8 +315,10 @@ static void __init efi_arch_handle_cmdline(CHAR16 =
+*image_name,
+> >           name.s =3D "xen";
+> >       place_string(&mbi.cmdline, name.s);
+> >  =20
+> > -    if ( mbi.cmdline )
+> > +    if ( mbi.cmdline ) {
+> >           mbi.flags |=3D MBI_CMDLINE;
+> > +        efi_early_parse_cmdline(mbi.cmdline);
+> > +    }
+>=20
+> Why? This is the xen.efi boot path, isn't it?=20
+
+Yes, as explained in commit message, this is to make it less confusing
+what option can be used when. To say "efi=3Dmapbs does X" instead of
+"efi=3Dmapbs does X, but only if Y, Z and K".
+
+> (Also, if this
+> change was to stay, the opening brace would need to go on its
+> own line.)
+>=20
+> > @@ -685,6 +688,9 @@ void __init efi_multiboot2(EFI_HANDLE ImageHandle, =
+EFI_SYSTEM_TABLE *SystemTable
+> >  =20
+> >       efi_init(ImageHandle, SystemTable);
+> >  =20
+> > +    if (cmdline)
+> > +        efi_early_parse_cmdline(cmdline);
+>=20
+> Style again (missing blanks in if()).
+>=20
+> > @@ -1412,16 +1417,32 @@ static int __init parse_efi_param(const char *s)
+> >              else
+> >                  rc =3D -EINVAL;
+> >          }
+> > +        else if ( (val =3D parse_boolean("mapbs", s, ss)) >=3D 0 )
+> > +        {
+> > +            map_bs =3D val;
+> > +        }
+>=20
+> This may _not_ be accepted when called the "normal" way, since it
+> would then fail to affect efi_arch_process_memory_map(), but it
+> would affect efi_init_memory().
+
+What do you mean? Have I missed some EFI boot code path? Where it would
+miss to affect efi_arch_process_memory_map() ?
+
+> I therefore think you don't want
+> to call this function from efi_early_parse_cmdline(), and instead
+> simply ignore the option here.
+>=20
+> Also (again if for some reason the change was to stay as is) -
+> stray braces.
+>=20
+> >          else
+> >              rc =3D -EINVAL;
+> > =20
+> >          s =3D ss + 1;
+> > -    } while ( *ss );
+> > +        /*
+> > +         * End parsing on both '\0' and ' ',
+> > +         * to make efi_early_parse_cmdline simpler.
+> > +         */
+> > +    } while ( *ss && *ss !=3D ' ');
+> >  =20
+> >      return rc;
+> >  }
+> >  custom_param("efi", parse_efi_param);
+> >  =20
+> > +/* Extract efi=3D param early in the boot */
+> > +static void __init efi_early_parse_cmdline(const char *cmdline)
+> > +{
+> > +    const char *efi_opt =3D strstr(cmdline, "efi=3D");
+> > +    if ( efi_opt )
+>=20
+> Blank line missing above here.
+>=20
+> > +        parse_efi_param(efi_opt + 4);
+> > +}
+>=20
+> What about multiple "efi=3D" on the command line? And what about
+> a (currently bogus) "abcefi=3D" on the command line, or yet some
+> other pattern wrongly matching the string you search for?
+
+Good points, I'll extend this function. Unless you can suggest some
+existing function that could be used this early instead?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--3xoW37o/FfUZJwQG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl1L6bMACgkQ24/THMrX
+1yyqYgf+KdHi4J6mAqe033RBEWUP37FwcyAWbmP0LhNPD5XbyP4cjZlrR66AfCkW
+7YbwRpAqJUasObNdFSQCU44T7PO3lgo5yTtuzNFGTxeT6MeP2KHkIAcsu3ZmmkRt
+rfzy9rGXZEgJJ0CRNjMg7LntTZv2uil6VFFZ1ETtvJII6VcbFo1scNgvN5Yz1LIk
+dIxzTAESRSZRB92pc6rJP0HUdqtKNJQN1WkYufykyiXuAOQvinBUUYB0XUEZqLPY
+O2d2++gqB5WJxMQHQBC+7LIGT0qK0hDxUEW8dI/csex46qc743QhI50Kz1zT89Ru
+klPSsnTkkAVlD5n06ZMD03kEdnx1sA==
+=mOC6
+-----END PGP SIGNATURE-----
+
+--3xoW37o/FfUZJwQG--
+
+
+--===============8747454905077925031==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8747454905077925031==--
+
