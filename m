@@ -2,117 +2,67 @@ Return-Path: <SRS0=JtEA=WE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20924C433FF
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 15:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1A51C433FF
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 15:13:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F02E6217F4
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 15:10:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F02E6217F4
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 86955218B8
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 15:13:27 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="mioLLNj6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 86955218B8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=infradead.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvk3e-0001YG-Le; Thu, 08 Aug 2019 15:10:26 +0000
+	id 1hvk6J-0001f6-7M; Thu, 08 Aug 2019 15:13:11 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=UoSe=WE=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1hvk3c-0001YB-P7
- for xen-devel@lists.xenproject.org; Thu, 08 Aug 2019 15:10:24 +0000
-X-Inumbo-ID: 9b1b161c-b9ee-11e9-8980-bc764e045a96
-Received: from m9a0001g.houston.softwaregrp.com (unknown [15.124.64.66])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=jdre=WE=merlin.srs.infradead.org=batv+cbf3729d93865f577a71+5828+infradead.org+dwmw2@srs-us1.protection.inumbo.net>)
+ id 1hvk6H-0001f0-S8
+ for xen-devel@lists.xenproject.org; Thu, 08 Aug 2019 15:13:10 +0000
+X-Inumbo-ID: 067947cd-b9ef-11e9-8980-bc764e045a96
+Received: from merlin.infradead.org (unknown [2001:8b0:10b:1231::1])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id 9b1b161c-b9ee-11e9-8980-bc764e045a96;
- Thu, 08 Aug 2019 15:10:22 +0000 (UTC)
-Received: FROM m9a0001g.houston.softwaregrp.com (15.121.0.191) BY
- m9a0001g.houston.softwaregrp.com WITH ESMTP; 
- Thu,  8 Aug 2019 15:10:00 +0000
-Received: from M4W0335.microfocus.com (2002:f78:1193::f78:1193) by
- M9W0068.microfocus.com (2002:f79:bf::f79:bf) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10; Thu, 8 Aug 2019 15:01:57 +0000
-Received: from NAM03-CO1-obe.outbound.protection.outlook.com (15.124.8.13) by
- M4W0335.microfocus.com (15.120.17.147) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.1591.10 via Frontend Transport; Thu, 8 Aug 2019 15:01:57 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LKMn/SrqqqZ2odHN0WOs/0Zsn0ECAsXp/h3XRYnqJZ2i318CBRaLQZOrups7aAYmhMqg8nF2IOqZ3Oii+ibacEFSDIjdCIbQ3AImBrjJqfIJsxFdBPE1wc+tXlglT7wFAeB0hJP5Ch9lX3+73ZJwVMizHFiFO8xxmsCrLAu0bgri7Uo6M3tVzA2PBAggli5OG60ek1kvTm8urrKQiZr4t+79/LT64Qh/UPvYyWiTfB7V35MJyoleiczyWFnBEmsGknUm2UV9zu4rT+Hdy0UBmFYK4kFyWoRW6i6e1vvr3YTNVVNnLY+4QATo+sJPhFW4OK2ChYSQeiNoj5R7CIht5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PpXDb0cpjoMQ7wHmOkF4E/r764mu6leVcpJ90pq/mDA=;
- b=Y+I+4+a2z3s3+PbY7ZtWoni0jTtwTCtAsC6UzIjc7XbCxkv/MHWELjUnVmmLUL2+s3cT9SNL4ieOlEfkI8bZdEBZJ9F5EF7ICNTNbiQDEosaOBRZR2vToL6hW0XDTNRHVciCI0EJtuYiY+y531rSPnBgruS1r6Sl0eVRuCtDipgMMrOC1SkwTClUZ15vgEMuGskJk53RcDIUQghrkmOjIhYwXdfusaDNbMJGg019ceAZlMao43V309rmiy89EcXzb5WU6kmJ0X4GgjFr1bAL5JY5MykJpfUNHNJlPg1RMENOO3khfiKBuhuvzy7Cub6h4lUR2i0+3TjRhlxpOlGMqA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=suse.com; dmarc=pass action=none header.from=suse.com;
- dkim=pass header.d=suse.com; arc=none
-Received: from MN2PR18MB3405.namprd18.prod.outlook.com (10.255.238.214) by
- MN2PR18MB2365.namprd18.prod.outlook.com (20.179.82.203) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2157.16; Thu, 8 Aug 2019 15:01:55 +0000
-Received: from MN2PR18MB3405.namprd18.prod.outlook.com
- ([fe80::a543:ed3c:6c3:2081]) by MN2PR18MB3405.namprd18.prod.outlook.com
- ([fe80::a543:ed3c:6c3:2081%7]) with mapi id 15.20.2157.015; Thu, 8 Aug 2019
- 15:01:55 +0000
-From: Jan Beulich <JBeulich@suse.com>
-To: Julien Grall <julien.grall@arm.com>
-Thread-Topic: [PATCH v2 1/4] xen/console: Don't treat NUL character as the end
- of the buffer
-Thread-Index: AQHVS5HylAe3eE1UcUur5OQYZ6SMtKbxSYOAgAAFgJiAAA5CAA==
-Date: Thu, 8 Aug 2019 15:01:55 +0000
-Message-ID: <63961c42-9716-b563-4eae-0e9164e24367@suse.com>
-References: <20190805132955.1630-1-julien.grall@arm.com>
- <20190805132955.1630-2-julien.grall@arm.com>
- <1adc84d1-dc16-5390-a056-e67d8eb9ab95@suse.com>
- <d86b54ba-cf10-892b-b6a0-aa2a4f1e3a07@arm.com>
-In-Reply-To: <d86b54ba-cf10-892b-b6a0-aa2a4f1e3a07@arm.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: AM0PR0202CA0028.eurprd02.prod.outlook.com
- (2603:10a6:208:1::41) To MN2PR18MB3405.namprd18.prod.outlook.com
- (2603:10b6:208:16c::22)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=JBeulich@suse.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [37.24.206.209]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 28819b47-59cc-4b39-6289-08d71c115a80
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(2390118)(7020095)(4652040)(8989299)(5600148)(711020)(4605104)(1401327)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
- SRVR:MN2PR18MB2365; 
-x-ms-traffictypediagnostic: MN2PR18MB2365:
-x-microsoft-antispam-prvs: <MN2PR18MB236583A960780BD8D590CF51B3D70@MN2PR18MB2365.namprd18.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:422;
-x-forefront-prvs: 012349AD1C
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(4636009)(366004)(376002)(346002)(39860400002)(396003)(136003)(199004)(189003)(51444003)(4326008)(36756003)(54906003)(6116002)(316002)(229853002)(6916009)(3846002)(6486002)(2906002)(25786009)(80792005)(102836004)(14444005)(186003)(476003)(6506007)(53546011)(386003)(11346002)(2616005)(446003)(486006)(71200400001)(71190400001)(76176011)(52116002)(31686004)(31696002)(99286004)(66066001)(256004)(7416002)(7736002)(4744005)(26005)(86362001)(478600001)(64756008)(8676002)(81156014)(6246003)(8936002)(53936002)(14454004)(6512007)(81166006)(66476007)(6436002)(66946007)(66556008)(5660300002)(305945005)(66446008);
- DIR:OUT; SFP:1102; SCL:1; SRVR:MN2PR18MB2365;
- H:MN2PR18MB3405.namprd18.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: suse.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: LkWLYteojZ/AD6Co3HDVewFicyvn096AV7ruLGJwlaBtN3e1LAXqt7FnDzkZscs3ORJblYSn5g/v0tZ/ndKW2m+ptxrPz8lkt8/QLxJNcz+/QfXNl/XM78RRbdfB5lroFohRjFUbGAFNtlV8YkZtEzmszsm8DxDhD+yoHLs2EN0gwuwxz+JYPTtv4didAbNE8k6298N4r9Dyua2ei1yiyUywpoAaIKTV5BgC+cZKzK6CdjO70TVbLfn2hLb/Dge4i3sUasw1yOsw9iOfitQEm8PfKjPYVPLFrZ4cCTnKuAJsxc53DxSHFiy0mvq0UGoqUmHYXsQBw6ZOhfW0jrQcXOl61PIdWVMM1XQ6Xov61zaUC5B5O5sUKYQYEY8m6BeZZ2zA3hkHOGAUDbL0sOLVmu5ad+Dcmq7jHLTwC2jajw4=
-x-ms-exchange-transport-forked: True
-Content-ID: <D5DBCEB92064EE4D83237B057B001A06@namprd18.prod.outlook.com>
-MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-Network-Message-Id: 28819b47-59cc-4b39-6289-08d71c115a80
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Aug 2019 15:01:55.7098 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 856b813c-16e5-49a5-85ec-6f081e13b527
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Yy3jlW8uf50MJ8lisBF2cESGy4p3xc6CoGcrdoLVapsYn/ZD5XOggHaLeY3jj/spAL7yLMcC0ioU1gZbVnGbMw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR18MB2365
-X-OriginatorOrg: suse.com
-Subject: Re: [Xen-devel] [PATCH v2 1/4] xen/console: Don't treat NUL
- character as the end of the buffer
+ id 067947cd-b9ef-11e9-8980-bc764e045a96;
+ Thu, 08 Aug 2019 15:13:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=merlin.20170209; h=Mime-Version:Content-Type:References:
+ In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+ Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=JNJFZtKGBP3cVLr64pM06prFFwZf1lZZYqKwU8H1wXo=; b=mioLLNj6KHaWRbaReu61zY6Fa
+ 25qH/jWG3PcMwUQfXB55hmlfUtY9HceoauCZZWLmBjuzYoTNM+PvmvxFYhNicS7wa2qRhseYpo943
+ Y/oRJRTadB8lKCiy59kawxcMOOy/x1LU6coOU5xuyGoNDtAM3g6FgGXWe6i4aP71J7RnmjjisFTqO
+ RShwME6C1COdLD6OpBIRjpLSA7aahcUQZ5gZr03uibcd/0sxEZdSoMAYNlS4F+Acg5pHWTc/fWkV+
+ UdD2AP+Vql8KZ+zcEVUTOc0mcXxIuoY8Axykj3hxnX5BdEa1WMVo5QlBXMfZzcSJflplxzD0YH3Z5
+ +RNXidMfg==;
+Received: from [2001:8b0:10b:1:4a2a:e3ff:fe14:8625]
+ (helo=u3832b3a9db3152.ant.amazon.com)
+ by merlin.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+ id 1hvk69-0002vo-3v; Thu, 08 Aug 2019 15:13:01 +0000
+Message-ID: <44b25042bb3d7fefe67ae68a9212d8384778ec42.camel@infradead.org>
+From: David Woodhouse <dwmw2@infradead.org>
+To: Ian Jackson <ian.jackson@citrix.com>
+Date: Thu, 08 Aug 2019 16:12:59 +0100
+In-Reply-To: <23882.61481.990906.474113@mariner.uk.xensource.com>
+References: <936c39728ca0c96d0666551046cf08ebc8774dd8.camel@infradead.org>
+ <5aa0116479240e5c2751fbaa745a6071a98f9480.camel@infradead.org>
+ <23882.61481.990906.474113@mariner.uk.xensource.com>
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by
+ merlin.infradead.org. See http://www.infradead.org/rpr.html
+Subject: Re: [Xen-devel] [PATCH v2] tools/xenstore: Do not abort xenstore-ls
+ if a node disappears while iterating
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -123,36 +73,304 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
+ Wei Liu <wl@xen.org>
+Content-Type: multipart/mixed; boundary="===============7086157660016780956=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMDguMDguMjAxOSAxNjoxMCwgSnVsaWVuIEdyYWxsIHdyb3RlOg0KPiBPbiAwOC8wOC8yMDE5
-IDE0OjUxLCBKYW4gQmV1bGljaCB3cm90ZToNCj4+IE9uIDA1LjA4LjIwMTkgMTU6MjksIEp1bGll
-biBHcmFsbCB3cm90ZToNCj4+PiAtLS0gYS94ZW4vaW5jbHVkZS94ZW4vdmlkZW8uaA0KPj4+ICsr
-KyBiL3hlbi9pbmNsdWRlL3hlbi92aWRlby5oDQo+Pj4gQEAgLTEzLDExICsxMywxMSBAQA0KPj4+
-IMKgI2lmZGVmIENPTkZJR19WSURFTw0KPj4+IMKgdm9pZCB2aWRlb19pbml0KHZvaWQpOw0KPj4+
-IC1leHRlcm4gdm9pZCAoKnZpZGVvX3B1dHMpKGNvbnN0IGNoYXIgKik7DQo+Pj4gK2V4dGVybiB2
-b2lkICgqdmlkZW9fcHV0cykoY29uc3QgY2hhciAqLCBzaXplX3QgbnIpOw0KPj4+IMKgdm9pZCB2
-aWRlb19lbmRib290KHZvaWQpOw0KPj4+IMKgI2Vsc2UNCj4+PiDCoCNkZWZpbmUgdmlkZW9faW5p
-dCgpwqDCoMKgICgodm9pZCkwKQ0KPj4+IC0jZGVmaW5lIHZpZGVvX3B1dHMocynCoMKgICgodm9p
-ZCkwKQ0KPj4+ICsjZGVmaW5lIHZpZGVvX3B1dHMocywgbnIpwqDCoCAoKHZvaWQpMCkNCj4+DQo+
-PiBXaGlsZSBJIGRvbid0IHRoaW5rIHRoZXJlJ3Mgb3Zlcmx5IG11Y2ggcmlzayBvZiAicyIgZ2V0
-dGluZyBhbg0KPj4gYXJndW1lbnQgd2l0aCBzaWRlIGVmZmVjdHMgcGFzc2VkLCBJIHRoaW5rIHRo
-YXQgZm9yICJuciIgdGhlDQo+PiByaXNrIGlzIHRoZXJlLiBNYXkgSSBhc2sgdGhhdCB5b3UgZXZh
-bHVhdGUgYm90aCBoZXJlLCBqdXN0IGluDQo+PiBjYXNlPw0KPiANCj4gQXJlIHlvdSBoYXBweSB3
-aXRoIHRoZSBmb2xsb3dpbmcgY29kZSAoTm90IHlldCBjb21waWxlZCEpOg0KPiANCj4gI2RlZmlu
-ZSB2aWRlb19wdHVzKHMsIG5yKSAoKHZvaWQpKHMpLCAodm9pZCkobnIpKQ0KDQpXaXRoIHMvcHR1
-cy9wdXRzLyAtIHN1cmUuIEEgc3RhdGljIGlubGluZSBtaWdodCBiZSBhbm90aGVyDQooZXZlbiBi
-ZXR0ZXIpIG9wdGlvbi4NCg0KSmFuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
-cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
-eGVuLWRldmVs
+
+--===============7086157660016780956==
+Content-Type: multipart/signed; micalg="sha-256";
+	protocol="application/x-pkcs7-signature";
+	boundary="=-2RZhzokAvnkzEIuknGZG"
+
+
+--=-2RZhzokAvnkzEIuknGZG
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 2019-08-07 at 16:37 +0100, Ian Jackson wrote:
+> I think it is not safe to continue if we get a permissions error.  I
+> think that would mean "we were not able to determine whether this node
+> exists", not "this node does not exist".
+
+Either way, I interpreted it more as "haha screw you, now I'm not going
+to tell you whether any *other* node exists".
+
+This is the test case I actually started with:
+
+(dom0) # for a in `seq 1 1000` ; do xenstore-write /local/domain/2/foo/$a $=
+a ; done
+
+Now simultaneously:
+
+(dom0) # for a in `seq 1 999` ; do xenstore-rm /local/domain/2/foo/$a  ; do=
+ne
+(dom2) # while true ; do ./xenstore-ls -p /local/domain/2/foo | grep -c 100=
+0;  done
+
+I do expect to see node 1000, every time. With my patch, that works.
+
+> So with a permissions error silently ignored, xenstore-ls might
+> silently produce partial output.
+
+Even without the race condition, we get partial output. In this test
+case, observe that node four is absent from what dom2 reports, and we
+get *two* error messages about node three.
+
+(dom0) # xenstore-ls -p /local/domain/2/foo
+one =3D "one"  . . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+two =3D "two"  . . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+three =3D "three"  . . . . . . . . . . . . . . . . . . . . . .  (n0)
+four =3D "four"  . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+
+(dom2) # xenstore-ls -p /local/domain/2/foo
+one =3D "one"  . . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+two =3D "two"  . . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+three:
+xenstore-ls:=20
+could not access permissions for three: Permission denied
+
+xenstore-ls: xs_directory (/local/domain/2/foo/three): Permission denied
+
+
+
+The tool actually makes three calls for each node it touches. If the
+xs_read() fails, it silently prints ":\n" and doesn't report the errno.
+
+If the (optional) xs_get_permissions() fails, it *warns* but continues,
+attempting to recurse into the node in question.
+
+If the xs_directory() fails, it aborts and doesn't even continue.
+
+My v2 patch makes the third case (xs_directory()) behave like the first
+(xs_read()), and silently continue. It gives me:
+
+(dom2) # ./xenstore-ls -p  /local/domain/2/foo
+one =3D "one"  . . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+two =3D "two"  . . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+three:
+xenstore-ls:=20
+could not access permissions for three: Permission denied
+
+four =3D "four"  . . . . . . . . . . . . . . . . . . . . . . .  (n0,r2)
+
+
+(dom2) # ./xenstore-ls /local/domain/2/foo
+one =3D "one"
+two =3D "two"
+three:
+
+four =3D "four"
+
+> Given that the code doesn't have a way to print an error message and
+> record the error code or exit status for later, I think the best
+> approach is probably exactly David's patch only without the mention of
+> EACCES.
+
+Well... here's an incremental straw man patch based on the existing v2,
+which will print an error for the *first* operation that fails, and
+should cope with race conditions too.
+
+Tested with
+
+(dom0) # while true; do xenstore-chmod /local/domain/2/foo/three n0; xensto=
+re-chmod /local/domain/2/foo/three n0 r2 ; done
+(dom2) # while true ;  do echo =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D ; sudo ./xenstore-ls  -p  /local/domain/2/foo; done
+
+diff --git a/tools/xenstore/xenstore_client.c b/tools/xenstore/xenstore_cli=
+ent.c
+index 9fcd3d2f9e..c5d0b18106 100644
+--- a/tools/xenstore/xenstore_client.c
++++ b/tools/xenstore/xenstore_client.c
+@@ -140,7 +140,7 @@ static int show_whole_path =3D 0;
+=20
+ #define MIN(a, b) (((a) < (b))? (a) : (b))
+=20
+-static void do_ls(struct xs_handle *h, char *path, int cur_depth, int show=
+_perms)
++static void do_ls(struct xs_handle *h, char *path, int cur_depth, int show=
+_perms, int ignore_errors)
+ {
+     char **e;
+     char *newpath, *val;
+@@ -151,7 +151,13 @@ static void do_ls(struct xs_handle *h, char *path, int=
+ cur_depth, int show_perms
+     e =3D xs_directory(h, XBT_NULL, path, &num);
+     if (e =3D=3D NULL) {
+         if (cur_depth && (errno =3D=3D ENOENT || errno =3D=3D EACCES)) {
+-            /* If a node disappears while recursing, silently move on. */
++            /*
++             * If a node disappears or becomes inaccessible while traversi=
+ng,
++             * only print an error if previous operations on this node hav=
+en't
++             * done do. Then move on.
++             */
++            if (!ignore_errors)
++                warn("xs_directory (%s)", path);
+             return;
+         }
+=20
+@@ -197,7 +203,7 @@ static void do_ls(struct xs_handle *h, char *path, int =
+cur_depth, int show_perms
+=20
+         /* Print value */
+         if (val =3D=3D NULL) {
+-            printf(":\n");
++            printf(": (%s)", strerror(errno));
+         }
+         else {
+             if (max_width < (linewid + len + TAG_LEN)) {
+@@ -222,7 +228,10 @@ static void do_ls(struct xs_handle *h, char *path, int=
+ cur_depth, int show_perms
+         if (show_perms) {
+             perms =3D xs_get_permissions(h, XBT_NULL, newpath, &nperms);
+             if (perms =3D=3D NULL) {
+-                warn("\ncould not access permissions for %s", e[i]);
++                /* Don't repeat an error message if xs_read() already fail=
+ed */
++                if (val)
++                    warn("could not access permissions for %s", e[i]);
++                val =3D NULL;
+             }
+             else {
+                 int i;
+@@ -239,7 +248,7 @@ static void do_ls(struct xs_handle *h, char *path, int =
+cur_depth, int show_perms
+=20
+         putchar('\n');
+            =20
+-        do_ls(h, newpath, cur_depth+1, show_perms);=20
++        do_ls(h, newpath, cur_depth+1, show_perms, !val);
+     }
+     free(e);
+     free(newpath);
+@@ -448,7 +457,7 @@ perform(enum mode mode, int optind, int argc, char **ar=
+gv, struct xs_handle *xsh
+             break;
+         }
+         case MODE_ls: {
+-            do_ls(xsh, argv[optind], 0, prefix);
++            do_ls(xsh, argv[optind], 0, prefix, 0);
+             optind++;
+             break;
+         }
+
+--=-2RZhzokAvnkzEIuknGZG
+Content-Type: application/x-pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCECow
+ggUcMIIEBKADAgECAhEA4rtJSHkq7AnpxKUY8ZlYZjANBgkqhkiG9w0BAQsFADCBlzELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgG
+A1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhl
+bnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0EwHhcNMTkwMTAyMDAwMDAwWhcNMjIwMTAxMjM1
+OTU5WjAkMSIwIAYJKoZIhvcNAQkBFhNkd213MkBpbmZyYWRlYWQub3JnMIIBIjANBgkqhkiG9w0B
+AQEFAAOCAQ8AMIIBCgKCAQEAsv3wObLTCbUA7GJqKj9vHGf+Fa+tpkO+ZRVve9EpNsMsfXhvFpb8
+RgL8vD+L133wK6csYoDU7zKiAo92FMUWaY1Hy6HqvVr9oevfTV3xhB5rQO1RHJoAfkvhy+wpjo7Q
+cXuzkOpibq2YurVStHAiGqAOMGMXhcVGqPuGhcVcVzVUjsvEzAV9Po9K2rpZ52FE4rDkpDK1pBK+
+uOAyOkgIg/cD8Kugav5tyapydeWMZRJQH1vMQ6OVT24CyAn2yXm2NgTQMS1mpzStP2ioPtTnszIQ
+Ih7ASVzhV6csHb8Yrkx8mgllOyrt9Y2kWRRJFm/FPRNEurOeNV6lnYAXOymVJwIDAQABo4IB0zCC
+Ac8wHwYDVR0jBBgwFoAUgq9sjPjF/pZhfOgfPStxSF7Ei8AwHQYDVR0OBBYEFLfuNf820LvaT4AK
+xrGK3EKx1DE7MA4GA1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8EAjAAMB0GA1UdJQQWMBQGCCsGAQUF
+BwMEBggrBgEFBQcDAjBGBgNVHSAEPzA9MDsGDCsGAQQBsjEBAgEDBTArMCkGCCsGAQUFBwIBFh1o
+dHRwczovL3NlY3VyZS5jb21vZG8ubmV0L0NQUzBaBgNVHR8EUzBRME+gTaBLhklodHRwOi8vY3Js
+LmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDbGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWls
+Q0EuY3JsMIGLBggrBgEFBQcBAQR/MH0wVQYIKwYBBQUHMAKGSWh0dHA6Ly9jcnQuY29tb2RvY2Eu
+Y29tL0NPTU9ET1JTQUNsaWVudEF1dGhlbnRpY2F0aW9uYW5kU2VjdXJlRW1haWxDQS5jcnQwJAYI
+KwYBBQUHMAGGGGh0dHA6Ly9vY3NwLmNvbW9kb2NhLmNvbTAeBgNVHREEFzAVgRNkd213MkBpbmZy
+YWRlYWQub3JnMA0GCSqGSIb3DQEBCwUAA4IBAQALbSykFusvvVkSIWttcEeifOGGKs7Wx2f5f45b
+nv2ghcxK5URjUvCnJhg+soxOMoQLG6+nbhzzb2rLTdRVGbvjZH0fOOzq0LShq0EXsqnJbbuwJhK+
+PnBtqX5O23PMHutP1l88AtVN+Rb72oSvnD+dK6708JqqUx2MAFLMevrhJRXLjKb2Mm+/8XBpEw+B
+7DisN4TMlLB/d55WnT9UPNHmQ+3KFL7QrTO8hYExkU849g58Dn3Nw3oCbMUgny81ocrLlB2Z5fFG
+Qu1AdNiBA+kg/UxzyJZpFbKfCITd5yX49bOriL692aMVDyqUvh8fP+T99PqorH4cIJP6OxSTdxKM
+MIIFHDCCBASgAwIBAgIRAOK7SUh5KuwJ6cSlGPGZWGYwDQYJKoZIhvcNAQELBQAwgZcxCzAJBgNV
+BAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAY
+BgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRo
+ZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMB4XDTE5MDEwMjAwMDAwMFoXDTIyMDEwMTIz
+NTk1OVowJDEiMCAGCSqGSIb3DQEJARYTZHdtdzJAaW5mcmFkZWFkLm9yZzCCASIwDQYJKoZIhvcN
+AQEBBQADggEPADCCAQoCggEBALL98Dmy0wm1AOxiaio/bxxn/hWvraZDvmUVb3vRKTbDLH14bxaW
+/EYC/Lw/i9d98CunLGKA1O8yogKPdhTFFmmNR8uh6r1a/aHr301d8YQea0DtURyaAH5L4cvsKY6O
+0HF7s5DqYm6tmLq1UrRwIhqgDjBjF4XFRqj7hoXFXFc1VI7LxMwFfT6PStq6WedhROKw5KQytaQS
+vrjgMjpICIP3A/CroGr+bcmqcnXljGUSUB9bzEOjlU9uAsgJ9sl5tjYE0DEtZqc0rT9oqD7U57My
+ECIewElc4VenLB2/GK5MfJoJZTsq7fWNpFkUSRZvxT0TRLqznjVepZ2AFzsplScCAwEAAaOCAdMw
+ggHPMB8GA1UdIwQYMBaAFIKvbIz4xf6WYXzoHz0rcUhexIvAMB0GA1UdDgQWBBS37jX/NtC72k+A
+CsaxitxCsdQxOzAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0TAQH/BAIwADAdBgNVHSUEFjAUBggrBgEF
+BQcDBAYIKwYBBQUHAwIwRgYDVR0gBD8wPTA7BgwrBgEEAbIxAQIBAwUwKzApBggrBgEFBQcCARYd
+aHR0cHM6Ly9zZWN1cmUuY29tb2RvLm5ldC9DUFMwWgYDVR0fBFMwUTBPoE2gS4ZJaHR0cDovL2Ny
+bC5jb21vZG9jYS5jb20vQ09NT0RPUlNBQ2xpZW50QXV0aGVudGljYXRpb25hbmRTZWN1cmVFbWFp
+bENBLmNybDCBiwYIKwYBBQUHAQEEfzB9MFUGCCsGAQUFBzAChklodHRwOi8vY3J0LmNvbW9kb2Nh
+LmNvbS9DT01PRE9SU0FDbGllbnRBdXRoZW50aWNhdGlvbmFuZFNlY3VyZUVtYWlsQ0EuY3J0MCQG
+CCsGAQUFBzABhhhodHRwOi8vb2NzcC5jb21vZG9jYS5jb20wHgYDVR0RBBcwFYETZHdtdzJAaW5m
+cmFkZWFkLm9yZzANBgkqhkiG9w0BAQsFAAOCAQEAC20spBbrL71ZEiFrbXBHonzhhirO1sdn+X+O
+W579oIXMSuVEY1LwpyYYPrKMTjKECxuvp24c829qy03UVRm742R9Hzjs6tC0oatBF7KpyW27sCYS
+vj5wbal+TttzzB7rT9ZfPALVTfkW+9qEr5w/nSuu9PCaqlMdjABSzHr64SUVy4ym9jJvv/FwaRMP
+gew4rDeEzJSwf3eeVp0/VDzR5kPtyhS+0K0zvIWBMZFPOPYOfA59zcN6AmzFIJ8vNaHKy5QdmeXx
+RkLtQHTYgQPpIP1Mc8iWaRWynwiE3ecl+PWzq4i+vdmjFQ8qlL4fHz/k/fT6qKx+HCCT+jsUk3cS
+jDCCBeYwggPOoAMCAQICEGqb4Tg7/ytrnwHV2binUlYwDQYJKoZIhvcNAQEMBQAwgYUxCzAJBgNV
+BAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAY
+BgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRp
+b24gQXV0aG9yaXR5MB4XDTEzMDExMDAwMDAwMFoXDTI4MDEwOTIzNTk1OVowgZcxCzAJBgNVBAYT
+AkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNV
+BAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRoZW50
+aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAvrOeV6wodnVAFsc4A5jTxhh2IVDzJXkLTLWg0X06WD6cpzEup/Y0dtmEatrQPTRI5Or1u6zf
++bGBSyD9aH95dDSmeny1nxdlYCeXIoymMv6pQHJGNcIDpFDIMypVpVSRsivlJTRENf+RKwrB6vcf
+WlP8dSsE3Rfywq09N0ZfxcBa39V0wsGtkGWC+eQKiz4pBZYKjrc5NOpG9qrxpZxyb4o4yNNwTqza
+aPpGRqXB7IMjtf7tTmU2jqPMLxFNe1VXj9XB1rHvbRikw8lBoNoSWY66nJN/VCJv5ym6Q0mdCbDK
+CMPybTjoNCQuelc0IAaO4nLUXk0BOSxSxt8kCvsUtQIDAQABo4IBPDCCATgwHwYDVR0jBBgwFoAU
+u69+Aj36pvE8hI6t7jiY7NkyMtQwHQYDVR0OBBYEFIKvbIz4xf6WYXzoHz0rcUhexIvAMA4GA1Ud
+DwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMBEGA1UdIAQKMAgwBgYEVR0gADBMBgNVHR8E
+RTBDMEGgP6A9hjtodHRwOi8vY3JsLmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9u
+QXV0aG9yaXR5LmNybDBxBggrBgEFBQcBAQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9jcnQuY29t
+b2RvY2EuY29tL0NPTU9ET1JTQUFkZFRydXN0Q0EuY3J0MCQGCCsGAQUFBzABhhhodHRwOi8vb2Nz
+cC5jb21vZG9jYS5jb20wDQYJKoZIhvcNAQEMBQADggIBAHhcsoEoNE887l9Wzp+XVuyPomsX9vP2
+SQgG1NgvNc3fQP7TcePo7EIMERoh42awGGsma65u/ITse2hKZHzT0CBxhuhb6txM1n/y78e/4ZOs
+0j8CGpfb+SJA3GaBQ+394k+z3ZByWPQedXLL1OdK8aRINTsjk/H5Ns77zwbjOKkDamxlpZ4TKSDM
+KVmU/PUWNMKSTvtlenlxBhh7ETrN543j/Q6qqgCWgWuMAXijnRglp9fyadqGOncjZjaaSOGTTFB+
+E2pvOUtY+hPebuPtTbq7vODqzCM6ryEhNhzf+enm0zlpXK7q332nXttNtjv7VFNYG+I31gnMrwfH
+M5tdhYF/8v5UY5g2xANPECTQdu9vWPoqNSGDt87b3gXb1AiGGaI06vzgkejL580ul+9hz9D0S0U4
+jkhJiA7EuTecP/CFtR72uYRBcunwwH3fciPjviDDAI9SnC/2aPY8ydehzuZutLbZdRJ5PDEJM/1t
+yZR2niOYihZ+FCbtf3D9mB12D4ln9icgc7CwaxpNSCPt8i/GqK2HsOgkL3VYnwtx7cJUmpvVdZ4o
+gnzgXtgtdk3ShrtOS1iAN2ZBXFiRmjVzmehoMof06r1xub+85hFQzVxZx5/bRaTKTlL8YXLI8nAb
+R9HWdFqzcOoB/hxfEyIQpx9/s81rgzdEZOofSlZHynoSMYIDyjCCA8YCAQEwga0wgZcxCzAJBgNV
+BAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAY
+BgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMT0wOwYDVQQDEzRDT01PRE8gUlNBIENsaWVudCBBdXRo
+ZW50aWNhdGlvbiBhbmQgU2VjdXJlIEVtYWlsIENBAhEA4rtJSHkq7AnpxKUY8ZlYZjANBglghkgB
+ZQMEAgEFAKCCAe0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTkw
+ODA4MTUxMjU5WjAvBgkqhkiG9w0BCQQxIgQgkYNHUAqJPdKIjYrOFVykM3QBOQSi2rB69fj6du+m
+7KYwgb4GCSsGAQQBgjcQBDGBsDCBrTCBlzELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIg
+TWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQx
+PTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhlbnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1h
+aWwgQ0ECEQDiu0lIeSrsCenEpRjxmVhmMIHABgsqhkiG9w0BCRACCzGBsKCBrTCBlzELMAkGA1UE
+BhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgG
+A1UEChMRQ09NT0RPIENBIExpbWl0ZWQxPTA7BgNVBAMTNENPTU9ETyBSU0EgQ2xpZW50IEF1dGhl
+bnRpY2F0aW9uIGFuZCBTZWN1cmUgRW1haWwgQ0ECEQDiu0lIeSrsCenEpRjxmVhmMA0GCSqGSIb3
+DQEBAQUABIIBAHTvkl8OhYrjWfr4ReBy8TC/QOB5BwmS+C/trYNvCS6Y77iPM/7n9lOkbOOJmwt5
+UHy6aQlNDzLkouZjNm7nZ/cblO/H/0nM/OkObHhtBVbsNtxpNCAApi1O0LonMWcfypmgdVOkkdcv
+yusQVe+sZO3i4ZuqtmgSAAfpaErxFLYHaFbmEIaG0rokXIyAwT/yZS2rtfmii/Uh8UsqQDNCnUeg
+tZcHF8iAFX0GYv2/4/YEMcqysX7IaHrgUm0ygzTkg7kwlIH2LJaREBY8/n284DN5w90qALXiHEWV
+DjtVUelmYr0qv97sZWPCWsipy2kkcLaGpIz7mayDFcjEKtIZRtsAAAAAAAA=
+
+
+--=-2RZhzokAvnkzEIuknGZG--
+
+
+
+--===============7086157660016780956==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7086157660016780956==--
+
+
