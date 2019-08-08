@@ -2,80 +2,67 @@ Return-Path: <SRS0=JtEA=WE=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,MIME_QP_LONG_LINE,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D2E7C433FF
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 23:05:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EDB52C0650F
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 23:25:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F3FE62173C
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 23:05:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BADE92086A
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Aug 2019 23:25:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="KzTZSAY/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F3FE62173C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=eikelenboom.it header.i=@eikelenboom.it header.b="G35hTPU5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BADE92086A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eikelenboom.it
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hvrSs-0002Ht-NI; Thu, 08 Aug 2019 23:04:58 +0000
+	id 1hvrmM-0004Lt-5W; Thu, 08 Aug 2019 23:25:06 +0000
 Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=Qeg/=WE=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1hvrSr-0002Ho-N5
- for xen-devel@lists.xenproject.org; Thu, 08 Aug 2019 23:04:57 +0000
-X-Inumbo-ID: f06bcab4-ba30-11e9-8980-bc764e045a96
-Received: from mail-qk1-x735.google.com (unknown [2607:f8b0:4864:20::735])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=oW8A=WE=eikelenboom.it=linux@srs-us1.protection.inumbo.net>)
+ id 1hvrmK-0004Lo-G8
+ for xen-devel@lists.xenproject.org; Thu, 08 Aug 2019 23:25:04 +0000
+X-Inumbo-ID: be064d17-ba33-11e9-8980-bc764e045a96
+Received: from server.eikelenboom.it (unknown [91.121.65.215])
  by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
- id f06bcab4-ba30-11e9-8980-bc764e045a96;
- Thu, 08 Aug 2019 23:04:56 +0000 (UTC)
-Received: by mail-qk1-x735.google.com with SMTP id r6so70314740qkc.0
- for <xen-devel@lists.xenproject.org>; Thu, 08 Aug 2019 16:04:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=EVWy5uMjqmWi86cf+GZW6r+YQ3KByJreN2MqQZrZfrA=;
- b=KzTZSAY//ox7QGczCdc5drUZCGunhGqZteyLIF5/BxtiQ+NaQVtioFSqB2poV0hzCu
- ZhVq8Tiheh8q8x7HALdlTM54iapp2uO+ozvSUMeoAy2fVzKVxL3Cqy+aVhHyhZn0Ikno
- 80YmoVktlF5wIOcTSi/uiVLUHWlc1R5NkbO5w7WA8+NgfuSxjq0cI1OyliNHlYmSmjsP
- OxnZJo0qXPv2fhdw+pzMhhCvXrebxUaWdiWnyYfeVNSjeGGTf12XU6XpWLOCzjmbCcK0
- GcrKsYwqKFLlo08lbmMCROnkcUtB/weH9UJlzC9havYiAKXXQJ0Gb50rTgR84Vic6/Nk
- L4Xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
- :content-transfer-encoding:message-id:references:to;
- bh=EVWy5uMjqmWi86cf+GZW6r+YQ3KByJreN2MqQZrZfrA=;
- b=kyahdbE9iwqHE35C7dIbbJLMgvOQnIMpkGaWkZVVb4R7iV1gkHKPwaQ7QnhRaXESIc
- VzbnlETLe+MDkcDXUUtv0SXfCfMwg7vLvBl3lOVq0KV0NAbN6PeixMWSm3SuZhyfQ6/q
- rfFH0Xk3d7E3feOvMbDwRcthjObJzQ5E2IUl1qd3vuubP0Jk2F+OunQNAG/57lXzKf4k
- YeWb1aS2DJxcBNmU+DSO25pKqmxJGG0R5FZSP7edXzwNhML2+hQntnNvgrvMGIHPdYWr
- jTW8/8kDuTg3gjPLRSkRtfsF/pJO9T4JrR3E16TtFAW6iFh+P52fJaUnKNwGU3UDBRwi
- xD2w==
-X-Gm-Message-State: APjAAAVGZy4WhIW2ApKheu/qr5x011WC+Pz+ogR9sKjFM04IYR3vDP/S
- ZyKzmnbnnJUth1ChmiaHTl5Lq3oj
-X-Google-Smtp-Source: APXvYqw3gpkRfiZB+WoykGQwBSeZrqZ3J5LfxdEk4C+cTqj4BG8OMZ7sMkNPFh7zVA8alin9yLhQ2w==
-X-Received: by 2002:a37:660d:: with SMTP id a13mr16036169qkc.36.1565305496203; 
- Thu, 08 Aug 2019 16:04:56 -0700 (PDT)
-Received: from ?IPv6:2607:fb90:7a2b:d242:65:d72:882:e0a9?
- ([2607:fb90:7a2b:d242:65:d72:882:e0a9])
- by smtp.gmail.com with ESMTPSA id g25sm35829761qto.45.2019.08.08.16.04.55
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 08 Aug 2019 16:04:55 -0700 (PDT)
-Mime-Version: 1.0 (1.0)
-From: Rich Persaud <persaur@gmail.com>
-X-Mailer: iPhone Mail (16G77)
-In-Reply-To: <ef1133c1-6e6e-c80f-168d-2bebb0df23d5@citrix.com>
-Date: Thu, 8 Aug 2019 19:04:54 -0400
-Message-Id: <6B785E19-4580-4BD6-90FA-E2823C510B1C@gmail.com>
-References: <ef1133c1-6e6e-c80f-168d-2bebb0df23d5@citrix.com>
-To: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [Xen-devel] Design session notes: Build system gripe session
+ id be064d17-ba33-11e9-8980-bc764e045a96;
+ Thu, 08 Aug 2019 23:25:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=eikelenboom.it; s=20180706; h=Content-Transfer-Encoding:Content-Type:
+ In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+ :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=QiLhTY+QDPo7gwMv8bm3ln29SihXhG4Offu9nEIBW7s=; b=G35hTPU5yXZ+b1D7TGF302rClq
+ NcjK1qMBPT+4SVBJwRX1uiEGKSELVFE9MGavdou3UF/2LLeYJ430pgJPzP+8Hm4wC8k1bT07802//
+ +TcdBImDITM8/nK81M9m41XyRe3tQWpu4ZrcqX5w4BoVZeTncYUfIIsDhlATZOzBg6gE=;
+Received: from ip4da85049.direct-adsl.nl ([77.168.80.73]:54282
+ helo=[172.16.1.50]) by server.eikelenboom.it with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
+ (envelope-from <linux@eikelenboom.it>)
+ id 1hvrmK-0002fT-Bc; Fri, 09 Aug 2019 01:25:04 +0200
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <b2d51bfa-17e0-c843-de2f-9fcba9ebc9f6@eikelenboom.it>
+ <dbb536d7-7bfb-27fb-902e-0851434bda96@citrix.com>
+ <a6f00518-f761-9362-6040-ee28c22cf334@eikelenboom.it>
+ <070124d4-93b6-e0f5-ea69-bcac2b5da7e3@citrix.com>
+ <d4fab4d9-f2d1-1c18-2582-1bd1283aa1cd@eikelenboom.it>
+ <d0f9713d-0768-dca6-87b3-3d3d3d02207b@citrix.com>
+From: Sander Eikelenboom <linux@eikelenboom.it>
+Message-ID: <90620f39-97bc-9528-0047-4b4584ca97b1@eikelenboom.it>
+Date: Fri, 9 Aug 2019 01:28:58 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
+MIME-Version: 1.0
+In-Reply-To: <d0f9713d-0768-dca6-87b3-3d3d3d02207b@citrix.com>
+Content-Language: en-US
+Subject: Re: [Xen-devel] [SUSPECTED SPAM]Xen-unstable staging build broken
+ by pvshim patches.
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,73 +73,69 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
- Christopher Clark <christopher.w.clark@gmail.com>
-Content-Type: multipart/mixed; boundary="===============8315810245656552441=="
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============8315810245656552441==
-Content-Type: multipart/alternative;
-	boundary=Apple-Mail-DE1B363F-C381-44B6-9355-0571E3DAA43A
-Content-Transfer-Encoding: 7bit
-
-
---Apple-Mail-DE1B363F-C381-44B6-9355-0571E3DAA43A
-Content-Type: text/plain;
-	charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
-
-> On Jul 15, 2019, at 09:27, George Dunlap <george.dunlap@citrix.com> wrote:=
-
-> ...
-> https://hackmd.io/mAGT5bU9T6-aXJVj88deYw
-> ...
->=20
-> 3. meta virtualization build system (yocto) needs to pull simlink
-> tricks, xen's build system stomp on that
-
-Are more details available on this item?
-
-This script can be used to cross-compile Xen for x86 or Arm, using OE/Yocto m=
-eta-virtualization:  https://github.com/dozylynx/oe-build-xen
-
-Rich=
-
---Apple-Mail-DE1B363F-C381-44B6-9355-0571E3DAA43A
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div dir=3D"ltr"><span></span></div><div di=
-r=3D"ltr"><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"><div dir=3D"ltr"></div><div dir=3D"ltr">On Jul 15, 2019, at 09:27, Ge=
-orge Dunlap &lt;<a href=3D"mailto:george.dunlap@citrix.com">george.dunlap@ci=
-trix.com</a>&gt; wrote:<br></div><blockquote type=3D"cite"><div dir=3D"ltr">=
-<span>...</span><br><span><a href=3D"https://hackmd.io/mAGT5bU9T6-aXJVj88deY=
-w">https://hackmd.io/mAGT5bU9T6-aXJVj88deYw</a></span><br><span>...</span><b=
-r><br><span>3. meta virtualization build system (yocto) needs to pull simlin=
-k</span><br><span>tricks, xen's build system stomp on that</span><br></div><=
-/blockquote><div><br></div>Are more details available on this item?<br><div>=
-<br></div><div>This script can be used to cross-compile Xen for x86 or Arm, u=
-sing OE/Yocto meta-virtualization: &nbsp;<a href=3D"https://github.com/dozyl=
-ynx/oe-build-xen">https://github.com/dozylynx/oe-build-xen</a></div><div><br=
-></div><div>Rich</div></div></body></html>=
-
---Apple-Mail-DE1B363F-C381-44B6-9355-0571E3DAA43A--
-
-
---===============8315810245656552441==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8315810245656552441==--
-
+T24gMDkvMDgvMjAxOSAwMDo0NCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwOC8wOC8yMDE5
+IDIzOjM0LCBTYW5kZXIgRWlrZWxlbmJvb20gd3JvdGU6Cj4+IE9uIDA4LzA4LzIwMTkgMjM6MTQs
+IEFuZHJldyBDb29wZXIgd3JvdGU6Cj4+PiBPbiAwOC8wOC8yMDE5IDIyOjE2LCBTYW5kZXIgRWlr
+ZWxlbmJvb20gd3JvdGU6Cj4+Pj4gT24gMDgvMDgvMjAxOSAyMzowNSwgQW5kcmV3IENvb3BlciB3
+cm90ZToKPj4+Pj4gT24gMDgvMDgvMjAxOSAyMTo1OSwgU2FuZGVyIEVpa2VsZW5ib29tIHdyb3Rl
+Ogo+Pj4+Pj4gSGkgQW5kcmV3LAo+Pj4+Pj4KPj4+Pj4+IEl0IHNlZW1zIHRoZSBwdnNoaW0gcGF0
+Y2hlcyBpbiB4ZW4tdW5zdGFibGUgc3RhZ2luZyBicmVhayB0aGUgYnVpbGQgb24gbXkgbWFjaGlu
+ZS4KPj4+Pj4+IEkgY2xvbmVkIGEgZnJlc2ggdHJlZSB0byBiZSBzdXJlLCBoYXZlbid0IGNoZWNr
+ZWQgd2hpY2ggb2YgdGhlIHR3byBjb21taXRzIGNhdXNlcyBpdDoKPj4+Pj4+IDA2MGY0ZWVlMGZi
+NDA4YjMxNjU0ODc3NWFiOTIxZTE2YjdhY2QwZTAgb3IgMzJiMWQ2Mjg4N2QwMWY4NWYwYzFkMmUw
+MTAzZjY5Zjc0ZTFmNmZhMwo+Pj4+Pj4KPj4+Pj4+IC0tCj4+Pj4+PiBTYW5kZXIKPj4+Pj4+Cj4+
+Pj4+Pgo+Pj4+Pj4KPj4+Pj4+IFsgLWQgLy91c3IvbG9jYWwvbGliL3hlbi9ib290IF0gfHwgL3Vz
+ci9zcmMvbmV3L3hlbi11bnN0YWJsZS90b29scy9maXJtd2FyZS8uLi8uLi90b29scy9jcm9zcy1p
+bnN0YWxsIC1kIC1tMDc1NSAtcCAvL3Vzci9sb2NhbC9saWIveGVuL2Jvb3QKPj4+Pj4+IFsgLWQg
+Ly91c3IvbG9jYWwvbGliL2RlYnVnL3Vzci9sb2NhbC9saWIveGVuL2Jvb3QgXSB8fCAvdXNyL3Ny
+Yy9uZXcveGVuLXVuc3RhYmxlL3Rvb2xzL2Zpcm13YXJlLy4uLy4uL3Rvb2xzL2Nyb3NzLWluc3Rh
+bGwgLWQgLW0wNzU1IC1wIC8vdXNyL2xvY2FsL2xpYi9kZWJ1Zy91c3IvbG9jYWwvbGliL3hlbi9i
+b290Cj4+Pj4+PiBbICEgLWUgaHZtbG9hZGVyL2h2bWxvYWRlciBdIHx8IC91c3Ivc3JjL25ldy94
+ZW4tdW5zdGFibGUvdG9vbHMvZmlybXdhcmUvLi4vLi4vdG9vbHMvY3Jvc3MtaW5zdGFsbCAtbTA2
+NDQgLXAgaHZtbG9hZGVyL2h2bWxvYWRlciAvL3Vzci9sb2NhbC9saWIveGVuL2Jvb3QKPj4+Pj4+
+IC91c3Ivc3JjL25ldy94ZW4tdW5zdGFibGUvdG9vbHMvZmlybXdhcmUvLi4vLi4vdG9vbHMvY3Jv
+c3MtaW5zdGFsbCAtbTA2NDQgLXAgc2VhYmlvcy1kaXIvb3V0L2Jpb3MuYmluIC8vdXNyL2xvY2Fs
+L2xpYi94ZW4vYm9vdC9zZWFiaW9zLmJpbgo+Pj4+Pj4gL3Vzci9zcmMvbmV3L3hlbi11bnN0YWJs
+ZS90b29scy9maXJtd2FyZS8uLi8uLi90b29scy9jcm9zcy1pbnN0YWxsIC1tMDY0NCAtcCB4ZW4t
+ZGlyL3hlbi1zaGltIC8vdXNyL2xvY2FsL2xpYi94ZW4vYm9vdC94ZW4tc2hpbQo+Pj4+Pj4gaW5z
+dGFsbDogY2Fubm90IHN0YXQgJ3hlbi1kaXIveGVuLXNoaW0nOiBObyBzdWNoIGZpbGUgb3IgZGly
+ZWN0b3J5Cj4+Pj4+PiBtYWtlWzRdOiAqKiogW01ha2VmaWxlOjUyOiBpbnN0YWxsXSBFcnJvciAx
+Cj4+Pj4+PiBtYWtlWzRdOiBMZWF2aW5nIGRpcmVjdG9yeSAnL3Vzci9zcmMvbmV3L3hlbi11bnN0
+YWJsZS90b29scy9maXJtd2FyZScKPj4+Pj4+IG1ha2VbM106ICoqKiBbL3Vzci9zcmMvbmV3L3hl
+bi11bnN0YWJsZS90b29scy8uLi90b29scy9SdWxlcy5tazoyMzc6IHN1YmRpci1pbnN0YWxsLWZp
+cm13YXJlXSBFcnJvciAyCj4+Pj4+PiBtYWtlWzNdOiBMZWF2aW5nIGRpcmVjdG9yeSAnL3Vzci9z
+cmMvbmV3L3hlbi11bnN0YWJsZS90b29scycKPj4+Pj4+IG1ha2VbMl06ICoqKiBbL3Vzci9zcmMv
+bmV3L3hlbi11bnN0YWJsZS90b29scy8uLi90b29scy9SdWxlcy5tazoyMzI6IHN1YmRpcnMtaW5z
+dGFsbF0gRXJyb3IgMgo+Pj4+Pj4gbWFrZVsyXTogTGVhdmluZyBkaXJlY3RvcnkgJy91c3Ivc3Jj
+L25ldy94ZW4tdW5zdGFibGUvdG9vbHMnCj4+Pj4+PiBtYWtlWzFdOiAqKiogW01ha2VmaWxlOjcz
+OiBpbnN0YWxsXSBFcnJvciAyCj4+Pj4+PiBtYWtlWzFdOiBMZWF2aW5nIGRpcmVjdG9yeSAnL3Vz
+ci9zcmMvbmV3L3hlbi11bnN0YWJsZS90b29scycKPj4+Pj4+IG1ha2U6ICoqKiBbTWFrZWZpbGU6
+MTMxOiBpbnN0YWxsLXRvb2xzXSBFcnJvciAyCj4+Pj4+IFRoYXQncyB3ZWlyZC4KPj4+Pj4KPj4+
+Pj4gRG8geW91IGhhdmUgdGhlIGZ1bGwgbG9nP8KgIFRoZSByZWFsIGZhaWx1cmUgd2FzIHNvbWV3
+aGVyZSBlYXJsaWVyIHdoZXJlCj4+Pj4+IHhlbi1zaGltIGRpZG4ndCBnZXQgc3RhcnRlZC4KPj4+
+Pj4KPj4+Pj4gfkFuZHJldwo+Pj4+Pgo+Pj4+IEhtbSBpZiBmb3Jnb3QgYW5kIHRodXMgZm9yZ290
+IHRvIG1lbnRpb24gbXkgYnVpbGQgc2NyaXB0IGRpc2FibGVzIHNvbWUgc3R1ZmY6Cj4+Pj4gLi9j
+b25maWd1cmUgLS1kaXNhYmxlLXFlbXUtdHJhZGl0aW9uYWwgLS1kaXNhYmxlLXN0dWJkb20gLS1k
+aXNhYmxlLWRvY3MgLS1kaXNhYmxlLXJvbWJpb3MKPj4+Pgo+Pj4+IENvdWxkIGJlIHRoYXQgb25l
+IG9mIHRob3NlIGRvZXNuJ3Qgd29yayBhbnltb3JlLgo+Pj4gVGhlIG9ubHkgaW50ZXJlc3Rpbmcg
+b25lIHdvdWxkIGJlIC0tZGlzYWJsZS1yb21iaW9zLCB3aGljaCBkb2VzIG1ha2UKPj4+IGNoYW5n
+ZXMgaW4gdGhpcyBhcmVhIG9mIHRoZSBidWlsZCwgYnV0IGV2ZXJ5dGhpbmcgSSBjaGFuZ2VkIHdh
+cyBpbnNpZGUKPj4+IHRoZSB4ZW4tZGlyLyBkaXJlY3Rvcnkgc28gc2hvdWxkbid0IGludGVyYWN0
+Lj4KPj4+IH5BbmRyZXcKPj4+Cj4+IEl0IGluZGVlZCBzZWVtcyB0byBiZSBzb21lIGludGVyYWN0
+aW9uIHdpdGggLS1kaXNhYmxlLXJvbWJpb3MsIHdpdGgganVzdAo+PiBhIHBsYWluIC4vY29uZmln
+dXJlIGl0IGJ1aWxkcyBmaW5lLgo+PiBMb2dzIHdoZW4gYnVpbGRpbmcgd2l0aCAtLWRpc2FibGUt
+cm9tYmlvcyBhcmUgYXR0YWNoZWQuCj4gCj4gUmlnaHQuwqAgU28gdGhlIGJ1aWxkIGl0c2VsZiB3
+b3JrcywgYnV0IHRoZSBzdWJzZXF1ZW50IGBtYWtlIGluc3RhbGxgIGZhaWxzLgo+IAo+IEFuZCB0
+byBjb25maXJtLCBhIGJ1aWxkIG9mIDhkNTRhNmFkZiAodGhlIHBhcmVudCBvZiBteSBmaXJzdCBz
+aGltCj4gY29tbWl0KSB3b3JrcyBlbnRpcmVseSBmaW5lPwo+IAo+IH5BbmRyZXcKPiAKSnVzdCBy
+ZWNoZWNrZWQsIGFuZCB5ZXMgdGhhdCBidWlsZHMgYW5kIGluc3RhbGxzIGZpbmUgKHdpdGggLS1k
+aXNhYmxlLXJvbWJpb3MpLgoKLS0KU2FuZGVyCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
+cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
+dGluZm8veGVuLWRldmVs
