@@ -2,96 +2,52 @@ Return-Path: <SRS0=QKFq=WI=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CBCF2C433FF
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Aug 2019 18:21:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7BBB5C31E40
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Aug 2019 18:50:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9EB532067D
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Aug 2019 18:21:53 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZjRigJPl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9EB532067D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4AB052085A
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Aug 2019 18:50:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4AB052085A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hxEws-0004eg-7e; Mon, 12 Aug 2019 18:21:38 +0000
-Received: from [172.99.69.81] (helo=us1-rack-iad1.inumbo.com)
+	id 1hxFOO-00076G-M0; Mon, 12 Aug 2019 18:50:04 +0000
+Received: from us1-rack-dfw2.inumbo.com ([104.130.134.6])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=gta3=WI=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1hxEwq-0004eW-Sp
- for xen-devel@lists.xenproject.org; Mon, 12 Aug 2019 18:21:36 +0000
-X-Inumbo-ID: 042bc638-bd2e-11e9-a228-0719648d03ac
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 042bc638-bd2e-11e9-a228-0719648d03ac;
- Mon, 12 Aug 2019 18:21:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1565634095;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=YyHNuPRyqaosd/+tWhz+df+oqb5irw6RFDbNkMo2spY=;
- b=ZjRigJPlVLqXdKt0yWAKXq8SbYz4TefIievPjpnyNuSRkTzphcBaHC7A
- MHTAyuqMf3XpykOu+Igb9VKVuN+H+jYBGY089dtRomE9FJ56/Vi1V/UXf
- AZjOiQGDLSgrSvXc9qm3V+304sxrvPDfungffxznZVspUXuv2Vz3w9kjd Y=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=andrew.cooper3@citrix.com;
- spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="andrew.cooper3@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
- Andrew.Cooper3@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="Andrew.Cooper3@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: 0nxikEo/PLFB39haPvkHGO5iqtAqGZbZRGMSWHKawVdK+cyUvnRKzW7HTxl1sBoRZmqXddZSDL
- xCEbSa4nrDcuqd03ingt32JMntW89KUeVJaxnrRzgQGtMB6IHlnznPcsjBG1XM+uJQLdE4hkFD
- rdR5tzGk63aNx8qdq5T6t1TM4+agyfziE9L+t4vvX7ahKSD904jXPrflbFa2YUzYHs0MolmuOQ
- G2oXp55Wlw7X2jYtaVvcz8+eUeIq9GBjfMl+DFw/xujECebvXpM6UWuvSdOGdJD0aNuaBLuBsi
- o84=
-X-SBRS: 2.7
-X-MesageID: 4371888
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.64,378,1559534400"; 
-   d="scan'208";a="4371888"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Date: Mon, 12 Aug 2019 19:21:24 +0100
-Message-ID: <20190812182125.18094-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190812182125.18094-1-andrew.cooper3@citrix.com>
-References: <20190812182125.18094-1-andrew.cooper3@citrix.com>
-MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH] x86/desc: Move boot_gdtr into .rodata
+ <SRS0=bBZR=WI=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1hxFOM-0006st-Rs
+ for xen-devel@lists.xenproject.org; Mon, 12 Aug 2019 18:50:02 +0000
+X-Inumbo-ID: fd4e6719-bd31-11e9-8980-bc764e045a96
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-dfw2.inumbo.com (Halon) with ESMTPS
+ id fd4e6719-bd31-11e9-8980-bc764e045a96;
+ Mon, 12 Aug 2019 18:50:01 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1hxFOL-0004mk-0F; Mon, 12 Aug 2019 18:50:01 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1hxFOK-0004r8-Or; Mon, 12 Aug 2019 18:50:00 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1hxFOK-0007Zl-OA; Mon, 12 Aug 2019 18:50:00 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-Id: <E1hxFOK-0007Zl-OA@osstest.test-lab.xenproject.org>
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 12 Aug 2019 18:50:00 +0000
+Subject: [Xen-devel] [libvirt bisection] complete build-i386-libvirt
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,29 +58,217 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============8330439670701860135=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SXQgaXMgbmV2ZXIgd3JpdHRlbiB0by4KClRoaXMgd2FzIGFuIG92ZXJzaWdodCB3aGVuIGl0IHdh
-cyBtb3ZlZCBmcm9tIGFzbSBpbnRvIEMuCgpTaWduZWQtb2ZmLWJ5OiBBbmRyZXcgQ29vcGVyIDxh
-bmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgotLS0KQ0M6IEphbiBCZXVsaWNoIDxKQmV1bGljaEBz
-dXNlLmNvbT4KQ0M6IFdlaSBMaXUgPHdsQHhlbi5vcmc+CkNDOiBSb2dlciBQYXUgTW9ubsOpIDxy
-b2dlci5wYXVAY2l0cml4LmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvZGVzYy5jIHwgMiArLQogMSBm
-aWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEv
-eGVuL2FyY2gveDg2L2Rlc2MuYyBiL3hlbi9hcmNoL3g4Ni9kZXNjLmMKaW5kZXggNDJjY2RjMmY4
-Yy4uZGZlYjFiZWFhOCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L2Rlc2MuYworKysgYi94ZW4v
-YXJjaC94ODYvZGVzYy5jCkBAIC04OSw3ICs4OSw3IEBAIHNlZ19kZXNjX3QgYm9vdF9jb21wYXRf
-Z2R0W1BBR0VfU0laRSAvIHNpemVvZihzZWdfZGVzY190KV0gPQogICogUmVmZXJlbmNlcyBib290
-X2NwdV9nZHRfdGFibGUgZm9yIGEgc2hvcnQgcGVyaW9kLCB1bnRpbCB0aGUgQ1BVcyBzd2l0Y2gK
-ICAqIG9udG8gdGhlaXIgcGVyLUNQVSBHRFRzLgogICovCi1zdHJ1Y3QgZGVzY19wdHIgYm9vdF9n
-ZHRyID0geworY29uc3Qgc3RydWN0IGRlc2NfcHRyIGJvb3RfZ2R0ciA9IHsKICAgICAubGltaXQg
-PSBMQVNUX1JFU0VSVkVEX0dEVF9CWVRFLAogICAgIC5iYXNlID0gKHVuc2lnbmVkIGxvbmcpKGJv
-b3RfZ2R0IC0gRklSU1RfUkVTRVJWRURfR0RUX0VOVFJZKSwKIH07Ci0tIAoyLjExLjAKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============8330439670701860135==
+Content-Type: text/plain
+
+branch xen-unstable
+xenbranch xen-unstable
+job build-i386-libvirt
+testid libvirt-build
+
+Tree: libvirt git://libvirt.org/libvirt.git
+Tree: libvirt_gnulib https://git.savannah.gnu.org/git/gnulib.git/
+Tree: libvirt_keycodemapdb https://gitlab.com/keycodemap/keycodemapdb.git
+Tree: ovmf git://xenbits.xen.org/osstest/ovmf.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: seabios git://xenbits.xen.org/osstest/seabios.git
+Tree: xen git://xenbits.xen.org/xen.git
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  libvirt git://libvirt.org/libvirt.git
+  Bug introduced:  55c8d1a95f9736641aab15bd7562db7d6890aceb
+  Bug not present: 463629559d4e534793e69ad84065ab4babc9c021
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/140014/
+
+
+  commit 55c8d1a95f9736641aab15bd7562db7d6890aceb
+  Author: Daniel P. Berrangé <berrange@redhat.com>
+  Date:   Tue Jul 23 11:06:27 2019 +0100
+  
+      remote: handle autoprobing of driver within virtproxyd
+      
+      The virtproxyd daemon is merely responsible for forwarding RPC calls to
+      one of the other per-driver daemons. As such, it does not have any
+      drivers loaded and so regular auto-probing logic will not work. We need
+      it to be able to handle NULL URIs though, so must implement some kind of
+      alternative probing logic.
+      
+      When running as root this is quite crude. If a per-driver daemon is
+      running, its UNIX socket will exist and we can assume it will accept
+      connections. If the per-driver daemon is not running, but socket
+      autostart is enabled, we again just assume it will accept connections.
+      
+      The is not great, however, because a default install may well have
+      all sockets available for activation. IOW, the virtxend socket may
+      exist, despite the fact that the libxl driver will not actually work.
+      
+      When running as non-root this is slightly easier as we only have two
+      drivers, QEMU and VirtualBox. These daemons will likely not be running
+      and socket activation won't be used either, as libvirt spawns the
+      daemon on demand. So we just check whether the daemon actually is
+      installed.
+      
+      Reviewed-by: Andrea Bolognani <abologna@redhat.com>
+      Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+
+
+For bisection revision-tuple graph see:
+   http://logs.test-lab.xenproject.org/osstest/results/bisect/libvirt/build-i386-libvirt.libvirt-build.html
+Revision IDs in each graph node refer, respectively, to the Trees above.
+
+----------------------------------------
+Running cs-bisection-step --graph-out=/home/logs/results/bisect/libvirt/build-i386-libvirt.libvirt-build --summary-out=tmp/140014.bisection-summary --basis-template=139829 --blessings=real,real-bisect libvirt build-i386-libvirt libvirt-build
+Searching for failure / basis pass:
+ 139972 fail [host=albana1] / 139853 [host=baroque1] 139829 [host=chardonnay1] 139790 [host=italia1] 139756 [host=huxelrebe1] 139688 [host=huxelrebe1] 139663 [host=huxelrebe0] 139627 [host=debina0] 139585 ok.
+Failure / basis pass flights: 139972 / 139585
+(tree with no url: minios)
+Tree: libvirt git://libvirt.org/libvirt.git
+Tree: libvirt_gnulib https://git.savannah.gnu.org/git/gnulib.git/
+Tree: libvirt_keycodemapdb https://gitlab.com/keycodemap/keycodemapdb.git
+Tree: ovmf git://xenbits.xen.org/osstest/ovmf.git
+Tree: qemu git://xenbits.xen.org/qemu-xen-traditional.git
+Tree: qemuu git://xenbits.xen.org/qemu-xen.git
+Tree: seabios git://xenbits.xen.org/osstest/seabios.git
+Tree: xen git://xenbits.xen.org/xen.git
+Latest e4c05240bf96218a10cd331813327524cb020621 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 1a624dd7cf0db5783b27e18e6c790178d14a1e6a d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 6c9639a72f0ca3a9430ef75f375877182281fdef
+Basis pass b4ab33b90bc2fce87bdcd7aad7669eff3bd79924 8089c00979a5b089cff592c6b91420e595657167 6280c94f306df6a20bbc100ba15a5a81af0366e6 b3d00df69c78fa0e12986a7ff334689a76f4578a d0d8ad39ecb51cd7497cd524484fe09f50876798 1bcf484fa9f451cc8c290fe80fd0e764199ca81c 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 22ec7474348fea2c4a32b0872dd3385bf3785a26
+Generating revisions with ./adhoc-revtuple-generator  git://libvirt.org/libvirt.git#b4ab33b90bc2fce87bdcd7aad7669eff3bd79924-e4c05240bf96218a10cd331813327524cb020621 https://git.savannah.gnu.org/git/gnulib.git/#8089c00979a5b089cff592c6b91420e595657167-c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 https://gitlab.com/keycodemap/keycodemapdb.git#6280c94f306df6a20bbc100ba15a5a81af0366e6-6280c94f306df6a20bbc100ba15a5a81af0366e6 git://xenbits.xen.org/osstest/ovmf.git#b3d00df69c78fa0e12986a7ff334689a76f4578\
+ a-1a624dd7cf0db5783b27e18e6c790178d14a1e6a git://xenbits.xen.org/qemu-xen-traditional.git#d0d8ad39ecb51cd7497cd524484fe09f50876798-d0d8ad39ecb51cd7497cd524484fe09f50876798 git://xenbits.xen.org/qemu-xen.git#1bcf484fa9f451cc8c290fe80fd0e764199ca81c-dbf360567a7da50db4d2f9bde4649aba21aa8106 git://xenbits.xen.org/osstest/seabios.git#30f1e41f04fb4c715d27f987f003cfc31c9ff4f3-30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 git://xenbits.xen.org/xen.git#22ec7474348fea2c4a32b0872dd3385bf3785a26-6c9639a72f0ca3a9\
+ 430ef75f375877182281fdef
+From git://cache:9419/git://libvirt.org/libvirt
+   8aa75435ff..a60ee91400  master     -> origin/master
+Loaded 7233 nodes in revision graph
+Searching for test results:
+ 139585 pass b4ab33b90bc2fce87bdcd7aad7669eff3bd79924 8089c00979a5b089cff592c6b91420e595657167 6280c94f306df6a20bbc100ba15a5a81af0366e6 b3d00df69c78fa0e12986a7ff334689a76f4578a d0d8ad39ecb51cd7497cd524484fe09f50876798 1bcf484fa9f451cc8c290fe80fd0e764199ca81c 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 22ec7474348fea2c4a32b0872dd3385bf3785a26
+ 139627 [host=debina0]
+ 139663 [host=huxelrebe0]
+ 139688 [host=huxelrebe1]
+ 139756 [host=huxelrebe1]
+ 139790 [host=italia1]
+ 139829 [host=chardonnay1]
+ 139853 [host=baroque1]
+ 139888 fail irrelevant
+ 139925 fail e4c05240bf96218a10cd331813327524cb020621 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 1a624dd7cf0db5783b27e18e6c790178d14a1e6a d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 6c9639a72f0ca3a9430ef75f375877182281fdef
+ 139965 pass b4ab33b90bc2fce87bdcd7aad7669eff3bd79924 8089c00979a5b089cff592c6b91420e595657167 6280c94f306df6a20bbc100ba15a5a81af0366e6 b3d00df69c78fa0e12986a7ff334689a76f4578a d0d8ad39ecb51cd7497cd524484fe09f50876798 1bcf484fa9f451cc8c290fe80fd0e764199ca81c 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 22ec7474348fea2c4a32b0872dd3385bf3785a26
+ 139993 fail 38d2e033686b5cc274f8f55075ce1985b71e329a c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 943c598efdffc9c788ea9b30a20fbbf3c70424cb
+ 139972 fail e4c05240bf96218a10cd331813327524cb020621 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 1a624dd7cf0db5783b27e18e6c790178d14a1e6a d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 6c9639a72f0ca3a9430ef75f375877182281fdef
+ 139997 pass 463629559d4e534793e69ad84065ab4babc9c021 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 139970 fail e4c05240bf96218a10cd331813327524cb020621 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 1a624dd7cf0db5783b27e18e6c790178d14a1e6a d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 6c9639a72f0ca3a9430ef75f375877182281fdef
+ 139998 fail 746955690a516ad6d833327c76d4fdac32cea398 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 139976 pass b4ab33b90bc2fce87bdcd7aad7669eff3bd79924 a4b2403aba8d8a8add531abe9b4da5650ef33f4b 6280c94f306df6a20bbc100ba15a5a81af0366e6 b3d00df69c78fa0e12986a7ff334689a76f4578a d0d8ad39ecb51cd7497cd524484fe09f50876798 1bcf484fa9f451cc8c290fe80fd0e764199ca81c 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 22ec7474348fea2c4a32b0872dd3385bf3785a26
+ 139978 pass 0366c3a358747feff86ebbd20410c01761092628 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 1821dbed1da616637f5c04fe1f5029016f81bd52 d0d8ad39ecb51cd7497cd524484fe09f50876798 1bcf484fa9f451cc8c290fe80fd0e764199ca81c 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 060f4eee0fb408b316548775ab921e16b7acd0e0
+ 140010 pass 463629559d4e534793e69ad84065ab4babc9c021 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 140000 fail 55c8d1a95f9736641aab15bd7562db7d6890aceb c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 139983 pass 6c62122e0615172068a6286428740024f8084264 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 b3527dedc3951f061c5a73cb4fb2b0f95f47e08b d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 2c19c7e8bb40c910c0105a08c0e56edd2ea0e5ed
+ 139988 pass 5d3475c8dc859284b6249b8498e8d157d7bdfd62 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 139990 pass b28fd43a5ec6da82b0ebd3ad46f49ab4d1efb736 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 140003 pass 463629559d4e534793e69ad84065ab4babc9c021 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 140014 fail 55c8d1a95f9736641aab15bd7562db7d6890aceb c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+ 140006 fail 55c8d1a95f9736641aab15bd7562db7d6890aceb c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+Searching for interesting versions
+ Result found: flight 139585 (pass), for basis pass
+ Result found: flight 139925 (fail), for basis failure
+ Repro found: flight 139965 (pass), for basis pass
+ Repro found: flight 139970 (fail), for basis failure
+ 0 revisions at 463629559d4e534793e69ad84065ab4babc9c021 c8e2eee548e6e81f3fccd31cf9f9a825db7fc8a8 6280c94f306df6a20bbc100ba15a5a81af0366e6 4b1b7c1913092d73d689d8086dcfa579c0217dc8 d0d8ad39ecb51cd7497cd524484fe09f50876798 dbf360567a7da50db4d2f9bde4649aba21aa8106 30f1e41f04fb4c715d27f987f003cfc31c9ff4f3 88d703a361d34d75f81fc6d30b31d0abc8aa17eb
+No revisions left to test, checking graph state.
+ Result found: flight 139997 (pass), for last pass
+ Result found: flight 140000 (fail), for first failure
+ Repro found: flight 140003 (pass), for last pass
+ Repro found: flight 140006 (fail), for first failure
+ Repro found: flight 140010 (pass), for last pass
+ Repro found: flight 140014 (fail), for first failure
+
+*** Found and reproduced problem changeset ***
+
+  Bug is in tree:  libvirt git://libvirt.org/libvirt.git
+  Bug introduced:  55c8d1a95f9736641aab15bd7562db7d6890aceb
+  Bug not present: 463629559d4e534793e69ad84065ab4babc9c021
+  Last fail repro: http://logs.test-lab.xenproject.org/osstest/logs/140014/
+
+
+  commit 55c8d1a95f9736641aab15bd7562db7d6890aceb
+  Author: Daniel P. Berrangé <berrange@redhat.com>
+  Date:   Tue Jul 23 11:06:27 2019 +0100
+  
+      remote: handle autoprobing of driver within virtproxyd
+      
+      The virtproxyd daemon is merely responsible for forwarding RPC calls to
+      one of the other per-driver daemons. As such, it does not have any
+      drivers loaded and so regular auto-probing logic will not work. We need
+      it to be able to handle NULL URIs though, so must implement some kind of
+      alternative probing logic.
+      
+      When running as root this is quite crude. If a per-driver daemon is
+      running, its UNIX socket will exist and we can assume it will accept
+      connections. If the per-driver daemon is not running, but socket
+      autostart is enabled, we again just assume it will accept connections.
+      
+      The is not great, however, because a default install may well have
+      all sockets available for activation. IOW, the virtxend socket may
+      exist, despite the fact that the libxl driver will not actually work.
+      
+      When running as non-root this is slightly easier as we only have two
+      drivers, QEMU and VirtualBox. These daemons will likely not be running
+      and socket activation won't be used either, as libvirt spawns the
+      daemon on demand. So we just check whether the daemon actually is
+      installed.
+      
+      Reviewed-by: Andrea Bolognani <abologna@redhat.com>
+      Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.734439 to fit
+pnmtopng: 58 colors found
+Revision graph left in /home/logs/results/bisect/libvirt/build-i386-libvirt.libvirt-build.{dot,ps,png,html,svg}.
+----------------------------------------
+140014: tolerable ALL FAIL
+
+flight 140014 libvirt real-bisect [real]
+http://logs.test-lab.xenproject.org/osstest/logs/140014/
+
+Failures :-/ but no regressions.
+
+Tests which did not succeed,
+including tests which could not be run:
+ build-i386-libvirt            6 libvirt-build           fail baseline untested
+
+
+jobs:
+ build-i386-libvirt                                           fail    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+
+--===============8330439670701860135==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8330439670701860135==--
