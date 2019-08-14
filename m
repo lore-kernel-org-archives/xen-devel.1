@@ -3,64 +3,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	FROM_EXCESS_BASE64,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86159C433FF
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2019 07:52:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09F6CC433FF
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2019 07:57:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5C6742084D
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2019 07:52:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CFB91205C9
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Aug 2019 07:57:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="lBLbaCYA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5C6742084D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NJpiZc4J"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFB91205C9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hxo4X-00012v-W7; Wed, 14 Aug 2019 07:51:53 +0000
+	id 1hxo9v-0001JR-U8; Wed, 14 Aug 2019 07:57:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=P7VX=WK=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1hxo4V-00012q-Vs
- for xen-devel@lists.xenproject.org; Wed, 14 Aug 2019 07:51:52 +0000
-X-Inumbo-ID: 5f6b602c-be68-11e9-84e2-e36f510a3411
-Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:20a:202:5300::5])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=yzLY=WK=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1hxo9u-0001JL-GB
+ for xen-devel@lists.xenproject.org; Wed, 14 Aug 2019 07:57:26 +0000
+X-Inumbo-ID: 27306ada-be69-11e9-aac3-f7d465835479
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5f6b602c-be68-11e9-84e2-e36f510a3411;
- Wed, 14 Aug 2019 07:51:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1565769109;
- s=strato-dkim-0002; d=aepfle.de;
- h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:
- X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
- bh=tVHsbdhUkugKJT8rabv6PPnUWESUI8ey26ukDYLjIZc=;
- b=lBLbaCYASk8+3A5oCNSWOZdtJMz0xzCxG8v3a1BG7qpTw9Xbmfd8gO8qGxA1uGTK6t
- WqpGX8SaXinkE8Sg/SA5sB0pDOd2yGIQ0STbWn6XII+4izANbP+MTEyYYsz2i3khXvgJ
- gSO+rqrvD3XM9zZxH2TxxbJLn1zE+0HVhrhSITQzsHT3fDRQU1CvBYTK/eYb7IdINQPS
- BpOK2nfp3ORU7F+gDWWzv/BEqSonVjZuSVt1dmMBTYBwuBli/VIat9b/dxKc/CsMZ/lo
- 3tgoTFzmNqpUqwYij2wce2Ojkh73MDz0Ut2kKBcLMaGIutJ+JJ/2Ujr1zBOTTnBCOiXt
- T6rA==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuznLRsvz6zGrN/JP2665"
-X-RZG-CLASS-ID: mo00
-Received: from aepfle.de by smtp.strato.de (RZmta 44.26.1 AUTH)
- with ESMTPSA id q09c76v7E7pn2NS
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate);
- Wed, 14 Aug 2019 09:51:49 +0200 (CEST)
-Date: Wed, 14 Aug 2019 09:51:45 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-Message-ID: <20190814075145.GA10492@aepfle.de>
+ id 27306ada-be69-11e9-aac3-f7d465835479;
+ Wed, 14 Aug 2019 07:57:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1565769446;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=3lLGqqm420oWoOAJpSqmtcIRAcDETiyymUwnLY3DUBQ=;
+ b=NJpiZc4Jv4uAf/49UQdZl7A+IVDQ5Iwx85LuRFh9buM6u3uB+dcS5pSL
+ 7x38hpZGbYduGaRfuLTDUkqITSreBtcfc7vUPobH1CBvkhgYWAFKO/KiX
+ UYUMCn0H2nuFxE8OUFv1PHNSxcGwvEDxSGMbvL57Yv84eF7MM3pXcHahK c=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa2.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa2.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: +ajHC5n4QKve3Lj5thgRt/etOPoi03QxwQW5u0dHztfMc5gtcTFaZYDjPSWufDR1fzF6+X4oLB
+ uZdfL1MxUsj9hCtyoVlioggkujWb+9SgK2s1KYIO1mfgJnI3PW8kHmagZaJG5MwCnjdzUIyaYc
+ eJDtHNdYaue7RsAMMPZSdPddaQAk12nHpNnOgwBEH3tllR4wCjo7mu/RDHgF/zC2IDkhvRkdna
+ OmpuegKu2cpwcukw3y5I2WZFwcjNyjFJgrNvjBSrJ/Aog3ExHR4BHEKELtAbtJVav/BkS9bRaI
+ 3Yg=
+X-SBRS: 2.7
+X-MesageID: 4241980
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.64,384,1559534400"; 
+   d="scan'208";a="4241980"
+Date: Wed, 14 Aug 2019 09:57:14 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Olaf Hering <olaf@aepfle.de>
+Message-ID: <20190814075714.27r6dfoxg6lepk32@Air-de-Roger>
 References: <20190513165321.464fdeaf.olaf@aepfle.de>
  <20190513152005.jojtolhh5wdguvg6@Air-de-Roger>
  <20190515121804.4e4a2c85.olaf@aepfle.de>
+ <20190814075145.GA10492@aepfle.de>
 MIME-Version: 1.0
-In-Reply-To: <20190515121804.4e4a2c85.olaf@aepfle.de>
-User-Agent: Mutt/1.12.1 (20190626T160221.793e0fc2)
+Content-Disposition: inline
+In-Reply-To: <20190814075145.GA10492@aepfle.de>
+User-Agent: NeoMutt/20180716
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 Subject: Re: [Xen-devel] how to disable build of pv-shim?
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -73,67 +108,21 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: xen-devel@lists.xenproject.org
-Content-Type: multipart/mixed; boundary="===============0794284705510070043=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============0794284705510070043==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="YiEDa0DAkWCtVeE4"
-Content-Disposition: inline
-
-
---YiEDa0DAkWCtVeE4
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, May 15, Olaf Hering wrote:
-
-> Am Mon, 13 May 2019 17:20:05 +0200
-> schrieb Roger Pau Monn=C3=A9 <roger.pau@citrix.com>:
->=20
-> > Let me know if that works for you and I will submit it formally.
-> Yes, it works for me. Thanks.
-
-Did you have a chance to submit a fix to support '--disable-pv-shim'?
-
-
-Olaf
-
---YiEDa0DAkWCtVeE4
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl1TvYwACgkQ86SN7mm1
-DoAClA//dtc3VJRc/kunN4ubO2ZZ+ddLwE59b9TihJdJsL6/a2mKRU6w+wXbzX1K
-99f/bNQkBdFuZ3bk9JuuQ8ufmK6DzaRehUr0jk9az3OYDBHrbim1WJgxoC06/AtH
-0GTKDGdbE/Xuk9NLdM0kagkAz0o0RsQSwiPlPO8mRp8Pe5sKwKYO9Uvq9gyOtRee
-bbmne50KHlbeZ8dw7q8e+VdphyXQo262QMSe24fZUAftv3g0h8/O/o6rGsBzIQWu
-Ux9+PWtL2oJIG3zMofTuem8T3b8bvgKkpiZw+QFr+qbhcNsJW0Bmbb1jCEgw4sxv
-Inj4WH6+7vQuNo9tFYDE3DcaoCzxyv1qjIdv1RDzJrZhpucnYnAmUPl7k6blHstv
-B2YIGC+V7oTDYUz7M2LTMD2P7sk9rGKmaOztvTWaV58lim3Ac+JsiPIysdgRVs1A
-0JYvbrYUH9DlSNK1H+2BocHixQJItee0/b3JFYxS3IAoCUHbvz8ILZl02vsxGK3l
-e4hga2bdCwTUuolqetutV6T/sHHqisPm+SsYloBk3/Yx2eOrjmfoKywvHWajO39A
-SPOhWnQXoM+R/JUiF4QmjACyf57R4TpwB8lgElkZGx1pVrKuYGu8oCwP7XE1AR+M
-sXxJ5A3JlF26OnamRotdCgcYAbi831AGPBP6AEG5WcD01ciUANM=
-=ffmP
------END PGP SIGNATURE-----
-
---YiEDa0DAkWCtVeE4--
-
-
---===============0794284705510070043==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0794284705510070043==--
-
+T24gV2VkLCBBdWcgMTQsIDIwMTkgYXQgMDk6NTE6NDVBTSArMDIwMCwgT2xhZiBIZXJpbmcgd3Jv
+dGU6Cj4gT24gV2VkLCBNYXkgMTUsIE9sYWYgSGVyaW5nIHdyb3RlOgo+IAo+ID4gQW0gTW9uLCAx
+MyBNYXkgMjAxOSAxNzoyMDowNSArMDIwMAo+ID4gc2NocmllYiBSb2dlciBQYXUgTW9ubsOpIDxy
+b2dlci5wYXVAY2l0cml4LmNvbT46Cj4gPiAKPiA+ID4gTGV0IG1lIGtub3cgaWYgdGhhdCB3b3Jr
+cyBmb3IgeW91IGFuZCBJIHdpbGwgc3VibWl0IGl0IGZvcm1hbGx5Lgo+ID4gWWVzLCBpdCB3b3Jr
+cyBmb3IgbWUuIFRoYW5rcy4KPiAKPiBEaWQgeW91IGhhdmUgYSBjaGFuY2UgdG8gc3VibWl0IGEg
+Zml4IHRvIHN1cHBvcnQgJy0tZGlzYWJsZS1wdi1zaGltJz8KClllcywgaXQgd2FzIGNvbW1pdHRl
+ZCBxdWl0ZSBzb21lIHRpbWUgYWdvLCBjaGVjayA4ODQ1MTU1YzgzMWM1OToKCmh0dHA6Ly94ZW5i
+aXRzLnhlbi5vcmcvZ2l0d2ViLz9wPXhlbi5naXQ7YT1jb21taXQ7aD04ODQ1MTU1YzgzMWM1OWU4
+NjdlZTNkZDMxZWU2M2UwY2M2YzdkY2YyCgpSb2dlci4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
