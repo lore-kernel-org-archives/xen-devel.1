@@ -6,48 +6,49 @@ X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
 	SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F387EC3A59C
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Aug 2019 07:35:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C6FEC3A59C
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Aug 2019 07:35:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CC50420644
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Aug 2019 07:35:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CC50420644
+	by mail.kernel.org (Postfix) with ESMTPS id 78B0120644
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Aug 2019 07:35:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 78B0120644
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bt.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hyWle-00051o-Dj; Fri, 16 Aug 2019 07:35:22 +0000
+	id 1hyWls-00058W-PY; Fri, 16 Aug 2019 07:35:36 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=1lwd=WM=bt.com=tony.nguyen@srs-us1.protection.inumbo.net>)
- id 1hyWlc-00051I-VU
- for xen-devel@lists.xenproject.org; Fri, 16 Aug 2019 07:35:21 +0000
-X-Inumbo-ID: 6541acf4-bff8-11e9-8bb0-12813bfff9fa
-Received: from smtpe1.intersmtp.com (unknown [62.239.224.237])
+ id 1hyWlr-00056b-D3
+ for xen-devel@lists.xenproject.org; Fri, 16 Aug 2019 07:35:35 +0000
+X-Inumbo-ID: 6dc2be2d-bff8-11e9-8bb0-12813bfff9fa
+Received: from smtpe1.intersmtp.com (unknown [213.121.35.74])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6541acf4-bff8-11e9-8bb0-12813bfff9fa;
- Fri, 16 Aug 2019 07:35:18 +0000 (UTC)
-Received: from tpw09926dag18g.domain1.systemhost.net (10.9.212.34) by
- RDW083A010ED66.bt.com (10.187.98.36) with Microsoft SMTP Server (TLS) id
- 14.3.439.0; Fri, 16 Aug 2019 08:34:21 +0100
+ id 6dc2be2d-bff8-11e9-8bb0-12813bfff9fa;
+ Fri, 16 Aug 2019 07:35:33 +0000 (UTC)
+Received: from tpw09926dag18h.domain1.systemhost.net (10.9.212.42) by
+ BWP09926079.bt.com (10.36.82.110) with Microsoft SMTP Server (version=TLS1_2, 
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.1.1713.5; Fri, 16
+ Aug 2019 08:35:09 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net (10.9.212.18) by
- tpw09926dag18g.domain1.systemhost.net (10.9.212.34) with Microsoft SMTP
- Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 08:35:16 +0100
+ tpw09926dag18h.domain1.systemhost.net (10.9.212.42) with Microsoft SMTP
+ Server (TLS) id 15.0.1395.4; Fri, 16 Aug 2019 08:35:32 +0100
 Received: from tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c]) by tpw09926dag18e.domain1.systemhost.net
  ([fe80::a946:6348:ccf4:fa6c%12]) with mapi id 15.00.1395.000; Fri, 16 Aug
- 2019 08:35:17 +0100
+ 2019 08:35:32 +0100
 From: <tony.nguyen@bt.com>
 To: <qemu-devel@nongnu.org>
-Thread-Topic: [Qemu-devel] [PATCH v7 27/42] hw/pci-host: Declare device little
- or big endian
-Thread-Index: AQHVVAUm9cRG05Q0ik+pgpUUBF5+Rg==
-Date: Fri, 16 Aug 2019 07:35:16 +0000
-Message-ID: <1565940916012.8169@bt.com>
+Thread-Topic: [Qemu-devel] [PATCH v7 28/42] hw/sd: Declare device little or
+ big endian
+Thread-Index: AQHVVAUvP5PxM0NZ6Eazlk4TnnbK6w==
+Date: Fri, 16 Aug 2019 07:35:32 +0000
+Message-ID: <1565940931091.42373@bt.com>
 References: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
 In-Reply-To: <43bc5e07ac614d0e8e740bf6007ff77b@tpw09926dag18e.domain1.systemhost.net>
 Accept-Language: en-AU, en-GB, en-US
@@ -58,8 +59,8 @@ x-ms-exchange-messagesentrepresentingtype: 1
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.187.101.40]
 MIME-Version: 1.0
-Subject: [Xen-devel] [Qemu-devel] [PATCH v7 27/42] hw/pci-host: Declare
- device little or big endian
+Subject: [Xen-devel] [Qemu-devel] [PATCH v7 28/42] hw/sd: Declare device
+ little or big endian
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -97,15 +98,16 @@ Cc: frederic.konrad@adacore.com, berto@igalia.com, qemu-block@nongnu.org,
  alistair@alistair23.me, paul.durrant@citrix.com, david@gibson.dropbear.id.au,
  xiaoguangrong.eric@gmail.com, huth@tuxfamily.org, jcd@tribudubois.net,
  pbonzini@redhat.com, stefanb@linux.ibm.com
-Content-Type: multipart/mixed; boundary="===============4067593795731650749=="
+Content-Type: multipart/mixed; boundary="===============4610913253908865631=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============4067593795731650749==
+--===============4610913253908865631==
 Content-Language: en-AU
-Content-Type: multipart/alternative; boundary="_000_15659409160128169btcom_"
+Content-Type: multipart/alternative;
+	boundary="_000_156594093109142373btcom_"
 
---_000_15659409160128169btcom_
+--_000_156594093109142373btcom_
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -126,55 +128,29 @@ better =3D)
 
 Signed-off-by: Tony Nguyen <tony.nguyen@bt.com>
 ---
- hw/pci-host/q35.c       | 2 +-
- hw/pci-host/versatile.c | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ hw/sd/pl181.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/pci-host/q35.c b/hw/pci-host/q35.c
-index 0a010be..fd20f72 100644
---- a/hw/pci-host/q35.c
-+++ b/hw/pci-host/q35.c
-@@ -288,7 +288,7 @@ static void tseg_blackhole_write(void *opaque, hwaddr a=
-ddr, uint64_t val,
- static const MemoryRegionOps tseg_blackhole_ops =3D {
-     .read =3D tseg_blackhole_read,
-     .write =3D tseg_blackhole_write,
--    .endianness =3D DEVICE_NATIVE_ENDIAN,
-+    .endianness =3D DEVICE_LITTLE_ENDIAN,
-     .valid.min_access_size =3D 1,
-     .valid.max_access_size =3D 4,
-     .impl.min_access_size =3D 4,
-diff --git a/hw/pci-host/versatile.c b/hw/pci-host/versatile.c
-index 791b321..e7017f3 100644
---- a/hw/pci-host/versatile.c
-+++ b/hw/pci-host/versatile.c
-@@ -240,7 +240,7 @@ static uint64_t pci_vpb_reg_read(void *opaque, hwaddr a=
-ddr,
- static const MemoryRegionOps pci_vpb_reg_ops =3D {
-     .read =3D pci_vpb_reg_read,
-     .write =3D pci_vpb_reg_write,
--    .endianness =3D DEVICE_NATIVE_ENDIAN,
-+    .endianness =3D DEVICE_LITTLE_ENDIAN,
-     .valid =3D {
-         .min_access_size =3D 4,
-         .max_access_size =3D 4,
-@@ -306,7 +306,7 @@ static uint64_t pci_vpb_config_read(void *opaque, hwadd=
-r addr,
- static const MemoryRegionOps pci_vpb_config_ops =3D {
-     .read =3D pci_vpb_config_read,
-     .write =3D pci_vpb_config_write,
+diff --git a/hw/sd/pl181.c b/hw/sd/pl181.c
+index 81b406d..f2027aa 100644
+--- a/hw/sd/pl181.c
++++ b/hw/sd/pl181.c
+@@ -449,7 +449,7 @@ static void pl181_write(void *opaque, hwaddr offset,
+ static const MemoryRegionOps pl181_ops =3D {
+     .read =3D pl181_read,
+     .write =3D pl181_write,
 -    .endianness =3D DEVICE_NATIVE_ENDIAN,
 +    .endianness =3D DEVICE_LITTLE_ENDIAN,
  };
 
- static int pci_vpb_map_irq(PCIDevice *d, int irq_num)
+ static void pl181_reset(DeviceState *d)
 --
 1.8.3.1
 
 ?
 
 
---_000_15659409160128169btcom_
+--_000_156594093109142373btcom_
 Content-Type: text/html; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
@@ -219,49 +195,24 @@ div>
 </div>
 <div>Signed-off-by: Tony Nguyen &lt;tony.nguyen@bt.com&gt;</div>
 <div>---</div>
-<div>&nbsp;hw/pci-host/q35.c &nbsp; &nbsp; &nbsp; | 2 &#43;-</div>
-<div>&nbsp;hw/pci-host/versatile.c | 4 &#43;&#43;--</div>
-<div>&nbsp;2 files changed, 3 insertions(&#43;), 3 deletions(-)</div>
+<div>&nbsp;hw/sd/pl181.c | 2 &#43;-</div>
+<div>&nbsp;1 file changed, 1 insertion(&#43;), 1 deletion(-)</div>
 <div><br>
 </div>
-<div>diff --git a/hw/pci-host/q35.c b/hw/pci-host/q35.c</div>
-<div>index 0a010be..fd20f72 100644</div>
-<div>--- a/hw/pci-host/q35.c</div>
-<div>&#43;&#43;&#43; b/hw/pci-host/q35.c</div>
-<div>@@ -288,7 &#43;288,7 @@ static void tseg_blackhole_write(void *opaque,=
- hwaddr addr, uint64_t val,</div>
-<div>&nbsp;static const MemoryRegionOps tseg_blackhole_ops =3D {</div>
-<div>&nbsp; &nbsp; &nbsp;.read =3D tseg_blackhole_read,</div>
-<div>&nbsp; &nbsp; &nbsp;.write =3D tseg_blackhole_write,</div>
-<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
-<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
-<div>&nbsp; &nbsp; &nbsp;.valid.min_access_size =3D 1,</div>
-<div>&nbsp; &nbsp; &nbsp;.valid.max_access_size =3D 4,</div>
-<div>&nbsp; &nbsp; &nbsp;.impl.min_access_size =3D 4,</div>
-<div>diff --git a/hw/pci-host/versatile.c b/hw/pci-host/versatile.c</div>
-<div>index 791b321..e7017f3 100644</div>
-<div>--- a/hw/pci-host/versatile.c</div>
-<div>&#43;&#43;&#43; b/hw/pci-host/versatile.c</div>
-<div>@@ -240,7 &#43;240,7 @@ static uint64_t pci_vpb_reg_read(void *opaque,=
- hwaddr addr,</div>
-<div>&nbsp;static const MemoryRegionOps pci_vpb_reg_ops =3D {</div>
-<div>&nbsp; &nbsp; &nbsp;.read =3D pci_vpb_reg_read,</div>
-<div>&nbsp; &nbsp; &nbsp;.write =3D pci_vpb_reg_write,</div>
-<div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
-<div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
-<div>&nbsp; &nbsp; &nbsp;.valid =3D {</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.min_access_size =3D 4,</div>
-<div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.max_access_size =3D 4,</div>
-<div>@@ -306,7 &#43;306,7 @@ static uint64_t pci_vpb_config_read(void *opaq=
-ue, hwaddr addr,</div>
-<div>&nbsp;static const MemoryRegionOps pci_vpb_config_ops =3D {</div>
-<div>&nbsp; &nbsp; &nbsp;.read =3D pci_vpb_config_read,</div>
-<div>&nbsp; &nbsp; &nbsp;.write =3D pci_vpb_config_write,</div>
+<div>diff --git a/hw/sd/pl181.c b/hw/sd/pl181.c</div>
+<div>index 81b406d..f2027aa 100644</div>
+<div>--- a/hw/sd/pl181.c</div>
+<div>&#43;&#43;&#43; b/hw/sd/pl181.c</div>
+<div>@@ -449,7 &#43;449,7 @@ static void pl181_write(void *opaque, hwaddr o=
+ffset,</div>
+<div>&nbsp;static const MemoryRegionOps pl181_ops =3D {</div>
+<div>&nbsp; &nbsp; &nbsp;.read =3D pl181_read,</div>
+<div>&nbsp; &nbsp; &nbsp;.write =3D pl181_write,</div>
 <div>- &nbsp; &nbsp;.endianness =3D DEVICE_NATIVE_ENDIAN,</div>
 <div>&#43; &nbsp; &nbsp;.endianness =3D DEVICE_LITTLE_ENDIAN,</div>
 <div>&nbsp;};</div>
 <div>&nbsp;</div>
-<div>&nbsp;static int pci_vpb_map_irq(PCIDevice *d, int irq_num)</div>
+<div>&nbsp;static void pl181_reset(DeviceState *d)</div>
 <div>--&nbsp;</div>
 <div>1.8.3.1</div>
 <div><br>
@@ -272,10 +223,10 @@ ue, hwaddr addr,</div>
 </body>
 </html>
 
---_000_15659409160128169btcom_--
+--_000_156594093109142373btcom_--
 
 
---===============4067593795731650749==
+--===============4610913253908865631==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -285,5 +236,5 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============4067593795731650749==--
+--===============4610913253908865631==--
 
