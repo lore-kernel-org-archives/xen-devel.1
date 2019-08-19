@@ -3,55 +3,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C87FDC3A59D
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Aug 2019 09:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7FA4CC3A59D
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Aug 2019 10:17:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A109C20989
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Aug 2019 09:54:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A109C20989
+	by mail.kernel.org (Postfix) with ESMTPS id 5A34C205F4
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Aug 2019 10:17:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5A34C205F4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1hzeMn-0001h0-SC; Mon, 19 Aug 2019 09:54:21 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1hzeiZ-0003b8-Fu; Mon, 19 Aug 2019 10:16:51 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=UkZp=WP=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1hzeMm-0001gv-VV
- for xen-devel@lists.xenproject.org; Mon, 19 Aug 2019 09:54:21 +0000
-X-Inumbo-ID: 4fbbeb58-c267-11e9-8beb-12813bfff9fa
+ id 1hzeiY-0003b3-LI
+ for xen-devel@lists.xenproject.org; Mon, 19 Aug 2019 10:16:50 +0000
+X-Inumbo-ID: 73149d2c-c26a-11e9-a661-bc764e2007e4
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 4fbbeb58-c267-11e9-8beb-12813bfff9fa;
- Mon, 19 Aug 2019 09:54:18 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 73149d2c-c26a-11e9-a661-bc764e2007e4;
+ Mon, 19 Aug 2019 10:16:46 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7A815344;
- Mon, 19 Aug 2019 02:54:18 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 38020344;
+ Mon, 19 Aug 2019 03:16:46 -0700 (PDT)
 Received: from [10.37.12.162] (unknown [10.37.12.162])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6ECC43F718;
- Mon, 19 Aug 2019 02:54:17 -0700 (PDT)
-To: Stefano Stabellini <sstabellini@kernel.org>
-References: <alpine.DEB.2.21.1908151634170.8737@sstabellini-ThinkPad-T480s>
- <20190815233618.31630-2-sstabellini@kernel.org>
- <df288911-2b33-8160-582d-e3c933ee8b8d@arm.com>
- <alpine.DEB.2.21.1908161747070.20094@sstabellini-ThinkPad-T480s>
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2E0DE3F706;
+ Mon, 19 Aug 2019 03:16:45 -0700 (PDT)
+To: Amit Tomer <amittomer25@gmail.com>
+References: <1559938596-5696-1-git-send-email-amittomer25@gmail.com>
+ <CABHD4K87Z8QWtga6+FmkFXzJcot+WHH4KS7x-g1wOir8V2-tcQ@mail.gmail.com>
+ <44094e19-48c6-8281-4e04-2b2a24db98db@arm.com>
+ <CABHD4K8GmFLXjwrRse5JuJ4rSJ3Wy0_uU_6edqSMF_Yi5-YjDQ@mail.gmail.com>
+ <ff55b765-03b5-9cb1-0e56-d342425a608d@arm.com>
+ <CABHD4K_3KSCJmEhn2uONt2wnMdLwz0hp-3Ocr_-KRpTmGKM9ow@mail.gmail.com>
 From: Julien Grall <julien.grall@arm.com>
-Message-ID: <517de741-3b6e-5583-7d98-43e00de072e5@arm.com>
-Date: Mon, 19 Aug 2019 10:54:14 +0100
+Message-ID: <f875a444-ee7f-2ca3-1a18-5ee89b59b1ea@arm.com>
+Date: Mon, 19 Aug 2019 11:16:43 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.1908161747070.20094@sstabellini-ThinkPad-T480s>
+In-Reply-To: <CABHD4K_3KSCJmEhn2uONt2wnMdLwz0hp-3Ocr_-KRpTmGKM9ow@mail.gmail.com>
 Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH v6 2/8] xen/arm: make process_memory_node a
- device_tree_node_func
+Subject: Re: [Xen-devel] [RFC PATCH 0/2] XEN booting on i.MX8M platform
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,22 +62,26 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Volodymyr_Babchuk@epam.com,
- Stefano Stabellini <stefanos@xilinx.com>
+Cc: Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>,
+ xen-devel@lists.xenproject.org, peng.fan@nxp.com,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andre Przywara <andre.przywara@arm.com>
 Content-Transfer-Encoding: base64
 Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-CgpPbiA4LzE3LzE5IDE6NDggQU0sIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToKPiBPbiBGcmks
-IDE2IEF1ZyAyMDE5LCBKdWxpZW4gR3JhbGwgd3JvdGU6Cj4gSSB0aGluayB5b3UgYXJlIHJpZ2h0
-LCBhbmQgaG9uZXN0bHkgSSB3YXMgdGhpbmtpbmcgYWJvdXQgaXQgd2hpbGUgSQo+IHVwZGF0ZWQg
-dGhpcyBwYXRjaC4gSWYgSSB1c2UgLUVJTlZBTCwgaXQgd291bGQgYmUgdGhlIHNhbWUgcmV0dXJu
-IGVycm9yCj4gYXMgdGhlICJpbnZhbGlkICNhZGRyZXNzLWNlbGxzIG9yICNzaXplLWNlbGxzIi4g
-SSBqdXN0IHdhbnRlZCB0bwo+IGRvdWJsZS1jaGVjayB0aGF0IGl0IGlzIE9LIGZvciB5b3UuCgpX
-ZSBkb24ndCBuZWVkIHRvIGRpZmZlcmVudGlhdGUgImludmFsaWQgI3thZGRyZXNzLCBzaXplfS1j
-ZWxscyIgZnJvbSAKInplcm8gc2l6ZSIsIHNvIHVzaW5nIHRoZSBzYW1lIGVycm5vIGlzIGZpbmUu
-CgpDaGVlcnMsCgotLSAKSnVsaWVuIEdyYWxsCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+CgpPbiA4LzYvMTkgMTA6MTQgUE0sIEFtaXQgVG9tZXIgd3JvdGU6Cj4gSGkKCkhpLAoKPj4gV2hh
+dCBhcmUgdGhlIGNvbnNlcXVlbmNlcyB0byBjaGFuZ2UgdGhlIGludGVycnVwdCBwYXJlbnQ/Cj4g
+Cj4gSSBhbSBub3QgZW50aXJlbHkgc3VyZSBhYm91dCBpdCBhdCB0aGUgbW9tZW50IGJ1dCBsb29r
+cyBsaWtlIGl0Cj4gY29udHJvbGxlcnMgcG93ZXIgZG9tYWluCj4gZm9yIHZhcmlvdXMgZGV2aWNl
+cyBsaWtlIEdQVSwgVlBVIGFuZCBPVEcgZXRjLgo+IAo+IFNvLCB3ZSBtYXkgbm90IGJlIGFibGUg
+dG8gc3VwcG9ydCB0aGVzZSBkZXZpY2VzIGZvciBYRU4gZG9tYWlucyA/CgpJIGhhdmVuJ3QgdXNl
+ZCB0aGUgcGxhdGZvcm0gc28gSSBjYW4ndCBmb3Igc3VyZSBrbm93IHdoYXQgY2FuIGhhcHBlbiAK
+aGVyZS4gVGhlIHJpc2sgaXMgaWYgYWxsIHRoZSBwb3dlciBkb21haW5zIGFyZSB0dXJuZWQgb2Zm
+IGF0IGJvb3QsIHRoZW4gCkRvbTAgd291bGQgbm90IGJlIGFibGUgdG8gdHVybiB0aGVtIG9uLiBU
+aGVyZWZvcmUgYWxsIHRoZSBkZXZpY2VzIHlvdSAKbGlzdGVkIG1heSBiZSB1bnVzYWJsZS4KCkNo
+ZWVycywKCi0tIApKdWxpZW4gR3JhbGwKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhl
+bnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5m
+by94ZW4tZGV2ZWw=
