@@ -2,80 +2,111 @@ Return-Path: <SRS0=Pr8P=WQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE06EC3A589
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 13:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 03F68C3A589
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 13:10:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8932A22D6D
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 13:00:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C583C22DBF
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 13:10:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="mgzoJMRe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8932A22D6D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IetKvIAs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C583C22DBF
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1i03kh-0001nf-11; Tue, 20 Aug 2019 13:00:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1i03te-0002JN-IA; Tue, 20 Aug 2019 13:09:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=7DDh=WQ=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1i03kg-0001na-7E
- for xen-devel@lists.xen.org; Tue, 20 Aug 2019 13:00:42 +0000
-X-Inumbo-ID: 838da884-c34a-11e9-b90c-bc764e2007e4
-Received: from out1-smtp.messagingengine.com (unknown [66.111.4.25])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 838da884-c34a-11e9-b90c-bc764e2007e4;
- Tue, 20 Aug 2019 13:00:41 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id 3819E220AF;
- Tue, 20 Aug 2019 09:00:41 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Tue, 20 Aug 2019 09:00:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=gHVoe2
- ynsaEysBEieFdg9JnORGx8WpC95683FUXM8kA=; b=mgzoJMRe9c0/nB57NolWGC
- 9aefT7p2gE2UONbwxOjSzDy0Y3DV1vkedqK8gXIrEokVPVT2gzXfRToNirKMF4Wh
- VToDosbpqCppudihQhtVR5uYfj5b5ACSXncxkMcJQfdytBOpuiaROX2VVHUTvSU+
- at6v8xm+0hyZxKyYD8NQqzvR/vfQq6YCZ2LAx43YplefyLuRD5ZCfrhErcrJbp//
- OhEa59HCZ8SLmLudULC95kOT14ZaIvReWnP9T9xC9LK9i+LGw9Nzf4LZyRol6kU6
- JNHumoagl7ZlyyB6SZVQivYT++wdo+LwoH7eScmfykFPBhut9pwjInb7fJoeD//Q
- ==
-X-ME-Sender: <xms:-O5bXZx8A0sTOuI_MGwBZFqElY2qgEk7qLmZ1DrR-8rX1Yqc7jdBxw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduvddrudeguddgheekucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvffukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
- ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
- hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucfkphepledurdeihedrfeegrdef
- feenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslh
- gvthhhihhnghhslhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedt
-X-ME-Proxy: <xmx:-O5bXZvM3n9TVGbddZd_L4cljkbxkKOj_7Zn7aQoji7pVNGB7VXQ7A>
- <xmx:-O5bXaOiZoFS4W9Hx5zeeh6yNMYYSnZAjZ-zUAfMpNSz46YAYEB4ww>
- <xmx:-O5bXRwhKe5Uyho7386lh-OPAE1LAxL6j16rBzQOnxicaZY6Xw0G7Q>
- <xmx:-e5bXVvQqdu5b5Oael6js4lKK31Bli3XFb7ovM1qDIWKiodRTC8nTA>
-Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
- by mail.messagingengine.com (Postfix) with ESMTPA id C78848005B;
- Tue, 20 Aug 2019 09:00:39 -0400 (EDT)
-Date: Tue, 20 Aug 2019 15:00:37 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-To: Pawel Wieczorkiewicz <wipawel@amazon.de>
-Message-ID: <20190820130037.GF1457@mail-itl>
-References: <20190815094400.126289-1-wipawel@amazon.de>
- <20190820125108.104102-1-wipawel@amazon.de>
+ <SRS0=WUBi=WQ=citrix.com=christian.lindig@srs-us1.protection.inumbo.net>)
+ id 1i03tc-0002JG-Ev
+ for xen-devel@lists.xenproject.org; Tue, 20 Aug 2019 13:09:56 +0000
+X-Inumbo-ID: cd0cd880-c34b-11e9-8bf7-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id cd0cd880-c34b-11e9-8bf7-12813bfff9fa;
+ Tue, 20 Aug 2019 13:09:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1566306594;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=1yX9yGpMYJQqXqLw+U1n899zDxfL2tvcr5ckLbOucUc=;
+ b=IetKvIAsUoMuyA9d4PXHGpEludHKxb7F8DE0rbJNYA+N5/3uok4npWz+
+ LpOW5DZb27kmviprUZG3JzGh07k8gM+ljq2UxjQU5DtBoGMhP5SKTf92a
+ BedalH21U+9YMEbZqYqH7cn8/wmJDdAmPui9Fs4GJSrD5+zvNWwjUjH9t U=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=christian.lindig@citrix.com;
+ spf=Pass smtp.mailfrom=christian.lindig@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ christian.lindig@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="christian.lindig@citrix.com";
+ x-sender="christian.lindig@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ christian.lindig@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="christian.lindig@citrix.com";
+ x-sender="christian.lindig@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="christian.lindig@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: CDvCOxymEVbvxWxHZmVmPefH8KmAWBjxE8+MS3ElXq3+C/S8mT3ZmwJ1zDD8NSkTPKc8m41W/U
+ RAYPhebesgC+bDLhp5owiCtDWEloCttXZBnftUQ3vj3yFKPacmrKI4HERZw/KKrUwo5WRUE7Sq
+ t/0PiplMXAorKEcdviQGqhhtuKF+z3l6eS+BQIQnzA0fDy7ZUbbvex70vMMdnJ6FSwTih28hm9
+ DaLBwfPlNJy5TELV7CUado0TWnzRMMSfiTiUjvZmG/G8NreytL42yZGpEmvc+M1ykdGIumjypm
+ wwQ=
+X-SBRS: 2.7
+X-MesageID: 4650790
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.64,408,1559534400"; 
+   d="scan'208";a="4650790"
+From: Christian Lindig <christian.lindig@citrix.com>
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+Thread-Topic: [PATCH] tools/oxenstored: port XS_INTRODUCE evtchn rebind
+ function from cxenstored
+Thread-Index: AQHVVr5MK6au/yYrc0WquZUXd0SG76cDkYSAgAAoOACAABgFAIAACWmAgAAG6gA=
+Date: Tue, 20 Aug 2019 13:09:51 +0000
+Message-ID: <C366A9DF-95EE-4262-BBC6-A1F61077CE28@citrix.com>
+References: <1566240335-6614-1-git-send-email-igor.druzhinin@citrix.com>
+ <7DFC36D5-7354-4D82-87A6-364FEDEAFAFC@citrix.com>
+ <d61c8e5e-eb9b-755f-0917-b4d009c64d74@citrix.com>
+ <9324516A-66F9-47FC-AD8F-BF44059D29B2@citrix.com>
+ <52ddaa4f-bc1a-43b2-a995-b9e7cae3044f@citrix.com>
+In-Reply-To: <52ddaa4f-bc1a-43b2-a995-b9e7cae3044f@citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3445.104.11)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-ID: <EC169D259004FF4D8D0AFD5A850B3307@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <20190820125108.104102-1-wipawel@amazon.de>
-Subject: Re: [Xen-devel] [livepatch: independ. modules v3 3/3] python: Add
- XC binding for Xen build ID
+Subject: Re: [Xen-devel] [PATCH] tools/oxenstored: port XS_INTRODUCE evtchn
+ rebind function from cxenstored
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,133 +117,24 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>,
- xen-devel@lists.xen.org, mpohlack@amazon.de, amazein@amazon.de,
- xen-devel@lists.xenproject.org
-Content-Type: multipart/mixed; boundary="===============3303476028460382227=="
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Ian Jackson <Ian.Jackson@citrix.com>, "wl@xen.org" <wl@xen.org>,
+ David Scott <dave@recoil.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============3303476028460382227==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="QXO0/MSS4VvK6f+D"
-Content-Disposition: inline
-
-
---QXO0/MSS4VvK6f+D
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [livepatch: independ. modules v3 3/3] python: Add XC binding for
- Xen build ID
-
-On Tue, Aug 20, 2019 at 12:51:08PM +0000, Pawel Wieczorkiewicz wrote:
-> Extend the list of xc() object methods with additional one to display
-> Xen's buildid. The implementation follows the libxl implementation
-> (e.g. max buildid size assumption being XC_PAGE_SIZE minus
-> sizeof(buildid->len)).
->=20
-> Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
-> Reviewed-by: Martin Mazein <amazein@amazon.de>
-> Reviewed-by: Andra-Irina Paraschiv <andraprs@amazon.com>
-> Reviewed-by: Norbert Manthey <nmanthey@amazon.de>
-
-Acked-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-
-> ---
-> v3:
-> * Instead of allocating XC_PAGE_SIZE plus size of the len field,
->  allocate one XC_PAGE_SIZE for the whole buildid struct.
-> * Modify commit message to reflect the above change.
-> v2:
-> * No code change
-> * Adding maintainers
-> ---
->  tools/python/xen/lowlevel/xc/xc.c | 27 +++++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
->=20
-> diff --git a/tools/python/xen/lowlevel/xc/xc.c b/tools/python/xen/lowleve=
-l/xc/xc.c
-> index 522cbe3b9c..7ed4a253de 100644
-> --- a/tools/python/xen/lowlevel/xc/xc.c
-> +++ b/tools/python/xen/lowlevel/xc/xc.c
-> @@ -1211,6 +1211,26 @@ out:
->      return ret_obj ? ret_obj : pyxc_error_to_exception(self->xc_handle);
->  }
-> =20
-> +static PyObject *pyxc_xenbuildid(XcObject *self)
-> +{
-> +    xen_build_id_t *buildid;
-> +    int i, r;
-> +    char *str;
-> +
-> +    buildid =3D alloca(XC_PAGE_SIZE);
-> +    buildid->len =3D XC_PAGE_SIZE - sizeof(*buildid);
-> +
-> +    r =3D xc_version(self->xc_handle, XENVER_build_id, buildid);
-> +    if ( r <=3D 0 )
-> +        return pyxc_error_to_exception(self->xc_handle);
-> +
-> +    str =3D alloca((r * 2) + 1);
-> +    for ( i =3D 0; i < r; i++ )
-> +        snprintf(&str[i * 2], 3, "%02hhx", buildid->buf[i]);
-> +
-> +    return Py_BuildValue("s", str);
-> +}
-> +
->  static PyObject *pyxc_xeninfo(XcObject *self)
->  {
->      xen_extraversion_t xen_extra;
-> @@ -2294,6 +2314,13 @@ static PyMethodDef pyxc_methods[] =3D {
->        "Returns [dict]: information about Xen"
->        "        [None]: on failure.\n" },
-> =20
-> +    { "buildid",
-> +      (PyCFunction)pyxc_xenbuildid,
-> +      METH_NOARGS, "\n"
-> +      "Get Xen buildid\n"
-> +      "Returns [str]: Xen buildid"
-> +      "        [None]: on failure.\n" },
-> +
->      { "shadow_control",=20
->        (PyCFunction)pyxc_shadow_control,=20
->        METH_VARARGS | METH_KEYWORDS, "\n"
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---QXO0/MSS4VvK6f+D
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl1b7vUACgkQ24/THMrX
-1yxW5Qf+IDjGbvF7uuK64oSQUJMBk1kpkxPbvnPGMeZhGRCj+rX5JntWA4JcAzY5
-7TDoJeoszsKHwcLUDQc9YotVX3Jo6ESRVfxr0+dN4bEqxlvbqF3yLcuetK17Ahs8
-j3E2843ZYP7dJ5XJCMsabP0ORnIPuG96HPEd+mLGq3mJ63wrj9iOc/PV41rCYjIF
-xOQnMWHJRCVXfpnKaMXKwyDxXlh7PNphJm+gp9EgyPSLZaNxL7q/CC3pV+y6gsHB
-hvreqQXAmSeJ7lZqOaEUyvPwLiNgMHy9V5M+uGAl6yhxkDywvcQnKCMnVHwgVvBP
-6BGg2yrQSbiM7OQvkZ1whGLF1LnMPw==
-=6OYn
------END PGP SIGNATURE-----
-
---QXO0/MSS4VvK6f+D--
-
-
---===============3303476028460382227==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3303476028460382227==--
-
+DQoNCj4gT24gMjAgQXVnIDIwMTksIGF0IDEzOjQ1LCBJZ29yIERydXpoaW5pbiA8aWdvci5kcnV6
+aGluaW5AY2l0cml4LmNvbT4gd3JvdGU6DQo+IA0KPiBjb24gaXMgcGFzc2VkIGludG8gdGhhdCBm
+dW5jdGlvbiBmcm9tIHhlbnN0b3JlZC5tbCB3aGVyZSBpdCdzIGV4dHJhY3RlZA0KPiBmcm9tIHRo
+ZSBzYW1lIGhhc2h0YWJsZSAoQ29ubmVjdGlvbnMpIHNvIGl0J3MgYWN0dWFsbHkgdGhlIGV4YWN0
+bHkgc2FtZQ0KPiBvYmplY3QuIA0KDQpUaGlzIGNvbWVzIGRvd24gdG8gd2hhdCBzZW1hbnRpY3Mg
+eW91IHdhbnQuIEl0IGlzIHVuZm9ydHVuYXRlIHRoYXQgQ29ubmVjdGlvbi50IGlzIG5vdCBhYnN0
+cmFjdCBhbmQgaXRzIGVxdWFsaXR5IG5vdCB3ZWxsIGRlZmluZWQuIFVzaW5nICE9IG5vdyByZWxp
+ZXMgb24gdGhlIGZhY3QgdGhhdCB5b3Ugb25seSBjb21wYXJlIHZhbHVlcyBzdG9yZWQgaW4gdGhl
+IHNhbWUgaGFzaCB0YWJsZS4NCg0K4oCUIEMNCg0KQWNrZWQtYnk6IENocmlzdGlhbiBMaW5kaWcg
+PGNocmlzdGlhbi5saW5kaWdAY2l0cml4LmNvbT4KX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
+dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL3hlbi1kZXZlbA==
