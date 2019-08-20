@@ -1,95 +1,101 @@
 Return-Path: <SRS0=Pr8P=WQ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.7 required=3.0 tests=CHARSET_FARAWAY_HEADER,
-	DKIM_INVALID,DKIM_SIGNED,FROM_EXCESS_BASE64,HEADER_FROM_DIFFERENT_DOMAINS,
-	HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Level: 
+X-Spam-Status: No, score=-8.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70295C3A589
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 10:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 30373C3A589
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 10:46:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CFDA7205ED
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 10:20:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F19D4206DF
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Aug 2019 10:45:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=siengine.partner.onmschina.cn header.i=@siengine.partner.onmschina.cn header.b="FS3dyjtB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFDA7205ED
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=siengine.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HcljaNAy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F19D4206DF
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1i01F5-0002nU-Pb; Tue, 20 Aug 2019 10:19:55 +0000
+	id 1i01dy-0005Ms-8a; Tue, 20 Aug 2019 10:45:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4Mjq=WQ=siengine.com=ge.liu@srs-us1.protection.inumbo.net>)
- id 1i0182-0002aD-2K
- for xen-devel@lists.xenproject.org; Tue, 20 Aug 2019 10:12:38 +0000
-X-Inumbo-ID: 05ae326a-c333-11e9-b90c-bc764e2007e4
-Received: from cn01-BJB-obe.outbound.protection.partner.outlook.cn (unknown
- [42.159.36.110]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 05ae326a-c333-11e9-b90c-bc764e2007e4;
- Tue, 20 Aug 2019 10:12:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=siengine.partner.onmschina.cn; s=selector1-siengine-partner-onmschina-cn;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xTe44fthvSryiodqHXxDqK0L8IAT5P76QCztLeq9mXI=;
- b=FS3dyjtBJLW3BlkHB1kQNekFxz0xix8vpNyYKhsTPULU3DLWhn9s1UV5EmqkBfQAtc84Z+Jto33s3GJx5XOezeFK8ieCaDLfxEjXA8ndOZfdZm1ck4jXLIhdc4zZJAwyz53ajyZVA7hBoEhxzM9lduPf3llUaCeC7RhGxyYv/O4=
-Received: from BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn (10.43.32.151) by
- BJXPR01MB0326.CHNPR01.prod.partner.outlook.cn (10.41.73.16) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2178.18; Tue, 20 Aug 2019 10:12:28 +0000
-Received: from BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn ([10.43.32.151])
- by BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn ([10.43.32.151])
- with mapi id 15.20.2178.018; Tue, 20 Aug 2019 10:12:28 +0000
-From: =?gb2312?B?TGl1IEdlL8H1uOo=?= <ge.liu@siengine.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Thread-Topic: [optee ]: about the max optee threads limitation
-Thread-Index: AdVXPXlc5alEi1p3Ql+0A9IfmKKKvwAAhFZw
-Date: Tue, 20 Aug 2019 10:12:28 +0000
-Message-ID: <BJXPR01MB06145299DF5B79F9D9236798FDAB0@BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn>
-References: <BJXPR01MB06145557808BAF8117CCD5AEFDAB0@BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn>
-In-Reply-To: <BJXPR01MB06145557808BAF8117CCD5AEFDAB0@BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=ge.liu@siengine.com; 
-x-originating-ip: [118.186.220.34]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: fee002fb-34ba-496f-f760-08d72556e7cf
-x-microsoft-antispam: BCL:0; PCL:0;
- RULEID:(4600270)(4652040)(97021020)(8989299)(711020)(4605104)(1401327)(97022020)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(4601075);
- SRVR:BJXPR01MB0326; 
-x-ms-traffictypediagnostic: BJXPR01MB0326:
-x-microsoft-antispam-prvs: <BJXPR01MB0326CCFAD84C03AD0EEF0D32FDAB0@BJXPR01MB0326.CHNPR01.prod.partner.outlook.cn>
-x-forefront-prvs: 013568035E
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10009020)(346002)(376002)(39830400003)(366004)(396003)(199004)(189003)(328002)(329002)(59450400001)(790700001)(486006)(6116002)(7736002)(4744005)(3846002)(2940100002)(186003)(102836004)(26005)(66066001)(8676002)(14454004)(9686003)(81156014)(2906002)(6306002)(54896002)(76176011)(55016002)(11346002)(446003)(476003)(7696005)(478600001)(5660300002)(316002)(63696004)(76116006)(95416001)(2501003)(52396003)(2351001)(6916009)(66556008)(66476007)(66946007)(66446008)(64756008)(5640700003)(85182001)(71190400001)(71200400001)(33656002)(8936002)(86362001);
- DIR:OUT; SFP:1101; SCL:1; SRVR:BJXPR01MB0326;
- H:BJXPR01MB0614.CHNPR01.prod.partner.outlook.cn; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:0; MX:1; 
-received-spf: None (protection.outlook.com: siengine.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: FUswlt7K7E5TTUhzggKVBE5EXPt2Xsi1qIG4nN/7FrDA3yn8sloGzoHDVF0vY6issAGaYoGpDt0y+3mtCLPLwGQ+z2wmNeJWqv4EuUr61MYKcQmiMtvUBDdAstMSL/cKB3dLkt+veIGBdl5esRT99m3Rz118geww/WWvaRVs9eJqqojYnMZWV4jSGmJyclbcdUCmhm6QeItaCRzMefqomnh50cfcnclFPqMkSVv9JPRwgM3AS2agJPC8Gsepkcp5BG+fy+bt/tP+DYSRovQuBdE+shsln32PivzCX6ioBnFGAKy9zppxwmGvQHip5duc5Wcby3MtwEMf9h1lOXKw2rpAyHAxy6bex5N6+b4wciUcbBYonrUx4xEkyg94z2xavWFTMAOjg+wEGCu/d+7tiroWTU0OSYDbYm8xuwWkDys=
-x-ms-exchange-transport-forked: True
+ <SRS0=MO/K=WQ=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
+ id 1i01dx-0005Mn-6C
+ for xen-devel@lists.xenproject.org; Tue, 20 Aug 2019 10:45:37 +0000
+X-Inumbo-ID: a42d8374-c337-11e9-b90c-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a42d8374-c337-11e9-b90c-bc764e2007e4;
+ Tue, 20 Aug 2019 10:45:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1566297936;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=+T2J6o/vqBMLiS3ZawS4BmSq52pGoqXHblUSv2g83Ww=;
+ b=HcljaNAykrsjBNgR3heHGgx8c490urYUEl9rL6jMZaUYkyf/9VxQB6W5
+ CyebOPGjOaizbWmi1do510L6bjRgG9dBx++Z8JUPX/4uWZBXIhg7BWrzM
+ 34z1qPHOIkZ45xal7bHp04zDT/s5kl4KhHkewAv/I+P7/HDTom8jIFut4 U=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=igor.druzhinin@citrix.com;
+ spf=Pass smtp.mailfrom=igor.druzhinin@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ igor.druzhinin@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="igor.druzhinin@citrix.com";
+ x-sender="igor.druzhinin@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+ igor.druzhinin@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="igor.druzhinin@citrix.com";
+ x-sender="igor.druzhinin@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83 ~all"
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="igor.druzhinin@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: voll20o0NevNNM80z6mKyFgEww8c/RfFRX6zbrqIrxU4UZAPkfMML6TB7q8mMmTlI9yqmraagA
+ qGqxxArhbTMY24noVwxtO10LTT2RL2fKeRjpfedrX5Lsr+k2EHZikXCmO+o3BTK3X0HsP26W7F
+ yNzhmPEZ21pxJy0U4CCIr/HftL0782GhahuF22+Ysc6cLBMZGcR04ke2kkbDhKd4+oBNb6Aqg8
+ v8+40pcc+71A0vu/6aY7DcOBin6n80/8vccc1UscPy6B7TGxsC9A3jNirhpaVdvbQkMRwUwabs
+ bOY=
+X-SBRS: 2.7
+X-MesageID: 4676819
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.64,408,1559534400"; 
+   d="scan'208";a="4676819"
+To: Christian Lindig <christian.lindig@citrix.com>
+References: <1566240335-6614-1-git-send-email-igor.druzhinin@citrix.com>
+ <7DFC36D5-7354-4D82-87A6-364FEDEAFAFC@citrix.com>
+From: Igor Druzhinin <igor.druzhinin@citrix.com>
+Message-ID: <d61c8e5e-eb9b-755f-0917-b4d009c64d74@citrix.com>
+Date: Tue, 20 Aug 2019 11:45:26 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-X-OriginatorOrg: siengine.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fee002fb-34ba-496f-f760-08d72556e7cf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Aug 2019 10:12:28.0227 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: dfd77111-ddba-4349-918d-07ae3a4b9d8e
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0Hjsh/YyuXLnx5pVUJbM9x8Hztjo3s0dsh5xAa69WyIcp63vfcS2V6KtuGxSCj5hq/8bLSjs8urFjM5Mpe9Prw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BJXPR01MB0326
-X-Mailman-Approved-At: Tue, 20 Aug 2019 10:19:54 +0000
-Subject: [Xen-devel] [optee ]: about the max optee threads limitation
+In-Reply-To: <7DFC36D5-7354-4D82-87A6-364FEDEAFAFC@citrix.com>
+Content-Language: en-US
+Subject: Re: [Xen-devel] [PATCH] tools/oxenstored: port XS_INTRODUCE evtchn
+ rebind function from cxenstored
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,183 +106,65 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============0410870986852782471=="
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Ian Jackson <Ian.Jackson@citrix.com>, "wl@xen.org" <wl@xen.org>,
+ David Scott <dave@recoil.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============0410870986852782471==
-Content-Language: zh-CN
-Content-Type: multipart/alternative;
-	boundary="_000_BJXPR01MB06145299DF5B79F9D9236798FDAB0BJXPR01MB0614CHNP_"
-
---_000_BJXPR01MB06145299DF5B79F9D9236798FDAB0BJXPR01MB0614CHNP_
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
-
-DQoNCg0KSGVsbG8sZXhwZXJ0cw0KDQpJIGFtIHJlYWRpbmcgdGhlIGNvZGUgYWJvdXQgdGhlIG9w
-dGVlIHN1cHBvcnRlZCBieSB4ZW4uDQoNCkkgbm90aWNlZCBmb2xsb3dpbmcgY29kZSB3aGljaCBh
-Ym91dCB0aGUgbGltaXRhdGlvbiBvZiB0aGUgobBtYXggb3B0ZWUgdGhyZWFkc6GxLg0KSXMgdGhl
-IGxpbWl0YXRpb24gc2hvdWxkIGJlIGFwcGxpZWQgdG8gYWxsIG9mIHRoZSBndWVzdCBWTXMgcnVu
-bmluZyBvbiBYZW4gPw0KaWYgaXQgaXMgeWVzLCBob3dldmVyLCBjdHggaXMgcGVyIFZNLCBzbywg
-aWYgdGhlcmUgaXMgYW5vdGhlciBWTSBlbmFibGUgdGhlIG9wdGVlICwgdGhlIGxpbWl0YXRpb24g
-bWF5IGV4Y2VlZCB0aGUgbnVtYmVyIG9mIG1heCBvcHRlZSB0aHJlYWRzLg0KSXMgaXQgcmlnaHQ/
-DQoNCkZpbGU6IHhlbi9hcmNoL2FybS90ZWUvb3B0ZWUuYw0Kc3RhdGljIHN0cnVjdCBvcHRlZV9z
-dGRfY2FsbCAqYWxsb2NhdGVfc3RkX2NhbGwoc3RydWN0IG9wdGVlX2RvbWFpbiAqY3R4KQ0Kew0K
-ICAgIHN0cnVjdCBvcHRlZV9zdGRfY2FsbCAqY2FsbDsNCiAgICBpbnQgY291bnQ7DQoNCiAgICAv
-Kg0KICAgICAqIE1ha2Ugc3VyZSB0aGF0IGd1ZXN0IGRvZXMgbm90IGV4ZWN1dGUgbW9yZSB0aGFu
-IG1heF9vcHRlZV90aHJlYWRzLg0KICAgICAqIFRoaXMgYWxzbyBpbmRpcmVjdGx5IGxpbWl0cyBu
-dW1iZXIgb2YgUlBDIFNITSBidWZmZXJzLCBiZWNhdXNlIE9QLVRFRQ0KICAgICAqIGFsbG9jYXRl
-cyBvbmUgc3VjaCBidWZmZXIgcGVyIHN0YW5kYXJkIGNhbGwuDQogICAgICovDQogICAgY291bnQg
-PSBhdG9taWNfYWRkX3VubGVzcygmY3R4LT5jYWxsX2NvdW50LCAxLCBtYXhfb3B0ZWVfdGhyZWFk
-cyk7DQogICAgaWYgKCBjb3VudCA9PSBtYXhfb3B0ZWVfdGhyZWFkcyApDQogICAgICAgIHJldHVy
-biBFUlJfUFRSKC1FTk9TUEMpOw0K
-
---_000_BJXPR01MB06145299DF5B79F9D9236798FDAB0BJXPR01MB0614CHNP_
-Content-Type: text/html; charset="gb2312"
-Content-Transfer-Encoding: quoted-printable
-
-<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
-osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
-xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
-//www.w3.org/TR/REC-html40">
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dgb2312">
-<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
-<style><!--
-/* Font Definitions */
-@font-face
-	{font-family:=CB=CE=CC=E5;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:=B5=C8=CF=DF;
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"\@=B5=C8=CF=DF";
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-@font-face
-	{font-family:"\@=CB=CE=CC=E5";
-	panose-1:2 1 6 0 3 1 1 1 1 1;}
-/* Style Definitions */
-p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	margin-bottom:.0001pt;
-	text-align:justify;
-	text-justify:inter-ideograph;
-	font-size:10.5pt;
-	font-family:=B5=C8=CF=DF;}
-a:link, span.MsoHyperlink
-	{mso-style-priority:99;
-	color:#0563C1;
-	text-decoration:underline;}
-a:visited, span.MsoHyperlinkFollowed
-	{mso-style-priority:99;
-	color:#954F72;
-	text-decoration:underline;}
-p.msonormal0, li.msonormal0, div.msonormal0
-	{mso-style-name:msonormal;
-	mso-margin-top-alt:auto;
-	margin-right:0cm;
-	mso-margin-bottom-alt:auto;
-	margin-left:0cm;
-	font-size:12.0pt;
-	font-family:=CB=CE=CC=E5;}
-span.EmailStyle18
-	{mso-style-type:personal;
-	font-family:=B5=C8=CF=DF;
-	color:windowtext;}
-span.EmailStyle19
-	{mso-style-type:personal-reply;
-	font-family:=B5=C8=CF=DF;
-	color:windowtext;}
-.MsoChpDefault
-	{mso-style-type:export-only;
-	font-size:10.0pt;}
-@page WordSection1
-	{size:612.0pt 792.0pt;
-	margin:72.0pt 90.0pt 72.0pt 90.0pt;}
-div.WordSection1
-	{page:WordSection1;}
---></style><!--[if gte mso 9]><xml>
-<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
-</xml><![endif]--><!--[if gte mso 9]><xml>
-<o:shapelayout v:ext=3D"edit">
-<o:idmap v:ext=3D"edit" data=3D"1" />
-</o:shapelayout></xml><![endif]-->
-</head>
-<body lang=3D"ZH-CN" link=3D"#0563C1" vlink=3D"#954F72" style=3D"text-justi=
-fy-trim:punctuation">
-<div class=3D"WordSection1">
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal" align=3D"left" style=3D"text-align:left"><span lang=
-=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Hello,experts<o:p></o:p></span>=
-</p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">I am reading the code about the=
- optee supported by xen.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">I noticed following code which =
-about the limitation of the
-</span>=A1=B0<span lang=3D"EN-US">max optee threads</span>=A1=B1<span lang=
-=3D"EN-US">.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Is the limitation should be app=
-lied to all of the guest VMs running on Xen ?
-<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">if it is yes, however, ctx is p=
-er VM, so, if there is another VM enable the optee , the limitation may exc=
-eed the number of max optee threads.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">Is it right?<o:p></o:p></span><=
-/p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">File: xen/arch/arm/tee/optee.c<=
-o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">static struct optee_std_call *a=
-llocate_std_call(struct optee_domain *ctx)<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">{<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp; struct optee=
-_std_call *call;<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp; int count;<o=
-:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US"><o:p>&nbsp;</o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp; /*<o:p></o:p=
-></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp;&nbsp; * Make=
- sure that guest does not execute more than max_optee_threads.<o:p></o:p></=
-span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp;&nbsp; * This=
- also indirectly limits number of RPC SHM buffers, because OP-TEE<o:p></o:p=
-></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp;&nbsp; * allo=
-cates one such buffer per standard call.<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp;&nbsp; */<o:p=
-></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp; count =3D at=
-omic_add_unless(&amp;ctx-&gt;call_count, 1, max_optee_threads);<o:p></o:p><=
-/span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp; if ( count =
-=3D=3D max_optee_threads )<o:p></o:p></span></p>
-<p class=3D"MsoNormal"><span lang=3D"EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
-nbsp;&nbsp; return ERR_PTR(-ENOSPC);<o:p></o:p></span></p>
-</div>
-</body>
-</html>
-
---_000_BJXPR01MB06145299DF5B79F9D9236798FDAB0BJXPR01MB0614CHNP_--
-
-
---===============0410870986852782471==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============0410870986852782471==--
-
+T24gMjAvMDgvMjAxOSAwOToyMSwgQ2hyaXN0aWFuIExpbmRpZyB3cm90ZToKPj4gKwkJCWlmIChE
+b21haW4uZ2V0X21mbiBlZG9tKSA9IG1mbiAmJiAoQ29ubmVjdGlvbnMuZmluZF9kb21haW4gY29u
+cyBkb21pZCkgIT0gY29uIHRoZW4gYmVnaW4KPiAKPiBUaGlzIHNob3VsZCB1c2UgPD4gaW5zdGVh
+ZCBvZiAhPSBiZWNhdXNlICE9IGlzIHBvaW50ZXIgaW5lcXVhbGl0eSBpbiBPQ2FtbC4gVGhlIHBh
+cmVudGhlc2VzIGFyZSBub3Qgc3RyaWN0bHkgbmVjZXNzYXJ5IGJlY2F1c2UgZnVuY3Rpb24gYXBw
+bGljYXRpb24gaGFzIHByZWNlZGVuY2UuIFNvOgo+IAo+IAlpZiBEb21haW4uZ2V0X21mbiBlZG9t
+ID0gbWZuICYmIENvbm5lY3Rpb25zLmZpbmRfZG9tYWluIGNvbnMgZG9taWQgPD4gY29uIHRoZW4g
+YmVnaW4KPiAKCkJ1dCBJIGFjdHVhbGx5IHdhbnQgdG8gY29tcGFyZSBwb2ludGVycyBoZXJlIC0g
+dGhlIGlkZWEgaXMgdGhhdCB0aGUKY29ubmVjdGlvbiBvYmplY3QgaW4gdGhlIGhhc2h0YWJsZSBp
+bmRleGVkIGJ5IGRvbWlkIGlzIG5vdCB0aGUgc2FtZSBhcwpjb25uZWN0aW9uIHRoYXQgd2UgZ290
+IFhTX0lOVFJPRFVDRSBtZXNzYWdlIGZyb20uIChzZWUKdG9vbHMveGVuc3RvcmUveGVuc3Ryb3Jl
+ZF9kb21haW4uYykKCklnb3IKCj4+IE9uIDE5IEF1ZyAyMDE5LCBhdCAxOTo0NSwgSWdvciBEcnV6
+aGluaW4gPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+IHdyb3RlOgo+Pgo+PiBDIHZlcnNpb24g
+b2YgeGVuc3RvcmVkIGhhZCB0aGlzIGFiaWxpdHkgc2luY2UgNjFhYWVkMGQ1ICgiQWxsb3cKPj4g
+WFNfSU5UUk9EVUNFIHRvIGJlIHVzZWQgZm9yIHJlYmluZGluZyB0aGUgeGVuc3RvcmUgZXZ0Y2hu
+LiIpIGZyb20gMjAwNy4KPj4gQ29weSBpdCBhcyBpcyB0byBPY2FtbCB2ZXJzaW9uLgo+Pgo+PiBT
+aWduZWQtb2ZmLWJ5OiBJZ29yIERydXpoaW5pbiA8aWdvci5kcnV6aGluaW5AY2l0cml4LmNvbT4K
+Pj4gLS0tCj4+IHRvb2xzL29jYW1sL3hlbnN0b3JlZC9kb21haW4ubWwgIHwgNiArKysrKy0KPj4g
+dG9vbHMvb2NhbWwveGVuc3RvcmVkL3Byb2Nlc3MubWwgfCA4ICsrKysrKystCj4+IDIgZmlsZXMg
+Y2hhbmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkKPj4KPj4gZGlmZiAtLWdp
+dCBhL3Rvb2xzL29jYW1sL3hlbnN0b3JlZC9kb21haW4ubWwgYi90b29scy9vY2FtbC94ZW5zdG9y
+ZWQvZG9tYWluLm1sCj4+IGluZGV4IGIwYTAxYjAuLmFlYjE4NWYgMTAwNjQ0Cj4+IC0tLSBhL3Rv
+b2xzL29jYW1sL3hlbnN0b3JlZC9kb21haW4ubWwKPj4gKysrIGIvdG9vbHMvb2NhbWwveGVuc3Rv
+cmVkL2RvbWFpbi5tbAo+PiBAQCAtMjMsOSArMjMsOSBAQCB0eXBlIHQgPQo+PiB7Cj4+IAlpZDog
+WGVuY3RybC5kb21pZDsKPj4gCW1mbjogbmF0aXZlaW50Owo+PiAtCXJlbW90ZV9wb3J0OiBpbnQ7
+Cj4+IAlpbnRlcmZhY2U6IFhlbm1tYXAubW1hcF9pbnRlcmZhY2U7Cj4+IAlldmVudGNobjogRXZl
+bnQudDsKPj4gKwltdXRhYmxlIHJlbW90ZV9wb3J0OiBpbnQ7Cj4+IAltdXRhYmxlIHBvcnQ6IFhl
+bmV2ZW50Y2huLnQgb3B0aW9uOwo+PiAJbXV0YWJsZSBiYWRfY2xpZW50OiBib29sOwo+PiAJbXV0
+YWJsZSBpb19jcmVkaXQ6IGludDsgKCogdGhlIHJvdW5kcyBvZiByaW5nIHByb2Nlc3MgbGVmdCB0
+byBkbywgZGVmYXVsdCBpcyAwLAo+PiBAQCAtNzEsNiArNzEsMTAgQEAgbGV0IG5vdGlmeSBkb20g
+PSBtYXRjaCBkb20ucG9ydCB3aXRoCj4+IAlFdmVudC5ub3RpZnkgZG9tLmV2ZW50Y2huIHBvcnQK
+Pj4KPj4gbGV0IGJpbmRfaW50ZXJkb21haW4gZG9tID0KPj4gKwliZWdpbiBtYXRjaCBkb20ucG9y
+dCB3aXRoCj4+ICsJfCBOb25lIC0+ICgpCj4+ICsJfCBTb21lIHBvcnQgLT4gRXZlbnQudW5iaW5k
+IGRvbS5ldmVudGNobiBwb3J0Cj4+ICsJZW5kOwo+PiAJZG9tLnBvcnQgPC0gU29tZSAoRXZlbnQu
+YmluZF9pbnRlcmRvbWFpbiBkb20uZXZlbnRjaG4gZG9tLmlkIGRvbS5yZW1vdGVfcG9ydCk7Cj4+
+IAlkZWJ1ZyAiYm91bmQgZG9tYWluICVkIHJlbW90ZSBwb3J0ICVkIHRvIGxvY2FsIHBvcnQgJXMi
+IGRvbS5pZCBkb20ucmVtb3RlX3BvcnQgKHN0cmluZ19vZl9wb3J0IGRvbS5wb3J0KQo+Pgo+PiBk
+aWZmIC0tZ2l0IGEvdG9vbHMvb2NhbWwveGVuc3RvcmVkL3Byb2Nlc3MubWwgYi90b29scy9vY2Ft
+bC94ZW5zdG9yZWQvcHJvY2Vzcy5tbAo+PiBpbmRleCA4YTdlNTM4Li5mZjVjOTQ4IDEwMDY0NAo+
+PiAtLS0gYS90b29scy9vY2FtbC94ZW5zdG9yZWQvcHJvY2Vzcy5tbAo+PiArKysgYi90b29scy9v
+Y2FtbC94ZW5zdG9yZWQvcHJvY2Vzcy5tbAo+PiBAQCAtNDA4LDcgKzQwOCwxMyBAQCBsZXQgZG9f
+aW50cm9kdWNlIGNvbiBfdCBkb21haW5zIGNvbnMgZGF0YSA9Cj4+IAkJaW4KPj4gCWxldCBkb20g
+PQo+PiAJCWlmIERvbWFpbnMuZXhpc3QgZG9tYWlucyBkb21pZCB0aGVuCj4+IC0JCQlEb21haW5z
+LmZpbmQgZG9tYWlucyBkb21pZAo+PiArCQkJbGV0IGVkb20gPSBEb21haW5zLmZpbmQgZG9tYWlu
+cyBkb21pZCBpbgo+PiArCQkJaWYgKERvbWFpbi5nZXRfbWZuIGVkb20pID0gbWZuICYmIChDb25u
+ZWN0aW9ucy5maW5kX2RvbWFpbiBjb25zIGRvbWlkKSAhPSBjb24gdGhlbiBiZWdpbgo+PiArCQkJ
+CSgqIFVzZSBYU19JTlRST0RVQ0UgZm9yIHJlY3JlYXRpbmcgdGhlIHhlbmJ1cyBldmVudC1jaGFu
+bmVsLiAqKQo+PiArCQkJCWVkb20ucmVtb3RlX3BvcnQgPC0gcG9ydDsKPj4gKwkJCQlEb21haW4u
+YmluZF9pbnRlcmRvbWFpbiBlZG9tOwo+PiArCQkJZW5kOwo+PiArCQkJZWRvbQo+PiAJCWVsc2Ug
+dHJ5Cj4+IAkJCWxldCBuZG9tID0gRG9tYWlucy5jcmVhdGUgZG9tYWlucyBkb21pZCBtZm4gcG9y
+dCBpbgo+PiAJCQlDb25uZWN0aW9ucy5hZGRfZG9tYWluIGNvbnMgbmRvbTsKPj4gLS0gCj4+IDIu
+Ny40Cj4+Cj4gCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpo
+dHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
