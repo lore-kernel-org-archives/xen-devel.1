@@ -7,77 +7,77 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5062AC3A59E
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Aug 2019 06:15:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B024DC3A59E
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Aug 2019 06:15:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1F8FF2339F
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Aug 2019 06:15:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7DD9820870
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Aug 2019 06:15:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.b="pn/JINVj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1F8FF2339F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=wdc.com header.i=@wdc.com header.b="fvIMHJZm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DD9820870
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=wdc.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1i0Jtg-000449-KY; Wed, 21 Aug 2019 06:15:04 +0000
+	id 1i0Jtr-0004IF-Ec; Wed, 21 Aug 2019 06:15:15 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=9TMJ=WR=wdc.com=prvs=12921afdb=chaitanya.kulkarni@srs-us1.protection.inumbo.net>)
- id 1i0Jte-000434-Ku
- for xen-devel@lists.xenproject.org; Wed, 21 Aug 2019 06:15:02 +0000
-X-Inumbo-ID: 01e03874-c3db-11e9-b95f-bc764e2007e4
+ id 1i0Jtq-0004HQ-5v
+ for xen-devel@lists.xenproject.org; Wed, 21 Aug 2019 06:15:14 +0000
+X-Inumbo-ID: 08cefe72-c3db-11e9-8980-bc764e2007e4
 Received: from esa6.hgst.iphmx.com (unknown [216.71.154.45])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 01e03874-c3db-11e9-b95f-bc764e2007e4;
- Wed, 21 Aug 2019 06:15:01 +0000 (UTC)
+ id 08cefe72-c3db-11e9-8980-bc764e2007e4;
+ Wed, 21 Aug 2019 06:15:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
- t=1566368101; x=1597904101;
+ t=1566368113; x=1597904113;
  h=from:to:cc:subject:date:message-id:in-reply-to: references;
- bh=TWIY4zyMbnSdbPfWCQisLpNGsxuN7LEVg7rZifVilrc=;
- b=pn/JINVjgUqubKHvgPvCNqgn7pG3wqXXyOaw89kYE6ytO+EPzlFvjK9V
- 3iUNRRjXj71UT7gIWihPDYKnV3rxqa4ZDe2qoP4pA7IndBzTobT0giYbV
- LLQdhQ+rv6fnm93evU89aKSfc7WIZ4pYOVamQxRFf1XrEkiA5t9CY1ilM
- djcJPOWsOD7PmMVEqtT1ofT0nVjjvTIgg0heIFQ9riXXr/Wv5U75eb4ZU
- 59fJm7TwRDGdP9TRjZc5+ikZqmC9t5feZQV2veIJ54bfxZNehNK74jjDM
- ce8Pv3EKPgImkhNKEeCNJKoWJHVHYNZ621V3kvkrFI3L68RHvdnB1zWNG A==;
-IronPort-SDR: 4+JRm2EKlRPM7Eie4NTCXUmVv7g4sQu1v79uXll+BfVC2gZP2JgUyTaj/N/MrDbtE4rrVHvPQl
- fmNhIrf+okpm2ApU4ufXgTSo+t0AaVhwipAVgCES8Tck/+uS6CZhdZaXNPs2ctTJmI4U19qMqE
- J0juTdEpZmZy377gWYrB8z/ENK3GsRXn3JkXX5i4Y3p+kFev3yjNET96uhUTDcXkCmy6s+DZdW
- otZZVDynd0OWjxgwKcbTAUjasbxULVH2J1chOFHYRraPxUv/5a5jpS8bGDdM2HrnTMwOC2KQKL
- wrg=
-X-IronPort-AV: E=Sophos;i="5.64,411,1559491200"; d="scan'208";a="117904710"
+ bh=D8YDUL5tZ05jSVemJWK/Wkcu4fkxmHw2a5twadHpA8s=;
+ b=fvIMHJZmy7nxIAAoibjPzhsQguo6zFDc3jnb0nelgobqNC77sLaG5hGM
+ FIa8j7xHknUPE7ux6Ptgv097FD6W7cS7l2vGTF8Jsjn3fLfgWDySo8rU7
+ wxQZdG7vKNUdoaB5f2H3+RGyXkXkZgRAHZ3rxI2/tTkzQW91kcR30sunh
+ PZjAtFhltBYAFuJ1tODRVQBTeOtzGrUwzgMCp6ZuFpKJ00XUwRn0uSE4s
+ F41NhM7FdQ5z0uhzrcHQnj14HBVlqlh2DOl2gtEz+/ijvtKBpiwRdhrQa
+ aLQ9ge05xmrAwKwLwes6+JJBW3rRtagP0uRrxrXCuN8RB7hIbjvzrpEVN w==;
+IronPort-SDR: f99C7JuoOOLlVUxfYCTSggoZBtafhjy1FSb4QzAEHkZAV0Er6RPC1l7Xd2mVFWQS9vv2Mg8qxT
+ pt3KPrZQkvfEnu2ZtHx1sFpK+EizeaehgT0EGnNAqGycx3J9KjqiTd7/F9WjMrPYXZ1dupgEcR
+ MK0mjaeUks8hQxMwNjkKHL6KpNgFqw2412eYzUZKwh7QI4d5rzDIdtudnQ/jo7VhrQbh/VHrEb
+ mBVCGSg4jgSWeezmHxd00JvQlJxIowFSenjzIp7MTooaWSTLOqaBGX5wbaYvd6gwGVMM6V/42a
+ ZjI=
+X-IronPort-AV: E=Sophos;i="5.64,411,1559491200"; d="scan'208";a="117904723"
 Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
  ([199.255.45.15])
- by ob1.hgst.iphmx.com with ESMTP; 21 Aug 2019 14:15:00 +0800
-IronPort-SDR: lO/l1zblGUq94kn9nZ48rBDYJUUay1zBSyRMbRSkGHJHg5RPyfcMoRBeqUCOp3gEk2siFpYa5f
- xfoV9q+gUNZgkSijYA9UzISQxROE2FT/lqcPsYsPg9p3RncjmljoUQljQHzjsfExMx3l/U80Il
- BaPZN7age0Hdp1xcnE+dZ8CP2DNbnAoMKk+TH4FUtY/9xZfCtVp8ynBhsuwBKzRIaEwLvraDUp
- P5W9ZC/1O61u3ktX5/8XNJF7kt4QD2TXF9jsNHiSmu/+xow9qlXFVEFN7G5oT8cN2OTo1GoQ8W
- 6/OnikgphnBdFRgtaz7EeYtM
+ by ob1.hgst.iphmx.com with ESMTP; 21 Aug 2019 14:15:12 +0800
+IronPort-SDR: 7ybJ0sJ/FhmmPtwXJeFV9uvC/bHzoF2IUZ5gPs7OxlbfN9DmZwRrjmzL81bBlMPnGaq7RqN1nQ
+ mKbnLuJxHd6eVfgGBeCXhINdHDfQDPT5jOtbb81ANjxq6cPpP0jbgYxvwp9g+9Iuf8ACcyhL14
+ qsEb0Zn0LnxuAMBVxESpH+PpnbZ+7ppbN9IcciLtdLn+IKX8LSKP4QSjK0caN8mDNDrT/eKIbG
+ M1MtqU4YiUjgf4+r4HJk/9InaNSFhXRSV7CCJvjYSl8EoVmVuVAerQJK9n2mqQFzz6hUk1iaLV
+ QyevNsWTI/tFBULgnzRbyu3a
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
  by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Aug 2019 23:12:22 -0700
-IronPort-SDR: 5/S77yaPX7vIPc8Ykudto5lXNWJHWMf9k8eRp3VA22ShuUnIWyO7HBQ+5tzxRnuB/rl895d70I
- 86QpiaX1uJ/JbLojGMgXm9WeY140bDRfoabDuUfUsNls8qwqFznkr5GENwDhjTPYv9YElxi/x5
- 5nW/zc6pDo9no7FW7MUum92rzmL3Z3p7aRGH12FMJl75j77cAWHqi4J3a7DmFbACMIS2GPs3g5
- uX4v7+k8k0zwseAE//uhMbrgJlegwYblO909AXAa1Kdxm8kkfVOoN1UvJESvG3Wy20saiTR79E
- CZ4=
+ 20 Aug 2019 23:12:34 -0700
+IronPort-SDR: BYJvRAQ6DwECniwHRLKaUr9x6qRGDsHdaIfg1ud9IVxV9yCvCNuNuKVUzzdBhpZt47I0lH4/y6
+ r8D53/P4Z9aK688Qqew0ezt7T/dj/JP9UbtCLxA9CqauIB04CofRKbjlP7H/hR6qwV2wLWIY73
+ tGseFCARD4wk5lDXH51RNjF4YV0l1IIhsgm3K/Cp29/2cpd8FPo2YMLKOYoeTxyJ07eENw5NDl
+ SHreBRLB3prhQjINcF9sFUTYXHo04Vn7uy1MBlNW+yKasuLS/7NJkLGl8Z0zDzbZJCuoLufFp4
+ AG8=
 WDCIronportException: Internal
 Received: from cvenusqemu.hgst.com ([10.202.66.73])
- by uls-op-cesaip01.wdc.com with ESMTP; 20 Aug 2019 23:15:00 -0700
+ by uls-op-cesaip01.wdc.com with ESMTP; 20 Aug 2019 23:15:12 -0700
 From: Chaitanya Kulkarni <chaitanya.kulkarni@wdc.com>
 To: linux-block@vger.kernel.org
-Date: Tue, 20 Aug 2019 23:14:19 -0700
-Message-Id: <20190821061423.3408-6-chaitanya.kulkarni@wdc.com>
+Date: Tue, 20 Aug 2019 23:14:21 -0700
+Message-Id: <20190821061423.3408-8-chaitanya.kulkarni@wdc.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <20190821061423.3408-1-chaitanya.kulkarni@wdc.com>
 References: <20190821061423.3408-1-chaitanya.kulkarni@wdc.com>
-Subject: [Xen-devel] [PATCH V5 5/9] bcache: update cached_dev_init() with
- helper
+Subject: [Xen-devel] [PATCH V5 7/9] blktrace: use helper in
+ blk_trace_setup_lba()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -100,24 +100,20 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SW4gdGhlIGJjYWNoZSB3aGVuIGluaXRpYWxpemluZyB0aGUgY2FjaGVkIGRldmljZSB3ZSBkb24n
-dCBhY3R1YWxseQp1c2UgYW55IHNvcnQgb2YgbG9ja2luZyB3aGVuIHJlYWRpbmcgdGhlIG51bWJl
-ciBvZiBzZWN0b3JzIGZyb20gdGhlCnBhcnQuIFRoaXMgcGF0Y2ggdXBkYXRlcyB0aGUgY2FjaGVk
-X2Rldl9pbml0KCkgd2l0aCBuZXdseSBpbnRyb2R1Y2VkCmhlbHBlciBmdW5jdGlvbiB0byByZWFk
-IHRoZSBucl9zZWN0cyBmcm9tIGJsb2NrIGRldmljZSdzIGhkX3BhcnRzIHdpdGgKdGhlIGhlbHAg
-b2YgcGFydF9ucl9zZWN0c19yZWFkKCkuCgpBY2tlZC1ieTogQ29seSBMaSA8Y29seWxpQHN1c2Uu
-ZGU+ClNpZ25lZC1vZmYtYnk6IENoYWl0YW55YSBLdWxrYXJuaSA8Y2hhaXRhbnlhLmt1bGthcm5p
-QHdkYy5jb20+Ci0tLQogZHJpdmVycy9tZC9iY2FjaGUvc3VwZXIuYyB8IDIgKy0KIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvbWQvYmNhY2hlL3N1cGVyLmMgYi9kcml2ZXJzL21kL2JjYWNoZS9zdXBlci5jCmluZGV4IDIw
-ZWQ4MzhlOTQxMy4uNzljODQ4ZmE1OTEyIDEwMDY0NAotLS0gYS9kcml2ZXJzL21kL2JjYWNoZS9z
-dXBlci5jCisrKyBiL2RyaXZlcnMvbWQvYmNhY2hlL3N1cGVyLmMKQEAgLTEzMDUsNyArMTMwNSw3
-IEBAIHN0YXRpYyBpbnQgY2FjaGVkX2Rldl9pbml0KHN0cnVjdCBjYWNoZWRfZGV2ICpkYywgdW5z
-aWduZWQgaW50IGJsb2NrX3NpemUpCiAJCQlxLT5saW1pdHMucmFpZF9wYXJ0aWFsX3N0cmlwZXNf
-ZXhwZW5zaXZlOwogCiAJcmV0ID0gYmNhY2hlX2RldmljZV9pbml0KCZkYy0+ZGlzaywgYmxvY2tf
-c2l6ZSwKLQkJCSBkYy0+YmRldi0+YmRfcGFydC0+bnJfc2VjdHMgLSBkYy0+c2IuZGF0YV9vZmZz
-ZXQpOworCQkJIGJkZXZfbnJfc2VjdHMoZGMtPmJkZXYpIC0gZGMtPnNiLmRhdGFfb2Zmc2V0KTsK
-IAlpZiAocmV0KQogCQlyZXR1cm4gcmV0OwogCi0tIAoyLjE3LjAKCgpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhl
-bi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3Jn
-L21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+VGhpcyBwYXRjaCB1cGRhdGVzIHRoZSBibGtfdHJhY2Vfc2V0dXBfbGJhKCkgd2l0aCBuZXdseSBp
+bnRyb2R1Y2VkCmhlbHBlciBmdW5jdGlvbiB0byByZWFkIHRoZSBucl9zZWN0cyBmcm9tIGJsb2Nr
+IGRldmljZSdzIGhkX3BhcnRzIHdpdGgKdGhlIGhlbHAgb2YgcGFydF9ucl9zZWN0c19yZWFkKCku
+CgpTaWduZWQtb2ZmLWJ5OiBDaGFpdGFueWEgS3Vsa2FybmkgPGNoYWl0YW55YS5rdWxrYXJuaUB3
+ZGMuY29tPgotLS0KIGtlcm5lbC90cmFjZS9ibGt0cmFjZS5jIHwgMiArLQogMSBmaWxlIGNoYW5n
+ZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEva2VybmVsL3Ry
+YWNlL2Jsa3RyYWNlLmMgYi9rZXJuZWwvdHJhY2UvYmxrdHJhY2UuYwppbmRleCAyZDZlOTNhYjA0
+NzguLjgwMWY4YzQ2NWJmZiAxMDA2NDQKLS0tIGEva2VybmVsL3RyYWNlL2Jsa3RyYWNlLmMKKysr
+IGIva2VybmVsL3RyYWNlL2Jsa3RyYWNlLmMKQEAgLTQ2MSw3ICs0NjEsNyBAQCBzdGF0aWMgdm9p
+ZCBibGtfdHJhY2Vfc2V0dXBfbGJhKHN0cnVjdCBibGtfdHJhY2UgKmJ0LAogCiAJaWYgKHBhcnQp
+IHsKIAkJYnQtPnN0YXJ0X2xiYSA9IHBhcnQtPnN0YXJ0X3NlY3Q7Ci0JCWJ0LT5lbmRfbGJhID0g
+cGFydC0+c3RhcnRfc2VjdCArIHBhcnQtPm5yX3NlY3RzOworCQlidC0+ZW5kX2xiYSA9IHBhcnQt
+PnN0YXJ0X3NlY3QgKyBiZGV2X25yX3NlY3RzKGJkZXYpOwogCX0gZWxzZSB7CiAJCWJ0LT5zdGFy
+dF9sYmEgPSAwOwogCQlidC0+ZW5kX2xiYSA9IC0xVUxMOwotLSAKMi4xNy4wCgoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
