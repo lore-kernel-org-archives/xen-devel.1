@@ -2,48 +2,110 @@ Return-Path: <SRS0=9cJ5=WZ=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B161C3A59F
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Aug 2019 09:34:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DF5D5C3A59F
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Aug 2019 09:37:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 65E5022CF5
-	for <xen-devel@archiver.kernel.org>; Thu, 29 Aug 2019 09:34:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65E5022CF5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 976FD215EA
+	for <xen-devel@archiver.kernel.org>; Thu, 29 Aug 2019 09:37:24 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=bitdefender.onmicrosoft.com header.i=@bitdefender.onmicrosoft.com header.b="DMW/NHNM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 976FD215EA
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=bitdefender.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1i3Gon-0008AA-Cv; Thu, 29 Aug 2019 09:34:13 +0000
+	id 1i3GrY-0008MK-Rp; Thu, 29 Aug 2019 09:37:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=C/xl=WZ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1i3Gom-00089P-Nw
- for xen-devel@lists.xenproject.org; Thu, 29 Aug 2019 09:34:12 +0000
-X-Inumbo-ID: 285ca40e-ca40-11e9-ac23-bc764e2007e4
-Received: from mx1.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Hcs9=WZ=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
+ id 1i3GrX-0008ME-94
+ for xen-devel@lists.xenproject.org; Thu, 29 Aug 2019 09:37:03 +0000
+X-Inumbo-ID: 8dcce6c8-ca40-11e9-8980-bc764e2007e4
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com (unknown
+ [2a01:111:f400:fe05::720])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 285ca40e-ca40-11e9-ac23-bc764e2007e4;
- Thu, 29 Aug 2019 09:34:12 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 15CE8B05C;
- Thu, 29 Aug 2019 09:33:11 +0000 (UTC)
-To: Roger Pau Monne <roger.pau@citrix.com>
+ id 8dcce6c8-ca40-11e9-8980-bc764e2007e4;
+ Thu, 29 Aug 2019 09:37:02 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=m4xesQe38ZTlIsXHx9bZpMLrvyRV1GUFwfk7FOCPcXA6MEFnZpZye10xysH8FxyPtlWu5PDPyln9jYiEj/diUMhzc/eyVn+rJHWYZLnrnGP06+2hMgd4aKThq3ZvQ9OkPm9az6v2VecHY3KM9X57E+0Msmynde1edK9S6ji6Jw01nIShrZzuwAW77CnJoepHE2HWDCF93i19yuKe1rNcivTBTRwIHafMObK4sBEN670jCXfuUD8ezd1Mo+RSdzHT6XIaKk2zlX/s3q7PrpK98XV8Fx7+IyF73xdYA2RpRpdQKRSqQ7QaIjJ44c6OGeZx1Dh97WkOls1B7z+XenPyjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CEVe2bKK4ZR+fuc0earyn91eDMWCpgVTw4ncRElhXIk=;
+ b=fQ/0P5DTemlespXKOqkMt9WovB8C64YyGHoXl8xp0cGTaLdIbbyey5+Eg0ZA7e8CYa4HH6bB5PoHhIdlFw9ukHW2HmifdTOzSOITd96FrM/0OoWjKosq9tgR9Vt4TfYwem5YN4m7o2vM3zoXd7Le2VtshJFro2HuVU5P+L6juJAimjY28BYszH2pmNaguok+2DRuPTX5O+fm9uTAiZBfK3Sms4CoN86zlYtexZw3gK/cddUXjys4J1SWXneYmN1OWS5YTul+jpkvbFpBeIEl4q/dSzrmO0IPDtCDQLomu1V5wGaxIASkMjlvXtINfZjaFZzM47/ltLOKQ7/M9tg4dA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bitdefender.com; dmarc=pass action=none
+ header.from=bitdefender.com; dkim=pass header.d=bitdefender.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bitdefender.onmicrosoft.com; s=selector2-bitdefender-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CEVe2bKK4ZR+fuc0earyn91eDMWCpgVTw4ncRElhXIk=;
+ b=DMW/NHNM+m8hec4yaqiLJqcLcM623mjvyi2BXUThbUvqlr/Ezdf+kQw0cfUOwLukaiayLg36DHFRhJJaQtIxmqyuuU/hhkWSgMnRh00F+f3/7CgD11nRJ4ooIrU/W4fAvT9UzSK5oFTpUic0Ui1wjBHMB00Z8XaAtTsd6BFIgdg=
+Received: from AM7PR02MB5750.eurprd02.prod.outlook.com (10.141.171.8) by
+ AM7PR02MB5830.eurprd02.prod.outlook.com (10.141.172.215) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2199.19; Thu, 29 Aug 2019 09:37:00 +0000
+Received: from AM7PR02MB5750.eurprd02.prod.outlook.com
+ ([fe80::d422:432c:51e0:2d74]) by AM7PR02MB5750.eurprd02.prod.outlook.com
+ ([fe80::d422:432c:51e0:2d74%4]) with mapi id 15.20.2220.013; Thu, 29 Aug 2019
+ 09:37:00 +0000
+From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
+To: Roger Pau Monne <roger.pau@citrix.com>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>
+Thread-Topic: [PATCH v2] Partially revert "x86/mm: Clean IOMMU flags from
+ p2m-pt code"
+Thread-Index: AQHVXkb2wrZEPpiihUuDabdThgmHracR3gwA
+Date: Thu, 29 Aug 2019 09:37:00 +0000
+Message-ID: <0feb4654-7aaa-6902-13bf-97436c88668b@bitdefender.com>
 References: <20190829084918.89608-1-roger.pau@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b17ee631-4cd8-1cd1-746b-9652be42c6d8@suse.com>
-Date: Thu, 29 Aug 2019 11:33:11 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
-MIME-Version: 1.0
 In-Reply-To: <20190829084918.89608-1-roger.pau@citrix.com>
+Accept-Language: en-US
 Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: VI1PR0501CA0019.eurprd05.prod.outlook.com
+ (2603:10a6:800:92::29) To AM7PR02MB5750.eurprd02.prod.outlook.com
+ (2603:10a6:20b:102::8)
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=aisaila@bitdefender.com; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-originating-ip: [91.199.104.6]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 576772ed-5f54-4158-0f50-08d72c647142
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(2017052603328)(7193020);
+ SRVR:AM7PR02MB5830; 
+x-ms-traffictypediagnostic: AM7PR02MB5830:|AM7PR02MB5830:
+x-microsoft-antispam-prvs: <AM7PR02MB58301945CBF160818E7CB894ABA20@AM7PR02MB5830.eurprd02.prod.outlook.com>
+x-ms-exchange-transport-forked: True
+x-ms-oob-tlc-oobclassifiers: OLM:293;
+x-forefront-prvs: 0144B30E41
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10019020)(376002)(346002)(39860400002)(136003)(396003)(366004)(199004)(189003)(2616005)(36756003)(305945005)(26005)(478600001)(6512007)(186003)(8936002)(6486002)(5660300002)(4744005)(102836004)(53546011)(76176011)(54906003)(6506007)(386003)(31686004)(71200400001)(476003)(71190400001)(316002)(66066001)(8676002)(229853002)(81156014)(81166006)(7736002)(25786009)(486006)(31696002)(99286004)(86362001)(110136005)(11346002)(66446008)(4326008)(446003)(52116002)(6116002)(256004)(2501003)(6246003)(66556008)(66946007)(2906002)(6436002)(64756008)(14454004)(3846002)(66476007)(53936002);
+ DIR:OUT; SFP:1102; SCL:1; SRVR:AM7PR02MB5830;
+ H:AM7PR02MB5750.eurprd02.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; MX:1; 
+received-spf: None (protection.outlook.com: bitdefender.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: RmxzGfwdpeDCTXTaa94bUspWPiKCA90Otpatr+1kmvNAdwZiblEXjzpOXUfYBwb0xwjE/476O2Uo9e3o+s+XolI1gEWiQPtQgWmovN0nL7xpuACW/pVjWChqAgjZF1HBQ7ENoiM+AxH/dFu8AWS2OHcucaG+RpNKgbYYej5Gvy5eaOVMz4PEo2+5Vlt+pn7eFNKtciq8waPV/vH9DCLVUtOpa072XUy7MdAa/Dq1wcr/WPDSKdyCr8RgENgYpG13fWVvXFS3mv3DYG5r+jlnkUA4lNxIUbNnKUQLXSLet+C52OzU+ZU1IxW6UVtYJCq08fxD7HTA7t9vQ/5JeaYYWTLqPwS3u/L+OC+jD7Izse6cGd0iX6Aur8m7RniCJ66e8VYsAxviKm0+uek3gZVg5AnnKCNibOGnHGbMFFrTbHY=
+Content-ID: <9AA4D46DD4DAFD4F831FE8EF869A6BCB@eurprd02.prod.outlook.com>
+MIME-Version: 1.0
+X-OriginatorOrg: bitdefender.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 576772ed-5f54-4158-0f50-08d72c647142
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Aug 2019 09:37:00.6522 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 487baf29-f1da-469a-9221-243f830c36f3
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: qIOlHrE8/6f4ps8kqu/97c5KRAxaPvm0GEorZHqicFGk6/sA3AoM2DlKeDs02q4p1DdVR0I2ezIrRKwOC4x9YcdY3M1PXIoJb4vDCIBDeqo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR02MB5830
 Subject: Re: [Xen-devel] [PATCH v2] Partially revert "x86/mm: Clean IOMMU
  flags from p2m-pt code"
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -56,28 +118,31 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Alexandru Stefan ISAILA <aisaila@bitdefender.com>,
- xen-devel@lists.xenproject.org, George Dunlap <george.dunlap@eu.citrix.com>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMjkuMDguMjAxOSAxMDo0OSwgUm9nZXIgUGF1IE1vbm5lIHdyb3RlOgo+IEBAIC02NDAsOSAr
-NjcwLDE3IEBAIHAybV9wdF9zZXRfZW50cnkoc3RydWN0IHAybV9kb21haW4gKnAybSwgZ2ZuX3Qg
-Z2ZuXywgbWZuX3QgbWZuLAo+ICAgICAgICAgICAmJiAoZ2ZuICsgKDFVTCA8PCBwYWdlX29yZGVy
-KSAtIDEgPiBwMm0tPm1heF9tYXBwZWRfcGZuKSApCj4gICAgICAgICAgcDJtLT5tYXhfbWFwcGVk
-X3BmbiA9IGdmbiArICgxVUwgPDwgcGFnZV9vcmRlcikgLSAxOwo+ICAKPiArICAgIGlmICggbmVl
-ZF9pb21tdV9wdF9zeW5jKHAybS0+ZG9tYWluKSAmJgo+ICsgICAgICAgICAoaW9tbXVfb2xkX2Zs
-YWdzICE9IGlvbW11X3B0ZV9mbGFncyB8fCBvbGRfbWZuICE9IG1mbl94KG1mbikpICkKPiArICAg
-ICAgICAgICAgcmMgPSBpb21tdV9wdGVfZmxhZ3MgPwo+ICsgICAgICAgICAgICAgICAgaW9tbXVf
-bGVnYWN5X21hcChkLCBfZGZuKGdmbiksIG1mbiwgcGFnZV9vcmRlciwKPiArICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgaW9tbXVfcHRlX2ZsYWdzKSA6Cj4gKyAgICAgICAgICAgICAg
-ICBpb21tdV9sZWdhY3lfdW5tYXAoZCwgX2RmbihnZm4pLCBwYWdlX29yZGVyKTsKCkluZGVudGF0
-aW9uIG9mIHRoZSBpZigpIGJvZHkgaXMgb25lIGxldmVsIHRvbyBkZWVwLiBXaXRoIHRoaXMKY29y
-cmVjdGVkIChlYXN5IGVub3VnaCB0byBkbyB3aGlsZSBjb21taXR0aW5nKQpSZXZpZXdlZC1ieTog
-SmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgoKSmFuCgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
-ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
-aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+DQoNCk9uIDI5LjA4LjIwMTkgMTE6NDksIFJvZ2VyIFBhdSBNb25uZSB3cm90ZToNCj4gVGhpcyBw
+YXJ0aWFsbHkgcmV2ZXJ0cyBjb21taXQNCj4gODU0YTQ5YTc0ODZhMDJlZGFlNWIzZTUzNjE3YmFj
+ZTUyNmU5YzFiMSBieSByZS1hZGRpbmcgdGhlIGxvZ2ljIHRoYXQNCj4gcHJvcGFnYXRlcyBjaGFu
+Z2VzIHRvIHRoZSBkb21haW4gcGh5c21hcCBkb25lIGJ5IHAybV9wdF9zZXRfZW50cnkgaW50bw0K
+PiB0aGUgaW9tbXUgcGFnZSB0YWJsZXMuIFdpdGhvdXQgdGhpcyBsb2dpYyBjaGFuZ2VzIHRvIHRo
+ZSBndWVzdCBwaHlzbWFwDQo+IGFyZSBub3QgcHJvcGFnYXRlZCB0byB0aGUgaW9tbXUsIGxlYXZp
+bmcgc3RhbGUgaW9tbXUgZW50cmllcyB0aGF0IGNhbg0KPiBsZWFrIGRhdGEsIG9yIGZhaWxpbmcg
+dG8gYWRkIG5ldyBlbnRyaWVzLg0KPiANCj4gTm90ZSB0aGF0IHRoaXMgY29tbWl0IGRvZXNuJ3Qg
+cmUtaW50cm9kdWNlIGlvbW11IGZsYWdzIHRvIHRoZSBjcHUgcGFnZQ0KPiB0YWJsZSBlbnRyaWVz
+LCBzaW5jZSB0aGUgbG9naWMgdG8gYWRkL3JlbW92ZSBlbnRyaWVzIHRvIHRoZSBpb21tdSBwYWdl
+DQo+IHRhYmxlcyBpcyBiYXNlZCBvbiB0aGUgcDJtIHR5cGUgYW5kIHRoZSBtZm4uDQo+IA0KPiBG
+aXhlczogODU0YTQ5YTc0ODZhMDIgKCd4ODYvbW06IENsZWFuIElPTU1VIGZsYWdzIGZyb20gcDJt
+LXB0IGNvZGUnKQ0KPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5wYXVA
+Y2l0cml4LmNvbT4NCj4gLS0tDQo+IENjOiBBbGV4YW5kcnUgU3RlZmFuIElTQUlMQSA8YWlzYWls
+YUBiaXRkZWZlbmRlci5jb20+DQo+IC0tLQ0KPiBDaGFuZ2VzIHNpbmNlIHYxOg0KPiAgIC0gUmVt
+b3ZlIHRoZSBzaGFyZS1wdCBicmFuY2gsIHRoZXJlJ3Mgbm8gc2hhcmluZyBvbiBBTUQgaGFyZHdh
+cmUuDQo+IC0tLQ0KDQpSZXZpZXdlZC1ieTogQWxleGFuZHJ1IElzYWlsYSA8YWlzYWlsYUBiaXRk
+ZWZlbmRlci5jb20+DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
