@@ -2,52 +2,52 @@ Return-Path: <SRS0=tVhX=W6=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7802BC3A5A2
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2019 12:22:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81195C3A5A7
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2019 12:25:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 51E252087E
-	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2019 12:22:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 51E252087E
+	by mail.kernel.org (Postfix) with ESMTPS id 5BE1B21881
+	for <xen-devel@archiver.kernel.org>; Tue,  3 Sep 2019 12:25:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BE1B21881
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1i57pL-0004uE-E9; Tue, 03 Sep 2019 12:22:27 +0000
+	id 1i57sa-0005II-9l; Tue, 03 Sep 2019 12:25:48 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=CRa/=W6=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1i57pJ-0004tN-Ab
- for xen-devel@lists.xenproject.org; Tue, 03 Sep 2019 12:22:25 +0000
-X-Inumbo-ID: 7af2831b-ce45-11e9-ab92-12813bfff9fa
+ id 1i57sZ-0005I8-8f
+ for xen-devel@lists.xenproject.org; Tue, 03 Sep 2019 12:25:47 +0000
+X-Inumbo-ID: f47c74f2-ce45-11e9-ab92-12813bfff9fa
 Received: from mx1.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7af2831b-ce45-11e9-ab92-12813bfff9fa;
- Tue, 03 Sep 2019 12:22:24 +0000 (UTC)
+ id f47c74f2-ce45-11e9-ab92-12813bfff9fa;
+ Tue, 03 Sep 2019 12:25:46 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 99AD0B027;
- Tue,  3 Sep 2019 12:22:23 +0000 (UTC)
+ by mx1.suse.de (Postfix) with ESMTP id DE638AEFB;
+ Tue,  3 Sep 2019 12:25:45 +0000 (UTC)
 To: Andrew Cooper <andrew.cooper3@citrix.com>
 References: <347e51f2-e80c-992c-6d0b-3b2bfdb75cce@suse.com>
- <2355680d-2052-60a8-fd46-ebf23196a4d6@suse.com>
- <0ff95d72-b647-4dad-40c5-a47a810fc172@citrix.com>
+ <fa007bb5-1644-6116-fe96-00b00f7241a4@suse.com>
+ <59fc6a13-6008-e537-6bfd-51fd97df676c@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <f25f8dfa-0b94-deee-1dd3-2f3cf2887a25@suse.com>
-Date: Tue, 3 Sep 2019 14:22:29 +0200
+Message-ID: <b0dff6e4-a5be-445d-76db-cbe923484a92@suse.com>
+Date: Tue, 3 Sep 2019 14:25:51 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
  Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <0ff95d72-b647-4dad-40c5-a47a810fc172@citrix.com>
+In-Reply-To: <59fc6a13-6008-e537-6bfd-51fd97df676c@citrix.com>
 Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH v3 2/8] x86/HVM: ignore guest INVD uses
+Subject: Re: [Xen-devel] [PATCH v3 5/8] x86emul: support MOVDIR{I, 64B} insns
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,33 +59,22 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Paul Durrant <Paul.Durrant@citrix.com>, Wei Liu <wl@xen.org>,
- Roger Pau Monne <roger.pau@citrix.com>
+ Wei Liu <wl@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMDMuMDkuMjAxOSAxMjoxOCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwMy8wOS8yMDE5
-IDEwOjM3LCBKYW4gQmV1bGljaCB3cm90ZToKPj4gVGhlIG9ubHkgcGxhY2Ugd2UnZCBleHBlY3Qg
-dGhlIGluc24gdG8gYmUgc2Vuc2libHkgdXNlZCBpcyBpbgo+PiAodmlydHVhbGl6YXRpb24gdW5h
-d2FyZSkgZmlybXdhcmUuCj4+Cj4+IFN1Z2dlc3RlZC1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3
-LmNvb3BlcjNAY2l0cml4LmNvbT4KPj4gU2lnbmVkLW9mZi1ieTogSmFuIEJldWxpY2ggPGpiZXVs
-aWNoQHN1c2UuY29tPgo+PiAtLS0KPj4gdjM6IE5ldy4KPj4KPj4gLS0tIGEveGVuL2FyY2gveDg2
-L2h2bS9lbXVsYXRlLmMKPj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9lbXVsYXRlLmMKPj4gQEAg
-LTIyMTAsMTEgKzIyMTAsMTggQEAgc3RhdGljIGludCBodm1lbXVsX2NhY2hlX29wKAo+PiAgCj4+
-ICAgICAgICAgIGh2bWVtdWxfdW5tYXBfbGluZWFyX2FkZHIobWFwcGluZywgYWRkciwgMCwgaHZt
-ZW11bF9jdHh0KTsKPj4gICAgICAgICAgLyogZmFsbCB0aHJvdWdoICovCj4+IC0gICAgY2FzZSB4
-ODZlbXVsX2ludmQ6Cj4+ICAgICAgY2FzZSB4ODZlbXVsX3diaW52ZDoKPj4gICAgICBjYXNlIHg4
-NmVtdWxfd2Jub2ludmQ6Cj4+ICAgICAgICAgIGFsdGVybmF0aXZlX3ZjYWxsKGh2bV9mdW5jcy53
-YmludmRfaW50ZXJjZXB0KTsKPj4gICAgICAgICAgYnJlYWs7Cj4+ICsKPj4gKyAgICBjYXNlIHg4
-NmVtdWxfaW52ZDoKPj4gKyAgICAgICAgLyoKPj4gKyAgICAgICAgICogRGVsaWJlcmF0ZWx5IGln
-bm9yZWQ6IFdlIGRvbid0IHdhbnQgdG8gaXNzdWUgSU5WRCwgYW5kIGlzc3VpbmcgV0JJTlZECj4g
-Cj4gSSdkIHBocmFzZSB0aGlzIG1vcmUgc3Ryb25nbHkuwqAgV2UgYWJzb2x1dGVseSBtdXN0IG5v
-dCBpc3N1ZSBJTlZEIG9yIHdlCj4gYnJlYWsgY2FjaGUgY29oZXJlbmN5Lgo+IAo+IElkZWFsbHkg
-d2l0aCB0aGlzIGFkanVzdGVkLCBSZXZpZXdlZC1ieTogQW5kcmV3IENvb3Blcgo+IDxhbmRyZXcu
-Y29vcGVyM0BjaXRyaXguY29tPgoKVGhhbmtzLCBJJ3ZlIHJlcGxhY2VkICJkb24ndCB3YW50IHRv
-IiB3aXRoICJtdXN0bid0Ii4KCkphbgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3hlbi1kZXZlbA==
+T24gMDMuMDkuMjAxOSAxMjoyOCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBPbiAwMy8wOS8yMDE5
+IDEwOjM5LCBKYW4gQmV1bGljaCB3cm90ZToKPj4gTm90ZSB0aGF0IFNETSByZXZpc2lvbiAwNzAg
+ZG9lc24ndCBzcGVjaWZ5IGV4Y2VwdGlvbiBiZWhhdmlvciBmb3IKPj4gTW9kUk0ubW9kICE9IDBi
+MTE7IGFzc3VtaW5nICNVRCBoZXJlLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5OiBKYW4gQmV1bGljaCA8
+amJldWxpY2hAc3VzZS5jb20+Cj4gCj4gV2hhdCBhcmUgd2UgZ29pbmcgdG8gZG8gYWJvdXQgdGhl
+IC0+d3JpdGUoKSBob29rIGF0b21pY2l0eT/CoCBJJ20gaGFwcHkKPiB0byBwdXQgaXQgb24gdGhl
+IFRPRE8gbGlzdCwgYnV0IHdlIGNhbid0IHNpbXBseSBpZ25vcmUgdGhlIHByb2JsZW0uCgpTbyBk
+byB5b3Ugbm90IGFncmVlIHdpdGggbXkgYXNzZXNzbWVudCB0aGF0IG91ciBtZW1jcHkoKQppbXBs
+ZW1lbnRhdGlvbiBzYXRpc2ZpZXMgdGhlIG5lZWQsIGFuZCBpdCdzIGp1c3Qgbm90IHZlcnkKbmlj
+ZSB0aGF0IHRoZSAtPndyaXRlKCkgaG9vayBpcyBkZXBlbmRlbnQgdXBvbiB0aGlzPwoKSmFuCgpf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwg
+bWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3Rz
+LnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
