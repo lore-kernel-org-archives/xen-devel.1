@@ -2,50 +2,53 @@ Return-Path: <SRS0=pR42=W7=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E2C7C3A5A7
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2019 11:30:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C2B7C3A5A7
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2019 11:30:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6877F22DBF
-	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2019 11:30:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6877F22DBF
+	by mail.kernel.org (Postfix) with ESMTPS id 6B2E423401
+	for <xen-devel@archiver.kernel.org>; Wed,  4 Sep 2019 11:30:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B2E423401
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1i5TUR-0006Rc-5g; Wed, 04 Sep 2019 11:30:19 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1i5TUR-0006S6-NI; Wed, 04 Sep 2019 11:30:19 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=WgxQ=W7=citrix.com=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1i5TUQ-0006RJ-39
+ id 1i5TUQ-0006RT-Cw
  for xen-devel@lists.xenproject.org; Wed, 04 Sep 2019 11:30:18 +0000
-X-Inumbo-ID: 5e1d4230-cf07-11e9-abb0-12813bfff9fa
+X-Inumbo-ID: 5ef17406-cf07-11e9-978d-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5e1d4230-cf07-11e9-abb0-12813bfff9fa;
- Wed, 04 Sep 2019 11:30:16 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 5ef17406-cf07-11e9-978d-bc764e2007e4;
+ Wed, 04 Sep 2019 11:30:17 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <lars.kurth@citrix.com>)
- id 1i5TUM-0005bw-TW; Wed, 04 Sep 2019 11:30:14 +0000
+ id 1i5TUO-0005c2-7t; Wed, 04 Sep 2019 11:30:16 +0000
 Received: from localhost ([127.0.0.1] helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <lars.kurth@citrix.com>)
- id 1i5TUM-0004TJ-MR; Wed, 04 Sep 2019 11:30:14 +0000
+ id 1i5TUO-0004TJ-0H; Wed, 04 Sep 2019 11:30:16 +0000
 From: Lars Kurth <lars.kurth@citrix.com>
 To: xen-devel@lists.xenproject.org
-Date: Wed,  4 Sep 2019 12:30:07 +0100
-Message-Id: <cover.8155a0a9d3da9781c83c5eaf5718c901934174f8.1567596460.git-series.lars.kurth@citrix.com>
+Date: Wed,  4 Sep 2019 12:30:08 +0100
+Message-Id: <0944333a4a0b503789d10afa63f8229bd0441290.1567596460.git-series.lars.kurth@citrix.com>
 X-Mailer: git-send-email 2.13.0
-Subject: [Xen-devel] [PATCH v4 0/3] Allow get_maintainer.pl /
- add_maintainers.pl scripts to be called outside of xen.git
+In-Reply-To: <cover.8155a0a9d3da9781c83c5eaf5718c901934174f8.1567596460.git-series.lars.kurth@citrix.com>
+References: <cover.8155a0a9d3da9781c83c5eaf5718c901934174f8.1567596460.git-series.lars.kurth@citrix.com>
+In-Reply-To: <cover.8155a0a9d3da9781c83c5eaf5718c901934174f8.1567596460.git-series.lars.kurth@citrix.com>
+References: <cover.8155a0a9d3da9781c83c5eaf5718c901934174f8.1567596460.git-series.lars.kurth@citrix.com>
+Subject: [Xen-devel] [PATCH v4 1/3] Remove hardcoding from
+ scripts/add_maintainers.pl
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -69,32 +72,18 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-VXNlLWNhc2U6IEFsbG93IHVzaW5nIGJvdGggc2NyaXB0cyBvbiB4ZW4gcmVwb3NpdG9yaWVzIHN1
-Y2ggYXMKbWluaS1vcy5naXQsIG9zc3Rlc3QuZ2l0LAoKQXNzdW1wdGlvbnM6IHRoZSByZXBvc2l0
-b3J5IGNvbnRhaW5zIGEgTUFJTlRBSU5FUlMgZmlsZSB0aGF0CmZvbGxvd3MgdGhlIHNhbWUgY29u
-dmVudGlvbnMgYXMgdGhlIGZpbGUgaW4geGVuLmdpdAoKQSBzdWdnZXN0ZWQgdGVtcGxhdGUgZm9y
-IHNpc3RlciByZXBvc2l0b3JpZXMgb2YgWGVuCgo9PT09PT09PT09PT09PT09PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PQpUaGlzIGZpbGUgZm9sbG93cyB0aGUgc2FtZSBj
-b252ZW50aW9ucyBhcyBvdXRsaW5lZCBpbgp4ZW4uZ2l0Ok1BSU5UQUlORVJTLiBQbGVhc2UgcmVm
-ZXIgdG8gdGhlIGZpbGUgaW4geGVuLmdpdApmb3IgbW9yZSBpbmZvcm1hdGlvbi4KClRIRSBSRVNU
-Ck06CU1BSU5UQUlORVIxIDxtYWludGFpbmVyMUBlbWFpbC5jb20+Ck06CU1BSU5UQUlORVIyIDxt
-YWludGFpbmVyMkBlbWFpbC5jb20+Ckw6CXhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpT
-OglTdXBwb3J0ZWQKRjoJKgpGOgkqLwpWOgl4ZW4tbWFpbnRhaW5lcnMtMQo9PT09PT09PT09PT09
-PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PQoKQ2hhbmdlcyBpbiB2
-MjoKKiBSZW1vdmUgZGVidWcgbWVzc2FnZQoKQ2hhbmdlcyBpbiB2MzoKKiBTcGxpdCBwYXRjaAoq
-IGFkZF9tYWludGFpbmVycy5wbDogZG8gbm90IGlzc3VlIGEgd2FybmluZwoqIGFkZF9tYWludGFp
-bmVycy5wbDogaW50cm9kdWNlIHByb2Nlc3NpbmcgbG9naWMgZm9yIFY6IHRhZwoqIE1BSU5UQUlO
-RVJTOiBBZGQgVjogdGFnIHRvIGZpbGUKCkNoYW5nZXMgaW4gdjQ6CiogUmVtb3ZlZCB0YWJzIGFu
-ZCBmaXhlZCB0eXBvCiogUmVtb3ZlZCB1bnVzZWQgdmFyaWFibGUKCkxhcnMgS3VydGggKDMpOgog
-IFJlbW92ZSBoYXJkY29kaW5nIGZyb20gc2NyaXB0cy9hZGRfbWFpbnRhaW5lcnMucGwKICBBZGQg
-ViBzZWN0aW9uIGVudHJ5IHRvIGFsbG93IGlkZW50aWZpY2F0aW9uIG9mIFhlbiBNQUlOVEFJTkVS
-UyBmaWxlCiAgQWRkIGxvZ2ljIHRvIHVzZSBWIHNlY3Rpb24gZW50cnkgaW4gVEhFIFJFU1QgZm9y
-IGlkZW50aWZ5aW5nIHhlbiB0cmVlcwoKIE1BSU5UQUlORVJTICAgICAgICAgICAgICAgIHwgIDQg
-KysrLQogc2NyaXB0cy9hZGRfbWFpbnRhaW5lcnMucGwgfCAgNCArLS0KIHNjcmlwdHMvZ2V0X21h
-aW50YWluZXIucGwgIHwgNTcgKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0t
-CiAzIGZpbGVzIGNoYW5nZWQsIDQxIGluc2VydGlvbnMoKyksIDI0IGRlbGV0aW9ucygtKQoKYmFz
-ZS1jb21taXQ6IDZjOTYzOWE3MmYwY2EzYTk0MzBlZjc1ZjM3NTg3NzE4MjI4MWZkZWYKLS0gCmdp
-dC1zZXJpZXMgMC45LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qu
-b3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2
-ZWw=
+SW5zdGVhZCBvZiB1c2luZyBhIGhhcmRjb2RlZCBsb2NhdGlvbiwgaW5oZXJpdCB0aGUKbG9jYXRp
+b24gZnJvbSAkMAoKU2lnbmVkLW9mZi1ieTogTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXgu
+Y29tPgotLS0KIHNjcmlwdHMvYWRkX21haW50YWluZXJzLnBsIHwgNCArKy0tCiAxIGZpbGUgY2hh
+bmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL3Njcmlw
+dHMvYWRkX21haW50YWluZXJzLnBsIGIvc2NyaXB0cy9hZGRfbWFpbnRhaW5lcnMucGwKaW5kZXgg
+MDllOWY2Ni4uNWE2ZDBmNiAxMDA3NTUKLS0tIGEvc2NyaXB0cy9hZGRfbWFpbnRhaW5lcnMucGwK
+KysrIGIvc2NyaXB0cy9hZGRfbWFpbnRhaW5lcnMucGwKQEAgLTI2LDkgKzI2LDkgQEAgc3ViIGlu
+c2VydCAoJCQkJCk7CiBzdWIgaGFzdGFnICgkJCk7CiAKICMgVG9vbCBWYXJpYWJsZXMKLW15ICRn
+ZXRfbWFpbnRhaW5lciAgICAgID0gIi4vc2NyaXB0cy9nZXRfbWFpbnRhaW5lci5wbCI7Ci0KIG15
+ICR0b29sID0gJDA7CitteSAkZ2V0X21haW50YWluZXIgPSAkdG9vbDsKKyRnZXRfbWFpbnRhaW5l
+ciA9fiBzL2FkZF9tYWludGFpbmVycy9nZXRfbWFpbnRhaW5lci87CiBteSAkdXNhZ2UgPSA8PEVP
+VDsKIE9QVElPTlM6CiAtLS0tLS0tLQotLSAKZ2l0LXNlcmllcyAwLjkuMQoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
