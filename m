@@ -7,72 +7,72 @@ X-Spam-Status: No, score=0.5 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 24760C4CECD
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2019 08:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B329C4CEC9
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2019 08:41:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E127920678
-	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2019 08:27:22 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1A2C821670
+	for <xen-devel@archiver.kernel.org>; Tue, 17 Sep 2019 08:41:02 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="bPXFCTN4"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E127920678
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="WFO8TDC4"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A2C821670
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iA8pL-0001oJ-8J; Tue, 17 Sep 2019 08:27:11 +0000
+	id 1iA92U-0004G9-2a; Tue, 17 Sep 2019 08:40:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=os7l=XM=amazon.de=prvs=156cae3ca=wipawel@srs-us1.protection.inumbo.net>)
- id 1iA8pK-0001o6-AG
- for xen-devel@lists.xen.org; Tue, 17 Sep 2019 08:27:10 +0000
-X-Inumbo-ID: ef329e24-d924-11e9-9604-12813bfff9fa
-Received: from smtp-fw-6001.amazon.com (unknown [52.95.48.154])
+ id 1iA92T-0004G4-9p
+ for xen-devel@lists.xenproject.org; Tue, 17 Sep 2019 08:40:45 +0000
+X-Inumbo-ID: d5fcc4f0-d926-11e9-9604-12813bfff9fa
+Received: from smtp-fw-33001.amazon.com (unknown [207.171.190.10])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ef329e24-d924-11e9-9604-12813bfff9fa;
- Tue, 17 Sep 2019 08:27:06 +0000 (UTC)
+ id d5fcc4f0-d926-11e9-9604-12813bfff9fa;
+ Tue, 17 Sep 2019 08:40:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
- t=1568708826; x=1600244826;
+ t=1568709643; x=1600245643;
  h=from:to:cc:subject:date:message-id:references:
  in-reply-to:mime-version;
- bh=DUiI/ZIFtKW2M+6vv8dqbcOMSdYkfPxaNDFmuWpEVNI=;
- b=bPXFCTN4yosXSwQFw0DOSSdNu6b75IGJZ6JPjIMbbgshVv9ixS927+jf
- 8Xy/tMgJBkUO/Z0NO/tCW96gCJLQvaT8Mt8Zf0wjMN7rSplqoJACvO2Wi
- zSIhJWHnslXeQUSlCN/yIA8bhY2Y+tnYbY8bLvy9Mq1vydHy+y6/t0M2K g=;
+ bh=SlHqPh1+zr8m6ThcrQxEzeo6DsxDWHShw//nw+bE8io=;
+ b=WFO8TDC4ky1G+BzeFJcoh+0iHk30B3rESXh4L6BNM++nn/QyG3ywg9B5
+ KwRnOBxFYMMP7/O/w3f+VAg1xENDOqZCeqizVtUW+ggFL3xahdNya7TdF
+ u00ykyb25SffYY/2XotR27OHWsPIR4clS45uuF4w5wQOWVONSSGeFiqB3 Y=;
 X-IronPort-AV: E=Sophos;i="5.64,515,1559520000"; 
- d="scan'208,217";a="415625079"
-Received: from iad6-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-1a-715bee71.us-east-1.amazon.com) ([10.124.125.6])
- by smtp-border-fw-out-6001.iad6.amazon.com with ESMTP;
- 17 Sep 2019 08:27:05 +0000
+ d="scan'208,217";a="833130635"
+Received: from sea3-co-svc-lb6-vlan2.sea.amazon.com (HELO
+ email-inbound-relay-2a-53356bf6.us-west-2.amazon.com) ([10.47.22.34])
+ by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP;
+ 17 Sep 2019 08:40:25 +0000
 Received: from EX13MTAUEA001.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan2.iad.amazon.com [10.40.159.162])
- by email-inbound-relay-1a-715bee71.us-east-1.amazon.com (Postfix) with ESMTPS
- id C6539A283F; Tue, 17 Sep 2019 08:27:02 +0000 (UTC)
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2a-53356bf6.us-west-2.amazon.com (Postfix) with ESMTPS
+ id 9BBFFA1C11; Tue, 17 Sep 2019 08:40:24 +0000 (UTC)
 Received: from EX13D05EUB002.ant.amazon.com (10.43.166.45) by
- EX13MTAUEA001.ant.amazon.com (10.43.61.82) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Tue, 17 Sep 2019 08:27:01 +0000
+ EX13MTAUEA001.ant.amazon.com (10.43.61.243) with Microsoft SMTP Server (TLS)
+ id 15.0.1367.3; Tue, 17 Sep 2019 08:40:24 +0000
 Received: from EX13D05EUB004.ant.amazon.com (10.43.166.115) by
  EX13D05EUB002.ant.amazon.com (10.43.166.45) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Tue, 17 Sep 2019 08:27:00 +0000
+ id 15.0.1367.3; Tue, 17 Sep 2019 08:40:23 +0000
 Received: from EX13D05EUB004.ant.amazon.com ([10.43.166.115]) by
  EX13D05EUB004.ant.amazon.com ([10.43.166.115]) with mapi id 15.00.1367.000;
- Tue, 17 Sep 2019 08:27:00 +0000
+ Tue, 17 Sep 2019 08:40:23 +0000
 From: "Wieczorkiewicz, Pawel" <wipawel@amazon.de>
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Thread-Topic: [PATCH v3 02/12] livepatch: Allow to override inter-modules
- buildid dependency
-Thread-Index: AQHVbH5iod7scPDMWUS0xYtrrp51Bqcuh86AgAECjwA=
-Date: Tue, 17 Sep 2019 08:27:00 +0000
-Message-ID: <F77F272E-18F8-4BFC-A6B6-6999F8149884@amazon.com>
+To: Jan Beulich <jbeulich@suse.com>
+Thread-Topic: [PATCH v3 10/12] livepatch: Handle arbitrary size names with the
+ list operation
+Thread-Index: AQHVbH5t2E3epIAMpU+MF4amoCEai6cvil0AgAADvAA=
+Date: Tue, 17 Sep 2019 08:40:23 +0000
+Message-ID: <26B651C9-2FA3-491A-A383-E4A4FFB3650D@amazon.com>
 References: <20190916105945.93632-1-wipawel@amazon.de>
- <20190916105945.93632-3-wipawel@amazon.de>
- <559ee54f-c962-1f3f-8291-9b5a1a6f9591@citrix.com>
-In-Reply-To: <559ee54f-c962-1f3f-8291-9b5a1a6f9591@citrix.com>
+ <20190916105945.93632-11-wipawel@amazon.de>
+ <fb181faf-76e2-57c9-ac1e-7f56a195f9ef@suse.com>
+In-Reply-To: <fb181faf-76e2-57c9-ac1e-7f56a195f9ef@suse.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -82,8 +82,8 @@ x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [10.43.164.196]
 MIME-Version: 1.0
 Precedence: Bulk
-Subject: Re: [Xen-devel] [PATCH v3 02/12] livepatch: Allow to override
- inter-modules buildid dependency
+Subject: Re: [Xen-devel] [PATCH v3 10/12] livepatch: Handle arbitrary size
+ names with the list operation
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -93,480 +93,201 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Tim Deegan <tim@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei
+ Liu <wl@xen.org>, Ross Lagerwall <ross.lagerwall@citrix.com>,
  George Dunlap <George.Dunlap@eu.citrix.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel <xen-devel@lists.xen.org>,
- "Pohlack, Martin" <mpohlack@amazon.de>, "Wieczorkiewicz,
- Pawel" <wipawel@amazon.de>, Julien Grall <julien.grall@arm.com>,
- Jan Beulich <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: multipart/mixed; boundary="===============1773182903284956334=="
+ KonradRzeszutek Wilk <konrad.wilk@oracle.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>, "Pohlack,
+ Martin" <mpohlack@amazon.de>, "Wieczorkiewicz, Pawel" <wipawel@amazon.de>,
+ Julien Grall <julien.grall@arm.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: multipart/mixed; boundary="===============8613951551033072656=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============1773182903284956334==
+--===============8613951551033072656==
 Content-Language: en-US
 Content-Type: multipart/alternative;
-	boundary="_000_F77F272E18F84BFCA6B66999F8149884amazoncom_"
+	boundary="_000_26B651C92FA3491AA383E4A4FFB3650Damazoncom_"
 
---_000_F77F272E18F84BFCA6B66999F8149884amazoncom_
-Content-Type: text/plain; charset="us-ascii"
+--_000_26B651C92FA3491AA383E4A4FFB3650Damazoncom_
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 
+DQoNCk9uIDE3LiBTZXAgMjAxOSwgYXQgMTA6MjcsIEphbiBCZXVsaWNoIDxqYmV1bGljaEBzdXNl
+LmNvbTxtYWlsdG86amJldWxpY2hAc3VzZS5jb20+PiB3cm90ZToNCg0KT24gMTYuMDkuMjAxOSAx
+Mjo1OSwgUGF3ZWwgV2llY3pvcmtpZXdpY3ogd3JvdGU6DQpAQCAtOTUxLDExICs5NTIsMTMgQEAg
+c3RydWN0IHhlbl9zeXNjdGxfbGl2ZXBhdGNoX2xpc3Qgew0KICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBhbW91bnQgb2YgcGF5bG9hZHMgYW5kIHZlcnNpb24u
+DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE9VVDogSG93
+IG1hbnkgcGF5bG9hZHMgbGVmdC4gKi8NCiAgICB1aW50MzJfdCBwYWQ7ICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgLyogSU46IE11c3QgYmUgemVyby4gKi8NCisgICAgdWludDY0X3QgbmFtZV90
+b3RhbF9zaXplOyAgICAgICAgICAgICAgIC8qIE9VVDogVG90YWwgc2l6ZSBvZiBhbGwgdHJhbnNm
+ZXIgbmFtZXMgKi8NCg0KV2h5IHVpbnQ2NF90IGFuZCBub3QgdWludDMyX3Q/IFlvdSBkb24ndCBl
+eHBlY3QgdGhpcyB0byBncm93DQpiZXlvbmQgNEdpQiwgZG8geW91Pw0KDQpJIGRvbuKAmXQsIGJ1
+dCB1aW50MzJfdCBpcyBub3QgcmVhbGx5IGNvbXBhdGlibGUgd2l0aCBzaXplX3QuDQpBbmQgSSB3
+YXMgdGhvdWdodCB0byBhbHdheXMgdXNlIHNpemVfdCBjb21wYXRpYmxlIHR5cGVzIGZvciBzaXpl
+cy4NCg0KQW55d2F5LCBJIGRvIG5vdCBtaW5kIGNoYW5naW5nIHRoaXMgdG8gd2hhdGV2ZXIgdHlw
+ZSB5b3UgcHJlZmVyLg0KDQoNCkFuZCB3aHkgT1VUIHJhdGhlciB0aGFuIElOL09VVD8gT25jZSB5
+b3UgbWFrZSB0aGlzICJhcmJpdHJhcnkNCnNpemUiLCBJIGRvbid0IHNlZSBhIG5lZWQgZm9yIGxp
+bWl0aW5nIHRoaXMgdG8gLi4uDQoNCiAgICBYRU5fR1VFU1RfSEFORExFXzY0KHhlbl9saXZlcGF0
+Y2hfc3RhdHVzX3QpIHN0YXR1czsgIC8qIE9VVC4gTXVzdCBoYXZlIGVub3VnaA0KICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzcGFjZSBhbGxvY2F0ZSBmb3Ig
+bnIgb2YgdGhlbS4gKi8NCiAgICBYRU5fR1VFU1RfSEFORExFXzY0KGNoYXIpIG5hbWU7ICAgICAg
+ICAgLyogT1VUOiBBcnJheSBvZiBuYW1lcy4gRWFjaCBtZW1iZXINCi0gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1VU1QgWEVOX0xJVkVQQVRDSF9OQU1FX1NJ
+WkUgaW4gc2l6ZS4NCi0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIE11c3QgaGF2ZSBuciBvZiB0aGVtLiAqLw0KKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgbWF5IGhhdmUgYW4gYXJiaXRyYXJ5IGxlbmd0aCB1cCB0bw0K
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgWEVOX0xJVkVQ
+QVRDSF9OQU1FX1NJWkUgYnl0ZXMuIE11c3QgaGF2ZQ0KKyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgbnIgb2YgdGhlbS4gKi8NCg0KLi4uIFhFTl9MSVZFUEFU
+Q0hfTkFNRV9TSVpFIGJ5dGVzIHBlciBlbnRyeS4NCg0KQ2hhbmdpbmcgdGhlIHVwcGVyIGJvdW5k
+IGxpbWl0YXRpb24gd2lsbCBicmVhayBjZXJ0YWluIGFzc3VtcHRpb25zIGFuZCBJIGRpZCBub3Qg
+d2FudCB0byBwaWxlIGFsbCB0aGVzZSBvbiB0b3Agb2YgdGhlIGN1cnJlbnQgY2hhbmdlLg0KQnV0
+LCB5ZXMsIHRoZSB1cHBlciBib3VuZCBsaW1pdCBjb3VsZCBiZSBkcm9wcGVkLiBJIHdvdWxkIHBy
+ZWZlciB0byBkbyBpdCBhcyBhbiBpbmRlcGVuZGVudCBwYXRjaC4NCg0KDQpBbmQgZmluYWxseSAt
+IHBsZWFzZSBzZW5kIHRvIHRoZSBsaXN0IGp1c3Qgb25jZSwgaS5lLiBwbGVhc2UNCmRvbid0IGhh
+dmUgdHdvIHhlbi1kZXZlbEAgaW4gdGhlIHJlY2lwaWVudHMgbGlzdC4NCg0KDQpTb3JyeSwgSSBk
+aWQgbm90IG5vdGljZSB0aGUgYWRkX21haW50YWluZXJzLnBsIHNjcmlwdCBhZGRzIGFuIGV4cGxp
+Y2l0IFRvOiBmb3IgdGhlIHhlbi1kZXZlbEAuDQoNCkphbg0KDQpCZXN0IFJlZ2FyZHMsDQpQYXdl
+bCBXaWVjem9ya2lld2ljeg0KDQoNCg0KCgoKQW1hem9uIERldmVsb3BtZW50IENlbnRlciBHZXJt
+YW55IEdtYkgKS3JhdXNlbnN0ci4gMzgKMTAxMTcgQmVybGluCkdlc2NoYWVmdHNmdWVocnVuZzog
+Q2hyaXN0aWFuIFNjaGxhZWdlciwgUmFsZiBIZXJicmljaApFaW5nZXRyYWdlbiBhbSBBbXRzZ2Vy
+aWNodCBDaGFybG90dGVuYnVyZyB1bnRlciBIUkIgMTQ5MTczIEIKU2l0ejogQmVybGluClVzdC1J
+RDogREUgMjg5IDIzNyA4NzkKCgo=
 
-
-On 16. Sep 2019, at 19:01, Ross Lagerwall <ross.lagerwall@citrix.com<mailto=
-:ross.lagerwall@citrix.com>> wrote:
-
-On 9/16/19 11:59 AM, Pawel Wieczorkiewicz wrote:
-snip
-+/*
-+ * Parse user provided action flags.
-+ * This function expects to only receive an array of input parameters bein=
-g flags.
-+ * Expected action is specified via idx paramater (index of flag_options[]=
-).
-+ */
-+static int get_flags(int argc, char *argv[], unsigned int idx, uint64_t *f=
-lags)
-+{
-+    int i, j;
-+
-+    if ( !flags || idx >=3D ARRAY_SIZE(flag_options) )
-+        return -1;
-+
-+    *flags =3D 0;
-+    for ( i =3D 0; i < argc; i++ )
-+    {
-+        for ( j =3D 0; j < ARRAY_SIZE(flag_options[idx]); j++ )
-+        {
-+            if ( !flag_options[idx][j].name )
-+                goto error;
-+
-+            if ( !strcmp(flag_options[idx][j].name, argv[i]) )
-+            {
-+                *flags |=3D flag_options[idx][j].flag;
-+                break;
-+            }
-+        }
-+
-+        if ( j =3D=3D ARRAY_SIZE(flag_options[idx]) )
-+            goto error;
-+    }
-+
-+    return 0;
-+error:
-+    fprintf(stderr, "Unsupported flag: %s.\n", argv[i]);
-+    errno =3D EINVAL;
-+    return errno;
-+}
-
-You return -1 above but +ve errno here. Please make it consistent.
-
-Well, I understood from the code of the file (e.g. action_func()) that the =
--1 value indicates a unexpected runtime error (negative val).
-Whereas, positive errno values are expected error to be dealt with.
-
-So:
-<0 - fatal errors
-0 - ok
->0 - errors to be handled
-
-Could you confirm please that I should make get_flags() return only positiv=
-e errors?
-
-Also, you don't need to set errno if returning the actual error.
-
-
-Honestly, I just copied the code from get_name() and wanted to the get_flag=
-s() to follow similar pattern.
-
-(The error handling in this file looks fairly inconsistent anyway but let's=
- not make it worse.)
-
-+
- /* The hypervisor timeout for the live patching operation is 30 msec,
-  * but it could take some time for the operation to start, so wait twice
-  * that period. */
-@@ -291,8 +357,9 @@ int action_func(int argc, char *argv[], unsigned int id=
-x)
-     char name[XEN_LIVEPATCH_NAME_SIZE];
-     int rc;
-     xen_livepatch_status_t status;
-+    uint64_t flags;
- -    if ( argc !=3D 1 )
-+    if ( argc < 1 )
-     {
-         show_help();
-         return -1;
-@@ -301,7 +368,10 @@ int action_func(int argc, char *argv[], unsigned int i=
-dx)
-     if ( idx >=3D ARRAY_SIZE(action_options) )
-         return -1;
- -    if ( get_name(argc, argv, name) )
-+    if ( get_name(argc--, argv++, name) )
-+        return EINVAL;
-+
-+    if ( get_flags(argc, argv, idx, &flags) )
-         return EINVAL;
-       /* Check initial status. */
-@@ -332,7 +402,7 @@ int action_func(int argc, char *argv[], unsigned int id=
-x)
-     if ( action_options[idx].allow & status.state )
-     {
-         printf("%s %s... ", action_options[idx].verb, name);
--        rc =3D action_options[idx].function(xch, name, HYPERVISOR_TIMEOUT_=
-NS);
-+        rc =3D action_options[idx].function(xch, name, HYPERVISOR_TIMEOUT_=
-NS, flags);
-         if ( rc )
-         {
-             int saved_errno =3D errno;
-@@ -394,17 +464,23 @@ int action_func(int argc, char *argv[], unsigned int =
-idx)
-   static int load_func(int argc, char *argv[])
- {
--    int rc;
--    char *new_argv[2];
--    char *path, *name, *lastdot;
-+    int i, rc =3D ENOMEM;
-+    char *upload_argv[2];
-+    char **apply_argv, *path, *name, *lastdot;
- -    if ( argc !=3D 1 )
-+    if ( argc < 1 )
-     {
-         show_help();
-         return -1;
-     }
-+
-+    /* apply action has <id> [flags] input requirement, which must be cons=
-tructed */
-+    apply_argv =3D (char **) malloc(argc * sizeof(*apply_argv));
-+    if ( !apply_argv )
-+        return rc;
-+
-     /* <file> */
--    new_argv[1] =3D argv[0];
-+    upload_argv[1] =3D argv[0];
-       /* Synthesize the <id> */
-     path =3D strdup(argv[0]);
-@@ -413,16 +489,23 @@ static int load_func(int argc, char *argv[])
-     lastdot =3D strrchr(name, '.');
-     if ( lastdot !=3D NULL )
-         *lastdot =3D '\0';
--    new_argv[0] =3D name;
-+    upload_argv[0] =3D name;
-+    apply_argv[0] =3D name;
- -    rc =3D upload_func(2 /* <id> <file> */, new_argv);
-+    /* Fill in all user provided flags */
-+    for ( i =3D 0; i < argc - 1; i++ )
-+        apply_argv[i + 1] =3D argv[i + 1];
-
-Wouldn't this make the loop body simpler?  i =3D 1; i < argc;
-
-
-ACK. It would indeed.
-
-Or alternatively, just a straight memcpy().
-
---
-Ross Lagerwall
-
-Best Regards,
-Pawel Wieczorkiewicz
-
-
-
-Amazon Development Center Germany GmbH
-Krausenstr. 38
-10117 Berlin
-Geschaeftsfuehrung: Christian Schlaeger, Ralf Herbrich
-Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-Sitz: Berlin
-Ust-ID: DE 289 237 879
-
-
-
---_000_F77F272E18F84BFCA6B66999F8149884amazoncom_
-Content-Type: text/html; charset="us-ascii"
-Content-ID: <C4D61DA5182E0B4D8A9A02F16679B31F@amazon.com>
+--_000_26B651C92FA3491AA383E4A4FFB3650Damazoncom_
+Content-Type: text/html; charset="utf-8"
+Content-ID: <6BAB59B47EFAC445BD9AAE5F2F4E9314@amazon.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 
-<html>
-<head>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii">
-</head>
-<body style=3D"word-wrap: break-word; -webkit-nbsp-mode: space; line-break:=
- after-white-space;" class=3D"">
-<br class=3D"">
-<div><br class=3D"">
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">On 16. Sep 2019, at 19:01, Ross Lagerwall &lt;<a href=3D"ma=
-ilto:ross.lagerwall@citrix.com" class=3D"">ross.lagerwall@citrix.com</a>&gt=
-; wrote:</div>
-<br class=3D"Apple-interchange-newline">
-<div class=3D"">
-<div class=3D"">On 9/16/19 11:59 AM, Pawel Wieczorkiewicz wrote:<br class=
-=3D"">
-snip<br class=3D"">
-<blockquote type=3D"cite" class=3D"">&#43;/*<br class=3D"">
-&#43; * Parse user provided action flags.<br class=3D"">
-&#43; * This function expects to only receive an array of input parameters =
-being flags.<br class=3D"">
-&#43; * Expected action is specified via idx paramater (index of flag_optio=
-ns[]).<br class=3D"">
-&#43; */<br class=3D"">
-&#43;static int get_flags(int argc, char *argv[], unsigned int idx, uint64_=
-t *flags)<br class=3D"">
-&#43;{<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;int i, j;<br class=3D"">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;if ( !flags || idx &gt;=3D ARRAY_SIZE(flag_options)=
- )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1;<br class=3D"">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;*flags =3D 0;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;for ( i =3D 0; i &lt; argc; i&#43;&#43; )<br class=
-=3D"">
-&#43; &nbsp;&nbsp;&nbsp;{<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for ( j =3D 0; j &lt; ARRAY=
-_SIZE(flag_options[idx]); j&#43;&#43; )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if =
-( !flag_options[idx][j].name )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;goto error;<br class=3D"">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if =
-( !strcmp(flag_options[idx][j].name, argv[i]) )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<b=
-r class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;*flags |=3D flag_options[idx][j].flag;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;&nbsp;&nbsp;&nbsp;break;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<b=
-r class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br class=3D"">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( j =3D=3D ARRAY_SIZE(fl=
-ag_options[idx]) )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;got=
-o error;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;}<br class=3D"">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;return 0;<br class=3D"">
-&#43;error:<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;fprintf(stderr, &quot;Unsupported flag: %s.\n&quot;=
-, argv[i]);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;errno =3D EINVAL;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;return errno;<br class=3D"">
-&#43;}<br class=3D"">
-</blockquote>
-<br class=3D"">
-You return -1 above but &#43;ve errno here. Please make it consistent.<br c=
-lass=3D"">
-</div>
-</div>
-</blockquote>
-<div><br class=3D"">
-</div>
-<div>Well, I understood from the code of the file (e.g. action_func()) that=
- the -1 value indicates a unexpected runtime error (negative val).</div>
-<div>Whereas, positive errno values are expected error to be dealt with.</d=
-iv>
-<div><br class=3D"">
-</div>
-<div>So:</div>
-<div>&lt;0 - fatal errors</div>
-<div>0 - ok</div>
-<div>&gt;0 - errors to be handled</div>
-<div><br class=3D"">
-</div>
-<div>Could you confirm please that I should make get_flags() return only po=
-sitive errors?</div>
-<br class=3D"">
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">
-<div class=3D"">Also, you don't need to set errno if returning the actual e=
-rror.<br class=3D"">
-<br class=3D"">
-</div>
-</div>
-</blockquote>
-<br class=3D"">
-<div>Honestly, I just copied the code from get_name() and wanted to the get=
-_flags() to follow similar pattern.</div>
-<br class=3D"">
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">
-<div class=3D"">(The error handling in this file looks fairly inconsistent =
-anyway but let's not make it worse.)<br class=3D"">
-<br class=3D"">
-</div>
-</div>
-</blockquote>
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">
-<div class=3D"">
-<blockquote type=3D"cite" class=3D"">&#43;<br class=3D"">
-&nbsp;/* The hypervisor timeout for the live patching operation is 30 msec,=
-<br class=3D"">
-&nbsp;&nbsp;* but it could take some time for the operation to start, so wa=
-it twice<br class=3D"">
-&nbsp;&nbsp;* that period. */<br class=3D"">
-@@ -291,8 &#43;357,9 @@ int action_func(int argc, char *argv[], unsigned in=
-t idx)<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char name[XEN_LIVEPATCH_NAME_SIZE];<br class=
-=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int rc;<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xen_livepatch_status_t status;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;uint64_t flags;<br class=3D"">
-&nbsp;- &nbsp;&nbsp;&nbsp;if ( argc !=3D 1 )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;if ( argc &lt; 1 )<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show_help();<br class=
-=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1;<br class=
-=3D"">
-@@ -301,7 &#43;368,10 @@ int action_func(int argc, char *argv[], unsigned i=
-nt idx)<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( idx &gt;=3D ARRAY_SIZE(action_options) )=
-<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1;<br class=
-=3D"">
-&nbsp;- &nbsp;&nbsp;&nbsp;if ( get_name(argc, argv, name) )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;if ( get_name(argc--, argv&#43;&#43;, name) )<br cl=
-ass=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return EINVAL;<br class=3D"=
-">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;if ( get_flags(argc, argv, idx, &amp;flags) )<br cl=
-ass=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return EINVAL;<br cla=
-ss=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Check initial status. */<br cl=
-ass=3D"">
-@@ -332,7 &#43;402,7 @@ int action_func(int argc, char *argv[], unsigned in=
-t idx)<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( action_options[idx].allow &amp; status.s=
-tate )<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf(&quot;%s %s...=
- &quot;, action_options[idx].verb, name);<br class=3D"">
-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rc =3D action_options[idx].func=
-tion(xch, name, HYPERVISOR_TIMEOUT_NS);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rc =3D action_options[idx].=
-function(xch, name, HYPERVISOR_TIMEOUT_NS, flags);<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( rc )<br class=3D=
-"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nb=
-sp;int saved_errno =3D errno;<br class=3D"">
-@@ -394,17 &#43;464,23 @@ int action_func(int argc, char *argv[], unsigned =
-int idx)<br class=3D"">
-&nbsp;&nbsp;&nbsp;static int load_func(int argc, char *argv[])<br class=3D"=
-">
-&nbsp;{<br class=3D"">
-- &nbsp;&nbsp;&nbsp;int rc;<br class=3D"">
-- &nbsp;&nbsp;&nbsp;char *new_argv[2];<br class=3D"">
-- &nbsp;&nbsp;&nbsp;char *path, *name, *lastdot;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;int i, rc =3D ENOMEM;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;char *upload_argv[2];<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;char **apply_argv, *path, *name, *lastdot;<br class=
-=3D"">
-&nbsp;- &nbsp;&nbsp;&nbsp;if ( argc !=3D 1 )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;if ( argc &lt; 1 )<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show_help();<br class=
-=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1;<br class=
-=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br class=3D"">
-&#43;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;/* apply action has &lt;id&gt; [flags] input requir=
-ement, which must be constructed */<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;apply_argv =3D (char **) malloc(argc * sizeof(*appl=
-y_argv));<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;if ( !apply_argv )<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return rc;<br class=3D"">
-&#43;<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* &lt;file&gt; */<br class=3D"">
-- &nbsp;&nbsp;&nbsp;new_argv[1] =3D argv[0];<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;upload_argv[1] =3D argv[0];<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Synthesize the &lt;id&gt; */<b=
-r class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path =3D strdup(argv[0]);<br class=3D"">
-@@ -413,16 &#43;489,23 @@ static int load_func(int argc, char *argv[])<br c=
-lass=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lastdot =3D strrchr(name, '.');<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( lastdot !=3D NULL )<br class=3D"">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*lastdot =3D '\0';<br=
- class=3D"">
-- &nbsp;&nbsp;&nbsp;new_argv[0] =3D name;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;upload_argv[0] =3D name;<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;apply_argv[0] =3D name;<br class=3D"">
-&nbsp;- &nbsp;&nbsp;&nbsp;rc =3D upload_func(2 /* &lt;id&gt; &lt;file&gt; *=
-/, new_argv);<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;/* Fill in all user provided flags */<br class=3D"">
-&#43; &nbsp;&nbsp;&nbsp;for ( i =3D 0; i &lt; argc - 1; i&#43;&#43; )<br cl=
-ass=3D"">
-&#43; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply_argv[i &#43; 1] =3D a=
-rgv[i &#43; 1];<br class=3D"">
-</blockquote>
-<br class=3D"">
-Wouldn't this make the loop body simpler? &nbsp;i =3D 1; i &lt; argc;<br cl=
-ass=3D"">
-<br class=3D"">
-</div>
-</div>
-</blockquote>
-<div><br class=3D"">
-</div>
-<div>ACK. It would indeed.</div>
-<br class=3D"">
-<blockquote type=3D"cite" class=3D"">
-<div class=3D"">
-<div class=3D"">Or alternatively, just a straight memcpy().<br class=3D"">
-<br class=3D"">
--- <br class=3D"">
-Ross Lagerwall<br class=3D"">
-</div>
-</div>
-</blockquote>
-</div>
-<br class=3D"">
-<div class=3D"">
-<div dir=3D"auto" style=3D"word-wrap: break-word; -webkit-nbsp-mode: space;=
- line-break: after-white-space;" class=3D"">
-<div style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: =
-Helvetica; font-size: 12px; font-style: normal; font-variant-caps: normal; =
-font-weight: normal; letter-spacing: normal; text-align: start; text-indent=
-: 0px; text-transform: none; white-space: normal; word-spacing: 0px; -webki=
-t-text-stroke-width: 0px; text-decoration: none;">
-Best Regards,<br class=3D"">
-Pawel Wieczorkiewicz</div>
-</div>
-</div>
-<br><br><br>Amazon Development Center Germany GmbH
-<br>Krausenstr. 38
-<br>10117 Berlin
-<br>Geschaeftsfuehrung: Christian Schlaeger, Ralf Herbrich
-<br>Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-<br>Sitz: Berlin
-<br>Ust-ID: DE 289 237 879
-<br><br><br>
-</body>
-</html>
+PGh0bWw+DQo8aGVhZD4NCjxtZXRhIGh0dHAtZXF1aXY9IkNvbnRlbnQtVHlwZSIgY29udGVudD0i
+dGV4dC9odG1sOyBjaGFyc2V0PXV0Zi04Ij4NCjwvaGVhZD4NCjxib2R5IHN0eWxlPSJ3b3JkLXdy
+YXA6IGJyZWFrLXdvcmQ7IC13ZWJraXQtbmJzcC1tb2RlOiBzcGFjZTsgbGluZS1icmVhazogYWZ0
+ZXItd2hpdGUtc3BhY2U7IiBjbGFzcz0iIj4NCjxiciBjbGFzcz0iIj4NCjxkaXY+PGJyIGNsYXNz
+PSIiPg0KPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIgY2xhc3M9IiI+DQo8ZGl2IGNsYXNzPSIiPk9u
+IDE3LiBTZXAgMjAxOSwgYXQgMTA6MjcsIEphbiBCZXVsaWNoICZsdDs8YSBocmVmPSJtYWlsdG86
+amJldWxpY2hAc3VzZS5jb20iIGNsYXNzPSIiPmpiZXVsaWNoQHN1c2UuY29tPC9hPiZndDsgd3Jv
+dGU6PC9kaXY+DQo8YnIgY2xhc3M9IkFwcGxlLWludGVyY2hhbmdlLW5ld2xpbmUiPg0KPGRpdiBj
+bGFzcz0iIj4NCjxkaXYgY2xhc3M9IiI+T24gMTYuMDkuMjAxOSAxMjo1OSwgUGF3ZWwgV2llY3pv
+cmtpZXdpY3ogd3JvdGU6PGJyIGNsYXNzPSIiPg0KPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIgY2xh
+c3M9IiI+QEAgLTk1MSwxMSAmIzQzOzk1MiwxMyBAQCBzdHJ1Y3QgeGVuX3N5c2N0bF9saXZlcGF0
+Y2hfbGlzdCB7PGJyIGNsYXNzPSIiPg0KJm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7YW1vdW50IG9mIHBheWxvYWRzIGFuZCB2ZXJzaW9uLjxiciBj
+bGFzcz0iIj4NCiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwO09VVDogSG93IG1hbnkgcGF5bG9hZHMgbGVmdC4gKi88YnIgY2xhc3M9IiI+DQombmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDt1aW50MzJfdCBwYWQ7ICZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOy8qIElOOiBNdXN0IGJlIHplcm8uICovPGJyIGNsYXNzPSIiPg0K
+JiM0MzsgJm5ic3A7Jm5ic3A7Jm5ic3A7dWludDY0X3QgbmFtZV90b3RhbF9zaXplOyAmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsvKiBPVVQ6IFRvdGFsIHNpemUgb2YgYWxsIHRyYW5zZmVyIG5h
+bWVzICovPGJyIGNsYXNzPSIiPg0KPC9ibG9ja3F1b3RlPg0KPGJyIGNsYXNzPSIiPg0KV2h5IHVp
+bnQ2NF90IGFuZCBub3QgdWludDMyX3Q/IFlvdSBkb24ndCBleHBlY3QgdGhpcyB0byBncm93PGJy
+IGNsYXNzPSIiPg0KYmV5b25kIDRHaUIsIGRvIHlvdT88YnIgY2xhc3M9IiI+DQo8L2Rpdj4NCjwv
+ZGl2Pg0KPC9ibG9ja3F1b3RlPg0KPGRpdj48YnIgY2xhc3M9IiI+DQo8L2Rpdj4NCjxkaXY+SSBk
+b27igJl0LCBidXQgdWludDMyX3QgaXMgbm90IHJlYWxseSBjb21wYXRpYmxlIHdpdGggc2l6ZV90
+LjwvZGl2Pg0KPGRpdj5BbmQgSSB3YXMgdGhvdWdodCB0byBhbHdheXMgdXNlIHNpemVfdCBjb21w
+YXRpYmxlIHR5cGVzIGZvciBzaXplcy48L2Rpdj4NCjxkaXY+PGJyIGNsYXNzPSIiPg0KPC9kaXY+
+DQo8ZGl2PkFueXdheSwgSSBkbyBub3QgbWluZCBjaGFuZ2luZyB0aGlzIHRvIHdoYXRldmVyIHR5
+cGUgeW91IHByZWZlci48L2Rpdj4NCjxiciBjbGFzcz0iIj4NCjxibG9ja3F1b3RlIHR5cGU9ImNp
+dGUiIGNsYXNzPSIiPg0KPGRpdiBjbGFzcz0iIj4NCjxkaXYgY2xhc3M9IiI+PGJyIGNsYXNzPSIi
+Pg0KQW5kIHdoeSBPVVQgcmF0aGVyIHRoYW4gSU4vT1VUPyBPbmNlIHlvdSBtYWtlIHRoaXMgJnF1
+b3Q7YXJiaXRyYXJ5PGJyIGNsYXNzPSIiPg0Kc2l6ZSZxdW90OywgSSBkb24ndCBzZWUgYSBuZWVk
+IGZvciBsaW1pdGluZyB0aGlzIHRvIC4uLjxiciBjbGFzcz0iIj4NCjxiciBjbGFzcz0iIj4NCjxi
+bG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNsYXNzPSIiPiZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwO1hF
+Tl9HVUVTVF9IQU5ETEVfNjQoeGVuX2xpdmVwYXRjaF9zdGF0dXNfdCkgc3RhdHVzOyAmbmJzcDsv
+KiBPVVQuIE11c3QgaGF2ZSBlbm91Z2g8YnIgY2xhc3M9IiI+DQombmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtzcGFjZSBhbGxvY2F0ZSBmb3IgbnIg
+b2YgdGhlbS4gKi88YnIgY2xhc3M9IiI+DQombmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtYRU5fR1VF
+U1RfSEFORExFXzY0KGNoYXIpIG5hbWU7ICZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOy8qIE9VVDogQXJyYXkgb2YgbmFtZXMuIEVhY2ggbWVtYmVyPGJyIGNs
+YXNzPSIiPg0KLSAmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDtNVVNUIFhFTl9MSVZFUEFUQ0hfTkFNRV9TSVpFIGluIHNpemUuPGJyIGNsYXNzPSIiPg0KLSAm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDtNdXN0IGhhdmUg
+bnIgb2YgdGhlbS4gKi88YnIgY2xhc3M9IiI+DQomIzQzOyAmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsm
+bmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJz
+cDsmbmJzcDsmbmJzcDsmbmJzcDsmbmJzcDttYXkgaGF2ZSBhbiBhcmJpdHJhcnkgbGVuZ3RoIHVw
+IHRvPGJyIGNsYXNzPSIiPg0KJiM0MzsgJm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7
+Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5ic3A7Jm5i
+c3A7Jm5ic3A7Jm5ic3A7WEVOX0xJVkVQQVRDSF9OQU1FX1NJWkUgYnl0ZXMuIE11c3QgaGF2ZTxi
+ciBjbGFzcz0iIj4NCiYjNDM7ICZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNw
+OyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZuYnNwOyZu
+YnNwOyZuYnNwO25yIG9mIHRoZW0uICovPGJyIGNsYXNzPSIiPg0KPC9ibG9ja3F1b3RlPg0KPGJy
+IGNsYXNzPSIiPg0KLi4uIFhFTl9MSVZFUEFUQ0hfTkFNRV9TSVpFIGJ5dGVzIHBlciBlbnRyeS48
+YnIgY2xhc3M9IiI+DQo8L2Rpdj4NCjwvZGl2Pg0KPC9ibG9ja3F1b3RlPg0KPGRpdj48YnIgY2xh
+c3M9IiI+DQo8L2Rpdj4NCjxkaXY+Q2hhbmdpbmcgdGhlIHVwcGVyIGJvdW5kIGxpbWl0YXRpb24g
+d2lsbCBicmVhayBjZXJ0YWluIGFzc3VtcHRpb25zIGFuZCBJIGRpZCBub3Qgd2FudCB0byBwaWxl
+IGFsbCB0aGVzZSBvbiB0b3Agb2YgdGhlIGN1cnJlbnQgY2hhbmdlLjwvZGl2Pg0KPGRpdj5CdXQs
+IHllcywgdGhlIHVwcGVyIGJvdW5kIGxpbWl0IGNvdWxkIGJlIGRyb3BwZWQuIEkgd291bGQgcHJl
+ZmVyIHRvIGRvIGl0IGFzIGFuIGluZGVwZW5kZW50IHBhdGNoLjwvZGl2Pg0KPGJyIGNsYXNzPSIi
+Pg0KPGJsb2NrcXVvdGUgdHlwZT0iY2l0ZSIgY2xhc3M9IiI+DQo8ZGl2IGNsYXNzPSIiPg0KPGRp
+diBjbGFzcz0iIj48YnIgY2xhc3M9IiI+DQpBbmQgZmluYWxseSAtIHBsZWFzZSBzZW5kIHRvIHRo
+ZSBsaXN0IGp1c3Qgb25jZSwgaS5lLiBwbGVhc2U8YnIgY2xhc3M9IiI+DQpkb24ndCBoYXZlIHR3
+byB4ZW4tZGV2ZWxAIGluIHRoZSByZWNpcGllbnRzIGxpc3QuPGJyIGNsYXNzPSIiPg0KPGJyIGNs
+YXNzPSIiPg0KPC9kaXY+DQo8L2Rpdj4NCjwvYmxvY2txdW90ZT4NCjxkaXY+PGJyIGNsYXNzPSIi
+Pg0KPC9kaXY+DQo8ZGl2PlNvcnJ5LCBJIGRpZCBub3Qgbm90aWNlIHRoZSBhZGRfbWFpbnRhaW5l
+cnMucGwgc2NyaXB0IGFkZHMgYW4gZXhwbGljaXQgVG86IGZvciB0aGUgeGVuLWRldmVsQC48L2Rp
+dj4NCjxiciBjbGFzcz0iIj4NCjxibG9ja3F1b3RlIHR5cGU9ImNpdGUiIGNsYXNzPSIiPg0KPGRp
+diBjbGFzcz0iIj4NCjxkaXYgY2xhc3M9IiI+SmFuPGJyIGNsYXNzPSIiPg0KPC9kaXY+DQo8L2Rp
+dj4NCjwvYmxvY2txdW90ZT4NCjwvZGl2Pg0KPGJyIGNsYXNzPSIiPg0KPGRpdiBjbGFzcz0iIj4N
+CjxkaXYgZGlyPSJhdXRvIiBzdHlsZT0id29yZC13cmFwOiBicmVhay13b3JkOyAtd2Via2l0LW5i
+c3AtbW9kZTogc3BhY2U7IGxpbmUtYnJlYWs6IGFmdGVyLXdoaXRlLXNwYWNlOyIgY2xhc3M9IiI+
+DQo8ZGl2IHN0eWxlPSJjYXJldC1jb2xvcjogcmdiKDAsIDAsIDApOyBjb2xvcjogcmdiKDAsIDAs
+IDApOyBmb250LWZhbWlseTogSGVsdmV0aWNhOyBmb250LXNpemU6IDEycHg7IGZvbnQtc3R5bGU6
+IG5vcm1hbDsgZm9udC12YXJpYW50LWNhcHM6IG5vcm1hbDsgZm9udC13ZWlnaHQ6IG5vcm1hbDsg
+bGV0dGVyLXNwYWNpbmc6IG5vcm1hbDsgdGV4dC1hbGlnbjogc3RhcnQ7IHRleHQtaW5kZW50OiAw
+cHg7IHRleHQtdHJhbnNmb3JtOiBub25lOyB3aGl0ZS1zcGFjZTogbm9ybWFsOyB3b3JkLXNwYWNp
+bmc6IDBweDsgLXdlYmtpdC10ZXh0LXN0cm9rZS13aWR0aDogMHB4OyB0ZXh0LWRlY29yYXRpb246
+IG5vbmU7Ij4NCkJlc3QgUmVnYXJkcyw8YnIgY2xhc3M9IiI+DQpQYXdlbCBXaWVjem9ya2lld2lj
+ejwvZGl2Pg0KPGJyIGNsYXNzPSJBcHBsZS1pbnRlcmNoYW5nZS1uZXdsaW5lIj4NCjwvZGl2Pg0K
+PGJyIGNsYXNzPSJBcHBsZS1pbnRlcmNoYW5nZS1uZXdsaW5lIj4NCjwvZGl2Pg0KPGJyIGNsYXNz
+PSIiPg0KPGJyPjxicj48YnI+QW1hem9uIERldmVsb3BtZW50IENlbnRlciBHZXJtYW55IEdtYkgK
+PGJyPktyYXVzZW5zdHIuIDM4Cjxicj4xMDExNyBCZXJsaW4KPGJyPkdlc2NoYWVmdHNmdWVocnVu
+ZzogQ2hyaXN0aWFuIFNjaGxhZWdlciwgUmFsZiBIZXJicmljaAo8YnI+RWluZ2V0cmFnZW4gYW0g
+QW10c2dlcmljaHQgQ2hhcmxvdHRlbmJ1cmcgdW50ZXIgSFJCIDE0OTE3MyBCCjxicj5TaXR6OiBC
+ZXJsaW4KPGJyPlVzdC1JRDogREUgMjg5IDIzNyA4NzkKPGJyPjxicj48YnI+CjwvYm9keT4NCjwv
+aHRtbD4NCg==
 
---_000_F77F272E18F84BFCA6B66999F8149884amazoncom_--
+--_000_26B651C92FA3491AA383E4A4FFB3650Damazoncom_--
 
 
 
---===============1773182903284956334==
+--===============8613951551033072656==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -576,6 +297,6 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============1773182903284956334==--
+--===============8613951551033072656==--
 
 
