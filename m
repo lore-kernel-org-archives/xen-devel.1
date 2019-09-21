@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 909DDC49ED7
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Sep 2019 10:08:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DC7A2C49ED7
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Sep 2019 10:09:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6120C217F5
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Sep 2019 10:08:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6120C217F5
+	by mail.kernel.org (Postfix) with ESMTPS id B0BD3217F5
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Sep 2019 10:09:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B0BD3217F5
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iBcJ7-0003iY-M6; Sat, 21 Sep 2019 10:08:01 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1iBcJw-0003rl-1A; Sat, 21 Sep 2019 10:08:52 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=VugD=XQ=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1iBcJ6-0003iT-O4
- for xen-devel@lists.xenproject.org; Sat, 21 Sep 2019 10:08:00 +0000
-X-Inumbo-ID: af5ccd70-dc57-11e9-b76c-bc764e2007e4
+ id 1iBcJu-0003re-5G
+ for xen-devel@lists.xenproject.org; Sat, 21 Sep 2019 10:08:50 +0000
+X-Inumbo-ID: cd9802e6-dc57-11e9-95b8-12813bfff9fa
 Received: from foss.arm.com (unknown [217.140.110.172])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id af5ccd70-dc57-11e9-b76c-bc764e2007e4;
- Sat, 21 Sep 2019 10:07:57 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id cd9802e6-dc57-11e9-95b8-12813bfff9fa;
+ Sat, 21 Sep 2019 10:08:48 +0000 (UTC)
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1E3981000;
- Sat, 21 Sep 2019 03:07:57 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DFDDE1000;
+ Sat, 21 Sep 2019 03:08:47 -0700 (PDT)
 Received: from e108454-lin.cambridge.arm.com (e108454-lin.cambridge.arm.com
  [10.1.196.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A1BA23F59C;
- Sat, 21 Sep 2019 03:07:56 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 39FC13F59C;
+ Sat, 21 Sep 2019 03:08:47 -0700 (PDT)
 From: Julien Grall <julien.grall@arm.com>
 To: xen-devel@lists.xenproject.org
-Date: Sat, 21 Sep 2019 11:07:53 +0100
-Message-Id: <20190921100753.21347-1-julien.grall@arm.com>
+Date: Sat, 21 Sep 2019 11:08:36 +0100
+Message-Id: <20190921100836.21396-1-julien.grall@arm.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [Xen-devel] [PATCH for-4.13] xen/arm: mm: Clear boot pagetables
- before bringing-up each secondary CPU
+Subject: [Xen-devel] [RESEND][PATCH for-4.13] xen/arm: mm: Clear boot
+ pagetables before bringing-up each secondary CPU
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -54,7 +55,9 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Julien Grall <julien.grall@arm.com>
+Cc: Julien Grall <julien.grall@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
