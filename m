@@ -2,55 +2,49 @@ Return-Path: <SRS0=VluW=XT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FC2BC432C2
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2019 11:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7432C4320D
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2019 11:10:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6D7452146E
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2019 11:10:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D7452146E
+	by mail.kernel.org (Postfix) with ESMTPS id A27302146E
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2019 11:10:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A27302146E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iCihl-0003ra-Nl; Tue, 24 Sep 2019 11:10:01 +0000
+	id 1iCihr-0004E4-2E; Tue, 24 Sep 2019 11:10:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=kqGS=XT=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1iCihj-0003n7-PW
- for xen-devel@lists.xenproject.org; Tue, 24 Sep 2019 11:09:59 +0000
-X-Inumbo-ID: ebee279a-dead-11e9-994c-bc764e2007e4
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=OCa0=XT=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1iCihp-00043q-M9
+ for xen-devel@lists.xenproject.org; Tue, 24 Sep 2019 11:10:05 +0000
+X-Inumbo-ID: 1caf1426-deb7-11e9-ae5c-bc764e2007e4
 Received: from mx1.suse.de (unknown [195.135.220.15])
  by localhost (Halon) with ESMTPS
- id ebee279a-dead-11e9-994c-bc764e2007e4;
- Tue, 24 Sep 2019 09:30:18 +0000 (UTC)
+ id 1caf1426-deb7-11e9-ae5c-bc764e2007e4;
+ Tue, 24 Sep 2019 10:36:05 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id C46FCBA7D;
- Tue, 24 Sep 2019 09:30:17 +0000 (UTC)
-To: Paul Durrant <Paul.Durrant@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <aa62726c-5aa4-8bcd-dc35-61eb8dfeaee3@suse.com>
- <e0a904bf-b6a0-6224-88f6-e89a95867718@suse.com>
- <1b23caa9eb9a424d919c2aed1a5ba80f@AMSPEX02CL03.citrite.net>
- <d977330a-88e0-e145-84ad-e0271232e477@suse.com>
- <ddb120a784e549e39c6e4612c10921e1@AMSPEX02CL03.citrite.net>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <8a42cbb2-7ed0-f2b6-679a-bab554faf527@suse.com>
-Date: Tue, 24 Sep 2019 11:30:17 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ by mx1.suse.de (Postfix) with ESMTP id 69DD7ACEC;
+ Tue, 24 Sep 2019 10:36:04 +0000 (UTC)
+Message-ID: <3ecd3f6a83f02a29b30f4b437d076e9bce697633.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+To: Jan Beulich <jbeulich@suse.com>, Juergen Gross <jgross@suse.com>
+Date: Tue, 24 Sep 2019 12:36:02 +0200
+In-Reply-To: <60d95799-e760-c7ea-0c81-60f350ff32df@suse.com>
+References: <20190914085251.18816-1-jgross@suse.com>
+ <60d95799-e760-c7ea-0c81-60f350ff32df@suse.com>
+Organization: SUSE
+User-Agent: Evolution 3.32.4 
 MIME-Version: 1.0
-In-Reply-To: <ddb120a784e549e39c6e4612c10921e1@AMSPEX02CL03.citrite.net>
-Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH v6 7/8] AMD/IOMMU: allocate one device table
- per PCI segment
+Subject: Re: [Xen-devel] [PATCH v3 00/47] xen: add core scheduling support
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,46 +55,124 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <Andrew.Cooper3@citrix.com>,
- Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <george.dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ Robert VanVossen <robert.vanvossen@dornerworks.com>, Tim Deegan <tim@xen.org>,
+ Julien Grall <julien.grall@arm.com>,
+ Josh Whitehead <josh.whitehead@dornerworks.com>,
+ Meng Xu <mengxu@cis.upenn.edu>, xen-devel@lists.xenproject.org,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
+Content-Type: multipart/mixed; boundary="===============6226274881102096966=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMjQuMDkuMjAxOSAxMToyMCwgUGF1bCBEdXJyYW50IHdyb3RlOgo+PiAtLS0tLU9yaWdpbmFs
-IE1lc3NhZ2UtLS0tLQo+PiBGcm9tOiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+Cj4+
-IFNlbnQ6IDI0IFNlcHRlbWJlciAyMDE5IDEwOjEwCj4+IFRvOiBQYXVsIER1cnJhbnQgPFBhdWwu
-RHVycmFudEBjaXRyaXguY29tPjsgeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCj4+IENj
-OiBTdXJhdmVlIFN1dGhpa3VscGFuaXQgPHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPjsg
-QW5kcmV3IENvb3BlciA8QW5kcmV3LkNvb3BlcjNAY2l0cml4LmNvbT4KPj4gU3ViamVjdDogUmU6
-IFtYZW4tZGV2ZWxdIFtQQVRDSCB2NiA3LzhdIEFNRC9JT01NVTogYWxsb2NhdGUgb25lIGRldmlj
-ZSB0YWJsZSBwZXIgUENJIHNlZ21lbnQKPj4KPj4gT24gMjMuMDkuMjAxOSAxODozMCwgUGF1bCBE
-dXJyYW50IHdyb3RlOgo+Pj4+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tCj4+Pj4gRnJvbTog
-WGVuLWRldmVsIDx4ZW4tZGV2ZWwtYm91bmNlc0BsaXN0cy54ZW5wcm9qZWN0Lm9yZz4gT24gQmVo
-YWxmIE9mIEphbiBCZXVsaWNoCj4+Pj4gU2VudDogMTkgU2VwdGVtYmVyIDIwMTkgMTQ6MjUKPj4+
-PiBUbzogeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCj4+Pj4gQ2M6IEFuZHJldyBDb29w
-ZXIgPEFuZHJldy5Db29wZXIzQGNpdHJpeC5jb20+OyBTdXJhdmVlIFN1dGhpa3VscGFuaXQKPj4g
-PHN1cmF2ZWUuc3V0aGlrdWxwYW5pdEBhbWQuY29tPgo+Pj4+IFN1YmplY3Q6IFtYZW4tZGV2ZWxd
-IFtQQVRDSCB2NiA3LzhdIEFNRC9JT01NVTogYWxsb2NhdGUgb25lIGRldmljZSB0YWJsZSBwZXIg
-UENJIHNlZ21lbnQKPj4+Pgo+Pj4+IEhhdmluZyBhIHNpbmdsZSBkZXZpY2UgdGFibGUgZm9yIGFs
-bCBzZWdtZW50cyBjYW4ndCBwb3NzaWJseSBiZSByaWdodC4KPj4+Cj4+PiBUaGUgY29weSBvZiB0
-aGUgc3BlYy4gSSBoYXZlIHNheXMgKG9uIHBhZ2UgMjUzOiBGaXhlZC1MZW5ndGggSVZIRAo+Pj4g
-QmxvY2tzKSB0aGF0IElWSEQgZW50cmllcyBtdXN0IGhhdmUgYSBzZWdtZW50IGdyb3VwIG9mIDAs
-IHNvIGNhbid0Cj4+PiB0aGUgY29kZSBqdXN0IHJlcXVpcmUgaW9tbXUtPnNlZyA9PSAwPwo+Pgo+
-PiBUaGUgd29yZGluZyBpbiBteSB2ZXJzaW9uIGlzICJBdCB0aGlzIHRpbWUsIG9ubHkgUENJIFNl
-Z21lbnQgR3JvdXAgMCBpcwo+PiBzdXBwb3J0ZWQuIiBUaGlzIHN1Z2dlc3RzIHRvIG1lIHRoYXQg
-aXQgaXMgbm90IGEgZ29vZCBpZGVhIHRvIGhhdmUgbG9naWMKPj4gYmFrZWQgaW4gdGhhdCBkZXBl
-bmRzIG9uIHRoaXMgcmVtYWluaW5nIHRydWUuIEkgcmVhbGl6ZSB0aG91Z2ggdGhhdCB0aGVyZQo+
-PiBhcmUgbW9yZSBwbGFjZXMgdGhhbiBqdXN0IHRoaXMgb25lIHdoZXJlIHdlIChoYXZlIHRvKSBh
-c3N1bWUgc2VnbWVudCAwCj4+IChhbGwgaW4gaW9tbXVfYWNwaS5jLCBhbmQgYWxsIG1hcmtlZCB3
-aXRoIGFuIFhYWCBjb21tZW50KS4KPj4KPiAKPiBPay4gRmFpciBlbm91Z2guIEkganVzdCB3YXNu
-J3Qgc3VyZSBpdCB3YXMgd29ydGggZG9pbmcgdGhpcyBjaGFuZ2UgYXQgdGhlCj4gbW9tZW50OwoK
-VGhlIHRoaW5nIHRoYXQgSSBmb3VuZCByZWFsbHkgZGlzZ3VzdGluZyB3YXMgdGhlIGdsb2JhbCAo
-aS5lLiBub3QgZXZlbgpzdGF0aWMpIHZhcmlhYmxlICJkZXZpY2VfdGFibGUiLiBBbmQgc2ltcGx5
-IG1ha2luZyBpdCBzdGF0aWMgd291bGQgc3RpbGwKaGF2ZSBsZWZ0IHRoaW5ncyBpbiB0b28gdWds
-eSBhIHN0YXRlIGZvciBteSB0YXN0ZS4KCj4gYnV0IGl0IGRvZXNuJ3QgaHVydCwgc28geW91IGNh
-biBhZGQgbXkgUi1iLgoKVGhhbmtzLgoKSmFuCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============6226274881102096966==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-2gse21NvQdgW1cZFTPOg"
+
+
+--=-2gse21NvQdgW1cZFTPOg
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, 2019-09-20 at 18:14 +0200, Jan Beulich wrote:
+> On 14.09.2019 10:52, Juergen Gross wrote:
+> > This is achieved by switching the scheduler to no longer see vcpus
+> > as
+> > the primary object to schedule, but "schedule units". Each schedule
+> > unit consists of as many vcpus as each core has threads on the
+> > current
+> > system. The vcpu->unit relation is fixed.
+>=20
+> There's another aspect here that, while perhaps obvious, I didn't
+> realize so far: Iirc right now schedulers try to place vCPU-s on
+> different cores, as long as there aren't more runnable vCPU-s than
+> there are cores.=20
+>
+Indeed they do.
+
+> This is to improve overall throughput, since
+> vCPU-s on sibling hyperthreads would compete for execution
+> resources. With a fixed relation this is going to be impossible.
+>
+It is. And that is the reason why my benchmarks show rather bad
+performance for a 4 vCUPUs VMs on a 8 CPUs (4 cores, with
+hyperthreading) host. In fact, as Juergen showed during his Xen Summit
+talk, in such a case core-scheduling achieves much worse performance
+than "regular" cpu-scheduling, both when hyperthreading is enabled and
+disabled.
+
+It's an intrinsic characteristic of this solution that we have decided
+to go for (i.e., introducing the 'virtual core' and 'scheduling
+resource' concepts, and act almost entirely at the schedule.c level).
+
+> Otoh I can of course see how, once we have proper virtual
+> topology, this allows better scheduling decisions inside the
+> guest, in particular if - under the right circumstances - it is
+> actually wanted to run two entities on sibling threads.
+>=20
+Yes, this is indeed one aspect. There is also the fact that, currently,
+as soon as you have 1 more vCPU than there are cores, e.g. coming from
+another VM, the guest that had each of its vCPUs running on one core,
+experiences a slowdown. While, with core-scheduling enabled from the
+beginning, performance stays consistent.
+
+In any case, this all happens with core-scheduling actually enabled.
+With these patches applied, but cpu-scheduling selected at boot, fully
+idle cores are still preferred, and the vCPUs will still be spread
+among them (as soon as there's any available).
+
+Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-2gse21NvQdgW1cZFTPOg
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl2J8ZIACgkQFkJ4iaW4
+c+7UBBAAyYw4DRQZO+RWHAZ1bt2RFpt8Q6LcUQ0ka5I9eLmcaVsnMUa2O0sFNp1L
+0iM0VAIox4EV3DanE5QwcqhA50H9+5qYZAXXRh0Z/anOTa/zZdfdH1Hz3vyt7Duh
+ewYs7edih4l6wKY2tTMO/o+39vIKWjEeQHsyICjKVHdINJkfOiOAiHrB1au3mGJG
+li7y+TDPdbwDhBCoxI3vm0BcWy6U1SKH0Ru8hD2dO0TSWJBDobzO7XckIFwSMWcH
+/oFcAHS1J36I8ir+VNGsesjh5iB6gFllEeKwxoaNH/yl/NAo8hHKi8Y2AF/M1D7s
+wo14cAN4OfwmaJfs7f3BK0k3Szi1iAz69OM29ysgEUa4RAHSdpqfAI8U3cEoU8gY
+MYhmxEPG1JpSpgbysxXeGwmh65yVvI2r9W/Hyr7CP2f8eU7ORjVzM/I6g4htpw2s
+HguZzw7pGhb1Hojurf8qzgWw5iGkkXNnQfBC56dpwZmlRsDmeSfhVyT7mVTVD1Ay
+i+s4hqDhYEEfb8Mye7iqJIAw0HSug9X+ceEiUox+ZyK9lJvSD5UD9lpeyekaMmZQ
+2n0iG/4uoEgy5GorgpRgRNt9oc9C2iDUWfA66XJfP1hZ7oWOTVbebE/sxpyLOKlW
+dOmnk/yr0pyEB3IgFwluMKR71c0EP0Uj3BOnKLVimqj9tUw+lUE=
+=3moq
+-----END PGP SIGNATURE-----
+
+--=-2gse21NvQdgW1cZFTPOg--
+
+
+
+--===============6226274881102096966==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============6226274881102096966==--
+
+
