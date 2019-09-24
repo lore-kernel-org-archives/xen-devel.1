@@ -1,54 +1,63 @@
-Return-Path: <SRS0=M2I+=XV=lists.xenproject.org=xen-devel-bounces@kernel.org>
+Return-Path: <SRS0=VluW=XT=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7F55CC4360C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2019 16:22:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 35069C432C2
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2019 16:30:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 54E1F21D56
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2019 16:22:12 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 54E1F21D56
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0257721655
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Sep 2019 16:30:25 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="z4t2oq3l"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0257721655
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iDWWf-0006jV-0N; Thu, 26 Sep 2019 16:21:53 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1iCnha-0006x6-Oz; Tue, 24 Sep 2019 16:30:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=cPk2=XV=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1iDWWd-0006jL-Hb
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2019 16:21:51 +0000
-X-Inumbo-ID: b24f0ae0-e079-11e9-97fb-bc764e2007e4
-Received: from mx1.suse.de (unknown [195.135.220.15])
+ <SRS0=y0Hj=XT=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1iCnhZ-0006wS-Ah
+ for xen-devel@lists.xen.org; Tue, 24 Sep 2019 16:30:09 +0000
+X-Inumbo-ID: 9272d9f0-dee8-11e9-9624-12813bfff9fa
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by localhost (Halon) with ESMTPS
- id b24f0ae0-e079-11e9-97fb-bc764e2007e4;
- Thu, 26 Sep 2019 16:21:30 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 5AAA8AFE8;
- Thu, 26 Sep 2019 16:21:29 +0000 (UTC)
-Message-ID: <8af491d8795a4327c1fc7e464ddca886529a502b.camel@suse.com>
-From: Dario Faggioli <dfaggioli@suse.com>
-To: =?ISO-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>, 
- xen-devel@lists.xenproject.org
-Date: Thu, 26 Sep 2019 18:21:27 +0200
-In-Reply-To: <bddb9939-9c68-304d-517e-95368d2fb675@suse.com>
-References: <20190914085251.18816-1-jgross@suse.com>
- <20190914085251.18816-48-jgross@suse.com>
- <f6cae9fa652707ec7548cd0929f9aa06fcd8affc.camel@suse.com>
- <bddb9939-9c68-304d-517e-95368d2fb675@suse.com>
-Organization: SUSE
-User-Agent: Evolution 3.32.4 
+ id 9272d9f0-dee8-11e9-9624-12813bfff9fa;
+ Tue, 24 Sep 2019 16:30:08 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 69BBA20872;
+ Tue, 24 Sep 2019 16:30:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1569342607;
+ bh=Oluvjc1hfQl9988/6EZGqVMs109NkXuBolJPEx72SRQ=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=z4t2oq3lMViufOv60TJhAnGC74qBl/BmX84vsE3/2NU+IDeRR07ObnUH9/smD/ccu
+ EpNM00Pil2w9y1rvvY/bSgoBnzBCYnQthpVLgoUWZT5aanT8k2gwNbR8uL5rH7IKjA
+ BgirHVP8mThwv1L2/sUiauDZmZIFoEAIFmUKE5wU=
+Date: Tue, 24 Sep 2019 09:29:18 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Julien Grall <julien.grall@arm.com>
+In-Reply-To: <8dc9b6b1-7aa1-491e-9026-28a3a33eb8f1@arm.com>
+Message-ID: <alpine.DEB.2.21.1909240929000.24909@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.1908201838370.20094@sstabellini-ThinkPad-T480s>
+ <20190821035315.12812-2-sstabellini@kernel.org>
+ <8dc9b6b1-7aa1-491e-9026-28a3a33eb8f1@arm.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH v3 47/47] xen/sched: add scheduling
- granularity enum
+Subject: Re: [Xen-devel] [PATCH v4 2/8] xen/arm: export device_tree_get_reg
+ and device_tree_get_u32
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,106 +68,25 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
- Julien Grall <julien.grall@arm.com>, Jan Beulich <jbeulich@suse.com>,
- Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
-Content-Type: multipart/mixed; boundary="===============8588867809999097558=="
+Cc: Stefano Stabellini <stefanos@xilinx.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, andrii_anisov@epam.com,
+ Achin.Gupta@arm.com, xen-devel@lists.xen.org, Volodymyr_Babchuk@epam.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============8588867809999097558==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-ZQah9PagcUMgTiy1KNpP"
-
-
---=-ZQah9PagcUMgTiy1KNpP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, 2019-09-26 at 14:37 +0200, J=C3=BCrgen Gro=C3=9F wrote:
-> On 26.09.19 11:46, Dario Faggioli wrote:
-> > On Sat, 2019-09-14 at 10:52 +0200, Juergen Gross wrote:
-> > > Add a scheduling granularity enum ("cpu", "core", "socket") for
-> > > specification of the scheduling granularity. Initially it is set
-> > > to
-> > > "cpu", this can be modified by the new boot parameter (x86 only)
-> > > "sched-gran".
-> > >=20
-> > > According to the selected granularity sched_granularity is set
-> > > after
-> > > all cpus are online.
-> > >=20
-> > > A test is added for all sched resources holding the same number
-> > > of
-> > > cpus. Fall back to core- or cpu-scheduling in that case.
-> > >=20
-> > > Signed-off-by: Juergen Gross <jgross@suse.com>
-> > >=20
-> > Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
->=20
-> Does this still stand with moving all code of this patch to
-> cpupool.c? That would avoid making some variables/functions globally
-> visible.
->
-Yep, I saw this being discussed during review of other patches, but
-forgot to mention it here, sorry.
-
-Yes, I'm fine with that, and I'm fine with the consequences of doing
-that on this patch (i.e., moving to cpupool.c).
-
-The Reviewed-by still holds.
-
-Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-ZQah9PagcUMgTiy1KNpP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl2M5YcACgkQFkJ4iaW4
-c+51jw/9HsTGWX6bv/juwL+RRqeg7FgcbSm9vY5Q67UyyZvx9hnAdwuv+qxRyLM9
-XY9HhcWXfugnL84dqRgQ2csEHTAzHxumfkfonPBzQdUDVvKDQQ/1sovtidTloF83
-pppCBeGkXfshXLaJktJqqdY33LzaeJNGhTBEr02bzmbFGcoHM7mDlEzyBb1d2eEK
-/64d8WYcyOIw1ml/i0MpkRfJnVjqXZIdTx/nvGzCflwuRF4G5eBaTfQCem0GM+hG
-ykdp8LJW0ivh+VCtP3V2utomIz9PztFRm2qTa8q7HgKer8JSCNrScxnVtpx8DIfw
-pPwdwcXNoRjgwmHLFOLqE+awAPKAacNZzDxsU9B8Dgoyg2xBq5qVN99Rzfgj8aOD
-GS6HjaGaHgu+mjrPUb0+KGCQTyb8oHZKLtbdklr79dRxqwJDuf6MVW//UrKI/3tc
-dSYjqpk/e2jBLXhFyv36N+kr1CimDKYrvXf7YtZGwcr7RENqB5A+j3nMJX4fbN89
-tghbuWc0hfqpDrnn4k51dQIzOsyi29Oi3CT0Fkn08FqwPmfXkF1chDR+2rmvQfi1
-Eyo+BbvsR+PH2TVlDxGG87SivzR6PhIxicT46GwegSGMltBrSO+QrOYpJJ/gRnoC
-r+YX0cbFmQly13sW/RoVv7tmDf+8FbWjjjAelOEVfp+4eEkhXpY=
-=OTcy
------END PGP SIGNATURE-----
-
---=-ZQah9PagcUMgTiy1KNpP--
-
-
-
---===============8588867809999097558==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8588867809999097558==--
-
-
+T24gVHVlLCAxMCBTZXAgMjAxOSwgSnVsaWVuIEdyYWxsIHdyb3RlOgo+IEhpLAo+IAo+IE9uIDgv
+MjEvMTkgNDo1MyBBTSwgU3RlZmFubyBTdGFiZWxsaW5pIHdyb3RlOgo+ID4gVGhleSdsbCBiZSB1
+c2VkIGluIGxhdGVyIHBhdGNoZXMuCj4gPiAKPiA+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3Rh
+YmVsbGluaSA8c3RlZmFub3NAeGlsaW54LmNvbT4KPiA+IAo+ID4gLS0tCj4gPiBDaGFuZ2VzIGlu
+IHY0Ogo+ID4gLSBuZXcgcGF0Y2gKPiA+IC0tLQo+ID4gICB4ZW4vYXJjaC9hcm0vYm9vdGZkdC5j
+ICAgICAgICB8IDggKysrKy0tLS0KPiA+ICAgeGVuL2luY2x1ZGUveGVuL2RldmljZV90cmVlLmgg
+fCA2ICsrKysrKwo+IAo+IGRldmljZV90cmVlLmggaXMgYSBjb21tb24gaGVhZGVyIHRoYXQgZGVz
+Y3JpYmUgYWxsIHRoZSBmdW5jdGlvbiBpbXBsZW1lbnRlZCBieQo+IGNvbW1vbi9kZXZpY2VfdHJl
+ZS5jLgo+IAo+IE1vc3QgbGlrZWx5IHlvdSB3YW50IHRvIGRlY2xhcmUgdGhlIHByb3RvdHlwZSBp
+biBhc20tYXJtL3NldHVwLmggYXMgdGhpcyBpcwo+IGRvbmUgZm9yIGFsbCB0aGUgb3RoZXJzIGZ1
+bmN0aW9uIGV4cG9ydGVkIGluIGJvb3RmZHQuYy4KIApJJ2xsIGRvIHRoYXQKCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxp
+c3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVj
+dC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
