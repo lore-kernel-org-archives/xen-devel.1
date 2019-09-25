@@ -2,54 +2,50 @@ Return-Path: <SRS0=n2L7=XU=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78FBEC432C2
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2019 15:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E8B3C432C2
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2019 15:11:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4E79521D7B
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2019 15:10:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E79521D7B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=arm.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3FDE121D7B
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Sep 2019 15:11:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3FDE121D7B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iD8va-0003St-Bv; Wed, 25 Sep 2019 15:10:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1iD8x9-0004BX-VK; Wed, 25 Sep 2019 15:11:39 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=KYcU=XU=arm.com=julien.grall@srs-us1.protection.inumbo.net>)
- id 1iD8vZ-0003Pt-Te
- for xen-devel@lists.xenproject.org; Wed, 25 Sep 2019 15:10:01 +0000
-X-Inumbo-ID: 8b647e48-dfa6-11e9-9636-12813bfff9fa
-Received: from foss.arm.com (unknown [217.140.110.172])
- by localhost (Halon) with ESMTP
- id 8b647e48-dfa6-11e9-9636-12813bfff9fa;
- Wed, 25 Sep 2019 15:10:00 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8BE651000;
- Wed, 25 Sep 2019 08:10:00 -0700 (PDT)
-Received: from [10.1.196.50] (e108454-lin.cambridge.arm.com [10.1.196.50])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 51DAD3F59C;
- Wed, 25 Sep 2019 08:09:59 -0700 (PDT)
-To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20190924154633.852828-1-volodymyr_babchuk@epam.com>
-From: Julien Grall <julien.grall@arm.com>
-Message-ID: <262f9d04-fe7c-c94c-f2bc-86678cbb5935@arm.com>
-Date: Wed, 25 Sep 2019 16:09:57 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ <SRS0=Rg9B=XU=suse.de=nsaenzjulienne@srs-us1.protection.inumbo.net>)
+ id 1iD8fB-000286-AO
+ for xen-devel@lists.xenproject.org; Wed, 25 Sep 2019 14:53:05 +0000
+X-Inumbo-ID: 2ce9a642-dfa4-11e9-bf31-bc764e2007e4
+Received: from mx1.suse.de (unknown [195.135.220.15])
+ by localhost (Halon) with ESMTPS
+ id 2ce9a642-dfa4-11e9-bf31-bc764e2007e4;
+ Wed, 25 Sep 2019 14:53:03 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx1.suse.de (Postfix) with ESMTP id 47F59AEE1;
+ Wed, 25 Sep 2019 14:53:02 +0000 (UTC)
+Message-ID: <d1a31a2ec8eb2f226b1fb41f6c24ffb47c3bf7c7.camel@suse.de>
+From: Nicolas Saenz Julienne <nsaenzjulienne@suse.de>
+To: Rob Herring <robh+dt@kernel.org>
+Date: Wed, 25 Sep 2019 16:52:59 +0200
+In-Reply-To: <CAL_Jsq+v+svTyna7UzQdRVqfNc5Z_bgWzxNRXv7-Wqv3NwDu2g@mail.gmail.com>
+References: <20190924181244.7159-1-nsaenzjulienne@suse.de>
+ <CAL_Jsq+v+svTyna7UzQdRVqfNc5Z_bgWzxNRXv7-Wqv3NwDu2g@mail.gmail.com>
+User-Agent: Evolution 3.32.4 
 MIME-Version: 1.0
-In-Reply-To: <20190924154633.852828-1-volodymyr_babchuk@epam.com>
-Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH v3 0/3] arch/arm: optee: fix TODOs and
- change status to "Tech Preview"
+X-Mailman-Approved-At: Wed, 25 Sep 2019 15:11:38 +0000
+Subject: Re: [Xen-devel] [PATCH 00/11] of: Fix DMA configuration for non-DT
+ masters
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,53 +56,174 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Tim Deegan <tim@xen.org>,
- "tee-dev@lists.linaro.org" <tee-dev@lists.linaro.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: devicetree@vger.kernel.org, Matthias Brugger <mbrugger@suse.com>,
+ linux-arm-msm <linux-arm-msm@vger.kernel.org>,
+ freedreno <freedreno@lists.freedesktop.org>,
+ linux-wireless <linux-wireless@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, etnaviv@lists.freedesktop.org,
+ linux-tegra@vger.kernel.org, Florian Fainelli <f.fainelli@gmail.com>,
+ Stefan Wahren <wahrenst@gmx.net>, james.quinlan@broadcom.com,
+ linux-pci@vger.kernel.org, "open list:DMA GENERIC OFFLOAD ENGINE
+ SUBSYSTEM" <dmaengine@vger.kernel.org>, xen-devel@lists.xenproject.org,
+ Dan Williams <dan.j.williams@intel.com>, Robin Murphy <robin.murphy@arm.com>,
+ Frank Rowand <frowand.list@gmail.com>,
+ "moderated list:ARM/FREESCALE IMX / MXC ARM ARCHITECTURE"
+ <linux-arm-kernel@lists.infradead.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="===============9060129792173961816=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGkgVm9sb2R5bXlyLAoKT24gMjQvMDkvMjAxOSAxNjo0NiwgVm9sb2R5bXlyIEJhYmNodWsgd3Jv
-dGU6Cj4gVGhpcyBpcyB0aGUgdGhpcmQgdmVyc2lvbiBvZiBtYXR1cmluZyB0aGUgT1AtVEVFIG1l
-ZGlhdG9yIHBhdGNoZXMuCj4gCj4gQ2hhbmdlcyBhbHNvIGNhbiBiZSBwdWxsZWQgZnJvbSBbM10u
-Cj4gCj4gQ2hhbmdlcyBmcm9tIHYyOgo+ICAgLSBUaGUgZm9sbG93aW5nIDMgcGF0Y2hlcyB3ZXJl
-IGNvbW1pdGVkOgo+ICAgeGVuL2FybTogb3B0ZWU6IGltcG9zZSBsaW1pdCBvbiBzaGFyZWQgYnVm
-ZmVyIHNpemUKPiAgIHhlbi9hcm06IG9wdGVlOiBjaGVjayBmb3IgcHJlZW1wdGlvbiB3aGlsZSBm
-cmVlaW5nIHNoYXJlZCBidWZmZXJzCj4gICB4ZW4vYXJtOiBvcHRlZTogbGltaXQgbnVtYmVyIG9m
-IHNoYXJlZCBidWZmZXJzCj4gICAtIE90aGVyIGNoYW5nZXMgYXJlIGRlc2NyaWJlZCBpbiB0aGUg
-Y29ycmVzcG9uZGluZyBwYXRjaGVzCj4gCj4gQ2hhbmdlcyBmcm9tIHYxOgo+ICAgLSBBZGRlZCBw
-YXRjaCB0aGF0IHVwZGF0ZXMgU1VQUE9SVC5tZAo+ICAgLSBJbnN0ZWFkIG9mIHJlbW92aW5nICJl
-eHBlcmltZW50YWwiIHN0YXR1cyBJIGNoYW5nZWQgaXQgdG8gIlRlY2ggUHJldmlldyIKPiAgIC0g
-T3RoZXIgY2hhbmdlcyBhcmUgZGVzY3JpYmVkIGluIHRoZSBjb3JyZXNwb25kaW5nIHBhdGNoZXMK
-PiAKPiBDb3ZlciBsZXR0ZXIgZm9yIHYxOgo+IAo+IFRoaXMgcGF0Y2ggc2VyaWVzIGZpeGVzIHZh
-cmlvdXMgdW5maW5pc2hlZCBpdGVtcyBpbiB0aGUgT1AtVEVFIG1lZGlhdG9yLgo+IE1vc3RseSB0
-aGlzIGlzIGFib3V0IGxpbWl0aW5nIHJlc291cmNlcyB0aGF0IGd1ZXN0IGNhbiBjb25zdW1lLiBU
-aGlzCj4gaW5jbHVkZXMgYm90aCBtZW1vcnkgYW5kIHRpbWUgLSBob3cgbWFueSBidWZmZXJzIGd1
-ZXN0IGNhbiBzaGFyZSB3aXRoCj4gT1AtVEVFICh0aGlzIHVzZXMgWGVuIG1lbW9yeSkgYW5kIHdo
-ZW4gbWVkaWF0b3Igc2hvdWxkIHByZWVtcHQgaXRzZWxmLAo+IHRvIG1ha2Ugc3VyZSB0aGF0IGd1
-ZXN0IGRvZXMgbm90IHN0cmVzcyBzY2hlZHVsaW5nLgo+IAo+IEFwYXJ0IGZyb20gdGhpcywgdGhl
-cmUgd2VyZSBvbmUgY2FzZSwgd2hlbiBtZWRpYXRvcidzIGFjdGlvbnMgbWlnaHQgbGVhZAo+IHRv
-IG1lbW9yeSBsZWFrIGluIGEgZ29vZC1iZWhhdmluZyBndWVzdC4gVG8gZml4IHRoaXMgaXNzdWUg
-SSBoYWQgdG8KPiBleHRlbmQgbWVkaWF0b3IgbG9naWMsIHNvIG5vdyBpdCBjYW4gaXNzdWUgUlBD
-IHJlcXVlc3RzIHRvIGd1ZXN0IGluIHRoZQo+IHNhbWUgd2F5LCBhcyBPUC1URUUgZG9lcyB0aGlz
-LiBUaGlzIGlzIHVzZWZ1bCBmZWF0dXJlLCBiZWNhdXNlIGl0Cj4gYWxsb3dzIHRvIHByZWVtcHQg
-bWVkaWF0b3IgZHVyaW5nIGxvbmcgb3BlcmF0aW9ucy4gU28sIGluIHRoZSBmdXR1cmUKPiBpdCB3
-aWxsIGJlIHBvc3NpYmxlIHRvIHJlbW92ZSBzaGFyZWQgYnVmZmVyIHNpemUgbGltaXRhdGlvbiwg
-YmVjYXVzZQo+IG1lZGlhdG9yIGNhbiBwcmVlbXB0IHNlbGYgZHVyaW5nIGJ1ZmZlciB0cmFuc2xh
-dGlvbi4KPiAKPiBUaGlzIHBhdGNoIHNlcmllcyBjYW4gYmUgcHVsbGVkIGZyb20gWzFdLgo+IAo+
-IFsxXSBodHRwczovL2dpdGh1Yi5jb20vbG9yYy94ZW4vdHJlZS9vcHRlZTNfdjEKPiBbMl0gaHR0
-cHM6Ly9naXRodWIuY29tL2xvcmMveGVuL3RyZWUvb3B0ZWUzX3YyCj4gWzNdIGh0dHBzOi8vZ2l0
-aHViLmNvbS9sb3JjL3hlbi90cmVlL29wdGVlM192Mwo+IAo+IAo+IFZvbG9keW15ciBCYWJjaHVr
-ICgzKToKPiAgICB4ZW4vYXJtOiBvcHRlZTogaGFuZGxlIHNoYXJlZCBidWZmZXIgdHJhbnNsYXRp
-b24gZXJyb3IKPiAgICBTVVBQT1JULm1kOiBEZXNjcmliZSBPUC1URUUgbWVkaWF0b3IKPiAgICB4
-ZW4vYXJtOiBvcHRlZTogdXBkYXRlIGRlc2NyaXB0aW9uIGluIEtjb25maWcKClRoZSBzZXJpZXMg
-aXMgbm93IG1lcmdlZC4gVGhhbmsgeW91IGZvciB0aGUgY29udHJpYnV0aW9uIQoKQ2hlZXJzLAoK
-LS0gCkp1bGllbiBHcmFsbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
-dC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1k
-ZXZlbA==
+
+--===============9060129792173961816==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-5Mzcra9IsjRjM5vnaomh"
+
+
+--=-5Mzcra9IsjRjM5vnaomh
+Content-Type: multipart/mixed; boundary="=-QzsDiLgE5dpWVAyKk5Wj"
+
+
+--=-QzsDiLgE5dpWVAyKk5Wj
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2019-09-24 at 16:59 -0500, Rob Herring wrote:
+> On Tue, Sep 24, 2019 at 1:12 PM Nicolas Saenz Julienne
+> <nsaenzjulienne@suse.de> wrote:
+> > Hi All,
+> > this series tries to address one of the issues blocking us from
+> > upstreaming Broadcom's STB PCIe controller[1]. Namely, the fact that
+> > devices not represented in DT which sit behind a PCI bus fail to get th=
+e
+> > bus' DMA addressing constraints.
+> >=20
+> > This is due to the fact that of_dma_configure() assumes it's receiving =
+a
+> > DT node representing the device being configured, as opposed to the PCI=
+e
+> > bridge node we currently pass. This causes the code to directly jump
+> > into PCI's parent node when checking for 'dma-ranges' and misses
+> > whatever was set there.
+> >=20
+> > To address this I create a new API in OF - inspired from Robin Murphys
+> > original proposal[2] - which accepts a bus DT node as it's input in
+> > order to configure a device's DMA constraints. The changes go deep into
+> > of/address.c's implementation, as a device being having a DT node
+> > assumption was pretty strong.
+> >=20
+> > On top of this work, I also cleaned up of_dma_configure() removing its
+> > redundant arguments and creating an alternative function for the specia=
+l
+> > cases
+> > not applicable to either the above case or the default usage.
+> >=20
+> > IMO the resulting functions are more explicit. They will probably
+> > surface some hacky usages that can be properly fixed as I show with the
+> > DT fixes on the Layerscape platform.
+> >=20
+> > This was also tested on a Raspberry Pi 4 with a custom PCIe driver and
+> > on a Seattle AMD board.
+>=20
+> Humm, I've been working on this issue too. Looks similar though yours
+> has a lot more churn and there's some other bugs I've found.
+
+That's good news, and yes now that I see it, some stuff on my series is ove=
+rly
+complicated. Specially around of_translate_*().
+
+On top of that, you removed in of_dma_get_range():
+
+-	/*
+-	 * At least empty ranges has to be defined for parent node if
+-	 * DMA is supported
+-	 */
+-	if (!ranges)
+-		break;
+
+Which I assumed was bound to the standard and makes things easier.
+
+> Can you test out this branch[1]. I don't have any h/w needing this,
+> but wrote a unittest and tested with modified QEMU.
+
+I reviewed everything, I did find a minor issue, see the patch attached.
+
+Also I tested your branch both on an RPi4, with a PCI device that depends o=
+n
+these changes and by comparing the OF debugs logs on a Layerscape board whi=
+ch
+uses dma-ranges, dma-coherent and IOMMU. All works as expected.
+
+Will you send this series for v5.5? Please keep me in the loop, I'll review=
+ and
+test the final version.
+
+Regards,
+Nicolas
+
+
+--=-QzsDiLgE5dpWVAyKk5Wj
+Content-Disposition: attachment;
+	filename*0=0001-of-device-do-not-bail-of_dma_configure-when-force_dm.pat;
+	filename*1=ch
+Content-Type: text/x-patch;
+	name="0001-of-device-do-not-bail-of_dma_configure-when-force_dm.patch";
+	charset="UTF-8"
+Content-Transfer-Encoding: base64
+
+RnJvbSAyNmQ1MTg1M2MyNWMwNGMyOGRiYzA5MDYxOTUxYTkzYzEwMmRhYmNkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBOaWNvbGFzIFNhZW56IEp1bGllbm5lIDxuc2FlbnpqdWxpZW5u
+ZUBzdXNlLmRlPgpEYXRlOiBXZWQsIDI1IFNlcCAyMDE5IDE2OjI2OjU3ICswMjAwClN1YmplY3Q6
+IFtQQVRDSF0gb2Y6IGRldmljZTogZG8gbm90IGJhaWwgb2ZfZG1hX2NvbmZpZ3VyZSgpIHdoZW4g
+Zm9yY2VfZG1hIGlzCiBzZXQKClNvbWUgWGVuIGRldmljZXMgY2FsbCBvZl9kbWFfY29uZmlndXJl
+KCkgd2l0aG91dCBhbiBhY3R1YWwgRFQgbm9kZSBpbgpvcmRlciBmb3IgaXQgdG8gc2V0IGl0cyAn
+ZG1hX29wcycuIFRoYXQncyB0aGUgb3JpZ2luYWwgaW50ZW50IG9mCidmb3JjZV9kbWEnLCBob25v
+ciB0aGF0IGJlaGF2aW91ci4KClNpZ25lZC1vZmYtYnk6IE5pY29sYXMgU2FlbnogSnVsaWVubmUg
+PG5zYWVuemp1bGllbm5lQHN1c2UuZGU+Ci0tLQogZHJpdmVycy9vZi9kZXZpY2UuYyB8IDIgLS0K
+IDEgZmlsZSBjaGFuZ2VkLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvb2Yv
+ZGV2aWNlLmMgYi9kcml2ZXJzL29mL2RldmljZS5jCmluZGV4IGE0NTI2MWUyMTE0NC4uN2JjMDBm
+NzI0NjhmIDEwMDY0NAotLS0gYS9kcml2ZXJzL29mL2RldmljZS5jCisrKyBiL2RyaXZlcnMvb2Yv
+ZGV2aWNlLmMKQEAgLTEwMCw4ICsxMDAsNiBAQCBpbnQgb2ZfZG1hX2NvbmZpZ3VyZShzdHJ1Y3Qg
+ZGV2aWNlICpkZXYsIHN0cnVjdCBkZXZpY2Vfbm9kZSAqcGFyZW50LCBib29sIGZvcmNlXwogCW5w
+ID0gZGV2LT5vZl9ub2RlOwogCWlmICghbnApCiAJCW5wID0gcGFyZW50OwotCWlmICghbnApCi0J
+CXJldHVybiAtRU5PREVWOwogCiAJcmV0ID0gb2ZfZG1hX2dldF9yYW5nZShucCwgJmRtYV9hZGRy
+LCAmcGFkZHIsICZzaXplKTsKIAlpZiAocmV0IDwgMCkgewotLSAKMi4yMy4wCgo=
+
+
+--=-QzsDiLgE5dpWVAyKk5Wj--
+
+--=-5Mzcra9IsjRjM5vnaomh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEErOkkGDHCg2EbPcGjlfZmHno8x/4FAl2Lf0sACgkQlfZmHno8
+x/7mvQf6A++shc7v4vCUvlFLh6kIZ0UPBKuSnxpUpUn+R3BMoS6J5Ce/ma0SOzIJ
+MRQmawROuL2F6qf0g3ykdpnaSD14TAEB9UnJzLoTkprKRFRhdq4pQjCDGDWIpWSO
+fW6GnBbCLaTa0r38siU1DvnV3ZXCNnmN+lO5mqEp380R7cLwMj0hrH4mzkNuSUHK
+uKWLMd/ZZyDk7e2j1qZ2bXg6PRRSfXZfU7Oqtwt6k7JNoPB/HneraMxoO43EyzDA
+qt4Fxx6cDsZQAPbqJPChpSN4USdi0rN171NlKW3+PRsGfZN4LzUF3MoK2uvReV0n
+DhW7JoNOzqhh0pk2iPTRov0M+zbYEg==
+=jmQ8
+-----END PGP SIGNATURE-----
+
+--=-5Mzcra9IsjRjM5vnaomh--
+
+
+
+--===============9060129792173961816==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============9060129792173961816==--
+
+
