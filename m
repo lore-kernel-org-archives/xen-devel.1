@@ -7,70 +7,70 @@ X-Spam-Status: No, score=-8.4 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94ECAC4360C
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2019 09:49:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F41FC432C2
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2019 09:49:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6565E222C0
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2019 09:49:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 729E0222C0
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Sep 2019 09:49:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="mg4OCw6X"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6565E222C0
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.com header.i=@amazon.com header.b="ojz5PpuG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 729E0222C0
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iDQPA-0006oH-L9; Thu, 26 Sep 2019 09:49:44 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1iDQPD-0006uD-Ii; Thu, 26 Sep 2019 09:49:47 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Ph5t=XV=amazon.com=prvs=165c3e20f=hongyax@srs-us1.protection.inumbo.net>)
- id 1iDQP9-0006ku-59
- for xen-devel@lists.xenproject.org; Thu, 26 Sep 2019 09:49:43 +0000
-X-Inumbo-ID: f1597b94-e042-11e9-b588-bc764e2007e4
-Received: from smtp-fw-9102.amazon.com (unknown [207.171.184.29])
+ id 1iDQPB-0006qk-UV
+ for xen-devel@lists.xenproject.org; Thu, 26 Sep 2019 09:49:45 +0000
+X-Inumbo-ID: de1c7900-e042-11e9-964c-12813bfff9fa
+Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
  by localhost (Halon) with ESMTPS
- id f1597b94-e042-11e9-b588-bc764e2007e4;
- Thu, 26 Sep 2019 09:49:33 +0000 (UTC)
+ id de1c7900-e042-11e9-964c-12813bfff9fa;
+ Thu, 26 Sep 2019 09:49:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
- t=1569491374; x=1601027374;
+ t=1569491340; x=1601027340;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=iM0pBRhHPqSu1d/F9uL8ZRB9EnCqA5i0SQPBpzKDfcA=;
- b=mg4OCw6XPvRdMU/LNsiFEKyriJaVIpWUWNTcMesE60Kw08V+p7A/92Qy
- AZWIbRFB/oXecaebpM9Cn5lg9YrB7fCClwBzTL/x1BlYvJdmHWmGlV0kv
- 4XXSk21zZ4zdLqO6Ksdd7yGgwjIIMwmNIXnK7jDOuuGmHsUKiOM78nabd 4=;
-X-IronPort-AV: E=Sophos;i="5.64,551,1559520000"; d="scan'208";a="704637261"
-Received: from sea3-co-svc-lb6-vlan3.sea.amazon.com (HELO
- email-inbound-relay-1e-a70de69e.us-east-1.amazon.com) ([10.47.22.38])
- by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP;
- 26 Sep 2019 09:48:00 +0000
+ bh=Wby/mGwNUuZMxWF138zkmrPdE1eRR8bcGajq5qTxSXc=;
+ b=ojz5PpuGRvxVFs9oILFlpn54wH3wrQe5nl4jxS0Bx51meoAHfuq1TASw
+ ns/aJTqJl80UEKlctCrvfqoHmhCd0q3lss7jNNI5KwwYVrtGl9NJByfuS
+ QrhTad5tFKjauoSBuXAMazUOxqm04xp/a3KbM9g7jajIUf1rx1SAW9fMc 4=;
+X-IronPort-AV: E=Sophos;i="5.64,551,1559520000"; d="scan'208";a="423750630"
+Received: from iad6-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-1e-97fdccfd.us-east-1.amazon.com) ([10.124.125.6])
+ by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
+ 26 Sep 2019 09:49:00 +0000
 Received: from EX13MTAUWA001.ant.amazon.com
- (iad55-ws-svc-p15-lb9-vlan2.iad.amazon.com [10.40.159.162])
- by email-inbound-relay-1e-a70de69e.us-east-1.amazon.com (Postfix) with ESMTPS
- id 34C6BA2443; Thu, 26 Sep 2019 09:47:44 +0000 (UTC)
-Received: from EX13D18UWA003.ant.amazon.com (10.43.160.238) by
- EX13MTAUWA001.ant.amazon.com (10.43.160.118) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Thu, 26 Sep 2019 09:47:12 +0000
+ (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
+ by email-inbound-relay-1e-97fdccfd.us-east-1.amazon.com (Postfix) with ESMTPS
+ id DDA02A1F03; Thu, 26 Sep 2019 09:48:58 +0000 (UTC)
+Received: from EX13D24UWA004.ant.amazon.com (10.43.160.233) by
+ EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
+ id 15.0.1367.3; Thu, 26 Sep 2019 09:48:31 +0000
 Received: from EX13MTAUWA001.ant.amazon.com (10.43.160.58) by
- EX13D18UWA003.ant.amazon.com (10.43.160.238) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Thu, 26 Sep 2019 09:47:12 +0000
+ EX13D24UWA004.ant.amazon.com (10.43.160.233) with Microsoft SMTP Server (TLS)
+ id 15.0.1367.3; Thu, 26 Sep 2019 09:48:30 +0000
 Received: from u9d785c4ba99158.ant.amazon.com (10.125.106.58) by
  mail-relay.amazon.com (10.43.160.118) with Microsoft SMTP Server id
- 15.0.1367.3 via Frontend Transport; Thu, 26 Sep 2019 09:47:10 +0000
+ 15.0.1367.3 via Frontend Transport; Thu, 26 Sep 2019 09:48:29 +0000
 From: <hongyax@amazon.com>
 To: <xen-devel@lists.xenproject.org>
-Date: Thu, 26 Sep 2019 10:45:33 +0100
-Message-ID: <78ad85ad08e14a59d7e6aa59b5aeac0bfa7bf82a.1569489002.git.hongyax@amazon.com>
+Date: Thu, 26 Sep 2019 10:46:16 +0100
+Message-ID: <32ae1461fb4177b1586bb7e735da6d58bbee5462.1569489002.git.hongyax@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1569489002.git.hongyax@amazon.com>
 References: <cover.1569489002.git.hongyax@amazon.com>
 MIME-Version: 1.0
 Precedence: Bulk
-Subject: [Xen-devel] [RFC PATCH 10/84] x86/mm: change pl2e to l2t in
- virt_to_xen_l2e
+Subject: [Xen-devel] [RFC PATCH 53/84] x86: remove lXe_to_lYe in __start_xen
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
@@ -88,33 +88,46 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-RnJvbTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KCldlIHdpbGwgbmVlZCB0byBoYXZl
-IGEgdmFyaWFibGUgbmFtZWQgcGwyZSB3aGVuIHdlIHJld3JpdGUKdmlydF90b194ZW5fbDJlLiBD
-aGFuZ2UgcGwyZSB0byBsMnQgdG8gcmVmbGVjdCBiZXR0ZXIgaXRzIHB1cnBvc2UuClRoaXMgd2ls
-bCBtYWtlIHJldmlld2luZyBsYXRlciBwYXRjaCBlYXNpZXIuCgpObyBmdW5jdGlvbmFsIGNoYW5n
-ZS4KClNpZ25lZC1vZmYtYnk6IFdlaSBMaXUgPHdlaS5saXUyQGNpdHJpeC5jb20+Ci0tLQogeGVu
-L2FyY2gveDg2L21tLmMgfCAxNCArKysrKysrLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDcgaW5z
-ZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94ODYvbW0u
-YyBiL3hlbi9hcmNoL3g4Ni9tbS5jCmluZGV4IGIyMGQ0MTdmZWMuLmVhNjkzMWUwNTIgMTAwNjQ0
-Ci0tLSBhL3hlbi9hcmNoL3g4Ni9tbS5jCisrKyBiL3hlbi9hcmNoL3g4Ni9tbS5jCkBAIC00OTM5
-LDIyICs0OTM5LDIyIEBAIHN0YXRpYyBsMl9wZ2VudHJ5X3QgKnZpcnRfdG9feGVuX2wyZSh1bnNp
-Z25lZCBsb25nIHYpCiAgICAgaWYgKCAhKGwzZV9nZXRfZmxhZ3MoKnBsM2UpICYgX1BBR0VfUFJF
-U0VOVCkgKQogICAgIHsKICAgICAgICAgYm9vbCBsb2NraW5nID0gc3lzdGVtX3N0YXRlID4gU1lT
-X1NUQVRFX2Jvb3Q7Ci0gICAgICAgIGwyX3BnZW50cnlfdCAqcGwyZSA9IGFsbG9jX3hlbl9wYWdl
-dGFibGUoKTsKKyAgICAgICAgbDJfcGdlbnRyeV90ICpsMnQgPSBhbGxvY194ZW5fcGFnZXRhYmxl
-KCk7CiAKLSAgICAgICAgaWYgKCAhcGwyZSApCisgICAgICAgIGlmICggIWwydCApCiAgICAgICAg
-ICAgICByZXR1cm4gTlVMTDsKICAgICAgICAgaWYgKCBsb2NraW5nICkKICAgICAgICAgICAgIHNw
-aW5fbG9jaygmbWFwX3BnZGlyX2xvY2spOwogICAgICAgICBpZiAoICEobDNlX2dldF9mbGFncygq
-cGwzZSkgJiBfUEFHRV9QUkVTRU5UKSApCiAgICAgICAgIHsKLSAgICAgICAgICAgIGNsZWFyX3Bh
-Z2UocGwyZSk7Ci0gICAgICAgICAgICBsM2Vfd3JpdGUocGwzZSwgbDNlX2Zyb21fcGFkZHIoX19w
-YShwbDJlKSwgX19QQUdFX0hZUEVSVklTT1IpKTsKLSAgICAgICAgICAgIHBsMmUgPSBOVUxMOwor
-ICAgICAgICAgICAgY2xlYXJfcGFnZShsMnQpOworICAgICAgICAgICAgbDNlX3dyaXRlKHBsM2Us
-IGwzZV9mcm9tX3BhZGRyKF9fcGEobDJ0KSwgX19QQUdFX0hZUEVSVklTT1IpKTsKKyAgICAgICAg
-ICAgIGwydCA9IE5VTEw7CiAgICAgICAgIH0KICAgICAgICAgaWYgKCBsb2NraW5nICkKICAgICAg
-ICAgICAgIHNwaW5fdW5sb2NrKCZtYXBfcGdkaXJfbG9jayk7Ci0gICAgICAgIGlmICggcGwyZSAp
-Ci0gICAgICAgICAgICBmcmVlX3hlbl9wYWdldGFibGUocGwyZSk7CisgICAgICAgIGlmICggbDJ0
-ICkKKyAgICAgICAgICAgIGZyZWVfeGVuX3BhZ2V0YWJsZShsMnQpOwogICAgIH0KIAogICAgIEJV
-R19PTihsM2VfZ2V0X2ZsYWdzKCpwbDNlKSAmIF9QQUdFX1BTRSk7Ci0tIAoyLjE3LjEKCgpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFp
-bGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhl
-bnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+RnJvbTogV2VpIExpdSA8d2VpLmxpdTJAY2l0cml4LmNvbT4KClByb3Blcmx5IG1hcCBhbmQgdW5t
+YXAgcGFnZSB0YWJsZXMgd2hlcmUgbmVjZXNzYXJ5LgoKU2lnbmVkLW9mZi1ieTogV2VpIExpdSA8
+d2VpLmxpdTJAY2l0cml4LmNvbT4KLS0tCiB4ZW4vYXJjaC94ODYvc2V0dXAuYyB8IDEwICsrKysr
+KysrLS0KIDEgZmlsZSBjaGFuZ2VkLCA4IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpk
+aWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3NldHVwLmMgYi94ZW4vYXJjaC94ODYvc2V0dXAuYwpp
+bmRleCAyNzk4MWFkYzBiLi4xYzkwNTU5Mjg4IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvc2V0
+dXAuYworKysgYi94ZW4vYXJjaC94ODYvc2V0dXAuYwpAQCAtMTA5NSwxMyArMTA5NSwxNyBAQCB2
+b2lkIF9faW5pdCBub3JldHVybiBfX3N0YXJ0X3hlbih1bnNpZ25lZCBsb25nIG1iaV9wKQogICAg
+ICAgICAgICAgcGw0ZSA9IF9fdmEoX19wYShpZGxlX3BnX3RhYmxlKSk7CiAgICAgICAgICAgICBm
+b3IgKCBpID0gMCA7IGkgPCBMNF9QQUdFVEFCTEVfRU5UUklFUzsgaSsrLCBwbDRlKysgKQogICAg
+ICAgICAgICAgeworICAgICAgICAgICAgICAgIGwzX3BnZW50cnlfdCAqbDN0OworCiAgICAgICAg
+ICAgICAgICAgaWYgKCAhKGw0ZV9nZXRfZmxhZ3MoKnBsNGUpICYgX1BBR0VfUFJFU0VOVCkgKQog
+ICAgICAgICAgICAgICAgICAgICBjb250aW51ZTsKICAgICAgICAgICAgICAgICAqcGw0ZSA9IGw0
+ZV9mcm9tX2ludHB0ZShsNGVfZ2V0X2ludHB0ZSgqcGw0ZSkgKwogICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHhlbl9waHlzX3N0YXJ0KTsKLSAgICAgICAgICAgICAgICBw
+bDNlID0gbDRlX3RvX2wzZSgqcGw0ZSk7CisgICAgICAgICAgICAgICAgcGwzZSA9IGwzdCA9IG1h
+cF94ZW5fcGFnZXRhYmxlX25ldyhsNGVfZ2V0X21mbigqcGw0ZSkpOwogICAgICAgICAgICAgICAg
+IGZvciAoIGogPSAwOyBqIDwgTDNfUEFHRVRBQkxFX0VOVFJJRVM7IGorKywgcGwzZSsrICkKICAg
+ICAgICAgICAgICAgICB7CisgICAgICAgICAgICAgICAgICAgIGwyX3BnZW50cnlfdCAqbDJ0Owor
+CiAgICAgICAgICAgICAgICAgICAgIC8qIE5vdCBwcmVzZW50LCAxR0IgbWFwcGluZywgb3IgYWxy
+ZWFkeSByZWxvY2F0ZWQ/ICovCiAgICAgICAgICAgICAgICAgICAgIGlmICggIShsM2VfZ2V0X2Zs
+YWdzKCpwbDNlKSAmIF9QQUdFX1BSRVNFTlQpIHx8CiAgICAgICAgICAgICAgICAgICAgICAgICAg
+KGwzZV9nZXRfZmxhZ3MoKnBsM2UpICYgX1BBR0VfUFNFKSB8fApAQCAtMTEwOSw3ICsxMTEzLDcg
+QEAgdm9pZCBfX2luaXQgbm9yZXR1cm4gX19zdGFydF94ZW4odW5zaWduZWQgbG9uZyBtYmlfcCkK
+ICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAgICAgICAgICAgICAgICAq
+cGwzZSA9IGwzZV9mcm9tX2ludHB0ZShsM2VfZ2V0X2ludHB0ZSgqcGwzZSkgKwogICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB4ZW5fcGh5c19zdGFydCk7Ci0gICAg
+ICAgICAgICAgICAgICAgIHBsMmUgPSBsM2VfdG9fbDJlKCpwbDNlKTsKKyAgICAgICAgICAgICAg
+ICAgICAgcGwyZSA9IGwydCA9IG1hcF94ZW5fcGFnZXRhYmxlX25ldyhsM2VfZ2V0X21mbigqcGwz
+ZSkpOwogICAgICAgICAgICAgICAgICAgICBmb3IgKCBrID0gMDsgayA8IEwyX1BBR0VUQUJMRV9F
+TlRSSUVTOyBrKyssIHBsMmUrKyApCiAgICAgICAgICAgICAgICAgICAgIHsKICAgICAgICAgICAg
+ICAgICAgICAgICAgIC8qIE5vdCBwcmVzZW50LCBQU0UsIG9yIGFscmVhZHkgcmVsb2NhdGVkPyAq
+LwpAQCAtMTEyMCw3ICsxMTI0LDkgQEAgdm9pZCBfX2luaXQgbm9yZXR1cm4gX19zdGFydF94ZW4o
+dW5zaWduZWQgbG9uZyBtYmlfcCkKICAgICAgICAgICAgICAgICAgICAgICAgICpwbDJlID0gbDJl
+X2Zyb21faW50cHRlKGwyZV9nZXRfaW50cHRlKCpwbDJlKSArCiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB4ZW5fcGh5c19zdGFydCk7CiAgICAgICAgICAg
+ICAgICAgICAgIH0KKyAgICAgICAgICAgICAgICAgICAgVU5NQVBfWEVOX1BBR0VUQUJMRV9ORVco
+bDJ0KTsKICAgICAgICAgICAgICAgICB9CisgICAgICAgICAgICAgICAgVU5NQVBfWEVOX1BBR0VU
+QUJMRV9ORVcobDN0KTsKICAgICAgICAgICAgIH0KIAogICAgICAgICAgICAgLyogVGhlIG9ubHkg
+ZGF0YSBtYXBwaW5ncyB0byBiZSByZWxvY2F0ZWQgYXJlIGluIHRoZSBYZW4gYXJlYS4gKi8KLS0g
+CjIuMTcuMQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
