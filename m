@@ -2,80 +2,105 @@ Return-Path: <SRS0=1d2Y=XW=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A31DAC4360C
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Sep 2019 15:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 781B8C4360C
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Sep 2019 15:35:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 71A3A217D7
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Sep 2019 15:33:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4A2B021841
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Sep 2019 15:35:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="VYuHBjBG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 71A3A217D7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=epam.com header.i=@epam.com header.b="jM3OUkdZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A2B021841
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iDsFW-0005Mt-TQ; Fri, 27 Sep 2019 15:33:38 +0000
+	id 1iDsGe-0005Sl-Dt; Fri, 27 Sep 2019 15:34:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=u2/q=XW=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1iDsFV-0005Mm-GZ
- for xen-devel@lists.xenproject.org; Fri, 27 Sep 2019 15:33:37 +0000
-X-Inumbo-ID: 2bdfac8a-e13c-11e9-b588-bc764e2007e4
-Received: from out1-smtp.messagingengine.com (unknown [66.111.4.25])
- by localhost (Halon) with ESMTPS
- id 2bdfac8a-e13c-11e9-b588-bc764e2007e4;
- Fri, 27 Sep 2019 15:33:36 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
- by mailout.nyi.internal (Postfix) with ESMTP id 07C5122220;
- Fri, 27 Sep 2019 11:33:36 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Fri, 27 Sep 2019 11:33:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; bh=qmvwaD
- ARkY3FMwH7telujdqH7hN0L2gMiy/zHe9kYIg=; b=VYuHBjBG84pax4KTx2jLqF
- JbYZRNDP4+5/KPgGfaC9fYh13GQoFLCO/dySWZI/0Mr0z+g0qgzMUBigamxb7kxS
- riQTKlsAbgd8MNHytSECA1B4aDoeRlWuBCiAgUhFn7iEjo7sqw9Hw5qVR3wIZnpY
- kGQi9YCRmjjuUwo9J85KLw91kWljaYnoLxdCBMwaKMtbfyUs2bjmxEqKhSG5+7et
- bDDIL7qH0T2TyFqokBi3oRXgacZARSRXK11SYMlRx+2uyYtEV0YkoCGdOyX6wnk/
- oStcF8iIpNIzIWhj8+kkJisJbjiA8BM1s80D1sEhRYYOnnfp4rZ4AtaownKd/LDQ
- ==
-X-ME-Sender: <xms:zyuOXeu9znm3YTSu_jFMqOMlEeHjb7NNQa8NTyTkFhCiHbljTbLBJA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrfeeigdekkecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpeffhffvuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
- ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
- hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecukfhppeeluddrieehrdefgedrfeef
- necurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhishhisghlvg
- hthhhinhhgshhlrggsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:zyuOXU5ROyxu1a50sPK-VSArDu0ij_JbAeIx0m-UEdyTF_mjJvTcgA>
- <xmx:zyuOXVLq69zhnuau2FEqNxlH-RPLnNmo4RIgFWx47p0_jo2BcxZctQ>
- <xmx:zyuOXWRl7z5uoUBrDCLMBHDL6LPebKFB34DvySK40Onwr50vg5uOZQ>
- <xmx:0CuOXannD-o-Zmxqri7Qqkz7I5gynWV5FsUqaSvJoDUk3rASepLMiw>
-Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
- by mail.messagingengine.com (Postfix) with ESMTPA id 0863880061;
- Fri, 27 Sep 2019 11:33:34 -0400 (EDT)
-Date: Fri, 27 Sep 2019 17:33:32 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-To: David Hildenbrand <david@redhat.com>
-Message-ID: <20190927153332.GW8065@mail-itl>
-References: <20190926213428.GU8065@mail-itl>
- <ae728728-9459-44d8-34f3-8ae78e273789@redhat.com>
+ <SRS0=myEs=XW=epam.com=volodymyr_babchuk@srs-us1.protection.inumbo.net>)
+ id 1iDsGc-0005Sb-Vo
+ for xen-devel@lists.xenproject.org; Fri, 27 Sep 2019 15:34:47 +0000
+X-Inumbo-ID: 54f42a06-e13c-11e9-bf31-bc764e2007e4
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com (unknown
+ [2a01:111:f400:fe0e::621]) by localhost (Halon) with ESMTPS
+ id 54f42a06-e13c-11e9-bf31-bc764e2007e4;
+ Fri, 27 Sep 2019 15:34:45 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=lUUtOlpylyL13DpQ6ugE7OUR+itIV+rnxd8lbSyU4YvZV3hnI2S7iSjH2hEpjHcFAc+Fdl2FrIhNGJ9akxzyvYrCb9WcpdRyevtUj7tiGfOpoEoCM5PO7S6mnOfFzO75MsQyTcC8r6gEHzQFXQlZPZMjh5WZZFw/jruHWFiUmfTOtds7cWhSc7P70A/jjzQFTMvLhDq9wTyL/X9IcL63r7lUoKxABcVIA0WoShxp80E5VrIo8es9rfBwB2LTYVsS4RgPrUj5dfz8WsRUIgvWXtzswSP0hoZvZLE3FwhF46XzbtRXi76lh+GeFYtC1eOm5VFKgm+BnoNvEPzlS1OS5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cc1K7PvVaakiog/+ssz6pIa48uAPTbxWsoa8AMjzl6o=;
+ b=Trvf1ViW80cGieoORCGKxS+0BViUtdVjpH5DOoo8ApHtoLkMlQMYZ5EXNhEE/aMcrP/KvcfCdhWSfgDxrqnjDssmhFSLXYbHf2cxwqJBXdN7KHMS/y+VipJK+BoDAqGd/B5MTgB0Gy+fMGWBicE17OjF5A2Ef2ZYhpgi0pKwiRBFzlkyat6hBP/EHKLwpAnN1NBcBql12zFq+4iTc0KvxRRKKY54HmGyQVo+lfKfuyS+LxHudhNFD7g9vnZ1zTSz0ADuyk3kkQZWf/3Uwg8rFnzI8RZFTvs5cxISW0bFS/7ZQXGYicy8rJgluQwsQDobYjMBnkP3DQtWOoD7INX23A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cc1K7PvVaakiog/+ssz6pIa48uAPTbxWsoa8AMjzl6o=;
+ b=jM3OUkdZXGAauHssyEAJ4yxYwmPZpzOrZnfD9h77rv9WrO6RRLlHj2QZRwEBEi8we0lb6YOx2JY5hl5ICDDPsbPVX/ViZCoNsKorAXC+UFAI2IXoZTZTJlx7tLZfrjfjVnlhXX+ePL1WNKayogtHGGLwdM89Mrl9jp8A+7wSLQI=
+Received: from AM0PR03MB4148.eurprd03.prod.outlook.com (20.177.40.10) by
+ AM0PR03MB3891.eurprd03.prod.outlook.com (52.135.146.148) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2284.26; Fri, 27 Sep 2019 15:34:44 +0000
+Received: from AM0PR03MB4148.eurprd03.prod.outlook.com
+ ([fe80::71e3:834d:5708:5a0a]) by AM0PR03MB4148.eurprd03.prod.outlook.com
+ ([fe80::71e3:834d:5708:5a0a%5]) with mapi id 15.20.2199.015; Fri, 27 Sep 2019
+ 15:34:44 +0000
+From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+To: Julien Grall <julien.grall@arm.com>
+Thread-Topic: [PATCH RFC for-4.13 08/10] xen/arm: alternative: add auto-nop
+ infrastructure
+Thread-Index: AQHVdJmVEemrUGDvaUSmkI1ETa3zKqc/qPeA
+Date: Fri, 27 Sep 2019 15:34:44 +0000
+Message-ID: <87impd92i4.fsf@epam.com>
+References: <20190926183808.11630-1-julien.grall@arm.com>
+ <20190926183808.11630-9-julien.grall@arm.com>
+In-Reply-To: <20190926183808.11630-9-julien.grall@arm.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Volodymyr_Babchuk@epam.com; 
+x-originating-ip: [85.223.209.22]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 7c6dee42-f83f-4300-bfc2-08d743603899
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(7168020)(4627221)(201703031133081)(201702281549075)(8990200)(5600167)(711020)(4605104)(1401327)(2017052603328)(7193020);
+ SRVR:AM0PR03MB3891; 
+x-ms-traffictypediagnostic: AM0PR03MB3891:|AM0PR03MB3891:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <AM0PR03MB3891AF1D13E4AA7375951C46E6810@AM0PR03MB3891.eurprd03.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:9508;
+x-forefront-prvs: 0173C6D4D5
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(396003)(366004)(136003)(39860400002)(376002)(346002)(189003)(199004)(486006)(11346002)(316002)(76116006)(80792005)(66946007)(7736002)(478600001)(4326008)(5660300002)(8936002)(229853002)(6246003)(256004)(6436002)(86362001)(6512007)(6486002)(186003)(55236004)(26005)(102836004)(36756003)(25786009)(14454004)(2906002)(71190400001)(71200400001)(91956017)(81166006)(6506007)(76176011)(54906003)(99286004)(2616005)(3846002)(8676002)(81156014)(6116002)(476003)(6916009)(66476007)(64756008)(66446008)(446003)(305945005)(66066001)(66556008);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:AM0PR03MB3891;
+ H:AM0PR03MB4148.eurprd03.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: epam.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: kUFLozgw5/NVJ1SXgZ4gYw6aJEdzgOMDwFzjcZ1li0p6tNydXwUQlafGxnheg0/t+bDWQq1uufR2SHVgMstF+LQwNZnp872gVUmVuaMjw+ZQ8AhWfTJlcigZe96GlRvXxfNWgtmDUEHvkbDisl2MWecGmdLftoueu8Iw9L3FXGMwNST9uOTrwHa+oWzvImqBnKByqIQWG/tENMLvgtX+d3GhL/x6dXPRUxPg8pPNerxxu4WBsmZQakbxSr9/8oFARy8Zj8rM0cEUZyrplR2Og1iiaCGHiHEqwNWNKVHP9iy7UhginSwl1rFsZEq1YYeBlHPfr4IC8uQMUruvCp5DeIEIECXr9krk/j2W7PPIxJo5r7R9oyNaW35JU+JeD+qOUxmF7y7OVvfGnkwQ8EjCsG2ZmdQrAO88l7+kH3YeopE=
 MIME-Version: 1.0
-In-Reply-To: <ae728728-9459-44d8-34f3-8ae78e273789@redhat.com>
-Subject: Re: [Xen-devel] VM_BUG_ON_PAGE(!PageOffline(page),
- page) in alloc_xenballooned_pages
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7c6dee42-f83f-4300-bfc2-08d743603899
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Sep 2019 15:34:44.0356 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: AGyavaH99nNHfn0E7tx4oEHBM8fq6IB3rvxnDHnm2FNCVbJaQpJ9m11pQvygA8Xi4gYC/ZZumW/0LhhSfsGy52V8lj31I5Q1OO8H3e75oOk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR03MB3891
+Subject: Re: [Xen-devel] [PATCH RFC for-4.13 08/10] xen/arm: alternative:
+ add auto-nop infrastructure
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -86,160 +111,41 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Content-Type: multipart/mixed; boundary="===============1834858972950722309=="
+Cc: Mark Rutland <mark.rutland@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Will Deacon <will.deacon@arm.com>,
+ "andrii.anisov@gmail.com" <andrii.anisov@gmail.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============1834858972950722309==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="SqTQPb5cgNiYHXAZ"
-Content-Disposition: inline
-
-
---SqTQPb5cgNiYHXAZ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: VM_BUG_ON_PAGE(!PageOffline(page), page) in
- alloc_xenballooned_pages
-
-On Fri, Sep 27, 2019 at 09:44:35AM +0200, David Hildenbrand wrote:
-> On 26.09.19 23:34, Marek Marczykowski-G=C3=B3recki wrote:
-> > Hi,
-> >=20
-> > I've hit VM_BUG_ON_PAGE(!PageOffline(page), page) in
-> > alloc_xenballooned_pages, when trying to use gnttab from userspace
-> > application. It happens on Xen PV, but not on Xen PVH or HVM with the
-> > same kernel. This happens at least with 5.1.6, but also 5.2.15
-> > (as seen below). Based on this, it looks related to 0266def91377
-> > (xen/balloon: Fix mapping PG_offline pages to user space) and probably
-> > 77c4adf6a6df (xen/balloon: mark inflated pages PG_offline).
-> >=20
-> > Any idea? Below is full message.
->=20
-> Now that's weird. Weird because half a year passed since=20
-> 0266def91377 (xen/balloon: Fix mapping PG_offline pages to user space).
-
-Not sure about others, but in Qubes we use PVH/HVM VMs mostly.
-
-> > page:ffffea0003e7ffc0 refcount:1 mapcount:0 mapping:0000000000000000 in=
-dex:0x0
-> > flags: 0xffffe00001000(reserved)
->=20
-> So we have a PageReserved page that is not PageOffline. I assume this
-> happens when we do a __ClearPageOffline() in alloc_xenballooned_pages().
->=20
-> That means, that we get such a page via balloon_retrieve(true). Which
-> means that we have such a page sitting in the ballooned_pages list, which
-> is weird.
->=20
-> Pages enter ballooned_pages via __balloon_append() only.
->=20
-> 1. Via xen_online_page(). We have a __SetPageOffline() right in front
->    of it.
-> 2. Via balloon_add_region(). I don't see a __SetPageOffline().
-> 3. Via decrease_reservation(). We seem to do a __SetPageOffline() on all
->    pages in the previous loop.
-> 4. Via free_xenballooned_pages(). We have a __SetPageOffline() right
->    in front of it.
->=20
->=20
-> So this smells like #2 (and matches your PV only observation). Also,
-> it makes sense that the page is PageReserved that way.
->=20
->=20
-> Wonder if it is as easy as:
-
-Yes, besides missing semicolon it works. Thanks!
-
-> From 0955beef5aa11da4a8398472ce3106a92599cbe6 Mon Sep 17 00:00:00 2001
-> From: David Hildenbrand <david@redhat.com>
-> Date: Fri, 27 Sep 2019 09:39:31 +0200
-> Subject: [PATCH v1] xen/balloon: Set pages PageOffline() in
->  balloon_add_region()
-> MIME-Version: 1.0
-> Content-Type: text/plain; charset=3DUTF-8
-> Content-Transfer-Encoding: 8bit
->=20
-> We are missing a __SetPageOffline(), which is why we can get
-> !PageOffline() pages onto the balloon list, where
-> alloc_xenballooned_pages() will complain:
->=20
-> page:ffffea0003e7ffc0 refcount:1 mapcount:0 mapping:0000000000000000 inde=
-x:0x0
-> flags: 0xffffe00001000(reserved)
-> raw: 000ffffe00001000 dead000000000100 dead000000000200 0000000000000000
-> raw: 0000000000000000 0000000000000000 00000001ffffffff 0000000000000000
-> page dumped because: VM_BUG_ON_PAGE(!PageOffline(page))
-> ------------[ cut here ]------------
-> kernel BUG at include/linux/page-flags.h:744!
-> invalid opcode: 0000 [#1] SMP NOPTI
->=20
-> Reported-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab=
-=2Ecom>
-> Fixes: 77c4adf6a6df ("xen/balloon: mark inflated pages PG_offline")
-> Cc: stable@vger.kernel.org # v5.1+
-> Signed-off-by: David Hildenbrand <david@redhat.com>
-
-Tested-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-
-> ---
->  drivers/xen/balloon.c | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
-> index 05b1f7e948ef..d31149068448 100644
-> --- a/drivers/xen/balloon.c
-> +++ b/drivers/xen/balloon.c
-> @@ -687,6 +687,7 @@ static void __init balloon_add_region(unsigned long s=
-tart_pfn,
->  		/* totalram_pages and totalhigh_pages do not
->  		   include the boot-time balloon extension, so
->  		   don't subtract from it. */
-> +		__SetPageOffline(page)
-                              ^
-                              ;
-
->  		__balloon_append(page);
->  	}
-> =20
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---SqTQPb5cgNiYHXAZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl2OK8sACgkQ24/THMrX
-1yxaHQf5AZV9Iaq9QNfuuDlM6uBx8RCguIRtfln6Pm1NmpKe/kKEcN9hMn+ylEfl
-PJcH3Ld4ggdtW0H9rcMcq5c1i/g1fZPu3SCkxMfiGg06OeSLyskQ5EYLcHJfUXSb
-F3tSZBCab0Acp5hMgVfzs/pGGO4WP1/cRl+qB8h6QPSaJftO2Ss5kGr8QbfLuMQj
-X5BgxgHcTfyTmGNCawTJoPHTRQyFTUrHneVtqa6kar8RI+XfqyahIXxsVb0/O6Cb
-8uL7oj0qymTdyh4O82K5/84Gx3zoGLHPYTYei8YxfH3lCPJTXEsi1cK9QABKzsUD
-voXmIAPNkhiHZxzPea2ud7RD7349XA==
-=8PQ3
------END PGP SIGNATURE-----
-
---SqTQPb5cgNiYHXAZ--
-
-
---===============1834858972950722309==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1834858972950722309==--
-
+Ckp1bGllbiBHcmFsbCB3cml0ZXM6Cgo+IEZyb206IE1hcmsgUnV0bGFuZCA8bWFyay5ydXRsYW5k
+QGFybS5jb20+Cj4KPiBJbiBzb21lIGNhc2VzLCBvbmUgc2lkZSBvZiBhbiBhbHRlcm5hdGl2ZSBz
+ZXF1ZW5jZSBpcyBzaW1wbHkgYSBudW1iZXIgb2YKPiBOT1BzIHVzZWQgdG8gYmFsYW5jZSB0aGUg
+b3RoZXIgc2lkZS4gS2VlcGluZyB0cmFjayBvZiB0aGlzIG1hbnVhbGx5IGlzCj4gdGVkaW91cywg
+YW5kIHRoZSBwcmVzZW5jZSBvZiBsYXJnZSBjaGFpbnMgb2YgTk9QcyBtYWtlcyB0aGUgY29kZSBt
+b3JlCj4gcGFpbmZ1bCB0byByZWFkIHRoYW4gbmVjZXNzYXJ5Lgo+Cj4gVG8gYW1lbGlvcmF0ZSBt
+YXR0ZXJzLCB0aGlzIHBhdGNoIGFkZHMgYSBuZXcgYWx0ZXJuYXRpdmVfZWxzZV9ub3BfZW5kaWYs
+Cj4gd2hpY2ggYXV0b21hdGljYWxseSBiYWxhbmNlcyBhbiBhbHRlcm5hdGl2ZSBzZXF1ZW5jZSB3
+aXRoIGEgdHJpdmlhbCBOT1AKPiBzbGVkLgo+Cj4gSW4gbWFueSBjYXNlcywgd2Ugd291bGQgbGlr
+ZSBhIE5PUC1zbGVkIGluIHRoZSBkZWZhdWx0IGNhc2UsIGFuZAo+IGluc3RydWN0aW9ucyBwYXRj
+aGVkIGluIGluIHRoZSBwcmVzZW5jZSBvZiBhIGZlYXR1cmUuIFRvIGVuYWJsZSB0aGUgTk9Qcwo+
+IHRvIGJlIGdlbmVyYXRlZCBhdXRvbWF0aWNhbGx5IGZvciB0aGlzIGNhc2UsIHRoaXMgcGF0Y2gg
+YWxzbyBhZGRzIGEgbmV3Cj4gYWx0ZXJuYXRpdmVfaWYsIGFuZCB1cGRhdGVzIGFsdGVybmF0aXZl
+X2Vsc2UgYW5kIGFsdGVybmF0aXZlX2VuZGlmIHRvCj4gd29yayB3aXRoIGVpdGhlciBhbHRlcm5h
+dGl2ZV9pZiBvciBhbHRlcm5hdGl2ZV9lbmRpZi4KPgo+IFRoZSBhbHRlcm5hdGl2ZSBpbmZyYXN0
+cnVjdHVyZSB3YXMgb3JpZ2luYWxseSBwb3J0ZWQgZnJvbSBMaW51eC4gU28gdGhpcwo+IGlzIHBy
+ZXR0eSBtdWNoIGEgc3RyYWlnaHQgYmFja3BvcnQgZnJvbSBjb21taXQgNzkyZDQ3Mzc5ZjRkICJh
+cm02NDoKPiBhbHRlcm5hdGl2ZTogYWRkIGF1dG8tbm9wIGluZnJhc3RydWN0dXJlIi4gVGhlIG9u
+bHkgZGlmZmVyZW5jZSBpcyB0aGUKPiBub3BzIG1hY3JvIGFkZGVkIGFzIG5vdCB5ZXQgZXhpc3Rp
+bmcgaW4gWGVuLgo+Cj4gU2lnbmVkLW9mZi1ieTogTWFyayBSdXRsYW5kIDxtYXJrLnJ1dGxhbmRA
+YXJtLmNvbT4KPiBbd2lsbDogdXNlIG5ldyBub3BzIG1hY3JvIHRvIGdlbmVyYXRlIG5vcCBzZXF1
+ZW5jZXNdCj4gU2lnbmVkLW9mZi1ieTogV2lsbCBEZWFjb24gPHdpbGwuZGVhY29uQGFybS5jb20+
+Cj4gW2p1bGllbjogQWRkIG5vcHMgYW5kIHBvcnQgdG8gWGVuXQo+IFNpZ25lZC1vZmYtYnk6IEp1
+bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+ClJldmlld2VkLWJ5OiBWb2xvZHlteXIg
+QmFiY2h1ayA8dm9sb2R5bXlyX2JhYmNodWtAZXBhbS5jb20+CgoKLS0gClZvbG9keW15ciBCYWJj
+aHVrIGF0IEVQQU0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcK
+aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
