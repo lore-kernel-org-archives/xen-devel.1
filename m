@@ -2,90 +2,89 @@ Return-Path: <SRS0=aHxP=YC=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNPARSEABLE_RELAY,URIBL_BLOCKED,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 326EDC47404
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2019 10:55:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 44F8AECE58D
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2019 11:01:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0735820B7C
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2019 10:55:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1467620659
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Oct 2019 11:01:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="qqpha/Te"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0735820B7C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="thz0PfkZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1467620659
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iI9cc-0004f8-HJ; Wed, 09 Oct 2019 10:55:10 +0000
+	id 1iI9iG-0005kE-9x; Wed, 09 Oct 2019 11:01:00 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=DL70=YC=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
- id 1iI9cb-0004ej-HA
- for xen-devel@lists.xenproject.org; Wed, 09 Oct 2019 10:55:09 +0000
-X-Inumbo-ID: 38f19b04-ea83-11e9-97ed-12813bfff9fa
-Received: from userp2130.oracle.com (unknown [156.151.31.86])
+ <SRS0=RT5Q=YC=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1iI9iE-0005k9-6w
+ for xen-devel@lists.xenproject.org; Wed, 09 Oct 2019 11:00:58 +0000
+X-Inumbo-ID: 11cd7b8c-ea84-11e9-97ed-12813bfff9fa
+Received: from wout4-smtp.messagingengine.com (unknown [64.147.123.20])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 38f19b04-ea83-11e9-97ed-12813bfff9fa;
- Wed, 09 Oct 2019 10:54:53 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x99An3EM076380;
- Wed, 9 Oct 2019 10:54:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id; s=corp-2019-08-05;
- bh=M33GVO9Y3jme01jHHD3zcMXHqJ6aM2z9oePhh2hkmuM=;
- b=qqpha/Te0Pky6KVXQk6AfDXZU2rXagKbsGeiW09MRWld8zjLm9/Ca+V9NZIcRUTcP1Hp
- w/n76C552Hetap0fxKNnEQ9LoesxXYBtHMlazkm5/rKaq8t+L67kAFN8CLu6yeVTWF0s
- wyiJP5m6Bqi94EcYz3RRLU2ytkAMDkl8YB0uNEe2vIYai8pcGNSnD+gpdHHpH6vRxPCs
- eSQmKOJRg8QQNG+Y/UYNW30dTChC2GdjjKcrtFeM7JLrbudajEHPoMJCfB5LpJeYwKZ4
- FnUtQeYQkIpc4mTqkcxGD99Qz2QUOihkg5ZrrxY/v2c3vHt+xJIyNEqNfjvvzTUSaKIn +w== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by userp2130.oracle.com with ESMTP id 2vejkukb03-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 09 Oct 2019 10:54:25 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x99AmbN2162723;
- Wed, 9 Oct 2019 10:54:24 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by userp3020.oracle.com with ESMTP id 2vh5caap72-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 09 Oct 2019 10:54:24 +0000
-Received: from abhmp0013.oracle.com (abhmp0013.oracle.com [141.146.116.19])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x99AsHxQ031048;
- Wed, 9 Oct 2019 10:54:19 GMT
-Received: from tomti.i.net-space.pl (/10.175.167.68)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Wed, 09 Oct 2019 03:54:16 -0700
-From: Daniel Kiper <daniel.kiper@oracle.com>
-To: linux-efi@vger.kernel.org, linux-kernel@vger.kernel.org, x86@kernel.org,
- xen-devel@lists.xenproject.org
-Date: Wed,  9 Oct 2019 12:53:55 +0200
-Message-Id: <20191009105358.32256-1-daniel.kiper@oracle.com>
-X-Mailer: git-send-email 2.11.0
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9404
- signatures=668684
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=672
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1908290000 definitions=main-1910090101
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9404
- signatures=668684
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=747 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1908290000
- definitions=main-1910090101
-Subject: [Xen-devel] [PATCH v3 0/3] x86/boot: Introduce the kernel_info et
- consortes
+ id 11cd7b8c-ea84-11e9-97ed-12813bfff9fa;
+ Wed, 09 Oct 2019 11:00:57 +0000 (UTC)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+ by mailout.west.internal (Postfix) with ESMTP id D372835B;
+ Wed,  9 Oct 2019 07:00:55 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute7.internal (MEProxy); Wed, 09 Oct 2019 07:00:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=RPljAu
+ t/zVYIWrkwMX/1AYgcti6WZj3X1qrAEQysqDU=; b=thz0PfkZ6vBk9/AYhaU+O2
+ 78gmimUeju3I7Ke9X+en1yphjzG6r9OLQXQ2EW/Lu7XAvRE77XfSUSBMGzeqp8ej
+ Z0UB1ielGggrB0evvdMdAFTU1PwGjz5zmKKm34DCzLxBl0I8xqfS0a26lyS1lJPe
+ 6i01NCc2sWdnabBLOtN0iQf2zH+x5tDPfR6+TyzUh7WyWSVPL+UJxkGCcQzGUlQM
+ ziw30pDd71K+eccU8tnLKc5+o4rzVQGebERLoChanjNbMiwj0COkO8uVpBWDOxw5
+ kAIMpLoqPt0WjSW8VKZidHNK7JJi115YFMAIa9kkilzE3J0rexxZLgUlEBoNXUsw
+ ==
+X-ME-Sender: <xms:572dXeyq90PgOIOzvVN0vPgKcBvdYtx8IFSY8kWC5VKf9RMgpbycWw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedriedugdduudcutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+ fjughrpeffhffvuffkfhggtggujgesghdtreertddtjeenucfhrhhomhepofgrrhgvkhcu
+ ofgrrhgtiiihkhhofihskhhiqdfikphrvggtkhhiuceomhgrrhhmrghrvghksehinhhvih
+ hsihgslhgvthhhihhnghhslhgrsgdrtghomheqnecukfhppedukeekrddugeejrdduudef
+ rddvfeefnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrghrmhgrrhgvkhesihhnvhhish
+ hisghlvghthhhinhhgshhlrggsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:572dXVPtwzzvd8TQChwc4BhHPbRBj5tg_OYOzTp_nA6-WV_LPAPHLg>
+ <xmx:572dXfUUMbdBS8INWlT5NthmJu6wwkM-99Ef5uU4bEv-cHH4XcyOtg>
+ <xmx:572dXZ0OZN9DyUq4bxEbziXEh9hyisUZG1RnY8e4ADi7692wIi4ImA>
+ <xmx:572dXUI6Zakmx0fe_dvJRvb8a_0BHf_tLscPx87ZqxFKiP0B1EvU-w>
+Received: from mail-itl (188.147.113.233.nat.umts.dynamic.t-mobile.pl
+ [188.147.113.233])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 29C188005C;
+ Wed,  9 Oct 2019 07:00:54 -0400 (EDT)
+Date: Wed, 9 Oct 2019 13:00:51 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+To: Jan Beulich <jbeulich@suse.com>
+Message-ID: <20191009110051.GP8065@mail-itl>
+References: <20190808025321.GF3257@mail-itl>
+ <36989497-d4d5-a9b3-7de1-8ebb3582cd0a@suse.com>
+ <20191008115014.GI8065@mail-itl>
+ <d7974227-0a42-c86c-d87e-18ce3168cd59@suse.com>
+ <20191008135252.GK8065@mail-itl>
+ <3251752c-117b-7a71-88ef-18e49aa63329@suse.com>
+ <20191008162922.GL8065@mail-itl>
+ <815f3cbc-22c3-5a02-429b-0cdf12d84917@suse.com>
+ <20191009103153.GO8065@mail-itl>
+ <13c61616-25eb-019d-75fd-7ac72f8bf133@suse.com>
+MIME-Version: 1.0
+In-Reply-To: <13c61616-25eb-019d-75fd-7ac72f8bf133@suse.com>
+Subject: Re: [Xen-devel] Xen 4.12 panic on Thinkpad W540 with UEFI mutiboot2,
+ efi=no-rs workarounds it
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -96,42 +95,109 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: jgross@suse.com, eric.snowberg@oracle.com, ard.biesheuvel@linaro.org,
- konrad.wilk@oracle.com, corbet@lwn.net, peterz@infradead.org,
- ross.philipson@oracle.com, dave.hansen@linux.intel.com, mingo@redhat.com,
- bp@alien8.de, luto@kernel.org, hpa@zytor.com, boris.ostrovsky@oracle.com,
- tglx@linutronix.de
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: multipart/mixed; boundary="===============3362509467736602357=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGksCgpEdWUgdG8gdmVyeSBsaW1pdGVkIHNwYWNlIGluIHRoZSBzZXR1cF9oZWFkZXIgdGhpcyBw
-YXRjaCBzZXJpZXMgaW50cm9kdWNlcyBuZXcKa2VybmVsX2luZm8gc3RydWN0IHdoaWNoIHdpbGwg
-YmUgdXNlZCB0byBjb252ZXkgaW5mb3JtYXRpb24gZnJvbSB0aGUga2VybmVsIHRvCnRoZSBib290
-bG9hZGVyLiBUaGlzIHdheSB0aGUgYm9vdCBwcm90b2NvbCBjYW4gYmUgZXh0ZW5kZWQgcmVnYXJk
-bGVzcyBvZiB0aGUKc2V0dXBfaGVhZGVyIGxpbWl0YXRpb25zLiBBZGRpdGlvbmFsbHksIHRoZSBw
-YXRjaCBzZXJpZXMgaW50cm9kdWNlcyBzb21lCmNvbnZlbmllbmNlIGZlYXR1cmVzIGxpa2UgdGhl
-IHNldHVwX2luZGlyZWN0IHN0cnVjdCBhbmQgdGhlCmtlcm5lbF9pbmZvLnNldHVwX3R5cGVfbWF4
-IGZpZWxkLgoKRGFuaWVsCgogRG9jdW1lbnRhdGlvbi94ODYvYm9vdC5yc3QgICAgICAgICAgICAg
-fCAxNjggKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrCiBhcmNoL3g4Ni9ib290L01ha2VmaWxlICAgICAg
-ICAgICAgICAgICB8ICAgMiArLQogYXJjaC94ODYvYm9vdC9jb21wcmVzc2VkL01ha2VmaWxlICAg
-ICAgfCAgIDQgKy0KIGFyY2gveDg2L2Jvb3QvY29tcHJlc3NlZC9rYXNsci5jICAgICAgIHwgIDEy
-ICsrKysrKwogYXJjaC94ODYvYm9vdC9jb21wcmVzc2VkL2tlcm5lbF9pbmZvLlMgfCAgMjIgKysr
-KysrKysrKysKIGFyY2gveDg2L2Jvb3QvaGVhZGVyLlMgICAgICAgICAgICAgICAgIHwgICAzICst
-CiBhcmNoL3g4Ni9ib290L3Rvb2xzL2J1aWxkLmMgICAgICAgICAgICB8ICAgNSArKysKIGFyY2gv
-eDg2L2luY2x1ZGUvdWFwaS9hc20vYm9vdHBhcmFtLmggIHwgIDE2ICsrKysrKystCiBhcmNoL3g4
-Ni9rZXJuZWwvZTgyMC5jICAgICAgICAgICAgICAgICB8ICAxMSArKysrKysKIGFyY2gveDg2L2tl
-cm5lbC9rZGVidWdmcy5jICAgICAgICAgICAgIHwgIDIwICsrKysrKysrLS0KIGFyY2gveDg2L2tl
-cm5lbC9rc3lzZnMuYyAgICAgICAgICAgICAgIHwgIDMwICsrKysrKysrKystLS0tCiBhcmNoL3g4
-Ni9rZXJuZWwvc2V0dXAuYyAgICAgICAgICAgICAgICB8ICAgNCArKwogYXJjaC94ODYvbW0vaW9y
-ZW1hcC5jICAgICAgICAgICAgICAgICAgfCAgMTEgKysrKysrCiAxMyBmaWxlcyBjaGFuZ2VkLCAy
-OTIgaW5zZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0pCgpEYW5pZWwgS2lwZXIgKDMpOgogICAg
-ICB4ODYvYm9vdDogSW50cm9kdWNlIHRoZSBrZXJuZWxfaW5mbwogICAgICB4ODYvYm9vdDogSW50
-cm9kdWNlIHRoZSBrZXJuZWxfaW5mby5zZXR1cF90eXBlX21heAogICAgICB4ODYvYm9vdDogSW50
-cm9kdWNlIHRoZSBzZXR1cF9pbmRpcmVjdAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3Rz
-LnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0
-aW5mby94ZW4tZGV2ZWw=
+
+--===============3362509467736602357==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="IJVQSCEsm6ceb9tV"
+Content-Disposition: inline
+
+
+--IJVQSCEsm6ceb9tV
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Xen-devel] Xen 4.12 panic on Thinkpad W540 with UEFI mutiboot2,
+ efi=no-rs workarounds it
+
+On Wed, Oct 09, 2019 at 12:50:09PM +0200, Jan Beulich wrote:
+> On 09.10.2019 12:31, Marek Marczykowski-G=C3=B3recki  wrote:
+> > On Wed, Oct 09, 2019 at 10:56:56AM +0200, Jan Beulich wrote:
+> >> On 08.10.2019 18:29, Marek Marczykowski-G=C3=B3recki  wrote:
+> >>> On Tue, Oct 08, 2019 at 04:19:13PM +0200, Jan Beulich wrote:
+> >>>> On 08.10.2019 15:52, Marek Marczykowski-G=C3=B3recki  wrote:
+> >>>>> In Linux case, it looks like it passes around the EFI memory map us=
+ing
+> >>>>> some Linux-specific mechanism, but I don't find it particularly
+> >>>>> appealing option.
+> >>
+> >> ... that this would require Xen following a Linux protocol.
+> >> This is nothing that can work building on EFI interfaces alone.
+> >=20
+> > Actually, there is something that could be used: presence of boot
+> > services. If the call to SetVirtualAddressMap() is bound to initial
+> > presence of boot services, then it surely won't happen after kexec, as
+> > boot services are not available anymore. In fact the patch I've sent
+> > does exactly that - call SetVirtualAddressMap() directly after
+> > ExitBootServices(), but I've realized this property only now. In this
+> > case, maybe kconfig option is not needed anymore?
+>=20
+> I'm unaware of a property telling an EFI application whether
+> boot services are available. By the definition I know they're
+> available up and until ExitBootServices() gets called.
+
+Regardless of how it is done, calling SetVirtualAddressMap() directly
+after ExitBootServices() should be fine. If for some reason Xen would
+try to call ExitBootServices() when boot services are already gone, it
+is a bug elsewhere (and probably will crash Xen before it event gets to
+SetVirtualAddressMap() call). I'm simply relying on this property,
+regardless of how it is technically done.
+
+> > BTW How runtime services work after kexec? I don't see EFI handles
+> > handed over kexec, are they somehow re-discovered?
+>=20
+> What EFI handles are you talking about? For runtime services
+> what a consumer needs is a table pointer, which is a field
+> in the system table, which in turn is an argument passed to
+> the EFI application's entry point.
+
+Yes, I'm talking about those pointers (system table specifically).
+
+> I didn't think there are
+> provisions in the spec for either of these pointers being NULL.
+
+But I don't see kexec using EFI application entry point. Am I missing
+something?
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--IJVQSCEsm6ceb9tV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl2dveAACgkQ24/THMrX
+1yyJaAf6AkQKWuWSZ0Nc0RPc4dqgg6/9nQOaRg8lvcgq9LiEgYsIRLRDaxKkydzY
+Dqev0Rtz5cYBupiatBsFi/4JWpA+y8Afu71dWWsqN2ItCLvpXO4vRHLccY/R0EF5
+QtYWzZg0zlqFYOaHMzcSrs8BszCTBwDDGf1C1n4a6zUy4vrcSyBgvM4DTvc7OFXN
+TcOCu+/Gcp6Jcg4b1w4ju2DY991BDdSNOBTO8aHxcgBNHdBSyUOUlpKdfWK5RtgV
+SVJaf+hlgPr25/IqlWjhbn6gCkyeS6brx6x1xszEwc21dA9/U8fi8Z7ttc6KYyg6
+uL+B6186+CWSObA30A+JZ7NjRa71qA==
+=6hLi
+-----END PGP SIGNATURE-----
+
+--IJVQSCEsm6ceb9tV--
+
+
+--===============3362509467736602357==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3362509467736602357==--
+
