@@ -2,57 +2,76 @@ Return-Path: <SRS0=i1rf=YH=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07621C4CECE
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Oct 2019 14:29:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89893C4CECE
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Oct 2019 14:30:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D64D92089C
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Oct 2019 14:29:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D64D92089C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5AF8A2089C
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Oct 2019 14:30:05 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AVScJlp6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5AF8A2089C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iK1M0-0000kR-S1; Mon, 14 Oct 2019 14:29:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=raPH=YH=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1iK1Lz-0000jr-57
- for xen-devel@lists.xenproject.org; Mon, 14 Oct 2019 14:29:43 +0000
-X-Inumbo-ID: 0fcaf5e4-ee8f-11e9-937f-12813bfff9fa
-Received: from mx1.redhat.com (unknown [209.132.183.28])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0fcaf5e4-ee8f-11e9-937f-12813bfff9fa;
- Mon, 14 Oct 2019 14:29:42 +0000 (UTC)
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mx1.redhat.com (Postfix) with ESMTPS id 168D7300BEAF;
- Mon, 14 Oct 2019 14:29:42 +0000 (UTC)
-Received: from x1w.redhat.com (unknown [10.40.206.0])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 28912600CD;
- Mon, 14 Oct 2019 14:29:17 +0000 (UTC)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: Markus Armbruster <armbru@redhat.com>,
-	qemu-devel@nongnu.org
-Date: Mon, 14 Oct 2019 16:22:39 +0200
-Message-Id: <20191014142246.4538-14-philmd@redhat.com>
-In-Reply-To: <20191014142246.4538-1-philmd@redhat.com>
-References: <20191014142246.4538-1-philmd@redhat.com>
+	id 1iK1MB-0000nP-6T; Mon, 14 Oct 2019 14:29:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=flUq=YH=gmail.com=pdurrant@srs-us1.protection.inumbo.net>)
+ id 1iK1MA-0000nD-Pu
+ for xen-devel@lists.xenproject.org; Mon, 14 Oct 2019 14:29:54 +0000
+X-Inumbo-ID: 1686baf8-ee8f-11e9-bbab-bc764e2007e4
+Received: from mail-pf1-x442.google.com (unknown [2607:f8b0:4864:20::442])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1686baf8-ee8f-11e9-bbab-bc764e2007e4;
+ Mon, 14 Oct 2019 14:29:54 +0000 (UTC)
+Received: by mail-pf1-x442.google.com with SMTP id 205so10526927pfw.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Oct 2019 07:29:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=pVgNsLZmusn/0VPc8jRmCgjq0/uu3i1yih1wwqVCCws=;
+ b=AVScJlp6hVP2I3fwaZhc4jyhmHHHVdeVScozqrfXAvuwx5AM+B51wzkN359hcnsPP5
+ aRkRwDTo1BX78uFAHS02JixP00kLLombIRsldeqfZH7uh5WKDuUsRe6hCTJHRsROvx0a
+ BbWHyN+/wDCdlRvdjzN/uEHlgZoGphrQV4o64Vg/wvCQxUnA/7Qb0thHB34/X8iodmsR
+ hgdDD2TOAL9kDqcZcxycJh+1OikNANeDERaz2zgcov7WR68TjWrzY9wTU5LCCB1wMRsf
+ 2AUHjJvfK8EJqno6i6tFTS/WfPweWyFDhDE1z2IyOvd65FoVYeFE+t0aXDw/pPVB13j1
+ XBqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=pVgNsLZmusn/0VPc8jRmCgjq0/uu3i1yih1wwqVCCws=;
+ b=dx2TAfKQ8yzv3HuB2OtFa/UdxKT84BDxYCKtHUglRsCqV2WgikwO7BpRL4c3SwTC7G
+ YASwlitLEjsGz+RObUaAnwiNVdSTTtodR5h3s8Y8nhQJui7xkGvF77dZUVU5NJewsXj8
+ 8Z3xaBB9SwyxQY98BD3xpcPAzMrKPwkZ8rNpZedtGSAql7W8abPyJMuH2J03FW9/QV7d
+ jt2MZKpejyjOFOGL9tTCGMLmQID/vjY/o19QAyKPHzv9EaQ11mgBH9vN5gjjSNYPVM6U
+ xbJU6Ni9fFjd2e5HriSOefAaGICWLrOSEZYd0SpE+VwQ+/XdcbqHVUe++HwJ3nOoFBKj
+ QCBg==
+X-Gm-Message-State: APjAAAVXZgOzFJ3FGwURHCNvqr2NHbdDi0rFUUFXuV+SdlHeMOj2aQzc
+ e5CttKNbVJixXcuzV194IA4yjpjBWkymJMp5/dQ=
+X-Google-Smtp-Source: APXvYqzlAsd8AavS54vG3LLcvFWdOJorkwhqLYrGGsuHW/7m/fDdfLR1oVhgW/XRyxvB0xa2GW8OX02i0CVqNWN9JaI=
+X-Received: by 2002:a63:82:: with SMTP id 124mr34900738pga.112.1571063393200; 
+ Mon, 14 Oct 2019 07:29:53 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16
- (mx1.redhat.com [10.5.110.40]); Mon, 14 Oct 2019 14:29:42 +0000 (UTC)
-Subject: [Xen-devel] [PATCH 13/20] hw/timer/hpet: Include
- "exec/address-spaces.h"
+References: <20191014142246.4538-1-philmd@redhat.com>
+ <20191014142246.4538-9-philmd@redhat.com>
+In-Reply-To: <20191014142246.4538-9-philmd@redhat.com>
+From: Paul Durrant <pdurrant@gmail.com>
+Date: Mon, 14 Oct 2019 15:29:42 +0100
+Message-ID: <CACCGGhCaC5-K+q+fJpTt5aZQ=-XurNAWwNDvKunBLaFHvu7yow@mail.gmail.com>
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Subject: Re: [Xen-devel] [PATCH 08/20] hw/xen/xen_pt_load_rom: Remove unused
+ includes
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,14 +84,15 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Fam Zheng <fam@euphon.net>, Peter Maydell <peter.maydell@linaro.org>,
  Matthew Rosato <mjrosato@linux.ibm.com>, Paul Durrant <paul@xen.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Gerd Hoffmann <kraxel@redhat.com>, Eric Blake <eblake@redhat.com>,
- Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org,
- Helge Deller <deller@gmx.de>, David Hildenbrand <david@redhat.com>,
+ qemu-devel@nongnu.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Eric Blake <eblake@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ qemu-block@nongnu.org, Helge Deller <deller@gmx.de>,
+ David Hildenbrand <david@redhat.com>, Markus Armbruster <armbru@redhat.com>,
  Halil Pasic <pasic@linux.ibm.com>,
  Christian Borntraeger <borntraeger@de.ibm.com>,
  Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Anthony Perard <anthony.perard@citrix.com>,
+ xen-devel <xen-devel@lists.xenproject.org>,
  Andrzej Zaborowski <balrogg@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>,
  Xie Changlong <xiechanglong.d@gmail.com>, qemu-s390x@nongnu.org,
  qemu-arm@nongnu.org, Stefan Hajnoczi <stefanha@redhat.com>,
@@ -86,20 +106,21 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-aHcvdGltZXIvaHBldC5jIGNhbGxzIGFkZHJlc3Nfc3BhY2Vfc3RsX2xlKCkgZGVjbGFyZWQgaW4K
-ImV4ZWMvYWRkcmVzcy1zcGFjZXMuaCIuIEluY2x1ZGUgaXQuCgpUaGlzIGZpeGVzICh3aGVuIG1v
-ZGlmeWluZyB1bnJlbGF0ZWQgaGVhZGVycyk6CgogIGh3L3RpbWVyL2hwZXQuYzoyMTA6MzE6IGVy
-cm9yOiB1c2Ugb2YgdW5kZWNsYXJlZCBpZGVudGlmaWVyICdhZGRyZXNzX3NwYWNlX21lbW9yeScK
-ICAgICAgICAgIGFkZHJlc3Nfc3BhY2Vfc3RsX2xlKCZhZGRyZXNzX3NwYWNlX21lbW9yeSwgdGlt
-ZXItPmZzYiA+PiAzMiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF5+fn5+fn5+fn5+
-fn5+fn5+fn5+CgpTaWduZWQtb2ZmLWJ5OiBQaGlsaXBwZSBNYXRoaWV1LURhdWTDqSA8cGhpbG1k
-QHJlZGhhdC5jb20+Ci0tLQogaHcvdGltZXIvaHBldC5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwg
-MSBpbnNlcnRpb24oKykKCmRpZmYgLS1naXQgYS9ody90aW1lci9ocGV0LmMgYi9ody90aW1lci9o
-cGV0LmMKaW5kZXggNDc3MmNjY2ZlMy4uNjU4OWQ2M2ViYiAxMDA2NDQKLS0tIGEvaHcvdGltZXIv
-aHBldC5jCisrKyBiL2h3L3RpbWVyL2hwZXQuYwpAQCAtMzUsNiArMzUsNyBAQAogI2luY2x1ZGUg
-Imh3L3RpbWVyL21jMTQ2ODE4cnRjLmgiCiAjaW5jbHVkZSAibWlncmF0aW9uL3Ztc3RhdGUuaCIK
-ICNpbmNsdWRlICJody90aW1lci9pODI1NC5oIgorI2luY2x1ZGUgImV4ZWMvYWRkcmVzcy1zcGFj
-ZXMuaCIKIAogLy8jZGVmaW5lIEhQRVRfREVCVUcKICNpZmRlZiBIUEVUX0RFQlVHCi0tIAoyLjIx
-LjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+T24gTW9uLCAxNCBPY3QgMjAxOSBhdCAxNToyNywgUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPHBo
+aWxtZEByZWRoYXQuY29tPiB3cm90ZToKPgo+IHhlbl9wdF9sb2FkX3JvbS5jIGRvZXMgbm90IHVz
+ZSBhbnkgb2YgdGhlc2UgaW5jbHVkZXMsIHJlbW92ZSB0aGVtLgo+Cj4gU2lnbmVkLW9mZi1ieTog
+UGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPHBoaWxtZEByZWRoYXQuY29tPgoKUmV2aWV3ZWQtYnk6
+IFBhdWwgRHVycmFudCA8cGF1bEB4ZW4ub3JnPgoKPiAtLS0KPiAgaHcveGVuL3hlbl9wdF9sb2Fk
+X3JvbS5jIHwgNCAtLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA0IGRlbGV0aW9ucygtKQo+Cj4gZGlm
+ZiAtLWdpdCBhL2h3L3hlbi94ZW5fcHRfbG9hZF9yb20uYyBiL2h3L3hlbi94ZW5fcHRfbG9hZF9y
+b20uYwo+IGluZGV4IDMwN2E1YzkzZTIuLmE1MGE4MDgzN2UgMTAwNjQ0Cj4gLS0tIGEvaHcveGVu
+L3hlbl9wdF9sb2FkX3JvbS5jCj4gKysrIGIvaHcveGVuL3hlbl9wdF9sb2FkX3JvbS5jCj4gQEAg
+LTMsMTIgKzMsOCBAQAo+ICAgKi8KPiAgI2luY2x1ZGUgInFlbXUvb3NkZXAuaCIKPiAgI2luY2x1
+ZGUgInFhcGkvZXJyb3IuaCIKPiAtI2luY2x1ZGUgImh3L2kzODYvcGMuaCIKPiAgI2luY2x1ZGUg
+InFlbXUvZXJyb3ItcmVwb3J0LmgiCj4gLSNpbmNsdWRlICJ1aS9jb25zb2xlLmgiCj4gICNpbmNs
+dWRlICJody9sb2FkZXIuaCIKPiAtI2luY2x1ZGUgIm1vbml0b3IvbW9uaXRvci5oIgo+IC0jaW5j
+bHVkZSAicWVtdS9yYW5nZS5oIgo+ICAjaW5jbHVkZSAiaHcvcGNpL3BjaS5oIgo+ICAjaW5jbHVk
+ZSAieGVuX3B0LmgiCj4KPiAtLQo+IDIuMjEuMAo+CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
