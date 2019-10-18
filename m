@@ -2,69 +2,63 @@ Return-Path: <SRS0=EGNL=YL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-11.8 required=3.0
+	tests=HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1496ACA9EA1
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 12:00:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF8B9CA9EA1
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 13:06:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E4F821852
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 11:59:59 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="SGV4YAfO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E4F821852
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
+	by mail.kernel.org (Postfix) with ESMTPS id A662320700
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 13:06:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A662320700
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=linutronix.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iLQuZ-0003i1-BN; Fri, 18 Oct 2019 11:59:15 +0000
+	id 1iLRw4-0000rf-Kn; Fri, 18 Oct 2019 13:04:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=JOGf=YL=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
- id 1iLQuX-0003hw-EG
- for xen-devel@lists.xenproject.org; Fri, 18 Oct 2019 11:59:14 +0000
-X-Inumbo-ID: b2a64c98-f19e-11e9-8aca-bc764e2007e4
-Received: from mo6-p00-ob.smtp.rzone.de (unknown [2a01:238:20a:202:5300::10])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=hxM9=YL=linutronix.de=tip-bot2@srs-us1.protection.inumbo.net>)
+ id 1iLRgF-0007me-OF
+ for xen-devel@lists.xenproject.org; Fri, 18 Oct 2019 12:48:31 +0000
+X-Inumbo-ID: 94295f06-f1a5-11e9-beca-bc764e2007e4
+Received: from Galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b2a64c98-f19e-11e9-8aca-bc764e2007e4;
- Fri, 18 Oct 2019 11:59:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1571399951;
- s=strato-dkim-0002; d=aepfle.de;
- h=References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:
- X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
- bh=3eXiHW2Imx71HJJsQGqj0nGTexLuX9XbxnI+nIe6qLI=;
- b=SGV4YAfOtZ6CEXJ7G8+1FoPflziKFKUdxJq+0VU/VVJbh5KohCSxZOsUvvQK+33one
- 4UeFCw2c3HCaGpi9X3w0DdqYE7ySrKhxQnLEHPG/d+cLN5t3RxgUYD9uVqbPHiAMejSE
- 7gRFPLvu4DzGgzxQf3Eq59OqGEc5v4csuyijbNZXMnvpZ8Grvq69OsWAT47Diixboloo
- BmZERkeAiNQklTv0zbztl7+cT1xBWffzA/YR0tTMp4rJpYbiBNPdJDjm//YyPJ2eD3LC
- H6PFUa7nglnmvPXiH5Qmer4ZZNCcbg2QU5Ys7R3T04YxlmTkygUH9bRnTsoyGPxg4B7w
- g35A==
-X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QED/SSGq+wjGiUC4kV1cX92EW4mFvNjTRB"
-X-RZG-CLASS-ID: mo00
-Received: from sender by smtp.strato.de (RZmta 44.28.1 AUTH)
- with ESMTPSA id e01a77v9IBx4BL8
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (curve secp521r1 with
- 521 ECDH bits, eq. 15360 bits RSA))
- (Client did not present a certificate);
- Fri, 18 Oct 2019 13:59:04 +0200 (CEST)
-Date: Fri, 18 Oct 2019 13:58:55 +0200
-From: Olaf Hering <olaf@aepfle.de>
-To: xen-devel@lists.xenproject.org
-Message-ID: <20191018135855.1e6544f4.olaf@aepfle.de>
-In-Reply-To: <20191002170543.26571-3-olaf@aepfle.de>
-References: <20191002170543.26571-1-olaf@aepfle.de>
- <20191002170543.26571-3-olaf@aepfle.de>
-X-Mailer: Claws Mail 2019.05.18 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
+ id 94295f06-f1a5-11e9-beca-bc764e2007e4;
+ Fri, 18 Oct 2019 12:48:27 +0000 (UTC)
+Received: from [5.158.153.53] (helo=tip-bot2.lab.linutronix.de)
+ by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
+ (Exim 4.80) (envelope-from <tip-bot2@linutronix.de>)
+ id 1iLRg3-00078X-N5; Fri, 18 Oct 2019 14:48:19 +0200
+Received: from [127.0.1.1] (localhost [IPv6:::1])
+ by tip-bot2.lab.linutronix.de (Postfix) with ESMTP id 477681C009C;
+ Fri, 18 Oct 2019 14:48:19 +0200 (CEST)
+Date: Fri, 18 Oct 2019 12:48:19 -0000
+From: "tip-bot2 for Masami Hiramatsu" <tip-bot2@linutronix.de>
+To: linux-tip-commits@vger.kernel.org
+In-Reply-To: <156777562873.25081.2288083344657460959.stgit@devnote2>
+References: <156777562873.25081.2288083344657460959.stgit@devnote2>
 MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH v2 2/8] tools: add with-xen-scriptdir
- configure option
+Message-ID: <157140289913.29376.11199090886356756663.tip-bot2@tip-bot2>
+X-Mailer: tip-git-log-daemon
+Robot-ID: <tip-bot2.linutronix.de>
+Robot-Unsubscribe: Contact <mailto:tglx@linutronix.de> to get blacklisted from
+ these emails
+Precedence: bulk
+X-Linutronix-Spam-Score: -1.0
+X-Linutronix-Spam-Level: -
+X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required, ALL_TRUSTED=-1,
+ SHORTCIRCUIT=-0.0001
+X-Mailman-Approved-At: Fri, 18 Oct 2019 13:04:51 +0000
+Subject: [Xen-devel] [tip: x86/core] x86/asm: Allow to pass macros to
+ __ASM_FORM()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -72,61 +66,52 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
-Content-Type: multipart/mixed; boundary="===============8709834928652602534=="
+Reply-To: linux-kernel@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, x86@kernel.org,
+ linux-kernel@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Josh Poimboeuf <jpoimboe@redhat.com>,
+ xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Randy Dunlap <rdunlap@infradead.org>, Ingo Molnar <mingo@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============8709834928652602534==
-Content-Type: multipart/signed; micalg=pgp-sha256;
- boundary="Sig_/ANdUQ9i/9Nz1=kggwSavaN6"; protocol="application/pgp-signature"
-
---Sig_/ANdUQ9i/9Nz1=kggwSavaN6
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-Am Wed,  2 Oct 2019 19:05:37 +0200
-schrieb Olaf Hering <olaf@aepfle.de>:
-
-> add a knob to configure
-
-Was this ever considered for merging, or are we done with this series?
-
-Olaf
-
---Sig_/ANdUQ9i/9Nz1=kggwSavaN6
-Content-Type: application/pgp-signature
-Content-Description: Digitale Signatur von OpenPGP
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl2pqQAACgkQ86SN7mm1
-DoDa3A/8C8YxezF2aKC6L89tgiHgf/7ZvBK04++DL5TiYG7d0wjabl9fcGs0CFpT
-GA0NDgOXFabzNlYGiZtxTxKHe7FnXhSjOiBFnHpPS0CP1NJmLIaNv+wulaHTWjg6
-D5yY1lq0LaoPNI0+sYGkR94K7AAhhyqtYgfjYveganSvLODb9hQR6ogCNJxpMaye
-6bI2bcrcYyHXRS0hC9jYOoM7MjCd87mIrFb9ZteeqEZfZ2B9g2V5aZCQgFxvy5g8
-DM/FOgH99Km7HGRrsrvsVONqURUqGfBIdYB//yssmtFg6gxTpUCmTOnBan9Ha+vS
-7E3b8aa/wf/a0Pf26KDtpFfVXICtGCxzfIjfNl7dT7YLomJZsZ0Ypi/B2stICGuS
-IV3NAXMpn/2VMZywaBfK6p9P8/Okg2RJVme1Vg9xWDA6ZZtPHWlMgOufAMNzZbop
-GN83Qr3FJazYDfERb8nvkBjrXy9LxwMYGcSUZjq67JHEPJwKkYXPmsUiQIvfKsQB
-AcuR3eXYeVqLCRaDB3cZiS/pgmEa9eofZHZGTdoBHY4Rw32RsvG/mGfyNzQRigIO
-VOikWZprTsY7QnVAf1I+KaxUwoSwdtngN68zrJOqKYTyQtcvKpnIzWpaO9p8GFa5
-G6u7aDmQNUjOqPCLTWaMZ60hUA/4F6Qg/vh/I/Rt0GESbNQyY44=
-=H8UY
------END PGP SIGNATURE-----
-
---Sig_/ANdUQ9i/9Nz1=kggwSavaN6--
-
-
---===============8709834928652602534==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============8709834928652602534==--
-
+VGhlIGZvbGxvd2luZyBjb21taXQgaGFzIGJlZW4gbWVyZ2VkIGludG8gdGhlIHg4Ni9jb3JlIGJy
+YW5jaCBvZiB0aXA6CgpDb21taXQtSUQ6ICAgICBmNzkxOWZkOTQzYWJmMGM3N2FlZDQ0NDFlYTk4
+OTdhMzIzZDEzMmY1CkdpdHdlYjogICAgICAgIGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvdGlwL2Y3
+OTE5ZmQ5NDNhYmYwYzc3YWVkNDQ0MWVhOTg5N2EzMjNkMTMyZjUKQXV0aG9yOiAgICAgICAgTWFz
+YW1pIEhpcmFtYXRzdSA8bWhpcmFtYXRAa2VybmVsLm9yZz4KQXV0aG9yRGF0ZTogICAgRnJpLCAw
+NiBTZXAgMjAxOSAyMjoxMzo0OCArMDk6MDAKQ29tbWl0dGVyOiAgICAgUGV0ZXIgWmlqbHN0cmEg
+PHBldGVyekBpbmZyYWRlYWQub3JnPgpDb21taXR0ZXJEYXRlOiBUaHUsIDE3IE9jdCAyMDE5IDIx
+OjMxOjU3ICswMjowMAoKeDg2L2FzbTogQWxsb3cgdG8gcGFzcyBtYWNyb3MgdG8gX19BU01fRk9S
+TSgpCgpVc2UgX19zdHJpbmdpZnkoKSBhdCBfX0FTTV9GT1JNKCkgc28gdGhhdCB1c2VyIGNhbiBw
+YXNzCmNvZGUgaW5jbHVkaW5nIG1hY3JvcyB0byBfX0FTTV9GT1JNKCkuCgpTaWduZWQtb2ZmLWJ5
+OiBNYXNhbWkgSGlyYW1hdHN1IDxtaGlyYW1hdEBrZXJuZWwub3JnPgpTaWduZWQtb2ZmLWJ5OiBQ
+ZXRlciBaaWpsc3RyYSAoSW50ZWwpIDxwZXRlcnpAaW5mcmFkZWFkLm9yZz4KQ2M6IEp1ZXJnZW4g
+R3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KQ2M6IHg4NkBrZXJuZWwub3JnCkNjOiBCb3JpcyBPc3Ry
+b3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgpDYzogSW5nbyBNb2xuYXIgPG1pbmdv
+QGtlcm5lbC5vcmc+CkNjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5pQGtlcm5lbC5v
+cmc+CkNjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPgpDYzogQm9y
+aXNsYXYgUGV0a292IDxicEBhbGllbjguZGU+CkNjOiB4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVj
+dC5vcmcKQ2M6IFJhbmR5IER1bmxhcCA8cmR1bmxhcEBpbmZyYWRlYWQub3JnPgpDYzogSm9zaCBQ
+b2ltYm9ldWYgPGpwb2ltYm9lQHJlZGhhdC5jb20+Ckxpbms6IGh0dHBzOi8vbGttbC5rZXJuZWwu
+b3JnL3IvMTU2Nzc3NTYyODczLjI1MDgxLjIyODgwODMzNDQ2NTc0NjA5NTkuc3RnaXRAZGV2bm90
+ZTIKLS0tCiBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9hc20uaCB8IDggKysrKystLS0KIDEgZmlsZSBj
+aGFuZ2VkLCA1IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvYXJj
+aC94ODYvaW5jbHVkZS9hc20vYXNtLmggYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9hc20uaAppbmRl
+eCAzZmY1NzdjLi4xYjU2M2Y5IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9hc20u
+aAorKysgYi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9hc20uaApAQCAtNyw5ICs3LDExIEBACiAjIGRl
+ZmluZSBfX0FTTV9GT1JNX1JBVyh4KSAgICAgeAogIyBkZWZpbmUgX19BU01fRk9STV9DT01NQSh4
+KSB4LAogI2Vsc2UKLSMgZGVmaW5lIF9fQVNNX0ZPUk0oeCkJIiAiICN4ICIgIgotIyBkZWZpbmUg
+X19BU01fRk9STV9SQVcoeCkgICAgICN4Ci0jIGRlZmluZSBfX0FTTV9GT1JNX0NPTU1BKHgpICIg
+IiAjeCAiLCIKKyNpbmNsdWRlIDxsaW51eC9zdHJpbmdpZnkuaD4KKworIyBkZWZpbmUgX19BU01f
+Rk9STSh4KQkiICIgX19zdHJpbmdpZnkoeCkgIiAiCisjIGRlZmluZSBfX0FTTV9GT1JNX1JBVyh4
+KSAgICAgX19zdHJpbmdpZnkoeCkKKyMgZGVmaW5lIF9fQVNNX0ZPUk1fQ09NTUEoeCkgIiAiIF9f
+c3RyaW5naWZ5KHgpICIsIgogI2VuZGlmCiAKICNpZm5kZWYgX194ODZfNjRfXwoKX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcg
+bGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9q
+ZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
