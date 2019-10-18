@@ -2,63 +2,82 @@ Return-Path: <SRS0=EGNL=YL=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-11.8 required=3.0
-	tests=HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C631CA9EA0
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 13:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E18AACA9EA1
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 13:08:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4EDE120700
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 13:06:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4EDE120700
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=linutronix.de
+	by mail.kernel.org (Postfix) with ESMTPS id A6FF2222C5
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Oct 2019 13:08:44 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OBaQgQ2K"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A6FF2222C5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iLRw5-0000rr-5f; Fri, 18 Oct 2019 13:04:53 +0000
+	id 1iLRyz-0001HT-Nz; Fri, 18 Oct 2019 13:07:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=hxM9=YL=linutronix.de=tip-bot2@srs-us1.protection.inumbo.net>)
- id 1iLRgP-0007nG-OU
- for xen-devel@lists.xenproject.org; Fri, 18 Oct 2019 12:48:41 +0000
-X-Inumbo-ID: 97e500f0-f1a5-11e9-beca-bc764e2007e4
-Received: from Galois.linutronix.de (unknown [2a0a:51c0:0:12e:550::1])
+ <SRS0=BpLK=YL=gmail.com=aleksandar.m.mail@srs-us1.protection.inumbo.net>)
+ id 1iLRyy-0001HE-EP
+ for xen-devel@lists.xenproject.org; Fri, 18 Oct 2019 13:07:52 +0000
+X-Inumbo-ID: 4a1d8fce-f1a8-11e9-beca-bc764e2007e4
+Received: from mail-oi1-x244.google.com (unknown [2607:f8b0:4864:20::244])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 97e500f0-f1a5-11e9-beca-bc764e2007e4;
- Fri, 18 Oct 2019 12:48:33 +0000 (UTC)
-Received: from [5.158.153.53] (helo=tip-bot2.lab.linutronix.de)
- by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
- (Exim 4.80) (envelope-from <tip-bot2@linutronix.de>)
- id 1iLRg3-00078L-5U; Fri, 18 Oct 2019 14:48:19 +0200
-Received: from [127.0.1.1] (localhost [IPv6:::1])
- by tip-bot2.lab.linutronix.de (Postfix) with ESMTP id AADD51C03AB;
- Fri, 18 Oct 2019 14:48:18 +0200 (CEST)
-Date: Fri, 18 Oct 2019 12:48:18 -0000
-From: "tip-bot2 for Masami Hiramatsu" <tip-bot2@linutronix.de>
-To: linux-tip-commits@vger.kernel.org
-In-Reply-To: <156777564986.25081.4964537658500952557.stgit@devnote2>
-References: <156777564986.25081.4964537658500952557.stgit@devnote2>
+ id 4a1d8fce-f1a8-11e9-beca-bc764e2007e4;
+ Fri, 18 Oct 2019 13:07:51 +0000 (UTC)
+Received: by mail-oi1-x244.google.com with SMTP id d140so840824oib.5
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Oct 2019 06:07:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+ :cc; bh=cU4Le2uZN2kUygkoBT99G2cJi+hgVIxtf8QhGpCMiEo=;
+ b=OBaQgQ2KuZ4Z/Luu2xRAFlzj9GQN1HN6NYo3HIriFNyItnkhmrI7okgnhy/X0zVPHd
+ qN29vaLB8hrqIE87dfIE5V+VO5E6OONt7AXZdl9uEiEdghweeNmy3crphyuuWlOoVZ4J
+ hbnU5NKo9CZuYkB5WRiR1V2doWDGOzfe6tNpe6MCkVXVS/6U5WcKFeRs2LU0TnpwFZbF
+ oXG9Qq9zg0c9gHiawzeH2xWb3NBWipZbH4eqYPojXovEzAAZlW/Sbf3rOyEQPKooYAs+
+ WpAtApjsgLK+dwBW1Pgb3tCsLJYoZ9MmB9n/fSGUUycolaYQDIev1h/acGC54+4hkpys
+ 0cgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+ :message-id:subject:to:cc;
+ bh=cU4Le2uZN2kUygkoBT99G2cJi+hgVIxtf8QhGpCMiEo=;
+ b=rRAmMWAvAATdlj8Q1NH+Pw0dLBPmKcGDsL+XAHD6XVz562vVX5XFuPV6nIcCzJTbMQ
+ GtsupW9vLG5TFpRviUObWEMN0ViA16MtfaOZmQPOJqRgDbvMMlVw2Ff7JiHgxisrJxnN
+ wPbGrYvd1M7vstLTVLDflgc+DI8ZPooBiNDmpMpF0oqb8SoEBe8WSiUtdj4bgaSuiECO
+ fKgvo5HSaDV3umuYHqyEuZgznEOXI2SKWA4SW4e2/KmXg8sCy0wdxqEpi/RP2dtvmLer
+ LIlSqqWvTgSuwSoPsWlJjVx7stf9hu1F1Q4ud8Kl1+0vzaAB0IySTDULNK79k26EzbOK
+ oH3g==
+X-Gm-Message-State: APjAAAX6znt2vrCJG5phnowg8QDaGCvKO8JU5bD0MB4GJ7MOh3LHc0oF
+ qMoix2yYCRyHWVrjinihDLvAvV8siMJ6avkeXOQ=
+X-Google-Smtp-Source: APXvYqwZGyTi4q7XpMcPyzImyjrjoHWQ3o+TY3SryW5ivIhXH+dde0+zRINx8KZo+OAbACDK762fpZb0UJAuHbhYDKw=
+X-Received: by 2002:aca:4e56:: with SMTP id c83mr8024184oib.53.1571404070902; 
+ Fri, 18 Oct 2019 06:07:50 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <157140289854.29376.4430795054323201093.tip-bot2@tip-bot2>
-X-Mailer: tip-git-log-daemon
-Robot-ID: <tip-bot2.linutronix.de>
-Robot-Unsubscribe: Contact <mailto:tglx@linutronix.de> to get blacklisted from
- these emails
-Precedence: bulk
-X-Linutronix-Spam-Score: -1.0
-X-Linutronix-Spam-Level: -
-X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required, ALL_TRUSTED=-1,
- SHORTCIRCUIT=-0.0001
-X-Mailman-Approved-At: Fri, 18 Oct 2019 13:04:51 +0000
-Subject: [Xen-devel] [tip: x86/core] x86: xen: insn: Decode Xen and KVM
- emulate-prefix signature
+Received: by 2002:a9d:340a:0:0:0:0:0 with HTTP; Fri, 18 Oct 2019 06:07:50
+ -0700 (PDT)
+In-Reply-To: <e149d24f-8d77-4126-8fc8-012b114dfe37@redhat.com>
+References: <20191015162705.28087-1-philmd@redhat.com>
+ <20191015162705.28087-27-philmd@redhat.com>
+ <CAL1e-=jVr+idQKNdOGSrODeq7XU-0JcCFTwapqk9-JvAKxk6Pw@mail.gmail.com>
+ <e149d24f-8d77-4126-8fc8-012b114dfe37@redhat.com>
+From: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
+Date: Fri, 18 Oct 2019 15:07:50 +0200
+Message-ID: <CAL1e-=iOhZATK3M4Qv8GXCtW8frSj7Jw5vGkJPUiz2G3Fh7BTw@mail.gmail.com>
+To: =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <philmd@redhat.com>
+Subject: Re: [Xen-devel] [PATCH 26/32] hw/pci-host/piix: Move RCR_IOPORT
+ register definition
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
+Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -66,187 +85,301 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: linux-kernel@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Laurent Vivier <lvivier@redhat.com>, Thomas Huth <thuth@redhat.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, x86@kernel.org,
- linux-kernel@vger.kernel.org, Borislav Petkov <bp@alien8.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Josh Poimboeuf <jpoimboe@redhat.com>,
- xen-devel@lists.xenproject.org, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Randy Dunlap <rdunlap@infradead.org>, Ingo Molnar <mingo@kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Eduardo Habkost <ehabkost@redhat.com>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>, Paul Durrant <paul@xen.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ =?UTF-8?Q?Philippe_Mathieu=2DDaud=C3=A9?= <f4bug@amsat.org>,
+ Igor Mammedov <imammedo@redhat.com>,
+ =?UTF-8?Q?Herv=C3=A9_Poussineau?= <hpoussin@reactos.org>,
+ Aleksandar Markovic <amarkovic@wavecomp.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Aleksandar Rikalo <aleksandar.rikalo@rt-rk.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, Richard Henderson <rth@twiddle.net>
+Content-Type: multipart/mixed; boundary="===============1247761088050665245=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-VGhlIGZvbGxvd2luZyBjb21taXQgaGFzIGJlZW4gbWVyZ2VkIGludG8gdGhlIHg4Ni9jb3JlIGJy
-YW5jaCBvZiB0aXA6CgpDb21taXQtSUQ6ICAgICA0ZDY1YWRmY2QxMTk2ODE4NjU5ZDNiZDliNDJk
-Y2NhYjI5MWUxNzUxCkdpdHdlYjogICAgICAgIGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvdGlwLzRk
-NjVhZGZjZDExOTY4MTg2NTlkM2JkOWI0MmRjY2FiMjkxZTE3NTEKQXV0aG9yOiAgICAgICAgTWFz
-YW1pIEhpcmFtYXRzdSA8bWhpcmFtYXRAa2VybmVsLm9yZz4KQXV0aG9yRGF0ZTogICAgRnJpLCAw
-NiBTZXAgMjAxOSAyMjoxNDoxMCArMDk6MDAKQ29tbWl0dGVyOiAgICAgUGV0ZXIgWmlqbHN0cmEg
-PHBldGVyekBpbmZyYWRlYWQub3JnPgpDb21taXR0ZXJEYXRlOiBUaHUsIDE3IE9jdCAyMDE5IDIx
-OjMxOjU3ICswMjowMAoKeDg2OiB4ZW46IGluc246IERlY29kZSBYZW4gYW5kIEtWTSBlbXVsYXRl
-LXByZWZpeCBzaWduYXR1cmUKCkRlY29kZSBYZW4gYW5kIEtWTSdzIGVtdWxhdGUtcHJlZml4IHNp
-Z25hdHVyZSBieSB4ODYgaW5zbiBkZWNvZGVyLgpJdCBpcyBjYWxsZWQgInByZWZpeCIgYnV0IGFj
-dHVhbGx5IG5vdCB4ODYgaW5zdHJ1Y3Rpb24gcHJlZml4LCBzbwp0aGlzIGFkZHMgaW5zbi5lbXVs
-YXRlX3ByZWZpeF9zaXplIGZpZWxkIGluc3RlYWQgb2YgcmV1c2luZwppbnNuLnByZWZpeGVzLgoK
-SWYgeDg2IGRlY29kZXIgZmluZHMgYSBzcGVjaWFsIHNlcXVlbmNlIG9mIGluc3RydWN0aW9ucyBv
-ZgpYRU5fRU1VTEFURV9QUkVGSVggYW5kICd1ZDJhOyAuYXNjaWkgImt2bSInLCBpdCBqdXN0IGNv
-dW50cyB0aGUKbGVuZ3RoLCBzZXQgaW5zbi5lbXVsYXRlX3ByZWZpeF9zaXplIGFuZCBmb2xkIGl0
-IHdpdGggdGhlIG5leHQKaW5zdHJ1Y3Rpb24uIEluIG90aGVyIHdvcmRzLCB0aGUgc2lnbmF0dXJl
-IGFuZCB0aGUgbmV4dCBpbnN0cnVjdGlvbgppcyB0cmVhdGVkIGFzIGEgc2luZ2xlIGluc3RydWN0
-aW9uLgoKU2lnbmVkLW9mZi1ieTogTWFzYW1pIEhpcmFtYXRzdSA8bWhpcmFtYXRAa2VybmVsLm9y
-Zz4KU2lnbmVkLW9mZi1ieTogUGV0ZXIgWmlqbHN0cmEgKEludGVsKSA8cGV0ZXJ6QGluZnJhZGVh
-ZC5vcmc+CkFja2VkLWJ5OiBKb3NoIFBvaW1ib2V1ZiA8anBvaW1ib2VAcmVkaGF0LmNvbT4KQ2M6
-IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KQ2M6IHg4NkBrZXJuZWwub3JnCkNjOiBC
-b3JpcyBPc3Ryb3Zza3kgPGJvcmlzLm9zdHJvdnNreUBvcmFjbGUuY29tPgpDYzogSW5nbyBNb2xu
-YXIgPG1pbmdvQGtlcm5lbC5vcmc+CkNjOiBTdGVmYW5vIFN0YWJlbGxpbmkgPHNzdGFiZWxsaW5p
-QGtlcm5lbC5vcmc+CkNjOiBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29t
-PgpDYzogQm9yaXNsYXYgUGV0a292IDxicEBhbGllbjguZGU+CkNjOiB4ZW4tZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKQ2M6IFJhbmR5IER1bmxhcCA8cmR1bmxhcEBpbmZyYWRlYWQub3JnPgpM
-aW5rOiBodHRwczovL2xrbWwua2VybmVsLm9yZy9yLzE1Njc3NzU2NDk4Ni4yNTA4MS40OTY0NTM3
-NjU4NTAwOTUyNTU3LnN0Z2l0QGRldm5vdGUyCi0tLQogYXJjaC94ODYvaW5jbHVkZS9hc20vaW5z
-bi5oICAgICAgICAgICAgICAgICB8ICA2ICsrKystCiBhcmNoL3g4Ni9saWIvaW5zbi5jICAgICAg
-ICAgICAgICAgICAgICAgICAgIHwgMzQgKysrKysrKysrKysrKysrKysrKystCiB0b29scy9hcmNo
-L3g4Ni9pbmNsdWRlL2FzbS9lbXVsYXRlX3ByZWZpeC5oIHwgMTQgKysrKysrKystCiB0b29scy9h
-cmNoL3g4Ni9pbmNsdWRlL2FzbS9pbnNuLmggICAgICAgICAgIHwgIDYgKysrKy0KIHRvb2xzL2Fy
-Y2gveDg2L2xpYi9pbnNuLmMgICAgICAgICAgICAgICAgICAgfCAzNCArKysrKysrKysrKysrKysr
-KysrKy0KIHRvb2xzL29ianRvb2wvc3luYy1jaGVjay5zaCAgICAgICAgICAgICAgICAgfCAgMyAr
-LQogdG9vbHMvcGVyZi9jaGVjay1oZWFkZXJzLnNoICAgICAgICAgICAgICAgICB8ICAzICstCiA3
-IGZpbGVzIGNoYW5nZWQsIDk4IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCiBjcmVhdGUg
-bW9kZSAxMDA2NDQgdG9vbHMvYXJjaC94ODYvaW5jbHVkZS9hc20vZW11bGF0ZV9wcmVmaXguaAoK
-ZGlmZiAtLWdpdCBhL2FyY2gveDg2L2luY2x1ZGUvYXNtL2luc24uaCBiL2FyY2gveDg2L2luY2x1
-ZGUvYXNtL2luc24uaAppbmRleCAxNTRmMjdiLi41YzFhZTNlIDEwMDY0NAotLS0gYS9hcmNoL3g4
-Ni9pbmNsdWRlL2FzbS9pbnNuLmgKKysrIGIvYXJjaC94ODYvaW5jbHVkZS9hc20vaW5zbi5oCkBA
-IC00NSw2ICs0NSw3IEBAIHN0cnVjdCBpbnNuIHsKIAkJc3RydWN0IGluc25fZmllbGQgaW1tZWRp
-YXRlMjsJLyogZm9yIDY0Yml0IGltbSBvciBzZWcxNiAqLwogCX07CiAKKwlpbnQJZW11bGF0ZV9w
-cmVmaXhfc2l6ZTsKIAlpbnNuX2F0dHJfdCBhdHRyOwogCXVuc2lnbmVkIGNoYXIgb3BuZF9ieXRl
-czsKIAl1bnNpZ25lZCBjaGFyIGFkZHJfYnl0ZXM7CkBAIC0xMjgsNiArMTI5LDExIEBAIHN0YXRp
-YyBpbmxpbmUgaW50IGluc25faXNfZXZleChzdHJ1Y3QgaW5zbiAqaW5zbikKIAlyZXR1cm4gKGlu
-c24tPnZleF9wcmVmaXgubmJ5dGVzID09IDQpOwogfQogCitzdGF0aWMgaW5saW5lIGludCBpbnNu
-X2hhc19lbXVsYXRlX3ByZWZpeChzdHJ1Y3QgaW5zbiAqaW5zbikKK3sKKwlyZXR1cm4gISFpbnNu
-LT5lbXVsYXRlX3ByZWZpeF9zaXplOworfQorCiAvKiBFbnN1cmUgdGhpcyBpbnN0cnVjdGlvbiBp
-cyBkZWNvZGVkIGNvbXBsZXRlbHkgKi8KIHN0YXRpYyBpbmxpbmUgaW50IGluc25fY29tcGxldGUo
-c3RydWN0IGluc24gKmluc24pCiB7CmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9saWIvaW5zbi5jIGIv
-YXJjaC94ODYvbGliL2luc24uYwppbmRleCAwYjU4NjJiLi40MDQyNzk1IDEwMDY0NAotLS0gYS9h
-cmNoL3g4Ni9saWIvaW5zbi5jCisrKyBiL2FyY2gveDg2L2xpYi9pbnNuLmMKQEAgLTEzLDYgKzEz
-LDggQEAKICNpbmNsdWRlIDxhc20vaW5hdC5oPgogI2luY2x1ZGUgPGFzbS9pbnNuLmg+CiAKKyNp
-bmNsdWRlIDxhc20vZW11bGF0ZV9wcmVmaXguaD4KKwogLyogVmVyaWZ5IG5leHQgc2l6ZW9mKHQp
-IGJ5dGVzIGNhbiBiZSBvbiB0aGUgc2FtZSBpbnN0cnVjdGlvbiAqLwogI2RlZmluZSB2YWxpZGF0
-ZV9uZXh0KHQsIGluc24sIG4pCVwKIAkoKGluc24pLT5uZXh0X2J5dGUgKyBzaXplb2YodCkgKyBu
-IDw9IChpbnNuKS0+ZW5kX2thZGRyKQpAQCAtNTgsNiArNjAsMzYgQEAgdm9pZCBpbnNuX2luaXQo
-c3RydWN0IGluc24gKmluc24sIGNvbnN0IHZvaWQgKmthZGRyLCBpbnQgYnVmX2xlbiwgaW50IHg4
-Nl82NCkKIAkJaW5zbi0+YWRkcl9ieXRlcyA9IDQ7CiB9CiAKK3N0YXRpYyBjb25zdCBpbnNuX2J5
-dGVfdCB4ZW5fcHJlZml4W10gPSB7IF9fWEVOX0VNVUxBVEVfUFJFRklYIH07CitzdGF0aWMgY29u
-c3QgaW5zbl9ieXRlX3Qga3ZtX3ByZWZpeFtdID0geyBfX0tWTV9FTVVMQVRFX1BSRUZJWCB9Owor
-CitzdGF0aWMgaW50IF9faW5zbl9nZXRfZW11bGF0ZV9wcmVmaXgoc3RydWN0IGluc24gKmluc24s
-CisJCQkJICAgICBjb25zdCBpbnNuX2J5dGVfdCAqcHJlZml4LCBzaXplX3QgbGVuKQoreworCXNp
-emVfdCBpOworCisJZm9yIChpID0gMDsgaSA8IGxlbjsgaSsrKSB7CisJCWlmIChwZWVrX25ieXRl
-X25leHQoaW5zbl9ieXRlX3QsIGluc24sIGkpICE9IHByZWZpeFtpXSkKKwkJCWdvdG8gZXJyX291
-dDsKKwl9CisKKwlpbnNuLT5lbXVsYXRlX3ByZWZpeF9zaXplID0gbGVuOworCWluc24tPm5leHRf
-Ynl0ZSArPSBsZW47CisKKwlyZXR1cm4gMTsKKworZXJyX291dDoKKwlyZXR1cm4gMDsKK30KKwor
-c3RhdGljIHZvaWQgaW5zbl9nZXRfZW11bGF0ZV9wcmVmaXgoc3RydWN0IGluc24gKmluc24pCit7
-CisJaWYgKF9faW5zbl9nZXRfZW11bGF0ZV9wcmVmaXgoaW5zbiwgeGVuX3ByZWZpeCwgc2l6ZW9m
-KHhlbl9wcmVmaXgpKSkKKwkJcmV0dXJuOworCisJX19pbnNuX2dldF9lbXVsYXRlX3ByZWZpeChp
-bnNuLCBrdm1fcHJlZml4LCBzaXplb2Yoa3ZtX3ByZWZpeCkpOworfQorCiAvKioKICAqIGluc25f
-Z2V0X3ByZWZpeGVzIC0gc2NhbiB4ODYgaW5zdHJ1Y3Rpb24gcHJlZml4IGJ5dGVzCiAgKiBAaW5z
-bjoJJnN0cnVjdCBpbnNuIGNvbnRhaW5pbmcgaW5zdHJ1Y3Rpb24KQEAgLTc2LDYgKzEwOCw4IEBA
-IHZvaWQgaW5zbl9nZXRfcHJlZml4ZXMoc3RydWN0IGluc24gKmluc24pCiAJaWYgKHByZWZpeGVz
-LT5nb3QpCiAJCXJldHVybjsKIAorCWluc25fZ2V0X2VtdWxhdGVfcHJlZml4KGluc24pOworCiAJ
-bmIgPSAwOwogCWxiID0gMDsKIAliID0gcGVla19uZXh0KGluc25fYnl0ZV90LCBpbnNuKTsKZGlm
-ZiAtLWdpdCBhL3Rvb2xzL2FyY2gveDg2L2luY2x1ZGUvYXNtL2VtdWxhdGVfcHJlZml4LmggYi90
-b29scy9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9lbXVsYXRlX3ByZWZpeC5oCm5ldyBmaWxlIG1vZGUg
-MTAwNjQ0CmluZGV4IDAwMDAwMDAuLjcwZjViOTgKLS0tIC9kZXYvbnVsbAorKysgYi90b29scy9h
-cmNoL3g4Ni9pbmNsdWRlL2FzbS9lbXVsYXRlX3ByZWZpeC5oCkBAIC0wLDAgKzEsMTQgQEAKKy8q
-IFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wICovCisjaWZuZGVmIF9BU01fWDg2X0VN
-VUxBVEVfUFJFRklYX0gKKyNkZWZpbmUgX0FTTV9YODZfRU1VTEFURV9QUkVGSVhfSAorCisvKgor
-ICogVmlydCBlc2NhcGUgc2VxdWVuY2VzIHRvIHRyaWdnZXIgaW5zdHJ1Y3Rpb24gZW11bGF0aW9u
-OworICogaWRlYWxseSB0aGVzZSB3b3VsZCBkZWNvZGUgdG8gJ3dob2xlJyBpbnN0cnVjdGlvbiBh
-bmQgbm90IGRlc3Ryb3kKKyAqIHRoZSBpbnN0cnVjdGlvbiBzdHJlYW07IHNhZGx5IHRoaXMgaXMg
-bm90IHRydWUgZm9yIHRoZSAna3ZtJyBvbmUgOi8KKyAqLworCisjZGVmaW5lIF9fWEVOX0VNVUxB
-VEVfUFJFRklYICAweDBmLDB4MGIsMHg3OCwweDY1LDB4NmUgIC8qIHVkMiA7IC5hc2NpaSAieGVu
-IiAqLworI2RlZmluZSBfX0tWTV9FTVVMQVRFX1BSRUZJWCAgMHgwZiwweDBiLDB4NmIsMHg3Niww
-eDZkCS8qIHVkMiA7IC5hc2NpaSAia3ZtIiAqLworCisjZW5kaWYKZGlmZiAtLWdpdCBhL3Rvb2xz
-L2FyY2gveDg2L2luY2x1ZGUvYXNtL2luc24uaCBiL3Rvb2xzL2FyY2gveDg2L2luY2x1ZGUvYXNt
-L2luc24uaAppbmRleCAzN2E0YzM5Li41Njg4NTRiIDEwMDY0NAotLS0gYS90b29scy9hcmNoL3g4
-Ni9pbmNsdWRlL2FzbS9pbnNuLmgKKysrIGIvdG9vbHMvYXJjaC94ODYvaW5jbHVkZS9hc20vaW5z
-bi5oCkBAIC00NSw2ICs0NSw3IEBAIHN0cnVjdCBpbnNuIHsKIAkJc3RydWN0IGluc25fZmllbGQg
-aW1tZWRpYXRlMjsJLyogZm9yIDY0Yml0IGltbSBvciBzZWcxNiAqLwogCX07CiAKKwlpbnQJZW11
-bGF0ZV9wcmVmaXhfc2l6ZTsKIAlpbnNuX2F0dHJfdCBhdHRyOwogCXVuc2lnbmVkIGNoYXIgb3Bu
-ZF9ieXRlczsKIAl1bnNpZ25lZCBjaGFyIGFkZHJfYnl0ZXM7CkBAIC0xMjgsNiArMTI5LDExIEBA
-IHN0YXRpYyBpbmxpbmUgaW50IGluc25faXNfZXZleChzdHJ1Y3QgaW5zbiAqaW5zbikKIAlyZXR1
-cm4gKGluc24tPnZleF9wcmVmaXgubmJ5dGVzID09IDQpOwogfQogCitzdGF0aWMgaW5saW5lIGlu
-dCBpbnNuX2hhc19lbXVsYXRlX3ByZWZpeChzdHJ1Y3QgaW5zbiAqaW5zbikKK3sKKwlyZXR1cm4g
-ISFpbnNuLT5lbXVsYXRlX3ByZWZpeF9zaXplOworfQorCiAvKiBFbnN1cmUgdGhpcyBpbnN0cnVj
-dGlvbiBpcyBkZWNvZGVkIGNvbXBsZXRlbHkgKi8KIHN0YXRpYyBpbmxpbmUgaW50IGluc25fY29t
-cGxldGUoc3RydWN0IGluc24gKmluc24pCiB7CmRpZmYgLS1naXQgYS90b29scy9hcmNoL3g4Ni9s
-aWIvaW5zbi5jIGIvdG9vbHMvYXJjaC94ODYvbGliL2luc24uYwppbmRleCA3OWUwNDhmLi4wMTUx
-ZGZjIDEwMDY0NAotLS0gYS90b29scy9hcmNoL3g4Ni9saWIvaW5zbi5jCisrKyBiL3Rvb2xzL2Fy
-Y2gveDg2L2xpYi9pbnNuLmMKQEAgLTEzLDYgKzEzLDggQEAKICNpbmNsdWRlICIuLi9pbmNsdWRl
-L2FzbS9pbmF0LmgiCiAjaW5jbHVkZSAiLi4vaW5jbHVkZS9hc20vaW5zbi5oIgogCisjaW5jbHVk
-ZSAiLi4vaW5jbHVkZS9hc20vZW11bGF0ZV9wcmVmaXguaCIKKwogLyogVmVyaWZ5IG5leHQgc2l6
-ZW9mKHQpIGJ5dGVzIGNhbiBiZSBvbiB0aGUgc2FtZSBpbnN0cnVjdGlvbiAqLwogI2RlZmluZSB2
-YWxpZGF0ZV9uZXh0KHQsIGluc24sIG4pCVwKIAkoKGluc24pLT5uZXh0X2J5dGUgKyBzaXplb2Yo
-dCkgKyBuIDw9IChpbnNuKS0+ZW5kX2thZGRyKQpAQCAtNTgsNiArNjAsMzYgQEAgdm9pZCBpbnNu
-X2luaXQoc3RydWN0IGluc24gKmluc24sIGNvbnN0IHZvaWQgKmthZGRyLCBpbnQgYnVmX2xlbiwg
-aW50IHg4Nl82NCkKIAkJaW5zbi0+YWRkcl9ieXRlcyA9IDQ7CiB9CiAKK3N0YXRpYyBjb25zdCBp
-bnNuX2J5dGVfdCB4ZW5fcHJlZml4W10gPSB7IF9fWEVOX0VNVUxBVEVfUFJFRklYIH07CitzdGF0
-aWMgY29uc3QgaW5zbl9ieXRlX3Qga3ZtX3ByZWZpeFtdID0geyBfX0tWTV9FTVVMQVRFX1BSRUZJ
-WCB9OworCitzdGF0aWMgaW50IF9faW5zbl9nZXRfZW11bGF0ZV9wcmVmaXgoc3RydWN0IGluc24g
-Kmluc24sCisJCQkJICAgICBjb25zdCBpbnNuX2J5dGVfdCAqcHJlZml4LCBzaXplX3QgbGVuKQor
-eworCXNpemVfdCBpOworCisJZm9yIChpID0gMDsgaSA8IGxlbjsgaSsrKSB7CisJCWlmIChwZWVr
-X25ieXRlX25leHQoaW5zbl9ieXRlX3QsIGluc24sIGkpICE9IHByZWZpeFtpXSkKKwkJCWdvdG8g
-ZXJyX291dDsKKwl9CisKKwlpbnNuLT5lbXVsYXRlX3ByZWZpeF9zaXplID0gbGVuOworCWluc24t
-Pm5leHRfYnl0ZSArPSBsZW47CisKKwlyZXR1cm4gMTsKKworZXJyX291dDoKKwlyZXR1cm4gMDsK
-K30KKworc3RhdGljIHZvaWQgaW5zbl9nZXRfZW11bGF0ZV9wcmVmaXgoc3RydWN0IGluc24gKmlu
-c24pCit7CisJaWYgKF9faW5zbl9nZXRfZW11bGF0ZV9wcmVmaXgoaW5zbiwgeGVuX3ByZWZpeCwg
-c2l6ZW9mKHhlbl9wcmVmaXgpKSkKKwkJcmV0dXJuOworCisJX19pbnNuX2dldF9lbXVsYXRlX3By
-ZWZpeChpbnNuLCBrdm1fcHJlZml4LCBzaXplb2Yoa3ZtX3ByZWZpeCkpOworfQorCiAvKioKICAq
-IGluc25fZ2V0X3ByZWZpeGVzIC0gc2NhbiB4ODYgaW5zdHJ1Y3Rpb24gcHJlZml4IGJ5dGVzCiAg
-KiBAaW5zbjoJJnN0cnVjdCBpbnNuIGNvbnRhaW5pbmcgaW5zdHJ1Y3Rpb24KQEAgLTc2LDYgKzEw
-OCw4IEBAIHZvaWQgaW5zbl9nZXRfcHJlZml4ZXMoc3RydWN0IGluc24gKmluc24pCiAJaWYgKHBy
-ZWZpeGVzLT5nb3QpCiAJCXJldHVybjsKIAorCWluc25fZ2V0X2VtdWxhdGVfcHJlZml4KGluc24p
-OworCiAJbmIgPSAwOwogCWxiID0gMDsKIAliID0gcGVla19uZXh0KGluc25fYnl0ZV90LCBpbnNu
-KTsKZGlmZiAtLWdpdCBhL3Rvb2xzL29ianRvb2wvc3luYy1jaGVjay5zaCBiL3Rvb2xzL29ianRv
-b2wvc3luYy1jaGVjay5zaAppbmRleCAwYTgzMmUyLi45YmQwNGJiIDEwMDc1NQotLS0gYS90b29s
-cy9vYmp0b29sL3N5bmMtY2hlY2suc2gKKysrIGIvdG9vbHMvb2JqdG9vbC9zeW5jLWNoZWNrLnNo
-CkBAIC00LDYgKzQsNyBAQAogRklMRVM9JwogYXJjaC94ODYvaW5jbHVkZS9hc20vaW5hdF90eXBl
-cy5oCiBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9vcmNfdHlwZXMuaAorYXJjaC94ODYvaW5jbHVkZS9h
-c20vZW11bGF0ZV9wcmVmaXguaAogYXJjaC94ODYvbGliL3g4Ni1vcGNvZGUtbWFwLnR4dAogYXJj
-aC94ODYvdG9vbHMvZ2VuLWluc24tYXR0ci14ODYuYXdrCiAnCkBAIC00Niw2ICs0Nyw2IEBAIGRv
-bmUKIGNoZWNrIGFyY2gveDg2L2luY2x1ZGUvYXNtL2luYXQuaCAgICAgJy1JICJeI2luY2x1ZGUg
-W1wiPF1cKGFzbS9cKSppbmF0X3R5cGVzLmhbXCI+XSInCiBjaGVjayBhcmNoL3g4Ni9pbmNsdWRl
-L2FzbS9pbnNuLmggICAgICctSSAiXiNpbmNsdWRlIFtcIjxdXChhc20vXCkqaW5hdC5oW1wiPl0i
-JwogY2hlY2sgYXJjaC94ODYvbGliL2luYXQuYyAgICAgICAgICAgICAnLUkgIl4jaW5jbHVkZSBb
-XCI8XVwoLi4vaW5jbHVkZS9cKSphc20vaW5zbi5oW1wiPl0iJwotY2hlY2sgYXJjaC94ODYvbGli
-L2luc24uYyAgICAgICAgICAgICAnLUkgIl4jaW5jbHVkZSBbXCI8XVwoLi4vaW5jbHVkZS9cKSph
-c20vaW5cKGF0XHxzblwpLmhbXCI+XSInCitjaGVjayBhcmNoL3g4Ni9saWIvaW5zbi5jICAgICAg
-ICAgICAgICctSSAiXiNpbmNsdWRlIFtcIjxdXCguLi9pbmNsdWRlL1wpKmFzbS9pblwoYXRcfHNu
-XCkuaFtcIj5dIiAtSSAiXiNpbmNsdWRlIFtcIjxdXCguLi9pbmNsdWRlL1wpKmFzbS9lbXVsYXRl
-X3ByZWZpeC5oW1wiPl0iJwogCiBjZCAtCmRpZmYgLS1naXQgYS90b29scy9wZXJmL2NoZWNrLWhl
-YWRlcnMuc2ggYi90b29scy9wZXJmL2NoZWNrLWhlYWRlcnMuc2gKaW5kZXggY2VhMTNjYi4uNDk5
-MjM1YSAxMDA3NTUKLS0tIGEvdG9vbHMvcGVyZi9jaGVjay1oZWFkZXJzLnNoCisrKyBiL3Rvb2xz
-L3BlcmYvY2hlY2staGVhZGVycy5zaApAQCAtMjgsNiArMjgsNyBAQCBhcmNoL3g4Ni9pbmNsdWRl
-L2FzbS9kaXNhYmxlZC1mZWF0dXJlcy5oCiBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9yZXF1aXJlZC1m
-ZWF0dXJlcy5oCiBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9jcHVmZWF0dXJlcy5oCiBhcmNoL3g4Ni9p
-bmNsdWRlL2FzbS9pbmF0X3R5cGVzLmgKK2FyY2gveDg2L2luY2x1ZGUvYXNtL2VtdWxhdGVfcHJl
-Zml4LmgKIGFyY2gveDg2L2luY2x1ZGUvdWFwaS9hc20vcHJjdGwuaAogYXJjaC94ODYvbGliL3g4
-Ni1vcGNvZGUtbWFwLnR4dAogYXJjaC94ODYvdG9vbHMvZ2VuLWluc24tYXR0ci14ODYuYXdrCkBA
-IC0xMTYsNyArMTE3LDcgQEAgY2hlY2sgbGliL2N0eXBlLmMJCSAgICAgICctSSAiXkVYUE9SVF9T
-WU1CT0wiIC1JICJeI2luY2x1ZGUgPGxpbnV4L2V4cG9ydC5oPiIgLUIKIGNoZWNrIGFyY2gveDg2
-L2luY2x1ZGUvYXNtL2luYXQuaCAgICAgJy1JICJeI2luY2x1ZGUgW1wiPF1cKGFzbS9cKSppbmF0
-X3R5cGVzLmhbXCI+XSInCiBjaGVjayBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9pbnNuLmggICAgICct
-SSAiXiNpbmNsdWRlIFtcIjxdXChhc20vXCkqaW5hdC5oW1wiPl0iJwogY2hlY2sgYXJjaC94ODYv
-bGliL2luYXQuYwkgICAgICAnLUkgIl4jaW5jbHVkZSBbXCI8XVwoLi4vaW5jbHVkZS9cKSphc20v
-aW5zbi5oW1wiPl0iJwotY2hlY2sgYXJjaC94ODYvbGliL2luc24uYwkgICAgICAnLUkgIl4jaW5j
-bHVkZSBbXCI8XVwoLi4vaW5jbHVkZS9cKSphc20vaW5cKGF0XHxzblwpLmhbXCI+XSInCitjaGVj
-ayBhcmNoL3g4Ni9saWIvaW5zbi5jICAgICAgICAgICAgICctSSAiXiNpbmNsdWRlIFtcIjxdXCgu
-Li9pbmNsdWRlL1wpKmFzbS9pblwoYXRcfHNuXCkuaFtcIj5dIiAtSSAiXiNpbmNsdWRlIFtcIjxd
-XCguLi9pbmNsdWRlL1wpKmFzbS9lbXVsYXRlX3ByZWZpeC5oW1wiPl0iJwogCiAjIGRpZmYgbm9u
-LXN5bW1ldHJpYyBmaWxlcwogY2hlY2tfMiB0b29scy9wZXJmL2FyY2gveDg2L2VudHJ5L3N5c2Nh
-bGxzL3N5c2NhbGxfNjQudGJsIGFyY2gveDg2L2VudHJ5L3N5c2NhbGxzL3N5c2NhbGxfNjQudGJs
-CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2
-ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xp
-c3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============1247761088050665245==
+Content-Type: multipart/alternative; boundary="00000000000071e34205952f058c"
+
+--00000000000071e34205952f058c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Friday, October 18, 2019, Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com=
+>
+wrote:
+
+> On 10/18/19 11:19 AM, Aleksandar Markovic wrote:
+>
+>> On Tuesday, October 15, 2019, Philippe Mathieu-Daud=C3=A9 <philmd@redhat=
+.com
+>> <mailto:philmd@redhat.com>> wrote:
+>>
+>>     From: Philippe Mathieu-Daud=C3=A9 <f4bug@amsat.org <mailto:f4bug@ams=
+at.org
+>> >>
+>>
+>>     The RCR_IOPORT register belongs to the PIIX chipset.
+>>     Move the definition to "piix.h".
+>>
+>>     Signed-off-by: Philippe Mathieu-Daud=C3=A9 <philmd@redhat.com
+>>     <mailto:philmd@redhat.com>>
+>>     ---
+>>       hw/pci-host/piix.c            | 1 +
+>>       include/hw/i386/pc.h          | 6 ------
+>>       include/hw/southbridge/piix.h | 6 ++++++
+>>       3 files changed, 7 insertions(+), 6 deletions(-)
+>>
+>>
+>> Does it make sense to add prefix PIIX_ or a similar one to the register
+>> name?
+>>
+>
+> Good idea, it will make the comment in hw/i386/acpi-build.c:213 cleaner:
+
+
+Correct. Let's than add PIIX_ prefix.
+
+Thanks in advance.
+
+A.
+
+
+
+>     /* The above need not be conditional on machine type because the rese=
+t
+> port
+>      * happens to be the same on PIIX (pc) and ICH9 (q35). */
+>     QEMU_BUILD_BUG_ON(ICH9_RST_CNT_IOPORT !=3D RCR_IOPORT);
+>
+>
+>> In any case:
+>>
+>> Reviewed-by: Aleksandar Markovic <amarkovic@wavecomp.com <mailto:
+>> amarkovic@wavecomp.com>>
+>>
+>
+> Thanks!
+>
+>
+>>     diff --git a/hw/pci-host/piix.c b/hw/pci-host/piix.c
+>>     index 3292703de7..3770575c1a 100644
+>>     --- a/hw/pci-host/piix.c
+>>     +++ b/hw/pci-host/piix.c
+>>     @@ -27,6 +27,7 @@
+>>       #include "hw/irq.h"
+>>       #include "hw/pci/pci.h"
+>>       #include "hw/pci/pci_host.h"
+>>     +#include "hw/southbridge/piix.h"
+>>       #include "hw/qdev-properties.h"
+>>       #include "hw/isa/isa.h"
+>>       #include "hw/sysbus.h"
+>>     diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h
+>>     index 183326d9fe..1c20b96571 100644
+>>     --- a/include/hw/i386/pc.h
+>>     +++ b/include/hw/i386/pc.h
+>>     @@ -257,12 +257,6 @@ typedef struct PCII440FXState PCII440FXState;
+>>
+>>       #define TYPE_IGD_PASSTHROUGH_I440FX_PCI_DEVICE
+>>     "igd-passthrough-i440FX"
+>>
+>>     -/*
+>>     - * Reset Control Register: PCI-accessible ISA-Compatible Register
+>>     at address
+>>     - * 0xcf9, provided by the PCI/ISA bridge (PIIX3 PCI function 0,
+>>     8086:7000).
+>>     - */
+>>     -#define RCR_IOPORT 0xcf9
+>>     -
+>>       PCIBus *i440fx_init(const char *host_type, const char *pci_type,
+>>                           PCII440FXState **pi440fx_state, int *piix_devf=
+n,
+>>                           ISABus **isa_bus, qemu_irq *pic,
+>>     diff --git a/include/hw/southbridge/piix.h
+>>     b/include/hw/southbridge/piix.h
+>>     index add352456b..79ebe0089b 100644
+>>     --- a/include/hw/southbridge/piix.h
+>>     +++ b/include/hw/southbridge/piix.h
+>>     @@ -18,6 +18,12 @@ I2CBus *piix4_pm_init(PCIBus *bus, int devfn,
+>>     uint32_t smb_io_base,
+>>                             qemu_irq sci_irq, qemu_irq smi_irq,
+>>                             int smm_enabled, DeviceState **piix4_pm);
+>>
+>>     +/*
+>>     + * Reset Control Register: PCI-accessible ISA-Compatible Register
+>>     at address
+>>     + * 0xcf9, provided by the PCI/ISA bridge (PIIX3 PCI function 0,
+>>     8086:7000).
+>>     + */
+>>     +#define RCR_IOPORT 0xcf9
+>>     +
+>>       extern PCIDevice *piix4_dev;
+>>
+>>       DeviceState *piix4_create(PCIBus *pci_bus, ISABus **isa_bus,
+>>     --     2.21.0
+>>
+>>
+>>
+
+--00000000000071e34205952f058c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<br><br>On Friday, October 18, 2019, Philippe Mathieu-Daud=C3=A9 &lt;<a hre=
+f=3D"mailto:philmd@redhat.com">philmd@redhat.com</a>&gt; wrote:<br><blockqu=
+ote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc s=
+olid;padding-left:1ex">On 10/18/19 11:19 AM, Aleksandar Markovic wrote:<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">
+On Tuesday, October 15, 2019, Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"ma=
+ilto:philmd@redhat.com" target=3D"_blank">philmd@redhat.com</a> &lt;mailto:=
+<a href=3D"mailto:philmd@redhat.com" target=3D"_blank">philmd@redhat.com</a=
+>&gt;&gt; wrote:<br>
+<br>
+=C2=A0 =C2=A0 From: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mailto:f4bug=
+@amsat.org" target=3D"_blank">f4bug@amsat.org</a> &lt;mailto:<a href=3D"mai=
+lto:f4bug@amsat.org" target=3D"_blank">f4bug@amsat.org</a>&gt;&gt;<br>
+<br>
+=C2=A0 =C2=A0 The RCR_IOPORT register belongs to the PIIX chipset.<br>
+=C2=A0 =C2=A0 Move the definition to &quot;piix.h&quot;.<br>
+<br>
+=C2=A0 =C2=A0 Signed-off-by: Philippe Mathieu-Daud=C3=A9 &lt;<a href=3D"mai=
+lto:philmd@redhat.com" target=3D"_blank">philmd@redhat.com</a><br>
+=C2=A0 =C2=A0 &lt;mailto:<a href=3D"mailto:philmd@redhat.com" target=3D"_bl=
+ank">philmd@redhat.com</a>&gt;&gt;<br>
+=C2=A0 =C2=A0 ---<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0hw/pci-host/piix.c=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 | 1 +<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0include/hw/i386/pc.h=C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 | 6 ------<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0include/hw/southbridge/piix.<wbr>h | 6 ++++++<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A03 files changed, 7 insertions(+), 6 deletions(-)<=
+br>
+<br>
+<br>
+Does it make sense to add prefix PIIX_ or a similar one to the register nam=
+e?<br>
+</blockquote>
+<br>
+Good idea, it will make the comment in hw/i386/acpi-build.c:213 cleaner:</b=
+lockquote><div><br></div><div>Correct. Let&#39;s than add PIIX_ prefix.</di=
+v><div><br></div><div>Thanks in advance.</div><div><br></div><div>A.</div><=
+div><br></div><div><br></div><blockquote class=3D"gmail_quote" style=3D"mar=
+gin:0 0 0 .8ex;border-left:1px #ccc solid;padding-left:1ex">
+<br>
+=C2=A0 =C2=A0 /* The above need not be conditional on machine type because =
+the reset port<br>
+=C2=A0 =C2=A0 =C2=A0* happens to be the same on PIIX (pc) and ICH9 (q35). *=
+/<br>
+=C2=A0 =C2=A0 QEMU_BUILD_BUG_ON(ICH9_RST_CNT<wbr>_IOPORT !=3D RCR_IOPORT);<=
+br>
+<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">
+<br>
+In any case:<br>
+<br>
+Reviewed-by: Aleksandar Markovic &lt;<a href=3D"mailto:amarkovic@wavecomp.c=
+om" target=3D"_blank">amarkovic@wavecomp.com</a> &lt;mailto:<a href=3D"mail=
+to:amarkovic@wavecomp.com" target=3D"_blank">amarkovic@wavecomp.com</a><wbr=
+>&gt;&gt;<br>
+</blockquote>
+<br>
+Thanks!<br>
+<br>
+<blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1p=
+x #ccc solid;padding-left:1ex">
+<br>
+=C2=A0 =C2=A0 diff --git a/hw/pci-host/piix.c b/hw/pci-host/piix.c<br>
+=C2=A0 =C2=A0 index 3292703de7..3770575c1a 100644<br>
+=C2=A0 =C2=A0 --- a/hw/pci-host/piix.c<br>
+=C2=A0 =C2=A0 +++ b/hw/pci-host/piix.c<br>
+=C2=A0 =C2=A0 @@ -27,6 +27,7 @@<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#include &quot;hw/irq.h&quot;<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#include &quot;hw/pci/pci.h&quot;<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#include &quot;hw/pci/pci_host.h&quot;<br>
+=C2=A0 =C2=A0 +#include &quot;hw/southbridge/piix.h&quot;<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#include &quot;hw/qdev-properties.h&quot;<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#include &quot;hw/isa/isa.h&quot;<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#include &quot;hw/sysbus.h&quot;<br>
+=C2=A0 =C2=A0 diff --git a/include/hw/i386/pc.h b/include/hw/i386/pc.h<br>
+=C2=A0 =C2=A0 index 183326d9fe..1c20b96571 100644<br>
+=C2=A0 =C2=A0 --- a/include/hw/i386/pc.h<br>
+=C2=A0 =C2=A0 +++ b/include/hw/i386/pc.h<br>
+=C2=A0 =C2=A0 @@ -257,12 +257,6 @@ typedef struct PCII440FXState PCII440FXS=
+tate;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0#define TYPE_IGD_PASSTHROUGH_I440FX_PC<wbr>I_DEVI=
+CE<br>
+=C2=A0 =C2=A0 &quot;igd-passthrough-i440FX&quot;<br>
+<br>
+=C2=A0 =C2=A0 -/*<br>
+=C2=A0 =C2=A0 - * Reset Control Register: PCI-accessible ISA-Compatible Reg=
+ister<br>
+=C2=A0 =C2=A0 at address<br>
+=C2=A0 =C2=A0 - * 0xcf9, provided by the PCI/ISA bridge (PIIX3 PCI function=
+ 0,<br>
+=C2=A0 =C2=A0 8086:7000).<br>
+=C2=A0 =C2=A0 - */<br>
+=C2=A0 =C2=A0 -#define RCR_IOPORT 0xcf9<br>
+=C2=A0 =C2=A0 -<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0PCIBus *i440fx_init(const char *host_type, const =
+char *pci_type,<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0PCII440FXState **pi440fx_state, int *piix_devfn,<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0ISABus **isa_bus, qemu_irq *pic,<br>
+=C2=A0 =C2=A0 diff --git a/include/hw/southbridge/piix.<wbr>h<br>
+=C2=A0 =C2=A0 b/include/hw/southbridge/piix.<wbr>h<br>
+=C2=A0 =C2=A0 index add352456b..79ebe0089b 100644<br>
+=C2=A0 =C2=A0 --- a/include/hw/southbridge/piix.<wbr>h<br>
+=C2=A0 =C2=A0 +++ b/include/hw/southbridge/piix.<wbr>h<br>
+=C2=A0 =C2=A0 @@ -18,6 +18,12 @@ I2CBus *piix4_pm_init(PCIBus *bus, int dev=
+fn,<br>
+=C2=A0 =C2=A0 uint32_t smb_io_base,<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0qemu_irq sci_irq, qemu_irq smi_irq,<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 =C2=A0 =C2=A0 =C2=A0int smm_enabled, DeviceState **piix4_pm);<br>
+<br>
+=C2=A0 =C2=A0 +/*<br>
+=C2=A0 =C2=A0 + * Reset Control Register: PCI-accessible ISA-Compatible Reg=
+ister<br>
+=C2=A0 =C2=A0 at address<br>
+=C2=A0 =C2=A0 + * 0xcf9, provided by the PCI/ISA bridge (PIIX3 PCI function=
+ 0,<br>
+=C2=A0 =C2=A0 8086:7000).<br>
+=C2=A0 =C2=A0 + */<br>
+=C2=A0 =C2=A0 +#define RCR_IOPORT 0xcf9<br>
+=C2=A0 =C2=A0 +<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0extern PCIDevice *piix4_dev;<br>
+<br>
+=C2=A0 =C2=A0 =C2=A0=C2=A0DeviceState *piix4_create(PCIBus *pci_bus, ISABus=
+ **isa_bus,<br>
+=C2=A0 =C2=A0 --=C2=A0 =C2=A0 =C2=A02.21.0<br>
+<br>
+<br>
+</blockquote>
+</blockquote>
+
+--00000000000071e34205952f058c--
+
+
+--===============1247761088050665245==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1247761088050665245==--
+
