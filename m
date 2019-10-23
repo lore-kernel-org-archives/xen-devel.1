@@ -6,46 +6,46 @@ X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7B0ACA9EB7
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2019 13:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97CB5CA9EB6
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2019 13:56:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C674E2173B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2019 13:54:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C674E2173B
+	by mail.kernel.org (Postfix) with ESMTPS id 731CA2053B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Oct 2019 13:56:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 731CA2053B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iNH60-0004DF-Ko; Wed, 23 Oct 2019 13:54:40 +0000
+	id 1iNH7N-0004Ln-Dr; Wed, 23 Oct 2019 13:56:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Yzoh=YQ=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1iNH5z-0004D7-Fl
- for xen-devel@lists.xenproject.org; Wed, 23 Oct 2019 13:54:39 +0000
-X-Inumbo-ID: a6da7572-f59c-11e9-a531-bc764e2007e4
+ id 1iNH7L-0004Lb-Qd
+ for xen-devel@lists.xenproject.org; Wed, 23 Oct 2019 13:56:03 +0000
+X-Inumbo-ID: d9a32be8-f59c-11e9-beca-bc764e2007e4
 Received: from mx1.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a6da7572-f59c-11e9-a531-bc764e2007e4;
- Wed, 23 Oct 2019 13:54:38 +0000 (UTC)
+ id d9a32be8-f59c-11e9-beca-bc764e2007e4;
+ Wed, 23 Oct 2019 13:56:03 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx1.suse.de (Postfix) with ESMTP id 36893B1DE;
- Wed, 23 Oct 2019 13:54:37 +0000 (UTC)
+ by mx1.suse.de (Postfix) with ESMTP id 5BA00B32C;
+ Wed, 23 Oct 2019 13:56:02 +0000 (UTC)
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20191019020452.8944-1-andrew.cooper3@citrix.com>
+References: <20191012181859.11110-1-andrew.cooper3@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <9bebea0a-e81a-2340-da22-8c648ce49741@suse.com>
-Date: Wed, 23 Oct 2019 15:54:52 +0200
+Message-ID: <ccad8d18-c661-94a9-3740-c59ed1d4827b@suse.com>
+Date: Wed, 23 Oct 2019 15:56:17 +0200
 User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
  Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20191019020452.8944-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20191012181859.11110-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
-Subject: Re: [Xen-devel] [PATCH v2] MAINTAINERS: Switch SVM maintainership
- to x86
+Subject: Re: [Xen-devel] [PATCH for-4.13] docs: Extend with details about
+ runtime microcode loading
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,21 +56,22 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
- Lars Kurth <lars.kurth@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Lars Kurth <lars.kurth@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ WeiLiu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>, Tim Deegan <tim@xen.org>,
+ Ian Jackson <ian.jackson@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMTkuMTAuMjAxOSAwNDowNCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBXZSBhcmUgbm93IGRv
-d24gdG8gMCBTVk0gbWFpbnRhaW5lcnMgd2hvIGFyZSBhY3RpdmUgYW5kIHdpc2ggdG8gaG9sZCB0
-aGUKPiBwb3NpdGlvbi4gIEluIGFncmVlbWVudCB3aXRoIEFNRCwgSmFuIGFuZCBJIHdpbGwgdGFr
-ZSBvdmVyIG1haW50YWluZXJzaGlwIGluCj4gdGhlIHNob3J0IHRlcm0uCj4gCj4gU2lnbmVkLW9m
-Zi1ieTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KPiBBY2tlZC1i
-eTogQm9yaXMgT3N0cm92c2t5IDxib3Jpcy5vc3Ryb3Zza3lAb3JhY2xlLmNvbT4KCkFja2VkLWJ5
-OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2
-ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWls
-bWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+T24gMTIuMTAuMjAxOSAyMDoxOCwgQW5kcmV3IENvb3BlciB3cm90ZToKPiBUaGUgeGVuLXVjb2Rl
+IHV0aWxpdHkgaXMgbmV3IHdpdGggdGhlIGxhdGUgbG9hZGluZyBpbXByb3ZlbWVudHMgaW4gNC4x
+My4KPiBVcGRhdGUgdGhlIGRvY3VtZW50YXRpb24gc3VpdGFibHkuCj4gCj4gU2lnbmVkLW9mZi1i
+eTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KCkFja2VkLWJ5OiBK
+YW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
+aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
+bGlzdGluZm8veGVuLWRldmVs
