@@ -2,75 +2,68 @@ Return-Path: <SRS0=n02L=YV=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 99AAECA9EC2
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2019 18:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7D812CA9EC0
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2019 18:40:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6F64321721
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2019 18:22:50 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 53500204FD
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Oct 2019 18:40:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hwB4OZR5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F64321721
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="ISVpnqjR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53500204FD
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iP9ew-0000lP-26; Mon, 28 Oct 2019 18:22:30 +0000
+	id 1iP9wR-0002SS-5o; Mon, 28 Oct 2019 18:40:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ZIpA=YV=gmail.com=al1img@srs-us1.protection.inumbo.net>)
- id 1iP9eu-0000lK-Nr
- for xen-devel@lists.xenproject.org; Mon, 28 Oct 2019 18:22:28 +0000
-X-Inumbo-ID: e5435d12-f9af-11e9-a531-bc764e2007e4
-Received: from mail-lf1-x12d.google.com (unknown [2a00:1450:4864:20::12d])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=YRk0=YV=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1iP9wP-0002SN-Hd
+ for xen-devel@lists.xenproject.org; Mon, 28 Oct 2019 18:40:33 +0000
+X-Inumbo-ID: 6c2e839a-f9b2-11e9-8aca-bc764e2007e4
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e5435d12-f9af-11e9-a531-bc764e2007e4;
- Mon, 28 Oct 2019 18:22:27 +0000 (UTC)
-Received: by mail-lf1-x12d.google.com with SMTP id b20so8553613lfp.4
- for <xen-devel@lists.xenproject.org>; Mon, 28 Oct 2019 11:22:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=AmXxX3VgioA77BuFL1MgA9bHl37lAvOM/aNAudeiASw=;
- b=hwB4OZR56vS4x7Sg1cUWQQWvxVL95MQoRaEUqjL+OssYycbKi0EvPTc0MHCo+XqwQb
- iSD+wRWG74XcVC/rKqLPbtlCoqAhxOizPokQCj80Ksd2xCgiv6Bi5rUv0+8z6TDnIWPG
- ivLKvx+pHt8UJMj8lMSdUfnbC4EjWUFOomxk+fcQzXsKOl+wwX3qJ4IlAHIGLZBPvHQa
- zB+3UE0lpBnZnyLx7I1l4KtTPjkKh1EkwhVF3RgikPkkZZ+MmaStHhwk38ljhdjUPmUE
- DtMgMtcFg33YEcMXjIfK7u0SlTXUNyLh2BMFCUfjHCOJVzaqChUde8Shr6gnAT6DjL68
- o5nA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=AmXxX3VgioA77BuFL1MgA9bHl37lAvOM/aNAudeiASw=;
- b=HazSv3wA+00QdGQLLvUsA5613KhK91N6z6MlVni+moG/DIVemFChkka2yfG6Dzgj+f
- JVAFbLS2cSGMACXCYESHauMmhwrY/2jUn9XC/FQc/6uC+w36t1kweyo4vLezrsoHXXvo
- 75NbYlR24KdIQzU5OyXXtmJ/n01NYPfK6dlIh8aQlTSJgkOVJYMeSnTqV4YyRexcx3fN
- rxqTLBveEUx54LNerKZnKAQbXop4HbFdfUG5nIdaEDI9fDKXoh8eeM7XlBR2n4QSQqwI
- /yng/ARu7ctrD0nnUrW6F3luI64At3vMWStnV2MvHTcpIQNSJba12PJWJGWR0zTHOqeP
- oM0w==
-X-Gm-Message-State: APjAAAWp3k7H9iohZUW8jhfUbwrWL14UQyDv8oxvZdiGufK4KRa8kJau
- xolgw4zu0yjQGZN/xEuX/1GSzZ/kjVbMSw==
-X-Google-Smtp-Source: APXvYqyNi5Vo49hRob1Gv4Cd9hlbe/gZAmpmVtLHWaCozRqGDmGueburTNPnn/jqwSdfg0wZwpMnmQ==
-X-Received: by 2002:a19:f018:: with SMTP id p24mr12021909lfc.93.1572286946283; 
- Mon, 28 Oct 2019 11:22:26 -0700 (PDT)
-Received: from al1-pc.kyiv.epam.com (ll-74.141.223.85.sovam.net.ua.
- [85.223.141.74])
- by smtp.gmail.com with ESMTPSA id p86sm7474522lja.100.2019.10.28.11.22.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 28 Oct 2019 11:22:25 -0700 (PDT)
-From: Oleksandr Grytsov <al1img@gmail.com>
-To: xen-devel@lists.xenproject.org
-Date: Mon, 28 Oct 2019 20:22:15 +0200
-Message-Id: <20191028182216.3882-1-al1img@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [Xen-devel] [PATCH v1 0/1] libxl/gentypes: add range init to array
- elements in json parsing
+ id 6c2e839a-f9b2-11e9-8aca-bc764e2007e4;
+ Mon, 28 Oct 2019 18:40:33 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D8F90214B2;
+ Mon, 28 Oct 2019 18:40:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1572288032;
+ bh=ElQFkRKWSf0nDLroKciIQWmFEto4Lgp2uXvv4YO7Cbw=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=ISVpnqjRJJtOvzuLoXG+D7YV1UxM8M1MmD6CnJ2830nL7bzfYj6otQf/QdUBKN1ZA
+ ve7gmRGQbzWBC/k0iasQhh4QH+sBz/RbX5i+er8UBLT+VbB+G3GQfGDmUtE+eC7X2H
+ ZrPR9zI5F0qAIDUpniLD5IjJT/qtuIhP3I4hD2GA=
+Date: Mon, 28 Oct 2019 11:40:23 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Dario Faggioli <dfaggioli@suse.com>
+In-Reply-To: <114c301a92c942208c63daa5046db4534b95da4a.camel@suse.com>
+Message-ID: <alpine.DEB.2.21.1910281138370.29150@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.1908071119470.2451@sstabellini-ThinkPad-T480s>
+ <f986544f59e1b2e9fddba5090fc3c706c38e1ad3.camel@suse.com>
+ <alpine.DEB.2.21.1908091127080.7788@sstabellini-ThinkPad-T480s>
+ <6bc0e21d79c4f02ad89c94fa732a32a57bdc8521.camel@suse.com>
+ <alpine.DEB.2.21.1908131413200.30179@sstabellini-ThinkPad-T480s>
+ <71cbab87f4929766bf4293419e50425ab62e822a.camel@suse.com>
+ <alpine.DEB.2.21.1908140927100.8737@sstabellini-ThinkPad-T480s>
+ <78072866796e1dedd9068e4298a13c58a30e74e7.camel@suse.com>
+ <197c435e78f47b0deb376493911abdc0922863b4.camel@suse.com>
+ <alpine.DEB.2.21.1908231722430.26226@sstabellini-ThinkPad-T480s>
+ <114c301a92c942208c63daa5046db4534b95da4a.camel@suse.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+MIME-Version: 1.0
+Subject: Re: [Xen-devel] dom0less + sched=null => broken in staging
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,27 +74,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: anthony.perard@citrix.com, Oleksandr Grytsov <oleksandr_grytsov@epam.com>,
- julien.grall@arm.com, ian.jackson@eu.citrix.com, wl@xen.org
-MIME-Version: 1.0
+Cc: "George.Dunlap@eu.citrix.com" <George.Dunlap@eu.citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "julien.grall@arm.com" <julien.grall@arm.com>,
+ "sstabellini@kernel.org" <sstabellini@kernel.org>,
+ "jgross@suse.de" <jgross@suse.de>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-RnJvbTogT2xla3NhbmRyIEdyeXRzb3YgPG9sZWtzYW5kcl9ncnl0c292QGVwYW0uY29tPgoKVGhl
-cmUgYXJlIHR3byBvbGQgdGhyZWFkcyBpbiB3aGljaCB0aGlzIGlzc3VlcyB3YXMgYWRkcmVzc2Vz
-IChbMV0sIFsyXSkgYnV0CnRoZSByb290IGNhdXNlIHdhc24ndCBkZWZpbmVkLiBUaGUgcmVhbCBy
-b290IGNhdXNlIGlzIHRoYXQgd2hlbiBsaWJ4bCBjcmVhdGVzCmpzb24gZmlsZSBpdCBkb2Vzbid0
-IHB1dCBlbnRyaWVzIGZvciBmaWVsZHMgd2l0aCBkZWZhdWx0IHZhbHVlICh3aGljaCBpcwpjb3Jy
-ZWN0KS4gVGhlbiBkdXJpbmcgcGFyc2luZyBqc29uIGJhY2sgdG8gZGF0YSwgYXJyYXkgZWxlbWVu
-dHMgYXJlIGluaXRpYWxpemVkCmJ5IHplcm8gaW4gYWxsIGNhc2VzLiBCdXQgdGhleSBzaG91bGQg
-YmUgaW5pdGlhbGl6ZWQgdG8gZGVmYXVsdCB2YWx1ZSAoaWYgaXQgaXMKbm90IGVxdWFscyB0byB6
-ZXJvKS4KClsxXSBodHRwczovL21hcmMuaW5mby8/bD14ZW4tZGV2ZWwmbT0xNTEzNzg3MjcyMTAx
-MzAmdz0yClsyXSBodHRwczovL21hcmMuaW5mby8/bD14ZW4tZGV2ZWwmbT0xNTcwNzE1NTE5MjU3
-MzQmdz0yCgpPbGVrc2FuZHIgR3J5dHNvdiAoMSk6CiAgbGlieGwvZ2VudHlwZXM6IGFkZCByYW5n
-ZSBpbml0IHRvIGFycmF5IGVsZW1lbnRzIGluIGpzb24gcGFyc2luZwoKIHRvb2xzL2xpYnhsL2dl
-bnR5cGVzLnB5IHwgMiArKwogMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQoKLS0gCjIu
-MTcuMQoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhl
-bi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBz
-Oi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+T24gTW9uLCAyOCBPY3QgMjAxOSwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gRnJpLCAyMDE5
+LTA4LTIzIGF0IDE4OjE2IC0wNzAwLCBTdGVmYW5vIFN0YWJlbGxpbmkgd3JvdGU6Cj4gPiBPbiBX
+ZWQsIDIxIEF1ZyAyMDE5LCBEYXJpbyBGYWdnaW9saSB3cm90ZToKPiA+ID4gSGV5LCBTdGVmYW5v
+LCBKdWxpZW4sCj4gPiA+IAo+ID4gPiBIZXJlJ3MgYW5vdGhlciBwYXRjaC4KPiA+ID4gCj4gPiA+
+IFJhdGhlciB0aGFuIGEgZGVidWcgcGF0Y2gsIHRoaXMgaXMgcmF0aGVyIGFuIGFjdHVhbCAicHJv
+cG9zZWQKPiA+ID4gc29sdXRpb24iLgo+ID4gPiAKPiA+ID4gQ2FuIHlvdSBnaXZlIGl0IGEgZ28/
+IElmIGl0IHdvcmtzLCBJJ2xsIHNwaW4gaXQgYXMgYSBwcm9wZXIgcGF0Y2guCj4gPiAKPiA+IFll
+cywgdGhpcyBzZWVtcyB0byBzb2x2ZSB0aGUgcHJvYmxlbSwgdGhhbmsgeW91IQo+ID4gCj4gSGV5
+LAo+IAo+IFNvcnJ5IHRoaXMgaXMgdGFraW5nIGEgbGl0dGxlIHdoaWxlLiBDYW4gYW55IG9mIHlv
+dSBwbGVhc2UgdGVzdCB0aGUKPiBhdHRhY2hlZCwgb24gdG9wIG9mIGN1cnJlbnQgc3RhZ2luZz8K
+PiAKPiBJbiBmYWN0LCBJIHJlYmFzZWQgdGhlIHBhdGNoIGluIG15IGxhc3QgZW1haWwgb24gdG9w
+IG9mIHRoYXQsIGFuZCBJJ2QKPiBsaWtlIHRvIGtub3cgaWYgaXQgc3RpbGwgd29ya3MsIGV2ZW4g
+bm93IHRoYXQgY29yZS1zY2hlZHVsaW5nIGlzIGluLgo+IAo+IElmIGl0IGRvZXMsIHRoZW4gYSBw
+cm9wZXIgY2hhbmdlbG9nIGlzIHRoZSBvbmx5IHRoaW5nIGl0J2QgYmUgbWlzc2luZywKPiBhbmQg
+SSdsbCBkbyBpdCBxdWlja2x5LCBJIHByb21pc2UgOi0pCgpUZXN0ZWQtYnk6IFN0ZWZhbm8gU3Rh
+YmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1h
+bi9saXN0aW5mby94ZW4tZGV2ZWw=
