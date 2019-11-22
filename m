@@ -2,78 +2,79 @@ Return-Path: <SRS0=EJ/f=ZO=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,
-	MIME_QP_LONG_LINE,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2235EC432C0
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2019 02:49:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94542C432C0
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2019 05:17:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D6AE92067D
-	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2019 02:49:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5E6A72068E
+	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2019 05:17:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lZz6UBTm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D6AE92067D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="YJIHNZEU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5E6A72068E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=soleen.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iXz0c-0002wN-UU; Fri, 22 Nov 2019 02:49:22 +0000
+	id 1iY1Jt-0006Ds-U0; Fri, 22 Nov 2019 05:17:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=Etr4=ZO=gmail.com=persaur@srs-us1.protection.inumbo.net>)
- id 1iXz0b-0002wI-Ty
- for xen-devel@lists.xenproject.org; Fri, 22 Nov 2019 02:49:22 +0000
-X-Inumbo-ID: aedbf622-0cd2-11ea-9631-bc764e2007e4
-Received: from mail-io1-xd30.google.com (unknown [2607:f8b0:4864:20::d30])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=5Q5S=ZO=soleen.com=pasha.tatashin@srs-us1.protection.inumbo.net>)
+ id 1iXwz0-00022F-UU
+ for xen-devel@lists.xenproject.org; Fri, 22 Nov 2019 00:39:34 +0000
+X-Inumbo-ID: 8d94d7f2-0cc0-11ea-b678-bc764e2007e4
+Received: from mail-ed1-x544.google.com (unknown [2a00:1450:4864:20::544])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id aedbf622-0cd2-11ea-9631-bc764e2007e4;
- Fri, 22 Nov 2019 02:49:20 +0000 (UTC)
-Received: by mail-io1-xd30.google.com with SMTP id x21so6243903ior.2
- for <xen-devel@lists.xenproject.org>; Thu, 21 Nov 2019 18:49:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=content-transfer-encoding:from:mime-version:subject:message-id:date
- :cc:to; bh=86CKn7obrA3mNzJL/xwZsizGIF0g9KztPRAGOqVxzt4=;
- b=lZz6UBTm1RWHbSdgIw0gkR/JiRjbwzkZq4D8jF8qdaqcbgnlsn+QRFSn23DVdGDfbk
- dqExMAwlS4JkiLCuiaN4/OdsUOxPAfK1IQQ50iK8sHFR0CFxqhvhE3CpiRxTbu3nBACT
- BkSVPfvB+po5FwbTd9qJhLqVLw45LY1qnL6PtPa0+4dAngOkEEwzEsDlL728CPmTjJB/
- EJ/9t9r4LdiVxlurrIB5A1upQjImqCkYi+Tn6+KeFRrNOnT/3o49jmuYN+AahJPsVOzu
- AOkGeAfT6VfjdlAhYcF9uMn4Rb0kcKxQr2ivuFp4Z8lWqEqavzivGJwD0FHptfvc4Oqt
- NDpg==
+ id 8d94d7f2-0cc0-11ea-b678-bc764e2007e4;
+ Fri, 22 Nov 2019 00:39:34 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id a24so4490228edt.0
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Nov 2019 16:39:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=soleen.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=oHj++TIMg4Ens0F3aJfk7j7E8iHr52gJeFlshV/ISiw=;
+ b=YJIHNZEUFsgL4TpJs14+fbdITnHvxz0M9LOs/Dgy5BnL6M72oTwQRtOfHbO+T05ufJ
+ 1/h2bu5CbngwpOk9xEAXUGoL47+0wPGVl8kzdVFg01KrkZWwGTKp9iyOPCAMdvcn1fFt
+ OMdq3ceEnzKogu7+hA4aBhv8w2Jc3Ofz5LZnK7luVq1GrJUQnU/fVoBM6h3G2vQprGJO
+ dfL6DlR4mjWJ8D5CyC68cL6TvpB2mRxeylMzeU5xftSuNDAa8J9opSHNTrz+YLpFlpWc
+ KfWihhOYnN6H7SyWReveUP0uLF3kZEWSuZ5asTyXPmCHwKTW3sgqpxJeiC1yudV73OrE
+ HZlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:content-transfer-encoding:from:mime-version
- :subject:message-id:date:cc:to;
- bh=86CKn7obrA3mNzJL/xwZsizGIF0g9KztPRAGOqVxzt4=;
- b=KeYD9QP9V2IqKZlJNzl+hAuAP8Fm2pAuCwQrRsi63vV9cq4hs02xJmBUnOKb/dhFWD
- hL/ey1roE/Qykxe9rOrUs3ZTsuj7O3kQSzLEB21cmMBYHYCTvdZHuudHvRX6XKvagluS
- gz+v7t+YbArZehf6CrRt9r2Z8qiKep3VquNBxbbd24bpHhX5934tAFU7KL1wFQD/VktR
- fzldajCvgzZOoby3IreeHvBihEnuWSV9+S6M7noqhOjupTlPNpNNPM+Lf/AmeXLbmxSU
- ni0gMw6CAo1FCy5+b6NHOStU7ba6GkB8vxqdQWKSCOpGI+d+GyxVdv2DaT/zpiDYa5Lu
- PjAg==
-X-Gm-Message-State: APjAAAX5+O4NAgUPBHAHexB60j5r9gF0q075jqO/cHGckiyzuoqBNg3I
- gFRlBHdF6zTZr6/OdbKm3Lw=
-X-Google-Smtp-Source: APXvYqznTsbdZstr6czG0GADUvSUg1fQf1ohzNbnEN0Tn6xeCKTa7Wwwa/tILxDQcgeH2+28WNyygg==
-X-Received: by 2002:a6b:bbc5:: with SMTP id
- l188mr11174263iof.259.1574390960082; 
- Thu, 21 Nov 2019 18:49:20 -0800 (PST)
-Received: from [100.64.72.189] ([173.245.215.240])
- by smtp.gmail.com with ESMTPSA id h23sm1713049iof.11.2019.11.21.18.49.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Nov 2019 18:49:19 -0800 (PST)
-From: Rich Persaud <persaur@gmail.com>
-Mime-Version: 1.0 (1.0)
-Message-Id: <A62BCCD8-7624-4A09-AE74-86CB79F4B8BD@gmail.com>
-Date: Thu, 21 Nov 2019 21:49:18 -0500
-To: =?utf-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Roman Shaposhnik <roman@zededa.com>
-X-Mailer: iPad Mail (17B111)
-Subject: Re: [Xen-devel] Status of 4.13
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=oHj++TIMg4Ens0F3aJfk7j7E8iHr52gJeFlshV/ISiw=;
+ b=ofpHzZLmHNRHP1rqnh3RfnR0EYp+PXYjoAuJ/zgWvpZ/uF5u82nZrnTxTQXC0JPPdj
+ Mvq+0/GJYaJYEA6mOxPDiC1d5z3Up9hLwHUH/g/PPICv0DNakTmvFsNjDa6XXr6WSHe8
+ 0QxZKuMc7cupATl3DlOgCcz53u3fXlnORy/It11fhTklp3361ELDmVY+3D+5NXFPC09J
+ LTwUxac46W2ht0rhBnAEoU48TiQaW1LeDD3+gCzwIeCH1jeaXWHCAjp9fLs5bWtzoa9z
+ wx3AOQW9XKLC+vETVeS/OCqKV0bGxcvMZOPOnTITgWlXbCABd4dtlE4pXiCAKZiqghH+
+ YbGg==
+X-Gm-Message-State: APjAAAWd1rfAkjxTx4dsCQDaxMGJVp8pHVxwgrtV+GNObfa1Tncs8A4V
+ tssdRtzVkm69zLznVVo5ae2E7TeVB3xzU41CuzH6Zg==
+X-Google-Smtp-Source: APXvYqwrtfAyjGP3wgLyPbLQNwjFVQfaBija5h4rX527rHpvOeFUrxNZS7l2iyVXlFryl9sSPZTcyswY1QHfRpt/xos=
+X-Received: by 2002:a17:906:b30c:: with SMTP id
+ n12mr17585915ejz.96.1574383173304; 
+ Thu, 21 Nov 2019 16:39:33 -0800 (PST)
+MIME-Version: 1.0
+References: <20191121184805.414758-1-pasha.tatashin@soleen.com>
+ <20191121184805.414758-2-pasha.tatashin@soleen.com>
+ <20191122002258.GD25745@shell.armlinux.org.uk>
+ <CA+CK2bDtADA2eVwJAUEPhpic8vXWegh8yLjo6Q6WmXZDxAfJpA@mail.gmail.com>
+ <20191122003403.GG25745@shell.armlinux.org.uk>
+ <20191122003524.GH25745@shell.armlinux.org.uk>
+In-Reply-To: <20191122003524.GH25745@shell.armlinux.org.uk>
+From: Pavel Tatashin <pasha.tatashin@soleen.com>
+Date: Thu, 21 Nov 2019 19:39:22 -0500
+Message-ID: <CA+CK2bAm0r8zLMz_gdq30zF8io5RzVnbXFSV9NkyT_uUxKJwLA@mail.gmail.com>
+To: Russell King - ARM Linux admin <linux@armlinux.org.uk>
+X-Mailman-Approved-At: Fri, 22 Nov 2019 05:17:22 +0000
+Subject: Re: [Xen-devel] [PATCH 1/3] arm/arm64/xen: use C inlines for
+ privcmd_call
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -84,261 +85,34 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: =?utf-8?Q?J=C3=BCrgen_Gro=C3=9F?= <jgross@suse.com>, Wei Liu <wl@xen.org>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <Andrew.Cooper3@citrix.com>,
- Ian Jackson <Ian.Jackson@eu.citrix.com>, Julien Grall <julien.grall@arm.com>,
- Jan Beulich <JBeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Content-Type: multipart/mixed; boundary="===============3346701306409204979=="
+Cc: Mark Rutland <mark.rutland@arm.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, stefan@agner.ch,
+ Masahiro Yamada <yamada.masahiro@socionext.com>, Will Deacon <will@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, Sasha Levin <sashal@kernel.org>,
+ sstabellini@kernel.org, James Morris <jmorris@namei.org>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ xen-devel@lists.xenproject.org, Vladimir Murzin <vladimir.murzin@arm.com>,
+ Marc Zyngier <marc.zyngier@arm.com>, alexios.zavras@intel.com,
+ boris.ostrovsky@oracle.com, allison@lohutok.net, jgross@suse.com,
+ steve.capper@arm.com, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ LKML <linux-kernel@vger.kernel.org>, James Morse <james.morse@arm.com>,
+ info@metux.net
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============3346701306409204979==
-Content-Type: multipart/alternative; boundary=Apple-Mail-775DED21-FC06-4491-9BE8-09FF24D5A9AA
-Content-Transfer-Encoding: 7bit
-
-
---Apple-Mail-775DED21-FC06-4491-9BE8-09FF24D5A9AA
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-=EF=BB=BFOn Nov 21, 2019, at 17:11, Marek Marczykowski-G=C3=B3recki <marmare=
-k@invisiblethingslab.com> wrote:
->=20
-> =EF=BB=BFOn Thu, Nov 21, 2019 at 11:39:14AM -0800, Roman Shaposhnik wrote:=
-
->>> On Thu, Nov 21, 2019 at 9:38 AM Andrew Cooper <andrew.cooper3@citrix.com=
-> wrote:
->>> On 21/11/2019 17:31, Roman Shaposhnik wrote:
->>>>>> On Wed, Nov 20, 2019 at 10:06 PM J=C3=BCrgen Gro=C3=9F <jgross@suse.c=
-om> wrote:
->>>>>>> Where do we stand with Xen 4.13 regarding blockers and related patch=
-es?
->>>>>>> 1. OSStest failure regarding nested test:
->>>>>>> I'm not quite sure whether the currently debated patch of Andrew is
->>>>>>> fixing the problem. If not, do we know what is missing or how to
->>>>>>> address the issue? If yes, could we please come to an agreement?
->>>>>>> As an alternative: any thoughts about ignoring this test failure for=
-
->>>>>>> 4.13-RC3 (IOW: doing a force push)?
->>>>>>> 2. Ryzen/Rome failures with Windows guests:
->>>>>>> What is the currently planned way to address the problem? Who is
->>>>>>> working on that?
->>>>>>> 3. Pending patches for 4.13:
->>>>>>> Could I please have feedback which patches tagged as "for-4.13" are
->>>>>>> fixing real regressions or issues? I don't want to take any patches
->>>>>>> not fixing real problems after RC3, and I hope to be able to get a
->>>>>>> push rather sooner than later to be able to let Ian cut RC3.
->>>>>>> 4. Are there any blockers for 4.13 other than 1. and 2. (apart of an=
-y
->>>>>>> pending XSAs)?
->>>>>> Any chance the efi=3Dno-rs regression can be added to the list? I und=
-erstand
->>>>>> that I'm still on the hook to provide more details (I promise to do i=
-t on Fri
->>>>>> when I get to my lab to actually have a serial console on all these b=
-oxes).
->>>>>> At the same time this is a pretty serious regression for an entire cl=
-ass of
->>>>>> devices where Xen was perfectly happy even during RC1.
->>>>> https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dcommitdiff;h=3D534f9e2=
-9ce28580892b3856036b5e5cd805667cc
->>>>> has been committed.  It is in staging, but not in master yet (because
->>>>> master is blocked by my regression in 1).
->> I'll make sure to test it on Fri, but here's where I'm lost -- my
->> understanding that
->> activation of this patch requires a special build flag to be passed.
-
-Draft doc for the Xen 4.13 improvement:
-https://wiki.xen.org/wiki/Xen_EFI#Compatibility_of_UEFI_Host_Firmware.2C_Xen=
-_and_UEFI_Runtime_Services
-
-Corrections and compatibility test reports would be welcome.
-
-Rich
-
->> Which means,
->> we're still very much in a regresses state when it comes to building
->> out-of-the-box,
->> no?
->=20
-> No, there are two thing:
-> 1. A bug triggered by efi=3Dno-rs flag - fixed in the above commit
-> 2. A second commit making efi=3Dno-rs unnecessary on some machines - this
-> is what require build flag (CONFIG_EFI_SET_VIRTUAL_ADDRESS_MAP=3Dy).
-
---Apple-Mail-775DED21-FC06-4491-9BE8-09FF24D5A9AA
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><div dir=3D"ltr">=EF=BB=BFOn Nov 21, 2019, a=
-t 17:11, Marek Marczykowski-G=C3=B3recki &lt;marmarek@invisiblethingslab.com=
-&gt; wrote:<div dir=3D"ltr"><div dir=3D"ltr"><blockquote type=3D"cite"><span=
-></span><br></blockquote><blockquote type=3D"cite"><span>=EF=BB=BFOn Thu, No=
-v 21, 2019 at 11:39:14AM -0800, Roman Shaposhnik wrote:</span><br></blockquo=
-te><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><span>On Thu, Nov 21, 2019 at 9:38 AM Andrew Cooper &lt;andrew.cooper3@=
-citrix.com&gt; wrote:</span><br></blockquote></blockquote></blockquote><bloc=
-kquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><sp=
-an>On 21/11/2019 17:31, Roman Shaposhnik wrote:</span><br></blockquote></blo=
-ckquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><bl=
-ockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><span>On Wed, Nov 20, 2019 at 10:06 PM J=C3=BCrgen G=
-ro=C3=9F &lt;jgross@suse.com&gt; wrote:</span><br></blockquote></blockquote>=
-</blockquote></blockquote></blockquote></blockquote><blockquote type=3D"cite=
-"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><span>Where do we stand with Xen 4.13 regarding blockers and related p=
-atches?</span><br></blockquote></blockquote></blockquote></blockquote></bloc=
-kquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>1. OSStest f=
-ailure regarding nested test:</span><br></blockquote></blockquote></blockquo=
-te></blockquote></blockquote></blockquote></blockquote><blockquote type=3D"c=
-ite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span> I'm not quite sure whether the currently debated patch of Andr=
-ew is</span><br></blockquote></blockquote></blockquote></blockquote></blockq=
-uote></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span> fixing the=
- problem. If not, do we know what is missing or how to</span><br></blockquot=
-e></blockquote></blockquote></blockquote></blockquote></blockquote></blockqu=
-ote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><span> address the issue? If yes, could we p=
-lease come to an agreement?</span><br></blockquote></blockquote></blockquote=
-></blockquote></blockquote></blockquote></blockquote><blockquote type=3D"cit=
-e"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span> As an alternative: any thoughts about ignoring this test failu=
-re for</span><br></blockquote></blockquote></blockquote></blockquote></block=
-quote></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span> 4.13-RC3 (=
-IOW: doing a force push)?</span><br></blockquote></blockquote></blockquote><=
-/blockquote></blockquote></blockquote></blockquote><blockquote type=3D"cite"=
-><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cit=
-e"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><span>2. Ryzen/Rome failures with Windows guests:</span><br></blockquot=
-e></blockquote></blockquote></blockquote></blockquote></blockquote></blockqu=
-ote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><span> What is the currently planned way to=
- address the problem? Who is</span><br></blockquote></blockquote></blockquot=
-e></blockquote></blockquote></blockquote></blockquote><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span> working on that?</span><br></blockquote></blockquote></blockqu=
-ote></blockquote></blockquote></blockquote></blockquote><blockquote type=3D"=
-cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span>3. Pending patches for 4.13:</span><br></blockquote></blockquot=
-e></blockquote></blockquote></blockquote></blockquote></blockquote><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><bloc=
-kquote type=3D"cite"><span> Could I please have feedback which patches tagge=
-d as "for-4.13" are</span><br></blockquote></blockquote></blockquote></block=
-quote></blockquote></blockquote></blockquote><blockquote type=3D"cite"><bloc=
-kquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><bl=
-ockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-span> fixing real regressions or issues? I don't want to take any patches</s=
-pan><br></blockquote></blockquote></blockquote></blockquote></blockquote></b=
-lockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><blockquote type=3D"cite"><blockquote type=3D"cite"><span> not fixing real p=
-roblems after RC3, and I hope to be able to get a</span><br></blockquote></b=
-lockquote></blockquote></blockquote></blockquote></blockquote></blockquote><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cit=
-e"><blockquote type=3D"cite"><span> push rather sooner than later to be able=
- to let Ian cut RC3.</span><br></blockquote></blockquote></blockquote></bloc=
-kquote></blockquote></blockquote></blockquote><blockquote type=3D"cite"><blo=
-ckquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><b=
-lockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite">=
-<span>4. Are there any blockers for 4.13 other than 1. and 2. (apart of any<=
-/span><br></blockquote></blockquote></blockquote></blockquote></blockquote><=
-/blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cit=
-e"><blockquote type=3D"cite"><blockquote type=3D"cite"><span> pending XSAs)?=
-</span><br></blockquote></blockquote></blockquote></blockquote></blockquote>=
-</blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite=
-"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><span>Any chance the efi=3Dno-rs regression ca=
-n be added to the list? I understand</span><br></blockquote></blockquote></b=
-lockquote></blockquote></blockquote></blockquote><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><blockquote type=3D"cite"><blockquote type=3D"cite"><span>that I'm still on=
- the hook to provide more details (I promise to do it on Fri</span><br></blo=
-ckquote></blockquote></blockquote></blockquote></blockquote></blockquote><bl=
-ockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><span>when I get to my lab to actually have a serial console on all these b=
-oxes).</span><br></blockquote></blockquote></blockquote></blockquote></block=
-quote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><bloc=
-kquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><bl=
-ockquote type=3D"cite"><span>At the same time this is a pretty serious regre=
-ssion for an entire class of</span><br></blockquote></blockquote></blockquot=
-e></blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><span>devices where Xen was per=
-fectly happy even during RC1.</span><br></blockquote></blockquote></blockquo=
-te></blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockqu=
-ote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><block=
-quote type=3D"cite"><span>https://xenbits.xen.org/gitweb/?p=3Dxen.git;a=3Dco=
-mmitdiff;h=3D534f9e29ce28580892b3856036b5e5cd805667cc</span><br></blockquote=
-></blockquote></blockquote></blockquote></blockquote><blockquote type=3D"cit=
-e"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><blockquote type=3D"cite"><span>has been committed. &nbsp;It is in stag=
-ing, but not in master yet (because</span><br></blockquote></blockquote></bl=
-ockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote typ=
-e=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><span>master is blocked by my regression in 1).</span><br></blo=
-ckquote></blockquote></blockquote></blockquote></blockquote><blockquote type=
-=3D"cite"><blockquote type=3D"cite"><span>I'll make sure to test it on Fri, b=
-ut here's where I'm lost -- my</span><br></blockquote></blockquote><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><span>understanding that</span><b=
-r></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"ci=
-te"><span>activation of this patch requires a special build flag to be passe=
-d.</span><br></blockquote></blockquote><span></span><br><span>Draft doc for t=
-he Xen 4.13 improvement:</span></div><div dir=3D"ltr"><a href=3D"https://wik=
-i.xen.org/wiki/Xen_EFI#Compatibility_of_UEFI_Host_Firmware.2C_Xen_and_UEFI_R=
-untime_Services">https://wiki.xen.org/wiki/Xen_EFI#Compatibility_of_UEFI_Hos=
-t_Firmware.2C_Xen_and_UEFI_Runtime_Services</a></div><div dir=3D"ltr"><br></=
-div><div dir=3D"ltr">Corrections and compatibility test reports would be wel=
-come.</div><div dir=3D"ltr"><br></div><div dir=3D"ltr">Rich</div><div dir=3D=
-"ltr"><span></span><br><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-span>Which means,</span><br></blockquote></blockquote><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><span>we're still very much in a regresses sta=
-te when it comes to building</span><br></blockquote></blockquote><blockquote=
- type=3D"cite"><blockquote type=3D"cite"><span>out-of-the-box,</span><br></b=
-lockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-span>no?</span><br></blockquote></blockquote><blockquote type=3D"cite"><span=
-></span><br></blockquote><blockquote type=3D"cite"><span>No, there are two t=
-hing:</span><br></blockquote><blockquote type=3D"cite"><span>1. A bug trigge=
-red by efi=3Dno-rs flag - fixed in the above commit</span><br></blockquote><=
-blockquote type=3D"cite"><span>2. A second commit making efi=3Dno-rs unneces=
-sary on some machines - this</span><br></blockquote><blockquote type=3D"cite=
-"><span>is what require build flag (CONFIG_EFI_SET_VIRTUAL_ADDRESS_MAP=3Dy).=
-</span></blockquote></div></div></div></body></html>=
-
---Apple-Mail-775DED21-FC06-4491-9BE8-09FF24D5A9AA--
-
-
---===============3346701306409204979==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3346701306409204979==--
-
+PiA+IFRoYXQgbWF5IGJlLCBidXQgYmUgdmVyeSBjYXJlZnVsIHRoYXQgeW91IG9ubHkgdXNlIHRo
+ZW0gaW4gQVJNdjctb25seQo+ID4gY29kZS4gIFVzaW5nIHRoZW0gZWxzZXdoZXJlIGlzIHVuc2Fm
+ZSBhcyB0aGUgZG9tYWluIHJlZ2lzdGVyIGlzIHVzZWQKPiA+IGZvciBvdGhlciBwdXJwb3Nlcywg
+YW5kIG1lcmVseSBibGF0dGluZyBvdmVyIGl0IChhcyB5b3VyCj4gPiB1YWNjZXNzX2VuYWJsZSBh
+bmQgdWFjY2Vzc19kaXNhYmxlIGZ1bmN0aW9ucyBkbykgaXMgdW5zYWZlLgo+Cj4gSW4gZmFjdCwg
+SSdsbCB0dXJuIHRoYXQgaW50byBhIGJpdCBtb3JlIHRoYW4gYSBzdWdnZXN0aW9uLiAgSSdsbCBt
+YWtlCj4gaXQgYSBOQUsgb24gYWRkaW5nIHRoZW0gdG8gMzItYml0IEFSTS4KPgoKVGhhdCdzIGZp
+bmUsIGFuZCBJIGFsc28gZGlkIG5vdCB3YW50IHRvIGNoYW5nZSBBUk0gMzItYml0LiBCdXQsIGRv
+IHlvdQpoYXZlIGEgc3VnZ2VzdGlvbiBob3cgZGlmZmVyZW50aWF0ZSBiZXR3ZWVuIGFybTY0IGFu
+ZCBhcm0gaW4KaW5jbHVkZS94ZW4vYXJtL2h5cGVyY2FsbC5oIHdpdGhvdXQgdWdseSBpZmRlZnM/
+CgpUaGFuayB5b3UsClBhc2hhCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
+LWRldmVs
