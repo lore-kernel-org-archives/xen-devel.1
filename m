@@ -7,65 +7,65 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D9D9EC33CA1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DBF90C33CA2
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2019 05:17:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA4992068E
+	by mail.kernel.org (Postfix) with ESMTPS id B02E520708
 	for <xen-devel@archiver.kernel.org>; Fri, 22 Nov 2019 05:17:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="D8TF57oZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA4992068E
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=soleen.com header.i=@soleen.com header.b="NCJD76gl"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B02E520708
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=soleen.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iY1Jr-0006CP-Vt; Fri, 22 Nov 2019 05:17:23 +0000
+	id 1iY1Jv-0006EG-1f; Fri, 22 Nov 2019 05:17:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=51Zo=ZN=soleen.com=pasha.tatashin@srs-us1.protection.inumbo.net>)
- id 1iXrV4-0006P0-OV
- for xen-devel@lists.xenproject.org; Thu, 21 Nov 2019 18:48:18 +0000
-X-Inumbo-ID: 77a3a576-0c8f-11ea-b678-bc764e2007e4
-Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
+ <SRS0=5Q5S=ZO=soleen.com=pasha.tatashin@srs-us1.protection.inumbo.net>)
+ id 1iXycN-0001Gi-E6
+ for xen-devel@lists.xenproject.org; Fri, 22 Nov 2019 02:24:19 +0000
+X-Inumbo-ID: 2bbadca2-0ccf-11ea-adbe-bc764e2007e4
+Received: from mail-qt1-x844.google.com (unknown [2607:f8b0:4864:20::844])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 77a3a576-0c8f-11ea-b678-bc764e2007e4;
- Thu, 21 Nov 2019 18:48:11 +0000 (UTC)
-Received: by mail-qt1-x842.google.com with SMTP id q8so2180118qtr.10
- for <xen-devel@lists.xenproject.org>; Thu, 21 Nov 2019 10:48:11 -0800 (PST)
+ id 2bbadca2-0ccf-11ea-adbe-bc764e2007e4;
+ Fri, 22 Nov 2019 02:24:12 +0000 (UTC)
+Received: by mail-qt1-x844.google.com with SMTP id o49so6122874qta.7
+ for <xen-devel@lists.xenproject.org>; Thu, 21 Nov 2019 18:24:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=soleen.com; s=google;
  h=from:to:subject:date:message-id:in-reply-to:references:mime-version
  :content-transfer-encoding;
  bh=HgQtjc5acLHzjiwVf/zPdL0W3rJRgxp/Mq6B1WIDDxY=;
- b=D8TF57oZonJsJ7ptNQX1Oql+1bGPweH7IQDgGXFghl6XLlpJMfByo9jtn6lWNVKneh
- s2cJgTr1kQWATQJrBvnkf95d+I3h7dwVBG/raggpy0IJob7OGHVHg9IPdtDdarosd954
- KFR3q4XmVCuDk6cTsFQy47BxZ22+ZDDQIEsZIop543H+GCFV/vAHhe7jJIwfww5UYbL5
- Gs9GL4HTjVd2fG46M2jukbPbRS4huhvRfKChueNRZEhzrnriSSgwr01jRIkK+k34OPaf
- xGvsJeSVsHNnl3tY0THdt6/yxjIzUUj/KIQb1SVBDN0kj4MtWe+F1Muehw4EuSxPRpXX
- 0l4Q==
+ b=NCJD76glok7tVpPWeRPMFMOTsJyN4W7x2c/GCYOWTwrHjqgkhGGyM4V97AkUHi7MJ8
+ KGTYQXByuaFA/HeJ/VPbTjcCKJ1GKPTm/770K7AeT6xPogT8ulU3rOP9qd11J7e3lcP1
+ QpEXRRxNPL/pyJn7e5Km8+UTwxnuBqX2xB6z45Aodil6sdu5WtiHlqtHjexiVH9xBs9h
+ zn9vt/ZcjNmX4zQzavX5aYNETygv+Fy21dmaPT6M8AV/hr7nhpf+0pCuDj86VttXSygY
+ B+SFKXJNsZUDaDYm066fXl8fGA4gF2/m3CEO9ntre4m2w/kNPPa7QP6LMBMl3WSEEyFs
+ xtLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
  bh=HgQtjc5acLHzjiwVf/zPdL0W3rJRgxp/Mq6B1WIDDxY=;
- b=K34paoVHvImqjjtestqcgTY7oksngYz9w+Pb1eUlu2JH/dG3UzMBntdVhYpu54tpES
- OazCUZItSQCGIDEo54OD2LEtY8wPu+Tx9D+XU+hIaLRZMGxuS3QNyOStZvrUfNvppRQg
- ZLlHif+GIYkJl3pR/MyoS3+V7F0NcnGwjsVUYjNDNEWI/LnPFN/1CB+YO/rLa4ih9cZs
- GtaL38rLW9/QuVMtiEn5OMkZIagj6EiBfeA/uBo0qDlnHsBVJaa3fGvNCOz/RqlKTtLW
- dOEZKgA2yuTz8JbeAnnCl6gOlk1aQAbS5KKQ1QNSG3eriq3cs8TeT/gdgJbLb+lGc7OD
- k9dw==
-X-Gm-Message-State: APjAAAU0yJR9YhP7fw4+f5VwWvvfanVmY+kHmLOK6sp9k1qx9iQy/JQC
- fBlB1RvQqEjJ6tRry3rhZcKcCw==
-X-Google-Smtp-Source: APXvYqyC5mwODRFAu6hCA10XUD/HEGjTmVXQZnPp2NesFrAjEuQLsTPPaA4uJEbcoHdfWmybnns7cA==
-X-Received: by 2002:ac8:7444:: with SMTP id h4mr10138097qtr.102.1574362091132; 
- Thu, 21 Nov 2019 10:48:11 -0800 (PST)
+ b=Ht9NUfV5ovYYvbPFV6EQzX9xFS5vJVifxUGTzUlvufD1l9UYTZx+hXb3kKGQ6CLEq9
+ fYgfhvmTnBwppX7NCy2rurUqrjynnQz4YFU5QEOCi821RaVti+Bkan2zjtXWYL3niPux
+ +RuVdDMMSz8vZVDG6ZuZ1/ZwDzsYeqI5SbSM1YaWoFYGZg0EVbkEFcFfdjO9qufbWP29
+ CjtqAPAMP0tAsbGudwxvv04nNzwBRu1Xk1kCsA8AC0a0Bo1awizHg0Rlm5Puldn8VOEy
+ B/EbckJ1HxKWHGp1OMZejgfvhCsVI+7+pJicW/Q1sjn0ocBDzQjnfKRa5xuDbLrmnf7Z
+ 4Igg==
+X-Gm-Message-State: APjAAAWEza+bo781Qs9tzknulB9Zhl/U/fwZc6O2idqWdW24ohuKTNTZ
+ To5gFZpMKwshLn23/TNPHwjLbw==
+X-Google-Smtp-Source: APXvYqyII7bwvpdPFvB1uClYqq9YlCH8qAJI5DdRg1eAxlpjXNOJ/Xqjeo/s4oaH3hLXKnjnqntnXg==
+X-Received: by 2002:ac8:1084:: with SMTP id a4mr12202956qtj.114.1574389451666; 
+ Thu, 21 Nov 2019 18:24:11 -0800 (PST)
 Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net.
  [73.69.118.222])
- by smtp.gmail.com with ESMTPSA id t2sm1811634qkt.95.2019.11.21.10.48.09
+ by smtp.gmail.com with ESMTPSA id z5sm2609801qtm.9.2019.11.21.18.24.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Nov 2019 10:48:10 -0800 (PST)
+ Thu, 21 Nov 2019 18:24:11 -0800 (PST)
 From: Pavel Tatashin <pasha.tatashin@soleen.com>
 To: pasha.tatashin@soleen.com, jmorris@namei.org, sashal@kernel.org,
  linux-kernel@vger.kernel.org, catalin.marinas@arm.com, will@kernel.org,
@@ -76,15 +76,15 @@ To: pasha.tatashin@soleen.com, jmorris@namei.org, sashal@kernel.org,
  sstabellini@kernel.org, boris.ostrovsky@oracle.com, jgross@suse.com,
  stefan@agner.ch, yamada.masahiro@socionext.com,
  xen-devel@lists.xenproject.org, linux@armlinux.org.uk
-Date: Thu, 21 Nov 2019 13:48:04 -0500
-Message-Id: <20191121184805.414758-3-pasha.tatashin@soleen.com>
+Date: Thu, 21 Nov 2019 21:24:05 -0500
+Message-Id: <20191122022406.590141-3-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191121184805.414758-1-pasha.tatashin@soleen.com>
-References: <20191121184805.414758-1-pasha.tatashin@soleen.com>
+In-Reply-To: <20191122022406.590141-1-pasha.tatashin@soleen.com>
+References: <20191122022406.590141-1-pasha.tatashin@soleen.com>
 MIME-Version: 1.0
 X-Mailman-Approved-At: Fri, 22 Nov 2019 05:17:22 +0000
-Subject: [Xen-devel] [PATCH 2/3] arm64: remove uaccess_ttbr0 asm macros from
- cache functions
+Subject: [Xen-devel] [PATCH v2 2/3] arm64: remove uaccess_ttbr0 asm macros
+ from cache functions
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
