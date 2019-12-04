@@ -2,65 +2,70 @@ Return-Path: <SRS0=ZD/N=Z2=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4CA69C43603
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F517C2BC73
 	for <xen-devel@archiver.kernel.org>; Wed,  4 Dec 2019 09:27:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 28400206DF
+	by mail.kernel.org (Postfix) with ESMTPS id 285802073B
 	for <xen-devel@archiver.kernel.org>; Wed,  4 Dec 2019 09:27:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 28400206DF
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 285802073B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=dingwall.me.uk
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1icQwR-0001qt-6o; Wed, 04 Dec 2019 09:27:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1icQwQ-0001qn-VA; Wed, 04 Dec 2019 09:27:26 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Fd9d=Z2=dingwall.me.uk=james@srs-us1.protection.inumbo.net>)
- id 1icQwQ-0001qi-FR
+ id 1icQwQ-0001qd-4f
  for xen-devel@lists.xenproject.org; Wed, 04 Dec 2019 09:27:26 +0000
-X-Inumbo-ID: 476f94f8-1678-11ea-a0d2-bc764e2007e4
-Received: from know-smtprelay-omc-3.server.virginmedia.net (unknown
- [80.0.253.67]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 476f94f8-1678-11ea-a0d2-bc764e2007e4;
+X-Inumbo-ID: 47705d2b-1678-11ea-81fe-12813bfff9fa
+Received: from know-smtprelay-omc-1.server.virginmedia.net (unknown
+ [80.0.253.65]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 47705d2b-1678-11ea-81fe-12813bfff9fa;
  Wed, 04 Dec 2019 09:27:24 +0000 (UTC)
 Received: from mail0.xen.dingwall.me.uk ([82.47.84.47]) by cmsmtp with ESMTPA
- id cQwNilTndMk4gcQwNiUugq; Wed, 04 Dec 2019 09:27:23 +0000
+ id cQwNiY5hqxs8ecQwNioh3X; Wed, 04 Dec 2019 09:27:23 +0000
 X-Originating-IP: [82.47.84.47]
 X-Authenticated-User: james.dingwall@blueyonder.co.uk
 X-Spam: 0
-X-Authority: v=2.3 cv=Rfa+9Wlv c=1 sm=1 tr=0 a=0bfgdX8EJi0Cr9X0x0jFDA==:117
- a=0bfgdX8EJi0Cr9X0x0jFDA==:17 a=xqWC_Br6kY4A:10 a=pxVhFHJ0LMsA:10
- a=GfapET-l_dkBDNbsHL0A:9
+X-Authority: v=2.3 cv=L98zvdb8 c=1 sm=1 tr=0 a=0bfgdX8EJi0Cr9X0x0jFDA==:117
+ a=0bfgdX8EJi0Cr9X0x0jFDA==:17 a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19
+ a=xqWC_Br6kY4A:10 a=pxVhFHJ0LMsA:10 a=5IRWAbXhAAAA:8 a=Sk5AkFDSzmZvWLMj57EA:9
+ a=G6QAcT8NE79V4_GB:21 a=pniMzHNUB-FszkVU:21 a=xo7gz2vLY8DhO4BdlxfM:22
 Received: from localhost (localhost [IPv6:::1])
- by mail0.xen.dingwall.me.uk (Postfix) with ESMTP id BE59115941C;
+ by mail0.xen.dingwall.me.uk (Postfix) with ESMTP id E9B07159423;
  Wed,  4 Dec 2019 09:27:41 +0000 (UTC)
 X-Virus-Scanned: Debian amavisd-new at dingwall.me.uk
 Received: from mail0.xen.dingwall.me.uk ([IPv6:::1])
  by localhost (mail0.xen.dingwall.me.uk [IPv6:::1]) (amavisd-new, port 10024)
- with ESMTP id gZQ54oq4ddN2; Wed,  4 Dec 2019 09:27:41 +0000 (UTC)
-Received: from behemoth.dingwall.me.uk (behemoth.dingwall.me.uk [192.168.1.5])
- by dingwall.me.uk (Postfix) with ESMTP id 8521F159413;
+ with ESMTP id K8vWBOZ4fSQp; Wed,  4 Dec 2019 09:27:41 +0000 (UTC)
+Received: from behemoth.dingwall.me.uk (behemoth.dingwall.me.uk
+ [IPv6:2001:470:695c:302::c0a8:105])
+ by dingwall.me.uk (Postfix) with ESMTP id 8ADB9159415;
  Wed,  4 Dec 2019 09:27:41 +0000 (UTC)
 Received: by behemoth.dingwall.me.uk (Postfix, from userid 1000)
- id 7FF5F140E15; Wed,  4 Dec 2019 09:27:41 +0000 (UTC)
+ id 8EC0B140E19; Wed,  4 Dec 2019 09:27:41 +0000 (UTC)
 From: james-xen@dingwall.me.uk
 To: xen-devel@lists.xenproject.org
-Date: Wed,  4 Dec 2019 09:27:35 +0000
-Message-Id: <20191204092739.18177-1-james-xen@dingwall.me.uk>
+Date: Wed,  4 Dec 2019 09:27:37 +0000
+Message-Id: <20191204092739.18177-3-james-xen@dingwall.me.uk>
 X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191204092739.18177-1-james-xen@dingwall.me.uk>
+References: <20191204092739.18177-1-james-xen@dingwall.me.uk>
 MIME-Version: 1.0
-X-CMAE-Envelope: MS4wfMwp32QxQOJTLzY+MwLbkx+8ze7848ZeIpY21eg5iEbuT67dRWEDzBIZz+j+umI7w76y5rxBfu856CrHgxa/YOXRtUSORrITzE+v19eq5q76WJKpaTjQ
- /Pgitv451uww3oLLDbyDux7EtEXLFuyAuTfMdUyvcFYX3wXP/A6B+BWqqvQWxWnL2mo1qNVEPEoe2F8xZOStrT5vwPvGiyidTC1kPgtVHfQGxKC9V4F2jW/Z
- dVDu2Hl5Z/wcpKyVSwziTxnfUeiMinxW83EYh/C2+40=
-Subject: [Xen-devel] [PATCH 0/4] xenstore domain: improve logging
- capabilities
+X-CMAE-Envelope: MS4wfKZJoxklV5Q0Crbpl0ZLACJxmaLTqKK6ekPEx8uMnDO5p1kjjD1esGp12wJKNL49IdkWu7Gf7CztIe8p8YMUwMzuIKFOUprkyINvei5hZ1YXg7gtsnRl
+ 5FtC7oEvAQNu+j0pAzSVopzAkwDJG+E603ho9qrM1KK7A9g13YbqQg1D7xjI5wm2evASO8HKBoYuUgcFh65K0Omec8bRgQzAsYtHn8CwyxL+ByavkDOFYH+c
+ cKHD2q24E0ilvqeb+l33P6e5wJVQ+iaquWicJ7YTp5E=
+Subject: [Xen-devel] [PATCH 2/4] xenstored logging: add control to
+ dynamically toggle tracesyslog flag
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,29 +76,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: wei.liu2@citrix.com, ian.jackson@eu.citrix.com
+Cc: wei.liu2@citrix.com, ian.jackson@eu.citrix.com,
+ James Dingwall <james@dingwall.me.uk>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGksCgpXaGVuIHhlbnN0b3JlIGlzIHJ1biBhcyBhIGRvbWFpbiB0aGVyZSBpcyBubyB3YXkgdG8g
-Z2V0IGxvZyBtZXNzYWdlcyBmcm9tIHRoZQpwcm9jZXNzLiAgVGhpcyBzbWFsbCBzZXJpZXMgYWRk
-cyBhIG5ldyAtLXRyYWNlLXN5c2xvZyBvcHRpb24gd2hpY2ggd2lsbCBjb3B5CnRyYWNlKCkgYW5k
-IHhwcmludGYoKSBtZXNzYWdlcyB0byBzeXNsb2csIGluIHRoZSBNaW5pT1MgY2FzZSB0aGlzIGRp
-cmVjdHMgdG8KdGhlIGtlcm5lbCBwcmludGsoKS4gIFdoZW4gaXQgaXMgZW5hYmxlZCBpbiB0aGUg
-eGVuc3RvcmUgZG9tYWluIG1lc3NhZ2VzIGFyZQpyZWNvcmRlZCBvbiB0aGUgaHlwZXJ2aXNvciBj
-b25zb2xlIGFjY29yZGluZyB0byB0aGUgZ3Vlc3RfbG9nbHZsLgoKQSBuZXcgeGVuc3RvcmUgY29u
-dHJvbCBpcyBhbHNvIGFkZGVkIHNvIHRoYXQgdGhlIGZ1bmN0aW9uYWxpdHkgY2FuIGJlIHRvZ2ds
-ZWQKZHluYW1pY2FsbHkgYXQgcnVudGltZS4KCkkgdGhpbmsgdGhlcmUgaXMgcG9zc2libHkgc29t
-ZSByb29tIGZvciBmdXJ0aGVyIGVuaGFuY2VtZW50cyBzbyB0aGF0IGl0IGlzCm1vcmUgZWFzaWx5
-IHBvc3NpYmxlIHRvIGxvZyBhdCBkaWZmZXJlbnQgcHJpb3JpdGllcyByYXRoZXIgdGhhbiBhIHNp
-bXBsZQp0cmFjZSgpID0gTE9HX0RFQlVHLCB4cHJpbnRmKCkgPSBMT0dfRVJSLiAgUGVyaGFwcyB0
-aGUgYWRkaXRpb24gb2Ygc29tZQptb3JlIG1hY3JvcyBzaW1pbGFyIHRvIGVwcmludGYgY291bGQg
-YmUgdXNlZnVsIHRvby4gIElmIHN1Y2ggY2hhbmdlIHdvdWxkCmJlIGNvbnNpZGVyZWQgdXNlZnVs
-IHRoZW4gc29tZSBndWlkYW5jZSBvbiB0aGUgbW9zdCBhcHByb3ByaWF0ZSBkaXJlY3Rpb24KdG8g
-dGFrZSB3b3VsZCBiZSBoZWxwZnVsLgoKVGhlIHNlcmllcyBpcyBiYXNlZCBvbiA0LjExLjMgYnV0
-IEkgY2FuIHJlYmFzZSBpdCB0byBtYXN0ZXIuCgpKYW1lcwoKCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
-dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
-bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+RnJvbTogSmFtZXMgRGluZ3dhbGwgPGphbWVzQGRpbmd3YWxsLm1lLnVrPgoKQWRkIGEgbmV3IHhl
+bnN0b3JlIGNvbnRyb2wgY29tbWFuZCB3aGljaCBhbGxvd3MgdGhlIHRyYWNlc3lzbG9nIGJvb2xl
+YW4gdG8gYmUKY2hhbmdlZCBhdCBydW4gdGltZS4KLS0tCiB0b29scy94ZW5zdG9yZS94ZW5zdG9y
+ZWRfY29udHJvbC5jIHwgMTggKysrKysrKysrKysrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgMTgg
+aW5zZXJ0aW9ucygrKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlZF9jb250
+cm9sLmMgYi90b29scy94ZW5zdG9yZS94ZW5zdG9yZWRfY29udHJvbC5jCmluZGV4IGU0YjhhYTk1
+YWIuLjEyMGRjM2FhOTggMTAwNjQ0Ci0tLSBhL3Rvb2xzL3hlbnN0b3JlL3hlbnN0b3JlZF9jb250
+cm9sLmMKKysrIGIvdG9vbHMveGVuc3RvcmUveGVuc3RvcmVkX2NvbnRyb2wuYwpAQCAtNzYsNiAr
+NzYsMjMgQEAgc3RhdGljIGludCBkb19jb250cm9sX2xvZ2ZpbGUodm9pZCAqY3R4LCBzdHJ1Y3Qg
+Y29ubmVjdGlvbiAqY29ubiwKIAlyZXR1cm4gMDsKIH0KIAorc3RhdGljIGludCBkb19jb250cm9s
+X2xvZ3N5c2xvZyh2b2lkICpjdHgsIHN0cnVjdCBjb25uZWN0aW9uICpjb25uLAorCQkJICBjaGFy
+ICoqdmVjLCBpbnQgbnVtKQoreworCWlmIChudW0gIT0gMSkKKwkJcmV0dXJuIEVJTlZBTDsKKwor
+CWlmICghc3RyY21wKHZlY1swXSwgIm9uIikpCisJCXRyYWNlc3lzbG9nID0gdHJ1ZTsKKwllbHNl
+IGlmICghc3RyY21wKHZlY1swXSwgIm9mZiIpKQorCQl0cmFjZXN5c2xvZyA9IGZhbHNlOworCWVs
+c2UKKwkJcmV0dXJuIEVJTlZBTDsKKworCXNlbmRfYWNrKGNvbm4sIFhTX0NPTlRST0wpOworCXJl
+dHVybiAwOworfQorCiBzdGF0aWMgaW50IGRvX2NvbnRyb2xfbWVtcmVwb3J0KHZvaWQgKmN0eCwg
+c3RydWN0IGNvbm5lY3Rpb24gKmNvbm4sCiAJCQkJY2hhciAqKnZlYywgaW50IG51bSkKIHsKQEAg
+LTEzMyw2ICsxNTAsNyBAQCBzdGF0aWMgc3RydWN0IGNtZF9zIGNtZHNbXSA9IHsKIAl7ICJjaGVj
+ayIsIGRvX2NvbnRyb2xfY2hlY2ssICIiIH0sCiAJeyAibG9nIiwgZG9fY29udHJvbF9sb2csICJv
+bnxvZmYiIH0sCiAJeyAibG9nZmlsZSIsIGRvX2NvbnRyb2xfbG9nZmlsZSwgIjxmaWxlPiIgfSwK
+Kwl7ICJzeXNsb2ciLCBkb19jb250cm9sX2xvZ3N5c2xvZywgIm9ufG9mZiIgfSwKIAl7ICJtZW1y
+ZXBvcnQiLCBkb19jb250cm9sX21lbXJlcG9ydCwgIls8ZmlsZT5dIiB9LAogCXsgInByaW50Iiwg
+ZG9fY29udHJvbF9wcmludCwgIjxzdHJpbmc+IiB9LAogCXsgImhlbHAiLCBkb19jb250cm9sX2hl
+bHAsICIiIH0sCi0tIAoyLjI0LjAKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5w
+cm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8v
+eGVuLWRldmVs
