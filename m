@@ -6,50 +6,48 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A1D85C43603
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Dec 2019 21:15:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4173BC43603
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Dec 2019 21:16:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7E21E214D8
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Dec 2019 21:15:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E21E214D8
+	by mail.kernel.org (Postfix) with ESMTPS id 1997D214D8
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Dec 2019 21:16:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1997D214D8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ifVoG-0006MX-Sg; Thu, 12 Dec 2019 21:15:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1ifVoQ-0006RA-D7; Thu, 12 Dec 2019 21:15:54 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=6iYZ=2C=xenproject.org=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1ifVoF-0006M4-9w
- for xen-devel@lists.xenproject.org; Thu, 12 Dec 2019 21:15:43 +0000
-X-Inumbo-ID: 736d2acd-1d24-11ea-8e25-12813bfff9fa
+ id 1ifVoP-0006QY-AC
+ for xen-devel@lists.xenproject.org; Thu, 12 Dec 2019 21:15:53 +0000
+X-Inumbo-ID: 73593ba2-1d24-11ea-b6f1-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 736d2acd-1d24-11ea-8e25-12813bfff9fa;
- Thu, 12 Dec 2019 21:14:59 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 73593ba2-1d24-11ea-b6f1-bc764e2007e4;
+ Thu, 12 Dec 2019 21:14:58 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <lars.kurth@xenproject.org>)
- id 1ifVnU-00015c-K3; Thu, 12 Dec 2019 21:14:56 +0000
+ id 1ifVnS-00015L-LK; Thu, 12 Dec 2019 21:14:54 +0000
 Received: from localhost ([127.0.0.1] helo=localhost.localdomain)
  by xenbits.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <lars.kurth@xenproject.org>)
- id 1ifVnU-0000Bm-Fh; Thu, 12 Dec 2019 21:14:56 +0000
+ id 1ifVnS-0000Bm-Dt; Thu, 12 Dec 2019 21:14:54 +0000
 From: Lars Kurth <lars.kurth@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 12 Dec 2019 21:14:31 +0000
-Message-Id: <02a32deb820bafa7719734de7bb14af173dbab23.1576184325.git.lars.kurth@citrix.com>
+Date: Thu, 12 Dec 2019 21:14:29 +0000
+Message-Id: <469326764ec7da37796adf429d61173207798816.1576184325.git.lars.kurth@citrix.com>
 X-Mailer: git-send-email 2.13.0
 In-Reply-To: <cover.1576184325.git.lars.kurth@citrix.com>
 References: <cover.1576184325.git.lars.kurth@citrix.com>
-MIME-Version: 1.0
 In-Reply-To: <cover.1576184325.git.lars.kurth@citrix.com>
 References: <cover.1576184325.git.lars.kurth@citrix.com>
-Subject: [Xen-devel] [PATCH v3 4/7] Add Communication Guide
+Subject: [Xen-devel] [PATCH v3 2/7] Xen Project Code of Conduct
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,123 +61,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Lars Kurth <lars.kurth@citrix.com>, xen-api@lists.xenproject.org,
  minios-devel@lists.xenproject.org, committers@xenproject.org,
  mirageos-devel@lists.xenproject.org, win-pv-devel@lists.xenproject.org
-Content-Type: multipart/mixed; boundary="===============1425839749368219899=="
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============1425839749368219899==
-Content-Type: text/plain; charset=Y
-Content-Transfer-Encoding: 8bit
-
-From: Lars Kurth <lars.kurth@citrix.com>
-
-This document is a portal page that lays out our gold standard,
-best practices for some common situations and mechanisms to help
-resolve issues that can have a negative effect on our community.
-
-Detail is covered in subsequent documents
-
-Changes since v2 (introduced in v2)
-- Make lines break at 80 characters
-
-Signed-off-by: Lars Kurth <lars.kurth@citrix.com>
----
-Cc: minios-devel@lists.xenproject.org
-Cc: xen-api@lists.xenproject.org
-Cc: win-pv-devel@lists.xenproject.org
-Cc: mirageos-devel@lists.xenproject.org
-Cc: committers@xenproject.org
----
- communication-guide.md | 67 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 67 insertions(+)
- create mode 100644 communication-guide.md
-
-diff --git a/communication-guide.md b/communication-guide.md
-new file mode 100644
-index 0000000..3c412d9
---- /dev/null
-+++ b/communication-guide.md
-@@ -0,0 +1,67 @@
-+# Communication Guide
-+
-+We believe that our [Code of Conduct](code-of-conduct.md) can help create a
-+harassment-free environment, but is not sufficient to create a welcoming
-+environment on its own. We can all make mistakes: when we do, we take
-+responsibility for them and try to improve.
-+
-+This document lays out our gold standard, best practices for some common
-+situations and mechanisms to help resolve issues that can have a
-+negative effect on our community.
-+
-+## Goal
-+
-+We want a productive, welcoming and agile community that can welcome new
-+ideas in a complex technical field which is able to reflect on and improve how
-+we work.
-+
-+## Communication & Handling Differences in Opinions
-+
-+Examples of behavior that contributes to creating a positive environment
-+include:
-+* Use welcoming and inclusive language
-+* Keep discussions technical and actionable
-+* Be respectful of differing viewpoints and experiences
-+* Be aware of your own and counterpart’s communication style and culture
-+* Gracefully accept constructive criticism
-+* Focus on what is best for the community
-+* Show empathy towards other community members
-+* Resolve differences in opinion effectively
-+
-+## Getting Help
-+
-+When developing code collaboratively, technical discussion and disagreements
-+are unavoidable. Our contributors come from different countries and cultures,
-+are driven by different goals and take pride in their work and in their point
-+of view. This invariably can lead to lengthy and unproductive debate,
-+followed by indecision, sometimes this can impact working relationships
-+or lead to other issues that can have a negative effect on our community.
-+
-+To minimize such issue, we provide a 3-stage process
-+* Self-help as outlined in this document
-+* Ability to ask for an independent opinion or help in private
-+* Mediation between parties which disagree. In this case a neutral community
-+  member assists the disputing parties resolve the issues or will work with the
-+  parties such that they can improve future interactions.
-+
-+If you need and independent opinion or help, feel free to contact
-+mediation@xenproject.org. The team behind mediation@ is made up of the
-+same community members as those listed in the Conduct Team: see
-+[Code of Conduct](code-of-conduct.md). In addition, team members are obligated
-+to maintain confidentiality with regard discussions that take place. If you
-+have concerns about any of the members of the mediation@ alias, you are
-+welcome to contact precisely the team member(s) of your choice. In this case,
-+please make certain that you highlight the nature of a request by making sure
-+that either help or mediation is mentioned in the e-mail subject or body.
-+
-+## Specific Topics and Best Practice
-+
-+* [Code Review Guide](code-review-guide.md):
-+  Essential reading for code reviewers and contributors
-+* [Communication Best Practice](communication-practice.md):
-+  This guide covers communication guidelines for code reviewers and reviewees.
-+  It should help you create self-awareness, anticipate, avoid  and help resolve
-+  communication issues.
-+* [Resolving Disagreement](resolving-disagreement.md):
-+  This guide lays out common situations that can lead to dead-lock and shows
-+  common patterns on how to avoid and resolve issues.
--- 
-2.13.0
-
-
-
---===============1425839749368219899==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1425839749368219899==--
+RnJvbTogTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgoKU3BlY2lmaWMgY2hhbmdl
+cyB0byB0aGUgYmFzZWxpbmU6CiogUmVwbGFjZSBsaXN0IG9mIHBvc2l0aXZlIGJlaGF2aW9ycyB3
+aXRoIGxpbmsgdG8gc2VwYXJhdGUgcHJvY2VzcwoqIFJlcGxhY2UgbWFpbnRhaW5lcnMgd2l0aCBw
+cm9qZWN0IGxlYWRlcnNoaXAKICAoZXhjZXB0IGluIG91ciBwbGVkZ2Ugd2hlcmUgbWFpbnRhaW5l
+cnMgaXMgbW9yZSBhcHByb3ByaWF0ZSkKKiBBZGQgJ29mIGFsbCBzdWItcHJvamVjdHMnIHRvIGNs
+YXJpZnkgc2NvcGUgb2YgQ29DCiogUmVuYW1lIEVuZm9yY2VtZW50CiogUmVwbGFjZSAicHJvamVj
+dCB0ZWFtIiB3aXRoICJDb25kdWN0IFRlYW0gbWVtYmVycyIKKiBBZGQgZS1tYWlsIGFsaWFzCiog
+QWRkIHNlY3Rpb24gb24gY29udGFjdGluZyBpbmRpdmlkdWFsIENvbmR1Y3QgVGVhbSBtZW1iZXJz
+CiogQWRkIHNlY3Rpb24gb24gQ29uZHVjdCBUZWFtIG1lbWJlcnMKClNpZ25lZC1vZmYtYnk6IExh
+cnMgS3VydGggPGxhcnMua3VydGhAY2l0cml4LmNvbT4KLS0tCkNoYWdnZXMgc2luY2UgdjE6Ciog
+QWRkcmVzc2VkIG5ld2xpbmUgY2hhbmdlcwoKQ2M6IG1pbmlvcy1kZXZlbEBsaXN0cy54ZW5wcm9q
+ZWN0Lm9yZwpDYzogeGVuLWFwaUBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpDYzogd2luLXB2LWRldmVs
+QGxpc3RzLnhlbnByb2plY3Qub3JnCkNjOiBtaXJhZ2Vvcy1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0
+Lm9yZwpDYzogY29tbWl0dGVyc0B4ZW5wcm9qZWN0Lm9yZwotLS0KIGNvZGUtb2YtY29uZHVjdC5t
+ZCB8IDQ1ICsrKysrKysrKysrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLQogMSBm
+aWxlIGNoYW5nZWQsIDI4IGluc2VydGlvbnMoKyksIDE3IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdp
+dCBhL2NvZGUtb2YtY29uZHVjdC5tZCBiL2NvZGUtb2YtY29uZHVjdC5tZAppbmRleCA4MWIyMTdj
+Li41ZDZkMWQ1IDEwMDY0NAotLS0gYS9jb2RlLW9mLWNvbmR1Y3QubWQKKysrIGIvY29kZS1vZi1j
+b25kdWN0Lm1kCkBAIC0xLDQgKzEsNCBAQAotIyBDb250cmlidXRvciBDb3ZlbmFudCBDb2RlIG9m
+IENvbmR1Y3QKKyMgWGVuIFByb2plY3QgQ29kZSBvZiBDb25kdWN0CiAKICMjIE91ciBQbGVkZ2UK
+IApAQCAtMTEsMTQgKzExLDEwIEBAIGFwcGVhcmFuY2UsIHJhY2UsIHJlbGlnaW9uLCBvciBzZXh1
+YWwgaWRlbnRpdHkgYW5kIG9yaWVudGF0aW9uLgogCiAjIyBPdXIgU3RhbmRhcmRzCiAKLUV4YW1w
+bGVzIG9mIGJlaGF2aW9yIHRoYXQgY29udHJpYnV0ZXMgdG8gY3JlYXRpbmcgYSBwb3NpdGl2ZSBl
+bnZpcm9ubWVudAotaW5jbHVkZToKLQotKiBVc2luZyB3ZWxjb21pbmcgYW5kIGluY2x1c2l2ZSBs
+YW5ndWFnZQotKiBCZWluZyByZXNwZWN0ZnVsIG9mIGRpZmZlcmluZyB2aWV3cG9pbnRzIGFuZCBl
+eHBlcmllbmNlcwotKiBHcmFjZWZ1bGx5IGFjY2VwdGluZyBjb25zdHJ1Y3RpdmUgY3JpdGljaXNt
+Ci0qIEZvY3VzaW5nIG9uIHdoYXQgaXMgYmVzdCBmb3IgdGhlIGNvbW11bml0eQotKiBTaG93aW5n
+IGVtcGF0aHkgdG93YXJkcyBvdGhlciBjb21tdW5pdHkgbWVtYmVycworV2UgYmVsaWV2ZSB0aGF0
+IGEgQ29kZSBvZiBDb25kdWN0IGNhbiBoZWxwIGNyZWF0ZSBhIGhhcmFzc21lbnQtZnJlZSBlbnZp
+cm9ubWVudCwKK2J1dCBpcyBub3Qgc3VmZmljaWVudCB0byBjcmVhdGUgYSB3ZWxjb21pbmcgZW52
+aXJvbm1lbnQgb24gaXRzIG93bjogZ3VpZGFuY2Ugb24KK2NyZWF0aW5nIGEgd2VsY29taW5nIGVu
+dmlyb25tZW50LCBob3cgdG8gY29tbXVuaWNhdGUgaW4gYW4gZWZmZWN0aXZlIGFuZCBmcmllbmRs
+eQord2F5LCBldGMuIGNhbiBiZSBmb3VuZCBbaGVyZV0oY29tbXVuaWNhdGlvbi1ndWlkZS5tZCku
+CiAKIEV4YW1wbGVzIG9mIHVuYWNjZXB0YWJsZSBiZWhhdmlvciBieSBwYXJ0aWNpcGFudHMgaW5j
+bHVkZToKIApAQCAtMzMsMTEgKzI5LDExIEBAIEV4YW1wbGVzIG9mIHVuYWNjZXB0YWJsZSBiZWhh
+dmlvciBieSBwYXJ0aWNpcGFudHMgaW5jbHVkZToKIAogIyMgT3VyIFJlc3BvbnNpYmlsaXRpZXMK
+IAotUHJvamVjdCBtYWludGFpbmVycyBhcmUgcmVzcG9uc2libGUgZm9yIGNsYXJpZnlpbmcgdGhl
+IHN0YW5kYXJkcyBvZiBhY2NlcHRhYmxlCitQcm9qZWN0IGxlYWRlcnNoaXAgdGVhbSBtZW1iZXJz
+IGFyZSByZXNwb25zaWJsZSBmb3IgY2xhcmlmeWluZyB0aGUgc3RhbmRhcmRzIG9mIGFjY2VwdGFi
+bGUKIGJlaGF2aW9yIGFuZCBhcmUgZXhwZWN0ZWQgdG8gdGFrZSBhcHByb3ByaWF0ZSBhbmQgZmFp
+ciBjb3JyZWN0aXZlIGFjdGlvbiBpbgogcmVzcG9uc2UgdG8gYW55IGluc3RhbmNlcyBvZiB1bmFj
+Y2VwdGFibGUgYmVoYXZpb3IuCiAKLVByb2plY3QgbWFpbnRhaW5lcnMgaGF2ZSB0aGUgcmlnaHQg
+YW5kIHJlc3BvbnNpYmlsaXR5IHRvIHJlbW92ZSwgZWRpdCwgb3IKK1Byb2plY3QgbGVhZGVyc2hp
+cCB0ZWFtIG1lbWJlcnMgaGF2ZSB0aGUgcmlnaHQgYW5kIHJlc3BvbnNpYmlsaXR5IHRvIHJlbW92
+ZSwgZWRpdCwgb3IKIHJlamVjdCBjb21tZW50cywgY29tbWl0cywgY29kZSwgd2lraSBlZGl0cywg
+aXNzdWVzLCBhbmQgb3RoZXIgY29udHJpYnV0aW9ucwogdGhhdCBhcmUgbm90IGFsaWduZWQgdG8g
+dGhpcyBDb2RlIG9mIENvbmR1Y3QsIG9yIHRvIGJhbiB0ZW1wb3JhcmlseSBvcgogcGVybWFuZW50
+bHkgYW55IGNvbnRyaWJ1dG9yIGZvciBvdGhlciBiZWhhdmlvcnMgdGhhdCB0aGV5IGRlZW0gaW5h
+cHByb3ByaWF0ZSwKQEAgLTQ1LDI2ICs0MSw0MSBAQCB0aHJlYXRlbmluZywgb2ZmZW5zaXZlLCBv
+ciBoYXJtZnVsLgogCiAjIyBTY29wZQogCi1UaGlzIENvZGUgb2YgQ29uZHVjdCBhcHBsaWVzIHdp
+dGhpbiBhbGwgcHJvamVjdCBzcGFjZXMsIGFuZCBpdCBhbHNvIGFwcGxpZXMgd2hlbgorVGhpcyBD
+b2RlIG9mIENvbmR1Y3QgYXBwbGllcyB3aXRoaW4gYWxsIHByb2plY3Qgc3BhY2VzIG9mIGFsbCBz
+dWItcHJvamVjdHMsIGFuZCBpdCBhbHNvIGFwcGxpZXMgd2hlbgogYW4gaW5kaXZpZHVhbCBpcyBy
+ZXByZXNlbnRpbmcgdGhlIHByb2plY3Qgb3IgaXRzIGNvbW11bml0eSBpbiBwdWJsaWMgc3BhY2Vz
+LgogRXhhbXBsZXMgb2YgcmVwcmVzZW50aW5nIGEgcHJvamVjdCBvciBjb21tdW5pdHkgaW5jbHVk
+ZSB1c2luZyBhbiBvZmZpY2lhbAogcHJvamVjdCBlLW1haWwgYWRkcmVzcywgcG9zdGluZyB2aWEg
+YW4gb2ZmaWNpYWwgc29jaWFsIG1lZGlhIGFjY291bnQsIG9yIGFjdGluZwogYXMgYW4gYXBwb2lu
+dGVkIHJlcHJlc2VudGF0aXZlIGF0IGFuIG9ubGluZSBvciBvZmZsaW5lIGV2ZW50LiBSZXByZXNl
+bnRhdGlvbiBvZgotYSBwcm9qZWN0IG1heSBiZSBmdXJ0aGVyIGRlZmluZWQgYW5kIGNsYXJpZmll
+ZCBieSBwcm9qZWN0IG1haW50YWluZXJzLgorYSBwcm9qZWN0IG1heSBiZSBmdXJ0aGVyIGRlZmlu
+ZWQgYW5kIGNsYXJpZmllZCBieSB0aGUgcHJvamVjdCBsZWFkZXJzaGlwLgogCi0jIyBFbmZvcmNl
+bWVudAorIyMgV2hhdCB0byBkbyBpZiB5b3Ugd2l0bmVzcyBvciBhcmUgc3ViamVjdCB0byB1bmFj
+Y2VwdGFibGUgYmVoYXZpb3IKIAogSW5zdGFuY2VzIG9mIGFidXNpdmUsIGhhcmFzc2luZywgb3Ig
+b3RoZXJ3aXNlIHVuYWNjZXB0YWJsZSBiZWhhdmlvciBtYXkgYmUKLXJlcG9ydGVkIGJ5IGNvbnRh
+Y3RpbmcgdGhlIHByb2plY3QgdGVhbSBhdCBbSU5TRVJUIEVNQUlMIEFERFJFU1NdLiBBbGwKK3Jl
+cG9ydGVkIGJ5IGNvbnRhY3RpbmcgQ29uZHVjdCBUZWFtIG1lbWJlcnMgYXQgY29uZHVjdEB4ZW5w
+cm9qZWN0Lm9yZy4gQWxsCiBjb21wbGFpbnRzIHdpbGwgYmUgcmV2aWV3ZWQgYW5kIGludmVzdGln
+YXRlZCBhbmQgd2lsbCByZXN1bHQgaW4gYSByZXNwb25zZSB0aGF0Ci1pcyBkZWVtZWQgbmVjZXNz
+YXJ5IGFuZCBhcHByb3ByaWF0ZSB0byB0aGUgY2lyY3Vtc3RhbmNlcy4gVGhlIHByb2plY3QgdGVh
+bSBpcworaXMgZGVlbWVkIG5lY2Vzc2FyeSBhbmQgYXBwcm9wcmlhdGUgdG8gdGhlIGNpcmN1bXN0
+YW5jZXMuIENvbmR1Y3QgVGVhbSBtZW1iZXJzIGFyZQogb2JsaWdhdGVkIHRvIG1haW50YWluIGNv
+bmZpZGVudGlhbGl0eSB3aXRoIHJlZ2FyZCB0byB0aGUgcmVwb3J0ZXIgb2YgYW4gaW5jaWRlbnQu
+CiBGdXJ0aGVyIGRldGFpbHMgb2Ygc3BlY2lmaWMgZW5mb3JjZW1lbnQgcG9saWNpZXMgbWF5IGJl
+IHBvc3RlZCBzZXBhcmF0ZWx5LgogCi1Qcm9qZWN0IG1haW50YWluZXJzIHdobyBkbyBub3QgZm9s
+bG93IG9yIGVuZm9yY2UgdGhlIENvZGUgb2YgQ29uZHVjdCBpbiBnb29kCitJZiB5b3UgaGF2ZSBj
+b25jZXJucyBhYm91dCBhbnkgb2YgdGhlIG1lbWJlcnMgb2YgdGhlIGNvbmR1Y3RAIGFsaWFzLAor
+eW91IGFyZSB3ZWxjb21lIHRvIGNvbnRhY3QgcHJlY2lzZWx5IHRoZSBDb25kdWN0IFRlYW0gbWVt
+YmVyKHMpIG9mCit5b3VyIGNob2ljZS4KKworUHJvamVjdCBsZWFkZXJzaGlwIHRlYW0gbWVtYmVy
+cyB3aG8gZG8gbm90IGZvbGxvdyBvciBlbmZvcmNlIHRoZSBDb2RlIG9mIENvbmR1Y3QgaW4gZ29v
+ZAogZmFpdGggbWF5IGZhY2UgdGVtcG9yYXJ5IG9yIHBlcm1hbmVudCByZXBlcmN1c3Npb25zIGFz
+IGRldGVybWluZWQgYnkgb3RoZXIKIG1lbWJlcnMgb2YgdGhlIHByb2plY3QncyBsZWFkZXJzaGlw
+LgogCisjIyBDb25kdWN0IFRlYW0gbWVtYmVycworQ29uZHVjdCBUZWFtIG1lbWJlcnMgYXJlIHBy
+b2plY3QgbGVhZGVyc2hpcCB0ZWFtIG1lbWJlcnMgZnJvbSBhbnkKK3N1Yi1wcm9qZWN0LiBUaGUg
+Y3VycmVudCBsaXN0IG9mIENvbmR1Y3QgVGVhbSBtZW1iZXJzIGlzOgorKiBMYXJzIEt1cnRoIDxs
+YXJzIGRvdCBrdXJ0aCBhdCB4ZW5wcm9qZWN0IGRvdCBvcmc+CisqIEdlb3JnZSBEdW5sYXAgPGdl
+b3JnZSBkb3QgZHVubGFwIGF0IGNpdHJpeCBkb3QgY29tPgorKiBJYW4gSmFja3NvbiA8aWFuIGRv
+dCBqYWNrc29uIGF0IGNpdHJpeCBkb3QgY29tPgorCitDb25kdWN0IFRlYW0gbWVtYmVycyBhcmUg
+Y2hhbmdlZCBieSBwcm9wb3NpbmcgYSBjaGFuZ2UgdG8gdGhpcyBkb2N1bWVudCwKK3Bvc3RlZCBv
+biBhbGwgc3ViLXByb2plY3QgbGlzdHMsIGZvbGxvd2VkIGJ5IGEgZm9ybWFsIGdsb2JhbCB2b3Rl
+IGFzIG91dGxpbmVkCitbaGVyZV06IGh0dHBzOi8veGVucHJvamVjdC5vcmcvZGV2ZWxvcGVycy9n
+b3Zlcm5hbmNlLyNwcm9qZWN0LWRlY2lzaW9ucworCiAjIyBBdHRyaWJ1dGlvbgogCiBUaGlzIENv
+ZGUgb2YgQ29uZHVjdCBpcyBhZGFwdGVkIGZyb20gdGhlIFtDb250cmlidXRvciBDb3ZlbmFudF1b
+aG9tZXBhZ2VdLCB2ZXJzaW9uIDEuNCwKLS0gCjIuMTMuMAoKCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRl
+dmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFp
+bG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
