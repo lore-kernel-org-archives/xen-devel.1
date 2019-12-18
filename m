@@ -2,51 +2,67 @@ Return-Path: <SRS0=H5Oh=2I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7748C43603
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 14:08:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB754C43603
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 14:14:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BFCF82146E
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 14:08:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BFCF82146E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 84B8A205ED
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 14:14:51 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=tklengyel.com header.i=@tklengyel.com header.b="IlHJGRuJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 84B8A205ED
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ihZze-0000Wk-Un; Wed, 18 Dec 2019 14:08:02 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1iha5v-0001KX-Pt; Wed, 18 Dec 2019 14:14:31 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=lBFt=2I=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1ihZzd-0000Wf-QE
- for xen-devel@lists.xenproject.org; Wed, 18 Dec 2019 14:08:01 +0000
-X-Inumbo-ID: cc829ef6-219f-11ea-9080-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id cc829ef6-219f-11ea-9080-12813bfff9fa;
- Wed, 18 Dec 2019 14:08:00 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id A3F36AC1C;
- Wed, 18 Dec 2019 14:07:59 +0000 (UTC)
-Message-ID: <6145592154e787eca4fe0118e17812b51c26c46e.camel@suse.com>
-From: Dario Faggioli <dfaggioli@suse.com>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Date: Wed, 18 Dec 2019 15:07:57 +0100
-In-Reply-To: <20191218074859.21665-10-jgross@suse.com>
-References: <20191218074859.21665-1-jgross@suse.com>
- <20191218074859.21665-10-jgross@suse.com>
-Organization: SUSE
-User-Agent: Evolution 3.34.2 
+ <SRS0=5UKC=2I=tklengyel.com=bounce+e181d6.cd840-xen-devel=lists.xenproject.org@srs-us1.protection.inumbo.net>)
+ id 1iha5v-0001KS-BA
+ for xen-devel@lists.xenproject.org; Wed, 18 Dec 2019 14:14:31 +0000
+X-Inumbo-ID: afca89bc-21a0-11ea-88e7-bc764e2007e4
+Received: from rs224.mailgun.us (unknown [209.61.151.224])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id afca89bc-21a0-11ea-88e7-bc764e2007e4;
+ Wed, 18 Dec 2019 14:14:21 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=tklengyel.com;
+ q=dns/txt; 
+ s=krs; t=1576678463; h=Content-Type: Cc: To: Subject: Message-ID: Date:
+ From: In-Reply-To: References: MIME-Version: Sender;
+ bh=xH5zgfvx4S1ugPmGm/SgceC3mkoCqxltQ/R+Doqyrms=;
+ b=IlHJGRuJFYbAALFOummsmy28uIQmRjmMlGXzKMc2vLBZNltmwP4RdbCXsCUY0hb5QAgiEnIB
+ CQmVeXBomB7+0FvCWtMlzJJjf6YnlVJ7yALS3Dmlmiwh8OldPsNqjAzeLXQSMjdKvC8RgiG/
+ 4LK4rimx7n/v8RCUVY4mupnv8W8=
+X-Mailgun-Sending-Ip: 209.61.151.224
+X-Mailgun-Sid: WyIyYTNmOCIsICJ4ZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmciLCAiY2Q4NDAiXQ==
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+ [209.85.128.54])
+ by mxa.mailgun.org with ESMTP id 5dfa343a.7fd7e5cbedf0-smtp-out-n02;
+ Wed, 18 Dec 2019 14:14:18 -0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id a5so2005539wmb.0
+ for <xen-devel@lists.xenproject.org>; Wed, 18 Dec 2019 06:14:18 -0800 (PST)
+X-Gm-Message-State: APjAAAVh8gqN3DNhfhKUZZXbC1tqP6qfK+KJUTJw9r5FgZ4IvRA33EJJ
+ OoPCloNYbNjvwu/Qm6NutTMyj4XCI+rkPMjku0Y=
+X-Google-Smtp-Source: APXvYqxxQBqX5xGN7CIMcVqOCZonpV2Wu5Ev5icTxi1Gnf3aGEcgxWFiJSuRjXU7Z2SEHkuXBkOkmol8e/yPS2Py1Mg=
+X-Received: by 2002:a1c:7918:: with SMTP id l24mr3734018wme.125.1576678457348; 
+ Wed, 18 Dec 2019 06:14:17 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH 9/9] xen/sched: add const qualifier where
- appropriate
+References: <e6853b44-681a-7423-ede0-43b551b554af@list.ru>
+In-Reply-To: <e6853b44-681a-7423-ede0-43b551b554af@list.ru>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Wed, 18 Dec 2019 07:13:41 -0700
+X-Gmail-Original-Message-ID: <CABfawhn8LB8kOaxys5aqC1iOBeKQdtw3+0Q0ES_5EVs_mMpMVA@mail.gmail.com>
+Message-ID: <CABfawhn8LB8kOaxys5aqC1iOBeKQdtw3+0Q0ES_5EVs_mMpMVA@mail.gmail.com>
+To: Sergey Kovalev <valor@list.ru>
+Subject: Re: [Xen-devel] [XEN PATCH v3] x86/vm_event: add short-circuit for
+ breakpoints (aka, , "fast single step")
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,91 +73,27 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <george.dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- Josh Whitehead <josh.whitehead@dornerworks.com>,
- Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>,
- Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-Content-Type: multipart/mixed; boundary="===============5228943335216381585=="
+Cc: Petre Pircalabu <ppircalabu@bitdefender.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============5228943335216381585==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-Dxu9FUiYaWBtdOkKja5B"
-
-
---=-Dxu9FUiYaWBtdOkKja5B
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2019-12-18 at 08:48 +0100, Juergen Gross wrote:
-> Make use of the const qualifier more often in scheduling code.
->=20
-> Signed-off-by: Juergen Gross <jgross@suse.com>
->
-Cool!
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-Another thing that it may be worth checking is whether all the places
-where 'int' is used for CPUs and vCPUs IDs (or alike) really need to be
-integer, or could be turned into unsigned.
-
-Of course, I'm not suggesting/asking to you to do that as well, I'm
-just mentioning in case anyone is interested/has time, or even just for
-the records.
-
-Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-Dxu9FUiYaWBtdOkKja5B
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl36Mr0ACgkQFkJ4iaW4
-c+5sUxAA23GYAf9/cRpEPGYzjzdtkJhQL1ZURtjoSEgYMOpdg4ZHNruEErIHUQMm
-nC6YyNZ7maGC3Eb47EGWYxeYhEqrF46KvVHUaoEBJBkpl/0hJRGvnViHvo25cSEv
-yecjR/lFpSBxU4j59kO4DRsCONDbUv9YrHax5U0XZyRwJNyzrx8pbO6hUkQVytqJ
-xbNzYWaPQjxVUeLvqTzwg5nlFw1W+2dybMdJaR/njUP0XwUVsz0V0X1s5So6cdKE
-bXqIME+DnmiNvg8TKL6DaXaBx+CW0SpjNG0MvLy8kedNqhsdUZYlzyHnskbTObn8
-d8ARzAoZDC8Rg1hoIUZ1D0zGq7XokoJpQNAzMOC9JU9FnJv6dholjN4fmLYYV6ZV
-Yv2VTn89MgkZhJ37Qu4O/D21hzYhXdfpAdL4g5EEXANu6wP6KXuEZqvOQxVhr/fO
-t2T/WC90KT+aJiF0zh0k7ETtbfkAzDtDCQISzf/AToYcXwVzwJ9FcTBDwJUMUrdO
-MQ+695w9OASAaP8rNwX/EaItElLOXrWp+LK+tl2it8oTJKYOf9IVRfms4ZZQy4hy
-yYtg/WuLRhwVijaUvafVOHsov+KXxhinvS1OiQQ/8BJag8DoLb/7dP4RjeTuYotE
-JzAX4oOFGgc7Q2FjI7Ai9hdFahmsNfv2n/3kxpt4Uss9qhE7jq0=
-=j7RI
------END PGP SIGNATURE-----
-
---=-Dxu9FUiYaWBtdOkKja5B--
-
-
-
---===============5228943335216381585==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============5228943335216381585==--
-
-
+PiBkaWZmIC0tZ2l0IGEveGVuL2luY2x1ZGUvcHVibGljL3ZtX2V2ZW50LmggYi94ZW4vaW5jbHVk
+ZS9wdWJsaWMvdm1fZXZlbnQuaAo+IGluZGV4IGFhNTRjODYzMjUuLmNiNTc3YTdiYTkgMTAwNjQ0
+Cj4gLS0tIGEveGVuL2luY2x1ZGUvcHVibGljL3ZtX2V2ZW50LmgKPiArKysgYi94ZW4vaW5jbHVk
+ZS9wdWJsaWMvdm1fZXZlbnQuaAo+IEBAIC0xMTAsNiArMTEwLDExIEBACj4gICAqIGludGVycnVw
+dCBwZW5kaW5nIGFmdGVyIHJlc3VtaW5nIHRoZSBWQ1BVLgo+ICAgKi8KPiAgI2RlZmluZSBWTV9F
+VkVOVF9GTEFHX0dFVF9ORVhUX0lOVEVSUlVQVCAoMSA8PCAxMCkKPiArLyoKPiArICogRXhlY3V0
+ZSBmYXN0IHNpbmdsZXN0ZXBwaW5nIG9uIHZtX2V2ZW50IHJlc3BvbnNlLgo+ICsgKiBSZXF1aXJl
+cyB0aGUgdkNQVSB0byBiZSBwYXVzZWQgYWxyZWFkeSAoc3luY2hyb25vdXMgZXZlbnRzIG9ubHkp
+Lgo+ICsgKi8KPiArI2RlZmluZSBWTV9FVkVOVF9GTEFHX0ZBU1RfU0lOR0xFU1RFUCAgKDEgPDwg
+MTEpCgpKdXN0IGFub3RoZXIgbWlub3Igc3R5bGUgbml0cGljazogYWxpZ25tZW50IG9mICgxIDw8
+IDExKSBpcyBvZmYKY29tcGFyZWQgdG8gYWxsIG9mIHRoZSBwcmV2aW91cyBkZWNsYXJhdGlvbiBh
+Ym92ZS4KClRhbWFzCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9y
+ZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
