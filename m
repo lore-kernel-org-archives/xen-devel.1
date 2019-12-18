@@ -6,41 +6,41 @@ X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
 	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFB6CC43603
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 09:09:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E9F7C43603
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 09:10:20 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 852D320717
-	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 09:09:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4F0E1227BF
+	for <xen-devel@archiver.kernel.org>; Wed, 18 Dec 2019 09:10:20 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TI/ylrCI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 852D320717
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="RBUOBCn2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F0E1227BF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ihVKH-0003bg-AQ; Wed, 18 Dec 2019 09:09:01 +0000
+	id 1ihVLM-0004OF-MN; Wed, 18 Dec 2019 09:10:08 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=5XdQ=2I=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1ihVKG-0003bP-7U
- for xen-devel@lists.xenproject.org; Wed, 18 Dec 2019 09:09:00 +0000
-X-Inumbo-ID: 05cbe836-2176-11ea-9048-12813bfff9fa
+ id 1ihVLL-0004Kd-Fi
+ for xen-devel@lists.xenproject.org; Wed, 18 Dec 2019 09:10:07 +0000
+X-Inumbo-ID: 2e49b497-2176-11ea-9049-12813bfff9fa
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 05cbe836-2176-11ea-9048-12813bfff9fa;
- Wed, 18 Dec 2019 09:08:58 +0000 (UTC)
+ id 2e49b497-2176-11ea-9049-12813bfff9fa;
+ Wed, 18 Dec 2019 09:10:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1576660138;
+ d=citrix.com; s=securemail; t=1576660206;
  h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=ZEPKWJ6+BrVdlqtuIY52e/b1qdh/h78DZ5mzr9Pf5T4=;
- b=TI/ylrCI2bXFr5SUfZ3PSnoZv5i6Wbz1MRM5UeF82qJdVQWDcVmJihrG
- fudnTN5TQOKqsWprv+BX4KFiQNfVyIhgBnFG2KkNd7LNrB+5iNuXl0sjW
- Gk2NxcF6OXumYswYluX+uE9cDB27Oh4uDDiDw47TFVhIMPnZcXwpy8pG4 A=;
+ mime-version:in-reply-to;
+ bh=kebSe7bFd4r5WsVKLdOphJxiN8W2bFvnn+rAP1oRUO8=;
+ b=RBUOBCn2J4NRs9ntk8eakK9uAzynJU9jdMSWj6XOQP03qdK6gTA6EX37
+ D6owjurQT1ab3j1v12G85vPmANWovZZsCOc++rQPCv2Xe9H3LbC7q8174
+ evNrqgJmnfD/b1CMQbL4tOPuZQ9X3zIIOU56uJgvMw1jP9Rc6v970Kv9Y U=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
@@ -72,23 +72,22 @@ Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: Sbta9OTv/uWO+o1GqI8aa50zCcIJDM5RNCTtlnyHjUmsNNFebCweoeTSD9YcaRbYVZDd6pKasn
- W+mmzqlI1398ETJlmGvNDAQ+UfaiJAcOM0Sq9XkvmsqlPEdq/UTw0zFY64TPA2PrtCN9GdwbKe
- TjxyyjZnYc49egk7q5WKJNwpEtAWjkx2gF97z7lfScmr9r9Yii8ZzXwXNomQ7cQJH2Pq/nY0cZ
- M5hxddTib3rwnP5wtvPbmdfTDrNX+WirqOCdB/lFsTyYl7SIZHIbkwoUvF/O+vE0DVdM6NCZck
- yT4=
+IronPort-SDR: EkBHfCjZwhI/0x0TE1lZeg7ZkCoL1ZcLw5ijwTVrxj452qCY20spKNFARnPLweRaC9el+X0XRw
+ IhNgRirDH8QSCGe2F8iz81w3fsMNlZMWoHCTncZwUgPinNMj0/DyrGxJuLV+xZ5PZKd13k8eqb
+ khWk3N1ocUhh9DEYl0QGfbjs7dJIaLdVp+6f2OG6n2jklveRQQuJ/3bSEJmQ8Flgit0xSefm9a
+ +K2K+243glOI1Ydb84Yb8kXX+a+h2ounyP9Du3zB7ytpMG24caVqeSKe+UOnk39eiB4evlRV+d
+ r1Q=
 X-SBRS: 2.7
-X-MesageID: 9855847
+X-MesageID: 9855886
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.69,328,1571716800"; 
-   d="scan'208";a="9855847"
+X-IronPort-AV: E=Sophos;i="5.69,328,1571716800"; d="asc'?scan'208";a="9855886"
 To: Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
  <xen-devel@lists.xenproject.org>
 References: <20191218074859.21665-1-jgross@suse.com>
- <20191218074859.21665-2-jgross@suse.com>
- <2ee2b27f31eeb85bff40bcfd588a6d45c7e80488.camel@suse.com>
+ <20191218074859.21665-3-jgross@suse.com>
+ <242410d6fa204129b0d99cdfda05badf276f24ed.camel@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=andrew.cooper3@citrix.com; prefer-encrypt=mutual; keydata=
@@ -134,17 +133,16 @@ Autocrypt: addr=andrew.cooper3@citrix.com; prefer-encrypt=mutual; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-Message-ID: <7c867097-d289-34af-0e89-3413b0480912@citrix.com>
-Date: Wed, 18 Dec 2019 09:08:40 +0000
+Message-ID: <bbe9f829-0b79-9d1c-4f08-8bd936a8e0a7@citrix.com>
+Date: Wed, 18 Dec 2019 09:10:01 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <2ee2b27f31eeb85bff40bcfd588a6d45c7e80488.camel@suse.com>
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+In-Reply-To: <242410d6fa204129b0d99cdfda05badf276f24ed.camel@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
  AMSPEX02CL01.citrite.net (10.69.22.125)
-Subject: Re: [Xen-devel] [PATCH 1/9] xen/sched: move schedulers and cpupool
- coding to dedicated directory
+Subject: Re: [Xen-devel] [PATCH 2/9] xen/sched: make sched-if.h really
+ scheduler private
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -161,48 +159,103 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Jackson <ian.jackson@eu.citrix.com>,
  Josh Whitehead <josh.whitehead@dornerworks.com>,
  Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>,
- Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ Stewart Hildebrand <stewart.hildebrand@dornerworks.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Content-Type: multipart/mixed; boundary="===============7182108137065982368=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gMTgvMTIvMjAxOSAwODo1OCwgRGFyaW8gRmFnZ2lvbGkgd3JvdGU6Cj4gT24gV2VkLCAyMDE5
-LTEyLTE4IGF0IDA4OjQ4ICswMTAwLCBKdWVyZ2VuIEdyb3NzIHdyb3RlOgo+PiBNb3ZlIHNjaGVk
-KmMgYW5kIGNwdXBvb2wuYyB0byBhIG5ldyBkaXJlY3RvcnkgY29tbW9uL3NjaGVkLgo+Pgo+PiBT
-aWduZWQtb2ZmLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+Cj4+IC0tLQo+PiAg
-TUFJTlRBSU5FUlMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgOCAr
-LS0KPj4gIHhlbi9jb21tb24vS2NvbmZpZyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHwgNjYgKy0tLS0tLS0tLS0tCj4+IC0tLS0tLS0tLS0KPj4gIHhlbi9jb21tb24vTWFrZWZpbGUg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDggKy0tCj4+ICB4ZW4vY29tbW9uL3Nj
-aGVkL0tjb25maWcgICAgICAgICAgICAgICAgICAgICAgICAgICB8IDY1Cj4+ICsrKysrKysrKysr
-KysrKysrKysrKwo+PiAgeGVuL2NvbW1vbi9zY2hlZC9NYWtlZmlsZSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgfCAgNyArKysKPj4gIC4uLi97Y29tcGF0L3NjaGVkdWxlLmMgPT4gc2NoZWQvY29t
-cGF0X3NjaGVkdWxlLmN9IHwgIDIgKy0KPj4gIHhlbi9jb21tb24veyA9PiBzY2hlZH0vY3B1cG9v
-bC5jICAgICAgICAgICAgICAgICAgIHwgIDAKPj4gIHhlbi9jb21tb24veyA9PiBzY2hlZH0vc2No
-ZWRfYXJpbmM2NTMuYyAgICAgICAgICAgIHwgIDAKPj4gIHhlbi9jb21tb24veyA9PiBzY2hlZH0v
-c2NoZWRfY3JlZGl0LmMgICAgICAgICAgICAgIHwgIDAKPj4gIHhlbi9jb21tb24veyA9PiBzY2hl
-ZH0vc2NoZWRfY3JlZGl0Mi5jICAgICAgICAgICAgIHwgIDAKPj4gIHhlbi9jb21tb24veyA9PiBz
-Y2hlZH0vc2NoZWRfbnVsbC5jICAgICAgICAgICAgICAgIHwgIDAKPj4gIHhlbi9jb21tb24veyA9
-PiBzY2hlZH0vc2NoZWRfcnQuYyAgICAgICAgICAgICAgICAgIHwgIDAKPj4gIHhlbi9jb21tb24v
-eyA9PiBzY2hlZH0vc2NoZWR1bGUuYyAgICAgICAgICAgICAgICAgIHwgIDIgKy0KPj4gIDEzIGZp
-bGVzIGNoYW5nZWQsIDgwIGluc2VydGlvbnMoKyksIDc4IGRlbGV0aW9ucygtKQo+PiAgY3JlYXRl
-IG1vZGUgMTAwNjQ0IHhlbi9jb21tb24vc2NoZWQvS2NvbmZpZwo+PiAgY3JlYXRlIG1vZGUgMTAw
-NjQ0IHhlbi9jb21tb24vc2NoZWQvTWFrZWZpbGUKPj4gIHJlbmFtZSB4ZW4vY29tbW9uL3tjb21w
-YXQvc2NoZWR1bGUuYyA9PiBzY2hlZC9jb21wYXRfc2NoZWR1bGUuY30KPj4gKDk3JSkKPj4gIHJl
-bmFtZSB4ZW4vY29tbW9uL3sgPT4gc2NoZWR9L2NwdXBvb2wuYyAoMTAwJSkKPj4gIHJlbmFtZSB4
-ZW4vY29tbW9uL3sgPT4gc2NoZWR9L3NjaGVkX2FyaW5jNjUzLmMgKDEwMCUpCj4+ICByZW5hbWUg
-eGVuL2NvbW1vbi97ID0+IHNjaGVkfS9zY2hlZF9jcmVkaXQuYyAoMTAwJSkKPj4gIHJlbmFtZSB4
-ZW4vY29tbW9uL3sgPT4gc2NoZWR9L3NjaGVkX2NyZWRpdDIuYyAoMTAwJSkKPj4gIHJlbmFtZSB4
-ZW4vY29tbW9uL3sgPT4gc2NoZWR9L3NjaGVkX251bGwuYyAoMTAwJSkKPj4gIHJlbmFtZSB4ZW4v
-Y29tbW9uL3sgPT4gc2NoZWR9L3NjaGVkX3J0LmMgKDEwMCUpCj4+ICByZW5hbWUgeGVuL2NvbW1v
-bi97ID0+IHNjaGVkfS9zY2hlZHVsZS5jICg5OSUpCj4+Cj4gTWF0dGVyIG9mIHRhc3RlLCBJIGd1
-ZXNzLCBidXQgd2hhdCBhYm91dCBub3QgcmVwZWF0aW5nICdzY2hlZCcsIGkuZS46Cj4KPiB4ZW4v
-Y29tbW9uL3NjaGVkX2NyZWRpdC5jICAtLT4geGVuL2NvbW1vbi9zY2hlZC9jcmVkaXQuYwo+IHhl
-bi9jb21tb24vc2NoZWRfY3JlZGl0Mi5jIC0tPiB4ZW4vY29tbW9uL3NjaGVkL2NyZWRpdDIuYwo+
-IHhlbi9jb21tb24vc2NoZWRfbnVsbC5jICAgIC0tPiB4ZW4vY29tbW9uL3NjaGVkL251bGwuYwo+
-IC4uLgo+Cj4gc2NoZWR1bGUuYyBjYW4gYmUgY2FsbGVkIHNvbWV0aGluZyBsaWtlICdjb3JlLmMn
-LAoKKzEgRldJVywgYW5kIGNvbXBhdF9zY2hlZHVsZS5jIGNhbiBqdXN0IGJlY29tZSBjb21wYXQu
-YwoKfkFuZHJldwoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
-Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+--===============7182108137065982368==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="ZQj0uIYgQaXji3OAClmI87giSi5ADNjzj"
+
+--ZQj0uIYgQaXji3OAClmI87giSi5ADNjzj
+Content-Type: multipart/mixed; boundary="r2dCMOFiK0J7dWgEnML9KDFkBedypOSv9";
+ protected-headers="v1"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Dario Faggioli <dfaggioli@suse.com>, Juergen Gross <jgross@suse.com>,
+ xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ Josh Whitehead <josh.whitehead@dornerworks.com>,
+ Meng Xu <mengxu@cis.upenn.edu>, Jan Beulich <jbeulich@suse.com>,
+ Stewart Hildebrand <stewart.hildebrand@dornerworks.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Message-ID: <bbe9f829-0b79-9d1c-4f08-8bd936a8e0a7@citrix.com>
+Subject: Re: [Xen-devel] [PATCH 2/9] xen/sched: make sched-if.h really
+ scheduler private
+References: <20191218074859.21665-1-jgross@suse.com>
+ <20191218074859.21665-3-jgross@suse.com>
+ <242410d6fa204129b0d99cdfda05badf276f24ed.camel@suse.com>
+In-Reply-To: <242410d6fa204129b0d99cdfda05badf276f24ed.camel@suse.com>
+
+--r2dCMOFiK0J7dWgEnML9KDFkBedypOSv9
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-GB
+
+On 18/12/2019 09:08, Dario Faggioli wrote:
+> On Wed, 2019-12-18 at 08:48 +0100, Juergen Gross wrote:
+>> include/xen/sched-if.h should be private to scheduler code, so move
+>> it
+>> to common/sched/sched-if.h and move the remaining use cases to
+>> cpupool.c and schedule.c.
+>>
+> Very, very nice cleanup.
+
+Yup - very nice to see.
+
+>
+>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>
+> Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+Thoughts on simply naming it private.h?
+
+~Andrew
+
+
+--r2dCMOFiK0J7dWgEnML9KDFkBedypOSv9--
+
+--ZQj0uIYgQaXji3OAClmI87giSi5ADNjzj
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCAAGBQJd+ezpAAoJEGXD+Qal15+gCfYP/21TMdW7M1JQ62+4SHSTcxJh
+f6JfeIDD0DxBoKsKbAbHOuYeW1+HW9Dnkk1B6ZcdUA1DRtZL3E4JPFtCe+yVpKq+
+Q8ALN8KKqfALR/3P2EfzXrYtDDfLxosCrerXHmWoJNNDCjLwWJgw6BPQ9Ji0dVF7
+tLl5vCwPBh+lIYC8v7xCsBSewMcbnECgKqZpGAKvtQ872yNYZS9dNCSySOg7zh7K
+hJgMxdLzymS8uqILS6/+PINC4jYjxsiSf31EYn7wdcaJu6pS1AcUhKkZM7/9/NPV
+sw8H+V7a7dFAGgREjCGy2xia4psj5KG1YCBQyWFSna8jxYLwSmsF4mVMEGMD9cdt
+0vG4MzhchKjIrGYkvFg8DW9hwm9qKIqE7Jf5alXzMTjjGcfoI5Iaw/CKHwjuTvZk
+p7NJCFELGZ6mSwsMAXr4rScOPM3p59xFIRcWYJ0wOEriVaEK9h/VlNg32F+vhAQU
+AanLr3riAwxGNA18Iq5/OUjZQE3ElWnbqnr4P8M5kFs321r/ELRNSUEwZVuceRNk
+nBuOjL5Od1tHxp0RXWNHISLGb6EN2O5cJ0S+QuKGzEYUnVhyZPT7n7FymMzlfNP0
+lY2CHozAKHkG4ThvM/bp66+3Akw2Eu6ce/+XWjIgQzb90TVLyPCPyUsDK00lh5W+
+nr63iD2ujEHkapcZG/Vq
+=qpfE
+-----END PGP SIGNATURE-----
+
+--ZQj0uIYgQaXji3OAClmI87giSi5ADNjzj--
+
+
+--===============7182108137065982368==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7182108137065982368==--
+
