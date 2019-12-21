@@ -2,45 +2,59 @@ Return-Path: <SRS0=IJoQ=2L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D9CAC2D0C0
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2019 13:20:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99936C2D0C0
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2019 14:55:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1256A2072B
-	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2019 13:20:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1256A2072B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 653C32070C
+	for <xen-devel@archiver.kernel.org>; Sat, 21 Dec 2019 14:55:55 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="cMfqv8y+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 653C32070C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iieff-0004P5-Nd; Sat, 21 Dec 2019 13:19:51 +0000
+	id 1iig9z-0003eH-9k; Sat, 21 Dec 2019 14:55:15 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=txka=2L=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1iiefe-0004P0-LL
- for xen-devel@lists.xenproject.org; Sat, 21 Dec 2019 13:19:50 +0000
-X-Inumbo-ID: 8ea98819-23f4-11ea-94b6-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=wxY0=2L=kernel.org=pr-tracker-bot@srs-us1.protection.inumbo.net>)
+ id 1iig9x-0003eB-AK
+ for xen-devel@lists.xenproject.org; Sat, 21 Dec 2019 14:55:13 +0000
+X-Inumbo-ID: e3cfed52-2401-11ea-94ce-12813bfff9fa
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8ea98819-23f4-11ea-94b6-12813bfff9fa;
- Sat, 21 Dec 2019 13:19:48 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 78058AD11;
- Sat, 21 Dec 2019 13:19:47 +0000 (UTC)
-From: Juergen Gross <jgross@suse.com>
-To: torvalds@linux-foundation.org
-Date: Sat, 21 Dec 2019 14:19:46 +0100
-Message-Id: <20191221131946.27017-1-jgross@suse.com>
-X-Mailer: git-send-email 2.16.4
-Subject: [Xen-devel] [GIT PULL] xen: branch for v5.5-rc3
+ id e3cfed52-2401-11ea-94ce-12813bfff9fa;
+ Sat, 21 Dec 2019 14:55:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1576940112;
+ bh=MLnfA3nzYAB00Nh83uzmFUMSz2Zg9w+B/yubzgqQZCQ=;
+ h=From:In-Reply-To:References:Date:To:Cc:From;
+ b=cMfqv8y+0rJA7SBwUZsCsoCZ8kty8vCVDI0MvNHZ6I1V8DOHchPV8leuP4bJdkIug
+ e0BuqTed4EknPHbtUV99AHiP+/7x9p6y2AwU3UIZTPmY1XjtKVFXKU3B8f8iWwLksG
+ YwlcvbgjEwDXIbRm2Z1NtLml9HoFevt7NcNpZOwY=
+From: pr-tracker-bot@kernel.org
+In-Reply-To: <20191221131946.27017-1-jgross@suse.com>
+References: <20191221131946.27017-1-jgross@suse.com>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20191221131946.27017-1-jgross@suse.com>
+X-PR-Tracked-Remote: git://git.kernel.org/pub/scm/linux/kernel/git/xen/tip.git
+ for-linus-5.5b-rc3-tag
+X-PR-Tracked-Commit-Id: d6bd6cf9feb81737f9f64d2c1acf98fdaacebad1
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 62af608b4b075871f7214c345c42a2e7a456f35d
+Message-Id: <157694011209.20544.506027854286834225.pr-tracker-bot@kernel.org>
+Date: Sat, 21 Dec 2019 14:55:12 +0000
+To: Juergen Gross <jgross@suse.com>
+Subject: Re: [Xen-devel] [GIT PULL] xen: branch for v5.5-rc3
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -52,36 +66,19 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: xen-devel@lists.xenproject.org, boris.ostrovsky@oracle.com,
- linux-kernel@vger.kernel.org
+ torvalds@linux-foundation.org, linux-kernel@vger.kernel.org
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-TGludXMsCgpQbGVhc2UgZ2l0IHB1bGwgdGhlIGZvbGxvd2luZyB0YWc6CgogZ2l0Oi8vZ2l0Lmtl
-cm5lbC5vcmcvcHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3hlbi90aXAuZ2l0IGZvci1saW51cy01
-LjViLXJjMy10YWcKCnhlbjogYnJhbmNoIGZvciB2NS41LXJjMwoKSXQgY29udGFpbnMgMiBjbGVh
-bnVwIHBhdGNoZXMgYW5kIGEgc21hbGwgc2VyaWVzIGZvciBzdXBwb3J0aW5nCnJlbG9hZGluZyB0
-aGUgWGVuIGJsb2NrIGJhY2tlbmQgZHJpdmVyLgoKVGhhbmtzLgoKSnVlcmdlbgoKIGRyaXZlcnMv
-YmxvY2sveGVuLWJsa2JhY2sveGVuYnVzLmMgICAgICAgICB8IDU2ICsrKysrKysrKysrKysrKysr
-KysrLS0tLS0tLS0tLQogZHJpdmVycy9ibG9jay94ZW4tYmxrZnJvbnQuYyAgICAgICAgICAgICAg
-IHwgIDQgKy0tCiBkcml2ZXJzL3hlbi9ncmFudC10YWJsZS5jICAgICAgICAgICAgICAgICAgfCAg
-NCAtLS0KIGRyaXZlcnMveGVuL3hlbmJ1cy94ZW5idXMuaCAgICAgICAgICAgICAgICB8ICAyIC0t
-CiBkcml2ZXJzL3hlbi94ZW5idXMveGVuYnVzX3Byb2JlLmMgICAgICAgICAgfCAzNSArKysrKyst
-LS0tLS0tLS0tLS0tCiBkcml2ZXJzL3hlbi94ZW5idXMveGVuYnVzX3Byb2JlX2JhY2tlbmQuYyAg
-fCAgMSAtCiBkcml2ZXJzL3hlbi94ZW5idXMveGVuYnVzX3Byb2JlX2Zyb250ZW5kLmMgfCAyNCAr
-KysrKysrKysrKystCiBpbmNsdWRlL3hlbi9pbnRlcmZhY2UvaW8vcmluZy5oICAgICAgICAgICAg
-fCAyOSArKysrKy0tLS0tLS0tLS0tCiBpbmNsdWRlL3hlbi94ZW5idXMuaCAgICAgICAgICAgICAg
-ICAgICAgICAgfCAgMSArCiA5IGZpbGVzIGNoYW5nZWQsIDgzIGluc2VydGlvbnMoKyksIDczIGRl
-bGV0aW9ucygtKQoKQWRpdHlhIFBha2tpICgxKToKICAgICAgeGVuL2dyYW50LXRhYmxlOiByZW1v
-dmUgbXVsdGlwbGUgQlVHX09OIG9uIGdudHRhYl9pbnRlcmZhY2UKCk5hdGhhbiBDaGFuY2VsbG9y
-ICgxKToKICAgICAgeGVuL2Jsa2Zyb250OiBBZGp1c3QgaW5kZW50YXRpb24gaW4geGx2YmRfYWxs
-b2NfZ2VuZGlzawoKUGF1bCBEdXJyYW50ICg0KToKICAgICAgeGVuYnVzOiBtb3ZlIHhlbmJ1c19k
-ZXZfc2h1dGRvd24oKSBpbnRvIGZyb250ZW5kIGNvZGUuLi4KICAgICAgeGVuYnVzOiBsaW1pdCB3
-aGVuIHN0YXRlIGlzIGZvcmNlZCB0byBjbG9zZWQKICAgICAgeGVuL2ludGVyZmFjZTogcmUtZGVm
-aW5lIEZST05UL0JBQ0tfUklOR19BVFRBQ0goKQogICAgICB4ZW4tYmxrYmFjazogc3VwcG9ydCBk
-eW5hbWljIHVuYmluZC9iaW5kCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9q
-ZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVu
-LWRldmVs
+VGhlIHB1bGwgcmVxdWVzdCB5b3Ugc2VudCBvbiBTYXQsIDIxIERlYyAyMDE5IDE0OjE5OjQ2ICsw
+MTAwOgoKPiBnaXQ6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9naXQveGVu
+L3RpcC5naXQgZm9yLWxpbnVzLTUuNWItcmMzLXRhZwoKaGFzIGJlZW4gbWVyZ2VkIGludG8gdG9y
+dmFsZHMvbGludXguZ2l0OgpodHRwczovL2dpdC5rZXJuZWwub3JnL3RvcnZhbGRzL2MvNjJhZjYw
+OGI0YjA3NTg3MWY3MjE0YzM0NWM0MmEyZTdhNDU2ZjM1ZAoKVGhhbmsgeW91IQoKLS0gCkRlZXQt
+ZG9vdC1kb3QsIEkgYW0gYSBib3QuCmh0dHBzOi8va29yZy53aWtpLmtlcm5lbC5vcmcvdXNlcmRv
+Yy9wcnRyYWNrZXIKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3Jn
+Cmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
