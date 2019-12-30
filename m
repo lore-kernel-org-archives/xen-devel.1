@@ -2,53 +2,109 @@ Return-Path: <SRS0=74OJ=2U=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3CD4DC2D0C2
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 19:35:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF848C2D0C3
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 20:20:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0791C20409
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 19:35:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0791C20409
+	by mail.kernel.org (Postfix) with ESMTPS id 9AC8B20658
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 20:20:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AC8B20658
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1im0ot-0004qr-6m; Mon, 30 Dec 2019 19:35:15 +0000
+	id 1im1Vw-0008PC-3n; Mon, 30 Dec 2019 20:19:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=dA5B=2U=xenproject.org=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1im0os-0004qT-5E
- for xen-devel@lists.xenproject.org; Mon, 30 Dec 2019 19:35:14 +0000
-X-Inumbo-ID: 21c48c4a-2b3b-11ea-88e7-bc764e2007e4
+ <SRS0=vt8s=2U=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1im1Vu-0008P7-NG
+ for xen-devel@lists.xenproject.org; Mon, 30 Dec 2019 20:19:42 +0000
+X-Inumbo-ID: abcfe4c4-2b41-11ea-88e7-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 21c48c4a-2b3b-11ea-88e7-bc764e2007e4;
- Mon, 30 Dec 2019 19:32:35 +0000 (UTC)
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ id abcfe4c4-2b41-11ea-88e7-bc764e2007e4;
+ Mon, 30 Dec 2019 20:19:24 +0000 (UTC)
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <lars.kurth@xenproject.org>)
- id 1im0mF-0003UC-QT; Mon, 30 Dec 2019 19:32:31 +0000
-Received: from localhost ([127.0.0.1] helo=MacBook-Pro-2.Home)
- by xenbits.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <lars.kurth@xenproject.org>)
- id 1im0mF-0007YU-DD; Mon, 30 Dec 2019 19:32:31 +0000
-From: Lars Kurth <lars.kurth@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Date: Mon, 30 Dec 2019 19:32:18 +0000
-Message-Id: <2d005116379febe0e6cfe0ea32792eb90bc74f9d.1577733361.git.lars.kurth@citrix.com>
-X-Mailer: git-send-email 2.13.0
-In-Reply-To: <cover.1577733361.git.lars.kurth@citrix.com>
-References: <cover.1577733361.git.lars.kurth@citrix.com>
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1im1Vc-0004X2-4M; Mon, 30 Dec 2019 20:19:24 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1im1Vb-0007r0-Oh; Mon, 30 Dec 2019 20:19:23 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1im1Vb-0005z3-GT; Mon, 30 Dec 2019 20:19:23 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-145393-mainreport@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <cover.1577733361.git.lars.kurth@citrix.com>
-References: <cover.1577733361.git.lars.kurth@citrix.com>
-Subject: [Xen-devel] [PATCH v4 6/7] Add guide on Communication Best Practice
+X-Osstest-Failures: xen-unstable:test-amd64-amd64-qemuu-nested-intel:debian-hvm-install/l1/l2:fail:regression
+ xen-unstable:test-amd64-amd64-amd64-pvgrub:xen-boot:fail:heisenbug
+ xen-unstable:test-amd64-amd64-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemut-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-rtds:guest-start/debian.repeat:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt-raw:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-amd64-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemuu-ws16-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemuu-win7-amd64:guest-stop:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-pvshim:guest-start:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-seattle:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-seattle:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-libvirt-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-libvirt-qemuu-debianhvm-amd64-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-qemuu-nested-amd:debian-hvm-install/l1/l2:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-thunderx:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-thunderx:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-libvirt-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-libvirt-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit2:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit2:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit1:migrate-support-check:fail:nonblocking
+ xen-unstable:test-arm64-arm64-xl-credit1:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-amd64-libvirt-vhd:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-arndale:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-arndale:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-cubietruck:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-multivcpu:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-cubietruck:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-multivcpu:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-rtds:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-rtds:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-libvirt-raw:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-vhd:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-vhd:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit1:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit1:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit2:migrate-support-check:fail:nonblocking
+ xen-unstable:test-armhf-armhf-xl-credit2:saverestore-support-check:fail:nonblocking
+ xen-unstable:test-amd64-i386-xl-qemut-ws16-amd64:guest-stop:fail:nonblocking
+X-Osstest-Versions-This: xen=3a13ac3ad4d3ef399fe2c85fb09fcb7ab1cdd140
+X-Osstest-Versions-That: xen=0cd791c499bdc698d14a24050ec56d60b45732e0
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Mon, 30 Dec 2019 20:19:23 +0000
+Subject: [Xen-devel] [xen-unstable test] 145393: regressions - FAIL
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,576 +115,263 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Lars Kurth <lars.kurth@citrix.com>, xen-api@lists.xenproject.org,
- minios-devel@lists.xenproject.org, committers@xenproject.org,
- mirageos-devel@lists.xenproject.org, win-pv-devel@lists.xenproject.org
-Content-Type: multipart/mixed; boundary="===============3642588139458458867=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---===============3642588139458458867==
-Content-Type: text/plain; charset=y
-Content-Transfer-Encoding: 8bit
-
-From: Lars Kurth <lars.kurth@citrix.com>
-
-This guide covers the bulk on Best Practice related to code review
-It primarily focusses on code review interactions
-It also covers how to deal with Misunderstandings and Cultural
-Differences
-
-Changes since v3
-* Fixed typo
-
-Changes since v2 (added in v2)
-* Fix typos
-* Extended "Verbose vs. terse"
-* Added "Clarity over Verbosity"
-* Broke "Identify the severity of an issue or disagreement" into two chapters
-  - "Identify the severity and optionality of review comments" and made
-    clarifications
-  - "Identify the severity of a disagreement"
-  - Expanded "Prioritize significant flaws"
-* Added "Reviewers: Take account of previous reviewer(s) comments"
-* Added prefixes such as "Reviewers:" where appropriate
-* Fixed lien wrapping to 80 characters
-* Replaced inline links with reference links
-
-Signed-off-by: Lars Kurth <lars.kurth@citrix.com>
----
-Cc: minios-devel@lists.xenproject.org
-Cc: xen-api@lists.xenproject.org
-Cc: win-pv-devel@lists.xenproject.org
-Cc: mirageos-devel@lists.xenproject.org
-Cc: committers@xenproject.org
----
- communication-practice.md | 504 ++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 504 insertions(+)
- create mode 100644 communication-practice.md
-
-diff --git a/communication-practice.md b/communication-practice.md
-new file mode 100644
-index 0000000..438b73a
---- /dev/null
-+++ b/communication-practice.md
-@@ -0,0 +1,504 @@
-+# Communication Best Practice
-+
-+This guide provides communication Best Practice that helps you in
-+* Using welcoming and inclusive language
-+* Keeping discussions technical and actionable
-+* Being respectful of differing viewpoints and experiences
-+* Being aware of your own and counterpart’s communication style and culture
-+* Show empathy towards other community members
-+
-+## Code reviews for **reviewers** and **patch authors**
-+
-+Before embarking on a code review, it is important to remember that
-+* A poorly executed code review can hurt the contributors feeling, even when a
-+  reviewer did not intend to do so. Feeling defensive is a normal reaction to
-+  a critique or feedback. A reviewer should be aware of how the pitch, tone,
-+  or sentiment of their comments could be interpreted by the contributor. The
-+  same applies to responses of an author to the reviewer.
-+* When reviewing someone's code, you are ultimately looking for issues. A good
-+  code reviewer is able to mentally separate finding issues from articulating
-+  code review comments in a constructive and positive manner: depending on your
-+  personality this can be **difficult** and you may need to develop a technique
-+  that works for you.
-+* As software engineers we like to be proud of the solutions we came up with.
-+  This can make it easy to take another people’s criticism personally. Always
-+  remember that it is the code that is being reviewed, not you as a person.
-+* When you receive code review feedback, please be aware that we have reviewers
-+  from different backgrounds, communication styles and cultures. Although we
-+  all trying to create a productive, welcoming and agile environment, we do
-+  not always succeed.
-+
-+### Express appreciation
-+
-+As the nature of code review to find bugs and possible issues, it is very easy
-+for reviewers to get into a mode of operation where the patch review ends up
-+being a list of issues, not mentioning what is right and well done. This can
-+lead to the code submitter interpreting your feedback in a negative way.
-+
-+The opening of a code review provides an opportunity to address this and also
-+sets the tone for the rest of the code review. Starting **every** review on a
-+positive note, helps set the tone for the rest of the review.
-+
-+For an initial patch, you can use phrases such as
-+> Thanks for the patch
-+> Thanks for doing this
-+
-+For further revisions within a review, phrases such as
-+> Thank you for addressing the last set of changes
-+
-+If you believe the code was good, it is good practice to highlight this by
-+using phrases such as
-+> Looks good, just a few comments
-+> The changes you have made since the last version look good
-+
-+If you think there were issues too many with the code to use one of the
-+phrases, you can still start on a positive note, by for example saying
-+> I think this is a good change
-+> I think this is a good feature proposal
-+
-+It is also entirely fine to highlight specific changes as good. The best place
-+to do this, is at the top of a patch, as addressing code review comments
-+typically requires a contributor to go through the list of things to address
-+and an in-lined positive comment is likely to break that workflow.
-+
-+You should also consider, that if you review a patch of an experienced
-+contributor phrases such as *Thanks for the patch* could come across as
-+patronizing, while using *Thanks for doing this* is less likely to be
-+interpreted as such.
-+
-+Appreciation should also be expressed by patch authors when asking for
-+clarifications to a review or responding to questions. A simple
-+> Thank you for your feedback
-+> Thank you for your reply
-+> Thank you XXX!
-+
-+is normally sufficient.
-+
-+### Avoid opinion: stick to the facts
-+
-+The way how a reviewer expresses feedback, has a big impact on how the author
-+perceives the feedback. Key to this is what we call **stick to the facts**.
-+The same is true when a patch author is responding to a comment from a
-+reviewer.
-+
-+One of our maintainers has been studying Mandarin for several years and has
-+come across the most strongly-worded dictionary entry [he has ever seen][1].
-+This example illustrates the problem of using opinion in code reviews vs.
-+using facts extremely well.
-+
-+> 裹脚 (guo3 jiao3): foot-binding (a vile feudal practice which crippled women
-+> both physically and spiritually)
-+
-+This is not something one is used to hearing from dictionary entries. Once you
-+investigate the practice foot-binding, it is hard to disagree with the
-+dictionary entry. However, the statement does not contain much information. If
-+you read it without knowing what foot-binding is, it is hard to be convinced
-+by this statement. The main take-away is that the author of the dictionary
-+entry had strong opinions about this topic. It does not tell you why you
-+should have the same opinion.
-+
-+Compare this to the [Wikipedia entry][2]
-+
-+> Foot binding was the custom of applying tight binding to the feet of young
-+> girls to modify the shape and size of their feet. ... foot binding was a
-+> painful practice and significantly limited the mobility of women, resulting
-+> in lifelong disabilities for most of its subjects. ... Binding usually
-+> started during the winter months since the feet were more likely to be numb,
-+> and therefore the pain would not be as extreme. …The toes on each foot
-+> were curled under, then pressed with great force downwards and squeezed
-+> into the sole of the foot until the toes broke…
-+
-+Without going into the details of foot-binding, it is noticeable that none of
-+what is written above uses opinion which could be interpreted as inflammatory
-+language. It is a list of simple facts that are laid out in a way that make it
-+obvious what the correct conclusion is.
-+
-+Because the Wikipedia entry is entirely fact based it is more powerful and
-+persuasive than the dictionary entry. The same applies to code reviews.
-+
-+Making statements in code reviews such as
-+> Your code is garbage
-+> This idea is stupid
-+
-+besides being an opinion is rude and counter productive
-+* It will make the patch author angry: instead of finding a solution to the
-+  problem the author will spend time and mental energy wrestling with their
-+  feelings
-+* It does not contain any information
-+* Facts are both more powerful and more persuasive
-+
-+Consider the following two pieces of feedback on a piece of code
-+> This piece of code is confusing
-+> It took me a long time to ﬁgure out what was going on here
-+
-+The first example expresses an opinion, whereas the second re-phrases the
-+statement in terms of what you experienced, which is a fact.
-+
-+Other examples:
-+> BAD: This is fragile
-+> SOMEWHAT BETTER: This seems fragile to me
-+> BEST: If X happens, Y will happen.
-+
-+A certain piece of code can be written in many different ways: this can lead to
-+disagreements on the best architecture, design or coding pattern. As already
-+pointed out in this section: avoid feedback that is opinion-based and thus
-+does not add any value. Back your criticism (or idea on how to solve a
-+problem) with a sensible rationale.
-+
-+### Review the code, not the person
-+
-+Without realizing it, it is easy to overlook the difference between insightful
-+critique of code and personal criticism. Let's look at a theoretical function
-+where there is an opportunity to return out of the function early. In this
-+case, you could say
-+
-+> You should return from this function early, because of XXX
-+
-+On its own, there is nothing wrong with this statement. However, a code review
-+is made up of multiple comments and using **You should** consistently can
-+start to feel negative and can be mis-interpreted as a personal attack. Using
-+something like avoids this issue:
-+
-+> Returning from this function early is better, because of XXX
-+
-+Without personal reference, a code review will communicate the problem, idea
-+or issue without risking mis-interpretation.
-+
-+### Verbose vs. terse
-+
-+Due to the time it takes to review and compose code reviewer, reviewers often
-+adopt a terse style. It is not unusual to see review comments such as
-+> typo
-+> s/resions/regions/
-+> coding style
-+> coding style: brackets not needed
-+etc.
-+
-+Terse code review style has its place and can be productive for both the
-+reviewer and the author. However, overuse can come across as unfriendly,
-+lacking empathy and can thus create a negative impression with the author of a
-+patch. This is in particular true, when you do not know the author or the
-+author is a newcomer. Terse communication styles can also be perceived as rude
-+in some cultures.
-+
-+If you tend to use a terse commenting style and you do not know whether the
-+author is OK with it, it is often a good idea to compensate for it in the code
-+review opening (where you express appreciation) or when there is a need for
-+verbose expression. However, when you know are working with a seasoned code
-+author, it is also entirely acceptable to drop niceties such as expressing
-+appreciation with the goal to save the author and reviewer time.
-+
-+It is also entirely fine to mention that you have a fairly terse communication
-+style and ask whether the author is OK with it. In almost all cases, they will
-+be: by asking you are showing empathy that helps counteract a negative
-+impression.
-+
-+### Clarity over verbosity
-+
-+When reading this document, you may get the impression that following the
-+guidance outlined here takes more effort and time for both code reviewers and
-+code authors. This is not the intention: much of this document aims to create
-+clearer communication, which ultimately saves time by reducing unnecessary
-+iterations during communication. We value **clarity over verbosity**.
-+
-+Areas which often create unnecessary back-and-forth between reviewers and
-+authors are
-+* Unstated assumptions and goals
-+* Leave suggestions, examples, and resources (such as links to existing code)
-+* There is nothing more helpful for the thought process than example. It
-+  guarantees that you have a shared understanding and reduces the questions
-+  asked on a comment.
-+
-+### Code Review Comments should be actionable
-+
-+Code review comments should be actionable: in other words, it needs to be clear
-+what the author of the code needs to do to address the issue you identified.
-+
-+Statements such as
-+> BAD: This is wrong
-+> BAD: This does not work
-+> BETTER, BUT NOT GOOD: This does not work, because of XXX
-+
-+do not normally provide the author of a patch with enough information to send
-+out a new patch version. By doing this, you essentially force the patch author
-+to **find** and **implement** an alternative, which then may also not be
-+acceptable to you as the **reviewer** of the patch.
-+
-+A better way to approach this is to say
-+
-+> This does not work, because of XXX
-+> You may want to investigate YYY and ZZZ as alternatives
-+
-+In some cases, it may not be clear whether YYY or ZZZ are the better solution.
-+As a reviewer you should be as up-front and possible in such a case and say
-+something like
-+
-+> I am not sure whether YYY and ZZZ are better, so you may want to outline your
-+> thoughts about both solutions by e-mail first, such that we can decide what
-+> works best
-+
-+### Identify the severity and optionality of review comments
-+
-+By default, every comment which is made **ought to be addressed** by the
-+author. However, sometimes reviewers note issues, which would be nice if they
-+were addressed, but are not mandatory to fix.
-+
-+Typically, reviewers use terminology such as
-+> This would be a nice-to-have
-+> This is not a blocker
-+
-+Some maintainers use
-+> NIT: XXX
-+
-+however, it is sometimes also used to indicate a minor issue that **must** be
-+fixed. Also terminology such as **this is not a blocker** could be
-+misinterpreted. It is important that **reviewers** use language that make
-+clear whether a comment is an optional suggestion. Examples may be
-+> NIT (optional): XXX
-+> I think it would be good if X also did Y, not a requirement but nice-to-have
-+
-+### Identify the severity of a disagreement
-+
-+During a code review, it can happen that reviewer and author disagree on how
-+to move forward. The default position when it comes to disagreements is that
-+**both parties want to argue their case**. However, frequently one or both
-+parties do not feel that strongly about a specific issue.
-+
-+Within the Xen Project, we have [a way][3] to highlight one's position on
-+proposals, formal or informal votes using the following notation:
-+> +2 : I am happy with this proposal, and I will argue for it
-+> +1 : I am happy with this proposal, but will not argue for it
-+> 0 : I have no opinion
-+> -1 : I am not happy with this proposal, but will not argue against it
-+> -2 : I am not happy with this proposal, and I will argue against it
-+
-+You can use a phrase such as
-+> I am not happy with this suggestion, but will not argue against it
-+
-+to make clear where you stand, while recording your position. Conversely, a
-+reviewer may do something similar
-+> I am not happy with XYZ, but will not argue against it [anymore]
-+> What we have now is good enough, but could be better
-+
-+### Authors: responding to review comments
-+
-+Typically patch authors are expected to **address all** review comments in the
-+next version of a patch or patch series. In a smooth-running code review where
-+you do not have further questions it is not at all necessary to acknowledge
-+the changes you are going to make:
-+* Simply send the next version with the changes addressed and record it in the
-+  change-log
-+
-+When there is discussion, the normal practice is to remove the portion of the
-+e-mail thread where there is agreement. Otherwise, the thread can become
-+exceptionally long.
-+
-+In cases where there was discussion and maybe disagreement, it does however
-+make sense to close the discussion by saying something like
-+
-+> ACK
-+> Seems we are agreed, I am going to do this
-+
-+Other situations when you may want to do this are cases where the reviewer made
-+optional suggestions, to make clear whether the suggestion will be followed or
-+not.
-+
-+### Avoid uncommon words: not everyone is a native English speaker
-+
-+Avoid uncommon words both when reviewing code or responding to a review. Not
-+everyone is a native English speaker. The use of such words can come across
-+badly and can lead to misunderstandings.
-+
-+### Prioritize significant flaws
-+
-+If a patch or patch series has significant flaws, such as
-+* It is built on wrong assumptions
-+* There are issues with the architecture or the design
-+
-+it does not make sense to do a detailed code review. In such cases, it is best
-+to focus on the major issues first and deal with style and minor issues in a
-+subsequent review. Not all series have significant flaws, but most series have
-+different classes of changes that are required for acceptance: covering a
-+range of major code modifications to minor code style fixes. To avoid
-+misunderstandings between reviewers and contributors, it is important to
-+establish and agree whether a series or part of a series has a significant
-+flaw and agree a course of action.
-+
-+A pragmatic approach would be to
-+* Highlight problematic portions of a series in the cover letter
-+* For the patch author and reviewer(s) to agree that for problematic to omit
-+  style and minor issues in the review, until the significant flaw is addressed
-+
-+This saves both the patch author and reviewer(s) time. Note that some
-+background is covered in detail in [Problematic Patch Reviews][4].
-+
-+
-+### Reviewers: Welcome newcomers
-+
-+When reviewing the first few patches of a newcomer to the project, you may want
-+spend additional time and effort in your code review. This contributes to a
-+more **positive experience**, which ultimately helps create a positive working
-+relationship in the long term.
-+
-+When someone does their first code submission, they will not be familiar with
-+**all** conventions in the project. A good approach is to
-+* Welcome the newcomer
-+* Offer to help with specific questions, for example on IRC
-+* Point to existing documentation: in particular if mistakes with the
-+  submission itself were made. In most situations, following the submission
-+  process makes the process more seamless for the contributor. So, you could
-+  say something like
-+
-+> Hi XXX. Welcome to the community and thank you for the patch
-+>
-+> I noticed that the submission you made seems to not follow our process.
-+> Are you aware of this document at YYY? If you follow the instructions the
-+> entire code submission process and dealing with review comments becomes
-+> much easier. Feel free to find me on IRC if you need specific help. My IRC
-+> handle is ZZZ
-+
-+### Reviewers: Take account of previous reviewer(s) comments
-+
-+Sometimes multiple reviewers share reviewing a series. For example,
-+reviewer John has reviewed the first 5 iterations of the series. The patch
-+author has addressed all of John's comments and Susan comes in and picks up
-+the series after iteration 5. In such cases it is possible that John and Susan
-+have different styles, such as
-+* different preferences on the code layout
-+* different preferences on code style
-+
-+If Susan were to be strict on her own style and highlight her style
-+preferences in subsequent reviews, this would cause additional re-work for the
-+code author. In addition, it also causes extra work for Susan. The easiest way
-+to avoid such situations, would be for Susan to focus on faulty code only and
-+to disregard personal preferences when taking over the review of a series.
-+
-+### Reviewers: Review the code, then review the review
-+
-+As stated earlier it is often difficult to mentally separate finding issues
-+from articulating code review comments in a constructive and positive manner.
-+Even as an experienced code reviewer you can be in a bad mood, which can
-+ impact your communication style.
-+
-+A good trick to avoid this, is to start and complete the code review and then
-+**not send it immediately**. You can then have a final go over the code review
-+at some later point in time and review your comments from the other author's
-+point of view. This minimizes the risk of being misunderstood. The same
-+applies when replying to a code review: draft your reply and give it a final
-+scan before pressing the send button.
-+
-+Generally, it is a good idea for code reviewers to do this regularly, purely
-+from the viewpoint of self-improvement and self-awareness.
-+
-+## Common Communication Pitfalls
-+
-+This section contains common communication issues and provides suggestions on
-+how to avoid them and resolve them. These are **general** issues which affect
-+**all** online communication. As such, we can only try and do our best.
-+
-+### Misunderstandings
-+
-+When you meet face to face, you can read a person’s emotions. Even with a
-+phone call, someone’s tone of voice can convey a lot of information. Using
-+on-line communication channels you are flying blind, which often leads to
-+misunderstandings. [Research][5] shows that in up to 50% of email
-+conversations, the tone of voice is misinterpreted.
-+
-+In code reviews and technical discussions in general we tend to see two things
-+* The reviewer or author interprets an exchange as too critical, passive
-+  aggressive, or other: this usually comes down to different cultures and
-+  communication styles, which are covered in the next section
-+* There is an actual misunderstanding of a subject under discussion
-+
-+In the latter case, the key to resolution is to **identify the
-+misunderstanding** as quickly as possible and call it out and de-escalate
-+rather than let the misunderstanding linger. This is inherently difficult and
-+requires more care than normal communication. Typically you would start with
-+* Showing appreciation
-+* Highlighting the potential misunderstanding and verifying whether the other
-+  person also feels that maybe there was a misunderstanding
-+* Proposing a way forward: for example, it may make sense to move the
-+  conversation from the mailing list to [IRC][6] either in private or public,
-+  a community call or a private phone/video call.
-+
-+It is entirely acceptable to do this in a direct reply to your communication
-+partner, rather than on a public e-mail list on or an otherwise public forum.
-+
-+A good approach is to use something like the following:
-+> Hi XXX! Thank you for the insights you have given me in this code review
-+> I feel that we are misunderstanding each other on the topic of YYY
-+> Would you mind trying to resolve this on IRC. I am available at ZZZ
-+
-+Usually, technical misunderstandings come down two either
-+1. Misinterpreting what the other person meant
-+2. Different - usually unstated - assumptions on how something works or what
-+   is to be achieved
-+3. Different - usually unstated - objectives and goals, which may be
-+   conflicting
-+4. Real differences in opinion
-+
-+The goal of calling out a possible misunderstanding is to establish what
-+caused the misunderstanding, such that all parties can move forward.
-+Typically, 1 and 2 are easily resolved and will lead back to a constructive
-+discussion. Whereas 3 and 4 may highlight an inherent disagreement, which may
-+need to be resolved through techniques as
-+outlined in [Resolving Disagreement][7].
-+
-+### Cultural differences and different communication styles
-+
-+The Xen Project is a global community with contributors from many different
-+backgrounds. Typically, when we communicate with a person we know, we factor
-+in past interactions. The less we know a person, the more we rely on cultural
-+norms.
-+
-+However, different norms and value systems come into play when people from
-+diverse cultural backgrounds interact. That can lead to misunderstandings,
-+especially in sensitive situations such as conflict resolution, giving and
-+receiving feedback, and consensus building.
-+
-+For example, giving direct feedback such as
-+> [Please] replace XXX with YYY, as XXX does not do ZZZ
-+
-+is acceptable and normal in some cultures, whereas in cultures which value
-+indirect feedback it would be considered rude. In the latter case, something
-+like the following would be used
-+> This looks very good to me, but I believe you should use YYY here,
-+> because XXX would....
-+
-+The key to working and communicating well with people from different cultural
-+backgrounds is **self-awareness**, which can then be used to either
-+* Adapt your own communication style depending on who you talk to
-+* Or to find a middle-ground that covers most bases
-+
-+A number of different theories in the field of working effectively are
-+currently popular, with the most well-known one being
-+[Erin Meyer's Culture Map][8]. A short overview can be found [here][9]
-+(33 slides).
-+
-+### Code reviews and discussions are not competitions
-+
-+Code reviews on our mailing lists are not competitions on who can come up with
-+the smartest solution or who is the real coding genius.
-+
-+In a code review - as well as in general - we expect that all stake-holders
-+* Gracefully accept constructive criticism
-+* Focus on what is best for the community
-+* Resolve differences in opinion effectively
-+
-+The next section provides pointers on how to do this effectively.
-+
-+### Resolving Disagreement Effectively
-+
-+Common scenarios are covered our guide on [Resolving Disagreement][7], which
-+lays out situations that can lead to dead-lock and shows common patterns on
-+how to avoid and resolve issues.
-+
-+[1]: https://youtu.be/ehZvBmrLRwg?t=834
-+[2]: https://en.wikipedia.org/wiki/Foot_binding
-+[3]: https://xenproject.org/developers/governance/#expressingopinion
-+[4]: resolving-disagreement.md#problems
-+[5]: https://www.wired.com/2006/02/the-secret-cause-of-flame-wars/
-+[6]: https://xenproject.org/help/irc/
-+[7]: resolving-disagreement.md
-+[8]: https://en.wikipedia.org/wiki/Erin_Meyer
-+[9]: https://www.nsf.gov/attachments/134059/public/15LFW_WorkingWithMulticulturalTeams_LarsonC.pdf
--- 
-2.13.0
-
-
-
---===============3642588139458458867==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============3642588139458458867==--
+ZmxpZ2h0IDE0NTM5MyB4ZW4tdW5zdGFibGUgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3MudGVzdC1s
+YWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzE0NTM5My8KClJlZ3Jlc3Npb25zIDotKAoK
+VGVzdHMgd2hpY2ggZGlkIG5vdCBzdWNjZWVkIGFuZCBhcmUgYmxvY2tpbmcsCmluY2x1ZGluZyB0
+ZXN0cyB3aGljaCBjb3VsZCBub3QgYmUgcnVuOgogdGVzdC1hbWQ2NC1hbWQ2NC1xZW11dS1uZXN0
+ZWQtaW50ZWwgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyIGZhaWwgUkVHUi4gdnMuIDE0NTAy
+NQoKVGVzdHMgd2hpY2ggYXJlIGZhaWxpbmcgaW50ZXJtaXR0ZW50bHkgKG5vdCBibG9ja2luZyk6
+CiB0ZXN0LWFtZDY0LWFtZDY0LWFtZDY0LXB2Z3J1YiAgNyB4ZW4tYm9vdCAgICAgICAgICAgICAg
+ICAgIGZhaWwgcGFzcyBpbiAxNDUzNzcKClRlc3RzIHdoaWNoIGRpZCBub3Qgc3VjY2VlZCwgYnV0
+IGFyZSBub3QgYmxvY2tpbmc6CiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQg
+MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlrZSAxNDUwMjUKIHRlc3QtYXJtaGYtYXJt
+aGYtbGlidmlydCAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICBsaWtl
+IDE0NTAyNQogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13aW43LWFtZDY0IDE3IGd1ZXN0LXN0
+b3AgICAgICAgICAgICBmYWlsIGxpa2UgMTQ1MDI1CiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQt
+d2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAgICAgIGZhaWwgbGlrZSAxNDUwMjUKIHRl
+c3QtYXJtaGYtYXJtaGYteGwtcnRkcyAgICAgMTYgZ3Vlc3Qtc3RhcnQvZGViaWFuLnJlcGVhdCAg
+ICBmYWlsICBsaWtlIDE0NTAyNQogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0LXJhdyAxMyBzYXZl
+cmVzdG9yZS1zdXBwb3J0LWNoZWNrICAgIGZhaWwgIGxpa2UgMTQ1MDI1CiB0ZXN0LWFtZDY0LWFt
+ZDY0LXhsLXFlbXV1LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgIGZhaWwgbGlr
+ZSAxNDUwMjUKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd3MxNi1hbWQ2NCAxNyBndWVzdC1z
+dG9wICAgICAgICAgICAgZmFpbCBsaWtlIDE0NTAyNQogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1
+LXdzMTYtYW1kNjQgMTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICBmYWlsIGxpa2UgMTQ1MDI1CiB0
+ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtd2luNy1hbWQ2NCAxNyBndWVzdC1zdG9wICAgICAgICAg
+ICAgIGZhaWwgbGlrZSAxNDUwMjUKIHRlc3QtYW1kNjQtaTM4Ni14bC1wdnNoaW0gICAgMTIgZ3Vl
+c3Qtc3RhcnQgICAgICAgICAgICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1h
+cm02NC14bC1zZWF0dGxlICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBu
+ZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLXNlYXR0bGUgIDE0IHNhdmVyZXN0b3JlLXN1
+cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQtbGlidmly
+dC14c20gMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwog
+dGVzdC1hbWQ2NC1pMzg2LWxpYnZpcnQgICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAg
+ICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydC14c20gIDEzIG1p
+Z3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQt
+YW1kNjQtbGlidmlydCAgICAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAg
+bmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXFlbXV1LWRlYmlhbmh2bS1hbWQ2
+NC14c20gMTEgbWlncmF0ZS1zdXBwb3J0LWNoZWNrIGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2
+NC1pMzg2LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXhzbSAxMSBtaWdyYXRlLXN1cHBv
+cnQtY2hlY2sgZmFpbCBuZXZlciBwYXNzCiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1h
+bWQgMTcgZGViaWFuLWh2bS1pbnN0YWxsL2wxL2wyICBmYWlsIG5ldmVyIHBhc3MKIHRlc3QtYXJt
+NjQtYXJtNjQteGwtdGh1bmRlcnggMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWls
+ICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14bCAgICAgICAgICAxMyBtaWdyYXRlLXN1
+cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhs
+LXRodW5kZXJ4IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBh
+c3MKIHRlc3QtYXJtNjQtYXJtNjQteGwgICAgICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1j
+aGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC1saWJ2aXJ0LXhzbSAx
+MyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFy
+bTY0LWFybTY0LWxpYnZpcnQteHNtIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFp
+bCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTMgbWlncmF0ZS1z
+dXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm02NC1hcm02NC14
+bC1jcmVkaXQyICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBw
+YXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDIgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQt
+Y2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAg
+MTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1h
+cm02NC1hcm02NC14bC1jcmVkaXQxICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZh
+aWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0LXhsLWNyZWRpdDEgIDE0IHNhdmVyZXN0
+b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYW1kNjQtYW1kNjQt
+bGlidmlydC12aGQgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIg
+cGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1hcm5kYWxlICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hl
+Y2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUg
+IDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3Qt
+YXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
+IGZhaWwgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1tdWx0aXZjcHUgMTMgbWlncmF0
+ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhm
+LXhsLWN1YmlldHJ1Y2sgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsIG5ldmVy
+IHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwtbXVsdGl2Y3B1IDE0IHNhdmVyZXN0b3JlLXN1cHBv
+cnQtY2hlY2sgICAgZmFpbCAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAg
+ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
+LWFybWhmLWFybWhmLXhsICAgICAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAg
+ZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYteGwgICAgICAgICAgMTQgc2F2ZXJl
+c3RvcmUtc3VwcG9ydC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1o
+Zi14bC1ydGRzICAgICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZl
+ciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXJ0ZHMgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBv
+cnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJtaGYtbGlidmlydC1y
+YXcgMTIgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVz
+dC1hcm1oZi1hcm1oZi14bC12aGQgICAgICAxMiBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAg
+IGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLXZoZCAgICAgIDEzIHNhdmVy
+ZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRlc3QtYXJtaGYtYXJt
+aGYteGwtY3JlZGl0MSAgMTMgbWlncmF0ZS1zdXBwb3J0LWNoZWNrICAgICAgICBmYWlsICAgbmV2
+ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bC1jcmVkaXQxICAxNCBzYXZlcmVzdG9yZS1zdXBw
+b3J0LWNoZWNrICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRp
+dDIgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVyIHBhc3MKIHRl
+c3QtYXJtaGYtYXJtaGYteGwtY3JlZGl0MiAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9ydC1jaGVjayAg
+ICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LXdzMTYtYW1kNjQg
+MTcgZ3Vlc3Qtc3RvcCAgICAgICAgICAgICAgZmFpbCBuZXZlciBwYXNzCgp2ZXJzaW9uIHRhcmdl
+dGVkIGZvciB0ZXN0aW5nOgogeGVuICAgICAgICAgICAgICAgICAgM2ExM2FjM2FkNGQzZWYzOTlm
+ZTJjODVmYjA5ZmNiN2FiMWNkZDE0MApiYXNlbGluZSB2ZXJzaW9uOgogeGVuICAgICAgICAgICAg
+ICAgICAgMGNkNzkxYzQ5OWJkYzY5OGQxNGEyNDA1MGVjNTZkNjBiNDU3MzJlMAoKTGFzdCB0ZXN0
+IG9mIGJhc2lzICAgMTQ1MDI1ICAyMDE5LTEyLTIwIDEzOjU4OjEwIFogICAxMCBkYXlzCkZhaWxp
+bmcgc2luY2UgICAgICAgIDE0NTA1OCAgMjAxOS0xMi0yMSAwNzoxNTozNyBaICAgIDkgZGF5cyAg
+IDIzIGF0dGVtcHRzClRlc3Rpbmcgc2FtZSBzaW5jZSAgIDE0NTMyMSAgMjAxOS0xMi0yOCAwNzo1
+MToxNCBaICAgIDIgZGF5cyAgICA2IGF0dGVtcHRzCgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KUGVvcGxlIHdobyB0b3VjaGVkIHJl
+dmlzaW9ucyB1bmRlciB0ZXN0OgogIEFuZHJldyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJp
+eC5jb20+CiAgSWFuIEphY2tzb24gPGlhbi5qYWNrc29uQGV1LmNpdHJpeC5jb20+CiAgSWdvciBE
+cnV6aGluaW4gPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+CiAgSmFuIEJldWxpY2ggPGpiZXVs
+aWNoQHN1c2UuY29tPgogIEp1bGllbiBHcmFsbCA8anVsaWVuLmdyYWxsQGFybS5jb20+CiAgSnVs
+aWVuIEdyYWxsIDxqdWxpZW5AeGVuLm9yZz4KICBLb25yYWQgUnplc3p1dGVrIFdpbGsgPGtvbnJh
+ZC53aWxrQG9yYWNsZS5jb20+CiAgTWFyZWsgTWFyY3p5a293c2tpLUfDs3JlY2tpIDxtYXJtYXJl
+a0BpbnZpc2libGV0aGluZ3NsYWIuY29tPgogIE5pY2sgUm9zYnJvb2sgPHJvc2Jyb29rbkBhaW5m
+b3NlYy5jb20+CiAgTmljayBSb3Nicm9vayA8cm9zYnJvb2tuQGdtYWlsLmNvbT4KICBQYXVsIER1
+cnJhbnQgPHBhdWxAeGVuLm9yZz4KICBQYXVsIER1cnJhbnQgPHBkdXJyYW50QGFtYXpvbi5jb20+
+CiAgUGF3ZWwgV2llY3pvcmtpZXdpY3ogPHdpcGF3ZWxAYW1hem9uLmRlPgogIFJvZ2VyIFBhdSBN
+b25uZSA8cm9nZXIucGF1QGNpdHJpeC5jb20+CiAgUm9nZXIgUGF1IE1vbm7DqSA8cm9nZXIucGF1
+QGNpdHJpeC5jb20+CiAgU2VyZ2V5IEtvdmFsZXYgPHZhbG9yQGxpc3QucnU+CiAgVGFtYXMgSyBM
+ZW5neWVsIDx0YW1hc0B0a2xlbmd5ZWwuY29tPgogIFdlaSBMaXUgPGxpdXdlQG1pY3Jvc29mdC5j
+b20+CiAgV2VpIExpdSA8d2xAeGVuLm9yZz4KCmpvYnM6CiBidWlsZC1hbWQ2NC14c20gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFy
+bTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNz
+ICAgIAogYnVpbGQtaTM4Ni14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC14dGYgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYXJt
+NjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQtbGlidmlydCAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02
+NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIGJ1aWxkLWFybWhmLWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1wcmV2ICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWkzODYt
+cHJldiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm02NC1wdm9wcyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFybWhmLXB2b3BzICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4Ni1w
+dm9wcyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LXh0Zi1hbWQ2NC1hbWQ2NC0xICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcGFzcyAgICAKIHRlc3QteHRmLWFtZDY0LWFtZDY0LTIgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC14dGYtYW1kNjQtYW1kNjQtMyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LXh0Zi1hbWQ2
+NC1hbWQ2NC00ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QteHRmLWFtZDY0LWFtZDY0LTUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bCAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJt
+aGYteGwgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1pMzg2LXhsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtcWVtdXUtZGViaWFuaHZtLWFt
+ZDY0LXhzbSAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXFlbXV1
+LWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1xZW11dC1zdHViZG9tLWRlYmlhbmh2bS1hbWQ2NC14c20gICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFtZDY0LWkzODYteGwtcWVtdXQtc3R1YmRvbS1kZWJpYW5odm0tYW1kNjQteHNtICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtZGViaWFuaHZtLWkzODYteHNt
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV0LWRlYmlh
+bmh2bS1pMzg2LXhzbSAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LXhsLXFlbXV1LWRlYmlhbmh2bS1pMzg2LXhzbSAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
+c3QtYW1kNjQtaTM4Ni14bC1xZW11dS1kZWJpYW5odm0taTM4Ni14c20gICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LWxpYnZpcnQteHNtICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1s
+aWJ2aXJ0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1hbWQ2NC14bC14c20gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC14c20gICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1x
+ZW11dS1uZXN0ZWQtYW1kICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0
+LWFtZDY0LWFtZDY0LXhsLXB2aHYyLWFtZCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1xZW11dC1yaGVsNmh2bS1hbWQgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV1LXJoZWw2aHZtLWFt
+ZCAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhs
+LXFlbXV0LWRlYmlhbmh2bS1hbWQ2NCAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtaTM4Ni14bC1xZW11dC1kZWJpYW5odm0tYW1kNjQgICAgICAgICAgICAgICAgICAgICBw
+YXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kZWJpYW5odm0tYW1kNjQgICAgICAg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtZGViaWFuaHZt
+LWFtZDY0ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1mcmVl
+YnNkMTAtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
+bWQ2NC1hbWQ2NC14bC1xZW11dS1vdm1mLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXQtd2luNy1hbWQ2
+NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFl
+bXV0LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFt
+ZDY0LWFtZDY0LXhsLXFlbXV1LXdpbjctYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgZmFp
+bCAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1xZW11dS13aW43LWFtZDY0ICAgICAgICAgICAgICAg
+ICAgICAgICAgICBmYWlsICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dC13czE2LWFtZDY0
+ICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVt
+dXQtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICAgZmFpbCAgICAKIHRlc3QtYW1k
+NjQtYW1kNjQteGwtcWVtdXUtd3MxNi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBmYWls
+ICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LXdzMTYtYW1kNjQgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWFybmRhbGUgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3Jl
+ZGl0MSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02
+NC1hcm02NC14bC1jcmVkaXQxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3Mg
+ICAgCiB0ZXN0LWFybWhmLWFybWhmLXhsLWNyZWRpdDEgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtY3JlZGl0MiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm02NC1hcm02NC14bC1jcmVk
+aXQyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhm
+LWFybWhmLXhsLWNyZWRpdDIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAg
+ICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtY3ViaWV0cnVjayAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC14bC1xZW11dS1kbXJlc3RyaWN0LWFt
+ZDY0LWRtcmVzdHJpY3QgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYteGwtcWVtdXUt
+ZG1yZXN0cmljdC1hbWQ2NC1kbXJlc3RyaWN0ICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQt
+YW1kNjQtZXhhbWluZSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
+IAogdGVzdC1hcm02NC1hcm02NC1leGFtaW5lICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybWhmLWFybWhmLWV4YW1pbmUgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1leGFtaW5lICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1p
+Mzg2LWZyZWVic2QxMC1pMzg2ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
+CiB0ZXN0LWFtZDY0LWFtZDY0LXFlbXV1LW5lc3RlZC1pbnRlbCAgICAgICAgICAgICAgICAgICAg
+ICAgICAgZmFpbCAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcHZodjItaW50ZWwgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXFlbXV0LXJoZWw2
+aHZtLWludGVsICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkz
+ODYtcWVtdXUtcmhlbDZodm0taW50ZWwgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAK
+IHRlc3QtYW1kNjQtYW1kNjQtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1saWJ2aXJ0ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWkzODYtbGlidmlydCAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1k
+NjQtbGl2ZXBhdGNoICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAog
+dGVzdC1hbWQ2NC1pMzg2LWxpdmVwYXRjaCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LW1pZ3J1cGdyYWRlICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni1taWdydXBncmFkZSAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2
+NC14bC1tdWx0aXZjcHUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0
+ZXN0LWFybWhmLWFybWhmLXhsLW11bHRpdmNwdSAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQtcGFpciAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXBhaXIgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0
+LWxpYnZpcnQtcGFpciAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRl
+c3QtYW1kNjQtaTM4Ni1saWJ2aXJ0LXBhaXIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICBwYXNzICAgIAogdGVzdC1hbWQ2NC1hbWQ2NC1hbWQ2NC1wdmdydWIgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWkzODYtcHZncnViICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
+eGwtcHZzaGltICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
+dC1hbWQ2NC1pMzg2LXhsLXB2c2hpbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IGZhaWwgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXB5Z3J1YiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWNvdzIgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi1s
+aWJ2aXJ0LXJhdyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0
+LWFtZDY0LWkzODYteGwtcmF3ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+cGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcnRkcyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hcm1oZi1hcm1oZi14bC1ydGRzICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhaWwgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhs
+LXNlYXR0bGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3Qt
+YW1kNjQtYW1kNjQteGwtcWVtdXUtZGViaWFuaHZtLWFtZDY0LXNoYWRvdyAgICAgICAgICAgICBw
+YXNzICAgIAogdGVzdC1hbWQ2NC1pMzg2LXhsLXFlbXV1LWRlYmlhbmh2bS1hbWQ2NC1zaGFkb3cg
+ICAgICAgICAgICAgIHBhc3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LXhsLXNoYWRvdyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtaTM4Ni14bC1z
+aGFkb3cgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1h
+cm02NC1hcm02NC14bC10aHVuZGVyeCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBh
+c3MgICAgCiB0ZXN0LWFtZDY0LWFtZDY0LWxpYnZpcnQtdmhkICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYXJtaGYtYXJtaGYteGwtdmhkICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAoKCi0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpzZy1yZXBvcnQtZmxpZ2h0
+IG9uIG9zc3Rlc3QudGVzdC1sYWIueGVucHJvamVjdC5vcmcKbG9nczogL2hvbWUvbG9ncy9sb2dz
+CmltYWdlczogL2hvbWUvbG9ncy9pbWFnZXMKCkxvZ3MsIGNvbmZpZyBmaWxlcywgZXRjLiBhcmUg
+YXZhaWxhYmxlIGF0CiAgICBodHRwOi8vbG9ncy50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9yZy9vc3N0
+ZXN0L2xvZ3MKCkV4cGxhbmF0aW9uIG9mIHRoZXNlIHJlcG9ydHMsIGFuZCBvZiBvc3N0ZXN0IGlu
+IGdlbmVyYWwsIGlzIGF0CiAgICBodHRwOi8veGVuYml0cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0
+ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUUuZW1haWw7aGI9bWFzdGVyCiAgICBodHRwOi8veGVuYml0
+cy54ZW4ub3JnL2dpdHdlYi8/cD1vc3N0ZXN0LmdpdDthPWJsb2I7Zj1SRUFETUU7aGI9bWFzdGVy
+CgpUZXN0IGhhcm5lc3MgY29kZSBjYW4gYmUgZm91bmQgYXQKICAgIGh0dHA6Ly94ZW5iaXRzLnhl
+bi5vcmcvZ2l0d2ViP3A9b3NzdGVzdC5naXQ7YT1zdW1tYXJ5CgoKTm90IHB1c2hpbmcuCgooTm8g
+cmV2aXNpb24gbG9nOyBpdCB3b3VsZCBiZSAxMzkyIGxpbmVzIGxvbmcuKQoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlz
+dApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0
+Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
