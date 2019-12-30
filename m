@@ -2,52 +2,55 @@ Return-Path: <SRS0=74OJ=2U=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.8 required=3.0
+	tests=HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B6E6AC2D0C2
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 19:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C713C2D0C2
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 19:34:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 928A320409
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 19:33:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 928A320409
+	by mail.kernel.org (Postfix) with ESMTPS id 2C8ED20409
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Dec 2019 19:34:16 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C8ED20409
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1im0n7-0003vC-JP; Mon, 30 Dec 2019 19:33:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1im0nS-00048Q-LY; Mon, 30 Dec 2019 19:33:46 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=dA5B=2U=xenproject.org=lars.kurth@srs-us1.protection.inumbo.net>)
- id 1im0n6-0003uZ-1B
- for xen-devel@lists.xenproject.org; Mon, 30 Dec 2019 19:33:24 +0000
-X-Inumbo-ID: 1e69297a-2b3b-11ea-b6f1-bc764e2007e4
+ id 1im0nR-000484-Rw
+ for xen-devel@lists.xenproject.org; Mon, 30 Dec 2019 19:33:45 +0000
+X-Inumbo-ID: 210dbad8-2b3b-11ea-a060-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1e69297a-2b3b-11ea-b6f1-bc764e2007e4;
- Mon, 30 Dec 2019 19:32:30 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 210dbad8-2b3b-11ea-a060-12813bfff9fa;
+ Mon, 30 Dec 2019 19:32:34 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <lars.kurth@xenproject.org>)
- id 1im0mB-0003TW-FQ; Mon, 30 Dec 2019 19:32:27 +0000
+ id 1im0mE-0003U1-Lh; Mon, 30 Dec 2019 19:32:30 +0000
 Received: from localhost ([127.0.0.1] helo=MacBook-Pro-2.Home)
  by xenbits.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <lars.kurth@xenproject.org>)
- id 1im0mB-0007YU-6y; Mon, 30 Dec 2019 19:32:27 +0000
+ id 1im0mE-0007YU-9h; Mon, 30 Dec 2019 19:32:30 +0000
 From: Lars Kurth <lars.kurth@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Date: Mon, 30 Dec 2019 19:32:14 +0000
-Message-Id: <bce250afe71018f1a62f1b34866833588670a1f9.1577733361.git.lars.kurth@citrix.com>
+Date: Mon, 30 Dec 2019 19:32:17 +0000
+Message-Id: <24bb87eccaaf8937443c42c69e215fc59b66741f.1577733361.git.lars.kurth@citrix.com>
 X-Mailer: git-send-email 2.13.0
 In-Reply-To: <cover.1577733361.git.lars.kurth@citrix.com>
 References: <cover.1577733361.git.lars.kurth@citrix.com>
+MIME-Version: 1.0
 In-Reply-To: <cover.1577733361.git.lars.kurth@citrix.com>
 References: <cover.1577733361.git.lars.kurth@citrix.com>
-Subject: [Xen-devel] [PATCH v4 2/7] Xen Project Code of Conduct
+Subject: [Xen-devel] [PATCH v4 5/7] Add Code Review Guide
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,108 +64,378 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Lars Kurth <lars.kurth@citrix.com>, xen-api@lists.xenproject.org,
  minios-devel@lists.xenproject.org, committers@xenproject.org,
  mirageos-devel@lists.xenproject.org, win-pv-devel@lists.xenproject.org
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7720788418475338962=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-RnJvbTogTGFycyBLdXJ0aCA8bGFycy5rdXJ0aEBjaXRyaXguY29tPgoKU3BlY2lmaWMgY2hhbmdl
-cyB0byB0aGUgYmFzZWxpbmU6CiogUmVwbGFjZSBsaXN0IG9mIHBvc2l0aXZlIGJlaGF2aW9ycyB3
-aXRoIGxpbmsgdG8gc2VwYXJhdGUgcHJvY2VzcwoqIFJlcGxhY2UgbWFpbnRhaW5lcnMgd2l0aCBw
-cm9qZWN0IGxlYWRlcnNoaXAKICAoZXhjZXB0IGluIG91ciBwbGVkZ2Ugd2hlcmUgbWFpbnRhaW5l
-cnMgaXMgbW9yZSBhcHByb3ByaWF0ZSkKKiBBZGQgJ29mIGFsbCBzdWItcHJvamVjdHMnIHRvIGNs
-YXJpZnkgc2NvcGUgb2YgQ29DCiogUmVuYW1lIEVuZm9yY2VtZW50CiogUmVwbGFjZSAicHJvamVj
-dCB0ZWFtIiB3aXRoICJDb25kdWN0IFRlYW0gbWVtYmVycyIKKiBBZGQgZS1tYWlsIGFsaWFzCiog
-QWRkIHNlY3Rpb24gb24gY29udGFjdGluZyBpbmRpdmlkdWFsIENvbmR1Y3QgVGVhbSBtZW1iZXJz
-CiogQWRkIHNlY3Rpb24gb24gQ29uZHVjdCBUZWFtIG1lbWJlcnMKClNpZ25lZC1vZmYtYnk6IExh
-cnMgS3VydGggPGxhcnMua3VydGhAY2l0cml4LmNvbT4KLS0tCkNjOiBtaW5pb3MtZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKQ2M6IHhlbi1hcGlAbGlzdHMueGVucHJvamVjdC5vcmcKQ2M6IHdp
-bi1wdi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpDYzogbWlyYWdlb3MtZGV2ZWxAbGlzdHMu
-eGVucHJvamVjdC5vcmcKQ2M6IGNvbW1pdHRlcnNAeGVucHJvamVjdC5vcmcKLS0tCiBjb2RlLW9m
-LWNvbmR1Y3QubWQgfCA0NSArKysrKysrKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0t
-LS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAyOCBpbnNlcnRpb25zKCspLCAxNyBkZWxldGlvbnMoLSkK
-CmRpZmYgLS1naXQgYS9jb2RlLW9mLWNvbmR1Y3QubWQgYi9jb2RlLW9mLWNvbmR1Y3QubWQKaW5k
-ZXggODFiMjE3Yy4uZWU3NTFhNyAxMDA2NDQKLS0tIGEvY29kZS1vZi1jb25kdWN0Lm1kCisrKyBi
-L2NvZGUtb2YtY29uZHVjdC5tZApAQCAtMSw0ICsxLDQgQEAKLSMgQ29udHJpYnV0b3IgQ292ZW5h
-bnQgQ29kZSBvZiBDb25kdWN0CisjIFhlbiBQcm9qZWN0IENvZGUgb2YgQ29uZHVjdAogCiAjIyBP
-dXIgUGxlZGdlCiAKQEAgLTExLDE0ICsxMSwxMCBAQCBhcHBlYXJhbmNlLCByYWNlLCByZWxpZ2lv
-biwgb3Igc2V4dWFsIGlkZW50aXR5IGFuZCBvcmllbnRhdGlvbi4KIAogIyMgT3VyIFN0YW5kYXJk
-cwogCi1FeGFtcGxlcyBvZiBiZWhhdmlvciB0aGF0IGNvbnRyaWJ1dGVzIHRvIGNyZWF0aW5nIGEg
-cG9zaXRpdmUgZW52aXJvbm1lbnQKLWluY2x1ZGU6Ci0KLSogVXNpbmcgd2VsY29taW5nIGFuZCBp
-bmNsdXNpdmUgbGFuZ3VhZ2UKLSogQmVpbmcgcmVzcGVjdGZ1bCBvZiBkaWZmZXJpbmcgdmlld3Bv
-aW50cyBhbmQgZXhwZXJpZW5jZXMKLSogR3JhY2VmdWxseSBhY2NlcHRpbmcgY29uc3RydWN0aXZl
-IGNyaXRpY2lzbQotKiBGb2N1c2luZyBvbiB3aGF0IGlzIGJlc3QgZm9yIHRoZSBjb21tdW5pdHkK
-LSogU2hvd2luZyBlbXBhdGh5IHRvd2FyZHMgb3RoZXIgY29tbXVuaXR5IG1lbWJlcnMKK1dlIGJl
-bGlldmUgdGhhdCBhIENvZGUgb2YgQ29uZHVjdCBjYW4gaGVscCBjcmVhdGUgYSBoYXJhc3NtZW50
-LWZyZWUgZW52aXJvbm1lbnQsCitidXQgaXMgbm90IHN1ZmZpY2llbnQgdG8gY3JlYXRlIGEgd2Vs
-Y29taW5nIGVudmlyb25tZW50IG9uIGl0cyBvd246IGd1aWRhbmNlIG9uCitjcmVhdGluZyBhIHdl
-bGNvbWluZyBlbnZpcm9ubWVudCwgaG93IHRvIGNvbW11bmljYXRlIGluIGFuIGVmZmVjdGl2ZSBh
-bmQgZnJpZW5kbHkKK3dheSwgZXRjLiBjYW4gYmUgZm91bmQgW2hlcmVdOiBUT0RPLUlOU0VSVC1V
-UkwuCiAKIEV4YW1wbGVzIG9mIHVuYWNjZXB0YWJsZSBiZWhhdmlvciBieSBwYXJ0aWNpcGFudHMg
-aW5jbHVkZToKIApAQCAtMzMsMTEgKzI5LDExIEBAIEV4YW1wbGVzIG9mIHVuYWNjZXB0YWJsZSBi
-ZWhhdmlvciBieSBwYXJ0aWNpcGFudHMgaW5jbHVkZToKIAogIyMgT3VyIFJlc3BvbnNpYmlsaXRp
-ZXMKIAotUHJvamVjdCBtYWludGFpbmVycyBhcmUgcmVzcG9uc2libGUgZm9yIGNsYXJpZnlpbmcg
-dGhlIHN0YW5kYXJkcyBvZiBhY2NlcHRhYmxlCitQcm9qZWN0IGxlYWRlcnNoaXAgdGVhbSBtZW1i
-ZXJzIGFyZSByZXNwb25zaWJsZSBmb3IgY2xhcmlmeWluZyB0aGUgc3RhbmRhcmRzIG9mIGFjY2Vw
-dGFibGUKIGJlaGF2aW9yIGFuZCBhcmUgZXhwZWN0ZWQgdG8gdGFrZSBhcHByb3ByaWF0ZSBhbmQg
-ZmFpciBjb3JyZWN0aXZlIGFjdGlvbiBpbgogcmVzcG9uc2UgdG8gYW55IGluc3RhbmNlcyBvZiB1
-bmFjY2VwdGFibGUgYmVoYXZpb3IuCiAKLVByb2plY3QgbWFpbnRhaW5lcnMgaGF2ZSB0aGUgcmln
-aHQgYW5kIHJlc3BvbnNpYmlsaXR5IHRvIHJlbW92ZSwgZWRpdCwgb3IKK1Byb2plY3QgbGVhZGVy
-c2hpcCB0ZWFtIG1lbWJlcnMgaGF2ZSB0aGUgcmlnaHQgYW5kIHJlc3BvbnNpYmlsaXR5IHRvIHJl
-bW92ZSwgZWRpdCwgb3IKIHJlamVjdCBjb21tZW50cywgY29tbWl0cywgY29kZSwgd2lraSBlZGl0
-cywgaXNzdWVzLCBhbmQgb3RoZXIgY29udHJpYnV0aW9ucwogdGhhdCBhcmUgbm90IGFsaWduZWQg
-dG8gdGhpcyBDb2RlIG9mIENvbmR1Y3QsIG9yIHRvIGJhbiB0ZW1wb3JhcmlseSBvcgogcGVybWFu
-ZW50bHkgYW55IGNvbnRyaWJ1dG9yIGZvciBvdGhlciBiZWhhdmlvcnMgdGhhdCB0aGV5IGRlZW0g
-aW5hcHByb3ByaWF0ZSwKQEAgLTQ1LDI2ICs0MSw0MCBAQCB0aHJlYXRlbmluZywgb2ZmZW5zaXZl
-LCBvciBoYXJtZnVsLgogCiAjIyBTY29wZQogCi1UaGlzIENvZGUgb2YgQ29uZHVjdCBhcHBsaWVz
-IHdpdGhpbiBhbGwgcHJvamVjdCBzcGFjZXMsIGFuZCBpdCBhbHNvIGFwcGxpZXMgd2hlbgorVGhp
-cyBDb2RlIG9mIENvbmR1Y3QgYXBwbGllcyB3aXRoaW4gYWxsIHByb2plY3Qgc3BhY2VzIG9mIGFs
-bCBzdWItcHJvamVjdHMsIGFuZCBpdCBhbHNvIGFwcGxpZXMgd2hlbgogYW4gaW5kaXZpZHVhbCBp
-cyByZXByZXNlbnRpbmcgdGhlIHByb2plY3Qgb3IgaXRzIGNvbW11bml0eSBpbiBwdWJsaWMgc3Bh
-Y2VzLgogRXhhbXBsZXMgb2YgcmVwcmVzZW50aW5nIGEgcHJvamVjdCBvciBjb21tdW5pdHkgaW5j
-bHVkZSB1c2luZyBhbiBvZmZpY2lhbAogcHJvamVjdCBlLW1haWwgYWRkcmVzcywgcG9zdGluZyB2
-aWEgYW4gb2ZmaWNpYWwgc29jaWFsIG1lZGlhIGFjY291bnQsIG9yIGFjdGluZwogYXMgYW4gYXBw
-b2ludGVkIHJlcHJlc2VudGF0aXZlIGF0IGFuIG9ubGluZSBvciBvZmZsaW5lIGV2ZW50LiBSZXBy
-ZXNlbnRhdGlvbiBvZgotYSBwcm9qZWN0IG1heSBiZSBmdXJ0aGVyIGRlZmluZWQgYW5kIGNsYXJp
-ZmllZCBieSBwcm9qZWN0IG1haW50YWluZXJzLgorYSBwcm9qZWN0IG1heSBiZSBmdXJ0aGVyIGRl
-ZmluZWQgYW5kIGNsYXJpZmllZCBieSB0aGUgcHJvamVjdCBsZWFkZXJzaGlwLgogCi0jIyBFbmZv
-cmNlbWVudAorIyMgV2hhdCB0byBkbyBpZiB5b3Ugd2l0bmVzcyBvciBhcmUgc3ViamVjdCB0byB1
-bmFjY2VwdGFibGUgYmVoYXZpb3IKIAogSW5zdGFuY2VzIG9mIGFidXNpdmUsIGhhcmFzc2luZywg
-b3Igb3RoZXJ3aXNlIHVuYWNjZXB0YWJsZSBiZWhhdmlvciBtYXkgYmUKLXJlcG9ydGVkIGJ5IGNv
-bnRhY3RpbmcgdGhlIHByb2plY3QgdGVhbSBhdCBbSU5TRVJUIEVNQUlMIEFERFJFU1NdLiBBbGwK
-K3JlcG9ydGVkIGJ5IGNvbnRhY3RpbmcgQ29uZHVjdCBUZWFtIG1lbWJlcnMgYXQgY29uZHVjdEB4
-ZW5wcm9qZWN0Lm9yZy4gQWxsCiBjb21wbGFpbnRzIHdpbGwgYmUgcmV2aWV3ZWQgYW5kIGludmVz
-dGlnYXRlZCBhbmQgd2lsbCByZXN1bHQgaW4gYSByZXNwb25zZSB0aGF0Ci1pcyBkZWVtZWQgbmVj
-ZXNzYXJ5IGFuZCBhcHByb3ByaWF0ZSB0byB0aGUgY2lyY3Vtc3RhbmNlcy4gVGhlIHByb2plY3Qg
-dGVhbSBpcworaXMgZGVlbWVkIG5lY2Vzc2FyeSBhbmQgYXBwcm9wcmlhdGUgdG8gdGhlIGNpcmN1
-bXN0YW5jZXMuIENvbmR1Y3QgVGVhbSBtZW1iZXJzIGFyZQogb2JsaWdhdGVkIHRvIG1haW50YWlu
-IGNvbmZpZGVudGlhbGl0eSB3aXRoIHJlZ2FyZCB0byB0aGUgcmVwb3J0ZXIgb2YgYW4gaW5jaWRl
-bnQuCiBGdXJ0aGVyIGRldGFpbHMgb2Ygc3BlY2lmaWMgZW5mb3JjZW1lbnQgcG9saWNpZXMgbWF5
-IGJlIHBvc3RlZCBzZXBhcmF0ZWx5LgogCi1Qcm9qZWN0IG1haW50YWluZXJzIHdobyBkbyBub3Qg
-Zm9sbG93IG9yIGVuZm9yY2UgdGhlIENvZGUgb2YgQ29uZHVjdCBpbiBnb29kCitJZiB5b3UgaGF2
-ZSBjb25jZXJucyBhYm91dCBhbnkgb2YgdGhlIG1lbWJlcnMgb2YgdGhlIGNvbmR1Y3RAIGFsaWFz
-LAoreW91IGFyZSB3ZWxjb21lIHRvIGNvbnRhY3QgcHJlY2lzZWx5IHRoZSBDb25kdWN0IFRlYW0g
-bWVtYmVyKHMpIG9mCit5b3VyIGNob2ljZS4KKworUHJvamVjdCBsZWFkZXJzaGlwIHRlYW0gbWVt
-YmVycyB3aG8gZG8gbm90IGZvbGxvdyBvciBlbmZvcmNlIHRoZSBDb2RlIG9mIENvbmR1Y3QgaW4g
-Z29vZAogZmFpdGggbWF5IGZhY2UgdGVtcG9yYXJ5IG9yIHBlcm1hbmVudCByZXBlcmN1c3Npb25z
-IGFzIGRldGVybWluZWQgYnkgb3RoZXIKIG1lbWJlcnMgb2YgdGhlIHByb2plY3QncyBsZWFkZXJz
-aGlwLgogCisjIyBDb25kdWN0IFRlYW0gbWVtYmVycworQ29uZHVjdCBUZWFtIG1lbWJlcnMgYXJl
-IHByb2plY3QgbGVhZGVyc2hpcCB0ZWFtIG1lbWJlcnMgZnJvbSBhbnkKK3N1Yi1wcm9qZWN0LiBU
-aGUgY3VycmVudCBsaXN0IG9mIENvbmR1Y3QgVGVhbSBtZW1iZXJzIGlzOgorKiBMYXJzIEt1cnRo
-IDxsYXJzIGRvdCBrdXJ0aCBhdCB4ZW5wcm9qZWN0IGRvdCBvcmc+CisqIEdlb3JnZSBEdW5sYXAg
-PGdlb3JnZSBkb3QgZHVubGFwIGF0IGNpdHJpeCBkb3QgY29tPgorKiBJYW4gSmFja3NvbiA8aWFu
-IGRvdCBqYWNrc29uIGF0IGNpdHJpeCBkb3QgY29tPgorCitDb25kdWN0IFRlYW0gbWVtYmVycyBh
-cmUgY2hhbmdlZCBieSBwcm9wb3NpbmcgYSBjaGFuZ2UgdG8gdGhpcyBkb2N1bWVudCwKK3Bvc3Rl
-ZCBvbiBhbGwgc3ViLXByb2plY3QgbGlzdHMsIGZvbGxvd2VkIGJ5IGEgZm9ybWFsIGdsb2JhbCB2
-b3RlIGFzIG91dGxpbmVkIFtoZXJlXTogaHR0cHM6Ly94ZW5wcm9qZWN0Lm9yZy9kZXZlbG9wZXJz
-L2dvdmVybmFuY2UvI3Byb2plY3QtZGVjaXNpb25zCisKICMjIEF0dHJpYnV0aW9uCiAKIFRoaXMg
-Q29kZSBvZiBDb25kdWN0IGlzIGFkYXB0ZWQgZnJvbSB0aGUgW0NvbnRyaWJ1dG9yIENvdmVuYW50
-XVtob21lcGFnZV0sIHZlcnNpb24gMS40LApAQCAtNzQsMyArODQsNCBAQCBhdmFpbGFibGUgYXQg
-aHR0cHM6Ly93d3cuY29udHJpYnV0b3ItY292ZW5hbnQub3JnL3ZlcnNpb24vMS80L2NvZGUtb2Yt
-Y29uZHVjdC5odAogCiBGb3IgYW5zd2VycyB0byBjb21tb24gcXVlc3Rpb25zIGFib3V0IHRoaXMg
-Y29kZSBvZiBjb25kdWN0LCBzZWUKIGh0dHBzOi8vd3d3LmNvbnRyaWJ1dG9yLWNvdmVuYW50Lm9y
-Zy9mYXEKKwotLSAKMi4xMy4wCgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJv
-amVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hl
-bi1kZXZlbA==
+--===============7720788418475338962==
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
+
+From: Lars Kurth <lars.kurth@citrix.com>
+
+This document highlights what reviewers such as maintainers and committers look
+for when reviewing code. It sets expectations for code authors and provides
+a framework for code reviewers.
+
+Changes since v3
+* Added example under *Workflow from a Reviewer's Perspective* section
+* Fixed typos in text introduced in v2
+
+Changes since v2 (introduced in v2)
+* Extend introduction
+* Add "Code Review Workflow" covering
+  - "Workflow from a Reviewer's Perspective"
+  - "Workflow from an Author's Perspective"
+  - "Problematic Patch Reviews"
+* Wrap to 80 characters
+* Replace inline links with reference links to make
+  wrapping easier
+
+Signed-off-by: Lars Kurth <lars.kurth@citrix.com>
+---
+Cc: minios-devel@lists.xenproject.org
+Cc: xen-api@lists.xenproject.org
+Cc: win-pv-devel@lists.xenproject.org
+Cc: mirageos-devel@lists.xenproject.org
+Cc: committers@xenproject.org
+---
+ code-review-guide.md | 313 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 313 insertions(+)
+ create mode 100644 code-review-guide.md
+
+diff --git a/code-review-guide.md b/code-review-guide.md
+new file mode 100644
+index 0000000..b2c08d2
+--- /dev/null
++++ b/code-review-guide.md
+@@ -0,0 +1,313 @@
++# Code Review Guide
++
++This document highlights what reviewers such as maintainers and committers look
++for when reviewing your code. It sets expectations for code authors and provides
++a framework for code reviewers.
++
++Before we start, it is important to remember that the primary purpose of a
++a code review is to identify any bugs or potential bugs in the code. Most code
++reviews are relatively straight-forward and do not require re-writing the
++submitted code substantially.
++
++The document provides advice on how to structure larger patch series and
++provides  pointers on code author's and reviewer's workflows.
++
++Sometimes it happens that a submitted patch series made wrong assumptions or has
++a flawed design or architecture. This can be frustrating for contributors and
++code  reviewers. Note that this document does contain [a section](#problems)
++that provides  suggestions on how to minimize the impact for most stake-holders
++and also on how to avoid such situations.
++
++This document does **not cover** the following topics:
++* [Communication Best Practice][1]
++* [Resolving Disagreement][2]
++* [Patch Submission Workflow][3]
++* [Managing Patch Submission with Git][4]
++
++## What we look for in Code Reviews
++
++When performing a code review, reviewers typically look for the following things
++
++### Is the change necessary to accomplish the goals?
++
++* Is it clear what the goals are?
++* Do we need to make a change, or can the goals be met with existing
++  functionality?
++
++### Architecture / Interface
++
++* Is this the best way to solve the problem?
++* Is this the right part of the code to modify?
++* Is this the right level of abstraction?
++* Is the interface general enough? Too general? Forward compatible?
++
++### Functionality
++
++* Does it do what it’s trying to do?
++* Is it doing it in the most efﬁcient way?
++* Does it handle all the corner / error cases correctly?
++
++### Maintainability / Robustness
++
++* Is the code clear? Appropriately commented?
++* Does it duplicate another piece of code?
++* Does the code make hidden assumptions?
++* Does it introduce sections which need to be kept **in sync** with other
++  sections?
++* Are there other **traps** someone modifying this code might fall into?
++
++**Note:** Sometimes you will work in areas which have identified maintainability
++and/or robustness issues. In such cases, maintainers may ask you to make
++additional changes, such that your submitted code does not make things worse or
++point you to other patches are already being worked on.
++
++### System properties
++
++In some areas of the code, system properties such as
++* Code size
++* Performance
++* Scalability
++* Latency
++* Complexity
++* &c
++are also important during code reviews.
++
++### Style
++
++* Comments, carriage returns, **snuggly braces**, &c
++* See [CODING_STYLE][5] and [tools/libxl/CODING_STYLE][6]
++* No extraneous whitespace changes
++
++### Documentation and testing
++
++* If there is pre-existing documentation in the tree, such as man pages, design
++  documents, etc. a contributor may be asked to update the documentation
++  alongside the change. Documentation is typically present in the [docs][7]
++  folder.
++* When adding new features that have an impact on the end-user,
++  a contributor should include an update to the [SUPPORT.md][8] file.
++  Typically, more complex features require several patch series before it is
++  ready to be advertised in SUPPORT.md
++* When adding new features, a contributor may be asked to provide tests or
++  ensure that existing tests pass
++
++#### Testing for the Xen Project Hypervisor
++
++Tests are typically located in one of the following directories
++* **Unit tests**: [tools/tests][9] or [xen/test][A]<br>
++  Unit testing is hard for a system like Xen and typically requires building a
++  subsystem of your tree. If your change can be easily unit tested, you should
++  consider submitting tests with your patch.
++* **Build and smoke test**: see [Xen GitLab CI][B]<br>
++  Runs build tests for a combination of various distros and compilers against
++  changes committed to staging. Developers can join as members and test their
++  development branches **before** submitting a patch.
++* **XTF tests** (microkernel-based tests): see [XTF][C]<br>
++  XTF has been designed to test interactions between your software and hardware.
++  It is a very useful tool for testing low level functionality and is executed
++  as part of the project's CI system. XTF can be easily executed locally on
++  xen.git trees.
++* **osstest**: see [README][D]<br>
++  Osstest is the Xen Projects automated test system, which tests basic Xen use
++  cases on a variety of different hardware. Before changes are committed, but
++  **after** they have been reviewed. A contributor’s changes **cannot be
++  applied to master** unless the tests pass this test suite. Note that XTF and
++  other tests are also executed as part of osstest.
++
++### Patch / Patch series information
++
++* Informative one-line changelog
++* Full changelog
++* Motivation described
++* All important technical changes mentioned
++* Changes since previous revision listed
++* Reviewed-by’s and Acked-by’s dropped if appropriate
++
++More information related to these items can be found in our
++[Patch submission Guide][E].
++
++## Code Review Workflow
++
++This section is important for code authors and reviewers. We recommend that in
++particular new code authors carefully read this section.
++
++### Workflow from a Reviewer's Perspective
++
++Patch series typically contain multiple changes to the codebase, some
++transforming the same section of the codebase multiple times. It is quite common
++for patches in a patch series to rely on the previous ones. This means that code
++reviewers review  patches and patch series **sequentially** and **the structure
++of a patch series guides the code review process**. Sometimes in a long series,
++patches {1,2}/10 will be clean-ups, {3-6}/10 will be general reorganisations
++which don't really seem to do anything and then {7-10}/10 will be the substance
++of the series, which helps the code reviewer understand what {3-6}/10 were
++about.
++
++Generally there are no hard rules on how to structure a series, as the structure
++of a series is very code specific and it is hard to give specific advice. There
++are some general tips which  help and some general patterns.
++
++**Tips:**
++
++* Outline the thinking behind the structure of the patch series. This can make
++  a huge difference and helps ensure that the code reviewer understands what the
++  series is trying to achieve and which portions are addressing which problems.
++* Try and keep changes that belong to a subsystem together
++* Expect that the structure of a patch series sometimes may need to change
++  between different versions of a patch series
++* **Most importantly**: Start small. Don't submit a large and complex patch
++  series as the first interaction with the community. Try and pick a smaller
++  task first (e.g. a bug-fix, a clean-up task, etc.) such that you don't have
++  to learn the tools, code and deal with a large patch series all together for
++  the first time.
++
++**General Patterns:**
++
++If there are multiple subsystems involved in your series, then these are best
++separated out into **sets of patches**, which roughly follow the following
++seven categories. In other words: you would end up with **7 categories x N
++subsystems**. In some cases, there is a **global set of patches** that affect
++all subsytems (e.g. headers, macros, documentation) impacting all changed
++subsystems which ideally comes **before** subsystem specific changes.
++
++The seven categories typically making up a logical set of patches
++1. Cleanups and/or new Independent Helper Functions
++2. Reorganisations
++3. Headers, APIs, Documentation and anything which helps understand the
++   substance of a series
++4. The substance of the change
++5. Cleanups of any infelicities introduced temporarily
++6. Deleting old code
++7. Test code
++
++Note that in many cases, some of the listed categories are not always present
++in each set, as they are not needed. Of course, sometimes there are several
++patches describing **changes of substance**, which could be ordered in different
++ways: in such cases it may be necessary to put reorganisations in between these
++patches.
++
++If a series is structured this way, it is often possible to agree early on,
++that a significant portion of the changes are fine and to check these in
++independently of the rest of the patch series. This means that there is
++* Less work for authors to rebase
++* Less cognitive overhead for reviewers to review successive versions of a
++  series
++* The possibility for different code reviewers to review portions of such
++  large changes independently
++
++**Trade-Offs:**
++
++* In some cases, following the general pattern above may create extra patches
++  and may make a series more complex and harder to understand.
++* Crafting a more extensive cover letter will be extra effort: in most cases,
++  the extra time investment will be saving time during the code review process.
++  Verbosity is not the goal, but clarity is. Before you send a larger series
++  in particular: try and put yourself into the position of a code reviewer and
++  try to identify information that helps a code reviewer follow the patch
++  series.
++* In cases where changes need to be back-ported to older releases, moving
++  general cleanups last is often preferable: in such cases the **substance of
++  the change** is back-ported, whereas general cleanups and improvements are
++  not.
++
++**Example:**
++* [[PATCH v3 00/18] VM forking][H] is a complex patch series with an exemplary
++  cover letter. Notably, it contains the following elements
++  * It provides a description of the design goals and detailed description
++    of the steps required to fork a VM.
++  * A description of changes to the user interface
++  * It contains some information about the test status of the series including
++    some performance information.
++  * It maps the series onto the categories listed above. As expected, not
++    all categories are used in this case. However, the series does contain
++    elements of **1** (in this case preparation to enable the functionality),
++    **2** reorganisations and other non-functional changes that enable the
++    rest of the series and **4** the substance of the series with additional
++    information to make it easier for the reviewer to parse the series.
++
++### Workflow from an Author's Perspective
++
++When code authors receive feedback on their patches, they typically first try
++to clarify feedback they do not understand. For smaller patches or patch series
++it makes sense to wait until receiving feedback on the entire series before
++sending out a new version addressing the changes. For larger series, it may
++make sense to send out a new revision earlier.
++
++As a reviewer, you need some system that helps ensure that you address all
++review comments. This can be tedious when trying to map a hierarchical e-mail
++thread onto a code-base. Different people use different techniques from using
++* In-code TODO statements with comment snippets copied into the code
++* To keeping a separate TODO list
++* To printing out the review conversation tree and ticking off what has been
++  addressed
++* A combination of the above
++
++### <a name="problems"></a>Problematic Patch Reviews
++
++A typical waterfall software development process is sequential with the
++following steps: define requirements, analyse, design, code, test and deploy.
++Problems uncovered by code review or testing at such a late stage can cause
++costly redesign and delays. The principle of **[Shift Left][D]** is to take a
++task that is traditionally performed at a late stage in the process and perform
++that task at earlier stages. The goal is to save time by avoiding refactoring.
++
++Typically, problematic patch reviews uncover issues such as wrong or missed
++assumptions, a problematic architecture or design, or other bugs that require
++significant re-implementation of a patch series to fix the issue.
++
++The principle of **Shift Left** also applies in code reviews. Let's assume a
++series has a major flaw: ideally, this flaw would be picked up in the **first
++or second iteration** of the code review. As significant parts of the code may
++have to be re-written, it does not make sense for reviewers to highlight minor
++issues (such as style issues) until major flaws have been addressed of the
++affected part of a patch series. In such cases, providing feedback on minor
++issues reviewers cause the code author and themselves extra work by asking for
++changes to code, which ultimately may be changed later.
++
++To make it possible for code reviewers to identify major issues early, it is
++important for code-authors to highlight possible issues in a cover letter and
++to structure a patch series in such a way that makes it easy for reviewers to
++separate difficult and easy portions of a patch series. This will enable
++reviewers to progress uncontroversial portions of a patch independently from
++controversial ones.
++
++### Reviewing for Patch Authors
++
++The following presentation by George Dunlap, provides an excellent overview on
++how we do code reviews, specifically targeting non-maintainers.
++
++As a community, we would love to have more help reviewing, including from **new
++community members**. But many people
++* do not know where to start, or
++* believe that their review would not contribute much, or
++* may feel intimidated reviewing the code of more established community members
++
++The presentation demonstrates that you do not need to worry about any of these
++concerns. In addition, reviewing other people's patches helps you
++* write better patches and experience the code review process from the other
++  side
++* and build more influence within the community over time
++
++Thus, we recommend strongly that **patch authors** read the watch the recording
++or read the slides:
++* [Patch Review for Non-Maintainers slides][F]
++* [Patch Review for Non-Maintainers recording - 20"][G]
++
++[1]: communication-practice.md
++[2]: resolving-disagreement.md
++[3]: https://wiki.xenproject.org/wiki/Submitting_Xen_Project_Patches
++[4]: https://wiki.xenproject.org/wiki/Managing_Xen_Patches_with_Git
++[5]: https://xenbits.xenproject.org/gitweb/?p=xen.git;a=blob;f=CODING_STYLE
++[6]: https://xenbits.xenproject.org/gitweb/?p=xen.git;a=blob;f=tools/libxl/CODING_STYLE
++[7]: https://xenbits.xenproject.org/gitweb/?p=xen.git;a=tree;f=docs
++[8]: https://xenbits.xenproject.org/gitweb/?p=xen.git;a=blob;f=SUPPORT.md
++[9]: https://xenbits.xenproject.org/gitweb/?p=xen.git;a=tree;f=tools/tests
++[A]: https://xenbits.xenproject.org/gitweb/?p=xen.git;a=tree;f=xen/test
++[B]: https://gitlab.com/xen-project/xen/pipelines
++[C]: https://xenbits.xenproject.org/docs/xtf/
++[D]: https://xenbits.xenproject.org/gitweb/?p=osstest.git;a=blob;f=README
++[E]: https://wiki.xenproject.org/wiki/Submitting_Xen_Project_Patches
++[D]: https://devopedia.org/shift-left
++[F]: https://www.slideshare.net/xen_com_mgr/xpdds19-keynote-patch-review-for-nonmaintainers-george-dunlap-citrix-systems-uk-ltd
++[G]: https://www.youtube.com/watch?v=ehZvBmrLRwg
++[H]: https://lists.xenproject.org/archives/html/xen-devel/2019-12/threads.html#02097
+-- 
+2.13.0
+
+
+
+--===============7720788418475338962==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7720788418475338962==--
