@@ -2,55 +2,60 @@ Return-Path: <SRS0=ufJU=23=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 103B3C33C8C
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 22:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1807C33C8C
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 22:10:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DE5122072A
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 22:03:29 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE5122072A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6FAB2207FD
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 22:10:04 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="2tKevtVc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FAB2207FD
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ioaSp-0005bp-7d; Mon, 06 Jan 2020 22:03:07 +0000
+	id 1ioaZF-0005pS-2F; Mon, 06 Jan 2020 22:09:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=8bCv=23=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1ioaSo-0005bk-4c
- for xen-devel@lists.xenproject.org; Mon, 06 Jan 2020 22:03:06 +0000
-X-Inumbo-ID: 471f1dbc-30d0-11ea-88e7-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=JuuU=23=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1ioaZE-0005pN-3t
+ for xen-devel@lists.xenproject.org; Mon, 06 Jan 2020 22:09:44 +0000
+X-Inumbo-ID: 3df88010-30d1-11ea-88e7-bc764e2007e4
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 471f1dbc-30d0-11ea-88e7-bc764e2007e4;
- Mon, 06 Jan 2020 22:02:49 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ioaSW-0008TF-Oj; Mon, 06 Jan 2020 22:02:48 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1ioaSW-0003LS-Gm; Mon, 06 Jan 2020 22:02:48 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1ioaSW-00012i-GD; Mon, 06 Jan 2020 22:02:48 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-145678-mainreport@xen.org>
+ id 3df88010-30d1-11ea-88e7-bc764e2007e4;
+ Mon, 06 Jan 2020 22:09:43 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id D40B0207FD;
+ Mon,  6 Jan 2020 22:09:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1578348583;
+ bh=CGMvGO5qgbyvjluic0OFn2wgjI5LWbFB35zrYsNEprg=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=2tKevtVcnSrGqh+J4RGATBz/awyb47vRgZz93Lwp7B9d5RSYO6huB/m4K6VQglobe
+ WoJ8AHdtPZOTFJhbxFtdCuFQY0d7R2/Cy2NB2N60XqQhRaEZjxEa4OrzmQERG9jBr5
+ 0mnOO7RxSDUTCmhar5mDc1N35R0Kkbskbl5DIp1w=
+Date: Mon, 6 Jan 2020 14:09:42 -0800 (PST)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Lars Kurth <lars.kurth@citrix.com>
+In-Reply-To: <0BDF4017-822C-45E2-9374-6ED3B7424787@citrix.com>
+Message-ID: <alpine.DEB.2.21.2001061408050.732@sstabellini-ThinkPad-T480s>
+References: <0BDF4017-822C-45E2-9374-6ED3B7424787@citrix.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-X-Osstest-Versions-This: ovmf=0ef6fbbd114e89b8d838eade39bc3a6d7ec54c3c
-X-Osstest-Versions-That: ovmf=6cfb6da9518d3c48107c26832e2709cfd92bf9fa
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 06 Jan 2020 22:02:48 +0000
-Subject: [Xen-devel] [ovmf test] 145678: all pass - PUSHED
+Content-Type: multipart/mixed; boundary="8323329-894946919-1578348583=:732"
+Subject: Re: [Xen-devel] [RFC] Integrate CoC, Governance,
+ Security Policy and other key documents into sphinx docs
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -61,47 +66,60 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: =?UTF-8?Q?J=C3=BCrgen_Gro=C3=9F?= <jgross@suse.com>,
+ xen-devel <xen-devel@lists.xenproject.org>, "Durrant,
+ Paul" <pdurrant@amazon.com>,
+ "committers@xenproject.org" <committers@xenproject.org>,
+ Andrew Cooper <Andrew.Cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-ZmxpZ2h0IDE0NTY3OCBvdm1mIHJlYWwgW3JlYWxdCmh0dHA6Ly9sb2dzLnRlc3QtbGFiLnhlbnBy
-b2plY3Qub3JnL29zc3Rlc3QvbG9ncy8xNDU2NzgvCgpQZXJmZWN0IDotKQpBbGwgdGVzdHMgaW4g
-dGhpcyBmbGlnaHQgcGFzc2VkIGFzIHJlcXVpcmVkCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rp
-bmc6CiBvdm1mICAgICAgICAgICAgICAgICAwZWY2ZmJiZDExNGU4OWI4ZDgzOGVhZGUzOWJjM2E2
-ZDdlYzU0YzNjCmJhc2VsaW5lIHZlcnNpb246CiBvdm1mICAgICAgICAgICAgICAgICA2Y2ZiNmRh
-OTUxOGQzYzQ4MTA3YzI2ODMyZTI3MDljZmQ5MmJmOWZhCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAx
-NDU2NjggIDIwMjAtMDEtMDYgMTM6MDk6NDkgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNl
-ICAgMTQ1Njc4ICAyMDIwLTAxLTA2IDE4OjA5OjMzIFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMK
-Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLQpQZW9wbGUgd2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgUGhpbGlwcGUg
-TWF0aGlldS1EYXVkZSA8cGhpbG1kQHJlZGhhdC5jb20+Cgpqb2JzOgogYnVpbGQtYW1kNjQteHNt
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBi
-dWlsZC1pMzg2LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICBwYXNzICAgIAogYnVpbGQtaTM4NiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hbWQ2NC1saWJ2
-aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1
-aWxkLWkzODYtbGlidmlydCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBwYXNzICAgIAogYnVpbGQtYW1kNjQtcHZvcHMgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1pMzg2LXB2b3BzICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQt
-eGwtcWVtdXUtb3ZtZi1hbWQ2NCAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVz
-dC1hbWQ2NC1pMzg2LXhsLXFlbXV1LW92bWYtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAg
-IHBhc3MgICAgCgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5w
-cm9qZWN0Lm9yZwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdl
-cwoKTG9ncywgY29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9s
-b2dzLnRlc3QtbGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2Yg
-dGhlc2UgcmVwb3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6
-Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5l
-bWFpbDtoYj1tYXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rl
-c3QuZ2l0O2E9YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBi
-ZSBmb3VuZCBhdAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0Lmdp
-dDthPXN1bW1hcnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9t
-ZS94ZW4vZ2l0L29zc3Rlc3Qvb3ZtZi5naXQKICAgNmNmYjZkYTk1MS4uMGVmNmZiYmQxMSAgMGVm
-NmZiYmQxMTRlODliOGQ4MzhlYWRlMzliYzNhNmQ3ZWM1NGMzYyAtPiB4ZW4tdGVzdGVkLW1hc3Rl
-cgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRl
-dmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9s
-aXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--8323329-894946919-1578348583=:732
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Wed, 18 Dec 2019, Lars Kurth wrote:
+> Hi all,
+> 
+> now that 4.13 is out of the way I wanted to get the CoC discussion closed - see https://lists.xenproject.org/archives/html/xen-devel/2019-12/threads.html#00926, which means I need ACKs or final suggestions. The next step would be to publish it on the website.
+> 
+> However, I have also been thinking about keeping some documents in multiple places and defining a *master* copy somewhere in a tree. Right now, these are a few personal repos that I own, which seems unnecessary, given that we have the sphinx docs. In the interest of improving the docs, we also need more useful content in the docs to guide people to them.
+> 
+> My proposal would be to move the master sources for a number of key process docs to xen.git:/docs maybe under a "Working with the Xen Project community" in a process-guide directory. 
+> This would then include content from
+> • http://xenbits.xen.org/gitweb/?p=people/larsk/governance.git;a=summary
+> • http://xenbits.xen.org/gitweb/?p=people/larsk/security-process.git;a=summary
+> • http://xenbits.xen.org/gitweb/?p=people/larsk/code-of-conduct.git;a=summary
+> 
+> and we could also consider including some of the wiki pages related to contribution workflow and re-direct the pages.
+> 
+> We would need to answer some questions, such as
+> a) Are we OK with these staying in markdown - I don’t mind converting
+
+As it looks like we are standardizing on RST we might as well use it. I
+expect very little conversions should be required from the dialect of
+markdown we are currently using.
+
+
+> b) Are we OK with some of the documents needing project wide agreement before they can be changed, specifically this would cover
+> - governance.git
+> - code-of-conduct.git:code-of-conduct.md
+> - code-of-conduct.git:communication-guide.md
+
+Yes, of course, as it is already the case today (although the docs are
+not stored in xen.git)
+--8323329-894946919-1578348583=:732
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--8323329-894946919-1578348583=:732--
+
