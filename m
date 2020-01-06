@@ -2,79 +2,54 @@ Return-Path: <SRS0=ufJU=23=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EE99C33C8C
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 14:30:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 828A8C33CA1
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 14:34:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0C5C22072E
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 14:30:18 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="SLUziQ40"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C5C22072E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
+	by mail.kernel.org (Postfix) with ESMTPS id 611D12072E
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Jan 2020 14:34:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 611D12072E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1ioTOM-0003HY-Ok; Mon, 06 Jan 2020 14:30:02 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=tjc+=23=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
- id 1ioTOL-00037B-Hx
- for xen-devel@lists.xenproject.org; Mon, 06 Jan 2020 14:30:01 +0000
-X-Inumbo-ID: 001b915a-3091-11ea-a914-bc764e2007e4
-Received: from wout2-smtp.messagingengine.com (unknown [64.147.123.25])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 001b915a-3091-11ea-a914-bc764e2007e4;
- Mon, 06 Jan 2020 14:29:52 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
- by mailout.west.internal (Postfix) with ESMTP id 20E0B751;
- Mon,  6 Jan 2020 09:29:51 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Mon, 06 Jan 2020 09:29:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=uSli1K
- V4yWw6qmhcEyNCmIwSMDMtTRUH1kVoe7015nQ=; b=SLUziQ40JwU+Az/BImFYXg
- e2yAcHJf/iiEsD3XQiAu5sjzkmtiN3lYY+SBe9zQr7x+rTnVC4A7h5cuyn2K/Ph4
- cHHsJXXAtYgCWQwmrKLYcalmScrnDbwVrfCv4Xoibsef/XtGl8qFwxA86Rp1km0I
- gB9Uq27nVr5/kcMa+b4m3YjXSZk+x9/ojVJPm/mwLI47V7lnbYLOhIJSEF3bOTor
- MbMbTD9j/lLeVlMZm+Kh68qHZSb4pP1RY2i09mPpmfx+JoHEK5mpMlcp9J802z6y
- 4hcXqFGx8gc8FaFH2vcoW0GpDkldMEkePcLpO5WJ5dFf4ofXlV9Je2BnNgltuHhA
- ==
-X-ME-Sender: <xms:XkQTXkreK3M3N1VuiCErJLla2srNti01KZVVUCnTrwWvlm0uyWMm-g>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrvdehtddgieeiucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
- cujfgurhepfffhvffukfhfgggtuggjsehgtderredttdejnecuhfhrohhmpeforghrvghk
- ucforghrtgiihihkohifshhkihdqifpkrhgvtghkihcuoehmrghrmhgrrhgvkhesihhnvh
- hishhisghlvghthhhinhhgshhlrggsrdgtohhmqeenucfkphepledurdeihedrfeegrdef
- feenucfrrghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslh
- gvthhhihhnghhslhgrsgdrtghomhenucevlhhushhtvghrufhiiigvpedt
-X-ME-Proxy: <xmx:XkQTXt4pGsAYvRWPO2FXM4KB0DSkIOzg9_mLzt9fqgEZ41fhVVYhRQ>
- <xmx:XkQTXirLM1L8aIiAZBu6MizLWeYOq5syzC-u0CSbh7MCrN7BmAbDww>
- <xmx:XkQTXni4rqkBFZfhvB_08umkzTt4109wXe5vjahlEsElrCVGggOeGw>
- <xmx:XkQTXvlFQ_2KXeYRRnDHLcSg8RBFr6eVLh7i3P8LAx-IGDyPedYPSQ>
-Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
- by mail.messagingengine.com (Postfix) with ESMTPA id C791C80063;
- Mon,  6 Jan 2020 09:29:49 -0500 (EST)
-Date: Mon, 6 Jan 2020 15:29:46 +0100
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Message-ID: <20200106142946.GJ1314@mail-itl>
-References: <20200104010759.GA2507@mail-itl>
- <b40c6f0d-374e-b771-1463-74c40bf4a340@suse.com>
- <20200106140418.GH1314@mail-itl> <20200106141609.GI1314@mail-itl>
+	id 1ioTSC-0003tG-FT; Mon, 06 Jan 2020 14:34:00 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=5DW6=23=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1ioTSB-0003tA-Sa
+ for xen-devel@lists.xenproject.org; Mon, 06 Jan 2020 14:33:59 +0000
+X-Inumbo-ID: 93310c7c-3091-11ea-ab11-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 93310c7c-3091-11ea-ab11-12813bfff9fa;
+ Mon, 06 Jan 2020 14:33:59 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 04F1FAB3D;
+ Mon,  6 Jan 2020 14:33:58 +0000 (UTC)
+To: Anthony PERARD <anthony.perard@citrix.com>
+References: <20191217105901.68158-1-anthony.perard@citrix.com>
+ <20191217105901.68158-3-anthony.perard@citrix.com>
+ <c2285ab6-8627-545b-eedc-61e3c9e46769@suse.com>
+ <20200106140147.GI1267@perard.uk.xensource.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <0a9b734c-b6fd-046f-83c9-68fe486d46d6@suse.com>
+Date: Mon, 6 Jan 2020 15:34:43 +0100
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.1
 MIME-Version: 1.0
-In-Reply-To: <20200106141609.GI1314@mail-itl>
-Subject: Re: [Xen-devel] Broken PCI device passthrough, after XSA-302 fix?
+In-Reply-To: <20200106140147.GI1267@perard.uk.xensource.com>
+Content-Language: en-US
+Subject: Re: [Xen-devel] [XEN PATCH v2 2/6] xen: Have Kconfig check $(CC)'s
+ version
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -85,140 +60,53 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-Content-Type: multipart/mixed; boundary="===============2493291486676522052=="
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============2493291486676522052==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Fnm8lRGFTVS/3GuM"
-Content-Disposition: inline
-
-
---Fnm8lRGFTVS/3GuM
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: Broken PCI device passthrough, after XSA-302 fix?
-
-On Mon, Jan 06, 2020 at 03:16:11PM +0100, Marek Marczykowski-G=C3=B3recki w=
-rote:
-> On Mon, Jan 06, 2020 at 03:04:20PM +0100, Marek Marczykowski-G=C3=B3recki=
- wrote:
-> > On Mon, Jan 06, 2020 at 12:18:31PM +0100, Jan Beulich wrote:
-> > > On 04.01.2020 02:07, Marek Marczykowski-G=C3=B3recki  wrote:
-> > > > I have a multi-function PCI device, behind a PCI bridge, that norma=
-lly
-> > > > I assign to a single domain. But now it fails with:
-> > > >=20
-> > > > (XEN) [VT-D]d14: 0000:04:00.0 owned by d0!<G><0>assign 0000:05:00.0=
- to dom14 failed (-22)
-> > >=20
-> > > Is this on the 1st attempt, or after the device had already been
-> > > assigned to some (same or other) guest? After quite a bit of
-> > > staring at the code I can't seem to be able to spot a difference
-> > > in behavior for the 1st attempt, but you not saying explicitly
-> > > that it would only happen on subsequent ones makes me assume you
-> > > run into the issue right away.
-> >=20
-> > Yes, it was the first try.
-> >=20
-> > > > This is Xen 4.8.5 + XSA patches. It started happening after some up=
-date
-> > > > during last few months, not really sure which one.
-> > >=20
-> > > Having a smaller window would of course help, as would ...
-> >=20
-> > The working version was just before XSAs of 2019-10-31  (which include
-> > XSA-302).
-> > But at this point, I'm not sure if no other configuration changes were
-> > made (see below).
-> >=20
-> > > > I guess it is because quarantine feature, so initial ownership of
-> > > > 0000:05:00.0 is different than the bridge it is connected to.
-> > > > I'm not sure if relevant for this case, but I also set
-> > > > pcidev->rdm_policy =3D LIBXL_RDM_RESERVE_POLICY_RELAXED.
-> > > >=20
-> > > > Booting with iommu=3Dno-quarantine helps. Note I do not use `xl
-> > > > pci-assignable-add` command, only bind the device to the pciback dr=
-iver
-> > > > in dom0.
-> > >=20
-> > > ... knowing whether behavior differs when using this preparatory
-> > > step.
-> >=20
-> > xl pci-assignable-add doesn't make a difference with XSA-306 applied.
-> > But I've tried xl pci-assignable-remove with interesting result:
-> > It succeeded for 0000:05:00.0 and 0000:05:00.2, but failed for
-> > 0000:05:00.1 with this message:
-> >=20
-> > (XEN) [VT-D]d0: 0000:05:00.1 owned by d32753!<G><0>deassign 0000:05:00.1
-> > from dom32753 failed (-22)
->=20
-> And now, after this operation (failed -remove) I get the following error
-> on domain start, even with LIBXL_RDM_RESERVE_POLICY_RELAXED properly
-> set:
->=20
-> (XEN) [VT-D]d13: 0000:05:00.1 owned by d32753!<G><0>assign 0000:05:00.1 t=
-o dom13 failed (-22)
->=20
-> I've tried doing -add and -remove in different order and every time it
-> fails for 0000:05:00.1, but works for other functions.
-> I don't see anything special about this function, compared to others.
->=20
-> I'll reboot the system and try again...
-
-After fresh reboot:
-
-1. xl debug-keys Q says 0000:05:00.* are assigned to dom0.
-2. xl pci-assignable-add 0000:05:00.* (in order: .0, .1, .2)
-3. domain start (with LIBXL_RDM_RESERVE_POLICY_RELAXED set) fails:
-
-(XEN) [VT-D]d5: 0000:04:00.0 owned by d0!<G><0>assign 0000:05:00.2 to dom5 =
-failed (-22)
-
-4. xl debug-keys Q says 0000:05:00.* are assigned to d32753
-5. domain start (with LIBXL_RDM_RESERVE_POLICY_RELAXED set) fails:
-
-(XEN) [VT-D]d7: 0000:05:00.2 owned by d32753!<G><0>assign 0000:05:00.2 to d=
-om7 failed (-22)
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-A: Because it messes up the order in which people normally read text.
-Q: Why is top-posting such a bad thing?
-
---Fnm8lRGFTVS/3GuM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl4TRFoACgkQ24/THMrX
-1yyjxgf+Oh2ystNHmJdtZMzCzaE4xOvXGOJtxADPUjlHZkJMLqxbznx7sT7TSMKB
-yOSXi2E7Kwn6TtSxbXDp19AuR3lgwScykwzykpF3/gw1tKM7bUlvET9BBRVw4r5z
-h1ILYPazxJT1tuGlDbqEwh/h2fccLOlT0eMhhx8zXpWmhcBqNp4MQCwDpP/JPC2e
-v5RrJfOKLR9sbeZZXvSYEgjeT5AbUt2yEsUsA0MeXmZjY8JVzFfDBJjbNWRrqulG
-wnxbWDXT+MTrM1rmHh0IDI0fiZ871XxYjiIqgnoAXncW/L5HKE0LCB2ZoRcr9Vph
-fW8lVso8y598VTR67hUpUlhVnzfe2w==
-=yEev
------END PGP SIGNATURE-----
-
---Fnm8lRGFTVS/3GuM--
-
-
---===============2493291486676522052==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============2493291486676522052==--
-
+T24gMDYuMDEuMjAyMCAxNTowMSwgQW50aG9ueSBQRVJBUkQgd3JvdGU6Cj4gT24gRnJpLCBKYW4g
+MDMsIDIwMjAgYXQgMDU6NDI6MThQTSArMDEwMCwgSmFuIEJldWxpY2ggd3JvdGU6Cj4+IE9uIDE3
+LjEyLjIwMTkgMTE6NTgsIEFudGhvbnkgUEVSQVJEIHdyb3RlOgo+Pj4gLS0tIGEveGVuL0tjb25m
+aWcKPj4+ICsrKyBiL3hlbi9LY29uZmlnCj4+PiBAQCAtNCw5ICs0LDI2IEBACj4+PiAgIwo+Pj4g
+IG1haW5tZW51ICJYZW4vJChTUkNBUkNIKSAkKFhFTl9GVUxMVkVSU0lPTikgQ29uZmlndXJhdGlv
+biIKPj4+ICAKPj4+ICtzb3VyY2UgInNjcmlwdHMvS2NvbmZpZy5pbmNsdWRlIgo+Pj4gKwo+Pj4g
+IGNvbmZpZyBCUk9LRU4KPj4+ICAJYm9vbAo+Pj4gIAo+Pj4gK2NvbmZpZyBDQ19JU19HQ0MKPj4+
+ICsJZGVmX2Jvb2wgJChzdWNjZXNzLCQoQ0MpIC0tdmVyc2lvbiB8IGhlYWQgLW4gMSB8IGdyZXAg
+LXEgZ2NjKQo+Pj4gKwo+Pj4gK2NvbmZpZyBHQ0NfVkVSU0lPTgo+Pj4gKwlpbnQKPj4+ICsJZGVm
+YXVsdCAkKHNoZWxsLCQoQkFTRURJUikvc2NyaXB0cy9nY2MtdmVyc2lvbi5zaCAkKENDKSkgaWYg
+Q0NfSVNfR0NDCj4+PiArCWRlZmF1bHQgMAo+Pgo+PiBXaHkgImlmIiBhbmQgYSAybmQgImRlZmF1
+bHQiIGxpbmUgaGVyZSBidXQgLi4uCj4+Cj4+PiArY29uZmlnIENDX0lTX0NMQU5HCj4+PiArCWRl
+Zl9ib29sICQoc3VjY2VzcywkKENDKSAtLXZlcnNpb24gfCBoZWFkIC1uIDEgfCBncmVwIC1xIGNs
+YW5nKQo+Pj4gKwo+Pj4gK2NvbmZpZyBDTEFOR19WRVJTSU9OCj4+PiArCWludAo+Pj4gKwlkZWZh
+dWx0ICQoc2hlbGwsJChCQVNFRElSKS9zY3JpcHRzL2NsYW5nLXZlcnNpb24uc2ggJChDQykpCj4+
+Cj4+IC4uLiBqdXN0IGEgc2luZ2xlLCB1bmNvbmRpdGlvbmFsIG9uZSBoZXJlPwo+IAo+IGNsYW5n
+LXZlcnNpb24uc2ggcmV0dXJucyAwIHdoZW4gQ0MgaXNuJ3QgY2xhbmcsIGJ1dCBnY2MtdmVyc2lv
+bi5zaAo+IGRvZXNuJ3QgY2hlY2sgaWYgQ0MgaXMgZ2NjLCBhbmQgcmV0dXJucyBhIGJvZ3VzIHZh
+bHVlcyBpbnN0ZWFkLgo+IAo+IGUuZy46Cj4gCj4gJCAuL2NsYW5nLXZlcnNpb24uc2ggY2xhbmcK
+PiA5MDAwMAo+ICQgLi9nY2MtdmVyc2lvbi5zaCBjbGFuZwo+IDQwMjAxCgpJbW8gYm90aCBzY3Jp
+cHRzIHNob3VsZCBiZWhhdmUgaWRlbnRpY2FsbHkgaW4gdGhpcyByZWdhcmQgKGFuZCBpbiBmYWN0
+CmluIGFsbCB1c2FnZSByZWxhdGVkIG9uZXMpLiBJZiBhZGp1c3RpbmcgdGhlIHNjcmlwdHMgaXMg
+ZW50aXJlbHkKdW5hY2NlcHRhYmxlIGZvciBzb21lIHJlYXNvbiwgdGhlbiB0aGUgZGVzY3JpcHRp
+b24gc2hvdWxkIGhpZ2hsaWdodAp0aGUgbmVlZCBmb3IgdGhlIGRpZmZlcmVuY2VzLgoKPj4gV291
+bGRuJ3QgYm90aCBiZXR0ZXIKPj4gaGF2ZSBhICJkZXBlbmRzIG9uIENDX0lTXyoiIGxpbmUgaW5z
+dGVhZD8gVGhpcyB3b3VsZCB0aGVuIGFsc28KPj4gcmVzdWx0IChhZmFpY3QpIGluIG5vIENPTkZJ
+R19DTEFOR19WRVJTSU9OIGluIC5jb25maWcgaWYgYnVpbGRpbmcKPj4gd2l0aCBnY2MgKGFuZCB2
+aWNlIHZlcnNhKSwgaW5zdGVhZCBvZiBhIGJvZ3VzIENPTkZJR19DTEFOR19WRVJTSU9OPTAuCj4g
+Cj4gSXQgc291bmRzIGF0dHJhY3RpbmcgdG8gcmVtb3ZlIHZhcmlhYmxlcyBmcm9tIC5jb25maWcs
+IGJ1dCBpdCBpcyBlcXVhbGx5Cj4gYXR0cmFjdGluZyB0byBhbHdheXMgaGF2ZSBhIHZhcmlhYmxl
+IHNldC4gSXQgY2FuIGJlIHVzZWQKPiB1bmNvbmRpdGlvbmFsbHkgd2hlbiBhbHdheXMgc2V0ICh3
+aXRob3V0IHJpc2tpbmcgaW52YWxpZCBzeW50YXggZm9yCj4gZXhhbXBsZSkuCgpIbW0sIHllcywg
+YXMgbG9uZyBhcyB3ZSBkb24ndCBoYXZlIChieSBtZWNoYW5pY2FsIGNvbnZlcnNpb24pIG9yIGdh
+aW4KY29uc3RydWN0cyBsaWtlCgojaWYgQ09ORklHX0dDQ19WRVJTSU9OIDwgNTAwMDAgLyogbXVz
+dCBiZSBnY2MgNC54ICovCgpQbHVzIC0gd2hhdCdzIENPTkZJR19DQ19JU197R0NDLENMQU5HfSBn
+b29kIGZvciB0aGVuPyBUaGUgc2FtZSBjYW4KdGhlbiBiZSBhY2hpZXZlZCBieSBjb21wYXJpbmcg
+Q09ORklHX3tHQ0MsQ0xBTkd9X1ZFUlNJT04gYWdhaW5zdCB6ZXJvLgoKSmFuCgpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBs
+aXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2pl
+Y3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
