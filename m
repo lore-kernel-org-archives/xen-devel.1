@@ -2,45 +2,81 @@ Return-Path: <SRS0=y94i=27=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-1.6 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLACK autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 70FD3C33CA3
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2020 19:43:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7955C33CA4
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2020 20:18:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 44AB22084D
-	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2020 19:43:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 44AB22084D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=virtuozzo.com
+	by mail.kernel.org (Postfix) with ESMTPS id 963352072E
+	for <xen-devel@archiver.kernel.org>; Fri, 10 Jan 2020 20:18:40 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WZfnURxk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 963352072E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iq0BU-0003uj-Cc; Fri, 10 Jan 2020 19:43:04 +0000
+	id 1iq0jP-0006pV-8G; Fri, 10 Jan 2020 20:18:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=OjxR=27=virtuozzo.com=vsementsov@srs-us1.protection.inumbo.net>)
- id 1iq0BS-0003uD-Ny
- for xen-devel@lists.xenproject.org; Fri, 10 Jan 2020 19:43:02 +0000
-X-Inumbo-ID: 5a27cf3a-33e1-11ea-a985-bc764e2007e4
-Received: from relay.sw.ru (unknown [185.231.240.75])
+ <SRS0=ROV9=27=gmail.com=lars.kurth.xen@srs-us1.protection.inumbo.net>)
+ id 1iq0jN-0006oy-5H
+ for xen-devel@lists.xenproject.org; Fri, 10 Jan 2020 20:18:05 +0000
+X-Inumbo-ID: 4e40d72a-33e6-11ea-b89f-bc764e2007e4
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5a27cf3a-33e1-11ea-a985-bc764e2007e4;
- Fri, 10 Jan 2020 19:42:36 +0000 (UTC)
-Received: from vovaso.qa.sw.ru ([10.94.3.0] helo=kvm.qa.sw.ru)
- by relay.sw.ru with esmtp (Exim 4.92.3)
- (envelope-from <vsementsov@virtuozzo.com>)
- id 1iq0AT-0008Ob-Ke; Fri, 10 Jan 2020 22:42:01 +0300
-From: Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>
-To: qemu-devel@nongnu.org
-Date: Fri, 10 Jan 2020 22:41:47 +0300
-Message-Id: <20200110194158.14190-1-vsementsov@virtuozzo.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH v6 00/11] error: auto propagated local_err part I
+ id 4e40d72a-33e6-11ea-b89f-bc764e2007e4;
+ Fri, 10 Jan 2020 20:18:04 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id b6so3013681wrq.0
+ for <xen-devel@lists.xenproject.org>; Fri, 10 Jan 2020 12:18:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
+ :references; bh=Qtjt/NhCsGYkrLGpy50uZzbnlh7WQcz8E/+0UPXUtl4=;
+ b=WZfnURxkkglpl4UgN7IJ6E4lXYs99UOMXLHl8KY0boiV3q2xsNCyvXtNWDyAEFyIB7
+ qSpRBm8Dm9ou13KHD9VGBylQvKRlMqnoTVRC6ZLC5Oydfh9moK15upVbsEazTzeVkF2H
+ R872/DNq/6kwNDSUbjj7FyunbDrOcVv5six1pXw2ObrSa5SgBk0Z/O5zO5ADV7Xqm2RW
+ o2akQ0mXMrGCGZukMB96nQdoTqyJzSoyNFOTsOZpMcvIQqpQ2KwZhnwxywOlYQ/jlZXH
+ kkkoY0CWv6Gm54iCzaqn9LDUS1BsC+EOJ14BM1R/JSpXJwhcGNLJai4lxoro5p5K5N8c
+ fsOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:message-id:mime-version:subject:date
+ :in-reply-to:cc:to:references;
+ bh=Qtjt/NhCsGYkrLGpy50uZzbnlh7WQcz8E/+0UPXUtl4=;
+ b=VI0UFQw7qBBP65JjT8pVpNSYHIektej53egQ4KTV4hPMiPBI5kcjuvypTDLEsQ6sPo
+ Tg1vnx/QanfgvODuFpVDCtW2OEneOi5F3LQBdVDnNlsB1XOigHcIdl0JpiM1XvnmJWXQ
+ tZlKNfuCrRYWh5AMEimHO6JCGgR21pdFVxIYk1GzDzfSQIZt57pGI9rYc/aLsrGQhR73
+ OFuxopAgCE7oZsB7VI5XnYenbdH8QsDbt7+XwHphZutikNiCbXxEOGqVMmGLxyOV2JHf
+ qPAwHqXQdY7uC+22bEUp2WzgJYZPeOke1az0jydQ88ZfKS3pDrvHqVVA+KmBRbfZoK3Z
+ hpmg==
+X-Gm-Message-State: APjAAAXwDskhZCHTzvqPKuBPns+sCPPlMp26xqWvi9H5Wgp6Zd3IOaM5
+ 2Rf5P1zA+oa/AP0tgJOzH88=
+X-Google-Smtp-Source: APXvYqyNp96yebhjsqdKWXFWD7XQXt26bvAB/fQAfiCvD2+2WEE+MUU542cNmRxEeVfXCdqrXuC4PA==
+X-Received: by 2002:adf:e8ca:: with SMTP id k10mr5233260wrn.50.1578687482863; 
+ Fri, 10 Jan 2020 12:18:02 -0800 (PST)
+Received: from ?IPv6:2a02:c7f:ac73:9500:bc0a:7758:470e:db30?
+ ([2a02:c7f:ac73:9500:bc0a:7758:470e:db30])
+ by smtp.gmail.com with ESMTPSA id q3sm3305816wmj.38.2020.01.10.12.18.02
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 10 Jan 2020 12:18:02 -0800 (PST)
+From: Lars Kurth <lars.kurth.xen@gmail.com>
+X-Google-Original-From: Lars Kurth <lars.kurth@xenproject.org>
+Message-Id: <CC483690-ACCF-4AF7-B84C-7A98E6CD489E@xenproject.org>
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
+Date: Fri, 10 Jan 2020 20:18:01 +0000
+In-Reply-To: <d2182056-4695-8f7f-2142-db6717e06d52@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200110091238.845-1-pdurrant@amazon.com>
+ <d2182056-4695-8f7f-2142-db6717e06d52@citrix.com>
+X-Mailer: Apple Mail (2.3445.104.11)
+Subject: Re: [Xen-devel] [PATCH] Introduce CHANGELOG.md
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,120 +87,189 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Wolf <kwolf@redhat.com>,
- Vladimir Sementsov-Ogievskiy <vsementsov@virtuozzo.com>,
- Laszlo Ersek <lersek@redhat.com>, qemu-block@nongnu.org,
- Paul Durrant <paul@xen.org>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Cornelia Huck <cohuck@redhat.com>, Greg Kurz <groug@kaod.org>,
- Max Reitz <mreitz@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Gerd Hoffmann <kraxel@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
- Eric Blake <eblake@redhat.com>, Michael Roth <mdroth@linux.vnet.ibm.com>,
- Markus Armbruster <armbru@redhat.com>, Stefan Berger <stefanb@linux.ibm.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Lars Kurth <lars.kurth@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ 'Jan Beulich' <jbeulich@suse.com>, xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: multipart/mixed; boundary="===============2837409652382602439=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGkgYWxsIQoKTm93LCB3aGVuIHByZXBhcmF0aW9ucyBmcm9tCiBbUkZDIHY1IDAwMC8xMjZdIGVy
-cm9yOiBhdXRvIHByb3BhZ2F0ZWQgbG9jYWxfZXJyCiBodHRwczovL2xpc3RzLmdudS5vcmcvYXJj
-aGl2ZS9odG1sL3FlbXUtZGV2ZWwvMjAxOS0xMC9tc2cwMjc3MS5odG1sCiBodHRwczovL3NyYy5v
-cGVudnoub3JnL3NjbS9+dnNlbWVudHNvdi9xZW11LmdpdCAjdGFnIHVwLWF1dG8tbG9jYWwtZXJy
-LXY1IAosIGFmdGVyIHNvbWUgaXRlcmF0aW9ucywgYXJlIGZpbmFsbHkgbWVyZ2VkLCBsZXQncyBw
-cm9jZWVkIHdpdGggdGhlCnJlc3QuIFNvcnJ5IGZvciBhIGJpZyBkZWxheSBvbiBteSBwYXJ0LgoK
-QXMgYSBmaXJzdCBzdGVwLCBJIGRlY2lkZWQgdG8gdGFrZSBzdWJzeXN0ZW1zLCBlYWNoIG9mIHRo
-ZW0gY292ZXJlZCBieQpvbmUgcGF0Y2gsIHdoaWNoIGdldCByLWIvYS1iIG1hcmtzIGJ5IG1haW50
-YWluZXIgb2YgdGhlIHN1YnN5c3RlbSBpbiB2NS4KCnY2IGlzIGF2YWlsYWJsZSBhdAogaHR0cHM6
-Ly9zcmMub3BlbnZ6Lm9yZy9zY20vfnZzZW1lbnRzb3YvcWVtdS5naXQgI3RhZyB1cC1hdXRvLWxv
-Y2FsLWVyci1wYXJ0SS12NiAKCkNoYW5nZXMgdjUtPnY2OgowMTogdXNlIGVycnAgbmFtZSBmb3Ig
-dGhlIHBhcmFtZXRlciwgYWRkIGFzc2VydGlvbgowMjogYWRkIGEgbG90IG9mIHRleHQgaW5mb3Jt
-YXRpb24sIGRyb3AgRXJpYydzIHItYi4KICAgIG5vIHNlbWFudGljIGNoYW5nZXMuCjAzOiBhZGQg
-bW9yZSBjb21tZW50cwogICAgc2tpcCBmdW5jdGlvbnMgd2l0aCBwYXR0ZXJuIGVycm9yX2FwcGVu
-ZF8uKl9oaW50IGluIG5hbWUKICAgIG1ha2UgZXJycCBpZGVudGlmaWVyLCB0byBtYXRjaCBhbnkg
-bmFtZSBvZiBFcnJvciAqKiBwYXJhbXRlcgogICAgc29tZSBvdGhlciBpbXByb3ZlbWVudHMKMDQ6
-IG9ubHkgY29tbWl0IG1lc3NhZ2UgY2hhbmdlZCwKICAgIGtlZXAgUGhpbGlwcGUncyByLWIKMDU6
-IG5ldywgbWFudWFsIHVwZGF0ZSBmb3IgaHcvc2Qvc3NpLXNkCjA2OiBvbmx5IGNvbW1pdCBtZXNz
-YWdlIGNoYW5nZWQsCiAgICBrZWVwIFBoaWxpcHBlJ3Mgci1iCjA3OiBvbmx5IGNvbW1pdCBtZXNz
-YWdlIGNoYW5nZWQsCiAgICBrZWVwIFBoaWxpcHBlJ3Mgci1iCjA4OiBsb2NhbF9wYXJzZV9vcHRz
-KCkgY2hhbmdlZCwgc28gcGF0Y2ggY2hhbmdlZCBpbiB0aGlzCiAgICBmdW5jdGlvbiwgZHJvcCBh
-LWIgbWFyawogICAgYWxzbywgaW5kZW50YXRpb24gZml4ZWQsIGJ5IGltcHJvdmVtZW50IGluIGNv
-Y2NpbmVsbGUgc2NyaXB0CjA5OiBvbmx5IGNvbW1pdCBtZXNzYWdlIGNoYW5nZWQsCiAgICBrZWVw
-IFN0ZWZhbidzIHItYgoxMDogY29tbWl0IG1lc3NhZ2UgYW5kIGEgYml0IG9mIGNvbnRleHQgY2hh
-bmdlZCwgc3RpbGwgc2VlbXMKICAgIHZhbGlkIHRvIGtlZXAgRXJpYydzIHItYgoxMTogYWRkIG5l
-dyBodW5rOiBody9wY2ktaG9zdC94ZW5faWdkX3B0LmMsIHNvLCBkcm9wIHItYgogICAgYWxzbywg
-aW5kZW50YXRpb24gZml4ZWQsIGJ5IGltcHJvdmVtZW50IGluIGNvY2NpbmVsbGUgc2NyaXB0CgpJ
-biB0aGVzZSBzZXJpZXMsIHRoZXJlIGlzIG5vIGNvbW1pdC1wZXItc3Vic3lzdGVtIHNjcmlwdCwg
-ZWFjaCBnZW5lcmF0ZWQKY29tbWl0IGlzIGdlbmVyYXRlZCBpbiBzZXBhcmF0ZS4KClN0aWxsLCBn
-ZW5lcmF0aW5nIGNvbW1hbmRzIGFyZSB2ZXJ5IHNpbWlsYXIsIGFuZCBsb29rcyBsaWtlCgogICAg
-c2VkIC1uICcvXjxTdWJzeXN0ZW0gbmFtZT4kLywvXiQve3MvXkY6IC8vcH0nIE1BSU5UQUlORVJT
-IHwgXAogICAgeGFyZ3MgZ2l0IGxzLWZpbGVzIHwgZ3JlcCAnXC5baGNdJCcgfCBcCiAgICB4YXJn
-cyBzcGF0Y2ggXAogICAgICAgIC0tc3AtZmlsZSBzY3JpcHRzL2NvY2NpbmVsbGUvYXV0by1wcm9w
-YWdhdGVkLWVycnAuY29jY2kgXAogICAgICAgIC0tbWFjcm8tZmlsZSBzY3JpcHRzL2NvY2NpLW1h
-Y3JvLWZpbGUuaCBcCiAgICAgICAgLS1pbi1wbGFjZSAtLW5vLXNob3ctZGlmZiAtLW1heC13aWR0
-aCA4MAoKTm90ZSwgdGhhdCBpbiBlYWNoIGdlbmVyYXRlZCBjb21taXQsIGdlbmVyYXRpb24gY29t
-bWFuZCBpcyB0aGUgb25seQp0ZXh0LCBpbmRlbnRlZCBieSA4IHNwYWNlcyBpbiAnZ2l0IGxvZyAt
-MScgb3V0cHV0LCBzbywgdG8gcmVnZW5lcmF0ZSBhbGwKY29tbWl0cyAoZm9yIGV4YW1wbGUsIGFm
-dGVyIHJlYmFzZSwgb3IgY2hhbmdlIGluIGNvY2NpbmVsbGUgc2NyaXB0KSwgeW91Cm1heSB1c2Ug
-dGhlIGZvbGxvd2luZyBjb21tYW5kOgoKZ2l0IHJlYmFzZSAteCAic2ggLWMgXCJnaXQgc2hvdyAt
-LXByZXR0eT0gLS1uYW1lLW9ubHkgfCB4YXJncyBnaXQgY2hlY2tvdXQgSEVBRF4gLS0gOyBnaXQg
-cmVzZXQ7IGdpdCBsb2cgLTEgfCBncmVwICdeICAgICAgICAnIHwgc2hcIiIgSEVBRH43CgpXaGlj
-aCB3aWxsIHN0YXJ0IGF1dG9tYXRlZCBpbnRlcmFjdGl2ZSByZWJhc2UgZm9yIGdlbmVyYXRlZCBw
-YXRjaGVzLAp3aGljaCB3aWxsIHN0b3AgaWYgZ2VuZXJhdGVkIHBhdGNoIGNoYW5nZWQKKHlvdSBt
-YXkgZG8gZ2l0IGNvbW1pdCAtLWFtZW5kIHRvIGFwcGx5IHVwZGF0ZWQgZ2VuZXJhdGVkIGNoYW5n
-ZXMpLgoKTm90ZToKICBnaXQgc2hvdyAtLXByZXR0eT0gLS1uYW1lLW9ubHkgICAtIGxpc3RzIGZp
-bGVzLCBjaGFuZ2VkIGluIEhFQUQKICBnaXQgbG9nIC0xIHwgZ3JlcCAnXiAgICAgICAgJyB8IHNo
-ICAgLSByZXJ1biBnZW5lcmF0aW9uIGNvbW1hbmQgb2YgSEVBRAoKCkNoZWNrIGZvciBjb21waWxh
-dGlvbiBvZiBjaGFuZ2VkIC5jIGZpbGVzCmdpdCByZWJhc2UgLXggInNoIC1jIFwiZ2l0IHNob3cg
-LS1wcmV0dHk9IC0tbmFtZS1vbmx5IHwgc2VkIC1uICdzL1wuYyQvLm8vcCcgfCB4YXJncyBtYWtl
-IC1qOVwiIiBIRUFEfjcKICAKClZsYWRpbWlyIFNlbWVudHNvdi1PZ2lldnNraXkgKDExKToKICBx
-YXBpL2Vycm9yOiBhZGQgKEVycm9yICoqZXJycCkgY2xlYW5pbmcgQVBJcwogIGVycm9yOiBhdXRv
-IHByb3BhZ2F0ZWQgbG9jYWxfZXJyCiAgc2NyaXB0czogYWRkIGNvY2NpbmVsbGUgc2NyaXB0IHRv
-IHVzZSBhdXRvIHByb3BhZ2F0ZWQgZXJycAogIGh3L3NkL3NzaS1zZDogZml4IGVycm9yIGhhbmRs
-aW5nIGluIHNzaV9zZF9yZWFsaXplCiAgU0QgKFNlY3VyZSBDYXJkKTogaW50cm9kdWNlIEVSUlBf
-QVVUT19QUk9QQUdBVEUKICBwZmxhc2g6IGludHJvZHVjZSBFUlJQX0FVVE9fUFJPUEFHQVRFCiAg
-ZndfY2ZnOiBpbnRyb2R1Y2UgRVJSUF9BVVRPX1BST1BBR0FURQogIHZpcnRpby05cDogaW50cm9k
-dWNlIEVSUlBfQVVUT19QUk9QQUdBVEUKICBUUE06IGludHJvZHVjZSBFUlJQX0FVVE9fUFJPUEFH
-QVRFCiAgbmJkOiBpbnRyb2R1Y2UgRVJSUF9BVVRPX1BST1BBR0FURQogIHhlbjogaW50cm9kdWNl
-IEVSUlBfQVVUT19QUk9QQUdBVEUKCiBpbmNsdWRlL2Jsb2NrL25iZC5oICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgfCAgIDEgKwogaW5jbHVkZS9xYXBpL2Vycm9yLmggICAgICAgICAgICAgICAg
-ICAgICAgICAgIHwgMTEzICsrKysrKysrKysrKystCiBibG9jay9uYmQuYyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgfCAgNDkgKysrLS0tCiBody85cGZzLzlwLWxvY2FsLmMgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTIgKy0KIGh3LzlwZnMvOXAuYyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArCiBody9ibG9jay9kYXRhcGxhbmUveGVuLWJs
-b2NrLmMgICAgICAgICAgICAgICAgfCAgMTcgKy0tCiBody9ibG9jay9wZmxhc2hfY2ZpMDEuYyAg
-ICAgICAgICAgICAgICAgICAgICAgfCAgIDcgKy0KIGh3L2Jsb2NrL3BmbGFzaF9jZmkwMi5jICAg
-ICAgICAgICAgICAgICAgICAgICB8ICAgNyArLQogaHcvYmxvY2sveGVuLWJsb2NrLmMgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHwgMTI1ICsrKysrKystLS0tLS0tLS0KIGh3L252cmFtL2Z3X2Nm
-Zy5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAxNCArLQogaHcvcGNpLWhvc3QveGVu
-X2lnZF9wdC5jICAgICAgICAgICAgICAgICAgICAgIHwgICA3ICstCiBody9zZC9zZGhjaS1wY2ku
-YyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDcgKy0KIGh3L3NkL3NkaGNpLmMgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyMSArKy0KIGh3L3NkL3NzaS1zZC5jICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAyNiArKystCiBody90cG0vdHBtX3V0aWwu
-YyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDcgKy0KIGh3L3hlbi94ZW4tYmFja2Vu
-ZC5jICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgNyArLQogaHcveGVuL3hlbi1idXMuYyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgMTAwICsrKysrKy0tLS0tLS0KIGh3L3hlbi94
-ZW4taG9zdC1wY2ktZGV2aWNlLmMgICAgICAgICAgICAgICAgICB8ICAyNyArKy0tCiBody94ZW4v
-eGVuX3B0LmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjUgKystLQogaHcveGVu
-L3hlbl9wdF9jb25maWdfaW5pdC5jICAgICAgICAgICAgICAgICAgIHwgIDIwICstLQogbmJkL2Ns
-aWVudC5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICA1ICsKIG5iZC9zZXJ2
-ZXIuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgNSArCiB0cG0uYyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDcgKy0KIHNjcmlwdHMvY29j
-Y2luZWxsZS9hdXRvLXByb3BhZ2F0ZWQtZXJycC5jb2NjaSB8IDEzOSArKysrKysrKysrKysrKysr
-KysKIDI0IGZpbGVzIGNoYW5nZWQsIDQ4MiBpbnNlcnRpb25zKCspLCAyNjcgZGVsZXRpb25zKC0p
-CiBjcmVhdGUgbW9kZSAxMDA2NDQgc2NyaXB0cy9jb2NjaW5lbGxlL2F1dG8tcHJvcGFnYXRlZC1l
-cnJwLmNvY2NpCgpDQzogQ29ybmVsaWEgSHVjayA8Y29odWNrQHJlZGhhdC5jb20+CkNDOiBFcmlj
-IEJsYWtlIDxlYmxha2VAcmVkaGF0LmNvbT4KQ0M6IEtldmluIFdvbGYgPGt3b2xmQHJlZGhhdC5j
-b20+CkNDOiBNYXggUmVpdHogPG1yZWl0ekByZWRoYXQuY29tPgpDQzogR3JlZyBLdXJ6IDxncm91
-Z0BrYW9kLm9yZz4KQ0M6IFN0ZWZhbiBIYWpub2N6aSA8c3RlZmFuaGFAcmVkaGF0LmNvbT4KQ0M6
-IFN0ZWZhbm8gU3RhYmVsbGluaSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KQ0M6IEFudGhvbnkg
-UGVyYXJkIDxhbnRob255LnBlcmFyZEBjaXRyaXguY29tPgpDQzogUGF1bCBEdXJyYW50IDxwYXVs
-QHhlbi5vcmc+CkNDOiAiUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kiIDxwaGlsbWRAcmVkaGF0LmNv
-bT4KQ0M6IExhc3psbyBFcnNlayA8bGVyc2VrQHJlZGhhdC5jb20+CkNDOiBHZXJkIEhvZmZtYW5u
-IDxrcmF4ZWxAcmVkaGF0LmNvbT4KQ0M6IFN0ZWZhbiBCZXJnZXIgPHN0ZWZhbmJAbGludXguaWJt
-LmNvbT4KQ0M6IE1hcmt1cyBBcm1icnVzdGVyIDxhcm1icnVAcmVkaGF0LmNvbT4KQ0M6IE1pY2hh
-ZWwgUm90aCA8bWRyb3RoQGxpbnV4LnZuZXQuaWJtLmNvbT4KQ0M6IHFlbXUtYmxvY2tAbm9uZ251
-Lm9yZwpDQzogeGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCgotLSAKMi4yMS4wCgoKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1h
-aWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54
-ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2837409652382602439==
+Content-Type: multipart/alternative;
+	boundary="Apple-Mail=_3E1DDC38-E22C-452E-8BF8-5B8DBCEE74D0"
+
+
+--Apple-Mail=_3E1DDC38-E22C-452E-8BF8-5B8DBCEE74D0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
+
+
+
+> On 10 Jan 2020, at 17:54, Andrew Cooper <andrew.cooper3@citrix.com> =
+wrote:
+>=20
+> On 10/01/2020 09:12, Paul Durrant wrote:
+>> As agreed during the 2020-01 community call [1] this patch introduces =
+a
+>> changelog, based on the principles explained at keepachangelog.com =
+[2].
+>> A new MAINTAINERS entry is also added, with myself as (currently =
+sole)
+>> maintainer.
+>>=20
+>> [1] See C.2 at =
+https://cryptpad.fr/pad/#/2/pad/edit/ERZtMYD5j6k0sv-NG6Htl-AJ/
+>> [2] https://keepachangelog.com/en/1.0.0/
+>>=20
+>> Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+>> ---
+>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Cc: George Dunlap <George.Dunlap@eu.citrix.com>
+>> Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+>> Cc: Jan Beulich <jbeulich@suse.com>
+>> Cc: Julien Grall <julien@xen.org>
+>> Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+>> Cc: Stefano Stabellini <sstabellini@kernel.org>
+>> Cc: Wei Liu <wl@xen.org>
+>> Cc: Lars Kurth <lars.kurth@citrix.com>
+>>=20
+>> Should there be other maintainers apart from myself (with my RM hat =
+on)?
+>> Perhaps Lars should also be added as a designated reviewer?
+>=20
+> Ultimately, the committers are last line of judgement on "whether this
+> change should be in the changelog".  Practically, that includes "The
+> Rest", but there was an objection to that on the call IIRC.
+
+Am happy to be added
+
+Lars
+
+
+--Apple-Mail=_3E1DDC38-E22C-452E-8BF8-5B8DBCEE74D0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=us-ascii
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; =
+charset=3Dus-ascii"></head><body style=3D"word-wrap: break-word; =
+-webkit-nbsp-mode: space; line-break: after-white-space;" class=3D""><br =
+class=3D""><div><br class=3D""><blockquote type=3D"cite" class=3D""><div =
+class=3D"">On 10 Jan 2020, at 17:54, Andrew Cooper &lt;<a =
+href=3D"mailto:andrew.cooper3@citrix.com" =
+class=3D"">andrew.cooper3@citrix.com</a>&gt; wrote:</div><br =
+class=3D"Apple-interchange-newline"><div class=3D""><span =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">On 10/01/2020 =
+09:12, Paul Durrant wrote:</span><br style=3D"caret-color: rgb(0, 0, 0); =
+font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><blockquote type=3D"cite" =
+style=3D"font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; orphans: auto; text-align: start; text-indent: 0px; =
+text-transform: none; white-space: normal; widows: auto; word-spacing: =
+0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D"">As agreed during the 2020-01 =
+community call [1] this patch introduces a<br class=3D"">changelog, =
+based on the principles explained at <a href=3D"http://keepachangelog.com"=
+ class=3D"">keepachangelog.com</a> [2].<br class=3D"">A new MAINTAINERS =
+entry is also added, with myself as (currently sole)<br =
+class=3D"">maintainer.<br class=3D""><br class=3D"">[1] See C.2 at <a =
+href=3D"https://cryptpad.fr/pad/#/2/pad/edit/ERZtMYD5j6k0sv-NG6Htl-AJ/" =
+class=3D"">https://cryptpad.fr/pad/#/2/pad/edit/ERZtMYD5j6k0sv-NG6Htl-AJ/<=
+/a><br class=3D"">[2] <a href=3D"https://keepachangelog.com/en/1.0.0/" =
+class=3D"">https://keepachangelog.com/en/1.0.0/</a><br class=3D""><br =
+class=3D"">Signed-off-by: Paul Durrant &lt;<a =
+href=3D"mailto:pdurrant@amazon.com" =
+class=3D"">pdurrant@amazon.com</a>&gt;<br class=3D"">---<br class=3D"">Cc:=
+ Andrew Cooper &lt;<a href=3D"mailto:andrew.cooper3@citrix.com" =
+class=3D"">andrew.cooper3@citrix.com</a>&gt;<br class=3D"">Cc: George =
+Dunlap &lt;<a href=3D"mailto:George.Dunlap@eu.citrix.com" =
+class=3D"">George.Dunlap@eu.citrix.com</a>&gt;<br class=3D"">Cc: Ian =
+Jackson &lt;<a href=3D"mailto:ian.jackson@eu.citrix.com" =
+class=3D"">ian.jackson@eu.citrix.com</a>&gt;<br class=3D"">Cc: Jan =
+Beulich &lt;<a href=3D"mailto:jbeulich@suse.com" =
+class=3D"">jbeulich@suse.com</a>&gt;<br class=3D"">Cc: Julien Grall =
+&lt;<a href=3D"mailto:julien@xen.org" class=3D"">julien@xen.org</a>&gt;<br=
+ class=3D"">Cc: Konrad Rzeszutek Wilk &lt;<a =
+href=3D"mailto:konrad.wilk@oracle.com" =
+class=3D"">konrad.wilk@oracle.com</a>&gt;<br class=3D"">Cc: Stefano =
+Stabellini &lt;<a href=3D"mailto:sstabellini@kernel.org" =
+class=3D"">sstabellini@kernel.org</a>&gt;<br class=3D"">Cc: Wei Liu =
+&lt;<a href=3D"mailto:wl@xen.org" class=3D"">wl@xen.org</a>&gt;<br =
+class=3D"">Cc: Lars Kurth &lt;<a href=3D"mailto:lars.kurth@citrix.com" =
+class=3D"">lars.kurth@citrix.com</a>&gt;<br class=3D""><br =
+class=3D"">Should there be other maintainers apart from myself (with my =
+RM hat on)?<br class=3D"">Perhaps Lars should also be added as a =
+designated reviewer?<br class=3D""></blockquote><br style=3D"caret-color: =
+rgb(0, 0, 0); font-family: Menlo-Regular; font-size: 11px; font-style: =
+normal; font-variant-caps: normal; font-weight: normal; letter-spacing: =
+normal; text-align: start; text-indent: 0px; text-transform: none; =
+white-space: normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none;" class=3D""><span style=3D"caret-color: rgb(0, 0, =
+0); font-family: Menlo-Regular; font-size: 11px; font-style: normal; =
+font-variant-caps: normal; font-weight: normal; letter-spacing: normal; =
+text-align: start; text-indent: 0px; text-transform: none; white-space: =
+normal; word-spacing: 0px; -webkit-text-stroke-width: 0px; =
+text-decoration: none; float: none; display: inline !important;" =
+class=3D"">Ultimately, the committers are last line of judgement on =
+"whether this</span><br style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">change should =
+be in the changelog".&nbsp; Practically, that includes "The</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""><span style=3D"caret-color: rgb(0, 0, 0); font-family: =
+Menlo-Regular; font-size: 11px; font-style: normal; font-variant-caps: =
+normal; font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none; float: none; display: inline !important;" class=3D"">Rest", but =
+there was an objection to that on the call IIRC.</span><br =
+style=3D"caret-color: rgb(0, 0, 0); font-family: Menlo-Regular; =
+font-size: 11px; font-style: normal; font-variant-caps: normal; =
+font-weight: normal; letter-spacing: normal; text-align: start; =
+text-indent: 0px; text-transform: none; white-space: normal; =
+word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration: =
+none;" class=3D""></div></blockquote><div><br class=3D""></div>Am happy =
+to be added</div><div><br class=3D""></div><div>Lars</div><br =
+class=3D""></body></html>=
+
+--Apple-Mail=_3E1DDC38-E22C-452E-8BF8-5B8DBCEE74D0--
+
+
+--===============2837409652382602439==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2837409652382602439==--
+
