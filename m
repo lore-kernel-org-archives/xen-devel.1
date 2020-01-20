@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
 	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 327C1C32771
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jan 2020 23:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C26C32771
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jan 2020 23:40:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E0F752253D
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Jan 2020 23:32:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 17BB322522
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Jan 2020 23:40:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="m4tzAPxt"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E0F752253D
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mEC2lVS5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 17BB322522
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1itgWr-0001WR-1m; Mon, 20 Jan 2020 23:32:21 +0000
+	id 1itge9-0001mD-Tw; Mon, 20 Jan 2020 23:39:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=JMHZ=3J=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1itgWq-0001WK-5X
- for xen-devel@lists.xenproject.org; Mon, 20 Jan 2020 23:32:20 +0000
-X-Inumbo-ID: 197ebecc-3bdd-11ea-b833-bc764e2007e4
-Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
+ id 1itge8-0001m8-GJ
+ for xen-devel@lists.xenproject.org; Mon, 20 Jan 2020 23:39:52 +0000
+X-Inumbo-ID: 2715d24a-3bde-11ea-9fd7-bc764e2007e4
+Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 197ebecc-3bdd-11ea-b833-bc764e2007e4;
- Mon, 20 Jan 2020 23:32:19 +0000 (UTC)
-Received: by mail-lf1-x141.google.com with SMTP id i23so634828lfo.7
- for <xen-devel@lists.xenproject.org>; Mon, 20 Jan 2020 15:32:19 -0800 (PST)
+ id 2715d24a-3bde-11ea-9fd7-bc764e2007e4;
+ Mon, 20 Jan 2020 23:39:51 +0000 (UTC)
+Received: by mail-lj1-x244.google.com with SMTP id a13so788849ljm.10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Jan 2020 15:39:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=qCkm7lqj5Vu8R42V1P6amkuYFU8R31EGhSVxNInu42U=;
- b=m4tzAPxtGlk2f64gFcOoa2RlXA3k/KcDEQ5lXw+TPyio9nzKhEac66ima9+kUTiprR
- FpzvhwDTsnE3X2doKglG8ExeovBu5WRWKepwPdyLmIcRxn/yaeEWwe/W5Je0kA6QmoAH
- zs0KQH3BxxzP5s1vGG8NwCXdVh8NuepjL3d+mo41fRd5+kHJs5KT9ym0zWUNbYGQdzfU
- 6uuH6WkQ75hboaGKR53/WvU/d41/Mnt0+hJSX8eChBQ3vZNWsrYMkhSPAaGdJnLT2ZVO
- Rgq0nJCjK6nF/vE18NhALcU21grhP665qKFhAi35+OIKup0tAbWljpFqtbPiWhHjNGpw
- Ylxg==
+ :cc; bh=kkD0X2gSmHnK/4LkL+ZYjh34c/uYh8bqT+o5NegCv48=;
+ b=mEC2lVS5+UGsaH7j2Cl+Hwq5zsDdUtA59Nupgy2IchsU2fjP2BsX0nJo1x6f5KG53+
+ +PZa5iogWOL3KlWeWoaePzeFi4oSePPJvmHWKIBWYeBntrzmKFnJaKRYKf9hB4gype2N
+ WFgMSAU2fDEOGonq3jWj2dI+DhF5ozPDaJ/6Y3k3P9TUo34WN7qPjwN5noREXRXUMdEK
+ J90keiKO2wPvReavvoYwfd9kZ5rM2g475UzeRpB5+kQVBK3ppTsNFK+o3gFz+0d2V9tO
+ C+w3uX+K6vNtInMWA8BLgfZZXI/KKbXaNbx6yOLBNhVPgth6wD7jyGZADaA6B8EzbqNU
+ wvzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=qCkm7lqj5Vu8R42V1P6amkuYFU8R31EGhSVxNInu42U=;
- b=kJRP+KhEBN4lPnWrvSP6+3+cAWjI0/cJWklWvGJxgGeIsDwldBlCaOryoNP/a7cBkk
- fLKWYV/KkPvY7MvBVvgLwpokzZZ6eIVPPiUoPzfbQl3cs+tcRWUshiwUopov7Uel45oP
- 9+BdJ1Rsy0LZ1sYNjg3JzeGtf0791sSfxz3DEegI2O478GHylR29FJoUTEMRW/3khy7X
- K2vvcYGRjkAmIULO9+LVTLGDifx+P1xSb8eF9FThcw2tTjkqaj1uRIgyxcERwV0P7EIx
- tpD2ksOGHIN4eArjtzBfUyjaBQYHqXtvI+IBal420TnjKyHgGzg7MmzBke1XiYkxzK7e
- jnlA==
-X-Gm-Message-State: APjAAAW7M2QFatI66MKq19/HheU/fRmyiBUftDwuucBCVVMscf6a3pS/
- V+q0KvMoozM8NfvADq+HybTpXIawPh6qqB3Lfao=
-X-Google-Smtp-Source: APXvYqx6lJHfsBzs3HNOaefyGjz8wT7sltGyqYSLDJKiGMDfKBmksQhnv6mC6w8T0E1G4enY++qRwLslQZcPCm7cyVE=
-X-Received: by 2002:ac2:4109:: with SMTP id b9mr929574lfi.9.1579563138644;
- Mon, 20 Jan 2020 15:32:18 -0800 (PST)
+ bh=kkD0X2gSmHnK/4LkL+ZYjh34c/uYh8bqT+o5NegCv48=;
+ b=WNzdVvJDnMkqFTXL9uJKdh1onFzEwqo0iqyx60uoipd/jFtLeMynDZ7FvtyPHp54Ks
+ RSPf7+h6Msw9PyMVvhgq1kiGVB0l/QB/vlyevWW8P2TSZpnAvSoVTLtG7rXfdmdSLr72
+ FCgIqN555oWEhEdrJx0ueJF82FcXkVX5iEhAXK9CF+3h31gvj5wrcvqO8YgtqrxKfyro
+ JH72x8B/up0a+RYHhsMOnuM0IyUi5aViNzz3evD8/Ia0sG04NGeu3GrCTiezZ9n2U2s1
+ 5zr/XVHsA019mInRhmRo3Ch7mH1ZfVh2H8HPGoXr2czBlJXM4siCNhzLwNanx9yQghfT
+ bZuw==
+X-Gm-Message-State: APjAAAV3pl9Kxc1bm2mZnhpsgS4xc3VBmiU7tUzpxlk+bJorbuR9q0cG
+ NorWbfKx7HZplgYWvp97nh16eR84LdC5KooESJI=
+X-Google-Smtp-Source: APXvYqwbCW/SH0aAldWFCyIGmi+jAJm0LAlM3quNTrRLRUWaBkS+EAk2zndDiGJ7M791oUURgdKPZMozmMGb7QEBB6I=
+X-Received: by 2002:a2e:b61a:: with SMTP id r26mr966255ljn.72.1579563590881;
+ Mon, 20 Jan 2020 15:39:50 -0800 (PST)
 MIME-Version: 1.0
 References: <20200117155734.1067550-1-george.dunlap@citrix.com>
- <20200117155734.1067550-3-george.dunlap@citrix.com>
-In-Reply-To: <20200117155734.1067550-3-george.dunlap@citrix.com>
+In-Reply-To: <20200117155734.1067550-1-george.dunlap@citrix.com>
 From: Nick Rosbrook <rosbrookn@gmail.com>
-Date: Mon, 20 Jan 2020 18:32:06 -0500
-Message-ID: <CAEBZRSd6Vg+Y9yMAV8x+2ScV3E-sROiwSksx33AZyk8p1U3xfQ@mail.gmail.com>
+Date: Mon, 20 Jan 2020 18:39:38 -0500
+Message-ID: <CAEBZRSf071rPGwnCM5FCMn-gGPao4T0TJx4qvZug4iokF56p_Q@mail.gmail.com>
 To: George Dunlap <george.dunlap@citrix.com>
-Subject: Re: [Xen-devel] [PATCH v3 3/8] go/xenlight: More informative error
- messages
+Subject: Re: [Xen-devel] [PATCH v3 1/8] golang/xenlight: Don't try to
+ marshall zero-length arrays in fromC
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,22 +86,26 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-PiBJZiBhbiBlcnJvciBpcyBlbmNvdW50ZXJlZCBkZWVwIGluIGEgY29tcGxpY2F0ZWQgZGF0YSBz
-dHJ1Y3R1cmUsIGl0J3MKPiBvZnRlbiBkaWZmaWN1bHQgdG8gdGVsbCB3aGVyZSB0aGUgZXJyb3Ig
-YWN0dWFsbHkgaXMuICBNYWtlIHRoZSBlcnJvcgo+IG1lc3NhZ2UgZnJvbSB0aGUgZ2VuZXJhdGVk
-IHRvQygpIGFuZCBmcm9tQygpIHN0cnVjdHVyZXMgbW9yZQo+IGluZm9ybWF0aXZlIGJ5IHRhZ2dp
-bmcgd2hpY2ggZmllbGQgYmVpbmcgY29udmVydGVkIGVuY291bnRlcmVkIHRoZQo+IGVycm9yLiAg
-VGhpcyB3aWxsIGhhdmUgdGhlIGVmZmVjdCBvZiBnaXZpbmcgYSAic3RhY2sgdHJhY2UiIG9mIHRo
-ZQo+IGZhaWx1cmUgaW5zaWRlIGEgbmVzdGVkIGRhdGEgc3RydWN0dXJlLgo+Cj4gTkIgdGhhdCBt
-eSB2ZXJzaW9uIG9mIHB5dGhvbiBpbnNpc3RzIG9uIHJlb3JkZXJpbmcgYSBjb3VwbGUgb2Ygc3dp
-dGNoCj4gc3RhdGVtZW50cyBmb3Igc29tZSByZWFzb247IEluIG90aGVyIHBhdGNoZXMgSSd2ZSBy
-ZXZlcnRlZCB0aG9zZQo+IGNoYW5nZXMsIGJ1dCBpbiB0aGlzIGNhc2UgaXQncyBtb3JlIGRpZmZp
-Y3VsdCBiZWNhdXNlIHRoZXkgaW50ZXJhY3QKPiB3aXRoIGFjdHVhbCBjb2RlIGNoYW5nZXMuICBJ
-J2xsIGxlYXZlIHRoaXMgaGVyZSBmb3Igbm93LCBhcyB3ZSdyZQo+IGdvaW5nIHRvIHJlbW92ZSBo
-ZWxwZXJzLmdlbi5nbyBmcm9tIGJlaW5nIHRyYWNrZWQgYnkgZ2l0IGF0IHNvbWUgcG9pbnQKPiBp
-biB0aGUgbmVhciBmdXR1cmUgYW55d2F5Lgo+Cj4gU2lnbmVkLW9mZi1ieTogR2VvcmdlIER1bmxh
-cCA8Z2VvcmdlLmR1bmxhcEBjaXRyaXguY29tPgoKUmV2aWV3ZWQtYnk6IE5pY2sgUm9zYnJvb2sg
-PHJvc2Jyb29rbkBhaW5mb3NlYy5jb20+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54
-ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGlu
-Zm8veGVuLWRldmVs
+IFNvcnJ5IEkgZGlkbid0IGNhdGNoIHRoaXMgdGhlIGZpcnN0IHRpbWUgYXJvdW5kLCBidXQ6Cgo+
+IGRpZmYgLS1naXQgYS90b29scy9nb2xhbmcveGVubGlnaHQvaGVscGVycy5nZW4uZ28gYi90b29s
+cy9nb2xhbmcveGVubGlnaHQvaGVscGVycy5nZW4uZ28KPiBpbmRleCBiOWE3ZTgyOGEwLi44ODk4
+MDdkOTI4IDEwMDY0NAo+IC0tLSBhL3Rvb2xzL2dvbGFuZy94ZW5saWdodC9oZWxwZXJzLmdlbi5n
+bwo+ICsrKyBiL3Rvb2xzL2dvbGFuZy94ZW5saWdodC9oZWxwZXJzLmdlbi5nbwo+IEBAIC02MjMs
+MTIgKzYyMywxNCBAQCBmdW5jICh4ICpTY2hlZFBhcmFtcykgdG9DKHhjICpDLmxpYnhsX3NjaGVk
+X3BhcmFtcykgKGVyciBlcnJvcikgewo+Cj4gIGZ1bmMgKHggKlZjcHVTY2hlZFBhcmFtcykgZnJv
+bUMoeGMgKkMubGlieGxfdmNwdV9zY2hlZF9wYXJhbXMpIGVycm9yIHsKPiAgICAgICAgIHguU2No
+ZWQgPSBTY2hlZHVsZXIoeGMuc2NoZWQpCj4gLSAgICAgICBudW1WY3B1cyA6PSBpbnQoeGMubnVt
+X3ZjcHVzKQo+IC0gICAgICAgY1ZjcHVzIDo9ICgqWzEgPDwgMjhdQy5saWJ4bF9zY2hlZF9wYXJh
+bXMpKHVuc2FmZS5Qb2ludGVyKHhjLnZjcHVzKSlbOm51bVZjcHVzOm51bVZjcHVzXQo+IC0gICAg
+ICAgeC5WY3B1cyA9IG1ha2UoW11TY2hlZFBhcmFtcywgbnVtVmNwdXMpCj4gLSAgICAgICBmb3Ig
+aSwgdiA6PSByYW5nZSBjVmNwdXMgewo+IC0gICAgICAgICAgICAgICBpZiBlcnIgOj0geC5WY3B1
+c1tpXS5mcm9tQygmdik7IGVyciAhPSBuaWwgewo+IC0gICAgICAgICAgICAgICAgICAgICAgIHJl
+dHVybiBlcnIKPiArICAgICAgIHguVmNwdXMgPSBuaWwKPiArICAgICAgIGlmIG51bVZjcHVzIDo9
+IGludCh4Yy5udW1fdmNwdXMpOyBudW1WY3B1cyA+IDAgewoKClNpbmNlIGBudW1YYCBpcyBub3cg
+c2NvcGVkIHRvIHRoaXMgaWYgYmxvY2ssIHdlIGNvdWxkIHByb2JhYmx5IGp1c3QKdXNlIGBuYCBv
+ciBzaW1pbGFyIGFuZCB0aGVuIGRyb3AgYGdvbGVudmFyYCBmcm9tCmB4ZW5saWdodF9nb2xhbmdf
+YXJyYXlfZnJvbUNgLiBJdCB3b3VsZCByZW1vdmUgc29tZSBwcmV0dHkgdWdseQp2YXJpYWJsZSBu
+YW1lcyBmcm9tIHRoZSBnZW5lcmF0ZWQgY29kZSA6KQoKLU5SCgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21h
+aWxtYW4vbGlzdGluZm8veGVuLWRldmVs
