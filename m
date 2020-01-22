@@ -6,46 +6,46 @@ X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEA5FC2D0DB
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 13:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 78A19C2D0DB
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 13:07:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 89F4524683
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 13:04:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89F4524683
+	by mail.kernel.org (Postfix) with ESMTPS id 52E192467A
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 13:07:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52E192467A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iuFgR-0007hO-AY; Wed, 22 Jan 2020 13:04:35 +0000
+	id 1iuFig-0007rG-Om; Wed, 22 Jan 2020 13:06:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=fyJD=3L=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1iuFgP-0007hE-Mv
- for xen-devel@lists.xenproject.org; Wed, 22 Jan 2020 13:04:33 +0000
-X-Inumbo-ID: b6b45a22-3d17-11ea-9fd7-bc764e2007e4
+ id 1iuFif-0007rA-Kk
+ for xen-devel@lists.xenproject.org; Wed, 22 Jan 2020 13:06:53 +0000
+X-Inumbo-ID: 0a0c9cfc-3d18-11ea-b833-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b6b45a22-3d17-11ea-9fd7-bc764e2007e4;
- Wed, 22 Jan 2020 13:04:25 +0000 (UTC)
+ id 0a0c9cfc-3d18-11ea-b833-bc764e2007e4;
+ Wed, 22 Jan 2020 13:06:45 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 7305CB2EE;
- Wed, 22 Jan 2020 13:04:24 +0000 (UTC)
-Message-ID: <c800457a3bf243c944e20f6a60883e94a3ea39f3.camel@suse.com>
+ by mx2.suse.de (Postfix) with ESMTP id 43A37AF65;
+ Wed, 22 Jan 2020 13:06:44 +0000 (UTC)
+Message-ID: <0961fa96db2c7e991a6117c989592efe16eb0ef5.camel@suse.com>
 From: Dario Faggioli <dfaggioli@suse.com>
 To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Date: Wed, 22 Jan 2020 14:04:23 +0100
-In-Reply-To: <20200108152328.27194-7-jgross@suse.com>
+Date: Wed, 22 Jan 2020 14:06:43 +0100
+In-Reply-To: <20200108152328.27194-5-jgross@suse.com>
 References: <20200108152328.27194-1-jgross@suse.com>
- <20200108152328.27194-7-jgross@suse.com>
+ <20200108152328.27194-5-jgross@suse.com>
 Organization: SUSE
 User-Agent: Evolution 3.34.3 
 MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH v2 6/9] xen/sched: replace null scheduler
- percpu-variable with pdata hook
+Subject: Re: [Xen-devel] [PATCH v2 4/9] xen/sched: remove special cases for
+ free cpus in schedulers
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,23 +57,25 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: George Dunlap <george.dunlap@eu.citrix.com>
-Content-Type: multipart/mixed; boundary="===============6240945965432777669=="
+Content-Type: multipart/mixed; boundary="===============0248318942723488356=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 
---===============6240945965432777669==
+--===============0248318942723488356==
 Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-hr3FJi15dtNRSpDVZeo2"
+	protocol="application/pgp-signature"; boundary="=-KGIsjrr1c6GsKuliE2n7"
 
 
---=-hr3FJi15dtNRSpDVZeo2
+--=-KGIsjrr1c6GsKuliE2n7
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 On Wed, 2020-01-08 at 16:23 +0100, Juergen Gross wrote:
-> Instead of having an own percpu-variable for private data per cpu the
-> generic scheduler interface for that purpose should be used.
+> With the idle scheduler now taking care of all cpus not in any
+> cpupool
+> the special cases in the other schedulers for no cpupool associated
+> can be removed.
 >=20
 > Signed-off-by: Juergen Gross <jgross@suse.com>
 >
@@ -89,33 +91,33 @@ SUSE Labs, SUSE https://www.suse.com/
 <<This happens because _I_ choose it to happen!>> (Raistlin Majere)
 
 
---=-hr3FJi15dtNRSpDVZeo2
+--=-KGIsjrr1c6GsKuliE2n7
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl4oSFcACgkQFkJ4iaW4
-c+5k0g//dywxkZOyO9GY2B/EDmId8QW7cWuclsfQCzDbRTYam/sBaw6ESuM0ZYj2
-1e7/RJdsl/OaBcW0z6xt7VvmJDcJK/2vBfW+ORJFux9fLhLnXjdId4MMzUBLoPTo
-gDw2KqnSCV4NTO17Ry0BisXC3dmpY7t3iJbiOY5Dim52I+5fvUPBTJ+A3rTxhh9t
-KNpKCaa9gbZ2qG1/hWmZmxJh38EjpsSK3odMY653iC+raWpzxEX1HxgxMtql2tkx
-mmcxkc/K63g3B0zc8YsYgwUos7GcWyt56h9oVxCHypWb000uQEkSBJEn5OHU4clJ
-IK604YYDHrWEphe4IPX8tmygW2nVJajdRX/IfVI24z6H/Q/bLRKi3P9CTcYjKDuf
-egWacQUlh8PImeR1Y2gLMfSbsLp+029HOJPx2c9wv4qg2QywkPTdLEGf5p7UWTin
-t74Q5TAGbON8Q0X8EW8+1EnYoW16JKW+y3R3DH/Ki1ltm4yhDlrmTMZhm1TUPy8C
-W1y/Kgu+/f6M9AdAo8q+rATjT7UGhH1sVadku6sPqQczRnECtN9S81LgSq28k/5E
-zZfRBcD9Dci8xh8jLz8lBg9IomsrsKZ3qZgpJgikK0+iP9ZG7NU/9DdTplQHqjUY
-kqW6JpxubGuk1kc3WOrkyyKVbuXNL5rlV/Tro/nv8nDLDF2ahB8=
-=U/yR
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl4oSOMACgkQFkJ4iaW4
+c+567w/9GuBDsS+on9jebYlB6qBsFhe2mI09dzJvg30v9557nXYNeCTB0QcShl5f
+KptS+pcgZawfXB4lOkMruCBgstyr/cX26Fy16vCB/FND34mAuc4EeG4VlWsVYAk6
+fRfNowZqsSXLriNvMARyCarP+WnyIEIvwjcYkn/EkyYsxRikuwcOLaxLD2K6hWR4
+rBqyu5bwv2CCBsZX3T4Ktzi3DB7F2xsBdKfb7UQQho6lTx5PGMnUSXjT2J7Bd98u
+v+j1LO5Ea6SlYYq+Mg8K4s7ifYG3WQtJIGZhiynYViCbbbqeGVoIN6q1gl0q+R6/
+rwe0IdAfHrzu6qp0K1UfzSoD1uP/mYJ2VI8Np6RdyxVsenYwX6W+kZTs+9xXnZZM
+Fhr6z8uDS/P2dBICqvAF5Dmm5jFN/7v+g5UY4aTGvQjdAveyMDxkdGOEMhOvGL07
+hvwgj1Z4/yDWso2UCS2HJKAVgd4dUtFrguRR4qRgoQTszF9CYB9le+GF5pFJ+zBb
+CZOlugVm+w8i0CYgpNzpvohIGYIUKz7w3sQIQQPjGQJbDsDjR0THprrh4LjP/q2v
+StTCIAKbSAkOVz93NNuoOykcHn9M2B1LzMAvV95yGutVgut2BAcaJALPf0M6LyWQ
+8x+aza/ZoCxaSh9hRrjAi6WinaYs8BkR6KGk2UWBKRKx5T7ZUmI=
+=hry5
 -----END PGP SIGNATURE-----
 
---=-hr3FJi15dtNRSpDVZeo2--
+--=-KGIsjrr1c6GsKuliE2n7--
 
 
 
---===============6240945965432777669==
+--===============0248318942723488356==
 Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: base64
@@ -125,6 +127,6 @@ X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
 IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
 cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
 
---===============6240945965432777669==--
+--===============0248318942723488356==--
 
 
