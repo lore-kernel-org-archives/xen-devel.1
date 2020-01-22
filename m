@@ -2,62 +2,81 @@ Return-Path: <SRS0=k60x=3L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F09F5C33CAF
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 18:57:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AF058C2D0DB
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 19:01:51 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D543E21835
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 18:57:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D543E21835
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 8235121835
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Jan 2020 19:01:51 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="gzWYM3gY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8235121835
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=invisiblethingslab.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iuLBc-0006sE-Np; Wed, 22 Jan 2020 18:57:08 +0000
+	id 1iuLFz-0007is-Tw; Wed, 22 Jan 2020 19:01:39 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=croL=3L=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1iuLBb-0006s9-VA
- for xen-devel@lists.xenproject.org; Wed, 22 Jan 2020 18:57:07 +0000
-X-Inumbo-ID: fc0571fc-3d48-11ea-bd21-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=1mKO=3L=invisiblethingslab.com=marmarek@srs-us1.protection.inumbo.net>)
+ id 1iuLFy-0007if-0i
+ for xen-devel@lists.xenproject.org; Wed, 22 Jan 2020 19:01:38 +0000
+X-Inumbo-ID: 9d907cba-3d49-11ea-bd26-12813bfff9fa
+Received: from out2-smtp.messagingengine.com (unknown [66.111.4.26])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fc0571fc-3d48-11ea-bd21-12813bfff9fa;
- Wed, 22 Jan 2020 18:57:06 +0000 (UTC)
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1iuLBa-0002tc-2I; Wed, 22 Jan 2020 18:57:06 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1iuLBZ-0004HN-KS; Wed, 22 Jan 2020 18:57:05 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1iuLBZ-000554-Ji; Wed, 22 Jan 2020 18:57:05 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-146390-mainreport@xen.org>
+ id 9d907cba-3d49-11ea-bd26-12813bfff9fa;
+ Wed, 22 Jan 2020 19:01:37 +0000 (UTC)
+Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
+ by mailout.nyi.internal (Postfix) with ESMTP id 3980921F32;
+ Wed, 22 Jan 2020 14:01:37 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute7.internal (MEProxy); Wed, 22 Jan 2020 14:01:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=d2SCTo
+ SZ+AaILyV5qnSuvtP7+pT5cBDCjvL3lDjWHio=; b=gzWYM3gYuJUVg7BSTl1i/m
+ M7OrKezm011qFFcguxOZokEp5CTD53QAJPnWXu3MvbIycBmX6GiT8I+QD4xVPKpm
+ 5pswJLHkFLsqESV1fAJyz6NU6RN05gOcUzzq0c8L4Wvozbb98AYRpNBMoEZ254H7
+ s+fH7qRErbaRtP2HKTeqIbpwc1N612J/pGkyw47vSg/o0KLApo5iWwtZoHzqIf8J
+ dE2kmrN4GpLLt+3KGojR2q5HH1MpQhxCDX84YGuzUiOt6KbWB0DFgJyE7lf5/5sH
+ q5Q+CBOUklOT/t5QMJ/p/CnqjKXySS/kOaTh2VWSUwMS8TMzmZBxTl0RqogSiHbg
+ ==
+X-ME-Sender: <xms:EZwoXiJ5mGApElmCfOXsK4Jcg8QTjAVXFfMxy-hY67wGdKfqZwUfpA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrvddtgdduudegucetufdoteggodetrfdotf
+ fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+ uceurghilhhouhhtmecufedttdenucenucfjughrpeffhffvuffkfhggtggujgesghdtre
+ ertddtjeenucfhrhhomhepofgrrhgvkhcuofgrrhgtiiihkhhofihskhhiqdfikphrvggt
+ khhiuceomhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhihhnghhslhgrsgdrtghomh
+ eqnecukfhppeeluddrieehrdefgedrfeefnecuvehluhhsthgvrhfuihiivgeptdenucfr
+ rghrrghmpehmrghilhhfrhhomhepmhgrrhhmrghrvghksehinhhvihhsihgslhgvthhhih
+ hnghhslhgrsgdrtghomh
+X-ME-Proxy: <xmx:EZwoXnll8pe5VKdr8x4ZHET8HyfcAhRai99rOSaMl3C2ZEzeMPKscg>
+ <xmx:EZwoXiqmPBH_634y6hTNIOZGrPcwO55ZSps8MltTq6lJZAQOXkBq9A>
+ <xmx:EZwoXpAUGdmBYGXLHg-2SuU2PJ2Ur7pV4Sj8KmJw6OQnspSx4pVcJQ>
+ <xmx:EZwoXhVHbHk7_xGJSm1K3XzLRgUPYRAJRSN45kjKQSKs6_4mUkDiRA>
+Received: from mail-itl (ip5b412221.dynamic.kabel-deutschland.de [91.65.34.33])
+ by mail.messagingengine.com (Postfix) with ESMTPA id 9D89C328005E;
+ Wed, 22 Jan 2020 14:01:36 -0500 (EST)
+Date: Wed, 22 Jan 2020 20:01:33 +0100
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
+To: tosher 1 <akm2tosher@yahoo.com>
+Message-ID: <20200122190133.GS2507@mail-itl>
+References: <1284035258.1445298.1579543677315.ref@mail.yahoo.com>
+ <1284035258.1445298.1579543677315@mail.yahoo.com>
+ <20200122012713.GB2995@mail-itl>
+ <1699773700.2581218.1579712175340@mail.yahoo.com>
 MIME-Version: 1.0
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=a4d457fd59f4ebfb524aec82cb6a3030087914ca
-X-Osstest-Versions-That: xen=f44a192d22a37dcb9171b95978b43637bc09718d
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 22 Jan 2020 18:57:05 +0000
-Subject: [Xen-devel] [xen-unstable-smoke test] 146390: tolerable all pass -
- PUSHED
+In-Reply-To: <1699773700.2581218.1579712175340@mail.yahoo.com>
+Subject: Re: [Xen-devel] HVM Driver Domain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,53 +87,119 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Xen-devel <xen-devel@lists.xenproject.org>
+Content-Type: multipart/mixed; boundary="===============7834300344077687078=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-ZmxpZ2h0IDE0NjM5MCB4ZW4tdW5zdGFibGUtc21va2UgcmVhbCBbcmVhbF0KaHR0cDovL2xvZ3Mu
-dGVzdC1sYWIueGVucHJvamVjdC5vcmcvb3NzdGVzdC9sb2dzLzE0NjM5MC8KCkZhaWx1cmVzIDot
-LyBidXQgbm8gcmVncmVzc2lvbnMuCgpUZXN0cyB3aGljaCBkaWQgbm90IHN1Y2NlZWQsIGJ1dCBh
-cmUgbm90IGJsb2NraW5nOgogdGVzdC1hbWQ2NC1hbWQ2NC1saWJ2aXJ0ICAgICAxMyBtaWdyYXRl
-LXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0LWFybTY0LWFybTY0
-LXhsLXhzbSAgICAgIDEzIG1pZ3JhdGUtc3VwcG9ydC1jaGVjayAgICAgICAgZmFpbCAgIG5ldmVy
-IHBhc3MKIHRlc3QtYXJtNjQtYXJtNjQteGwteHNtICAgICAgMTQgc2F2ZXJlc3RvcmUtc3VwcG9y
-dC1jaGVjayAgICBmYWlsICAgbmV2ZXIgcGFzcwogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAg
-ICAxMyBtaWdyYXRlLXN1cHBvcnQtY2hlY2sgICAgICAgIGZhaWwgICBuZXZlciBwYXNzCiB0ZXN0
-LWFybWhmLWFybWhmLXhsICAgICAgICAgIDE0IHNhdmVyZXN0b3JlLXN1cHBvcnQtY2hlY2sgICAg
-ZmFpbCAgIG5ldmVyIHBhc3MKCnZlcnNpb24gdGFyZ2V0ZWQgZm9yIHRlc3Rpbmc6CiB4ZW4gICAg
-ICAgICAgICAgICAgICBhNGQ0NTdmZDU5ZjRlYmZiNTI0YWVjODJjYjZhMzAzMDA4NzkxNGNhCmJh
-c2VsaW5lIHZlcnNpb246CiB4ZW4gICAgICAgICAgICAgICAgICBmNDRhMTkyZDIyYTM3ZGNiOTE3
-MWI5NTk3OGI0MzYzN2JjMDk3MThkCgpMYXN0IHRlc3Qgb2YgYmFzaXMgICAxNDYzNjcgIDIwMjAt
-MDEtMjEgMjI6MDE6MTAgWiAgICAwIGRheXMKVGVzdGluZyBzYW1lIHNpbmNlICAgMTQ2MzkwICAy
-MDIwLTAxLTIyIDE2OjAwOjI1IFogICAgMCBkYXlzICAgIDEgYXR0ZW1wdHMKCi0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpQZW9wbGUg
-d2hvIHRvdWNoZWQgcmV2aXNpb25zIHVuZGVyIHRlc3Q6CiAgSmFuIEJldWxpY2ggPGpiZXVsaWNo
-QHN1c2UuY29tPgogIFJvZ2VyIFBhdSBNb25uw6kgPHJvZ2VyLnBhdUBjaXRyaXguY29tPgoKam9i
-czoKIGJ1aWxkLWFybTY0LXhzbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBwYXNzICAgIAogYnVpbGQtYW1kNjQgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAgCiBidWlsZC1hcm1oZiAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIGJ1aWxkLWFtZDY0
-LWxpYnZpcnQgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYXNzICAg
-IAogdGVzdC1hcm1oZi1hcm1oZi14bCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHBhc3MgICAgCiB0ZXN0LWFybTY0LWFybTY0LXhsLXhzbSAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgcGFzcyAgICAKIHRlc3QtYW1kNjQtYW1kNjQteGwtcWVtdXUt
-ZGViaWFuaHZtLWFtZDY0ICAgICAgICAgICAgICAgICAgICBwYXNzICAgIAogdGVzdC1hbWQ2NC1h
-bWQ2NC1saWJ2aXJ0ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBhc3MgICAg
-CgoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tCnNnLXJlcG9ydC1mbGlnaHQgb24gb3NzdGVzdC50ZXN0LWxhYi54ZW5wcm9qZWN0Lm9y
-Zwpsb2dzOiAvaG9tZS9sb2dzL2xvZ3MKaW1hZ2VzOiAvaG9tZS9sb2dzL2ltYWdlcwoKTG9ncywg
-Y29uZmlnIGZpbGVzLCBldGMuIGFyZSBhdmFpbGFibGUgYXQKICAgIGh0dHA6Ly9sb2dzLnRlc3Qt
-bGFiLnhlbnByb2plY3Qub3JnL29zc3Rlc3QvbG9ncwoKRXhwbGFuYXRpb24gb2YgdGhlc2UgcmVw
-b3J0cywgYW5kIG9mIG9zc3Rlc3QgaW4gZ2VuZXJhbCwgaXMgYXQKICAgIGh0dHA6Ly94ZW5iaXRz
-Lnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9YmxvYjtmPVJFQURNRS5lbWFpbDtoYj1t
-YXN0ZXIKICAgIGh0dHA6Ly94ZW5iaXRzLnhlbi5vcmcvZ2l0d2ViLz9wPW9zc3Rlc3QuZ2l0O2E9
-YmxvYjtmPVJFQURNRTtoYj1tYXN0ZXIKClRlc3QgaGFybmVzcyBjb2RlIGNhbiBiZSBmb3VuZCBh
-dAogICAgaHR0cDovL3hlbmJpdHMueGVuLm9yZy9naXR3ZWI/cD1vc3N0ZXN0LmdpdDthPXN1bW1h
-cnkKCgpQdXNoaW5nIHJldmlzaW9uIDoKClRvIHhlbmJpdHMueGVuLm9yZzovaG9tZS94ZW4vZ2l0
-L3hlbi5naXQKICAgZjQ0YTE5MmQyMi4uYTRkNDU3ZmQ1OSAgYTRkNDU3ZmQ1OWY0ZWJmYjUyNGFl
-YzgyY2I2YTMwMzAwODc5MTRjYSAtPiBzbW9rZQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7834300344077687078==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="AonAANj1daC6QcQu"
+Content-Disposition: inline
+
+
+--AonAANj1daC6QcQu
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Xen-devel] HVM Driver Domain
+
+On Wed, Jan 22, 2020 at 04:56:15PM +0000, tosher 1 wrote:
+> Hi Marek,
+>=20
+> Thanks for your response. The server machine I am using for this setup is=
+ an x86_64 Intel Xeon. For the Dom0, I am using Ubuntu 18.04 running on ker=
+nel version 5.0.0-37-generic. My Xen version is 4.9.2.=20
+>=20
+> For the HVM driver domain, I am using Ubuntu 18.04 running on kernel vers=
+ion 5.0.0-23-generic. I am doing a NIC PCI passthrough to this domain. The =
+Xen config file for this domain looks like the following.
+>=20
+> builder =3D "hvm"
+> name =3D "ubuntu-doment-hvm"
+> memory =3D "2048"
+> pci =3D [ '01:00.0,permissive=3D1' ]
+> vcpus =3D 1
+> disk =3D ['phy:/dev/vg/ubuntu-hvm,hda,w']
+> vnc =3D 1
+> boot=3D"c"
+>=20
+> I have installed xen-tools of version 4.7 in this driver domain so that t=
+he vif-scirpts work. The network configuration here looks like the followin=
+g where ens5f0 is the interface name for the NIC I did passthrough.
+>=20
+> auto lo
+> iface lo inet loopback
+>=20
+> iface ens5f0 inet manual
+>=20
+> auto xenbr1
+> iface xenbr1 inet static
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bridge_ports ens5f0
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 address 192.168.1.3
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 netmask 255.255.255.0
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 gateway 192.168.1.1
+
+Probably irrelevant at this stage, but do you have "xendriverdomain"
+service running in the backend?
+
+> The Xen config file content for the DomU is as the following.
+>=20
+> name =3D "ubuntu_on_ubuntu"
+> bootloader =3D "/usr/lib/xen-4.9/bin/pygrub"
+> memory =3D 1024
+> vcpus =3D 1
+> vif =3D [ 'backend=3Dubuntu-domnet-hvm,bridge=3Dxenbr1' ]
+> disk =3D [ '/dev/vg/lv_vm_ubuntu_guest,raw,xvda,rw' ]
+>=20
+> When I try to launch this DomU, I get the following error.
+>=20
+> libxl: error: libxl_nic.c:652:libxl__device_nic_set_devids: Domain 31:Una=
+ble to set nic defaults for nic 0.
+
+I don't see what is wrong here. Are you sure the backend domain is
+running?
+
+> Are these configurations basically very different for what you do for Qub=
+es? Please let me know your thoughts.
+
+Looks similar, although we do that through libvirt.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+A: Because it messes up the order in which people normally read text.
+Q: Why is top-posting such a bad thing?
+
+--AonAANj1daC6QcQu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAl4onA0ACgkQ24/THMrX
+1yz3hwf/VmeNCmqa/RcbMWj2A+3aH8UGlk92qBsKPNfBzTR06tjlYSPxa+E47uFs
+lK7fYNHMzXS0zIHBC0hQf5/oQlGYlRNf/UViIfO4MIhMZ5u4DHpU50rcdkEm1c5a
+SWMcxebwXuovkNH3gnJoVhU28aYgbbNa9bOrdwyzRm0Gq4hlRgaxuYJjxOpyPymF
+FvektAxcTBx1ZcJXn+6eDT0p51/mJNYTf5byAinK6sDMPUFd2uiObkALV0OHYkvu
+3Hp0c8YQei6FRvd4MENaVoc/oyIyyqRswrjvZIjw40OnxNXrOFcjtFuZoL6NMwNf
+rxgM4TAOG4zH7W1/gDGsjsCnkBWLyA==
+=K8bw
+-----END PGP SIGNATURE-----
+
+--AonAANj1daC6QcQu--
+
+
+--===============7834300344077687078==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============7834300344077687078==--
+
