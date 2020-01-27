@@ -2,53 +2,76 @@ Return-Path: <SRS0=EHzT=3Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BF59C2D0DB
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2020 18:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B44C3C2D0DB
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2020 18:42:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 06E2A2467F
-	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2020 18:35:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 06E2A2467F
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8E30E214D8
+	for <xen-devel@archiver.kernel.org>; Mon, 27 Jan 2020 18:42:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E30E214D8
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.de
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iw9Dl-0002Jk-CA; Mon, 27 Jan 2020 18:34:49 +0000
+	id 1iw9LI-0003dZ-AM; Mon, 27 Jan 2020 18:42:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=5jYl=3Q=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
- id 1iw9Dk-0002Iq-4E
- for xen-devel@lists.xenproject.org; Mon, 27 Jan 2020 18:34:48 +0000
-X-Inumbo-ID: a0644668-4133-11ea-b45d-bc764e2007e4
-Received: from mga07.intel.com (unknown [134.134.136.100])
+ <SRS0=6bwx=3Q=suse.de=tzimmermann@srs-us1.protection.inumbo.net>)
+ id 1iw9LG-0003dU-Qi
+ for xen-devel@lists.xenproject.org; Mon, 27 Jan 2020 18:42:34 +0000
+X-Inumbo-ID: c7cc0046-4134-11ea-acc1-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a0644668-4133-11ea-b45d-bc764e2007e4;
- Mon, 27 Jan 2020 18:34:17 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
- 27 Jan 2020 10:06:50 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,370,1574150400"; d="scan'208";a="231562399"
-Received: from tlengyel-mobl2.amr.corp.intel.com (HELO localhost.localdomain)
- ([10.254.183.124])
- by orsmga006.jf.intel.com with ESMTP; 27 Jan 2020 10:06:49 -0800
-From: Tamas K Lengyel <tamas.lengyel@intel.com>
-To: xen-devel@lists.xenproject.org
-Date: Mon, 27 Jan 2020 10:06:36 -0800
-Message-Id: <de8e30d7bdc25e509f7da0affc9c77f8c1a49599.1580148227.git.tamas.lengyel@intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1580148227.git.tamas.lengyel@intel.com>
-References: <cover.1580148227.git.tamas.lengyel@intel.com>
+ id c7cc0046-4134-11ea-acc1-bc764e2007e4;
+ Mon, 27 Jan 2020 18:42:33 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 097A7B13C;
+ Mon, 27 Jan 2020 18:42:31 +0000 (UTC)
+To: Emil Velikov <emil.l.velikov@gmail.com>
+References: <20200123092123.28368-1-tzimmermann@suse.de>
+ <20200123092123.28368-2-tzimmermann@suse.de>
+ <CACvgo53YvKjPNNshZoTjJehHyOX6e05kJ5gAXtjwxs+oLLv7vw@mail.gmail.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ mQENBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAG0J1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPokBVAQTAQgAPhYh
+ BHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsDBQkDwmcABQsJCAcCBhUKCQgLAgQWAgMB
+ Ah4BAheAAAoJEGgNwR1TC3ojR80H/jH+vYavwQ+TvO8ksXL9JQWc3IFSiGpuSVXLCdg62AmR
+ irxW+qCwNncNQyb9rd30gzdectSkPWL3KSqEResBe24IbA5/jSkPweJasgXtfhuyoeCJ6PXo
+ clQQGKIoFIAEv1s8l0ggPZswvCinegl1diyJXUXmdEJRTWYAtxn/atut1o6Giv6D2qmYbXN7
+ mneMC5MzlLaJKUtoH7U/IjVw1sx2qtxAZGKVm4RZxPnMCp9E1MAr5t4dP5gJCIiqsdrVqI6i
+ KupZstMxstPU//azmz7ZWWxT0JzgJqZSvPYx/SATeexTYBP47YFyri4jnsty2ErS91E6H8os
+ Bv6pnSn7eAq5AQ0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRH
+ UE9eosYbT6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgT
+ RjP+qbU63Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+R
+ dhgATnWWGKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zb
+ ehDda8lvhFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r
+ 12+lqdsAEQEAAYkBPAQYAQgAJhYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJbOdLgAhsMBQkD
+ wmcAAAoJEGgNwR1TC3ojpfcIAInwP5OlcEKokTnHCiDTz4Ony4GnHRP2fXATQZCKxmu4AJY2
+ h9ifw9Nf2TjCZ6AMvC3thAN0rFDj55N9l4s1CpaDo4J+0fkrHuyNacnT206CeJV1E7NYntxU
+ n+LSiRrOdywn6erjxRi9EYTVLCHcDhBEjKmFZfg4AM4GZMWX1lg0+eHbd5oL1as28WvvI/uI
+ aMyV8RbyXot1r/8QLlWldU3NrTF5p7TMU2y3ZH2mf5suSKHAMtbE4jKJ8ZHFOo3GhLgjVrBW
+ HE9JXO08xKkgD+w6v83+nomsEuf6C6LYrqY/tsZvyEX6zN8CtirPdPWu/VXNRYAl/lat7lSI
+ 3H26qrE=
+Message-ID: <183782e6-164c-bae8-90e0-906edb059a1d@suse.de>
+Date: Mon, 27 Jan 2020 19:42:27 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH v6 8/9] x86/mem_sharing: reset a fork
+In-Reply-To: <CACvgo53YvKjPNNshZoTjJehHyOX6e05kJ5gAXtjwxs+oLLv7vw@mail.gmail.com>
+Subject: Re: [Xen-devel] [PATCH v4 01/15] drm: Initialize struct
+ drm_crtc_state.no_vblank from device settings
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,82 +82,184 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Tamas K Lengyel <tamas.lengyel@intel.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: david@lechnology.com, oleksandr_andrushchenko@epam.com,
+ Dave Airlie <airlied@linux.ie>, Sam Ravnborg <sam@ravnborg.org>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ Hans de Goede <hdegoede@redhat.com>,
+ =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ xen-devel@lists.xenproject.org, Emil Velikov <emil.velikov@collabora.com>,
+ Sean Paul <sean@poorly.run>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Content-Type: multipart/mixed; boundary="===============4485625997998440008=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SW1wbGVtZW50IGh5cGVyY2FsbCB0aGF0IGFsbG93cyBhIGZvcmsgdG8gc2hlZCBhbGwgbWVtb3J5
-IHRoYXQgZ290IGFsbG9jYXRlZApmb3IgaXQgZHVyaW5nIGl0cyBleGVjdXRpb24gYW5kIHJlLWxv
-YWQgaXRzIHZDUFUgY29udGV4dCBmcm9tIHRoZSBwYXJlbnQgVk0uClRoaXMgYWxsb3dzIHRoZSBm
-b3JrZWQgVk0gdG8gcmVzZXQgaW50byB0aGUgc2FtZSBzdGF0ZSB0aGUgcGFyZW50IFZNIGlzIGlu
-IGEKZmFzdGVyIHdheSB0aGVuIGNyZWF0aW5nIGEgbmV3IGZvcmsgd291bGQgYmUuIE1lYXN1cmVt
-ZW50cyBzaG93IGFib3V0IGEgMngKc3BlZWR1cCBkdXJpbmcgbm9ybWFsIGZ1enppbmcgb3BlcmF0
-aW9ucy4gUGVyZm9ybWFuY2UgbWF5IHZhcnkgZGVwZW5kaW5nIGhvdwptdWNoIG1lbW9yeSBnb3Qg
-YWxsb2NhdGVkIGZvciB0aGUgZm9ya2VkIFZNLiBJZiBpdCBoYXMgYmVlbiBjb21wbGV0ZWx5CmRl
-ZHVwbGljYXRlZCBmcm9tIHRoZSBwYXJlbnQgVk0gdGhlbiBjcmVhdGluZyBhIG5ldyBmb3JrIHdv
-dWxkIGxpa2VseSBiZSBtb3JlCnBlcmZvcm1hbnQuCgpTaWduZWQtb2ZmLWJ5OiBUYW1hcyBLIExl
-bmd5ZWwgPHRhbWFzLmxlbmd5ZWxAaW50ZWwuY29tPgotLS0KIHhlbi9hcmNoL3g4Ni9tbS9tZW1f
-c2hhcmluZy5jIHwgNzYgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysKIHhlbi9p
-bmNsdWRlL3B1YmxpYy9tZW1vcnkuaCAgIHwgIDEgKwogMiBmaWxlcyBjaGFuZ2VkLCA3NyBpbnNl
-cnRpb25zKCspCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L21tL21lbV9zaGFyaW5nLmMgYi94
-ZW4vYXJjaC94ODYvbW0vbWVtX3NoYXJpbmcuYwppbmRleCBiNmJlNzg0ODZkLi44ODU0OWRiN2Iy
-IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvbW0vbWVtX3NoYXJpbmcuYworKysgYi94ZW4vYXJj
-aC94ODYvbW0vbWVtX3NoYXJpbmcuYwpAQCAtMTYxMyw2ICsxNjEzLDU5IEBAIHN0YXRpYyBpbnQg
-bWVtX3NoYXJpbmdfZm9yayhzdHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3QgZG9tYWluICpjZCkKICAg
-ICByZXR1cm4gcmM7CiB9CiAKKy8qCisgKiBUaGUgZm9yayByZXNldCBvcGVyYXRpb24gaXMgaW50
-ZW5kZWQgdG8gYmUgdXNlZCBvbiBzaG9ydC1saXZlZCBmb3JrcyBvbmx5LgorICogVGhlcmUgaXMg
-bm8gaHlwZXJjYWxsIGNvbnRpbnVhdGlvbiBvcGVyYXRpb24gaW1wbGVtZW50ZWQgZm9yIHRoaXMg
-cmVhc29uLgorICogRm9yIGZvcmtzIHRoYXQgb2J0YWluIGEgbGFyZ2VyIG1lbW9yeSBmb290cHJp
-bnQgaXQgaXMgbGlrZWx5IGdvaW5nIHRvIGJlCisgKiBtb3JlIHBlcmZvcm1hbnQgdG8gY3JlYXRl
-IGEgbmV3IGZvcmsgaW5zdGVhZCBvZiByZXNldHRpbmcgYW4gZXhpc3Rpbmcgb25lLgorICoKKyAq
-IFRPRE86IEluIGNhc2UgdGhpcyBoeXBlcmNhbGwgd291bGQgYmVjb21lIHVzZWZ1bCBvbiBmb3Jr
-cyB3aXRoIGxhcmdlciBtZW1vcnkKKyAqIGZvb3RwcmludHMgdGhlIGh5cGVyY2FsbCBjb250aW51
-YXRpb24gc2hvdWxkIGJlIGltcGxlbWVudGVkLgorICovCitzdGF0aWMgaW50IG1lbV9zaGFyaW5n
-X2ZvcmtfcmVzZXQoc3RydWN0IGRvbWFpbiAqZCwgc3RydWN0IGRvbWFpbiAqY2QpCit7CisgICAg
-aW50IHJjOworICAgIHN0cnVjdCBwMm1fZG9tYWluKiBwMm0gPSBwMm1fZ2V0X2hvc3RwMm0oY2Qp
-OworICAgIHN0cnVjdCBwYWdlX2luZm8gKnBhZ2UsICp0bXA7CisKKyAgICBkb21haW5fcGF1c2Uo
-Y2QpOworCisgICAgcGFnZV9saXN0X2Zvcl9lYWNoX3NhZmUocGFnZSwgdG1wLCAmY2QtPnBhZ2Vf
-bGlzdCkKKyAgICB7CisgICAgICAgIHAybV90eXBlX3QgcDJtdDsKKyAgICAgICAgcDJtX2FjY2Vz
-c190IHAybWE7CisgICAgICAgIGdmbl90IGdmbjsKKyAgICAgICAgbWZuX3QgbWZuID0gcGFnZV90
-b19tZm4ocGFnZSk7CisKKyAgICAgICAgaWYgKCAhbWZuX3ZhbGlkKG1mbikgKQorICAgICAgICAg
-ICAgY29udGludWU7CisKKyAgICAgICAgZ2ZuID0gbWZuX3RvX2dmbihjZCwgbWZuKTsKKyAgICAg
-ICAgbWZuID0gX19nZXRfZ2ZuX3R5cGVfYWNjZXNzKHAybSwgZ2ZuX3goZ2ZuKSwgJnAybXQsICZw
-Mm1hLAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgMCwgTlVMTCwgZmFsc2Up
-OworCisgICAgICAgIGlmICggIXAybV9pc19yYW0ocDJtdCkgfHwgcDJtX2lzX3NoYXJlZChwMm10
-KSApCisgICAgICAgICAgICBjb250aW51ZTsKKworICAgICAgICAvKiB0YWtlIGFuIGV4dHJhIHJl
-ZmVyZW5jZSAqLworICAgICAgICBpZiAoICFnZXRfcGFnZShwYWdlLCBjZCkgKQorICAgICAgICAg
-ICAgY29udGludWU7CisKKyAgICAgICAgcmMgPSBwMm0tPnNldF9lbnRyeShwMm0sIGdmbiwgSU5W
-QUxJRF9NRk4sIFBBR0VfT1JERVJfNEssCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgcDJt
-X2ludmFsaWQsIHAybV9hY2Nlc3Nfcnd4LCAtMSk7CisgICAgICAgIEFTU0VSVCghcmMpOworCisg
-ICAgICAgIHB1dF9wYWdlX2FsbG9jX3JlZihwYWdlKTsKKyAgICAgICAgcHV0X3BhZ2UocGFnZSk7
-CisgICAgfQorCisgICAgaWYgKCAhKHJjID0gaHZtX2NvcHlfY29udGV4dF9hbmRfcGFyYW1zKGQs
-IGNkKSkgKQorICAgICAgICBmb3JrX3RzYyhkLCBjZCk7CisKKyAgICBkb21haW5fdW5wYXVzZShj
-ZCk7CisgICAgcmV0dXJuIHJjOworfQorCiBpbnQgbWVtX3NoYXJpbmdfbWVtb3AoWEVOX0dVRVNU
-X0hBTkRMRV9QQVJBTSh4ZW5fbWVtX3NoYXJpbmdfb3BfdCkgYXJnKQogewogICAgIGludCByYzsK
-QEAgLTE4OTcsNiArMTk1MCwyOSBAQCBpbnQgbWVtX3NoYXJpbmdfbWVtb3AoWEVOX0dVRVNUX0hB
-TkRMRV9QQVJBTSh4ZW5fbWVtX3NoYXJpbmdfb3BfdCkgYXJnKQogICAgICAgICBicmVhazsKICAg
-ICB9CiAKKyAgICBjYXNlIFhFTk1FTV9zaGFyaW5nX29wX2ZvcmtfcmVzZXQ6CisgICAgeworICAg
-ICAgICBzdHJ1Y3QgZG9tYWluICpwZDsKKworICAgICAgICByYyA9IC1FSU5WQUw7CisgICAgICAg
-IGlmICggbXNvLnUuZm9yay5fcGFkWzBdIHx8IG1zby51LmZvcmsuX3BhZFsxXSB8fAorICAgICAg
-ICAgICAgIG1zby51LmZvcmsuX3BhZFsyXSApCisgICAgICAgICAgICBnb3RvIG91dDsKKworICAg
-ICAgICByYyA9IC1FTk9TWVM7CisgICAgICAgIGlmICggIWQtPnBhcmVudCApCisgICAgICAgICAg
-ICBnb3RvIG91dDsKKworICAgICAgICByYyA9IHJjdV9sb2NrX2xpdmVfcmVtb3RlX2RvbWFpbl9i
-eV9pZChkLT5wYXJlbnQtPmRvbWFpbl9pZCwgJnBkKTsKKyAgICAgICAgaWYgKCByYyApCisgICAg
-ICAgICAgICBnb3RvIG91dDsKKworICAgICAgICByYyA9IG1lbV9zaGFyaW5nX2ZvcmtfcmVzZXQo
-cGQsIGQpOworCisgICAgICAgIHJjdV91bmxvY2tfZG9tYWluKHBkKTsKKyAgICAgICAgYnJlYWs7
-CisgICAgfQorCiAgICAgZGVmYXVsdDoKICAgICAgICAgcmMgPSAtRU5PU1lTOwogICAgICAgICBi
-cmVhazsKZGlmZiAtLWdpdCBhL3hlbi9pbmNsdWRlL3B1YmxpYy9tZW1vcnkuaCBiL3hlbi9pbmNs
-dWRlL3B1YmxpYy9tZW1vcnkuaAppbmRleCA5MGEzZjQ0OThlLi5lM2QwNjNlMjJlIDEwMDY0NAot
-LS0gYS94ZW4vaW5jbHVkZS9wdWJsaWMvbWVtb3J5LmgKKysrIGIveGVuL2luY2x1ZGUvcHVibGlj
-L21lbW9yeS5oCkBAIC00ODMsNiArNDgzLDcgQEAgREVGSU5FX1hFTl9HVUVTVF9IQU5ETEUoeGVu
-X21lbV9hY2Nlc3Nfb3BfdCk7CiAjZGVmaW5lIFhFTk1FTV9zaGFyaW5nX29wX2F1ZGl0ICAgICAg
-ICAgICAgIDcKICNkZWZpbmUgWEVOTUVNX3NoYXJpbmdfb3BfcmFuZ2Vfc2hhcmUgICAgICAgOAog
-I2RlZmluZSBYRU5NRU1fc2hhcmluZ19vcF9mb3JrICAgICAgICAgICAgICA5CisjZGVmaW5lIFhF
-Tk1FTV9zaGFyaW5nX29wX2ZvcmtfcmVzZXQgICAgICAgIDEwCiAKICNkZWZpbmUgWEVOTUVNX1NI
-QVJJTkdfT1BfU19IQU5ETEVfSU5WQUxJRCAgKC0xMCkKICNkZWZpbmUgWEVOTUVNX1NIQVJJTkdf
-T1BfQ19IQU5ETEVfSU5WQUxJRCAgKC05KQotLSAKMi4yMC4xCgoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4t
-ZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4485625997998440008==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="xOxj5EAc8eozWsu9aetd70iPvMav8MAEx"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--xOxj5EAc8eozWsu9aetd70iPvMav8MAEx
+Content-Type: multipart/mixed; boundary="plrgK2rFyOclW2N2pxB9OddQThC5DZIA4";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Emil Velikov <emil.l.velikov@gmail.com>
+Cc: Dave Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
+ david@lechnology.com, =?UTF-8?Q?Noralf_Tr=c3=b8nnes?= <noralf@tronnes.org>,
+ Sean Paul <sean@poorly.run>, oleksandr_andrushchenko@epam.com,
+ Sam Ravnborg <sam@ravnborg.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Emil Velikov <emil.velikov@collabora.com>, xen-devel@lists.xenproject.org,
+ ML dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>
+Message-ID: <183782e6-164c-bae8-90e0-906edb059a1d@suse.de>
+Subject: Re: [PATCH v4 01/15] drm: Initialize struct drm_crtc_state.no_vblank
+ from device settings
+References: <20200123092123.28368-1-tzimmermann@suse.de>
+ <20200123092123.28368-2-tzimmermann@suse.de>
+ <CACvgo53YvKjPNNshZoTjJehHyOX6e05kJ5gAXtjwxs+oLLv7vw@mail.gmail.com>
+In-Reply-To: <CACvgo53YvKjPNNshZoTjJehHyOX6e05kJ5gAXtjwxs+oLLv7vw@mail.gmail.com>
+
+--plrgK2rFyOclW2N2pxB9OddQThC5DZIA4
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+
+Hi Emil
+
+Am 27.01.20 um 19:12 schrieb Emil Velikov:
+> Hi Thomas,
+>=20
+> On Thu, 23 Jan 2020 at 09:21, Thomas Zimmermann <tzimmermann@suse.de> w=
+rote:
+>=20
+>> @@ -174,12 +174,22 @@ struct drm_crtc_state {
+>>          * @no_vblank:
+>>          *
+>>          * Reflects the ability of a CRTC to send VBLANK events. This =
+state
+>> -        * usually depends on the pipeline configuration, and the main=
+ usuage
+>> -        * is CRTCs feeding a writeback connector operating in oneshot=
+ mode.
+>> -        * In this case the VBLANK event is only generated when a job =
+is queued
+>> -        * to the writeback connector, and we want the core to fake VB=
+LANK
+>> -        * events when this part of the pipeline hasn't changed but ot=
+hers had
+>> -        * or when the CRTC and connectors are being disabled.
+>> +        * usually depends on the pipeline configuration. If set to tr=
+ue, DRM
+>> +        * atomic helpers will sendout a fake VBLANK event during disp=
+lay
+>> +        * updates.
+>> +        *
+>> +        * One usage is for drivers and/or hardware without support fo=
+r VBLANK
+>> +        * interrupts. Such drivers typically do not initialize vblank=
+ing
+>> +        * (i.e., call drm_vblank_init() wit the number of CRTCs). For=
+ CRTCs
+>> +        * without initialized vblanking, the field is initialized to =
+true and
+>> +        * a VBLANK event will be send out on each update of the displ=
+ay
+>> +        * pipeline.
+>> +        *
+>> +        * Another usage is CRTCs feeding a writeback connector operat=
+ing in
+>> +        * oneshot mode. In this case the VBLANK event is only generat=
+ed when
+>> +        * a job is queued to the writeback connector, and we want the=
+ core
+>> +        * to fake VBLANK events when this part of the pipeline hasn't=
+ changed
+>> +        * but others had or when the CRTC and connectors are being di=
+sabled.
+>>          *
+>=20
+> Perhaps it's just me, yet the following ideas would make the topic
+> significantly easier and clearer.
+>=20
+>  - adding explicit "fake" when talking about drm/atomic _helpers_
+> generating/sending a VBLANK event.
+> For example, in 15/15 the commit message says "fake", while inline
+> comment omits it... Leading to the confusion pointed out.
+
+No problem on being more precise here. I'll update the docs accordingly.
+
+>=20
+> - s/no_vblank/fake_vblank/g or s/no_vblank/no_hw_vblank/g
+> Simple and concise. With slight inclination towards the former wording =
+:-)
+
+I'd prefer to not change the field's name. The current name 'no_vblank'
+indicates state and lets helpers decide what to do with it. The name
+'fake_vblank' indicates an instruction to the helpers, telling them what
+to do. It does neither seem to fit into drm_crtc_state, nor into the
+overall concept.
+
+Best regards
+Thomas
+
+>=20
+> If you and Daniel agree with the rename, then the first sentence of
+> the description should probably be tweaked.
+>=20
+> HTH
+> Emil
+>=20
+
+--=20
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Maxfeldstr. 5, 90409 N=C3=BCrnberg, Germany
+(HRB 36809, AG N=C3=BCrnberg)
+Gesch=C3=A4ftsf=C3=BChrer: Felix Imend=C3=B6rffer
+
+
+--plrgK2rFyOclW2N2pxB9OddQThC5DZIA4--
+
+--xOxj5EAc8eozWsu9aetd70iPvMav8MAEx
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEchf7rIzpz2NEoWjlaA3BHVMLeiMFAl4vLxMACgkQaA3BHVML
+eiMniQgAoMHRhI6ErQBZBW15wxr+4WFi1xiReRxPUJNhDs1YsUJvsMwE0AXBHbkh
+j5lmVFmbd5rv/EMgDYibBpMVY/zAL1EYuuqxdEVS6YmhH63SUWNtIvcfnIakofEK
+2MvRXne7UCX1Nh0l1vxr3iYailXChIGSC4FLQb3SrgDUGKGZw+pBEIH+7w4hwXOY
+yVIPmaCLUXIcjBX1Wu6CA0IP2BinpAVa+6lpUJ7H2628CVTzwV5p7VyZhtEUawlJ
+KR4W0gb1z864Biqs0IA2Ukp7WKHY51L96JhqwWofJULi5xIsmFptyW/gVND3MBW8
+O0CfSFppbmZQhlT+vO3wof3qZmTbGg==
+=b1dk
+-----END PGP SIGNATURE-----
+
+--xOxj5EAc8eozWsu9aetd70iPvMav8MAEx--
+
+
+--===============4485625997998440008==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============4485625997998440008==--
+
