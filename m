@@ -2,44 +2,46 @@ Return-Path: <SRS0=o/65=3Y=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C0D1EC35247
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Feb 2020 21:50:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 326C0C35247
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Feb 2020 21:50:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 871D12084E
-	for <xen-devel@archiver.kernel.org>; Tue,  4 Feb 2020 21:50:02 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 01C5A2084E
+	for <xen-devel@archiver.kernel.org>; Tue,  4 Feb 2020 21:50:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="EKvycUiM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 871D12084E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MK6IjHxc"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 01C5A2084E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1iz64n-0000wA-Mj; Tue, 04 Feb 2020 21:49:45 +0000
+	id 1iz64r-0000wP-1r; Tue, 04 Feb 2020 21:49:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I1tw=3Y=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1iz64l-0000w5-M5
- for xen-devel@lists.xenproject.org; Tue, 04 Feb 2020 21:49:43 +0000
-X-Inumbo-ID: 3fa3e0ca-4798-11ea-9026-12813bfff9fa
+ id 1iz64q-0000wJ-JN
+ for xen-devel@lists.xenproject.org; Tue, 04 Feb 2020 21:49:48 +0000
+X-Inumbo-ID: 40c2782c-4798-11ea-9026-12813bfff9fa
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3fa3e0ca-4798-11ea-9026-12813bfff9fa;
- Tue, 04 Feb 2020 21:49:42 +0000 (UTC)
+ id 40c2782c-4798-11ea-9026-12813bfff9fa;
+ Tue, 04 Feb 2020 21:49:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1580852981;
- h=from:to:cc:subject:date:message-id:mime-version;
- bh=enOZ6QsNdoW8EkW30E453t0iz+gC477hk2nvfEPryl0=;
- b=EKvycUiMEE1NYUZ38FVGnmYpTbKBB2WGA4y6aNxswcDaSA3JAYhlq/kR
- D9zF7ARQq6JUAmUKIzwyuDbXSKGzLnNiUHkin1kd8ZC4jHM6tKX0EzF9Y
- N1orWuJLXZrL7LjOgWrbf01Q5/FaUics/oIsGHCZMF6MaveLxmcJxu9dP k=;
+ d=citrix.com; s=securemail; t=1580852983;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=RKbuWJWH3gHV/V5tipvNpTzFzBPm/XK6B4kBhfD1mKA=;
+ b=MK6IjHxc7opVs4L+/r/0dqeEQ0/ftLZwwFb//yO51bB0YlZGFXIw16+p
+ 2/IYCmLosE/PWzOowvdnqzFEpo7MnYpboVM4zsRZSgn+AhNh69ZBN/T9e
+ BeWKOavJCFm9E2j/+4Eoo4WD+JpTjTPvUGQx24znA+44QTLCp9Vg9wSvX Q=;
 Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=igor.druzhinin@citrix.com;
@@ -71,24 +73,27 @@ Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
  envelope-from="igor.druzhinin@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: kz8I8NjO3JD/KyyWSZ3bYfq0128PrfeNs0i9CDffFJc3EbcdR5wHRVeAP/0vO4qISan81mt9Ae
- bJHSrABPHZs/f9wiTAIEfbuQKPWK5+OAdLJxb+A4QsplIVu660Fp24h3aHG8bK4A3hPGGnbzfx
- old9NFV08VcLuA9Ka0285/07WmBQDhNhhyeWEIbaILFTwbuq1alQMO1IBYGIm6098pl2kS50cA
- 5oWe0IWwYys/B3Dy2lWVqURQOO53czuDqk4x+s4GREiTYiTgBVayLHLhR6M08p1U7z9671SoP8
- Cio=
+IronPort-SDR: j72BCuRmGm1CRLUEsyW+WS2J3ZXMm6I3i36usrXZ5KsbhBarh4C4lVd3Frt5S3+rIejlgZLKeT
+ H2t6v/1S4kCF2cy1XTVRVSiFRkSnC3YZ3nrNXgkXMApJKtImh0droCH4//F7KdC5QQw8Na3PVc
+ ATS/LCZXQyMF8FtMxGWxgQe5OKbkKk9j6WPfUzOCnuLorsGER6mrzKdFWv4wCMQJ1sx940lWw4
+ 2jnrov02hzoYqgalfWQeXD4xP0oVeGPtEP+AopOannT5ttKIZREmc7eHA97EEUdc+I0UYE0HMl
+ qi4=
 X-SBRS: 2.7
-X-MesageID: 12319354
+X-MesageID: 12319355
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.70,403,1574139600"; d="scan'208";a="12319354"
+X-IronPort-AV: E=Sophos;i="5.70,403,1574139600"; d="scan'208";a="12319355"
 From: Igor Druzhinin <igor.druzhinin@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Date: Tue, 4 Feb 2020 21:49:35 +0000
-Message-ID: <1580852977-23866-1-git-send-email-igor.druzhinin@citrix.com>
+Date: Tue, 4 Feb 2020 21:49:37 +0000
+Message-ID: <1580852977-23866-3-git-send-email-igor.druzhinin@citrix.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1580852977-23866-1-git-send-email-igor.druzhinin@citrix.com>
+References: <1580852977-23866-1-git-send-email-igor.druzhinin@citrix.com>
 MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH v2 0/2] PV shim timekeeping fixes
+Subject: [Xen-devel] [PATCH v2 2/2] x86/time: report correct frequency of
+ Xen PV clocksource
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -106,11 +111,25 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SWdvciBEcnV6aGluaW4gKDIpOgogIHg4Ni9zaGltOiBzdXNwZW5kIGFuZCByZXN1bWUgcGxhdGZv
-cm0gdGltZSBjb3JyZWN0bHkKICB4ODYvdGltZTogcmVwb3J0IGNvcnJlY3QgZnJlcXVlbmN5IG9m
-IFhlbiBQViBjbG9ja3NvdXJjZQoKIHhlbi9hcmNoL3g4Ni9wdi9zaGltLmMgfCAgNyArKysrKyst
-CiB4ZW4vYXJjaC94ODYvdGltZS5jICAgIHwgMTcgKysrKysrKysrKystLS0tLS0KIDIgZmlsZXMg
-Y2hhbmdlZCwgMTcgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkKCi0tIAoyLjcuNAoKCl9f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
-YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
-eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
+VGhlIHZhbHVlIG9mIHRoZSBjb3VudGVyIHJlcHJlc2VudHMgdGhlIG51bWJlciBvZiBuYW5vc2Vj
+b25kcwpzaW5jZSBob3N0IGJvb3QuIFRoYXQgbWVhbnMgdGhlIGNvcnJlY3QgZnJlcXVlbmN5IGlz
+IGFsd2F5cyAxR0h6LgoKVGhpcyBpbmNvbnNpc3RlbmN5IGNhdXNlZCB0aW1lIHRvIGdvIHNsb3dl
+ciBpbiBQViBzaGltIG9uIG1vc3QKcGxhdGZvcm1zLgoKU2lnbmVkLW9mZi1ieTogSWdvciBEcnV6
+aGluaW4gPGlnb3IuZHJ1emhpbmluQGNpdHJpeC5jb20+Ci0tLQogeGVuL2FyY2gveDg2L3RpbWUu
+YyB8IDUgKystLS0KIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25z
+KC0pCgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L3RpbWUuYyBiL3hlbi9hcmNoL3g4Ni90aW1l
+LmMKaW5kZXggN2U3YTYyZS4uMjZmOWJhZCAxMDA2NDQKLS0tIGEveGVuL2FyY2gveDg2L3RpbWUu
+YworKysgYi94ZW4vYXJjaC94ODYvdGltZS5jCkBAIC01ODcsOSArNTg3LDcgQEAgc3RhdGljIGlu
+dDY0X3QgX19pbml0IGluaXRfeGVuX3RpbWVyKHN0cnVjdCBwbGF0Zm9ybV90aW1lc291cmNlICpw
+dHMpCiAgICAgaWYgKCAheGVuX2d1ZXN0ICkKICAgICAgICAgcmV0dXJuIDA7CiAKLSAgICBwdHMt
+PmZyZXF1ZW5jeSA9IHhlbl90aW1lcl9jcHVfZnJlcXVlbmN5KCk7Ci0KLSAgICByZXR1cm4gcHRz
+LT5mcmVxdWVuY3k7CisgICAgcmV0dXJuIHhlbl90aW1lcl9jcHVfZnJlcXVlbmN5KCk7CiB9CiAK
+IHN0YXRpYyBhbHdheXNfaW5saW5lIHVpbnQ2NF90IHJlYWRfY3ljbGUoY29uc3Qgc3RydWN0IHZj
+cHVfdGltZV9pbmZvICppbmZvLApAQCAtNjQzLDYgKzY0MSw3IEBAIHN0YXRpYyBzdHJ1Y3QgcGxh
+dGZvcm1fdGltZXNvdXJjZSBfX2luaXRkYXRhIHBsdF94ZW5fdGltZXIgPQogewogICAgIC5pZCA9
+ICJ4ZW4iLAogICAgIC5uYW1lID0gIlhFTiBQViBDTE9DSyIsCisgICAgLmZyZXF1ZW5jeSA9IDEw
+MDAwMDAwMDBVTEwsCiAgICAgLnJlYWRfY291bnRlciA9IHJlYWRfeGVuX3RpbWVyLAogICAgIC5p
+bml0ID0gaW5pdF94ZW5fdGltZXIsCiAgICAgLnJlc3VtZSA9IHJlc3VtZV94ZW5fdGltZXIsCi0t
+IAoyLjcuNAoKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Clhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0
+dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
