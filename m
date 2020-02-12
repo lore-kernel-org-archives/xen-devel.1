@@ -2,71 +2,105 @@ Return-Path: <SRS0=1nYC=4A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BE232C3B186
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Feb 2020 13:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93ECBC2BA83
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Feb 2020 13:46:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 87A1020659
-	for <xen-devel@archiver.kernel.org>; Wed, 12 Feb 2020 13:44:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5BE9220659
+	for <xen-devel@archiver.kernel.org>; Wed, 12 Feb 2020 13:46:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="A/ITxfTn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 87A1020659
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=nxp.com header.i=@nxp.com header.b="QQtfEZJz"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5BE9220659
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=nxp.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1j1sJM-0007Nd-Nc; Wed, 12 Feb 2020 13:44:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=LgqP=4A=redhat.com=david@srs-us1.protection.inumbo.net>)
- id 1j1sJL-0007ND-SJ
- for xen-devel@lists.xenproject.org; Wed, 12 Feb 2020 13:44:15 +0000
-X-Inumbo-ID: c1519e22-4d9d-11ea-bc8e-bc764e2007e4
-Received: from us-smtp-1.mimecast.com (unknown [207.211.31.120])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id c1519e22-4d9d-11ea-bc8e-bc764e2007e4;
- Wed, 12 Feb 2020 13:44:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1581515053;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZyIsCGbp0q7rUNVxi3tQZc/wfPXKE8Dd+matyQg6+Kw=;
- b=A/ITxfTnEctdIV+rpWv0h6CVznAJDByfi8Zqum0UvUoZ/O0V7NknFkPgrOoufudiCKfjc/
- s7oXq6rnpOedPmzRb/8VIOXJxMbqePY9jIeyVrTyQAroRXRqrXIyyWQhiv/tbJgcSNOSMP
- seCy5ubcLL5kOrzPq3Fua9XHeYVbb7o=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-431-JcoS9hQuPluo-HF9K9lF9Q-1; Wed, 12 Feb 2020 08:44:11 -0500
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B44478017CC;
- Wed, 12 Feb 2020 13:44:09 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-117-92.ams2.redhat.com [10.36.117.92])
- by smtp.corp.redhat.com (Postfix) with ESMTP id A21F71001281;
- Wed, 12 Feb 2020 13:44:04 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: qemu-devel@nongnu.org
-Date: Wed, 12 Feb 2020 14:42:51 +0100
-Message-Id: <20200212134254.11073-14-david@redhat.com>
-In-Reply-To: <20200212134254.11073-1-david@redhat.com>
-References: <20200212134254.11073-1-david@redhat.com>
+	id 1j1sKr-0007WZ-ED; Wed, 12 Feb 2020 13:45:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=tZ9R=4A=nxp.com=andrei.cherechesu@srs-us1.protection.inumbo.net>)
+ id 1j1sKp-0007WO-DD
+ for xen-devel@lists.xenproject.org; Wed, 12 Feb 2020 13:45:47 +0000
+X-Inumbo-ID: f81c765c-4d9d-11ea-b759-12813bfff9fa
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (unknown
+ [40.107.21.83]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f81c765c-4d9d-11ea-b759-12813bfff9fa;
+ Wed, 12 Feb 2020 13:45:46 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=c/EcSMbeBlPI25sC3DTJ6Ddc/V3QmE8jhnmtN0NZsaBb7YjrcEs5/R4FL+nKj6oZ1Vw85rra3t1IVqGAzdGG9ys+ecCD1L5K8aZ/j7X/axpjptsa52AQEHB5lyftuOFCyxtvH1kEENWIXphurcUYjCa5DAyKp1djfc/+AzCtXpnhMpHZvN9KV0aghqadtL9D0eNO54qyjjTToIdUsB2XoYY5J20lW0TPDosF+iVjTp+o5c2wAkkLM8B+fuOnAUmJYoLNdFjuN1ldlYvGzwDBmfvfuIZL0719sRKfXtEeLYc6ma/jsQjKkjvqzN3ACbOfXjpmDxDslCUocUb/kVMRcQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UKmJYmrQev6JPLBLt31ENZtyjojok8ftRYKsGlgRkAg=;
+ b=GHuX00X54cOQNw7DhNjzlHnIqrzAqJF4JdE+BTuaEyxYwrCv/EUIVymHGw7rG5nN+BFUIhpvtZfIb+EA01LWZntBblYVj3NWg43co2tF7XcGxZIr21KMYWcjsAL+WwFLhabZBJL4UPk5KWrpjQ58vDZqA2UUrhKftFEDRN3zR2Mefrex9JRtgPsVLt0Y4Bu2ROFW32Ui47UtYyTzGdRziGPpQ2dAlyUagiqvY84nkBn3hRDUZNdmHYpXeTggIX/6zVtYurl00zyO61DgKk9XKqclcTqgCHd1K0U3bWD/N15o/Ra7FfBfolRBc9NVtIt4rao2KFU+Wc2lMYttoGF4mw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UKmJYmrQev6JPLBLt31ENZtyjojok8ftRYKsGlgRkAg=;
+ b=QQtfEZJzZq5qXc/d0ET80M7/rQpYBcJbMz+YpQ2kYD01iU5b3xeIdy4OD5dsaG8pwat4vHsulcovJSTr+bS4BUqap2nTXXc8a9vFPiuJGneETfrz0ULxQis6tl7N6Q8QV3jbqO92l9qvmYInZItroVvPC/X6Vv++opRaQgaXSlM=
+Received: from VI1PR04MB5807.eurprd04.prod.outlook.com (20.178.205.21) by
+ VI1PR04MB4957.eurprd04.prod.outlook.com (20.177.48.75) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2707.27; Wed, 12 Feb 2020 13:45:44 +0000
+Received: from VI1PR04MB5807.eurprd04.prod.outlook.com
+ ([fe80::f41c:72d1:8193:286e]) by VI1PR04MB5807.eurprd04.prod.outlook.com
+ ([fe80::f41c:72d1:8193:286e%7]) with mapi id 15.20.2729.021; Wed, 12 Feb 2020
+ 13:45:44 +0000
+From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Thread-Topic: [Xen-devel] Having a DOM-U guest with 1:1 mapping in the second
+ stage MMU.
+Thread-Index: AQHV4aq5xQnQHfhMdkCO+1lU3LD8+Q==
+Date: Wed, 12 Feb 2020 13:45:44 +0000
+Message-ID: <VI1PR04MB58071B8C08BD7D7D7D61BDF2F91B0@VI1PR04MB5807.eurprd04.prod.outlook.com>
+References: <VI1PR04MB5807A7F83F1B2763BD7EEB20F91B0@VI1PR04MB5807.eurprd04.prod.outlook.com>
+In-Reply-To: <VI1PR04MB5807A7F83F1B2763BD7EEB20F91B0@VI1PR04MB5807.eurprd04.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=andrei.cherechesu@nxp.com; 
+x-originating-ip: [212.146.100.6]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 5f69ce9e-734a-4652-8001-08d7afc1dbae
+x-ms-traffictypediagnostic: VI1PR04MB4957:|VI1PR04MB4957:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <VI1PR04MB4957075E54FD2350F31EA45AF91B0@VI1PR04MB4957.eurprd04.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7219;
+x-forefront-prvs: 0311124FA9
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(396003)(39860400002)(366004)(136003)(346002)(376002)(189003)(199004)(86362001)(66446008)(26005)(54906003)(76116006)(66556008)(2940100002)(316002)(66476007)(66946007)(33656002)(6916009)(64756008)(6506007)(9686003)(7696005)(2906002)(186003)(45080400002)(4326008)(478600001)(71200400001)(5660300002)(44832011)(81166006)(52536014)(8676002)(966005)(8936002)(81156014)(55016002)(10126625002);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:VI1PR04MB4957;
+ H:VI1PR04MB5807.eurprd04.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: nxp.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: +D08mSDuBm7NYi+tcUlvQLM65fXZqe6W+Hc6gUQ9BZgRd4HL0eaK0XHVfcjgQNNQGNFVsnGRqPP1efsVpC7NgSr6hMOyAag3H/ob1g3jQFxnMaRIl/OXMFT4yKNQNPZXDcebpybWFhZP7Xh0aD1ZoNWgX0s/SaABeWSzs5jMzmfvmw5kUcDJ+ZOHuk2x7m+oQ8wrkrAt6KDcUMWfvFwu1wKuJ6Ucz6VyNS5c107qqontAtLanzYen6lhtyyLW9nCqVWh+KsYmZWBNvkjuiYT31A8lloFAjMsfUX0iUaY9x8g59laAGEd3T4WQdl9OlJ95FHbepwZ0BMyYjYjPf0XFiKwVfZbwX5pR+8ZtiH45qbCDZwCdmP6UQLfCotFEdPl/PdIik95GrMnbFxo4l/7p7nT8JbD5Mj5iIRfJu0wgGvpzwa6KSk9wcmPFGAS5gRvdBL61VS3rEgkAcyKNSJWulJk301vaps9yI9X0hm1DaftoZcnsETj42pVjr7XtVQizIVg2M5Tu4MULKnx6rKSCgH84mdBJY8Td2VePiPUcs+YIyl3myJ70nJ+NN2GbKprNLlhUMvMykJxgc2p2Zoyfw==
+x-ms-exchange-antispam-messagedata: myCB+XGokoDg1QWSwGJx8N2MmRJt9FVrphlfUnY6RddfSA20w8+sWGt74WaC2uZpQI+B+sxzBxAuhnDgTZidGxSkMTaIpzFCSy+80O7PZ9BfRnKQUAw/TJqg8e6KQHYpimMrLs9LeYWFOyc1t6yG4w==
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-X-MC-Unique: JcoS9hQuPluo-HF9K9lF9Q-1
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Subject: [Xen-devel] [PATCH v2 fixed 13/16] numa: Teach ram block notifiers
- about resizable ram blocks
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f69ce9e-734a-4652-8001-08d7afc1dbae
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Feb 2020 13:45:44.3740 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: KpCN64n05fTjWIEL24QnakBED3/HNqaTT6fucnfoGV+IdOponLDHCFoOVMxc546ZjCrMTwxek0J7ophLvdgI59qJOO66pbipReAVjkIxo/k=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB4957
+Subject: Re: [Xen-devel] Having a DOM-U guest with 1:1 mapping in the second
+ stage MMU.
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -77,235 +111,385 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Eduardo Habkost <ehabkost@redhat.com>, "Michael S . Tsirkin" <mst@redhat.com>,
- David Hildenbrand <david@redhat.com>,
- "Dr . David Alan Gilbert" <dgilbert@redhat.com>, Paul Durrant <paul@xen.org>,
- xen-devel@lists.xenproject.org, Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Igor Mammedov <imammedo@redhat.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Richard Henderson <rth@twiddle.net>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Jorge Pereira <jorge.pereira@nxp.com>, Julien Grall <julien@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Content-Type: multipart/mixed; boundary="===============2762865968602497794=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-V2Ugd2FudCB0byBhY3R1YWxseSByZXNpemUgcmFtIGJsb2NrcyAobWFrZSBldmVyeXRoaW5nIGJl
-dHdlZW4KdXNlZF9sZW5ndGggYW5kIG1heF9sZW5ndGggaW5hY2Nlc3NpYmxlKSAtIGhvd2V2ZXIs
-IG5vdCBhbGwgcmFtIGJsb2NrCm5vdGlmaWVycyB3aWxsIHN1cHBvcnQgdGhhdC4gTGV0J3MgdGVh
-Y2ggdGhlIG5vdGlmaWVyIHRoYXQgcmFtIGJsb2NrcwphcmUgaW5kZWVkIHJlc2l6YWJsZSwgYnV0
-IGtlZXAgdXNpbmcgbWF4X3NpemUgaW4gdGhlIGV4aXN0aW5nIG5vdGlmaWVycy4KClN1cHBseSB0
-aGUgbWF4X3NpemUgd2hlbiBhZGRpbmcgYW5kIHJlbW92aW5nIHJhbSBibG9ja3MuIEFsc28sIG5v
-dGlmeSBvbgpyZXNpemVzLiBJbnRyb2R1Y2UgYSB3YXkgdG8gZGV0ZWN0IGlmIGFueSByZWdpc3Rl
-cmVkIG5vdGlmaWVyIGRvZXMgbm90CnN1cHBvcnQgcmVzaXplcyAtIHJhbV9ibG9ja19ub3RpZmll
-cnNfc3VwcG9ydF9yZXNpemUoKSAtIHdoaWNoIHdlIGNhbiBsYXRlcgp1c2UgdG8gZmFsbGJhY2sg
-dG8gbGVnYWN5IGhhbmRsaW5nIGlmIGEgcmVnaXN0ZXJlZCBub3RpZmllciAoZXNwLiwgU0VWIGFu
-ZApIQVgpIGRvZXMgbm90IHN1cHBvcnQgYWN0dWFsIHJlc2l6ZXMuCgpDYzogUmljaGFyZCBIZW5k
-ZXJzb24gPHJ0aEB0d2lkZGxlLm5ldD4KQ2M6IFBhb2xvIEJvbnppbmkgPHBib256aW5pQHJlZGhh
-dC5jb20+CkNjOiAiRHIuIERhdmlkIEFsYW4gR2lsYmVydCIgPGRnaWxiZXJ0QHJlZGhhdC5jb20+
-CkNjOiBFZHVhcmRvIEhhYmtvc3QgPGVoYWJrb3N0QHJlZGhhdC5jb20+CkNjOiBNYXJjZWwgQXBm
-ZWxiYXVtIDxtYXJjZWwuYXBmZWxiYXVtQGdtYWlsLmNvbT4KQ2M6IFN0ZWZhbm8gU3RhYmVsbGlu
-aSA8c3N0YWJlbGxpbmlAa2VybmVsLm9yZz4KQ2M6IEFudGhvbnkgUGVyYXJkIDxhbnRob255LnBl
-cmFyZEBjaXRyaXguY29tPgpDYzogUGF1bCBEdXJyYW50IDxwYXVsQHhlbi5vcmc+CkNjOiAiTWlj
-aGFlbCBTLiBUc2lya2luIiA8bXN0QHJlZGhhdC5jb20+CkNjOiB4ZW4tZGV2ZWxAbGlzdHMueGVu
-cHJvamVjdC5vcmcKQ2M6IElnb3IgTWFtbWVkb3YgPGltYW1tZWRvQHJlZGhhdC5jb20+ClNpZ25l
-ZC1vZmYtYnk6IERhdmlkIEhpbGRlbmJyYW5kIDxkYXZpZEByZWRoYXQuY29tPgotLS0KIGV4ZWMu
-YyAgICAgICAgICAgICAgICAgICAgIHwgMTMgKysrKysrKysrKystLQogaHcvY29yZS9udW1hLmMg
-ICAgICAgICAgICAgfCAzNCArKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tLS0tCiBody9p
-Mzg2L3hlbi94ZW4tbWFwY2FjaGUuYyB8ICA3ICsrKystLS0KIGluY2x1ZGUvZXhlYy9yYW1saXN0
-LmggICAgIHwgMTQgKysrKysrKysrKy0tLS0KIHRhcmdldC9pMzg2L2hheC1tZW0uYyAgICAgIHwg
-IDUgKysrLS0KIHRhcmdldC9pMzg2L3Nldi5jICAgICAgICAgIHwgMTggKysrKysrKysrKy0tLS0t
-LS0tCiB1dGlsL3ZmaW8taGVscGVycy5jICAgICAgICB8IDE3ICsrKysrKysrKy0tLS0tLS0tCiA3
-IGZpbGVzIGNoYW5nZWQsIDc2IGluc2VydGlvbnMoKyksIDMyIGRlbGV0aW9ucygtKQoKZGlmZiAt
-LWdpdCBhL2V4ZWMuYyBiL2V4ZWMuYwppbmRleCBmYzY1YzRmN2NhLi5mMmQzMDQ3OWI4IDEwMDY0
-NAotLS0gYS9leGVjLmMKKysrIGIvZXhlYy5jCkBAIC0yMTM5LDYgKzIxMzksOCBAQCBzdGF0aWMg
-dm9pZCBxZW11X3JhbV9hcHBseV9zZXR0aW5ncyh2b2lkICpob3N0LCBzaXplX3QgbGVuZ3RoKQog
-ICovCiBpbnQgcWVtdV9yYW1fcmVzaXplKFJBTUJsb2NrICpibG9jaywgcmFtX2FkZHJfdCBuZXdz
-aXplLCBFcnJvciAqKmVycnApCiB7CisgICAgY29uc3QgcmFtX2FkZHJfdCBvbGRzaXplID0gYmxv
-Y2stPnVzZWRfbGVuZ3RoOworCiAgICAgYXNzZXJ0KGJsb2NrKTsKIAogICAgIG5ld3NpemUgPSBI
-T1NUX1BBR0VfQUxJR04obmV3c2l6ZSk7CkBAIC0yMTY3LDYgKzIxNjksMTEgQEAgaW50IHFlbXVf
-cmFtX3Jlc2l6ZShSQU1CbG9jayAqYmxvY2ssIHJhbV9hZGRyX3QgbmV3c2l6ZSwgRXJyb3IgKipl
-cnJwKQogICAgIGJsb2NrLT51c2VkX2xlbmd0aCA9IG5ld3NpemU7CiAgICAgY3B1X3BoeXNpY2Fs
-X21lbW9yeV9zZXRfZGlydHlfcmFuZ2UoYmxvY2stPm9mZnNldCwgYmxvY2stPnVzZWRfbGVuZ3Ro
-LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIERJUlRZX0NMSUVOVFNf
-QUxMKTsKKworICAgIGlmIChibG9jay0+aG9zdCkgeworICAgICAgICByYW1fYmxvY2tfbm90aWZ5
-X3Jlc2l6ZWQoYmxvY2stPmhvc3QsIG9sZHNpemUsIG5ld3NpemUpOworICAgIH0KKwogICAgIG1l
-bW9yeV9yZWdpb25fc2V0X3NpemUoYmxvY2stPm1yLCBuZXdzaXplKTsKICAgICBpZiAoYmxvY2st
-PnJlc2l6ZWQpIHsKICAgICAgICAgYmxvY2stPnJlc2l6ZWQoYmxvY2stPmlkc3RyLCBuZXdzaXpl
-LCBibG9jay0+aG9zdCk7CkBAIC0yMzE5LDcgKzIzMjYsOCBAQCBzdGF0aWMgdm9pZCByYW1fYmxv
-Y2tfYWRkKFJBTUJsb2NrICpuZXdfYmxvY2ssIEVycm9yICoqZXJycCkKIAogICAgIGlmIChuZXdf
-YmxvY2stPmhvc3QpIHsKICAgICAgICAgcWVtdV9yYW1fYXBwbHlfc2V0dGluZ3MobmV3X2Jsb2Nr
-LT5ob3N0LCBuZXdfYmxvY2stPm1heF9sZW5ndGgpOwotICAgICAgICByYW1fYmxvY2tfbm90aWZ5
-X2FkZChuZXdfYmxvY2stPmhvc3QsIG5ld19ibG9jay0+bWF4X2xlbmd0aCk7CisgICAgICAgIHJh
-bV9ibG9ja19ub3RpZnlfYWRkKG5ld19ibG9jay0+aG9zdCwgbmV3X2Jsb2NrLT51c2VkX2xlbmd0
-aCwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmV3X2Jsb2NrLT5tYXhfbGVuZ3RoKTsK
-ICAgICB9CiB9CiAKQEAgLTI1MDIsNyArMjUxMCw4IEBAIHZvaWQgcWVtdV9yYW1fZnJlZShSQU1C
-bG9jayAqYmxvY2spCiAgICAgfQogCiAgICAgaWYgKGJsb2NrLT5ob3N0KSB7Ci0gICAgICAgIHJh
-bV9ibG9ja19ub3RpZnlfcmVtb3ZlKGJsb2NrLT5ob3N0LCBibG9jay0+bWF4X2xlbmd0aCk7Cisg
-ICAgICAgIHJhbV9ibG9ja19ub3RpZnlfcmVtb3ZlKGJsb2NrLT5ob3N0LCBibG9jay0+dXNlZF9s
-ZW5ndGgsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJsb2NrLT5tYXhfbGVuZ3Ro
-KTsKICAgICB9CiAKICAgICBxZW11X211dGV4X2xvY2tfcmFtbGlzdCgpOwpkaWZmIC0tZ2l0IGEv
-aHcvY29yZS9udW1hLmMgYi9ody9jb3JlL251bWEuYwppbmRleCA2NTk5YzY5ZTA1Li41YjIwZGM3
-MjZkIDEwMDY0NAotLS0gYS9ody9jb3JlL251bWEuYworKysgYi9ody9jb3JlL251bWEuYwpAQCAt
-OTAyLDExICs5MDIsMTIgQEAgdm9pZCBxdWVyeV9udW1hX25vZGVfbWVtKE51bWFOb2RlTWVtIG5v
-ZGVfbWVtW10sIE1hY2hpbmVTdGF0ZSAqbXMpCiBzdGF0aWMgaW50IHJhbV9ibG9ja19ub3RpZnlf
-YWRkX3NpbmdsZShSQU1CbG9jayAqcmIsIHZvaWQgKm9wYXF1ZSkKIHsKICAgICBjb25zdCByYW1f
-YWRkcl90IG1heF9zaXplID0gcWVtdV9yYW1fZ2V0X21heF9sZW5ndGgocmIpOworICAgIGNvbnN0
-IHJhbV9hZGRyX3Qgc2l6ZSA9IHFlbXVfcmFtX2dldF91c2VkX2xlbmd0aChyYik7CiAgICAgdm9p
-ZCAqaG9zdCA9IHFlbXVfcmFtX2dldF9ob3N0X2FkZHIocmIpOwogICAgIFJBTUJsb2NrTm90aWZp
-ZXIgKm5vdGlmaWVyID0gb3BhcXVlOwogCiAgICAgaWYgKGhvc3QpIHsKLSAgICAgICAgbm90aWZp
-ZXItPnJhbV9ibG9ja19hZGRlZChub3RpZmllciwgaG9zdCwgbWF4X3NpemUpOworICAgICAgICBu
-b3RpZmllci0+cmFtX2Jsb2NrX2FkZGVkKG5vdGlmaWVyLCBob3N0LCBzaXplLCBtYXhfc2l6ZSk7
-CiAgICAgfQogICAgIHJldHVybiAwOwogfQpAQCAtOTIzLDIwICs5MjQsNDMgQEAgdm9pZCByYW1f
-YmxvY2tfbm90aWZpZXJfcmVtb3ZlKFJBTUJsb2NrTm90aWZpZXIgKm4pCiAgICAgUUxJU1RfUkVN
-T1ZFKG4sIG5leHQpOwogfQogCi12b2lkIHJhbV9ibG9ja19ub3RpZnlfYWRkKHZvaWQgKmhvc3Qs
-IHNpemVfdCBzaXplKQordm9pZCByYW1fYmxvY2tfbm90aWZ5X2FkZCh2b2lkICpob3N0LCBzaXpl
-X3Qgc2l6ZSwgc2l6ZV90IG1heF9zaXplKQogewogICAgIFJBTUJsb2NrTm90aWZpZXIgKm5vdGlm
-aWVyOwogCiAgICAgUUxJU1RfRk9SRUFDSChub3RpZmllciwgJnJhbV9saXN0LnJhbWJsb2NrX25v
-dGlmaWVycywgbmV4dCkgewotICAgICAgICBub3RpZmllci0+cmFtX2Jsb2NrX2FkZGVkKG5vdGlm
-aWVyLCBob3N0LCBzaXplKTsKKyAgICAgICAgbm90aWZpZXItPnJhbV9ibG9ja19hZGRlZChub3Rp
-ZmllciwgaG9zdCwgc2l6ZSwgbWF4X3NpemUpOwogICAgIH0KIH0KIAotdm9pZCByYW1fYmxvY2tf
-bm90aWZ5X3JlbW92ZSh2b2lkICpob3N0LCBzaXplX3Qgc2l6ZSkKK3ZvaWQgcmFtX2Jsb2NrX25v
-dGlmeV9yZW1vdmUodm9pZCAqaG9zdCwgc2l6ZV90IHNpemUsIHNpemVfdCBtYXhfc2l6ZSkKIHsK
-ICAgICBSQU1CbG9ja05vdGlmaWVyICpub3RpZmllcjsKIAogICAgIFFMSVNUX0ZPUkVBQ0gobm90
-aWZpZXIsICZyYW1fbGlzdC5yYW1ibG9ja19ub3RpZmllcnMsIG5leHQpIHsKLSAgICAgICAgbm90
-aWZpZXItPnJhbV9ibG9ja19yZW1vdmVkKG5vdGlmaWVyLCBob3N0LCBzaXplKTsKKyAgICAgICAg
-bm90aWZpZXItPnJhbV9ibG9ja19yZW1vdmVkKG5vdGlmaWVyLCBob3N0LCBzaXplLCBtYXhfc2l6
-ZSk7CiAgICAgfQogfQorCit2b2lkIHJhbV9ibG9ja19ub3RpZnlfcmVzaXplZCh2b2lkICpob3N0
-LCBzaXplX3Qgb2xkX3NpemUsIHNpemVfdCBuZXdfc2l6ZSkKK3sKKyAgICBSQU1CbG9ja05vdGlm
-aWVyICpub3RpZmllcjsKKworICAgIFFMSVNUX0ZPUkVBQ0gobm90aWZpZXIsICZyYW1fbGlzdC5y
-YW1ibG9ja19ub3RpZmllcnMsIG5leHQpIHsKKyAgICAgICAgaWYgKG5vdGlmaWVyLT5yYW1fYmxv
-Y2tfcmVzaXplZCkgeworICAgICAgICAgICAgbm90aWZpZXItPnJhbV9ibG9ja19yZXNpemVkKG5v
-dGlmaWVyLCBob3N0LCBvbGRfc2l6ZSwgbmV3X3NpemUpOworICAgICAgICB9CisgICAgfQorfQor
-Citib29sIHJhbV9ibG9ja19ub3RpZmllcnNfc3VwcG9ydF9yZXNpemUodm9pZCkKK3sKKyAgICBS
-QU1CbG9ja05vdGlmaWVyICpub3RpZmllcjsKKworICAgIFFMSVNUX0ZPUkVBQ0gobm90aWZpZXIs
-ICZyYW1fbGlzdC5yYW1ibG9ja19ub3RpZmllcnMsIG5leHQpIHsKKyAgICAgICAgaWYgKCFub3Rp
-Zmllci0+cmFtX2Jsb2NrX3Jlc2l6ZWQpIHsKKyAgICAgICAgICAgIHJldHVybiBmYWxzZTsKKyAg
-ICAgICAgfQorICAgIH0KKyAgICByZXR1cm4gdHJ1ZTsKK30KZGlmZiAtLWdpdCBhL2h3L2kzODYv
-eGVuL3hlbi1tYXBjYWNoZS5jIGIvaHcvaTM4Ni94ZW4veGVuLW1hcGNhY2hlLmMKaW5kZXggNWIx
-MjBlZDQ0Yi4uZDZkY2VhNjVkMSAxMDA2NDQKLS0tIGEvaHcvaTM4Ni94ZW4veGVuLW1hcGNhY2hl
-LmMKKysrIGIvaHcvaTM4Ni94ZW4veGVuLW1hcGNhY2hlLmMKQEAgLTE2OSw3ICsxNjksOCBAQCBz
-dGF0aWMgdm9pZCB4ZW5fcmVtYXBfYnVja2V0KE1hcENhY2hlRW50cnkgKmVudHJ5LAogCiAgICAg
-aWYgKGVudHJ5LT52YWRkcl9iYXNlICE9IE5VTEwpIHsKICAgICAgICAgaWYgKCEoZW50cnktPmZs
-YWdzICYgWEVOX01BUENBQ0hFX0VOVFJZX0RVTU1ZKSkgewotICAgICAgICAgICAgcmFtX2Jsb2Nr
-X25vdGlmeV9yZW1vdmUoZW50cnktPnZhZGRyX2Jhc2UsIGVudHJ5LT5zaXplKTsKKyAgICAgICAg
-ICAgIHJhbV9ibG9ja19ub3RpZnlfcmVtb3ZlKGVudHJ5LT52YWRkcl9iYXNlLCBlbnRyeS0+c2l6
-ZSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVudHJ5LT5zaXplKTsKICAg
-ICAgICAgfQogICAgICAgICBpZiAobXVubWFwKGVudHJ5LT52YWRkcl9iYXNlLCBlbnRyeS0+c2l6
-ZSkgIT0gMCkgewogICAgICAgICAgICAgcGVycm9yKCJ1bm1hcCBmYWlscyIpOwpAQCAtMjExLDcg
-KzIxMiw3IEBAIHN0YXRpYyB2b2lkIHhlbl9yZW1hcF9idWNrZXQoTWFwQ2FjaGVFbnRyeSAqZW50
-cnksCiAgICAgfQogCiAgICAgaWYgKCEoZW50cnktPmZsYWdzICYgWEVOX01BUENBQ0hFX0VOVFJZ
-X0RVTU1ZKSkgewotICAgICAgICByYW1fYmxvY2tfbm90aWZ5X2FkZCh2YWRkcl9iYXNlLCBzaXpl
-KTsKKyAgICAgICAgcmFtX2Jsb2NrX25vdGlmeV9hZGQodmFkZHJfYmFzZSwgc2l6ZSwgc2l6ZSk7
-CiAgICAgfQogCiAgICAgZW50cnktPnZhZGRyX2Jhc2UgPSB2YWRkcl9iYXNlOwpAQCAtNDUyLDcg
-KzQ1Myw3IEBAIHN0YXRpYyB2b2lkIHhlbl9pbnZhbGlkYXRlX21hcF9jYWNoZV9lbnRyeV91bmxv
-Y2tlZCh1aW50OF90ICpidWZmZXIpCiAgICAgfQogCiAgICAgcGVudHJ5LT5uZXh0ID0gZW50cnkt
-Pm5leHQ7Ci0gICAgcmFtX2Jsb2NrX25vdGlmeV9yZW1vdmUoZW50cnktPnZhZGRyX2Jhc2UsIGVu
-dHJ5LT5zaXplKTsKKyAgICByYW1fYmxvY2tfbm90aWZ5X3JlbW92ZShlbnRyeS0+dmFkZHJfYmFz
-ZSwgZW50cnktPnNpemUsIGVudHJ5LT5zaXplKTsKICAgICBpZiAobXVubWFwKGVudHJ5LT52YWRk
-cl9iYXNlLCBlbnRyeS0+c2l6ZSkgIT0gMCkgewogICAgICAgICBwZXJyb3IoInVubWFwIGZhaWxz
-Iik7CiAgICAgICAgIGV4aXQoLTEpOwpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9leGVjL3JhbWxpc3Qu
-aCBiL2luY2x1ZGUvZXhlYy9yYW1saXN0LmgKaW5kZXggYmM0ZmFhMWIwMC4uOTJlNTQ4NDYxZSAx
-MDA2NDQKLS0tIGEvaW5jbHVkZS9leGVjL3JhbWxpc3QuaAorKysgYi9pbmNsdWRlL2V4ZWMvcmFt
-bGlzdC5oCkBAIC02NSwxNSArNjUsMjEgQEAgdm9pZCBxZW11X211dGV4X2xvY2tfcmFtbGlzdCh2
-b2lkKTsKIHZvaWQgcWVtdV9tdXRleF91bmxvY2tfcmFtbGlzdCh2b2lkKTsKIAogc3RydWN0IFJB
-TUJsb2NrTm90aWZpZXIgewotICAgIHZvaWQgKCpyYW1fYmxvY2tfYWRkZWQpKFJBTUJsb2NrTm90
-aWZpZXIgKm4sIHZvaWQgKmhvc3QsIHNpemVfdCBzaXplKTsKLSAgICB2b2lkICgqcmFtX2Jsb2Nr
-X3JlbW92ZWQpKFJBTUJsb2NrTm90aWZpZXIgKm4sIHZvaWQgKmhvc3QsIHNpemVfdCBzaXplKTsK
-KyAgICB2b2lkICgqcmFtX2Jsb2NrX2FkZGVkKShSQU1CbG9ja05vdGlmaWVyICpuLCB2b2lkICpo
-b3N0LCBzaXplX3Qgc2l6ZSwKKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplX3QgbWF4
-X3NpemUpOworICAgIHZvaWQgKCpyYW1fYmxvY2tfcmVtb3ZlZCkoUkFNQmxvY2tOb3RpZmllciAq
-biwgdm9pZCAqaG9zdCwgc2l6ZV90IHNpemUsCisgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBzaXplX3QgbWF4X3NpemUpOworICAgIHZvaWQgKCpyYW1fYmxvY2tfcmVzaXplZCkoUkFNQmxv
-Y2tOb3RpZmllciAqbiwgdm9pZCAqaG9zdCwgc2l6ZV90IG9sZF9zaXplLAorICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgc2l6ZV90IG5ld19zaXplKTsKICAgICBRTElTVF9FTlRSWShSQU1C
-bG9ja05vdGlmaWVyKSBuZXh0OwogfTsKIAogdm9pZCByYW1fYmxvY2tfbm90aWZpZXJfYWRkKFJB
-TUJsb2NrTm90aWZpZXIgKm4pOwogdm9pZCByYW1fYmxvY2tfbm90aWZpZXJfcmVtb3ZlKFJBTUJs
-b2NrTm90aWZpZXIgKm4pOwotdm9pZCByYW1fYmxvY2tfbm90aWZ5X2FkZCh2b2lkICpob3N0LCBz
-aXplX3Qgc2l6ZSk7Ci12b2lkIHJhbV9ibG9ja19ub3RpZnlfcmVtb3ZlKHZvaWQgKmhvc3QsIHNp
-emVfdCBzaXplKTsKK3ZvaWQgcmFtX2Jsb2NrX25vdGlmeV9hZGQodm9pZCAqaG9zdCwgc2l6ZV90
-IHNpemUsIHNpemVfdCBtYXhfc2l6ZSk7Cit2b2lkIHJhbV9ibG9ja19ub3RpZnlfcmVtb3ZlKHZv
-aWQgKmhvc3QsIHNpemVfdCBzaXplLCBzaXplX3QgbWF4X3NpemUpOwordm9pZCByYW1fYmxvY2tf
-bm90aWZ5X3Jlc2l6ZWQodm9pZCAqaG9zdCwgc2l6ZV90IG9sZF9zaXplLCBzaXplX3QgbmV3X3Np
-emUpOworYm9vbCByYW1fYmxvY2tfbm90aWZpZXJzX3N1cHBvcnRfcmVzaXplKHZvaWQpOwogCiB2
-b2lkIHJhbV9ibG9ja19kdW1wKE1vbml0b3IgKm1vbik7CiAKZGlmZiAtLWdpdCBhL3RhcmdldC9p
-Mzg2L2hheC1tZW0uYyBiL3RhcmdldC9pMzg2L2hheC1tZW0uYwppbmRleCA2YmI1YTI0OTE3Li40
-NTRkN2ZiMjEyIDEwMDY0NAotLS0gYS90YXJnZXQvaTM4Ni9oYXgtbWVtLmMKKysrIGIvdGFyZ2V0
-L2kzODYvaGF4LW1lbS5jCkBAIC0yOTMsNyArMjkzLDggQEAgc3RhdGljIE1lbW9yeUxpc3RlbmVy
-IGhheF9tZW1vcnlfbGlzdGVuZXIgPSB7CiAgICAgLnByaW9yaXR5ID0gMTAsCiB9OwogCi1zdGF0
-aWMgdm9pZCBoYXhfcmFtX2Jsb2NrX2FkZGVkKFJBTUJsb2NrTm90aWZpZXIgKm4sIHZvaWQgKmhv
-c3QsIHNpemVfdCBzaXplKQorc3RhdGljIHZvaWQgaGF4X3JhbV9ibG9ja19hZGRlZChSQU1CbG9j
-a05vdGlmaWVyICpuLCB2b2lkICpob3N0LCBzaXplX3Qgc2l6ZSwKKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgc2l6ZV90IG1heF9zaXplKQogewogICAgIC8qCiAgICAgICogV2UgbXVz
-dCByZWdpc3RlciBlYWNoIFJBTSBibG9jayB3aXRoIHRoZSBIQVhNIGtlcm5lbCBtb2R1bGUsIG9y
-CkBAIC0zMDQsNyArMzA1LDcgQEAgc3RhdGljIHZvaWQgaGF4X3JhbV9ibG9ja19hZGRlZChSQU1C
-bG9ja05vdGlmaWVyICpuLCB2b2lkICpob3N0LCBzaXplX3Qgc2l6ZSkKICAgICAgKiBob3N0IHBo
-eXNpY2FsIHBhZ2VzIGZvciB0aGUgUkFNIGJsb2NrIGFzIHBhcnQgb2YgdGhpcyByZWdpc3RyYXRp
-b24KICAgICAgKiBwcm9jZXNzLCBoZW5jZSB0aGUgbmFtZSBoYXhfcG9wdWxhdGVfcmFtKCkuCiAg
-ICAgICovCi0gICAgaWYgKGhheF9wb3B1bGF0ZV9yYW0oKHVpbnQ2NF90KSh1aW50cHRyX3QpaG9z
-dCwgc2l6ZSkgPCAwKSB7CisgICAgaWYgKGhheF9wb3B1bGF0ZV9yYW0oKHVpbnQ2NF90KSh1aW50
-cHRyX3QpaG9zdCwgbWF4X3NpemUpIDwgMCkgewogICAgICAgICBmcHJpbnRmKHN0ZGVyciwgIkhB
-WCBmYWlsZWQgdG8gcG9wdWxhdGUgUkFNXG4iKTsKICAgICAgICAgYWJvcnQoKTsKICAgICB9CmRp
-ZmYgLS1naXQgYS90YXJnZXQvaTM4Ni9zZXYuYyBiL3RhcmdldC9pMzg2L3Nldi5jCmluZGV4IDAy
-NGJiMjRlNTEuLjZiNGNlZTI0YTIgMTAwNjQ0Ci0tLSBhL3RhcmdldC9pMzg2L3Nldi5jCisrKyBi
-L3RhcmdldC9pMzg2L3Nldi5jCkBAIC0xMjksNyArMTI5LDggQEAgc2V2X3NldF9ndWVzdF9zdGF0
-ZShTZXZTdGF0ZSBuZXdfc3RhdGUpCiB9CiAKIHN0YXRpYyB2b2lkCi1zZXZfcmFtX2Jsb2NrX2Fk
-ZGVkKFJBTUJsb2NrTm90aWZpZXIgKm4sIHZvaWQgKmhvc3QsIHNpemVfdCBzaXplKQorc2V2X3Jh
-bV9ibG9ja19hZGRlZChSQU1CbG9ja05vdGlmaWVyICpuLCB2b2lkICpob3N0LCBzaXplX3Qgc2l6
-ZSwKKyAgICAgICAgICAgICAgICAgICAgc2l6ZV90IG1heF9zaXplKQogewogICAgIGludCByOwog
-ICAgIHN0cnVjdCBrdm1fZW5jX3JlZ2lvbiByYW5nZTsKQEAgLTE0NiwxOSArMTQ3LDIwIEBAIHNl
-dl9yYW1fYmxvY2tfYWRkZWQoUkFNQmxvY2tOb3RpZmllciAqbiwgdm9pZCAqaG9zdCwgc2l6ZV90
-IHNpemUpCiAgICAgfQogCiAgICAgcmFuZ2UuYWRkciA9IChfX3U2NCkodW5zaWduZWQgbG9uZylo
-b3N0OwotICAgIHJhbmdlLnNpemUgPSBzaXplOworICAgIHJhbmdlLnNpemUgPSBtYXhfc2l6ZTsK
-IAotICAgIHRyYWNlX2t2bV9tZW1jcnlwdF9yZWdpc3Rlcl9yZWdpb24oaG9zdCwgc2l6ZSk7Cisg
-ICAgdHJhY2Vfa3ZtX21lbWNyeXB0X3JlZ2lzdGVyX3JlZ2lvbihob3N0LCBtYXhfc2l6ZSk7CiAg
-ICAgciA9IGt2bV92bV9pb2N0bChrdm1fc3RhdGUsIEtWTV9NRU1PUllfRU5DUllQVF9SRUdfUkVH
-SU9OLCAmcmFuZ2UpOwogICAgIGlmIChyKSB7CiAgICAgICAgIGVycm9yX3JlcG9ydCgiJXM6IGZh
-aWxlZCB0byByZWdpc3RlciByZWdpb24gKCVwKyUjengpIGVycm9yICclcyciLAotICAgICAgICAg
-ICAgICAgICAgICAgX19mdW5jX18sIGhvc3QsIHNpemUsIHN0cmVycm9yKGVycm5vKSk7CisgICAg
-ICAgICAgICAgICAgICAgICBfX2Z1bmNfXywgaG9zdCwgbWF4X3NpemUsIHN0cmVycm9yKGVycm5v
-KSk7CiAgICAgICAgIGV4aXQoMSk7CiAgICAgfQogfQogCiBzdGF0aWMgdm9pZAotc2V2X3JhbV9i
-bG9ja19yZW1vdmVkKFJBTUJsb2NrTm90aWZpZXIgKm4sIHZvaWQgKmhvc3QsIHNpemVfdCBzaXpl
-KQorc2V2X3JhbV9ibG9ja19yZW1vdmVkKFJBTUJsb2NrTm90aWZpZXIgKm4sIHZvaWQgKmhvc3Qs
-IHNpemVfdCBzaXplLAorICAgICAgICAgICAgICAgICAgICAgIHNpemVfdCBtYXhfc2l6ZSkKIHsK
-ICAgICBpbnQgcjsKICAgICBzdHJ1Y3Qga3ZtX2VuY19yZWdpb24gcmFuZ2U7CkBAIC0xNzUsMTMg
-KzE3NywxMyBAQCBzZXZfcmFtX2Jsb2NrX3JlbW92ZWQoUkFNQmxvY2tOb3RpZmllciAqbiwgdm9p
-ZCAqaG9zdCwgc2l6ZV90IHNpemUpCiAgICAgfQogCiAgICAgcmFuZ2UuYWRkciA9IChfX3U2NCko
-dW5zaWduZWQgbG9uZylob3N0OwotICAgIHJhbmdlLnNpemUgPSBzaXplOworICAgIHJhbmdlLnNp
-emUgPSBtYXhfc2l6ZTsKIAotICAgIHRyYWNlX2t2bV9tZW1jcnlwdF91bnJlZ2lzdGVyX3JlZ2lv
-bihob3N0LCBzaXplKTsKKyAgICB0cmFjZV9rdm1fbWVtY3J5cHRfdW5yZWdpc3Rlcl9yZWdpb24o
-aG9zdCwgbWF4X3NpemUpOwogICAgIHIgPSBrdm1fdm1faW9jdGwoa3ZtX3N0YXRlLCBLVk1fTUVN
-T1JZX0VOQ1JZUFRfVU5SRUdfUkVHSU9OLCAmcmFuZ2UpOwogICAgIGlmIChyKSB7CiAgICAgICAg
-IGVycm9yX3JlcG9ydCgiJXM6IGZhaWxlZCB0byB1bnJlZ2lzdGVyIHJlZ2lvbiAoJXArJSN6eCki
-LAotICAgICAgICAgICAgICAgICAgICAgX19mdW5jX18sIGhvc3QsIHNpemUpOworICAgICAgICAg
-ICAgICAgICAgICAgX19mdW5jX18sIGhvc3QsIG1heF9zaXplKTsKICAgICB9CiB9CiAKZGlmZiAt
-LWdpdCBhL3V0aWwvdmZpby1oZWxwZXJzLmMgYi91dGlsL3ZmaW8taGVscGVycy5jCmluZGV4IGIz
-YWRjMzI4ZGIuLjNkYjZhYTQ5ZjQgMTAwNjQ0Ci0tLSBhL3V0aWwvdmZpby1oZWxwZXJzLmMKKysr
-IGIvdXRpbC92ZmlvLWhlbHBlcnMuYwpAQCAtMzcyLDI1ICszNzIsMjYgQEAgZmFpbF9jb250YWlu
-ZXI6CiAgICAgcmV0dXJuIHJldDsKIH0KIAotc3RhdGljIHZvaWQgcWVtdV92ZmlvX3JhbV9ibG9j
-a19hZGRlZChSQU1CbG9ja05vdGlmaWVyICpuLAotICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICB2b2lkICpob3N0LCBzaXplX3Qgc2l6ZSkKK3N0YXRpYyB2b2lkIHFlbXVfdmZp
-b19yYW1fYmxvY2tfYWRkZWQoUkFNQmxvY2tOb3RpZmllciAqbiwgdm9pZCAqaG9zdCwKKyAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2l6ZV90IHNpemUsIHNpemVfdCBtYXhf
-c2l6ZSkKIHsKICAgICBRRU1VVkZJT1N0YXRlICpzID0gY29udGFpbmVyX29mKG4sIFFFTVVWRklP
-U3RhdGUsIHJhbV9ub3RpZmllcik7CiAgICAgaW50IHJldDsKIAotICAgIHRyYWNlX3FlbXVfdmZp
-b19yYW1fYmxvY2tfYWRkZWQocywgaG9zdCwgc2l6ZSk7Ci0gICAgcmV0ID0gcWVtdV92ZmlvX2Rt
-YV9tYXAocywgaG9zdCwgc2l6ZSwgZmFsc2UsIE5VTEwpOworICAgIHRyYWNlX3FlbXVfdmZpb19y
-YW1fYmxvY2tfYWRkZWQocywgaG9zdCwgbWF4X3NpemUpOworICAgIHJldCA9IHFlbXVfdmZpb19k
-bWFfbWFwKHMsIGhvc3QsIG1heF9zaXplLCBmYWxzZSwgTlVMTCk7CiAgICAgaWYgKHJldCkgewot
-ICAgICAgICBlcnJvcl9yZXBvcnQoInFlbXVfdmZpb19kbWFfbWFwKCVwLCAlenUpIGZhaWxlZDog
-JWQiLCBob3N0LCBzaXplLCByZXQpOworICAgICAgICBlcnJvcl9yZXBvcnQoInFlbXVfdmZpb19k
-bWFfbWFwKCVwLCAlenUpIGZhaWxlZDogJWQiLCBob3N0LAorICAgICAgICAgICAgICAgICAgICAg
-bWF4X3NpemUsIHJldCk7CiAgICAgfQogfQogCi1zdGF0aWMgdm9pZCBxZW11X3ZmaW9fcmFtX2Js
-b2NrX3JlbW92ZWQoUkFNQmxvY2tOb3RpZmllciAqbiwKLSAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICB2b2lkICpob3N0LCBzaXplX3Qgc2l6ZSkKK3N0YXRpYyB2b2lkIHFl
-bXVfdmZpb19yYW1fYmxvY2tfcmVtb3ZlZChSQU1CbG9ja05vdGlmaWVyICpuLCB2b2lkICpob3N0
-LAorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVfdCBzaXplLCBz
-aXplX3QgbWF4X3NpemUpCiB7CiAgICAgUUVNVVZGSU9TdGF0ZSAqcyA9IGNvbnRhaW5lcl9vZihu
-LCBRRU1VVkZJT1N0YXRlLCByYW1fbm90aWZpZXIpOwogICAgIGlmIChob3N0KSB7Ci0gICAgICAg
-IHRyYWNlX3FlbXVfdmZpb19yYW1fYmxvY2tfcmVtb3ZlZChzLCBob3N0LCBzaXplKTsKKyAgICAg
-ICAgdHJhY2VfcWVtdV92ZmlvX3JhbV9ibG9ja19yZW1vdmVkKHMsIGhvc3QsIG1heF9zaXplKTsK
-ICAgICAgICAgcWVtdV92ZmlvX2RtYV91bm1hcChzLCBob3N0KTsKICAgICB9CiB9Ci0tIAoyLjI0
-LjEKCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4t
-ZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczov
-L2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+--===============2762865968602497794==
+Content-Language: en-US
+Content-Type: multipart/alternative;
+	boundary="_000_VI1PR04MB58071B8C08BD7D7D7D61BDF2F91B0VI1PR04MB5807eurp_"
+
+--_000_VI1PR04MB58071B8C08BD7D7D7D61BDF2F91B0VI1PR04MB5807eurp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+[[ Sorry. Needed to send another mail because I forgot to add xen-devel lis=
+ts to CC. ]]
+
+Hello,
+
+I applied your direct-map patch, Stefano, on top of RELEASE-4.13.0
+Xen.
+
+I also took your advice and used the Imagebuilder tool to setup my
+u-boot environment. I modified the tool to allow SDCard booting and
+tweaked the parameters a little to fit our platforms, also introducing
+support to add "direct-map" parameter in specific /chosen/DomU node
+and "xen,passthrough" in the host dts. The tool is very helpful and
+allows me to quickly change the u-boot environment without manually
+entering all the fdt formatting commands.
+
+The dom0less booting is successful, however, when I try to passthrough
+any device (I tried with ethernet card and uSDHC) I get a kernel panic
+in DomU when it tries to probe the driver, because of an unhandled
+fault:
+(XEN) DOM1: [    3.883482] sdhci: Secure Digital Host Controller Interface =
+driver
+(XEN) DOM1: [    3.891021] sdhci: Copyright(c) Pierre Ossman
+(XEN) DOM1: [    3.896389] sdhci-pltfm: SDHCI platform and OF driver helper
+(XEN) DOM1: [    3.903298] Unhandled fault at 0xffffff800800d048
+(XEN) DOM1: [    3.909021] Mem abort info:
+(XEN) DOM1: [    3.912863]   ESR =3D 0x96000000
+(XEN) DOM1: [    3.917019]   Exception class =3D DABT (current EL), IL =3D =
+32 bits
+(XEN) DOM1: [    3.924115]   SET =3D 0, FnV =3D 0
+(XEN) DOM1: [    3.928206]   EA =3D 0, S1PTW =3D 0
+(XEN) DOM1: [    3.932457] Data abort info:
+(XEN) DOM1: [    3.936514]   ISV =3D 0, ISS =3D 0x00000000
+(XEN) DOM1: [    3.941398]   CM =3D 0, WnR =3D 0
+(XEN) DOM1: [    3.945481] swapper pgtable: 4k pages, 39-bit VAs, pgdp =3D =
+(____ptrval____)
+(XEN) DOM1: [    3.953532] [ffffff800800d048] pgd=3D00000000bfffe803, pud=
+=3D00000000bfffe803, pmd=3D00000000bfffd803, pte=3D00e80000402f0f07
+(XEN) DOM1: [    3.965278] Internal error: ttbr address size fault: 9600000=
+0 [#1] PREEMPT SMP
+(XEN) DOM1: [    3.973546] Modules linked in:
+(XEN) DOM1: [    3.977709] Process swapper/0 (pid: 1, stack limit =3D 0x(__=
+__ptrval____))
+(XEN) DOM1: [    3.985525] CPU: 0 PID: 1 Comm: swapper/0 Not tainted 4.19.5=
+9-rt24+g00334f2 #1
+(XEN) DOM1: [    3.993855] pstate: 60000005 (nZCv daif -PAN -UAO)
+(XEN) DOM1: [    3.999755] pc : 0xffffff80083ac864
+(XEN) DOM1: [    4.004354] lr : 0xffffff80083ac810
+(XEN) DOM1: [    4.008955] sp : ffffff800800bba0
+(XEN) DOM1: [    4.013382] x29: ffffff800800bba0 x28: 0000000000000000
+(XEN) DOM1: [    4.019805] x27: ffffff800864f068 x26: ffffff80086ba000
+(XEN) DOM1: [    4.026228] x25: ffffffc031564980 x24: ffffff800856e0c0
+(XEN) DOM1: [    4.032651] x23: ffffffc03e8eec00 x22: ffffffc03e8eec10
+(XEN) DOM1: [    4.039074] x21: ffffffc03e8bf500 x20: ffffffc03e8bf800
+(XEN) DOM1: [    4.045497] x19: 0000000000000000 x18: ffffffffffffffff
+(XEN) DOM1: [    4.051921] x17: 0000000000000000 x16: 0000000000000000
+(XEN) DOM1: [    4.058344] x15: ffffff8008678548 x14: ffffffffffffffff
+(XEN) DOM1: [    4.064767] x13: 0000000000000018 x12: 0101010101010101
+(XEN) DOM1: [    4.071190] x11: 0000000000000020 x10: 0101010101010101
+(XEN) DOM1: [    4.077613] x9 : 0000000000000000 x8 : ffffffc031564c00
+(XEN) DOM1: [    4.084036] x7 : 0000000000000000 x6 : 000000000000003f
+(XEN) DOM1: [    4.090459] x5 : 0000000000000002 x4 : ffffffc03e83b4c0
+(XEN) DOM1: [    4.096883] x3 : 0000000000000000 x2 : 0000000000000000
+(XEN) DOM1: [    4.103306] x1 : ffffffc03e8bf000 x0 : ffffff800800d048
+(XEN) DOM1: [    4.109729] Call trace:
+(XEN) DOM1: [    4.113290]  0xffffff80083ac864
+(XEN) DOM1: [    4.117541]  0xffffff800832e3b8
+(XEN) DOM1: [    4.121795]  0xffffff800832c49c
+(XEN) DOM1: [    4.126047]  0xffffff800832c6bc
+(XEN) DOM1: [    4.130301]  0xffffff800832c808
+(XEN) DOM1: [    4.134554]  0xffffff800832a208
+(XEN) DOM1: [    4.138807]  0xffffff800832bd38
+(XEN) DOM1: [    4.143060]  0xffffff800832b5d8
+(XEN) DOM1: [    4.147314]  0xffffff800832d1f0
+(XEN) DOM1: [    4.151567]  0xffffff800832e318
+(XEN) DOM1: [    4.155820]  0xffffff800861d5f8
+(XEN) DOM1: [    4.160073]  0xffffff800808397c
+(XEN) DOM1: [    4.164326]  0xffffff8008600db4
+(XEN) DOM1: [    4.168580]  0xffffff80085078c0
+(XEN) DOM1: [    4.172833]  0xffffff8008084c30
+(XEN) DOM1: [    4.177091] Code: b9000ea0 d5033e9f f9400ea0 91012000 (b9000=
+01f)
+(XEN) DOM1: [    4.184298] ---[ end trace 7dc5f6b878cccbfa ]---
+(XEN) DOM1: [    4.191546] Kernel panic - not syncing: Attempted to kill in=
+it! exitcode=3D0x0000000b
+
+I uploaded on pastebin.com the u-boot env settings [0], my device
+passthrough partial dts [1], and the whole log of boot messages
+from xen, Dom0 and DomU [2]. I also modified the guest address
+layout and mapped the PL011 UART and GICv3 addresses to match
+the physical ones, as well as setting the GUEST_GNTTAB_BASE and
+GUEST_MAGIC_BASE to addresses before our board's RAM start address.
+I updated the GUEST_RAM0_BASE and GUEST_RAM0_SIZE to match the
+physical ones.
+
+Maybe you could check if I did anything wrong, because I couldn't
+figure it out.
+
+[0] https://pastebin.com/As6PgVFf
+[1] https://pastebin.com/j0NS4x5Z
+[2] https://pastebin.com/TaZR8pii
+
+Thank you once again for your support,
+Andrei
+
+--_000_VI1PR04MB58071B8C08BD7D7D7D61BDF2F91B0VI1PR04MB5807eurp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#0563C1;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:#954F72;
+	text-decoration:underline;}
+p.msonormal0, li.msonormal0, div.msonormal0
+	{mso-style-name:msonormal;
+	mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+span.EmailStyle18
+	{mso-style-type:personal;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+span.EmailStyle20
+	{mso-style-type:personal-reply;
+	font-family:"Calibri",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal">[[ Sorry. Needed to send another mail because I forg=
+ot to add xen-devel lists to CC. ]]<o:p></o:p></p>
+<p class=3D"MsoNormal"><b><o:p>&nbsp;</o:p></b></p>
+<p class=3D"MsoNormal">Hello,<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I applied your direct-map patch, Stefano, on top of =
+RELEASE-4.13.0<o:p></o:p></p>
+<p class=3D"MsoNormal">Xen.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I also took your advice and used the Imagebuilder to=
+ol to setup my<o:p></o:p></p>
+<p class=3D"MsoNormal">u-boot environment. I modified the tool to allow SDC=
+ard booting and<o:p></o:p></p>
+<p class=3D"MsoNormal">tweaked the parameters a little to fit our platforms=
+, also introducing<o:p></o:p></p>
+<p class=3D"MsoNormal">support to add &#8220;direct-map&#8221; parameter in=
+ specific /chosen/DomU node<o:p></o:p></p>
+<p class=3D"MsoNormal">and &#8220;xen,passthrough&#8221; in the host dts. T=
+he tool is very helpful and<o:p></o:p></p>
+<p class=3D"MsoNormal">allows me to quickly change the u-boot environment w=
+ithout manually<o:p></o:p></p>
+<p class=3D"MsoNormal">entering all the fdt formatting commands.<o:p></o:p>=
+</p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">The dom0less booting is successful, however, when I =
+try to passthrough<o:p></o:p></p>
+<p class=3D"MsoNormal">any device (I tried with ethernet card and uSDHC) I =
+get a kernel panic<o:p></o:p></p>
+<p class=3D"MsoNormal">in DomU when it tries to probe the driver, because o=
+f an unhandled<o:p></o:p></p>
+<p class=3D"MsoNormal">fault:<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.883482] sdhci: Sec=
+ure Digital Host Controller Interface driver<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.891021] sdhci: Cop=
+yright(c) Pierre Ossman<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.896389] sdhci-pltf=
+m: SDHCI platform and OF driver helper<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.903298] Unhandled =
+fault at 0xffffff800800d048<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.909021] Mem abort =
+info:<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.912863]&nbsp;&nbsp=
+; ESR =3D 0x96000000<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.917019]&nbsp;&nbsp=
+; Exception class =3D DABT (current EL), IL =3D 32 bits<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.924115]&nbsp;&nbsp=
+; SET =3D 0, FnV =3D 0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.928206]&nbsp;&nbsp=
+; EA =3D 0, S1PTW =3D 0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.932457] Data abort=
+ info:<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.936514]&nbsp;&nbsp=
+; ISV =3D 0, ISS =3D 0x00000000<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.941398]&nbsp;&nbsp=
+; CM =3D 0, WnR =3D 0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.945481] swapper pg=
+table: 4k pages, 39-bit VAs, pgdp =3D (____ptrval____)<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.953532] [ffffff800=
+800d048] pgd=3D00000000bfffe803, pud=3D00000000bfffe803, pmd=3D00000000bfff=
+d803, pte=3D00e80000402f0f07<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.965278] Internal e=
+rror: ttbr address size fault: 96000000 [#1] PREEMPT SMP<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.973546] Modules li=
+nked in:<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.977709] Process sw=
+apper/0 (pid: 1, stack limit =3D 0x(____ptrval____))<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.985525] CPU: 0 PID=
+: 1 Comm: swapper/0 Not tainted 4.19.59-rt24&#43;g00334f2 #1<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.993855] pstate: 60=
+000005 (nZCv daif -PAN -UAO)<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 3.999755] pc : 0xfff=
+fff80083ac864<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.004354] lr : 0xfff=
+fff80083ac810<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.008955] sp : fffff=
+f800800bba0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.013382] x29: fffff=
+f800800bba0 x28: 0000000000000000<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.019805] x27: fffff=
+f800864f068 x26: ffffff80086ba000<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.026228] x25: fffff=
+fc031564980 x24: ffffff800856e0c0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.032651] x23: fffff=
+fc03e8eec00 x22: ffffffc03e8eec10<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.039074] x21: fffff=
+fc03e8bf500 x20: ffffffc03e8bf800<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [ &nbsp;&nbsp;&nbsp;4.045497] x19: 00000=
+00000000000 x18: ffffffffffffffff<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.051921] x17: 00000=
+00000000000 x16: 0000000000000000<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.058344] x15: fffff=
+f8008678548 x14: ffffffffffffffff<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.064767] x13: 00000=
+00000000018 x12: 0101010101010101<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.071190] x11: 00000=
+00000000020 x10: 0101010101010101<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.077613] x9 : 00000=
+00000000000 x8 : ffffffc031564c00<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.084036] x7 : 00000=
+00000000000 x6 : 000000000000003f<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.090459] x5 : 00000=
+00000000002 x4 : ffffffc03e83b4c0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.096883] x3 : 00000=
+00000000000 x2 : 0000000000000000<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.103306] x1 : fffff=
+fc03e8bf000 x0 : ffffff800800d048<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.109729] Call trace=
+:<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.113290]&nbsp; 0xff=
+ffff80083ac864<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.117541]&nbsp; 0xff=
+ffff800832e3b8<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.121795]&nbsp; 0xff=
+ffff800832c49c<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.126047]&nbsp; 0xff=
+ffff800832c6bc<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.130301]&nbsp; 0xff=
+ffff800832c808<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.134554]&nbsp; 0xff=
+ffff800832a208<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.138807]&nbsp; 0xff=
+ffff800832bd38<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.143060]&nbsp; 0xff=
+ffff800832b5d8<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.147314]&nbsp; 0xff=
+ffff800832d1f0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.151567]&nbsp; 0xff=
+ffff800832e318<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.155820]&nbsp; 0xff=
+ffff800861d5f8<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.160073]&nbsp; 0xff=
+ffff800808397c<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.164326]&nbsp; 0xff=
+ffff8008600db4<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.168580]&nbsp; 0xff=
+ffff80085078c0<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.172833]&nbsp; 0xff=
+ffff8008084c30<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.177091] Code: b900=
+0ea0 d5033e9f f9400ea0 91012000 (b900001f)<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.184298] ---[ end t=
+race 7dc5f6b878cccbfa ]---<o:p></o:p></p>
+<p class=3D"MsoNormal">(XEN) DOM1: [&nbsp;&nbsp;&nbsp; 4.191546] Kernel pan=
+ic - not syncing: Attempted to kill init! exitcode=3D0x0000000b<o:p></o:p><=
+/p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">I uploaded on pastebin.com the u-boot env settings [=
+0], my device<o:p></o:p></p>
+<p class=3D"MsoNormal">passthrough partial dts [1], and the whole log of bo=
+ot messages<o:p></o:p></p>
+<p class=3D"MsoNormal">from xen, Dom0 and DomU [2]. I also modified the gue=
+st address<o:p></o:p></p>
+<p class=3D"MsoNormal">layout and mapped the PL011 UART and GICv3 addresses=
+ to match<o:p></o:p></p>
+<p class=3D"MsoNormal">the physical ones, as well as setting the GUEST_GNTT=
+AB_BASE and<o:p></o:p></p>
+<p class=3D"MsoNormal">GUEST_MAGIC_BASE to addresses before our board's RAM=
+ start address.<o:p></o:p></p>
+<p class=3D"MsoNormal">I updated the GUEST_RAM0_BASE and GUEST_RAM0_SIZE to=
+ match the<o:p></o:p></p>
+<p class=3D"MsoNormal">physical ones.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Maybe you could check if I did anything wrong, becau=
+se I couldn't<o:p></o:p></p>
+<p class=3D"MsoNormal">figure it out.<o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">[0] <a href=3D"https://pastebin.com/As6PgVFf">https:=
+//pastebin.com/As6PgVFf</a><o:p></o:p></p>
+<p class=3D"MsoNormal">[1] <a href=3D"https://pastebin.com/j0NS4x5Z">https:=
+//pastebin.com/j0NS4x5Z</a><o:p></o:p></p>
+<p class=3D"MsoNormal">[2] <a href=3D"https://pastebin.com/TaZR8pii">https:=
+//pastebin.com/TaZR8pii</a><o:p></o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal">Thank you once again for your support,<o:p></o:p></p=
+>
+<p class=3D"MsoNormal">Andrei<o:p></o:p></p>
+</div>
+</body>
+</html>
+
+--_000_VI1PR04MB58071B8C08BD7D7D7D61BDF2F91B0VI1PR04MB5807eurp_--
+
+
+--===============2762865968602497794==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============2762865968602497794==--
+
