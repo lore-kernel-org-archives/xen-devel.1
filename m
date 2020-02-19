@@ -2,73 +2,49 @@ Return-Path: <SRS0=lRzm=4H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B121C34047
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2020 16:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40E11C34056
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2020 16:47:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3E25520578
-	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2020 16:45:10 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RQWOYYOW"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3E25520578
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1A34F20578
+	for <xen-devel@archiver.kernel.org>; Wed, 19 Feb 2020 16:47:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A34F20578
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1j4ST6-0003fF-4y; Wed, 19 Feb 2020 16:45:00 +0000
+	id 1j4SVK-0003qX-Jp; Wed, 19 Feb 2020 16:47:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=rwKB=4H=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1j4ST4-0003eu-Dz
- for xen-devel@lists.xenproject.org; Wed, 19 Feb 2020 16:44:58 +0000
-X-Inumbo-ID: 299e0c4c-5337-11ea-ade5-bc764e2007e4
-Received: from mail-wm1-x342.google.com (unknown [2a00:1450:4864:20::342])
+ <SRS0=NMhh=4H=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1j4SVJ-0003qR-TS
+ for xen-devel@lists.xenproject.org; Wed, 19 Feb 2020 16:47:17 +0000
+X-Inumbo-ID: 7c957b74-5337-11ea-b0fd-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 299e0c4c-5337-11ea-ade5-bc764e2007e4;
- Wed, 19 Feb 2020 16:44:57 +0000 (UTC)
-Received: by mail-wm1-x342.google.com with SMTP id t23so1417615wmi.1
- for <xen-devel@lists.xenproject.org>; Wed, 19 Feb 2020 08:44:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=TrG1L2VGzXZTkpSwWyl6DCEmpwmLxsHAtrfzv+YSGlg=;
- b=RQWOYYOWjupx5XHFt7oLflvM7ynEi39rDuME/3B4I9xOY0ptK7a8lgQbxeYrbr1MKK
- +M4nz8goXgFxYSpCvErzu7QtOYeBGVvoUtZqZUviuIviVSQNiYN0KCkaWkqqIPrCcYnm
- /2tg5omBFzFU+UfnhzkriQrZDsnlpUVNg85SlQcWjhbXuq4IDNbQFR8HLLQPHmC7WEXV
- dx6bM1Yz6hgLS1fSRnJZo399TR7pJ85oStT1mnquG9VSWLASaB/f3/Q9kKSpS5mNQrXi
- ydsw8AaqAS4SeIK8XbhBee3GGog0hgC2NChoOkI1AyYQrePVs1nDNkvo+36dXYAZSEQj
- 8niA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=TrG1L2VGzXZTkpSwWyl6DCEmpwmLxsHAtrfzv+YSGlg=;
- b=BvvdzJ/8Iwtf6QiFUOGy71txpNzEktesq1rCHXy2X2YNVjY/o7agQcHCxYDEUz90OJ
- F/jLIb8I10gZ0X5THD5W0Ad3F6EZZh9eznvQhqj163PSl7TlvdZbToufm8CrrZsPKz2T
- fhF8lvONyR0tdhv2kXvdfmwLpFC4hRZA5RRZARyhls30xGir18gML+6eqIyERNTo6MOy
- FxHDj/wzpjNglLwIuVWueEU9NHeLJ+JHwWVEmi8b48pWTIn8Ze18uEvY1f334HbQ93SO
- 26Zh/BTXnvtFMoAtlSLawxL+5w2CpFI3u0nzqq7tUYAW1xcwcPSUmrFDE5bwh+zmuzxF
- ehLw==
-X-Gm-Message-State: APjAAAUAf2QfHGtpBrzosN7pMSMI5TNU+w9vL9GYKjRjksIuj5wRdJKl
- GZCGJtxgmjDbnQUFbT8/da0FgxRxVipUg1OwDws=
-X-Google-Smtp-Source: APXvYqx4KkSvaoYDTfYvDEkkRS/mHopfO1PUajSBHe0qMr+9S7cPp5ADATz1yEaGgizzBuJ52EFdzDx/7v/9LXN6yp8=
-X-Received: by 2002:a05:600c:d6:: with SMTP id
- u22mr11179456wmm.77.1582130697131; 
- Wed, 19 Feb 2020 08:44:57 -0800 (PST)
+ id 7c957b74-5337-11ea-b0fd-bc764e2007e4;
+ Wed, 19 Feb 2020 16:47:17 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 67A08ACE8;
+ Wed, 19 Feb 2020 16:47:16 +0000 (UTC)
+Message-ID: <95f651ddc1639d1c498067e4af71759585aa48b3.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Date: Wed, 19 Feb 2020 17:47:14 +0100
+In-Reply-To: <20200123085504.30911-1-jgross@suse.com>
+References: <20200123085504.30911-1-jgross@suse.com>
+Organization: SUSE
+User-Agent: Evolution 3.34.3 
 MIME-Version: 1.0
-References: <20200210184549.28707-1-andrew.cooper3@citrix.com>
-In-Reply-To: <20200210184549.28707-1-andrew.cooper3@citrix.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Wed, 19 Feb 2020 09:44:20 -0700
-Message-ID: <CABfawh==BEes5nvt=FD4waOb4pAgANGV+nPG1+XQ=CkgZ8FRGA@mail.gmail.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [Xen-devel] [PATCH] xen/arm: Restrict access to most HVM_PARAM's
+Subject: Re: [Xen-devel] [PATCH] xen/sched: rework credit2 run-queue
+ allocation
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,21 +55,183 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: George Dunlap <george.dunlap@eu.citrix.com>
+Content-Type: multipart/mixed; boundary="===============0039065992735132300=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gTW9uLCBGZWIgMTAsIDIwMjAgYXQgMTE6NDYgQU0gQW5kcmV3IENvb3Blcgo8YW5kcmV3LmNv
-b3BlcjNAY2l0cml4LmNvbT4gd3JvdGU6Cj4KPiBBUk0gY3VycmVudGx5IGhhcyBubyByZXN0cmlj
-dGlvbnMgb24gdG9vbHN0YWNrIGFuZCBndWVzdCBhY2Nlc3MgdG8gdGhlIGVudGlyZQo+IEhWTV9Q
-QVJBTSBibG9jay4gIEFzIHRoZSBwYWdpbmcvbW9uaXRvci9zaGFyaW5nIGZlYXR1cmVzIGFyZW4n
-dCB1bmRlciBzZWN1cml0eQo+IHN1cHBvcnQsIHRoaXMgZG9lc24ndCBuZWVkIGFuIFhTQS4KClRo
-ZXJlIGlzIG5vIHBhZ2luZyBvciBzaGFyaW5nIGltcGxlbWVudGF0aW9uIG9uIEFSTSBhbnl3YXku
-IEEgY2Mgd291bGQKaGF2ZSBiZWVuIG5pY2UgdGhvdWdoLgoKVGhhbmtzLApUYW1hcwoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxp
-bmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0039065992735132300==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-wb2jRvPJHKVdykESzqI+"
+
+
+--=-wb2jRvPJHKVdykESzqI+
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2020-01-23 at 09:55 +0100, Juergen Gross wrote:
+> Currently the memory for each run-queue of the credit2 scheduler is
+> allocated at the scheduler's init function: for each cpu in the
+> system
+> a struct csched2_runqueue_data is being allocated, even if the
+> current scheduler only handles one physical cpu or is configured to
+> work with a single run-queue. As each struct contains 4 cpumasks this
+> sums up to rather large memory sizes pretty fast.
+>=20
+Ok, I finally found the time to look at this... And I like it. :-)
+
+> In fact this fixes a bug in credit2 related to run-queue handling:
+> cpu_to_runqueue() will return the first free or matching run-queue,
+> which ever is found first. So in case a cpu is removed from credit2
+> this could result in e.g. run-queue 0 becoming free, so when another
+> cpu is added it will in any case be assigned to that free run-queue,
+> even if it would have found another run-queue matching later.
+>=20
+That's a good catch... Thanks!
+
+So, I only have a request, and a question:
+
+> --- a/xen/common/sched/credit2.c
+> +++ b/xen/common/sched/credit2.c
+> @@ -849,51 +822,71 @@ static inline bool same_core(unsigned int cpua,
+> unsigned int cpub)
+>             cpu_to_core(cpua) =3D=3D cpu_to_core(cpub);
+>  }
+> =20
+> -static unsigned int
+> -cpu_to_runqueue(const struct csched2_private *prv, unsigned int cpu)
+> +static struct csched2_runqueue_data *
+> +cpu_add_to_runqueue(struct csched2_private *prv, unsigned int cpu)
+>  {
+> -    const struct csched2_runqueue_data *rqd;
+> -    unsigned int rqi;
+> +    struct csched2_runqueue_data *rqd, *rqd_new;
+> +    struct list_head *rqd_ins;
+> +    unsigned long flags;
+> +    int rqi =3D 0;
+> +    bool rqi_unused =3D false, rqd_valid =3D false;
+> +
+> +    rqd_new =3D xzalloc(struct csched2_runqueue_data);
+> =20
+>
+So, I'm not sure I see why it's better to allocating this here, and
+then free it if we didn't need it, instead than allocating it later,
+only if we actually need it... What am I missing? :-)
+
+> -    for ( rqi =3D 0; rqi < nr_cpu_ids; rqi++ )
+> +    write_lock_irqsave(&prv->lock, flags);
+> +
+> +    rqd_ins =3D &prv->rql;
+> +    list_for_each_entry ( rqd, &prv->rql, rql )
+>      {
+>          unsigned int peer_cpu;
+> =20
+> -        /*
+> -         * As soon as we come across an uninitialized runqueue, use
+> it.
+> -         * In fact, either:
+> -         *  - we are initializing the first cpu, and we assign it to
+> -         *    runqueue 0. This is handy, especially if we are
+> dealing
+> -         *    with the boot cpu (if credit2 is the default
+> scheduler),
+> -         *    as we would not be able to use cpu_to_socket() and
+> similar
+> -         *    helpers anyway (they're result of which is not
+> reliable yet);
+> -         *  - we have gone through all the active runqueues, and
+> have not
+> -         *    found anyone whose cpus' topology matches the one we
+> are
+> -         *    dealing with, so activating a new runqueue is what we
+> want.
+> -         */
+> -        if ( prv->rqd[rqi].id =3D=3D -1 )
+> -            break;
+> +        /* Remember first unused queue index. */
+> +        if ( !rqi_unused && rqd->id > rqi )
+> +            rqi_unused =3D true;
+> =20
+> -        rqd =3D prv->rqd + rqi;
+> -        BUG_ON(cpumask_empty(&rqd->active));
+> -
+> -        peer_cpu =3D cpumask_first(&rqd->active);
+> +        peer_cpu =3D rqd->pick_bias;
+>          BUG_ON(cpu_to_socket(cpu) =3D=3D XEN_INVALID_SOCKET_ID ||
+>                 cpu_to_socket(peer_cpu) =3D=3D XEN_INVALID_SOCKET_ID);
+> =20
+> -        if (opt_runqueue =3D=3D OPT_RUNQUEUE_CPU)
+> -            continue;
+>          if ( opt_runqueue =3D=3D OPT_RUNQUEUE_ALL ||
+>               (opt_runqueue =3D=3D OPT_RUNQUEUE_CORE &&
+> same_core(peer_cpu, cpu)) ||
+>               (opt_runqueue =3D=3D OPT_RUNQUEUE_SOCKET &&
+> same_socket(peer_cpu, cpu)) ||
+>               (opt_runqueue =3D=3D OPT_RUNQUEUE_NODE &&
+> same_node(peer_cpu, cpu)) )
+> +        {
+> +            rqd_valid =3D true;
+>              break;
+> +        }
+>
+So, OPT_RUNQUEUE_CPU is just disappearing. If I understood the
+algorithm correctly, that is because in such case we just scan through
+the whole list, without finding any match, and the we'll allocate a new
+runqueue (while, for any of the other options, we stop as soon as we
+found a runqueue with a CPU inside it which match the criteria).
+
+Can we add a comment about this. Not necessary to describe the
+algorithm in details, I don't think... just a few words, especially
+about the fact that the enum has a _CPU item that, at a first and quick
+look, we seem to be ignoring here?
+
+Thanks and Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-wb2jRvPJHKVdykESzqI+
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl5NZpMACgkQFkJ4iaW4
+c+5PYg/+NefZs9UVbCYQoNQ8NlKL5xcrWMHhYZCKlJZbZIG1J8EYa1CxX8UTxhdH
+VviteVauMuBS5kmEaAhSnOuEPn4cs7qd/FexVdfdo3I9BiOq6nkqCqzOQTrHJbHu
+/Xm+0ZuMG1usYt0SCqbYLDFPJAkSlKoGSaU/5xbAiLuy1vBUiEbxqSmLdHb1sZ1K
+q6rH0Enm76nmsiaq4z+lsNrol1cFJLV0xiPcITJGOokOgDyJtKTjNzF9uANt3o66
+3qJgrw7+dVKsz9fRQ/yo1fHZo6RX+za/ztMrIs8R50GxlBYlbe4leRyuTumUfG9J
+bLPLqv39oIwaMxhTDSNk1jL/T1tfTEo9QP45x8kSkzh6ySL1hqvGOQmmlUXT6cwS
+qOb6yO9TWCNZxN3MLuZbuAuT54VDQk9UF6xVeZ2ZvSx9hmyWC2WNB9U9fbMKyCaK
+x+mJaaKe0y8H1rfYOEaaVBu/08Ee8NTJEE+NaAMsIAsXs8HM7AFdsSipZiNrZeXM
+glhoZJK/rpgenQhJLWiIVGkXpl25I6E62GYsS/vPlilBX6YoyPviDGlTZ1n0aLH7
+245G5fNw2Du48iMxP2BHmRMkf9pxl7BKJ/Yp7C4HtCYitn7ut3wgR+zwEvNYlkd5
+kqf+D+Aa3JM5r003T/tXY8AVDKrPG+h4rArQR5DlobjdRvZpskQ=
+=Uy58
+-----END PGP SIGNATURE-----
+
+--=-wb2jRvPJHKVdykESzqI+--
+
+
+
+--===============0039065992735132300==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============0039065992735132300==--
+
+
