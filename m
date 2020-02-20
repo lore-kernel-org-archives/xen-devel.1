@@ -2,114 +2,55 @@ Return-Path: <SRS0=miCT=4I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.1 required=3.0 tests=DATE_IN_PAST_06_12,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72EF6C11D04
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6C9EEC11D04
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:02:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3DF83207FD
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:00:46 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=bitdefender.onmicrosoft.com header.i=@bitdefender.onmicrosoft.com header.b="UXm+sNap"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DF83207FD
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bitdefender.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4609124654
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:02:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4609124654
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1j4idI-0006mi-1X; Thu, 20 Feb 2020 10:00:36 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=/BCT=4I=bitdefender.com=aisaila@srs-us1.protection.inumbo.net>)
- id 1j4idG-0006md-W3
- for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 10:00:35 +0000
-X-Inumbo-ID: d4bc29d4-53c7-11ea-84f2-12813bfff9fa
-Received: from EUR02-HE1-obe.outbound.protection.outlook.com (unknown
- [40.107.1.119]) by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d4bc29d4-53c7-11ea-84f2-12813bfff9fa;
- Thu, 20 Feb 2020 10:00:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=f/jVrw1a2auDNG8AEjboVmp0cNUoQoqh6QXkyLWJ/lvAXBQUiIlkwWYJFwwoVe6tN3mVRwNfZCUev3Oo+vOnGs6cIWqN35urGFnf5bED4/QdJXwypx+DdSjkS89L1xequyFcRqBEHeDzpqpSYSuFrkql2Kg+pY80njeMqTSSux2aSvXQ5Y8+7WrfIulbvRqhSuPAA51Mx+UDgXIMnaheV6wNIBPY8DsBDjMQzqQp2SYKdbGp4YE453aMMFoTZj8bIuDYKJ7CBJOf8PQSm6XJ9ogRypO/We+1RCEhsmBBsRw/hz60JQqKrvusBsai0Qa6YmKD5PQljQc2nR8BSGhQbg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iMztn245XkEhzXSFM7UoGhi4z2rEDnI3mGuOXSMDBow=;
- b=NG4LKdNeeQ82/eWXSJp8aF+F+pncIeJMybss4XVFw+tqoCVA1yaMEaA59GbqCNSn8defsPMrOhAJLuSPzl0ZtlB/+6BnYhua+R2jyylcSUBYuxO7e1lg/0eh5OtznqG3VhyYG6Z+/fu41i11G51QAw94OXufw1QNeBReLW6dQ9xGDFIOHpp6bzMKzlmVx8TNTEMwRc5hj+FuKc/uZahvQMV17oyjPHbvBbz/igZA1ECm9Brj2I8X/UcSsYXrTJ/H5NG/+ifo44iJxZQEC37EZgZNUmuiu5yrxmL7y8sDwzqtLbwwHqnMumavuuz+MqAIRE4xefVQRGCjhMKuvaMxwA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bitdefender.com; dmarc=pass action=none
- header.from=bitdefender.com; dkim=pass header.d=bitdefender.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bitdefender.onmicrosoft.com; s=selector2-bitdefender-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iMztn245XkEhzXSFM7UoGhi4z2rEDnI3mGuOXSMDBow=;
- b=UXm+sNapKNkNObCfhhWpLFVlfzAY4I85H0TB9Qak3JXYHnC2qAZl4MA2a1qDAUIhq6icdIbX/UXIv1a7plZc69cDca72nwM14iL89mfsuYXpKnE/08stSxNwjUEbVKrEwhtWkUcmzw2KNsiZvg5ebjBJKt+t91JmiFVMqinQ6ec=
-Received: from DB6PR02MB2999.eurprd02.prod.outlook.com (10.170.219.144) by
- DB6PR02MB3175.eurprd02.prod.outlook.com (10.170.222.150) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2729.34; Thu, 20 Feb 2020 10:00:00 +0000
-Received: from DB6PR02MB2999.eurprd02.prod.outlook.com
- ([fe80::f1c2:7dd1:1131:1c1d]) by DB6PR02MB2999.eurprd02.prod.outlook.com
- ([fe80::f1c2:7dd1:1131:1c1d%7]) with mapi id 15.20.2729.033; Thu, 20 Feb 2020
- 10:00:00 +0000
-Received: from [10.10.195.54] (91.199.104.6) by
- AM0PR06CA0081.eurprd06.prod.outlook.com (2603:10a6:208:fa::22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2750.18 via Frontend Transport; Thu, 20 Feb 2020 09:59:58 +0000
-From: Alexandru Stefan ISAILA <aisaila@bitdefender.com>
-To: Jan Beulich <jbeulich@suse.com>
-Thread-Topic: [PATCH V3] x86/altp2m: Hypercall to set altp2m view visibility
-Thread-Index: AQHV5wWKuFf2vClElk6nKYx34YpPrKgivhiAgAEc4IA=
-Date: Thu, 20 Feb 2020 09:59:59 +0000
-Message-ID: <1b42e2e2-1559-9014-1022-e5d5bf65eaa6@bitdefender.com>
-References: <20200219091811.9689-1-aisaila@bitdefender.com>
- <6ec21fc9-a4fc-58b3-d823-8bdb291a22ac@suse.com>
-In-Reply-To: <6ec21fc9-a4fc-58b3-d823-8bdb291a22ac@suse.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: AM0PR06CA0081.eurprd06.prod.outlook.com
- (2603:10a6:208:fa::22) To DB6PR02MB2999.eurprd02.prod.outlook.com
- (2603:10a6:6:17::16)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=aisaila@bitdefender.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [91.199.104.6]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: c6633a9a-5ca4-43b1-b148-08d7b5eba5aa
-x-ms-traffictypediagnostic: DB6PR02MB3175:|DB6PR02MB3175:
-x-microsoft-antispam-prvs: <DB6PR02MB3175AB0ABB88CFCC7A8F2ADAAB130@DB6PR02MB3175.eurprd02.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8882;
-x-forefront-prvs: 031996B7EF
-x-forefront-antispam-report: SFV:NSPM;
- SFS:(10019020)(39850400004)(376002)(346002)(396003)(136003)(366004)(199004)(189003)(5660300002)(86362001)(6916009)(71200400001)(4326008)(81156014)(66446008)(64756008)(66476007)(66946007)(31686004)(478600001)(8936002)(8676002)(81166006)(2906002)(66556008)(31696002)(16526019)(2616005)(956004)(316002)(53546011)(186003)(26005)(6486002)(54906003)(36756003)(52116002)(7416002)(16576012);
- DIR:OUT; SFP:1102; SCL:1; SRVR:DB6PR02MB3175;
- H:DB6PR02MB2999.eurprd02.prod.outlook.com; FPR:; SPF:None; LANG:en;
- PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: bitdefender.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: YhsZd0p6BZEwjgykBY1jFrWOpVTlYaLXXTRwY68SC1EnT/OhicGnJs38ZZqbwCDJqBoH2+vxUoSQX9x7uHSSehNOonbQAgzzrMYtXPUVSRPgM94xeQVtQA7LCPFITSIHo4uZBp8DB9o8clw5vQDeHBY/y+kdSwFEdQJ7sbaQbfQOyfPZ0ew4mhmTqDXQZrtg0CRMqwHJy6d/n8R9JvpLCP9Hhe+lB6kYSeG1w9xp+hZ5G/b7D2wt0dxXNZ7rfoqQMLxV0tcADfecc1SF1vX164NwBuDw+6XEsghxCVWKISKDz4ACZPCV2tSGN+b/5w/Kd/uqqb9xMrutv6aHPicTPYQY1ERaizW63mcS43G9oBwYOEO31YjV63lECBEmzldyM7Oo+vR3o2rVRR75t4tkNak6Um0982t7EoO9Yq3qCzlA2nmfn4F8SQiJXcBxH760
-x-ms-exchange-antispam-messagedata: GQ9sFw9D2pkmAGtLNHfix9TDsxEx4BaBBdSxbzNwjD/1Muu/fc9ElL9KlCaaXQn1DZuPW5HzxvDGAvnPLAO217AyIt9GUV7JVshaq3RKNnBk34UTe/pH3y4pmb5Zc85cha427FdXKsPSLum/lqd7qg==
-x-ms-exchange-transport-forked: True
-Content-ID: <425D8F6BE63EB94498E42E5E37841230@eurprd02.prod.outlook.com>
+	id 1j4ifF-0006wz-FY; Thu, 20 Feb 2020 10:02:37 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=eEsh=4I=xen.org=wl@srs-us1.protection.inumbo.net>)
+ id 1j4ifE-0006ws-04
+ for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 10:02:36 +0000
+X-Inumbo-ID: 1e461678-53c8-11ea-ade5-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1e461678-53c8-11ea-ade5-bc764e2007e4;
+ Thu, 20 Feb 2020 10:02:35 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1j4ifC-00050s-Ki; Thu, 20 Feb 2020 10:02:34 +0000
+Received: from 41.142.6.51.dyn.plus.net ([51.6.142.41] helo=debian)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1j4ifC-00022L-CT; Thu, 20 Feb 2020 10:02:34 +0000
+Date: Thu, 20 Feb 2020 00:51:23 +0000
+From: Wei Liu <wl@xen.org>
+To: Sander Eikelenboom <linux@eikelenboom.it>
+Message-ID: <20200220005123.wtas2zrii4zgf3rz@debian>
+References: <cover.1582143896.git.linux@eikelenboom.it>
+ <a5d34e806a0798e411b405625d1ef74db998fc85.1582143896.git.linux@eikelenboom.it>
 MIME-Version: 1.0
-X-OriginatorOrg: bitdefender.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c6633a9a-5ca4-43b1-b148-08d7b5eba5aa
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2020 09:59:59.9072 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 487baf29-f1da-469a-9221-243f830c36f3
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 25oi1ibzeYgQlnzyT/hHyv74253Sl73QezQNiFcnWPCgV+ueygfx04obBzc6qRBc7R3/K86YPc9IiYUZbecM/r2zYH1AQQzxT0CoIJPHL/Q=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR02MB3175
-Subject: Re: [Xen-devel] [PATCH V3] x86/altp2m: Hypercall to set altp2m view
- visibility
+Content-Disposition: inline
+In-Reply-To: <a5d34e806a0798e411b405625d1ef74db998fc85.1582143896.git.linux@eikelenboom.it>
+User-Agent: NeoMutt/20180716
+Subject: Re: [Xen-devel] [PATCH 2/3] tools/xentop: Remove dead code
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -120,46 +61,43 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Jun Nakajima <jun.nakajima@intel.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-DQoNCk9uIDE5LjAyLjIwMjAgMTk6MDAsIEphbiBCZXVsaWNoIHdyb3RlOg0KPiBPbiAxOS4wMi4y
-MDIwIDEwOjE4LCBBbGV4YW5kcnUgU3RlZmFuIElTQUlMQSB3cm90ZToNCj4+IEBAIC00ODM1LDYg
-KzQ4MzYsMjMgQEAgc3RhdGljIGludCBkb19hbHRwMm1fb3AoDQo+PiAgICAgICAgICAgYnJlYWs7
-DQo+PiAgICAgICB9DQo+PiAgIA0KPj4gKyAgICBjYXNlIEhWTU9QX2FsdHAybV9zZXRfdmlzaWJp
-bGl0eToNCj4+ICsgICAgew0KPj4gKyAgICAgICAgdWludDE2X3QgYWx0cDJtX2lkeCA9IGEudS5z
-ZXRfdmlzaWJpbGl0eS5hbHRwMm1faWR4Ow0KPj4gKw0KPj4gKyAgICAgICAgaWYgKCBhLnUuc2V0
-X3Zpc2liaWxpdHkucGFkICkNCj4+ICsgICAgICAgICAgICByYyA9IC1FSU5WQUw7DQo+PiArICAg
-ICAgICBlbHNlIGlmICggIWFsdHAybV9hY3RpdmUoZCkgKQ0KPj4gKyAgICAgICAgICAgIHJjID0g
-LUVPUE5PVFNVUFA7DQo+PiArICAgICAgICBlbHNlIGlmICggYS51LnNldF92aXNpYmlsaXR5LnZp
-c2libGUgKQ0KPj4gKyAgICAgICAgICAgIGQtPmFyY2guYWx0cDJtX3dvcmtpbmdfZXB0cFthbHRw
-Mm1faWR4XSA9DQo+PiArICAgICAgICAgICAgICAgIGQtPmFyY2guYWx0cDJtX2VwdHBbYWx0cDJt
-X2lkeF07DQo+PiArICAgICAgICBlbHNlDQo+PiArICAgICAgICAgICAgZC0+YXJjaC5hbHRwMm1f
-d29ya2luZ19lcHRwW2FsdHAybV9pZHhdID0NCj4+ICsgICAgICAgICAgICAgICAgbWZuX3goSU5W
-QUxJRF9NRk4pOw0KPiANCj4gRG9uJ3QgeW91IG5lZWQgdG8gYm91bmRzIGNoZWNrIHRoZSBpbmRl
-eCBiZWZvcmUgaXRzIHVzZT8NCg0KVW5sZXNzIHdlIHdhbnQgYSBpbmRleCBvdXQgb2YgYm91bmRz
-IGZyb20gdGhlIHVzZXIuIFNvcnJ5IGZvciBub3QgaGF2aW5nIA0KdGhhdCwgSSB3aWxsIGFkZCBh
-ICJhbHRwMm1fZXB0cFthcnJheV9pbmRleF9ub3NwZWMoYWx0cDJtX2lkeCwgDQpNQVhfRVBUUCld
-IiBpbiBwbGFjZSBmb3IgdGhlIG5leHQgdmVyc2lvbi4NCg0KPiBBbmQNCj4gc2hvdWxkbid0IHlv
-dSByZXR1cm4gYW4gZXJyb3IgYWxzbyBmb3IgaW4tcmFuZ2Ugb25lcyB3aGljaA0KPiBhcmVuJ3Qg
-YWN0dWFsbHkgdmFsaWQ/DQpUaGF0IGlzIGEgZ29vZCB0aGluZy4gTWF5YmUgLUVJTlZBTCBjb3Vs
-ZCBmaXQgdGhpcz8NCg0KQW5kIHRvZ2V0aGVyIHdpdGggdGhlIGJvdW5kcyBjaGVjayBpdCB3aWxs
-IGVuZCB1cCBzb21ldGhpbmcgbGlrZSB0aGlzOg0KDQppZiAoICFhbHRwMm1faWR4IDwgMCB8fCBh
-bHRwMm1faWR4ID49IA0KbWluKEFSUkFZX1NJWkUoZC0+YXJjaC5hbHRwMm1fcDJtKSwgTUFYX0VQ
-VFApIHx8IA0KYWx0cDJtX2VwdHBbYXJyYXlfaW5kZXhfbm9zcGVjKGFsdHAybV9pZHgsIE1BWF9F
-UFRQKV0gPT0gDQptZm5feChJTlZBTElEX01GTikgKQ0KDQpyZXR1cm4gLUVJTlZBTDsNCg0KQW5k
-IGxvb2tpbmcgYWdhaW4sIGl0IGNvdWxkIGJlIGNvdXBsZWQgd2l0aCB0aGUgYS51LnNldF92aXNp
-YmlsaXR5LnBhZC4NCg0KVGhhbmtzLA0KQWxleA0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlz
-dHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL3hlbi1kZXZlbA==
+T24gV2VkLCBGZWIgMTksIDIwMjAgYXQgMDk6MzE6MzFQTSArMDEwMCwgU2FuZGVyIEVpa2VsZW5i
+b29tIHdyb3RlOgo+IFNpZ25lZC1vZmYtYnk6IFNhbmRlciBFaWtlbGVuYm9vbSA8bGludXhAZWlr
+ZWxlbmJvb20uaXQ+Cj4gLS0tCgpJIHdpbGwgYWRkIHRoZSBmb2xsb3dpbmcgY29tbWl0IG1lc3Nh
+Z2U6CgpUaGUgdmFyaWFibGUgZnJlZWFsYmVfbWIgd2FzIG5ldmVyIHJlYWxseSB1c2VkLiBEZWxl
+dGUgaXQgYW5kIHRoZSBjb2RlCmFzc29jaWF0ZWQgd2l0aCBpdC4KCkFja2VkLWJ5OiBXZWkgTGl1
+IDx3bEB4ZW4ub3JnPgoKPiAgdG9vbHMveGVuc3RhdC94ZW50b3AveGVudG9wLmMgfCAxMCArKy0t
+LS0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKyksIDggZGVsZXRpb25zKC0p
+Cj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0YXQveGVudG9wL3hlbnRvcC5jIGIvdG9vbHMv
+eGVuc3RhdC94ZW50b3AveGVudG9wLmMKPiBpbmRleCAxM2I2MTJmMjZkLi5iYmI1ZDQ3Yjc2IDEw
+MDY0NAo+IC0tLSBhL3Rvb2xzL3hlbnN0YXQveGVudG9wL3hlbnRvcC5jCj4gKysrIGIvdG9vbHMv
+eGVuc3RhdC94ZW50b3AveGVudG9wLmMKPiBAQCAtOTQzLDcgKzk0Myw2IEBAIHZvaWQgZG9fc3Vt
+bWFyeSh2b2lkKQo+ICAJICAgICAgICAgY3Jhc2ggPSAwLCBkeWluZyA9IDAsIHNodXRkb3duID0g
+MDsKPiAgCXVuc2lnbmVkIGksIG51bV9kb21haW5zID0gMDsKPiAgCXVuc2lnbmVkIGxvbmcgbG9u
+ZyB1c2VkID0gMDsKPiAtCWxvbmcgZnJlZWFibGVfbWIgPSAwOwo+ICAJeGVuc3RhdF9kb21haW4g
+KmRvbWFpbjsKPiAgCXRpbWVfdCBjdXJ0Owo+ICAKPiBAQCAtOTcwLDE3ICs5NjksMTIgQEAgdm9p
+ZCBkb19zdW1tYXJ5KHZvaWQpCj4gIAkgICAgICBudW1fZG9tYWlucywgcnVuLCBibG9jaywgcGF1
+c2UsIGNyYXNoLCBkeWluZywgc2h1dGRvd24pOwo+ICAKPiAgCXVzZWQgPSB4ZW5zdGF0X25vZGVf
+dG90X21lbShjdXJfbm9kZSkteGVuc3RhdF9ub2RlX2ZyZWVfbWVtKGN1cl9ub2RlKTsKPiAtCWZy
+ZWVhYmxlX21iID0gMDsKPiAgCj4gIAkvKiBEdW1wIG5vZGUgbWVtb3J5IGFuZCBjcHUgaW5mb3Jt
+YXRpb24gKi8KPiAtCWlmICggZnJlZWFibGVfbWIgPD0gMCApCj4gLQkgICAgIHByaW50KCJNZW06
+ICVsbHVrIHRvdGFsLCAlbGx1ayB1c2VkLCAlbGx1ayBmcmVlICAgICIsCj4gKwlwcmludCgiTWVt
+OiAlbGx1ayB0b3RhbCwgJWxsdWsgdXNlZCwgJWxsdWsgZnJlZSAgICAiLAo+ICAJICAgICAgeGVu
+c3RhdF9ub2RlX3RvdF9tZW0oY3VyX25vZGUpLzEwMjQsIHVzZWQvMTAyNCwKPiAgCSAgICAgIHhl
+bnN0YXRfbm9kZV9mcmVlX21lbShjdXJfbm9kZSkvMTAyNCk7Cj4gLQllbHNlCj4gLQkgICAgIHBy
+aW50KCJNZW06ICVsbHVrIHRvdGFsLCAlbGx1ayB1c2VkLCAlbGx1ayBmcmVlLCAlbGRrIGZyZWVh
+YmxlLCAiLAo+IC0JICAgICAgeGVuc3RhdF9ub2RlX3RvdF9tZW0oY3VyX25vZGUpLzEwMjQsIHVz
+ZWQvMTAyNCwKPiAtCSAgICAgIHhlbnN0YXRfbm9kZV9mcmVlX21lbShjdXJfbm9kZSkvMTAyNCwg
+ZnJlZWFibGVfbWIqMTAyNCk7Cj4gKwo+ICAJcHJpbnQoIkNQVXM6ICV1IEAgJWxsdU1IelxuIiwK
+PiAgCSAgICAgIHhlbnN0YXRfbm9kZV9udW1fY3B1cyhjdXJfbm9kZSksCj4gIAkgICAgICB4ZW5z
+dGF0X25vZGVfY3B1X2h6KGN1cl9ub2RlKS8xMDAwMDAwKTsKPiAtLSAKPiAyLjIwLjEKPiAKCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBt
+YWlsaW5nIGxpc3QKWGVuLWRldmVsQGxpc3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMu
+eGVucHJvamVjdC5vcmcvbWFpbG1hbi9saXN0aW5mby94ZW4tZGV2ZWw=
