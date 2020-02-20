@@ -2,65 +2,50 @@ Return-Path: <SRS0=miCT=4I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4BB00C11D04
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B538C11D04
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:57:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8082224654
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:52:47 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=msd.im header.i=@msd.im header.b="e2g8QaRn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8082224654
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=msd.im
+	by mail.kernel.org (Postfix) with ESMTPS id 651442465D
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:57:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 651442465D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1j4iVF-0005Yg-U0; Thu, 20 Feb 2020 09:52:17 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1j4iaF-0005k7-Oo; Thu, 20 Feb 2020 09:57:27 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=X/eN=4I=msd.im=msd+xen-devel@srs-us1.protection.inumbo.net>)
- id 1j4iVE-0005Xw-6D
- for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 09:52:16 +0000
-X-Inumbo-ID: ab405e14-53c6-11ea-ade5-bc764e2007e4
-Received: from smtp.smtpout.orange.fr (unknown [80.12.242.134])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ab405e14-53c6-11ea-ade5-bc764e2007e4;
- Thu, 20 Feb 2020 09:52:13 +0000 (UTC)
-Received: from msd.im ([86.192.232.123]) by mwinf5d23 with ME
- id 4xsB2200h2gQJfJ03xsCmv; Thu, 20 Feb 2020 10:52:12 +0100
-X-ME-Helo: msd.im
-X-ME-Auth: Z19kZXNwb2lzQG9yYW5nZS5mcg==
-X-ME-Date: Thu, 20 Feb 2020 10:52:12 +0100
-X-ME-IP: 86.192.232.123
-Received: from [10.59.118.51] (82-64-206-189.subs.proxad.net [82.64.206.189])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128
- bits)) (No client certificate requested)
- by msd.im (Postfix) with ESMTPSA id AE9DD20178
- for <xen-devel@lists.xenproject.org>; Thu, 20 Feb 2020 10:52:11 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=msd.im; s=msd001;
- t=1582192331; bh=1ZuzhGLhyvdtKjbiM+4RqaVXiSWProAe6o9hNjv82HA=;
- h=From:To:Subject:Date:From;
- b=e2g8QaRnVSMLu3M1F2Lyxv073mK4ZKoRz+RKa+VkC/uXboR2n+6HBfbpT5M+9Z41a
- jEYZCEOdsh1HIBaTAoGKQErsvMfcDa3xrcGo+mhH1Snf/alhRp75NrT/K1l9lq2l7b
- URkBz0JrmNwWQbMsy+20OP1FZGSyQbTkLNXuolZtzkRNT4l85RhX8z496bsItD93hw
- KJ2hxqozbYNmYUBnOYylHHMQpcSzEMEtsR4J9O144M65JFt+EeatD8GEuV2NgxKuig
- U3SrUbqW5NJX1xEBhJWSlFCqFzEJZm3jXHh2ImK8F8OwXwat8+WUy0SQPHNuho+6y1
- 8Mdnf9bQ5bw9A==
-From: msd+xen-devel@msd.im
-To: xen-devel@lists.xenproject.org
-Message-ID: <35e1ce76-5415-1a3c-e391-2c7f2528f0f2@msd.im>
-Date: Thu, 20 Feb 2020 10:52:09 +0100
-User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ <SRS0=10iu=4I=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1j4iaE-0005k2-Mg
+ for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 09:57:26 +0000
+X-Inumbo-ID: 64efa298-53c7-11ea-84f2-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 64efa298-53c7-11ea-84f2-12813bfff9fa;
+ Thu, 20 Feb 2020 09:57:25 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 18261ABE7;
+ Thu, 20 Feb 2020 09:57:24 +0000 (UTC)
+Message-ID: <215dd48f64d3d2b867dbc4897aba31f3b672b819.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Date: Thu, 20 Feb 2020 10:57:23 +0100
+In-Reply-To: <20200211122736.16714-1-jgross@suse.com>
+References: <20200211122736.16714-1-jgross@suse.com>
+Organization: SUSE
+User-Agent: Evolution 3.34.3 
 MIME-Version: 1.0
-Content-Language: en-GB
-Subject: [Xen-devel] dom-u stuck in ---sr- state after reboot
+Subject: Re: [Xen-devel] [PATCH v2] xen/sched: add some diagnostic info in
+ the run queue keyhandler
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,20 +56,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: George Dunlap <george.dunlap@eu.citrix.com>
+Content-Type: multipart/mixed; boundary="===============1285742974925745058=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGkgZXZlcnlvbmUsCgpTaW5jZSBJIHVzZSBYZW4gNC4xMSBvbiBEZWJpYW4gMTAsIHNvbWV0aW1l
-cyAoYWJvdXQgb25lIGluIHR3ZW50eSB0aW1lcykKYWZ0ZXIgYSBkb20tdSByZWJvb3QsIGl0IHN0
-YXlzIHN0dWNrIHdpdGggdGhlIHN0YXRlICctLS1zci0nLgpUaGlzIGhhZCBuZXZlciBoYXBwZW5l
-ZCBmb3IgbWUgd2l0aCBYZW4gNC40IG9uIERlYmlhbiA4LgoKSSBoYXZlIHRvIG1hbnVhbGx5IGRl
-c3Ryb3kgYW5kIHJlYm9vdCB0aGUgZG9tLXUgc3R1Y2sgZG9tYWluLgoKSSBjYW4ndCBzZWUgYW55
-IGVycm9yIGluIGxvZ3MuCgpEbyB5b3Uga25vdyB3aHkgYW5kIGhvdyBJIGNhbiBhdm9pZCBpdCA/
-CgpCZXN0IHJlZ2FyZHMsCgoKR3VpbGxhdW1lCgpJIHRyeSB0byBhc2sgb24gdGhpcyBtYWlsaW5n
-IGxpc3QgYmVjYXVzZSBJIGdvdCBubyByZXNwb25zZSBoZXJlIDoKaHR0cHM6Ly9tYXJrbWFpbC5v
-cmcvbWVzc2FnZS9uNG1qaHZ4YWxjMmd3ZjY3CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0
-cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlz
-dGluZm8veGVuLWRldmVs
+
+--===============1285742974925745058==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-/D51d9MA8eUAcpTYuXq2"
+
+
+--=-/D51d9MA8eUAcpTYuXq2
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 2020-02-11 at 13:27 +0100, Juergen Gross wrote:
+> When dumping the run queue information add some more data regarding
+> current and (if known) previous vcpu for each physical cpu.
+>=20
+> With core scheduling activated the printed data will be e.g.:
+>=20
+> (XEN) CPUs info:
+> (XEN) CPU[00] current=3Dd[IDLE]v0, curr=3Dd[IDLE]v0, prev=3DNULL
+> (XEN) CPU[01] current=3Dd[IDLE]v1
+> (XEN) CPU[02] current=3Dd[IDLE]v2, curr=3Dd[IDLE]v2, prev=3DNULL
+> (XEN) CPU[03] current=3Dd[IDLE]v3
+>=20
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+>
+I'm fine with this patch, i.e., I think the additional logging it is
+adding is useful and the locking is correct and in line with the
+current (scheduling) keyhandler locking practices.
+
+And thanks for making the requested adjustments to the changelog. :-)
+
+So, I think it should go in:
+
+Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
+
+If/when, as a result of the discussion going on in the thread about
+keyhandler locking, we decide to change all the locks for all the
+keyhandlers, then we'll change them here as well.
+
+Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-/D51d9MA8eUAcpTYuXq2
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl5OWAMACgkQFkJ4iaW4
+c+6GexAAu6K5aw8p7qgY7jOFloXFUH21W8tI43mM89Se4DW5ja57BgTCYENdM+hj
+MCm+SAdbdhTWQN/ggAljBJ8nWfvlpDh6M/UT01UILTvxhnlX/+9AiC3bdOZlIYhW
+aMlxK5sXF4lISD6ycheP/Mq3iaRN/TSST990o4LAHdkzQkSy9FxBBkLnAV1pYEk/
+hSGC6wGJYS70XOwOcdOGPJQLJRAlLVpnqAyURlXWmJmOQ0OxvSMB6vY5v1cajrWe
+qvQpO0fXNwr0x1JHSJbfW0SER5taR7Hn2oYHBHqk80tnZayPQ5XiWN93fMms58sa
+wZoPWFgxMg5F+4ltYWmfSfwDn2BA8OoFDDFgdJyWXdkCE9lpJK2vdXAJzQ60pc1h
+XaaKbxEKeuMBdpkjMe/HBXaLDFmNeWvS5lq1JRNA7KqnEvauGTrfz3/jahXu+x2y
+q8dyT0pRIVAiJYYuxKFZizNgjEmDRinKHs1pM/nB2wMfVChwezcN29siVIP4XqpC
+9/bJ3okWQr5AS+Lvms94C8YqFKkvY4WEWGrPBMxs3+MlXewuiIGiRlLNINH9Q6xE
+uYcX+7SVu5OJYponKnxiA0EamrsT5L5diODF4vhC9kPa8PufiOr6ClBSII/Pe5WP
+MXw276Zk3N2FOZToDCRndr1KyTyFJucrPYv0JGrmZtiDnk7RntE=
+=CuNW
+-----END PGP SIGNATURE-----
+
+--=-/D51d9MA8eUAcpTYuXq2--
+
+
+
+--===============1285742974925745058==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============1285742974925745058==--
+
+
