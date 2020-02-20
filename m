@@ -2,57 +2,55 @@ Return-Path: <SRS0=miCT=4I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.1 required=3.0 tests=DATE_IN_PAST_06_12,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-4.1 required=3.0 tests=DATE_IN_PAST_06_12,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6CFEBC11D04
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 364F9C11D04
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:07:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 47A6024654
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:06:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 47A6024654
+	by mail.kernel.org (Postfix) with ESMTPS id 10EED20801
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 10:07:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10EED20801
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1j4iiN-0007JS-P1; Thu, 20 Feb 2020 10:05:51 +0000
+	id 1j4ijy-0007RL-5Z; Thu, 20 Feb 2020 10:07:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=eEsh=4I=xen.org=wl@srs-us1.protection.inumbo.net>)
- id 1j4iiM-0007JL-JI
- for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 10:05:50 +0000
-X-Inumbo-ID: 924b4412-53c8-11ea-bc8e-bc764e2007e4
+ id 1j4ijx-0007RG-SE
+ for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 10:07:29 +0000
+X-Inumbo-ID: cd657e78-53c8-11ea-ade5-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 924b4412-53c8-11ea-bc8e-bc764e2007e4;
- Thu, 20 Feb 2020 10:05:50 +0000 (UTC)
+ id cd657e78-53c8-11ea-ade5-bc764e2007e4;
+ Thu, 20 Feb 2020 10:07:29 +0000 (UTC)
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <wl@xen.org>)
- id 1j4iiL-00056p-7V; Thu, 20 Feb 2020 10:05:49 +0000
+ id 1j4ijw-00059w-KG; Thu, 20 Feb 2020 10:07:28 +0000
 Received: from 41.142.6.51.dyn.plus.net ([51.6.142.41] helo=debian)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
  (envelope-from <wl@xen.org>)
- id 1j4iiK-0002L2-VD; Thu, 20 Feb 2020 10:05:49 +0000
-Date: Thu, 20 Feb 2020 00:54:38 +0000
+ id 1j4ijw-0002Vt-Bg; Thu, 20 Feb 2020 10:07:28 +0000
+Date: Thu, 20 Feb 2020 00:56:17 +0000
 From: Wei Liu <wl@xen.org>
 To: Sander Eikelenboom <linux@eikelenboom.it>
-Message-ID: <20200220005438.7veaneplgzj5wvgb@debian>
+Message-ID: <20200220005617.jbsgmv43rnx3onzj@debian>
 References: <cover.1582143896.git.linux@eikelenboom.it>
- <416169fe34ec346a5edde2c66c4b017871c2a891.1582143896.git.linux@eikelenboom.it>
- <20200220004816.qydrhtyedkko4rc7@debian>
+ <a5d34e806a0798e411b405625d1ef74db998fc85.1582143896.git.linux@eikelenboom.it>
+ <20200220005123.wtas2zrii4zgf3rz@debian>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200220004816.qydrhtyedkko4rc7@debian>
+In-Reply-To: <20200220005123.wtas2zrii4zgf3rz@debian>
 User-Agent: NeoMutt/20180716
-Subject: Re: [Xen-devel] [PATCH 1/3] tools/xentop: Fix calculation of used
- memory.
+Subject: Re: [Xen-devel] [PATCH 2/3] tools/xentop: Remove dead code
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,28 +68,16 @@ Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gVGh1LCBGZWIgMjAsIDIwMjAgYXQgMTI6NDg6MTZBTSArMDAwMCwgV2VpIExpdSB3cm90ZToK
-PiBUaGUgY29kZSBsb29rcyBjb3JyZWN0IHRvIG1lLCBidXQgSSB3b3VsZCBsaWtlIHRvIGFkZCB0
-aGUgZm9sbG93aW5nCj4gY29tbWl0IG1lc3NhZ2UgdG8gdGhpcyBjaGFuZ2UuCj4gCj4gVXNlZCBt
-ZW1vcnkgc2hvdWxkIGJlIGNhbGN1bGF0ZWQgYnkgc3VidHJhY3RpbmcgZnJlZSBtZW1vcnkgZnJv
-bSB0b3RhbAo+IG1lbW9yeS4KCkZpeGVzOiBjNTg4YzAwMmNjMSAoInRvb2xzOiByZW1vdmUgdG1l
-bSBjb2RlIGFuZCBjb21tYW5kcyIpCgo+IAo+IAo+IE9uIFdlZCwgRmViIDE5LCAyMDIwIGF0IDA5
-OjMxOjMwUE0gKzAxMDAsIFNhbmRlciBFaWtlbGVuYm9vbSB3cm90ZToKPiA+IFNpZ25lZC1vZmYt
-Ynk6IFNhbmRlciBFaWtlbGVuYm9vbSA8bGludXhAZWlrZWxlbmJvb20uaXQ+Cj4gPiAtLS0KPiA+
-ICB0b29scy94ZW5zdGF0L3hlbnRvcC94ZW50b3AuYyB8IDIgKy0KPiA+ICAxIGZpbGUgY2hhbmdl
-ZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPiA+IAo+ID4gZGlmZiAtLWdpdCBhL3Rv
-b2xzL3hlbnN0YXQveGVudG9wL3hlbnRvcC5jIGIvdG9vbHMveGVuc3RhdC94ZW50b3AveGVudG9w
-LmMKPiA+IGluZGV4IGFmMTFlYmZiZjcuLjEzYjYxMmYyNmQgMTAwNjQ0Cj4gPiAtLS0gYS90b29s
-cy94ZW5zdGF0L3hlbnRvcC94ZW50b3AuYwo+ID4gKysrIGIvdG9vbHMveGVuc3RhdC94ZW50b3Av
-eGVudG9wLmMKPiA+IEBAIC05NjksNyArOTY5LDcgQEAgdm9pZCBkb19zdW1tYXJ5KHZvaWQpCj4g
-PiAgCSAgICAgICIldSBjcmFzaGVkLCAldSBkeWluZywgJXUgc2h1dGRvd24gXG4iLAo+ID4gIAkg
-ICAgICBudW1fZG9tYWlucywgcnVuLCBibG9jaywgcGF1c2UsIGNyYXNoLCBkeWluZywgc2h1dGRv
-d24pOwo+ID4gIAo+ID4gLQl1c2VkID0geGVuc3RhdF9ub2RlX3RvdF9tZW0oY3VyX25vZGUpOwo+
-ID4gKwl1c2VkID0geGVuc3RhdF9ub2RlX3RvdF9tZW0oY3VyX25vZGUpLXhlbnN0YXRfbm9kZV9m
-cmVlX21lbShjdXJfbm9kZSk7Cj4gCj4gQWxzbywgSSB3aWxsIGFkZCBzcGFjZXMgYXJvdW5kICIt
-Ii4KPiAKPiBBY2tlZC1ieTogV2VpIExpdSA8d2xAeGVuLm9yZz4KPiAKPiA+ICAJZnJlZWFibGVf
-bWIgPSAwOwo+ID4gIAo+ID4gIAkvKiBEdW1wIG5vZGUgbWVtb3J5IGFuZCBjcHUgaW5mb3JtYXRp
-b24gKi8KPiA+IC0tIAo+ID4gMi4yMC4xCj4gPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fClhlbi1kZXZlbCBtYWlsaW5nIGxpc3QKWGVuLWRldmVsQGxp
-c3RzLnhlbnByb2plY3Qub3JnCmh0dHBzOi8vbGlzdHMueGVucHJvamVjdC5vcmcvbWFpbG1hbi9s
-aXN0aW5mby94ZW4tZGV2ZWw=
+T24gVGh1LCBGZWIgMjAsIDIwMjAgYXQgMTI6NTE6MjNBTSArMDAwMCwgV2VpIExpdSB3cm90ZToK
+PiBPbiBXZWQsIEZlYiAxOSwgMjAyMCBhdCAwOTozMTozMVBNICswMTAwLCBTYW5kZXIgRWlrZWxl
+bmJvb20gd3JvdGU6Cj4gPiBTaWduZWQtb2ZmLWJ5OiBTYW5kZXIgRWlrZWxlbmJvb20gPGxpbnV4
+QGVpa2VsZW5ib29tLml0Pgo+ID4gLS0tCj4gCj4gSSB3aWxsIGFkZCB0aGUgZm9sbG93aW5nIGNv
+bW1pdCBtZXNzYWdlOgo+IAo+IFRoZSB2YXJpYWJsZSBmcmVlYWxiZV9tYiB3YXMgbmV2ZXIgcmVh
+bGx5IHVzZWQuIERlbGV0ZSBpdCBhbmQgdGhlIGNvZGUKPiBhc3NvY2lhdGVkIHdpdGggaXQuCgpB
+Y3R1YWxseSwgdXNlIHRoZSBmb2xsb3dpbmc6CgpUaGUgZnJlZWFibGVfbWIgdmFyaWFibGUgd2Fz
+IG1hZGUgdG8gYWx3YXlzIGJlIHplcm8gd2hlbiBwdXJnaW5nIHRtZW0KZnJvbSB0b29scy4gV2Ug
+Y2FuIGluIGZhY3QganVzdCBkZWxldGUgaXQgYW5kIHRoZSBjb2RlIGFzc29jaWF0ZWQgd2l0aApp
+dC4KCkZpeGVzOiBjNTg4YzAwMmNjMSAoInRvb2xzOiByZW1vdmUgdG1lbSBjb2RlIGFuZCBjb21t
+YW5kcyIpCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpY
+ZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRw
+czovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
