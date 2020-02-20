@@ -2,50 +2,57 @@ Return-Path: <SRS0=miCT=4I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.1 required=3.0 tests=DATE_IN_PAST_06_12,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B538C11D04
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:57:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E5E77C11D09
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:59:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 651442465D
-	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:57:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 651442465D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C361E24676
+	for <xen-devel@archiver.kernel.org>; Thu, 20 Feb 2020 09:59:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C361E24676
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1j4iaF-0005k7-Oo; Thu, 20 Feb 2020 09:57:27 +0000
+	id 1j4icE-0005sa-D1; Thu, 20 Feb 2020 09:59:30 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=10iu=4I=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1j4iaE-0005k2-Mg
- for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 09:57:26 +0000
-X-Inumbo-ID: 64efa298-53c7-11ea-84f2-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=eEsh=4I=xen.org=wl@srs-us1.protection.inumbo.net>)
+ id 1j4icD-0005sV-Tu
+ for xen-devel@lists.xenproject.org; Thu, 20 Feb 2020 09:59:29 +0000
+X-Inumbo-ID: aeab036e-53c7-11ea-84f2-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 64efa298-53c7-11ea-84f2-12813bfff9fa;
- Thu, 20 Feb 2020 09:57:25 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 18261ABE7;
- Thu, 20 Feb 2020 09:57:24 +0000 (UTC)
-Message-ID: <215dd48f64d3d2b867dbc4897aba31f3b672b819.camel@suse.com>
-From: Dario Faggioli <dfaggioli@suse.com>
-To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
-Date: Thu, 20 Feb 2020 10:57:23 +0100
-In-Reply-To: <20200211122736.16714-1-jgross@suse.com>
-References: <20200211122736.16714-1-jgross@suse.com>
-Organization: SUSE
-User-Agent: Evolution 3.34.3 
+ id aeab036e-53c7-11ea-84f2-12813bfff9fa;
+ Thu, 20 Feb 2020 09:59:28 +0000 (UTC)
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1j4icB-0004pm-3g; Thu, 20 Feb 2020 09:59:27 +0000
+Received: from 41.142.6.51.dyn.plus.net ([51.6.142.41] helo=debian)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1j4icA-0001kQ-Qi; Thu, 20 Feb 2020 09:59:27 +0000
+Date: Thu, 20 Feb 2020 00:48:16 +0000
+From: Wei Liu <wl@xen.org>
+To: Sander Eikelenboom <linux@eikelenboom.it>
+Message-ID: <20200220004816.qydrhtyedkko4rc7@debian>
+References: <cover.1582143896.git.linux@eikelenboom.it>
+ <416169fe34ec346a5edde2c66c4b017871c2a891.1582143896.git.linux@eikelenboom.it>
 MIME-Version: 1.0
-Subject: Re: [Xen-devel] [PATCH v2] xen/sched: add some diagnostic info in
- the run queue keyhandler
+Content-Disposition: inline
+In-Reply-To: <416169fe34ec346a5edde2c66c4b017871c2a891.1582143896.git.linux@eikelenboom.it>
+User-Agent: NeoMutt/20180716
+Subject: Re: [Xen-devel] [PATCH 1/3] tools/xentop: Fix calculation of used
+ memory.
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -56,95 +63,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: George Dunlap <george.dunlap@eu.citrix.com>
-Content-Type: multipart/mixed; boundary="===============1285742974925745058=="
+Cc: xen-devel@lists.xenproject.org, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
---===============1285742974925745058==
-Content-Type: multipart/signed; micalg="pgp-sha256";
-	protocol="application/pgp-signature"; boundary="=-/D51d9MA8eUAcpTYuXq2"
-
-
---=-/D51d9MA8eUAcpTYuXq2
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 2020-02-11 at 13:27 +0100, Juergen Gross wrote:
-> When dumping the run queue information add some more data regarding
-> current and (if known) previous vcpu for each physical cpu.
->=20
-> With core scheduling activated the printed data will be e.g.:
->=20
-> (XEN) CPUs info:
-> (XEN) CPU[00] current=3Dd[IDLE]v0, curr=3Dd[IDLE]v0, prev=3DNULL
-> (XEN) CPU[01] current=3Dd[IDLE]v1
-> (XEN) CPU[02] current=3Dd[IDLE]v2, curr=3Dd[IDLE]v2, prev=3DNULL
-> (XEN) CPU[03] current=3Dd[IDLE]v3
->=20
-> Signed-off-by: Juergen Gross <jgross@suse.com>
->
-I'm fine with this patch, i.e., I think the additional logging it is
-adding is useful and the locking is correct and in line with the
-current (scheduling) keyhandler locking practices.
-
-And thanks for making the requested adjustments to the changelog. :-)
-
-So, I think it should go in:
-
-Reviewed-by: Dario Faggioli <dfaggioli@suse.com>
-
-If/when, as a result of the discussion going on in the thread about
-keyhandler locking, we decide to change all the locks for all the
-keyhandlers, then we'll change them here as well.
-
-Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-/D51d9MA8eUAcpTYuXq2
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl5OWAMACgkQFkJ4iaW4
-c+6GexAAu6K5aw8p7qgY7jOFloXFUH21W8tI43mM89Se4DW5ja57BgTCYENdM+hj
-MCm+SAdbdhTWQN/ggAljBJ8nWfvlpDh6M/UT01UILTvxhnlX/+9AiC3bdOZlIYhW
-aMlxK5sXF4lISD6ycheP/Mq3iaRN/TSST990o4LAHdkzQkSy9FxBBkLnAV1pYEk/
-hSGC6wGJYS70XOwOcdOGPJQLJRAlLVpnqAyURlXWmJmOQ0OxvSMB6vY5v1cajrWe
-qvQpO0fXNwr0x1JHSJbfW0SER5taR7Hn2oYHBHqk80tnZayPQ5XiWN93fMms58sa
-wZoPWFgxMg5F+4ltYWmfSfwDn2BA8OoFDDFgdJyWXdkCE9lpJK2vdXAJzQ60pc1h
-XaaKbxEKeuMBdpkjMe/HBXaLDFmNeWvS5lq1JRNA7KqnEvauGTrfz3/jahXu+x2y
-q8dyT0pRIVAiJYYuxKFZizNgjEmDRinKHs1pM/nB2wMfVChwezcN29siVIP4XqpC
-9/bJ3okWQr5AS+Lvms94C8YqFKkvY4WEWGrPBMxs3+MlXewuiIGiRlLNINH9Q6xE
-uYcX+7SVu5OJYponKnxiA0EamrsT5L5diODF4vhC9kPa8PufiOr6ClBSII/Pe5WP
-MXw276Zk3N2FOZToDCRndr1KyTyFJucrPYv0JGrmZtiDnk7RntE=
-=CuNW
------END PGP SIGNATURE-----
-
---=-/D51d9MA8eUAcpTYuXq2--
-
-
-
---===============1285742974925745058==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
-IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
-cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
-
---===============1285742974925745058==--
-
-
+VGhlIGNvZGUgbG9va3MgY29ycmVjdCB0byBtZSwgYnV0IEkgd291bGQgbGlrZSB0byBhZGQgdGhl
+IGZvbGxvd2luZwpjb21taXQgbWVzc2FnZSB0byB0aGlzIGNoYW5nZS4KClVzZWQgbWVtb3J5IHNo
+b3VsZCBiZSBjYWxjdWxhdGVkIGJ5IHN1YnRyYWN0aW5nIGZyZWUgbWVtb3J5IGZyb20gdG90YWwK
+bWVtb3J5LgoKCk9uIFdlZCwgRmViIDE5LCAyMDIwIGF0IDA5OjMxOjMwUE0gKzAxMDAsIFNhbmRl
+ciBFaWtlbGVuYm9vbSB3cm90ZToKPiBTaWduZWQtb2ZmLWJ5OiBTYW5kZXIgRWlrZWxlbmJvb20g
+PGxpbnV4QGVpa2VsZW5ib29tLml0Pgo+IC0tLQo+ICB0b29scy94ZW5zdGF0L3hlbnRvcC94ZW50
+b3AuYyB8IDIgKy0KPiAgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9u
+KC0pCj4gCj4gZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0YXQveGVudG9wL3hlbnRvcC5jIGIvdG9v
+bHMveGVuc3RhdC94ZW50b3AveGVudG9wLmMKPiBpbmRleCBhZjExZWJmYmY3Li4xM2I2MTJmMjZk
+IDEwMDY0NAo+IC0tLSBhL3Rvb2xzL3hlbnN0YXQveGVudG9wL3hlbnRvcC5jCj4gKysrIGIvdG9v
+bHMveGVuc3RhdC94ZW50b3AveGVudG9wLmMKPiBAQCAtOTY5LDcgKzk2OSw3IEBAIHZvaWQgZG9f
+c3VtbWFyeSh2b2lkKQo+ICAJICAgICAgIiV1IGNyYXNoZWQsICV1IGR5aW5nLCAldSBzaHV0ZG93
+biBcbiIsCj4gIAkgICAgICBudW1fZG9tYWlucywgcnVuLCBibG9jaywgcGF1c2UsIGNyYXNoLCBk
+eWluZywgc2h1dGRvd24pOwo+ICAKPiAtCXVzZWQgPSB4ZW5zdGF0X25vZGVfdG90X21lbShjdXJf
+bm9kZSk7Cj4gKwl1c2VkID0geGVuc3RhdF9ub2RlX3RvdF9tZW0oY3VyX25vZGUpLXhlbnN0YXRf
+bm9kZV9mcmVlX21lbShjdXJfbm9kZSk7CgpBbHNvLCBJIHdpbGwgYWRkIHNwYWNlcyBhcm91bmQg
+Ii0iLgoKQWNrZWQtYnk6IFdlaSBMaXUgPHdsQHhlbi5vcmc+Cgo+ICAJZnJlZWFibGVfbWIgPSAw
+Owo+ICAKPiAgCS8qIER1bXAgbm9kZSBtZW1vcnkgYW5kIGNwdSBpbmZvcm1hdGlvbiAqLwo+IC0t
+IAo+IDIuMjAuMQo+IAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KWGVuLWRldmVsIG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5v
+cmcKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZl
+bA==
