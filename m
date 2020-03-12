@@ -2,81 +2,52 @@ Return-Path: <SRS0=j2vx=45=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97932C1975A
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2020 14:56:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EA51C10DCE
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2020 14:58:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67AF020663
-	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2020 14:56:15 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kVDNXjPf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67AF020663
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 526A420663
+	for <xen-devel@archiver.kernel.org>; Thu, 12 Mar 2020 14:58:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 526A420663
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jCPFg-0001lz-L4; Thu, 12 Mar 2020 14:56:00 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jCPI4-00023c-48; Thu, 12 Mar 2020 14:58:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=M9DE=45=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1jCPFg-0001lk-2a
- for xen-devel@lists.xenproject.org; Thu, 12 Mar 2020 14:56:00 +0000
-X-Inumbo-ID: 94b5b976-6471-11ea-bec1-bc764e2007e4
-Received: from mail-qv1-xf42.google.com (unknown [2607:f8b0:4864:20::f42])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 94b5b976-6471-11ea-bec1-bc764e2007e4;
- Thu, 12 Mar 2020 14:55:57 +0000 (UTC)
-Received: by mail-qv1-xf42.google.com with SMTP id du17so2725429qvb.12
- for <xen-devel@lists.xenproject.org>; Thu, 12 Mar 2020 07:55:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=tiMMbdlplWbQkqKBrkqBCfz0n+qZkFIQLjvGcjRlus0=;
- b=kVDNXjPf7KOui5qsaux0T5RiwyA/hueF/+XMUrc2aQRs7XW6lOmFsmP7doHyyiIml6
- bqdPpdAeEhOibjgyrL5AGllXZZ2zI6wbKLcsundujYDotmHHF5JY4H4vKRLBJjYzPvcX
- U1QGVcQIdTIXLmT4Ov7btcFD/k65KSCeteeSuN8uDHkCmSBa0UcgrQwRSJ5S20eOQlLe
- TuVQgUifbr6vvrAkB5tXDs2eyZ+tMV7I4B0I8dpWeE5cq/+UYODLDiF/MwMKhoamSQye
- pjEKHa+KjMo8+Znq+NWk9LuMoHEnqo/Xoz+SDY8hOV+OfovlA2uX7y1h93LxtGXUqEZN
- 2hLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=tiMMbdlplWbQkqKBrkqBCfz0n+qZkFIQLjvGcjRlus0=;
- b=EM+rA4qnrpvNEtZs8aEUYn6Pamt1uBCikkanXHMelzmS8AhePOSu1tu93pgVgn3o+8
- sFZA8yLYGU4C3cfi+isxYUARBlAQLPerYaedru4GkqI0FI1zH+Hkh3yq6IVp7iOzDDVj
- veIYrUzY+/EjunE5+OoIs4MDcSiR4i2oFTxbHkX3bPR+CI57ZZq3WVRlXtPNRxdRbUMv
- gzTXawciXk//mPrAxFmNen6x1WdKERUNOX92z/0RDHcx46D6QNeQKY+6dBxcxnwbefZY
- ycF/HHYtrVkpx+WndBgU3NUkC5dC+5MDHABQoQA07ADjSilRkzjuYP/S1sAaS/RaPkEK
- HYaQ==
-X-Gm-Message-State: ANhLgQ3TzLGshQx4Ian77G3tyQ+N9iRECh4sGnV6zt5frLPAp7kbYgax
- oRv2TY66ikBK8xvT+t/E7ZEjBYlJ
-X-Google-Smtp-Source: ADFU+vtFQtHbmq/6X7Z3fr6MmHwbkRdXuL6OzKGLC7jG8n+bZb9ddH7qGn3h23QsMR6W3MB8RDzaog==
-X-Received: by 2002:a05:6214:1703:: with SMTP id
- db3mr1686198qvb.28.1584024957023; 
- Thu, 12 Mar 2020 07:55:57 -0700 (PDT)
-Received: from pm2-ws13.praxislan02.com ([2001:470:8:67e:ba27:ebff:fee8:ce27])
- by smtp.gmail.com with ESMTPSA id
- q1sm19756442qtp.81.2020.03.12.07.55.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Mar 2020 07:55:56 -0700 (PDT)
-From: Jason Andryuk <jandryuk@gmail.com>
-To: xen-devel@lists.xenproject.org
-Date: Thu, 12 Mar 2020 10:54:17 -0400
-Message-Id: <20200312145417.106812-3-jandryuk@gmail.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200312145417.106812-1-jandryuk@gmail.com>
-References: <20200312145417.106812-1-jandryuk@gmail.com>
+ <SRS0=yTGL=45=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1jCPI3-00023S-7S
+ for xen-devel@lists.xenproject.org; Thu, 12 Mar 2020 14:58:27 +0000
+X-Inumbo-ID: ecef92b0-6471-11ea-b1a6-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id ecef92b0-6471-11ea-b1a6-12813bfff9fa;
+ Thu, 12 Mar 2020 14:58:26 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 1218AABE9;
+ Thu, 12 Mar 2020 14:58:25 +0000 (UTC)
+Message-ID: <32e8d197e0d0a0ca4be4cb0078ef329b6ed98e3f.camel@suse.com>
+From: Dario Faggioli <dfaggioli@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Date: Thu, 12 Mar 2020 15:58:22 +0100
+In-Reply-To: <57b1c260-0d1b-76de-83e5-65e043263325@citrix.com>
+References: <158402056376.753.7091379488590272336.stgit@Palanthas>
+ <158402065414.753.15785539969715690913.stgit@Palanthas>
+ <57b1c260-0d1b-76de-83e5-65e043263325@citrix.com>
+Organization: SUSE
+User-Agent: Evolution 3.34.4 
 MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH 2/2] scripts: Use stat to check lock claim
+Subject: Re: [Xen-devel] [PATCH 1/2] xen: credit2: avoid vCPUs to ever reach
+ lower credits than idle
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -87,68 +58,122 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>,
- Jason Andryuk <jandryuk@gmail.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Juergen Gross <jgross@suse.com>, Charles Arnold <carnold@suse.com>,
+ Tomas Mozes <hydrapolic@gmail.com>, Glen <glenbarney@gmail.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Sarah Newman <srn@prgmr.com>
+Content-Type: multipart/mixed; boundary="===============3743334602482624120=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-UmVwbGFjZSB0aGUgcGVybCBsb2NraW5nIGNoZWNrIHdpdGggc3RhdCgxKS4gIFN0YXQgaXMgYWJs
-ZSB0byBmc3RhdApzdGRpbiAoZmlsZSBkZXNjcmlwdG9yIDApIHdoZW4gcGFzc2VkICctJyBhcyBh
-biBhcmd1bWVudC4gIFRoaXMgaXMgbm93CnVzZWQgdG8gY2hlY2sgJF9sb2NrZmQuICBzdGF0KDEp
-IHN1cHBvcnQgZm9yICctJyB3YXMgaW50cm9kdWNlZCB0bwpjb3JldXRpbHMgaW4gMjAwOS4KCkFm
-dGVyIEEgcmVsZWFzZXMgaXRzIGxvY2ssIHNjcmlwdCBCIHdpbGwgcmV0dXJuIGZyb20gZmxvY2sg
-YW5kIGV4ZWN1dGUKc3RhdC4gIFNpbmNlIHRoZSBsb2NrZmlsZSBoYXMgYmVlbiByZW1vdmVkIGJ5
-IEEsIHN0YXQgcHJpbnRzIGFuIGVycm9yIHRvCnN0ZGVyciBhbmQgZXhpdHMgbm9uLXplcm8uICBS
-ZWRpcmVjdCBzdGRlcnIgdG8gL2Rldi9udWxsIHRvIGF2b2lkCmZpbGxpbmcgL3Zhci9sb2cveGVu
-L3hlbi1ob3RwbHVnLmxvZyB3aXRoICJObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5IgptZXNzYWdl
-cy4KClBsYWNpbmcgdGhlIHN0YXQgY2FsbCBpbnNpZGUgdGhlICJpZiIgY29uZGl0aW9uIGVuc3Vy
-ZXMgd2Ugb25seSBjaGVjawp0aGUgc3RhdCBvdXRwdXQgd2hlbiB0aGUgY29tbWFuZCBjb21wbGV0
-ZWQgc3VjY2Vzc2Z1bGx5LgoKVGhpcyBjaGFuZ2UgcmVtb3ZlcyB0aGUgb25seSBydW50aW1lIGRl
-cGVuZGVuY3kgb2YgdGhlIHhlbiB0b29sc3RhY2sgb24KcGVybC4KClN1Z2dlc3RlZC1ieTogSWFu
-IEphY2tzb24gPGlhbi5qYWNrc29uQGNpdHJpeC5jb20+ClNpZ25lZC1vZmYtYnk6IEphc29uIEFu
-ZHJ5dWsgPGphbmRyeXVrQGdtYWlsLmNvbT4KCi0tLQp2MjoKICBSZXBsYWNlIHNlZCB3aXRoIGJh
-c2ggc3RyaW5nIG1hbmlwdWxhdGlvbi4KClNpZ25lZC1vZmYtYnk6IEphc29uIEFuZHJ5dWsgPGph
-bmRyeXVrQGdtYWlsLmNvbT4KLS0tCiB0b29scy9ob3RwbHVnL0xpbnV4L2xvY2tpbmcuc2ggfCAy
-OCArKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMTkgaW5zZXJ0
-aW9ucygrKSwgOSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS90b29scy9ob3RwbHVnL0xpbnV4
-L2xvY2tpbmcuc2ggYi90b29scy9ob3RwbHVnL0xpbnV4L2xvY2tpbmcuc2gKaW5kZXggYmFhYWY3
-MzUwOC4uNjlhZWZhZTZmNiAxMDA2NDQKLS0tIGEvdG9vbHMvaG90cGx1Zy9MaW51eC9sb2NraW5n
-LnNoCisrKyBiL3Rvb2xzL2hvdHBsdWcvTGludXgvbG9ja2luZy5zaApAQCAtNDEsNyArNDEsNyBA
-QCBjbGFpbV9sb2NrKCkKICAgICAjIGZyb20gY2hpYXJrLXV0aWxzLCBleGNlcHQgdXNpbmcgZmxv
-Y2suICBJdCBoYXMgdGhlIGJlbmVmaXQgb2YKICAgICAjIGl0IGJlaW5nIHBvc3NpYmxlIHRvIHNh
-ZmVseSByZW1vdmUgdGhlIGxvY2tmaWxlIHdoZW4gZG9uZS4KICAgICAjIFNlZSBiZWxvdyBmb3Ig
-YSBjb3JyZWN0bmVzcyBwcm9vZi4KLSAgICBsb2NhbCByaWdodGZpbGUKKyAgICBsb2NhbCBzdGF0
-CiAgICAgd2hpbGUgdHJ1ZTsgZG8KICAgICAgICAgZXZhbCAiZXhlYyAkX2xvY2tmZDw+JF9sb2Nr
-ZmlsZSIKICAgICAgICAgZmxvY2sgLXggJF9sb2NrZmQgfHwgcmV0dXJuICQ/CkBAIC01MCwxNCAr
-NTAsMjQgQEAgY2xhaW1fbG9jaygpCiAgICAgICAgICMgYWN0dWFsbHkgYSBzeW50aGV0aWMgc3lt
-bGluayBpbiAvcHJvYyBhbmQgd2UgYXJlbid0CiAgICAgICAgICMgZ3VhcmFudGVlZCB0aGF0IG91
-ciBzdGF0KDIpIHdvbid0IGxvc2UgdGhlIHJhY2Ugd2l0aCBhbgogICAgICAgICAjIHJtKDEpIGJl
-dHdlZW4gcmVhZGluZyB0aGUgc3ludGhldGljIGxpbmsgYW5kIHRyYXZlcnNpbmcgdGhlCi0gICAg
-ICAgICMgZmlsZSBzeXN0ZW0gdG8gZmluZCB0aGUgaW51bS4gIFBlcmwgaXMgdmVyeSBmYXN0IHNv
-IHVzZSB0aGF0LgotICAgICAgICByaWdodGZpbGU9JCggcGVybCAtZSAnCi0gICAgICAgICAgICBv
-cGVuIFNURElOLCAiPCYnJF9sb2NrZmQnIiBvciBkaWUgJCE7Ci0gICAgICAgICAgICBteSAkZmRf
-aW51bSA9IChzdGF0IFNURElOKVsxXTsgZGllICQhIHVubGVzcyBkZWZpbmVkICRmZF9pbnVtOwot
-ICAgICAgICAgICAgbXkgJGZpbGVfaW51bSA9IChzdGF0ICRBUkdWWzBdKVsxXTsKLSAgICAgICAg
-ICAgIHByaW50ICJ5XG4iIGlmICRmZF9pbnVtIGVxICRmaWxlX2ludW07Ci0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICcgIiRfbG9ja2ZpbGUiICkKLSAgICAgICAgaWYgWyB4JHJpZ2h0Zmls
-ZSA9IHh5IF07IHRoZW4gYnJlYWs7IGZpCisgICAgICAgICMgZmlsZSBzeXN0ZW0gdG8gZmluZCB0
-aGUgaW51bS4gIHN0YXQoMSkgdHJhbnNsYXRlcyAnLScgaW50byBhbgorICAgICAgICAjIGZzdGF0
-KDIpIG9mIEZEIDAuICBTbyB3ZSBqdXN0IG5lZWQgdG8gYXJyYW5nZSB0aGUgRkRzIHByb3Blcmx5
-CisgICAgICAgICMgdG8gZ2V0IHRoZSBmc3RhdCgyKSB3ZSBuZWVkLiAgc3RhdCB3aWxsIG91dHB1
-dCB0d28gbGluZXMgbGlrZToKKyAgICAgICAgIyBXVy5YWFgKKyAgICAgICAgIyBZWS5aWloKKyAg
-ICAgICAgIyB3aGljaCBuZWVkIHRvIGJlIHNlcGFyYXRlZCBhbmQgY29tcGFyZWQuCisgICAgICAg
-IGlmIHN0YXQ9JCggc3RhdCAtTCAtYyAnJUQuJWknIC0gJF9sb2NrZmlsZSAwPCYkX2xvY2tmZCAy
-Pi9kZXYvbnVsbCApCisgICAgICAgIHRoZW4KKyAgICAgICAgICAgIGxvY2FsIGZpbGVfc3RhdAor
-ICAgICAgICAgICAgbG9jYWwgZmRfc3RhdAorCisgICAgICAgICAgICAjIG1hdGNoIG9uIGxpdGVy
-YWwgbmV3bGluZQorICAgICAgICAgICAgZmRfc3RhdD0ke3N0YXQlCisqfQorICAgICAgICAgICAg
-ZmlsZV9zdGF0PSR7c3RhdCMqCit9CisgICAgICAgICAgICBpZiBbICIkZmRfc3RhdCIgPSAiJGZp
-bGVfc3RhdCIgXSA7IHRoZW4gYnJlYWs7IGZpCisgICAgICAgIGZpCiAgICAgICAgICMgU29tZSB2
-ZXJzaW9ucyBvZiBiYXNoIGFwcGVhciB0byBiZSBidWdneSBpZiB0aGUgc2FtZQogICAgICAgICAj
-ICRfbG9ja2ZpbGUgaXMgb3BlbmVkIHJlcGVhdGVkbHkuIENsb3NlIHRoZSBjdXJyZW50IGZkIGhl
-cmUuCiAgICAgICAgIGV2YWwgImV4ZWMgJF9sb2NrZmQ8Ji0iCi0tIAoyLjI0LjEKCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGlu
-ZyBsaXN0Clhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnBy
-b2plY3Qub3JnL21haWxtYW4vbGlzdGluZm8veGVuLWRldmVs
+
+--===============3743334602482624120==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-EIZ6jO6gNv4mctVJybiP"
+
+
+--=-EIZ6jO6gNv4mctVJybiP
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 2020-03-12 at 13:55 +0000, Andrew Cooper wrote:
+> On 12/03/2020 13:44, Dario Faggioli wrote:
+> >=20
+> > NOTE: investigations have been done about _how_ it is possible for
+> > a
+> > vCPU to execute for so long that its credits becomes so low. While
+> > still
+> > not completely clear, there are evidence that:
+> > - it only happens very rarely
+> > - it appears to be both machine and workload specific
+> > - it does not look to be a Credit2 (e.g., as it happens when
+> > running
+> >   with Credit1 as well) issue, or a scheduler issue
+>=20
+> On what basis?
+>=20
+On the basis that I have traced execution times of vCPUs, when running
+on both Credit1 and Credit2, on a system where I can sort-of reproduce
+the issue, and I see them being able to execute for ginormous
+timeslices, with both scheduler.
+
+That's what this paragraph above, plus similar ones in the cover letter
+,were supposed to mean. If it is not clear enough, sorry.
+
+> Everything reported to xen-devel appears to suggests it is a credit2
+> problem.  It doesn't manifest on versions of Xen before credit2
+> became
+> the default, and switching back to credit1 appears to mitigate the
+> problem.
+>=20
+Yes, because even if the issue is there in both cases, when you use
+Credit2 it manifests as vCPUs being starved (because of the "they end
+up having less priority than the idle vCPU" thing). When you use
+Credit1, this does not happen, because time accounting and
+prioritization are done differently there.
+
+Switching to Credit1, at least on the box where I could reproduce the
+problem, did not make the issue that the vCPUs run for way too long
+disappear. It's the symptoms that this issue cause that are different
+for the two schedulers.
+
+> Certainly as far as XenServer is concerned, we haven't seen symptoms
+> like this in a decade of running credit1.
+>=20
+I am only able to reproduce this issue on one box, and not really 100%
+deterministically. I have never noticed anything like this in the past
+few years, on Credit2. At least, nothing as severe as this (or we would
+have noticed, which is what, in fact, has happened!).
+
+With Credit1, even if the issue is there, you won't notice it in this
+form, se we really can't know.
+
+Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-EIZ6jO6gNv4mctVJybiP
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl5qTg8ACgkQFkJ4iaW4
+c+6BhxAAryyy2ohqUHsIt5BC/VA2OR7gdhEQTIVhiJBWtDkxktXkpaxha3DqKTHv
+4T55DMYnzXeIIwN3GTx30mk1FGPd6Ye2HpPlQIhdUv/yLhFBxQH7Ld/cXqXuDOrQ
+28A1E43cKeYuE3oHtvCe1YeZcNkGp/8zaFt4xpX7o6kw+wuK42szjLuzeKc1XLiJ
+6hdwjNkxTSmhPI/dK7xfPScZyOfJm4J0lO8C2Bdnl8R3ynoy2Px8/HKIRLGHirAk
+bN9Hy5Z6oduqf9/XnGa8nI2cb+8Z6zP57+sN6aWQKizlc9i7Mw2+I2GdiHzGS+t+
+HyXTcCNnxzMiJFj6MzAv+YcturQaqBkn8RAukvNZFIb8TU3+RFN9FspCeFOcAaVp
+/KeMqA53nyhG9olZKyPsCUyA+tW7kAIN7GAXmthvJFceqGOs8udpxObCXMfKbmZY
+pFVJ9Sd+4zn3wIMBXA8E2+Y8EPLWU5Sf2y2TZCcDqdumkBiYcgUw/8Ln0wBMpFSf
+CROlbK4I0B4NiPiD+XyO3Wjjj5TRRVsZE+seeLFsXrJ3BzKICb1lbQ8DnmaaCK2O
+UG70ZejZ8WeTnRgkKiB8iCNSapCi1RGKa0ndKOQUffWHlaGOfZWbrNecMuJ8IzuM
+ODghEVWqmnfsTuZXHzbMpBA2az710HhwpptiOqez4SVxugpXHmA=
+=qX/Y
+-----END PGP SIGNATURE-----
+
+--=-EIZ6jO6gNv4mctVJybiP--
+
+
+
+--===============3743334602482624120==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============3743334602482624120==--
+
+
