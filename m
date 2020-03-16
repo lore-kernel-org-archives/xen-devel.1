@@ -6,58 +6,58 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC44AC5ACC0
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2020 02:34:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7810C5ACBF
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2020 02:35:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7DFA120726
-	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2020 02:34:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BAAFE20736
+	for <xen-devel@archiver.kernel.org>; Mon, 16 Mar 2020 02:35:12 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Kf33GIac"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7DFA120726
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="udGP+VU6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BAAFE20736
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jDfZt-0004sP-0A; Mon, 16 Mar 2020 02:34:05 +0000
+	id 1jDfad-0004xj-MH; Mon, 16 Mar 2020 02:34:51 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Dpgy=5B=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1jDfZs-0004sK-B3
- for xen-devel@lists.xenproject.org; Mon, 16 Mar 2020 02:34:04 +0000
-X-Inumbo-ID: 99ce3de2-672e-11ea-b769-12813bfff9fa
+ id 1jDfac-0004xV-1Z
+ for xen-devel@lists.xenproject.org; Mon, 16 Mar 2020 02:34:50 +0000
+X-Inumbo-ID: b51cc21c-672e-11ea-b769-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 99ce3de2-672e-11ea-b769-12813bfff9fa;
- Mon, 16 Mar 2020 02:34:03 +0000 (UTC)
+ id b51cc21c-672e-11ea-b769-12813bfff9fa;
+ Mon, 16 Mar 2020 02:34:49 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 66FF0206EB;
- Mon, 16 Mar 2020 02:34:02 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 5737620722;
+ Mon, 16 Mar 2020 02:34:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1584326043;
+ s=default; t=1584326089;
  bh=8utJ4PbiBkJFqLWavO/QYmjVPSaB2McN1fDCS3CNWwg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Kf33GIacZxdQb+WRd5kZqTQXVmg0KYqxjAr8GHdw2qvVCQQjE1ZzSbKDXRhbbJBbG
- nXZfQkdafcqQBZrJvUc3TUEXNS7pn2vOWvpWG5d2Mtg9ezUhSUtMSI9qPl5faepKmn
- KaUY+w3JJ4CQSGu/8Pblu79JkiI4jYSnO08RHnfc=
+ b=udGP+VU6NBCxwUWPJ/es6ozpsgfMPvcTT0JGtb5ZXhus8Hoo6jQl52wb7VIh1un0q
+ CsOUQ3DXMISrir9fHQKuWxAmIgXzlc5mHhv9mlud/zJe90R2UKLIp2rPbJP2aqtX9O
+ DPp8h8KDuOgN32NCwEnE0l+/eiQt3G4/2M0zZGlM=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun, 15 Mar 2020 22:33:14 -0400
-Message-Id: <20200316023319.749-36-sashal@kernel.org>
+Date: Sun, 15 Mar 2020 22:34:08 -0400
+Message-Id: <20200316023411.1263-32-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200316023319.749-1-sashal@kernel.org>
-References: <20200316023319.749-1-sashal@kernel.org>
+In-Reply-To: <20200316023411.1263-1-sashal@kernel.org>
+References: <20200316023411.1263-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Subject: [Xen-devel] [PATCH AUTOSEL 5.5 36/41] xenbus: req->body should be
+Subject: [Xen-devel] [PATCH AUTOSEL 5.4 32/35] xenbus: req->body should be
  updated before req->state
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
