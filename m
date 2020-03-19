@@ -2,65 +2,51 @@ Return-Path: <SRS0=5+kv=5E=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4354C4332D
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2020 00:12:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 06842C4332B
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2020 00:28:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 950BB2076E
-	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2020 00:12:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 950BB2076E
+	by mail.kernel.org (Postfix) with ESMTPS id D1A7D20772
+	for <xen-devel@archiver.kernel.org>; Thu, 19 Mar 2020 00:28:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D1A7D20772
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jEimt-0006gB-5x; Thu, 19 Mar 2020 00:11:51 +0000
+	id 1jEj2m-0007sH-AJ; Thu, 19 Mar 2020 00:28:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=qcPS=5E=gmail.com=raistlin.df@srs-us1.protection.inumbo.net>)
- id 1jEims-0006g6-Eb
- for xen-devel@lists.xenproject.org; Thu, 19 Mar 2020 00:11:50 +0000
-X-Inumbo-ID: 39cfa7ec-6976-11ea-a6c1-bc764e2007e4
-Received: from mail-wr1-f68.google.com (unknown [209.85.221.68])
+ <SRS0=BIJ4=5E=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
+ id 1jEj2l-0007sC-70
+ for xen-devel@lists.xenproject.org; Thu, 19 Mar 2020 00:28:15 +0000
+X-Inumbo-ID: 84adb6a8-6978-11ea-a6c1-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 39cfa7ec-6976-11ea-a6c1-bc764e2007e4;
- Thu, 19 Mar 2020 00:11:49 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id z15so655886wrl.1
- for <xen-devel@lists.xenproject.org>; Wed, 18 Mar 2020 17:11:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:cc:date:message-id:user-agent
- :mime-version:content-transfer-encoding;
- bh=C+ga8IRqjnzVzIkJv3Dux201lscOOys40W9ajr6lSSY=;
- b=nras0zEPKsfmOA3yADSYwGBaYrL78Q6J/AAUHKcMlevXFZ+BoP+2gQZb4svnbmeuKL
- BLPXyZMNi6v0/l/h93m963Mk2+skrCjb5b2d9+Qf6YvLc5mowxhZqGPnEnmjLsJbNW+P
- TPXEwTUbzu7syKLlMwld7h+0NN+n3/TU2VqdEsUgb+/Fp24M/wlRRm1Pas3nqBXPoNDC
- 4EJ8cpqc2Uf4G7og8gPHYmoVpKD6/9vJA3h1uvMNMb2uyY8GdTEMwPS6p1rc/6+HS0vQ
- hZMI8+1bDTOrY4UYJucp4yIfOuZq1uyXpMdFKlqxvmVbcQ3Dt+X/RkoJW9J/LusChUVk
- n9Sw==
-X-Gm-Message-State: ANhLgQ0/V6nxvOFmlAHbZSrIzT37n9NGRsPjJoMWUul/OMm95S8v2XqR
- AbAQ9o1xZmXq9jRWd/WZ/8k=
-X-Google-Smtp-Source: ADFU+vvkyQvRe6w/172yRyLW9ZK3yZpNO7vHte8ZSjK+DXx7PomdvGeuxpvUOtU0+1+FKTyhjwPvXg==
-X-Received: by 2002:adf:fa0e:: with SMTP id m14mr549233wrr.80.1584576707928;
- Wed, 18 Mar 2020 17:11:47 -0700 (PDT)
-Received: from [192.168.0.35] (87.78.186.89.cust.ip.kpnqwest.it.
- [89.186.78.87])
- by smtp.gmail.com with ESMTPSA id e1sm665873wrx.90.2020.03.18.17.11.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Mar 2020 17:11:45 -0700 (PDT)
+ id 84adb6a8-6978-11ea-a6c1-bc764e2007e4;
+ Thu, 19 Mar 2020 00:28:13 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id A8CD3AE4B;
+ Thu, 19 Mar 2020 00:28:12 +0000 (UTC)
+Message-ID: <413cac496e18bcb04b0691ef633d206f3a14a8e3.camel@suse.com>
 From: Dario Faggioli <dfaggioli@suse.com>
-To: xen-devel@lists.xenproject.org
-Date: Thu, 19 Mar 2020 01:11:44 +0100
-Message-ID: <158457508246.11355.6457403441669388939.stgit@Palanthas>
-User-Agent: StGit/0.21
+To: Marek =?ISO-8859-1?Q?Marczykowski-G=F3recki?=
+ <marmarek@invisiblethingslab.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Date: Thu, 19 Mar 2020 01:28:10 +0100
+In-Reply-To: <20200318221006.GS18599@mail-itl>
+References: <20200318141635.GW7869@mail-itl>
+ <fa845540-fd8e-bc63-a3af-50673dede579@citrix.com>
+ <20200318221006.GS18599@mail-itl>
+Organization: SUSE
+User-Agent: Evolution 3.34.4 
 MIME-Version: 1.0
-Subject: [Xen-devel] [PATCH v2 0/2] xen: credit2: fix vcpu starvation due to
- too few credits
+Subject: Re: [Xen-devel] Xen crash after S3 suspend - Xen 4.13
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,126 +57,138 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Charles Arnold <carnold@suse.com>,
- Jan Beulich <jbeulich@suse.com>, Glen <glenbarney@gmail.com>,
- George Dunlap <george.dunlap@citrix.com>, Tomas Mozes <hydrapolic@gmail.com>,
- Sarah Newman <srn@prgmr.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: xen-devel <xen-devel@lists.xenproject.org>, Juergen Gross <jgross@suse.de>
+Content-Type: multipart/mixed; boundary="===============8349284337159760556=="
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-SGVsbG8gZXZlcnlvbmUsCgpIZXJlJ3MgdjIgb2YgdGhlIHNlcmllcyBmb3IgZml4aW5nIHNvbWUg
-c3RhcnZhdGlvbiBpc3N1ZXMsIHVuZGVyCkNyZWRpdDIsIGlmIGFzIGEgY29uc2VxdWVuY2Ugb2Yg
-c29tZSAoc3RpbGwgdW5jbGVhcikgYnVnL2NpcmN1bXN0YW5jZSwKdkNQVXMgbWFuYWdlIHRvIHJ1
-biB1bmludGVycnVwdGVkIGZvciBsb25nIHRpbWVzbGljZXMuCgp2MSBpcyB0aGlzOgpodHRwczov
-L2xvcmUua2VybmVsLm9yZy94ZW4tZGV2ZWwvMTU4NDAyMDU2Mzc2Ljc1My43MDkxMzc5NDg4NTkw
-MjcyMzM2LnN0Z2l0QFBhbGFudGhhcy8KCkFuZCB0aGUgc2VyaWVzIGlzIGFsc28gYXZhaWxhYmxl
-IGhlcmU6Cmh0dHBzOi8vZ2l0bGFiLmNvbS9kZmFnZ2lvbGkveGVuLy0vdHJlZS9zY2hlZC9jcmVk
-aXQyL2ZpeC1jcmVkaXQyLXZjcHUtc3RhbGwtdjIKaHR0cHM6Ly9naXRsYWIuY29tL2RmYWdnaW9s
-aS94ZW4uZ2l0IGZpeC1jcmVkaXQyLXZjcHUtc3RhbGwtdjIKCkRpZmZlcmVuY2UgYmV0d2VlbiB2
-MSBhbmQgdjIgaXMgdGhhdCBJIHRvb2sgYSBzbGlnaGx5IGRpZmZlcmVudAphcHByb2FjaCwgaW4g
-cGF0Y2ggMS4gVGhpcyBpcyBkdWUgdG8gZGlzY3Vzc2lvbiBoYXBwZW5lZCB3aXRoaW4gdGhlIHYx
-CnRocmVhZCBhbmQgb24gSVJDIChtb3JlIGJlbG93LCBhbmQgaW4gcGF0Y2ggMSBjaGFuZ2Vsb2cp
-LgoKQmFzaWNhbGx5LCB0aGVyZSBoYXZlIGJlZW4gcmVwb3J0cyBvZiBhIENyZWRpdDIgaXNzdWUg
-ZHVlIHRvIHdoaWNoCnZDUFVzIHdoZXJlIGJlaW5nIHN0YXJ2ZWQsIHRvIHRoZSBwb2ludCB0aGF0
-IGd1ZXN0IGtlcm5lbCB3b3VsZCBjb21wbGFpbgpvciBldmVuIGNyYXNoLgoKU2VlIHRoZSBmb2xs
-b3dpbmcgeGVuLXVzZXJzIGFuZCB4ZW4tZGV2ZWwgdGhyZWFkczoKaHR0cHM6Ly9saXN0cy54ZW5w
-cm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi11c2Vycy8yMDIwLTAyL21zZzAwMDE4Lmh0bWwK
-aHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9odG1sL3hlbi11c2Vycy8yMDIw
-LTAyL21zZzAwMDE1Lmh0bWwKaHR0cHM6Ly9saXN0cy54ZW5wcm9qZWN0Lm9yZy9hcmNoaXZlcy9o
-dG1sL3hlbi1kZXZlbC8yMDIwLTAyL21zZzAxMTU4Lmh0bWwKCkkgZGlkIHNvbWUgaW52ZXN0aWdh
-dGlvbnMsIGFuZCBmaWd1cmVkIG91dCB0aGF0IHRoZSB2Q1BVcyBpbiBxdWVzdGlvbgphcmUgbm90
-IHNjaGVkdWxlZCBmb3IgbG9uZyB0aW1lIGludGVydmFscyBiZWNhdXNlIHRoZXkgc29tZWhvdyBt
-YW5hZ2UgdG8KYmUgZ2l2ZW4gYW4gYW1vdW50IG9mIGNyZWRpdHMgd2hpY2ggaXMgbGVzcyB0aGFu
-IHRoZSBjcmVkaXQgdGhlIGlkbGUKdkNQVSBoYXMuCgpBbiBleGFtcGxlIG9mIHRoaXMgc2l0dWF0
-aW9uIGlzIHNob3duIGhlcmUuIEluIGZhY3QsIHdlIGNhbiBzZWUgZDB2MQpzaXR0aW5nIGluIHRo
-ZSBydW5xdWV1ZSB3aGlsZSBhbGwgdGhlIENQVXMgYXJlIGlkbGUsIGFzIGl0IGhhcwotMTI1NDIz
-ODI3MCBjcmVkaXRzLCB3aGljaCBpcyBzbWFsbGVyIHRoYW4gLTJeMzAgPSDiiJIxMDczNzQxODI0
-OgoKICAgIChYRU4pIFJ1bnF1ZXVlIDA6CiAgICAoWEVOKSAgIG5jcHVzICAgICAgICAgICAgICA9
-IDI4CiAgICAoWEVOKSAgIGNwdXMgICAgICAgICAgICAgICA9IDAtMjcKICAgIChYRU4pICAgbWF4
-X3dlaWdodCAgICAgICAgID0gMjU2CiAgICAoWEVOKSAgIHBpY2tfYmlhcyAgICAgICAgICA9IDIy
-CiAgICAoWEVOKSAgIGluc3Rsb2FkICAgICAgICAgICA9IDEKICAgIChYRU4pICAgYXZlbG9hZCAg
-ICAgICAgICAgID0gMjkzMzkxICh+MTExJSkKICAgIChYRU4pICAgaWRsZXJzOiAwMCwwMDAwMDAw
-MCwwMDAwMDAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwZmZmZmZmZgogICAgKFhFTikg
-ICB0aWNrbGVkOiAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwMDAwMDAw
-MCwwMDAwMDAwMAogICAgKFhFTikgICBmdWxseSBpZGxlIGNvcmVzOiAwMCwwMDAwMDAwMCwwMDAw
-MDAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwMDAwMDAwMCwwZmZmZmZmZgogICAgWy4uLl0KICAgIChY
-RU4pIFJ1bnF1ZXVlIDA6CiAgICAoWEVOKSBDUFVbMDBdIHJ1bnE9MCwgc2libGluZz0wMCwuLi4s
-IGNvcmU9MDAsLi4uCiAgICAoWEVOKSBDUFVbMDFdIHJ1bnE9MCwgc2libGluZz0wMCwuLi4sIGNv
-cmU9MDAsLi4uCiAgICBbLi4uXQogICAgKFhFTikgQ1BVWzI2XSBydW5xPTAsIHNpYmxpbmc9MDAs
-Li4uLCBjb3JlPTAwLC4uLgogICAgKFhFTikgQ1BVWzI3XSBydW5xPTAsIHNpYmxpbmc9MDAsLi4u
-LCBjb3JlPTAwLC4uLgogICAgKFhFTikgUlVOUToKICAgIChYRU4pICAgICAwOiBbMC4xXSBmbGFn
-cz0wIGNwdT01IGNyZWRpdD0tMTI1NDIzODI3MCBbdz0yNTZdIGxvYWQ9MjYyMTQ0ICh+MTAwJSkK
-ClRoaXMgaGFwcGVucyBiYWNhdXNlIC0tYWx0aG91Z2ggdmVyeSByYXJlbHktLSB2Q1BVcyBhcmUg
-YWxsb3dlZCB0bwpleGVjdXRlIGZvciBtdWNoIG1vcmUgdGhhbiB0aGUgc2NoZWR1bGVyIHdvdWxk
-IHdhbnQgdGhlbSB0by4KCkZvciBleGFtcGxlLCBJIGhhdmUgYSB0cmFjZSBzaG93aW5nIHRoYXQg
-Y3NjaGVkMl9zY2hlZHVsZSgpIGlzIGludm9rZWQgYXQKdD01Nzk3MDc0NjE1NW5zLiBBdCB0PTU3
-OTcwNzQ3NjU4bnMgKCsxNTAzbnMpIHRoZSBzX3RpbWVyIGlzIHNldCB0bwpmaXJlIGF0IHQ9NTc5
-Nzk0ODUwODNucywgaS5lLiwgODczODkyOG5zIGluIGZ1dHVyZS4gVGhhdCdzIGJlY2F1c2UgY3Jl
-ZGl0Cm9mIHNuZXh0IGlzIGV4YWN0bHkgdGhhdCA4NzM4OTI4bnMuIFRoZW4sIHdoYXQgSSBzZWUg
-aXMgdGhhdCB0aGUgbmV4dApjYWxsIHRvIGJ1cm5fY3JlZGl0cygpLCBjb21pbmcgZnJvbSBjc2No
-ZWQyX3NjaGVkdWxlKCkgZm9yIHRoZSBzYW1lIHZDUFUKaGFwcGVucyBhdCB0PTYwMDgzMjgzNjE3
-bnMuIFRoYXQgaXMgKmEgbG90KiAoMjEwMzc5ODUzNG5zKSBsYXRlciB0aGFuCndoZW4gd2UgZXhw
-ZWN0ZWQgYW5kIGFza2VkLiBPZiBjb3Vyc2UsIHRoYXQgYWxzbyBtZWFucyB0aGF0IGRlbHRhIGlz
-CjIxMTI1Mzc0NjJucywgYW5kIHRoZXJlZm9yZSBjcmVkaXRzIHdpbGwgc2luayB0byAtMjEwMzc5
-ODUzNCEKCkFsc28sIHRvIHRoZSBiZXN0IG9mIG15IGN1cnJlbnQga25vd2xlZGdlLCB0aGlzIGRv
-ZXMgbm90IGxvb2sgbGlrZQpDcmVkaXQyIHJlbGF0ZWQsIGFzIEkndmUgb2JzZXJ2ZWQgaXQgd2hl
-biBydW5uaW5nIHdpdGggQ3JlZGl0MSBhcyB3ZWxsLgpJIHBlcnNvbmFsbHkgZG9uJ3QgdGhpbmsg
-aXQgd291bGQgYmUgc2NoZWR1bGluZyByZWxhdGVkLCBpbiBnZW5lcmFsLCBidXQKSSBuZWVkIHRv
-IGRvIG1vcmUgaW52ZXN0aWdhdGlvbiB0byBiZSBzdXJlIGFib3V0IHRoYXQgKGFuZC9vciB0byBm
-aWd1cmUKb3V0IHdoYXQgdGhlIHJlYWwgcm9vdCBjYXVzZSBpcykuCgpUaGUgcmVhc29uIHdoeSBD
-cmVkaXQyIGlzIGFmZmVjdGVkIG11Y2ggbW9yZSB0aGFuIENyZWRpdDEgaXMgYmVjYXVzZSBvZgpo
-b3cgdGltZSBhY2NvdW50aW5nIGlzIGRvbmUuIEJhc2ljYWxseSwgdGhlcmUncyB2ZXJ5IHJ1ZGlt
-ZW50YWwgdGltZQphY2NvdW50aW5nIGluIENyZWRpdDEsIHdoaWNoIGlzIGEgdmVyeSBiYWQgdGhp
-bmcsIElNTywgYnV0IGluZGVlZCB0aGF0CmlzIGFsc28gd2hhdCBwcmV2ZW50ZWQgZm9yIHRoaXMg
-aXNzdWUgdG8gY2F1c2Ugc2V2ZXJlIHN0YWxscy4KCk9uZSBtb3JlIHRoaW5nIGlzIHRoYXQgQ3Jl
-ZGl0MiBnaXZlcyAtMl4zMCBjcmVkaXRzIHRvIHRoZSBpZGxlIHZDUFUsIHdoaWNoCndhcyBjb25z
-aWRlcmVkIHRvIGJlIGxvdyBlbm91Z2gsIHdoaWNoIGlzIHRydWUuIEJ1dCBpdCdzIG5vdCBhIHJv
-YnVzdApjaG9pY2UsIHNob3VsZCBhbiBpc3N1ZSBsaWtlIHRoZSBvbmUgd2UncmUgZGlzY3Vzc2lu
-ZyBvY2N1ciwgd2hpY2ggaXMKaGFwcGVuaW5nLiA6LSkKCldlIGNhbiBtYWtlIHRoaW5ncyBiZXR0
-ZXIgYnkgZXN0YWJsaXNoaW5nIGEgbWluaW11bSB2YWx1ZSBmb3IgdGhlIGFtb3VudApvZiBjcmVk
-aXRzIGFueSB2Q1BVIHdpbGwgZXZlciBiZSBhYmxlIHRvIHJlYWNoLiBJbiBmYWN0LCBhcyBzb29u
-IGFzIHdlCnJlYWxpemUgdGhhdCB0aGUgdkNQVSB0aGF0IHNob3VsZCBydW4gbmV4dCBoYXMgYSBu
-ZWdhdGl2ZSBhbW91bnQgb2YKY3JlZGl0cyAtLW5vIG1hdHRlciB3aGV0aGVyIC0xIG9yIC0yXjMw
-LS0gd2UgZG8gYSBjcmVkaXQgcmVzZXQuIFdoaWNoCm1lYW5zIHRoYXQgd2UgY2FuIGp1c3QgbGlt
-aXQgdGhpcyAibmVnYXRpdmUgY3JlZGl0cyBwZWFrIiBkdXJpbmcKYWNjb3VudGluZyBhbnl3YXku
-IFRoZW4sIGZvciBpbmNyZWFzZWQgcm9idXN0bmVzcywgd2UgdXNlIGFuIGV2ZW4Kc21hbGxlciB2
-YWx1ZSBmb3IgdGhlIGNyZWRpdHMgd2UgZ2l2ZSB0byB0aGUgaWRsZSB2Q1BVcywgc28gdGhhdCB3
-ZSdyZQpzdXJlIHRoYXQgd2Ugd2lsbCBuZXZlciBwaWNrIGlkbGUgaW5zdGVhZCBvZiBhbiBhY3R1
-YWwgdkNQVSB0aGF0IGlzCnJlYWR5IHRvIHJ1bi4KClRoaXMgaXMgd2hhdCBpcyBkb25lIGluIHRo
-ZSBmaXJzdCBwYXRjaCBvZiB0aGlzIHNlcmllcy4gVGhpcyBpcyBhCnJvYnVzdG5lc3MgaW1wcm92
-ZW1lbnQgYW5kIGEgZml4IChvciBhdCBsZWFzdCB0aGUgYmVzdCB3YXkgd2UgY2FuIGRlYWwKd2l0
-aCB0aGUgaXQgd2l0aGluIHRoZSBzY2hlZHVsZXIpIGZvciB0aGUgaXNzdWUgYXQgaGFuZC4gSXQg
-dGhlcmVmb3JlCnNob3VsZCBiZSBiYWNrcG9ydGVkLgoKV2hpbGUgbG9va2luZyBpbnRvIHRoaXMs
-IEkgYWxzbyBoYXZlIGZvdW5kIG91dCB0aGF0IHRoZXJlIGlzIGFuIGFjdHVhbApidWcgaW4gQ3Jl
-ZGl0MiBjb2RlLiBJdCBpcyBzb21ldGhpbmcgSSBpbnRyb2R1Y2VkIG15c2VsZiB3aXRoIGNvbW1p
-dAo1ZTRiNDE5OTY2N2I5ICgieGVuOiBjcmVkaXQyOiBvbmx5IHJlc2V0IGNyZWRpdCBvbiByZXNl
-dCBjb25kaXRpb24iKS4KSW4gZmFjdCwgd2hpbGUgaXQgd2FzIGFuZCBzdGlsbCBpcyBhIGdvb2Qg
-aWRlYSB0byBhdm9pZCByZXNldHRpbmcKY3JlZGl0cyB0b28gb2Z0ZW4sIHRoZSBpbXBsZW1lbnRh
-dGlvbiBvZiB0aGlzIHdhcyBqdXN0IHdyb25nLgoKQSBmaXggZm9yIHRoaXMgYnVnIGlzIHdoYXQg
-aXMgY29udGFpbmVkIGluIHBhdGNoIDIuIEFuZCBpdCBhbHNvIHNob3VsZApiZSBiYWNrcG9ydGVk
-LgoKTm90ZSB0aGF0IHBhdGNoIDIgYWxvbmUgd2FzIGFsc28gYWxyZWFkeSBtaXRpZ2F0aW5nIHRo
-ZSBzdGFsbC9zdGFydmF0aW9uCmlzc3VlIHF1aXRlIHN1YnN0YW50aWFsbHkuIE5ldmVydGhlbGVz
-cywgdGhlIHByb3BlciBmaXggZm9yIHRoZSBpc3N1ZQppdHNlbGYgaXMgbWFraW5nIENyZWRpdDIg
-bW9yZSByb2J1c3QgYWdhaW5zdCBzaW1pbGFyIHByb2JsZW0sIGFzIGRvbmUgaW4KcGF0Y2ggMSwg
-d2hpbGUgdGhpcyBvdGhlciBidWcganVzdCBoYXBwZW5zIHRvIGJlIHNvbWV0aGluZyB3aGljaApp
-bnRlcmFjdCB3aXRoIHRoZSBzeW1wdGhvbXMuCgpUaGlzIHRvIHNheSB0aGF0LCBhbHRob3VnaCBi
-b3RoIHBhdGNoZXMgd2lsbCBiZSBidWdwb3J0ZWQsIGFzYm90aCBhcmUKYWN0dWFsIGJ1Z2ZpeGVz
-LCBpZiB0aGVyZSBpcyB0aGUgbmVlZCB0byBhcHBseSBzb21ldGhpbmcgImluIGVtZXJnZW5jeSIK
-dG8gZml4IHRoZSBzdGFydmF0aW9uIHByb2JsZW0sIGFwcGx5aW5nIG9ubHkgcGF0Y2ggMSBpcyBl
-bm91Z2guCgpUaGFua3MgYW5kIFJlZ2FyZHMKLS0tCkRhcmlvIEZhZ2dpb2xpICgyKToKICAgICAg
-eGVuOiBjcmVkaXQyOiBhdm9pZCB2Q1BVcyB0byBldmVyIHJlYWNoIGxvd2VyIGNyZWRpdHMgdGhh
-biBpZGxlCiAgICAgIHhlbjogY3JlZGl0MjogZml4IGNyZWRpdCByZXNldCBoYXBwZW5pbmcgdG9v
-IGZldyB0aW1lcwoKIHRvb2xzL3hlbnRyYWNlL2Zvcm1hdHMgICAgIHwgICAgNCArLQogdG9vbHMv
-eGVudHJhY2UveGVuYWx5emUuYyAgfCAgIDEzICsrKy0tLS0KIHhlbi9jb21tb24vc2NoZWQvY3Jl
-ZGl0Mi5jIHwgICA4MyArKysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LQogMyBmaWxlcyBjaGFuZ2VkLCA0OCBpbnNlcnRpb25zKCspLCA1MiBkZWxldGlvbnMoLSkKLS0K
-RGFyaW8gRmFnZ2lvbGksIFBoLkQKaHR0cDovL2Fib3V0Lm1lL2RhcmlvLmZhZ2dpb2xpClZpcnR1
-YWxpemF0aW9uIFNvZnR3YXJlIEVuZ2luZWVyClNVU0UgTGFicywgU1VTRSBodHRwczovL3d3dy5z
-dXNlLmNvbS8KLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLQo8PFRoaXMgaGFwcGVucyBiZWNhdXNlIF9JXyBjaG9vc2UgaXQg
-dG8gaGFwcGVuIT4+IChSYWlzdGxpbiBNYWplcmUpCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+
+--===============8349284337159760556==
+Content-Type: multipart/signed; micalg="pgp-sha256";
+	protocol="application/pgp-signature"; boundary="=-mkttsT56z8bkquCZok65"
+
+
+--=-mkttsT56z8bkquCZok65
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+[Adding Juergen]
+
+On Wed, 2020-03-18 at 23:10 +0100, Marek Marczykowski-G=C3=B3recki wrote:
+> On Wed, Mar 18, 2020 at 02:50:52PM +0000, Andrew Cooper wrote:
+> > On 18/03/2020 14:16, Marek Marczykowski-G=C3=B3recki wrote:
+> > > Hi,
+> > >=20
+> > > In my test setup (inside KVM with nested virt enabled), I rather
+> > > frequently get Xen crash on resume from S3. Full message below.
+> > >=20
+> > > This is Xen 4.13.0, with some patches, including "sched: fix
+> > > resuming
+> > > from S3 with smt=3D0".
+> > >=20
+> > > Contrary to the previous issue, this one does not happen always -
+> > > I
+> > > would say in about 40% cases on this setup, but very rarely on
+> > > physical
+> > > setup.
+> > >=20
+> > > This is _without_ core scheduling enabled, and also with smt=3Doff.
+> > >=20
+> > > Do you think it would be any different on xen-unstable? I cat
+> > > try, but
+> > > it isn't trivial in this setup, so I'd ask first.
+> > >=20
+Well, Juergen has fixed quite a few issues.
+
+Most of them where triggering with core-scheduling enabled, and I don't
+recall any of them which looked similar or related to this.
+
+Still, it's possible that the same issue causes different symptoms, and
+hence that maybe one of the patches would fix this too.
+
+But if it's difficult for you to try upstream, let's maybe wait and see
+if he has an opinion about this bug.
+
+I have just one question:
+
+> (XEN) Assertion 'c2rqd(ops, sched_unit_master(unit)) =3D=3D svc->rqd'
+> failed at sched_credit2.c:2137
+> (XEN) ----[ Xen-4.13.0  x86_64  debug=3Dy   Not tainted ]----
+> [...]
+> (XEN) Xen call trace:
+> (XEN)    [<ffff82d08022bee9>] R
+> sched_credit2.c#csched2_unit_wake+0x174/0x176
+> (XEN)    [<ffff82d0802346c6>] F vcpu_wake+0xdd/0x3ff
+> (XEN)    [<ffff82d0802082f1>] F domain_unpause+0x2f/0x3b
+> (XEN)    [<ffff82d08020843e>] F
+> domain_unpause_by_systemcontroller+0x40/0x60
+> (XEN)    [<ffff82d080205ea5>] F do_domctl+0x9e4/0x1952
+> (XEN)    [<ffff82d08034d922>] F pv_hypercall+0x548/0x560
+> (XEN)    [<ffff82d080354432>] F lstar_enter+0x112/0x120
+> (XEN)=20
+> (XEN)=20
+> (XEN) ****************************************
+> (XEN) Panic on CPU 0:
+> (XEN) Assertion 'c2rqd(ops, sched_unit_master(unit)) =3D=3D svc->rqd'
+> failed at sched_credit2.c:2137
+> (XEN) ****************************************
+> (XEN)=20
+>
+Do you remember (or can easily test) whether this was also occurring on
+Xen 4.12, i.e., without core-scheduling code even being there, when
+this ASSERT was:
+
+ ASSERT(c2rqd(ops, vc->processor) =3D=3D svc->rqd );
+
+If no, that might mean we have some scheduling resource and/or master
+CPU issue on the S3 resume path.
+
+Thanks and Regards
+--=20
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+
+
+--=-mkttsT56z8bkquCZok65
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl5yvJsACgkQFkJ4iaW4
+c+69Ug//VIwVK2FJPyT6jvMyBkKy4aDOOGXsEQ3RW3GgHPese+wT2TUouLbVi+so
+Rh/9d/mpM/6n40Bcm4j8Yp6s5LPR3tDkfH1FlWN2b9CYTVgkuMdoY0tUBxprT9wU
+5uH+vDTGcqzQIIudfm7+HXXT/pvZdY2M4VakgT2E0qjT5XiiIpL3B0XzVPCoI0wm
+F/WxXNYqaxYCPfkkp84ZBAsCOT7CJ90xbS2spnRnyFSHBgV1CmwMoa1jwNAWZ1LL
+ItAYf5PlC+p7CFxZ2sdeJocag5lBB2iwBA1+06An20wU+7T02ytRtAf66eOOQcXJ
+YMelwDSOvXT13Zg3RJPhsWj76B3P0OuDKzyD+Fc892/3VA8mn5cubZ8HKT4dgkDM
+ubVsT+sts02DyeWHMt9K28X8kzC5+S6bwPaFciZ63bQi775dAWFyiu9qJi4Wyne6
+39XQnbxTZx+j5FXparNozZ/e+JcXx2vN1TekxIjqzRT9JILhlykB1zR0WZkKslm7
+cyQswCI658hxCsTvaAiR03+LCpxYciIKqOVSoG7YImTRaNmjxaUOUYzJUKPgdaLz
+2TXbEsxv9JKicbqvgFfbepuQzupyanvj3R+eDYglT5mphiuLUU+SwmmoHEdiNaJ5
+BOI8HcIoa86d+GOli4VRIm/Kz2N3kr39qp0eCaT2K3lZ4c0o9XI=
+=PdMF
+-----END PGP SIGNATURE-----
+
+--=-mkttsT56z8bkquCZok65--
+
+
+
+--===============8349284337159760556==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KWGVuLWRldmVs
+IG1haWxpbmcgbGlzdApYZW4tZGV2ZWxAbGlzdHMueGVucHJvamVjdC5vcmcKaHR0cHM6Ly9saXN0
+cy54ZW5wcm9qZWN0Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL3hlbi1kZXZlbA==
+
+--===============8349284337159760556==--
+
+
