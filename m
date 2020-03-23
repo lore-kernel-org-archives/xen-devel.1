@@ -2,60 +2,59 @@ Return-Path: <SRS0=vmDZ=5I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D139C54FCE
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2020 14:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D3095C3F2CD
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2020 15:12:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5D0E82076A
-	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2020 14:56:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A0B66206F8
+	for <xen-devel@archiver.kernel.org>; Mon, 23 Mar 2020 15:12:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="UA7Rr1wS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5D0E82076A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Cp6ZFWXB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0B66206F8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGOUF-0008OA-R5; Mon, 23 Mar 2020 14:55:31 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jGOkG-0001g4-L1; Mon, 23 Mar 2020 15:12:04 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Jqku=5I=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jGOUE-0008O5-S1
- for xen-devel@lists.xenproject.org; Mon, 23 Mar 2020 14:55:30 +0000
-X-Inumbo-ID: 568776c8-6d16-11ea-82ea-12813bfff9fa
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 568776c8-6d16-11ea-82ea-12813bfff9fa;
- Mon, 23 Mar 2020 14:55:30 +0000 (UTC)
+ id 1jGOkF-0001fz-Oo
+ for xen-devel@lists.xenproject.org; Mon, 23 Mar 2020 15:12:03 +0000
+X-Inumbo-ID: a6356d86-6d18-11ea-b34e-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a6356d86-6d18-11ea-b34e-bc764e2007e4;
+ Mon, 23 Mar 2020 15:12:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1584975330;
+ d=citrix.com; s=securemail; t=1584976323;
  h=date:from:to:cc:subject:message-id:references:
  mime-version:content-transfer-encoding:in-reply-to;
- bh=lBVVrBypVz+RADchWAvVwdaNJBZHScOt3Cc1rORYDdI=;
- b=UA7Rr1wSRybvKR2xkxtVBslUftY0NcgyS9rSnUTUU/0iJ56Rme/cckpW
- jXv6c9QyeHv7j8sWFhGczgTgPr+pdgL8cP6TacqtzF1vXgHohAXfdmyJs
- xRBd3eXFeJqcFhAtCWko4tcACl9dF+DIlz3Frhu1EgO3I461fb0w78Ms/ 8=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ bh=nI+tA/Ao5jCVIwg+pkiNkHdYRRrGR5fFqbun+08s8Ho=;
+ b=Cp6ZFWXByXB17J87V5lNEbKwQiwwHRIlujRUwlBip28cc2x3rfVJHLt/
+ oK5ZSps5newcXMK1QnnoszqbPKOqH6jPmwPHoZwK9AB0D532oSFX21Wy/
+ KE3y3txWR9HI+sl1vE+Y2ZSawr0Nbi9Qh0Tk0wzD2L1tTPtjNDxN02AKk U=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=roger.pau@citrix.com;
  spf=Pass smtp.mailfrom=roger.pau@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa4.hc3370-68.iphmx.com;
+ receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
  roger.pau@citrix.com designates 162.221.158.21 as permitted
  sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa4.hc3370-68.iphmx.com;
+ receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -64,36 +63,42 @@ Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: LufU9WBY251XB+4L29AisBql4KftCAViZA91z6ekHJUun8XztQ5VLTDD6QOQnumWlhlQQz5qdh
- ViLl+cJqzd00AKgXop8Fsz4Aq4zi+Bp/B7SYLbiis8nhA5xVtMm0ZqnujSruIK+Dy5xuBNLC/2
- 5UO4lElqyMQ7hHRML/AfC0itKUN+pMSRqvaUGUxkbaXkrY7w4cNHTogb45wa8eH6PMLzzMYnrK
- uyoQrBnn/NJnP4y2udfj7H2Ly+gjzE7D6R1l+AzcNd+uyWyMsR0JqHUUH1MVlmmiTiS4K4J0YY
- 7bk=
+IronPort-SDR: 3u7IKaosBhYvQljNKygxCYGayFRPpgRtgF0IiekYpXzZnXFbcWd/wnUDvIWPpAHgrTm1TcGz3z
+ s0agmgS4jKd49aWpTDRd00AduNrOYrazHtIH2gT61yBMk609VPEzw4TuDNF+u65nS2s4C4glNe
+ FVqExYCONZQ8HTs/WQXTOjocT4fptM+gqHbLMLHGorMc+8hk4OuX+smuBVH9vKouTv5Sv0B52K
+ GeJSzvc2pwOoUzgQf4/MVXp1yeK1I7D0ioYhD6/TCFQbtsm/gUlAeK/A+zTbqRp95UJTNJEjPR
+ QRU=
 X-SBRS: 2.7
-X-MesageID: 15118429
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 14681739
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,296,1580792400"; d="scan'208";a="15118429"
-Date: Mon, 23 Mar 2020 15:55:22 +0100
+X-IronPort-AV: E=Sophos;i="5.72,296,1580792400"; d="scan'208";a="14681739"
+Date: Mon, 23 Mar 2020 16:11:53 +0100
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Message-ID: <20200323145522.GC24458@Air-de-Roger.citrite.net>
-References: <20200320030929.24735-1-marmarek@invisiblethingslab.com>
+To: Anthony PERARD <anthony.perard@citrix.com>
+Subject: Re: [XEN PATCH v3 15/23] xen/build: have the root Makefile generates
+ the CFLAGS
+Message-ID: <20200323151153.GD24458@Air-de-Roger.citrite.net>
+References: <20200226113355.2532224-1-anthony.perard@citrix.com>
+ <20200226113355.2532224-16-anthony.perard@citrix.com>
+ <20200227110504.GN24458@Air-de-Roger.citrite.net>
+ <20200317180524.GA4088@perard.uk.xensource.com>
+ <20200319162412.GH4088@perard.uk.xensource.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <20200320030929.24735-1-marmarek@invisiblethingslab.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200319162412.GH4088@perard.uk.xensource.com>
 X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH v2] xen-pciback: fix INTERRUPT_TYPE_* defines
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,27 +109,65 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Stefano
- Stabellini <sstabellini@kernel.org>, open list <linux-kernel@vger.kernel.org>,
- Simon Gaiser <simon@invisiblethingslab.com>, xen-devel@lists.xenproject.org,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-T24gRnJpLCBNYXIgMjAsIDIwMjAgYXQgMDQ6MDk6MThBTSArMDEwMCwgTWFyZWsgTWFyY3p5a293
-c2tpLUfDs3JlY2tpIHdyb3RlOgo+IHhlbl9wY2lia19nZXRfaW50ZXJydXB0X3R5cGUoKSBhc3N1
-bWVzIElOVEVSUlVQVF9UWVBFX05PTkUgYmVpbmcgMAo+IChpbml0aWFsaXplIHJldCB0byAwIGFu
-ZCByZXR1cm4gYXMgSU5URVJSVVBUX1RZUEVfTk9ORSkuCj4gRml4IHRoZSBkZWZpbml0aW9uIHRv
-IG1ha2UgSU5URVJSVVBUX1RZUEVfTk9ORSByZWFsbHkgMCwgYW5kIGFsc28gc2hpZnQKPiBvdGhl
-ciB2YWx1ZXMgdG8gbm90IGxlYXZlIGhvbGVzLgo+IEJ1dCBhbHNvLCBkbyBub3QgYXNzdW1lIElO
-VEVSUlVQVF9UWVBFX05PTkUgYmVpbmcgMCBhbnltb3JlIHRvIGF2b2lkCj4gc2ltaWxhciBjb25m
-dXNpb25zIGluIHRoZSBmdXR1cmUuCj4gCj4gRml4ZXM6IDQ3Njg3OGU0YjJiZSAoInhlbi1wY2li
-YWNrOiBvcHRpb25hbGx5IGFsbG93IGludGVycnVwdCBlbmFibGUgZmxhZyB3cml0ZXMiKQo+IFNp
-Z25lZC1vZmYtYnk6IE1hcmVrIE1hcmN6eWtvd3NraS1Hw7NyZWNraSA8bWFybWFyZWtAaW52aXNp
-YmxldGhpbmdzbGFiLmNvbT4KClJldmlld2VkLWJ5OiBSb2dlciBQYXUgTW9ubsOpIDxyb2dlci5w
-YXVAY2l0cml4LmNvbT4KClRoYW5rcywgUm9nZXIuCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpYZW4tZGV2ZWwgbWFpbGluZyBsaXN0Clhlbi1kZXZlbEBs
-aXN0cy54ZW5wcm9qZWN0Lm9yZwpodHRwczovL2xpc3RzLnhlbnByb2plY3Qub3JnL21haWxtYW4v
-bGlzdGluZm8veGVuLWRldmVs
+On Thu, Mar 19, 2020 at 04:24:12PM +0000, Anthony PERARD wrote:
+> On Tue, Mar 17, 2020 at 06:05:24PM +0000, Anthony PERARD wrote:
+> > On Thu, Feb 27, 2020 at 12:05:04PM +0100, Roger Pau Monné wrote:
+> > > On Wed, Feb 26, 2020 at 11:33:47AM +0000, Anthony PERARD wrote:
+> > > > +ifneq ($(CONFIG_CC_IS_CLANG),y)
+> > > > +# Clang doesn't understand this command line argument, and doesn't appear to
+> > > > +# have an suitable alternative.  The resulting compiled binary does function,
+> > > > +# but has an excessively large symbol table.
+> > > > +CFLAGS += -Wa,--strip-local-absolute
+> > > 
+> > > This is not really related to clang, but to the assembler. If clang is
+> > > used with -no-integrated-as it's quite likely that the GNU assembler
+> > > will be used, and hence this option would be available.
+> > > 
+> > > Can we use cc-option-add here in order to detect whether the build
+> > > toolchain support the option?
+> > 
+> > That can be done, but I think I'll do that as a follow up of this patch,
+> > to avoid too many changes when moving the cflags around.
+> > 
+> > > Ideally this should be done after the integrated assembler tests
+> > > performed in x86/Rules.mk.
+> 
+> So, testing for the -Wa,--strip-local-absolute flags turns out to be
+> more complicated than I though it would be.
+>  - cc-option-add doesn't work because it doesn't test with the current list
+>    of CFLAGS. And if I add the CFLAGS, clang says the option is unused,
+>    it doesn't matter if -no-integrated-as is present or not.
+
+Oh, that seems like completely bogus clang behavior. It's my
+understanding (from reading the manual) that whatever gets appended to
+-Wa,<arg> is just passed to the assembler, in which case the compiler
+has no idea whether it's used by it or not.
+
+Which version of clang did you use to test it?
+
+Isn't it fine to just attempt to test if it works, and if the compiler
+complains just don't append it? (regardless of whether
+-no-integrated-as is used or not)
+
+>  - I tried to use as-option macro from Linux but that comes with issues
+>    as well. I don't think that enough work as been done to make it work
+>    well with clang. (I probably need to filter -Wall out of the CFLAGS
+>    when testing, and they are probably other issues.)
+> 
+> So I think I leave the enhancement for later. Having the flag depends
+> on GCC is good enough for now.
+
+Right, until clang adds support for it there's no pressure.
+
+Thanks, Roger.
+
