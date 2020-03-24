@@ -2,52 +2,102 @@ Return-Path: <SRS0=L5TH=5J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS autolearn=unavailable autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28DAAC43331
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DD36DC43331
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:16:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 03D0D2074D
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:14:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 03D0D2074D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id AD7542076F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:16:59 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OHIJYAXk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AD7542076F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGlFY-0004YJ-HD; Tue, 24 Mar 2020 15:13:52 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=hjhq=5J=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jGlFW-0004YE-Ln
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 15:13:50 +0000
-X-Inumbo-ID: 108b6aea-6de2-11ea-a6c1-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 108b6aea-6de2-11ea-a6c1-bc764e2007e4;
- Tue, 24 Mar 2020 15:13:50 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 1820EAB6D;
- Tue, 24 Mar 2020 15:13:49 +0000 (UTC)
-To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+	id 1jGlIE-0004fO-WE; Tue, 24 Mar 2020 15:16:38 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=gj1N=5J=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jGlID-0004fJ-CG
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 15:16:37 +0000
+X-Inumbo-ID: 73cee2c6-6de2-11ea-844a-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 73cee2c6-6de2-11ea-844a-12813bfff9fa;
+ Tue, 24 Mar 2020 15:16:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1585062996;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=RseeQCj2NR8Swtya70snFlU0fchG/HJCbgy6RmMHvWY=;
+ b=OHIJYAXk1uUAY34317aq/O4y1oUj3eQHKSzgiJmgUIrev0uraZNq6zpf
+ Xn19yhGL6dnu7y7EpIFeapwgouEFwLvrHmSjPF1iVMoixaMEKOoKsxPIh
+ +jyBMnu7oW0ICCAZ5amGO/pzrCAqsZ+fBO7IBp4VNqh95QrMOVaWPSdk8 Q=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: GoWcsj6Go6zh231OquFT09PHhau9utSPaHE2uxd1+btY+8jwzhWMlGKU9W7XlNkIJUJ6JuFvxp
+ Dngq1bmuboh97C3KVBpPpQj73soJYHVctl5f5ejvCNs1SYSX5Dw3dtGbq4AJCf5Ql8GO7DrBS4
+ 6jK0jLV11NAokk5rql/vH0LxZrvX8x7OJXdFHw2xzsU9WZc2T02wXbCHM/Ur6teoN10wW6TrK2
+ /i/hnQvUMat51SyZwHUryhv8cFBMPPnIhjhBwV8DhaHr5mBHQ4JQZtdcWq8uDKTIrOJNDvtAtE
+ aic=
+X-SBRS: 2.7
+X-MesageID: 14880194
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,300,1580792400"; d="scan'208";a="14880194"
+Date: Tue, 24 Mar 2020 16:16:28 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <20200324151628.GM24458@Air-de-Roger.citrite.net>
 References: <20200324150015.50496-1-roger.pau@citrix.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <42a7b408-1ea1-04fa-e70b-cbdaba54c558@suse.com>
-Date: Tue, 24 Mar 2020 16:13:48 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+ <20200324150015.50496-2-roger.pau@citrix.com>
+ <f4ce1d95-c80a-8727-7ddc-9199bb2036c4@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20200324150015.50496-1-roger.pau@citrix.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Xen-devel] [PATCH 1/2] xen: expand BALLOON_MEMORY_HOTPLUG
- description
+In-Reply-To: <f4ce1d95-c80a-8727-7ddc-9199bb2036c4@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
+Subject: Re: [Xen-devel] [PATCH 2/2] xen: enable BALLOON_MEMORY_HOTPLUG by
+ default
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,48 +110,58 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: xen-devel@lists.xenproject.org,
  Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Stefano Stabellini <sstabellini@kernel.org>
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, linux-kernel@vger.kernel.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.03.20 16:00, Roger Pau Monne wrote:
-> To mention it's also useful for PVH or HVM domains that require
-> mapping foreign memory or grants.
+On Tue, Mar 24, 2020 at 04:09:35PM +0100, Jürgen Groß wrote:
+> On 24.03.20 16:00, Roger Pau Monne wrote:
+> > Without it a PVH dom0 is mostly useless, as it would balloon down huge
+> > amounts of RAM in order get physical address space to map foreign
+> > memory and grants, ultimately leading to an out of memory situation.
+> > 
+> > Such option is also needed for HVM or PVH driver domains, since they
+> > also require mapping grants into physical memory regions.
+> > 
+> > Suggested-by: Ian Jackson <ian.jackson@eu.citrix.com>
+> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> > ---
+> > Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> > Cc: Juergen Gross <jgross@suse.com>
+> > Cc: Stefano Stabellini <sstabellini@kernel.org>
+> > Cc: xen-devel@lists.xenproject.org
+> > ---
+> >   drivers/xen/Kconfig | 1 +
+> >   1 file changed, 1 insertion(+)
+> > 
+> > diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
+> > index 57ddd6f4b729..c344bcffd89d 100644
+> > --- a/drivers/xen/Kconfig
+> > +++ b/drivers/xen/Kconfig
+> > @@ -13,6 +13,7 @@ config XEN_BALLOON
+> >   config XEN_BALLOON_MEMORY_HOTPLUG
+> >   	bool "Memory hotplug support for Xen balloon driver"
+> >   	depends on XEN_BALLOON && MEMORY_HOTPLUG
+> > +	default y
+> >   	help
+> >   	  Memory hotplug support for Xen balloon driver allows expanding memory
+> >   	  available for the system above limit declared at system startup.
+> > 
 > 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> ---
-> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-> Cc: Juergen Gross <jgross@suse.com>
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: xen-devel@lists.xenproject.org
-> ---
->   drivers/xen/Kconfig | 4 ++++
->   1 file changed, 4 insertions(+)
+> Another variant would be to set: default XEN_BACKEND
 > 
-> diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-> index 61212fc7f0c7..57ddd6f4b729 100644
-> --- a/drivers/xen/Kconfig
-> +++ b/drivers/xen/Kconfig
-> @@ -19,6 +19,10 @@ config XEN_BALLOON_MEMORY_HOTPLUG
->   	  It is very useful on critical systems which require long
->   	  run without rebooting.
->   
-> +	  It's also very useful for translated domains (PVH or HVM) to obtain
+> This would match the reasoning for switching it on.
 
-I'd rather say "(non PV)" or "(PVH, HVM or Arm)".
+I would rather have it always on if possible, as gntdev or privcmd
+(when used to map foreign pages from user-space) will also require it,
+and they are not gated on XEN_BACKEND AFAICT.
 
-> +	  unpopulated physical memory ranges to use in order to map foreign
-> +	  memory or grants.
-> +
->   	  Memory could be hotplugged in following steps:
->   
->   	    1) target domain: ensure that memory auto online policy is in
+> Either way would be fine with me, so you can add
 > 
+> Reviewed-by: Juergen Gross <jgross@suse.com>
 
-With that:
+Thanks!
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
-
-
-Juergen
+Roger.
 
