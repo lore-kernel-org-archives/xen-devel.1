@@ -2,96 +2,53 @@ Return-Path: <SRS0=L5TH=5J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF18BC43331
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D64E0C41621
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:10:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9031020775
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:00:49 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="CXqxsWsw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9031020775
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id B0F0820775
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 15:10:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B0F0820775
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGl2f-0003Jo-Is; Tue, 24 Mar 2020 15:00:33 +0000
+	id 1jGlBS-0003dA-IR; Tue, 24 Mar 2020 15:09:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=gj1N=5J=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jGl2e-0003Je-BO
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 15:00:32 +0000
-X-Inumbo-ID: 32540df0-6de0-11ea-bec1-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=hjhq=5J=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jGlBR-0003d5-RZ
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 15:09:37 +0000
+X-Inumbo-ID: 79eeb290-6de1-11ea-b34e-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 32540df0-6de0-11ea-bec1-bc764e2007e4;
- Tue, 24 Mar 2020 15:00:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585062027;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=ssXAEeDvel0Jf7gmmpPeu8hMRNYSVWL/a7oAMPsVjt4=;
- b=CXqxsWswotXjfTgXdqENKoOI66cO5CaBE2hUYXZMoh3LiGhw9nqOTdzK
- xMCzh1QzBpUtkeZbCHKcF4CtJNLVH4mxzdDqu/XpnNfpwN2SGQmBW7hmN
- W3DjYDBj7O19DeFhfd2n+7oM5UIvbp52wj6cDYjC9wiQzxLANcpXCKi2R s=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: 229YkSUPjTs2vF4LrHxAgXY+0/Cxpb0vjzrzH+SAqyCmieLe/OXnOTr2iYuhQQYLYQGzbEhzZ2
- LVaJsD+YCTD7R5RnydHpvwGjcWkpBXoBE2bYSPnPELLfD66DWK7DKj71KdmYeJEKXWxPA3FmTk
- lO7BeEP9kxCvTYODa9N22iDd5RWV+Is0Stno94+OksnMGfdPoqSmqX3Ie7W7tDpQQDvU0q6ixo
- H4UR9U5rhZ8+5qOxxNeAa1Rb7ooSq5lKz1fJ8zNdGSi+vDaldHSaGfgFhtlSX5QXFf1TG77Izk
- s+s=
-X-SBRS: 2.7
-X-MesageID: 15193081
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,300,1580792400"; d="scan'208";a="15193081"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <linux-kernel@vger.kernel.org>
-Date: Tue, 24 Mar 2020 16:00:14 +0100
-Message-ID: <20200324150015.50496-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.25.0
+ id 79eeb290-6de1-11ea-b34e-bc764e2007e4;
+ Tue, 24 Mar 2020 15:09:37 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 42C1FAC22;
+ Tue, 24 Mar 2020 15:09:36 +0000 (UTC)
+To: Roger Pau Monne <roger.pau@citrix.com>, linux-kernel@vger.kernel.org
+References: <20200324150015.50496-1-roger.pau@citrix.com>
+ <20200324150015.50496-2-roger.pau@citrix.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <f4ce1d95-c80a-8727-7ddc-9199bb2036c4@suse.com>
+Date: Tue, 24 Mar 2020 16:09:35 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.5.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20200324150015.50496-2-roger.pau@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [PATCH 1/2] xen: expand BALLOON_MEMORY_HOTPLUG
- description
+Subject: Re: [Xen-devel] [PATCH 2/2] xen: enable BALLOON_MEMORY_HOTPLUG by
+ default
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,41 +59,54 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>, Stefano
- Stabellini <sstabellini@kernel.org>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-To mention it's also useful for PVH or HVM domains that require
-mapping foreign memory or grants.
+On 24.03.20 16:00, Roger Pau Monne wrote:
+> Without it a PVH dom0 is mostly useless, as it would balloon down huge
+> amounts of RAM in order get physical address space to map foreign
+> memory and grants, ultimately leading to an out of memory situation.
+> 
+> Such option is also needed for HVM or PVH driver domains, since they
+> also require mapping grants into physical memory regions.
+> 
+> Suggested-by: Ian Jackson <ian.jackson@eu.citrix.com>
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> ---
+> Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+> Cc: Juergen Gross <jgross@suse.com>
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: xen-devel@lists.xenproject.org
+> ---
+>   drivers/xen/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
+> index 57ddd6f4b729..c344bcffd89d 100644
+> --- a/drivers/xen/Kconfig
+> +++ b/drivers/xen/Kconfig
+> @@ -13,6 +13,7 @@ config XEN_BALLOON
+>   config XEN_BALLOON_MEMORY_HOTPLUG
+>   	bool "Memory hotplug support for Xen balloon driver"
+>   	depends on XEN_BALLOON && MEMORY_HOTPLUG
+> +	default y
+>   	help
+>   	  Memory hotplug support for Xen balloon driver allows expanding memory
+>   	  available for the system above limit declared at system startup.
+> 
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: xen-devel@lists.xenproject.org
----
- drivers/xen/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
+Another variant would be to set: default XEN_BACKEND
 
-diff --git a/drivers/xen/Kconfig b/drivers/xen/Kconfig
-index 61212fc7f0c7..57ddd6f4b729 100644
---- a/drivers/xen/Kconfig
-+++ b/drivers/xen/Kconfig
-@@ -19,6 +19,10 @@ config XEN_BALLOON_MEMORY_HOTPLUG
- 	  It is very useful on critical systems which require long
- 	  run without rebooting.
- 
-+	  It's also very useful for translated domains (PVH or HVM) to obtain
-+	  unpopulated physical memory ranges to use in order to map foreign
-+	  memory or grants.
-+
- 	  Memory could be hotplugged in following steps:
- 
- 	    1) target domain: ensure that memory auto online policy is in
--- 
-2.25.0
+This would match the reasoning for switching it on.
 
+Either way would be fine with me, so you can add
+
+Reviewed-by: Juergen Gross <jgross@suse.com>
+
+
+Juergen
 
