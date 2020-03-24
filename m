@@ -6,39 +6,39 @@ X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 147AEC43331
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:28:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B1BB5C43331
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:28:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E520020774
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:27:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E520020774
+	by mail.kernel.org (Postfix) with ESMTPS id 83A1220774
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:28:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 83A1220774
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGmOz-0003FI-Pw; Tue, 24 Mar 2020 16:27:41 +0000
+	id 1jGmPe-0003NC-3l; Tue, 24 Mar 2020 16:28:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Lmgi=5J=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jGmOy-0003F5-VS
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 16:27:40 +0000
-X-Inumbo-ID: 60b06264-6dec-11ea-a6c1-bc764e2007e4
+ id 1jGmPc-0003My-UJ
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 16:28:20 +0000
+X-Inumbo-ID: 79192958-6dec-11ea-bec1-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 60b06264-6dec-11ea-a6c1-bc764e2007e4;
- Tue, 24 Mar 2020 16:27:39 +0000 (UTC)
+ id 79192958-6dec-11ea-bec1-bc764e2007e4;
+ Tue, 24 Mar 2020 16:28:20 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 89F6CACC2;
- Tue, 24 Mar 2020 16:27:38 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id A829AABF4;
+ Tue, 24 Mar 2020 16:28:19 +0000 (UTC)
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 References: <cfeb8fcf-3ba6-674c-17a9-93be9e746930@suse.com>
-Message-ID: <fbabdcdb-3123-75e7-896c-9c7dd844f409@suse.com>
-Date: Tue, 24 Mar 2020 17:27:37 +0100
+Message-ID: <8cf000a6-a8ac-22b6-422d-c11dc8b6454a@suse.com>
+Date: Tue, 24 Mar 2020 17:28:17 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
@@ -46,8 +46,8 @@ In-Reply-To: <cfeb8fcf-3ba6-674c-17a9-93be9e746930@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Subject: [Xen-devel] [PATCH 4/7] x86emul: vendor specific near indirect
- branch behavior in 64-bit mode
+Subject: [Xen-devel] [PATCH 5/7] x86emul: vendor specific SYSENTER/SYSEXIT
+ behavior in long mode
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,54 +63,59 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Intel CPUs ignore operand size overrides here, while AMD ones don't.
+Intel CPUs permit both insns there while AMD ones don't.
+
+While at it also
+- drop the ring 0 check from SYSENTER handling - neither Intel's nor
+  AMD's insn pages have any indication of #GP(0) getting raised when
+  executed from ring 0, and trying it out in practice also confirms
+  the check shouldn't be there,
+- move SYSENTER segment register writing until after the (in principle
+  able to fail) MSR reads.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/tools/tests/x86_emulator/test_x86_emulator.c
-+++ b/tools/tests/x86_emulator/test_x86_emulator.c
-@@ -813,6 +813,17 @@ static const struct {
-         .opcode = { 0x66, 0x67, 0xe3, 0x10 },
-         .opc_len = { 4, 4 },
-         .disp = { 4 + 16 - MMAP_ADDR, 4 + 16 },
-+    }, {
-+        .descr = "jmpw *(%rsp)",
-+        .opcode = { 0x66, 0xff, 0x24, 0x24 },
-+        .opc_len = { 4, 4 },
-+        .disp = { STKVAL_DISP - MMAP_ADDR, STKVAL_DISP },
-+    }, {
-+        .descr = "callw *(%rsp)",
-+        .opcode = { 0x66, 0xff, 0x14, 0x24 },
-+        .opc_len = { 4, 4 },
-+        .stkoff = { -2, -8 },
-+        .disp = { STKVAL_DISP - MMAP_ADDR, STKVAL_DISP },
-     },
- };
- #endif
 --- a/xen/arch/x86/x86_emulate/x86_emulate.c
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -2524,8 +2524,7 @@ x86_decode_onebyte(
-         {
-         case 2: /* call (near) */
-         case 4: /* jmp (near) */
--        case 6: /* push */
--            if ( mode_64bit() && op_bytes == 4 )
-+            if ( mode_64bit() && (op_bytes == 4 || !amd_like(ctxt)) )
-                 op_bytes = 8;
-             state->desc = DstNone | SrcMem | Mov;
-             break;
-@@ -2537,6 +2536,12 @@ x86_decode_onebyte(
-                 op_bytes = 4;
-             state->desc = DstNone | SrcMem | Mov;
-             break;
+@@ -6588,7 +6588,7 @@ x86_emulate(
+ 
+     case X86EMUL_OPC(0x0f, 0x34): /* sysenter */
+         vcpu_must_have(sep);
+-        generate_exception_if(mode_ring0(), EXC_GP, 0);
++        generate_exception_if(amd_like(ctxt) && ctxt->lma, EXC_UD);
+         generate_exception_if(!in_protmode(ctxt, ops), EXC_GP, 0);
+ 
+         fail_if(ops->read_msr == NULL);
+@@ -6611,11 +6611,6 @@ x86_emulate(
+         sreg.limit = ~0u;  /* 4GB limit */
+         sreg.attr = 0xc93; /* G+DB+P+S+Data */
+ 
+-        fail_if(ops->write_segment == NULL);
+-        if ( (rc = ops->write_segment(x86_seg_cs, &cs, ctxt)) != 0 ||
+-             (rc = ops->write_segment(x86_seg_ss, &sreg, ctxt)) != 0 )
+-            goto done;
+-
+         if ( (rc = ops->read_msr(MSR_IA32_SYSENTER_EIP,
+                                  &msr_val, ctxt)) != X86EMUL_OKAY )
+             goto done;
+@@ -6626,11 +6621,19 @@ x86_emulate(
+             goto done;
+         _regs.r(sp) = ctxt->lma ? msr_val : (uint32_t)msr_val;
+ 
++        fail_if(!ops->write_segment);
++        if ( (rc = ops->write_segment(x86_seg_cs, &cs,
++                                      ctxt)) != X86EMUL_OKAY ||
++             (rc = ops->write_segment(x86_seg_ss, &sreg,
++                                      ctxt)) != X86EMUL_OKAY )
++            goto done;
 +
-+        case 6: /* push */
-+            if ( mode_64bit() && op_bytes == 4 )
-+                op_bytes = 8;
-+            state->desc = DstNone | SrcMem | Mov;
-+            break;
-         }
+         singlestep = _regs.eflags & X86_EFLAGS_TF;
          break;
-     }
-
+ 
+     case X86EMUL_OPC(0x0f, 0x35): /* sysexit */
+         vcpu_must_have(sep);
++        generate_exception_if(amd_like(ctxt) && ctxt->lma, EXC_UD);
+         generate_exception_if(!mode_ring0(), EXC_GP, 0);
+         generate_exception_if(!in_protmode(ctxt, ops), EXC_GP, 0);
+ 
 
