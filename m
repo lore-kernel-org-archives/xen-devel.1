@@ -2,77 +2,91 @@ Return-Path: <SRS0=L5TH=5J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.5 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 39A71C41621
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 14:23:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB758C43331
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 14:28:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 101ED2080C
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 14:23:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 101ED2080C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 8952920788
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 14:28:30 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.co.uk header.i=@amazon.co.uk header.b="LrS8EPJk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8952920788
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.co.uk
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGkRz-0007tW-EB; Tue, 24 Mar 2020 14:22:39 +0000
+	id 1jGkXL-0008Af-6r; Tue, 24 Mar 2020 14:28:11 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2LnZ=5J=gmail.com=julien.grall.oss@srs-us1.protection.inumbo.net>)
- id 1jGkRx-0007tL-Cf
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 14:22:37 +0000
-X-Inumbo-ID: e897c225-6dda-11ea-841b-12813bfff9fa
-Received: from mail-ed1-f66.google.com (unknown [209.85.208.66])
+ <SRS0=xWCa=5J=amazon.co.uk=prvs=345581a90=pdurrant@srs-us1.protection.inumbo.net>)
+ id 1jGkXK-0008Aa-M0
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 14:28:10 +0000
+X-Inumbo-ID: af681070-6ddb-11ea-841e-12813bfff9fa
+Received: from smtp-fw-9101.amazon.com (unknown [207.171.184.25])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e897c225-6dda-11ea-841b-12813bfff9fa;
- Tue, 24 Mar 2020 14:22:36 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id v1so6753298edq.8
- for <xen-devel@lists.xenproject.org>; Tue, 24 Mar 2020 07:22:36 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=4c9BzGTaFKahl1/eNqTdpOD1GYzEveY8QyF3cGnidg4=;
- b=NIwR4T/ROQQPf+d6IJDbNBKimtyVkRnkCb58v+Yf4vfokvP2MrJvk6LTwKhEU6uEBN
- 3WQ3F+LuLSyZVFC793O9nfcwPNK0q4+bQdFBDnjlnwqITHe8aiHlm4uBGJeLclzpS3yu
- LEjiEdSBH/Ls8yIAnuPgw2dA8rDYsdk29itvEOMGpP9KlEr0RAEw9rCv4QJwmxbZAEJw
- pNslUizPhc4Epv3nD1/mTJYghnfW+wlikGZWVIcwhq6imMa/pWAik8I5dUZ8u5V5Pc4+
- f4VajOEHqH0F7VgjeLK51BKx4BV944xwRsziANdrSExHjwq21fpnP/fDeaDWc4MeNoVj
- E1ng==
-X-Gm-Message-State: ANhLgQ2Hu6ZPBfpRqfbnmKztSUfimvvVLldvN/OQQeJV+eQNNecfZShr
- RWzV7skINV4KbOV5Pk3bBm8=
-X-Google-Smtp-Source: ADFU+vujjMwqfjdJ4CKXY8y9P54dqX4MT7DeN8NR8Rvj0eF5dCxiTC6aXMyyWmx1FYwHeDWdJy+Nfg==
-X-Received: by 2002:a50:998b:: with SMTP id m11mr27497040edb.36.1585059755628; 
- Tue, 24 Mar 2020 07:22:35 -0700 (PDT)
-Received: from a483e7b01a66.ant.amazon.com (54-240-197-224.amazon.com.
- [54.240.197.224])
- by smtp.gmail.com with ESMTPSA id g4sm634707eje.0.2020.03.24.07.22.34
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 24 Mar 2020 07:22:35 -0700 (PDT)
-To: paul@xen.org, xen-devel@lists.xenproject.org
+ id af681070-6ddb-11ea-841e-12813bfff9fa;
+ Tue, 24 Mar 2020 14:28:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.co.uk; i=@amazon.co.uk; q=dns/txt;
+ s=amazon201209; t=1585060090; x=1616596090;
+ h=from:to:cc:date:message-id:references:in-reply-to:
+ content-transfer-encoding:mime-version:subject;
+ bh=J6WB7u45gC0IRS2XMxSwzfqxCirhISmZPi5TplWjz/U=;
+ b=LrS8EPJkZ5jJGw47cw1XL8Gq7kBO0QbIEZq8YuJU3Ik63C0fWE6t3FL7
+ U6SS3gmzKoiaTNY9L/LcbVsubsxSlpCmzQDVZronUw2TAea074FusG1zO
+ NH0gyTDfTaPhGvGapNMYrXbXDNP0Sm7R2whHJUTTIfyTJw+vJpRLdI93Z A=;
+IronPort-SDR: cy5T3Ize7B5iZWrK3uyIiyMc53d/yKQEYpcMi+cBXPJvmnOc1i/DUQEBMfrzaf7bzXsjzhKIBX
+ hyiPNRQCrV0Q==
+X-IronPort-AV: E=Sophos;i="5.72,300,1580774400"; d="scan'208";a="24794106"
+Thread-Topic: [PATCH v6 5/5] domain: use PGC_extra domheap page for shared_info
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-2c-1968f9fa.us-west-2.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP;
+ 24 Mar 2020 14:28:08 +0000
+Received: from EX13MTAUEA002.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+ by email-inbound-relay-2c-1968f9fa.us-west-2.amazon.com (Postfix) with ESMTPS
+ id 07133A2786; Tue, 24 Mar 2020 14:28:06 +0000 (UTC)
+Received: from EX13D32EUC002.ant.amazon.com (10.43.164.94) by
+ EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
+ id 15.0.1236.3; Tue, 24 Mar 2020 14:28:06 +0000
+Received: from EX13D32EUC003.ant.amazon.com (10.43.164.24) by
+ EX13D32EUC002.ant.amazon.com (10.43.164.94) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Tue, 24 Mar 2020 14:28:06 +0000
+Received: from EX13D32EUC003.ant.amazon.com ([10.43.164.24]) by
+ EX13D32EUC003.ant.amazon.com ([10.43.164.24]) with mapi id 15.00.1497.006;
+ Tue, 24 Mar 2020 14:28:05 +0000
+From: "Durrant, Paul" <pdurrant@amazon.co.uk>
+To: Julien Grall <julien@xen.org>, "paul@xen.org" <paul@xen.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Thread-Index: AQHWAefNkz0pzx/YO02nstJylfW4r6hXzF7w
+Date: Tue, 24 Mar 2020 14:28:05 +0000
+Message-ID: <5d37f2834d384188a37dd7b98b4b7a22@EX13D32EUC003.ant.amazon.com>
 References: <20200310174917.1514-1-paul@xen.org>
  <20200310174917.1514-6-paul@xen.org>
-From: Julien Grall <julien@xen.org>
-Message-ID: <65cb0423-09c3-209a-85dc-63b07085d7ac@xen.org>
-Date: Tue, 24 Mar 2020 14:22:33 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ <65cb0423-09c3-209a-85dc-63b07085d7ac@xen.org>
+In-Reply-To: <65cb0423-09c3-209a-85dc-63b07085d7ac@xen.org>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.43.164.198]
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <20200310174917.1514-6-paul@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Precedence: Bulk
 Subject: Re: [Xen-devel] [PATCH v6 5/5] domain: use PGC_extra domheap page
  for shared_info
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -80,72 +94,54 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Konrad
+ Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Paul,
-
-On 10/03/2020 17:49, paul@xen.org wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
-> 
-> Currently shared_info is a shared xenheap page but shared xenheap pages
-> complicate future plans for live-update of Xen so it is desirable to,
-> where possible, not use them [1]. This patch therefore converts shared_info
-> into a PGC_extra domheap page. This does entail freeing shared_info during
-> domain_relinquish_resources() rather than domain_destroy() so care is
-> needed to avoid de-referencing a NULL shared_info pointer hence some
-> extra checks of 'is_dying' are needed.
-> 
-> NOTE: For Arm, the call to free_shared_info() in arch_domain_destroy() is
->        left in place since it is idempotent and called in the error path for
->        arch_domain_create().
-
-The approach looks good to me. I have one comment below.
-
-[...]
-
-> diff --git a/xen/common/domain.c b/xen/common/domain.c
-> index 4ef0d3b21e..4f3266454f 100644
-> --- a/xen/common/domain.c
-> +++ b/xen/common/domain.c
-> @@ -1651,24 +1651,44 @@ int continue_hypercall_on_cpu(
->   
->   int alloc_shared_info(struct domain *d, unsigned int memflags)
->   {
-> -    if ( (d->shared_info.virt = alloc_xenheap_pages(0, memflags)) == NULL )
-> +    struct page_info *pg;
-> +
-> +    pg = alloc_domheap_page(d, MEMF_no_refcount | memflags);
-> +    if ( !pg )
->           return -ENOMEM;
->   
-> -    d->shared_info.mfn = virt_to_mfn(d->shared_info.virt);
-> +    if ( !get_page_and_type(pg, d, PGT_writable_page) )
-> +    {
-> +        /*
-> +         * The domain should not be running at this point so there is
-> +         * no way we should reach this error path.
-> +         */
-> +        ASSERT_UNREACHABLE();
-> +        return -ENODATA;
-> +    }
-> +
-> +    d->shared_info.mfn = page_to_mfn(pg);
-> +    d->shared_info.virt = __map_domain_page_global(pg);
-
-__map_domain_page_global() is not guaranteed to succeed. For instance, 
-on Arm32 this will be a call to vmap().
-
-So you want to check the return.
-
-Cheers,
-
--- 
-Julien Grall
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KW3NuaXBdDQo+ID4gQ3VycmVudGx5IHNoYXJl
+ZF9pbmZvIGlzIGEgc2hhcmVkIHhlbmhlYXAgcGFnZSBidXQgc2hhcmVkIHhlbmhlYXAgcGFnZXMN
+Cj4gPiBjb21wbGljYXRlIGZ1dHVyZSBwbGFucyBmb3IgbGl2ZS11cGRhdGUgb2YgWGVuIHNvIGl0
+IGlzIGRlc2lyYWJsZSB0bywNCj4gPiB3aGVyZSBwb3NzaWJsZSwgbm90IHVzZSB0aGVtIFsxXS4g
+VGhpcyBwYXRjaCB0aGVyZWZvcmUgY29udmVydHMgc2hhcmVkX2luZm8NCj4gPiBpbnRvIGEgUEdD
+X2V4dHJhIGRvbWhlYXAgcGFnZS4gVGhpcyBkb2VzIGVudGFpbCBmcmVlaW5nIHNoYXJlZF9pbmZv
+IGR1cmluZw0KPiA+IGRvbWFpbl9yZWxpbnF1aXNoX3Jlc291cmNlcygpIHJhdGhlciB0aGFuIGRv
+bWFpbl9kZXN0cm95KCkgc28gY2FyZSBpcw0KPiA+IG5lZWRlZCB0byBhdm9pZCBkZS1yZWZlcmVu
+Y2luZyBhIE5VTEwgc2hhcmVkX2luZm8gcG9pbnRlciBoZW5jZSBzb21lDQo+ID4gZXh0cmEgY2hl
+Y2tzIG9mICdpc19keWluZycgYXJlIG5lZWRlZC4NCj4gPg0KPiA+IE5PVEU6IEZvciBBcm0sIHRo
+ZSBjYWxsIHRvIGZyZWVfc2hhcmVkX2luZm8oKSBpbiBhcmNoX2RvbWFpbl9kZXN0cm95KCkgaXMN
+Cj4gPiAgICAgICAgbGVmdCBpbiBwbGFjZSBzaW5jZSBpdCBpcyBpZGVtcG90ZW50IGFuZCBjYWxs
+ZWQgaW4gdGhlIGVycm9yIHBhdGggZm9yDQo+ID4gICAgICAgIGFyY2hfZG9tYWluX2NyZWF0ZSgp
+Lg0KPiANCj4gVGhlIGFwcHJvYWNoIGxvb2tzIGdvb2QgdG8gbWUuIEkgaGF2ZSBvbmUgY29tbWVu
+dCBiZWxvdy4NCj4gDQoNClRoYW5rcy4NCg0KPiBbLi4uXQ0KPiANCj4gPiBkaWZmIC0tZ2l0IGEv
+eGVuL2NvbW1vbi9kb21haW4uYyBiL3hlbi9jb21tb24vZG9tYWluLmMNCj4gPiBpbmRleCA0ZWYw
+ZDNiMjFlLi40ZjMyNjY0NTRmIDEwMDY0NA0KPiA+IC0tLSBhL3hlbi9jb21tb24vZG9tYWluLmMN
+Cj4gPiArKysgYi94ZW4vY29tbW9uL2RvbWFpbi5jDQo+ID4gQEAgLTE2NTEsMjQgKzE2NTEsNDQg
+QEAgaW50IGNvbnRpbnVlX2h5cGVyY2FsbF9vbl9jcHUoDQo+ID4NCj4gPiAgIGludCBhbGxvY19z
+aGFyZWRfaW5mbyhzdHJ1Y3QgZG9tYWluICpkLCB1bnNpZ25lZCBpbnQgbWVtZmxhZ3MpDQo+ID4g
+ICB7DQo+ID4gLSAgICBpZiAoIChkLT5zaGFyZWRfaW5mby52aXJ0ID0gYWxsb2NfeGVuaGVhcF9w
+YWdlcygwLCBtZW1mbGFncykpID09IE5VTEwgKQ0KPiA+ICsgICAgc3RydWN0IHBhZ2VfaW5mbyAq
+cGc7DQo+ID4gKw0KPiA+ICsgICAgcGcgPSBhbGxvY19kb21oZWFwX3BhZ2UoZCwgTUVNRl9ub19y
+ZWZjb3VudCB8IG1lbWZsYWdzKTsNCj4gPiArICAgIGlmICggIXBnICkNCj4gPiAgICAgICAgICAg
+cmV0dXJuIC1FTk9NRU07DQo+ID4NCj4gPiAtICAgIGQtPnNoYXJlZF9pbmZvLm1mbiA9IHZpcnRf
+dG9fbWZuKGQtPnNoYXJlZF9pbmZvLnZpcnQpOw0KPiA+ICsgICAgaWYgKCAhZ2V0X3BhZ2VfYW5k
+X3R5cGUocGcsIGQsIFBHVF93cml0YWJsZV9wYWdlKSApDQo+ID4gKyAgICB7DQo+ID4gKyAgICAg
+ICAgLyoNCj4gPiArICAgICAgICAgKiBUaGUgZG9tYWluIHNob3VsZCBub3QgYmUgcnVubmluZyBh
+dCB0aGlzIHBvaW50IHNvIHRoZXJlIGlzDQo+ID4gKyAgICAgICAgICogbm8gd2F5IHdlIHNob3Vs
+ZCByZWFjaCB0aGlzIGVycm9yIHBhdGguDQo+ID4gKyAgICAgICAgICovDQo+ID4gKyAgICAgICAg
+QVNTRVJUX1VOUkVBQ0hBQkxFKCk7DQo+ID4gKyAgICAgICAgcmV0dXJuIC1FTk9EQVRBOw0KPiA+
+ICsgICAgfQ0KPiA+ICsNCj4gPiArICAgIGQtPnNoYXJlZF9pbmZvLm1mbiA9IHBhZ2VfdG9fbWZu
+KHBnKTsNCj4gPiArICAgIGQtPnNoYXJlZF9pbmZvLnZpcnQgPSBfX21hcF9kb21haW5fcGFnZV9n
+bG9iYWwocGcpOw0KPiANCj4gX19tYXBfZG9tYWluX3BhZ2VfZ2xvYmFsKCkgaXMgbm90IGd1YXJh
+bnRlZWQgdG8gc3VjY2VlZC4gRm9yIGluc3RhbmNlLA0KPiBvbiBBcm0zMiB0aGlzIHdpbGwgYmUg
+YSBjYWxsIHRvIHZtYXAoKS4NCj4gDQo+IFNvIHlvdSB3YW50IHRvIGNoZWNrIHRoZSByZXR1cm4u
+DQo+IA0KDQpPaywgSSdsbCBhZGQgYSBjaGVjay4NCg0KQXMgSmFuIGRpc2NvdmVyZWQsIEkgbWVz
+c2VkIHVwIHRoZSB2ZXJzaW9uIG51bWJlcmluZyBzbyB0aGVyZSBpcyBhbHJlYWR5IGEgdjcgc2Vy
+aWVzIHdoZXJlIEkgZHJvcHBlZCB0aGlzIHBhdGNoICh1bnRpbCBJIGNhbiBncm91cCBpdCB3aXRo
+IGNvbnZlcnNpb24gb2Ygb3RoZXIgc2hhcmVkIHhlbmhlYXAgcGFnZXMpLg0KDQogIFBhdWwNCg0K
+PiBDaGVlcnMsDQo+IA0KPiAtLQ0KPiBKdWxpZW4gR3JhbGwNCg==
 
