@@ -6,39 +6,42 @@ X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5F4AC43331
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:29:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F3C4C43331
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:29:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BE72820774
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:29:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BE72820774
+	by mail.kernel.org (Postfix) with ESMTPS id DE1E82076F
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 16:29:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE1E82076F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGmQA-0003So-DZ; Tue, 24 Mar 2020 16:28:54 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jGmQX-0003XL-NI; Tue, 24 Mar 2020 16:29:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Lmgi=5J=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jGmQ9-0003Sd-Hx
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 16:28:53 +0000
-X-Inumbo-ID: 8c5952ae-6dec-11ea-b34e-bc764e2007e4
+ id 1jGmQW-0003Ws-48
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 16:29:16 +0000
+X-Inumbo-ID: 99e3203a-6dec-11ea-8476-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8c5952ae-6dec-11ea-b34e-bc764e2007e4;
- Tue, 24 Mar 2020 16:28:52 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 99e3203a-6dec-11ea-8476-12813bfff9fa;
+ Tue, 24 Mar 2020 16:29:15 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CCAF5ABF4;
- Tue, 24 Mar 2020 16:28:51 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 86765ABF4;
+ Tue, 24 Mar 2020 16:29:14 +0000 (UTC)
 From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>
 References: <cfeb8fcf-3ba6-674c-17a9-93be9e746930@suse.com>
-Message-ID: <7c4b7701-0840-1e06-3b54-e259c223e61c@suse.com>
-Date: Tue, 24 Mar 2020 17:28:50 +0100
+Message-ID: <78b62646-6fd4-e5b3-bc09-783bb017eaaa@suse.com>
+Date: Tue, 24 Mar 2020 17:29:13 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
@@ -46,7 +49,7 @@ In-Reply-To: <cfeb8fcf-3ba6-674c-17a9-93be9e746930@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Subject: [Xen-devel] [PATCH 6/7] x86emul: vendor specific SYSCALL behavior
+Subject: [Xen-devel] [PATCH 7/7] x86emul: support SYSRET
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,42 +60,76 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-AMD CPUs permit the insn everywhere (even outside of protected mode),
-while Intel ones restrict it to 64-bit mode. While at it also add the
-so far missing CPUID bit check.
+This is to augment SYSCALL, which has been supported for quite some
+time.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 --- a/xen/arch/x86/x86_emulate/x86_emulate.c
 +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -1870,6 +1870,7 @@ amd_like(const struct x86_emulate_ctxt *
- #define vcpu_has_f16c()        (ctxt->cpuid->basic.f16c)
- #define vcpu_has_rdrand()      (ctxt->cpuid->basic.rdrand)
- 
-+#define vcpu_has_syscall()     (ctxt->cpuid->extd.syscall)
- #define vcpu_has_mmxext()      (ctxt->cpuid->extd.mmxext || vcpu_has_sse())
- #define vcpu_has_3dnow_ext()   (ctxt->cpuid->extd._3dnowext)
- #define vcpu_has_3dnow()       (ctxt->cpuid->extd._3dnow)
-@@ -5897,13 +5898,13 @@ x86_emulate(
+@@ -5975,6 +5975,60 @@ x86_emulate(
+             goto done;
          break;
  
-     case X86EMUL_OPC(0x0f, 0x05): /* syscall */
--        generate_exception_if(!in_protmode(ctxt, ops), EXC_UD);
--
++    case X86EMUL_OPC(0x0f, 0x07): /* sysret */
 +        vcpu_must_have(syscall);
-         /* Inject #UD if syscall/sysret are disabled. */
-         fail_if(ops->read_msr == NULL);
-         if ( (rc = ops->read_msr(MSR_EFER, &msr_val, ctxt)) != X86EMUL_OKAY )
-             goto done;
-         generate_exception_if((msr_val & EFER_SCE) == 0, EXC_UD);
++        /* Inject #UD if syscall/sysret are disabled. */
++        fail_if(!ops->read_msr);
++        if ( (rc = ops->read_msr(MSR_EFER, &msr_val, ctxt)) != X86EMUL_OKAY )
++            goto done;
++        generate_exception_if((msr_val & EFER_SCE) == 0, EXC_UD);
 +        generate_exception_if(!amd_like(ctxt) && !mode_64bit(), EXC_UD);
- 
-         if ( (rc = ops->read_msr(MSR_STAR, &msr_val, ctxt)) != X86EMUL_OKAY )
-             goto done;
++        generate_exception_if(!mode_ring0(), EXC_GP, 0);
++        generate_exception_if(!in_protmode(ctxt, ops), EXC_GP, 0);
++
++        if ( (rc = ops->read_msr(MSR_STAR, &msr_val, ctxt)) != X86EMUL_OKAY )
++            goto done;
++
++        sreg.sel = ((msr_val >> 48) + 8) | 3; /* SELECTOR_RPL_MASK */
++        cs.sel = op_bytes == 8 ? sreg.sel + 8 : sreg.sel - 8;
++
++        cs.base = sreg.base = 0; /* flat segment */
++        cs.limit = sreg.limit = ~0u; /* 4GB limit */
++        cs.attr = 0xcfb; /* G+DB+P+DPL3+S+Code */
++        sreg.attr = 0xcf3; /* G+DB+P+DPL3+S+Data */
++
++#ifdef __x86_64__
++        if ( mode_64bit() )
++        {
++            if ( op_bytes == 8 )
++            {
++                cs.attr = 0xafb; /* L+DB+P+DPL3+S+Code */
++                generate_exception_if(!is_canonical_address(_regs.rcx) &&
++                                      !amd_like(ctxt), EXC_GP, 0);
++                _regs.rip = _regs.rcx;
++            }
++            else
++                _regs.rip = _regs.ecx;
++
++            _regs.eflags = _regs.r11 & ~(X86_EFLAGS_RF | X86_EFLAGS_VM);
++        }
++        else
++#endif
++        {
++            _regs.r(ip) = _regs.ecx;
++            _regs.eflags |= X86_EFLAGS_IF;
++        }
++
++        fail_if(!ops->write_segment);
++        if ( (rc = ops->write_segment(x86_seg_cs, &cs, ctxt)) != X86EMUL_OKAY ||
++             (!amd_like(ctxt) &&
++              (rc = ops->write_segment(x86_seg_ss, &sreg,
++                                       ctxt)) != X86EMUL_OKAY) )
++            goto done;
++
++        singlestep = _regs.eflags & X86_EFLAGS_TF;
++        break;
++
+     case X86EMUL_OPC(0x0f, 0x08): /* invd */
+     case X86EMUL_OPC(0x0f, 0x09): /* wbinvd / wbnoinvd */
+         generate_exception_if(!mode_ring0(), EXC_GP, 0);
 
 
