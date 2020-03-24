@@ -6,44 +6,45 @@ X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 508E4C4332B
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 09:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C4D66C4332B
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 09:31:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1D138208CA
-	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 09:27:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D138208CA
+	by mail.kernel.org (Postfix) with ESMTPS id A0A8A20786
+	for <xen-devel@archiver.kernel.org>; Tue, 24 Mar 2020 09:31:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0A8A20786
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jGfpy-00053H-HL; Tue, 24 Mar 2020 09:27:06 +0000
+	id 1jGfuH-0005oP-4v; Tue, 24 Mar 2020 09:31:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Lmgi=5J=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jGfpx-000539-Fi
- for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 09:27:05 +0000
-X-Inumbo-ID: 9f2a9c7a-6db1-11ea-b34e-bc764e2007e4
+ id 1jGfuF-0005oJ-2A
+ for xen-devel@lists.xenproject.org; Tue, 24 Mar 2020 09:31:31 +0000
+X-Inumbo-ID: 3d8ff450-6db2-11ea-a6c1-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9f2a9c7a-6db1-11ea-b34e-bc764e2007e4;
- Tue, 24 Mar 2020 09:27:04 +0000 (UTC)
+ id 3d8ff450-6db2-11ea-a6c1-bc764e2007e4;
+ Tue, 24 Mar 2020 09:31:29 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id DF307ABD7;
- Tue, 24 Mar 2020 09:27:02 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 993BCABD7;
+ Tue, 24 Mar 2020 09:31:28 +0000 (UTC)
+From: Jan Beulich <jbeulich@suse.com>
 To: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>
 References: <20200310174917.1514-1-paul@xen.org>
  <20200310174917.1514-6-paul@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <5d28392f-b32e-717b-636e-1aa80a75243c@suse.com>
-Date: Tue, 24 Mar 2020 10:26:57 +0100
+ <5d28392f-b32e-717b-636e-1aa80a75243c@suse.com>
+Message-ID: <391b3511-3353-e40c-858e-489389a8a3d3@suse.com>
+Date: Tue, 24 Mar 2020 10:31:26 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <20200310174917.1514-6-paul@xen.org>
+In-Reply-To: <5d28392f-b32e-717b-636e-1aa80a75243c@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -68,50 +69,54 @@ Cc: Wei Liu <wl@xen.org>, paul@xen.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 10.03.2020 18:49, paul@xen.org wrote:
-> From: Paul Durrant <pdurrant@amazon.com>
+On 24.03.2020 10:26, Jan Beulich wrote:
+> On 10.03.2020 18:49, paul@xen.org wrote:
+>> From: Paul Durrant <pdurrant@amazon.com>
+>>
+>> Currently shared_info is a shared xenheap page but shared xenheap pages
+>> complicate future plans for live-update of Xen so it is desirable to,
+>> where possible, not use them [1]. This patch therefore converts shared_info
+>> into a PGC_extra domheap page. This does entail freeing shared_info during
+>> domain_relinquish_resources() rather than domain_destroy() so care is
+>> needed to avoid de-referencing a NULL shared_info pointer hence some
+>> extra checks of 'is_dying' are needed.
+>>
+>> NOTE: For Arm, the call to free_shared_info() in arch_domain_destroy() is
+>>       left in place since it is idempotent and called in the error path for
+>>       arch_domain_create().
+>>
+>> [1] See https://lists.xenproject.org/archives/html/xen-devel/2020-02/msg02018.html
+>>
+>> Signed-off-by: Paul Durrant <paul@xen.org>
+>> ---
+>> Cc: Stefano Stabellini <sstabellini@kernel.org>
+>> Cc: Julien Grall <julien@xen.org>
+>> Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Cc: George Dunlap <george.dunlap@citrix.com>
+>> Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+>> Cc: Jan Beulich <jbeulich@suse.com>
+>> Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+>> Cc: Wei Liu <wl@xen.org>
+>>
+>> v6:
+>>  - Drop dump_shared_info() but tag the shared info in the 'ExtraPage'
+>>    dump
+>>
+>> v5:
+>>  - Incorporate new dump_shared_info() function
+>>
+>> v2:
+>>  - Addressed comments from Julien
+>>  - Expanded the commit comment to explain why this patch is wanted
+>> ---
+>>  xen/arch/arm/domain.c      |  2 ++
 > 
-> Currently shared_info is a shared xenheap page but shared xenheap pages
-> complicate future plans for live-update of Xen so it is desirable to,
-> where possible, not use them [1]. This patch therefore converts shared_info
-> into a PGC_extra domheap page. This does entail freeing shared_info during
-> domain_relinquish_resources() rather than domain_destroy() so care is
-> needed to avoid de-referencing a NULL shared_info pointer hence some
-> extra checks of 'is_dying' are needed.
-> 
-> NOTE: For Arm, the call to free_shared_info() in arch_domain_destroy() is
->       left in place since it is idempotent and called in the error path for
->       arch_domain_create().
-> 
-> [1] See https://lists.xenproject.org/archives/html/xen-devel/2020-02/msg02018.html
-> 
-> Signed-off-by: Paul Durrant <paul@xen.org>
-> ---
-> Cc: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: Julien Grall <julien@xen.org>
-> Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-> Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-> Cc: George Dunlap <george.dunlap@citrix.com>
-> Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-> Cc: Jan Beulich <jbeulich@suse.com>
-> Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-> Cc: Wei Liu <wl@xen.org>
-> 
-> v6:
->  - Drop dump_shared_info() but tag the shared info in the 'ExtraPage'
->    dump
-> 
-> v5:
->  - Incorporate new dump_shared_info() function
-> 
-> v2:
->  - Addressed comments from Julien
->  - Expanded the commit comment to explain why this patch is wanted
-> ---
->  xen/arch/arm/domain.c      |  2 ++
+> Julien, Stefano? (I'd prefer to commit the entire series in one go,
+> rather than leaving out just this last patch.)
 
-Julien, Stefano? (I'd prefer to commit the entire series in one go,
-rather than leaving out just this last patch.)
+Actually - never mind, I've just realized that there are still some
+pending items on the last two patches of this series.
 
 Jan
 
