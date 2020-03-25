@@ -2,53 +2,53 @@ Return-Path: <SRS0=jAzW=5K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06814C43331
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 11:45:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EB17BC43331
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 11:47:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D45C820714
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 11:45:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D45C820714
+	by mail.kernel.org (Postfix) with ESMTPS id B67D620714
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 11:47:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B67D620714
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jH4TB-00023o-CX; Wed, 25 Mar 2020 11:45:13 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jH4Ui-00029m-Oq; Wed, 25 Mar 2020 11:46:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=grKZ=5K=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jH4T9-00023j-O3
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 11:45:11 +0000
-X-Inumbo-ID: 14e9042e-6e8e-11ea-85de-12813bfff9fa
+ id 1jH4Ug-00029g-Ti
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 11:46:46 +0000
+X-Inumbo-ID: 4dcc1786-6e8e-11ea-bec1-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 14e9042e-6e8e-11ea-85de-12813bfff9fa;
- Wed, 25 Mar 2020 11:45:10 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4dcc1786-6e8e-11ea-bec1-bc764e2007e4;
+ Wed, 25 Mar 2020 11:46:46 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id C46E5AC5B;
- Wed, 25 Mar 2020 11:45:09 +0000 (UTC)
-To: Andrew Cooper <andrew.cooper3@citrix.com>
+ by mx2.suse.de (Postfix) with ESMTP id 834F5AC5B;
+ Wed, 25 Mar 2020 11:46:45 +0000 (UTC)
+To: paul@xen.org
 References: <6fa81b4d-528d-5c33-50c5-a18396b4383a@suse.com>
- <db2b459a-5dac-ecd0-1650-f8b1dca8ff96@citrix.com>
+ <81e7aade-9dfb-313a-ad81-30b2703c2136@suse.com>
+ <00c301d60297$471cb7f0$d55627d0$@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <162583f8-2b2e-e9c9-1fcf-8fff629d0cb0@suse.com>
-Date: Wed, 25 Mar 2020 12:45:08 +0100
+Message-ID: <1cc4b223-42c4-1c3b-98fb-d43cda1c47bf@suse.com>
+Date: Wed, 25 Mar 2020 12:46:44 +0100
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <db2b459a-5dac-ecd0-1650-f8b1dca8ff96@citrix.com>
+In-Reply-To: <00c301d60297$471cb7f0$d55627d0$@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-Subject: Re: [Xen-devel] [PATCH v5 00/10] x86emul: further work
+Subject: Re: [Xen-devel] [PATCH v5 05/10] x86emul: support MOVDIR64B insn
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,38 +59,51 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Paul Durrant <Paul.Durrant@citrix.com>, Wei Liu <wl@xen.org>,
- Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, 'Paul Durrant' <Paul.Durrant@citrix.com>,
+ 'Roger Pau Monne' <roger.pau@citrix.com>, 'Wei Liu' <wl@xen.org>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 25.03.2020 12:41, Andrew Cooper wrote:
-> On 24/03/2020 12:26, Jan Beulich wrote:
->> Some of the later patches are still at least partly RFC, for
->> varying reasons (see there). I'd appreciate though if at least
->> some of the earlier ones could go in rather sooner than later.
+On 25.03.2020 12:19, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jan Beulich
+>> Sent: 24 March 2020 12:34
+>> To: xen-devel@lists.xenproject.org
+>> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Paul Durrant <Paul.Durrant@citrix.com>; Wei Liu
+>> <wl@xen.org>; Roger Pau Monne <roger.pau@citrix.com>
+>> Subject: [Xen-devel] [PATCH v5 05/10] x86emul: support MOVDIR64B insn
 >>
->> Patch 1 functionally (for the test harness) depends on
->> "libx86/CPUID: fix (not just) leaf 7 processing", while at
->> least patch 2 contextually depends on "x86emul: disable
->> FPU/MMX/SIMD insn emulation when !HVM".
+>> Introduce a new blk() hook, paralleling the rmw() on in certain way, but
+>> being intended for larger data sizes, and hence its HVM intermediate
+>> handling function doesn't fall back to splitting the operation if the
+>> requested virtual address can't be mapped.
 >>
->>  1: x86emul: support AVX512_BF16 insns
->>  2: x86emul: support MOVDIRI insn
->>  3: x86: determine HAVE_AS_* just once
+>> Note that SDM revision 071 doesn't specify exception behavior for
+>> ModRM.mod == 0b11; assuming #UD here.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> TBD: If we want to avoid depending on correct MTRR settings,
+>>      hvmemul_map_linear_addr() may need to gain a parameter to allow
+>>      controlling cachability of the produced mapping(s).
 > 
-> I have (in this order when threaded):
-> 
-> 02/10 Support AVX512_BF16
-> 02/10 Support MOVDIRI
-> 01/10 Support AVX512_BF16
-> 03/10 Determine HAS_AS_*
-> 
-> To a first approximation, the two AVX512_BF16 ones look identical, so
-> I'm going to assume that the first one (chronologically) was the error.
+> Or could we deal with this by adding an optional cache flush into the unmap?
 
-Yes indeed, sorry.
+But (non-)cachability of a range can't generally by covered by
+simply flushing the cache.
+
+>> Of course the
+>>      function will also need to be made capable of mapping at least
+>>      p2m_mmio_direct pages for this and the two ENQCMD insns to be
+>>      actually useful.
+> 
+> 
+> I/O emulation parts LGTM so...
+> 
+> Reviewed-by: Paul Durrant <paul@xen.org>
+
+Thanks much.
 
 Jan
 
