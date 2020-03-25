@@ -2,66 +2,90 @@ Return-Path: <SRS0=jAzW=5K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1CAFC1975A
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 15:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B60BC1975A
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 15:55:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B27492073E
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 15:54:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B27492073E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=hygon.cn
+	by mail.kernel.org (Postfix) with ESMTPS id 47AE32073E
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 15:55:53 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=tklengyel-com.20150623.gappssmtp.com header.i=@tklengyel-com.20150623.gappssmtp.com header.b="HC01FRMt"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 47AE32073E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jH8M5-0007QF-Gm; Wed, 25 Mar 2020 15:54:09 +0000
+	id 1jH8NW-0007Xe-Ss; Wed, 25 Mar 2020 15:55:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=QfP3=5K=hygon.cn=puwen@srs-us1.protection.inumbo.net>)
- id 1jH8M4-0007QA-Ga
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 15:54:08 +0000
-X-Inumbo-ID: c34d537c-6eb0-11ea-a6c1-bc764e2007e4
-Received: from spam2.hygon.cn (unknown [110.188.70.11])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=OrPJ=5K=tklsoftware.com=tamas@srs-us1.protection.inumbo.net>)
+ id 1jH8NV-0007XU-Ji
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 15:55:37 +0000
+X-Inumbo-ID: 11314008-6eb1-11ea-bec1-bc764e2007e4
+Received: from mail-ed1-x544.google.com (unknown [2a00:1450:4864:20::544])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c34d537c-6eb0-11ea-a6c1-bc764e2007e4;
- Wed, 25 Mar 2020 15:53:30 +0000 (UTC)
-Received: from MK-DB.hygon.cn ([172.23.18.60])
- by spam2.hygon.cn with ESMTP id 02PFjQPn016039;
- Wed, 25 Mar 2020 23:45:26 +0800 (GMT-8)
- (envelope-from puwen@hygon.cn)
-Received: from cncheex01.Hygon.cn ([172.23.18.10])
- by MK-DB.hygon.cn with ESMTP id 02PFjB1w047376;
- Wed, 25 Mar 2020 23:45:16 +0800 (GMT-8)
- (envelope-from puwen@hygon.cn)
-Received: from [192.168.1.193] (172.23.18.44) by cncheex01.Hygon.cn
- (172.23.18.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1466.3; Wed, 25 Mar
- 2020 23:44:53 +0800
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <20200324103726.3406-1-puwen@hygon.cn>
- <20200325103054.GA28601@Air-de-Roger>
-From: Pu Wen <puwen@hygon.cn>
-Message-ID: <772e041d-a91a-e67c-1243-530065b2f628@hygon.cn>
-Date: Wed, 25 Mar 2020 23:23:36 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ id 11314008-6eb1-11ea-bec1-bc764e2007e4;
+ Wed, 25 Mar 2020 15:55:37 +0000 (UTC)
+Received: by mail-ed1-x544.google.com with SMTP id i24so3029636eds.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2020 08:55:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tklengyel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=0t6FiyQ5ezBu/aoWTWdQOAAymfDOafftrsazQVSzYG8=;
+ b=HC01FRMt4z675q9+H1Y7JGE3CVyelkgd1AHGa0uYdAp93zUnRUW56KVD82rvDd88Xt
+ Sx5KhjaOyYX/ZTsUy76yCgp5zBdIyVoBY1t0qriRn4u+DHnKwn+x0VGXb2nJx9j+ckWh
+ WtwO2M9KQIzNtXXRss+EXm6H8QimMrVW2e1n5uBdZTKtUHuoRrwY1gZlolB0E9pyjhOL
+ /tdnR6CFx5/womq0Fb+S7fEZcigrgBPcPJ6U3rXq/Kpl6MzEMcHVqsq9DPe6TRaRbIC6
+ Wx3xisMLmehFk/SMzjZ5C0MaxzkZK9mqdyVoMyv7MD+bIHmbVv1O284tz9da2FHcAOIS
+ YnYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=0t6FiyQ5ezBu/aoWTWdQOAAymfDOafftrsazQVSzYG8=;
+ b=nsmVDYNo8qVkRq23mO8XM45r5Ep1oweQ95uCt8+Rq3LJbOMM0WfruUrNDg0tRMYBXd
+ ADe8rFJfSrXeO2KMtTofFDGqkDtMCBxQUwfzPRmhlln8yFJyDBXdu1UGzxUhx82fX3q/
+ N91NKcyshMI2yzntr4OvwWcHppgumjfxcj30aHRZyvuEZONpth7Ov/jVqiQbzn2hI45a
+ lxAF5dgUr9kmOfSxUx5CntGmitUWDzaBC2V0GF8Vj/DW1FmMRqMchx8szBOaV7PxUgxb
+ pwqNAmW5p2Bd7M5qASnwRg7ZaidVnUE/Jw9YlT73gJXf6CmdfAnfUl4Fv2rzHUIA+2IT
+ jbcQ==
+X-Gm-Message-State: ANhLgQ3fjZoaKTvrSPttNzulRE/ZB29J5iGRoFCTzE0MjZBFuRMQbSYM
+ XgnFNYBS+QTkxMlgJZycZ7qyyknFhK4=
+X-Google-Smtp-Source: ADFU+vtMDGJFqKhfjjtlXsidX0zll1xMgdfbY+B4rM+IIrOfhS2Ol50uoX0Df6EkdawnQhSgUX8vow==
+X-Received: by 2002:aa7:d4c4:: with SMTP id t4mr3523949edr.181.1585151735724; 
+ Wed, 25 Mar 2020 08:55:35 -0700 (PDT)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com.
+ [209.85.128.47])
+ by smtp.gmail.com with ESMTPSA id a21sm298404edr.22.2020.03.25.08.55.33
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 25 Mar 2020 08:55:34 -0700 (PDT)
+Received: by mail-wm1-f47.google.com with SMTP id c187so3057536wme.1
+ for <xen-devel@lists.xenproject.org>; Wed, 25 Mar 2020 08:55:33 -0700 (PDT)
+X-Received: by 2002:a05:600c:2293:: with SMTP id
+ 19mr3978963wmf.84.1585151733159; 
+ Wed, 25 Mar 2020 08:55:33 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200325103054.GA28601@Air-de-Roger>
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.23.18.44]
-X-ClientProxiedBy: cncheex01.Hygon.cn (172.23.18.10) To cncheex01.Hygon.cn
- (172.23.18.10)
-X-MAIL: spam2.hygon.cn 02PFjQPn016039
-X-DNSRBL: 
-Subject: Re: [Xen-devel] [PATCH v2] SVM: Add union intstat_t for offset 68h
- in vmcb struct
+References: <cover.1584981438.git.tamas.lengyel@intel.com>
+ <46457bd6e877abe12a8c005c23f0f1aab13afd24.1584981438.git.tamas.lengyel@intel.com>
+ <20200325155247.GE28601@Air-de-Roger>
+In-Reply-To: <20200325155247.GE28601@Air-de-Roger>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Wed, 25 Mar 2020 09:54:56 -0600
+X-Gmail-Original-Message-ID: <CABfawhkxper9QAzKMVHPp-xn-upQzuwK=iMkCAnXEEgeD7aogw@mail.gmail.com>
+Message-ID: <CABfawhkxper9QAzKMVHPp-xn-upQzuwK=iMkCAnXEEgeD7aogw@mail.gmail.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Xen-devel] [PATCH v12 2/3] x86/mem_sharing: reset a fork
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,35 +96,110 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 2020/3/25 18:30, Roger Pau Monné wrote:
-> On Tue, Mar 24, 2020 at 06:37:26PM +0800, Pu Wen wrote:
->> diff --git a/xen/include/asm-x86/hvm/svm/vmcb.h b/xen/include/asm-x86/hvm/svm/vmcb.h
->> index b9e389d481..d8a3285752 100644
->> --- a/xen/include/asm-x86/hvm/svm/vmcb.h
->> +++ b/xen/include/asm-x86/hvm/svm/vmcb.h
->> @@ -316,6 +316,17 @@ typedef union
->>       uint64_t raw;
->>   } intinfo_t;
->>   
->> +typedef union
->> +{
->> +    struct
->> +    {
->> +        u64 intr_shadow:    1;
->> +        u64 guest_intr_mask:1;
->> +        u64 resvd:          62;
-> 
-> Could you also use uint64_t for the fields, like you do below for
-> raw?
+On Wed, Mar 25, 2020 at 9:52 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com>=
+ wrote:
+>
+> On Mon, Mar 23, 2020 at 10:04:36AM -0700, Tamas K Lengyel wrote:
+> > Implement hypercall that allows a fork to shed all memory that got allo=
+cated
+> > for it during its execution and re-load its vCPU context from the paren=
+t VM.
+> > This allows the forked VM to reset into the same state the parent VM is=
+ in a
+> > faster way then creating a new fork would be. Measurements show about a=
+ 2x
+> > speedup during normal fuzzing operations. Performance may vary dependin=
+g how
+> > much memory got allocated for the forked VM. If it has been completely
+> > deduplicated from the parent VM then creating a new fork would likely b=
+e more
+> > performant.
+> >
+> > Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
+>
+> LGTM:
+>
+> Reviewed-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+>
+> One minor nit below.
+>
+> > ---
+> > v12: remove continuation & add comment back
+> >      address style issues pointed out by Jan
+> > ---
+> >  xen/arch/x86/mm/mem_sharing.c | 77 +++++++++++++++++++++++++++++++++++
+> >  xen/include/public/memory.h   |  1 +
+> >  2 files changed, 78 insertions(+)
+> >
+> > diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharin=
+g.c
+> > index 23deeddff2..930a5f58ef 100644
+> > --- a/xen/arch/x86/mm/mem_sharing.c
+> > +++ b/xen/arch/x86/mm/mem_sharing.c
+> > @@ -1775,6 +1775,60 @@ static int fork(struct domain *cd, struct domain=
+ *d)
+> >      return rc;
+> >  }
+> >
+> > +/*
+> > + * The fork reset operation is intended to be used on short-lived fork=
+s only.
+> > + * There is no hypercall continuation operation implemented for this r=
+eason.
+> > + * For forks that obtain a larger memory footprint it is likely going =
+to be
+> > + * more performant to create a new fork instead of resetting an existi=
+ng one.
+> > + *
+> > + * TODO: In case this hypercall would become useful on forks with larg=
+er memory
+> > + * footprints the hypercall continuation should be implemented (or if =
+this
+> > + * feature needs to be become "stable").
+> > + */
+> > +static int mem_sharing_fork_reset(struct domain *d, struct domain *pd)
+> > +{
+> > +    int rc;
+> > +    struct p2m_domain *p2m =3D p2m_get_hostp2m(d);
+> > +    struct page_info *page, *tmp;
+> > +
+> > +    spin_lock(&d->page_alloc_lock);
+> > +    domain_pause(d);
+> > +
+> > +    page_list_for_each_safe(page, tmp, &d->page_list)
+> > +    {
+> > +        p2m_type_t p2mt;
+> > +        p2m_access_t p2ma;
+> > +        mfn_t mfn =3D page_to_mfn(page);
+> > +        gfn_t gfn =3D mfn_to_gfn(d, mfn);
+> > +
+> > +        mfn =3D __get_gfn_type_access(p2m, gfn_x(gfn), &p2mt, &p2ma,
+> > +                                    0, NULL, false);
+> > +
+> > +        /* only reset pages that are sharable */
+> > +        if ( !p2m_is_sharable(p2mt) )
+> > +            continue;
+> > +
+> > +        /* take an extra reference or just skip if can't for whatever =
+reason */
+> > +        if ( !get_page(page, d) )
+> > +            continue;
+>
+> You can join both conditions above into a single one, if both just
+> need to perform a continue.
 
-Ok, thanks. Maybe bool for intr_shadow and guest_intr_mask is better?
+We could but I think it's easier to read it this way. So I prefer to
+keep it separate.
 
--- 
-Regards,
-Pu Wen
+Thanks for the review!
+Tamas
 
