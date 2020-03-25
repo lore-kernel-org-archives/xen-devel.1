@@ -2,54 +2,64 @@ Return-Path: <SRS0=jAzW=5K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 285F0C43331
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80827C1975A
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DF5BF20714
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF5BF20714
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 350FD20714
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:44 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="vAAk+YW6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 350FD20714
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jH37u-00014t-Oi; Wed, 25 Mar 2020 10:19:10 +0000
+	id 1jH38C-00016M-1Z; Wed, 25 Mar 2020 10:19:28 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=grKZ=5K=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jH37t-00014o-Rx
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 10:19:09 +0000
-X-Inumbo-ID: 0fab59b4-6e82-11ea-85c5-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=0Nu5=5K=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1jH38A-00016G-Pi
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 10:19:26 +0000
+X-Inumbo-ID: 1a9c88ca-6e82-11ea-85c5-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0fab59b4-6e82-11ea-85c5-12813bfff9fa;
- Wed, 25 Mar 2020 10:19:08 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CACECAD11;
- Wed, 25 Mar 2020 10:19:06 +0000 (UTC)
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <cfeb8fcf-3ba6-674c-17a9-93be9e746930@suse.com>
- <78b62646-6fd4-e5b3-bc09-783bb017eaaa@suse.com>
- <9af3c1bb-5b8f-4ff5-c9ce-2f34af652814@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <75958d0a-9b63-6f70-a38b-471994c45f5f@suse.com>
-Date: Wed, 25 Mar 2020 11:19:05 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ id 1a9c88ca-6e82-11ea-85c5-12813bfff9fa;
+ Wed, 25 Mar 2020 10:19:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Reply-To:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=/qNnEPH9R5bh9R4nZ/TIRrkOcOb3uYVD+3SLweSFy8U=; b=vAAk+YW6Zi3PnzyIYzXiVAJXJz
+ tJOoX8b7FD8jBBTtv2QfYrdfmsrZRVOugKPce1iG7rZwa2lOj+sUhbp9SKYH1TD8f4NmYW/4PQT30
+ hr4ePY9aigHFqPsuwoTShKbo9LhHV0vNW2TMuOApIdHTccAoZOANPBlNF7/Fo/nEqsTs=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <paul@xen.org>)
+ id 1jH389-0003CZ-CZ; Wed, 25 Mar 2020 10:19:25 +0000
+Received: from [54.239.6.185] (helo=CBG-R90WXYV0.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <paul@xen.org>)
+ id 1jH389-0006jD-1n; Wed, 25 Mar 2020 10:19:25 +0000
+From: paul@xen.org
+To: xen-devel@lists.xenproject.org
+Date: Wed, 25 Mar 2020 10:19:22 +0000
+Message-Id: <20200325101922.339-1-paul@xen.org>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <9af3c1bb-5b8f-4ff5-c9ce-2f34af652814@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Subject: Re: [Xen-devel] [PATCH 7/7] x86emul: support SYSRET
+Subject: [Xen-devel] [ANNOUNCE] Xen 4.14 Development Update
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,136 +70,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Reply-To: xen-devel@lists.xenproject.org, pdurrant@amazon.com
+Cc: jgross@suse.com, andrew.cooper3@citrix.com, pdurrant@amazon.com,
+ marmarek@invisiblethingslab.com, hongyxia@amazon.com, jbeulich@suse.com,
+ tamas.k.lengyel@gmail.com, roger.pau@citrix.com, dwmw@amazon.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 25.03.2020 11:00, Andrew Cooper wrote:
-> On 24/03/2020 16:29, Jan Beulich wrote:
->> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
->> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
->> @@ -5975,6 +5975,60 @@ x86_emulate(
->>              goto done;
->>          break;
->>  
->> +    case X86EMUL_OPC(0x0f, 0x07): /* sysret */
->> +        vcpu_must_have(syscall);
->> +        /* Inject #UD if syscall/sysret are disabled. */
->> +        fail_if(!ops->read_msr);
->> +        if ( (rc = ops->read_msr(MSR_EFER, &msr_val, ctxt)) != X86EMUL_OKAY )
->> +            goto done;
->> +        generate_exception_if((msr_val & EFER_SCE) == 0, EXC_UD);
-> 
-> (as with the SYSCALL side), no need for the vcpu_must_have(syscall) as
-> well as this check.
+This email only tracks big items for xen.git tree. Please reply for items
+you would like to see in 4.14 so that people have an idea what
+is going on and prioritise accordingly.
 
-Hmm, yes, we do so elsewhere too, so I'll adjust this there and here.
+You're welcome to provide description and use cases of the feature you're
+working on.
 
->> +        generate_exception_if(!amd_like(ctxt) && !mode_64bit(), EXC_UD);
->> +        generate_exception_if(!mode_ring0(), EXC_GP, 0);
->> +        generate_exception_if(!in_protmode(ctxt, ops), EXC_GP, 0);
->> +
-> 
-> The Intel SYSRET vulnerability checks regs->rcx for canonicity here, and
-> raises #GP here.
-> 
-> I see you've got it below, but this is where the Intel pseudocode puts
-> it, before MSR_STAR gets read, and logically it should be grouped with
-> the other excpetions.
+= Timeline =
 
-I had it here first, then moved it down to avoid yet another mode_64bit()
-instance. I didn't see why the ordering would matter for the overall
-result, on the basis that the STAR read ought not to fail under normal
-circumstances. I'll move it back where it was since you ask for it.
+We now adopt a fixed cut-off date scheme. We will release about every 8
+ months.
+The critical dates for Xen 4.14 are as follows:
 
->> +        if ( (rc = ops->read_msr(MSR_STAR, &msr_val, ctxt)) != X86EMUL_OKAY )
->> +            goto done;
->> +        sreg.sel = ((msr_val >> 48) + 8) | 3; /* SELECTOR_RPL_MASK */
-> 
-> This would be the logical behaviour...
-> 
-> AMD CPUs |3 into %cs.sel, but don't make an equivalent adjustment for
-> %ss.sel, and simply take MSR_START.SYSRET_CS + 8.
-> 
-> If you aren't careful with MSR_STAR, SYSRET will return to userspace
-> with mismatching RPL/DPL and userspace can really find itself with an
-> %ss with an RPL of 0.  (Of course, when you take an interrupt and
-> attempt to IRET back to this context, things fall apart).
-> 
-> I discovered this entirely by accident in XTF, but it is confirmed by
-> careful reading of the AMD SYSRET pseudocode.
+---> We are here
+* Last posting date: May 1st, 2020
+* Hard code freeze: May 22nd, 2020
+* Release: June 26th, 2020
 
-I did notice this in their pseudocode, but it looked too wrong to
-be true. Will change.
+Note that we don't have a freeze exception scheme anymore. All patches
+that wish to go into 4.14 must be posted initially no later than the
+last posting date and finally no later than the hard code freeze.
+All patches posted after that date will be automatically queued into next
+release.
 
->> +        cs.sel = op_bytes == 8 ? sreg.sel + 8 : sreg.sel - 8;
->> +
->> +        cs.base = sreg.base = 0; /* flat segment */
->> +        cs.limit = sreg.limit = ~0u; /* 4GB limit */
->> +        cs.attr = 0xcfb; /* G+DB+P+DPL3+S+Code */
->> +        sreg.attr = 0xcf3; /* G+DB+P+DPL3+S+Data */
-> 
-> Again, that would be the logical behaviour...
-> 
-> AMD CPU's don't update anything but %ss.sel, and even comment the fact
-> in pseudocode now.
-> 
-> This was discovered by Andy Luto, where he found that taking an
-> interrupt (unconditionally sets %ss to NUL), and opportunistic sysret
-> back to 32bit userspace lets userspace see a sane %ss value, but with
-> the attrs still empty, and the stack unusable.
-> 
->> +
->> +#ifdef __x86_64__
->> +        if ( mode_64bit() )
->> +        {
->> +            if ( op_bytes == 8 )
->> +            {
->> +                cs.attr = 0xafb; /* L+DB+P+DPL3+S+Code */
->> +                generate_exception_if(!is_canonical_address(_regs.rcx) &&
->> +                                      !amd_like(ctxt), EXC_GP, 0);
-> 
-> Wherever this ends up living, I think it needs calling out with a
-> comment /* CVE-xxx, Intel privilege escalation hole */, as it is a very
-> subtle piece of vendor specific behaviour.
-> 
-> Do we have a Centaur/other CPU to try with?  I'd err on the side of
-> going with == Intel rather than !AMD to avoid introducing known
-> vulnerabilities into models which stand half a chance of not being affected.
+RCs will be arranged immediately after freeze.
 
-I'd rather not - this exception behavior is spelled out by the
-SDM, and hence imo pretty likely to be followed by clones.
-While I do have a VIA box somewhere, it's not stable enough to
-run for more than a couple of minutes.
+There is also a jira instance to track all the tasks (not only big)
+for the project. See: https://xenproject.atlassian.net/projects/XEN/issues.
 
->> +                _regs.rip = _regs.rcx;
->> +            }
->> +            else
->> +                _regs.rip = _regs.ecx;
->> +
->> +            _regs.eflags = _regs.r11 & ~(X86_EFLAGS_RF | X86_EFLAGS_VM);
->> +        }
->> +        else
->> +#endif
->> +        {
->> +            _regs.r(ip) = _regs.ecx;
->> +            _regs.eflags |= X86_EFLAGS_IF;
->> +        }
->> +
->> +        fail_if(!ops->write_segment);
->> +        if ( (rc = ops->write_segment(x86_seg_cs, &cs, ctxt)) != X86EMUL_OKAY ||
->> +             (!amd_like(ctxt) &&
->> +              (rc = ops->write_segment(x86_seg_ss, &sreg,
->> +                                       ctxt)) != X86EMUL_OKAY) )
-> 
-> Oh - here is the AMD behaviour with %ss, but its not quite correct.
-> 
-> AFAICT, the correct behaviour is to read the old %ss on AMD-like, set
-> flat attributes on Intel, and write back normally, because %ss.sel does
-> get updated.
+Some of the tasks tracked by this e-mail also have a corresponding jira task
+referred by XEN-N.
 
-Oh, of course - I meant to, got distracted, and then forgot. Will fix.
+There is a version number for patch series associated to each feature.
+Can each owner send an update giving the latest version number if the
+series has been re-posted? Also, can the owners of any completed items
+please respond so that the item can be moved into the 'Completed' section.
 
-Jan
+= Projects =
+
+== Hypervisor == 
+
+*  Live-Updating Xen (RFC v2)
+  -  David Woodhouse
+  -  The latest code is available at https://xenbits.xen.org/gitweb/?p=people/dwmw2/xen.git;a=shortlog;h=refs/heads/lu-master
+  -  Project wiki page at https://wiki.xenproject.org/wiki/Live-Updating_Xen
+
+*  Non-Cooperative Live Migration (v7 (design docs))
+  -  Paul Durrant
+
+*  Secret Hiding (v5)
+  -  Hongyan Xia
+
+*  Hypervisor file system (v6)
+  -  Juergen Gross
+
+=== x86 === 
+
+*  Linux stub domains (v4)
+  -  Marek Marczykowski-Górecki
+
+*  Virtualise MSR_ARCH_CAPS for guests
+  -  Andrew Cooper
+
+*  AMD hardware mitigations (Rome)
+  -  Andrew Cooper
+
+*  Xen ioreq server (v3)
+  -  Roger Pau Monne
+
+*  Memory read caching in emulation (v5)
+  -  Jan Beulich
+
+*  Instruction emulator improvements
+  -  Jan Beulich
+
+*  VM forking (v11)
+  -  Tamas K Lengyel
+
+=== ARM === 
+
+== Completed == 
+
+
+Paul Durrant
 
