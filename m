@@ -6,60 +6,91 @@ X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80827C1975A
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B1B1C54FD0
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 350FD20714
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E3D6520714
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="vAAk+YW6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 350FD20714
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="S+a4MqkG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E3D6520714
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jH38C-00016M-1Z; Wed, 25 Mar 2020 10:19:28 +0000
+	id 1jH38H-00017w-E4; Wed, 25 Mar 2020 10:19:33 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=0Nu5=5K=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jH38A-00016G-Pi
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 10:19:26 +0000
-X-Inumbo-ID: 1a9c88ca-6e82-11ea-85c5-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=lu4h=5K=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jH38F-00017d-Pi
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 10:19:31 +0000
+X-Inumbo-ID: 1cf42d9e-6e82-11ea-85c5-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1a9c88ca-6e82-11ea-85c5-12813bfff9fa;
- Wed, 25 Mar 2020 10:19:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Reply-To:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/qNnEPH9R5bh9R4nZ/TIRrkOcOb3uYVD+3SLweSFy8U=; b=vAAk+YW6Zi3PnzyIYzXiVAJXJz
- tJOoX8b7FD8jBBTtv2QfYrdfmsrZRVOugKPce1iG7rZwa2lOj+sUhbp9SKYH1TD8f4NmYW/4PQT30
- hr4ePY9aigHFqPsuwoTShKbo9LhHV0vNW2TMuOApIdHTccAoZOANPBlNF7/Fo/nEqsTs=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <paul@xen.org>)
- id 1jH389-0003CZ-CZ; Wed, 25 Mar 2020 10:19:25 +0000
-Received: from [54.239.6.185] (helo=CBG-R90WXYV0.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <paul@xen.org>)
- id 1jH389-0006jD-1n; Wed, 25 Mar 2020 10:19:25 +0000
-From: paul@xen.org
-To: xen-devel@lists.xenproject.org
-Date: Wed, 25 Mar 2020 10:19:22 +0000
-Message-Id: <20200325101922.339-1-paul@xen.org>
-X-Mailer: git-send-email 2.17.1
+ id 1cf42d9e-6e82-11ea-85c5-12813bfff9fa;
+ Wed, 25 Mar 2020 10:19:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1585131570;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=XEgDZuOwwNyS0bjk2/uEkpNpG2eAcVVSjm/B+WEIYnY=;
+ b=S+a4MqkGQif2DODTtC0mEpXMqvPr4hGkrtQfMFyRaTYoPkdanLCFI9ex
+ J+Eb7thOHCDaIbTiugNgfqBZJqQL5jjIdOLvb833xihh4eu8tliA/pHIe
+ 2fmGBkYAVj5CvL8kH177LkmVt/aLL6/1LLyOwGYJtHuw/+zoWn0BTl1NK 8=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: 9JlBUHZpC4DsvhODgViMwrmkhlKfYpHlbJ5q++SWHbWHIvSjCp4Glru0Hwh3JSpIGxhC/p9tzM
+ TGz6ZVCsaP2+/wcP0rfNIsiEo6Ua8yCIja2VMd1ENSWXfkNxzhsabq/UyVorOm28d4cGpWRLG5
+ lUVOCGlgKl9Assn4IBgIYI/FRYf+k3buhC6HeE9X/sdjVfN1iSugACs6hDTUEDJuo58J6GFM1w
+ p/oEhp9ZFUaez7SO0fHU5Zx3oUIBsCahB0jkjJpDbhuy8bUJlgY5TSgmGCJwCJHyqAzXS1swWr
+ b+E=
+X-SBRS: 2.7
+X-MesageID: 15252273
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,304,1580792400"; d="scan'208";a="15252273"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Date: Wed, 25 Mar 2020 11:19:06 +0100
+Message-ID: <20200325101910.29168-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [ANNOUNCE] Xen 4.14 Development Update
+Subject: [Xen-devel] [PATCH v2 0/4] x86/nvmx: fixes for interrupt injection
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,95 +101,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: xen-devel@lists.xenproject.org, pdurrant@amazon.com
-Cc: jgross@suse.com, andrew.cooper3@citrix.com, pdurrant@amazon.com,
- marmarek@invisiblethingslab.com, hongyxia@amazon.com, jbeulich@suse.com,
- tamas.k.lengyel@gmail.com, roger.pau@citrix.com, dwmw@amazon.com
+Cc: Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This email only tracks big items for xen.git tree. Please reply for items
-you would like to see in 4.14 so that people have an idea what
-is going on and prioritise accordingly.
+Hello,
 
-You're welcome to provide description and use cases of the feature you're
-working on.
+osstest identified a regression caused by my earlier attempt to fix
+interrupt injection when using nested VMX. This series aims to fix the
+regression, and should unblock several osstest branches.
 
-= Timeline =
+The following report is from osstest with this series applied:
 
-We now adopt a fixed cut-off date scheme. We will release about every 8
- months.
-The critical dates for Xen 4.14 are as follows:
+http://logs.test-lab.xenproject.org/osstest/logs/148979/
 
----> We are here
-* Last posting date: May 1st, 2020
-* Hard code freeze: May 22nd, 2020
-* Release: June 26th, 2020
+Note the last patch (4/4) is the one that actually fixes the issue. Xen
+will always use the Ack on exit feature so patches 2/4 and 3/4 don't
+change the functionality when running a nested Xen, as it always
+requires SVI to be updated.
 
-Note that we don't have a freeze exception scheme anymore. All patches
-that wish to go into 4.14 must be posted initially no later than the
-last posting date and finally no later than the hard code freeze.
-All patches posted after that date will be automatically queued into next
-release.
+Thanks, Roger.
 
-RCs will be arranged immediately after freeze.
+Roger Pau Monne (4):
+  Revert "x86/vvmx: fix virtual interrupt injection when Ack on exit
+    control is used"
+  x86/nvmx: only update SVI when using Ack on exit
+  x86/nvmx: split updating RVI from SVI in nvmx_update_apicv
+  x86/nvmx: update exit bitmap when using virtual interrupt delivery
 
-There is also a jira instance to track all the tasks (not only big)
-for the project. See: https://xenproject.atlassian.net/projects/XEN/issues.
+ xen/arch/x86/hvm/vmx/intr.c       | 21 ++++++++++++--------
+ xen/arch/x86/hvm/vmx/vvmx.c       | 33 ++++++++++++++++++++-----------
+ xen/include/asm-x86/hvm/vmx/vmx.h |  2 ++
+ 3 files changed, 36 insertions(+), 20 deletions(-)
 
-Some of the tasks tracked by this e-mail also have a corresponding jira task
-referred by XEN-N.
+-- 
+2.26.0
 
-There is a version number for patch series associated to each feature.
-Can each owner send an update giving the latest version number if the
-series has been re-posted? Also, can the owners of any completed items
-please respond so that the item can be moved into the 'Completed' section.
-
-= Projects =
-
-== Hypervisor == 
-
-*  Live-Updating Xen (RFC v2)
-  -  David Woodhouse
-  -  The latest code is available at https://xenbits.xen.org/gitweb/?p=people/dwmw2/xen.git;a=shortlog;h=refs/heads/lu-master
-  -  Project wiki page at https://wiki.xenproject.org/wiki/Live-Updating_Xen
-
-*  Non-Cooperative Live Migration (v7 (design docs))
-  -  Paul Durrant
-
-*  Secret Hiding (v5)
-  -  Hongyan Xia
-
-*  Hypervisor file system (v6)
-  -  Juergen Gross
-
-=== x86 === 
-
-*  Linux stub domains (v4)
-  -  Marek Marczykowski-Górecki
-
-*  Virtualise MSR_ARCH_CAPS for guests
-  -  Andrew Cooper
-
-*  AMD hardware mitigations (Rome)
-  -  Andrew Cooper
-
-*  Xen ioreq server (v3)
-  -  Roger Pau Monne
-
-*  Memory read caching in emulation (v5)
-  -  Jan Beulich
-
-*  Instruction emulator improvements
-  -  Jan Beulich
-
-*  VM forking (v11)
-  -  Tamas K Lengyel
-
-=== ARM === 
-
-== Completed == 
-
-
-Paul Durrant
 
