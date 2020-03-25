@@ -2,46 +2,44 @@ Return-Path: <SRS0=jAzW=5K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 87C21C43331
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 14:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54462C43331
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 14:11:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 57B0920722
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 14:10:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 20C6E20722
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 14:11:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gWZZejRZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57B0920722
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="X1hZ+JCR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20C6E20722
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jH6ju-0006mn-QV; Wed, 25 Mar 2020 14:10:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jH6kk-0006qb-51; Wed, 25 Mar 2020 14:11:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=K3jc=5K=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jH6jt-0006mh-Mt
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 14:10:37 +0000
-X-Inumbo-ID: 661591fa-6ea2-11ea-8622-12813bfff9fa
+ id 1jH6kj-0006q1-97
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 14:11:29 +0000
+X-Inumbo-ID: 84f1355c-6ea2-11ea-b34e-bc764e2007e4
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 661591fa-6ea2-11ea-8622-12813bfff9fa;
- Wed, 25 Mar 2020 14:10:36 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 84f1355c-6ea2-11ea-b34e-bc764e2007e4;
+ Wed, 25 Mar 2020 14:11:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585145436;
+ d=citrix.com; s=securemail; t=1585145488;
  h=subject:to:cc:references:from:message-id:date:
  mime-version:in-reply-to:content-transfer-encoding;
  bh=oJHuPy8YVX64cOHCh4EvAjVSh9fcgSV/J0qLjsaiK+k=;
- b=gWZZejRZmFeE8az9HNPxIgcjD8slO396WQlAiK0Gyq/UJ0arKMqLg6vJ
- 7ulIqzfKYZK2ko/ifn0eM5t3jwPxkYrVxCoyP1Mw2LiDIPepEDTanxMsq
- vxCANEjyvroeNKLDjTIProF1CaGywTNJGieV83FRVYSCN0e/AxLMY2VCj g=;
+ b=X1hZ+JCRFmF537LHCqO7+GFiYz8LA5iXClVkhtna37Ok3hzAiy3cIo+P
+ qG5SG4QGmH3lm07SJ84IZhz1Etol5wWLIgmQ5g3BUoVUrh+zbOKYuxipg
+ C4MqhZvpO/T+Ph05rQ41TyuF2hIVkcXOo+dmB67/PrEHDekjPhYbY12PM I=;
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
@@ -73,35 +71,35 @@ Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: AAIMhAywX70+KuBnHYisvwDl55qusvRv+BDp9BVibQ/XEtYPuUA+0GoAdaf72a36xUKPU034By
- pw181QqDjb1E786agv8yBQDUqeCEQHVygfKMys9+A86aELX21tw9AlAYMVUaROHUtYqDHY0JwD
- 2kdYTtvi4ZacfwtJdjcoCwzCmnW92gzyIGxOR8EFfui/OlI4svZypjhEm4udBWMaLGfV5crZSX
- 9Xz1a5M5t30c2J6Z+/K8MP7b8oIwM2lsvKGn2ICGWb6y9s31Dl28ZFZwu3NE89qh/ZLPAeF8ul
- 1KU=
+IronPort-SDR: A1PPyh5CsjyzHyx57e+odKbO37hfNg1ckxSc7j+LOztaE5lM2VjwKom1VuvmMDqKp0QOH5s4fV
+ D9hIJOIU/y0VYIgXuLCYS8CooBSuOlmw7i4YFa8OFhEbJJevzpzQF2N4ZRAosy4YvRTSk53Exu
+ nZsDof/8qlxE9Fpa/iM/Fag1q1DJgDL24/975SJd/yHbu5s80ctxVXwqudhzc8vy5W6jOYgzfN
+ 6hlldjQwZYskZQzwR2PNUYgzQg4xE6LRUIzBv7jaP2SpvrlcGRx/O65LhfQU+c+kAdcVNWv0l8
+ BSU=
 X-SBRS: 2.7
-X-MesageID: 15265052
+X-MesageID: 15265134
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,304,1580792400"; d="scan'208";a="15265052"
+X-IronPort-AV: E=Sophos;i="5.72,304,1580792400"; d="scan'208";a="15265134"
 To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
  <xen-devel@lists.xenproject.org>
 References: <cfeb8fcf-3ba6-674c-17a9-93be9e746930@suse.com>
- <5fbb2e32-ad0f-af25-35de-720baff3351e@suse.com>
+ <fbabdcdb-3123-75e7-896c-9c7dd844f409@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <ab2f7a1c-9d42-db0a-fcc0-e8426f73046d@citrix.com>
-Date: Wed, 25 Mar 2020 14:10:31 +0000
+Message-ID: <c4c0245a-753f-1725-705b-769179db609c@citrix.com>
+Date: Wed, 25 Mar 2020 14:11:24 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <5fbb2e32-ad0f-af25-35de-720baff3351e@suse.com>
+In-Reply-To: <fbabdcdb-3123-75e7-896c-9c7dd844f409@suse.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH 3/7] x86emul: vendor specific direct branch
- behavior in 64-bit mode
+Subject: Re: [Xen-devel] [PATCH 4/7] x86emul: vendor specific near indirect
+ branch behavior in 64-bit mode
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
