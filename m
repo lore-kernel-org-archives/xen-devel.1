@@ -2,60 +2,59 @@ Return-Path: <SRS0=jAzW=5K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 092A4C1975A
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 403E2C43331
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:31:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CEBC120714
-	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:19:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id EE45D20772
+	for <xen-devel@archiver.kernel.org>; Wed, 25 Mar 2020 10:31:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="iDR2EnbN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CEBC120714
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="B2lYhQjB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE45D20772
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jH38S-0001Do-HF; Wed, 25 Mar 2020 10:19:44 +0000
+	id 1jH3JY-0003At-Iy; Wed, 25 Mar 2020 10:31:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=lu4h=5K=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jH38R-0001Ch-Gt
- for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 10:19:43 +0000
-X-Inumbo-ID: 216384f6-6e82-11ea-a6c1-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1jH3JX-0003Ao-Cl
+ for xen-devel@lists.xenproject.org; Wed, 25 Mar 2020 10:31:11 +0000
+X-Inumbo-ID: be4a07da-6e83-11ea-bec1-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 216384f6-6e82-11ea-a6c1-bc764e2007e4;
- Wed, 25 Mar 2020 10:19:37 +0000 (UTC)
+ id be4a07da-6e83-11ea-bec1-bc764e2007e4;
+ Wed, 25 Mar 2020 10:31:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585131577;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=z/xEhW0aEfRsm+03v7+aRFxfGwQG1ImR13kmJO0HdxI=;
- b=iDR2EnbNUrroGnGmnBhAsCaXsiOs42k9+FxLok9PdSIOvkW3NlgRoaXd
- +sUcLGJvWaehRL9oCdd3W6Zwp5YSMwUHpFLs63f9OJ9xE9uX9Ma0qjklt
- dbr5kqwzDLpvc5AakPIZH/KFptFVoKPgM6wbCWGl1fGGMhxFUzwZceakG s=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1585132270;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=UH+y3waYbvDUtNRL+6XOc4jN70wYy1fmfYi/WrWcpVU=;
+ b=B2lYhQjBt4VoTHHqPqnBmrW01G7ZLGvkrIm3akUYTwgC+dNL8qONhnic
+ +AAKmNv/Cgmv9eoNOiFQvPSZzl+lpWXkjnmAsyuRMlRisLYJBCWdmv+Qu
+ DK9AgnfSd7IQtsYnyYf9zd/kxxc8qDLkt4CGRKDQoht8/4EFRchEag/l8 s=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=roger.pau@citrix.com;
  spf=Pass smtp.mailfrom=roger.pau@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
+ receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
  roger.pau@citrix.com designates 162.221.158.21 as permitted
  sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
+ receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -64,36 +63,37 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: dLOpcjX8YA5t7HoZatAR2I69unop2MuriRg4leFI1Wb3oA1AA7uUi3wT61KP7JevhvkLhiaSWZ
- 55JXmlg+DI9P0XxWeCmpbRqntB8rdugqjSlCzbizHiJLFpmtmihSV9jvFpmNkrHEKljBhFCJCu
- OAXMLHHCOoUslIU1RlrTDDPqPPTkI10yIEzhovIQDXvq5cv829ttESQlbxeRYmXsEcWbeWdvC/
- 9rOOohpRYk9nHxxt3l6uYOj2QBxzaqNQf4LaNAhznMw13KE1vXj77zyskIAVhqZC934ESSIxoC
- en0=
+IronPort-SDR: 7/soXoTYCk9rhcK+TZRCIPC9Sty2p97chmGgKQRVfpH541QfcTFFFH2rC+3UBm79fBl3b+2HnP
+ fVfEk154OFrYke8WOCncshK2tYYrLS25/nvQ7haYw9EBhbM356+RVBwaSnmDQ5sVANZP3SSKLV
+ gTHUJL9WShHZyRG70s6LewnZ33hyPxkkeXmD8j9x2uB9yBU5lpM+knZ1OqHfQHR4Zj7GOmaoXq
+ EavXURBHI/BUgflQr+JrrVyH5yDaJJPMBS3iMOJMVbPLbBWQMrKSin/6+KlH13N1OMRgE0vFyu
+ Dbg=
 X-SBRS: 2.7
-X-MesageID: 14930585
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 15252772
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,304,1580792400"; d="scan'208";a="14930585"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Date: Wed, 25 Mar 2020 11:19:09 +0100
-Message-ID: <20200325101910.29168-4-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.0
-In-Reply-To: <20200325101910.29168-1-roger.pau@citrix.com>
-References: <20200325101910.29168-1-roger.pau@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.72,304,1580792400"; d="scan'208";a="15252772"
+Date: Wed, 25 Mar 2020 11:30:54 +0100
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Pu Wen <puwen@hygon.cn>
+Message-ID: <20200325103054.GA28601@Air-de-Roger>
+References: <20200324103726.3406-1-puwen@hygon.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [PATCH v2 3/4] x86/nvmx: split updating RVI from SVI in
- nvmx_update_apicv
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20200324103726.3406-1-puwen@hygon.cn>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
+Subject: Re: [Xen-devel] [PATCH v2] SVM: Add union intstat_t for offset 68h
+ in vmcb struct
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,76 +104,30 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Updating SVI is required when an interrupt has been injected using the
-Ack on exit VMEXIT feature, so that the in service interrupt in the
-GUEST_INTR_STATUS matches the vector that is signaled in
-VM_EXIT_INTR_INFO.
+On Tue, Mar 24, 2020 at 06:37:26PM +0800, Pu Wen wrote:
+> diff --git a/xen/include/asm-x86/hvm/svm/vmcb.h b/xen/include/asm-x86/hvm/svm/vmcb.h
+> index b9e389d481..d8a3285752 100644
+> --- a/xen/include/asm-x86/hvm/svm/vmcb.h
+> +++ b/xen/include/asm-x86/hvm/svm/vmcb.h
+> @@ -316,6 +316,17 @@ typedef union
+>      uint64_t raw;
+>  } intinfo_t;
+>  
+> +typedef union
+> +{
+> +    struct
+> +    {
+> +        u64 intr_shadow:    1;
+> +        u64 guest_intr_mask:1;
+> +        u64 resvd:          62;
 
-Updating RVI however is not tied to the Ack on exit feature, as it
-signals the next vector to be injected, and hence should always be
-updated to the next pending vector, regardless of whether Ack on exit
-is enabled.
+Could you also use uint64_t for the fields, like you do below for
+raw?
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/hvm/vmx/vvmx.c | 22 +++++++++++++++++-----
- 1 file changed, 17 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
-index 1753005c91..8431c912a1 100644
---- a/xen/arch/x86/hvm/vmx/vvmx.c
-+++ b/xen/arch/x86/hvm/vmx/vvmx.c
-@@ -1384,26 +1384,38 @@ static void nvmx_update_apicv(struct vcpu *v)
-     struct nestedvmx *nvmx = &vcpu_2_nvmx(v);
-     unsigned long reason = get_vvmcs(v, VM_EXIT_REASON);
-     unsigned long intr_info = get_vvmcs(v, VM_EXIT_INTR_INFO);
-+    int rvi;
- 
-     if ( reason == EXIT_REASON_EXTERNAL_INTERRUPT &&
-          nvmx->intr.source == hvm_intsrc_lapic &&
-          (intr_info & INTR_INFO_VALID_MASK) )
-     {
-         uint16_t status;
--        uint32_t rvi, ppr;
--        uint32_t vector = intr_info & 0xff;
-+        uint32_t ppr;
-+        unsigned int vector = intr_info & INTR_INFO_VECTOR_MASK;
-         struct vlapic *vlapic = vcpu_vlapic(v);
- 
-+        /*
-+         * Update SVI to record the currently in service interrupt that's
-+         * signaled in EXIT_INTR_INFO.
-+         */
-         vlapic_ack_pending_irq(v, vector, 1);
- 
-         ppr = vlapic_set_ppr(vlapic);
-         WARN_ON((ppr & 0xf0) != (vector & 0xf0));
- 
-         status = vector << VMX_GUEST_INTR_STATUS_SVI_OFFSET;
--        rvi = vlapic_has_pending_irq(v);
--        if ( rvi != -1 )
--            status |= rvi & VMX_GUEST_INTR_STATUS_SUBFIELD_BITMASK;
-+        __vmwrite(GUEST_INTR_STATUS, status);
-+    }
-+
-+    rvi = vlapic_has_pending_irq(v);
-+    if ( rvi != -1 )
-+    {
-+        unsigned long status;
- 
-+        __vmread(GUEST_INTR_STATUS, &status);
-+        status &= ~VMX_GUEST_INTR_STATUS_SUBFIELD_BITMASK;
-+        status |= rvi & VMX_GUEST_INTR_STATUS_SUBFIELD_BITMASK;
-         __vmwrite(GUEST_INTR_STATUS, status);
-     }
- }
--- 
-2.26.0
-
+Thanks, Roger.
 
