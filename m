@@ -6,45 +6,44 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 972FCC43331
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 01CE7C43331
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6FBD720719
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FBD720719
+	by mail.kernel.org (Postfix) with ESMTPS id D13F220719
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D13F220719
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHOfi-0005aZ-Ta; Thu, 26 Mar 2020 09:19:30 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jHOfo-0005dA-Ge; Thu, 26 Mar 2020 09:19:36 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=BM0P=5L=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jHOfh-0005a7-Md
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 09:19:29 +0000
-X-Inumbo-ID: e1f10c14-6f42-11ea-a6c1-bc764e2007e4
+ id 1jHOfn-0005ci-2U
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 09:19:35 +0000
+X-Inumbo-ID: e1ddaf34-6f42-11ea-877f-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e1f10c14-6f42-11ea-a6c1-bc764e2007e4;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e1ddaf34-6f42-11ea-877f-12813bfff9fa;
  Thu, 26 Mar 2020 09:19:24 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 55E56AF3B;
- Thu, 26 Mar 2020 09:19:23 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id CD23BAC0C;
+ Thu, 26 Mar 2020 09:19:22 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 26 Mar 2020 10:19:17 +0100
-Message-Id: <20200326091918.12388-5-jgross@suse.com>
+Date: Thu, 26 Mar 2020 10:19:15 +0100
+Message-Id: <20200326091918.12388-3-jgross@suse.com>
 X-Mailer: git-send-email 2.16.4
 In-Reply-To: <20200326091918.12388-1-jgross@suse.com>
 References: <20200326091918.12388-1-jgross@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [PATCH v8 4/5] xen/rcu: add assertions to debug build
+Subject: [Xen-devel] [PATCH v8 2/5] xen/rcu: don't use stop_machine_run()
+ for rcu_barrier()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,145 +62,229 @@ Cc: Juergen Gross <jgross@suse.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Xen's RCU implementation relies on no softirq handling taking place
-while being in a RCU critical section. Add ASSERT()s in debug builds
-in order to catch any violations.
+Today rcu_barrier() is calling stop_machine_run() to synchronize all
+physical cpus in order to ensure all pending rcu calls have finished
+when returning.
 
-For that purpose modify rcu_read_[un]lock() to use a dedicated percpu
-counter additional to preempt_[en|dis]able() as this enables to test
-that condition in __do_softirq() (ASSERT_NOT_IN_ATOMIC() is not
-usable there due to __cpu_up() calling process_pending_softirqs()
-while holding the cpu hotplug lock).
+As stop_machine_run() is using tasklets this requires scheduling of
+idle vcpus on all cpus imposing the need to call rcu_barrier() on idle
+cpus only in case of core scheduling being active, as otherwise a
+scheduling deadlock would occur.
 
-While at it switch the rcu_read_[un]lock() implementation to static
-inline functions instead of macros.
+There is no need at all to do the syncing of the cpus in tasklets, as
+rcu activity is started in __do_softirq() called whenever softirq
+activity is allowed. So rcu_barrier() can easily be modified to use
+softirq for synchronization of the cpus no longer requiring any
+scheduling activity.
 
+As there already is a rcu softirq reuse that for the synchronization.
+
+Remove the barrier element from struct rcu_data as it isn't used.
+
+Finally switch rcu_barrier() to return void as it now can never fail.
+
+Partially-based-on-patch-by: Igor Druzhinin <igor.druzhinin@citrix.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V3:
-- add barriers to rcu_[en|dis]able() (Roger Pau Monné)
-- add rcu_quiesce_allowed() to ASSERT_NOT_IN_ATOMIC (Roger Pau Monné)
-- convert macros to static inline functions
-- add sanity check in rcu_read_unlock()
+V2:
+- add recursion detection
 
-V4:
-- use barrier() in rcu_[en|dis]able() (Julien Grall)
+V3:
+- fix races (Igor Druzhinin)
 
 V5:
-- use rcu counter even if not using a debug build
+- rename done_count to pending_count (Jan Beulich)
+- fix race (Jan Beulich)
 
 V6:
-- keep preempt_[dis|en]able() calls
+- add barrier (Julien Grall)
+- add ASSERT() (Julien Grall)
+- hold cpu_map lock until end of rcu_barrier() (Julien Grall)
+
+V7:
+- update comment (Jan Beulich)
+- add barriers (Jan Beulich)
+
+V8:
+- adjust barrier and comment (Julien Grall, Jan Beulich)
 ---
- xen/common/rcupdate.c      |  2 ++
- xen/common/softirq.c       |  4 +++-
- xen/include/xen/rcupdate.h | 37 ++++++++++++++++++++++++++++++++++---
- 3 files changed, 39 insertions(+), 4 deletions(-)
+ xen/common/rcupdate.c      | 108 +++++++++++++++++++++++++++++++++------------
+ xen/include/xen/rcupdate.h |   2 +-
+ 2 files changed, 82 insertions(+), 28 deletions(-)
 
 diff --git a/xen/common/rcupdate.c b/xen/common/rcupdate.c
-index f3159e470f..a5a27af3de 100644
+index 03d84764d2..f3159e470f 100644
 --- a/xen/common/rcupdate.c
 +++ b/xen/common/rcupdate.c
-@@ -46,6 +46,8 @@
- #include <xen/cpu.h>
- #include <xen/stop_machine.h>
+@@ -83,7 +83,6 @@ struct rcu_data {
+     struct rcu_head **donetail;
+     long            blimit;           /* Upper limit on a processed batch */
+     int cpu;
+-    struct rcu_head barrier;
+     long            last_rs_qlen;     /* qlen during the last resched */
  
-+DEFINE_PER_CPU(unsigned int, rcu_lock_cnt);
-+
- /* Global control variables for rcupdate callback mechanism. */
- static struct rcu_ctrlblk {
-     long cur;           /* Current batch number.                      */
-diff --git a/xen/common/softirq.c b/xen/common/softirq.c
-index 00d676b62c..eba65c5fc0 100644
---- a/xen/common/softirq.c
-+++ b/xen/common/softirq.c
-@@ -31,6 +31,8 @@ static void __do_softirq(unsigned long ignore_mask)
-     unsigned long pending;
-     bool rcu_allowed = !(ignore_mask & (1ul << RCU_SOFTIRQ));
+     /* 3) idle CPUs handling */
+@@ -91,6 +90,7 @@ struct rcu_data {
+     bool idle_timer_active;
  
-+    ASSERT(!rcu_allowed || rcu_quiesce_allowed());
-+
-     for ( ; ; )
-     {
-         /*
-@@ -58,7 +60,7 @@ void process_pending_softirqs(void)
-                                 (1ul << SCHED_SLAVE_SOFTIRQ);
- 
-     /* Block RCU processing in case of rcu_read_lock() held. */
--    if ( preempt_count() )
-+    if ( !rcu_quiesce_allowed() )
-         ignore_mask |= 1ul << RCU_SOFTIRQ;
- 
-     ASSERT(!in_irq() && local_irq_is_enabled());
-diff --git a/xen/include/xen/rcupdate.h b/xen/include/xen/rcupdate.h
-index 31c8b86d13..6f2587058e 100644
---- a/xen/include/xen/rcupdate.h
-+++ b/xen/include/xen/rcupdate.h
-@@ -32,12 +32,35 @@
- #define __XEN_RCUPDATE_H
- 
- #include <xen/cache.h>
-+#include <xen/compiler.h>
- #include <xen/spinlock.h>
- #include <xen/cpumask.h>
-+#include <xen/percpu.h>
- #include <xen/preempt.h>
- 
- #define __rcu
- 
-+DECLARE_PER_CPU(unsigned int, rcu_lock_cnt);
-+
-+static inline void rcu_quiesce_disable(void)
-+{
-+    preempt_disable();
-+    this_cpu(rcu_lock_cnt)++;
-+    barrier();
-+}
-+
-+static inline void rcu_quiesce_enable(void)
-+{
-+    barrier();
-+    this_cpu(rcu_lock_cnt)--;
-+    preempt_enable();
-+}
-+
-+static inline bool rcu_quiesce_allowed(void)
-+{
-+    return !this_cpu(rcu_lock_cnt);
-+}
-+
- /**
-  * struct rcu_head - callback structure for use with RCU
-  * @next: next update requests in a list
-@@ -91,16 +114,24 @@ typedef struct _rcu_read_lock rcu_read_lock_t;
-  * will be deferred until the outermost RCU read-side critical section
-  * completes.
-  *
-- * It is illegal to block while in an RCU read-side critical section.
-+ * It is illegal to process softirqs or block while in an RCU read-side
-+ * critical section.
-  */
--#define rcu_read_lock(x)       ({ ((void)(x)); preempt_disable(); })
-+static inline void rcu_read_lock(rcu_read_lock_t *lock)
-+{
-+    rcu_quiesce_disable();
-+}
- 
- /**
-  * rcu_read_unlock - marks the end of an RCU read-side critical section.
-  *
-  * See rcu_read_lock() for more information.
-  */
--#define rcu_read_unlock(x)     ({ ((void)(x)); preempt_enable(); })
-+static inline void rcu_read_unlock(rcu_read_lock_t *lock)
-+{
-+    ASSERT(!rcu_quiesce_allowed());
-+    rcu_quiesce_enable();
-+}
+     bool            process_callbacks;
++    bool            barrier_active;
+ };
  
  /*
-  * So where is rcu_write_lock()?  It does not exist, as there is no
+@@ -143,51 +143,98 @@ static int qhimark = 10000;
+ static int qlowmark = 100;
+ static int rsinterval = 1000;
+ 
+-struct rcu_barrier_data {
+-    struct rcu_head head;
+-    atomic_t *cpu_count;
+-};
++/*
++ * rcu_barrier() handling:
++ * Two counters are used to synchronize rcu_barrier() work:
++ * - cpu_count holds the number of cpus required to finish barrier handling.
++ *   It is decremented by each cpu when it has performed all pending rcu calls.
++ * - pending_count shows whether any rcu_barrier() activity is running and
++ *   it is used to synchronize leaving rcu_barrier() only after all cpus
++ *   have finished their processing. pending_count is initialized to nr_cpus + 1
++ *   and it is decremented by each cpu when it has seen that cpu_count has
++ *   reached 0. The cpu where rcu_barrier() has been called will wait until
++ *   pending_count has been decremented to 1 (so all cpus have seen cpu_count
++ *   reaching 0) and will then set pending_count to 0 indicating there is no
++ *   rcu_barrier() running.
++ * Cpus are synchronized via softirq mechanism. rcu_barrier() is regarded to
++ * be active if pending_count is not zero. In case rcu_barrier() is called on
++ * multiple cpus it is enough to check for pending_count being not zero on entry
++ * and to call process_pending_softirqs() in a loop until pending_count drops to
++ * zero, before starting the new rcu_barrier() processing.
++ */
++static atomic_t cpu_count = ATOMIC_INIT(0);
++static atomic_t pending_count = ATOMIC_INIT(0);
+ 
+ static void rcu_barrier_callback(struct rcu_head *head)
+ {
+-    struct rcu_barrier_data *data = container_of(
+-        head, struct rcu_barrier_data, head);
+-    atomic_inc(data->cpu_count);
++    /*
++     * We need a barrier making all previous writes visible to other cpus
++     * before doing the atomic_dec(). This would be something like
++     * smp_mb__before_atomic() limited to writes, which isn't existing.
++     * So we choose the best alternative available which is smp_wmb()
++     * (correct on Arm and only a minor impact on x86, while
++     * smp_mb__before_atomic() would be correct on x86, but with a larger
++     * impact on Arm).
++     */
++    smp_wmb();
++    atomic_dec(&cpu_count);
+ }
+ 
+-static int rcu_barrier_action(void *_cpu_count)
++static void rcu_barrier_action(void)
+ {
+-    struct rcu_barrier_data data = { .cpu_count = _cpu_count };
+-
+-    ASSERT(!local_irq_is_enabled());
+-    local_irq_enable();
++    struct rcu_head head;
+ 
+     /*
+      * When callback is executed, all previously-queued RCU work on this CPU
+-     * is completed. When all CPUs have executed their callback, data.cpu_count
+-     * will have been incremented to include every online CPU.
++     * is completed. When all CPUs have executed their callback, cpu_count
++     * will have been decremented to 0.
+      */
+-    call_rcu(&data.head, rcu_barrier_callback);
++    call_rcu(&head, rcu_barrier_callback);
+ 
+-    while ( atomic_read(data.cpu_count) != num_online_cpus() )
++    while ( atomic_read(&cpu_count) )
+     {
+         process_pending_softirqs();
+         cpu_relax();
+     }
+ 
+-    local_irq_disable();
+-
+-    return 0;
++    smp_mb__before_atomic();
++    atomic_dec(&pending_count);
+ }
+ 
+-/*
+- * As rcu_barrier() is using stop_machine_run() it is allowed to be used in
+- * idle context only (see comment for stop_machine_run()).
+- */
+-int rcu_barrier(void)
++void rcu_barrier(void)
+ {
+-    atomic_t cpu_count = ATOMIC_INIT(0);
+-    return stop_machine_run(rcu_barrier_action, &cpu_count, NR_CPUS);
++    unsigned int n_cpus;
++
++    ASSERT(!in_irq() && local_irq_is_enabled());
++
++    for ( ; ; )
++    {
++        if ( !atomic_read(&pending_count) && get_cpu_maps() )
++        {
++            n_cpus = num_online_cpus();
++
++            if ( atomic_cmpxchg(&pending_count, 0, n_cpus + 1) == 0 )
++                break;
++
++            put_cpu_maps();
++        }
++
++        process_pending_softirqs();
++        cpu_relax();
++    }
++
++    atomic_set(&cpu_count, n_cpus);
++    cpumask_raise_softirq(&cpu_online_map, RCU_SOFTIRQ);
++
++    while ( atomic_read(&pending_count) != 1 )
++    {
++        process_pending_softirqs();
++        cpu_relax();
++    }
++
++    atomic_set(&pending_count, 0);
++
++    put_cpu_maps();
+ }
+ 
+ /* Is batch a before batch b ? */
+@@ -426,6 +473,13 @@ static void rcu_process_callbacks(void)
+         rdp->process_callbacks = false;
+         __rcu_process_callbacks(&rcu_ctrlblk, rdp);
+     }
++
++    if ( atomic_read(&cpu_count) && !rdp->barrier_active )
++    {
++        rdp->barrier_active = true;
++        rcu_barrier_action();
++        rdp->barrier_active = false;
++    }
+ }
+ 
+ static int __rcu_pending(struct rcu_ctrlblk *rcp, struct rcu_data *rdp)
+diff --git a/xen/include/xen/rcupdate.h b/xen/include/xen/rcupdate.h
+index eb9b60df07..31c8b86d13 100644
+--- a/xen/include/xen/rcupdate.h
++++ b/xen/include/xen/rcupdate.h
+@@ -144,7 +144,7 @@ void rcu_check_callbacks(int cpu);
+ void call_rcu(struct rcu_head *head, 
+               void (*func)(struct rcu_head *head));
+ 
+-int rcu_barrier(void);
++void rcu_barrier(void);
+ 
+ void rcu_idle_enter(unsigned int cpu);
+ void rcu_idle_exit(unsigned int cpu);
 -- 
 2.16.4
 
