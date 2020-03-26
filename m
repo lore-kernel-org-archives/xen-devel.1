@@ -2,54 +2,91 @@ Return-Path: <SRS0=xTCj=5L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 76437C43331
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 15:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8BC2FC43331
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 17:03:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4330520737
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 15:54:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4330520737
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 58F8C20714
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 17:03:34 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=tklengyel-com.20150623.gappssmtp.com header.i=@tklengyel-com.20150623.gappssmtp.com header.b="0IrlWzo9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 58F8C20714
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHUpj-0001nr-LM; Thu, 26 Mar 2020 15:54:15 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ColY=5L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jHUpi-0001nl-OT
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 15:54:14 +0000
-X-Inumbo-ID: 0a36105c-6f7a-11ea-8818-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0a36105c-6f7a-11ea-8818-12813bfff9fa;
- Thu, 26 Mar 2020 15:54:14 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 17AF7AEF3;
- Thu, 26 Mar 2020 15:54:13 +0000 (UTC)
-To: julien@xen.org
-References: <20200322161418.31606-1-julien@xen.org>
- <20200322161418.31606-8-julien@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <12a955a3-d326-f5f9-f20b-69f3dafac238@suse.com>
-Date: Thu, 26 Mar 2020 16:54:11 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+	id 1jHVtq-0007sD-F0; Thu, 26 Mar 2020 17:02:34 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=1MmV=5L=tklsoftware.com=tamas@srs-us1.protection.inumbo.net>)
+ id 1jHVto-0007s7-T9
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 17:02:33 +0000
+X-Inumbo-ID: 949ae976-6f83-11ea-bec1-bc764e2007e4
+Received: from mail-ed1-x542.google.com (unknown [2a00:1450:4864:20::542])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 949ae976-6f83-11ea-bec1-bc764e2007e4;
+ Thu, 26 Mar 2020 17:02:31 +0000 (UTC)
+Received: by mail-ed1-x542.google.com with SMTP id a43so7693404edf.6
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2020 10:02:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=tklengyel-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=9jtbHUc3SoqE02eYGrgci0tTAcNp0rJgvjiPvHnGNa8=;
+ b=0IrlWzo9ztzOLhTrNsaFO+3OKEzJzqxTz7Zt6BoP461526Fx2VYCgZmqzes5iqORxJ
+ pfJz5b2618DpjxEWJPOXchthK8va9/aKhDOIqAVLeQVA10YyEWd5Bwhi0n3DVuRGdult
+ Yd/3vbwcxNlpqENG6bO6GH4lDFOTI1F3ct8KVK+J1+8NEfokFYbizJlC9MyQYrYRofXw
+ 31HzWPe6Z2VfjuoxeAQKqWuoQTWUGnrTRNsliO1UMySV4Re2dxpF3iwq+TL9K6bXBie/
+ hWdVV8aphJwIsxxQvERCNB1v+FhK889YPDOv86EY2CkPl8/aYLrekJ8e747Pl2fJRt1m
+ KGng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=9jtbHUc3SoqE02eYGrgci0tTAcNp0rJgvjiPvHnGNa8=;
+ b=CiY4vwMLANirV2N7J5OOhRFeb3RdWTQ/JIxFQ8wBpoy83YJ5ccwN7CWaP2EIj7w3yI
+ w6tnWK6Mys1ibZnRvfQix+k33xWcEo1EkS0Vif0i1hpX75ZipdK6vDUUpaHx25BC09Mc
+ 2OOYtmngjFZ9ODGMD/RCU+yegCV2nz+bd5UyseIINoGF6dcQ4MQJxXcbX441IclixjHv
+ Onb/1FrlwOe9UScEvTYuAKWuInZ7joQ1bkrq7GX7hjSwL9AYYpU5tY6zr9ilzw0M8vF6
+ uMFmndkYRRQ7seebjzI1MJaXT4pzQ4E5T181+h5/Xl6pDxKenj6VnMhgZ/cabHJKMcKc
+ Q3Rw==
+X-Gm-Message-State: ANhLgQ3qbsmlJ2zdtlJXx6HDTzxqkkvxwncCdRcqP8TxucTphoVXIO8K
+ mkmCYMQ5PZlPXZWHw6fua7KMoWyQZCE=
+X-Google-Smtp-Source: ADFU+vuuomzP+BU8wAuRR5Z531+r/IxSyBGmgYrIRlhsT6D1/sRvPtiJtoIsYhooi9SOi2nJBMo+Zg==
+X-Received: by 2002:a05:6402:17c6:: with SMTP id
+ s6mr9012073edy.212.1585242150497; 
+ Thu, 26 Mar 2020 10:02:30 -0700 (PDT)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com.
+ [209.85.221.48])
+ by smtp.gmail.com with ESMTPSA id by25sm369509ejb.16.2020.03.26.10.02.27
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 26 Mar 2020 10:02:28 -0700 (PDT)
+Received: by mail-wr1-f48.google.com with SMTP id u10so8727570wro.7
+ for <xen-devel@lists.xenproject.org>; Thu, 26 Mar 2020 10:02:27 -0700 (PDT)
+X-Received: by 2002:adf:94c6:: with SMTP id 64mr10544884wrr.386.1585242147145; 
+ Thu, 26 Mar 2020 10:02:27 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200322161418.31606-8-julien@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Xen-devel] [PATCH 07/17] xen/x86: traps: Convert
- __page_fault_type() to use typesafe MFN
+References: <cover.1584981438.git.tamas.lengyel@intel.com>
+ <a8cf8742054d04760f2f5060cfeef5bef1edbd6f.1584981438.git.tamas.lengyel@intel.com>
+ <20200325154702.GD28601@Air-de-Roger>
+ <c88f7cac-9990-957d-746b-fc60040c4c59@suse.com>
+ <20200326091019.GI28601@Air-de-Roger>
+In-Reply-To: <20200326091019.GI28601@Air-de-Roger>
+From: Tamas K Lengyel <tamas@tklengyel.com>
+Date: Thu, 26 Mar 2020 11:01:50 -0600
+X-Gmail-Original-Message-ID: <CABfawhnVfE6MeqP7=SROXfXfR2O8p=vhZZ2z0WF2=vPez4qwaQ@mail.gmail.com>
+Message-ID: <CABfawhnVfE6MeqP7=SROXfXfR2O8p=vhZZ2z0WF2=vPez4qwaQ@mail.gmail.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [Xen-devel] [PATCH v12 1/3] xen/mem_sharing: VM forking
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,23 +97,119 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 22.03.2020 17:14, julien@xen.org wrote:
-> From: Julien Grall <jgrall@amazon.com>
-> 
-> Note that the code is now using cr3_to_mfn() to get the MFN. This is
-> slightly different as the top 12-bits will now be masked.
+On Thu, Mar 26, 2020 at 3:10 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com>=
+ wrote:
+>
+> On Thu, Mar 26, 2020 at 08:07:09AM +0100, Jan Beulich wrote:
+> > On 25.03.2020 16:47, Roger Pau Monn=C3=A9 wrote:
+> > > On Mon, Mar 23, 2020 at 10:04:35AM -0700, Tamas K Lengyel wrote:
+> > >> +static int copy_vcpu_settings(struct domain *cd, struct domain *d)
+> > >> +{
+> > >> +    unsigned int i;
+> > >> +    struct p2m_domain *p2m =3D p2m_get_hostp2m(cd);
+> > >> +    int ret =3D -EINVAL;
+> > >> +
+> > >> +    for ( i =3D 0; i < cd->max_vcpus; i++ )
+> > >> +    {
+> > >> +        const struct vcpu *d_vcpu =3D d->vcpu[i];
+> > >> +        struct vcpu *cd_vcpu =3D cd->vcpu[i];
+> > >> +        struct vcpu_runstate_info runstate;
+> > >> +        mfn_t vcpu_info_mfn;
+> > >> +
+> > >> +        if ( !d_vcpu || !cd_vcpu )
+> > >> +            continue;
+> > >> +
+> > >> +        /*
+> > >> +         * Copy & map in the vcpu_info page if the guest uses one
+> > >> +         */
+> > >> +        vcpu_info_mfn =3D d_vcpu->vcpu_info_mfn;
+> > >> +        if ( !mfn_eq(vcpu_info_mfn, INVALID_MFN) )
+> > >> +        {
+> > >> +            mfn_t new_vcpu_info_mfn =3D cd_vcpu->vcpu_info_mfn;
+> > >> +
+> > >> +            /*
+> > >> +             * Allocate & map the page for it if it hasn't been alr=
+eady
+> > >> +             */
+> > >> +            if ( mfn_eq(new_vcpu_info_mfn, INVALID_MFN) )
+> > >> +            {
+> > >> +                gfn_t gfn =3D mfn_to_gfn(d, vcpu_info_mfn);
+> > >> +                unsigned long gfn_l =3D gfn_x(gfn);
+> > >> +                struct page_info *page;
+> > >> +
+> > >> +                if ( !(page =3D alloc_domheap_page(cd, 0)) )
+> > >> +                    return -ENOMEM;
+> > >> +
+> > >> +                new_vcpu_info_mfn =3D page_to_mfn(page);
+> > >> +                set_gpfn_from_mfn(mfn_x(new_vcpu_info_mfn), gfn_l);
+> > >> +
+> > >> +                ret =3D p2m->set_entry(p2m, gfn, new_vcpu_info_mfn,=
+ PAGE_ORDER_4K,
+> > >> +                                     p2m_ram_rw, p2m->default_acces=
+s, -1);
+> > >> +                if ( ret )
+> > >> +                    return ret;
+> > >> +
+> > >> +                ret =3D map_vcpu_info(cd_vcpu, gfn_l,
+> > >> +                                    d_vcpu->vcpu_info_offset);
+> > >> +                if ( ret )
+> > >> +                    return ret;
+> > >> +            }
+> > >> +
+> > >> +            copy_domain_page(new_vcpu_info_mfn, vcpu_info_mfn);
+> > >> +        }
+> > >> +
+> > >> +        /*
+> > >> +         * Setup the vCPU runstate area
+> > >> +         */
+> > >> +        if ( guest_handle_is_null(runstate_guest(cd_vcpu)) )
+> > >
+> > > Maybe I'm confused, but isn't this the other way around and you need
+> > > to check? If the parent runstate is not null copy it to the fork,
+> > > ie:
+> > >
+> > > if ( !guest_handle_is_null(runstate_guest(d_vcpu)) )
+> > > {
+> > >     ...
+> > >
+> > >> +        {
+> > >> +            runstate_guest(cd_vcpu) =3D runstate_guest(d_vcpu);
+> > >> +            vcpu_runstate_get(cd_vcpu, &runstate);
+> > >> +            __copy_to_guest(runstate_guest(cd_vcpu), &runstate, 1);
+> > >
+> > > You should check the return code I think.
+> >
+> > I don't think so - this is a best effort operation just like e.g.
+> > in the handling of VCPUOP_register_runstate_memory_area.
+>
+> I think printing a debug message might be helpful, not so much as for
+> the importance of failing to copy the runstate area, but it could
+> signal that something went wrong, anyway I don't have such a strong
+> opinion.
+>
+> Just to confirm, __copy_to_guest will cause the forked domain memory
+> to be populated and the whole page to be copied over right? (and will
+> also cause the page tables to be added to the fork physmap in write
+> mode to set the accessed/dirty bits)
 
-And here I agree with the change. Hence it is even more so important
-that the patch introducing the new helper(s) first gets sorted.
-Should there be further patches in this series with this same
-interaction issue, I won't point it out again and may not respond at
-all if I see no other issues.
+I checked this and it ends up calling hvm_translate_get_page which
+issues a call to get_page_from_gfn already with P2M_UNSHARE already.
+The problem is that we are still in the process of forking the VM, so
+mem_sharing_is_fork is not yet true, since we haven't finished the
+process yet completely. So what I'll do is set the parent pointer
+early which will allow memory to be populated from the parent. If
+there is an error during the fork operation the fork domain is getting
+destroyed by the toolstack anyway so we don't have to worry about
+unwinding a half-way completed fork.
 
-Jan
+Tamas
 
