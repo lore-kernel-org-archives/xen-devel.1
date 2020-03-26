@@ -2,64 +2,64 @@ Return-Path: <SRS0=xTCj=5L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3038EC43331
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 13:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B52FC43331
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 13:57:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F006F206E6
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 13:56:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DE73E206E6
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 13:57:18 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="GNHatakX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F006F206E6
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Tt3jzhi+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE73E206E6
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHSzh-0005wD-DP; Thu, 26 Mar 2020 13:56:25 +0000
+	id 1jHT0E-0005zj-Nq; Thu, 26 Mar 2020 13:56:58 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=4pkz=5L=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jHSzg-0005w8-8u
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 13:56:24 +0000
-X-Inumbo-ID: 93368212-6f69-11ea-87ed-12813bfff9fa
+ <SRS0=CKeT=5L=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jHT0D-0005za-77
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 13:56:57 +0000
+X-Inumbo-ID: a78d3f80-6f69-11ea-87ed-12813bfff9fa
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 93368212-6f69-11ea-87ed-12813bfff9fa;
- Thu, 26 Mar 2020 13:56:22 +0000 (UTC)
+ id a78d3f80-6f69-11ea-87ed-12813bfff9fa;
+ Thu, 26 Mar 2020 13:56:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585230982;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=qFVOM5vcVP0USi4x5eWEMJxQCyyy5LJaAeMhBDvvTFc=;
- b=GNHatakX6HCQ793RnVpNZR3RcuyKb+Aw8aS85iDCbKzNWlkUbb4NEH17
- lBwg8Jya9OggorSbkIRs/zCvLoJjjnEqgKJTpKWFpSrQ/aaNQeGR95lzM
- Zllbr4ogHwQKrG8cBWNRh2syfLOQQ/OfOXSboO9I0nvGJyApxOt8Lxmgb 8=;
+ d=citrix.com; s=securemail; t=1585231016;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=+d/kMZGaT+rnc6Btm1R311vezXfsyqvDgmhJ6f4woN0=;
+ b=Tt3jzhi+OlFgjbeh+R9nM4uCWVS4q2753Z6TyA1LkPuNVgdtOrsx8vvW
+ 7etd6aywCnDPfh7jejjC7qQSGveUTkfu/4skEYmC8ergyFySz2VeoDHfL
+ IKfKCVlnUvXzWSKmzCBu5Xu/PDF3StepqYLwnmqxC/871fJlVkrCyrk4V w=;
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=andrew.cooper3@citrix.com;
- spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
 Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
- andrew.cooper3@citrix.com) identity=pra;
+ anthony.perard@citrix.com) identity=pra;
  client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="andrew.cooper3@citrix.com";
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible
 Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
- Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ anthony.perard@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
  client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="Andrew.Cooper3@citrix.com";
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
  x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
  ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
@@ -70,36 +70,30 @@ Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
  client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
+ envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: EvzhLEnkdV6HMBdMl5P6IcG56H9pme+HE6B2SEajBE4yXmTyCFaQ192Pz6oKflB39/+cPpnoji
- ley6370s15Tu9lDKIn9fvBvDsgs2VU8vwZbI9gLnq6dqQ3SWzJoWZVC2fg89vrh5ASAg6i0sIS
- PFBJDzwhN6Ni9TUk755oUsTC5LUEyQkb5VGJoYtupYtCmopqhDIaQPgHfMOb7d3gpweMdPZB2g
- Lh+0cOs0y6RUgtWHcLeIPYfisGICZLslknrQQTt59OdwfiKjqfKX2zveX1Upfjy7/hxfsK8zcr
- /wk=
+IronPort-SDR: zVYcbjpDyi7TJTfNwM3l/6DPXt8ZjhWR90luU7wi3EIDTHSitNWYUKbsIQ2Fjjpp+5c+Ss88dl
+ GGQrN6lqKXZ2f1CR8BxDuChdXbHioO9jtGr7G0FRHPiNXXWk2fnfUuHFpmB1zsOaVQBffY3e4o
+ j9tPtxZgNCh8SsEJOEVjk24PbduuroDlnK77543MyhqBUwZbfYtvMU+lmIWiS/EvT08E0/xZFi
+ iVbKynpaxVRtOV1rKuI8LWM4GelYzR8ONzSBf7pKRLRhcLy+y4nsYqMzRKsYAqQd0di3CkI7Uw
+ Gsg=
 X-SBRS: 2.7
-X-MesageID: 15338302
+X-MesageID: 15338337
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,308,1580792400"; d="scan'208";a="15338302"
-To: Pu Wen <puwen@hygon.cn>, <xen-devel@lists.xenproject.org>
-References: <1585230270-24178-1-git-send-email-puwen@hygon.cn>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <92973061-0063-11de-5d5b-eb663de90cce@citrix.com>
-Date: Thu, 26 Mar 2020 13:56:17 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+X-IronPort-AV: E=Sophos;i="5.72,308,1580792400"; d="scan'208";a="15338337"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Date: Thu, 26 Mar 2020 13:56:21 +0000
+Message-ID: <20200326135621.687685-1-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <1585230270-24178-1-git-send-email-puwen@hygon.cn>
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
-Subject: Re: [Xen-devel] [PATCH v3] SVM: Add union intstat_t for offset 68h
- in vmcb struct
+Content-Type: text/plain
+Subject: [Xen-devel] [XEN PATCH] build: detect compiler upgrade to rerun
+ kconfig
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -110,34 +104,53 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
+ Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 26/03/2020 13:44, Pu Wen wrote:
-> According to chapter "Appendix B Layout of VMCB" in the new version
-> (v3.32) AMD64 APM[1], bit 1 of the VMCB offset 68h is defined as
-> GUEST_INTERRUPT_MASK.
->
-> In current xen codes, it use whole u64 interrupt_shadow to setup
-> interrupt shadow, which will misuse other bit in VMCB offset 68h
-> as part of interrupt_shadow, causing svm_get_interrupt_shadow() to
-> mistake the guest having interrupts enabled as being in an interrupt
-> shadow.  This has been observed to cause SeaBIOS to hang on boot.
->
-> Add union intstat_t for VMCB offset 68h and fix codes to only use
-> bit 0 as intr_shadow according to the new APM description.
->
-> Reference:
-> [1] https://www.amd.com/system/files/TechDocs/24593.pdf
->
-> Signed-off-by: Pu Wen <puwen@hygon.cn>
+This simple comment allows to detect when $(CC) changes version.
+Kconfig will be rerun in this case. (Rerun is forced by
+include/config.auto.cmd which detects changes of CC_VERSION_TEXT
+value).
 
-Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
+ xen/Kconfig  | 2 ++
+ xen/Makefile | 4 ++++
+ 2 files changed, 6 insertions(+)
 
-Although thinking about it, renaming irq_stat to irq_state would
-probably be a good move.  I can fix this on commit - no need to send a v4.
+diff --git a/xen/Kconfig b/xen/Kconfig
+index 073042f46730..4ffa2f90a267 100644
+--- a/xen/Kconfig
++++ b/xen/Kconfig
+@@ -4,6 +4,8 @@
+ #
+ mainmenu "Xen/$(SRCARCH) $(XEN_FULLVERSION) Configuration"
+ 
++comment "Compiler: $(CC_VERSION_TEXT)"
++
+ source "scripts/Kconfig.include"
+ 
+ config BROKEN
+diff --git a/xen/Makefile b/xen/Makefile
+index e5f7b1ae13bc..6dadb3afc119 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -277,6 +277,10 @@ $(foreach base,arch/x86/mm/guest_walk_% \
+                arch/x86/mm/shadow/guest_%, \
+     $(foreach ext,o i s,$(call build-intermediate,$(base).$(ext))))
+ 
++# CC_VERSION_TEXT is referenced from Kconfig (so it needs export),
++# and from include/config/auto.conf.cmd to detect the compiler upgrade.
++export CC_VERSION_TEXT := $(shell $(CC) --version 2>/dev/null | head -n 1)
++
+ kconfig := oldconfig config menuconfig defconfig allyesconfig allnoconfig \
+ 	nconfig xconfig gconfig savedefconfig listnewconfig olddefconfig \
+ 	randconfig $(notdir $(wildcard arch/$(SRCARCH)/configs/*_defconfig))
+-- 
+Anthony PERARD
 
-~Andrew
 
