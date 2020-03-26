@@ -2,53 +2,73 @@ Return-Path: <SRS0=xTCj=5L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7215CC43331
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 10:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6064FC43331
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 10:18:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 46DB620775
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 10:17:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46DB620775
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1282220775
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 10:18:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1282220775
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=hygon.cn
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHPZS-0004M5-2z; Thu, 26 Mar 2020 10:17:06 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jHPaR-0004Pz-DO; Thu, 26 Mar 2020 10:18:07 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=ColY=5L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jHPZR-0004M0-FA
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 10:17:05 +0000
-X-Inumbo-ID: eeaae9d6-6f4a-11ea-8799-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id eeaae9d6-6f4a-11ea-8799-12813bfff9fa;
- Thu, 26 Mar 2020 10:17:01 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 62B99AF37;
- Thu, 26 Mar 2020 10:17:00 +0000 (UTC)
-To: Tamas K Lengyel <tamas.lengyel@intel.com>
-References: <cover.1584981438.git.tamas.lengyel@intel.com>
- <46457bd6e877abe12a8c005c23f0f1aab13afd24.1584981438.git.tamas.lengyel@intel.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <3f0fd837-bee6-3a68-8db3-1a99b97aac9e@suse.com>
-Date: Thu, 26 Mar 2020 11:16:55 +0100
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ (envelope-from <SRS0=hxw6=5L=hygon.cn=puwen@srs-us1.protection.inumbo.net>)
+ id 1jHPaQ-0004Pr-4w
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 10:18:06 +0000
+X-Inumbo-ID: fde11b1e-6f4a-11ea-bec1-bc764e2007e4
+Received: from spam2.hygon.cn (unknown [110.188.70.11])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fde11b1e-6f4a-11ea-bec1-bc764e2007e4;
+ Thu, 26 Mar 2020 10:17:28 +0000 (UTC)
+Received: from MK-FE.hygon.cn ([172.23.18.61])
+ by spam2.hygon.cn with ESMTP id 02QAGHGS018283;
+ Thu, 26 Mar 2020 18:16:17 +0800 (GMT-8)
+ (envelope-from puwen@hygon.cn)
+Received: from cncheex02.Hygon.cn ([172.23.18.12])
+ by MK-FE.hygon.cn with ESMTP id 02QAGMvL015115;
+ Thu, 26 Mar 2020 18:16:22 +0800 (GMT-8)
+ (envelope-from puwen@hygon.cn)
+Received: from cncheex01.Hygon.cn (172.23.18.10) by cncheex02.Hygon.cn
+ (172.23.18.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1466.3; Thu, 26 Mar
+ 2020 18:16:00 +0800
+Received: from cncheex01.Hygon.cn ([172.23.18.10]) by cncheex01.Hygon.cn
+ ([172.23.18.10]) with mapi id 15.01.1466.003; Thu, 26 Mar 2020 18:16:00 +0800
+From: Wen Pu <puwen@hygon.cn>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger.pau@citrix.com>
+Thread-Topic: [PATCH v2] SVM: Add union intstat_t for offset 68h in vmcb struct
+Thread-Index: AQHWAchKa19WBqZbrUeUW98N9K32Y6hYl0AAgABRxwCAAAtGgIABMRyA
+Date: Thu, 26 Mar 2020 10:16:00 +0000
+Message-ID: <37e6a72d-2bd8-a296-3182-f1f3f159d03e@hygon.cn>
+References: <20200324103726.3406-1-puwen@hygon.cn>
+ <20200325103054.GA28601@Air-de-Roger>
+ <772e041d-a91a-e67c-1243-530065b2f628@hygon.cn>
+ <e4c2dafa-2b03-e6d0-4511-872cb70e8e68@citrix.com>
+In-Reply-To: <e4c2dafa-2b03-e6d0-4511-872cb70e8e68@citrix.com>
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.23.18.44]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <D93CB7D1B8ED2A4397E1B6F5F6CD5BC3@Hygon.cn>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <46457bd6e877abe12a8c005c23f0f1aab13afd24.1584981438.git.tamas.lengyel@intel.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Xen-devel] [PATCH v12 2/3] x86/mem_sharing: reset a fork
+X-MAIL: spam2.hygon.cn 02QAGHGS018283
+X-DNSRBL: 
+Subject: Re: [Xen-devel] [PATCH v2] SVM: Add union intstat_t for offset 68h
+ in vmcb struct
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,26 +79,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Tamas K Lengyel <tamas@tklengyel.com>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 23.03.2020 18:04, Tamas K Lengyel wrote:
-> +static int mem_sharing_fork_reset(struct domain *d, struct domain *pd)
-> +{
-> +    int rc;
-> +    struct p2m_domain *p2m = p2m_get_hostp2m(d);
-> +    struct page_info *page, *tmp;
-> +
-> +    spin_lock(&d->page_alloc_lock);
-> +    domain_pause(d);
-
-Why do you take the lock first?
-
-Jan
+T24gMjAyMC8zLzI2IDA6MDMsIEFuZHJldyBDb29wZXIgd3JvdGU6DQo+IE9uIDI1LzAzLzIwMjAg
+MTU6MjMsIFB1IFdlbiB3cm90ZToNCj4+IE9uIDIwMjAvMy8yNSAxODozMCwgUm9nZXIgUGF1IE1v
+bm7DqSB3cm90ZToNCj4+PiBPbiBUdWUsIE1hciAyNCwgMjAyMCBhdCAwNjozNzoyNlBNICswODAw
+LCBQdSBXZW4gd3JvdGU6DQo+Pj4+IGRpZmYgLS1naXQgYS94ZW4vaW5jbHVkZS9hc20teDg2L2h2
+bS9zdm0vdm1jYi5oDQo+Pj4+IGIveGVuL2luY2x1ZGUvYXNtLXg4Ni9odm0vc3ZtL3ZtY2IuaA0K
+Pj4+PiBpbmRleCBiOWUzODlkNDgxLi5kOGEzMjg1NzUyIDEwMDY0NA0KPj4+PiAtLS0gYS94ZW4v
+aW5jbHVkZS9hc20teDg2L2h2bS9zdm0vdm1jYi5oDQo+Pj4+ICsrKyBiL3hlbi9pbmNsdWRlL2Fz
+bS14ODYvaHZtL3N2bS92bWNiLmgNCj4+Pj4gQEAgLTMxNiw2ICszMTYsMTcgQEAgdHlwZWRlZiB1
+bmlvbg0KPj4+PiAgwqDCoMKgwqDCoCB1aW50NjRfdCByYXc7DQo+Pj4+ICDCoCB9IGludGluZm9f
+dDsNCj4+Pj4gIMKgICt0eXBlZGVmIHVuaW9uDQo+Pj4+ICt7DQo+Pj4+ICvCoMKgwqAgc3RydWN0
+DQo+Pj4+ICvCoMKgwqAgew0KPj4+PiArwqDCoMKgwqDCoMKgwqAgdTY0IGludHJfc2hhZG93OsKg
+wqDCoCAxOw0KPj4+PiArwqDCoMKgwqDCoMKgwqAgdTY0IGd1ZXN0X2ludHJfbWFzazoxOw0KPj4+
+PiArwqDCoMKgwqDCoMKgwqAgdTY0IHJlc3ZkOsKgwqDCoMKgwqDCoMKgwqDCoCA2MjsNCj4+Pg0K
+Pj4+IENvdWxkIHlvdSBhbHNvIHVzZSB1aW50NjRfdCBmb3IgdGhlIGZpZWxkcywgbGlrZSB5b3Ug
+ZG8gYmVsb3cgZm9yDQo+Pj4gcmF3Pw0KPj4NCj4+IE9rLCB0aGFua3MuIE1heWJlIGJvb2wgZm9y
+IGludHJfc2hhZG93IGFuZCBndWVzdF9pbnRyX21hc2sgaXMgYmV0dGVyPw0KPiANCj4gQm9vbCB3
+b3VsZCBiZSBiZXR0ZXIgaWYgeW91J3JlIHdpbGxpbmcgdG8gY2hhbmdlIHRoZW0uDQo+IA0KPiBU
+aGVyZSBpcyBhIHN1YnRsZSB0cnVuY2F0aW9uIGJ1ZyB3aXRoIGNhbiBvY2N1ciwgZS5nLg0KPiAN
+Cj4gZm9vLT5pbnRyX3NoYWRvdyA9IGJhciAmIE1BU0s7DQo+IA0KPiB0dXJucyB0byAwIGlmIE1B
+U0sgaXNuJ3QgdGhlIGJvdHRvbSBiaXQsIGFuZCBpbnRyX3NoYWRvdyBpcyBub3QgYm9vbC4NCj4g
+DQo+IFRoZSB0cmFkaXRpb25hbCB3YXkgdG8gZml4IHRoaXMgaXMgd2l0aCAhIShiYXIgJiBNQVNL
+KSwgYnV0IGJvb2xzIGFyZQ0KPiBzYWZlciBiZWNhdXNlIHlvdSBjYW4ndCBnZXQgaXQgd3Jvbmcg
+YWNjaWRlbnRhbGx5Lg0KPiANCj4gSXRzIGFsc28gZmluZSB0byBkcm9wIHRoZSByZXN2ZCBlbnRp
+cmVseS7CoCBObyBuZWVkIGZvciB0aGUgZmllbGQuDQoNClRoYW5rcyBmb3IgdGhlIGV4cGxhbmF0
+aW9uLiBJJ20gZmluZSB0byB1c2UgYm9vbCBmb3IgaW50cl9zaGFkb3cgYW5kDQpkcm9wIHRoZSBy
+ZXN2ZCBmaWVsZC4NCg0KLS0gDQpSZWdhcmRzLA0KUHUgV2Vu
 
