@@ -6,44 +6,47 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC5B2C2D0E8
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 61E16C43331
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 87DC220719
-	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 87DC220719
+	by mail.kernel.org (Postfix) with ESMTPS id 3B0CC20719
+	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 09:19:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B0CC20719
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHOfe-0005Yj-Gw; Thu, 26 Mar 2020 09:19:26 +0000
+	id 1jHOfj-0005am-6U; Thu, 26 Mar 2020 09:19:31 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=BM0P=5L=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jHOfd-0005YX-2K
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 09:19:25 +0000
-X-Inumbo-ID: e0657558-6f42-11ea-877f-12813bfff9fa
+ id 1jHOfi-0005aI-40
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 09:19:30 +0000
+X-Inumbo-ID: e1ddaf35-6f42-11ea-877f-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e0657558-6f42-11ea-877f-12813bfff9fa;
- Thu, 26 Mar 2020 09:19:23 +0000 (UTC)
+ id e1ddaf35-6f42-11ea-877f-12813bfff9fa;
+ Thu, 26 Mar 2020 09:19:24 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 7E832AF26;
- Thu, 26 Mar 2020 09:19:22 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 1FF3FAF2C;
+ Thu, 26 Mar 2020 09:19:23 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 26 Mar 2020 10:19:14 +0100
-Message-Id: <20200326091918.12388-2-jgross@suse.com>
+Date: Thu, 26 Mar 2020 10:19:16 +0100
+Message-Id: <20200326091918.12388-4-jgross@suse.com>
 X-Mailer: git-send-email 2.16.4
 In-Reply-To: <20200326091918.12388-1-jgross@suse.com>
 References: <20200326091918.12388-1-jgross@suse.com>
-Subject: [Xen-devel] [PATCH v8 1/5] xen: introduce
- smp_mb__[after|before]_atomic() barriers
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Xen-devel] [PATCH v8 3/5] xen: don't process rcu callbacks when
+ holding a rcu_read_lock()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -57,58 +60,71 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Jan Beulich <jbeulich@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-When using atomic variables for synchronization barriers are needed
-to ensure proper data serialization. Introduce smp_mb__before_atomic()
-and smp_mb__after_atomic() as in the Linux kernel for that purpose.
+Some keyhandlers are calling process_pending_softirqs() while holding
+a rcu_read_lock(). This is wrong, as process_pending_softirqs() might
+activate rcu calls which should not happen inside a rcu_read_lock().
 
-Use the same definitions as in the Linux kernel.
+For that purpose modify process_pending_softirqs() to not allow rcu
+callback processing when a rcu_read_lock() is being held.
 
-Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V7:
-- new patch
----
- xen/include/asm-arm/system.h | 3 +++
- xen/include/asm-x86/system.h | 3 +++
- 2 files changed, 6 insertions(+)
+V3:
+- add RCU_SOFTIRQ to ignore in process_pending_softirqs_norcu()
+  (Roger Pau Monné)
 
-diff --git a/xen/include/asm-arm/system.h b/xen/include/asm-arm/system.h
-index e5d062667d..65d5c8e423 100644
---- a/xen/include/asm-arm/system.h
-+++ b/xen/include/asm-arm/system.h
-@@ -30,6 +30,9 @@
+V5:
+- block rcu processing depending on rch_read_lock() being held or not
+  (Jan Beulich)
+---
+ xen/common/softirq.c | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/xen/common/softirq.c b/xen/common/softirq.c
+index b83ad96d6c..00d676b62c 100644
+--- a/xen/common/softirq.c
++++ b/xen/common/softirq.c
+@@ -29,6 +29,7 @@ static void __do_softirq(unsigned long ignore_mask)
+ {
+     unsigned int i, cpu;
+     unsigned long pending;
++    bool rcu_allowed = !(ignore_mask & (1ul << RCU_SOFTIRQ));
  
- #define smp_wmb()       dmb(ishst)
+     for ( ; ; )
+     {
+@@ -38,7 +39,7 @@ static void __do_softirq(unsigned long ignore_mask)
+          */
+         cpu = smp_processor_id();
  
-+#define smp_mb__before_atomic()    smp_mb()
-+#define smp_mb__after_atomic()     smp_mb()
+-        if ( rcu_pending(cpu) )
++        if ( rcu_allowed && rcu_pending(cpu) )
+             rcu_check_callbacks(cpu);
+ 
+         if ( ((pending = (softirq_pending(cpu) & ~ignore_mask)) == 0)
+@@ -53,9 +54,16 @@ static void __do_softirq(unsigned long ignore_mask)
+ 
+ void process_pending_softirqs(void)
+ {
++    unsigned long ignore_mask = (1ul << SCHEDULE_SOFTIRQ) |
++                                (1ul << SCHED_SLAVE_SOFTIRQ);
 +
- /*
-  * This is used to ensure the compiler did actually allocate the register we
-  * asked it for some inline assembly sequences.  Apparently we can't trust
-diff --git a/xen/include/asm-x86/system.h b/xen/include/asm-x86/system.h
-index 069f422f0d..7e5891f3df 100644
---- a/xen/include/asm-x86/system.h
-+++ b/xen/include/asm-x86/system.h
-@@ -233,6 +233,9 @@ static always_inline unsigned long __xadd(
- #define set_mb(var, value) do { xchg(&var, value); } while (0)
- #define set_wmb(var, value) do { var = value; smp_wmb(); } while (0)
- 
-+#define smp_mb__before_atomic()    do { } while (0)
-+#define smp_mb__after_atomic()     do { } while (0)
++    /* Block RCU processing in case of rcu_read_lock() held. */
++    if ( preempt_count() )
++        ignore_mask |= 1ul << RCU_SOFTIRQ;
 +
- /**
-  * array_index_mask_nospec() - generate a mask that is ~0UL when the
-  *      bounds check succeeds and 0 otherwise
+     ASSERT(!in_irq() && local_irq_is_enabled());
+     /* Do not enter scheduler as it can preempt the calling context. */
+-    __do_softirq((1ul << SCHEDULE_SOFTIRQ) | (1ul << SCHED_SLAVE_SOFTIRQ));
++    __do_softirq(ignore_mask);
+ }
+ 
+ void do_softirq(void)
 -- 
 2.16.4
 
