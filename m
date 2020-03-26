@@ -2,60 +2,61 @@ Return-Path: <SRS0=xTCj=5L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7711BC43331
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7AC56C2D0E8
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 15:28:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 42B0C20748
+	by mail.kernel.org (Postfix) with ESMTPS id 425EE2073E
 	for <xen-devel@archiver.kernel.org>; Thu, 26 Mar 2020 15:28:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="McgZfqIk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 42B0C20748
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OFqE2/9d"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 425EE2073E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHUQ2-0006xH-Es; Thu, 26 Mar 2020 15:27:42 +0000
+	id 1jHUQ6-0006xv-SG; Thu, 26 Mar 2020 15:27:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=a2Fc=5L=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jHUQ1-0006xC-4n
- for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 15:27:41 +0000
-X-Inumbo-ID: 539e4d0a-6f76-11ea-880d-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1jHUQ6-0006xi-2G
+ for xen-devel@lists.xenproject.org; Thu, 26 Mar 2020 15:27:46 +0000
+X-Inumbo-ID: 55fb24b8-6f76-11ea-880d-12813bfff9fa
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 539e4d0a-6f76-11ea-880d-12813bfff9fa;
- Thu, 26 Mar 2020 15:27:40 +0000 (UTC)
+ id 55fb24b8-6f76-11ea-880d-12813bfff9fa;
+ Thu, 26 Mar 2020 15:27:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585236460;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=1PSTaJ180/RZBpYrNgDsW1McFsnl5htpTr3y5bTuCBo=;
- b=McgZfqIkv8pGxub8o0m731GYEk4VjkLz1KZKZAUUJtHN8Th6T+/MWWKX
- cal3sAGBaU/wKeqqxYG1G24IamFz4pEVIwfVJupENUvv6v4nRwVKDRgX6
- K1Cs5AGk7LFlWw0HE0yboCSMbmeRWTFknfBJXumZUjhnMuOdEu0VMHhK+ s=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1585236463;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=6fjiTrIRuEMMbz6K31zXO+vBOLjObAGvvwGKsTQeTO4=;
+ b=OFqE2/9dkOenYoffFJAITfoOlqBRIUoerjSKkK5vQv/5dnoaEA0vh9Bk
+ 0vd/IPiH4nv7SABlEnm7vPDZqVwf0FPHdmfn2WdFyJWWzl8VRCg3knRb4
+ nYxTXXCEv4PlP6DZsWEjYgyZezy8x3Z54mIDtS4u4Q6o4vbDFIEfRupqm Q=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=roger.pau@citrix.com;
  spf=Pass smtp.mailfrom=roger.pau@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
+ receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  roger.pau@citrix.com designates 162.221.158.21 as permitted
  sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
+ receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -64,33 +65,36 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: +avkQwAwGZa5zPPDsicSNkXaWTfLGc7iaji3mNSMPFH6UQTjsNi52MqKi8cD69G2NXiyNPWOuG
- kQgpIGmxaA00sXNX+OQ7MNjCUJ+16MWn+cRo/VRtNRFuQkulqJvCNtTVU+KSkXtsmE2UlJwgxT
- D8uh8IHfZH4pIKeKTmBzjsfFvn7vAl/wq8KP9by6DGRvqzJEhWc69DHrO6dpK8UXoSf0z55T1I
- ikSKo/cXSgYueV44N8fWxoA5EB7rGWKkCLzU7sLlude9ZpRdG1M0JkfcUg8ptHrDpD2P26gb55
- dHU=
+IronPort-SDR: UuvNZFzF9fMuF6eELqNAgiBpizqVKXaADCrnLlUegwHi0tpC4VqnJ3DvxHC1v0d9rgxAVcvStG
+ IyRejFQ48XBRCZTOp5xo0EYKO1P3T/HCZFGNYFyn2bCGGDWspJRwWuaNukd90m1vdlc/q3K/M2
+ IwUpdTa3CBlO2ivCy32SenC675Wj3i/3wfs4/N5ZvsnDMQmse+ZR1jXvJRJVNiNsw2EOEZ6xES
+ mEA4f9OBDxXAfoLeCiPPSNseP+KJLgjDl6sJ6eiWSb5cHeBW5eGyw/pkFuFplEhycmYw+Y/taj
+ pMk=
 X-SBRS: 2.7
-X-MesageID: 15024593
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 14702088
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,308,1580792400"; d="scan'208";a="15024593"
+X-IronPort-AV: E=Sophos;i="5.72,308,1580792400"; d="scan'208";a="14702088"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Date: Thu, 26 Mar 2020 16:27:16 +0100
-Message-ID: <20200326152720.36970-1-roger.pau@citrix.com>
+Date: Thu, 26 Mar 2020 16:27:17 +0100
+Message-ID: <20200326152720.36970-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.26.0
+In-Reply-To: <20200326152720.36970-1-roger.pau@citrix.com>
+References: <20200326152720.36970-1-roger.pau@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [PATCH v3 0/4] x86/nvmx: fixes for interrupt injection
+Subject: [Xen-devel] [PATCH v3 1/4] Revert "x86/vvmx: fix virtual interrupt
+ injection when Ack on exit control is used"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -107,35 +111,36 @@ Cc: Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello,
+This reverts commit f96e1469ad06b61796c60193daaeb9f8a96d7458.
 
-osstest identified a regression caused by my earlier attempt to fix
-interrupt injection when using nested VMX. This series aims to fix the
-regression, and should unblock several osstest branches.
+The commit is wrong, as the whole point of nvmx_update_apicv is to
+update the guest interrupt status field when the Ack on exit VMEXIT
+control feature is enabled.
 
-The following report is from osstest with this series applied:
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+---
+ xen/arch/x86/hvm/vmx/vvmx.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
-http://logs.test-lab.xenproject.org/osstest/logs/149051/
-
-Note the last patch (4/4) is the one that actually fixes the issue. Xen
-will always use the Ack on exit feature so patches 2/4 and 3/4 don't
-change the functionality when running a nested Xen, as it always
-requires SVI to be updated.
-
-Thanks, Roger.
-
-Roger Pau Monne (4):
-  Revert "x86/vvmx: fix virtual interrupt injection when Ack on exit
-    control is used"
-  x86/nvmx: only update SVI when using Ack on exit
-  x86/nvmx: split updating RVI from SVI in nvmx_update_apicv
-  x86/nvmx: update exit bitmap when using virtual interrupt delivery
-
- xen/arch/x86/hvm/vmx/intr.c       | 21 +++++++++------
- xen/arch/x86/hvm/vmx/vvmx.c       | 43 ++++++++++++++++++++-----------
- xen/include/asm-x86/hvm/vmx/vmx.h |  2 ++
- 3 files changed, 43 insertions(+), 23 deletions(-)
-
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index f049920196..1b8461ba30 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -1456,12 +1456,7 @@ static void virtual_vmexit(struct cpu_user_regs *regs)
+     /* updating host cr0 to sync TS bit */
+     __vmwrite(HOST_CR0, v->arch.hvm.vmx.host_cr0);
+ 
+-    if ( cpu_has_vmx_virtual_intr_delivery &&
+-         /*
+-          * Only inject the vector if the Ack on exit bit is not set, else the
+-          * interrupt will be signaled in the vmcs VM_EXIT_INTR_INFO field.
+-          */
+-         !(get_vvmcs(v, VM_EXIT_CONTROLS) & VM_EXIT_ACK_INTR_ON_EXIT) )
++    if ( cpu_has_vmx_virtual_intr_delivery )
+         nvmx_update_apicv(v);
+ 
+     nvcpu->nv_vmswitch_in_progress = 0;
 -- 
 2.26.0
 
