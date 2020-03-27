@@ -2,65 +2,47 @@ Return-Path: <SRS0=U/nz=5M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 233E2C2D0F0
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 19:06:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 443A6C43331
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 19:31:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EFBB8208E4
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 19:06:33 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="O3Pnm3WT"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EFBB8208E4
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0CC1A20575
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 19:31:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0CC1A20575
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=dornerworks.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHuIu-00010d-7s; Fri, 27 Mar 2020 19:06:04 +0000
+	id 1jHugc-0003cv-1D; Fri, 27 Mar 2020 19:30:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=FIC2=5M=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jHuIs-00010S-J6
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2020 19:06:02 +0000
-X-Inumbo-ID: fff63f92-705d-11ea-a6c1-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fff63f92-705d-11ea-a6c1-bc764e2007e4;
- Fri, 27 Mar 2020 19:06:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=LbkHRMejVzjX2Y1W5Wqka+7qxm9kBms8I4prnQ0VkJ4=; b=O3Pnm3WTHlxwO/aHPiA6TzTVb7
- z93HNWeUDmHKZptteXNzz/tIQ9Am3ge431GMOPbjS79vSNNJuEf+wjJ4PdCfvOKnCP1ozJsHkONyz
- Bm6Xq+aLsXI1dKHK7eZanZ/zXFVBBvLfwbb8FBFZUbgk7hKSlE/1+tChL44swRLvzYJ8=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jHuIr-0000HW-7V; Fri, 27 Mar 2020 19:06:01 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jHuIq-0008GW-UI; Fri, 27 Mar 2020 19:06:01 +0000
-From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Date: Fri, 27 Mar 2020 19:05:44 +0000
-Message-Id: <20200327190546.21580-2-julien@xen.org>
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=JEYE=5M=dornerworks.com=jeff.kubascik@srs-us1.protection.inumbo.net>)
+ id 1jHuga-0003cq-Dt
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2020 19:30:32 +0000
+X-Inumbo-ID: 6b859d04-7061-11ea-bec1-bc764e2007e4
+Received: from webmail.dornerworks.com (unknown [12.207.209.150])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 6b859d04-7061-11ea-bec1-bc764e2007e4;
+ Fri, 27 Mar 2020 19:30:31 +0000 (UTC)
+From: Jeff Kubascik <jeff.kubascik@dornerworks.com>
+To: <xen-devel@lists.xenproject.org>, George Dunlap
+ <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>
+Date: Fri, 27 Mar 2020 15:30:23 -0400
+Message-ID: <20200327193023.506-1-jeff.kubascik@dornerworks.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200327190546.21580-1-julien@xen.org>
-References: <20200327190546.21580-1-julien@xen.org>
-Subject: [Xen-devel] [PATCH 1/3] xen/x86: ioapic: Use true/false in
- bad_ioapic_register()
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Originating-IP: [172.27.13.208]
+X-ClientProxiedBy: Mcbain.dw.local (172.27.1.45) To Mcbain.dw.local
+ (172.27.1.45)
+Subject: [Xen-devel] [PATCH] sched/core: Fix bug when moving a domain
+ between cpupools
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,40 +53,58 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: julien@xen.org, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
- Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Stewart Hildebrand <Stewart.Hildebrand@dornerworks.com>,
+ Nathan Studer <Nathan.Studer@dornerworks.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
+For each UNIT, sched_set_affinity is called before unit->priv is updated
+to the new cpupool private UNIT data structure. The issue is
+sched_set_affinity will call the adjust_affinity method of the cpupool.
+If defined, the new cpupool may use unit->priv (e.g. credit), which at
+this point still references the old cpupool private UNIT data structure.
 
-bad_ioapic_register() is return a bool, so we should switch to
-true/false.
+This change fixes the bug by moving the switch of unit->priv earler in
+the function.
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
+Signed-off-by: Jeff Kubascik <jeff.kubascik@dornerworks.com>
 ---
- xen/arch/x86/io_apic.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hello,
 
-diff --git a/xen/arch/x86/io_apic.c b/xen/arch/x86/io_apic.c
-index e98e08e9c8..9868933287 100644
---- a/xen/arch/x86/io_apic.c
-+++ b/xen/arch/x86/io_apic.c
-@@ -2531,10 +2531,10 @@ static __init bool bad_ioapic_register(unsigned int idx)
-     {
-         printk(KERN_WARNING "I/O APIC %#x registers return all ones, skipping!\n",
-                mp_ioapics[idx].mpc_apicaddr);
--        return 1;
-+        return true;
-     }
+I've been working on updating the arinc653 scheduler to support
+multicore for a few months now. In the process of testing, I came across
+this obscure bug in the core scheduler code that took me a few weeks to
+track down. This bug resulted in the credit scheduler writing past the
+end of the arinc653 private UNIT data structure into the TLSF allocator
+bhdr structure of the adjacent region. This required some deep diving
+into the TLSF allocator code to trace the bug back to this point.
+
+Sincerely,
+Jeff Kubascik
+---
+ xen/common/sched/core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index 7e8e7d2c39..ea572a345a 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -686,6 +686,7 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
+         unsigned int unit_p = new_p;
  
--    return 0;
-+    return false;
- }
+         unitdata = unit->priv;
++        unit->priv = unit_priv[unit_idx];
  
- void __init init_ioapic_mappings(void)
+         for_each_sched_unit_vcpu ( unit, v )
+         {
+@@ -707,7 +708,6 @@ int sched_move_domain(struct domain *d, struct cpupool *c)
+          */
+         spin_unlock_irq(lock);
+ 
+-        unit->priv = unit_priv[unit_idx];
+         if ( !d->is_dying )
+             sched_move_irqs(unit);
+ 
 -- 
 2.17.1
 
