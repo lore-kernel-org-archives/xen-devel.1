@@ -2,68 +2,104 @@ Return-Path: <SRS0=U/nz=5M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 588EDC2D0EC
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 13:46:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 244DBC43331
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 13:50:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 20006207FF
-	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 13:46:51 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E2CDF206F6
+	for <xen-devel@archiver.kernel.org>; Fri, 27 Mar 2020 13:50:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="OYyXDuPl"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 20006207FF
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MhD03JJg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2CDF206F6
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jHpJT-0005pZ-Dj; Fri, 27 Mar 2020 13:46:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=KiP0=5M=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jHpJS-0005pL-G3
- for xen-devel@lists.xenproject.org; Fri, 27 Mar 2020 13:46:18 +0000
-X-Inumbo-ID: 53d7c73e-7031-11ea-a6c1-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 53d7c73e-7031-11ea-a6c1-bc764e2007e4;
- Fri, 27 Mar 2020 13:46:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FmjhAN/b04fcBYlf6wClhBaFhTqwFrSRfJVK3buN+Z4=; b=OYyXDuPlVZoexKzt20Hi8QQq08
- miW5j2/VpO157Epbv4U/TPW5/DwyUKO3fSerko9XttB8UDwgL2PmqQEYJLk7WOPtvfXhizHTGeOBp
- O2oHy8U6uw2hfLaD+TarpbniQXyLKaPkld4RJ4CU3eulISCeOrN+PAKT/8DEKkuDeBew=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <paul@xen.org>)
- id 1jHpJO-0001IF-OZ; Fri, 27 Mar 2020 13:46:14 +0000
-Received: from 54-240-197-232.amazon.com ([54.240.197.232]
- helo=u2f063a87eabd5f.cbg10.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <paul@xen.org>)
- id 1jHpJO-00066v-B6; Fri, 27 Mar 2020 13:46:14 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Date: Fri, 27 Mar 2020 13:46:09 +0000
-Message-Id: <20200327134610.23387-2-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200327134610.23387-1-paul@xen.org>
-References: <20200327134610.23387-1-paul@xen.org>
+	id 1jHpNR-0006p1-7l; Fri, 27 Mar 2020 13:50:25 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=o0RR=5M=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jHpNP-0006ow-Md
+ for xen-devel@lists.xenproject.org; Fri, 27 Mar 2020 13:50:23 +0000
+X-Inumbo-ID: e6c96f16-7031-11ea-8993-12813bfff9fa
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e6c96f16-7031-11ea-8993-12813bfff9fa;
+ Fri, 27 Mar 2020 13:50:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1585317023;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=AfU1+LNWgSXWN6HdSvZWs7ZyBax5efBTGgnWljnsh7w=;
+ b=MhD03JJgjrF2NtiG28AkGqpqbGVp1CXFW+6VRrFyeOwRGkHKs9pPhBcD
+ OL59xLHrcE3Y20PjfBBiuES5LXKy0l7j7NkiB//z1nMnddsk4EsbKmgcc
+ yYN8a9/kyUMzi1X/f+LO8bVhZJFrwbiPBXq9e/Y+Zmt82eF+qXRk0Cvcl s=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: AB3pzU3y729pInrop7X51yGUtENPcr4Fm9cPbWKwqaFYvSIHAFQSrQIASSCADQMl4GRitWY0Xk
+ FxGXeuZS/aEZpQY+1yB4Jrchozo2DLIcQ9YXQbldYoSsEb+quNIZYGUHdBbnTVzI1Kbni6MW9a
+ pYdDSsPClIbqYOaFZDjbWRkDteMXyNRaaQScBnzbMfCeUU+K4jG05KHB27/GdiQ2gnbYhxlrY6
+ sptmv8gu0u0Qu1K6CgucJqj3lJAAlb36QYZMe4c0p21WKXdN14gxqX4BUpfICF/EAvhjk7Vk2P
+ Cto=
+X-SBRS: 2.7
+X-MesageID: 14739770
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,312,1580792400"; d="scan'208";a="14739770"
+To: Dario Faggioli <dfaggioli@suse.com>, <xen-devel@lists.xenproject.org>
+References: <158524374263.32448.13098482060302794023.stgit@Palanthas>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <3e6adbd8-c255-3455-2089-3233d5069b96@citrix.com>
+Date: Fri, 27 Mar 2020 13:50:16 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [PATCH v8 1/2] docs/designs: Add a design document for
- non-cooperative live migration
+In-Reply-To: <158524374263.32448.13098482060302794023.stgit@Palanthas>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
+Subject: Re: [Xen-devel] [PATCH] automation: update openSUSE Tumbleweed
+ building dependencies
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -74,344 +110,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 26/03/2020 17:29, Dario Faggioli wrote:
+> We need python3 (and the respective -devel package), these days.
+>
+> Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
+> ---
+> Cc: Doug Goldstein <cardoe@cardoe.com>
+> ---
+>  .../build/suse/opensuse-tumbleweed.dockerfile      |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/automation/build/suse/opensuse-tumbleweed.dockerfile b/automation/build/suse/opensuse-tumbleweed.dockerfile
+> index 2676a87c85..e80d773a79 100644
+> --- a/automation/build/suse/opensuse-tumbleweed.dockerfile
+> +++ b/automation/build/suse/opensuse-tumbleweed.dockerfile
+> @@ -54,8 +54,8 @@ RUN zypper install -y --no-recommends \
+>          pandoc \
+>          patch \
+>          pkg-config \
+> -        python \
+> -        python-devel \
+> +        python3 \
+> +        python3-devel \
 
-It has become apparent to some large cloud providers that the current
-model of cooperative migration of guests under Xen is not usable as it
-relies on software running inside the guest, which is likely beyond the
-provider's control.
-This patch introduces a proposal for non-cooperative live migration,
-designed not to rely on any guest-side software.
+These containers get used for older Xen branches as well, so you
+generally can't take deps out like this (Until we stop building the
+oldest branches which need the dependency).
 
-Signed-off-by: Paul Durrant <paul@xen.org>
----
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <George.Dunlap@eu.citrix.com>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Wei Liu <wl@xen.org>
+Will tumbleweed cope with both packages installed concurrently?
 
-v8:
- - Addressed comments from Julien on v6 that I missed
-
-v6:
- - Addressed comments from Julien
-
-v5:
- - Note that PV domain are not just expected to co-operate, they are
-   required to
-
-v4:
- - Fix issues raised by Wei
-
-v2:
- - Use the term 'non-cooperative' instead of 'transparent'
- - Replace 'trust in' with 'reliance on' when referring to guest-side
-   software
----
- docs/designs/non-cooperative-migration.md | 280 ++++++++++++++++++++++
- 1 file changed, 280 insertions(+)
- create mode 100644 docs/designs/non-cooperative-migration.md
-
-diff --git a/docs/designs/non-cooperative-migration.md b/docs/designs/non-cooperative-migration.md
-new file mode 100644
-index 0000000000..4b876d809f
---- /dev/null
-+++ b/docs/designs/non-cooperative-migration.md
-@@ -0,0 +1,280 @@
-+# Non-Cooperative Migration of Guests on Xen
-+
-+## Background
-+
-+The normal model of migration in Xen is driven by the guest because it was
-+originally implemented for PV guests, where the guest must be aware it is
-+running under Xen and is hence expected to co-operate. This model dates from
-+an era when it was assumed that the host administrator had control of at
-+least the privileged software running in the guest (i.e. the guest kernel)
-+which may still be true in an enterprise deployment but is not generally
-+true in a cloud environment. The aim of this design is to provide a model
-+which is purely host driven, requiring no co-operation from the software
-+running in the guest, and is thus suitable for cloud scenarios.
-+
-+PV guests are out of scope for this project because, as is outlined above,
-+they have a symbiotic relationship with the hypervisor and therefore a
-+certain level of co-operation is required.
-+
-+x86 HVM guests can already be migrated on Xen without guest co-operation
-+but only if they don’t have PV drivers installed[1] or are not in ACPI
-+power state S0. The reason for not expecting co-operation if the guest is
-+any sort of suspended state is obvious, but the reason co-operation is
-+expected if PV drivers are installed is due to the nature of PV protocols.
-+
-+## Xenstore Nodes and Domain ID
-+
-+The PV driver model consists of a *frontend* and a *backend*. The frontend
-+runs inside the guest domain and the backend runs inside a *service domain*
-+which may or may not be domain 0. The frontend and backend typically pass
-+data via memory pages which are shared between the two domains, but this
-+channel of communication is generally established using xenstore (the store
-+protocol itself being an exception to this for obvious chicken-and-egg
-+reasons).
-+
-+Typical protocol establishment is based on use of two separate xenstore
-+*areas*. If we consider PV drivers for the *netif* protocol (i.e. class vif)
-+and assume the guest has domid X, the service domain has domid Y, and the
-+vif has index Z then the frontend area will reside under the parent node:
-+
-+`/local/domain/Y/device/vif/Z`
-+
-+All backends, by convention, typically reside under parent node:
-+
-+`/local/domain/X/backend`
-+
-+and the normal backend area for vif Z would be:
-+
-+`/local/domain/X/backend/vif/Y/Z`
-+
-+but this should not be assumed.
-+
-+The toolstack will place two nodes in the frontend area to explicitly locate
-+the backend:
-+
-+    * `backend`: the fully qualified xenstore path of the backend area
-+    * `backend-id`: the domid of the service domain
-+
-+and similarly two nodes in the backend area to locate the frontend area:
-+
-+    * `frontend`: the fully qualified xenstore path of the frontend area
-+    * `frontend-id`: the domid of the guest domain
-+
-+
-+The guest domain only has write permission to the frontend area and
-+similarly the service domain only has write permission to the backend area,
-+but both ends have read permission to both areas.
-+
-+Under both frontend and backend areas is a node called *state*. This is key
-+to protocol establishment. Upon PV device creation the toolstack will set
-+the value of both state nodes to 1 (XenbusStateInitialising[2]). This
-+should cause enumeration of appropriate devices in both the guest and
-+service domains. The backend device, once it has written any necessary
-+protocol specific information into the xenstore backend area (to be read
-+by the frontend driver) will update the backend state node to 2
-+(XenbusStateInitWait). From this point on PV protocols differ slightly; the
-+following illustration is true of the netif protocol.
-+
-+Upon seeing a backend state value of 2, the frontend driver will then read
-+the protocol specific information, write details of grant references (for
-+shared pages) and event channel ports (for signalling) that it has created,
-+and set the state node in the frontend area to 4 (XenbusStateConnected).
-+Upon see this frontend state, the backend driver will then read the grant
-+references (mapping the shared pages) and event channel ports (opening its
-+end of them) and set the state node in the backend area to 4. Protocol
-+establishment is now complete and the frontend and backend start to pass
-+data.
-+
-+Because the domid of both ends of a PV protocol forms a key part of
-+negotiating the data plane for that protocol (because it is encoded into
-+both xenstore nodes and node paths), and because guest’s own domid and the
-+domid of the service domain are visible to the guest in xenstore (and hence
-+ay cached internally), and neither are necessarily preserved during
-+migration, it is hence necessary to have the co-operation of the frontend
-+in re-negotiating the protocol using the new domid after migration.
-+
-+Moreover the backend-id value will be used by the frontend driver in
-+setting up grant table entries and event channels to communicate with the
-+service domain, so the co-operation of the guest is required to
-+re-establish these in the new host environment after migration.
-+
-+Thus if we are to change the model and support migration of a guest with PV
-+drivers, without the co-operation of the frontend driver code, the paths and
-+values in both the frontend and backend xenstore areas must remain unchanged
-+and valid in the new host environment, and the grant table entries and event
-+channels must be preserved (and remain operational once guest execution is
-+resumed).
-+
-+Because the service domain’s domid is used directly by the guest in setting
-+up grant entries and event channels, the backend drivers in the new host
-+environment must be provided by service domain with the same domid. Also,
-+because the guest can sample its own domid from the frontend area and use
-+it in hypercalls (e.g. HVMOP_set_param) rather than DOMID_SELF, the guest
-+domid must also be preserved to maintain the ABI.
-+
-+Furthermore, it will necessary to modify backend drivers to re-establish
-+communication with frontend drivers without perturbing the content of the
-+backend area or requiring any changes to the values of the xenstore state
-+nodes.
-+
-+## Other Para-Virtual State
-+
-+### Shared Rings
-+
-+Because the console and store protocol shared pages are actually part of
-+the guest memory image (in an E820 reserved region just below 4G in x86
-+VMs) then the content will get migrated as part of the guest memory image.
-+Hence no additional code is require to prevent any guest visible change in
-+the content.
-+
-+### Shared Info
-+
-+There is already a record defined in *libxenctrl Domain Image Format* [3]
-+called `SHARED_INFO` which simply contains a complete copy of the domain’s
-+shared info page. It is not currently incuded in an HVM (type `0x0002`)
-+migration stream. It may be feasible to include it as an optional record
-+but it is not clear that the content of the shared info page ever needs
-+to be preserved for an HVM guest.
-+
-+For a PV guest the `arch_shared_info` sub-structure contains important
-+information about the guest’s P2M, but this information is not relevant for
-+an HVM guest where the P2M is not directly manipulated via the guest. The
-+other state contained in the `shared_info` structure relates the domain
-+wall-clock (the state of which should already be transferred by the `RTC`
-+HVM context information which contained in the `HVM_CONTEXT` save record)
-+and some event channel state (particularly if using the *2l* protocol).
-+Event channel state will need to be fully transferred if we are not going
-+to require the guest co-operation to re-open the channels and so it should
-+be possible to re-build a shared info page for an HVM guest from such other
-+state.
-+
-+Note that the shared info page also contains an array of
-+`XEN_LEGACY_MAX_VCPUS` (32 for x86) `vcpu_info` structures. A domain may
-+nominate a different guest physical address to use for the vcpu info. This
-+is mandatory if a domain wants to use more than XEN_LEGACY_MAX_VCPUS vCPUs
-+and optional otherwise. This mapping is not currently transferred in the
-+migration state so this will either need to be added into an existing save
-+record, or an additional type of save record will be needed.
-+
-+### Xenstore Watches
-+
-+As mentioned above, no domain Xenstore state is currently transferred in
-+the migration stream. There is a record defined in *libxenlight Domain
-+Image Format* [4] called `EMULATOR_XENSTORE_DATA` for transferring Xenstore
-+nodes relating to emulators but no record type is defined for nodes
-+relating to the domain itself, nor for registered *watches*. A XenStore
-+watch is a mechanism used by PV frontend and backend drivers to request a
-+notification if the value of a particular node (e.g. the other end’s state
-+node) changes, so it is important that watches continue to function after a
-+migration. One or more new save records will therefore be required to
-+transfer Xenstore state. It will also be necessary to extend the *store*
-+protocol[5] with mechanisms to allow the toolstack to acquire the list of
-+watches that the guest has registered and for the toolstack to register a
-+watch on behalf of a domain.
-+
-+### Event channels
-+
-+Event channels are essentially the para-virtual equivalent of interrupts.
-+They are an important part of post PV protocols. Normally a frontend driver
-+creates an *inter-domain* event channel between its own domain and the
-+domain running the backend, which it discovers using the `backend-id` node
-+in Xenstore (see above), by making a `EVTCHNOP_alloc_unbound` hypercall.
-+This hypercall allocates an event channel object in the hypervisor and
-+assigns a *local port* number which is then written into the frontend area
-+in Xenstore. The backend driver then reads this port number and *binds* to
-+the event channel by specifying it, and the value of `frontend-id`, as
-+*remote domain* and *remote port* (respectively) to a
-+`EVTCHNOP_bind_interdomain` hypercall. Once connection is established in
-+this fashion frontend and backend drivers can use the event channel as a
-+*mailbox* to notify each other when a shared ring has been updated with new
-+requests or response structures.
-+
-+Currently no event channel state is preserved on migration, requiring
-+frontend and backend drivers to create and bind a complete new set of event
-+channels in order to re-establish a protocol connection. Hence, one or more
-+new save records will be required to transfer event channel state in order
-+to avoid the need for explicit action by frontend drivers running in the
-+guest. Note that the local port numbers need to preserved in this state as
-+they are the only context the guest has to refer to the hypervisor event
-+channel objects.
-+
-+Note also that the PV *store* (Xenstore access) and *console* protocols
-+also rely on event channels which are set up by the toolstack. Normally,
-+early in migration, the toolstack running on the remote host would set up a
-+new pair of event channels for these protocols in the destination domain.
-+These may not be assigned the same local port numbers as the protocols
-+running in the source domain. For non-cooperative migration these channels
-+must either be created with fixed port numbers, or their creation must be
-+avoided and instead be included in the general event channel state
-+record(s).
-+
-+### Grant table
-+
-+The grant table is essentially the para-virtual equivalent of an IOMMU. For
-+example, the shared rings of a PV protocol are *granted* by a frontend
-+driver to the backend driver by allocating *grant entries* in the guest’s
-+table, filling in details of the memory pages and then writing the *grant
-+references* (the index values of the grant entries) into Xenstore. The
-+grant references of the protocol buffers themselves are typically written
-+directly into the request structures passed via a shared ring.
-+
-+The guest is responsible for managing its own grant table. No hypercall is
-+required to grant a memory page to another domain. It is sufficient to find
-+an unused grant entry and set bits in the entry to give read and/or write
-+access to a remote domain also specified in the entry along with the page
-+frame number. Thus the layout and content of the grant table logically
-+forms part of the guest state.
-+
-+Currently no grant table state is migrated, requiring a guest to separately
-+maintain any state that it wishes to persist elsewhere in its memory image
-+and then restore it after migration. Thus to avoid the need for such
-+explicit action by the guest, one or more new save records will be required
-+to migrate the contents of the grant table.
-+
-+# Outline Proposal
-+
-+* PV backend drivers will be modified to unilaterally re-establish
-+connection to a frontend if the backend state node is restored with value 4
-+(XenbusStateConnected)[6].
-+
-+* The toolstack choose a randomized domid for initial creation or default
-+migration, but preserve the source domid non-cooperative migration.
-+Non-Cooperative migration will have to be denied if the domid is
-+unavailable on the target host, but randomization of domid on creation
-+should hopefully minimize the likelihood of this. Non-Cooperative migration
-+to localhost will clearly not be possible.
-+
-+* `xenstored` should be modified to implement the new mechanisms needed.
-+See *Other Para-Virtual State* above. A further design document will
-+propose additional protocol messages.
-+
-+* Within the migration stream extra save records will be defined as
-+required. See *Other Para-Virtual State* above. A further design document
-+will propose modifications to the libxenlight and libxenctrl Domain Image
-+Formats.
-+
-+* An option should be added to the toolstack to initiate a non-cooperative
-+migration, instead of the (default) potentially co-operative migration.
-+Essentially this should skip the check to see if PV drivers and migrate as
-+if there are none present, but also enabling the extra save records. Note
-+that at least some of the extra records should only form part of a
-+non-cooperative migration stream. For example, migrating event channel
-+state would be counter productive in a normal migration as this will
-+essentially leak event channel objects at the receiving end. Others, such
-+as grant table state, could potentially harmlessly form part of a normal
-+migration stream.
-+
-+* * *
-+[1] PV drivers are deemed to be installed if the HVM parameter
-+*HVM_PARAM_CALLBACK_IRQ* has been set to a non-zero value.
-+
-+[2] See https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/include/public/io/xenbus.h
-+
-+[3] See https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/specs/libxc-migration-stream.pandoc
-+
-+[4] See https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/specs/libxl-migration-stream.pandoc
-+
-+[5] See https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=docs/misc/xenstore.txt
-+
-+[6] `xen-blkback` and `xen-netback` have already been modified in Linux to do
-+this.
--- 
-2.20.1
-
+~Andrew
 
