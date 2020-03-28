@@ -2,70 +2,69 @@ Return-Path: <SRS0=CqUQ=5N=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DDB2C43331
-	for <xen-devel@archiver.kernel.org>; Sat, 28 Mar 2020 10:53:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43126C43331
+	for <xen-devel@archiver.kernel.org>; Sat, 28 Mar 2020 10:59:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4CCD5206CC
-	for <xen-devel@archiver.kernel.org>; Sat, 28 Mar 2020 10:53:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DAEBD20716
+	for <xen-devel@archiver.kernel.org>; Sat, 28 Mar 2020 10:59:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Aurx0by1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4CCD5206CC
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Gjw41TjC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DAEBD20716
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jI95g-0005CV-3c; Sat, 28 Mar 2020 10:53:24 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jI9BJ-0005Rg-Pk; Sat, 28 Mar 2020 10:59:13 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=eoyf=5N=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jI95f-0005CL-2c
- for xen-devel@lists.xenproject.org; Sat, 28 Mar 2020 10:53:23 +0000
-X-Inumbo-ID: 57c81284-70e2-11ea-a6c1-bc764e2007e4
+ (envelope-from <SRS0=8l4x=5N=xen.org=wl@srs-us1.protection.inumbo.net>)
+ id 1jI9BI-0005RZ-UM
+ for xen-devel@lists.xenproject.org; Sat, 28 Mar 2020 10:59:12 +0000
+X-Inumbo-ID: 17ff83cb-70e3-11ea-8b30-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 57c81284-70e2-11ea-a6c1-bc764e2007e4;
- Sat, 28 Mar 2020 10:53:22 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 17ff83cb-70e3-11ea-8b30-12813bfff9fa;
+ Sat, 28 Mar 2020 10:58:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8vaf3d+uhJiRLj435/ha2i9sn3nxkyjZup9zocN7ED0=; b=Aurx0by1q2AMT3qaLOCdwRrX1x
- rtTuMsOaQ8TQnQsL9BV1cd9Fz6NA2DG+f4LoUGLTvZUYTzX57F8E3mIBhw3OOzaJ6Djl0LPq7SMZI
- SRQmf0Q3COLVvbQYkAgkAgcX3cwRST1sEx10antKY3nyBUI5Xj6HssOq7PoV074PYepM=;
+ bh=VGg5s7LEJBJSjdd7dc6tJwEHIukPmsXF3AhFSl6pAIw=; b=Gjw41TjCHal50+3D9RqSoYCaEl
+ 1uW/tgD+7sAd3PBUwpmzTA3ORQu/UljqcJ3CiseKN47oGyO7MkWWnZcn1Ygvbzgffqzi9j4hmC+5f
+ lt/Ck90SR26YmPVcVxmIAJqGdgjWByvYIGAJk9cisZn7Zp28vQANXY8d+ueD/oE/exo0=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jI95d-0007r3-0w; Sat, 28 Mar 2020 10:53:21 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ (envelope-from <wl@xen.org>)
+ id 1jI9Ao-0007xm-Ca; Sat, 28 Mar 2020 10:58:42 +0000
+Received: from 44.142.6.51.dyn.plus.net ([51.6.142.44] helo=debian)
  by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jI95c-0006eI-RD; Sat, 28 Mar 2020 10:53:20 +0000
-To: Jan Beulich <jbeulich@suse.com>
-References: <20200322161418.31606-1-julien@xen.org>
- <20200322161418.31606-10-julien@xen.org>
- <bae1a883-45ad-344d-ecbf-4eddc7627182@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <d3c391bb-f66b-a4fd-0848-46238db9cf59@xen.org>
-Date: Sat, 28 Mar 2020 10:53:18 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1jI9Ao-0006uB-2Z; Sat, 28 Mar 2020 10:58:42 +0000
+Date: Sat, 28 Mar 2020 10:58:39 +0000
+From: Wei Liu <wl@xen.org>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Message-ID: <20200328105839.rf3igs2h7o7ujj7s@debian>
+References: <20200328053834.GA12753@simran-Inspiron-5558>
+ <20200328101840.GN28601@Air-de-Roger>
 MIME-Version: 1.0
-In-Reply-To: <bae1a883-45ad-344d-ecbf-4eddc7627182@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
-Subject: Re: [Xen-devel] [PATCH 09/17] xen/x86: Reduce the number of use of
- l*e_{from, get}_pfn()
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200328101840.GN28601@Air-de-Roger>
+User-Agent: NeoMutt/20180716
+Subject: Re: [Xen-devel] [PATCH] xen/x86: Remove unnecessary cast on void
+ pointer
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -76,43 +75,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Kevin Tian <kevin.tian@intel.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org,
+ Simran Singhal <singhalsimran0@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Jan,
-
-On 27/03/2020 10:52, Jan Beulich wrote:
-> On 22.03.2020 17:14, julien@xen.org wrote:
->> --- a/xen/arch/x86/mm.c
->> +++ b/xen/arch/x86/mm.c
->> @@ -1138,7 +1138,7 @@ static int
->>   get_page_from_l2e(
->>       l2_pgentry_t l2e, mfn_t l2mfn, struct domain *d, unsigned int flags)
->>   {
->> -    unsigned long mfn = l2e_get_pfn(l2e);
->> +    mfn_t mfn = l2e_get_mfn(l2e);
->>       int rc;
->>   
->>       if ( unlikely((l2e_get_flags(l2e) & L2_DISALLOW_MASK)) )
->> @@ -1150,7 +1150,7 @@ get_page_from_l2e(
->>   
->>       ASSERT(!(flags & PTF_preemptible));
->>   
->> -    rc = get_page_and_type_from_mfn(_mfn(mfn), PGT_l1_page_table, d, flags);
->> +    rc = get_page_and_type_from_mfn(mfn, PGT_l1_page_table, d, flags);
+On Sat, Mar 28, 2020 at 11:18:40AM +0100, Roger Pau Monné wrote:
+> Thanks!
 > 
-> To bring this better in line with the L3 and L4 counterparts,
-> could you please drop the local variable instead? Then
+> On Sat, Mar 28, 2020 at 11:08:35AM +0530, Simran Singhal wrote:
+> > diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+> > index f049920196..a53d3ca2a4 100644
+> > --- a/xen/arch/x86/hvm/vmx/vvmx.c
+> > +++ b/xen/arch/x86/hvm/vmx/vvmx.c
+> > @@ -256,7 +256,7 @@ static int vvmcs_offset(u32 width, u32 type, u32 index)
+> >  u64 get_vvmcs_virtual(void *vvmcs, u32 vmcs_encoding)
+> >  {
+> >      union vmcs_encoding enc;
+> > -    u64 *content = (u64 *) vvmcs;
+> > +    u64 *content = vvmcs;
+> >      int offset;
+> >      u64 res;
+> >  
+> > @@ -310,7 +310,7 @@ enum vmx_insn_errno get_vvmcs_real_safe(const struct vcpu *v, u32 encoding,
+> >  void set_vvmcs_virtual(void *vvmcs, u32 vmcs_encoding, u64 val)
+> >  {
+> >      union vmcs_encoding enc;
+> > -    u64 *content = (u64 *) vvmcs;
+> > +    u64 *content = vvmcs;
+> 
+> While there, would you mind changing u64 to uint64_t? (here and
+> above)
+> 
 
-I will do it.
+To add some context to this comment: new code has been using uintX
+variants. We want to migrate existing code gradually. Since you're
+touching these lines anyway, it is a good chance to do the migration.
 
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+When you do this in your next version, please add a line in the commit
+message saying something along the line that "Take the chance to change
+some u64 to uint64_t".
 
-Cheers,
-
--- 
-Julien Grall
+Wei.
 
