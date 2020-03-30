@@ -2,62 +2,66 @@ Return-Path: <SRS0=Uyyz=5P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-14.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 868DFC18E5B
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82ABEC2D0ED
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4806F20784
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5D7182072E
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:59 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="mZNZwvUJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4806F20784
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="eAP96CDy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5D7182072E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIzz6-0005wi-M9; Mon, 30 Mar 2020 19:22:08 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jIzzY-00067D-54; Mon, 30 Mar 2020 19:22:36 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=TZrn=5P=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jIzz5-0005wd-MT
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 19:22:07 +0000
-X-Inumbo-ID: bea8bcda-72bb-11ea-b58d-bc764e2007e4
+ id 1jIzzX-00066b-6R
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 19:22:35 +0000
+X-Inumbo-ID: c4a4302e-72bb-11ea-b9f4-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bea8bcda-72bb-11ea-b58d-bc764e2007e4;
- Mon, 30 Mar 2020 19:22:07 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c4a4302e-72bb-11ea-b9f4-12813bfff9fa;
+ Mon, 30 Mar 2020 19:22:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/m5rkw09wMZM91lGWjJGpITVIPpD1zajgSv5FMfTHw0=; b=mZNZwvUJNcBL7kPQwGhBqm0MEQ
- QcNgESO55RktRMSkC4r6DFkxCZJP7HchDJ4xUSpRRjyRgiI9/50A6vu8VyblAB8Qt8dC9lIHttorL
- brugraKjoG1SeuYHuEm8PoRC0r8x4oMAFSj3Hxuzgj627UOvSdqolw1ctaaBwZOAKfpA=;
+ bh=Ar+pkUkHO0IhgHIuaQM/KErTZxeGYex2N8R3XcCHzrQ=; b=eAP96CDy+hf5LJjWKoslWCgnDV
+ OBlDEhaQoQj082EWORgY45D5O5I4WegRSYbXD9+2//3vREl11FF+w0VcF2kCnqgSrtTmqanAsNBpK
+ Y2Ha3KBi3ShH+xu21RbgHeoDNkWzNUtdUwUHxtJM762kIWqu+ujOJvTy/l4RWhbHEV/E=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jIzz4-0003kw-3E; Mon, 30 Mar 2020 19:22:06 +0000
+ id 1jIzzE-0003lx-Io; Mon, 30 Mar 2020 19:22:16 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jIzz3-0007AJ-Jn; Mon, 30 Mar 2020 19:22:06 +0000
+ id 1jIzzE-0007AJ-9t; Mon, 30 Mar 2020 19:22:16 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Date: Mon, 30 Mar 2020 20:21:49 +0100
-Message-Id: <20200330192157.1335-1-julien@xen.org>
+Date: Mon, 30 Mar 2020 20:21:57 +0100
+Message-Id: <20200330192157.1335-9-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
-Subject: [Xen-devel] [PATCH 0/8] Fix build with using OCaml 4.06.1 and
- -safe-string
+In-Reply-To: <20200330192157.1335-1-julien@xen.org>
+References: <20200330192157.1335-1-julien@xen.org>
+Subject: [Xen-devel] [PATCH 8/8] tools/ocaml: Fix stubs build when OCaml has
+ been compiled with -safe-string
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -68,57 +72,83 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, dfaggioli@suse.com,
- Christian Lindig <christian.lindig@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, David Scott <dave@recoil.org>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>, Julien Grall <jgrall@amazon.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, dfaggioli@suse.com,
+ Christian Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Hi all,
+The OCaml code has been fixed to handle properly -safe-string in Xen
+4.11, however the stubs part were missed.
 
-This series is meant to solve the build issue reported by Dario when
-using recent version of OCaml and -safe-string.
+On OCaml newer than 4.06.1, String_Val() will return a const char *
+when using -safe-string leading to build failure when this is used
+in place where char * is expected.
 
-I took the opportunity to harden a bit more the code by using const more
-often.
+The main use in Xen code base is when a new string is allocated. The
+suggested approach by the OCaml community [1] is to use the helper
+caml_alloc_initialized_string() but it was introduced by OCaml 4.06.1.
 
-This series was only build tested.
+The next best approach is to cast String_val() to (char *) as the helper
+would have done. So use it when we need to update the new string using
+memcpy().
 
-Cheers,
+Take the opportunity to remove the unnecessary cast of the source as
+mempcy() is expecting a void *.
 
-Julien Grall (8):
-  xen/guest_access: Harden copy_to_guest_offset to prevent const dest
-    operand
-  xen/public: sysctl: set_parameter.params and debug.keys should be
-    const
-  tools/libxc: misc: Mark const the parameter 'keys' of
-    xc_send_debug_keys()
-  tools/libxc: misc: Mark const the parameter 'params' of
-    xc_set_parameters()
-  tools/ocaml: libxc: Check error return in stub_xc_vcpu_context_get()
-  tools/ocaml: libxb: Harden stub_header_of_string()
-  tools/ocaml: libxb: Avoid to use String_val() when value is bytes
-  tools/ocaml: Fix stubs build when OCaml has been compiled with
-    -safe-string
+[1] https://github.com/ocaml/ocaml/pull/1274
 
- tools/libxc/include/xenctrl.h       |  4 ++--
- tools/libxc/xc_misc.c               |  8 ++++----
- tools/libxc/xc_private.h            |  8 ++++++++
- tools/ocaml/libs/xb/xenbus_stubs.c  |  6 +++---
- tools/ocaml/libs/xb/xs_ring_stubs.c | 12 ++++++++++--
- tools/ocaml/libs/xc/xenctrl_stubs.c |  6 ++++--
- xen/include/asm-arm/guest_access.h  |  2 +-
- xen/include/asm-x86/guest_access.h  |  2 +-
- xen/include/public/sysctl.h         |  4 ++--
- 9 files changed, 35 insertions(+), 17 deletions(-)
+Reported-by: Dario Faggioli <dfaggioli@suse.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
 
+---
+
+    I thought about detecting whether caml_alloc_initialized_string()
+    strings exist and implement it if not. This requires a bit more
+    work, so I would like to get feedback first whether this is worth
+    it.
+---
+ tools/ocaml/libs/xb/xenbus_stubs.c  | 2 +-
+ tools/ocaml/libs/xc/xenctrl_stubs.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tools/ocaml/libs/xb/xenbus_stubs.c b/tools/ocaml/libs/xb/xenbus_stubs.c
+index 001bb03371..3065181a55 100644
+--- a/tools/ocaml/libs/xb/xenbus_stubs.c
++++ b/tools/ocaml/libs/xb/xenbus_stubs.c
+@@ -65,7 +65,7 @@ CAMLprim value stub_string_of_header(value tid, value rid, value ty, value len)
+ 	};
+ 
+ 	ret = caml_alloc_string(sizeof(struct xsd_sockmsg));
+-	memcpy(String_val(ret), &xsd, sizeof(struct xsd_sockmsg));
++	memcpy((char *) String_val(ret), &xsd, sizeof(struct xsd_sockmsg));
+ 
+ 	CAMLreturn(ret);
+ }
+diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
+index 0fdbeac158..94aba38a42 100644
+--- a/tools/ocaml/libs/xc/xenctrl_stubs.c
++++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
+@@ -501,7 +501,7 @@ CAMLprim value stub_xc_vcpu_context_get(value xch, value domid,
+ 		failwith_xc(_H(xch));
+ 
+ 	context = caml_alloc_string(sizeof(ctxt));
+-	memcpy(String_val(context), (char *) &ctxt.c, sizeof(ctxt.c));
++	memcpy((char *) String_val(context), &ctxt.c, sizeof(ctxt.c));
+ 
+ 	CAMLreturn(context);
+ }
+@@ -680,7 +680,7 @@ CAMLprim value stub_xc_readconsolering(value xch)
+ 		conring_size = size;
+ 
+ 	ring = caml_alloc_string(count);
+-	memcpy(String_val(ring), str, count);
++	memcpy((char *) String_val(ring), str, count);
+ 	free(str);
+ 
+ 	CAMLreturn(ring);
 -- 
 2.17.1
 
