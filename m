@@ -7,60 +7,60 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 717CCC2D0F2
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0684AC2D0EB
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4329A2072E
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D57C52072E
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="gbelpuF+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4329A2072E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ry2T9/59"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D57C52072E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIzzG-0005y6-TR; Mon, 30 Mar 2020 19:22:18 +0000
+	id 1jIzzC-0005x8-7X; Mon, 30 Mar 2020 19:22:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=TZrn=5P=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jIzzF-0005xt-Lf
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 19:22:17 +0000
-X-Inumbo-ID: c3fd449e-72bb-11ea-83d8-bc764e2007e4
+ id 1jIzzA-0005wz-MD
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 19:22:12 +0000
+X-Inumbo-ID: c0b69ec0-72bb-11ea-b4f4-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c3fd449e-72bb-11ea-83d8-bc764e2007e4;
- Mon, 30 Mar 2020 19:22:16 +0000 (UTC)
+ id c0b69ec0-72bb-11ea-b4f4-bc764e2007e4;
+ Mon, 30 Mar 2020 19:22:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5RK/M/BD78N+wYg8aAJcgWTuFyhsFJhP/rvS9tnG5ds=; b=gbelpuF+8nz0EGiSJb3ROmX5Bv
- umYGB/CtTDuxmb+xsgzL0NFR5tPOe0tUb42dp6RXODkcn0OzQ6KMi2XYcbQzcmwTRjA/mik4lNUbe
- Moh7iklMlInYb6VDchoCZCSYSFrCr6wKSm0dKGmAer1iVQvH1bUKtEWU+d4yaAwJzdBY=;
+ bh=r3hOtP/jXPcCtes7l0jKraBeKHXjJ8jvdB/4BpY9Tk4=; b=ry2T9/59Z0GKkxLpHpaoeEFpZ0
+ W/D5IRQopyYOy/39rSCrp8OMSUSkzUuStRSJLmY3/wIRPROLW6F8gc8yzkEGzGDlMnUnyZJnhPfmq
+ D8DDGOQdd1ehyckpg0i7KGsNQdc0Q0A8EKcifa2mITwySHMMWAMlVIe17piHIdupy7x4=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jIzzD-0003lr-9V; Mon, 30 Mar 2020 19:22:15 +0000
+ id 1jIzz7-0003l9-Aw; Mon, 30 Mar 2020 19:22:09 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jIzzD-0007AJ-0d; Mon, 30 Mar 2020 19:22:15 +0000
+ id 1jIzz7-0007AJ-1R; Mon, 30 Mar 2020 19:22:09 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Date: Mon, 30 Mar 2020 20:21:56 +0100
-Message-Id: <20200330192157.1335-8-julien@xen.org>
+Date: Mon, 30 Mar 2020 20:21:51 +0100
+Message-Id: <20200330192157.1335-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200330192157.1335-1-julien@xen.org>
 References: <20200330192157.1335-1-julien@xen.org>
-Subject: [Xen-devel] [PATCH 7/8] tools/ocaml: libxb: Avoid to use
- String_val() when value is bytes
+Subject: [Xen-devel] [PATCH 2/8] xen/public: sysctl: set_parameter.params
+ and debug.keys should be const
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,73 +71,51 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>, Julien Grall <jgrall@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>, dfaggioli@suse.com,
- Christian Lindig <christian.lindig@citrix.com>, David Scott <dave@recoil.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, dfaggioli@suse.com,
+ Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-Commit ec7d54dd1a "ocaml/libs/xb: Use bytes in place of strings for
-mutable buffers" switch mutable buffers from string to bytes. However
-the C code were still using String_Val() to access them.
+The fields set_parameter.params and debug.keys should never be modified
+by the hypervisor. So mark them as const.
 
-While the underlying structure is the same between string and bytes, a
-string is meant to be immutable. OCaml 4.06.1 and later will enforce it.
-Therefore, it will not be possible to build the OCaml libs when using
--safe-string. This is because String_val() will return a const value.
-
-To avoid plain cast in the code, the code is now switched to use
-Bytes_val(). As the macro is not defined in older OCaml version, we need
-to provide a stub.
-
-Take the opportunity to switch to const the buffer in
-ml_interface_write() as it should not be modified.
-
-Reported-by: Dario Faggioli <dfaggioli@suse.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- tools/ocaml/libs/xb/xs_ring_stubs.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/tools/ocaml/libs/xb/xs_ring_stubs.c b/tools/ocaml/libs/xb/xs_ring_stubs.c
-index 473787064a..7537a23949 100644
---- a/tools/ocaml/libs/xb/xs_ring_stubs.c
-+++ b/tools/ocaml/libs/xb/xs_ring_stubs.c
-@@ -36,6 +36,14 @@
+---
+
+I am not entirely sure whether we should bump the systcl version for
+this change. Any thoughts?
+---
+ xen/include/public/sysctl.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/xen/include/public/sysctl.h b/xen/include/public/sysctl.h
+index 3d72fab49f..3a08c512e8 100644
+--- a/xen/include/public/sysctl.h
++++ b/xen/include/public/sysctl.h
+@@ -170,7 +170,7 @@ struct xen_sysctl_getdomaininfolist {
+ /* XEN_SYSCTL_debug_keys */
+ struct xen_sysctl_debug_keys {
+     /* IN variables. */
+-    XEN_GUEST_HANDLE_64(char) keys;
++    XEN_GUEST_HANDLE_64(const_char) keys;
+     uint32_t nr_keys;
+ };
  
- #define GET_C_STRUCT(a) ((struct mmap_interface *) a)
+@@ -1037,7 +1037,7 @@ struct xen_sysctl_livepatch_op {
+  */
  
-+/*
-+ * Bytes_val has been introduced by Ocaml 4.06.1. So define our own version
-+ * if needed.
-+ */
-+#ifndef Bytes_val
-+#define Bytes_val(x) ((unsigned char *) Bp_val(x))
-+#endif
-+
- CAMLprim value ml_interface_read(value ml_interface,
-                                  value ml_buffer,
-                                  value ml_len)
-@@ -44,7 +52,7 @@ CAMLprim value ml_interface_read(value ml_interface,
- 	CAMLlocal1(ml_result);
- 
- 	struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
--	char *buffer = String_val(ml_buffer);
-+	unsigned char *buffer = Bytes_val(ml_buffer);
- 	int len = Int_val(ml_len);
- 	int result;
- 
-@@ -103,7 +111,7 @@ CAMLprim value ml_interface_write(value ml_interface,
- 	CAMLlocal1(ml_result);
- 
- 	struct mmap_interface *interface = GET_C_STRUCT(ml_interface);
--	char *buffer = String_val(ml_buffer);
-+	const unsigned char *buffer = Bytes_val(ml_buffer);
- 	int len = Int_val(ml_len);
- 	int result;
- 
+ struct xen_sysctl_set_parameter {
+-    XEN_GUEST_HANDLE_64(char) params;       /* IN: pointer to parameters. */
++    XEN_GUEST_HANDLE_64(const_char) params; /* IN: pointer to parameters. */
+     uint16_t size;                          /* IN: size of parameters. */
+     uint16_t pad[3];                        /* IN: MUST be zero. */
+ };
 -- 
 2.17.1
 
