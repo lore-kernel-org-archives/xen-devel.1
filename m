@@ -2,66 +2,70 @@ Return-Path: <SRS0=Uyyz=5P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 248EBC43331
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:23:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7EDCC43331
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 20:33:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F16D62072E
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:23:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A53B020757
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 20:33:36 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="CRq9bVLP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F16D62072E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="CtOFfS0G"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A53B020757
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIzz9-0005wt-Up; Mon, 30 Mar 2020 19:22:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJ15Z-0003qo-JJ; Mon, 30 Mar 2020 20:32:53 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=TZrn=5P=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jIzz8-0005wo-5k
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 19:22:10 +0000
-X-Inumbo-ID: bf42d45a-72bb-11ea-b9f4-12813bfff9fa
+ id 1jJ15Y-0003qj-B0
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 20:32:52 +0000
+X-Inumbo-ID: a0ad9e4e-72c5-11ea-83d8-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id bf42d45a-72bb-11ea-b9f4-12813bfff9fa;
- Mon, 30 Mar 2020 19:22:08 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a0ad9e4e-72c5-11ea-83d8-bc764e2007e4;
+ Mon, 30 Mar 2020 20:32:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=m6d++yISFYoabczO21ysTR9r+GhnJXbvqXk0ITsPtjo=; b=CRq9bVLPhYr/5ywgpu35lYfrCq
- XihjmGslycLYzQhv117hy3z2K8TYeOD1/D5zjZe1fDtH3qJ0YyTqtTPL0U92tDmU94hdS3kSzhuWx
- gYQcvWvk5K/6bI1b4fNymdAoOgfxqAoM5FwuuvdQFRneHwNYTG9hWDpGy0DoS2sN+5Kk=;
+ bh=si56M0grJb0MssyVvs1c7OVlZddA2qH5T0dDU1ySE18=; b=CtOFfS0GO8Z1yYW4s29uMGSPlb
+ 6LRxaU/vPnMHZrKEizLMzEPP4sbZCheY977FPwqGL12HG8fu8fbA1oo+KixvTsoETDOMfuy29AH69
+ 71QQ76mo/Cm4o+WI/DA+Y9SyVTVq8pcEnkUpL+0MzY0yAKCq8xdYsdCr8R6w10YeCLuU=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jIzz5-0003l1-M9; Mon, 30 Mar 2020 19:22:07 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
+ id 1jJ15X-0005FC-Ip; Mon, 30 Mar 2020 20:32:51 +0000
+Received: from cpc91226-cmbg18-2-0-cust12.5-4.cable.virginm.net ([82.0.29.13]
+ helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jIzz5-0007AJ-DC; Mon, 30 Mar 2020 19:22:07 +0000
+ id 1jJ15X-0001zF-Cu; Mon, 30 Mar 2020 20:32:51 +0000
+To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
+References: <ac7e2df75c70affd992ed68b7d3e189fa59fa709.camel@suse.com>
+ <671346c5-cb0c-4bc9-8124-07beeb5cbf73@xen.org>
+ <f828909bab87d11f81ab216290db045b94ec0228.camel@suse.com>
 From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Date: Mon, 30 Mar 2020 20:21:50 +0100
-Message-Id: <20200330192157.1335-2-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200330192157.1335-1-julien@xen.org>
-References: <20200330192157.1335-1-julien@xen.org>
-Subject: [Xen-devel] [PATCH 1/8] xen/guest_access: Harden
- copy_to_guest_offset to prevent const dest operand
+Message-ID: <ea53cd6b-ce69-0ad8-e62e-60372c5eb75a@xen.org>
+Date: Mon, 30 Mar 2020 21:32:49 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.6.0
+MIME-Version: 1.0
+In-Reply-To: <f828909bab87d11f81ab216290db045b94ec0228.camel@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Xen-devel] Tools build failure with gcc-9.2.1
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -72,57 +76,45 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, dfaggioli@suse.com,
- Jan Beulich <jbeulich@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
+Hi Dario,
 
-At the moment, copy_to_guest_offset() will allow the hypervisor to copy
-data to guest handle marked const.
+On 30/03/2020 11:58, Dario Faggioli wrote:
+> On Sun, 2020-03-29 at 18:19 +0100, Julien Grall wrote:
+>> On 25/03/2020 09:40, Dario Faggioli wrote:
+>>> /usr/include/string.h:43:14: note: expected 'void * restrict' but
+>>> argument is of type 'const char *'
+>>>      43 | extern void *memcpy (void *__restrict __dest, const void
+>>> *__restrict __src,
+>>>         |              ^~~~~~
+>>>
+>>> When building with:
+>>>
+>>> gcc version 9.2.1 20200306 [revision
+>>> c5edde44f5b17b4891f17a63517f355bbf89e7d3] (SUSE Linux)
+>>>
+>>> Already known and being dealt with?
+>>
+>> I suspect you have a new version of Ocaml built with -safe-string as
+>> per
+>> [1], String_Val() will return (const char *) rather than (char *).
+>>
+> Yep, I checked in the ocaml headers installed on the system, and that's
+> exactly the case.
+> 
+>> I am looking at writing a patch for it and send it to xen-devel.
+>>
+> Cool, thanks! I'll be happy to test it. :-)
 
-Thankfully, no users of the helper will do that. Rather than hoping this
-can be caught during review, harden copy_to_guest_offset() so the build
-will fail if such users are introduced.
+I have just posted the patches [1]. This was compiled with OCaml 4.10.x 
+and -safe-string. Let me know if it fixes everything on your side.
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- xen/include/asm-arm/guest_access.h | 2 +-
- xen/include/asm-x86/guest_access.h | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+Cheers,
 
-diff --git a/xen/include/asm-arm/guest_access.h b/xen/include/asm-arm/guest_access.h
-index 8997a1cbfe..ff2eec237d 100644
---- a/xen/include/asm-arm/guest_access.h
-+++ b/xen/include/asm-arm/guest_access.h
-@@ -126,7 +126,7 @@ int access_guest_memory_by_ipa(struct domain *d, paddr_t ipa, void *buf,
- 
- #define __copy_to_guest_offset(hnd, off, ptr, nr) ({    \
-     const typeof(*(ptr)) *_s = (ptr);                   \
--    char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
-+    typeof(*((hnd).p)) *_d = (hnd).p;                   \
-     ((void)((hnd).p == (ptr)));                         \
-     __raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));\
- })
-diff --git a/xen/include/asm-x86/guest_access.h b/xen/include/asm-x86/guest_access.h
-index ca700c959a..2693c6540b 100644
---- a/xen/include/asm-x86/guest_access.h
-+++ b/xen/include/asm-x86/guest_access.h
-@@ -86,7 +86,7 @@
-  */
- #define copy_to_guest_offset(hnd, off, ptr, nr) ({      \
-     const typeof(*(ptr)) *_s = (ptr);                   \
--    char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
-+    typeof(*((hnd).p)) *_d = (hnd).p;                   \
-     ((void)((hnd).p == (ptr)));                         \
-     raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));  \
- })
+[1] <20200330192157.1335-1-julien@xen.org>
+
 -- 
-2.17.1
-
+Julien Grall
 
