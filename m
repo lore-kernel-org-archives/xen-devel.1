@@ -2,74 +2,52 @@ Return-Path: <SRS0=Uyyz=5P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0794C43331
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 11:29:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7506EC43331
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 11:45:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B026E20716
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 11:29:09 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QLd8DcTC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B026E20716
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4CDFB2072E
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 11:45:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4CDFB2072E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIsas-0005xL-1i; Mon, 30 Mar 2020 11:28:38 +0000
+	id 1jIsqe-0007ae-QT; Mon, 30 Mar 2020 11:44:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=3hNz=5P=gmail.com=singhalsimran0@srs-us1.protection.inumbo.net>)
- id 1jIsaq-0005xG-CQ
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 11:28:36 +0000
-X-Inumbo-ID: 9796437a-7279-11ea-9e09-bc764e2007e4
-Received: from mail-lj1-x244.google.com (unknown [2a00:1450:4864:20::244])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=QcrT=5P=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jIsqe-0007aZ-0H
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 11:44:56 +0000
+X-Inumbo-ID: d33bf7b0-727b-11ea-b4f4-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9796437a-7279-11ea-9e09-bc764e2007e4;
- Mon, 30 Mar 2020 11:28:35 +0000 (UTC)
-Received: by mail-lj1-x244.google.com with SMTP id r7so9968635ljg.13
- for <xen-devel@lists.xenproject.org>; Mon, 30 Mar 2020 04:28:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=1ZwBKSU1juBKx4YPmtcbdFn7oKsd3ZEl3Xygh8+GRbE=;
- b=QLd8DcTCFCdwpedyXHlabUmuzDpuCMNwHSlP/+f8F7gZ0qXufcfViQfOOZKPGzMe5U
- WRfd9LUYB9MnwQfzJc5SMhXtDCNjX2npiz0iFBrWMKEI7pJ9eQxkpgiyUPMsJOAnGD8i
- jzN+/jvxlaiiC413LZk+u01KldBAnCKIJ6NoVYnj1S15dNGJNpzx9yY5+ygb6qZM2FkR
- 7Azi2h/IFDIo9FzXMk1ClNKkRBZJU3+DN9w1e4hL5GNkymrnLAXky6cJP5+ul0uR/3HR
- B7Q4XpD3WIPkis35G/AEC7YIjB9s167F2medov2NJW+13cbdrcsHNJl8vDGsSyndUL0k
- bVxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=1ZwBKSU1juBKx4YPmtcbdFn7oKsd3ZEl3Xygh8+GRbE=;
- b=oxk2jolpECmx8GuH9YO6Xm4nxFwSNLEAm1CrDTU5qc0M5fr3AoiMX+F/VKHkHUlf65
- 7AU2Ml+HUYHnx+C8JAMmTyEv6Pr9mrrVoEg230wTcO08CdcnvHG7qsvh0VhcVVq23R2Z
- dWi2VQ2bDZ64zHCcJ1NtN0OL7LUW/UHtgbxAuhUNX5sbEsQfUKji5okhF3GWASx0arid
- uN2chiJ0a4M7wfLC4L5UvojyprZG5Q2AQ7GVRnsjXiCA74SX/+zVY75VABy7t6AnN9EI
- YctuUA0EXrFkxE7V328Q/bkxQnyviW3rAk5+MOT0JnFzo0Hb/0rxu2r7lhXuXhKEykoY
- zU4w==
-X-Gm-Message-State: AGi0PuaeXzdWbLqtM4yR3OfneNiGrdvflz4xRs+Fpmbdy1fYS2Oisg+W
- ZXmezaAzzDQLpyeVf0+deXKt4r+GaHmpGKJGTyppEUE8
-X-Google-Smtp-Source: APiQypLoCVaAW4DjsQF2BwOiXi0yBdS/masadYjE8xDvJq6ajd8u2nihe7v0lWD8n7LV+NZhfSOnVRs1BAiyP2vyMHo=
-X-Received: by 2002:a2e:b52f:: with SMTP id z15mr6854989ljm.38.1585567714255; 
- Mon, 30 Mar 2020 04:28:34 -0700 (PDT)
+ id d33bf7b0-727b-11ea-b4f4-bc764e2007e4;
+ Mon, 30 Mar 2020 11:44:34 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 69C04ABEA;
+ Mon, 30 Mar 2020 11:44:33 +0000 (UTC)
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200328152954.6224-1-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <3ccbd2dc-d721-c23f-d67a-6a1f8520fb2b@suse.com>
+Date: Mon, 30 Mar 2020 13:44:31 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-References: <20200329061608.GA29651@simran-Inspiron-5558>
- <20200329134657.zdbanqkhzmtmurue@debian>
-In-Reply-To: <20200329134657.zdbanqkhzmtmurue@debian>
-From: Simran Singhal <singhalsimran0@gmail.com>
-Date: Mon, 30 Mar 2020 16:58:19 +0530
-Message-ID: <CALrZqyPD_MZu0N9XmCfhpmmH9gckJwAxK_6Bux2moMuDeidLeg@mail.gmail.com>
-To: Wei Liu <wl@xen.org>
-Content-Type: multipart/alternative; boundary="00000000000060298405a210c07a"
-Subject: Re: [Xen-devel] [PATCH] xen/x86: Compress lines for immediate return
+In-Reply-To: <20200328152954.6224-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+Subject: Re: [Xen-devel] [PATCH] x86/ucode/amd: Fix more potential buffer
+ overruns with microcode parsing
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -80,97 +58,52 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---00000000000060298405a210c07a
-Content-Type: text/plain; charset="UTF-8"
+On 28.03.2020 16:29, Andrew Cooper wrote:
+> --- a/xen/arch/x86/cpu/microcode/amd.c
+> +++ b/xen/arch/x86/cpu/microcode/amd.c
+> @@ -303,11 +303,20 @@ static int get_ucode_from_buffer_amd(
+>  static int install_equiv_cpu_table(
+>      struct microcode_amd *mc_amd,
+>      const void *data,
+> +    size_t size_left,
+>      size_t *offset)
+>  {
+> -    const struct mpbhdr *mpbuf = data + *offset + 4;
+> +    const struct mpbhdr *mpbuf;
+>      const struct equiv_cpu_entry *eq;
+>  
+> +    if ( size_left < (sizeof(*mpbuf) + 4) ||
+> +         (mpbuf = data + *offset + 4,
+> +          size_left - sizeof(*mpbuf) - 4 < mpbuf->len) )
 
-On Sun, Mar 29, 2020 at 7:17 PM Wei Liu <wl@xen.org> wrote:
+This proliferation of literal 4 made me look into where this 4
+is coming from and why it's here. Afaict it's covering for
+UCODE_MAGIC. There's no good sizeof() that could be used instead,
+so how about getting rid of this addend altogether by setting
+offset to sizeof(uint32_t) near
 
-> On Sun, Mar 29, 2020 at 11:46:08AM +0530, Simran Singhal wrote:
-> > diff --git a/xen/arch/x86/oprofile/op_model_athlon.c
-> b/xen/arch/x86/oprofile/op_model_athlon.c
-> > index 5c48f868ae..2bc0d04a1f 100644
-> > --- a/xen/arch/x86/oprofile/op_model_athlon.c
-> > +++ b/xen/arch/x86/oprofile/op_model_athlon.c
-> > @@ -343,9 +343,8 @@ static int athlon_check_ctrs(unsigned int const cpu,
-> >               }
-> >       }
-> >
-> > -     ovf = handle_ibs(mode, regs);
-> >       /* See op_model_ppro.c */
-> > -     return ovf;
-> > +     return handle_ibs(mode, regs);
->
-> Hmm... ovf can potentially be set in the for loop before this hunk, but
-> then immediately get overwritten by the function call. I bet the ovf = 1
-> line is the reason why you didn't remove ovf out right.
->
-> I think you can perhaps just remove ovf here. It would make any
-> difference logically.
->
-> Other changes look correct to me.
->
+    if ( *(const uint32_t *)buf != UCODE_MAGIC )
 
-Thanks for your feedback.
-Ah! I agree on "ovf = 1" is the reason I decided to leave ovf as it is.
-I'll remove ovf now and send the new version of this patch.
+in cpu_request_microcode() and adding sizeof(header[0]) into
+*offset near
 
-Thanks
-Simran
+        if ( header[0] == UCODE_MAGIC &&
+             header[1] == UCODE_EQUIV_CPU_TABLE_TYPE )
 
+in container_fast_forward()? (The code following the big, 7-
+bullet-point comment in cpu_request_microcode() may also
+need adjustment, but I wonder if we couldn't better get rid
+of it altogether.)
 
->
-> Wei.
->
+However, since the change as is looks correct to me and doesn't
+make the situation much worse, I'm not objecting to you also
+putting it in as is, in which case
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
---00000000000060298405a210c07a
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Sun, Mar 29, 2020 at 7:17 PM Wei L=
-iu &lt;<a href=3D"mailto:wl@xen.org">wl@xen.org</a>&gt; wrote:<br></div><bl=
-ockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-lef=
-t:1px solid rgb(204,204,204);padding-left:1ex">On Sun, Mar 29, 2020 at 11:4=
-6:08AM +0530, Simran Singhal wrote:<br>
-&gt; diff --git a/xen/arch/x86/oprofile/op_model_athlon.c b/xen/arch/x86/op=
-rofile/op_model_athlon.c<br>
-&gt; index 5c48f868ae..2bc0d04a1f 100644<br>
-&gt; --- a/xen/arch/x86/oprofile/op_model_athlon.c<br>
-&gt; +++ b/xen/arch/x86/oprofile/op_model_athlon.c<br>
-&gt; @@ -343,9 +343,8 @@ static int athlon_check_ctrs(unsigned int const cp=
-u,<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0}<br>
-&gt;=C2=A0 <br>
-&gt; -=C2=A0 =C2=A0 =C2=A0ovf =3D handle_ibs(mode, regs);<br>
-&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/* See op_model_ppro.c */<br>
-&gt; -=C2=A0 =C2=A0 =C2=A0return ovf;<br>
-&gt; +=C2=A0 =C2=A0 =C2=A0return handle_ibs(mode, regs);<br>
-<br>
-Hmm... ovf can potentially be set in the for loop before this hunk, but<br>
-then immediately get overwritten by the function call. I bet the ovf =3D 1<=
-br>
-line is the reason why you didn&#39;t remove ovf out right.<br>
-<br>
-I think you can perhaps just remove ovf here. It would make any<br>
-difference logically.<br>
-<br>
-Other changes look correct to me.<br></blockquote><div><br></div><div>Thank=
-s for your feedback.<br></div><div>Ah! I agree on &quot;ovf =3D 1&quot; is =
-the reason I decided to leave ovf as it is.</div><div>I&#39;ll remove ovf n=
-ow and send the new version of this patch.</div><div><br></div><div>Thanks<=
-/div><div>Simran<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote=
-" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);=
-padding-left:1ex">
-<br>
-Wei.<br>
-</blockquote></div></div>
-
---00000000000060298405a210c07a--
+Jan
 
