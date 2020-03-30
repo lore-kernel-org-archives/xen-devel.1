@@ -2,59 +2,62 @@ Return-Path: <SRS0=Uyyz=5P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB79EC43331
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 15:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ACA6BC43331
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 16:35:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AAE9B20780
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 15:03:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AAE9B20780
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7AFDC20578
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 16:35:44 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="U2ZNWcH9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AFDC20578
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIvvo-0000lq-95; Mon, 30 Mar 2020 15:02:28 +0000
+	id 1jIxNe-0000d5-2t; Mon, 30 Mar 2020 16:35:18 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=1ChX=5P=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
- id 1jIvvn-0000ll-PK
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 15:02:27 +0000
-X-Inumbo-ID: 75b31f82-7297-11ea-b9e3-12813bfff9fa
-Received: from mga01.intel.com (unknown [192.55.52.88])
+ <SRS0=8l10=5P=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jIxNc-0000d0-Ft
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 16:35:16 +0000
+X-Inumbo-ID: 6f6ddb4e-72a4-11ea-b9e8-12813bfff9fa
+Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 75b31f82-7297-11ea-b9e3-12813bfff9fa;
- Mon, 30 Mar 2020 15:02:24 +0000 (UTC)
-IronPort-SDR: b7pfRrmIMKGruDNa8dAxUpd72bi8og5IFBpAYBClv54TDeaTa9HF0ViClmt8HF0l5ypy/YNNcE
- AYHirQEUyUgw==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Mar 2020 08:02:23 -0700
-IronPort-SDR: YPFixhP41SM69xoWr66an6Ix740PMulByl56DYqhHTh3TUdZzJZ3+5Rup12gE40RsnEwe3hY2J
- PGaeMUEd+Yew==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,324,1580803200"; d="scan'208";a="359199578"
-Received: from yliu23-mobl.amr.corp.intel.com (HELO localhost.localdomain)
- ([10.212.168.11])
- by fmsmga001.fm.intel.com with ESMTP; 30 Mar 2020 08:02:20 -0700
-From: Tamas K Lengyel <tamas.lengyel@intel.com>
-To: xen-devel@lists.xenproject.org
-Date: Mon, 30 Mar 2020 08:02:08 -0700
-Message-Id: <f40757694decdfdbd5a264be4c277ba824261874.1585579955.git.tamas.lengyel@intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1585579955.git.tamas.lengyel@intel.com>
-References: <cover.1585579955.git.tamas.lengyel@intel.com>
+ id 6f6ddb4e-72a4-11ea-b9e8-12813bfff9fa;
+ Mon, 30 Mar 2020 16:35:16 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 45A6020578;
+ Mon, 30 Mar 2020 16:35:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1585586115;
+ bh=LXXXvSmZ3tlihJJx2PDGWFu8dGE5oCrKU3iW2CJJLzQ=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=U2ZNWcH9c/51YzqlEzGc5z+lQInPxJ/TnPV3pcpiRTX3JvUhvbH6hlypE0iqPuM+O
+ QKX+5O5OcaZCs/S8om8lJBLRmGyfPnHeJWLVqL9xqZsxLCdrOr1FFW7q8E4+Zyy5gx
+ rhrBxTQYDkwFIWOEN5pSLefNHGv1QkVmSkl3h95M=
+Date: Mon, 30 Mar 2020 09:35:14 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: Julien Grall <julien@xen.org>
+In-Reply-To: <38f56c3e-8f7d-7aee-8216-73398f4543bb@xen.org>
+Message-ID: <alpine.DEB.2.21.2003300932430.4572@sstabellini-ThinkPad-T480s>
+References: <20200327023451.20271-1-sstabellini@kernel.org>
+ <38f56c3e-8f7d-7aee-8216-73398f4543bb@xen.org>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: [Xen-devel] [PATCH v13 1/3] xen/mem_sharing: VM forking
+Content-Type: text/plain; charset=US-ASCII
+Subject: Re: [Xen-devel] [PATCH v2] xen/arm: implement GICD_I[S/C]ACTIVER
+ reads
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -65,633 +68,26 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Peng Fan <peng.fan@nxp.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>,
+ Wei Xu <xuwei5@hisilicon.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-VM forking is the process of creating a domain with an empty memory space and a
-parent domain specified from which to populate the memory when necessary. For
-the new domain to be functional the VM state is copied over as part of the fork
-operation (HVM params, hap allocation, etc).
+On Sat, 28 Mar 2020, Julien Grall wrote:
+> qHi Stefano,
+> 
+> On 27/03/2020 02:34, Stefano Stabellini wrote:
+> > This is a simple implementation of GICD_ICACTIVER / GICD_ISACTIVER
+> > reads. It doesn't take into account the latest state of interrupts on
+> > other vCPUs. Only the current vCPU is up-to-date. A full solution is
+> > not possible because it would require synchronization among all vCPUs,
+> > which would be very expensive in terms or latency.
+> 
+> Your sentence suggests you have number showing that correctly emulating the
+> registers would be too slow. Mind sharing them?
 
-Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-v13: Address issues pointed out by Roger & Jan
-     Introduce & use PAGE_OFFSET to calculate vcpu_info offset
----
- xen/arch/x86/domain.c             |  13 ++
- xen/arch/x86/hvm/hvm.c            |   4 +-
- xen/arch/x86/mm/hap/hap.c         |   3 +-
- xen/arch/x86/mm/mem_sharing.c     | 351 ++++++++++++++++++++++++++++++
- xen/arch/x86/mm/p2m.c             |   9 +-
- xen/include/asm-arm/page.h        |   1 +
- xen/include/asm-x86/hap.h         |   1 +
- xen/include/asm-x86/hvm/hvm.h     |   2 +
- xen/include/asm-x86/mem_sharing.h |  18 ++
- xen/include/asm-x86/page.h        |   1 +
- xen/include/public/memory.h       |   5 +
- xen/include/xen/sched.h           |   1 +
- 12 files changed, 404 insertions(+), 5 deletions(-)
-
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 683bc619aa..a008d7df1c 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2211,6 +2211,19 @@ int domain_relinquish_resources(struct domain *d)
-             ret = relinquish_shared_pages(d);
-             if ( ret )
-                 return ret;
-+
-+            /*
-+             * If the domain is forked, decrement the parent's pause count
-+             * and release the domain.
-+             */
-+            if ( mem_sharing_is_fork(d) )
-+            {
-+                struct domain *parent = d->parent;
-+
-+                d->parent = NULL;
-+                domain_unpause(parent);
-+                put_domain(parent);
-+            }
-         }
- #endif
- 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index a3d115b650..304b3d1562 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1917,7 +1917,7 @@ int hvm_hap_nested_page_fault(paddr_t gpa, unsigned long gla,
-     }
- #endif
- 
--    /* Spurious fault? PoD and log-dirty also take this path. */
-+    /* Spurious fault? PoD, log-dirty and VM forking also take this path. */
-     if ( p2m_is_ram(p2mt) )
-     {
-         rc = 1;
-@@ -4377,7 +4377,7 @@ static int hvm_allow_get_param(struct domain *d,
-     return rc;
- }
- 
--static int hvm_get_param(struct domain *d, uint32_t index, uint64_t *value)
-+int hvm_get_param(struct domain *d, uint32_t index, uint64_t *value)
- {
-     int rc;
- 
-diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
-index a6d5e39b02..814d0c3253 100644
---- a/xen/arch/x86/mm/hap/hap.c
-+++ b/xen/arch/x86/mm/hap/hap.c
-@@ -321,8 +321,7 @@ static void hap_free_p2m_page(struct domain *d, struct page_info *pg)
- }
- 
- /* Return the size of the pool, rounded up to the nearest MB */
--static unsigned int
--hap_get_allocation(struct domain *d)
-+unsigned int hap_get_allocation(struct domain *d)
- {
-     unsigned int pg = d->arch.paging.hap.total_pages
-         + d->arch.paging.hap.p2m_pages;
-diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
-index f49f27a3ef..faa79011c3 100644
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -22,6 +22,7 @@
- 
- #include <xen/types.h>
- #include <xen/domain_page.h>
-+#include <xen/event.h>
- #include <xen/spinlock.h>
- #include <xen/rwlock.h>
- #include <xen/mm.h>
-@@ -36,6 +37,8 @@
- #include <asm/altp2m.h>
- #include <asm/atomic.h>
- #include <asm/event.h>
-+#include <asm/hap.h>
-+#include <asm/hvm/hvm.h>
- #include <xsm/xsm.h>
- 
- #include "mm-locks.h"
-@@ -1443,6 +1446,318 @@ static inline int mem_sharing_control(struct domain *d, bool enable)
-     return 0;
- }
- 
-+/*
-+ * Forking a page only gets called when the VM faults due to no entry being
-+ * in the EPT for the access. Depending on the type of access we either
-+ * populate the physmap with a shared entry for read-only access or
-+ * fork the page if its a write access.
-+ *
-+ * The client p2m is already locked so we only need to lock
-+ * the parent's here.
-+ */
-+int mem_sharing_fork_page(struct domain *d, gfn_t gfn, bool unsharing)
-+{
-+    int rc = -ENOENT;
-+    shr_handle_t handle;
-+    struct domain *parent = d->parent;
-+    struct p2m_domain *p2m;
-+    unsigned long gfn_l = gfn_x(gfn);
-+    mfn_t mfn, new_mfn;
-+    p2m_type_t p2mt;
-+    struct page_info *page;
-+
-+    if ( !mem_sharing_is_fork(d) )
-+        return -ENOENT;
-+
-+    if ( !unsharing )
-+    {
-+        /* For read-only accesses we just add a shared entry to the physmap */
-+        while ( parent )
-+        {
-+            if ( !(rc = nominate_page(parent, gfn, 0, &handle)) )
-+                break;
-+
-+            parent = parent->parent;
-+        }
-+
-+        if ( !rc )
-+        {
-+            /* The client's p2m is already locked */
-+            p2m = p2m_get_hostp2m(parent);
-+
-+            p2m_lock(p2m);
-+            rc = add_to_physmap(parent, gfn_l, handle, d, gfn_l, false);
-+            p2m_unlock(p2m);
-+
-+            if ( !rc )
-+                return 0;
-+        }
-+    }
-+
-+    /*
-+     * If it's a write access (ie. unsharing) or if adding a shared entry to
-+     * the physmap failed we'll fork the page directly.
-+     */
-+    p2m = p2m_get_hostp2m(d);
-+    parent = d->parent;
-+
-+    while ( parent )
-+    {
-+        mfn = get_gfn_query(parent, gfn_l, &p2mt);
-+
-+        /* We can't fork grant memory from the parent, only regular ram */
-+        if ( mfn_valid(mfn) && p2m_is_ram(p2mt) )
-+            break;
-+
-+        put_gfn(parent, gfn_l);
-+        parent = parent->parent;
-+    }
-+
-+    if ( !parent )
-+        return -ENOENT;
-+
-+    if ( !(page = alloc_domheap_page(d, 0)) )
-+    {
-+        put_gfn(parent, gfn_l);
-+        return -ENOMEM;
-+    }
-+
-+    new_mfn = page_to_mfn(page);
-+    copy_domain_page(new_mfn, mfn);
-+    set_gpfn_from_mfn(mfn_x(new_mfn), gfn_l);
-+
-+    put_gfn(parent, gfn_l);
-+
-+    return p2m->set_entry(p2m, gfn, new_mfn, PAGE_ORDER_4K, p2m_ram_rw,
-+                          p2m->default_access, -1);
-+}
-+
-+static int bring_up_vcpus(struct domain *cd, struct domain *d)
-+{
-+    unsigned int i;
-+    int ret = -EINVAL;
-+
-+    if ( d->max_vcpus != cd->max_vcpus ||
-+        (ret = cpupool_move_domain(cd, d->cpupool)) )
-+        return ret;
-+
-+    for ( i = 0; i < cd->max_vcpus; i++ )
-+    {
-+        if ( !d->vcpu[i] || cd->vcpu[i] )
-+            continue;
-+
-+        if ( !vcpu_create(cd, i) )
-+            return -EINVAL;
-+    }
-+
-+    domain_update_node_affinity(cd);
-+    return 0;
-+}
-+
-+static int copy_vcpu_settings(struct domain *cd, struct domain *d)
-+{
-+    unsigned int i;
-+    struct p2m_domain *p2m = p2m_get_hostp2m(cd);
-+    int ret = -EINVAL;
-+
-+    for ( i = 0; i < cd->max_vcpus; i++ )
-+    {
-+        const struct vcpu *d_vcpu = d->vcpu[i];
-+        struct vcpu *cd_vcpu = cd->vcpu[i];
-+        struct vcpu_runstate_info runstate;
-+        mfn_t vcpu_info_mfn;
-+
-+        if ( !d_vcpu || !cd_vcpu )
-+            continue;
-+
-+        /* Copy & map in the vcpu_info page if the guest uses one */
-+        vcpu_info_mfn = d_vcpu->vcpu_info_mfn;
-+        if ( !mfn_eq(vcpu_info_mfn, INVALID_MFN) )
-+        {
-+            mfn_t new_vcpu_info_mfn = cd_vcpu->vcpu_info_mfn;
-+
-+            /* Allocate & map the page for it if it hasn't been already */
-+            if ( mfn_eq(new_vcpu_info_mfn, INVALID_MFN) )
-+            {
-+                gfn_t gfn = mfn_to_gfn(d, vcpu_info_mfn);
-+                unsigned long gfn_l = gfn_x(gfn);
-+                struct page_info *page;
-+
-+                if ( !(page = alloc_domheap_page(cd, 0)) )
-+                    return -ENOMEM;
-+
-+                new_vcpu_info_mfn = page_to_mfn(page);
-+                set_gpfn_from_mfn(mfn_x(new_vcpu_info_mfn), gfn_l);
-+
-+                ret = p2m->set_entry(p2m, gfn, new_vcpu_info_mfn,
-+                                     PAGE_ORDER_4K, p2m_ram_rw,
-+                                     p2m->default_access, -1);
-+                if ( ret )
-+                    return ret;
-+
-+                ret = map_vcpu_info(cd_vcpu, gfn_l,
-+                                    PAGE_OFFSET(d_vcpu->vcpu_info));
-+                if ( ret )
-+                    return ret;
-+            }
-+
-+            copy_domain_page(new_vcpu_info_mfn, vcpu_info_mfn);
-+        }
-+
-+        /* Setup the vCPU runstate area */
-+        if ( !guest_handle_is_null(runstate_guest(d_vcpu)) )
-+        {
-+            runstate_guest(cd_vcpu) = runstate_guest(d_vcpu);
-+            vcpu_runstate_get(cd_vcpu, &runstate);
-+            __copy_to_guest(runstate_guest(cd_vcpu), &runstate, 1);
-+        }
-+
-+        /*
-+         * TODO: to support VMs with PV interfaces copy additional
-+         * settings here, such as PV timers.
-+         */
-+    }
-+
-+    return 0;
-+}
-+
-+static int fork_hap_allocation(struct domain *cd, struct domain *d)
-+{
-+    int rc;
-+    bool preempted;
-+    unsigned long mb = hap_get_allocation(d);
-+
-+    if ( mb == hap_get_allocation(cd) )
-+        return 0;
-+
-+    paging_lock(cd);
-+    rc = hap_set_allocation(cd, mb << (20 - PAGE_SHIFT), &preempted);
-+    paging_unlock(cd);
-+
-+    return preempted ? -ERESTART : rc;
-+}
-+
-+static void copy_tsc(struct domain *cd, struct domain *d)
-+{
-+    uint32_t tsc_mode;
-+    uint32_t gtsc_khz;
-+    uint32_t incarnation;
-+    uint64_t elapsed_nsec;
-+
-+    tsc_get_info(d, &tsc_mode, &elapsed_nsec, &gtsc_khz, &incarnation);
-+    /* Don't bump incarnation on set */
-+    tsc_set_info(cd, tsc_mode, elapsed_nsec, gtsc_khz, incarnation - 1);
-+}
-+
-+static int copy_special_pages(struct domain *cd, struct domain *d)
-+{
-+    mfn_t new_mfn, old_mfn;
-+    struct p2m_domain *p2m = p2m_get_hostp2m(cd);
-+    static const unsigned int params[] =
-+    {
-+        HVM_PARAM_STORE_PFN,
-+        HVM_PARAM_IOREQ_PFN,
-+        HVM_PARAM_BUFIOREQ_PFN,
-+        HVM_PARAM_CONSOLE_PFN
-+    };
-+    unsigned int i;
-+    int rc;
-+
-+    for ( i = 0; i < ARRAY_SIZE(params); i++ )
-+    {
-+        p2m_type_t t;
-+        uint64_t value = 0;
-+        struct page_info *page;
-+
-+        if ( hvm_get_param(cd, params[i], &value) || !value )
-+            continue;
-+
-+        old_mfn = get_gfn_query_unlocked(d, value, &t);
-+        new_mfn = get_gfn_query_unlocked(cd, value, &t);
-+
-+        /* Allocate the page and map it in if it's not present */
-+        if ( mfn_eq(new_mfn, INVALID_MFN) )
-+        {
-+            if ( !(page = alloc_domheap_page(cd, 0)) )
-+                return -ENOMEM;
-+
-+            new_mfn = page_to_mfn(page);
-+            set_gpfn_from_mfn(mfn_x(new_mfn), value);
-+
-+            rc = p2m->set_entry(p2m, _gfn(value), new_mfn, PAGE_ORDER_4K,
-+                                p2m_ram_rw, p2m->default_access, -1);
-+            if ( rc )
-+                return rc;
-+        }
-+
-+        copy_domain_page(new_mfn, old_mfn);
-+    }
-+
-+    old_mfn = _mfn(virt_to_mfn(d->shared_info));
-+    new_mfn = _mfn(virt_to_mfn(cd->shared_info));
-+    copy_domain_page(new_mfn, old_mfn);
-+
-+    return 0;
-+}
-+
-+static int copy_settings(struct domain *cd, struct domain *d)
-+{
-+    int rc;
-+
-+    if ( (rc = copy_vcpu_settings(cd, d)) )
-+        return rc;
-+
-+    if ( (rc = hvm_copy_context_and_params(cd, d)) )
-+        return rc;
-+
-+    if ( (rc = copy_special_pages(cd, d)) )
-+        return rc;
-+
-+    copy_tsc(cd, d);
-+
-+    return rc;
-+}
-+
-+static int fork(struct domain *cd, struct domain *d)
-+{
-+    int rc = -EBUSY;
-+
-+    if ( !cd->controller_pause_count )
-+        return rc;
-+
-+    if ( !cd->parent )
-+    {
-+        if ( !get_domain(d) )
-+        {
-+            ASSERT_UNREACHABLE();
-+            return -EBUSY;
-+        }
-+
-+        domain_pause(d);
-+        cd->max_pages = d->max_pages;
-+        cd->parent = d;
-+    }
-+
-+    /* This is preemptible so it's the first to get done */
-+    if ( (rc = fork_hap_allocation(cd, d)) )
-+        goto done;
-+
-+    if ( (rc = bring_up_vcpus(cd, d)) )
-+        goto done;
-+
-+    rc = copy_settings(cd, d);
-+
-+ done:
-+    if ( rc && rc != -ERESTART )
-+    {
-+        domain_unpause(d);
-+        put_domain(d);
-+        cd->parent = NULL;
-+    }
-+
-+    return rc;
-+}
-+
- int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
- {
-     int rc;
-@@ -1697,6 +2012,42 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
-         rc = debug_gref(d, mso.u.debug.u.gref);
-         break;
- 
-+    case XENMEM_sharing_op_fork:
-+    {
-+        struct domain *pd;
-+
-+        rc = -EINVAL;
-+        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[2] )
-+            goto out;
-+
-+        rc = rcu_lock_live_remote_domain_by_id(mso.u.fork.parent_domain,
-+                                               &pd);
-+        if ( rc )
-+            goto out;
-+
-+        rc = -EINVAL;
-+        if ( pd->max_vcpus != d->max_vcpus )
-+        {
-+            rcu_unlock_domain(pd);
-+            goto out;
-+        }
-+
-+        if ( !mem_sharing_enabled(pd) && (rc = mem_sharing_control(pd, true)) )
-+        {
-+            rcu_unlock_domain(pd);
-+            goto out;
-+        }
-+
-+        rc = fork(d, pd);
-+
-+        if ( rc == -ERESTART )
-+            rc = hypercall_create_continuation(__HYPERVISOR_memory_op,
-+                                               "lh", XENMEM_sharing_op,
-+                                               arg);
-+        rcu_unlock_domain(pd);
-+        break;
-+    }
-+
-     default:
-         rc = -ENOSYS;
-         break;
-diff --git a/xen/arch/x86/mm/p2m.c b/xen/arch/x86/mm/p2m.c
-index d93c418bcf..0d0e34e81e 100644
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -509,6 +509,12 @@ mfn_t __get_gfn_type_access(struct p2m_domain *p2m, unsigned long gfn_l,
- 
-     mfn = p2m->get_entry(p2m, gfn, t, a, q, page_order, NULL);
- 
-+    /* Check if we need to fork the page */
-+    if ( (q & P2M_ALLOC) && p2m_is_hole(*t) &&
-+         !mem_sharing_fork_page(p2m->domain, gfn, q & P2M_UNSHARE) )
-+        mfn = p2m->get_entry(p2m, gfn, t, a, q, page_order, NULL);
-+
-+    /* Check if we need to unshare the page */
-     if ( (q & P2M_UNSHARE) && p2m_is_shared(*t) )
-     {
-         ASSERT(p2m_is_hostp2m(p2m));
-@@ -588,7 +594,8 @@ struct page_info *p2m_get_page_from_gfn(
-             return page;
- 
-         /* Error path: not a suitable GFN at all */
--        if ( !p2m_is_ram(*t) && !p2m_is_paging(*t) && !p2m_is_pod(*t) )
-+        if ( !p2m_is_ram(*t) && !p2m_is_paging(*t) && !p2m_is_pod(*t) &&
-+             !mem_sharing_is_fork(p2m->domain) )
-             return NULL;
-     }
- 
-diff --git a/xen/include/asm-arm/page.h b/xen/include/asm-arm/page.h
-index 37e1d9aadb..4ea8e97247 100644
---- a/xen/include/asm-arm/page.h
-+++ b/xen/include/asm-arm/page.h
-@@ -12,6 +12,7 @@
- #define PADDR_BITS              40
- #endif
- #define PADDR_MASK              ((1ULL << PADDR_BITS)-1)
-+#define PAGE_OFFSET(ptr)        ((vaddr_t)(ptr) & ~PAGE_MASK)
- 
- #define VADDR_BITS              32
- #define VADDR_MASK              (~0UL)
-diff --git a/xen/include/asm-x86/hap.h b/xen/include/asm-x86/hap.h
-index b94bfb4ed0..1bf07e49fe 100644
---- a/xen/include/asm-x86/hap.h
-+++ b/xen/include/asm-x86/hap.h
-@@ -45,6 +45,7 @@ int   hap_track_dirty_vram(struct domain *d,
- 
- extern const struct paging_mode *hap_paging_get_mode(struct vcpu *);
- int hap_set_allocation(struct domain *d, unsigned int pages, bool *preempted);
-+unsigned int hap_get_allocation(struct domain *d);
- 
- #endif /* XEN_HAP_H */
- 
-diff --git a/xen/include/asm-x86/hvm/hvm.h b/xen/include/asm-x86/hvm/hvm.h
-index b007b2e343..f283c7d187 100644
---- a/xen/include/asm-x86/hvm/hvm.h
-+++ b/xen/include/asm-x86/hvm/hvm.h
-@@ -336,6 +336,8 @@ unsigned long hvm_cr4_guest_valid_bits(const struct domain *d, bool restore);
- 
- int hvm_copy_context_and_params(struct domain *src, struct domain *dst);
- 
-+int hvm_get_param(struct domain *d, uint32_t index, uint64_t *value);
-+
- #ifdef CONFIG_HVM
- 
- #define hvm_get_guest_tsc(v) hvm_get_guest_tsc_fixed(v, 0)
-diff --git a/xen/include/asm-x86/mem_sharing.h b/xen/include/asm-x86/mem_sharing.h
-index 53b7929d0e..cf7a12f4d2 100644
---- a/xen/include/asm-x86/mem_sharing.h
-+++ b/xen/include/asm-x86/mem_sharing.h
-@@ -77,6 +77,14 @@ static inline int mem_sharing_unshare_page(struct domain *d,
-     return rc;
- }
- 
-+static inline bool mem_sharing_is_fork(const struct domain *d)
-+{
-+    return d->parent;
-+}
-+
-+int mem_sharing_fork_page(struct domain *d, gfn_t gfn,
-+                          bool unsharing);
-+
- /*
-  * If called by a foreign domain, possible errors are
-  *   -EBUSY -> ring full
-@@ -130,6 +138,16 @@ static inline int mem_sharing_notify_enomem(struct domain *d, unsigned long gfn,
-     return -EOPNOTSUPP;
- }
- 
-+static inline bool mem_sharing_is_fork(const struct domain *d)
-+{
-+    return false;
-+}
-+
-+static inline int mem_sharing_fork_page(struct domain *d, gfn_t gfn, bool lock)
-+{
-+    return -EOPNOTSUPP;
-+}
-+
- #endif
- 
- #endif /* __MEM_SHARING_H__ */
-diff --git a/xen/include/asm-x86/page.h b/xen/include/asm-x86/page.h
-index c98d8f5ede..eb73a0fc23 100644
---- a/xen/include/asm-x86/page.h
-+++ b/xen/include/asm-x86/page.h
-@@ -10,6 +10,7 @@
- #define PAGE_SIZE           (_AC(1,L) << PAGE_SHIFT)
- #define PAGE_MASK           (~(PAGE_SIZE-1))
- #define PAGE_FLAG_MASK      (~0)
-+#define PAGE_OFFSET(ptr)    ((unsigned long)(ptr) & ~PAGE_MASK)
- 
- #define PAGE_ORDER_4K       0
- #define PAGE_ORDER_2M       9
-diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
-index 126d0ff06e..5ee4e0da12 100644
---- a/xen/include/public/memory.h
-+++ b/xen/include/public/memory.h
-@@ -482,6 +482,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_mem_access_op_t);
- #define XENMEM_sharing_op_add_physmap       6
- #define XENMEM_sharing_op_audit             7
- #define XENMEM_sharing_op_range_share       8
-+#define XENMEM_sharing_op_fork              9
- 
- #define XENMEM_SHARING_OP_S_HANDLE_INVALID  (-10)
- #define XENMEM_SHARING_OP_C_HANDLE_INVALID  (-9)
-@@ -532,6 +533,10 @@ struct xen_mem_sharing_op {
-                 uint32_t gref;     /* IN: gref to debug         */
-             } u;
-         } debug;
-+        struct mem_sharing_op_fork {      /* OP_FORK */
-+            domid_t parent_domain;        /* IN: parent's domain id */
-+            uint16_t pad[3];              /* Must be set to 0 */
-+        } fork;
-     } u;
- };
- typedef struct xen_mem_sharing_op xen_mem_sharing_op_t;
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 4b78291d51..195e7ee583 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -481,6 +481,7 @@ struct domain
-     /* Memory sharing support */
- #ifdef CONFIG_MEM_SHARING
-     struct vm_event_domain *vm_event_share;
-+    struct domain *parent; /* VM fork parent */
- #endif
-     /* Memory paging support */
- #ifdef CONFIG_HAS_MEM_PAGING
--- 
-2.20.1
-
+No, I don't have any numbers. Would you prefer a different wording or a
+better explanation? I also realized there is a typo in there (or/of).
 
