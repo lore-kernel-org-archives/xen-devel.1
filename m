@@ -2,75 +2,66 @@ Return-Path: <SRS0=Uyyz=5P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CE5DAC2D0EB
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 17:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D042C2D0ED
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9DF69206F5
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 17:11:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4409520771
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 19:22:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="g++9AiIv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9DF69206F5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="wut8A6a2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4409520771
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIxwb-00042k-JU; Mon, 30 Mar 2020 17:11:25 +0000
+	id 1jIzzE-0005xh-Jm; Mon, 30 Mar 2020 19:22:16 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=k668=5P=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jIxwa-00042f-20
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 17:11:24 +0000
-X-Inumbo-ID: 79bddca3-72a9-11ea-b9eb-12813bfff9fa
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=TZrn=5P=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jIzzD-0005xW-5y
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 19:22:15 +0000
+X-Inumbo-ID: c0dbf5b2-72bb-11ea-b9f4-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 79bddca3-72a9-11ea-b9eb-12813bfff9fa;
- Mon, 30 Mar 2020 17:11:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ id c0dbf5b2-72bb-11ea-b9f4-12813bfff9fa;
+ Mon, 30 Mar 2020 19:22:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=1/lTty5AFQStKXukrvIDyvdAlOkOxfkJ5H6iRzLw18g=; b=g++9AiIvCsjOwEsoyfx8DD0Z9
- 8vKgsVUujfkV8k+fFW6N6Sb1m+iKtoj2eQ7uG9xXaAMF0/GxVAPhfJot/p100QnTHH+x9MO12TmVJ
- OInGzHQu+H3RQwDqNtfJ5XCP1xdp9DLmvcXQd+YekDKuBtdRQRvpDXA1BZ+5YrCdLHob0=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cY01mY86IvlEBi9LBC0n631juFx7p42WJ2oDnAMsp50=; b=wut8A6a2aSgZO+eHz0HH0rqTy4
+ rvgwJNTmIhTbrd5jDC/zDcJvGDdefAooOvvpqh+Lpp+eA4WLYBXCAN0whFWfK8h8RuvdTH/hQ4nXL
+ oezV4/psEFV14HQH6fiTJg44b7opJMuv3YFyAhsI4/P3eV9jj9dpK7YLX+Gpp/+2iu2A=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jIxwX-0001D9-Gj; Mon, 30 Mar 2020 17:11:21 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jIxwX-0000DL-34; Mon, 30 Mar 2020 17:11:21 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jIxwX-0003y0-2N; Mon, 30 Mar 2020 17:11:21 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-149213-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=b72682c602b8d1aaadca439d49cc79c79dbc17bc
-X-Osstest-Versions-That: xen=e19b4b3b55f84e0cfcc02fe5d66965969a81c965
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Mon, 30 Mar 2020 17:11:21 +0000
-Subject: [Xen-devel] [xen-unstable-smoke test] 149213: tolerable all pass -
- PUSHED
+ (envelope-from <julien@xen.org>)
+ id 1jIzz8-0003lE-Bt; Mon, 30 Mar 2020 19:22:10 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=ufe34d9ed68d054.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jIzz8-0007AJ-3D; Mon, 30 Mar 2020 19:22:10 +0000
+From: Julien Grall <julien@xen.org>
+To: xen-devel@lists.xenproject.org
+Date: Mon, 30 Mar 2020 20:21:52 +0100
+Message-Id: <20200330192157.1335-4-julien@xen.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200330192157.1335-1-julien@xen.org>
+References: <20200330192157.1335-1-julien@xen.org>
+Subject: [Xen-devel] [PATCH 3/8] tools/libxc: misc: Mark const the parameter
+ 'keys' of xc_send_debug_keys()
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,64 +72,85 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>, dfaggioli@suse.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 149213 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/149213/
+From: Julien Grall <jgrall@amazon.com>
 
-Failures :-/ but no regressions.
+OCaml is using a string to describe the parameter 'keys' of
+xc_send_debug_keys(). Since Ocaml 4.06.01, String_val() will return a
+const char * when using -safe-string. This will result to a build
+failure because xc_send_debug_keys() expects a char *.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+The function should never modify the parameter 'keys' and therefore the
+parameter should be const. Unfortunately, this is not directly possible
+because DECLARE_HYPERCALL_BOUNCE() is expecting a non-const variable.
 
-version targeted for testing:
- xen                  b72682c602b8d1aaadca439d49cc79c79dbc17bc
-baseline version:
- xen                  e19b4b3b55f84e0cfcc02fe5d66965969a81c965
+A new macro DECLARE_HYPERCALL_BOUNCE_IN() is introduced and will take
+care of const parameter. The first user will be xc_send_debug_keys() but
+this can be used in more place in the future.
 
-Last test of basis   149132  2020-03-28 12:00:37 Z    2 days
-Testing same since   149213  2020-03-30 14:06:47 Z    0 days    1 attempts
+Reported-by: Dario Faggioli <dfaggioli@suse.com>
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+---
+ tools/libxc/include/xenctrl.h | 2 +-
+ tools/libxc/xc_misc.c         | 4 ++--
+ tools/libxc/xc_private.h      | 8 ++++++++
+ 3 files changed, 11 insertions(+), 3 deletions(-)
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Jan Beulich <jbeulich@suse.com>
-  Jason Andryuk <jandryuk@gmail.com>
-  Simran Singhal <singhalsimran0@gmail.com>
+diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
+index fc6e57a1a0..d8874eb846 100644
+--- a/tools/libxc/include/xenctrl.h
++++ b/tools/libxc/include/xenctrl.h
+@@ -1225,7 +1225,7 @@ int xc_readconsolering(xc_interface *xch,
+                        unsigned int *pnr_chars,
+                        int clear, int incremental, uint32_t *pindex);
+ 
+-int xc_send_debug_keys(xc_interface *xch, char *keys);
++int xc_send_debug_keys(xc_interface *xch, const char *keys);
+ int xc_set_parameters(xc_interface *xch, char *params);
+ 
+ typedef struct xen_sysctl_physinfo xc_physinfo_t;
+diff --git a/tools/libxc/xc_misc.c b/tools/libxc/xc_misc.c
+index 093fa44081..957c03415c 100644
+--- a/tools/libxc/xc_misc.c
++++ b/tools/libxc/xc_misc.c
+@@ -167,11 +167,11 @@ int xc_readconsolering(xc_interface *xch,
+     return ret;
+ }
+ 
+-int xc_send_debug_keys(xc_interface *xch, char *keys)
++int xc_send_debug_keys(xc_interface *xch, const char *keys)
+ {
+     int ret, len = strlen(keys);
+     DECLARE_SYSCTL;
+-    DECLARE_HYPERCALL_BOUNCE(keys, len, XC_HYPERCALL_BUFFER_BOUNCE_IN);
++    DECLARE_HYPERCALL_BOUNCE_IN(keys, len);
+ 
+     if ( xc_hypercall_bounce_pre(xch, keys) )
+         return -1;
+diff --git a/tools/libxc/xc_private.h b/tools/libxc/xc_private.h
+index adc3b6a571..c77edb3c4c 100644
+--- a/tools/libxc/xc_private.h
++++ b/tools/libxc/xc_private.h
+@@ -181,6 +181,14 @@ enum {
+  */
+ #define DECLARE_HYPERCALL_BOUNCE(_ubuf, _sz, _dir) DECLARE_NAMED_HYPERCALL_BOUNCE(_ubuf, _ubuf, _sz, _dir)
+ 
++/*
++ * Declare a bounce buffer shadowing the named user data pointer that
++ * cannot be modified.
++ */
++#define DECLARE_HYPERCALL_BOUNCE_IN(_ubuf, _sz)                     \
++    DECLARE_NAMED_HYPERCALL_BOUNCE(_ubuf, (void *)(_ubuf), _sz,     \
++                                   XC_HYPERCALL_BUFFER_BOUNCE_IN)
++
+ /*
+  * Set the size of data to bounce. Useful when the size is not known
+  * when the bounce buffer is declared.
+-- 
+2.17.1
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   e19b4b3b55..b72682c602  b72682c602b8d1aaadca439d49cc79c79dbc17bc -> smoke
 
