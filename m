@@ -2,99 +2,59 @@ Return-Path: <SRS0=Uyyz=5P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EB494C43331
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 14:14:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A53DDC2D0E5
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 15:03:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BCAC0206F6
-	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 14:14:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="dUWSps5Q"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BCAC0206F6
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6D36020780
+	for <xen-devel@archiver.kernel.org>; Mon, 30 Mar 2020 15:03:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D36020780
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jIvB1-00051q-Ok; Mon, 30 Mar 2020 14:14:07 +0000
+	id 1jIvvq-0000m5-IW; Mon, 30 Mar 2020 15:02:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=IY4r=5P=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jIvB1-00051l-2I
- for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 14:14:07 +0000
-X-Inumbo-ID: b6ad8900-7290-11ea-b58d-bc764e2007e4
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ <SRS0=1ChX=5P=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
+ id 1jIvvp-0000lw-SU
+ for xen-devel@lists.xenproject.org; Mon, 30 Mar 2020 15:02:29 +0000
+X-Inumbo-ID: 7706aa32-7297-11ea-b4f4-bc764e2007e4
+Received: from mga01.intel.com (unknown [192.55.52.88])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b6ad8900-7290-11ea-b58d-bc764e2007e4;
- Mon, 30 Mar 2020 14:14:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585577647;
- h=from:mime-version:content-transfer-encoding:message-id:
- date:to:cc:subject:in-reply-to:references;
- bh=HhEus4mHMc6GLiGsfxkILuLxKuV6A8Ag3UsP/8ykGe0=;
- b=dUWSps5QHKXF6XUixcaSNvf3uQGq7MvDiVyR0wLiPQZiMEGqXVOqm1IC
- 15UgGp3v25jCr6pFxpDPOy727WIT0ipEHnLGkhQKuqJU3zx+S8sIVTS7Y
- GJM31YV6gQSbAcRXOed48k1QptyxtSYMHlzlPsvfa9mPvAjqvsKo9HTDV o=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=ian.jackson@citrix.com;
- spf=Pass smtp.mailfrom=Ian.Jackson@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- ian.jackson@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="Ian.Jackson@citrix.com";
- x-sender="ian.jackson@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
- Ian.Jackson@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="Ian.Jackson@citrix.com";
- x-sender="Ian.Jackson@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="Ian.Jackson@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: hLdh5UVCbqlf2Bw4CXddV/3vEhAazDJ8Kw5knIMBlWaZib63PrLC646HbWL/wp23J0TeaJ/wRY
- OwxLLeqzsoD2qTfQFRdNkyu+yiVikS5sKsL6J225XkDKvIkexiEc0cYbm2dFv+vdHMaNDsTZNX
- kXebTObruA12PISkRsByL7E+ZLjHk0UnjPyq5dQ6fpAkxAfinjEDqvlabsxXcdizplZwedklgM
- pu2cw0l2BlMp+nIy4xeFjH8HgyaDzSIHCmfyDqBTb8Tpe+n7vMAgFZK7pIFrgRYISaQJaskiqw
- 3aI=
-X-SBRS: 2.7
-X-MesageID: 14849065
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,324,1580792400"; d="scan'208";a="14849065"
-From: Ian Jackson <ian.jackson@citrix.com>
+ id 7706aa32-7297-11ea-b4f4-bc764e2007e4;
+ Mon, 30 Mar 2020 15:02:25 +0000 (UTC)
+IronPort-SDR: 3jP4ez0AtUEHNnjq2ckwbmRXH7bCt5ykCU/FW5iT/HMAWr+HsXn3UUkGaEO0qjGamriJAi20Zc
+ luQAlADtb0bA==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Mar 2020 08:02:24 -0700
+IronPort-SDR: 5c2y3QnOheP74TQ0Bv9k+ugPKVonIf3m8+6TniJjw3PMJqsaNVowRiFuj9dpMPkvh6XBmyuNEF
+ 8Wd63ieuWFMA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.72,324,1580803200"; d="scan'208";a="359199596"
+Received: from yliu23-mobl.amr.corp.intel.com (HELO localhost.localdomain)
+ ([10.212.168.11])
+ by fmsmga001.fm.intel.com with ESMTP; 30 Mar 2020 08:02:22 -0700
+From: Tamas K Lengyel <tamas.lengyel@intel.com>
+To: xen-devel@lists.xenproject.org
+Date: Mon, 30 Mar 2020 08:02:09 -0700
+Message-Id: <b0628adfca106baf8675e89e41449962ab52326e.1585579955.git.tamas.lengyel@intel.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <cover.1585579955.git.tamas.lengyel@intel.com>
+References: <cover.1585579955.git.tamas.lengyel@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24193.65186.623770.59312@mariner.uk.xensource.com>
-Date: Mon, 30 Mar 2020 15:13:54 +0100
-To: Julien Grall <julien@xen.org>
-In-Reply-To: <0d28fc28-390d-f251-5c3d-e8f4d1e7950d@xen.org>
-References: <20200330135735.31512-1-ian.jackson@eu.citrix.com>
- <20200330135735.31512-2-ian.jackson@eu.citrix.com>
- <0d28fc28-390d-f251-5c3d-e8f4d1e7950d@xen.org>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
-Subject: Re: [Xen-devel] [PATCH 1/3] docs etc.: https: Fix references to
- wiki.xen[project.org
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Subject: [Xen-devel] [PATCH v13 2/3] x86/mem_sharing: reset a fork
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,22 +65,144 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>, Andrew
- Cooper <Andrew.Cooper3@citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- Yang Hongyang <imhy.yang@gmail.com>, Jan Beulich <jbeulich@suse.com>,
- Shriram Rajagopalan <rshriram@cs.ubc.ca>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Julien Grall writes ("Re: [PATCH 1/3] docs etc.: https: Fix references to wiki.xen[project.org"):
-> Hi Ian,
-> 
-> Title: Did you intend to use {,project} rather than [project?
+Implement hypercall that allows a fork to shed all memory that got allocated
+for it during its execution and re-load its vCPU context from the parent VM.
+This allows the forked VM to reset into the same state the parent VM is in a
+faster way then creating a new fork would be. Measurements show about a 2x
+speedup during normal fuzzing operations. Performance may vary depending how
+much memory got allocated for the forked VM. If it has been completely
+deduplicated from the parent VM then creating a new fork would likely be more
+performant.
 
-I intended to use [project].  Will fix.
+Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+v12: remove continuation & add comment back
+     address style issues pointed out by Jan
+---
+ xen/arch/x86/mm/mem_sharing.c | 77 +++++++++++++++++++++++++++++++++++
+ xen/include/public/memory.h   |  1 +
+ 2 files changed, 78 insertions(+)
 
-Ian.
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index faa79011c3..cc09f9c84f 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -1758,6 +1758,61 @@ static int fork(struct domain *cd, struct domain *d)
+     return rc;
+ }
+ 
++/*
++ * The fork reset operation is intended to be used on short-lived forks only.
++ * There is no hypercall continuation operation implemented for this reason.
++ * For forks that obtain a larger memory footprint it is likely going to be
++ * more performant to create a new fork instead of resetting an existing one.
++ *
++ * TODO: In case this hypercall would become useful on forks with larger memory
++ * footprints the hypercall continuation should be implemented (or if this
++ * feature needs to be become "stable").
++ */
++static int mem_sharing_fork_reset(struct domain *d, struct domain *pd)
++{
++    int rc;
++    struct p2m_domain *p2m = p2m_get_hostp2m(d);
++    struct page_info *page, *tmp;
++
++    domain_pause(d);
++
++    /* need recursive lock because we will free pages */
++    spin_lock_recursive(&d->page_alloc_lock);
++    page_list_for_each_safe(page, tmp, &d->page_list)
++    {
++        p2m_type_t p2mt;
++        p2m_access_t p2ma;
++        mfn_t mfn = page_to_mfn(page);
++        gfn_t gfn = mfn_to_gfn(d, mfn);
++
++        mfn = __get_gfn_type_access(p2m, gfn_x(gfn), &p2mt, &p2ma,
++                                    0, NULL, false);
++
++        /* only reset pages that are sharable */
++        if ( !p2m_is_sharable(p2mt) )
++            continue;
++
++        /* take an extra reference or just skip if can't for whatever reason */
++        if ( !get_page(page, d) )
++            continue;
++
++        /* forked memory is 4k, not splitting large pages so this must work */
++        rc = p2m->set_entry(p2m, gfn, INVALID_MFN, PAGE_ORDER_4K,
++                            p2m_invalid, p2m_access_rwx, -1);
++        ASSERT(!rc);
++
++        put_page_alloc_ref(page);
++        put_page(page);
++    }
++    spin_unlock_recursive(&d->page_alloc_lock);
++
++    rc = copy_settings(d, pd);
++
++    domain_unpause(d);
++
++    return rc;
++}
++
+ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+ {
+     int rc;
+@@ -2048,6 +2103,28 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+         break;
+     }
+ 
++    case XENMEM_sharing_op_fork_reset:
++    {
++        struct domain *pd;
++
++        rc = -EINVAL;
++        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[2] )
++            goto out;
++
++        rc = -ENOSYS;
++        if ( !d->parent )
++            goto out;
++
++        rc = rcu_lock_live_remote_domain_by_id(d->parent->domain_id, &pd);
++        if ( rc )
++            goto out;
++
++        rc = mem_sharing_fork_reset(d, pd);
++
++        rcu_unlock_domain(pd);
++        break;
++    }
++
+     default:
+         rc = -ENOSYS;
+         break;
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index 5ee4e0da12..d36d64b8dc 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -483,6 +483,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_mem_access_op_t);
+ #define XENMEM_sharing_op_audit             7
+ #define XENMEM_sharing_op_range_share       8
+ #define XENMEM_sharing_op_fork              9
++#define XENMEM_sharing_op_fork_reset        10
+ 
+ #define XENMEM_SHARING_OP_S_HANDLE_INVALID  (-10)
+ #define XENMEM_SHARING_OP_C_HANDLE_INVALID  (-9)
+-- 
+2.20.1
+
 
