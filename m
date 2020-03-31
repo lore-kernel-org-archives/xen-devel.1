@@ -2,46 +2,45 @@ Return-Path: <SRS0=JQvX=5Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	NORMAL_HTTP_TO_IP,NUMERIC_HTTP_ADDR,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 60E6EC43331
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18BF6C2D0F3
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2984B206DB
+	by mail.kernel.org (Postfix) with ESMTPS id D48E6206DB
 	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gppCY4m6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2984B206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gJYp5gPp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D48E6206DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEAv-0000wS-JZ; Tue, 31 Mar 2020 10:31:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJEB0-0000zK-At; Tue, 31 Mar 2020 10:31:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEAt-0000vy-Li
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:15 +0000
-X-Inumbo-ID: bd184d20-733a-11ea-ba0c-12813bfff9fa
+ id 1jJEAy-0000yn-ME
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:20 +0000
+X-Inumbo-ID: bec3dd88-733a-11ea-b58d-bc764e2007e4
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id bd184d20-733a-11ea-ba0c-12813bfff9fa;
- Tue, 31 Mar 2020 10:31:10 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bec3dd88-733a-11ea-b58d-bc764e2007e4;
+ Tue, 31 Mar 2020 10:31:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585650671;
+ d=citrix.com; s=securemail; t=1585650674;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=z9+M96E+n/Hy3z7gJKZ88aBj5n9HL0vJXghsNjxddMo=;
- b=gppCY4m6nUGxkyp3zbrHk0MUmzJhdWsUTzyG03uMiC3pFEGUcRiaIuh2
- BhiGlFtmT2POCz1+23OwkGfSuTGKdMUS4i8ukNuES5WRpgh46/6ksEKWG
- LM65AmslrUvkB6UMhZIfOFpT/wuSO6Lg/qDCYmVja0EFaEvrOcOUrScDM c=;
+ bh=OYE88/tj0Eiuv+psYdXYwHPdKpl+cAgiq9sanZybeHo=;
+ b=gJYp5gPp6tT9qo32lseOqReZ4i2116RTmTpVaPeZo7dhhZv356hA8o0V
+ 1JcJ1f5zgq1SdcorU1lAz/4G07bFHaZOK3U6iD61WF+65HO8RK1WWZz7g
+ NHWTisfwfIXwlAc8FvOC3Vlyv71+z0vFkwao6Cs5r05sCsTu1/qZ4P9Mg I=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -73,29 +72,29 @@ Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: gm2gZRJ9f+J/hypl/Llejvy7D09o6OKigL2xnVNqz0J/SV9vsJiFfiWQJ4XIRFYCu9pVv2VgDu
- nQPSR3pNotCx/MApBr+qwsItuhPvSdv+xu7Sva0vNs5aqPbluswIqqOXGF19N/AIajzRMLIrS0
- UDmgm0T/II7R9zW/B2fNL9ZRC0LL3BCpmwU07UbfUHc9GhpwIRCYTA+elUjuogYIDTgFMm/5lW
- mVY5+oQajHSh4LMSCg6PhDhZo6tL5XvB84rNjATw2t8WfCjgCAMG33T0hzj6ghbj1oxfkZ4hhv
- RAs=
+IronPort-SDR: bbwSsfvgN7UDcIvMlbiDws0zTHCCsZrFohTrRNm0tyHKqmuOEjplg+HLwjFesDUz0VhGQ5uQkT
+ ruknPCt24wUJ8xoavvkXnSpkM7ahHXlHXVyJIjqdR0hQnJ77iS+M5R3tP5qUip7dLpKfCmXFI7
+ lrFyUc23oS7MtMTSTpgLFPQKa0JU+LZMO1W05p2nei1VsGvKS+DJHDLRXUAdlYQp7YHtS0weEu
+ PwrqrB7bJnkTK+yEiv/WvugrA3uRLLsQsixpr3+/sz4Z19rD3KM0FeN5T+8g/WgeA/OBFcZnkU
+ ejo=
 X-SBRS: 2.7
-X-MesageID: 15138787
+X-MesageID: 15138791
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138787"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138791"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 05/18] xen/build: use new $(c_flags) and $(a_flags)
- instead of $(CFLAGS)
-Date: Tue, 31 Mar 2020 11:30:49 +0100
-Message-ID: <20200331103102.1105674-6-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 08/18] xen/build: introduce if_changed and
+ if_changed_rule
+Date: Tue, 31 Mar 2020 11:30:52 +0100
+Message-ID: <20200331103102.1105674-9-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -109,260 +108,453 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
  Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+ Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-In a later patch ("xen/build: have the root Makefile generates the
-CFLAGS), we want to generate the CFLAGS in xen/Makefile, then export
-it and have Rules.mk use a CFLAGS from the environment variables. That
-changes the flavor of the CFLAGS and flags intended for one target
-(like -D__OBJECT_FILE__ and -M%) gets propagated and duplicated. So we
-start by moving such flags out of $(CFLAGS) and into $(c_flags) which
-is to be modified by only Rules.mk.
+The if_changed macro from Linux, in addition to check if any files
+needs an update, check if the command line has changed since the last
+invocation. The latter will force a rebuild if any options to the
+executable have changed.
 
-__OBJECT_FILE__ is only used by arch/x86/mm/*.c files, so having it in
-$(c_flags) is enough, we don't need it in $(a_flags).
+if_changed_rule checks dependencies like if_changed, but execute
+rule_$(1) instead of cmd_$(1) when a target needs to be rebuilt. A rule_
+macro can call more than one cmd_ macro. One of the cmd_ macro in a
+rule need to be call using a macro that record the command line, so
+cmd_and_record is introduced. It is similar to cmd_and_fixup from
+Linux but without a call to fixdep which we don't have yet. (We will
+later replace cmd_and_record by cmd_and_fixup.)
 
-For include/Makefile and as-insn we can keep using CFLAGS, but since
-it doesn't have -M* flags anymore there is no need to filter them out.
+Example of a rule_ macro:
+define rule_cc_o_c
+    $(call cmd_and_record,cc_o_o)
+    $(call cmd,objcopy)
+endef
 
-The XEN_BUILD_EFI tests in arch/x86/Makefile was filtering out
-CFLAGS-y, but according to dd40177c1bc8 ("x86-64/EFI: add CFLAGS to
-check compile"), it was done to filter out -MF. CFLAGS doesn't
-have those flags anymore, so no filtering is needed.
+This needs one of the call to use cmd_and_record, otherwise no .*.cmd
+file will be created, and the target will keep been rebuilt.
 
-This is inspired by the way Kbuild generates CFLAGS for each targets.
+In order for if_changed to works correctly, we need to load the .%.cmd
+files that the macro generates, this is done by adding targets in to
+the $(targets) variable. We use intermediate_targets to add %.init.o
+dependency %.o to target since there aren't in obj-y.
+
+We also add $(MAKECMDGOALS) to targets so that when running for
+example `make common/memory.i`, make will load the associated .%.cmd
+dependency file.
+
+Beside the if_changed*, we import the machinery used for a "beautify
+output". The important one is when running make with V=2 which help to
+debug the makefiles by printing why a target is been rebuilt, via the
+$(echo-why) macro.
+
+if_changed and if_changed_rule aren't used yet.
+
+Most of this code is copied from Linux v5.4, including the
+documentation.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
 
 Notes:
     v4:
-    - drop change in as-insn macro, and keep filtering-out -M% %.d
-    
-    v3:
-    - include/Makefile: Keep using CFLAGS, but since it doesn't have -M*
-      flags anymore, no need to filter it.
-    - Write c_flags and a_flags on a single line.
-    - arch/x86/Makefile: remove the filter-out of dependency flags
-      they are remove from CFLAGS anyway.
-      (was intended to be done in xen/build: have the root Makefile
-      generates the CFLAGS originally, move the change to this patch).
-    - also modify as-insn as it is now xen/ only.
+    - Use := in make whenever possible (instead of =)
+    - insert new string in .gitignore somewhere more plausible.
+    - import documentation from Linux
 
- xen/Rules.mk                    | 23 +++++++++++------------
- xen/arch/arm/Makefile           |  4 ++--
- xen/arch/x86/Makefile           |  6 +++---
- xen/arch/x86/mm/Makefile        |  6 +++---
- xen/arch/x86/mm/hap/Makefile    |  6 +++---
- xen/arch/x86/mm/shadow/Makefile |  6 +++---
- xen/include/Makefile            |  2 +-
- 7 files changed, 26 insertions(+), 27 deletions(-)
+ .gitignore                            |   1 +
+ docs/misc/xen-makefiles/makefiles.rst |  99 ++++++++++++++++++++++++
+ xen/Makefile                          |  53 ++++++++++++-
+ xen/Rules.mk                          |  33 +++++++-
+ xen/scripts/Kbuild.include            | 107 ++++++++++++++++++++++++++
+ 5 files changed, 291 insertions(+), 2 deletions(-)
 
+diff --git a/.gitignore b/.gitignore
+index 4ca679ddbc9a..bfa53723b38b 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,4 +1,5 @@
+ .hg
++.*.cmd
+ .*.tmp
+ *.orig
+ *~
+diff --git a/docs/misc/xen-makefiles/makefiles.rst b/docs/misc/xen-makefiles/makefiles.rst
+index a86e3a612d61..9efd8464a763 100644
+--- a/docs/misc/xen-makefiles/makefiles.rst
++++ b/docs/misc/xen-makefiles/makefiles.rst
+@@ -85,3 +85,102 @@ Compilation flags
+ 
+ 	CFLAGS-y specifies options for compiling with $(CC).
+ 	AFLAGS-y specifies assembler options.
++
++
++Build system infrastructure
++===========================
++
++This chapter describe some of the macro used when building Xen.
++
++Macros
++------
++
++
++    if_changed
++	if_changed is the infrastructure used for the following commands.
++
++	Usage::
++
++		target: source(s) FORCE
++			$(call if_changed,ld/objcopy/...)
++
++	When the rule is evaluated, it is checked to see if any files
++	need an update, or the command line has changed since the last
++	invocation. The latter will force a rebuild if any options
++	to the executable have changed.
++	Any target that utilises if_changed must be listed in $(targets),
++	otherwise the command line check will fail, and the target will
++	always be built.
++	if_changed may be used in conjunction with custom commands as
++	defined in "Custom commands".
++
++	Note: It is a typical mistake to forget the FORCE prerequisite.
++	Another common pitfall is that whitespace is sometimes
++	significant; for instance, the below will fail (note the extra space
++	after the comma)::
++
++		target: source(s) FORCE
++
++	**WRONG!**	$(call if_changed, ld/objcopy/...)
++
++        Note:
++	      if_changed should not be used more than once per target.
++              It stores the executed command in a corresponding .cmd
++
++        file and multiple calls would result in overwrites and
++        unwanted results when the target is up to date and only the
++        tests on changed commands trigger execution of commands.
++
++    ld
++	Link target.
++
++	Example::
++
++		targets += setup setup.o bootsect bootsect.o
++		$(obj)/setup $(obj)/bootsect: %: %.o FORCE
++			$(call if_changed,ld)
++
++	$(targets) are assigned all potential targets, by which the build
++	system knows the targets and will:
++
++		1) check for commandline changes
++
++	The ": %: %.o" part of the prerequisite is a shorthand that
++	frees us from listing the setup.o and bootsect.o files.
++
++	Note:
++	      It is a common mistake to forget the "targets :=" assignment,
++	      resulting in the target file being recompiled for no
++	      obvious reason.
++
++    objcopy
++	Copy binary. Uses OBJCOPYFLAGS usually specified in
++	arch/$(ARCH)/Makefile.
++
++Custom commands
++---------------
++
++	When the build system is executing with V=0, then only
++	a shorthand of a command is normally displayed.
++	To enable this behaviour for custom commands, two variables are
++	required to be set::
++
++		quiet_cmd_<command>	- what shall be echoed
++		      cmd_<command>	- the command to execute
++
++	Example::
++
++		# xsm/flask/Makefile
++		mkflask := policy/mkflask.sh
++		quiet_cmd_mkflask = MKFLASK $@
++		cmd_mkflask = $(CONFIG_SHELL) $(mkflask) $(AWK) include \
++			$(FLASK_H_DEPEND)
++
++		include/flask.h: $(FLASK_H_DEPEND) $(mkflask) FORCE
++			$(call if_changed,mkflask)
++
++	When updating the include/flask.h target, the line:
++
++		MKFLASK include/flask.h
++
++	will be displayed with "make V=0". (V=0 is the default)
+diff --git a/xen/Makefile b/xen/Makefile
+index 372692841913..c4cd4d07a9bc 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -52,7 +52,57 @@ dist: install
+ 
+ ifneq ($(root-make-done),y)
+ # section to run before calling Rules.mk, but only once.
++
++# Beautify output
++# ---------------------------------------------------------------------------
++#
++# Normally, we echo the whole command before executing it. By making
++# that echo $($(quiet)$(cmd)), we now have the possibility to set
++# $(quiet) to choose other forms of output instead, e.g.
++#
++#         quiet_cmd_cc_o_c = Compiling $(RELDIR)/$@
++#         cmd_cc_o_c       = $(CC) $(c_flags) -c -o $@ $<
++#
++# If $(quiet) is empty, the whole command will be printed.
++# If it is set to "quiet_", only the short version will be printed.
++# If it is set to "silent_", nothing will be printed at all, since
++# the variable $(silent_cmd_cc_o_c) doesn't exist.
++#
++# A simple variant is to prefix commands with $(Q) - that's useful
++# for commands that shall be hidden in non-verbose mode.
+ #
++#	$(Q)ln $@ :<
++#
++# If KBUILD_VERBOSE equals 0 then the above command will be hidden.
++# If KBUILD_VERBOSE equals 1 then the above command is displayed.
++#
++# To put more focus on warnings, be less verbose as default
++# Use 'make V=1' to see the full commands
++
++ifeq ("$(origin V)", "command line")
++    KBUILD_VERBOSE := $(V)
++endif
++ifndef KBUILD_VERBOSE
++    KBUILD_VERBOSE := 0
++endif
++
++ifeq ($(KBUILD_VERBOSE),1)
++    quiet :=
++    Q :=
++else
++    quiet := quiet_
++    Q := @
++endif
++
++# If the user is running make -s (silent mode), suppress echoing of
++# commands
++
++ifneq ($(findstring s,$(filter-out --%,$(MAKEFLAGS))),)
++    quiet := silent_
++endif
++
++export quiet Q KBUILD_VERBOSE
++
+ # To make sure we do not include .config for any of the *config targets
+ # catch them early, and hand them over to tools/kconfig/Makefile
+ 
+@@ -258,7 +308,8 @@ _clean: delete-unfresh-files
+ 	$(MAKE) $(clean) arch/x86
+ 	$(MAKE) $(clean) test
+ 	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) clean
+-	find . \( -name "*.o" -o -name ".*.d" -o -name ".*.d2" -o -name "*.gcno" \) -exec rm -f {} \;
++	find . \( -name "*.o" -o -name ".*.d" -o -name ".*.d2" \
++		-o -name "*.gcno" -o -name ".*.cmd" \) -exec rm -f {} \;
+ 	rm -f include/asm $(TARGET) $(TARGET).gz $(TARGET).efi $(TARGET).efi.map $(TARGET)-syms $(TARGET)-syms.map *~ core
+ 	rm -f include/asm-*/asm-offsets.h
+ 	rm -f .banner
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 9079df7978a7..3408a35dbf53 100644
+index 7f28c3bc6c13..f531fd5e342d 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -57,7 +57,6 @@ CFLAGS += -Werror -Wredundant-decls -Wno-pointer-arith
- $(call cc-option-add,CFLAGS,CC,-Wvla)
- CFLAGS += -pipe -D__XEN__ -include $(BASEDIR)/include/xen/config.h
- CFLAGS-$(CONFIG_DEBUG_INFO) += -g
--CFLAGS += '-D__OBJECT_FILE__="$@"'
+@@ -42,6 +42,7 @@ ALL_OBJS-y               += $(BASEDIR)/arch/$(TARGET_ARCH)/built_in.o
+ ALL_OBJS-$(CONFIG_CRYPTO)   += $(BASEDIR)/crypto/built_in.o
  
- ifneq ($(CONFIG_CC_IS_CLANG),y)
- # Clang doesn't understand this command line argument, and doesn't appear to
-@@ -70,9 +69,6 @@ AFLAGS += -D__ASSEMBLY__
+ # Initialise some variables
++targets :=
+ CFLAGS-y :=
+ AFLAGS-y :=
  
- ALL_OBJS := $(ALL_OBJS-y)
+@@ -69,6 +70,10 @@ $(foreach o,$(filter-out %/,$(obj-y) $(obj-bin-y) $(extra-y)),$(eval $(call gend
+ subdir-y := $(subdir-y) $(filter %/, $(obj-y))
+ obj-y    := $(patsubst %/, %/built_in.o, $(obj-y))
  
--# Get gcc to generate the dependencies for us.
--CFLAGS-y += -MMD -MP -MF $(@D)/.$(@F).d
--
- CFLAGS += $(CFLAGS-y)
- # allow extra CFLAGS externally via EXTRA_CFLAGS_XEN_CORE
- CFLAGS += $(EXTRA_CFLAGS_XEN_CORE)
-@@ -146,9 +142,12 @@ endif
- # Always build obj-bin files as binary even if they come from C source. 
- $(obj-bin-y): CFLAGS := $(filter-out -flto,$(CFLAGS))
- 
-+c_flags = -MMD -MP -MF $(@D)/.$(@F).d $(CFLAGS) '-D__OBJECT_FILE__="$@"'
-+a_flags = -MMD -MP -MF $(@D)/.$(@F).d $(AFLAGS)
++# $(subdir-obj-y) is the list of objects in $(obj-y) which uses dir/ to
++# tell kbuild to descend
++subdir-obj-y := $(filter %/built_in.o, $(obj-y))
 +
- built_in.o: $(obj-y) $(extra-y)
- ifeq ($(obj-y),)
--	$(CC) $(CFLAGS) -c -x c /dev/null -o $@
-+	$(CC) $(c_flags) -c -x c /dev/null -o $@
- else
- ifeq ($(CONFIG_LTO),y)
- 	$(LD_LTO) -r -o $@ $(filter-out $(extra-y),$^)
-@@ -159,7 +158,7 @@ endif
+ $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += -DINIT_SECTIONS_ONLY
  
+ ifeq ($(CONFIG_COVERAGE),y)
+@@ -124,6 +129,10 @@ else
+ endif
+ endif
+ 
++targets += built_in.o
++targets += $(filter-out $(subdir-obj-y), $(obj-y)) $(extra-y)
++targets += $(MAKECMDGOALS)
++
  built_in_bin.o: $(obj-bin-y) $(extra-y)
  ifeq ($(obj-bin-y),)
--	$(CC) $(AFLAGS) -c -x assembler /dev/null -o $@
-+	$(CC) $(a_flags) -c -x assembler /dev/null -o $@
- else
- 	$(LD) $(LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
- endif
-@@ -178,7 +177,7 @@ SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
- 
- %.o: %.c Makefile
- ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
--	$(CC) $(CFLAGS) -c $< -o $(@D)/.$(@F).tmp -MQ $@
-+	$(CC) $(c_flags) -c $< -o $(@D)/.$(@F).tmp -MQ $@
- ifeq ($(CONFIG_CC_IS_CLANG),y)
- 	$(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
- else
-@@ -186,11 +185,11 @@ else
- endif
- 	rm -f $(@D)/.$(@F).tmp
- else
--	$(CC) $(CFLAGS) -c $< -o $@
-+	$(CC) $(c_flags) -c $< -o $@
+ 	$(CC) $(a_flags) -c -x assembler /dev/null -o $@
+@@ -132,7 +141,7 @@ else
  endif
  
- %.o: %.S Makefile
--	$(CC) $(AFLAGS) -c $< -o $@
-+	$(CC) $(a_flags) -c $< -o $@
+ # Force execution of pattern rules (for which PHONY cannot be directly used).
+-.PHONY: FORCE
++PHONY += FORCE
+ FORCE:
  
- $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
- 	$(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
-@@ -205,12 +204,12 @@ $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
- 	$(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
- 
- %.i: %.c Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) $< -o $@
-+	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) $< -o $@
- 
- %.s: %.c Makefile
--	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -S $< -o $@
-+	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
- 
+ %/built_in.o: FORCE
+@@ -180,4 +189,26 @@ $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
  %.s: %.S Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(AFLAGS)) $< -o $@
-+	$(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
+ 	$(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
  
++# Add intermediate targets:
++# When building objects with specific suffix patterns, add intermediate
++# targets that the final targets are derived from.
++intermediate_targets = $(foreach sfx, $(2), \
++				$(patsubst %$(strip $(1)),%$(sfx), \
++					$(filter %$(strip $(1)), $(targets))))
++# %.init.o <- %.o
++targets += $(call intermediate_targets, .init.o, .o)
++
  -include $(DEPS_INCLUDE)
-diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 7273f356f190..913f6cdeed3f 100644
---- a/xen/arch/arm/Makefile
-+++ b/xen/arch/arm/Makefile
-@@ -120,10 +120,10 @@ $(TARGET)-syms: prelink.o xen.lds
- 	rm -f $(@D)/.$(@F).[0-9]*
++
++# Read all saved command lines and dependencies for the $(targets) we
++# may be building above, using $(if_changed{,_dep}). As an
++# optimization, we don't need to read them if the target does not
++# exist, we will rebuild anyway in that case.
++
++existing-targets := $(wildcard $(sort $(targets)))
++
++-include $(foreach f,$(existing-targets),$(dir $(f)).$(notdir $(f)).cmd)
++
++# Declare the contents of the PHONY variable as phony.  We keep that
++# information in a variable so we can use it in if_changed and friends.
++.PHONY: $(PHONY)
+diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
+index 14f68fa42868..0de6ca21c0a2 100644
+--- a/xen/scripts/Kbuild.include
++++ b/xen/scripts/Kbuild.include
+@@ -2,11 +2,30 @@
+ ####
+ # kbuild: Generic definitions
  
- asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c
--	$(CC) $(filter-out -flto,$(CFLAGS)) -S -o $@ $<
-+	$(CC) $(filter-out -flto,$(c_flags)) -S -o $@ $<
++# Convenient variables
++squote  := '
++empty   :=
++space   := $(empty) $(empty)
++space_escape := _-_SPACE_-_
++pound   := \#
++
++###
++# Name of target with a '.' as filename prefix. foo/bar.o => foo/.bar.o
++dot-target = $(@D)/.$(@F)
++
+ ###
+ # dependencies
+ DEPS = .*.d
+ DEPS_INCLUDE = $(addsuffix .d2, $(basename $(wildcard $(DEPS))))
  
- xen.lds: xen.lds.S
--	$(CC) -P -E -Ui386 $(AFLAGS) -o $@ $<
-+	$(CC) -P -E -Ui386 $(a_flags) -o $@ $<
- 	sed -e 's/xen\.lds\.o:/xen\.lds:/g' <.xen.lds.d >.xen.lds.d.new
- 	mv -f .xen.lds.d.new .xen.lds.d
- 
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index e954edbc2e0a..1405525105d9 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -168,7 +168,7 @@ EFI_LDFLAGS += --major-os-version=2 --minor-os-version=0
- EFI_LDFLAGS += --major-subsystem-version=2 --minor-subsystem-version=0
- 
- # Check if the compiler supports the MS ABI.
--export XEN_BUILD_EFI := $(shell $(CC) $(filter-out $(CFLAGS-y) .%.d,$(CFLAGS)) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
-+export XEN_BUILD_EFI := $(shell $(CC) $(CFLAGS) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
- # Check if the linker supports PE.
- XEN_BUILD_PE := $(if $(XEN_BUILD_EFI),$(shell $(LD) -mi386pep --subsystem=10 -o efi/check.efi efi/check.o 2>/dev/null && echo y))
- CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
-@@ -223,7 +223,7 @@ efi/boot.init.o efi/runtime.o efi/compat.o efi/buildid.o efi/relocs-dummy.o: $(B
- efi/boot.init.o efi/runtime.o efi/compat.o efi/buildid.o efi/relocs-dummy.o: ;
- 
- asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c $(BASEDIR)/include/asm-x86/asm-macros.h
--	$(CC) $(filter-out -Wa$(comma)% -flto,$(CFLAGS)) -S -o $@ $<
-+	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -o $@ $<
- 
- asm-macros.i: CFLAGS += -D__ASSEMBLY__ -P
- 
-@@ -240,7 +240,7 @@ $(BASEDIR)/include/asm-x86/asm-macros.h: asm-macros.i Makefile
- 
- efi.lds: AFLAGS += -DEFI
- xen.lds efi.lds: xen.lds.S
--	$(CC) -P -E -Ui386 $(filter-out -Wa$(comma)%,$(AFLAGS)) -o $@ $<
-+	$(CC) -P -E -Ui386 $(filter-out -Wa$(comma)%,$(a_flags)) -o $@ $<
- 	sed -e 's/.*\.lds\.o:/$(@F):/g' <.$(@F).d >.$(@F).d.new
- 	mv -f .$(@F).d.new .$(@F).d
- 
-diff --git a/xen/arch/x86/mm/Makefile b/xen/arch/x86/mm/Makefile
-index d87dc0aa6eeb..a2431fde6bb4 100644
---- a/xen/arch/x86/mm/Makefile
-+++ b/xen/arch/x86/mm/Makefile
-@@ -12,10 +12,10 @@ obj-$(CONFIG_HVM) += p2m-ept.o p2m-pod.o
- obj-y += paging.o
- 
- guest_walk_%.o: guest_walk.c Makefile
--	$(CC) $(CFLAGS) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
-+	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
- 
- guest_walk_%.i: guest_walk.c Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
-+	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
- 
- guest_walk_%.s: guest_walk.c Makefile
--	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
-+	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
-diff --git a/xen/arch/x86/mm/hap/Makefile b/xen/arch/x86/mm/hap/Makefile
-index b14a9aff93d2..22e7ad54bd33 100644
---- a/xen/arch/x86/mm/hap/Makefile
-+++ b/xen/arch/x86/mm/hap/Makefile
-@@ -6,10 +6,10 @@ obj-y += nested_hap.o
- obj-y += nested_ept.o
- 
- guest_walk_%level.o: guest_walk.c Makefile
--	$(CC) $(CFLAGS) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
-+	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
- 
- guest_walk_%level.i: guest_walk.c Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
-+	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
- 
- guest_walk_%level.s: guest_walk.c Makefile
--	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
-+	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
-diff --git a/xen/arch/x86/mm/shadow/Makefile b/xen/arch/x86/mm/shadow/Makefile
-index ff03a9937f9b..23d3ff10802c 100644
---- a/xen/arch/x86/mm/shadow/Makefile
-+++ b/xen/arch/x86/mm/shadow/Makefile
-@@ -7,10 +7,10 @@ obj-y += none.o
- endif
- 
- guest_%.o: multi.c Makefile
--	$(CC) $(CFLAGS) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
-+	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
- 
- guest_%.i: multi.c Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
-+	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
- 
- guest_%.s: multi.c Makefile
--	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
-+	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index 433bad9055b2..a488a98d8bb7 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -64,7 +64,7 @@ compat/%.h: compat/%.i Makefile $(BASEDIR)/tools/compat-build-header.py
- 	mv -f $@.new $@
- 
- compat/%.i: compat/%.c Makefile
--	$(CPP) $(filter-out -Wa$(comma)% -M% %.d -include %/include/xen/config.h,$(CFLAGS)) $(cppflags-y) -o $@ $<
-+	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(CFLAGS)) $(cppflags-y) -o $@ $<
- 
- compat/%.c: public/%.h xlat.lst Makefile $(BASEDIR)/tools/compat-build-source.py
- 	mkdir -p $(@D)
++###
++# real prerequisites without phony targets
++real-prereqs = $(filter-out $(PHONY), $^)
++
++###
++# Escape single quote for use in echo statements
++escsq = $(subst $(squote),'\$(squote)',$1)
++
+ # as-insn: Check whether assembler supports an instruction.
+ # Usage: cflags-y += $(call as-insn,CC FLAGS,"insn",option-yes,option-no)
+ as-insn = $(if $(shell echo 'void _(void) { asm volatile ( $(2) ); }' \
+@@ -37,3 +56,91 @@ clean := -f $(BASEDIR)/scripts/Makefile.clean clean -C
+ # Usage:
+ # $(MAKE) $(kconfig) target
+ kconfig = -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)"
++
++# echo command.
++# Short version is used, if $(quiet) equals `quiet_', otherwise full one.
++echo-cmd = $(if $($(quiet)cmd_$(1)),\
++        echo '  $(call escsq,$($(quiet)cmd_$(1)))$(echo-why)';)
++
++# printing commands
++cmd = @set -e; $(echo-cmd) $(cmd_$(1))
++
++###
++# if_changed      - execute command if any prerequisite is newer than
++#                   target, or command line has changed
++# if_changed_rule - as if_changed but execute rule instead
++
++ifneq ($(KBUILD_NOCMDDEP),1)
++# Check if both commands are the same including their order. Result is empty
++# string if equal. User may override this check using make KBUILD_NOCMDDEP=1
++cmd-check = $(filter-out $(subst $(space),$(space_escape),$(strip $(cmd_$@))), \
++                         $(subst $(space),$(space_escape),$(strip $(cmd_$1))))
++else
++cmd-check = $(if $(strip $(cmd_$@)),,1)
++endif
++
++# Replace >$< with >$$< to preserve $ when reloading the .cmd file
++# (needed for make)
++# Replace >#< with >$(pound)< to avoid starting a comment in the .cmd file
++# (needed for make)
++# Replace >'< with >'\''< to be able to enclose the whole string in '...'
++# (needed for the shell)
++make-cmd = $(call escsq,$(subst $(pound),$$(pound),$(subst $$,$$$$,$(cmd_$(1)))))
++
++# Find any prerequisites that is newer than target or that does not exist.
++# PHONY targets skipped in both cases.
++any-prereq = $(filter-out $(PHONY),$?)$(filter-out $(PHONY) $(wildcard $^),$^)
++
++# Execute command if command has changed or prerequisite(s) are updated.
++if_changed = $(if $(any-prereq)$(cmd-check),                                 \
++        $(cmd);                                                              \
++        printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd, @:)
++
++# Usage: $(call if_changed_rule,foo)
++# Will check if $(cmd_foo) or any of the prerequisites changed,
++# and if so will execute $(rule_foo).
++if_changed_rule = $(if $(any-prereq)$(cmd-check),$(rule_$(1)),@:)
++
++cmd_and_record =                                                             \
++        $(cmd);                                                              \
++        printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd
++
++###
++# why - tell why a target got built
++#       enabled by make V=2
++#       Output (listed in the order they are checked):
++#          (1) - due to target is PHONY
++#          (2) - due to target missing
++#          (3) - due to: file1.h file2.h
++#          (4) - due to command line change
++#          (5) - due to missing .cmd file
++#          (6) - due to target not in $(targets)
++# (1) PHONY targets are always build
++# (2) No target, so we better build it
++# (3) Prerequisite is newer than target
++# (4) The command line stored in the file named dir/.target.cmd
++#     differed from actual command line. This happens when compiler
++#     options changes
++# (5) No dir/.target.cmd file (used to store command line)
++# (6) No dir/.target.cmd file and target not listed in $(targets)
++#     This is a good hint that there is a bug in the kbuild file
++ifeq ($(KBUILD_VERBOSE),2)
++why =                                                                        \
++    $(if $(filter $@, $(PHONY)),- due to target is PHONY,                    \
++        $(if $(wildcard $@),                                                 \
++            $(if $(any-prereq),- due to: $(any-prereq),                      \
++                $(if $(cmd-check),                                           \
++                    $(if $(cmd_$@),- due to command line change,             \
++                        $(if $(filter $@, $(targets)),                       \
++                            - due to missing .cmd file,                      \
++                            - due to $(notdir $@) not in $$(targets)         \
++                         )                                                   \
++                     )                                                       \
++                 )                                                           \
++             ),                                                              \
++             - due to target missing                                         \
++         )                                                                   \
++     )
++
++echo-why = $(call escsq, $(strip $(why)))
++endif
 -- 
 Anthony PERARD
 
