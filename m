@@ -2,47 +2,48 @@ Return-Path: <SRS0=JQvX=5Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B3179C43331
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 15:57:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 477ABC43331
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 15:58:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8946520BED
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 15:57:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8946520BED
+	by mail.kernel.org (Postfix) with ESMTPS id 2154D20784
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 15:58:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2154D20784
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJJGF-0007FG-Eh; Tue, 31 Mar 2020 15:57:07 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJJHU-0007M7-Rv; Tue, 31 Mar 2020 15:58:24 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=DP+J=5Q=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jJJGD-0007F8-F8
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 15:57:05 +0000
-X-Inumbo-ID: 43f5b85a-7368-11ea-ba2f-12813bfff9fa
+ id 1jJJHT-0007Lx-VC
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 15:58:23 +0000
+X-Inumbo-ID: 72ee9c80-7368-11ea-b58d-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 43f5b85a-7368-11ea-ba2f-12813bfff9fa;
- Tue, 31 Mar 2020 15:57:04 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 72ee9c80-7368-11ea-b58d-bc764e2007e4;
+ Tue, 31 Mar 2020 15:58:23 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CBF98AE50;
- Tue, 31 Mar 2020 15:57:03 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9D9D3AE4B;
+ Tue, 31 Mar 2020 15:58:22 +0000 (UTC)
+Subject: [PATCH v2 1/2] x86emul: vendor specific SYSCALL behavior
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2 0/2] x86emul: (mainly) vendor specific behavior adjustments
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Message-ID: <e4b15b26-4492-efb0-c19a-288c0fd65ba9@suse.com>
-Date: Tue, 31 Mar 2020 17:57:01 +0200
+References: <e4b15b26-4492-efb0-c19a-288c0fd65ba9@suse.com>
+Message-ID: <d87ee7fe-b658-2b6d-e492-55589cadc7b5@suse.com>
+Date: Tue, 31 Mar 2020 17:58:14 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
+In-Reply-To: <e4b15b26-4492-efb0-c19a-288c0fd65ba9@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -61,10 +62,35 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Just the remaining two pieces of the original series.
+AMD CPUs permit the insn everywhere (even outside of protected mode),
+while Intel ones restrict it to 64-bit mode. While at it also comment
+about the apparently missing CPUID bit check.
 
-1: vendor specific SYSCALL behavior
-2: support SYSRET
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+v2: Replace CPUID bit check by comment.
 
-Jan
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -5897,13 +5897,16 @@ x86_emulate(
+         break;
+ 
+     case X86EMUL_OPC(0x0f, 0x05): /* syscall */
+-        generate_exception_if(!in_protmode(ctxt, ops), EXC_UD);
+-
+-        /* Inject #UD if syscall/sysret are disabled. */
++        /*
++         * Inject #UD if syscall/sysret are disabled. EFER.SCE can't be set
++         * with the respective CPUID bit clear, so no need for an explicit
++         * check of that one.
++         */
+         fail_if(ops->read_msr == NULL);
+         if ( (rc = ops->read_msr(MSR_EFER, &msr_val, ctxt)) != X86EMUL_OKAY )
+             goto done;
+         generate_exception_if((msr_val & EFER_SCE) == 0, EXC_UD);
++        generate_exception_if(!amd_like(ctxt) && !mode_64bit(), EXC_UD);
+ 
+         if ( (rc = ops->read_msr(MSR_STAR, &msr_val, ctxt)) != X86EMUL_OKAY )
+             goto done;
+
 
