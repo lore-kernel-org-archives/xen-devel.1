@@ -7,41 +7,40 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5297EC2D0EE
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84574C2D0EF
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 272B020838
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:34 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 572D1206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Mwj+3OaE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 272B020838
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FLbs6kVr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 572D1206DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEAq-0000vP-7T; Tue, 31 Mar 2020 10:31:12 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJEAv-0000wa-TA; Tue, 31 Mar 2020 10:31:17 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEAo-0000v9-PE
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:10 +0000
-X-Inumbo-ID: bb7a65d5-733a-11ea-ba0c-12813bfff9fa
+ id 1jJEAt-0000vz-MR
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:15 +0000
+X-Inumbo-ID: bd2aa47a-733a-11ea-b58d-bc764e2007e4
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id bb7a65d5-733a-11ea-ba0c-12813bfff9fa;
- Tue, 31 Mar 2020 10:31:08 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bd2aa47a-733a-11ea-b58d-bc764e2007e4;
+ Tue, 31 Mar 2020 10:31:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585650669;
+ d=citrix.com; s=securemail; t=1585650671;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=bHmbNn+xSjp5FPcLqfUyNkXyOAlVeYUAo2LAo99Colo=;
- b=Mwj+3OaEOY2ZBW/o2daYxFPGSM5dqLBB12qgqBGunILpTEKWMHGMqSke
- HtLR2xAmnkzrJOOadz1cN5M5ZF5alMRAPwHUMG5sYrgLbX0F9a62hskU5
- FP/WbFXfKl4c7S6yjoyJGI1mMfpXThdoNFycUqD3zyg3YsVOeeaqYIiAP o=;
+ bh=B2c8PFnX2lG4+CRuHl+fzIwey4dBLqAwqoZqdNixUwE=;
+ b=FLbs6kVrUrc+UuR5GtTI1DogJw1eNK9IDocs37mwNutGdIHe7YiJtviT
+ qaNsLz4Kw2F9gvSeoPIDIVysRNYEaX40iIgKErKXOkhCpCFws81Hajs7j
+ QrHbnLWclZQ62sfZQIkLQugThieZiV5L91vCPHITrA0JheTnh3ATPPitm 8=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -73,29 +72,28 @@ Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: DvYawsXKEXC6awT2cHsXcWfV6x//viIjD3hTAbpaqyBW4QbZWaiEAlqovsqjePmT6uGJqnJC7i
- uTZ8qUbmmrogWoBBAwwixf+VLqCmFo4tZhGnWrJTAX5XT2TpC6f+05e5PMBEyD704VshiPJPuq
- JOSbeaZ7R/dtpu9DVJANZRZrIs0hWBN4DpX6fDs9//hlLLmciZwSoGRdX5oBUGnqRm/iIS8XlJ
- vmGOlEWfSW7Qyu+LQ3dXANoJfy0KsgGG68Ga3PQVxsSsEtl3LJ/KLqAKcM2o+Q48H0A9vQ8da1
- PQ4=
+IronPort-SDR: 5jDjny+ZUqEGwf81l377FYnEOtjMnxe54Topdbn3WJfafEY6mRx6h1HRHfY1kfYqPpg1xCGxzh
+ Q9zNMJo0vUU1pmGoFq0dLIZQLKsSnchnFahOhaqr1iZ+SXpJyy8njiYQKwrZ5mUpGB1tAJE+iV
+ RbTcbtffzzPpjDZFvrjeZntdy/UId6JZImK8b08zfpRYBy0bkhcsN8Hc4GnR6zy6MuDq6wsckC
+ S/3BqkEg8A5udvkzJUNOjtUG3ThlMn717fcV7HJpAlUSiemtG/BZesxrW6yXD+P7zmdMYkeyGo
+ e4Y=
 X-SBRS: 2.7
-X-MesageID: 15138784
+X-MesageID: 15138790
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138784"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138790"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 04/18] xen/build: include include/config/auto.conf in
- main Makefile
-Date: Tue, 31 Mar 2020 11:30:48 +0100
-Message-ID: <20200331103102.1105674-5-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 09/18] xen/build: Start using if_changed
+Date: Tue, 31 Mar 2020 11:30:53 +0100
+Message-ID: <20200331103102.1105674-10-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -106,200 +104,276 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
- Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We are going to generate the CFLAGS early from "xen/Makefile" instead
-of in "Rules.mk", but we need to include "config/auto.conf", so
-include it in "Makefile".
+This patch start to use if_changed introduced in a previous commit.
 
-Before including "config/auto.conf" we check which make target a user
-is calling, as some targets don't need "auto.conf". For targets that
-needs auto.conf, make will generate it (and a default .config if
-missing).
+Whenever if_changed is called, the target must have FORCE as
+dependency so that if_changed can check if the command line to be
+run has changed, so the macro $(real-prereqs) must be used to
+discover the dependencies without "FORCE".
 
-root-make-done is to avoid doing the calculation again once Rules.mk
-takes over and is been executed with the root Makefile. When Rules.mk
-is including xen/Makefile, `config-build' and `need-config' are
-undefined so auto.conf will not be included again (it is already
-included by Rules.mk) and kconfig target are out of reach of Rules.mk.
+Whenever a target isn't in obj-y, it should be added to extra-y so the
+.*.cmd dependency file associated with the target can be loaded. This
+is done for xsm/flask/ and both common/lib{elf,fdt}/ and
+arch/x86/Makefile.
 
-We are introducing a target %config to catch all targets for kconfig.
-So we need an extra target %/.config to prevent make from trying to
-regenerate $(XEN_ROOT)/.config that is included in Config.mk.
+For the targets that generate .*.d dependency files, there's going to
+be two dependency files (.*.d and .*.cmd) until we can merge them
+together in a later patch via fixdep from Linux.
 
-The way targets are filtered is inspired by Kbuild, with some code
-imported from Linux. That's why there is PHONY variable that isn't
-used yet, for example.
+One cleanup, libelf-relocate.o doesn't exist anymore.
+
+We import cmd_ld and cmd_objcopy from Linux v5.4.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
     v4:
-    - check that root-make-done hasn't been set to an expected value
-      instead of checking if it has been set at all.
-    - Add a shorthand $(kconfig) to run kconfig targets.
-    
-    v3:
-    - filter only for %config instead of both config %config
-    - keep the multi-target pattern rule trick for include/config/auto.conf
-      instead of using Linux's newer pattern (we dont have tristate.conf so
-      don't need to change it)
-    - use y/n for root-make-done, config-build, need-config instead of
-      relying on ifdef and ifndef and on assigning an empty value meaning
-      undef
-    - use space for indentation
-    - explain why %/.config is suddenly needed.
+    - typos
+    - fix missing FORCE in libfdt/Makefile
+    - typo flask vs flash in xsm
+    - in xsm, use *_H_DEPEND in command lines of mkaccess and mkflask
+      instead of $(real-prereq) to avoid including the script as argument of
+      itself.
 
- xen/Makefile               | 98 +++++++++++++++++++++++++++++---------
- xen/scripts/Kbuild.include |  5 ++
- 2 files changed, 80 insertions(+), 23 deletions(-)
+ xen/Rules.mk               | 68 +++++++++++++++++++++++++++-----------
+ xen/arch/arm/Makefile      |  4 +--
+ xen/arch/x86/Makefile      |  1 +
+ xen/arch/x86/efi/Makefile  |  7 ++--
+ xen/common/libelf/Makefile | 12 ++++---
+ xen/common/libfdt/Makefile | 11 +++---
+ xen/xsm/flask/Makefile     | 17 +++++++---
+ 7 files changed, 85 insertions(+), 35 deletions(-)
 
-diff --git a/xen/Makefile b/xen/Makefile
-index e5f7b1ae13bc..8375070e0d41 100644
---- a/xen/Makefile
-+++ b/xen/Makefile
-@@ -49,7 +49,73 @@ default: build
- .PHONY: dist
- dist: install
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index f531fd5e342d..5e668f5ba0d8 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -56,6 +56,18 @@ SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
  
--build install:: include/config/auto.conf
-+
-+ifneq ($(root-make-done),y)
-+# section to run before calling Rules.mk, but only once.
-+#
-+# To make sure we do not include .config for any of the *config targets
-+# catch them early, and hand them over to tools/kconfig/Makefile
-+
-+clean-targets := %clean
-+no-dot-config-targets := $(clean-targets) \
-+                         uninstall debug cloc \
-+                         cscope TAGS tags MAP gtags \
-+                         xenversion
-+
-+config-build    := n
-+need-config     := y
-+
-+ifneq ($(filter $(no-dot-config-targets), $(MAKECMDGOALS)),)
-+    ifeq ($(filter-out $(no-dot-config-targets), $(MAKECMDGOALS)),)
-+        need-config := n
-+    endif
-+endif
-+
-+ifneq ($(filter %config,$(MAKECMDGOALS)),)
-+    config-build := y
-+endif
-+
-+export root-make-done := y
-+endif # root-make-done
-+
-+include scripts/Kbuild.include
-+
-+ifeq ($(config-build),y)
-+# ===========================================================================
-+# *config targets only - make sure prerequisites are updated, and descend
-+# in tools/kconfig to make the *config target
-+
-+config: FORCE
-+	$(MAKE) $(kconfig) $@
-+
-+# Config.mk tries to include .config file, don't try to remake it
-+%/.config: ;
-+
-+%config: FORCE
-+	$(MAKE) $(kconfig) $@
-+
-+else # !config-build
-+
-+ifeq ($(need-config),y)
-+include include/config/auto.conf
-+# Read in dependencies to all Kconfig* files, make sure to run syncconfig if
-+# changes are detected.
-+include include/config/auto.conf.cmd
-+
-+# Allow people to just run `make` as before and not force them to configure
-+$(KCONFIG_CONFIG):
-+	$(MAKE) $(kconfig) defconfig
-+
-+# The actual configuration files used during the build are stored in
-+# include/generated/ and include/config/. Update them if .config is newer than
-+# include/config/auto.conf (which mirrors .config).
-+#
-+# This exploits the 'multi-target pattern rule' trick.
-+# The syncconfig should be executed only once to make all the targets.
-+include/config/%.conf include/config/%.conf.cmd: $(KCONFIG_CONFIG)
-+	$(MAKE) $(kconfig) syncconfig
-+
-+endif # need-config
+ include Makefile
  
- .PHONY: build install uninstall clean distclean MAP
- build install uninstall debug clean distclean MAP::
-@@ -254,9 +320,6 @@ cscope:
- _MAP:
- 	$(NM) -n $(TARGET)-syms | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aUw] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)' > System.map
- 
--.PHONY: FORCE
--FORCE:
--
- %.o %.i %.s: %.c FORCE
- 	$(MAKE) -f $(BASEDIR)/Rules.mk -C $(*D) $(@F)
- 
-@@ -277,25 +340,6 @@ $(foreach base,arch/x86/mm/guest_walk_% \
-                arch/x86/mm/shadow/guest_%, \
-     $(foreach ext,o i s,$(call build-intermediate,$(base).$(ext))))
- 
--kconfig := oldconfig config menuconfig defconfig allyesconfig allnoconfig \
--	nconfig xconfig gconfig savedefconfig listnewconfig olddefconfig \
--	randconfig $(notdir $(wildcard arch/$(SRCARCH)/configs/*_defconfig))
--.PHONY: $(kconfig)
--$(kconfig):
--	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)" $@
--
--include/config/%.conf: include/config/auto.conf.cmd $(KCONFIG_CONFIG)
--	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)" syncconfig
--
--# Allow people to just run `make` as before and not force them to configure
--$(KCONFIG_CONFIG):
--	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)" defconfig
--
--# Break the dependency chain for the first run
--include/config/auto.conf.cmd: ;
--
---include $(BASEDIR)/include/config/auto.conf.cmd
--
- .PHONY: cloc
- cloc:
- 	$(eval tmpfile := $(shell mktemp))
-@@ -307,3 +351,11 @@ cloc:
- 	cloc --list-file=$(tmpfile)
- 	rm $(tmpfile)
- 
-+endif #config-build
++# Linking
++# ---------------------------------------------------------------------------
 +
-+PHONY += FORCE
-+FORCE:
++quiet_cmd_ld = LD      $@
++cmd_ld = $(LD) $(XEN_LDFLAGS) -r -o $@ $(real-prereqs)
 +
-+# Declare the contents of the PHONY variable as phony.  We keep that
-+# information in a variable so we can use it in if_changed and friends.
-+.PHONY: $(PHONY)
-diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
-index 806c68824ed5..14f68fa42868 100644
---- a/xen/scripts/Kbuild.include
-+++ b/xen/scripts/Kbuild.include
-@@ -32,3 +32,8 @@ cc-ifversion = $(shell [ $(CONFIG_GCC_VERSION)0 $(1) $(2)000 ] && echo $(3) || e
- # Usage:
- # $(MAKE) $(clean) dir
- clean := -f $(BASEDIR)/scripts/Makefile.clean clean -C
++# Objcopy
++# ---------------------------------------------------------------------------
 +
-+# Shorthand for kconfig
-+# Usage:
-+# $(MAKE) $(kconfig) target
-+kconfig = -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)"
++quiet_cmd_objcopy = OBJCOPY $@
++cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
++
+ define gendep
+     ifneq ($(1),$(subst /,:,$(1)))
+         DEPS += $(dir $(1)).$(notdir $(1)).d
+@@ -165,29 +177,47 @@ else
+ 	$(CC) $(c_flags) -c $< -o $@
+ endif
+ 
+-%.o: %.S Makefile
+-	$(CC) $(a_flags) -c $< -o $@
++quiet_cmd_cc_o_S = CC      $@
++cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
++
++%.o: %.S FORCE
++	$(call if_changed,cc_o_S)
++
++
++quiet_cmd_obj_init_o = INIT_O  $@
++define cmd_obj_init_o
++    $(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
++        case "$$name" in \
++        .*.local) ;; \
++        .text|.text.*|.data|.data.*|.bss) \
++            test $$sz != 0 || continue; \
++            echo "Error: size of $<:$$name is 0x$$sz" >&2; \
++            exit $$(expr $$idx + 1);; \
++        esac; \
++    done; \
++    $(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
++endef
++
++$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o FORCE
++	$(call if_changed,obj_init_o)
++
++quiet_cmd_cpp_i_c = CPP     $@
++cmd_cpp_i_c = $(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) $< -o $@
++
++quiet_cmd_cc_s_c = CC      $@
++cmd_cc_s_c = $(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
+ 
+-$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
+-	$(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
+-		case "$$name" in \
+-		.*.local) ;; \
+-		.text|.text.*|.data|.data.*|.bss) \
+-			test $$sz != 0 || continue; \
+-			echo "Error: size of $<:$$name is 0x$$sz" >&2; \
+-			exit $$(expr $$idx + 1);; \
+-		esac; \
+-	done
+-	$(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
++quiet_cmd_s_S = CPP     $@
++cmd_s_S = $(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
+ 
+-%.i: %.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) $< -o $@
++%.i: %.c FORCE
++	$(call if_changed,cpp_i_c)
+ 
+-%.s: %.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
++%.s: %.c FORCE
++	$(call if_changed,cc_s_c)
+ 
+-%.s: %.S Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
++%.s: %.S FORCE
++	$(call if_changed,cpp_s_S)
+ 
+ # Add intermediate targets:
+ # When building objects with specific suffix patterns, add intermediate
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 9f1ab2335756..b79ad55646bd 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -97,8 +97,8 @@ prelink_lto.o: $(ALL_OBJS)
+ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+ 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ else
+-prelink.o: $(ALL_OBJS)
+-	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
++prelink.o: $(ALL_OBJS) FORCE
++	$(call if_changed,ld)
+ endif
+ 
+ $(TARGET)-syms: prelink.o xen.lds
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index a805e9982e85..44137d919b66 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -71,6 +71,7 @@ obj-$(CONFIG_TBOOT) += tboot.o
+ obj-y += hpet.o
+ obj-y += vm_event.o
+ obj-y += xstate.o
++extra-y += asm-macros.i
+ 
+ x86_emulate.o: x86_emulate/x86_emulate.c x86_emulate/x86_emulate.h
+ 
+diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
+index 490d791aae2d..3e4c395b7535 100644
+--- a/xen/arch/x86/efi/Makefile
++++ b/xen/arch/x86/efi/Makefile
+@@ -1,7 +1,10 @@
+ CFLAGS-y += -fshort-wchar
+ 
+-%.o: %.ihex
+-	$(OBJCOPY) -I ihex -O binary $< $@
++quiet_cmd_objcopy_o_ihex = OBJCOPY $@
++cmd_objcopy_o_ihex = $(OBJCOPY) -I ihex -O binary $< $@
++
++%.o: %.ihex FORCE
++	$(call if_changed,objcopy_o_ihex)
+ 
+ boot.init.o: buildid.o
+ 
+diff --git a/xen/common/libelf/Makefile b/xen/common/libelf/Makefile
+index 464c448d9d37..a92326c982e9 100644
+--- a/xen/common/libelf/Makefile
++++ b/xen/common/libelf/Makefile
+@@ -1,12 +1,16 @@
+ obj-bin-y := libelf.o
+ nocov-y += libelf.o
++libelf-objs := libelf-tools.o libelf-loader.o libelf-dominfo.o
+ 
+ SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
++OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
+ 
+ CFLAGS-y += -Wno-pointer-sign
+ 
+-libelf.o: libelf-temp.o Makefile
+-	$(OBJCOPY) $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
++libelf.o: libelf-temp.o FORCE
++	$(call if_changed,objcopy)
+ 
+-libelf-temp.o: libelf-tools.o libelf-loader.o libelf-dominfo.o #libelf-relocate.o
+-	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
++libelf-temp.o: $(libelf-objs) FORCE
++	$(call if_changed,ld)
++
++extra-y += libelf-temp.o $(libelf-objs)
+diff --git a/xen/common/libfdt/Makefile b/xen/common/libfdt/Makefile
+index e2a5e59380a0..6bd207cf8ffa 100644
+--- a/xen/common/libfdt/Makefile
++++ b/xen/common/libfdt/Makefile
+@@ -1,14 +1,17 @@
+ include Makefile.libfdt
+ 
+ SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
++OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
+ 
+ obj-y += libfdt.o
+ nocov-y += libfdt.o
+ 
+ CFLAGS-y += -I$(BASEDIR)/include/xen/libfdt/
+ 
+-libfdt.o: libfdt-temp.o Makefile
+-	$(OBJCOPY) $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
++libfdt.o: libfdt-temp.o FORCE
++	$(call if_changed,objcopy)
+ 
+-libfdt-temp.o: $(LIBFDT_OBJS)
+-	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
++libfdt-temp.o: $(LIBFDT_OBJS) FORCE
++	$(call if_changed,ld)
++
++extra-y += libfdt-temp.o $(LIBFDT_OBJS)
+diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
+index 011ef5ca91f8..7d0831e2b865 100644
+--- a/xen/xsm/flask/Makefile
++++ b/xen/xsm/flask/Makefile
+@@ -20,12 +20,21 @@ AV_H_FILES = include/av_perm_to_string.h include/av_permissions.h
+ ALL_H_FILES = $(FLASK_H_FILES) $(AV_H_FILES)
+ 
+ $(obj-y) ss/built_in.o: $(ALL_H_FILES)
++extra-y += $(ALL_H_FILES)
+ 
+-$(FLASK_H_FILES): $(FLASK_H_DEPEND)
+-	$(CONFIG_SHELL) policy/mkflask.sh $(AWK) include $(FLASK_H_DEPEND)
++mkflask := policy/mkflask.sh
++quiet_cmd_mkflask = MKFLASK $@
++cmd_mkflask = $(CONFIG_SHELL) $(mkflask) $(AWK) include $(FLASK_H_DEPEND)
+ 
+-$(AV_H_FILES): $(AV_H_DEPEND)
+-	$(CONFIG_SHELL) policy/mkaccess_vector.sh $(AWK) $(AV_H_DEPEND)
++$(FLASK_H_FILES): $(FLASK_H_DEPEND) $(mkflask) FORCE
++	$(call if_changed,mkflask)
++
++mkaccess := policy/mkaccess_vector.sh
++quiet_cmd_mkaccess = MKACCESS VECTOR $@
++cmd_mkaccess = $(CONFIG_SHELL) $(mkaccess) $(AWK) $(AV_H_DEPEND)
++
++$(AV_H_FILES): $(AV_H_DEPEND) $(mkaccess) FORCE
++	$(call if_changed,mkaccess)
+ 
+ obj-bin-$(CONFIG_XSM_FLASK_POLICY) += flask-policy.o
+ flask-policy.o: policy.bin
 -- 
 Anthony PERARD
 
