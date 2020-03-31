@@ -7,40 +7,41 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34BC8C43331
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5297EC2D0EE
 	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 00DAE206DB
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 272B020838
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:34 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="P8m4r/cG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00DAE206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Mwj+3OaE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 272B020838
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEAp-0000vJ-Vb; Tue, 31 Mar 2020 10:31:11 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jJEAq-0000vP-7T; Tue, 31 Mar 2020 10:31:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEAo-0000vA-MJ
+ id 1jJEAo-0000v9-PE
  for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:10 +0000
-X-Inumbo-ID: bc469bd6-733a-11ea-b58d-bc764e2007e4
+X-Inumbo-ID: bb7a65d5-733a-11ea-ba0c-12813bfff9fa
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bc469bd6-733a-11ea-b58d-bc764e2007e4;
- Tue, 31 Mar 2020 10:31:09 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bb7a65d5-733a-11ea-ba0c-12813bfff9fa;
+ Tue, 31 Mar 2020 10:31:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585650670;
+ d=citrix.com; s=securemail; t=1585650669;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=9qsUPcuNZB94vcMy9A4eDY05j7eFH8egvaVUDX3e+N4=;
- b=P8m4r/cGzT/HK+6p8mv9xeS3J1VebosLqwZwnTTK0wmiR1FTcEX8dO+4
- U/eZtrpSHbm5rv5JASnW/HuYf5/xG32vQLL/rkEyxHBkE/OXlEWPPF/am
- X1WaKNcoF+kOq1HqTBv0Kk2WZ4Zdb+pWk5Fr3VGn+heUfHASWiGpfP100 M=;
+ bh=bHmbNn+xSjp5FPcLqfUyNkXyOAlVeYUAo2LAo99Colo=;
+ b=Mwj+3OaEOY2ZBW/o2daYxFPGSM5dqLBB12qgqBGunILpTEKWMHGMqSke
+ HtLR2xAmnkzrJOOadz1cN5M5ZF5alMRAPwHUMG5sYrgLbX0F9a62hskU5
+ FP/WbFXfKl4c7S6yjoyJGI1mMfpXThdoNFycUqD3zyg3YsVOeeaqYIiAP o=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -72,22 +73,23 @@ Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: M+Lfh2hbsCFUWmZLcxiwSyDh+gfuAqOD/NyLBDiSDyImtJfy+/jaWlANC1qSF5gUktIeB/EaRH
- RaqZ79KFNJcwBGG/CnLK44jT2YQbKDFgOpaGERr07aAfoaSQNcC4IEVzax+EFf2pCA/qrVW6mN
- E/JEkNiuE3LmlgHC3QEs8L5Hvtg/W39xm/Rl13Jtt7BVhc0r89iFFknbzT0uQTWQQEcEru4wZr
- Ful4VulXxHYAj5TtK53hHV1n7pp8R+qT+KDHcXJ5/brzOMfn9a01E2n9g3DY5QZ7zUQIJXMBxE
- cNk=
+IronPort-SDR: DvYawsXKEXC6awT2cHsXcWfV6x//viIjD3hTAbpaqyBW4QbZWaiEAlqovsqjePmT6uGJqnJC7i
+ uTZ8qUbmmrogWoBBAwwixf+VLqCmFo4tZhGnWrJTAX5XT2TpC6f+05e5PMBEyD704VshiPJPuq
+ JOSbeaZ7R/dtpu9DVJANZRZrIs0hWBN4DpX6fDs9//hlLLmciZwSoGRdX5oBUGnqRm/iIS8XlJ
+ vmGOlEWfSW7Qyu+LQ3dXANoJfy0KsgGG68Ga3PQVxsSsEtl3LJ/KLqAKcM2o+Q48H0A9vQ8da1
+ PQ4=
 X-SBRS: 2.7
-X-MesageID: 15138786
+X-MesageID: 15138784
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138786"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138784"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 07/18] build: Introduce documentation for xen Makefiles
-Date: Tue, 31 Mar 2020 11:30:51 +0100
-Message-ID: <20200331103102.1105674-8-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 04/18] xen/build: include include/config/auto.conf in
+ main Makefile
+Date: Tue, 31 Mar 2020 11:30:48 +0100
+Message-ID: <20200331103102.1105674-5-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
@@ -111,131 +113,193 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This start explainning the variables that can be used in the many
-Makefiles in xen/.
+We are going to generate the CFLAGS early from "xen/Makefile" instead
+of in "Rules.mk", but we need to include "config/auto.conf", so
+include it in "Makefile".
 
-Most of the document copies and modifies text from Linux v5.4 document
-linux.git/Documentation/kbuild/makefiles.rst. Modification are mostly
-to avoid mentioning kbuild. Thus I've added the SPDX tag which was
-only in index.rst in linux.git.
+Before including "config/auto.conf" we check which make target a user
+is calling, as some targets don't need "auto.conf". For targets that
+needs auto.conf, make will generate it (and a default .config if
+missing).
+
+root-make-done is to avoid doing the calculation again once Rules.mk
+takes over and is been executed with the root Makefile. When Rules.mk
+is including xen/Makefile, `config-build' and `need-config' are
+undefined so auto.conf will not be included again (it is already
+included by Rules.mk) and kconfig target are out of reach of Rules.mk.
+
+We are introducing a target %config to catch all targets for kconfig.
+So we need an extra target %/.config to prevent make from trying to
+regenerate $(XEN_ROOT)/.config that is included in Config.mk.
+
+The way targets are filtered is inspired by Kbuild, with some code
+imported from Linux. That's why there is PHONY variable that isn't
+used yet, for example.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 ---
 
 Notes:
     v4:
-    - new patch
+    - check that root-make-done hasn't been set to an expected value
+      instead of checking if it has been set at all.
+    - Add a shorthand $(kconfig) to run kconfig targets.
+    
+    v3:
+    - filter only for %config instead of both config %config
+    - keep the multi-target pattern rule trick for include/config/auto.conf
+      instead of using Linux's newer pattern (we dont have tristate.conf so
+      don't need to change it)
+    - use y/n for root-make-done, config-build, need-config instead of
+      relying on ifdef and ifndef and on assigning an empty value meaning
+      undef
+    - use space for indentation
+    - explain why %/.config is suddenly needed.
 
- docs/misc/xen-makefiles/makefiles.rst | 87 +++++++++++++++++++++++++++
- xen/Rules.mk                          |  4 ++
- 2 files changed, 91 insertions(+)
- create mode 100644 docs/misc/xen-makefiles/makefiles.rst
+ xen/Makefile               | 98 +++++++++++++++++++++++++++++---------
+ xen/scripts/Kbuild.include |  5 ++
+ 2 files changed, 80 insertions(+), 23 deletions(-)
 
-diff --git a/docs/misc/xen-makefiles/makefiles.rst b/docs/misc/xen-makefiles/makefiles.rst
-new file mode 100644
-index 000000000000..a86e3a612d61
---- /dev/null
-+++ b/docs/misc/xen-makefiles/makefiles.rst
-@@ -0,0 +1,87 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============
-+Xen Makefiles
-+=============
-+
-+Documentation for the build system of Xen, found in xen.git/xen/.
-+
-+Makefile files
-+==============
-+
-+Description of the syntax that can be used in most Makefiles named
-+'Makefile'. ('xen/Makefile' isn't part of the description.)
-+
-+'Makefile's are consumed by 'Rules.mk' when building.
-+
-+Goal definitions
-+----------------
-+
-+	Goal definitions are the main part (heart) of the Makefile.
-+	These lines define the files to be built, any special compilation
-+	options, and any subdirectories to be entered recursively.
-+
-+	The most simple makefile contains one line:
-+
-+	Example::
-+
-+		obj-y += foo.o
-+
-+	This tells the build system that there is one object in that
-+	directory, named foo.o. foo.o will be built from foo.c or foo.S.
-+
-+	The following pattern is often used to have object selected
-+	depending on the configuration:
-+
-+	Example::
-+
-+		obj-$(CONFIG_FOO) += foo.o
-+
-+	$(CONFIG_FOO) can evaluates to y.
-+	If CONFIG_FOO is not y, then the file will not be compiled nor linked.
-+
-+Descending down in directories
-+------------------------------
-+
-+	A Makefile is only responsible for building objects in its own
-+	directory. Files in subdirectories should be taken care of by
-+	Makefiles in these subdirs. The build system will automatically
-+	invoke make recursively in subdirectories, provided you let it know of
-+	them.
-+
-+	To do so, obj-y is used.
-+	acpi lives in a separate directory, and the Makefile present in
-+	drivers/ tells the build system to descend down using the following
-+	assignment.
-+
-+	Example::
-+
-+		#drivers/Makefile
-+		obj-$(CONFIG_ACPI) += acpi/
-+
-+	If CONFIG_ACPI is set to 'y'
-+	the corresponding obj- variable will be set, and the build system
-+	will descend down in the apci directory.
-+	The build system only uses this information to decide that it needs
-+	to visit the directory, it is the Makefile in the subdirectory that
-+	specifies what is modular and what is built-in.
-+
-+	It is good practice to use a `CONFIG_` variable when assigning directory
-+	names. This allows the build system to totally skip the directory if the
-+	corresponding `CONFIG_` option is 'y'.
-+
-+Compilation flags
-+-----------------
-+
-+    CFLAGS-y and AFLAGS-y
-+	These two flags apply only to the makefile in which they
-+	are assigned. They are used for all the normal cc, as and ld
-+	invocations happening during a recursive build.
-+
-+	$(CFLAGS-y) is necessary because the top Makefile owns the
-+	variable $(XEN_CFLAGS) and uses it for compilation flags for the
-+	entire tree. And the variable $(CFLAGS) is modified by Config.mk
-+	which evaluated in every subdirs.
-+
-+	CFLAGS-y specifies options for compiling with $(CC).
-+	AFLAGS-y specifies assembler options.
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 0def40a00a09..7f28c3bc6c13 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -1,3 +1,7 @@
-+#
-+# See docs/misc/xen-makefiles/makefiles.rst on variables that can be used in
-+# Makefile and are consumed by Rules.mk
-+#
+diff --git a/xen/Makefile b/xen/Makefile
+index e5f7b1ae13bc..8375070e0d41 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -49,7 +49,73 @@ default: build
+ .PHONY: dist
+ dist: install
  
- -include $(BASEDIR)/include/config/auto.conf
+-build install:: include/config/auto.conf
++
++ifneq ($(root-make-done),y)
++# section to run before calling Rules.mk, but only once.
++#
++# To make sure we do not include .config for any of the *config targets
++# catch them early, and hand them over to tools/kconfig/Makefile
++
++clean-targets := %clean
++no-dot-config-targets := $(clean-targets) \
++                         uninstall debug cloc \
++                         cscope TAGS tags MAP gtags \
++                         xenversion
++
++config-build    := n
++need-config     := y
++
++ifneq ($(filter $(no-dot-config-targets), $(MAKECMDGOALS)),)
++    ifeq ($(filter-out $(no-dot-config-targets), $(MAKECMDGOALS)),)
++        need-config := n
++    endif
++endif
++
++ifneq ($(filter %config,$(MAKECMDGOALS)),)
++    config-build := y
++endif
++
++export root-make-done := y
++endif # root-make-done
++
++include scripts/Kbuild.include
++
++ifeq ($(config-build),y)
++# ===========================================================================
++# *config targets only - make sure prerequisites are updated, and descend
++# in tools/kconfig to make the *config target
++
++config: FORCE
++	$(MAKE) $(kconfig) $@
++
++# Config.mk tries to include .config file, don't try to remake it
++%/.config: ;
++
++%config: FORCE
++	$(MAKE) $(kconfig) $@
++
++else # !config-build
++
++ifeq ($(need-config),y)
++include include/config/auto.conf
++# Read in dependencies to all Kconfig* files, make sure to run syncconfig if
++# changes are detected.
++include include/config/auto.conf.cmd
++
++# Allow people to just run `make` as before and not force them to configure
++$(KCONFIG_CONFIG):
++	$(MAKE) $(kconfig) defconfig
++
++# The actual configuration files used during the build are stored in
++# include/generated/ and include/config/. Update them if .config is newer than
++# include/config/auto.conf (which mirrors .config).
++#
++# This exploits the 'multi-target pattern rule' trick.
++# The syncconfig should be executed only once to make all the targets.
++include/config/%.conf include/config/%.conf.cmd: $(KCONFIG_CONFIG)
++	$(MAKE) $(kconfig) syncconfig
++
++endif # need-config
  
+ .PHONY: build install uninstall clean distclean MAP
+ build install uninstall debug clean distclean MAP::
+@@ -254,9 +320,6 @@ cscope:
+ _MAP:
+ 	$(NM) -n $(TARGET)-syms | grep -v '\(compiled\)\|\(\.o$$\)\|\( [aUw] \)\|\(\.\.ng$$\)\|\(LASH[RL]DI\)' > System.map
+ 
+-.PHONY: FORCE
+-FORCE:
+-
+ %.o %.i %.s: %.c FORCE
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk -C $(*D) $(@F)
+ 
+@@ -277,25 +340,6 @@ $(foreach base,arch/x86/mm/guest_walk_% \
+                arch/x86/mm/shadow/guest_%, \
+     $(foreach ext,o i s,$(call build-intermediate,$(base).$(ext))))
+ 
+-kconfig := oldconfig config menuconfig defconfig allyesconfig allnoconfig \
+-	nconfig xconfig gconfig savedefconfig listnewconfig olddefconfig \
+-	randconfig $(notdir $(wildcard arch/$(SRCARCH)/configs/*_defconfig))
+-.PHONY: $(kconfig)
+-$(kconfig):
+-	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)" $@
+-
+-include/config/%.conf: include/config/auto.conf.cmd $(KCONFIG_CONFIG)
+-	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)" syncconfig
+-
+-# Allow people to just run `make` as before and not force them to configure
+-$(KCONFIG_CONFIG):
+-	$(MAKE) -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)" defconfig
+-
+-# Break the dependency chain for the first run
+-include/config/auto.conf.cmd: ;
+-
+--include $(BASEDIR)/include/config/auto.conf.cmd
+-
+ .PHONY: cloc
+ cloc:
+ 	$(eval tmpfile := $(shell mktemp))
+@@ -307,3 +351,11 @@ cloc:
+ 	cloc --list-file=$(tmpfile)
+ 	rm $(tmpfile)
+ 
++endif #config-build
++
++PHONY += FORCE
++FORCE:
++
++# Declare the contents of the PHONY variable as phony.  We keep that
++# information in a variable so we can use it in if_changed and friends.
++.PHONY: $(PHONY)
+diff --git a/xen/scripts/Kbuild.include b/xen/scripts/Kbuild.include
+index 806c68824ed5..14f68fa42868 100644
+--- a/xen/scripts/Kbuild.include
++++ b/xen/scripts/Kbuild.include
+@@ -32,3 +32,8 @@ cc-ifversion = $(shell [ $(CONFIG_GCC_VERSION)0 $(1) $(2)000 ] && echo $(3) || e
+ # Usage:
+ # $(MAKE) $(clean) dir
+ clean := -f $(BASEDIR)/scripts/Makefile.clean clean -C
++
++# Shorthand for kconfig
++# Usage:
++# $(MAKE) $(kconfig) target
++kconfig = -f $(BASEDIR)/tools/kconfig/Makefile.kconfig ARCH=$(ARCH) SRCARCH=$(SRCARCH) HOSTCC="$(HOSTCC)" HOSTCXX="$(HOSTCXX)"
 -- 
 Anthony PERARD
 
