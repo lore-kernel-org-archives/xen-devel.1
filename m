@@ -7,57 +7,56 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D1217C43331
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F2602C2D0EE
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A085E206DB
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C1614206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MlS1y7Zz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A085E206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="O5eQBmwE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1614206DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJDmI-0005p0-Pu; Tue, 31 Mar 2020 10:05:50 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJDmP-0005uk-Tb; Tue, 31 Mar 2020 10:05:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=fshn=5Q=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jJDmH-0005o6-8x
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:05:49 +0000
-X-Inumbo-ID: 2f649310-7337-11ea-ba0b-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2f649310-7337-11ea-ba0b-12813bfff9fa;
- Tue, 31 Mar 2020 10:05:44 +0000 (UTC)
+ id 1jJDmP-0005u6-3v
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:05:57 +0000
+X-Inumbo-ID: 325bcb24-7337-11ea-b4f4-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 325bcb24-7337-11ea-b4f4-bc764e2007e4;
+ Tue, 31 Mar 2020 10:05:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585649144;
+ d=citrix.com; s=securemail; t=1585649150;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=4Rpc+u7yewDKCwasBqxPdMtiKb7w5ItgKOuQREKX64k=;
- b=MlS1y7ZzkI85eiQiiHF4PvDTodsN3LztDnH5CuKnTHkRUQYENuyji75d
- +MaWKOpRyneaF1hTBZgAW/92FlEHCM68+SpPYQXfi8PIA/3IMND00yH/F
- VFGve12kTHcHuxYK3pCu37j22yoXns4Pi1vgDWXcDt8m3EZMElPU9Plw+ s=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=RXoGjwqxEgkEyP09KfWZrxI1cEHDPQ7pSyNUoM8V/OU=;
+ b=O5eQBmwE5z3ShVtBnmfM6OMKB9FEn/LeTfHQkLZDVyHW1Kb8X630mQ0e
+ KDFdRI82ifNX4qnhwAFcYhivCWIhC8pzZDCY9gG/gH3fsy2zCLk81ERlt
+ 1GUk5dz0p3kb1jQjKntRJZ43QqsHPhdKzsp0yeJ0UJGYYSCEHp5mU/2RK M=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -66,30 +65,30 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: tW0ZKWaHqITBnQUfNXWyyeP5LgTUL9itJB1I3I63diIB+Q8ORzkjBwhZtdumqQDWN86wXLJjNp
- rdb7qQ/gRgIOdSjlcP3qkNnHZyYaEXJRI0Jx/noDsFH5SUtpGWYKWIZRoblGGoOND45AxfELHp
- Pu3i9lM52Exgeu5hggS0oLBy4Z9dFqfiFAJ3hYPRf8YMPFr4cBSz7YEcuH5SQzik5+N5ZHGike
- +ACKIH83Fa83xxch6md5Svpe0Yd4edwCyPSvYqyTWRNJ3+EscP5qVeXEMwH4GQsiPybmX7X57K
- NPk=
+IronPort-SDR: f0qRLIDg9nvm10rai68Kr+qGElZNeUi9y18eICqWyi4uC0gXeLuJXVrzW39CU0xLEiRnoUiBiW
+ 2yn3ChCH3BEOQ90O/RLFjvkINEF3nTB80aEMb8MO5+KdppaAx1gJNFgpSmxyDQqurDuyAeIgzw
+ Wvaas9WjzQJbWRyEj5vLKYrNoo1UFTO5/hiAq3cfGiXOj+ki+TBo97HcbNfm/FINvtMnLnbJSq
+ cPTAl43CvCoi3tMUT8t3Jw54PlpgqH6RG+vSyaaMqtBp+wHvdORY4KPYZbdxxnFRn6l0sqVt2W
+ jD0=
 X-SBRS: 2.7
-X-MesageID: 15245336
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 14930060
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15245336"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14930060"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 05/11] x86/ucode/amd: Overhaul the equivalent cpu table
- handling completely
-Date: Tue, 31 Mar 2020 11:05:25 +0100
-Message-ID: <20200331100531.4294-6-andrew.cooper3@citrix.com>
+Subject: [PATCH 08/11] x86/ucode/amd: Rename bufsize to size in
+ cpu_request_microcode()
+Date: Tue, 31 Mar 2020 11:05:28 +0100
+Message-ID: <20200331100531.4294-9-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200331100531.4294-1-andrew.cooper3@citrix.com>
 References: <20200331100531.4294-1-andrew.cooper3@citrix.com>
@@ -112,239 +111,99 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We currently copy the entire equivalency table, and the single correct
-microcode.  This is not safe to heterogeneous scenarios, and as Xen doesn't
-support such situations to being with, can be used to simplify things further.
+To simplify future cleanup, rename this variable.
 
-The CPUID.1.EAX => processor_rev_id mapping is fixed for an individual part.
-We can cache the single appropriate entry on first discovery, and forgo
-duplicating the entire table.
-
-Alter install_equiv_cpu_table() to be scan_equiv_cpu_table() which is
-responsible for checking the equivalency table and caching appropriate
-details.  It now has a check for finding a different mapping (which indicates
-that one of the tables we've seen is definitely wrong).
-
-A return value of -ESRCH is now used to signify "everything fine, but nothing
-applicable for the current CPU", which is used to select the
-container_fast_forward() path.
-
-Drop the printk(), as each applicable error path in scan_equiv_cpu_table()
-already prints diagnostics.
+No functional change.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
-
-Naming of 'equiv' subject to improvement.
-
-An alternative would be to embed the full equivelancy table, but it is fairly
-large, and would need adjusting every time a new model/stepping was released.
 ---
- xen/arch/x86/cpu/microcode/amd.c | 112 ++++++++++++++++++++++-----------------
- 1 file changed, 64 insertions(+), 48 deletions(-)
+ xen/arch/x86/cpu/microcode/amd.c | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index d2ecc7ae87..d3439b0c6c 100644
+index 254f3dd4d7..980e61c547 100644
 --- a/xen/arch/x86/cpu/microcode/amd.c
 +++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -61,8 +61,6 @@ struct __packed microcode_header_amd {
- struct microcode_patch {
-     struct microcode_header_amd *mpb;
-     size_t mpb_size;
--    struct equiv_cpu_entry *equiv_cpu_table;
--    size_t equiv_cpu_table_size;
- };
- 
- /* Temporary, until the microcode_* structure are disentangled. */
-@@ -74,6 +72,31 @@ struct mpbhdr {
-     uint8_t data[];
- };
- 
-+/*
-+ * Microcode updates for different CPUs are distinguished by their
-+ * processor_rev_id in the header.  This denotes the format of the internals
-+ * of the microcode engine, and is fixed for an individual CPU.
-+ *
-+ * There is a mapping from the CPU signature (CPUID.1.EAX -
-+ * family/model/stepping) to the "equivalent CPU identifier" which is
-+ * similarly fixed.  In some cases, multiple different CPU signatures map to
-+ * the same equiv_id for processor lines which share identical microcode
-+ * facilities.
-+ *
-+ * This mapping can't be calculated in the general case, but is provided in
-+ * the microcode container, so the correct piece of microcode for the CPU can
-+ * be identified.  We cache it the first time we encounter the correct mapping
-+ * for this system.
-+ *
-+ * Note: for now, we assume a fully homogeneous setup, meaning that there is
-+ * exactly one equiv_id we need to worry about for microcode blob
-+ * identification.  This may need revisiting in due course.
-+ */
-+static struct {
-+    uint32_t sig;
-+    uint16_t id;
-+} equiv __read_mostly;
-+
- /* See comment in start_update() for cases when this routine fails */
- static int collect_cpu_info(struct cpu_signature *csig)
- {
-@@ -150,40 +173,15 @@ static bool check_final_patch_levels(const struct cpu_signature *sig)
-     return false;
- }
- 
--static bool_t find_equiv_cpu_id(const struct equiv_cpu_entry *equiv_cpu_table,
--                                unsigned int current_cpu_id,
--                                unsigned int *equiv_cpu_id)
--{
--    unsigned int i;
--
--    if ( !equiv_cpu_table )
--        return 0;
--
--    for ( i = 0; equiv_cpu_table[i].installed_cpu != 0; i++ )
--    {
--        if ( current_cpu_id == equiv_cpu_table[i].installed_cpu )
--        {
--            *equiv_cpu_id = equiv_cpu_table[i].equiv_cpu & 0xffff;
--            return 1;
--        }
--    }
--
--    return 0;
--}
--
- static enum microcode_match_result microcode_fits(
-     const struct microcode_amd *mc_amd)
- {
-     unsigned int cpu = smp_processor_id();
-     const struct cpu_signature *sig = &per_cpu(cpu_sig, cpu);
-     const struct microcode_header_amd *mc_header = mc_amd->mpb;
--    const struct equiv_cpu_entry *equiv_cpu_table = mc_amd->equiv_cpu_table;
--    unsigned int equiv_cpu_id;
- 
--    if ( !find_equiv_cpu_id(equiv_cpu_table, sig->sig, &equiv_cpu_id) )
--        return MIS_UCODE;
--
--    if ( (mc_header->processor_rev_id) != equiv_cpu_id )
-+    if ( equiv.sig != sig->sig ||
-+         equiv.id  != mc_header->processor_rev_id )
-         return MIS_UCODE;
- 
-     if ( !verify_patch_size(mc_amd->mpb_size) )
-@@ -213,7 +211,6 @@ static void free_patch(struct microcode_patch *mc_amd)
- {
-     if ( mc_amd )
-     {
--        xfree(mc_amd->equiv_cpu_table);
-         xfree(mc_amd->mpb);
-         xfree(mc_amd);
-     }
-@@ -335,14 +332,15 @@ static int get_ucode_from_buffer_amd(
+@@ -427,8 +427,7 @@ static int container_fast_forward(const void *data, size_t size_left, size_t *of
      return 0;
  }
  
--static int install_equiv_cpu_table(
--    struct microcode_amd *mc_amd,
-+static int scan_equiv_cpu_table(
-     const void *data,
-     size_t size_left,
-     size_t *offset)
+-static struct microcode_patch *cpu_request_microcode(const void *buf,
+-                                                     size_t bufsize)
++static struct microcode_patch *cpu_request_microcode(const void *buf, size_t size)
  {
-+    const struct cpu_signature *sig = &this_cpu(cpu_sig);
-     const struct mpbhdr *mpbuf;
-     const struct equiv_cpu_entry *eq;
-+    unsigned int i, nr;
- 
-     if ( size_left < (sizeof(*mpbuf) + 4) ||
-          (mpbuf = data + *offset + 4,
-@@ -362,19 +360,45 @@ static int install_equiv_cpu_table(
- 
-     if ( mpbuf->len == 0 || mpbuf->len % sizeof(*eq) ||
-          (eq = (const void *)mpbuf->data,
--          eq[(mpbuf->len / sizeof(*eq)) - 1].installed_cpu) )
-+          nr = mpbuf->len / sizeof(*eq),
-+          eq[nr - 1].installed_cpu) )
-     {
-         printk(KERN_ERR "microcode: Wrong microcode equivalent cpu table length\n");
-         return -EINVAL;
-     }
- 
--    mc_amd->equiv_cpu_table = xmemdup_bytes(mpbuf->data, mpbuf->len);
--    if ( !mc_amd->equiv_cpu_table )
--        return -ENOMEM;
-+    /* Search the equiv_cpu_table for the current CPU. */
-+    for ( i = 0; i < nr && eq[i].installed_cpu; ++i )
-+    {
-+        if ( eq[i].installed_cpu != sig->sig )
-+            continue;
- 
--    mc_amd->equiv_cpu_table_size = mpbuf->len;
-+        if ( !equiv.sig ) /* Cache details on first find. */
-+        {
-+            equiv.sig = sig->sig;
-+            equiv.id  = eq[i].equiv_cpu;
-+            return 0;
-+        }
- 
--    return 0;
-+        if ( equiv.sig != sig->sig || equiv.id != eq[i].equiv_cpu )
-+        {
-+            /*
-+             * This can only occur if two equiv tables have been seen with
-+             * different mappings for the same CPU.  The mapping is fixed, so
-+             * one of the tables is wrong.  As we can't calculate the mapping,
-+             * we trusted the first table we saw.
-+             */
-+            printk(XENLOG_ERR
-+                   "microcode: Equiv mismatch: cpu %08x, got %04x, cached %04x\n",
-+                   sig->sig, eq[i].equiv_cpu, equiv.id);
-+            return -EINVAL;
-+        }
-+
-+        return 0;
-+    }
-+
-+    /* equiv_cpu_table was fine, but nothing found for the current CPU. */
-+    return -ESRCH;
- }
- 
- static int container_fast_forward(const void *data, size_t size_left, size_t *offset)
-@@ -417,7 +441,6 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-     struct microcode_patch *patch = NULL;
-     size_t offset = 0, saved_size = 0;
-     int error = 0;
--    unsigned int equiv_cpu_id;
+     struct microcode_amd *mc_amd;
+     struct microcode_header_amd *saved = NULL;
+@@ -438,7 +437,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
      unsigned int cpu = smp_processor_id();
      const struct cpu_signature *sig = &per_cpu(cpu_sig, cpu);
  
-@@ -444,15 +467,9 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-      */
-     while ( offset < bufsize )
+-    if ( bufsize < 4 ||
++    if ( size < 4 ||
+          *(const uint32_t *)buf != UCODE_MAGIC )
      {
--        error = install_equiv_cpu_table(mc_amd, buf, bufsize - offset, &offset);
--        if ( error )
--        {
--            printk(KERN_ERR "microcode: installing equivalent cpu table failed\n");
--            break;
--        }
-+        error = scan_equiv_cpu_table(buf, bufsize - offset, &offset);
+         printk(KERN_ERR "microcode: Wrong microcode patch file magic\n");
+@@ -459,17 +458,17 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+      * 1. check if this container file has equiv_cpu_id match
+      * 2. If not, fast-fwd to next container file
+      */
+-    while ( offset < bufsize )
++    while ( offset < size )
+     {
+-        error = scan_equiv_cpu_table(buf, bufsize - offset, &offset);
++        error = scan_equiv_cpu_table(buf, size - offset, &offset);
  
--        if ( find_equiv_cpu_id(mc_amd->equiv_cpu_table, sig->sig,
--                               &equiv_cpu_id) )
-+        if ( !error || error != -ESRCH )
+         if ( !error || error != -ESRCH )
              break;
  
-         error = container_fast_forward(buf, bufsize - offset, &offset);
-@@ -479,7 +496,6 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+-        error = container_fast_forward(buf, bufsize - offset, &offset);
++        error = container_fast_forward(buf, size - offset, &offset);
          if ( error == -ENODATA )
-             error = 0;
+         {
+-            ASSERT(offset == bufsize);
++            ASSERT(offset == size);
+             break;
+         }
+         if ( error )
+@@ -498,7 +497,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+      * It's possible the data file has multiple matching ucode,
+      * lets keep searching till the latest version
+      */
+-    while ( (error = get_ucode_from_buffer_amd(mc_amd, buf, bufsize,
++    while ( (error = get_ucode_from_buffer_amd(mc_amd, buf, size,
+                                                &offset)) == 0 )
+     {
+         /*
+@@ -517,7 +516,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+             mc_amd->mpb = NULL;
+         }
  
--        xfree(mc_amd->equiv_cpu_table);
-         xfree(mc_amd);
-         goto out;
+-        if ( offset >= bufsize )
++        if ( offset >= size )
+             break;
+ 
+         /*
+@@ -527,7 +526,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+          *    earlier while() (On this case, matches on earlier container
+          *    file and we break)
+          * 3. Proceed to while ( (error = get_ucode_from_buffer_amd(mc_amd,
+-         *                                  buf, bufsize,&offset)) == 0 )
++         *                                  buf, size, &offset)) == 0 )
+          * 4. Find correct patch using microcode_fits() and apply the patch
+          *    (Assume: apply_microcode() is successful)
+          * 5. The while() loop from (3) continues to parse the binary as
+@@ -540,7 +539,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+          *    before if ( mpbuf->type != UCODE_UCODE_TYPE ) evaluates to
+          *    false and returns -EINVAL.
+          */
+-        if ( offset + SECTION_HDR_SIZE <= bufsize &&
++        if ( offset + SECTION_HDR_SIZE <= size &&
+              *(const uint32_t *)(buf + offset) == UCODE_MAGIC )
+             break;
      }
 -- 
 2.11.0
