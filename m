@@ -7,41 +7,41 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A92B7C43331
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95C95C2D0E8
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 76D30208E4
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 62B19208E4
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="GtT/9khL"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 76D30208E4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WkV+h0PC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62B19208E4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEQd-0002xm-BK; Tue, 31 Mar 2020 10:47:31 +0000
+	id 1jJEQi-00033G-8z; Tue, 31 Mar 2020 10:47:36 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEQc-0002xN-7S
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:47:30 +0000
-X-Inumbo-ID: 0454d062-733d-11ea-ba0c-12813bfff9fa
+ id 1jJEQh-00032A-7o
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:47:35 +0000
+X-Inumbo-ID: 05b79fdf-733d-11ea-ba0c-12813bfff9fa
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0454d062-733d-11ea-ba0c-12813bfff9fa;
- Tue, 31 Mar 2020 10:47:29 +0000 (UTC)
+ id 05b79fdf-733d-11ea-ba0c-12813bfff9fa;
+ Tue, 31 Mar 2020 10:47:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585651650;
+ d=citrix.com; s=securemail; t=1585651652;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=JeUsPgvppjoTgoSQDJQrJ8xz/P7fKJCsWup60MnRC1U=;
- b=GtT/9khLtDcBk8y/h5QXzDOjEQ0lNpzFZsS2fMCp1GjTeNmo/IJF4DnU
- T3+GGpAW7wOwTgqvuTNYLSn4P5E2CN7WbzJVq3IQTFUrGrUI7MDS6yocv
- glbQSz25lrkshODfmGhtRcTfPX9+d9FMuV7/Yk1TNG+nFvr6Sle3tXSCF s=;
+ bh=sTRFnOyU0qysVRQKIYm0QNOBqhQc72Q/G0zAnlz7wss=;
+ b=WkV+h0PCk7bhHCZu30gDrjMdITnj0n/1Tbr6PaS31bQysA6lyaBmyVQe
+ RxLWRqF1ngjOr9ToheOGKnEOrPOVUyMcOjQtJp7eF7YVzXwVmyGzKTjZv
+ Q0Rw9GDW164DtNCHmzMVCAq6bvuR2pHWmag+FWaRY8xUn4+nKbBIGG9Gi c=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -73,28 +73,28 @@ Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: KdzNX0PSUNBli/sj0NvYAwoVyQVUg1hP+RRdG1xUB/X0PuJWpmXnTDjgFCgTu+HupwK+L0fl/h
- 1DgloYAoGWi7gA1yc3+WJocpwEf9f5JeLW22v02ECeAzzcIflghDVEbZvR5y+118u0SUFXSz/a
- xp7g4KZvCF8ixnFdnylqbySHJxGis1Nm9HybGm79Q5RDUrnw5mrykNzNockz0mSkugi+nHxz+D
- HQ5fBzPfzoljcyv5vN8A1auu6RqdZhlarQ45GT06F3a39VK69twjlTik7sdxqfHPBrBMBN0HaX
- Gqs=
+IronPort-SDR: viTSuHUT56dAd46Npgp61E6wHa4ri6NYqsb0L7KvibMGiKbnoav/JB/670NXVr7YjHfSVYzvMy
+ BHNSFWPTVt/yTHp9rdWDbgWj7Ft84gStkYjngUTbtjuCAR7Xnl+Oxy7dw9xxqJjqBrcxhnPGA8
+ eX4rOCQLX4L91ytvh+m7kbGGU7bH3BVQciDty5hI+Vhwoqe8imQmJSC4OAHDh9T5BrnYN6OlHj
+ VfPaUE/tdfYgvoAq7Wa4b0fYZ90QkEKXTdal2+K5f9yZR1BZbMrFzNn6vzm9iiPO6YS1kClMIf
+ 4Ws=
 X-SBRS: 2.7
-X-MesageID: 14904509
+X-MesageID: 14904511
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14904509"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14904511"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 16/18] build,xsm: Fix multiple call
-Date: Tue, 31 Mar 2020 11:31:00 +0100
-Message-ID: <20200331103102.1105674-17-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 13/18] xen/build: Use if_changed for prelink*.o
+Date: Tue, 31 Mar 2020 11:30:57 +0100
+Message-ID: <20200331103102.1105674-14-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -106,45 +106,52 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Anthony PERARD <anthony.perard@citrix.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>
+ Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Both script mkflask.sh and mkaccess_vector.sh generates multiple
-files. Exploits the 'multi-target pattern rule' trick to call each
-scripts only once.
+We change the dependencies of prelink-efi.o so that we can use the
+same command line. The dependency on efi/built_in.o isn't needed
+because, we already have:
+    efi/*.o: efi/built_in.o
+to build efi/*.o files that prelink-efi.o needs.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
     v4:
-    - new patch
+    - fix rebuild, prelink.o and prelink-efi.o needs to be in targets
 
- xen/xsm/flask/Makefile | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/x86/Makefile | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
-index 7d0831e2b865..48577cbe3f04 100644
---- a/xen/xsm/flask/Makefile
-+++ b/xen/xsm/flask/Makefile
-@@ -26,14 +26,14 @@ mkflask := policy/mkflask.sh
- quiet_cmd_mkflask = MKFLASK $@
- cmd_mkflask = $(CONFIG_SHELL) $(mkflask) $(AWK) include $(FLASK_H_DEPEND)
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index eb6f7a6aceca..7676fb1c5bc8 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -128,11 +128,13 @@ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+ prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o efi/boot.init.o
+ 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ else
+-prelink.o: $(ALL_OBJS)
+-	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
++prelink.o: $(ALL_OBJS) FORCE
++	$(call if_changed,ld)
++
++prelink-efi.o: $(filter-out %/efi/built_in.o,$(ALL_OBJS)) efi/boot.init.o efi/runtime.o efi/compat.o FORCE
++	$(call if_changed,ld)
  
--$(FLASK_H_FILES): $(FLASK_H_DEPEND) $(mkflask) FORCE
-+$(patsubst include/%,\%/%,$(FLASK_H_FILES)): $(FLASK_H_DEPEND) $(mkflask) FORCE
- 	$(call if_changed,mkflask)
+-prelink-efi.o: $(ALL_OBJS) efi/boot.init.o efi/runtime.o efi/compat.o
+-	$(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out %/efi/built_in.o,$^)
++targets += prelink.o prelink-efi.o
+ endif
  
- mkaccess := policy/mkaccess_vector.sh
- quiet_cmd_mkaccess = MKACCESS VECTOR $@
- cmd_mkaccess = $(CONFIG_SHELL) $(mkaccess) $(AWK) $(AV_H_DEPEND)
- 
--$(AV_H_FILES): $(AV_H_DEPEND) $(mkaccess) FORCE
-+$(patsubst include/%,\%/%,$(AV_H_FILES)): $(AV_H_DEPEND) $(mkaccess) FORCE
- 	$(call if_changed,mkaccess)
- 
- obj-bin-$(CONFIG_XSM_FLASK_POLICY) += flask-policy.o
+ $(TARGET)-syms: prelink.o xen.lds
 -- 
 Anthony PERARD
 
