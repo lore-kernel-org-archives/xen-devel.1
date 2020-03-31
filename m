@@ -7,56 +7,57 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 20F72C2D0EF
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A92B7C43331
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E58C0208E4
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 76D30208E4
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:47 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="bce8vxZW"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E58C0208E4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="GtT/9khL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 76D30208E4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEQd-0002y8-KG; Tue, 31 Mar 2020 10:47:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jJEQd-0002xm-BK; Tue, 31 Mar 2020 10:47:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEQc-0002xQ-9m
+ id 1jJEQc-0002xN-7S
  for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:47:30 +0000
-X-Inumbo-ID: 02dda9ca-733d-11ea-b4f4-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 02dda9ca-733d-11ea-b4f4-bc764e2007e4;
- Tue, 31 Mar 2020 10:47:27 +0000 (UTC)
+X-Inumbo-ID: 0454d062-733d-11ea-ba0c-12813bfff9fa
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0454d062-733d-11ea-ba0c-12813bfff9fa;
+ Tue, 31 Mar 2020 10:47:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585651648;
+ d=citrix.com; s=securemail; t=1585651650;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=C/idYU1VU2IlndD5vCH9ocRvuNC+krC6KqsaRrZnf0k=;
- b=bce8vxZW7Fz6WB2qh825b+suND+A5ftH+tV63fpKgRqrcwolTsoYY9h2
- PR+MWHsO26sEewsWQiScN04ZjojQEulROKahCQgiyTyQdHcN1sWYN6OMn
- k8T5TaWL9NucKIWfj9eDKmgjlV3jjPnmIXMw2DRRve2FGUWq7nkb3AnOY E=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ bh=JeUsPgvppjoTgoSQDJQrJ8xz/P7fKJCsWup60MnRC1U=;
+ b=GtT/9khLtDcBk8y/h5QXzDOjEQ0lNpzFZsS2fMCp1GjTeNmo/IJF4DnU
+ T3+GGpAW7wOwTgqvuTNYLSn4P5E2CN7WbzJVq3IQTFUrGrUI7MDS6yocv
+ glbQSz25lrkshODfmGhtRcTfPX9+d9FMuV7/Yk1TNG+nFvr6Sle3tXSCF s=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
  spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
  anthony.perard@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,30 +66,29 @@ Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: FNgE11mTYU3wsjPR7QjbGUq7CMfBh/nCRoj0+HaxpFVo+1Opo9Q5qyCTJic45FydjzPbBNEQad
- J5YRSwElfxKn3Sqm/6yhWDN1sS3WqC6QVX5pkI26WcZ90zBaYCsgxK3X6AFQOapbCu3OA0NaLY
- D7MSyax+UZ5a9LhqwZ6q/5+qOMBHBPhHPxaFpzju6JprHsF5391LXlhgLFSdxDxHc0wj20NtIq
- 8pTtfzdsJdsMhdLhOwcAKnFaqleWxl6iai9uOHXvDh5xrWv4ek9IuA7UJSV9PU9Vx4iRY9Blpv
- z48=
+IronPort-SDR: KdzNX0PSUNBli/sj0NvYAwoVyQVUg1hP+RRdG1xUB/X0PuJWpmXnTDjgFCgTu+HupwK+L0fl/h
+ 1DgloYAoGWi7gA1yc3+WJocpwEf9f5JeLW22v02ECeAzzcIflghDVEbZvR5y+118u0SUFXSz/a
+ xp7g4KZvCF8ixnFdnylqbySHJxGis1Nm9HybGm79Q5RDUrnw5mrykNzNockz0mSkugi+nHxz+D
+ HQ5fBzPfzoljcyv5vN8A1auu6RqdZhlarQ45GT06F3a39VK69twjlTik7sdxqfHPBrBMBN0HaX
+ Gqs=
 X-SBRS: 2.7
-X-MesageID: 14931630
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 14904509
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14931630"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14904509"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 11/18] xen/build: Use if_changed_rules with %.o:%.c
- targets
-Date: Tue, 31 Mar 2020 11:30:55 +0100
-Message-ID: <20200331103102.1105674-12-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 16/18] build,xsm: Fix multiple call
+Date: Tue, 31 Mar 2020 11:31:00 +0100
+Message-ID: <20200331103102.1105674-17-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
@@ -105,67 +105,46 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Use $(dot-target) to have the target name prefix with a dot.
-
-Now, when the CC command has run, it is recorded in .*.cmd
-file, then if_changed_rules will compare it on subsequent runs.
+Both script mkflask.sh and mkaccess_vector.sh generates multiple
+files. Exploits the 'multi-target pattern rule' trick to call each
+scripts only once.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/Rules.mk | 26 +++++++++++++++++---------
- 1 file changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/xen/Rules.mk b/xen/Rules.mk
-index c744175fd6f0..e126e4972dec 100644
---- a/xen/Rules.mk
-+++ b/xen/Rules.mk
-@@ -173,19 +173,27 @@ FORCE:
+Notes:
+    v4:
+    - new patch
+
+ xen/xsm/flask/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
+index 7d0831e2b865..48577cbe3f04 100644
+--- a/xen/xsm/flask/Makefile
++++ b/xen/xsm/flask/Makefile
+@@ -26,14 +26,14 @@ mkflask := policy/mkflask.sh
+ quiet_cmd_mkflask = MKFLASK $@
+ cmd_mkflask = $(CONFIG_SHELL) $(mkflask) $(AWK) include $(FLASK_H_DEPEND)
  
- SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
+-$(FLASK_H_FILES): $(FLASK_H_DEPEND) $(mkflask) FORCE
++$(patsubst include/%,\%/%,$(FLASK_H_FILES)): $(FLASK_H_DEPEND) $(mkflask) FORCE
+ 	$(call if_changed,mkflask)
  
--%.o: %.c Makefile
-+quiet_cmd_cc_o_c = CC      $@
- ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
--	$(CC) $(c_flags) -c $< -o $(@D)/.$(@F).tmp -MQ $@
--ifeq ($(CONFIG_CC_IS_CLANG),y)
--	$(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
--else
--	$(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
--endif
--	rm -f $(@D)/.$(@F).tmp
-+    cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $(dot-target).tmp -MQ $@
-+    ifeq ($(CONFIG_CC_IS_CLANG),y)
-+        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(dot-target).tmp $@
-+    else
-+        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(dot-target).tmp $@
-+    endif
-+    cmd_objcopy_fix_sym += && rm -f $(dot-target).tmp
- else
--	$(CC) $(c_flags) -c $< -o $@
-+    cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $@
- endif
+ mkaccess := policy/mkaccess_vector.sh
+ quiet_cmd_mkaccess = MKACCESS VECTOR $@
+ cmd_mkaccess = $(CONFIG_SHELL) $(mkaccess) $(AWK) $(AV_H_DEPEND)
  
-+define rule_cc_o_c
-+    $(call cmd_and_record,cc_o_c)
-+    $(call cmd,objcopy_fix_sym)
-+endef
-+
-+%.o: %.c FORCE
-+	$(call if_changed_rule,cc_o_c)
-+
- quiet_cmd_cc_o_S = CC      $@
- cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
+-$(AV_H_FILES): $(AV_H_DEPEND) $(mkaccess) FORCE
++$(patsubst include/%,\%/%,$(AV_H_FILES)): $(AV_H_DEPEND) $(mkaccess) FORCE
+ 	$(call if_changed,mkaccess)
  
+ obj-bin-$(CONFIG_XSM_FLASK_POLICY) += flask-policy.o
 -- 
 Anthony PERARD
 
