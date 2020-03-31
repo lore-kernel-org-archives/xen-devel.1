@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C60FC2D0EE
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 20F72C2D0EF
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5E93C208E4
+	by mail.kernel.org (Postfix) with ESMTPS id E58C0208E4
 	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Rmb7vlqp"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5E93C208E4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="bce8vxZW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E58C0208E4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEQP-0002t2-4D; Tue, 31 Mar 2020 10:47:17 +0000
+	id 1jJEQd-0002y8-KG; Tue, 31 Mar 2020 10:47:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEQN-0002sx-F8
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:47:15 +0000
-X-Inumbo-ID: fb74fcb0-733c-11ea-83d8-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ id 1jJEQc-0002xQ-9m
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:47:30 +0000
+X-Inumbo-ID: 02dda9ca-733d-11ea-b4f4-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fb74fcb0-733c-11ea-83d8-bc764e2007e4;
- Tue, 31 Mar 2020 10:47:14 +0000 (UTC)
+ id 02dda9ca-733d-11ea-b4f4-bc764e2007e4;
+ Tue, 31 Mar 2020 10:47:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585651634;
+ d=citrix.com; s=securemail; t=1585651648;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=lDRlkg899SiCd2y5eU+46cWGS8nMcYP2KjNS9HXZkJQ=;
- b=Rmb7vlqpDUQaTqhpNDP3W5UUUXiiPDc91cQdYEQ3v/+sPISX9KT+6FZA
- KEdB2DdeGBJQGcejmavJ5d3hHlx/n/WCZAw4s0nuYBkYfEiHaTusQJF0E
- vJZCqwikflzu1MNazAuMFQArsuk9DsbsUyzn6X2jEYQypPRbUEeQ3QhOG g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=C/idYU1VU2IlndD5vCH9ocRvuNC+krC6KqsaRrZnf0k=;
+ b=bce8vxZW7Fz6WB2qh825b+suND+A5ftH+tV63fpKgRqrcwolTsoYY9h2
+ PR+MWHsO26sEewsWQiScN04ZjojQEulROKahCQgiyTyQdHcN1sWYN6OMn
+ k8T5TaWL9NucKIWfj9eDKmgjlV3jjPnmIXMw2DRRve2FGUWq7nkb3AnOY E=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
  spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  anthony.perard@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,29 +65,30 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: KKYv3hltNk9TmzAmAoHvsretgA6PJB5TeyF8tz5qS/yKcCQTNyCfBz9WTM5wDzT4sCowpxArvM
- KZ+3R5bg/di9dMKgUkrPSa5mCxw8zEw/VVcIYcOQ9eLXaly89cRpZEcNabf6bpC5Z2Q2TImclL
- APSXo3f0oz3ejAcxRaP7OuPU4zbIWcP301tnH88lHQ8lW+yYnhgGYWiVmDpeqbDT5+5ffhly2u
- 7vBM66ZQCMklSIqNWEA0bqEhVkRRJFZraAq16pLD88HOOiogApflvjf5WgdAgpI3h09DcofwoW
- yjI=
+IronPort-SDR: FNgE11mTYU3wsjPR7QjbGUq7CMfBh/nCRoj0+HaxpFVo+1Opo9Q5qyCTJic45FydjzPbBNEQad
+ J5YRSwElfxKn3Sqm/6yhWDN1sS3WqC6QVX5pkI26WcZ90zBaYCsgxK3X6AFQOapbCu3OA0NaLY
+ D7MSyax+UZ5a9LhqwZ6q/5+qOMBHBPhHPxaFpzju6JprHsF5391LXlhgLFSdxDxHc0wj20NtIq
+ 8pTtfzdsJdsMhdLhOwcAKnFaqleWxl6iai9uOHXvDh5xrWv4ek9IuA7UJSV9PU9Vx4iRY9Blpv
+ z48=
 X-SBRS: 2.7
-X-MesageID: 15246891
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 14931630
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15246891"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14931630"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 17/18] build,include: rework compat-build-source.py
-Date: Tue, 31 Mar 2020 11:31:01 +0100
-Message-ID: <20200331103102.1105674-18-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 11/18] xen/build: Use if_changed_rules with %.o:%.c
+ targets
+Date: Tue, 31 Mar 2020 11:30:55 +0100
+Message-ID: <20200331103102.1105674-12-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
@@ -104,99 +105,67 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
- Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Anthony PERARD <anthony.perard@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Improvement are:
-- give the path to xlat.lst as argument
-- include `grep -v` in compat-build-source.py script, we don't need to
-  write this in several scripted language.
-- have 'xlat.lst' path as a variable.
+Use $(dot-target) to have the target name prefix with a dot.
 
-No changes in final compat/%.h headers.
+Now, when the CC command has run, it is recorded in .*.cmd
+file, then if_changed_rules will compare it on subsequent runs.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
+ xen/Rules.mk | 26 +++++++++++++++++---------
+ 1 file changed, 17 insertions(+), 9 deletions(-)
 
-Notes:
-    v4:
-    - new patch
-
- xen/include/Makefile             | 11 ++++++-----
- xen/tools/compat-build-source.py |  8 +++++++-
- 2 files changed, 13 insertions(+), 6 deletions(-)
-
-diff --git a/xen/include/Makefile b/xen/include/Makefile
-index 2a10725d689b..74b26a028902 100644
---- a/xen/include/Makefile
-+++ b/xen/include/Makefile
-@@ -50,6 +50,8 @@ public-$(CONFIG_ARM) := $(wildcard public/arch-arm/*.h public/arch-arm/*/*.h)
- .PHONY: all
- all: $(headers-y)
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index c744175fd6f0..e126e4972dec 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -173,19 +173,27 @@ FORCE:
  
-+xlat_lst = xlat.lst
+ SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
+ 
+-%.o: %.c Makefile
++quiet_cmd_cc_o_c = CC      $@
+ ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
+-	$(CC) $(c_flags) -c $< -o $(@D)/.$(@F).tmp -MQ $@
+-ifeq ($(CONFIG_CC_IS_CLANG),y)
+-	$(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
+-else
+-	$(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
+-endif
+-	rm -f $(@D)/.$(@F).tmp
++    cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $(dot-target).tmp -MQ $@
++    ifeq ($(CONFIG_CC_IS_CLANG),y)
++        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(dot-target).tmp $@
++    else
++        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(dot-target).tmp $@
++    endif
++    cmd_objcopy_fix_sym += && rm -f $(dot-target).tmp
+ else
+-	$(CC) $(c_flags) -c $< -o $@
++    cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $@
+ endif
+ 
++define rule_cc_o_c
++    $(call cmd_and_record,cc_o_c)
++    $(call cmd,objcopy_fix_sym)
++endef
 +
- compat/%.h: compat/%.i Makefile $(BASEDIR)/tools/compat-build-header.py
- 	set -e; id=_$$(echo $@ | tr '[:lower:]-/.' '[:upper:]___'); \
- 	echo "#ifndef $$id" >$@.new; \
-@@ -66,10 +68,9 @@ compat/%.h: compat/%.i Makefile $(BASEDIR)/tools/compat-build-header.py
- compat/%.i: compat/%.c Makefile
- 	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(XEN_CFLAGS)) $(cppflags-y) -o $@ $<
++%.o: %.c FORCE
++	$(call if_changed_rule,cc_o_c)
++
+ quiet_cmd_cc_o_S = CC      $@
+ cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
  
--compat/%.c: public/%.h xlat.lst Makefile $(BASEDIR)/tools/compat-build-source.py
-+compat/%.c: public/%.h $(xlat_lst) Makefile $(BASEDIR)/tools/compat-build-source.py
- 	mkdir -p $(@D)
--	grep -v 'DEFINE_XEN_GUEST_HANDLE(long)' $< | \
--	$(PYTHON) $(BASEDIR)/tools/compat-build-source.py >$@.new
-+	$(PYTHON) $(BASEDIR)/tools/compat-build-source.py $(xlat_lst) <$< >$@.new
- 	mv -f $@.new $@
- 
- compat/.xlat/%.h: compat/%.h compat/.xlat/%.lst $(BASEDIR)/tools/get-fields.sh Makefile
-@@ -80,12 +81,12 @@ compat/.xlat/%.h: compat/%.h compat/.xlat/%.lst $(BASEDIR)/tools/get-fields.sh M
- 	mv -f $@.new $@
- 
- .PRECIOUS: compat/.xlat/%.lst
--compat/.xlat/%.lst: xlat.lst Makefile
-+compat/.xlat/%.lst: $(xlat_lst) Makefile
- 	mkdir -p $(@D)
- 	grep -v '^[[:blank:]]*#' $< | sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,[[:blank:]]+$*\.h[[:blank:]]*$$,,p' >$@.new
- 	$(call move-if-changed,$@.new,$@)
- 
--xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' xlat.lst | uniq)
-+xlat-y := $(shell sed -ne 's,@arch@,$(compat-arch-y),g' -re 's,^[?!][[:blank:]]+[^[:blank:]]+[[:blank:]]+,,p' $(xlat_lst) | uniq)
- xlat-y := $(filter $(patsubst compat/%,%,$(headers-y)),$(xlat-y))
- 
- compat/xlat.h: $(addprefix compat/.xlat/,$(xlat-y)) Makefile
-diff --git a/xen/tools/compat-build-source.py b/xen/tools/compat-build-source.py
-index c664eb85e633..c7fc2c53db61 100755
---- a/xen/tools/compat-build-source.py
-+++ b/xen/tools/compat-build-source.py
-@@ -12,7 +12,11 @@ pats = [
-  [ r"XEN_GUEST_HANDLE(_[0-9A-Fa-f]+)?", r"COMPAT_HANDLE" ],
- ];
- 
--xlatf = open('xlat.lst', 'r')
-+try:
-+    xlatf = open(sys.argv[1], 'r')
-+except IndexError:
-+    print('missing path to xlat.lst argument')
-+    sys.exit(1)
- for line in xlatf.readlines():
-     match = re.subn(r"^\s*\?\s+(\w*)\s.*", r"\1", line.rstrip())
-     if match[1]:
-@@ -24,6 +28,8 @@ for pat in pats:
-     pat[0] = re.compile(pat[0])
- 
- for line in sys.stdin.readlines():
-+    if 'DEFINE_XEN_GUEST_HANDLE(long)' in line:
-+        continue
-     for pat in pats:
-         line = re.sub(pat[0], pat[1], line)
-     print(line.rstrip())
 -- 
 Anthony PERARD
 
