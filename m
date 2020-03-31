@@ -2,45 +2,100 @@ Return-Path: <SRS0=JQvX=5Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B42A4C2D0F3
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 16:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EF043C43331
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 16:45:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 938DD21556
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 16:43:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 938DD21556
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id BF26E20784
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 16:45:28 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MQmB+G8b"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BF26E20784
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJJz3-0003p3-83; Tue, 31 Mar 2020 16:43:25 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jJK0p-000407-W1; Tue, 31 Mar 2020 16:45:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=DbII=5Q=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jJJz1-0003ou-HD
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 16:43:23 +0000
-X-Inumbo-ID: bbb76fe0-736e-11ea-83d8-bc764e2007e4
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bbb76fe0-736e-11ea-83d8-bc764e2007e4;
- Tue, 31 Mar 2020 16:43:22 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1jJJyz-0003wI-Oo; Tue, 31 Mar 2020 17:43:21 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
-To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH v2 1/2] host props/flags: Break out
- blessing_must_not_modify_host
-Date: Tue, 31 Mar 2020 17:43:17 +0100
-Message-Id: <20200331164318.4651-1-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.11.0
+ <SRS0=57j9=5Q=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jJK0o-000400-BJ
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 16:45:14 +0000
+X-Inumbo-ID: fd3fd651-736e-11ea-ba31-12813bfff9fa
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id fd3fd651-736e-11ea-ba31-12813bfff9fa;
+ Tue, 31 Mar 2020 16:45:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1585673113;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=iwSNoFlusd+ybrSt+z/xqsPpnMj700JZYGghroZg4AU=;
+ b=MQmB+G8bfInR57qIbM3zEi0CD3rsyBmBOBuX1OqIv9cStWC8P0hSy/hd
+ A7jxRpgFIW9V75m5qVzsMl8DFdJeZFW6cuv8ndsUXJ6pzdFLQG3x8TRwE
+ SnVOQ2XeBb141BN1dqGCyREO9+gtiUfx5AqIXbWNYKRap8y89DrxAgebe 8=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa2.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa2.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: mCPXjFHCdN3klFUdZcxHX+VwE6Vj1d/lCjYtirlYh14uh2vyZYpp668OlP34630Fqz7yothp0J
+ m/tD/f30EdPAW4PoQuPyTDMDPl/VxsWQEOo+0L5YRvhvpqNLOrNUw34enEBGCu/MUOh4iyKdY+
+ He02cD0VKpD8VlRAhBFyq6qVcoFz77QlXu+SFqX8KEayT8ewhzIMLlfY36rmLkwYTa4DNJSe2r
+ rSAGaCkQL+tyfZE2NalFap3gTyWix29cfpwP9hd7NiBAD22LXJHJdOxTKcPCVbQK+49IBbLzuB
+ 91c=
+X-SBRS: 2.7
+X-MesageID: 14955694
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,328,1580792400"; d="scan'208";a="14955694"
+Date: Tue, 31 Mar 2020 18:45:00 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH v8 1/3] x86/tlb: introduce a flush HVM ASIDs flag
+Message-ID: <20200331164500.GT28601@Air-de-Roger>
+References: <20200320184240.41769-1-roger.pau@citrix.com>
+ <20200320184240.41769-2-roger.pau@citrix.com>
+ <ee1587a0-7a6c-a1f9-860e-ea93a05d8462@suse.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <ee1587a0-7a6c-a1f9-860e-ea93a05d8462@suse.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -51,79 +106,159 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: xen-devel@lists.xenproject.org, Tim Deegan <tim@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This return value convention is convenient for the callers, since they
-want to print a message when we mayn't modify.
+On Tue, Mar 31, 2020 at 05:40:59PM +0200, Jan Beulich wrote:
+> On 20.03.2020 19:42, Roger Pau Monne wrote:
+> > Introduce a specific flag to request a HVM guest linear TLB flush,
+> > which is an ASID/VPID tickle that forces a guest linear to guest
+> > physical TLB flush for all HVM guests.
+> > 
+> > This was previously unconditionally done in each pre_flush call, but
+> > that's not required: HVM guests not using shadow don't require linear
+> > TLB flushes as Xen doesn't modify the guest page tables in that case
+> > (ie: when using HAP). Note that shadow paging code already takes care
+> > of issuing the necessary flushes when the shadow page tables are
+> > modified.
+> > 
+> > In order to keep the previous behavior modify all shadow code TLB
+> > flushes to also flush the guest linear to physical TLB. I haven't
+> > looked at each specific shadow code TLB flush in order to figure out
+> > whether it actually requires a guest TLB flush or not, so there might
+> > be room for improvement in that regard.
+> > 
+> > Also perform ASID/VPIT flushes when modifying the p2m tables as it's a
+> > requirement for AMD hardware. Finally keep the flush in
+> > switch_cr3_cr4, as it's not clear whether code could rely on
+> > switch_cr3_cr4 also performing a guest linear TLB flush. A following
+> > patch can remove the ASID/VPIT tickle from switch_cr3_cr4 if found to
+> > not be necessary.
+> 
+> s/VPIT/VPID/ in this paragraph?
 
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
----
- Osstest.pm                  | 10 +++++++++-
- Osstest/HostDB/Executive.pm |  4 ++--
- ts-examine-hostprops-save   |  4 ++--
- 3 files changed, 13 insertions(+), 5 deletions(-)
+Right, sorry.
 
-diff --git a/Osstest.pm b/Osstest.pm
-index 27136bc9..54f0085c 100644
---- a/Osstest.pm
-+++ b/Osstest.pm
-@@ -40,7 +40,7 @@ BEGIN {
-                       $dbh_tests db_retry db_retry_retry db_retry_abort
- 		      db_readonly_report
-                       db_begin_work db_prepare
--                      get_harness_rev
-+                      get_harness_rev blessing_must_not_modify_host
-                       ensuredir get_filecontents_core_quiet system_checked
-                       nonempty visible_undef show_abs_time
-                       %arch_debian2xen %arch_xen2debian
-@@ -407,6 +407,14 @@ sub get_harness_rev () {
-     return $rev;
- }
- 
-+sub blessing_must_not_modify_host ($) {
-+    # returns '' (falseish) if we may modify a host's props etc.,
-+    # or a trueish string message if may not
-+    my ($intended_blessing) = @_;
-+    return '' if $intended_blessing eq "real";
-+    return "intended blessing $intended_blessing != real";
-+}
-+
- sub get_filecontents_core_quiet ($) { # ENOENT => undef
-     my ($path) = @_;
-     if (!open GFC, '<', $path) {
-diff --git a/Osstest/HostDB/Executive.pm b/Osstest/HostDB/Executive.pm
-index a6dc4462..41cce046 100644
---- a/Osstest/HostDB/Executive.pm
-+++ b/Osstest/HostDB/Executive.pm
-@@ -55,8 +55,8 @@ sub modify_host ($$$) {
-     my ($hd, $ho, $query) = @_;
-     my $blessing = intended_blessing();
- 
--    die "Attempting to modify host with intended blessing $blessing != real"
--        if $blessing ne "real";
-+    my $wrong = blessing_must_not_modify_host($blessing);
-+    die "Attempting to modify host but $wrong" if $wrong;
- 
-     db_retry($dbh_tests, [qw(resources)], $query);
- }
-diff --git a/ts-examine-hostprops-save b/ts-examine-hostprops-save
-index e50ea7fb..0c39b864 100755
---- a/ts-examine-hostprops-save
-+++ b/ts-examine-hostprops-save
-@@ -31,8 +31,8 @@ logm("setting host properties and flags");
- 
- # NB: in order to aid debug only attempt to save the host props on flights
- # with intended real blessing, for the rest just do a dry run.
--our $dry_run = $blessing ne "real";
--logm("not saving host props/flags with intended blessing $blessing != real")
-+our $dry_run = blessing_must_not_modify_host($blessing);
-+logm("not saving host props/flags ($dry_run)")
-     if $dry_run;
- 
- foreach my $k (sort keys %r) {
--- 
-2.11.0
+> > --- a/xen/arch/x86/mm/hap/hap.c
+> > +++ b/xen/arch/x86/mm/hap/hap.c
+> > @@ -118,7 +118,7 @@ int hap_track_dirty_vram(struct domain *d,
+> >              p2m_change_type_range(d, begin_pfn, begin_pfn + nr,
+> >                                    p2m_ram_rw, p2m_ram_logdirty);
+> >  
+> > -            flush_tlb_mask(d->dirty_cpumask);
+> > +            flush_mask(d->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> >  
+> >              memset(dirty_bitmap, 0xff, size); /* consider all pages dirty */
+> >          }
+> > @@ -205,7 +205,7 @@ static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
+> >           * to be read-only, or via hardware-assisted log-dirty.
+> >           */
+> >          p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
+> > -        flush_tlb_mask(d->dirty_cpumask);
+> > +        flush_mask(d->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> >      }
+> >      return 0;
+> >  }
+> > @@ -234,7 +234,7 @@ static void hap_clean_dirty_bitmap(struct domain *d)
+> >       * be read-only, or via hardware-assisted log-dirty.
+> >       */
+> >      p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
+> > -    flush_tlb_mask(d->dirty_cpumask);
+> > +    flush_mask(d->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> >  }
+> >  
+> >  /************************************************/
+> > @@ -798,7 +798,7 @@ hap_write_p2m_entry(struct p2m_domain *p2m, unsigned long gfn, l1_pgentry_t *p,
+> >  
+> >      safe_write_pte(p, new);
+> >      if ( old_flags & _PAGE_PRESENT )
+> > -        flush_tlb_mask(d->dirty_cpumask);
+> > +        flush_mask(d->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> 
+> For all four - why FLUSH_TLB? Doesn't the flushing here solely care
+> about guest translations?
 
+Not on AMD, at least to my understanding, the AMD SDM states:
+
+"If a hypervisor modifies a nested page table by decreasing permission
+levels, clearing present bits, or changing address translations and
+intends to return to the same ASID, it should use either TLB command
+011b or 001b."
+
+It's in section 15.16.1.
+
+This to my understanding implies that on AMD hardware modifications to
+the NPT require an ASID flush. I assume that on AMD ASIDs also cache
+combined translations, guest linear -> host physical.
+
+In fact without doing such flushes when modifying the nested page
+tables XenRT was seeing multiple issues on AMD hardware.
+
+> > --- a/xen/arch/x86/mm/hap/nested_hap.c
+> > +++ b/xen/arch/x86/mm/hap/nested_hap.c
+> > @@ -84,7 +84,7 @@ nestedp2m_write_p2m_entry(struct p2m_domain *p2m, unsigned long gfn,
+> >      safe_write_pte(p, new);
+> >  
+> >      if (old_flags & _PAGE_PRESENT)
+> > -        flush_tlb_mask(p2m->dirty_cpumask);
+> > +        flush_mask(p2m->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> 
+> Same here then I guess.
+> 
+> > --- a/xen/arch/x86/mm/p2m-pt.c
+> > +++ b/xen/arch/x86/mm/p2m-pt.c
+> > @@ -896,7 +896,8 @@ static void p2m_pt_change_entry_type_global(struct p2m_domain *p2m,
+> >      unmap_domain_page(tab);
+> >  
+> >      if ( changed )
+> > -         flush_tlb_mask(p2m->domain->dirty_cpumask);
+> > +         flush_mask(p2m->domain->dirty_cpumask,
+> > +                    FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> 
+> Given that this code is used in shadow mode as well, perhaps
+> better to keep it here. Albeit maybe FLUSH_TLB could be dependent
+> upon !hap_enabled()?
+> 
+> > --- a/xen/arch/x86/mm/paging.c
+> > +++ b/xen/arch/x86/mm/paging.c
+> > @@ -613,7 +613,7 @@ void paging_log_dirty_range(struct domain *d,
+> >  
+> >      p2m_unlock(p2m);
+> >  
+> > -    flush_tlb_mask(d->dirty_cpumask);
+> > +    flush_mask(d->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> 
+> Same here?
+
+I'm fine with doing further refinements, but I would like to be on the
+conservative side and keep such flushes.
+
+> > @@ -993,7 +993,7 @@ static void shadow_blow_tables(struct domain *d)
+> >                                 pagetable_get_mfn(v->arch.shadow_table[i]), 0);
+> >  
+> >      /* Make sure everyone sees the unshadowings */
+> > -    flush_tlb_mask(d->dirty_cpumask);
+> > +    flush_mask(d->dirty_cpumask, FLUSH_TLB | FLUSH_HVM_ASID_CORE);
+> 
+> Taking this as example, wouldn't it be more consistent overall if
+> paths not being HVM-only would specify FLUSH_HVM_ASID_CORE only
+> for HVM domains?
+
+I think there's indeed room for improvement here, as it's likely
+possible to drop some of the ASID/VPID flushes. Given that previous to
+this patch we would flush ASIDs on every TLB flush I think the current
+approach is safe, and as said above further improvements can be done
+afterwards.
+
+> Also, seeing the large number of conversions, perhaps have another
+> wrapper, e.g. flush_tlb_mask_hvm(), at least for the cases where
+> both flags get specified unconditionally?
+
+That's fine for me, if you agree with the proposed naming
+(flush_tlb_mask_hvm) I'm happy to introduce the helper.
+
+Thanks, Roger.
 
