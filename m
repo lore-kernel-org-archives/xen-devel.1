@@ -7,57 +7,56 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95C95C2D0E8
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A8400C2D0EE
 	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 62B19208E4
+	by mail.kernel.org (Postfix) with ESMTPS id 70C8F20B1F
 	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:47:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="WkV+h0PC"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62B19208E4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="VWXWNdVd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 70C8F20B1F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEQi-00033G-8z; Tue, 31 Mar 2020 10:47:36 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJEQi-00033g-Ij; Tue, 31 Mar 2020 10:47:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEQh-00032A-7o
+ id 1jJEQh-00032F-Aa
  for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:47:35 +0000
-X-Inumbo-ID: 05b79fdf-733d-11ea-ba0c-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 05b79fdf-733d-11ea-ba0c-12813bfff9fa;
- Tue, 31 Mar 2020 10:47:32 +0000 (UTC)
+X-Inumbo-ID: 038cc518-733d-11ea-b4f4-bc764e2007e4
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 038cc518-733d-11ea-b4f4-bc764e2007e4;
+ Tue, 31 Mar 2020 10:47:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585651652;
+ d=citrix.com; s=securemail; t=1585651648;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=sTRFnOyU0qysVRQKIYm0QNOBqhQc72Q/G0zAnlz7wss=;
- b=WkV+h0PCk7bhHCZu30gDrjMdITnj0n/1Tbr6PaS31bQysA6lyaBmyVQe
- RxLWRqF1ngjOr9ToheOGKnEOrPOVUyMcOjQtJp7eF7YVzXwVmyGzKTjZv
- Q0Rw9GDW164DtNCHmzMVCAq6bvuR2pHWmag+FWaRY8xUn4+nKbBIGG9Gi c=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+ bh=hJREXR/Deb6xN8gdjZwqytr8p+Qcw1FoTGCESEajh20=;
+ b=VWXWNdVduAGTFZXcfLXzaB1LzcKnQOkh/sG8zUBS3q8Y5TwAvByuc/ja
+ L94IZEwBenMQCXnhLlCQYVNP+LN3qAh7CpSuRdr0m2Q70IMZ6b1Box+cy
+ Ovz6BxZfkPbdTT9jjk6JjLmn0uYENMOLW3dkBWjZdeivDhRYdDmFJcI52 w=;
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
  spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  anthony.perard@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -66,35 +65,35 @@ Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: viTSuHUT56dAd46Npgp61E6wHa4ri6NYqsb0L7KvibMGiKbnoav/JB/670NXVr7YjHfSVYzvMy
- BHNSFWPTVt/yTHp9rdWDbgWj7Ft84gStkYjngUTbtjuCAR7Xnl+Oxy7dw9xxqJjqBrcxhnPGA8
- eX4rOCQLX4L91ytvh+m7kbGGU7bH3BVQciDty5hI+Vhwoqe8imQmJSC4OAHDh9T5BrnYN6OlHj
- VfPaUE/tdfYgvoAq7Wa4b0fYZ90QkEKXTdal2+K5f9yZR1BZbMrFzNn6vzm9iiPO6YS1kClMIf
- 4Ws=
+IronPort-SDR: M1Eh0mQ4Ys0U/xe6Q7L+JvVmMf0aCsAbBWLadE3vSGRZQbkzv+ClHUFKMDThikDWsVXVjMHeKH
+ ssbS6H+M+tko5HYaokNkeNVS7TS28zzJrvyYelc2L5Y2KEbE4Ww5H/Or/2aD6AMZlCoi3r5h8n
+ ZtyQJQcdhLgDJCflK6wSLcnM1l20avL5WggdaYfFBD5NHROHeG+AfU9EVsL+7GeJAyx04A6ra/
+ 4gY2dMNASHEIq03UmGLGqX6mtc/oF7yfjpCufrvRUwtM8kvxGBI/c4Xdnl2Ghi1It7H1fjFKyY
+ Ad8=
 X-SBRS: 2.7
-X-MesageID: 14904511
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 14931634
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14904511"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14931634"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 13/18] xen/build: Use if_changed for prelink*.o
-Date: Tue, 31 Mar 2020 11:30:57 +0100
-Message-ID: <20200331103102.1105674-14-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 15/18] xen/build: use if_changed to build guest_%.o
+Date: Tue, 31 Mar 2020 11:30:59 +0100
+Message-ID: <20200331103102.1105674-16-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,53 +104,110 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony PERARD <anthony.perard@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>,
+Cc: Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We change the dependencies of prelink-efi.o so that we can use the
-same command line. The dependency on efi/built_in.o isn't needed
-because, we already have:
-    efi/*.o: efi/built_in.o
-to build efi/*.o files that prelink-efi.o needs.
+Use if_changed for building all guest_%.o objects, and make use of
+command that already exist.
+
+This patch make a change to the way guest_%.o files are built, and now
+run the same commands that enforce unique symbols. But with patch
+"xen,symbols: rework file symbols selection", ./symbols should still
+select the file symbols directive intended to be used for guest_%.o
+objects.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
     v4:
-    - fix rebuild, prelink.o and prelink-efi.o needs to be in targets
+    - remove the introduction of Kbuild's CFLAGS_$@
+      and simply use make's per-target variable customization.
+      Mostly to avoid using $(eval ) which might not work as expected on
+      make 3.80.
 
- xen/arch/x86/Makefile | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ xen/arch/x86/mm/Makefile        | 14 ++++++++------
+ xen/arch/x86/mm/hap/Makefile    | 15 +++++++++------
+ xen/arch/x86/mm/shadow/Makefile | 14 ++++++++------
+ 3 files changed, 25 insertions(+), 18 deletions(-)
 
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index eb6f7a6aceca..7676fb1c5bc8 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -128,11 +128,13 @@ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
- prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o efi/boot.init.o
- 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
- else
--prelink.o: $(ALL_OBJS)
--	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
-+prelink.o: $(ALL_OBJS) FORCE
-+	$(call if_changed,ld)
-+
-+prelink-efi.o: $(filter-out %/efi/built_in.o,$(ALL_OBJS)) efi/boot.init.o efi/runtime.o efi/compat.o FORCE
-+	$(call if_changed,ld)
+diff --git a/xen/arch/x86/mm/Makefile b/xen/arch/x86/mm/Makefile
+index a2431fde6bb4..a66a57314489 100644
+--- a/xen/arch/x86/mm/Makefile
++++ b/xen/arch/x86/mm/Makefile
+@@ -11,11 +11,13 @@ obj-y += p2m.o p2m-pt.o
+ obj-$(CONFIG_HVM) += p2m-ept.o p2m-pod.o
+ obj-y += paging.o
  
--prelink-efi.o: $(ALL_OBJS) efi/boot.init.o efi/runtime.o efi/compat.o
--	$(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out %/efi/built_in.o,$^)
-+targets += prelink.o prelink-efi.o
+-guest_walk_%.o: guest_walk.c Makefile
+-	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++guest_walk_%.o guest_walk_%.i guest_walk_%.s: CFLAGS-y += -DGUEST_PAGING_LEVELS=$*
+ 
+-guest_walk_%.i: guest_walk.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++guest_walk_%.o: guest_walk.c FORCE
++	$(call if_changed_rule,cc_o_c)
+ 
+-guest_walk_%.s: guest_walk.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
++guest_walk_%.i: guest_walk.c FORCE
++	$(call if_changed,cpp_i_c)
++
++guest_walk_%.s: guest_walk.c FORCE
++	$(call if_changed,cc_s_c)
+diff --git a/xen/arch/x86/mm/hap/Makefile b/xen/arch/x86/mm/hap/Makefile
+index 22e7ad54bd33..34720b2fbe2e 100644
+--- a/xen/arch/x86/mm/hap/Makefile
++++ b/xen/arch/x86/mm/hap/Makefile
+@@ -5,11 +5,14 @@ obj-y += guest_walk_4level.o
+ obj-y += nested_hap.o
+ obj-y += nested_ept.o
+ 
+-guest_walk_%level.o: guest_walk.c Makefile
+-	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++guest_walk_%level.o guest_walk_%level.i guest_walk_%level.s: \
++    CFLAGS-y += -DGUEST_PAGING_LEVELS=$*
+ 
+-guest_walk_%level.i: guest_walk.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++guest_walk_%level.o: guest_walk.c FORCE
++	$(call if_changed_rule,cc_o_c)
+ 
+-guest_walk_%level.s: guest_walk.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
++guest_walk_%level.i: guest_walk.c FORCE
++	$(call if_changed,cpp_i_c)
++
++guest_walk_%level.s: guest_walk.c FORCE
++	$(call if_changed,cc_s_c)
+diff --git a/xen/arch/x86/mm/shadow/Makefile b/xen/arch/x86/mm/shadow/Makefile
+index 23d3ff10802c..e00f9cb1aaba 100644
+--- a/xen/arch/x86/mm/shadow/Makefile
++++ b/xen/arch/x86/mm/shadow/Makefile
+@@ -6,11 +6,13 @@ else
+ obj-y += none.o
  endif
  
- $(TARGET)-syms: prelink.o xen.lds
+-guest_%.o: multi.c Makefile
+-	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++guest_%.o guest_%.i guest_%.s: CFLAGS-y += -DGUEST_PAGING_LEVELS=$*
+ 
+-guest_%.i: multi.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++guest_%.o: multi.c FORCE
++	$(call if_changed_rule,cc_o_c)
+ 
+-guest_%.s: multi.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
++guest_%.i: multi.c FORCE
++	$(call if_changed,cpp_i_c)
++
++guest_%.s: multi.c FORCE
++	$(call if_changed,cc_s_c)
 -- 
 Anthony PERARD
 
