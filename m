@@ -2,72 +2,98 @@ Return-Path: <SRS0=JQvX=5Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B912C43331
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7F8AC43331
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D24A206DB
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9758F206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="fUMD0xtp"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D24A206DB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="M+V2fjk9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9758F206DB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEBG-00016J-Lb; Tue, 31 Mar 2020 10:31:38 +0000
+	id 1jJEBM-00019Y-VS; Tue, 31 Mar 2020 10:31:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=sM9E=5Q=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jJEBF-00015W-42
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:37 +0000
-X-Inumbo-ID: cc8af73a-733a-11ea-b4f4-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jJEBL-00018n-By
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:43 +0000
+X-Inumbo-ID: cff915aa-733a-11ea-b58d-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cc8af73a-733a-11ea-b4f4-bc764e2007e4;
- Tue, 31 Mar 2020 10:31:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=S16JMbe4oecwCGPghUtdUbzdZk9pI8R5Q9hqBmJjAXE=; b=fUMD0xtpDfcfL/weoN7s/zFbY+
- jtsp3Pe6XqZlg8QyZbjZWzhpxdS+tMXcZ9AvomRiljDv0L2A/RDQv4ndQeHTqpMUOLNDZg8wv7s69
- cFo6m45RF3cgr8I6I7QAgeIbYO/vph/kkvhE9p7qFCBQXog6SoM+GjL+/CxiCpHrqIM8=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jJEBC-0002Lu-9S; Tue, 31 Mar 2020 10:31:34 +0000
-Received: from 54-240-197-234.amazon.com ([54.240.197.234]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jJEBB-0004ul-Li; Tue, 31 Mar 2020 10:31:34 +0000
-Subject: Re: [PATCH] Revert "domctl: improve locking during domain destruction"
-To: Jim Fehlig <jfehlig@suse.com>, Jan Beulich <jbeulich@suse.com>
-References: <de46590ad566d9be55b26eaca0bc4dc7fbbada59.1585063311.git.hongyxia@amazon.com>
- <37dcd2d8-8ffe-a58e-4c7a-6dafc935b1c1@suse.com>
- <94abc4e0-b11e-df0f-3e3c-c3a61d87c63a@xen.org>
- <30f1ec6d-b5be-fcb1-c685-ed02961175c1@suse.com>
- <547e509f-93ba-2bbf-f12d-21b9443e12e4@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <94fc29a5-bfa4-4361-0654-789f2b80c89c@xen.org>
-Date: Tue, 31 Mar 2020 11:31:30 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ id cff915aa-733a-11ea-b58d-bc764e2007e4;
+ Tue, 31 Mar 2020 10:31:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1585650702;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=qGmk9lWzyjZ3W046CwcY92BlKqx7jNo/u56lSdPKuD8=;
+ b=M+V2fjk9zAZojQK1gYCDZup4XKIyiANvzkQw0MeNFlIkQwggw5aYjk0g
+ RVf93WSAp+HbBdtwHACE9EUd88ORscQahRFufz7x3hn3x0aMsSJD7erDO
+ Mue57TK3hQH8MEWGyHl5oMZz1WyVqFos4vsIIq3quUnX8UWs1iwpIpiWt Y=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ anthony.perard@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+ anthony.perard@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: Q41Dgutv3UEMP88hLbqoHIPWRjZelnChWC4N+3EKHIT6I0hWP4gjOXSYkV2hG1vXayO2aBa5De
+ 7KYkWz1603oCA61DLY5/tH+OuQ/Embk7DrkvzHLAGJDrAlMTIKLzfVHMWjFEtUOK6yDWjlmB/Y
+ l1wxfiXxwRRuhcwW1b7rrGzdKErtk6Nxz9MNyvh3oHBt+isru6PU09DExd8WRRSzaCShqGyjYi
+ KQ9CzNrFnasj9Rhjm3AxU83Vqd3uaHHzoPBOHP3r1soXM0ti6tlVJDNyTNFzrfuyNAMTbqyS8N
+ g2I=
+X-SBRS: 2.7
+X-MesageID: 15575940
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15575940"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Subject: [XEN PATCH v4 03/18] build,arm: Fix deps check of head.o
+Date: Tue, 31 Mar 2020 11:30:47 +0100
+Message-ID: <20200331103102.1105674-4-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
+References: <20200331103102.1105674-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <547e509f-93ba-2bbf-f12d-21b9443e12e4@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -78,74 +104,52 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Hongyan Xia <hx242@xen.org>, Charles Arnold <CARNOLD@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Jim,
+arm*/head.o isn't in obj-y or extra-y, so make don't load the
+associated .*.d file (or .*.cmd file when if_changed will be used).
+There is a workaround where .*.d file is added manually into DEPS.
 
-On 26/03/2020 16:55, Jim Fehlig wrote:
-> On 3/25/20 1:11 AM, Jan Beulich wrote:
->> On 24.03.2020 19:39, Julien Grall wrote:
->>> On 24/03/2020 16:13, Jan Beulich wrote:
->>>> On 24.03.2020 16:21, Hongyan Xia wrote:
->>>>> From: Hongyan Xia <hongyxia@amazon.com>
->>>>> In contrast,
->>>>> after dropping that commit, parallel domain destructions will just 
->>>>> fail
->>>>> to take the domctl lock, creating a hypercall continuation and backing
->>>>> off immediately, allowing the thread that holds the lock to destroy a
->>>>> domain much more quickly and allowing backed-off threads to process
->>>>> events and irqs.
->>>>>
->>>>> On a 144-core server with 4TiB of memory, destroying 32 guests (each
->>>>> with 4 vcpus and 122GiB memory) simultaneously takes:
->>>>>
->>>>> before the revert: 29 minutes
->>>>> after the revert: 6 minutes
->>>>
->>>> This wants comparing against numbers demonstrating the bad effects of
->>>> the global domctl lock. Iirc they were quite a bit higher than 6 min,
->>>> perhaps depending on guest properties.
->>>
->>> Your original commit message doesn't contain any clue in which
->>> cases the domctl lock was an issue. So please provide information
->>> on the setups you think it will make it worse.
->>
->> I did never observe the issue myself - let's see whether one of the SUSE
->> people possibly involved in this back then recall (or have further
->> pointers; Jim, Charles?), or whether any of the (partly former) Citrix
->> folks do. My vague recollection is that the issue was the tool stack as
->> a whole stalling for far too long in particular when destroying very
->> large guests.
-> 
-> I too only have a vague memory of the issue but do recall shutting down 
-> large guests (e.g. 500GB) taking a long time and blocking other 
-> toolstack operations. I haven't checked on the behavior in quite some 
-> time though.
+Changing DEPS isn't needed, we can simply add head.o into extra-y and
+the dependency files will be loaded.
 
-It might be worth checking how toolstack operations (such as domain 
-creating) is affected by the revert. @Hongyan would you be able to test it?
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+---
 
-> 
->> One important aspect not discussed in the commit message
->> at all is that holding the domctl lock block basically _all_ tool stack
->> operations (including e.g. creation of new guests), whereas the new
->> issue attempted to be addressed is limited to just domain cleanup.
-> 
-> I more vaguely recall shutting down the host taking a *long* time when 
-> dom0 had large amounts of memory, e.g. when it had all host memory (no 
-> dom0_mem= setting and autoballooning enabled).
+Notes:
+    v4:
+    - new patch, fix rebuild of head.o with "xen/build: Start using
+      if_changed" applied
 
-AFAIK, we never relinquish memory from dom0. So I am not sure how a 
-large amount of memory in Dom0 would affect the host shutting down.
+ xen/arch/arm/Makefile | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-Cheers,
-
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 12f92a4bd3f9..7273f356f190 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -62,6 +62,7 @@ obj-$(CONFIG_SBSA_VUART_CONSOLE) += vpl011.o
+ obj-y += vsmc.o
+ obj-y += vpsci.o
+ obj-y += vuart.o
++extra-y += $(TARGET_SUBARCH)/head.o
+ 
+ #obj-bin-y += ....o
+ 
+@@ -72,8 +73,6 @@ endif
+ 
+ ALL_OBJS := $(TARGET_SUBARCH)/head.o $(ALL_OBJS)
+ 
+-DEPS += $(TARGET_SUBARCH)/.head.o.d
+-
+ ifdef CONFIG_LIVEPATCH
+ all_symbols = --all-symbols
+ ifdef CONFIG_FAST_SYMBOL_LOOKUP
 -- 
-Julien Grall
+Anthony PERARD
+
 
