@@ -7,40 +7,41 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84574C2D0EF
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 60E6EC43331
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 572D1206DB
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2984B206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:31:37 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FLbs6kVr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 572D1206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gppCY4m6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2984B206DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEAv-0000wa-TA; Tue, 31 Mar 2020 10:31:17 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jJEAv-0000wS-JZ; Tue, 31 Mar 2020 10:31:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEAt-0000vz-MR
+ id 1jJEAt-0000vy-Li
  for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:15 +0000
-X-Inumbo-ID: bd2aa47a-733a-11ea-b58d-bc764e2007e4
+X-Inumbo-ID: bd184d20-733a-11ea-ba0c-12813bfff9fa
 Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id bd2aa47a-733a-11ea-b58d-bc764e2007e4;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id bd184d20-733a-11ea-ba0c-12813bfff9fa;
  Tue, 31 Mar 2020 10:31:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=citrix.com; s=securemail; t=1585650671;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=B2c8PFnX2lG4+CRuHl+fzIwey4dBLqAwqoZqdNixUwE=;
- b=FLbs6kVrUrc+UuR5GtTI1DogJw1eNK9IDocs37mwNutGdIHe7YiJtviT
- qaNsLz4Kw2F9gvSeoPIDIVysRNYEaX40iIgKErKXOkhCpCFws81Hajs7j
- QrHbnLWclZQ62sfZQIkLQugThieZiV5L91vCPHITrA0JheTnh3ATPPitm 8=;
+ bh=z9+M96E+n/Hy3z7gJKZ88aBj5n9HL0vJXghsNjxddMo=;
+ b=gppCY4m6nUGxkyp3zbrHk0MUmzJhdWsUTzyG03uMiC3pFEGUcRiaIuh2
+ BhiGlFtmT2POCz1+23OwkGfSuTGKdMUS4i8ukNuES5WRpgh46/6ksEKWG
+ LM65AmslrUvkB6UMhZIfOFpT/wuSO6Lg/qDCYmVja0EFaEvrOcOUrScDM c=;
 Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -72,22 +73,23 @@ Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: 5jDjny+ZUqEGwf81l377FYnEOtjMnxe54Topdbn3WJfafEY6mRx6h1HRHfY1kfYqPpg1xCGxzh
- Q9zNMJo0vUU1pmGoFq0dLIZQLKsSnchnFahOhaqr1iZ+SXpJyy8njiYQKwrZ5mUpGB1tAJE+iV
- RbTcbtffzzPpjDZFvrjeZntdy/UId6JZImK8b08zfpRYBy0bkhcsN8Hc4GnR6zy6MuDq6wsckC
- S/3BqkEg8A5udvkzJUNOjtUG3ThlMn717fcV7HJpAlUSiemtG/BZesxrW6yXD+P7zmdMYkeyGo
- e4Y=
+IronPort-SDR: gm2gZRJ9f+J/hypl/Llejvy7D09o6OKigL2xnVNqz0J/SV9vsJiFfiWQJ4XIRFYCu9pVv2VgDu
+ nQPSR3pNotCx/MApBr+qwsItuhPvSdv+xu7Sva0vNs5aqPbluswIqqOXGF19N/AIajzRMLIrS0
+ UDmgm0T/II7R9zW/B2fNL9ZRC0LL3BCpmwU07UbfUHc9GhpwIRCYTA+elUjuogYIDTgFMm/5lW
+ mVY5+oQajHSh4LMSCg6PhDhZo6tL5XvB84rNjATw2t8WfCjgCAMG33T0hzj6ghbj1oxfkZ4hhv
+ RAs=
 X-SBRS: 2.7
-X-MesageID: 15138790
+X-MesageID: 15138787
 X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138790"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15138787"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 09/18] xen/build: Start using if_changed
-Date: Tue, 31 Mar 2020 11:30:53 +0100
-Message-ID: <20200331103102.1105674-10-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 05/18] xen/build: use new $(c_flags) and $(a_flags)
+ instead of $(CFLAGS)
+Date: Tue, 31 Mar 2020 11:30:49 +0100
+Message-ID: <20200331103102.1105674-6-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
@@ -104,276 +106,263 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
+ Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Tim Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>,
  Anthony PERARD <anthony.perard@citrix.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This patch start to use if_changed introduced in a previous commit.
+In a later patch ("xen/build: have the root Makefile generates the
+CFLAGS), we want to generate the CFLAGS in xen/Makefile, then export
+it and have Rules.mk use a CFLAGS from the environment variables. That
+changes the flavor of the CFLAGS and flags intended for one target
+(like -D__OBJECT_FILE__ and -M%) gets propagated and duplicated. So we
+start by moving such flags out of $(CFLAGS) and into $(c_flags) which
+is to be modified by only Rules.mk.
 
-Whenever if_changed is called, the target must have FORCE as
-dependency so that if_changed can check if the command line to be
-run has changed, so the macro $(real-prereqs) must be used to
-discover the dependencies without "FORCE".
+__OBJECT_FILE__ is only used by arch/x86/mm/*.c files, so having it in
+$(c_flags) is enough, we don't need it in $(a_flags).
 
-Whenever a target isn't in obj-y, it should be added to extra-y so the
-.*.cmd dependency file associated with the target can be loaded. This
-is done for xsm/flask/ and both common/lib{elf,fdt}/ and
-arch/x86/Makefile.
+For include/Makefile and as-insn we can keep using CFLAGS, but since
+it doesn't have -M* flags anymore there is no need to filter them out.
 
-For the targets that generate .*.d dependency files, there's going to
-be two dependency files (.*.d and .*.cmd) until we can merge them
-together in a later patch via fixdep from Linux.
+The XEN_BUILD_EFI tests in arch/x86/Makefile was filtering out
+CFLAGS-y, but according to dd40177c1bc8 ("x86-64/EFI: add CFLAGS to
+check compile"), it was done to filter out -MF. CFLAGS doesn't
+have those flags anymore, so no filtering is needed.
 
-One cleanup, libelf-relocate.o doesn't exist anymore.
-
-We import cmd_ld and cmd_objcopy from Linux v5.4.
+This is inspired by the way Kbuild generates CFLAGS for each targets.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 
 Notes:
     v4:
-    - typos
-    - fix missing FORCE in libfdt/Makefile
-    - typo flask vs flash in xsm
-    - in xsm, use *_H_DEPEND in command lines of mkaccess and mkflask
-      instead of $(real-prereq) to avoid including the script as argument of
-      itself.
+    - drop change in as-insn macro, and keep filtering-out -M% %.d
+    
+    v3:
+    - include/Makefile: Keep using CFLAGS, but since it doesn't have -M*
+      flags anymore, no need to filter it.
+    - Write c_flags and a_flags on a single line.
+    - arch/x86/Makefile: remove the filter-out of dependency flags
+      they are remove from CFLAGS anyway.
+      (was intended to be done in xen/build: have the root Makefile
+      generates the CFLAGS originally, move the change to this patch).
+    - also modify as-insn as it is now xen/ only.
 
- xen/Rules.mk               | 68 +++++++++++++++++++++++++++-----------
- xen/arch/arm/Makefile      |  4 +--
- xen/arch/x86/Makefile      |  1 +
- xen/arch/x86/efi/Makefile  |  7 ++--
- xen/common/libelf/Makefile | 12 ++++---
- xen/common/libfdt/Makefile | 11 +++---
- xen/xsm/flask/Makefile     | 17 +++++++---
- 7 files changed, 85 insertions(+), 35 deletions(-)
+ xen/Rules.mk                    | 23 +++++++++++------------
+ xen/arch/arm/Makefile           |  4 ++--
+ xen/arch/x86/Makefile           |  6 +++---
+ xen/arch/x86/mm/Makefile        |  6 +++---
+ xen/arch/x86/mm/hap/Makefile    |  6 +++---
+ xen/arch/x86/mm/shadow/Makefile |  6 +++---
+ xen/include/Makefile            |  2 +-
+ 7 files changed, 26 insertions(+), 27 deletions(-)
 
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index f531fd5e342d..5e668f5ba0d8 100644
+index 9079df7978a7..3408a35dbf53 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -56,6 +56,18 @@ SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
+@@ -57,7 +57,6 @@ CFLAGS += -Werror -Wredundant-decls -Wno-pointer-arith
+ $(call cc-option-add,CFLAGS,CC,-Wvla)
+ CFLAGS += -pipe -D__XEN__ -include $(BASEDIR)/include/xen/config.h
+ CFLAGS-$(CONFIG_DEBUG_INFO) += -g
+-CFLAGS += '-D__OBJECT_FILE__="$@"'
  
- include Makefile
+ ifneq ($(CONFIG_CC_IS_CLANG),y)
+ # Clang doesn't understand this command line argument, and doesn't appear to
+@@ -70,9 +69,6 @@ AFLAGS += -D__ASSEMBLY__
  
-+# Linking
-+# ---------------------------------------------------------------------------
+ ALL_OBJS := $(ALL_OBJS-y)
+ 
+-# Get gcc to generate the dependencies for us.
+-CFLAGS-y += -MMD -MP -MF $(@D)/.$(@F).d
+-
+ CFLAGS += $(CFLAGS-y)
+ # allow extra CFLAGS externally via EXTRA_CFLAGS_XEN_CORE
+ CFLAGS += $(EXTRA_CFLAGS_XEN_CORE)
+@@ -146,9 +142,12 @@ endif
+ # Always build obj-bin files as binary even if they come from C source. 
+ $(obj-bin-y): CFLAGS := $(filter-out -flto,$(CFLAGS))
+ 
++c_flags = -MMD -MP -MF $(@D)/.$(@F).d $(CFLAGS) '-D__OBJECT_FILE__="$@"'
++a_flags = -MMD -MP -MF $(@D)/.$(@F).d $(AFLAGS)
 +
-+quiet_cmd_ld = LD      $@
-+cmd_ld = $(LD) $(XEN_LDFLAGS) -r -o $@ $(real-prereqs)
-+
-+# Objcopy
-+# ---------------------------------------------------------------------------
-+
-+quiet_cmd_objcopy = OBJCOPY $@
-+cmd_objcopy = $(OBJCOPY) $(OBJCOPYFLAGS) $< $@
-+
- define gendep
-     ifneq ($(1),$(subst /,:,$(1)))
-         DEPS += $(dir $(1)).$(notdir $(1)).d
-@@ -165,29 +177,47 @@ else
- 	$(CC) $(c_flags) -c $< -o $@
+ built_in.o: $(obj-y) $(extra-y)
+ ifeq ($(obj-y),)
+-	$(CC) $(CFLAGS) -c -x c /dev/null -o $@
++	$(CC) $(c_flags) -c -x c /dev/null -o $@
+ else
+ ifeq ($(CONFIG_LTO),y)
+ 	$(LD_LTO) -r -o $@ $(filter-out $(extra-y),$^)
+@@ -159,7 +158,7 @@ endif
+ 
+ built_in_bin.o: $(obj-bin-y) $(extra-y)
+ ifeq ($(obj-bin-y),)
+-	$(CC) $(AFLAGS) -c -x assembler /dev/null -o $@
++	$(CC) $(a_flags) -c -x assembler /dev/null -o $@
+ else
+ 	$(LD) $(LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
+ endif
+@@ -178,7 +177,7 @@ SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
+ 
+ %.o: %.c Makefile
+ ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
+-	$(CC) $(CFLAGS) -c $< -o $(@D)/.$(@F).tmp -MQ $@
++	$(CC) $(c_flags) -c $< -o $(@D)/.$(@F).tmp -MQ $@
+ ifeq ($(CONFIG_CC_IS_CLANG),y)
+ 	$(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
+ else
+@@ -186,11 +185,11 @@ else
+ endif
+ 	rm -f $(@D)/.$(@F).tmp
+ else
+-	$(CC) $(CFLAGS) -c $< -o $@
++	$(CC) $(c_flags) -c $< -o $@
  endif
  
--%.o: %.S Makefile
--	$(CC) $(a_flags) -c $< -o $@
-+quiet_cmd_cc_o_S = CC      $@
-+cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
-+
-+%.o: %.S FORCE
-+	$(call if_changed,cc_o_S)
-+
-+
-+quiet_cmd_obj_init_o = INIT_O  $@
-+define cmd_obj_init_o
-+    $(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
-+        case "$$name" in \
-+        .*.local) ;; \
-+        .text|.text.*|.data|.data.*|.bss) \
-+            test $$sz != 0 || continue; \
-+            echo "Error: size of $<:$$name is 0x$$sz" >&2; \
-+            exit $$(expr $$idx + 1);; \
-+        esac; \
-+    done; \
-+    $(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
-+endef
-+
-+$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o FORCE
-+	$(call if_changed,obj_init_o)
-+
-+quiet_cmd_cpp_i_c = CPP     $@
-+cmd_cpp_i_c = $(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) $< -o $@
-+
-+quiet_cmd_cc_s_c = CC      $@
-+cmd_cc_s_c = $(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
+ %.o: %.S Makefile
+-	$(CC) $(AFLAGS) -c $< -o $@
++	$(CC) $(a_flags) -c $< -o $@
  
--$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
--	$(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
--		case "$$name" in \
--		.*.local) ;; \
--		.text|.text.*|.data|.data.*|.bss) \
--			test $$sz != 0 || continue; \
--			echo "Error: size of $<:$$name is 0x$$sz" >&2; \
--			exit $$(expr $$idx + 1);; \
--		esac; \
--	done
--	$(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
-+quiet_cmd_s_S = CPP     $@
-+cmd_s_S = $(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
+ $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
+ 	$(OBJDUMP) -h $< | sed -n '/[0-9]/{s,00*,0,g;p;}' | while read idx name sz rest; do \
+@@ -205,12 +204,12 @@ $(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): %.init.o: %.o Makefile
+ 	$(OBJCOPY) $(foreach s,$(SPECIAL_DATA_SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
  
--%.i: %.c Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) $< -o $@
-+%.i: %.c FORCE
-+	$(call if_changed,cpp_i_c)
+ %.i: %.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) $< -o $@
++	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) $< -o $@
  
--%.s: %.c Makefile
--	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
-+%.s: %.c FORCE
-+	$(call if_changed,cc_s_c)
+ %.s: %.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -S $< -o $@
++	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
  
--%.s: %.S Makefile
--	$(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
-+%.s: %.S FORCE
-+	$(call if_changed,cpp_s_S)
+ %.s: %.S Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(AFLAGS)) $< -o $@
++	$(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
  
- # Add intermediate targets:
- # When building objects with specific suffix patterns, add intermediate
+ -include $(DEPS_INCLUDE)
 diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-index 9f1ab2335756..b79ad55646bd 100644
+index 7273f356f190..913f6cdeed3f 100644
 --- a/xen/arch/arm/Makefile
 +++ b/xen/arch/arm/Makefile
-@@ -97,8 +97,8 @@ prelink_lto.o: $(ALL_OBJS)
- prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
- 	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
- else
--prelink.o: $(ALL_OBJS)
--	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
-+prelink.o: $(ALL_OBJS) FORCE
-+	$(call if_changed,ld)
- endif
+@@ -120,10 +120,10 @@ $(TARGET)-syms: prelink.o xen.lds
+ 	rm -f $(@D)/.$(@F).[0-9]*
  
- $(TARGET)-syms: prelink.o xen.lds
+ asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c
+-	$(CC) $(filter-out -flto,$(CFLAGS)) -S -o $@ $<
++	$(CC) $(filter-out -flto,$(c_flags)) -S -o $@ $<
+ 
+ xen.lds: xen.lds.S
+-	$(CC) -P -E -Ui386 $(AFLAGS) -o $@ $<
++	$(CC) -P -E -Ui386 $(a_flags) -o $@ $<
+ 	sed -e 's/xen\.lds\.o:/xen\.lds:/g' <.xen.lds.d >.xen.lds.d.new
+ 	mv -f .xen.lds.d.new .xen.lds.d
+ 
 diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index a805e9982e85..44137d919b66 100644
+index e954edbc2e0a..1405525105d9 100644
 --- a/xen/arch/x86/Makefile
 +++ b/xen/arch/x86/Makefile
-@@ -71,6 +71,7 @@ obj-$(CONFIG_TBOOT) += tboot.o
- obj-y += hpet.o
- obj-y += vm_event.o
- obj-y += xstate.o
-+extra-y += asm-macros.i
+@@ -168,7 +168,7 @@ EFI_LDFLAGS += --major-os-version=2 --minor-os-version=0
+ EFI_LDFLAGS += --major-subsystem-version=2 --minor-subsystem-version=0
  
- x86_emulate.o: x86_emulate/x86_emulate.c x86_emulate/x86_emulate.h
+ # Check if the compiler supports the MS ABI.
+-export XEN_BUILD_EFI := $(shell $(CC) $(filter-out $(CFLAGS-y) .%.d,$(CFLAGS)) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
++export XEN_BUILD_EFI := $(shell $(CC) $(CFLAGS) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
+ # Check if the linker supports PE.
+ XEN_BUILD_PE := $(if $(XEN_BUILD_EFI),$(shell $(LD) -mi386pep --subsystem=10 -o efi/check.efi efi/check.o 2>/dev/null && echo y))
+ CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
+@@ -223,7 +223,7 @@ efi/boot.init.o efi/runtime.o efi/compat.o efi/buildid.o efi/relocs-dummy.o: $(B
+ efi/boot.init.o efi/runtime.o efi/compat.o efi/buildid.o efi/relocs-dummy.o: ;
  
-diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
-index 490d791aae2d..3e4c395b7535 100644
---- a/xen/arch/x86/efi/Makefile
-+++ b/xen/arch/x86/efi/Makefile
-@@ -1,7 +1,10 @@
- CFLAGS-y += -fshort-wchar
+ asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c $(BASEDIR)/include/asm-x86/asm-macros.h
+-	$(CC) $(filter-out -Wa$(comma)% -flto,$(CFLAGS)) -S -o $@ $<
++	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -o $@ $<
  
--%.o: %.ihex
--	$(OBJCOPY) -I ihex -O binary $< $@
-+quiet_cmd_objcopy_o_ihex = OBJCOPY $@
-+cmd_objcopy_o_ihex = $(OBJCOPY) -I ihex -O binary $< $@
-+
-+%.o: %.ihex FORCE
-+	$(call if_changed,objcopy_o_ihex)
+ asm-macros.i: CFLAGS += -D__ASSEMBLY__ -P
  
- boot.init.o: buildid.o
+@@ -240,7 +240,7 @@ $(BASEDIR)/include/asm-x86/asm-macros.h: asm-macros.i Makefile
  
-diff --git a/xen/common/libelf/Makefile b/xen/common/libelf/Makefile
-index 464c448d9d37..a92326c982e9 100644
---- a/xen/common/libelf/Makefile
-+++ b/xen/common/libelf/Makefile
-@@ -1,12 +1,16 @@
- obj-bin-y := libelf.o
- nocov-y += libelf.o
-+libelf-objs := libelf-tools.o libelf-loader.o libelf-dominfo.o
+ efi.lds: AFLAGS += -DEFI
+ xen.lds efi.lds: xen.lds.S
+-	$(CC) -P -E -Ui386 $(filter-out -Wa$(comma)%,$(AFLAGS)) -o $@ $<
++	$(CC) -P -E -Ui386 $(filter-out -Wa$(comma)%,$(a_flags)) -o $@ $<
+ 	sed -e 's/.*\.lds\.o:/$(@F):/g' <.$(@F).d >.$(@F).d.new
+ 	mv -f .$(@F).d.new .$(@F).d
  
- SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
-+OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
+diff --git a/xen/arch/x86/mm/Makefile b/xen/arch/x86/mm/Makefile
+index d87dc0aa6eeb..a2431fde6bb4 100644
+--- a/xen/arch/x86/mm/Makefile
++++ b/xen/arch/x86/mm/Makefile
+@@ -12,10 +12,10 @@ obj-$(CONFIG_HVM) += p2m-ept.o p2m-pod.o
+ obj-y += paging.o
  
- CFLAGS-y += -Wno-pointer-sign
+ guest_walk_%.o: guest_walk.c Makefile
+-	$(CC) $(CFLAGS) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
  
--libelf.o: libelf-temp.o Makefile
--	$(OBJCOPY) $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
-+libelf.o: libelf-temp.o FORCE
-+	$(call if_changed,objcopy)
+ guest_walk_%.i: guest_walk.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
  
--libelf-temp.o: libelf-tools.o libelf-loader.o libelf-dominfo.o #libelf-relocate.o
--	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
-+libelf-temp.o: $(libelf-objs) FORCE
-+	$(call if_changed,ld)
-+
-+extra-y += libelf-temp.o $(libelf-objs)
-diff --git a/xen/common/libfdt/Makefile b/xen/common/libfdt/Makefile
-index e2a5e59380a0..6bd207cf8ffa 100644
---- a/xen/common/libfdt/Makefile
-+++ b/xen/common/libfdt/Makefile
-@@ -1,14 +1,17 @@
- include Makefile.libfdt
+ guest_walk_%.s: guest_walk.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
++	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
+diff --git a/xen/arch/x86/mm/hap/Makefile b/xen/arch/x86/mm/hap/Makefile
+index b14a9aff93d2..22e7ad54bd33 100644
+--- a/xen/arch/x86/mm/hap/Makefile
++++ b/xen/arch/x86/mm/hap/Makefile
+@@ -6,10 +6,10 @@ obj-y += nested_hap.o
+ obj-y += nested_ept.o
  
- SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
-+OBJCOPYFLAGS := $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s))
+ guest_walk_%level.o: guest_walk.c Makefile
+-	$(CC) $(CFLAGS) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
  
- obj-y += libfdt.o
- nocov-y += libfdt.o
+ guest_walk_%level.i: guest_walk.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
  
- CFLAGS-y += -I$(BASEDIR)/include/xen/libfdt/
+ guest_walk_%level.s: guest_walk.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
++	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
+diff --git a/xen/arch/x86/mm/shadow/Makefile b/xen/arch/x86/mm/shadow/Makefile
+index ff03a9937f9b..23d3ff10802c 100644
+--- a/xen/arch/x86/mm/shadow/Makefile
++++ b/xen/arch/x86/mm/shadow/Makefile
+@@ -7,10 +7,10 @@ obj-y += none.o
+ endif
  
--libfdt.o: libfdt-temp.o Makefile
--	$(OBJCOPY) $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
-+libfdt.o: libfdt-temp.o FORCE
-+	$(call if_changed,objcopy)
+ guest_%.o: multi.c Makefile
+-	$(CC) $(CFLAGS) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++	$(CC) $(c_flags) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
  
--libfdt-temp.o: $(LIBFDT_OBJS)
--	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
-+libfdt-temp.o: $(LIBFDT_OBJS) FORCE
-+	$(call if_changed,ld)
-+
-+extra-y += libfdt-temp.o $(LIBFDT_OBJS)
-diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
-index 011ef5ca91f8..7d0831e2b865 100644
---- a/xen/xsm/flask/Makefile
-+++ b/xen/xsm/flask/Makefile
-@@ -20,12 +20,21 @@ AV_H_FILES = include/av_perm_to_string.h include/av_permissions.h
- ALL_H_FILES = $(FLASK_H_FILES) $(AV_H_FILES)
+ guest_%.i: multi.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
++	$(CPP) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -c $< -o $@
  
- $(obj-y) ss/built_in.o: $(ALL_H_FILES)
-+extra-y += $(ALL_H_FILES)
+ guest_%.s: multi.c Makefile
+-	$(CC) $(filter-out -Wa$(comma)%,$(CFLAGS)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
++	$(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -DGUEST_PAGING_LEVELS=$* -S $< -o $@
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index 433bad9055b2..a488a98d8bb7 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -64,7 +64,7 @@ compat/%.h: compat/%.i Makefile $(BASEDIR)/tools/compat-build-header.py
+ 	mv -f $@.new $@
  
--$(FLASK_H_FILES): $(FLASK_H_DEPEND)
--	$(CONFIG_SHELL) policy/mkflask.sh $(AWK) include $(FLASK_H_DEPEND)
-+mkflask := policy/mkflask.sh
-+quiet_cmd_mkflask = MKFLASK $@
-+cmd_mkflask = $(CONFIG_SHELL) $(mkflask) $(AWK) include $(FLASK_H_DEPEND)
+ compat/%.i: compat/%.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)% -M% %.d -include %/include/xen/config.h,$(CFLAGS)) $(cppflags-y) -o $@ $<
++	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(CFLAGS)) $(cppflags-y) -o $@ $<
  
--$(AV_H_FILES): $(AV_H_DEPEND)
--	$(CONFIG_SHELL) policy/mkaccess_vector.sh $(AWK) $(AV_H_DEPEND)
-+$(FLASK_H_FILES): $(FLASK_H_DEPEND) $(mkflask) FORCE
-+	$(call if_changed,mkflask)
-+
-+mkaccess := policy/mkaccess_vector.sh
-+quiet_cmd_mkaccess = MKACCESS VECTOR $@
-+cmd_mkaccess = $(CONFIG_SHELL) $(mkaccess) $(AWK) $(AV_H_DEPEND)
-+
-+$(AV_H_FILES): $(AV_H_DEPEND) $(mkaccess) FORCE
-+	$(call if_changed,mkaccess)
- 
- obj-bin-$(CONFIG_XSM_FLASK_POLICY) += flask-policy.o
- flask-policy.o: policy.bin
+ compat/%.c: public/%.h xlat.lst Makefile $(BASEDIR)/tools/compat-build-source.py
+ 	mkdir -p $(@D)
 -- 
 Anthony PERARD
 
