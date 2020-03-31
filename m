@@ -7,40 +7,40 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E219FC43331
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7171C2D0E8
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:32:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A63FF206DB
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:32:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7067E206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:32:13 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hs2BC54o"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A63FF206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LlNkG8TE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7067E206DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJEBa-0001MZ-NO; Tue, 31 Mar 2020 10:31:58 +0000
+	id 1jJEBV-0001Hg-6Z; Tue, 31 Mar 2020 10:31:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=I6p8=5Q=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jJEBZ-0001LQ-53
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:57 +0000
-X-Inumbo-ID: d1aa006c-733a-11ea-b58d-bc764e2007e4
+ id 1jJEBU-0001Gy-4X
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:31:52 +0000
+X-Inumbo-ID: d09ef088-733a-11ea-83d8-bc764e2007e4
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d1aa006c-733a-11ea-b58d-bc764e2007e4;
- Tue, 31 Mar 2020 10:31:45 +0000 (UTC)
+ id d09ef088-733a-11ea-83d8-bc764e2007e4;
+ Tue, 31 Mar 2020 10:31:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585650705;
+ d=citrix.com; s=securemail; t=1585650703;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=wQpJCnzMoRgzJpnbgfA1CHBstAlwYXGC9u9GZzIVVmQ=;
- b=hs2BC54o31gv5gLJn0TyXBnJLkoxByZQCfRqOy9ZenUS0710wW9y/KI+
- lZn2oA5HrSnxm6Nme7G0BYYPMBpWk8si4omuH7yd0M7iv5TMMFSmlpqP2
- qYTbl90hHkmsLYZuvJCEunRPsEbA+8r27HzWZ7E8SWVUZh4uqEJ41uHIl w=;
+ bh=urX0oNruXSy704Xb8768tt/5GIHekC4HLoiuLnPVD/c=;
+ b=LlNkG8TEHFa+CWjds2RDWA4zBIgCpxYqTFi+J78LkG0VX1qCLVt1odTF
+ 2epO1u8s2Zb74QcMVBKiketAmqioS+INRHWXcT/RzyTE33ndXSv07EBfO
+ uJLV55VvvKRonvd3qrgaStROQCVGtu66cHZ+wufv0YiidhcHEpNAFsfta 8=;
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -72,22 +72,23 @@ Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: MSGSmPs3sYGlLB0PaYCu5K2FfYtM/L7Y1zJapIZGEUvAxPLOzU3z1C2XjFIfLaXLfMbViOphRD
- HFpK2W+jh7KnPdCBDQtLakIdbpAWG3JWtWLNcKPWQ6A0+Iy7bCb8t1k9hdX4Ted/ONBAMP7wRA
- /2xWFIQdL3pGh16FxUw7xublwYqoQOzauqaM1aYRjLtzl0mYLZNSPeytohXYuw/qf3O6fDgkcb
- dDrH70nUHLOUCaLpbBpq+2VqqBGNqGyeO0ivMaWvhUXV2Sg7mFWTGHdwMudBXh/lXkXh0oH8Ph
- vwg=
+IronPort-SDR: 0yoP6ZNd3hbcRXq3TRT5lLXe+Po9gv3SZLR28+g94EwCZZi9ze9HxYXjO9N2G3KE0cGS+8A2Ij
+ QuLVtsgn8Dc6TZ5FB6upkk8GNPZGJahhgQH1/idqr+91uzY0xEasjgU+0O7KB8AhP3ik0HwLeC
+ +bpNVfV1XxpQyAobH4L7h5abdt3lz4lJcW+FqQc3fN7eKpK5xZ3CeS2+/Nru8Ob4x10IpZpmF3
+ XOozLuGEzM9bTeV4d1IGExjx0FkhVRhxtpkGtt8jTGXaAh257X8yVQQtouYIwqg/GzyhxJS9nc
+ M0s=
 X-SBRS: 2.7
-X-MesageID: 15575933
+X-MesageID: 15575939
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15575933"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15575939"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v4 01/18] xen/arm: Rename all early printk macro
-Date: Tue, 31 Mar 2020 11:30:45 +0100
-Message-ID: <20200331103102.1105674-2-anthony.perard@citrix.com>
+Subject: [XEN PATCH v4 06/18] xen/build: have the root Makefile generates the
+ CFLAGS
+Date: Tue, 31 Mar 2020 11:30:50 +0100
+Message-ID: <20200331103102.1105674-7-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200331103102.1105674-1-anthony.perard@citrix.com>
 References: <20200331103102.1105674-1-anthony.perard@citrix.com>
@@ -104,292 +105,721 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony PERARD <anthony.perard@citrix.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
+ Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Julien Grall <jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Julien Grall <julien@xen.org>
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We are going to move the generation of the early printk macro into
-Kconfig. This means all macro will be prefix with CONFIG_. We do that
-ahead of the change.
+Instead of generating the CFLAGS in Rules.mk everytime we enter a new
+subdirectory, we are going to generate most of them a single time, and
+export the result in the environment so that Rules.mk can use it.  The
+only flags left to be generated are the ones that depend on the
+targets, but the variable $(c_flags) takes care of that.
 
-We also take the opportunity to better name some variables, which are
-used by only one driver and wouldn't make sens for other UART driver.
-Thus,
-    - EARLY_UART_REG_SHIFT became CONFIG_EARLY_UART_8250_REG_SHIFT
-    - EARLY_PRINTK_VERSION_* became CONFIG_EARLY_UART_SCIF_VERSION_*
+Arch specific CFLAGS are generated by a new file "arch/*/arch.mk"
+which is included by the root Makefile.
 
-The other variables are change to have the prefix CONFIG_EARLY_UART_
-when they change a parameter of the driver. So we have now:
-    - CONFIG_EARLY_UART_BAUD_RATE
-    - CONFIG_EARLY_UART_BASE_ADDRESS
-    - CONFIG_EARLY_UART_INIT
+We export the *FLAGS via the environment variables XEN_*FLAGS because
+Rules.mk still includes Config.mk and would add duplicated flags to
+CFLAGS.
+
+When running Rules.mk in the root directory (xen/), the variable
+`root-make-done' is set, so `need-config' will remain undef and so the
+root Makefile will not generate the cflags again.
+
+We can't use CFLAGS in subdirectories to add flags to particular
+targets, instead start to use CFLAGS-y. Idem for AFLAGS.
+So there are two different CFLAGS-y, the one in xen/Makefile (and
+arch.mk), and the one in subdirs that Rules.mk is going to use.
+We can't add to XEN_CFLAGS because it is exported, so making change to
+it might be propagated to subdirectory which isn't intended.
+
+Some style change are introduced in this patch:
+    when LDFLAGS_DIRECT is included in LDFLAGS
+    use of CFLAGS-$(CONFIG_INDIRECT_THUNK) instead of ifeq().
+
+There is on FIXME added about LTO build, but since LTO is marked as
+BROKEN, this commit doesn't attempt to filter -flto flags out of the
+CFLAGS.
 
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
-Tested-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 
 Notes:
     v4:
-    - cleanup in head.S, removing extra () and space
-    
-    Patch v3 and early where in "xen/arm: Configure early printk via
-    Kconfig" series.
+    - typos
+    - Adding $(AFLAGS-y) to $(AFLAGS)
     
     v3:
-    - Revert the renaming of EARLY_PRINTK to CONFIG_EARLY_PRINTK in the
-      makefiles, as this doesn't work well with user provided
-      CONFIG_EARLY_PRINTK.
-      This is done in the following patch instead.
-    
-    - rename CONFIG_EARLY_UART_BAUD_RATE to CONFIG_EARLY_UART_PL011_BAUD_RATE
+    - squash "xen/build: introduce ccflags-y and CFLAGS_$@" here, with
+      those changes:
+        - rename ccflags-y to simply CFLAGS-y and start using AFLAGS-y in
+          subdirs.
+        - remove CFLAGS_$@, we don't need it yet.
+        - fix build of xen.lds and efi.lds which needed -D to be a_flags
+    - remove arch_ccflags, and modify c_flags directly
+      with that change, reorder c_flags, so that target specific flags are last.
+    - remove HAVE_AS_QUOTED_SYM from envvar and check XEN_CFLAGS to find if
+      it's there when adding -D__OBJECT_LABEL__.
+    - fix missing some flags in AFLAGS
+      (like -fshort-wchar in xen/arch/x86/efi/Makefile,
+       and -D__OBJECT_LABEL__ and CFLAGS-stack-boundary)
+    - keep COV_FLAGS generation in Rules.mk since it doesn't invovle to
+      call CC
+    - fix clang test for "asm()-s support .include." (in a new patch done
+      ahead)
+    - include Kconfig.include in xen/Makefile because as-option-add is
+      defined there now.
 
- xen/arch/arm/Rules.mk              | 14 +++++++-------
- xen/arch/arm/arm32/debug-8250.inc  |  2 +-
- xen/arch/arm/arm32/debug-pl011.inc |  4 ++--
- xen/arch/arm/arm32/debug-scif.inc  |  4 ++--
- xen/arch/arm/arm32/debug.S         |  4 ++--
- xen/arch/arm/arm32/head.S          | 10 +++++-----
- xen/arch/arm/arm64/debug-8250.inc  |  4 ++--
- xen/arch/arm/arm64/debug-pl011.inc |  4 ++--
- xen/arch/arm/arm64/debug.S         |  4 ++--
- xen/arch/arm/arm64/head.S          | 10 +++++-----
- xen/include/asm-arm/early_printk.h |  2 +-
- 11 files changed, 31 insertions(+), 31 deletions(-)
+ xen/Makefile                       | 58 +++++++++++++++++++
+ xen/Rules.mk                       | 74 +++++++-----------------
+ xen/arch/arm/Makefile              | 10 ++--
+ xen/arch/arm/Rules.mk              | 23 --------
+ xen/arch/arm/{Rules.mk => arch.mk} |  5 --
+ xen/arch/arm/efi/Makefile          |  2 +-
+ xen/arch/x86/Makefile              | 24 ++++----
+ xen/arch/x86/Rules.mk              | 91 ++----------------------------
+ xen/arch/x86/{Rules.mk => arch.mk} | 17 ++----
+ xen/arch/x86/efi/Makefile          |  2 +-
+ xen/common/libelf/Makefile         |  4 +-
+ xen/common/libfdt/Makefile         |  4 +-
+ xen/include/Makefile               |  2 +-
+ xen/xsm/flask/Makefile             |  2 +-
+ xen/xsm/flask/ss/Makefile          |  2 +-
+ 15 files changed, 115 insertions(+), 205 deletions(-)
+ copy xen/arch/arm/{Rules.mk => arch.mk} (85%)
+ copy xen/arch/x86/{Rules.mk => arch.mk} (87%)
 
+diff --git a/xen/Makefile b/xen/Makefile
+index 8375070e0d41..372692841913 100644
+--- a/xen/Makefile
++++ b/xen/Makefile
+@@ -115,6 +115,64 @@ $(KCONFIG_CONFIG):
+ include/config/%.conf include/config/%.conf.cmd: $(KCONFIG_CONFIG)
+ 	$(MAKE) $(kconfig) syncconfig
+ 
++ifeq ($(CONFIG_DEBUG),y)
++CFLAGS += -O1
++else
++CFLAGS += -O2
++endif
++
++ifeq ($(CONFIG_FRAME_POINTER),y)
++CFLAGS += -fno-omit-frame-pointer
++else
++CFLAGS += -fomit-frame-pointer
++endif
++
++CFLAGS += -nostdinc -fno-builtin -fno-common
++CFLAGS += -Werror -Wredundant-decls -Wno-pointer-arith
++$(call cc-option-add,CFLAGS,CC,-Wvla)
++CFLAGS += -pipe -D__XEN__ -include $(BASEDIR)/include/xen/config.h
++CFLAGS-$(CONFIG_DEBUG_INFO) += -g
++
++ifneq ($(CONFIG_CC_IS_CLANG),y)
++# Clang doesn't understand this command line argument, and doesn't appear to
++# have an suitable alternative.  The resulting compiled binary does function,
++# but has an excessively large symbol table.
++CFLAGS += -Wa,--strip-local-absolute
++endif
++
++AFLAGS += -D__ASSEMBLY__
++
++CFLAGS += $(CFLAGS-y)
++# allow extra CFLAGS externally via EXTRA_CFLAGS_XEN_CORE
++CFLAGS += $(EXTRA_CFLAGS_XEN_CORE)
++
++# Most CFLAGS are safe for assembly files:
++#  -std=gnu{89,99} gets confused by #-prefixed end-of-line comments
++#  -flto makes no sense and annoys clang
++AFLAGS += $(filter-out -std=gnu% -flto,$(CFLAGS)) $(AFLAGS-y)
++
++# LDFLAGS are only passed directly to $(LD)
++LDFLAGS += $(LDFLAGS_DIRECT) $(LDFLAGS-y)
++
++ifeq ($(CONFIG_UBSAN),y)
++CFLAGS_UBSAN := -fsanitize=undefined
++else
++CFLAGS_UBSAN :=
++endif
++
++ifeq ($(CONFIG_LTO),y)
++CFLAGS += -flto
++LDFLAGS-$(CONFIG_CC_IS_CLANG) += -plugin LLVMgold.so
++endif
++
++include $(BASEDIR)/arch/$(TARGET_ARCH)/arch.mk
++
++# define new variables to avoid the ones defines in Config.mk
++export XEN_CFLAGS := $(CFLAGS)
++export XEN_AFLAGS := $(AFLAGS)
++export XEN_LDFLAGS := $(LDFLAGS)
++export CFLAGS_UBSAN
++
+ endif # need-config
+ 
+ .PHONY: build install uninstall clean distclean MAP
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index 3408a35dbf53..0def40a00a09 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -38,59 +38,17 @@ ALL_OBJS-y               += $(BASEDIR)/arch/$(TARGET_ARCH)/built_in.o
+ ALL_OBJS-$(CONFIG_CRYPTO)   += $(BASEDIR)/crypto/built_in.o
+ 
+ # Initialise some variables
+-CFLAGS_UBSAN :=
+-
+-ifeq ($(CONFIG_DEBUG),y)
+-CFLAGS += -O1
+-else
+-CFLAGS += -O2
+-endif
+-
+-ifeq ($(CONFIG_FRAME_POINTER),y)
+-CFLAGS += -fno-omit-frame-pointer
+-else
+-CFLAGS += -fomit-frame-pointer
+-endif
+-
+-CFLAGS += -nostdinc -fno-builtin -fno-common
+-CFLAGS += -Werror -Wredundant-decls -Wno-pointer-arith
+-$(call cc-option-add,CFLAGS,CC,-Wvla)
+-CFLAGS += -pipe -D__XEN__ -include $(BASEDIR)/include/xen/config.h
+-CFLAGS-$(CONFIG_DEBUG_INFO) += -g
+-
+-ifneq ($(CONFIG_CC_IS_CLANG),y)
+-# Clang doesn't understand this command line argument, and doesn't appear to
+-# have an suitable alternative.  The resulting compiled binary does function,
+-# but has an excessively large symbol table.
+-CFLAGS += -Wa,--strip-local-absolute
+-endif
+-
+-AFLAGS += -D__ASSEMBLY__
++CFLAGS-y :=
++AFLAGS-y :=
+ 
+ ALL_OBJS := $(ALL_OBJS-y)
+ 
+-CFLAGS += $(CFLAGS-y)
+-# allow extra CFLAGS externally via EXTRA_CFLAGS_XEN_CORE
+-CFLAGS += $(EXTRA_CFLAGS_XEN_CORE)
+-
+-# Most CFLAGS are safe for assembly files:
+-#  -std=gnu{89,99} gets confused by #-prefixed end-of-line comments
+-#  -flto makes no sense and annoys clang
+-AFLAGS += $(filter-out -std=gnu% -flto,$(CFLAGS))
+-
+-# LDFLAGS are only passed directly to $(LD)
+-LDFLAGS += $(LDFLAGS_DIRECT)
+-
+-LDFLAGS += $(LDFLAGS-y)
+-
+ SPECIAL_DATA_SECTIONS := rodata $(foreach a,1 2 4 8 16, \
+                                             $(foreach w,1 2 4, \
+                                                         rodata.str$(w).$(a)) \
+                                             rodata.cst$(a)) \
+                          $(foreach r,rel rel.ro,data.$(r).local)
+ 
+-include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
+-
+ include Makefile
+ 
+ define gendep
+@@ -107,7 +65,7 @@ $(foreach o,$(filter-out %/,$(obj-y) $(obj-bin-y) $(extra-y)),$(eval $(call gend
+ subdir-y := $(subdir-y) $(filter %/, $(obj-y))
+ obj-y    := $(patsubst %/, %/built_in.o, $(obj-y))
+ 
+-$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS += -DINIT_SECTIONS_ONLY
++$(filter %.init.o,$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += -DINIT_SECTIONS_ONLY
+ 
+ ifeq ($(CONFIG_COVERAGE),y)
+ ifeq ($(CONFIG_CC_IS_CLANG),y)
+@@ -115,19 +73,16 @@ ifeq ($(CONFIG_CC_IS_CLANG),y)
+ else
+     COV_FLAGS := -fprofile-arcs -ftest-coverage
+ endif
+-$(filter-out %.init.o $(nocov-y),$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS += $(COV_FLAGS)
++$(filter-out %.init.o $(nocov-y),$(obj-y) $(obj-bin-y) $(extra-y)): CFLAGS-y += $(COV_FLAGS)
+ endif
+ 
+ ifeq ($(CONFIG_UBSAN),y)
+-CFLAGS_UBSAN += -fsanitize=undefined
+ # Any -fno-sanitize= options need to come after any -fsanitize= options
+ $(filter-out %.init.o $(noubsan-y),$(obj-y) $(obj-bin-y) $(extra-y)): \
+-CFLAGS += $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
++CFLAGS-y += $(filter-out -fno-%,$(CFLAGS_UBSAN)) $(filter -fno-%,$(CFLAGS_UBSAN))
+ endif
+ 
+ ifeq ($(CONFIG_LTO),y)
+-CFLAGS += -flto
+-LDFLAGS-$(CONFIG_CC_IS_CLANG) += -plugin LLVMgold.so
+ # Would like to handle all object files as bitcode, but objects made from
+ # pure asm are in a different format and have to be collected separately.
+ # Mirror the directory tree, collecting them as built_in_bin.o.
+@@ -140,10 +95,19 @@ obj-bin-y :=
+ endif
+ 
+ # Always build obj-bin files as binary even if they come from C source. 
+-$(obj-bin-y): CFLAGS := $(filter-out -flto,$(CFLAGS))
++# FIXME LTO broken, but we would need a different way to filter -flto out
++# $(obj-bin-y): CFLAGS := $(filter-out -flto,$(CFLAGS))
++
++# Calculation of flags, first the generic flags, then the arch specific flags,
++# and last the flags modified for a target or a directory.
++
++c_flags = -MMD -MP -MF $(@D)/.$(@F).d $(XEN_CFLAGS) '-D__OBJECT_FILE__="$@"'
++a_flags = -MMD -MP -MF $(@D)/.$(@F).d $(XEN_AFLAGS)
++
++include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
+ 
+-c_flags = -MMD -MP -MF $(@D)/.$(@F).d $(CFLAGS) '-D__OBJECT_FILE__="$@"'
+-a_flags = -MMD -MP -MF $(@D)/.$(@F).d $(AFLAGS)
++c_flags += $(CFLAGS-y)
++a_flags += $(CFLAGS-y) $(AFLAGS-y)
+ 
+ built_in.o: $(obj-y) $(extra-y)
+ ifeq ($(obj-y),)
+@@ -152,7 +116,7 @@ else
+ ifeq ($(CONFIG_LTO),y)
+ 	$(LD_LTO) -r -o $@ $(filter-out $(extra-y),$^)
+ else
+-	$(LD) $(LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
+ endif
+ endif
+ 
+@@ -160,7 +124,7 @@ built_in_bin.o: $(obj-bin-y) $(extra-y)
+ ifeq ($(obj-bin-y),)
+ 	$(CC) $(a_flags) -c -x assembler /dev/null -o $@
+ else
+-	$(LD) $(LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
+ endif
+ 
+ # Force execution of pattern rules (for which PHONY cannot be directly used).
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index 913f6cdeed3f..9f1ab2335756 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -95,24 +95,24 @@ prelink_lto.o: $(ALL_OBJS)
+ 
+ # Link it with all the binary objects
+ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ else
+ prelink.o: $(ALL_OBJS)
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ endif
+ 
+ $(TARGET)-syms: prelink.o xen.lds
+-	$(LD) $(LDFLAGS) -T xen.lds -N prelink.o \
++	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o \
+ 	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
+ 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).0.S
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).0.o
+-	$(LD) $(LDFLAGS) -T xen.lds -N prelink.o \
++	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o \
+ 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
+ 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort >$(@D)/.$(@F).1.S
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).1.o
+-	$(LD) $(LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
++	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
+ 	    $(@D)/.$(@F).1.o -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+ 		| $(BASEDIR)/tools/symbols --xensyms --sysv --sort \
 diff --git a/xen/arch/arm/Rules.mk b/xen/arch/arm/Rules.mk
-index 022a3a6f82ba..faa09ea111ec 100644
+index 3ad284aa71a4..e69de29bb2d1 100644
 --- a/xen/arch/arm/Rules.mk
 +++ b/xen/arch/arm/Rules.mk
-@@ -66,9 +66,9 @@ endif
- endif
- ifeq ($(EARLY_PRINTK_INC),scif)
- ifneq ($(word 3,$(EARLY_PRINTK_CFG)),)
--CFLAGS-y += -DEARLY_PRINTK_VERSION_$(word 3,$(EARLY_PRINTK_CFG))
-+CFLAGS-y += -DCONFIG_EARLY_UART_SCIF_VERSION_$(word 3,$(EARLY_PRINTK_CFG))
+@@ -1,23 +0,0 @@
+-########################################
+-# arm-specific definitions
+-
+-#
+-# If you change any of these configuration options then you must
+-# 'make clean' before rebuilding.
+-#
+-
+-CFLAGS += -I$(BASEDIR)/include
+-
+-$(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+-$(call cc-option-add,CFLAGS,CC,-Wnested-externs)
+-
+-# Prevent floating-point variables from creeping into Xen.
+-CFLAGS-$(CONFIG_ARM_32) += -msoft-float
+-CFLAGS-$(CONFIG_ARM_32) += -mcpu=cortex-a15
+-
+-CFLAGS-$(CONFIG_ARM_64) += -mcpu=generic
+-CFLAGS-$(CONFIG_ARM_64) += -mgeneral-regs-only # No fp registers etc
+-
+-ifneq ($(filter command line environment,$(origin CONFIG_EARLY_PRINTK)),)
+-    $(error You must use 'make menuconfig' to enable/disable early printk now)
+-endif
+diff --git a/xen/arch/arm/Rules.mk b/xen/arch/arm/arch.mk
+similarity index 85%
+copy from xen/arch/arm/Rules.mk
+copy to xen/arch/arm/arch.mk
+index 3ad284aa71a4..c8186f58288d 100644
+--- a/xen/arch/arm/Rules.mk
++++ b/xen/arch/arm/arch.mk
+@@ -1,11 +1,6 @@
+ ########################################
+ # arm-specific definitions
+ 
+-#
+-# If you change any of these configuration options then you must
+-# 'make clean' before rebuilding.
+-#
+-
+ CFLAGS += -I$(BASEDIR)/include
+ 
+ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+diff --git a/xen/arch/arm/efi/Makefile b/xen/arch/arm/efi/Makefile
+index d34c9168914a..e3ff2c3f283c 100644
+--- a/xen/arch/arm/efi/Makefile
++++ b/xen/arch/arm/efi/Makefile
+@@ -1,4 +1,4 @@
+-CFLAGS += -fshort-wchar
++CFLAGS-y += -fshort-wchar
+ 
+ obj-y +=  boot.init.o runtime.o
+ obj-$(CONFIG_ACPI) +=  efi-dom0.init.o
+diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
+index 1405525105d9..a805e9982e85 100644
+--- a/xen/arch/x86/Makefile
++++ b/xen/arch/x86/Makefile
+@@ -121,32 +121,32 @@ prelink-efi_lto.o: $(ALL_OBJS) efi/runtime.o efi/compat.o
+ 
+ # Link it with all the binary objects
+ prelink.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink_lto.o
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ 
+ prelink-efi.o: $(patsubst %/built_in.o,%/built_in_bin.o,$(ALL_OBJS)) prelink-efi_lto.o efi/boot.init.o
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
  else
--CFLAGS-y += -DEARLY_PRINTK_VERSION_NONE
-+CFLAGS-y += -DCONFIG_EARLY_UART_SCIF_VERSION_NONE
+ prelink.o: $(ALL_OBJS)
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+ 
+ prelink-efi.o: $(ALL_OBJS) efi/boot.init.o efi/runtime.o efi/compat.o
+-	$(LD) $(LDFLAGS) -r -o $@ $(filter-out %/efi/built_in.o,$^)
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out %/efi/built_in.o,$^)
  endif
+ 
+ $(TARGET)-syms: prelink.o xen.lds
+-	$(LD) $(LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
++	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
+ 	    $(BASEDIR)/common/symbols-dummy.o -o $(@D)/.$(@F).0
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).0 \
+ 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort \
+ 		>$(@D)/.$(@F).0.S
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).0.o
+-	$(LD) $(LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
++	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
+ 	    $(@D)/.$(@F).0.o -o $(@D)/.$(@F).1
+ 	$(NM) -pa --format=sysv $(@D)/.$(@F).1 \
+ 		| $(BASEDIR)/tools/symbols $(all_symbols) --sysv --sort $(syms-warn-dup-y) \
+ 		>$(@D)/.$(@F).1.S
+ 	$(MAKE) -f $(BASEDIR)/Rules.mk $(@D)/.$(@F).1.o
+-	$(LD) $(LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
++	$(LD) $(XEN_LDFLAGS) -T xen.lds -N prelink.o $(build_id_linker) \
+ 	    $(@D)/.$(@F).1.o -o $@
+ 	$(NM) -pa --format=sysv $(@D)/$(@F) \
+ 		| $(BASEDIR)/tools/symbols --xensyms --sysv --sort \
+@@ -159,7 +159,7 @@ note.o: $(TARGET)-syms
+ 		--rename-section=.data=.note.gnu.build-id -S $@.bin $@
+ 	rm -f $@.bin
+ 
+-EFI_LDFLAGS = $(patsubst -m%,-mi386pep,$(LDFLAGS)) --subsystem=10
++EFI_LDFLAGS = $(patsubst -m%,-mi386pep,$(XEN_LDFLAGS)) --subsystem=10
+ EFI_LDFLAGS += --image-base=$(1) --stack=0,0 --heap=0,0 --strip-debug
+ EFI_LDFLAGS += --section-alignment=0x200000 --file-alignment=0x20
+ EFI_LDFLAGS += --major-image-version=$(XEN_VERSION)
+@@ -168,7 +168,7 @@ EFI_LDFLAGS += --major-os-version=2 --minor-os-version=0
+ EFI_LDFLAGS += --major-subsystem-version=2 --minor-subsystem-version=0
+ 
+ # Check if the compiler supports the MS ABI.
+-export XEN_BUILD_EFI := $(shell $(CC) $(CFLAGS) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
++export XEN_BUILD_EFI := $(shell $(CC) $(XEN_CFLAGS) -c efi/check.c -o efi/check.o 2>/dev/null && echo y)
+ # Check if the linker supports PE.
+ XEN_BUILD_PE := $(if $(XEN_BUILD_EFI),$(shell $(LD) -mi386pep --subsystem=10 -o efi/check.efi efi/check.o 2>/dev/null && echo y))
+ CFLAGS-$(XEN_BUILD_EFI) += -DXEN_BUILD_EFI
+@@ -178,7 +178,7 @@ $(TARGET).efi: ALT_BASE = 0x$(shell $(NM) efi/relocs-dummy.o | sed -n 's, A ALT_
+ 
+ ifneq ($(build_id_linker),)
+ ifeq ($(call ld-ver-build-id,$(LD) $(filter -m%,$(EFI_LDFLAGS))),y)
+-CFLAGS += -DBUILD_ID_EFI
++CFLAGS-y += -DBUILD_ID_EFI
+ EFI_LDFLAGS += $(build_id_linker)
+ note_file := efi/buildid.o
+ # NB: this must be the last input in the linker call, because inputs following
+@@ -225,7 +225,7 @@ efi/boot.init.o efi/runtime.o efi/compat.o efi/buildid.o efi/relocs-dummy.o: ;
+ asm-offsets.s: $(TARGET_SUBARCH)/asm-offsets.c $(BASEDIR)/include/asm-x86/asm-macros.h
+ 	$(CC) $(filter-out -Wa$(comma)% -flto,$(c_flags)) -S -o $@ $<
+ 
+-asm-macros.i: CFLAGS += -D__ASSEMBLY__ -P
++asm-macros.i: CFLAGS-y += -D__ASSEMBLY__ -P
+ 
+ $(BASEDIR)/include/asm-x86/asm-macros.h: asm-macros.i Makefile
+ 	echo '#if 0' >$@.new
+@@ -238,7 +238,7 @@ $(BASEDIR)/include/asm-x86/asm-macros.h: asm-macros.i Makefile
+ 	echo '#endif' >>$@.new
+ 	$(call move-if-changed,$@.new,$@)
+ 
+-efi.lds: AFLAGS += -DEFI
++efi.lds: AFLAGS-y += -DEFI
+ xen.lds efi.lds: xen.lds.S
+ 	$(CC) -P -E -Ui386 $(filter-out -Wa$(comma)%,$(a_flags)) -o $@ $<
+ 	sed -e 's/.*\.lds\.o:/$(@F):/g' <.$(@F).d >.$(@F).d.new
+diff --git a/xen/arch/x86/Rules.mk b/xen/arch/x86/Rules.mk
+index 4b7ab784670c..56fe22c979ea 100644
+--- a/xen/arch/x86/Rules.mk
++++ b/xen/arch/x86/Rules.mk
+@@ -1,89 +1,10 @@
+ ########################################
+ # x86-specific definitions
+ 
+-XEN_IMG_OFFSET := 0x200000
+-
+-CFLAGS += -I$(BASEDIR)/include
+-CFLAGS += -I$(BASEDIR)/include/asm-x86/mach-generic
+-CFLAGS += -I$(BASEDIR)/include/asm-x86/mach-default
+-CFLAGS += -DXEN_IMG_OFFSET=$(XEN_IMG_OFFSET)
+-CFLAGS += '-D__OBJECT_LABEL__=$(subst /,$$,$(subst -,_,$(subst $(BASEDIR)/,,$(CURDIR))/$@))'
+-
+-# Prevent floating-point variables from creeping into Xen.
+-CFLAGS += -msoft-float
+-
+-ifeq ($(CONFIG_CC_IS_CLANG),y)
+-# Note: Any test which adds -no-integrated-as will cause subsequent tests to
+-# succeed, and not trigger further additions.
+-#
+-# The tests to select whether the integrated assembler is usable need to happen
+-# before testing any assembler features, or else the result of the tests would
+-# be stale if the integrated assembler is not used.
+-
+-# Older clang's built-in assembler doesn't understand .skip with labels:
+-# https://bugs.llvm.org/show_bug.cgi?id=27369
+-$(call as-option-add,CFLAGS,CC,".L0: .L1: .skip (.L1 - .L0)",,\
+-                     -no-integrated-as)
+-
+-# Check whether clang asm()-s support .include.
+-$(call as-option-add,CFLAGS,CC,".include \"asm-x86/indirect_thunk_asm.h\"",,\
+-                     -no-integrated-as)
+-
+-# Check whether clang keeps .macro-s between asm()-s:
+-# https://bugs.llvm.org/show_bug.cgi?id=36110
+-$(call as-option-add,CFLAGS,CC,\
+-                     ".macro FOO;.endm"$$(close); asm volatile $$(open)".macro FOO;.endm",\
+-                     -no-integrated-as)
+-endif
+-
+-$(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+-$(call cc-option-add,CFLAGS,CC,-Wnested-externs)
+-$(call as-option-add,CFLAGS,CC,"vmcall",-DHAVE_AS_VMX)
+-$(call as-option-add,CFLAGS,CC,"crc32 %eax$$(comma)%eax",-DHAVE_AS_SSE4_2)
+-$(call as-option-add,CFLAGS,CC,"invept (%rax)$$(comma)%rax",-DHAVE_AS_EPT)
+-$(call as-option-add,CFLAGS,CC,"rdrand %eax",-DHAVE_AS_RDRAND)
+-$(call as-option-add,CFLAGS,CC,"rdfsbase %rax",-DHAVE_AS_FSGSBASE)
+-$(call as-option-add,CFLAGS,CC,"xsaveopt (%rax)",-DHAVE_AS_XSAVEOPT)
+-$(call as-option-add,CFLAGS,CC,"rdseed %eax",-DHAVE_AS_RDSEED)
+-$(call as-option-add,CFLAGS,CC,"clwb (%rax)",-DHAVE_AS_CLWB)
+-$(call as-option-add,CFLAGS,CC,".equ \"x\"$$(comma)1", \
+-                     -U__OBJECT_LABEL__ -DHAVE_AS_QUOTED_SYM \
+-                     '-D__OBJECT_LABEL__=$(subst $(BASEDIR)/,,$(CURDIR))/$$@')
+-$(call as-option-add,CFLAGS,CC,"invpcid (%rax)$$(comma)%rax",-DHAVE_AS_INVPCID)
+-
+-# GAS's idea of true is -1.  Clang's idea is 1
+-$(call as-option-add,CFLAGS,CC,\
+-    ".if ((1 > 0) < 0); .error \"\";.endif",,-DHAVE_AS_NEGATIVE_TRUE)
+-
+-# Check to see whether the assmbler supports the .nop directive.
+-$(call as-option-add,CFLAGS,CC,\
+-    ".L1: .L2: .nops (.L2 - .L1)$$(comma)9",-DHAVE_AS_NOPS_DIRECTIVE)
+-
+-CFLAGS += -mno-red-zone -fpic -fno-asynchronous-unwind-tables
+-
+-# Xen doesn't use SSE interally.  If the compiler supports it, also skip the
+-# SSE setup for variadic function calls.
+-CFLAGS += -mno-sse $(call cc-option,$(CC),-mskip-rax-setup)
+-
+-# Compile with thunk-extern, indirect-branch-register if avaiable.
+-ifeq ($(CONFIG_INDIRECT_THUNK),y)
+-CFLAGS += -mindirect-branch=thunk-extern -mindirect-branch-register
+-CFLAGS += -fno-jump-tables
++ifneq ($(filter -DHAVE_AS_QUOTED_SYM,$(XEN_CFLAGS)),)
++object_label_flags = '-D__OBJECT_LABEL__=$(subst $(BASEDIR)/,,$(CURDIR))/$@'
++else
++object_label_flags = '-D__OBJECT_LABEL__=$(subst /,$$,$(subst -,_,$(subst $(BASEDIR)/,,$(CURDIR))/$@))'
  endif
+-
+-# If supported by the compiler, reduce stack alignment to 8 bytes. But allow
+-# this to be overridden elsewhere.
+-$(call cc-option-add,CFLAGS-stack-boundary,CC,-mpreferred-stack-boundary=3)
+-CFLAGS += $(CFLAGS-stack-boundary)
+-
+-ifeq ($(CONFIG_UBSAN),y)
+-# Don't enable alignment sanitisation.  x86 has efficient unaligned accesses,
+-# and various things (ACPI tables, hypercall pages, stubs, etc) are wont-fix.
+-# It also causes an as-yet-unidentified crash on native boot before the
+-# console starts.
+-$(call cc-option-add,CFLAGS_UBSAN,CC,-fno-sanitize=alignment)
+-endif
+-
+-# Set up the assembler include path properly for older toolchains.
+-CFLAGS += -Wa,-I$(BASEDIR)/include
+-
++c_flags += $(object_label_flags) $(CFLAGS-stack-boundary)
++a_flags += $(object_label_flags) $(CFLAGS-stack-boundary)
+diff --git a/xen/arch/x86/Rules.mk b/xen/arch/x86/arch.mk
+similarity index 87%
+copy from xen/arch/x86/Rules.mk
+copy to xen/arch/x86/arch.mk
+index 4b7ab784670c..2a51553edb3c 100644
+--- a/xen/arch/x86/Rules.mk
++++ b/xen/arch/x86/arch.mk
+@@ -1,13 +1,12 @@
+ ########################################
+ # x86-specific definitions
  
-@@ -77,11 +77,11 @@ EARLY_PRINTK := y
- endif
+-XEN_IMG_OFFSET := 0x200000
++export XEN_IMG_OFFSET := 0x200000
  
- CFLAGS-$(EARLY_PRINTK) += -DCONFIG_EARLY_PRINTK
--CFLAGS-$(EARLY_PRINTK_INIT_UART) += -DEARLY_PRINTK_INIT_UART
--CFLAGS-$(EARLY_PRINTK) += -DEARLY_PRINTK_INC=\"debug-$(EARLY_PRINTK_INC).inc\"
--CFLAGS-$(EARLY_PRINTK) += -DEARLY_PRINTK_BAUD=$(EARLY_PRINTK_BAUD)
--CFLAGS-$(EARLY_PRINTK) += -DEARLY_UART_BASE_ADDRESS=$(EARLY_UART_BASE_ADDRESS)
--CFLAGS-$(EARLY_PRINTK) += -DEARLY_UART_REG_SHIFT=$(EARLY_UART_REG_SHIFT)
-+CFLAGS-$(EARLY_PRINTK_INIT_UART) += -DCONFIG_EARLY_UART_INIT
-+CFLAGS-$(EARLY_PRINTK) += -DCONFIG_EARLY_PRINTK_INC=\"debug-$(EARLY_PRINTK_INC).inc\"
-+CFLAGS-$(EARLY_PRINTK) += -DCONFIG_EARLY_UART_PL011_BAUD_RATE=$(EARLY_PRINTK_BAUD)
-+CFLAGS-$(EARLY_PRINTK) += -DCONFIG_EARLY_UART_BASE_ADDRESS=$(EARLY_UART_BASE_ADDRESS)
-+CFLAGS-$(EARLY_PRINTK) += -DCONFIG_EARLY_UART_8250_REG_SHIFT=$(EARLY_UART_REG_SHIFT)
+ CFLAGS += -I$(BASEDIR)/include
+ CFLAGS += -I$(BASEDIR)/include/asm-x86/mach-generic
+ CFLAGS += -I$(BASEDIR)/include/asm-x86/mach-default
+ CFLAGS += -DXEN_IMG_OFFSET=$(XEN_IMG_OFFSET)
+-CFLAGS += '-D__OBJECT_LABEL__=$(subst /,$$,$(subst -,_,$(subst $(BASEDIR)/,,$(CURDIR))/$@))'
  
- else # !CONFIG_DEBUG
+ # Prevent floating-point variables from creeping into Xen.
+ CFLAGS += -msoft-float
+@@ -46,9 +45,7 @@ $(call as-option-add,CFLAGS,CC,"rdfsbase %rax",-DHAVE_AS_FSGSBASE)
+ $(call as-option-add,CFLAGS,CC,"xsaveopt (%rax)",-DHAVE_AS_XSAVEOPT)
+ $(call as-option-add,CFLAGS,CC,"rdseed %eax",-DHAVE_AS_RDSEED)
+ $(call as-option-add,CFLAGS,CC,"clwb (%rax)",-DHAVE_AS_CLWB)
+-$(call as-option-add,CFLAGS,CC,".equ \"x\"$$(comma)1", \
+-                     -U__OBJECT_LABEL__ -DHAVE_AS_QUOTED_SYM \
+-                     '-D__OBJECT_LABEL__=$(subst $(BASEDIR)/,,$(CURDIR))/$$@')
++$(call as-option-add,CFLAGS,CC,".equ \"x\"$$(comma)1",-DHAVE_AS_QUOTED_SYM)
+ $(call as-option-add,CFLAGS,CC,"invpcid (%rax)$$(comma)%rax",-DHAVE_AS_INVPCID)
  
-diff --git a/xen/arch/arm/arm32/debug-8250.inc b/xen/arch/arm/arm32/debug-8250.inc
-index 0759a27ee157..c47e8be4aaf3 100644
---- a/xen/arch/arm/arm32/debug-8250.inc
-+++ b/xen/arch/arm/arm32/debug-8250.inc
-@@ -23,7 +23,7 @@
-  */
- .macro early_uart_ready rb rc
- 1:
--        ldr     \rc, [\rb, #(UART_LSR << EARLY_UART_REG_SHIFT)] /* Read LSR */
-+        ldr     \rc, [\rb, #(UART_LSR << CONFIG_EARLY_UART_8250_REG_SHIFT)] /* Read LSR */
-         tst     \rc, #UART_LSR_THRE     /* Check Xmit holding register flag */
-         beq     1b                         /* Wait for the UART to be ready */
- .endm
-diff --git a/xen/arch/arm/arm32/debug-pl011.inc b/xen/arch/arm/arm32/debug-pl011.inc
-index ec462eabab5c..214f68dc95bd 100644
---- a/xen/arch/arm/arm32/debug-pl011.inc
-+++ b/xen/arch/arm/arm32/debug-pl011.inc
-@@ -25,9 +25,9 @@
-  * rd: scratch register 2 (unused here)
-  */
- .macro early_uart_init rb, rc, rd
--        mov   \rc, #(7372800 / EARLY_PRINTK_BAUD % 16)
-+        mov   \rc, #(7372800 / CONFIG_EARLY_UART_PL011_BAUD_RATE % 16)
-         str   \rc, [\rb, #FBRD]     /* -> UARTFBRD (Baud divisor fraction) */
--        mov   \rc, #(7372800 / EARLY_PRINTK_BAUD / 16)
-+        mov   \rc, #(7372800 / CONFIG_EARLY_UART_PL011_BAUD_RATE / 16)
-         str   \rc, [\rb, #IBRD]     /* -> UARTIBRD (Baud divisor integer) */
-         mov   \rc, #0x60            /* 8n1 */
-         str   \rc, [\rb, #LCR_H]     /* -> UARTLCR_H (Line control) */
-diff --git a/xen/arch/arm/arm32/debug-scif.inc b/xen/arch/arm/arm32/debug-scif.inc
-index 3f01c909c238..b2b82501e792 100644
---- a/xen/arch/arm/arm32/debug-scif.inc
-+++ b/xen/arch/arm/arm32/debug-scif.inc
-@@ -19,10 +19,10 @@
+ # GAS's idea of true is -1.  Clang's idea is 1
+@@ -66,15 +63,14 @@ CFLAGS += -mno-red-zone -fpic -fno-asynchronous-unwind-tables
+ CFLAGS += -mno-sse $(call cc-option,$(CC),-mskip-rax-setup)
  
- #include <asm/scif-uart.h>
+ # Compile with thunk-extern, indirect-branch-register if avaiable.
+-ifeq ($(CONFIG_INDIRECT_THUNK),y)
+-CFLAGS += -mindirect-branch=thunk-extern -mindirect-branch-register
+-CFLAGS += -fno-jump-tables
+-endif
++CFLAGS-$(CONFIG_INDIRECT_THUNK) += -mindirect-branch=thunk-extern
++CFLAGS-$(CONFIG_INDIRECT_THUNK) += -mindirect-branch-register
++CFLAGS-$(CONFIG_INDIRECT_THUNK) += -fno-jump-tables
  
--#ifdef EARLY_PRINTK_VERSION_NONE
-+#ifdef CONFIG_EARLY_UART_SCIF_VERSION_NONE
- #define STATUS_REG    SCIF_SCFSR
- #define TX_FIFO_REG   SCIF_SCFTDR
--#elif EARLY_PRINTK_VERSION_A
-+#elif CONFIG_EARLY_UART_SCIF_VERSION_A
- #define STATUS_REG    SCIFA_SCASSR
- #define TX_FIFO_REG   SCIFA_SCAFTDR
- #endif
-diff --git a/xen/arch/arm/arm32/debug.S b/xen/arch/arm/arm32/debug.S
-index 1829b29915e0..e77c76d0debc 100644
---- a/xen/arch/arm/arm32/debug.S
-+++ b/xen/arch/arm/arm32/debug.S
-@@ -19,8 +19,8 @@
+ # If supported by the compiler, reduce stack alignment to 8 bytes. But allow
+ # this to be overridden elsewhere.
+ $(call cc-option-add,CFLAGS-stack-boundary,CC,-mpreferred-stack-boundary=3)
+-CFLAGS += $(CFLAGS-stack-boundary)
++export CFLAGS-stack-boundary
  
- #include <asm/early_printk.h>
+ ifeq ($(CONFIG_UBSAN),y)
+ # Don't enable alignment sanitisation.  x86 has efficient unaligned accesses,
+@@ -86,4 +82,3 @@ endif
  
--#ifdef EARLY_PRINTK_INC
--#include EARLY_PRINTK_INC
-+#if defined (CONFIG_EARLY_PRINTK_INC)
-+#include CONFIG_EARLY_PRINTK_INC
- #endif
+ # Set up the assembler include path properly for older toolchains.
+ CFLAGS += -Wa,-I$(BASEDIR)/include
+-
+diff --git a/xen/arch/x86/efi/Makefile b/xen/arch/x86/efi/Makefile
+index 4bc0a196e9ca..490d791aae2d 100644
+--- a/xen/arch/x86/efi/Makefile
++++ b/xen/arch/x86/efi/Makefile
+@@ -1,4 +1,4 @@
+-CFLAGS += -fshort-wchar
++CFLAGS-y += -fshort-wchar
  
- /*
-diff --git a/xen/arch/arm/arm32/head.S b/xen/arch/arm/arm32/head.S
-index e9d356f05c2b..c404fa973e9b 100644
---- a/xen/arch/arm/arm32/head.S
-+++ b/xen/arch/arm/arm32/head.S
-@@ -36,8 +36,8 @@
- #define XEN_FIRST_SLOT      first_table_offset(XEN_VIRT_START)
- #define XEN_SECOND_SLOT     second_table_offset(XEN_VIRT_START)
+ %.o: %.ihex
+ 	$(OBJCOPY) -I ihex -O binary $< $@
+diff --git a/xen/common/libelf/Makefile b/xen/common/libelf/Makefile
+index 3d9e38f27e65..464c448d9d37 100644
+--- a/xen/common/libelf/Makefile
++++ b/xen/common/libelf/Makefile
+@@ -3,10 +3,10 @@ nocov-y += libelf.o
  
--#if (defined (CONFIG_EARLY_PRINTK)) && (defined (EARLY_PRINTK_INC))
--#include EARLY_PRINTK_INC
-+#if defined(CONFIG_EARLY_PRINTK) && defined(CONFIG_EARLY_PRINTK_INC)
-+#include CONFIG_EARLY_PRINTK_INC
- #endif
+ SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
  
- /*
-@@ -223,7 +223,7 @@ GLOBAL(init_secondary)
- 1:
+-CFLAGS += -Wno-pointer-sign
++CFLAGS-y += -Wno-pointer-sign
  
- #ifdef CONFIG_EARLY_PRINTK
--        mov_w r11, EARLY_UART_BASE_ADDRESS   /* r11 := UART base address */
-+        mov_w r11, CONFIG_EARLY_UART_BASE_ADDRESS   /* r11 := UART base address */
-         PRINT("- CPU ")
-         print_reg r7
-         PRINT(" booting -\r\n")
-@@ -706,8 +706,8 @@ ENTRY(switch_ttbr)
-  * Clobbers r0 - r3
-  */
- init_uart:
--        mov_w r11, EARLY_UART_BASE_ADDRESS
--#ifdef EARLY_PRINTK_INIT_UART
-+        mov_w r11, CONFIG_EARLY_UART_BASE_ADDRESS
-+#ifdef CONFIG_EARLY_UART_INIT
-         early_uart_init r11, r1, r2
- #endif
-         PRINT("- UART enabled -\r\n")
-diff --git a/xen/arch/arm/arm64/debug-8250.inc b/xen/arch/arm/arm64/debug-8250.inc
-index 53d6828bfafe..30ea13077e22 100644
---- a/xen/arch/arm/arm64/debug-8250.inc
-+++ b/xen/arch/arm/arm64/debug-8250.inc
-@@ -25,7 +25,7 @@
-  */
- .macro early_uart_ready xb c
- 1:
--       ldrb  w\c, [\xb, #UART_LSR << EARLY_UART_REG_SHIFT]
-+       ldrb  w\c, [\xb, #UART_LSR << CONFIG_EARLY_UART_8250_REG_SHIFT]
-        and w\c, w\c, #UART_LSR_THRE
-        cmp w\c, #UART_LSR_THRE
-        b.ne 1b
-@@ -38,7 +38,7 @@
-  */
- .macro early_uart_transmit xb wt
-         /* UART_THR  transmit holding */
--        strb   \wt, [\xb, #UART_THR << EARLY_UART_REG_SHIFT]
-+        strb   \wt, [\xb, #UART_THR << CONFIG_EARLY_UART_8250_REG_SHIFT]
- .endm
+ libelf.o: libelf-temp.o Makefile
+ 	$(OBJCOPY) $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
  
- /*
-diff --git a/xen/arch/arm/arm64/debug-pl011.inc b/xen/arch/arm/arm64/debug-pl011.inc
-index 569c3dfbcf47..385deff49b1b 100644
---- a/xen/arch/arm/arm64/debug-pl011.inc
-+++ b/xen/arch/arm/arm64/debug-pl011.inc
-@@ -24,9 +24,9 @@
-  * c: scratch register number
-  */
- .macro early_uart_init xb, c
--        mov   x\c, #(7372800 / EARLY_PRINTK_BAUD % 16)
-+        mov   x\c, #(7372800 / CONFIG_EARLY_UART_PL011_BAUD_RATE % 16)
-         strh  w\c, [\xb, #0x28]      /* -> UARTFBRD (Baud divisor fraction) */
--        mov   x\c, #(7372800 / EARLY_PRINTK_BAUD / 16)
-+        mov   x\c, #(7372800 / CONFIG_EARLY_UART_PL011_BAUD_RATE / 16)
-         strh  w\c, [\xb, #0x24]      /* -> UARTIBRD (Baud divisor integer) */
-         mov   x\c, #0x60             /* 8n1 */
-         str   w\c, [\xb, #0x2C]      /* -> UARTLCR_H (Line control) */
-diff --git a/xen/arch/arm/arm64/debug.S b/xen/arch/arm/arm64/debug.S
-index b7f53ac0519b..71cad9d762b2 100644
---- a/xen/arch/arm/arm64/debug.S
-+++ b/xen/arch/arm/arm64/debug.S
-@@ -19,8 +19,8 @@
+ libelf-temp.o: libelf-tools.o libelf-loader.o libelf-dominfo.o #libelf-relocate.o
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+diff --git a/xen/common/libfdt/Makefile b/xen/common/libfdt/Makefile
+index c075bbf5462a..e2a5e59380a0 100644
+--- a/xen/common/libfdt/Makefile
++++ b/xen/common/libfdt/Makefile
+@@ -5,10 +5,10 @@ SECTIONS := text data $(SPECIAL_DATA_SECTIONS)
+ obj-y += libfdt.o
+ nocov-y += libfdt.o
  
- #include <asm/early_printk.h>
+-CFLAGS += -I$(BASEDIR)/include/xen/libfdt/
++CFLAGS-y += -I$(BASEDIR)/include/xen/libfdt/
  
--#ifdef EARLY_PRINTK_INC
--#include EARLY_PRINTK_INC
-+#ifdef CONFIG_EARLY_PRINTK_INC
-+#include CONFIG_EARLY_PRINTK_INC
- #endif
+ libfdt.o: libfdt-temp.o Makefile
+ 	$(OBJCOPY) $(foreach s,$(SECTIONS),--rename-section .$(s)=.init.$(s)) $< $@
  
- /*
-diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-index e5015f93a2d8..5d44667bd89d 100644
---- a/xen/arch/arm/arm64/head.S
-+++ b/xen/arch/arm/arm64/head.S
-@@ -45,8 +45,8 @@
- #define __HEAD_FLAGS            ((__HEAD_FLAG_PAGE_SIZE << 1) | \
-                                  (__HEAD_FLAG_PHYS_BASE << 3))
+ libfdt-temp.o: $(LIBFDT_OBJS)
+-	$(LD) $(LDFLAGS) -r -o $@ $^
++	$(LD) $(XEN_LDFLAGS) -r -o $@ $^
+diff --git a/xen/include/Makefile b/xen/include/Makefile
+index a488a98d8bb7..2a10725d689b 100644
+--- a/xen/include/Makefile
++++ b/xen/include/Makefile
+@@ -64,7 +64,7 @@ compat/%.h: compat/%.i Makefile $(BASEDIR)/tools/compat-build-header.py
+ 	mv -f $@.new $@
  
--#if (defined (CONFIG_EARLY_PRINTK)) && (defined (EARLY_PRINTK_INC))
--#include EARLY_PRINTK_INC
-+#if defined(CONFIG_EARLY_PRINTK) && defined(CONFIG_EARLY_PRINTK_INC)
-+#include CONFIG_EARLY_PRINTK_INC
- #endif
+ compat/%.i: compat/%.c Makefile
+-	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(CFLAGS)) $(cppflags-y) -o $@ $<
++	$(CPP) $(filter-out -Wa$(comma)% -include %/include/xen/config.h,$(XEN_CFLAGS)) $(cppflags-y) -o $@ $<
  
- /*
-@@ -363,7 +363,7 @@ GLOBAL(init_secondary)
- 1:
+ compat/%.c: public/%.h xlat.lst Makefile $(BASEDIR)/tools/compat-build-source.py
+ 	mkdir -p $(@D)
+diff --git a/xen/xsm/flask/Makefile b/xen/xsm/flask/Makefile
+index b1fd45421993..011ef5ca91f8 100644
+--- a/xen/xsm/flask/Makefile
++++ b/xen/xsm/flask/Makefile
+@@ -4,7 +4,7 @@ obj-y += flask_op.o
  
- #ifdef CONFIG_EARLY_PRINTK
--        ldr   x23, =EARLY_UART_BASE_ADDRESS /* x23 := UART base address */
-+        ldr   x23, =CONFIG_EARLY_UART_BASE_ADDRESS /* x23 := UART base address */
-         PRINT("- CPU ")
-         print_reg x24
-         PRINT(" booting -\r\n")
-@@ -843,8 +843,8 @@ ENTRY(switch_ttbr)
-  * Clobbers x0 - x1
-  */
- init_uart:
--        ldr   x23, =EARLY_UART_BASE_ADDRESS
--#ifdef EARLY_PRINTK_INIT_UART
-+        ldr   x23, =CONFIG_EARLY_UART_BASE_ADDRESS
-+#ifdef CONFIG_EARLY_UART_INIT
-         early_uart_init x23, 0
- #endif
-         PRINT("- UART enabled -\r\n")
-diff --git a/xen/include/asm-arm/early_printk.h b/xen/include/asm-arm/early_printk.h
-index 078cf701dcb0..d5485decfa9f 100644
---- a/xen/include/asm-arm/early_printk.h
-+++ b/xen/include/asm-arm/early_printk.h
-@@ -15,7 +15,7 @@
+ obj-y += ss/
  
- /* need to add the uart address offset in page to the fixmap address */
- #define EARLY_UART_VIRTUAL_ADDRESS \
--    (FIXMAP_ADDR(FIXMAP_CONSOLE) +(EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
-+    (FIXMAP_ADDR(FIXMAP_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
+-CFLAGS += -I./include
++CFLAGS-y += -I./include
  
- #endif /* !CONFIG_EARLY_PRINTK */
+ AWK = awk
  
+diff --git a/xen/xsm/flask/ss/Makefile b/xen/xsm/flask/ss/Makefile
+index 046ce8f53326..d32b9e07138e 100644
+--- a/xen/xsm/flask/ss/Makefile
++++ b/xen/xsm/flask/ss/Makefile
+@@ -8,4 +8,4 @@ obj-y += services.o
+ obj-y += conditional.o
+ obj-y += mls.o
+ 
+-CFLAGS += -I../include
++CFLAGS-y += -I../include
 -- 
 Anthony PERARD
 
