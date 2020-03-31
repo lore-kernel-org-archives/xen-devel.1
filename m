@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F2602C2D0EE
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7255C43331
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1614206DB
-	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:11 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 981F3206DB
+	for <xen-devel@archiver.kernel.org>; Tue, 31 Mar 2020 10:06:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="O5eQBmwE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1614206DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hXnV5v14"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 981F3206DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJDmP-0005uk-Tb; Tue, 31 Mar 2020 10:05:57 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jJDmN-0005si-Jr; Tue, 31 Mar 2020 10:05:55 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=fshn=5Q=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jJDmP-0005u6-3v
- for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:05:57 +0000
-X-Inumbo-ID: 325bcb24-7337-11ea-b4f4-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 325bcb24-7337-11ea-b4f4-bc764e2007e4;
- Tue, 31 Mar 2020 10:05:49 +0000 (UTC)
+ id 1jJDmM-0005rq-95
+ for xen-devel@lists.xenproject.org; Tue, 31 Mar 2020 10:05:54 +0000
+X-Inumbo-ID: 2f649312-7337-11ea-ba0b-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 2f649312-7337-11ea-ba0b-12813bfff9fa;
+ Tue, 31 Mar 2020 10:05:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585649150;
+ d=citrix.com; s=securemail; t=1585649145;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=RXoGjwqxEgkEyP09KfWZrxI1cEHDPQ7pSyNUoM8V/OU=;
- b=O5eQBmwE5z3ShVtBnmfM6OMKB9FEn/LeTfHQkLZDVyHW1Kb8X630mQ0e
- KDFdRI82ifNX4qnhwAFcYhivCWIhC8pzZDCY9gG/gH3fsy2zCLk81ERlt
- 1GUk5dz0p3kb1jQjKntRJZ43QqsHPhdKzsp0yeJ0UJGYYSCEHp5mU/2RK M=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ bh=bRv2ZDDEle7+rr6nLrEPeMqu4nRuzhy/4HYzc7luCQ8=;
+ b=hXnV5v140EUolkCQLbiIo6Duo/L3K3E1vB9ozfLV8rhaBjnv0q5B6e8n
+ OdknJXrMQBsE3r02JRkBsrt7y+H403wyp3Qx4QhI/YBlxOZjfDTyRJgJO
+ MMR2qDiJggV5HdwTBe9O6/ijlTZFt/+MHj4BARRL+w0/MWXgst2N3EdNZ 4=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,30 +66,30 @@ Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: f0qRLIDg9nvm10rai68Kr+qGElZNeUi9y18eICqWyi4uC0gXeLuJXVrzW39CU0xLEiRnoUiBiW
- 2yn3ChCH3BEOQ90O/RLFjvkINEF3nTB80aEMb8MO5+KdppaAx1gJNFgpSmxyDQqurDuyAeIgzw
- Wvaas9WjzQJbWRyEj5vLKYrNoo1UFTO5/hiAq3cfGiXOj+ki+TBo97HcbNfm/FINvtMnLnbJSq
- cPTAl43CvCoi3tMUT8t3Jw54PlpgqH6RG+vSyaaMqtBp+wHvdORY4KPYZbdxxnFRn6l0sqVt2W
- jD0=
+IronPort-SDR: ImDgnuZpNV9ILuPcyTYVM1MpFFldmGAMbeW5w4EGwpxCKzxyTYxuIYz2YqlYKPTvaaEm4t6zI0
+ Q0qZrRefWytWnnS+IuibknspytIO9OQjI0RuHV7FY+oWyZ1KA4jJCpDUP8oVICDX/1ar+Oj1cA
+ 7ftZVTeNZwS+edqdYJOOVzAGl876ghYuGOOgHteABnAtBLpbSwWMgJ5MMMI2jqe0x4iaLBIahz
+ ePq4pFzPtlA2YBc5U3wqgRuYQqFXl6BIadfs6K3J4G5hrl3GZ/1TOLFXa2yLw6m3ktB2DruAWc
+ SAo=
 X-SBRS: 2.7
-X-MesageID: 14930060
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 15245337
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="14930060"
+X-IronPort-AV: E=Sophos;i="5.72,327,1580792400"; d="scan'208";a="15245337"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 08/11] x86/ucode/amd: Rename bufsize to size in
- cpu_request_microcode()
-Date: Tue, 31 Mar 2020 11:05:28 +0100
-Message-ID: <20200331100531.4294-9-andrew.cooper3@citrix.com>
+Subject: [PATCH 06/11] x86/ucode/amd: Move verify_patch_size() into
+ get_ucode_from_buffer_amd()
+Date: Tue, 31 Mar 2020 11:05:26 +0100
+Message-ID: <20200331100531.4294-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200331100531.4294-1-andrew.cooper3@citrix.com>
 References: <20200331100531.4294-1-andrew.cooper3@citrix.com>
@@ -111,9 +112,13 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-To simplify future cleanup, rename this variable.
+We only stash the microcode blob size so it can be audited in
+microcode_fits().  However, the patch size check depends only on the CPU
+family.
 
-No functional change.
+Move the check earlier to when we are parsing the container, which avoids
+caching bad microcode in the first place, and allows us to avoid storing the
+size at all.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -121,90 +126,76 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/cpu/microcode/amd.c | 21 ++++++++++-----------
- 1 file changed, 10 insertions(+), 11 deletions(-)
+ xen/arch/x86/cpu/microcode/amd.c | 18 +++++++-----------
+ 1 file changed, 7 insertions(+), 11 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 254f3dd4d7..980e61c547 100644
+index d3439b0c6c..8318664f85 100644
 --- a/xen/arch/x86/cpu/microcode/amd.c
 +++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -427,8 +427,7 @@ static int container_fast_forward(const void *data, size_t size_left, size_t *of
-     return 0;
- }
+@@ -60,7 +60,6 @@ struct __packed microcode_header_amd {
  
--static struct microcode_patch *cpu_request_microcode(const void *buf,
--                                                     size_t bufsize)
-+static struct microcode_patch *cpu_request_microcode(const void *buf, size_t size)
- {
+ struct microcode_patch {
+     struct microcode_header_amd *mpb;
+-    size_t mpb_size;
+ };
+ 
+ /* Temporary, until the microcode_* structure are disentangled. */
+@@ -184,12 +183,6 @@ static enum microcode_match_result microcode_fits(
+          equiv.id  != mc_header->processor_rev_id )
+         return MIS_UCODE;
+ 
+-    if ( !verify_patch_size(mc_amd->mpb_size) )
+-    {
+-        pr_debug("microcode: patch size mismatch\n");
+-        return MIS_UCODE;
+-    }
+-
+     if ( mc_header->patch_id <= sig->rev )
+     {
+         pr_debug("microcode: patch is already at required level or greater.\n");
+@@ -318,10 +311,15 @@ static int get_ucode_from_buffer_amd(
+         return -EINVAL;
+     }
+ 
++    if ( !verify_patch_size(mpbuf->len) )
++    {
++        printk(XENLOG_ERR "microcode: patch size mismatch\n");
++        return -EINVAL;
++    }
++
+     mc_amd->mpb = xmemdup_bytes(mpbuf->data, mpbuf->len);
+     if ( !mc_amd->mpb )
+         return -ENOMEM;
+-    mc_amd->mpb_size = mpbuf->len;
+ 
+     pr_debug("microcode: CPU%d size %zu, block size %u offset %zu equivID %#x rev %#x\n",
+              smp_processor_id(), bufsize, mpbuf->len, *offset,
+@@ -439,7 +437,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
      struct microcode_amd *mc_amd;
      struct microcode_header_amd *saved = NULL;
-@@ -438,7 +437,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+     struct microcode_patch *patch = NULL;
+-    size_t offset = 0, saved_size = 0;
++    size_t offset = 0;
+     int error = 0;
      unsigned int cpu = smp_processor_id();
      const struct cpu_signature *sig = &per_cpu(cpu_sig, cpu);
- 
--    if ( bufsize < 4 ||
-+    if ( size < 4 ||
-          *(const uint32_t *)buf != UCODE_MAGIC )
-     {
-         printk(KERN_ERR "microcode: Wrong microcode patch file magic\n");
-@@ -459,17 +458,17 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-      * 1. check if this container file has equiv_cpu_id match
-      * 2. If not, fast-fwd to next container file
-      */
--    while ( offset < bufsize )
-+    while ( offset < size )
-     {
--        error = scan_equiv_cpu_table(buf, bufsize - offset, &offset);
-+        error = scan_equiv_cpu_table(buf, size - offset, &offset);
- 
-         if ( !error || error != -ESRCH )
-             break;
- 
--        error = container_fast_forward(buf, bufsize - offset, &offset);
-+        error = container_fast_forward(buf, size - offset, &offset);
-         if ( error == -ENODATA )
+@@ -516,7 +514,6 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
          {
--            ASSERT(offset == bufsize);
-+            ASSERT(offset == size);
-             break;
+             xfree(saved);
+             saved = mc_amd->mpb;
+-            saved_size = mc_amd->mpb_size;
          }
-         if ( error )
-@@ -498,7 +497,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-      * It's possible the data file has multiple matching ucode,
-      * lets keep searching till the latest version
-      */
--    while ( (error = get_ucode_from_buffer_amd(mc_amd, buf, bufsize,
-+    while ( (error = get_ucode_from_buffer_amd(mc_amd, buf, size,
-                                                &offset)) == 0 )
+         else
+         {
+@@ -555,7 +552,6 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
+     if ( saved )
      {
-         /*
-@@ -517,7 +516,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-             mc_amd->mpb = NULL;
-         }
- 
--        if ( offset >= bufsize )
-+        if ( offset >= size )
-             break;
- 
-         /*
-@@ -527,7 +526,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-          *    earlier while() (On this case, matches on earlier container
-          *    file and we break)
-          * 3. Proceed to while ( (error = get_ucode_from_buffer_amd(mc_amd,
--         *                                  buf, bufsize,&offset)) == 0 )
-+         *                                  buf, size, &offset)) == 0 )
-          * 4. Find correct patch using microcode_fits() and apply the patch
-          *    (Assume: apply_microcode() is successful)
-          * 5. The while() loop from (3) continues to parse the binary as
-@@ -540,7 +539,7 @@ static struct microcode_patch *cpu_request_microcode(const void *buf,
-          *    before if ( mpbuf->type != UCODE_UCODE_TYPE ) evaluates to
-          *    false and returns -EINVAL.
-          */
--        if ( offset + SECTION_HDR_SIZE <= bufsize &&
-+        if ( offset + SECTION_HDR_SIZE <= size &&
-              *(const uint32_t *)(buf + offset) == UCODE_MAGIC )
-             break;
+         mc_amd->mpb = saved;
+-        mc_amd->mpb_size = saved_size;
+         patch = mc_amd;
      }
+     else
 -- 
 2.11.0
 
