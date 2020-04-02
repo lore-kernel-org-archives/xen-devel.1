@@ -6,44 +6,45 @@ X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 34865C43331
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 08:25:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3610FC43331
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 08:42:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F6F1206F6
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 08:25:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F6F1206F6
+	by mail.kernel.org (Postfix) with ESMTPS id D6D3220857
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 08:42:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D6D3220857
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJv9q-0008Eg-UK; Thu, 02 Apr 2020 08:25:02 +0000
+	id 1jJvPv-0001Rn-Mm; Thu, 02 Apr 2020 08:41:39 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Ugol=5S=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jJv9o-0008EQ-Vj
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 08:25:01 +0000
-X-Inumbo-ID: 716b2c1c-74bb-11ea-b4f4-bc764e2007e4
+ id 1jJvPu-0001Rg-Jk
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 08:41:38 +0000
+X-Inumbo-ID: c425b0ce-74bd-11ea-83d8-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 716b2c1c-74bb-11ea-b4f4-bc764e2007e4;
- Thu, 02 Apr 2020 08:25:00 +0000 (UTC)
+ id c425b0ce-74bd-11ea-83d8-bc764e2007e4;
+ Thu, 02 Apr 2020 08:41:38 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 9462AADAB;
- Thu,  2 Apr 2020 08:24:59 +0000 (UTC)
-Subject: [PATCH v2 2/2] x86/cpuidle: support Cannon Lake (again)
+ by mx2.suse.de (Postfix) with ESMTP id C514BAFF5;
+ Thu,  2 Apr 2020 08:41:36 +0000 (UTC)
+Subject: Re: [PATCH v2] x86emul: suppress "not built" warning for test harness
+ for run targets
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <e39d4326-57d1-a4b5-3081-76b5160644ae@suse.com>
-Message-ID: <91bbd232-a96c-6b00-fbaa-ac8094eb0cfe@suse.com>
-Date: Thu, 2 Apr 2020 10:24:57 +0200
+References: <4c5af3e1-836f-4104-99a8-79755c8034e1@suse.com>
+Message-ID: <3a0f9394-f7d1-94f0-4a81-6240f01348b8@suse.com>
+Date: Thu, 2 Apr 2020 10:40:40 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <e39d4326-57d1-a4b5-3081-76b5160644ae@suse.com>
+In-Reply-To: <4c5af3e1-836f-4104-99a8-79755c8034e1@suse.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -62,50 +63,48 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-As per SDM rev 071 Cannon Lake has
-- no CC3 residency MSR at 3FC,
-- a CC1 residency MSR ar 660 (like various Atoms),
-- a useless (always zero) CC3 residency MSR at 662.
-Hence it needs a separate case label.
+On 20.03.2020 17:11, Jan Beulich wrote:
+> The run* targets can be used to test whatever the tool chain is capable
+> of building, as long as at least the main harness source file builds.
+> Don't probe the tools chain, in particular to avoid issuing the warning,
+> in this case. While looking into this I also noticed the wording of the
+> respective comment isn't quite right, which therefore gets altered at
+> the same time.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-v2: Split. This patch is beign submitted more for completeness than with
-    the expectation that it would get acked, as per the v1 feedback.
----
-Using the MSR cross reference in the same SDM revision one might even
-get the impression that further MSRs are unavailable, but newer CPUs
-don't appear to be consistently listed there at all, so may rather be a
-doc shortcoming. I've pointed this out to Intel, but I'm not expecting
-swift feedback.
+I guess this is simple enough a change that I'll commit it early
+next week, unless I hear otherwise till then.
 
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -69,7 +69,7 @@
- #define GET_PC8_RES(val)  GET_HW_RES_IN_NS(0x630, val) /* some Haswells only */
- #define GET_PC9_RES(val)  GET_HW_RES_IN_NS(0x631, val) /* some Haswells only */
- #define GET_PC10_RES(val) GET_HW_RES_IN_NS(0x632, val) /* some Haswells only */
--#define GET_CC1_RES(val)  GET_HW_RES_IN_NS(0x660, val) /* Silvermont only */
-+#define GET_CC1_RES(val)  GET_HW_RES_IN_NS(0x660, val)
- #define GET_CC3_RES(val)  GET_HW_RES_IN_NS(0x3FC, val)
- #define GET_CC6_RES(val)  GET_HW_RES_IN_NS(0x3FD, val)
- #define GET_CC7_RES(val)  GET_HW_RES_IN_NS(0x3FE, val) /* SNB onwards */
-@@ -201,6 +201,16 @@ static void do_get_hw_residencies(void *
-         GET_CC3_RES(hw_res->cc3);
-         GET_CC6_RES(hw_res->cc6);
-         break;
-+    /* Cannon Lake */
-+    case 0x66:
-+        GET_PC2_RES(hw_res->pc2);
-+        GET_PC3_RES(hw_res->pc3);
-+        GET_PC6_RES(hw_res->pc6);
-+        GET_PC7_RES(hw_res->pc7);
-+        GET_CC1_RES(hw_res->cc1);
-+        GET_CC6_RES(hw_res->cc6);
-+        GET_CC7_RES(hw_res->cc7);
-+        break;
-     /* Xeon Phi Knights Landing */
-     case 0x57:
-     /* Xeon Phi Knights Mill */
+Jan
 
+> ---
+> v2: Also suppress the compiler/assembler probing in this case.
+> 
+> --- a/tools/tests/x86_emulator/Makefile
+> +++ b/tools/tests/x86_emulator/Makefile
+> @@ -97,11 +97,13 @@ avx512dq-opmask-vecs := 1 2
+>  avx512bw-opmask-vecs := 4 8
+>  
+>  # Suppress building by default of the harness if the compiler can't deal
+> -# with any of the extensions used.  Don't alter the "run" target dependencies
+> +# with some of the extensions used.  Don't alter the "run" target dependencies
+>  # though, as this target needs to be specified manually, and things may work
+>  # partially even with older compilers.
+>  TARGET-y := $(TARGET)
+>  
+> +ifeq ($(filter run%,$(MAKECMDGOALS)),)
+> +
+>  define simd-check-cc
+>  TARGET-$(shell echo 'int i;' | $(CC) -x c -c -o /dev/null -m$(1) - || echo y) :=
+>  endef
+> @@ -116,6 +118,8 @@ ifeq ($(TARGET-y),)
+>  $(warning Test harness not built, use newer compiler than "$(CC)" (version $(shell $(CC) -dumpversion)) and an "{evex}" capable assembler)
+>  endif
+>  
+> +endif
+> +
+>  all: $(TARGET-y)
+>  
+>  # For AVX and later, have the compiler avoid XMM0 to widen coverage of
 
