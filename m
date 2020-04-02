@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 16B49C10F26
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:19:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F0EEC10F26
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:19:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC8922077D
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:19:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E7C3C2077D
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:19:42 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="DKuLQ31n"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC8922077D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="GtZaplka"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E7C3C2077D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJwwU-0000qG-Um; Thu, 02 Apr 2020 10:19:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJwwU-0000px-LU; Thu, 02 Apr 2020 10:19:22 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=8h32=5S=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jJwwT-0000pm-DZ
+ id 1jJwwS-0000pc-Vn
  for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 10:19:21 +0000
-X-Inumbo-ID: 65c20cf4-74cb-11ea-bba1-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 65c20cf4-74cb-11ea-bba1-12813bfff9fa;
- Thu, 02 Apr 2020 10:19:12 +0000 (UTC)
+X-Inumbo-ID: 6a0cec34-74cb-11ea-9e09-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 6a0cec34-74cb-11ea-9e09-bc764e2007e4;
+ Thu, 02 Apr 2020 10:19:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585822752;
+ d=citrix.com; s=securemail; t=1585822761;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=6rwZacdltItl9czt/IkZJAdDx3fDf89O2zoFUkCWxII=;
- b=DKuLQ31n4nvhglfk0XMdRtCLNKk0YguB2HElxGt3ggmJQeF9Odffh3v5
- livHxNq7MkopCdbCaJMatxuD1iuM2OZTBkwUf8ifymEH5X7CNlEABylLu
- rowdankaB/H0GK/wqRsSeqoD0o5RNsiphDbjILXdBO/mb0xx0RtvvVFWC c=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=eZcKbBNzadTU2s5TsuGgFszMTPPeWk2mohwFyrTvSJM=;
+ b=GtZaplkanE0grmFBn+4xj8xzuYu9ogeyuiEQWTzOhGumB+EDeG6D4MZp
+ N4466XoCzuIgTroJUQmZOAwgLjJKJKKu0DHiHBroRS1TfaL7TiMHvpofk
+ SU+jlufOls2JYcExQZ6p1AcqYL+2NkBZijbBqkBfO3d70IViOXf3fl02y 4=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -66,30 +65,29 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: 70Hu1c/V3Xo4KeglIpiHkC8ugzcgbwS4wwpPLpvGWqiMgO3cCdF5MPFMqKNra51MkBgKQaGzDE
- GQTm51Y1vqiZbkBhn92eiZ7f4Iq2lcbOSQKJz7219QNpMUpDbyfe8w8EzSvEc4kn6YrEMGmfDv
- miWv7fcjcBSnPsyQ+Q+iJVB32l2aIr3JGmuEmuBR6dJ0cCFoTZawP905WCU/MXqHaWll0tMvPw
- zAG1ZnhSfQShb9Qzfe0sX6IY73GaDLWdPyyRjYaOg7ee4+GNzEjb3Wo/T0lp7F5Pcfi0a7LqRh
- YCw=
+IronPort-SDR: mQ5ta3syU40qCuRiz25H7IFZHcb5LaPTsLyu+OecTg5uFvaosagAGd3/k9ggn2tYW8SZcAqiXm
+ gzXSFg7f4/7NABosLqKGIVLBZbOxWWN4kuScVVVKwFszZymiE4btkFSZ+MOj3rcGYibhLI7PBm
+ mvEeuEAF9ilrFMhh1zvmUOxFNA5E028/P7aAuyoU2NM10l03UfNbgtvqtgvERVFaxBUklPMzZe
+ pYDhgJgdIiqEBnG0RHgmGFtGZu4EYTHQaNCcXTcxIPEySsuDichfhSfmnrTFWbGnLkU5qdWftF
+ TiE=
 X-SBRS: 2.7
-X-MesageID: 15380676
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 15041306
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,335,1580792400"; d="scan'208";a="15380676"
+X-IronPort-AV: E=Sophos;i="5.72,335,1580792400"; d="scan'208";a="15041306"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 3/5] x86/ucode: Don't try to cope with NULL pointers in
- apply_microcode()
-Date: Thu, 2 Apr 2020 11:19:00 +0100
-Message-ID: <20200402101902.28234-4-andrew.cooper3@citrix.com>
+Subject: [PATCH 5/5] x86/ucode: Simplify the ops->collect_cpu_info() API
+Date: Thu, 2 Apr 2020 11:19:02 +0100
+Message-ID: <20200402101902.28234-6-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200402101902.28234-1-andrew.cooper3@citrix.com>
 References: <20200402101902.28234-1-andrew.cooper3@citrix.com>
@@ -112,9 +110,11 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-No paths to apply_microcode() pass a NULL pointer, and other hooks don't
-tolerate one in the first place.  We can expect the core logic not to pass us
-junk, so drop the checks.
+All callers pass &this_cpu(cpu_sig) for the cpu_sig parameter, and all
+implementations unconditionally return 0.  Simplify it to be void.
+
+Drop the long-stale comment on the AMD side, whose counterpart in
+start_update() used to be "collect_cpu_info() doesn't fail so we're fine".
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -122,38 +122,128 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/cpu/microcode/amd.c   | 3 ---
- xen/arch/x86/cpu/microcode/intel.c | 3 ---
- 2 files changed, 6 deletions(-)
+ xen/arch/x86/cpu/microcode/amd.c     |  7 +++----
+ xen/arch/x86/cpu/microcode/core.c    | 14 ++++++--------
+ xen/arch/x86/cpu/microcode/intel.c   |  5 ++---
+ xen/arch/x86/cpu/microcode/private.h |  7 +++++--
+ 4 files changed, 16 insertions(+), 17 deletions(-)
 
 diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index c9656de55d..0ca0e9a038 100644
+index e23bdef6f2..13bf9f4dee 100644
 --- a/xen/arch/x86/cpu/microcode/amd.c
 +++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -219,9 +219,6 @@ static int apply_microcode(const struct microcode_patch *patch)
-     struct cpu_signature *sig = &per_cpu(cpu_sig, cpu);
-     uint32_t rev, old_rev = sig->rev;
+@@ -90,9 +90,10 @@ static struct {
+     uint16_t id;
+ } equiv __read_mostly;
  
--    if ( !patch )
--        return -ENOENT;
+-/* See comment in start_update() for cases when this routine fails */
+-static int collect_cpu_info(struct cpu_signature *csig)
++static void collect_cpu_info(void)
+ {
++    struct cpu_signature *csig = &this_cpu(cpu_sig);
++
+     memset(csig, 0, sizeof(*csig));
+ 
+     csig->sig = cpuid_eax(1);
+@@ -100,8 +101,6 @@ static int collect_cpu_info(struct cpu_signature *csig)
+ 
+     pr_debug("microcode: CPU%d collect_cpu_info: patch_id=%#x\n",
+              smp_processor_id(), csig->rev);
 -
-     if ( microcode_fits(patch) != NEW_UCODE )
-         return -EINVAL;
+-    return 0;
+ }
  
+ static bool_t verify_patch_size(uint32_t patch_size)
+diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
+index 53e447ea9a..a220f908b8 100644
+--- a/xen/arch/x86/cpu/microcode/core.c
++++ b/xen/arch/x86/cpu/microcode/core.c
+@@ -237,10 +237,9 @@ static const struct microcode_patch *nmi_patch = ZERO_BLOCK_PTR;
+  */
+ static struct microcode_patch *parse_blob(const char *buf, size_t len)
+ {
+-    if ( likely(!microcode_ops->collect_cpu_info(&this_cpu(cpu_sig))) )
+-        return microcode_ops->cpu_request_microcode(buf, len);
++    microcode_ops->collect_cpu_info();
+ 
+-    return NULL;
++    return microcode_ops->cpu_request_microcode(buf, len);
+ }
+ 
+ static void microcode_free_patch(struct microcode_patch *patch)
+@@ -306,10 +305,9 @@ static bool wait_cpu_callout(unsigned int nr)
+  */
+ static int microcode_update_cpu(const struct microcode_patch *patch)
+ {
+-    int err = microcode_ops->collect_cpu_info(&this_cpu(cpu_sig));
++    int err;
+ 
+-    if ( unlikely(err) )
+-        return err;
++    microcode_ops->collect_cpu_info();
+ 
+     spin_lock(&microcode_mutex);
+     if ( patch )
+@@ -737,7 +735,7 @@ int microcode_update_one(bool start_update)
+     if ( !microcode_ops )
+         return -EOPNOTSUPP;
+ 
+-    microcode_ops->collect_cpu_info(&this_cpu(cpu_sig));
++    microcode_ops->collect_cpu_info();
+ 
+     if ( start_update && microcode_ops->start_update )
+     {
+@@ -819,7 +817,7 @@ int __init early_microcode_init(void)
+         return -ENODEV;
+     }
+ 
+-    microcode_ops->collect_cpu_info(&this_cpu(cpu_sig));
++    microcode_ops->collect_cpu_info();
+ 
+     if ( ucode_mod.mod_end || ucode_blob.size )
+         rc = early_microcode_update_cpu();
 diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index 315fca9ff2..9cb077b583 100644
+index 29745ed55f..a9f4d6e829 100644
 --- a/xen/arch/x86/cpu/microcode/intel.c
 +++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -270,9 +270,6 @@ static int apply_microcode(const struct microcode_patch *patch)
-     struct cpu_signature *sig = &this_cpu(cpu_sig);
-     uint32_t rev, old_rev = sig->rev;
+@@ -115,8 +115,9 @@ static bool signature_matches(const struct cpu_signature *cpu_sig,
+     return cpu_sig->pf & ucode_pf;
+ }
  
--    if ( !patch )
--        return -ENOENT;
+-static int collect_cpu_info(struct cpu_signature *csig)
++static void collect_cpu_info(void)
+ {
++    struct cpu_signature *csig = &this_cpu(cpu_sig);
+     uint64_t msr_content;
+ 
+     memset(csig, 0, sizeof(*csig));
+@@ -133,8 +134,6 @@ static int collect_cpu_info(struct cpu_signature *csig)
+     csig->rev = (uint32_t)(msr_content >> 32);
+     pr_debug("microcode: collect_cpu_info : sig=%#x, pf=%#x, rev=%#x\n",
+              csig->sig, csig->pf, csig->rev);
 -
-     if ( microcode_update_match(patch) != NEW_UCODE )
-         return -EINVAL;
+-    return 0;
+ }
  
+ /*
+diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
+index 878f8d805f..dc5c7a81ae 100644
+--- a/xen/arch/x86/cpu/microcode/private.h
++++ b/xen/arch/x86/cpu/microcode/private.h
+@@ -33,8 +33,11 @@ struct microcode_ops {
+     struct microcode_patch *(*cpu_request_microcode)(const void *buf,
+                                                      size_t size);
+ 
+-    /* Obtain microcode-relevant details for the current CPU. */
+-    int (*collect_cpu_info)(struct cpu_signature *csig);
++    /*
++     * Obtain microcode-relevant details for the current CPU.  Results in
++     * per_cpu(cpu_sig).
++     */
++    void (*collect_cpu_info)(void);
+ 
+     /*
+      * Attempt to load the provided patch into the CPU.  Returns an error if
 -- 
 2.11.0
 
