@@ -2,47 +2,44 @@ Return-Path: <SRS0=3qI7=5S=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C44AC2D0F3
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 15:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94AE0C43331
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 15:46:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7A6CE2063A
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 15:46:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7A6CE2063A
+	by mail.kernel.org (Postfix) with ESMTPS id 71A4A2063A
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 15:46:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 71A4A2063A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jK232-0003j4-Ex; Thu, 02 Apr 2020 15:46:28 +0000
+	id 1jK238-0003lt-7t; Thu, 02 Apr 2020 15:46:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=Jjwm=5S=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jK231-0003it-HQ
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 15:46:27 +0000
-X-Inumbo-ID: 198ef396-74f9-11ea-9e09-bc764e2007e4
+ id 1jK236-0003lB-Gu
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 15:46:32 +0000
+X-Inumbo-ID: 19c5fed6-74f9-11ea-b58d-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 198ef396-74f9-11ea-9e09-bc764e2007e4;
- Thu, 02 Apr 2020 15:46:21 +0000 (UTC)
+ id 19c5fed6-74f9-11ea-b58d-bc764e2007e4;
+ Thu, 02 Apr 2020 15:46:22 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id D2AB2AC44;
+ by mx2.suse.de (Postfix) with ESMTP id D482AAE38;
  Thu,  2 Apr 2020 15:46:19 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v7 03/12] docs: add feature document for Xen hypervisor
- sysfs-like support
-Date: Thu,  2 Apr 2020 17:46:07 +0200
-Message-Id: <20200402154616.16927-4-jgross@suse.com>
+Subject: [PATCH v7 00/12] Add hypervisor sysfs-like support
+Date: Thu,  2 Apr 2020 17:46:04 +0200
+Message-Id: <20200402154616.16927-1-jgross@suse.com>
 X-Mailer: git-send-email 2.16.4
-In-Reply-To: <20200402154616.16927-1-jgross@suse.com>
-References: <20200402154616.16927-1-jgross@suse.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -53,11 +50,16 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
@@ -65,251 +67,139 @@ On the 2019 Xen developer summit there was agreement that the Xen
 hypervisor should gain support for a hierarchical name-value store
 similar to the Linux kernel's sysfs.
 
-In the beginning there should only be basic support: entries can be
-added from the hypervisor itself only, there is a simple hypercall
-interface to read the data.
+This is a first implementation of that idea adding the basic
+functionality to hypervisor and tools side. The interface to any
+user program making use of that "xen-hypfs" is a new library
+"libxenhypfs" with a stable interface.
 
-Add a feature document for setting the base of a discussion regarding
-the desired functionality and the entries to add.
+The series adds read-only nodes with buildinfo data and writable
+nodes with runtime parameters. xl is switched to use the new file
+system for modifying the runtime parameters and the old sysctl
+interface for that purpose is dropped.
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
----
-V1:
-- remove the "--" prefixes of the sub-commands of the user tool
-  (Jan Beulich)
-- rename xenfs to xenhypfs (Jan Beulich)
-- add "tree" and "write" options to user tool
+Changes in V7:
+- old patch 1 already applied
+- add new patch 1 (carved out and modified from patch 9)
+- addressed review comments
+- modified public interface to have a max write size instead of a
+  writable flag only
 
-V2:
-- move example tree to the paths description (Ian Jackson)
-- specify allowed characters for keys and values (Ian Jackson)
+Changes in V6:
+- added new patches 1, 10, 11, 12
+- addressed review comments
+- modified interface for creating nodes for runtime parameters
 
-V3:
-- correct introduction (writable entries)
+Changes in V5:
+- switched to xsm for privilege check
 
-V4:
-- add list specification
-- add entry example (Julien Grall)
-- correct date and Xen version (Julien Grall)
-- add ARM64 as possible architecture (Julien Grall)
-- add version description to the feature doc (Jan Beulich)
----
- docs/features/hypervisorfs.pandoc |  92 +++++++++++++++++++++++++++++++++
- docs/misc/hypfs-paths.pandoc      | 105 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 197 insertions(+)
+Changes in V4:
+- former patch 2 removed as already committed
+- addressed review comments
+
+Changes in V3:
+- major rework, especially by supporting binary contents of entries
+- added several new patches (1, 2, 7)
+- full support of all runtime parameters
+- support of writing entries (especially runtime parameters)
+
+Changes in V2:
+- all comments to V1 addressed
+- added man-page for xenhypfs tool
+- added runtime parameter read access for string parameters
+
+Changes in V1:
+- renamed xenfs ->xenhypfs
+- added writable entries support at the interface level and in the
+  xenhypfs tool
+- added runtime parameter read access (integer type only for now)
+- added docs/misc/hypfs-paths.pandoc for path descriptions
+
+Juergen Gross (12):
+  xen/vmx: let opt_ept_ad always reflect the current setting
+  xen: add a generic way to include binary files as variables
+  docs: add feature document for Xen hypervisor sysfs-like support
+  xen: add basic hypervisor filesystem support
+  libs: add libxenhypfs
+  tools: add xenfs tool
+  xen: provide version information in hypfs
+  xen: add /buildinfo/config entry to hypervisor filesystem
+  xen: add runtime parameter access support to hypfs
+  tools/libxl: use libxenhypfs for setting xen runtime parameters
+  tools/libxc: remove xc_set_parameters()
+  xen: remove XEN_SYSCTL_set_parameter support
+
+ .gitignore                          |   6 +
+ docs/features/hypervisorfs.pandoc   |  92 +++++++
+ docs/man/xenhypfs.1.pod             |  61 ++++
+ docs/misc/hypfs-paths.pandoc        | 163 +++++++++++
+ tools/Rules.mk                      |   8 +-
+ tools/flask/policy/modules/dom0.te  |   4 +-
+ tools/libs/Makefile                 |   1 +
+ tools/libs/hypfs/Makefile           |  16 ++
+ tools/libs/hypfs/core.c             | 536 ++++++++++++++++++++++++++++++++++++
+ tools/libs/hypfs/include/xenhypfs.h |  75 +++++
+ tools/libs/hypfs/libxenhypfs.map    |  10 +
+ tools/libs/hypfs/xenhypfs.pc.in     |  10 +
+ tools/libxc/include/xenctrl.h       |   1 -
+ tools/libxc/xc_misc.c               |  21 --
+ tools/libxl/Makefile                |   3 +-
+ tools/libxl/libxl.c                 |  53 +++-
+ tools/libxl/libxl_internal.h        |   1 +
+ tools/libxl/xenlight.pc.in          |   2 +-
+ tools/misc/Makefile                 |   6 +
+ tools/misc/xenhypfs.c               | 192 +++++++++++++
+ tools/xl/xl_misc.c                  |   1 -
+ xen/arch/arm/traps.c                |   1 +
+ xen/arch/arm/xen.lds.S              |  10 +-
+ xen/arch/x86/hvm/hypercall.c        |   1 +
+ xen/arch/x86/hvm/vmx/vmcs.c         |  54 +++-
+ xen/arch/x86/hvm/vmx/vmx.c          |   4 +-
+ xen/arch/x86/hypercall.c            |   1 +
+ xen/arch/x86/pv/domain.c            |  21 +-
+ xen/arch/x86/pv/hypercall.c         |   1 +
+ xen/arch/x86/xen.lds.S              |  10 +-
+ xen/common/Kconfig                  |  10 +
+ xen/common/Makefile                 |  13 +
+ xen/common/grant_table.c            |  49 +++-
+ xen/common/hypfs.c                  | 381 +++++++++++++++++++++++++
+ xen/common/kernel.c                 |  84 +++++-
+ xen/common/sysctl.c                 |  36 ---
+ xen/drivers/char/console.c          |  61 +++-
+ xen/include/Makefile                |   1 +
+ xen/include/asm-x86/hvm/vmx/vmcs.h  |   3 +-
+ xen/include/public/hypfs.h          | 127 +++++++++
+ xen/include/public/sysctl.h         |  19 +-
+ xen/include/public/xen.h            |   1 +
+ xen/include/xen/hypercall.h         |   8 +
+ xen/include/xen/hypfs.h             | 118 ++++++++
+ xen/include/xen/kernel.h            |   3 +
+ xen/include/xen/lib.h               |   1 -
+ xen/include/xen/param.h             | 101 ++++---
+ xen/include/xlat.lst                |   2 +
+ xen/include/xsm/dummy.h             |   6 +
+ xen/include/xsm/xsm.h               |   6 +
+ xen/tools/binfile                   |  41 +++
+ xen/xsm/dummy.c                     |   1 +
+ xen/xsm/flask/Makefile              |   5 +-
+ xen/xsm/flask/flask-policy.S        |  16 --
+ xen/xsm/flask/hooks.c               |   9 +-
+ xen/xsm/flask/policy/access_vectors |   4 +-
+ 56 files changed, 2284 insertions(+), 187 deletions(-)
  create mode 100644 docs/features/hypervisorfs.pandoc
+ create mode 100644 docs/man/xenhypfs.1.pod
  create mode 100644 docs/misc/hypfs-paths.pandoc
+ create mode 100644 tools/libs/hypfs/Makefile
+ create mode 100644 tools/libs/hypfs/core.c
+ create mode 100644 tools/libs/hypfs/include/xenhypfs.h
+ create mode 100644 tools/libs/hypfs/libxenhypfs.map
+ create mode 100644 tools/libs/hypfs/xenhypfs.pc.in
+ create mode 100644 tools/misc/xenhypfs.c
+ create mode 100644 xen/common/hypfs.c
+ create mode 100644 xen/include/public/hypfs.h
+ create mode 100644 xen/include/xen/hypfs.h
+ create mode 100755 xen/tools/binfile
+ delete mode 100644 xen/xsm/flask/flask-policy.S
 
-diff --git a/docs/features/hypervisorfs.pandoc b/docs/features/hypervisorfs.pandoc
-new file mode 100644
-index 0000000000..a0a0ead057
---- /dev/null
-+++ b/docs/features/hypervisorfs.pandoc
-@@ -0,0 +1,92 @@
-+% Hypervisor FS
-+% Revision 1
-+
-+\clearpage
-+
-+# Basics
-+---------------- ---------------------
-+         Status: **Supported**
-+
-+  Architectures: all
-+
-+     Components: Hypervisor, toolstack
-+---------------- ---------------------
-+
-+# Overview
-+
-+The Hypervisor FS is a hierarchical name-value store for reporting
-+information to guests, especially dom0. It is similar to the Linux
-+kernel's sysfs. Entries and directories are created by the hypervisor,
-+while the toolstack is able to use a hypercall to query the entry
-+values or (if allowed by the hypervisor) to modify them.
-+
-+# User details
-+
-+With:
-+
-+    xenhypfs ls <path>
-+
-+the user can list the entries of a specific path of the FS. Using:
-+
-+    xenhypfs cat <path>
-+
-+the content of an entry can be retrieved. Using:
-+
-+    xenhypfs write <path> <string>
-+
-+a writable entry can be modified. With:
-+
-+    xenhypfs tree
-+
-+the complete Hypervisor FS entry tree can be printed.
-+
-+The FS paths are documented in `docs/misc/hypfs-paths.pandoc`.
-+
-+# Technical details
-+
-+Access to the hypervisor filesystem is done via the stable new hypercall
-+__HYPERVISOR_filesystem_op. This hypercall supports a sub-command
-+XEN_HYPFS_OP_get_version which will return the highest version of the
-+interface supported by the hypervisor. Additions to the interface need
-+to bump the interface version. The hypervisor is required to support the
-+previous interface versions, too (this implies that additions will always
-+require new sub-commands in order to allow the hypervisor to decide which
-+version of the interface to use).
-+
-+* hypercall interface specification
-+    * `xen/include/public/hypfs.h`
-+* hypervisor internal files
-+    * `xen/include/xen/hypfs.h`
-+    * `xen/common/hypfs.c`
-+* `libxenhypfs`
-+    * `tools/libs/libxenhypfs/*`
-+* `xenhypfs`
-+    * `tools/misc/xenhypfs.c`
-+* path documentation
-+    * `docs/misc/hypfs-paths.pandoc`
-+
-+# Testing
-+
-+Any new parameters or hardware mitigations should be verified to show up
-+correctly in the filesystem.
-+
-+# Areas for improvement
-+
-+* More detailed access rights
-+* Entries per domain and/or per cpupool
-+
-+# Known issues
-+
-+* None
-+
-+# References
-+
-+* None
-+
-+# History
-+
-+------------------------------------------------------------------------
-+Date       Revision Version  Notes
-+---------- -------- -------- -------------------------------------------
-+2020-01-23 1        Xen 4.14 Document written
-+---------- -------- -------- -------------------------------------------
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-new file mode 100644
-index 0000000000..b9f50f6998
---- /dev/null
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -0,0 +1,105 @@
-+# Xenhypfs Paths
-+
-+This document attempts to define all the paths which are available
-+in the Xen hypervisor file system (hypfs).
-+
-+The hypervisor file system can be accessed via the xenhypfs tool.
-+
-+## Notation
-+
-+The hypervisor file system is similar to the Linux kernel's sysfs.
-+In this document directories are always specified with a trailing "/".
-+
-+The following notation conventions apply:
-+
-+        DIRECTORY/
-+
-+        PATH = VALUES [TAGS]
-+
-+The first syntax defines a directory. It normally contains related
-+entries and the general scope of the directory is described.
-+
-+The second syntax defines a file entry containing values which are
-+either set by the hypervisor or, if the file is writable, can be set
-+by the user.
-+
-+PATH can contain simple regex constructs following the Perl compatible
-+regexp syntax described in pcre(3) or perlre(1).
-+
-+A hypervisor file system entry name can be any 0-delimited byte string
-+not containing any '/' character. The names "." and ".." are reserved
-+for file system internal use.
-+
-+VALUES are strings and can take the following forms:
-+
-+* STRING -- an arbitrary 0-delimited byte string.
-+* INTEGER -- An integer, in decimal representation unless otherwise
-+  noted.
-+* "a literal string" -- literal strings are contained within quotes.
-+* (VALUE | VALUE | ... ) -- a set of alternatives. Alternatives are
-+  separated by a "|" and all the alternatives are enclosed in "(" and
-+  ")".
-+* {VALUE, VALUE, ... } -- a list of possible values separated by "," and
-+  enclosed in "{" and "}".
-+
-+Additional TAGS may follow as a comma separated set of the following
-+tags enclosed in square brackets.
-+
-+* w -- Path is writable by the user. This capability is usually
-+  limited to the control domain (e.g. dom0).
-+* ARM | ARM32 | ARM64 | X86: the path is available for the respective
-+  architecture only.
-+* PV --  Path is valid for PV capable hypervisors only.
-+* HVM -- Path is valid for HVM capable hypervisors only.
-+* CONFIG_* -- Path is valid only in case the hypervisor was built with
-+  the respective config option.
-+
-+So an entry could look like this:
-+
-+    /cpu-bugs/active-pv/xpti = ("No"|{"dom0", "domU", "PCID on"}) [w,X86,PV]
-+
-+Possible values would be "No" or a list of "dom0", "domU", and "PCID on".
-+The entry would be writable and it would exist on X86 only and only if the
-+hypervisor is configured to support PV guests.
-+
-+## Example
-+
-+A populated Xen hypervisor file system might look like the following example:
-+
-+    /
-+        buildinfo/           directory containing build-time data
-+            config           contents of .config file used to build Xen
-+        cpu-bugs/            x86: directory of cpu bug information
-+            l1tf             "Vulnerable" or "Not vulnerable"
-+            mds              "Vulnerable" or "Not vulnerable"
-+            meltdown         "Vulnerable" or "Not vulnerable"
-+            spec-store-bypass "Vulnerable" or "Not vulnerable"
-+            spectre-v1       "Vulnerable" or "Not vulnerable"
-+            spectre-v2       "Vulnerable" or "Not vulnerable"
-+            mitigations/     directory of mitigation settings
-+                bti-thunk    "N/A", "RETPOLINE", "LFENCE" or "JMP"
-+                spec-ctrl    "No", "IBRS+" or IBRS-"
-+                ibpb         "No" or "Yes"
-+                l1d-flush    "No" or "Yes"
-+                md-clear     "No" or "VERW"
-+                l1tf-barrier "No" or "Yes"
-+            active-hvm/      directory for mitigations active in hvm doamins
-+                msr-spec-ctrl "No" or "Yes"
-+                rsb          "No" or "Yes"
-+                eager-fpu    "No" or "Yes"
-+                md-clear     "No" or "Yes"
-+            active-pv/       directory for mitigations active in pv doamins
-+                msr-spec-ctrl "No" or "Yes"
-+                rsb          "No" or "Yes"
-+                eager-fpu    "No" or "Yes"
-+                md-clear     "No" or "Yes"
-+                xpti         "No" or list of "dom0", "domU", "PCID on"
-+                l1tf-shadow  "No" or list of "dom0", "domU"
-+        params/              directory with hypervisor parameter values
-+                             (boot/runtime parameters)
-+
-+## General Paths
-+
-+#### /
-+
-+The root of the hypervisor file system.
 -- 
 2.16.4
 
