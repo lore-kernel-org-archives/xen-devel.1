@@ -2,70 +2,104 @@ Return-Path: <SRS0=3qI7=5S=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.6 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-7.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93EA0C43331
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 12:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F38D1C2BA15
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 12:56:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5FBA920757
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 12:44:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C21EA20784
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 12:56:27 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Td9C5U/h"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FBA920757
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="DEEMEyYo"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C21EA20784
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJzC8-00050W-2p; Thu, 02 Apr 2020 12:43:40 +0000
+	id 1jJzO9-0005vm-8j; Thu, 02 Apr 2020 12:56:05 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=6xHX=5S=gmail.com=kevin.buckley.ecs.vuw.ac.nz@srs-us1.protection.inumbo.net>)
- id 1jJzC7-00050R-4G
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 12:43:39 +0000
-X-Inumbo-ID: 92d6f196-74df-11ea-9e09-bc764e2007e4
-Received: from mail-wr1-x42f.google.com (unknown [2a00:1450:4864:20::42f])
+ <SRS0=8h32=5S=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jJzO7-0005vh-5L
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 12:56:03 +0000
+X-Inumbo-ID: 4dd483fe-74e1-11ea-b58d-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 92d6f196-74df-11ea-9e09-bc764e2007e4;
- Thu, 02 Apr 2020 12:43:38 +0000 (UTC)
-Received: by mail-wr1-x42f.google.com with SMTP id t7so3979140wrw.12
- for <xen-devel@lists.xenproject.org>; Thu, 02 Apr 2020 05:43:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:from:date:message-id:subject:to;
- bh=Uuthd54xjku6K8Q2Q227K08pkabnP+VFCySgM4kEalQ=;
- b=Td9C5U/hACTCraH7iI7bHObT0Q0XdPVxUmpGRfoPWZDNo5smj0JsMbOfEhtNVrZuc7
- HF/E/pXtp2MAVA0F3rJ+NWWww4wbhCUOxwzM7c1rKuezzu4xcIjD0FBFoB9zcHtvQ6CR
- QhVo0IvaJabfT4uVK8g2uZr5FDaf1N4iNebO7+rUt67kZrODQaScyLkjXVyNA9ZEuD4O
- F2CKLVe85KIGy5N1RHr7bDfNs8WC+0bjWzRJ7eJ5voxFhqu4OAmwLKh+D9PScjamVw7Q
- YfeJiixq4OHw5r1i1Xqx10+z1G+g4w9mc4eoRloS9xAQ7g2W29dIlcr0Efj7JuKmq17b
- 8ALw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
- bh=Uuthd54xjku6K8Q2Q227K08pkabnP+VFCySgM4kEalQ=;
- b=mw9DDAgTeXCZ4vgRNqQkTqL1nXGl79Md0BQDGkNMYROEJgPeVgR0ffUSjX7GO+cLnb
- nz8wd5VS57G6yriFHNhP/mq4wtAoyap3cZCf4+4Wk1PlzIpTw9rrHmDKaF2JQTbLmek3
- +AVDmIy4geYjRrOm+qNWApLnEwkNsHZgs1TNMhkE0vhbqhxjqBT7n6mIwHQ3Imi2Z30b
- vSIFm12mh8a9STkQtMmvBbXt/msvjTofQpnrz2wmo8/sO+8ZGUXaCgkfRgK8p0NqBleF
- mSyKSgF4bDykML6wCDP2MByb5uPcEyBuzG02loq72GmTNJYTnSp3S6JVTkT/MLvnqD00
- Rphg==
-X-Gm-Message-State: AGi0Pubw+lYAr+tYXc5g4ORNyf8gWe5tMdoAuw5D0v3S22/1hkZFWdMX
- bZb/VFYWr946poe4+JF+hicSMi5YuL81CC8FLuQVWGEKJ+Q=
-X-Google-Smtp-Source: APiQypLv6jG95UiKFCi60x4POV7E6+Rc2abv5tHdXKjRaz1GVm80lX8RVPEu+A1evt5pVhx19MJnF4foUTTbdRrylsY=
-X-Received: by 2002:adf:a2d8:: with SMTP id t24mr3334511wra.366.1585831417250; 
- Thu, 02 Apr 2020 05:43:37 -0700 (PDT)
+ id 4dd483fe-74e1-11ea-b58d-bc764e2007e4;
+ Thu, 02 Apr 2020 12:56:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1585832162;
+ h=subject:to:references:from:message-id:date:mime-version:
+ in-reply-to:content-transfer-encoding;
+ bh=p0nro/otG9FvlcbRWEZTTq4craSZautD7iOq2tx3e4E=;
+ b=DEEMEyYoz0OLr4ZRVpRcEtBMCrxiKjl5XalOxkSDZ8NMFZtOMfacnutD
+ +a611sfGy1O7gMOo5q2AWLpG3nWnGcfRHIgt0oyRVUL4kVDuRrem+hqZ5
+ +mJ3a0H1aTO4fSRQM9xgmbNBqsniK6wEdIPko4NYa1BUpjzuJJ+/cND8O 4=;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: YhJserJ4oif0agV9Yy0Udz2wB1yeV6J9pSg+383q2AEyH9vKpnEfvLkaQEFMQ808KAHpuq5l3b
+ /QqxbUtP+pdx2cezN6NLROUVaB/Iec0uROqFUz32K61aKlf1S7XdvQ7v40XBxHP2wwJd3VSifG
+ bluGpXTNqiJM6dUwDecixvvDQEeCJSBmgUdv99RBVrLswqmANu9ReSvf+NCe9ON8FpEed2IfZY
+ qrZcuIpz6ShXqy50a4ocRrsXoAJnotuvFMGxjvmyN51eUWBS7s5n7Cmjbz3/GWdRzzUlbzmgLE
+ sjg=
+X-SBRS: 2.7
+X-MesageID: 15047941
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,335,1580792400"; d="scan'208";a="15047941"
+Subject: Re: 4.13: import xen.lowlevel.xc fails with SystemError: bad call
+ flags
+To: Kevin Buckley <kevin.buckley.ecs.vuw.ac.nz@gmail.com>,
+ <xen-devel@lists.xenproject.org>
+References: <CABwOO=doPdSR1PUPLU-X2R6akDGRgBoqMv_wK_sPpkh9jF6kCQ@mail.gmail.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <49bb60b5-d64b-393c-bdd2-a4024e695e6e@citrix.com>
+Date: Thu, 2 Apr 2020 13:55:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-From: Kevin Buckley <kevin.buckley.ecs.vuw.ac.nz@gmail.com>
-Date: Thu, 2 Apr 2020 20:43:26 +0800
-Message-ID: <CABwOO=doPdSR1PUPLU-X2R6akDGRgBoqMv_wK_sPpkh9jF6kCQ@mail.gmail.com>
-Subject: 4.13: import xen.lowlevel.xc fails with SystemError: bad call flags
-To: xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CABwOO=doPdSR1PUPLU-X2R6akDGRgBoqMv_wK_sPpkh9jF6kCQ@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,95 +113,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello again,
-
-despite having built a Xen 4.13 with just Python3 on a
-Linux From Scratch system,
-
-  http://youvegotbuckleys.org.nz/LFS/LFS-BOOK.html
-
-specifically
-
- http://youvegotbuckleys.org.nz/LFS/LFS-BOOK.html#ch-xen
-
-
-and booted into the Dom0 (Linux 5.5.3, GCC 9.2.0, Python 3.8.1)
-without issue, in coming to boot up a DomU, I get the following
-terse message
-
-
-~ # cat /var/log/xen/bootloader.3.log
-Traceback (most recent call last):
-  File "/usr/lib/xen/bin/pygrub", line 21, in <module>
-    import xen.lowlevel.xc
-SystemError: bad call flags
-~ #
-
-in the wake of these messages during the xl cretate's  pygrub boot:
-
-
-libxl: error: libxl_bootloader.c:648:bootloader_finished: Domain
-3:bootloader failed - consult logfile /var/log/xen/bootloader.3.log
-libxl: error: libxl_exec.c:117:libxl_report_child_exitstatus:
-bootloader [766] exited with error status 1
-libxl: error: libxl_create.c:1420:domcreate_rebuild_done: Domain
-3:cannot (re-)build domain: -3
-libxl: error: libxl_domain.c:1177:libxl__destroy_domid: Domain
-3:Non-existant domain
-libxl: error: libxl_domain.c:1131:domain_destroy_callback: Domain
-3:Unable to destroy guest
-libxl: error: libxl_domain.c:1058:domain_destroy_cb: Domain
-3:Destruction of domain failed
-libxl: error: libxl_dom.c:40:libxl__domain_type: unable to get domain
-type for domid=3
-xl: unable to exec console client: No such file or directory
-libxl: error: libxl_exec.c:117:libxl_report_child_exitstatus: console
-child [767] exited with error status 1
-
-
-There's a suggestion out on the interweb thing that these
-
-  SystemError: bad call flags
-
-are something to do with Python 3.8, as in this thread I found
-when searching for the above:
-
--------
-It's a bug in the Python binding of libcomps. I proposed a fix upstream:
-https://github.com/rpm-software-management/libcomps/pull/50
-
-Extract:
-
-> In Python 3.7, import didn't check descriptor flags (METH_KEYWORDS):
-> these flags were only checked when the methods were called.
+On 02/04/2020 13:43, Kevin Buckley wrote:
+> Hello again,
 >
-> In Python 3.8, the flags are checked at soon as the module is imported,
-> which prevents the module to be imported.
--------
+> despite having built a Xen 4.13 with just Python3 on a
+> Linux From Scratch system,
+>
+>   http://youvegotbuckleys.org.nz/LFS/LFS-BOOK.html
+>
+> specifically
+>
+>  http://youvegotbuckleys.org.nz/LFS/LFS-BOOK.html#ch-xen
+>
+>
+> and booted into the Dom0 (Linux 5.5.3, GCC 9.2.0, Python 3.8.1)
+> without issue, in coming to boot up a DomU, I get the following
+> terse message
+>
+>
+> ~ # cat /var/log/xen/bootloader.3.log
+> Traceback (most recent call last):
+>   File "/usr/lib/xen/bin/pygrub", line 21, in <module>
+>     import xen.lowlevel.xc
+> SystemError: bad call flags
+> ~ #
+>
+> in the wake of these messages during the xl cretate's  pygrub boot:
+>
+>
+> libxl: error: libxl_bootloader.c:648:bootloader_finished: Domain
+> 3:bootloader failed - consult logfile /var/log/xen/bootloader.3.log
+> libxl: error: libxl_exec.c:117:libxl_report_child_exitstatus:
+> bootloader [766] exited with error status 1
+> libxl: error: libxl_create.c:1420:domcreate_rebuild_done: Domain
+> 3:cannot (re-)build domain: -3
+> libxl: error: libxl_domain.c:1177:libxl__destroy_domid: Domain
+> 3:Non-existant domain
+> libxl: error: libxl_domain.c:1131:domain_destroy_callback: Domain
+> 3:Unable to destroy guest
+> libxl: error: libxl_domain.c:1058:domain_destroy_cb: Domain
+> 3:Destruction of domain failed
+> libxl: error: libxl_dom.c:40:libxl__domain_type: unable to get domain
+> type for domid=3
+> xl: unable to exec console client: No such file or directory
+> libxl: error: libxl_exec.c:117:libxl_report_child_exitstatus: console
+> child [767] exited with error status 1
+>
+>
+> There's a suggestion out on the interweb thing that these
+>
+>   SystemError: bad call flags
+>
+> are something to do with Python 3.8, as in this thread I found
+> when searching for the above:
+>
+> -------
+> It's a bug in the Python binding of libcomps. I proposed a fix upstream:
+> https://github.com/rpm-software-management/libcomps/pull/50
+>
+> Extract:
+>
+>> In Python 3.7, import didn't check descriptor flags (METH_KEYWORDS):
+>> these flags were only checked when the methods were called.
+>>
+>> In Python 3.8, the flags are checked at soon as the module is imported,
+>> which prevents the module to be imported.
+> -------
+>
+> Is that likely to be what i am seeing?
+>
+> I had a gander at
+>
+> tools/python/xen/lowlevel/xc/xc.c
+>
+> tools/python/xen/lowlevel/xs/xc.c
+>
+> but it's not obvious to me where, presumably in,
+>
+> #if PY_MAJOR_VERSION >= 3
+> #define INITERROR return NULL
+> PyMODINIT_FUNC PyInit_xc(void)
+> #else
+> #define INITERROR return
+> PyMODINIT_FUNC initxc(void)
+> #endif
+> {
+>
+> I could start to "play around" with any "descriptor flags"
+>
+>
+> Any pointers welcome, including "it's not a Python 3.8 thing,
+> you idiot" responses,
 
-Is that likely to be what i am seeing?
+We've got a fix in staging
 
-I had a gander at
+https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=e19b4b3b55f84e0cfcc02fe5d66965969a81c965
 
-tools/python/xen/lowlevel/xc/xc.c
+It hasn't been backported to the 4.13 stable tree yet.
 
-tools/python/xen/lowlevel/xs/xc.c
-
-but it's not obvious to me where, presumably in,
-
-#if PY_MAJOR_VERSION >= 3
-#define INITERROR return NULL
-PyMODINIT_FUNC PyInit_xc(void)
-#else
-#define INITERROR return
-PyMODINIT_FUNC initxc(void)
-#endif
-{
-
-I could start to "play around" with any "descriptor flags"
-
-
-Any pointers welcome, including "it's not a Python 3.8 thing,
-you idiot" responses,
-Kevin
+~Andrew
 
