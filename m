@@ -2,46 +2,44 @@ Return-Path: <SRS0=3qI7=5S=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 47BABC2BA13
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F29CAC43331
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:23:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B6BF2077D
-	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:19:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A09AB20787
+	for <xen-devel@archiver.kernel.org>; Thu,  2 Apr 2020 10:23:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="FPgqf9RE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B6BF2077D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Iytpkjej"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A09AB20787
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jJwwZ-0000sd-DC; Thu, 02 Apr 2020 10:19:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jJx0E-000236-0g; Thu, 02 Apr 2020 10:23:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=8h32=5S=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jJwwY-0000sH-Dm
- for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 10:19:26 +0000
-X-Inumbo-ID: 66a5fd6a-74cb-11ea-bba1-12813bfff9fa
+ id 1jJx0C-000231-9r
+ for xen-devel@lists.xenproject.org; Thu, 02 Apr 2020 10:23:12 +0000
+X-Inumbo-ID: f41d9ac2-74cb-11ea-b58d-bc764e2007e4
 Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 66a5fd6a-74cb-11ea-bba1-12813bfff9fa;
- Thu, 02 Apr 2020 10:19:14 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f41d9ac2-74cb-11ea-b58d-bc764e2007e4;
+ Thu, 02 Apr 2020 10:23:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585822754;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=AD6n+KBMI4yDtXDNza0GnMzi5v0BBwM+iL+cgl/2+J8=;
- b=FPgqf9REoOlZW3iJfOwKvCf8O98HDotAbKo3JERkafijXPWJB58onOIq
- FN8MtG/5Mm+CzWpD740ZHRQTpWfnT7Fw7+jYTMZXWYUpHS2QK+2fGT30X
- hEQNYePvtDOeldDa/SeHTnZaiha/sKOtbYlY676D7HFMVHTGgv9hYZJWW c=;
+ d=citrix.com; s=securemail; t=1585822992;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=Y8LCM/pBPhxwBWME6Rc+dCIWJCwOZHigAysnBgEo1j4=;
+ b=Iytpkjejcr8F5jqULgVd0P/w33JYnH61zWorOU5GqNC9wHYA+iA07/l7
+ LVVMpeGw21/Ek39PfwNUy/Nx5TT/WhEj8/rnd2c5WZYJv4gkxfl4THflV
+ vQaixxKCuGXVez/0EUhPZhks7ggRREE3uBD+1l+p0SqR2ey2uBoc7XshV A=;
 Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
@@ -73,28 +71,34 @@ Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: LXGnhvtl0LbEKYegPnMWbxg6dYtw0N7TNPt4EZQAh/8iAKR2rFHd2I9HolsRhvtgw4fZiAlj8b
- G+RZmsKc+Ic7TlvjWBxq55+4YggPVrv/U2+XhlIXTELmyp3c5bXsT4wuAlD3OoiwK35PtK6ahy
- 2d7ln0lRIwKlYKpicb7jhKCk7DfID8rC1SzfAk6H9wBp85JFAARrqFOFw7epqEXx6brU4Ie2YS
- 6Q85Xy72RLcXbwOXjSm28V6rgf+L7F8UWQoJ+Ve7ZmO5NH1amoe3CRHUHfZLYPo+EmHyIP7cqh
- 4vQ=
+IronPort-SDR: PmIXRldKAlznqTrSX38cf/QgGDOmpqz3/bd8vTE7VdquFi+PE2RiKriVHyAQpNsi2iMRlCPEwb
+ qUrzENRU1hW9bABbz/r2wJRuY0JgSJDeNBOh3ABcEuyaucQexdztUCsXlxy+DPO+kTV6cIOQFE
+ S27uX7gM3Z5v8y3Kvs6VQkNoCvjun+ON536efOXO1/tYR8O70Zdgu9SaI+E1b5jhM1c58n/xjQ
+ 90jO783RAApMckuqzKAOt5uAUrflhX4i9MHeJ//TUuxYDAHW988DP61TxoHi4bJ7QLK6vnFpoe
+ zKY=
 X-SBRS: 2.7
-X-MesageID: 15068042
+X-MesageID: 15068231
 X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,335,1580792400"; d="scan'208";a="15068042"
+X-IronPort-AV: E=Sophos;i="5.72,335,1580792400"; d="scan'208";a="15068231"
+Subject: Re: [PATCH] x86emul: inherit HOSTCC when building 32-bit harness on
+ 64-bit host
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>
+References: <842a0920-60ed-cf51-7f6c-37af40173160@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 4/5] x86/ucode: Drop ops->free_patch()
-Date: Thu, 2 Apr 2020 11:19:01 +0100
-Message-ID: <20200402101902.28234-5-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200402101902.28234-1-andrew.cooper3@citrix.com>
-References: <20200402101902.28234-1-andrew.cooper3@citrix.com>
+Message-ID: <09789474-7e62-67cc-0420-7c25b9572bce@citrix.com>
+Date: Thu, 2 Apr 2020 11:23:07 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <842a0920-60ed-cf51-7f6c-37af40173160@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,118 +109,19 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-With the newly cleaned up vendor logic, each struct microcode_patch is a
-trivial object in memory with no dependent allocations.
+On 02/04/2020 10:43, Jan Beulich wrote:
+> We're deliberately bringing XEN_COMPILE_ARCH and XEN_TARGET_ARCH out of
+> sync in this case, and hence HOSTCC won't get set from CC. Therefore
+> without this addition HOSTCC would not match a possible make command
+> line override of CC, but default to "gcc", likely causing the build to
+> fail for test_x86_emulator.c on systems with too old a gcc.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-This is unlikely to change moving forwards, and function pointers are
-expensive in the days of retpoline.  Move the responsibility to xfree() back
-to common code.  If the need does arise in the future, we can consider
-reintroducing the hook.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Wei Liu <wl@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/cpu/microcode/amd.c     | 6 ------
- xen/arch/x86/cpu/microcode/core.c    | 4 ++--
- xen/arch/x86/cpu/microcode/intel.c   | 6 ------
- xen/arch/x86/cpu/microcode/private.h | 5 +----
- 4 files changed, 3 insertions(+), 18 deletions(-)
-
-diff --git a/xen/arch/x86/cpu/microcode/amd.c b/xen/arch/x86/cpu/microcode/amd.c
-index 0ca0e9a038..e23bdef6f2 100644
---- a/xen/arch/x86/cpu/microcode/amd.c
-+++ b/xen/arch/x86/cpu/microcode/amd.c
-@@ -188,11 +188,6 @@ static enum microcode_match_result microcode_fits(
-     return NEW_UCODE;
- }
- 
--static void free_patch(struct microcode_patch *patch)
--{
--    xfree(patch);
--}
--
- static enum microcode_match_result compare_header(
-     const struct microcode_patch *new, const struct microcode_patch *old)
- {
-@@ -418,6 +413,5 @@ const struct microcode_ops amd_ucode_ops = {
-     .start_update                     = start_update,
-     .end_update_percpu                = svm_host_osvw_init,
- #endif
--    .free_patch                       = free_patch,
-     .compare_patch                    = compare_patch,
- };
-diff --git a/xen/arch/x86/cpu/microcode/core.c b/xen/arch/x86/cpu/microcode/core.c
-index b3e5913d49..53e447ea9a 100644
---- a/xen/arch/x86/cpu/microcode/core.c
-+++ b/xen/arch/x86/cpu/microcode/core.c
-@@ -243,9 +243,9 @@ static struct microcode_patch *parse_blob(const char *buf, size_t len)
-     return NULL;
- }
- 
--static void microcode_free_patch(struct microcode_patch *microcode_patch)
-+static void microcode_free_patch(struct microcode_patch *patch)
- {
--    microcode_ops->free_patch(microcode_patch);
-+    xfree(patch);
- }
- 
- /* Return true if cache gets updated. Otherwise, return false */
-diff --git a/xen/arch/x86/cpu/microcode/intel.c b/xen/arch/x86/cpu/microcode/intel.c
-index 9cb077b583..29745ed55f 100644
---- a/xen/arch/x86/cpu/microcode/intel.c
-+++ b/xen/arch/x86/cpu/microcode/intel.c
-@@ -245,11 +245,6 @@ static enum microcode_match_result microcode_update_match(
-     return mc->rev > cpu_sig->rev ? NEW_UCODE : OLD_UCODE;
- }
- 
--static void free_patch(struct microcode_patch *patch)
--{
--    xfree(patch);
--}
--
- static enum microcode_match_result compare_patch(
-     const struct microcode_patch *new, const struct microcode_patch *old)
- {
-@@ -356,6 +351,5 @@ const struct microcode_ops intel_ucode_ops = {
-     .cpu_request_microcode            = cpu_request_microcode,
-     .collect_cpu_info                 = collect_cpu_info,
-     .apply_microcode                  = apply_microcode,
--    .free_patch                       = free_patch,
-     .compare_patch                    = compare_patch,
- };
-diff --git a/xen/arch/x86/cpu/microcode/private.h b/xen/arch/x86/cpu/microcode/private.h
-index d31bcf14b1..878f8d805f 100644
---- a/xen/arch/x86/cpu/microcode/private.h
-+++ b/xen/arch/x86/cpu/microcode/private.h
-@@ -25,7 +25,7 @@ struct microcode_ops {
-      *
-      * If one is found, allocate and return a struct microcode_patch
-      * encapsulating the appropriate microcode patch.  Does not alias the
--     * original buffer.
-+     * original buffer.  Must be suitable to be freed with a single xfree().
-      *
-      * If one is not found, (nothing matches the current CPU), return NULL.
-      * Also may return ERR_PTR(-err), e.g. bad container, out of memory.
-@@ -56,9 +56,6 @@ struct microcode_ops {
-      */
-     void (*end_update_percpu)(void);
- 
--    /* Free a patch previously allocated by cpu_request_microcode(). */
--    void (*free_patch)(struct microcode_patch *patch);
--
-     /*
-      * Given two patches, are they both applicable to the current CPU, and is
-      * new a higher revision than old?
--- 
-2.11.0
-
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
