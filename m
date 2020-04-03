@@ -2,105 +2,88 @@ Return-Path: <SRS0=kYra=5T=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 64FFBC2BA15
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 15:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4776BC43331
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 15:20:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 32CAC20678
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 15:18:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1A831206A3
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 15:20:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IK8kQCej"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 32CAC20678
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nir+Uytf"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1A831206A3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jKO4y-0001Rq-BN; Fri, 03 Apr 2020 15:17:56 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jKO7N-0002Ap-PT; Fri, 03 Apr 2020 15:20:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=WUFr=5T=citrix.com=igor.druzhinin@srs-us1.protection.inumbo.net>)
- id 1jKO4x-0001Rl-E1
- for xen-devel@lists.xenproject.org; Fri, 03 Apr 2020 15:17:55 +0000
-X-Inumbo-ID: 4a7a230c-75be-11ea-bd34-12813bfff9fa
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4a7a230c-75be-11ea-bd34-12813bfff9fa;
- Fri, 03 Apr 2020 15:17:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1585927074;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=83j+5Tkowfz8HhhnuYl4Rh0uuDc1nomq8rA+k3VBjCo=;
- b=IK8kQCejkyTLZHjv/FQYZNwQmtgMRuPnX5DLQjHGFprANl6ZksHpbKn2
- MPOCvkygHXNAsxJUKVf5GgtOcImZ3dE2/8fPopb7o6tK1An4EuLjnizAP
- 1VK4rS0pgporIv2iwfmsXzQg0cK8JUqnNupG7a0jpz/h7TDU4ahTpkQBl I=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=igor.druzhinin@citrix.com;
- spf=Pass smtp.mailfrom=igor.druzhinin@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- igor.druzhinin@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="igor.druzhinin@citrix.com";
- x-sender="igor.druzhinin@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
- igor.druzhinin@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="igor.druzhinin@citrix.com";
- x-sender="igor.druzhinin@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="igor.druzhinin@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: R5j06J1v92J03FOsqkSnNpwx/FtPkGratEXQ+ypJHqmsunTDrFmgn3c/B7iYDDfy31FWfjgKgk
- WSBq66H5hNzBnWg1e+YwDm2hVWWRKkgKJeLWPM73aukeBB2lZXvlOA3tnj9S4fTxwcXOYYHJWe
- 9jyHhdWIX13zqZBnBT1253SfSXEcC/quGcHosxxhVSCciCOSZKgZ9SxnKusDJRpkwqt51VfN7i
- GrKqoJwClGou/BIIU5F2R8sy71HKidGk1glm2ZcARzWEDSdAaeN5M38AFfcdhzNmBCNFWbg51H
- 2rE=
-X-SBRS: 2.7
-X-MesageID: 15803287
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,340,1580792400"; d="scan'208";a="15803287"
-Subject: Re: [PATCH] hvmloader: probe memory below 4G before allocation for
- OVMF
-To: Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>
-References: <1585844328-30654-1-git-send-email-igor.druzhinin@citrix.com>
- <66ee36a9-b525-50d4-17e8-8a10f6afd55f@suse.com>
- <0faaee38-e314-24a8-b97d-9f000251a63e@citrix.com>
- <9cba6eda-2c7c-9700-a484-c72100b8268f@citrix.com>
- <050e4847-df42-6e16-3707-19fadbae9229@suse.com>
-From: Igor Druzhinin <igor.druzhinin@citrix.com>
-Message-ID: <c4b676a9-58ce-ae11-e13b-aae41b6c27b1@citrix.com>
-Date: Fri, 3 Apr 2020 16:17:49 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+ <SRS0=DmfO=5T=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jKO7M-0002Aj-GF
+ for xen-devel@lists.xenproject.org; Fri, 03 Apr 2020 15:20:24 +0000
+X-Inumbo-ID: a371f89a-75be-11ea-b4f4-bc764e2007e4
+Received: from mail-wm1-x330.google.com (unknown [2a00:1450:4864:20::330])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a371f89a-75be-11ea-b4f4-bc764e2007e4;
+ Fri, 03 Apr 2020 15:20:23 +0000 (UTC)
+Received: by mail-wm1-x330.google.com with SMTP id i19so8161923wmb.0
+ for <xen-devel@lists.xenproject.org>; Fri, 03 Apr 2020 08:20:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=paZCOymGUO3uhYNh9MBt/YSXWrRalqdxRoI1h3RgPoU=;
+ b=nir+Uytfzgd1nRefyAn0sRuNLpRqDNi+9OfW3hTNnPi/Yu+FJlhhXW6/NemAPGWPPH
+ K0rSJi6jQWhr4OZjZxnbSxprl5fr7/N9xBV9ywS+sumIwuy8n0l/TqF17dIJcTQBhts/
+ Qy1HYcuw1AXvfHbY/BfIkdPwJimV68p4bhA7+Szt0k+WtYrZBMYODJ+J42N7D2JYOgqP
+ F072fztnCOfj8xN8TzrHha0guJbYgOSwNsuYaX4hxDWnKEw5atxm+MptZDUSfUjowDZ7
+ n1gIpVGtPjt2hsWG50Wvr0LFIx93nHQWeuxnaJF8QZAKO773gpP6y51OUlqa9LgYi54m
+ st+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=paZCOymGUO3uhYNh9MBt/YSXWrRalqdxRoI1h3RgPoU=;
+ b=iA4kyciCKZAb8C2tOhDmD5Ht18mQI103gixfdvl97s2Zepa4V3smNhCVQrni7yiQDH
+ SqXNuXNrZDY+y6PeVnx5JH5x7RxYNR5ZhG6+aaW7rd5CrtcRKtsBG+sYeYBc165iFs/Z
+ tgHhNif9fu9L4m5JrEv1u/PzUsmCVGPETgmkqks6faEUf1kBAaEVJMSIux3Wd6ccvmWM
+ r0aSNjUO/7jZJ5GtDijVdvW9u61txfjWi2qP4CrIMRcVUPU3Si0i6fzBr8u41xuQTulq
+ R036ZCgsDrfGMyjB4u5S7I1n0X8STcwlz6pzqqr40Y2MQ/6vjN4llfzUWeRCGNU8/osI
+ G5Ng==
+X-Gm-Message-State: AGi0PubSnhb3ST0aA7HHai3IO01f+PjZ+sATbpddrbuSwGPkP2mGch6R
+ +tfuWo3OS86De1uSkE43WKH9W3veih0=
+X-Google-Smtp-Source: APiQypLqhwP7eASMSRAAvkljQv0c+We1ZmIbxAbmK+bLdsXWQO9TUrFOCHj5TTVncx/W5l0Wr4GtPg==
+X-Received: by 2002:a05:600c:220f:: with SMTP id
+ z15mr9712527wml.185.1585927223054; 
+ Fri, 03 Apr 2020 08:20:23 -0700 (PDT)
+Received: from CBGR90WXYV0 ([54.239.6.186])
+ by smtp.gmail.com with ESMTPSA id v9sm477168wrv.18.2020.04.03.08.20.21
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 03 Apr 2020 08:20:22 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Jan Beulich'" <jbeulich@suse.com>
+References: <20200327185012.1795-1-paul@xen.org>
+ <20200327185012.1795-4-paul@xen.org>
+ <b94676ab-371b-bb69-0d07-dd38fe22ceba@suse.com>
+In-Reply-To: <b94676ab-371b-bb69-0d07-dd38fe22ceba@suse.com>
+Subject: RE: [PATCH 3/5] tools/misc: add xen-ctx to present domain context
+Date: Fri, 3 Apr 2020 16:20:20 +0100
+Message-ID: <001e01d609cb$64913fa0$2db3bee0$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <050e4847-df42-6e16-3707-19fadbae9229@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQG3I8TZM/MLMEc/e2It3WEXPZVs8AIR6g5qAoK3rZqogKoVMA==
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -111,69 +94,45 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, ian.jackson@eu.citrix.com, wl@xen.org,
- roger.pau@citrix.com
+Reply-To: paul@xen.org
+Cc: xen-devel@lists.xenproject.org, 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'Wei Liu' <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 03/04/2020 16:05, Jan Beulich wrote:
-> On 03.04.2020 16:47, Igor Druzhinin wrote:
->> On 03/04/2020 15:39, Andrew Cooper wrote:
->>> On 03/04/2020 14:53, Jan Beulich wrote:
->>>> On 02.04.2020 18:18, Igor Druzhinin wrote:
->>>>> The area just below 4G where OVMF image is originally relocated is not
->>>>> necessarily a hole - it might contain pages preallocated by device model
->>>>> or the toolstack. By unconditionally populating on top of this memory
->>>>> the original pages are getting lost while still potentially foreign mapped
->>>>> in Dom0.
->>>> When there are pre-allocated pages - have they been orphaned? If
->>>> so, shouldn't whoever populated them unpopulate rather than
->>>> orphaning them? Or if not - how is the re-use you do safe?
->>>
->>> So this is a mess.
->>>
->>> OVMF is linked to run at a fixed address suitable for native hardware,
->>> which is in the SPI ROM immediately below the 4G boundary (this is
->>> correct).  We also put the framebuffer there (this is not correct).
->>>
->>> This was fine for RomBIOS which is located under the 1M boundary.
->>>
->>> It is also fine for a fully-emulated VGA device in Qemu, because the the
->>> framebuffer if moved (re-set up actually) when the virtual BAR is moved,
->>> but with a real GPU (SR-IOV in this case), there is no logic to play games.
+> -----Original Message-----
+> From: Jan Beulich <jbeulich@suse.com>
+> Sent: 30 March 2020 11:54
+> To: Paul Durrant <paul@xen.org>
+> Cc: xen-devel@lists.xenproject.org; Ian Jackson <ian.jackson@eu.citrix.com>; Wei Liu <wl@xen.org>
+> Subject: Re: [PATCH 3/5] tools/misc: add xen-ctx to present domain context
 > 
-> So are you saying OVMF starts out appearing to run in VRAM then
-> in the OVMF case, until the frame buffer gets moved? If so,
-> with the logic added by this patch, how would both places end
-> (old VRAM address, where OVMF lives, and new VRAM address) get
-> backed by distinct pages? Wouldn't the avoided re-populate
-> result in the same page having two uses? Or alternatively there
-> being a hole in OVMF space, which would be a problem if this
-> was backing runtime memory? 
-
-In normal case (not SR-IOV) VRAM gets evacuated (by PCI logic) before
-hvmloader overwrites it. So the issue is avoided. But for SR-IOV VRAM
-stays so VRAM area is temporary used to hold OVMF image - until decompression
-is complete. With this patch VRAM pages would be used for that purpose
-instead new ones.
-
->>> The problem is entirely caused by the framebuffer in Xen not being like
->>> any real system.  The framebuffer isn't actually in a BAR, and also
->>> doesn't manifest itself in the way that graphics-stolen-ram normally
->>> does, either.
->>
->> Adding to what Andrew said:
->>
->> There multiple technical complications that caused this mess.
->> One of them is that there is no unfortunately a better place for the
->> framebuffer to be located initially. Second, SR-IOV device
->> is real and adding a virtual BAR to it is also complicated (due to
->> compatibility reasons) and NVIDIA decided to avoid that.
+> On 27.03.2020 19:50, Paul Durrant wrote:
+> > This tools is analogous to 'xen-hvmctx' which presents HVM context.
+> > Subsequent patches will add 'dump' functions when new records are
+> > introduced.
+> >
+> > Signed-off-by: Paul Durrant <paul@xen.org>
+> > ---
+> > Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+> > Cc: Wei Liu <wl@xen.org>
+> > ---
+> >  .gitignore           |   1 +
+> >  tools/misc/Makefile  |   4 ++
+> >  tools/misc/xen-ctx.c | 144 +++++++++++++++++++++++++++++++++++++++++++
 > 
-> In which case I wonder - aren't you ending up with the MMIO case
-> that I had mentioned, and that you said is difficult to deal with?
+> Is xen-ctx a good choice of a name, considering we already have not
+> only xen-hvmctx, but also xenctx? If the new functionality isn't a
+> good fit for either, perhaps its name would better reflect its
+> connection to save/restore records? xen-sr-dump looks pretty clumsy
+> to me, but still seems better than a name easily mixed up with
+> others.
 
-No, it's VRAM area (normal RAM pages) - not MMIO.
+How about xen-domctx?
 
-Igor
+  Paul
+
+> 
+> Jan
+
 
