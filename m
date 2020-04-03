@@ -2,51 +2,70 @@ Return-Path: <SRS0=kYra=5T=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F3DD8C43331
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 09:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2D06FC2D0E8
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 09:13:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B68A82080C
-	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 09:11:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B68A82080C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id F247720737
+	for <xen-devel@archiver.kernel.org>; Fri,  3 Apr 2020 09:13:38 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="wXumFoze"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F247720737
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jKIM3-00039P-4Y; Fri, 03 Apr 2020 09:11:11 +0000
+	id 1jKIO8-0003IP-Li; Fri, 03 Apr 2020 09:13:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=qJwk=5T=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jKIM1-00039K-Ch
- for xen-devel@lists.xenproject.org; Fri, 03 Apr 2020 09:11:09 +0000
-X-Inumbo-ID: 0de214aa-758b-11ea-b58d-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=fKXS=5T=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jKIO7-0003IK-T4
+ for xen-devel@lists.xenproject.org; Fri, 03 Apr 2020 09:13:19 +0000
+X-Inumbo-ID: 5c150380-758b-11ea-b58d-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0de214aa-758b-11ea-b58d-bc764e2007e4;
- Fri, 03 Apr 2020 09:11:08 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 432FAADC8;
- Fri,  3 Apr 2020 09:11:07 +0000 (UTC)
+ id 5c150380-758b-11ea-b58d-bc764e2007e4;
+ Fri, 03 Apr 2020 09:13:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=bBhycdUWxbN/XcZgP00W/lb/2siG9aVTWMKSQAT4K3M=; b=wXumFoze2Joi4ghNPr2d46ZMkP
+ 632XhlFpfMfrewpczL3Ftt/AA3jdz0IERV/JgdCmvV6Q0EgDysmqLZFnzWn0Ey9kIVb77lhYdA6ZN
+ 8LUe2Or/2JJat+b3mUhNgNhhcrGlwBx+eO7s8ypdzRVio7vyS1N+PkdfwQXymdz4zJDc=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jKIO6-0002WX-0K; Fri, 03 Apr 2020 09:13:18 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jKIO5-0008Q4-QF; Fri, 03 Apr 2020 09:13:17 +0000
 Subject: Re: [xen-unstable test] 149335: regressions - FAIL
-To: Julien Grall <julien@xen.org>
+To: Jan Beulich <jbeulich@suse.com>
 References: <osstest-149335-mainreport@xen.org>
  <90c01d6b-1d8f-81de-656e-d97eea302552@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <8087c371-0488-3a26-379b-af964b4300ce@suse.com>
-Date: Fri, 3 Apr 2020 11:11:04 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ <8087c371-0488-3a26-379b-af964b4300ce@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <7d7afffb-9b8e-e504-9f23-4aa3d7e55e04@xen.org>
+Date: Fri, 3 Apr 2020 10:13:16 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <90c01d6b-1d8f-81de-656e-d97eea302552@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <8087c371-0488-3a26-379b-af964b4300ce@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -66,30 +85,38 @@ Cc: xen-devel@lists.xenproject.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 03.04.2020 11:08, Julien Grall wrote:
-> Hi,
-> 
-> On 03/04/2020 06:27, osstest service owner wrote:
->> flight 149335 xen-unstable real [real]
->> http://logs.test-lab.xenproject.org/osstest/logs/149335/
+
+
+On 03/04/2020 10:11, Jan Beulich wrote:
+> On 03.04.2020 11:08, Julien Grall wrote:
+>> Hi,
 >>
->> Regressions :-(
+>> On 03/04/2020 06:27, osstest service owner wrote:
+>>> flight 149335 xen-unstable real [real]
+>>> http://logs.test-lab.xenproject.org/osstest/logs/149335/
+>>>
+>>> Regressions :-(
+>>>
+>>> Tests which did not succeed and are blocking,
+>>> including tests which could not be run:
+>>>    test-amd64-amd64-dom0pvh-xl-intel 18 guest-localmigrate/x10 fail REGR. vs. 149188
+>>>    build-amd64-xsm               6 xen-build                fail REGR. vs. 149188
 >>
->> Tests which did not succeed and are blocking,
->> including tests which could not be run:
->>   test-amd64-amd64-dom0pvh-xl-intel 18 guest-localmigrate/x10 fail REGR. vs. 149188
->>   build-amd64-xsm               6 xen-build                fail REGR. vs. 149188
+>> I am a bit puzzled with this failure. Looking at the log [1], I only found:
+>>
+>> failure (trapped): status 256 at Osstest/TestSupport.pm line 551.
+>>
+>> Can anyone spot an issue in the log?
 > 
-> I am a bit puzzled with this failure. Looking at the log [1], I only found:
+> Yes:
 > 
-> failure (trapped): status 256 at Osstest/TestSupport.pm line 551.
-> 
-> Can anyone spot an issue in the log?
+> fatal: remote error: git-cache-proxy: git remote died with error exit code 1 // Fetching origin // fatal: unable to access 'https://github.com/krb5/krb5/': The requested URL returned error: 504 // error: Could not fetch origin
+> fatal: clone of 'https://github.com/krb5/krb5' into submodule path '/home/osstest/build.149335.build-amd64-xsm/xen/tools/firmware/ovmf-dir-remote/CryptoPkg/Library/OpensslLib/openssl/krb5' failed
 
-Yes:
+Thanks! So it is a networking issue. I will ignore this one.
 
-fatal: remote error: git-cache-proxy: git remote died with error exit code 1 // Fetching origin // fatal: unable to access 'https://github.com/krb5/krb5/': The requested URL returned error: 504 // error: Could not fetch origin
-fatal: clone of 'https://github.com/krb5/krb5' into submodule path '/home/osstest/build.149335.build-amd64-xsm/xen/tools/firmware/ovmf-dir-remote/CryptoPkg/Library/OpensslLib/openssl/krb5' failed
+Cheers,
 
-Jan
+-- 
+Julien Grall
 
