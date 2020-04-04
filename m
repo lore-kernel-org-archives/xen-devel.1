@@ -7,56 +7,57 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0AD61C2BA16
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 96EB4C2BA16
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:11:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D19E220659
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:10:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6905C20659
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:11:01 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Bx9n5y4P"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D19E220659
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="f/JfCmsr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6905C20659
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jKiZP-0005pQ-8U; Sat, 04 Apr 2020 13:10:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jKiZN-0005oY-VK; Sat, 04 Apr 2020 13:10:41 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=7qE9=5U=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jKiZN-0005oN-Pd
- for xen-devel@lists.xenproject.org; Sat, 04 Apr 2020 13:10:41 +0000
-X-Inumbo-ID: ad8c47ce-7675-11ea-83d8-bc764e2007e4
+ id 1jKiZM-0005nk-9I
+ for xen-devel@lists.xenproject.org; Sat, 04 Apr 2020 13:10:40 +0000
+X-Inumbo-ID: a8b10442-7675-11ea-be20-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ad8c47ce-7675-11ea-83d8-bc764e2007e4;
- Sat, 04 Apr 2020 13:10:38 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a8b10442-7675-11ea-be20-12813bfff9fa;
+ Sat, 04 Apr 2020 13:10:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=96KKJCpdFR7vcoVbtVCMECvOok+zumfKbz+sn1zOelQ=; b=Bx9n5y4PjUGHo9AVvHd2x09TNy
- TzNfGgA1U4JsvJ0O5lI95rOe59MG2dt7/T6KkhncRsXe7kXnJoEUo5FclmYSB1CDHd4AAZil3WNIX
- sIKH/nJQa9hxaOzdGEbR0i1bMo/tRHBXwR1yhUD9VL0Za4XDcSOs2rh69HPsMFd3nBJk=;
+ bh=OCcHpjmQmhgOeKrDB+npwO03tYkJM3G16mLTFLIt6vs=; b=f/JfCmsrAcCypyBAiMdT1pYYlh
+ yWlrNssjI//3TehSSFHdVMD5v6CeVPaM3FsHVQ2kxFLYrxdiBEQ12S4Pv4EcYt2ml/pxVScbHPioP
+ UAS5CcC/aGD3YNPcYpbVk2RUKqJgdgruCYbtUiNG6SvMZutW5Cwq07onWvRiJD/01qBA=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jKiZJ-0008GL-Dm; Sat, 04 Apr 2020 13:10:37 +0000
+ id 1jKiZB-0008Fa-R9; Sat, 04 Apr 2020 13:10:29 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jKiZJ-0007rM-4v; Sat, 04 Apr 2020 13:10:37 +0000
+ id 1jKiZB-0007rM-IJ; Sat, 04 Apr 2020 13:10:29 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 7/7] xen/guest_access: Fix coding style in xen/guest_access.h
-Date: Sat,  4 Apr 2020 14:10:17 +0100
-Message-Id: <20200404131017.27330-8-julien@xen.org>
+Subject: [PATCH 2/7] xen/arm: kernel: Re-order the includes
+Date: Sat,  4 Apr 2020 14:10:12 +0100
+Message-Id: <20200404131017.27330-3-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404131017.27330-1-julien@xen.org>
 References: <20200404131017.27330-1-julien@xen.org>
@@ -70,108 +71,52 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Julien Grall <jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ julien@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-    * Add space before and after operator
-    * Align \
-    * Format comments
-
-No functional changes expected.
+We usually have xen/ includes first and then asm/. They are also ordered
+alphabetically among themselves.
 
 Signed-off-by: Julien Grall <jgrall@amazon.com>
 ---
- xen/include/xen/guest_access.h | 40 +++++++++++++++++++---------------
- 1 file changed, 23 insertions(+), 17 deletions(-)
+ xen/arch/arm/kernel.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/xen/include/xen/guest_access.h b/xen/include/xen/guest_access.h
-index f724f995c3..24f03a84ff 100644
---- a/xen/include/xen/guest_access.h
-+++ b/xen/include/xen/guest_access.h
-@@ -18,20 +18,24 @@
- #define guest_handle_add_offset(hnd, nr) ((hnd).p += (nr))
- #define guest_handle_subtract_offset(hnd, nr) ((hnd).p -= (nr))
- 
--/* Cast a guest handle (either XEN_GUEST_HANDLE or XEN_GUEST_HANDLE_PARAM)
-- * to the specified type of XEN_GUEST_HANDLE_PARAM. */
-+/*
-+ * Cast a guest handle (either XEN_GUEST_HANDLE or XEN_GUEST_HANDLE_PARAM)
-+ * to the specified type of XEN_GUEST_HANDLE_PARAM.
-+ */
- #define guest_handle_cast(hnd, type) ({         \
-     type *_x = (hnd).p;                         \
--    (XEN_GUEST_HANDLE_PARAM(type)) { _x };            \
-+    (XEN_GUEST_HANDLE_PARAM(type)) { _x };      \
- })
- 
- /* Cast a XEN_GUEST_HANDLE to XEN_GUEST_HANDLE_PARAM */
- #define guest_handle_to_param(hnd, type) ({                  \
-     typeof((hnd).p) _x = (hnd).p;                            \
-     XEN_GUEST_HANDLE_PARAM(type) _y = { _x };                \
--    /* type checking: make sure that the pointers inside     \
-+    /*                                                       \
-+     * type checking: make sure that the pointers inside     \
-      * XEN_GUEST_HANDLE and XEN_GUEST_HANDLE_PARAM are of    \
--     * the same type, then return hnd */                     \
-+     * the same type, then return hnd.                       \
-+     */                                                      \
-     (void)(&_x == &_y.p);                                    \
-     _y;                                                      \
- })
-@@ -40,9 +44,11 @@
- #define guest_handle_from_param(hnd, type) ({               \
-     typeof((hnd).p) _x = (hnd).p;                           \
-     XEN_GUEST_HANDLE(type) _y = { _x };                     \
--    /* type checking: make sure that the pointers inside    \
-+    /*                                                      \
-+     * type checking: make sure that the pointers inside    \
-      * XEN_GUEST_HANDLE and XEN_GUEST_HANDLE_PARAM are of   \
--     * the same type, then return hnd */                    \
-+     * the same type, then return hnd.                      \
-+     */                                                     \
-     (void)(&_x == &_y.p);                                   \
-     _y;                                                     \
- })
-@@ -123,12 +129,12 @@
-  * The variable _t is only here to catch at build time whether we are
-  * copying back to a const guest handle.
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index 8eff074836..f95fa392af 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -3,20 +3,20 @@
+  *
+  * Copyright (C) 2011 Citrix Systems, Inc.
   */
--#define __copy_to_guest_offset(hnd, off, ptr, nr) ({    \
--    const typeof(*(ptr)) *_s = (ptr);                   \
--    char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
--    void *__maybe_unused _t = (hnd).p;                  \
--    ((void)((hnd).p == (ptr)));                         \
--    __raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));\
-+#define __copy_to_guest_offset(hnd, off, ptr, nr) ({        \
-+    const typeof(*(ptr)) *_s = (ptr);                       \
-+    char (*_d)[sizeof(*_s)] = (void *)(hnd).p;              \
-+    void *__maybe_unused _t = (hnd).p;                      \
-+    ((void)((hnd).p == (ptr)));                             \
-+    __raw_copy_to_guest(_d + (off), _s, sizeof(*_s) * (nr));\
- })
++#include <xen/domain_page.h>
+ #include <xen/errno.h>
++#include <xen/gunzip.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
++#include <xen/libfdt/libfdt.h>
+ #include <xen/mm.h>
+-#include <xen/domain_page.h>
+ #include <xen/sched.h>
+-#include <asm/byteorder.h>
+-#include <asm/setup.h>
+-#include <xen/libfdt/libfdt.h>
+-#include <xen/gunzip.h>
+ #include <xen/vmap.h>
  
- #define __clear_guest_offset(hnd, off, nr) ({    \
-@@ -136,10 +142,10 @@
-     __raw_clear_guest(_d + (off), nr);           \
- })
++#include <asm/byteorder.h>
+ #include <asm/guest_access.h>
+ #include <asm/kernel.h>
++#include <asm/setup.h>
  
--#define __copy_from_guest_offset(ptr, hnd, off, nr) ({  \
--    const typeof(*(ptr)) *_s = (hnd).p;                 \
--    typeof(*(ptr)) *_d = (ptr);                         \
--    __raw_copy_from_guest(_d, _s+(off), sizeof(*_d)*(nr));\
-+#define __copy_from_guest_offset(ptr, hnd, off, nr) ({          \
-+    const typeof(*(ptr)) *_s = (hnd).p;                         \
-+    typeof(*(ptr)) *_d = (ptr);                                 \
-+    __raw_copy_from_guest(_d, _s + (off), sizeof (*_d) * (nr)); \
- })
- 
- #define __copy_field_to_guest(hnd, ptr, field) ({       \
+ #define UIMAGE_MAGIC          0x27051956
+ #define UIMAGE_NMLEN          32
 -- 
 2.17.1
 
