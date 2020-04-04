@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AE26FC2BA16
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:06:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C5ABC2BA16
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:10:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6E5A520659
-	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:06:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4B86E20659
+	for <xen-devel@archiver.kernel.org>; Sat,  4 Apr 2020 13:10:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="fPJB9cIE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E5A520659
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="MEVkTDco"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B86E20659
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jKiVH-0004ug-2c; Sat, 04 Apr 2020 13:06:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jKiZE-0005kS-Vr; Sat, 04 Apr 2020 13:10:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=7qE9=5U=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jKiVG-0004u6-3g
- for xen-devel@lists.xenproject.org; Sat, 04 Apr 2020 13:06:26 +0000
-X-Inumbo-ID: 16b2fcb3-7675-11ea-be20-12813bfff9fa
+ id 1jKiZD-0005kH-Pl
+ for xen-devel@lists.xenproject.org; Sat, 04 Apr 2020 13:10:31 +0000
+X-Inumbo-ID: a96112d8-7675-11ea-9e09-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 16b2fcb3-7675-11ea-be20-12813bfff9fa;
- Sat, 04 Apr 2020 13:06:25 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a96112d8-7675-11ea-9e09-bc764e2007e4;
+ Sat, 04 Apr 2020 13:10:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=nL6FEJ5/y1biweD0xTmxlZW+q9AMSw7C93G6n4hYeOo=; b=fPJB9cIEFzj89LEBO2XnYQwQKO
- 8/LadqNF6qb4kAHJqBGnQQ7MzGG2pj3nL7OFSwMal5dYS9oR/Nu15AojMMyZ8SHKAmAzJu77ziDft
- WJQsxbsZvVMtjTSBnmxnBQDw39Q7sHzvjqhEYa2o5xf/fqje5Wx2K258sUObYSyNNddU=;
+ bh=IbfxDvUU3r+UopRQDKG0coR2ogjCp6rmXPtnRoSVZOs=; b=MEVkTDcoXfkDtJsYM62DK5Npnf
+ b6aXYCgdZW1mTq6uwWOcRIjKviemkf5SYW+E2L1Fguuvg5CwHjudNHIgdmmO8K69NG77lRwnDCFyf
+ g9HkB5K6SwZGBl9cY2D4vBuut2kBYAunJwVyLXfWg577EvmtNho+g8q9qvmrXoeG45sA=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jKiVE-00089p-IU; Sat, 04 Apr 2020 13:06:24 +0000
+ id 1jKiZC-0008Fn-So; Sat, 04 Apr 2020 13:10:30 +0000
 Received: from 54-240-197-235.amazon.com ([54.240.197.235]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jKiVE-0007aO-8R; Sat, 04 Apr 2020 13:06:24 +0000
+ id 1jKiZC-0007rM-Jx; Sat, 04 Apr 2020 13:10:30 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v2] xen/guest_access: Harden *copy_to_guest_offset() to
- prevent const dest operand
-Date: Sat,  4 Apr 2020 14:06:13 +0100
-Message-Id: <20200404130613.26428-1-julien@xen.org>
+Subject: [PATCH 3/7] xen/arm: decode: Re-order the includes
+Date: Sat,  4 Apr 2020 14:10:13 +0100
+Message-Id: <20200404131017.27330-4-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200404131017.27330-1-julien@xen.org>
+References: <20200404131017.27330-1-julien@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -70,108 +70,62 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Jan Beulich <jbeulich@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Julien Grall <jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ julien@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-At the moment, *copy_to_guest_offset() will allow the hypervisor to copy
-data to guest handle marked const.
+We usually have xen/ includes first and then asm/. They are also ordered
+alphabetically among themselves.
 
-Thankfully, no users of the helper will do that. Rather than hoping this
-can be caught during review, harden copy_to_guest_offset() so the build
-will fail if such users are introduced.
-
-There is no easy way to check whether a const is NULL in C99. The
-approach used is to introduce an unused variable that is non-const and
-assign the handle. If the handle were const, this would fail at build
-because without an explicit cast, it is not possible to assign a const
-variable to a non-const variable.
-
-Suggested-by: Jan Beulich <jbeulich@suse.com>
 Signed-off-by: Julien Grall <jgrall@amazon.com>
-
 ---
-    Changes in v2:
-        - Use a void * variable to check the handle is not const.
----
- xen/include/asm-arm/guest_access.h | 9 +++++++++
- xen/include/asm-x86/guest_access.h | 9 +++++++++
- 2 files changed, 18 insertions(+)
+ xen/arch/arm/decode.c | 5 +++--
+ xen/arch/arm/kernel.c | 2 +-
+ 2 files changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/xen/include/asm-arm/guest_access.h b/xen/include/asm-arm/guest_access.h
-index 8997a1cbfe..4046d50347 100644
---- a/xen/include/asm-arm/guest_access.h
-+++ b/xen/include/asm-arm/guest_access.h
-@@ -74,10 +74,14 @@ int access_guest_memory_by_ipa(struct domain *d, paddr_t ipa, void *buf,
- /*
-  * Copy an array of objects to guest context via a guest handle,
-  * specifying an offset into the guest array.
-+ *
-+ * The variable _t is only here to catch at build time whether we are
-+ * copying back to a const guest handle.
+diff --git a/xen/arch/arm/decode.c b/xen/arch/arm/decode.c
+index 8b1e15d118..144793c8ce 100644
+--- a/xen/arch/arm/decode.c
++++ b/xen/arch/arm/decode.c
+@@ -17,11 +17,12 @@
+  * GNU General Public License for more details.
   */
- #define copy_to_guest_offset(hnd, off, ptr, nr) ({      \
-     const typeof(*(ptr)) *_s = (ptr);                   \
-     char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
-+    void *__maybe_unused _t = (hnd).p;                  \
-     ((void)((hnd).p == (ptr)));                         \
-     raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));  \
- })
-@@ -124,9 +128,14 @@ int access_guest_memory_by_ipa(struct domain *d, paddr_t ipa, void *buf,
- #define guest_handle_okay(hnd, nr) (1)
- #define guest_handle_subrange_okay(hnd, first, last) (1)
  
-+/*
-+ * The variable _t is only here to catch at build time whether we are
-+ * copying back to a const guest handle.
-+ */
- #define __copy_to_guest_offset(hnd, off, ptr, nr) ({    \
-     const typeof(*(ptr)) *_s = (ptr);                   \
-     char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
-+    void *__maybe_unused _t = (hnd).p;                  \
-     ((void)((hnd).p == (ptr)));                         \
-     __raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));\
- })
-diff --git a/xen/include/asm-x86/guest_access.h b/xen/include/asm-x86/guest_access.h
-index ca700c959a..0b58f2baee 100644
---- a/xen/include/asm-x86/guest_access.h
-+++ b/xen/include/asm-x86/guest_access.h
-@@ -83,10 +83,14 @@
- /*
-  * Copy an array of objects to guest context via a guest handle,
-  * specifying an offset into the guest array.
-+ *
-+ * The variable _t is only here to catch at build time whether we are
-+ * copying back to a const guest handle.
+-#include <xen/types.h>
++#include <xen/lib.h>
+ #include <xen/sched.h>
++#include <xen/types.h>
++
+ #include <asm/current.h>
+ #include <asm/guest_access.h>
+-#include <xen/lib.h>
+ 
+ #include "decode.h"
+ 
+diff --git a/xen/arch/arm/kernel.c b/xen/arch/arm/kernel.c
+index f95fa392af..032923853f 100644
+--- a/xen/arch/arm/kernel.c
++++ b/xen/arch/arm/kernel.c
+@@ -5,6 +5,7 @@
   */
- #define copy_to_guest_offset(hnd, off, ptr, nr) ({      \
-     const typeof(*(ptr)) *_s = (ptr);                   \
-     char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
-+    void *__maybe_unused _t = (hnd).p;                  \
-     ((void)((hnd).p == (ptr)));                         \
-     raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));  \
- })
-@@ -134,9 +138,14 @@
-                      (last)-(first)+1,                  \
-                      sizeof(*(hnd).p)))
+ #include <xen/domain_page.h>
+ #include <xen/errno.h>
++#include <xen/guest_access.h>
+ #include <xen/gunzip.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+@@ -14,7 +15,6 @@
+ #include <xen/vmap.h>
  
-+/*
-+ * The variable _t is only here to catch at build time whether we are
-+ * copying back to a const guest handle.
-+ */
- #define __copy_to_guest_offset(hnd, off, ptr, nr) ({    \
-     const typeof(*(ptr)) *_s = (ptr);                   \
-     char (*_d)[sizeof(*_s)] = (void *)(hnd).p;          \
-+    void *__maybe_unused _t = (hnd).p;                  \
-     ((void)((hnd).p == (ptr)));                         \
-     __raw_copy_to_guest(_d+(off), _s, sizeof(*_s)*(nr));\
- })
+ #include <asm/byteorder.h>
+-#include <asm/guest_access.h>
+ #include <asm/kernel.h>
+ #include <asm/setup.h>
+ 
 -- 
 2.17.1
 
