@@ -2,99 +2,74 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BEBFCC2BA17
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:17:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FFB0C2BA17
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:17:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B784249C0
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:17:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 63774249C0
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:17:29 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="bAO2VbE3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B784249C0
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="o50vP1ig"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 63774249C0
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLVMa-0007c0-44; Mon, 06 Apr 2020 17:16:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jLVN6-0007fO-EW; Mon, 06 Apr 2020 17:17:16 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=06X9=5W=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jLVMY-0007bv-LY
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 17:16:42 +0000
-X-Inumbo-ID: 61a0dbb6-782a-11ea-800b-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 61a0dbb6-782a-11ea-800b-12813bfff9fa;
- Mon, 06 Apr 2020 17:16:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586193401;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=dw9qolkhXIn6b0T6yhcbrD/aJmWH4v6hLGN3vF3fBK8=;
- b=bAO2VbE3nnYP6pJLUEMrYvo/wDZeC1zAcuuYiewhT3ZoT0iUE7FJwLug
- coDy3OnCGGlLnOGhes1le7TAAxGlnrpZ7yMVgo3Jl5I+JKjNIULoxBydZ
- tWXk3y3DgQEklNhkUnHrtEtYzc9+pvvGzgYU3ydJC9e2e+7jV9Y8k77qH w=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=anthony.perard@citrix.com;
- spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="anthony.perard@citrix.com";
- x-sender="anthony.perard@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
- anthony.perard@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="anthony.perard@citrix.com";
- x-sender="anthony.perard@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="anthony.perard@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: 61p/Hxv70zQnfNanLwCuMtI/mdPU1ZSSxLjAFfIgef6sApVUYnSJHMAYfOnW8uANV8AS2N0yIT
- Vf5v+Gaf8ayKF/U65vNby/Q7N4/I0KbK6CJoGwtUDEig5ia3pGgahxl5DxhFbP2iIkmEJTVTRr
- GlWxFF0NpRtXbvUqwyXTeoER8101SH6FWaDPaopeKkipPXDaLfWYySeqtr8JnNpaUepwhNdNxD
- Xty56atu35YBojAZtk94S+7IiroEpM1m7hWd6TBP5Q/no0osAtmn6sfC030hQzwynqpZg1JS85
- 9lk=
-X-SBRS: 2.7
-X-MesageID: 15573591
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,351,1580792400"; d="scan'208";a="15573591"
-Date: Mon, 6 Apr 2020 18:16:37 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
-Subject: Re: [PATCH for-5.0] xen-block: Fix uninitialized variable
-Message-ID: <20200406171637.GU4088@perard.uk.xensource.com>
-References: <20200406164207.1446817-1-anthony.perard@citrix.com>
- <325e0ffb-2f1b-cbfd-6b24-0d912a9aabe2@redhat.com>
+ <SRS0=t1eN=5W=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1jLVN5-0007fC-6v
+ for xen-devel@lists.xen.org; Mon, 06 Apr 2020 17:17:15 +0000
+X-Inumbo-ID: 751441f6-782a-11ea-9e09-bc764e2007e4
+Received: from mail-wr1-x432.google.com (unknown [2a00:1450:4864:20::432])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 751441f6-782a-11ea-9e09-bc764e2007e4;
+ Mon, 06 Apr 2020 17:17:14 +0000 (UTC)
+Received: by mail-wr1-x432.google.com with SMTP id k1so406132wrm.3
+ for <xen-devel@lists.xen.org>; Mon, 06 Apr 2020 10:17:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+OPct1KjAk/W161QAuAlNNDHiF+Nzw97Vme4IELTBuY=;
+ b=o50vP1igvMSUBQMBAI4BWO4cYHpBsdOT/Og4hXof4QhvwTzec27TrARs97W68yC9Vu
+ cJ6twbYJzm9vpQu5CsvnsGjoBS8KjKSTer4sXUVm+WEDgJfeQIxaeEIBIY/PO46YafDx
+ aDEYehdPM2gs9Pi/YRB9gTsZbjozvADjqYVw7GAp73nVsEGmTkiN9JLk7QyJHRRsVUlw
+ U2ZdHuRaC8w/gIl85OTBPGEKekJkU20bIbVbjzvyS9oCG4Y+XW7FiJQV9sRc/q53pQ4Y
+ N71bDXoOMR4Nb+QyJyWYAhtjSUXvGpSzrq2NLIgishnRAwHgAos0W1ZGkhpwzGe3Zfvr
+ qraw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+OPct1KjAk/W161QAuAlNNDHiF+Nzw97Vme4IELTBuY=;
+ b=OK/v9DfiSv3vxwvgvIZLkitoUKoZqfHT6Wtbwj21wGysLw9ifTOv+TRYCtiT0uyp41
+ w9nrgyeM4CqMEHKBwG7l5F1HpQADYq6wLaT9qgBaf3TSWg+sPDpQBR7taFnJYUiW1WvC
+ APHVIWeqiIxqJadube5/sz7onuU1prXFgqLtTaIh9hdnEWNxSZ33ddGIicwG4ZOuMKWT
+ FSXuzPbe8I6CbRLk+tygNNmlDw+gemBN6b1VGoq7rgJt8DNEW9eBS5daTUr44Sf+4NfO
+ cjNbH4Gilz5jAJ+LlV9IDW3t8j0xQRF0QIJh1FpGB2WQiGhakM9w3HblWLtLPKzw11JP
+ drxQ==
+X-Gm-Message-State: AGi0PuaeMJvaRD8XLjRenHueYHX/8zXTAB3PV1ANYSZH55UAys0MG27+
+ bc6MP6UdKgrMETxW9Hl6WddUEDPZBLt0W6zCGxw=
+X-Google-Smtp-Source: APiQypKwPzHgkZj6LDS8jxtDhjQ+kuOWpthELdhABhYX1QzMnN2Pfjo6rXfY/79DEnGxUKpGW2pp9j4xv9unmejenuk=
+X-Received: by 2002:adf:eac1:: with SMTP id o1mr261145wrn.182.1586193433261;
+ Mon, 06 Apr 2020 10:17:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <325e0ffb-2f1b-cbfd-6b24-0d912a9aabe2@redhat.com>
+References: <CABB6KG-UCdPTa3yM57JB13G=Yebe8chuQKvKkNbtoGRSZ9Ypsw@mail.gmail.com>
+ <a8c56ab0-bc51-fa1c-c63f-cb9ada8a1823@citrix.com>
+In-Reply-To: <a8c56ab0-bc51-fa1c-c63f-cb9ada8a1823@citrix.com>
+From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
+Date: Mon, 6 Apr 2020 11:16:36 -0600
+Message-ID: <CABfawhn_hw=o5j+G9VfqPK6opytqt=q2-cz4GjNgCTA5zBvNrA@mail.gmail.com>
+Subject: Re: Live migration and PV device handling
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,50 +80,39 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Wolf <kwolf@redhat.com>, Stefano Stabellini <sstabellini@kernel.org>,
- qemu-block@nongnu.org, Paul Durrant <paul@xen.org>, qemu-devel@nongnu.org,
- Markus Armbruster <armbru@redhat.com>, xen-devel@lists.xenproject.org,
- Max Reitz <mreitz@redhat.com>
+Cc: Xen-devel <xen-devel@lists.xen.org>,
+ Anastassios Nanos <anastassios.nanos@sunlight.io>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, Apr 06, 2020 at 06:50:41PM +0200, Philippe Mathieu-Daudé wrote:
-> On 4/6/20 6:42 PM, Anthony PERARD wrote:
-> > Since 7f5d9b206d1e ("object-add: don't create return value if
-> > failed"), qmp_object_add() don't write any value in 'ret_data', thus
-> > has random data. Then qobject_unref() fails and abort().
-> > 
-> > Fix by initialising 'ret_data' properly.
-> 
-> Or move qobject_unref() after the error check?
-> 
-> -- >8 --
-> diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-> index 07bb32e22b..f3f1cbef65 100644
-> --- a/hw/block/xen-block.c
-> +++ b/hw/block/xen-block.c
-> @@ -869,7 +869,6 @@ static XenBlockIOThread *xen_block_iothread_create(const
-> char *id,
->      qdict_put_str(opts, "id", id);
->      qmp_object_add(opts, &ret_data, &local_err);
->      qobject_unref(opts);
-> -    qobject_unref(ret_data);
-> 
->      if (local_err) {
->          error_propagate(errp, local_err);
-> @@ -878,6 +877,7 @@ static XenBlockIOThread *xen_block_iothread_create(const
-> char *id,
->          g_free(iothread);
->          return NULL;
->      }
-> +    qobject_unref(ret_data);
+On Fri, Apr 3, 2020 at 6:44 AM Andrew Cooper <andrew.cooper3@citrix.com> wrote:
+>
+> On 03/04/2020 13:32, Anastassios Nanos wrote:
+> > Hi all,
+> >
+> > I am trying to understand how live-migration happens in xen. I am
+> > looking in the HVM guest case and I have dug into the relevant parts
+> > of the toolstack and the hypervisor regarding memory, vCPU context
+> > etc.
+> >
+> > In particular, I am interested in how PV device migration happens. I
+> > assume that the guest is not aware of any suspend/resume operations
+> > being done
+>
+> Sadly, this assumption is not correct.  HVM guests with PV drivers
+> currently have to be aware in exactly the same way as PV guests.
+>
+> Work is in progress to try and address this.  See
+> https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=775a02452ddf3a6889690de90b1a94eb29c3c732
+> (sorry - for some reason that doc isn't being rendered properly in
+> https://xenbits.xen.org/docs/ )
 
-That won't help, qmp_object_add() doesn't change the value of ret_data
-at all. The other users of qmp_object_add() passes an initialised
-'ret_data', so we should do the same I think.
+That proposal is very interesting - first time it came across my radar
+- but I dislike the idea that domain IDs need to be preserved for
+uncooperative migration to work. Ideally I would be able to take
+advantage of the same plumbing to perform forking of VMs with PV
+drivers where preserving the domain id is impossible since its still
+in use.
 
-Thanks,
-
--- 
-Anthony PERARD
+Tamas
 
