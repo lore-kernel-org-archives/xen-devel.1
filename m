@@ -2,92 +2,66 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91F62C2BA18
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 18832C2BA18
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:27:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 645FA20672
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:27:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DA40C20672
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:27:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lTZ4RrDE"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 645FA20672
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="O4CfVD7X"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA40C20672
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLN60-00031V-Nx; Mon, 06 Apr 2020 08:27:04 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=etk8=5W=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jLN60-00031Q-4o
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 08:27:04 +0000
-X-Inumbo-ID: 646e82de-77e0-11ea-b4f4-bc764e2007e4
-Received: from mail-ed1-x541.google.com (unknown [2a00:1450:4864:20::541])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 646e82de-77e0-11ea-b4f4-bc764e2007e4;
- Mon, 06 Apr 2020 08:27:03 +0000 (UTC)
-Received: by mail-ed1-x541.google.com with SMTP id a43so18172980edf.6
- for <xen-devel@lists.xenproject.org>; Mon, 06 Apr 2020 01:27:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=AmBPbhV6g2IaLOFOkpSmZFKlFd1m/HMJ+BA2WDmUJIU=;
- b=lTZ4RrDEQ2e0sj/upAp4GgAOsH5JOj4MUaMfKU3Ou4LheVKzHOC6GOErLoTVROgoYm
- yCBULJxRqJJplz4j0JD267G7DbqY8+4fIZ/RtQv6H4QLf10Z6ae8Q7hPMqF7+bTdB+mu
- eDpv0doFswVf6wRKTmpfuMG7AhJbMqdQ+D1pzXAcAin4I8XP9mcaUBHVgqh9wB0nkFCX
- zzzPWwgm9xTUnNY8dSZ54ickVKb+HRAGloPuJZnEZjgAP4rBII58lndi5GoQCghJ4dB5
- f3YJUydhhRq1nDe4AR0uLuCbZV2En7bOYPiZ54qEbwtrtkZm7GeD98jCtb4K9IqO7gK7
- gWjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=AmBPbhV6g2IaLOFOkpSmZFKlFd1m/HMJ+BA2WDmUJIU=;
- b=Dwpn93e6Czg5iJokBEkKQJOb39QEjaGXsG4jyWSwwK0sgIFZt5oQdbp6M1iifY7Nkb
- PykUdVmssi8PmboSGZJL1B/YAS1B3dIrCPoQo17H8n2G123H9XIoqS2UmsXFCjb1txzI
- 1N13EwW34Iy54cJH5LmDK9QvgLUwa+E662jfa4kqADdvuv3Igess28xEQ+i4McEjFR2E
- qrx4Ir3+7TAzDp7Mo1l1cyf9bzgKO2RvMlsg0riQJeNX39PecP9CLjWWrI28xBz5NeDT
- zU7ikQAHFN13THrd6cS+x6oZFtuKHWyUn7ePLzpkrk87sHL9VmILMNIQD38dbqhDfPRV
- jzXQ==
-X-Gm-Message-State: AGi0Pua4MDrc+HnQBLU8u7iH9J7cq7fEwNbe2TdtOpCcmZvrR18e9xJe
- TQsbzewHvos4AZSRpImdzYI=
-X-Google-Smtp-Source: APiQypLguW7BSWBLjVfkgWMNjzRjxwD9bbYIpW5CSxqaTLRUWdMuWOITt5p37kuc8zt5X+Ib2B7zBg==
-X-Received: by 2002:a17:906:4d4d:: with SMTP id
- b13mr1352105ejv.6.1586161622483; 
- Mon, 06 Apr 2020 01:27:02 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-238.amazon.com. [54.240.197.238])
- by smtp.gmail.com with ESMTPSA id p17sm2776308ejn.5.2020.04.06.01.27.01
- (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 06 Apr 2020 01:27:01 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Julien Grall'" <julien@xen.org>,
-	<xen-devel@lists.xenproject.org>
-References: <20200327185012.1795-1-paul@xen.org>
- <20200327185012.1795-2-paul@xen.org>
- <5a26a89a-6422-b41d-daac-8f33a48ae23b@xen.org>
- <002201d609d0$55a76690$00f633b0$@xen.org>
- <acd5fee0-2bf6-4573-8467-38d24827ca1f@xen.org>
-In-Reply-To: <acd5fee0-2bf6-4573-8467-38d24827ca1f@xen.org>
-Subject: RE: [PATCH 1/5] xen/common: introduce a new framework for
- save/restore of 'domain' context
-Date: Mon, 6 Apr 2020 09:27:00 +0100
-Message-ID: <001701d60bed$25606f80$70214e80$@xen.org>
-MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQG3I8TZM/MLMEc/e2It3WEXPZVs8AC9qttvAt7KY/0Cn78SegKGUxSNqGN7zjA=
+	id 1jLN6f-00039A-CG; Mon, 06 Apr 2020 08:27:45 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=/g5+=5W=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1jLN6e-00038v-EC
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 08:27:44 +0000
+X-Inumbo-ID: 7bfe6752-77e0-11ea-bfd7-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7bfe6752-77e0-11ea-bfd7-12813bfff9fa;
+ Mon, 06 Apr 2020 08:27:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Mime-Version:Content-Type:
+ References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=uS79rdr2gTc56AOSoA+CLXOyDTk2U5AqZbWu/xQvh8c=; b=O4CfVD7XRNpMLEozF9my9xjmQB
+ VBw8WnWjq2OhNuhqbVShM/2dGmZaLNhjMKCmha/bw2q/OGhkCAXGN+xCjl87ynTQy+ZgaNExT06Nk
+ j6TJdJRtnm2TUpGDvY4kE9i6bB6EG3FAJvg4GNBCbWmNo1wZ9NPjl2SOdyL70kGhWjOo=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jLN6b-0004TV-S3; Mon, 06 Apr 2020 08:27:41 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=freeip.amazon.com) by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jLN6b-0003tR-Ht; Mon, 06 Apr 2020 08:27:41 +0000
+Message-ID: <636251f68db5e094f0c4dd5871eb4146dadb1589.camel@xen.org>
+Subject: Re: [Xen-devel] [PATCH 0/5] use new API for Xen page tables
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Date: Mon, 06 Apr 2020 09:27:39 +0100
+In-Reply-To: <cover.1584955616.git.hongyxia@amazon.com>
+References: <cover.1584955616.git.hongyxia@amazon.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.1 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -98,76 +72,36 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>, 'Jan Beulich' <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Wei Liu <wl@xen.org>,
+ Roger Pau =?ISO-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Julien Grall <julien@xen.org>
-> Sent: 03 April 2020 18:24
-> To: paul@xen.org; xen-devel@lists.xenproject.org
-> Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap' =
-<george.dunlap@citrix.com>; 'Ian
-> Jackson' <ian.jackson@eu.citrix.com>; 'Jan Beulich' =
-<jbeulich@suse.com>; 'Stefano Stabellini'
-> <sstabellini@kernel.org>; 'Wei Liu' <wl@xen.org>
-> Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for =
-save/restore of 'domain' context
->=20
-> Hi Paul,
->=20
-> On 03/04/2020 16:55, Paul Durrant wrote:
-> >> -----Original Message-----
-> > [snip]
-> >>> +
-> >>> +#include <xen/save.h>
-> >>> +
-> >>> +struct domain_context {
-> >>> +    bool log;
-> >>> +    struct domain_save_descriptor desc;
-> >>> +    domain_copy_entry copy;
-> >>
-> >> As your new framework is technically an extension of existing one, =
-it
-> >> would be good to explain why we diverge in the definitions.
-> >>
-> >
-> > I don't follow. What is diverging? I explain in the commit comment =
-that this is a parallel
-> framework. Do I need to justify why it is not a carbon copy of the HVM =
-one?
->=20
-> Well, they are both restoring/saving guest state. The only difference =
-is
-> the existing one is focusing on HVM state.
->=20
-> So it would make sense long term to have only one hypercall and tell
-> what you want to save. In fact, some of the improvement here would
-> definitely make the HVM one nicer to use (at least in the context of =
-LU).
->=20
+Ping.
 
-I guess we could move the HVM save records over to the new framework, =
-but it works for the moment so I don't want to bring it into scope now.
-
->  From the commit message, it is not clear to me why a new framework =
-and
-> why the infrastructure is at the same time different but not.
->=20
-
-An alternative would be to move the HVM save code into common code and =
-then try to adapt it. I think that would result in more code churn and =
-ultimately be harder to review. The extra infrastructure introduced here =
-is fairly minimal and, for the moment, only targeting PV state. As I =
-said above there's nothing stopping the HVM records being ported over =
-later once any initial issues have been shaken out.
-
-  Paul
-
-
+On Mon, 2020-03-23 at 09:41 +0000, Hongyan Xia wrote:
+> From: Hongyan Xia <hongyxia@amazon.com>
+> 
+> This small series is basically just rewriting functions using the new
+> API to map and unmap PTEs. Each patch is independent.
+> 
+> Apart from mapping and unmapping page tables, no other functional
+> change
+> intended.
+> 
+> Wei Liu (5):
+>   x86/shim: map and unmap page tables in replace_va_mapping
+>   x86_64/mm: map and unmap page tables in m2p_mapped
+>   x86_64/mm: map and unmap page tables in share_hotadd_m2p_table
+>   x86_64/mm: map and unmap page tables in destroy_compat_m2p_mapping
+>   x86_64/mm: map and unmap page tables in destroy_m2p_mapping
+> 
+>  xen/arch/x86/pv/shim.c     | 10 ++++---
+>  xen/arch/x86/x86_64/mm.c   | 55 +++++++++++++++++++++++++-----------
+> --
+>  xen/include/asm-x86/page.h | 18 +++++++++++++
+>  3 files changed, 62 insertions(+), 21 deletions(-)
+> 
 
 
