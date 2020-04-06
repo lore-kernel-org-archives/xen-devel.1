@@ -2,96 +2,46 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 02664C2BA18
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 07046C2BA18
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:27:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BE39A20672
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:17:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="RermtGnw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BE39A20672
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id CE8C020672
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 08:27:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CE8C020672
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLMwL-00029G-ND; Mon, 06 Apr 2020 08:17:05 +0000
+	id 1jLN67-00032L-22; Mon, 06 Apr 2020 08:27:11 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Lhp/=5W=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jLMwJ-00029B-Kj
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 08:17:03 +0000
-X-Inumbo-ID: fc9594e6-77de-11ea-bfd5-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=leFb=5W=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jLN66-000325-9g
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 08:27:10 +0000
+X-Inumbo-ID: 672752a8-77e0-11ea-bfd7-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fc9594e6-77de-11ea-bfd5-12813bfff9fa;
- Mon, 06 Apr 2020 08:16:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586161019;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=5pHG+Clk9GGLPdJQKpggaAZW3Q+Tf++1CLgU5tkdt9E=;
- b=RermtGnwyOAi5rVAEX2GPNEye5kYI75Cg+zpEUXtT3ASN3QmcFO8l+qr
- zSAAhwbhiOLvEe8ZLaLFFf8VUQJmPNPfQMVqCIAK9tP0N8T3gsFkOQEeH
- +wrz0+ZEgdNYkNyhZ0zWgRDvrmCjFALo0WE1utpr5dr4G94mVY9NgNZcF k=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: S0ZaVdOmSpMen520XGvGllSvFqBFrCHUWeyOMkZJOp0Wa+mh5B/uTdmmP9M7N0yxjapSvje53W
- bH6CDhha7KvQStjC6XMcXRyybAiRtxp3bU5IAUwL9bAi3zG+Jv5MmFG192HGaRBcYcXgAihZsx
- LFn5PoUN4DwdmSrYXjMVm5cqiRgETdieL9Fq6w/C1sellsT4n/CdcH31q+2fh1qJhZfzjmrrf5
- /guyyUFVowbksTRIN5M/rP7mKqVrkxD0fD3HTn7C43xVU20UjLXp+3ZBs0X/URuavRtTMlNEVM
- dNM=
-X-SBRS: 2.7
-X-MesageID: 15541691
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,350,1580792400"; d="scan'208";a="15541691"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH OSSTEST] linux: enable x2APIC kernel support
-Date: Mon, 6 Apr 2020 10:16:36 +0200
-Message-ID: <20200406081636.78027-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 672752a8-77e0-11ea-bfd7-12813bfff9fa;
+ Mon, 06 Apr 2020 08:27:08 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 9DFAFAB8F;
+ Mon,  6 Apr 2020 08:27:06 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v2] tools/libxl: make default of max event channels dependant
+ on vcpus
+Date: Mon,  6 Apr 2020 10:27:04 +0200
+Message-Id: <20200406082704.13994-1-jgross@suse.com>
+X-Mailer: git-send-email 2.16.4
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,52 +52,54 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: ian.jackson@eu.citrix.com, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Anthony PERARD <anthony.perard@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Without it Linux is not able to parse the x2APIC ACPI MADT entries
-crafted by Xen when booted in PVH mode, following log is from one of
-the dom0pvh jobs:
+Since Xen 4.4 the maximum number of event channels for a guest is
+defaulting to 1023. For large guests with lots of vcpus this is not
+enough, as e.g. the Linux kernel uses 7 event channels per vcpu,
+limiting the guest to about 140 vcpus.
 
-ACPI: x2apic entry ignored
-ACPI: x2apic entry ignored
-ACPI: x2apic entry ignored
-ACPI: x2apic entry ignored
-IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
-IOAPIC[1]: apic_id 1, version 17, address 0xfec20000, GSI 24-55
-ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
-ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 low level)
-Using ACPI (MADT) for SMP configuration information
-smpboot: Boot CPU (id 0) not listed by BIOS
-smpboot: Allowing 1 CPUs, 0 hotplug CPUs
+Instead of requiring to specify the allowed number of event channels
+via the "event_channels" domain config option, make the default
+depend on the maximum number of vcpus of the guest. This will require
+to use the "event_channels" domain config option in fewer cases as
+before.
 
-Note that PVH mode only creates x2APIC entries for simplicity, and
-because x2APIC mode is always provided to PVH guests. Not adding
-x2APIC support forces Linux to boot in UP mode, since x2APIC entries
-contain the information of additional processors available on the
-system.
+As different guests will have differing needs the calculation of the
+maximum number of event channels can be a rough estimate only,
+currently based on the Linux kernel requirements. Nevertheless it is
+much better than the static upper limit of today as more guests will
+boot just fine with the new approach.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+In order not to regress current configs use 1023 as the minimum
+default setting.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- ts-kernel-build | 3 +++
- 1 file changed, 3 insertions(+)
+V2:
+- use max() instead of min()
+- clarify commit message a little bit
+---
+ tools/libxl/libxl_create.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/ts-kernel-build b/ts-kernel-build
-index 89cdafcb..6c8f1d6a 100755
---- a/ts-kernel-build
-+++ b/ts-kernel-build
-@@ -622,6 +622,9 @@ esac
- # Disable components that don't build
- setopt CONFIG_TEGRA_HOST1X n
+diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
+index e7cb2dbc2b..c025b21894 100644
+--- a/tools/libxl/libxl_create.c
++++ b/tools/libxl/libxl_create.c
+@@ -226,7 +226,7 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
+             b_info->iomem[i].gfn = b_info->iomem[i].start;
  
-+# Enable x2APIC support for PVH mode
-+setopt CONFIG_X86_X2APIC y
-+
- exit 0
- END
- }
+     if (!b_info->event_channels)
+-        b_info->event_channels = 1023;
++        b_info->event_channels = max(1023, b_info->max_vcpus * 8 + 255);
+ 
+     libxl__arch_domain_build_info_setdefault(gc, b_info);
+     libxl_defbool_setdefault(&b_info->dm_restrict, false);
 -- 
-2.26.0
+2.16.4
 
 
