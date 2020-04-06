@@ -2,98 +2,52 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68613C2BA1E
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 11:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EADB6C2BA19
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 11:01:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D904206F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 11:00:27 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="AlT2GZla"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D904206F5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id C4849206F5
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 11:01:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C4849206F5
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLPU6-00017u-9g; Mon, 06 Apr 2020 11:00:06 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=06X9=5W=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jLPU4-0000v6-L5
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 11:00:04 +0000
-X-Inumbo-ID: c3e7cba3-77f5-11ea-bfe0-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c3e7cba3-77f5-11ea-bfe0-12813bfff9fa;
- Mon, 06 Apr 2020 11:00:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586170803;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=4hx5mGuHDzA5+dvvT4cVCkiCfX8ylquIvcCMnoby8o8=;
- b=AlT2GZlaPxuKcV9GX4kHCs+T2VidspOwSNV7/SIeYJD88XWKeSPZeTni
- hMQsZM52CW6M/btB8wxvoPyldho7EQUC9qMR8XEtZXCRBW5hOzE9fhiGd
- R56gfmol9r4Bnu8Ny1URAa2UdqyjS5BMmlWvpc6rbmHJ+I3jl4+7rhssd g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=anthony.perard@citrix.com;
- spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="anthony.perard@citrix.com";
- x-sender="anthony.perard@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
- anthony.perard@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="anthony.perard@citrix.com";
- x-sender="anthony.perard@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="anthony.perard@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: vzlJoJoPAWg3TfMFYrWLraz7UQzkYEFdlGGQmtyLH3Nt97LUS2ei0GJtf75z6whm2zpnCVqbKg
- IBJDVMR9rghkcT7KNpbYdfbCNOK97ABA+rihv4x55SWwFLeutrij99+YxiPQCXwL88XhjP8Bka
- 0D8doIQw2ZfOrEey/y+p/kNmNQM0aHstCNclMfWLi5rBTmOoCBOMcZP0BaXycD0eDG5UqDdJNP
- rw35MtUdb7UYmSffiu/kglPgSDxVq2F1tl1nOEpblMtLp1NEnwWM6FMJuL4PGsKc9sAC5VfsT6
- +YM=
-X-SBRS: 2.7
-X-MesageID: 15547921
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,350,1580792400"; d="scan'208";a="15547921"
-Date: Mon, 6 Apr 2020 11:59:54 +0100
-From: Anthony PERARD <anthony.perard@citrix.com>
-To: <paul@xen.org>
-Subject: Re: [PATCH for-5.0] xen-block: Fix double qlist remove
-Message-ID: <20200406105954.GT4088@perard.uk.xensource.com>
-References: <20200402130819.1216125-1-anthony.perard@citrix.com>
- <001801d608fa$d3f0d3f0$7bd27bd0$@xen.org>
+	id 1jLPVh-0001O2-V9; Mon, 06 Apr 2020 11:01:45 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=8YOW=5W=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jLPVg-0001NR-IK
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 11:01:44 +0000
+X-Inumbo-ID: 001faff4-77f6-11ea-b4f4-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 001faff4-77f6-11ea-b4f4-bc764e2007e4;
+ Mon, 06 Apr 2020 11:01:44 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id DEC70AB8B;
+ Mon,  6 Apr 2020 11:01:41 +0000 (UTC)
+Subject: Re: [PATCH v2] xen/guest_access: Harden *copy_to_guest_offset() to
+ prevent const dest operand
+To: Julien Grall <julien@xen.org>
+References: <20200404130613.26428-1-julien@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <391ef401-b5d3-2f95-5fe3-c32f372dcc92@suse.com>
+Date: Mon, 6 Apr 2020 13:01:37 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <001801d608fa$d3f0d3f0$7bd27bd0$@xen.org>
+In-Reply-To: <20200404130613.26428-1-julien@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,56 +58,41 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: 'Kevin Wolf' <kwolf@redhat.com>,
- 'Stefano Stabellini' <sstabellini@kernel.org>, qemu-block@nongnu.org,
- qemu-stable@nongnu.org, qemu-devel@nongnu.org, 'Max Reitz' <mreitz@redhat.com>,
- 'Stefan Hajnoczi' <stefanha@redhat.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
+ xen-devel@lists.xenproject.org, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, Apr 02, 2020 at 03:27:22PM +0100, Paul Durrant wrote:
-> > -----Original Message-----
-> > From: Anthony PERARD <anthony.perard@citrix.com>
-> > Sent: 02 April 2020 14:08
-> > To: qemu-devel@nongnu.org
-> > Cc: qemu-stable@nongnu.org; Anthony PERARD <anthony.perard@citrix.com>; Stefano Stabellini
-> > <sstabellini@kernel.org>; Paul Durrant <paul@xen.org>; Stefan Hajnoczi <stefanha@redhat.com>; Kevin
-> > Wolf <kwolf@redhat.com>; Max Reitz <mreitz@redhat.com>; xen-devel@lists.xenproject.org; qemu-
-> > block@nongnu.org
-> > Subject: [PATCH for-5.0] xen-block: Fix double qlist remove
-> > 
-> > Commit a31ca6801c02 ("qemu/queue.h: clear linked list pointers on
-> > remove") revealed that a request was removed twice from a list, once
-> > in xen_block_finish_request() and a second time in
-> > xen_block_release_request() when both function are called from
-> > xen_block_complete_aio(). But also, the `requests_inflight' counter is
-> > decreased twice, and thus became negative.
-> > 
-> > This is a bug that was introduced in bfd0d6366043, where a `finished'
-> > list was removed.
-> > 
-> > This patch simply re-add the `finish' parameter of
-> > xen_block_release_request() so that we can distinguish when we need to
-> > remove a request from the inflight list and when not.
-> > 
-> > Fixes: bfd0d6366043 ("xen-block: improve response latency")
-> > Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+On 04.04.2020 15:06, Julien Grall wrote:
+> From: Julien Grall <jgrall@amazon.com>
 > 
-> It looks to me like it would just be more straightforward to simply drop the QLIST_REMOVE and requests_inflight-- from
-> xen_block_release_request() and simply insist that xen_block_finish_request() is called in all cases (which I think means adding one
-> extra call to it in xen_block_handle_requests()).
+> At the moment, *copy_to_guest_offset() will allow the hypervisor to copy
+> data to guest handle marked const.
+> 
+> Thankfully, no users of the helper will do that. Rather than hoping this
+> can be caught during review, harden copy_to_guest_offset() so the build
+> will fail if such users are introduced.
+> 
+> There is no easy way to check whether a const is NULL in C99. The
+> approach used is to introduce an unused variable that is non-const and
+> assign the handle. If the handle were const, this would fail at build
+> because without an explicit cast, it is not possible to assign a const
+> variable to a non-const variable.
+> 
+> Suggested-by: Jan Beulich <jbeulich@suse.com>
+> Signed-off-by: Julien Grall <jgrall@amazon.com>
 
-I'm thinking of going further than that. I've notice another bug, in
-case of error in xen_block_do_aio(), xen_block_finish_request() is
-called without ever calling send_response() or release_request(). I
-think that mean a leak of request.
+I'm not convinced it is a good idea to add (recurring) comments
+like you do - there are more aspects of these macros that would
+be worth commenting on, and commenting on some but not all may
+give the wrong impression of all subtleties being covered (also
+for others).
 
-So, I'm thinking of creating a function that would do finish_request(),
-send_response(), release_request(), has I believe those operations needs
-to be done together anyway.
+In any event I'd like to ask that each header gain such a
+comment only once, with the other being a tiny reference to the
+one "complete" instance.
 
-I'll rework the patch.
-
--- 
-Anthony PERARD
+Jan
 
