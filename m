@@ -2,57 +2,97 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=3.0 tests=DATE_IN_PAST_03_06,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7027C2BA17
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:35:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BD49DC2BA1B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:44:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A4CB120672
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:35:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4CB120672
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 985E820672
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:44:00 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="F+RmdHBQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 985E820672
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLVeP-0001OU-KY; Mon, 06 Apr 2020 17:35:09 +0000
+	id 1jLVmY-0002FT-Gu; Mon, 06 Apr 2020 17:43:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=8YOW=5W=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jLVeO-0001OO-Jx
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 17:35:08 +0000
-X-Inumbo-ID: f522e4a4-782c-11ea-83d8-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=06X9=5W=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jLVmX-0002FO-KC
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 17:43:33 +0000
+X-Inumbo-ID: 220da138-782e-11ea-9e09-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f522e4a4-782c-11ea-83d8-bc764e2007e4;
- Mon, 06 Apr 2020 17:35:08 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 73AD1C1AA;
- Mon,  6 Apr 2020 17:35:05 +0000 (UTC)
-Subject: Re: [PATCH v7 08/12] xen: add /buildinfo/config entry to hypervisor
- filesystem
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-References: <20200402154616.16927-1-jgross@suse.com>
- <20200402154616.16927-9-jgross@suse.com>
- <19f84540-6b49-f99d-805a-e07f56330f31@suse.com>
- <b9ddd1fb-d868-bb69-3b6b-27531beda2fa@suse.com>
- <f7d1f3aa-3a7e-fcb2-3163-5e67756e8452@suse.com>
- <17d65095-a51e-2e00-38ee-7c1c83d2bb99@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <51e0f0d2-f9ce-83fd-79fa-ae4805356612@suse.com>
-Date: Mon, 6 Apr 2020 14:29:22 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ id 220da138-782e-11ea-9e09-bc764e2007e4;
+ Mon, 06 Apr 2020 17:43:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1586195012;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=bphNPG/A+OeRKQoZBapDV/s73PtCWQsb127JQKMzOao=;
+ b=F+RmdHBQTFFvzkacoZ3/hXM4lHdqVhQlhLDNjDFEZMtdAclAtlf9pWPz
+ I1HvQ6g7p/fg8nuz7E4S0fh9g9db5IuO7lIMVVhOUzIg6LSSlZOhh0xmm
+ OBrOQUt7sj9mtfGjJWM/wH8t23ghBmKTth1JO0PTwM8XQjuntye+76OrB w=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ anthony.perard@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+ anthony.perard@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: hlwK8qzoKR3mA9SudDYB7JPSpQopwHfmD0RVWef2oBdIhmk3ijC0+3/s95S//l+6oEL8dsmgt8
+ Uawkk1KEd8fi+ZuOC2BZ4QpNt5FC6GCEnEYZVho/chg/F8dlrZg6czj8gXIe8lUROYGsHwZkaq
+ j+SraWWkJVFvNOLDyIeXhcspFxknIP0pUJllzFYn+l6GGDxL4WPszJx8A11HSq8WY4tHdX3CRE
+ deaNLxX6QujMrG3H3CELbEh71lmlOeoZdd433K4tta+A+L6EstblMI3iZN47kIqjhMffSiFRmf
+ 4N0=
+X-SBRS: 2.7
+X-MesageID: 15918507
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,351,1580792400"; d="scan'208";a="15918507"
+Date: Mon, 6 Apr 2020 18:43:23 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Subject: Re: [RFC] hw/usb/xen-usb.c: Pass struct usbback_req* to
+ usbback_packet_complete()
+Message-ID: <20200406174323.GV4088@perard.uk.xensource.com>
+References: <20200323164318.26567-1-peter.maydell@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <17d65095-a51e-2e00-38ee-7c1c83d2bb99@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20200323164318.26567-1-peter.maydell@linaro.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,69 +103,41 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org, Stefano
+ Stabellini <sstabellini@kernel.org>, qemu-devel@nongnu.org,
+ Gerd Hoffmann <kraxel@redhat.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 03.04.2020 17:45, Jürgen Groß wrote:
-> On 03.04.20 17:33, Jan Beulich wrote:
->> On 03.04.2020 17:12, Jürgen Groß wrote:
->>> On 03.04.20 16:31, Jan Beulich wrote:
->>>> On 02.04.2020 17:46, Juergen Gross wrote:
->>>>> --- a/xen/common/Kconfig
->>>>> +++ b/xen/common/Kconfig
->>>>> @@ -353,6 +353,16 @@ config DOM0_MEM
->>>>>            Leave empty if you are not sure what to specify.
->>>>>    +config HYPFS_CONFIG
->>>>> +    bool "Provide hypervisor .config via hypfs entry"
->>>>> +    default y
->>>>
->>>> My initial reaction was to ask for "depends on HYPFS", but then
->>>> I noticed the earlier patch doesn't introduce such. Am I
->>>> mis-remembering that it was agreed to make the whole thing
->>>> possible to disable at least in EXPERT mode?
->>>
->>> No, I don't remember that agreement.
->>>
->>> And TBH I'm not sure this is a good idea, as that would at once make the
->>> plan to replace at least some sysctl and/or domctl interfaces impossible
->>> (like e.g. the last 3 patches of the series are doing already), or at
->>> least would tie the related functionality to CONFIG_HYPFS.
->>
->> I think that would be fine - that's what config setting are for.
->> Someone caring about space may not care about runtime setting of
->> parameters.
+On Mon, Mar 23, 2020 at 04:43:18PM +0000, Peter Maydell wrote:
+> The function usbback_packet_complete() currently takes a USBPacket*,
+> which must be a pointer to the packet field within a struct
+> usbback_req; the function uses container_of() to get the struct
+> usbback_req* given the USBPacket*.
 > 
-> So right now it would start with a plain hypfs available or not.
+> This is unnecessarily confusing (and in particular it confuses the
+> Coverity Scan analysis, resulting in the false positive CID 1421919
+> where it thinks that we write off the end of the structure). Since
+> both callsites already have the pointer to the struct usbback_req,
+> just pass that in directly.
 > 
-> The next step would be in patch 12 to tell the user he will lose the
-> capability of setting runtime parameters.
+> Signed-off-by: Peter Maydell <peter.maydell@linaro.org>
+> ---
+> This is an RFC because:
+>  * I'm not very familiar with the Xen bits of QEMU
+>  * the main rationale here is to change something that's
+>    confusing Coverity -- the code as it stands isn't wrong
+>  * the only testing I've done is "make check"
+> Still, the change seems like a good thing to me as a human reader...
 > 
-> Another planned extension would be to control per-cpupool settings,
-> which would the go away (possibly functionality being unconditionally
-> available today).
-> 
-> Next would be the lack of being able to control per-domain mitigations
-> like XPTI or L1TF, which I'd like to add.
-> 
-> Another thing I wanted to add is some debugging stuff (e.g. to switch
-> lock profiling using hypfs).
-> 
-> And the list will go on.
+> PS: QEMU's MAINTAINERS file stanza for Xen doesn't pick up
+> that this file is Xen related, so it could use an extra F: line.
 
-Understood.
+Looks good,
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 
-> Does it really make sense to make a central control and information
-> interface conditional?
+Thanks,
 
-None of the above may be of interest to e.g. embedded use cases.
-
-> I'd like at least a second opinion on that topic.
-
-Yes, further opinions would surely help.
-
-Jan
+-- 
+Anthony PERARD
 
