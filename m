@@ -2,75 +2,93 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FD6BC2BA19
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 09:08:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E3856C2BA2B
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 09:18:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3DB82206B8
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 09:08:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AF1622078C
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 09:18:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="C853642A"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DB82206B8
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="et5yYcI3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF1622078C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLNjz-00071K-4e; Mon, 06 Apr 2020 09:08:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=glNc=5W=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jLNjx-00071C-WD
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 09:08:22 +0000
-X-Inumbo-ID: 292a9400-77e6-11ea-bfdb-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 292a9400-77e6-11ea-bfdb-12813bfff9fa;
- Mon, 06 Apr 2020 09:08:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=f/czkPuAxgbvkU7yHJ3kEfADYS05yG6g7KfewQSoHO4=; b=C853642AhlLU0dHqeerZLrAmQ7
- UfLi1gFyFjlVeY8ciPLTppEixyfHR9BVYHpNSDdXSfsKrl+LYMRgth0Uyt9wQW2j3r2Vg4Mv7FLxm
- TLOIIHkixNzmcHfeEreLgIWFvDyFLbOWvJvkO4N+oPyn8z27GMclyKoRLv5kV4xQdmOQ=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jLNjt-0005Lt-PQ; Mon, 06 Apr 2020 09:08:17 +0000
-Received: from 54-240-197-239.amazon.com ([54.240.197.239]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jLNjt-0006bO-IQ; Mon, 06 Apr 2020 09:08:17 +0000
-Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for
- save/restore of 'domain' context
-To: paul@xen.org, xen-devel@lists.xenproject.org
+	id 1jLNtY-0007xQ-4B; Mon, 06 Apr 2020 09:18:16 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=etk8=5W=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jLNtW-0007xL-Ln
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 09:18:14 +0000
+X-Inumbo-ID: 8a491a8a-77e7-11ea-9e09-bc764e2007e4
+Received: from mail-ed1-x542.google.com (unknown [2a00:1450:4864:20::542])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8a491a8a-77e7-11ea-9e09-bc764e2007e4;
+ Mon, 06 Apr 2020 09:18:13 +0000 (UTC)
+Received: by mail-ed1-x542.google.com with SMTP id cw6so18295191edb.9
+ for <xen-devel@lists.xenproject.org>; Mon, 06 Apr 2020 02:18:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=Tx7rBNCXnlpHQrdNaaPu8h1N1job7kKMdjUxxhmPvMI=;
+ b=et5yYcI3kUwJcncifL5Zxkeul2/yVG1+EIVgHGQk45PdQlFUVR0Kre+N2m6EQ2aoov
+ OGfUUsb3xW+e4vL3ThjXgnKS0Hk7ZPXsXn/xnqYX0w9cR9hTzbVqDNC+3UIc805lPgjt
+ BM+nAj1OpKwMJzlcvpJESaISj9/S/x83RBHgF9Brk4ctGTnbfQBP/DETYqGqecY24iJ1
+ 69PO8gJW1g/+7+N2ixSa2oHOg34n7xiUnRWLxqJnYMVwZm5O2NjKUnLg6iEUvSmZMM5G
+ mrMqrHxsCf/GQHq+Cft+xYE3boJlk6GzQqKqCPzRJiOPy0YE7tZQLX5VGuEHT6UInIPs
+ 4e8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=Tx7rBNCXnlpHQrdNaaPu8h1N1job7kKMdjUxxhmPvMI=;
+ b=ZnMprCnaJoP+Q01L43d+nOodm1hC7aDKUwQxU5E8g4AdS+YboBjvA5oZs5Oci/bIKB
+ P/yHhd5P1wLAfHOUJgqTVR+GWGZG64RvYhMBJEgAksaFqyKcijxwWwhjwtoz/JGrHRQn
+ r+aCXyTjMX3jJvxt/dx21MNjFJ0YotgeJqch4CVLm+Pq+C1WALUU13dq95JQafzAoltS
+ 0crRpK1ggnvOyL/1y+358dgBSs0zrGd6D40eURZTLwScq+yQqFTm107SmLaZvaP4leZp
+ G6tpKPwaAxnhWV7b1Zd6Nn/gLAkR8cPbADUBgfKRGj74XNEvVZARnRoUpDXSIkl7PV97
+ ORgg==
+X-Gm-Message-State: AGi0PuZIhiR1ls7xF1VvvgMHQ/V1W0n+1lGwNII8FMGe2MwiT4hufNVL
+ d9MHz7eq5MXEPekqUQDao5Q=
+X-Google-Smtp-Source: APiQypLt124LSi+NXS22VGoVs7pgQEBqkmeGCcXdMn0JcQ129IZpxIJ5PNBkyQ7UUGlsiuSQ2Gsipg==
+X-Received: by 2002:aa7:d999:: with SMTP id u25mr18804209eds.210.1586164692515; 
+ Mon, 06 Apr 2020 02:18:12 -0700 (PDT)
+Received: from CBGR90WXYV0 (54-240-197-238.amazon.com. [54.240.197.238])
+ by smtp.gmail.com with ESMTPSA id c5sm242346edt.40.2020.04.06.02.18.11
+ (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+ Mon, 06 Apr 2020 02:18:11 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Julien Grall'" <julien@xen.org>,
+	<xen-devel@lists.xenproject.org>
 References: <20200327185012.1795-1-paul@xen.org>
  <20200327185012.1795-2-paul@xen.org>
  <5a26a89a-6422-b41d-daac-8f33a48ae23b@xen.org>
  <002201d609d0$55a76690$00f633b0$@xen.org>
  <acd5fee0-2bf6-4573-8467-38d24827ca1f@xen.org>
  <001701d60bed$25606f80$70214e80$@xen.org>
-From: Julien Grall <julien@xen.org>
-Message-ID: <e2e25069-36e5-b965-8f66-59a460369e88@xen.org>
-Date: Mon, 6 Apr 2020 10:08:15 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ <e2e25069-36e5-b965-8f66-59a460369e88@xen.org>
+In-Reply-To: <e2e25069-36e5-b965-8f66-59a460369e88@xen.org>
+Subject: RE: [PATCH 1/5] xen/common: introduce a new framework for
+ save/restore of 'domain' context
+Date: Mon, 6 Apr 2020 10:18:10 +0100
+Message-ID: <002701d60bf4$4b640460$e22c0d20$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <001701d60bed$25606f80$70214e80$@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQG3I8TZM/MLMEc/e2It3WEXPZVs8AC9qttvAt7KY/0Cn78SegKGUxSNAT1JVvEC2KVtyahC20mg
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,6 +99,7 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Reply-To: paul@xen.org
 Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
  'Andrew Cooper' <andrew.cooper3@citrix.com>,
  'Ian Jackson' <ian.jackson@eu.citrix.com>,
@@ -88,75 +107,131 @@ Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Paul,
+> -----Original Message-----
+> From: Julien Grall <julien@xen.org>
+> Sent: 06 April 2020 10:08
+> To: paul@xen.org; xen-devel@lists.xenproject.org
+> Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap' =
+<george.dunlap@citrix.com>; 'Ian
+> Jackson' <ian.jackson@eu.citrix.com>; 'Jan Beulich' =
+<jbeulich@suse.com>; 'Stefano Stabellini'
+> <sstabellini@kernel.org>; 'Wei Liu' <wl@xen.org>
+> Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for =
+save/restore of 'domain' context
+>=20
+> Hi Paul,
+>=20
+> On 06/04/2020 09:27, Paul Durrant wrote:
+> >> -----Original Message-----
+> >> From: Julien Grall <julien@xen.org>
+> >> Sent: 03 April 2020 18:24
+> >> To: paul@xen.org; xen-devel@lists.xenproject.org
+> >> Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap' =
+<george.dunlap@citrix.com>; 'Ian
+> >> Jackson' <ian.jackson@eu.citrix.com>; 'Jan Beulich' =
+<jbeulich@suse.com>; 'Stefano Stabellini'
+> >> <sstabellini@kernel.org>; 'Wei Liu' <wl@xen.org>
+> >> Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for =
+save/restore of 'domain' context
+> >>
+> >> Hi Paul,
+> >>
+> >> On 03/04/2020 16:55, Paul Durrant wrote:
+> >>>> -----Original Message-----
+> >>> [snip]
+> >>>>> +
+> >>>>> +#include <xen/save.h>
+> >>>>> +
+> >>>>> +struct domain_context {
+> >>>>> +    bool log;
+> >>>>> +    struct domain_save_descriptor desc;
+> >>>>> +    domain_copy_entry copy;
+> >>>>
+> >>>> As your new framework is technically an extension of existing =
+one, it
+> >>>> would be good to explain why we diverge in the definitions.
+> >>>>
+> >>>
+> >>> I don't follow. What is diverging? I explain in the commit comment =
+that this is a parallel
+> >> framework. Do I need to justify why it is not a carbon copy of the =
+HVM one?
+> >>
+> >> Well, they are both restoring/saving guest state. The only =
+difference is
+> >> the existing one is focusing on HVM state.
+> >>
+> >> So it would make sense long term to have only one hypercall and =
+tell
+> >> what you want to save. In fact, some of the improvement here would
+> >> definitely make the HVM one nicer to use (at least in the context =
+of LU).
+> >>
+> >
+> > I guess we could move the HVM save records over to the new =
+framework, but it works for the moment so
+> I don't want to bring it into scope now.
+>=20
+> And I agree, hence why I say "long term" :).
+>=20
+> >
+> >>   From the commit message, it is not clear to me why a new =
+framework and
+> >> why the infrastructure is at the same time different but not.
+> >>
+> >
+> > An alternative would be to move the HVM save code into common code =
+and then try to adapt it. I think
+> that would result in more code churn and ultimately be harder to =
+review. The extra infrastructure
+> introduced here is fairly minimal and, for the moment, only targeting =
+PV state. As I said above
+> there's nothing stopping the HVM records being ported over later once =
+any initial issues have been
+> shaken out.
+>=20
+> Code churn is always going to necessary one day or another if we want =
+to
+> consolidate the two.
+>=20
+> Having two frameworks is not without risks. There are a few unknown to
+> be answered:
+>    * Is there any dependency between the two? If yes, what is the =
+ordering?
 
-On 06/04/2020 09:27, Paul Durrant wrote:
->> -----Original Message-----
->> From: Julien Grall <julien@xen.org>
->> Sent: 03 April 2020 18:24
->> To: paul@xen.org; xen-devel@lists.xenproject.org
->> Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap' <george.dunlap@citrix.com>; 'Ian
->> Jackson' <ian.jackson@eu.citrix.com>; 'Jan Beulich' <jbeulich@suse.com>; 'Stefano Stabellini'
->> <sstabellini@kernel.org>; 'Wei Liu' <wl@xen.org>
->> Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for save/restore of 'domain' context
->>
->> Hi Paul,
->>
->> On 03/04/2020 16:55, Paul Durrant wrote:
->>>> -----Original Message-----
->>> [snip]
->>>>> +
->>>>> +#include <xen/save.h>
->>>>> +
->>>>> +struct domain_context {
->>>>> +    bool log;
->>>>> +    struct domain_save_descriptor desc;
->>>>> +    domain_copy_entry copy;
->>>>
->>>> As your new framework is technically an extension of existing one, it
->>>> would be good to explain why we diverge in the definitions.
->>>>
->>>
->>> I don't follow. What is diverging? I explain in the commit comment that this is a parallel
->> framework. Do I need to justify why it is not a carbon copy of the HVM one?
->>
->> Well, they are both restoring/saving guest state. The only difference is
->> the existing one is focusing on HVM state.
->>
->> So it would make sense long term to have only one hypercall and tell
->> what you want to save. In fact, some of the improvement here would
->> definitely make the HVM one nicer to use (at least in the context of LU).
->>
-> 
-> I guess we could move the HVM save records over to the new framework, but it works for the moment so I don't want to bring it into scope now.
+There isn't any dependency at the moment so need I say anything? If an =
+ordering dependency is introduced by a future patch then surely that =
+would be time to call it out.
 
-And I agree, hence why I say "long term" :).
+>    * The name of the hypercall does not say anything about "PV". So a
+> contributor could think it would be fine to save/restore new HVM state
+> in the new generic hypercall. Is it going to be an issue? If so, how =
+do
+> we prevent it?
 
-> 
->>   From the commit message, it is not clear to me why a new framework and
->> why the infrastructure is at the same time different but not.
->>
-> 
-> An alternative would be to move the HVM save code into common code and then try to adapt it. I think that would result in more code churn and ultimately be harder to review. The extra infrastructure introduced here is fairly minimal and, for the moment, only targeting PV state. As I said above there's nothing stopping the HVM records being ported over later once any initial issues have been shaken out.
+The commit message says:
 
-Code churn is always going to necessary one day or another if we want to 
-consolidate the two.
+"Domain context is state held in the hypervisor that does not come under
+the category of 'HVM state' but is instead 'PV state' that is common
+between PV guests and enlightened HVM guests (i.e. those that have PV
+drivers) such as event channel state, grant entry state, etc."
 
-Having two frameworks is not without risks. There are a few unknown to 
-be answered:
-   * Is there any dependency between the two? If yes, what is the ordering?
-   * The name of the hypercall does not say anything about "PV". So a 
-contributor could think it would be fine to save/restore new HVM state 
-in the new generic hypercall. Is it going to be an issue? If so, how do 
-we prevent it?
-   * Are we going to deprecate the existing framework?
+Do you think this should also appear in a comment? Do we really care? =
+Nothing fundamentally prevents the mechanism being used for HVM state, =
+but that may introduce an ordering dependency.
 
-I am not suggesting we should not go with two frameworks, but the 
-reasons and implications are not clear to me. Hence, why I think the 
-commit message should be expanded with some rationale.
+>    * Are we going to deprecate the existing framework?
+>=20
 
-Cheers,
+There is no intention as yet.
 
--- 
-Julien Grall
+> I am not suggesting we should not go with two frameworks, but the
+> reasons and implications are not clear to me. Hence, why I think the
+> commit message should be expanded with some rationale.
+>=20
+
+Ok, I can add a paragraph to try to explain a little more.
+
+  Paul
+
 
