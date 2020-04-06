@@ -2,77 +2,54 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3292EC2BA19
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 09:51:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1BF0C2BA19
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 10:18:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E5F7E206F5
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 09:51:25 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="zJweDKdP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E5F7E206F5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 98B142054F
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 10:18:05 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 98B142054F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLOP3-0002nq-CP; Mon, 06 Apr 2020 09:50:49 +0000
+	id 1jLOp8-0004ep-JC; Mon, 06 Apr 2020 10:17:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=glNc=5W=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jLOP2-0002nl-QF
- for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 09:50:48 +0000
-X-Inumbo-ID: 16ac21d0-77ec-11ea-bfdb-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=leFb=5W=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jLOp7-0004ek-N7
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 10:17:45 +0000
+X-Inumbo-ID: dabc0007-77ef-11ea-bfdc-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 16ac21d0-77ec-11ea-bfdb-12813bfff9fa;
- Mon, 06 Apr 2020 09:50:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=0W92GQ2KYsJSiOqtNt+eIN9zwerXYnj/05lFW5sQ33w=; b=zJweDKdPZIbIWPejE4PqQZHMGc
- UR//5z6uNReRTONq/jpiIt6HETG2X6eMgma8M6uex5z2wFIAjTIVPPTq0IFRxvVSx//RCSG+NyLzm
- YFxEB+gDeQELsCTpaBJ6qLtl0crEHkZTjPac/ebAj+EEY2UINN5BWZZXn8hCj00fFEgA=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jLOOw-0006FR-Rk; Mon, 06 Apr 2020 09:50:42 +0000
-Received: from 54-240-197-231.amazon.com ([54.240.197.231]
- helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jLOOw-0000aC-GJ; Mon, 06 Apr 2020 09:50:42 +0000
-Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for
- save/restore of 'domain' context
-To: paul@xen.org, xen-devel@lists.xenproject.org
-References: <20200327185012.1795-1-paul@xen.org>
- <20200327185012.1795-2-paul@xen.org>
- <5a26a89a-6422-b41d-daac-8f33a48ae23b@xen.org>
- <002201d609d0$55a76690$00f633b0$@xen.org>
- <acd5fee0-2bf6-4573-8467-38d24827ca1f@xen.org>
- <001701d60bed$25606f80$70214e80$@xen.org>
- <e2e25069-36e5-b965-8f66-59a460369e88@xen.org>
- <002701d60bf4$4b640460$e22c0d20$@xen.org>
-From: Julien Grall <julien@xen.org>
-Message-ID: <ac273b12-36f4-ca5c-c18b-7a59d2b84e2e@xen.org>
-Date: Mon, 6 Apr 2020 10:50:40 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ id dabc0007-77ef-11ea-bfdc-12813bfff9fa;
+ Mon, 06 Apr 2020 10:17:44 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 7AE66AC11;
+ Mon,  6 Apr 2020 10:17:42 +0000 (UTC)
+Subject: Re: [PATCH v2] tools/libxl: make default of max event channels
+ dependant on vcpus
+To: Julien Grall <julien@xen.org>, xen-devel@lists.xenproject.org
+References: <20200406082704.13994-1-jgross@suse.com>
+ <afc7e988-3b51-bbee-cba8-af30a7605dc4@xen.org>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <d1b095db-064e-bccf-b55d-d85fecb3045a@suse.com>
+Date: Mon, 6 Apr 2020 12:17:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <002701d60bf4$4b640460$e22c0d20$@xen.org>
+In-Reply-To: <afc7e988-3b51-bbee-cba8-af30a7605dc4@xen.org>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -83,141 +60,85 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, 'Wei Liu' <wl@xen.org>,
- 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>, 'Jan Beulich' <jbeulich@suse.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Paul,
+On 06.04.20 11:24, Julien Grall wrote:
+> Hi Jurgen,
+> 
+> On 06/04/2020 09:27, Juergen Gross wrote:
+>> Since Xen 4.4 the maximum number of event channels for a guest is
+>> defaulting to 1023. For large guests with lots of vcpus this is not
+>> enough, as e.g. the Linux kernel uses 7 event channels per vcpu,
+>> limiting the guest to about 140 vcpus.
+> 
+> Large guests on which arch? Which type of guests?
 
-On 06/04/2020 10:18, Paul Durrant wrote:
->> -----Original Message-----
->> From: Julien Grall <julien@xen.org>
->> Sent: 06 April 2020 10:08
->> To: paul@xen.org; xen-devel@lists.xenproject.org
->> Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap' <george.dunlap@citrix.com>; 'Ian
->> Jackson' <ian.jackson@eu.citrix.com>; 'Jan Beulich' <jbeulich@suse.com>; 'Stefano Stabellini'
->> <sstabellini@kernel.org>; 'Wei Liu' <wl@xen.org>
->> Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for save/restore of 'domain' context
+I'm pretty sure this applies to x86 only. I'm not aware of event
+channels being used on ARM for IPIs.
+
+> 
+>> Instead of requiring to specify the allowed number of event channels
+>> via the "event_channels" domain config option, make the default
+>> depend on the maximum number of vcpus of the guest. This will require
+>> to use the "event_channels" domain config option in fewer cases as
+>> before.
 >>
->> Hi Paul,
+>> As different guests will have differing needs the calculation of the
+>> maximum number of event channels can be a rough estimate only,
+>> currently based on the Linux kernel requirements.
+> 
+> I am not overly happy to extend the default numbers of event channels 
+> for everyone based on Linux behavior on a given setup. Yes you have more 
+> guests that would be able to run, but at the expense of allowing a guest 
+> to use more xen memory.
+
+The resulting number would be larger than today only for guests with
+more than 96 vcpus. So I don't think the additional amount of memory
+is really that problematic.
+
+> 
+> For instance, I don't think this limit increase is necessary on Arm.
+> 
+>> Nevertheless it is
+>> much better than the static upper limit of today as more guests will
+>> boot just fine with the new approach.
 >>
->> On 06/04/2020 09:27, Paul Durrant wrote:
->>>> -----Original Message-----
->>>> From: Julien Grall <julien@xen.org>
->>>> Sent: 03 April 2020 18:24
->>>> To: paul@xen.org; xen-devel@lists.xenproject.org
->>>> Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>; 'George Dunlap' <george.dunlap@citrix.com>; 'Ian
->>>> Jackson' <ian.jackson@eu.citrix.com>; 'Jan Beulich' <jbeulich@suse.com>; 'Stefano Stabellini'
->>>> <sstabellini@kernel.org>; 'Wei Liu' <wl@xen.org>
->>>> Subject: Re: [PATCH 1/5] xen/common: introduce a new framework for save/restore of 'domain' context
->>>>
->>>> Hi Paul,
->>>>
->>>> On 03/04/2020 16:55, Paul Durrant wrote:
->>>>>> -----Original Message-----
->>>>> [snip]
->>>>>>> +
->>>>>>> +#include <xen/save.h>
->>>>>>> +
->>>>>>> +struct domain_context {
->>>>>>> +    bool log;
->>>>>>> +    struct domain_save_descriptor desc;
->>>>>>> +    domain_copy_entry copy;
->>>>>>
->>>>>> As your new framework is technically an extension of existing one, it
->>>>>> would be good to explain why we diverge in the definitions.
->>>>>>
->>>>>
->>>>> I don't follow. What is diverging? I explain in the commit comment that this is a parallel
->>>> framework. Do I need to justify why it is not a carbon copy of the HVM one?
->>>>
->>>> Well, they are both restoring/saving guest state. The only difference is
->>>> the existing one is focusing on HVM state.
->>>>
->>>> So it would make sense long term to have only one hypercall and tell
->>>> what you want to save. In fact, some of the improvement here would
->>>> definitely make the HVM one nicer to use (at least in the context of LU).
->>>>
->>>
->>> I guess we could move the HVM save records over to the new framework, but it works for the moment so
->> I don't want to bring it into scope now.
+>> In order not to regress current configs use 1023 as the minimum
+>> default setting.
 >>
->> And I agree, hence why I say "long term" :).
+>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>> ---
+>> V2:
+>> - use max() instead of min()
+>> - clarify commit message a little bit
+>> ---
+>>   tools/libxl/libxl_create.c | 2 +-
+> 
+> The documentation should be updated.
+
+Oh, indeed.
+
+> 
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
 >>
->>>
->>>>    From the commit message, it is not clear to me why a new framework and
->>>> why the infrastructure is at the same time different but not.
->>>>
->>>
->>> An alternative would be to move the HVM save code into common code and then try to adapt it. I think
->> that would result in more code churn and ultimately be harder to review. The extra infrastructure
->> introduced here is fairly minimal and, for the moment, only targeting PV state. As I said above
->> there's nothing stopping the HVM records being ported over later once any initial issues have been
->> shaken out.
->>
->> Code churn is always going to necessary one day or another if we want to
->> consolidate the two.
->>
->> Having two frameworks is not without risks. There are a few unknown to
->> be answered:
->>     * Is there any dependency between the two? If yes, what is the ordering?
+>> diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
+>> index e7cb2dbc2b..c025b21894 100644
+>> --- a/tools/libxl/libxl_create.c
+>> +++ b/tools/libxl/libxl_create.c
+>> @@ -226,7 +226,7 @@ int libxl__domain_build_info_setdefault(libxl__gc 
+>> *gc,
+>>               b_info->iomem[i].gfn = b_info->iomem[i].start;
+>>       if (!b_info->event_channels)
+>> -        b_info->event_channels = 1023;
+>> +        b_info->event_channels = max(1023, b_info->max_vcpus * 8 + 255);
 > 
-> There isn't any dependency at the moment so need I say anything? If an ordering dependency is introduced by a future patch then surely that would be time to call it out.
+> What is the 255 for?
 
-If we don't spell out a dependency now, then the risk is we have to 
-modify the toolstack at the same time as spelling out the dependency.
+Just some headroom for e.g. pv devices.
 
-I am not sure whether this matters thought. This would only affect the 
-save part as the restore part should be just reading records one by one.
 
-> 
->>     * The name of the hypercall does not say anything about "PV". So a
->> contributor could think it would be fine to save/restore new HVM state
->> in the new generic hypercall. Is it going to be an issue? If so, how do
->> we prevent it?
-> 
-> The commit message says:
-> 
-> "Domain context is state held in the hypervisor that does not come under
-> the category of 'HVM state' but is instead 'PV state' that is common
-> between PV guests and enlightened HVM guests (i.e. those that have PV
-> drivers) such as event channel state, grant entry state, etc."
-
-This does not seem to cover all the cases. For instance, where would you 
-save IOREQ servers information?
-
-> 
-> Do you think this should also appear in a comment? Do we really care? Nothing fundamentally prevents the mechanism being used for HVM state, but that may introduce an ordering dependency.
-
-I don't particularly like the idea to let the contributor decide where 
-"HVM context" or as part of the "Domain context".
-
-This is  going to result to unwanted dependency and possibly 
-bikeshedding on where they should be saved.
-
-My preference would be to mark the existing framework as deprecated and 
-force all the new states to be saved as part of the new "Domain Context".
-
-> 
->>     * Are we going to deprecate the existing framework?
->>
-> 
-> There is no intention as yet.
-> 
->> I am not suggesting we should not go with two frameworks, but the
->> reasons and implications are not clear to me. Hence, why I think the
->> commit message should be expanded with some rationale.
->>
-> 
-> Ok, I can add a paragraph to try to explain a little more.
-
-That would be appreciated. Thank you!
-
-Cheers,
-
--- 
-Julien Grall
+Juergen
 
