@@ -2,76 +2,57 @@ Return-Path: <SRS0=VfOS=5W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-1.2 required=3.0 tests=DATE_IN_PAST_03_06,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 084CCC2BA17
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:32:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7027C2BA17
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:35:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CEA7020672
-	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:32:02 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="q7Vu5Mbn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CEA7020672
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id A4CB120672
+	for <xen-devel@archiver.kernel.org>; Mon,  6 Apr 2020 17:35:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A4CB120672
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLVbB-0001EI-3U; Mon, 06 Apr 2020 17:31:49 +0000
+	id 1jLVeP-0001OU-KY; Mon, 06 Apr 2020 17:35:09 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=t1eN=5W=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1jLVb9-0001ED-Vq
- for xen-devel@lists.xen.org; Mon, 06 Apr 2020 17:31:48 +0000
-X-Inumbo-ID: 7d90057a-782c-11ea-9e09-bc764e2007e4
-Received: from mail-wm1-x343.google.com (unknown [2a00:1450:4864:20::343])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=8YOW=5W=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jLVeO-0001OO-Jx
+ for xen-devel@lists.xenproject.org; Mon, 06 Apr 2020 17:35:08 +0000
+X-Inumbo-ID: f522e4a4-782c-11ea-83d8-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7d90057a-782c-11ea-9e09-bc764e2007e4;
- Mon, 06 Apr 2020 17:31:47 +0000 (UTC)
-Received: by mail-wm1-x343.google.com with SMTP id j19so166986wmi.2
- for <xen-devel@lists.xen.org>; Mon, 06 Apr 2020 10:31:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=QtQEmnvIRNjTWAGtotK8vr5aL1WEPMTRa/UAOoQ/pSk=;
- b=q7Vu5MbnAyAdq/X/v95seSyLeDOQk8rxYf+a67Xnw4wEm5iwv2I9i+vchjZoNsEHgD
- du9Y9hb9L/kmiuRzQaWSv2efPtKcOoTFKkuVfmzR4uFlEHCVI3geAXV/w/G7F7Nr+yax
- U5FSg0SxRBKqOQhmPv/MoQxkm9nRYLlYhfgCFO0UDFKkLA+aRro7pRIbqxASFisOATFh
- 0yNIeDS7PY7mYo4r+ZHcSgJcZtY6sbKvTcQ/GSrtkiCmZh0EVubXhadxbImZoxKfB44c
- qdDTY2AUETLxAWoincuEiBYClnfsjOg2BnKQigVyOgByxLgiDzJJ+BXHb6uzqQyHGI/2
- ZQOA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=QtQEmnvIRNjTWAGtotK8vr5aL1WEPMTRa/UAOoQ/pSk=;
- b=ATXo26cFknS9/jxheynSbV/DGAbt6w14G4B/zr9lBdf+X6gjubRFdu3ixxkP8/SFOa
- 1p9hF/j7PAukkwjmADJU0/D28BbSdDvyG9KbhccCuPLoeFTm1DdRcWhODP2MG142t+m6
- Hk/HpYbwQxBU/0RyJq3JSVjc4MVcmipve3BfHmkNTMo3jqlGnEyD+ZnNEVhnbpwclws+
- DHkM5JJ1VJEOCb1FuMq/V3bFgSyC7YZMuU++gXiwU5M/KltwGviOdIW+oiqkT3rgbSbB
- pL37Ys/2dVwTKuKaMoFfZgVCk64TD0vlxAFSmZCHYc6wSxMwhiSGyJ0Ipb3XqwSh8loD
- 202g==
-X-Gm-Message-State: AGi0PuYCN5niYOOmx5mvpcuhXdXBuVyw5EJn9czqdWcfP4cLH9JLGLrx
- r11QQMtGc8k3VvBYFKtSXhpq2pKEvSmKSzkr004=
-X-Google-Smtp-Source: APiQypIbzVcQhtuKPx/sWYXqksN+tCLZDAk0hzlSjQiNX5GtwWG/GDjtfexjX56TkPBmMZS9LXKn4lmLqLhrYWNb/MQ=
-X-Received: by 2002:a7b:c842:: with SMTP id c2mr457489wml.154.1586194306477;
- Mon, 06 Apr 2020 10:31:46 -0700 (PDT)
+ id f522e4a4-782c-11ea-83d8-bc764e2007e4;
+ Mon, 06 Apr 2020 17:35:08 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 73AD1C1AA;
+ Mon,  6 Apr 2020 17:35:05 +0000 (UTC)
+Subject: Re: [PATCH v7 08/12] xen: add /buildinfo/config entry to hypervisor
+ filesystem
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+References: <20200402154616.16927-1-jgross@suse.com>
+ <20200402154616.16927-9-jgross@suse.com>
+ <19f84540-6b49-f99d-805a-e07f56330f31@suse.com>
+ <b9ddd1fb-d868-bb69-3b6b-27531beda2fa@suse.com>
+ <f7d1f3aa-3a7e-fcb2-3163-5e67756e8452@suse.com>
+ <17d65095-a51e-2e00-38ee-7c1c83d2bb99@suse.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <51e0f0d2-f9ce-83fd-79fa-ae4805356612@suse.com>
+Date: Mon, 6 Apr 2020 14:29:22 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-References: <CABB6KG-UCdPTa3yM57JB13G=Yebe8chuQKvKkNbtoGRSZ9Ypsw@mail.gmail.com>
- <a8c56ab0-bc51-fa1c-c63f-cb9ada8a1823@citrix.com>
- <CABfawhn_hw=o5j+G9VfqPK6opytqt=q2-cz4GjNgCTA5zBvNrA@mail.gmail.com>
- <6bb7eb58-01c6-00e4-672e-83d5fcb87ea0@citrix.com>
-In-Reply-To: <6bb7eb58-01c6-00e4-672e-83d5fcb87ea0@citrix.com>
-From: Tamas K Lengyel <tamas.k.lengyel@gmail.com>
-Date: Mon, 6 Apr 2020 11:31:10 -0600
-Message-ID: <CABfawh=6z-pxgrj1M3JbG-9H=iR78rTwt8+MUf_6-Sd5kqyhdA@mail.gmail.com>
-Subject: Re: Live migration and PV device handling
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <17d65095-a51e-2e00-38ee-7c1c83d2bb99@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -82,54 +63,69 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xen.org>,
- Anastassios Nanos <anastassios.nanos@sunlight.io>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, Apr 6, 2020 at 11:24 AM Andrew Cooper <andrew.cooper3@citrix.com> wrote:
->
-> On 06/04/2020 18:16, Tamas K Lengyel wrote:
-> > On Fri, Apr 3, 2020 at 6:44 AM Andrew Cooper <andrew.cooper3@citrix.com> wrote:
-> >> On 03/04/2020 13:32, Anastassios Nanos wrote:
-> >>> Hi all,
-> >>>
-> >>> I am trying to understand how live-migration happens in xen. I am
-> >>> looking in the HVM guest case and I have dug into the relevant parts
-> >>> of the toolstack and the hypervisor regarding memory, vCPU context
-> >>> etc.
-> >>>
-> >>> In particular, I am interested in how PV device migration happens. I
-> >>> assume that the guest is not aware of any suspend/resume operations
-> >>> being done
-> >> Sadly, this assumption is not correct.  HVM guests with PV drivers
-> >> currently have to be aware in exactly the same way as PV guests.
-> >>
-> >> Work is in progress to try and address this.  See
-> >> https://xenbits.xen.org/gitweb/?p=xen.git;a=commitdiff;h=775a02452ddf3a6889690de90b1a94eb29c3c732
-> >> (sorry - for some reason that doc isn't being rendered properly in
-> >> https://xenbits.xen.org/docs/ )
-> > That proposal is very interesting - first time it came across my radar
-> > - but I dislike the idea that domain IDs need to be preserved for
-> > uncooperative migration to work.
->
-> The above restriction is necessary to work with existing guests, which
-> is an implementation requirement of the folks driving the work.
->
-> > Ideally I would be able to take
-> > advantage of the same plumbing to perform forking of VMs with PV
-> > drivers where preserving the domain id is impossible since its still
-> > in use.
->
-> We would of course like to make changes to remove the above restriction
-> in the longterm.  The problem is that it is not a trivial thing to fix.
-> Various things were discussed in Chicago, but I don't recall if any of
-> the plans made their way onto xen-devel.
+On 03.04.2020 17:45, Jürgen Groß wrote:
+> On 03.04.20 17:33, Jan Beulich wrote:
+>> On 03.04.2020 17:12, Jürgen Groß wrote:
+>>> On 03.04.20 16:31, Jan Beulich wrote:
+>>>> On 02.04.2020 17:46, Juergen Gross wrote:
+>>>>> --- a/xen/common/Kconfig
+>>>>> +++ b/xen/common/Kconfig
+>>>>> @@ -353,6 +353,16 @@ config DOM0_MEM
+>>>>>            Leave empty if you are not sure what to specify.
+>>>>>    +config HYPFS_CONFIG
+>>>>> +    bool "Provide hypervisor .config via hypfs entry"
+>>>>> +    default y
+>>>>
+>>>> My initial reaction was to ask for "depends on HYPFS", but then
+>>>> I noticed the earlier patch doesn't introduce such. Am I
+>>>> mis-remembering that it was agreed to make the whole thing
+>>>> possible to disable at least in EXPERT mode?
+>>>
+>>> No, I don't remember that agreement.
+>>>
+>>> And TBH I'm not sure this is a good idea, as that would at once make the
+>>> plan to replace at least some sysctl and/or domctl interfaces impossible
+>>> (like e.g. the last 3 patches of the series are doing already), or at
+>>> least would tie the related functionality to CONFIG_HYPFS.
+>>
+>> I think that would be fine - that's what config setting are for.
+>> Someone caring about space may not care about runtime setting of
+>> parameters.
+> 
+> So right now it would start with a plain hypfs available or not.
+> 
+> The next step would be in patch 12 to tell the user he will lose the
+> capability of setting runtime parameters.
+> 
+> Another planned extension would be to control per-cpupool settings,
+> which would the go away (possibly functionality being unconditionally
+> available today).
+> 
+> Next would be the lack of being able to control per-domain mitigations
+> like XPTI or L1TF, which I'd like to add.
+> 
+> Another thing I wanted to add is some debugging stuff (e.g. to switch
+> lock profiling using hypfs).
+> 
+> And the list will go on.
 
-Yea I imagine trying to get this to work with existing PV drivers is
-not possible in any other way. But if we can update the PV driver code
-such that in the longterm it can work without preserving the domain
-ID, that would be worthwhile.
+Understood.
 
-Tamas
+> Does it really make sense to make a central control and information
+> interface conditional?
+
+None of the above may be of interest to e.g. embedded use cases.
+
+> I'd like at least a second opinion on that topic.
+
+Yes, further opinions would surely help.
+
+Jan
 
