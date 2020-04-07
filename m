@@ -2,69 +2,65 @@ Return-Path: <SRS0=FJpJ=5X=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9CA32C2BA1A
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 17:39:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 804E9C2BA1A
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 17:39:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6E84E20857
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 17:39:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4D3B92082F
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 17:39:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Gi9kP/nX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E84E20857
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="q+0mrVus"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4D3B92082F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLsBP-0000rE-Ou; Tue, 07 Apr 2020 17:38:43 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jLsBd-0000sT-0y; Tue, 07 Apr 2020 17:38:57 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=SCBO=5X=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jLsBO-0000r9-H6
- for xen-devel@lists.xenproject.org; Tue, 07 Apr 2020 17:38:42 +0000
-X-Inumbo-ID: 9f5e1a6e-78f6-11ea-b4f4-bc764e2007e4
+ (envelope-from <SRS0=ZKm6=5X=xen.org=paul@srs-us1.protection.inumbo.net>)
+ id 1jLsBb-0000sG-87
+ for xen-devel@lists.xenproject.org; Tue, 07 Apr 2020 17:38:55 +0000
+X-Inumbo-ID: a686552c-78f6-11ea-8122-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9f5e1a6e-78f6-11ea-b4f4-bc764e2007e4;
- Tue, 07 Apr 2020 17:38:42 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a686552c-78f6-11ea-8122-12813bfff9fa;
+ Tue, 07 Apr 2020 17:38:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=mTUhw75EAcIsBdxvOhBuDMN2uHNORvVO9OdgrVxBkgI=; b=Gi9kP/nXnKoRQLfOY5k33XING8
- j7Kx8WyZqCsmNzdsoAIFN/IEQ/s14uQK+6oOz8guPSiqK+pilHZHy3Hpp3pNn/smrSHO7o5GLsqDk
- 0c0U+vpzfaaBYyXHlfTmq4nHboqnZ6uo8buX8XXn4NMLCRQJuc293rKcEa1FSq91WJwM=;
+ bh=eiF4aa0zQ/96ZjFZ+g49/zBFkKngySOJIsCL/9n+Y/o=; b=q+0mrVusowxJha5vrF842VlQF3
+ XNpEvAyfh4gHdVzrqProQu6c7omtRkAjdWPOwOgGcGrOQrFevh8xnrNOA2UM4DvbULwYuCk/cSMj+
+ gzDZhwSZkSWl57A9+YuaxCM63fGCsaIfKOOwNDtkAbNH1Fw2/ocd86OYu9AJnbiNxt2k=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jLsBK-0000JQ-8f; Tue, 07 Apr 2020 17:38:38 +0000
-Received: from 54-240-197-236.amazon.com ([54.240.197.236]
- helo=a483e7b01a66.ant.amazon.com)
+ (envelope-from <paul@xen.org>)
+ id 1jLsBW-0000Ja-VB; Tue, 07 Apr 2020 17:38:50 +0000
+Received: from 54-240-197-232.amazon.com ([54.240.197.232]
+ helo=u2f063a87eabd5f.cbg10.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jLsBJ-00087A-Ve; Tue, 07 Apr 2020 17:38:38 +0000
-Subject: Re: [PATCH] MAINTAINERS: Remove all S: entries
-To: Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
-References: <20200407161519.16493-1-ian.jackson@eu.citrix.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <e768f715-7d39-539d-f44f-863f9bff0576@xen.org>
-Date: Tue, 7 Apr 2020 18:38:36 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ (envelope-from <paul@xen.org>)
+ id 1jLsBW-00088J-Le; Tue, 07 Apr 2020 17:38:50 +0000
+From: Paul Durrant <paul@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v2 0/5] domain context infrastructure
+Date: Tue,  7 Apr 2020 18:38:42 +0100
+Message-Id: <20200407173847.1595-1-paul@xen.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20200407161519.16493-1-ian.jackson@eu.citrix.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -75,46 +71,68 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi,
+From: Paul Durrant <pdurrant@amazon.com>
 
-On 07/04/2020 17:15, Ian Jackson wrote:
-> Feature support status is tracked in SUPPORT.md nowadays.
+Paul Durrant (5):
+  xen/common: introduce a new framework for save/restore of 'domain'
+    context
+  xen/common/domctl: introduce XEN_DOMCTL_get/setdomaincontext
+  tools/misc: add xen-domctx to present domain context
+  common/domain: add a domain context record for shared_info...
+  tools/libxc: make use of domain context SHARED_INFO record...
 
-I don't think we track everything the same way. At least...
-
-> 
-> Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
-> ---
->   MAINTAINERS | 60 ------------------------------------------------------------
->   1 file changed, 60 deletions(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 8a4c869704..e784169d1b 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -69,16 +69,6 @@ Descriptions of section entries:
->   	L: Mailing list that is relevant to this area
->   	W: Web-page with status/info
->   	T: SCM tree type and location.  Type is one of: git, hg, quilt, stgit.
-> -	S: Status, one of the following:
-> -	   Supported:	Someone is actually paid to look after this.
-> -	   Maintained:	Someone actually looks after it.
-
-... we don't have a way to track code that are maintained but no-one is 
-paid.
-
-IHMO, this is an important to track as a contributor should not expect 
-the same level of support between someone that is paid for it and 
-someone that is not.
-
-Cheers,
-
+ .gitignore                             |   1 +
+ tools/flask/policy/modules/xen.if      |   4 +-
+ tools/libxc/include/xenctrl.h          |   5 +
+ tools/libxc/xc_domain.c                |  54 ++++
+ tools/libxc/xc_sr_common.h             |   7 +-
+ tools/libxc/xc_sr_common_x86.c         |  59 +++++
+ tools/libxc/xc_sr_common_x86.h         |   4 +
+ tools/libxc/xc_sr_common_x86_pv.c      |  53 ++++
+ tools/libxc/xc_sr_common_x86_pv.h      |   3 +
+ tools/libxc/xc_sr_restore_x86_pv.c     |  40 ++-
+ tools/libxc/xc_sr_save_x86_pv.c        |  26 +-
+ tools/libxc/xg_save_restore.h          |   1 +
+ tools/misc/Makefile                    |   4 +
+ tools/misc/xen-domctx.c                | 156 ++++++++++++
+ xen/common/Makefile                    |   1 +
+ xen/common/domain.c                    |  81 ++++++
+ xen/common/domctl.c                    | 117 +++++++++
+ xen/common/save.c                      | 329 +++++++++++++++++++++++++
+ xen/include/public/arch-arm/hvm/save.h |   5 +
+ xen/include/public/arch-x86/hvm/save.h |   5 +
+ xen/include/public/domctl.h            |  44 +++-
+ xen/include/public/save.h              |  92 +++++++
+ xen/include/xen/save.h                 | 152 ++++++++++++
+ xen/xsm/flask/hooks.c                  |   6 +
+ xen/xsm/flask/policy/access_vectors    |   4 +
+ 25 files changed, 1201 insertions(+), 52 deletions(-)
+ create mode 100644 tools/misc/xen-domctx.c
+ create mode 100644 xen/common/save.c
+ create mode 100644 xen/include/public/save.h
+ create mode 100644 xen/include/xen/save.h
+---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: Wei Liu <wl@xen.org>
 -- 
-Julien Grall
+2.20.1
+
 
