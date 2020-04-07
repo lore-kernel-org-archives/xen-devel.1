@@ -2,45 +2,45 @@ Return-Path: <SRS0=FJpJ=5X=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+X-Spam-Status: No, score=-8.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14796C2BA2B
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5435BC2BA80
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:23:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D67E02072F
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:23:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 214B52072F
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:23:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NAlyRtDB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D67E02072F
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TAzEuqla"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 214B52072F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLq3z-0005e5-0Q; Tue, 07 Apr 2020 15:22:55 +0000
+	id 1jLq3t-0005dh-O2; Tue, 07 Apr 2020 15:22:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=DsZW=5X=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jLq3x-0005dz-0b
- for xen-devel@lists.xenproject.org; Tue, 07 Apr 2020 15:22:53 +0000
-X-Inumbo-ID: a3390742-78e3-11ea-b58d-bc764e2007e4
+ id 1jLq3s-0005dc-4M
+ for xen-devel@lists.xenproject.org; Tue, 07 Apr 2020 15:22:48 +0000
+X-Inumbo-ID: a2714d88-78e3-11ea-b58d-bc764e2007e4
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a3390742-78e3-11ea-b58d-bc764e2007e4;
- Tue, 07 Apr 2020 15:22:48 +0000 (UTC)
+ id a2714d88-78e3-11ea-b58d-bc764e2007e4;
+ Tue, 07 Apr 2020 15:22:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=citrix.com; s=securemail; t=1586272967;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=Qg827KIvdKEzs6jvNwGqMNXyL08iW2Xpsw7/s+ZIo+U=;
- b=NAlyRtDBCStIB2MhWCpu9WXHiCFu58eFDpy9cpRVUYxy0ZO6dd8nx5sZ
- Uvoo+r5bOPZhovwYzSQa6BlRgqQ3TXTGrdxVxqyUUXwAdcPdMeNVuwo8/
- SIWFb4LCUC2UwY12IlDjEzSy4buv4DMelBjK3GlC1pKfn0yDp5pmvw0+G I=;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=p4pqrvqLWTeQJ2N/iED4+aXuC2skShBJ4HGL3c8YB1Y=;
+ b=TAzEuqlaknaOmP2fRZRgeyybFDHw8gYHvdWaiXLiASbPrzvdoxgm2h3Y
+ dmij6fRihwTThCBRtDvTPW26POTmyOAcg9kaiQ9obpe9FiMf2pBVAGgaP
+ 85vYxdYbAyQWP6UNs1sV2kB/X3DJVZgIEdELuWoTVl0W1YPybMmx2gEDu Q=;
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
@@ -72,25 +72,23 @@ Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: kEEUF3m5QJdGP+nVunsvGYsRB0qPKBIMKb/0kGJ3Ad5qvTmdLxzqw07ltbH+HjkMS71Lrl6qAZ
- yaqI6F3eG7Ljvf+RIJ4y5SPiYNj2f/YSQoguctmkfywB1hHd8dYISMCx2YiySk4t6THD2BQCLP
- knLe7MnbkruiyE3zrnKMGimmjyRfL/DuVm0FlJIL58nV+zkLXePqoukx+rwJVM+fHTfww1YqlB
- xHvSG8Zx8+xBzBZrflAGWY1Q724URub+FE+lbwk29Fg0NiOIHzB4pSav/fbtBaxYHZbvF4WFqP
- 4ps=
+IronPort-SDR: 5+opBNhuKZjxrRGFQXvAaJMdbcrJU69J57N5qV2v5aq49GjtbNrkEyM5Jmgq3OiYKidpOMYe78
+ wdi0th0m74HMsZ7tDLtfOBtLwmPvmz0Ne4665Fi9FXXkm0HXsaK6t2IsYaREOpq50ZCa7emJ4V
+ iSQCYz0wsi/QRa8stCQJtuca3iMxokWAcCbU99E+KIN4cgvgRWNz1HfbldysuqtLyP3XY7bGew
+ zXEAgcrWH4Dd1EK2yrTr0GMlWofR2KN1vO+FUBzk2cxYdaNg490IcIBRXUVUWOCAChZGbiiZGL
+ 56Q=
 X-SBRS: 2.7
-X-MesageID: 15974527
+X-MesageID: 15974520
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,355,1580792400"; d="scan'208";a="15974527"
+X-IronPort-AV: E=Sophos;i="5.72,355,1580792400"; d="scan'208";a="15974520"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <qemu-devel@nongnu.org>
-Subject: [PULL 2/3] xen-block: Fix uninitialized variable
-Date: Tue, 7 Apr 2020 16:22:36 +0100
-Message-ID: <20200407152237.1468704-3-anthony.perard@citrix.com>
+Subject: [PULL 0/3] xen queue for 5.0
+Date: Tue, 7 Apr 2020 16:22:34 +0100
+Message-ID: <20200407152237.1468704-1-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.26.0
-In-Reply-To: <20200407152237.1468704-1-anthony.perard@citrix.com>
-References: <20200407152237.1468704-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -108,34 +106,35 @@ Cc: Peter Maydell <peter.maydell@linaro.org>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Since 7f5d9b206d1e ("object-add: don't create return value if
-failed"), qmp_object_add() don't write any value in 'ret_data', thus
-has random data. Then qobject_unref() fails and abort().
+The following changes since commit 8f0d25c464a1989d606f7b988d07b1147dfcde33:
 
-Fix by initialising 'ret_data' properly.
+  Merge remote-tracking branch 'remotes/philmd-gitlab/tags/acceptance-fixes-20200407' into staging (2020-04-07 15:10:11 +0100)
 
-Fixes: 5f07c4d60d09 ("qapi: Flatten object-add")
-Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
-Reviewed-by: Markus Armbruster <armbru@redhat.com>
-Message-Id: <20200406164207.1446817-1-anthony.perard@citrix.com>
----
- hw/block/xen-block.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+are available in the Git repository at:
 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 07bb32e22b51..99cb4c67cb09 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -860,7 +860,7 @@ static XenBlockIOThread *xen_block_iothread_create(const char *id,
-     XenBlockIOThread *iothread = g_new(XenBlockIOThread, 1);
-     Error *local_err = NULL;
-     QDict *opts;
--    QObject *ret_data;
-+    QObject *ret_data = NULL;
- 
-     iothread->id = g_strdup(id);
- 
--- 
-Anthony PERARD
+  https://xenbits.xen.org/git-http/people/aperard/qemu-dm.git tags/pull-xen-20200407
 
+for you to fetch changes up to 758af9cfabfb000eb00e42b9738e655b18fdd812:
+
+  MAINTAINERS: Add xen-usb.c to Xen section (2020-04-07 16:13:26 +0100)
+
+----------------------------------------------------------------
+Xen queue for QEMU 5.0
+
+- Fix for xen-block.
+- A fix for a Coverity false positive in xen-usb.
+- Update MAINTAINERS to add xen-usb.c to Xen section.
+
+----------------------------------------------------------------
+Anthony PERARD (2):
+      xen-block: Fix uninitialized variable
+      MAINTAINERS: Add xen-usb.c to Xen section
+
+Peter Maydell (1):
+      hw/usb/xen-usb.c: Pass struct usbback_req* to usbback_packet_complete()
+
+ MAINTAINERS          |  1 +
+ hw/block/xen-block.c |  2 +-
+ hw/usb/xen-usb.c     | 10 ++++------
+ 3 files changed, 6 insertions(+), 7 deletions(-)
 
