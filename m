@@ -2,56 +2,98 @@ Return-Path: <SRS0=FJpJ=5X=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C77FC2BA2B
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:14:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 14796C2BA2B
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:23:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7AD5820692
-	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:14:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AD5820692
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id D67E02072F
+	for <xen-devel@archiver.kernel.org>; Tue,  7 Apr 2020 15:23:08 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NAlyRtDB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D67E02072F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jLpw2-0004n2-SM; Tue, 07 Apr 2020 15:14:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=71dA=5X=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jLpw1-0004mx-MW
- for xen-devel@lists.xenproject.org; Tue, 07 Apr 2020 15:14:41 +0000
-X-Inumbo-ID: 80bd6268-78e2-11ea-80ea-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 80bd6268-78e2-11ea-80ea-12813bfff9fa;
- Tue, 07 Apr 2020 15:14:41 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 54013AC77;
- Tue,  7 Apr 2020 15:14:39 +0000 (UTC)
-Subject: Re: [PATCH 3/5] x86_64/mm: map and unmap page tables in
- share_hotadd_m2p_table
-To: Hongyan Xia <hx242@xen.org>
-References: <cover.1584955616.git.hongyxia@amazon.com>
- <2fa83ef5818805c179757caac99ccf7ab4f7ba3a.1584955616.git.hongyxia@amazon.com>
- <f1537005-cac8-cd74-e19c-043219ccab56@suse.com>
- <7a5e9095c1c927819d248d5227d2511676781855.camel@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <0d0fb4e9-c27e-a8b2-8fc7-602bc535b655@suse.com>
-Date: Tue, 7 Apr 2020 17:14:39 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+	id 1jLq3z-0005e5-0Q; Tue, 07 Apr 2020 15:22:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=DsZW=5X=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jLq3x-0005dz-0b
+ for xen-devel@lists.xenproject.org; Tue, 07 Apr 2020 15:22:53 +0000
+X-Inumbo-ID: a3390742-78e3-11ea-b58d-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id a3390742-78e3-11ea-b58d-bc764e2007e4;
+ Tue, 07 Apr 2020 15:22:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1586272967;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=Qg827KIvdKEzs6jvNwGqMNXyL08iW2Xpsw7/s+ZIo+U=;
+ b=NAlyRtDBCStIB2MhWCpu9WXHiCFu58eFDpy9cpRVUYxy0ZO6dd8nx5sZ
+ Uvoo+r5bOPZhovwYzSQa6BlRgqQ3TXTGrdxVxqyUUXwAdcPdMeNVuwo8/
+ SIWFb4LCUC2UwY12IlDjEzSy4buv4DMelBjK3GlC1pKfn0yDp5pmvw0+G I=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ anthony.perard@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+ anthony.perard@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: kEEUF3m5QJdGP+nVunsvGYsRB0qPKBIMKb/0kGJ3Ad5qvTmdLxzqw07ltbH+HjkMS71Lrl6qAZ
+ yaqI6F3eG7Ljvf+RIJ4y5SPiYNj2f/YSQoguctmkfywB1hHd8dYISMCx2YiySk4t6THD2BQCLP
+ knLe7MnbkruiyE3zrnKMGimmjyRfL/DuVm0FlJIL58nV+zkLXePqoukx+rwJVM+fHTfww1YqlB
+ xHvSG8Zx8+xBzBZrflAGWY1Q724URub+FE+lbwk29Fg0NiOIHzB4pSav/fbtBaxYHZbvF4WFqP
+ 4ps=
+X-SBRS: 2.7
+X-MesageID: 15974527
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,355,1580792400"; d="scan'208";a="15974527"
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: <qemu-devel@nongnu.org>
+Subject: [PULL 2/3] xen-block: Fix uninitialized variable
+Date: Tue, 7 Apr 2020 16:22:36 +0100
+Message-ID: <20200407152237.1468704-3-anthony.perard@citrix.com>
+X-Mailer: git-send-email 2.26.0
+In-Reply-To: <20200407152237.1468704-1-anthony.perard@citrix.com>
+References: <20200407152237.1468704-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <7a5e9095c1c927819d248d5227d2511676781855.camel@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -62,66 +104,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Peter Maydell <peter.maydell@linaro.org>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 07.04.2020 17:11, Hongyan Xia wrote:
-> On Wed, 2020-04-01 at 14:29 +0200, Jan Beulich wrote:
->> On 23.03.2020 10:41, Hongyan Xia wrote:
->>> --- a/xen/include/asm-x86/page.h
->>> +++ b/xen/include/asm-x86/page.h
->>> @@ -196,6 +196,24 @@ static inline l4_pgentry_t
->>> l4e_from_paddr(paddr_t pa, unsigned int flags)
->>>  #define map_l2t_from_l3e(x)        (l2_pgentry_t
->>> *)map_domain_page(l3e_get_mfn(x))
->>>  #define map_l3t_from_l4e(x)        (l3_pgentry_t
->>> *)map_domain_page(l4e_get_mfn(x))
->>>  
->>> +#define l1e_from_l2e(l2e, off) ({                   \
->>> +        l1_pgentry_t *l1t = map_l1t_from_l2e(l2e);  \
->>> +        l1_pgentry_t l1e = l1t[off];                \
->>> +        UNMAP_DOMAIN_PAGE(l1t);                     \
->>> +        l1e; })
->>> +
->>> +#define l2e_from_l3e(l3e, off) ({                   \
->>> +        l2_pgentry_t *l2t = map_l2t_from_l3e(l3e);  \
->>> +        l2_pgentry_t l2e = l2t[off];                \
->>> +        UNMAP_DOMAIN_PAGE(l2t);                     \
->>> +        l2e; })
->>> +
->>> +#define l3e_from_l4e(l4e, off) ({                   \
->>> +        l3_pgentry_t *l3t = map_l3t_from_l4e(l4e);  \
->>> +        l3_pgentry_t l3e = l3t[off];                \
->>> +        UNMAP_DOMAIN_PAGE(l3t);                     \
->>> +        l3e; })
->>
->> There's a reason these are macros rather than inline functions,
->> I assume? (This reason would be nice to be stated in the
->> description.)
-> 
-> Actually no specific reasons, just to keep them as macros to be
-> consistent with other helpers above. Fairly trivial to convert them
-> into inline functions if this is desired.
+Since 7f5d9b206d1e ("object-add: don't create return value if
+failed"), qmp_object_add() don't write any value in 'ret_data', thus
+has random data. Then qobject_unref() fails and abort().
 
-Where possible this would be the preferred route for new helpers.
+Fix by initialising 'ret_data' properly.
 
->> I don't see why you use UNMAP_DOMAIN_PAGE() rather than
->> unmap_domain_page() here - the variables in question go out of
->> scope right afterwards, so the storing of NULL into them is
->> pointless (and very likely to be eliminated by the compiler
->> anyway).
-> 
-> My intention is to just avoid using the lower case one altogether, so
-> that one day when we need to expand any function or macros we do not
-> need to look back at the code and worry about whether any lower case
-> ones need to be converted to upper case (sometimes for large functions
-> this may not be trivial), and the compiler can deal with the extra
-> nullification anyway.
+Fixes: 5f07c4d60d09 ("qapi: Flatten object-add")
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Message-Id: <20200406164207.1446817-1-anthony.perard@citrix.com>
+---
+ hw/block/xen-block.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I don't agree with this goal; perhaps others on Cc have an opinion?
+diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
+index 07bb32e22b51..99cb4c67cb09 100644
+--- a/hw/block/xen-block.c
++++ b/hw/block/xen-block.c
+@@ -860,7 +860,7 @@ static XenBlockIOThread *xen_block_iothread_create(const char *id,
+     XenBlockIOThread *iothread = g_new(XenBlockIOThread, 1);
+     Error *local_err = NULL;
+     QDict *opts;
+-    QObject *ret_data;
++    QObject *ret_data = NULL;
+ 
+     iothread->id = g_strdup(id);
+ 
+-- 
+Anthony PERARD
 
-Jan
 
