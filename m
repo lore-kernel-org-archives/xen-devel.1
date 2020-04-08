@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 378BEC2BA2B
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A775C38A29
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0C6BD20769
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D3A4320769
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="ECcLHHKM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C6BD20769
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="xWXrvfUd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D3A4320769
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2u6-0002gm-72; Wed, 08 Apr 2020 05:05:34 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jM2u6-0002h5-GG; Wed, 08 Apr 2020 05:05:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2u4-0002fs-H4
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:32 +0000
-X-Inumbo-ID: 8c730c42-7956-11ea-b4f4-bc764e2007e4
-Received: from aserp2120.oracle.com (unknown [141.146.126.78])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8c730c42-7956-11ea-b4f4-bc764e2007e4;
+ id 1jM2u5-0002gJ-4B
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:33 +0000
+X-Inumbo-ID: 8c67c17c-7956-11ea-81bb-12813bfff9fa
+Received: from userp2120.oracle.com (unknown [156.151.31.85])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8c67c17c-7956-11ea-81bb-12813bfff9fa;
  Wed, 08 Apr 2020 05:05:22 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 038544lW191251;
- Wed, 8 Apr 2020 05:05:09 GMT
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853GBi179620;
+ Wed, 8 Apr 2020 05:05:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=Q/x63j7IF9jNQkX6xMMSEc7WXp2MrGiG0gMNWP0OfWM=;
- b=ECcLHHKM1Y3f/mNjqQHcNekCfZwy7o5zdSSQAxLfqjPZMM2CwYlwO9ziEEQME73MsHEU
- L++tyOqLrBEz+TPthoQ2QMk9tFdULvWDh4X7mSjd1qCUoYVZk28ix7ZtaRdJ1F2vD2PG
- eMan5188ae3P/oVnDlkKI+g407m/RDHzMPH9B1nDUdn9BJAV5875XtLNojw57f/axCcB
- AQtKmdYasSQzu01XH4kHhT8ck/rfDnFf6wPrMCXiNGxOZ70jmj13uXWotmQoRbM+QzS6
- IgK8/idFBsVRyi7CG4lOSpSf8+0yp0jR+s01UpXhsN41QuU9tT4s+LayyeXT4pPfCgK2 7A== 
+ bh=kG41Wdi3xZl8bLDCQdMVBGXBcfy0aVqVcUlxPKtO2Qo=;
+ b=xWXrvfUdB9tuJuQ2V9qdp8V5Bz/bz2ImxUQMZguPeBGwXxeXQYy1NSxRzY5PefUFgpCi
+ DE348mVzKuUk1tMCueBWHccBpShi3itMcbUNJlD7HQhzAmsa08nAPhzy6973ZKTzTfVQ
+ WbbNP2PNksH1Xt5HpceILIVsYBjThZn8GmaQPXJ7/cVAn3dWpMcXfJ+nzcncLVFMkK/s
+ LunZLiI+/yDjmOTe811yfyRavy6AoS80i5en5ECYf7zgvFKOwGItBp1etljPK9ypTOOE
+ WlgQIgH+NA20KP2M/zAXvrlZiP8WfH2UQlOeF4HKb5cnflfwZj4/IurCxH++yE9rr9eR uA== 
 Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by aserp2120.oracle.com with ESMTP id 3091m0s0s4-1
+ by userp2120.oracle.com with ESMTP id 3091mnh14d-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:09 +0000
+ Wed, 08 Apr 2020 05:05:16 +0000
 Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853Kcm158669;
- Wed, 8 Apr 2020 05:05:08 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by userp3030.oracle.com with ESMTP id 3091m01frk-1
+ by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853Lv7159055;
+ Wed, 8 Apr 2020 05:05:16 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3030.oracle.com with ESMTP id 3091m01fwa-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:08 +0000
+ Wed, 08 Apr 2020 05:05:16 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 038557fF007332;
- Wed, 8 Apr 2020 05:05:07 GMT
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03855FqY030510;
+ Wed, 8 Apr 2020 05:05:15 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:05:07 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:05:14 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 07/26] x86/paravirt: Persist .parainstructions.runtime
-Date: Tue,  7 Apr 2020 22:03:04 -0700
-Message-Id: <20200408050323.4237-8-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 11/26] x86/alternatives: Remove return value of
+ text_poke*()
+Date: Tue,  7 Apr 2020 22:03:08 -0700
+Message-Id: <20200408050323.4237-12-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -77,17 +79,17 @@ X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
  malwarescore=0
- mlxlogscore=999 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
+ mlxlogscore=813 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
  mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2003020000 definitions=main-2004080037
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- mlxlogscore=999 mlxscore=0
- priorityscore=1501 phishscore=0 suspectscore=0 bulkscore=0
- lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2003020000 definitions=main-2004080037
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ mlxlogscore=873 mlxscore=0 priorityscore=1501 bulkscore=0 adultscore=0
+ impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004080037
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -107,141 +109,77 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Persist .parainstructions.runtime in memory. We will use it to
-patch paravirt-ops at runtime.
-
-The extra memory footprint depends on chosen config options but the
-inlined queued_spin_unlock() presents an edge case:
-
- $ objdump -h vmlinux|grep .parainstructions
- Idx Name              		Size      VMA
- 	LMA                File-off  Algn
-  27 .parainstructions 		0001013c  ffffffff82895000
-  	0000000002895000   01c95000  2**3
-  28 .parainstructions.runtime  0000cd2c  ffffffff828a5140
-  	00000000028a5140   01ca5140  2**3
-
-(The added footprint is the size of the .parainstructions.runtime
-section.)
-
-  $ size vmlinux
-  text       data       bss        dec      hex       filename
-  13726196   12302814   14094336   40123346 2643bd2   vmlinux
+Various text_poke() variants don't return a useful value. Remove it.
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/include/asm/alternative.h |  1 +
- arch/x86/kernel/alternative.c      | 16 +++++++++++++++-
- arch/x86/kernel/module.c           | 28 +++++++++++++++++++++++-----
- 3 files changed, 39 insertions(+), 6 deletions(-)
+ arch/x86/include/asm/text-patching.h |  4 ++--
+ arch/x86/kernel/alternative.c        | 11 +++++------
+ 2 files changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
-index db91a7731d87..d19546c14ff6 100644
---- a/arch/x86/include/asm/alternative.h
-+++ b/arch/x86/include/asm/alternative.h
-@@ -76,6 +76,7 @@ extern void apply_alternatives(struct alt_instr *start, struct alt_instr *end);
- struct module;
+diff --git a/arch/x86/include/asm/text-patching.h b/arch/x86/include/asm/text-patching.h
+index 706e61e6967d..04778c2bc34e 100644
+--- a/arch/x86/include/asm/text-patching.h
++++ b/arch/x86/include/asm/text-patching.h
+@@ -46,9 +46,9 @@ extern void text_poke_early(void *addr, const void *opcode, size_t len);
+  * On the local CPU you need to be protected against NMI or MCE handlers seeing
+  * an inconsistent instruction while you patch.
+  */
+-extern void *text_poke(void *addr, const void *opcode, size_t len);
++extern void text_poke(void *addr, const void *opcode, size_t len);
+ extern void text_poke_sync(void);
+-extern void *text_poke_kgdb(void *addr, const void *opcode, size_t len);
++extern void text_poke_kgdb(void *addr, const void *opcode, size_t len);
+ extern int poke_int3_handler(struct pt_regs *regs);
+ extern void text_poke_bp(void *addr, const void *opcode, size_t len, const void *emulate);
  
- void alternatives_module_add(struct module *mod, char *name,
-+			     void *para, void *para_end,
- 			     void *locks, void *locks_end,
- 			     void *text, void *text_end);
- void alternatives_module_del(struct module *mod);
 diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 09e4ee0e09a2..8189ac21624c 100644
+index 0c335af9ee28..8c79a3dc5e72 100644
 --- a/arch/x86/kernel/alternative.c
 +++ b/arch/x86/kernel/alternative.c
-@@ -482,6 +482,12 @@ struct alt_module {
- 	struct module	*mod;
- 	char		*name;
+@@ -805,7 +805,7 @@ void __init_or_module text_poke_early(void *addr, const void *opcode,
+ __ro_after_init struct mm_struct *poking_mm;
+ __ro_after_init unsigned long poking_addr;
  
-+#ifdef CONFIG_PARAVIRT_RUNTIME
-+	/* ptrs to paravirt sites */
-+	struct paravirt_patch_site *para;
-+	struct paravirt_patch_site *para_end;
-+#endif
-+
- 	/* ptrs to lock prefixes */
- 	const s32	*locks;
- 	const s32	*locks_end;
-@@ -496,6 +502,7 @@ struct alt_module {
- static LIST_HEAD(alt_modules);
- 
- void __init_or_module alternatives_module_add(struct module *mod, char *name,
-+					      void *para, void *para_end,
- 					      void *locks, void *locks_end,
- 					      void *text,  void *text_end)
+-static void *__text_poke(void *addr, const void *opcode, size_t len)
++static void __text_poke(void *addr, const void *opcode, size_t len)
  {
-@@ -506,7 +513,7 @@ void __init_or_module alternatives_module_add(struct module *mod, char *name,
- 	if (!noreplace_smp && (num_present_cpus() == 1 || setup_max_cpus <= 1))
- 		uniproc_patched = true;
- #endif
--	if (!uniproc_patched)
-+	if (!IS_ENABLED(CONFIG_PARAVIRT_RUNTIME) && !uniproc_patched)
- 		return;
+ 	bool cross_page_boundary = offset_in_page(addr) + len > PAGE_SIZE;
+ 	struct page *pages[2] = {NULL};
+@@ -906,7 +906,6 @@ static void *__text_poke(void *addr, const void *opcode, size_t len)
  
- 	mutex_lock(&text_mutex);
-@@ -516,6 +523,11 @@ void __init_or_module alternatives_module_add(struct module *mod, char *name,
- 	alt->mod	= mod;
- 	alt->name	= name;
+ 	pte_unmap_unlock(ptep, ptl);
+ 	local_irq_restore(flags);
+-	return addr;
+ }
  
-+#ifdef CONFIG_PARAVIRT_RUNTIME
-+	alt->para	= para;
-+	alt->para_end	= para_end;
-+#endif
-+
- 	if (num_possible_cpus() != 1 || uniproc_patched) {
- 		/* Remember only if we'll need to undo it. */
- 		alt->locks	= locks;
-@@ -733,6 +745,8 @@ void __init alternative_instructions(void)
- 	apply_alternatives(__alt_instructions, __alt_instructions_end);
+ /**
+@@ -925,11 +924,11 @@ static void *__text_poke(void *addr, const void *opcode, size_t len)
+  * by registering a module notifier, and ordering module removal and patching
+  * trough a mutex.
+  */
+-void *text_poke(void *addr, const void *opcode, size_t len)
++void text_poke(void *addr, const void *opcode, size_t len)
+ {
+ 	lockdep_assert_held(&text_mutex);
  
- 	alternatives_module_add(NULL, "core kernel",
-+				__parainstructions_runtime,
-+				__parainstructions_runtime_end,
- 				__smp_locks, __smp_locks_end,
- 				_text, _etext);
+-	return __text_poke(addr, opcode, len);
++	__text_poke(addr, opcode, len);
+ }
  
-diff --git a/arch/x86/kernel/module.c b/arch/x86/kernel/module.c
-index fc3d35198b09..7b2632184c11 100644
---- a/arch/x86/kernel/module.c
-+++ b/arch/x86/kernel/module.c
-@@ -248,12 +248,30 @@ int module_finalize(const Elf_Ehdr *hdr,
- 		void *aseg = (void *)alt->sh_addr;
- 		apply_alternatives(aseg, aseg + alt->sh_size);
- 	}
--	if (locks && text) {
--		void *lseg = (void *)locks->sh_addr;
--		void *tseg = (void *)text->sh_addr;
-+	if (para_run || (locks && text)) {
-+		void *pseg, *pseg_end;
-+		void *lseg, *lseg_end;
-+		void *tseg, *tseg_end;
-+
-+		pseg = pseg_end = NULL;
-+		lseg = lseg_end = NULL;
-+		tseg = tseg_end = NULL;
-+		if (para_run) {
-+			pseg = (void *)para_run->sh_addr;
-+			pseg_end = pseg + para_run->sh_size;
-+		}
-+
-+		if (locks && text) {
-+			tseg = (void *)text->sh_addr;
-+			tseg_end = tseg + text->sh_size;
-+
-+			lseg = (void *)locks->sh_addr;
-+			lseg_end = lseg + locks->sh_size;
-+		}
- 		alternatives_module_add(me, me->name,
--					lseg, lseg + locks->sh_size,
--					tseg, tseg + text->sh_size);
-+					pseg, pseg_end,
-+					lseg, lseg_end,
-+					tseg, tseg_end);
- 	}
+ /**
+@@ -946,9 +945,9 @@ void *text_poke(void *addr, const void *opcode, size_t len)
+  * Context: should only be used by kgdb, which ensures no other core is running,
+  *	    despite the fact it does not hold the text_mutex.
+  */
+-void *text_poke_kgdb(void *addr, const void *opcode, size_t len)
++void text_poke_kgdb(void *addr, const void *opcode, size_t len)
+ {
+-	return __text_poke(addr, opcode, len);
++	__text_poke(addr, opcode, len);
+ }
  
- 	if (para) {
+ static void do_sync_core(void *info)
 -- 
 2.20.1
 
