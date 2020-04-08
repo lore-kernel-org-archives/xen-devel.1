@@ -7,67 +7,67 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5493C38A2C
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 378BEC2BA2B
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 77ECA20A8B
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0C6BD20769
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="JdkjanUu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77ECA20A8B
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="ECcLHHKM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C6BD20769
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2uA-0002k6-RM; Wed, 08 Apr 2020 05:05:38 +0000
+	id 1jM2u6-0002gm-72; Wed, 08 Apr 2020 05:05:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2u9-0002j8-Hx
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:37 +0000
-X-Inumbo-ID: 8c9f7de0-7956-11ea-83d8-bc764e2007e4
+ id 1jM2u4-0002fs-H4
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:32 +0000
+X-Inumbo-ID: 8c730c42-7956-11ea-b4f4-bc764e2007e4
 Received: from aserp2120.oracle.com (unknown [141.146.126.78])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8c9f7de0-7956-11ea-83d8-bc764e2007e4;
+ id 8c730c42-7956-11ea-b4f4-bc764e2007e4;
  Wed, 08 Apr 2020 05:05:22 +0000 (UTC)
 Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853kJT191170;
- Wed, 8 Apr 2020 05:05:03 GMT
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 038544lW191251;
+ Wed, 8 Apr 2020 05:05:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=YqkpSF+xaj87ukpBfxxbSQruerieQm4kGvLikr6EByg=;
- b=JdkjanUuxwOILdkRa92kgljdqWjdgneiBkVZJxAeqNWM1rn046UVVjh8q+hLyr1jCaw5
- efBQTN7ituKdbN9KZYhmSd6bCobGZy4Ai8YbCGV7w+NxE1HICzDkva4dKA2R+PUxPIzC
- shywYoahTgQ9oCJkap9TlaUAxYpHeIGVf+XMEFvzEXjWP7PfrP/slqcx10d7fz1KStg2
- kcTlKOfFWU0p6o2YZbGTWkmxDBVRKFs1+6jB2CTRjJvQ3gD2DZgw1BPb+x1v8dy4x7qv
- J0Dv+ro6jQX3SXKG0NtTYkrxjdavZEFEdN+7kyhodZuYxmp5MbHHWuEIxUhLyQuwPcF6 vg== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by aserp2120.oracle.com with ESMTP id 3091m0s0rs-1
+ bh=Q/x63j7IF9jNQkX6xMMSEc7WXp2MrGiG0gMNWP0OfWM=;
+ b=ECcLHHKM1Y3f/mNjqQHcNekCfZwy7o5zdSSQAxLfqjPZMM2CwYlwO9ziEEQME73MsHEU
+ L++tyOqLrBEz+TPthoQ2QMk9tFdULvWDh4X7mSjd1qCUoYVZk28ix7ZtaRdJ1F2vD2PG
+ eMan5188ae3P/oVnDlkKI+g407m/RDHzMPH9B1nDUdn9BJAV5875XtLNojw57f/axCcB
+ AQtKmdYasSQzu01XH4kHhT8ck/rfDnFf6wPrMCXiNGxOZ70jmj13uXWotmQoRbM+QzS6
+ IgK8/idFBsVRyi7CG4lOSpSf8+0yp0jR+s01UpXhsN41QuU9tT4s+LayyeXT4pPfCgK2 7A== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by aserp2120.oracle.com with ESMTP id 3091m0s0s4-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:02 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03852XPH062239;
- Wed, 8 Apr 2020 05:05:02 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by userp3020.oracle.com with ESMTP id 3091mh1k6d-1
+ Wed, 08 Apr 2020 05:05:09 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853Kcm158669;
+ Wed, 8 Apr 2020 05:05:08 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+ by userp3030.oracle.com with ESMTP id 3091m01frk-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:02 +0000
+ Wed, 08 Apr 2020 05:05:08 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03854w5i030423;
- Wed, 8 Apr 2020 05:04:59 GMT
+ by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 038557fF007332;
+ Wed, 8 Apr 2020 05:05:07 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:04:57 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:05:07 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 02/26] x86/paravirt: Allow paravirt patching post-init
-Date: Tue,  7 Apr 2020 22:02:59 -0700
-Message-Id: <20200408050323.4237-3-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 07/26] x86/paravirt: Persist .parainstructions.runtime
+Date: Tue,  7 Apr 2020 22:03:04 -0700
+Message-Id: <20200408050323.4237-8-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -75,11 +75,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- suspectscore=0 bulkscore=0
- mlxlogscore=999 mlxscore=0 phishscore=0 malwarescore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
- definitions=main-2004080037
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ malwarescore=0
+ mlxlogscore=999 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2004080037
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
@@ -107,181 +107,141 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Paravirt-ops are patched at init to convert indirect calls into
-direct calls and in some cases, to inline the target at the call-site.
-This is done by way of PVOP* macros which save the call-site
-information via compile time annotations.
+Persist .parainstructions.runtime in memory. We will use it to
+patch paravirt-ops at runtime.
 
-Pull this state out in .parainstructions.runtime for some pv-ops such
-that they can be used for runtime patching.
+The extra memory footprint depends on chosen config options but the
+inlined queued_spin_unlock() presents an edge case:
+
+ $ objdump -h vmlinux|grep .parainstructions
+ Idx Name              		Size      VMA
+ 	LMA                File-off  Algn
+  27 .parainstructions 		0001013c  ffffffff82895000
+  	0000000002895000   01c95000  2**3
+  28 .parainstructions.runtime  0000cd2c  ffffffff828a5140
+  	00000000028a5140   01ca5140  2**3
+
+(The added footprint is the size of the .parainstructions.runtime
+section.)
+
+  $ size vmlinux
+  text       data       bss        dec      hex       filename
+  13726196   12302814   14094336   40123346 2643bd2   vmlinux
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/Kconfig                      | 12 ++++++++++++
- arch/x86/include/asm/paravirt_types.h |  5 +++++
- arch/x86/include/asm/text-patching.h  |  5 +++++
- arch/x86/kernel/alternative.c         |  2 ++
- arch/x86/kernel/module.c              | 10 +++++++++-
- arch/x86/kernel/vmlinux.lds.S         | 16 ++++++++++++++++
- include/asm-generic/vmlinux.lds.h     |  8 ++++++++
- 7 files changed, 57 insertions(+), 1 deletion(-)
+ arch/x86/include/asm/alternative.h |  1 +
+ arch/x86/kernel/alternative.c      | 16 +++++++++++++++-
+ arch/x86/kernel/module.c           | 28 +++++++++++++++++++++++-----
+ 3 files changed, 39 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 1edf788d301c..605619938f08 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -764,6 +764,18 @@ config PARAVIRT
- 	  over full virtualization.  However, when run without a hypervisor
- 	  the kernel is theoretically slower and slightly larger.
+diff --git a/arch/x86/include/asm/alternative.h b/arch/x86/include/asm/alternative.h
+index db91a7731d87..d19546c14ff6 100644
+--- a/arch/x86/include/asm/alternative.h
++++ b/arch/x86/include/asm/alternative.h
+@@ -76,6 +76,7 @@ extern void apply_alternatives(struct alt_instr *start, struct alt_instr *end);
+ struct module;
  
-+config PARAVIRT_RUNTIME
-+	bool "Enable paravirtualized ops to be patched at runtime"
-+	depends on PARAVIRT
-+	help
-+	  Enable the paravirtualized guest kernel to switch pv-ops based on
-+	  changed host conditions, potentially improving performance
-+	  significantly.
-+
-+	  This would increase the memory footprint of the running kernel
-+	  slightly (depending mostly on whether lock and unlock are inlined
-+	  or not.)
-+
- config PARAVIRT_XXL
- 	bool
- 
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 37e8f27a3b9d..00e4a062ca10 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -723,6 +723,11 @@ struct paravirt_patch_site {
- extern struct paravirt_patch_site __parainstructions[],
- 	__parainstructions_end[];
- 
-+#ifdef CONFIG_PARAVIRT_RUNTIME
-+extern struct paravirt_patch_site __parainstructions_runtime[],
-+	__parainstructions_runtime_end[];
-+#endif
-+
- #endif	/* __ASSEMBLY__ */
- 
- #endif	/* _ASM_X86_PARAVIRT_TYPES_H */
-diff --git a/arch/x86/include/asm/text-patching.h b/arch/x86/include/asm/text-patching.h
-index 67315fa3956a..e2ef241c261e 100644
---- a/arch/x86/include/asm/text-patching.h
-+++ b/arch/x86/include/asm/text-patching.h
-@@ -18,6 +18,11 @@ static inline void apply_paravirt(struct paravirt_patch_site *start,
- #define __parainstructions_end	NULL
- #endif
- 
-+#ifndef CONFIG_PARAVIRT_RUNTIME
-+#define __parainstructions_runtime	NULL
-+#define __parainstructions_runtime_end	NULL
-+#endif
-+
- /*
-  * Currently, the max observed size in the kernel code is
-  * JUMP_LABEL_NOP_SIZE/RELATIVEJUMP_SIZE, which are 5.
+ void alternatives_module_add(struct module *mod, char *name,
++			     void *para, void *para_end,
+ 			     void *locks, void *locks_end,
+ 			     void *text, void *text_end);
+ void alternatives_module_del(struct module *mod);
 diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 7867dfb3963e..fdfda1375f82 100644
+index 09e4ee0e09a2..8189ac21624c 100644
 --- a/arch/x86/kernel/alternative.c
 +++ b/arch/x86/kernel/alternative.c
-@@ -740,6 +740,8 @@ void __init alternative_instructions(void)
- #endif
- 
- 	apply_paravirt(__parainstructions, __parainstructions_end);
-+	apply_paravirt(__parainstructions_runtime,
-+		       __parainstructions_runtime_end);
- 
- 	restart_nmi();
- 	alternatives_patched = 1;
-diff --git a/arch/x86/kernel/module.c b/arch/x86/kernel/module.c
-index d5c72cb877b3..658ea60ce324 100644
---- a/arch/x86/kernel/module.c
-+++ b/arch/x86/kernel/module.c
-@@ -222,7 +222,7 @@ int module_finalize(const Elf_Ehdr *hdr,
- 		    struct module *me)
- {
- 	const Elf_Shdr *s, *text = NULL, *alt = NULL, *locks = NULL,
--		*para = NULL, *orc = NULL, *orc_ip = NULL;
-+		*para = NULL, *para_run = NULL, *orc = NULL, *orc_ip = NULL;
- 	char *secstrings = (void *)hdr + sechdrs[hdr->e_shstrndx].sh_offset;
- 
- 	for (s = sechdrs; s < sechdrs + hdr->e_shnum; s++) {
-@@ -234,6 +234,9 @@ int module_finalize(const Elf_Ehdr *hdr,
- 			locks = s;
- 		if (!strcmp(".parainstructions", secstrings + s->sh_name))
- 			para = s;
-+		if (!strcmp(".parainstructions.runtime",
-+			    secstrings + s->sh_name))
-+			para_run = s;
- 		if (!strcmp(".orc_unwind", secstrings + s->sh_name))
- 			orc = s;
- 		if (!strcmp(".orc_unwind_ip", secstrings + s->sh_name))
-@@ -257,6 +260,11 @@ int module_finalize(const Elf_Ehdr *hdr,
- 		void *pseg = (void *)para->sh_addr;
- 		apply_paravirt(pseg, pseg + para->sh_size);
- 	}
-+	if (para_run) {
-+		void *pseg = (void *)para_run->sh_addr;
-+
-+		apply_paravirt(pseg, pseg + para_run->sh_size);
-+	}
- 
- 	/* make jump label nops */
- 	jump_label_apply_nops(me);
-diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
-index 1bf7e312361f..7f5b8f6ab96e 100644
---- a/arch/x86/kernel/vmlinux.lds.S
-+++ b/arch/x86/kernel/vmlinux.lds.S
-@@ -269,6 +269,7 @@ SECTIONS
- 	.parainstructions : AT(ADDR(.parainstructions) - LOAD_OFFSET) {
- 		__parainstructions = .;
- 		*(.parainstructions)
-+		PARAVIRT_DISCARD(.parainstructions.runtime)
- 		__parainstructions_end = .;
- 	}
- 
-@@ -348,6 +349,21 @@ SECTIONS
- 		__smp_locks_end = .;
- 	}
+@@ -482,6 +482,12 @@ struct alt_module {
+ 	struct module	*mod;
+ 	char		*name;
  
 +#ifdef CONFIG_PARAVIRT_RUNTIME
-+	/*
-+	 * .parainstructions.runtime sticks around in memory after
-+	 * init so it doesn't need to be page-aligned but everything
-+	 * around us is so we will be too.
-+	 */
-+	. = ALIGN(8);
-+	.parainstructions.runtime : AT(ADDR(.parainstructions.runtime) - \
-+								LOAD_OFFSET) {
-+		__parainstructions_runtime = .;
-+		PARAVIRT_KEEP(.parainstructions.runtime)
-+		__parainstructions_runtime_end = .;
-+	}
++	/* ptrs to paravirt sites */
++	struct paravirt_patch_site *para;
++	struct paravirt_patch_site *para_end;
 +#endif
 +
- #ifdef CONFIG_X86_64
- 	.data_nosave : AT(ADDR(.data_nosave) - LOAD_OFFSET) {
- 		NOSAVE_DATA
-diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-index 71e387a5fe90..6b009d5ce51f 100644
---- a/include/asm-generic/vmlinux.lds.h
-+++ b/include/asm-generic/vmlinux.lds.h
-@@ -135,6 +135,14 @@
- #define MEM_DISCARD(sec) *(.mem##sec)
- #endif
+ 	/* ptrs to lock prefixes */
+ 	const s32	*locks;
+ 	const s32	*locks_end;
+@@ -496,6 +502,7 @@ struct alt_module {
+ static LIST_HEAD(alt_modules);
  
-+#if defined(CONFIG_PARAVIRT_RUNTIME)
-+#define PARAVIRT_KEEP(sec)	*(sec)
-+#define PARAVIRT_DISCARD(sec)
-+#else
-+#define PARAVIRT_KEEP(sec)
-+#define PARAVIRT_DISCARD(sec)	*(sec)
+ void __init_or_module alternatives_module_add(struct module *mod, char *name,
++					      void *para, void *para_end,
+ 					      void *locks, void *locks_end,
+ 					      void *text,  void *text_end)
+ {
+@@ -506,7 +513,7 @@ void __init_or_module alternatives_module_add(struct module *mod, char *name,
+ 	if (!noreplace_smp && (num_present_cpus() == 1 || setup_max_cpus <= 1))
+ 		uniproc_patched = true;
+ #endif
+-	if (!uniproc_patched)
++	if (!IS_ENABLED(CONFIG_PARAVIRT_RUNTIME) && !uniproc_patched)
+ 		return;
+ 
+ 	mutex_lock(&text_mutex);
+@@ -516,6 +523,11 @@ void __init_or_module alternatives_module_add(struct module *mod, char *name,
+ 	alt->mod	= mod;
+ 	alt->name	= name;
+ 
++#ifdef CONFIG_PARAVIRT_RUNTIME
++	alt->para	= para;
++	alt->para_end	= para_end;
 +#endif
 +
- #ifdef CONFIG_FTRACE_MCOUNT_RECORD
- /*
-  * The ftrace call sites are logged to a section whose name depends on the
+ 	if (num_possible_cpus() != 1 || uniproc_patched) {
+ 		/* Remember only if we'll need to undo it. */
+ 		alt->locks	= locks;
+@@ -733,6 +745,8 @@ void __init alternative_instructions(void)
+ 	apply_alternatives(__alt_instructions, __alt_instructions_end);
+ 
+ 	alternatives_module_add(NULL, "core kernel",
++				__parainstructions_runtime,
++				__parainstructions_runtime_end,
+ 				__smp_locks, __smp_locks_end,
+ 				_text, _etext);
+ 
+diff --git a/arch/x86/kernel/module.c b/arch/x86/kernel/module.c
+index fc3d35198b09..7b2632184c11 100644
+--- a/arch/x86/kernel/module.c
++++ b/arch/x86/kernel/module.c
+@@ -248,12 +248,30 @@ int module_finalize(const Elf_Ehdr *hdr,
+ 		void *aseg = (void *)alt->sh_addr;
+ 		apply_alternatives(aseg, aseg + alt->sh_size);
+ 	}
+-	if (locks && text) {
+-		void *lseg = (void *)locks->sh_addr;
+-		void *tseg = (void *)text->sh_addr;
++	if (para_run || (locks && text)) {
++		void *pseg, *pseg_end;
++		void *lseg, *lseg_end;
++		void *tseg, *tseg_end;
++
++		pseg = pseg_end = NULL;
++		lseg = lseg_end = NULL;
++		tseg = tseg_end = NULL;
++		if (para_run) {
++			pseg = (void *)para_run->sh_addr;
++			pseg_end = pseg + para_run->sh_size;
++		}
++
++		if (locks && text) {
++			tseg = (void *)text->sh_addr;
++			tseg_end = tseg + text->sh_size;
++
++			lseg = (void *)locks->sh_addr;
++			lseg_end = lseg + locks->sh_size;
++		}
+ 		alternatives_module_add(me, me->name,
+-					lseg, lseg + locks->sh_size,
+-					tseg, tseg + text->sh_size);
++					pseg, pseg_end,
++					lseg, lseg_end,
++					tseg, tseg_end);
+ 	}
+ 
+ 	if (para) {
 -- 
 2.20.1
 
