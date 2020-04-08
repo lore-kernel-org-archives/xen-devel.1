@@ -7,67 +7,68 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1497C2D0EA
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87D77C38A29
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A42872082F
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5CCAF20769
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="Nz0B0/o9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A42872082F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="PlrYMSP2"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CCAF20769
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2uZ-0003Dm-Si; Wed, 08 Apr 2020 05:06:03 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jM2uu-0003dN-4u; Wed, 08 Apr 2020 05:06:24 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2uY-0003C7-IU
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:06:02 +0000
-X-Inumbo-ID: 94a55730-7956-11ea-9e09-bc764e2007e4
-Received: from userp2130.oracle.com (unknown [156.151.31.86])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 94a55730-7956-11ea-9e09-bc764e2007e4;
- Wed, 08 Apr 2020 05:05:36 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03854HmH012943;
- Wed, 8 Apr 2020 05:05:27 GMT
+ id 1jM2ut-0003c2-5c
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:06:23 +0000
+X-Inumbo-ID: 98167b38-7956-11ea-81bb-12813bfff9fa
+Received: from userp2120.oracle.com (unknown [156.151.31.85])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 98167b38-7956-11ea-81bb-12813bfff9fa;
+ Wed, 08 Apr 2020 05:05:41 +0000 (UTC)
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+ by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03852xa5179539;
+ Wed, 8 Apr 2020 05:05:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=3KrJyMdl6FuU/9RrwZPu8LutFkDCWnKoiuaiLyLQY8k=;
- b=Nz0B0/o9yL4G/oeYKXgml5AlpwAqrxs9OSYyfd/2t3KASsuXVslfpk3aV4siEspeImVv
- hF5mZp00cKk33qyWWIWzgx7Z/2TQbCIg4+L+xdwnRQHABYbAaX8eoRfCCmAuRRNxd8Yw
- b9h2KmNAKrdNawOdsrEQ9YaTpzcLbV4+S29wLj8mtcKjr+8OuLKxgVlpROe8Uc7ntEYy
- plZiZePsltN5gQ4IzVpPOcYcmZwK2LMz2g5CfWO4pPFGbQEi7yhGvMUP7T5/BxCphx9t
- ZQkM0P06aEe4dKlyv9maop2wZsC0FwJjCcQC7CvJv65TbINE/KWXveQRy4d4cNgM292g JA== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2130.oracle.com with ESMTP id 3091m390xw-1
+ bh=7Qqvi8ilezudja6Xt6TMpZeT8QAYzWIZNCTpskFpIKg=;
+ b=PlrYMSP2h6k1ZitVeuybm/+AYAE+sB8vRMB0+kQOvow5oszNXceJgjEAAvFiIlmk8dfT
+ 43T9eS07CTuXT5UodAkvV/QFJS1fQXtS2c29x/cctBkqEX6jmAfoJcWHJC0DTzKAUQWR
+ iUbfgYI6KmSYNMk70LnKGdaOG/+UOyrjPqDPs2t9xMboURdOeol/NYZGkwptOCiG14T0
+ sbJWNxq07XmOG8CdPD29AbXQVHyC/cFAqZVn9RBzyVvGYcPANFGGd78XxPiAgZ4dOBxM
+ VvAY06D+9EnXtAWkr8uALBZMh621nLJ+hx8OYkjVKw5z/RXOjk5BS3CqcxHaLinqXVoO jQ== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by userp2120.oracle.com with ESMTP id 3091mnh158-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:27 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03851WbQ100696;
- Wed, 8 Apr 2020 05:05:26 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3020.oracle.com with ESMTP id 3091m2hvdm-1
+ Wed, 08 Apr 2020 05:05:36 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03852gSb148301;
+ Wed, 8 Apr 2020 05:05:35 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3030.oracle.com with ESMTP id 3091kgj7qp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:26 +0000
+ Wed, 08 Apr 2020 05:05:35 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03855PX9030620;
- Wed, 8 Apr 2020 05:05:25 GMT
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03855Xes022191;
+ Wed, 8 Apr 2020 05:05:33 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:05:25 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:05:33 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 19/26] x86/alternatives: NMI safe runtime patching
-Date: Tue,  7 Apr 2020 22:03:16 -0700
-Message-Id: <20200408050323.4237-20-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 25/26] x86/kvm: Guest support for dynamic hints
+Date: Tue,  7 Apr 2020 22:03:22 -0700
+Message-Id: <20200408050323.4237-26-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -75,19 +76,19 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- bulkscore=0 mlxscore=0
- malwarescore=0 spamscore=0 adultscore=0 suspectscore=0 mlxlogscore=999
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ bulkscore=0 suspectscore=0
+ spamscore=0 malwarescore=0 adultscore=0 phishscore=0 mlxlogscore=999
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
  definitions=main-2004080037
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- adultscore=0
- impostorscore=0 malwarescore=0 lowpriorityscore=0 mlxlogscore=999
- priorityscore=1501 clxscore=1015 bulkscore=0 phishscore=0 mlxscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2003020000 definitions=main-2004080037
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ malwarescore=0
+ mlxlogscore=999 mlxscore=0 priorityscore=1501 bulkscore=0 adultscore=0
+ impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004080037
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -107,302 +108,240 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Runtime patching can deadlock with multiple simultaneous NMIs.
-This can happen while patching inter-dependent pv-ops which are
-used in the NMI path (ex pv_lock_ops):
+If the hypervisor supports KVM_FEATURE_DYNAMIC_HINTS, then register a
+callback vector (currently chosen to be HYPERVISOR_CALLBACK_VECTOR.)
+The callback triggers on a change in the active hints which are
+are exported via KVM CPUID in %ecx.
 
- CPU0   			    CPUx
- ----                               ----
-
- patch_worker()                     patch_worker()
-
-   /* Traversal, insn-gen */          text_poke_sync_finish()
-   tps.patch_worker()                   /* wait until:
-     /* = paravirt_worker() */           *  tps->state == PATCH_DONE
-                                         */
-           /* start-patching:lock.spin_unlock */
-      generate_paravirt()
-        runtime_patch()
-
-      text_poke_site()                  text_poke_sync_site()
-        poke_sync()                      /* for state in:
-          __text_do_poke()                *  PATCH_SYNC_[012]
-	  ==NMI==                         */
-	                                 ==NMI==
-         tries-to-acquire:nmi_lock       acquires:nmi_lock
-                                         tries-to-release:nmi_lock
-					 ==BP==
-   				         text_poke_sync_site()
-
-      /* waiting-for:nmi_lock */    /* waiting-for:patched-spin_unlock() */
-
-A similar deadlock exists if two secondary CPUs get an NMI as well.
-
-Fix this by patching NMI-unsafe ops in an NMI context. Given that the
-NMI entry code ensures that NMIs do not nest, we are guaranteed that
-this can be done atomically.
-
-We do this by registering a local NMI handler (text_poke_nmi()) and
-triggering a local NMI on the primary (via patch_worker_nmi()) which
-then calls the same worker (tps->patch_worker()) as in thread-context.
-
-On the secondary, we continue with the pipeline sync loop (via
-text_poke_sync_finish()) in thread-context; however, if there is an
-NMI on the secondary, we call text_poke_sync_finish() in the handler
-which continues the work that was being done in thread-context.
-
-Also note that text_poke_nmi() always executes first so we know that
-it takes priority over any arbitrary code executing in the installed
-NMI handlers.
-
- CPU0                                CPUx
- ----                                ----
-
- patch_worker(nmi=true)              patch_worker(nmi=true)
-
-   patch_worker_nmi() -> triggers NMI   text_poke_sync_finish()
-   /* wait for return from NMI */         /* wait until:
-            ...                            *  tps->state == PATCH_DONE
-                                           */
-
-   smp_store_release(&tps->state,
-                     PATCH_DONE)
-                                          /* for each patch-site */
-
-                                          text_poke_sync_site()
- CPU0-NMI                                 /* for each:
- --------                                  *  PATCH_SYNC_[012]
-                                           */
- text_poke_nmi()                            sync_one()
-   /* Traversal, insn-gen */                ack()
-   tps.patch_worker()
-   /* = paravirt_worker() */                ...
-
-   /* for each patch-site */
-
-     generate_paravirt()
-       runtime_patch()
-
-     text_poke_site()
-       poke_sync()
-         __text_do_poke()
-         sync_one()
-         ack()
-         wait_for_acks()
-
-          ...
-
+Trigger re-evaluation of KVM_HINTS based on change in their active
+status.
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/include/asm/text-patching.h |   2 +-
- arch/x86/kernel/alternative.c        | 120 ++++++++++++++++++++++++++-
- 2 files changed, 117 insertions(+), 5 deletions(-)
+ arch/x86/Kconfig                |  1 +
+ arch/x86/entry/entry_64.S       |  5 +++
+ arch/x86/include/asm/kvm_para.h |  7 ++++
+ arch/x86/kernel/kvm.c           | 58 ++++++++++++++++++++++++++++++---
+ include/asm-generic/kvm_para.h  |  4 +++
+ include/linux/kvm_para.h        |  5 +++
+ 6 files changed, 76 insertions(+), 4 deletions(-)
 
-diff --git a/arch/x86/include/asm/text-patching.h b/arch/x86/include/asm/text-patching.h
-index e86709a8287e..9ba329bf9479 100644
---- a/arch/x86/include/asm/text-patching.h
-+++ b/arch/x86/include/asm/text-patching.h
-@@ -22,7 +22,7 @@ static inline void apply_paravirt(struct paravirt_patch_site *start,
- #define __parainstructions_runtime	NULL
- #define __parainstructions_runtime_end	NULL
- #else
--int paravirt_runtime_patch(void);
-+int paravirt_runtime_patch(bool nmi);
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index e0629558b6b5..23b239d184fc 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -810,6 +810,7 @@ config KVM_GUEST
+ 	select PARAVIRT_CLOCK
+ 	select ARCH_CPUIDLE_HALTPOLL
+ 	select PARAVIRT_RUNTIME
++	select X86_HV_CALLBACK_VECTOR
+ 	default y
+ 	---help---
+ 	  This option enables various optimizations for running under the KVM
+diff --git a/arch/x86/entry/entry_64.S b/arch/x86/entry/entry_64.S
+index 0e9504fabe52..96b2a243c54f 100644
+--- a/arch/x86/entry/entry_64.S
++++ b/arch/x86/entry/entry_64.S
+@@ -1190,6 +1190,11 @@ apicinterrupt3 HYPERVISOR_CALLBACK_VECTOR \
+ 	acrn_hv_callback_vector acrn_hv_vector_handler
  #endif
  
- /*
-diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index c68d940356a2..385c3e6ea925 100644
---- a/arch/x86/kernel/alternative.c
-+++ b/arch/x86/kernel/alternative.c
-@@ -1442,6 +1442,14 @@ struct text_poke_state {
- 
- 	unsigned int primary_cpu; /* CPU doing the patching. */
- 	unsigned int num_acks; /* Number of Acks needed. */
++#if IS_ENABLED(CONFIG_KVM_GUEST)
++apicinterrupt3 HYPERVISOR_CALLBACK_VECTOR \
++	kvm_callback_vector kvm_do_callback
++#endif
 +
-+	/*
-+	 * To synchronize with the NMI handler.
-+	 */
-+	atomic_t nmi_work;
-+
-+	/* Ensure this is patched atomically against NMIs. */
-+	bool nmi_context;
- };
+ idtentry debug			do_debug		has_error_code=0	paranoid=1 shift_ist=IST_INDEX_DB ist_offset=DB_STACK_OFFSET
+ idtentry int3			do_int3			has_error_code=0	create_gap=1
+ idtentry stack_segment		do_stack_segment	has_error_code=1
+diff --git a/arch/x86/include/asm/kvm_para.h b/arch/x86/include/asm/kvm_para.h
+index 9b4df6eaa11a..5a7ca5639c2e 100644
+--- a/arch/x86/include/asm/kvm_para.h
++++ b/arch/x86/include/asm/kvm_para.h
+@@ -88,11 +88,13 @@ static inline long kvm_hypercall4(unsigned int nr, unsigned long p1,
+ bool kvm_para_available(void);
+ unsigned int kvm_arch_para_features(void);
+ unsigned int kvm_arch_para_hints(void);
++unsigned int kvm_arch_para_active_hints(void);
+ void kvm_async_pf_task_wait(u32 token, int interrupt_kernel);
+ void kvm_async_pf_task_wake(u32 token);
+ u32 kvm_read_and_reset_pf_reason(void);
+ extern void kvm_disable_steal_time(void);
+ void do_async_page_fault(struct pt_regs *regs, unsigned long error_code, unsigned long address);
++void kvm_callback_vector(struct pt_regs *regs);
  
- static struct text_poke_state text_poke_state;
-@@ -1715,6 +1723,7 @@ static void poke_int3_native(struct pt_regs *regs,
-  * on secondary CPUs for all patch sites.
-  *
-  * Called in thread context with tps->state == PATCH_SYNC_DONE.
-+ * Also might be called from NMI context with an arbitrary tps->state.
-  * Returns with tps->state == PATCH_DONE.
-  */
- static void text_poke_sync_finish(struct text_poke_state *tps)
-@@ -1741,6 +1750,12 @@ static void text_poke_sync_finish(struct text_poke_state *tps)
- 			cpumask_set_cpu(cpu, &tps->sync_ack_map);
- 			smp_cond_load_acquire(&tps->state,
- 					      (state != VAL));
-+		} else if (in_nmi() && (state & PATCH_SYNC_x)) {
-+			/*
-+			 * Called in case of NMI so we should be ready
-+			 * to be called with any PATCH_SYNC_x.
-+			 */
-+			text_poke_sync_site(tps);
- 		} else if (state == PATCH_SYNC_0) {
- 			/*
- 			 * PATCH_SYNC_1, PATCH_SYNC_2 are handled
-@@ -1753,6 +1768,91 @@ static void text_poke_sync_finish(struct text_poke_state *tps)
- 	}
+ #ifdef CONFIG_PARAVIRT_SPINLOCKS
+ void __init kvm_spinlock_init(void);
+@@ -121,6 +123,11 @@ static inline unsigned int kvm_arch_para_hints(void)
+ 	return 0;
  }
  
-+/*
-+ * text_poke_nmi() - primary CPU comes here (via self NMI) and the
-+ * secondary (if there's an NMI.)
-+ *
-+ * By placing this NMI handler first, we can restrict execution of any
-+ * NMI code that might be under patching.
-+ * Local NMI handling also does not go through any locking code so it
-+ * should be safe to install one.
-+ *
-+ * In both these roles the state-machine is identical to the one that
-+ * we had in task context.
-+ */
-+static int text_poke_nmi(unsigned int val, struct pt_regs *regs)
++static inline unsigned int kvm_arch_para_active_hints(void)
 +{
-+	int ret, cpu = smp_processor_id();
-+	struct text_poke_state *tps = &text_poke_state;
++	return 0;
++}
 +
-+	/*
-+	 * We came here because there's a text-poke handler
-+	 * installed. Get out if there's no work assigned yet.
-+	 */
-+	if (atomic_read(&tps->nmi_work) == 0)
-+		return NMI_DONE;
+ static inline u32 kvm_read_and_reset_pf_reason(void)
+ {
+ 	return 0;
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index 1cb7eab805a6..163b7a7ec5f9 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -25,6 +25,8 @@
+ #include <linux/nmi.h>
+ #include <linux/swait.h>
+ #include <linux/memory.h>
++#include <linux/irq.h>
++#include <linux/interrupt.h>
+ #include <asm/timer.h>
+ #include <asm/cpu.h>
+ #include <asm/traps.h>
+@@ -438,7 +440,7 @@ static void __init sev_map_percpu_data(void)
+ static bool pv_tlb_flush_supported(void)
+ {
+ 	return (kvm_para_has_feature(KVM_FEATURE_PV_TLB_FLUSH) &&
+-		!kvm_para_has_hint(KVM_HINTS_REALTIME) &&
++		!kvm_para_has_active_hint(KVM_HINTS_REALTIME) &&
+ 		kvm_para_has_feature(KVM_FEATURE_STEAL_TIME));
+ }
+ 
+@@ -463,7 +465,7 @@ static bool pv_ipi_supported(void)
+ static bool pv_sched_yield_supported(void)
+ {
+ 	return (kvm_para_has_feature(KVM_FEATURE_PV_SCHED_YIELD) &&
+-		!kvm_para_has_hint(KVM_HINTS_REALTIME) &&
++		!kvm_para_has_active_hint(KVM_HINTS_REALTIME) &&
+ 	    kvm_para_has_feature(KVM_FEATURE_STEAL_TIME));
+ }
+ 
+@@ -568,7 +570,7 @@ static void kvm_smp_send_call_func_ipi(const struct cpumask *mask)
+ static void __init kvm_smp_prepare_cpus(unsigned int max_cpus)
+ {
+ 	native_smp_prepare_cpus(max_cpus);
+-	if (kvm_para_has_hint(KVM_HINTS_REALTIME))
++	if (kvm_para_has_active_hint(KVM_HINTS_REALTIME))
+ 		static_branch_disable(&virt_spin_lock_key);
+ }
+ 
+@@ -654,6 +656,13 @@ static bool kvm_pv_tlb(void)
+ 	return cond;
+ }
+ 
++#ifdef CONFIG_PARAVIRT_RUNTIME
++static bool has_dynamic_hint;
++static void __init kvm_register_callback_vector(void);
++#else
++#define has_dynamic_hint false
++#endif /* CONFIG_PARAVIRT_RUNTIME */
 +
-+	if (cpu == tps->primary_cpu) {
-+		/*
-+		 * Do what we came here for. We can safely patch: any
-+		 * secondary CPUs executing in NMI context have been
-+		 * captured in the code below and are doing useful
-+		 * work.
-+		 */
-+		tps->patch_worker(tps);
-+
-+		/*
-+		 * Both the primary and the secondary CPUs are done (in NMI
-+		 * or thread context.) Mark work done so any future NMIs can
-+		 * skip this and go to the real handler.
-+		 */
-+		atomic_dec(&tps->nmi_work);
-+
-+		/*
-+		 * The NMI was self-induced, consume it.
-+		 */
-+		ret = NMI_HANDLED;
-+	} else {
-+		/*
-+		 * Unexpected NMI on a secondary CPU: do sync_core()
-+		 * work until done.
-+		 */
-+		text_poke_sync_finish(tps);
-+
-+		/*
-+		 * The NMI was spontaneous, not self-induced.
-+		 * Don't consume it.
-+		 */
-+		ret = NMI_DONE;
+ static void __init kvm_guest_init(void)
+ {
+ 	int i;
+@@ -674,6 +683,12 @@ static void __init kvm_guest_init(void)
+ 	if (kvm_para_has_feature(KVM_FEATURE_PV_EOI))
+ 		apic_set_eoi_write(kvm_guest_apic_eoi_write);
+ 
++	if (IS_ENABLED(CONFIG_PARAVIRT_RUNTIME) &&
++	    kvm_para_has_feature(KVM_FEATURE_DYNAMIC_HINTS)) {
++		kvm_register_callback_vector();
++		has_dynamic_hint = true;
 +	}
 +
-+	return ret;
-+}
-+
+ #ifdef CONFIG_SMP
+ 	smp_ops.smp_prepare_cpus = kvm_smp_prepare_cpus;
+ 	smp_ops.smp_prepare_boot_cpu = kvm_smp_prepare_boot_cpu;
+@@ -729,12 +744,27 @@ unsigned int kvm_arch_para_features(void)
+ 	return cpuid_eax(kvm_cpuid_base() | KVM_CPUID_FEATURES);
+ }
+ 
 +/*
-+ * patch_worker_nmi() - sets up an NMI handler to do the
-+ * patching work.
-+ * This stops any NMIs from interrupting any code that might
-+ * be getting patched.
++ * Universe of hints that's ever been given to this guest.
 + */
-+static void __maybe_unused patch_worker_nmi(void)
+ unsigned int kvm_arch_para_hints(void)
+ {
+ 	return cpuid_edx(kvm_cpuid_base() | KVM_CPUID_FEATURES);
+ }
+ EXPORT_SYMBOL_GPL(kvm_arch_para_hints);
+ 
++/*
++ * Currently active set of hints. Reading can race with modifications.
++ */
++unsigned int kvm_arch_para_active_hints(void)
 +{
-+	atomic_set(&text_poke_state.nmi_work, 1);
-+	/*
-+	 * We could just use apic->send_IPI_self here. However, for reasons
-+	 * that I don't understand, apic->send_IPI() or apic->send_IPI_mask()
-+	 * work but apic->send_IPI_self (which internally does apic_write())
-+	 * does not.
-+	 */
-+	apic->send_IPI(smp_processor_id(), NMI_VECTOR);
++	if (has_dynamic_hint)
++		return cpuid_ecx(kvm_cpuid_base() | KVM_CPUID_FEATURES);
++	else
++		return kvm_arch_para_hints();
++}
++EXPORT_SYMBOL_GPL(kvm_arch_para_active_hints);
 +
-+	/*
-+	 * Barrier to ensure that we do actually execute the NMI
-+	 * before exiting.
-+	 */
-+	atomic_cond_read_acquire(&text_poke_state.nmi_work, !VAL);
+ static uint32_t __init kvm_detect(void)
+ {
+ 	return kvm_cpuid_base();
+@@ -878,7 +908,7 @@ static inline bool kvm_para_lock_ops(void)
+ {
+ 	/* Does host kernel support KVM_FEATURE_PV_UNHALT? */
+ 	return kvm_para_has_feature(KVM_FEATURE_PV_UNHALT) &&
+-		!kvm_para_has_hint(KVM_HINTS_REALTIME);
++		!kvm_para_has_active_hint(KVM_HINTS_REALTIME);
+ }
+ 
+ static bool kvm_pv_spinlock(void)
+@@ -975,4 +1005,24 @@ void kvm_trigger_reprobe_cpuid(struct work_struct *work)
+ 
+ 	mutex_unlock(&text_mutex);
+ }
++
++static DECLARE_WORK(trigger_reprobe, kvm_trigger_reprobe_cpuid);
++
++void __irq_entry kvm_do_callback(struct pt_regs *regs)
++{
++	struct pt_regs *old_regs = set_irq_regs(regs);
++
++	irq_enter();
++	inc_irq_stat(irq_hv_callback_count);
++
++	schedule_work(&trigger_reprobe);
++	irq_exit();
++	set_irq_regs(old_regs);
 +}
 +
- static int patch_worker(void *t)
- {
- 	int cpu = smp_processor_id();
-@@ -1769,7 +1869,10 @@ static int patch_worker(void *t)
- 		 * Generates insns and calls text_poke_site() to do the poking
- 		 * and sync.
- 		 */
--		tps->patch_worker(tps);
-+		if (!tps->nmi_context)
-+			tps->patch_worker(tps);
-+		else
-+			patch_worker_nmi();
- 
- 		/*
- 		 * We are done patching. Switch the state to PATCH_DONE
-@@ -1790,7 +1893,8 @@ static int patch_worker(void *t)
-  *
-  * Return: 0 on success, -errno on failure.
-  */
--static int __maybe_unused text_poke_late(patch_worker_t worker, void *stage)
-+static int __maybe_unused text_poke_late(patch_worker_t worker, void *stage,
-+					 bool nmi)
- {
- 	int ret;
- 
-@@ -1807,12 +1911,20 @@ static int __maybe_unused text_poke_late(patch_worker_t worker, void *stage)
- 	text_poke_state.state = PATCH_SYNC_DONE; /* Start state */
- 	text_poke_state.primary_cpu = smp_processor_id();
- 
-+	text_poke_state.nmi_context = nmi;
-+
-+	if (nmi)
-+		register_nmi_handler(NMI_LOCAL, text_poke_nmi,
-+				     NMI_FLAG_FIRST, "text_poke_nmi");
- 	/*
- 	 * Run the worker on all online CPUs. Don't need to do anything
- 	 * for offline CPUs as they come back online with a clean cache.
- 	 */
- 	ret = stop_machine(patch_worker, &text_poke_state, cpu_online_mask);
- 
-+	if (nmi)
-+		unregister_nmi_handler(NMI_LOCAL, "text_poke_nmi");
-+
- 	return ret;
- }
- 
-@@ -1957,13 +2069,13 @@ static void paravirt_worker(struct text_poke_state *tps)
-  *
-  * Return: 0 on success, -errno on failure.
-  */
--int paravirt_runtime_patch(void)
-+int paravirt_runtime_patch(bool nmi)
- {
- 	lockdep_assert_held(&text_mutex);
- 
- 	if (!pv_stage.count)
- 		return -EINVAL;
- 
--	return text_poke_late(paravirt_worker, &pv_stage);
-+	return text_poke_late(paravirt_worker, &pv_stage, nmi);
- }
++static void __init kvm_register_callback_vector(void)
++{
++	alloc_intr_gate(HYPERVISOR_CALLBACK_VECTOR, kvm_callback_vector);
++	wrmsrl(MSR_KVM_HINT_VECTOR, HYPERVISOR_CALLBACK_VECTOR);
++}
  #endif /* CONFIG_PARAVIRT_RUNTIME */
+diff --git a/include/asm-generic/kvm_para.h b/include/asm-generic/kvm_para.h
+index 728e5c5706c4..4a575299ad62 100644
+--- a/include/asm-generic/kvm_para.h
++++ b/include/asm-generic/kvm_para.h
+@@ -24,6 +24,10 @@ static inline unsigned int kvm_arch_para_hints(void)
+ 	return 0;
+ }
+ 
++static inline unsigned int kvm_arch_para_active_hints(void)
++{
++	return 0;
++}
+ static inline bool kvm_para_available(void)
+ {
+ 	return false;
+diff --git a/include/linux/kvm_para.h b/include/linux/kvm_para.h
+index f23b90b02898..c98d3944d25a 100644
+--- a/include/linux/kvm_para.h
++++ b/include/linux/kvm_para.h
+@@ -14,4 +14,9 @@ static inline bool kvm_para_has_hint(unsigned int feature)
+ {
+ 	return !!(kvm_arch_para_hints() & (1UL << feature));
+ }
++
++static inline bool kvm_para_has_active_hint(unsigned int feature)
++{
++	return !!(kvm_arch_para_active_hints() & BIT(feature));
++}
+ #endif /* __LINUX_KVM_PARA_H */
 -- 
 2.20.1
 
