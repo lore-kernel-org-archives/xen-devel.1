@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
+	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 305C8C5321D
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EAAE1C2BB86
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:07:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F2DCE2082F
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id BB0E420769
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:07:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="vt9sy4IT"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2DCE2082F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="HAM6OV/l"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BB0E420769
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2ua-0003Eg-Dl; Wed, 08 Apr 2020 05:06:04 +0000
+	id 1jM2w8-0004Yt-In; Wed, 08 Apr 2020 05:07:40 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2uZ-0003Cn-53
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:06:03 +0000
-X-Inumbo-ID: 94cf9aae-7956-11ea-81bb-12813bfff9fa
+ id 1jM2w6-0004YC-M0
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:07:38 +0000
+X-Inumbo-ID: dd4c6e4c-7956-11ea-81bb-12813bfff9fa
 Received: from userp2130.oracle.com (unknown [156.151.31.86])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 94cf9aae-7956-11ea-81bb-12813bfff9fa;
- Wed, 08 Apr 2020 05:05:36 +0000 (UTC)
+ id dd4c6e4c-7956-11ea-81bb-12813bfff9fa;
+ Wed, 08 Apr 2020 05:07:38 +0000 (UTC)
 Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 038553d4013457;
- Wed, 8 Apr 2020 05:05:28 GMT
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 038542I1012889;
+ Wed, 8 Apr 2020 05:07:32 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=RT2DLUiFIblGAhj2vsdXWMs47UzEg77Wx4rwQqNvIys=;
- b=vt9sy4IT0ona61EF6lrQB6+fOd4n1UUP16sabHo45o2Fj3qC6LzIzwKRjy/UGHKp6UtX
- qFSd5YSVzautGXeCr2eAJwfIK/iGXCJNeAxcoDO3I7m5gSP91p4n0pb5kTTgdsi0yjOx
- qo22FkosRIApaeM6Fz6ilxR/dtoXxhOalPa8lPluAeNfJBYl4kG5bLmjOE/87zZNyJBJ
- gyT8RCVnfUfcfVutEDgu5tGajHjyK4ZwDhUOdnggz0MB/ArZELsxKKhJSr8EvqA/iPGM
- LytegfsDsU5SPuZ1H7lB9GSPk4DwMfVvQ5OLU8BwvFvA+C8d07oHuaLcCOsQnaN6BFRD jw== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2130.oracle.com with ESMTP id 3091m390y1-1
+ bh=BUklSOLzYwRiPoSEy5WnSrk9xDtG8YVnZFCF9aTkapM=;
+ b=HAM6OV/lJ8vmGWaH8HEJdwRVp6ooCzYRoUgChfSW/OrSpqxiPml6ta3JoC90TxAKpbMs
+ /Aw45BvATgx0Gcb944Wm1+NEmIyniu3IdIy9ErStnhlW3Bc0dWmZTJdB3sq08USIeKo/
+ aqkvcvZA2mZGOwjMug+1v+JOivODST/9JEJwD93eAR9vuYHZGeissmTBP4cMlxdEJan1
+ U/qEsbPmwI1VaIxk6TYSwbVGnWc9dH2xDJBKxKQYq17Er/B8vs95H2Zsew/xzl6XYBFB
+ TbYIeOc2t3aZfJw6LgrJ1ZcG29Oaic0u0EqByPailVmBhykZpOmmRBElQQBF1OUqBn75 CQ== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2130.oracle.com with ESMTP id 3091m3915p-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:28 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853M4I159232;
- Wed, 8 Apr 2020 05:05:28 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by userp3030.oracle.com with ESMTP id 3091m01g4f-1
+ Wed, 08 Apr 2020 05:07:32 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03851Wqa100631;
+ Wed, 8 Apr 2020 05:05:31 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+ by aserp3020.oracle.com with ESMTP id 3091m2hvmg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:27 +0000
+ Wed, 08 Apr 2020 05:05:31 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 03855QOv007470;
- Wed, 8 Apr 2020 05:05:26 GMT
+ by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03855TSJ022184;
+ Wed, 8 Apr 2020 05:05:29 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:05:26 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:05:29 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 20/26] x86/paravirt: Enable pv-spinlocks in runtime_patch()
-Date: Tue,  7 Apr 2020 22:03:17 -0700
-Message-Id: <20200408050323.4237-21-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 22/26] kvm/paravirt: Encapsulate KVM pv switching logic
+Date: Tue,  7 Apr 2020 22:03:19 -0700
+Message-Id: <20200408050323.4237-23-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -76,11 +76,11 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- malwarescore=0
- mlxlogscore=999 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2003020000 definitions=main-2004080037
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ bulkscore=0 mlxscore=0
+ malwarescore=0 spamscore=0 adultscore=0 suspectscore=0 mlxlogscore=999
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004080037
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
@@ -108,94 +108,179 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Enable runtime patching of paravirt spinlocks. These can be trivially
-enabled because pv_lock_ops are never preemptible -- preemption is
-disabled at entry to spin_lock*().
-
-Note that a particular CPU instance might get preempted in the host but
-because runtime_patching() is called via stop_machine(), the migration
-thread would flush out any kernel threads preempted in the host.
+KVM pv-ops are dependent on KVM features/hints which are exposed
+via CPUID. Decouple the probing and the enabling of these ops from
+__init so they can be called post-init as well.
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/include/asm/paravirt.h  | 10 +++++-----
- arch/x86/kernel/paravirt_patch.c | 12 ++++++++++++
- kernel/locking/lock_events.c     |  2 +-
- 3 files changed, 18 insertions(+), 6 deletions(-)
+ arch/x86/Kconfig      |  1 +
+ arch/x86/kernel/kvm.c | 87 ++++++++++++++++++++++++++++++-------------
+ 2 files changed, 63 insertions(+), 25 deletions(-)
 
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index 694d8daf4983..cb3d0a91c060 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -642,27 +642,27 @@ static inline void __set_fixmap(unsigned /* enum fixed_addresses */ idx,
- static __always_inline void pv_queued_spin_lock_slowpath(struct qspinlock *lock,
- 							u32 val)
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 605619938f08..e0629558b6b5 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -809,6 +809,7 @@ config KVM_GUEST
+ 	depends on PARAVIRT
+ 	select PARAVIRT_CLOCK
+ 	select ARCH_CPUIDLE_HALTPOLL
++	select PARAVIRT_RUNTIME
+ 	default y
+ 	---help---
+ 	  This option enables various optimizations for running under the KVM
+diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
+index e56d263159d7..31f5ecfd3907 100644
+--- a/arch/x86/kernel/kvm.c
++++ b/arch/x86/kernel/kvm.c
+@@ -24,6 +24,7 @@
+ #include <linux/debugfs.h>
+ #include <linux/nmi.h>
+ #include <linux/swait.h>
++#include <linux/memory.h>
+ #include <asm/timer.h>
+ #include <asm/cpu.h>
+ #include <asm/traps.h>
+@@ -262,12 +263,20 @@ do_async_page_fault(struct pt_regs *regs, unsigned long error_code, unsigned lon
+ }
+ NOKPROBE_SYMBOL(do_async_page_fault);
+ 
++static bool kvm_pv_io_delay(void)
++{
++	bool cond = kvm_para_has_feature(KVM_FEATURE_NOP_IO_DELAY);
++
++	paravirt_stage_alt(cond, cpu.io_delay, kvm_io_delay);
++
++	return cond;
++}
++
+ static void __init paravirt_ops_setup(void)
  {
--	PVOP_VCALL2(lock.queued_spin_lock_slowpath, lock, val);
-+	PVRTOP_VCALL2(lock.queued_spin_lock_slowpath, lock, val);
+ 	pv_info.name = "KVM";
+ 
+-	if (kvm_para_has_feature(KVM_FEATURE_NOP_IO_DELAY))
+-		pv_ops.cpu.io_delay = kvm_io_delay;
++	kvm_pv_io_delay();
+ 
+ #ifdef CONFIG_X86_IO_APIC
+ 	no_timer_check = 1;
+@@ -432,6 +441,15 @@ static bool pv_tlb_flush_supported(void)
+ 		kvm_para_has_feature(KVM_FEATURE_STEAL_TIME));
  }
  
- static __always_inline void pv_queued_spin_unlock(struct qspinlock *lock)
- {
--	PVOP_VCALLEE1(lock.queued_spin_unlock, lock);
-+	PVRTOP_VCALLEE1(lock.queued_spin_unlock, lock);
++static bool kvm_pv_steal_clock(void)
++{
++	bool cond = kvm_para_has_feature(KVM_FEATURE_STEAL_TIME);
++
++	paravirt_stage_alt(cond, time.steal_clock, kvm_steal_clock);
++
++	return cond;
++}
++
+ static DEFINE_PER_CPU(cpumask_var_t, __pv_cpu_mask);
+ 
+ #ifdef CONFIG_SMP
+@@ -624,6 +642,17 @@ static void kvm_flush_tlb_others(const struct cpumask *cpumask,
+ 	native_flush_tlb_others(flushmask, info);
  }
  
- static __always_inline void pv_wait(u8 *ptr, u8 val)
++static bool kvm_pv_tlb(void)
++{
++	bool cond = pv_tlb_flush_supported();
++
++	paravirt_stage_alt(cond, mmu.flush_tlb_others,
++			   kvm_flush_tlb_others);
++	paravirt_stage_alt(cond, mmu.tlb_remove_table,
++			   tlb_remove_table);
++	return cond;
++}
++
+ static void __init kvm_guest_init(void)
  {
--	PVOP_VCALL2(lock.wait, ptr, val);
-+	PVRTOP_VCALL2(lock.wait, ptr, val);
+ 	int i;
+@@ -635,16 +664,11 @@ static void __init kvm_guest_init(void)
+ 	if (kvm_para_has_feature(KVM_FEATURE_ASYNC_PF))
+ 		x86_init.irqs.trap_init = kvm_apf_trap_init;
+ 
+-	if (kvm_para_has_feature(KVM_FEATURE_STEAL_TIME)) {
++	if (kvm_pv_steal_clock())
+ 		has_steal_clock = 1;
+-		pv_ops.time.steal_clock = kvm_steal_clock;
+-	}
+ 
+-	if (pv_tlb_flush_supported()) {
+-		pv_ops.mmu.flush_tlb_others = kvm_flush_tlb_others;
+-		pv_ops.mmu.tlb_remove_table = tlb_remove_table;
++	if (kvm_pv_tlb())
+ 		pr_info("KVM setup pv remote TLB flush\n");
+-	}
+ 
+ 	if (kvm_para_has_feature(KVM_FEATURE_PV_EOI))
+ 		apic_set_eoi_write(kvm_guest_apic_eoi_write);
+@@ -849,33 +873,46 @@ asm(
+ 
+ #endif
+ 
++static inline bool kvm_para_lock_ops(void)
++{
++	/* Does host kernel support KVM_FEATURE_PV_UNHALT? */
++	return kvm_para_has_feature(KVM_FEATURE_PV_UNHALT) &&
++		!kvm_para_has_hint(KVM_HINTS_REALTIME);
++}
++
++static bool kvm_pv_spinlock(void)
++{
++	bool cond = kvm_para_lock_ops();
++	bool preempt_cond = cond &&
++			kvm_para_has_feature(KVM_FEATURE_STEAL_TIME);
++
++	paravirt_stage_alt(cond, lock.queued_spin_lock_slowpath,
++			   __pv_queued_spin_lock_slowpath);
++	paravirt_stage_alt(cond, lock.queued_spin_unlock.func,
++			   PV_CALLEE_SAVE(__pv_queued_spin_unlock).func);
++	paravirt_stage_alt(cond, lock.wait, kvm_wait);
++	paravirt_stage_alt(cond, lock.kick, kvm_kick_cpu);
++
++	paravirt_stage_alt(preempt_cond,
++			   lock.vcpu_is_preempted.func,
++			   PV_CALLEE_SAVE(__kvm_vcpu_is_preempted).func);
++	return cond;
++}
++
+ /*
+  * Setup pv_lock_ops to exploit KVM_FEATURE_PV_UNHALT if present.
+  */
+ void __init kvm_spinlock_init(void)
+ {
+-	/* Does host kernel support KVM_FEATURE_PV_UNHALT? */
+-	if (!kvm_para_has_feature(KVM_FEATURE_PV_UNHALT))
+-		return;
+-
+-	if (kvm_para_has_hint(KVM_HINTS_REALTIME))
+-		return;
+ 
+ 	/* Don't use the pvqspinlock code if there is only 1 vCPU. */
+ 	if (num_possible_cpus() == 1)
+ 		return;
+ 
+-	__pv_init_lock_hash();
+-	pv_ops.lock.queued_spin_lock_slowpath = __pv_queued_spin_lock_slowpath;
+-	pv_ops.lock.queued_spin_unlock =
+-		PV_CALLEE_SAVE(__pv_queued_spin_unlock);
+-	pv_ops.lock.wait = kvm_wait;
+-	pv_ops.lock.kick = kvm_kick_cpu;
++	if (!kvm_pv_spinlock())
++		return;
+ 
+-	if (kvm_para_has_feature(KVM_FEATURE_STEAL_TIME)) {
+-		pv_ops.lock.vcpu_is_preempted =
+-			PV_CALLEE_SAVE(__kvm_vcpu_is_preempted);
+-	}
++	__pv_init_lock_hash();
  }
  
- static __always_inline void pv_kick(int cpu)
- {
--	PVOP_VCALL1(lock.kick, cpu);
-+	PVRTOP_VCALL1(lock.kick, cpu);
- }
- 
- static __always_inline bool pv_vcpu_is_preempted(long cpu)
- {
--	return PVOP_CALLEE1(bool, lock.vcpu_is_preempted, cpu);
-+	return PVRTOP_CALLEE1(bool, lock.vcpu_is_preempted, cpu);
- }
- 
- void __raw_callee_save___native_queued_spin_unlock(struct qspinlock *lock);
-diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
-index 3eb8c0e720b4..3f8606f2811c 100644
---- a/arch/x86/kernel/paravirt_patch.c
-+++ b/arch/x86/kernel/paravirt_patch.c
-@@ -152,6 +152,18 @@ int runtime_patch(u8 type, void *insn_buff, void *op,
- 
- 	/* Nothing whitelisted for now. */
- 	switch (type) {
-+#ifdef CONFIG_PARAVIRT_SPINLOCKS
-+	/*
-+	 * Preemption is always disabled in the lifetime of a spinlock
-+	 * (whether held or while waiting to acquire.)
-+	 */
-+	case PARAVIRT_PATCH(lock.queued_spin_lock_slowpath):
-+	case PARAVIRT_PATCH(lock.queued_spin_unlock):
-+	case PARAVIRT_PATCH(lock.wait):
-+	case PARAVIRT_PATCH(lock.kick):
-+	case PARAVIRT_PATCH(lock.vcpu_is_preempted):
-+		break;
-+#endif
- 	default:
- 		pr_warn("type=%d unsuitable for runtime-patching\n", type);
- 		return -EINVAL;
-diff --git a/kernel/locking/lock_events.c b/kernel/locking/lock_events.c
-index fa2c2f951c6b..c3057e82e6f9 100644
---- a/kernel/locking/lock_events.c
-+++ b/kernel/locking/lock_events.c
-@@ -115,7 +115,7 @@ static const struct file_operations fops_lockevent = {
- 	.llseek = default_llseek,
- };
- 
--#ifdef CONFIG_PARAVIRT_SPINLOCKS
-+#if defined(CONFIG_PARAVIRT_SPINLOCKS) && !defined(CONFIG_PARAVIRT_RUNTIME)
- #include <asm/paravirt.h>
- 
- static bool __init skip_lockevent(const char *name)
+ #endif	/* CONFIG_PARAVIRT_SPINLOCKS */
 -- 
 2.20.1
 
