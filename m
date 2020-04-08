@@ -7,69 +7,68 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A775C38A29
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C3B3C2BB54
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D3A4320769
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CA0072082F
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="xWXrvfUd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D3A4320769
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="p4M4l8mn"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CA0072082F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2u6-0002h5-GG; Wed, 08 Apr 2020 05:05:34 +0000
+	id 1jM2uL-0002v1-PL; Wed, 08 Apr 2020 05:05:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2u5-0002gJ-4B
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:33 +0000
-X-Inumbo-ID: 8c67c17c-7956-11ea-81bb-12813bfff9fa
-Received: from userp2120.oracle.com (unknown [156.151.31.85])
+ id 1jM2uK-0002so-4x
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:48 +0000
+X-Inumbo-ID: 8c4f2959-7956-11ea-81bb-12813bfff9fa
+Received: from userp2130.oracle.com (unknown [156.151.31.86])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c67c17c-7956-11ea-81bb-12813bfff9fa;
- Wed, 08 Apr 2020 05:05:22 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853GBi179620;
- Wed, 8 Apr 2020 05:05:16 GMT
+ id 8c4f2959-7956-11ea-81bb-12813bfff9fa;
+ Wed, 08 Apr 2020 05:05:23 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03854BNo012923;
+ Wed, 8 Apr 2020 05:04:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=kG41Wdi3xZl8bLDCQdMVBGXBcfy0aVqVcUlxPKtO2Qo=;
- b=xWXrvfUdB9tuJuQ2V9qdp8V5Bz/bz2ImxUQMZguPeBGwXxeXQYy1NSxRzY5PefUFgpCi
- DE348mVzKuUk1tMCueBWHccBpShi3itMcbUNJlD7HQhzAmsa08nAPhzy6973ZKTzTfVQ
- WbbNP2PNksH1Xt5HpceILIVsYBjThZn8GmaQPXJ7/cVAn3dWpMcXfJ+nzcncLVFMkK/s
- LunZLiI+/yDjmOTe811yfyRavy6AoS80i5en5ECYf7zgvFKOwGItBp1etljPK9ypTOOE
- WlgQIgH+NA20KP2M/zAXvrlZiP8WfH2UQlOeF4HKb5cnflfwZj4/IurCxH++yE9rr9eR uA== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2120.oracle.com with ESMTP id 3091mnh14d-1
+ bh=skSK5dc4HZd1ygvZWCZ0mvu5/IDpVFbzIohZL2fpedY=;
+ b=p4M4l8mnkF/etgUggs6AvVrpqtHrBab+6kS2BRdp7uKb7mxGmfZxSjdhraVPNVIOBqW1
+ 9SsaF2ylBowJOGLHnPtacyQU8Iu1M2C729hNOxufFVU93m1m+cPlYGbixXwwcAptu91a
+ Dn7Ljb7dgX5WW5iaPA9CEvwfhOV/51yb4VF9MJYDR7G5sIw8yzijv+pZP4rdMgdHm+uE
+ Ul8vqHxMUpyE+BWirc2G54VFigebcGKqdiqjiSB/OQraTshP5IDeg1J9KANEDdF7e95c
+ rQTAkrvuRgoaIPmCw1NiQKZoAdBT2OYIgd96D8d+7Iya26gRJrIFVYatZXQuwbpqUWnH dA== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by userp2130.oracle.com with ESMTP id 3091m390vy-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:16 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853Lv7159055;
- Wed, 8 Apr 2020 05:05:16 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by userp3030.oracle.com with ESMTP id 3091m01fwa-1
+ Wed, 08 Apr 2020 05:04:59 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03852glC148201;
+ Wed, 8 Apr 2020 05:04:58 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+ by aserp3030.oracle.com with ESMTP id 3091kgj6ng-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:16 +0000
+ Wed, 08 Apr 2020 05:04:58 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03855FqY030510;
- Wed, 8 Apr 2020 05:05:15 GMT
+ by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 03854tSP015092;
+ Wed, 8 Apr 2020 05:04:56 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:05:14 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:04:55 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 11/26] x86/alternatives: Remove return value of
- text_poke*()
-Date: Tue,  7 Apr 2020 22:03:08 -0700
-Message-Id: <20200408050323.4237-12-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 01/26] x86/paravirt: Specify subsection in PVOP macros
+Date: Tue,  7 Apr 2020 22:02:58 -0700
+Message-Id: <20200408050323.4237-2-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -77,19 +76,19 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- malwarescore=0
- mlxlogscore=813 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2003020000 definitions=main-2004080037
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- mlxlogscore=873 mlxscore=0 priorityscore=1501 bulkscore=0 adultscore=0
- impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ bulkscore=0 suspectscore=0
+ spamscore=0 malwarescore=0 adultscore=0 phishscore=0 mlxlogscore=999
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
  definitions=main-2004080037
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
+ signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ adultscore=0
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 mlxlogscore=999
+ priorityscore=1501 clxscore=1015 bulkscore=0 phishscore=0 mlxscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2004080037
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -109,77 +108,295 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Various text_poke() variants don't return a useful value. Remove it.
+Allow PVOP macros to specify a subsection such that _paravirt_alt() can
+optionally put sites in .parainstructions.*.
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/include/asm/text-patching.h |  4 ++--
- arch/x86/kernel/alternative.c        | 11 +++++------
- 2 files changed, 7 insertions(+), 8 deletions(-)
+ arch/x86/include/asm/paravirt_types.h | 158 +++++++++++++++++---------
+ 1 file changed, 102 insertions(+), 56 deletions(-)
 
-diff --git a/arch/x86/include/asm/text-patching.h b/arch/x86/include/asm/text-patching.h
-index 706e61e6967d..04778c2bc34e 100644
---- a/arch/x86/include/asm/text-patching.h
-+++ b/arch/x86/include/asm/text-patching.h
-@@ -46,9 +46,9 @@ extern void text_poke_early(void *addr, const void *opcode, size_t len);
-  * On the local CPU you need to be protected against NMI or MCE handlers seeing
-  * an inconsistent instruction while you patch.
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index 732f62e04ddb..37e8f27a3b9d 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -337,6 +337,9 @@ struct paravirt_patch_template {
+ extern struct pv_info pv_info;
+ extern struct paravirt_patch_template pv_ops;
+ 
++/* Sub-section for .parainstructions */
++#define PV_SUFFIX ""
++
+ #define PARAVIRT_PATCH(x)					\
+ 	(offsetof(struct paravirt_patch_template, x) / sizeof(void *))
+ 
+@@ -350,9 +353,9 @@ extern struct paravirt_patch_template pv_ops;
+  * Generate some code, and mark it as patchable by the
+  * apply_paravirt() alternate instruction patcher.
   */
--extern void *text_poke(void *addr, const void *opcode, size_t len);
-+extern void text_poke(void *addr, const void *opcode, size_t len);
- extern void text_poke_sync(void);
--extern void *text_poke_kgdb(void *addr, const void *opcode, size_t len);
-+extern void text_poke_kgdb(void *addr, const void *opcode, size_t len);
- extern int poke_int3_handler(struct pt_regs *regs);
- extern void text_poke_bp(void *addr, const void *opcode, size_t len, const void *emulate);
+-#define _paravirt_alt(insn_string, type, clobber)	\
++#define _paravirt_alt(sec, insn_string, type, clobber)	\
+ 	"771:\n\t" insn_string "\n" "772:\n"		\
+-	".pushsection .parainstructions,\"a\"\n"	\
++	".pushsection .parainstructions" sec ",\"a\"\n"	\
+ 	_ASM_ALIGN "\n"					\
+ 	_ASM_PTR " 771b\n"				\
+ 	"  .byte " type "\n"				\
+@@ -361,8 +364,9 @@ extern struct paravirt_patch_template pv_ops;
+ 	".popsection\n"
  
-diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 0c335af9ee28..8c79a3dc5e72 100644
---- a/arch/x86/kernel/alternative.c
-+++ b/arch/x86/kernel/alternative.c
-@@ -805,7 +805,7 @@ void __init_or_module text_poke_early(void *addr, const void *opcode,
- __ro_after_init struct mm_struct *poking_mm;
- __ro_after_init unsigned long poking_addr;
+ /* Generate patchable code, with the default asm parameters. */
+-#define paravirt_alt(insn_string)					\
+-	_paravirt_alt(insn_string, "%c[paravirt_typenum]", "%c[paravirt_clobber]")
++#define paravirt_alt(sec, insn_string)					\
++	_paravirt_alt(sec, insn_string, "%c[paravirt_typenum]",		\
++		      "%c[paravirt_clobber]")
  
--static void *__text_poke(void *addr, const void *opcode, size_t len)
-+static void __text_poke(void *addr, const void *opcode, size_t len)
- {
- 	bool cross_page_boundary = offset_in_page(addr) + len > PAGE_SIZE;
- 	struct page *pages[2] = {NULL};
-@@ -906,7 +906,6 @@ static void *__text_poke(void *addr, const void *opcode, size_t len)
+ /* Simple instruction patching code. */
+ #define NATIVE_LABEL(a,x,b) "\n\t.globl " a #x "_" #b "\n" a #x "_" #b ":\n\t"
+@@ -414,7 +418,7 @@ int paravirt_disable_iospace(void);
+  * unfortunately, are quite a bit (r8 - r11)
+  *
+  * The call instruction itself is marked by placing its start address
+- * and size into the .parainstructions section, so that
++ * and size into the .parainstructions* sections, so that
+  * apply_paravirt() in arch/i386/kernel/alternative.c can do the
+  * appropriate patching under the control of the backend pv_init_ops
+  * implementation.
+@@ -512,7 +516,7 @@ int paravirt_disable_iospace(void);
+ 	})
  
- 	pte_unmap_unlock(ptep, ptl);
- 	local_irq_restore(flags);
--	return addr;
- }
  
- /**
-@@ -925,11 +924,11 @@ static void *__text_poke(void *addr, const void *opcode, size_t len)
-  * by registering a module notifier, and ordering module removal and patching
-  * trough a mutex.
-  */
--void *text_poke(void *addr, const void *opcode, size_t len)
-+void text_poke(void *addr, const void *opcode, size_t len)
- {
- 	lockdep_assert_held(&text_mutex);
+-#define ____PVOP_CALL(rettype, op, clbr, call_clbr, extra_clbr,		\
++#define ____PVOP_CALL(sec, rettype, op, clbr, call_clbr, extra_clbr,	\
+ 		      pre, post, ...)					\
+ 	({								\
+ 		rettype __ret;						\
+@@ -522,7 +526,7 @@ int paravirt_disable_iospace(void);
+ 		/* since this condition will never hold */		\
+ 		if (sizeof(rettype) > sizeof(unsigned long)) {		\
+ 			asm volatile(pre				\
+-				     paravirt_alt(PARAVIRT_CALL)	\
++				     paravirt_alt(sec, PARAVIRT_CALL)	\
+ 				     post				\
+ 				     : call_clbr, ASM_CALL_CONSTRAINT	\
+ 				     : paravirt_type(op),		\
+@@ -532,7 +536,7 @@ int paravirt_disable_iospace(void);
+ 			__ret = (rettype)((((u64)__edx) << 32) | __eax); \
+ 		} else {						\
+ 			asm volatile(pre				\
+-				     paravirt_alt(PARAVIRT_CALL)	\
++				     paravirt_alt(sec, PARAVIRT_CALL)	\
+ 				     post				\
+ 				     : call_clbr, ASM_CALL_CONSTRAINT	\
+ 				     : paravirt_type(op),		\
+@@ -544,22 +548,22 @@ int paravirt_disable_iospace(void);
+ 		__ret;							\
+ 	})
  
--	return __text_poke(addr, opcode, len);
-+	__text_poke(addr, opcode, len);
- }
+-#define __PVOP_CALL(rettype, op, pre, post, ...)			\
+-	____PVOP_CALL(rettype, op, CLBR_ANY, PVOP_CALL_CLOBBERS,	\
++#define __PVOP_CALL(sec, rettype, op, pre, post, ...)			\
++	____PVOP_CALL(sec, rettype, op, CLBR_ANY, PVOP_CALL_CLOBBERS,	\
+ 		      EXTRA_CLOBBERS, pre, post, ##__VA_ARGS__)
  
- /**
-@@ -946,9 +945,9 @@ void *text_poke(void *addr, const void *opcode, size_t len)
-  * Context: should only be used by kgdb, which ensures no other core is running,
-  *	    despite the fact it does not hold the text_mutex.
-  */
--void *text_poke_kgdb(void *addr, const void *opcode, size_t len)
-+void text_poke_kgdb(void *addr, const void *opcode, size_t len)
- {
--	return __text_poke(addr, opcode, len);
-+	__text_poke(addr, opcode, len);
- }
+-#define __PVOP_CALLEESAVE(rettype, op, pre, post, ...)			\
+-	____PVOP_CALL(rettype, op.func, CLBR_RET_REG,			\
++#define __PVOP_CALLEESAVE(sec, rettype, op, pre, post, ...)		\
++	____PVOP_CALL(sec, rettype, op.func, CLBR_RET_REG,		\
+ 		      PVOP_CALLEE_CLOBBERS, ,				\
+ 		      pre, post, ##__VA_ARGS__)
  
- static void do_sync_core(void *info)
+ 
+-#define ____PVOP_VCALL(op, clbr, call_clbr, extra_clbr, pre, post, ...)	\
++#define ____PVOP_VCALL(sec, op, clbr, call_clbr, extra_clbr, pre, post, ...)	\
+ 	({								\
+ 		PVOP_VCALL_ARGS;					\
+ 		PVOP_TEST_NULL(op);					\
+ 		asm volatile(pre					\
+-			     paravirt_alt(PARAVIRT_CALL)		\
++			     paravirt_alt(sec, PARAVIRT_CALL)		\
+ 			     post					\
+ 			     : call_clbr, ASM_CALL_CONSTRAINT		\
+ 			     : paravirt_type(op),			\
+@@ -568,85 +572,127 @@ int paravirt_disable_iospace(void);
+ 			     : "memory", "cc" extra_clbr);		\
+ 	})
+ 
+-#define __PVOP_VCALL(op, pre, post, ...)				\
+-	____PVOP_VCALL(op, CLBR_ANY, PVOP_VCALL_CLOBBERS,		\
++#define __PVOP_VCALL(sec, op, pre, post, ...)				\
++	____PVOP_VCALL(sec, op, CLBR_ANY, PVOP_VCALL_CLOBBERS,		\
+ 		       VEXTRA_CLOBBERS,					\
+ 		       pre, post, ##__VA_ARGS__)
+ 
+-#define __PVOP_VCALLEESAVE(op, pre, post, ...)				\
+-	____PVOP_VCALL(op.func, CLBR_RET_REG,				\
++#define __PVOP_VCALLEESAVE(sec, op, pre, post, ...)			\
++	____PVOP_VCALL(sec, op.func, CLBR_RET_REG,			\
+ 		      PVOP_VCALLEE_CLOBBERS, ,				\
+ 		      pre, post, ##__VA_ARGS__)
+ 
+ 
+ 
+-#define PVOP_CALL0(rettype, op)						\
+-	__PVOP_CALL(rettype, op, "", "")
+-#define PVOP_VCALL0(op)							\
+-	__PVOP_VCALL(op, "", "")
++#define _PVOP_CALL0(sec, rettype, op)					\
++	__PVOP_CALL(sec, rettype, op, "", "")
++#define _PVOP_VCALL0(sec, op)						\
++	__PVOP_VCALL(sec, op, "", "")
+ 
+-#define PVOP_CALLEE0(rettype, op)					\
+-	__PVOP_CALLEESAVE(rettype, op, "", "")
+-#define PVOP_VCALLEE0(op)						\
+-	__PVOP_VCALLEESAVE(op, "", "")
++#define _PVOP_CALLEE0(sec, rettype, op)					\
++	__PVOP_CALLEESAVE(sec, rettype, op, "", "")
++#define _PVOP_VCALLEE0(sec, op)						\
++	__PVOP_VCALLEESAVE(sec, op, "", "")
+ 
+ 
+-#define PVOP_CALL1(rettype, op, arg1)					\
+-	__PVOP_CALL(rettype, op, "", "", PVOP_CALL_ARG1(arg1))
+-#define PVOP_VCALL1(op, arg1)						\
+-	__PVOP_VCALL(op, "", "", PVOP_CALL_ARG1(arg1))
++#define _PVOP_CALL1(sec, rettype, op, arg1)				\
++	__PVOP_CALL(sec, rettype, op, "", "", PVOP_CALL_ARG1(arg1))
++#define _PVOP_VCALL1(sec, op, arg1)					\
++	__PVOP_VCALL(sec, op, "", "", PVOP_CALL_ARG1(arg1))
+ 
+-#define PVOP_CALLEE1(rettype, op, arg1)					\
+-	__PVOP_CALLEESAVE(rettype, op, "", "", PVOP_CALL_ARG1(arg1))
+-#define PVOP_VCALLEE1(op, arg1)						\
+-	__PVOP_VCALLEESAVE(op, "", "", PVOP_CALL_ARG1(arg1))
++#define _PVOP_CALLEE1(sec, rettype, op, arg1)				\
++	__PVOP_CALLEESAVE(sec, rettype, op, "", "", PVOP_CALL_ARG1(arg1))
++#define _PVOP_VCALLEE1(sec, op, arg1)					\
++	__PVOP_VCALLEESAVE(sec, op, "", "", PVOP_CALL_ARG1(arg1))
+ 
+-
+-#define PVOP_CALL2(rettype, op, arg1, arg2)				\
+-	__PVOP_CALL(rettype, op, "", "", PVOP_CALL_ARG1(arg1),		\
++#define _PVOP_CALL2(sec, rettype, op, arg1, arg2)			\
++	__PVOP_CALL(sec, rettype, op, "", "", PVOP_CALL_ARG1(arg1),	\
+ 		    PVOP_CALL_ARG2(arg2))
+-#define PVOP_VCALL2(op, arg1, arg2)					\
+-	__PVOP_VCALL(op, "", "", PVOP_CALL_ARG1(arg1),			\
++#define _PVOP_VCALL2(sec, op, arg1, arg2)				\
++	__PVOP_VCALL(sec, op, "", "", PVOP_CALL_ARG1(arg1),		\
+ 		     PVOP_CALL_ARG2(arg2))
+ 
+-#define PVOP_CALLEE2(rettype, op, arg1, arg2)				\
+-	__PVOP_CALLEESAVE(rettype, op, "", "", PVOP_CALL_ARG1(arg1),	\
++#define _PVOP_CALLEE2(sec, rettype, op, arg1, arg2)			\
++	__PVOP_CALLEESAVE(sec, rettype, op, "", "", PVOP_CALL_ARG1(arg1), \
+ 			  PVOP_CALL_ARG2(arg2))
+-#define PVOP_VCALLEE2(op, arg1, arg2)					\
+-	__PVOP_VCALLEESAVE(op, "", "", PVOP_CALL_ARG1(arg1),		\
++#define _PVOP_VCALLEE2(sec, op, arg1, arg2)				\
++	__PVOP_VCALLEESAVE(sec, op, "", "", PVOP_CALL_ARG1(arg1),	\
+ 			   PVOP_CALL_ARG2(arg2))
+ 
+ 
+-#define PVOP_CALL3(rettype, op, arg1, arg2, arg3)			\
+-	__PVOP_CALL(rettype, op, "", "", PVOP_CALL_ARG1(arg1),		\
++#define _PVOP_CALL3(sec, rettype, op, arg1, arg2, arg3)			\
++	__PVOP_CALL(sec, rettype, op, "", "", PVOP_CALL_ARG1(arg1),	\
+ 		    PVOP_CALL_ARG2(arg2), PVOP_CALL_ARG3(arg3))
+-#define PVOP_VCALL3(op, arg1, arg2, arg3)				\
+-	__PVOP_VCALL(op, "", "", PVOP_CALL_ARG1(arg1),			\
++#define _PVOP_VCALL3(sec, op, arg1, arg2, arg3)				\
++	__PVOP_VCALL(sec, op, "", "", PVOP_CALL_ARG1(arg1),		\
+ 		     PVOP_CALL_ARG2(arg2), PVOP_CALL_ARG3(arg3))
+ 
+ /* This is the only difference in x86_64. We can make it much simpler */
+ #ifdef CONFIG_X86_32
+-#define PVOP_CALL4(rettype, op, arg1, arg2, arg3, arg4)			\
+-	__PVOP_CALL(rettype, op,					\
++#define _PVOP_CALL4(sec, rettype, op, arg1, arg2, arg3, arg4)		\
++	__PVOP_CALL(sec, rettype, op,					\
+ 		    "push %[_arg4];", "lea 4(%%esp),%%esp;",		\
+ 		    PVOP_CALL_ARG1(arg1), PVOP_CALL_ARG2(arg2),		\
+ 		    PVOP_CALL_ARG3(arg3), [_arg4] "mr" ((u32)(arg4)))
+-#define PVOP_VCALL4(op, arg1, arg2, arg3, arg4)				\
+-	__PVOP_VCALL(op,						\
++#define _PVOP_VCALL4(sec, op, arg1, arg2, arg3, arg4)			\
++	__PVOP_VCALL(sec, op,						\
+ 		    "push %[_arg4];", "lea 4(%%esp),%%esp;",		\
+ 		    "0" ((u32)(arg1)), "1" ((u32)(arg2)),		\
+ 		    "2" ((u32)(arg3)), [_arg4] "mr" ((u32)(arg4)))
+ #else
+-#define PVOP_CALL4(rettype, op, arg1, arg2, arg3, arg4)			\
+-	__PVOP_CALL(rettype, op, "", "",				\
++#define _PVOP_CALL4(sec, rettype, op, arg1, arg2, arg3, arg4)		\
++	__PVOP_CALL(sec, rettype, op, "", "",				\
+ 		    PVOP_CALL_ARG1(arg1), PVOP_CALL_ARG2(arg2),		\
+ 		    PVOP_CALL_ARG3(arg3), PVOP_CALL_ARG4(arg4))
+-#define PVOP_VCALL4(op, arg1, arg2, arg3, arg4)				\
+-	__PVOP_VCALL(op, "", "",					\
++#define _PVOP_VCALL4(sec, op, arg1, arg2, arg3, arg4)			\
++	__PVOP_VCALL(sec, op, "", "",					\
+ 		     PVOP_CALL_ARG1(arg1), PVOP_CALL_ARG2(arg2),	\
+ 		     PVOP_CALL_ARG3(arg3), PVOP_CALL_ARG4(arg4))
+ #endif
+ 
++/*
++ * PVOP macros for .parainstructions
++ */
++#define PVOP_CALL0(rettype, op)						\
++	_PVOP_CALL0(PV_SUFFIX, rettype, op)
++#define PVOP_VCALL0(op)							\
++	_PVOP_VCALL0(PV_SUFFIX, op)
++
++#define PVOP_CALLEE0(rettype, op)					\
++	_PVOP_CALLEE0(PV_SUFFIX, rettype, op)
++#define PVOP_VCALLEE0(op)						\
++	_PVOP_VCALLEE0(PV_SUFFIX, op)
++
++#define PVOP_CALL1(rettype, op, arg1)					\
++	_PVOP_CALL1(PV_SUFFIX, rettype, op, arg1)
++#define PVOP_VCALL1(op, arg1)						\
++	_PVOP_VCALL1(PV_SUFFIX, op, arg1)
++
++#define PVOP_CALLEE1(rettype, op, arg1)					\
++	_PVOP_CALLEE1(PV_SUFFIX, rettype, op, arg1)
++#define PVOP_VCALLEE1(op, arg1)						\
++	_PVOP_VCALLEE1(PV_SUFFIX, op, arg1)
++
++#define PVOP_CALL2(rettype, op, arg1, arg2)				\
++	_PVOP_CALL2(PV_SUFFIX, rettype, op, arg1, arg2)
++#define PVOP_VCALL2(op, arg1, arg2)					\
++	_PVOP_VCALL2(PV_SUFFIX, op, arg1, arg2)
++
++#define PVOP_CALLEE2(rettype, op, arg1, arg2)				\
++	_PVOP_CALLEE2(PV_SUFFIX, rettype, op, arg1, arg2)
++#define PVOP_VCALLEE2(op, arg1, arg2)					\
++	_PVOP_VCALLEE2(PV_SUFFIX, op, arg1, arg2)
++
++#define PVOP_CALL3(rettype, op, arg1, arg2, arg3)			\
++	_PVOP_CALL3(PV_SUFFIX, rettype, op, arg1, arg2, arg3)
++#define PVOP_VCALL3(op, arg1, arg2, arg3)				\
++	_PVOP_VCALL3(PV_SUFFIX, op, arg1, arg2, arg3)
++
++#define PVOP_CALL4(rettype, op, arg1, arg2, arg3, arg4)			\
++	_PVOP_CALL4(PV_SUFFIX, rettype, op, arg1, arg2, arg3, arg4)
++#define PVOP_VCALL4(op, arg1, arg2, arg3, arg4)				\
++	_PVOP_VCALL4(PV_SUFFIX, op, arg1, arg2, arg3, arg4)
++
+ /* Lazy mode for batching updates / context switch */
+ enum paravirt_lazy_mode {
+ 	PARAVIRT_LAZY_NONE,
+@@ -667,7 +713,7 @@ u64 _paravirt_ident_64(u64);
+ 
+ #define paravirt_nop	((void *)_paravirt_nop)
+ 
+-/* These all sit in the .parainstructions section to tell us what to patch. */
++/* These all sit in .parainstructions* sections to tell us what to patch. */
+ struct paravirt_patch_site {
+ 	u8 *instr;		/* original instructions */
+ 	u8 type;		/* type of this instruction */
 -- 
 2.20.1
 
