@@ -7,68 +7,67 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D812DC38A2B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A5493C38A2C
 	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AC8432082F
+	by mail.kernel.org (Postfix) with ESMTPS id 77ECA20A8B
 	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:49 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="alK3sFDt"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AC8432082F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="JdkjanUu"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 77ECA20A8B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2uB-0002kV-4h; Wed, 08 Apr 2020 05:05:39 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jM2uA-0002k6-RM; Wed, 08 Apr 2020 05:05:38 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2uA-0002jQ-4V
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:38 +0000
-X-Inumbo-ID: 8c753620-7956-11ea-81bb-12813bfff9fa
-Received: from userp2120.oracle.com (unknown [156.151.31.85])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8c753620-7956-11ea-81bb-12813bfff9fa;
+ id 1jM2u9-0002j8-Hx
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:37 +0000
+X-Inumbo-ID: 8c9f7de0-7956-11ea-83d8-bc764e2007e4
+Received: from aserp2120.oracle.com (unknown [141.146.126.78])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8c9f7de0-7956-11ea-83d8-bc764e2007e4;
  Wed, 08 Apr 2020 05:05:22 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853MYK179629;
- Wed, 8 Apr 2020 05:05:07 GMT
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+ by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03853kJT191170;
+ Wed, 8 Apr 2020 05:05:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=wXWzqKpXP4X1QYluyMKcRS0Im/RDUvqYRVQBv1BS7nY=;
- b=alK3sFDt1Pwv7BYgZTwY8xnWBnHMLyJyt9SlwdNVAK2rna7XJu9iH2Y4DM6F0e9VfnC3
- GBqgu4QeDotoIm1NugkOTmgOqQb8NWWI3q5AvR/VAr/yW4T5A9roFCPiUgvbdkJf2VYr
- F0uBX8fTAVhVvjGNnf90CpBJP5UeILeKgH/DFfNpGbja2gaUn/33CY4yQCYCUjHrZ1x+
- 9+GQAaIiiFoEj2zgpzDOmZOCBpdD17bAzpbXUZu+hER4VtI+Ue9QyHVrw3rsHvCXl3RO
- mhfNnyC1wWZofzLK34HV/83fsKsCqIOOP8jU05D0+FNlDl7JqAlacAHsF/SSoud5ZyCd GQ== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2120.oracle.com with ESMTP id 3091mnh140-1
+ bh=YqkpSF+xaj87ukpBfxxbSQruerieQm4kGvLikr6EByg=;
+ b=JdkjanUuxwOILdkRa92kgljdqWjdgneiBkVZJxAeqNWM1rn046UVVjh8q+hLyr1jCaw5
+ efBQTN7ituKdbN9KZYhmSd6bCobGZy4Ai8YbCGV7w+NxE1HICzDkva4dKA2R+PUxPIzC
+ shywYoahTgQ9oCJkap9TlaUAxYpHeIGVf+XMEFvzEXjWP7PfrP/slqcx10d7fz1KStg2
+ kcTlKOfFWU0p6o2YZbGTWkmxDBVRKFs1+6jB2CTRjJvQ3gD2DZgw1BPb+x1v8dy4x7qv
+ J0Dv+ro6jQX3SXKG0NtTYkrxjdavZEFEdN+7kyhodZuYxmp5MbHHWuEIxUhLyQuwPcF6 vg== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+ by aserp2120.oracle.com with ESMTP id 3091m0s0rs-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:07 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03851X9K100807;
- Wed, 8 Apr 2020 05:05:06 GMT
+ Wed, 08 Apr 2020 05:05:02 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+ by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03852XPH062239;
+ Wed, 8 Apr 2020 05:05:02 GMT
 Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
- by aserp3020.oracle.com with ESMTP id 3091m2huh7-1
+ by userp3020.oracle.com with ESMTP id 3091mh1k6d-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:06 +0000
+ Wed, 08 Apr 2020 05:05:02 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 038556XE030455;
- Wed, 8 Apr 2020 05:05:06 GMT
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03854w5i030423;
+ Wed, 8 Apr 2020 05:04:59 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:05:05 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:04:57 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 06/26] x86/alternatives: Remove stale symbols
-Date: Tue,  7 Apr 2020 22:03:03 -0700
-Message-Id: <20200408050323.4237-7-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 02/26] x86/paravirt: Allow paravirt patching post-init
+Date: Tue,  7 Apr 2020 22:02:59 -0700
+Message-Id: <20200408050323.4237-3-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -76,19 +75,19 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- bulkscore=0 mlxscore=0
- malwarescore=0 spamscore=0 adultscore=0 suspectscore=0 mlxlogscore=999
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ suspectscore=0 bulkscore=0
+ mlxlogscore=999 mlxscore=0 phishscore=0 malwarescore=0 spamscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
  definitions=main-2004080037
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- mlxlogscore=999 mlxscore=0 priorityscore=1501 bulkscore=0 adultscore=0
- impostorscore=0 phishscore=0 spamscore=0 clxscore=1015 lowpriorityscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
- definitions=main-2004080037
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
+ mlxlogscore=999 mlxscore=0
+ priorityscore=1501 phishscore=0 suspectscore=0 bulkscore=0
+ lowpriorityscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2004080037
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -108,27 +107,181 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-__start_parainstructions and __stop_parainstructions aren't
-defined, remove them.
+Paravirt-ops are patched at init to convert indirect calls into
+direct calls and in some cases, to inline the target at the call-site.
+This is done by way of PVOP* macros which save the call-site
+information via compile time annotations.
+
+Pull this state out in .parainstructions.runtime for some pv-ops such
+that they can be used for runtime patching.
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/kernel/alternative.c | 2 --
- 1 file changed, 2 deletions(-)
+ arch/x86/Kconfig                      | 12 ++++++++++++
+ arch/x86/include/asm/paravirt_types.h |  5 +++++
+ arch/x86/include/asm/text-patching.h  |  5 +++++
+ arch/x86/kernel/alternative.c         |  2 ++
+ arch/x86/kernel/module.c              | 10 +++++++++-
+ arch/x86/kernel/vmlinux.lds.S         | 16 ++++++++++++++++
+ include/asm-generic/vmlinux.lds.h     |  8 ++++++++
+ 7 files changed, 57 insertions(+), 1 deletion(-)
 
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 1edf788d301c..605619938f08 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -764,6 +764,18 @@ config PARAVIRT
+ 	  over full virtualization.  However, when run without a hypervisor
+ 	  the kernel is theoretically slower and slightly larger.
+ 
++config PARAVIRT_RUNTIME
++	bool "Enable paravirtualized ops to be patched at runtime"
++	depends on PARAVIRT
++	help
++	  Enable the paravirtualized guest kernel to switch pv-ops based on
++	  changed host conditions, potentially improving performance
++	  significantly.
++
++	  This would increase the memory footprint of the running kernel
++	  slightly (depending mostly on whether lock and unlock are inlined
++	  or not.)
++
+ config PARAVIRT_XXL
+ 	bool
+ 
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index 37e8f27a3b9d..00e4a062ca10 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -723,6 +723,11 @@ struct paravirt_patch_site {
+ extern struct paravirt_patch_site __parainstructions[],
+ 	__parainstructions_end[];
+ 
++#ifdef CONFIG_PARAVIRT_RUNTIME
++extern struct paravirt_patch_site __parainstructions_runtime[],
++	__parainstructions_runtime_end[];
++#endif
++
+ #endif	/* __ASSEMBLY__ */
+ 
+ #endif	/* _ASM_X86_PARAVIRT_TYPES_H */
+diff --git a/arch/x86/include/asm/text-patching.h b/arch/x86/include/asm/text-patching.h
+index 67315fa3956a..e2ef241c261e 100644
+--- a/arch/x86/include/asm/text-patching.h
++++ b/arch/x86/include/asm/text-patching.h
+@@ -18,6 +18,11 @@ static inline void apply_paravirt(struct paravirt_patch_site *start,
+ #define __parainstructions_end	NULL
+ #endif
+ 
++#ifndef CONFIG_PARAVIRT_RUNTIME
++#define __parainstructions_runtime	NULL
++#define __parainstructions_runtime_end	NULL
++#endif
++
+ /*
+  * Currently, the max observed size in the kernel code is
+  * JUMP_LABEL_NOP_SIZE/RELATIVEJUMP_SIZE, which are 5.
 diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 4157f848b537..09e4ee0e09a2 100644
+index 7867dfb3963e..fdfda1375f82 100644
 --- a/arch/x86/kernel/alternative.c
 +++ b/arch/x86/kernel/alternative.c
-@@ -623,8 +623,6 @@ void __init_or_module apply_paravirt(struct paravirt_patch_site *start,
- 		text_poke_early(p->instr, insn_buff, p->len);
- 	}
- }
--extern struct paravirt_patch_site __start_parainstructions[],
--	__stop_parainstructions[];
- #endif	/* CONFIG_PARAVIRT */
+@@ -740,6 +740,8 @@ void __init alternative_instructions(void)
+ #endif
  
+ 	apply_paravirt(__parainstructions, __parainstructions_end);
++	apply_paravirt(__parainstructions_runtime,
++		       __parainstructions_runtime_end);
+ 
+ 	restart_nmi();
+ 	alternatives_patched = 1;
+diff --git a/arch/x86/kernel/module.c b/arch/x86/kernel/module.c
+index d5c72cb877b3..658ea60ce324 100644
+--- a/arch/x86/kernel/module.c
++++ b/arch/x86/kernel/module.c
+@@ -222,7 +222,7 @@ int module_finalize(const Elf_Ehdr *hdr,
+ 		    struct module *me)
+ {
+ 	const Elf_Shdr *s, *text = NULL, *alt = NULL, *locks = NULL,
+-		*para = NULL, *orc = NULL, *orc_ip = NULL;
++		*para = NULL, *para_run = NULL, *orc = NULL, *orc_ip = NULL;
+ 	char *secstrings = (void *)hdr + sechdrs[hdr->e_shstrndx].sh_offset;
+ 
+ 	for (s = sechdrs; s < sechdrs + hdr->e_shnum; s++) {
+@@ -234,6 +234,9 @@ int module_finalize(const Elf_Ehdr *hdr,
+ 			locks = s;
+ 		if (!strcmp(".parainstructions", secstrings + s->sh_name))
+ 			para = s;
++		if (!strcmp(".parainstructions.runtime",
++			    secstrings + s->sh_name))
++			para_run = s;
+ 		if (!strcmp(".orc_unwind", secstrings + s->sh_name))
+ 			orc = s;
+ 		if (!strcmp(".orc_unwind_ip", secstrings + s->sh_name))
+@@ -257,6 +260,11 @@ int module_finalize(const Elf_Ehdr *hdr,
+ 		void *pseg = (void *)para->sh_addr;
+ 		apply_paravirt(pseg, pseg + para->sh_size);
+ 	}
++	if (para_run) {
++		void *pseg = (void *)para_run->sh_addr;
++
++		apply_paravirt(pseg, pseg + para_run->sh_size);
++	}
+ 
+ 	/* make jump label nops */
+ 	jump_label_apply_nops(me);
+diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
+index 1bf7e312361f..7f5b8f6ab96e 100644
+--- a/arch/x86/kernel/vmlinux.lds.S
++++ b/arch/x86/kernel/vmlinux.lds.S
+@@ -269,6 +269,7 @@ SECTIONS
+ 	.parainstructions : AT(ADDR(.parainstructions) - LOAD_OFFSET) {
+ 		__parainstructions = .;
+ 		*(.parainstructions)
++		PARAVIRT_DISCARD(.parainstructions.runtime)
+ 		__parainstructions_end = .;
+ 	}
+ 
+@@ -348,6 +349,21 @@ SECTIONS
+ 		__smp_locks_end = .;
+ 	}
+ 
++#ifdef CONFIG_PARAVIRT_RUNTIME
++	/*
++	 * .parainstructions.runtime sticks around in memory after
++	 * init so it doesn't need to be page-aligned but everything
++	 * around us is so we will be too.
++	 */
++	. = ALIGN(8);
++	.parainstructions.runtime : AT(ADDR(.parainstructions.runtime) - \
++								LOAD_OFFSET) {
++		__parainstructions_runtime = .;
++		PARAVIRT_KEEP(.parainstructions.runtime)
++		__parainstructions_runtime_end = .;
++	}
++#endif
++
+ #ifdef CONFIG_X86_64
+ 	.data_nosave : AT(ADDR(.data_nosave) - LOAD_OFFSET) {
+ 		NOSAVE_DATA
+diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
+index 71e387a5fe90..6b009d5ce51f 100644
+--- a/include/asm-generic/vmlinux.lds.h
++++ b/include/asm-generic/vmlinux.lds.h
+@@ -135,6 +135,14 @@
+ #define MEM_DISCARD(sec) *(.mem##sec)
+ #endif
+ 
++#if defined(CONFIG_PARAVIRT_RUNTIME)
++#define PARAVIRT_KEEP(sec)	*(sec)
++#define PARAVIRT_DISCARD(sec)
++#else
++#define PARAVIRT_KEEP(sec)
++#define PARAVIRT_DISCARD(sec)	*(sec)
++#endif
++
+ #ifdef CONFIG_FTRACE_MCOUNT_RECORD
  /*
+  * The ftrace call sites are logged to a section whose name depends on the
 -- 
 2.20.1
 
