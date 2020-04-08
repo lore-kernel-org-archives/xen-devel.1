@@ -7,69 +7,67 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=unavailable
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D039C2BA16
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E1497C2D0EA
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6ADE62083E
-	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:05:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A42872082F
+	for <xen-devel@archiver.kernel.org>; Wed,  8 Apr 2020 05:06:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="vI5EI8HO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6ADE62083E
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="Nz0B0/o9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A42872082F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jM2uG-0002q1-Ux; Wed, 08 Apr 2020 05:05:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jM2uZ-0003Dm-Si; Wed, 08 Apr 2020 05:06:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=sdaI=5Y=oracle.com=ankur.a.arora@srs-us1.protection.inumbo.net>)
- id 1jM2uF-0002oQ-53
- for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:05:43 +0000
-X-Inumbo-ID: 8dca44f3-7956-11ea-81bb-12813bfff9fa
+ id 1jM2uY-0003C7-IU
+ for xen-devel@lists.xenproject.org; Wed, 08 Apr 2020 05:06:02 +0000
+X-Inumbo-ID: 94a55730-7956-11ea-9e09-bc764e2007e4
 Received: from userp2130.oracle.com (unknown [156.151.31.86])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8dca44f3-7956-11ea-81bb-12813bfff9fa;
- Wed, 08 Apr 2020 05:05:24 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 94a55730-7956-11ea-9e09-bc764e2007e4;
+ Wed, 08 Apr 2020 05:05:36 +0000 (UTC)
 Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03854h69013027;
- Wed, 8 Apr 2020 05:05:18 GMT
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03854HmH012943;
+ Wed, 8 Apr 2020 05:05:27 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2020-01-29;
- bh=8QxNSgJ0TIVxhxX6u30CrqzHaWwQp1Js8M95AGUtpXc=;
- b=vI5EI8HOwXwI5eQetVqe1UeC1FDR5h2Wq2Yc4V02ynbY+QJ5s5gshLf87NcS/xzV5QOo
- Gxmf6Vle0gmY8WBM7etujGZBUqGtXtK1X6cQzgXXz0qUt/rOZqrM4I7h/EmNpLtA8kVU
- rXTBt/ChGhsl6vAhJJASdRwQwK0zmTX9YsmKvblCa/Y0h7xD3BPSovfFcl/75PqYbkD7
- gBYSc9aJ+v3Rzov2jFcgMCyVPXAvnQL5E3hd1TQJY93DhmCkgtqATrczQaTw63J/BWNy
- UpTY/JGIya+qIoWXiyPI34jM69Qs0NZVo5Y/v2bge1U6jQZnHztNJNjgbCHjywWIB7PE /A== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
- by userp2130.oracle.com with ESMTP id 3091m390xf-1
+ bh=3KrJyMdl6FuU/9RrwZPu8LutFkDCWnKoiuaiLyLQY8k=;
+ b=Nz0B0/o9yL4G/oeYKXgml5AlpwAqrxs9OSYyfd/2t3KASsuXVslfpk3aV4siEspeImVv
+ hF5mZp00cKk33qyWWIWzgx7Z/2TQbCIg4+L+xdwnRQHABYbAaX8eoRfCCmAuRRNxd8Yw
+ b9h2KmNAKrdNawOdsrEQ9YaTpzcLbV4+S29wLj8mtcKjr+8OuLKxgVlpROe8Uc7ntEYy
+ plZiZePsltN5gQ4IzVpPOcYcmZwK2LMz2g5CfWO4pPFGbQEi7yhGvMUP7T5/BxCphx9t
+ ZQkM0P06aEe4dKlyv9maop2wZsC0FwJjCcQC7CvJv65TbINE/KWXveQRy4d4cNgM292g JA== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+ by userp2130.oracle.com with ESMTP id 3091m390xw-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:18 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
- by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03852XTl062344;
- Wed, 8 Apr 2020 05:05:17 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
- by userp3020.oracle.com with ESMTP id 3091mh1kmn-1
+ Wed, 08 Apr 2020 05:05:27 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+ by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03851WbQ100696;
+ Wed, 8 Apr 2020 05:05:26 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by aserp3020.oracle.com with ESMTP id 3091m2hvdm-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 08 Apr 2020 05:05:17 +0000
+ Wed, 08 Apr 2020 05:05:26 +0000
 Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 03855GdY007447;
- Wed, 8 Apr 2020 05:05:16 GMT
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03855PX9030620;
+ Wed, 8 Apr 2020 05:05:25 GMT
 Received: from monad.ca.oracle.com (/10.156.75.81)
  by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 07 Apr 2020 22:05:16 -0700
+ with ESMTP ; Tue, 07 Apr 2020 22:05:25 -0700
 From: Ankur Arora <ankur.a.arora@oracle.com>
 To: linux-kernel@vger.kernel.org, x86@kernel.org
-Subject: [RFC PATCH 12/26] x86/alternatives: Use __get_unlocked_pte() in
- text_poke()
-Date: Tue,  7 Apr 2020 22:03:09 -0700
-Message-Id: <20200408050323.4237-13-ankur.a.arora@oracle.com>
+Subject: [RFC PATCH 19/26] x86/alternatives: NMI safe runtime patching
+Date: Tue,  7 Apr 2020 22:03:16 -0700
+Message-Id: <20200408050323.4237-20-ankur.a.arora@oracle.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200408050323.4237-1-ankur.a.arora@oracle.com>
 References: <20200408050323.4237-1-ankur.a.arora@oracle.com>
@@ -77,16 +75,16 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
- suspectscore=0 bulkscore=0
- mlxlogscore=702 mlxscore=0 phishscore=0 malwarescore=0 spamscore=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ bulkscore=0 mlxscore=0
+ malwarescore=0 spamscore=0 adultscore=0 suspectscore=0 mlxlogscore=999
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
  definitions=main-2004080037
 X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9584
  signatures=668685
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
  adultscore=0
- impostorscore=0 malwarescore=0 lowpriorityscore=0 mlxlogscore=763
+ impostorscore=0 malwarescore=0 lowpriorityscore=0 mlxlogscore=999
  priorityscore=1501 clxscore=1015 bulkscore=0 phishscore=0 mlxscore=0
  suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2003020000 definitions=main-2004080037
@@ -109,111 +107,302 @@ Cc: jgross@suse.com, xen-devel@lists.xenproject.org, kvm@vger.kernel.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-text_poke() uses get_locked_pte() to map poking_addr. However, this
-introduces a dependency on locking code which precludes using
-text_poke() to modify qspinlock primitives.
+Runtime patching can deadlock with multiple simultaneous NMIs.
+This can happen while patching inter-dependent pv-ops which are
+used in the NMI path (ex pv_lock_ops):
 
-Accesses to this pte (and poking_addr) are protected by text_mutex
-so we can safely switch to __get_unlocked_pte() here. Note that
-we do need to be careful that we do not try to modify the poking_addr
-from multiple contexts simultaneously (ex. INT3 or NMI context.)
+ CPU0   			    CPUx
+ ----                               ----
+
+ patch_worker()                     patch_worker()
+
+   /* Traversal, insn-gen */          text_poke_sync_finish()
+   tps.patch_worker()                   /* wait until:
+     /* = paravirt_worker() */           *  tps->state == PATCH_DONE
+                                         */
+           /* start-patching:lock.spin_unlock */
+      generate_paravirt()
+        runtime_patch()
+
+      text_poke_site()                  text_poke_sync_site()
+        poke_sync()                      /* for state in:
+          __text_do_poke()                *  PATCH_SYNC_[012]
+	  ==NMI==                         */
+	                                 ==NMI==
+         tries-to-acquire:nmi_lock       acquires:nmi_lock
+                                         tries-to-release:nmi_lock
+					 ==BP==
+   				         text_poke_sync_site()
+
+      /* waiting-for:nmi_lock */    /* waiting-for:patched-spin_unlock() */
+
+A similar deadlock exists if two secondary CPUs get an NMI as well.
+
+Fix this by patching NMI-unsafe ops in an NMI context. Given that the
+NMI entry code ensures that NMIs do not nest, we are guaranteed that
+this can be done atomically.
+
+We do this by registering a local NMI handler (text_poke_nmi()) and
+triggering a local NMI on the primary (via patch_worker_nmi()) which
+then calls the same worker (tps->patch_worker()) as in thread-context.
+
+On the secondary, we continue with the pipeline sync loop (via
+text_poke_sync_finish()) in thread-context; however, if there is an
+NMI on the secondary, we call text_poke_sync_finish() in the handler
+which continues the work that was being done in thread-context.
+
+Also note that text_poke_nmi() always executes first so we know that
+it takes priority over any arbitrary code executing in the installed
+NMI handlers.
+
+ CPU0                                CPUx
+ ----                                ----
+
+ patch_worker(nmi=true)              patch_worker(nmi=true)
+
+   patch_worker_nmi() -> triggers NMI   text_poke_sync_finish()
+   /* wait for return from NMI */         /* wait until:
+            ...                            *  tps->state == PATCH_DONE
+                                           */
+
+   smp_store_release(&tps->state,
+                     PATCH_DONE)
+                                          /* for each patch-site */
+
+                                          text_poke_sync_site()
+ CPU0-NMI                                 /* for each:
+ --------                                  *  PATCH_SYNC_[012]
+                                           */
+ text_poke_nmi()                            sync_one()
+   /* Traversal, insn-gen */                ack()
+   tps.patch_worker()
+   /* = paravirt_worker() */                ...
+
+   /* for each patch-site */
+
+     generate_paravirt()
+       runtime_patch()
+
+     text_poke_site()
+       poke_sync()
+         __text_do_poke()
+         sync_one()
+         ack()
+         wait_for_acks()
+
+          ...
+
 
 Signed-off-by: Ankur Arora <ankur.a.arora@oracle.com>
 ---
- arch/x86/kernel/alternative.c |  9 ++++-----
- include/linux/mm.h            | 16 ++++++++++++++--
- mm/memory.c                   |  9 ++++++---
- 3 files changed, 24 insertions(+), 10 deletions(-)
+ arch/x86/include/asm/text-patching.h |   2 +-
+ arch/x86/kernel/alternative.c        | 120 ++++++++++++++++++++++++++-
+ 2 files changed, 117 insertions(+), 5 deletions(-)
 
-diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index 8c79a3dc5e72..0344e49a4ade 100644
---- a/arch/x86/kernel/alternative.c
-+++ b/arch/x86/kernel/alternative.c
-@@ -812,7 +812,6 @@ static void __text_poke(void *addr, const void *opcode, size_t len)
- 	temp_mm_state_t prev;
- 	unsigned long flags;
- 	pte_t pte, *ptep;
--	spinlock_t *ptl;
- 	pgprot_t pgprot;
- 
- 	/*
-@@ -846,10 +845,11 @@ static void __text_poke(void *addr, const void *opcode, size_t len)
- 	pgprot = __pgprot(pgprot_val(PAGE_KERNEL) & ~_PAGE_GLOBAL);
- 
- 	/*
--	 * The lock is not really needed, but this allows to avoid open-coding.
-+	 * text_poke() might be used to poke spinlock primitives so do this
-+	 * unlocked. This does mean that we need to be careful that no other
-+	 * context (ex. INT3 handler) is simultaneously writing to this pte.
- 	 */
--	ptep = get_locked_pte(poking_mm, poking_addr, &ptl);
--
-+	ptep = __get_unlocked_pte(poking_mm, poking_addr);
- 	/*
- 	 * This must not fail; preallocated in poking_init().
- 	 */
-@@ -904,7 +904,6 @@ static void __text_poke(void *addr, const void *opcode, size_t len)
- 	 */
- 	BUG_ON(memcmp(addr, opcode, len));
- 
--	pte_unmap_unlock(ptep, ptl);
- 	local_irq_restore(flags);
- }
- 
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 7dd5c4ccbf85..d4a652c2e269 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -1895,8 +1895,20 @@ static inline int pte_devmap(pte_t pte)
- 
- int vma_wants_writenotify(struct vm_area_struct *vma, pgprot_t vm_page_prot);
- 
--extern pte_t *__get_locked_pte(struct mm_struct *mm, unsigned long addr,
--			       spinlock_t **ptl);
-+pte_t *__get_pte(struct mm_struct *mm, unsigned long addr, spinlock_t **ptl);
-+
-+static inline pte_t *__get_unlocked_pte(struct mm_struct *mm,
-+					unsigned long addr)
-+{
-+	return __get_pte(mm, addr, NULL);
-+}
-+
-+static inline pte_t *__get_locked_pte(struct mm_struct *mm,
-+				      unsigned long addr, spinlock_t **ptl)
-+{
-+	return __get_pte(mm, addr, ptl);
-+}
-+
- static inline pte_t *get_locked_pte(struct mm_struct *mm, unsigned long addr,
- 				    spinlock_t **ptl)
- {
-diff --git a/mm/memory.c b/mm/memory.c
-index 586271f3efc6..7acfe9512084 100644
---- a/mm/memory.c
-+++ b/mm/memory.c
-@@ -1407,8 +1407,8 @@ void zap_vma_ptes(struct vm_area_struct *vma, unsigned long address,
- }
- EXPORT_SYMBOL_GPL(zap_vma_ptes);
- 
--pte_t *__get_locked_pte(struct mm_struct *mm, unsigned long addr,
--			spinlock_t **ptl)
-+pte_t *__get_pte(struct mm_struct *mm, unsigned long addr,
-+		 spinlock_t **ptl)
- {
- 	pgd_t *pgd;
- 	p4d_t *p4d;
-@@ -1427,7 +1427,10 @@ pte_t *__get_locked_pte(struct mm_struct *mm, unsigned long addr,
- 		return NULL;
- 
- 	VM_BUG_ON(pmd_trans_huge(*pmd));
--	return pte_alloc_map_lock(mm, pmd, addr, ptl);
-+	if (likely(ptl))
-+		return pte_alloc_map_lock(mm, pmd, addr, ptl);
-+	else
-+		return pte_alloc_map(mm, pmd, addr);
- }
+diff --git a/arch/x86/include/asm/text-patching.h b/arch/x86/include/asm/text-patching.h
+index e86709a8287e..9ba329bf9479 100644
+--- a/arch/x86/include/asm/text-patching.h
++++ b/arch/x86/include/asm/text-patching.h
+@@ -22,7 +22,7 @@ static inline void apply_paravirt(struct paravirt_patch_site *start,
+ #define __parainstructions_runtime	NULL
+ #define __parainstructions_runtime_end	NULL
+ #else
+-int paravirt_runtime_patch(void);
++int paravirt_runtime_patch(bool nmi);
+ #endif
  
  /*
+diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
+index c68d940356a2..385c3e6ea925 100644
+--- a/arch/x86/kernel/alternative.c
++++ b/arch/x86/kernel/alternative.c
+@@ -1442,6 +1442,14 @@ struct text_poke_state {
+ 
+ 	unsigned int primary_cpu; /* CPU doing the patching. */
+ 	unsigned int num_acks; /* Number of Acks needed. */
++
++	/*
++	 * To synchronize with the NMI handler.
++	 */
++	atomic_t nmi_work;
++
++	/* Ensure this is patched atomically against NMIs. */
++	bool nmi_context;
+ };
+ 
+ static struct text_poke_state text_poke_state;
+@@ -1715,6 +1723,7 @@ static void poke_int3_native(struct pt_regs *regs,
+  * on secondary CPUs for all patch sites.
+  *
+  * Called in thread context with tps->state == PATCH_SYNC_DONE.
++ * Also might be called from NMI context with an arbitrary tps->state.
+  * Returns with tps->state == PATCH_DONE.
+  */
+ static void text_poke_sync_finish(struct text_poke_state *tps)
+@@ -1741,6 +1750,12 @@ static void text_poke_sync_finish(struct text_poke_state *tps)
+ 			cpumask_set_cpu(cpu, &tps->sync_ack_map);
+ 			smp_cond_load_acquire(&tps->state,
+ 					      (state != VAL));
++		} else if (in_nmi() && (state & PATCH_SYNC_x)) {
++			/*
++			 * Called in case of NMI so we should be ready
++			 * to be called with any PATCH_SYNC_x.
++			 */
++			text_poke_sync_site(tps);
+ 		} else if (state == PATCH_SYNC_0) {
+ 			/*
+ 			 * PATCH_SYNC_1, PATCH_SYNC_2 are handled
+@@ -1753,6 +1768,91 @@ static void text_poke_sync_finish(struct text_poke_state *tps)
+ 	}
+ }
+ 
++/*
++ * text_poke_nmi() - primary CPU comes here (via self NMI) and the
++ * secondary (if there's an NMI.)
++ *
++ * By placing this NMI handler first, we can restrict execution of any
++ * NMI code that might be under patching.
++ * Local NMI handling also does not go through any locking code so it
++ * should be safe to install one.
++ *
++ * In both these roles the state-machine is identical to the one that
++ * we had in task context.
++ */
++static int text_poke_nmi(unsigned int val, struct pt_regs *regs)
++{
++	int ret, cpu = smp_processor_id();
++	struct text_poke_state *tps = &text_poke_state;
++
++	/*
++	 * We came here because there's a text-poke handler
++	 * installed. Get out if there's no work assigned yet.
++	 */
++	if (atomic_read(&tps->nmi_work) == 0)
++		return NMI_DONE;
++
++	if (cpu == tps->primary_cpu) {
++		/*
++		 * Do what we came here for. We can safely patch: any
++		 * secondary CPUs executing in NMI context have been
++		 * captured in the code below and are doing useful
++		 * work.
++		 */
++		tps->patch_worker(tps);
++
++		/*
++		 * Both the primary and the secondary CPUs are done (in NMI
++		 * or thread context.) Mark work done so any future NMIs can
++		 * skip this and go to the real handler.
++		 */
++		atomic_dec(&tps->nmi_work);
++
++		/*
++		 * The NMI was self-induced, consume it.
++		 */
++		ret = NMI_HANDLED;
++	} else {
++		/*
++		 * Unexpected NMI on a secondary CPU: do sync_core()
++		 * work until done.
++		 */
++		text_poke_sync_finish(tps);
++
++		/*
++		 * The NMI was spontaneous, not self-induced.
++		 * Don't consume it.
++		 */
++		ret = NMI_DONE;
++	}
++
++	return ret;
++}
++
++/*
++ * patch_worker_nmi() - sets up an NMI handler to do the
++ * patching work.
++ * This stops any NMIs from interrupting any code that might
++ * be getting patched.
++ */
++static void __maybe_unused patch_worker_nmi(void)
++{
++	atomic_set(&text_poke_state.nmi_work, 1);
++	/*
++	 * We could just use apic->send_IPI_self here. However, for reasons
++	 * that I don't understand, apic->send_IPI() or apic->send_IPI_mask()
++	 * work but apic->send_IPI_self (which internally does apic_write())
++	 * does not.
++	 */
++	apic->send_IPI(smp_processor_id(), NMI_VECTOR);
++
++	/*
++	 * Barrier to ensure that we do actually execute the NMI
++	 * before exiting.
++	 */
++	atomic_cond_read_acquire(&text_poke_state.nmi_work, !VAL);
++}
++
+ static int patch_worker(void *t)
+ {
+ 	int cpu = smp_processor_id();
+@@ -1769,7 +1869,10 @@ static int patch_worker(void *t)
+ 		 * Generates insns and calls text_poke_site() to do the poking
+ 		 * and sync.
+ 		 */
+-		tps->patch_worker(tps);
++		if (!tps->nmi_context)
++			tps->patch_worker(tps);
++		else
++			patch_worker_nmi();
+ 
+ 		/*
+ 		 * We are done patching. Switch the state to PATCH_DONE
+@@ -1790,7 +1893,8 @@ static int patch_worker(void *t)
+  *
+  * Return: 0 on success, -errno on failure.
+  */
+-static int __maybe_unused text_poke_late(patch_worker_t worker, void *stage)
++static int __maybe_unused text_poke_late(patch_worker_t worker, void *stage,
++					 bool nmi)
+ {
+ 	int ret;
+ 
+@@ -1807,12 +1911,20 @@ static int __maybe_unused text_poke_late(patch_worker_t worker, void *stage)
+ 	text_poke_state.state = PATCH_SYNC_DONE; /* Start state */
+ 	text_poke_state.primary_cpu = smp_processor_id();
+ 
++	text_poke_state.nmi_context = nmi;
++
++	if (nmi)
++		register_nmi_handler(NMI_LOCAL, text_poke_nmi,
++				     NMI_FLAG_FIRST, "text_poke_nmi");
+ 	/*
+ 	 * Run the worker on all online CPUs. Don't need to do anything
+ 	 * for offline CPUs as they come back online with a clean cache.
+ 	 */
+ 	ret = stop_machine(patch_worker, &text_poke_state, cpu_online_mask);
+ 
++	if (nmi)
++		unregister_nmi_handler(NMI_LOCAL, "text_poke_nmi");
++
+ 	return ret;
+ }
+ 
+@@ -1957,13 +2069,13 @@ static void paravirt_worker(struct text_poke_state *tps)
+  *
+  * Return: 0 on success, -errno on failure.
+  */
+-int paravirt_runtime_patch(void)
++int paravirt_runtime_patch(bool nmi)
+ {
+ 	lockdep_assert_held(&text_mutex);
+ 
+ 	if (!pv_stage.count)
+ 		return -EINVAL;
+ 
+-	return text_poke_late(paravirt_worker, &pv_stage);
++	return text_poke_late(paravirt_worker, &pv_stage, nmi);
+ }
+ #endif /* CONFIG_PARAVIRT_RUNTIME */
 -- 
 2.20.1
 
