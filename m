@@ -2,73 +2,52 @@ Return-Path: <SRS0=5pkY=5Z=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6D660C2D0EA
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2020 09:34:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AEABC2BB55
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2020 09:42:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 92B372084D
-	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2020 09:28:38 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="wLxG7X55"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 92B372084D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 2F28521D91
+	for <xen-devel@archiver.kernel.org>; Thu,  9 Apr 2020 09:42:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F28521D91
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jMTTv-0003aZ-TR; Thu, 09 Apr 2020 09:28:19 +0000
+	id 1jMThK-00059x-EP; Thu, 09 Apr 2020 09:42:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=EhrS=5Z=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jMTTu-0003aU-7q
- for xen-devel@lists.xenproject.org; Thu, 09 Apr 2020 09:28:18 +0000
-X-Inumbo-ID: 71ddda58-7a44-11ea-b4f4-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=6Jhw=5Z=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jMThJ-00059m-6i
+ for xen-devel@lists.xenproject.org; Thu, 09 Apr 2020 09:42:09 +0000
+X-Inumbo-ID: 60ff8734-7a46-11ea-b58d-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 71ddda58-7a44-11ea-b4f4-bc764e2007e4;
- Thu, 09 Apr 2020 09:28:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=8kp5cilarZI2IdGcOQHvhDJzG1/Yatb76O8KHEXL7T0=; b=wLxG7X55RbD0FJkXETK+bxZQwL
- 7Jvb5eJEyOvYqYSycy/7GFPJcWEipRg60Az/ruPo+9l7h02j0k3iErmhpKJjj6+1UUcQS/5WSfv3w
- 9oxpEftB2qVYaqOYLHlbhx0QjWqu3KYjloUz7Xr0zDFzo7fcrvqtymajmXByZ1bEEKaQ=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jMTTr-0001JS-15; Thu, 09 Apr 2020 09:28:15 +0000
-Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jMTTq-00022A-PU; Thu, 09 Apr 2020 09:28:14 +0000
-Subject: Re: [PATCH 6/7] xen/guest_access: Consolidate guest access helpers in
- xen/guest_access.h
-To: Jan Beulich <jbeulich@suse.com>
-References: <20200404131017.27330-1-julien@xen.org>
- <20200404131017.27330-7-julien@xen.org>
- <e2588f6e-1f13-b66f-8e3d-b8568f67b62a@suse.com>
- <041a9f9f-cc9e-eac5-cdd2-555fb1c88e6f@xen.org>
- <cf6c0e0b-ade0-587f-ea0e-80b02b21b1a9@suse.com>
- <c8e66108-7ac1-fb51-841f-21886b731f04@xen.org>
- <f02f09ec-b643-8321-e235-ce0ee5526ab3@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <69deb8f4-bafe-734c-f6fa-de41ecf539d2@xen.org>
-Date: Thu, 9 Apr 2020 10:28:12 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.6.0
+ id 60ff8734-7a46-11ea-b58d-bc764e2007e4;
+ Thu, 09 Apr 2020 09:42:08 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 018D7AC24;
+ Thu,  9 Apr 2020 09:42:06 +0000 (UTC)
+Subject: Re: [PATCH v2 1/5] x86/shim: map and unmap page tables in
+ replace_va_mapping
+To: Hongyan Xia <hx242@xen.org>
+References: <cover.1586352238.git.hongyxia@amazon.com>
+ <7638095024ec3379a8d9ddadfe47e36da168e4dd.1586352238.git.hongyxia@amazon.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <ddbad9f5-307e-7b1d-0cc7-cd7ed684f680@suse.com>
+Date: Thu, 9 Apr 2020 11:42:02 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-In-Reply-To: <f02f09ec-b643-8321-e235-ce0ee5526ab3@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+In-Reply-To: <7638095024ec3379a8d9ddadfe47e36da168e4dd.1586352238.git.hongyxia@amazon.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -80,61 +59,61 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+On 08.04.2020 15:36, Hongyan Xia wrote:
+> --- a/xen/arch/x86/pv/shim.c
+> +++ b/xen/arch/x86/pv/shim.c
+> @@ -168,16 +168,17 @@ const struct platform_bad_page *__init pv_shim_reserved_pages(unsigned int *size
+>  static void __init replace_va_mapping(struct domain *d, l4_pgentry_t *l4start,
+>                                        unsigned long va, mfn_t mfn)
+>  {
+> -    l4_pgentry_t *pl4e = l4start + l4_table_offset(va);
+> -    l3_pgentry_t *pl3e = l4e_to_l3e(*pl4e) + l3_table_offset(va);
+> -    l2_pgentry_t *pl2e = l3e_to_l2e(*pl3e) + l2_table_offset(va);
+> -    l1_pgentry_t *pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(va);
+> +    l4_pgentry_t l4e = l4start[l4_table_offset(va)];
+> +    l3_pgentry_t l3e = l3e_from_l4e(l4e, l3_table_offset(va));
+> +    l2_pgentry_t l2e = l2e_from_l3e(l3e, l2_table_offset(va));
+> +    l1_pgentry_t *pl1e = map_l1t_from_l2e(l2e) + l1_table_offset(va);
+>      struct page_info *page = mfn_to_page(l1e_get_mfn(*pl1e));
+>  
+>      put_page_and_type(page);
+>  
+>      *pl1e = l1e_from_mfn(mfn, (!is_pv_32bit_domain(d) ? L1_PROT
+>                                                        : COMPAT_L1_PROT));
+> +    UNMAP_DOMAIN_PAGE(pl1e);
+>  }
 
+As said before, here and below I think it should be unmap_domain_page().
 
-On 09/04/2020 09:06, Jan Beulich wrote:
-> On 09.04.2020 10:01, Julien Grall wrote:
->> Hi,
->>
->> On 09/04/2020 07:30, Jan Beulich wrote:
->>> On 09.04.2020 00:05, Julien Grall wrote:
->>> I don't see why a new port may not also want
->>> to go that route instead of the x86/Arm one.
->> I could accept that someone would want to reinvent a new ABI
->> from scratch for just an hypothetical new arch. However it would
->> be quite an effort to reinvent XEN_GUEST_HANDLE(). The chance is
->> RISC-V is only going to re-use what Arm did as Arm already did
->> with x86.
->>
->> I would like to avoid to introduce a new directory asm-generic
->> with just one header in it. Maybe you have some other headers in
->> mind?
-> 
-> I recall having wondered a few times whether we shouldn't use this
-> concept elsewhere. One case iirc was bitops stuff. Looking over
-> the Linux ones, some atomic and barrier fallback implementations
-> may also sensibly live there, and there are likely more.
+> --- a/xen/include/asm-x86/page.h
+> +++ b/xen/include/asm-x86/page.h
+> @@ -196,6 +196,19 @@ static inline l4_pgentry_t l4e_from_paddr(paddr_t pa, unsigned int flags)
+>  #define map_l2t_from_l3e(x)        (l2_pgentry_t *)map_domain_page(l3e_get_mfn(x))
+>  #define map_l3t_from_l4e(x)        (l3_pgentry_t *)map_domain_page(l4e_get_mfn(x))
+>  
+> +/* Unlike lYe_to_lXe(), lXe_from_lYe() do not rely on the direct map. */
+> +#define l2e_from_l3e(l3e, offset) ({                        \
+> +        const l2_pgentry_t *l2t = map_l2t_from_l3e(l3e);    \
+> +        l2_pgentry_t l2e = l2t[offset];                     \
+> +        UNMAP_DOMAIN_PAGE(l2t);                             \
+> +        l2e; })
+> +
+> +#define l3e_from_l4e(l4e, offset) ({                        \
+> +        const l3_pgentry_t *l3t = map_l3t_from_l4e(l4e);    \
+> +        l3_pgentry_t l3e = l3t[offset];                     \
+> +        UNMAP_DOMAIN_PAGE(l3t);                             \
+> +        l3e; })
 
-In theory it makes sense but, in the current state of Xen, 'asm-generic' 
-means they are common to Arm and x86. This is basically the same 
-definition as for the directory 'xen'. So how do you draw a line which 
-files go where?
+I think l1e_from_l2e() should be introduced at the same time, even
+if for now it's unused. I also think, like we do elsewhere, that
+macro-local variables would better have _ suffixes, to avoid
+possible variable aliasing issues.
 
-To be honest, I don't think we can draw a line without a 3rd 
-architecture. So I would recommend to wait until then to create an 
-asm-generic directory.
-
-Meanwhile, I still think the consolidation in xen/ is useful as it makes 
-easier to maintain. It is also going to make easier for RISCv (or a new 
-arch) as they don't have to worry about duplication (if any).
-
-In the event they decide to purse their own route, then it is not going 
-to be a massive pain to move part of xen/guest_access.h in 
-asm-generic/guest_access.h and include the latter from {xen, asm} 
-/guest_access.h.
-
-Cheers,
-
-
--- 
-Julien Grall
+Jan
 
