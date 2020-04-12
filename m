@@ -8,73 +8,71 @@ X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72A7BC2BB86
-	for <xen-devel@archiver.kernel.org>; Sun, 12 Apr 2020 22:03:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 82083C2D0EC
+	for <xen-devel@archiver.kernel.org>; Sun, 12 Apr 2020 22:03:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4704820644
-	for <xen-devel@archiver.kernel.org>; Sun, 12 Apr 2020 22:03:09 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 50FC220644
+	for <xen-devel@archiver.kernel.org>; Sun, 12 Apr 2020 22:03:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ADa+qUn5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4704820644
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mbXds/yM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50FC220644
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jNkgm-0003EM-6J; Sun, 12 Apr 2020 22:02:52 +0000
+	id 1jNkgw-0003Gh-Ng; Sun, 12 Apr 2020 22:03:02 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=6Dwh=54=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1jNkgl-0003EF-JE
- for xen-devel@lists.xenproject.org; Sun, 12 Apr 2020 22:02:51 +0000
-X-Inumbo-ID: 57e82190-7d09-11ea-b58d-bc764e2007e4
-Received: from mail-qv1-xf43.google.com (unknown [2607:f8b0:4864:20::f43])
+ id 1jNkgv-0003GM-Jg
+ for xen-devel@lists.xenproject.org; Sun, 12 Apr 2020 22:03:01 +0000
+X-Inumbo-ID: 597b2f70-7d09-11ea-83d8-bc764e2007e4
+Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 57e82190-7d09-11ea-b58d-bc764e2007e4;
- Sun, 12 Apr 2020 22:02:47 +0000 (UTC)
-Received: by mail-qv1-xf43.google.com with SMTP id q73so3616609qvq.2
- for <xen-devel@lists.xenproject.org>; Sun, 12 Apr 2020 15:02:47 -0700 (PDT)
+ id 597b2f70-7d09-11ea-83d8-bc764e2007e4;
+ Sun, 12 Apr 2020 22:02:49 +0000 (UTC)
+Received: by mail-qt1-x842.google.com with SMTP id z90so5859322qtd.10
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Apr 2020 15:02:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :in-reply-to:references;
- bh=EYuJy7ICD2kfNTKAB5E+SVFDtpQL5zTM1dMZH8Nfw14=;
- b=ADa+qUn5NQzV1qu4k6654JciCe63UHdb3SDQW9LOG4BvO3u9NLetoxp0KDUSNTWaZf
- jKCsdqZxSu2snqj/vc4AULhFMgKyThQMhgmvUYdYRFvuPFbA6yiVhO1izoacj1i8toQl
- XeNMrwTWDu33P2mT3SbSyQ4E0GE8gsVshcSdYpdbuGLYBU4u9yXTC6Fz4AMhx9E5hI6v
- 7C0B7Z/TWEsx9/pLK7Kanm/o4JsW6e76sRiDuaHAQGFrd3PS05vdEhM0BJE3KLzSDhng
- 4UU80/mYEMJsZm8YvEe0ggSQ0mCcCJetaT61TDJW9uys377wmFyfaBdOjgRURcDMp8Mv
- Ssrg==
+ bh=xQseH+w2yE4yJYVdULOAupSEFUC15dIoKjSVtzW1RYQ=;
+ b=mbXds/yMXXI77oozv1GEuKTLmqLlNMAuQy5DVvhXLICyJHvTtY/UBdkRokROlrE5iu
+ ZZg4GrhROG5Aan+JfINU5GFQWhgErhwCAi7xcsj4m55nmWOpFSrkB2u7rY3KWAusdXuR
+ XZErv2fJ0Jut+rjwSbd8tBDO9H+zCBFH+oNY+hOnyAYPjKlxDAglE3gAnu4a7NBU8s+7
+ tF342TiNmwKvsMG2apnmqUyxALTHOaro2HI41a/EFWeZcQpWLeMlD2USNh3BpcZ47Tqj
+ Gmebw/A5qgWNivdalS8VnZy62AHTOlnCpt0EDd3PB3znoZJ9wtMDzrgxxiHNTQNd3EQb
+ aAoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:in-reply-to:references;
- bh=EYuJy7ICD2kfNTKAB5E+SVFDtpQL5zTM1dMZH8Nfw14=;
- b=uXtcnXXXR7yzBMzektehxuZMWVuOWZINBrrODBaq18TsCUgI1QRCp+zlK3r2VWeX1F
- xpNrg2fqE5GooXCrCR+xNdTAoPSQwy9ZsozqlNSXI9b/xTa46kSPqlwNG+oVIuLlIQ6h
- ua8EPG2Ps+Qy6Qwug74Gk7E7Vmot+Qc2iOvkVVeXxJ5VXXMR0zru2kAEn1gjkZLDbWXe
- KgE3WQtAE2OTfN/7JVgw380yrKRbshQwiAjvzbNuBZoI3Y4UuRw3q7cZgg9G0wEHSqV1
- UKJIVy6Urag3MonBXBPXaKzyYn0J0jRl3tI9Ejnul4NZyLZALDwP7gJXD2NHWs/FMmQW
- 0TCQ==
-X-Gm-Message-State: AGi0PuadroHCD4lUZlsZRgC1Sw+p+NMszvln0TyxKtUeMpsjRhnogiNM
- LNgGaRKHW7+IjvjRGWc0b9WANF7s
-X-Google-Smtp-Source: APiQypKOSKazjyYGBfbvqjoDULajgQ4tkzHcgT01amGgnMryarJC3NHwfSK8I5N3KYiDpNCYXdpyVQ==
-X-Received: by 2002:a05:6214:1e5:: with SMTP id
- c5mr14095258qvu.79.1586728966528; 
- Sun, 12 Apr 2020 15:02:46 -0700 (PDT)
+ bh=xQseH+w2yE4yJYVdULOAupSEFUC15dIoKjSVtzW1RYQ=;
+ b=lx58xuDUR7Nohsqs/Bxt30Jr9+tvusQ6dZ6bfc7zb44sBkyv8/F3ZYsTdQr5GOCYTa
+ vbPsex0jLSahZ242UcA42tylGmIM/iOnO5P1oScDVwamieQDbLFFuIgzdl1jPLwC0S5N
+ loycoacAo4jisazzg2KPRccYB87r7441wjbyikN/clPSLa5JBbP28b1wFdHrff9xZtT/
+ yXq7foFiKOst/WiduSNQlpU3Dova2T6o773R2y2UhgfAvggbGfqBw+Lxgk8rYWy9ZM2A
+ BUQtxDkzOX1pu7pZlYadQplb//osnh8t5HeSSPiUSdVGmLe1ERQg8kfM+mF05eap02Zc
+ 2sbQ==
+X-Gm-Message-State: AGi0PubBP5zaFYg5ge7OM6B1RiQu9li5X++U5uZRSOe4QDja3NjeOPH6
+ 0H3JCpRzK1RmR5vAjTJhsqfX7q6o
+X-Google-Smtp-Source: APiQypIacsGj1YC3T0eoqwBQppzvgi5VJQQlNAtetUcTtfDHNvyORLAg2oT9k2X/6y9Ww/MHRv7E5w==
+X-Received: by 2002:ac8:6d23:: with SMTP id r3mr8470311qtu.84.1586728969148;
+ Sun, 12 Apr 2020 15:02:49 -0700 (PDT)
 Received: from four.lan (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
  by smtp.gmail.com with ESMTPSA id
- s14sm3691128qts.70.2020.04.12.15.02.45
+ s14sm3691128qts.70.2020.04.12.15.02.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 15:02:45 -0700 (PDT)
+ Sun, 12 Apr 2020 15:02:48 -0700 (PDT)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 1/4] golang/xenlight: add NameToDomid and DomidToName util
- functions
-Date: Sun, 12 Apr 2020 18:02:39 -0400
-Message-Id: <e2d8d6c1293c8251be881cd471265aa8188ae2ae.1586727061.git.rosbrookn@ainfosec.com>
+Subject: [PATCH 3/4] golang/xenlight: add DevicePciAdd/Remove wrappers
+Date: Sun, 12 Apr 2020 18:02:41 -0400
+Message-Id: <7f03220c9db0a377cd26c0c96d8a10981ec47282.1586727061.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1586727061.git.rosbrookn@ainfosec.com>
 References: <cover.1586727061.git.rosbrookn@ainfosec.com>
@@ -96,57 +94,56 @@ Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Many exported functions in xenlight require a domid as an argument. Make
-it easier for package users to use these functions by adding wrappers
-for the libxl utility functions libxl_name_to_domid and
-libxl_domid_to_name.
+Add DevicePciAdd and DevicePciRemove as wrappers for
+libxl_device_pci_add and libxl_device_pci remove.
 
 Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 ---
- tools/golang/xenlight/xenlight.go | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ tools/golang/xenlight/xenlight.go | 34 +++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
 diff --git a/tools/golang/xenlight/xenlight.go b/tools/golang/xenlight/xenlight.go
-index 3f1b0baa0c..8492bcec4e 100644
+index a56f913b81..c94b046667 100644
 --- a/tools/golang/xenlight/xenlight.go
 +++ b/tools/golang/xenlight/xenlight.go
-@@ -20,6 +20,7 @@ package xenlight
- #cgo LDFLAGS: -lxenlight -lyajl -lxentoollog
- #include <stdlib.h>
- #include <libxl.h>
-+#include <libxl_utils.h>
- */
- import "C"
+@@ -1102,3 +1102,37 @@ func (Ctx *Context) DeviceNicRemove(domid Domid, nic *DeviceNic) error {
  
-@@ -124,6 +125,28 @@ func (ctx *Context) Close() error {
- 
- type Domid uint32
- 
-+// NameToDomid returns the Domid for a domain, given its name, if it exists.
-+func (Ctx *Context) NameToDomid(name string) (Domid, error) {
-+	var domid C.uint32_t
+ 	return nil
+ }
 +
-+	cname := C.CString(name)
-+	defer C.free(unsafe.Pointer(cname))
++// DevicePciAdd is used to passthrough a PCI device to a domain.
++func (Ctx *Context) DevicePciAdd(domid Domid, pci *DevicePci) error {
++	var cpci C.libxl_device_pci
 +
-+	if ret := C.libxl_name_to_domid(Ctx.ctx, cname, &domid); ret != 0 {
-+		return ^Domid(0), Error(ret)
++	if err := pci.toC(&cpci); err != nil {
++		return err
++	}
++	defer C.libxl_device_pci_dispose(&cpci)
++
++	ret := C.libxl_device_pci_add(Ctx.ctx, C.uint32_t(domid), &cpci, nil)
++	if ret != 0 {
++		return Error(ret)
 +	}
 +
-+	return Domid(domid), nil
++	return nil
 +}
 +
-+// DomidToName returns the name for a domain, given its domid.
-+func (Ctx *Context) DomidToName(domid Domid) string {
-+	cname := C.libxl_domid_to_name(Ctx.ctx, C.uint32_t(domid))
-+	defer C.free(unsafe.Pointer(cname))
++// DevicePciRemove removes a PCI device from a domain.
++func (Ctx *Context) DevicePciRemove(domid Domid, pci *DevicePci) error {
++	var cpci C.libxl_device_pci
 +
-+	return C.GoString(cname)
++	if err := pci.toC(&cpci); err != nil {
++		return err
++	}
++	defer C.libxl_device_pci_dispose(&cpci)
++
++	ret := C.libxl_device_pci_remove(Ctx.ctx, C.uint32_t(domid), &cpci, nil)
++	if ret != 0 {
++		return Error(ret)
++	}
++
++	return nil
 +}
-+
- // Devid is a device ID.
- type Devid int
- 
 -- 
 2.17.1
 
