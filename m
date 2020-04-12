@@ -2,76 +2,80 @@ Return-Path: <SRS0=hXTC=54=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 48A81C2D0EC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4AC60C2BB85
 	for <xen-devel@archiver.kernel.org>; Sun, 12 Apr 2020 21:10:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E1179206E9
+	by mail.kernel.org (Postfix) with ESMTPS id E0DAF206E5
 	for <xen-devel@archiver.kernel.org>; Sun, 12 Apr 2020 21:10:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OxkjuSkW"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E1179206E9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="F6MwD2LX"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E0DAF206E5
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jNjrd-0006iP-SP; Sun, 12 Apr 2020 21:10:01 +0000
+	id 1jNjro-0007Jb-Ex; Sun, 12 Apr 2020 21:10:12 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=pqw0=54=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jNjrc-0006fm-UO
- for xen-devel@lists.xenproject.org; Sun, 12 Apr 2020 21:10:00 +0000
-X-Inumbo-ID: f7fc3d0e-7d01-11ea-9e09-bc764e2007e4
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ id 1jNjrm-0007JW-Q3
+ for xen-devel@lists.xenproject.org; Sun, 12 Apr 2020 21:10:10 +0000
+X-Inumbo-ID: fc3c0584-7d01-11ea-b4f4-bc764e2007e4
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f7fc3d0e-7d01-11ea-9e09-bc764e2007e4;
- Sun, 12 Apr 2020 21:10:00 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id f13so8369660wrm.13
- for <xen-devel@lists.xenproject.org>; Sun, 12 Apr 2020 14:10:00 -0700 (PDT)
+ id fc3c0584-7d01-11ea-b4f4-bc764e2007e4;
+ Sun, 12 Apr 2020 21:10:07 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id i10so8378368wrv.10
+ for <xen-devel@lists.xenproject.org>; Sun, 12 Apr 2020 14:10:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=78jL4VADjrh0P46dW2DeDq44Jyf+SdDfu3arjlW7LnM=;
- b=OxkjuSkWJAFZSnNM8yGetjkdEAeKalwtCudr2Vh2d27xI1BS4ILr7L9uBODjpRJkpH
- R6D8YXX/p+XUqNrFQIAz93kwaViDm5mQpiBuOecCeCVBz4yojSdNqw6Ipl46gFGlzf9r
- g8Cm0L+Z0C4mTbJh2CzJAY1wv+iIGBJ1VnGSQPeoXju8w0uYyAB0pz5E8h0xKz80Mxci
- z074B0Y4PP1p9TvlgPyvgyIT792lXRCe/qHu6rPI5r6pePkQJmyeyZz3JKxyhm2cJYbS
- 4YYIUqsp56tehGunUkN7pmQHzZn5tu03tfUy2aBHiRpXOWFa841s50yv6YsU3qC+BikH
- QIjA==
+ h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=gsYbEjd4TD9Bp8EbfBEbuZbEWy++c7aKNJLdJ3YG81s=;
+ b=F6MwD2LXNz5qSiQ9U7sN6titbvBTVPwW+WPnxAgReHxGMCEM+dPMLI2rDyI1SBuexA
+ 8X4en7LsPicU3CvVdJfUwpaYkWQJx/9JDE36m/vCG9tt4oNnclZvSGLtxDh9g2nqvVen
+ egUlGG7jm5W4bkUTTQyk2IrVD5095MR2BaBB1nrA2tWvi4Uo2j7P5Aid8G1fMkGhrHgp
+ 3JcUjkFFHKzGHqOa5WPhvPjQa5uJtWQqbZ7u6YajqffuNp4Y4eS18QQqe3TejYDaLL/v
+ NSSfd4k/Trj0zKPV1XsX0isvHEDohvQeLjdKEdbJp37tNHLfgAKiMGDBvJ9cRKFn6wia
+ 3pRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=78jL4VADjrh0P46dW2DeDq44Jyf+SdDfu3arjlW7LnM=;
- b=Ga/4cHxs3+okKoKq8o7zgcJsqb1xlhZSAaTg6aH06B4htNT9ZFuWAjGsnCkX9wgKMZ
- GV0Pz7KyTEsbHdPPVAXl9CKXlKfp+Pd2viqJlxu/3A9HRhIl7H2tLeU+W3NR5jowUjj4
- PBGjOeKbA28/Wtauh1gdO4Z3SrcNMkgeUgUNzCWAQt0t0E3CxGOg1JrAyi21v+OB5CK6
- U+qs6i5aMUgvmiVQo2OQINkPu3O1Ak9hJFoizH0K+jgAEqPpOS2KU2OMO0R40n90uHwS
- lyHZommzsMvbEmgnfXpe5Y75CLRHkGoLHJ4XWVIY8eZF9VesPHgkqYIHP6RrmP12ZeCU
- Bk2Q==
-X-Gm-Message-State: AGi0Pub2Ynko8rYK+/R7BhhhyCb52Eo53Mp4hYNrOvh+T3RXETIVz14t
- /jLGZHR6Y6Bj1b+q/TiLhbE=
-X-Google-Smtp-Source: APiQypIHokdZHj3hxylpnNFCsDn0s/aQ6M1SC93tjDE0SBCneBZJc3wwsTL0+EuIZJCPMwTTJMFunQ==
-X-Received: by 2002:a5d:61c5:: with SMTP id q5mr5945448wrv.260.1586725799424; 
- Sun, 12 Apr 2020 14:09:59 -0700 (PDT)
+ :in-reply-to:references:mime-version:content-transfer-encoding;
+ bh=gsYbEjd4TD9Bp8EbfBEbuZbEWy++c7aKNJLdJ3YG81s=;
+ b=WRmDogn4LuWT0Xz02wTwnftnBgR3gI9W+VKWKb7W3oeV44FyjB3lHHWIfKb3KB2oAF
+ OgvHcz9JMHP3yPHvXflG+Eo+0lcGoCP7eXf0RcrAnL86mqTc05St65n9n38w+9BFrn0d
+ spcp9c/TmxHMTbuqCRULftW/zky8YtjK/uwCdrfs/HPhSLTVwOPdx6XOankDE4/7cBJ1
+ 9BJ5oESubbdIwInQHVXdekhdPyBq+sAsvpobVoML7FxHbginFxii6vS6SEh0Nk6ZHHd4
+ gdXAUzfQ2JzcMSpOtGSQ0+D841syz2yOx+CDMT2UmQkfD36pwkGInQoah14BfJKwL7rY
+ 4uwA==
+X-Gm-Message-State: AGi0PubCGJzTPiDng7EvtoeeC/eyA7no0wvbH/ylwI1EYjoPXt4jyESp
+ RBJsQjTnKgFgbvCzp+9sd24=
+X-Google-Smtp-Source: APiQypIWuuzEDhgrL5dFuOMcEExPN7XGYetuwcVi65TL0H1PSMXhw1g00339hVtTvTn98WKI8byMwQ==
+X-Received: by 2002:a5d:69c9:: with SMTP id s9mr15764392wrw.307.1586725806483; 
+ Sun, 12 Apr 2020 14:10:06 -0700 (PDT)
 Received: from localhost.localdomain (116.red-83-42-57.dynamicip.rima-tde.net.
  [83.42.57.116])
- by smtp.gmail.com with ESMTPSA id o16sm12553602wrs.44.2020.04.12.14.09.55
+ by smtp.gmail.com with ESMTPSA id o16sm12553602wrs.44.2020.04.12.14.10.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Apr 2020 14:09:58 -0700 (PDT)
+ Sun, 12 Apr 2020 14:10:05 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
-Subject: [PATCH-for-5.1 0/3] various: Remove unnecessary casts
-Date: Sun, 12 Apr 2020 23:09:51 +0200
-Message-Id: <20200412210954.32313-1-f4bug@amsat.org>
+Subject: [PATCH-for-5.1 2/3] various: Remove unnecessary OBJECT() cast
+Date: Sun, 12 Apr 2020 23:09:53 +0200
+Message-Id: <20200412210954.32313-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.1
+In-Reply-To: <20200412210954.32313-1-f4bug@amsat.org>
+References: <20200412210954.32313-1-f4bug@amsat.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -110,42 +114,148 @@ Cc: Peter Maydell <peter.maydell@linaro.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Remove unnecessary casts using coccinelle scripts.
+The OBJECT() macro is defined as:
 
-The CPU()/OBJECT() patches don't introduce logical change,
-The DEVICE() one removes various OBJECT_CHECK() calls.
+  #define OBJECT(obj) ((Object *)(obj))
 
-Philippe Mathieu-Daudé (3):
-  target: Remove unnecessary CPU() cast
-  various: Remove unnecessary OBJECT() cast
-  hw: Remove unnecessary DEVICE() cast
+Remove unnecessary OBJECT() casts.
 
+Patch created mechanically using spatch with this script:
+
+  @@
+  typedef Object;
+  Object *o;
+  @@
+  -   OBJECT(o)
+  +   o
+
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
  hw/core/bus.c                       | 2 +-
- hw/display/artist.c                 | 2 +-
- hw/display/cg3.c                    | 2 +-
- hw/display/sm501.c                  | 2 +-
- hw/display/tcx.c                    | 4 ++--
- hw/display/vga-isa.c                | 2 +-
- hw/i2c/imx_i2c.c                    | 2 +-
- hw/i2c/mpc_i2c.c                    | 2 +-
  hw/ide/ahci-allwinner.c             | 2 +-
- hw/ide/piix.c                       | 2 +-
  hw/ipmi/smbus_ipmi.c                | 2 +-
  hw/microblaze/petalogix_ml605_mmu.c | 8 ++++----
- hw/misc/macio/pmu.c                 | 2 +-
- hw/net/ftgmac100.c                  | 3 +--
- hw/net/imx_fec.c                    | 2 +-
- hw/nubus/nubus-device.c             | 2 +-
- hw/pci-host/bonito.c                | 2 +-
- hw/ppc/spapr.c                      | 2 +-
  hw/s390x/sclp.c                     | 2 +-
- hw/sh4/sh_pci.c                     | 2 +-
- hw/xen/xen-legacy-backend.c         | 2 +-
  monitor/misc.c                      | 3 +--
  qom/object.c                        | 4 ++--
- target/ppc/mmu_helper.c             | 2 +-
- 24 files changed, 29 insertions(+), 31 deletions(-)
+ 7 files changed, 11 insertions(+), 12 deletions(-)
 
+diff --git a/hw/core/bus.c b/hw/core/bus.c
+index 3dc0a825f0..4ea5870de8 100644
+--- a/hw/core/bus.c
++++ b/hw/core/bus.c
+@@ -25,7 +25,7 @@
+ 
+ void qbus_set_hotplug_handler(BusState *bus, Object *handler, Error **errp)
+ {
+-    object_property_set_link(OBJECT(bus), OBJECT(handler),
++    object_property_set_link(OBJECT(bus), handler,
+                              QDEV_HOTPLUG_HANDLER_PROPERTY, errp);
+ }
+ 
+diff --git a/hw/ide/ahci-allwinner.c b/hw/ide/ahci-allwinner.c
+index bb8393d2b6..8536b9eb5a 100644
+--- a/hw/ide/ahci-allwinner.c
++++ b/hw/ide/ahci-allwinner.c
+@@ -90,7 +90,7 @@ static void allwinner_ahci_init(Object *obj)
+     SysbusAHCIState *s = SYSBUS_AHCI(obj);
+     AllwinnerAHCIState *a = ALLWINNER_AHCI(obj);
+ 
+-    memory_region_init_io(&a->mmio, OBJECT(obj), &allwinner_ahci_mem_ops, a,
++    memory_region_init_io(&a->mmio, obj, &allwinner_ahci_mem_ops, a,
+                           "allwinner-ahci", ALLWINNER_AHCI_MMIO_SIZE);
+     memory_region_add_subregion(&s->ahci.mem, ALLWINNER_AHCI_MMIO_OFF,
+                                 &a->mmio);
+diff --git a/hw/ipmi/smbus_ipmi.c b/hw/ipmi/smbus_ipmi.c
+index 2a9470d9df..f1a0148755 100644
+--- a/hw/ipmi/smbus_ipmi.c
++++ b/hw/ipmi/smbus_ipmi.c
+@@ -329,7 +329,7 @@ static void smbus_ipmi_init(Object *obj)
+ {
+     SMBusIPMIDevice *sid = SMBUS_IPMI(obj);
+ 
+-    ipmi_bmc_find_and_link(OBJECT(obj), (Object **) &sid->bmc);
++    ipmi_bmc_find_and_link(obj, (Object **) &sid->bmc);
+ }
+ 
+ static void smbus_ipmi_get_fwinfo(struct IPMIInterface *ii, IPMIFwInfo *info)
+diff --git a/hw/microblaze/petalogix_ml605_mmu.c b/hw/microblaze/petalogix_ml605_mmu.c
+index 0a2640c40b..52dcea9abd 100644
+--- a/hw/microblaze/petalogix_ml605_mmu.c
++++ b/hw/microblaze/petalogix_ml605_mmu.c
+@@ -150,9 +150,9 @@ petalogix_ml605_init(MachineState *machine)
+     qdev_set_nic_properties(eth0, &nd_table[0]);
+     qdev_prop_set_uint32(eth0, "rxmem", 0x1000);
+     qdev_prop_set_uint32(eth0, "txmem", 0x1000);
+-    object_property_set_link(OBJECT(eth0), OBJECT(ds),
++    object_property_set_link(OBJECT(eth0), ds,
+                              "axistream-connected", &error_abort);
+-    object_property_set_link(OBJECT(eth0), OBJECT(cs),
++    object_property_set_link(OBJECT(eth0), cs,
+                              "axistream-control-connected", &error_abort);
+     qdev_init_nofail(eth0);
+     sysbus_mmio_map(SYS_BUS_DEVICE(eth0), 0, AXIENET_BASEADDR);
+@@ -163,9 +163,9 @@ petalogix_ml605_init(MachineState *machine)
+     cs = object_property_get_link(OBJECT(eth0),
+                                   "axistream-control-connected-target", NULL);
+     qdev_prop_set_uint32(dma, "freqhz", 100 * 1000000);
+-    object_property_set_link(OBJECT(dma), OBJECT(ds),
++    object_property_set_link(OBJECT(dma), ds,
+                              "axistream-connected", &error_abort);
+-    object_property_set_link(OBJECT(dma), OBJECT(cs),
++    object_property_set_link(OBJECT(dma), cs,
+                              "axistream-control-connected", &error_abort);
+     qdev_init_nofail(dma);
+     sysbus_mmio_map(SYS_BUS_DEVICE(dma), 0, AXIDMA_BASEADDR);
+diff --git a/hw/s390x/sclp.c b/hw/s390x/sclp.c
+index f0c35aa57a..bae9d2350f 100644
+--- a/hw/s390x/sclp.c
++++ b/hw/s390x/sclp.c
+@@ -288,7 +288,7 @@ void s390_sclp_init(void)
+ 
+     object_property_add_child(qdev_get_machine(), TYPE_SCLP, new,
+                               NULL);
+-    object_unref(OBJECT(new));
++    object_unref(new);
+     qdev_init_nofail(DEVICE(new));
+ }
+ 
+diff --git a/monitor/misc.c b/monitor/misc.c
+index 6c45fa490f..57af5fa5a4 100644
+--- a/monitor/misc.c
++++ b/monitor/misc.c
+@@ -1839,8 +1839,7 @@ void object_add_completion(ReadLineState *rs, int nb_args, const char *str)
+ static int qdev_add_hotpluggable_device(Object *obj, void *opaque)
+ {
+     GSList **list = opaque;
+-    DeviceState *dev = (DeviceState *)object_dynamic_cast(OBJECT(obj),
+-                                                          TYPE_DEVICE);
++    DeviceState *dev = (DeviceState *)object_dynamic_cast(obj, TYPE_DEVICE);
+ 
+     if (dev == NULL) {
+         return 0;
+diff --git a/qom/object.c b/qom/object.c
+index 1812f79224..9893cc5459 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -762,7 +762,7 @@ Object *object_new_with_propv(const char *typename,
+         }
+     }
+ 
+-    object_unref(OBJECT(obj));
++    object_unref(obj);
+     return obj;
+ 
+  error:
+@@ -1689,7 +1689,7 @@ void object_property_add_child(Object *obj, const char *name,
+         return;
+     }
+ 
+-    type = g_strdup_printf("child<%s>", object_get_typename(OBJECT(child)));
++    type = g_strdup_printf("child<%s>", object_get_typename(child));
+ 
+     op = object_property_add(obj, name, type, object_get_child_property, NULL,
+                              object_finalize_child_property, child, &local_err);
 -- 
 2.21.1
 
