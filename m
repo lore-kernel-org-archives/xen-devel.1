@@ -2,55 +2,74 @@ Return-Path: <SRS0=0Wix=56=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 111F2C2BB86
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 10:13:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 52EA3C2BA19
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 10:38:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D28EA2072D
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 10:13:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D28EA2072D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1219520732
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 10:38:48 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="oeBmwK26"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1219520732
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOIZ1-0004uu-Ur; Tue, 14 Apr 2020 10:13:07 +0000
+	id 1jOIxb-0006jH-Ss; Tue, 14 Apr 2020 10:38:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=t7Uy=56=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jOIZ0-0004up-KE
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2020 10:13:06 +0000
-X-Inumbo-ID: 87df5e88-7e38-11ea-83d8-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=1gEY=56=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jOIxa-0006jC-KG
+ for xen-devel@lists.xenproject.org; Tue, 14 Apr 2020 10:38:30 +0000
+X-Inumbo-ID: 14b175dc-7e3c-11ea-b58d-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 87df5e88-7e38-11ea-83d8-bc764e2007e4;
- Tue, 14 Apr 2020 10:13:05 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id BD16BAD9F;
- Tue, 14 Apr 2020 10:13:03 +0000 (UTC)
-Subject: Re: [PATCH v9 1/3] x86/tlb: introduce a flush HVM ASIDs flag
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <20200406105703.79201-1-roger.pau@citrix.com>
- <20200406105703.79201-2-roger.pau@citrix.com>
- <30062a0c-6587-a16e-2b31-de0dd6bf4c9a@suse.com>
- <20200414075245.GC28601@Air-de-Roger>
- <92a4ff05-9dcf-1d50-b9b2-bde39c4e3e8d@suse.com>
- <20200414100213.GH28601@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <389afe02-1747-1583-e642-6e4025b402aa@suse.com>
-Date: Tue, 14 Apr 2020 12:13:04 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id 14b175dc-7e3c-11ea-b58d-bc764e2007e4;
+ Tue, 14 Apr 2020 10:38:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=cfI1M21/GnjXK7e4TZAloK4ojaKa+Or9W0AEaI7jEHY=; b=oeBmwK26o9ooEM69CP0N8baGM9
+ oO49pd7iXvVZsOPIUGdL6MqJsaGLcw4cGXNcu0VXaT/q1WYqTE17f5n2xz8XzhIMnDEHsdjDYn4UX
+ Wg6IsbqUYxoQc4WIiHQv/BYJrbYJyHmYYZty3phyPyZPQ1kGQyh1X+Y1jVP/FnTzF51o=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jOIxU-0007H2-F3; Tue, 14 Apr 2020 10:38:24 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jOIxU-00024h-7q; Tue, 14 Apr 2020 10:38:24 +0000
+Subject: Re: [PATCH v7 09/12] xen: add runtime parameter access support to
+ hypfs
+To: Jan Beulich <jbeulich@suse.com>
+References: <20200402154616.16927-1-jgross@suse.com>
+ <20200402154616.16927-10-jgross@suse.com>
+ <f08bdac6-122a-9289-3241-a0460a73c686@suse.com>
+ <1a68e135-2761-0ccd-11fc-45344a84757d@suse.com>
+ <bdd65308-e549-c2b2-0de9-fb220d03f087@xen.org>
+ <82cfcac7-225f-204b-e8fc-cbd04f9652e9@suse.com>
+ <06e72ae4-da0b-db3b-af43-0ba8970844dc@xen.org>
+ <b393e524-85e8-dbfd-225d-fea87646c199@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <5ee4101f-aea0-4ead-d1eb-c20bffccd467@xen.org>
+Date: Tue, 14 Apr 2020 11:38:21 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200414100213.GH28601@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <b393e524-85e8-dbfd-225d-fea87646c199@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -62,119 +81,86 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Tim Deegan <tim@xen.org>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ Kevin Tian <kevin.tian@intel.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 14.04.2020 12:02, Roger Pau Monné wrote:
-> On Tue, Apr 14, 2020 at 11:01:06AM +0200, Jan Beulich wrote:
->> On 14.04.2020 09:52, Roger Pau Monné wrote:
->>> On Thu, Apr 09, 2020 at 01:54:40PM +0200, Jan Beulich wrote:
->>>> On 06.04.2020 12:57, Roger Pau Monne wrote:
->>>>> --- a/xen/arch/x86/mm/hap/hap.c
->>>>> +++ b/xen/arch/x86/mm/hap/hap.c
->>>>> @@ -118,7 +118,7 @@ int hap_track_dirty_vram(struct domain *d,
->>>>>              p2m_change_type_range(d, begin_pfn, begin_pfn + nr,
->>>>>                                    p2m_ram_rw, p2m_ram_logdirty);
->>>>>  
->>>>> -            flush_tlb_mask(d->dirty_cpumask);
->>>>> +            hap_flush_tlb_mask(d->dirty_cpumask);
->>>>>  
->>>>>              memset(dirty_bitmap, 0xff, size); /* consider all pages dirty */
->>>>>          }
->>>>> @@ -205,7 +205,7 @@ static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
->>>>>           * to be read-only, or via hardware-assisted log-dirty.
->>>>>           */
->>>>>          p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
->>>>> -        flush_tlb_mask(d->dirty_cpumask);
->>>>> +        hap_flush_tlb_mask(d->dirty_cpumask);
->>>>>      }
->>>>>      return 0;
->>>>>  }
->>>>> @@ -234,7 +234,7 @@ static void hap_clean_dirty_bitmap(struct domain *d)
->>>>>       * be read-only, or via hardware-assisted log-dirty.
->>>>>       */
->>>>>      p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
->>>>> -    flush_tlb_mask(d->dirty_cpumask);
->>>>> +    hap_flush_tlb_mask(d->dirty_cpumask);
->>>>>  }
->>>>>  
->>>>>  /************************************************/
->>>>> @@ -798,7 +798,7 @@ hap_write_p2m_entry(struct p2m_domain *p2m, unsigned long gfn, l1_pgentry_t *p,
->>>>>  
->>>>>      safe_write_pte(p, new);
->>>>>      if ( old_flags & _PAGE_PRESENT )
->>>>> -        flush_tlb_mask(d->dirty_cpumask);
->>>>> +        hap_flush_tlb_mask(d->dirty_cpumask);
->>>>>  
->>>>>      paging_unlock(d);
->>>>>  
->>>>
->>>> Following up on my earlier mail about paging_log_dirty_range(), I'm
->>>> now of the opinion that all of these flushes should go away too. I
->>>> can only assume that they got put where they are when HAP code was
->>>> cloned from the shadow one. These are only p2m operations, and hence
->>>> p2m level TLB flushing is all that's needed here.
->>>
->>> IIRC without those ASID flushes NPT won't work correctly, as I think
->>> it relies on those flushes when updating the p2m.
+
+
+On 14/04/2020 10:50, Jan Beulich wrote:
+> On 14.04.2020 11:45, Julien Grall wrote:
 >>
->> Hmm, yes - at least for this last one (in patch context) I definitely
->> agree: NPT's TLB invalidation is quite different from EPT's (and I
->> was too focused on the latter when writing the earlier reply).
->> Therefore how about keeping hap_flush_tlb_mask() (and its uses), but
->> teaching it to do nothing for EPT, while doing an ASID based flush
->> for NPT?
+>>
+>> On 14/04/2020 10:31, Jan Beulich wrote:
+>>> On 14.04.2020 11:29, Julien Grall wrote:
+>>>> On 03/04/2020 16:31, Jürgen Groß wrote:
+>>>>> On 03.04.20 16:51, Jan Beulich wrote:
+>>>>>> On 02.04.2020 17:46, Juergen Gross wrote:
+>>>>>>> V7:
+>>>>>>> - fine tune some parameter initializations (Jan Beulich)
+>>>>>>> - call custom_runtime_set_var() after updating the value
+>>>>>>> - modify alignment in Arm linker script to 4 (Jan Beulich)
+>>>>>>
+>>>>>> I didn't ask for this to be unilaterally 4 - I don't think this
+>>>>>> would work on Arm64, seeing that there are pointers inside the
+>>>>>> struct. This wants to be pointer size, i.e. 4 for Arm32 but 8
+>>>>>> for Arm64.
+>>>>
+>>>> We don't allow unaligned access on Arm32, so if your structure happen to have a 64-bit value in it then you will get a crash at runtime.
+>>>>
+>>>> For safety, it should neither be POINTER_ALIGN or 4, but 8.
+>>>> This is going to make your linker more robust.
+>>>
+>>> Would you mind explaining to me why POINTER_ALIGN would be wrong
+>>> when the most strictly aligned field in a structure is a pointer?
+>> Both are valid with one difference though. If tomorrow someone send
+>> a patch to add a 64-bit in the structure, what are the chance one
+>> won't notice the alignment change? It is quite high.
 > 
-> I could give that a try. I'm slightly worried that EPT code might rely
-> on some of those ASID/VPID flushes. It seems like it's trying to do
-> VPID flushes when needed, but issues could be masked by the ASID/VPID
-> flushes done by the callers.
+> Hmm, adjustments altering structure alignment that affect linker
+> script correctness should imo always be accompanied by checking
+> what the linker scripts has for the specific structure.
 
-I can't seem to find any EPT code doing VPID flushes, and I'd also
-not expect to. There's VMX code doing so, yes. EPT should be fully
-agnostic to guest virtual address space.
+I agree with this, however this is theory. In practice, a contributor 
+may not have noticed it and the reviewer may have overlooked it. So I 
+prefer to make my life easier if the trade off is limited.
 
->> There may then even be the option to have a wider purpose helper,
->> dealing with most (all?) of the flushes needed from underneath
->> x86/mm/, setting the TLB and HVM_ASID_CORE flags as appropriate. In
->> the EPT case the function would still be a no-op (afaict).
 > 
-> That seems nice, we would have to be careful however as reducing the
-> number of ASID/VPID flushes could uncover issues in the existing code.
-> I guess you mean something like:
+>> If you align the section to 8, then you make your code more robust
+>> at the expense of possibly adding an extra 4-bytes in your binary.
 > 
-> static inline void guest_flush_tlb_mask(const struct domain *d,
->                                         const cpumask_t *mask)
-> {
->     flush_mask(mask, (is_pv_domain(d) || shadow_mode_enabled(d) ? FLUSH_TLB
->                                                                 : 0) |
->     		     (is_hvm_domain(d) && cpu_has_svm ? FLUSH_HVM_ASID_CORE
-> 		                                      : 0));
-> }
+> Well, you're the maintainer for Arm, so you've got to judge. I'd
+> view things the other way around.
+For me, review and maintenance are burden that needs to be decreased and 
+not increased.
 
-Almost - is_hvm_domain(d) && cpu_has_svm seems to wide for me. I'd
-rather use hap_enabled() && cpu_has_svm, which effectively means NPT.
-Or am I overlooking a need to do ASID flushes also in shadow mode?
+> Yes, it's less likely for even
+> larger alignment requirements to get introduced, but why not be
+> careful about these too and, say, align everything to PAGE_SIZE?
+> IOW - where do you draw the line in a non-arbitrary way?
 
-Also I'd suggest to calculate the flags up front, to avoid calling
-flush_mask() in the first place in case (EPT) neither bit is set.
+Most of decisions are arbitrary, some are more than other (e.g style).
 
-> I think this should work, but I would rather do it in a separate
-> patch.
+We are down to the cost of alignment vs cost of maintenance/review 
+longer term.
 
-Yes, just like the originally (wrongly, as you validly say) suggested
-full removal of them, putting this in a separate patch would indeed
-seem better.
+ldr/str on arm32 will request the address to be aligned to the size 
+accessed. This will at most be 8. So by switching to 8, you remove most 
+of the common unalignment fault.
 
-> I'm also not fully convinced guest_flush_tlb_mask is the best
-> name, but I couldn't think of anything else more descriptive of the
-> purpose of the function.
+You could use an higher alignment (such as PAGE_SIZE), but such 
+structures are pretty limited and mostly used by the hardware. So the 
+chance is the alignment will be correct from scratch.
 
-That's the name I was thinking of, too, despite also not being
-entirely happy with it.
+Cheers,
 
-Jan
+-- 
+Julien Grall
 
