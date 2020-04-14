@@ -2,45 +2,45 @@ Return-Path: <SRS0=0Wix=56=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-8.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 91E4DC352BE
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 20:23:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 595C9C2BB1D
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 20:25:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5293F20CC7
-	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 20:23:48 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 26CCA2074D
+	for <xen-devel@archiver.kernel.org>; Tue, 14 Apr 2020 20:25:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="d2nCyzE1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5293F20CC7
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MSFySptP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 26CCA2074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOS5h-0006fi-MK; Tue, 14 Apr 2020 20:23:29 +0000
+	id 1jOS76-0006lh-4r; Tue, 14 Apr 2020 20:24:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=JNOL=56=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jOS5g-0006fd-TC
- for xen-devel@lists.xenproject.org; Tue, 14 Apr 2020 20:23:28 +0000
-X-Inumbo-ID: cc884a9a-7e8d-11ea-b58d-bc764e2007e4
+ id 1jOS75-0006lb-3D
+ for xen-devel@lists.xenproject.org; Tue, 14 Apr 2020 20:24:55 +0000
+X-Inumbo-ID: 00060c86-7e8e-11ea-b58d-bc764e2007e4
 Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cc884a9a-7e8d-11ea-b58d-bc764e2007e4;
- Tue, 14 Apr 2020 20:23:27 +0000 (UTC)
+ id 00060c86-7e8e-11ea-b58d-bc764e2007e4;
+ Tue, 14 Apr 2020 20:24:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586895807;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version;
- bh=dDpooWvCvCdfVU+Csr7I2hSG58ilkPwM/JN7uGWPjoQ=;
- b=d2nCyzE1gfQx7bJjF93JEpbD5sONp/PGP2Ck7mQchoVLyU6NoTuarhnB
- 4K3HTBlipwJSrHh6GvoRkXkYmzwgMw+D2/DPot69jSls97X0U3U48zpAY
- fxLjuYiu1MyccNgko/6W4JFs8lHXJ6MWToVx1bO8GMkVkGosmufRRiTT8 g=;
+ d=citrix.com; s=securemail; t=1586895894;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=y3TBEIewzoLbvOHXkrqiBad2k4udvTD2ufd/z90hUQA=;
+ b=MSFySptPQ1xHTsCCJE+AyvVStnDnCoznsf4Xt9cCcDATAoQ3DzLL0xJH
+ PkSWd+Ck5yQ0xjWlHj+fxSMeg0/VzmoPjWANgAbGCkbxh6mrZMbwer98J
+ 5M+MZaqfaeEchlG7vdzOcim7falcdk9Y8osasRrHacw6fsA3SQvrFI6+B 0=;
 Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
@@ -72,28 +72,34 @@ Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: uk328W3r5ZgYEZRkXbA2nHU8HUAqJFrULWd69v7HEoqsChQ86WEflmlLIqbhPivhWBnACvuaCJ
- Nl0JZ6PPJ9Xvmy5w0aVHjFU6n4IZjHd3cCtHjaEweK0871wZji9qaQHLPTfN1wDqHgHvpLueRQ
- 56KvVW/ks3Yhr7Ced9d4mUSJGA2aGLLaKwIC210T3mDadDVS5qYXD3snvIGP70NUjtf2lX8vDH
- BDDM8UTOKdowizAbEC6zijamjZicnpuBj5Ue4GNw+2xJY8AquAFt48fmW3RYzFwZnogtXJRLpn
- 7X0=
+IronPort-SDR: HpGCMY45IRaSrSS6demanULjBpYhw87sCqDBlLOLz+wlKgIOW+81RvBoBOJFU83IkAQGJHTZdn
+ nQ0fs+rEaRGXP1Ql6dfTg0WaJGabc1SzT+L6m4oIqCGWSFxxOKWZbagJTLu72afCUWzQrhYOkj
+ PEAhKyKUxYBw7/bFEhVzMwNqMB4BWsqUin86hYP8Y2wnP/lHfwSqeeyDHDlXX25mP3oOmNGieW
+ tv+bfhnbqJzB8xNe28HDyZv2RhxE9m+jqqdjqEc0RUbKXnpRO+lrnOCkF8qFRzZJfcliX41fKF
+ 3Ao=
 X-SBRS: 2.7
-X-MesageID: 15995059
+X-MesageID: 15995110
 X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,384,1580792400"; d="scan'208";a="15995059"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.72,384,1580792400"; d="scan'208";a="15995110"
+Subject: Re: Ping [PATCH v2 14/17] libxc/save: Write X86_{CPUID,MSR}_DATA
+ records
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v3 10/17] tools/libxl: Plumb a restore boolean into
- libxl__domain_build_state
-Date: Tue, 14 Apr 2020 21:23:21 +0100
-Message-ID: <20200414202321.17580-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200127143444.25538-11-andrew.cooper3@citrix.com>
-References: <20200127143444.25538-11-andrew.cooper3@citrix.com>
+References: <20200127143444.25538-1-andrew.cooper3@citrix.com>
+ <20200127143444.25538-15-andrew.cooper3@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <5c535bf4-d1ca-488a-7b2b-dd1c023d0d83@citrix.com>
+Date: Tue, 14 Apr 2020 21:24:50 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain
+In-Reply-To: <20200127143444.25538-15-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,104 +110,138 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony PERARD <anthony.perard@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Ian Jackson <Ian.Jackson@citrix.com>
+Cc: Ian Jackson <Ian.Jackson@citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-To fix CPUID handling, libxl__build_pre() is going to have to distinguish
-between a brand new VM vs one which is being migrated-in/resumed.
-
-Transcribe dcs->restore_fd into dbs->restore in initiate_domain_create()
-only (specifically avoiding the stubdom state in libxl__spawn_stub_dm()).
-
-While tweaking initiate_domain_create(), make a new dbs alias and simplify
-later code, and drop the local restore_fd alias as the new dbs->restore is
-more intuitive in context.
-
-No functional change.
-
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Ian Jackson <Ian.Jackson@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Anthony PERARD <anthony.perard@citrix.com>
-
-v2:
- * New.  This is c/s aacc1430064 "tools/libxl: Plumb domain_create_state down
-   into libxl__build_pre()" take-2, without any collateral damage to stubdoms.
-v3:
- * Extend libxl__domain_build_state instead of adding a new parameter to
-   libxl__build_pre().
----
- tools/libxl/libxl_create.c   | 14 +++++++-------
- tools/libxl/libxl_internal.h |  4 ++++
- 2 files changed, 11 insertions(+), 7 deletions(-)
-
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
-index e7cb2dbc2b..5a043df15f 100644
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -1181,18 +1181,18 @@ static void initiate_domain_create(libxl__egc *egc,
- 
-     /* convenience aliases */
-     libxl_domain_config *const d_config = dcs->guest_config;
--    const int restore_fd = dcs->restore_fd;
-+    libxl__domain_build_state *dbs = &dcs->build_state;
- 
-     libxl__xswait_init(&dcs->console_xswait);
- 
-     domid = dcs->domid;
--    libxl__domain_build_state_init(&dcs->build_state);
-+    libxl__domain_build_state_init(dbs);
-+    dbs->restore = dcs->restore_fd >= 0;
- 
-     ret = libxl__domain_config_setdefault(gc,d_config,domid);
-     if (ret) goto error_out;
- 
--    ret = libxl__domain_make(gc, d_config, &dcs->build_state, &domid,
--                             dcs->soft_reset);
-+    ret = libxl__domain_make(gc, d_config, dbs, &domid, dcs->soft_reset);
-     if (ret) {
-         LOGD(ERROR, domid, "cannot make domain: %d", ret);
-         dcs->guest_domid = domid;
-@@ -1236,7 +1236,7 @@ static void initiate_domain_create(libxl__egc *egc,
-     if (ret)
-         goto error_out;
- 
--    if (restore_fd >= 0 || dcs->soft_reset) {
-+    if (dbs->restore || dcs->soft_reset) {
-         LOGD(DEBUG, domid, "restoring, not running bootloader");
-         domcreate_bootloader_done(egc, &dcs->bl, 0);
-     } else  {
-@@ -1247,8 +1247,8 @@ static void initiate_domain_create(libxl__egc *egc,
-         dcs->bl.disk = bootdisk;
-         dcs->bl.domid = dcs->guest_domid;
- 
--        dcs->bl.kernel = &dcs->build_state.pv_kernel;
--        dcs->bl.ramdisk = &dcs->build_state.pv_ramdisk;
-+        dcs->bl.kernel = &dbs->pv_kernel;
-+        dcs->bl.ramdisk = &dbs->pv_ramdisk;
- 
-         libxl__bootloader_run(egc, &dcs->bl);
-     }
-diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
-index 5f39e44cb9..e5effd2ad1 100644
---- a/tools/libxl/libxl_internal.h
-+++ b/tools/libxl/libxl_internal.h
-@@ -1397,6 +1397,10 @@ typedef struct {
- 
-     /* ARM only to deal with broken firmware */
-     uint32_t clock_frequency;
-+
-+    /* Whether this domain is being migrated/restored, or booting fresh.  Only
-+     * applicable to the primary domain, not support domains (e.g. stub QEMU). */
-+    bool restore;
- } libxl__domain_build_state;
- 
- _hidden void libxl__domain_build_state_init(libxl__domain_build_state *s);
--- 
-2.11.0
+On 27/01/2020 14:34, Andrew Cooper wrote:
+> With all other plumbing in place, obtain the CPU Policy from Xen and
+> write it into the migration stream.
+>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Ian Jackson <Ian.Jackson@citrix.com>
+> CC: Wei Liu <wl@xen.org>
+> ---
+>  tools/libxc/xc_sr_common_x86.c   | 50 ++++++++++++++++++++++++++++++++++++++++
+>  tools/libxc/xc_sr_common_x86.h   |  6 +++++
+>  tools/libxc/xc_sr_save_x86_hvm.c |  2 +-
+>  tools/libxc/xc_sr_save_x86_pv.c  | 12 +++++++++-
+>  4 files changed, 68 insertions(+), 2 deletions(-)
+>
+> diff --git a/tools/libxc/xc_sr_common_x86.c b/tools/libxc/xc_sr_common_x86.c
+> index 8980299e9a..6267655dab 100644
+> --- a/tools/libxc/xc_sr_common_x86.c
+> +++ b/tools/libxc/xc_sr_common_x86.c
+> @@ -42,6 +42,56 @@ int handle_x86_tsc_info(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+>      return 0;
+>  }
+>  
+> +int write_x86_cpu_policy_records(struct xc_sr_context *ctx)
+> +{
+> +    xc_interface *xch = ctx->xch;
+> +    struct xc_sr_record cpuid = { .type = REC_TYPE_X86_CPUID_POLICY, };
+> +    struct xc_sr_record msrs  = { .type = REC_TYPE_X86_MSR_POLICY, };
+> +    uint32_t nr_leaves = 0, nr_msrs = 0;
+> +    int rc;
+> +
+> +    if ( xc_get_cpu_policy_size(xch, &nr_leaves, &nr_msrs) < 0 )
+> +    {
+> +        PERROR("Unable to get CPU Policy size");
+> +        return -1;
+> +    }
+> +
+> +    cpuid.data = malloc(nr_leaves * sizeof(xen_cpuid_leaf_t));
+> +    msrs.data  = malloc(nr_msrs   * sizeof(xen_msr_entry_t));
+> +    if ( !cpuid.data || !msrs.data )
+> +    {
+> +        ERROR("Cannot allocate memory for CPU Policy");
+> +        rc = -1;
+> +        goto out;
+> +    }
+> +
+> +    if ( xc_get_domain_cpu_policy(xch, ctx->domid, &nr_leaves, cpuid.data,
+> +                                  &nr_msrs, msrs.data) )
+> +    {
+> +        PERROR("Unable to get d%d CPU Policy", ctx->domid);
+> +        rc = -1;
+> +        goto out;
+> +    }
+> +
+> +    cpuid.length = nr_leaves * sizeof(xen_cpuid_leaf_t);
+> +    if ( cpuid.length )
+> +    {
+> +        rc = write_record(ctx, &cpuid);
+> +        if ( rc )
+> +            goto out;
+> +    }
+> +
+> +    msrs.length = nr_msrs * sizeof(xen_msr_entry_t);
+> +    if ( msrs.length )
+> +        rc = write_record(ctx, &msrs);
+> +
+> + out:
+> +    free(cpuid.data);
+> +    free(msrs.data);
+> +
+> +    return rc;
+> +}
+> +
+>  int handle_x86_cpuid_policy(struct xc_sr_context *ctx, struct xc_sr_record *rec)
+>  {
+>      xc_interface *xch = ctx->xch;
+> diff --git a/tools/libxc/xc_sr_common_x86.h b/tools/libxc/xc_sr_common_x86.h
+> index c458c1aa37..d1050981dd 100644
+> --- a/tools/libxc/xc_sr_common_x86.h
+> +++ b/tools/libxc/xc_sr_common_x86.h
+> @@ -15,6 +15,12 @@ int write_x86_tsc_info(struct xc_sr_context *ctx);
+>  int handle_x86_tsc_info(struct xc_sr_context *ctx, struct xc_sr_record *rec);
+>  
+>  /*
+> + * Obtains a domains CPU Policy from Xen, and writes X86_{CPUID,MSR}_POLICY
+> + * records into the stream.
+> + */
+> +int write_x86_cpu_policy_records(struct xc_sr_context *ctx);
+> +
+> +/*
+>   * Parses an X86_CPUID_POLICY record and stashes the content for application
+>   * when a STATIC_DATA_END record is encountered.
+>   */
+> diff --git a/tools/libxc/xc_sr_save_x86_hvm.c b/tools/libxc/xc_sr_save_x86_hvm.c
+> index 93bcc1c273..acf9264dec 100644
+> --- a/tools/libxc/xc_sr_save_x86_hvm.c
+> +++ b/tools/libxc/xc_sr_save_x86_hvm.c
+> @@ -172,7 +172,7 @@ static int x86_hvm_setup(struct xc_sr_context *ctx)
+>  
+>  static int x86_hvm_static_data(struct xc_sr_context *ctx)
+>  {
+> -    return 0;
+> +    return write_x86_cpu_policy_records(ctx);
+>  }
+>  
+>  static int x86_hvm_start_of_stream(struct xc_sr_context *ctx)
+> diff --git a/tools/libxc/xc_sr_save_x86_pv.c b/tools/libxc/xc_sr_save_x86_pv.c
+> index 46019d962d..c7e246ef4f 100644
+> --- a/tools/libxc/xc_sr_save_x86_pv.c
+> +++ b/tools/libxc/xc_sr_save_x86_pv.c
+> @@ -1054,7 +1054,17 @@ static int x86_pv_setup(struct xc_sr_context *ctx)
+>  
+>  static int x86_pv_static_data(struct xc_sr_context *ctx)
+>  {
+> -    return write_x86_pv_info(ctx);
+> +    int rc;
+> +
+> +    rc = write_x86_pv_info(ctx);
+> +    if ( rc )
+> +        return rc;
+> +
+> +    rc = write_x86_cpu_policy_records(ctx);
+> +    if ( rc )
+> +        return rc;
+> +
+> +    return 0;
+>  }
+>  
+>  static int x86_pv_start_of_stream(struct xc_sr_context *ctx)
 
 
