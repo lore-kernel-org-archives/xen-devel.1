@@ -2,53 +2,53 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C2C9CC3815B
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:21:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F292AC2BA19
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:22:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F14D20775
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:21:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F14D20775
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A1E4520775
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:22:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A1E4520775
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=huawei.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOdIb-0006mg-LQ; Wed, 15 Apr 2020 08:21:33 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=UoJL=57=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jOdIa-0006mb-83
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:21:32 +0000
-X-Inumbo-ID: 1bb864d8-7ef2-11ea-8a15-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1bb864d8-7ef2-11ea-8a15-12813bfff9fa;
- Wed, 15 Apr 2020 08:21:30 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id B7EC3AD57;
- Wed, 15 Apr 2020 08:21:28 +0000 (UTC)
-Subject: [PATCH 0/2] x86: high compat r/o M2P table handling adjustments
-To: xen-devel@lists.xenproject.org
-References: <cover.1586352238.git.hongyxia@amazon.com>
- <91728ed9a191160e6405267f5ae05cb6d3724f22.1586352238.git.hongyxia@amazon.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <fc61fd42-0e09-0f13-bccb-ba0202d936ca@suse.com>
-Date: Wed, 15 Apr 2020 10:21:23 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+	id 1jOdJk-0006rX-1n; Wed, 15 Apr 2020 08:22:44 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=X1rp=57=huawei.com=yanaijie@srs-us1.protection.inumbo.net>)
+ id 1jOdJi-0006rL-If
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:22:42 +0000
+X-Inumbo-ID: 43598486-7ef2-11ea-b58d-bc764e2007e4
+Received: from huawei.com (unknown [45.249.212.191])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 43598486-7ef2-11ea-b58d-bc764e2007e4;
+ Wed, 15 Apr 2020 08:22:39 +0000 (UTC)
+Received: from DGGEMS408-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 8FB6EBE898881FBAF5;
+ Wed, 15 Apr 2020 16:22:35 +0800 (CST)
+Received: from huawei.com (10.175.124.28) by DGGEMS408-HUB.china.huawei.com
+ (10.3.19.208) with Microsoft SMTP Server id 14.3.487.0; Wed, 15 Apr 2020
+ 16:22:25 +0800
+From: Jason Yan <yanaijie@huawei.com>
+To: <sstabellini@kernel.org>, <linux@armlinux.org.uk>,
+ <xen-devel@lists.xenproject.org>, <linux-arm-kernel@lists.infradead.org>,
+ <linux-kernel@vger.kernel.org>
+Subject: [PATCH] arm/xen: make _xen_start_info static
+Date: Wed, 15 Apr 2020 16:48:53 +0800
+Message-ID: <20200415084853.5808-1-yanaijie@huawei.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-In-Reply-To: <91728ed9a191160e6405267f5ae05cb6d3724f22.1586352238.git.hongyxia@amazon.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.175.124.28]
+X-CFilter-Loop: Reflected
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -59,21 +59,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Hongyan Xia <hx242@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- julien@xen.org, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Hulk Robot <hulkci@huawei.com>, Jason Yan <yanaijie@huawei.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-While looking at "x86_64/mm: map and unmap page tables in
-destroy_compat_m2p_mapping" it occurred to me that the mappings
-changed there can be dropped altogether, as can the linear
-address range used for this. Note that both patches have only
-been lightly tested so far, I guess in particular the 2nd one
-may still have issues.
+Fix the following sparse warning:
 
-1: x86: drop unnecessary page table walking in compat r/o M2P handling
-2: x86: drop high compat r/o M2P table address range
+arch/arm64/xen/../../arm/xen/enlighten.c:39:19: warning: symbol
+'_xen_start_info' was not declared. Should it be static?
 
-Jan
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: Jason Yan <yanaijie@huawei.com>
+---
+ arch/arm/xen/enlighten.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
+index dd6804a64f1a..fd4e1ce1daf9 100644
+--- a/arch/arm/xen/enlighten.c
++++ b/arch/arm/xen/enlighten.c
+@@ -36,7 +36,7 @@
+ 
+ #include <linux/mm.h>
+ 
+-struct start_info _xen_start_info;
++static struct start_info _xen_start_info;
+ struct start_info *xen_start_info = &_xen_start_info;
+ EXPORT_SYMBOL(xen_start_info);
+ 
+-- 
+2.21.1
+
 
