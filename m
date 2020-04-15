@@ -2,57 +2,58 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F190C2BB1D
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:02:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C22EC2BB1D
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:03:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 095952072D
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:02:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id CD2792072D
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:03:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="tlt0r1zG"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 095952072D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="E6vlUiEQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CD2792072D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOWRX-00019B-S6; Wed, 15 Apr 2020 01:02:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jOWSD-0001C7-Ix; Wed, 15 Apr 2020 01:03:01 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=NGac=57=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jOWRW-000196-Rl
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 01:02:18 +0000
-X-Inumbo-ID: c087bf1a-7eb4-11ea-b58d-bc764e2007e4
+ id 1jOWSC-0001BW-7z
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 01:03:00 +0000
+X-Inumbo-ID: d8674d46-7eb4-11ea-89ec-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c087bf1a-7eb4-11ea-b58d-bc764e2007e4;
- Wed, 15 Apr 2020 01:02:18 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 1DCAD2072D;
- Wed, 15 Apr 2020 01:02:17 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id d8674d46-7eb4-11ea-89ec-12813bfff9fa;
+ Wed, 15 Apr 2020 01:02:59 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
+ (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 506B120787;
+ Wed, 15 Apr 2020 01:02:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586912537;
- bh=ZdE3Xo7+81xPuHaeUJizVXRE+i9VJW2i2pT0cGASjhE=;
- h=Date:From:To:cc:Subject:From;
- b=tlt0r1zGAOh0hyzkI9DICiMFiAP7AjQQ6YAwtd/yokfCYm47mJ3cB+QZ4SjwIhgym
- NxN7TWClBKCikxMaFzvcjvnGEvgW59txqu7F6pZlezEExwvw2tdTkRyZn7NX6X91V8
- MRUQ4J/s5quYD+aVpP0KuFeTjVa4QSmlXDqeoAFA=
-Date: Tue, 14 Apr 2020 18:02:09 -0700 (PDT)
+ s=default; t=1586912578;
+ bh=YfCOD/krweRwr+m0KM00qRltE3yb4U9K6JqnMq8B/LA=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=E6vlUiEQIJ8wbywo5ASO6NY0rjUvrS4xDtaM0szQDkyAZAx1CeKpyZBSFVpufidIc
+ w93SVAifJ3BXdbNHJpx+JdfNMCa9x8hvD+OHgRcKqegjg+eljNO3jJBNr7lPui8BK6
+ LVVYKX7JoKEXYMwBrXVD66ZCMf6ZxlR2ECZvIeGs=
 From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 0/12] direct-map DomUs
-Message-ID: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Subject: [PATCH 03/12] xen/arm: introduce 1:1 mapping for domUs
+Date: Tue, 14 Apr 2020 18:02:46 -0700
+Message-Id: <20200415010255.10081-3-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -63,81 +64,175 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Artem_Mygaiev@epam.com, peng.fan@nxp.com, sstabellini@kernel.org,
- julien@xen.org, andrew.cooper3@citrix.com, George.Dunlap@citrix.com,
- Bertrand.Marquis@arm.com, jbeulich@suse.com, Volodymyr_Babchuk@epam.com
+Cc: Volodymyr_Babchuk@epam.com, sstabellini@kernel.org, julien@xen.org,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi all,
+In some cases it is desirable to map domU memory 1:1 (guest physical ==
+physical.) For instance, because we want to assign a device to the domU
+but the IOMMU is not present or cannot be used. In these cases, other
+mechanisms should be used for DMA protection, e.g. a MPU.
 
-This series adds support for 1:1 mapping (guest physical == physical)
-the memory of dom0less domUs. The memory ranges assigned to a domU can be
-explicitly chosen by the user at boot time.
+This patch introduces a new device tree option for dom0less guests to
+request a domain to be directly mapped. It also specifies the memory
+ranges. This patch documents the new attribute and parses it at boot
+time. (However, the implementation of 1:1 mapping is missing and just
+BUG() out at the moment.)  Finally the patch sets the new direct_map
+flag for DomU domains.
 
-This is desirable in cases where an IOMMU is not present in the system,
-or it cannot be used. For instance, it might not be usable because it
-doesn't cover a specific device, or because it doesn't have enough
-bandwidth, or because it adds too much latency. In these cases, the user
-should use a MPU to protect the memory in the system (e.g. the Xilinx
-XMPU), configuring it with the chosen address ranges.
-
-Cheers,
-
-Stefano
-
-
-
-The following changes since commit 7372466b21c3b6c96bb7a52754e432bac883a1e3:
-
-  x86/mem_sharing: Fix build with !CONFIG_XSM (2020-04-10 15:20:10 +0100)
-
-are available in the Git repository at:
-
-  http://xenbits.xenproject.org/git-http/people/sstabellini/xen-unstable.git direct-map-1
-
-for you to fetch changes up to 43503720ab6851a28a66fdd067f592d5354ae83a:
-
-  xen/arm: call iomem_permit_access for passthrough devices (2020-04-14 17:42:21 -0700)
-
-----------------------------------------------------------------
-Stefano Stabellini (12):
-      xen: introduce xen_dom_flags
-      xen/arm: introduce arch_xen_dom_flags and direct_map
-      xen/arm: introduce 1:1 mapping for domUs
-      xen: split alloc_heap_pages in two halves for reusability
-      xen: introduce reserve_heap_pages
-      xen/arm: reserve 1:1 memory for direct_map domUs
-      xen/arm: new vgic: rename vgic_cpu/dist_base to c/dbase
-      xen/arm: if is_domain_direct_mapped use native addresses for GICv2
-      xen/arm: if is_domain_direct_mapped use native addresses for GICv3
-      xen/arm: if is_domain_direct_mapped use native UART address for vPL011
-      xen/arm: if xen_force don't try to setup the IOMMU
-      xen/arm: call iomem_permit_access for passthrough devices
-
- docs/misc/arm/device-tree/booting.txt |  13 +++
- docs/misc/arm/passthrough-noiommu.txt |  35 ++++++++
- xen/arch/arm/domain.c                 |   4 +-
- xen/arch/arm/domain_build.c           | 141 ++++++++++++++++++++++++++----
- xen/arch/arm/setup.c                  |   3 +-
- xen/arch/arm/vgic-v2.c                |  12 +--
- xen/arch/arm/vgic-v3.c                |  18 +++-
- xen/arch/arm/vgic/vgic-init.c         |   4 +-
- xen/arch/arm/vgic/vgic-v2.c           |  18 ++--
- xen/arch/arm/vpl011.c                 |  12 ++-
- xen/arch/x86/domain.c                 |   3 +-
- xen/arch/x86/setup.c                  |   3 +-
- xen/common/domain.c                   |  13 +--
- xen/common/domctl.c                   |   3 +-
- xen/common/page_alloc.c               | 158 +++++++++++++++++++++++++---------
- xen/common/sched/core.c               |   3 +-
- xen/include/asm-arm/domain.h          |  10 ++-
- xen/include/asm-arm/new_vgic.h        |   4 +-
- xen/include/asm-arm/vgic.h            |   1 +
- xen/include/asm-x86/domain.h          |   2 +
- xen/include/xen/domain.h              |   8 +-
- xen/include/xen/mm.h                  |   2 +
- xen/include/xen/sched.h               |   2 +-
- 23 files changed, 373 insertions(+), 99 deletions(-)
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+---
+ docs/misc/arm/device-tree/booting.txt | 13 +++++++
+ docs/misc/arm/passthrough-noiommu.txt | 35 ++++++++++++++++++
+ xen/arch/arm/domain_build.c           | 52 +++++++++++++++++++++++++--
+ 3 files changed, 98 insertions(+), 2 deletions(-)
  create mode 100644 docs/misc/arm/passthrough-noiommu.txt
+
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index 5243bc7fd3..fce5f7ed5a 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -159,6 +159,19 @@ with the following properties:
+     used, or GUEST_VPL011_SPI+1 if vpl011 is enabled, whichever is
+     greater.
+ 
++- direct-map
++
++    Optional. An array of integer pairs specifying addresses and sizes.
++    direct_map requests the memory of the domain to be 1:1 mapped with
++    the memory ranges specified as argument. Only sizes that are a
++    power of two number of pages are allowed.
++
++- #direct-map-addr-cells and #direct-map-size-cells
++
++    The number of cells to use for the addresses and for the sizes in
++    direct-map. Default and maximum are 2 cells for both addresses and
++    sizes.
++
+ - #address-cells and #size-cells
+ 
+     Both #address-cells and #size-cells need to be specified because
+diff --git a/docs/misc/arm/passthrough-noiommu.txt b/docs/misc/arm/passthrough-noiommu.txt
+new file mode 100644
+index 0000000000..d2bfaf26c3
+--- /dev/null
++++ b/docs/misc/arm/passthrough-noiommu.txt
+@@ -0,0 +1,35 @@
++Request Device Assignment without IOMMU support
++===============================================
++
++Add xen,force-assign-without-iommu; to the device tree snippet
++
++    ethernet: ethernet@ff0e0000 {
++        compatible = "cdns,zynqmp-gem";
++        xen,path = "/amba/ethernet@ff0e0000";
++        xen,reg = <0x0 0xff0e0000 0x1000 0x0 0xff0e0000>;
++        xen,force-assign-without-iommu;
++
++Optionally, if none of the domains require an IOMMU, then it could be
++disabled (not recommended). For instance by adding status = "disabled";
++under the smmu node:
++
++    smmu@fd800000 {
++        compatible = "arm,mmu-500";
++        status = "disabled";
++
++
++Request 1:1 memory mapping for the dom0-less domain
++===================================================
++
++Add a direct-map property under the appropriate /chosen/domU node with
++the memory ranges you want to assign to your domain. If you are using
++imagebuilder, you can add to boot.source something like the following:
++
++    fdt set /chosen/domU0 direct-map <0x0 0x10000000 0x0 0x10000000 0x0 0x60000000 0x0 0x10000000>
++
++Which will assign the ranges:
++
++    0x10000000 - 0x20000000
++    0x60000000 - 0x70000000
++
++to the first dom0less domU.
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 2ec7453aa3..a2bb411568 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -2435,7 +2435,51 @@ static int __init construct_domU(struct domain *d,
+     /* type must be set before allocate memory */
+     d->arch.type = kinfo.type;
+ #endif
+-    allocate_memory(d, &kinfo);
++
++    if ( !is_domain_direct_mapped(d) )
++        allocate_memory(d, &kinfo);
++    else
++    {
++        struct membank banks[NR_MEM_BANKS];
++        const struct dt_property *prop;
++        u32 direct_map_len, direct_map_addr_len = 2, direct_map_size_len = 2;
++        unsigned int i;
++        __be32 *p;
++
++        prop = dt_find_property(node, "direct-map", &direct_map_len);
++        BUG_ON(!prop);
++
++        dt_property_read_u32(node,
++                             "#direct-map-addr-cells",
++                             &direct_map_addr_len);
++        dt_property_read_u32(node,
++                             "#direct-map-size-cells",
++                             &direct_map_size_len);
++        BUG_ON(direct_map_size_len > 2 || direct_map_addr_len > 2);
++
++        for ( i = 0, p = prop->value;
++              i < direct_map_len /
++                  (4 * (direct_map_addr_len + direct_map_size_len));
++              i++)
++        {
++            int j;
++
++            banks[i].start = 0;
++            for ( j = 0; j < direct_map_addr_len; j++, p++ )
++                banks[i].start |= __be32_to_cpu(*p) << (32*j);
++
++            banks[i].size = 0;
++            for ( j = 0; j < direct_map_size_len; j++, p++ )
++                banks[i].size |= __be32_to_cpu(*p) << (32*j);
++
++            printk(XENLOG_DEBUG
++                   "direct_map start=%#"PRIpaddr" size=%#"PRIpaddr"\n",
++                   banks[i].start, banks[i].size);
++        }
++
++        /* reserve_memory_11(d, &kinfo, &banks[0], i); */
++        BUG();
++    }
+ 
+     rc = prepare_dtb_domU(d, &kinfo);
+     if ( rc < 0 )
+@@ -2455,6 +2499,7 @@ void __init create_domUs(void)
+ {
+     struct dt_device_node *node;
+     const struct dt_device_node *chosen = dt_find_node_by_path("/chosen");
++    u32 direct_map = 0;
+ 
+     BUG_ON(chosen == NULL);
+     dt_for_each_child_node(chosen, node)
+@@ -2476,8 +2521,11 @@ void __init create_domUs(void)
+             panic("Missing property 'cpus' for domain %s\n",
+                   dt_node_name(node));
+ 
+-        if ( dt_find_compatible_node(node, NULL, "multiboot,device-tree") )
++        dt_find_property(node, "direct-map", &direct_map);
++        if ( dt_find_compatible_node(node, NULL, "multiboot,device-tree") &&
++             !direct_map )
+             d_cfg.flags |= XEN_DOMCTL_CDF_iommu;
++        flags.arch.is_direct_map = direct_map != 0;
+ 
+         if ( !dt_property_read_u32(node, "nr_spis", &d_cfg.arch.nr_spis) )
+         {
+-- 
+2.17.1
+
 
