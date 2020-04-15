@@ -2,96 +2,52 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78EF4C2BB85
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 77F33C2BA19
 	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:53:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 461B3206F9
+	by mail.kernel.org (Postfix) with ESMTPS id 52C432078A
 	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:53:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="SJrPDPuZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 461B3206F9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 52C432078A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOdnB-0001oy-AS; Wed, 15 Apr 2020 08:53:09 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2fIs=57=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jOdn9-0001og-Kx
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:53:07 +0000
-X-Inumbo-ID: 85a7dbea-7ef6-11ea-8a18-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 85a7dbea-7ef6-11ea-8a18-12813bfff9fa;
- Wed, 15 Apr 2020 08:53:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586940786;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=+PGgzijF6Yzl+0XlKliQKwd7r9rXyaW+LoGuU5tOlPo=;
- b=SJrPDPuZdJTUZrA4YFZLvK5+RujFsqCKLYHlKss6HefR6yDfbokOOh+s
- /0usvXFpnOrSdu6xfw9LSWqjTZ4A2Rhg11MD13/I1aizrpxaumY9AjGx1
- jLdcOzSGnieobZlwDd4d6b7q/U2I/p++xX2rsTkJwPq/68NOEYWKYqLS9 k=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: 8c7e0A+J1l9bUa/W+hxa5tyRnGRS0j8uaDmS+t3aRFAQB8tCMmllbCQsLdJkUFsVR1bCJ5clpo
- 1zVrQYUerCMNser+Y6WrfCK5NqAb31n7SWxHduZBNAkRIH5xZJt1ay2uT+2NG+SY9rhes0sB/T
- QPmakUJCEBAI/0+DiQRTDq09Xu2+9s9jXwWqhjX58JUOG6IzOKRr3hUQbbzLNjo6sMKt3CmqOi
- pmdpu3ZxmIbyEwyAFY36Ekoppzk8QcW4OQ84zVgMtB7XmjPs+aagorb42Z7pBmemygLeJzXokb
- 0nU=
-X-SBRS: 2.7
-X-MesageID: 15684440
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,386,1580792400"; d="scan'208";a="15684440"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH OSSTEST 1/2] exanime: test for SMT and add a host flag
-Date: Wed, 15 Apr 2020 10:52:45 +0200
-Message-ID: <20200415085246.7945-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.0
+	id 1jOdn5-0001nF-Rk; Wed, 15 Apr 2020 08:53:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=UoJL=57=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jOdn4-0001nA-Ba
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:53:02 +0000
+X-Inumbo-ID: 82f4d664-7ef6-11ea-b58d-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 82f4d664-7ef6-11ea-b58d-bc764e2007e4;
+ Wed, 15 Apr 2020 08:53:01 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 9F231AF92;
+ Wed, 15 Apr 2020 08:52:59 +0000 (UTC)
+Subject: [PATCH 1/3] xenoprof: adjust ordering of page sharing vs domain type
+ setting
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <25c5b76f-4f95-3ba9-0ae0-dd0c1f3f8496@suse.com>
+Message-ID: <0a7d6a97-7093-6cec-4c8d-d1ca39e0815e@suse.com>
+Date: Wed, 15 Apr 2020 10:52:58 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <25c5b76f-4f95-3ba9-0ae0-dd0c1f3f8496@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,71 +58,62 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: ian.jackson@eu.citrix.com, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Check if hosts have SMT based on the number of threads per core. A
-value of threads per core different than 0 implies SMT support.
+Buffer pages should be shared with "ignored" or "active" guests only
+(besides, obviously, the primary profiling domain). Hence domain type
+should be set to "ignored" before unsharing from the primary domain
+(which implies even a previously "passive" domain may then access its
+buffers, albeit that's not very useful unless it gets promoted to
+"active" subsequently), i.e. such that no further writes of records to
+the buffer would occur, and (at least for consistency) also before
+sharing it (with the calling domain) from the XENOPROF_get_buffer path.
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- sg-run-job     |  1 +
- ts-examine-cpu | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 33 insertions(+)
- create mode 100755 ts-examine-cpu
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Wei Liu <wl@xen.org>
 
-diff --git a/sg-run-job b/sg-run-job
-index 97011843..aa7953ac 100755
---- a/sg-run-job
-+++ b/sg-run-job
-@@ -679,6 +679,7 @@ proc examine-host-examine {install} {
-     if {$ok} {
- 	run-ts -.  =           ts-examine-serial-post + host
- 	run-ts .   =           ts-examine-iommu       + host
-+	run-ts .   =           ts-examine-cpu         + host
- 	run-ts .   =           ts-examine-logs-save   + host
- 	run-ts .   =           ts-examine-hostprops-save
+--- a/xen/common/xenoprof.c
++++ b/xen/common/xenoprof.c
+@@ -372,8 +372,8 @@ static void reset_passive(struct domain
+     if ( x == NULL )
+         return;
+ 
+-    unshare_xenoprof_page_with_guest(x);
+     x->domain_type = XENOPROF_DOMAIN_IGNORED;
++    unshare_xenoprof_page_with_guest(x);
+ }
+ 
+ static void reset_active_list(void)
+@@ -654,6 +654,13 @@ static int xenoprof_op_get_buffer(XEN_GU
+         if ( ret < 0 )
+             return ret;
      }
-diff --git a/ts-examine-cpu b/ts-examine-cpu
-new file mode 100755
-index 00000000..98ffab59
---- /dev/null
-+++ b/ts-examine-cpu
-@@ -0,0 +1,32 @@
-+#!/usr/bin/perl -w
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+#
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+#
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
++    else
++    {
++        d->xenoprof->domain_ready = 0;
++        d->xenoprof->domain_type = XENOPROF_DOMAIN_IGNORED;
++    }
 +
-+use strict qw(vars);
-+BEGIN { unshift @INC, qw(.); }
-+use Osstest;
-+use Osstest::TestSupport;
-+
-+tsreadconfig();
-+
-+our ($whhost) = @ARGV;
-+$whhost ||= 'host';
-+our $ho= selecthost($whhost);
-+our $info = target_cmd_output_root($ho, 'xl info', 10);
-+our $threads = $info =~ s/^threads_per_core\s*:.*\s//;
-+
-+logm("$ho->{Ident} threads per core: $threads");
-+hostflag_putative_record($ho, "smt", !!$threads);
--- 
-2.26.0
++    d->xenoprof->is_primary = (xenoprof_primary_profiler == d);
+ 
+     ret = share_xenoprof_page_with_guest(
+         d, virt_to_mfn(d->xenoprof->rawbuf), d->xenoprof->npages);
+@@ -662,10 +669,6 @@ static int xenoprof_op_get_buffer(XEN_GU
+ 
+     xenoprof_reset_buf(d);
+ 
+-    d->xenoprof->domain_type  = XENOPROF_DOMAIN_IGNORED;
+-    d->xenoprof->domain_ready = 0;
+-    d->xenoprof->is_primary   = (xenoprof_primary_profiler == current->domain);
+-        
+     xenoprof_get_buffer.nbuf = d->xenoprof->nbuf;
+     xenoprof_get_buffer.bufsize = d->xenoprof->bufsize;
+     if ( !paging_mode_translate(d) )
 
 
