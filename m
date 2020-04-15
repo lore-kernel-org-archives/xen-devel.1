@@ -2,61 +2,86 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A123C38A2B
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 07:56:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B9B9C2BA19
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:09:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 35B5120768
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 07:56:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 35B5120768
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=kaod.org
+	by mail.kernel.org (Postfix) with ESMTPS id 0A63B206A2
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:09:39 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TDlPv+Ac"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0A63B206A2
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOcuO-0003YS-87; Wed, 15 Apr 2020 07:56:32 +0000
+	id 1jOd6k-0005Cb-6A; Wed, 15 Apr 2020 08:09:18 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=+FHt=57=kaod.org=clg@srs-us1.protection.inumbo.net>)
- id 1jOcn5-0002f1-CO
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 07:48:59 +0000
-X-Inumbo-ID: 8ff6d532-7eed-11ea-9e09-bc764e2007e4
-Received: from 19.mo7.mail-out.ovh.net (unknown [178.33.251.118])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=Tbih=57=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jOd6i-0005CW-U4
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:09:16 +0000
+X-Inumbo-ID: 65cf88e6-7ef0-11ea-83d8-bc764e2007e4
+Received: from mail-wr1-x434.google.com (unknown [2a00:1450:4864:20::434])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8ff6d532-7eed-11ea-9e09-bc764e2007e4;
- Wed, 15 Apr 2020 07:48:58 +0000 (UTC)
-Received: from player794.ha.ovh.net (unknown [10.110.103.23])
- by mo7.mail-out.ovh.net (Postfix) with ESMTP id 3396415C048
- for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2020 09:48:57 +0200 (CEST)
-Received: from kaod.org (82-64-250-170.subs.proxad.net [82.64.250.170])
- (Authenticated sender: clg@kaod.org)
- by player794.ha.ovh.net (Postfix) with ESMTPSA id C91BCE662EB5;
- Wed, 15 Apr 2020 07:48:00 +0000 (UTC)
-Subject: Re: [PATCH-for-5.1 1/3] target: Remove unnecessary CPU() cast
-To: =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <f4bug@amsat.org>,
- qemu-devel@nongnu.org
-References: <20200412210954.32313-1-f4bug@amsat.org>
- <20200412210954.32313-2-f4bug@amsat.org>
-From: =?UTF-8?Q?C=c3=a9dric_Le_Goater?= <clg@kaod.org>
-Message-ID: <1a7f2324-4264-e23f-b218-beeb50051cce@kaod.org>
-Date: Wed, 15 Apr 2020 09:48:00 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ id 65cf88e6-7ef0-11ea-83d8-bc764e2007e4;
+ Wed, 15 Apr 2020 08:09:15 +0000 (UTC)
+Received: by mail-wr1-x434.google.com with SMTP id h26so6561563wrb.7
+ for <xen-devel@lists.xenproject.org>; Wed, 15 Apr 2020 01:09:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=fruIXAGEQTGd94ccisu4R0cvxtI5K2GJVStu/u0gz3E=;
+ b=TDlPv+AcUFIE2hi7yPchoyD3f+fZ7jRUePlTK7qWBaHcdI0Sk1GtaaVGO9u7ObRdQ0
+ 516didBfMwKcasiG3zl4Jk39hjeshIEioCozdwCAoX/Z3xYdmrulI4WjJFMj3SDi6ZPx
+ c4M5rTWRZSIVl8nJCIzr+UzyhywREJ8EDUmeAkO8lwkZ1eBuoEffNTPN977KLJnQ+MhB
+ kGgMKKaevS0nnl8LffvzjHVbs07uldIbDD1WZA0Kkv/cEi9CZSPig2xQwG8lTh10VfUY
+ YmgmhOx6Cj8RQJILWw76uhVSnxqN/ghRKXm3Jgz1Ny4fjHqsf6IWRX3lXFsUcuTry+mX
+ 3yhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=fruIXAGEQTGd94ccisu4R0cvxtI5K2GJVStu/u0gz3E=;
+ b=tT0mXk8Blli07MemU+rKUacu0D/nYnBCdbEh01g/uOXNXvl3+qs+WOBiC54pKsMevL
+ /jkgOaUcVk62B/PrP2slTCGGbn9q0J5XcQu14h2NKLCc20ZyNHzUwLM496x6UmR6PjxC
+ p+biwSoXWX1n/ErTYIE64tb0hXw7VFUA5ZQmddxoXlQZDyCWZVkaym0Ag2Wc6S1KAguE
+ SBZiHcHpGAr+r5mW5cDuOA32OPr9mnabnYQGSyvDMqGjO951K7RzZUUZZo7nESt+LhXV
+ SW7cHYmJaK9vq3O/GehSZDWait9HuqZc8aRd9Yt3cZzoNCn2SEkvx4POx6WL+CHjCUUz
+ Am6w==
+X-Gm-Message-State: AGi0PuaejWOCq2Z4erWca6lB6bFCq6zFmuqQiERoIRbLQwxb8NAq96Jh
+ xYNSaJduL/+IYEP7kB8zCG4=
+X-Google-Smtp-Source: APiQypIR6IITNMggG/0rE4iTa20Cgo468VRjdfdsU+xo+ASWHi7PIHHcBx1BOuFM5MFFTt9mR477kg==
+X-Received: by 2002:adf:de8b:: with SMTP id w11mr1058459wrl.48.1586938154948; 
+ Wed, 15 Apr 2020 01:09:14 -0700 (PDT)
+Received: from CBGR90WXYV0 ([54.239.6.185])
+ by smtp.gmail.com with ESMTPSA id x18sm21985707wrs.11.2020.04.15.01.09.13
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Wed, 15 Apr 2020 01:09:14 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Juergen Gross'" <jgross@suse.com>,
+	<xen-devel@lists.xenproject.org>
+References: <20200414155942.3347-1-jgross@suse.com>
+In-Reply-To: <20200414155942.3347-1-jgross@suse.com>
+Subject: RE: [PATCH] docs: update xenstore migration design document
+Date: Wed, 15 Apr 2020 09:09:12 +0100
+Message-ID: <002701d612fd$26f1b950$74d52bf0$@xen.org>
 MIME-Version: 1.0
-In-Reply-To: <20200412210954.32313-2-f4bug@amsat.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 13576101080511187955
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrfedvgdduvddvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepuffvfhfhkffffgggjggtgfesthekredttdefjeenucfhrhhomhepveorughrihgtpgfnvggpifhorghtvghruceotghlgheskhgrohgurdhorhhgqeenucfkpheptddrtddrtddrtddpkedvrdeigedrvdehtddrudejtdenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejleegrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomheptghlgheskhgrohgurdhorhhgpdhrtghpthhtohepgigvnhdquggvvhgvlheslhhishhtshdrgigvnhhprhhojhgvtghtrdhorhhg
-X-Mailman-Approved-At: Wed, 15 Apr 2020 07:56:31 +0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQFbcicelFd+KtVwoWRd2uUiJ/nPAqlvCwVg
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,67 +92,185 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- David Hildenbrand <david@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- BALATON Zoltan <balaton@eik.bme.hu>, Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>, qemu-block@nongnu.org,
- Paul Durrant <paul@xen.org>, Markus Armbruster <armbru@redhat.com>,
- Halil Pasic <pasic@linux.ibm.com>,
- Christian Borntraeger <borntraeger@de.ibm.com>,
- Aleksandar Markovic <aleksandar.qemu.devel@gmail.com>,
- Joel Stanley <joel@jms.id.au>, Anthony Perard <anthony.perard@citrix.com>,
- xen-devel@lists.xenproject.org, David Gibson <david@gibson.dropbear.id.au>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- Eduardo Habkost <ehabkost@redhat.com>, Corey Minyard <minyard@acm.org>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>, qemu-s390x@nongnu.org,
- qemu-arm@nongnu.org, Peter Chubb <peter.chubb@nicta.com.au>,
- John Snow <jsnow@redhat.com>, Richard Henderson <rth@twiddle.net>,
- =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
- Andrew Jeffery <andrew@aj.id.au>, Cornelia Huck <cohuck@redhat.com>,
- Laurent Vivier <laurent@vivier.eu>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+Reply-To: paul@xen.org
+Cc: 'Stefano Stabellini' <sstabellini@kernel.org>,
+ 'Julien Grall' <julien@xen.org>, 'Wei Liu' <wl@xen.org>,
+ 'Andrew Cooper' <andrew.cooper3@citrix.com>,
+ 'Ian Jackson' <ian.jackson@eu.citrix.com>,
+ 'George Dunlap' <george.dunlap@citrix.com>, 'Jan Beulich' <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 4/12/20 11:09 PM, Philippe Mathieu-Daudé wrote:
-> The CPU() macro is defined as:
+> -----Original Message-----
+> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Juergen Gross
+> Sent: 14 April 2020 17:00
+> To: xen-devel@lists.xenproject.org
+> Cc: Juergen Gross <jgross@suse.com>; Stefano Stabellini <sstabellini@kernel.org>; Julien Grall
+> <julien@xen.org>; Wei Liu <wl@xen.org>; Andrew Cooper <andrew.cooper3@citrix.com>; Ian Jackson
+> <ian.jackson@eu.citrix.com>; George Dunlap <george.dunlap@citrix.com>; Jan Beulich <jbeulich@suse.com>
+> Subject: [PATCH] docs: update xenstore migration design document
 > 
->   #define CPU(obj) ((CPUState *)(obj))
+> In the past there have been several attempts to make Xenstore
+> restartable. This requires to transfer the internal Xenstore state to
+> the new instance. With the Xenstore migration protocol added recently
+> to Xen's documentation a first base has been defined to represent the
+> state of Xenstore. This can be expanded a little bit in order to have
+> a full state representation which is needed as a first step for live
+> updating Xenstore.
 > 
-> Remove an unnecessary CPU() cast.
+> Add some definitions to designs/xenstore-migration.md which are needed
+> for live update of xenstored.
 > 
-> Patch created mechanically using spatch with this script:
-> 
->   @@
->   typedef CPUState;
->   CPUState *s;
->   @@
->   -   CPU(s)
->   +   s
-> 
-> Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
-
-Reviewed-by: Cédric Le Goater <clg@kaod.org>
-
+> Signed-off-by: Juergen Gross <jgross@suse.com>
 > ---
->  target/ppc/mmu_helper.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  docs/designs/xenstore-migration.md | 90 ++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 87 insertions(+), 3 deletions(-)
 > 
-> diff --git a/target/ppc/mmu_helper.c b/target/ppc/mmu_helper.c
-> index 86c667b094..8972714775 100644
-> --- a/target/ppc/mmu_helper.c
-> +++ b/target/ppc/mmu_helper.c
-> @@ -1820,7 +1820,7 @@ static inline void do_invalidate_BAT(CPUPPCState *env, target_ulong BATu,
->      if (((end - base) >> TARGET_PAGE_BITS) > 1024) {
->          /* Flushing 1024 4K pages is slower than a complete flush */
->          LOG_BATS("Flush all BATs\n");
-> -        tlb_flush(CPU(cs));
-> +        tlb_flush(cs);
->          LOG_BATS("Flush done\n");
->          return;
->      }
+> diff --git a/docs/designs/xenstore-migration.md b/docs/designs/xenstore-migration.md
+> index 6ab351e8fe..09bb4700b4 100644
+> --- a/docs/designs/xenstore-migration.md
+> +++ b/docs/designs/xenstore-migration.md
+> @@ -9,6 +9,10 @@ records must include details of registered xenstore watches as well as
+>  content; information that cannot currently be recovered from `xenstored`,
+>  and hence some extension to the xenstore protocol[2] will also be required.
 > 
+> +As a similar set of data is needed for transferring xenstore data from
+> +one instance to another when live updating xenstored the same definitions
+> +are being used.
+> +
+
+That makes sense, but using an external entity to extract the state makes less sense in the context of live update so, going
+forward, I suggest dropping the section on extra commands.
+Also, we should define a separate 'xenstore domain image format' which can be included as an opaque entity in the migration stream,
+in the same way as the qemu save image.
+
+>  The *libxenlight Domain Image Format* specification[3] already defines a
+>  record type `EMULATOR_XENSTORE_DATA` but this is not suitable for
+>  transferring xenstore data pertaining to the domain directly as it is
+> @@ -48,7 +52,10 @@ where type is one of the following values
+>  |        | 0x00000001: NODE_DATA                            |
+>  |        | 0x00000002: WATCH_DATA                           |
+>  |        | 0x00000003: TRANSACTION_DATA                     |
+> -|        | 0x00000004 - 0xFFFFFFFF: reserved for future use |
+> +|        | 0x00000004: TRANSACTION_NODE_DATA                |
+> +|        | 0x00000005: GUEST_RING_DATA                      |
+> +|        | 0x00000006: DOMAIN_START (live update only)      |
+> +|        | 0x00000007 - 0xFFFFFFFF: reserved for future use |
+> 
+> 
+>  and data is one of the record data formats described in the following
+> @@ -79,7 +86,7 @@ as follows:
+>  +-------------------------------+
+>  | perm count (N)                |
+>  +-------------------------------+
+> -| perm0                         |
+> +| perm1                         |
+>  +-------------------------------+
+>  ...
+>  +-------------------------------+
+> @@ -93,7 +100,7 @@ as follows:
+>  +-------------------------------+
+>  ```
+> 
+> -where perm0..N are formatted as follows:
+> +where perm1..N are formatted as follows:
+> 
+> 
+>  ```
+> @@ -164,6 +171,83 @@ as follows:
+>  where tx_id is the non-zero identifier values of an open transaction.
+> 
+> 
+> +**TRANSACTION_NODE_DATA**
+> +
+> +
+> +Each TRANSACTION_NODE_DATA record specifies a transaction local xenstore
+> +node. Its is similar to the NODE_DATA record with the addition of a
+> +transaction id:
+> +
+> +```
+> +    0       1       2       3     octet
+> ++-------+-------+-------+-------+
+> +| TRANSACTION_NODE_DATA         |
+> ++-------------------------------+
+> +| tx_id                         |
+> ++-------------------------------+
+> +| path length                   |
+> ++-------------------------------+
+> +| path data                     |
+> +...
+> +| pad (0 to 3 octets)           |
+> ++-------------------------------+
+> +| perm count (N)                |
+> ++-------------------------------+
+> +| perm1                         |
+> ++-------------------------------+
+> +...
+> ++-------------------------------+
+> +| permN                         |
+> ++-------------------------------+
+> +| value length                  |
+> ++-------------------------------+
+> +| value data                    |
+> +...
+> +| pad (0 to 3 octets)           |
+> ++-------------------------------+
+> +```
+> +
+> +where perm1..N are formatted as specified in the NODE_DATA record. A perm
+> +count of 0 denotes a node having been deleted in the transaction.
+> +
+
+Transferring this state means we can presumably drop the TRANSACTION_DATA, since we can infer open transactions from the presence of
+these records?
+
+> +
+> +**GUEST_RING_DATA**
+> +
+> +
+> +The GUEST_RING_DATA record is used to transfer data which is pending to be
+> +written to the guest's xenstore ring buffer. It si formatted as follows:
+> +
+> +
+> +```
+> ++-------+-------+-------+-------+
+> +| GUEST_RING_DATA               |
+> ++-------------------------------+
+> +| value length                  |
+> ++-------------------------------+
+> +| value data                    |
+> +...
+> +| pad (0 to 3 octets)           |
+> ++-------------------------------+
+> +```
+> +
+> +**DOMAIN_START**
+> +
+> +
+> +For live updating xenstored data of multiple domains needs to be transferred.
+> +For this purpose the DOMAIN_START record is being used. All records of types
+> +other than NODE_DATA always relate to the last DOMAIN_START record in the
+> +stream. A DOMAIN_START record just contains a domain-id:
+
+If we define a separate stream format as I suggest above, I'd expect the domain-id to be part of the header.
+
+> +
+> +
+> +```
+> ++-------+-------+-------+-------+
+> +| DOMAIN_START                  |
+> ++-------------------------------+
+> +| domid         | pad           |
+> ++-------------------------------+
+> +```
+> +
+> +
+>  ### Protocol Extension
+
+As mentioned above, this section ought to be dropped for the moment. We should define the ways in which xenstored should dump state
+in various scenarios: e.g. for LU it will likely be serialize to memory (possibly dev/shmem?), for migration/save-restore it will
+probably be serialize to fd (socket/file). We should also define how dumping state will be triggered.
+
+  Paul
 
 
