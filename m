@@ -2,98 +2,51 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A7FFC38A2C
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:53:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 359ACC2BA19
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:54:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E3F2B206F9
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:53:44 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Xoi0EV7R"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E3F2B206F9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 0C859206F9
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 08:54:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0C859206F9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOdnW-0001to-2O; Wed, 15 Apr 2020 08:53:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2fIs=57=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jOdnV-0001ta-0y
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:53:29 +0000
-X-Inumbo-ID: 8f945cd3-7ef6-11ea-8a18-12813bfff9fa
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8f945cd3-7ef6-11ea-8a18-12813bfff9fa;
- Wed, 15 Apr 2020 08:53:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586940803;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=PxPJblaeLlg5yGtVcndg0YsUI7TARWY6Ce7p0+AXg0M=;
- b=Xoi0EV7RnSDp64FBlRx/rUM2yAWhwzKAUQ1FGDih5DlZWmSNboNrIOoJ
- 7gSwfvRPCf+yDQGUkrYpy2GPuCheBEB5wiBXwx9w/xgWZKnWC6HVWxr1W
- jG+DhbZ6fSQBWWGFNEj3XSBqsKqKz+9DumjAWMKXeVwfFWPUSsdMu9dYm o=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: E5orRe/uLBPDGpzEGM8zcXo09dKQB+6wJRlWfJDikRhOqd5KtZJRv7i/L7PeqHX1aiqohtze3z
- pgyBF5lysSW+KA9sSNFO1Q1K529NqhFLbokylPHzlzLXkKvZBskjgct3IPTCyy9573g1z9Qd4M
- O5cj64wMab1LN9PhgL3bq1VVUnrl176Lq3hxQ/8IpJGiEJxbjqhMAwKfbcNGfWw41ECegv4wwp
- H83WPXgxy0ocle6XP6qhKuHzmywJRxVLH/+fdeE6b38AZR4KPKGyKz9PdivxIj1PG0hEORT0sA
- huE=
-X-SBRS: 2.7
-X-MesageID: 16373616
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,386,1580792400"; d="scan'208";a="16373616"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH OSSTEST 2/2] make-flight: add a core scheduling job
-Date: Wed, 15 Apr 2020 10:52:46 +0200
-Message-ID: <20200415085246.7945-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.0
-In-Reply-To: <20200415085246.7945-1-roger.pau@citrix.com>
-References: <20200415085246.7945-1-roger.pau@citrix.com>
+	id 1jOdnj-0001xo-Eh; Wed, 15 Apr 2020 08:53:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=UoJL=57=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jOdni-0001xY-1F
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 08:53:42 +0000
+X-Inumbo-ID: 9a9864fc-7ef6-11ea-9e09-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 9a9864fc-7ef6-11ea-9e09-bc764e2007e4;
+ Wed, 15 Apr 2020 08:53:41 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 80423AF92;
+ Wed, 15 Apr 2020 08:53:39 +0000 (UTC)
+Subject: [PATCH 3/3] xenoprof: limit scope of types and #define-s
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <25c5b76f-4f95-3ba9-0ae0-dd0c1f3f8496@suse.com>
+Message-ID: <61ac5f46-fd43-e173-202e-9de46755d604@suse.com>
+Date: Wed, 15 Apr 2020 10:53:38 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <25c5b76f-4f95-3ba9-0ae0-dd0c1f3f8496@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,86 +57,136 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: ian.jackson@eu.citrix.com, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Run a simple core scheduling tests on a host that has SMT support.
-This is only enabled for Xen >= 4.13.
+Quite a few of the items are used by xenoprof.c only, so move them there
+to limit their visibility as well as the amount of re-building needed in
+case of changes. Also drop the inclusion of the public header there.
 
-The runvar difference is:
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-+test-amd64-coresched-amd64-xl all_host_di_version 2020-02-10
-+test-amd64-coresched-i386-xl  all_host_di_version 2020-02-10
-+test-amd64-coresched-amd64-xl all_host_suite      stretch
-+test-amd64-coresched-i386-xl  all_host_suite      stretch
-+test-amd64-coresched-amd64-xl all_hostflags       arch-amd64,arch-xen-amd64,suite-stretch,purpose-test,smt
-+test-amd64-coresched-i386-xl  all_hostflags       arch-i386,arch-xen-amd64,suite-stretch,purpose-test,smt
-+test-amd64-coresched-amd64-xl arch                amd64
-+test-amd64-coresched-i386-xl  arch                i386
-+test-amd64-coresched-amd64-xl buildjob            build-amd64
-+test-amd64-coresched-i386-xl  buildjob            build-i386
-+test-amd64-coresched-amd64-xl debian_arch         amd64
-+test-amd64-coresched-i386-xl  debian_arch         i386
-+test-amd64-coresched-amd64-xl debian_kernkind     pvops
-+test-amd64-coresched-i386-xl  debian_kernkind     pvops
-+test-amd64-coresched-amd64-xl debian_suite        stretch
-+test-amd64-coresched-i386-xl  debian_suite        stretch
-+test-amd64-coresched-amd64-xl kernbuildjob        build-amd64-pvops
-+test-amd64-coresched-i386-xl  kernbuildjob        build-i386-pvops
-+test-amd64-coresched-amd64-xl kernkind            pvops
-+test-amd64-coresched-i386-xl  kernkind            pvops
-+test-amd64-coresched-amd64-xl toolstack           xl
-+test-amd64-coresched-i386-xl  toolstack           xl
-+test-amd64-coresched-amd64-xl xen_boot_append     sched-gran=core
-+test-amd64-coresched-i386-xl  xen_boot_append     sched-gran=core
-+test-amd64-coresched-amd64-xl xenbuildjob         build-amd64
-+test-amd64-coresched-i386-xl  xenbuildjob         build-amd64
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
- make-flight | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
-
-diff --git a/make-flight b/make-flight
-index 2f445d95..e656125e 100755
---- a/make-flight
-+++ b/make-flight
-@@ -763,6 +763,17 @@ test_matrix_do_one () {
-   *)                test_dom0pvh=n ;;
-   esac
+--- a/xen/arch/x86/oprofile/nmi_int.c
++++ b/xen/arch/x86/oprofile/nmi_int.c
+@@ -19,7 +19,7 @@
+ #include <xen/string.h>
+ #include <xen/delay.h>
+ #include <xen/xenoprof.h>
+-#include <public/xen.h>
++#include <public/xenoprof.h>
+ #include <asm/msr.h>
+ #include <asm/apic.h>
+ #include <asm/regs.h>
+--- a/xen/common/xenoprof.c
++++ b/xen/common/xenoprof.c
+@@ -23,6 +23,32 @@
+ #undef virt_to_mfn
+ #define virt_to_mfn(va) _mfn(__virt_to_mfn(va))
  
-+  # core scheduling tests for versions >= 4.13 only
-+  case "$xenbranch" in
-+  xen-3.*-testing)  test_coresched=n ;;
-+  xen-4.?-testing)  test_coresched=n ;;
-+  xen-4.10-testing) test_coresched=n ;;
-+  xen-4.11-testing) test_coresched=n ;;
-+  xen-4.12-testing) test_coresched=n ;;
-+  *)                test_coresched=y ;;
-+  esac
++#define XENOPROF_DOMAIN_IGNORED    0
++#define XENOPROF_DOMAIN_ACTIVE     1
++#define XENOPROF_DOMAIN_PASSIVE    2
 +
++#define XENOPROF_IDLE              0
++#define XENOPROF_INITIALIZED       1
++#define XENOPROF_COUNTERS_RESERVED 2
++#define XENOPROF_READY             3
++#define XENOPROF_PROFILING         4
 +
-   # xend PV guest test on x86 only
-   if [ x$test_xend = xy -a \( $dom0arch = "i386" -o $dom0arch = "amd64" \) ]; then
-     job_create_test test-$xenarch$kern-$dom0arch-pv test-debian xend \
-@@ -894,6 +905,15 @@ test_matrix_do_one () {
++#ifndef CONFIG_COMPAT
++#define XENOPROF_COMPAT(x) false
++typedef struct xenoprof_buf xenoprof_buf_t;
++#define xenoprof_buf(d, b, field) ACCESS_ONCE((b)->field)
++#else
++#include <compat/xenoprof.h>
++#define XENOPROF_COMPAT(x) ((x)->is_compat)
++typedef union {
++    struct xenoprof_buf native;
++    struct compat_oprof_buf compat;
++} xenoprof_buf_t;
++#define xenoprof_buf(d, b, field) ACCESS_ONCE(*(!(d)->xenoprof->is_compat \
++                                                ? &(b)->native.field \
++                                                : &(b)->compat.field))
++#endif
++
+ /* Limit amount of pages used for shared buffer (per domain) */
+ #define MAX_OPROF_SHARED_PAGES 32
  
-   fi
+--- a/xen/xsm/flask/hooks.c
++++ b/xen/xsm/flask/hooks.c
+@@ -29,6 +29,7 @@
+ #include <public/platform.h>
+ #include <public/version.h>
+ #include <public/hvm/params.h>
++#include <public/xenoprof.h>
+ #include <public/xsm/flask_op.h>
  
-+  # Core-scheduling tests are x86 only
-+  if [ x$test_coresched = xy -a $xenarch = amd64 ]; then
-+    job_create_test test-$xenarch$kern-coresched-$dom0arch-xl \
-+                    test-debian xl $xenarch $dom0arch $debian_runvars \
-+                    all_hostflags=$most_hostflags,smt \
-+                    xen_boot_append='sched-gran=core'
-+
-+  fi
-+
-   #do_passthrough_tests
+ #include <avc.h>
+--- a/xen/include/asm-x86/xenoprof.h
++++ b/xen/include/asm-x86/xenoprof.h
+@@ -26,6 +26,8 @@ struct vcpu;
  
-   do_pygrub_tests
--- 
-2.26.0
+ #ifdef CONFIG_XENOPROF
+ 
++#include <public/xen.h>
++
+ int nmi_reserve_counters(void);
+ int nmi_setup_events(void);
+ int nmi_enable_virq(void);
+--- a/xen/include/xen/xenoprof.h
++++ b/xen/include/xen/xenoprof.h
+@@ -11,7 +11,6 @@
+ #define __XEN_XENOPROF_H__
+ 
+ #include <xen/inttypes.h>
+-#include <public/xenoprof.h>
+ #include <asm/xenoprof.h>
+ 
+ #define PMU_OWNER_NONE          0
+@@ -20,37 +19,9 @@
+ 
+ #ifdef CONFIG_XENOPROF
+ 
+-#define XENOPROF_DOMAIN_IGNORED    0
+-#define XENOPROF_DOMAIN_ACTIVE     1
+-#define XENOPROF_DOMAIN_PASSIVE    2
+-
+-#define XENOPROF_IDLE              0
+-#define XENOPROF_INITIALIZED       1
+-#define XENOPROF_COUNTERS_RESERVED 2
+-#define XENOPROF_READY             3
+-#define XENOPROF_PROFILING         4
+-
+-#ifndef CONFIG_COMPAT
+-typedef struct xenoprof_buf xenoprof_buf_t;
+-#else
+-#include <compat/xenoprof.h>
+-typedef union {
+-	struct xenoprof_buf native;
+-	struct compat_oprof_buf compat;
+-} xenoprof_buf_t;
+-#endif
+-
+-#ifndef CONFIG_COMPAT
+-#define XENOPROF_COMPAT(x) 0
+-#define xenoprof_buf(d, b, field) ACCESS_ONCE((b)->field)
+-#else
+-#define XENOPROF_COMPAT(x) ((x)->is_compat)
+-#define xenoprof_buf(d, b, field) ACCESS_ONCE(*(!(d)->xenoprof->is_compat \
+-                                                ? &(b)->native.field \
+-                                                : &(b)->compat.field))
+-#endif
+-
+ struct domain;
++struct vcpu;
++struct cpu_user_regs;
+ 
+ int acquire_pmu_ownership(int pmu_ownership);
+ void release_pmu_ownership(int pmu_ownership);
 
 
