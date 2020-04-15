@@ -2,95 +2,99 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 15E57C2BB55
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 14:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50F59C2BA19
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 14:11:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD179206D5
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 14:10:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1DBE6206D5
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 14:11:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Fpet0uH6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD179206D5
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="JGaPWqvC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DBE6206D5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOikP-0000Ca-JX; Wed, 15 Apr 2020 14:10:37 +0000
+	id 1jOikf-0000GI-9f; Wed, 15 Apr 2020 14:10:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=2fIs=57=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jOikO-0000CP-35
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 14:10:36 +0000
-X-Inumbo-ID: dfe00890-7f22-11ea-83d8-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ <SRS0=NCA0=57=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jOike-0000G9-Qa
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 14:10:52 +0000
+X-Inumbo-ID: e9d1e788-7f22-11ea-b58d-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id dfe00890-7f22-11ea-83d8-bc764e2007e4;
- Wed, 15 Apr 2020 14:10:35 +0000 (UTC)
+ id e9d1e788-7f22-11ea-b58d-bc764e2007e4;
+ Wed, 15 Apr 2020 14:10:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586959835;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=MCT9iaP9hqthD1TJioFT3LOvApm5sCvM4OiVAxcsBdg=;
- b=Fpet0uH6nscgqK9CPx2wg8TrVfWi9+3qr1iOiAn9vGnRnqEy5BA7XDbs
- PzGPVU6JE0M0dRiIc7f7wBOgtZPUmu5ZENYfrqBJZvRsEhoZKb2BO9/0w
- g4neEBvYzxdt8j+PjdEv3UPZ4/c41RIcqOBkqxkl+INSzvaxiurRqn9mU Y=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1586959852;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=U+ELunXxu2T17jTs1dYsbxn04Pb6u8YpFuruJyTrt8U=;
+ b=JGaPWqvCB648CzIYtGOXSMDHr7WBGA+CrqNQvml5SXuVcYERG8MDDcHx
+ x9RxhsTyUX/aq1/bjGT8t3UnsG9Nyg/DvxKrXqONKbB4SUzYQkmtIkI6j
+ Ht3yMHlteYdj5TmGNCKPIkUwA6JYY3qa6R6+HUoMEO+Svm/dpLJewfos0 U=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
+ anthony.perard@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+ anthony.perard@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
  x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
  ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: 3eXi28DNUq0OnBf5u457LPO/8hOfR6TZqOniFEe6ePFsY+cj/65VYIrGatTFqMNXUd/OxNc3xJ
- IHCxIl3GjCDUtIhOhqDX8s5qjz0Rvqp6Hw1TSleIT5EWvfeKvCVijLHTgRI0HDA1WDcy9tR2TL
- AX0qIrU9GvSioaS1Vv2TztXquGKYEaGCPzbX9IqhjAk7lcN+5yfZdGBhQq7QhN9JRmVPB5J7lj
- 1m8X/EAyF6gIMSQyU1Ji3BQxGv16LmlEd7LQbCHRR5Ohmr0I+UjPnJpeBabRH9FQSXiKn745yn
- TdY=
+IronPort-SDR: +gOrhGCOHPGIv4rjaKsHQgMaEN5V5joxLzSa9KUZiEzcX0qM94671z/LagFOQfEeSKhypNY3bx
+ VGckw5+yAZIKCyxDcqiu5EZsxmNapT/F/+knpRkGTO6cOxUgjSl7JTRaThFOM0wuG0GbONurf9
+ 9qjBEo/COqI4ua545lzUR6SKYP1INGgXDtvr0xs/cMW0IqiP3DLjZ87X5mECvoOoMmE4Xa5ED2
+ pdKTdiTGl1HBgrjH7QRyH/Ka3kq7D5ALJK+M9O4Wx6L1P8F6so6xqg6A65EVihYt/BEUI3fO6m
+ mkI=
 X-SBRS: 2.7
-X-MesageID: 16036222
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 16120068
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,387,1580792400"; d="scan'208";a="16036222"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH OSSTEST v3 1/2] exanime: test for SMT and add a host flag
-Date: Wed, 15 Apr 2020 16:10:08 +0200
-Message-ID: <20200415141009.10912-1-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.0
+X-IronPort-AV: E=Sophos;i="5.72,387,1580792400"; d="scan'208";a="16120068"
+Date: Wed, 15 Apr 2020 15:10:45 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [XEN PATCH v4 06/18] xen/build: have the root Makefile generates
+ the CFLAGS
+Message-ID: <20200415141045.GB4088@perard.uk.xensource.com>
+References: <20200331103102.1105674-1-anthony.perard@citrix.com>
+ <20200331103102.1105674-7-anthony.perard@citrix.com>
+ <a2b16a74-4eed-eeae-d791-fa9fd4e63d08@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <a2b16a74-4eed-eeae-d791-fa9fd4e63d08@suse.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -101,77 +105,36 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: ian.jackson@eu.citrix.com, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
+ Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ xen-devel@lists.xenproject.org, Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Check if hosts have SMT based on the number of threads per core. A
-value of threads per core greater than 1 implies SMT support.
+On Wed, Apr 08, 2020 at 01:50:33PM +0200, Jan Beulich wrote:
+> On 31.03.2020 12:30, Anthony PERARD wrote:
+> >  # Always build obj-bin files as binary even if they come from C source. 
+> > -$(obj-bin-y): CFLAGS := $(filter-out -flto,$(CFLAGS))
+> > +# FIXME LTO broken, but we would need a different way to filter -flto out
+> > +# $(obj-bin-y): CFLAGS := $(filter-out -flto,$(CFLAGS))
+> 
+> While you mention this in the description, I'm still not overly
+> happy with it getting commented out. What's wrong with making the
+> construct simply act on c_flags?
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - Use hw-smt.
+It doesn't work.
 
-Changes since v1:
- - Fix regex and set SMT if number of threads per core is > 1.
----
- sg-run-job     |  1 +
- ts-examine-cpu | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 33 insertions(+)
- create mode 100755 ts-examine-cpu
+I tried
+    $(obj-bin-y): c_flags := $(filter-out -flto,$(c_flags))
+but the $@ expansion was empty.
 
-diff --git a/sg-run-job b/sg-run-job
-index 97011843..aa7953ac 100755
---- a/sg-run-job
-+++ b/sg-run-job
-@@ -679,6 +679,7 @@ proc examine-host-examine {install} {
-     if {$ok} {
- 	run-ts -.  =           ts-examine-serial-post + host
- 	run-ts .   =           ts-examine-iommu       + host
-+	run-ts .   =           ts-examine-cpu         + host
- 	run-ts .   =           ts-examine-logs-save   + host
- 	run-ts .   =           ts-examine-hostprops-save
-     }
-diff --git a/ts-examine-cpu b/ts-examine-cpu
-new file mode 100755
-index 00000000..81cf7544
---- /dev/null
-+++ b/ts-examine-cpu
-@@ -0,0 +1,32 @@
-+#!/usr/bin/perl -w
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2020 Citrix Inc.
-+#
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+#
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+#
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+use strict qw(vars);
-+BEGIN { unshift @INC, qw(.); }
-+use Osstest;
-+use Osstest::TestSupport;
-+
-+tsreadconfig();
-+
-+our ($whhost) = @ARGV;
-+$whhost ||= 'host';
-+our $ho= selecthost($whhost);
-+our $info = target_cmd_output_root($ho, 'xl info', 10);
-+our $threads = $info =~ /^threads_per_core\s*:\s.*/m;
-+
-+logm("$ho->{Ident} threads per core: $threads");
-+hostflag_putative_record($ho, "hw-smt", $threads > 1);
+I guess we could do:
+    $(obj-bin-y): XEN_CFLAGS := $(filter-out -flto,$(XEN_CFLAGS))
+that's probably enough for now. Even if we can't test it properly.
+
 -- 
-2.26.0
-
+Anthony PERARD
 
