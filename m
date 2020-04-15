@@ -2,67 +2,62 @@ Return-Path: <SRS0=NS8K=57=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F1EAC38A2C
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C6167C2BA19
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3DFB220771
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:30 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 918862064A
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:32 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="jSgcbfR6"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3DFB220771
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="676GNLxC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 918862064A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOmvG-0000FI-CS; Wed, 15 Apr 2020 18:38:06 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jOmvF-0000F7-1W; Wed, 15 Apr 2020 18:38:05 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=lFP+=57=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jOmvF-0000FB-GL
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 18:38:05 +0000
-X-Inumbo-ID: 3e0d54f2-7f48-11ea-b58d-bc764e2007e4
+ id 1jOmvE-0000F2-3o
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 18:38:04 +0000
+X-Inumbo-ID: 3d46427c-7f48-11ea-8abf-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e0d54f2-7f48-11ea-b58d-bc764e2007e4;
- Wed, 15 Apr 2020 18:38:04 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3d46427c-7f48-11ea-8abf-12813bfff9fa;
+ Wed, 15 Apr 2020 18:38:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=OGUpue1cqSI1HPssYadS8eAIPmRW9EWPZGCXCE9dcVM=; b=jSgcbfR6F4U6UthIr2iYcEdQU0
- xT73P2rrPBS96AckwpUD4P63Y69k/Xn7NanJtNaINdz2Yd2bkSfjiUGfznFHOkFRN+lk/QkEwFgrC
- GA261dK3vkPNcQaiecneXyq+y9eqGVlrkNsY6mnqKffjPYAniOVp+FoVZra2DNtqMlQE=;
+ bh=w0De8RWsimvi343iFj1mIkaonWnYYRQGzcjR5lnEr8U=; b=676GNLxCC4w4dAJ1sz8YHb3rEr
+ p4MZuXT/tzfTWyi+QwsJxcHA1SHTJa7E7s3RYBzom1WjI75uywIPkogA/rp5RSlgMJNYCxbh+0OWq
+ pKhozrI6Pgb08hY1YyXjVBaigSmLVhmYpazQQzxF7ePJklabIEbdKl9oOZEhXAPhSEB8=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jOmvE-00020Z-22; Wed, 15 Apr 2020 18:38:04 +0000
+ id 1jOmvC-00020U-LN; Wed, 15 Apr 2020 18:38:02 +0000
 Received: from 54-240-197-234.amazon.com ([54.240.197.234]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jOmvD-0005Md-O3; Wed, 15 Apr 2020 18:38:03 +0000
+ id 1jOmvC-0005Md-AW; Wed, 15 Apr 2020 18:38:02 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 1/4] x86/shim: map and unmap page tables in
- replace_va_mapping
-Date: Wed, 15 Apr 2020 19:37:49 +0100
-Message-Id: <2401b53f39ae0aeb7fac6c207f5f89ff8687338b.1586975587.git.hongyxia@amazon.com>
+Subject: [PATCH v4 0/4] use new API for Xen page tables
+Date: Wed, 15 Apr 2020 19:37:48 +0100
+Message-Id: <cover.1586975587.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1586975587.git.hongyxia@amazon.com>
-References: <cover.1586975587.git.hongyxia@amazon.com>
-In-Reply-To: <cover.1586975587.git.hongyxia@amazon.com>
-References: <cover.1586975587.git.hongyxia@amazon.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -79,92 +74,41 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Wei Liu <wei.liu2@citrix.com>
+From: Hongyan Xia <hongyxia@amazon.com>
 
-Also, introduce lYe_from_lXe() macros which do not rely on the direct
-map when walking page tables. Unfortunately, they cannot be inline
-functions due to the header dependency on domain_page.h, so keep them as
-macros just like map_lYt_from_lXe().
+This small series is basically just rewriting functions using the new
+API to map and unmap PTEs. Each patch is independent.
 
-Signed-off-by: Wei Liu <wei.liu2@citrix.com>
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Apart from mapping and unmapping page tables, no other functional change
+intended.
 
 ---
 Changed in v4:
-- use _ suffixes instead of prefixes.
+- use _ suffix instead of prefix in macros.
+- use normal unmap_domain_page() for variable right before end-of-scope.
 
 Changed in v3:
-- use unmap_domain_page() instead of the macro in several places.
-- also introduce l1e_from_l2e().
-- add _ prefix in macros to avoid aliasing.
+- address all comments in v2.
+- drop patch 4, since other clean-ups will make it unnecessary.
 
 Changed in v2:
-- instead of map, map, map, read/write, unmap, unmap, unmap, do map,
-  read PTE, unmap for each level instead.
-- use lYe_from_lXe() macros and lift them from a later patch to this
-  patch.
-- const qualify pointers in new macros.
----
- xen/arch/x86/pv/shim.c     |  9 +++++----
- xen/include/asm-x86/page.h | 19 +++++++++++++++++++
- 2 files changed, 24 insertions(+), 4 deletions(-)
+- I kept UNMAP_DOMAIN_PAGE() for now in v2, but I if people say
+  in some cases it is an overkill and unmap_domain_page() should be
+  used, I am okay with that and can make the change.
+- code cleanup and style fixes.
+- unmap as early as possible.
 
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index ed2ece8a8a..31264582cc 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -168,16 +168,17 @@ const struct platform_bad_page *__init pv_shim_reserved_pages(unsigned int *size
- static void __init replace_va_mapping(struct domain *d, l4_pgentry_t *l4start,
-                                       unsigned long va, mfn_t mfn)
- {
--    l4_pgentry_t *pl4e = l4start + l4_table_offset(va);
--    l3_pgentry_t *pl3e = l4e_to_l3e(*pl4e) + l3_table_offset(va);
--    l2_pgentry_t *pl2e = l3e_to_l2e(*pl3e) + l2_table_offset(va);
--    l1_pgentry_t *pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(va);
-+    l4_pgentry_t l4e = l4start[l4_table_offset(va)];
-+    l3_pgentry_t l3e = l3e_from_l4e(l4e, l3_table_offset(va));
-+    l2_pgentry_t l2e = l2e_from_l3e(l3e, l2_table_offset(va));
-+    l1_pgentry_t *pl1e = map_l1t_from_l2e(l2e) + l1_table_offset(va);
-     struct page_info *page = mfn_to_page(l1e_get_mfn(*pl1e));
- 
-     put_page_and_type(page);
- 
-     *pl1e = l1e_from_mfn(mfn, (!is_pv_32bit_domain(d) ? L1_PROT
-                                                       : COMPAT_L1_PROT));
-+    unmap_domain_page(pl1e);
- }
- 
- static void evtchn_reserve(struct domain *d, unsigned int port)
-diff --git a/xen/include/asm-x86/page.h b/xen/include/asm-x86/page.h
-index eb73a0fc23..5acf3d3d5a 100644
---- a/xen/include/asm-x86/page.h
-+++ b/xen/include/asm-x86/page.h
-@@ -197,6 +197,25 @@ static inline l4_pgentry_t l4e_from_paddr(paddr_t pa, unsigned int flags)
- #define map_l2t_from_l3e(x)        (l2_pgentry_t *)map_domain_page(l3e_get_mfn(x))
- #define map_l3t_from_l4e(x)        (l3_pgentry_t *)map_domain_page(l4e_get_mfn(x))
- 
-+/* Unlike lYe_to_lXe(), lXe_from_lYe() do not rely on the direct map. */
-+#define l1e_from_l2e(l2e_, offset_) ({                      \
-+        const l1_pgentry_t *l1t_ = map_l1t_from_l2e(l2e_);  \
-+        l1_pgentry_t l1e_ = l1t_[offset_];                  \
-+        unmap_domain_page(l1t_);                            \
-+        l1e_; })
-+
-+#define l2e_from_l3e(l3e_, offset_) ({                      \
-+        const l2_pgentry_t *l2t_ = map_l2t_from_l3e(l3e_);  \
-+        l2_pgentry_t l2e_ = l2t_[offset_];                  \
-+        unmap_domain_page(l2t_);                            \
-+        l2e_; })
-+
-+#define l3e_from_l4e(l4e_, offset_) ({                      \
-+        const l3_pgentry_t *l3t_ = map_l3t_from_l4e(l4e_);  \
-+        l3_pgentry_t l3e_ = l3t_[offset_];                  \
-+        unmap_domain_page(l3t_);                            \
-+        l3e_; })
-+
- /* Given a virtual address, get an entry offset into a page table. */
- #define l1_table_offset(a)         \
-     (((a) >> L1_PAGETABLE_SHIFT) & (L1_PAGETABLE_ENTRIES - 1))
+Wei Liu (4):
+  x86/shim: map and unmap page tables in replace_va_mapping
+  x86_64/mm: map and unmap page tables in m2p_mapped
+  x86_64/mm: map and unmap page tables in share_hotadd_m2p_table
+  x86_64/mm: map and unmap page tables in destroy_m2p_mapping
+
+ xen/arch/x86/pv/shim.c     |  9 ++++----
+ xen/arch/x86/x86_64/mm.c   | 44 +++++++++++++++++++++-----------------
+ xen/include/asm-x86/page.h | 19 ++++++++++++++++
+ 3 files changed, 48 insertions(+), 24 deletions(-)
+
 -- 
 2.24.1.AMZN
 
