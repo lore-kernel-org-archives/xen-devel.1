@@ -7,92 +7,62 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 97CFDC2BA19
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 17:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DE96C2BA19
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 68D4C206A2
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 17:39:40 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4A5142064A
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:29 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="YaLsDyX1"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 68D4C206A2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="vduiSzcA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A5142064A
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOm0O-0003F1-3c; Wed, 15 Apr 2020 17:39:20 +0000
+	id 1jOmvQ-0000GT-E0; Wed, 15 Apr 2020 18:38:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=c95o=57=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jOm0N-0003Ew-2Q
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 17:39:19 +0000
-X-Inumbo-ID: 07cf02ee-7f40-11ea-83d8-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=lFP+=57=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1jOmvP-0000GC-DS
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 18:38:15 +0000
+X-Inumbo-ID: 4099e352-7f48-11ea-b58d-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 07cf02ee-7f40-11ea-83d8-bc764e2007e4;
- Wed, 15 Apr 2020 17:39:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1586972358;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=KT25FAHq2BmfGlcvKEr4mXsRrbSMMRPlnJpg+2+Quf0=;
- b=YaLsDyX1Y72KHdGtHWFRlfDtn0O7wrupwC8emrTkgk0mAumrNl//CLcU
- omDNYmNqMyi5QSuMuWzaHbk8DodEOxPja82D7ZcZRqXfNNimomKNfW/25
- 6gLJcPBCVbGTnDTW9Upm39viL048HgCbYmMNTkNLRcc9BbWWSz89+ONdP 8=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=andrew.cooper3@citrix.com;
- spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="andrew.cooper3@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
- Andrew.Cooper3@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="Andrew.Cooper3@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: gUaA31CQCxiClz/lI3IeMQFARiETpsiNaP4x3659Q/wcJVtVNl8Jo+TQrMgYKJMnfVcxqZDTPE
- sj8yK0oUC6C79TbQ5ESmuACSMKxXh0YGhHaqikK8rU9P3jaGwGtPkWAEF/LkXTqLB3kdnZpQXK
- +nC++WXm/Dekmg1u2wBlaVMxdM69nJTsGmOz0fIIAj4Z80cfKzsJ8niJpEh8ZUsvTM5jOuRnjN
- cg7l6KJFzFttZmjhesjbrFdO8gvTacKDkdIufSIp3QWII3HFvuUu1gA6G8f+Vr2TXLWkqAoV3t
- FuY=
-X-SBRS: 2.7
-X-MesageID: 15746409
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,387,1580792400"; d="scan'208";a="15746409"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH] x86/boot: Fix early exception handling with
- CONFIG_PERF_COUNTERS
-Date: Wed, 15 Apr 2020 18:39:11 +0100
-Message-ID: <20200415173911.13286-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 4099e352-7f48-11ea-b58d-bc764e2007e4;
+ Wed, 15 Apr 2020 18:38:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=wtSQHHmgrwnbMvPmliwMYHdNPJs99gEJt0RbRPvDJgc=; b=vduiSzcAUdceT/n7jp+T1bniId
+ ZPNFexGiSZu0nll3HunbP2GHiz8v8ANbQ9h0d924b/+mEYpum/bbbZT/xKLduFcUHmv/V2Sp7BSrh
+ Z0Bdsadnz0SrGhTLQxqM6K4yj4srTWyHXKtIDA54aYjg0L0IJbzhz3BvzKldlp713yWY=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jOmvI-00020s-A7; Wed, 15 Apr 2020 18:38:08 +0000
+Received: from 54-240-197-234.amazon.com ([54.240.197.234]
+ helo=u1bbd043a57dd5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jOmvI-0005Md-0h; Wed, 15 Apr 2020 18:38:08 +0000
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v4 4/4] x86_64/mm: map and unmap page tables in
+ destroy_m2p_mapping
+Date: Wed, 15 Apr 2020 19:37:52 +0100
+Message-Id: <cd077c5592df0ee1c3568bab1c5e5001946981a9.1586975587.git.hongyxia@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1586975587.git.hongyxia@amazon.com>
+References: <cover.1586975587.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1586975587.git.hongyxia@amazon.com>
+References: <cover.1586975587.git.hongyxia@amazon.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -103,118 +73,94 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
- Wei Liu <wl@xen.org>, Jan Beulich <JBeulich@suse.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The PERFC_INCR() macro uses current->processor, but current is not valid
-during early boot.  This causes the following crash to occur if
-e.g. rdmsr_safe() has to recover from a #GP fault.
+From: Wei Liu <wei.liu2@citrix.com>
 
-  (XEN) Early fatal page fault at e008:ffff82d0803b1a39 (cr2=0000000000000004, ec=0000)
-  (XEN) ----[ Xen-4.14-unstable  x86_64  debug=y   Not tainted ]----
-  (XEN) CPU:    0
-  (XEN) RIP:    e008:[<ffff82d0803b1a39>] x86_64/entry.S#handle_exception_saved+0x64/0xb8
-  ...
-  (XEN) Xen call trace:
-  (XEN)    [<ffff82d0803b1a39>] R x86_64/entry.S#handle_exception_saved+0x64/0xb8
-  (XEN)    [<ffff82d0806394fe>] F __start_xen+0x2cd/0x2980
-  (XEN)    [<ffff82d0802000ec>] F __high_start+0x4c/0x4e
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 
-Furthermore, the PERFC_INCR() macro is wildly inefficient.  There has been a
-single caller for many releases now, so inline it and delete the macro
-completely.
-
-For the assembly, move entry_vector from %eax into %ecx.  There is no encoding
-benefit for movzbl, and it frees up %eax to be used inside the
-CONFIG_PERF_COUNTERS block where there is an encoding benefit.
-
-There is no need to reference current at all.  What is actually needed is the
-per_cpu_offset which can be obtained directly from the top-of-stack block.
-This simplifies the counter handling to 3 instructions and no spilling to the
-stack at all.
-
-The same breakage from above is now handled properly:
-
-  (XEN) traps.c:1591: GPF (0000): ffff82d0806394fe [__start_xen+0x2cd/0x2980] -> ffff82d0803b3bfb
-
-Reported-by: Julien Grall <jgrall@amazon.com>
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Wei Liu <wl@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
-CC: Julien Grall <jgrall@amazon.com>
----
- xen/arch/x86/x86_64/asm-offsets.c |  1 +
- xen/arch/x86/x86_64/entry.S       | 10 +++++++---
- xen/include/asm-x86/asm_defns.h   | 16 ----------------
- 3 files changed, 8 insertions(+), 19 deletions(-)
+Changed in v4:
+- switch to normal unmap_domain_page() for variable right before
+  end-of-scope.
 
-diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
-index b8e8510439..500df7a3e7 100644
---- a/xen/arch/x86/x86_64/asm-offsets.c
-+++ b/xen/arch/x86/x86_64/asm-offsets.c
-@@ -112,6 +112,7 @@ void __dummy__(void)
-     OFFSET(CPUINFO_guest_cpu_user_regs, struct cpu_info, guest_cpu_user_regs);
-     OFFSET(CPUINFO_verw_sel, struct cpu_info, verw_sel);
-     OFFSET(CPUINFO_current_vcpu, struct cpu_info, current_vcpu);
-+    OFFSET(CPUINFO_per_cpu_offset, struct cpu_info, per_cpu_offset);
-     OFFSET(CPUINFO_cr4, struct cpu_info, cr4);
-     OFFSET(CPUINFO_xen_cr3, struct cpu_info, xen_cr3);
-     OFFSET(CPUINFO_pv_cr3, struct cpu_info, pv_cr3);
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 997c481ecb..52bd41d9f6 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -677,10 +677,14 @@ handle_exception_saved:
- #endif /* CONFIG_PV */
-         sti
- 1:      movq  %rsp,%rdi
--        movzbl UREGS_entry_vector(%rsp),%eax
-+        movzbl UREGS_entry_vector(%rsp), %ecx
-         leaq  exception_table(%rip),%rdx
--        PERFC_INCR(exceptions, %rax, %rbx)
--        mov   (%rdx, %rax, 8), %rdx
-+#ifdef CONFIG_PERF_COUNTERS
-+        lea   per_cpu__perfcounters(%rip), %rax
-+        add   STACK_CPUINFO_FIELD(per_cpu_offset)(%r14), %rax
-+        incl  ASM_PERFC_exceptions * 4(%rax, %rcx, 4)
-+#endif
-+        mov   (%rdx, %rcx, 8), %rdx
-         INDIRECT_CALL %rdx
-         mov   %r15, STACK_CPUINFO_FIELD(xen_cr3)(%r14)
-         mov   %r13b, STACK_CPUINFO_FIELD(use_pv_cr3)(%r14)
-diff --git a/xen/include/asm-x86/asm_defns.h b/xen/include/asm-x86/asm_defns.h
-index bc9d9fcdb2..b42a19b654 100644
---- a/xen/include/asm-x86/asm_defns.h
-+++ b/xen/include/asm-x86/asm_defns.h
-@@ -346,22 +346,6 @@ static always_inline void stac(void)
+Changed in v3:
+- rename l2_ro_mpt into pl2e to avoid confusion.
+
+Changed in v2:
+- no point in re-mapping l2t because it is exactly the same as
+  l2_ro_mpt.
+- point l2_ro_mpt to the entry instead of doing l2_table_offset() all
+  the time.
+---
+ xen/arch/x86/x86_64/mm.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index cfaeae84e9..e85ef449f3 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -263,7 +263,8 @@ static void destroy_m2p_mapping(struct mem_hotadd_info *info)
+     unsigned long i, va, rwva;
+     unsigned long smap = info->spfn, emap = info->epfn;
  
- #endif
+-    l3_ro_mpt = l4e_to_l3e(idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)]);
++    l3_ro_mpt = map_l3t_from_l4e(
++                    idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)]);
  
--#ifdef CONFIG_PERF_COUNTERS
--#define PERFC_INCR(_name,_idx,_cur)             \
--        pushq _cur;                             \
--        movslq VCPU_processor(_cur),_cur;       \
--        pushq %rdx;                             \
--        leaq __per_cpu_offset(%rip),%rdx;       \
--        movq (%rdx,_cur,8),_cur;                \
--        leaq per_cpu__perfcounters(%rip),%rdx;  \
--        addq %rdx,_cur;                         \
--        popq %rdx;                              \
--        incl ASM_PERFC_##_name*4(_cur,_idx,4);  \
--        popq _cur
--#else
--#define PERFC_INCR(_name,_idx,_cur)
--#endif
--
- /* Work around AMD erratum #88 */
- #define safe_swapgs                             \
-         "mfence; swapgs;"
+     /*
+      * No need to clean m2p structure existing before the hotplug
+@@ -271,7 +272,7 @@ static void destroy_m2p_mapping(struct mem_hotadd_info *info)
+     for (i = smap; i < emap;)
+     {
+         unsigned long pt_pfn;
+-        l2_pgentry_t *l2_ro_mpt;
++        l2_pgentry_t *pl2e;
+ 
+         va = RO_MPT_VIRT_START + i * sizeof(*machine_to_phys_mapping);
+         rwva = RDWR_MPT_VIRT_START + i * sizeof(*machine_to_phys_mapping);
+@@ -285,26 +286,30 @@ static void destroy_m2p_mapping(struct mem_hotadd_info *info)
+             continue;
+         }
+ 
+-        l2_ro_mpt = l3e_to_l2e(l3_ro_mpt[l3_table_offset(va)]);
+-        if (!(l2e_get_flags(l2_ro_mpt[l2_table_offset(va)]) & _PAGE_PRESENT))
++        pl2e = map_l2t_from_l3e(l3_ro_mpt[l3_table_offset(va)]) +
++                    l2_table_offset(va);
++        if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
+         {
+             i = ( i & ~((1UL << (L2_PAGETABLE_SHIFT - 3)) - 1)) +
+                     (1UL << (L2_PAGETABLE_SHIFT - 3)) ;
++            UNMAP_DOMAIN_PAGE(pl2e);
+             continue;
+         }
+ 
+-        pt_pfn = l2e_get_pfn(l2_ro_mpt[l2_table_offset(va)]);
++        pt_pfn = l2e_get_pfn(*pl2e);
+         if ( hotadd_mem_valid(pt_pfn, info) )
+         {
+             destroy_xen_mappings(rwva, rwva + (1UL << L2_PAGETABLE_SHIFT));
+ 
+-            l2_ro_mpt = l3e_to_l2e(l3_ro_mpt[l3_table_offset(va)]);
+-            l2e_write(&l2_ro_mpt[l2_table_offset(va)], l2e_empty());
++            l2e_write(pl2e, l2e_empty());
+         }
+         i = ( i & ~((1UL << (L2_PAGETABLE_SHIFT - 3)) - 1)) +
+               (1UL << (L2_PAGETABLE_SHIFT - 3));
++        unmap_domain_page(pl2e);
+     }
+ 
++    UNMAP_DOMAIN_PAGE(l3_ro_mpt);
++
+     destroy_compat_m2p_mapping(info);
+ 
+     /* Brute-Force flush all TLB */
 -- 
-2.11.0
+2.24.1.AMZN
 
 
