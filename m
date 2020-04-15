@@ -6,51 +6,52 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E165AC2BB1D
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:03:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B689EC352BE
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:03:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B48A62072D
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:03:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 838162072D
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 01:03:26 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="xea7/ciO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B48A62072D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="VqWqFsZR"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 838162072D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOWSL-0001Ft-Qw; Wed, 15 Apr 2020 01:03:09 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jOWST-0001Kp-0w; Wed, 15 Apr 2020 01:03:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=NGac=57=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jOWSK-0001FQ-FS
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 01:03:08 +0000
-X-Inumbo-ID: d93f8b0a-7eb4-11ea-b4f4-bc764e2007e4
+ id 1jOWSR-0001JV-4v
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 01:03:15 +0000
+X-Inumbo-ID: da3083ca-7eb4-11ea-89ec-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d93f8b0a-7eb4-11ea-b4f4-bc764e2007e4;
- Wed, 15 Apr 2020 01:02:59 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id da3083ca-7eb4-11ea-89ec-12813bfff9fa;
+ Wed, 15 Apr 2020 01:03:01 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A5AD72083B;
- Wed, 15 Apr 2020 01:02:58 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 69B81208FE;
+ Wed, 15 Apr 2020 01:03:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586912579;
- bh=YV7d8M1BR8baRsXNvbLsTI5FkEiel89KL9GK6xJVhRk=;
+ s=default; t=1586912580;
+ bh=ZzU/KCsWFqwH+c4W+Sd0RSn1ZEn5hNAtQGIHQMy5tEk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=xea7/ciO1nz2/OVyRSuWlcKWtX9VHsqi0YcK0pKXrNW3WohMbZp62cZvsAySHk6lC
- lmVpXdQLoNORTEVTgpatQy3ZqT1yG4D0fHlow0JPbSIfdpBzChQhsDQEuzplpYEUMS
- eqaojGPaKVpVoUE8Nmsb9xPuEFXHcMdPUfuDpWWo=
+ b=VqWqFsZR6RwDPloWnP4LyDoX02kf0vE9iKyZaguCe9gybtsSJRC2cRPSOagrTHmNH
+ 5JeJsG0LKR1YfyruQjIm9ORndgRSKuInwXNxCm9xBq4B+IJxXCMZWBBVxPK8/A2kjz
+ 5ANwSqaclTnIZVZDTBVcIe5iphX+0/NFxdgyphCg=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 04/12] xen: split alloc_heap_pages in two halves for
- reusability
-Date: Tue, 14 Apr 2020 18:02:47 -0700
-Message-Id: <20200415010255.10081-4-sstabellini@kernel.org>
+Subject: [PATCH 08/12] xen/arm: if is_domain_direct_mapped use native
+ addresses for GICv2
+Date: Tue, 14 Apr 2020 18:02:51 -0700
+Message-Id: <20200415010255.10081-8-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
@@ -64,155 +65,130 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: sstabellini@kernel.org, julien@xen.org, Wei Liu <wl@xen.org>,
- andrew.cooper3@citrix.com, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, jbeulich@suse.com,
- Stefano Stabellini <stefano.stabellini@xilinx.com>, Volodymyr_Babchuk@epam.com
+Cc: Volodymyr_Babchuk@epam.com, sstabellini@kernel.org, julien@xen.org,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This patch splits the implementation of alloc_heap_pages into two halves
-so that the second half can be reused by the next patch.
+Today we use native addresses to map the GICv2 for Dom0 and fixed
+addresses for DomUs.
+
+This patch changes the behavior so that native addresses are used for
+any domain that is_domain_direct_mapped.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-CC: andrew.cooper3@citrix.com
-CC: jbeulich@suse.com
-CC: George Dunlap <george.dunlap@citrix.com>
-CC: Ian Jackson <ian.jackson@eu.citrix.com>
-CC: Wei Liu <wl@xen.org>
 ---
-Comments are welcome. I am not convinced that this is the right way to
-split it. Please let me know if you have any suggestions.
----
- xen/common/page_alloc.c | 94 +++++++++++++++++++++++------------------
- 1 file changed, 53 insertions(+), 41 deletions(-)
+ xen/arch/arm/domain_build.c | 10 +++++++---
+ xen/arch/arm/vgic-v2.c      | 12 ++++++------
+ xen/arch/arm/vgic/vgic-v2.c |  2 +-
+ xen/include/asm-arm/vgic.h  |  1 +
+ 4 files changed, 15 insertions(+), 10 deletions(-)
 
-diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
-index 10b7aeca48..79ae64d4b8 100644
---- a/xen/common/page_alloc.c
-+++ b/xen/common/page_alloc.c
-@@ -911,54 +911,18 @@ static struct page_info *get_free_buddy(unsigned int zone_lo,
-     }
- }
+diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+index 627e0c5e8e..303bee60f6 100644
+--- a/xen/arch/arm/domain_build.c
++++ b/xen/arch/arm/domain_build.c
+@@ -1643,8 +1643,12 @@ static int __init make_gicv2_domU_node(struct kernel_info *kinfo)
+     int res = 0;
+     __be32 reg[(GUEST_ROOT_ADDRESS_CELLS + GUEST_ROOT_SIZE_CELLS) * 2];
+     __be32 *cells;
++    struct domain *d = kinfo->d;
++    char buf[38];
  
--/* Allocate 2^@order contiguous pages. */
--static struct page_info *alloc_heap_pages(
--    unsigned int zone_lo, unsigned int zone_hi,
--    unsigned int order, unsigned int memflags,
--    struct domain *d)
-+static void __alloc_heap_pages(struct page_info **pgo,
-+                               unsigned int order,
-+                               unsigned int memflags,
-+                               struct domain *d)
+-    res = fdt_begin_node(fdt, "interrupt-controller@"__stringify(GUEST_GICD_BASE));
++    snprintf(buf, sizeof(buf), "interrupt-controller@%"PRIx64,
++             d->arch.vgic.dbase);
++    res = fdt_begin_node(fdt, buf);
+     if ( res )
+         return res;
+ 
+@@ -1666,9 +1670,9 @@ static int __init make_gicv2_domU_node(struct kernel_info *kinfo)
+ 
+     cells = &reg[0];
+     dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
+-                       GUEST_GICD_BASE, GUEST_GICD_SIZE);
++                       d->arch.vgic.dbase, GUEST_GICD_SIZE);
+     dt_child_set_range(&cells, GUEST_ROOT_ADDRESS_CELLS, GUEST_ROOT_SIZE_CELLS,
+-                       GUEST_GICC_BASE, GUEST_GICC_SIZE);
++                       d->arch.vgic.cbase, GUEST_GICC_SIZE);
+ 
+     res = fdt_property(fdt, "reg", reg, sizeof(reg));
+     if (res)
+diff --git a/xen/arch/arm/vgic-v2.c b/xen/arch/arm/vgic-v2.c
+index 64b141fea5..9a74e2ed38 100644
+--- a/xen/arch/arm/vgic-v2.c
++++ b/xen/arch/arm/vgic-v2.c
+@@ -650,14 +650,14 @@ static int vgic_v2_vcpu_init(struct vcpu *v)
+ static int vgic_v2_domain_init(struct domain *d)
  {
-     nodeid_t node;
-     unsigned int i, buddy_order, zone, first_dirty;
-     unsigned long request = 1UL << order;
--    struct page_info *pg;
-     bool need_tlbflush = false;
-     uint32_t tlbflush_timestamp = 0;
-     unsigned int dirty_cnt = 0;
--
--    /* Make sure there are enough bits in memflags for nodeID. */
--    BUILD_BUG_ON((_MEMF_bits - _MEMF_node) < (8 * sizeof(nodeid_t)));
--
--    ASSERT(zone_lo <= zone_hi);
--    ASSERT(zone_hi < NR_ZONES);
--
--    if ( unlikely(order > MAX_ORDER) )
--        return NULL;
--
--    spin_lock(&heap_lock);
--
--    /*
--     * Claimed memory is considered unavailable unless the request
--     * is made by a domain with sufficient unclaimed pages.
--     */
--    if ( (outstanding_claims + request > total_avail_pages) &&
--          ((memflags & MEMF_no_refcount) ||
--           !d || d->outstanding_pages < request) )
--    {
--        spin_unlock(&heap_lock);
--        return NULL;
--    }
--
--    pg = get_free_buddy(zone_lo, zone_hi, order, memflags, d);
--    /* Try getting a dirty buddy if we couldn't get a clean one. */
--    if ( !pg && !(memflags & MEMF_no_scrub) )
--        pg = get_free_buddy(zone_lo, zone_hi, order,
--                            memflags | MEMF_no_scrub, d);
--    if ( !pg )
--    {
--        /* No suitable memory blocks. Fail the request. */
--        spin_unlock(&heap_lock);
--        return NULL;
--    }
-+    struct page_info *pg = *pgo;
+     int ret;
+-    paddr_t cbase, csize;
++    paddr_t csize;
+     paddr_t vbase;
  
-     node = phys_to_nid(page_to_maddr(pg));
-     zone = page_to_zone(pg);
-@@ -984,6 +948,7 @@ static struct page_info *alloc_heap_pages(
-                 first_dirty = 0; /* We've moved past original first_dirty */
-         }
+     /*
+      * The hardware domain gets the hardware address.
+      * Guests get the virtual platform layout.
+      */
+-    if ( is_hardware_domain(d) )
++    if ( is_domain_direct_mapped(d) )
+     {
+         d->arch.vgic.dbase = vgic_v2_hw.dbase;
+         /*
+@@ -667,7 +667,7 @@ static int vgic_v2_domain_init(struct domain *d)
+          * Note that we assume the size of the CPU interface is always
+          * aligned to PAGE_SIZE.
+          */
+-        cbase = vgic_v2_hw.cbase;
++        d->arch.vgic.cbase = vgic_v2_hw.cbase;
+         csize = vgic_v2_hw.csize;
+         vbase = vgic_v2_hw.vbase;
      }
-+    *pgo = pg;
+@@ -681,7 +681,7 @@ static int vgic_v2_domain_init(struct domain *d)
+          * region.
+          */
+         BUILD_BUG_ON(GUEST_GICC_SIZE != SZ_8K);
+-        cbase = GUEST_GICC_BASE;
++        d->arch.vgic.cbase = GUEST_GICC_BASE;
+         csize = GUEST_GICC_SIZE;
+         vbase = vgic_v2_hw.vbase + vgic_v2_hw.aliased_offset;
+     }
+@@ -690,8 +690,8 @@ static int vgic_v2_domain_init(struct domain *d)
+      * Map the gic virtual cpu interface in the gic cpu interface
+      * region of the guest.
+      */
+-    ret = map_mmio_regions(d, gaddr_to_gfn(cbase), csize / PAGE_SIZE,
+-                           maddr_to_mfn(vbase));
++    ret = map_mmio_regions(d, gaddr_to_gfn(d->arch.vgic.cbase),
++                           csize / PAGE_SIZE, maddr_to_mfn(vbase));
+     if ( ret )
+         return ret;
  
-     ASSERT(avail[node][zone] >= request);
-     avail[node][zone] -= request;
-@@ -1062,6 +1027,53 @@ static struct page_info *alloc_heap_pages(
-     if ( need_tlbflush )
-         filtered_flush_tlb_mask(tlbflush_timestamp);
- 
-+}
-+
-+/* Allocate 2^@order contiguous pages. */
-+static struct page_info *alloc_heap_pages(
-+    unsigned int zone_lo, unsigned int zone_hi,
-+    unsigned int order, unsigned int memflags,
-+    struct domain *d)
-+{
-+    unsigned long request = 1UL << order;
-+    struct page_info *pg;
-+
-+    /* Make sure there are enough bits in memflags for nodeID. */
-+    BUILD_BUG_ON((_MEMF_bits - _MEMF_node) < (8 * sizeof(nodeid_t)));
-+
-+    ASSERT(zone_lo <= zone_hi);
-+    ASSERT(zone_hi < NR_ZONES);
-+
-+    if ( unlikely(order > MAX_ORDER) )
-+        return NULL;
-+
-+    spin_lock(&heap_lock);
-+
-+    /*
-+     * Claimed memory is considered unavailable unless the request
-+     * is made by a domain with sufficient unclaimed pages.
-+     */
-+    if ( (outstanding_claims + request > total_avail_pages) &&
-+          ((memflags & MEMF_no_refcount) ||
-+           !d || d->outstanding_pages < request) )
-+    {
-+        spin_unlock(&heap_lock);
-+        return NULL;
-+    }
-+
-+    pg = get_free_buddy(zone_lo, zone_hi, order, memflags, d);
-+    /* Try getting a dirty buddy if we couldn't get a clean one. */
-+    if ( !pg && !(memflags & MEMF_no_scrub) )
-+        pg = get_free_buddy(zone_lo, zone_hi, order,
-+                            memflags | MEMF_no_scrub, d);
-+    if ( !pg )
-+    {
-+        /* No suitable memory blocks. Fail the request. */
-+        spin_unlock(&heap_lock);
-+        return NULL;
-+    }
-+
-+    __alloc_heap_pages(&pg, order, memflags, d);
-     return pg;
- }
- 
+diff --git a/xen/arch/arm/vgic/vgic-v2.c b/xen/arch/arm/vgic/vgic-v2.c
+index 09cb92039a..275dd8bea9 100644
+--- a/xen/arch/arm/vgic/vgic-v2.c
++++ b/xen/arch/arm/vgic/vgic-v2.c
+@@ -266,7 +266,7 @@ int vgic_v2_map_resources(struct domain *d)
+      * The hardware domain gets the hardware address.
+      * Guests get the virtual platform layout.
+      */
+-    if ( is_hardware_domain(d) )
++    if ( is_domain_direct_mapped(d) )
+     {
+         d->arch.vgic.dbase = gic_v2_hw_data.dbase;
+         /*
+diff --git a/xen/include/asm-arm/vgic.h b/xen/include/asm-arm/vgic.h
+index ce1e3c4bbd..f151d98773 100644
+--- a/xen/include/asm-arm/vgic.h
++++ b/xen/include/asm-arm/vgic.h
+@@ -152,6 +152,7 @@ struct vgic_dist {
+     struct pending_irq *pending_irqs;
+     /* Base address for guest GIC */
+     paddr_t dbase; /* Distributor base address */
++    paddr_t cbase; /* CPU interface base address */
+ #ifdef CONFIG_GICV3
+     /* GIC V3 addressing */
+     /* List of contiguous occupied by the redistributors */
 -- 
 2.17.1
 
