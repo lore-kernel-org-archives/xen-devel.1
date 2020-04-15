@@ -7,57 +7,57 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7DE96C2BA19
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F755C2BB85
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4A5142064A
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:29 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0FFCF2064A
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 18:38:30 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="vduiSzcA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A5142064A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="glId3sBL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FFCF2064A
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOmvQ-0000GT-E0; Wed, 15 Apr 2020 18:38:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jOmvK-0000Fk-Mw; Wed, 15 Apr 2020 18:38:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=lFP+=57=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jOmvP-0000GC-DS
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 18:38:15 +0000
-X-Inumbo-ID: 4099e352-7f48-11ea-b58d-bc764e2007e4
+ id 1jOmvI-0000FT-W5
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 18:38:09 +0000
+X-Inumbo-ID: 3f236a20-7f48-11ea-8abf-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4099e352-7f48-11ea-b58d-bc764e2007e4;
- Wed, 15 Apr 2020 18:38:08 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3f236a20-7f48-11ea-8abf-12813bfff9fa;
+ Wed, 15 Apr 2020 18:38:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wtSQHHmgrwnbMvPmliwMYHdNPJs99gEJt0RbRPvDJgc=; b=vduiSzcAUdceT/n7jp+T1bniId
- ZPNFexGiSZu0nll3HunbP2GHiz8v8ANbQ9h0d924b/+mEYpum/bbbZT/xKLduFcUHmv/V2Sp7BSrh
- Z0Bdsadnz0SrGhTLQxqM6K4yj4srTWyHXKtIDA54aYjg0L0IJbzhz3BvzKldlp713yWY=;
+ bh=CtlOkdsHjlKFcb39XzK+uw2HvlaIF3cGj21C2XsAUj8=; b=glId3sBLWVFPgGXaUMZcet07lb
+ hxuPNoosoivlji4cO+7gfQHaeE6JlHzl9j10fjJjSbYTH4eIyEjBfnLCzSj0zFDMnfOQndYvKHz4k
+ d0fLo8CVxxoQq2jLWGiUC1AsVHXsQnjw7W7Ib5oI6HRpYdFmewesFF2T7XUrQWXwq+UA=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jOmvI-00020s-A7; Wed, 15 Apr 2020 18:38:08 +0000
+ id 1jOmvF-00020g-Fa; Wed, 15 Apr 2020 18:38:05 +0000
 Received: from 54-240-197-234.amazon.com ([54.240.197.234]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jOmvI-0005Md-0h; Wed, 15 Apr 2020 18:38:08 +0000
+ id 1jOmvF-0005Md-5r; Wed, 15 Apr 2020 18:38:05 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 4/4] x86_64/mm: map and unmap page tables in
- destroy_m2p_mapping
-Date: Wed, 15 Apr 2020 19:37:52 +0100
-Message-Id: <cd077c5592df0ee1c3568bab1c5e5001946981a9.1586975587.git.hongyxia@amazon.com>
+Subject: [PATCH v4 2/4] x86_64/mm: map and unmap page tables in m2p_mapped
+Date: Wed, 15 Apr 2020 19:37:50 +0100
+Message-Id: <5e880ea0aea869fe31438b61540227c6f4f1bfcb.1586975587.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1586975587.git.hongyxia@amazon.com>
 References: <cover.1586975587.git.hongyxia@amazon.com>
@@ -83,83 +83,54 @@ From: Wei Liu <wei.liu2@citrix.com>
 
 Signed-off-by: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 ---
-Changed in v4:
-- switch to normal unmap_domain_page() for variable right before
-  end-of-scope.
-
 Changed in v3:
-- rename l2_ro_mpt into pl2e to avoid confusion.
+- rename l3e_ro_mpt and l2e_ro_mpt, just call them l3e and l2e.
 
 Changed in v2:
-- no point in re-mapping l2t because it is exactly the same as
-  l2_ro_mpt.
-- point l2_ro_mpt to the entry instead of doing l2_table_offset() all
-  the time.
+- avoid adding goto labels, simply get the PTE and unmap quickly.
+- code style fixes.
 ---
- xen/arch/x86/x86_64/mm.c | 19 ++++++++++++-------
- 1 file changed, 12 insertions(+), 7 deletions(-)
+ xen/arch/x86/x86_64/mm.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
 diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index cfaeae84e9..e85ef449f3 100644
+index cee836ec37..41755ded26 100644
 --- a/xen/arch/x86/x86_64/mm.c
 +++ b/xen/arch/x86/x86_64/mm.c
-@@ -263,7 +263,8 @@ static void destroy_m2p_mapping(struct mem_hotadd_info *info)
-     unsigned long i, va, rwva;
-     unsigned long smap = info->spfn, emap = info->epfn;
+@@ -129,14 +129,13 @@ static mfn_t alloc_hotadd_mfn(struct mem_hotadd_info *info)
+ static int m2p_mapped(unsigned long spfn)
+ {
+     unsigned long va;
+-    l3_pgentry_t *l3_ro_mpt;
+-    l2_pgentry_t *l2_ro_mpt;
++    l3_pgentry_t l3e;
++    l2_pgentry_t l2e;
  
--    l3_ro_mpt = l4e_to_l3e(idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)]);
-+    l3_ro_mpt = map_l3t_from_l4e(
-+                    idle_pg_table[l4_table_offset(RO_MPT_VIRT_START)]);
+     va = RO_MPT_VIRT_START + spfn * sizeof(*machine_to_phys_mapping);
+-    l3_ro_mpt = l4e_to_l3e(idle_pg_table[l4_table_offset(va)]);
++    l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(va)], l3_table_offset(va));
  
-     /*
-      * No need to clean m2p structure existing before the hotplug
-@@ -271,7 +272,7 @@ static void destroy_m2p_mapping(struct mem_hotadd_info *info)
-     for (i = smap; i < emap;)
+-    switch ( l3e_get_flags(l3_ro_mpt[l3_table_offset(va)]) &
+-             (_PAGE_PRESENT |_PAGE_PSE))
++    switch ( l3e_get_flags(l3e) & (_PAGE_PRESENT | _PAGE_PSE) )
      {
-         unsigned long pt_pfn;
--        l2_pgentry_t *l2_ro_mpt;
-+        l2_pgentry_t *pl2e;
- 
-         va = RO_MPT_VIRT_START + i * sizeof(*machine_to_phys_mapping);
-         rwva = RDWR_MPT_VIRT_START + i * sizeof(*machine_to_phys_mapping);
-@@ -285,26 +286,30 @@ static void destroy_m2p_mapping(struct mem_hotadd_info *info)
-             continue;
-         }
- 
--        l2_ro_mpt = l3e_to_l2e(l3_ro_mpt[l3_table_offset(va)]);
--        if (!(l2e_get_flags(l2_ro_mpt[l2_table_offset(va)]) & _PAGE_PRESENT))
-+        pl2e = map_l2t_from_l3e(l3_ro_mpt[l3_table_offset(va)]) +
-+                    l2_table_offset(va);
-+        if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
-         {
-             i = ( i & ~((1UL << (L2_PAGETABLE_SHIFT - 3)) - 1)) +
-                     (1UL << (L2_PAGETABLE_SHIFT - 3)) ;
-+            UNMAP_DOMAIN_PAGE(pl2e);
-             continue;
-         }
- 
--        pt_pfn = l2e_get_pfn(l2_ro_mpt[l2_table_offset(va)]);
-+        pt_pfn = l2e_get_pfn(*pl2e);
-         if ( hotadd_mem_valid(pt_pfn, info) )
-         {
-             destroy_xen_mappings(rwva, rwva + (1UL << L2_PAGETABLE_SHIFT));
- 
--            l2_ro_mpt = l3e_to_l2e(l3_ro_mpt[l3_table_offset(va)]);
--            l2e_write(&l2_ro_mpt[l2_table_offset(va)], l2e_empty());
-+            l2e_write(pl2e, l2e_empty());
-         }
-         i = ( i & ~((1UL << (L2_PAGETABLE_SHIFT - 3)) - 1)) +
-               (1UL << (L2_PAGETABLE_SHIFT - 3));
-+        unmap_domain_page(pl2e);
+         case _PAGE_PSE|_PAGE_PRESENT:
+             return M2P_1G_MAPPED;
+@@ -146,9 +145,9 @@ static int m2p_mapped(unsigned long spfn)
+         default:
+             return M2P_NO_MAPPED;
      }
+-    l2_ro_mpt = l3e_to_l2e(l3_ro_mpt[l3_table_offset(va)]);
++    l2e = l2e_from_l3e(l3e, l2_table_offset(va));
  
-+    UNMAP_DOMAIN_PAGE(l3_ro_mpt);
-+
-     destroy_compat_m2p_mapping(info);
+-    if (l2e_get_flags(l2_ro_mpt[l2_table_offset(va)]) & _PAGE_PRESENT)
++    if ( l2e_get_flags(l2e) & _PAGE_PRESENT )
+         return M2P_2M_MAPPED;
  
-     /* Brute-Force flush all TLB */
+     return M2P_NO_MAPPED;
 -- 
 2.24.1.AMZN
 
