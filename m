@@ -6,55 +6,55 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 614CCC2BA19
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 11:36:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DA7D3C2BB55
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 11:43:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 284E42137B
-	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 11:36:27 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id AFA2A20737
+	for <xen-devel@archiver.kernel.org>; Wed, 15 Apr 2020 11:43:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="twUXnbkx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 284E42137B
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="eWWAghB+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AFA2A20737
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOgKk-00018X-Ok; Wed, 15 Apr 2020 11:35:58 +0000
+	id 1jOgS3-00021X-Kt; Wed, 15 Apr 2020 11:43:31 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=3n5d=57=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1jOgKj-00018S-Su
- for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 11:35:57 +0000
-X-Inumbo-ID: 45dc65c8-7f0d-11ea-83d8-bc764e2007e4
+ id 1jOgS1-00021S-Vb
+ for xen-devel@lists.xenproject.org; Wed, 15 Apr 2020 11:43:29 +0000
+X-Inumbo-ID: 5354c2e4-7f0e-11ea-b58d-bc764e2007e4
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 45dc65c8-7f0d-11ea-83d8-bc764e2007e4;
- Wed, 15 Apr 2020 11:35:57 +0000 (UTC)
+ id 5354c2e4-7f0e-11ea-b58d-bc764e2007e4;
+ Wed, 15 Apr 2020 11:43:29 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 3F92920737;
- Wed, 15 Apr 2020 11:35:56 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 418DF2078A;
+ Wed, 15 Apr 2020 11:43:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1586950556;
+ s=default; t=1586951008;
  bh=Le5r4ZEgqHViB7UDMuTUHMRwchWcpxKe6N8tGPIdKdI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=twUXnbkxpBhf/riUONtD4bwFwRT9Vt3foYA9D0BJamIKVv6ey8auSuK0AYChUJvM+
- 3fNJl0rSEnAG1ZyxE1MZAlyEMSfcEvP+WOFeHWcBCDCaTYGrqJFWdfw/Y+QsheIgF/
- InGmOQuvgz+YeRoaWaFil7ect+j/y62Ys5ZDQyK8=
+ b=eWWAghB+N20XKezbzLQ1pEo5G4+q4R+DyHD9Ldl1O1k7/RK6NDCACdfT4Vfp5G/nT
+ Tm4LBWgecFf8RxkAiie1J8eDYkiohFAdYgnW3RdmrU2Tyhu4ZP241A/O1JBUo8xoyW
+ xh5O9W1n1rG34DZMhNn21xFVkiHWWUwfLO7yY7TE=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.6 062/129] x86/xen: Make the boot CPU idle task
+Subject: [PATCH AUTOSEL 5.5 053/106] x86/xen: Make the boot CPU idle task
  reliable
-Date: Wed, 15 Apr 2020 07:33:37 -0400
-Message-Id: <20200415113445.11881-62-sashal@kernel.org>
+Date: Wed, 15 Apr 2020 07:41:33 -0400
+Message-Id: <20200415114226.13103-53-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200415113445.11881-1-sashal@kernel.org>
-References: <20200415113445.11881-1-sashal@kernel.org>
+In-Reply-To: <20200415114226.13103-1-sashal@kernel.org>
+References: <20200415114226.13103-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
