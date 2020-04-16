@@ -2,114 +2,80 @@ Return-Path: <SRS0=l70B=6A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.4 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9D4C0C2BB85
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4798AC352BE
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:42:16 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6B9AE21BE5
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:38:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1863E21BE5
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:42:15 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="H90mztX7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6B9AE21BE5
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="FdJNGvyi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1863E21BE5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jP0yf-0004hk-8N; Thu, 16 Apr 2020 09:38:33 +0000
+	id 1jP122-0005Tt-Pd; Thu, 16 Apr 2020 09:42:02 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Wvvh=6A=citrix.com=sergey.dyasli@srs-us1.protection.inumbo.net>)
- id 1jP0ye-0004he-6t
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 09:38:32 +0000
-X-Inumbo-ID: 0852acee-7fc6-11ea-8b6d-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ <SRS0=Xq2g=6A=amazon.de=prvs=368a07d89=wipawel@srs-us1.protection.inumbo.net>)
+ id 1jP121-0005To-3l
+ for xen-devel@lists.xen.org; Thu, 16 Apr 2020 09:42:01 +0000
+X-Inumbo-ID: 845095eb-7fc6-11ea-8b6d-12813bfff9fa
+Received: from smtp-fw-9102.amazon.com (unknown [207.171.184.29])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 0852acee-7fc6-11ea-8b6d-12813bfff9fa;
- Thu, 16 Apr 2020 09:38:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587029911;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=um4CYpM/aGGIm54gur/4JoCcsorEfvmkqorHGGSv+J8=;
- b=H90mztX7rD570/yiOhFNhjfSPoz/LGEUsmHIRo1xXagOfySlYCMQUXvc
- t28pUNr5lJf/PWU/Naq3WKMllJ5quIvs+xUVtfK+aa3pLT406b3GJhWXN
- jumwtrB9xNb0a2zO6kqlrNvC6HHisONTc62XkqOCUCtYK8fmDEXbMKTQV I=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=sergey.dyasli@citrix.com;
- spf=Pass smtp.mailfrom=sergey.dyasli@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- sergey.dyasli@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="sergey.dyasli@citrix.com";
- x-sender="sergey.dyasli@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
- sergey.dyasli@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="sergey.dyasli@citrix.com";
- x-sender="sergey.dyasli@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="sergey.dyasli@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: 7rhV4FwIG4X8WnGhEXBXNLrLSg8V4FMaFfaw5MmSB0UBMd+cg0mjluospN15akAqQz+vz3kZQ7
- FrL2yEhdtfP6zmBBLQch73DrFzryy/QVfn00TMlPnqOxz7ksyLXDqLlWB0SRTP12FCACrL3rgR
- fsdBkT1eeuqvNIfmA5nzvQAC4hzJ5eF3htKZ3RPfaU4BIDx3ttigVyeHM02glWBEnAkgR0QNPn
- LiUzGxrAvXanN8Sklp+WizGT/O38nxZl5s09YpjN81NKLfe+uaGzpHCdVOn9y8bHZbrBxjz/hY
- pqM=
-X-SBRS: 2.7
-X-MesageID: 16168094
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,390,1580792400"; d="scan'208";a="16168094"
-From: Sergey Dyasli <sergey.dyasli@citrix.com>
-To: =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH] sched: print information about scheduler granularity
-Thread-Topic: [PATCH] sched: print information about scheduler granularity
-Thread-Index: AQHWE8nCYlq/J4KoL0iU4gkSoIElX6h7UR4AgAAWygD///EBAIAAEwaA
-Date: Thu, 16 Apr 2020 09:38:27 +0000
-Message-ID: <1587029894464.80479@citrix.com>
-References: <20200416083341.21122-1-sergey.dyasli@citrix.com>
- <996ed66e-3782-5187-a804-9291741a2241@suse.com>
- <1587028832608.72974@citrix.com>
- <bd38c4da-b982-0d13-bdbd-ab363dae68e0@suse.com>
-In-Reply-To: <bd38c4da-b982-0d13-bdbd-ab363dae68e0@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-imapappendstamp: AMSPEX02CL03.citrite.net (15.00.1497.006)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-Content-Type: text/plain; charset="iso-8859-1"
-Content-ID: <38FD14541B61304BAFABA8E3DBB18EC4@citrix.com>
-Content-Transfer-Encoding: quoted-printable
+ id 845095eb-7fc6-11ea-8b6d-12813bfff9fa;
+ Thu, 16 Apr 2020 09:41:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+ t=1587030120; x=1618566120;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=UEPw6O3BljFwct47izeBxnxQHVPFN3vhQxafqb4+2o0=;
+ b=FdJNGvyiZtCeHWoHX1X013xozj8fgiAkmZWhfXDp5xpL9V3l7hHdBCL7
+ 7iogntAJcNqeQwtuE/Vhx2fviuoZIpxsINYrX0F9fnW4CLOFZjnFXsOR5
+ HPinekU4dKxJw6Mroi84kcNWnZGZzHQCmcjQwsynVak5xe1Ej7QLd9vcO I=;
+IronPort-SDR: awgMYQycTtlz5joRHfcsa6TCbyYnbC4FGLuXeI+yN/YVQg4UmtZOk46pq8uR8pMjgVjQmMzR+p
+ r5roaCCx9irw==
+X-IronPort-AV: E=Sophos;i="5.72,390,1580774400"; d="scan'208";a="37396512"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-2a-69849ee2.us-west-2.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP;
+ 16 Apr 2020 09:41:58 +0000
+Received: from EX13MTAUEA002.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2a-69849ee2.us-west-2.amazon.com (Postfix) with ESMTPS
+ id F102BA2264; Thu, 16 Apr 2020 09:41:56 +0000 (UTC)
+Received: from EX13D05EUC003.ant.amazon.com (10.43.164.207) by
+ EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 16 Apr 2020 09:41:56 +0000
+Received: from EX13MTAUEA001.ant.amazon.com (10.43.61.82) by
+ EX13D05EUC003.ant.amazon.com (10.43.164.207) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 16 Apr 2020 09:41:55 +0000
+Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
+ by mail-relay.amazon.com (10.43.61.243) with Microsoft SMTP Server id
+ 15.0.1497.2 via Frontend Transport; Thu, 16 Apr 2020 09:41:54 +0000
+From: Pawel Wieczorkiewicz <wipawel@amazon.de>
+To: <xen-devel@lists.xen.org>
+Subject: [XTF 1/4] lib: Add XEN_MAJOR() and XEN_MINOR() macros
+Date: Thu, 16 Apr 2020 09:41:38 +0000
+Message-ID: <20200416094141.65120-2-wipawel@amazon.de>
+X-Mailer: git-send-email 2.16.6
+In-Reply-To: <20200416094141.65120-1-wipawel@amazon.de>
+References: <20200416094141.65120-1-wipawel@amazon.de>
 MIME-Version: 1.0
+Content-Type: text/plain
+Precedence: Bulk
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -117,61 +83,64 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Sergey Dyasli <sergey.dyasli@citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Dario Faggioli <dfaggioli@suse.com>
+Cc: julien@xen.org, paul@xen.org, semelpaul@gmail.com,
+ andrew.cooper3@citrix.com, Pawel Wieczorkiewicz <wipawel@amazon.de>,
+ nmanthey@amazon.de
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 16/04/2020 10:25, J=FCrgen Gro=DF wrote:=0A=
-> On 16.04.20 11:20, Sergey Dyasli wrote:=0A=
->> On 16/04/2020 09:57, J=FCrgen Gro=DF wrote:=0A=
->>> On 16.04.20 10:33, Sergey Dyasli wrote:=0A=
->>>> Currently it might be not obvious which scheduling mode is being used=
-=0A=
->>>> by the scheduler. Alleviate this by printing additional information=0A=
->>>> about the selected granularity. Messages now look like these:=0A=
->>>>=0A=
->>>> 1. boot=0A=
->>>> (XEN) [00089808f0ea7496] Using scheduler: SMP Credit Scheduler (credit=
-) in core-scheduling mode=0A=
->>>>=0A=
->>>> 2. xl debug-keys r=0A=
->>>> (XEN) [=A0=A0 45.914314] Scheduler: SMP Credit Scheduler (credit) in 2=
--way core-scheduling mode=0A=
->>>>=0A=
->>>> Signed-off-by: Sergey Dyasli <sergey.dyasli@citrix.com>=0A=
->>>=0A=
->>> Hmm, do we need that?=0A=
->>>=0A=
->>> The xen commandline ins part of the boot messages and is contained=0A=
->>> in the "xl info" output.=0A=
->>=0A=
->> It's true that you can see "sched-gran=3Dcore" in "xl info" output. But =
-that's=0A=
->> just the switch - not the end result. A user might want to verify that h=
-e did=0A=
->> everything correctly and core-scheduling mode has indeed been enabled.=
-=0A=
-> =0A=
-> I'm planning to add this information in the pending hypfs (per cpupool).=
-=0A=
-=0A=
-hypfs is certainly nice, but I doubt it'll be available for Xen 4.13.=0A=
-=0A=
-> I'm not opposed to your patch, but as soon as we have per-cpupool=0A=
-> granularity it should be reverted again.=0A=
-=0A=
-"xl debug-keys r" already prints the granularity information per cpupool.=
-=0A=
-It's just opt_sched_granularity is currently a single global variable. Once=
-=0A=
-per-cpupool granularity is implemented, sched_gran_str() should simply gain=
-=0A=
-granularity as a parameter.=0A=
-=0A=
---=0A=
-Thanks,=0A=
-Sergey=0A=
-=0A=
+These are just a simple macros obtaining major, minor values as
+returned by xen_version hypercall.
+
+Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
+---
+ include/xtf/lib.h    | 3 +++
+ tests/xsa-213/main.c | 4 ++--
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/include/xtf/lib.h b/include/xtf/lib.h
+index 3348464..40e5731 100644
+--- a/include/xtf/lib.h
++++ b/include/xtf/lib.h
+@@ -20,6 +20,9 @@
+ 
+ #define ACCESS_ONCE(x)   (*(volatile typeof(x) *)&(x))
+ 
++#define XEN_MAJOR(v) (((v) >> 16) & 0xFFFF)
++#define XEN_MINOR(v) ((v) & 0xFFFF)
++
+ void __noreturn panic(const char *fmt, ...) __printf(1, 2);
+ 
+ #define ASSERT(cond)                                    \
+diff --git a/tests/xsa-213/main.c b/tests/xsa-213/main.c
+index 64e7065..0353168 100644
+--- a/tests/xsa-213/main.c
++++ b/tests/xsa-213/main.c
+@@ -121,8 +121,8 @@ void test_main(void)
+ {
+     long rc, xen_version = hypercall_xen_version(XENVER_version, NULL);
+ 
+-    printk("Found Xen %ld.%ld\n",
+-           (xen_version >> 16) & 0xffff, xen_version & 0xffff);
++    printk("Found Xen %ld.%ld\n", XEN_MAJOR(xen_version),
++           XEN_MINOR(xen_version));
+ 
+     xtf_set_idte(X86_VEC_AVAIL, &idte);
+ 
+-- 
+2.16.6
+
+
+
+
+Amazon Development Center Germany GmbH
+Krausenstr. 38
+10117 Berlin
+Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+Sitz: Berlin
+Ust-ID: DE 289 237 879
+
+
+
 
