@@ -3,102 +3,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56C37C2BB85
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10053C2BB85
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:34:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2201B206B9
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:20:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D2766208E4
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:34:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="eVYBkwBe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2201B206B9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="zB/xDfUV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D2766208E4
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jOzkM-0005qM-W6; Thu, 16 Apr 2020 08:19:42 +0000
+	id 1jOzyF-0007Ru-Me; Thu, 16 Apr 2020 08:34:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=HCIP=6A=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jOzkL-0005qH-UO
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 08:19:42 +0000
-X-Inumbo-ID: 048bcee8-7fbb-11ea-b4f4-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=FuWY=6A=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jOzyE-0007Rm-Qc
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 08:34:02 +0000
+X-Inumbo-ID: 05f25732-7fbd-11ea-b4f4-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 048bcee8-7fbb-11ea-b4f4-bc764e2007e4;
- Thu, 16 Apr 2020 08:19:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587025180;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=0ixsc0CzeYa9zcT53ZlBUs1gmBMK2SR725xlwyoE4ZM=;
- b=eVYBkwBev+9fNMKU2Tid7Fzc4QLU3r1PDsdHJ8NFm1s8ZWeKUg1DFgJT
- 1uXYl+9VJJTgH8/oHi2qF0LHuNdBGcaQM8+34eOx7/yc02EVNpaELz9Ni
- Lft7H3mQZCZW+7dYNHhOAxiE48ZTq0I1yHFOXRWS+2LM73fkbficXAIUD k=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=andrew.cooper3@citrix.com;
- spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="andrew.cooper3@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
- Andrew.Cooper3@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="Andrew.Cooper3@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: /bAA3odhOw10A5EzH+a+1ebWjyrYZhaSwwTURssJnoQp+Bh1rM9tld+zkkliewSayEVB+Vb7k2
- 4bAKPynN0BfD22egjxFhxXmt3B1G6jWIj5DqA6q9IiYkUr0y9VekVebFUqhX40uqetL5zo5/6l
- 3YD8CAtOM4+XbvTAk2uy5nHsRnr7MDIluQfx1cT0LacvQKINJ3WQwak+YCzh7t4uPXJTRgb3zF
- ZApKluZahbesdr3I/jqk42rFD4MwLs+kuHs3jdBjf0SwbHg0ifn86mSBH7jbBFre7cNEYuFn4q
- IaI=
-X-SBRS: 2.7
-X-MesageID: 16165154
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,390,1580792400"; d="scan'208";a="16165154"
+ id 05f25732-7fbd-11ea-b4f4-bc764e2007e4;
+ Thu, 16 Apr 2020 08:34:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=5rwClm+Zgtmmy4ztGRUQ5EJ3hSqUkJhruPU33x8OK9U=; b=zB/xDfUVKw75+nC3KYbUWUXn7u
+ FC/L4uVg8CHqoYa7cmGVfqcLdC9Di1oNEby7Ks4dhmMsKE7ayxO7eRnQplV5yQVhkClbHQi/5lmXP
+ zfLEYBtK4YxbB/oEUJ73oEq9V5mMYO+A1xh72ybD+bYZR0D8AFLJ5ULF/b9WQH1azk8M=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jOzyA-0007g2-UV; Thu, 16 Apr 2020 08:33:58 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jOzyA-0006FQ-NK; Thu, 16 Apr 2020 08:33:58 +0000
 Subject: Re: [PATCH] x86/boot: Fix early exception handling with
  CONFIG_PERF_COUNTERS
-To: Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
 References: <20200415173911.13286-1-andrew.cooper3@citrix.com>
- <72b35bfa-e795-72c0-d925-924ca18711df@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <4c418f62-14b5-1f77-9bf3-979b5d1f56d9@citrix.com>
-Date: Thu, 16 Apr 2020 09:19:12 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+From: Julien Grall <julien@xen.org>
+Message-ID: <1123ff61-4e82-26dc-6727-d6a877f3723d@xen.org>
+Date: Thu, 16 Apr 2020 09:33:56 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <72b35bfa-e795-72c0-d925-924ca18711df@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200415173911.13286-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -109,87 +76,54 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>,
- Julien Grall <jgrall@amazon.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Julien Grall <jgrall@amazon.com>, Jan Beulich <JBeulich@suse.com>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 16/04/2020 08:19, Jan Beulich wrote:
-> On 15.04.2020 19:39, Andrew Cooper wrote:
->> The PERFC_INCR() macro uses current->processor, but current is not valid
->> during early boot.  This causes the following crash to occur if
->> e.g. rdmsr_safe() has to recover from a #GP fault.
->>
->>   (XEN) Early fatal page fault at e008:ffff82d0803b1a39 (cr2=0000000000000004, ec=0000)
->>   (XEN) ----[ Xen-4.14-unstable  x86_64  debug=y   Not tainted ]----
->>   (XEN) CPU:    0
->>   (XEN) RIP:    e008:[<ffff82d0803b1a39>] x86_64/entry.S#handle_exception_saved+0x64/0xb8
->>   ...
->>   (XEN) Xen call trace:
->>   (XEN)    [<ffff82d0803b1a39>] R x86_64/entry.S#handle_exception_saved+0x64/0xb8
->>   (XEN)    [<ffff82d0806394fe>] F __start_xen+0x2cd/0x2980
->>   (XEN)    [<ffff82d0802000ec>] F __high_start+0x4c/0x4e
->>
->> Furthermore, the PERFC_INCR() macro is wildly inefficient.  There has been a
->> single caller for many releases now, so inline it and delete the macro
->> completely.
->>
->> For the assembly, move entry_vector from %eax into %ecx.  There is no encoding
->> benefit for movzbl, and it frees up %eax to be used inside the
->> CONFIG_PERF_COUNTERS block where there is an encoding benefit.
-> I don't mind the change in register use, but I'd certainly like to
-> understand the supposed "encoding benefit". Afaics ...
->
->> --- a/xen/arch/x86/x86_64/entry.S
->> +++ b/xen/arch/x86/x86_64/entry.S
->> @@ -677,10 +677,14 @@ handle_exception_saved:
->>  #endif /* CONFIG_PV */
->>          sti
->>  1:      movq  %rsp,%rdi
->> -        movzbl UREGS_entry_vector(%rsp),%eax
->> +        movzbl UREGS_entry_vector(%rsp), %ecx
->>          leaq  exception_table(%rip),%rdx
->> -        PERFC_INCR(exceptions, %rax, %rbx)
->> -        mov   (%rdx, %rax, 8), %rdx
->> +#ifdef CONFIG_PERF_COUNTERS
->> +        lea   per_cpu__perfcounters(%rip), %rax
->> +        add   STACK_CPUINFO_FIELD(per_cpu_offset)(%r14), %rax
->> +        incl  ASM_PERFC_exceptions * 4(%rax, %rcx, 4)
->> +#endif
-> ... all insns inside the block use a ModR/M byte, and there's also
-> no special SIB encoding form used (i.e. one where the disp size
-> would increase because of register choice).
+Hi Andrew,
 
-Hmm - I suppose it is stale, written for an older version of the logic
-before I spotted a further optimisation.
+On 15/04/2020 18:39, Andrew Cooper wrote:
+> The PERFC_INCR() macro uses current->processor, but current is not valid
+> during early boot.  This causes the following crash to occur if
+> e.g. rdmsr_safe() has to recover from a #GP fault.
+> 
+>    (XEN) Early fatal page fault at e008:ffff82d0803b1a39 (cr2=0000000000000004, ec=0000)
+>    (XEN) ----[ Xen-4.14-unstable  x86_64  debug=y   Not tainted ]----
+>    (XEN) CPU:    0
+>    (XEN) RIP:    e008:[<ffff82d0803b1a39>] x86_64/entry.S#handle_exception_saved+0x64/0xb8
+>    ...
+>    (XEN) Xen call trace:
+>    (XEN)    [<ffff82d0803b1a39>] R x86_64/entry.S#handle_exception_saved+0x64/0xb8
+>    (XEN)    [<ffff82d0806394fe>] F __start_xen+0x2cd/0x2980
+>    (XEN)    [<ffff82d0802000ec>] F __high_start+0x4c/0x4e
+> 
+> Furthermore, the PERFC_INCR() macro is wildly inefficient.  There has been a
+> single caller for many releases now, so inline it and delete the macro
+> completely.
+> 
+> For the assembly, move entry_vector from %eax into %ecx.  There is no encoding
+> benefit for movzbl, and it frees up %eax to be used inside the
+> CONFIG_PERF_COUNTERS block where there is an encoding benefit.
+> 
+> There is no need to reference current at all.  What is actually needed is the
+> per_cpu_offset which can be obtained directly from the top-of-stack block.
+> This simplifies the counter handling to 3 instructions and no spilling to the
+> stack at all.
+> 
+> The same breakage from above is now handled properly:
+> 
+>    (XEN) traps.c:1591: GPF (0000): ffff82d0806394fe [__start_xen+0x2cd/0x2980] -> ffff82d0803b3bfb
+> 
+> Reported-by: Julien Grall <jgrall@amazon.com>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-> With this clarified, i.e. possibly the commit message updated
-> accordingly, and possibly even code churn reduced by undoing the
-> change of register used,
+I can confirm the crash I have seen has now disappeared.
 
-Leaving %eax as was, and using %rdi for the single temporary looks like:
+Tested-by: Julien Grall <jgrall@amazon.com>
 
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 997c481ecb..1984bb7948 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -679,7 +679,11 @@ handle_exception_saved:
- 1:      movq  %rsp,%rdi
-         movzbl UREGS_entry_vector(%rsp),%eax
-         leaq  exception_table(%rip),%rdx
--        PERFC_INCR(exceptions, %rax, %rbx)
-+#ifdef CONFIG_PERF_COUNTERS
-+        lea   per_cpu__perfcounters(%rip), %rdi
-+        add   STACK_CPUINFO_FIELD(per_cpu_offset)(%r14), %rdi
-+        incl  ASM_PERFC_exceptions * 4(%rdi, %rax, 4)
-+#endif
-         mov   (%rdx, %rax, 8), %rdx
-         INDIRECT_CALL %rdx
-         mov   %r15, STACK_CPUINFO_FIELD(xen_cr3)(%r14)
+Cheers,
 
-
-If you're happy with that?
-
-~Andrew
+-- 
+Julien Grall
 
