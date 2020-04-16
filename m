@@ -2,63 +2,62 @@ Return-Path: <SRS0=l70B=6A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F39F6C2BB85
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 14:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D61AC2BB85
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 14:18:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C211F21927
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 14:00:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 1276F2063A
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 14:18:31 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="S9J2UKpZ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C211F21927
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="LbdF3kOI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1276F2063A
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jP54A-0005AV-49; Thu, 16 Apr 2020 14:00:30 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jP5LH-0006SG-Hb; Thu, 16 Apr 2020 14:18:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=8YfG=6A=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jP548-0005AC-7I
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 14:00:28 +0000
-X-Inumbo-ID: 9e2f1b16-7fea-11ea-8b99-12813bfff9fa
+ <SRS0=IxKm=6A=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jP5LG-0006SB-MF
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 14:18:10 +0000
+X-Inumbo-ID: 18d10a76-7fed-11ea-b4f4-bc764e2007e4
 Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9e2f1b16-7fea-11ea-8b99-12813bfff9fa;
- Thu, 16 Apr 2020 14:00:24 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 18d10a76-7fed-11ea-b4f4-bc764e2007e4;
+ Thu, 16 Apr 2020 14:18:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587045625;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=9fcaOhytlvsoCQdOFtbwDrty6x8vBezRR7Mhmxygeew=;
- b=S9J2UKpZf9sABINeYrs8VmK/RwTORzVMyc5M2iP3PtrxriKKK4p2xpqC
- ORM9xc5LmZ/0MW/GACOsHAcKUp0cyHWPNdgmj9cMNrJ9rYXAMZsQPV1o4
- bQl05izC2r6rzKv7jvStYom9XQEGFte2RGNB8J2vTXykKcJVg56tMhJHF Q=;
+ d=citrix.com; s=securemail; t=1587046690;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=Kh3BmGMTXO9P5LsWmgax8Nkxw/HZZ74qwzH8KOZvnEM=;
+ b=LbdF3kOI2VwG1mhyutV0gG4jpTAWFt80PP0W4/N8nYoK7Y6nKWNWITXX
+ gg7vup+4FxGPhp8EBzMY+FlH59NO9JcSb/OVGeFP1oPX0Y1UAi5u5SA4T
+ Bgkumzwu0w+38c5X8DVJaXY+KCx/cwF3XNWNA5mOQ5E52nxbncuxj4gds k=;
 Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
 Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+ anthony.perard@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible
 Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
+ anthony.perard@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
  x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
  ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
@@ -69,31 +68,32 @@ Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
  client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
+ envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: erGlxoMUDHD0u/d94h3GqsgyDHpES9jP0yYfjhBYob3iqAQHtVggwRBTV1Ow6YwtBwcCMRqvyW
- yUE47HPH+GHkwl6d2lWzVSMW+TDxNopJJALJV/GKGghv8eR29wPrXqpYyZwLqUM8BPax/THBz/
- pPgbG35NOvd+JxlybFBFQ7LbrjOYgclbfuGrCnqoWh+IdOMqgy9WU6HF/nGyUGnRBAPL4TtniY
- Vb33Wa8TeLHW9AEYU6+d/UW3J2+WvyzU+XvkchXW0zulvJOSK81NA/BSoL1baRZoAD64qKzY5z
- paQ=
+IronPort-SDR: igkCrR43vR+I/WSxy3qHtrkK8+NajL66CnFaQAXwphlv+exSsRge3ssGaJJ2CotAZ96DATBjsV
+ mxDeGLo06KmCst1NyKZoeTaYlaw9eBwqZysJJ36WidO5+v1MOnDRsueiPleOIG/R6g3BmhiuDl
+ 7IcMccig8Mgp8gnCzjqvAW7BG0uWt9JFBg8RYQjbh+fEAKQUvFwEb0qt6pKKYOKB3eMSxtMZon
+ qjb39SE77g/3nZROsAYE4JpJcrYfHwAfe/OzxZKjofmA4ayfJRl4mELTOZ+S0aQUxgJIDHNJyG
+ MBE=
 X-SBRS: 2.7
-X-MesageID: 15766298
+X-MesageID: 15767899
 X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,391,1580792400"; d="scan'208";a="15766298"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v10 2/3] x86/tlb: allow disabling the TLB clock
-Date: Thu, 16 Apr 2020 15:59:08 +0200
-Message-ID: <20200416135909.16155-3-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.0
-In-Reply-To: <20200416135909.16155-1-roger.pau@citrix.com>
-References: <20200416135909.16155-1-roger.pau@citrix.com>
+X-IronPort-AV: E=Sophos;i="5.72,391,1580792400"; d="scan'208";a="15767899"
+Date: Thu, 16 Apr 2020 15:17:52 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [XEN PATCH v4 18/18] build, include: rework compat-build-header.py
+Message-ID: <20200416141752.GK4088@perard.uk.xensource.com>
+References: <20200331103102.1105674-1-anthony.perard@citrix.com>
+ <20200331103102.1105674-19-anthony.perard@citrix.com>
+ <7bd39b51-5dee-40f5-1524-f36aad6b7d06@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <7bd39b51-5dee-40f5-1524-f36aad6b7d06@suse.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -104,146 +104,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
+ Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
+ xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The TLB clock is helpful when running Xen on bare metal because when
-doing a TLB flush each CPU is IPI'ed and can keep a timestamp of the
-last flush.
+On Wed, Apr 08, 2020 at 03:56:02PM +0200, Jan Beulich wrote:
+> On 31.03.2020 12:31, Anthony PERARD wrote:
+> > Replace a mix of shell script and python script by all python script.
+> > 
+> > Remove the unnecessary "grep -v '^# [0-9]'". It is to hide the
+> > linemarkers generated by the preprocessor. But adding -P inhibit there
+> > generation, thus the grep isn't needed anymore.
+> > 
+> > gcc -E -P and clang -E -P have different behavior. While both don't
+> > generates linemarkers, gcc also removes all empty lines while clang
+> > keep them all. We don't need those empty lines, so we don't generates
+> > them in the final compat/%.h headers. (This replace `uniq` which was
+> > only de-duplicating empty line.)
+> > 
+> > The only changes in the final generated headers it that they don't
+> > have empty lines anymore.
+> 
+> Making them harder to read? While typically no-one needs to look at
+> their contents, in case of problems it helps if generated files are
+> half way accessible to a human as well.
 
-This is not the case however when Xen is running virtualized, and the
-underlying hypervisor provides mechanism to assist in performing TLB
-flushes: Xen itself for example offers a HVMOP_flush_tlbs hypercall in
-order to perform a TLB flush without having to IPI each CPU. When
-using such mechanisms it's no longer possible to keep a timestamp of
-the flushes on each CPU, as they are performed by the underlying
-hypervisor.
+I do think they are still readable. Those empty lines don't add much.
+There are so many of them that a `uniq` is needed...
 
-Offer a boolean in order to signal Xen that the timestamped TLB
-shouldn't be used. This avoids keeping the timestamps of the flushes,
-and also forces NEED_FLUSH to always return true.
+For example, with dm_op.h, we have this:
 
-No functional change intended, as this change doesn't introduce any
-user that disables the timestamped TLB.
+<<<<<<< before
+#pragma pack(4)
+typedef uint16_t ioservid_compat_t;
+struct compat_dm_op_create_ioreq_server {
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Wei Liu <wl@xen.org>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
- xen/arch/x86/flushtlb.c        | 19 +++++++++++++------
- xen/include/asm-x86/flushtlb.h | 17 ++++++++++++++++-
- 2 files changed, 29 insertions(+), 7 deletions(-)
+    uint8_t handle_bufioreq;
+    uint8_t pad[3];
 
-diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
-index 7d261aef32..e1b1e98c23 100644
---- a/xen/arch/x86/flushtlb.c
-+++ b/xen/arch/x86/flushtlb.c
-@@ -33,6 +33,9 @@
- u32 tlbflush_clock = 1U;
- DEFINE_PER_CPU(u32, tlbflush_time);
- 
-+/* Signals whether the TLB flush clock is in use. */
-+bool __read_mostly tlb_clk_enabled = true;
-+
- /*
-  * pre_flush(): Increment the virtual TLB-flush clock. Returns new clock value.
-  * 
-@@ -83,12 +86,13 @@ static void post_flush(u32 t)
- static void do_tlb_flush(void)
- {
-     unsigned long flags, cr4;
--    u32 t;
-+    u32 t = 0;
- 
-     /* This non-reentrant function is sometimes called in interrupt context. */
-     local_irq_save(flags);
- 
--    t = pre_flush();
-+    if ( tlb_clk_enabled )
-+        t = pre_flush();
- 
-     if ( use_invpcid )
-         invpcid_flush_all();
-@@ -100,7 +104,8 @@ static void do_tlb_flush(void)
-     else
-         write_cr3(read_cr3());
- 
--    post_flush(t);
-+    if ( tlb_clk_enabled )
-+        post_flush(t);
- 
-     local_irq_restore(flags);
- }
-@@ -108,7 +113,7 @@ static void do_tlb_flush(void)
- void switch_cr3_cr4(unsigned long cr3, unsigned long cr4)
- {
-     unsigned long flags, old_cr4;
--    u32 t;
-+    u32 t = 0;
- 
-     /* Throughout this function we make this assumption: */
-     ASSERT(!(cr4 & X86_CR4_PCIDE) || !(cr4 & X86_CR4_PGE));
-@@ -116,7 +121,8 @@ void switch_cr3_cr4(unsigned long cr3, unsigned long cr4)
-     /* This non-reentrant function is sometimes called in interrupt context. */
-     local_irq_save(flags);
- 
--    t = pre_flush();
-+    if ( tlb_clk_enabled )
-+        t = pre_flush();
-     hvm_flush_guest_tlbs();
- 
-     old_cr4 = read_cr4();
-@@ -169,7 +175,8 @@ void switch_cr3_cr4(unsigned long cr3, unsigned long cr4)
-     if ( cr4 & X86_CR4_PCIDE )
-         invpcid_flush_all_nonglobals();
- 
--    post_flush(t);
-+    if ( tlb_clk_enabled )
-+        post_flush(t);
- 
-     local_irq_restore(flags);
- }
-diff --git a/xen/include/asm-x86/flushtlb.h b/xen/include/asm-x86/flushtlb.h
-index 50df468c16..d5ca4bad57 100644
---- a/xen/include/asm-x86/flushtlb.h
-+++ b/xen/include/asm-x86/flushtlb.h
-@@ -21,10 +21,21 @@ extern u32 tlbflush_clock;
- /* Time at which each CPU's TLB was last flushed. */
- DECLARE_PER_CPU(u32, tlbflush_time);
- 
--#define tlbflush_current_time() tlbflush_clock
-+/* TLB clock is in use. */
-+extern bool tlb_clk_enabled;
-+
-+static inline uint32_t tlbflush_current_time(void)
-+{
-+    /* Returning 0 from tlbflush_current_time will always force a flush. */
-+    return tlb_clk_enabled ? tlbflush_clock : 0;
-+}
- 
- static inline void page_set_tlbflush_timestamp(struct page_info *page)
- {
-+    /* Avoid the write if the TLB clock is disabled. */
-+    if ( !tlb_clk_enabled )
-+        return;
-+
-     /*
-      * Prevent storing a stale time stamp, which could happen if an update
-      * to tlbflush_clock plus a subsequent flush IPI happen between the
-@@ -67,6 +78,10 @@ static inline void tlbflush_filter(cpumask_t *mask, uint32_t page_timestamp)
- {
-     unsigned int cpu;
- 
-+    /* Short-circuit: there's no need to iterate if the clock is disabled. */
-+    if ( !tlb_clk_enabled )
-+        return;
-+
-     for_each_cpu ( cpu, mask )
-         if ( !NEED_FLUSH(per_cpu(tlbflush_time, cpu), page_timestamp) )
-             __cpumask_clear_cpu(cpu, mask);
+    ioservid_compat_t id;
+};
+struct compat_dm_op_get_ioreq_server_info {
+
+    ioservid_compat_t id;
+
+    uint16_t flags;
+
+    evtchn_port_compat_t bufioreq_port;
+
+    uint64_t ioreq_gfn;
+
+    uint64_t bufioreq_gfn;
+};
+struct compat_dm_op_ioreq_server_range {
+
+    ioservid_compat_t id;
+    uint16_t pad;
+
+    uint32_t type;
+
+    uint64_t start, end;
+};
+=======
+#pragma pack(4)
+typedef uint16_t ioservid_compat_t;
+struct compat_dm_op_create_ioreq_server {
+    uint8_t handle_bufioreq;
+    uint8_t pad[3];
+    ioservid_compat_t id;
+};
+struct compat_dm_op_get_ioreq_server_info {
+    ioservid_compat_t id;
+    uint16_t flags;
+    evtchn_port_compat_t bufioreq_port;
+    uint64_t ioreq_gfn;
+    uint64_t bufioreq_gfn;
+};
+struct compat_dm_op_ioreq_server_range {
+    ioservid_compat_t id;
+    uint16_t pad;
+    uint32_t type;
+    uint64_t start, end;
+};
+>>>>>>> after
+
+Thanks,
+
 -- 
-2.26.0
-
+Anthony PERARD
 
