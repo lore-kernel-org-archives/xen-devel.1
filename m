@@ -6,41 +6,41 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17851C2BB55
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 12:27:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 99664C2BB55
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 12:28:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E4B0F206B9
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 12:27:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E4B0F206B9
+	by mail.kernel.org (Postfix) with ESMTPS id 7571D20786
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 12:28:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7571D20786
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jP3cF-0003Wm-MM; Thu, 16 Apr 2020 12:27:35 +0000
+	id 1jP3cc-0003ds-3v; Thu, 16 Apr 2020 12:27:58 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=fNsn=6A=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jP3cE-0003WU-Gy
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 12:27:34 +0000
-X-Inumbo-ID: a51e214b-7fdd-11ea-8b81-12813bfff9fa
+ id 1jP3cb-0003c0-0W
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 12:27:57 +0000
+X-Inumbo-ID: b036c136-7fdd-11ea-8b81-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id a51e214b-7fdd-11ea-8b81-12813bfff9fa;
- Thu, 16 Apr 2020 12:27:33 +0000 (UTC)
+ id b036c136-7fdd-11ea-8b81-12813bfff9fa;
+ Thu, 16 Apr 2020 12:27:51 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 2D0CBAC6D;
- Thu, 16 Apr 2020 12:27:32 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 003A4AC7B;
+ Thu, 16 Apr 2020 12:27:49 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: minios-devel@lists.xenproject.org,
 	xen-devel@lists.xenproject.org
-Subject: [PATCH] mini-os: use -m elf_i386 for final linking
-Date: Thu, 16 Apr 2020 14:27:31 +0200
-Message-Id: <20200416122731.22713-1-jgross@suse.com>
+Subject: [PATCH] mini-os: provide binary without debug information
+Date: Thu, 16 Apr 2020 14:27:48 +0200
+Message-Id: <20200416122748.22798-1-jgross@suse.com>
 X-Mailer: git-send-email 2.16.4
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -56,26 +56,30 @@ Cc: Juergen Gross <jgross@suse.com>, samuel.thibault@ens-lyon.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Using the standard -m elf_x86_64 for 64-bit mini-os results in the
-first section (.text) to start only at offset 2MB in the binary file.
-
-Using -m elf_i386 avoids that problem without any visible disadvantage.
+Provide a mini-os binary stripped from debug information in order to
+have a smaller resulting kernel file. The binary with debug
+information is kept with the suffix "-debug".
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- arch/x86/arch.mk | 2 ++
- 1 file changed, 2 insertions(+)
+ Makefile | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/arch.mk b/arch/x86/arch.mk
-index c87885f..00028a0 100644
---- a/arch/x86/arch.mk
-+++ b/arch/x86/arch.mk
-@@ -26,3 +26,5 @@ ifeq ($(CONFIG_PARAVIRT),n)
- ARCH_LDFLAGS_FINAL := --oformat=elf32-i386
- ARCH_AS_DEPS += x86_hvm.S
- endif
-+
-+ARCH_LDFLAGS_FINAL += -m elf_i386
+diff --git a/Makefile b/Makefile
+index 6a05de6..be640cd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -167,7 +167,9 @@ $(OBJ_DIR)/arch/x86/minios-x86%.lds:  arch/x86/minios-x86.lds.S
+ $(OBJ_DIR)/$(TARGET): $(OBJS) $(APP_O) arch_lib $(OBJ_DIR)/$(TARGET_ARCH_DIR)/minios-$(MINIOS_TARGET_ARCH).lds
+ 	$(LD) -r $(LDFLAGS) $(HEAD_OBJ) $(APP_O) $(OBJS) $(LDARCHLIB) $(LDLIBS) -o $@.o
+ 	$(OBJCOPY) -w -G $(GLOBAL_PREFIX)* -G _start $@.o $@.o
+-	$(LD) $(LDFLAGS) $(LDFLAGS_FINAL) $@.o $(EXTRA_OBJS) -o $@
++	$(LD) $(LDFLAGS) $(LDFLAGS_FINAL) $@.o $(EXTRA_OBJS) -o $@-debug
++	strip -s $@-debug -o $@
++	gzip -n -f -9 -c $@-debug >$@-debug.gz
+ 	gzip -n -f -9 -c $@ >$@.gz
+ 
+ .PHONY: config
 -- 
 2.16.4
 
