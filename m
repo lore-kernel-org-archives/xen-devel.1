@@ -2,70 +2,74 @@ Return-Path: <SRS0=l70B=6A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.4 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8ED2EC2BB85
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:42:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 29CC9C2D0EF
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:42:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6018B21BE5
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:42:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F381921BE5
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 09:42:33 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="sEft3WfA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6018B21BE5
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="P8rwHFgI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F381921BE5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jP12A-0005WZ-MQ; Thu, 16 Apr 2020 09:42:10 +0000
+	id 1jP12P-0005bV-1K; Thu, 16 Apr 2020 09:42:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=Xq2g=6A=amazon.de=prvs=368a07d89=wipawel@srs-us1.protection.inumbo.net>)
- id 1jP129-0005WF-By
- for xen-devel@lists.xen.org; Thu, 16 Apr 2020 09:42:09 +0000
-X-Inumbo-ID: 8a4fa7d8-7fc6-11ea-9e09-bc764e2007e4
-Received: from smtp-fw-2101.amazon.com (unknown [72.21.196.25])
+ id 1jP12N-0005b4-Nc
+ for xen-devel@lists.xen.org; Thu, 16 Apr 2020 09:42:23 +0000
+X-Inumbo-ID: 92e334f0-7fc6-11ea-b4f4-bc764e2007e4
+Received: from smtp-fw-6001.amazon.com (unknown [52.95.48.154])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 8a4fa7d8-7fc6-11ea-9e09-bc764e2007e4;
- Thu, 16 Apr 2020 09:42:08 +0000 (UTC)
+ id 92e334f0-7fc6-11ea-b4f4-bc764e2007e4;
+ Thu, 16 Apr 2020 09:42:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
- t=1587030130; x=1618566130;
- h=from:to:cc:subject:date:message-id:mime-version;
- bh=N1PTILdmBfZn0k0Ab+em8z55iCcBPHLG1MBSARH7dyg=;
- b=sEft3WfAQREuuD+g9jBzjrYb/4rysG/zSJOhqQfvuaXkaeJO49yRnX32
- NBnbbgMWGR6vPJCM3wlsvoQCXgp1fiYhhY5zUmhVQp34J8EF0rVEaeuv3
- 7oTH1SnQ3gpGWot8wQEzhNVQBEjPHPVucU0WqFqfXDMwmsU1/D36TUgEb 4=;
-IronPort-SDR: C//d8M9DnvYSECCCxrZ9Up9jtF1y54t7U8++eWZJ9svcIKT+TotKIfB1wKTibmdkvwkB35BF+R
- JOsW0slzsbSw==
-X-IronPort-AV: E=Sophos;i="5.72,390,1580774400"; d="scan'208";a="26069913"
-Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO
- email-inbound-relay-2b-4e24fd92.us-west-2.amazon.com) ([10.43.8.2])
- by smtp-border-fw-out-2101.iad2.amazon.com with ESMTP;
- 16 Apr 2020 09:41:56 +0000
+ t=1587030143; x=1618566143;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=nBLsA1bQLNUw4cSYjqTUKz4JCf9EJCqVCkOxhJf9Dao=;
+ b=P8rwHFgI9voH3xn9bkvFzTgoq3N7neS5PrOa578RUxO8bwQYjULs5mEB
+ BC6+cc0QCqqKcc0M207mDxY+865owtaJv8thOZC7SJWjg5T6hK3taHTpb
+ Jd04KeLaRGI5bmJlQZkY9kdNeB2iAeA664Pc9DKskoJ8N6PGPgdzHjTEN Y=;
+IronPort-SDR: 4zeGHXNkwwvCfr19HUt8zMUCSA+sE035/1CEAJo8lWjqG6csKOEBfXySD8LDoRI47c78qCl2XV
+ GJ6xWD94TUFA==
+X-IronPort-AV: E=Sophos;i="5.72,390,1580774400"; d="scan'208";a="27162069"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-2c-397e131e.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-out-6001.iad6.amazon.com with ESMTP;
+ 16 Apr 2020 09:42:22 +0000
 Received: from EX13MTAUEA002.ant.amazon.com
- (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
- by email-inbound-relay-2b-4e24fd92.us-west-2.amazon.com (Postfix) with ESMTPS
- id 28D05A23D6; Thu, 16 Apr 2020 09:41:55 +0000 (UTC)
-Received: from EX13D05EUB001.ant.amazon.com (10.43.166.87) by
+ (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+ by email-inbound-relay-2c-397e131e.us-west-2.amazon.com (Postfix) with ESMTPS
+ id 9F2B2A2E2B; Thu, 16 Apr 2020 09:42:21 +0000 (UTC)
+Received: from EX13D02EUB003.ant.amazon.com (10.43.166.172) by
  EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 16 Apr 2020 09:41:54 +0000
+ id 15.0.1497.2; Thu, 16 Apr 2020 09:42:02 +0000
 Received: from EX13MTAUEA001.ant.amazon.com (10.43.61.82) by
- EX13D05EUB001.ant.amazon.com (10.43.166.87) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 16 Apr 2020 09:41:53 +0000
+ EX13D02EUB003.ant.amazon.com (10.43.166.172) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 16 Apr 2020 09:42:01 +0000
 Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
  by mail-relay.amazon.com (10.43.61.243) with Microsoft SMTP Server id
- 15.0.1497.2 via Frontend Transport; Thu, 16 Apr 2020 09:41:52 +0000
+ 15.0.1497.2 via Frontend Transport; Thu, 16 Apr 2020 09:41:59 +0000
 From: Pawel Wieczorkiewicz <wipawel@amazon.de>
 To: <xen-devel@lists.xen.org>
-Subject: [XTF 0/4] Small fixes and improvements
-Date: Thu, 16 Apr 2020 09:41:37 +0000
-Message-ID: <20200416094141.65120-1-wipawel@amazon.de>
+Subject: [XTF 4/4] setup: Setup PV console for HVM guests on xen >4.2
+Date: Thu, 16 Apr 2020 09:41:41 +0000
+Message-ID: <20200416094141.65120-5-wipawel@amazon.de>
 X-Mailer: git-send-email 2.16.6
+In-Reply-To: <20200416094141.65120-1-wipawel@amazon.de>
+References: <20200416094141.65120-1-wipawel@amazon.de>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: Bulk
@@ -78,32 +82,102 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: julien@xen.org, paul@xen.org, semelpaul@gmail.com,
- andrew.cooper3@citrix.com, Pawel Wieczorkiewicz <wipawel@amazon.de>,
- nmanthey@amazon.de
+Cc: Paul Semel <phentex@amazon.de>, julien@xen.org, paul@xen.org,
+ semelpaul@gmail.com, andrew.cooper3@citrix.com,
+ Pawel Wieczorkiewicz <wipawel@amazon.de>, nmanthey@amazon.de
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is the first series of XTF patches I intend to send.
-It covers some relatively small fixes to handling of PV console
-by HVM guests, as well as adding serial consol support.
+From: Paul Semel <phentex@amazon.de>
 
-Paul Semel (2):
-  Enabled serial writing for hvm guests
-  setup: Setup PV console for HVM guests on xen >4.2
+Xen 4.2 requires a workaround that does not setup PV console
+for HVM guests. However, newer Xen versions do not have that
+limitation and should always have the PV console setup.
 
-Pawel Wieczorkiewicz (2):
-  lib: Add XEN_MAJOR() and XEN_MINOR() macros
-  lib: always append CR after LF in vsnprintf()
+In arch_setup() detects Xen version by issuing xen_version hypercall
+and optionally passes the version to main_xtf().
 
- arch/x86/setup.c        | 34 ++++++++++++++++++++++++++++++++--
- common/libc/vsnprintf.c | 10 ++++++++++
+Signed-off-by: Paul Semel <phentex@amazon.de>
+Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
+---
+ arch/x86/setup.c        | 20 ++++++++++++++++++--
  common/setup.c          |  6 +++++-
  include/xtf/framework.h |  2 +-
- include/xtf/lib.h       |  3 +++
- tests/xsa-213/main.c    |  4 ++--
- 6 files changed, 53 insertions(+), 6 deletions(-)
+ 3 files changed, 24 insertions(+), 4 deletions(-)
 
+diff --git a/arch/x86/setup.c b/arch/x86/setup.c
+index f6fa4df..e3f74e6 100644
+--- a/arch/x86/setup.c
++++ b/arch/x86/setup.c
+@@ -250,8 +250,10 @@ static void xen_console_write(const char *buf, size_t len)
+     hypercall_console_write(buf, len);
+ }
+ 
+-void arch_setup(void)
++void arch_setup(int *version)
+ {
++    int xen_version;
++
+     if ( IS_DEFINED(CONFIG_HVM) && !pvh_start_info )
+     {
+         register_console_callback(qemu_console_write);
+@@ -272,9 +274,23 @@ void arch_setup(void)
+ 
+     init_hypercalls();
+ 
+-    if ( !is_initdomain() )
++    xen_version = hypercall_xen_version(XENVER_version, NULL);
++    if ( version )
++        *version = xen_version;
++
++    /*
++     * The setup_pv_console function registers a writing function
++     * that makes hvm guests crash on Xen 4.2
++     */
++    if ( (!IS_DEFINED(CONFIG_HVM) ||
++         (XEN_MAJOR(xen_version) >= 4 && XEN_MINOR(xen_version) > 2)) &&
++         !is_initdomain() )
+     {
+         setup_pv_console();
++    }
++
++    if ( !is_initdomain() )
++    {
+         setup_xenbus();
+     }
+ 
+diff --git a/common/setup.c b/common/setup.c
+index 932fc09..1d3da15 100644
+--- a/common/setup.c
++++ b/common/setup.c
+@@ -19,9 +19,13 @@
+  */
+ void __noreturn xtf_main(void)
+ {
+-    arch_setup();
++    int xen_version;
++
++    arch_setup(&xen_version);
+ 
+     printk("--- Xen Test Framework ---\n");
++    printk("Found Xen: %d.%d\n", XEN_MAJOR(xen_version),
++           XEN_MINOR(xen_version));
+     printk("Environment: %s\n", environment_description);
+     printk("%s\n", test_title);
+ 
+diff --git a/include/xtf/framework.h b/include/xtf/framework.h
+index a71bf39..6664733 100644
+--- a/include/xtf/framework.h
++++ b/include/xtf/framework.h
+@@ -2,7 +2,7 @@
+ #define XTF_FRAMEWORK_H
+ 
+ /* To be implemented by each arch */
+-void arch_setup(void);
++void arch_setup(int *);
+ void test_setup(void);
+ 
+ /* Single line summary of execution environment. */
 -- 
 2.16.6
 
