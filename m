@@ -2,51 +2,68 @@ Return-Path: <SRS0=l70B=6A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-7.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2403BC38A29
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDAB2C2BB85
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:59:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 02D8C214D8
-	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:58:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 02D8C214D8
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id A7D45206B9
+	for <xen-devel@archiver.kernel.org>; Thu, 16 Apr 2020 08:59:52 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ooXQYAgs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7D45206B9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jP0LM-00011q-G6; Thu, 16 Apr 2020 08:57:56 +0000
+	id 1jP0N1-00018P-UI; Thu, 16 Apr 2020 08:59:39 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=fNsn=6A=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jP0LL-00011l-CR
- for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 08:57:55 +0000
-X-Inumbo-ID: 5ba42716-7fc0-11ea-8b69-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=FuWY=6A=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jP0N0-00018G-Iv
+ for xen-devel@lists.xenproject.org; Thu, 16 Apr 2020 08:59:38 +0000
+X-Inumbo-ID: 999ab0a8-7fc0-11ea-8b69-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5ba42716-7fc0-11ea-8b69-12813bfff9fa;
- Thu, 16 Apr 2020 08:57:54 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 6ED2AAD60;
- Thu, 16 Apr 2020 08:57:52 +0000 (UTC)
-Subject: Re: [PATCH] sched: print information about scheduler granularity
-To: Sergey Dyasli <sergey.dyasli@citrix.com>, xen-devel@lists.xenproject.org
-References: <20200416083341.21122-1-sergey.dyasli@citrix.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <996ed66e-3782-5187-a804-9291741a2241@suse.com>
-Date: Thu, 16 Apr 2020 10:57:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ id 999ab0a8-7fc0-11ea-8b69-12813bfff9fa;
+ Thu, 16 Apr 2020 08:59:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=/TqZOft4RGfERk+H5s4rfyuDHaBPVm0OwmJ0sXepDpA=; b=ooXQYAgs8csaj+aTRKxynXvhwj
+ xGF91o5po60r3VN4H4DVa1KuM1mUGN4Y4p2hgKxxsnaznZd7oRSzOhzEwAjW5Pc5IHRXKZ3Rnm8UG
+ ENy8vRVRjZzIe9/4NPDJ7hs9Fl9LjIbO4WJxCdkwuhZzKrXb3+aaMofFDjgxM4qle6GI=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jP0Ms-0008Ad-Bi; Thu, 16 Apr 2020 08:59:30 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jP0Ms-0000MV-2r; Thu, 16 Apr 2020 08:59:30 +0000
+Subject: Re: [PATCH 0/12] direct-map DomUs
+To: Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
+From: Julien Grall <julien@xen.org>
+Message-ID: <4a62c7c1-710f-21a9-a6cc-03aa290e18b1@xen.org>
+Date: Thu, 16 Apr 2020 09:59:27 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200416083341.21122-1-sergey.dyasli@citrix.com>
+In-Reply-To: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -58,29 +75,63 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Dario Faggioli <dfaggioli@suse.com>
+Cc: Artem_Mygaiev@epam.com, peng.fan@nxp.com, andrew.cooper3@citrix.com,
+ George.Dunlap@citrix.com, Bertrand.Marquis@arm.com, jbeulich@suse.com,
+ Volodymyr_Babchuk@epam.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 16.04.20 10:33, Sergey Dyasli wrote:
-> Currently it might be not obvious which scheduling mode is being used
-> by the scheduler. Alleviate this by printing additional information
-> about the selected granularity. Messages now look like these:
+
+
+On 15/04/2020 02:02, Stefano Stabellini wrote:
+> Hi all,
 > 
-> 1. boot
-> (XEN) [00089808f0ea7496] Using scheduler: SMP Credit Scheduler (credit) in core-scheduling mode
+> This series adds support for 1:1 mapping (guest physical == physical)
+> the memory of dom0less domUs. The memory ranges assigned to a domU can be
+> explicitly chosen by the user at boot time.
 > 
-> 2. xl debug-keys r
-> (XEN) [   45.914314] Scheduler: SMP Credit Scheduler (credit) in 2-way core-scheduling mode
+> This is desirable in cases where an IOMMU is not present in the system,
+> or it cannot be used. For instance, it might not be usable because it
+> doesn't cover a specific device, or because it doesn't have enough
+> bandwidth, or because it adds too much latency. In these cases, the user
+> should use a MPU to protect the memory in the system (e.g. the Xilinx
+> XMPU), configuring it with the chosen address ranges.
 > 
-> Signed-off-by: Sergey Dyasli <sergey.dyasli@citrix.com>
+> Cheers,
+> 
+> Stefano
+> 
+> 
+> 
+> The following changes since commit 7372466b21c3b6c96bb7a52754e432bac883a1e3:
+> 
+>    x86/mem_sharing: Fix build with !CONFIG_XSM (2020-04-10 15:20:10 +0100)
+> 
+> are available in the Git repository at:
+> 
+>    http://xenbits.xenproject.org/git-http/people/sstabellini/xen-unstable.git direct-map-1
+> 
+> for you to fetch changes up to 43503720ab6851a28a66fdd067f592d5354ae83a:
+> 
+>    xen/arm: call iomem_permit_access for passthrough devices (2020-04-14 17:42:21 -0700)
+> 
+> ----------------------------------------------------------------
+> Stefano Stabellini (12):
+>        xen: introduce xen_dom_flags
+>        xen/arm: introduce arch_xen_dom_flags and direct_map
+>        xen/arm: introduce 1:1 mapping for domUs
+>        xen: split alloc_heap_pages in two halves for reusability
+>        xen: introduce reserve_heap_pages
+>        xen/arm: reserve 1:1 memory for direct_map domUs
+>        xen/arm: new vgic: rename vgic_cpu/dist_base to c/dbase
+>        xen/arm: if is_domain_direct_mapped use native addresses for GICv2
+>        xen/arm: if is_domain_direct_mapped use native addresses for GICv3
+>        xen/arm: if is_domain_direct_mapped use native UART address for vPL011
 
-Hmm, do we need that?
+The 3 patches above cover addresses but not interrupts. Why?
 
-The xen commandline ins part of the boot messages and is contained
-in the "xl info" output.
+Cheers,
 
-
-Juergen
+-- 
+Julien Grall
 
