@@ -2,79 +2,57 @@ Return-Path: <SRS0=mRjJ=6B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.4 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BD33C2BB55
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D6FF9C2BB1D
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:09:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 00FA6221E9
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:43 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="Iq05JnjD"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00FA6221E9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
+	by mail.kernel.org (Postfix) with ESMTPS id ADF51206D5
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:09:58 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ADF51206D5
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=huawei.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPL51-0001s1-4f; Fri, 17 Apr 2020 07:06:27 +0000
+	id 1jPL8A-0002Ms-Mp; Fri, 17 Apr 2020 07:09:42 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=3sm3=6B=amazon.de=prvs=369b905e4=wipawel@srs-us1.protection.inumbo.net>)
- id 1jPL4z-0001rQ-Vh
- for xen-devel@lists.xen.org; Fri, 17 Apr 2020 07:06:25 +0000
-X-Inumbo-ID: f3b57adc-8079-11ea-b4f4-bc764e2007e4
-Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
+ <SRS0=VQOO=6B=huawei.com=yanaijie@srs-us1.protection.inumbo.net>)
+ id 1jPL89-0002Mn-NU
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 07:09:41 +0000
+X-Inumbo-ID: 653c4366-807a-11ea-b4f4-bc764e2007e4
+Received: from huawei.com (unknown [45.249.212.32])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f3b57adc-8079-11ea-b4f4-bc764e2007e4;
- Fri, 17 Apr 2020 07:06:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
- t=1587107186; x=1618643186;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version;
- bh=ohM0/A02cQtDxZuWCKtvIr8AsH7i7i/rmvBHra8TnjM=;
- b=Iq05JnjD0Ksap+A2CMLoa+a+aCdMiyQJ+jkfyeB/osDnSD/mhRK2v8F7
- lj1DVW6W239jFO/I1i+8YuBLqeuDoH5kTqn3qWR0aSL2YiPXJbgGvSSBz
- KtRx/0LMcJ0dGICKMoXZ0vlnHUHSgzcLuDhEbOgbLk5labBs50RpMQhnW Q=;
-IronPort-SDR: /gCX9Bs9KaV8s7+165BhnxqcrciZ2hP71u0dos2O8eUjPUQxjrJmVL3fhlouF8tIIOa5de3rZq
- 8Ltkwv+SMVhg==
-X-IronPort-AV: E=Sophos;i="5.72,394,1580774400"; d="scan'208";a="25912318"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-2b-4ff6265a.us-west-2.amazon.com) ([10.43.8.6])
- by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
- 17 Apr 2020 07:06:14 +0000
-Received: from EX13MTAUEA002.ant.amazon.com
- (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
- by email-inbound-relay-2b-4ff6265a.us-west-2.amazon.com (Postfix) with ESMTPS
- id D57D3A2747; Fri, 17 Apr 2020 07:06:11 +0000 (UTC)
-Received: from EX13D05EUB003.ant.amazon.com (10.43.166.253) by
- EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 17 Apr 2020 07:05:51 +0000
-Received: from EX13MTAUEE002.ant.amazon.com (10.43.62.24) by
- EX13D05EUB003.ant.amazon.com (10.43.166.253) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 17 Apr 2020 07:05:50 +0000
-Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
- by mail-relay.amazon.com (10.43.62.224) with Microsoft SMTP Server id
- 15.0.1497.2 via Frontend Transport; Fri, 17 Apr 2020 07:05:48 +0000
-From: Pawel Wieczorkiewicz <wipawel@amazon.de>
-To: <xen-devel@lists.xen.org>
-Subject: [XTF 6/6] event_channels: Add EVTCHNOP_bind_vcpu hypercall support
-Date: Fri, 17 Apr 2020 07:05:28 +0000
-Message-ID: <20200417070528.48329-7-wipawel@amazon.de>
-X-Mailer: git-send-email 2.16.6
-In-Reply-To: <20200417070528.48329-1-wipawel@amazon.de>
-References: <20200417070528.48329-1-wipawel@amazon.de>
+ id 653c4366-807a-11ea-b4f4-bc764e2007e4;
+ Fri, 17 Apr 2020 07:09:37 +0000 (UTC)
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.58])
+ by Forcepoint Email with ESMTP id 28D6622F2F9E658195FE;
+ Fri, 17 Apr 2020 15:09:35 +0800 (CST)
+Received: from huawei.com (10.175.124.28) by DGGEMS404-HUB.china.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server id 14.3.487.0; Fri, 17 Apr 2020
+ 15:09:27 +0800
+From: Jason Yan <yanaijie@huawei.com>
+To: <konrad.wilk@oracle.com>, <bhelgaas@google.com>, <tglx@linutronix.de>,
+ <mingo@redhat.com>, <bp@alien8.de>, <x86@kernel.org>, <hpa@zytor.com>,
+ <xen-devel@lists.xenproject.org>, <linux-pci@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+Subject: [PATCH] xen/pci: make xen_msi_init() static
+Date: Fri, 17 Apr 2020 15:35:53 +0800
+Message-ID: <20200417073553.42873-1-yanaijie@huawei.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-Precedence: Bulk
+X-Originating-IP: [10.175.124.28]
+X-CFilter-Loop: Reflected
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
+Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -82,56 +60,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: julien@xen.org, paul@xen.org, semelpaul@gmail.com,
- andrew.cooper3@citrix.com, Pawel Wieczorkiewicz <wipawel@amazon.de>,
- nmanthey@amazon.de
+Cc: Hulk Robot <hulkci@huawei.com>, Jason Yan <yanaijie@huawei.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
+Fix the following sparse warning:
+
+arch/x86/pci/xen.c:426:13: warning: symbol 'xen_msi_init' was not
+declared. Should it be static?
+
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: Jason Yan <yanaijie@huawei.com>
 ---
- include/xen/event_channel.h | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/x86/pci/xen.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/xen/event_channel.h b/include/xen/event_channel.h
-index 62ee95a..6253b89 100644
---- a/include/xen/event_channel.h
-+++ b/include/xen/event_channel.h
-@@ -2,6 +2,7 @@
- #define XEN_PUBLIC_EVENT_CHANNEL_H
+diff --git a/arch/x86/pci/xen.c b/arch/x86/pci/xen.c
+index 91220cc25854..0d06f12ccd74 100644
+--- a/arch/x86/pci/xen.c
++++ b/arch/x86/pci/xen.c
+@@ -423,7 +423,7 @@ int __init pci_xen_init(void)
+ }
  
- #define EVTCHNOP_send             4
-+#define EVTCHNOP_bind_vcpu        8
- #define EVTCHNOP_init_control    11
- #define EVTCHNOP_expand_array    12
- 
-@@ -22,6 +23,12 @@ struct evtchn_expand_array {
-     uint64_t array_gfn;
- };
- 
-+struct evtchn_bind_vcpu {
-+    /* IN parameters. */
-+    evtchn_port_t port;
-+    uint32_t vcpu;
-+};
-+
- #endif /* XEN_PUBLIC_EVENT_CHANNEL_H */
- 
- /*
+ #ifdef CONFIG_PCI_MSI
+-void __init xen_msi_init(void)
++static void __init xen_msi_init(void)
+ {
+ 	if (!disable_apic) {
+ 		/*
 -- 
-2.16.6
-
-
-
-
-Amazon Development Center Germany GmbH
-Krausenstr. 38
-10117 Berlin
-Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-Sitz: Berlin
-Ust-ID: DE 289 237 879
-
-
+2.21.1
 
 
