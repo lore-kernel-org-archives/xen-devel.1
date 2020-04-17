@@ -7,67 +7,66 @@ X-Spam-Status: No, score=-8.4 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
 	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DEA7C2BB85
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BD33C2BB55
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 61D23221F4
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:29 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 00FA6221E9
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="jdNkq8/P"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 61D23221F4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="Iq05JnjD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00FA6221E9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPL4o-0001kI-AL; Fri, 17 Apr 2020 07:06:14 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jPL51-0001s1-4f; Fri, 17 Apr 2020 07:06:27 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=3sm3=6B=amazon.de=prvs=369b905e4=wipawel@srs-us1.protection.inumbo.net>)
- id 1jPL4n-0001k1-Lv
- for xen-devel@lists.xen.org; Fri, 17 Apr 2020 07:06:13 +0000
-X-Inumbo-ID: ec349702-8079-11ea-8c80-12813bfff9fa
-Received: from smtp-fw-6001.amazon.com (unknown [52.95.48.154])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ec349702-8079-11ea-8c80-12813bfff9fa;
- Fri, 17 Apr 2020 07:06:13 +0000 (UTC)
+ id 1jPL4z-0001rQ-Vh
+ for xen-devel@lists.xen.org; Fri, 17 Apr 2020 07:06:25 +0000
+X-Inumbo-ID: f3b57adc-8079-11ea-b4f4-bc764e2007e4
+Received: from smtp-fw-6002.amazon.com (unknown [52.95.49.90])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f3b57adc-8079-11ea-b4f4-bc764e2007e4;
+ Fri, 17 Apr 2020 07:06:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
- t=1587107173; x=1618643173;
+ t=1587107186; x=1618643186;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=7z65Bh4Xe0Ehypmwl+K1UUIrCedT+0ZwsHnvKnpUKuo=;
- b=jdNkq8/P4tIwHc5HqNoq+VfI1uWhFxRffAs6Ba7AhvzPK1ytQe+yBWgi
- ICbexPFXPs9z3GE8NnLehUerGuXb+G4el+d8/sPIkexqyJPm+VnAZBUAZ
- +pXl2V2wcaEZ63EgbJEgrKhNvZjPo71nPyFvDEGDaCP432F6wsw5IQ22X I=;
-IronPort-SDR: ipOWzI3Pz3DD/dajzMiIsbaMbBaQAyA9/mhsuH+7SPxo01uOIPjsRIZkiZbCQteofQXlvabn86
- jdhLw+mSKaPw==
-X-IronPort-AV: E=Sophos;i="5.72,394,1580774400"; d="scan'208";a="27348926"
+ bh=ohM0/A02cQtDxZuWCKtvIr8AsH7i7i/rmvBHra8TnjM=;
+ b=Iq05JnjD0Ksap+A2CMLoa+a+aCdMiyQJ+jkfyeB/osDnSD/mhRK2v8F7
+ lj1DVW6W239jFO/I1i+8YuBLqeuDoH5kTqn3qWR0aSL2YiPXJbgGvSSBz
+ KtRx/0LMcJ0dGICKMoXZ0vlnHUHSgzcLuDhEbOgbLk5labBs50RpMQhnW Q=;
+IronPort-SDR: /gCX9Bs9KaV8s7+165BhnxqcrciZ2hP71u0dos2O8eUjPUQxjrJmVL3fhlouF8tIIOa5de3rZq
+ 8Ltkwv+SMVhg==
+X-IronPort-AV: E=Sophos;i="5.72,394,1580774400"; d="scan'208";a="25912318"
 Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-2b-baacba05.us-west-2.amazon.com) ([10.43.8.6])
- by smtp-border-fw-out-6001.iad6.amazon.com with ESMTP;
- 17 Apr 2020 07:06:13 +0000
+ email-inbound-relay-2b-4ff6265a.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP;
+ 17 Apr 2020 07:06:14 +0000
 Received: from EX13MTAUEA002.ant.amazon.com
- (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
- by email-inbound-relay-2b-baacba05.us-west-2.amazon.com (Postfix) with ESMTPS
- id B58B1A056D; Fri, 17 Apr 2020 07:06:11 +0000 (UTC)
-Received: from EX13D02EUC004.ant.amazon.com (10.43.164.117) by
+ (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+ by email-inbound-relay-2b-4ff6265a.us-west-2.amazon.com (Postfix) with ESMTPS
+ id D57D3A2747; Fri, 17 Apr 2020 07:06:11 +0000 (UTC)
+Received: from EX13D05EUB003.ant.amazon.com (10.43.166.253) by
  EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 17 Apr 2020 07:05:47 +0000
+ id 15.0.1497.2; Fri, 17 Apr 2020 07:05:51 +0000
 Received: from EX13MTAUEE002.ant.amazon.com (10.43.62.24) by
- EX13D02EUC004.ant.amazon.com (10.43.164.117) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 17 Apr 2020 07:05:46 +0000
+ EX13D05EUB003.ant.amazon.com (10.43.166.253) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 17 Apr 2020 07:05:50 +0000
 Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
  by mail-relay.amazon.com (10.43.62.224) with Microsoft SMTP Server id
- 15.0.1497.2 via Frontend Transport; Fri, 17 Apr 2020 07:05:45 +0000
+ 15.0.1497.2 via Frontend Transport; Fri, 17 Apr 2020 07:05:48 +0000
 From: Pawel Wieczorkiewicz <wipawel@amazon.de>
 To: <xen-devel@lists.xen.org>
-Subject: [XTF 4/6] time: Add helper functions and macros to time management
-Date: Fri, 17 Apr 2020 07:05:26 +0000
-Message-ID: <20200417070528.48329-5-wipawel@amazon.de>
+Subject: [XTF 6/6] event_channels: Add EVTCHNOP_bind_vcpu hypercall support
+Date: Fri, 17 Apr 2020 07:05:28 +0000
+Message-ID: <20200417070528.48329-7-wipawel@amazon.de>
 X-Mailer: git-send-email 2.16.6
 In-Reply-To: <20200417070528.48329-1-wipawel@amazon.de>
 References: <20200417070528.48329-1-wipawel@amazon.de>
@@ -83,131 +82,40 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: semelpaul@gmail.com, andrew.cooper3@citrix.com, julien@xen.org,
- nmanthey@amazon.de, paul@xen.org
+Cc: julien@xen.org, paul@xen.org, semelpaul@gmail.com,
+ andrew.cooper3@citrix.com, Pawel Wieczorkiewicz <wipawel@amazon.de>,
+ nmanthey@amazon.de
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Semel <phentex@amazon.de>
-
-Add the following helper functions:
-  - nspin_sleep()
-  - spin_sleep()
-  - mspin_sleep()
-
-Add the following helper macros:
-  - sleep()
-  - msleep()
-  - NOW()
-
-Signed-off-by: Paul Semel <phentex@amazon.de>
+Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
 ---
- common/time.c      | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/xtf/time.h | 16 +++++++++++++++
- 2 files changed, 74 insertions(+)
+ include/xen/event_channel.h | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/common/time.c b/common/time.c
-index fffae1c..3db1f8f 100644
---- a/common/time.c
-+++ b/common/time.c
-@@ -104,6 +104,64 @@ int gettimeofday(struct timeval *tp)
-     return 0;
- }
+diff --git a/include/xen/event_channel.h b/include/xen/event_channel.h
+index 62ee95a..6253b89 100644
+--- a/include/xen/event_channel.h
++++ b/include/xen/event_channel.h
+@@ -2,6 +2,7 @@
+ #define XEN_PUBLIC_EVENT_CHANNEL_H
  
-+#if defined(__i386__)
-+static inline void nspin_sleep(uint32_t t)
-+#else
-+static inline void nspin_sleep(uint64_t t)
-+#endif
-+{
-+    unsigned long end = since_boot_time() + t;
-+
-+    while ( since_boot_time() < end )
-+        asm volatile ( "pause" );
-+}
-+
-+#if defined(__i386__)
-+static inline void spin_sleep(uint32_t t)
-+#else
-+static inline void spin_sleep(uint64_t t)
-+#endif
-+{
-+#if defined(__i386__)
-+    uint32_t nsec = t * 1000000000;
-+#else
-+    uint64_t nsec = t * 1000000000ul;
-+#endif
-+    nspin_sleep(nsec);
-+}
-+
-+#if defined(__i386__)
-+static inline void mspin_sleep(uint32_t t)
-+#else
-+static inline void mspin_sleep(uint64_t t)
-+#endif
-+{
-+#if defined(__i386__)
-+    uint32_t nsec = t * 1000000;
-+#else
-+    uint64_t nsec = t * 1000000ul;
-+#endif
-+    nspin_sleep(nsec);
-+}
-+
-+#if defined(__i386__)
-+void sleep(uint32_t t)
-+#else
-+void sleep(uint64_t t)
-+#endif
-+{
-+    spin_sleep(t);
-+}
-+
-+#if defined(__i386__)
-+void msleep(uint32_t t)
-+#else
-+void msleep(uint64_t t)
-+#endif
-+{
-+    mspin_sleep(t);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/include/xtf/time.h b/include/xtf/time.h
-index e312465..07fcae5 100644
---- a/include/xtf/time.h
-+++ b/include/xtf/time.h
-@@ -23,14 +23,30 @@ struct timeval {
- uint32_t since_boot_time(void);
+ #define EVTCHNOP_send             4
++#define EVTCHNOP_bind_vcpu        8
+ #define EVTCHNOP_init_control    11
+ #define EVTCHNOP_expand_array    12
  
- uint32_t current_time(void);
-+
-+/* This function takes seconds in parameter */
-+void sleep(uint32_t f);
-+
-+/* Be careful, this function takes milliseconds in parameter,
-+ * not microseconds !
-+ */
-+void msleep(uint32_t f);
- #else
- uint64_t since_boot_time(void);
+@@ -22,6 +23,12 @@ struct evtchn_expand_array {
+     uint64_t array_gfn;
+ };
  
- uint64_t current_time(void);
++struct evtchn_bind_vcpu {
++    /* IN parameters. */
++    evtchn_port_t port;
++    uint32_t vcpu;
++};
 +
-+void sleep(uint64_t f);
-+
-+void msleep(uint64_t f);
- #endif
- 
- int gettimeofday(struct timeval *tp);
- 
-+
-+/* This returns the current epoch time */
-+#define NOW() current_time()
-+
- #endif /* XTF_TIME_H */
+ #endif /* XEN_PUBLIC_EVENT_CHANNEL_H */
  
  /*
 -- 
