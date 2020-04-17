@@ -2,63 +2,62 @@ Return-Path: <SRS0=mRjJ=6B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-6.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,UNWANTED_LANGUAGE_BODY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E6409C38A2C
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81932C352BE
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B702121D94
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5097721D94
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="fsoDzbLe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B702121D94
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="D3+GJWuL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5097721D94
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPNfe-0000M6-Nm; Fri, 17 Apr 2020 09:52:26 +0000
+	id 1jPNft-0000UJ-3c; Fri, 17 Apr 2020 09:52:41 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=lM+k=6B=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jPNfd-0000Lc-0p
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 09:52:25 +0000
-X-Inumbo-ID: 2030b313-8091-11ea-8c9b-12813bfff9fa
+ id 1jPNfs-0000Tf-1F
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 09:52:40 +0000
+X-Inumbo-ID: 24f1209e-8091-11ea-8c9b-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2030b313-8091-11ea-8c9b-12813bfff9fa;
- Fri, 17 Apr 2020 09:52:20 +0000 (UTC)
+ id 24f1209e-8091-11ea-8c9b-12813bfff9fa;
+ Fri, 17 Apr 2020 09:52:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=fgPHa6/lewyPUGLpvLuUr7Qnl8FXYus9SeBUggwCmRY=; b=fsoDzbLe09VaPA4VGTGG/T2hUA
- ng16FFZwNw0bU5Df2LGAgfBie/sIqtw/GHzip1fzwercdIajGh2lUi7UvIwZvPcWUSzbZpRQ+4sr2
- JC12EYZYIOBOWUlpfl1yhEqZxMD+E54kgExpa6CVvZy3QCRiEiQ/dvIiOVgsZM4x9HFo=;
+ bh=Dfu+OgKnJzFWoXe/gPFe0obtWomHwJiB46S0uhovLc0=; b=D3+GJWuLGIwR19dKVk0QfvNpEP
+ cq5z41eQ+J/4T7c2UgY0l1mUsBfDgyPYxRoCHvFEVty/RdmTdnBAeHoDv2QLHpo989tqmXDP8/zq8
+ aqAaX/Nm3UKdNTMnSmr4X/cLjNmWJY6ox7HCtSFN9clvlm85ITsPGB8cccDyzXW+xf+w=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jPNfX-0002fd-9o; Fri, 17 Apr 2020 09:52:19 +0000
+ id 1jPNfe-0002g8-Aj; Fri, 17 Apr 2020 09:52:26 +0000
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jPNfW-000304-TS; Fri, 17 Apr 2020 09:52:19 +0000
+ id 1jPNfe-000304-15; Fri, 17 Apr 2020 09:52:26 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 1/6] x86_64/mm: map and unmap page tables in
- cleanup_frame_table
-Date: Fri, 17 Apr 2020 10:52:03 +0100
-Message-Id: <12c4fe0c0c05b9f76377c085d8a6558beae64003.1587116799.git.hongyxia@amazon.com>
+Subject: [PATCH 6/6] x86/pv: map and unmap page table in dom0_construct_pv
+Date: Fri, 17 Apr 2020 10:52:08 +0100
+Message-Id: <18fda6bdeb4f20bf2272503e45c7c420e51673ac.1587116799.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1587116799.git.hongyxia@amazon.com>
 References: <cover.1587116799.git.hongyxia@amazon.com>
@@ -82,53 +81,36 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Wei Liu <wei.liu2@citrix.com>
 
-Also fix a weird indentation.
-
 Signed-off-by: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 ---
- xen/arch/x86/x86_64/mm.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ xen/arch/x86/pv/dom0_build.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index e85ef449f3..18210405f4 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -737,8 +737,8 @@ static void cleanup_frame_table(struct mem_hotadd_info *info)
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 28a939b68a..a03f0501ab 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -677,6 +677,8 @@ int __init dom0_construct_pv(struct domain *d,
  
-     while (sva < eva)
+     if ( is_pv_32bit_domain(d) )
      {
--        l3e = l4e_to_l3e(idle_pg_table[l4_table_offset(sva)])[
--          l3_table_offset(sva)];
-+        l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(sva)],
-+                           l3_table_offset(sva));
-         if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) ||
-              (l3e_get_flags(l3e) & _PAGE_PSE) )
-         {
-@@ -747,7 +747,7 @@ static void cleanup_frame_table(struct mem_hotadd_info *info)
-             continue;
-         }
- 
--        l2e = l3e_to_l2e(l3e)[l2_table_offset(sva)];
-+        l2e = l2e_from_l3e(l3e, l2_table_offset(sva));
-         ASSERT(l2e_get_flags(l2e) & _PAGE_PRESENT);
- 
-         if ( (l2e_get_flags(l2e) & (_PAGE_PRESENT | _PAGE_PSE)) ==
-@@ -763,10 +763,10 @@ static void cleanup_frame_table(struct mem_hotadd_info *info)
-             continue;
-         }
- 
--        ASSERT(l1e_get_flags(l2e_to_l1e(l2e)[l1_table_offset(sva)]) &
--                _PAGE_PRESENT);
--         sva = (sva & ~((1UL << PAGE_SHIFT) - 1)) +
--                    (1UL << PAGE_SHIFT);
-+        ASSERT(l1e_get_flags(l1e_from_l2e(l2e, l1_table_offset(sva))) &
-+               _PAGE_PRESENT);
++        l2_pgentry_t *l2t;
 +
-+        sva = (sva & ~((1UL << PAGE_SHIFT) - 1)) + (1UL << PAGE_SHIFT);
+         /* Ensure the first four L3 entries are all populated. */
+         for ( i = 0, l3tab = l3start; i < 4; ++i, ++l3tab )
+         {
+@@ -691,7 +693,9 @@ int __init dom0_construct_pv(struct domain *d,
+                 l3e_get_page(*l3tab)->u.inuse.type_info |= PGT_pae_xen_l2;
+         }
+ 
+-        init_xen_pae_l2_slots(l3e_to_l2e(l3start[3]), d);
++        l2t = map_l2t_from_l3e(l3start[3]);
++        init_xen_pae_l2_slots(l2t, d);
++        unmap_domain_page(l2t);
      }
  
-     /* Brute-Force flush all TLB */
+     /* Pages that are part of page tables must be read only. */
 -- 
 2.24.1.AMZN
 
