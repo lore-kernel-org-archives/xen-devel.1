@@ -7,57 +7,57 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 51771C38A2C
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E70DC352BE
 	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 15:50:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0FC6221D79
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 15:50:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 0F4B320936
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 15:50:40 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hRtN2I0O"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FC6221D79
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="b6K8WYIT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F4B320936
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPTFy-0007WE-6x; Fri, 17 Apr 2020 15:50:18 +0000
+	id 1jPTG8-0007XQ-VK; Fri, 17 Apr 2020 15:50:28 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=z9Py=6B=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jPTFw-0007W9-W9
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 15:50:17 +0000
-X-Inumbo-ID: 1e35ab82-80c3-11ea-8d2d-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ id 1jPTG7-0007X6-07
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 15:50:27 +0000
+X-Inumbo-ID: 1f61c946-80c3-11ea-8d2d-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1e35ab82-80c3-11ea-8d2d-12813bfff9fa;
- Fri, 17 Apr 2020 15:50:11 +0000 (UTC)
+ id 1f61c946-80c3-11ea-8d2d-12813bfff9fa;
+ Fri, 17 Apr 2020 15:50:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587138611;
+ d=citrix.com; s=securemail; t=1587138613;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=n+kJcIVbiUyfNa/vyQETwoQaqxnGj4WaK08bU0mpih8=;
- b=hRtN2I0OIE8y+Zi/dpQjUqLCsSAU9I3WoxwYgvRFatSvSMPtdD+0K+Bg
- N2cuCa65YRccGg5LHrXop7ylPBa9p06jsYP3IYeEM6WA85qFJNI1JlhYS
- 0obBJgsPf2iGiIosKz/FH2LH/y49jZcbm/4MePNTk2nmJf0ymNcjK0fnm I=;
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ bh=I+Bzh3V08iUOv/zMH5/E2yogQfOh3a7ZmPE910Vqxec=;
+ b=b6K8WYIT+yJsqi9Eb2Edl+tupQ8guogVzlVKRG4M/eAcnMCBmCVlo3kX
+ vUlKY7W3ImYRftVfbgnHOnDwFmjEzm2CY0Ri/eeAGP8GQnpwgeI27+Aex
+ gAK1p8aprKrYmAJsZPpZkETvmEXUegiXQpLusuRJt6enm/LJq72dFsvtM 4=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -66,30 +66,29 @@ Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: 8Vcdiq6a3gEzu1kd9D3SXRhu8odtLdwfaNLMVV4pcfP+CBcV0GsgdPkLh86Q4M6llxFbBZSO8i
- lBGg6e9Rc2fwNZLdoFh7bY9V2GnlMyuixjajzPIZ5rHqb/Upld0OdrEezDv+HMUatSCfCnj3Hf
- iMDN6RY/uWDJ7ezfGmRAXh9BPOAMqmoM79JyJSkAeGJJSk3epCxXb7G2a1Pwv5/pTNf+8Bkwez
- Dku+pWBL//AfyNwjr7IN86o6UbvTK1+8Te73vE2rAcj1cUQ8mlMYuQTziAIcKTei9o2Z8HCWpP
- dPI=
+IronPort-SDR: ZZHdT/SVFo4ioFH9zsgNLB31zP9EFSLqKfJ1WrK6nWJd9gTlf5lGp94n5yIVrvpF+MJ6J6Z5xA
+ quFbwGvXi+DAJP2wViJRg163Sf9NhLgrl02pS8kqn1Z4s8ixFd1VQxipQ80JL3rZyhr9FnHgFx
+ RG2iB+SiTSaulJ8iyyT/KL/KlHIdN3fW+iyEmmrwhoPMa2pM+DDubLbuZmuFN1i3FF/9YE0li5
+ Mye8StftOunlmrc6BQr6EmnZKN53rV39LgrhQj3uIY/0aR+MeBj1NjRVTPyfHT17ZphWVikUnl
+ NPw=
 X-SBRS: 2.7
-X-MesageID: 16253793
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 16168815
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,395,1580792400"; d="scan'208";a="16253793"
+X-IronPort-AV: E=Sophos;i="5.72,395,1580792400"; d="scan'208";a="16168815"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 1/3] x86/pv: Options to disable and/or compile out 32bit PV
- support
-Date: Fri, 17 Apr 2020 16:50:02 +0100
-Message-ID: <20200417155004.16806-2-andrew.cooper3@citrix.com>
+Subject: [PATCH 3/3] x86/pv: Compile out compat_gdt in !CONFIG_PV builds
+Date: Fri, 17 Apr 2020 16:50:04 +0100
+Message-ID: <20200417155004.16806-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200417155004.16806-1-andrew.cooper3@citrix.com>
 References: <20200417155004.16806-1-andrew.cooper3@citrix.com>
@@ -112,14 +111,22 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is the start of some performance and security-hardening improvements,
-based on the fact that 32bit PV guests are few and far between these days.
+There is no need for the Compat GDT if there are no 32bit PV guests.  This
+saves 4k per online CPU
 
-Ring1 is full or architectural corner cases, such as counting as supervisor
-from a paging point of view.  This accounts for a substantial performance hit
-on processors from the last 8 years (adjusting SMEP/SMAP on every privilege
-transition), and the gap is only going to get bigger with new hardware
-features.
+Bloat-o-meter reports the following savings in Xen itself:
+
+  add/remove: 0/3 grow/shrink: 1/4 up/down: 7/-4612 (-4605)
+  Function                                     old     new   delta
+  cpu_smpboot_free                            1249    1256      +7
+  per_cpu__compat_gdt_l1e                        8       -      -8
+  per_cpu__compat_gdt                            8       -      -8
+  init_idt_traps                               442     420     -22
+  load_system_tables                           414     364     -50
+  trap_init                                    444     280    -164
+  cpu_smpboot_callback                        1255     991    -264
+  boot_compat_gdt                             4096       -   -4096
+  Total: Before=3062726, After=3058121, chg -0.15%
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -127,164 +134,118 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
-There is a series I can't quite post yet which wants to conditionally turn
-opt_pv32 off, which is why I've put it straight in in an int8_t form rather
-than a straight boolean form.
+The increase in cpu_smpboot_free() appears to be a consequence of a totally
+different layout of basic blocks.
 ---
- docs/misc/xen-command-line.pandoc | 12 +++++++++++-
- xen/arch/x86/Kconfig              | 16 ++++++++++++++++
- xen/arch/x86/pv/domain.c          | 35 +++++++++++++++++++++++++++++++++++
- xen/arch/x86/setup.c              |  9 +++++++--
- xen/include/asm-x86/pv/domain.h   |  6 ++++++
- 5 files changed, 75 insertions(+), 3 deletions(-)
+ xen/arch/x86/cpu/common.c |  5 +++--
+ xen/arch/x86/desc.c       |  2 ++
+ xen/arch/x86/smpboot.c    |  5 ++++-
+ xen/arch/x86/traps.c      | 10 +++++++---
+ 4 files changed, 16 insertions(+), 6 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index acd0b3d994..ee12b0f53f 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -1694,7 +1694,17 @@ The following resources are available:
-     CDP, one COS will corespond two CBMs other than one with CAT, due to the
-     sum of CBMs is fixed, that means actual `cos_max` in use will automatically
-     reduce to half when CDP is enabled.
--	
-+
-+### pv
-+    = List of [ 32=<bool> ]
-+
-+    Applicability: x86
-+
-+Controls for aspects of PV guest support.
-+
-+*   The `32` boolean controls whether 32bit PV guests can be created.  It
-+    defaults to `true`, and is ignored when `CONFIG_PV32` is compiled out.
-+
- ### pv-linear-pt (x86)
- > `= <boolean>`
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 1b33f1ed71..7b093cb421 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -752,8 +752,9 @@ void load_system_tables(void)
  
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index 8149362bde..4c52197de3 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -49,6 +49,22 @@ config PV
+ 	_set_tssldt_desc(gdt + TSS_ENTRY, (unsigned long)tss,
+ 			 sizeof(*tss) - 1, SYS_DESC_tss_avail);
+-	_set_tssldt_desc(compat_gdt + TSS_ENTRY, (unsigned long)tss,
+-			 sizeof(*tss) - 1, SYS_DESC_tss_busy);
++	if ( IS_ENABLED(CONFIG_PV32) )
++		_set_tssldt_desc(compat_gdt + TSS_ENTRY, (unsigned long)tss,
++				 sizeof(*tss) - 1, SYS_DESC_tss_busy);
  
- 	  If unsure, say Y.
- 
-+config PV32
-+	bool "Support for 32bit PV guests"
-+	depends on PV
-+	default y
-+	---help---
-+	  The 32bit PV ABI uses Ring1, an area of the x86 architecture which
-+	  was deprecated and mostly removed in the AMD64 spec.  As a result,
-+	  it occasionally conflicts with newer x86 hardware features, causing
-+	  overheads for Xen to maintain backwards compatibility.
-+
-+	  People may wish to disable 32bit PV guests for attack surface
-+	  reduction, or performance reasons.  Backwards compatibility can be
-+	  provided via the PV Shim mechanism.
-+
-+	  If unsure, say Y.
-+
- config PV_LINEAR_PT
-        bool "Support for PV linear pagetables"
-        depends on PV
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 70fae43965..47a0db082f 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -16,6 +16,39 @@
- #include <asm/pv/domain.h>
- #include <asm/shadow.h>
+ 	per_cpu(full_gdt_loaded, cpu) = false;
+ 	lgdt(&gdtr);
+diff --git a/xen/arch/x86/desc.c b/xen/arch/x86/desc.c
+index dfeb1beaa8..39080ca672 100644
+--- a/xen/arch/x86/desc.c
++++ b/xen/arch/x86/desc.c
+@@ -55,6 +55,7 @@ seg_desc_t boot_gdt[PAGE_SIZE / sizeof(seg_desc_t)] =
+     [SEL2GDT(PER_CPU_SELECTOR)] =     { 0x0000910000000000 },
+ };
  
 +#ifdef CONFIG_PV32
-+int8_t __read_mostly opt_pv32 = -1;
+ __section(".data.page_aligned") __aligned(PAGE_SIZE)
+ seg_desc_t boot_compat_gdt[PAGE_SIZE / sizeof(seg_desc_t)] =
+ {
+@@ -83,6 +84,7 @@ seg_desc_t boot_compat_gdt[PAGE_SIZE / sizeof(seg_desc_t)] =
+     /* 0xe060 - per-CPU entry (limit == cpu) */
+     [SEL2GDT(PER_CPU_SELECTOR)] =     { 0x0000910000000000 },
+ };
 +#endif
-+
-+static int parse_pv(const char *s)
-+{
-+    const char *ss;
-+    int val, rc = 0;
-+
-+    do {
-+        ss = strchr(s, ',');
-+        if ( !ss )
-+            ss = strchr(s, '\0');
-+
-+        if ( (val = parse_boolean("32", s, ss)) >= 0 )
-+        {
-+#ifdef CONFIG_PV32
-+            opt_pv32 = val;
-+#else
-+            printk(XENLOG_INFO
-+                   "CONFIG_PV32 disabled - ignoring 'pv=32' setting\n");
-+#endif
-+        }
-+        else
-+            rc = -EINVAL;
-+
-+        s = ss + 1;
-+    } while ( *ss );
-+
-+    return rc;
-+}
-+custom_param("pv", parse_pv);
-+
- static __read_mostly enum {
-     PCID_OFF,
-     PCID_ALL,
-@@ -174,6 +207,8 @@ int switch_compat(struct domain *d)
  
-     BUILD_BUG_ON(offsetof(struct shared_info, vcpu_info) != 0);
- 
-+    if ( !opt_pv32 )
-+        return -EOPNOTSUPP;
-     if ( is_hvm_domain(d) || domain_tot_pages(d) != 0 )
-         return -EACCES;
-     if ( is_pv_32bit_domain(d) )
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 885919d5c3..c50aefb2de 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -53,6 +53,7 @@
- #include <asm/spec_ctrl.h>
- #include <asm/guest.h>
- #include <asm/microcode.h>
-+#include <asm/pv/domain.h>
- 
- /* opt_nosmp: If true, secondary processors are ignored. */
- static bool __initdata opt_nosmp;
-@@ -1875,8 +1876,12 @@ void arch_get_xen_caps(xen_capabilities_info_t *info)
-     {
-         snprintf(s, sizeof(s), "xen-%d.%d-x86_64 ", major, minor);
-         safe_strcat(*info, s);
--        snprintf(s, sizeof(s), "xen-%d.%d-x86_32p ", major, minor);
--        safe_strcat(*info, s);
-+
-+        if ( opt_pv32 )
-+        {
-+            snprintf(s, sizeof(s), "xen-%d.%d-x86_32p ", major, minor);
-+            safe_strcat(*info, s);
-+        }
-     }
-     if ( hvm_enabled )
-     {
-diff --git a/xen/include/asm-x86/pv/domain.h b/xen/include/asm-x86/pv/domain.h
-index 7a69bfb303..df9716ff26 100644
---- a/xen/include/asm-x86/pv/domain.h
-+++ b/xen/include/asm-x86/pv/domain.h
-@@ -23,6 +23,12 @@
- 
- #include <xen/sched.h>
- 
-+#ifdef CONFIG_PV32
-+extern int8_t opt_pv32;
-+#else
-+# define opt_pv32 false
-+#endif
-+
  /*
-  * PCID values for the address spaces of 64-bit pv domains:
-  *
+  * Used by each CPU as it starts up, to enter C with a suitable %cs.
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 09264b02d1..f9f63e496f 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -959,7 +959,8 @@ static void cpu_smpboot_free(unsigned int cpu, bool remove)
+             free_domheap_page(mfn_to_page(mfn));
+     }
+ 
+-    FREE_XENHEAP_PAGE(per_cpu(compat_gdt, cpu));
++    if ( IS_ENABLED(CONFIG_PV32) )
++        FREE_XENHEAP_PAGE(per_cpu(compat_gdt, cpu));
+ 
+     if ( remove )
+     {
+@@ -1001,6 +1002,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
+     BUILD_BUG_ON(NR_CPUS > 0x10000);
+     gdt[PER_CPU_GDT_ENTRY - FIRST_RESERVED_GDT_ENTRY].a = cpu;
+ 
++#ifdef CONFIG_PV32
+     per_cpu(compat_gdt, cpu) = gdt = alloc_xenheap_pages(0, memflags);
+     if ( gdt == NULL )
+         goto out;
+@@ -1008,6 +1010,7 @@ static int cpu_smpboot_alloc(unsigned int cpu)
+         l1e_from_pfn(virt_to_mfn(gdt), __PAGE_HYPERVISOR_RW);
+     memcpy(gdt, boot_compat_gdt, NR_RESERVED_GDT_PAGES * PAGE_SIZE);
+     gdt[PER_CPU_GDT_ENTRY - FIRST_RESERVED_GDT_ENTRY].a = cpu;
++#endif
+ 
+     if ( idt_tables[cpu] == NULL )
+         idt_tables[cpu] = alloc_xenheap_pages(0, memflags);
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index e838846c6b..0bcf554e93 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -100,8 +100,10 @@ static DEFINE_PER_CPU(unsigned long, last_extable_addr);
+ 
+ DEFINE_PER_CPU_READ_MOSTLY(seg_desc_t *, gdt);
+ DEFINE_PER_CPU_READ_MOSTLY(l1_pgentry_t, gdt_l1e);
++#ifdef CONFIG_PV32
+ DEFINE_PER_CPU_READ_MOSTLY(seg_desc_t *, compat_gdt);
+ DEFINE_PER_CPU_READ_MOSTLY(l1_pgentry_t, compat_gdt_l1e);
++#endif
+ 
+ /* Master table, used by CPU0. */
+ idt_entry_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
+@@ -1999,7 +2001,8 @@ void __init init_idt_traps(void)
+     idt_tables[0] = idt_table;
+ 
+     this_cpu(gdt) = boot_gdt;
+-    this_cpu(compat_gdt) = boot_compat_gdt;
++    if ( IS_ENABLED(CONFIG_PV32) )
++        this_cpu(compat_gdt) = boot_compat_gdt;
+ }
+ 
+ extern void (*const autogen_entrypoints[X86_NR_VECTORS])(void);
+@@ -2030,8 +2033,9 @@ void __init trap_init(void)
+     /* Cache {,compat_}gdt_l1e now that physically relocation is done. */
+     this_cpu(gdt_l1e) =
+         l1e_from_pfn(virt_to_mfn(boot_gdt), __PAGE_HYPERVISOR_RW);
+-    this_cpu(compat_gdt_l1e) =
+-        l1e_from_pfn(virt_to_mfn(boot_compat_gdt), __PAGE_HYPERVISOR_RW);
++    if ( IS_ENABLED(CONFIG_PV32) )
++        this_cpu(compat_gdt_l1e) =
++            l1e_from_pfn(virt_to_mfn(boot_compat_gdt), __PAGE_HYPERVISOR_RW);
+ 
+     percpu_traps_init();
+ 
 -- 
 2.11.0
 
