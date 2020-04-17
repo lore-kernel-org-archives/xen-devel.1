@@ -2,75 +2,111 @@ Return-Path: <SRS0=mRjJ=6B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E2F29C352BE
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 13:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7A04C2D0EF
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 13:43:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B890C20857
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 13:41:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9478B20857
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 13:43:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XVU2YuWv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B890C20857
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Bncg1tWP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9478B20857
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPRFZ-0003jD-1j; Fri, 17 Apr 2020 13:41:45 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jPRHZ-0003wQ-PE; Fri, 17 Apr 2020 13:43:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=8vtN=6B=gmail.com=brendank310@srs-us1.protection.inumbo.net>)
- id 1jPRAp-0002w8-4t
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 13:36:51 +0000
-X-Inumbo-ID: 7e06d128-80b0-11ea-9e09-bc764e2007e4
-Received: from mail-qk1-x72b.google.com (unknown [2607:f8b0:4864:20::72b])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7e06d128-80b0-11ea-9e09-bc764e2007e4;
- Fri, 17 Apr 2020 13:36:50 +0000 (UTC)
-Received: by mail-qk1-x72b.google.com with SMTP id x66so2316302qkd.9
- for <xen-devel@lists.xenproject.org>; Fri, 17 Apr 2020 06:36:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id;
- bh=wWFO4OrewFzHWBIK4A/5sZz/WdC0rHyctT9V9v5Avow=;
- b=XVU2YuWvv6CVx4OW+5x1js3oxi+SdhXTkvGtYWdNF5P/smVNFXhtBAYu0mZFMdNALt
- OvbhJ+bGKgHNGBs7dc7c430XRPYAT9eNY6RpEWpVSvfGyPCnYeuNRPXGhFaCkW6SGzgI
- fgKIhRn2LQTwhZHKoEGYYGCgM1dQTKypY7bsQTuHvGowAQfPFRLgrWY1u2DYID8sIsmK
- 61q2tV1SFaotxfT51cLgg2Twn7q7QLKN8eOHqAQn4Luf4N5vPeNOrQdJO6ML7d3ft+U0
- TAE76vKvxrSacO0nkPB4TTdtxJyO0th8x6WC0sRsa/FE9JZ944HOF6AcUVggb0wgAQ2r
- 6LUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=wWFO4OrewFzHWBIK4A/5sZz/WdC0rHyctT9V9v5Avow=;
- b=DZEogf07KH4l8BHJkyVNOWpMbnAlvUSomvaew0+lhS5kPrOFIxCBzpqLvSxcKjijG7
- iSMhgqJDDOlAWy+hHzOUAOkltDsdgRbQXoVEuKKTqOdMN4UlQDVWEiHrJL3oB3wbP82/
- PVC0CqGnEsjGC/bzwBO4uYGMszssM4gjhIDShOO42PLUMqkg+yl5kDpAF+SZMnhFsgAE
- UqYqbRJ1au9Nobiw1mFwKzPxJRFTbMD118b8e8yT0sEAJMa4hyj40pZyxRqihrFkAgvo
- mpxVz2FPl6C8+0sX2zuEE7Ht0vMIbYlZsIFJp7ErsuPSiqJYj98AY8lpUT7dLdvLRsm4
- mdGA==
-X-Gm-Message-State: AGi0PuZs0pzQZ/at2FsurHnZGCbnPsQJVpLNhZHQSo1E87M3489xooJh
- VGwFPH57hoIksXtNTg4ppPDPF+nq9eRHUw==
-X-Google-Smtp-Source: APiQypKphbZJN0BAcXe4dNOcmQFWeiUUKpO3dI07Rb7VA/9iyM8q/ThAHDSxQOG3Rb80cnGl1p9yIg==
-X-Received: by 2002:a37:b1c6:: with SMTP id a189mr3288480qkf.26.1587130609992; 
- Fri, 17 Apr 2020 06:36:49 -0700 (PDT)
-Received: from ubuntu.localdomain
- (pool-96-249-236-140.nrflva.fios.verizon.net. [96.249.236.140])
- by smtp.gmail.com with ESMTPSA id s15sm18140737qtc.31.2020.04.17.06.36.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Apr 2020 06:36:49 -0700 (PDT)
-From: Brendan Kerrigan <brendank310@gmail.com>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH 0/1] Mask VT-d DMAR faults for IGD devices
-Date: Fri, 17 Apr 2020 09:36:25 -0400
-Message-Id: <20200417133626.72302-1-brendank310@gmail.com>
-X-Mailer: git-send-email 2.17.1
-X-Mailman-Approved-At: Fri, 17 Apr 2020 13:41:44 +0000
+ <SRS0=f44r=6B=citrix.com=sergey.dyasli@srs-us1.protection.inumbo.net>)
+ id 1jPRHX-0003wK-Om
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 13:43:47 +0000
+X-Inumbo-ID: 74f87c35-80b1-11ea-8ce6-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 74f87c35-80b1-11ea-8ce6-12813bfff9fa;
+ Fri, 17 Apr 2020 13:43:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1587131025;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=+5W5SMf3LfxShpfVPxwa76djMVbv6G1uq8Zf3be7nqA=;
+ b=Bncg1tWPiM/AUM+3fBJqTcb2zKnQOrnO/LxMZ7XOmIVmk05wWH1j4Pbl
+ w0jVdJYR4CcBjldWUKKn1vYVKosHqx9BThwglvhBbFgUA7FQtwSYtYBn/
+ hs+pbT+SMw43uA9Vx+5Sg0DT7l9CdC+PtPLPMN6jqX9If1PfzJ3Ndd7O/ 4=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=sergey.dyasli@citrix.com;
+ spf=Pass smtp.mailfrom=sergey.dyasli@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ sergey.dyasli@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="sergey.dyasli@citrix.com";
+ x-sender="sergey.dyasli@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+ sergey.dyasli@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="sergey.dyasli@citrix.com";
+ x-sender="sergey.dyasli@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="sergey.dyasli@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: LdzRVlFhzQ3FsvQL97yGXmJnVEPAE6C0WztRsxKXgBeeri5iZMqbizVtaXSJazcaSOTGTnLBNe
+ BW1OBWlLSRKaGJ+20zY5lVz/YvlXkQc2I952BBTqH1ZSYgPvt6/n58p93FkgCSwsNY+a5QojJx
+ noThwM/6Ufm9bxYfN9C+lRNStXwsPH+8oZWTs+Pr7Hn7K3kr7YJWwUsBdacHRC2x7iRJqCYnSo
+ 4krihPlL8CTfqy1qWT/gsErrBIBR5oqBtw772hCrIBQHnaabHRGLMIaLAojh2ZVppniy9wLf72
+ Da0=
+X-SBRS: 2.7
+X-MesageID: 16520376
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,395,1580792400"; d="scan'208";a="16520376"
+From: Sergey Dyasli <sergey.dyasli@citrix.com>
+To: =?iso-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>, Dario Faggioli
+ <dfaggioli@suse.com>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] sched: print information about scheduler granularity
+Thread-Topic: [PATCH] sched: print information about scheduler granularity
+Thread-Index: AQHWE8nCYlq/J4KoL0iU4gkSoIElX6h701EAgAD/WICAAHCoAA==
+Date: Fri, 17 Apr 2020 13:43:42 +0000
+Message-ID: <1587131006806.63738@citrix.com>
+References: <20200416083341.21122-1-sergey.dyasli@citrix.com>
+ <d2577c4b4ff040c8f256d203e647619d9d4d6ebb.camel@suse.com>
+ <3dacf98c-c4b7-a263-01d3-f8562619ff53@suse.com>
+In-Reply-To: <3dacf98c-c4b7-a263-01d3-f8562619ff53@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-imapappendstamp: AMSPEX02CL03.citrite.net (15.00.1497.006)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <734F0004E7610C44BE63323EB5575303@citrix.com>
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -81,30 +117,108 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: kevin.tian@intel.com, Brendan Kerrigan <kerriganb@ainfosec.com>
+Cc: George Dunlap <George.Dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Brendan Kerrigan <kerriganb@ainfosec.com>
-
-The Intel IOMMU for at least 8th and 9th generation Core processors has a bug
-where the Fault Processing Disable bit is not respected for the Intel Graphics
-Device (IGD). The resulting behavior was reported previously[1]. The underlying
-cause is described by Intel as Errata ID 049 in the Core spec update
-document[2], along with a suggested workaround, which is implemented in the
-patch.
-
-[1] https://lists.xen.org/archives/html/xen-devel/2015-08/msg01955.html
-[2] https://www.intel.com/content/dam/www/public/us/en/documents/specification-updates/8th-gen-core-spec-update.pdf
-
-
-Brendan Kerrigan (1):
-  x86/vtd: Mask DMAR faults for IGD devices
-
- xen/drivers/passthrough/vtd/iommu.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
--- 
-2.17.1
-
+On 17/04/2020 08:57, J=FCrgen Gro=DF wrote:=0A=
+> On 16.04.20 18:43, Dario Faggioli wrote:=0A=
+>> On Thu, 2020-04-16 at 09:33 +0100, Sergey Dyasli wrote:=0A=
+>>> Currently it might be not obvious which scheduling mode is being used=
+=0A=
+>>> by the scheduler. Alleviate this by printing additional information=0A=
+>>> about the selected granularity.=0A=
+>>>=0A=
+>> I like the idea. However, I don't like how verbose and long that line=0A=
+>> becomes.=0A=
+>>=0A=
+>>> =A0 Messages now look like these:=0A=
+>>>=0A=
+>>> 1. boot=0A=
+>>> (XEN) [00089808f0ea7496] Using scheduler: SMP Credit Scheduler=0A=
+>>> (credit) in core-scheduling mode=0A=
+>>>=0A=
+>>> 2. xl debug-keys r=0A=
+>>> (XEN) [=A0=A0 45.914314] Scheduler: SMP Credit Scheduler (credit) in 2-=
+=0A=
+>>> way core-scheduling mode=0A=
+>>>=0A=
+>> What about adding an entry, just below these ones. Something looking=0A=
+>> like, for instance (both at boot and in the debug-key dump):=0A=
+>>=0A=
+>> "Scheduling granularity: cpu"=0A=
+>>=0A=
+>> (or "core", or "socket")=0A=
+=0A=
+I agree that the line becomes too long. I'll print the new information=0A=
+on a separate line as you suggest in v2.=0A=
+=0A=
+>>=0A=
+>> Also=0A=
+>>=0A=
+>>> --- a/xen/common/sched/cpupool.c=0A=
+>>> +++ b/xen/common/sched/cpupool.c=0A=
+>>> @@ -38,7 +38,35 @@ static cpumask_t cpupool_locked_cpus;=0A=
+>>> =A0 static DEFINE_SPINLOCK(cpupool_lock);=0A=
+>>> =A0 static enum sched_gran __read_mostly opt_sched_granularity =3D=0A=
+>>> SCHED_GRAN_cpu;=0A=
+>>> -static unsigned int __read_mostly sched_granularity =3D 1;=0A=
+>>> +static unsigned int __read_mostly sched_granularity;=0A=
+>>> +=0A=
+>>> +char *sched_gran_str(char *str, size_t size)=0A=
+>>> +{=0A=
+>>> +=A0=A0=A0 char *mode =3D "";=0A=
+>>> +=0A=
+>>> +=A0=A0=A0 switch ( opt_sched_granularity )=0A=
+>>> +=A0=A0=A0 {=0A=
+>>> +=A0=A0=A0 case SCHED_GRAN_cpu:=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 mode =3D "cpu";=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+>>> +=A0=A0=A0 case SCHED_GRAN_core:=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 mode =3D "core";=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+>>> +=A0=A0=A0 case SCHED_GRAN_socket:=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 mode =3D "socket";=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+>>> +=A0=A0=A0 default:=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 ASSERT_UNREACHABLE();=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 break;=0A=
+>>> +=A0=A0=A0 }=0A=
+>>> +=0A=
+>>> +=A0=A0=A0 if ( sched_granularity )=0A=
+>>> +=A0=A0=A0=A0=A0=A0=A0 snprintf(str, size, "%u-way %s", sched_granulari=
+ty, mode);=0A=
+>>>=0A=
+>> I'm not sure about using the value of the enum like this.=0A=
+> =0A=
+> enum? sched_granularity holds the number of cpus per scheduling=0A=
+> resource. opt_sched_granularity is the enum.=0A=
+> =0A=
+>>=0A=
+>> E.g., in a system with 4 threads per core, enabling core scheduling=0A=
+>> granularity would mean having 4 vCPUs in the scheduling units. But this=
+=0A=
+>> will still print "2-way core-scheduling", which I think would sound=0A=
+>> confusing.=0A=
+> =0A=
+> It would print "4-way", of course.=0A=
+> =0A=
+>>=0A=
+>> So I'd just go with "cpu", "core" and "socket" strings.=0A=
+> =0A=
+> No, this is not a good idea. With e.g. smt=3D0 you'll be able to have=0A=
+> "1-way core" which is much more informative than "core".=0A=
+=0A=
+Can confirm the above. "sched-gran=3Dcore" on a Knights Mill produces:=0A=
+(XEN) [  232.018648] Scheduler: SMP Credit Scheduler (credit) in 4-way core=
+-scheduling mode=0A=
+=0A=
+While "sched-gran=3Dcore smt=3D0" gives:=0A=
+(XEN) [  259.337588] Scheduler: SMP Credit Scheduler (credit) in 1-way core=
+-scheduling mode=0A=
+=0A=
+--=0A=
+Thanks,=0A=
+Sergey=0A=
+=0A=
 
