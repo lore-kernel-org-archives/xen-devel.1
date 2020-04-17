@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-8.4 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
 	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 124B8C352BE
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EEDDC2BB1D
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DB9BF22252
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:14 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 70C2B221EC
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 07:06:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="ptbhjimg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DB9BF22252
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="IHlDk+s/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 70C2B221EC
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPL4c-0001gF-EY; Fri, 17 Apr 2020 07:06:02 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jPL4j-0001iU-1G; Fri, 17 Apr 2020 07:06:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=3sm3=6B=amazon.de=prvs=369b905e4=wipawel@srs-us1.protection.inumbo.net>)
- id 1jPL4b-0001g5-9W
- for xen-devel@lists.xen.org; Fri, 17 Apr 2020 07:06:01 +0000
-X-Inumbo-ID: e2279250-8079-11ea-9e09-bc764e2007e4
-Received: from smtp-fw-2101.amazon.com (unknown [72.21.196.25])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e2279250-8079-11ea-9e09-bc764e2007e4;
- Fri, 17 Apr 2020 07:05:56 +0000 (UTC)
+ id 1jPL4i-0001iJ-LZ
+ for xen-devel@lists.xen.org; Fri, 17 Apr 2020 07:06:08 +0000
+X-Inumbo-ID: e6d588fd-8079-11ea-8c80-12813bfff9fa
+Received: from smtp-fw-4101.amazon.com (unknown [72.21.198.25])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e6d588fd-8079-11ea-8c80-12813bfff9fa;
+ Fri, 17 Apr 2020 07:06:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
- t=1587107156; x=1618643156;
+ t=1587107165; x=1618643165;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version;
- bh=FGq21dZDqlyAQXJxV2xTF6vsjs2rXeIGTVUXZZqRLdA=;
- b=ptbhjimgkFbgqPndDPQ8IHF1jFoLh7ooko+wBKsclEHQr+yHTPPJ50rN
- 2L/csHrXyzFBcE16TaKDOb31eBXmmKS2QkhJni3UnlqNli044tuP4dDSZ
- HbX+ir3UBBf1VGyblaqdU5gzrtwhAcwNLSMtw0R0fdLBTlD9nxBXrGDOC U=;
-IronPort-SDR: rjJzvLVqtRl3y398/t9DcG0j2Zl+/QEbvLLjmG61nbiR07845Oq27V1MnQL0HXGPPxmBq1ysn2
- LVWhC2MEWvZw==
-X-IronPort-AV: E=Sophos;i="5.72,394,1580774400"; d="scan'208";a="26253747"
-Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO
- email-inbound-relay-2a-90c42d1d.us-west-2.amazon.com) ([10.43.8.2])
- by smtp-border-fw-out-2101.iad2.amazon.com with ESMTP;
- 17 Apr 2020 07:05:43 +0000
+ bh=493GNuIf5KbW+Y/729Kw1IKQ8Uqsew/NWiY7HpkG1hg=;
+ b=IHlDk+s/fHSacLfqJM1ZyUhysyyzv1zhiljbsKiX5C+T2+uj7ZiuIcX5
+ yxeXjz8iSBpDQ8fSLqfmzhOB4LA/ZsYxkVFbhKY6VAu3DDi2GTIgQ+yEH
+ DPt7St+azVfn42SSIKa+jI8awMzMSBhoQf+cJgd6uxycHhsb6Jv/gGGp3 c=;
+IronPort-SDR: bB/uFZXPLRh/pPukLbf1/QJKMR4TloS6qG2sZfxHgYCMOuZ1ys2ILsDEwcKqcvWmqOjiZ+9jNp
+ Mmn+b03wsatw==
+X-IronPort-AV: E=Sophos;i="5.72,394,1580774400"; d="scan'208";a="26002075"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
+ email-inbound-relay-2c-4e7c8266.us-west-2.amazon.com) ([10.43.8.6])
+ by smtp-border-fw-out-4101.iad4.amazon.com with ESMTP;
+ 17 Apr 2020 07:05:47 +0000
 Received: from EX13MTAUEA002.ant.amazon.com
- (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
- by email-inbound-relay-2a-90c42d1d.us-west-2.amazon.com (Postfix) with ESMTPS
- id BD700A225C; Fri, 17 Apr 2020 07:05:42 +0000 (UTC)
-Received: from EX13D02EUC002.ant.amazon.com (10.43.164.14) by
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2c-4e7c8266.us-west-2.amazon.com (Postfix) with ESMTPS
+ id 32E3AA24C6; Fri, 17 Apr 2020 07:05:46 +0000 (UTC)
+Received: from EX13D02EUB001.ant.amazon.com (10.43.166.150) by
  EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 17 Apr 2020 07:05:42 +0000
+ id 15.0.1497.2; Fri, 17 Apr 2020 07:05:45 +0000
 Received: from EX13MTAUEE002.ant.amazon.com (10.43.62.24) by
- EX13D02EUC002.ant.amazon.com (10.43.164.14) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Fri, 17 Apr 2020 07:05:41 +0000
+ EX13D02EUB001.ant.amazon.com (10.43.166.150) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 17 Apr 2020 07:05:44 +0000
 Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
  by mail-relay.amazon.com (10.43.62.224) with Microsoft SMTP Server id
- 15.0.1497.2 via Frontend Transport; Fri, 17 Apr 2020 07:05:39 +0000
+ 15.0.1497.2 via Frontend Transport; Fri, 17 Apr 2020 07:05:43 +0000
 From: Pawel Wieczorkiewicz <wipawel@amazon.de>
 To: <xen-devel@lists.xen.org>
-Subject: [XTF 1/6] time: introduce time managment in xtf
-Date: Fri, 17 Apr 2020 07:05:23 +0000
-Message-ID: <20200417070528.48329-2-wipawel@amazon.de>
+Subject: [XTF 3/6] time: add gettimeofday() function to time managment
+Date: Fri, 17 Apr 2020 07:05:25 +0000
+Message-ID: <20200417070528.48329-4-wipawel@amazon.de>
 X-Mailer: git-send-email 2.16.6
 In-Reply-To: <20200417070528.48329-1-wipawel@amazon.de>
 References: <20200417070528.48329-1-wipawel@amazon.de>
 MIME-Version: 1.0
 Content-Type: text/plain
-Precedence: Bulk
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
+Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -82,198 +83,74 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: julien@xen.org, paul@xen.org, semelpaul@gmail.com,
- andrew.cooper3@citrix.com, Pawel Wieczorkiewicz <wipawel@amazon.de>,
- nmanthey@amazon.de
+Cc: semelpaul@gmail.com, andrew.cooper3@citrix.com, julien@xen.org,
+ nmanthey@amazon.de, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Paul Semel <phentex@amazon.de>
 
-This commit introduces basic time management functionality.
-For synchronization purpose, we do really want to be able to
-"control" time.
-
-Add since_boot_time() that gets the time in nanoseconds from the
-moment the VM has booted.
-
 Signed-off-by: Paul Semel <phentex@amazon.de>
-Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
 ---
- build/files.mk     |  1 +
- common/time.c      | 85 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/xtf/lib.h  | 18 ++++++++++++
- include/xtf/time.h | 28 ++++++++++++++++++
- 4 files changed, 132 insertions(+)
- create mode 100644 common/time.c
- create mode 100644 include/xtf/time.h
+ common/time.c      | 14 ++++++++++++++
+ include/xtf/time.h | 12 ++++++++++++
+ 2 files changed, 26 insertions(+)
 
-diff --git a/build/files.mk b/build/files.mk
-index dfa27e4..6286317 100644
---- a/build/files.mk
-+++ b/build/files.mk
-@@ -16,6 +16,7 @@ obj-perarch += $(ROOT)/common/libc/vsnprintf.o
- obj-perarch += $(ROOT)/common/report.o
- obj-perarch += $(ROOT)/common/setup.o
- obj-perarch += $(ROOT)/common/xenbus.o
-+obj-perarch += $(ROOT)/common/time.o
- 
- obj-perenv += $(ROOT)/arch/x86/decode.o
- obj-perenv += $(ROOT)/arch/x86/desc.o
 diff --git a/common/time.c b/common/time.c
-new file mode 100644
-index 0000000..b9a6531
---- /dev/null
+index 7decd07..fffae1c 100644
+--- a/common/time.c
 +++ b/common/time.c
-@@ -0,0 +1,85 @@
-+#include <xtf/types.h>
-+#include <xtf/traps.h>
-+#include <xtf/time.h>
-+#include <xtf/atomic.h>
-+
-+/* This function was taken from mini-os source code */
-+/* It returns ((delta << shift) * mul_frac) >> 32 */
-+static inline uint64_t scale_delta(uint64_t delta, uint32_t mul_frac, int shift)
-+{
-+    uint64_t product;
-+#ifdef __i386__
-+    uint32_t tmp1, tmp2;
-+#endif
-+
-+    if ( shift < 0 )
-+        delta >>= -shift;
-+    else
-+        delta <<= shift;
-+
-+#ifdef __i386__
-+    __asm__ (
-+            "mul  %5       ; "
-+            "mov  %4,%%eax ; "
-+            "mov  %%edx,%4 ; "
-+            "mul  %5       ; "
-+            "add  %4,%%eax ; "
-+            "xor  %5,%5    ; "
-+            "adc  %5,%%edx ; "
-+            : "=A" (product), "=r" (tmp1), "=r" (tmp2)
-+            : "a" ((uint32_t)delta), "1" ((uint32_t)(delta >> 32)), "2" (mul_frac) );
-+#else
-+    __asm__ (
-+            "mul %%rdx ; shrd $32,%%rdx,%%rax"
-+            : "=a" (product) : "0" (delta), "d" ((uint64_t)mul_frac) );
-+#endif
-+
-+    return product;
-+}
-+
-+
-+#if defined(__i386__)
-+uint32_t since_boot_time(void)
-+#else
-+uint64_t since_boot_time(void)
-+#endif
-+{
-+    unsigned long old_tsc, tsc;
-+#if defined(__i386__)
-+    uint32_t system_time;
-+#else
-+    uint64_t system_time;
-+#endif
-+    uint32_t ver1, ver2;
-+
-+    do {
-+        do {
-+            ver1 = shared_info.vcpu_info[0].time.version;
-+            smp_rmb();
-+        } while ( (ver1 & 1) == 1 );
-+
-+        system_time = shared_info.vcpu_info[0].time.system_time;
-+        old_tsc = shared_info.vcpu_info[0].time.tsc_timestamp;
-+
-+        smp_rmb();
-+        tsc = rdtscp();
-+        ver2 = ACCESS_ONCE(shared_info.vcpu_info[0].time.version);
-+        smp_rmb();
-+    } while ( ver1 != ver2 );
-+
-+    system_time += scale_delta(tsc - old_tsc,
-+                               shared_info.vcpu_info[0].time.tsc_to_system_mul,
-+                               shared_info.vcpu_info[0].time.tsc_shift);
-+
-+    return system_time;
-+}
-+
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
+@@ -90,6 +90,20 @@ uint64_t current_time(void)
+     return seconds + (since_boot_time() / 1000000000);
+ }
+ 
++/* The POSIX gettimeofday syscall normally takes a second argument, which is
++ * the timezone (struct timezone). However, it sould be NULL because linux
++ * doesn't use it anymore. So we need for us to add it in this function
 + */
-diff --git a/include/xtf/lib.h b/include/xtf/lib.h
-index 3348464..c3eb10c 100644
---- a/include/xtf/lib.h
-+++ b/include/xtf/lib.h
-@@ -54,6 +54,24 @@ void __noreturn panic(const char *fmt, ...) __printf(1, 2);
- 
- #define ROUNDUP(x, a) (((x) + (a) - 1) & ~((a) - 1))
- 
-+#ifdef __GCC_ASM_FLAG_OUTPUTS__
-+# define ASM_FLAG_OUT(yes, no) yes
-+#else
-+# define ASM_FLAG_OUT(yes, no) no
-+#endif
++int gettimeofday(struct timeval *tp)
++{
++    if (!tp)
++        return -1;
 +
-+static inline uint64_t rdtsc (void) {
-+  unsigned int low, high;
-+  asm volatile ("rdtsc" : "=a" (low), "=d" (high));
-+  return ((uint64_t) high << 32) | low;
++    tp->sec = current_time();
++    tp->nsec = shared_info.wc_nsec + (since_boot_time() % 1000000000);
++    return 0;
 +}
 +
-+static inline uint64_t rdtscp (void) {
-+  unsigned int low, high;
-+  asm volatile ("rdtscp" : "=a" (low), "=d" (high) :: "ecx");
-+  return ((uint64_t) high << 32) | low;
-+}
-+
- void heapsort(void *base, size_t nmemb, size_t size,
-               int (*compar)(const void *, const void *),
-               void (*swap)(void *, void *));
+ /*
+  * Local variables:
+  * mode: C
 diff --git a/include/xtf/time.h b/include/xtf/time.h
-new file mode 100644
-index 0000000..e30d109
---- /dev/null
+index 52da27a..e312465 100644
+--- a/include/xtf/time.h
 +++ b/include/xtf/time.h
-@@ -0,0 +1,28 @@
-+/**
-+ * @file include/xtf/time.h
-+ *
-+ * Time management
-+ */
-+#ifndef XTF_TIME_H
-+# define XTF_TIME_H
-+
-+#include <xtf/types.h>
-+
-+#if defined(__i386__)
-+/* Time from boot in nanoseconds */
-+uint32_t since_boot_time(void);
+@@ -8,6 +8,16 @@
+ 
+ #include <xtf/types.h>
+ 
++struct timeval {
++#if !defined(__i386__)
++    uint64_t sec;
++    uint64_t nsec;
 +#else
-+uint64_t since_boot_time(void);
++    uint32_t sec;
++    uint32_t nsec;
 +#endif
++};
 +
-+#endif /* XTF_TIME_H */
+ #if defined(__i386__)
+ /* Time from boot in nanoseconds */
+ uint32_t since_boot_time(void);
+@@ -19,6 +29,8 @@ uint64_t since_boot_time(void);
+ uint64_t current_time(void);
+ #endif
+ 
++int gettimeofday(struct timeval *tp);
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
+ #endif /* XTF_TIME_H */
+ 
+ /*
 -- 
 2.16.6
 
