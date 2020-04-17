@@ -2,65 +2,54 @@ Return-Path: <SRS0=mRjJ=6B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 152FCC352BE
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 11:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98C8BC38A2E
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 12:05:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DC3F4206D9
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 11:46:07 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="BhJU5kpe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DC3F4206D9
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 750F22083E
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 12:05:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 750F22083E
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPPRN-000266-3c; Fri, 17 Apr 2020 11:45:49 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jPPjn-0003n3-4b; Fri, 17 Apr 2020 12:04:51 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=+QBT=6B=xen.org=wl@srs-us1.protection.inumbo.net>)
- id 1jPPRL-000261-QW
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 11:45:47 +0000
-X-Inumbo-ID: fa5fa034-80a0-11ea-b4f4-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fa5fa034-80a0-11ea-b4f4-bc764e2007e4;
- Fri, 17 Apr 2020 11:45:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID
- :Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID
- :Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
- Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
- :List-Post:List-Owner:List-Archive;
- bh=nhJoQhBdS+eHcmpfuySjaJ1ecM/XbFb2B9gH6k6ftF8=; b=BhJU5kpev6cGZB9Hr3lnQlbUiU
- QdgcKKsSDdVTFBONqDPcfmpIV57sNDsiOIQbINPXs9UX00Hd0zNtTIEqVwwSOQWlCBoRFcvqdPBCt
- PjhoYBkM1R3FEl1nFdvTqXSkwehnBCprFruHG5dg+tiVtewV+3BKJHDGvBiABoVrgQjI=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <wl@xen.org>)
- id 1jPPRK-0004up-L5; Fri, 17 Apr 2020 11:45:46 +0000
-Received: from 44.142.6.51.dyn.plus.net ([51.6.142.44] helo=debian)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <wl@xen.org>)
- id 1jPPRK-0002g6-Bu; Fri, 17 Apr 2020 11:45:46 +0000
-Date: Fri, 17 Apr 2020 12:45:43 +0100
-From: Wei Liu <wl@xen.org>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH] x86/pv: Delete CONFIG_PV_LDT_PAGING
-Message-ID: <20200417114543.rofpi53qdg3gcsm2@debian>
-References: <20200417113423.19057-1-andrew.cooper3@citrix.com>
+ (envelope-from <SRS0=x8HM=6B=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jPPjl-0003my-TP
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 12:04:49 +0000
+X-Inumbo-ID: a235c016-80a3-11ea-8cc2-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id a235c016-80a3-11ea-8cc2-12813bfff9fa;
+ Fri, 17 Apr 2020 12:04:48 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 9BC93AD83;
+ Fri, 17 Apr 2020 12:04:46 +0000 (UTC)
+Subject: Re: [PATCH] x86/vtd: fix EPT page table sharing check
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <20200417102650.20083-1-roger.pau@citrix.com>
+ <c3589851-7084-e3a4-f776-6157bc4de762@suse.com>
+ <20200417111637.GP28601@Air-de-Roger>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <224070b7-d396-52cb-5eed-d0295528a865@suse.com>
+Date: Fri, 17 Apr 2020 14:04:40 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200417113423.19057-1-andrew.cooper3@citrix.com>
-User-Agent: NeoMutt/20180716
+In-Reply-To: <20200417111637.GP28601@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -71,19 +60,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>,
- Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Kevin Tian <kevin.tian@intel.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, Apr 17, 2020 at 12:34:23PM +0100, Andrew Cooper wrote:
-> ... in accordance with the timeline layed out in the Kconfig message.  There
-> has been no comment since it was disabled by default.
+On 17.04.2020 13:16, Roger Pau Monné wrote:
+> On Fri, Apr 17, 2020 at 12:57:16PM +0200, Jan Beulich wrote:
+>> On 17.04.2020 12:26, Roger Pau Monne wrote:
+>>> --- a/xen/drivers/passthrough/vtd/iommu.c
+>>> +++ b/xen/drivers/passthrough/vtd/iommu.c
+>>> @@ -1914,8 +1914,10 @@ static int __init vtd_ept_page_compatible(struct vtd_iommu *iommu)
+>>>      if ( rdmsr_safe(MSR_IA32_VMX_EPT_VPID_CAP, ept_cap) != 0 ) 
+>>>          return 0;
+>>>  
+>>> -    return (ept_has_2mb(ept_cap) && opt_hap_2mb) == cap_sps_2mb(vtd_cap) &&
+>>> -           (ept_has_1gb(ept_cap) && opt_hap_1gb) == cap_sps_1gb(vtd_cap);
+>>> +    return ((ept_has_2mb(ept_cap) && opt_hap_2mb) ? cap_sps_2mb(vtd_cap)
+>>> +                                                  : true) &&
+>>> +           ((ept_has_1gb(ept_cap) && opt_hap_1gb) ? cap_sps_1gb(vtd_cap)
+>>> +                                                  : true);
+>>
+>> I have to admit that I always find it odd to have "true" or "false"
+>> as the 2nd or 3rd operand of a ternary. How about simply changing
+>> == to <= in the original expression?
+> 
+> I find it weird to use <= to compare booleans, but I can change it.
 
-layed -> laid
+In the end Kevin will have to judge what variant to use.
 
-Code looks good to me:
+> Let me post a new version with the adjustments to the commit message
+> and this requested change.
 
-Reviewed-by: Wei Liu <wl@xen.org>
+Thanks.
+
+Jan
 
