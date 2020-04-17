@@ -2,54 +2,66 @@ Return-Path: <SRS0=mRjJ=6B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EA99BC3815B
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 186BFC352BE
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C6BB2207FC
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:45:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6BB2207FC
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id D628921D94
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:37 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="U/vQRxFi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D628921D94
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPNYS-0007xF-AC; Fri, 17 Apr 2020 09:45:00 +0000
+	id 1jPNfc-0000LT-Dh; Fri, 17 Apr 2020 09:52:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=x8HM=6B=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jPNYQ-0007xA-QQ
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 09:44:58 +0000
-X-Inumbo-ID: 1954cc96-8090-11ea-b58d-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=lM+k=6B=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1jPNfb-0000LM-40
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 09:52:23 +0000
+X-Inumbo-ID: 226fb0b0-8091-11ea-b4f4-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1954cc96-8090-11ea-b58d-bc764e2007e4;
- Fri, 17 Apr 2020 09:44:58 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 2A21BAD45;
- Fri, 17 Apr 2020 09:44:56 +0000 (UTC)
-Subject: Re: [PATCH 3/6] x86/mem-paging: use guest handle for
- XENMEM_paging_op_prep
-To: Julien Grall <julien@xen.org>
-References: <3b7cc69d-709c-570a-716a-c45f6fda181f@suse.com>
- <f3c57792-d372-a70f-691b-87681b83e898@suse.com>
- <d340e170-1c08-e20a-b170-c176eb00b4dd@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <5e1dc7fd-f780-31bc-670d-4736061f46af@suse.com>
-Date: Fri, 17 Apr 2020 11:44:53 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <d340e170-1c08-e20a-b170-c176eb00b4dd@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+ id 226fb0b0-8091-11ea-b4f4-bc764e2007e4;
+ Fri, 17 Apr 2020 09:52:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=7I49opomVxvB6V8PzhNVtuuo+Ifnpql27GLDjPB32Kw=; b=U/vQRxFirIgOsjhpUeE1YKAn/1
+ ioly0B4M83S0EK0PELN1eGIbRSPaod2Z1wJwZzJvz4kK+YGbQGqQ/dmAUfaydE8dBlSU3HiS2UW7S
+ nBlomGh2Ejn/9aVTANwypSQcq2bKlplr6hG/Vl6S8f1o7Wo/wazxJ0ri8nM7jf2wDYz4=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jPNfa-0002fp-2R; Fri, 17 Apr 2020 09:52:22 +0000
+Received: from 54-240-197-227.amazon.com ([54.240.197.227]
+ helo=u1bbd043a57dd5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jPNfZ-000304-Os; Fri, 17 Apr 2020 09:52:22 +0000
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH 3/6] x86_64/mm: map and unmap page tables in subarch_memory_op
+Date: Fri, 17 Apr 2020 10:52:05 +0100
+Message-Id: <1c88c785eb9537983a1692cc379604233ff13025.1587116799.git.hongyxia@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1587116799.git.hongyxia@amazon.com>
+References: <cover.1587116799.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1587116799.git.hongyxia@amazon.com>
+References: <cover.1587116799.git.hongyxia@amazon.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -60,52 +72,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 17.04.2020 10:37, Julien Grall wrote:
-> On 16/04/2020 16:46, Jan Beulich wrote:
->> While it should have been this way from the beginning, not doing so will
->> become an actual problem with PVH Dom0.
-> 
-> I think the current code is also buggy on PV dom0 because the buffer
-> is not locked in memory. So you have no promise the buffer will be
-> present when calling the hypercall.
+From: Wei Liu <wei.liu2@citrix.com>
 
-Quite possibly; I didn't looks at that aspect at all.
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+---
+ xen/arch/x86/x86_64/mm.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
->> --- a/tools/libxc/xc_mem_paging.c
->> +++ b/tools/libxc/xc_mem_paging.c
->> @@ -26,15 +26,33 @@ static int xc_mem_paging_memop(xc_interf
->>                                  unsigned int op, uint64_t gfn, void *buffer)
-> 
-> NIT: As you switch the handle to use const, would it make to also
-> make the buffer const?
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 5714e5ba62..6d52183559 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -932,13 +932,13 @@ long subarch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+               (v < (unsigned long)(machine_to_phys_mapping + max_page));
+               i++, v += 1UL << L2_PAGETABLE_SHIFT )
+         {
+-            l3e = l4e_to_l3e(idle_pg_table[l4_table_offset(v)])[
+-                l3_table_offset(v)];
++            l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(v)],
++                               l3_table_offset(v));
+             if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) )
+                 mfn = last_mfn;
+             else if ( !(l3e_get_flags(l3e) & _PAGE_PSE) )
+             {
+-                l2e = l3e_to_l2e(l3e)[l2_table_offset(v)];
++                l2e = l2e_from_l3e(l3e, l2_table_offset(v));
+                 if ( l2e_get_flags(l2e) & _PAGE_PRESENT )
+                     mfn = l2e_get_pfn(l2e);
+                 else
+-- 
+2.24.1.AMZN
 
-A separate change, I would say, but if the tool stack maintainers
-agree with doing so at the same time, I certainly can.
-
->> --- a/xen/arch/x86/mm/p2m.c
->> +++ b/xen/arch/x86/mm/p2m.c
->> @@ -1779,7 +1779,8 @@ void p2m_mem_paging_populate(struct doma
->>    * mfn if populate was called for  gfn which was nominated but not evicted. In
->>    * this case only the p2mt needs to be forwarded.
->>    */
->> -int p2m_mem_paging_prep(struct domain *d, unsigned long gfn_l, uint64_t buffer)
->> +int p2m_mem_paging_prep(struct domain *d, unsigned long gfn_l,
->> +                        XEN_GUEST_HANDLE_PARAM(const_uint8) buffer)
-> 
-> Shouldn't this technically be XEN_GUEST_HANDLE_64() to match the field?
-
-I think an argument can be made for going either way - as a function
-parameter it should have the type chosen. Do you see any (possibly
-just latent) breakage from using _PARAM() rather than _64()?
-
-Jan
 
