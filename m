@@ -2,100 +2,86 @@ Return-Path: <SRS0=mRjJ=6B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52BE8C38A2D
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 15:50:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BC167C38A2B
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 16:07:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0FFEA2223C
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 15:50:41 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6D1F620771
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 16:07:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="OCq2Kqcw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0FFEA2223C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="XJPguxHV"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D1F620771
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPTG3-0007Wi-JL; Fri, 17 Apr 2020 15:50:23 +0000
+	id 1jPTWK-0000rH-QP; Fri, 17 Apr 2020 16:07:12 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=z9Py=6B=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jPTG1-0007WZ-WD
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 15:50:22 +0000
-X-Inumbo-ID: 1f61c945-80c3-11ea-8d2d-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by lists.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <SRS0=Ygtx=6B=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jPTWJ-0000rC-06
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 16:07:11 +0000
+X-Inumbo-ID: 7dd06e71-80c5-11ea-8d34-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1f61c945-80c3-11ea-8d2d-12813bfff9fa;
- Fri, 17 Apr 2020 15:50:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587138612;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=ZhK0+BzJnp1VoPrHaLr5cGNVpfHqgyvx1ITJ+8zW0CY=;
- b=OCq2KqcwQhkfBU0cDmGVB0GA+B51j0jHk2AAGtCru15GqK6R6V3ET5cI
- kpoSzCd7pMlZHvu+XV6mEMeDXmzUcRdvNdD7ZYMCisHAfwz2/vUiIcEuW
- v5QZqGuDMqUGr1hTRISJV2DNWTejoDNJwCrmCCEn+oqyuPEBUyIJ7M75t g=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=andrew.cooper3@citrix.com;
- spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="andrew.cooper3@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
- Andrew.Cooper3@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="Andrew.Cooper3@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: W60PJzhwI65JY1GYUh57Ly621HUTbcLiEz5oy0VTNXg7PnHPDHnYNirQiboUboOIulASbJDdr1
- poaZgku4gp0ROTF6jflE5I2WFFCLUwM0Ya2F4PWcxEXzKi4y+zYd1smgUspOHsm8J95tdeSzlp
- +OKmDFAywofaNFoW08QuQFuap1MD0xHI8w7Ovt3Nyi32fFbRBZOBNswxmR3iVUdI/bbXFjPUQW
- uU+YPouzi5QerAjeF09mIejvZPFIUMO+zrzu6EmUG3W+qmJBDCJqDEy+RGjkDI+W0TUnAwD2oY
- 0pQ=
-X-SBRS: 2.7
-X-MesageID: 16168814
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,395,1580792400"; d="scan'208";a="16168814"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 2/3] x86/pv: Short-circuit is_pv_{32,
- 64}bit_domain() in !CONFIG_PV32 builds
-Date: Fri, 17 Apr 2020 16:50:03 +0100
-Message-ID: <20200417155004.16806-3-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200417155004.16806-1-andrew.cooper3@citrix.com>
-References: <20200417155004.16806-1-andrew.cooper3@citrix.com>
+ id 7dd06e71-80c5-11ea-8d34-12813bfff9fa;
+ Fri, 17 Apr 2020 16:07:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=6+dABX/BVEpImn2q9apkI5btMGodHnh717dR+CmwPbo=; b=XJPguxHV6CvF1jVOruWkeP/c8O
+ VhU7X6A1r92tqitZ6e5B/5TAdBFws8pxtrLOzkmbHdjInCZq29aNgHv8Mis+jpyF7EndRDOMwbs/+
+ K9t7v9jfjHB1YBJO7Rdx5HKraugKf2H8Pz/GbYY7vdFgOeW7CO3EFOFcmuUXHadW1lHk=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jPTWD-0002Cx-40; Fri, 17 Apr 2020 16:07:05 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jPTWC-0002v2-Ry; Fri, 17 Apr 2020 16:07:05 +0000
+Subject: Re: [PATCH v2] xen/arm: implement GICD_I[S/C]ACTIVER reads
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
+References: <20200327023451.20271-1-sstabellini@kernel.org>
+ <5deb3992-3cf5-2b00-8cef-af75ed83a1fd@xen.org>
+ <alpine.DEB.2.21.2003311121120.4572@sstabellini-ThinkPad-T480s>
+ <2bb21703-8078-cd92-0463-bea049413f32@xen.org>
+ <alpine.DEB.2.21.2004010747530.10657@sstabellini-ThinkPad-T480s>
+ <d457455f-a1ad-1964-ff15-45d794f1822a@xen.org>
+ <alpine.DEB.2.21.2004031234010.23034@sstabellini-ThinkPad-T480s>
+ <CAJ=z9a2LdC-nSMUEjLhGp_4PAkcRkp4wJKXiAy0ftt34T8LAVg@mail.gmail.com>
+ <D048CA76-8C9F-4F44-B05C-D834A6D0D37D@citrix.com>
+ <9de763c9-19f2-2163-d5db-95176dbce3cc@xen.org>
+ <082584BF-3837-48A7-A0C2-9582BA3379C0@citrix.com>
+ <a29cb044-7e78-a47b-f842-327373e0ec9f@xen.org>
+ <4FBF62BA-5844-4506-8C01-FE1A6F4A7ED2@citrix.com>
+ <057f48b7-84be-0bc5-773d-d01a79181b20@xen.org>
+ <alpine.DEB.2.21.2004081642070.28673@sstabellini-ThinkPad-T480s>
+ <914c421a-02cf-375b-a3fa-1c5e934cdeb3@xen.org>
+ <3b002deb-5a80-3dc4-9462-649135cfbd29@xen.org>
+ <C39B873E-F40C-4549-9D5E-953E88F94E43@arm.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <1b91aeb3-589b-ac68-8f92-a1e06fa9640d@xen.org>
+Date: Fri, 17 Apr 2020 17:07:02 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <C39B873E-F40C-4549-9D5E-953E88F94E43@arm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -106,188 +92,37 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Peng Fan <peng.fan@nxp.com>, Stefano Stabellini <sstabellini@kernel.org>,
+ "maz@kernel.org" <maz@kernel.org>, George Dunlap <George.Dunlap@citrix.com>,
+ Wei Xu <xuwei5@hisilicon.com>, xen-devel <xen-devel@lists.xenproject.org>,
+ nd <nd@arm.com>, Julien Grall <julien.grall.oss@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-... and move arch.is_32bit_pv into the pv union while at it.
+Hi Bertrand,
 
-Bloat-o-meter reports the following net savings with some notable differences
-highlighted:
+On 17/04/2020 16:16, Bertrand Marquis wrote:
+> It seems that the problem is a bit bigger then expected and will need 
+> more discussion and thinking.
+> I did some research on my side and there are several design possible 
+> depending on what should be the goal performance or real-time behaviour 
+> (going from just give the status we have to fire a service interrupts 
+> when any interrupts is acked by a guest to refresh our internal status).
+> 
+> In the short term, could we not agree to fix the typo by returning 
+> always 0 and start a discussion on the vgic implementation ?
 
-  add/remove: 4/6 grow/shrink: 5/76 up/down: 1955/-18792 (-16837)
-  Function                                     old     new   delta
-  ...
-  pv_vcpu_initialise                           411     158    -253
-  guest_cpuid                                 1837    1584    -253
-  pv_hypercall                                 579     297    -282
-  check_descriptor                             427     130    -297
-  _get_page_type                              5915    5202    -713
-  arch_get_info_guest                         2225    1195   -1030
-  context_switch                              3831    2635   -1196
-  dom0_construct_pv                          10284    8939   -1345
-  arch_set_info_guest                         5564    3267   -2297
-  Total: Before=3079563, After=3062726, chg -0.55%
+I have already pointed out multiple time now ([1], [2]) that I would not 
+oppose the temporary solution. I think this is a matter of someone 
+(Stefano?) to submit it :).
 
-In principle, DOMAIN_is_32bit_pv should be based on CONFIG_PV32, but the
-assembly code is going to need further untangling before that becomes easy to
-do.  For now, use CONFIG_PV as missed accidentally by c/s ec651bd2460 "x86:
-make entry point code build when !CONFIG_PV".
+Cheers,
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Wei Liu <wl@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/domctl.c             |  4 ++--
- xen/arch/x86/pv/domain.c          |  6 +++---
- xen/arch/x86/pv/hypercall.c       |  2 ++
- xen/arch/x86/x86_64/asm-offsets.c |  4 +++-
- xen/include/asm-x86/domain.h      |  4 ++--
- xen/include/xen/sched.h           | 15 +++++++++++++--
- 6 files changed, 25 insertions(+), 10 deletions(-)
+[1] 
+https://lists.xenproject.org/archives/html/xen-devel/2019-11/msg01642.html
+[2] 
+https://lists.xenproject.org/archives/html/xen-devel/2020-04/msg00459.html
 
-diff --git a/xen/arch/x86/domctl.c b/xen/arch/x86/domctl.c
-index add70126b9..3822dd7fd1 100644
---- a/xen/arch/x86/domctl.c
-+++ b/xen/arch/x86/domctl.c
-@@ -576,8 +576,8 @@ long arch_do_domctl(
-             ret = -EOPNOTSUPP;
-         else if ( is_pv_domain(d) )
-         {
--            if ( ((domctl->u.address_size.size == 64) && !d->arch.is_32bit_pv) ||
--                 ((domctl->u.address_size.size == 32) && d->arch.is_32bit_pv) )
-+            if ( ((domctl->u.address_size.size == 64) && !d->arch.pv.is_32bit) ||
-+                 ((domctl->u.address_size.size == 32) && d->arch.pv.is_32bit) )
-                 ret = 0;
-             else if ( domctl->u.address_size.size == 32 )
-                 ret = switch_compat(d);
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index 47a0db082f..e0977bfbd7 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -215,7 +215,7 @@ int switch_compat(struct domain *d)
-         return 0;
- 
-     d->arch.has_32bit_shinfo = 1;
--    d->arch.is_32bit_pv = 1;
-+    d->arch.pv.is_32bit = 1;
- 
-     for_each_vcpu( d, v )
-     {
-@@ -235,7 +235,7 @@ int switch_compat(struct domain *d)
-     return 0;
- 
-  undo_and_fail:
--    d->arch.is_32bit_pv = d->arch.has_32bit_shinfo = 0;
-+    d->arch.pv.is_32bit = d->arch.has_32bit_shinfo = 0;
-     for_each_vcpu( d, v )
-     {
-         free_compat_arg_xlat(v);
-@@ -358,7 +358,7 @@ int pv_domain_initialise(struct domain *d)
-     d->arch.ctxt_switch = &pv_csw;
- 
-     /* 64-bit PV guest by default. */
--    d->arch.is_32bit_pv = d->arch.has_32bit_shinfo = 0;
-+    d->arch.pv.is_32bit = d->arch.has_32bit_shinfo = 0;
- 
-     d->arch.pv.xpti = is_hardware_domain(d) ? opt_xpti_hwdom : opt_xpti_domu;
- 
-diff --git a/xen/arch/x86/pv/hypercall.c b/xen/arch/x86/pv/hypercall.c
-index 17ddf9ea1f..32d90a543f 100644
---- a/xen/arch/x86/pv/hypercall.c
-+++ b/xen/arch/x86/pv/hypercall.c
-@@ -302,6 +302,7 @@ void pv_ring3_init_hypercall_page(void *p)
-     }
- }
- 
-+#ifdef CONFIG_PV32
- void pv_ring1_init_hypercall_page(void *p)
- {
-     unsigned int i;
-@@ -329,6 +330,7 @@ void pv_ring1_init_hypercall_page(void *p)
-         *(u8  *)(p+ 7) = 0xc3;    /* ret */
-     }
- }
-+#endif
- 
- /*
-  * Local variables:
-diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
-index 500df7a3e7..9f66a69be7 100644
---- a/xen/arch/x86/x86_64/asm-offsets.c
-+++ b/xen/arch/x86/x86_64/asm-offsets.c
-@@ -98,8 +98,10 @@ void __dummy__(void)
-     OFFSET(VCPU_nsvm_hap_enabled, struct vcpu, arch.hvm.nvcpu.u.nsvm.ns_hap_enabled);
-     BLANK();
- 
--    OFFSET(DOMAIN_is_32bit_pv, struct domain, arch.is_32bit_pv);
-+#ifdef CONFIG_PV
-+    OFFSET(DOMAIN_is_32bit_pv, struct domain, arch.pv.is_32bit);
-     BLANK();
-+#endif
- 
-     OFFSET(VCPUINFO_upcall_pending, struct vcpu_info, evtchn_upcall_pending);
-     OFFSET(VCPUINFO_upcall_mask, struct vcpu_info, evtchn_upcall_mask);
-diff --git a/xen/include/asm-x86/domain.h b/xen/include/asm-x86/domain.h
-index 4192c636b1..ae155d6522 100644
---- a/xen/include/asm-x86/domain.h
-+++ b/xen/include/asm-x86/domain.h
-@@ -254,6 +254,8 @@ struct pv_domain
- 
-     atomic_t nr_l4_pages;
- 
-+    /* Is a 32-bit PV guest? */
-+    bool is_32bit;
-     /* XPTI active? */
-     bool xpti;
-     /* Use PCID feature? */
-@@ -333,8 +335,6 @@ struct arch_domain
-     /* NB. protected by d->event_lock and by irq_desc[irq].lock */
-     struct radix_tree_root irq_pirq;
- 
--    /* Is a 32-bit PV (non-HVM) guest? */
--    bool_t is_32bit_pv;
-     /* Is shared-info page in 32-bit format? */
-     bool_t has_32bit_shinfo;
- 
-diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-index 195e7ee583..6101761d25 100644
---- a/xen/include/xen/sched.h
-+++ b/xen/include/xen/sched.h
-@@ -985,7 +985,11 @@ static always_inline bool is_pv_vcpu(const struct vcpu *v)
- #ifdef CONFIG_COMPAT
- static always_inline bool is_pv_32bit_domain(const struct domain *d)
- {
--    return is_pv_domain(d) && d->arch.is_32bit_pv;
-+#ifdef CONFIG_PV32
-+    return is_pv_domain(d) && d->arch.pv.is_32bit;
-+#else
-+    return false;
-+#endif
- }
- 
- static always_inline bool is_pv_32bit_vcpu(const struct vcpu *v)
-@@ -995,7 +999,14 @@ static always_inline bool is_pv_32bit_vcpu(const struct vcpu *v)
- 
- static always_inline bool is_pv_64bit_domain(const struct domain *d)
- {
--    return is_pv_domain(d) && !d->arch.is_32bit_pv;
-+    if ( !is_pv_domain(d) )
-+        return false;
-+
-+#ifdef CONFIG_PV32
-+    return !d->arch.pv.is_32bit;
-+#else
-+    return true;
-+#endif
- }
- 
- static always_inline bool is_pv_64bit_vcpu(const struct vcpu *v)
 -- 
-2.11.0
-
+Julien Grall
 
