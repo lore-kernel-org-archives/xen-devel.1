@@ -7,57 +7,58 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B0749C3815B
-	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E927C38A29
+	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8056121D94
+	by mail.kernel.org (Postfix) with ESMTPS id D322721D94
 	for <xen-devel@archiver.kernel.org>; Fri, 17 Apr 2020 09:52:43 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="6Wg/PSgP"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8056121D94
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="FPk6Z1cK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D322721D94
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPNfh-0000Mq-18; Fri, 17 Apr 2020 09:52:29 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jPNfj-0000Nv-An; Fri, 17 Apr 2020 09:52:31 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=lM+k=6B=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jPNfg-0000Me-1B
- for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 09:52:28 +0000
-X-Inumbo-ID: 241c2132-8091-11ea-b58d-bc764e2007e4
+ id 1jPNfi-0000NQ-0x
+ for xen-devel@lists.xenproject.org; Fri, 17 Apr 2020 09:52:30 +0000
+X-Inumbo-ID: 21d23984-8091-11ea-8c9b-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 241c2132-8091-11ea-b58d-bc764e2007e4;
- Fri, 17 Apr 2020 09:52:25 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 21d23984-8091-11ea-8c9b-12813bfff9fa;
+ Fri, 17 Apr 2020 09:52:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=3PKlc7n3xS/jV0u6XuY6+PkL5866S2noi39EkmZJHLk=; b=6Wg/PSgPxch2MIXxZCIZTcAGU2
- e+xUte2YS7ssUZFYv3wFEa/duhWo1Ggen13MRH11jSCORyfcUeRbyKWsDQDL6mNvXVJ1/HexFz1DW
- fygtm8y+pMpFDHAveHIAoqHwbPYOc4iAYVihpCinG71neeIk6++Dvyj3pRxvpxhj1a3U=;
+ bh=tEeVOsGMSDjBCM+osSPHmTi/618O72vOFb/JLOuqfjw=; b=FPk6Z1cKcufcm78XCUmuoAsxxg
+ NB3bUWLYiTVSS/9IGOxLLksT8xkRnHri/hH9X25+ldy7DqY3dAxpaUOvJy/7srSgxcNkRUC8X6CIT
+ qf0PaoDxzvVgRwDGesPf3H/FRcBDOLUa/0Pm4j8vLlNFK0NeMdi+zzvlyjh2PVzilojw=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jPNfc-0002g2-TE; Fri, 17 Apr 2020 09:52:24 +0000
+ id 1jPNfY-0002fk-Lb; Fri, 17 Apr 2020 09:52:20 +0000
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jPNfc-000304-Ju; Fri, 17 Apr 2020 09:52:24 +0000
+ id 1jPNfY-000304-B3; Fri, 17 Apr 2020 09:52:20 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 5/6] x86/pv: map and unmap page tables in
- mark_pv_pt_pages_rdonly
-Date: Fri, 17 Apr 2020 10:52:07 +0100
-Message-Id: <9287363e13924f4a633b47b53c23b3466e26e4a8.1587116799.git.hongyxia@amazon.com>
+Subject: [PATCH 2/6] x86_64/mm: map and unmap page tables in
+ subarch_init_memory
+Date: Fri, 17 Apr 2020 10:52:04 +0100
+Message-Id: <0e14533f516ee5ce410e2cd8050f085aec4b4961.1587116799.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1587116799.git.hongyxia@amazon.com>
 References: <cover.1587116799.git.hongyxia@amazon.com>
@@ -84,64 +85,46 @@ From: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 ---
- xen/arch/x86/pv/dom0_build.c | 32 ++++++++++++++++++++------------
- 1 file changed, 20 insertions(+), 12 deletions(-)
+ xen/arch/x86/x86_64/mm.c | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
-index 5678da782d..28a939b68a 100644
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -50,17 +50,17 @@ static __init void mark_pv_pt_pages_rdonly(struct domain *d,
-     unsigned long count;
-     struct page_info *page;
-     l4_pgentry_t *pl4e;
--    l3_pgentry_t *pl3e;
--    l2_pgentry_t *pl2e;
--    l1_pgentry_t *pl1e;
-+    l3_pgentry_t *pl3e, *l3t;
-+    l2_pgentry_t *pl2e, *l2t;
-+    l1_pgentry_t *pl1e, *l1t;
- 
-     pl4e = l4start + l4_table_offset(vpt_start);
--    pl3e = l4e_to_l3e(*pl4e);
--    pl3e += l3_table_offset(vpt_start);
--    pl2e = l3e_to_l2e(*pl3e);
--    pl2e += l2_table_offset(vpt_start);
--    pl1e = l2e_to_l1e(*pl2e);
--    pl1e += l1_table_offset(vpt_start);
-+    l3t = map_l3t_from_l4e(*pl4e);
-+    pl3e = l3t + l3_table_offset(vpt_start);
-+    l2t = map_l2t_from_l3e(*pl3e);
-+    pl2e = l2t + l2_table_offset(vpt_start);
-+    l1t = map_l1t_from_l2e(*pl2e);
-+    pl1e = l1t + l1_table_offset(vpt_start);
-     for ( count = 0; count < nr_pt_pages; count++ )
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 18210405f4..5714e5ba62 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -852,14 +852,14 @@ void __init subarch_init_memory(void)
+           v += n << PAGE_SHIFT )
      {
-         l1e_remove_flags(*pl1e, _PAGE_RW);
-@@ -85,12 +85,20 @@ static __init void mark_pv_pt_pages_rdonly(struct domain *d,
-             if ( !((unsigned long)++pl2e & (PAGE_SIZE - 1)) )
-             {
-                 if ( !((unsigned long)++pl3e & (PAGE_SIZE - 1)) )
--                    pl3e = l4e_to_l3e(*++pl4e);
--                pl2e = l3e_to_l2e(*pl3e);
-+                {
-+                    unmap_domain_page(l3t);
-+                    pl3e = l3t = map_l3t_from_l4e(*++pl4e);
-+                }
-+                unmap_domain_page(l2t);
-+                pl2e = l2t = map_l2t_from_l3e(*pl3e);
-             }
--            pl1e = l2e_to_l1e(*pl2e);
-+            unmap_domain_page(l1t);
-+            pl1e = l1t = map_l1t_from_l2e(*pl2e);
-         }
-     }
-+    unmap_domain_page(l1t);
-+    unmap_domain_page(l2t);
-+    unmap_domain_page(l3t);
- }
- 
- static __init void setup_pv_physmap(struct domain *d, unsigned long pgtbl_pfn,
+         n = L2_PAGETABLE_ENTRIES * L1_PAGETABLE_ENTRIES;
+-        l3e = l4e_to_l3e(idle_pg_table[l4_table_offset(v)])[
+-            l3_table_offset(v)];
++        l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(v)],
++                           l3_table_offset(v));
+         if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) )
+             continue;
+         if ( !(l3e_get_flags(l3e) & _PAGE_PSE) )
+         {
+             n = L1_PAGETABLE_ENTRIES;
+-            l2e = l3e_to_l2e(l3e)[l2_table_offset(v)];
++            l2e = l2e_from_l3e(l3e, l2_table_offset(v));
+             if ( !(l2e_get_flags(l2e) & _PAGE_PRESENT) )
+                 continue;
+             m2p_start_mfn = l2e_get_pfn(l2e);
+@@ -878,11 +878,11 @@ void __init subarch_init_memory(void)
+           v != RDWR_COMPAT_MPT_VIRT_END;
+           v += 1 << L2_PAGETABLE_SHIFT )
+     {
+-        l3e = l4e_to_l3e(idle_pg_table[l4_table_offset(v)])[
+-            l3_table_offset(v)];
++        l3e = l3e_from_l4e(idle_pg_table[l4_table_offset(v)],
++                           l3_table_offset(v));
+         if ( !(l3e_get_flags(l3e) & _PAGE_PRESENT) )
+             continue;
+-        l2e = l3e_to_l2e(l3e)[l2_table_offset(v)];
++        l2e = l2e_from_l3e(l3e, l2_table_offset(v));
+         if ( !(l2e_get_flags(l2e) & _PAGE_PRESENT) )
+             continue;
+         m2p_start_mfn = l2e_get_pfn(l2e);
 -- 
 2.24.1.AMZN
 
