@@ -2,69 +2,67 @@ Return-Path: <SRS0=dngF=6C=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB64CC2D0EF
-	for <xen-devel@archiver.kernel.org>; Sat, 18 Apr 2020 10:54:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7903CC2D0EF
+	for <xen-devel@archiver.kernel.org>; Sat, 18 Apr 2020 11:01:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F8C122240
-	for <xen-devel@archiver.kernel.org>; Sat, 18 Apr 2020 10:54:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 2F06321D7E
+	for <xen-devel@archiver.kernel.org>; Sat, 18 Apr 2020 11:01:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="paZ1Fyuh"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F8C122240
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="FQ5cl9zT"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2F06321D7E
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jPl7N-00053p-5g; Sat, 18 Apr 2020 10:54:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jPlE8-0005uU-V9; Sat, 18 Apr 2020 11:01:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <SRS0=8kJB=6C=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jPl7L-00053k-VW
- for xen-devel@lists.xenproject.org; Sat, 18 Apr 2020 10:54:36 +0000
-X-Inumbo-ID: fd8c1b8a-8162-11ea-8e3b-12813bfff9fa
+ id 1jPlE7-0005uK-KN
+ for xen-devel@lists.xenproject.org; Sat, 18 Apr 2020 11:01:35 +0000
+X-Inumbo-ID: f7b846c4-8163-11ea-b4f4-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fd8c1b8a-8162-11ea-8e3b-12813bfff9fa;
- Sat, 18 Apr 2020 10:54:35 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f7b846c4-8163-11ea-b4f4-bc764e2007e4;
+ Sat, 18 Apr 2020 11:01:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=HSDBAEvJ7RUlXDXP2H48sMA6xVahTxTlM0FI7E2eZyE=; b=paZ1Fyuh8aotQMdB3iF+9wnzkg
- cR2Q+yNseUUff9F/3ucYG21KugeFSxEvafCXEeKdXW/qTqdM7WZHJOU2kyyHcACbJOYLbcg0ebs/f
- rlltHPwWc+GoQqCEWgq+nYMlQt/TvsxdS2VY8KCx8ENGuunNeMnpQcbgoFlh+Afxo81E=;
+ bh=T0pf81C8tsobYNsvH2Fh3loQ0nS6jxdDTYbmC9/2MJw=; b=FQ5cl9zTgqZxGeNYb1dshsBeVR
+ XfZewbmv5UmUlJMb/wMMbOrBCMeO36rw5Cbk5KuZnk1SIVwDiIvIa6qIVYn/LK/PKFW6vjxO92QlM
+ F4qUbKm7bxIPQZbRPfjiUgpSbzm9V06s7qmlwFhjmKri+DKaCp5/u+z3P+l1OfAA0z3k=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jPl7I-0007GG-N9; Sat, 18 Apr 2020 10:54:32 +0000
+ id 1jPlE5-0007RU-8S; Sat, 18 Apr 2020 11:01:33 +0000
 Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jPl7I-0005Mp-Fq; Sat, 18 Apr 2020 10:54:32 +0000
-Subject: Re: [PATCH 06/17] xen/x86: mm: Fix the comment on top
- put_page_from_l2e() to use 'mfn'
+ id 1jPlE5-0006JO-13; Sat, 18 Apr 2020 11:01:33 +0000
+Subject: Re: [PATCH 07/17] xen/x86: traps: Convert __page_fault_type() to use
+ typesafe MFN
 To: Jan Beulich <jbeulich@suse.com>
 References: <20200322161418.31606-1-julien@xen.org>
- <20200322161418.31606-7-julien@xen.org>
- <4f6d47dd-997d-977e-690d-7f21be2617a0@suse.com>
+ <20200322161418.31606-8-julien@xen.org>
+ <12a955a3-d326-f5f9-f20b-69f3dafac238@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <09bf5a4a-e60f-3f98-1a3d-00e4777665fa@xen.org>
-Date: Sat, 18 Apr 2020 11:54:30 +0100
+Message-ID: <527ec42b-1fcf-7e35-0ed7-b9da91a8c583@xen.org>
+Date: Sat, 18 Apr 2020 12:01:31 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
  Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <4f6d47dd-997d-977e-690d-7f21be2617a0@suse.com>
+In-Reply-To: <12a955a3-d326-f5f9-f20b-69f3dafac238@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
@@ -84,47 +82,23 @@ Cc: xen-devel@lists.xenproject.org, Julien Grall <jgrall@amazon.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Jan,
 
-On 26/03/2020 15:51, Jan Beulich wrote:
+
+On 26/03/2020 15:54, Jan Beulich wrote:
 > On 22.03.2020 17:14, julien@xen.org wrote:
 >> From: Julien Grall <jgrall@amazon.com>
 >>
->> We are using the 'mfn' to refer to machine frame. As this function deal
->> with 'mfn', replace 'pfn' with 'mfn'.
->>
->> Signed-off-by: Julien Grall <jgrall@amazon.com>
->>
->> ---
->>
->> I am not entirely sure to understand the comment on top of the
->> function, so this change may be wrong.
+>> Note that the code is now using cr3_to_mfn() to get the MFN. This is
+>> slightly different as the top 12-bits will now be masked.
 > 
-> Looking at the history of the function, ...
-> 
->> --- a/xen/arch/x86/mm.c
->> +++ b/xen/arch/x86/mm.c
->> @@ -1321,7 +1321,7 @@ static int put_data_pages(struct page_info *page, bool writeable, int pt_shift)
->>   }
->>   
->>   /*
->> - * NB. Virtual address 'l2e' maps to a machine address within frame 'pfn'.
->> + * NB. Virtual address 'l2e' maps to a machine address within frame 'mfn'.
->>    * Note also that this automatically deals correctly with linear p.t.'s.
->>    */
->>   static int put_page_from_l2e(l2_pgentry_t l2e, mfn_t l2mfn, unsigned int flags)
-> 
-> ... it used to be
-> 
-> static int put_page_from_l2e(l2_pgentry_t l2e, unsigned long pfn)
-> 
-> When the rename occurred (in the context of or as a follow-up to an
-> XSA iirc), the comment adjustment was apparently missed. With the
-> referenced name matching that of the function argument (l2mfn)
-> Acked-by: Jan Beulich <jbeulich@suse.com>
+> And here I agree with the change. Hence it is even more so important
+> that the patch introducing the new helper(s) first gets sorted.
+> Should there be further patches in this series with this same
+> interaction issue, I won't point it out again and may not respond at
+> all if I see no other issues.
 
-I will update the reference to use 'l2mfn' and also add a word that the 
-comment was adjusted in ea51977a7aa5e645680a7194550fbceb59004ccf.
+I will update the commit message explaining the reason of using 
+cr3_to_mfn() and look at the other user.
 
 Cheers,
 
