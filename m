@@ -6,84 +6,83 @@ X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
 	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 781DEC3815B
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:16:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8CAE7C3815B
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:20:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A70C20B1F
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:16:01 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 568B820722
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:20:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=tklengyel-com.20150623.gappssmtp.com header.i=@tklengyel-com.20150623.gappssmtp.com header.b="ig7YigTd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A70C20B1F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=tklengyel-com.20150623.gappssmtp.com header.i=@tklengyel-com.20150623.gappssmtp.com header.b="iv2jwUO7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 568B820722
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQXDC-00058n-Kx; Mon, 20 Apr 2020 14:15:50 +0000
+	id 1jQXH6-0005P1-77; Mon, 20 Apr 2020 14:19:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=AIDV=6E=tklsoftware.com=tamas@srs-us1.protection.inumbo.net>)
- id 1jQXDB-00058d-Hs
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 14:15:49 +0000
-X-Inumbo-ID: 6eb12fd0-8311-11ea-9e09-bc764e2007e4
-Received: from mail-ej1-x644.google.com (unknown [2a00:1450:4864:20::644])
+ id 1jQXH4-0005Ow-Lw
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 14:19:50 +0000
+X-Inumbo-ID: fe343332-8311-11ea-b4f4-bc764e2007e4
+Received: from mail-ed1-x542.google.com (unknown [2a00:1450:4864:20::542])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6eb12fd0-8311-11ea-9e09-bc764e2007e4;
- Mon, 20 Apr 2020 14:15:48 +0000 (UTC)
-Received: by mail-ej1-x644.google.com with SMTP id x1so8034386ejd.8
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2020 07:15:48 -0700 (PDT)
+ id fe343332-8311-11ea-b4f4-bc764e2007e4;
+ Mon, 20 Apr 2020 14:19:49 +0000 (UTC)
+Received: by mail-ed1-x542.google.com with SMTP id p16so2852575edm.10
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2020 07:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=tklengyel-com.20150623.gappssmtp.com; s=20150623;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=js3/PcnLC9eiEFfZ7ktFRlh5Aytzt6B6NIEngxcMNzM=;
- b=ig7YigTdtLIleaXJLOe+ai2QazINZl0eiLexI0bcIRFQ/FAWiSGb0XmeAZh1yFGDWT
- rL1kfkXGFIg6IhZ5Q+/QVY/2pcWXx67WKj4AfWKI6CGX86oRLFm/TWJp9aD4xOz6dZgM
- qY9fNjjLjOY89wMWXpoaEQiw8InIEbPIr5z4k7FJAumhjj3aBq56a6fZPyl3bRvFqyoQ
- BibnOjYBAd8XWapbT8J9VOC2xTxsh0drgDvI5ej1nAYAQRXb5w8+nlCMy2XuXTIHRA7/
- hbzhRWM5xOpFcFTI74MznTuiWT+pKXCP3dc0xixRUgU6+ZErNR1r6+eEzVo9gICNgyHy
- qXKQ==
+ bh=t/kri24haV5L/p/bSs6cCMuZWIexiokG6gR1wAuRqYc=;
+ b=iv2jwUO7qFn3rx7A2CX6BtzqiH9FNBs5WpVuXYESSlw+WGPjPLpJFB1hbwkMBUisag
+ 5zdkFdWzB+nEkBA9il+2AAlhgSvxelnkAVhrNuwnYC+uUaONDBK3sx0MEyU9fwDccrEq
+ K794oUIlYbsgrntEuGkKfDnS/DEbflRinax04/1mmPA4w6Nf5cf3MRtylkbXgTp5Imrr
+ c4ZFPF86EslxP7fqI6mGGstMH4JYxhPajhlT+sdgmzuLine0rD0rNuQi71QGE+n2SGT/
+ 0jeK89J9AuX2O5LWx+/EZL9gT96plRXC5guMWtC9y2Alr6g3Rv88Y0xccI+3aUl3I08i
+ J7Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=js3/PcnLC9eiEFfZ7ktFRlh5Aytzt6B6NIEngxcMNzM=;
- b=Le2pq2usSFD60rGRxHIryGuQ0EZLbYfOuAfWTsubBmTLjj1StgSpYf/wBLQ5ln4yFu
- 2BpaLbo2eL5ueKsWAziRQat9YnvEp2X551y40xITaQQiYxvVcVIR6TNap+sC98KjHqy6
- WoskcfaLy0T7mW8HmqtpObV6vuajBB3IGbhYteKuhHhyo6g8T2ZxKJfdjx0Mg16Dg4Ro
- Bv70hWvF3rRdQ2MndgIlw2ZytZbAXvfnFyvSuJxZpX53Q23meBfjt0z5NTlBctpANqpI
- eiGXPU6QpPe262UsQu3KOA3kC29F8PAz5D8RCtsIjrMSdIgKmWr6n/KFYfnb3UH9cw6V
- dxBA==
-X-Gm-Message-State: AGi0PuapGJCFwEJ350C5vLdjJfeulCCz5JGHpl2JFFAUIXqOXK4JtnDY
- Iz0nTIOt56khTJ7IECMz1RgcLBEd13A=
-X-Google-Smtp-Source: APiQypLqwQolzKDjGXL0nmgajG5HzKZphaZpNPLBDVnREQ7MNj+KFjWnUzXxUI6Ej62NnOoIjPtJJA==
-X-Received: by 2002:a17:906:11c7:: with SMTP id
- o7mr2571936eja.108.1587392146874; 
- Mon, 20 Apr 2020 07:15:46 -0700 (PDT)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com.
- [209.85.221.45])
- by smtp.gmail.com with ESMTPSA id l2sm161631ejz.29.2020.04.20.07.15.45
+ bh=t/kri24haV5L/p/bSs6cCMuZWIexiokG6gR1wAuRqYc=;
+ b=YWfQzgk/RKHsJZE8tU6z7ZgU8OsoIToSZCtO84GxlLyjaIHyAN24W4IuXaDqsbLptV
+ UUhFgz4CiyuIiuQ54qm63deCqRCwf3CqpO8fSWWKIZ9VJemj5TS7sWJE5DJmAfsX+rWb
+ KTGdUzv11HX0BvaHUQuri6CdzicnRHLqopRaSDz2PIsDTt0HdSuYDyCWsTlLih9T05BM
+ 6v00xVUpWwJUsmSSjftaRlHzsaw86p4RUZ+teypE4UNVarJ/H4d15rm6T/YgD6SKCuGm
+ JvDm+cvgUFX+JGbJDctbYlo6VAfG2oKSqJxgYgD034fhmJDqOfheYTL8NVlT4Ay6NJV5
+ hkHw==
+X-Gm-Message-State: AGi0Puay0cpudMH9tsfS6505k/2ey0XqAJ1FNUhkqa0cGMgvn5MUlnKf
+ QkshGB5UHBM+Ud3jpGmNzbi+BJq8oyU=
+X-Google-Smtp-Source: APiQypIzUYfD0SLF+Ne1E+BT5Y4h9OJamjq+oOFaEM150/1PNC1YbDxOMmouEoofJ74hoOvAvvFWwg==
+X-Received: by 2002:a05:6402:3041:: with SMTP id
+ bu1mr13920357edb.145.1587392388166; 
+ Mon, 20 Apr 2020 07:19:48 -0700 (PDT)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com.
+ [209.85.221.41])
+ by smtp.gmail.com with ESMTPSA id o13sm163353ejn.19.2020.04.20.07.19.47
  for <xen-devel@lists.xenproject.org>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Apr 2020 07:15:45 -0700 (PDT)
-Received: by mail-wr1-f45.google.com with SMTP id u13so12389341wrp.3
- for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2020 07:15:45 -0700 (PDT)
-X-Received: by 2002:a05:6000:4:: with SMTP id
- h4mr19658737wrx.386.1587392145242; 
- Mon, 20 Apr 2020 07:15:45 -0700 (PDT)
+ Mon, 20 Apr 2020 07:19:47 -0700 (PDT)
+Received: by mail-wr1-f41.google.com with SMTP id j2so12373379wrs.9
+ for <xen-devel@lists.xenproject.org>; Mon, 20 Apr 2020 07:19:47 -0700 (PDT)
+X-Received: by 2002:a5d:4ac9:: with SMTP id y9mr8992366wrs.182.1587392387111; 
+ Mon, 20 Apr 2020 07:19:47 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1587142844.git.tamas.lengyel@intel.com>
- <ef0f91fd4c49c623dda09a1774392d2f2a99ae35.1587142844.git.tamas.lengyel@intel.com>
- <20200420074516.GQ28601@Air-de-Roger>
-In-Reply-To: <20200420074516.GQ28601@Air-de-Roger>
+ <0be7501ace42d856b344828755ece18659dabd33.1587142844.git.tamas.lengyel@intel.com>
+ <20200420075655.GR28601@Air-de-Roger>
+In-Reply-To: <20200420075655.GR28601@Air-de-Roger>
 From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Mon, 20 Apr 2020 08:15:10 -0600
-X-Gmail-Original-Message-ID: <CABfawh=Fd+Te7ECcgdxU3GUnBYygDXjFDyRHKAWf75MLZu7KAQ@mail.gmail.com>
-Message-ID: <CABfawh=Fd+Te7ECcgdxU3GUnBYygDXjFDyRHKAWf75MLZu7KAQ@mail.gmail.com>
-Subject: Re: [PATCH v15 1/3] mem_sharing: don't reset vCPU info page during
- fork reset
+Date: Mon, 20 Apr 2020 08:19:12 -0600
+X-Gmail-Original-Message-ID: <CABfawhmWm_KasEPG=4e1V4qF5uh-ErtazsK=O8gS2n80KrqOyA@mail.gmail.com>
+Message-ID: <CABfawhmWm_KasEPG=4e1V4qF5uh-ErtazsK=O8gS2n80KrqOyA@mail.gmail.com>
+Subject: Re: [PATCH v15 2/3] mem_sharing: allow forking domain with IOMMU
+ enabled
 To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -97,131 +96,184 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
  Xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, Apr 20, 2020 at 1:45 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com>=
+On Mon, Apr 20, 2020 at 1:57 AM Roger Pau Monn=C3=A9 <roger.pau@citrix.com>=
  wrote:
 >
-> On Fri, Apr 17, 2020 at 10:06:31AM -0700, Tamas K Lengyel wrote:
-> > When a forked VM is being reset while having vm_events active, re-copyi=
-ng the
-> > vCPU info page can lead to events being lost. This seems to only affect=
- a
-> > subset of events (interrupts), while not others (cpuid, MTF, EPT) thus =
-it was
+> On Fri, Apr 17, 2020 at 10:06:32AM -0700, Tamas K Lengyel wrote:
+> > The memory sharing subsystem by default doesn't allow a domain to share=
+ memory
+> > if it has an IOMMU active for obvious security reasons. However, when f=
+uzzing a
+> > VM fork, the same security restrictions don't necessarily apply. While =
+it makes
+> > no sense to try to create a full fork of a VM that has an IOMMU attache=
+d as only
+> > one domain can own the pass-through device at a time, creating a shallo=
+w fork
+> > without a device model is still very useful for fuzzing kernel-mode dri=
+vers.
+> >
+> > By allowing the parent VM to initialize the kernel-mode driver with a r=
+eal
+> > device that's pass-through, the driver can enter into a state more suit=
+able for
+>                 ^ passed
+> > fuzzing. Some of these initialization steps are quite complex and are e=
+asier to
+> > perform when a real device is present. After the initialization, shallo=
+w forks
+> > can be utilized for fuzzing code-segments in the device driver that don=
+'t
+> > directly interact with the device.
 >
-> I'm slightly lost by the sentence, is the guest or the hypervisor
-> the one losing events?
->
-> Ie: interrupts are events from a guest PoV, but cpuid or EPT is not
-> something that triggers events that are injected to the guest. I think
-> the commit message needs clarification.
+> If I understand this correctly, the forked VM won't have an IOMMU
+> setup, and the only domain allowed to interact with the device would
+> be the parent?
 
-Sorry, what I meant was software interrupts are not triggered anymore,
-ie. int3 and it's associated event is not sent to the monitor
-application (VM_EVENT_REASON_SOFTWARE_BREAKPOINT).
+Correct, this mode would only be for forks that have no access to
+devices at all (--launch-dm no).
 
 >
-> > not discovered beforehand. Only copying vCPU info page contents during =
-initial
-> > fork fixes the problem.
->
-> Hm, I'm not sure I understand why this is causing issues. When you
-> reset a fork you should reset the vcpu info page, or else event masks wou=
-ld
-> be in a wrong state?
-
-When we reset a fork we only want to 1) discard any memory allocated
-for it 2) reset the vCPU registers. We don't want to reset event
-channels or anything else. We have active vm_events on the domain and
-the whole point of doing a fork reset is to avoid having to
-reinitialize all that as it's quite slow.
-
 > >
 > > Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
 > > ---
-> >  xen/arch/x86/mm/mem_sharing.c | 50 +++++++++++++++++------------------
-> >  1 file changed, 25 insertions(+), 25 deletions(-)
+> >  xen/arch/x86/mm/mem_sharing.c | 18 ++++++++++++------
+> >  xen/include/public/memory.h   |  4 +++-
+> >  2 files changed, 15 insertions(+), 7 deletions(-)
 > >
 > > diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharin=
 g.c
-> > index e572e9e39d..4b31a8b8f6 100644
+> > index 4b31a8b8f6..a5063d5992 100644
 > > --- a/xen/arch/x86/mm/mem_sharing.c
 > > +++ b/xen/arch/x86/mm/mem_sharing.c
-> > @@ -1534,28 +1534,6 @@ int mem_sharing_fork_page(struct domain *d, gfn_=
-t gfn, bool unsharing)
-> >                            p2m->default_access, -1);
+> > @@ -1430,7 +1430,8 @@ static int range_share(struct domain *d, struct d=
+omain *cd,
+> >      return rc;
 > >  }
 > >
-> > -static int bring_up_vcpus(struct domain *cd, struct domain *d)
-> > -{
-> > -    unsigned int i;
-> > -    int ret =3D -EINVAL;
-> > -
-> > -    if ( d->max_vcpus !=3D cd->max_vcpus ||
-> > -        (ret =3D cpupool_move_domain(cd, d->cpupool)) )
-> > -        return ret;
-> > -
-> > -    for ( i =3D 0; i < cd->max_vcpus; i++ )
-> > -    {
-> > -        if ( !d->vcpu[i] || cd->vcpu[i] )
-> > -            continue;
-> > -
-> > -        if ( !vcpu_create(cd, i) )
-> > -            return -EINVAL;
-> > -    }
-> > -
-> > -    domain_update_node_affinity(cd);
-> > -    return 0;
-> > -}
-> > -
-> >  static int copy_vcpu_settings(struct domain *cd, const struct domain *=
-d)
+> > -static inline int mem_sharing_control(struct domain *d, bool enable)
+> > +static inline int mem_sharing_control(struct domain *d, bool enable,
+> > +                                      bool allow_iommu)
 > >  {
-> >      unsigned int i;
-> > @@ -1614,6 +1592,31 @@ static int copy_vcpu_settings(struct domain *cd,=
- const struct domain *d)
-> >      return 0;
-> >  }
+> >      if ( enable )
+> >      {
+> > @@ -1440,7 +1441,7 @@ static inline int mem_sharing_control(struct doma=
+in *d, bool enable)
+> >          if ( unlikely(!hap_enabled(d)) )
+> >              return -ENODEV;
 > >
-> > +static int bring_up_vcpus(struct domain *cd, struct domain *d)
-> > +{
-> > +    unsigned int i;
-> > +    int ret =3D -EINVAL;
-> > +
-> > +    if ( d->max_vcpus !=3D cd->max_vcpus ||
-> > +        (ret =3D cpupool_move_domain(cd, d->cpupool)) )
-> > +        return ret;
-> > +
-> > +    for ( i =3D 0; i < cd->max_vcpus; i++ )
-> > +    {
-> > +        if ( !d->vcpu[i] || cd->vcpu[i] )
-> > +            continue;
-> > +
-> > +        if ( !vcpu_create(cd, i) )
-> > +            return -EINVAL;
-> > +    }
-> > +
-> > +    if ( (ret =3D copy_vcpu_settings(cd, d)) )
-> > +        return ret;
-> > +
-> > +    domain_update_node_affinity(cd);
-> > +    return 0;
-> > +}
+> > -        if ( unlikely(is_iommu_enabled(d)) )
+> > +        if (unlikely(!allow_iommu && is_iommu_enabled(d)) )
 >
-> I would prefer the code movement to be in a different patch: it makes
-> it more difficult to spot non-functional changes being made while
-> moving the function around.
+> Coding style (missing space)
 
-I don't think it's worth splitting this patch because of that. The
-patch is quite small an the move is trivial to allow the function
-bring_up_vcpus be able to call copy_vcpu_settings without having to
-pre-declare that function.
+Ack
 
+>
+> >              return -EXDEV;
+> >      }
+> >
+> > @@ -1827,7 +1828,8 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_=
+mem_sharing_op_t) arg)
+> >      if ( rc )
+> >          goto out;
+> >
+> > -    if ( !mem_sharing_enabled(d) && (rc =3D mem_sharing_control(d, tru=
+e)) )
+> > +    if ( !mem_sharing_enabled(d) &&
+> > +         (rc =3D mem_sharing_control(d, true, false)) )
+> >          return rc;
+> >
+> >      switch ( mso.op )
+> > @@ -2063,9 +2065,10 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen=
+_mem_sharing_op_t) arg)
+> >      case XENMEM_sharing_op_fork:
+> >      {
+> >          struct domain *pd;
+> > +        bool allow_iommu;
+> >
+> >          rc =3D -EINVAL;
+> > -        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[=
+2] )
+> > +        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] )
+> >              goto out;
+> >
+> >          rc =3D rcu_lock_live_remote_domain_by_id(mso.u.fork.parent_dom=
+ain,
+> > @@ -2080,7 +2083,10 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen=
+_mem_sharing_op_t) arg)
+> >              goto out;
+> >          }
+> >
+> > -        if ( !mem_sharing_enabled(pd) && (rc =3D mem_sharing_control(p=
+d, true)) )
+> > +        allow_iommu =3D mso.u.fork.flags & XENMEM_FORK_WITH_IOMMU_ALLO=
+WED;
+>
+> I'm not sure whether it is worth to extract the flags into booleans at
+> this level. As you add more flags it might make sense to just pass the
+> whole flags field to mem_sharing_control?
+
+Sure.
+
+>
+> mem_sharing_memop itself doesn't need to know which flags are
+> specified.
+>
+> > +
+> > +        if ( !mem_sharing_enabled(pd) &&
+> > +             (rc =3D mem_sharing_control(pd, true, allow_iommu)) )
+> >          {
+> >              rcu_unlock_domain(pd);
+> >              goto out;
+> > @@ -2138,7 +2144,7 @@ int mem_sharing_domctl(struct domain *d, struct x=
+en_domctl_mem_sharing_op *mec)
+> >      switch ( mec->op )
+> >      {
+> >      case XEN_DOMCTL_MEM_SHARING_CONTROL:
+> > -        rc =3D mem_sharing_control(d, mec->u.enable);
+> > +        rc =3D mem_sharing_control(d, mec->u.enable, false);
+> >          break;
+> >
+> >      default:
+> > diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+> > index d36d64b8dc..1d2149def3 100644
+> > --- a/xen/include/public/memory.h
+> > +++ b/xen/include/public/memory.h
+> > @@ -536,7 +536,9 @@ struct xen_mem_sharing_op {
+> >          } debug;
+> >          struct mem_sharing_op_fork {      /* OP_FORK */
+> >              domid_t parent_domain;        /* IN: parent's domain id */
+> > -            uint16_t pad[3];              /* Must be set to 0 */
+> > +#define XENMEM_FORK_WITH_IOMMU_ALLOWED 1  /* Allow forking domain with=
+ IOMMU */
+>
+> Since this is a flags field, can you express this is as: (1u << 0).
+
+I was thinking of doing that then it won't fit into a single line. For
+this particular flag it would also make no difference.
+
+>
+> > +            uint16_t flags;               /* IN: optional settings */
+> > +            uint16_t pad[2];              /* Must be set to 0 */
+>
+> Nit: padding can be made a uint32_t now instead of an array of two
+> uint16_t.
+>
+> Or add an uint16_t between parent_domain and flags and make flags an
+> uint32_t.
+
+True.
+
+Thanks,
 Tamas
 
