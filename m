@@ -2,69 +2,53 @@ Return-Path: <SRS0=l84g=6E=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 72173C3A5A0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:15:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 81987C3815B
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:15:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 40C8720B1F
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:15:24 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="hbsS/Mut"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40C8720B1F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 5B73F20B1F
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 14:15:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B73F20B1F
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQXCU-00052i-QM; Mon, 20 Apr 2020 14:15:06 +0000
+	id 1jQXCn-000546-4y; Mon, 20 Apr 2020 14:15:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=JPG3=6E=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jQXCT-00052Y-KF
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 14:15:05 +0000
-X-Inumbo-ID: 534249c9-8311-11ea-906a-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=z/8R=6E=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jQXCm-00053z-QH
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 14:15:24 +0000
+X-Inumbo-ID: 6019afe2-8311-11ea-906a-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 534249c9-8311-11ea-906a-12813bfff9fa;
- Mon, 20 Apr 2020 14:15:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Y9sVFCkw9Wu8l6WSbqyH/0aVtir6qS95iEHpEFKks80=; b=hbsS/MuthYW8Vh+D9Zbnecg7/S
- wVDcymMSymRQYX+6sx3A395EYR7BhwgYe28W2TdwVrWCOavwvGou6Rc4/Jd4UIyRA312YwX5/hhVj
- HpfgNtfaizGIqPDc3ROrJhcCraKsTGTW62FDIYJzXSBPtuIf42LIZTVfRy7udqSQOPpQ=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jQXCQ-0006GS-46; Mon, 20 Apr 2020 14:15:02 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jQXCP-00080c-T8; Mon, 20 Apr 2020 14:15:02 +0000
-Subject: Re: [PATCH 0/3] xenoprof: XSA-313 follow-up
-To: paul@xen.org, 'Jan Beulich' <jbeulich@suse.com>,
- xen-devel@lists.xenproject.org
-References: <25c5b76f-4f95-3ba9-0ae0-dd0c1f3f8496@suse.com>
- <002801d61302$dbd21950$93764bf0$@xen.org>
-From: Julien Grall <julien@xen.org>
-Message-ID: <410df70e-6e21-2d0a-8148-62ccf2a24366@xen.org>
-Date: Mon, 20 Apr 2020 15:14:59 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.7.0
+ id 6019afe2-8311-11ea-906a-12813bfff9fa;
+ Mon, 20 Apr 2020 14:15:24 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id C5DA4ABD7;
+ Mon, 20 Apr 2020 14:15:22 +0000 (UTC)
+Subject: Re: [PATCH 1/3] x86/pv: Options to disable and/or compile out 32bit
+ PV support
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200417155004.16806-1-andrew.cooper3@citrix.com>
+ <20200417155004.16806-2-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <3aa6e2bf-b0a3-5540-ec9a-0abc048a85ab@suse.com>
+Date: Mon, 20 Apr 2020 16:15:21 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <002801d61302$dbd21950$93764bf0$@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+In-Reply-To: <20200417155004.16806-2-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -76,45 +60,27 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: 'Andrew Cooper' <andrew.cooper3@citrix.com>,
- 'Stefano Stabellini' <sstabellini@kernel.org>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>,
- 'George Dunlap' <george.dunlap@citrix.com>, 'Wei Liu' <wl@xen.org>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Paul,
+On 17.04.2020 17:50, Andrew Cooper wrote:
+> --- a/xen/arch/x86/Kconfig
+> +++ b/xen/arch/x86/Kconfig
+> @@ -49,6 +49,22 @@ config PV
+>  
+>  	  If unsure, say Y.
+>  
+> +config PV32
+> +	bool "Support for 32bit PV guests"
+> +	depends on PV
+> +	default y
 
-On 15/04/2020 09:50, Paul Durrant wrote:
->> -----Original Message-----
->> From: Jan Beulich <jbeulich@suse.com>
->> Sent: 15 April 2020 09:45
->> To: xen-devel@lists.xenproject.org
->> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; George Dunlap <george.dunlap@citrix.com>; Ian Jackson
->> <ian.jackson@eu.citrix.com>; Julien Grall <julien@xen.org>; Stefano Stabellini
->> <sstabellini@kernel.org>; Wei Liu <wl@xen.org>; Paul Durrant <paul@xen.org>
->> Subject: [PATCH 0/3] xenoprof: XSA-313 follow-up
->>
->> Patch 1 was considered to become part of the XSA, but it was then
->> decided against. The other two are a little bit of cleanup, albeit
->> there's certainly far more room for tidying. Yet then again Paul,
->> in his mail from Mar 13, was asking whether we shouldn't drop
->> xenoprof altogether, at which point cleaning up the code would be
->> wasted effort.
->>
-> 
-> That's still my opinion. This is a large chunk of (only passively maintained) code which I think is of very limited value (since it relates to an old tool, and it only works for PV domains).
+I guess I can see why you don't want an EXPERT dependency here, but
+I guess we really need to settle on our (as a community) position
+on the growth of varying configs people can build and expect to be
+supported.
 
-While there are no active user we are aware of, this is an example on 
-how to implement a profiler backend with Xen. So I would agree with 
-Andrew here.
-
-IIRC, the reason behind your request is it makes difficult for your 
-xenheap work. Am I correct? If so, do you have a thread explaining the 
-issues?
-
-Cheers,
-
--- 
-Julien Grall
+Jan
 
