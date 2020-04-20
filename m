@@ -2,61 +2,102 @@ Return-Path: <SRS0=l84g=6E=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AFC69C3A5A0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 13:39:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B5AE7C3815B
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 13:40:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B35220857
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 13:39:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B35220857
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 7EDF020857
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 13:40:24 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gNBe3oJ8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7EDF020857
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQWdz-0000ev-OY; Mon, 20 Apr 2020 13:39:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=z/8R=6E=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jQWdy-0000ep-AJ
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 13:39:26 +0000
-X-Inumbo-ID: 5905a707-830c-11ea-9062-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5905a707-830c-11ea-9062-12813bfff9fa;
- Mon, 20 Apr 2020 13:39:25 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 533E8ADD3;
- Mon, 20 Apr 2020 13:39:23 +0000 (UTC)
-Subject: Re: [XEN PATCH v4 14/18] xen,symbols: rework file symbols selection
-To: Anthony PERARD <anthony.perard@citrix.com>
-References: <20200331103102.1105674-1-anthony.perard@citrix.com>
- <20200331103102.1105674-15-anthony.perard@citrix.com>
- <e28fa2b6-89c9-8e87-eaf0-91a3d6f6a62f@suse.com>
- <20200416124400.GG4088@perard.uk.xensource.com>
- <312e719f-2bae-cb29-a6dd-29ae0d976d95@suse.com>
- <20200416150929.GL4088@perard.uk.xensource.com>
- <586cff44-d46e-3a5b-9e47-0c7ff4de8801@suse.com>
- <20200417131931.GM4088@perard.uk.xensource.com>
- <83de83ee-848f-a048-7293-d1e5b01dd217@suse.com>
- <20200417144218.GN4088@perard.uk.xensource.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <fa559a21-5c86-fe00-0bbf-23270e5f6951@suse.com>
-Date: Mon, 20 Apr 2020 15:39:18 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+	id 1jQWeh-0001OF-3I; Mon, 20 Apr 2020 13:40:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
+ <SRS0=61/n=6E=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jQWef-0001O8-Rn
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 13:40:09 +0000
+X-Inumbo-ID: 735baa10-830c-11ea-83d8-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 735baa10-830c-11ea-83d8-bc764e2007e4;
+ Mon, 20 Apr 2020 13:40:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1587390008;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=dkX0LhNkF7QXB5i7ncQgZIg5lPgcDEw3d4hNAnw1U2A=;
+ b=gNBe3oJ8DWyWa6TlnHr2m0xtGaUh63A/hxhTtsniIfUBHSBoP4+2VQ76
+ S0/auIGpehujDwQWLp6jpBm2N8YJqXPD81I5oR6kE613RRNtAHF5vjI2G
+ tvEf2fF95MyGEcgp2XUhvaRy4QGO5oGwi2CwW1y3FZnFya7G77amRk58u E=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: y1HcT2tUx2uuBM38CT6ha1INOCW9zW3Nu58s+MT2Lj1kMr+PbnnFaFbyn0vBY6nHQ6lJRfwHeB
+ e8NqKeX6nIVP11Rz7EldKGqP7IahnkHAuQtM3moIhxTXhqltdngHcFcE3nmtaWslgRKCwRtq0a
+ 8CEePjA63mYGx31oqA/EN2ISY6MMe9JtSgbdwfVDkfv9xwTQshGMNWOPC3Mflzq1D9oPcWAp9a
+ ms+jiP8rp2+83j87ec3mI3KDWwaIHy5PzcXnWv7YLZOoYYVhD+8pczPsYxxyCKqwcmPU1ApInk
+ LwA=
+X-SBRS: 2.7
+X-MesageID: 16253199
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,406,1580792400"; d="scan'208";a="16253199"
+Subject: Re: [PATCH] x86emul: SYSRET must change CPL
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+ <xen-devel@lists.xenproject.org>
+References: <d193babc-9afa-7cff-13f4-532e62d5e3e6@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <4f605ad9-ebf0-522e-6d84-ec717ab6171e@citrix.com>
+Date: Mon, 20 Apr 2020 14:40:05 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200417144218.GN4088@perard.uk.xensource.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <d193babc-9afa-7cff-13f4-532e62d5e3e6@suse.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -67,73 +108,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 17.04.2020 16:42, Anthony PERARD wrote:
-> On Fri, Apr 17, 2020 at 03:39:48PM +0200, Jan Beulich wrote:
->> On 17.04.2020 15:19, Anthony PERARD wrote:
->>> Or do you mean keeping exception to the rule? And hope that when someone
->>> changes the rule, it doesn't forget to check if the exception needs
->>> changing as well?
->>
->> ... "exception" like you put it (requiring special care to keep
->> multiple instances in sync) is not the only way this can be done
->> (and indeed I'd not want something like this). Since you have
->> (in patch 15) e.g.
->>
->> guest_walk_%.o: guest_walk.c FORCE
->> 	$(call if_changed_rule,cc_o_c)
->>
->> anyway, the desire to skip the objcopy step could be communicated
->> to the command from here, without needing to clone the command.
->> One way might be a special (phony) dependency, another might be to
->> set some variable along the lines of
->>
->> guest_walk_%.o: SPECIAL := y
-> 
-> I guess something like that could be done. But if possible, I'd like to
-> avoid that.
-> 
->>> Also, I'm going to have to use this patch later anyway as sometime CC
->>> use a full path to the source as file symbol. So this is going to be
->>> important when we will run for example
->>> `clang -o arch/x86/mm/guest_walk_2.o arch/x86/mm/guest_walk.c`.
->>> (There isn't a patch for that yet.)
->>
->> That's interesting - what will be the goal of that future adjustment?
-> 
-> It's a step toward my goal of been able to have out-of-tree build for
-> xen, as stated in my cover letter. In order to do that, I try to adapt
-> Kbuild to build Xen.
-> 
-> Kbuild is building the linux kernel without changing directory, so I'd
-> like to do the same, as it probably makes it easier to do out-of-tree
-> build.
-> 
-> Another tool I'd like to use from Kbuild is ./fixdep, it's a small
-> program that run after running CC and fix the dependency file that CC
-> generates. The main thing it does is to add a dependency on
-> Kconfig options that a source file uses instead of having a dependency
-> on whether any unrelated Kconfig has change at all. But ./fixdep from
-> Linux only works if we build without changing directory. ([1] for more
-> on fixdep)
-> 
-> I guess one advantage of never changing directory is that we can always
-> use relative path in global *FLAGS. There isn't a need to use absolute
-> path, which is an issue when the source tree is moved to a different
-> location. That can easily happen when for example you try to build in a
-> container (mapping the source tree inside it) then try to rebuild from
-> outside. (After using automation/scripts/containerize for example.)
-> And we don't need tricks like the .*.d2 files (which isn't needed in the
-> hypervisor anyway, so far at least).
+On 16/04/2020 13:14, Jan Beulich wrote:
+> The special AMD behavior of leaving SS mostly alone wasn't really
+> complete: We need to adjust CPL aka SS.DPL.
+>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Ah, I see. Out-of-tree builds don't necessarily imply source trees
-that can also be moved, so you want to actually go a step further.
+Oops.
 
-Jan
+Reviewed-by: Andrew Cooper <andrew.cooper3@citrix.com>
+
+>
+> --- a/xen/arch/x86/x86_emulate/x86_emulate.c
+> +++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+> @@ -6022,6 +6022,8 @@ x86_emulate(
+>  
+>              /* There's explicitly no RPL adjustment here. */
+>              sreg.sel = (msr_val >> 48) + 8;
+> +            /* But DPL needs adjustment, for the new CPL to be correct. */
+> +            sreg.dpl = 3;
+>          }
+>  
+>  #ifdef __x86_64__
+
 
