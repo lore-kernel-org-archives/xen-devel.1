@@ -2,57 +2,70 @@ Return-Path: <SRS0=l84g=6E=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 52F93C3A5A0
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 12:12:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A4B6AC3A5A0
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 12:13:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2CF45206F6
-	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 12:12:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2CF45206F6
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 74834206D6
+	for <xen-devel@archiver.kernel.org>; Mon, 20 Apr 2020 12:13:43 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="D/SKxKYy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 74834206D6
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQVHY-0000rg-4T; Mon, 20 Apr 2020 12:12:12 +0000
+	id 1jQVIr-0000yX-Gb; Mon, 20 Apr 2020 12:13:33 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <SRS0=z/8R=6E=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jQVHX-0000rb-OW
- for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 12:12:11 +0000
-X-Inumbo-ID: 293d4328-8300-11ea-b58d-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=JPG3=6E=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jQVIq-0000yP-5g
+ for xen-devel@lists.xenproject.org; Mon, 20 Apr 2020 12:13:32 +0000
+X-Inumbo-ID: 59bd5dda-8300-11ea-9e09-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 293d4328-8300-11ea-b58d-bc764e2007e4;
- Mon, 20 Apr 2020 12:12:10 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 11BBFABAD;
- Mon, 20 Apr 2020 12:12:09 +0000 (UTC)
-Subject: Re: [PATCH 3/6] x86/mem-paging: use guest handle for
- XENMEM_paging_op_prep
-To: Julien Grall <julien@xen.org>
-References: <3b7cc69d-709c-570a-716a-c45f6fda181f@suse.com>
- <f3c57792-d372-a70f-691b-87681b83e898@suse.com>
- <d340e170-1c08-e20a-b170-c176eb00b4dd@xen.org>
- <5e1dc7fd-f780-31bc-670d-4736061f46af@suse.com>
- <80621ca8-6c08-2868-ada6-bf0ef41fc699@xen.org>
- <802bfbad-a0d7-8d7a-716d-76f0b83c5707@suse.com>
- <136f8a16-3160-04f7-55f3-667f578e505e@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <f281c763-42ea-ae6f-7c1c-2a5523a64db9@suse.com>
-Date: Mon, 20 Apr 2020 14:12:04 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id 59bd5dda-8300-11ea-9e09-bc764e2007e4;
+ Mon, 20 Apr 2020 12:13:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=L9TqMVZQYqMWHi2FhTfEDDZifUufm8YPzvfzEYDISAg=; b=D/SKxKYy1pAYXMH0qsUbgF7zcq
+ piQZ8o2FbcB1cJr4Cq3WcJRRtMKgMW4B/lMqW5Ps/E7AiZyroUeYMcroR8hNEYG7m6EcbkDKpF4fI
+ 6RXNs9oAw6gDuWIvWb2yghLXXbGDYFGyxn753B7UUl8QS7BAZwYCvvOSPyBILzxaoKhU=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jQVIj-0003gw-RP; Mon, 20 Apr 2020 12:13:25 +0000
+Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jQVIj-0000yk-KO; Mon, 20 Apr 2020 12:13:25 +0000
+Subject: Re: [PATCH 0/8] Fix build with using OCaml 4.06.1 and -safe-string
+To: Christian Lindig <christian.lindig@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ David Scott <dave@recoil.org>
+References: <20200330192157.1335-1-julien@xen.org>
+ <67d3370c-779a-7007-e5fa-98d957a85ce9@xen.org>
+ <1587043532025.36720@citrix.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <b585e4c0-5770-4b56-3a1c-96b5c749fa78@xen.org>
+Date: Mon, 20 Apr 2020 13:13:22 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <136f8a16-3160-04f7-55f3-667f578e505e@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <1587043532025.36720@citrix.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
@@ -65,35 +78,30 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+ Andrew Cooper <Andrew.Cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
+ George Dunlap <George.Dunlap@citrix.com>,
+ "dfaggioli@suse.com" <dfaggioli@suse.com>, Jan Beulich <jbeulich@suse.com>,
+ Ian Jackson <Ian.Jackson@citrix.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 20.04.2020 14:08, Julien Grall wrote:
-> On 20/04/2020 08:26, Jan Beulich wrote:
->> On 17.04.2020 19:13, Julien Grall wrote:
->>> FWIW, the different matters on Arm. Although, it looks like the
->>> compiler will not warn you if you are using the wrong handler :(.
->>
->> I find this highly suspicious, but can't check myself until back
->> in the office - these are distinct compound types after all, so
->> this shouldn't just be a warning, but an error. Or did you merely
->> mean there's no warning on x86?
-> 
-> I mean on Arm 32-bit. I have changed one of the function to use XEN_GUEST_HANDLE_PARAM() rather than XEN_GUEST_HANDLE() but not changing the caller.
-> 
-> It is probably because they are both defined using an union. Interestly, the type will also not be checked, so the code a function will happily accept a XEN_GUEST_HANDLE_PARAM(uint8) even if the prototype requested XEN_GUEST_HANDLE_PARAM(uint64).
-> 
-> This looks rather messy, maybe we should use a structure (and some alignment) to add more safety.
+Hi Christian,
 
-Are the unions plain ones? I could see room for behavior like
-the one you describe with transparent unions, albeit still
-not quite like you describe it. Getting handle types to be
-properly type-checked by the compiler is pretty imperative imo.
+On 16/04/2020 14:25, Christian Lindig wrote:
+> 
+> The changes in the OCaml C stubs look good to me. They don't really touch the interface but are mostly concerned with types on the C side by adding casts, const, and so on. The extended error handling is an improvement.
 
-Jan
+Thank you for the review! I will commit the rest of the series.
+
+As an aside, the acked-by was adding as part of the signature.
+
+Not sure whether this is intentional but some e-mail clients are hiding 
+the signature so the acked-by can be easily missed.
+
+Cheers,
+
+-- 
+Julien Grall
 
