@@ -2,61 +2,61 @@ Return-Path: <SRS0=TXFR=6F=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8892C54FCC
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E440EC55185
 	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 16:12:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7E4772068F
+	by mail.kernel.org (Postfix) with ESMTPS id B67452071C
 	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 16:12:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="NmbqwTum"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E4772068F
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="atS3jXv/"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B67452071C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQvVa-0005Ph-6R; Tue, 21 Apr 2020 16:12:26 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jQvVj-0005SD-HL; Tue, 21 Apr 2020 16:12:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=FwqV=6F=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jQvVY-0005Pc-L5
- for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 16:12:24 +0000
-X-Inumbo-ID: e1ed0329-83ea-11ea-9160-12813bfff9fa
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e1ed0329-83ea-11ea-9160-12813bfff9fa;
- Tue, 21 Apr 2020 16:12:23 +0000 (UTC)
+ id 1jQvVi-0005Rn-Pk
+ for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 16:12:34 +0000
+X-Inumbo-ID: e78d7ae2-83ea-11ea-83d8-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e78d7ae2-83ea-11ea-83d8-bc764e2007e4;
+ Tue, 21 Apr 2020 16:12:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587485543;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=jPOuSn9Ufevxvq1zCWh1f+c0TEZ2OwuaVLSgw7emdXc=;
- b=NmbqwTumiISP1mx4ONvdp0V40EsB7EK1sAMSGBjefaaAa5qybVp7Gyhc
- kK2fVauUHiRBr5u736Q/c59dph/3rHQcWcYXOVNWknAITjFTqTqoTqIo4
- jM1tf4W7//ILHfk5e5PvMoTT+dRok18iWyEfXtyQ3uyrMob94K7sEjUKa A=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ d=citrix.com; s=securemail; t=1587485552;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=zEDVWtRNnmIv3S8+CaBN4lgkVkyoY1pGarxEeF5jdjg=;
+ b=atS3jXv/m5cYKEdPsWKLWAxrbi3n/fvLtsukXCwBTd4hVAQQaLz2Ksmx
+ 7u/vMJciryE239Ei6RVZVhHXAv2kU2hegysI4T+92aPjeU2zI8N28477p
+ aonxaA1hj2LBQFirlGtEicdbis5ESwm4d8Vhb8s69PFkIEpw4aNE6on6h 4=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
  spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
  anthony.perard@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,33 +65,35 @@ Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: TrZj9YlMdTDuYDUspGI9xkAsdT55vuX430lEeRu5OxUvg0wzUvukPFY3A76MknI5DdwIne9per
- 4/XeZztL9zxLftqN5g4Ae8ur43SctjqaEtLzBi7WtfP2LXWnk/reu+c0GzKLVtbOnhITe51+kt
- 6DDKBObc6FPt4MiePseMV4yL2phlqdG8UGNo6YiXp1exj911CYMBgrqU92rht7NFJU7WiookdE
- ozFKHXv/EgtJUSGVoSLy0a8w6SZjn187T3KxnmLneHhZ2HtwTIULvdELiPtEy9Ot0WO3E3IOxf
- 8AA=
+IronPort-SDR: 31oQgUFgunBghWDk/ml68DoAX8eNl8VnT+ClLsXPzU3D7PwG2lUfA2dOFsRrnGUBUtnRW0TNYK
+ VX25DrgWtCljd06XhAH4imcqbJHmt3eyk3SF73rgpxyuQBdERRdc9KWlaQiScKxlOr4/TDM1xE
+ Gm0QJDHZt++Zpu6qSWnVkeCZ8u1kcRhNxRLguw+/4XIYjQS4Wrti89lpjyNABqOkJ1f7gacQ19
+ qFB0b7K0Nq8l2tnM7ypUlNMbzsoe5iWB5Lo8rz8T0ncw1e4+aek29kvAMWarLuBA/MkfJbyxkL
+ cS8=
 X-SBRS: 2.7
-X-MesageID: 16028573
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 16414410
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,410,1580792400"; d="scan'208";a="16028573"
+X-IronPort-AV: E=Sophos;i="5.72,410,1580792400"; d="scan'208";a="16414410"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v5 00/16] xen: Build system improvements
-Date: Tue, 21 Apr 2020 17:11:52 +0100
-Message-ID: <20200421161208.2429539-1-anthony.perard@citrix.com>
+Subject: [XEN PATCH v5 05/16] build: Introduce documentation for xen Makefiles
+Date: Tue, 21 Apr 2020 17:11:57 +0100
+Message-ID: <20200421161208.2429539-6-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.26.1
+In-Reply-To: <20200421161208.2429539-1-anthony.perard@citrix.com>
+References: <20200421161208.2429539-1-anthony.perard@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -102,106 +104,141 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Wei
- Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Tim
- Deegan <tim@xen.org>, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Anthony PERARD <anthony.perard@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Patch series available in this git branch:
-https://xenbits.xen.org/git-http/people/aperard/xen-unstable.git br.build-system-xen-v5
+This start explainning the variables that can be used in the many
+Makefiles in xen/.
 
-v5:
-- few changes detailed in patch notes.
-- 1 new patch
+Most of the document copies and modifies text from Linux v5.4 document
+linux.git/Documentation/kbuild/makefiles.rst. Modification are mostly
+to avoid mentioning kbuild. Thus I've added the SPDX tag which was
+only in index.rst in linux.git.
 
-v4:
-- some patch already applied.
-- Have added patches from "xen/arm: Configure early printk via Kconfig" series.
-- Some new patch to add documentation or fix issues, and patch to improve
-  compat header generation.
-Other changes are detailed in patches.
+Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
 
-v3:
-- new patches that do some cleanup or fix issues
-- have rework most patches, to have better commit message or change the coding
-  style, or fix issues that I've seen. There were some cases where CFLAGS were
-  missing.
-  See patch notes for details
-- introduce if_changed*. That plenty of new patches on top of what we had in v2.
-  (those changes ignore CONFIG_LTO=y, I'll see about fixing that later)
+Notes:
+    v4:
+    - new patch
 
-(There is more to come in order to use fixdep from Linux, but that's not ready)
-
-Hi,
-
-I have work toward building Xen (the hypervisor) with Linux's build system,
-Kbuild.
-
-The main reason for that is to be able to have out-of-tree build. It's annoying
-when a build fail because of the pvshim. Other benefit is a much faster
-rebuild, and `make clean` doesn't take ages, and better dependencies to figure
-out what needs to be rebuild.
-
-So, we are not there yet, but the series already contain quite a few
-improvement and cleanup. More patches are going to be added to the series.
-
-Cheers,
-
-Anthony PERARD (16):
-  build,xsm: Fix multiple call
-  xen/build: include include/config/auto.conf in main Makefile
-  xen/build: use new $(c_flags) and $(a_flags) instead of $(CFLAGS)
-  xen/build: have the root Makefile generates the CFLAGS
-  build: Introduce documentation for xen Makefiles
-  xen/build: introduce if_changed and if_changed_rule
-  xen/build: Start using if_changed
-  build: Introduce $(cpp_flags)
-  xen/build: use if_changed on built_in.o
-  xen/build: Use if_changed_rules with %.o:%.c targets
-  xen/build: factorise generation of the linker scripts
-  xen/build: Use if_changed for prelink*.o
-  xen,symbols: rework file symbols selection
-  build: use if_changed to build mm/*/guest_%.o
-  build,include: rework compat-build-source.py
-  build,include: rework compat-build-header.py
-
- .gitignore                            |   1 +
- docs/misc/xen-makefiles/makefiles.rst | 185 ++++++++++++++++++++
- xen/Makefile                          | 212 ++++++++++++++++++++---
- xen/Rules.mk                          | 235 ++++++++++++++++----------
- xen/arch/arm/Makefile                 |  22 +--
- xen/arch/arm/Rules.mk                 |  23 ---
- xen/arch/arm/{Rules.mk => arch.mk}    |   5 -
- xen/arch/arm/efi/Makefile             |   2 +-
- xen/arch/x86/Makefile                 |  41 ++---
- xen/arch/x86/Rules.mk                 |  91 +---------
- xen/arch/x86/{Rules.mk => arch.mk}    |  17 +-
- xen/arch/x86/efi/Makefile             |   9 +-
- xen/arch/x86/mm/Makefile              |  14 +-
- xen/arch/x86/mm/hap/Makefile          |  15 +-
- xen/arch/x86/mm/shadow/Makefile       |  14 +-
- xen/common/libelf/Makefile            |  14 +-
- xen/common/libfdt/Makefile            |  13 +-
- xen/include/Makefile                  |  16 +-
- xen/scripts/Kbuild.include            | 107 ++++++++++++
- xen/tools/compat-build-header.py      |  52 +++++-
- xen/tools/compat-build-source.py      |   8 +-
- xen/tools/symbols.c                   |  20 ++-
- xen/xsm/flask/Makefile                |  19 ++-
- xen/xsm/flask/ss/Makefile             |   2 +-
- 24 files changed, 809 insertions(+), 328 deletions(-)
+ docs/misc/xen-makefiles/makefiles.rst | 87 +++++++++++++++++++++++++++
+ xen/Rules.mk                          |  4 ++
+ 2 files changed, 91 insertions(+)
  create mode 100644 docs/misc/xen-makefiles/makefiles.rst
- copy xen/arch/arm/{Rules.mk => arch.mk} (85%)
- copy xen/arch/x86/{Rules.mk => arch.mk} (87%)
 
+diff --git a/docs/misc/xen-makefiles/makefiles.rst b/docs/misc/xen-makefiles/makefiles.rst
+new file mode 100644
+index 000000000000..a86e3a612d61
+--- /dev/null
++++ b/docs/misc/xen-makefiles/makefiles.rst
+@@ -0,0 +1,87 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=============
++Xen Makefiles
++=============
++
++Documentation for the build system of Xen, found in xen.git/xen/.
++
++Makefile files
++==============
++
++Description of the syntax that can be used in most Makefiles named
++'Makefile'. ('xen/Makefile' isn't part of the description.)
++
++'Makefile's are consumed by 'Rules.mk' when building.
++
++Goal definitions
++----------------
++
++	Goal definitions are the main part (heart) of the Makefile.
++	These lines define the files to be built, any special compilation
++	options, and any subdirectories to be entered recursively.
++
++	The most simple makefile contains one line:
++
++	Example::
++
++		obj-y += foo.o
++
++	This tells the build system that there is one object in that
++	directory, named foo.o. foo.o will be built from foo.c or foo.S.
++
++	The following pattern is often used to have object selected
++	depending on the configuration:
++
++	Example::
++
++		obj-$(CONFIG_FOO) += foo.o
++
++	$(CONFIG_FOO) can evaluates to y.
++	If CONFIG_FOO is not y, then the file will not be compiled nor linked.
++
++Descending down in directories
++------------------------------
++
++	A Makefile is only responsible for building objects in its own
++	directory. Files in subdirectories should be taken care of by
++	Makefiles in these subdirs. The build system will automatically
++	invoke make recursively in subdirectories, provided you let it know of
++	them.
++
++	To do so, obj-y is used.
++	acpi lives in a separate directory, and the Makefile present in
++	drivers/ tells the build system to descend down using the following
++	assignment.
++
++	Example::
++
++		#drivers/Makefile
++		obj-$(CONFIG_ACPI) += acpi/
++
++	If CONFIG_ACPI is set to 'y'
++	the corresponding obj- variable will be set, and the build system
++	will descend down in the apci directory.
++	The build system only uses this information to decide that it needs
++	to visit the directory, it is the Makefile in the subdirectory that
++	specifies what is modular and what is built-in.
++
++	It is good practice to use a `CONFIG_` variable when assigning directory
++	names. This allows the build system to totally skip the directory if the
++	corresponding `CONFIG_` option is 'y'.
++
++Compilation flags
++-----------------
++
++    CFLAGS-y and AFLAGS-y
++	These two flags apply only to the makefile in which they
++	are assigned. They are used for all the normal cc, as and ld
++	invocations happening during a recursive build.
++
++	$(CFLAGS-y) is necessary because the top Makefile owns the
++	variable $(XEN_CFLAGS) and uses it for compilation flags for the
++	entire tree. And the variable $(CFLAGS) is modified by Config.mk
++	which evaluated in every subdirs.
++
++	CFLAGS-y specifies options for compiling with $(CC).
++	AFLAGS-y specifies assembler options.
+diff --git a/xen/Rules.mk b/xen/Rules.mk
+index 8e4b9e3a4a82..9d1e1ebf5e44 100644
+--- a/xen/Rules.mk
++++ b/xen/Rules.mk
+@@ -1,3 +1,7 @@
++#
++# See docs/misc/xen-makefiles/makefiles.rst on variables that can be used in
++# Makefile and are consumed by Rules.mk
++#
+ 
+ -include $(BASEDIR)/include/config/auto.conf
+ 
 -- 
 Anthony PERARD
 
