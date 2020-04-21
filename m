@@ -7,56 +7,57 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 62F5CC55183
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 16:12:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0C6FC54FC9
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 16:13:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 391342071E
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 16:12:54 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7CA922068F
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 16:13:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="YWByUit3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 391342071E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="BGACX90U"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7CA922068F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQvVu-0005a8-8O; Tue, 21 Apr 2020 16:12:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jQvVy-0005eK-Jl; Tue, 21 Apr 2020 16:12:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=FwqV=6F=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
- id 1jQvVs-0005Yk-QF
- for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 16:12:44 +0000
-X-Inumbo-ID: eb4cf23e-83ea-11ea-b4f4-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id eb4cf23e-83ea-11ea-b4f4-bc764e2007e4;
- Tue, 21 Apr 2020 16:12:38 +0000 (UTC)
+ id 1jQvVx-0005dA-Gm
+ for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 16:12:49 +0000
+X-Inumbo-ID: edb62586-83ea-11ea-9160-12813bfff9fa
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id edb62586-83ea-11ea-9160-12813bfff9fa;
+ Tue, 21 Apr 2020 16:12:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587485558;
+ d=citrix.com; s=securemail; t=1587485562;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=s+d3Av6oel5qMTSwNLaojwyj9CuUdXJgvmHiictMXoI=;
- b=YWByUit3bQOKzVXz3HSTt5Nxkmlk3vHxEGVuuoXO9rz2E1UgEN6p6RK0
- tVhDD9WEvG0aTDPicmPiqJR0HqXJr1L+F1dq/RF+G2o+lRIspBpvANvWy
- PtMQTsh9mUpo63ol9U98rX4rfbEsbMg2RY7BDDf3I+Ssk7xfNbJgD5GP4 M=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=0izhnBZO5D9wuACF3/cIE86tFOeUto318+1OADqyCoo=;
+ b=BGACX90UYtvdeQSJReSQ1jC/QaiIrKVDJKOWLR6Ry1nCTSiTMfMkIe58
+ 8if9AsqTNdOBMmXC2g5bEyeq8j7rKb7lCPUQixCjYq924g8hOMV1x4iYJ
+ G4H6sjTOaDIygZmJ725Nb3bZMhf8mqY2zH0oT2yxfGgiuzoLCAWohlu3Q 4=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=anthony.perard@citrix.com;
  spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  anthony.perard@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
  anthony.perard@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="anthony.perard@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,29 +66,30 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="anthony.perard@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: q9maglSWzj19QYn3MKDXTkwLOC3tZHBAOphDPsyhBvZzMFAEiKTeKUfAIjQ5yE/KBLrAmsEsqS
- HFgjxL1hthFHWSTmySTWArecW2UaiuDBL5ouWTZh5suWaAQUVCqqS2i9PpFSpj+3Q2kQSJY8RO
- kXPMUIAXxNknd9J9+C4hPBHRAZNuishUiyq4cFFPwCxyVsXau8l7s+NkA9S9ZRJAZoJdB56uxN
- L4/G3S2TUSE1zaGbzCZDNG4gaouELAsh4tfja3tEvYBT1meGNegYnGTQUNG/O1rRPB8vd1rKUE
- glw=
+IronPort-SDR: ujEdstzz5iP8bpZsR/3NBoE1tb6gIVT7YwtcNbq9VfKnStCgLpX6k5L627K1LwFbmN+kuFiiDZ
+ FhJKu0F87UC/m0hLWErGTkp8kFg/yejZa7jcFrElnvNNQz18wsTq7zY/anJQELC+nF68R6xqH3
+ WfHAmb6afBqD96j85hj+u/ixJED7VeZ9yqQM/enH6/er78WAaMy0LtxpRcu/IaD9RLIvd4zXp+
+ SO9U+16kUnGXkikqoFAvdoL7G+0IDKSy4OEklkoS9z41wR2/TtH6Eo5rhYIyGXK/HEWJl0L8Oi
+ aeE=
 X-SBRS: 2.7
-X-MesageID: 16330448
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 16414439
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,410,1580792400"; d="scan'208";a="16330448"
+X-IronPort-AV: E=Sophos;i="5.72,410,1580792400"; d="scan'208";a="16414439"
 From: Anthony PERARD <anthony.perard@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [XEN PATCH v5 08/16] build: Introduce $(cpp_flags)
-Date: Tue, 21 Apr 2020 17:12:00 +0100
-Message-ID: <20200421161208.2429539-9-anthony.perard@citrix.com>
+Subject: [XEN PATCH v5 10/16] xen/build: Use if_changed_rules with %.o:%.c
+ targets
+Date: Tue, 21 Apr 2020 17:12:02 +0100
+Message-ID: <20200421161208.2429539-11-anthony.perard@citrix.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200421161208.2429539-1-anthony.perard@citrix.com>
 References: <20200421161208.2429539-1-anthony.perard@citrix.com>
@@ -104,44 +106,67 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, Ian
- Jackson <ian.jackson@eu.citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>, Anthony PERARD <anthony.perard@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Anthony PERARD <anthony.perard@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+Use $(dot-target) to have the target name prefix with a dot.
+
+Now, when the CC command has run, it is recorded in .*.cmd
+file, then if_changed_rules will compare it on subsequent runs.
+
 Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-
-Notes:
-    v5:
-    - new patch
-
- xen/Rules.mk | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/Rules.mk | 26 +++++++++++++++++---------
+ 1 file changed, 17 insertions(+), 9 deletions(-)
 
 diff --git a/xen/Rules.mk b/xen/Rules.mk
-index 2e28c572305a..25bcf45612bd 100644
+index 5e08e14455d7..9150911296de 100644
 --- a/xen/Rules.mk
 +++ b/xen/Rules.mk
-@@ -123,6 +123,7 @@ $(obj-bin-y): XEN_CFLAGS := $(filter-out -flto,$(XEN_CFLAGS))
+@@ -173,19 +173,27 @@ FORCE:
  
- c_flags = -MMD -MP -MF $(@D)/.$(@F).d $(XEN_CFLAGS) '-D__OBJECT_FILE__="$@"'
- a_flags = -MMD -MP -MF $(@D)/.$(@F).d $(XEN_AFLAGS)
-+cpp_flags = $(filter-out -Wa$(comma)%,$(a_flags))
+ SRCPATH := $(patsubst $(BASEDIR)/%,%,$(CURDIR))
  
- include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
+-%.o: %.c Makefile
++quiet_cmd_cc_o_c = CC      $@
+ ifeq ($(CONFIG_ENFORCE_UNIQUE_SYMBOLS),y)
+-	$(CC) $(c_flags) -c $< -o $(@D)/.$(@F).tmp -MQ $@
+-ifeq ($(CONFIG_CC_IS_CLANG),y)
+-	$(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
+-else
+-	$(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(@D)/.$(@F).tmp $@
+-endif
+-	rm -f $(@D)/.$(@F).tmp
++    cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $(dot-target).tmp -MQ $@
++    ifeq ($(CONFIG_CC_IS_CLANG),y)
++        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $<=$(SRCPATH)/$< $(dot-target).tmp $@
++    else
++        cmd_objcopy_fix_sym = $(OBJCOPY) --redefine-sym $(<F)=$(SRCPATH)/$< $(dot-target).tmp $@
++    endif
++    cmd_objcopy_fix_sym += && rm -f $(dot-target).tmp
+ else
+-	$(CC) $(c_flags) -c $< -o $@
++    cmd_cc_o_c = $(CC) $(c_flags) -c $< -o $@
+ endif
  
-@@ -207,7 +208,7 @@ quiet_cmd_cc_s_c = CC      $@
- cmd_cc_s_c = $(CC) $(filter-out -Wa$(comma)%,$(c_flags)) -S $< -o $@
++define rule_cc_o_c
++    $(call cmd_and_record,cc_o_c)
++    $(call cmd,objcopy_fix_sym)
++endef
++
++%.o: %.c FORCE
++	$(call if_changed_rule,cc_o_c)
++
+ quiet_cmd_cc_o_S = CC      $@
+ cmd_cc_o_S = $(CC) $(a_flags) -c $< -o $@
  
- quiet_cmd_s_S = CPP     $@
--cmd_s_S = $(CPP) $(filter-out -Wa$(comma)%,$(a_flags)) $< -o $@
-+cmd_s_S = $(CPP) $(cpp_flags) $< -o $@
- 
- %.i: %.c FORCE
- 	$(call if_changed,cpp_i_c)
 -- 
 Anthony PERARD
 
