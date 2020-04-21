@@ -2,56 +2,55 @@ Return-Path: <SRS0=TXFR=6F=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 17F43C54FC9
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 22169C54FCC
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:48:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA8F52070B
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:48:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA8F52070B
+	by mail.kernel.org (Postfix) with ESMTPS id 07F622071C
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:48:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 07F622071C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQwzu-0006wT-24; Tue, 21 Apr 2020 17:47:50 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jQwzp-0006vj-KH; Tue, 21 Apr 2020 17:47:45 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
  <SRS0=90sK=6F=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
- id 1jQwzs-0006wF-F4
- for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 17:47:48 +0000
-X-Inumbo-ID: 33f23b36-83f8-11ea-83d8-bc764e2007e4
+ id 1jQwzo-0006vY-Ac
+ for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 17:47:44 +0000
+X-Inumbo-ID: 2fc05a3e-83f8-11ea-9177-12813bfff9fa
 Received: from mga05.intel.com (unknown [192.55.52.43])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 33f23b36-83f8-11ea-83d8-bc764e2007e4;
- Tue, 21 Apr 2020 17:47:43 +0000 (UTC)
-IronPort-SDR: wof1HeqO93luk6GBbvgWUUrJjVgMNtdj56lQCpmaPrOlvbmpdkBUcSsqDPpwhVB2A3enGDJHW5
- vdhh3Lla36WA==
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 2fc05a3e-83f8-11ea-9177-12813bfff9fa;
+ Tue, 21 Apr 2020 17:47:39 +0000 (UTC)
+IronPort-SDR: 1X6RjqN38W3xfluhUPJFVo+slI69vGDR5mpbseiMndfvSlixYr14sijk0GthrlUaYTmEwKregV
+ PLtac/Pf6tzw==
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from fmsmga003.fm.intel.com ([10.253.24.29])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Apr 2020 10:47:38 -0700
-IronPort-SDR: v+zuVKiGGBtEq1BGefKamc33QP6S5dAcn7QFqCJfNqBUp0a5boH4nGoMSt6m8EeAUuDGo2fwV5
- Y1+fO29dHnPQ==
+ 21 Apr 2020 10:47:35 -0700
+IronPort-SDR: 3YJc4GWZuxL0qpKOjiZXrT/0eFBNlH7Tj7rsDOXA5kav9/5APtMhvFaseCnbQo2lEZ6s/n2zLH
+ r9SElV567KUg==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,411,1580803200"; d="scan'208";a="300680743"
+X-IronPort-AV: E=Sophos;i="5.72,411,1580803200"; d="scan'208";a="300680735"
 Received: from tlengyel-mobl2.amr.corp.intel.com (HELO localhost.localdomain)
  ([10.212.17.85])
- by FMSMGA003.fm.intel.com with ESMTP; 21 Apr 2020 10:47:36 -0700
+ by FMSMGA003.fm.intel.com with ESMTP; 21 Apr 2020 10:47:34 -0700
 From: Tamas K Lengyel <tamas.lengyel@intel.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v16 2/3] mem_sharing: allow forking domain with IOMMU enabled
-Date: Tue, 21 Apr 2020 10:47:24 -0700
-Message-Id: <c958f3776e602143efb2fb7c146a0c18a3fcd262.1587490511.git.tamas.lengyel@intel.com>
+Subject: [PATCH v16 0/3] VM forking
+Date: Tue, 21 Apr 2020 10:47:22 -0700
+Message-Id: <cover.1587490511.git.tamas.lengyel@intel.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1587490511.git.tamas.lengyel@intel.com>
-References: <cover.1587490511.git.tamas.lengyel@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -70,121 +69,120 @@ Cc: Tamas K Lengyel <tamas@tklengyel.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>,
+ Anthony PERARD <anthony.perard@citrix.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The memory sharing subsystem by default doesn't allow a domain to share memory
-if it has an IOMMU active for obvious security reasons. However, when fuzzing a
-VM fork, the same security restrictions don't necessarily apply. While it makes
-no sense to try to create a full fork of a VM that has an IOMMU attached as only
-one domain can own the pass-through device at a time, creating a shallow fork
-without a device model is still very useful for fuzzing kernel-mode drivers.
+The following patches are part of the series that implement VM forking for
+Intel HVM guests to allow for the fast creation of identical VMs without the
+assosciated high startup costs of booting or restoring the VM from a savefile.
 
-By allowing the parent VM to initialize the kernel-mode driver with a real
-device that's pass-through, the driver can enter into a state more suitable for
-fuzzing. Some of these initialization steps are quite complex and are easier to
-perform when a real device is present. After the initialization, shallow forks
-can be utilized for fuzzing code-segments in the device driver that don't
-directly interact with the device.
+JIRA issue: https://xenproject.atlassian.net/browse/XEN-89
 
-Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
----
-v16: Minor fixes based on feedback
----
- xen/arch/x86/mm/mem_sharing.c | 20 +++++++++++++-------
- xen/include/public/memory.h   |  4 +++-
- 2 files changed, 16 insertions(+), 8 deletions(-)
+The fork operation is implemented as part of the "xl fork-vm" command:
+    xl fork-vm -C <config> -Q <qemu-save-file> -m <max-vcpus> <parent_domid>
+    
+By default a fully functional fork is created. The user is in charge however to
+create the appropriate config file for the fork and to generate the QEMU save
+file before the fork-vm call is made. The config file needs to give the
+fork a new name at minimum but other settings may also require changes. Certain
+settings in the config file of both the parent and the fork have to be set to
+default. Details are documented.
 
-diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
-index d8ed660abb..e690d2fa13 100644
---- a/xen/arch/x86/mm/mem_sharing.c
-+++ b/xen/arch/x86/mm/mem_sharing.c
-@@ -1445,7 +1445,8 @@ static int range_share(struct domain *d, struct domain *cd,
-     return rc;
- }
- 
--static inline int mem_sharing_control(struct domain *d, bool enable)
-+static inline int mem_sharing_control(struct domain *d, bool enable,
-+                                      uint16_t flags)
- {
-     if ( enable )
-     {
-@@ -1455,7 +1456,8 @@ static inline int mem_sharing_control(struct domain *d, bool enable)
-         if ( unlikely(!hap_enabled(d)) )
-             return -ENODEV;
- 
--        if ( unlikely(is_iommu_enabled(d)) )
-+        if ( unlikely(is_iommu_enabled(d) &&
-+                      !(flags & XENMEM_FORK_WITH_IOMMU_ALLOWED)) )
-             return -EXDEV;
-     }
- 
-@@ -1848,7 +1850,8 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
-     if ( rc )
-         goto out;
- 
--    if ( !mem_sharing_enabled(d) && (rc = mem_sharing_control(d, true)) )
-+    if ( !mem_sharing_enabled(d) &&
-+         (rc = mem_sharing_control(d, true, 0)) )
-         return rc;
- 
-     switch ( mso.op )
-@@ -2086,7 +2089,9 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
-         struct domain *pd;
- 
-         rc = -EINVAL;
--        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[2] )
-+        if ( mso.u.fork.pad )
-+            goto out;
-+        if ( mso.u.fork.flags & ~XENMEM_FORK_WITH_IOMMU_ALLOWED )
-             goto out;
- 
-         rc = rcu_lock_live_remote_domain_by_id(mso.u.fork.parent_domain,
-@@ -2101,7 +2106,8 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
-             goto out;
-         }
- 
--        if ( !mem_sharing_enabled(pd) && (rc = mem_sharing_control(pd, true)) )
-+        if ( !mem_sharing_enabled(pd) &&
-+             (rc = mem_sharing_control(pd, true, mso.u.fork.flags)) )
-         {
-             rcu_unlock_domain(pd);
-             goto out;
-@@ -2122,7 +2128,7 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
-         struct domain *pd;
- 
-         rc = -EINVAL;
--        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[2] )
-+        if ( mso.u.fork.pad || mso.u.fork.flags )
-             goto out;
- 
-         rc = -ENOSYS;
-@@ -2159,7 +2165,7 @@ int mem_sharing_domctl(struct domain *d, struct xen_domctl_mem_sharing_op *mec)
-     switch ( mec->op )
-     {
-     case XEN_DOMCTL_MEM_SHARING_CONTROL:
--        rc = mem_sharing_control(d, mec->u.enable);
-+        rc = mem_sharing_control(d, mec->u.enable, 0);
-         break;
- 
-     default:
-diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
-index d36d64b8dc..e56800357d 100644
---- a/xen/include/public/memory.h
-+++ b/xen/include/public/memory.h
-@@ -536,7 +536,9 @@ struct xen_mem_sharing_op {
-         } debug;
-         struct mem_sharing_op_fork {      /* OP_FORK */
-             domid_t parent_domain;        /* IN: parent's domain id */
--            uint16_t pad[3];              /* Must be set to 0 */
-+#define XENMEM_FORK_WITH_IOMMU_ALLOWED (1u << 0)
-+            uint16_t flags;               /* IN: optional settings */
-+            uint32_t pad;                 /* Must be set to 0 */
-         } fork;
-     } u;
- };
+The interface also allows to split the forking into two steps:
+    xl fork-vm --launch-dm no \
+               -m <max-vcpus> \
+               -p <parent_domid>
+    xl fork-vm --launch-dm late \
+               -C <config_file_for_fork> \
+               -Q <qemu_save_file> \
+               <fork_domid>
+
+The split creation model is useful when the VM needs to be created as fast as
+possible. The forked VM can be unpaused without the device model being launched
+to be monitored and accessed via VMI. Note however that without its device
+model running (depending on what is executing in the VM) it is bound to
+misbehave or even crash when its trying to access devices that would be
+emulated by QEMU. We anticipate that for certain use-cases this would be an
+acceptable situation, in case for example when fuzzing is performed of code
+segments that don't access such devices.
+
+Launching the device model requires the QEMU Xen savefile to be generated
+manually from the parent VM. This can be accomplished simply by connecting to
+its QMP socket and issuing the "xen-save-devices-state" command. For example
+using the standard tool socat these commands can be used to generate the file:
+    socat - UNIX-CONNECT:/var/run/xen/qmp-libxl-<parent_domid>
+    { "execute": "qmp_capabilities" }
+    { "execute": "xen-save-devices-state", \
+        "arguments": { "filename": "/path/to/save/qemu_state", \
+                        "live": false} }
+
+At runtime the forked VM starts running with an empty p2m which gets lazily
+populated when the VM generates EPT faults, similar to how altp2m views are
+populated. If the memory access is a read-only access, the p2m entry is
+populated with a memory shared entry with its parent. For write memory accesses
+or in case memory sharing wasn't possible (for example in case a reference is
+held by a third party), a new page is allocated and the page contents are
+copied over from the parent VM. Forks can be further forked if needed, thus
+allowing for further memory savings.
+
+A VM fork reset hypercall is also added that allows the fork to be reset to the
+state it was just after a fork, also accessible via xl:
+    xl fork-vm --fork-reset -p <fork_domid>
+
+This is an optimization for cases where the forks are very short-lived and run
+without a device model, so resetting saves some time compared to creating a
+brand new fork provided the fork has not aquired a lot of memory. If the fork
+has a lot of memory deduplicated it is likely going to be faster to create a
+new fork from scratch and asynchronously destroying the old one.
+
+The series has been tested with Windows VMs and functions as expected. Linux
+VMs when forked from a running VM will have a frozen VNC screen. Linux VMs at
+this time can only be forked with a working device model when the parent VM was
+restored from a snapshot using "xl restore -p". This is a known limitation.
+Also note that PVHVM/PVH Linux guests have not been tested. Forking most likely
+works but PV devices and drivers would require additional wiring to set things
+up properly since the guests are unaware of the forking taking place, unlike
+the save/restore routine where the guest is made aware of the procedure.
+
+Forking time has been measured to be 0.0007s, device model launch to be around
+1s depending largely on the number of devices being emulated. Fork resets have
+been measured to be 0.0001s under the optimal circumstances.
+
+New in v16:
+    A better bugfix for fork reset issue
+    Minor fixes for the IOMMU allow patch based on feedback
+
+Patch 1 fix for VM fork reset removing pages from the p2m that it shouldn't
+Patch 2 adds option to fork a domain with IOMMU active
+Patch 3 adds the toolstack-side code implementing VM forking and reset
+
+Tamas K Lengyel (3):
+  mem_sharing: fix sharability check during fork reset
+  mem_sharing: allow forking domain with IOMMU enabled
+  xen/tools: VM forking toolstack side
+
+ docs/man/xl.1.pod.in          |  44 +++++
+ tools/libxc/include/xenctrl.h |  14 ++
+ tools/libxc/xc_memshr.c       |  26 +++
+ tools/libxl/libxl.h           |  12 ++
+ tools/libxl/libxl_create.c    | 361 +++++++++++++++++++---------------
+ tools/libxl/libxl_dm.c        |   2 +-
+ tools/libxl/libxl_dom.c       |  43 +++-
+ tools/libxl/libxl_internal.h  |   7 +
+ tools/libxl/libxl_types.idl   |   1 +
+ tools/libxl/libxl_x86.c       |  42 ++++
+ tools/xl/Makefile             |   2 +-
+ tools/xl/xl.h                 |   5 +
+ tools/xl/xl_cmdtable.c        |  15 ++
+ tools/xl/xl_forkvm.c          | 149 ++++++++++++++
+ tools/xl/xl_vmcontrol.c       |  14 ++
+ xen/arch/x86/mm/mem_sharing.c |  99 ++++++----
+ xen/include/public/memory.h   |   4 +-
+ 17 files changed, 637 insertions(+), 203 deletions(-)
+ create mode 100644 tools/xl/xl_forkvm.c
+
 -- 
 2.20.1
 
