@@ -2,99 +2,58 @@ Return-Path: <SRS0=TXFR=6F=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B70C3C54FC9
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17F43C54FC9
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:48:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85D5E206D9
-	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:31:01 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="To55zwlN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85D5E206D9
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id EA8F52070B
+	for <xen-devel@archiver.kernel.org>; Tue, 21 Apr 2020 17:48:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA8F52070B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.89)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jQwj5-0005rU-Nx; Tue, 21 Apr 2020 17:30:27 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jQwzu-0006wT-24; Tue, 21 Apr 2020 17:47:50 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.89) (envelope-from
- <SRS0=Zbep=6F=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jQwj5-0005rP-55
- for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 17:30:27 +0000
-X-Inumbo-ID: c8fe2833-83f5-11ea-9175-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c8fe2833-83f5-11ea-9175-12813bfff9fa;
- Tue, 21 Apr 2020 17:30:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587490225;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=rTyg5GkSCEnmbYmkqxtD0tdi7bqwJ71vNPKBP0QsvuU=;
- b=To55zwlN2IL4hRMtuFInAXNt8DaRvDvkhDxixVzY0jEBbDEAzIqvU7wJ
- ZneYpSrEqMcDqQA7rRY0u0hyzJDfBIJGUk5RFFkVkXWfNBSm3GlwI1iLT
- yhQkDXSqEMelbPNuhKFZeImEKGdn8C5VjL0c6XbrQ0uco/k9oAbpmWMEZ I=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: 8+wPFDfQSk/Nl84ZXfpS+QeVyRlOobvkreTY7CtgKDs9nFYoFzojVmfRbi8htLxThPATd/gqTz
- e1ubtSBNiiqtOEByK9Qfpss7DfTjZHESjaFnHAVBl+p0zmaEX712KQ09AKR+rgAH1NDKDMLwmY
- bWnP4hcbgPcZ5Xd1R8QdJiSgWs8F4ItMyd129lIfiqqVs+PWGPXBtDVmhioFvA2WpLDk+aYiDg
- 10YIGf7JFTP37rfAiaafgL7sFLcQQ5chwYB0uyyMAxt1+FuAJGqLKw85HGB51whdELvDGZftPb
- LGE=
-X-SBRS: 2.7
-X-MesageID: 16335694
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.72,411,1580792400"; d="scan'208";a="16335694"
-Date: Tue, 21 Apr 2020 19:30:10 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: [PATCH v2 4/4] x86: adjustments to guest handle treatment
-Message-ID: <20200421173010.GY28601@Air-de-Roger>
-References: <9d4b738a-4487-6bfc-3076-597d074c7b47@suse.com>
- <e820e1b9-7a7e-21f3-1ea0-d939de1905dd@suse.com>
+ <SRS0=90sK=6F=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
+ id 1jQwzs-0006wF-F4
+ for xen-devel@lists.xenproject.org; Tue, 21 Apr 2020 17:47:48 +0000
+X-Inumbo-ID: 33f23b36-83f8-11ea-83d8-bc764e2007e4
+Received: from mga05.intel.com (unknown [192.55.52.43])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 33f23b36-83f8-11ea-83d8-bc764e2007e4;
+ Tue, 21 Apr 2020 17:47:43 +0000 (UTC)
+IronPort-SDR: wof1HeqO93luk6GBbvgWUUrJjVgMNtdj56lQCpmaPrOlvbmpdkBUcSsqDPpwhVB2A3enGDJHW5
+ vdhh3Lla36WA==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Apr 2020 10:47:38 -0700
+IronPort-SDR: v+zuVKiGGBtEq1BGefKamc33QP6S5dAcn7QFqCJfNqBUp0a5boH4nGoMSt6m8EeAUuDGo2fwV5
+ Y1+fO29dHnPQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.72,411,1580803200"; d="scan'208";a="300680743"
+Received: from tlengyel-mobl2.amr.corp.intel.com (HELO localhost.localdomain)
+ ([10.212.17.85])
+ by FMSMGA003.fm.intel.com with ESMTP; 21 Apr 2020 10:47:36 -0700
+From: Tamas K Lengyel <tamas.lengyel@intel.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v16 2/3] mem_sharing: allow forking domain with IOMMU enabled
+Date: Tue, 21 Apr 2020 10:47:24 -0700
+Message-Id: <c958f3776e602143efb2fb7c146a0c18a3fcd262.1587490511.git.tamas.lengyel@intel.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <cover.1587490511.git.tamas.lengyel@intel.com>
+References: <cover.1587490511.git.tamas.lengyel@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <e820e1b9-7a7e-21f3-1ea0-d939de1905dd@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.23
 Precedence: list
@@ -105,32 +64,128 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>,
+Cc: Tamas K Lengyel <tamas@tklengyel.com>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+ Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, Apr 21, 2020 at 11:13:23AM +0200, Jan Beulich wrote:
-> First of all avoid excessive conversions. copy_{from,to}_guest(), for
-> example, work fine with all of XEN_GUEST_HANDLE{,_64,_PARAM}().
+The memory sharing subsystem by default doesn't allow a domain to share memory
+if it has an IOMMU active for obvious security reasons. However, when fuzzing a
+VM fork, the same security restrictions don't necessarily apply. While it makes
+no sense to try to create a full fork of a VM that has an IOMMU attached as only
+one domain can own the pass-through device at a time, creating a shallow fork
+without a device model is still very useful for fuzzing kernel-mode drivers.
 
-I'm not sure I understand the difference between those two, as they
-are both placeholders for linear guest addresses?
+By allowing the parent VM to initialize the kernel-mode driver with a real
+device that's pass-through, the driver can enter into a state more suitable for
+fuzzing. Some of these initialization steps are quite complex and are easier to
+perform when a real device is present. After the initialization, shallow forks
+can be utilized for fuzzing code-segments in the device driver that don't
+directly interact with the device.
 
-AFAICT XEN_GUEST_HANDLE should be used for guest pointers inside of an
-hypercall struct, while XEN_GUEST_HANDLE_PARAM is for guest pointers
-as hypercall arguments. But those are both just guest pointers,
-whether they are a parameter to the hypercall or a field in a
-struct, and hence could use the same type?
+Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
+---
+v16: Minor fixes based on feedback
+---
+ xen/arch/x86/mm/mem_sharing.c | 20 +++++++++++++-------
+ xen/include/public/memory.h   |  4 +++-
+ 2 files changed, 16 insertions(+), 8 deletions(-)
 
-I assume there's some reason for not doing so, and I see the comment
-about other arches, but again a linear guest address is just that in
-all arches, regardless of it's placement.
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index d8ed660abb..e690d2fa13 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -1445,7 +1445,8 @@ static int range_share(struct domain *d, struct domain *cd,
+     return rc;
+ }
+ 
+-static inline int mem_sharing_control(struct domain *d, bool enable)
++static inline int mem_sharing_control(struct domain *d, bool enable,
++                                      uint16_t flags)
+ {
+     if ( enable )
+     {
+@@ -1455,7 +1456,8 @@ static inline int mem_sharing_control(struct domain *d, bool enable)
+         if ( unlikely(!hap_enabled(d)) )
+             return -ENODEV;
+ 
+-        if ( unlikely(is_iommu_enabled(d)) )
++        if ( unlikely(is_iommu_enabled(d) &&
++                      !(flags & XENMEM_FORK_WITH_IOMMU_ALLOWED)) )
+             return -EXDEV;
+     }
+ 
+@@ -1848,7 +1850,8 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+     if ( rc )
+         goto out;
+ 
+-    if ( !mem_sharing_enabled(d) && (rc = mem_sharing_control(d, true)) )
++    if ( !mem_sharing_enabled(d) &&
++         (rc = mem_sharing_control(d, true, 0)) )
+         return rc;
+ 
+     switch ( mso.op )
+@@ -2086,7 +2089,9 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+         struct domain *pd;
+ 
+         rc = -EINVAL;
+-        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[2] )
++        if ( mso.u.fork.pad )
++            goto out;
++        if ( mso.u.fork.flags & ~XENMEM_FORK_WITH_IOMMU_ALLOWED )
+             goto out;
+ 
+         rc = rcu_lock_live_remote_domain_by_id(mso.u.fork.parent_domain,
+@@ -2101,7 +2106,8 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+             goto out;
+         }
+ 
+-        if ( !mem_sharing_enabled(pd) && (rc = mem_sharing_control(pd, true)) )
++        if ( !mem_sharing_enabled(pd) &&
++             (rc = mem_sharing_control(pd, true, mso.u.fork.flags)) )
+         {
+             rcu_unlock_domain(pd);
+             goto out;
+@@ -2122,7 +2128,7 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+         struct domain *pd;
+ 
+         rc = -EINVAL;
+-        if ( mso.u.fork.pad[0] || mso.u.fork.pad[1] || mso.u.fork.pad[2] )
++        if ( mso.u.fork.pad || mso.u.fork.flags )
+             goto out;
+ 
+         rc = -ENOSYS;
+@@ -2159,7 +2165,7 @@ int mem_sharing_domctl(struct domain *d, struct xen_domctl_mem_sharing_op *mec)
+     switch ( mec->op )
+     {
+     case XEN_DOMCTL_MEM_SHARING_CONTROL:
+-        rc = mem_sharing_control(d, mec->u.enable);
++        rc = mem_sharing_control(d, mec->u.enable, 0);
+         break;
+ 
+     default:
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index d36d64b8dc..e56800357d 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -536,7 +536,9 @@ struct xen_mem_sharing_op {
+         } debug;
+         struct mem_sharing_op_fork {      /* OP_FORK */
+             domid_t parent_domain;        /* IN: parent's domain id */
+-            uint16_t pad[3];              /* Must be set to 0 */
++#define XENMEM_FORK_WITH_IOMMU_ALLOWED (1u << 0)
++            uint16_t flags;               /* IN: optional settings */
++            uint32_t pad;                 /* Must be set to 0 */
+         } fork;
+     } u;
+ };
+-- 
+2.20.1
 
-Sorry, this is likely tangential to your patch.
-
-Thanks, Roger.
 
