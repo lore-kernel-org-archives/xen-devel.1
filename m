@@ -2,74 +2,106 @@ Return-Path: <SRS0=FTuz=6G=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F19B4C55190
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 12:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8E921C55185
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 12:20:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C1C8321D79
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 12:19:18 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6128A2098B
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 12:20:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="OGw/VPSi"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C1C8321D79
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="dpj0Jpjr"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6128A2098B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jREL9-0005AO-UY; Wed, 22 Apr 2020 12:18:55 +0000
+	id 1jREMV-0005tq-AA; Wed, 22 Apr 2020 12:20:19 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=GuZW=6G=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jREL8-0005AJ-N5
- for xen-devel@lists.xenproject.org; Wed, 22 Apr 2020 12:18:54 +0000
-X-Inumbo-ID: 69ce797e-8493-11ea-926b-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=yehR=6G=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jREMT-0005tg-UZ
+ for xen-devel@lists.xenproject.org; Wed, 22 Apr 2020 12:20:18 +0000
+X-Inumbo-ID: 9f34712a-8493-11ea-926b-12813bfff9fa
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 69ce797e-8493-11ea-926b-12813bfff9fa;
- Wed, 22 Apr 2020 12:18:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=cMOPaOLK42hQvOgzGUzV5yI//1yskD+hq/9Wvsrzi40=; b=OGw/VPSiU9Elcp6b+i/VMKLfN
- Gp8eipnsoJO7x33nd/Q7bK4hmkqahrrswUbqIe8y+cBewRIy0xmVlHN5eB4jD7X1oEjbGVyKl2c9K
- ceu5w5lC/YYZpTwXUb2ZrfjUekurvG9NMqmv/wumLK6r2j47lQ+gGHMOEA9b8zbckbPes=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jREL0-0005NA-6Z; Wed, 22 Apr 2020 12:18:46 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jREKz-0003Yu-U4; Wed, 22 Apr 2020 12:18:45 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jREKz-0004Dx-TT; Wed, 22 Apr 2020 12:18:45 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-149733-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 9f34712a-8493-11ea-926b-12813bfff9fa;
+ Wed, 22 Apr 2020 12:20:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1587558015;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=uybLuVdkqaTFdLBCFX6aVDoWpAdWDrb62FwYzc00iR8=;
+ b=dpj0Jpjrk9unop8RUl90n48HQc8sCvBMjxL4EXHEEqrqDZfhclD7rRSi
+ DkZLymXyBhdtnCS5MMVfvk8Hn46yf65Xjhqxj/ns9EeULn2fgWSXTso6x
+ b5gTxGfxM0iX+3mdiKbn+Y8W7Af+/JMfuKkHK3/P1qg94PYuZkaUyKSYh 0=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: IHRhp7IM1jZirlKm2mYv1r6iQd0LFBKt7B5KpGdpNWZtPb8z0hH5jYsAwEnEuZ1UuSK0e6YzPc
+ V6HkO57CahywqKTXqxpBGGhY41KXvLJy5sSC4BRymasx8j+DksX5xG/MiBWVPtrNfJXZfJrEXv
+ Se9NJGb5f5rh18kWGae/58aP2FCin0GO1KQnvS8xrMtFYQyRnpvyjJErWHUykeS0EJWaKcP/Q+
+ 6Cxf7WBI7CjEG1UKA4KX6lLnszkC8Fmgp9jcb2MCZwBa3aJCh6F492xL6lUlQpvnO2vanOSlQ/
+ b7U=
+X-SBRS: 2.7
+X-MesageID: 16461383
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.72,414,1580792400"; d="scan'208";a="16461383"
+Subject: Re: [PATCH 01/10] x86/mm: no-one passes a NULL domain to
+ init_xen_l4_slots()
+To: Jan Beulich <jbeulich@suse.com>
+References: <65bfcd6a-2bb0-da6f-9e85-39f224bd81fb@suse.com>
+ <19d7ad4f-c653-b7b6-59a8-90c9700c9200@suse.com>
+ <68542638-b5d5-3261-8088-d0cd6e2dcd74@citrix.com>
+ <757e4a8b-f60d-1c5c-fe11-b1d22980f09e@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <9432cd11-3d40-76b7-b033-08aab274172a@citrix.com>
+Date: Wed, 22 Apr 2020 13:20:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 149733: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=17b094b97c823c956c57e31c5cd7175d56b3efe4
-X-Osstest-Versions-That: xen=5730ac3c8346f56fe8ee90249cdcbdab2a4d5791
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 22 Apr 2020 12:18:45 +0000
+In-Reply-To: <757e4a8b-f60d-1c5c-fe11-b1d22980f09e@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,64 +112,39 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Tim
+ Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 149733 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/149733/
+On 20/04/2020 06:48, Jan Beulich wrote:
+> On 17.04.2020 21:46, Andrew Cooper wrote:
+>> On 17/04/2020 15:25, Jan Beulich wrote:
+>>> Drop the NULL checks - they've been introduced by commit 8d7b633ada
+>>> ("x86/mm: Consolidate all Xen L4 slot writing into
+>>> init_xen_l4_slots()") for no apparent reason.
+>> :) I'll take this as conformation that all my sudden pagetable work in
+>> Xen manage ended up being rather more subtle than Linux's equivalent
+>> work for KPTI.
+>>
+>> https://lists.xenproject.org/archives/html/xen-devel/2018-01/msg00281.html
+>>
+>> Specifically, this was part of trying to arrange for fully per-pcpu
+>> private mappings, and was used to construct the pagetables for the idle
+>> vcpu which specifically don't have a perdomain mapping.
+>>
+>> Seeing as this is still an outstanding task in the secret-free-Xen
+>> plans, any dropping of it now will have to be undone at some point in
+>> the future.
+> s/will/may/ I suppose - we don't know for sure how this will look
+> like at this point.
 
-Failures :-/ but no regressions.
+Will.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+The only reason we don't need it right now is because idle_pg_table[]
+gets constructed at boot time.  As soon as we're creating one (or more)
+per pcpu, we need a way of writing an L4 without a perdomain mapping.
 
-version targeted for testing:
- xen                  17b094b97c823c956c57e31c5cd7175d56b3efe4
-baseline version:
- xen                  5730ac3c8346f56fe8ee90249cdcbdab2a4d5791
-
-Last test of basis   149727  2020-04-22 00:01:31 Z    0 days
-Testing same since   149733  2020-04-22 09:02:41 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Tim Deegan <tim@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   5730ac3c83..17b094b97c  17b094b97c823c956c57e31c5cd7175d56b3efe4 -> smoke
+~Andrew
 
