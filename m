@@ -2,72 +2,75 @@ Return-Path: <SRS0=FTuz=6G=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80FE0C54FCB
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 18:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1FBEC54FCB
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 19:47:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4D4282098B
-	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 18:56:24 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6439320644
+	for <xen-devel@archiver.kernel.org>; Wed, 22 Apr 2020 19:47:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mYha5onf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4D4282098B
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="obB0vOxK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6439320644
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRKXR-0002Yj-Tw; Wed, 22 Apr 2020 18:56:01 +0000
+	id 1jRLKq-0007DR-QC; Wed, 22 Apr 2020 19:47:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=ldCW=6G=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1jRKXQ-0002Ye-5q
- for xen-devel@lists.xenproject.org; Wed, 22 Apr 2020 18:56:00 +0000
-X-Inumbo-ID: e73757b2-84ca-11ea-b4f4-bc764e2007e4
-Received: from mail-lf1-x132.google.com (unknown [2a00:1450:4864:20::132])
+ id 1jRLKp-0007DM-S0
+ for xen-devel@lists.xenproject.org; Wed, 22 Apr 2020 19:47:03 +0000
+X-Inumbo-ID: 094a1414-84d2-11ea-9e09-bc764e2007e4
+Received: from mail-lf1-x142.google.com (unknown [2a00:1450:4864:20::142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e73757b2-84ca-11ea-b4f4-bc764e2007e4;
- Wed, 22 Apr 2020 18:55:59 +0000 (UTC)
-Received: by mail-lf1-x132.google.com with SMTP id g10so2580799lfj.13
- for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2020 11:55:59 -0700 (PDT)
+ id 094a1414-84d2-11ea-9e09-bc764e2007e4;
+ Wed, 22 Apr 2020 19:47:03 +0000 (UTC)
+Received: by mail-lf1-x142.google.com with SMTP id l11so2747541lfc.5
+ for <xen-devel@lists.xenproject.org>; Wed, 22 Apr 2020 12:47:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=gddG5PZDCbgewde5LFsrnaQZpH7b9VEvC8Um1KlBE4Y=;
- b=mYha5onfeMct02gBKfTECQcjXnR9cz+EgqVe/LdAWwX2NaZ77Y1IXF0z1Eakx57XIW
- WOSXJ6odvESCp/Ye94zaCXmzB19eVKXLFjXx+dzESV4F/zAtdCcYrbFnQ25QPdFm1MM/
- 1oO3MokEguCiRsVUxw0N81rwTPFFecjwNENSUewDAE2gKKWtjob67SH2y8zGm3Hq3bFY
- qgzHSPC1CK0bT8/MsMwNjLgIVI2nMk9BDx5gciINeOsBbj9I/t4sdeh6Gmh8IlBUr3Q8
- TJPrrsbD9ZkWpr/ScksMqRtydFQS9oMzdlkSiDYWWYMwHBHiWbpXQlWr6fKh3e6sNv29
- II8Q==
+ bh=fH5ovlMQHSD35J+5fA7W367GKpKz222U1ZfjV1xIg7E=;
+ b=obB0vOxKEhc05/wG2Cw6EK0B2bGPmU0rWBnrYmTQMAuNVBQdCtfSpr1laclLY4KBvZ
+ 1rC5C0rKhiLackNxPA08vUd4uSvpXVSnXLfGSATGQHChB9SaYc5f4zHj/YO1i1FBnXi8
+ +Ur3tL5qCcduVoxgVDRKBGD8osheNux7KtdYjmD1yemS50g1w/CrfRFE/Af1JbIUITGQ
+ Ncrhi0j64zibkSgjaxA9Uhsn8m7AHkEAZwdpemoamVe1nixqVxUHdC/arUwLeHK6HwRx
+ E7NtWA8It4yQDLtrLn/CBm62JGoSRXy/SRpW+GfxWb13PViv6JWGZdFnydduENJeuR95
+ 7NRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=gddG5PZDCbgewde5LFsrnaQZpH7b9VEvC8Um1KlBE4Y=;
- b=ac3WUxMtHy0a3qZOe2a8vIbK0G8R4714yeKUv9LwliclW2uEanOphLOCCiS6P815qF
- IyFQ4bM9f6SdsqWX6kID6rqloWPM9IZ+6D+ktjV6SoNY6zwuj40k1pE4obcZWaBdU/Tc
- P/TdhBO3qnGdLO2h774gXgJbiPNzOgjFxi18D0stQAsM6Out2BygVFnJE0jtxLpQ8U1z
- D6t267g0er6UKnjzBw7lwct/WOn4kKWeLJBDOT+Jx1CCeezoMvl27YlZqAFW+LN+3g5T
- wQmRiY6F8CeHN4UijaOj+MKDVexBR2ZQBzYvpJElQ+w0pr3mtt8aat6v+0eZsGara3da
- GVHA==
-X-Gm-Message-State: AGi0PuaYnGXySMgWfBnONlkAetGgqHn1keD5ASvXeCC0Zr7sqb3oVI1U
- vmACAcBUIf12ruu60dWecGCE7oG4CYYYJhTQLsS/TxLk
-X-Google-Smtp-Source: APiQypJzaeYlYzHGR2Z41U+t6aDQKbWRs6Av9fAAJKSgW8XTx5rSsobCmNW/QlAHAVWp+sl34kdpih26EQPbCjGG/tM=
-X-Received: by 2002:a19:1c3:: with SMTP id 186mr17922436lfb.191.1587581758004; 
- Wed, 22 Apr 2020 11:55:58 -0700 (PDT)
+ bh=fH5ovlMQHSD35J+5fA7W367GKpKz222U1ZfjV1xIg7E=;
+ b=Fg9fqmXsfmAaFOuPwlqfl4hcFKgZlEbAXU5HSTS/4j83X1mXHFANC1sfYVIAv8MNTS
+ DZ5zNo7MEnoTRDM9fEcncy21GKUqukG3GEG+oHrVG2c76ewd+otVn+KRmn/4kz7GhtDC
+ EXLno5nqOlIaih2A0foiKw/wjCGB5oq9FOphX/shUTUSpT00+kn9zIViml3UUNFhnqyT
+ kRjFdTRpR641MCYK5knxgxD+iYuJaMon5rgvxL3pCr0yMjQ4UVy0KIA13QiQtQH8uIih
+ YkvV+0cFYezpvFy6sZN6n3k51+ZckSMFgteHWA2zzqs0ZK5g/8uL7JDi70udtPs3XpJz
+ Kt+w==
+X-Gm-Message-State: AGi0PuZRK7gld9Z9dfodofaRNErqNwBHiJxatH5xL2ZzuM57Rq8t1Dnv
+ utR5zz6EIFrCIi0FJrCWAYxL0T+q8hlkaem4Sgk=
+X-Google-Smtp-Source: APiQypKJcp00pj5t78apj5qE1RxvSfKr92SkVWprDNXkhvU0tl8gF1Pk6rj9OQy/uhVme/lwWFe7+iwYFBOujhCoDio=
+X-Received: by 2002:a19:6007:: with SMTP id u7mr114957lfb.9.1587584821755;
+ Wed, 22 Apr 2020 12:47:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <FC32A2FB-F339-4F3A-8237-0A4334ADF3D2@citrix.com>
-In-Reply-To: <FC32A2FB-F339-4F3A-8237-0A4334ADF3D2@citrix.com>
+References: <cover.1586727061.git.rosbrookn@ainfosec.com>
+ <e2d8d6c1293c8251be881cd471265aa8188ae2ae.1586727061.git.rosbrookn@ainfosec.com>
+ <65721F76-319A-47E4-8184-116F02B2BCE3@citrix.com>
+In-Reply-To: <65721F76-319A-47E4-8184-116F02B2BCE3@citrix.com>
 From: Nick Rosbrook <rosbrookn@gmail.com>
-Date: Wed, 22 Apr 2020 14:55:46 -0400
-Message-ID: <CAEBZRSe=yB6Y1TQSQqAphDw8gVKm8VhpqEYsKXgVnZjvPNPUnQ@mail.gmail.com>
-Subject: Re: Golang Xen packages and the golang packaging system
+Date: Wed, 22 Apr 2020 15:46:50 -0400
+Message-ID: <CAEBZRSckvUqCikFhtHECzmybwC_d8ojCfvBznvF90A7pS1A_1Q@mail.gmail.com>
+Subject: Re: [PATCH 1/4] golang/xenlight: add NameToDomid and DomidToName util
+ functions
 To: George Dunlap <George.Dunlap@citrix.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -81,66 +84,60 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel <xen-devel@lists.xenproject.org>,
+Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
+ xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
  Ian Jackson <Ian.Jackson@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> One question I have from the above is how the xen.git RELEASE-X.Y.Z shoul=
-d correspond to the vA.B.C in the golang package repo.
->
-> The obvious answer, of course, is (A, B, C) =3D (X, Y, Z); that is, xen.g=
-it tag RELEASE-4.14.0 should create a golang package tag of v4.14.0.
->
-> The issue with this is that golang assumes you=E2=80=99re using semantic =
-versioning; so a `go get -u` would normally feel justified in upgrading fro=
-m v4.14.x to v4.15.x.
->
-> A couple of possible responses:
->
-> 1. Declare that OK.  That would mean not only that we have to have v4.15.=
-x be compatible with golang source code written against v4.14; it would als=
-o mean that v4.15.x needs to be able to *compile* against libxl version 4.1=
-4.  Which might be a good idea, but we=E2=80=99d want to think carefully be=
-fore making that kind of commitment.
->
-> 2. Declare that people need to use `go get -u=3Dpatch` when updating, and=
-/or use go.mod &c to manually restrict the version of go to use to the curr=
-ently-installed Xen version
->
-> 3. Map (A, B, C) =3D (Y, Z, 0).  (i.e., RELEASE-4.14.5 would make tag v14=
-.5.0 .)  `go get` wouldn=E2=80=99t update automatically, but it might be co=
-nfusing which version *should* be used; particularly if we ever roll over a=
- major version for Xen.
->
-> Any other possibilities?
->
-> I think I=E2=80=99d start out with #2, and then consider moving to #1 at =
-some point in the future.
->
-> Thoughts?
+> libxl.h defines INVALID_DOMID =E2=80=94 do we want to define an exported =
+constant with the same name and use that here?  (Although part of me wonder=
+s if DOMID_INVALID would be a better option.)
 
-We should also consider aligning with Go module versioning
-conventions. For example, right now the package is unstable, so
-according to convention we should be in v0.1.x. A "v0" indicates to
-the Go ecosystem that, at this stage, we will likely make breaking
-changes to the package API. So, tagging v4.14.0 is a bit confusing
-since this indicates that we are on the 4th major version of the
-package, and that it's stable. See [1] and [2] for more on these
-conventions.
+Yeah, that makes sense. I'll add that.
 
-However, things are obviously complicated by the fact that the
-xenlight package depends on libxl, and following convention might make
-that relationship less clear and difficult to track. But, if we stray
-from convention we at least need to be clear about it and have a good
-explanation why.
+> > +     }
+> > +
+> > +     return Domid(domid), nil
+> > +}
+> > +
+> > +// DomidToName returns the name for a domain, given its domid.
+> > +func (Ctx *Context) DomidToName(domid Domid) string {
+> > +     cname :=3D C.libxl_domid_to_name(Ctx.ctx, C.uint32_t(domid))
+> > +     defer C.free(unsafe.Pointer(cname))
+> > +
+> > +     return C.GoString(cname)
+> > +}
+>
+> It looks to me like if the domid doesn=E2=80=99t exist, libxl_domid_to_na=
+me() will return NULL; and then DomidToName will return =E2=80=9C=E2=80=9D.=
+  Is that what we want?
+>
+> If so, it should probably be documented.
 
-That said, unless we can come up with a good way to follow convention
-*and* keep the libxl version sorted, I think #2 makes the most sense
-right now.
+I considered returning an error if C.GoString(cname) =3D=3D "". But, with
+these functions (as well as the others in these series), I opted to
+keep the signatures aligned with their libxl counterparts since we're
+keeping the package API mostly one-to-one with libxl. I can add a
+second return value if you prefer, otherwise I'll just add a note in
+the comment.
+
+> One thing that might be worth pointing out is that both of these function=
+s are actually racy: There=E2=80=99s no guarantee that by the time libxl_do=
+mid_to_name() returns that the domain with that name has died, and another =
+domain with a different name has re-used the same domid.  That=E2=80=99s pa=
+rtly why Xen has the whole =E2=80=9Cdomain reaper=E2=80=9D system, like for=
+ Unix processes (which so far isn=E2=80=99t implementable yet with the gola=
+ng wrappers).  I think when we make our =E2=80=9Cvm=E2=80=9D library, we=E2=
+=80=99re going to want to try to come up with something like an object that=
+ makes it easy to avoid this sort of race.
+
+That's good to know, thanks. I'll add that to the comments as well.
+
+> But that=E2=80=99s a discussion for another day. :-)  Everything else loo=
+ks good, thanks.
+
+Thanks!
 
 -NR
-
-[1] https://blog.golang.org/publishing-go-modules
-[2] https://blog.golang.org/v2-go-modules
 
