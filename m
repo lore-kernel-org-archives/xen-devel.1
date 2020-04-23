@@ -2,54 +2,80 @@ Return-Path: <SRS0=af7b=6H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-8.5 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DECD7C2BA19
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 08:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B86A0C2BA19
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:20:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B8EC620781
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 08:39:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B8EC620781
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 814B920704
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:20:02 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="pleixGnI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 814B920704
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRXOZ-0007v8-Ml; Thu, 23 Apr 2020 08:39:43 +0000
+	id 1jRYxG-0007kl-SL; Thu, 23 Apr 2020 10:19:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=0dw1=6H=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jRXOZ-0007uu-8S
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 08:39:43 +0000
-X-Inumbo-ID: f9ae4d1a-853d-11ea-b58d-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=19NY=6H=amazon.de=prvs=375504273=wipawel@srs-us1.protection.inumbo.net>)
+ id 1jRYxF-0007kb-IB
+ for xen-devel@lists.xen.org; Thu, 23 Apr 2020 10:19:37 +0000
+X-Inumbo-ID: ecef6164-854b-11ea-83d8-bc764e2007e4
+Received: from smtp-fw-2101.amazon.com (unknown [72.21.196.25])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f9ae4d1a-853d-11ea-b58d-bc764e2007e4;
- Thu, 23 Apr 2020 08:39:42 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 68E07AFC1;
- Thu, 23 Apr 2020 08:39:40 +0000 (UTC)
-Subject: [PATCH v2 6/6] x86/mem-paging: consistently use gfn_t
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <b8437b1f-af58-70df-91d2-bd875912e57b@suse.com>
-Message-ID: <b50f9677-3b62-b071-decc-007e6a92701d@suse.com>
-Date: Thu, 23 Apr 2020 10:39:39 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id ecef6164-854b-11ea-83d8-bc764e2007e4;
+ Thu, 23 Apr 2020 10:19:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
+ t=1587637173; x=1619173173;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version;
+ bh=SdYPm/GFznwSuKyPDcCLKFoxWBcmizZriwQogmFgpi8=;
+ b=pleixGnI5HRxdeecvKVYZgoo1Bog9CdpDQ+e+oqH44PnslUIBfVqW9yo
+ Q1B63Xh2A4Zztg0MBI6KbVPiOZqiB3cgQeFBDNSbBNZ54NzIPDPaTlhgs
+ Wu1M2ciUnUTK9dsVA3qldCAxVOdtw/vSQDVFTQWoThrFaMctXCci5ULH7 Y=;
+IronPort-SDR: RruP8HKAKWseFm5VDZjhpfrDlg8mcIt3nPX+ND5I+CUaUk0Jpj/iP3XZhP277X3mSlTasC3b6n
+ ampsfH6nx8rA==
+X-IronPort-AV: E=Sophos;i="5.73,306,1583193600"; d="scan'208";a="27274840"
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO
+ email-inbound-relay-2a-f14f4a47.us-west-2.amazon.com) ([10.43.8.2])
+ by smtp-border-fw-out-2101.iad2.amazon.com with ESMTP;
+ 23 Apr 2020 10:19:33 +0000
+Received: from EX13MTAUEA002.ant.amazon.com
+ (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+ by email-inbound-relay-2a-f14f4a47.us-west-2.amazon.com (Postfix) with ESMTPS
+ id DA2B2A06E6; Thu, 23 Apr 2020 10:19:31 +0000 (UTC)
+Received: from EX13D02EUC003.ant.amazon.com (10.43.164.10) by
+ EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 23 Apr 2020 10:19:31 +0000
+Received: from EX13MTAUEA001.ant.amazon.com (10.43.61.82) by
+ EX13D02EUC003.ant.amazon.com (10.43.164.10) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 23 Apr 2020 10:19:30 +0000
+Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
+ by mail-relay.amazon.com (10.43.61.243) with Microsoft SMTP Server id
+ 15.0.1497.2 via Frontend Transport; Thu, 23 Apr 2020 10:19:29 +0000
+From: Pawel Wieczorkiewicz <wipawel@amazon.de>
+To: <xen-devel@lists.xen.org>
+Subject: [XTF 2/4] libc, strtol: Add isspace(), isdigit(), isxdigit(),
+ isascii()
+Date: Thu, 23 Apr 2020 10:19:16 +0000
+Message-ID: <20200423101918.13566-3-wipawel@amazon.de>
+X-Mailer: git-send-email 2.16.6
+In-Reply-To: <20200423101918.13566-1-wipawel@amazon.de>
+References: <20200423101918.13566-1-wipawel@amazon.de>
 MIME-Version: 1.0
-In-Reply-To: <b8437b1f-af58-70df-91d2-bd875912e57b@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+Precedence: Bulk
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
-Precedence: list
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=unsubscribe>
@@ -57,288 +83,148 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: julien@xen.org, wipawel@xen.org, paul@xen.org, semelpaul@gmail.com,
+ andrew.cooper3@citrix.com, wipawel@amazon.de, nmanthey@amazon.de
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Where gprintk()s get touched anyway to switch to PRI_gfn, also switch to
-%pd for the domain logged.
+These ctype.h derived helper functions simplify strtol() code and will
+help simplify strtoul().
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
 ---
-v2: Use gfn_t for local var in mod_l1_entry(). Use PRI_gfn when printk()
-    arg is gfn_x(). Re-base.
+ common/lib.c            |  8 --------
+ common/libc/strtol.c    |  9 +++------
+ common/libc/vsnprintf.c |  8 --------
+ include/xtf/libc.h      | 29 +++++++++++++++++++++++++++++
+ 4 files changed, 32 insertions(+), 22 deletions(-)
 
---- a/xen/arch/x86/hvm/dm.c
-+++ b/xen/arch/x86/hvm/dm.c
-@@ -278,7 +278,7 @@ static int set_mem_type(struct domain *d
-         if ( p2m_is_paging(t) )
-         {
-             put_gfn(d, pfn);
--            p2m_mem_paging_populate(d, pfn);
-+            p2m_mem_paging_populate(d, _gfn(pfn));
-             return -EAGAIN;
-         }
+diff --git a/common/lib.c b/common/lib.c
+index acf4da1..7381a3a 100644
+--- a/common/lib.c
++++ b/common/lib.c
+@@ -3,14 +3,6 @@
+ #include <xtf/hypercall.h>
+ #include <xtf/xenstore.h>
  
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1988,7 +1988,7 @@ int hvm_hap_nested_page_fault(paddr_t gp
-      * locks in such circumstance.
-      */
-     if ( paged )
--        p2m_mem_paging_populate(currd, gfn);
-+        p2m_mem_paging_populate(currd, _gfn(gfn));
- 
-     if ( sharing_enomem )
-     {
-@@ -3222,7 +3222,7 @@ enum hvm_translation_result hvm_translat
-     if ( p2m_is_paging(p2mt) )
-     {
-         put_page(page);
--        p2m_mem_paging_populate(v->domain, gfn_x(gfn));
-+        p2m_mem_paging_populate(v->domain, gfn);
-         return HVMTRANS_gfn_paged_out;
-     }
-     if ( p2m_is_shared(p2mt) )
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -2120,16 +2120,17 @@ static int mod_l1_entry(l1_pgentry_t *pl
-              paging_mode_translate(pg_dom) )
-         {
-             p2m_type_t p2mt;
-+            gfn_t gfn = _gfn(l1e_get_pfn(nl1e));
-             p2m_query_t q = l1e_get_flags(nl1e) & _PAGE_RW ?
-                             P2M_ALLOC | P2M_UNSHARE : P2M_ALLOC;
- 
--            page = get_page_from_gfn(pg_dom, l1e_get_pfn(nl1e), &p2mt, q);
-+            page = get_page_from_gfn(pg_dom, gfn_x(gfn), &p2mt, q);
- 
-             if ( p2m_is_paged(p2mt) )
-             {
-                 if ( page )
-                     put_page(page);
--                p2m_mem_paging_populate(pg_dom, l1e_get_pfn(nl1e));
-+                p2m_mem_paging_populate(pg_dom, gfn);
-                 return -ENOENT;
-             }
- 
-@@ -3951,7 +3952,7 @@ long do_mmu_update(
-                     put_page(page);
-                 if ( p2m_is_paged(p2mt) )
-                 {
--                    p2m_mem_paging_populate(pt_owner, gmfn);
-+                    p2m_mem_paging_populate(pt_owner, _gfn(gmfn));
-                     rc = -ENOENT;
-                 }
-                 else
---- a/xen/arch/x86/mm/hap/guest_walk.c
-+++ b/xen/arch/x86/mm/hap/guest_walk.c
-@@ -68,7 +68,7 @@ unsigned long hap_p2m_ga_to_gfn(GUEST_PA
-         *pfec = PFEC_page_paged;
-         if ( top_page )
-             put_page(top_page);
--        p2m_mem_paging_populate(p2m->domain, cr3 >> PAGE_SHIFT);
-+        p2m_mem_paging_populate(p2m->domain, _gfn(PFN_DOWN(cr3)));
-         return gfn_x(INVALID_GFN);
-     }
-     if ( p2m_is_shared(p2mt) )
-@@ -110,7 +110,7 @@ unsigned long hap_p2m_ga_to_gfn(GUEST_PA
-         {
-             ASSERT(p2m_is_hostp2m(p2m));
-             *pfec = PFEC_page_paged;
--            p2m_mem_paging_populate(p2m->domain, gfn_x(gfn));
-+            p2m_mem_paging_populate(p2m->domain, gfn);
-             return gfn_x(INVALID_GFN);
-         }
-         if ( p2m_is_shared(p2mt) )
---- a/xen/arch/x86/mm/mem_paging.c
-+++ b/xen/arch/x86/mm/mem_paging.c
-@@ -36,12 +36,11 @@
-  * released by the guest. The pager is supposed to drop its reference of the
-  * gfn.
-  */
--void p2m_mem_paging_drop_page(struct domain *d, unsigned long gfn,
--                              p2m_type_t p2mt)
-+void p2m_mem_paging_drop_page(struct domain *d, gfn_t gfn, p2m_type_t p2mt)
+-#ifndef isdigit
+-/* Avoid pulling in all of ctypes just for this. */
+-static int isdigit(int c)
+-{
+-    return c >= '0' && c <= '9';
+-}
+-#endif
+-
+ void __noreturn panic(const char *fmt, ...)
  {
-     vm_event_request_t req = {
-         .reason = VM_EVENT_REASON_MEM_PAGING,
--        .u.mem_paging.gfn = gfn
-+        .u.mem_paging.gfn = gfn_x(gfn)
-     };
- 
-     /*
-@@ -89,16 +88,15 @@ void p2m_mem_paging_drop_page(struct dom
-  * already sent to the pager. In this case the caller has to try again until the
-  * gfn is fully paged in again.
-  */
--void p2m_mem_paging_populate(struct domain *d, unsigned long gfn_l)
-+void p2m_mem_paging_populate(struct domain *d, gfn_t gfn)
- {
-     struct vcpu *v = current;
-     vm_event_request_t req = {
-         .reason = VM_EVENT_REASON_MEM_PAGING,
--        .u.mem_paging.gfn = gfn_l
-+        .u.mem_paging.gfn = gfn_x(gfn)
-     };
-     p2m_type_t p2mt;
-     p2m_access_t a;
--    gfn_t gfn = _gfn(gfn_l);
-     mfn_t mfn;
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
-     int rc = vm_event_claim_slot(d, d->vm_event_paging);
-@@ -106,8 +104,8 @@ void p2m_mem_paging_populate(struct doma
-     /* We're paging. There should be a ring. */
-     if ( rc == -EOPNOTSUPP )
-     {
--        gdprintk(XENLOG_ERR, "Dom%d paging gfn %lx yet no ring in place\n",
--                 d->domain_id, gfn_l);
-+        gdprintk(XENLOG_ERR, "%pd paging gfn %"PRI_gfn" yet no ring in place\n",
-+                 d, gfn_x(gfn));
-         /* Prevent the vcpu from faulting repeatedly on the same gfn */
-         if ( v->domain == d )
-             vcpu_pause_nosync(v);
-@@ -218,13 +216,12 @@ void p2m_mem_paging_resume(struct domain
-  * Once the p2mt is changed the page is readonly for the guest.  On success the
-  * pager can write the page contents to disk and later evict the page.
-  */
--static int nominate(struct domain *d, unsigned long gfn_l)
-+static int nominate(struct domain *d, gfn_t gfn)
- {
-     struct page_info *page;
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
-     p2m_type_t p2mt;
-     p2m_access_t a;
--    gfn_t gfn = _gfn(gfn_l);
-     mfn_t mfn;
-     int ret = -EBUSY;
- 
-@@ -279,12 +276,11 @@ static int nominate(struct domain *d, un
-  * could evict it, eviction can not be done either. In this case the gfn is
-  * still backed by a mfn.
-  */
--static int evict(struct domain *d, unsigned long gfn_l)
-+static int evict(struct domain *d, gfn_t gfn)
- {
-     struct page_info *page;
-     p2m_type_t p2mt;
-     p2m_access_t a;
--    gfn_t gfn = _gfn(gfn_l);
-     mfn_t mfn;
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
-     int ret = -EBUSY;
-@@ -346,13 +342,12 @@ static int evict(struct domain *d, unsig
-  * mfn if populate was called for  gfn which was nominated but not evicted. In
-  * this case only the p2mt needs to be forwarded.
-  */
--static int prepare(struct domain *d, unsigned long gfn_l,
-+static int prepare(struct domain *d, gfn_t gfn,
-                    XEN_GUEST_HANDLE_64(const_uint8) buffer)
- {
-     struct page_info *page = NULL;
-     p2m_type_t p2mt;
-     p2m_access_t a;
--    gfn_t gfn = _gfn(gfn_l);
-     mfn_t mfn;
-     struct p2m_domain *p2m = p2m_get_hostp2m(d);
-     int ret, page_extant = 1;
-@@ -404,8 +399,8 @@ static int prepare(struct domain *d, uns
-         if ( ret )
-         {
-             gdprintk(XENLOG_ERR,
--                     "Failed to load paging-in gfn %lx Dom%d bytes left %d\n",
--                     gfn_l, d->domain_id, ret);
-+                     "Failed to load paging-in %pd gfn %"PRI_gfn" bytes left %d\n",
-+                     d, gfn_x(gfn), ret);
-             ret = -EFAULT;
-             goto out;
-         }
-@@ -421,7 +416,7 @@ static int prepare(struct domain *d, uns
-                                                  : p2m_ram_rw, a);
-     if ( !ret )
-     {
--        set_gpfn_from_mfn(mfn_x(mfn), gfn_l);
-+        set_gpfn_from_mfn(mfn_x(mfn), gfn_x(gfn));
- 
-         if ( !page_extant )
-             atomic_dec(&d->paged_pages);
-@@ -465,15 +460,15 @@ int mem_paging_memop(XEN_GUEST_HANDLE_PA
-     switch( mpo.op )
-     {
-     case XENMEM_paging_op_nominate:
--        rc = nominate(d, mpo.gfn);
-+        rc = nominate(d, _gfn(mpo.gfn));
-         break;
- 
-     case XENMEM_paging_op_evict:
--        rc = evict(d, mpo.gfn);
-+        rc = evict(d, _gfn(mpo.gfn));
-         break;
- 
-     case XENMEM_paging_op_prep:
--        rc = prepare(d, mpo.gfn, mpo.buffer);
-+        rc = prepare(d, _gfn(mpo.gfn), mpo.buffer);
-         if ( !rc )
-             copyback = 1;
-         break;
---- a/xen/arch/x86/mm/p2m.c
-+++ b/xen/arch/x86/mm/p2m.c
-@@ -1835,7 +1835,7 @@ void *map_domain_gfn(struct p2m_domain *
-         ASSERT(p2m_is_hostp2m(p2m));
-         if ( page )
-             put_page(page);
--        p2m_mem_paging_populate(p2m->domain, gfn_x(gfn));
-+        p2m_mem_paging_populate(p2m->domain, gfn);
-         *pfec = PFEC_page_paged;
-         return NULL;
+     va_list args;
+diff --git a/common/libc/strtol.c b/common/libc/strtol.c
+index 64ce621..f85ac7a 100644
+--- a/common/libc/strtol.c
++++ b/common/libc/strtol.c
+@@ -57,7 +57,7 @@ long strtol(const char *nptr, char **endptr, int base)
+     s = nptr;
+     do {
+         c = *s++;
+-    } while ( c == ' ' );
++    } while ( isspace(c) );
+     if (c == '-') {
+         neg = 1;
+         c = *s++;
+@@ -67,10 +67,7 @@ long strtol(const char *nptr, char **endptr, int base)
+             c = *s++;
      }
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -848,7 +848,7 @@ int guest_wrmsr_xen(struct vcpu *v, uint
+     if ((base == 0 || base == 16) &&
+-            c == '0' && (*s == 'x' || *s == 'X') &&
+-            ((s[1] >= '0' && s[1] <= '9') ||
+-             (s[1] >= 'A' && s[1] <= 'F') ||
+-             (s[1] >= 'a' && s[1] <= 'f'))) {
++            c == '0' && (*s == 'x' || *s == 'X') && isxdigit(s[1])) {
+         c = s[1];
+         s += 2;
+         base = 16;
+@@ -104,7 +101,7 @@ long strtol(const char *nptr, char **endptr, int base)
+     cutlim = cutoff % base;
+     cutoff /= base;
+     for ( ; ; c = *s++) {
+-        if (c >= '0' && c <= '9')
++        if (isdigit(c))
+             c -= '0';
+         else if (c >= 'A' && c <= 'Z')
+             c -= 'A' - 10;
+diff --git a/common/libc/vsnprintf.c b/common/libc/vsnprintf.c
+index a49fd30..495c0a5 100644
+--- a/common/libc/vsnprintf.c
++++ b/common/libc/vsnprintf.c
+@@ -2,14 +2,6 @@
+ #include <xtf/libc.h>
+ #include <xtf/compiler.h>
  
-             if ( p2m_is_paging(t) )
-             {
--                p2m_mem_paging_populate(d, gmfn);
-+                p2m_mem_paging_populate(d, _gfn(gmfn));
-                 return X86EMUL_RETRY;
-             }
+-#ifndef isdigit
+-/* Avoid pulling in all of ctypes just for this. */
+-static int isdigit(int c)
+-{
+-    return c >= '0' && c <= '9';
+-}
+-#endif
+-
+ /*
+  * The subset of formatting supported:
+  *
+diff --git a/include/xtf/libc.h b/include/xtf/libc.h
+index f352f7f..0caa7d3 100644
+--- a/include/xtf/libc.h
++++ b/include/xtf/libc.h
+@@ -56,6 +56,35 @@ bool arch_fmt_pointer(
+     char **str, char *end, const char **fmt_ptr, const void *arg,
+     int width, int precision, unsigned int flags);
  
---- a/xen/common/memory.c
-+++ b/xen/common/memory.c
-@@ -322,7 +322,7 @@ int guest_remove_page(struct domain *d,
++#ifndef isspace
++static inline int isspace(int c)
++{
++    return c == ' ' || c == '\t';
++}
++#endif
++
++#ifndef isdigit
++static inline int isdigit(int c)
++{
++    return c >= '0' && c <= '9';
++}
++#endif
++
++#ifndef isxdigit
++static inline int isxdigit(int c)
++{
++    return (isdigit(c) || (c >= 'A' && c <= 'F') ||
++           (c >= 'a' && c <= 'f'));
++}
++#endif
++
++#ifndef isascii
++static inline int isascii(int c)
++{
++    return c >= 0 && c <= 127;
++}
++#endif
++
+ #endif /* XTF_LIBC_H */
  
-         put_gfn(d, gmfn);
- 
--        p2m_mem_paging_drop_page(d, gmfn, p2mt);
-+        p2m_mem_paging_drop_page(d, _gfn(gmfn), p2mt);
- 
-         return 0;
-     }
-@@ -1667,7 +1667,7 @@ int check_get_page_from_gfn(struct domai
-         if ( page )
-             put_page(page);
- 
--        p2m_mem_paging_populate(d, gfn_x(gfn));
-+        p2m_mem_paging_populate(d, gfn);
-         return -EAGAIN;
-     }
- #endif
---- a/xen/include/asm-x86/p2m.h
-+++ b/xen/include/asm-x86/p2m.h
-@@ -732,10 +732,9 @@ static inline void p2m_pod_init(struct p
- int set_shared_p2m_entry(struct domain *d, unsigned long gfn, mfn_t mfn);
- 
- /* Tell xenpaging to drop a paged out frame */
--void p2m_mem_paging_drop_page(struct domain *d, unsigned long gfn, 
--                                p2m_type_t p2mt);
-+void p2m_mem_paging_drop_page(struct domain *d, gfn_t gfn, p2m_type_t p2mt);
- /* Start populating a paged out frame */
--void p2m_mem_paging_populate(struct domain *d, unsigned long gfn);
-+void p2m_mem_paging_populate(struct domain *d, gfn_t gfn);
- /* Resume normal operation (in case a domain was paused) */
- struct vm_event_st;
- void p2m_mem_paging_resume(struct domain *d, struct vm_event_st *rsp);
+ /*
+-- 
+2.16.6
+
+
+
+
+Amazon Development Center Germany GmbH
+Krausenstr. 38
+10117 Berlin
+Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+Sitz: Berlin
+Ust-ID: DE 289 237 879
+
+
 
 
