@@ -2,74 +2,71 @@ Return-Path: <SRS0=af7b=6H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-13.5 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
-	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.5 required=3.0 tests=DKIM_ADSP_ALL,DKIM_INVALID,
+	DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 32569C55186
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 431E5C2BA19
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:20:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 02E2320704
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:20:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 074B420704
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:20:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="kuMJ4xYf"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 02E2320704
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=amazon.de header.i=@amazon.de header.b="FqZbLvn9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 074B420704
 Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=amazon.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRYxo-0008Vm-Kb; Thu, 23 Apr 2020 10:20:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jRYy8-0000B6-Vh; Thu, 23 Apr 2020 10:20:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=19NY=6H=amazon.de=prvs=375504273=wipawel@srs-us1.protection.inumbo.net>)
- id 1jRYxn-0008VN-91
- for xen-devel@lists.xen.org; Thu, 23 Apr 2020 10:20:11 +0000
-X-Inumbo-ID: 034d961a-854c-11ea-83d8-bc764e2007e4
-Received: from smtp-fw-6001.amazon.com (unknown [52.95.48.154])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 034d961a-854c-11ea-83d8-bc764e2007e4;
- Thu, 23 Apr 2020 10:20:10 +0000 (UTC)
+ id 1jRYy7-0000AB-93
+ for xen-devel@lists.xen.org; Thu, 23 Apr 2020 10:20:31 +0000
+X-Inumbo-ID: 0f0d0f76-854c-11ea-933e-12813bfff9fa
+Received: from smtp-fw-9102.amazon.com (unknown [207.171.184.29])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0f0d0f76-854c-11ea-933e-12813bfff9fa;
+ Thu, 23 Apr 2020 10:20:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazon201209;
- t=1587637211; x=1619173211;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version;
- bh=aBOG/6W6YvsGazAUBqvfFvgqMcAkzkVroszf6yNe9L8=;
- b=kuMJ4xYfeMFjNAdFAznC3Tr/cN2iHgkRR3/hTHI6ej+oVpT8zXVHLE4/
- EjbsU9LOJOh5QCM630+kXwv5PMaTdbJwrw+tj94AuLUiOpyKCt0SZLnVn
- x6N7uPQ4u0IRlbo2SsO9V4DR5T5fx2o70pryrH6tTz2BdxRyhRLn31GKy c=;
-IronPort-SDR: TKykPitZHv6+bNPeNmKtlVtViLcZQbXOJCXY+qrfV0dNcNdOJ+/MgtTvRKy0kJx+19vEbMG38x
- RTKoKA7hPdig==
-X-IronPort-AV: E=Sophos;i="5.73,306,1583193600"; d="scan'208";a="28374691"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO
- email-inbound-relay-2b-c7131dcf.us-west-2.amazon.com) ([10.43.8.6])
- by smtp-border-fw-out-6001.iad6.amazon.com with ESMTP;
- 23 Apr 2020 10:19:58 +0000
+ t=1587637231; x=1619173231;
+ h=from:to:cc:subject:date:message-id:mime-version;
+ bh=FA21mCdHll/rCD+CdQJA+A8GO9v6LBIhxlYvWv3fymI=;
+ b=FqZbLvn9EsPOxxKqWXbwWZcRSziErBhTbi3nJvNSmOfVbc+VBjBWYqDS
+ saUMzTWA/sNAqfrx3ktVJtq59U9uy7DsVYlunoCK/NgCzhUlg2WUaSQ+B
+ mEeWA4jrTWWvPStlXh6yP0rbOaPXtpH0wyzYYhurRh5ydxYNhnuKUUZtJ Q=;
+IronPort-SDR: Qtdg0ScsyKudTkS6Uwe+BZ1jNO5g82NyOrJWdgcbA4QHpsIQItEEPxbvvOFDU3kbykAOoZLgie
+ OjFeAGZ3kGlg==
+X-IronPort-AV: E=Sophos;i="5.73,306,1583193600"; d="scan'208";a="39000805"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO
+ email-inbound-relay-2c-4e7c8266.us-west-2.amazon.com) ([10.47.23.38])
+ by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP;
+ 23 Apr 2020 10:20:30 +0000
 Received: from EX13MTAUEA002.ant.amazon.com
  (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
- by email-inbound-relay-2b-c7131dcf.us-west-2.amazon.com (Postfix) with ESMTPS
- id 3BC25A2454; Thu, 23 Apr 2020 10:19:57 +0000 (UTC)
-Received: from EX13D05EUC001.ant.amazon.com (10.43.164.118) by
+ by email-inbound-relay-2c-4e7c8266.us-west-2.amazon.com (Postfix) with ESMTPS
+ id C57D0A1BEF; Thu, 23 Apr 2020 10:20:29 +0000 (UTC)
+Received: from EX13D02EUC003.ant.amazon.com (10.43.164.10) by
  EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 23 Apr 2020 10:19:33 +0000
+ id 15.0.1497.2; Thu, 23 Apr 2020 10:20:01 +0000
 Received: from EX13MTAUEA001.ant.amazon.com (10.43.61.82) by
- EX13D05EUC001.ant.amazon.com (10.43.164.118) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Thu, 23 Apr 2020 10:19:32 +0000
+ EX13D02EUC003.ant.amazon.com (10.43.164.10) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 23 Apr 2020 10:20:00 +0000
 Received: from dev-dsk-wipawel-1a-0c4e6d58.eu-west-1.amazon.com (10.4.134.33)
  by mail-relay.amazon.com (10.43.61.243) with Microsoft SMTP Server id
- 15.0.1497.2 via Frontend Transport; Thu, 23 Apr 2020 10:19:30 +0000
+ 15.0.1497.2 via Frontend Transport; Thu, 23 Apr 2020 10:19:59 +0000
 From: Pawel Wieczorkiewicz <wipawel@amazon.de>
 To: <xen-devel@lists.xen.org>
-Subject: [XTF 3/4] libc, strtol: Add FreeBSD libc implementation of strtoul()
-Date: Thu, 23 Apr 2020 10:19:17 +0000
-Message-ID: <20200423101918.13566-4-wipawel@amazon.de>
+Subject: [XTF v2 v2 0/4] Small fixes and improvements
+Date: Thu, 23 Apr 2020 10:19:51 +0000
+Message-ID: <20200423101955.13761-1-wipawel@amazon.de>
 X-Mailer: git-send-email 2.16.6
-In-Reply-To: <20200423101918.13566-1-wipawel@amazon.de>
-References: <20200423101918.13566-1-wipawel@amazon.de>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: Bulk
@@ -87,106 +84,27 @@ Cc: julien@xen.org, wipawel@xen.org, paul@xen.org, semelpaul@gmail.com,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The function was derived from:
-https://github.com/freebsd/freebsd/blob/master/lib/libc/stdlib/strtoul.c
+This is the first series of XTF patches I intend to send.
+It covers some relatively small changes displaying Xen version on test
+start, as well as adding serial consol support for HVM guests..
 
-Sligthly modified to use ctypes helpers and ignore locale.
+Paul Semel (1):
+  Enabled serial writing for hvm guests
 
-Signed-off-by: Pawel Wieczorkiewicz <wipawel@amazon.de>
----
- common/libc/strtol.c | 69 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- include/xtf/libc.h   |  1 +
- 2 files changed, 70 insertions(+)
+Pawel Wieczorkiewicz (3):
+  lib: Add XEN_MAJOR() and XEN_MINOR() macros
+  lib: always append CR after LF in vsnprintf()
+  setup: Detect and display Xen version on test startup
 
-diff --git a/common/libc/strtol.c b/common/libc/strtol.c
-index f85ac7a..66ba787 100644
---- a/common/libc/strtol.c
-+++ b/common/libc/strtol.c
-@@ -130,3 +130,72 @@ long strtol(const char *nptr, char **endptr, int base)
-         *endptr = (char *)(any ? s - 1 : nptr);
-     return (acc);
- }
-+
-+/*
-+ * Convert a string to an unsigned long integer.
-+ *
-+ * Ignores `locale' stuff. Assumes that the upper and lower case
-+ * alphabets and digits are each contiguous.
-+ */
-+unsigned long strtoul(const char *nptr, char **endptr, int base)
-+{
-+    const char *s = nptr;
-+    unsigned long acc;
-+    unsigned char c;
-+    unsigned long cutoff;
-+    int neg = 0, any, cutlim;
-+
-+    /*
-+     * See strtol for comments as to the logic used.
-+     */
-+    do {
-+        c = *s++;
-+    } while (isspace(c));
-+    if (c == '-') {
-+        neg = 1;
-+        c = *s++;
-+    } else if (c == '+')
-+        c = *s++;
-+    if ((base == 0 || base == 16) &&
-+            c == '0' && (*s == 'x' || *s == 'X') && isxdigit(s[1])) {
-+        c = s[1];
-+        s += 2;
-+        base = 16;
-+    }
-+    if (base == 0)
-+        base = c == '0' ? 8 : 10;
-+    acc = any = 0;
-+    if (base < 2 || base > 36)
-+        goto noconv;
-+
-+    cutoff = (unsigned long)ULONG_MAX / (unsigned long)base;
-+    cutlim = (unsigned long)ULONG_MAX % (unsigned long)base;
-+    for ( ; ; c = *s++) {
-+        if (isdigit(c))
-+            c -= '0';
-+        else if (c >= 'A' && c <= 'Z')
-+            c -= 'A' - 10;
-+        else if (c >= 'a' && c <= 'z')
-+            c -= 'a' - 10;
-+        else
-+            break;
-+        if (c >= base)
-+            break;
-+        if (any < 0 || acc > cutoff || (acc == cutoff && c > cutlim))
-+            any = -1;
-+        else {
-+            any = 1;
-+            acc *= base;
-+            acc += c;
-+        }
-+    }
-+    if (any < 0) {
-+        acc = ULONG_MAX;
-+    } else if (!any) {
-+noconv: ;
-+    } else if (neg)
-+        acc = -acc;
-+    if (endptr != NULL)
-+        *endptr = (char *)(any ? s - 1 : nptr);
-+    return (acc);
-+}
-diff --git a/include/xtf/libc.h b/include/xtf/libc.h
-index 0caa7d3..75f193b 100644
---- a/include/xtf/libc.h
-+++ b/include/xtf/libc.h
-@@ -36,6 +36,7 @@ int memcmp(const void *s1, const void *s2, size_t n);
- #define memcmp(s1, s2, n)           __builtin_memcmp(s1, s2, n)
- 
- long strtol(const char *nptr, char **endptr, int base);
-+unsigned long strtoul(const char *nptr, char **endptr, int base);
- 
- size_t strnlen(const char *str, size_t max);
- 
+ arch/x86/setup.c        | 22 +++++++++++++++++++++-
+ common/console.c        |  3 ++-
+ common/libc/vsnprintf.c | 10 ++++++++++
+ common/setup.c          |  6 +++++-
+ include/xtf/framework.h |  2 +-
+ include/xtf/lib.h       |  3 +++
+ tests/xsa-213/main.c    |  4 ++--
+ 7 files changed, 44 insertions(+), 6 deletions(-)
+
 -- 
 2.16.6
 
