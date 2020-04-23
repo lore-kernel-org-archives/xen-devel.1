@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD9A2C55193
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 14:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id ED9A5C54FD0
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 14:57:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 91B352087E
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 14:57:05 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B2DA1214AF
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 14:57:04 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="IF31iiKz"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 91B352087E
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="aMc591cy"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B2DA1214AF
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRdHZ-0000lJ-9k; Thu, 23 Apr 2020 14:56:53 +0000
+	id 1jRdHU-0000jC-TW; Thu, 23 Apr 2020 14:56:48 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Oa1P=6H=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jRdHY-0000l4-H1
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 14:56:52 +0000
-X-Inumbo-ID: a64b7dac-8572-11ea-b58d-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
+ id 1jRdHT-0000it-HR
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 14:56:47 +0000
+X-Inumbo-ID: a4414168-8572-11ea-b58d-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id a64b7dac-8572-11ea-b58d-bc764e2007e4;
- Thu, 23 Apr 2020 14:56:45 +0000 (UTC)
+ id a4414168-8572-11ea-b58d-bc764e2007e4;
+ Thu, 23 Apr 2020 14:56:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587653806;
+ d=citrix.com; s=securemail; t=1587653803;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=6xDyV2T4eBxzsTghP88Qw+tODGijc2LN55Bf5M9CvYA=;
- b=IF31iiKzbbeu0G5uKW+KflYcFn/E+NQ1KSr/3NYqk0sKb7DEb8WbO851
- 2kXMZRlIPQVvnt+6o5NfHdTUKhpZf9WP68oWbyUQMo4bSroa5GiEkv+se
- mEXzpGuJB79rex+1p70FiJTM0rSDaTXCMiSuvbXEL0ReI5xgkEx2Iud+U s=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ bh=lw0igEL+hLah+EJErxdPOZY2wmhG4dh1CdAbnB4ziu8=;
+ b=aMc591cySkNIk05zQeYW3Y4S5qF1DjHvGdIdJCdU157DpKuo0JQKQejK
+ lFySGpG6J51UGTLfdi4EZS4MkXHd/qcROwQ1e0OYPdIok4AViL3vGMbmr
+ D4qzrlo8fWnq+RUhf4LyYIEzBuCAv9zRpAKY2KDHZ5DrtAaekQmk3rIKM g=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=roger.pau@citrix.com;
  spf=Pass smtp.mailfrom=roger.pau@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa2.hc3370-68.iphmx.com;
+ receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
  roger.pau@citrix.com designates 162.221.158.21 as permitted
  sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa2.hc3370-68.iphmx.com;
+ receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="roger.pau@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -64,29 +64,29 @@ Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="roger.pau@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: HLxOj7Zj+/LRqnIGjwgJD9AW8xDF/WuvKmYEfbwNNfqIyeV8+NyPVu8oKK81E/oC4V5b6TAwa4
- pLA75EFGZwohAF52zOO3vpKcldwU3K0VGg8YWw/t0xFHcgK6g99G6JkqZRroFi6erS/uy9girE
- 2PyN9AhrtTH2Z5DHLKz9Y8JPYciOj8KMHlU1/GF5xK4XqdpNNLnwTkdtDKPsHpIrMZTUaO93NX
- T0p2kOMGeBzIOjPmc+iHOoNeR5GNmNmcpAmBf0zKQw/5Uw9siSqCGKhk6qUTmfKLJcxrHmRpeo
- o5k=
+IronPort-SDR: 6Bt5GGHe4QvAM1PydNq68I5FNT8OBYyMHNGt6Tx7xNYcuWi+O3ZhZ1KwCf5hdrSod6vdCF5mrn
+ vVhKbOrEpnxjx/5y0JCI0CB9BNL/DGsp/GdqWixn6D775fZCLsjQ8aDdjfDqKgwofH2xj/Qgg9
+ Tc8aHqZWnyzFN0KxaoEMbrtOqLHzrXh6CWN9e9KYqCinmzlTORvMOSPWDSy1n+iOkeMmZgbRuz
+ rwpFtpfgWJeOj0cKcWAxWSta5bTDiM7wj74gisRiQom4M5XKTvtEh2CZwQL8Zv+uk6XW6KuWfs
+ 95o=
 X-SBRS: 2.7
-X-MesageID: 16153763
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 16389041
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,307,1583211600"; d="scan'208";a="16153763"
+X-IronPort-AV: E=Sophos;i="5.73,307,1583211600"; d="scan'208";a="16389041"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v11 3/3] x86/tlb: use Xen L0 assisted TLB flush when available
-Date: Thu, 23 Apr 2020 16:56:11 +0200
-Message-ID: <20200423145611.55378-4-roger.pau@citrix.com>
+Subject: [PATCH v11 1/3] x86/tlb: introduce a flush HVM ASIDs flag
+Date: Thu, 23 Apr 2020 16:56:09 +0200
+Message-ID: <20200423145611.55378-2-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.26.0
 In-Reply-To: <20200423145611.55378-1-roger.pau@citrix.com>
 References: <20200423145611.55378-1-roger.pau@citrix.com>
@@ -103,199 +103,446 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Tim Deegan <tim@xen.org>, George
+ Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Use Xen's L0 HVMOP_flush_tlbs hypercall in order to perform flushes.
-This greatly increases the performance of TLB flushes when running
-with a high amount of vCPUs as a Xen guest, and is specially important
-when running in shim mode.
+Introduce a specific flag to request a HVM guest linear TLB flush,
+which is an ASID/VPID tickle that forces a guest linear to guest
+physical TLB flush for all HVM guests.
 
-The following figures are from a PV guest running `make -j32 xen` in
-shim mode with 32 vCPUs and HAP.
+This was previously unconditionally done in each pre_flush call, but
+that's not required: HVM guests not using shadow don't require linear
+TLB flushes as Xen doesn't modify the pages tables the guest runs on
+in that case (ie: when using HAP). Note that shadow paging code
+already takes care of issuing the necessary flushes when the shadow
+page tables are modified.
 
-Using x2APIC and ALLBUT shorthand:
-real	4m35.973s
-user	4m35.110s
-sys	36m24.117s
+In order to keep the previous behavior modify all shadow code TLB
+flushes to also flush the guest linear to physical TLB if the guest is
+HVM. I haven't looked at each specific shadow code TLB flush in order
+to figure out whether it actually requires a guest TLB flush or not,
+so there might be room for improvement in that regard.
 
-Using L0 assisted flush:
-real    1m2.596s
-user    4m34.818s
-sys     5m16.374s
-
-The implementation adds a new hook to hypervisor_ops so other
-enlightenments can also implement such assisted flush just by filling
-the hook.
-
-Note that the Xen implementation completely ignores the dirty CPU mask
-and the linear address passed in, and always performs a global TLB
-flush on all vCPUs. This is a limitation of the hypercall provided by
-Xen. Also note that local TLB flushes are not performed using the
-assisted TLB flush, only remote ones.
+Also perform ASID/VPID flushes when modifying the p2m tables as it's a
+requirement for AMD hardware. Finally keep the flush in
+switch_cr3_cr4, as it's not clear whether code could rely on
+switch_cr3_cr4 also performing a guest linear TLB flush. A following
+patch can remove the ASID/VPID tickle from switch_cr3_cr4 if found to
+not be necessary.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Reviewed-by: Wei Liu <wl@xen.org>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
+Changes since v10:
+ - Reword commit message.
+ - Split flags generation in guest_flush_tlb_mask to a separate
+   helper.
+ - Move sh_flush_local into multi.c and make it use
+   guest_flush_tlb_flags.
+ - Flush ASID always when running HVM domains in shadow mode.
+
+Changes since v9:
+ - Introduce and use guest_flush_tlb_mask and sh_flush_local.
+ - Add a local domain variable to p2m_pt_change_entry_type_global.
+
+Changes since v8:
+ - Don't flush host TLB on HAP changes.
+ - Introduce a helper for shadow changes that only flushes ASIDs/VPIDs
+   when the guest is HVM.
+ - Introduce a helper for HAP that only flushes ASIDs/VPIDs.
+
+Changes since v7:
+ - Do not perform an ASID flush in filtered_flush_tlb_mask: the
+   requested flush is related to the page need_tlbflush field and not
+   to p2m changes (applies to both callers).
+
+Changes since v6:
+ - Add ASID/VPID flushes when modifying the p2m.
+ - Keep the ASID/VPID flush in switch_cr3_cr4.
+
 Changes since v5:
+ - Rename FLUSH_GUESTS_TLB to FLUSH_HVM_ASID_CORE.
  - Clarify commit message.
- - Test for assisted flush at setup, do this for all hypervisors.
- - Return EOPNOTSUPP if assisted flush is not available.
-
-Changes since v4:
- - Adjust order calculation.
-
-Changes since v3:
- - Use an alternative call for the flush hook.
-
-Changes since v1:
- - Add a L0 assisted hook to hypervisor ops.
+ - Define FLUSH_HVM_ASID_CORE to 0 when !CONFIG_HVM.
 ---
- xen/arch/x86/guest/hypervisor.c        | 14 ++++++++++++++
- xen/arch/x86/guest/xen/xen.c           |  6 ++++++
- xen/arch/x86/smp.c                     |  7 +++++++
- xen/include/asm-x86/guest/hypervisor.h | 17 +++++++++++++++++
- 4 files changed, 44 insertions(+)
+ xen/arch/x86/flushtlb.c          | 23 +++++++++++++++++++++--
+ xen/arch/x86/mm/hap/hap.c        |  8 ++++----
+ xen/arch/x86/mm/hap/nested_hap.c |  2 +-
+ xen/arch/x86/mm/p2m-pt.c         |  5 +++--
+ xen/arch/x86/mm/paging.c         |  2 +-
+ xen/arch/x86/mm/shadow/common.c  | 18 +++++++++---------
+ xen/arch/x86/mm/shadow/hvm.c     |  2 +-
+ xen/arch/x86/mm/shadow/multi.c   | 22 ++++++++++++++--------
+ xen/include/asm-x86/flushtlb.h   |  9 +++++++++
+ 9 files changed, 63 insertions(+), 28 deletions(-)
 
-diff --git a/xen/arch/x86/guest/hypervisor.c b/xen/arch/x86/guest/hypervisor.c
-index 647cdb1367..e46de42ded 100644
---- a/xen/arch/x86/guest/hypervisor.c
-+++ b/xen/arch/x86/guest/hypervisor.c
-@@ -18,6 +18,7 @@
-  *
-  * Copyright (c) 2019 Microsoft.
+diff --git a/xen/arch/x86/flushtlb.c b/xen/arch/x86/flushtlb.c
+index 03f92c23dc..0c40b5d273 100644
+--- a/xen/arch/x86/flushtlb.c
++++ b/xen/arch/x86/flushtlb.c
+@@ -7,6 +7,7 @@
+  * Copyright (c) 2003-2006, K A Fraser
   */
-+#include <xen/cpumask.h>
- #include <xen/init.h>
- #include <xen/types.h>
  
-@@ -51,6 +52,10 @@ void __init hypervisor_setup(void)
- {
-     if ( ops.setup )
-         ops.setup();
-+
-+    /* Check if assisted flush is available and disable the TLB clock if so. */
-+    if ( !hypervisor_flush_tlb(cpumask_of(smp_processor_id()), NULL, 0) )
-+        tlb_clk_enabled = false;
++#include <xen/paging.h>
+ #include <xen/sched.h>
+ #include <xen/smp.h>
+ #include <xen/softirq.h>
+@@ -59,8 +60,6 @@ static u32 pre_flush(void)
+         raise_softirq(NEW_TLBFLUSH_CLOCK_PERIOD_SOFTIRQ);
+ 
+  skip_clocktick:
+-    hvm_flush_guest_tlbs();
+-
+     return t2;
  }
  
- int hypervisor_ap_setup(void)
-@@ -73,6 +78,15 @@ void __init hypervisor_e820_fixup(struct e820map *e820)
-         ops.e820_fixup(e820);
- }
+@@ -118,6 +117,7 @@ void switch_cr3_cr4(unsigned long cr3, unsigned long cr4)
+     local_irq_save(flags);
  
-+int hypervisor_flush_tlb(const cpumask_t *mask, const void *va,
-+                         unsigned int order)
-+{
-+    if ( ops.flush_tlb )
-+        return alternative_call(ops.flush_tlb, mask, va, order);
-+
-+    return -EOPNOTSUPP;
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
-index e74fd1e995..3bc01c8723 100644
---- a/xen/arch/x86/guest/xen/xen.c
-+++ b/xen/arch/x86/guest/xen/xen.c
-@@ -324,12 +324,18 @@ static void __init e820_fixup(struct e820map *e820)
-         pv_shim_fixup_e820(e820);
- }
+     t = pre_flush();
++    hvm_flush_guest_tlbs();
  
-+static int flush_tlb(const cpumask_t *mask, const void *va, unsigned int order)
-+{
-+    return xen_hypercall_hvm_op(HVMOP_flush_tlbs, NULL);
-+}
-+
- static const struct hypervisor_ops __initconstrel ops = {
-     .name = "Xen",
-     .setup = setup,
-     .ap_setup = ap_setup,
-     .resume = resume,
-     .e820_fixup = e820_fixup,
-+    .flush_tlb = flush_tlb,
- };
+     old_cr4 = read_cr4();
+     ASSERT(!(old_cr4 & X86_CR4_PCIDE) || !(old_cr4 & X86_CR4_PGE));
+@@ -221,6 +221,9 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
+             do_tlb_flush();
+     }
  
- const struct hypervisor_ops *__init xg_probe(void)
-diff --git a/xen/arch/x86/smp.c b/xen/arch/x86/smp.c
-index bcead5d01b..1d9fec65de 100644
---- a/xen/arch/x86/smp.c
-+++ b/xen/arch/x86/smp.c
-@@ -15,6 +15,7 @@
- #include <xen/perfc.h>
- #include <xen/spinlock.h>
- #include <asm/current.h>
-+#include <asm/guest.h>
- #include <asm/smp.h>
- #include <asm/mc146818rtc.h>
- #include <asm/flushtlb.h>
-@@ -268,6 +269,12 @@ void flush_area_mask(const cpumask_t *mask, const void *va, unsigned int flags)
-     if ( (flags & ~FLUSH_ORDER_MASK) &&
-          !cpumask_subset(mask, cpumask_of(cpu)) )
++    if ( flags & FLUSH_HVM_ASID_CORE )
++        hvm_flush_guest_tlbs();
++
+     if ( flags & FLUSH_CACHE )
      {
-+        if ( cpu_has_hypervisor &&
-+             !(flags & ~(FLUSH_TLB | FLUSH_TLB_GLOBAL | FLUSH_VA_VALID |
-+                         FLUSH_ORDER_MASK)) &&
-+             !hypervisor_flush_tlb(mask, va, (flags - 1) & FLUSH_ORDER_MASK) )
-+            return;
+         const struct cpuinfo_x86 *c = &current_cpu_data;
+@@ -254,3 +257,19 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
+ 
+     return flags;
+ }
 +
-         spin_lock(&flush_lock);
-         cpumask_and(&flush_cpumask, mask, &cpu_online_map);
-         cpumask_clear_cpu(cpu, &flush_cpumask);
-diff --git a/xen/include/asm-x86/guest/hypervisor.h b/xen/include/asm-x86/guest/hypervisor.h
-index ade10e74ea..77a1d21824 100644
---- a/xen/include/asm-x86/guest/hypervisor.h
-+++ b/xen/include/asm-x86/guest/hypervisor.h
-@@ -19,6 +19,8 @@
- #ifndef __X86_HYPERVISOR_H__
- #define __X86_HYPERVISOR_H__
- 
-+#include <xen/cpumask.h>
-+
- #include <asm/e820.h>
- 
- struct hypervisor_ops {
-@@ -32,6 +34,8 @@ struct hypervisor_ops {
-     void (*resume)(void);
-     /* Fix up e820 map */
-     void (*e820_fixup)(struct e820map *e820);
-+    /* L0 assisted TLB flush */
-+    int (*flush_tlb)(const cpumask_t *mask, const void *va, unsigned int order);
- };
- 
- #ifdef CONFIG_GUEST
-@@ -41,6 +45,14 @@ void hypervisor_setup(void);
- int hypervisor_ap_setup(void);
- void hypervisor_resume(void);
- void hypervisor_e820_fixup(struct e820map *e820);
-+/*
-+ * L0 assisted TLB flush.
-+ * mask: cpumask of the dirty vCPUs that should be flushed.
-+ * va: linear address to flush, or NULL for global flushes.
-+ * order: order of the linear address pointed by va.
-+ */
-+int hypervisor_flush_tlb(const cpumask_t *mask, const void *va,
-+                         unsigned int order);
- 
- #else
- 
-@@ -52,6 +64,11 @@ static inline void hypervisor_setup(void) { ASSERT_UNREACHABLE(); }
- static inline int hypervisor_ap_setup(void) { return 0; }
- static inline void hypervisor_resume(void) { ASSERT_UNREACHABLE(); }
- static inline void hypervisor_e820_fixup(struct e820map *e820) {}
-+static inline int hypervisor_flush_tlb(const cpumask_t *mask, const void *va,
-+                                       unsigned int order)
++unsigned int guest_flush_tlb_flags(const struct domain *d)
 +{
-+    return -EOPNOTSUPP;
++    bool shadow = paging_mode_shadow(d);
++    bool asid = is_hvm_domain(d) && (cpu_has_svm || shadow);
++
++    return (shadow ? FLUSH_TLB : 0) | (asid ? FLUSH_HVM_ASID_CORE : 0);
 +}
++
++void guest_flush_tlb_mask(const struct domain *d, const cpumask_t *mask)
++{
++    unsigned int flags = guest_flush_tlb_flags(d);
++
++    if ( flags )
++        flush_mask(mask, flags);
++}
+diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
+index 11829e7aad..580d1c2164 100644
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -118,7 +118,7 @@ int hap_track_dirty_vram(struct domain *d,
+             p2m_change_type_range(d, begin_pfn, begin_pfn + nr,
+                                   p2m_ram_rw, p2m_ram_logdirty);
  
- #endif  /* CONFIG_GUEST */
+-            flush_tlb_mask(d->dirty_cpumask);
++            guest_flush_tlb_mask(d, d->dirty_cpumask);
  
+             memset(dirty_bitmap, 0xff, size); /* consider all pages dirty */
+         }
+@@ -205,7 +205,7 @@ static int hap_enable_log_dirty(struct domain *d, bool_t log_global)
+          * to be read-only, or via hardware-assisted log-dirty.
+          */
+         p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+     }
+     return 0;
+ }
+@@ -234,7 +234,7 @@ static void hap_clean_dirty_bitmap(struct domain *d)
+      * be read-only, or via hardware-assisted log-dirty.
+      */
+     p2m_change_entry_type_global(d, p2m_ram_rw, p2m_ram_logdirty);
+-    flush_tlb_mask(d->dirty_cpumask);
++    guest_flush_tlb_mask(d, d->dirty_cpumask);
+ }
+ 
+ /************************************************/
+@@ -812,7 +812,7 @@ hap_write_p2m_entry(struct p2m_domain *p2m, unsigned long gfn, l1_pgentry_t *p,
+ 
+     safe_write_pte(p, new);
+     if ( old_flags & _PAGE_PRESENT )
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+ 
+     paging_unlock(d);
+ 
+diff --git a/xen/arch/x86/mm/hap/nested_hap.c b/xen/arch/x86/mm/hap/nested_hap.c
+index abe5958a52..f92ddc5206 100644
+--- a/xen/arch/x86/mm/hap/nested_hap.c
++++ b/xen/arch/x86/mm/hap/nested_hap.c
+@@ -84,7 +84,7 @@ nestedp2m_write_p2m_entry(struct p2m_domain *p2m, unsigned long gfn,
+     safe_write_pte(p, new);
+ 
+     if (old_flags & _PAGE_PRESENT)
+-        flush_tlb_mask(p2m->dirty_cpumask);
++        guest_flush_tlb_mask(d, p2m->dirty_cpumask);
+ 
+     paging_unlock(d);
+ 
+diff --git a/xen/arch/x86/mm/p2m-pt.c b/xen/arch/x86/mm/p2m-pt.c
+index eb66077496..5c0501794e 100644
+--- a/xen/arch/x86/mm/p2m-pt.c
++++ b/xen/arch/x86/mm/p2m-pt.c
+@@ -866,11 +866,12 @@ static void p2m_pt_change_entry_type_global(struct p2m_domain *p2m,
+     l1_pgentry_t *tab;
+     unsigned long gfn = 0;
+     unsigned int i, changed;
++    const struct domain *d = p2m->domain;
+ 
+     if ( pagetable_get_pfn(p2m_get_pagetable(p2m)) == 0 )
+         return;
+ 
+-    ASSERT(hap_enabled(p2m->domain));
++    ASSERT(hap_enabled(d));
+ 
+     tab = map_domain_page(pagetable_get_mfn(p2m_get_pagetable(p2m)));
+     for ( changed = i = 0; i < (1 << PAGETABLE_ORDER); ++i )
+@@ -896,7 +897,7 @@ static void p2m_pt_change_entry_type_global(struct p2m_domain *p2m,
+     unmap_domain_page(tab);
+ 
+     if ( changed )
+-         flush_tlb_mask(p2m->domain->dirty_cpumask);
++         guest_flush_tlb_mask(d, d->dirty_cpumask);
+ }
+ 
+ static int p2m_pt_change_entry_type_range(struct p2m_domain *p2m,
+diff --git a/xen/arch/x86/mm/paging.c b/xen/arch/x86/mm/paging.c
+index f5ff5d67a0..7c265fb5f3 100644
+--- a/xen/arch/x86/mm/paging.c
++++ b/xen/arch/x86/mm/paging.c
+@@ -613,7 +613,7 @@ void paging_log_dirty_range(struct domain *d,
+ 
+     p2m_unlock(p2m);
+ 
+-    flush_tlb_mask(d->dirty_cpumask);
++    guest_flush_tlb_mask(d, d->dirty_cpumask);
+ }
+ 
+ /*
+diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+index 3746dd6fb0..7ed8e7b71b 100644
+--- a/xen/arch/x86/mm/shadow/common.c
++++ b/xen/arch/x86/mm/shadow/common.c
+@@ -368,7 +368,7 @@ static int oos_remove_write_access(struct vcpu *v, mfn_t gmfn,
+     }
+ 
+     if ( ftlb )
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+ 
+     return 0;
+ }
+@@ -946,7 +946,7 @@ static void _shadow_prealloc(struct domain *d, unsigned int pages)
+                 /* See if that freed up enough space */
+                 if ( d->arch.paging.shadow.free_pages >= pages )
+                 {
+-                    flush_tlb_mask(d->dirty_cpumask);
++                    guest_flush_tlb_mask(d, d->dirty_cpumask);
+                     return;
+                 }
+             }
+@@ -1000,7 +1000,7 @@ static void shadow_blow_tables(struct domain *d)
+                                pagetable_get_mfn(v->arch.shadow_table[i]), 0);
+ 
+     /* Make sure everyone sees the unshadowings */
+-    flush_tlb_mask(d->dirty_cpumask);
++    guest_flush_tlb_mask(d, d->dirty_cpumask);
+ }
+ 
+ void shadow_blow_tables_per_domain(struct domain *d)
+@@ -1103,7 +1103,7 @@ mfn_t shadow_alloc(struct domain *d,
+         if ( unlikely(!cpumask_empty(&mask)) )
+         {
+             perfc_incr(shadow_alloc_tlbflush);
+-            flush_tlb_mask(&mask);
++            guest_flush_tlb_mask(d, &mask);
+         }
+         /* Now safe to clear the page for reuse */
+         clear_domain_page(page_to_mfn(sp));
+@@ -2296,7 +2296,7 @@ void sh_remove_shadows(struct domain *d, mfn_t gmfn, int fast, int all)
+ 
+     /* Need to flush TLBs now, so that linear maps are safe next time we
+      * take a fault. */
+-    flush_tlb_mask(d->dirty_cpumask);
++    guest_flush_tlb_mask(d, d->dirty_cpumask);
+ 
+     paging_unlock(d);
+ }
+@@ -3013,7 +3013,7 @@ static void sh_unshadow_for_p2m_change(struct domain *d, unsigned long gfn,
+         {
+             sh_remove_all_shadows_and_parents(d, mfn);
+             if ( sh_remove_all_mappings(d, mfn, _gfn(gfn)) )
+-                flush_tlb_mask(d->dirty_cpumask);
++                guest_flush_tlb_mask(d, d->dirty_cpumask);
+         }
+     }
+ 
+@@ -3053,7 +3053,7 @@ static void sh_unshadow_for_p2m_change(struct domain *d, unsigned long gfn,
+                 }
+                 omfn = mfn_add(omfn, 1);
+             }
+-            flush_tlb_mask(&flushmask);
++            guest_flush_tlb_mask(d, &flushmask);
+ 
+             if ( npte )
+                 unmap_domain_page(npte);
+@@ -3340,7 +3340,7 @@ int shadow_track_dirty_vram(struct domain *d,
+         }
+     }
+     if ( flush_tlb )
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+     goto out;
+ 
+ out_sl1ma:
+@@ -3410,7 +3410,7 @@ bool shadow_flush_tlb(bool (*flush_vcpu)(void *ctxt, struct vcpu *v),
+     }
+ 
+     /* Flush TLBs on all CPUs with dirty vcpu state. */
+-    flush_tlb_mask(mask);
++    guest_flush_tlb_mask(d, mask);
+ 
+     /* Done. */
+     for_each_vcpu ( d, v )
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index 1e6024c71f..608360daec 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -591,7 +591,7 @@ static void validate_guest_pt_write(struct vcpu *v, mfn_t gmfn,
+ 
+     if ( rc & SHADOW_SET_FLUSH )
+         /* Need to flush TLBs to pick up shadow PT changes */
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+ 
+     if ( rc & SHADOW_SET_ERROR )
+     {
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 5368adf474..7d16d1c1a9 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -85,6 +85,12 @@ const char *const fetch_type_names[] = {
+ };
+ #endif
+ 
++/* Helper to perform a local TLB flush. */
++static void sh_flush_local(const struct domain *d)
++{
++    flush_local(guest_flush_tlb_flags(d));
++}
++
+ /**************************************************************************/
+ /* Hash table mapping from guest pagetables to shadows
+  *
+@@ -3075,7 +3081,7 @@ static int sh_page_fault(struct vcpu *v,
+         perfc_incr(shadow_rm_write_flush_tlb);
+         smp_wmb();
+         atomic_inc(&d->arch.paging.shadow.gtable_dirty_version);
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+     }
+ 
+ #if (SHADOW_OPTIMIZATIONS & SHOPT_OUT_OF_SYNC)
+@@ -3584,7 +3590,7 @@ static bool sh_invlpg(struct vcpu *v, unsigned long linear)
+     if ( mfn_to_page(sl1mfn)->u.sh.type
+          == SH_type_fl1_shadow )
+     {
+-        flush_tlb_local();
++        sh_flush_local(v->domain);
+         return false;
+     }
+ 
+@@ -3798,7 +3804,7 @@ sh_update_linear_entries(struct vcpu *v)
+      * linear pagetable to read a top-level shadow page table entry. But,
+      * without this change, it would fetch the wrong value due to a stale TLB.
+      */
+-    flush_tlb_local();
++    sh_flush_local(d);
+ }
+ 
+ 
+@@ -3998,7 +4004,7 @@ sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
+      * (old) shadow linear maps in the writeable mapping heuristics. */
+ #if GUEST_PAGING_LEVELS == 2
+     if ( sh_remove_write_access(d, gmfn, 2, 0) != 0 )
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+     sh_set_toplevel_shadow(v, 0, gmfn, SH_type_l2_shadow);
+ #elif GUEST_PAGING_LEVELS == 3
+     /* PAE guests have four shadow_table entries, based on the
+@@ -4022,7 +4028,7 @@ sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
+             }
+         }
+         if ( flush )
+-            flush_tlb_mask(d->dirty_cpumask);
++            guest_flush_tlb_mask(d, d->dirty_cpumask);
+         /* Now install the new shadows. */
+         for ( i = 0; i < 4; i++ )
+         {
+@@ -4043,7 +4049,7 @@ sh_update_cr3(struct vcpu *v, int do_locking, bool noflush)
+     }
+ #elif GUEST_PAGING_LEVELS == 4
+     if ( sh_remove_write_access(d, gmfn, 4, 0) != 0 )
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+     sh_set_toplevel_shadow(v, 0, gmfn, SH_type_l4_shadow);
+     if ( !shadow_mode_external(d) && !is_pv_32bit_domain(d) )
+     {
+@@ -4494,7 +4500,7 @@ static void sh_pagetable_dying(paddr_t gpa)
+         }
+     }
+     if ( flush )
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+ 
+     /* Remember that we've seen the guest use this interface, so we
+      * can rely on it using it in future, instead of guessing at
+@@ -4531,7 +4537,7 @@ static void sh_pagetable_dying(paddr_t gpa)
+         mfn_to_page(gmfn)->pagetable_dying = true;
+         shadow_unhook_mappings(d, smfn, 1/* user pages only */);
+         /* Now flush the TLB: we removed toplevel mappings. */
+-        flush_tlb_mask(d->dirty_cpumask);
++        guest_flush_tlb_mask(d, d->dirty_cpumask);
+     }
+ 
+     /* Remember that we've seen the guest use this interface, so we
+diff --git a/xen/include/asm-x86/flushtlb.h b/xen/include/asm-x86/flushtlb.h
+index 2cfe4e6e97..798049b6ad 100644
+--- a/xen/include/asm-x86/flushtlb.h
++++ b/xen/include/asm-x86/flushtlb.h
+@@ -105,6 +105,12 @@ void switch_cr3_cr4(unsigned long cr3, unsigned long cr4);
+ #define FLUSH_VCPU_STATE 0x1000
+  /* Flush the per-cpu root page table */
+ #define FLUSH_ROOT_PGTBL 0x2000
++#if CONFIG_HVM
++ /* Flush all HVM guests linear TLB (using ASID/VPID) */
++#define FLUSH_HVM_ASID_CORE 0x4000
++#else
++#define FLUSH_HVM_ASID_CORE 0
++#endif
+ 
+ /* Flush local TLBs/caches. */
+ unsigned int flush_area_local(const void *va, unsigned int flags);
+@@ -159,4 +165,7 @@ static inline int clean_dcache_va_range(const void *p, unsigned long size)
+     return clean_and_invalidate_dcache_va_range(p, size);
+ }
+ 
++unsigned int guest_flush_tlb_flags(const struct domain *d);
++void guest_flush_tlb_mask(const struct domain *d, const cpumask_t *mask);
++
+ #endif /* __FLUSHTLB_H__ */
 -- 
 2.26.0
 
