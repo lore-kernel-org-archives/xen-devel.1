@@ -2,108 +2,68 @@ Return-Path: <SRS0=af7b=6H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C70D7C2BA19
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:23:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F658C55192
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:25:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 89B3720704
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:23:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 429C520704
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:25:58 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="cFGIj76M"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 89B3720704
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="w/6ZTct+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 429C520704
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRZ0U-0001CG-Cn; Thu, 23 Apr 2020 10:22:58 +0000
+	id 1jRZ3F-0001jM-W4; Thu, 23 Apr 2020 10:25:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=wmme=6H=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jRZ0S-0001AT-V0
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 10:22:56 +0000
-X-Inumbo-ID: 659ca5b8-854c-11ea-933f-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=IVNM=6H=xen.org=wl@srs-us1.protection.inumbo.net>)
+ id 1jRZ3E-0001is-Hv
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 10:25:48 +0000
+X-Inumbo-ID: cc4cb19a-854c-11ea-933f-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 659ca5b8-854c-11ea-933f-12813bfff9fa;
- Thu, 23 Apr 2020 10:22:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1587637377;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-id:content-transfer-encoding: mime-version;
- bh=nU6Y4kkVHHkj1jrwZ1jZ8l50lzOYrnbCWh/1N9UKlek=;
- b=cFGIj76MwcdfayXLzXL7hIbvQ+LJHYyWeesvGssSf+6ylYQEAJlyWeX3
- 2hA4E/chKqGNKWmH2QW82NdBVNLCJ1rXk6tH3vWxmkEPMxjhXMe1duRLH
- wgcGKilI8Sud0TLBSkXKGMDEO/PqW34BRieQQ/LfDoIfOm7uVcfBvdbE5 E=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=George.Dunlap@citrix.com;
- spf=Pass smtp.mailfrom=George.Dunlap@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- George.Dunlap@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="George.Dunlap@citrix.com";
- x-sender="George.Dunlap@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
- George.Dunlap@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="George.Dunlap@citrix.com";
- x-sender="George.Dunlap@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="George.Dunlap@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: mspqZjDSIMvmZflvLD+zdnB7AR1trZSPEY5EelXCpIoqJ66kNS0Cq1/VtY7TlBOrHdhn7e5N/2
- 2CEZ+IU3J/TGJLLvVZRRZHq4ZilWeKvKvONFX/Cplky3XXMWPRzSnS+fssymbi80T1Cw9SmD46
- zKK6KxYVxBqliq0W6fuEO8QnTRyvfwTTvRedy3Hmk+1YQetTcfwbD2R6Zqm+unN7tGbJbDNMmX
- iqINUNXSVoZTtaJsv9KxDq44eQZqvYEFu0Tm/7EIg8jei8fKwBVwwG46v7XLgeZmh8LvBEmV35
- tQ8=
-X-SBRS: 2.7
-X-MesageID: 16103911
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,306,1583211600"; d="scan'208";a="16103911"
-From: George Dunlap <George.Dunlap@citrix.com>
+ id cc4cb19a-854c-11ea-933f-12813bfff9fa;
+ Thu, 23 Apr 2020 10:25:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID
+ :Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID
+ :Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
+ Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
+ :List-Post:List-Owner:List-Archive;
+ bh=sqB0POh+DlkETeDvNvjuZIZRynPRSQnUNmboT+aYH9M=; b=w/6ZTct+9ejejJj7v8lbQfg39F
+ evUShwuXIZSEgMsvplQczVjewIIzOUIcQAqmD65DkLRA1pRzVHzUX/PEDtvKvjWmI47lV9vtUeZXu
+ nmZM32b+IgYuXuROIHL8sOpPKAb0i6gewAnx+flueSJcCmfK7jNJlibi6pmqYOMh5/ek=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <wl@xen.org>)
+ id 1jRZ3D-0000MK-2n; Thu, 23 Apr 2020 10:25:47 +0000
+Received: from 44.142.6.51.dyn.plus.net ([51.6.142.44] helo=debian)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1jRZ3C-00059N-QW; Thu, 23 Apr 2020 10:25:47 +0000
+Date: Thu, 23 Apr 2020 11:25:43 +0100
+From: Wei Liu <wl@xen.org>
 To: Nick Rosbrook <rosbrookn@gmail.com>
-Subject: Re: [PATCH 4/4] golang/xenlight: add DeviceUsbdevAdd/Remove wrappers
-Thread-Topic: [PATCH 4/4] golang/xenlight: add DeviceUsbdevAdd/Remove wrappers
-Thread-Index: AQHWERYd3+QkSUgUBk+84Cm8kpq52KiGbo8A
-Date: Thu, 23 Apr 2020 10:22:46 +0000
-Message-ID: <F8B21573-2C49-4402-9CEB-C46CF8AFDCFC@citrix.com>
-References: <cover.1586727061.git.rosbrookn@ainfosec.com>
- <1fcd31482f5183f29e9d949c6e17183b6b101c8b.1586727061.git.rosbrookn@ainfosec.com>
-In-Reply-To: <1fcd31482f5183f29e9d949c6e17183b6b101c8b.1586727061.git.rosbrookn@ainfosec.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3608.60.0.2.5)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <2CB9B430F023AB4DBBCDAACE6DD933BB@citrix.com>
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 2/2] golang/xenlight: stop tracking generated files
+Message-ID: <20200423102543.iy4szqmbfzsohlwd@debian>
+References: <cover.1587599094.git.rosbrookn@ainfosec.com>
+ <f4fd2508a9cbceec2d1b8b480d4e4a15422d67d2.1587599095.git.rosbrookn@ainfosec.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f4fd2508a9cbceec2d1b8b480d4e4a15422d67d2.1587599095.git.rosbrookn@ainfosec.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -114,20 +74,23 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, Ian Jackson <Ian.Jackson@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-
-
-> On Apr 12, 2020, at 11:02 PM, Nick Rosbrook <rosbrookn@gmail.com> wrote:
->=20
-> Add DeviceUsbdevAdd and DeviceUsbdevRemove as wrappers for
-> libxl_device_usbdev_add and libxl_device_usbdev_remove.
->=20
+On Wed, Apr 22, 2020 at 08:25:26PM -0400, Nick Rosbrook wrote:
+> The generated go files were tracked temporarily while the initial
+> implementation of gengotypes.py was in progress. They can now be removed
+> and ignored by git and hg.
+> 
+> While here, make sure generated files are removed by make clean.
+> 
 > Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 
-Reviewed-by: George Dunlap <george.dunlap@citrix.com>
+Acked-by: Wei Liu <wl@xen.org>
 
