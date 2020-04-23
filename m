@@ -2,67 +2,67 @@ Return-Path: <SRS0=af7b=6H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E9F38C2BA19
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B57E0C2BA19
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:30:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BE5A620704
-	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:25:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 80F312076C
+	for <xen-devel@archiver.kernel.org>; Thu, 23 Apr 2020 10:30:39 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="0WnNRUP9"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BE5A620704
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="0ENP90q8"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 80F312076C
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRZ3A-0001iG-Np; Thu, 23 Apr 2020 10:25:44 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jRZ7i-0002bu-K7; Thu, 23 Apr 2020 10:30:26 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=IVNM=6H=xen.org=wl@srs-us1.protection.inumbo.net>)
- id 1jRZ39-0001hR-Hj
- for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 10:25:43 +0000
-X-Inumbo-ID: c8bd369e-854c-11ea-933f-12813bfff9fa
+ id 1jRZ7g-0002bp-Kb
+ for xen-devel@lists.xenproject.org; Thu, 23 Apr 2020 10:30:24 +0000
+X-Inumbo-ID: 70e4e3f8-854d-11ea-b58d-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c8bd369e-854c-11ea-933f-12813bfff9fa;
- Thu, 23 Apr 2020 10:25:42 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 70e4e3f8-854d-11ea-b58d-bc764e2007e4;
+ Thu, 23 Apr 2020 10:30:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID
- :Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID
- :Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
- Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
- :List-Post:List-Owner:List-Archive;
- bh=K6c8z0zSO4hwF1jNd7IKrbrk9Saj8OUXaoMIdtS9eWo=; b=0WnNRUP98oTYTHtbIbBzj1CNMX
- c+kZ0NZylgzBJOUmMzNg4OiZ7WlDstdm+jBCywF0OwuZOjSmlYkXxQxPAqoBt9hZJ4QG5U75XW6NE
- X1JZisI6VFmlncQVr8np+qD3Wta7b2JAyzzUJOxkHhoM5Cma/BFKJYjyZ2/rdw5IDUeQ=;
+ s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
+ MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=aPFru5k8xeaS99OltKI3qFaxgEJ+9rtIHqVXBXXSvwc=; b=0ENP90q83mbn0TqfQmxNo4h4nP
+ 70pxRthb9VfRCKb2p8Y2EMnLuP96FjVUex1bq43zVfq15doEeekDWWyqsqfiv0rh00U9dh0a2te78
+ ZkBqIS5HZUqZ7kOmiq2xYosXMRk2TeKPLDduq5LoYoC4kaP/mXUfQqpkvwTqs1v9Yoa0=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <wl@xen.org>)
- id 1jRZ37-0000M4-8i; Thu, 23 Apr 2020 10:25:41 +0000
+ id 1jRZ7e-0000UO-Pb; Thu, 23 Apr 2020 10:30:22 +0000
 Received: from 44.142.6.51.dyn.plus.net ([51.6.142.44] helo=debian)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
  (envelope-from <wl@xen.org>)
- id 1jRZ37-00059C-0R; Thu, 23 Apr 2020 10:25:41 +0000
-Date: Thu, 23 Apr 2020 11:25:38 +0100
+ id 1jRZ7e-0005YI-EW; Thu, 23 Apr 2020 10:30:22 +0000
+Date: Thu, 23 Apr 2020 11:30:19 +0100
 From: Wei Liu <wl@xen.org>
-To: Nick Rosbrook <rosbrookn@gmail.com>
-Subject: Re: [PATCH 1/2] tools: build golang tools if go compiler is present
-Message-ID: <20200423102538.vxuo7s2lamkxhoo7@debian>
-References: <cover.1587599094.git.rosbrookn@ainfosec.com>
- <c2d966b43313c9df64551b0ce31462c176445b70.1587599095.git.rosbrookn@ainfosec.com>
+To: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+Subject: Re: [PATCH v10 1/3] x86/tlb: introduce a flush HVM ASIDs flag
+Message-ID: <20200423103019.a43rnmub5jdszjhc@debian>
+References: <20200416135909.16155-1-roger.pau@citrix.com>
+ <20200416135909.16155-2-roger.pau@citrix.com>
+ <20200422163338.GF28601@Air-de-Roger>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <c2d966b43313c9df64551b0ce31462c176445b70.1587599095.git.rosbrookn@ainfosec.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200422163338.GF28601@Air-de-Roger>
 User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -74,27 +74,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>, xen-devel@lists.xenproject.org,
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
+Cc: Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Tim Deegan <tim@xen.org>, George Dunlap <george.dunlap@citrix.com>,
+ Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, Apr 22, 2020 at 08:25:25PM -0400, Nick Rosbrook wrote:
-> By default, if the go compiler is found by the configure script, build
-> the golang tools. If the compiler is not found, and
-> --enable-golang_tools was not explicitly set, do not build to the golang
-
---enable-golang-tools here.
-
-> tools.
+On Wed, Apr 22, 2020 at 06:33:38PM +0200, Roger Pau Monné wrote:
+> On Thu, Apr 16, 2020 at 03:59:07PM +0200, Roger Pau Monne wrote:
+> > @@ -254,3 +257,14 @@ unsigned int flush_area_local(const void *va, unsigned int flags)
+> >  
+> >      return flags;
+> >  }
+> > +
+> > +void guest_flush_tlb_mask(const struct domain *d, const cpumask_t *mask)
+> > +{
+> > +    unsigned int flags = (is_pv_domain(d) || paging_mode_shadow(d) ? FLUSH_TLB
+> > +                                                                   : 0) |
+> > +                         (is_hvm_domain(d) && cpu_has_svm ? FLUSH_HVM_ASID_CORE
+> > +                                                          : 0);
 > 
-> The new corresponding make variable is CONFIG_GOLANG_TOOLS. Remove
-> CONFIG_GOLANG from tools/Rules.mk since the new variable is set by
-> configure.
+> Maybe I'm getting confused, but I think the above is wrong and ASID
+> should _always_ be flushed when running a HVM domain in shadow mode
+> regardless of whether the underlying hw is Intel or AMD, ie:
 > 
-> Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+> bool shadow = paging_mode_shadow(d);
+> unsigned int flags = (shadow ? FLUSH_TLB : 0) |
+>                      (is_hvm_domain(d) &&
+>                       (cpu_has_svm || shadow) ? FLUSH_HVM_ASID_CORE : 0);
 
-Acked-by: Wei Liu <wl@xen.org>
+This sort of long expression is prone to error. See XSA-316.
 
-Note to self: fix commit message and maybe rerun autogen.sh.
+Can I request it to be broken down a bit?
+
+Wei.
 
