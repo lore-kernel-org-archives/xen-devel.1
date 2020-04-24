@@ -2,54 +2,71 @@ Return-Path: <SRS0=cyMZ=6I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D988FC54FCB
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 14:51:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 510A5C54FD0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 15:44:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B24EC2071E
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 14:51:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B24EC2071E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2217320728
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 15:44:38 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="vS03vCt1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2217320728
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRzg2-00006o-O4; Fri, 24 Apr 2020 14:51:38 +0000
+	id 1jS0Up-0004Lw-T0; Fri, 24 Apr 2020 15:44:07 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=/Nbk=6I=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jRzg0-00006b-Q1
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 14:51:36 +0000
-X-Inumbo-ID: 181e5ccf-863b-11ea-94ba-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=WQMg=6I=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jS0Uo-0004Lr-Kg
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 15:44:06 +0000
+X-Inumbo-ID: 6dd1f69c-8642-11ea-94ce-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 181e5ccf-863b-11ea-94ba-12813bfff9fa;
- Fri, 24 Apr 2020 14:51:35 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 18997ACE3;
- Fri, 24 Apr 2020 14:51:34 +0000 (UTC)
+ id 6dd1f69c-8642-11ea-94ce-12813bfff9fa;
+ Fri, 24 Apr 2020 15:44:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=v3wqAYCavyypofe7MTlDKDLJYRm4yp0uzip8LrFvrKM=; b=vS03vCt1k6EmD6b8pEgVjAJrUp
+ /YFl87QUp97uEWTAfb0rgoWl8gZuqMhvyA2zB9iQLAryJaIOeuRKK1WhiFP5rOAwS2CVC3RdygqUO
+ fBYtcNvSqYVonTpvrWT+Rm3BVTABVxnhIpSS2VwyNZuz+wATwsqhlBmzwsR4fIejfwKo=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jS0Um-0003iM-J8; Fri, 24 Apr 2020 15:44:04 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jS0Um-0000cZ-CZ; Fri, 24 Apr 2020 15:44:04 +0000
 Subject: Re: [PATCH] docs/designs: re-work the xenstore migration document...
-To: Julien Grall <julien@xen.org>, Paul Durrant <paul@xen.org>,
- xen-devel@lists.xenproject.org
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org
 References: <20200424133736.737-1-paul@xen.org>
  <a1febde5-0a34-6480-6400-7142a6bb6f52@suse.com>
  <c7cb8073-44ef-c92e-2962-d427e1568748@xen.org>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <8029c772-9c42-460c-e17c-85e18b32f102@suse.com>
-Date: Fri, 24 Apr 2020 16:51:33 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+ <8029c772-9c42-460c-e17c-85e18b32f102@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <7ae1bb1c-0029-c3f0-1565-e5f99effee51@xen.org>
+Date: Fri, 24 Apr 2020 16:44:02 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <c7cb8073-44ef-c92e-2962-d427e1568748@xen.org>
+In-Reply-To: <8029c772-9c42-460c-e17c-85e18b32f102@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -65,40 +82,58 @@ Cc: Paul Durrant <pdurrant@amazon.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.04.20 16:38, Julien Grall wrote:
-> Hi,
-> 
-> On 24/04/2020 15:26, Jürgen Groß wrote:
->>> +```
->>> +    0       1       2       3       4       5       6       7    octet
->>> ++-------+-------+-------+-------+-------+-------+-------+-------+
->>> +| type                          | len                           |
->>> ++-------------------------------+-------------------------------+
->>> +| body
->>> +...
->>> +|       | padding (0 to 7 octets)                               |
->>> ++-------+-------------------------------------------------------+
->>> +```
->>> +
->>> +NOTE: padding octets here and in all subsequent format 
->>> specifications must be
->>> +      zero, unless stated otherwise.
+
+
+On 24/04/2020 15:51, Jürgen Groß wrote:
+> On 24.04.20 16:38, Julien Grall wrote:
+>> Hi,
 >>
->> What about: "... are written as zero and should be ignored on read."
+>> On 24/04/2020 15:26, Jürgen Groß wrote:
+>>>> +```
+>>>> +    0       1       2       3       4       5       6       7    octet
+>>>> ++-------+-------+-------+-------+-------+-------+-------+-------+
+>>>> +| type                          | len                           |
+>>>> ++-------------------------------+-------------------------------+
+>>>> +| body
+>>>> +...
+>>>> +|       | padding (0 to 7 octets)                               |
+>>>> ++-------+-------------------------------------------------------+
+>>>> +```
+>>>> +
+>>>> +NOTE: padding octets here and in all subsequent format 
+>>>> specifications must be
+>>>> +      zero, unless stated otherwise.
+>>>
+>>> What about: "... are written as zero and should be ignored on read."
+>>
+>> I would rather not say "ignored" because it doesn't allow us to extend 
+>> the record if needed in a safe way. The read side should abort if it 
+>> sees an other value than 0 in the padding.
 > 
-> I would rather not say "ignored" because it doesn't allow us to extend 
-> the record if needed in a safe way. The read side should abort if it 
-> sees an other value than 0 in the padding.
+> I'd rather ignore unknown fields. This allows to add optional data
+> without having to special case it. 
 
-I'd rather ignore unknown fields. This allows to add optional data
-without having to special case it. Writing zeroes is the important part
-here, of course.
+You will need a special case for 0 in any case.
 
-Ignoring those fields would e.g. enable a downgrade more easily, while
-aborting could make that impossible.
+> Writing zeroes is the important part
+> here, of course.
+> 
+> Ignoring those fields would e.g. enable a downgrade more easily, while
+> aborting could make that impossible.
 
-And in case a version would write non-zero bytes (e.g. due to a bug)
-this version could never be live-updated.
+You are assuming the fields may contain optional data. Now imagine, we 
+realize in a few months we missed some important fields. How would you 
+describe the required fields?
 
-Juergen
+I can see two ways:
+     1) Re-using the padding fields if possible
+     2) Extending the record
+
+If you re-use the padding fields, then when you downgrade you may lose 
+information. If you extend the size of the record, then you can't downgrade.
+
+Cheers,
+
+-- 
+Julien Grall
 
