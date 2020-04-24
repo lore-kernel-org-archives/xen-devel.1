@@ -6,56 +6,56 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 53AF3C54FD0
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 12:23:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E06B1C55197
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 12:24:25 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 26DB520776
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 12:23:56 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B75C821569
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 12:24:25 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="zwo1FmAO"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 26DB520776
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="QcKJCAVJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B75C821569
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRxMu-0001Uc-UP; Fri, 24 Apr 2020 12:23:44 +0000
+	id 1jRxNM-0001YL-6a; Fri, 24 Apr 2020 12:24:12 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=4idh=6I=kernel.org=sashal@srs-us1.protection.inumbo.net>)
- id 1jRxMt-0001UR-CB
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 12:23:43 +0000
-X-Inumbo-ID: 6f94db78-8626-11ea-9490-12813bfff9fa
+ id 1jRxNK-0001Y5-Ew
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 12:24:10 +0000
+X-Inumbo-ID: 7fb6fd06-8626-11ea-9490-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 6f94db78-8626-11ea-9490-12813bfff9fa;
- Fri, 24 Apr 2020 12:23:43 +0000 (UTC)
+ id 7fb6fd06-8626-11ea-9490-12813bfff9fa;
+ Fri, 24 Apr 2020 12:24:10 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id D339020776;
- Fri, 24 Apr 2020 12:23:41 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 992F0218AC;
+ Fri, 24 Apr 2020 12:24:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1587731022;
- bh=IUCErDYU5+chUFB9+LblbUcLmt79a5CAIndVF79zzyc=;
+ s=default; t=1587731049;
+ bh=IN3dBcosvKC2QUoeyRI6B2svCXNsLO997YBPPyyQJAs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=zwo1FmAO7tVEIUmg3qmd96ARoD0Msmy6lRm4rM9OPb7JgAk0z3M4rdOXADz1TbzIa
- 6GB5or2oSMJ7csl1mVMPd+4Hnav27fAEJZy2m0rE7RxKzeB7jSlJi9Gu2msVv2nqZo
- s2dDg6egHqfPY0y8HwWKqExekawle2RDvnUEI8Ss=
+ b=QcKJCAVJWk0V069e672XlB1HrHenrPmgC1TWWpl4v1F6a1LI+NcVyhenBsShQrSQk
+ 5SjoFSyrhvjVzNKQ0DHVvt8Bk8tVQk9F2RKhY3Af9SGjUkwIZRHkQPN0HB2XIR8RHQ
+ RQVEK3FPXmH6sy82LuHLSqf4wASPlsi/RKVal53w=
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.4 16/26] xen/xenbus: ensure xenbus_map_ring_valloc()
- returns proper grant status
-Date: Fri, 24 Apr 2020 08:23:13 -0400
-Message-Id: <20200424122323.10194-16-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 11/18] xen/xenbus: ensure
+ xenbus_map_ring_valloc() returns proper grant status
+Date: Fri, 24 Apr 2020 08:23:48 -0400
+Message-Id: <20200424122355.10453-11-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200424122323.10194-1-sashal@kernel.org>
-References: <20200424122323.10194-1-sashal@kernel.org>
+In-Reply-To: <20200424122355.10453-1-sashal@kernel.org>
+References: <20200424122355.10453-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -103,10 +103,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
-index e17ca81561713..a38292ef79f6d 100644
+index a1c17000129ba..e94a61eaeceb0 100644
 --- a/drivers/xen/xenbus/xenbus_client.c
 +++ b/drivers/xen/xenbus/xenbus_client.c
-@@ -448,7 +448,14 @@ EXPORT_SYMBOL_GPL(xenbus_free_evtchn);
+@@ -450,7 +450,14 @@ EXPORT_SYMBOL_GPL(xenbus_free_evtchn);
  int xenbus_map_ring_valloc(struct xenbus_device *dev, grant_ref_t *gnt_refs,
  			   unsigned int nr_grefs, void **vaddr)
  {
