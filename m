@@ -6,47 +6,47 @@ X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E35B1C54FCB
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 13:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17D4AC54FD0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 13:11:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BD09920728
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 13:02:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BD09920728
+	by mail.kernel.org (Postfix) with ESMTPS id E8FE720728
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 13:11:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E8FE720728
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRxxZ-0005GR-Ht; Fri, 24 Apr 2020 13:01:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jRy6w-00069y-Is; Fri, 24 Apr 2020 13:11:18 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=2qtr=6I=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jRxxY-0005GM-83
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 13:01:36 +0000
-X-Inumbo-ID: b9d113b4-862b-11ea-949f-12813bfff9fa
+ id 1jRy6v-00069s-Sy
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 13:11:17 +0000
+X-Inumbo-ID: 14c80ee8-862d-11ea-b4f4-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b9d113b4-862b-11ea-949f-12813bfff9fa;
- Fri, 24 Apr 2020 13:01:35 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 14c80ee8-862d-11ea-b4f4-bc764e2007e4;
+ Fri, 24 Apr 2020 13:11:17 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 140E6AE64;
- Fri, 24 Apr 2020 13:01:33 +0000 (UTC)
-Subject: Re: [XEN PATCH v5 04/16] xen/build: have the root Makefile generates
- the CFLAGS
-To: Anthony PERARD <anthony.perard@citrix.com>
-References: <20200421161208.2429539-1-anthony.perard@citrix.com>
- <20200421161208.2429539-5-anthony.perard@citrix.com>
+ by mx2.suse.de (Postfix) with ESMTP id 42620AC5B;
+ Fri, 24 Apr 2020 13:11:15 +0000 (UTC)
+Subject: Re: [PATCH v17 2/2] xen/tools: VM forking toolstack side
+To: Tamas K Lengyel <tamas.lengyel@intel.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
+References: <70ea4889e30ed35760329331ddfeb279fcd80786.1587655725.git.tamas.lengyel@intel.com>
+ <e416eac0c986fd1aba5f576d9b065a6f47660b2c.1587655725.git.tamas.lengyel@intel.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <db4f1e4f-1ffc-522a-4b2f-9eb2315d1acc@suse.com>
-Date: Fri, 24 Apr 2020 15:01:32 +0200
+Message-ID: <1d705ad2-a5a1-8124-b43a-421143728669@suse.com>
+Date: Fri, 24 Apr 2020 15:11:10 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200421161208.2429539-5-anthony.perard@citrix.com>
+In-Reply-To: <e416eac0c986fd1aba5f576d9b065a6f47660b2c.1587655725.git.tamas.lengyel@intel.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -60,57 +60,20 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 21.04.2020 18:11, Anthony PERARD wrote:
-> Instead of generating the CFLAGS in Rules.mk everytime we enter a new
-> subdirectory, we are going to generate most of them a single time, and
-> export the result in the environment so that Rules.mk can use it.  The
-> only flags left to be generated are the ones that depend on the
-> targets, but the variable $(c_flags) takes care of that.
+On 23.04.2020 17:30, Tamas K Lengyel wrote:
+> Add necessary bits to implement "xl fork-vm" commands. The command allows the
+> user to specify how to launch the device model allowing for a late-launch model
+> in which the user can execute the fork without the device model and decide to
+> only later launch it.
 > 
-> Arch specific CFLAGS are generated by a new file "arch/*/arch.mk"
-> which is included by the root Makefile.
-> 
-> We export the *FLAGS via the environment variables XEN_*FLAGS because
-> Rules.mk still includes Config.mk and would add duplicated flags to
-> CFLAGS.
-> 
-> When running Rules.mk in the root directory (xen/), the variable
-> `root-make-done' is set, so `need-config' will remain undef and so the
-> root Makefile will not generate the cflags again.
-> 
-> We can't use CFLAGS in subdirectories to add flags to particular
-> targets, instead start to use CFLAGS-y. Idem for AFLAGS.
-> So there are two different CFLAGS-y, the one in xen/Makefile (and
-> arch.mk), and the one in subdirs that Rules.mk is going to use.
-> We can't add to XEN_CFLAGS because it is exported, so making change to
-> it might be propagated to subdirectory which isn't intended.
-> 
-> Some style change are introduced in this patch:
->     when LDFLAGS_DIRECT is included in LDFLAGS
->     use of CFLAGS-$(CONFIG_INDIRECT_THUNK) instead of ifeq().
-> 
-> The LTO change hasn't been tested properly, as LTO is marked as
-> broken.
-> 
-> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
+> Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
 
-While committing this, in my pre-push build test I noticed that
-presumably an earlier change of yours has caused
-
-Makefile:103: include/config/auto.conf: No such file or directory
-Makefile:106: include/config/auto.conf.cmd: No such file or directory
-
-for a build in a completely fresh tree.
+As before this will be left for the tool stack maintainers to
+ack and commit.
 
 Jan
 
