@@ -7,57 +7,56 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6B126C55191
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 14:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E30EC54FD0
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 14:20:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3E9C320700
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 14:09:55 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 3C4A520736
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 14:20:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="wZarron7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3E9C320700
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="CGmFqXrs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C4A520736
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRz1Q-00030I-Vh; Fri, 24 Apr 2020 14:09:40 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jRzBh-0005Cs-Ur; Fri, 24 Apr 2020 14:20:17 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=OF9t=6I=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jRz1P-0002zR-Le
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 14:09:39 +0000
-X-Inumbo-ID: 35da7c9e-8635-11ea-94b0-12813bfff9fa
+ id 1jRzBg-0005Cb-1p
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 14:20:16 +0000
+X-Inumbo-ID: b4b7478a-8636-11ea-b58d-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 35da7c9e-8635-11ea-94b0-12813bfff9fa;
- Fri, 24 Apr 2020 14:09:28 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b4b7478a-8636-11ea-b58d-bc764e2007e4;
+ Fri, 24 Apr 2020 14:20:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QEgbzBwJFIRd1ScLggvvofYSSDEx2eZQcbh7hVPo+uI=; b=wZarron7xIIzBW7E+eHmwQVMNa
- ViVyFwLfw3guf+v0i57cFEEtYMQWjHElbIxWjU9f0tDb8zbGioYDKi5QP0Lk3Kx2YaS+E3xSgyXNF
- +tzr9+2UFxZpUt78F9Bw8zgTKMxXhy2yjtzO4U+qLTdnr+TxcpeH0O/YZVSS7v3ntIow=;
+ bh=WuHZzCeYG5C/b2g02WeZNMxfNBzADEMLdtqdGqvTvAU=; b=CGmFqXrswBnXEgsEUtJqz1C1Y5
+ HUvGO2SmQtdlfTptXzTOW0DFxw44kXES8+86535RR/2O/aXlYD9rOcISb4t7dw5p3rKnglMNNEqoN
+ w3dxw24uM2rV+bhCrWRTvJHKX9EdIas5o6vFa2oC/ERqzwNARSgPB/edOticec6jhS9k=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jRz1E-0001hB-6c; Fri, 24 Apr 2020 14:09:28 +0000
+ id 1jRzBa-0001xB-99; Fri, 24 Apr 2020 14:20:10 +0000
 Received: from 54-240-197-226.amazon.com ([54.240.197.226]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jRz1D-0001fN-QH; Fri, 24 Apr 2020 14:09:28 +0000
+ id 1jRz1K-0001fN-VT; Fri, 24 Apr 2020 14:09:35 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v6 06/15] x86_64/mm: introduce pl2e in paging_init
-Date: Fri, 24 Apr 2020 15:08:57 +0100
-Message-Id: <40759ec2fa21e365ad8a59ab0de59b3f7f5fb42a.1587735799.git.hongyxia@amazon.com>
+Subject: [PATCH v6 11/15] x86/smpboot: clone_mapping should have one exit path
+Date: Fri, 24 Apr 2020 15:09:02 +0100
+Message-Id: <7c84de54ad0ae7a2e7c0c36ac7fa43860f8de995.1587735799.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1587735799.git.hongyxia@amazon.com>
 References: <cover.1587735799.git.hongyxia@amazon.com>
@@ -81,90 +80,78 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Wei Liu <wei.liu2@citrix.com>
 
-Introduce pl2e so that we can use l2_ro_mpt to point to the page table
-itself.
+We will soon need to clean up page table mappings in the exit path.
 
 No functional change.
 
 Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 ---
- xen/arch/x86/x86_64/mm.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ xen/arch/x86/smpboot.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index 6557255494..35f9de4ad4 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -479,7 +479,7 @@ void __init paging_init(void)
-     unsigned long i, mpt_size, va;
-     unsigned int n, memflags;
-     l3_pgentry_t *l3_ro_mpt;
--    l2_pgentry_t *l2_ro_mpt = NULL;
-+    l2_pgentry_t *pl2e = NULL, *l2_ro_mpt = NULL;
-     struct page_info *l1_pg;
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 275ce7661d..5b0e24f925 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -675,6 +675,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     l3_pgentry_t *pl3e;
+     l2_pgentry_t *pl2e;
+     l1_pgentry_t *pl1e;
++    int rc = -ENOMEM;
  
      /*
-@@ -529,7 +529,7 @@ void __init paging_init(void)
-             (L2_PAGETABLE_SHIFT - 3 + PAGE_SHIFT)));
- 
-         if ( cpu_has_page1gb &&
--             !((unsigned long)l2_ro_mpt & ~PAGE_MASK) &&
-+             !((unsigned long)pl2e & ~PAGE_MASK) &&
-              (mpt_size >> L3_PAGETABLE_SHIFT) > (i >> PAGETABLE_ORDER) )
-         {
-             unsigned int k, holes;
-@@ -589,7 +589,7 @@ void __init paging_init(void)
-             memset((void *)(RDWR_MPT_VIRT_START + (i << L2_PAGETABLE_SHIFT)),
-                    0xFF, 1UL << L2_PAGETABLE_SHIFT);
+      * Sanity check 'linear'.  We only allow cloning from the Xen virtual
+@@ -715,7 +716,10 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+             pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(linear);
+             flags = l1e_get_flags(*pl1e);
+             if ( !(flags & _PAGE_PRESENT) )
+-                return 0;
++            {
++                rc = 0;
++                goto out;
++            }
+             pfn = l1e_get_pfn(*pl1e);
          }
--        if ( !((unsigned long)l2_ro_mpt & ~PAGE_MASK) )
-+        if ( !((unsigned long)pl2e & ~PAGE_MASK) )
-         {
-             if ( (l2_ro_mpt = alloc_xen_pagetable()) == NULL )
-                 goto nomem;
-@@ -597,13 +597,14 @@ void __init paging_init(void)
-             l3e_write(&l3_ro_mpt[l3_table_offset(va)],
-                       l3e_from_paddr(__pa(l2_ro_mpt),
-                                      __PAGE_HYPERVISOR_RO | _PAGE_USER));
-+            pl2e = l2_ro_mpt;
-             ASSERT(!l2_table_offset(va));
-         }
-         /* NB. Cannot be GLOBAL: guest user mode should not see it. */
-         if ( l1_pg )
--            l2e_write(l2_ro_mpt, l2e_from_page(
-+            l2e_write(pl2e, l2e_from_page(
-                 l1_pg, /*_PAGE_GLOBAL|*/_PAGE_PSE|_PAGE_USER|_PAGE_PRESENT));
--        l2_ro_mpt++;
-+        pl2e++;
      }
- #undef CNT
- #undef MFN
-@@ -613,6 +614,7 @@ void __init paging_init(void)
-         goto nomem;
-     compat_idle_pg_table_l2 = l2_ro_mpt;
-     clear_page(l2_ro_mpt);
-+    pl2e = l2_ro_mpt;
-     /* Allocate and map the compatibility mode machine-to-phys table. */
-     mpt_size = (mpt_size >> 1) + (1UL << (L2_PAGETABLE_SHIFT - 1));
-     if ( mpt_size > RDWR_COMPAT_MPT_VIRT_END - RDWR_COMPAT_MPT_VIRT_START )
-@@ -625,7 +627,7 @@ void __init paging_init(void)
-              sizeof(*compat_machine_to_phys_mapping))
-     BUILD_BUG_ON((sizeof(*frame_table) & ~sizeof(*frame_table)) % \
-                  sizeof(*compat_machine_to_phys_mapping));
--    for ( i = 0; i < (mpt_size >> L2_PAGETABLE_SHIFT); i++, l2_ro_mpt++ )
-+    for ( i = 0; i < (mpt_size >> L2_PAGETABLE_SHIFT); i++, pl2e++ )
+@@ -724,7 +728,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
      {
-         memflags = MEMF_node(phys_to_nid(i <<
-             (L2_PAGETABLE_SHIFT - 2 + PAGE_SHIFT)));
-@@ -647,7 +649,7 @@ void __init paging_init(void)
-                         (i << L2_PAGETABLE_SHIFT)),
-                0xFF, 1UL << L2_PAGETABLE_SHIFT);
-         /* NB. Cannot be GLOBAL as the ptes get copied into per-VM space. */
--        l2e_write(l2_ro_mpt, l2e_from_page(l1_pg, _PAGE_PSE|_PAGE_PRESENT));
-+        l2e_write(pl2e, l2e_from_page(l1_pg, _PAGE_PSE|_PAGE_PRESENT));
+         pl3e = alloc_xen_pagetable();
+         if ( !pl3e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl3e);
+         l4e_write(&rpt[root_table_offset(linear)],
+                   l4e_from_paddr(__pa(pl3e), __PAGE_HYPERVISOR));
+@@ -738,7 +742,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     {
+         pl2e = alloc_xen_pagetable();
+         if ( !pl2e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl2e);
+         l3e_write(pl3e, l3e_from_paddr(__pa(pl2e), __PAGE_HYPERVISOR));
      }
- #undef CNT
- #undef MFN
+@@ -754,7 +758,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     {
+         pl1e = alloc_xen_pagetable();
+         if ( !pl1e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl1e);
+         l2e_write(pl2e, l2e_from_paddr(__pa(pl1e), __PAGE_HYPERVISOR));
+     }
+@@ -775,7 +779,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     else
+         l1e_write(pl1e, l1e_from_pfn(pfn, flags));
+ 
+-    return 0;
++    rc = 0;
++ out:
++    return rc;
+ }
+ 
+ DEFINE_PER_CPU(root_pgentry_t *, root_pgt);
 -- 
 2.24.1.AMZN
 
