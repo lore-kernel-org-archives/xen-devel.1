@@ -2,68 +2,82 @@ Return-Path: <SRS0=cyMZ=6I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 23B0AC2BA19
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 02:11:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CF93DC2BA19
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 03:02:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2ECB2087E
-	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 02:11:25 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9792B2074F
+	for <xen-devel@archiver.kernel.org>; Fri, 24 Apr 2020 03:02:48 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="Oco6dWvY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2ECB2087E
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="C2Uq/Ybm"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9792B2074F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jRnnm-0005qY-NB; Fri, 24 Apr 2020 02:10:50 +0000
+	id 1jRobq-0001Wv-U6; Fri, 24 Apr 2020 03:02:34 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=CzFP=6I=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jRnnl-0005qT-1z
- for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 02:10:49 +0000
-X-Inumbo-ID: cd5292d8-85d0-11ea-b4f4-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=6uIs=6I=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
+ id 1jRobp-0001Wl-U5
+ for xen-devel@lists.xenproject.org; Fri, 24 Apr 2020 03:02:33 +0000
+X-Inumbo-ID: 08c207b6-85d8-11ea-b4f4-bc764e2007e4
+Received: from mail-qk1-x741.google.com (unknown [2607:f8b0:4864:20::741])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id cd5292d8-85d0-11ea-b4f4-bc764e2007e4;
- Fri, 24 Apr 2020 02:10:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=A9DOIxZLG8hCICvTA1wUX0g2FpSRn0N30cLqN7SGTwE=; b=Oco6dWvYry7F1YfupKA1Nu9bj
- GANMR+qxRku0RMtVsGiq/ZeABlZd0okhKz9M0rqHSt80fXWuOtlVh05sYR0NVhLVf8JtDP7JvHRM9
- MbCxREz0L2JLlpeXHifvf/b1a9A/8KRsXOv3/cwbW1qZ+a3y4PiHU//JfrS9rL/6zgy9E=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jRnnf-0002Nt-4R; Fri, 24 Apr 2020 02:10:43 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jRnne-0003dg-QW; Fri, 24 Apr 2020 02:10:42 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jRnne-0006Hc-Ph; Fri, 24 Apr 2020 02:10:42 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-149766-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [ovmf test] 149766: all pass - PUSHED
-X-Osstest-Versions-This: ovmf=d5339c04d7cd47c061ec146a7b062052e3dc56ca
-X-Osstest-Versions-That: ovmf=3a3a3af4a29ee36b1db11842d40b74f2de892a35
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 24 Apr 2020 02:10:42 +0000
+ id 08c207b6-85d8-11ea-b4f4-bc764e2007e4;
+ Fri, 24 Apr 2020 03:02:29 +0000 (UTC)
+Received: by mail-qk1-x741.google.com with SMTP id n143so8857110qkn.8
+ for <xen-devel@lists.xenproject.org>; Thu, 23 Apr 2020 20:02:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :in-reply-to:references;
+ bh=omHxvvNf5Pv3ZOKDgsTQhZY6McIm27KQ9kB0Xgc12vs=;
+ b=C2Uq/YbmHigGFo6KhCvp4kIJ8dmQfhohEld85TPbtshStz29W6ifHSHOBUk0prL1tZ
+ Irawxeq6f+zokpyHBhGd8vxmxb1KQhji2GLpmm45i2z/Q2WwwrCjBiFfxbkL4P9S5Oh2
+ 01REU9C6XE7behfxHiB8dv5QteFbLqJC7ZUeKXiZ5FsOLwxfywS8fKeeif+ZjYqPPSTp
+ ppA1Qejan35IfX7Xc6aINllAg3IzJoLg2mpVAtnZooG46RKV9mm11QUwb/c0EJeFq2b3
+ 1gXYBDgYk3J3QVSSHyEJUuXUiq0IjdL/F0+MXCskDxdQzpr4uh8AGzR+9uDdXKxCtbtZ
+ yr6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:in-reply-to:references;
+ bh=omHxvvNf5Pv3ZOKDgsTQhZY6McIm27KQ9kB0Xgc12vs=;
+ b=tyW8IZDIrV+HcsP14e3tXf6F5laJfRbvZTZCcF71lm0P6ZROxHe8cR419W84FpITK6
+ Zy4yF7mrLgLqEALEFZh7uprrCjVR80p5VQAvCkbm17coB7TopEUjHXAXQ3taSEPPcnjE
+ b7Sw5yovNS+cMGiEQReKFh6vdb8ef+Z18doUfrSwyMu2GNvwNSRdeFrKkuistnhsCDnb
+ PjhEm/pclaDH3cPdNe4A2Lq6jsNNLxK32QlEu8lqGshVxlievRdcLMGU3974tGF6WwX5
+ OJmZpzW4C/hqJg5gON2oGSBYnftQAZYtjuXaTgzTl4uY1QfBHclUrGhJf8etCOViSLal
+ D0mA==
+X-Gm-Message-State: AGi0PublMr6ysNQlMq+ItzAVq+n7oBuShGIsS3r6DJHfLvz9IeK3wlaJ
+ 3J00Cz6J750YXr53KhjcCHdKwKzQcYs=
+X-Google-Smtp-Source: APiQypJxMngb7/CVOcVv3eCLHUwJvwuuVqm7Eg3mvEw1Buwl3RBkj+MxsJv9A9JxHPigGo4k5h25YA==
+X-Received: by 2002:ae9:ef93:: with SMTP id d141mr6908540qkg.311.1587697348777; 
+ Thu, 23 Apr 2020 20:02:28 -0700 (PDT)
+Received: from six.lan (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
+ by smtp.gmail.com with ESMTPSA id i6sm2836197qkk.123.2020.04.23.20.02.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Apr 2020 20:02:28 -0700 (PDT)
+From: Nick Rosbrook <rosbrookn@gmail.com>
+X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v2 1/1] golang/xenlight: add NameToDomid and DomidToName util
+ functions
+Date: Thu, 23 Apr 2020 23:02:24 -0400
+Message-Id: <73e709cf0a87f3728de438e4a3b849462fd098ac.1587682041.git.rosbrookn@ainfosec.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1587682041.git.rosbrookn@ainfosec.com>
+References: <cover.1587682041.git.rosbrookn@ainfosec.com>
+In-Reply-To: <cover.1587682041.git.rosbrookn@ainfosec.com>
+References: <cover.1587682041.git.rosbrookn@ainfosec.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,57 +88,92 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 149766 ovmf real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/149766/
+Many exported functions in xenlight require a domid as an argument. Make
+it easier for package users to use these functions by adding wrappers
+for the libxl utility functions libxl_name_to_domid and
+libxl_domid_to_name.
 
-Perfect :-)
-All tests in this flight passed as required
-version targeted for testing:
- ovmf                 d5339c04d7cd47c061ec146a7b062052e3dc56ca
-baseline version:
- ovmf                 3a3a3af4a29ee36b1db11842d40b74f2de892a35
+Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
+---
+ tools/golang/xenlight/xenlight.go | 38 ++++++++++++++++++++++++++++++-
+ 1 file changed, 37 insertions(+), 1 deletion(-)
 
-Last test of basis   149747  2020-04-23 07:21:34 Z    0 days
-Testing same since   149766  2020-04-23 14:40:11 Z    0 days    1 attempts
+diff --git a/tools/golang/xenlight/xenlight.go b/tools/golang/xenlight/xenlight.go
+index 6b4f492550..d1d30b63e1 100644
+--- a/tools/golang/xenlight/xenlight.go
++++ b/tools/golang/xenlight/xenlight.go
+@@ -21,13 +21,13 @@ package xenlight
+ #cgo LDFLAGS: -lxenlight -lyajl -lxentoollog
+ #include <stdlib.h>
+ #include <libxl.h>
++#include <libxl_utils.h>
+ 
+ static const libxl_childproc_hooks childproc_hooks = { .chldowner = libxl_sigchld_owner_mainloop };
+ 
+ void xenlight_set_chldproc(libxl_ctx *ctx) {
+ 	libxl_childproc_setmode(ctx, &childproc_hooks, NULL);
+ }
+-
+ */
+ import "C"
+ 
+@@ -75,6 +75,10 @@ var libxlErrors = map[Error]string{
+ 	ErrorFeatureRemoved:               "Feature removed",
+ }
+ 
++const (
++	DomidInvalid Domid = ^Domid(0)
++)
++
+ func (e Error) Error() string {
+ 	if s, ok := libxlErrors[e]; ok {
+ 		return s
+@@ -190,6 +194,38 @@ func (ctx *Context) Close() error {
+ 
+ type Domid uint32
+ 
++// NameToDomid returns the Domid for a domain, given its name, if it exists.
++//
++// NameToDomid does not guarantee that the domid associated with name at
++// the time NameToDomid is called is the same as the domid associated with
++// name at the time NameToDomid returns.
++func (Ctx *Context) NameToDomid(name string) (Domid, error) {
++	var domid C.uint32_t
++
++	cname := C.CString(name)
++	defer C.free(unsafe.Pointer(cname))
++
++	if ret := C.libxl_name_to_domid(Ctx.ctx, cname, &domid); ret != 0 {
++		return DomidInvalid, Error(ret)
++	}
++
++	return Domid(domid), nil
++}
++
++// DomidToName returns the name for a domain, given its domid. If there
++// is no domain with the given domid, DomidToName will return the empty
++// string.
++//
++// DomidToName does not guarantee that the name (if any) associated with domid
++// at the time DomidToName is called is the same as the name (if any) associated
++// with domid at the time DomidToName returns.
++func (Ctx *Context) DomidToName(domid Domid) string {
++	cname := C.libxl_domid_to_name(Ctx.ctx, C.uint32_t(domid))
++	defer C.free(unsafe.Pointer(cname))
++
++	return C.GoString(cname)
++}
++
+ // Devid is a device ID.
+ type Devid int
+ 
+-- 
+2.17.1
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Hao A Wu <hao.a.wu@intel.com>
-
-jobs:
- build-amd64-xsm                                              pass    
- build-i386-xsm                                               pass    
- build-amd64                                                  pass    
- build-i386                                                   pass    
- build-amd64-libvirt                                          pass    
- build-i386-libvirt                                           pass    
- build-amd64-pvops                                            pass    
- build-i386-pvops                                             pass    
- test-amd64-amd64-xl-qemuu-ovmf-amd64                         pass    
- test-amd64-i386-xl-qemuu-ovmf-amd64                          pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/osstest/ovmf.git
-   3a3a3af4a2..d5339c04d7  d5339c04d7cd47c061ec146a7b062052e3dc56ca -> xen-tested-master
 
