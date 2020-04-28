@@ -2,72 +2,69 @@ Return-Path: <SRS0=URyG=6M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 03FFCC83000
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 10:23:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 281FEC83000
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 10:40:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C558E206C0
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 10:23:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E94B5206D6
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 10:40:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="TtT4g4Tm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C558E206C0
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=puzio.waw.pl header.i=@puzio.waw.pl header.b="vSNw6kM1"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E94B5206D6
+Authentication-Results: mail.kernel.org; dmarc=fail (p=quarantine dis=none) header.from=puzio.waw.pl
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTNOd-0006pA-C4; Tue, 28 Apr 2020 10:23:23 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=c5nG=6M=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jTNOc-0006p5-CC
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 10:23:22 +0000
-X-Inumbo-ID: 48d53462-893a-11ea-9848-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 48d53462-893a-11ea-9848-12813bfff9fa;
- Tue, 28 Apr 2020 10:23:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WdL+tRd89XoXFlZNEtfi3nhZsBi/cccWkhKZhUzmap4=; b=TtT4g4Tm7N8qC8Ecl8715+TUne
- jZnduYwhZ2c/L9gpeINZngTeIhuxjtdRAvg+KVh4vjguJc1QSu2Y2FYcgnEHWH3lmFhU6co3cp3sz
- VCxDkEHsZn5C0nq+reR6WCdWjVhGZoYR16V0PoRqKQ0ex4CClsRuja4Ut8/ONsZw2heY=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jTNOY-0000SX-W2; Tue, 28 Apr 2020 10:23:18 +0000
-Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <julien@xen.org>)
- id 1jTNOY-0006Om-HW; Tue, 28 Apr 2020 10:23:18 +0000
-Subject: Re: [PATCH v4] docs/designs: re-work the xenstore migration
- document...
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
- Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org
-References: <20200427155035.668-1-paul@xen.org>
- <7ab25832-66e6-020f-b343-059f21771054@xen.org>
- <f13de8bc-ca5d-2341-3797-b34f9f2c70ef@suse.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <2087b3dd-7d2c-3ab3-d6ce-a4d132f7ec4d@xen.org>
-Date: Tue, 28 Apr 2020 11:23:10 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.7.0
+	id 1jTNeV-0007tC-QW; Tue, 28 Apr 2020 10:39:47 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=bVBP=6M=puzio.waw.pl=artur@srs-us1.protection.inumbo.net>)
+ id 1jTMjF-0002M8-8j
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 09:40:38 +0000
+X-Inumbo-ID: 4eea4bcc-8934-11ea-ae69-bc764e2007e4
+Received: from puzio.waw.pl (unknown [2001:41d0:401:3100::3f29])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4eea4bcc-8934-11ea-ae69-bc764e2007e4;
+ Tue, 28 Apr 2020 09:40:34 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by puzio.waw.pl (Postfix) with ESMTP id E4B4F1C492;
+ Tue, 28 Apr 2020 11:40:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=puzio.waw.pl;
+ s=default; t=1588066846;
+ bh=JkOniP87jULWq0LQ3Z7u0q7SiZfMusLTsWD8rZJuaqs=;
+ h=Subject:To:Cc:References:From:Date:In-Reply-To;
+ b=vSNw6kM11+eO/ZFLrZw/9SUpJepaNyK2VBwUFEBG5g5Pm7I+TZPVYuyfyGRW7pWpi
+ CkIv0StlHxScBGYAJbx2FQq4o9jGRGVPciTiU6pw+u/vrnAzegj2y4rnmSwQr0ri8w
+ W0Pgi3HWdn6c48E/q093H8spQ3hjf/weanLIUubkKj6FcOfmdcohRHO6FFNjA+DgQG
+ oSWhjVvP2JQsWjBG20Ftba4JOHTiP8IGeHmMjyjFXxN9JptIrXO3wi87xCsjM1J0dP
+ 4UL1aJcJyWrxPeIbR5hb3ld2ph9rMDX+22yv7/nFAeKsyuNWqlV/jrO8kWx5LE1WM1
+ 6Fz6iuHRwCxmA==
+X-Fuglu-Suspect: b4cc723c9a65426cad6da44d8fdc13c1
+X-Fuglu-Spamstatus: NO
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ (Authenticated sender: artur@puzio.waw.pl)
+ by puzio.waw.pl (Postfix) with ESMTPSA;
+ Tue, 28 Apr 2020 11:40:41 +0200 (CEST)
+Subject: Re: [PATCH 1/2] Fix undefined behaviour
+To: paul@xen.org, 'Grzegorz Uriasz' <gorbak25@gmail.com>, qemu-devel@nongnu.org
+References: <20200428062847.7764-1-gorbak25@gmail.com>
+ <20200428062847.7764-2-gorbak25@gmail.com>
+ <000001d61d34$6c0218f0$44064ad0$@xen.org>
+From: Artur Puzio <artur@puzio.waw.pl>
+Message-ID: <90a8b709-c506-92e2-800c-e1558f18df94@puzio.waw.pl>
+Date: Tue, 28 Apr 2020 11:40:46 +0200
 MIME-Version: 1.0
-In-Reply-To: <f13de8bc-ca5d-2341-3797-b34f9f2c70ef@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <000001d61d34$6c0218f0$44064ad0$@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US-large
+X-Mailman-Approved-At: Tue, 28 Apr 2020 10:39:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,134 +75,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: 'Stefano Stabellini' <sstabellini@kernel.org>, jakub@bartmin.ski,
+ marmarek@invisiblethingslab.com, 'Anthony Perard' <anthony.perard@citrix.com>,
+ j.nowak26@student.uw.edu.pl, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Juergen,
-
-On 28/04/2020 11:10, Jürgen Groß wrote:
-> On 28.04.20 11:05, Julien Grall wrote:
->>> -where tx_id is the non-zero identifier values of an open transaction.
->>> +| Field     | Description                                       |
->>> +|-----------|---------------------------------------------------|
->>> +| `domid`   | The domain-id that owns the shared page           |
->>> +|           |                                                   |
->>> +| `tdomid`  | The domain-id that `domid` acts on behalf of if   |
->>> +|           | it has been subject to an SET_TARGET              |
->>> +|           | operation [2] or DOMID_INVALID [3] otherwise      |
->>> +|           |                                                   |
->>> +| `flags`   | Must be zero                                      |
->>> +|           |                                                   |
->>> +| `evtchn`  | The port number of the interdomain channel used   |
->>> +|           | by `domid` to communicate with xenstored          |
->>> +|           |                                                   |
->>> +| `mfn`     | The MFN of the shared page for a live update or   |
->>> +|           | ~0 (i.e. all bits set) otherwise                  |
->>> -### Protocol Extension
->>> +Since the ABI guarantees that entry 1 in `domid`'s grant table will 
->>> always
->>> +contain the GFN of the shared page, so for a live update `mfn` can 
->>> be used to
->>> +give confidence that `domid` has not been re-cycled during the update.
+On 28.04.2020 10:10, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Grzegorz Uriasz <gorbak25@gmail.com>
+>> Sent: 28 April 2020 07:29
+>> To: qemu-devel@nongnu.org
+>> Cc: Grzegorz Uriasz <gorbak25@gmail.com>; marmarek@invisiblethingslab.com; artur@puzio.waw.pl;
+>> jakub@bartmin.ski; j.nowak26@student.uw.edu.pl; Stefano Stabellini <sstabellini@kernel.org>; Anthony
+>> Perard <anthony.perard@citrix.com>; Paul Durrant <paul@xen.org>; xen-devel@lists.xenproject.org
+>> Subject: [PATCH 1/2] Fix undefined behaviour
 >>
->> I am confused, there is no way a XenStored running in an Arm domain 
->> can map the MFN of the shared page. So how is this going to work out?
-> 
-> I guess this will be a MFN for PV guests and a guest PFN else.
+>> Signed-off-by: Grzegorz Uriasz <gorbak25@gmail.com>
+> I think we need more of a commit comment for both this and patch #2 to explain why you are making the changes.
+>
+>   Paul 
 
-If we use Xen terminology (xen/include/xen/mm.h), this would be a GFN.
+I agree Grzegorz should improve the commit messages. In the mean time
+see email with subject "[PATCH 0/2] Fix QEMU crashes when passing IGD to
+a guest VM under XEN", it contains quite detailed explanation for both
+"Fix undefined behaviour" and "Improve legacy vbios handling" patches.
 
-> 
->>
->> [...]
->>
->>> -START_DOMAIN_TRANSACTION    <domid>|<transid>|
->>> +    0       1       2       3    octet
->>> ++-------+-------+-------+-------+
->>> +| conn-id                       |
->>> ++-------------------------------+
->>> +| tx-id                         |
->>> ++---------------+---------------+
->>> +| path-len      | value-len     |
->>> ++---------------+---------------+
->>> +| access        | perm-count    |
->>> ++---------------+---------------+
->>> +| perm1                         |
->>> ++-------------------------------+
->>> +...
->>> ++-------------------------------+
->>> +| permN                         |
->>> ++---------------+---------------+
->>> +| path
->>> +...
->>> +| value
->>> +...
->>> +```
->>> +
->>> +
->>> +| Field        | Description                                    |
->>> +|--------------|------------------------------------------------|
->>> +| `conn-id`    | If this value is non-zero then this record     |
->>> +|              | related to a pending transaction               |
->>
->> If conn-id is 0, how do you know the owner of the node?
-> 
-> The first permission entry's domid is the owner.
+Artur Puzio
 
-I think this should be spell out in the specification.
-
-> 
->>
->>> +|              |                                                |
->>> +| `tx-id`      | This value should be ignored if `conn-id` is   |
->>> +|              | zero. Otherwise it specifies the id of the     |
->>> +|              | pending transaction                            |
->>> +|              |                                                |
->>> +| `path-len`   | The length (in octets) of `path` including the |
->>> +|              | NUL terminator                                 |
->>> +|              |                                                |
->>> +| `value-len`  | The length (in octets) of `value` (which will  |
->>> +|              | be zero for a deleted node)                    |
->>> +|              |                                                |
->>> +| `access`     | This value should be ignored if this record    |
->>> +|              | does not relate to a pending transaction,      |
->>> +|              | otherwise it specifies the accesses made to    |
->>> +|              | the node and hence is a bitwise OR of:         |
->>> +|              |                                                |
->>> +|              | 0x0001: read                                   |
->>> +|              | 0x0002: written                                |
->>> +|              |                                                |
->>> +|              | The value will be zero for a deleted node      |
->>> +|              |                                                |
->>> +| `perm-count` | The number (N) of node permission specifiers   |
->>> +|              | (which will be 0 for a node deleted in a       |
->>> +|              | pending transaction)                           |
->>> +|              |                                                |
->>> +| `perm1..N`   | A list of zero or more node permission         |
->>> +|              | specifiers (see below)                         |
->>
->> This is a bit odd to start at one. Does it mean perm0 exists and not 
->> preserved?
-> 
-> Why? perm0 does not exist. If you have N permissions 1..N is just fine.
-> If you have no permissions (N=0) you won't have any permX entry.
-> 
-> In theory you could say perm0..N-1, but this would result in perm0..-1
-> for N=0 which would be really odd.
-
-As it is odd to me to start at 1 (I am used to index starting at 0) ;). 
-The more it wasn't clear how you would specify the owner. So I thought 
-perm0 had a specific meaning.
-
-If you clarify perm1 is the owner, then it may make easier to figure out 
-that perm0 doesn't exist.
-
-Cheers,
-
--- 
-Julien Grall
 
