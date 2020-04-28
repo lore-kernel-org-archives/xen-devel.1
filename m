@@ -2,49 +2,50 @@ Return-Path: <SRS0=URyG=6M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 056FBC83000
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 13:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF366C83009
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 13:51:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D07C2206B9
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 13:48:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D07C2206B9
+	by mail.kernel.org (Postfix) with ESMTPS id 966EF206B9
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 13:51:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 966EF206B9
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTQb2-00025X-JQ; Tue, 28 Apr 2020 13:48:24 +0000
+	id 1jTQdQ-0002ov-2x; Tue, 28 Apr 2020 13:50:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/MZc=6M=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jTQb1-00025S-G8
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 13:48:23 +0000
-X-Inumbo-ID: ed009fba-8956-11ea-b07b-bc764e2007e4
+ id 1jTQdO-0002oq-Nm
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 13:50:50 +0000
+X-Inumbo-ID: 44d6c6ec-8957-11ea-b07b-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ed009fba-8956-11ea-b07b-bc764e2007e4;
- Tue, 28 Apr 2020 13:48:22 +0000 (UTC)
+ id 44d6c6ec-8957-11ea-b07b-bc764e2007e4;
+ Tue, 28 Apr 2020 13:50:50 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id ABA53ACD0;
- Tue, 28 Apr 2020 13:48:20 +0000 (UTC)
-Subject: Re: [XEN PATCH v5 09/16] xen/build: use if_changed on built_in.o
+ by mx2.suse.de (Postfix) with ESMTP id 0789BAC64;
+ Tue, 28 Apr 2020 13:50:47 +0000 (UTC)
+Subject: Re: [XEN PATCH v5 11/16] xen/build: factorise generation of the
+ linker scripts
 To: Anthony PERARD <anthony.perard@citrix.com>
 References: <20200421161208.2429539-1-anthony.perard@citrix.com>
- <20200421161208.2429539-10-anthony.perard@citrix.com>
+ <20200421161208.2429539-12-anthony.perard@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6c6d20f5-d8ab-ee15-d2fc-e19b1dced99a@suse.com>
-Date: Tue, 28 Apr 2020 15:48:13 +0200
+Message-ID: <5b2caf05-506d-7d61-cd41-375c069a0433@suse.com>
+Date: Tue, 28 Apr 2020 15:50:47 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200421161208.2429539-10-anthony.perard@citrix.com>
+In-Reply-To: <20200421161208.2429539-12-anthony.perard@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -61,59 +62,29 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
+ George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 21.04.2020 18:12, Anthony PERARD wrote:
-> In the case where $(obj-y) is empty, we also replace $(c_flags) by
-> $(XEN_CFLAGS) to avoid generating an .%.d dependency file. This avoid
-> make trying to include %.h file in the ld command if $(obj-y) isn't
-> empty anymore on a second run.
+> In Arm and X86 makefile, generating the linker script is the same, so
+> we can simply have both call the same macro.
+> 
+> We need to add *.lds files into extra-y so that Rules.mk can find the
+> .*.cmd dependency file and load it.
+> 
+> Change made to the command line:
+> - Use of $(CPP) instead of $(CC) -E
+> - Remove -Ui386.
+>   We don't compile Xen for i386 anymore, so that macro is never
+>   defined. Also it doesn't make sense on Arm.
+> - Use $(cpp_flags) which simply filter -Wa,% options from $(a_flags).
 > 
 > Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 
+For the non-Arm bits
 Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Personally I'd prefer ...
-
-> --- a/xen/Rules.mk
-> +++ b/xen/Rules.mk
-> @@ -130,15 +130,24 @@ include $(BASEDIR)/arch/$(TARGET_ARCH)/Rules.mk
->  c_flags += $(CFLAGS-y)
->  a_flags += $(CFLAGS-y) $(AFLAGS-y)
->  
-> -built_in.o: $(obj-y) $(extra-y)
-> -ifeq ($(obj-y),)
-> -	$(CC) $(c_flags) -c -x c /dev/null -o $@
-> -else
-> +quiet_cmd_ld_builtin = LD      $@
->  ifeq ($(CONFIG_LTO),y)
-> -	$(LD_LTO) -r -o $@ $(filter-out $(extra-y),$^)
-> +cmd_ld_builtin = \
-> +    $(LD_LTO) -r -o $@ $(filter-out $(extra-y),$(real-prereqs))
->  else
-> -	$(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out $(extra-y),$^)
-> +cmd_ld_builtin = \
-> +    $(LD) $(XEN_LDFLAGS) -r -o $@ $(filter-out $(extra-y),$(real-prereqs))
->  endif
-> +
-> +quiet_cmd_cc_builtin = LD      $@
-> +cmd_cc_builtin = \
-> +    $(CC) $(XEN_CFLAGS) -c -x c /dev/null -o $@
-> +
-> +built_in.o: $(obj-y) $(extra-y) FORCE
-> +ifeq ($(obj-y),)
-> +	$(call if_changed,cc_builtin)
-> +else
-> +	$(call if_changed,ld_builtin)
->  endif
-
-...
-
-   $(call if_changed,$(if $(obj-y),ld,cc)_builtin)
-
-but perhaps I'm the only one.
-
-Jan
 
