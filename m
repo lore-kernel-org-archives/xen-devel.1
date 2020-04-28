@@ -2,68 +2,79 @@ Return-Path: <SRS0=URyG=6M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8D715C83000
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 09:06:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 17E67C83000
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 09:44:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8A7ED20663
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 09:06:09 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id DA7EA206D7
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 09:44:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="fsZ4eaJR"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A7ED20663
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="rEMTVota"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA7EA206D7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTMBa-0007OR-9t; Tue, 28 Apr 2020 09:05:50 +0000
+	id 1jTMm9-0002Ud-Az; Tue, 28 Apr 2020 09:43:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=c5nG=6M=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jTMBZ-0007OM-Eb
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 09:05:49 +0000
-X-Inumbo-ID: 73ac1288-892f-11ea-ae69-bc764e2007e4
+ id 1jTMm7-0002UY-LQ
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 09:43:35 +0000
+X-Inumbo-ID: ba8ee572-8934-11ea-ae69-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 73ac1288-892f-11ea-ae69-bc764e2007e4;
- Tue, 28 Apr 2020 09:05:48 +0000 (UTC)
+ id ba8ee572-8934-11ea-ae69-bc764e2007e4;
+ Tue, 28 Apr 2020 09:43:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
  MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=7Ex4oGeyJtMHGteGUUOu2sfpGBhX9fsCbpakoUC4KV4=; b=fsZ4eaJRUAfJq/t66c3nZc3KnW
- eatKSV/D7Vos2beo/FYJE+oKL368WrNDGsPhg78pI6Bofulj5Z/W4ym5+rPIhBc0M1YBjbTWfWKu4
- ZCCFuQ2guTv84DWazTRQoDdVL8SZ7Ejvcggqq1hMqwago8SEkd/8cmjeSoYtrtiiEeQc=;
+ bh=CLxcQIFLF32J9+tiUSzaNz79a2kscluBH/BRJRCbHHE=; b=rEMTVotaNXsDQvKG7maLHzYgyO
+ 6DC2zdlK4lVW+w1Qc/5089DuxuFtq8bHur3up6Qg/VzH8u5bRQZjdYxMfkvr6GGXHRKH+AcOHV/wd
+ NGUgTELLOx6tGPKmY6e0D3jE+MSdPwfW7DPnBKLPvpmjsj5dBP8X3QLihOsI5uN8/AxA=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jTMBV-0007DN-3O; Tue, 28 Apr 2020 09:05:45 +0000
-Received: from [54.239.6.187] (helo=a483e7b01a66.ant.amazon.com)
+ id 1jTMm6-0007xi-NI; Tue, 28 Apr 2020 09:43:34 +0000
+Received: from [54.239.6.188] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jTMBU-0000W3-Nl; Tue, 28 Apr 2020 09:05:45 +0000
-Subject: Re: [PATCH v4] docs/designs: re-work the xenstore migration
- document...
-To: Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org
-References: <20200427155035.668-1-paul@xen.org>
+ id 1jTMm6-0003Kj-9S; Tue, 28 Apr 2020 09:43:34 +0000
+Subject: Re: [PATCH v7 08/12] xen: add /buildinfo/config entry to hypervisor
+ filesystem
+To: Jan Beulich <jbeulich@suse.com>, George Dunlap <George.Dunlap@citrix.com>
+References: <20200402154616.16927-1-jgross@suse.com>
+ <20200402154616.16927-9-jgross@suse.com>
+ <19f84540-6b49-f99d-805a-e07f56330f31@suse.com>
+ <b9ddd1fb-d868-bb69-3b6b-27531beda2fa@suse.com>
+ <f7d1f3aa-3a7e-fcb2-3163-5e67756e8452@suse.com>
+ <17d65095-a51e-2e00-38ee-7c1c83d2bb99@suse.com>
+ <51e0f0d2-f9ce-83fd-79fa-ae4805356612@suse.com>
+ <31c7f4fe-847c-96f5-e598-dba99b0bb61a@suse.com>
+ <085E1F72-EC22-43D6-8F7E-EDC132CC787D@citrix.com>
+ <fb0e92cc-102f-7f87-1ad6-f3ccce1eee60@suse.com>
+ <064958B4-1FCC-4300-A98A-7A1D608376F8@citrix.com>
+ <23606595-8ce0-5151-d800-1dc0d97513d1@suse.com>
 From: Julien Grall <julien@xen.org>
-Message-ID: <7ab25832-66e6-020f-b343-059f21771054@xen.org>
-Date: Tue, 28 Apr 2020 10:05:42 +0100
+Message-ID: <304ab794-4d04-ae0d-d644-a7ddb0f23bf4@xen.org>
+Date: Tue, 28 Apr 2020 10:43:32 +0100
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
  Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200427155035.668-1-paul@xen.org>
+In-Reply-To: <23606595-8ce0-5151-d800-1dc0d97513d1@suse.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,230 +85,78 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+ Andrew Cooper <Andrew.Cooper3@citrix.com>,
+ Ian Jackson <Ian.Jackson@citrix.com>,
+ xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Paul,
+Hi Jan,
 
-On 27/04/2020 16:50, Paul Durrant wrote:
-> diff --git a/docs/designs/xenstore-migration.md b/docs/designs/xenstore-migration.md
-> index 6ab351e8fe..51d8b85171 100644
-> --- a/docs/designs/xenstore-migration.md
-> +++ b/docs/designs/xenstore-migration.md
-> @@ -3,254 +3,400 @@
->   ## Background
->   
->   The design for *Non-Cooperative Migration of Guests*[1] explains that extra
-> -save records are required in the migrations stream to allow a guest running
-> -PV drivers to be migrated without its co-operation. Moreover the save
-> -records must include details of registered xenstore watches as well as
-> -content; information that cannot currently be recovered from `xenstored`,
-> -and hence some extension to the xenstore protocol[2] will also be required.
-> -
-> -The *libxenlight Domain Image Format* specification[3] already defines a
-> -record type `EMULATOR_XENSTORE_DATA` but this is not suitable for
-> -transferring xenstore data pertaining to the domain directly as it is
-> -specified such that keys are relative to the path
-> -`/local/domain/$dm_domid/device-model/$domid`. Thus it is necessary to
-> -define at least one new save record type.
-> +save records are required in the migrations stream to allow a guest running PV
-> +drivers to be migrated without its co-operation. Moreover the save records must
-> +include details of registered xenstore watches as well ascontent; information
+On 28/04/2020 09:39, Jan Beulich wrote:
+> On 28.04.2020 10:24, George Dunlap wrote:
+>>> On Apr 28, 2020, at 8:20 AM, Jan Beulich <jbeulich@suse.com> wrote:
+>>> On 27.04.2020 18:25, George Dunlap wrote:
+>>>> If Jan is OK with it simply being outside CONFIG_EXPERT, then great.  But if he insists on some kind of testing for it to be outside of CONFIG_EXPERT, then again, the people who want it to be security supported should be the ones who do the work to make it happen.
+>>>
+>>> I don't understand this part, I'm afraid: Without a config option,
+>>> the code is going to be security supported as long as it doesn't
+>>> get marked otherwise (experimental or what not). With an option
+>>> depending on EXPERT, what would become security unsupported is the
+>>> non-default (i.e. disabled) setting. There's not a whole lot to
+>>> test there, it's merely a formal consequence of our general rules.
+>>> (Of course, over time dependencies of other code may develop on
+>>> the information being available e.g. to Dom0 userland. Just like
+>>> there's Linux userland code assuming the kernel config is
+>>> available in certain ways [I don't necessarily mean the equivalent
+>>> of hypfs here], to then use it in what I'd call abusive ways in at
+>>> least some cases.)
+>>
+>> Here’s an argument you might make:
+>>
+>> “As a member of the security team, I don’t want to be on the hook for issuing XSAs for code which isn’t at least smoke-tested.  Therefore, I oppose any patch adding CONFIG_HYPFS outside of CONFIG_EXPERT, *unless* there is a concrete plan for getting regular testing for CONFIG_HYPFS=n.”
+>>
+>> I’m not saying that’s an argument you *should* make.  But personally I don’t have a strong argument against such an argument. So, it seems to me, if you did make it, you have a reasonable chance of carrying your point.
+>>
+>> Now consider this hypothetical universe where you made that argument and nobody opposed it.  In order to get a particular feature (CONFIG_HYPFS=n security supported), there is extra work that needs to be done (getting CONFIG_HYPFS=n tested regularly).  My point was, the expectation should be that the extra work will be done by the people who want or benefit from the feature; the series shouldn’t be blocked until Juergen implements CONFIG_HYPFS=n testing (since he doesn’t personally have a stake in that feature).
+>>
+>> Now obviously, doing work to help someone else out in the community is of course a good thing to do; it builds goodwill, uses our aggregate resources more efficiently, and makes our community more enjoyable to work with.  But the goodwill primarily comes from the fact that it was done as a voluntary choice, not as a requirement.
+>>
+>> Juergen was balking at having to do what he saw as extra work to implement CONFIG_HYPFS.  I wanted to make it clear that even though I see value in having CONFIG_HYPFS, *he* doesn’t have to do the work if he doesn’t want to (although it would certainly be appreciated if he did).  And this paragraph was extending the same principle into the hypothetical universe where someone insisted that CONFIG_HYPFS=n had to be tested before being security supported.
+>>
+>> Hope that makes sense. :-)
+> 
+> Yes, it does, thanks for the clarification. I can see what you describe
+> as a valid perspective to take, but really in my request to Jürgen I
+> took another: Now that we have Kconfig, additions of larger bodies of
+> code (possibly also just in terms of binary size) should imo generally
+> be questioned whether they want/need to be built for everyone. I.e. it
+> is not to be left to people being worried about binary sizes to arrange
+> for things to not be built, but for people contributing new but not
+> entirely essential code to consider making it option from the very
+> beginning.
 
-s/ascontent/as content/
+I like the idea to have a more configurable Xen but this also comes at 
+the expense of the testing/support.
 
-[...]
+At the moment, we are getting around the problem by gating the new 
+config options with CONFIG_EXPERT. I have stoppped counting the number 
+of time I sweared because my config got rewritten when using 'make 
+clean' or explain to someone else how to use it.
 
-> +### END
-> +
-> +The end record marks the end of the image, and is the final record
-> +in the stream.
->   
->   ```
-> -    0       1       2       3     octet
-> -+-------+-------+-------+-------+
-> -| NODE_DATA                     |
-> -+-------------------------------+
-> -| path length                   |
-> -+-------------------------------+
-> -| path data                     |
-> -...
-> -| pad (0 to 3 octets)           |
-> -+-------------------------------+
-> -| perm count (N)                |
-> -+-------------------------------+
-> -| perm0                         |
-> -+-------------------------------+
-> -...
-> -+-------------------------------+
-> -| permN                         |
-> -+-------------------------------+
-> -| value length                  |
-> -+-------------------------------+
-> -| value data                    |
-> -...
-> -| pad (0 to 3 octets)           |
-> -+-------------------------------+
-> +    0       1       2       3       4       5       6       7    octet
-> ++-------+-------+-------+-------+-------+-------+-------+-------+
->   ```
->   
-> -where perm0..N are formatted as follows:
->   
-> +The end record contains no fields; its body length is 0.
-> +
-> +\pagebreak
-> +
-> +### GLOBAL_DATA
-> +
-> +This record is only relevant for live update. It contains details of global
-> +xenstored state that needs to be restored.
+As it stands, CONFIG_EXPERT is unusable and most likely anything behind 
+it will rot quite quickly. So if we want to add more stuff behind it, 
+then I would suggest to make it more accessible so any developper can 
+experiment with it.
 
-Reading this paragraph, it sounds like GLOBAL_DATA should always be 
-present in the liveupdate stream. However ...
-
-[...]
-
-> -path length and value length are specified in octets (excluding the NUL
-> -terminator of the path). perm should be one of the ASCII values `w`, `r`,
-> -`b` or `n` as described in [2]. All pad values should be 0.
-> -All paths should be absolute (i.e. start with `/`) and as described in
-> -[2].
-> +| Field          | Description                                  |
-> +|----------------|----------------------------------------------|
-> +| `rw-socket-fd` | The file descriptor of the socket accepting  |
-> +|                | read-write connections                       |
-> +|                |                                              |
-> +| `ro-socket-fd` | The file descriptor of the socket accepting  |
-> +|                | read-only connections                        |
->   
-> +xenstored will resume in the original process context. Hence `rw-socket-fd` and
-> +`ro-socket-fd` simply specify the file descriptors of the sockets.
-
-... sockets may not always be available in XenStored. So should we 
-reserve a value for "not in-use socket"?
-
-[...]
-
-> -wpath length and token length are specified in octets (excluding the NUL
-> -terminator). The wpath should be as described for the `WATCH` operation in
-> -[2]. The token is an arbitrary string of octets not containing any NUL
-> -values.
->   
-> +| Field       | Description                                     |
-> +|-------------|-------------------------------------------------|
-> +| `conn-id`   | A non-zero number used to identify this         |
-> +|             | connection in subsequent connection-specific    |
-> +|             | records                                         |
-> +|             |                                                 |
-> +| `conn-type` | 0x0000: shared ring                             |
-> +|             | 0x0001: socket                                  |
-
-I would write "0x0002 - 0xFFFF: reserved for future use" to match the 
-rest of the specification.
-
-[...]
-
-> -where tx_id is the non-zero identifier values of an open transaction.
->   
-> +| Field     | Description                                       |
-> +|-----------|---------------------------------------------------|
-> +| `domid`   | The domain-id that owns the shared page           |
-> +|           |                                                   |
-> +| `tdomid`  | The domain-id that `domid` acts on behalf of if   |
-> +|           | it has been subject to an SET_TARGET              |
-> +|           | operation [2] or DOMID_INVALID [3] otherwise      |
-> +|           |                                                   |
-> +| `flags`   | Must be zero                                      |
-> +|           |                                                   |
-> +| `evtchn`  | The port number of the interdomain channel used   |
-> +|           | by `domid` to communicate with xenstored          |
-> +|           |                                                   |
-> +| `mfn`     | The MFN of the shared page for a live update or   |
-> +|           | ~0 (i.e. all bits set) otherwise                  |
->   
-> -### Protocol Extension
-> +Since the ABI guarantees that entry 1 in `domid`'s grant table will always
-> +contain the GFN of the shared page, so for a live update `mfn` can be used to
-> +give confidence that `domid` has not been re-cycled during the update.
-
-I am confused, there is no way a XenStored running in an Arm domain can 
-map the MFN of the shared page. So how is this going to work out?
-
-[...]
-
-> -START_DOMAIN_TRANSACTION    <domid>|<transid>|
-> +    0       1       2       3    octet
-> ++-------+-------+-------+-------+
-> +| conn-id                       |
-> ++-------------------------------+
-> +| tx-id                         |
-> ++---------------+---------------+
-> +| path-len      | value-len     |
-> ++---------------+---------------+
-> +| access        | perm-count    |
-> ++---------------+---------------+
-> +| perm1                         |
-> ++-------------------------------+
-> +...
-> ++-------------------------------+
-> +| permN                         |
-> ++---------------+---------------+
-> +| path
-> +...
-> +| value
-> +...
-> +```
-> +
-> +
-> +| Field        | Description                                    |
-> +|--------------|------------------------------------------------|
-> +| `conn-id`    | If this value is non-zero then this record     |
-> +|              | related to a pending transaction               |
-
-If conn-id is 0, how do you know the owner of the node?
-
-> +|              |                                                |
-> +| `tx-id`      | This value should be ignored if `conn-id` is   |
-> +|              | zero. Otherwise it specifies the id of the     |
-> +|              | pending transaction                            |
-> +|              |                                                |
-> +| `path-len`   | The length (in octets) of `path` including the |
-> +|              | NUL terminator                                 |
-> +|              |                                                |
-> +| `value-len`  | The length (in octets) of `value` (which will  |
-> +|              | be zero for a deleted node)                    |
-> +|              |                                                |
-> +| `access`     | This value should be ignored if this record    |
-> +|              | does not relate to a pending transaction,      |
-> +|              | otherwise it specifies the accesses made to    |
-> +|              | the node and hence is a bitwise OR of:         |
-> +|              |                                                |
-> +|              | 0x0001: read                                   |
-> +|              | 0x0002: written                                |
-> +|              |                                                |
-> +|              | The value will be zero for a deleted node      |
-> +|              |                                                |
-> +| `perm-count` | The number (N) of node permission specifiers   |
-> +|              | (which will be 0 for a node deleted in a       |
-> +|              | pending transaction)                           |
-> +|              |                                                |
-> +| `perm1..N`   | A list of zero or more node permission         |
-> +|              | specifiers (see below)                         |
-
-This is a bit odd to start at one. Does it mean perm0 exists and not 
-preserved?
-
-> +|              |                                                |
-> +| `path`       | The absolute path of the node                  |
-> +|              |                                                |
-> +| `value`      | The node value (which may be empty or contain  |
-> +|              | NUL octets)                                    |
+Going forward, I would expect the embedded folks to want more part of 
+Xen configurable. Requesting them to use CONFIG_EXPERT may be an issue 
+as this means we would not security support them. At the same time, I 
+understand that exposing a CONFIG increase the testing matrix. How about 
+declaring we are supporting/testing a given set of .config? On Arm it 
+would be defconfig and tiny.
 
 Cheers,
 
