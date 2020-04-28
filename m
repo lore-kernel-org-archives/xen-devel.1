@@ -2,50 +2,50 @@ Return-Path: <SRS0=URyG=6M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A817EC83000
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DB390C83000
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:34:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7BF52206D7
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:33:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7BF52206D7
+	by mail.kernel.org (Postfix) with ESMTPS id B433C206D7
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:34:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B433C206D7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTSEo-0005Zn-B2; Tue, 28 Apr 2020 15:33:34 +0000
+	id 1jTSFf-0005db-Kd; Tue, 28 Apr 2020 15:34:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/MZc=6M=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jTSEn-0005Zi-BM
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 15:33:33 +0000
-X-Inumbo-ID: 9e0a19a4-8965-11ea-b9cf-bc764e2007e4
+ id 1jTSFe-0005dR-5g
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 15:34:26 +0000
+X-Inumbo-ID: bd79fc82-8965-11ea-b9cf-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9e0a19a4-8965-11ea-b9cf-bc764e2007e4;
- Tue, 28 Apr 2020 15:33:32 +0000 (UTC)
+ id bd79fc82-8965-11ea-b9cf-bc764e2007e4;
+ Tue, 28 Apr 2020 15:34:25 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 0F258AB7F;
- Tue, 28 Apr 2020 15:33:31 +0000 (UTC)
-Subject: Re: [PATCH 5/6] x86/pv: map and unmap page tables in
- mark_pv_pt_pages_rdonly
-To: Hongyan Xia <hx242@xen.org>, Wei Liu <wl@xen.org>
+ by mx2.suse.de (Postfix) with ESMTP id DA763ACE3;
+ Tue, 28 Apr 2020 15:34:23 +0000 (UTC)
+Subject: Re: [PATCH 6/6] x86/pv: map and unmap page table in dom0_construct_pv
+To: Hongyan Xia <hx242@xen.org>
 References: <cover.1587116799.git.hongyxia@amazon.com>
- <9287363e13924f4a633b47b53c23b3466e26e4a8.1587116799.git.hongyxia@amazon.com>
+ <18fda6bdeb4f20bf2272503e45c7c420e51673ac.1587116799.git.hongyxia@amazon.com>
+ <140cc03d-08ab-6a45-e56d-0b68e71eebd2@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <fbb4a755-c450-77dd-2aa5-44c01b42a5ff@suse.com>
-Date: Tue, 28 Apr 2020 17:33:29 +0200
+Message-ID: <beda12fd-cb61-8db4-8bbd-992f33fa5310@suse.com>
+Date: Tue, 28 Apr 2020 17:34:23 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <9287363e13924f4a633b47b53c23b3466e26e4a8.1587116799.git.hongyxia@amazon.com>
+In-Reply-To: <140cc03d-08ab-6a45-e56d-0b68e71eebd2@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -60,28 +60,21 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, julien@xen.org,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>,
+ Julien Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 17.04.2020 11:52, Hongyan Xia wrote:
-> --- a/xen/arch/x86/pv/dom0_build.c
-> +++ b/xen/arch/x86/pv/dom0_build.c
-> @@ -50,17 +50,17 @@ static __init void mark_pv_pt_pages_rdonly(struct domain *d,
->      unsigned long count;
->      struct page_info *page;
->      l4_pgentry_t *pl4e;
-> -    l3_pgentry_t *pl3e;
-> -    l2_pgentry_t *pl2e;
-> -    l1_pgentry_t *pl1e;
-> +    l3_pgentry_t *pl3e, *l3t;
-> +    l2_pgentry_t *pl2e, *l2t;
-> +    l1_pgentry_t *pl1e, *l1t;
+On 24.04.2020 11:18, Julien Grall wrote:
+> On 17/04/2020 10:52, Hongyan Xia wrote:
+>> From: Wei Liu <wei.liu2@citrix.com>
+>>
+>> Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+>> Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+> 
+> Reviewed-by: Julien Grall <jgrall@amazon.com>
 
-I don't quite see why the new local variables get introduced:
-unmap_domain_page(), iirc, is quite fine with a non-page-
-aligned argument.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
