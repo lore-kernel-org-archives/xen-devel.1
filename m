@@ -2,54 +2,79 @@ Return-Path: <SRS0=URyG=6M=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C8F85C83000
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 06:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A8C4C83004
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 06:30:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B1BD206A5
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 06:30:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B1BD206A5
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3B2CA206A5
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 06:30:55 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nM9hl7S7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3B2CA206A5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTJl3-0000Bo-EO; Tue, 28 Apr 2020 06:30:17 +0000
+	id 1jTJlV-0000En-NT; Tue, 28 Apr 2020 06:30:45 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=/MZc=6M=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jTJl2-0000Bj-99
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 06:30:16 +0000
-X-Inumbo-ID: b862ae20-8919-11ea-ae69-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=wX7d=6M=gmail.com=gorbak25@srs-us1.protection.inumbo.net>)
+ id 1jTJkb-0007ym-QT
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 06:29:49 +0000
+X-Inumbo-ID: a8812798-8919-11ea-b9cf-bc764e2007e4
+Received: from mail-wr1-x444.google.com (unknown [2a00:1450:4864:20::444])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b862ae20-8919-11ea-ae69-bc764e2007e4;
- Tue, 28 Apr 2020 06:30:15 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 97538AC12;
- Tue, 28 Apr 2020 06:30:13 +0000 (UTC)
-Subject: Re: [PATCH] x86: refine guest_mode()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <7b62d06c-1369-2857-81c0-45e2434357f4@suse.com>
- <1704f4f6-7e77-971c-2c94-4f6a6719c34a@citrix.com>
- <5bbe6425-396c-d934-b5af-53b594a4afbc@suse.com>
- <16939982-3ccc-f848-0694-61b154dca89a@citrix.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <5ce12c86-c894-4a2c-9fa6-1c2a6007ca28@suse.com>
-Date: Tue, 28 Apr 2020 08:30:12 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id a8812798-8919-11ea-b9cf-bc764e2007e4;
+ Tue, 28 Apr 2020 06:29:48 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id k1so23236866wrx.4
+ for <xen-devel@lists.xenproject.org>; Mon, 27 Apr 2020 23:29:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=6BE++WsHDYO/WOBqJLui7tOCRnqB8ihSSf6W8ZHJC58=;
+ b=nM9hl7S7+RQTxl+m0wJsf+Uu39xU2juocV+4M9QJrHIoCFJvGsuda+dbtbNNNC/9/9
+ mVR8wmkJ/tJRrYnmlLK4j1TcQwphdLKdugvkCOYO6oZXIfwLH4JGEAQUC0zUS633O5bH
+ rLVNnETO10FU58TlVyXSCb4qyjobuNqSUn3sRZ5/M+6BLkAmigKTu/9rErt+DYJgO+x1
+ UeiUS5fGO5n2RRKGY0yR8Ubx+h7aTmb3FbV4osINY5RLLa9a371bXCr7MChrtwdPuqoJ
+ 6utk6llcKNACK+u1/711wpRJJRLljc1j1q5eS+Ai0alnoDUWafB2vpccVKZtKav+Ws+I
+ ziIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=6BE++WsHDYO/WOBqJLui7tOCRnqB8ihSSf6W8ZHJC58=;
+ b=lwt63TqmMIO0TJ2Iia8IDYUwpgclgyDj5BA1eRc+MpGSJmDBmqeRWh7bqXbv/f7l2T
+ XlnIruGeIgl4UO58X1uyCrbT8ux2B6EqeWK2WdThCkeEvH1eYKfWx6h6i7HocLs/97Vg
+ /ygwc6z1HWJXdg+xuUXpNH2zuPX0n1kpWhJ37HA8hj9eGoSyr8byZrS5LNS7iHWkeo8Y
+ 3nEsW2687mzOwAsKu93pX7I1R5c4kQAgDLyTg5+GWR3Wev2U3HhjyLi7FGYi6UNq5Xtz
+ UhCSngK6xyWbAsAjEbZRbeah+AAWj7RJLZ1/IVgBrbsfZ2Y3jhnMuPPSPHbp6blA8V+d
+ e//w==
+X-Gm-Message-State: AGi0PuarvOu+Qde1KlRygcQn5ITLbHOWvH0euiIr0KiLhYEDmdf7uVux
+ YMdMad9fuel8bXXIgXUePuM=
+X-Google-Smtp-Source: APiQypKMJeOYX3PcohWzIS41hAKPeyC3HjuX1SjsDhBdVcAyjumoMDzsHpT/1m0Gnu0C1B4RG+D8jw==
+X-Received: by 2002:adf:dd8a:: with SMTP id x10mr31936913wrl.308.1588055387873; 
+ Mon, 27 Apr 2020 23:29:47 -0700 (PDT)
+Received: from localhost.localdomain (public-gprs351065.centertel.pl.
+ [37.47.2.154])
+ by smtp.gmail.com with ESMTPSA id a205sm2030564wmh.29.2020.04.27.23.29.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Apr 2020 23:29:47 -0700 (PDT)
+From: Grzegorz Uriasz <gorbak25@gmail.com>
+To: qemu-devel@nongnu.org
+Subject: [PATCH 0/2] Fix QEMU crashes when passing IGD to a guest VM under XEN
+Date: Tue, 28 Apr 2020 06:28:45 +0000
+Message-Id: <20200428062847.7764-1-gorbak25@gmail.com>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
-In-Reply-To: <16939982-3ccc-f848-0694-61b154dca89a@citrix.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Tue, 28 Apr 2020 06:30:43 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,77 +85,56 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: artur@puzio.waw.pl, Stefano Stabellini <sstabellini@kernel.org>,
+ Paul Durrant <paul@xen.org>, jakub@bartmin.ski,
+ marmarek@invisiblethingslab.com, Grzegorz Uriasz <gorbak25@gmail.com>,
+ Anthony Perard <anthony.perard@citrix.com>, j.nowak26@student.uw.edu.pl,
+ xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 27.04.2020 22:11, Andrew Cooper wrote:
-> On 27/04/2020 16:15, Jan Beulich wrote:
->> On 27.04.2020 16:35, Andrew Cooper wrote:
->>> On 27/04/2020 09:03, Jan Beulich wrote:
->>>> The 2nd of the assertions as well as the macro's return value have been
->>>> assuming we're on the primary stack. While for most IST exceptions we
->>>> eventually switch back to the main one,
->>> "we switch to the main one when interrupting user mode".
->>>
->>> "eventually" isn't accurate as it is before we enter C.
->> Right, will change.
->>
->>>> --- a/xen/include/asm-x86/regs.h
->>>> +++ b/xen/include/asm-x86/regs.h
->>>> @@ -10,9 +10,10 @@
->>>>      /* Frame pointer must point into current CPU stack. */                    \
->>>>      ASSERT(diff < STACK_SIZE);                                                \
->>>>      /* If not a guest frame, it must be a hypervisor frame. */                \
->>>> -    ASSERT((diff == 0) || (r->cs == __HYPERVISOR_CS));                        \
->>>> +    if ( diff < PRIMARY_STACK_SIZE )                                          \
->>>> +        ASSERT(!diff || ((r)->cs == __HYPERVISOR_CS));                        \
->>>>      /* Return TRUE if it's a guest frame. */                                  \
->>>> -    (diff == 0);                                                              \
->>>> +    !diff || ((r)->cs != __HYPERVISOR_CS);                                    \
->>> The (diff == 0) already worried me before because it doesn't fail safe,
->>> but this makes things more problematic.  Consider the case back when we
->>> had __HYPERVISOR_CS32.
->> Yes - if __HYPERVISOR_CS32 would ever have been to be used for
->> anything, it would have needed checking for here.
->>
->>> Guest mode is strictly "(r)->cs & 3".
->> As long as CS (a) gets properly saved (it's a "manual" step for
->> SYSCALL/SYSRET as well as #VMEXIT) and (b) didn't get clobbered. I
->> didn't write this code, I don't think, so I can only guess that
->> there were intentions behind this along these lines.
-> 
-> Hmm - the VMExit case might be problematic here, due to the variability
-> in the poison used.
 
-"Variability" is an understatement - there's no poisoning at all
-in release builds afaics (and to be honest it seems a somewhat
-pointless to write the same values over and over again in debug
-mode). With this, ...
+Hi,
 
->>> Everything else is expectations about how things ought to be laid out,
->>> but for safety in release builds, the final judgement should not depend
->>> on the expectations evaluating true.
->> Well, I can switch to a purely CS.RPL based approach, as long as
->> we're happy to live with the possible downside mentioned above.
->> Of course this would then end up being a more intrusive change
->> than originally intended ...
-> 
-> I'd certainly prefer to go for something which is more robust, even if
-> it is a larger change.
+This patch series is a small subset of a bigger patch set spanning few projects aiming to isolate the GPU
+in QUBES OS to a dedicated security domain. I'm doing this together with 3 colleagues as part of our Bachelors thesis.
 
-... what's your suggestion? Basing on _just_ CS.RPL obviously won't
-work. Not even if we put in place the guest's CS (albeit that
-somewhat depends on the meaning we assign to the macro's returned
-value). Using current inside the macro to determine whether the
-guest is HVM would also seem fragile to me - there are quite a few
-uses of guest_mode(). Which would leave passing in a const struct
-vcpu * (or domain *), requiring to touch all call sites, including
-Arm's.
+When passing an Intel Graphic Device to a HVM guest under XEN, QEMU sometimes crashes
+when starting the VM. It turns out that the code responsible for setting up
+the legacy VBIOS for the IGD contains a bug which results in a memcpy of an undefined size
+between the QEMU heap and the physical memory of the guest.
 
-Compared to this it would seem to me that the change as presented
-is a clear improvement without becoming overly large of a change.
+If the size of the memcpy is small enough qemu does not crash - this means that this
+bug is actually a small security issue - a hostile guest kernel might determine the memory layout of
+QEMU simply by looking at physical memory beyond 0xdffff - this defeats ASLR and might make exploitation
+easier if other issues were to be found.
 
-Jan
+The problem is the current mechanism for obtaining a copy of the ROM of the IGD.
+We first allocate a buffer which holds the vbios - the size of which is obtained from sysfs.
+We then try to read the rom from sysfs, if we fail then we just return without setting the size of the buffer.
+This would be ok if the size of the ROM reported by sysfs would be 0, but the size is always 32 pages as this corresponds
+to legacy memory ranges. It turns out that reading the ROM fails on every single device I've tested(spanning few
+generations of IGD), which means qemu never sets the size of the buffer and returns a valid pointer to code which
+basically does a memcpy of an undefined size.
+
+I'm including two patches.
+The first one fixes the security issue by making failing to read the ROM from sysfs fatal.
+The second patch introduces a better method for obtaining the VBIOS. I've haven't yet seen a single device on which
+the old code was working, the new code basically creates a shadow copy directly by reading from /dev/mem - this
+should be fine as a quick grep of the codebase shows that this approach is already being used to handle MSI.
+I've tested the new code on few different laptops and it works fine and the guest VMS finally stopped complaining that
+the VBIOS tables are missing.
+
+Grzegorz Uriasz (2):
+  Fix undefined behaviour
+  Improve legacy vbios handling
+
+ hw/xen/xen_pt.c          |  8 +++++--
+ hw/xen/xen_pt_graphics.c | 48 +++++++++++++++++++++++++++++++++++++---
+ hw/xen/xen_pt_load_rom.c | 13 +++++------
+ 3 files changed, 57 insertions(+), 12 deletions(-)
+
+-- 
+2.26.1
+
 
