@@ -6,47 +6,47 @@ X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 90C14C83001
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:23:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 09CF8C83000
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:27:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 691C5206D8
-	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:23:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 691C5206D8
+	by mail.kernel.org (Postfix) with ESMTPS id D7FB2206D8
+	for <xen-devel@archiver.kernel.org>; Tue, 28 Apr 2020 15:27:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D7FB2206D8
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTS4z-0004Ok-SR; Tue, 28 Apr 2020 15:23:25 +0000
+	id 1jTS7q-0004Vz-B1; Tue, 28 Apr 2020 15:26:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/MZc=6M=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jTS4z-0004Od-1c
- for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 15:23:25 +0000
-X-Inumbo-ID: 337a08a2-8964-11ea-ae69-bc764e2007e4
+ id 1jTS7p-0004Vt-Nv
+ for xen-devel@lists.xenproject.org; Tue, 28 Apr 2020 15:26:21 +0000
+X-Inumbo-ID: 9cc16490-8964-11ea-9887-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 337a08a2-8964-11ea-ae69-bc764e2007e4;
- Tue, 28 Apr 2020 15:23:24 +0000 (UTC)
+ id 9cc16490-8964-11ea-9887-bc764e2007e4;
+ Tue, 28 Apr 2020 15:26:21 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id A34A2AD9A;
- Tue, 28 Apr 2020 15:23:22 +0000 (UTC)
-Subject: Re: [PATCH 3/6] x86_64/mm: map and unmap page tables in
- subarch_memory_op
+ by mx2.suse.de (Postfix) with ESMTP id 7B374AB7F;
+ Tue, 28 Apr 2020 15:26:19 +0000 (UTC)
+Subject: Re: [PATCH 4/6] x86/smpboot: map and unmap page tables in
+ cleanup_cpu_root_pgt
 To: Hongyan Xia <hx242@xen.org>
 References: <cover.1587116799.git.hongyxia@amazon.com>
- <1c88c785eb9537983a1692cc379604233ff13025.1587116799.git.hongyxia@amazon.com>
- <1fe549b7-2141-c013-61de-f7196e7ba966@xen.org>
+ <bc0ad02ad73ac3f02e063457d69634b1f6b57ddc.1587116799.git.hongyxia@amazon.com>
+ <afec3c99-49e8-0304-23ef-1763df48fc9c@xen.org>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <378cf8d2-28b7-5754-fc32-e48bfc3c7299@suse.com>
-Date: Tue, 28 Apr 2020 17:23:21 +0200
+Message-ID: <332fec70-3661-d0c3-25de-dc5a7a5ee4b3@suse.com>
+Date: Tue, 28 Apr 2020 17:26:09 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <1fe549b7-2141-c013-61de-f7196e7ba966@xen.org>
+In-Reply-To: <afec3c99-49e8-0304-23ef-1763df48fc9c@xen.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -67,7 +67,7 @@ Cc: xen-devel@lists.xenproject.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.04.2020 11:06, Julien Grall wrote:
+On 24.04.2020 11:13, Julien Grall wrote:
 > On 17/04/2020 10:52, Hongyan Xia wrote:
 >> From: Wei Liu <wei.liu2@citrix.com>
 >>
