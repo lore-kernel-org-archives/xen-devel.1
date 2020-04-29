@@ -2,99 +2,70 @@ Return-Path: <SRS0=DK6E=6N=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C4AF6C83004
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2020 13:22:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E642CC83003
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2020 13:23:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 92D2E2087E
-	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2020 13:22:42 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B824A21775
+	for <xen-devel@archiver.kernel.org>; Wed, 29 Apr 2020 13:23:01 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YtbTmF8d"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 92D2E2087E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="G2fhviyL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B824A21775
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jTmfS-0007tE-78; Wed, 29 Apr 2020 13:22:26 +0000
+	id 1jTmfp-0007w9-KH; Wed, 29 Apr 2020 13:22:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/uTc=6N=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jTmfR-0007t7-4g
- for xen-devel@lists.xenproject.org; Wed, 29 Apr 2020 13:22:25 +0000
-X-Inumbo-ID: 766b47bc-8a1c-11ea-b07b-bc764e2007e4
-Received: from mail-wr1-x443.google.com (unknown [2a00:1450:4864:20::443])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=2IrC=6N=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jTmfn-0007vs-Iu
+ for xen-devel@lists.xenproject.org; Wed, 29 Apr 2020 13:22:47 +0000
+X-Inumbo-ID: 843a31e6-8a1c-11ea-b9cf-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 766b47bc-8a1c-11ea-b07b-bc764e2007e4;
- Wed, 29 Apr 2020 13:22:24 +0000 (UTC)
-Received: by mail-wr1-x443.google.com with SMTP id t14so2478635wrw.12
- for <xen-devel@lists.xenproject.org>; Wed, 29 Apr 2020 06:22:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=7QaBiRW4xSkhhUWlHoNtsHvIq9713jNgN1BqjrnK9uk=;
- b=YtbTmF8dFZKWbgUOPRP5VnunwnlokKjJM0ORMySyVIATrGZGQOAuhGaAkMCmZbiFm/
- HabuNvVyaRf262oL44TjuCQnT34mf/szbeZ3XLyKk02MHeBlPVTxpLVIwP9CXZEhDgFP
- iczLKhAA4sQ8zRr1NaxN1nFULOZckoBl+6I6JhU6Mkksx+wXF7e8gRN2MQLtkWfGPt1D
- LUtwmsbY10wSJGc1tQOdCyT3qxTn+IfZyWB0tgb7mlHOn24jGoNXdkUyijqexeKK6E3s
- r+couGiVxWcA4khojNbAktI/HQXSXivwmzLS2OJtLt4J9D2nH+a2CWSUdHyxHzDEWv7n
- 6kmQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=7QaBiRW4xSkhhUWlHoNtsHvIq9713jNgN1BqjrnK9uk=;
- b=FvjOp0SEFqgkD1sx4U1ZRJVxMfdGjh+66HoGDId+u36x6mRbamHwyrOFb+yWM3gt9F
- BgJ/5ZuGyUqxXSkVZ2ed9MOvb6muO+oKR/kQsEDaIHEFzYyJt161+LhjxDfYXxHS9zlk
- 0oKS7kIbsxGV59PL5mSpfFZGnto5MO1xXjJVHlxDcMft3SAz7Tq2MdA/qeicwu7SHjuz
- mwM0CFtQVxP0feWG/SBkKuXG9zKUTCpOfKtsj0vh6GVQsMr936OPzw4lSIpMiK0QgapA
- jW6EDUCGmtqq8uw5on/dEQz53a1T9gENqQMGUh1wxu7O/Za1oq+D3pNy4hAxZJl7UUsQ
- 9LGQ==
-X-Gm-Message-State: AGi0PuYO6M3JR9bW2jHh1K0P+1Pvug24sUIfV45VUbir+Y++Ym9RXMFt
- sfH53SywRWQjUalEcX9N7s8=
-X-Google-Smtp-Source: APiQypI/eUep6KdlA0qho55MsHdOEUyLGfPtC+5OPviSGtlu7aqqQy4JoazPfYzayvvE1XLVmsyUyA==
-X-Received: by 2002:a5d:4381:: with SMTP id i1mr38005620wrq.194.1588166543490; 
- Wed, 29 Apr 2020 06:22:23 -0700 (PDT)
-Received: from CBGR90WXYV0 ([54.239.6.187])
- by smtp.gmail.com with ESMTPSA id k3sm33414039wru.90.2020.04.29.06.22.21
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 29 Apr 2020 06:22:22 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Igor Druzhinin'" <igor.druzhinin@citrix.com>,
- =?UTF-8?Q?'J=C3=BCrgen_Gro=C3=9F'?= <jgross@suse.com>,
- "'Julien Grall'" <julien@xen.org>,
- "'Julien Grall'" <julien.grall.oss@gmail.com>
-References: <20200428155144.8253-1-jgross@suse.com>
- <CAJ=z9a0WfWQs+UJ-t4Kt6PGGdNnA2kMeK5p8bNnDT_eFcpDiiQ@mail.gmail.com>
- <d1c41bd7-676e-c50a-416d-c62efcbdd41d@suse.com>
- <76ed29d6-e2fc-cd48-6de7-e0032daaa2e9@xen.org>
- <3fd79cb1-e18f-1987-69ff-94f1bd15c66f@citrix.com>
- <3dcbe001-c66c-13a6-7a28-ef24b05eefa0@suse.com>
- <c07e5106-d8de-f6a7-e406-b25ee9ff6d49@citrix.com>
- <f80aff47-8617-8f59-0d34-bf0385128b62@suse.com>
- <a23c3d72-f5c8-5c3f-2c2f-5a9ca1065d1f@citrix.com>
- <000001d61e25$97f86530$c7e92f90$@xen.org>
- <0eaea23f-8b4a-2c67-2fc4-827cf26dbd8d@citrix.com>
-In-Reply-To: <0eaea23f-8b4a-2c67-2fc4-827cf26dbd8d@citrix.com>
-Subject: RE: [PATCH] tools/xenstore: don't store domU's mfn of ring page in
- xensotred
-Date: Wed, 29 Apr 2020 14:22:21 +0100
-Message-ID: <000101d61e29$37890f70$a69b2e50$@xen.org>
+ id 843a31e6-8a1c-11ea-b9cf-bc764e2007e4;
+ Wed, 29 Apr 2020 13:22:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=7+F1l2FcWfs/7ZNEI5erNsE7mfBro9fYkLosgj4p+jg=; b=G2fhviyLBXq7IGGaD1ga1JEv9I
+ zWO2XJbDl+3C/RBf2c96nLCTgCb1lr1U+UlIDRsjzzicD5j/U0Up2nfYE+gaHYEnzNGPsnwC9WY/I
+ nJunPrpd/yvumE+orsHsLixE7O4pPKgo/H0TVzgXlS2rz4ip5jcmlRBW9wuTi9quMPx8=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jTmfj-0001kn-Vs; Wed, 29 Apr 2020 13:22:43 +0000
+Received: from [54.239.6.186] (helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jTmfj-0002tJ-M2; Wed, 29 Apr 2020 13:22:43 +0000
+Subject: Re: [PATCH v2 4/4] x86: adjustments to guest handle treatment
+To: Jan Beulich <jbeulich@suse.com>
+References: <9d4b738a-4487-6bfc-3076-597d074c7b47@suse.com>
+ <e820e1b9-7a7e-21f3-1ea0-d939de1905dd@suse.com>
+ <9108f918-ee44-0740-48e0-7e0b0c761e1b@xen.org>
+ <2025316a-de36-91d9-521c-547af668f919@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <b7cf3ad4-2537-9df8-7a8a-743cd0fe45c0@xen.org>
+Date: Wed, 29 Apr 2020 14:22:40 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQI5DSqNP/4D/SMDjCtgzueaLTX80QC4bkXHAbDXqJ8CsNUfVQLT/QPPATMMdVoBnbvEPwMR4MQ0ANMkKK0Bz5197wJMukkIpzQ1JXA=
+In-Reply-To: <2025316a-de36-91d9-521c-547af668f919@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -105,89 +76,66 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'xen-devel' <xen-devel@lists.xenproject.org>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>, 'Wei Liu' <wl@xen.org>,
- andrew.cooper3@citrix.com
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Tim Deegan <tim@xen.org>,
+ George Dunlap <george.dunlap@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Igor Druzhinin <igor.druzhinin@citrix.com>
-> Sent: 29 April 2020 14:17
-> To: paul@xen.org; 'J=C3=BCrgen Gro=C3=9F' <jgross@suse.com>; 'Julien =
-Grall' <julien@xen.org>; 'Julien Grall'
-> <julien.grall.oss@gmail.com>
-> Cc: 'xen-devel' <xen-devel@lists.xenproject.org>; 'Ian Jackson' =
-<ian.jackson@eu.citrix.com>; 'Wei Liu'
-> <wl@xen.org>; andrew.cooper3@citrix.com
-> Subject: Re: [PATCH] tools/xenstore: don't store domU's mfn of ring =
-page in xensotred
->=20
-> On 29/04/2020 13:56, Paul Durrant wrote:
-> >> -----Original Message-----
-> >> From: Igor Druzhinin <igor.druzhinin@citrix.com>
-> >> Sent: 29 April 2020 13:50
-> >> To: J=C3=BCrgen Gro=C3=9F <jgross@suse.com>; Julien Grall =
-<julien@xen.org>; Julien Grall
-> >> <julien.grall.oss@gmail.com>
-> >> Cc: xen-devel <xen-devel@lists.xenproject.org>; Ian Jackson =
-<ian.jackson@eu.citrix.com>; Wei Liu
-> >> <wl@xen.org>; andrew.cooper3@citrix.com; Paul Durrant =
-<paul@xen.org>
-> >> Subject: Re: [PATCH] tools/xenstore: don't store domU's mfn of ring =
-page in xensotred
-> >>
-> >> On 29/04/2020 13:29, J=C3=BCrgen Gro=C3=9F wrote:
-> >>>
-> >>> Wei, Ian, can you please tell me where I'm wrong?
-> >>>
-> >>> A soft reset should restart the domain in a clean state. AFAIK =
-libxl is
-> >>> handling that by doing kind of in-place save-restore, including =
-calling
-> >>> xs_release_domain() and later xs_introduce_domain(). This should =
-result
-> >>> in xenstored throwing away all state it has regarding the domain =
-and
-> >>> then restarting with a new (internal) domain instance.
-> >>>
-> >>> Is XAPI doing soft reset differently? Why should there be a need =
-for
-> >>> keeping xenstored data across a soft reset?
-> >>
-> >> Yes, XAPI is doing soft reset differently from libxl. You need to =
-keep xenstore
-> >> data to at least keep backends working without the need to =
-reinitialize them
-> >> before entering kdump kernel. We do the same thing while entering =
-crash kernel
-> >> in Windows after BSOD (CC Paul as he recommended this approach).
-> >
-> > IIRC I recommended not involving Xen or the toolstack in entering =
-the crash kernel... they don't
-> need to know. Windows quite happily enters its crash kernel, rebuilds =
-its Xen interfaces and re-
-> attaches to PV backends without any external intervention.
->=20
-> In case of kdump toolstack certainly needs to know as it gets shutdown =
-code 5 and
-> needs to restart the domain.
->=20
+Hi,
 
-The toolstack needs to restart the domain once the crash has completed, =
-yes.
+On 22/04/2020 10:32, Jan Beulich wrote:
+> On 22.04.2020 10:17, Julien Grall wrote:
+>> On 21/04/2020 10:13, Jan Beulich wrote:
+>>> First of all avoid excessive conversions. copy_{from,to}_guest(), for
+>>> example, work fine with all of XEN_GUEST_HANDLE{,_64,_PARAM}().
+>>>
+>>> Further
+>>> - do_physdev_op_compat() didn't use the param form for its parameter,
+>>> - {hap,shadow}_track_dirty_vram() wrongly used the param form,
+>>> - compat processor Px logic failed to check compatibility of native and
+>>>     compat structures not further converted.
+>>>
+>>> As this eliminates all users of guest_handle_from_param() and as there's
+>>> no real need to allow for conversions in both directions, drop the
+>>> macros as well.
+>>
+>> I was kind of expecting both guest_handle_from_param() and
+>> guest_handle_to_param() to be dropped together. May I ask why
+>> you still need guest_handle_to_param()?
+> 
+> There are three (iirc) uses left which I don't really see how
+> to sensibly replace. Take a look at the different callers of
+> x86's vcpumask_to_pcpumask(), for example.
 
-> And I'm not completely sure it's possible to enter kdump without =
-calling soft reset
-> at all. Even if it's possible I'd be cautious to do it in production =
-for the future.
->=20
+Oh, const_guest_handle_from_ptr() is returning a GUEST_HANDLE_PARAM. 
+This is a bit odd but fair enough.
 
-If it is not possible at the moment then IMO it should be made so; =
-having soft reset in the toolstack is a layering violation IMO.
+> 
+>>> --- a/xen/include/xen/acpi.h
+>>> +++ b/xen/include/xen/acpi.h
+>>> @@ -184,8 +184,8 @@ static inline unsigned int acpi_get_csub
+>>>    static inline void acpi_set_csubstate_limit(unsigned int new_limit) { return; }
+>>>    #endif
+>>>    -#ifdef XEN_GUEST_HANDLE_PARAM
+>>> -int acpi_set_pdc_bits(u32 acpi_id, XEN_GUEST_HANDLE_PARAM(uint32));
+>>> +#ifdef XEN_GUEST_HANDLE
+>>> +int acpi_set_pdc_bits(u32 acpi_id, XEN_GUEST_HANDLE(uint32));
+>>>    #endif
+>>
+>> Do we really need to keep the #ifdef here?
+> 
+> I think so, yes, or else the original one wouldn't have been
+> needed either. (Consider the header getting included without
+> any of the public headers having got included first.) Dropping
+> (if it was possible) this would be an orthogonal change imo.
 
-  Paul
+Fair point.
 
+Cheers,
 
+-- 
+Julien Grall
 
