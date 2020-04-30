@@ -2,43 +2,47 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 83BF6C47253
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C3985C4724C
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 65B0E20836
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:46 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65B0E20836
+	by mail.kernel.org (Postfix) with ESMTPS id A727C20870
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A727C20870
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUDuA-0007wB-TA; Thu, 30 Apr 2020 18:27:26 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jUDuM-0007xq-HJ; Thu, 30 Apr 2020 18:27:38 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0VdV=6O=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1jUDu9-0007w6-Qo
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 18:27:25 +0000
-X-Inumbo-ID: 3cf3584a-8b10-11ea-b9cf-bc764e2007e4
+ id 1jUDuK-0007xQ-FE
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 18:27:36 +0000
+X-Inumbo-ID: 429940b8-8b10-11ea-9a92-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3cf3584a-8b10-11ea-b9cf-bc764e2007e4;
- Thu, 30 Apr 2020 18:27:25 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 429940b8-8b10-11ea-9a92-12813bfff9fa;
+ Thu, 30 Apr 2020 18:27:36 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 7892AAC4A;
- Thu, 30 Apr 2020 18:27:23 +0000 (UTC)
-Subject: [PATCH 0/3] Automation: improve openSUSE containers + podman
+ by mx2.suse.de (Postfix) with ESMTP id 800D1AC4A;
+ Thu, 30 Apr 2020 18:27:34 +0000 (UTC)
+Subject: [PATCH 2/3] automation: openSUSE distro names helpers for
+ containerize.
 From: Dario Faggioli <dfaggioli@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 30 Apr 2020 20:27:22 +0200
-Message-ID: <158827088416.19371.17008531228521109457.stgit@Palanthas>
+Date: Thu, 30 Apr 2020 20:27:34 +0200
+Message-ID: <158827125424.19371.11152490489435365073.stgit@Palanthas>
+In-Reply-To: <158827088416.19371.17008531228521109457.stgit@Palanthas>
+References: <158827088416.19371.17008531228521109457.stgit@Palanthas>
 User-Agent: StGit/0.21
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -53,41 +57,29 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Doug Goldstein <cardoe@cardoe.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello,
-
-This short series contains some improvements for building Xen in
-openSUSE containers. In fact, the build dependencies inside the
-Tumbleweed container are updated and more handy helpers are added, in
-containerize, for referring to both Leap and Tumbleweed containers.
-
-In addition to that, in patch 3, the containerize script is enhanced so
-that it is now possible to use podman, instead of docker. Rootless mode
-for podman also works (provided the system is properly configured) which,
-IMO, is rather nice.
-
-Docker of course continue to work, and is kept as the default.
-
-Regards
+Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
 ---
-Dario Faggioli (3):
-      automation: update openSUSE Tumbleweed building dependencies
-      automation: openSUSE distro names helpers for containerize.
-      automation: implement (rootless) podman support in containerize
+Cc: Doug Goldstein <cardoe@cardoe.com>
+---
+ automation/scripts/containerize |    2 ++
+ 1 file changed, 2 insertions(+)
 
- automation/build/README.md                         |   10 ++++++++++
- .../build/suse/opensuse-tumbleweed.dockerfile      |    2 ++
- automation/scripts/containerize                    |   19 +++++++++++++++----
- 3 files changed, 27 insertions(+), 4 deletions(-)
---
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
+diff --git a/automation/scripts/containerize b/automation/scripts/containerize
+index fbc4bc22d6..eb805bf96c 100755
+--- a/automation/scripts/containerize
++++ b/automation/scripts/containerize
+@@ -24,6 +24,8 @@ case "_${CONTAINER}" in
+     _stretch|_) CONTAINER="${BASE}/debian:stretch" ;;
+     _trusty) CONTAINER="${BASE}/ubuntu:trusty" ;;
+     _xenial) CONTAINER="${BASE}/ubuntu:xenial" ;;
++    _opensuse-leap|_leap) CONTAINER="${BASE}/suse:opensuse-leap" ;;
++    _opensuse-tumbleweed|_tumbleweed) CONTAINER="${BASE}/suse:opensuse-tumbleweed" ;;
+ esac
+ 
+ # Use this variable to control whether root should be used
+
 
