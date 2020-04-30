@@ -2,46 +2,43 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B89DDC47247
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 83BF6C47253
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9513220836
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9513220836
+	by mail.kernel.org (Postfix) with ESMTPS id 65B0E20836
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:27:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65B0E20836
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUDuG-0007wX-55; Thu, 30 Apr 2020 18:27:32 +0000
+	id 1jUDuA-0007wB-TA; Thu, 30 Apr 2020 18:27:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0VdV=6O=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1jUDuE-0007wP-Ol
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 18:27:30 +0000
-X-Inumbo-ID: 4005399a-8b10-11ea-b07b-bc764e2007e4
+ id 1jUDu9-0007w6-Qo
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 18:27:25 +0000
+X-Inumbo-ID: 3cf3584a-8b10-11ea-b9cf-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4005399a-8b10-11ea-b07b-bc764e2007e4;
- Thu, 30 Apr 2020 18:27:30 +0000 (UTC)
+ id 3cf3584a-8b10-11ea-b9cf-bc764e2007e4;
+ Thu, 30 Apr 2020 18:27:25 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CC9FBAC4A;
- Thu, 30 Apr 2020 18:27:28 +0000 (UTC)
-Subject: [PATCH 1/3] automation: update openSUSE Tumbleweed building
- dependencies
+ by mx2.suse.de (Postfix) with ESMTP id 7892AAC4A;
+ Thu, 30 Apr 2020 18:27:23 +0000 (UTC)
+Subject: [PATCH 0/3] Automation: improve openSUSE containers + podman
 From: Dario Faggioli <dfaggioli@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 30 Apr 2020 20:27:28 +0200
-Message-ID: <158827124854.19371.13461510910212179854.stgit@Palanthas>
-In-Reply-To: <158827088416.19371.17008531228521109457.stgit@Palanthas>
-References: <158827088416.19371.17008531228521109457.stgit@Palanthas>
+Date: Thu, 30 Apr 2020 20:27:22 +0200
+Message-ID: <158827088416.19371.17008531228521109457.stgit@Palanthas>
 User-Agent: StGit/0.21
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -61,35 +58,36 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We need python3 (and the respective -devel package), these days.
+Hello,
 
-Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
----
-Cc: Doug Goldstein <cardoe@cardoe.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
----
-This patch was submitted already, but not as part of this series.
+This short series contains some improvements for building Xen in
+openSUSE containers. In fact, the build dependencies inside the
+Tumbleweed container are updated and more handy helpers are added, in
+containerize, for referring to both Leap and Tumbleweed containers.
 
-Anyway, changes from v1:
-* add python3 instead of replacing python2 with it.
+In addition to that, in patch 3, the containerize script is enhanced so
+that it is now possible to use podman, instead of docker. Rootless mode
+for podman also works (provided the system is properly configured) which,
+IMO, is rather nice.
+
+Docker of course continue to work, and is kept as the default.
+
+Regards
 ---
-I think the tumbleweed image in our registry needs to be updated.
----
+Dario Faggioli (3):
+      automation: update openSUSE Tumbleweed building dependencies
+      automation: openSUSE distro names helpers for containerize.
+      automation: implement (rootless) podman support in containerize
+
+ automation/build/README.md                         |   10 ++++++++++
  .../build/suse/opensuse-tumbleweed.dockerfile      |    2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/automation/build/suse/opensuse-tumbleweed.dockerfile b/automation/build/suse/opensuse-tumbleweed.dockerfile
-index 2676a87c85..084cce0921 100644
---- a/automation/build/suse/opensuse-tumbleweed.dockerfile
-+++ b/automation/build/suse/opensuse-tumbleweed.dockerfile
-@@ -56,6 +56,8 @@ RUN zypper install -y --no-recommends \
-         pkg-config \
-         python \
-         python-devel \
-+        python3 \
-+        python3-devel \
-         systemd-devel \
-         tar \
-         transfig \
-
+ automation/scripts/containerize                    |   19 +++++++++++++++----
+ 3 files changed, 27 insertions(+), 4 deletions(-)
+--
+Dario Faggioli, Ph.D
+http://about.me/dario.faggioli
+Virtualization Software Engineer
+SUSE Labs, SUSE https://www.suse.com/
+-------------------------------------------------------------------
+<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
 
