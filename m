@@ -2,53 +2,63 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD043C8300A
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 12:43:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7EC76C8300A
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 12:44:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9A28E2072A
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 12:43:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A28E2072A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4E0F320656
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 12:44:01 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="QlXevOI9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4E0F320656
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jU8Wf-0001nK-AZ; Thu, 30 Apr 2020 12:42:49 +0000
+	id 1jU8Xd-0001sN-Sz; Thu, 30 Apr 2020 12:43:49 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Mtm3=6O=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jU8Wd-0001nF-Hq
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 12:42:47 +0000
-X-Inumbo-ID: 17b6538c-8ae0-11ea-9a3e-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ (envelope-from <SRS0=ng0l=6O=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jU8Xb-0001s3-US
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 12:43:47 +0000
+X-Inumbo-ID: 3b1bef31-8ae0-11ea-9a3e-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 17b6538c-8ae0-11ea-9a3e-12813bfff9fa;
- Thu, 30 Apr 2020 12:42:46 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 20EB5AC64;
- Thu, 30 Apr 2020 12:42:45 +0000 (UTC)
-Subject: Re: [PATCH v6 09/15] efi: use new page table APIs in copy_mapping
-To: Hongyan Xia <hx242@xen.org>
-References: <cover.1587735799.git.hongyxia@amazon.com>
- <6c27c79964eb16eba4743515689b9fd7eb3409d1.1587735799.git.hongyxia@amazon.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <6f2447ba-e12a-9241-6c2c-a7a49059c09b@suse.com>
-Date: Thu, 30 Apr 2020 14:42:40 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <6c27c79964eb16eba4743515689b9fd7eb3409d1.1587735799.git.hongyxia@amazon.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ id 3b1bef31-8ae0-11ea-9a3e-12813bfff9fa;
+ Thu, 30 Apr 2020 12:43:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Rb4tS9NJ8SZ1ohKOUTAAEEo8r3jML2X8FNBVDKVIVCs=; b=QlXevOI90bsWZ6a7NQ7g8ECkab
+ 4nVn+X/d1jNT2D8e63D3Qh+reGVDcA/kKWGtW7zo8S4fuJfkKuXg9+P+D3M/6a8eRrxdnKve1vwFc
+ 5dDENMVTOn9PV8ImE6Oj+XUvKpKnoDpI2a7CLTUOKaA541UBNwL/G/OFXElInGnpyNrw=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jU8XZ-0002qD-PL; Thu, 30 Apr 2020 12:43:45 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=ufe34d9ed68d054.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jU8XZ-0001dc-En; Thu, 30 Apr 2020 12:43:45 +0000
+From: Julien Grall <julien@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH 0/2] xen: Allow EXPERT mode to be selected from the menuconfig
+ directly
+Date: Thu, 30 Apr 2020 13:43:41 +0100
+Message-Id: <20200430124343.29886-1-julien@xen.org>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,42 +69,34 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, julien@xen.org
+Cc: Julien Grall <jgrall@amazon.com>, julien@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.04.2020 16:09, Hongyan Xia wrote:
-> --- a/xen/common/efi/boot.c
-> +++ b/xen/common/efi/boot.c
-> @@ -1454,16 +1454,20 @@ static __init void copy_mapping(unsigned long mfn, unsigned long end,
->              continue;
->          if ( !(l4e_get_flags(l4e) & _PAGE_PRESENT) )
->          {
-> -            l3dst = alloc_xen_pagetable();
-> -            BUG_ON(!l3dst);
-> +            mfn_t l3mfn = alloc_xen_pagetable_new();
-> +
-> +            BUG_ON(mfn_eq(l3mfn, INVALID_MFN));
-> +            l3dst = map_domain_page(l3mfn);
->              clear_page(l3dst);
->              efi_l4_pgtable[l4_table_offset(mfn << PAGE_SHIFT)] =
-> -                l4e_from_paddr(virt_to_maddr(l3dst), __PAGE_HYPERVISOR);
-> +                l4e_from_mfn(l3mfn, __PAGE_HYPERVISOR);
->          }
->          else
-> -            l3dst = l4e_to_l3e(l4e);
-> -        l3src = l4e_to_l3e(idle_pg_table[l4_table_offset(va)]);
-> +            l3dst = map_l3t_from_l4e(l4e);
-> +        l3src = map_l3t_from_l4e(idle_pg_table[l4_table_offset(va)]);
->          l3dst[l3_table_offset(mfn << PAGE_SHIFT)] = l3src[l3_table_offset(va)];
-> +        unmap_domain_page(l3src);
-> +        unmap_domain_page(l3dst);
->      }
->  }
+From: Julien Grall <jgrall@amazon.com>
 
-This looks very inefficient - you establish and tear down two mappings
-per loop iteration, when really you may end up copying all 512 slots
-between the same pair of L3 tables.
+Hi all,
 
-Jan
+This small series is meant to make easier to experiment when using Xen.
+See patch #2 for more details.
+
+Cheers,
+
+Julien Grall (2):
+  xen/Kconfig: define EXPERT a bool rather than a string
+  xen: Allow EXPERT mode to be selected from the menuconfig directly
+
+ xen/Kconfig                     | 11 +++++++++--
+ xen/Kconfig.debug               |  2 +-
+ xen/Makefile                    |  1 -
+ xen/arch/arm/Kconfig            | 10 +++++-----
+ xen/arch/x86/Kconfig            |  6 +++---
+ xen/common/Kconfig              | 14 +++++++-------
+ xen/common/sched/Kconfig        |  2 +-
+ xen/drivers/passthrough/Kconfig |  2 +-
+ 8 files changed, 27 insertions(+), 21 deletions(-)
+
+-- 
+2.17.1
+
 
