@@ -2,64 +2,103 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D23D9C47247
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 17:01:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2B3F7C47247
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:10:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9AB9220661
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 17:01:12 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E09432073E
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 18:10:01 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="2gZE6lvI"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9AB9220661
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="BVBteh+t"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E09432073E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUCYC-0001Fy-Pv; Thu, 30 Apr 2020 17:00:40 +0000
+	id 1jUDcj-0006E4-5o; Thu, 30 Apr 2020 18:09:25 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=kEmr=6O=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jUCYB-0001Ft-TJ
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 17:00:39 +0000
-X-Inumbo-ID: 1e27506c-8b04-11ea-9a80-12813bfff9fa
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=/gX9=6O=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jUDch-0006Dz-RK
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 18:09:23 +0000
+X-Inumbo-ID: b693c0fd-8b0d-11ea-9a8d-12813bfff9fa
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1e27506c-8b04-11ea-9a80-12813bfff9fa;
- Thu, 30 Apr 2020 17:00:39 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 533F620661;
- Thu, 30 Apr 2020 17:00:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1588266038;
- bh=B93+UsnDv7RgSAjrT+Hkx5AcpSSaxP4darVD6tkMveE=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=2gZE6lvI+9otreOVVbZCl0tunJWtx0+yqXV0Q7iFjKHbbAM97MigfaKbIrDKCbS29
- vWnAWeGg7zomEbyKTeVcXc295bPQs5tZ9B0UePAx6M11xvYt9qfNOG37DYF/iVRKHm
- Q0SONajevEhxfAwYnNxcgLy2CU0VOQQwylbODj0s=
-Date: Thu, 30 Apr 2020 10:00:37 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-Subject: Re: [PATCH 05/12] xen: introduce reserve_heap_pages
-In-Reply-To: <a316ed70-da35-8be0-a092-d992e56563d2@xen.org>
-Message-ID: <alpine.DEB.2.21.2004300928240.28941@sstabellini-ThinkPad-T480s>
-References: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
- <20200415010255.10081-5-sstabellini@kernel.org>
- <3129ab49-5898-9d2e-8fbb-d1fcaf6cdec7@suse.com>
- <alpine.DEB.2.21.2004291510270.28941@sstabellini-ThinkPad-T480s>
- <a316ed70-da35-8be0-a092-d992e56563d2@xen.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+ id b693c0fd-8b0d-11ea-9a8d-12813bfff9fa;
+ Thu, 30 Apr 2020 18:09:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1588270162;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=62PGdF+06MeHjzW7MjMajxK6hZQfjsamzxWU86mFF14=;
+ b=BVBteh+tlxD1SXuKUjNh6kehV8nE6+9fWoxChu2EoR0jLcpG8+h2sKf+
+ C3L67Y9D26wVK5rEIPjY2P/1M7dCYeOyegsFF3V/Qtv3TMgm+lw+vXZ+P
+ rfPcH7ffsWi9Onw+kkPI0jxq6X5kU34Nu6LAGv0FFV+Ayz3EmIJeST9zM I=;
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: V2L/P/HuW5hvQ3CzJkAOPntko5E2GHA/rz/1nOcH3Z0P9UjrqnbJEUHhYJA53vQa6SwcVmP4Y0
+ 3IOgVVpRHrC1XlwVHc/PtEqDSu+/s5KePujTwDjOG9XBVSQeAV2PaNEFYBCnmVF4n1RGgLDwSg
+ BbKoro1JEA4YlEpy260k6Xrp5mDX/gk7Cw9rwmoKmdSkSvP448VIVVyTcNCtvLc1uqzbDThAlp
+ mFKPDg9uNKSk5n/ovc9CuuWTRK6r2SDhVz5rL5xLAjE6+MQstEaX21TESvyhKCjoU8aTwywbZg
+ rCk=
+X-SBRS: 2.7
+X-MesageID: 16841389
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,336,1583211600"; d="scan'208";a="16841389"
+Date: Thu, 30 Apr 2020 20:09:13 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/hap: be more selective with assisted TLB flush
+Message-ID: <20200430180913.GF28601@Air-de-Roger>
+References: <20200429173601.77605-1-roger.pau@citrix.com>
+ <4257a323-d37f-4af0-bdc6-a3f65c19438a@suse.com>
+ <20200430082844.GZ28601@Air-de-Roger>
+ <d5a0308b-0ac3-21f5-9a07-e1402005b663@suse.com>
+ <487fb08f-a9f5-7de9-54f0-f158fa687e6c@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <487fb08f-a9f5-7de9-54f0-f158fa687e6c@citrix.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -70,100 +109,70 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- andrew.cooper3@citrix.com, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- xen-devel@lists.xenproject.org,
- Stefano Stabellini <stefano.stabellini@xilinx.com>, Volodymyr_Babchuk@epam.com,
- "Woodhouse, David" <dwmw@amazon.co.uk>
+Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>, George
+ Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, 30 Apr 2020, Julien Grall wrote:
-> > > > +    pg = maddr_to_page(start);
-> > > > +    node = phys_to_nid(start);
-> > > > +    zone = page_to_zone(pg);
-> > > > +    page_list_del(pg, &heap(node, zone, order));
-> > > > +
-> > > > +    __alloc_heap_pages(pg, order, memflags, d);
-> > > 
-> > > I agree with Julien in not seeing how this can be safe / correct.
-> > 
-> > I haven't seen any issues so far in my testing -- I imagine it is
-> > because there aren't many memory allocations after setup_mm() and before
-> > create_domUs()  (which on ARM is called just before
-> > domain_unpause_by_systemcontroller at the end of start_xen.)
+On Thu, Apr 30, 2020 at 05:19:19PM +0100, Andrew Cooper wrote:
+> On 30/04/2020 09:33, Jan Beulich wrote:
+> > On 30.04.2020 10:28, Roger Pau Monné wrote:
+> >> On Thu, Apr 30, 2020 at 09:20:58AM +0200, Jan Beulich wrote:
+> >>> On 29.04.2020 19:36, Roger Pau Monne wrote:
+> >>>> When doing an assisted flush on HAP the purpose of the
+> >>>> on_selected_cpus is just to trigger a vmexit on remote CPUs that are
+> >>>> in guest context, and hence just using is_vcpu_dirty_cpu is too lax,
+> >>>> also check that the vCPU is running.
+> >>> Am I right to understand that the change is relevant only to
+> >>> cover the period of time between ->is_running becoming false
+> >>> and ->dirty_cpu becoming VCPU_CPU_CLEAN? I.e. ...
+> >>>
+> >>>> --- a/xen/arch/x86/mm/hap/hap.c
+> >>>> +++ b/xen/arch/x86/mm/hap/hap.c
+> >>>> @@ -719,7 +719,7 @@ static bool flush_tlb(bool (*flush_vcpu)(void *ctxt, struct vcpu *v),
+> >>>>          hvm_asid_flush_vcpu(v);
+> >>>>  
+> >>>>          cpu = read_atomic(&v->dirty_cpu);
+> >>>> -        if ( cpu != this_cpu && is_vcpu_dirty_cpu(cpu) )
+> >>>> +        if ( cpu != this_cpu && is_vcpu_dirty_cpu(cpu) && v->is_running )
+> >>> ... the previous logic would have suitably covered the switch-to
+> >>> path, but doesn't properly cover the switch-from one, due to our
+> >>> lazy context switch approach?
+> >> Yes. Also __context_switch is not called from context_switch when
+> >> switching to the idle vcpu, and hence dirty_cpu is not cleared.
+> >>
+> >>> If so, I agree with the change:
+> >>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> >>> It might be worth mentioning this detail in the description then,
+> >>> though.
+> >> Would you mind adding to the commit message if you agree:
+> >>
+> >> "Due to the lazy context switching done by Xen dirty_cpu won't always be
+> >> cleared when the guest vCPU is not running, and hence relying on
+> >> is_running allows more fine grained control of whether the vCPU is
+> >> actually running."
+> > Sure; I'll give it over the weekend though for others to comment, if
+> > so desired.
 > 
-> I am not sure why you exclude setup_mm(). Any memory allocated (boot
-> allocator, xenheap) can clash with your regions. The main memory allocations
-> are for the frametable and dom0. I would say you were lucky to not hit them.
+> I think it is worth pointing out that this fixes a large perf regression
+> on Nehalem/Westmere systems, where L1 Shim using the enlightened
+> hypercall is 8x slower than unenlightened way.
 
-Maybe it is because Xen typically allocates memory top-down? So if I
-chose a high range then I would see a failure? But I have been mostly
-testing with ranges close to the begin of RAM (as opposed to
-ranges close to the end of RAM.)
+I might as well post the actual numbers I have.
 
- 
-> > I gave a quick look at David's series. Is the idea that I should add a
-> > patch to do the following:
-> > 
-> > - avoiding adding these ranges to xenheap in setup_mm, wait for later
-> >    (a bit like reserved_mem regions)
-> 
-> I guess by xenheap, you mean domheap? But the problem is not only for domheap,
-> it is also for any memory allocated via the boot allocator. So you need to
-> exclude those regions from any possible allocations.
+I've measured the time of the non-local branch of flush_area_mask
+inside the shim running with 32vCPUs over 100000 executions and
+averaged the result on a large Westmere system (80 ways total). The
+figures where fetched during the boot of a SLES 11 PV guest. The
+results are as follow (less is better):
 
-OK, I think we are saying the same thing but let me check.
+Non assisted flush with x2APIC:      112406ns
+Assisted flush without this patch:   820450ns
+Assisted flush with this patch:        8330ns
 
-By boot allocator you mean alloc_boot_pages, right? That boot allocator
-operates on ranges given to it by init_boot_pages calls.
-init_boot_pages is called from setup_mm. I didn't write it clearly but
-I also meant not calling init_boot_pages on them from setup_mm.
+I can add the figures to the commit message if deemed interesting to
+have in the repo. Or the above text can be appended to the commit
+message if that's fine.
 
-Are we saying the same thing?
-
-
-
-> > - in construct_domU, add the range to xenheap and reserve it with
-> > reserve_heap_pages
-> 
-> I am afraid you can't give the regions to the allocator and then allocate
-> them. The allocator is free to use any page for its own purpose or exclude
-> them.
->
-> AFAICT, the allocator doesn't have a list of page in use. It only keeps track
-> of free pages. So we can make the content of struct page_info to look like it
-> was allocated by the allocator.
-> 
-> We would need to be careful when giving a page back to allocator as the page
-> would need to be initialized (see [1]). This may not be a concern for Dom0less
-> as the domain may never be destroyed but will be for correctness PoV.
-> 
-> For LiveUpdate, the original Xen will carve out space to use by the boot
-> allocator in the new Xen. But I think this is not necessary in your context.
-> 
-> It should be sufficient to exclude the page from the boot allocators (as we do
-> for other modules).
-> 
-> One potential issue that can arise is there is no easy way today to
-> differentiate between pages allocated and pages not yet initialized. To make
-> the code robust, we need to prevent a page to be used in two places. So for
-> LiveUpdate we are marking them with a special value, this is used afterwards
-> to check we are effictively using a reserved page.
-> 
-> I hope this helps.
-
-Thanks for writing all of this down but I haven't understood some of it.
-
-For the sake of this discussion let's say that we managed to "reserve"
-the range early enough like we do for other modules, as you wrote.
-
-At the point where we want to call reserve_heap_pages() we would call
-init_heap_pages() just before it. We are still relatively early at boot
-so there aren't any concurrent memory operations. Why this doesn't work?
-
-If it doesn't work, I am not following what is your alternative
-suggestion about making "the content of struct page_info to look like it
-was allocated by the allocator."
+Roger.
 
