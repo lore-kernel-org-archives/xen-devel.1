@@ -7,56 +7,56 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6F0CDC47254
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 84132C47259
 	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 20:45:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3E2D420774
+	by mail.kernel.org (Postfix) with ESMTPS id 5281E20836
 	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 20:45:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="cdbbpPvF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3E2D420774
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="qCRIOJB3"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5281E20836
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUG3A-0002qt-O6; Thu, 30 Apr 2020 20:44:52 +0000
+	id 1jUG31-0002oe-7q; Thu, 30 Apr 2020 20:44:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=fL57=6O=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jUG39-0002qK-EF
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 20:44:51 +0000
-X-Inumbo-ID: 6c920ebc-8b23-11ea-b9cf-bc764e2007e4
+ id 1jUG2z-0002oZ-Gl
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 20:44:41 +0000
+X-Inumbo-ID: 6a0b6dc8-8b23-11ea-b9cf-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6c920ebc-8b23-11ea-b9cf-bc764e2007e4;
- Thu, 30 Apr 2020 20:44:45 +0000 (UTC)
+ id 6a0b6dc8-8b23-11ea-b9cf-bc764e2007e4;
+ Thu, 30 Apr 2020 20:44:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=WTEV0oPtcbmzQwnNtr2I2AVsKwc6yGr7IZ4NoXd1nT4=; b=cdbbpPvFM/mqtoRn44qvXJUJ4E
- SAz077vwekyoVNG4sLAzgzr8i2FsuLB8SvwFl0rw55f/u0ElP8VlofANR8/aRzyeJOtHaQBSzKarT
- PiJ8oEW5NYkGxTPvhqeuh7OVM/GrUQcqaVtacXAAc/XRSz5Kxlryon/f9Swfq02cHHyA=;
+ bh=mny4fPGI0W4kUckCGEUBvQNC9MU0BAlbEexMC4JDbrU=; b=qCRIOJB3HVKUWxuaCufWT128qC
+ L1aqst12J/+1zHfzX8myHDSFQDCOCuKkgc5zDiDbEd8QTjWaXYlS5tiRH9JMfcrfWdTmJ5NyJ9vG+
+ d092LdAOlkOX5j3wDWzaG3EQ+zglhFK812VPu0KH2cHEk1rpOLNL8l1+emPs5w4O0Uw8=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jUG32-0004LP-Mo; Thu, 30 Apr 2020 20:44:44 +0000
+ id 1jUG2y-0004L2-CB; Thu, 30 Apr 2020 20:44:40 +0000
 Received: from 54-240-197-234.amazon.com ([54.240.197.234]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <hx242@xen.org>)
- id 1jUG32-0005wj-Cc; Thu, 30 Apr 2020 20:44:44 +0000
+ id 1jUG2y-0005wj-2Q; Thu, 30 Apr 2020 20:44:40 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 05/16] x86: map/unmap pages in restore_all_guests.
-Date: Thu, 30 Apr 2020 21:44:14 +0100
-Message-Id: <97a7680a1be26f6e34b91d29551747afa5235555.1588278317.git.hongyxia@amazon.com>
+Subject: [PATCH 02/16] acpi: vmap pages in acpi_os_alloc_memory
+Date: Thu, 30 Apr 2020 21:44:11 +0100
+Message-Id: <a71d1903267b84afdb0e54fa2ac55540ab2f9357.1588278317.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1588278317.git.hongyxia@amazon.com>
 References: <cover.1588278317.git.hongyxia@amazon.com>
@@ -72,70 +72,66 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
- Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Hongyan Xia <hongyxia@amazon.com>
 
-Before, it assumed the pv cr3 could be accessed via a direct map. This
-is no longer true.
-
-Note that we do not map and unmap root_pgt for now since it is still a
-xenheap page.
+Also, introduce a wrapper around vmap that maps a contiguous range for
+boot allocations.
 
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 ---
- xen/arch/x86/x86_64/entry.S | 27 ++++++++++++++++++++++++++-
- 1 file changed, 26 insertions(+), 1 deletion(-)
+ xen/drivers/acpi/osl.c | 9 ++++++++-
+ xen/include/xen/vmap.h | 5 +++++
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index d55453f3f3..110cd0394f 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -154,7 +154,24 @@ restore_all_guest:
-         and   %rsi, %rdi
-         and   %r9, %rsi
-         add   %rcx, %rdi
--        add   %rcx, %rsi
+diff --git a/xen/drivers/acpi/osl.c b/xen/drivers/acpi/osl.c
+index 4c8bb7839e..d0762dad4e 100644
+--- a/xen/drivers/acpi/osl.c
++++ b/xen/drivers/acpi/osl.c
+@@ -219,7 +219,11 @@ void *__init acpi_os_alloc_memory(size_t sz)
+ 	void *ptr;
+ 
+ 	if (system_state == SYS_STATE_early_boot)
+-		return mfn_to_virt(mfn_x(alloc_boot_pages(PFN_UP(sz), 1)));
++	{
++		mfn_t mfn = alloc_boot_pages(PFN_UP(sz), 1);
 +
-+         /*
-+          * Without a direct map, we have to map first before copying. We only
-+          * need to map the guest root table but not the per-CPU root_pgt,
-+          * because the latter is still a xenheap page.
-+          */
-+        pushq %r9
-+        pushq %rdx
-+        pushq %rax
-+        pushq %rdi
-+        mov   %rsi, %rdi
-+        shr   $PAGE_SHIFT, %rdi
-+        callq map_domain_page
-+        mov   %rax, %rsi
-+        popq  %rdi
-+        /* Stash the pointer for unmapping later. */
-+        pushq %rax
++		return vmap_boot_pages(mfn, PFN_UP(sz));
++	}
+ 
+ 	ptr = xmalloc_bytes(sz);
+ 	ASSERT(!ptr || is_xmalloc_memory(ptr));
+@@ -244,5 +248,8 @@ void __init acpi_os_free_memory(void *ptr)
+ 	if (is_xmalloc_memory(ptr))
+ 		xfree(ptr);
+ 	else if (ptr && system_state == SYS_STATE_early_boot)
++	{
++		vunmap(ptr);
+ 		init_boot_pages(__pa(ptr), __pa(ptr) + PAGE_SIZE);
++	}
+ }
+diff --git a/xen/include/xen/vmap.h b/xen/include/xen/vmap.h
+index 369560e620..c70801e195 100644
+--- a/xen/include/xen/vmap.h
++++ b/xen/include/xen/vmap.h
+@@ -23,6 +23,11 @@ void *vmalloc_xen(size_t size);
+ void *vzalloc(size_t size);
+ void vfree(void *va);
+ 
++static inline void *vmap_boot_pages(mfn_t mfn, unsigned int nr_pages)
++{
++    return __vmap(&mfn, nr_pages, 1, 1, PAGE_HYPERVISOR, VMAP_DEFAULT);
++}
 +
-         mov   $ROOT_PAGETABLE_FIRST_XEN_SLOT, %ecx
-         mov   root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rsi), %r8
-         mov   %r8, root_table_offset(SH_LINEAR_PT_VIRT_START)*8(%rdi)
-@@ -166,6 +183,14 @@ restore_all_guest:
-         sub   $(ROOT_PAGETABLE_FIRST_XEN_SLOT - \
-                 ROOT_PAGETABLE_LAST_XEN_SLOT - 1) * 8, %rdi
-         rep movsq
-+
-+        /* Unmap the page. */
-+        popq  %rdi
-+        callq unmap_domain_page
-+        popq  %rax
-+        popq  %rdx
-+        popq  %r9
-+
- .Lrag_copy_done:
-         mov   %r9, STACK_CPUINFO_FIELD(xen_cr3)(%rdx)
-         movb  $1, STACK_CPUINFO_FIELD(use_pv_cr3)(%rdx)
+ void __iomem *ioremap(paddr_t, size_t);
+ 
+ static inline void iounmap(void __iomem *va)
 -- 
 2.24.1.AMZN
 
