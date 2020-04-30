@@ -2,78 +2,96 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96EBCC83006
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 08:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 645C6C8300A
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 09:18:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69377214D8
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 08:34:29 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 318EF2173E
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 09:18:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel-com.20150623.gappssmtp.com header.i=@intel-com.20150623.gappssmtp.com header.b="C7NzSwQe"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69377214D8
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="EiHyYPXS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 318EF2173E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jU4e8-0004js-V9; Thu, 30 Apr 2020 08:34:16 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jU5KI-0008Iq-T2; Thu, 30 Apr 2020 09:17:50 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=JErk=6O=intel.com=dan.j.williams@srs-us1.protection.inumbo.net>)
- id 1jU4e8-0004jn-Bu
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 08:34:16 +0000
-X-Inumbo-ID: 5ddc9dd0-8abd-11ea-ae69-bc764e2007e4
-Received: from mail-ej1-x641.google.com (unknown [2a00:1450:4864:20::641])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5ddc9dd0-8abd-11ea-ae69-bc764e2007e4;
- Thu, 30 Apr 2020 08:34:13 +0000 (UTC)
-Received: by mail-ej1-x641.google.com with SMTP id n4so3966276ejs.11
- for <xen-devel@lists.xenproject.org>; Thu, 30 Apr 2020 01:34:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=intel-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=87dIcS/jrU3IxflLIkdtnvU4qll0iHvEZNuLGZ4o7wI=;
- b=C7NzSwQeQ8r7hb6zu0mE43nN5BVsWOZy21t9s86oMspwPoqNG+2r9QwYXMI253bkO+
- f2NXbqJEZlVUDXw2jKOJXTdMksOMSeCU/1+d1/KW3kPK6bDnIkjaV85ydvslVx7+7VaK
- H/Wy8s3jtrbog9dFPbt+U8g4F9a/kPxAFzoHfDtTpSCDud/nTiDKxbIHNOx4gDT1cWli
- scShmtfTOkTf1D6LztaDjOZAMAIUOcl9E1Ehg4s+icpPrmffJn6TfhOtMJuuVZZemCWo
- u5q8IaOdIkls7C87+V/X7frCMtH72XB/et/faVXvhnFad5uP3/TQ8BbSLNTCllAusarT
- BwFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=87dIcS/jrU3IxflLIkdtnvU4qll0iHvEZNuLGZ4o7wI=;
- b=eBK7HnCm2+L9Ye86kGh2AOY2F3sNS/Z+gbFKxnbgmfAnuhNSSETHX6IqLSwc0Ah27b
- 1h6VpKIUuDIVpooJDKOlbG7K4CfzE34nYrXvkqRNi+DGwtBFO87WHBZUmUfUL/oo9dVO
- fxToH3GCwBGRo5CqrySxVoOAZu7kxhCFeAJWElhvEAdA4vpDazEzsRqhZshdP0ZFK47o
- BBrMA3iuV4ESMm+j8UujRX+m6wrNo0PBCz60axlUDJTA/+IWwrgNOVFSCQWV3Wc+jQLm
- yaw3l637rmMQ7MlqlgtC5sUyXmSh2mONCfAmtacFF95X2x43eAFpxlfJybdtBMCvJ4sb
- xjvQ==
-X-Gm-Message-State: AGi0Pub8WUzp0yGb/xZYONJzKrZ3FlofcgfpoGcMHyuPgfJtqzlQOBQ8
- leTLheZJ4KZlMSt3L4zV2KFzNQuPIP3P3AdG7ZO/GA==
-X-Google-Smtp-Source: APiQypLBVztlIIHfr3wCtEt+MVa/TaJHl/O1nuNqStB0TwAKkS6wTTbCgFJlPXMDG8iI601GTPaB481cRsH+FNdImHY=
-X-Received: by 2002:a17:906:7750:: with SMTP id
- o16mr1715515ejn.12.1588235651152; 
- Thu, 30 Apr 2020 01:34:11 -0700 (PDT)
+ <SRS0=/gX9=6O=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jU5KH-0008Il-QG
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 09:17:49 +0000
+X-Inumbo-ID: 757ff7ed-8ac3-11ea-9a12-12813bfff9fa
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 757ff7ed-8ac3-11ea-9a12-12813bfff9fa;
+ Thu, 30 Apr 2020 09:17:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1588238268;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=3tElwOR5SMvygmh076A/T3p277AnxQXNp6ZmGgUyWcs=;
+ b=EiHyYPXS4L+0jtD/Rysju4C/LUMqiHS53ufV1HX+8D5sj8RvAU++aOxA
+ oHPCNY96MR9zSsmXygzgHDUPdkQVc3pzrQaH7IBX5YGP0HwfgfSDnGpPU
+ z2vSGQcucLzqbG+JRCdlWpnzJxbL8trTHCwF1UP9kg/45Z7J61fXm+pTW k=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: El3z5Pex9n1Vnt4iBED7+gKnfwSD+n80nkFwZBKKJeHx72O4VmnQQJopwFqDF1jVYu3hvQ6vRx
+ fax7vP/VNOhqVsylSpv8nRmRXuGD/14Xk1HNIi+TaP9wbABNoPhGxLEPdlaXZIQrndvyTj7btL
+ whjTfyK3ouxXHwoOZ7WQkPjpTPh1hKd/CA7PqOWG+7Eg0p4Shv1nX0ErAvledG7qaRWVWb0thF
+ uaQyy+zPRVDLpPFd3HRMo2pm7/J6PY9b3eNMQrz9wU97zdPmANojtlVhgC7RuS5gYcJdvl0UGa
+ /Kw=
+X-SBRS: 2.7
+X-MesageID: 16893124
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,334,1583211600"; d="scan'208";a="16893124"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Subject: [PATCH] x86/hvm: allow for more fine grained assisted flush
+Date: Thu, 30 Apr 2020 11:17:25 +0200
+Message-ID: <20200430091725.80656-1-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
-References: <20200429160803.109056-1-david@redhat.com>
- <20200429160803.109056-3-david@redhat.com>
- <a7305cd8-8b2f-1d8f-7654-ecf777c46df6@redhat.com>
- <CAPcyv4i04+QLxiOyz04_eef2DFetEFKBUmi2A4xxw9abQD8hNQ@mail.gmail.com>
- <e32522cd-31bb-e129-47a6-9ec13b570506@redhat.com>
-In-Reply-To: <e32522cd-31bb-e129-47a6-9ec13b570506@redhat.com>
-From: Dan Williams <dan.j.williams@intel.com>
-Date: Thu, 30 Apr 2020 01:34:00 -0700
-Message-ID: <CAPcyv4gjRE23BHsBAnaVWAPUHWdenxYMUwDBnDF7UmoejmmbNQ@mail.gmail.com>
-Subject: Re: [PATCH v1 2/3] mm/memory_hotplug: Introduce MHP_DRIVER_MANAGED
-To: David Hildenbrand <david@redhat.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,83 +102,203 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: virtio-dev@lists.oasis-open.org, linux-hyperv@vger.kernel.org,
- Michal Hocko <mhocko@suse.com>, Pavel Tatashin <pasha.tatashin@soleen.com>,
- Baoquan He <bhe@redhat.com>, Linux MM <linux-mm@kvack.org>,
- Wei Yang <richard.weiyang@gmail.com>, linux-s390 <linux-s390@vger.kernel.org>,
- linux-nvdimm <linux-nvdimm@lists.01.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Linux ACPI <linux-acpi@vger.kernel.org>,
- "Michael S . Tsirkin" <mst@redhat.com>, Eric Biederman <ebiederm@xmission.com>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- xen-devel <xen-devel@lists.xenproject.org>,
- Andrew Morton <akpm@linux-foundation.org>, Michal Hocko <mhocko@kernel.org>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, George
+ Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, Apr 30, 2020 at 1:21 AM David Hildenbrand <david@redhat.com> wrote:
-> >> Just because we decided to use some DAX memory in the current kernel as
-> >> system ram, doesn't mean we should make that decision for the kexec
-> >> kernel (e.g., using it as initial memory, placing kexec binaries onto
-> >> it, etc.). This is also not what we would observe during a real reboot.
-> >
-> > Agree.
-> >
-> >> I can see that the "System RAM" resource will show up as child resource
-> >> under the device e.g., in /proc/iomem.
-> >>
-> >> However, entries in /sys/firmware/memmap/ are created as "System RAM".
-> >
-> > True. Do you think this rename should just be limited to what type
-> > /sys/firmware/memmap/ emits? I have the concern, but no proof
->
-> We could split this patch into
->
-> MHP_NO_FIRMWARE_MEMMAP (create firmware memmap entries)
->
-> and
->
-> MHP_DRIVER_MANAGED (name of the resource)
->
-> See below, the latter might not be needed.
->
-> > currently, that there are /proc/iomem walkers that explicitly look for
-> > "System RAM", but might be thrown off by "System RAM (driver
-> > managed)". I was not aware of /sys/firmware/memmap until about 5
-> > minutes ago.
->
-> The only two users of /proc/iomem I am aware of are kexec-tools and some
-> s390x tools.
->
-> kexec-tools on x86-64 uses /sys/firmware/memmap to craft the initial
-> memmap, but uses /proc/iomem to
-> a) Find places for kexec images
-> b) Detect memory regions to dump via kdump
->
-> I am not yet sure if we really need the "System RAM (driver managed)"
-> part. If we can teach kexec-tools to
-> a) Don't place kexec images on "System RAM" that has a parent resource
-> (most likely requires kexec-tools changes)
-> b) Consider for kdump "System RAM" that has a parent resource
-> we might be able to avoid renaming that. (I assume that's already done)
->
-> E.g., regarding virtio-mem (patch #3) I am currently also looking into
-> creating a parent resource instead, like dax/kmem to avoid the rename:
->
-> :/# cat /proc/iomem
-> 00000000-00000fff : Reserved
-> [...]
-> 100000000-13fffffff : System RAM
-> 140000000-33fffffff : virtio0
->   140000000-147ffffff : System RAM
->   148000000-14fffffff : System RAM
->   150000000-157ffffff : System RAM
-> 340000000-303fffffff : virtio1
->   340000000-347ffffff : System RAM
-> 3280000000-32ffffffff : PCI Bus 0000:00
+Improve the assisted flush by expanding the interface and allowing for
+more fine grained TLB flushes to be issued using the HVMOP_flush_tlbs
+hypercall. Support for such advanced flushes is signaled in CPUID
+using the XEN_HVM_CPUID_ADVANCED_FLUSH flag.
 
-Looks good to me if it flies with kexec-tools.
+The new features make use of the NULL parameter so far passed in the
+hypercall in order to convey extra data to perform more selective
+flushes: a virtual address, an order field, a flags field and finally a
+vCPU bitmap. Note that not all features are implemented as part of
+this patch, but are already added to the interface in order to avoid
+having to introduce yet a new CPUID flag when the new features are
+added.
+
+The feature currently implemented is the usage of a guest provided
+vCPU bitmap in order to signal which vCPUs require a TLB flush,
+instead of assuming all vCPUs must be flushed. Note that not
+implementing the rest of the features just make the flush less
+efficient, but it's still correct and safe.
+
+Finally add support for Xen running in guest mode (Xen on Xen or PV
+shim mode) to use the newly introduced flush options when available.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+---
+ xen/arch/x86/guest/xen/xen.c        | 22 +++++++++++++++++-
+ xen/arch/x86/hvm/hvm.c              | 35 ++++++++++++++++++++++++-----
+ xen/arch/x86/traps.c                |  4 +++-
+ xen/include/public/arch-x86/cpuid.h |  2 ++
+ xen/include/public/hvm/hvm_op.h     | 23 ++++++++++++++++++-
+ 5 files changed, 78 insertions(+), 8 deletions(-)
+
+diff --git a/xen/arch/x86/guest/xen/xen.c b/xen/arch/x86/guest/xen/xen.c
+index 2ff63d370a..310ce0c6fb 100644
+--- a/xen/arch/x86/guest/xen/xen.c
++++ b/xen/arch/x86/guest/xen/xen.c
+@@ -326,7 +326,27 @@ static void __init e820_fixup(struct e820map *e820)
+ 
+ static int flush_tlb(const cpumask_t *mask, const void *va, unsigned int flags)
+ {
+-    return xen_hypercall_hvm_op(HVMOP_flush_tlbs, NULL);
++    xen_hvm_flush_tlbs_t op = {
++        .va = (unsigned long)va,
++        .order = (flags - 1) & FLUSH_ORDER_MASK,
++        .flags = ((flags & FLUSH_TLB_GLOBAL) ? HVMOP_flush_global : 0) |
++                 ((flags & FLUSH_VA_VALID) ? HVMOP_flush_va_valid : 0),
++        .mask_size = BITS_TO_LONGS(nr_cpu_ids),
++    };
++    static int8_t __read_mostly advanced_flush = -1;
++
++    if ( advanced_flush == -1 )
++    {
++        uint32_t eax, ebx, ecx, edx;
++
++        ASSERT(xen_cpuid_base);
++        cpuid(xen_cpuid_base + 4, &eax, &ebx, &ecx, &edx);
++        advanced_flush = (eax & XEN_HVM_CPUID_ADVANCED_FLUSH) ? 1 : 0;
++    }
++
++    set_xen_guest_handle(op.vcpu_mask, cpumask_bits(mask));
++
++    return xen_hypercall_hvm_op(HVMOP_flush_tlbs, advanced_flush ? &op : NULL);
+ }
+ 
+ static const struct hypervisor_ops __initconstrel ops = {
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 814b7020d8..1d41b6e2ea 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -4011,17 +4011,42 @@ static void hvm_s3_resume(struct domain *d)
+     }
+ }
+ 
+-static bool always_flush(void *ctxt, struct vcpu *v)
++static bool flush_check(void *mask, struct vcpu *v)
+ {
+-    return true;
++    return mask ? test_bit(v->vcpu_id, (unsigned long *)mask) : true;
+ }
+ 
+-static int hvmop_flush_tlb_all(void)
++static int hvmop_flush_tlb(XEN_GUEST_HANDLE_PARAM(xen_hvm_flush_tlbs_t) uop)
+ {
++    xen_hvm_flush_tlbs_t op;
++    DECLARE_BITMAP(mask, HVM_MAX_VCPUS) = { };
++    bool valid_mask = false;
++
+     if ( !is_hvm_domain(current->domain) )
+         return -EINVAL;
+ 
+-    return paging_flush_tlb(always_flush, NULL) ? 0 : -ERESTART;
++    if ( !guest_handle_is_null(uop) )
++    {
++        if ( copy_from_guest(&op, uop, 1) )
++            return -EFAULT;
++
++        /*
++         * TODO: implement support for the other features present in
++         * xen_hvm_flush_tlbs_t: flushing a specific virtual address and not
++         * flushing global mappings.
++         */
++
++        if ( op.mask_size > ARRAY_SIZE(mask) )
++            return -EINVAL;
++
++        if ( copy_from_guest(mask, op.vcpu_mask, op.mask_size) )
++            return -EFAULT;
++
++        valid_mask = true;
++    }
++
++    return paging_flush_tlb(flush_check, valid_mask ? mask : NULL) ? 0
++                                                                   : -ERESTART;
+ }
+ 
+ static int hvmop_set_evtchn_upcall_vector(
+@@ -5017,7 +5042,7 @@ long do_hvm_op(unsigned long op, XEN_GUEST_HANDLE_PARAM(void) arg)
+         break;
+ 
+     case HVMOP_flush_tlbs:
+-        rc = guest_handle_is_null(arg) ? hvmop_flush_tlb_all() : -EINVAL;
++        rc = hvmop_flush_tlb(guest_handle_cast(arg, xen_hvm_flush_tlbs_t));
+         break;
+ 
+     case HVMOP_get_mem_type:
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index e838846c6b..b07da2fd33 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -966,8 +966,10 @@ void cpuid_hypervisor_leaves(const struct vcpu *v, uint32_t leaf,
+         /*
+          * Indicate that memory mapped from other domains (either grants or
+          * foreign pages) has valid IOMMU entries.
++         *
++         * Also signal support for more selective assisted flush support.
+          */
+-        res->a |= XEN_HVM_CPUID_IOMMU_MAPPINGS;
++        res->a |= XEN_HVM_CPUID_IOMMU_MAPPINGS | XEN_HVM_CPUID_ADVANCED_FLUSH;
+ 
+         /* Indicate presence of vcpu id and set it in ebx */
+         res->a |= XEN_HVM_CPUID_VCPU_ID_PRESENT;
+diff --git a/xen/include/public/arch-x86/cpuid.h b/xen/include/public/arch-x86/cpuid.h
+index ce46305bee..b980ed91f6 100644
+--- a/xen/include/public/arch-x86/cpuid.h
++++ b/xen/include/public/arch-x86/cpuid.h
+@@ -102,6 +102,8 @@
+ #define XEN_HVM_CPUID_IOMMU_MAPPINGS   (1u << 2)
+ #define XEN_HVM_CPUID_VCPU_ID_PRESENT  (1u << 3) /* vcpu id is present in EBX */
+ #define XEN_HVM_CPUID_DOMID_PRESENT    (1u << 4) /* domid is present in ECX */
++/* Supports more fine grained assisted flush, see HVMOP_flush_tlbs. */
++#define XEN_HVM_CPUID_ADVANCED_FLUSH   (1u << 5)
+ 
+ /*
+  * Leaf 6 (0x40000x05)
+diff --git a/xen/include/public/hvm/hvm_op.h b/xen/include/public/hvm/hvm_op.h
+index 870ec52060..ca6ae678bc 100644
+--- a/xen/include/public/hvm/hvm_op.h
++++ b/xen/include/public/hvm/hvm_op.h
+@@ -99,8 +99,29 @@ DEFINE_XEN_GUEST_HANDLE(xen_hvm_set_pci_link_route_t);
+ 
+ #endif /* __XEN_INTERFACE_VERSION__ < 0x00040900 */
+ 
+-/* Flushes all VCPU TLBs: @arg must be NULL. */
++/*
++ * Flushes all VCPU TLBs: @arg can be NULL or xen_hvm_flush_tlbs_t.
++ *
++ * Support for passing a xen_hvm_flush_tlbs_t parameter is signaled in CPUID,
++ * see XEN_HVM_CPUID_ADVANCED_FLUSH.
++ */
+ #define HVMOP_flush_tlbs          5
++struct xen_hvm_flush_tlbs {
++    /* Virtual address to be flushed. */
++    uint64_t va;
++    uint16_t order;
++    uint16_t flags;
++/* Flush global mappings. */
++#define HVMOP_flush_global      (1u << 0)
++/* VA for the flush has a valid mapping. */
++#define HVMOP_flush_va_valid    (1u << 1)
++    /* Number of uint64_t elements in vcpu_mask. */
++    uint32_t mask_size;
++    /* Bitmask of vcpus that should be flushed. */
++    XEN_GUEST_HANDLE(const_uint64) vcpu_mask;
++};
++typedef struct xen_hvm_flush_tlbs xen_hvm_flush_tlbs_t;
++DEFINE_XEN_GUEST_HANDLE(xen_hvm_flush_tlbs_t);
+ 
+ /*
+  * hvmmem_type_t should not be defined when generating the corresponding
+-- 
+2.26.0
+
 
