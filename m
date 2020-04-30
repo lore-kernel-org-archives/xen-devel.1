@@ -2,67 +2,76 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 09F25C47247
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 20:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F5B1C4724C
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 20:54:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D113C20836
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 20:50:44 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5674C20774
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 20:54:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="HZ3Q9E4S"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D113C20836
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="J/fSsYMM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5674C20774
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUG8j-0004bx-KG; Thu, 30 Apr 2020 20:50:37 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=fL57=6O=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jUG8i-0004bO-Sh
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 20:50:36 +0000
-X-Inumbo-ID: 2dcb9211-8b24-11ea-9ab3-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2dcb9211-8b24-11ea-9ab3-12813bfff9fa;
- Thu, 30 Apr 2020 20:50:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=tF+dQ9SLZTmEavdmofAbgYKyBZJqPPcUUiyb5AWHxN8=; b=HZ3Q9E4S5yiVy8k/Mfc9UAUXsi
- O1sw7XgIi6nF741qocRN/95JoYovNWdGd3bBrj+aNrItkexAW57YfkTs4HkGKyEaNkKkFFYXdfVhU
- eMd1JKLU1yKKp4Z4KPUjwrS/sMnihHtyOyD16eQyYgRoJFaTzFqR1qwJ94oMjm7IhaEY=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1jUG8I-0004Un-SN; Thu, 30 Apr 2020 20:50:10 +0000
-Received: from 54-240-197-234.amazon.com ([54.240.197.234]
- helo=u1bbd043a57dd5a.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <hx242@xen.org>)
- id 1jUG3G-0005wj-3A; Thu, 30 Apr 2020 20:44:58 +0000
-From: Hongyan Xia <hx242@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH 14/16] x86/setup: leave early boot slightly earlier
-Date: Thu, 30 Apr 2020 21:44:23 +0100
-Message-Id: <446c0b3b1811574d155cb84827e4fc64e3425413.1588278317.git.hongyxia@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1588278317.git.hongyxia@amazon.com>
-References: <cover.1588278317.git.hongyxia@amazon.com>
-In-Reply-To: <cover.1588278317.git.hongyxia@amazon.com>
-References: <cover.1588278317.git.hongyxia@amazon.com>
+	id 1jUGBx-000571-4y; Thu, 30 Apr 2020 20:53:57 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=RHFy=6O=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1jUGBw-00056q-Bs
+ for xen-devel@lists.xen.org; Thu, 30 Apr 2020 20:53:56 +0000
+X-Inumbo-ID: b4446862-8b24-11ea-ae69-bc764e2007e4
+Received: from mail-lf1-x141.google.com (unknown [2a00:1450:4864:20::141])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id b4446862-8b24-11ea-ae69-bc764e2007e4;
+ Thu, 30 Apr 2020 20:53:55 +0000 (UTC)
+Received: by mail-lf1-x141.google.com with SMTP id j14so2408586lfg.9
+ for <xen-devel@lists.xen.org>; Thu, 30 Apr 2020 13:53:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=SKC1Ubs64feoGoEAHeoVOPMHU64p71MzA+JDLl+lbLc=;
+ b=J/fSsYMM8my3Td7IWI5u/N4Ujzb0AsdFYbPi1ODROzWXiaQwcM0d00f+b7pNZCzux5
+ WEHz7QtJNQR8CnlDZ+HG19oy/bmwE33IcvyQcDrS6T3bIVSGUql2v+N4cJAqTLZjTc+o
+ E0y3LV/9qRHC3MZ2WLDF0vEQ7ld1/RiD4uJKz33oPVb0pihyzPnBg/PVIpuJWvA1/k59
+ AmcYQjaclbWrgmSbzuzRs9kVVs2xJHBl7A6kNjPUEW+lNFjW8JWjfpNVySZhyREBMESF
+ Zo78AE8Pl8LNTu4HPOhC9Cvi2vux5ml+1+055qlslYL68yNapineAKttKyoCI+RzVXi+
+ s/wg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=SKC1Ubs64feoGoEAHeoVOPMHU64p71MzA+JDLl+lbLc=;
+ b=Xa2KI90tW+CwYOoxtfV5uQRcLV0ASIir/Ozstw4MzHGrEQzn5AZww/KjWac2HD9hGk
+ dt9myBP8ioOuOC092oMMOSpXNpAPgfbkCZRgQ3pP4OtXV04cOHEW+WR0+yORd5Ex9f5O
+ MtPLtxld1dyxqO3mgOXlh/nQtLHiElqjLj7cUzJ1nS3Fmsnm02cQDPT8sMKT+b8O6Yh3
+ kQ9Fxo3x8vOmOFAu1vMhs2hEy1mcXR2WTsX6jBwYDiMd9UTPp3oFif54t0vCKiq3erU/
+ riUWg69pNe+Qla3qkN5vv0x8k2fdsAGtfsgNIPzpsXKENBs3GInP/aDj5riMXjDVQscn
+ 2bXw==
+X-Gm-Message-State: AGi0PubeXrfkPNB55burOP130X/MOP13Mu1ncA+/IoPhihKbQF9YZ5kB
+ ARV7wAERlQI49vejcCsxmS1tax7+ci8VCqqQLuA=
+X-Google-Smtp-Source: APiQypK8ZUgAbkay/BA3dA1dtaANoskPU01mbUAjWFCgZNDTK5Lxny3armTJO92C2IRDKe4amick9pAFWODInFAfw3E=
+X-Received: by 2002:a19:3848:: with SMTP id d8mr342982lfj.44.1588280034139;
+ Thu, 30 Apr 2020 13:53:54 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAOCxVi0s5X+=Hug2_M-AyXvYpiwqfkf7G2Y66kp44MQ-xgO+KA@mail.gmail.com>
+ <e92bb8ab-3dd2-bb19-d524-d78279f9508a@citrix.com>
+ <CAOCxVi1PWM_9t03f=_qn0PXkKB1gN4504h+ijMpwqGU9VpR48g@mail.gmail.com>
+ <CAOCxVi0=iKzeJ0gfZ8XoMTXYrZaHbok=F30pw1rNdsUhkQcXjw@mail.gmail.com>
+In-Reply-To: <CAOCxVi0=iKzeJ0gfZ8XoMTXYrZaHbok=F30pw1rNdsUhkQcXjw@mail.gmail.com>
+From: Jason Andryuk <jandryuk@gmail.com>
+Date: Thu, 30 Apr 2020 16:53:42 -0400
+Message-ID: <CAKf6xptZyZPGL34SKMcEyMyHzqvMpqoY4fdMFaabUb45dnC4bg@mail.gmail.com>
+Subject: Re: Xen Compilation Error on Ubuntu 20.04
+To: Ayush Dosaj <ayushdosaj2313@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,68 +82,43 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
- Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Hongyan Xia <hongyxia@amazon.com>
+On Thu, Apr 30, 2020 at 4:18 AM Ayush Dosaj <ayushdosaj2313@gmail.com> wrote:
+>
+> Hi Andrew, Xen Development team.
+>
+> I compiled and installed Xen by appending -fcf-protection=none to CFLAGS on Ubuntu 20.04 but it still crashes on startup.
 
-When we do not have a direct map, memory for metadata of heap nodes in
-init_node_heap() is allocated from xenheap, which needs to be mapped and
-unmapped on demand. However, we cannot just take memory from the boot
-allocator to create the PTEs while we are passing memory to the heap
-allocator.
+Ayush, try the patch below.  EMBEDDED_EXTRA_CFLAGS ensures it is set
+down in xen/arch/x86/boot/build32.mk
 
-To solve this race, we leave early boot slightly sooner so that Xen PTE
-pages are allocated from the heap instead of the boot allocator. We can
-do this because the metadata for the 1st node is statically allocated,
-and by the time we need memory to create mappings for the 2nd node, we
-already have enough memory in the heap allocator in the 1st node.
+-Jason
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
----
- xen/arch/x86/setup.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+diff --git a/Config.mk b/Config.mk
+index 0f303c79b2..efb3d42bc4 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -205,6 +205,7 @@ APPEND_CFLAGS += $(foreach i, $(APPEND_INCLUDES), -I$(i))
 
-diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
-index 60fc4038be..dbb2ac1c8f 100644
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1507,6 +1507,22 @@ void __init noreturn __start_xen(unsigned long mbi_p)
- 
-     numa_initmem_init(0, raw_max_page);
- 
-+    /*
-+     * When we do not have a direct map, memory for metadata of heap nodes in
-+     * init_node_heap() is allocated from xenheap, which needs to be mapped and
-+     * unmapped on demand. However, we cannot just take memory from the boot
-+     * allocator to create the PTEs while we are passing memory to the heap
-+     * allocator during end_boot_allocator().
-+     *
-+     * To solve this race, we need to leave early boot before
-+     * end_boot_allocator() so that Xen PTE pages are allocated from the heap
-+     * instead of the boot allocator. We can do this because the metadata for
-+     * the 1st node is statically allocated, and by the time we need memory to
-+     * create mappings for the 2nd node, we already have enough memory in the
-+     * heap allocator in the 1st node.
-+     */
-+    system_state = SYS_STATE_boot;
-+
-     if ( max_page - 1 > virt_to_mfn(HYPERVISOR_VIRT_END - 1) )
-     {
-         unsigned long limit = virt_to_mfn(HYPERVISOR_VIRT_END - 1);
-@@ -1536,8 +1552,6 @@ void __init noreturn __start_xen(unsigned long mbi_p)
-     else
-         end_boot_allocator();
- 
--    system_state = SYS_STATE_boot;
--
-     console_init_ring();
-     vesa_init();
- 
--- 
-2.24.1.AMZN
+ EMBEDDED_EXTRA_CFLAGS := -nopie -fno-stack-protector -fno-stack-protector-all
+ EMBEDDED_EXTRA_CFLAGS += -fno-exceptions
++EMBEDDED_EXTRA_CFLAGS += -fcf-protection=none
 
+ XEN_EXTFILES_URL ?= http://xenbits.xen.org/xen-extfiles
+ # All the files at that location were downloaded from elsewhere on
+diff --git a/xen/arch/x86/Rules.mk b/xen/arch/x86/Rules.mk
+index 4b7ab78467..c3cbae69d2 100644
+--- a/xen/arch/x86/Rules.mk
++++ b/xen/arch/x86/Rules.mk
+@@ -69,6 +69,7 @@ CFLAGS += -mno-sse $(call cc-option,$(CC),-mskip-rax-setup)
+ ifeq ($(CONFIG_INDIRECT_THUNK),y)
+ CFLAGS += -mindirect-branch=thunk-extern -mindirect-branch-register
+ CFLAGS += -fno-jump-tables
++$(call cc-option-add,CFLAGS,CC,-fcf-protection=none)
+ endif
+
+ # If supported by the compiler, reduce stack alignment to 8 bytes. But allow
 
