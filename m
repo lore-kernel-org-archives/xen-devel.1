@@ -2,53 +2,47 @@ Return-Path: <SRS0=NZeg=6O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4C69CC4724C
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 15:16:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10EF7C4724C
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 15:16:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 25D1D20661
-	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 15:16:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 25D1D20661
+	by mail.kernel.org (Postfix) with ESMTPS id E084720661
+	for <xen-devel@archiver.kernel.org>; Thu, 30 Apr 2020 15:16:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E084720661
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUAug-0007Mr-LS; Thu, 30 Apr 2020 15:15:46 +0000
+	id 1jUAuy-0007OP-Ue; Thu, 30 Apr 2020 15:16:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=Mtm3=6O=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jUAuf-0007Mm-UP
- for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 15:15:45 +0000
-X-Inumbo-ID: 764d5bb0-8af5-11ea-9887-bc764e2007e4
+ (envelope-from <SRS0=H9qc=6O=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jUAux-0007OA-Ou
+ for xen-devel@lists.xenproject.org; Thu, 30 Apr 2020 15:16:03 +0000
+X-Inumbo-ID: 81319f00-8af5-11ea-ae69-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 764d5bb0-8af5-11ea-9887-bc764e2007e4;
- Thu, 30 Apr 2020 15:15:44 +0000 (UTC)
+ id 81319f00-8af5-11ea-ae69-bc764e2007e4;
+ Thu, 30 Apr 2020 15:16:03 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id CF933ABB2;
- Thu, 30 Apr 2020 15:15:42 +0000 (UTC)
-Subject: Re: [PATCH v6 12/15] x86/smpboot: switch pl*e to use new APIs in
- clone_mapping
-To: Hongyan Xia <hx242@xen.org>
-References: <cover.1587735799.git.hongyxia@amazon.com>
- <a1c29e58a5d40748413e8088ad88ba4319a328d4.1587735799.git.hongyxia@amazon.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <88709097-661e-ce7b-1a46-1dcecf029428@suse.com>
-Date: Thu, 30 Apr 2020 17:15:38 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <a1c29e58a5d40748413e8088ad88ba4319a328d4.1587735799.git.hongyxia@amazon.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ by mx2.suse.de (Postfix) with ESMTP id 4981FAD31;
+ Thu, 30 Apr 2020 15:16:01 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH 1/3] xen/sched: allow rcu work to happen when syncing cpus in
+ core scheduling
+Date: Thu, 30 Apr 2020 17:15:57 +0200
+Message-Id: <20200430151559.1464-2-jgross@suse.com>
+X-Mailer: git-send-email 2.16.4
+In-Reply-To: <20200430151559.1464-1-jgross@suse.com>
+References: <20200430151559.1464-1-jgross@suse.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,112 +53,76 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>, julien@xen.org,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Dario Faggioli <dfaggioli@suse.com>,
+ Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 24.04.2020 16:09, Hongyan Xia wrote:
-> From: Wei Liu <wei.liu2@citrix.com>
+With RCU barriers moved from tasklets to normal RCU processing cpu
+offlining in core scheduling might deadlock due to cpu synchronization
+required by RCU processing and core scheduling concurrently.
 
-Nit: Why the emphasis on pl*e in the title? Is there anything left
-unconverted in the function? IOW how about "switch clone_mapping()
-to new page table APIs"?
+Fix that by bailing out from core scheduling synchronization in case
+of pending RCU work. Additionally the RCU softirq is now required to
+be of higher priority than the scheduling softirqs in order to do
+RCU processing before entering the scheduler again, as bailing out from
+the core scheduling synchronization requires to raise another softirq
+SCHED_SLAVE, which would bypass RCU processing again.
 
-> --- a/xen/arch/x86/smpboot.c
-> +++ b/xen/arch/x86/smpboot.c
-> @@ -672,9 +672,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
->  {
->      unsigned long linear = (unsigned long)ptr, pfn;
->      unsigned int flags;
-> -    l3_pgentry_t *pl3e;
-> -    l2_pgentry_t *pl2e;
-> -    l1_pgentry_t *pl1e;
-> +    l3_pgentry_t *pl3e = NULL;
-> +    l2_pgentry_t *pl2e = NULL;
-> +    l1_pgentry_t *pl1e = NULL;
+Reported-by: Sergey Dyasli <sergey.dyasli@citrix.com>
+Tested-by: Sergey Dyasli <sergey.dyasli@citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ xen/common/sched/core.c   | 10 +++++++---
+ xen/include/xen/softirq.h |  2 +-
+ 2 files changed, 8 insertions(+), 4 deletions(-)
 
-The latter two need initializers, yes, but why pl3e?
+diff --git a/xen/common/sched/core.c b/xen/common/sched/core.c
+index d94b95285f..a099e37b0f 100644
+--- a/xen/common/sched/core.c
++++ b/xen/common/sched/core.c
+@@ -2457,13 +2457,17 @@ static struct sched_unit *sched_wait_rendezvous_in(struct sched_unit *prev,
+             v = unit2vcpu_cpu(prev, cpu);
+         }
+         /*
+-         * Coming from idle might need to do tasklet work.
++         * Check for any work to be done which might need cpu synchronization.
++         * This is either pending RCU work, or tasklet work when coming from
++         * idle.
+          * In order to avoid deadlocks we can't do that here, but have to
+-         * continue the idle loop.
++         * schedule the previous vcpu again, which will lead to the desired
++         * processing to be done.
+          * Undo the rendezvous_in_cnt decrement and schedule another call of
+          * sched_slave().
+          */
+-        if ( is_idle_unit(prev) && sched_tasklet_check_cpu(cpu) )
++        if ( rcu_pending(cpu) ||
++             (is_idle_unit(prev) && sched_tasklet_check_cpu(cpu)) )
+         {
+             struct vcpu *vprev = current;
+ 
+diff --git a/xen/include/xen/softirq.h b/xen/include/xen/softirq.h
+index b4724f5c8b..1f6c4783da 100644
+--- a/xen/include/xen/softirq.h
++++ b/xen/include/xen/softirq.h
+@@ -4,10 +4,10 @@
+ /* Low-latency softirqs come first in the following list. */
+ enum {
+     TIMER_SOFTIRQ = 0,
++    RCU_SOFTIRQ,
+     SCHED_SLAVE_SOFTIRQ,
+     SCHEDULE_SOFTIRQ,
+     NEW_TLBFLUSH_CLOCK_PERIOD_SOFTIRQ,
+-    RCU_SOFTIRQ,
+     TASKLET_SOFTIRQ,
+     NR_COMMON_SOFTIRQS
+ };
+-- 
+2.16.4
 
-> @@ -689,8 +689,8 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
->           (linear >= XEN_VIRT_END && linear < DIRECTMAP_VIRT_START) )
->          return -EINVAL;
->  
-> -    pl3e = l4e_to_l3e(idle_pg_table[root_table_offset(linear)]) +
-> -        l3_table_offset(linear);
-> +    pl3e = map_l3t_from_l4e(idle_pg_table[root_table_offset(linear)]);
-> +    pl3e += l3_table_offset(linear);
-
-By keeping original style (a single assignment) you'd have slightly
-less of a diff, and I think keeping original style where it's not
-colliding with any of our rules is generally a good idea. Doing so
-won't even make you hit the slightly flawed definition of
-map_l3t_from_l4e() at al (missing outer parentheses). I notice you
-do so ...
-
-> @@ -702,7 +702,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
->      }
->      else
->      {
-> -        pl2e = l3e_to_l2e(*pl3e) + l2_table_offset(linear);
-> +        pl2e = map_l2t_from_l3e(*pl3e) + l2_table_offset(linear);
->          flags = l2e_get_flags(*pl2e);
->          ASSERT(flags & _PAGE_PRESENT);
->          if ( flags & _PAGE_PSE )
-> @@ -713,7 +713,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
->          }
->          else
->          {
-> -            pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(linear);
-> +            pl1e = map_l1t_from_l2e(*pl2e) + l1_table_offset(linear);
-
-... in both of these cases.
-
-> @@ -724,48 +724,61 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
->          }
->      }
->  
-> +    UNMAP_DOMAIN_PAGE(pl1e);
-> +    UNMAP_DOMAIN_PAGE(pl2e);
-> +    UNMAP_DOMAIN_PAGE(pl3e);
-> +
->      if ( !(root_get_flags(rpt[root_table_offset(linear)]) & _PAGE_PRESENT) )
->      {
-> -        pl3e = alloc_xen_pagetable();
-> -        if ( !pl3e )
-> +        mfn_t l3mfn = alloc_xen_pagetable_new();
-> +
-> +        if ( mfn_eq(l3mfn, INVALID_MFN) )
->              goto out;
-> +
-> +        pl3e = map_domain_page(l3mfn);
-
-Seeing this recur (from other patches) I wonder whether we wouldn't
-better make map_domain_page() accept INVALID_MFN and return NULL in
-this case. In cases like the one here it would eliminate the need
-for several local variables. Of course the downside of this is that
-then we'll have to start checking map_domain_page()'s return value.
-A middle ground could be to have
-
-void *alloc_mapped_pagetable(mfn_t *mfn);
-
-allowing to pass in NULL if the MFN is of no interest.
-
-> @@ -781,6 +794,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
->  
->      rc = 0;
->   out:
-> +    UNMAP_DOMAIN_PAGE(pl1e);
-> +    UNMAP_DOMAIN_PAGE(pl2e);
-> +    UNMAP_DOMAIN_PAGE(pl3e);
->      return rc;
->  }
-
-I don't think the writing of NULL into the variables is necessary
-here. And if the needed if()-s are of concern, then perhaps we
-should consider making unmap_domain_page() finally accept NULL as
-input?
-
-Jan
 
