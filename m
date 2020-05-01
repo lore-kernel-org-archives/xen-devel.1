@@ -7,56 +7,56 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D7E47C4725B
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B0ADBC47259
 	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 22:59:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A840D216FD
+	by mail.kernel.org (Postfix) with ESMTPS id 8334321775
 	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 22:59:29 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Kn9cZ2YJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A840D216FD
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="HRQXCw/9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8334321775
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUecd-0007w6-0s; Fri, 01 May 2020 22:59:07 +0000
+	id 1jUecn-0007zf-7K; Fri, 01 May 2020 22:59:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T3Df=6P=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jUecc-0007vF-31
- for xen-devel@lists.xenproject.org; Fri, 01 May 2020 22:59:06 +0000
-X-Inumbo-ID: 57d17eb8-8bff-11ea-b07b-bc764e2007e4
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ id 1jUecm-0007z2-4R
+ for xen-devel@lists.xenproject.org; Fri, 01 May 2020 22:59:16 +0000
+X-Inumbo-ID: 5ce7dcf8-8bff-11ea-b9cf-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 57d17eb8-8bff-11ea-b07b-bc764e2007e4;
- Fri, 01 May 2020 22:59:00 +0000 (UTC)
+ id 5ce7dcf8-8bff-11ea-b9cf-bc764e2007e4;
+ Fri, 01 May 2020 22:59:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588373940;
+ d=citrix.com; s=securemail; t=1588373948;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=rL/dG5kGKiStpqKmDj82L3vvn9kv06+Bf9qYwu7T+rE=;
- b=Kn9cZ2YJBdhJQbkjLexIclJ/3Dm+uFcV1T7SZRyiX/XxGRUW1T0CE2kJ
- qGXbDyvdkHwc9bEp+KTrQ2z2lJLmA+goxswBKWNgIiYa0Aq+4VMPX9WrB
- ISb3v7cQKDPMvqBBZY2rHigt8UD5kC3ioFYm0cMvwnub1cQjPrnWmzdhB 0=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+ bh=KmdiFWTUtoRQ6SF0OGgDhEv3ORD8KJHYv15kmE23ReQ=;
+ b=HRQXCw/9UuQPkIuaP98GPgTkF0YBdIab2DH4VEdhwH9i4faNXdsIGgyF
+ NkuISlKUyrxyGN9IzXFuPbnIc1bbYnMwE8ZdfdYkmJnQZiuPDfTBcOw0Z
+ +QafbUqMWxnEjyYATrkQJc3PHsKTd16Qy/wX0vdgZSwkAvzdJKHjnci9k c=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,29 +65,29 @@ Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: zm/Rio6/a5ZOg6ZjO8FJSzE8qGDSpCwuHsz559zCVgwOpMbAVIWa+S+s+4hHf9z7aT2FUR1wds
- j8hzds/+dTrTjpEaIXPADLOAMqt3yRyHmm9A0LnVkHmhpXigbIKGdELb900ETMHcpI+qyFOeGA
- 58gpwwWRCnlpY1OeCdntVjVcMg2aq4AC/6YmnP7hHHHxJ2IXmCoK/j4lBT7MWB0mM2EtG93O09
- DkbCoFQgm5gIq7A0Q4kz3bgf1EJRMWgsE5KCpUVrZsfjWyGjgLhB3oFrNAA/yQlvLBrqvQhX/0
- CVo=
+IronPort-SDR: 7WuTT0jWBm09Mc/nbOEE+auc69OKlH3GWOmbKE2uVAaOnAmqnkYT90HxHA3xmAPWNI+BMHFQ2r
+ QHw2wS8jFcFSMJk6tCSvXzMJibya4VQtH2wTwGkhBdEFfWkDG6fKCGbYlu5ntbh7Dsr5JO9xLN
+ Fer8dsWTpxRAq4tmk0Yp0XzXCokf/n7WlYO6HQGVD0hhksc5wAJxM2nddEnnSLjZW9vBsgpxs6
+ zEEL36xfT+/7Vf5tWmR5HD6wPpCbAhCWLB/LFoVBCjAczqFaoycmS3subZlpqx8D2WiXLueYZb
+ klg=
 X-SBRS: 2.7
-X-MesageID: 16584676
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 17293962
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16584676"
+X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="17293962"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 08/16] x86/shstk: Create shadow stacks
-Date: Fri, 1 May 2020 23:58:30 +0100
-Message-ID: <20200501225838.9866-9-andrew.cooper3@citrix.com>
+Subject: [PATCH 01/16] x86/traps: Drop last_extable_addr
+Date: Fri, 1 May 2020 23:58:23 +0100
+Message-ID: <20200501225838.9866-2-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200501225838.9866-1-andrew.cooper3@citrix.com>
 References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
@@ -110,18 +110,14 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Introduce HYPERVISOR_SHSTK pagetable constants, which are Read-Only + Dirty.
-Use these in place of _PAGE_NONE for memguard_guard_stack().
+The only user of this facility is dom_crash_sync_extable() by passing 0 into
+asm_domain_crash_synchronous().  The common error cases are already covered
+with show_page_walk(), leaving only %ss/%fs selector/segment errors in the
+compat case.
 
-Supervisor shadow stacks need a token written at the top, which is most easily
-done before making the frame read only.
-
-Allocate the shadow IST stack block in struct tss_page.  It doesn't strictly
-need to live here, but it is a convenient location (and XPTI-safe, for testing
-purposes).
-
-Have load_system_tables() set up the shadow IST stack table when setting up
-the regular IST in the TSS.
+Point at dom_crash_sync_extable in the error message, which is about as good
+as the error hints from other users of asm_domain_crash_synchronous(), and
+drop last_extable_addr.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -129,117 +125,87 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/cpu/common.c         | 19 +++++++++++++++++++
- xen/arch/x86/mm.c                 | 22 +++++++++++++++++++---
- xen/include/asm-x86/page.h        |  1 +
- xen/include/asm-x86/processor.h   |  3 ++-
- xen/include/asm-x86/x86_64/page.h |  1 +
- 5 files changed, 42 insertions(+), 4 deletions(-)
+ xen/arch/x86/traps.c        | 11 +----------
+ xen/arch/x86/x86_64/entry.S |  2 +-
+ 2 files changed, 2 insertions(+), 11 deletions(-)
 
-diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
-index 290f9f1c30..3962717aa5 100644
---- a/xen/arch/x86/cpu/common.c
-+++ b/xen/arch/x86/cpu/common.c
-@@ -748,6 +748,25 @@ void load_system_tables(void)
- 		.bitmap = IOBMP_INVALID_OFFSET,
- 	};
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 33e5d21ece..fe9457cdb6 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -96,7 +96,6 @@ static char __read_mostly opt_nmi[10] = "fatal";
+ string_param("nmi", opt_nmi);
  
-+	/* Set up the shadow stack IST. */
-+	if ( cpu_has_xen_shstk ) {
-+		unsigned int i;
-+		uint64_t *ist_ssp = this_cpu(tss_page).ist_ssp;
-+
-+		/* Must point at the supervisor stack token. */
-+		ist_ssp[IST_MCE] = stack_top + (IST_MCE * 0x400) - 8;
-+		ist_ssp[IST_NMI] = stack_top + (IST_NMI * 0x400) - 8;
-+		ist_ssp[IST_DB]  = stack_top + (IST_DB  * 0x400) - 8;
-+		ist_ssp[IST_DF]  = stack_top + (IST_DF  * 0x400) - 8;
-+
-+		/* Poision unused entries. */
-+		for ( i = IST_MAX;
-+		      i < ARRAY_SIZE(this_cpu(tss_page).ist_ssp); ++i )
-+			ist_ssp[i] = 0x8600111111111111ul;
-+
-+		wrmsrl(MSR_INTERRUPT_SSP_TABLE, (unsigned long)ist_ssp);
-+	}
-+
- 	BUILD_BUG_ON(sizeof(*tss) <= 0x67); /* Mandated by the architecture. */
+ DEFINE_PER_CPU(uint64_t, efer);
+-static DEFINE_PER_CPU(unsigned long, last_extable_addr);
  
- 	_set_tssldt_desc(gdt + TSS_ENTRY, (unsigned long)tss,
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index bc44d865ef..4e2c3c9735 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -6000,12 +6000,28 @@ void memguard_unguard_range(void *p, unsigned long l)
+ DEFINE_PER_CPU_READ_MOSTLY(seg_desc_t *, gdt);
+ DEFINE_PER_CPU_READ_MOSTLY(l1_pgentry_t, gdt_l1e);
+@@ -786,7 +785,6 @@ static void do_trap(struct cpu_user_regs *regs)
+     {
+         dprintk(XENLOG_ERR, "Trap %u: %p [%ps] -> %p\n",
+                 trapnr, _p(regs->rip), _p(regs->rip), _p(fixup));
+-        this_cpu(last_extable_addr) = regs->rip;
+         regs->rip = fixup;
+         return;
+     }
+@@ -1099,7 +1097,6 @@ void do_invalid_op(struct cpu_user_regs *regs)
+  die:
+     if ( (fixup = search_exception_table(regs)) != 0 )
+     {
+-        this_cpu(last_extable_addr) = regs->rip;
+         regs->rip = fixup;
+         return;
+     }
+@@ -1122,7 +1119,6 @@ void do_int3(struct cpu_user_regs *regs)
  
- #endif
+         if ( (fixup = search_exception_table(regs)) != 0 )
+         {
+-            this_cpu(last_extable_addr) = regs->rip;
+             dprintk(XENLOG_DEBUG, "Trap %u: %p [%ps] -> %p\n",
+                     TRAP_int3, _p(regs->rip), _p(regs->rip), _p(fixup));
+             regs->rip = fixup;
+@@ -1461,7 +1457,6 @@ void do_page_fault(struct cpu_user_regs *regs)
+             perfc_incr(copy_user_faults);
+             if ( unlikely(regs->error_code & PFEC_reserved_bit) )
+                 reserved_bit_page_fault(addr, regs);
+-            this_cpu(last_extable_addr) = regs->rip;
+             regs->rip = fixup;
+             return;
+         }
+@@ -1591,7 +1586,6 @@ void do_general_protection(struct cpu_user_regs *regs)
+     {
+         dprintk(XENLOG_INFO, "GPF (%04x): %p [%ps] -> %p\n",
+                 regs->error_code, _p(regs->rip), _p(regs->rip), _p(fixup));
+-        this_cpu(last_extable_addr) = regs->rip;
+         regs->rip = fixup;
+         return;
+     }
+@@ -2085,10 +2079,7 @@ void asm_domain_crash_synchronous(unsigned long addr)
+      */
+     clac();
  
--void memguard_guard_stack(void *p)
-+static void write_sss_token(unsigned long *ptr)
- {
--    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
-+    /*
-+     * A supervisor shadow stack token is its own linear address, with the
-+     * busy bit (0) clear.
-+     */
-+    *ptr = (unsigned long)ptr;
-+}
+-    if ( addr == 0 )
+-        addr = this_cpu(last_extable_addr);
+-
+-    printk("domain_crash_sync called from entry.S: fault at %p %pS\n",
++    printk("domain_crash_sync called from entry.S: issue around %p %pS\n",
+            _p(addr), _p(addr));
  
-+void memguard_guard_stack(void *p)
-+{
-+    /* IST Shadow stacks.  4x 1k in stack page 0. */
-+    write_sss_token(p + 0x3f8);
-+    write_sss_token(p + 0x7f8);
-+    write_sss_token(p + 0xbf8);
-+    write_sss_token(p + 0xff8);
-+    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
-+
-+    /* Primary Shadow Stack.  1x 4k in stack page 5. */
-     p += 5 * PAGE_SIZE;
--    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
-+    write_sss_token(p + 0xff8);
-+    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
- }
- 
- void memguard_unguard_stack(void *p)
-diff --git a/xen/include/asm-x86/page.h b/xen/include/asm-x86/page.h
-index 5acf3d3d5a..f632affaef 100644
---- a/xen/include/asm-x86/page.h
-+++ b/xen/include/asm-x86/page.h
-@@ -364,6 +364,7 @@ void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t);
-                                    _PAGE_DIRTY | _PAGE_RW)
- #define __PAGE_HYPERVISOR_UCMINUS (__PAGE_HYPERVISOR | _PAGE_PCD)
- #define __PAGE_HYPERVISOR_UC      (__PAGE_HYPERVISOR | _PAGE_PCD | _PAGE_PWT)
-+#define __PAGE_HYPERVISOR_SHSTK   (__PAGE_HYPERVISOR_RO | _PAGE_DIRTY)
- 
- #define MAP_SMALL_PAGES _PAGE_AVAIL0 /* don't use superpages mappings */
- 
-diff --git a/xen/include/asm-x86/processor.h b/xen/include/asm-x86/processor.h
-index f7e80d12e4..54e1a8b605 100644
---- a/xen/include/asm-x86/processor.h
-+++ b/xen/include/asm-x86/processor.h
-@@ -434,7 +434,8 @@ struct __packed tss64 {
-     uint16_t :16, bitmap;
- };
- struct tss_page {
--    struct tss64 __aligned(PAGE_SIZE) tss;
-+    uint64_t __aligned(PAGE_SIZE) ist_ssp[8];
-+    struct tss64 tss;
- };
- DECLARE_PER_CPU(struct tss_page, tss_page);
- 
-diff --git a/xen/include/asm-x86/x86_64/page.h b/xen/include/asm-x86/x86_64/page.h
-index 9876634881..26621f9519 100644
---- a/xen/include/asm-x86/x86_64/page.h
-+++ b/xen/include/asm-x86/x86_64/page.h
-@@ -171,6 +171,7 @@ static inline intpte_t put_pte_flags(unsigned int x)
- #define PAGE_HYPERVISOR_RW      (__PAGE_HYPERVISOR_RW      | _PAGE_GLOBAL)
- #define PAGE_HYPERVISOR_RX      (__PAGE_HYPERVISOR_RX      | _PAGE_GLOBAL)
- #define PAGE_HYPERVISOR_RWX     (__PAGE_HYPERVISOR         | _PAGE_GLOBAL)
-+#define PAGE_HYPERVISOR_SHSTK   (__PAGE_HYPERVISOR_SHSTK   | _PAGE_GLOBAL)
- 
- #define PAGE_HYPERVISOR         PAGE_HYPERVISOR_RW
- #define PAGE_HYPERVISOR_UCMINUS (__PAGE_HYPERVISOR_UCMINUS | \
+     __domain_crash(current->domain);
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index d55453f3f3..a3ce298529 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -527,7 +527,7 @@ ENTRY(dom_crash_sync_extable)
+         sete  %al
+         leal  (%rax,%rax,2),%eax
+         orb   %al,UREGS_cs(%rsp)
+-        xorl  %edi,%edi
++        lea   dom_crash_sync_extable(%rip), %rdi
+         jmp   asm_domain_crash_synchronous /* Does not return */
+         .popsection
+ #endif /* CONFIG_PV */
 -- 
 2.11.0
 
