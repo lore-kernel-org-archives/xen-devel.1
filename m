@@ -7,56 +7,56 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AA6B0C47254
-	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C925C47254
+	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7E58C208DB
-	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 50086208DB
+	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="iOc9QmKx"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7E58C208DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Bwi9hlB9"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50086208DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUehg-0001AP-P4; Fri, 01 May 2020 23:04:20 +0000
+	id 1jUehq-0001DA-HP; Fri, 01 May 2020 23:04:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T3Df=6P=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jUehf-0001AF-N1
- for xen-devel@lists.xenproject.org; Fri, 01 May 2020 23:04:19 +0000
-X-Inumbo-ID: 15fcccbc-8c00-11ea-9887-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1jUehp-0001Cf-IW
+ for xen-devel@lists.xenproject.org; Fri, 01 May 2020 23:04:29 +0000
+X-Inumbo-ID: 18c43340-8c00-11ea-ae69-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 15fcccbc-8c00-11ea-9887-bc764e2007e4;
- Fri, 01 May 2020 23:04:18 +0000 (UTC)
+ id 18c43340-8c00-11ea-ae69-bc764e2007e4;
+ Fri, 01 May 2020 23:04:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588374258;
+ d=citrix.com; s=securemail; t=1588374263;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=HTUK8m+QrV1a4/c+FcbBl6B+TxDRXiRJZVfXM92PQy0=;
- b=iOc9QmKxzAeTJCrxrx/MA3LkSf8Dde+9NsbXTPx7VC+uh1TNJ1r4ZSth
- cnMZLPIFRVYxoxolviwSMGZB/OGw3yD2TTR8r+OKo2WtgHJ3PZByi2q29
- ZIJl+1fuy2gzZxNaDsCmKgG5XIW/+WaD8zePshBmg/3NsGwsBh7ekJU2B k=;
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ bh=QQTKLF5FcqWscWYTybl+ldFADN5l5S3i4DlWR7dOp0U=;
+ b=Bwi9hlB9twrgPWza/i/YntZ7SklkzWhK0zE/g/G/SlgHFMG1/egX3gKX
+ pNcAshrDAbplO/4jVljkNkPC1zAWbTKDzYomEKd6oZtxIpiF20Y69E8TV
+ QOJQ6WlGJkW5YTquqzoPxHYHHf/xIEr+FhrtMG06LTnJLim37yBAiurYE Q=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,30 +65,29 @@ Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: LwgmbsDFxdS+tPhQKNfQOdklFvxXZDioEMP9BKxTatOmGiSlPKvotKZZwqe3z+LlvdvTNSoFug
- NJ2mHwyf1Ao8tw+o6ofA7ZWar0nPm/qP15wYYp3kPU9d9mj5tHrECaarbawvhyN6nNML/mr2zj
- nV6vc007LnblHHWt4VgzZNHORmk98DXVTGnb9tKQ23wuwFb3Z69Sj6/2mDLXs0eRRopJDOE/J5
- bDq1LMsTN2dNfIyG4ZSHRsaXwMf2x/ZRetoDZ9OmSoGfZ/vGglnjx+g51ZgbGV/iEsQcEvHcRj
- Xzk=
+IronPort-SDR: warOANc0prrJjWlz01fdFNaC2VNLf73T7N7GydCNmFSXCFe6EDaDu2iZOgOD68YmWQ2GEUfuTM
+ A3HcFFK3s9Rbp+jKi7I/QHNKpiiv3hEgRrValrt6B2uexJr9r9j2RQBlv18LDcAJN6qN82CoNV
+ QwD4q0xFbOm8t9Xqc6X/l+FMOacKZQOIj+ynNDE/6wNHVHsEfc+Zezrmp0KIqz+NGH6XtijoDo
+ Gq0NcGs3jzdFKwVRtlo9phZJaYJargH2g+P0H+mSlZWhbZTuT02AP6LyQn/c+u6tIXqkBeE+Wm
+ eW4=
 X-SBRS: 2.7
-X-MesageID: 17294144
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 16855100
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="17294144"
+X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16855100"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 14/16] x86/alt: Adjust _alternative_instructions() to not
- create shadow stacks
-Date: Fri, 1 May 2020 23:58:36 +0100
-Message-ID: <20200501225838.9866-15-andrew.cooper3@citrix.com>
+Subject: [PATCH 16/16] x86/shstk: Activate Supervisor Shadow Stacks
+Date: Fri, 1 May 2020 23:58:38 +0100
+Message-ID: <20200501225838.9866-17-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200501225838.9866-1-andrew.cooper3@citrix.com>
 References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
@@ -111,12 +110,18 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The current alternatives algorithm clears CR0.WP and writes into .text.  This
-has a side effect of the mappings becoming shadow stacks once CET is active.
+With all other plumbing in place, activate shadow stacks when possible.
 
-Adjust _alternative_instructions() to clean up after itself.  This involves
-extending the set of bits modify_xen_mappings() to include Dirty (and Accessed
-for good measure).
+The BSP needs to wait until alternatives have run (to avoid interaction with
+CR0.WP), and after the first reset_stack_and_jump() to avoid having a pristine
+shadow stack interact in problematic ways with an in-use regular stack.
+Activate shadow stack in reinit_bsp_stack().
+
+APs have all infrastructure set up by the booting CPU, so enable shadow stacks
+before entering C.  The S3 path needs save and restore SSP along side RSP.
+
+The crash path needs to turn CET off to avoid interfereing with the kexec
+kernel's environment.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -124,66 +129,273 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/alternative.c | 14 ++++++++++++++
- xen/arch/x86/mm.c          |  6 +++---
- 2 files changed, 17 insertions(+), 3 deletions(-)
+ xen/arch/x86/acpi/wakeup_prot.S | 56 +++++++++++++++++++++++++++++++++++++++++
+ xen/arch/x86/boot/x86_64.S      | 30 +++++++++++++++++++++-
+ xen/arch/x86/cpu/common.c       |  5 ++++
+ xen/arch/x86/crash.c            |  7 ++++++
+ xen/arch/x86/setup.c            | 26 +++++++++++++++++++
+ xen/arch/x86/spec_ctrl.c        |  8 ++++++
+ xen/include/asm-x86/msr-index.h |  3 +++
+ xen/include/asm-x86/x86-defns.h |  1 +
+ 8 files changed, 135 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
-index ce2b4302e6..004e9ede25 100644
---- a/xen/arch/x86/alternative.c
-+++ b/xen/arch/x86/alternative.c
-@@ -21,6 +21,7 @@
- #include <asm/processor.h>
- #include <asm/alternative.h>
- #include <xen/init.h>
-+#include <asm/setup.h>
- #include <asm/system.h>
- #include <asm/traps.h>
- #include <asm/nmi.h>
-@@ -398,6 +399,19 @@ static void __init _alternative_instructions(bool force)
-         panic("Timed out waiting for alternatives self-NMI to hit\n");
- 
-     set_nmi_callback(saved_nmi_callback);
+diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
+index 4dba6020a7..22c0f8cc79 100644
+--- a/xen/arch/x86/acpi/wakeup_prot.S
++++ b/xen/arch/x86/acpi/wakeup_prot.S
+@@ -1,3 +1,8 @@
++#include <asm/config.h>
++#include <asm/msr-index.h>
++#include <asm/page.h>
++#include <asm/processor.h>
 +
-+    /*
-+     * When Xen is using shadow stacks, the alternatives clearing CR0.WP and
-+     * writing into the mappings set dirty bits, turning the mappings into
-+     * shadow stack mappings.
-+     *
-+     * While we can execute from them, this would also permit them to be the
-+     * target of WRSS instructions, so reset the dirty after patching.
-+     */
+         .file __FILE__
+         .text
+         .code64
+@@ -15,6 +20,12 @@ ENTRY(do_suspend_lowlevel)
+         mov     %cr0, %rax
+         mov     %rax, saved_cr0(%rip)
+ 
++#ifdef CONFIG_XEN_SHSTK
++        mov     $1, %eax
++        rdsspq  %rax
++        mov     %rax, saved_ssp(%rip)
++#endif
++
+         /* enter sleep state physically */
+         mov     $3, %edi
+         call    acpi_enter_sleep_state
+@@ -48,6 +59,48 @@ ENTRY(s3_resume)
+         pushq   %rax
+         lretq
+ 1:
++#ifdef CONFIG_XEN_SHSTK
++	/*
++         * Restoring SSP is a little convoluted, because we are intercepting
++         * the middle of an in-use shadow stack.  Write a temporary supervisor
++         * token under the stack, so SETSSBSY takes us where we want, then
++         * reset MSR_PL0_SSP to its usual value and pop the temporary token.
++         */
++        mov     saved_rsp(%rip), %rdi
++        cmpq    $1, %rdi
++        je      .L_shstk_done
++
++        /* Write a supervisor token under SSP. */
++        sub     $8, %rdi
++        mov     %rdi, (%rdi)
++
++        /* Load it into MSR_PL0_SSP. */
++        mov     $MSR_PL0_SSP, %ecx
++        mov     %rdi, %rdx
++        shr     $32, %rdx
++        mov     %edi, %eax
++
++        /* Enable CET. */
++        mov     $MSR_S_CET, %ecx
++        xor     %edx, %edx
++        mov     $CET_SHSTK_EN | CET_WRSS_EN, %eax
++        wrmsr
++
++        /* Activate our temporary token. */
++        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ebx
++        mov     %rbx, %cr4
++        setssbsy
++
++        /* Reset MSR_PL0_SSP back to its expected value. */
++        and     $~(STACK_SIZE - 1), %eax
++        or      $0x5ff8, %eax
++        wrmsr
++
++        /* Pop the temporary token off the stack. */
++        mov     $2, %eax
++        incsspd %eax
++.L_shstk_done:
++#endif
+ 
+         call    load_system_tables
+ 
+@@ -65,6 +118,9 @@ ENTRY(s3_resume)
+ 
+ saved_rsp:      .quad   0
+ saved_cr0:      .quad   0
++#ifdef CONFIG_XEN_SHSTK
++saved_ssp:      .quad   0
++#endif
+ 
+ GLOBAL(saved_magic)
+         .long   0x9abcdef0
+diff --git a/xen/arch/x86/boot/x86_64.S b/xen/arch/x86/boot/x86_64.S
+index 314a32a19f..59b770f955 100644
+--- a/xen/arch/x86/boot/x86_64.S
++++ b/xen/arch/x86/boot/x86_64.S
+@@ -28,8 +28,36 @@ ENTRY(__high_start)
+         lretq
+ 1:
+         test    %ebx,%ebx
+-        jnz     start_secondary
++        jz      .L_bsp
+ 
++        /* APs.  Set up shadow stacks before entering C. */
++
++        testl   $cpufeat_mask(X86_FEATURE_XEN_SHSTK), \
++                CPUINFO_FEATURE_OFFSET(X86_FEATURE_XEN_SHSTK) + boot_cpu_data(%rip)
++        je      .L_ap_shstk_done
++
++        mov     $MSR_S_CET, %ecx
++        xor     %edx, %edx
++        mov     $CET_SHSTK_EN | CET_WRSS_EN, %eax
++        wrmsr
++
++        mov     $MSR_PL0_SSP, %ecx
++        mov     %rsp, %rdx
++        shr     $32, %rdx
++        mov     %esp, %eax
++        and     $~(STACK_SIZE - 1), %eax
++        or      $0x5ff8, %eax
++        wrmsr
++
++        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ecx
++        mov     %rcx, %cr4
++        setssbsy
++
++.L_ap_shstk_done:
++        call    start_secondary
++        BUG     /* start_secondary() shouldn't return. */
++
++.L_bsp:
+         /* Pass off the Multiboot info structure to C land (if applicable). */
+         mov     multiboot_ptr(%rip),%edi
+         call    __start_xen
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 3962717aa5..a77be36349 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -323,6 +323,11 @@ void __init early_cpu_init(void)
+ 	       x86_cpuid_vendor_to_str(c->x86_vendor), c->x86, c->x86,
+ 	       c->x86_model, c->x86_model, c->x86_mask, eax);
+ 
++	if (c->cpuid_level >= 7) {
++		cpuid_count(7, 0, &eax, &ebx, &ecx, &edx);
++		c->x86_capability[cpufeat_word(X86_FEATURE_CET_SS)] = ecx;
++	}
++
+ 	eax = cpuid_eax(0x80000000);
+ 	if ((eax >> 16) == 0x8000 && eax >= 0x80000008) {
+ 		eax = cpuid_eax(0x80000008);
+diff --git a/xen/arch/x86/crash.c b/xen/arch/x86/crash.c
+index 450eecd46b..0611b4fb9b 100644
+--- a/xen/arch/x86/crash.c
++++ b/xen/arch/x86/crash.c
+@@ -200,6 +200,13 @@ void machine_crash_shutdown(void)
+     /* Reset CPUID masking and faulting to the host's default. */
+     ctxt_switch_levelling(NULL);
+ 
++    /* Disable shadow stacks. */
 +    if ( cpu_has_xen_shstk )
-+        modify_xen_mappings(XEN_VIRT_START + MB(2),
-+                            (unsigned long)&__2M_text_end,
-+                            PAGE_HYPERVISOR_RX);
++    {
++        wrmsrl(MSR_S_CET, 0);
++        write_cr4(read_cr4() & ~X86_CR4_CET);
++    }
++
+     info = kexec_crash_save_info();
+     info->xen_phys_start = xen_phys_start;
+     info->dom0_pfn_to_mfn_frame_list_list =
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index aa21201507..5c574b2035 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -664,6 +664,13 @@ static void __init noreturn reinit_bsp_stack(void)
+     stack_base[0] = stack;
+     memguard_guard_stack(stack);
+ 
++    if ( cpu_has_xen_shstk )
++    {
++        wrmsrl(MSR_PL0_SSP, (unsigned long)stack + 0x5ff8);
++        wrmsrl(MSR_S_CET, CET_SHSTK_EN | CET_WRSS_EN);
++        asm volatile ("setssbsy" ::: "memory");
++    }
++
+     reset_stack_and_jump_nolp(init_done);
  }
  
- void __init alternative_instructions(void)
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 4e2c3c9735..26b01cb917 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -5448,8 +5448,8 @@ int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-  * mappings, but will shatter superpages if necessary, and will destroy
-  * mappings if not passed _PAGE_PRESENT.
-  *
-- * The only flags considered are NX, RW and PRESENT.  All other input flags
-- * are ignored.
-+ * The only flags considered are NX, D, A, RW and PRESENT.  All other input
-+ * flags are ignored.
-  *
-  * It is an error to call with present flags over an unpopulated range.
-  */
-@@ -5462,7 +5462,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-     unsigned long v = s;
+@@ -985,6 +992,21 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+     /* This must come before e820 code because it sets paddr_bits. */
+     early_cpu_init();
  
-     /* Set of valid PTE bits which may be altered. */
--#define FLAGS_MASK (_PAGE_NX|_PAGE_RW|_PAGE_PRESENT)
-+#define FLAGS_MASK (_PAGE_NX|_PAGE_DIRTY|_PAGE_ACCESSED|_PAGE_RW|_PAGE_PRESENT)
-     nf &= FLAGS_MASK;
++    /* Choose shadow stack early, to set infrastructure up appropriately. */
++    if ( opt_xen_shstk && boot_cpu_has(X86_FEATURE_CET_SS) )
++    {
++        printk("Enabling Supervisor Shadow Stacks\n");
++
++        setup_force_cpu_cap(X86_FEATURE_XEN_SHSTK);
++#ifdef CONFIG_PV32
++        if ( opt_pv32 )
++        {
++            opt_pv32 = 0;
++            printk("  - Disabling PV32 due to Shadow Stacks\n");
++        }
++#endif
++    }
++
+     /* Sanitise the raw E820 map to produce a final clean version. */
+     max_page = raw_max_page = init_e820(memmap_type, &e820_raw);
  
-     ASSERT(IS_ALIGNED(s, PAGE_SIZE));
+@@ -1721,6 +1743,10 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+ 
+     alternative_branches();
+ 
++    /* Defer CR4.CET until alternatives have finished playing with CR4.WP */
++    if ( cpu_has_xen_shstk )
++        set_in_cr4(X86_CR4_CET);
++
+     /*
+      * NB: when running as a PV shim VCPUOP_up/down is wired to the shim
+      * physical cpu_add/remove functions, so launch the guest with only
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index c5d8e587a8..a94be2d594 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -882,6 +882,14 @@ void __init init_speculation_mitigations(void)
+     hw_smt_enabled = check_smt_enabled();
+ 
+     /*
++     * First, disable the use of retpolines if Xen is using shadow stacks, as
++     * they are incompatible.
++     */
++    if ( cpu_has_xen_shstk &&
++         (opt_thunk == THUNK_DEFAULT || opt_thunk == THUNK_RETPOLINE) )
++        thunk = THUNK_JMP;
++
++    /*
+      * Has the user specified any custom BTI mitigations?  If so, follow their
+      * instructions exactly and disable all heuristics.
+      */
+diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
+index 85c5f20b76..cdfb7b047b 100644
+--- a/xen/include/asm-x86/msr-index.h
++++ b/xen/include/asm-x86/msr-index.h
+@@ -68,6 +68,9 @@
+ 
+ #define MSR_U_CET                           0x000006a0
+ #define MSR_S_CET                           0x000006a2
++#define  CET_SHSTK_EN                       (_AC(1, ULL) <<  0)
++#define  CET_WRSS_EN                        (_AC(1, ULL) <<  1)
++
+ #define MSR_PL0_SSP                         0x000006a4
+ #define MSR_PL1_SSP                         0x000006a5
+ #define MSR_PL2_SSP                         0x000006a6
+diff --git a/xen/include/asm-x86/x86-defns.h b/xen/include/asm-x86/x86-defns.h
+index 84e15b15be..4051a80485 100644
+--- a/xen/include/asm-x86/x86-defns.h
++++ b/xen/include/asm-x86/x86-defns.h
+@@ -73,6 +73,7 @@
+ #define X86_CR4_SMEP       0x00100000 /* enable SMEP */
+ #define X86_CR4_SMAP       0x00200000 /* enable SMAP */
+ #define X86_CR4_PKE        0x00400000 /* enable PKE */
++#define X86_CR4_CET        0x00800000 /* Control-flow Enforcement Technology */
+ 
+ /*
+  * XSTATE component flags in XCR0
 -- 
 2.11.0
 
