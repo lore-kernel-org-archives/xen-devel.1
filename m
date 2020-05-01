@@ -7,57 +7,56 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96ADDC47256
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98944C47258
 	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 22:59:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 58068216FD
+	by mail.kernel.org (Postfix) with ESMTPS id 57805208DB
 	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 22:59:29 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="CWTRh3jM"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 58068216FD
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="R9E45x62"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57805208DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUech-0007wj-9B; Fri, 01 May 2020 22:59:11 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jUecZ-0007us-Kz; Fri, 01 May 2020 22:59:03 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T3Df=6P=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jUecg-0007wT-18
- for xen-devel@lists.xenproject.org; Fri, 01 May 2020 22:59:10 +0000
-X-Inumbo-ID: 5cf8f43e-8bff-11ea-9b6f-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5cf8f43e-8bff-11ea-9b6f-12813bfff9fa;
- Fri, 01 May 2020 22:59:08 +0000 (UTC)
+ id 1jUecX-0007ud-Gj
+ for xen-devel@lists.xenproject.org; Fri, 01 May 2020 22:59:01 +0000
+X-Inumbo-ID: 57b0d122-8bff-11ea-9887-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 57b0d122-8bff-11ea-9887-bc764e2007e4;
+ Fri, 01 May 2020 22:58:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588373949;
+ d=citrix.com; s=securemail; t=1588373939;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=vfDg0gLirp3wqWcYHVf6YMOyxLiUvrLksiHPpLTiioo=;
- b=CWTRh3jMoBdgTb8l5JZHkZrzWJ2i0vSdsuBe5XBN8ZgsOo63lF313NXC
- jcrMgm4JJKaBTeMwUeVoA6dDaITrVacXQchFXaHEJeyNLRGmAFy70EYJM
- ReZyH0y3kedaALnaXzJwEBoVOhmM2WzXdWtUC4TuN20BTnPgajOGU/hSd s=;
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+ bh=7x5ESMNeelNN6mx92zjbIOif/mDl8/XYbLA1njk7T8g=;
+ b=R9E45x62qjLIIIrMD3jzK2GbTFHHkI+BwqxvDmcVb70lHvfjcb3mzZ/C
+ ghkXCb8EpC4SZSzeTtfL4uwQlKdO5KPQpNKPWrHjIlvE4gTrPZAr9/USD
+ 1+ISsVUN2IdU39rVqsWHJNvkaCXBqRyz3J7RPXXlTYe2h6rJJJuEDwl9T 8=;
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -66,30 +65,29 @@ Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: kIYvcEtKJuBgW1dMx7Ua+jevmpknfZwyDEOZbchuAhJfHUXQJf87Ye5sg9yPemW/8UqWX4hLus
- St19uT9t+tWzu0d55eT5RBQKAJxbdBzfeHAW6pOK/P81MbGa14YVdTnu4e7mi0Cmk3kNQzuEzx
- SlaZso0FMEoWSNc5fA5n1mhN2agYO9cEcTFH5WYR8JGX8bCbIZdYciuvQoRfTxC/qQFUAi88VU
- +hm++7OuEAR1TbbVXSFEMtG66NL0jubThZ0LPvqy/3f0dbqp3mkKaOzHfvlBVeaovzxEm1pQ/a
- 5Jo=
+IronPort-SDR: V89ehA/w7+CdA8L11/1s8fe0cbsS4DVzi0DwAvyQ+3YkGGg7gmWsJXV9QR5avOXlUNEoFQS9n6
+ 8Gkk62mZSUQqmPjD3g7sISTx7m4uUmjqAVbftWuDHHvCj1CO0anil0m0yVq0Itnv+YA2QQ2jUW
+ s5qAbhy5L3GsMo8wVxwOe+szIBB48mDxwqqJvPSEokAEDmXxXq2XAx5NcGxNIdnVWvXsnDaUSl
+ +z8W3a83ZhXBmPRQGBGoZLvUnDFkqtwG/L+2gPxpuZ1w6nOicjY37awmlO9tdJUHNM27mrC9A8
+ p8Y=
 X-SBRS: 2.7
-X-MesageID: 16584680
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 16994843
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16584680"
+X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16994843"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 02/16] x86/traps: Clean up printing in
- do_reserved_trap()/fatal_trap()
-Date: Fri, 1 May 2020 23:58:24 +0100
-Message-ID: <20200501225838.9866-3-andrew.cooper3@citrix.com>
+Subject: [PATCH 07/16] x86/shstk: Re-layout the stack block for shadow stacks
+Date: Fri, 1 May 2020 23:58:29 +0100
+Message-ID: <20200501225838.9866-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200501225838.9866-1-andrew.cooper3@citrix.com>
 References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
@@ -112,14 +110,22 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-For one, they render the vector in a different base.
+We have two free pages in the current stack.  A useful property of shadow
+stacks and regular stacks is that they act as each others guard pages as far
+as OoB writes go.
 
-Introduce X86_EXC_* constants and vec_name() to refer to exceptions by their
-mnemonic, which starts bringing the code/diagnostics in line with the Intel
-and AMD manuals.
+Move the regular IST stacks up by one page, to allow their shadow stack page
+to be in slot 0.  The primary shadow stack uses slot 5.
 
-Provide constants for every archtiecturally defined exception, even those not
-implemented by Xen yet, as do_reserved_trap() is a catch-all handler.
+As the shadow IST stacks are only 1k large, shuffle the order of IST vectors
+to have #DF numerically highest (so there is no chance of a shadow stack
+overflow clobbering the supervisor token).
+
+The XPTI code already breaks the MEMORY_GUARD abstraction for stacks by
+forcing it to be present.  To avoid having too many configurations, do away
+with the concept entirely, and unconditionally unmap the pages in all cases.
+
+A later change will turn these properly into shadow stacks.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -127,121 +133,200 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/traps.c            | 24 +++++++++++++++++++-----
- xen/include/asm-x86/processor.h |  6 +-----
- xen/include/asm-x86/x86-defns.h | 35 +++++++++++++++++++++++++++++++++++
- 3 files changed, 55 insertions(+), 10 deletions(-)
+ xen/arch/x86/cpu/common.c       | 10 +++++-----
+ xen/arch/x86/mm.c               | 19 ++++++-------------
+ xen/arch/x86/smpboot.c          |  3 +--
+ xen/arch/x86/traps.c            | 23 ++++++-----------------
+ xen/include/asm-x86/current.h   | 12 ++++++------
+ xen/include/asm-x86/mm.h        |  1 -
+ xen/include/asm-x86/processor.h |  6 +++---
+ 7 files changed, 27 insertions(+), 47 deletions(-)
 
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 131ff03fcf..290f9f1c30 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -732,14 +732,14 @@ void load_system_tables(void)
+ 		.rsp2 = 0x8600111111111111ul,
+ 
+ 		/*
+-		 * MCE, NMI and Double Fault handlers get their own stacks.
++		 * #DB, NMI, DF and #MCE handlers get their own stacks.
+ 		 * All others poisoned.
+ 		 */
+ 		.ist = {
+-			[IST_MCE - 1] = stack_top + IST_MCE * PAGE_SIZE,
+-			[IST_DF  - 1] = stack_top + IST_DF  * PAGE_SIZE,
+-			[IST_NMI - 1] = stack_top + IST_NMI * PAGE_SIZE,
+-			[IST_DB  - 1] = stack_top + IST_DB  * PAGE_SIZE,
++			[IST_MCE - 1] = stack_top + (1 + IST_MCE) * PAGE_SIZE,
++			[IST_NMI - 1] = stack_top + (1 + IST_NMI) * PAGE_SIZE,
++			[IST_DB  - 1] = stack_top + (1 + IST_DB)  * PAGE_SIZE,
++			[IST_DF  - 1] = stack_top + (1 + IST_DF)  * PAGE_SIZE,
+ 
+ 			[IST_MAX ... ARRAY_SIZE(tss->ist) - 1] =
+ 				0x8600111111111111ul,
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 355c50ff91..bc44d865ef 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -6002,25 +6002,18 @@ void memguard_unguard_range(void *p, unsigned long l)
+ 
+ void memguard_guard_stack(void *p)
+ {
+-    /* IST_MAX IST pages + at least 1 guard page + primary stack. */
+-    BUILD_BUG_ON((IST_MAX + 1) * PAGE_SIZE + PRIMARY_STACK_SIZE > STACK_SIZE);
++    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
+ 
+-    memguard_guard_range(p + IST_MAX * PAGE_SIZE,
+-                         STACK_SIZE - PRIMARY_STACK_SIZE - IST_MAX * PAGE_SIZE);
++    p += 5 * PAGE_SIZE;
++    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
+ }
+ 
+ void memguard_unguard_stack(void *p)
+ {
+-    memguard_unguard_range(p + IST_MAX * PAGE_SIZE,
+-                           STACK_SIZE - PRIMARY_STACK_SIZE - IST_MAX * PAGE_SIZE);
+-}
+-
+-bool memguard_is_stack_guard_page(unsigned long addr)
+-{
+-    addr &= STACK_SIZE - 1;
++    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_RW);
+ 
+-    return addr >= IST_MAX * PAGE_SIZE &&
+-           addr < STACK_SIZE - PRIMARY_STACK_SIZE;
++    p += 5 * PAGE_SIZE;
++    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_RW);
+ }
+ 
+ void arch_dump_shared_mem_info(void)
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index f999323bc4..e0f421ca3d 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -823,8 +823,7 @@ static int setup_cpu_root_pgt(unsigned int cpu)
+ 
+     /* Install direct map page table entries for stack, IDT, and TSS. */
+     for ( off = rc = 0; !rc && off < STACK_SIZE; off += PAGE_SIZE )
+-        if ( !memguard_is_stack_guard_page(off) )
+-            rc = clone_mapping(__va(__pa(stack_base[cpu])) + off, rpt);
++        rc = clone_mapping(__va(__pa(stack_base[cpu])) + off, rpt);
+ 
+     if ( !rc )
+         rc = clone_mapping(idt_tables[cpu], rpt);
 diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index fe9457cdb6..e73f07f28a 100644
+index ddbe312f89..1cf00c1f4a 100644
 --- a/xen/arch/x86/traps.c
 +++ b/xen/arch/x86/traps.c
-@@ -686,6 +686,20 @@ const char *trapstr(unsigned int trapnr)
-     return trapnr < ARRAY_SIZE(strings) ? strings[trapnr] : "???";
- }
- 
-+static const char *vec_name(unsigned int vec)
-+{
-+    static const char names[][4] = {
-+#define N(x) [X86_EXC_ ## x] = #x
-+        N(DE),  N(DB),  N(NMI), N(BP),  N(OF),  N(BR),  N(UD),  N(NM),
-+        N(DF),  N(CSO), N(TS),  N(NP),  N(SS),  N(GP),  N(PF),  N(SPV),
-+        N(MF),  N(AC),  N(MC),  N(XM),  N(VE),  N(CP),
-+                                        N(HV),  N(VC),  N(SX),
-+#undef N
-+    };
-+
-+    return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : "??";
-+}
-+
+@@ -369,20 +369,15 @@ static void show_guest_stack(struct vcpu *v, const struct cpu_user_regs *regs)
  /*
-  * This is called for faults at very unexpected times (e.g., when interrupts
-  * are disabled). In such situations we can't do much that is safe. We try to
-@@ -743,10 +757,9 @@ void fatal_trap(const struct cpu_user_regs *regs, bool show_remote)
-         }
-     }
+  * Notes for get_stack_trace_bottom() and get_stack_dump_bottom()
+  *
+- * Stack pages 0 - 3:
++ * Stack pages 1 - 4:
+  *   These are all 1-page IST stacks.  Each of these stacks have an exception
+  *   frame and saved register state at the top.  The interesting bound for a
+  *   trace is the word adjacent to this, while the bound for a dump is the
+  *   very top, including the exception frame.
+  *
+- * Stack pages 4 and 5:
+- *   None of these are particularly interesting.  With MEMORY_GUARD, page 5 is
+- *   explicitly not present, so attempting to dump or trace it is
+- *   counterproductive.  Without MEMORY_GUARD, it is possible for a call chain
+- *   to use the entire primary stack and wander into page 5.  In this case,
+- *   consider these pages an extension of the primary stack to aid debugging
+- *   hopefully rare situations where the primary stack has effective been
+- *   overflown.
++ * Stack pages 0 and 5:
++ *   Shadow stacks.  These are mapped read-only, and used by CET-SS capable
++ *   processors.  They will never contain regular stack data.
+  *
+  * Stack pages 6 and 7:
+  *   These form the primary stack, and have a cpu_info at the top.  For a
+@@ -396,13 +391,10 @@ unsigned long get_stack_trace_bottom(unsigned long sp)
+ {
+     switch ( get_stack_page(sp) )
+     {
+-    case 0 ... 3:
++    case 1 ... 4:
+         return ROUNDUP(sp, PAGE_SIZE) -
+             offsetof(struct cpu_user_regs, es) - sizeof(unsigned long);
  
--    panic("FATAL TRAP: vector = %d (%s)\n"
--          "[error_code=%04x] %s\n",
--          trapnr, trapstr(trapnr), regs->error_code,
--          (regs->eflags & X86_EFLAGS_IF) ? "" : ", IN INTERRUPT CONTEXT");
-+    panic("FATAL TRAP: vec %u, #%s[%04x]%s\n",
-+          trapnr, vec_name(trapnr), regs->error_code,
-+          (regs->eflags & X86_EFLAGS_IF) ? "" : " IN INTERRUPT CONTEXT");
- }
+-#ifndef MEMORY_GUARD
+-    case 4 ... 5:
+-#endif
+     case 6 ... 7:
+         return ROUNDUP(sp, STACK_SIZE) -
+             sizeof(struct cpu_info) - sizeof(unsigned long);
+@@ -416,12 +408,9 @@ unsigned long get_stack_dump_bottom(unsigned long sp)
+ {
+     switch ( get_stack_page(sp) )
+     {
+-    case 0 ... 3:
++    case 1 ... 4:
+         return ROUNDUP(sp, PAGE_SIZE) - sizeof(unsigned long);
  
- static void do_reserved_trap(struct cpu_user_regs *regs)
-@@ -757,7 +770,8 @@ static void do_reserved_trap(struct cpu_user_regs *regs)
-         return;
+-#ifndef MEMORY_GUARD
+-    case 4 ... 5:
+-#endif
+     case 6 ... 7:
+         return ROUNDUP(sp, STACK_SIZE) - sizeof(unsigned long);
  
-     show_execution_state(regs);
--    panic("FATAL RESERVED TRAP %#x: %s\n", trapnr, trapstr(trapnr));
-+    panic("FATAL RESERVED TRAP: vec %u, #%s[%04x]\n",
-+          trapnr, vec_name(trapnr), regs->error_code);
- }
+diff --git a/xen/include/asm-x86/current.h b/xen/include/asm-x86/current.h
+index 5b8f4dbc79..99b66a0087 100644
+--- a/xen/include/asm-x86/current.h
++++ b/xen/include/asm-x86/current.h
+@@ -16,12 +16,12 @@
+  *
+  * 7 - Primary stack (with a struct cpu_info at the top)
+  * 6 - Primary stack
+- * 5 - Optionally not present (MEMORY_GUARD)
+- * 4 - Unused; optionally not present (MEMORY_GUARD)
+- * 3 - Unused; optionally not present (MEMORY_GUARD)
+- * 2 - MCE IST stack
+- * 1 - NMI IST stack
+- * 0 - Double Fault IST stack
++ * 5 - Primay Shadow Stack (read-only)
++ * 4 - #DF IST stack
++ * 3 - #DB IST stack
++ * 2 - NMI IST stack
++ * 1 - #MC IST stack
++ * 0 - IST Shadow Stacks (4x 1k, read-only)
+  */
  
- static void do_trap(struct cpu_user_regs *regs)
+ /*
+diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
+index 3d3f9d49ac..7e74996053 100644
+--- a/xen/include/asm-x86/mm.h
++++ b/xen/include/asm-x86/mm.h
+@@ -536,7 +536,6 @@ void memguard_unguard_range(void *p, unsigned long l);
+ 
+ void memguard_guard_stack(void *p);
+ void memguard_unguard_stack(void *p);
+-bool __attribute_const__ memguard_is_stack_guard_page(unsigned long addr);
+ 
+ struct mmio_ro_emulate_ctxt {
+         unsigned long cr2;
 diff --git a/xen/include/asm-x86/processor.h b/xen/include/asm-x86/processor.h
-index 8f6f5a97dd..12b55e1022 100644
+index 5e8a0fb649..f7e80d12e4 100644
 --- a/xen/include/asm-x86/processor.h
 +++ b/xen/include/asm-x86/processor.h
-@@ -43,11 +43,7 @@
- #define TRAP_virtualisation   20
- #define TRAP_nr               32
+@@ -439,10 +439,10 @@ struct tss_page {
+ DECLARE_PER_CPU(struct tss_page, tss_page);
  
--#define TRAP_HAVE_EC                                                    \
--    ((1u << TRAP_double_fault) | (1u << TRAP_invalid_tss) |             \
--     (1u << TRAP_no_segment) | (1u << TRAP_stack_error) |               \
--     (1u << TRAP_gp_fault) | (1u << TRAP_page_fault) |                  \
--     (1u << TRAP_alignment_check))
-+#define TRAP_HAVE_EC X86_EXC_HAVE_EC
+ #define IST_NONE 0UL
+-#define IST_DF   1UL
++#define IST_MCE  1UL
+ #define IST_NMI  2UL
+-#define IST_MCE  3UL
+-#define IST_DB   4UL
++#define IST_DB   3UL
++#define IST_DF   4UL
+ #define IST_MAX  4UL
  
- /* Set for entry via SYSCALL. Informs return code to use SYSRETQ not IRETQ. */
- /* NB. Same as VGCF_in_syscall. No bits in common with any other TRAP_ defn. */
-diff --git a/xen/include/asm-x86/x86-defns.h b/xen/include/asm-x86/x86-defns.h
-index 8bf503220a..84e15b15be 100644
---- a/xen/include/asm-x86/x86-defns.h
-+++ b/xen/include/asm-x86/x86-defns.h
-@@ -118,4 +118,39 @@
- 
- #define X86_NR_VECTORS 256
- 
-+/* Exception Vectors */
-+#define X86_EXC_DE             0 /* Divide Error. */
-+#define X86_EXC_DB             1 /* Debug Exception. */
-+#define X86_EXC_NMI            2 /* NMI. */
-+#define X86_EXC_BP             3 /* Breakpoint. */
-+#define X86_EXC_OF             4 /* Overflow. */
-+#define X86_EXC_BR             5 /* BOUND Range. */
-+#define X86_EXC_UD             6 /* Invalid Opcode. */
-+#define X86_EXC_NM             7 /* Device Not Available. */
-+#define X86_EXC_DF             8 /* Double Fault. */
-+#define X86_EXC_CSO            9 /* Coprocessor Segment Overrun. */
-+#define X86_EXC_TS            10 /* Invalid TSS. */
-+#define X86_EXC_NP            11 /* Segment Not Present. */
-+#define X86_EXC_SS            12 /* Stack-Segment Fault. */
-+#define X86_EXC_GP            13 /* General Porection Fault. */
-+#define X86_EXC_PF            14 /* Page Fault. */
-+#define X86_EXC_SPV           15 /* PIC Spurious Interrupt Vector. */
-+#define X86_EXC_MF            16 /* Maths fault (x87 FPU). */
-+#define X86_EXC_AC            17 /* Alignment Check. */
-+#define X86_EXC_MC            18 /* Machine Check. */
-+#define X86_EXC_XM            19 /* SIMD Exception. */
-+#define X86_EXC_VE            20 /* Virtualisation Exception. */
-+#define X86_EXC_CP            21 /* Control-flow Protection. */
-+#define X86_EXC_HV            28 /* Hypervisor Injection. */
-+#define X86_EXC_VC            29 /* VMM Communication. */
-+#define X86_EXC_SX            30 /* Security Exception. */
-+
-+/* Bitmap of exceptions which have error codes. */
-+#define X86_EXC_HAVE_EC                                             \
-+    ((1u << X86_EXC_DF) | (1u << X86_EXC_TS) | (1u << X86_EXC_NP) | \
-+     (1u << X86_EXC_SS) | (1u << X86_EXC_GP) | (1u << X86_EXC_PF) | \
-+     (1u << X86_EXC_AC) | (1u << X86_EXC_CP) |                      \
-+     (1u << X86_EXC_VC) | (1u << X86_EXC_SX))
-+
-+
- #endif	/* __XEN_X86_DEFNS_H__ */
+ /* Set the Interrupt Stack Table used by a particular IDT entry. */
 -- 
 2.11.0
 
