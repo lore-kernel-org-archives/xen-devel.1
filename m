@@ -7,56 +7,56 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B8776C47254
-	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 22:59:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DDE50C47256
+	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B1F8208DB
-	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 22:59:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A31B2208DB
+	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:35 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="fGi6lLAU"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B1F8208DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="KNNp+gba"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A31B2208DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUed2-000898-1K; Fri, 01 May 2020 22:59:32 +0000
+	id 1jUehm-0001Av-0w; Fri, 01 May 2020 23:04:26 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T3Df=6P=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jUed1-00088e-40
- for xen-devel@lists.xenproject.org; Fri, 01 May 2020 22:59:31 +0000
-X-Inumbo-ID: 5dd33824-8bff-11ea-ae69-bc764e2007e4
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1jUehk-0001Ad-J0
+ for xen-devel@lists.xenproject.org; Fri, 01 May 2020 23:04:24 +0000
+X-Inumbo-ID: 1779f240-8c00-11ea-9887-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5dd33824-8bff-11ea-ae69-bc764e2007e4;
- Fri, 01 May 2020 22:59:09 +0000 (UTC)
+ id 1779f240-8c00-11ea-9887-bc764e2007e4;
+ Fri, 01 May 2020 23:04:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588373949;
+ d=citrix.com; s=securemail; t=1588374261;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=zvkVxgzJkr/FcspZwSx7AStaUlQ9aD0VLFmFs6qVRg0=;
- b=fGi6lLAUwPdBOiAVnHjWKK41Hlx2go5w8R3p2YUdlH3M2qWCCLOm/+30
- CGTZ7u/y2QHMJB2jLnSBgDL3eDVMkfd8796S2IOUlQd7lXm65I+AS4zt8
- 0mnc6XI6GExBY2f1SmPcH3skfdtYVPkE1xl82dnU3cNsqsYlsSFSn9U/h M=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ bh=6HdmjgF6D28Zm4TcRg1rdSfUjLRRQBlEC1IznYRSCjQ=;
+ b=KNNp+gbapOKdSfOCeWRD8NK8qtexsKixwsdTUuELxQEIqnupsNlkQm8B
+ s2/ML2342gRREcHTI4Ug26K3Wqq5Bgy34C7OMTLxUolB97dCUFn6Y/yKo
+ r5Ut1BEpY/VkrTj8DiP54+Cedw1PBRkIB/xmyZW2UTa4zPFnxdHmiTsWV g=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,30 +65,30 @@ Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: uy/J8kG2T7UsumKNrlGpZrycXRrLKHkS8/gkbU9dYQkI//NE/4SNcE1Qgh87iP7E0nwcLnHD82
- NqrkcX/IuKsap+7nG9do8Pmvg5rRYn+kNoArkjTxcKfm4aNlugT2LrRAe+VZLgA4aJqbeuKBhb
- I8P1T/h6bQGm6aw4IR62GF8X9FdbwUMVXXMgmB/4tOlS+VC7KDeWKCZofJWfAqQdV+a+H/T0FD
- fCueCjlYLwN7bzkITbTT5OPtNTDae3q9QDVZwbo1ytYpxTw58XrwSYQg7RIFaF1Wc3+LfNd8Qs
- JZk=
+IronPort-SDR: V6SFzoHHkY51sW4Cww8TJ2Z4t6bksd+bmW8hNop1qzs5IfwqLPCX6DhPY3lmIO4x0k91u4Tl+5
+ Q3yoaFOFI0bDWvpc32p3mXv5uDq36txwkI9u615vvf/bN1cNXNfwcPigtV6yFhjOMFAV2pO115
+ n4jaEypIRuhd5AWjfYWhhCqj9LDNIec9PegiXvJibGt14RJ7+WgjbN/mSkWS5TWN3IPYSGVjlt
+ HBlgtPNhSyM8R20u8iLCWAqHq5Ie0BNsDykjyE9S22fSt13dz4BDZ4gra6gkaC2dbpsA5IVtbj
+ CXo=
 X-SBRS: 2.7
-X-MesageID: 16854948
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 17294146
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16854948"
+X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="17294146"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 04/16] x86/smpboot: Write the top-of-stack block in
- cpu_smpboot_alloc()
-Date: Fri, 1 May 2020 23:58:26 +0100
-Message-ID: <20200501225838.9866-5-andrew.cooper3@citrix.com>
+Subject: [PATCH 15/16] x86/entry: Adjust guest paths to be shadow stack
+ compatible
+Date: Fri, 1 May 2020 23:58:37 +0100
+Message-ID: <20200501225838.9866-16-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200501225838.9866-1-andrew.cooper3@citrix.com>
 References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
@@ -111,9 +111,14 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This allows the AP boot assembly use per-cpu variables, and brings the
-semantics closer to that of the BSP, which can use per-cpu variables from the
-start of day.
+The SYSCALL/SYSEXIT paths need to use {SET,CLR}SSBSY.  The IRET to guest paths
+must not, which forces us to spill a register to the stack.
+
+The IST switch onto the primary stack is not great as we have an instruction
+boundary with no shadow stack.  This is the least bad option available.
+
+These paths are not used before shadow stacks are properly established, so can
+use alternatives to avoid extra runtime CET detection logic.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -121,58 +126,67 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/smpboot.c        | 7 ++++++-
- xen/include/asm-x86/current.h | 5 -----
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ xen/arch/x86/x86_64/compat/entry.S |  2 +-
+ xen/arch/x86/x86_64/entry.S        | 19 ++++++++++++++++++-
+ 2 files changed, 19 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 5a3786d399..f999323bc4 100644
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -329,7 +329,6 @@ void start_secondary(void *unused)
+diff --git a/xen/arch/x86/x86_64/compat/entry.S b/xen/arch/x86/x86_64/compat/entry.S
+index 3cd375bd48..7816d0d4ac 100644
+--- a/xen/arch/x86/x86_64/compat/entry.S
++++ b/xen/arch/x86/x86_64/compat/entry.S
+@@ -198,7 +198,7 @@ ENTRY(cr4_pv32_restore)
  
-     /* Critical region without IDT or TSS.  Any fault is deadly! */
+ /* See lstar_enter for entry register state. */
+ ENTRY(cstar_enter)
+-        /* sti could live here when we don't switch page tables below. */
++        ALTERNATIVE "", "setssbsy", X86_FEATURE_XEN_SHSTK
+         CR4_PV32_RESTORE
+         movq  8(%rsp),%rax /* Restore %rax. */
+         movq  $FLAT_USER_SS32, 8(%rsp) /* Assume a 64bit domain.  Compat handled lower. */
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index 06da350ba0..91cd8f94fd 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -194,6 +194,15 @@ restore_all_guest:
+         movq  8(%rsp),%rcx            # RIP
+         ja    iret_exit_to_guest
  
--    set_processor_id(cpu);
-     set_current(idle_vcpu[cpu]);
-     this_cpu(curr_vcpu) = idle_vcpu[cpu];
-     rdmsrl(MSR_EFER, this_cpu(efer));
-@@ -986,6 +985,7 @@ static void cpu_smpboot_free(unsigned int cpu, bool remove)
- 
- static int cpu_smpboot_alloc(unsigned int cpu)
- {
-+    struct cpu_info *info;
-     unsigned int i, memflags = 0;
-     nodeid_t node = cpu_to_node(cpu);
-     seg_desc_t *gdt;
-@@ -999,6 +999,11 @@ static int cpu_smpboot_alloc(unsigned int cpu)
-         stack_base[cpu] = alloc_xenheap_pages(STACK_ORDER, memflags);
-     if ( stack_base[cpu] == NULL )
-         goto out;
++        /* Clear the supervisor shadow stack token busy bit. */
++.macro rag_clrssbsy
++        push %rax
++        rdsspq %rax
++        clrssbsy (%rax)
++        pop %rax
++.endm
++        ALTERNATIVE "", rag_clrssbsy, X86_FEATURE_XEN_SHSTK
 +
-+    info = get_cpu_info_from_stack((unsigned long)stack_base[cpu]);
-+    info->processor_id = cpu;
-+    info->per_cpu_offset = __per_cpu_offset[cpu];
+         cmpw  $FLAT_USER_CS32,16(%rsp)# CS
+         movq  32(%rsp),%rsp           # RSP
+         je    1f
+@@ -226,7 +235,7 @@ iret_exit_to_guest:
+  * %ss must be saved into the space left by the trampoline.
+  */
+ ENTRY(lstar_enter)
+-        /* sti could live here when we don't switch page tables below. */
++        ALTERNATIVE "", "setssbsy", X86_FEATURE_XEN_SHSTK
+         movq  8(%rsp),%rax /* Restore %rax. */
+         movq  $FLAT_KERNEL_SS,8(%rsp)
+         pushq %r11
+@@ -877,6 +886,14 @@ handle_ist_exception:
+         movl  $UREGS_kernel_sizeof/8,%ecx
+         movq  %rdi,%rsp
+         rep   movsq
 +
-     memguard_guard_stack(stack_base[cpu]);
- 
-     gdt = per_cpu(gdt, cpu) ?: alloc_xenheap_pages(0, memflags);
-diff --git a/xen/include/asm-x86/current.h b/xen/include/asm-x86/current.h
-index 0b47485337..5b8f4dbc79 100644
---- a/xen/include/asm-x86/current.h
-+++ b/xen/include/asm-x86/current.h
-@@ -100,11 +100,6 @@ static inline struct cpu_info *get_cpu_info(void)
- #define current               (get_current())
- 
- #define get_processor_id()    (get_cpu_info()->processor_id)
--#define set_processor_id(id)  do {                                      \
--    struct cpu_info *ci__ = get_cpu_info();                             \
--    ci__->per_cpu_offset = __per_cpu_offset[ci__->processor_id = (id)]; \
--} while (0)
--
- #define guest_cpu_user_regs() (&get_cpu_info()->guest_cpu_user_regs)
- 
- /*
++        /* Switch Shadow Stacks */
++.macro ist_switch_shstk
++        rdsspq %rdi
++        clrssbsy (%rdi)
++        setssbsy
++.endm
++        ALTERNATIVE "", ist_switch_shstk, X86_FEATURE_XEN_SHSTK
+ 1:
+ #else
+         ASSERT_CONTEXT_IS_XEN
 -- 
 2.11.0
 
