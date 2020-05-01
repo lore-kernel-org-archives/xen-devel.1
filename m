@@ -7,57 +7,56 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A7841C47256
-	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 331B4C47254
+	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 79995208DB
-	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:43 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 070F8208DB
+	for <xen-devel@archiver.kernel.org>; Fri,  1 May 2020 23:04:45 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="eOVxo4n+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 79995208DB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ca/Y9wdg"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 070F8208DB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUeho-0001Bq-9T; Fri, 01 May 2020 23:04:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jUehv-0001G4-UQ; Fri, 01 May 2020 23:04:35 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=T3Df=6P=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jUehn-0001BR-50
- for xen-devel@lists.xenproject.org; Fri, 01 May 2020 23:04:27 +0000
-X-Inumbo-ID: 1a67054c-8c00-11ea-9b70-12813bfff9fa
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1a67054c-8c00-11ea-9b70-12813bfff9fa;
+ id 1jUehu-0001FM-JM
+ for xen-devel@lists.xenproject.org; Fri, 01 May 2020 23:04:34 +0000
+X-Inumbo-ID: 1aa23f5e-8c00-11ea-ae69-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1aa23f5e-8c00-11ea-ae69-bc764e2007e4;
  Fri, 01 May 2020 23:04:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=citrix.com; s=securemail; t=1588374266;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=xNDjbEw11ojfVPqDcOxo4l2IKtjrw8Xz8xcuwlJlm7I=;
- b=eOVxo4n+9/viNDAsWhSpUoPBcSA59fnHUISp3LXnZfWKMoFNgl87Imud
- T76m4Z/2FwXqpTIKEIB76Kd1K0DumP8ZwZWBGayH4TRgwapFo6EWMKMdw
- JeM2v7SjYBZyB9x2dRltNYcvtrTXwIuAVyUuy//YWWhHwYLzpk8yx+ZNj 8=;
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+ bh=uwqto+nsVNLj4DX0sYxzltmriQwYE0YYvDMISJG9Vwo=;
+ b=ca/Y9wdg9cmMQpC3zP2Ui4KH0I8NVjJXvc0kr3vkrt3YLGY2usoshxAX
+ nhfOsQW3Cku71pAPLN/s+m5eBRf+kvHP+SBlA5zqYSN+8KYbZYor0ro4I
+ DyI23g5Tf59uthtG8myT92ICjOsJQEXCIuhMgjH4N2KjVr/Zgt0vRVxhq 4=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -66,30 +65,30 @@ Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-IronPort-SDR: RQO3kNgN7pqeaRKjD9Q7Gzk0acvKAER0HyP3NHfdCg9AB4epBxfWQjxpqYwfziLU6MdX16WBTJ
- m7hpKTIs/06zkqPrwoy3oS5boN20Wlm8uHuxFZDZcx8vQaXXvLB2NXEYjwYsiEZVOwvvLgtwGT
- 9LV4M8CLgpvLmAljGbxKnZTLrcvmZLaS9N31HkYU3sWXcTzPB3wrcVwfKxrM9XG0x36zjjoDW4
- VBv/6wK9MncRLIlOKplp+a8VKMEnCrxKzzAeNz3FFmHDfCXM788JCNHWizvayskqdZeJwtXzUY
- 4CA=
+IronPort-SDR: vyZJf3XChK3+6Biz+YWJLkqCcBFG7t+PFauyzWQfKb9zrybxorqUy3rh0tRdcOmcwU3CGgISvh
+ AH+Bh7Ql2I3ViuWPd3lwaZ/ovOI8NPHBZEFMxWfxzDjTzc2pnXc7vFq0zTZrOcincvZo0Ph3FH
+ tCaVyfz5hEEiOHBL60lcUiC8CQCTswwturEabnlNLXsLXQsfyZh2bRhBM6jxWb4HLI9q9hyu4N
+ Be8ZGyyI27g3DUZr1FjC13O0uesvVRjPAJPRoplG9UjBwr3UaYkomzHNjiZJTT7JJkg6DikVbw
+ oWI=
 X-SBRS: 2.7
-X-MesageID: 16906065
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 16855103
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16906065"
+X-IronPort-AV: E=Sophos;i="5.73,341,1583211600"; d="scan'208";a="16855103"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH 12/16] x86/extable: Adjust extable handling to be shadow stack
- compatible
-Date: Fri, 1 May 2020 23:58:34 +0100
-Message-ID: <20200501225838.9866-13-andrew.cooper3@citrix.com>
+Subject: [PATCH 10/16] x86/cpu: Adjust reset_stack_and_jump() to be shadow
+ stack compatible
+Date: Fri, 1 May 2020 23:58:32 +0100
+Message-ID: <20200501225838.9866-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200501225838.9866-1-andrew.cooper3@citrix.com>
 References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
@@ -112,8 +111,7 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-When adjusting an IRET frame to recover from a fault, and equivalent
-adjustment needs making in the shadow IRET frame.
+We need to unwind up to the supervisor token.  See the comment for details.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -121,65 +119,66 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/arch/x86/traps.c        | 22 ++++++++++++++++++++++
- xen/arch/x86/x86_64/entry.S | 11 ++++++++++-
- 2 files changed, 32 insertions(+), 1 deletion(-)
+ xen/include/asm-x86/current.h | 42 +++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 39 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 1cf00c1f4a..2354357cc1 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -778,6 +778,28 @@ static bool exception_fixup(struct cpu_user_regs *regs, bool print)
-                vec_name(regs->entry_vector), regs->error_code,
-                _p(regs->rip), _p(regs->rip), _p(fixup));
+diff --git a/xen/include/asm-x86/current.h b/xen/include/asm-x86/current.h
+index 99b66a0087..2a7b728b1e 100644
+--- a/xen/include/asm-x86/current.h
++++ b/xen/include/asm-x86/current.h
+@@ -124,13 +124,49 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
+ # define CHECK_FOR_LIVEPATCH_WORK ""
+ #endif
  
-+    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
-+    {
-+        unsigned long ssp;
-+
-+        asm ("rdsspq %0" : "=r" (ssp) : "0" (1) );
-+        if ( ssp != 1 )
-+        {
-+            unsigned long *ptr = _p(ssp);
-+
-+            /* Search for %rip in the shadow stack, ... */
-+            while ( *ptr != regs->rip )
-+                ptr++;
-+
-+            ASSERT(ptr[1] == __HYPERVISOR_CS);
-+
-+            /* ... and adjust to the fixup location. */
-+            asm ("wrssq %[fix], %[stk]"
-+                 : [stk] "=m" (*ptr)
-+                 : [fix] "r" (fixup));
-+        }
-+    }
-+
-     regs->rip = fixup;
- 
-     return true;
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index 6403c0ab92..06da350ba0 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -708,7 +708,16 @@ exception_with_ints_disabled:
-         call  search_pre_exception_table
-         testq %rax,%rax                 # no fixup code for faulting EIP?
-         jz    1b
--        movq  %rax,UREGS_rip(%rsp)
-+        movq  %rax,UREGS_rip(%rsp)      # fixup regular stack
-+
 +#ifdef CONFIG_XEN_SHSTK
-+        mov    $1, %edi
-+        rdsspq %rdi
-+        cmp    $1, %edi
-+        je     .L_exn_shstk_done
-+        wrssq  %rax, (%rdi)             # fixup shadow stack
-+.L_exn_shstk_done:
++/*
++ * We need to unwind the primary shadow stack to its supervisor token, located
++ * at 0x5ff8 from the base of the stack blocks.
++ *
++ * Read the shadow stack pointer, subtract it from 0x5ff8, divide by 8 to get
++ * the number of slots needing popping.
++ *
++ * INCSSPQ can't pop more than 255 entries.  We shouldn't ever need to pop
++ * that many entries, and getting this wrong will cause us to #DF later.
++ */
++# define SHADOW_STACK_WORK                      \
++    "mov $1, %[ssp];"                           \
++    "rdsspd %[ssp];"                            \
++    "cmp $1, %[ssp];"                           \
++    "je 1f;" /* CET not active?  Skip. */       \
++    "mov $"STR(0x5ff8)", %[val];"               \
++    "and $"STR(STACK_SIZE - 1)", %[ssp];"       \
++    "sub %[ssp], %[val];"                       \
++    "shr $3, %[val];"                           \
++    "cmp $255, %[val];"                         \
++    "jle 2f;"                                   \
++    "ud2a;"                                     \
++    "2: incsspq %q[val];"                       \
++    "1:"
++#else
++# define SHADOW_STACK_WORK ""
 +#endif
-         subq  $8,UREGS_rsp(%rsp)        # add ec/ev to previous stack frame
-         testb $15,UREGS_rsp(%rsp)       # return %rsp is now aligned?
-         jz    1f                        # then there is a pad quadword already
++
+ #define switch_stack_and_jump(fn, instr)                                \
+     ({                                                                  \
++        unsigned int tmp;                                               \
+         __asm__ __volatile__ (                                          \
+-            "mov %0,%%"__OP"sp;"                                        \
++            "cmc;"                                                      \
++            SHADOW_STACK_WORK                                           \
++            "mov %[stk], %%rsp;"                                        \
+             instr                                                       \
+-             "jmp %c1"                                                  \
+-            : : "r" (guest_cpu_user_regs()), "i" (fn) : "memory" );     \
++            "jmp %c[fun];"                                              \
++            : [val] "=&r" (tmp),                                        \
++              [ssp] "=&r" (tmp)                                         \
++            : [stk] "r" (guest_cpu_user_regs()),                        \
++              [fun] "i" (fn)                                            \
++            : "memory" );                                               \
+         unreachable();                                                  \
+     })
+ 
 -- 
 2.11.0
 
