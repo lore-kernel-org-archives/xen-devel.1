@@ -2,65 +2,73 @@ Return-Path: <SRS0=g+bS=6Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5EA3BC3A5A9
-	for <xen-devel@archiver.kernel.org>; Sat,  2 May 2020 16:07:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 72717C3A5A9
+	for <xen-devel@archiver.kernel.org>; Sat,  2 May 2020 16:10:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2BAF0206C0
-	for <xen-devel@archiver.kernel.org>; Sat,  2 May 2020 16:07:47 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 426F424953
+	for <xen-devel@archiver.kernel.org>; Sat,  2 May 2020 16:10:10 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="KUDrWZVv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2BAF0206C0
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="2fgUg2Dk"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 426F424953
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jUufX-00014w-Sf; Sat, 02 May 2020 16:07:11 +0000
+	id 1jUuiF-0001Q8-K0; Sat, 02 May 2020 16:09:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=L6si=6Q=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jUufX-00014h-98
- for xen-devel@lists.xenproject.org; Sat, 02 May 2020 16:07:11 +0000
-X-Inumbo-ID: f8426b2a-8c8e-11ea-b07b-bc764e2007e4
+ id 1jUuiE-0001Py-HO
+ for xen-devel@lists.xenproject.org; Sat, 02 May 2020 16:09:58 +0000
+X-Inumbo-ID: 5e68695e-8c8f-11ea-ae69-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f8426b2a-8c8e-11ea-b07b-bc764e2007e4;
- Sat, 02 May 2020 16:07:06 +0000 (UTC)
+ id 5e68695e-8c8f-11ea-ae69-bc764e2007e4;
+ Sat, 02 May 2020 16:09:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:References:Cc:To:From:Subject:Sender:Reply-To:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=EquJ+P1MjKxYVanc5AWfgfmBQn5lz7a3I5D3bo//H6o=; b=KUDrWZVvEZWpLImbEeyABfPOQ0
- lzI103l846PopeLBujNexEEOSDZloGpuAry1hWahRpExEJ7uIRDMk1+6O9LnGHAVFnAMScNsTos6z
- Zj6gK1fgZTknM4ls5CqaKS3LnI9V/Jk4WDx42uIh5OxXqD1M+nrRK3Eo7Q8UL5wp6A8Q=;
+ bh=sjgRGKeJeHNEvm2DlH6hf3yn/kVQ4Ai7mTa9cxvFe94=; b=2fgUg2DkTSF57YEgShbKnGoC4Q
+ fXzcoD/W404cEH+LhTI3RkSAC0mBSmOOsiuX2Y7a7MHn8kpMzyDlPZqCHpQNrCL3PIv1nyxOfbJ6x
+ cNzeDDywn5mA2erheJsavrv43bhpqf6zr5iSJK7hTp2dHamlhoWf2VHC9mNwsW49jx6A=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jUufR-0000pm-Sl; Sat, 02 May 2020 16:07:05 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=ufe34d9ed68d054.ant.amazon.com)
+ id 1jUuiC-0000tC-OL; Sat, 02 May 2020 16:09:56 +0000
+Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jUufR-00054b-He; Sat, 02 May 2020 16:07:05 +0000
+ id 1jUuiC-0005Lo-Dw; Sat, 02 May 2020 16:09:56 +0000
+Subject: Re: [PATCH v1.1 2/3] xen/sched: fix theoretical races accessing
+ vcpu->dirty_cpu
 From: Julien Grall <julien@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH for-4.14 1/3] xen/arm: atomic: Allow read_atomic() to be used
- in more cases
-Date: Sat,  2 May 2020 17:06:58 +0100
-Message-Id: <20200502160700.19573-2-julien@xen.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200502160700.19573-1-julien@xen.org>
-References: <20200502160700.19573-1-julien@xen.org>
+To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
+ xen-devel@lists.xenproject.org
+References: <20200430152848.20275-1-jgross@suse.com>
+ <987abb9e-e4f1-1981-595d-0474e91d67f8@xen.org>
+ <678d3815-d554-7b92-aa81-908978e2b19b@suse.com>
+ <2c72bb17-cf67-a7ce-6dcb-2c3b4d1231e7@xen.org>
+Message-ID: <e274cf53-261d-0af5-6d81-2031e70da3e3@xen.org>
+Date: Sat, 2 May 2020 17:09:53 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
+MIME-Version: 1.0
+In-Reply-To: <2c72bb17-cf67-a7ce-6dcb-2c3b4d1231e7@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,83 +79,48 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Julien Grall <jgrall@amazon.com>, Stefano Stabellini <sstabellini@kernel.org>,
- julien@xen.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Julien Grall <jgrall@amazon.com>
 
-The current implementation of read_atomic() on Arm will not allow to:
-    1) Read a value from a pointer to const because the temporary
-    variable will be const and therefore it is not possible to assign
-    any value. This can be solved by using a union between the type and
-    a char[0].
-    2) Read a pointer value (e.g void *) because the switch contains
-    cast from other type than the size of a pointer. This can be solved by
-    by introducing a static inline for the switch and use void * for the
-    pointer.
 
-Reported-by: Juergen Gross <jgross@suse.com>
-Signed-off-by: Julien Grall <jgrall@amazon.com>
----
- xen/include/asm-arm/atomic.h | 37 +++++++++++++++++++++++++++---------
- 1 file changed, 28 insertions(+), 9 deletions(-)
+On 02/05/2020 13:34, Julien Grall wrote:
+>>>> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
+>>>> index 195e7ee583..81628e2d98 100644
+>>>> --- a/xen/include/xen/sched.h
+>>>> +++ b/xen/include/xen/sched.h
+>>>> @@ -844,7 +844,7 @@ static inline bool is_vcpu_dirty_cpu(unsigned 
+>>>> int cpu)
+>>>>   static inline bool vcpu_cpu_dirty(const struct vcpu *v)
+>>>>   {
+>>>> -    return is_vcpu_dirty_cpu(v->dirty_cpu);
+>>>> +    return is_vcpu_dirty_cpu(read_atomic((unsigned int 
+>>>> *)&v->dirty_cpu));
+>>>
+>>> Is the cast necessary?
+>>
+>> Yes, that was the problem when building for ARM I encountered.
+>>
+>> read_atomic() on ARM has a local variable of the same type as the
+>> read_atomic() parameter for storing the result. Due to the const
+>> attribute of v this results in assignment to a read-only variable.
+> 
+> Doh, we should be able to read from a const value without. So I would 
+> argue this is a bug in the read_atomic() implementation on Arm. I will 
+> try to come up with a patch.
 
-diff --git a/xen/include/asm-arm/atomic.h b/xen/include/asm-arm/atomic.h
-index e81bf80e305c..3c3d6bb04ee8 100644
---- a/xen/include/asm-arm/atomic.h
-+++ b/xen/include/asm-arm/atomic.h
-@@ -71,18 +71,37 @@ build_add_sized(add_u32_sized, "", WORD, uint32_t)
- #undef build_atomic_write
- #undef build_add_sized
- 
-+void __bad_atomic_read(const volatile void *p, void *res);
- void __bad_atomic_size(void);
- 
-+static always_inline void read_atomic_size(const volatile void *p,
-+                                           void *res,
-+                                           unsigned int size)
-+{
-+    switch ( size )
-+    {
-+    case 1:
-+        *(uint8_t *)res = read_u8_atomic(p);
-+        break;
-+    case 2:
-+        *(uint16_t *)res = read_u16_atomic(p);
-+        break;
-+    case 4:
-+        *(uint32_t *)res = read_u32_atomic(p);
-+        break;
-+    case 8:
-+        *(uint64_t *)res = read_u64_atomic(p);
-+        break;
-+    default:
-+        __bad_atomic_read(p, res);
-+        break;
-+    }
-+}
-+
- #define read_atomic(p) ({                                               \
--    typeof(*p) __x;                                                     \
--    switch ( sizeof(*p) ) {                                             \
--    case 1: __x = (typeof(*p))read_u8_atomic((uint8_t *)p); break;      \
--    case 2: __x = (typeof(*p))read_u16_atomic((uint16_t *)p); break;    \
--    case 4: __x = (typeof(*p))read_u32_atomic((uint32_t *)p); break;    \
--    case 8: __x = (typeof(*p))read_u64_atomic((uint64_t *)p); break;    \
--    default: __x = 0; __bad_atomic_size(); break;                       \
--    }                                                                   \
--    __x;                                                                \
-+    union { typeof(*p) val; char c[0]; } x_;                            \
-+    read_atomic_size(p, x_.c, sizeof(*p));                              \
-+    x_.val;                                                             \
- })
- 
- #define write_atomic(p, x) ({                                           \
+I have just sent a series [1] to address the issue reported here and a 
+few more.
+
+Cheers,
+
+[1] <20200502160700.19573-1-julien@xen.org>
+
 -- 
-2.17.1
-
+Julien Grall
 
