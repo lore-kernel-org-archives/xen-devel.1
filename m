@@ -2,49 +2,103 @@ Return-Path: <SRS0=jOUd=6S=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A84B6C3A5A9
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2020 15:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8B321C3A5A9
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2020 15:09:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 85016206D7
-	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2020 15:07:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 85016206D7
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 597C4206D7
+	for <xen-devel@archiver.kernel.org>; Mon,  4 May 2020 15:09:01 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="gmRlYsxE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 597C4206D7
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jVcg1-0005Xc-6w; Mon, 04 May 2020 15:06:37 +0000
+	id 1jVci9-0005fb-Mn; Mon, 04 May 2020 15:08:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=NHsq=6S=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jVcg0-0005XR-2k
- for xen-devel@lists.xenproject.org; Mon, 04 May 2020 15:06:36 +0000
-X-Inumbo-ID: d8625fdc-8e18-11ea-b9cf-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SbWK=6S=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jVci8-0005fV-GI
+ for xen-devel@lists.xenproject.org; Mon, 04 May 2020 15:08:48 +0000
+X-Inumbo-ID: 26ba02c0-8e19-11ea-b9cf-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d8625fdc-8e18-11ea-b9cf-bc764e2007e4;
- Mon, 04 May 2020 15:06:35 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 13E88ABCC;
- Mon,  4 May 2020 15:06:36 +0000 (UTC)
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86emul: extend x86_insn_is_mem_write() coverage
-Message-ID: <5bf829b6-c60d-7849-e2a5-f84485849197@suse.com>
-Date: Mon, 4 May 2020 17:06:32 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ id 26ba02c0-8e19-11ea-b9cf-bc764e2007e4;
+ Mon, 04 May 2020 15:08:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1588604927;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=wjSY2GhoO17AjmZTCXOxGZ+UkDFTIAB/CbmgGVGaI+c=;
+ b=gmRlYsxETJDOEcBZwQXlhGwTrqMeTNkHX3UbYD0VnSs1LbDgAMftVKlr
+ BoqERimWUPkpLGartVagA+EpacUk3Z2PvMabHwxEkxkHuueQLiYWulL4x
+ B785681bJlkRsz059ukYbAwJmvAoZqB/bRjgFbPyTwwRMi0BhLhyVSGk2 U=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: Xz63FMZyf8hWLY7PLjITaPwT89WVg3nUrHNbIzXwYddsEqqDLDpOppoTcPfQrJP/P0SQ2GJXjn
+ K5FFOFdBTsS6PTjJKfi1kllQ2wjtF3ut6CVUv1bFU5r+AokzGPS8pKBRHW+54KB3JDlnnVA9pj
+ Ji+tvxrh+qFBAgl0IeODq33hzLTTj7DSKUQQ2eNB3vwjQF9lIzKxi6Kc/EUSE517T9jEsY26F8
+ 1iYCGw1UUtl/wEl0BqFwrgxn/UUgyrET+vxi6qXAJZI0zxHQHrz9C8EgC4sesTThLXYtaLWrHC
+ Xxk=
+X-SBRS: 2.7
+X-MesageID: 17376503
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,352,1583211600"; d="scan'208";a="17376503"
+Subject: Re: [PATCH 08/16] x86/shstk: Create shadow stacks
+To: Jan Beulich <jbeulich@suse.com>
+References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
+ <20200501225838.9866-9-andrew.cooper3@citrix.com>
+ <c31d9d4d-76ea-1391-5f7d-fbb3f47e16ce@suse.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <92816b17-448f-d1ed-3579-393292120565@citrix.com>
+Date: Mon, 4 May 2020 16:08:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <c31d9d4d-76ea-1391-5f7d-fbb3f47e16ce@suse.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -55,63 +109,40 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Several insns were missed when this function was first added. As far as
-insns already supported by the emulator go - SMSW and {,V}STMXCSR were
-wrongly considered r/o insns so far.
+On 04/05/2020 15:55, Jan Beulich wrote:
+>> +		/* Poision unused entries. */
+>> +		for ( i = IST_MAX;
+>> +		      i < ARRAY_SIZE(this_cpu(tss_page).ist_ssp); ++i )
+>> +			ist_ssp[i] = 0x8600111111111111ul;
+> IST_MAX == IST_DF, so you're overwriting one token here.
 
-Insns like the VMX, SVM, or CET-SS ones, PTWRITE, or AMD's new SNP ones
-are intentionally not covered just yet. VMPTRST is put there just to
-complete the respective group.
+And failing to poison entry 0.  This was a bad rearrangement when
+tidying the series up.
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Unfortunately, testing the #DF path isn't terribly easy.
 
---- a/xen/arch/x86/x86_emulate/x86_emulate.c
-+++ b/xen/arch/x86/x86_emulate/x86_emulate.c
-@@ -11551,13 +11551,39 @@ x86_insn_is_mem_write(const struct x86_e
-         break;
- 
-     case X86EMUL_OPC(0x0f, 0x01):
--        return !(state->modrm_reg & 6); /* SGDT / SIDT */
-+        switch ( state->modrm_reg & 7 )
-+        {
-+        case 0: /* SGDT */
-+        case 1: /* SIDT */
-+        case 4: /* SMSW */
-+            return true;
-+        }
-+        break;
-+
-+    case X86EMUL_OPC(0x0f, 0xae):
-+        switch ( state->modrm_reg & 7 )
-+        {
-+        case 0: /* FXSAVE */
-+        case 3: /* {,V}STMXCSR */
-+        case 4: /* XSAVE */
-+        case 6: /* XSAVEOPT */
-+            return true;
-+        }
-+        break;
- 
-     case X86EMUL_OPC(0x0f, 0xba):
-         return (state->modrm_reg & 7) > 4; /* BTS / BTR / BTC */
- 
-     case X86EMUL_OPC(0x0f, 0xc7):
--        return (state->modrm_reg & 7) == 1; /* CMPXCHG{8,16}B */
-+        switch ( state->modrm_reg & 7 )
-+        {
-+        case 1: /* CMPXCHG{8,16}B */
-+        case 4: /* XSAVEC */
-+        case 5: /* XSAVES */
-+        case 7: /* VMPTRST */
-+            return true;
-+        }
-+        break;
-     }
- 
-     return false;
+>> --- a/xen/include/asm-x86/processor.h
+>> +++ b/xen/include/asm-x86/processor.h
+>> @@ -434,7 +434,8 @@ struct __packed tss64 {
+>>      uint16_t :16, bitmap;
+>>  };
+>>  struct tss_page {
+>> -    struct tss64 __aligned(PAGE_SIZE) tss;
+>> +    uint64_t __aligned(PAGE_SIZE) ist_ssp[8];
+>> +    struct tss64 tss;
+>>  };
+> Just curious - any particular reason you put this ahead of the TSS?
+
+Yes.  Reduced chance of interacting with a buggy IO bitmap offset.
+
+Furthermore, we could do away most of the IO emulation quirking, and the
+#GP path overhead, if we actually constructed a real IO bitmap for
+dom0.  That would require using the 8k following the TSS.
+
+~Andrew
 
