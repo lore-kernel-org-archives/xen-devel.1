@@ -2,54 +2,98 @@ Return-Path: <SRS0=STq+=6T=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6FDF4C47254
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 13:13:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75C10C47254
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 13:31:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 49E7720658
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 13:13:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49E7720658
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 36244206A5
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 13:31:54 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hmrognyq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 36244206A5
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jVxOB-0004eZ-MY; Tue, 05 May 2020 13:13:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=uapr=6T=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jVxOA-0004eU-RW
- for xen-devel@lists.xenproject.org; Tue, 05 May 2020 13:13:34 +0000
-X-Inumbo-ID: 3884906a-8ed2-11ea-9db6-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3884906a-8ed2-11ea-9db6-12813bfff9fa;
- Tue, 05 May 2020 13:13:33 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id ECF3DAFA0
- for <xen-devel@lists.xenproject.org>; Tue,  5 May 2020 13:13:34 +0000 (UTC)
-Subject: Re: [PATCH v5] docs/designs: re-work the xenstore migration
- document...
-To: xen-devel@lists.xenproject.org
-References: <20200428150624.265-1-paul@xen.org>
- <2bf7dc13-65a4-317e-2c8c-bd6972dbb35a@xen.org>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <fb319876-41eb-e785-a197-92440187a135@suse.com>
-Date: Tue, 5 May 2020 15:13:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+	id 1jVxfY-0006Hc-B3; Tue, 05 May 2020 13:31:32 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=XWWA=6T=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jVxfX-0006HX-C2
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2020 13:31:31 +0000
+X-Inumbo-ID: ba41ed80-8ed4-11ea-ae69-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ba41ed80-8ed4-11ea-ae69-bc764e2007e4;
+ Tue, 05 May 2020 13:31:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1588685490;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:content-transfer-encoding:in-reply-to;
+ bh=HLVryuYvm4E3GILTVgMqdrirvdvs/GBYf/P2QgtxmpU=;
+ b=hmrognyqlJiTJWgntkhFrCjImiCKNvEA0gyJhGV3LMP+2J7vkIceBia/
+ tQIrh3kt6kI0oHI9FF97163a/YR2cTcbmCSsd1QbUwrAb07YWGEw5Mx0W
+ ueOlzH5jPruhhbGmfYX0IpbSw343j0svyvjAz1+HXccaLhOsXWoykhgpr o=;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=roger.pau@citrix.com;
+ spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
+ receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
+ roger.pau@citrix.com designates 162.221.158.21 as permitted
+ sender) identity=mailfrom; client-ip=162.221.158.21;
+ receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="roger.pau@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="roger.pau@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+IronPort-SDR: pnEiRSEHGfgLAxTTvX3RXcnzx6E0EPonEqdf26gbgkX0x1XPOTrCWEC7d+M5X+G6TAnWNonmSm
+ ZxfszX5DGlhnRvGDm79wjt1FTUBTte6DjrMoAj8z7s1UZWxDSqSqbiGT6dKDpMpwd1rgavlDxP
+ PAkvNoRLbn9XPjGM8/GNGGnwfJ0/Lhd667c9qXTL6H+LvV1i3Fct98AXK13vD7/YhZkRof0GfA
+ 1Puus/L8VxzUMJV3NfhMMyrgwRBPUSrpZ2+LyRYGhcUOkLFnHODNQs4acGjOhRMPzxorObZiM7
+ oiE=
+X-SBRS: 2.7
+X-MesageID: 17031866
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,355,1583211600"; d="scan'208";a="17031866"
+Date: Tue, 5 May 2020 15:31:19 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/pv: Compile out emul-gate-op in !CONFIG_PV32 builds
+Message-ID: <20200505133119.GB1353@Air-de-Roger>
+References: <20200505113537.29968-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <2bf7dc13-65a4-317e-2c8c-bd6972dbb35a@xen.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200505113537.29968-1-andrew.cooper3@citrix.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,47 +104,17 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
+ Jan Beulich <JBeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 05.05.20 15:01, Julien Grall wrote:
-> Hi Paul,
+On Tue, May 05, 2020 at 12:35:37PM +0100, Andrew Cooper wrote:
+> The caller is already guarded by is_pv_32bit_vcpu().
 > 
-> On 28/04/2020 16:06, Paul Durrant wrote:
->> From: Paul Durrant <pdurrant@amazon.com>
->>
->> ... to specify a separate migration stream that will also be suitable for
->> live update.
->>
->> The original scope of the document was to support non-cooperative 
->> migration
->> of guests [1] but, since then, live update of xenstored has been 
->> brought into
->> scope. Thus it makes more sense to define a separate image format for
->> serializing xenstore state that is suitable for both purposes.
->>
->> The document has been limited to specifying a new image format. The 
->> mechanism
->> for acquiring the image for live update or migration is not covered as 
->> that
->> is more appropriately dealt with by a patch to docs/misc/xenstore.txt. 
->> It is
->> also expected that, when the first implementation of live update or 
->> migration
->> making use of this specification is committed, that the document is 
->> moved from
->> docs/designs into docs/specs.
->>
->> NOTE: It will only be necessary to save and restore state for active 
->> xenstore
->>        connections, but the documentation for 'RESUME' in xenstore.txt 
->> implies
->>        otherwise. That command is unused so this patch deletes it from 
->> the
->>        specification.
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Could someone from Citrix please verify that XAPI isn't using XS_RESUME?
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 
-
-Juergen
+Thanks, Roger.
 
