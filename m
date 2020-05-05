@@ -2,98 +2,77 @@ Return-Path: <SRS0=STq+=6T=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C28B0C47259
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 09:25:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 02C1FC47254
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 10:19:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 93AB120721
-	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 09:25:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C80CD20675
+	for <xen-devel@archiver.kernel.org>; Tue,  5 May 2020 10:19:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="XagVZvfw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 93AB120721
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="GR15LwTL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C80CD20675
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jVtpB-0002Nz-Dt; Tue, 05 May 2020 09:25:13 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=XWWA=6T=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jVtpA-0002Nr-4E
- for xen-devel@lists.xenproject.org; Tue, 05 May 2020 09:25:12 +0000
-X-Inumbo-ID: 513e6bc8-8eb2-11ea-ae69-bc764e2007e4
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 513e6bc8-8eb2-11ea-ae69-bc764e2007e4;
- Tue, 05 May 2020 09:25:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588670711;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=99RC9b/V5iDp9O+PzyOxH6obFMvEPeacU7D+AkWN0Os=;
- b=XagVZvfwgcfPeUU4ZzdnaL9Eel0kRwwb/r+cYlTZ/st2NFQQUm9V3/eM
- n476cwPgTqJ0/gqa9tBsFg5E292nxvKDKO3TZIduUB+hvCtt63ogKFvSJ
- rwbD21GZdX+FB8kkQcgdVBiQrwir28fcS3C4eHV/jtHx89hcdCwXtcYD3 Q=;
-Authentication-Results: esa1.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa1.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa1.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-IronPort-SDR: TD3bVff+XQLNCZ8KBoB6hjmooAXQEDkX6Gn0aFn4jTtOJisDJ/bFX3Dxvbu9o+Z+gO/BKzzUR/
- xDN35BPvxwC9lLBsgzEFUQHERy5MsSE/lL5rsqMEaPWZ+chNA/PbiAhIsqAM5wUGoVBhTO9Cl2
- IKeYmqSjfATz+UeRvAe415Ma+Jhc4pWJ0dWea9QAq6cWF+zBD4PQKCOmfFkX9JEMg/CS7H1jUY
- fgVunq1SpSotYzSe5lXMtF4FSH+PlGhYFF9fuavT2rdJWgNNlI3ZKrAxzpus2RB4BfynIJlioW
- T1M=
-X-SBRS: 2.7
-X-MesageID: 17012785
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,354,1583211600"; d="scan'208";a="17012785"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH 1/3] x86/mm: do not attempt to convert _PAGE_GNTTAB to a
- boolean
-Date: Tue, 5 May 2020 11:24:52 +0200
-Message-ID: <20200505092454.9161-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200505092454.9161-1-roger.pau@citrix.com>
-References: <20200505092454.9161-1-roger.pau@citrix.com>
+	id 1jVufa-0006ni-89; Tue, 05 May 2020 10:19:22 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Ph1I=6T=redhat.com=armbru@srs-us1.protection.inumbo.net>)
+ id 1jVufZ-0006nd-Ag
+ for xen-devel@lists.xenproject.org; Tue, 05 May 2020 10:19:21 +0000
+X-Inumbo-ID: e179ae27-8eb9-11ea-9da1-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.120])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id e179ae27-8eb9-11ea-9da1-12813bfff9fa;
+ Tue, 05 May 2020 10:19:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1588673959;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1P/5QYytElvztL4q85MDX6gLDmepTUOXbdNhCTBxhz4=;
+ b=GR15LwTL3fnshm0QX/LZNScTDuQjZ4cBRQR6TS9LmWbGPXHWy4Z99bfh3ZLv34MDK+jpNV
+ 1QliD0BfZTFNVCsMI0/iu7Lc2zGTPv39F6OpmL7jG3xNhrgDX5a3ttq5jGiLd9UZvWIJNR
+ QH1f818apt5zk8bZ/oRaVhqDAt8qNz0=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-260-2AN3aTbAPjeur6A4AMgvKQ-1; Tue, 05 May 2020 06:19:14 -0400
+X-MC-Unique: 2AN3aTbAPjeur6A4AMgvKQ-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5FA98107ACCD;
+ Tue,  5 May 2020 10:19:13 +0000 (UTC)
+Received: from blackfin.pond.sub.org (ovpn-113-6.ams2.redhat.com [10.36.113.6])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 48EAE627D9;
+ Tue,  5 May 2020 10:19:10 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id C9E3D11358BE; Tue,  5 May 2020 12:19:08 +0200 (CEST)
+From: Markus Armbruster <armbru@redhat.com>
+To: qemu-devel@nongnu.org
+Subject: [PATCH v2 02/10] xen: Fix and improve handling of device_add usb-host
+ errors
+Date: Tue,  5 May 2020 12:19:00 +0200
+Message-Id: <20200505101908.6207-3-armbru@redhat.com>
+In-Reply-To: <20200505101908.6207-1-armbru@redhat.com>
+References: <20200505101908.6207-1-armbru@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -104,44 +83,82 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Stefano Stabellini <sstabellini@kernel.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Paul Durrant <paul@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Clang 10 complains with:
+usbback_portid_add() leaks the error when qdev_device_add() fails.
+Fix that.  While there, use the error to improve the error message.
 
-mm.c:1239:10: error: converting the result of '<<' to a boolean always evaluates to true
-      [-Werror,-Wtautological-constant-compare]
-    if ( _PAGE_GNTTAB && (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
-         ^
-xen/include/asm/x86_64/page.h:161:25: note: expanded from macro '_PAGE_GNTTAB'
-#define _PAGE_GNTTAB (1U<<22)
-                        ^
+The qemu_opts_from_qdict() similarly leaks on failure.  But any
+failure there is a programming error.  Pass &error_abort.
 
-Remove the conversion of _PAGE_GNTTAB to a boolean, since the and
-operation performed afterwards will already return false if the value
-of the macro is 0.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Fixes: 816ac92ef769f9ffc534e49a1bb6177bddce7aa2
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Anthony Perard <anthony.perard@citrix.com>
+Cc: Paul Durrant <paul@xen.org>
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Cc: xen-devel@lists.xenproject.org
+Signed-off-by: Markus Armbruster <armbru@redhat.com>
 ---
- xen/arch/x86/mm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/usb/xen-usb.c | 19 +++++++++----------
+ 1 file changed, 9 insertions(+), 10 deletions(-)
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 355c50ff91..27069d2451 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -1236,7 +1236,7 @@ void put_page_from_l1e(l1_pgentry_t l1e, struct domain *l1e_owner)
-      * (Note that the undestroyable active grants are not a security hole in
-      * Xen. All active grants can safely be cleaned up when the domain dies.)
-      */
--    if ( _PAGE_GNTTAB && (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
-+    if ( (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
-          !l1e_owner->is_shutting_down && !l1e_owner->is_dying )
-     {
-         gdprintk(XENLOG_WARNING,
--- 
-2.26.2
+diff --git a/hw/usb/xen-usb.c b/hw/usb/xen-usb.c
+index 961190d0f7..4d266d7bb4 100644
+--- a/hw/usb/xen-usb.c
++++ b/hw/usb/xen-usb.c
+@@ -30,6 +30,7 @@
+ #include "hw/usb.h"
+ #include "hw/xen/xen-legacy-backend.h"
+ #include "monitor/qdev.h"
++#include "qapi/error.h"
+ #include "qapi/qmp/qdict.h"
+ #include "qapi/qmp/qstring.h"
+=20
+@@ -755,13 +756,16 @@ static void usbback_portid_add(struct usbback_info *u=
+sbif, unsigned port,
+     qdict_put_int(qdict, "port", port);
+     qdict_put_int(qdict, "hostbus", atoi(busid));
+     qdict_put_str(qdict, "hostport", portname);
+-    opts =3D qemu_opts_from_qdict(qemu_find_opts("device"), qdict, &local_=
+err);
+-    if (local_err) {
+-        goto err;
+-    }
++    opts =3D qemu_opts_from_qdict(qemu_find_opts("device"), qdict,
++                                &error_abort);
+     usbif->ports[port - 1].dev =3D USB_DEVICE(qdev_device_add(opts, &local=
+_err));
+     if (!usbif->ports[port - 1].dev) {
+-        goto err;
++        qobject_unref(qdict);
++        xen_pv_printf(&usbif->xendev, 0,
++                      "device %s could not be opened: %s\n",
++                      busid, error_get_pretty(local_err));
++        error_free(local_err);
++        return;
+     }
+     qobject_unref(qdict);
+     speed =3D usbif->ports[port - 1].dev->speed;
+@@ -793,11 +797,6 @@ static void usbback_portid_add(struct usbback_info *us=
+bif, unsigned port,
+     usbback_hotplug_enq(usbif, port);
+=20
+     TR_BUS(&usbif->xendev, "port %d attached\n", port);
+-    return;
+-
+-err:
+-    qobject_unref(qdict);
+-    xen_pv_printf(&usbif->xendev, 0, "device %s could not be opened\n", bu=
+sid);
+ }
+=20
+ static void usbback_process_port(struct usbback_info *usbif, unsigned port=
+)
+--=20
+2.21.1
 
 
