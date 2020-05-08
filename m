@@ -2,44 +2,47 @@ Return-Path: <SRS0=18Bn=6W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88863C47247
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C9E25C4724C
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 66AA521841
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 66AA521841
+	by mail.kernel.org (Postfix) with ESMTPS id AA55721841
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:52 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA55721841
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jX51K-0001wS-JV; Fri, 08 May 2020 15:34:38 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jX51P-00020o-IF; Fri, 08 May 2020 15:34:43 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=JXU2=6W=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jX51J-0001vu-9v
- for xen-devel@lists.xenproject.org; Fri, 08 May 2020 15:34:37 +0000
-X-Inumbo-ID: 66464586-9141-11ea-b07b-bc764e2007e4
+ id 1jX51O-0001zf-EC
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2020 15:34:42 +0000
+X-Inumbo-ID: 674b1723-9141-11ea-a01d-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 66464586-9141-11ea-b07b-bc764e2007e4;
- Fri, 08 May 2020 15:34:26 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 674b1723-9141-11ea-a01d-12813bfff9fa;
+ Fri, 08 May 2020 15:34:28 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id D9802AE71;
- Fri,  8 May 2020 15:34:27 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id C664CAEF8;
+ Fri,  8 May 2020 15:34:29 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v8 00/12] Add hypervisor sysfs-like support
-Date: Fri,  8 May 2020 17:34:09 +0200
-Message-Id: <20200508153421.24525-1-jgross@suse.com>
+Subject: [PATCH v8 11/12] tools/libxc: remove xc_set_parameters()
+Date: Fri,  8 May 2020 17:34:20 +0200
+Message-Id: <20200508153421.24525-12-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
+In-Reply-To: <20200508153421.24525-1-jgross@suse.com>
+References: <20200508153421.24525-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -52,160 +55,66 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On the 2019 Xen developer summit there was agreement that the Xen
-hypervisor should gain support for a hierarchical name-value store
-similar to the Linux kernel's sysfs.
+There is no user of xc_set_parameters() left, so remove it.
 
-This is a first implementation of that idea adding the basic
-functionality to hypervisor and tools side. The interface to any
-user program making use of that "xen-hypfs" is a new library
-"libxenhypfs" with a stable interface.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V6:
+- new patch
+---
+ tools/libxc/include/xenctrl.h |  1 -
+ tools/libxc/xc_misc.c         | 21 ---------------------
+ 2 files changed, 22 deletions(-)
 
-The series adds read-only nodes with buildinfo data and writable
-nodes with runtime parameters. xl is switched to use the new file
-system for modifying the runtime parameters and the old sysctl
-interface for that purpose is dropped.
-
-Changes in V8:
-- addressed review comments
-- added CONFIG_HYPFS config option
-
-Changes in V7:
-- old patch 1 already applied
-- add new patch 1 (carved out and modified from patch 9)
-- addressed review comments
-- modified public interface to have a max write size instead of a
-  writable flag only
-
-Changes in V6:
-- added new patches 1, 10, 11, 12
-- addressed review comments
-- modified interface for creating nodes for runtime parameters
-
-Changes in V5:
-- switched to xsm for privilege check
-
-Changes in V4:
-- former patch 2 removed as already committed
-- addressed review comments
-
-Changes in V3:
-- major rework, especially by supporting binary contents of entries
-- added several new patches (1, 2, 7)
-- full support of all runtime parameters
-- support of writing entries (especially runtime parameters)
-
-Changes in V2:
-- all comments to V1 addressed
-- added man-page for xenhypfs tool
-- added runtime parameter read access for string parameters
-
-Changes in V1:
-- renamed xenfs ->xenhypfs
-- added writable entries support at the interface level and in the
-  xenhypfs tool
-- added runtime parameter read access (integer type only for now)
-- added docs/misc/hypfs-paths.pandoc for path descriptions
-
-Juergen Gross (12):
-  xen/vmx: let opt_ept_ad always reflect the current setting
-  xen: add a generic way to include binary files as variables
-  docs: add feature document for Xen hypervisor sysfs-like support
-  xen: add basic hypervisor filesystem support
-  libs: add libxenhypfs
-  tools: add xenfs tool
-  xen: provide version information in hypfs
-  xen: add /buildinfo/config entry to hypervisor filesystem
-  xen: add runtime parameter access support to hypfs
-  tools/libxl: use libxenhypfs for setting xen runtime parameters
-  tools/libxc: remove xc_set_parameters()
-  xen: remove XEN_SYSCTL_set_parameter support
-
- .gitignore                          |   6 +
- docs/features/hypervisorfs.pandoc   |  92 +++++
- docs/man/xenhypfs.1.pod             |  61 ++++
- docs/misc/hypfs-paths.pandoc        | 165 +++++++++
- tools/Rules.mk                      |   8 +-
- tools/flask/policy/modules/dom0.te  |   4 +-
- tools/libs/Makefile                 |   1 +
- tools/libs/hypfs/Makefile           |  16 +
- tools/libs/hypfs/core.c             | 536 ++++++++++++++++++++++++++++
- tools/libs/hypfs/include/xenhypfs.h |  90 +++++
- tools/libs/hypfs/libxenhypfs.map    |  10 +
- tools/libs/hypfs/xenhypfs.pc.in     |  10 +
- tools/libxc/include/xenctrl.h       |   1 -
- tools/libxc/xc_misc.c               |  21 --
- tools/libxl/Makefile                |   3 +-
- tools/libxl/libxl.c                 |  53 ++-
- tools/libxl/libxl_internal.h        |   1 +
- tools/libxl/xenlight.pc.in          |   2 +-
- tools/misc/Makefile                 |   6 +
- tools/misc/xenhypfs.c               | 192 ++++++++++
- tools/xl/xl_misc.c                  |   1 -
- xen/arch/arm/traps.c                |   3 +
- xen/arch/arm/xen.lds.S              |  12 +-
- xen/arch/x86/hvm/hypercall.c        |   3 +
- xen/arch/x86/hvm/vmx/vmcs.c         |  47 ++-
- xen/arch/x86/hvm/vmx/vmx.c          |   4 +-
- xen/arch/x86/hypercall.c            |   3 +
- xen/arch/x86/pv/domain.c            |  24 +-
- xen/arch/x86/pv/hypercall.c         |   3 +
- xen/arch/x86/xen.lds.S              |  12 +-
- xen/common/Kconfig                  |  22 ++
- xen/common/Makefile                 |  13 +
- xen/common/grant_table.c            |  62 +++-
- xen/common/hypfs.c                  | 385 ++++++++++++++++++++
- xen/common/kernel.c                 |  82 ++++-
- xen/common/sysctl.c                 |  36 --
- xen/drivers/char/console.c          |  77 +++-
- xen/include/Makefile                |   1 +
- xen/include/asm-x86/hvm/vmx/vmcs.h  |   3 +-
- xen/include/public/hypfs.h          | 127 +++++++
- xen/include/public/sysctl.h         |  19 +-
- xen/include/public/xen.h            |   1 +
- xen/include/xen/hypercall.h         |  10 +
- xen/include/xen/hypfs.h             | 124 +++++++
- xen/include/xen/kernel.h            |   3 +
- xen/include/xen/lib.h               |   1 -
- xen/include/xen/param.h             | 123 +++++--
- xen/include/xlat.lst                |   2 +
- xen/include/xsm/dummy.h             |   6 +
- xen/include/xsm/xsm.h               |   6 +
- xen/tools/binfile                   |  41 +++
- xen/xsm/dummy.c                     |   1 +
- xen/xsm/flask/Makefile              |   5 +-
- xen/xsm/flask/flask-policy.S        |  16 -
- xen/xsm/flask/hooks.c               |   9 +-
- xen/xsm/flask/policy/access_vectors |   4 +-
- 56 files changed, 2379 insertions(+), 190 deletions(-)
- create mode 100644 docs/features/hypervisorfs.pandoc
- create mode 100644 docs/man/xenhypfs.1.pod
- create mode 100644 docs/misc/hypfs-paths.pandoc
- create mode 100644 tools/libs/hypfs/Makefile
- create mode 100644 tools/libs/hypfs/core.c
- create mode 100644 tools/libs/hypfs/include/xenhypfs.h
- create mode 100644 tools/libs/hypfs/libxenhypfs.map
- create mode 100644 tools/libs/hypfs/xenhypfs.pc.in
- create mode 100644 tools/misc/xenhypfs.c
- create mode 100644 xen/common/hypfs.c
- create mode 100644 xen/include/public/hypfs.h
- create mode 100644 xen/include/xen/hypfs.h
- create mode 100755 xen/tools/binfile
- delete mode 100644 xen/xsm/flask/flask-policy.S
-
+diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
+index 0a6ff93229..feb20319b6 100644
+--- a/tools/libxc/include/xenctrl.h
++++ b/tools/libxc/include/xenctrl.h
+@@ -1226,7 +1226,6 @@ int xc_readconsolering(xc_interface *xch,
+                        int clear, int incremental, uint32_t *pindex);
+ 
+ int xc_send_debug_keys(xc_interface *xch, const char *keys);
+-int xc_set_parameters(xc_interface *xch, const char *params);
+ 
+ typedef struct xen_sysctl_physinfo xc_physinfo_t;
+ typedef struct xen_sysctl_cputopo xc_cputopo_t;
+diff --git a/tools/libxc/xc_misc.c b/tools/libxc/xc_misc.c
+index fe477bf344..3820394413 100644
+--- a/tools/libxc/xc_misc.c
++++ b/tools/libxc/xc_misc.c
+@@ -187,27 +187,6 @@ int xc_send_debug_keys(xc_interface *xch, const char *keys)
+     return ret;
+ }
+ 
+-int xc_set_parameters(xc_interface *xch, const char *params)
+-{
+-    int ret, len = strlen(params);
+-    DECLARE_SYSCTL;
+-    DECLARE_HYPERCALL_BOUNCE_IN(params, len);
+-
+-    if ( xc_hypercall_bounce_pre(xch, params) )
+-        return -1;
+-
+-    sysctl.cmd = XEN_SYSCTL_set_parameter;
+-    set_xen_guest_handle(sysctl.u.set_parameter.params, params);
+-    sysctl.u.set_parameter.size = len;
+-    memset(sysctl.u.set_parameter.pad, 0, sizeof(sysctl.u.set_parameter.pad));
+-
+-    ret = do_sysctl(xch, &sysctl);
+-
+-    xc_hypercall_bounce_post(xch, params);
+-
+-    return ret;
+-}
+-
+ int xc_physinfo(xc_interface *xch,
+                 xc_physinfo_t *put_info)
+ {
 -- 
 2.26.1
 
