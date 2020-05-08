@@ -6,40 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9E25C4724C
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76F35C38A2A
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AA55721841
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AA55721841
+	by mail.kernel.org (Postfix) with ESMTPS id 54C1321841
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 54C1321841
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jX51P-00020o-IF; Fri, 08 May 2020 15:34:43 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jX51P-00020K-8D; Fri, 08 May 2020 15:34:43 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=JXU2=6W=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jX51O-0001zf-EC
+ id 1jX51O-0001zb-Ba
  for xen-devel@lists.xenproject.org; Fri, 08 May 2020 15:34:42 +0000
-X-Inumbo-ID: 674b1723-9141-11ea-a01d-12813bfff9fa
+X-Inumbo-ID: 66eec602-9141-11ea-b9cf-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 674b1723-9141-11ea-a01d-12813bfff9fa;
- Fri, 08 May 2020 15:34:28 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 66eec602-9141-11ea-b9cf-bc764e2007e4;
+ Fri, 08 May 2020 15:34:27 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id C664CAEF8;
- Fri,  8 May 2020 15:34:29 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id BA2D6AE8C;
+ Fri,  8 May 2020 15:34:28 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v8 11/12] tools/libxc: remove xc_set_parameters()
-Date: Fri,  8 May 2020 17:34:20 +0200
-Message-Id: <20200508153421.24525-12-jgross@suse.com>
+Subject: [PATCH v8 06/12] tools: add xenfs tool
+Date: Fri,  8 May 2020 17:34:15 +0200
+Message-Id: <20200508153421.24525-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200508153421.24525-1-jgross@suse.com>
 References: <20200508153421.24525-1-jgross@suse.com>
@@ -55,66 +54,354 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-There is no user of xc_set_parameters() left, so remove it.
+Add the xenfs tool for accessing the hypervisor filesystem.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Wei Liu <wl@xen.org>
+---
+V1:
+- rename to xenhypfs
+- don't use "--" for subcommands
+- add write support
+
+V2:
+- escape non-printable characters per default with cat subcommand
+  (Ian Jackson)
+- add -b option to cat subcommand (Ian Jackson)
+- add man page
+
+V3:
+- adapt to new hypfs interface
+
+V7:
+- added missing bool for ls output
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
-V6:
-- new patch
----
- tools/libxc/include/xenctrl.h |  1 -
- tools/libxc/xc_misc.c         | 21 ---------------------
- 2 files changed, 22 deletions(-)
+ .gitignore              |   1 +
+ docs/man/xenhypfs.1.pod |  61 +++++++++++++
+ tools/misc/Makefile     |   6 ++
+ tools/misc/xenhypfs.c   | 192 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 260 insertions(+)
+ create mode 100644 docs/man/xenhypfs.1.pod
+ create mode 100644 tools/misc/xenhypfs.c
 
-diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
-index 0a6ff93229..feb20319b6 100644
---- a/tools/libxc/include/xenctrl.h
-+++ b/tools/libxc/include/xenctrl.h
-@@ -1226,7 +1226,6 @@ int xc_readconsolering(xc_interface *xch,
-                        int clear, int incremental, uint32_t *pindex);
+diff --git a/.gitignore b/.gitignore
+index 41b1d4c8a1..ce3ef23d45 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -368,6 +368,7 @@ tools/libxl/test_timedereg
+ tools/libxl/test_fdderegrace
+ tools/firmware/etherboot/eb-roms.h
+ tools/firmware/etherboot/gpxe-git-snapshot.tar.gz
++tools/misc/xenhypfs
+ tools/misc/xenwatchdogd
+ tools/misc/xen-hvmcrash
+ tools/misc/xen-lowmemd
+diff --git a/docs/man/xenhypfs.1.pod b/docs/man/xenhypfs.1.pod
+new file mode 100644
+index 0000000000..37aa488fcc
+--- /dev/null
++++ b/docs/man/xenhypfs.1.pod
+@@ -0,0 +1,61 @@
++=head1 NAME
++
++xenhypfs - Xen tool to access Xen hypervisor file system
++
++=head1 SYNOPSIS
++
++B<xenhypfs> I<subcommand> [I<options>] [I<args>]
++
++=head1 DESCRIPTION
++
++The B<xenhypfs> program is used to access the Xen hypervisor file system.
++It can be used to show the available entries, to show their contents and
++(if allowed) to modify their contents.
++
++=head1 SUBCOMMANDS
++
++=over 4
++
++=item B<ls> I<path>
++
++List the available entries below I<path>.
++
++=item B<cat> [I<-b>] I<path>
++
++Show the contents of the entry specified by I<path>. Non-printable characters
++other than white space characters (like tab, new line) will be shown as
++B<\xnn> (B<nn> being a two digit hex number) unless the option B<-b> is
++specified.
++
++=item B<write> I<path> I<value>
++
++Set the contents of the entry specified by I<path> to I<value>.
++
++=item B<tree>
++
++Show all the entries of the file system as a tree.
++
++=back
++
++=head1 RETURN CODES
++
++=over 4
++
++=item B<0>
++
++Success
++
++=item B<1>
++
++Invalid usage (e.g. unknown subcommand, unknown option, missing parameter).
++
++=item B<2>
++
++Entry not found while traversing the tree.
++
++=item B<3>
++
++Access right violation.
++
++=back
++
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 63947bfadc..9fdb13597f 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -24,6 +24,7 @@ INSTALL_SBIN-$(CONFIG_X86)     += xen-lowmemd
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-mfndump
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-ucode
+ INSTALL_SBIN                   += xencov
++INSTALL_SBIN                   += xenhypfs
+ INSTALL_SBIN                   += xenlockprof
+ INSTALL_SBIN                   += xenperf
+ INSTALL_SBIN                   += xenpm
+@@ -86,6 +87,9 @@ xenperf: xenperf.o
+ xenpm: xenpm.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
  
- int xc_send_debug_keys(xc_interface *xch, const char *keys);
--int xc_set_parameters(xc_interface *xch, const char *params);
++xenhypfs: xenhypfs.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenhypfs) $(APPEND_LDFLAGS)
++
+ xenlockprof: xenlockprof.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
  
- typedef struct xen_sysctl_physinfo xc_physinfo_t;
- typedef struct xen_sysctl_cputopo xc_cputopo_t;
-diff --git a/tools/libxc/xc_misc.c b/tools/libxc/xc_misc.c
-index fe477bf344..3820394413 100644
---- a/tools/libxc/xc_misc.c
-+++ b/tools/libxc/xc_misc.c
-@@ -187,27 +187,6 @@ int xc_send_debug_keys(xc_interface *xch, const char *keys)
-     return ret;
- }
+@@ -94,6 +98,8 @@ xen-hptool.o: CFLAGS += -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
+ xen-hptool: xen-hptool.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenstore) $(APPEND_LDFLAGS)
  
--int xc_set_parameters(xc_interface *xch, const char *params)
--{
--    int ret, len = strlen(params);
--    DECLARE_SYSCTL;
--    DECLARE_HYPERCALL_BOUNCE_IN(params, len);
--
--    if ( xc_hypercall_bounce_pre(xch, params) )
--        return -1;
--
--    sysctl.cmd = XEN_SYSCTL_set_parameter;
--    set_xen_guest_handle(sysctl.u.set_parameter.params, params);
--    sysctl.u.set_parameter.size = len;
--    memset(sysctl.u.set_parameter.pad, 0, sizeof(sysctl.u.set_parameter.pad));
--
--    ret = do_sysctl(xch, &sysctl);
--
--    xc_hypercall_bounce_post(xch, params);
--
--    return ret;
--}
--
- int xc_physinfo(xc_interface *xch,
-                 xc_physinfo_t *put_info)
- {
++xenhypfs.o: CFLAGS += $(CFLAGS_libxenhypfs)
++
+ # xen-mfndump incorrectly uses libxc internals
+ xen-mfndump.o: CFLAGS += -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
+ xen-mfndump: xen-mfndump.o
+diff --git a/tools/misc/xenhypfs.c b/tools/misc/xenhypfs.c
+new file mode 100644
+index 0000000000..158b901f42
+--- /dev/null
++++ b/tools/misc/xenhypfs.c
+@@ -0,0 +1,192 @@
++#define _GNU_SOURCE
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <xenhypfs.h>
++
++static struct xenhypfs_handle *hdl;
++
++static int usage(void)
++{
++    fprintf(stderr, "usage: xenhypfs ls <path>\n");
++    fprintf(stderr, "       xenhypfs cat [-b] <path>\n");
++    fprintf(stderr, "       xenhypfs write <path> <val>\n");
++    fprintf(stderr, "       xenhypfs tree\n");
++
++    return 1;
++}
++
++static void xenhypfs_print_escaped(char *string)
++{
++    char *c;
++
++    for (c = string; *c; c++) {
++        if (isgraph(*c) || isspace(*c))
++            printf("%c", *c);
++        else
++            printf("\\x%02x", *c);
++    }
++    printf("\n");
++}
++
++static int xenhypfs_cat(int argc, char *argv[])
++{
++    int ret = 0;
++    char *result;
++    char *path;
++    bool bin = false;
++
++    switch (argc) {
++    case 1:
++        path = argv[0];
++        break;
++
++    case 2:
++        if (strcmp(argv[0], "-b"))
++            return usage();
++        bin = true;
++        path = argv[1];
++        break;
++
++    default:
++        return usage();
++    }
++
++    result = xenhypfs_read(hdl, path);
++    if (!result) {
++        perror("could not read");
++        ret = 3;
++    } else {
++        if (!bin)
++            printf("%s\n", result);
++        else
++            xenhypfs_print_escaped(result);
++        free(result);
++    }
++
++    return ret;
++}
++
++static int xenhypfs_wr(char *path, char *val)
++{
++    int ret;
++
++    ret = xenhypfs_write(hdl, path, val);
++    if (ret) {
++        perror("could not write");
++        ret = 3;
++    }
++
++    return ret;
++}
++
++static char *xenhypfs_type(struct xenhypfs_dirent *ent)
++{
++    char *res;
++
++    switch (ent->type) {
++    case xenhypfs_type_dir:
++        res = "<dir>   ";
++        break;
++    case xenhypfs_type_blob:
++        res = "<blob>  ";
++        break;
++    case xenhypfs_type_string:
++        res = "<string>";
++        break;
++    case xenhypfs_type_uint:
++        res = "<uint>  ";
++        break;
++    case xenhypfs_type_int:
++        res = "<int>   ";
++        break;
++    case xenhypfs_type_bool:
++        res = "<bool>  ";
++        break;
++    default:
++        res = "<\?\?\?>   ";
++        break;
++    }
++
++    return res;
++}
++
++static int xenhypfs_ls(char *path)
++{
++    struct xenhypfs_dirent *ent;
++    unsigned int n, i;
++    int ret = 0;
++
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if (!ent) {
++        perror("could not read dir");
++        ret = 3;
++    } else {
++        for (i = 0; i < n; i++)
++            printf("%s r%c %s\n", xenhypfs_type(ent + i),
++                   ent[i].is_writable ? 'w' : '-', ent[i].name);
++
++        free(ent);
++    }
++
++    return ret;
++}
++
++static int xenhypfs_tree_sub(char *path, unsigned int depth)
++{
++    struct xenhypfs_dirent *ent;
++    unsigned int n, i;
++    int ret = 0;
++    char *p;
++
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if (!ent)
++        return 2;
++
++    for (i = 0; i < n; i++) {
++        printf("%*s%s%s\n", depth * 2, "", ent[i].name,
++               ent[i].type == xenhypfs_type_dir ? "/" : "");
++        if (ent[i].type == xenhypfs_type_dir) {
++            asprintf(&p, "%s%s%s", path, (depth == 1) ? "" : "/", ent[i].name);
++            if (xenhypfs_tree_sub(p, depth + 1))
++                ret = 2;
++        }
++    }
++
++    free(ent);
++
++    return ret;
++}
++
++static int xenhypfs_tree(void)
++{
++    printf("/\n");
++
++    return xenhypfs_tree_sub("/", 1);
++}
++
++int main(int argc, char *argv[])
++{
++    int ret;
++
++    hdl = xenhypfs_open(NULL, 0);
++
++    if (!hdl) {
++        fprintf(stderr, "Could not open libxenhypfs\n");
++        ret = 2;
++    } else if (argc >= 3 && !strcmp(argv[1], "cat"))
++        ret = xenhypfs_cat(argc - 2, argv + 2);
++    else if (argc == 3 && !strcmp(argv[1], "ls"))
++        ret = xenhypfs_ls(argv[2]);
++    else if (argc == 4 && !strcmp(argv[1], "write"))
++        ret = xenhypfs_wr(argv[2], argv[3]);
++    else if (argc == 2 && !strcmp(argv[1], "tree"))
++        ret = xenhypfs_tree();
++    else
++        ret = usage();
++
++    xenhypfs_close(hdl);
++
++    return ret;
++}
 -- 
 2.26.1
 
