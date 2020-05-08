@@ -2,104 +2,49 @@ Return-Path: <SRS0=18Bn=6W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 001A0C38A2A
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:31:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E7D3CC38A2A
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C6BA621841
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:31:15 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="SpzoObUF"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6BA621841
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id C42EA21841
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C42EA21841
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jX4xs-0001i4-SG; Fri, 08 May 2020 15:31:04 +0000
+	id 1jX51A-0001sR-Bv; Fri, 08 May 2020 15:34:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=M6n8=6W=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jX4xr-0001hy-9O
- for xen-devel@lists.xenproject.org; Fri, 08 May 2020 15:31:03 +0000
-X-Inumbo-ID: ec95f682-9140-11ea-9887-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=JXU2=6W=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jX519-0001sG-D5
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2020 15:34:27 +0000
+X-Inumbo-ID: 660d27a6-9141-11ea-b9cf-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ec95f682-9140-11ea-9887-bc764e2007e4;
- Fri, 08 May 2020 15:31:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588951862;
- h=subject:to:cc:references:from:message-id:date:
- mime-version:in-reply-to:content-transfer-encoding;
- bh=5+MGsT7EyqtQLeICh9rFqTjuvOdRffCurchcqUClatM=;
- b=SpzoObUFHmGI9TOl2R32lkSmYSCMZo6u6qmutbiuxGD9KHDt4Siz7tHj
- Zij2csP21QlR7oRxx6lZXKbciQuu1OLgCTTYjk7jIUb8L1AKjZtGum69t
- K7Xr5fpmpz74ISfacng6wAQLVCyQKfo17i1duu9W3deiAEawCrsWY53kd g=;
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="andrew.cooper3@citrix.com";
- x-conformance=sidf_compatible
-Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
- Andrew.Cooper3@citrix.com designates 162.221.158.21 as
- permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="Andrew.Cooper3@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="Andrew.Cooper3@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=andrew.cooper3@citrix.com;
- spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com;
- dmarc=pass (p=none dis=none) d=citrix.com
-IronPort-SDR: GpVAFiZb+9fWBIHW5kac0SEi9E6bmNffs3++sIDrqvpFinArVS4ufgdGtyQ2GiHYx3WiE7/b5Y
- VwXYGXgRY3heO6s0Av0tL9GNvmnQ83Lo9LDsWIob4GJbbu9ATvcbVjvzagfa4yEQI2clN3Dm6Y
- eTidIsvPEIm8NOIemLbroYfmmhY0wie42bJMPAyQTRj6OTs69aruL+W2GkYxJQP/zRMN6I3JGP
- p7H1ralItCjcHnsspQHm42+OgIbsTdiB+6xP3hiwzTSeORW4Mcjk0Jj+zeSx9lIzXTKJJNdGR9
- oDw=
-X-SBRS: 2.7
-X-MesageID: 17453940
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,368,1583211600"; d="scan'208";a="17453940"
-Subject: Re: [PATCH] tools/libxc: Reduce feature handling complexity in
- xc_cpuid_apply_policy()
-To: Xen-devel <xen-devel@lists.xenproject.org>
-References: <20200303182326.16739-1-andrew.cooper3@citrix.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <f2d8a8cc-a949-22f0-0e26-0df2c7d5889f@citrix.com>
-Date: Fri, 8 May 2020 16:30:58 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id 660d27a6-9141-11ea-b9cf-bc764e2007e4;
+ Fri, 08 May 2020 15:34:26 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id D2E17AE64;
+ Fri,  8 May 2020 15:34:27 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v8 01/12] xen/vmx: let opt_ept_ad always reflect the current
+ setting
+Date: Fri,  8 May 2020 17:34:10 +0200
+Message-Id: <20200508153421.24525-2-jgross@suse.com>
+X-Mailer: git-send-email 2.26.1
+In-Reply-To: <20200508153421.24525-1-jgross@suse.com>
+References: <20200508153421.24525-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20200303182326.16739-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -110,78 +55,118 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <Ian.Jackson@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Tools ping?
+In case opt_ept_ad has not been set explicitly by the user via command
+line or runtime parameter, it is treated as "no" on Avoton cpus.
 
-~Andrew
+Change that handling by setting opt_ept_ad to 0 for this cpu type
+explicitly if no user value has been set.
 
-On 03/03/2020 18:23, Andrew Cooper wrote:
-> xc_cpuid_apply_policy() is gaining extra parameters to untangle CPUID
-> complexity in Xen.  While an improvement in general, it does have the
-> unfortunate side effect of duplicating some settings across muliple
-> parameters.
->
-> Rearrange the logic to only consider 'pae' if no explicit featureset is
-> provided.  This reduces the complexity for callers who have already provided a
-> pae setting in the featureset.
->
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Jan Beulich <JBeulich@suse.com>
-> CC: Wei Liu <wl@xen.org>
-> CC: Roger Pau Monné <roger.pau@citrix.com>
-> CC: Ian Jackson <Ian.Jackson@citrix.com>
-> ---
->  tools/libxc/include/xenctrl.h | 6 ++++++
->  tools/libxc/xc_cpuid_x86.c    | 7 +++++--
->  2 files changed, 11 insertions(+), 2 deletions(-)
->
-> diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
-> index fc6e57a1a0..8d13a7e20b 100644
-> --- a/tools/libxc/include/xenctrl.h
-> +++ b/tools/libxc/include/xenctrl.h
-> @@ -1798,6 +1798,12 @@ int xc_cpuid_set(xc_interface *xch,
->                   const unsigned int *input,
->                   const char **config,
->                   char **config_transformed);
-> +/*
-> + * Make adjustments to the CPUID settings for a domain.
-> + *
-> + * Either pass a full new @featureset (and @nr_features), or adjust individual
-> + * features (@pae).
-> + */
->  int xc_cpuid_apply_policy(xc_interface *xch,
->                            uint32_t domid,
->                            const uint32_t *featureset,
-> diff --git a/tools/libxc/xc_cpuid_x86.c b/tools/libxc/xc_cpuid_x86.c
-> index 5ced6d18b9..f045b03223 100644
-> --- a/tools/libxc/xc_cpuid_x86.c
-> +++ b/tools/libxc/xc_cpuid_x86.c
-> @@ -532,6 +532,11 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid,
->  
->          cpuid_featureset_to_policy(feat, p);
->      }
-> +    else
-> +    {
-> +        if ( di.hvm )
-> +            p->basic.pae = pae;
-> +    }
->  
->      if ( !di.hvm )
->      {
-> @@ -615,8 +620,6 @@ int xc_cpuid_apply_policy(xc_interface *xch, uint32_t domid,
->              break;
->          }
->  
-> -        p->basic.pae = pae;
-> -
->          /*
->           * These settings are necessary to cause earlier HVM_PARAM_NESTEDHVM /
->           * XEN_DOMCTL_disable_migrate settings to be reflected correctly in
+By putting this into the (renamed) boot time initialization of vmcs.c
+_vmx_cpu_up() can be made static.
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+---
+ xen/arch/x86/hvm/vmx/vmcs.c        | 22 +++++++++++++++-------
+ xen/arch/x86/hvm/vmx/vmx.c         |  4 +---
+ xen/include/asm-x86/hvm/vmx/vmcs.h |  3 +--
+ 3 files changed, 17 insertions(+), 12 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 4c23645454..221af9737a 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -315,10 +315,6 @@ static int vmx_init_vmcs_config(void)
+ 
+         if ( !opt_ept_ad )
+             _vmx_ept_vpid_cap &= ~VMX_EPT_AD_BIT;
+-        else if ( /* Work around Erratum AVR41 on Avoton processors. */
+-                  boot_cpu_data.x86 == 6 && boot_cpu_data.x86_model == 0x4d &&
+-                  opt_ept_ad < 0 )
+-            _vmx_ept_vpid_cap &= ~VMX_EPT_AD_BIT;
+ 
+         /*
+          * Additional sanity checking before using EPT:
+@@ -652,7 +648,7 @@ void vmx_cpu_dead(unsigned int cpu)
+     vmx_pi_desc_fixup(cpu);
+ }
+ 
+-int _vmx_cpu_up(bool bsp)
++static int _vmx_cpu_up(bool bsp)
+ {
+     u32 eax, edx;
+     int rc, bios_locked, cpu = smp_processor_id();
+@@ -2108,9 +2104,21 @@ static void vmcs_dump(unsigned char ch)
+     printk("**************************************\n");
+ }
+ 
+-void __init setup_vmcs_dump(void)
++int __init vmx_vmcs_init(void)
+ {
+-    register_keyhandler('v', vmcs_dump, "dump VT-x VMCSs", 1);
++    int ret;
++
++    if ( opt_ept_ad < 0 )
++        /* Work around Erratum AVR41 on Avoton processors. */
++        opt_ept_ad = !(boot_cpu_data.x86 == 6 &&
++                       boot_cpu_data.x86_model == 0x4d);
++
++    ret = _vmx_cpu_up(true);
++
++    if ( !ret )
++        register_keyhandler('v', vmcs_dump, "dump VT-x VMCSs", 1);
++
++    return ret;
+ }
+ 
+ static void __init __maybe_unused build_assertions(void)
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 6efa80e422..11a4dd94cf 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2482,7 +2482,7 @@ const struct hvm_function_table * __init start_vmx(void)
+ {
+     set_in_cr4(X86_CR4_VMXE);
+ 
+-    if ( _vmx_cpu_up(true) )
++    if ( vmx_vmcs_init() )
+     {
+         printk("VMX: failed to initialise.\n");
+         return NULL;
+@@ -2553,8 +2553,6 @@ const struct hvm_function_table * __init start_vmx(void)
+         vmx_function_table.get_guest_bndcfgs = vmx_get_guest_bndcfgs;
+     }
+ 
+-    setup_vmcs_dump();
+-
+     lbr_tsx_fixup_check();
+     bdf93_fixup_check();
+ 
+diff --git a/xen/include/asm-x86/hvm/vmx/vmcs.h b/xen/include/asm-x86/hvm/vmx/vmcs.h
+index 95c1dea7b8..906810592f 100644
+--- a/xen/include/asm-x86/hvm/vmx/vmcs.h
++++ b/xen/include/asm-x86/hvm/vmx/vmcs.h
+@@ -21,11 +21,10 @@
+ #include <xen/mm.h>
+ 
+ extern void vmcs_dump_vcpu(struct vcpu *v);
+-extern void setup_vmcs_dump(void);
++extern int vmx_vmcs_init(void);
+ extern int  vmx_cpu_up_prepare(unsigned int cpu);
+ extern void vmx_cpu_dead(unsigned int cpu);
+ extern int  vmx_cpu_up(void);
+-extern int  _vmx_cpu_up(bool bsp);
+ extern void vmx_cpu_down(void);
+ 
+ struct vmcs_struct {
+-- 
+2.26.1
 
 
