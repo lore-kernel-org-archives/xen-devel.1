@@ -2,61 +2,61 @@ Return-Path: <SRS0=18Bn=6W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A9C23C38A2A
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 20:33:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CBA3C38A2A
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 21:04:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6FDC221775
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 20:33:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 269D32173E
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 21:04:46 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="d3ct67v+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FDC221775
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="QNY/MycQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 269D32173E
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jX9fz-0003tx-6n; Fri, 08 May 2020 20:32:55 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jXAAR-0006TL-Tm; Fri, 08 May 2020 21:04:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=M6n8=6W=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jX9fx-0003ts-O4
- for xen-devel@lists.xenproject.org; Fri, 08 May 2020 20:32:53 +0000
-X-Inumbo-ID: 16ceacda-916b-11ea-9887-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 16ceacda-916b-11ea-9887-bc764e2007e4;
- Fri, 08 May 2020 20:32:52 +0000 (UTC)
+ id 1jXAAR-0006TG-0T
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2020 21:04:23 +0000
+X-Inumbo-ID: 7d828f1a-916f-11ea-a071-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7d828f1a-916f-11ea-a071-12813bfff9fa;
+ Fri, 08 May 2020 21:04:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1588969973;
+ d=citrix.com; s=securemail; t=1588971862;
  h=subject:to:cc:references:from:message-id:date:
  mime-version:in-reply-to:content-transfer-encoding;
- bh=lvcHfMrPoxy3lfH9QSTjWGiNH2/W59CeABGN2RP453Y=;
- b=d3ct67v+yu+aVKURHK/vShqTADatG0FviMjUtPd2qkIDz9Roz2c/OBDQ
- THjEpf5UVqZm/6c1u+RNruwHKBmjPmH8Tr40Vdq8FT9+fdVmPhJeSTJTW
- 0uk8JVvcSU1YQsCh1d6mrG/c9QQ+UusZKGzvBCFFYlZbjYStIYMX1RASX U=;
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ bh=Xt1kL6CbUuB4s9c/xNAlc5HpI87uPFG7NIUqE70ub6Q=;
+ b=QNY/MycQMKfD7WskuLaSKzC9vRCt4izP+MfB3VAaqz2dS1pqDE8B7B1W
+ aTKdm/Dd6DXn73rjokEzZGW/c2tTeM+dt6ktGKm8QcXtQFWFx4chDXVGD
+ gxviTblK8dAZK6YlCx/aP/WDtHP48DJPLyjUgMiwaIzCBexv1t2aD69RN k=;
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa4.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -65,38 +65,38 @@ Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa4.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
 X-Ironport-Dmarc-Check-Result: validskip
-IronPort-SDR: gLEO9oAMiGRmKnl3GtWt0sX7AQPZZ1BwmIWR7VMFy2qVlsq6amL74aGQSuJrccZJEuvSXPTsJX
- 6blFDBlgf0HbtDdDpeEpCaVj0m0PIURi9a5lf3RI89aLJG85AqcLoBaEqsfCn2Dm04vU/Ztnxv
- R3JftELIBv5iFSMVOm142oJT3uvqD2+GdKYH4igu9rAK9+GDHte3Z7ZyfMAov/QouF9nooY5Xl
- Oh6xs/y3sK83m6QcWYmEWbgVjOyBpz96bi9owHQ4OcV7LtWlV0Hud3qiTdiBkGVa7J8Me1ad7t
- O/k=
+IronPort-SDR: gvEq1nHMnQBL3kJRzNlmeSRMD51Jsf8m9tpPAbfGsUMP2mEyH+Ygw9e7hvVjWv/RQ/bSz6Mrvu
+ k5PlFOat2DCORtgZ9PyvcnjvzcZ5orhDLZgGayn7z12NQhsgGv/VLWwpOD6q10NTAxtrlxrpb6
+ tu8X83AhhFjrRUHVory4/r2s0hf8TyWUe4ABZ0iYSD3MIG855BO07ZFFR3ihvGebwVlxLUUCsv
+ 5fRSSpAMRVXcpk++MMxm1fTcncpobCbtJDdXfjp8anVOr5DfsTcvqDfpYz6N3Mtq7pNqLr05PG
+ 0V4=
 X-SBRS: 2.7
-X-MesageID: 17123184
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 17795292
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,369,1583211600"; d="scan'208";a="17123184"
-Subject: Re: [PATCH v8 10/12] x86/HVM: scale MPERF values reported to guests
- (on AMD)
+X-IronPort-AV: E=Sophos;i="5.73,369,1583211600"; d="scan'208";a="17795292"
+Subject: Re: [PATCH v8 12/12] x86/HVM: don't needlessly intercept
+ APERF/MPERF/TSC MSR reads
 To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
  <xen-devel@lists.xenproject.org>
 References: <60cc730f-2a1c-d7a6-74fe-64f3c9308831@suse.com>
- <5da4ed2e-8eb8-0b18-3c1f-9d419371c08a@suse.com>
+ <e92b6c1a-b2c3-13e7-116c-4772c851dd0b@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <8bf8b3c9-1cec-0943-4b98-75b4a787a344@citrix.com>
-Date: Fri, 8 May 2020 21:32:46 +0100
+Message-ID: <81cc74ce-0a53-d5cd-3513-af3af6382815@citrix.com>
+Date: Fri, 8 May 2020 22:04:17 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <5da4ed2e-8eb8-0b18-3c1f-9d419371c08a@suse.com>
+In-Reply-To: <e92b6c1a-b2c3-13e7-116c-4772c851dd0b@suse.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Content-Language: en-GB
@@ -116,90 +116,35 @@ Cc: Wei Liu <wl@xen.org>, Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 05/05/2020 09:18, Jan Beulich wrote:
-> AMD's PM specifies that MPERF (and its r/o counterpart) reads are
-> affected by the TSC ratio. Hence when processing such reads in software
-> we too should scale the values. While we don't currently (yet) expose
-> the underlying feature flags, besides us allowing the MSRs to be read
-> nevertheless, RDPRU is going to expose the values even to user space.
->
-> Furthermore, due to the not exposed feature flags, this change has the
-> effect of making properly inaccessible (for reads) the two MSRs.
->
-> Note that writes to MPERF (and APERF) continue to be unsupported.
+On 05/05/2020 09:20, Jan Beulich wrote:
+> If the hardware can handle accesses, we should allow it to do so. This
+> way we can expose EFRO to HVM guests,
 
-Linux is now using MPERF/APERF for its frequency-invariant scheduling
-logic.  Irritatingly, via its read/write alias rather than its read-only
-alias.  Even more irritatingly, Intel's reference algorithm recommends
-writing to both, despite this being being far less efficient than (one
-of) AMD's (two) algorithm(s) which tells you just to subtract the values
-you last sampled.
+I'm reminded now of the conversation I'm sure we've had before, although
+I have a feeling it was on IRC.
 
-On the one hand, I'm tempted to suggest that we offer EFRO on Intel and
-update Linux to use it.  OTOH, that would VMExit as Intel CPUs don't
-understand the EFRO interface.
+APERF/MPERF (including the EFRO interface on AMD) are free running
+counters but only in C0.  The raw values are not synchronised across
+threads.
 
-I can't see any sane way to virtualise the write behaviour for MPERF/APERF.
+A vCPU which gets rescheduled has a 50% chance of finding the one or
+both values going backwards, and a 100% chance of totally bogus calculation.
 
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> ---
-> v3: New.
-> ---
-> I did consider whether to put the code in guest_rdmsr() instead, but
-> decided that it's better to have it next to TSC handling.
+There is no point exposing APERF/MPERF to guests.  It can only be used
+safely in hypervisor context, on AMD hardware with a CLGI/STGI region,
+or on Intel hardware in an NMI handler if you trust that a machine check
+isn't going to ruin your day.
 
-Please do put it in guest_rdmsr().  This is code hygene just as much as
-bool_t or style fixes are.
+VMs have no way of achieving the sampling requirements, and has a fair
+chance of getting a plausible-but-wrong answer.
 
-The relationship to TSC is passing-at-best.
+The only possibility to do this safely is on a VM which is pinned to
+pCPU for its lifetime, but even I'm unconvinced of the correctness.
 
->
-> --- a/xen/arch/x86/hvm/hvm.c
-> +++ b/xen/arch/x86/hvm/hvm.c
-> @@ -3478,6 +3478,22 @@ int hvm_msr_read_intercept(unsigned int
->          *msr_content = v->arch.hvm.msr_tsc_adjust;
->          break;
->  
-> +    case MSR_MPERF_RD_ONLY:
-> +        if ( !d->arch.cpuid->extd.efro )
-> +        {
-> +            goto gp_fault;
-> +
-> +    case MSR_IA32_MPERF:
-> +            if ( !(d->arch.cpuid->basic.raw[6].c &
-> +                   CPUID6_ECX_APERFMPERF_CAPABILITY) )
-> +                goto gp_fault;
-> +        }
-> +        if ( rdmsr_safe(msr, *msr_content) )
-> +            goto gp_fault;
-> +        if ( d->arch.cpuid->x86_vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON) )
-
-I suspect we want to gain amd_like() outside of the emulator.
-
-> +            *msr_content = hvm_get_guest_tsc_fixed(v, *msr_content);
-> +        break;
-> +
->      case MSR_APIC_BASE:
->          *msr_content = vcpu_vlapic(v)->hw.apic_base_msr;
->          break;
-> --- a/xen/include/asm-x86/msr-index.h
-> +++ b/xen/include/asm-x86/msr-index.h
-> @@ -405,6 +405,9 @@
->  #define MSR_IA32_MPERF			0x000000e7
->  #define MSR_IA32_APERF			0x000000e8
->  
-> +#define MSR_MPERF_RD_ONLY		0xc00000e7
-> +#define MSR_APERF_RD_ONLY		0xc00000e8
-
-S/RD_ONLY/RO/ ?  No loss of meaning.  Also, above the legacy line please.
+I don't think we should be exposing this functionality to guests at all,
+although I might be persuaded if someone wanting to use it in a VM can
+provide a concrete justification of why the above problems won't get in
+their way.
 
 ~Andrew
-
-> +
->  #define MSR_IA32_THERM_CONTROL		0x0000019a
->  #define MSR_IA32_THERM_INTERRUPT	0x0000019b
->  #define MSR_IA32_THERM_STATUS		0x0000019c
->
-
 
