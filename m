@@ -6,47 +6,48 @@ X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
 	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5364BC38A2A
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 08:20:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76D23C38A2A
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 08:29:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2769D20735
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 08:20:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2769D20735
+	by mail.kernel.org (Postfix) with ESMTPS id 4282C20870
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 08:29:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4282C20870
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jWyEX-0005rF-Vl; Fri, 08 May 2020 08:19:49 +0000
+	id 1jWyNU-0006iS-SX; Fri, 08 May 2020 08:29:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=t3Kb=6W=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jWyEW-0005r9-P0
- for xen-devel@lists.xenproject.org; Fri, 08 May 2020 08:19:48 +0000
-X-Inumbo-ID: ae3a16ac-9104-11ea-ae69-bc764e2007e4
+ (envelope-from <SRS0=JXU2=6W=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jWyNT-0006iN-Rz
+ for xen-devel@lists.xenproject.org; Fri, 08 May 2020 08:29:03 +0000
+X-Inumbo-ID: f8f46e30-9105-11ea-b9cf-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ae3a16ac-9104-11ea-ae69-bc764e2007e4;
- Fri, 08 May 2020 08:19:48 +0000 (UTC)
+ id f8f46e30-9105-11ea-b9cf-bc764e2007e4;
+ Fri, 08 May 2020 08:29:03 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id DCFD2B004;
- Fri,  8 May 2020 08:19:49 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 9C875AEC4;
+ Fri,  8 May 2020 08:29:04 +0000 (UTC)
 Subject: Re: [PATCH 3/3] xen/cpupool: fix removing cpu from a cpupool
-To: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
 References: <20200430151559.1464-1-jgross@suse.com>
  <20200430151559.1464-4-jgross@suse.com>
  <e02432bf8ea8ca85a31176de1a1f9e429c84b243.camel@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <7c0c5c02-7bf8-8aa1-4c5d-586d18290d2f@suse.com>
-Date: Fri, 8 May 2020 10:19:46 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ <7c0c5c02-7bf8-8aa1-4c5d-586d18290d2f@suse.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <515da70d-1149-0de7-0592-78416496ed62@suse.com>
+Date: Fri, 8 May 2020 10:29:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <e02432bf8ea8ca85a31176de1a1f9e429c84b243.camel@suse.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <7c0c5c02-7bf8-8aa1-4c5d-586d18290d2f@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -64,26 +65,30 @@ Cc: xen-devel@lists.xenproject.org, George Dunlap <george.dunlap@citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 07.05.2020 20:36, Dario Faggioli wrote:
-> On Thu, 2020-04-30 at 17:15 +0200, Juergen Gross wrote:
->> Commit cb563d7665f2 ("xen/sched: support core scheduling for moving
->> cpus to/from cpupools") introduced a regression when trying to remove
->> an offline cpu from a cpupool, as the system would crash in this
->> situation.
->>
->> Fix that by testing the cpu to be online.
->>
->> Fixes: cb563d7665f2 ("xen/sched: support core scheduling for moving
->> cpus to/from cpupools")
->> Signed-off-by: Juergen Gross <jgross@suse.com>
->>
-> Acked-by: Dario Faggioli <dfaggioli@suse.com>
+On 08.05.20 10:19, Jan Beulich wrote:
+> On 07.05.2020 20:36, Dario Faggioli wrote:
+>> On Thu, 2020-04-30 at 17:15 +0200, Juergen Gross wrote:
+>>> Commit cb563d7665f2 ("xen/sched: support core scheduling for moving
+>>> cpus to/from cpupools") introduced a regression when trying to remove
+>>> an offline cpu from a cpupool, as the system would crash in this
+>>> situation.
+>>>
+>>> Fix that by testing the cpu to be online.
+>>>
+>>> Fixes: cb563d7665f2 ("xen/sched: support core scheduling for moving
+>>> cpus to/from cpupools")
+>>> Signed-off-by: Juergen Gross <jgross@suse.com>
+>>>
+>> Acked-by: Dario Faggioli <dfaggioli@suse.com>
+> 
+> Jürgen,
+> 
+> it looks like this is independent of the earlier two patches
+> and hence could go in, while I understand there'll be v2 for
+> the earlier ones. Please confirm.
 
-Jürgen,
+Confirmed.
 
-it looks like this is independent of the earlier two patches
-and hence could go in, while I understand there'll be v2 for
-the earlier ones. Please confirm.
 
-Jan
+Juergen
 
