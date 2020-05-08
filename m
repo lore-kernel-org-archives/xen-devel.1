@@ -6,39 +6,41 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 28F6AC38A2A
-	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0F246C47247
+	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0205821841
+	by mail.kernel.org (Postfix) with ESMTPS id E2CBB21841
 	for <xen-devel@archiver.kernel.org>; Fri,  8 May 2020 15:34:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0205821841
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2CBB21841
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jX51U-000256-Tv; Fri, 08 May 2020 15:34:48 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jX51V-00025S-6z; Fri, 08 May 2020 15:34:49 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=JXU2=6W=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jX51T-00023x-Al
+ id 1jX51T-000242-Ea
  for xen-devel@lists.xenproject.org; Fri, 08 May 2020 15:34:47 +0000
-X-Inumbo-ID: 6707a9a6-9141-11ea-ae69-bc764e2007e4
+X-Inumbo-ID: 674b1722-9141-11ea-a01d-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 6707a9a6-9141-11ea-ae69-bc764e2007e4;
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 674b1722-9141-11ea-a01d-12813bfff9fa;
  Fri, 08 May 2020 15:34:28 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id F2E63AEA6;
- Fri,  8 May 2020 15:34:28 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id AAA1BAEE9;
+ Fri,  8 May 2020 15:34:29 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v8 07/12] xen: provide version information in hypfs
-Date: Fri,  8 May 2020 17:34:16 +0200
-Message-Id: <20200508153421.24525-8-jgross@suse.com>
+Subject: [PATCH v8 10/12] tools/libxl: use libxenhypfs for setting xen runtime
+ parameters
+Date: Fri,  8 May 2020 17:34:19 +0200
+Message-Id: <20200508153421.24525-11-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200508153421.24525-1-jgross@suse.com>
 References: <20200508153421.24525-1-jgross@suse.com>
@@ -54,151 +56,162 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Anthony PERARD <anthony.perard@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Provide version and compile information in /buildinfo/ node of the
-Xen hypervisor file system. As this information is accessible by dom0
-only no additional security problem arises.
+Instead of xc_set_parameters() use xenhypfs_write() for setting
+parameters of the hypervisor.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V3:
+V6:
 - new patch
-
-V4:
-- add __read_mostly annotations (Jan Beulich)
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- docs/misc/hypfs-paths.pandoc | 45 ++++++++++++++++++++++++++++++++++
- xen/common/kernel.c          | 47 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 92 insertions(+)
+ tools/Rules.mk               |  2 +-
+ tools/libxl/Makefile         |  3 +-
+ tools/libxl/libxl.c          | 53 ++++++++++++++++++++++++++++++++----
+ tools/libxl/libxl_internal.h |  1 +
+ tools/libxl/xenlight.pc.in   |  2 +-
+ tools/xl/xl_misc.c           |  1 -
+ 6 files changed, 52 insertions(+), 10 deletions(-)
 
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-index 39539fa1b5..d730caf394 100644
---- a/docs/misc/hypfs-paths.pandoc
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -105,3 +105,48 @@ A populated Xen hypervisor file system might look like the following example:
- #### /
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index ad6073fcad..883a193f9e 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -178,7 +178,7 @@ CFLAGS += -O2 -fomit-frame-pointer
+ endif
  
- The root of the hypervisor file system.
+ CFLAGS_libxenlight = -I$(XEN_XENLIGHT) $(CFLAGS_libxenctrl) $(CFLAGS_xeninclude)
+-SHDEPS_libxenlight = $(SHLIB_libxenctrl) $(SHLIB_libxenstore)
++SHDEPS_libxenlight = $(SHLIB_libxenctrl) $(SHLIB_libxenstore) $(SHLIB_libxenhypfs)
+ LDLIBS_libxenlight = $(SHDEPS_libxenlight) $(XEN_XENLIGHT)/libxenlight$(libextension)
+ SHLIB_libxenlight  = $(SHDEPS_libxenlight) -Wl,-rpath-link=$(XEN_XENLIGHT)
+ 
+diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
+index 69fcf21577..a89ebab0b4 100644
+--- a/tools/libxl/Makefile
++++ b/tools/libxl/Makefile
+@@ -20,7 +20,7 @@ LIBUUID_LIBS += -luuid
+ endif
+ 
+ LIBXL_LIBS =
+-LIBXL_LIBS = $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(PTYFUNCS_LIBS) $(LIBUUID_LIBS)
++LIBXL_LIBS = $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenhypfs) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(PTYFUNCS_LIBS) $(LIBUUID_LIBS)
+ ifeq ($(CONFIG_LIBNL),y)
+ LIBXL_LIBS += $(LIBNL3_LIBS)
+ endif
+@@ -33,6 +33,7 @@ CFLAGS_LIBXL += $(CFLAGS_libxentoolcore)
+ CFLAGS_LIBXL += $(CFLAGS_libxenevtchn)
+ CFLAGS_LIBXL += $(CFLAGS_libxenctrl)
+ CFLAGS_LIBXL += $(CFLAGS_libxenguest)
++CFLAGS_LIBXL += $(CFLAGS_libxenhypfs)
+ CFLAGS_LIBXL += $(CFLAGS_libxenstore)
+ ifeq ($(CONFIG_LIBNL),y)
+ CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
+diff --git a/tools/libxl/libxl.c b/tools/libxl/libxl.c
+index f60fd3e4fd..621acc88f3 100644
+--- a/tools/libxl/libxl.c
++++ b/tools/libxl/libxl.c
+@@ -663,15 +663,56 @@ int libxl_set_parameters(libxl_ctx *ctx, char *params)
+ {
+     int ret;
+     GC_INIT(ctx);
++    char *par, *val, *end, *path;
++    xenhypfs_handle *hypfs;
+ 
+-    ret = xc_set_parameters(ctx->xch, params);
+-    if (ret < 0) {
+-        LOGEV(ERROR, ret, "setting parameters");
+-        GC_FREE;
+-        return ERROR_FAIL;
++    hypfs = xenhypfs_open(ctx->lg, 0);
++    if (!hypfs) {
++        LOGE(ERROR, "opening Xen hypfs");
++        ret = ERROR_FAIL;
++        goto out;
+     }
 +
-+#### /buildinfo/
++    while (isblank(*params))
++        params++;
 +
-+A directory containing static information generated while building the
-+hypervisor.
++    for (par = params; *par; par = end) {
++        end = strchr(par, ' ');
++        if (!end)
++            end = par + strlen(par);
 +
-+#### /buildinfo/changeset = STRING
++        val = strchr(par, '=');
++        if (val > end)
++            val = NULL;
++        if (!val && !strncmp(par, "no", 2)) {
++            path = libxl__sprintf(gc, "/params/%s", par + 2);
++            path[end - par - 2 + 8] = 0;
++            val = "no";
++            par += 2;
++        } else {
++            path = libxl__sprintf(gc, "/params/%s", par);
++            path[val - par + 8] = 0;
++            val = libxl__strndup(gc, val + 1, end - val - 1);
++        }
 +
-+Git commit of the hypervisor.
++	LOG(DEBUG, "setting node \"%s\" to value \"%s\"", path, val);
++        ret = xenhypfs_write(hypfs, path, val);
++        if (ret < 0) {
++            LOGE(ERROR, "setting parameters");
++            ret = ERROR_FAIL;
++            goto out;
++        }
 +
-+#### /buildinfo/compileinfo/
++        while (isblank(*end))
++            end++;
++    }
 +
-+A directory containing information about compilation of Xen.
++    ret = 0;
 +
-+#### /buildinfo/compileinfo/compile_by = STRING
-+
-+Information who compiled the hypervisor.
-+
-+#### /buildinfo/compileinfo/compile_date = STRING
-+
-+Date of the hypervisor compilation.
-+
-+#### /buildinfo/compileinfo/compile_domain = STRING
-+
-+Information about the compile domain.
-+
-+#### /buildinfo/compileinfo/compiler = STRING
-+
-+The compiler used to build Xen.
-+
-+#### /buildinfo/version/
-+
-+A directory containing version information of the hypervisor.
-+
-+#### /buildinfo/version/extra = STRING
-+
-+Extra version information.
-+
-+#### /buildinfo/version/major = INTEGER
-+
-+The major version of Xen.
-+
-+#### /buildinfo/version/minor = INTEGER
-+
-+The minor version of Xen.
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index 572e3fc07d..db7bd23fcb 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -13,6 +13,7 @@
- #include <xen/paging.h>
- #include <xen/guest_access.h>
- #include <xen/hypercall.h>
-+#include <xen/hypfs.h>
- #include <xsm/xsm.h>
- #include <asm/current.h>
- #include <public/version.h>
-@@ -373,6 +374,52 @@ void __init do_initcalls(void)
-         (*call)();
++out:
++    xenhypfs_close(hypfs);
+     GC_FREE;
+-    return 0;
++    return ret;
  }
  
-+#ifdef CONFIG_HYPFS
-+static unsigned int __read_mostly major_version;
-+static unsigned int __read_mostly minor_version;
-+
-+static HYPFS_DIR_INIT(buildinfo, "buildinfo");
-+static HYPFS_DIR_INIT(compileinfo, "compileinfo");
-+static HYPFS_DIR_INIT(version, "version");
-+static HYPFS_UINT_INIT(major, "major", major_version);
-+static HYPFS_UINT_INIT(minor, "minor", minor_version);
-+static HYPFS_STRING_INIT(changeset, "changeset");
-+static HYPFS_STRING_INIT(compiler, "compiler");
-+static HYPFS_STRING_INIT(compile_by, "compile_by");
-+static HYPFS_STRING_INIT(compile_date, "compile_date");
-+static HYPFS_STRING_INIT(compile_domain, "compile_domain");
-+static HYPFS_STRING_INIT(extra, "extra");
-+
-+static int __init buildinfo_init(void)
-+{
-+    hypfs_add_dir(&hypfs_root, &buildinfo, true);
-+
-+    hypfs_string_set_reference(&changeset, xen_changeset());
-+    hypfs_add_leaf(&buildinfo, &changeset, true);
-+
-+    hypfs_add_dir(&buildinfo, &compileinfo, true);
-+    hypfs_string_set_reference(&compiler, xen_compiler());
-+    hypfs_string_set_reference(&compile_by, xen_compile_by());
-+    hypfs_string_set_reference(&compile_date, xen_compile_date());
-+    hypfs_string_set_reference(&compile_domain, xen_compile_domain());
-+    hypfs_add_leaf(&compileinfo, &compiler, true);
-+    hypfs_add_leaf(&compileinfo, &compile_by, true);
-+    hypfs_add_leaf(&compileinfo, &compile_date, true);
-+    hypfs_add_leaf(&compileinfo, &compile_domain, true);
-+
-+    major_version = xen_major_version();
-+    minor_version = xen_minor_version();
-+    hypfs_add_dir(&buildinfo, &version, true);
-+    hypfs_string_set_reference(&extra, xen_extra_version());
-+    hypfs_add_leaf(&version, &extra, true);
-+    hypfs_add_leaf(&version, &major, true);
-+    hypfs_add_leaf(&version, &minor, true);
-+
-+    return 0;
-+}
-+__initcall(buildinfo_init);
-+#endif
-+
- # define DO(fn) long do_##fn
+ static int fd_set_flags(libxl_ctx *ctx, int fd,
+diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
+index e5effd2ad1..b85b771659 100644
+--- a/tools/libxl/libxl_internal.h
++++ b/tools/libxl/libxl_internal.h
+@@ -56,6 +56,7 @@
+ #define XC_WANT_COMPAT_MAP_FOREIGN_API
+ #include <xenctrl.h>
+ #include <xenguest.h>
++#include <xenhypfs.h>
+ #include <xc_dom.h>
  
- #endif
+ #include <xen-tools/libs.h>
+diff --git a/tools/libxl/xenlight.pc.in b/tools/libxl/xenlight.pc.in
+index c0f769fd20..6b351ba096 100644
+--- a/tools/libxl/xenlight.pc.in
++++ b/tools/libxl/xenlight.pc.in
+@@ -9,4 +9,4 @@ Description: The Xenlight library for Xen hypervisor
+ Version: @@version@@
+ Cflags: -I${includedir}
+ Libs: @@libsflag@@${libdir} -lxenlight
+-Requires.private: xentoollog,xenevtchn,xencontrol,xenguest,xenstore
++Requires.private: xentoollog,xenevtchn,xencontrol,xenguest,xenstore,xenhypfs
+diff --git a/tools/xl/xl_misc.c b/tools/xl/xl_misc.c
+index 20ed605f4f..08f0fb6dc9 100644
+--- a/tools/xl/xl_misc.c
++++ b/tools/xl/xl_misc.c
+@@ -168,7 +168,6 @@ int main_set_parameters(int argc, char **argv)
+ 
+     if (libxl_set_parameters(ctx, params)) {
+         fprintf(stderr, "cannot set parameters: %s\n", params);
+-        fprintf(stderr, "Use \"xl dmesg\" to look for possible reason.\n");
+         return EXIT_FAILURE;
+     }
+ 
 -- 
 2.26.1
 
