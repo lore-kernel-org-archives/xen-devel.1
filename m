@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AD4B5C47255
-	for <xen-devel@archiver.kernel.org>; Mon, 11 May 2020 17:20:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00EF3C47255
+	for <xen-devel@archiver.kernel.org>; Mon, 11 May 2020 17:48:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7C742206D7
-	for <xen-devel@archiver.kernel.org>; Mon, 11 May 2020 17:20:29 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B68F9206B7
+	for <xen-devel@archiver.kernel.org>; Mon, 11 May 2020 17:48:38 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="QFqBSWaA"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C742206D7
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZyMnIVwv"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B68F9206B7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYC6A-0000zO-C9; Mon, 11 May 2020 17:20:14 +0000
+	id 1jYCXI-0002pP-L2; Mon, 11 May 2020 17:48:16 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=MQL3=6Z=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jYC69-0000zJ-OD
- for xen-devel@lists.xenproject.org; Mon, 11 May 2020 17:20:13 +0000
-X-Inumbo-ID: ac24b670-93ab-11ea-9887-bc764e2007e4
+ id 1jYCXH-0002pK-EO
+ for xen-devel@lists.xenproject.org; Mon, 11 May 2020 17:48:15 +0000
+X-Inumbo-ID: 96939368-93af-11ea-b07b-bc764e2007e4
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ac24b670-93ab-11ea-9887-bc764e2007e4;
- Mon, 11 May 2020 17:20:12 +0000 (UTC)
+ id 96939368-93af-11ea-b07b-bc764e2007e4;
+ Mon, 11 May 2020 17:48:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1589217612;
+ d=citrix.com; s=securemail; t=1589219294;
  h=subject:to:cc:references:from:message-id:date:
  mime-version:in-reply-to:content-transfer-encoding;
- bh=V4AWX8xeCPie/Pw176bJsSk4E5fPG4JRdKC6J9P9dDg=;
- b=QFqBSWaA6HOav11pto/aKiwVNzUVsjFH5CZcC0eX8W81tEW6eyTWRyym
- Cdjsq82BN9Sa6A40Q8zgrZxm9YJ8jRa8JmmV3xP6zSToSyOyuajyTJFhF
- uOVZKbFOcin/vPoO0QJtu8Ba4JuwULKn+D39npteyf+/sRSrX6f6+yEFF g=;
+ bh=1YuLqSJhS24tb+cRPtgbpGsjxbGohZ1x4vJW0qivluQ=;
+ b=ZyMnIVwvNNxqXkiZsfX6EWxfPXe6ckie+qgTyxgegjIy2nO+IJqHdkle
+ 4HWaB+vcz9aF1IsTR0M6ljw51MEyEn7AEySkiDdj/r0U0Y8c3UkGelRrX
+ 2hFUBIf/pYX+VoJwZica5eDdv3LJ2J0QK//Jyu0NBGpI3AKtXT6XfONjC g=;
 Received-SPF: None (esa4.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
@@ -72,34 +72,34 @@ Authentication-Results: esa4.hc3370-68.iphmx.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com;
  dmarc=pass (p=none dis=none) d=citrix.com
-IronPort-SDR: 2lDwPoN6XwKW149XCgLpOVaYISXx3JP8MRpoHwDL3QnAsLr/LdrTBu+d6TjHE0zUkisYk8FYjM
- kwZcmUgCJKsDycWv9gOgLXHEPtahQBPta0cMaDQgC8eN7TiMXvSo36StWSS9gRkoiHghuKSp15
- HMlLiCr0+utEgtzdmbkvHFCD385NVKX2hKYue9X/CC3YDF6EUW+Bi8SWzD1Js7Ll3pgDiWA9gE
- /APtBN76qln9diU4uWQCDk3fAIkBmhdeBLuL2P6aRN5JBxWAo7oQ474wUM50PhwLV+aIlu8Sra
- 6eU=
+IronPort-SDR: 000k+0R0nErGb8NbHz0FFJQ5jkiWORs981K8+ywmfEg2ECNkXaLzuKfeGqxZ6w8+MgNgToU0GM
+ XzKUNr/OQS1v5utgFig7Vul30YuI8GdX7gGd9sC0wlZIPjzUmVZ1ZKWShwfj85Vab8f0IapLFn
+ RoNmqaG+VG0HeqkzeZ3iO88Q3y80ZDMMLMNWDEjRRgX3t6NOXZOpOhOPv51NlCIwlHz+e+k2fh
+ ic7Y5menFrEfwlJyFxMVS2t02hyHNmhGMZBW+IpJ+rMGZ/2J2g2ZoBFiC51HVumYpkcerfOWGc
+ dC8=
 X-SBRS: 2.7
-X-MesageID: 17930201
+X-MesageID: 17932759
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,380,1583211600"; d="scan'208";a="17930201"
-Subject: Re: [PATCH 06/16] x86/traps: Implement #CP handler and extend #PF for
- shadow stacks
+X-IronPort-AV: E=Sophos;i="5.73,380,1583211600"; d="scan'208";a="17932759"
+Subject: Re: [PATCH 07/16] x86/shstk: Re-layout the stack block for shadow
+ stacks
 To: Jan Beulich <jbeulich@suse.com>
 References: <20200501225838.9866-1-andrew.cooper3@citrix.com>
- <20200501225838.9866-7-andrew.cooper3@citrix.com>
- <561914ce-d076-8f1a-e74b-7c37567480a1@suse.com>
+ <20200501225838.9866-8-andrew.cooper3@citrix.com>
+ <8b6e03ee-545d-eada-457e-79c183a72d6d@suse.com>
 From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <b7cbee0d-2215-e600-e755-48a329e0786d@citrix.com>
-Date: Mon, 11 May 2020 18:20:07 +0100
+Message-ID: <51eca0a6-48ff-9169-2c41-c1cadace1d02@citrix.com>
+Date: Mon, 11 May 2020 18:48:09 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <561914ce-d076-8f1a-e74b-7c37567480a1@suse.com>
+In-Reply-To: <8b6e03ee-545d-eada-457e-79c183a72d6d@suse.com>
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
  AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -116,74 +116,66 @@ Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 04/05/2020 15:10, Jan Beulich wrote:
+On 04/05/2020 15:24, Jan Beulich wrote:
 > On 02.05.2020 00:58, Andrew Cooper wrote:
->> @@ -1457,6 +1451,10 @@ void do_page_fault(struct cpu_user_regs *regs)
->>      {
->>          enum pf_type pf_type = spurious_page_fault(addr, regs);
+>> --- a/xen/arch/x86/cpu/common.c
+>> +++ b/xen/arch/x86/cpu/common.c
+>> @@ -732,14 +732,14 @@ void load_system_tables(void)
+>>  		.rsp2 = 0x8600111111111111ul,
 >>  
->> +        /* Any fault on a shadow stack access is a bug in Xen. */
->> +        if ( error_code & PFEC_shstk )
->> +            goto fatal;
-> Not going through the full spurious_page_fault() in this case
-> would seem desirable, as would be at least a respective
-> adjustment to __page_fault_type(). Perhaps such an adjustment
-> could then avoid the change (and the need for goto) here?
-
-This seems to do a lot of things which have little/nothing to do with
-spurious faults.
-
-In particular, we don't need to disable interrupts to look at
-PFEC_shstk, or RSVD for that matter.
-
->> @@ -1906,6 +1905,43 @@ void do_debug(struct cpu_user_regs *regs)
->>      pv_inject_hw_exception(TRAP_debug, X86_EVENT_NO_EC);
->>  }
->>  
->> +void do_entry_CP(struct cpu_user_regs *regs)
-> If there's a plan to change other exception handlers to this naming
-> scheme too, I can live with the intermediate inconsistency.
-
-Yes.  This isn't the first time I've introduced this naming scheme
-either, but the emulator patch got stuck in trivialities.
-
-> Otherwise, though, I'd prefer a name closer to what other handlers
-> use, e.g. do_control_prot(). Same for the asm entry point then.
-
-These names are impossible to search for, because there is no
-consistency even amongst the similarly named ones.
-
->
->> @@ -940,7 +944,8 @@ autogen_stubs: /* Automatically generated stubs. */
->>          entrypoint 1b
->>  
->>          /* Reserved exceptions, heading towards do_reserved_trap(). */
->> -        .elseif vec == TRAP_copro_seg || vec == TRAP_spurious_int || (vec > TRAP_simd_error && vec < TRAP_nr)
->> +        .elseif vec == TRAP_copro_seg || vec == TRAP_spurious_int || \
->> +                vec == TRAP_virtualisation || (vec > X86_EXC_CP && vec < TRAP_nr)
-> Use the shorter X86_EXC_VE here, since you don't want/need to
-> retain what was there before? (I'd be fine with you changing
-> the two other TRAP_* too at this occasion.)
+>>  		/*
+>> -		 * MCE, NMI and Double Fault handlers get their own stacks.
+>> +		 * #DB, NMI, DF and #MCE handlers get their own stacks.
+> Then also #DF and #MC?
 
 Ok.
 
-Having played this game several times now, I'm considering reworking how
-do_reserved_trap() gets set up, because we've now got two places which
-can go wrong and result in an unhelpful assert early on boot, rather
-than a build-time failure.  (The one thing I'm not sure on how to do is
-usefully turn this into a build time failure.)
-
 >
->> --- a/xen/include/asm-x86/processor.h
->> +++ b/xen/include/asm-x86/processor.h
->> @@ -68,6 +68,7 @@
->>  #define PFEC_reserved_bit   (_AC(1,U) << 3)
->>  #define PFEC_insn_fetch     (_AC(1,U) << 4)
->>  #define PFEC_prot_key       (_AC(1,U) << 5)
->> +#define PFEC_shstk         (_AC(1,U) << 6)
-> One too few padding blanks?
+>> --- a/xen/arch/x86/mm.c
+>> +++ b/xen/arch/x86/mm.c
+>> @@ -6002,25 +6002,18 @@ void memguard_unguard_range(void *p, unsigned long l)
+>>  
+>>  void memguard_guard_stack(void *p)
+>>  {
+>> -    /* IST_MAX IST pages + at least 1 guard page + primary stack. */
+>> -    BUILD_BUG_ON((IST_MAX + 1) * PAGE_SIZE + PRIMARY_STACK_SIZE > STACK_SIZE);
+>> +    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
+>>  
+>> -    memguard_guard_range(p + IST_MAX * PAGE_SIZE,
+>> -                         STACK_SIZE - PRIMARY_STACK_SIZE - IST_MAX * PAGE_SIZE);
+>> +    p += 5 * PAGE_SIZE;
+> The literal 5 here and ...
+>
+>> +    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
+>>  }
+>>  
+>>  void memguard_unguard_stack(void *p)
+>>  {
+>> -    memguard_unguard_range(p + IST_MAX * PAGE_SIZE,
+>> -                           STACK_SIZE - PRIMARY_STACK_SIZE - IST_MAX * PAGE_SIZE);
+>> -}
+>> -
+>> -bool memguard_is_stack_guard_page(unsigned long addr)
+>> -{
+>> -    addr &= STACK_SIZE - 1;
+>> +    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_RW);
+>>  
+>> -    return addr >= IST_MAX * PAGE_SIZE &&
+>> -           addr < STACK_SIZE - PRIMARY_STACK_SIZE;
+>> +    p += 5 * PAGE_SIZE;
+> ... here could do with macro-izing: IST_MAX + 1 would already be
+> a little better, I guess.
 
-Oops.
+The problem is that "IST_MAX + 1" is now less meaningful than a literal
+5, because at least 5 obviously matches up with the comment describing
+which page does what.
 
 ~Andrew
+
+>
+> Preferably with adjustments along these lines
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+>
+> Jan
+
 
