@@ -2,107 +2,104 @@ Return-Path: <SRS0=FkqA=62=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 320F5C2D0F6
-	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 17:52:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D76F7CA90AF
+	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 18:48:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id ED1A3206B9
-	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 17:52:36 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id A3CAB20673
+	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 18:48:00 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=pass (1024-bit key) header.d=dornerworkssystem.onmicrosoft.us header.i=@dornerworkssystem.onmicrosoft.us header.b="k2IeNJtk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org ED1A3206B9
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=dornerworks.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ChdUIv0R"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3CAB20673
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYZ4h-0003mV-I0; Tue, 12 May 2020 17:52:15 +0000
+	id 1jYZw4-0008DD-K8; Tue, 12 May 2020 18:47:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UHzJ=62=dornerworks.com=stewart.hildebrand@srs-us1.protection.inumbo.net>)
- id 1jYZ4g-0003mQ-KZ
- for xen-devel@lists.xenproject.org; Tue, 12 May 2020 17:52:14 +0000
-X-Inumbo-ID: 4f7b4226-9479-11ea-b9cf-bc764e2007e4
-Received: from USG02-BN3-obe.outbound.protection.office365.us (unknown
- [2001:489a:2202:c::623])
+ <SRS0=Sh4E=62=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1jYZw3-0008D8-Pj
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2020 18:47:23 +0000
+X-Inumbo-ID: 03a77bbe-9481-11ea-ae69-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4f7b4226-9479-11ea-b9cf-bc764e2007e4;
- Tue, 12 May 2020 17:52:13 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
- b=FNRv4yf6VBuwcj7CX05z4y06SXfqXUOWpsAryReOlqvp7FDgVUJ/SVuDr2yW76nF9u4oJZyU9pYwhU+clr+/n0bzG0l5LpOh7KJdANrizZHLAOVsFSwuOO0osoT2WS0d8eKe6l5oXnfqAx0L5YnmOkULKoQn2mdivI+bZES64f5HoB6pm/wrehMl0+ufDG/Im0I7JYfoDpJbPPByb2dAs2ZY+1y867zHJPIeB3ojeO7ORPSQQmfWJh521vIDcBx14K4emTOVh3jBijpq04s2Bx2YvVAZWEc94HQYmL9NhfedL+39tzLCtOYzuYjLW9ef0XDUSpmEzfYjO/wDd3/s6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector5401;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibFUUBUfF4zgAAt8INh+umAlcWsDLL1uH7FOJdxJPag=;
- b=grT6wEmtoxI2kjiiv+FAXoXfzIH0cWgcOlm/e2jw93M0AetlSfD6oUBTrW5ujyry/yhOEPmzPuRGDrWMpazFCWk7L+hEF5KG1zjDGRhn7RK/ToBcnS+Sfo8xGe3Cg5/7WaP/duRaYrMfqG/5/aqLIu9PjWlXlcRPndkuk8YW9qEZrsW3oTTOARk/wp0eRNxhhloMIh/b0wERb2WW3IkEXr9zp0Yfpo198uXYtBtVyMeodEmHsPeyIdKSrObCDyPIjZCRjnPAMjgcvPfjGKmX/4kGakjbY+961VwPghrIrm/mY3d6t4J/X9XBAwZqtbFhPk/ErKeFoM+/zpDiUofCww==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 207.242.234.14) smtp.rcpttodomain=lists.xenproject.org
- smtp.mailfrom=dornerworks.com; dmarc=none action=none
- header.from=dornerworks.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=dornerworkssystem.onmicrosoft.us;
- s=selector1-dornerworkssystem-onmicrosoft-us;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ibFUUBUfF4zgAAt8INh+umAlcWsDLL1uH7FOJdxJPag=;
- b=k2IeNJtkHI9E8zge43PkMrsFrxnuHejHraPcePVZjgKdVnkc5fp5C71+tMLYu8rC/F9p7t9jddsz9WTIaTIt68zpEawlasBFbLidB9RjdJNz3v7qK0R63LHPWTAc9yAx6bbwFbQDYylcQ5sH7LefIsXvZvM0P7efXxhY8xuRHdI=
-Received: from SN1P110CA0027.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:61::17)
- by SN5P110MB0557.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:41c::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2958.35; Tue, 12 May
- 2020 17:52:09 +0000
-Received: from CY1USG02FT013.eop-usg02.itar.protection.office365.us
- (2001:489a:2202:d::631) by SN1P110CA0027.office365.us (2001:489a:200:61::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2958.35 via Frontend
- Transport; Tue, 12 May 2020 17:52:09 +0000
-Authentication-Results: spf=fail (sender IP is 207.242.234.14)
- smtp.mailfrom=dornerworks.com; lists.xenproject.org; dkim=none (message not
- signed) header.d=none;lists.xenproject.org; dmarc=none action=none
- header.from=dornerworks.com;
-Received-SPF: Fail (protection.outlook.com: domain of dornerworks.com does not
- designate 207.242.234.14 as permitted sender)
- receiver=protection.outlook.com; client-ip=207.242.234.14;
- helo=ubuntu.localdomain;
-Received: from ubuntu.localdomain (207.242.234.14) by
- CY1USG02FT013.mail.protection.office365.us (10.97.26.98) with Microsoft SMTP
- Server id 15.20.2979.30 via Frontend Transport; Tue, 12 May 2020 17:52:07
- +0000
-From: Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
-To: xen-devel@lists.xenproject.org
-Subject: [XEN PATCH 0/2] xen/build: fix kconfig errors during config merge
-Date: Tue, 12 May 2020 13:52:04 -0400
-Message-Id: <20200512175206.20314-1-stewart.hildebrand@dornerworks.com>
-X-Mailer: git-send-email 2.26.2
+ id 03a77bbe-9481-11ea-ae69-bc764e2007e4;
+ Tue, 12 May 2020 18:47:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1589309242;
+ h=subject:to:cc:references:from:message-id:date:
+ mime-version:in-reply-to:content-transfer-encoding;
+ bh=f4J1OFATmnrmFK7ksAxy0B0Slp2BkOK60i2CQ7K1lRQ=;
+ b=ChdUIv0RvWywXxEXQj3coC8gu3EuZm/z5f+urGAYEiE8TlkYWQoXRNjV
+ wEGzj6bls1765MbiaLkEb0Mu2/r/MiOlerAaQT6+4bF9UATV5Ge85wLHN
+ bhB5oOXS6LDhowAzwAH5dHRYo4C+xfaZPA9Q78ZqH3CrAa5Rfbmf8rCkX E=;
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ andrew.cooper3@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="andrew.cooper3@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
+ Andrew.Cooper3@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="Andrew.Cooper3@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
+ envelope-from="Andrew.Cooper3@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+Authentication-Results: esa6.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=andrew.cooper3@citrix.com;
+ spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com;
+ dmarc=pass (p=none dis=none) d=citrix.com
+IronPort-SDR: hYykLjkCS6FKzopO1KlOSjfAOKeL5xbJhT9IdKYsh1j4GUkDkUoUwRjShlTiz/cdI440wpGoyI
+ XGSMW0Fv0MeUk1hMFDg4PaVRnjrdIdTryw0MAMh0EC8EpqzEIYl1K94t2m+96kAikdJL/zmhV7
+ G3D8LthhjtXTwZ+pwVaG1aomMO8438sSsj85yeDmg/HZFo67g5FSVHYqmr8+byGObsbws3KJxK
+ Ix4uTK0H1HoUczLyyGY/G/p9K7CeRexCHHmJm7GvPJc2GzphgNilQkY1qfdr3I9XtHHVvVuAef
+ Opw=
+X-SBRS: 2.7
+X-MesageID: 17719284
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,384,1583211600"; d="scan'208";a="17719284"
+Subject: Re: [PATCH 0/2] Fixups for fcf-protection
+To: Stefan Bader <stefan.bader@canonical.com>, Jason Andryuk
+ <jandryuk@gmail.com>, <xen-devel@lists.xenproject.org>
+References: <20200512033948.3507-1-jandryuk@gmail.com>
+ <3542ecb3-6f4e-2408-ea9f-9b03ac23688e@canonical.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <2fbc4be8-c992-1703-168c-a4124a0fd02e@citrix.com>
+Date: Tue, 12 May 2020 19:47:16 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
+In-Reply-To: <3542ecb3-6f4e-2408-ea9f-9b03ac23688e@canonical.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:207.242.234.14; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ubuntu.localdomain; PTR:InfoDomainNonexistent; CAT:NONE;
- SFTY:;
- SFS:(346002)(46966005)(33430700001)(8676002)(81166007)(6916009)(70206006)(33310700002)(33440700001)(8936002)(70586007)(82310400002)(2616005)(44832011)(1076003)(86362001)(47076004)(4326008)(6666004)(508600001)(4744005)(956004)(336012)(186003)(5660300002)(36756003)(54906003)(26005)(2906002);
- DIR:OUT; SFP:1101; 
-Content-Type: text/plain
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1bde4486-e498-4431-364b-08d7f69d314f
-X-MS-TrafficTypeDiagnostic: SN5P110MB0557:
-X-Microsoft-Antispam-PRVS: <SN5P110MB055798B824C98EFE1D941EA18CBE0@SN5P110MB0557.NAMP110.PROD.OUTLOOK.COM>
-X-MS-Oob-TLC-OOBClassifiers: OLM:5797;
-X-Forefront-PRVS: 0401647B7F
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-OriginatorOrg: dornerworks.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 May 2020 17:52:07.9848 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1bde4486-e498-4431-364b-08d7f69d314f
-X-MS-Exchange-CrossTenant-Id: 097cf9aa-db69-4b12-aeab-ab5f513dbff9
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=097cf9aa-db69-4b12-aeab-ab5f513dbff9; Ip=[207.242.234.14];
- Helo=[ubuntu.localdomain]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN5P110MB0557
+Content-Language: en-GB
+X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -113,32 +110,35 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony PERARD <anthony.perard@citrix.com>,
- Doug Goldstein <cardoe@cardoe.com>
+Cc: Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This series fixes a couple of kconfig errors that I observed while
-invoking a build with a defconfig and config fragment.
+On 12/05/2020 08:17, Stefan Bader wrote:
+> On 12.05.20 05:39, Jason Andryuk wrote:
+>> Two patches to fix building with a cf-protection toolchain.  The first
+>> handles the case where the compiler fails to run with "error:
+>> ‘-mindirect-branch’ and ‘-fcf-protection’ are not compatible".
+>>
+>> The second fixes a runtime error that prevented Xen booting in legacy
+>> mode.
+> That might be better than just disabling fcf-protection as well (which was done
+> in Ubuntu lacking a better solution).
 
-I invoked the build as follows:
+It is a GCC bug
 
-cat > xen/arch/arm/configs/custom.config <<EOF
-CONFIG_DEBUG=y
-CONFIG_SCHED_ARINC653=y
-CONFIG_EARLY_PRINTK_ZYNQMP=y
-EOF
-make -C xen XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig custom.config
-make XEN_TARGET_ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- dist-xen -j $(nproc)
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=93654
 
-Stewart Hildebrand (2):
-  xen/build: fixup path to merge_config.sh
-  xen/build: use the correct kconfig makefile
+Fixed for 10, and 9.4
 
- xen/tools/kconfig/Makefile | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> Not sure it was already hit but that additional .note section breaks the build
+> of the emulator as generated headers become gigantic:
+>
+> https://git.launchpad.net/ubuntu/+source/xen/tree/debian/patches/1001-strip-note-gnu-property.patch?h=ubuntu/focal
 
--- 
-2.26.2
+4.6G of notes?!?  That is surely a toolchain bug.
 
+~Andrew
 
