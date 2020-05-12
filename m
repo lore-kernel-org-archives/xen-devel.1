@@ -2,65 +2,80 @@ Return-Path: <SRS0=FkqA=62=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FDDBC47255
-	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 01:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D5F1AC54E8B
+	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 03:40:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2A1E2070B
-	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 01:11:21 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 9A5632068D
+	for <xen-devel@archiver.kernel.org>; Tue, 12 May 2020 03:40:28 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="AfNUWN+e"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2A1E2070B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="c1M1X3dP"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9A5632068D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYJRY-0008PS-S9; Tue, 12 May 2020 01:10:48 +0000
+	id 1jYLm6-000417-4D; Tue, 12 May 2020 03:40:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4tCB=62=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jYJRY-0008PN-9w
- for xen-devel@lists.xenproject.org; Tue, 12 May 2020 01:10:48 +0000
-X-Inumbo-ID: 696d9652-93ed-11ea-ae69-bc764e2007e4
-Received: from mail.kernel.org (unknown [198.145.29.99])
+ <SRS0=rfNj=62=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
+ id 1jYLm4-000410-S8
+ for xen-devel@lists.xenproject.org; Tue, 12 May 2020 03:40:08 +0000
+X-Inumbo-ID: 45cf3aba-9402-11ea-b07b-bc764e2007e4
+Received: from mail-qv1-xf42.google.com (unknown [2607:f8b0:4864:20::f42])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 696d9652-93ed-11ea-ae69-bc764e2007e4;
- Tue, 12 May 2020 01:10:47 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id A204320722;
- Tue, 12 May 2020 01:10:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1589245847;
- bh=cSFwD1+I8gzgQ6JIea/1dIP90y0woUlDtgmTMw5D0xM=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=AfNUWN+eHXwrPKR8FX/olDTjta3/5LcQk8tqZcyhZcyeX8N5RQ6EGcKTSrpQuvdXk
- WrkiaPVmgRnCvAGrAFmrPzYIBEyP9wcO8zzfeyISn/8hvT0pu3mOxkX0Ih5lssOi7t
- Xvz/yO4ZpjVVup5B36zErOZ/VMkXYmZkeQXyWTvU=
-Date: Mon, 11 May 2020 18:10:46 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Julien Grall <julien@xen.org>
-Subject: Re: [PATCH 05/12] xen: introduce reserve_heap_pages
-In-Reply-To: <86e8fa89-c6f5-6c9e-4f3e-7f98e8e12c6a@xen.org>
-Message-ID: <alpine.DEB.2.21.2005111750240.26167@sstabellini-ThinkPad-T480s>
-References: <alpine.DEB.2.21.2004141746350.8746@sstabellini-ThinkPad-T480s>
- <20200415010255.10081-5-sstabellini@kernel.org>
- <3129ab49-5898-9d2e-8fbb-d1fcaf6cdec7@suse.com>
- <alpine.DEB.2.21.2004291510270.28941@sstabellini-ThinkPad-T480s>
- <a316ed70-da35-8be0-a092-d992e56563d2@xen.org>
- <alpine.DEB.2.21.2004300928240.28941@sstabellini-ThinkPad-T480s>
- <86e8fa89-c6f5-6c9e-4f3e-7f98e8e12c6a@xen.org>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+ id 45cf3aba-9402-11ea-b07b-bc764e2007e4;
+ Tue, 12 May 2020 03:40:07 +0000 (UTC)
+Received: by mail-qv1-xf42.google.com with SMTP id r3so5788571qvm.1
+ for <xen-devel@lists.xenproject.org>; Mon, 11 May 2020 20:40:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=fUSe4sPjrvSj8MkkBiwu4oYkVAy7jThrwleho5JbiVw=;
+ b=c1M1X3dPW7QnQPjbFpKT7WhAdgxtg4rq9TM7hm5+PSgae+tVgAk0JBMT0ZwBeSwujK
+ uZfh4bYl2V9rpND3rgVchQd6asXnmTwXhhbOxY8XbY93n443iKWwfzsZuihjsdwA21mZ
+ s0xTpK8fDNciZg078A4XzJTMyhk+SpbAogyy/sr6+UFhHR5/GAQ6gXDsDDxUC8eorjaq
+ QPW5lIF7S6arOwtLmGa0T/l4vQJAhS6SoelNd/BBPhKg2qV4P1rP2gKaUyALEejJp0gZ
+ QnInLjfLJjP9Y6LcywP4p/bc9FCcHOxPF4HnQ63li6GccJS1FMtt6k8WDtO8BsEt7wDa
+ vtOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=fUSe4sPjrvSj8MkkBiwu4oYkVAy7jThrwleho5JbiVw=;
+ b=Iy6yKbE4zJDwdR9NwlSjTJzWRhzXF+6Nj11GfGsgWEyS2ouzTv/nqWGUP4QkEScg4N
+ xTyIsMVwWUwWwEAdsb2wS5NaxmwmAPPmJBKAedQeDNlDWDrxvgYxEYAadfk7jDlg69ws
+ d/2Si5u2sKm42g0eG/vciqRiPf4UhXoDfxNpUlenEH7mxqq6fQzqyFu/SEAZvCH4To4J
+ jbHIl9BUE3hzV79lW+zvLQldh7anHbJvesRZwyfv/erKg+TGVdmPveNq+wWNR/7T4Rw9
+ E1V4Lx8UPNigDcl9B2IcsIUnFdHjfa5RYqPi/rI1QBKA3tNNLmtcDKXcSwu8bIs+YgAi
+ kihA==
+X-Gm-Message-State: AGi0PubRqJmInhCW1Fpbd3Z6S7WEKKbdUs2Ab6+hrX8GHAToEmMfnmmo
+ EDtdStNgAvzzXEmENyPIFyrFE6Np
+X-Google-Smtp-Source: APiQypLRzxmHa0L58r2SmRhhbfGpiE9hN1MiCxm5pUopE/A9Pmr4BwSf/4tYae5vzJKjB77AHsPb2w==
+X-Received: by 2002:ad4:548b:: with SMTP id q11mr18798391qvy.129.1589254806451; 
+ Mon, 11 May 2020 20:40:06 -0700 (PDT)
+Received: from shine.lan ([2001:470:8:67e:54fc:f6ff:ea10:3d73])
+ by smtp.gmail.com with ESMTPSA id w35sm1107092qtk.51.2020.05.11.20.40.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 May 2020 20:40:05 -0700 (PDT)
+From: Jason Andryuk <jandryuk@gmail.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH 2/2] x86/boot: Drop .note.gnu.properties in build32.lds
+Date: Mon, 11 May 2020 23:39:48 -0400
+Message-Id: <20200512033948.3507-3-jandryuk@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200512033948.3507-1-jandryuk@gmail.com>
+References: <20200512033948.3507-1-jandryuk@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,138 +86,50 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- andrew.cooper3@citrix.com, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- xen-devel@lists.xenproject.org,
- Stefano Stabellini <stefano.stabellini@xilinx.com>, Volodymyr_Babchuk@epam.com,
- "Woodhouse, David" <dwmw@amazon.co.uk>
+Cc: Wei Liu <wl@xen.org>, Jason Andryuk <jandryuk@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Stefan Bader <stefan.bader@canonical.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, 30 Apr 2020, Julien Grall wrote:
-> On 30/04/2020 18:00, Stefano Stabellini wrote:
-> > On Thu, 30 Apr 2020, Julien Grall wrote:
-> > > > > > +    pg = maddr_to_page(start);
-> > > > > > +    node = phys_to_nid(start);
-> > > > > > +    zone = page_to_zone(pg);
-> > > > > > +    page_list_del(pg, &heap(node, zone, order));
-> > > > > > +
-> > > > > > +    __alloc_heap_pages(pg, order, memflags, d);
-> > > > > 
-> > > > > I agree with Julien in not seeing how this can be safe / correct.
-> > > > 
-> > > > I haven't seen any issues so far in my testing -- I imagine it is
-> > > > because there aren't many memory allocations after setup_mm() and before
-> > > > create_domUs()  (which on ARM is called just before
-> > > > domain_unpause_by_systemcontroller at the end of start_xen.)
-> > > 
-> > > I am not sure why you exclude setup_mm(). Any memory allocated (boot
-> > > allocator, xenheap) can clash with your regions. The main memory
-> > > allocations
-> > > are for the frametable and dom0. I would say you were lucky to not hit
-> > > them.
-> > 
-> > Maybe it is because Xen typically allocates memory top-down? So if I
-> > chose a high range then I would see a failure? But I have been mostly
-> > testing with ranges close to the begin of RAM (as opposed to
-> > ranges close to the end of RAM.)
-> 
-> I haven't looked at the details of the implementation, but you can try to
-> specify dom0 addresses for your domU. You should see a failure.
+reloc.S and cmdline.S as arrays of executable bytes for inclusion in
+head.S generated from compiled object files.  Object files generated by
+an -fcf-protection toolchain include a .note.gnu.property section.  The
+way reloc.S and cmdline.S are generated, the bytes of .note.gnu.property
+become the start of the .S files.  When head.S calls reloc or
+cmdline_parse_early, those note bytes are executed instead of the
+intended .text section.  This results in an early crash in reloc.
 
-I managed to reproduce a failure by choosing the top address range. On
-Xilinx ZynqMP the memory is:
+Discard the .note.gnu.property section when linking to avoid the extra
+bytes.
 
-  reg = <0x0 0x0 0x0 0x7ff00000 0x8 0x0 0x0 0x80000000>;
+Stefan Bader also noticed that build32.mk requires -fcf-protection=none
+or else the hypervisor will not boot.
+https://bugs.launchpad.net/ubuntu/+source/gcc-9/+bug/1863260
 
-And I chose:
+CC: Stefan Bader <stefan.bader@canonical.com>
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+ xen/arch/x86/boot/build32.lds | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-  fdt set /chosen/domU0 direct-map <0x0 0x10000000 0x10000000 0x8 0x70000000 0x10000000>
+diff --git a/xen/arch/x86/boot/build32.lds b/xen/arch/x86/boot/build32.lds
+index da35aee910..0f69765579 100644
+--- a/xen/arch/x86/boot/build32.lds
++++ b/xen/arch/x86/boot/build32.lds
+@@ -48,5 +48,10 @@ SECTIONS
+          * Please check build32.mk for more details.
+          */
+         /* *(.got.plt) */
++        /*
++         * The note will end up before the .text section and be called
++         * incorrectly as instructions.
++         */
++        *(.note.gnu.property)
+   }
+ }
+-- 
+2.25.1
 
-Resulting in:
-
-(XEN) *** LOADING DOMU cpus=1 memory=80000KB ***
-(XEN) Loading d1 kernel from boot module @ 0000000007200000
-(XEN) Loading ramdisk from boot module @ 0000000008200000
-(XEN) direct_map start=0x00000010000000 size=0x00000010000000
-(XEN) direct_map start=0x00000870000000 size=0x00000010000000
-(XEN) Data Abort Trap. Syndrome=0x5
-(XEN) Walking Hypervisor VA 0x2403480018 on CPU0 via TTBR 0x0000000000f05000
-(XEN) 0TH[0x0] = 0x0000000000f08f7f
-(XEN) 1ST[0x90] = 0x0000000000000000
-(XEN) CPU0: Unexpected Trap: Data Abort
-
-[...]
-
-(XEN) Xen call trace:
-(XEN)    [<000000000021a65c>] page_alloc.c#alloc_pages_from_buddy+0x15c/0x5d0 (PC)
-(XEN)    [<000000000021b43c>] reserve_domheap_pages+0xc4/0x148 (LR)
-
-Anything other than the very top of memory works.
-
-
-> > > > - in construct_domU, add the range to xenheap and reserve it with
-> > > > reserve_heap_pages
-> > > 
-> > > I am afraid you can't give the regions to the allocator and then allocate
-> > > them. The allocator is free to use any page for its own purpose or exclude
-> > > them.
-> > > 
-> > > AFAICT, the allocator doesn't have a list of page in use. It only keeps
-> > > track
-> > > of free pages. So we can make the content of struct page_info to look like
-> > > it
-> > > was allocated by the allocator.
-> > > 
-> > > We would need to be careful when giving a page back to allocator as the
-> > > page
-> > > would need to be initialized (see [1]). This may not be a concern for
-> > > Dom0less
-> > > as the domain may never be destroyed but will be for correctness PoV.
-> > > 
-> > > For LiveUpdate, the original Xen will carve out space to use by the boot
-> > > allocator in the new Xen. But I think this is not necessary in your
-> > > context.
-> > > 
-> > > It should be sufficient to exclude the page from the boot allocators (as
-> > > we do
-> > > for other modules).
-> > > 
-> > > One potential issue that can arise is there is no easy way today to
-> > > differentiate between pages allocated and pages not yet initialized. To
-> > > make
-> > > the code robust, we need to prevent a page to be used in two places. So
-> > > for
-> > > LiveUpdate we are marking them with a special value, this is used
-> > > afterwards
-> > > to check we are effictively using a reserved page.
-> > > 
-> > > I hope this helps.
-> > 
-> > Thanks for writing all of this down but I haven't understood some of it.
-> > 
-> > For the sake of this discussion let's say that we managed to "reserve"
-> > the range early enough like we do for other modules, as you wrote.
-> > 
-> > At the point where we want to call reserve_heap_pages() we would call
-> > init_heap_pages() just before it. We are still relatively early at boot
-> > so there aren't any concurrent memory operations. Why this doesn't work?
-> 
-> Because init_heap_pages() may exclude some pages (for instance MFN 0 is carved
-> out) or use pages for its internal structure (see init_node_heap()). So you
-> can't expect to be able to allocate the exact same region by
-> reserve_heap_pages().
-
-But it can't possibly use of any of pages it is trying to add to the
-heap, right?
-
-We have reserved a certain range, we tell init_heap_pages to add the
-range to the heap, init_node_heap gets called and it ends up calling
-xmalloc. There is no way xmalloc can use any memory from that
-particular range because it is not in the heap yet. That should be safe.
-
-The init_node_heap code is a bit hard to follow but I went through it
-and couldn't spot anything that could cause any issues (MFN 0 aside
-which is a bit special). Am I missing something?
 
