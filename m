@@ -2,88 +2,110 @@ Return-Path: <SRS0=3ye+=63=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DD737C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:28:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A1416C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:44:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EBA04207EA
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:28:00 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id B668820659
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:44:09 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="El8k9x9p"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EBA04207EA
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="MyK8o+CZ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B668820659
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYtIC-0007rp-9P; Wed, 13 May 2020 15:27:32 +0000
+	id 1jYtXn-00014B-Na; Wed, 13 May 2020 15:43:39 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=mpYu=63=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jYtIB-0007rk-3k
- for xen-devel@lists.xenproject.org; Wed, 13 May 2020 15:27:31 +0000
-X-Inumbo-ID: 423dd6b8-952e-11ea-ae69-bc764e2007e4
-Received: from mail-wr1-x42d.google.com (unknown [2a00:1450:4864:20::42d])
+ <SRS0=hhv+=63=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
+ id 1jYtXm-00013Z-NX
+ for xen-devel@lists.xenproject.org; Wed, 13 May 2020 15:43:38 +0000
+X-Inumbo-ID: 82b47a06-9530-11ea-b07b-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 423dd6b8-952e-11ea-ae69-bc764e2007e4;
- Wed, 13 May 2020 15:27:30 +0000 (UTC)
-Received: by mail-wr1-x42d.google.com with SMTP id y16so14241008wrs.3
- for <xen-devel@lists.xenproject.org>; Wed, 13 May 2020 08:27:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=9atujlcgusW5HYpnti+tAVTbDLW9h5r5ESSqAQKGoYI=;
- b=El8k9x9pPnRMmeA4DcwlA88LCHObx9eQg+njZXhqgT8e7w5M57l2ve8PfzaL8RTOHN
- TS8cm0m59jmLR9gk0Tm7Jw++bPV9DeJH0WEzE2CPdf4e5X7C7eR+k5P42yFmKkA6d4eK
- 6u+4X13rWSxiZlXbe0BKT8Xh8+4Ee+zvg58MS1AeogRsgf3Y/75F7fxvdZ0tyjiRGR8j
- MezCj1ZOqurKxZjSs2f+skYNVKY35UTZhxfO3uvzwJFpcYNG2eEcAEBlPAtBnhKYrOaL
- mrXClGktVhaXxw/LUKiqufmhPNDe3L8ryu056j7Iu3cHms+pZjC1CR1Dfizxl7qUxOTU
- DJew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=9atujlcgusW5HYpnti+tAVTbDLW9h5r5ESSqAQKGoYI=;
- b=smir2kiYR2JooEi1DlioUVJFjeT49xI7/PFCk8JEkR0u8ZaToDQpwmNMI4Y732M9lM
- hbymR9Nsy0dTygdVnxqcZV/j6iDB3bOCpDXKkXwQVkFN1EyjWLwGEZ/tFRJhFshpXNTM
- BZ9l75OChGyds1ik1SG/z+u+fQFV0BJtZLP/qJiLlmA0ZYcJLwEZO4HJ91TJM9R17CKr
- psT/Bezp2HBHaD7m/64Wp3C16f/hWtWWLMR2lJjedWw2pL62u1YdAoQJ45E1+eEqtC0k
- jWlmW/DtA70PAqRxJUhGunLTbfLMfn62cYwE/p9boEcyU7N+8P6vtzXEIdOwj+8U29fT
- ARDA==
-X-Gm-Message-State: AGi0PuakN0u+4r+42p8HW4HfoowsucmP8omrCgKmLSjPWgitzgSoBOBk
- PxH8Z0Qm+O+EmRMeWvGRBUA=
-X-Google-Smtp-Source: APiQypIFooOW2UeOBm1MA4feXuxZvob1heQ0TNb+VHV4u/m0Ozp8GHgvPm6t1GG09iuSH7Onygbe4g==
-X-Received: by 2002:a5d:56c6:: with SMTP id m6mr31013234wrw.78.1589383649674; 
- Wed, 13 May 2020 08:27:29 -0700 (PDT)
-Received: from CBGR90WXYV0 (54-240-197-226.amazon.com. [54.240.197.226])
- by smtp.gmail.com with ESMTPSA id 89sm27716332wrj.37.2020.05.13.08.27.28
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Wed, 13 May 2020 08:27:29 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'Jan Beulich'" <jbeulich@suse.com>
-References: <20200407173847.1595-1-paul@xen.org>
- <20200407173847.1595-4-paul@xen.org>
- <76e91373-1f7c-bd68-2800-83163fb22aa2@suse.com>
-In-Reply-To: <76e91373-1f7c-bd68-2800-83163fb22aa2@suse.com>
-Subject: RE: [PATCH v2 3/5] tools/misc: add xen-domctx to present domain
- context
-Date: Wed, 13 May 2020 16:27:28 +0100
-Message-ID: <001101d6293b$0374bdc0$0a5e3940$@xen.org>
+ id 82b47a06-9530-11ea-b07b-bc764e2007e4;
+ Wed, 13 May 2020 15:43:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1589384617;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-id:content-transfer-encoding: mime-version;
+ bh=Mkr6Uo3lyE7hiZ4l/x1maj4DgXhMgoRRrV0ngc5bcfc=;
+ b=MyK8o+CZZIdMhAxEOlZ7MUvnxhiHWzq2N2vZ6TeR5FmRJZccChf27Pcb
+ 1eM0R9is1YfznW2yb/I+J+qCqCU2MLt6B5SsojIt8n7OSnyQKkCGrWBtf
+ oh64ggZpUrPBSMp51LjoCocjW+4kyfiozAhEOhhiGXdhQyCUgDFEqjla6 g=;
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ George.Dunlap@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="George.Dunlap@citrix.com";
+ x-sender="George.Dunlap@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa5.hc3370-68.iphmx.com: domain of
+ George.Dunlap@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="George.Dunlap@citrix.com";
+ x-sender="George.Dunlap@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa5.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa5.hc3370-68.iphmx.com;
+ envelope-from="George.Dunlap@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=George.Dunlap@citrix.com;
+ spf=Pass smtp.mailfrom=George.Dunlap@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com;
+ dmarc=pass (p=none dis=none) d=citrix.com
+IronPort-SDR: gHBWn170w+QERJvitPyjhI6I5WutqgBYKlSU5TnG9J4meSkQvZryi2Aqd/PN8DktGUuMwLiN+6
+ Uy35PthhOdXqRpl5dMpeGI0RYXQv+X/taQzVL0tvozE34Nfna0+gJZlkNRP2TDNMe1KggfRXMI
+ +zDAFTllM4z10p9OvkWkXi2HbYdl3/4/rMYxMbRDjQGXKp1CwfbLAK+O2SLelXboStnm25YY0y
+ dmeclml9xrWdYtOLg980eEihE1KQeG7xUYy7zTNXlYRuuUmijPVAIDSVaqlxj4EC42KqT28GvL
+ x8A=
+X-SBRS: 2.7
+X-MesageID: 17704893
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,388,1583211600"; d="scan'208";a="17704893"
+From: George Dunlap <George.Dunlap@citrix.com>
+To: Nick Rosbrook <rosbrookn@gmail.com>
+Subject: Re: [PATCH v3 1/1] golang/xenlight: add necessary module/package
+ documentation
+Thread-Topic: [PATCH v3 1/1] golang/xenlight: add necessary module/package
+ documentation
+Thread-Index: AQHWKTFf897wv5R+lky5jSbM2UASCaimBpqA
+Date: Wed, 13 May 2020 15:43:33 +0000
+Message-ID: <CF9BC8CA-8A63-4569-AA49-A33A14D858CE@citrix.com>
+References: <cover.1589379056.git.rosbrookn@ainfosec.com>
+ <fa80be6bf52005db0e54fd8dd74a9ff855a5316f.1589379056.git.rosbrookn@ainfosec.com>
+In-Reply-To: <fa80be6bf52005db0e54fd8dd74a9ff855a5316f.1589379056.git.rosbrookn@ainfosec.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-mailer: Apple Mail (2.3608.80.23.2.2)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <536A57941FE4644C8297FCD5908EFF12@citrix.com>
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQIOC3/NwyZzJjhdRz0oBcI7Is/lxwFxlJcKATUa0IqoISjFcA==
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,41 +116,29 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: xen-devel@lists.xenproject.org, 'Paul Durrant' <pdurrant@amazon.com>,
- 'Ian Jackson' <ian.jackson@eu.citrix.com>, 'Wei Liu' <wl@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
+ Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <Andrew.Cooper3@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>, Jan Beulich <jbeulich@suse.com>, Ian
+ Jackson <Ian.Jackson@citrix.com>, xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: Jan Beulich <jbeulich@suse.com>
-> Sent: 29 April 2020 16:04
-> To: Paul Durrant <paul@xen.org>
-> Cc: xen-devel@lists.xenproject.org; Paul Durrant <pdurrant@amazon.com>; Ian Jackson
-> <ian.jackson@eu.citrix.com>; Wei Liu <wl@xen.org>
-> Subject: Re: [PATCH v2 3/5] tools/misc: add xen-domctx to present domain context
-> 
-> On 07.04.2020 19:38, Paul Durrant wrote:
-> > +int main(int argc, char **argv)
-> > +{
-> > +    uint32_t domid;
-> > +    unsigned int entry;
-> > +    xc_interface *xch;
-> > +    int rc;
-> > +
-> > +    if ( argc != 2 || !argv[1] || (rc = atoi(argv[1])) < 0 )
-> > +    {
-> > +        fprintf(stderr, "usage: %s <domid>\n", argv[0]);
-> > +        exit(1);
-> > +    }
-> 
-> Perhaps also allow dumping just a single (vCPU or other) ID?
-> 
 
-Yes, I can add optional type and instance arguments.
 
-  Paul
+> On May 13, 2020, at 3:18 PM, Nick Rosbrook <rosbrookn@gmail.com> wrote:
+>=20
+> Add a README and package comment giving a brief overview of the package.
+> These also help pkg.go.dev generate better documentation.
+>=20
+> Also, add a copy of the LGPL (the same license used by libxl) to
+> tools/golang/xenlight. This is required for the package to be shown
+> on pkg.go.dev and added to the default module proxy, proxy.golang.org.
+>=20
+> Finally, add an entry for the xenlight package to SUPPORT.md.
+>=20
+> Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
 
-> Jan
+Reviewed-by: George Dunlap <george.dunlap@citrix.com>
 
 
