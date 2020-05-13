@@ -2,48 +2,49 @@ Return-Path: <SRS0=3ye+=63=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 250BECA90AF
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 09:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D679EC2D0F9
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 09:15:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA93D20740
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 09:14:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA93D20740
+	by mail.kernel.org (Postfix) with ESMTPS id B07B920661
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 09:15:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B07B920661
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYnSU-0007qF-FK; Wed, 13 May 2020 09:13:46 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jYnUC-0007wQ-Ry; Wed, 13 May 2020 09:15:32 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=dqM3=63=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jYnSS-0007qA-Io
- for xen-devel@lists.xenproject.org; Wed, 13 May 2020 09:13:44 +0000
-X-Inumbo-ID: 0adb0f94-94fa-11ea-ae69-bc764e2007e4
+ id 1jYnUB-0007wK-Kx
+ for xen-devel@lists.xenproject.org; Wed, 13 May 2020 09:15:31 +0000
+X-Inumbo-ID: 4ae3dda0-94fa-11ea-a345-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0adb0f94-94fa-11ea-ae69-bc764e2007e4;
- Wed, 13 May 2020 09:13:43 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 4ae3dda0-94fa-11ea-a345-12813bfff9fa;
+ Wed, 13 May 2020 09:15:31 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 1481AAB8F;
- Wed, 13 May 2020 09:13:45 +0000 (UTC)
-Subject: Re: [PATCH] x86/build32: Discard all orphaned sections
+ by mx2.suse.de (Postfix) with ESMTP id DD898AE28;
+ Wed, 13 May 2020 09:15:32 +0000 (UTC)
+Subject: Re: [PATCH] x86/build: Unilaterally disable -fcf-protection
 To: Andrew Cooper <andrew.cooper3@citrix.com>
-References: <20200512191108.6461-1-andrew.cooper3@citrix.com>
+References: <20200512191116.6851-1-andrew.cooper3@citrix.com>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <a1d1135a-8f9c-81c3-5fc8-bbc3787ebd0f@suse.com>
-Date: Wed, 13 May 2020 11:13:40 +0200
+Message-ID: <1e02fd6a-255a-a588-bf19-963917438fe4@suse.com>
+Date: Wed, 13 May 2020 11:15:28 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200512191108.6461-1-andrew.cooper3@citrix.com>
+In-Reply-To: <20200512191116.6851-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -64,33 +65,12 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 12.05.2020 21:11, Andrew Cooper wrote:
-> @@ -47,6 +47,14 @@ SECTIONS
->           *
->           * Please check build32.mk for more details.
->           */
-> -        /* *(.got.plt) */
-> +        *(.got.plt)
-> +  }
-> +
-> +  /DISCARD/ : {
-> +        /*
-> +         * Discard everything else, to prevent linkers from putting
-> +         * orphaned sections ahead of .text, which needs to be first.
-> +         */
-> +        *(*)
->    }
->  }
+> See comment for details.  Works around a GCC-9 bug which breaks the build on
+> Ubuntu.
+> 
+> Reported-by: Jason Andryuk <jandryuk@gmail.com>
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-To be honest I'm not sure if this isn't going too far. Much
-depends on what would happen if a new real section appeared
-that needs retaining. Granted the linker may then once again
-put it at the beginning of the image, and we'll be screwed
-again, just like we'll be screwed if a section gets discarded
-by mistake. But it would be really nice if we had a way to
-flag the need to play with the linker script. Hence perhaps
-on new enough tool chains we indeed may want to make use of
---orphan-handling= ? And then discard just .note and .note.*
-here?
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
