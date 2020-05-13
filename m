@@ -2,63 +2,74 @@ Return-Path: <SRS0=3ye+=63=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0B09DC433E1
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:44:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10832C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:52:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24FC82065C
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:44:28 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 28A58205CB
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 15:52:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Mq0bonYa"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24FC82065C
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="MFP72jQG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 28A58205CB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYtYE-00015c-0C; Wed, 13 May 2020 15:44:06 +0000
+	id 1jYtfy-00021c-SW; Wed, 13 May 2020 15:52:06 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=yQOZ=63=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jYtYC-00015T-7A
- for xen-devel@lists.xenproject.org; Wed, 13 May 2020 15:44:04 +0000
-X-Inumbo-ID: 9211a456-9530-11ea-a3ac-12813bfff9fa
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=7Rkd=63=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1jYtfx-00021X-M5
+ for xen-devel@lists.xenproject.org; Wed, 13 May 2020 15:52:05 +0000
+X-Inumbo-ID: ac4d6891-9531-11ea-a3ae-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 9211a456-9530-11ea-a3ac-12813bfff9fa;
- Wed, 13 May 2020 15:44:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/7oErC2oD1FcQ4fz06/kz/o4eYcq6WUr8ULBeUXJrcs=; b=Mq0bonYakbRr3UnPTZ9WkzH/8R
- G2Kf6Bpl0KPZK8TutwBptlA3bz5URgiBzHc7xn1BKoKmgEjwqtjGfahzxnU/AAKDJKOAqCTazFBRk
- AOZDHlk+S0EaSFyvlYTzUvMmYBASA/J37D+Y30EdN5Mcu7XJ1CZCtcpxmQBuSvjh5xns=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
+ id ac4d6891-9531-11ea-a3ae-12813bfff9fa;
+ Wed, 13 May 2020 15:51:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=KR//BHBpdOA1Y3U+XBxEqbkPzttr+bdCD3hhbPBDVWI=; b=MFP72jQGYKpNwdb/Q/jUAytru
+ zfdDwPkOBrijiVclT/Z0deyIkak8Apwyhb7/YMQkpFJAdncjJeldPXdzWY5GNC/coduCuarem0fcN
+ iEB5aqn9SVlt7kvPN135dFR2gmfpslZGZKoPYk1nwP/LSHDvaE3Dxo4v9e4Bg5WXva08c=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
  by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1jYtYA-0001ra-Kp; Wed, 13 May 2020 15:44:02 +0000
-Received: from 54-240-197-236.amazon.com ([54.240.197.236]
- helo=u1bbd043a57dd5a.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <hx242@xen.org>)
- id 1jYtYA-000716-8Y; Wed, 13 May 2020 15:44:02 +0000
-From: Hongyan Xia <hx242@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH] domain_page: handle NULL within unmap_domain_page() itself
-Date: Wed, 13 May 2020 16:43:33 +0100
-Message-Id: <a3ddf0c755227a3c742f6b93783c576135a86874.1589384602.git.hongyxia@amazon.com>
-X-Mailer: git-send-email 2.17.1
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jYtfp-00022M-0y; Wed, 13 May 2020 15:51:57 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jYtfo-0001hc-LD; Wed, 13 May 2020 15:51:56 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1jYtfo-0001CD-KU; Wed, 13 May 2020 15:51:56 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-150162-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+MIME-Version: 1.0
+Subject: [xen-unstable-smoke test] 150162: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=9d83ad86834300927b636fa02b29d84854399ed8
+X-Osstest-Versions-That: xen=a82582b1af6a4a57ca53bcfad9f71428cb5f9a54
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Wed, 13 May 2020 15:51:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,76 +80,65 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Hongyan Xia <hongyxia@amazon.com>
+flight 150162 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/150162/
 
-The macro version UNMAP_DOMAIN_PAGE() does both NULL checking and
-variable clearing. Move NULL checking into the function itself so that
-the semantics is consistent with other similar constructs like XFREE().
-This also eases the use unmap_domain_page() in error handling paths,
-where we only care about NULL checking but not about variable clearing.
+Failures :-/ but no regressions.
 
-Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
----
- xen/arch/arm/mm.c             | 3 +++
- xen/arch/x86/domain_page.c    | 2 +-
- xen/include/xen/domain_page.h | 7 ++-----
- 3 files changed, 6 insertions(+), 6 deletions(-)
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
 
-diff --git a/xen/arch/arm/mm.c b/xen/arch/arm/mm.c
-index 727107eefa..1b14f49345 100644
---- a/xen/arch/arm/mm.c
-+++ b/xen/arch/arm/mm.c
-@@ -498,6 +498,9 @@ void unmap_domain_page(const void *va)
-     lpae_t *map = this_cpu(xen_dommap);
-     int slot = ((unsigned long) va - DOMHEAP_VIRT_START) >> SECOND_SHIFT;
- 
-+    if ( !va )
-+        return;
-+
-     local_irq_save(flags);
- 
-     ASSERT(slot >= 0 && slot < DOMHEAP_ENTRIES);
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index dd32712d2f..b03728e18e 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -181,7 +181,7 @@ void unmap_domain_page(const void *ptr)
-     unsigned long va = (unsigned long)ptr, mfn, flags;
-     struct vcpu_maphash_entry *hashent;
- 
--    if ( va >= DIRECTMAP_VIRT_START )
-+    if ( !va || va >= DIRECTMAP_VIRT_START )
-         return;
- 
-     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
-diff --git a/xen/include/xen/domain_page.h b/xen/include/xen/domain_page.h
-index ab2be7b719..a182d33b67 100644
---- a/xen/include/xen/domain_page.h
-+++ b/xen/include/xen/domain_page.h
-@@ -73,11 +73,8 @@ static inline void unmap_domain_page_global(const void *va) {};
- #endif /* !CONFIG_DOMAIN_PAGE */
- 
- #define UNMAP_DOMAIN_PAGE(p) do {   \
--    if ( p )                        \
--    {                               \
--        unmap_domain_page(p);       \
--        (p) = NULL;                 \
--    }                               \
-+    unmap_domain_page(p);           \
-+    (p) = NULL;                     \
- } while ( false )
- 
- #endif /* __XEN_DOMAIN_PAGE_H__ */
--- 
-2.17.1
+version targeted for testing:
+ xen                  9d83ad86834300927b636fa02b29d84854399ed8
+baseline version:
+ xen                  a82582b1af6a4a57ca53bcfad9f71428cb5f9a54
 
+Last test of basis   150134  2020-05-11 10:01:13 Z    2 days
+Testing same since   150162  2020-05-13 13:00:23 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  Julien Grall <jgrall@amazon.com>
+  Nick Rosbrook <rosbrookn@ainfosec.com>
+  Nick Rosbrook <rosbrookn@gmail.com>
+  Paul Durrant <pdurrant@amazon.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   a82582b1af..9d83ad8683  9d83ad86834300927b636fa02b29d84854399ed8 -> smoke
 
