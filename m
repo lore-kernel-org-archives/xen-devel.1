@@ -2,74 +2,74 @@ Return-Path: <SRS0=3ye+=63=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AED1BC2D0FA
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 00:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7628CC2D0F8
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 00:58:24 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8076220675
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 00:56:17 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4988120675
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 00:58:24 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dJYOWESk"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8076220675
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="VVlIpEw6"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4988120675
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYfgj-00063y-7R; Wed, 13 May 2020 00:55:57 +0000
+	id 1jYfit-0006El-Tf; Wed, 13 May 2020 00:58:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=FcTI=63=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
- id 1jYfgh-000637-ET
- for xen-devel@lists.xenproject.org; Wed, 13 May 2020 00:55:55 +0000
-X-Inumbo-ID: 7fd151e6-94b4-11ea-ae69-bc764e2007e4
-Received: from mail-qt1-x835.google.com (unknown [2607:f8b0:4864:20::835])
+ id 1jYfit-0006Eg-Jh
+ for xen-devel@lists.xenproject.org; Wed, 13 May 2020 00:58:11 +0000
+X-Inumbo-ID: d10f3c08-94b4-11ea-b07b-bc764e2007e4
+Received: from mail-qk1-x741.google.com (unknown [2607:f8b0:4864:20::741])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7fd151e6-94b4-11ea-ae69-bc764e2007e4;
- Wed, 13 May 2020 00:55:54 +0000 (UTC)
-Received: by mail-qt1-x835.google.com with SMTP id p12so12825238qtn.13
- for <xen-devel@lists.xenproject.org>; Tue, 12 May 2020 17:55:54 -0700 (PDT)
+ id d10f3c08-94b4-11ea-b07b-bc764e2007e4;
+ Wed, 13 May 2020 00:58:11 +0000 (UTC)
+Received: by mail-qk1-x741.google.com with SMTP id y22so3114439qki.3
+ for <xen-devel@lists.xenproject.org>; Tue, 12 May 2020 17:58:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=from:to:cc:subject:date:message-id;
- bh=EMqMHiDg6gKs8OQ+tw4WAiOg/f7/en1mPF/tDzR7hOE=;
- b=dJYOWESkROg0U5+eZsfHG8Ydy4j1f2bOnzQ0NIislyQIWJCCqMs8OZO185Q22TSWVZ
- mZiQBhe9SShl8/qBIcexNLhUO3b3Eqm5BNArlQ7EFYsXv+cVh/C57dbUMC8QspkTWnTx
- 9h3avkzMwHHB+I3OyzzQ7tV5d11SCD0HhohHUw49bd0TXWgq4kD+6u83hWGJBI2OP3Ck
- rEAzNRxzShU1ukriU1Mu+fGCPPiHA8sf7bplW5D0AQmdNsainhTXYZ/zpzn3Kp7qjjQb
- 9Nj97d3uLESPlLxEMVXM9pUXYpjKGnoJJTc6AAZwEomGC6lATm5A4YBM9ytIZYk3Av0d
- zGhg==
+ bh=Abb8SF9BVb/yvCQWRsCzpAAii8nwRgH/VtD1d77e7kM=;
+ b=VVlIpEw6Q0U6XlZM1WlSNHztNl024vZOo6JuKhbgjVgFRZJh7Q3S36v9QUuivHTmqp
+ A20SaZn1c0QitYH2WMN+M+dO/+E1K9hFl8DH6dd7Dl0jyvAHtL+5gLVLpB5PVAs3dJNp
+ Uz15Rvdc8tgBSSc3JIyvSOAltHWWOhEjsqHMC+UVTdIFT6zRJrDioI3+ZNzNjiCCb2l3
+ Qx/ziEEfEYxG1EczkHL4VOSZzxHSAejpSq6OCNIN/BKBrXJrZYw9MM/oO9kJLq02gGCz
+ s216aFSdX3/FAUHJGAnBpxqPkzHCDWS2M0z79Q+IU0oftT3UhF7JlKbG8flg5Fw6/Un9
+ NbPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=EMqMHiDg6gKs8OQ+tw4WAiOg/f7/en1mPF/tDzR7hOE=;
- b=OCPOeefxUqfZCSrMqTOHci45eIvMdGZdaBnkdiTVSwYg50WKJp2+9G0wGyRMXMogtC
- +hQKV2HuoB9y4XepJSo+HKOZFXM9y5WLYPAUrjC0fqRj2KLunpLqnyu5pQc/z5VLEthw
- pLCEEzss4CcA2x41uPiz6th2zuG0VSo3UWJL9k0HLkfzxfIXRv4THSoHJ9oWQhg9KNiu
- O9MVCoqaYcKAF6pEPf+wOrYWAezk+mgMaG1O+ktqtAtDHDKGGPV3ydBEq6qxINotzL15
- OWdkWAJfdPnktNR+Ma8cT6+6PnKgzUoX/sc5qltM6pqZGK9O2YaP+OPfEVyOjnnMsAYn
- 8t/g==
-X-Gm-Message-State: AGi0PuaSvCIIkWFFmKMHzi3AkCNeYbazNU4ot3LeFnL4PDWO5TOYQfuk
- lIOd7ebzEOJrDdbebK95bHPKH/eccFc=
-X-Google-Smtp-Source: APiQypLZrSd1jBf6vjCZ/Iqv8pToJSWHu2/t9eUwUf47AIwgkw4AxwzKB+ETw0D4ubAoaW2Gmo8Rug==
-X-Received: by 2002:aed:3949:: with SMTP id l67mr13125456qte.313.1589331353911; 
- Tue, 12 May 2020 17:55:53 -0700 (PDT)
+ bh=Abb8SF9BVb/yvCQWRsCzpAAii8nwRgH/VtD1d77e7kM=;
+ b=SKXh4TdtbWp/uQBDVEGlK38o5MKteoTkSQlDGRSomFEhLYMTx6VIprq9tuEmvs1U6H
+ 4MqdTw9nXliD+2oSV+68C3ViIT8ZGlxiLasbEhCdEzi7gww/KIy+Y5uF2zBDJxc+P2pK
+ gmGHg0FY/d0xs9/93s5287usaMkDiYdWYMxjWKv1dvhN2wFFGY3EbBRzgc6tWDpqpu+x
+ r19A7qty5i+geKBEO8IPij8YdcbUji9kQ1AUKC5uJfPXJHxexf0Jqe6srptwZFFvQBJC
+ nZz2Xe6hjoxnJaHnynmHoGCqita4N/39jidaPSSnQhrbpIHC4k69p7lCtQYxfDeocQ7m
+ Gh2w==
+X-Gm-Message-State: AGi0PuYgoCLTQe0caRzF2DrCfhr0dovAWmGZ22RRBXIezOv1/0RO8xF/
+ wk8Jc4EgY6cIRbFCdK0gzqDloxDfgwY=
+X-Google-Smtp-Source: APiQypIOaRVxfIQ+gNYGoQX9nWHQ8ZayFE/yEjmLUnRkfSfUwrq6b0YbC4QRP8JPsMRbJc0awmvOXA==
+X-Received: by 2002:a37:97c1:: with SMTP id
+ z184mr18043810qkd.249.1589331490249; 
+ Tue, 12 May 2020 17:58:10 -0700 (PDT)
 Received: from six.lan (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
- by smtp.gmail.com with ESMTPSA id y28sm8388602qtc.62.2020.05.12.17.55.52
+ by smtp.gmail.com with ESMTPSA id 62sm12400828qkh.113.2020.05.12.17.58.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 12 May 2020 17:55:53 -0700 (PDT)
+ Tue, 12 May 2020 17:58:09 -0700 (PDT)
 From: Nick Rosbrook <rosbrookn@gmail.com>
 X-Google-Original-From: Nick Rosbrook <rosbrookn@ainfosec.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v3 0/1] More wrappers for xenlight Go package
-Date: Tue, 12 May 2020 20:55:49 -0400
-Message-Id: <cover.1589321804.git.rosbrookn@ainfosec.com>
+Subject: [PATCH v2 0/3] initialize xenlight go module
+Date: Tue, 12 May 2020 20:58:04 -0400
+Message-Id: <cover.1589330383.git.rosbrookn@ainfosec.com>
 X-Mailer: git-send-email 2.17.1
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -81,34 +81,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
+ George Dunlap <george.dunlap@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This series adds wrappers to the xenlight package for various libxl
-functions, which are now trivial to add with the generated types and 
-marshaling helpers. In particular, these are functions that would allow
-redctl to begin making the transition to using the xenlight package. For 
-reference, I have started an experimental branch where I am using these
-functions in redctl [1].
-
-[1] https://gitlab.com/enr0n/redctl/-/blob/1bdf7b515654cc030e095f3a630a24530f930c00/internal/server/xenlight_xen_driver.go
+These patches setup an initial Go module for the xenlight package. The
+go code is tracked again, since the module is defined in xen.git as
+xenbits.xenproject.org/git-http/xen.git/tools/golang/xenlight. The final patch
+adds a README and LICENSE to tools/golang/xenlight so that the package
+will show up properly on pkg.go.dev and be available via the module
+proxy at proxy.golang.org.
 
 Changes in v2:
- - Define constant DomidInvalid in first patch for use in NameToDomid
- - Add more detail to function comments
+ - Use xenproject.org instead of xen.org in module path.
+ - Use `go build` instead of `go install` in xenlight Makefile.
+ - Use LGPL instead of GPL for xenlight LICENSE.
+ - Add entry for xenlight package in SUPPORT.md.
+ - Change some wording in the README for clarity. 
 
-Changes in v3:
- - Define INVALID_DOMID_TYPED in C preamble so that the Go const
-   DomidInvalid is always in-sync with the libxl definition.
+Nick Rosbrook (3):
+  golang/xenlight: re-track generated go code
+  golang/xenlight: init xenlight go module
+  golang/xenlight: add necessary module/package documentation
 
-Nick Rosbrook (1):
-  golang/xenlight: add NameToDomid and DomidToName util functions
-
- tools/golang/xenlight/xenlight.go | 40 ++++++++++++++++++++++++++++++-
- 1 file changed, 39 insertions(+), 1 deletion(-)
+ .gitignore                           |    3 -
+ .hgignore                            |    2 -
+ SUPPORT.md                           |    6 +
+ tools/golang/xenlight/LICENSE        |  198 ++
+ tools/golang/xenlight/Makefile       |    3 +-
+ tools/golang/xenlight/README.md      |   17 +
+ tools/golang/xenlight/go.mod         |    1 +
+ tools/golang/xenlight/helpers.gen.go | 4728 ++++++++++++++++++++++++++
+ tools/golang/xenlight/types.gen.go   | 1226 +++++++
+ tools/golang/xenlight/xenlight.go    |    2 +
+ 10 files changed, 6179 insertions(+), 7 deletions(-)
+ create mode 100644 tools/golang/xenlight/LICENSE
+ create mode 100644 tools/golang/xenlight/README.md
+ create mode 100644 tools/golang/xenlight/go.mod
+ create mode 100644 tools/golang/xenlight/helpers.gen.go
+ create mode 100644 tools/golang/xenlight/types.gen.go
 
 -- 
 2.17.1
