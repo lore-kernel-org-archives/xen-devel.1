@@ -2,55 +2,57 @@ Return-Path: <SRS0=3ye+=63=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BCA66CA90AF
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 13:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BFD76C2D0FC
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 13:56:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1BC5A2054F
-	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 13:56:42 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 24C102054F
+	for <xen-devel@archiver.kernel.org>; Wed, 13 May 2020 13:56:44 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="hrrY+jgg"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1BC5A2054F
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="ZAUpL6SG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24C102054F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jYrrr-0007Px-CV; Wed, 13 May 2020 13:56:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jYrrt-0007QO-NU; Wed, 13 May 2020 13:56:17 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=cxQB=63=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jYrrq-0007Ps-CA
- for xen-devel@lists.xenproject.org; Wed, 13 May 2020 13:56:14 +0000
-X-Inumbo-ID: 819c9a90-9521-11ea-9887-bc764e2007e4
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 819c9a90-9521-11ea-9887-bc764e2007e4;
- Wed, 13 May 2020 13:56:13 +0000 (UTC)
+ id 1jYrrs-0007Q3-Il
+ for xen-devel@lists.xenproject.org; Wed, 13 May 2020 13:56:16 +0000
+X-Inumbo-ID: 8230159a-9521-11ea-a380-12813bfff9fa
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 8230159a-9521-11ea-a380-12813bfff9fa;
+ Wed, 13 May 2020 13:56:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
  d=citrix.com; s=securemail; t=1589378174;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=szdENZVnK21wmpaV/YA6upz3x9DsZQ4tlOwrH96ssUA=;
- b=hrrY+jggF7ZVaA9VlEOqzHzmCJ7tCNXtlfiBDdlqVqhJi1NJClNCyZMK
- hCG+ilroJF9+mkyInQbQi/wr80pzB9FV05fggEEyZUsoe3XaX9usaTTdE
- bLxFUAVg7EQsMX7FyA1w2JsC1G+7INeVb0fx/cvzjRfPK1YhuCLF900+4 4=;
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=8RnL7r04wvQLuEkyA1mIyz1nkfFjDGCWQxNcNfagCt4=;
+ b=ZAUpL6SGJN70VJrjN95xxkbFv72q4A9LB6XFIAxMfvOspzlOQ8aJMrSl
+ qf5Pk7h5xJB/847sxJ7fJN4RWXriqPJ2mfvKceHysGyH8kfxNea+FFOTy
+ Kb98X7+8A7fCONSaxMzwOgnhw0GOx1cLf4HwbVdANgHFe2c28QXADvWgv o=;
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  andrew.cooper3@citrix.com) identity=pra;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="andrew.cooper3@citrix.com";
  x-conformance=sidf_compatible
-Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
+Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
  Andrew.Cooper3@citrix.com designates 162.221.158.21 as
  permitted sender) identity=mailfrom;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="Andrew.Cooper3@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
@@ -59,36 +61,38 @@ Received-SPF: Pass (esa2.hc3370-68.iphmx.com: domain of
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa2.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa2.hc3370-68.iphmx.com;
+ client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
  envelope-from="Andrew.Cooper3@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
  spf=None smtp.pra=andrew.cooper3@citrix.com;
  spf=Pass smtp.mailfrom=Andrew.Cooper3@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com;
  dmarc=pass (p=none dis=none) d=citrix.com
-IronPort-SDR: oT5dIifoFXzVz1Re2i0NWmkd5ngOkzeV2gSKY/ltaaOocMbRS3u2CqDSVHRzJOI5XD08gBiQBM
- DbrvDqPwARTGfVrhycrLH3KFFWV09cYaZhcoQgxo6SwCAy48gkJkU5yCc84vQX+C1fvejHDGBO
- 93j9x3bVPU2U2Z3zESPG+EexmJmbktLIVZqTMkb0fi3ATyskpdUsCqjsIsAOT5FguVYV7cjfSD
- 55iiT1trEMjJ4UJEfkM6/pqK9SQmw8kKZhFvo6DmsmQMj8M4Iib4R6mX8Jn0IdY4LmMc+3GBRQ
- kcs=
+IronPort-SDR: OsZHGwfRCQDDywVu6pe+akW9kNGwoP1VbEawUh6mupPmhbra4dTE2Wkq/TDp83Nyg35LMQwdDF
+ EAUHT7MDR8Rr14GUtC91sVg+NymN6Wo26BdluIh8gS5yS74tz1ccbOYmMyv78NMLzHvwd5mDNV
+ QLJZj2LrdftePKEu2Nq5xsYzY7tMelU4LP9jLwwWY2930tnXeFZgEQhzRhpA6Qijbbtk0RXdYB
+ glhefavSDmxxep4W9jeZ5AY3wkQfwAMOW/ceNWY3rN5rks5bKvJQpiWXr3ZXw75Tyu4Dk1RHfH
+ bgE=
 X-SBRS: 2.7
-X-MesageID: 17443159
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 17414537
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,387,1583211600"; d="scan'208";a="17443159"
+X-IronPort-AV: E=Sophos;i="5.73,387,1583211600"; d="scan'208";a="17414537"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH] build: Fix build with Ubuntu
-Date: Wed, 13 May 2020 14:55:50 +0100
-Message-ID: <20200513135552.24329-1-andrew.cooper3@citrix.com>
+Subject: [PATCH] x86/build: Unilaterally disable -fcf-protection
+Date: Wed, 13 May 2020 14:55:52 +0100
+Message-ID: <20200513135552.24329-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200513135552.24329-1-andrew.cooper3@citrix.com>
+References: <20200513135552.24329-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -102,28 +106,54 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Jason
- Andryuk <jandryuk@gmail.com>, George Dunlap <George.Dunlap@eu.citrix.com>,
+Cc: Wei Liu <wl@xen.org>, Jason Andryuk <jandryuk@gmail.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefan Bader <stefan.bader@canonical.com>, Jan Beulich <JBeulich@suse.com>,
- Ian Jackson <ian.jackson@citrix.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This supercedes "x86/build: Unilaterally disable -fcf-protection"
+Xen doesn't support CET-IBT yet.  At a minimum, logic is required to enable it
+for supervisor use, but the livepatch functionality needs to learn not to
+overwrite ENDBR64 instructions.
 
-Andrew Cooper (2):
-  x86/build: move -fno-asynchronous-unwind-tables into EMBEDDED_EXTRA_CFLAGS
-  x86/build: Unilaterally disable -fcf-protection
+Furthermore, Ubuntu enables -fcf-protection by default, along with a buggy
+version of GCC-9 which objects to it in combination with
+-mindirect-branch=thunk-extern (Fixed in GCC 10, 9.4).
 
- Config.mk                            | 3 ++-
- tools/tests/x86_emulator/testcase.mk | 2 +-
- xen/arch/x86/arch.mk                 | 2 +-
- xen/arch/x86/boot/build32.mk         | 2 +-
- 4 files changed, 5 insertions(+), 4 deletions(-)
+Various objects (Xen boot path, Rombios 32 stubs) require .text to be at the
+beginning of the object.  These paths explode when .note.gnu.properties gets
+put ahead of .text and we end up executing the notes data.
 
+Disable -fcf-protection for all embedded objects.
+
+Reported-by: Jason Andryuk <jandryuk@gmail.com>
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Wei Liu <wl@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
+CC: Jason Andryuk <jandryuk@gmail.com>
+CC: Stefan Bader <stefan.bader@canonical.com>
+
+v2:
+ * Fix Rombios 32 stubs as well.
+---
+ Config.mk | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Config.mk b/Config.mk
+index b0f16680f3..7d556aed30 100644
+--- a/Config.mk
++++ b/Config.mk
+@@ -205,6 +205,7 @@ APPEND_CFLAGS += $(foreach i, $(APPEND_INCLUDES), -I$(i))
+ 
+ EMBEDDED_EXTRA_CFLAGS := -nopie -fno-stack-protector -fno-stack-protector-all
+ EMBEDDED_EXTRA_CFLAGS += -fno-exceptions -fno-asynchronous-unwind-tables
++EMBEDDED_EXTRA_CFLAGS += -fcf-protection=none
+ 
+ XEN_EXTFILES_URL ?= http://xenbits.xen.org/xen-extfiles
+ # All the files at that location were downloaded from elsewhere on
 -- 
 2.11.0
 
