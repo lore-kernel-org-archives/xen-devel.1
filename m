@@ -2,43 +2,44 @@ Return-Path: <SRS0=xDB7=64=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 389B5C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A07D8C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:13 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0F3442065D
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0F3442065D
+	by mail.kernel.org (Postfix) with ESMTPS id 6D7752065D
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D7752065D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZEiU-00081v-PW; Thu, 14 May 2020 14:20:06 +0000
+	id 1jZEiP-0007QT-Cs; Thu, 14 May 2020 14:20:01 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f2eD=64=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jZEiT-0007x7-JE
- for xen-devel@lists.xenproject.org; Thu, 14 May 2020 14:20:05 +0000
-X-Inumbo-ID: fbe02a0c-95ed-11ea-ae69-bc764e2007e4
+ id 1jZEiO-0007QM-Jy
+ for xen-devel@lists.xenproject.org; Thu, 14 May 2020 14:20:00 +0000
+X-Inumbo-ID: fbb2d6ce-95ed-11ea-9887-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fbe02a0c-95ed-11ea-ae69-bc764e2007e4;
+ id fbb2d6ce-95ed-11ea-9887-bc764e2007e4;
  Thu, 14 May 2020 14:19:55 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jZEiI-0004pf-Tl; Thu, 14 May 2020 15:19:55 +0100
+ id 1jZEiI-0004pf-Ma; Thu, 14 May 2020 15:19:54 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 2/4] ts-repeat-test: Honour repeat_mult
-Date: Thu, 14 May 2020 15:19:49 +0100
-Message-Id: <20200514141951.29371-3-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 1/4] Executive: Do not print "shared ... marked ready"
+ when not shared
+Date: Thu, 14 May 2020 15:19:48 +0100
+Message-Id: <20200514141951.29371-2-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200514141951.29371-1-ian.jackson@eu.citrix.com>
 References: <20200514141951.29371-1-ian.jackson@eu.citrix.com>
@@ -58,29 +59,42 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Nothing automatic uses repeat_mult but this script should definitely
-honour it.
-
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-repeat-test | 4 ++++
- 1 file changed, 4 insertions(+)
+ Osstest/Executive.pm | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/ts-repeat-test b/ts-repeat-test
-index 4625add8..e6b52465 100755
---- a/ts-repeat-test
-+++ b/ts-repeat-test
-@@ -51,6 +51,10 @@ my $dumper = new Data::Dumper [\@cmdis], [qw(*cmdis)];
- $dumper->Indent(0);
- print $dumper->Dump,"\n";
+diff --git a/Osstest/Executive.pm b/Osstest/Executive.pm
+index e741f529..c3dc1261 100644
+--- a/Osstest/Executive.pm
++++ b/Osstest/Executive.pm
+@@ -1017,11 +1017,12 @@ sub executive_resource_shared_mark_ready ($$$) {
+     my ($restype, $resname, $sharetype) = @_;
+     # must run outside transaction
  
-+my $times = $r{repeat_mult} || 1;
-+my $orgreps = $reps;
-+$reps *= $times;
-+
- foreach my $rep (1..$reps) {
-     logm("========== rep $rep ==========");
-     foreach my $cmdi (@cmdis) {
++    my $oldshr;
+     my $what= "resource $restype $resname";
+     $sharetype .= ' '.get_harness_rev();
+ 
+     db_retry($dbh_tests, [qw(resources)], sub {
+-        my $oldshr= resource_check_allocated_core($restype, $resname);
++        $oldshr= resource_check_allocated_core($restype, $resname);
+         if (defined $oldshr) {
+             die "$what shared $oldshr->{Type} not $sharetype"
+                 unless $oldshr->{Type} eq $sharetype;
+@@ -1053,7 +1054,11 @@ END
+     }) {
+        logm("post-mark-ready queue daemon prod failed: $@");
+     }
+-    logm("$restype $resname shared $sharetype marked ready");
++    if ($oldshr) {
++	logm("$restype $resname shared $sharetype marked ready");
++    } else {
++	logm("$restype $resname (not shared, $sharetype) is ready");
++    }
+ }
+ 
+ # hostalloc_maxwait_starvation
 -- 
 2.20.1
 
