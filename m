@@ -2,50 +2,50 @@ Return-Path: <SRS0=xDB7=64=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2C434C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 13:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B420C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 13:11:36 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EF35520727
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 13:03:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EF35520727
+	by mail.kernel.org (Postfix) with ESMTPS id 2C90F206DA
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 13:11:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C90F206DA
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZDW5-0000Nd-RM; Thu, 14 May 2020 13:03:13 +0000
+	id 1jZDdx-0001Jh-4I; Thu, 14 May 2020 13:11:21 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ezST=64=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jZDW4-0000Mu-QI
- for xen-devel@lists.xenproject.org; Thu, 14 May 2020 13:03:12 +0000
-X-Inumbo-ID: 435a2f82-95e3-11ea-a487-12813bfff9fa
+ id 1jZDdu-0001J8-OT
+ for xen-devel@lists.xenproject.org; Thu, 14 May 2020 13:11:18 +0000
+X-Inumbo-ID: 658974ae-95e4-11ea-a488-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 435a2f82-95e3-11ea-a487-12813bfff9fa;
- Thu, 14 May 2020 13:03:11 +0000 (UTC)
+ id 658974ae-95e4-11ea-a488-12813bfff9fa;
+ Thu, 14 May 2020 13:11:18 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 7D71EAC6D;
- Thu, 14 May 2020 13:03:12 +0000 (UTC)
-Subject: Re: [PATCH v8 12/12] xen: remove XEN_SYSCTL_set_parameter support
-To: Juergen Gross <jgross@suse.com>
-References: <20200508153421.24525-1-jgross@suse.com>
- <20200508153421.24525-13-jgross@suse.com>
+ by mx2.suse.de (Postfix) with ESMTP id 39B46AC5B;
+ Thu, 14 May 2020 13:11:19 +0000 (UTC)
+Subject: Re: [PATCH] domain_page: handle NULL within unmap_domain_page() itself
+To: Hongyan Xia <hx242@xen.org>
+References: <a3ddf0c755227a3c742f6b93783c576135a86874.1589384602.git.hongyxia@amazon.com>
+ <20200514100133.ne3ed6laazrta3xa@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <2c962dd4-5af6-e09e-d712-18f8a92b4a92@suse.com>
-Date: Thu, 14 May 2020 15:03:04 +0200
+Message-ID: <94343df1-64bc-2b07-acbc-4f4b6c54fb55@suse.com>
+Date: Thu, 14 May 2020 15:11:14 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200508153421.24525-13-jgross@suse.com>
+In-Reply-To: <20200514100133.ne3ed6laazrta3xa@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -59,104 +59,29 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Jun Nakajima <jun.nakajima@intel.com>, xen-devel@lists.xenproject.org,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
+ George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 08.05.2020 17:34, Juergen Gross wrote:
+On 14.05.2020 12:01, Wei Liu wrote:
+> On Wed, May 13, 2020 at 04:43:33PM +0100, Hongyan Xia wrote:
+>> From: Hongyan Xia <hongyxia@amazon.com>
+>>
+>> The macro version UNMAP_DOMAIN_PAGE() does both NULL checking and
+>> variable clearing. Move NULL checking into the function itself so that
+>> the semantics is consistent with other similar constructs like XFREE().
+>> This also eases the use unmap_domain_page() in error handling paths,
+>> where we only care about NULL checking but not about variable clearing.
+>>
+>> Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+> 
+> Reviewed-by: Wei Liu <wl@xen.org>
 
-Besides the changes made, wouldn't it be worthwhile to change
-HYPFS Kconfig help wording from "result in some features not
-being available" to something mentioning runtime parameter
-setting in particular, and perhaps also from "might" to "will"?
-
-> --- a/xen/arch/x86/hvm/vmx/vmcs.c
-> +++ b/xen/arch/x86/hvm/vmx/vmcs.c
-> @@ -71,27 +71,6 @@ static bool __read_mostly opt_ept_pml = true;
->  static s8 __read_mostly opt_ept_ad = -1;
->  int8_t __read_mostly opt_ept_exec_sp = -1;
->  
-> -#ifdef CONFIG_HYPFS
-> -static char opt_ept_setting[10];
-> -
-> -static void update_ept_param(void)
-> -{
-> -    if ( opt_ept_exec_sp >= 0 )
-> -        snprintf(opt_ept_setting, sizeof(opt_ept_setting), "exec-sp=%d",
-> -                 opt_ept_exec_sp);
-> -}
-> -
-> -static void __init init_ept_param(struct param_hypfs *par)
-> -{
-> -    update_ept_param();
-> -    custom_runtime_set_var(par, opt_ept_setting);
-> -}
-> -#else
-> -static void update_ept_param(void)
-> -{
-> -}
-> -#endif
-> -
->  static int __init parse_ept_param(const char *s)
->  {
->      const char *ss;
-> @@ -118,6 +97,22 @@ static int __init parse_ept_param(const char *s)
->  }
->  custom_param("ept", parse_ept_param);
->  
-> +#ifdef CONFIG_HYPFS
-> +static char opt_ept_setting[10];
-> +
-> +static void update_ept_param(void)
-> +{
-> +    if ( opt_ept_exec_sp >= 0 )
-> +        snprintf(opt_ept_setting, sizeof(opt_ept_setting), "exec-sp=%d",
-> +                 opt_ept_exec_sp);
-> +}
-> +
-> +static void __init init_ept_param(struct param_hypfs *par)
-> +{
-> +    update_ept_param();
-> +    custom_runtime_set_var(par, opt_ept_setting);
-> +}
-
-If I'm not mistaken this is pure code movement, and solely to be
-able to have ...
-
-> +
->  static int parse_ept_param_runtime(const char *s);
->  custom_runtime_only_param("ept", parse_ept_param_runtime, init_ept_param);
->  
-> @@ -172,6 +167,7 @@ static int parse_ept_param_runtime(const char *s)
->  
->      return 0;
->  }
-> +#endif
-
-... a single #ifdef region now including a few more lines. No
-strict need to change it, but couldn't the earlier patch have
-inserted the code in its final place right away?
-
-> @@ -1106,7 +1090,7 @@ struct xen_sysctl {
->  #define XEN_SYSCTL_get_cpu_levelling_caps        25
->  #define XEN_SYSCTL_get_cpu_featureset            26
->  #define XEN_SYSCTL_livepatch_op                  27
-> -#define XEN_SYSCTL_set_parameter                 28
-> +/* #define XEN_SYSCTL_set_parameter                 28 */
-
-Nit: There are now 3 too many padding spaces. Granted that's
-how it was done for XEN_SYSCTL_tmem_op ...
-
-In any event, as before,
 Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
