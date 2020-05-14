@@ -6,47 +6,48 @@ X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 266BEC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 09:56:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 43FA0C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 09:59:03 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0248F206B6
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 09:55:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0248F206B6
+	by mail.kernel.org (Postfix) with ESMTPS id 22257206B6
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 09:59:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22257206B6
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZAae-0007oh-5P; Thu, 14 May 2020 09:55:44 +0000
+	id 1jZAdg-00080m-KZ; Thu, 14 May 2020 09:58:52 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=ezST=64=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jZAac-0007oV-Pv
- for xen-devel@lists.xenproject.org; Thu, 14 May 2020 09:55:42 +0000
-X-Inumbo-ID: 125b135c-95c9-11ea-a464-12813bfff9fa
+ (envelope-from <SRS0=WGWk=64=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jZAdf-00080A-Iz
+ for xen-devel@lists.xenproject.org; Thu, 14 May 2020 09:58:51 +0000
+X-Inumbo-ID: 82e089e0-95c9-11ea-a464-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 125b135c-95c9-11ea-a464-12813bfff9fa;
- Thu, 14 May 2020 09:55:42 +0000 (UTC)
+ id 82e089e0-95c9-11ea-a464-12813bfff9fa;
+ Thu, 14 May 2020 09:58:51 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 435C7AF8A;
- Thu, 14 May 2020 09:55:43 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 4C759AEB9;
+ Thu, 14 May 2020 09:58:51 +0000 (UTC)
 Subject: Re: [PATCH v8 04/12] xen: add basic hypervisor filesystem support
-To: Juergen Gross <jgross@suse.com>
+To: Jan Beulich <jbeulich@suse.com>
 References: <20200508153421.24525-1-jgross@suse.com>
  <20200508153421.24525-5-jgross@suse.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <479b4738-2127-998a-2d8e-c7a9af8ff0a3@suse.com>
-Date: Thu, 14 May 2020 11:55:37 +0200
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ <479b4738-2127-998a-2d8e-c7a9af8ff0a3@suse.com>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <8d0b5a5c-efee-1189-40a2-e70ba60cedbb@suse.com>
+Date: Thu, 14 May 2020 11:58:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200508153421.24525-5-jgross@suse.com>
-Content-Type: text/plain; charset=utf-8
+In-Reply-To: <479b4738-2127-998a-2d8e-c7a9af8ff0a3@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -69,36 +70,41 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 08.05.2020 17:34, Juergen Gross wrote:
-> --- /dev/null
-> +++ b/xen/include/xen/hypfs.h
-> @@ -0,0 +1,122 @@
-> +#ifndef __XEN_HYPFS_H__
-> +#define __XEN_HYPFS_H__
-> +
-> +#ifdef CONFIG_HYPFS
-> +#include <xen/list.h>
-> +#include <xen/string.h>
-> +#include <public/hypfs.h>
-> +
-> +struct hypfs_entry_leaf;
-> +
-> +struct hypfs_entry {
-> +    unsigned short type;
-> +    unsigned short encoding;
-> +    unsigned int size;
-> +    unsigned int max_size;
+On 14.05.20 11:55, Jan Beulich wrote:
+> On 08.05.2020 17:34, Juergen Gross wrote:
+>> --- /dev/null
+>> +++ b/xen/include/xen/hypfs.h
+>> @@ -0,0 +1,122 @@
+>> +#ifndef __XEN_HYPFS_H__
+>> +#define __XEN_HYPFS_H__
+>> +
+>> +#ifdef CONFIG_HYPFS
+>> +#include <xen/list.h>
+>> +#include <xen/string.h>
+>> +#include <public/hypfs.h>
+>> +
+>> +struct hypfs_entry_leaf;
+>> +
+>> +struct hypfs_entry {
+>> +    unsigned short type;
+>> +    unsigned short encoding;
+>> +    unsigned int size;
+>> +    unsigned int max_size;
+> 
+> Btw with these, ...
+> 
+>> +    const char *name;
+>> +    struct list_head list;
+>> +    int (*read)(const struct hypfs_entry *entry,
+>> +                XEN_GUEST_HANDLE_PARAM(void) uaddr);
+>> +    int (*write)(struct hypfs_entry_leaf *leaf,
+>> +                 XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned long ulen);
+> 
+> ... why unsigned long here (noticed while looking at patch 9)?
 
-Btw with these, ...
+Indeed, will switch to unsigned int.
 
-> +    const char *name;
-> +    struct list_head list;
-> +    int (*read)(const struct hypfs_entry *entry,
-> +                XEN_GUEST_HANDLE_PARAM(void) uaddr);
-> +    int (*write)(struct hypfs_entry_leaf *leaf,
-> +                 XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned long ulen);
 
-... why unsigned long here (noticed while looking at patch 9)?
+Juergen
 
-Jan
 
