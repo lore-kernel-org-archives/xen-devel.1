@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 93AF4C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0188AC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69C372065D
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69C372065D
+	by mail.kernel.org (Postfix) with ESMTPS id CF8992065D
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 14:20:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF8992065D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZEia-00087L-3R; Thu, 14 May 2020 14:20:12 +0000
+	id 1jZEif-0008A0-Bg; Thu, 14 May 2020 14:20:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=f2eD=64=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jZEiY-00086y-Jq
- for xen-devel@lists.xenproject.org; Thu, 14 May 2020 14:20:10 +0000
-X-Inumbo-ID: fc0457ec-95ed-11ea-9887-bc764e2007e4
+ id 1jZEid-00089E-Kg
+ for xen-devel@lists.xenproject.org; Thu, 14 May 2020 14:20:15 +0000
+X-Inumbo-ID: fc289710-95ed-11ea-ae69-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id fc0457ec-95ed-11ea-9887-bc764e2007e4;
+ id fc289710-95ed-11ea-ae69-bc764e2007e4;
  Thu, 14 May 2020 14:19:56 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jZEiJ-0004pf-85; Thu, 14 May 2020 15:19:55 +0100
+ id 1jZEiJ-0004pf-Fi; Thu, 14 May 2020 15:19:55 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 3/4] ts-repeat-test: Show total planned repeat count
- info
-Date: Thu, 14 May 2020 15:19:50 +0100
-Message-Id: <20200514141951.29371-4-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 4/4] TestSupport: honour OSSTEST_PDU_MANUAL override
+ env var
+Date: Thu, 14 May 2020 15:19:51 +0100
+Message-Id: <20200514141951.29371-5-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200514141951.29371-1-ian.jackson@eu.citrix.com>
 References: <20200514141951.29371-1-ian.jackson@eu.citrix.com>
@@ -59,26 +59,32 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Message change only
+This takes effect on everything that uses selecthost().  The result is
+that PDU operations are made manual.  This can be useful for testing
+etc.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-repeat-test | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Osstest/TestSupport.pm | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/ts-repeat-test b/ts-repeat-test
-index e6b52465..5e17c335 100755
---- a/ts-repeat-test
-+++ b/ts-repeat-test
-@@ -56,7 +56,7 @@ my $orgreps = $reps;
- $reps *= $times;
+diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
+index 3700a8fe..1e7da676 100644
+--- a/Osstest/TestSupport.pm
++++ b/Osstest/TestSupport.pm
+@@ -1059,6 +1059,12 @@ sub power_cycle_host_setup ($) {
+ 	    MethObjs => power_cycle_parse_method($ho, $spec),
+         };
+     }
++    if ($ENV{OSSTEST_PDU_MANUAL}) {
++	@approaches = ({
++            Name => 'manual-override',
++            MethObjs => power_cycle_parse_method($ho, 'manual'),
++        });
++    }
+     $ho->{PowerApproaches} = \@approaches;
+ }
  
- foreach my $rep (1..$reps) {
--    logm("========== rep $rep ==========");
-+    logm("========== rep $rep / $reps ($orgreps x $times) ==========");
-     foreach my $cmdi (@cmdis) {
- 	my $l = $cmdi->{L};
- 	logm("---------- rep $rep @$l ----------");
 -- 
 2.20.1
 
