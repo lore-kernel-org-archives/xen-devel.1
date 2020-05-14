@@ -2,54 +2,70 @@ Return-Path: <SRS0=xDB7=64=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 43FA0C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 09:59:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 372FEC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 10:02:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 22257206B6
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 09:59:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 22257206B6
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 16FD920671
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 10:02:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 16FD920671
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZAdg-00080m-KZ; Thu, 14 May 2020 09:58:52 +0000
+	id 1jZAgN-0000Pr-2R; Thu, 14 May 2020 10:01:39 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=WGWk=64=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jZAdf-00080A-Iz
- for xen-devel@lists.xenproject.org; Thu, 14 May 2020 09:58:51 +0000
-X-Inumbo-ID: 82e089e0-95c9-11ea-a464-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=SZsc=64=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1jZAgL-0000Pm-SZ
+ for xen-devel@lists.xenproject.org; Thu, 14 May 2020 10:01:37 +0000
+X-Inumbo-ID: e58d6090-95c9-11ea-a464-12813bfff9fa
+Received: from mail-wm1-f68.google.com (unknown [209.85.128.68])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 82e089e0-95c9-11ea-a464-12813bfff9fa;
- Thu, 14 May 2020 09:58:51 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 4C759AEB9;
- Thu, 14 May 2020 09:58:51 +0000 (UTC)
-Subject: Re: [PATCH v8 04/12] xen: add basic hypervisor filesystem support
-To: Jan Beulich <jbeulich@suse.com>
-References: <20200508153421.24525-1-jgross@suse.com>
- <20200508153421.24525-5-jgross@suse.com>
- <479b4738-2127-998a-2d8e-c7a9af8ff0a3@suse.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <8d0b5a5c-efee-1189-40a2-e70ba60cedbb@suse.com>
-Date: Thu, 14 May 2020 11:58:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id e58d6090-95c9-11ea-a464-12813bfff9fa;
+ Thu, 14 May 2020 10:01:36 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id f13so1162382wmc.5
+ for <xen-devel@lists.xenproject.org>; Thu, 14 May 2020 03:01:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=hpaBJ8k/wS/3dOaZzQwwuKmfoM1Lz+L6HOA3llNZp6g=;
+ b=jq0JENzvFyc29P8RiD08BGdKDX2LW5zOc0nSV/IbgfwvsT87+8DChxlZuY2K8KzH+0
+ JN5RNQlO/z4Me9cew/CBYOVlLy8Ayl6NjJvMuHzoxsE93oYZGSPxIaAt52ZBZMvpubX/
+ J0spnq75s3DT94OgbEaE4+B6iOPL5Pc51KyxjEM7cR2vapZaAMs9fzG1c0cbmgcI/bao
+ eNtvoTQq5Xr//JlXhpfBWaM5GTurYoMY+pIqqxsmIfLUsd5rhFkRqVjlFPAS/aNa7e5z
+ VTT/CgznryTU1Vgt0Z6Q489XHB+RFPcuhDz7RhzHEdSKdXKNjGNhjk1otwmPDbaDMEyx
+ bFJw==
+X-Gm-Message-State: AOAM531XuLyc9mUL8mVQwFIzxtSqNvKieTW+JEw5seVV0mQoCST4OAjA
+ pEOjPB9Ng5WBjNZ5qQMHml0=
+X-Google-Smtp-Source: ABdhPJzj6sKBOsEL8o563s+cwBODl1NfFJXXI3GJ7tYjFnrfXqfA/+yv6JK2vRWqP74c741h8PSBmA==
+X-Received: by 2002:a1c:7d43:: with SMTP id y64mr9673774wmc.46.1589450495718; 
+ Thu, 14 May 2020 03:01:35 -0700 (PDT)
+Received: from
+ liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net
+ ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id w15sm14050208wmi.35.2020.05.14.03.01.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 May 2020 03:01:35 -0700 (PDT)
+Date: Thu, 14 May 2020 10:01:33 +0000
+From: Wei Liu <wl@xen.org>
+To: Hongyan Xia <hx242@xen.org>
+Subject: Re: [PATCH] domain_page: handle NULL within unmap_domain_page() itself
+Message-ID: <20200514100133.ne3ed6laazrta3xa@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
+References: <a3ddf0c755227a3c742f6b93783c576135a86874.1589384602.git.hongyxia@amazon.com>
 MIME-Version: 1.0
-In-Reply-To: <479b4738-2127-998a-2d8e-c7a9af8ff0a3@suse.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a3ddf0c755227a3c742f6b93783c576135a86874.1589384602.git.hongyxia@amazon.com>
+User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,48 +79,22 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 14.05.20 11:55, Jan Beulich wrote:
-> On 08.05.2020 17:34, Juergen Gross wrote:
->> --- /dev/null
->> +++ b/xen/include/xen/hypfs.h
->> @@ -0,0 +1,122 @@
->> +#ifndef __XEN_HYPFS_H__
->> +#define __XEN_HYPFS_H__
->> +
->> +#ifdef CONFIG_HYPFS
->> +#include <xen/list.h>
->> +#include <xen/string.h>
->> +#include <public/hypfs.h>
->> +
->> +struct hypfs_entry_leaf;
->> +
->> +struct hypfs_entry {
->> +    unsigned short type;
->> +    unsigned short encoding;
->> +    unsigned int size;
->> +    unsigned int max_size;
+On Wed, May 13, 2020 at 04:43:33PM +0100, Hongyan Xia wrote:
+> From: Hongyan Xia <hongyxia@amazon.com>
 > 
-> Btw with these, ...
+> The macro version UNMAP_DOMAIN_PAGE() does both NULL checking and
+> variable clearing. Move NULL checking into the function itself so that
+> the semantics is consistent with other similar constructs like XFREE().
+> This also eases the use unmap_domain_page() in error handling paths,
+> where we only care about NULL checking but not about variable clearing.
 > 
->> +    const char *name;
->> +    struct list_head list;
->> +    int (*read)(const struct hypfs_entry *entry,
->> +                XEN_GUEST_HANDLE_PARAM(void) uaddr);
->> +    int (*write)(struct hypfs_entry_leaf *leaf,
->> +                 XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned long ulen);
-> 
-> ... why unsigned long here (noticed while looking at patch 9)?
+> Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 
-Indeed, will switch to unsigned int.
-
-
-Juergen
-
+Reviewed-by: Wei Liu <wl@xen.org>
 
