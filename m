@@ -2,102 +2,98 @@ Return-Path: <SRS0=xDB7=64=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 96569C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 16:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0974DC433E1
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 16:36:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5FC472065D
-	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 16:30:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D08D2206A5
+	for <xen-devel@archiver.kernel.org>; Thu, 14 May 2020 16:36:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="O9ZwrLxH"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FC472065D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="TJ1w2WXW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D08D2206A5
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZGkH-00065R-Pf; Thu, 14 May 2020 16:30:05 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jZGpv-0006MD-QZ; Thu, 14 May 2020 16:35:55 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=otfA=64=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jZGkF-0005nF-MN
- for xen-devel@lists.xenproject.org; Thu, 14 May 2020 16:30:03 +0000
-X-Inumbo-ID: 2920d00e-9600-11ea-a4b1-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2920d00e-9600-11ea-a4b1-12813bfff9fa;
- Thu, 14 May 2020 16:30:02 +0000 (UTC)
+ <SRS0=NlH/=64=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1jZGpu-0006M1-JX
+ for xen-devel@lists.xenproject.org; Thu, 14 May 2020 16:35:54 +0000
+X-Inumbo-ID: fa70211e-9600-11ea-9887-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id fa70211e-9600-11ea-9887-bc764e2007e4;
+ Thu, 14 May 2020 16:35:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1589473803;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:content-transfer-encoding:in-reply-to;
- bh=/9nygPkkp5Q+lpg2QhK9iP++CHjileKsIkdOdkAm6YE=;
- b=O9ZwrLxHaB5AtRq5wyzVBbja8Pg+9vgqNJI+dfjDnZ/fvcp3SygtMfcU
- YJrcCiSRCxGisG57KW2plTLSzDCEPy7bHkteW79ModPtDXCWU3xrj+bJO
- 1I7pGfYB34T3pKK9iQHBWzsxPtFULzzpTCwSKClwM/7XZwp+G9K/tNFxq A=;
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+ d=citrix.com; s=securemail; t=1589474154;
+ h=from:mime-version:content-transfer-encoding:message-id:
+ date:to:cc:subject:in-reply-to:references;
+ bh=qwtVVp+ccBGno3qwbkxZ3SGpiyVoSG6FcIf+fQ/YyHk=;
+ b=TJ1w2WXWZKRFGyy5S7Ks5PZpxh4eCVUK/ifC2A0SRbQVcjMUgQtGXSG1
+ 2gaxYb0pBVEmH3n9iDz6uxZzah0V4n+Qe6j7sgI0NDo/n2K8FTar4J4g6
+ QuyB/fVTGi8GVnKfObzKrYmVxEmUF0LJW9nnl1Bm6t1sdJeorr+ohHs3p Q=;
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa3.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
+ ian.jackson@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="Ian.Jackson@citrix.com";
+ x-sender="ian.jackson@citrix.com"; x-conformance=sidf_compatible
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
+ Ian.Jackson@citrix.com designates 162.221.158.21 as permitted
  sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
+ receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="Ian.Jackson@citrix.com";
+ x-sender="Ian.Jackson@citrix.com";
  x-conformance=sidf_compatible; x-record-type="v=spf1";
  x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
  ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
  ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
  ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
  ip4:168.245.78.127 ~all"
-Received-SPF: None (esa3.hc3370-68.iphmx.com: no sender
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
  authenticity information available from domain of
  postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa3.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="Ian.Jackson@citrix.com";
  x-sender="postmaster@mail.citrix.com";
  x-conformance=sidf_compatible
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
+ spf=None smtp.pra=ian.jackson@citrix.com;
+ spf=Pass smtp.mailfrom=Ian.Jackson@citrix.com;
  spf=None smtp.helo=postmaster@mail.citrix.com;
  dmarc=pass (p=none dis=none) d=citrix.com
-IronPort-SDR: uiOcC6PytHKgVWXDkSN386MNBT6O4rE2AsztKQw0bcwYqVetUPKuSxyG5FnwlMY1zdpmU8Kh0t
- TklHLq14m3Zqmqd4dj9yDgyO6AbDpvdZ704OlI7fdZEU0pSIQQBLfrxrYkYuXbbzE5U4E+aL09
- nueJ9N2HUbEizLw1W7JplXGS31YzYBrfOzJMqg/wUQQNQKinGY3w7oZILxp4M871FxytfW7JRj
- k7JYMYCt33+CIHyOZYbi+KTuwreE/UkujJhgbHvsN1oWQ5l4qy+v0ANEWkTkdYadZFeEoLQ6Ny
- tJ0=
+IronPort-SDR: zR9S7KlqnsrROAKQGc3slbURnWZASnugNjse+qecOgBEeTlVZwStzRSMNFps9hNoGQoaSjFbl6
+ gM+KWR0mDq70ZlzrDdSdRysjyjeNru3E98d0AElo7txde/VJNIu7VDPjYzfJhqWyTV2If/lMUc
+ M3OxzrILj2geDS8K4xXTRxkPJ5J2ZNXtj0kZazR6J8u/bGQr1qeiA4JuRFx4q5Jy5uo4j5Z+G2
+ WH3PFasXwWJQq6lC9FzUyw0eYH/rzrSIg1etm60soexK2ln+dNQo9ly7dH53+HPw4EdaP60JZO
+ N4o=
 X-SBRS: 2.7
-X-MesageID: 17541766
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 17817132
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,392,1583211600"; d="scan'208";a="17541766"
-Date: Thu, 14 May 2020 18:29:55 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: [PATCH v2 5/6] x86/mem-paging: move code to its dedicated source
- file
-Message-ID: <20200514162955.GJ54375@Air-de-Roger>
-References: <b8437b1f-af58-70df-91d2-bd875912e57b@suse.com>
- <b9b189b1-9484-4501-6085-adf86e73f262@suse.com>
+X-IronPort-AV: E=Sophos;i="5.73,392,1583211600"; d="scan'208";a="17817132"
+From: Ian Jackson <ian.jackson@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <b9b189b1-9484-4501-6085-adf86e73f262@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+Message-ID: <24253.29542.373728.684202@mariner.uk.xensource.com>
+Date: Thu, 14 May 2020 17:35:50 +0100
+To: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: [PATCH v5 10/21] tools: add missing libxenvchan cflags
+In-Reply-To: <20200428040433.23504-11-jandryuk@gmail.com>
+References: <20200428040433.23504-1-jandryuk@gmail.com>
+ <20200428040433.23504-11-jandryuk@gmail.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -109,18 +105,16 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>, Andrew
- Cooper <andrew.cooper3@citrix.com>
+ Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?=
+ <marmarek@invisiblethingslab.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Thu, Apr 23, 2020 at 10:39:17AM +0200, Jan Beulich wrote:
-> Do a little bit of style adjustment along the way, and drop the
-> "p2m_mem_paging_" prefixes from the now static functions.
+Jason Andryuk writes ("[PATCH v5 10/21] tools: add missing libxenvchan cflags"):
+> From: Marek Marczykowski-GÛrecki <marmarek@invisiblethingslab.com>
 > 
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> libxenvchan.h include xenevtchn.h and xengnttab.h, so applications built
+> with it needs applicable -I in CFLAGS too.
 
-Reviewed-by: Roger Pau Monn√© <roger.pau@citrix.com>
-
-Thanks, Roger.
+Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
 
