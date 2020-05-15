@@ -6,41 +6,41 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E24F2C433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E6D77C433E2
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A413A20758
+	by mail.kernel.org (Postfix) with ESMTPS id A380D2074D
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A413A20758
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A380D2074D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZYzd-0004l8-8T; Fri, 15 May 2020 11:59:09 +0000
+	id 1jZYzX-0004kF-MG; Fri, 15 May 2020 11:59:03 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=yAEg=65=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jZYzc-0004ky-4v
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 11:59:08 +0000
-X-Inumbo-ID: 7726e7a5-96a3-11ea-a554-12813bfff9fa
+ id 1jZYzX-0004kA-8X
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 11:59:03 +0000
+X-Inumbo-ID: 76ee0704-96a3-11ea-a554-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7726e7a5-96a3-11ea-a554-12813bfff9fa;
+ id 76ee0704-96a3-11ea-a554-12813bfff9fa;
  Fri, 15 May 2020 11:59:01 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 232DAAE96;
- Fri, 15 May 2020 11:59:03 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 700D2AE52;
+ Fri, 15 May 2020 11:59:02 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v9 03/12] docs: add feature document for Xen hypervisor
- sysfs-like support
-Date: Fri, 15 May 2020 13:58:47 +0200
-Message-Id: <20200515115856.11965-4-jgross@suse.com>
+Subject: [PATCH v9 01/12] xen/vmx: let opt_ept_ad always reflect the current
+ setting
+Date: Fri, 15 May 2020 13:58:45 +0200
+Message-Id: <20200515115856.11965-2-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200515115856.11965-1-jgross@suse.com>
 References: <20200515115856.11965-1-jgross@suse.com>
@@ -56,270 +56,117 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On the 2019 Xen developer summit there was agreement that the Xen
-hypervisor should gain support for a hierarchical name-value store
-similar to the Linux kernel's sysfs.
+In case opt_ept_ad has not been set explicitly by the user via command
+line or runtime parameter, it is treated as "no" on Avoton cpus.
 
-In the beginning there should only be basic support: entries can be
-added from the hypervisor itself only, there is a simple hypercall
-interface to read the data.
+Change that handling by setting opt_ept_ad to 0 for this cpu type
+explicitly if no user value has been set.
 
-Add a feature document for setting the base of a discussion regarding
-the desired functionality and the entries to add.
+By putting this into the (renamed) boot time initialization of vmcs.c
+_vmx_cpu_up() can be made static.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V1:
-- remove the "--" prefixes of the sub-commands of the user tool
-  (Jan Beulich)
-- rename xenfs to xenhypfs (Jan Beulich)
-- add "tree" and "write" options to user tool
+ xen/arch/x86/hvm/vmx/vmcs.c        | 22 +++++++++++++++-------
+ xen/arch/x86/hvm/vmx/vmx.c         |  4 +---
+ xen/include/asm-x86/hvm/vmx/vmcs.h |  3 +--
+ 3 files changed, 17 insertions(+), 12 deletions(-)
 
-V2:
-- move example tree to the paths description (Ian Jackson)
-- specify allowed characters for keys and values (Ian Jackson)
-
-V3:
-- correct introduction (writable entries)
-
-V4:
-- add list specification
-- add entry example (Julien Grall)
-- correct date and Xen version (Julien Grall)
-- add ARM64 as possible architecture (Julien Grall)
-- add version description to the feature doc (Jan Beulich)
-
-V8:
-- clarify syntax used in hypfs-paths.pandoc (George Dunlap)
-
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
- docs/features/hypervisorfs.pandoc |  92 +++++++++++++++++++++++++
- docs/misc/hypfs-paths.pandoc      | 107 ++++++++++++++++++++++++++++++
- 2 files changed, 199 insertions(+)
- create mode 100644 docs/features/hypervisorfs.pandoc
- create mode 100644 docs/misc/hypfs-paths.pandoc
-
-diff --git a/docs/features/hypervisorfs.pandoc b/docs/features/hypervisorfs.pandoc
-new file mode 100644
-index 0000000000..a0a0ead057
---- /dev/null
-+++ b/docs/features/hypervisorfs.pandoc
-@@ -0,0 +1,92 @@
-+% Hypervisor FS
-+% Revision 1
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 4c23645454..221af9737a 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -315,10 +315,6 @@ static int vmx_init_vmcs_config(void)
+ 
+         if ( !opt_ept_ad )
+             _vmx_ept_vpid_cap &= ~VMX_EPT_AD_BIT;
+-        else if ( /* Work around Erratum AVR41 on Avoton processors. */
+-                  boot_cpu_data.x86 == 6 && boot_cpu_data.x86_model == 0x4d &&
+-                  opt_ept_ad < 0 )
+-            _vmx_ept_vpid_cap &= ~VMX_EPT_AD_BIT;
+ 
+         /*
+          * Additional sanity checking before using EPT:
+@@ -652,7 +648,7 @@ void vmx_cpu_dead(unsigned int cpu)
+     vmx_pi_desc_fixup(cpu);
+ }
+ 
+-int _vmx_cpu_up(bool bsp)
++static int _vmx_cpu_up(bool bsp)
+ {
+     u32 eax, edx;
+     int rc, bios_locked, cpu = smp_processor_id();
+@@ -2108,9 +2104,21 @@ static void vmcs_dump(unsigned char ch)
+     printk("**************************************\n");
+ }
+ 
+-void __init setup_vmcs_dump(void)
++int __init vmx_vmcs_init(void)
+ {
+-    register_keyhandler('v', vmcs_dump, "dump VT-x VMCSs", 1);
++    int ret;
 +
-+\clearpage
++    if ( opt_ept_ad < 0 )
++        /* Work around Erratum AVR41 on Avoton processors. */
++        opt_ept_ad = !(boot_cpu_data.x86 == 6 &&
++                       boot_cpu_data.x86_model == 0x4d);
 +
-+# Basics
-+---------------- ---------------------
-+         Status: **Supported**
++    ret = _vmx_cpu_up(true);
 +
-+  Architectures: all
++    if ( !ret )
++        register_keyhandler('v', vmcs_dump, "dump VT-x VMCSs", 1);
 +
-+     Components: Hypervisor, toolstack
-+---------------- ---------------------
-+
-+# Overview
-+
-+The Hypervisor FS is a hierarchical name-value store for reporting
-+information to guests, especially dom0. It is similar to the Linux
-+kernel's sysfs. Entries and directories are created by the hypervisor,
-+while the toolstack is able to use a hypercall to query the entry
-+values or (if allowed by the hypervisor) to modify them.
-+
-+# User details
-+
-+With:
-+
-+    xenhypfs ls <path>
-+
-+the user can list the entries of a specific path of the FS. Using:
-+
-+    xenhypfs cat <path>
-+
-+the content of an entry can be retrieved. Using:
-+
-+    xenhypfs write <path> <string>
-+
-+a writable entry can be modified. With:
-+
-+    xenhypfs tree
-+
-+the complete Hypervisor FS entry tree can be printed.
-+
-+The FS paths are documented in `docs/misc/hypfs-paths.pandoc`.
-+
-+# Technical details
-+
-+Access to the hypervisor filesystem is done via the stable new hypercall
-+__HYPERVISOR_filesystem_op. This hypercall supports a sub-command
-+XEN_HYPFS_OP_get_version which will return the highest version of the
-+interface supported by the hypervisor. Additions to the interface need
-+to bump the interface version. The hypervisor is required to support the
-+previous interface versions, too (this implies that additions will always
-+require new sub-commands in order to allow the hypervisor to decide which
-+version of the interface to use).
-+
-+* hypercall interface specification
-+    * `xen/include/public/hypfs.h`
-+* hypervisor internal files
-+    * `xen/include/xen/hypfs.h`
-+    * `xen/common/hypfs.c`
-+* `libxenhypfs`
-+    * `tools/libs/libxenhypfs/*`
-+* `xenhypfs`
-+    * `tools/misc/xenhypfs.c`
-+* path documentation
-+    * `docs/misc/hypfs-paths.pandoc`
-+
-+# Testing
-+
-+Any new parameters or hardware mitigations should be verified to show up
-+correctly in the filesystem.
-+
-+# Areas for improvement
-+
-+* More detailed access rights
-+* Entries per domain and/or per cpupool
-+
-+# Known issues
-+
-+* None
-+
-+# References
-+
-+* None
-+
-+# History
-+
-+------------------------------------------------------------------------
-+Date       Revision Version  Notes
-+---------- -------- -------- -------------------------------------------
-+2020-01-23 1        Xen 4.14 Document written
-+---------- -------- -------- -------------------------------------------
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-new file mode 100644
-index 0000000000..39539fa1b5
---- /dev/null
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -0,0 +1,107 @@
-+# Xenhypfs Paths
-+
-+This document attempts to define all the paths which are available
-+in the Xen hypervisor file system (hypfs).
-+
-+The hypervisor file system can be accessed via the xenhypfs tool.
-+
-+## Notation
-+
-+The hypervisor file system is similar to the Linux kernel's sysfs.
-+In this document directories are always specified with a trailing "/".
-+
-+The following notation conventions apply:
-+
-+        DIRECTORY/
-+
-+        PATH = VALUES [TAGS]
-+
-+The first syntax defines a directory. It normally contains related
-+entries and the general scope of the directory is described.
-+
-+The second syntax defines a file entry containing values which are
-+either set by the hypervisor or, if the file is writable, can be set
-+by the user.
-+
-+PATH can contain simple regex constructs following the Perl compatible
-+regexp syntax described in pcre(3) or perlre(1).
-+
-+A hypervisor file system entry name can be any 0-delimited byte string
-+not containing any '/' character. The names "." and ".." are reserved
-+for file system internal use.
-+
-+VALUES are strings and can take the following forms (note that this represents
-+only the syntax used in this document):
-+
-+* STRING -- an arbitrary 0-delimited byte string.
-+* INTEGER -- An integer, in decimal representation unless otherwise
-+  noted.
-+* "a literal string" -- literal strings are contained within quotes.
-+* (VALUE | VALUE | ... ) -- a set of alternatives. Alternatives are
-+  separated by a "|" and all the alternatives are enclosed in "(" and
-+  ")".
-+* {VALUE, VALUE, ... } -- a list of possible values separated by "," and
-+  enclosed in "{" and "}".
-+
-+Additional TAGS may follow as a comma separated set of the following
-+tags enclosed in square brackets.
-+
-+* w -- Path is writable by the user. This capability is usually
-+  limited to the control domain (e.g. dom0).
-+* ARM | ARM32 | ARM64 | X86: the path is available for the respective
-+  architecture only.
-+* PV --  Path is valid for PV capable hypervisors only.
-+* HVM -- Path is valid for HVM capable hypervisors only.
-+* CONFIG_* -- Path is valid only in case the hypervisor was built with
-+  the respective config option.
-+
-+So an entry could look like this:
-+
-+    /cpu-bugs/active-pv/xpti = ("No"|{"dom0", "domU", "PCID-on"}) [w,X86,PV]
-+
-+Possible values would be "No" or a list of "dom0", "domU", and "PCID-on" with
-+the list elements separated by spaces, e.g. "dom0 PCID-on".
-+The entry would be writable and it would exist on X86 only and only if the
-+hypervisor is configured to support PV guests.
-+
-+## Example
-+
-+A populated Xen hypervisor file system might look like the following example:
-+
-+    /
-+        buildinfo/           directory containing build-time data
-+            config           contents of .config file used to build Xen
-+        cpu-bugs/            x86: directory of cpu bug information
-+            l1tf             "Vulnerable" or "Not vulnerable"
-+            mds              "Vulnerable" or "Not vulnerable"
-+            meltdown         "Vulnerable" or "Not vulnerable"
-+            spec-store-bypass "Vulnerable" or "Not vulnerable"
-+            spectre-v1       "Vulnerable" or "Not vulnerable"
-+            spectre-v2       "Vulnerable" or "Not vulnerable"
-+            mitigations/     directory of mitigation settings
-+                bti-thunk    "N/A", "RETPOLINE", "LFENCE" or "JMP"
-+                spec-ctrl    "No", "IBRS+" or "IBRS-"
-+                ibpb         "No" or "Yes"
-+                l1d-flush    "No" or "Yes"
-+                md-clear     "No" or "VERW"
-+                l1tf-barrier "No" or "Yes"
-+            active-hvm/      directory for mitigations active in hvm doamins
-+                msr-spec-ctrl "No" or "Yes"
-+                rsb          "No" or "Yes"
-+                eager-fpu    "No" or "Yes"
-+                md-clear     "No" or "Yes"
-+            active-pv/       directory for mitigations active in pv doamins
-+                msr-spec-ctrl "No" or "Yes"
-+                rsb          "No" or "Yes"
-+                eager-fpu    "No" or "Yes"
-+                md-clear     "No" or "Yes"
-+                xpti         "No" or list of "dom0", "domU", "PCID-on"
-+                l1tf-shadow  "No" or list of "dom0", "domU"
-+        params/              directory with hypervisor parameter values
-+                             (boot/runtime parameters)
-+
-+## General Paths
-+
-+#### /
-+
-+The root of the hypervisor file system.
++    return ret;
+ }
+ 
+ static void __init __maybe_unused build_assertions(void)
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 6efa80e422..11a4dd94cf 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2482,7 +2482,7 @@ const struct hvm_function_table * __init start_vmx(void)
+ {
+     set_in_cr4(X86_CR4_VMXE);
+ 
+-    if ( _vmx_cpu_up(true) )
++    if ( vmx_vmcs_init() )
+     {
+         printk("VMX: failed to initialise.\n");
+         return NULL;
+@@ -2553,8 +2553,6 @@ const struct hvm_function_table * __init start_vmx(void)
+         vmx_function_table.get_guest_bndcfgs = vmx_get_guest_bndcfgs;
+     }
+ 
+-    setup_vmcs_dump();
+-
+     lbr_tsx_fixup_check();
+     bdf93_fixup_check();
+ 
+diff --git a/xen/include/asm-x86/hvm/vmx/vmcs.h b/xen/include/asm-x86/hvm/vmx/vmcs.h
+index 95c1dea7b8..906810592f 100644
+--- a/xen/include/asm-x86/hvm/vmx/vmcs.h
++++ b/xen/include/asm-x86/hvm/vmx/vmcs.h
+@@ -21,11 +21,10 @@
+ #include <xen/mm.h>
+ 
+ extern void vmcs_dump_vcpu(struct vcpu *v);
+-extern void setup_vmcs_dump(void);
++extern int vmx_vmcs_init(void);
+ extern int  vmx_cpu_up_prepare(unsigned int cpu);
+ extern void vmx_cpu_dead(unsigned int cpu);
+ extern int  vmx_cpu_up(void);
+-extern int  _vmx_cpu_up(bool bsp);
+ extern void vmx_cpu_down(void);
+ 
+ struct vmcs_struct {
 -- 
 2.26.1
 
