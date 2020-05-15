@@ -2,45 +2,47 @@ Return-Path: <SRS0=3DVc=65=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1B084C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BCD18C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:45 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E423D2074D
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E423D2074D
+	by mail.kernel.org (Postfix) with ESMTPS id 9742A206D4
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9742A206D4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZYzn-0004q9-Ei; Fri, 15 May 2020 11:59:19 +0000
+	id 1jZYzs-0004sv-PG; Fri, 15 May 2020 11:59:24 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=yAEg=65=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jZYzm-0004p5-5F
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 11:59:18 +0000
-X-Inumbo-ID: 7714b584-96a3-11ea-a554-12813bfff9fa
+ id 1jZYzr-0004rs-5Z
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 11:59:23 +0000
+X-Inumbo-ID: 787698b6-96a3-11ea-a554-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7714b584-96a3-11ea-a554-12813bfff9fa;
- Fri, 15 May 2020 11:59:01 +0000 (UTC)
+ id 787698b6-96a3-11ea-a554-12813bfff9fa;
+ Fri, 15 May 2020 11:59:03 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 71777AE70;
- Fri, 15 May 2020 11:59:02 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id C5734AECD;
+ Fri, 15 May 2020 11:59:03 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v9 00/12] Add hypervisor sysfs-like support
-Date: Fri, 15 May 2020 13:58:44 +0200
-Message-Id: <20200515115856.11965-1-jgross@suse.com>
+Subject: [PATCH v9 06/12] tools: add xenfs tool
+Date: Fri, 15 May 2020 13:58:50 +0200
+Message-Id: <20200515115856.11965-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
+In-Reply-To: <20200515115856.11965-1-jgross@suse.com>
+References: <20200515115856.11965-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -53,163 +55,354 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
+Cc: Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Anthony PERARD <anthony.perard@citrix.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On the 2019 Xen developer summit there was agreement that the Xen
-hypervisor should gain support for a hierarchical name-value store
-similar to the Linux kernel's sysfs.
+Add the xenfs tool for accessing the hypervisor filesystem.
 
-This is a first implementation of that idea adding the basic
-functionality to hypervisor and tools side. The interface to any
-user program making use of that "xen-hypfs" is a new library
-"libxenhypfs" with a stable interface.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Wei Liu <wl@xen.org>
+---
+V1:
+- rename to xenhypfs
+- don't use "--" for subcommands
+- add write support
 
-The series adds read-only nodes with buildinfo data and writable
-nodes with runtime parameters. xl is switched to use the new file
-system for modifying the runtime parameters and the old sysctl
-interface for that purpose is dropped.
+V2:
+- escape non-printable characters per default with cat subcommand
+  (Ian Jackson)
+- add -b option to cat subcommand (Ian Jackson)
+- add man page
 
-Changes in V9:
-- addressed review comments
+V3:
+- adapt to new hypfs interface
 
-Changes in V8:
-- addressed review comments
-- added CONFIG_HYPFS config option
+V7:
+- added missing bool for ls output
 
-Changes in V7:
-- old patch 1 already applied
-- add new patch 1 (carved out and modified from patch 9)
-- addressed review comments
-- modified public interface to have a max write size instead of a
-  writable flag only
-
-Changes in V6:
-- added new patches 1, 10, 11, 12
-- addressed review comments
-- modified interface for creating nodes for runtime parameters
-
-Changes in V5:
-- switched to xsm for privilege check
-
-Changes in V4:
-- former patch 2 removed as already committed
-- addressed review comments
-
-Changes in V3:
-- major rework, especially by supporting binary contents of entries
-- added several new patches (1, 2, 7)
-- full support of all runtime parameters
-- support of writing entries (especially runtime parameters)
-
-Changes in V2:
-- all comments to V1 addressed
-- added man-page for xenhypfs tool
-- added runtime parameter read access for string parameters
-
-Changes in V1:
-- renamed xenfs ->xenhypfs
-- added writable entries support at the interface level and in the
-  xenhypfs tool
-- added runtime parameter read access (integer type only for now)
-- added docs/misc/hypfs-paths.pandoc for path descriptions
-
-Juergen Gross (12):
-  xen/vmx: let opt_ept_ad always reflect the current setting
-  xen: add a generic way to include binary files as variables
-  docs: add feature document for Xen hypervisor sysfs-like support
-  xen: add basic hypervisor filesystem support
-  libs: add libxenhypfs
-  tools: add xenfs tool
-  xen: provide version information in hypfs
-  xen: add /buildinfo/config entry to hypervisor filesystem
-  xen: add runtime parameter access support to hypfs
-  tools/libxl: use libxenhypfs for setting xen runtime parameters
-  tools/libxc: remove xc_set_parameters()
-  xen: remove XEN_SYSCTL_set_parameter support
-
- .gitignore                          |   6 +
- docs/features/hypervisorfs.pandoc   |  92 +++++
- docs/man/xenhypfs.1.pod             |  61 ++++
- docs/misc/hypfs-paths.pandoc        | 165 +++++++++
- tools/Rules.mk                      |   8 +-
- tools/flask/policy/modules/dom0.te  |   4 +-
- tools/libs/Makefile                 |   1 +
- tools/libs/hypfs/Makefile           |  16 +
- tools/libs/hypfs/core.c             | 536 ++++++++++++++++++++++++++++
- tools/libs/hypfs/include/xenhypfs.h |  90 +++++
- tools/libs/hypfs/libxenhypfs.map    |  10 +
- tools/libs/hypfs/xenhypfs.pc.in     |  10 +
- tools/libxc/include/xenctrl.h       |   1 -
- tools/libxc/xc_misc.c               |  21 --
- tools/libxl/Makefile                |   3 +-
- tools/libxl/libxl.c                 |  53 ++-
- tools/libxl/libxl_internal.h        |   1 +
- tools/libxl/xenlight.pc.in          |   2 +-
- tools/misc/Makefile                 |   6 +
- tools/misc/xenhypfs.c               | 192 ++++++++++
- tools/xl/xl_misc.c                  |   1 -
- xen/arch/arm/traps.c                |   3 +
- xen/arch/arm/xen.lds.S              |  13 +-
- xen/arch/x86/hvm/hypercall.c        |   3 +
- xen/arch/x86/hvm/vmx/vmcs.c         |  47 ++-
- xen/arch/x86/hvm/vmx/vmx.c          |   4 +-
- xen/arch/x86/hypercall.c            |   3 +
- xen/arch/x86/pv/domain.c            |  21 +-
- xen/arch/x86/pv/hypercall.c         |   3 +
- xen/arch/x86/xen.lds.S              |  12 +-
- xen/common/Kconfig                  |  23 ++
- xen/common/Makefile                 |  13 +
- xen/common/grant_table.c            |  62 +++-
- xen/common/hypfs.c                  | 448 +++++++++++++++++++++++
- xen/common/kernel.c                 |  84 ++++-
- xen/common/sysctl.c                 |  36 --
- xen/drivers/char/console.c          |  72 +++-
- xen/include/Makefile                |   1 +
- xen/include/asm-x86/hvm/vmx/vmcs.h  |   3 +-
- xen/include/public/hypfs.h          | 129 +++++++
- xen/include/public/sysctl.h         |  19 +-
- xen/include/public/xen.h            |   1 +
- xen/include/xen/hypercall.h         |  10 +
- xen/include/xen/hypfs.h             | 123 +++++++
- xen/include/xen/kernel.h            |   3 +
- xen/include/xen/lib.h               |   1 -
- xen/include/xen/param.h             | 126 +++++--
- xen/include/xlat.lst                |   2 +
- xen/include/xsm/dummy.h             |   6 +
- xen/include/xsm/xsm.h               |   6 +
- xen/tools/binfile                   |  41 +++
- xen/xsm/dummy.c                     |   1 +
- xen/xsm/flask/Makefile              |   5 +-
- xen/xsm/flask/flask-policy.S        |  16 -
- xen/xsm/flask/hooks.c               |   9 +-
- xen/xsm/flask/policy/access_vectors |   4 +-
- 56 files changed, 2439 insertions(+), 193 deletions(-)
- create mode 100644 docs/features/hypervisorfs.pandoc
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ .gitignore              |   1 +
+ docs/man/xenhypfs.1.pod |  61 +++++++++++++
+ tools/misc/Makefile     |   6 ++
+ tools/misc/xenhypfs.c   | 192 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 260 insertions(+)
  create mode 100644 docs/man/xenhypfs.1.pod
- create mode 100644 docs/misc/hypfs-paths.pandoc
- create mode 100644 tools/libs/hypfs/Makefile
- create mode 100644 tools/libs/hypfs/core.c
- create mode 100644 tools/libs/hypfs/include/xenhypfs.h
- create mode 100644 tools/libs/hypfs/libxenhypfs.map
- create mode 100644 tools/libs/hypfs/xenhypfs.pc.in
  create mode 100644 tools/misc/xenhypfs.c
- create mode 100644 xen/common/hypfs.c
- create mode 100644 xen/include/public/hypfs.h
- create mode 100644 xen/include/xen/hypfs.h
- create mode 100755 xen/tools/binfile
- delete mode 100644 xen/xsm/flask/flask-policy.S
 
+diff --git a/.gitignore b/.gitignore
+index 7bd292f64d..6171b3b43f 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -368,6 +368,7 @@ tools/libxl/test_timedereg
+ tools/libxl/test_fdderegrace
+ tools/firmware/etherboot/eb-roms.h
+ tools/firmware/etherboot/gpxe-git-snapshot.tar.gz
++tools/misc/xenhypfs
+ tools/misc/xenwatchdogd
+ tools/misc/xen-hvmcrash
+ tools/misc/xen-lowmemd
+diff --git a/docs/man/xenhypfs.1.pod b/docs/man/xenhypfs.1.pod
+new file mode 100644
+index 0000000000..37aa488fcc
+--- /dev/null
++++ b/docs/man/xenhypfs.1.pod
+@@ -0,0 +1,61 @@
++=head1 NAME
++
++xenhypfs - Xen tool to access Xen hypervisor file system
++
++=head1 SYNOPSIS
++
++B<xenhypfs> I<subcommand> [I<options>] [I<args>]
++
++=head1 DESCRIPTION
++
++The B<xenhypfs> program is used to access the Xen hypervisor file system.
++It can be used to show the available entries, to show their contents and
++(if allowed) to modify their contents.
++
++=head1 SUBCOMMANDS
++
++=over 4
++
++=item B<ls> I<path>
++
++List the available entries below I<path>.
++
++=item B<cat> [I<-b>] I<path>
++
++Show the contents of the entry specified by I<path>. Non-printable characters
++other than white space characters (like tab, new line) will be shown as
++B<\xnn> (B<nn> being a two digit hex number) unless the option B<-b> is
++specified.
++
++=item B<write> I<path> I<value>
++
++Set the contents of the entry specified by I<path> to I<value>.
++
++=item B<tree>
++
++Show all the entries of the file system as a tree.
++
++=back
++
++=head1 RETURN CODES
++
++=over 4
++
++=item B<0>
++
++Success
++
++=item B<1>
++
++Invalid usage (e.g. unknown subcommand, unknown option, missing parameter).
++
++=item B<2>
++
++Entry not found while traversing the tree.
++
++=item B<3>
++
++Access right violation.
++
++=back
++
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 63947bfadc..9fdb13597f 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -24,6 +24,7 @@ INSTALL_SBIN-$(CONFIG_X86)     += xen-lowmemd
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-mfndump
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-ucode
+ INSTALL_SBIN                   += xencov
++INSTALL_SBIN                   += xenhypfs
+ INSTALL_SBIN                   += xenlockprof
+ INSTALL_SBIN                   += xenperf
+ INSTALL_SBIN                   += xenpm
+@@ -86,6 +87,9 @@ xenperf: xenperf.o
+ xenpm: xenpm.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
++xenhypfs: xenhypfs.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenhypfs) $(APPEND_LDFLAGS)
++
+ xenlockprof: xenlockprof.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
+@@ -94,6 +98,8 @@ xen-hptool.o: CFLAGS += -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
+ xen-hptool: xen-hptool.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenstore) $(APPEND_LDFLAGS)
+ 
++xenhypfs.o: CFLAGS += $(CFLAGS_libxenhypfs)
++
+ # xen-mfndump incorrectly uses libxc internals
+ xen-mfndump.o: CFLAGS += -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
+ xen-mfndump: xen-mfndump.o
+diff --git a/tools/misc/xenhypfs.c b/tools/misc/xenhypfs.c
+new file mode 100644
+index 0000000000..158b901f42
+--- /dev/null
++++ b/tools/misc/xenhypfs.c
+@@ -0,0 +1,192 @@
++#define _GNU_SOURCE
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <xenhypfs.h>
++
++static struct xenhypfs_handle *hdl;
++
++static int usage(void)
++{
++    fprintf(stderr, "usage: xenhypfs ls <path>\n");
++    fprintf(stderr, "       xenhypfs cat [-b] <path>\n");
++    fprintf(stderr, "       xenhypfs write <path> <val>\n");
++    fprintf(stderr, "       xenhypfs tree\n");
++
++    return 1;
++}
++
++static void xenhypfs_print_escaped(char *string)
++{
++    char *c;
++
++    for (c = string; *c; c++) {
++        if (isgraph(*c) || isspace(*c))
++            printf("%c", *c);
++        else
++            printf("\\x%02x", *c);
++    }
++    printf("\n");
++}
++
++static int xenhypfs_cat(int argc, char *argv[])
++{
++    int ret = 0;
++    char *result;
++    char *path;
++    bool bin = false;
++
++    switch (argc) {
++    case 1:
++        path = argv[0];
++        break;
++
++    case 2:
++        if (strcmp(argv[0], "-b"))
++            return usage();
++        bin = true;
++        path = argv[1];
++        break;
++
++    default:
++        return usage();
++    }
++
++    result = xenhypfs_read(hdl, path);
++    if (!result) {
++        perror("could not read");
++        ret = 3;
++    } else {
++        if (!bin)
++            printf("%s\n", result);
++        else
++            xenhypfs_print_escaped(result);
++        free(result);
++    }
++
++    return ret;
++}
++
++static int xenhypfs_wr(char *path, char *val)
++{
++    int ret;
++
++    ret = xenhypfs_write(hdl, path, val);
++    if (ret) {
++        perror("could not write");
++        ret = 3;
++    }
++
++    return ret;
++}
++
++static char *xenhypfs_type(struct xenhypfs_dirent *ent)
++{
++    char *res;
++
++    switch (ent->type) {
++    case xenhypfs_type_dir:
++        res = "<dir>   ";
++        break;
++    case xenhypfs_type_blob:
++        res = "<blob>  ";
++        break;
++    case xenhypfs_type_string:
++        res = "<string>";
++        break;
++    case xenhypfs_type_uint:
++        res = "<uint>  ";
++        break;
++    case xenhypfs_type_int:
++        res = "<int>   ";
++        break;
++    case xenhypfs_type_bool:
++        res = "<bool>  ";
++        break;
++    default:
++        res = "<\?\?\?>   ";
++        break;
++    }
++
++    return res;
++}
++
++static int xenhypfs_ls(char *path)
++{
++    struct xenhypfs_dirent *ent;
++    unsigned int n, i;
++    int ret = 0;
++
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if (!ent) {
++        perror("could not read dir");
++        ret = 3;
++    } else {
++        for (i = 0; i < n; i++)
++            printf("%s r%c %s\n", xenhypfs_type(ent + i),
++                   ent[i].is_writable ? 'w' : '-', ent[i].name);
++
++        free(ent);
++    }
++
++    return ret;
++}
++
++static int xenhypfs_tree_sub(char *path, unsigned int depth)
++{
++    struct xenhypfs_dirent *ent;
++    unsigned int n, i;
++    int ret = 0;
++    char *p;
++
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if (!ent)
++        return 2;
++
++    for (i = 0; i < n; i++) {
++        printf("%*s%s%s\n", depth * 2, "", ent[i].name,
++               ent[i].type == xenhypfs_type_dir ? "/" : "");
++        if (ent[i].type == xenhypfs_type_dir) {
++            asprintf(&p, "%s%s%s", path, (depth == 1) ? "" : "/", ent[i].name);
++            if (xenhypfs_tree_sub(p, depth + 1))
++                ret = 2;
++        }
++    }
++
++    free(ent);
++
++    return ret;
++}
++
++static int xenhypfs_tree(void)
++{
++    printf("/\n");
++
++    return xenhypfs_tree_sub("/", 1);
++}
++
++int main(int argc, char *argv[])
++{
++    int ret;
++
++    hdl = xenhypfs_open(NULL, 0);
++
++    if (!hdl) {
++        fprintf(stderr, "Could not open libxenhypfs\n");
++        ret = 2;
++    } else if (argc >= 3 && !strcmp(argv[1], "cat"))
++        ret = xenhypfs_cat(argc - 2, argv + 2);
++    else if (argc == 3 && !strcmp(argv[1], "ls"))
++        ret = xenhypfs_ls(argv[2]);
++    else if (argc == 4 && !strcmp(argv[1], "write"))
++        ret = xenhypfs_wr(argv[2], argv[3]);
++    else if (argc == 2 && !strcmp(argv[1], "tree"))
++        ret = xenhypfs_tree();
++    else
++        ret = usage();
++
++    xenhypfs_close(hdl);
++
++    return ret;
++}
 -- 
 2.26.1
 
