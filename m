@@ -2,77 +2,99 @@ Return-Path: <SRS0=3DVc=65=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9163AC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 13:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6A572C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 14:13:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5CCA620728
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 13:59:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 35FD52078C
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 14:13:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="sq5WMAsJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CCA620728
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="CJ/RTGh5"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 35FD52078C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZarY-0000TJ-1O; Fri, 15 May 2020 13:58:56 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=j7Zx=65=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jZarW-0000T6-Sv
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 13:58:54 +0000
-X-Inumbo-ID: 36980248-96b4-11ea-b07b-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 36980248-96b4-11ea-b07b-bc764e2007e4;
- Fri, 15 May 2020 13:58:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Mime-Version:Content-Type:
- References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=PWQWXrIuGs7RAXhKWVwKGHVI3lRjEpMtYlHNc3tRSjM=; b=sq5WMAsJn1nO680KN5L6/h5C0d
- hEzUTFsGq65nwZENqishP+cB0P7xiqWCtad+DAyt0HrSjtxDQVm/U8bXy4N7CoPf2BgU56WVPBr1L
- jGw4esiQUnsb17gQt01iI7NQv7/fzY/xUSuzdJdH2km0+BtdI6dg+CbEiBo25KhzCH0g=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hx242@xen.org>)
- id 1jZarT-0000U5-VT; Fri, 15 May 2020 13:58:51 +0000
-Received: from 54-240-197-235.amazon.com ([54.240.197.235]
- helo=freeip.amazon.com) by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <hx242@xen.org>)
- id 1jZarT-0008HY-KL; Fri, 15 May 2020 13:58:51 +0000
-Message-ID: <09b58be54cc40812631653f149e017933a3cfdf8.camel@xen.org>
-Subject: Re: Error during update_runstate_area with KPTI activated
-From: Hongyan Xia <hx242@xen.org>
-To: Julien Grall <julien@xen.org>, Roger Pau =?ISO-8859-1?Q?Monn=E9?=
- <roger.pau@citrix.com>
-Date: Fri, 15 May 2020 14:58:48 +0100
-In-Reply-To: <108a179b-d8ea-01b9-6c6b-9f5cc57f6dc0@xen.org>
-References: <2c4437e9-d513-3e3c-7fec-13ffadc17df2@xen.org>
- <2E95C767-FFE1-4A48-B56D-F858A8CEE5D7@arm.com>
- <ab4f3c2a-95aa-1256-f6f4-0c3057f5600c@xen.org>
- <b6511a29-35a4-a1d0-dd29-7de4103ec98e@citrix.com>
- <CAJ=z9a1H2C6sWiScYw9XXLRcezBfUxYz2semj33D5GpB5=EE_w@mail.gmail.com>
- <478C4829-CCAF-495B-860E-6BA3D86AA47D@arm.com>
- <20200515083838.GN54375@Air-de-Roger>
- <d2033adc-3f98-2d14-ae6d-f8dcd8b90002@xen.org>
- <20200515091018.GO54375@Air-de-Roger>
- <3813cfa2-c881-3fa5-bdf8-a2e874584a9f@xen.org>
- <20200515095751.GQ54375@Air-de-Roger>
- <108a179b-d8ea-01b9-6c6b-9f5cc57f6dc0@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
+	id 1jZb5e-0002RQ-AS; Fri, 15 May 2020 14:13:30 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=CqcK=65=citrix.com=anthony.perard@srs-us1.protection.inumbo.net>)
+ id 1jZb5c-0002RL-Dz
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 14:13:28 +0000
+X-Inumbo-ID: 3ecda0c4-96b6-11ea-a570-12813bfff9fa
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3ecda0c4-96b6-11ea-a570-12813bfff9fa;
+ Fri, 15 May 2020 14:13:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+ d=citrix.com; s=securemail; t=1589552007;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=cC1STYRLTf6YUZdMJFzv2MxI8WzpEFWRewwQ81O2R2g=;
+ b=CJ/RTGh5szvJwNw/9rC4Mx6/Csl5t4VxFmteIHJoV9R2nzwJPNzcOaHo
+ h4RNXRBWnm36jTKJWkGrc0sSWGQ5tgOlDqOcph7AE+eCKes3O/NaieZfK
+ SUK2Ce2zrTC3WL82YPrIEqijRW882bkoQQ0IEtC8vjmkm8qVhY37tkJ9k A=;
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ anthony.perard@citrix.com) identity=pra;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible
+Received-SPF: Pass (esa1.hc3370-68.iphmx.com: domain of
+ anthony.perard@citrix.com designates 162.221.158.21 as
+ permitted sender) identity=mailfrom;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="anthony.perard@citrix.com";
+ x-conformance=sidf_compatible; x-record-type="v=spf1";
+ x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
+ ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
+ ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
+ ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
+ ip4:168.245.78.127 ~all"
+Received-SPF: None (esa1.hc3370-68.iphmx.com: no sender
+ authenticity information available from domain of
+ postmaster@mail.citrix.com) identity=helo;
+ client-ip=162.221.158.21; receiver=esa1.hc3370-68.iphmx.com;
+ envelope-from="anthony.perard@citrix.com";
+ x-sender="postmaster@mail.citrix.com";
+ x-conformance=sidf_compatible
+Authentication-Results: esa1.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none;
+ spf=None smtp.pra=anthony.perard@citrix.com;
+ spf=Pass smtp.mailfrom=anthony.perard@citrix.com;
+ spf=None smtp.helo=postmaster@mail.citrix.com;
+ dmarc=pass (p=none dis=none) d=citrix.com
+IronPort-SDR: qk1LzcWYbAtizaKmEL0G23TGS0brcBnTveqpZcsf3P6RTWTF2keiUFQXbg2RNKW5w+Q/2MnY13
+ vD91ewXcMzSOSgDe4ZnovpZW6dSDX4FTf+K4zDPBbpHUAVgNRJCL8p2iudyfXcO0aivCsGT+Ov
+ baiLzE7k2V8lFX3wVNtTYRmteZAyO9SJatA9xpWaYpvImv6mefl50XoWQX4ariCkU8lFEFOQsn
+ OwYXtlVjYUcTWC1B9PSMdniV/eElOEyo5mCWdJh7fqjoy/jZSiWzIYfRs15Vt4NNYj2gdV52Br
+ 8VI=
+X-SBRS: 2.7
+X-MesageID: 17902781
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,395,1583211600"; d="scan'208";a="17902781"
+Date: Fri, 15 May 2020 15:13:05 +0100
+From: Anthony PERARD <anthony.perard@citrix.com>
+To: Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
+Subject: Re: [XEN PATCH 1/2] xen/build: fixup path to merge_config.sh
+Message-ID: <20200515141305.GJ2116@perard.uk.xensource.com>
+References: <20200512175206.20314-1-stewart.hildebrand@dornerworks.com>
+ <20200512175206.20314-2-stewart.hildebrand@dornerworks.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20200512175206.20314-2-stewart.hildebrand@dornerworks.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,95 +105,21 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <stefano.stabellini@xilinx.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Bertrand Marquis <Bertrand.Marquis@arm.com>,
- xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>,
- Julien Grall <julien.grall.oss@gmail.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, 2020-05-15 at 11:08 +0100, Julien Grall wrote:
-> Hi,
+On Tue, May 12, 2020 at 01:52:05PM -0400, Stewart Hildebrand wrote:
+> This resolves the following observed error:
 > 
-> On 15/05/2020 10:57, Roger Pau Monné wrote:
-> > On Fri, May 15, 2020 at 10:23:16AM +0100, Julien Grall wrote:
-> > > [CAUTION - EXTERNAL EMAIL] DO NOT reply, click links, or open
-> > > attachments unless you have verified the sender and know the
-> > > content is safe.
-> > > 
-> > > 
-> > > On 15/05/2020 10:10, Roger Pau Monné wrote:
-> > > > On Fri, May 15, 2020 at 09:53:54AM +0100, Julien Grall wrote:
-...
+> /bin/sh: /path/to/xen/xen/../xen/scripts/kconfig/merge_config.sh: No such file or directory
+> 
+> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@dornerworks.com>
 
-> > > > 
-> > > > Could we map/unmap the runtime area on domain switch at a per-
-> > > > cpu
-> > > > based linear space area? There's no reason to have all the
-> > > > runtime
-> > > > areas mapped all the time, you just care about the one from the
-> > > > running vcpu.
-> > > 
-> > > AFAICT, this is only used during context switching. This is a bit
-> > > surprising
-> > > because I would expect it to be updated when the vCPU is running.
-> > > 
-> > > So maybe we could just use map_domain_page() and take care
-> > > manually about
-> > > cross-page boundary.
-> > > 
-> > > > 
-> > > > Maybe the overhead of that mapping and unmapping would be
-> > > > too high? But seeing that we are aiming at a secret-free Xen we
-> > > > would
-> > > > have to eventually go that route anyway.
-> > > 
-> > > The overhead is likely to be higher with the existing code as you
-> > > have to
-> > > walk the guest page-tables and the p2m everytime in order to
-> > > translate the
-> > > guest virtual address to a host physical address.
-> > 
-> > Maybe I'm getting confused, but you actually want to avoid the
-> > guest
-> > page table walk, as the guest might be running with user-space page
-> > tables that don't have the linear address of the runtime area
-> > mapped,
-> > and hence you would like to do the walk only once (at hypercall
-> > registration time) and keep a reference to the page(s)?
-> 
-> That's right.
-> 
-> > 
-> > I assumed the whole point of this was to avoid doing the page table
-> > walk when you need to update the runstate info area.
-> 
-> Sorry I wasn't clear. I was trying to answer to your question about
-> the 
-> overhead.
-> 
-> The overhead with SH and the existing runstate implementation is
-> going 
-> to be quite high because you would need to map/unmap each table
-> during 
-> your walk. By removing the walk, you would now have only one
-> map/unmap 
-> for the update which I think is acceptable.
-> 
-> So the change discussed in this thread is also going to be
-> beneficial 
-> for SH even if we keep a map/unmap in the process.
+Reviewed-by: Anthony PERARD <anthony.perard@citrix.com>
 
-For every hypercall, trap, context switch... one or two maps and unmaps
-is definitely fine, showing almost no impact in real-world performance.
-The most impact I found in the direct map removal work is definitely
-GVA->GFN->MFN walk for traps and hypercalls. HVM + EPT walk can take up
-to 20 maps and unmaps which degrades hypercall and emmulated MMIO
-performance by up to 60%. It would be really nice if some paths can
-just take GFN or just register the MFN. So I would definitely welcome a
-change to use the physcial address.
+Thanks,
 
-Hongyan
-
+-- 
+Anthony PERARD
 
