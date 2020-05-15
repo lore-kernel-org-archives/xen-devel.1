@@ -2,97 +2,76 @@ Return-Path: <SRS0=3DVc=65=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_2 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9AB48C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 13:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9163AC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 13:59:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 67E4E20728
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 13:59:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5CCA620728
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 13:59:23 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=citrix.com header.i=@citrix.com header.b="Nyu1ydGQ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 67E4E20728
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="sq5WMAsJ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CCA620728
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZarK-0000R3-Hz; Fri, 15 May 2020 13:58:42 +0000
+	id 1jZarY-0000TJ-1O; Fri, 15 May 2020 13:58:56 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=I0w9=65=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jZarJ-0000Qs-Iv
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 13:58:41 +0000
-X-Inumbo-ID: 2b451bd8-96b4-11ea-b9cf-bc764e2007e4
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=j7Zx=65=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1jZarW-0000T6-Sv
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 13:58:54 +0000
+X-Inumbo-ID: 36980248-96b4-11ea-b07b-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2b451bd8-96b4-11ea-b9cf-bc764e2007e4;
- Fri, 15 May 2020 13:58:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
- d=citrix.com; s=securemail; t=1589551115;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=9gp9wrRn7KriUqfiJcrm7JJ3iaK6QWAFr6UqKaTmPqA=;
- b=Nyu1ydGQhnnkTs3Z37gQQESMBInF4iQ6+07kuJZPkThc/rH5H0T4sXXQ
- 8PlD1T8ZUIFIWrpAxRZOoCvks2o/nY97HRR6InIg5b9Pu6+UfZNpx2vdM
- O4DBSPgFrqyMO38xzJkgUajjsUj2NbeVvsMOltHEmdcbMYMBz0t9ZQzpZ g=;
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- roger.pau@citrix.com) identity=pra; client-ip=162.221.158.21;
- receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com"; x-conformance=sidf_compatible
-Received-SPF: Pass (esa6.hc3370-68.iphmx.com: domain of
- roger.pau@citrix.com designates 162.221.158.21 as permitted
- sender) identity=mailfrom; client-ip=162.221.158.21;
- receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="roger.pau@citrix.com";
- x-conformance=sidf_compatible; x-record-type="v=spf1";
- x-record-text="v=spf1 ip4:209.167.231.154 ip4:178.63.86.133
- ip4:195.66.111.40/30 ip4:85.115.9.32/28 ip4:199.102.83.4
- ip4:192.28.146.160 ip4:192.28.146.107 ip4:216.52.6.88
- ip4:216.52.6.188 ip4:162.221.158.21 ip4:162.221.156.83
- ip4:168.245.78.127 ~all"
-Received-SPF: None (esa6.hc3370-68.iphmx.com: no sender
- authenticity information available from domain of
- postmaster@mail.citrix.com) identity=helo;
- client-ip=162.221.158.21; receiver=esa6.hc3370-68.iphmx.com;
- envelope-from="roger.pau@citrix.com";
- x-sender="postmaster@mail.citrix.com";
- x-conformance=sidf_compatible
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none;
- spf=None smtp.pra=roger.pau@citrix.com;
- spf=Pass smtp.mailfrom=roger.pau@citrix.com;
- spf=None smtp.helo=postmaster@mail.citrix.com;
- dmarc=pass (p=none dis=none) d=citrix.com
-IronPort-SDR: wsU8T5RVIy4TwDZfNfGWqJH7KIhF++S5PgXkWVfYhWdlTE+WpOdLbtXF7aDDEHOnWURRrqNNfS
- wWXc5u/7PhSEO30wecvWa46Z13aWzgWuUbNdPdljwPlqP9vyUw6tBZVvFE9c+rchMnMuZf554P
- rlSy7nE6uGSA2dUigapgt4koBJKFMO5PwS3UKL6HoOuCJxlgEviR0BWBzq8NHDy7PCOLLsncG0
- TXvdt6lfEurwQGrzLI9K18c9sQJINEHnmDysrgx6YYbGRL1M+ofC/fB6zItluw/2rIOeZYixNl
- 6J8=
-X-SBRS: 2.7
-X-MesageID: 17988403
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,395,1583211600"; d="scan'208";a="17988403"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v3 1/2] x86/idle: rework C6 EOI workaround
-Date: Fri, 15 May 2020 15:58:01 +0200
-Message-ID: <20200515135802.63853-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200515135802.63853-1-roger.pau@citrix.com>
-References: <20200515135802.63853-1-roger.pau@citrix.com>
-MIME-Version: 1.0
+ id 36980248-96b4-11ea-b07b-bc764e2007e4;
+ Fri, 15 May 2020 13:58:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Mime-Version:Content-Type:
+ References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=PWQWXrIuGs7RAXhKWVwKGHVI3lRjEpMtYlHNc3tRSjM=; b=sq5WMAsJn1nO680KN5L6/h5C0d
+ hEzUTFsGq65nwZENqishP+cB0P7xiqWCtad+DAyt0HrSjtxDQVm/U8bXy4N7CoPf2BgU56WVPBr1L
+ jGw4esiQUnsb17gQt01iI7NQv7/fzY/xUSuzdJdH2km0+BtdI6dg+CbEiBo25KhzCH0g=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1jZarT-0000U5-VT; Fri, 15 May 2020 13:58:51 +0000
+Received: from 54-240-197-235.amazon.com ([54.240.197.235]
+ helo=freeip.amazon.com) by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <hx242@xen.org>)
+ id 1jZarT-0008HY-KL; Fri, 15 May 2020 13:58:51 +0000
+Message-ID: <09b58be54cc40812631653f149e017933a3cfdf8.camel@xen.org>
+Subject: Re: Error during update_runstate_area with KPTI activated
+From: Hongyan Xia <hx242@xen.org>
+To: Julien Grall <julien@xen.org>, Roger Pau =?ISO-8859-1?Q?Monn=E9?=
+ <roger.pau@citrix.com>
+Date: Fri, 15 May 2020 14:58:48 +0100
+In-Reply-To: <108a179b-d8ea-01b9-6c6b-9f5cc57f6dc0@xen.org>
+References: <2c4437e9-d513-3e3c-7fec-13ffadc17df2@xen.org>
+ <2E95C767-FFE1-4A48-B56D-F858A8CEE5D7@arm.com>
+ <ab4f3c2a-95aa-1256-f6f4-0c3057f5600c@xen.org>
+ <b6511a29-35a4-a1d0-dd29-7de4103ec98e@citrix.com>
+ <CAJ=z9a1H2C6sWiScYw9XXLRcezBfUxYz2semj33D5GpB5=EE_w@mail.gmail.com>
+ <478C4829-CCAF-495B-860E-6BA3D86AA47D@arm.com>
+ <20200515083838.GN54375@Air-de-Roger>
+ <d2033adc-3f98-2d14-ae6d-f8dcd8b90002@xen.org>
+ <20200515091018.GO54375@Air-de-Roger>
+ <3813cfa2-c881-3fa5-bdf8-a2e874584a9f@xen.org>
+ <20200515095751.GQ54375@Air-de-Roger>
+ <108a179b-d8ea-01b9-6c6b-9f5cc57f6dc0@xen.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -104,118 +83,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Stefano Stabellini <stefano.stabellini@xilinx.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>,
+ xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>,
+ Julien Grall <julien.grall.oss@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Change the C6 EOI workaround (errata AAJ72) to use x86_match_cpu. Also
-call the workaround from mwait_idle, previously it was only used by
-the ACPI idle driver. Finally make sure the routine is called for all
-states equal or greater than ACPI_STATE_C3, note that the ACPI driver
-doesn't currently handle them, but the errata condition shouldn't be
-limited by that.
+On Fri, 2020-05-15 at 11:08 +0100, Julien Grall wrote:
+> Hi,
+> 
+> On 15/05/2020 10:57, Roger Pau Monné wrote:
+> > On Fri, May 15, 2020 at 10:23:16AM +0100, Julien Grall wrote:
+> > > [CAUTION - EXTERNAL EMAIL] DO NOT reply, click links, or open
+> > > attachments unless you have verified the sender and know the
+> > > content is safe.
+> > > 
+> > > 
+> > > On 15/05/2020 10:10, Roger Pau Monné wrote:
+> > > > On Fri, May 15, 2020 at 09:53:54AM +0100, Julien Grall wrote:
+...
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v2:
- - New in this version.
----
- xen/arch/x86/acpi/cpu_idle.c  | 43 +++++++++++++++++++++--------------
- xen/arch/x86/cpu/mwait-idle.c |  3 +++
- xen/include/asm-x86/cpuidle.h |  1 +
- 3 files changed, 30 insertions(+), 17 deletions(-)
+> > > > 
+> > > > Could we map/unmap the runtime area on domain switch at a per-
+> > > > cpu
+> > > > based linear space area? There's no reason to have all the
+> > > > runtime
+> > > > areas mapped all the time, you just care about the one from the
+> > > > running vcpu.
+> > > 
+> > > AFAICT, this is only used during context switching. This is a bit
+> > > surprising
+> > > because I would expect it to be updated when the vCPU is running.
+> > > 
+> > > So maybe we could just use map_domain_page() and take care
+> > > manually about
+> > > cross-page boundary.
+> > > 
+> > > > 
+> > > > Maybe the overhead of that mapping and unmapping would be
+> > > > too high? But seeing that we are aiming at a secret-free Xen we
+> > > > would
+> > > > have to eventually go that route anyway.
+> > > 
+> > > The overhead is likely to be higher with the existing code as you
+> > > have to
+> > > walk the guest page-tables and the p2m everytime in order to
+> > > translate the
+> > > guest virtual address to a host physical address.
+> > 
+> > Maybe I'm getting confused, but you actually want to avoid the
+> > guest
+> > page table walk, as the guest might be running with user-space page
+> > tables that don't have the linear address of the runtime area
+> > mapped,
+> > and hence you would like to do the walk only once (at hypercall
+> > registration time) and keep a reference to the page(s)?
+> 
+> That's right.
+> 
+> > 
+> > I assumed the whole point of this was to avoid doing the page table
+> > walk when you need to update the runstate info area.
+> 
+> Sorry I wasn't clear. I was trying to answer to your question about
+> the 
+> overhead.
+> 
+> The overhead with SH and the existing runstate implementation is
+> going 
+> to be quite high because you would need to map/unmap each table
+> during 
+> your walk. By removing the walk, you would now have only one
+> map/unmap 
+> for the update which I think is acceptable.
+> 
+> So the change discussed in this thread is also going to be
+> beneficial 
+> for SH even if we keep a map/unmap in the process.
 
-diff --git a/xen/arch/x86/acpi/cpu_idle.c b/xen/arch/x86/acpi/cpu_idle.c
-index b83446e77d..0efdaff21b 100644
---- a/xen/arch/x86/acpi/cpu_idle.c
-+++ b/xen/arch/x86/acpi/cpu_idle.c
-@@ -548,26 +548,35 @@ void trace_exit_reason(u32 *irq_traced)
-     }
- }
- 
--/*
-- * "AAJ72. EOI Transaction May Not be Sent if Software Enters Core C6 During 
-- * an Interrupt Service Routine"
-- * 
-- * There was an errata with some Core i7 processors that an EOI transaction 
-- * may not be sent if software enters core C6 during an interrupt service 
-- * routine. So we don't enter deep Cx state if there is an EOI pending.
-- */
--static bool errata_c6_eoi_workaround(void)
-+bool errata_c6_eoi_workaround(void)
- {
--    static int8_t fix_needed = -1;
-+    static int8_t __read_mostly fix_needed = -1;
- 
-     if ( unlikely(fix_needed == -1) )
-     {
--        int model = boot_cpu_data.x86_model;
--        fix_needed = (cpu_has_apic && !directed_eoi_enabled &&
--                      (boot_cpu_data.x86_vendor == X86_VENDOR_INTEL) &&
--                      (boot_cpu_data.x86 == 6) &&
--                      ((model == 0x1a) || (model == 0x1e) || (model == 0x1f) ||
--                       (model == 0x25) || (model == 0x2c) || (model == 0x2f)));
-+#define INTEL_FAM6_MODEL(m) { X86_VENDOR_INTEL, 6, m, X86_FEATURE_ALWAYS }
-+        /*
-+         * Errata AAJ72: EOI Transaction May Not be Sent if Software Enters
-+         * Core C6 During an Interrupt Service Routine"
-+         *
-+         * There was an errata with some Core i7 processors that an EOI
-+         * transaction may not be sent if software enters core C6 during an
-+         * interrupt service routine. So we don't enter deep Cx state if
-+         * there is an EOI pending.
-+         */
-+        const static struct x86_cpu_id eoi_errata[] = {
-+            INTEL_FAM6_MODEL(0x1a),
-+            INTEL_FAM6_MODEL(0x1e),
-+            INTEL_FAM6_MODEL(0x1f),
-+            INTEL_FAM6_MODEL(0x25),
-+            INTEL_FAM6_MODEL(0x2c),
-+            INTEL_FAM6_MODEL(0x2f),
-+            { }
-+        };
-+#undef INTEL_FAM6_MODEL
-+
-+        fix_needed = cpu_has_apic && !directed_eoi_enabled &&
-+                     x86_match_cpu(eoi_errata);
-     }
- 
-     return (fix_needed && cpu_has_pending_apic_eoi());
-@@ -676,7 +685,7 @@ static void acpi_processor_idle(void)
-         return;
-     }
- 
--    if ( (cx->type == ACPI_STATE_C3) && errata_c6_eoi_workaround() )
-+    if ( (cx->type >= ACPI_STATE_C3) && errata_c6_eoi_workaround() )
-         cx = power->safe_state;
- 
- 
-diff --git a/xen/arch/x86/cpu/mwait-idle.c b/xen/arch/x86/cpu/mwait-idle.c
-index b81937966e..88a3e160c5 100644
---- a/xen/arch/x86/cpu/mwait-idle.c
-+++ b/xen/arch/x86/cpu/mwait-idle.c
-@@ -770,6 +770,9 @@ static void mwait_idle(void)
- 		return;
- 	}
- 
-+	if ((cx->type >= 3) && errata_c6_eoi_workaround())
-+		cx = power->safe_state;
-+
- 	eax = cx->address;
- 	cstate = ((eax >> MWAIT_SUBSTATE_SIZE) & MWAIT_CSTATE_MASK) + 1;
- 
-diff --git a/xen/include/asm-x86/cpuidle.h b/xen/include/asm-x86/cpuidle.h
-index 5d7dffd228..13879f58a1 100644
---- a/xen/include/asm-x86/cpuidle.h
-+++ b/xen/include/asm-x86/cpuidle.h
-@@ -26,4 +26,5 @@ void update_idle_stats(struct acpi_processor_power *,
- void update_last_cx_stat(struct acpi_processor_power *,
-                          struct acpi_processor_cx *, uint64_t);
- 
-+bool errata_c6_eoi_workaround(void);
- #endif /* __X86_ASM_CPUIDLE_H__ */
--- 
-2.26.2
+For every hypercall, trap, context switch... one or two maps and unmaps
+is definitely fine, showing almost no impact in real-world performance.
+The most impact I found in the direct map removal work is definitely
+GVA->GFN->MFN walk for traps and hypercalls. HVM + EPT walk can take up
+to 20 maps and unmaps which degrades hypercall and emmulated MMIO
+performance by up to 60%. It would be really nice if some paths can
+just take GFN or just register the MFN. So I would definitely welcome a
+change to use the physcial address.
+
+Hongyan
 
 
