@@ -2,63 +2,65 @@ Return-Path: <SRS0=3DVc=65=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5F715C433E1
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:53:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D7D46C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:53:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 359F7206C0
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:53:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 359F7206C0
+	by mail.kernel.org (Postfix) with ESMTPS id B5443206C0
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:53:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5443206C0
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZda9-0001oq-2U; Fri, 15 May 2020 16:53:09 +0000
+	id 1jZdaE-0001pa-R8; Fri, 15 May 2020 16:53:14 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Gjd2=65=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1jZda8-0001og-9U
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 16:53:08 +0000
-X-Inumbo-ID: 8cc78f7c-96cc-11ea-a5a3-12813bfff9fa
-Received: from mail-io1-f66.google.com (unknown [209.85.166.66])
+ id 1jZdaD-0001pF-9i
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 16:53:13 +0000
+X-Inumbo-ID: 8e6510f2-96cc-11ea-a5a3-12813bfff9fa
+Received: from mail-il1-f195.google.com (unknown [209.85.166.195])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 8cc78f7c-96cc-11ea-a5a3-12813bfff9fa;
- Fri, 15 May 2020 16:53:07 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id x5so3459508ioh.6
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2020 09:53:06 -0700 (PDT)
+ id 8e6510f2-96cc-11ea-a5a3-12813bfff9fa;
+ Fri, 15 May 2020 16:53:09 +0000 (UTC)
+Received: by mail-il1-f195.google.com with SMTP id q10so3264451ile.0
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2020 09:53:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=CRPzrYLWQvzMenpCCXIyMtcBORlWmDbOjSdaQ3OXrrc=;
- b=XZFlOk1EY3r20Ag9bWB7PnP6oBInA8pkHQWi/wUswgaB6Qb0og0SiFiS+yEeyoaEeN
- ErEH3BZ/Jf84oY4dkgKnkKQ+c0/cPrF9IhJfdF5qX9ov7cqMUvfWaLpEWj9S0ybFNK0l
- VCZHyDcbWrw6N6NULnMMeKu2CjIRUYtLWYkC/1qUaG89vCdrTiOSVbS0oGW29wUqUjvP
- A8yO9flRLwLcXWvt7Bm2A804pJHEFxw9CHJCQ9vt4P8lX3To6Gw4OSudOpXs6nW9C22g
- uFjGQtnR96vGBZTdi1jXBh1mMRS8J560KpEviYko893J9JTWRC4AT251zR6DixhhM+/h
- TYzQ==
-X-Gm-Message-State: AOAM5315RbS3xvTQPgpGqKayBaKL2eLacZnj1T/xF8bLVMqj0se7ZP1l
- DaxCRKVEVwdF5X9ZeuhewtLtg+Ng
-X-Google-Smtp-Source: ABdhPJxzEU1foLBwsnvKSYPTWtjsFABSua9Zs52rNrnUqTDJiwComzN5U74Ub1XyBQ8unvv4gzliJQ==
-X-Received: by 2002:a5d:9ecb:: with SMTP id a11mr3815297ioe.115.1589561586090; 
- Fri, 15 May 2020 09:53:06 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=jt1CDv42jbXBvQwTwsCwnePoxzMUg9bAOQny9395qek=;
+ b=LEVXgLxXJBHHw0dcVcpUNYBjENXF7i3ETBSZI/+Z0EoHXTlWBJkHloWVv2WGMuj9L4
+ DoQRdfLqxYxFASwj4VeP+76GutLSCkox1Yv6YiD3iIZ8Ab47uMgvG4L+ADxZj2NXMupZ
+ 4DrKHyNk+5FVPELF+3RwEzSqxH845cv6y8HkCTYHMrxR6eNHwUXW67h/j70tDdn+3l50
+ QFKSkm/Qegq5vmSZ7W1DSYSDpytcXZ4FU8o4vTwc9jZJQr8Uqq9EiNzjOCPVUK9/FLkJ
+ uLVqkrYpCds9P1a/yAPdFsNgeyt0jWCbPBQSrfs61SeqUnEmDIt3vPq93jRNxgrNuVKu
+ Jikw==
+X-Gm-Message-State: AOAM531HNHa7mGSrrAALdYmyI2PHUyG6A6gZsbsilKTWvGNjfrRfTs9I
+ 9zAs38BMaJU+M2NB5Uu2iRvxG6n+
+X-Google-Smtp-Source: ABdhPJwOm/mJrPEyejLSbaZbRPEYr43yHgbWuONTakvkvCRA7qod90BxOnWL1cGETaMDIyqLHWvdMQ==
+X-Received: by 2002:a92:3607:: with SMTP id d7mr2608056ila.222.1589561588859; 
+ Fri, 15 May 2020 09:53:08 -0700 (PDT)
 Received: from t0.lan (c-71-205-12-124.hsd1.co.comcast.net. [71.205.12.124])
- by smtp.googlemail.com with ESMTPSA id f17sm932136iol.26.2020.05.15.09.53.04
+ by smtp.googlemail.com with ESMTPSA id f17sm932136iol.26.2020.05.15.09.53.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2020 09:53:05 -0700 (PDT)
+ Fri, 15 May 2020 09:53:08 -0700 (PDT)
 From: Tamas K Lengyel <tamas@tklengyel.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 0/3] vm_event: fix race-condition when disabling monitor events
-Date: Fri, 15 May 2020 10:52:59 -0600
-Message-Id: <cover.1589561218.git.tamas@tklengyel.com>
+Subject: [PATCH 2/3] xen/vm_event: add vm_event_check_pending_op
+Date: Fri, 15 May 2020 10:53:01 -0600
+Message-Id: <0b282dc0a59459da4db0c53b13508e1ff39d70b9.1589561218.git.tamas@tklengyel.com>
 X-Mailer: git-send-email 2.26.1
+In-Reply-To: <cover.1589561218.git.tamas@tklengyel.com>
+References: <cover.1589561218.git.tamas@tklengyel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -74,8 +76,6 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Petre Pircalabu <ppircalabu@bitdefender.com>,
  Tamas K Lengyel <tamas@tklengyel.com>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
  Alexandru Isaila <aisaila@bitdefender.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
@@ -83,70 +83,123 @@ Cc: Petre Pircalabu <ppircalabu@bitdefender.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-For the last couple years we have received numerous reports from users of
-monitor vm_events of spurious guest crashes when using events. In particular,
-it has observed that the problem occurs when vm_events are being disabled. The
-nature of the guest crash varied widely and has only occured occasionally. This
-made debugging the issue particularly hard. We had discussions about this issue
-even here on the xen-devel mailinglist with no luck figuring it out.
+Perform sanity checking when shutting vm_event down to determine whether
+it is safe to do so. Error out with -EAGAIN in case pending operations
+have been found for the domain.
 
-The bug has now been identified as a race-condition between register event
-handling and disabling the vm_event interface.
+Signed-off-by: Tamas K Lengyel <tamas@tklengyel.com>
+---
+ xen/arch/x86/vm_event.c        | 23 +++++++++++++++++++++++
+ xen/common/vm_event.c          | 17 ++++++++++++++---
+ xen/include/asm-arm/vm_event.h |  7 +++++++
+ xen/include/asm-x86/vm_event.h |  2 ++
+ 4 files changed, 46 insertions(+), 3 deletions(-)
 
-Patch 96760e2fba100d694300a81baddb5740e0f8c0ee, "vm_event: deny register writes
-if refused by  vm_event reply" is the patch that introduced the error. In this
-patch emulation of register write events can be postponed until the
-corresponding vm_event handler decides whether to allow such write to take
-place. Unfortunately this can only be implemented by performing the deny/allow
-step when the vCPU gets scheduled. Due to that postponed emulation of the event
-if the user decides to pause the VM in the vm_event handler and then disable
-events, the entire emulation step is skipped the next time the vCPU is resumed.
-Even if the user doesn't pause during the vm_event handling but exits
-immediately and disables vm_event, the situation becomes racey as disabling
-vm_event may succeed before the guest's vCPUs get scheduled with the pending
-emulation task. This has been particularly the case with VMs that have several
-vCPUs as after the VM is unpaused it may actually take a long time before all
-vCPUs get scheduled.
-
-The only solution currently is to poll each vCPU before vm_events are disabled
-to verify they had been scheduled. The following patches resolve this issue in
-a much nicer way.
-
-Patch 1 adds an option to the monitor_op domctl that needs to be specified if
-    the user wants to actually use the postponed register-write handling
-    mechanism. If that option is not specified then handling is performed the
-    same way as before patch 96760e2fba100d694300a81baddb5740e0f8c0ee.
-    
-Patch 2 performs sanity checking when disabling vm_events to determine whether
-    its safe to free all vm_event structures. The vCPUs still get unpaused to
-    allow them to get scheduled and perform any of their pending operations,
-    but otherwise an -EAGAIN error is returned signaling to the user that they
-    need to wait and try again disabling the interface.
-    
-Patch 3 adds a vm_event specifically to signal to the user when it is safe to
-    continue disabling the interface.
-    
-Shout out to our friends at CERT.pl for stumbling upon a crucial piece of
-information that lead to finally squashing this nasty bug.
-
-Tamas K Lengyel (3):
-  xen/monitor: Control register values
-  xen/vm_event: add vm_event_check_pending_op
-  xen/vm_event: Add safe to disable vm_event
-
- xen/arch/x86/hvm/hvm.c            | 69 +++++++++++++++++++++++--------
- xen/arch/x86/hvm/monitor.c        | 14 +++++++
- xen/arch/x86/monitor.c            | 23 ++++++++++-
- xen/arch/x86/vm_event.c           | 23 +++++++++++
- xen/common/vm_event.c             | 17 ++++++--
- xen/include/asm-arm/vm_event.h    |  7 ++++
- xen/include/asm-x86/domain.h      |  2 +
- xen/include/asm-x86/hvm/monitor.h |  1 +
- xen/include/asm-x86/vm_event.h    |  2 +
- xen/include/public/domctl.h       |  3 ++
- xen/include/public/vm_event.h     |  8 ++++
- 11 files changed, 147 insertions(+), 22 deletions(-)
-
+diff --git a/xen/arch/x86/vm_event.c b/xen/arch/x86/vm_event.c
+index 848d69c1b0..558b7da4b1 100644
+--- a/xen/arch/x86/vm_event.c
++++ b/xen/arch/x86/vm_event.c
+@@ -297,6 +297,29 @@ void vm_event_emulate_check(struct vcpu *v, vm_event_response_t *rsp)
+     };
+ }
+ 
++bool vm_event_check_pending_op(struct vcpu *v)
++{
++    struct monitor_write_data *w = &v->arch.vm_event->write_data;
++
++    if ( !v->arch.vm_event->sync_event )
++        return false;
++
++    if ( w->do_write.cr0 )
++        return true;
++    if ( w->do_write.cr3 )
++        return true;
++    if ( w->do_write.cr4 )
++        return true;
++    if ( w->do_write.msr )
++        return true;
++    if ( v->arch.vm_event->set_gprs )
++        return true;
++    if ( v->arch.vm_event->emulate_flags )
++        return true;
++
++    return false;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/common/vm_event.c b/xen/common/vm_event.c
+index 127f2d58f1..2df327a42c 100644
+--- a/xen/common/vm_event.c
++++ b/xen/common/vm_event.c
+@@ -183,6 +183,7 @@ static int vm_event_disable(struct domain *d, struct vm_event_domain **p_ved)
+     if ( vm_event_check_ring(ved) )
+     {
+         struct vcpu *v;
++        bool pending_op = false;
+ 
+         spin_lock(&ved->lock);
+ 
+@@ -192,9 +193,6 @@ static int vm_event_disable(struct domain *d, struct vm_event_domain **p_ved)
+             return -EBUSY;
+         }
+ 
+-        /* Free domU's event channel and leave the other one unbound */
+-        free_xen_event_channel(d, ved->xen_port);
+-
+         /* Unblock all vCPUs */
+         for_each_vcpu ( d, v )
+         {
+@@ -203,8 +201,21 @@ static int vm_event_disable(struct domain *d, struct vm_event_domain **p_ved)
+                 vcpu_unpause(v);
+                 ved->blocked--;
+             }
++
++            if ( vm_event_check_pending_op(v) )
++                pending_op = true;
+         }
+ 
++        /* vm_event ops are still pending until vCPUs get scheduled */
++        if ( pending_op )
++        {
++            spin_unlock(&ved->lock);
++            return -EAGAIN;
++        }
++
++        /* Free domU's event channel and leave the other one unbound */
++        free_xen_event_channel(d, ved->xen_port);
++
+         destroy_ring_for_helper(&ved->ring_page, ved->ring_pg_struct);
+ 
+         vm_event_cleanup_domain(d);
+diff --git a/xen/include/asm-arm/vm_event.h b/xen/include/asm-arm/vm_event.h
+index 14d1d341cc..5cbc9c6dc2 100644
+--- a/xen/include/asm-arm/vm_event.h
++++ b/xen/include/asm-arm/vm_event.h
+@@ -58,4 +58,11 @@ void vm_event_sync_event(struct vcpu *v, bool value)
+     /* Not supported on ARM. */
+ }
+ 
++static inline
++bool vm_event_check_pending_op(struct vcpu *v)
++{
++    /* Not supported on ARM. */
++    return false;
++}
++
+ #endif /* __ASM_ARM_VM_EVENT_H__ */
+diff --git a/xen/include/asm-x86/vm_event.h b/xen/include/asm-x86/vm_event.h
+index 785e741fba..9c5ce3129c 100644
+--- a/xen/include/asm-x86/vm_event.h
++++ b/xen/include/asm-x86/vm_event.h
+@@ -54,4 +54,6 @@ void vm_event_emulate_check(struct vcpu *v, vm_event_response_t *rsp);
+ 
+ void vm_event_sync_event(struct vcpu *v, bool value);
+ 
++bool vm_event_check_pending_op(struct vcpu *v);
++
+ #endif /* __ASM_X86_VM_EVENT_H__ */
 -- 
 2.26.1
 
