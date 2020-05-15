@@ -6,39 +6,41 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E5206C433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id E24F2C433E0
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:30 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A37C2206D4
+	by mail.kernel.org (Postfix) with ESMTPS id A413A20758
 	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 11:59:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A37C2206D4
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A413A20758
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZYzZ-0004kQ-Ts; Fri, 15 May 2020 11:59:05 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jZYzd-0004l8-8T; Fri, 15 May 2020 11:59:09 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=yAEg=65=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jZYzZ-0004kL-Bl
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 11:59:05 +0000
-X-Inumbo-ID: 78a97984-96a3-11ea-ae69-bc764e2007e4
+ id 1jZYzc-0004ky-4v
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 11:59:08 +0000
+X-Inumbo-ID: 7726e7a5-96a3-11ea-a554-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 78a97984-96a3-11ea-ae69-bc764e2007e4;
- Fri, 15 May 2020 11:59:04 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 7726e7a5-96a3-11ea-a554-12813bfff9fa;
+ Fri, 15 May 2020 11:59:01 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 09BAAAEC1;
+ by mx2.suse.de (Postfix) with ESMTP id 232DAAE96;
  Fri, 15 May 2020 11:59:03 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v9 07/12] xen: provide version information in hypfs
-Date: Fri, 15 May 2020 13:58:51 +0200
-Message-Id: <20200515115856.11965-8-jgross@suse.com>
+Subject: [PATCH v9 03/12] docs: add feature document for Xen hypervisor
+ sysfs-like support
+Date: Fri, 15 May 2020 13:58:47 +0200
+Message-Id: <20200515115856.11965-4-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200515115856.11965-1-jgross@suse.com>
 References: <20200515115856.11965-1-jgross@suse.com>
@@ -57,148 +59,267 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
+ Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Provide version and compile information in /buildinfo/ node of the
-Xen hypervisor file system. As this information is accessible by dom0
-only no additional security problem arises.
+On the 2019 Xen developer summit there was agreement that the Xen
+hypervisor should gain support for a hierarchical name-value store
+similar to the Linux kernel's sysfs.
+
+In the beginning there should only be basic support: entries can be
+added from the hypervisor itself only, there is a simple hypercall
+interface to read the data.
+
+Add a feature document for setting the base of a discussion regarding
+the desired functionality and the entries to add.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Julien Grall <jgrall@amazon.com>
 ---
+V1:
+- remove the "--" prefixes of the sub-commands of the user tool
+  (Jan Beulich)
+- rename xenfs to xenhypfs (Jan Beulich)
+- add "tree" and "write" options to user tool
+
+V2:
+- move example tree to the paths description (Ian Jackson)
+- specify allowed characters for keys and values (Ian Jackson)
+
 V3:
-- new patch
+- correct introduction (writable entries)
 
 V4:
-- add __read_mostly annotations (Jan Beulich)
+- add list specification
+- add entry example (Julien Grall)
+- correct date and Xen version (Julien Grall)
+- add ARM64 as possible architecture (Julien Grall)
+- add version description to the feature doc (Jan Beulich)
+
+V8:
+- clarify syntax used in hypfs-paths.pandoc (George Dunlap)
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- docs/misc/hypfs-paths.pandoc | 45 ++++++++++++++++++++++++++++++++++
- xen/common/kernel.c          | 47 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 92 insertions(+)
+ docs/features/hypervisorfs.pandoc |  92 +++++++++++++++++++++++++
+ docs/misc/hypfs-paths.pandoc      | 107 ++++++++++++++++++++++++++++++
+ 2 files changed, 199 insertions(+)
+ create mode 100644 docs/features/hypervisorfs.pandoc
+ create mode 100644 docs/misc/hypfs-paths.pandoc
 
+diff --git a/docs/features/hypervisorfs.pandoc b/docs/features/hypervisorfs.pandoc
+new file mode 100644
+index 0000000000..a0a0ead057
+--- /dev/null
++++ b/docs/features/hypervisorfs.pandoc
+@@ -0,0 +1,92 @@
++% Hypervisor FS
++% Revision 1
++
++\clearpage
++
++# Basics
++---------------- ---------------------
++         Status: **Supported**
++
++  Architectures: all
++
++     Components: Hypervisor, toolstack
++---------------- ---------------------
++
++# Overview
++
++The Hypervisor FS is a hierarchical name-value store for reporting
++information to guests, especially dom0. It is similar to the Linux
++kernel's sysfs. Entries and directories are created by the hypervisor,
++while the toolstack is able to use a hypercall to query the entry
++values or (if allowed by the hypervisor) to modify them.
++
++# User details
++
++With:
++
++    xenhypfs ls <path>
++
++the user can list the entries of a specific path of the FS. Using:
++
++    xenhypfs cat <path>
++
++the content of an entry can be retrieved. Using:
++
++    xenhypfs write <path> <string>
++
++a writable entry can be modified. With:
++
++    xenhypfs tree
++
++the complete Hypervisor FS entry tree can be printed.
++
++The FS paths are documented in `docs/misc/hypfs-paths.pandoc`.
++
++# Technical details
++
++Access to the hypervisor filesystem is done via the stable new hypercall
++__HYPERVISOR_filesystem_op. This hypercall supports a sub-command
++XEN_HYPFS_OP_get_version which will return the highest version of the
++interface supported by the hypervisor. Additions to the interface need
++to bump the interface version. The hypervisor is required to support the
++previous interface versions, too (this implies that additions will always
++require new sub-commands in order to allow the hypervisor to decide which
++version of the interface to use).
++
++* hypercall interface specification
++    * `xen/include/public/hypfs.h`
++* hypervisor internal files
++    * `xen/include/xen/hypfs.h`
++    * `xen/common/hypfs.c`
++* `libxenhypfs`
++    * `tools/libs/libxenhypfs/*`
++* `xenhypfs`
++    * `tools/misc/xenhypfs.c`
++* path documentation
++    * `docs/misc/hypfs-paths.pandoc`
++
++# Testing
++
++Any new parameters or hardware mitigations should be verified to show up
++correctly in the filesystem.
++
++# Areas for improvement
++
++* More detailed access rights
++* Entries per domain and/or per cpupool
++
++# Known issues
++
++* None
++
++# References
++
++* None
++
++# History
++
++------------------------------------------------------------------------
++Date       Revision Version  Notes
++---------- -------- -------- -------------------------------------------
++2020-01-23 1        Xen 4.14 Document written
++---------- -------- -------- -------------------------------------------
 diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
-index 39539fa1b5..d730caf394 100644
---- a/docs/misc/hypfs-paths.pandoc
+new file mode 100644
+index 0000000000..39539fa1b5
+--- /dev/null
 +++ b/docs/misc/hypfs-paths.pandoc
-@@ -105,3 +105,48 @@ A populated Xen hypervisor file system might look like the following example:
- #### /
- 
- The root of the hypervisor file system.
+@@ -0,0 +1,107 @@
++# Xenhypfs Paths
 +
-+#### /buildinfo/
++This document attempts to define all the paths which are available
++in the Xen hypervisor file system (hypfs).
 +
-+A directory containing static information generated while building the
-+hypervisor.
++The hypervisor file system can be accessed via the xenhypfs tool.
 +
-+#### /buildinfo/changeset = STRING
++## Notation
 +
-+Git commit of the hypervisor.
++The hypervisor file system is similar to the Linux kernel's sysfs.
++In this document directories are always specified with a trailing "/".
 +
-+#### /buildinfo/compileinfo/
++The following notation conventions apply:
 +
-+A directory containing information about compilation of Xen.
++        DIRECTORY/
 +
-+#### /buildinfo/compileinfo/compile_by = STRING
++        PATH = VALUES [TAGS]
 +
-+Information who compiled the hypervisor.
++The first syntax defines a directory. It normally contains related
++entries and the general scope of the directory is described.
 +
-+#### /buildinfo/compileinfo/compile_date = STRING
++The second syntax defines a file entry containing values which are
++either set by the hypervisor or, if the file is writable, can be set
++by the user.
 +
-+Date of the hypervisor compilation.
++PATH can contain simple regex constructs following the Perl compatible
++regexp syntax described in pcre(3) or perlre(1).
 +
-+#### /buildinfo/compileinfo/compile_domain = STRING
++A hypervisor file system entry name can be any 0-delimited byte string
++not containing any '/' character. The names "." and ".." are reserved
++for file system internal use.
 +
-+Information about the compile domain.
++VALUES are strings and can take the following forms (note that this represents
++only the syntax used in this document):
 +
-+#### /buildinfo/compileinfo/compiler = STRING
++* STRING -- an arbitrary 0-delimited byte string.
++* INTEGER -- An integer, in decimal representation unless otherwise
++  noted.
++* "a literal string" -- literal strings are contained within quotes.
++* (VALUE | VALUE | ... ) -- a set of alternatives. Alternatives are
++  separated by a "|" and all the alternatives are enclosed in "(" and
++  ")".
++* {VALUE, VALUE, ... } -- a list of possible values separated by "," and
++  enclosed in "{" and "}".
 +
-+The compiler used to build Xen.
++Additional TAGS may follow as a comma separated set of the following
++tags enclosed in square brackets.
 +
-+#### /buildinfo/version/
++* w -- Path is writable by the user. This capability is usually
++  limited to the control domain (e.g. dom0).
++* ARM | ARM32 | ARM64 | X86: the path is available for the respective
++  architecture only.
++* PV --  Path is valid for PV capable hypervisors only.
++* HVM -- Path is valid for HVM capable hypervisors only.
++* CONFIG_* -- Path is valid only in case the hypervisor was built with
++  the respective config option.
 +
-+A directory containing version information of the hypervisor.
++So an entry could look like this:
 +
-+#### /buildinfo/version/extra = STRING
++    /cpu-bugs/active-pv/xpti = ("No"|{"dom0", "domU", "PCID-on"}) [w,X86,PV]
 +
-+Extra version information.
++Possible values would be "No" or a list of "dom0", "domU", and "PCID-on" with
++the list elements separated by spaces, e.g. "dom0 PCID-on".
++The entry would be writable and it would exist on X86 only and only if the
++hypervisor is configured to support PV guests.
 +
-+#### /buildinfo/version/major = INTEGER
++## Example
 +
-+The major version of Xen.
++A populated Xen hypervisor file system might look like the following example:
 +
-+#### /buildinfo/version/minor = INTEGER
++    /
++        buildinfo/           directory containing build-time data
++            config           contents of .config file used to build Xen
++        cpu-bugs/            x86: directory of cpu bug information
++            l1tf             "Vulnerable" or "Not vulnerable"
++            mds              "Vulnerable" or "Not vulnerable"
++            meltdown         "Vulnerable" or "Not vulnerable"
++            spec-store-bypass "Vulnerable" or "Not vulnerable"
++            spectre-v1       "Vulnerable" or "Not vulnerable"
++            spectre-v2       "Vulnerable" or "Not vulnerable"
++            mitigations/     directory of mitigation settings
++                bti-thunk    "N/A", "RETPOLINE", "LFENCE" or "JMP"
++                spec-ctrl    "No", "IBRS+" or "IBRS-"
++                ibpb         "No" or "Yes"
++                l1d-flush    "No" or "Yes"
++                md-clear     "No" or "VERW"
++                l1tf-barrier "No" or "Yes"
++            active-hvm/      directory for mitigations active in hvm doamins
++                msr-spec-ctrl "No" or "Yes"
++                rsb          "No" or "Yes"
++                eager-fpu    "No" or "Yes"
++                md-clear     "No" or "Yes"
++            active-pv/       directory for mitigations active in pv doamins
++                msr-spec-ctrl "No" or "Yes"
++                rsb          "No" or "Yes"
++                eager-fpu    "No" or "Yes"
++                md-clear     "No" or "Yes"
++                xpti         "No" or list of "dom0", "domU", "PCID-on"
++                l1tf-shadow  "No" or list of "dom0", "domU"
++        params/              directory with hypervisor parameter values
++                             (boot/runtime parameters)
 +
-+The minor version of Xen.
-diff --git a/xen/common/kernel.c b/xen/common/kernel.c
-index 572e3fc07d..db7bd23fcb 100644
---- a/xen/common/kernel.c
-+++ b/xen/common/kernel.c
-@@ -13,6 +13,7 @@
- #include <xen/paging.h>
- #include <xen/guest_access.h>
- #include <xen/hypercall.h>
-+#include <xen/hypfs.h>
- #include <xsm/xsm.h>
- #include <asm/current.h>
- #include <public/version.h>
-@@ -373,6 +374,52 @@ void __init do_initcalls(void)
-         (*call)();
- }
- 
-+#ifdef CONFIG_HYPFS
-+static unsigned int __read_mostly major_version;
-+static unsigned int __read_mostly minor_version;
++## General Paths
 +
-+static HYPFS_DIR_INIT(buildinfo, "buildinfo");
-+static HYPFS_DIR_INIT(compileinfo, "compileinfo");
-+static HYPFS_DIR_INIT(version, "version");
-+static HYPFS_UINT_INIT(major, "major", major_version);
-+static HYPFS_UINT_INIT(minor, "minor", minor_version);
-+static HYPFS_STRING_INIT(changeset, "changeset");
-+static HYPFS_STRING_INIT(compiler, "compiler");
-+static HYPFS_STRING_INIT(compile_by, "compile_by");
-+static HYPFS_STRING_INIT(compile_date, "compile_date");
-+static HYPFS_STRING_INIT(compile_domain, "compile_domain");
-+static HYPFS_STRING_INIT(extra, "extra");
++#### /
 +
-+static int __init buildinfo_init(void)
-+{
-+    hypfs_add_dir(&hypfs_root, &buildinfo, true);
-+
-+    hypfs_string_set_reference(&changeset, xen_changeset());
-+    hypfs_add_leaf(&buildinfo, &changeset, true);
-+
-+    hypfs_add_dir(&buildinfo, &compileinfo, true);
-+    hypfs_string_set_reference(&compiler, xen_compiler());
-+    hypfs_string_set_reference(&compile_by, xen_compile_by());
-+    hypfs_string_set_reference(&compile_date, xen_compile_date());
-+    hypfs_string_set_reference(&compile_domain, xen_compile_domain());
-+    hypfs_add_leaf(&compileinfo, &compiler, true);
-+    hypfs_add_leaf(&compileinfo, &compile_by, true);
-+    hypfs_add_leaf(&compileinfo, &compile_date, true);
-+    hypfs_add_leaf(&compileinfo, &compile_domain, true);
-+
-+    major_version = xen_major_version();
-+    minor_version = xen_minor_version();
-+    hypfs_add_dir(&buildinfo, &version, true);
-+    hypfs_string_set_reference(&extra, xen_extra_version());
-+    hypfs_add_leaf(&version, &extra, true);
-+    hypfs_add_leaf(&version, &major, true);
-+    hypfs_add_leaf(&version, &minor, true);
-+
-+    return 0;
-+}
-+__initcall(buildinfo_init);
-+#endif
-+
- # define DO(fn) long do_##fn
- 
- #endif
++The root of the hypervisor file system.
 -- 
 2.26.1
 
