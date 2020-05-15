@@ -2,69 +2,66 @@ Return-Path: <SRS0=3DVc=65=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9A5C9C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id DE919C433E3
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:53:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 70CF1207F9
-	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:44:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 70CF1207F9
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id BE4C920727
+	for <xen-devel@archiver.kernel.org>; Fri, 15 May 2020 16:53:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BE4C920727
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jZdRJ-0000r0-0i; Fri, 15 May 2020 16:44:01 +0000
+	id 1jZdaA-0001ow-Ad; Fri, 15 May 2020 16:53:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=iw4X=65=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1jZdRH-0000qt-6d
- for xen-devel@lists.xenproject.org; Fri, 15 May 2020 16:43:59 +0000
-X-Inumbo-ID: 45dfe34e-96cb-11ea-b07b-bc764e2007e4
-Received: from mail-wr1-f45.google.com (unknown [209.85.221.45])
+ <SRS0=Gjd2=65=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
+ id 1jZda8-0001ol-Sw
+ for xen-devel@lists.xenproject.org; Fri, 15 May 2020 16:53:08 +0000
+X-Inumbo-ID: 8d9cea8c-96cc-11ea-9887-bc764e2007e4
+Received: from mail-io1-f66.google.com (unknown [209.85.166.66])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 45dfe34e-96cb-11ea-b07b-bc764e2007e4;
- Fri, 15 May 2020 16:43:58 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id v12so4248047wrp.12
- for <xen-devel@lists.xenproject.org>; Fri, 15 May 2020 09:43:58 -0700 (PDT)
+ id 8d9cea8c-96cc-11ea-9887-bc764e2007e4;
+ Fri, 15 May 2020 16:53:08 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id j8so3389551iog.13
+ for <xen-devel@lists.xenproject.org>; Fri, 15 May 2020 09:53:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=WI1ahOcWbzT79YScFm2k3Snud6/mjAqZd8zfDh+GsFc=;
- b=PPeKFuOtC8BXDFQJ8JgqrfKK0ANzefXC2Xw8oglbY6mLrDSdqZrlbqbC5osBd4tqf0
- cCHUVDY5KMD3fs9UVwlL/KhWBoO6U0fMhyUP00UpOGgZpx3J8wMQ8ftET/nTrzp2rQzN
- Ix4xz+cQ+qAjBI5UpxfqOB87GUG95AxAZmz8jYguZxUIUFgBKkmn2H3p6AZTUv+QyxsV
- 1QPoWqagz6by37oOxyvvqzZe8RCf/dru7y/UNdCYonzVr655koPdvhdojYs75ix/P3Wu
- EI8zp2OGEuvJkL2Ggg7k8+nZn8rYFzHlLf6qErjJbCQ4uQXfOX6fWKJ6ZIpq/9iZMQef
- bCww==
-X-Gm-Message-State: AOAM532xy6ehGA2IxhnyFmQbjbq/eTjyYwOKlpsRwIjdFs0LEFpOb58h
- ay8SY6LEYgJu06zAYTzvP9w=
-X-Google-Smtp-Source: ABdhPJxxuUMcUrB7+efaSelt+CKLf0mZxIhPLOg5WPmCbE2PJ/9EkzKSRyvKTpzDzinBxr5H9kJNfw==
-X-Received: by 2002:adf:82c3:: with SMTP id 61mr5441863wrc.326.1589561038048; 
- Fri, 15 May 2020 09:43:58 -0700 (PDT)
-Received: from
- liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net
- ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id q17sm4602659wmk.36.2020.05.15.09.43.57
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=LCoqaKlszXhgdfaEb+32A9dBWLg/txZ1ajVdd1EaKUI=;
+ b=Opj7CDveF5EdT5c/QAKT5cReFiT0u19RWTQ6vbaztpwmFhfdGvOfTTlXYhP5g8qyyW
+ 8aIpVyDfbc+vc1WyZScBfqQYIvQKNeuchsY1U1+ikI0Wdf/Of8SFDNk+Xe+clxOBwMX0
+ zrQfj69S8wcUwy2SHKzMX4oSEat1J3zUgzeulzwJwjRVt/VmYe4sSHZDUy8y/TVZoRYK
+ nceDgLTOek2ActZnKHbalWAGMef13Yie9WFo/0FtRWbmrpvkp/P1/DX4GOvLpdkG1x7a
+ BtE99RMmpAYPCrVuMnnmxJUnkw/SmTwj3QTgfELNvpOeEqJ6gSOqvWD4oF5pxVAKJmRZ
+ Pr+Q==
+X-Gm-Message-State: AOAM532f8TikI3fpBQ82A3JLyo0uWA/tOOBV21kM+psOOywy3v1Or2ff
+ li9Vd1DgabiRbO0RuWIKmy/EAYIZ
+X-Google-Smtp-Source: ABdhPJxSkpecThAe6sZz9e5Ngtdnf6wU8HA7RM/rYMWhKrBrKtW25xrNSVuPAx+qunX4javiQ0Bnhg==
+X-Received: by 2002:a5e:d506:: with SMTP id e6mr3878910iom.184.1589561587502; 
+ Fri, 15 May 2020 09:53:07 -0700 (PDT)
+Received: from t0.lan (c-71-205-12-124.hsd1.co.comcast.net. [71.205.12.124])
+ by smtp.googlemail.com with ESMTPSA id f17sm932136iol.26.2020.05.15.09.53.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 15 May 2020 09:43:57 -0700 (PDT)
-Date: Fri, 15 May 2020 16:43:55 +0000
-From: Wei Liu <wl@xen.org>
-To: paul@xen.org
-Subject: Re: Items for CHANGELOG.md in 4.14
-Message-ID: <20200515164355.oujf2mvbep6yhlua@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
-References: <000401d62aaa$e0eccab0$a2c66010$@xen.org>
+ Fri, 15 May 2020 09:53:06 -0700 (PDT)
+From: Tamas K Lengyel <tamas@tklengyel.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH 1/3] xen/monitor: Control register values
+Date: Fri, 15 May 2020 10:53:00 -0600
+Message-Id: <72d4d282dd20b79ebdbaf1f70865ea38b075c5c0.1589561218.git.tamas@tklengyel.com>
+X-Mailer: git-send-email 2.26.1
+In-Reply-To: <cover.1589561218.git.tamas@tklengyel.com>
+References: <cover.1589561218.git.tamas@tklengyel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <000401d62aaa$e0eccab0$a2c66010$@xen.org>
-User-Agent: NeoMutt/20180716
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,26 +72,142 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
- 'Roger Pau Monne' <roger.pau@citrix.com>
+Cc: Petre Pircalabu <ppircalabu@bitdefender.com>,
+ Tamas K Lengyel <tamas@tklengyel.com>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, May 15, 2020 at 12:20:44PM +0100, Paul Durrant wrote:
-> All,
-> 
->   In the last community call I took an ACTION to send a reminder email to submit patches to get CHANGELOG.md up to date. Several
-> items were mentioned during the call (see minutes at https://cryptpad.fr/pad/#/2/pad/edit/qPQUEQEv3nJJ97clS8b2KdtP/):
-> 
-> - Ability to conditionally compile-out 32-bit PV guests (security attack surface reduction)
-> - Basic support for AMD Milan CPUS
-> - Golang binding advances
-> - x2apic, improvements on tlbflush hypercall
-> - General improvements in pvshim
-> - Xen on Hyper-V
+Extend the monitor_op domctl to include option that enables
+controlling what values certain registers are permitted to hold
+by a monitor subscriber.
 
-As part of this work, there is now a "framework" to make it easy to port
-Xen to run on top of hypervisors. Does this need calling out?
+Signed-off-by: Tamas K Lengyel <tamas@tklengyel.com>
+---
+ xen/arch/x86/hvm/hvm.c       | 31 +++++++++++++++++++------------
+ xen/arch/x86/monitor.c       | 10 +++++++++-
+ xen/include/asm-x86/domain.h |  1 +
+ xen/include/public/domctl.h  |  1 +
+ 4 files changed, 30 insertions(+), 13 deletions(-)
 
-Wei.
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index 814b7020d8..063f8ddc18 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -2263,9 +2263,10 @@ int hvm_set_cr0(unsigned long value, bool may_defer)
+     {
+         ASSERT(v->arch.vm_event);
+ 
+-        if ( hvm_monitor_crX(CR0, value, old_value) )
++        if ( hvm_monitor_crX(CR0, value, old_value) &&
++             v->domain->arch.monitor.control_register_values )
+         {
+-            /* The actual write will occur in hvm_do_resume(), if permitted. */
++            /* The actual write will occur in hvm_do_resume, if permitted. */
+             v->arch.vm_event->write_data.do_write.cr0 = 1;
+             v->arch.vm_event->write_data.cr0 = value;
+ 
+@@ -2362,9 +2363,10 @@ int hvm_set_cr3(unsigned long value, bool may_defer)
+     {
+         ASSERT(v->arch.vm_event);
+ 
+-        if ( hvm_monitor_crX(CR3, value, old) )
++        if ( hvm_monitor_crX(CR3, value, old) &&
++             v->domain->arch.monitor.control_register_values )
+         {
+-            /* The actual write will occur in hvm_do_resume(), if permitted. */
++            /* The actual write will occur in hvm_do_resume, if permitted. */
+             v->arch.vm_event->write_data.do_write.cr3 = 1;
+             v->arch.vm_event->write_data.cr3 = value;
+ 
+@@ -2443,9 +2445,10 @@ int hvm_set_cr4(unsigned long value, bool may_defer)
+     {
+         ASSERT(v->arch.vm_event);
+ 
+-        if ( hvm_monitor_crX(CR4, value, old_cr) )
++        if ( hvm_monitor_crX(CR4, value, old_cr) &&
++             v->domain->arch.monitor.control_register_values )
+         {
+-            /* The actual write will occur in hvm_do_resume(), if permitted. */
++            /* The actual write will occur in hvm_do_resume, if permitted. */
+             v->arch.vm_event->write_data.do_write.cr4 = 1;
+             v->arch.vm_event->write_data.cr4 = value;
+ 
+@@ -3587,13 +3590,17 @@ int hvm_msr_write_intercept(unsigned int msr, uint64_t msr_content,
+ 
+         ASSERT(v->arch.vm_event);
+ 
+-        /* The actual write will occur in hvm_do_resume() (if permitted). */
+-        v->arch.vm_event->write_data.do_write.msr = 1;
+-        v->arch.vm_event->write_data.msr = msr;
+-        v->arch.vm_event->write_data.value = msr_content;
+-
+         hvm_monitor_msr(msr, msr_content, msr_old_content);
+-        return X86EMUL_OKAY;
++
++        if ( v->domain->arch.monitor.control_register_values )
++        {
++            /* The actual write will occur in hvm_do_resume, if permitted. */
++            v->arch.vm_event->write_data.do_write.msr = 1;
++            v->arch.vm_event->write_data.msr = msr;
++            v->arch.vm_event->write_data.value = msr_content;
++
++            return X86EMUL_OKAY;
++        }
+     }
+ 
+     if ( (ret = guest_wrmsr(v, msr, msr_content)) != X86EMUL_UNHANDLEABLE )
+diff --git a/xen/arch/x86/monitor.c b/xen/arch/x86/monitor.c
+index bbcb7536c7..1517a97f50 100644
+--- a/xen/arch/x86/monitor.c
++++ b/xen/arch/x86/monitor.c
+@@ -144,7 +144,15 @@ int arch_monitor_domctl_event(struct domain *d,
+                               struct xen_domctl_monitor_op *mop)
+ {
+     struct arch_domain *ad = &d->arch;
+-    bool requested_status = (XEN_DOMCTL_MONITOR_OP_ENABLE == mop->op);
++    bool requested_status;
++
++    if ( XEN_DOMCTL_MONITOR_OP_CONTROL_REGISTERS == mop->op )
++    {
++        ad->monitor.control_register_values = true;
++        return 0;
++    }
++
++    requested_status = (XEN_DOMCTL_MONITOR_OP_ENABLE == mop->op);
+ 
+     switch ( mop->event )
+     {
+diff --git a/xen/include/asm-x86/domain.h b/xen/include/asm-x86/domain.h
+index 5b6d909266..d890ab7a22 100644
+--- a/xen/include/asm-x86/domain.h
++++ b/xen/include/asm-x86/domain.h
+@@ -416,6 +416,7 @@ struct arch_domain
+          * This is used to filter out pagefaults.
+          */
+         unsigned int inguest_pagefault_disabled                            : 1;
++        unsigned int control_register_values                               : 1;
+         struct monitor_msr_bitmap *msr_bitmap;
+         uint64_t write_ctrlreg_mask[4];
+     } monitor;
+diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
+index 1ad34c35eb..cbcd25f12c 100644
+--- a/xen/include/public/domctl.h
++++ b/xen/include/public/domctl.h
+@@ -1025,6 +1025,7 @@ struct xen_domctl_psr_cmt_op {
+ #define XEN_DOMCTL_MONITOR_OP_DISABLE           1
+ #define XEN_DOMCTL_MONITOR_OP_GET_CAPABILITIES  2
+ #define XEN_DOMCTL_MONITOR_OP_EMULATE_EACH_REP  3
++#define XEN_DOMCTL_MONITOR_OP_CONTROL_REGISTERS 4
+ 
+ #define XEN_DOMCTL_MONITOR_EVENT_WRITE_CTRLREG         0
+ #define XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR            1
+-- 
+2.26.1
+
 
