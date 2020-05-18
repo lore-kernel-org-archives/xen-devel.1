@@ -6,57 +6,61 @@ X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D1ADC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 16:35:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76EEBC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 16:37:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 25E7520709
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 16:35:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 25E7520709
+	by mail.kernel.org (Postfix) with ESMTPS id 55AE1207D8
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 16:37:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 55AE1207D8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jaij3-0002Cd-01; Mon, 18 May 2020 16:34:49 +0000
+	id 1jailW-0002JF-De; Mon, 18 May 2020 16:37:22 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=TuVG=7A=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jaij1-0002C7-K6
- for xen-devel@lists.xenproject.org; Mon, 18 May 2020 16:34:47 +0000
-X-Inumbo-ID: 7c237eb4-9925-11ea-9887-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1jailV-0002JA-2G
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2020 16:37:21 +0000
+X-Inumbo-ID: d7b9d80e-9925-11ea-9887-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 7c237eb4-9925-11ea-9887-bc764e2007e4;
- Mon, 18 May 2020 16:34:46 +0000 (UTC)
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ id d7b9d80e-9925-11ea-9887-bc764e2007e4;
+ Mon, 18 May 2020 16:37:20 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: Q3jbo6O4LYW6cbIn/QuEaplO4s0geX/mDEzvnfGuEkLEkqNQGsYNrWufn/wWHO63ocU7LJtjE6
- bj7SYEOnEzEnQ1Fio4i4GEoD1sxa77eJpnHzA+ts2SIhr1WME1I93Szf3WnCqEaXpYuWjlUSu/
- f8xmtHaGSq6Owi7eiq/zOubIeaaDlL6UGQ6RNMytn/0H83/Ek1vQSXQlC7iO7VoaIlly53HUzD
- yODUDz2AWZBjTqKdO86rYrhrnporMzDxI8qryRZETviUl0QO27r1nC+VzYDzHlGvCZ81tDOIiC
- qMk=
+IronPort-SDR: EazD7dgrhyln6e9FNS/gLcSpODu/YgR8dXgEJwxvEotcQqESdQu6TuPP9pcquSLEXhD5MuoTIk
+ yneyBGzzmhtOB/Zd5wrVTP22UJxpPYuU5iPGS6KwtESQc0ChHYnypj52hTLFkmrOT6EF1toPFW
+ o3V8S+d93f976m0Ys41cypvBlN0UO7iPiaj9XNtaI3+Dc6JHia1LdZK1PVWfDNWGvaT08KuKIq
+ Dydd0lcQwbUBgu2LgqQ2zJu8AH3I9ZPm3Cgbfrp1PMh+pPA5gtKXFjZhCpB+0iAyI6Sl0sCBZN
+ Jbg=
 X-SBRS: 2.7
-X-MesageID: 18511119
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 18071372
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,407,1583211600"; d="scan'208";a="18511119"
+X-IronPort-AV: E=Sophos;i="5.73,407,1583211600"; d="scan'208";a="18071372"
 From: Ian Jackson <ian.jackson@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Message-ID: <24258.47393.798081.764926@mariner.uk.xensource.com>
-Date: Mon, 18 May 2020 17:34:41 +0100
+Message-ID: <24258.47547.105405.754194@mariner.uk.xensource.com>
+Date: Mon, 18 May 2020 17:37:15 +0100
 To: Jason Andryuk <jandryuk@gmail.com>
-Subject: Re: [PATCH v6 06/18] libxl: write qemu arguments into separate
- xenstore keys
-In-Reply-To: <CAKf6xpueM5BXd0ivDHHpq2oRo_T1Uh+zMF0TrrV5u5dVR8DiLQ@mail.gmail.com>
-References: <20200518011353.326287-1-jandryuk@gmail.com>
- <20200518011353.326287-7-jandryuk@gmail.com>
- <24258.39310.574582.176081@mariner.uk.xensource.com>
- <CAKf6xpueM5BXd0ivDHHpq2oRo_T1Uh+zMF0TrrV5u5dVR8DiLQ@mail.gmail.com>
+Subject: Re: [PATCH v5 09/21] libxl: add save/restore support for qemu-xen in
+ stubdomain [and 1 more messages]
+In-Reply-To: <CAKf6xpvdSb=fSebzpHaLb1F9zNqsUn3dA03wYoXaZtxSLn0K+w@mail.gmail.com>
+References: <20200428040433.23504-1-jandryuk@gmail.com>
+ <24253.29524.798802.978257@mariner.uk.xensource.com>
+ <CAKf6xpvJMovKMTWipC4gZuBD8FgmBEWbDbkm=ryRWSxNifQcJw@mail.gmail.com>
+ <24258.39029.788968.419649@mariner.uk.xensource.com>
+ <20200428040433.23504-10-jandryuk@gmail.com>
+ <20200518145028.GD98582@mail-itl>
+ <24258.42794.136081.367565@mariner.uk.xensource.com>
+ <CAKf6xpvdSb=fSebzpHaLb1F9zNqsUn3dA03wYoXaZtxSLn0K+w@mail.gmail.com>
 X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -75,34 +79,28 @@ Cc: Anthony Perard <anthony.perard@citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Jason Andryuk writes ("Re: [PATCH v6 06/18] libxl: write qemu arguments into separate xenstore keys"):
-> On Mon, May 18, 2020 at 10:20 AM Ian Jackson <ian.jackson@citrix.com> wrote:
-> > I think this should be "goto out".  That conforms to standard libxl
-> > error handling discipline and avoids future leak bugs etc.
-> > libxl__xs_transaction_abort is a no-op with t==NULL.
-> >
-> > Also, it is not clear to me why you chose to put this outside the
-> > transaction loop.  Can you either put it inside the transaction loop,
-> > or produce an explanation as to why this approach is race-free...
+Jason Andryuk writes ("Re: [PATCH v5 09/21] libxl: add save/restore support for qemu-xen in stubdomain [and 1 more messages]"):
+> On Mon, May 18, 2020 at 11:18 AM Ian Jackson <ian.jackson@citrix.com> wrote:
+> > [explanation of confusion]
 > 
-> I just matched the old code's transaction only around the write.  "vm"
-> shouldn't change during runtime, but I can make the changes as you
-> suggest.
+> Do you want the commit message to add a blurb about this?  So the
+> message becomes:
+> """
+> Rely on a wrapper script in stubdomain to attach relevant consoles to
+> qemu.  The save console (1) must be attached to fdset/1.  When
+> performing a restore, $STUBDOM_RESTORE_INCOMING_ARG must be replaced on
+> the qemu command line by "fd:$FD", where $FD is an open file descriptor
+> number to the restore console (2).
+> 
+> Existing libxl code (for dom0) already connects the stubdom's save &
+> restore console outputs to the save & restore files.
+> """
 
-Ah I see.  I hadn't spotted this duplication.
+I think that would be good, thanks, yes but I won't insist on it.
 
-As there is only one caller of libxl__write_stub_dmargs the messing
-about with %d/vm and the transaction and so on could be factored out
-and only the actual arg processing made conditional.
+I think I already gave my ack for v6 of this.  If you add the commit
+message text above you should obviously keep that ack.
 
-I would prefer that, to be honest.  But I don't want to derail this
-series at this point by asking you to take on refactorings that I
-ought to have asked for sooner.
-
-So I'll take it if you make the new code the way I like it, as I
-suggest above.  Maybe it will be refactored later (perhaps even by
-me...)
-
-Regards,
+Thanks,
 Ian.
 
