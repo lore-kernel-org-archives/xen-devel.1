@@ -2,53 +2,70 @@ Return-Path: <SRS0=XBwx=7A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2032C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 13:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D99E3C433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 13:15:58 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 78F1E20671
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 13:14:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 78F1E20671
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 9EFEB20671
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 13:15:58 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="xjnq5gPi"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9EFEB20671
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jafaC-0006Ww-RY; Mon, 18 May 2020 13:13:28 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jafcR-0006dv-8D; Mon, 18 May 2020 13:15:47 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=hVld=7A=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jafaB-0006Wr-TV
- for xen-devel@lists.xenproject.org; Mon, 18 May 2020 13:13:27 +0000
-X-Inumbo-ID: 5bafc226-9909-11ea-a860-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 5bafc226-9909-11ea-a860-12813bfff9fa;
- Mon, 18 May 2020 13:13:26 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 0491BB1F7;
- Mon, 18 May 2020 13:13:27 +0000 (UTC)
-Subject: Re: [PATCH v4] x86: clear RDRAND CPUID bit on AMD family 15h/16h
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <69382ba7-b562-2c8c-1843-b17ce6c512f1@suse.com>
- <20200515151838.GU54375@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <e4c23fcb-0a09-4e8c-eabe-ff7040427376@suse.com>
-Date: Mon, 18 May 2020 15:13:23 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ (envelope-from <SRS0=/+tu=7A=xen.org=julien@srs-us1.protection.inumbo.net>)
+ id 1jafcP-0006do-PN
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2020 13:15:45 +0000
+X-Inumbo-ID: aeaf1e40-9909-11ea-b07b-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id aeaf1e40-9909-11ea-b07b-bc764e2007e4;
+ Mon, 18 May 2020 13:15:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+ MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=NhDnZvpcDeGZ65uLgD9pNSdYv9QgJZf6F3tFtD4GQ+w=; b=xjnq5gPi9bggAZ7cXwfE857poU
+ WJT1eGlht7AwSom1wM6HCZRFyslEEtH6K1INQD9Uvc87C9iElMpsh6w7jYGjIg4+SeTJaFVap9iFM
+ nMi5ltXlpJmL3d4TPg8IAXdDXEIkC605I8tQvo5yyW5vqc9ejDl3gDmgTBMdd5ArdH9E=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <julien@xen.org>)
+ id 1jafcM-00008D-NE; Mon, 18 May 2020 13:15:42 +0000
+Received: from 54-240-197-224.amazon.com ([54.240.197.224]
+ helo=a483e7b01a66.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
+ (envelope-from <julien@xen.org>)
+ id 1jafcM-0006d4-FZ; Mon, 18 May 2020 13:15:42 +0000
+Subject: Re: [RESEND PATCH v2 for-4.14] pvcalls: Document correctly and
+ explicitely the padding for all arches
+To: Jan Beulich <jbeulich@suse.com>
+References: <20200516102157.1928-1-julien@xen.org>
+ <31a7d5b0-4e4f-960c-d4e0-8e87bf489db2@suse.com>
+From: Julien Grall <julien@xen.org>
+Message-ID: <8b0aa4b3-9220-ab13-aa8f-2b7907a3efdf@xen.org>
+Date: Mon, 18 May 2020 14:15:40 +0100
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
+ Gecko/20100101 Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200515151838.GU54375@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <31a7d5b0-4e4f-960c-d4e0-8e87bf489db2@suse.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,90 +76,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 15.05.2020 17:18, Roger Pau Monné wrote:
-> On Mon, Mar 09, 2020 at 10:08:50AM +0100, Jan Beulich wrote:
->> Inspired by Linux commit c49a0a80137c7ca7d6ced4c812c9e07a949f6f24:
->>
->>     There have been reports of RDRAND issues after resuming from suspend on
->>     some AMD family 15h and family 16h systems. This issue stems from a BIOS
->>     not performing the proper steps during resume to ensure RDRAND continues
->>     to function properly.
->>
->>     Update the CPU initialization to clear the RDRAND CPUID bit for any family
->>     15h and 16h processor that supports RDRAND. If it is known that the family
->>     15h or family 16h system does not have an RDRAND resume issue or that the
->>     system will not be placed in suspend, the "cpuid=rdrand" kernel parameter
->>     can be used to stop the clearing of the RDRAND CPUID bit.
->>
->>     Note, that clearing the RDRAND CPUID bit does not prevent a processor
->>     that normally supports the RDRAND instruction from executing it. So any
->>     code that determined the support based on family and model won't #UD.
->>
->> Warn if no explicit choice was given on affected hardware.
->>
->> Check RDRAND functions at boot as well as after S3 resume (the retry
->> limit chosen is entirely arbitrary).
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+Hi Jan,
 
-Thanks much.
-
->> @@ -646,6 +647,25 @@ static void init_amd(struct cpuinfo_x86
->>  		if (acpi_smi_cmd && (acpi_enable_value | acpi_disable_value))
->>  			amd_acpi_c1e_quirk = true;
->>  		break;
->> +
->> +	case 0x15: case 0x16:
->> +		/*
->> +		 * There are too many Fam15/Fam16 systems where upon resume
->> +		 * from S3 firmware fails to re-setup properly functioning
->> +		 * RDRAND.  Clear the feature unless force-enabled on the
->> +		 * command line.
->> +		 */
->> +		if (c == &boot_cpu_data &&
->> +		    cpu_has(c, X86_FEATURE_RDRAND) &&
->> +		    !is_forced_cpu_cap(X86_FEATURE_RDRAND)) {
+On 18/05/2020 12:51, Jan Beulich wrote:
+> On 16.05.2020 12:21, Julien Grall wrote:
+>> --- a/xen/include/public/io/pvcalls.h
+>> +++ b/xen/include/public/io/pvcalls.h
+>> @@ -65,6 +65,9 @@ struct xen_pvcalls_request {
+>>               uint32_t domain;
+>>               uint32_t type;
+>>               uint32_t protocol;
+>> +#ifndef CONFIG_X86_32
+>> +            uint8_t pad[4];
+>> +#endif
 > 
-> Given this is the only user of is_forced_cpu_cap...
-> 
->> +			static const char __initconst text[] =
->> +				"RDRAND may cease to work on this hardware upon resume from S3.\n"
->> +				"Please choose an explicit cpuid={no-}rdrand setting.\n";
->> +
->> +			setup_clear_cpu_cap(X86_FEATURE_RDRAND);
->> +			warning_add(text);
->> +		}
->> +		break;
->>  	}
->>  
->>  	display_cacheinfo(c);
->> --- a/xen/arch/x86/cpu/common.c
->> +++ b/xen/arch/x86/cpu/common.c
->> @@ -11,6 +11,7 @@
->>  #include <asm/io.h>
->>  #include <asm/mpspec.h>
->>  #include <asm/apic.h>
->> +#include <asm/random.h>
->>  #include <asm/setup.h>
->>  #include <mach_apic.h>
->>  #include <public/sysctl.h> /* for XEN_INVALID_{SOCKET,CORE}_ID */
->> @@ -98,6 +99,11 @@ void __init setup_force_cpu_cap(unsigned
->>  	__set_bit(cap, boot_cpu_data.x86_capability);
->>  }
->>  
->> +bool is_forced_cpu_cap(unsigned int cap)
-> 
-> ... I think this could be made __init?
+> There's no concept of CONFIG_* in the public headers, the dependency
+> (as you'll find elsewhere) is on __i386__ / __x86_64__.
 
-Ah, now it can be again, yes. It was an endless back and forth between
-the various versions (some not even posted).
+Doh, I forgot it. I will fix it.
 
-Jan
+> Also whether
+> there's any padding really doesn't depend directly on the architecture,
+> but instead on __alignof__(uint64_t) (i.e. a future port to a 32-bit
+> arch, even if - like on x86 - just a guest bitness, may similarly
+> want / need / have no padding here).
+
+Lets imagine someone decide to introduce 32-bit and then later on 
+64-bit. Both have different padding requirements. This would result to 
+the same mess as on x86.
+
+So I think we shouldn't depend on __alignof__(uint64_t) to avoid any 
+more screw up. Obviously extra care would need to be taken if the 
+padding is higher, but it is also true in many other place of Xen headers.
+
+Cheers,
+
+-- 
+Julien Grall
 
