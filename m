@@ -2,78 +2,77 @@ Return-Path: <SRS0=XBwx=7A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+X-Spam-Status: No, score=-8.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8495FC433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 01:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 817E4C433E2
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 01:15:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 57AFA206D4
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 01:15:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 54C7B2067D
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 01:15:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="dmYzjqhn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57AFA206D4
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pFmqH/y+"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 54C7B2067D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jaUMx-0008UK-8Z; Mon, 18 May 2020 01:15:03 +0000
+	id 1jaUMe-0008SA-4y; Mon, 18 May 2020 01:14:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=tJLm=7A=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1jaUMv-0008U5-SI
- for xen-devel@lists.xenproject.org; Mon, 18 May 2020 01:15:01 +0000
-X-Inumbo-ID: f92d3b24-98a4-11ea-b9cf-bc764e2007e4
-Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
+ id 1jaUMc-0008S5-1F
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2020 01:14:42 +0000
+X-Inumbo-ID: f325192c-98a4-11ea-b07b-bc764e2007e4
+Received: from mail-qt1-x843.google.com (unknown [2607:f8b0:4864:20::843])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f92d3b24-98a4-11ea-b9cf-bc764e2007e4;
- Mon, 18 May 2020 01:14:51 +0000 (UTC)
-Received: by mail-qt1-x842.google.com with SMTP id a23so1134322qto.1
- for <xen-devel@lists.xenproject.org>; Sun, 17 May 2020 18:14:51 -0700 (PDT)
+ id f325192c-98a4-11ea-b07b-bc764e2007e4;
+ Mon, 18 May 2020 01:14:41 +0000 (UTC)
+Received: by mail-qt1-x843.google.com with SMTP id p12so6807385qtn.13
+ for <xen-devel@lists.xenproject.org>; Sun, 17 May 2020 18:14:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=BWSyY9N8FyMXoF1yPMPDtUrpbXjsGUwF5REIL/gyKE4=;
- b=dmYzjqhn8djThiD2veq57JdGz25GPorcVaEokl2lHY+o69SGbl/uoxQ1RZCUEe4XZ+
- CdP6adOaOBbmJcRmbZbYX3YgVEz55ewTwrPuHXvm95IyZbWqH3scoAjIhi6QDHl+sb6e
- tL30WijZOeD8Y+jmufz+6CCWH7l0aGfp748EWFOWb9AQW4T0yRvnRlKf6KJvUy9gCFFh
- dGrmCC9DsDnFF5YqMUDumDQxT0v1nzx9Ci4MbTaMGb/bui5n0x6X0zpJH/4h4OXIQpaw
- XH6C6bVbmFxkvsQqofYtzg7xf3YsTjycd9iyVCsLTpeXclxxFijq9DRE5YYUzB06mIfY
- i1sQ==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=AjO9kkt5bMdK0S8Ne/6CQZwANRVtIV2wBZ1lc1Nj27g=;
+ b=pFmqH/y+TAs8gwaQTKUwL2fnTsjIrU/KF/XOv2XPu2xj6DK3venX8LTJEhc7Bbk/li
+ OQwsI7c8ecgBAaImOBCQbfheHk0ZXBREa9RX781f8ThYsphxRTRYMYzia8B8j5kCJb+r
+ wLYuE11rRf+XL74zxJP/PItqAkck40Ia4bxLiu3QwFzslUTSxGyN4hQuk6QNx/ZjMLK7
+ pmYBATA1lDVjG2WZNlUH7KxrBsckSCf6JluS9m7nfiYfB5tqyAiSYNgprytJS/ZehSMI
+ 32IzO2mI9m292zhxvu9OUrw0+CO4zszGcu+pAcggr5oVK/70u1lTfoPovpT/WUe/hqvU
+ tl3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=BWSyY9N8FyMXoF1yPMPDtUrpbXjsGUwF5REIL/gyKE4=;
- b=N0poky+kT4/hjGdYMsCjpQiAHAA9+qernI8bNm7l2Tp6IEB8b9wrsbis2pZHkmAMU6
- C6JJAovHP488nOyY4j+q8H0UvmiDf/aZE7TRsES7HBV9oi+6MnOspAL5RTC6UvG2RvuH
- +1E83rszwtnCaSaC+hXc4RV/GN54XdqTHSayB+cAKi+zLRjdzoJBm1bDHt3plxHhTDUh
- OtNCc7l1wtKe1wtJWyL3eufMc91CBujlaY4B7tvOUehkpuse3Xju6GnE0eXteB2qCqpZ
- k9MTVftTcA/OaQm4Q0lh/ftiilnvEMEMI3QC0ZnG2n8BnGNw7o2nuqor5ZSi2gtwBpel
- +C/w==
-X-Gm-Message-State: AOAM532fdggrclJN7raGn1+VSaB8ec3VFC8P3fUrqPb7YnusBO0k7h2G
- kZCIdLBycSp9PZUEnVREwsYfOxAk
-X-Google-Smtp-Source: ABdhPJyQ8nGpESmVdZae8TILsY1KpZ+Wbr4ArZ7xFlRRhBuWFQQSSMn+p/7NqkeImxBSOkezy/nJ/Q==
-X-Received: by 2002:aed:3b75:: with SMTP id q50mr14557795qte.23.1589764490424; 
- Sun, 17 May 2020 18:14:50 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=AjO9kkt5bMdK0S8Ne/6CQZwANRVtIV2wBZ1lc1Nj27g=;
+ b=bHetmOSsDZ4FirkMD3TLuL0lpWuYTnqUmGPn9q5DPr+5OTRRIQhg1HSOOIPyk0cEF2
+ vYIN9SUrVBX5htCpWXAhWoy12I1DmkbnTBkbFaaltbcO+alq/fxohVcWfKElnRpIfc7q
+ K7uiB/uHlgJz8ednTM60WPLQiPZgRyCRn8fWIbbtGOyfABHwFjwxyACR8Ut4fGITkR79
+ N99JYW1TEOz3ofA1tFfiLVD+MMine86sDhQ3jvsmM1UmIs8NCYnUX6Wv6GHmxmcLC278
+ qs2JHmvT5hM5Egm2mrjNhqmBCFwdh8NPLzjiHLsWtacj0gXjet26EH3ZZr1l8IAB3ym1
+ EiJw==
+X-Gm-Message-State: AOAM5316IaP9KVtjjZjVxG5Ewe3aROWpgOsAcTi9/9Q/wMMllFmxMnnA
+ EpOLsC78xqzxMHMnjYKXYCrr22wdayI=
+X-Google-Smtp-Source: ABdhPJzk3UMrvPbTVGipeZvHLW8jkkL2P8wcQKp+/bfuYa5dOeomzXK3NnhG5KezYUpIF/9C0S38wg==
+X-Received: by 2002:ac8:326d:: with SMTP id y42mr13923879qta.243.1589764480140; 
+ Sun, 17 May 2020 18:14:40 -0700 (PDT)
 Received: from shine.lan ([2001:470:8:67e:ec68:c92e:af5a:2d3a])
- by smtp.gmail.com with ESMTPSA id l2sm7072864qkd.57.2020.05.17.18.14.49
+ by smtp.gmail.com with ESMTPSA id l2sm7072864qkd.57.2020.05.17.18.14.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 17 May 2020 18:14:49 -0700 (PDT)
+ Sun, 17 May 2020 18:14:39 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v6 04/18] libxl: Allow running qemu-xen in stubdomain
-Date: Sun, 17 May 2020 21:13:39 -0400
-Message-Id: <20200518011353.326287-5-jandryuk@gmail.com>
+Subject: [PATCH v6 00/18] Add support for qemu-xen runnning in a Linux-based
+ stubdomain
+Date: Sun, 17 May 2020 21:13:35 -0400
+Message-Id: <20200518011353.326287-1-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200518011353.326287-1-jandryuk@gmail.com>
-References: <20200518011353.326287-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -87,86 +86,165 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>, Jason Andryuk <jandryuk@gmail.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Jason Andryuk <jandryuk@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Anthony PERARD <anthony.perard@citrix.com>,
- Ian Jackson <ian.jackson@citrix.com>
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Ian Jackson <ian.jackson@citrix.com>,
+ Anthony PERARD <anthony.perard@citrix.com>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Hi,
 
-Do not prohibit anymore using stubdomain with qemu-xen.
-To help distingushing MiniOS and Linux stubdomain, add helper inline
-functions libxl__stubdomain_is_linux() and
-libxl__stubdomain_is_linux_running(). Those should be used where really
-the difference is about MiniOS/Linux, not qemu-xen/qemu-xen-traditional.
+In coordination with Marek, I'm making a submission of his patches for Linux
+stubdomain device-model support.  I made a few of my own additions, but Marek
+did the heavy lifting.  Thank you, Marek.
 
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
-Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Below is mostly the v5 cover leter with a few additions.
 
----
+General idea is to allow freely set device_model_version and
+device_model_stubdomain_override and choose the right options based on this
+choice.  Also, allow to specific path to stubdomain kernel/ramdisk, for greater
+flexibility.
+
+First two patches add documentation about expected toolstack-stubdomain-qemu
+interface, both for MiniOS stubdomain and Linux stubdomain.
+
+Initial version has no QMP support - in initial patches it is completely
+disabled, which means no suspend/restore and no PCI passthrough.
+
+Later patches add QMP over libvchan connection support. The actual connection
+is made in a separate process. As discussed on Xen Summit 2019, this allows to
+apply some basic checks and/or filtering (not part of this series), to limit
+libxl exposure for potentially malicious stubdomain.
+
+Jason's additions ensure the qmp-proxy (vchan-socket-proxy) processes and
+sockets are cleaned up and add some documentation.
+
+The actual stubdomain implementation is here:
+
+   https://github.com/jandryuk/qubes-vmm-xen-stubdom-linux
+   (branch initramfs-tools, tag for-upstream-v6)
+
+See readme there for build instructions.  Marek's version requires dracut.  I
+have hacked up a version usable with initramfs-tools.
+
+The v6 version is needed to be compatible with these changes in the v6 posting:
+
+ - Mini-OS stubdoms use dmargs xenstore key as a string.  Linux stubdoms
+   use dm-argv as a directory for numbered entries.
+
+ - The hardcoded "fd:3" for the restore image is replaced with the
+   placehodler string $STUBDOM_RESTORE_INCOMING_ARG.  The stubdom
+   initscript needs to replace that with a an "fd:$FD" string to the
+   hooked up console 2.
+
+Few comments/questions about the stubdomain code:
+
+1. There are extra patches for qemu that are necessary to run it in stubdomain.
+While it is desirable to upstream them, I think it can be done after merging
+libxl part. Stubdomain's qemu build will in most cases be separate anyway, to
+limit qemu's dependencies (so the stubdomain size).
+
+2. By default Linux hvc-xen console frontend is unreliable for data transfer
+(qemu state save/restore) - it drops data sent faster than client is reading
+it. To fix it, console device needs to be switched into raw mode (`stty raw
+/dev/hvc1`). Especially for restoring qemu state it is tricky, as it would need
+to be done before opening the device, but stty (obviously) needs to open the
+device first. To solve this problem, for now the repository contains kernel
+patch which changes the default for all hvc consoles. Again, this isn't
+practical problem, as the kernel for stubdomain is built separately. But it
+would be nice to have something working with vanilla kernel. I see those
+options:
+  - convert it to kernel cmdline parameter (hvc_console_raw=1 ?)
+  - use channels instead of consoles (and on the kernel side change the default
+    to "raw" only for channels); while in theory better design, libxl part will
+    be more complex, as channels can be connected to sockets but not files, so
+    libxl would need to read/write to it exactly when qemu write/read the data,
+    not before/after as it is done now
+
+Remaining parts for eliminating dom0's instance of qemu:
+ - do not force QDISK backend for CDROM
+ - multiple consoles support in xenconsoled
+
+Changes in v2:
+ - apply review comments by Jason Andryuk
 Changes in v3:
- - new patch, instead of "libxl: Add "stubdomain_version" to
- domain_build_info"
- - helper functions as suggested by Ian Jackson
+ - rework qemu arguments handling (separate xenstore keys, instead of \x1b separator)
+ - add QMP over libvchan, instead of console
+ - add protocol documentation
+ - a lot of minor changes, see individual patches for full changes list
+ - split xenconsoled patches into separate series
+Changes in v4:
+ - extract vchan connection into a separate process
+ - rebase on master
+ - various fixes
+Changes in v5:
+ - Marek: apply review comments from Jason Andryuk
+ - Jason: Clean up qmp-proxy processes and sockets
 Changes in v6:
- - Add Acked-by: Ian Jackson
----
- tools/libxl/libxl_create.c   |  9 ---------
- tools/libxl/libxl_internal.h | 17 +++++++++++++++++
- 2 files changed, 17 insertions(+), 9 deletions(-)
+ - Squash vchan-proxy kill and socket cleanup into "libxl: use vchan for
+   QMP access with Linux stubdomain".
+ - Use dm-argv as the xenstore directory for the QEMU arguments.
+ - Use $STUBDOM_RESTORE_INCOMING_ARG as a placeholder instead of
+   hardcoding "fd:3".
+ - Comment to re-run autotools.
+ - Add Acked-by from Ian Jackson where approriate.
 
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
-index 5a043df15f..433947abab 100644
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -171,15 +171,6 @@ int libxl__domain_build_info_setdefault(libxl__gc *gc,
-         }
-     }
- 
--    if (b_info->type == LIBXL_DOMAIN_TYPE_HVM &&
--        b_info->device_model_version !=
--            LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN_TRADITIONAL &&
--        libxl_defbool_val(b_info->device_model_stubdomain)) {
--        LOG(ERROR,
--            "device model stubdomains require \"qemu-xen-traditional\"");
--        return ERROR_INVAL;
--    }
--
-     if (!b_info->max_vcpus)
-         b_info->max_vcpus = 1;
-     if (!b_info->avail_vcpus.size) {
-diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
-index e5effd2ad1..d1ebdec8d2 100644
---- a/tools/libxl/libxl_internal.h
-+++ b/tools/libxl/libxl_internal.h
-@@ -2324,6 +2324,23 @@ _hidden int libxl__device_model_version_running(libxl__gc *gc, uint32_t domid);
-   /* Return the system-wide default device model */
- _hidden libxl_device_model_version libxl__default_device_model(libxl__gc *gc);
- 
-+static inline
-+bool libxl__stubdomain_is_linux_running(libxl__gc *gc, uint32_t domid)
-+{
-+    /* same logic as in libxl__stubdomain_is_linux */
-+    return libxl__device_model_version_running(gc, domid)
-+        == LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
-+}
-+
-+static inline
-+bool libxl__stubdomain_is_linux(libxl_domain_build_info *b_info)
-+{
-+    /* right now qemu-tranditional implies MiniOS stubdomain and qemu-xen
-+     * implies Linux stubdomain */
-+    return libxl_defbool_val(b_info->device_model_stubdomain) &&
-+        b_info->device_model_version == LIBXL_DEVICE_MODEL_VERSION_QEMU_XEN;
-+}
-+
- #define DEVICE_MODEL_XS_PATH(gc, dm_domid, domid, fmt, _a...)              \
-     libxl__sprintf(gc, "/local/domain/%u/device-model/%u" fmt, dm_domid,   \
-                    domid, ##_a)
+Eric Shelton (1):
+  libxl: Handle Linux stubdomain specific QEMU options.
+
+Jason Andryuk (3):
+  libxl: Refactor kill_device_model to libxl__kill_xs_path
+  docs: Add device-model-domid to xenstore-paths
+  libxl: Check stubdomain kernel & ramdisk presence
+
+Marek Marczykowski-Górecki (14):
+  Document ioemu MiniOS stubdomain protocol
+  Document ioemu Linux stubdomain protocol
+  libxl: fix qemu-trad cmdline for no sdl/vnc case
+  libxl: Allow running qemu-xen in stubdomain
+  libxl: write qemu arguments into separate xenstore keys
+  xl: add stubdomain related options to xl config parser
+  tools/libvchan: notify server when client is connected
+  libxl: add save/restore support for qemu-xen in stubdomain
+  tools: add missing libxenvchan cflags
+  tools: add simple vchan-socket-proxy
+  libxl: use vchan for QMP access with Linux stubdomain
+  libxl: require qemu in dom0 for multiple stubdomain consoles
+  libxl: ignore emulated IDE disks beyond the first 4
+  libxl: consider also qemu in stubdomain in libxl__dm_active check
+
+ .gitignore                          |   1 +
+ configure                           |  14 +-
+ docs/configure                      |  14 +-
+ docs/man/xl.cfg.5.pod.in            |  27 +-
+ docs/misc/stubdom.txt               | 105 ++++++
+ docs/misc/xenstore-paths.pandoc     |   5 +
+ stubdom/configure                   |  14 +-
+ tools/Rules.mk                      |   2 +-
+ tools/config.h.in                   |   3 +
+ tools/configure                     |  46 ++-
+ tools/configure.ac                  |   9 +
+ tools/libvchan/Makefile             |   8 +-
+ tools/libvchan/init.c               |   3 +
+ tools/libvchan/vchan-socket-proxy.c | 478 ++++++++++++++++++++++++++
+ tools/libxl/libxl_aoutils.c         |  32 ++
+ tools/libxl/libxl_create.c          |  46 ++-
+ tools/libxl/libxl_dm.c              | 506 ++++++++++++++++++++++------
+ tools/libxl/libxl_domain.c          |  10 +
+ tools/libxl/libxl_internal.h        |  22 ++
+ tools/libxl/libxl_mem.c             |   6 +-
+ tools/libxl/libxl_qmp.c             |  27 +-
+ tools/libxl/libxl_types.idl         |   3 +
+ tools/xl/xl_parse.c                 |   7 +
+ 23 files changed, 1209 insertions(+), 179 deletions(-)
+ create mode 100644 tools/libvchan/vchan-socket-proxy.c
+
 -- 
 2.25.1
 
