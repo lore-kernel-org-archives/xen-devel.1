@@ -2,74 +2,67 @@ Return-Path: <SRS0=XBwx=7A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F52CC433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 15:05:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6DFA8C433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 15:18:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1C42820671
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 15:05:59 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=linux-powerpc-org.20150623.gappssmtp.com header.i=@linux-powerpc-org.20150623.gappssmtp.com header.b="tX18kMH5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C42820671
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=linux-powerpc.org
+	by mail.kernel.org (Postfix) with ESMTPS id 40EDE207D3
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 15:18:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 40EDE207D3
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jahKk-0001jk-AI; Mon, 18 May 2020 15:05:38 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jahWs-0002nd-Ov; Mon, 18 May 2020 15:18:10 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hPYZ=7A=linux-powerpc.org=kda@srs-us1.protection.inumbo.net>)
- id 1jahKj-0001ja-4u
- for xen-devel@lists.xenproject.org; Mon, 18 May 2020 15:05:37 +0000
-X-Inumbo-ID: 06e66b40-9919-11ea-ae69-bc764e2007e4
-Received: from mail-lj1-x241.google.com (unknown [2a00:1450:4864:20::241])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 06e66b40-9919-11ea-ae69-bc764e2007e4;
- Mon, 18 May 2020 15:05:36 +0000 (UTC)
-Received: by mail-lj1-x241.google.com with SMTP id u15so10246248ljd.3
- for <xen-devel@lists.xenproject.org>; Mon, 18 May 2020 08:05:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-powerpc-org.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id;
- bh=5ZQonOkXHgWeke396MyrCrje/s40Q6/pN3g2SkH/8Xw=;
- b=tX18kMH5bs5YknKTJ3HuUOoTtLZo58+zr1cAemX1Tmh6VYaMCONXwi2FkFWtm0DlgN
- dni5gZar6g/Do1i+EoBfEdsg8IDw3AmYsM86Xj4swEcazOD95NBOPFpt4ZAyJTZgLUYc
- o4NH4JFcPIWUOhpE2hgKG3zSRjAYTJyjB8qSadvrQROr2vOTP7bLZFoo2h2oFwdPGUf6
- b//lGKi5TKTNO95ZGEczYABPNDFwgaVrlC3pUKkLDKfJKwtuf8m8lkMepr3bMhhwmfcs
- tmc0zsd24wUuMscSYNu+HK3r6UAy0ljyBvptY35zrdm1S2NvXdQFeVlPoP7zf5vS+LVj
- 3HKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id;
- bh=5ZQonOkXHgWeke396MyrCrje/s40Q6/pN3g2SkH/8Xw=;
- b=ulwOldVH/PbdrBdy8g0jlmW5EwbxKrCrwMSMHfFNEcXOC/uS+yzd9ARpeCvTeZNO4L
- a7BGdOQVL+YWScPalKXcQNyTeWnvOG/0O1ctwDNpOW7jUrdwwJPIZCAGgnbUAuyof/3O
- vnNeGo+COeoofExMzn5u6I/MQsxlVio4c1hXvwCM3vI0cCgdNEZJPQ8I3rnZuv7mqtLa
- lPcr1XyNdKQBPLpvZbqGRHgMihyUmCMxQJAjdDqeMXtSm5c+opatpBBLRW/2K5IFHm6x
- +UgV+ccJAkszvwepLwtAVElgtJBMvnbcmm3hVQWiGOWCCFDBPJsDJXnePTRZCiyXOKrE
- bYjg==
-X-Gm-Message-State: AOAM532E4t+qgMBx7dTM07kS57B1lrdmcs8/PZaW5QstiQyqnix01KTm
- B9YIS3L3A/FaCuWHGCdT8zG8lwsoEBzOmQ==
-X-Google-Smtp-Source: ABdhPJyL9pGeWSaL7kl5ehK87kkKc+Del+rsWDEA2yvMomHnsOqt2/WC4Ll84GtxbzpIwGfLtHTnQg==
-X-Received: by 2002:a2e:8703:: with SMTP id m3mr10548371lji.286.1589814334809; 
- Mon, 18 May 2020 08:05:34 -0700 (PDT)
-Received: from centos7-pv-guest.localdomain ([5.35.46.227])
- by smtp.gmail.com with ESMTPSA id 130sm7296306lfl.37.2020.05.18.08.05.33
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 18 May 2020 08:05:34 -0700 (PDT)
-From: Denis Kirjanov <kda@linux-powerpc.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4] public/io/netif.h: add a new extra type for XDP
-Date: Mon, 18 May 2020 18:04:52 +0300
-Message-Id: <1589814292-1789-1-git-send-email-kda@linux-powerpc.org>
-X-Mailer: git-send-email 1.8.3.1
+ <SRS0=TuVG=7A=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1jahWq-0002nX-R7
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2020 15:18:08 +0000
+X-Inumbo-ID: c6d396c0-991a-11ea-a872-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c6d396c0-991a-11ea-a872-12813bfff9fa;
+ Mon, 18 May 2020 15:18:07 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: JkbVuUvGzKnGQQCS/YF3/lx3SQ+gsGc95icrSqD7k1DiojJHjk73/SbTddemRrHOiF6NDI/OTq
+ CfJp5ZIkP1FEVbRT78aVgciZNntvv4wycxF+34qjdp2i65LwMUUla4FayYsV+uNZjoIW4uBs3s
+ n0BYbdyK/kRdS+4pJlh6wSi57aX/l99Z9vg7B/l/DAxHZqn2DSbhQ1FKgcZpRB9bbvNb7uTwLG
+ EzOMMRGxMYTWuA8/Gf3zjHYZfdSpQDJli75cUa1tuCFmTWpdKa3pDnVBCteGeCM3GE1geH/nWj
+ Vrk=
+X-SBRS: 2.7
+X-MesageID: 18502088
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,407,1583211600"; d="scan'208";a="18502088"
+From: Ian Jackson <ian.jackson@citrix.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: 8bit
+Message-ID: <24258.42794.136081.367565@mariner.uk.xensource.com>
+Date: Mon, 18 May 2020 16:18:02 +0100
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?=
+ <marmarek@invisiblethingslab.com>, Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: [PATCH v5 09/21] libxl: add save/restore support for qemu-xen in
+ stubdomain [and 1 more messages]
+In-Reply-To: <20200428040433.23504-10-jandryuk@gmail.com>,
+ <20200518145028.GD98582@mail-itl>
+References: <20200428040433.23504-1-jandryuk@gmail.com>
+ <20200428040433.23504-10-jandryuk@gmail.com>
+ <24253.29524.798802.978257@mariner.uk.xensource.com>
+ <CAKf6xpvJMovKMTWipC4gZuBD8FgmBEWbDbkm=ryRWSxNifQcJw@mail.gmail.com>
+ <24258.39029.788968.419649@mariner.uk.xensource.com>
+ <20200518145028.GD98582@mail-itl>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,76 +73,78 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: jgross@suse.com, paul@xen.org
+Cc: Anthony Perard <anthony.perard@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Wei
+ Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The patch adds a new extra type to be able to diffirentiate
-between RX responses on xen-netfront side with the adjusted offset
-required for XDP processing.
+> 
+Marek Marczykowski-Górecki writes ("Re: [PATCH v5 09/21] libxl: add save/restore support for qemu-xen in stubdomain"):
+> On Mon, May 18, 2020 at 03:15:17PM +0100, Ian Jackson wrote:
+> > Err, by "the qemu savefile pathname" I meant the pathname in dom0.
+> > I assume your wrapper script opens that and feeds it to the console.
+> > Is that right ?
+> 
+> Not really a wrapper script. On dom0 side it is console backend (qemu)
+> instructed to connect the console to a file, instead of pty. I have
+> implemented similar feature in my xenconsoled patch series sent a while
+> ago (sent along with v2 of this series), but that series needs some more
+> love.
+> 
+> On the stubdomain side, it is a script that launches qemu - opens a
+> /dev/hvc2, then pass the FD to qemu via -incoming option (which is
+> really constructed by libxl).
 
-The offset value from a guest is passed via xenstore.
+Hi.  Thanks for trying to help me understand.  I was still confused
+though.  I tried to explain another way and that helped me see what's
+going on.
 
-Signed-off-by: Denis Kirjanov <denis.kirjanov@suse.com>
----
-v4:
-- updated the commit and documenation
+I think I understand now.
 
-v3:
-- updated the commit message
+For reference, my confusion was this:
 
-v2:
-- added documentation
-- fixed padding for netif_extra_info
----
----
- xen/include/public/io/netif.h | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+Jason Andryuk writes ("[PATCH v5 09/21] libxl: add save/restore support for qemu-xen in stubdomain"):
+> index bdc23554eb..45d0dd56f5 100644
+> --- a/tools/libxl/libxl_dm.c
+> +++ b/tools/libxl/libxl_dm.c
+> @@ -1744,10 +1744,17 @@ static int libxl__build_device_model_args_new(libxl__gc *gc,
+>      }
+>  
+>      if (state->saved_state) {
+> -        /* This file descriptor is meant to be used by QEMU */
+> -        *dm_state_fd = open(state->saved_state, O_RDONLY);
+> -        flexarray_append(dm_args, "-incoming");
+> -        flexarray_append(dm_args, GCSPRINTF("fd:%d",*dm_state_fd));
+> +        if (is_stubdom) {
+> +            /* Linux stubdomain connects specific FD to STUBDOM_CONSOLE_RESTORE
+> +             */
+> +            flexarray_append(dm_args, "-incoming");
+> +            flexarray_append(dm_args, "fd:3");
+> +        } else {
+> +            /* This file descriptor is meant to be used by QEMU */
+> +            *dm_state_fd = open(state->saved_state, O_RDONLY);
+> +            flexarray_append(dm_args, "-incoming");
+> +            flexarray_append(dm_args, GCSPRINTF("fd:%d",*dm_state_fd));
+> +        }
 
-diff --git a/xen/include/public/io/netif.h b/xen/include/public/io/netif.h
-index 9fcf91a..a92bf04 100644
---- a/xen/include/public/io/netif.h
-+++ b/xen/include/public/io/netif.h
-@@ -161,6 +161,17 @@
-  */
- 
- /*
-+ * "xdp-headroom" is used to request that extra space is added
-+ * for XDP processing.  The value is measured in bytes and passed by
-+ * the frontend to be consistent between both ends.
-+ * If the value is greater than zero that means that
-+ * an RX response is going to be passed to an XDP program for processing.
-+ *
-+ * "feature-xdp-headroom" is set to "1" by the netback side like other features
-+ * so a guest can check if an XDP program can be processed.
-+ */
-+
-+/*
-  * Control ring
-  * ============
-  *
-@@ -985,7 +996,8 @@ typedef struct netif_tx_request netif_tx_request_t;
- #define XEN_NETIF_EXTRA_TYPE_MCAST_ADD (2)  /* u.mcast */
- #define XEN_NETIF_EXTRA_TYPE_MCAST_DEL (3)  /* u.mcast */
- #define XEN_NETIF_EXTRA_TYPE_HASH      (4)  /* u.hash */
--#define XEN_NETIF_EXTRA_TYPE_MAX       (5)
-+#define XEN_NETIF_EXTRA_TYPE_XDP       (5)  /* u.xdp */
-+#define XEN_NETIF_EXTRA_TYPE_MAX       (6)
- 
- /* netif_extra_info_t flags. */
- #define _XEN_NETIF_EXTRA_FLAG_MORE (0)
-@@ -1018,6 +1030,10 @@ struct netif_extra_info {
-             uint8_t algorithm;
-             uint8_t value[4];
-         } hash;
-+        struct {
-+            uint16_t headroom;
-+            uint16_t pad[2]
-+        } xdp;
-         uint16_t pad[3];
-     } u;
- };
--- 
-1.8.3.1
+In this hunk, the call
+           *dm_state_fd = open(state->saved_state, O_RDONLY);
+becomes conditional.  It is no longer executed in the stubdomain
+case.
 
+So then, who opens state->saved_state ?  And how do they get told
+where it is ?  If it's somewhere else in libxl, why doesn't it show up
+in this patch ?
+
+Posing the question liked that allowed me to see that the answer is
+
+           console[i].output = GCSPRINTF("file:%s",
+                           libxl__device_model_savefile(gc, guest_domid));
+
+in spawn_stub_launch_dm.  And it doesn't appear in the patch because
+it's already used for minios stub trad qemu and the same code is
+now going to be executed for linux stub moderm qemu.
+
+Ian.
 
