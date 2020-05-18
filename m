@@ -2,53 +2,73 @@ Return-Path: <SRS0=XBwx=7A=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4E144C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 10:28:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 951B5C433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 10:31:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0AE9620657
-	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 10:28:35 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0AE9620657
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 6CC06207ED
+	for <xen-devel@archiver.kernel.org>; Mon, 18 May 2020 10:31:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CC06207ED
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jad05-0007wH-0Y; Mon, 18 May 2020 10:28:01 +0000
+	id 1jad3F-0000G6-Fw; Mon, 18 May 2020 10:31:17 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=k4Zq=7A=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jad03-0007wC-K6
- for xen-devel@lists.xenproject.org; Mon, 18 May 2020 10:27:59 +0000
-X-Inumbo-ID: 3e46f0fe-98f2-11ea-b07b-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=eFi1=7A=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
+ id 1jad3E-0000G1-9z
+ for xen-devel@lists.xenproject.org; Mon, 18 May 2020 10:31:16 +0000
+X-Inumbo-ID: b3c9b686-98f2-11ea-ae69-bc764e2007e4
+Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e46f0fe-98f2-11ea-b07b-bc764e2007e4;
- Mon, 18 May 2020 10:27:58 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 6EA6BAA4F;
- Mon, 18 May 2020 10:28:00 +0000 (UTC)
-Subject: Re: [PATCH] public/io/netif.h: add a new extra type for XDP
-To: Denis Kirjanov <kda@linux-powerpc.org>
-References: <1589790285-1250-1-git-send-email-kda@linux-powerpc.org>
- <bbd8a83a-a676-9fa1-b03b-526e5122966f@suse.com>
- <CAOJe8K2pUv4Upvxya3LFPj0CxZ1-_hDZcrv-r6Q2EaxC8Ym6Ow@mail.gmail.com>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <2615d770-c17b-26e0-4686-852ca122eeb4@suse.com>
-Date: Mon, 18 May 2020 12:27:56 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
+ id b3c9b686-98f2-11ea-ae69-bc764e2007e4;
+ Mon, 18 May 2020 10:31:15 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id s8so11189309wrt.9
+ for <xen-devel@lists.xenproject.org>; Mon, 18 May 2020 03:31:15 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=qypNNsoA5wBKPhj7Sf33bS3ovebO9BMY32ZKbRxVRBY=;
+ b=Xr6oFU7PwOBkYl1VPkWniVywwc8MFtuzJOabpO3EzcsvCnU1WjzjKR5QMAyJJJVbEQ
+ QZFLsM+RxNjxiaV4isF8aTP2GME9zMCGvn/NeLZrH72FaQpmkDmSN4dZLfuYuyZeeZRA
+ yvvzw8N/shkS6k8fRRx1sshuzqABrdkpEsLmpP49FI+/f6xgAWutGG+P+AqK3bjod174
+ 38mWVn89bwAJ8BzCoBg4MxWjQE7qslaGWOuycr9jCeOnzDeWuUzHfjvdUyuJTipVGNLK
+ ts56Q2nO38X5CWliCvxkqsCzeUWrTaZ2ZVRO07MPsEoSlPIQ/W1y8+vNypKGUgICggex
+ tP8A==
+X-Gm-Message-State: AOAM531gnCPhKJKZJfgPLX0Bq/0rqvzwNv7z1TPt5xfVZNby2Iebfzat
+ 8k3x9P8Jrhg5ordRxeB22ZM=
+X-Google-Smtp-Source: ABdhPJxcbk7mn21pDORZuLxyNWw2IKhPO6lSmS9k23Qcp+QsHkMLHjf2zKm7zOLTu0psCCUUN5/t7w==
+X-Received: by 2002:a5d:4cc1:: with SMTP id c1mr18409241wrt.32.1589797875067; 
+ Mon, 18 May 2020 03:31:15 -0700 (PDT)
+Received: from
+ liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net
+ ([51.145.34.42])
+ by smtp.gmail.com with ESMTPSA id p10sm17171731wra.78.2020.05.18.03.31.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 18 May 2020 03:31:14 -0700 (PDT)
+Date: Mon, 18 May 2020 10:31:13 +0000
+From: Wei Liu <wl@xen.org>
+To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+ Jan Beulich <jbeulich@suse.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Wei Liu <wl@xen.org>
+Subject: Re: [PATCH mini-os] console: add newline at EOF
+Message-ID: <20200518103113.v4vik5mcwzuaofxn@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
+References: <9d2e445b-0b0f-4e4d-08a8-0f22013f111b@suse.com>
+ <20200518075300.t3tvfo7ucbwujmif@function>
 MIME-Version: 1.0
-In-Reply-To: <CAOJe8K2pUv4Upvxya3LFPj0CxZ1-_hDZcrv-r6Q2EaxC8Ym6Ow@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200518075300.t3tvfo7ucbwujmif@function>
+User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,33 +79,18 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 18.05.20 11:52, Denis Kirjanov wrote:
-> On 5/18/20, Jürgen Groß <jgross@suse.com> wrote:
->> On 18.05.20 10:24, Denis Kirjanov wrote:
->>> The patch adds a new extra type to be able to diffirentiate
->>> between RX responses on xen-netfront side with the adjusted offset
->>> required for XDP processing.
->>>
->>> For Linux the offset value is going to be passed via xenstore.
->>
->> Why? I can only see disadvantages by using a different communication
->> mechanism.
-> I see it like other features passed through xenstore and it requires
-> less changes to
-> other structures with the same final result.
+On Mon, May 18, 2020 at 09:53:00AM +0200, Samuel Thibault wrote:
+> Jan Beulich, le lun. 18 mai 2020 09:09:14 +0200, a ecrit:
+> > Some gcc versions get pretty unhappy without.
+> > 
+> > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> That was an easy one :)
+> 
+> Reviewed-by: Samuel Thibault <samuel.thibault@ens-lyon.org>
 
-This is okay as long there is no Xenstore interaction required when the
-interface has been setup completely (i.e. only defining the needed
-offset for XDP is fine, enabling/disabling XDP at runtime should not be
-done via Xenstore IMO).
-
-And please, no guest type special casing. Please replace "Linux" by e.g.
-"The guest" (with additional tweaking of the following sentence).
-
-
-Juergen
+Applied.
 
