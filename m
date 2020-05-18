@@ -2,70 +2,67 @@ Return-Path: <SRS0=kHyn=7B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.9 required=3.0 tests=DATE_IN_PAST_06_12,
+	DKIM_INVALID,DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C9A9FC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7623CC433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:23:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9F07320709
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:17:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9F07320709
+	by mail.kernel.org (Postfix) with ESMTPS id 45E7520709
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:23:05 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="utrlcu0A"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 45E7520709
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jaxRD-0003Jm-SK; Tue, 19 May 2020 08:17:23 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=IbQz=7B=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1jaxRB-0003Je-Rv
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 08:17:21 +0000
-X-Inumbo-ID: 2924948a-99a9-11ea-b07b-bc764e2007e4
-Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2924948a-99a9-11ea-b07b-bc764e2007e4;
- Tue, 19 May 2020 08:17:21 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id i15so14746800wrx.10
- for <xen-devel@lists.xenproject.org>; Tue, 19 May 2020 01:17:21 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=rPvsYD8u9NYxPAtjlCpCo+A9TeCrz0m4y0nIF0xzGoY=;
- b=f90jlETaMAK37uZJSvfVQh5BjieUZ2saCm7ExFdhoiZrUj104p4V8QLlW/2l0fcd53
- +li26pWKTB0RCTFjTfKOG0NZOKkkMdwupigYcgmyN/sWdvn4QfrjUmtq4ZCp1Gu2X2eK
- D4AJcvV7u/CSGxVozA+zo20dpDvGWzXmbHwnIJQ+YegIJNj6vymyfKiwSkhCZBwjmH4J
- OmHEWIZQo19YhgxwBw1v3nZ/uCrCOfSVOyMDRM7O1XGSBOGnAqbq2NxXHk+reXlHNvhn
- YyNKDBnjZdsxwiNz+w8coz9Zzb4JY83v7YAgPvWd45YhiUUFKetKFdrBwhSf6R4NgHDd
- 6ThA==
-X-Gm-Message-State: AOAM532eNXdKnqR076bFiDD35DYaBzttQ00K3A3iDPP2iX1mQTNuJGDk
- C/fMT32obM0jfbrvXv9kwmY=
-X-Google-Smtp-Source: ABdhPJxzNTIywS28ZPLHd20SnUo68SfhSE+H31hG8Z1rBke1hX1NpKT0ILUz8d4ye6S1VjnedsbKCQ==
-X-Received: by 2002:adf:e783:: with SMTP id n3mr23864842wrm.157.1589876240380; 
- Tue, 19 May 2020 01:17:20 -0700 (PDT)
-Received: from
- liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net
- ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id b7sm2784796wmj.29.2020.05.19.01.17.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 May 2020 01:17:19 -0700 (PDT)
-Date: Tue, 19 May 2020 08:17:18 +0000
+	id 1jaxW9-00048n-Fc; Tue, 19 May 2020 08:22:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=mazm=7B=xen.org=wl@srs-us1.protection.inumbo.net>)
+ id 1jaxW8-00048i-Lh
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 08:22:28 +0000
+X-Inumbo-ID: e0320fe0-99a9-11ea-a8e4-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e0320fe0-99a9-11ea-a8e4-12813bfff9fa;
+ Tue, 19 May 2020 08:22:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID
+ :Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID
+ :Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
+ Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
+ :List-Post:List-Owner:List-Archive;
+ bh=Rc+qzUpe0T069lskf8TXNNcQCBC0VCFC0iUiW3PNpCA=; b=utrlcu0AgRkjLf/Rsyhse2WhB7
+ kT1FLIx13BMfa4ikBcMl8hbyAQsf+qc8Oh1UqY51YSLy+8W6k8LPeBnWmXV8O+MsmslsO59RW8ZQv
+ cJURxTrQWgTQEvKqlZ/IP9SmN/3VQDZ7QdooKQMZcggIKy8KZgdobJS1sE5m9PW1AJDM=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <wl@xen.org>)
+ id 1jaxW5-000370-QD; Tue, 19 May 2020 08:22:25 +0000
+Received: from 96.142.6.51.dyn.plus.net ([51.6.142.96] helo=debian)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+ (envelope-from <wl@xen.org>)
+ id 1jaxW5-00037u-G6; Tue, 19 May 2020 08:22:25 +0000
+Date: Mon, 18 May 2020 23:24:38 +0100
 From: Wei Liu <wl@xen.org>
-To: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v10 10/12] tools/libxl: use libxenhypfs for setting xen
- runtime parameters
-Message-ID: <20200519081718.tkp7rsd3fseqmyzv@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
-References: <20200519072106.26894-1-jgross@suse.com>
- <20200519072106.26894-11-jgross@suse.com>
+To: Jason Andryuk <jandryuk@gmail.com>
+Subject: Re: [PATCH v7 00/19] Add support for qemu-xen runnning in a
+ Linux-based stubdomain
+Message-ID: <20200518222438.ar6e7fzkrjr5voau@debian>
+References: <20200519015503.115236-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200519072106.26894-11-jgross@suse.com>
+In-Reply-To: <20200519015503.115236-1-jandryuk@gmail.com>
 User-Agent: NeoMutt/20180716
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -77,113 +74,17 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
- Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Samuel Thibault <samuel.thibault@ens-lyon.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Ian Jackson <ian.jackson@citrix.com>,
+ Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Tue, May 19, 2020 at 09:21:04AM +0200, Juergen Gross wrote:
-> Instead of xc_set_parameters() use xenhypfs_write() for setting
-> parameters of the hypervisor.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> ---
-> V6:
-> - new patch
-> ---
->  tools/Rules.mk               |  2 +-
->  tools/libxl/Makefile         |  3 +-
->  tools/libxl/libxl.c          | 53 ++++++++++++++++++++++++++++++++----
->  tools/libxl/libxl_internal.h |  1 +
->  tools/libxl/xenlight.pc.in   |  2 +-
->  tools/xl/xl_misc.c           |  1 -
->  6 files changed, 52 insertions(+), 10 deletions(-)
-> 
-> diff --git a/tools/Rules.mk b/tools/Rules.mk
-> index ad6073fcad..883a193f9e 100644
-> --- a/tools/Rules.mk
-> +++ b/tools/Rules.mk
-> @@ -178,7 +178,7 @@ CFLAGS += -O2 -fomit-frame-pointer
->  endif
->  
->  CFLAGS_libxenlight = -I$(XEN_XENLIGHT) $(CFLAGS_libxenctrl) $(CFLAGS_xeninclude)
-> -SHDEPS_libxenlight = $(SHLIB_libxenctrl) $(SHLIB_libxenstore)
-> +SHDEPS_libxenlight = $(SHLIB_libxenctrl) $(SHLIB_libxenstore) $(SHLIB_libxenhypfs)
->  LDLIBS_libxenlight = $(SHDEPS_libxenlight) $(XEN_XENLIGHT)/libxenlight$(libextension)
->  SHLIB_libxenlight  = $(SHDEPS_libxenlight) -Wl,-rpath-link=$(XEN_XENLIGHT)
->  
-> diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
-> index 69fcf21577..a89ebab0b4 100644
-> --- a/tools/libxl/Makefile
-> +++ b/tools/libxl/Makefile
-> @@ -20,7 +20,7 @@ LIBUUID_LIBS += -luuid
->  endif
->  
->  LIBXL_LIBS =
-> -LIBXL_LIBS = $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(PTYFUNCS_LIBS) $(LIBUUID_LIBS)
-> +LIBXL_LIBS = $(LDLIBS_libxentoollog) $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenhypfs) $(LDLIBS_libxenstore) $(LDLIBS_libxentoolcore) $(PTYFUNCS_LIBS) $(LIBUUID_LIBS)
->  ifeq ($(CONFIG_LIBNL),y)
->  LIBXL_LIBS += $(LIBNL3_LIBS)
->  endif
-> @@ -33,6 +33,7 @@ CFLAGS_LIBXL += $(CFLAGS_libxentoolcore)
->  CFLAGS_LIBXL += $(CFLAGS_libxenevtchn)
->  CFLAGS_LIBXL += $(CFLAGS_libxenctrl)
->  CFLAGS_LIBXL += $(CFLAGS_libxenguest)
-> +CFLAGS_LIBXL += $(CFLAGS_libxenhypfs)
->  CFLAGS_LIBXL += $(CFLAGS_libxenstore)
->  ifeq ($(CONFIG_LIBNL),y)
->  CFLAGS_LIBXL += $(LIBNL3_CFLAGS)
-> diff --git a/tools/libxl/libxl.c b/tools/libxl/libxl.c
-> index f60fd3e4fd..621acc88f3 100644
-> --- a/tools/libxl/libxl.c
-> +++ b/tools/libxl/libxl.c
-> @@ -663,15 +663,56 @@ int libxl_set_parameters(libxl_ctx *ctx, char *params)
->  {
->      int ret;
->      GC_INIT(ctx);
-> +    char *par, *val, *end, *path;
-> +    xenhypfs_handle *hypfs;
->  
-> -    ret = xc_set_parameters(ctx->xch, params);
-> -    if (ret < 0) {
-> -        LOGEV(ERROR, ret, "setting parameters");
-> -        GC_FREE;
-> -        return ERROR_FAIL;
-> +    hypfs = xenhypfs_open(ctx->lg, 0);
-> +    if (!hypfs) {
-> +        LOGE(ERROR, "opening Xen hypfs");
-> +        ret = ERROR_FAIL;
-> +        goto out;
->      }
-> +
-> +    while (isblank(*params))
-> +        params++;
-> +
-> +    for (par = params; *par; par = end) {
-> +        end = strchr(par, ' ');
-> +        if (!end)
-> +            end = par + strlen(par);
-> +
-> +        val = strchr(par, '=');
-> +        if (val > end)
-> +            val = NULL;
-> +        if (!val && !strncmp(par, "no", 2)) {
-> +            path = libxl__sprintf(gc, "/params/%s", par + 2);
-> +            path[end - par - 2 + 8] = 0;
-> +            val = "no";
-> +            par += 2;
-> +        } else {
-> +            path = libxl__sprintf(gc, "/params/%s", par);
-> +            path[val - par + 8] = 0;
-> +            val = libxl__strndup(gc, val + 1, end - val - 1);
-> +        }
-> +
-> +	LOG(DEBUG, "setting node \"%s\" to value \"%s\"", path, val);
+I have queued up the first 5 patches for committing today.
 
-Indentation is wrong, but this can be fixed upon committing.
-
-I would very much like the parsing be moved to libxlu. That can wait
-till another day.
-
-Acked-by: Wei Liu <wl@xen.org>
+Wei.
 
