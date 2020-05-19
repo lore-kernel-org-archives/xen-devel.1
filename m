@@ -2,74 +2,65 @@ Return-Path: <SRS0=kHyn=7B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BB219C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 17:07:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A45DC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 17:21:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8CB7B207D3
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 17:07:46 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C808D2075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 17:21:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="zkYjjoc7"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8CB7B207D3
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="gSJKewAq"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C808D2075F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb5iJ-0002Hn-BW; Tue, 19 May 2020 17:07:35 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jb5uu-0003uo-RP; Tue, 19 May 2020 17:20:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=B//R=7B=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jb5iI-0002Hf-2w
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 17:07:34 +0000
-X-Inumbo-ID: 3ab6facd-99f3-11ea-a955-12813bfff9fa
+ id 1jb5ut-0003uj-Gw
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 17:20:35 +0000
+X-Inumbo-ID: 0cb3400c-99f5-11ea-b07b-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 3ab6facd-99f3-11ea-a955-12813bfff9fa;
- Tue, 19 May 2020 17:07:33 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0cb3400c-99f5-11ea-b07b-bc764e2007e4;
+ Tue, 19 May 2020 17:20:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=zBPupmTA7a2M6q+7ZyaoHEWiEA41qdpUVWh+L9qVbtQ=; b=zkYjjoc7eDBzN1/TzLxwSokr0V
- f4NbHPkQlInE3iuM49kKGFxnJFHoAqtEBVvF5YQb9RXfADDHWng11TD37EyH+sAW/zqq7Og6GaUJQ
- 7BgvSo1BB7FcySKzocW4c+qgWvpQb+z61LPWxpCLntTyEGHagureR0pi/C0snrv4+I/E=;
+ bh=/nUeUpuVV0k6Tn2LGbWheh4wHL0r38S9VrtLJqRIuNc=; b=gSJKewAqElCrYrsymiW8f6VAGR
+ qilPwMQ04D3whhl1Nh9PPboEHO56jG0QnHneY+CsGa992Bt5kP4cc4hFs1HDF7d9LJJtuxTQsHpbR
+ A+ghRUv/gfL+SUYEwZWam2xlf+BSpfcdb9WfgRMxPg5prTlrvJeo84ijOmRPorOIqxwU=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jb5iF-0006RF-3p; Tue, 19 May 2020 17:07:31 +0000
-Received: from 54-240-197-225.amazon.com ([54.240.197.225]
- helo=a483e7b01a66.ant.amazon.com)
+ id 1jb5ur-0006gi-IC; Tue, 19 May 2020 17:20:33 +0000
+Received: from 54-240-197-227.amazon.com ([54.240.197.227]
+ helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jb5iE-00030w-3J; Tue, 19 May 2020 17:07:30 +0000
-Subject: Re: [PATCH for-4.14 3/3] xen/arm: plat: Allocate as much as possible
- memory below 1GB for dom0 for RPI
-To: minyard@acm.org, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20200518113008.15422-1-julien@xen.org>
- <20200518113008.15422-4-julien@xen.org>
- <bc9a1121a7484ef484c30869793698f912987d23.camel@epam.com>
- <20200519000242.GA3948@minyard.net>
+ id 1jb5ur-0003ie-81; Tue, 19 May 2020 17:20:33 +0000
 From: Julien Grall <julien@xen.org>
-Message-ID: <d48d6fa3-8c09-0a89-e399-09e25909b590@xen.org>
-Date: Tue, 19 May 2020 18:07:28 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:68.0)
- Gecko/20100101 Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <20200519000242.GA3948@minyard.net>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v2 for-4.14 1/3] xen/arm: Allow a platform to override the DMA
+ width
+Date: Tue, 19 May 2020 18:20:26 +0100
+Message-Id: <20200519172028.31169-2-julien@xen.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200519172028.31169-1-julien@xen.org>
+References: <20200519172028.31169-1-julien@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,61 +71,115 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- "jgrall@amazon.com" <jgrall@amazon.com>,
- "sstabellini@kernel.org" <sstabellini@kernel.org>,
- "roman@zededa.com" <roman@zededa.com>,
- "jeff.kubascik@dornerworks.com" <jeff.kubascik@dornerworks.com>
+Cc: Corey Minyard <cminyard@mvista.com>, minyard@acm.org,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <jgrall@amazon.com>,
+ roman@zededa.com, George Dunlap <george.dunlap@citrix.com>,
+ jeff.kubascik@dornerworks.com, Jan Beulich <jbeulich@suse.com>,
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Corey,
+From: Julien Grall <jgrall@amazon.com>
 
-On 19/05/2020 01:02, Corey Minyard wrote:
-> On Mon, May 18, 2020 at 08:36:08PM +0000, Volodymyr Babchuk wrote:
->> Hi Julien,
->>
->> On Mon, 2020-05-18 at 12:30 +0100, Julien Grall wrote:
->>> From: Julien Grall <jgrall@amazon.com>
->>>
->>> The raspberry PI 4 has devices that can only DMA into the first GB of
->>> the RAM. Therefore we want allocate as much as possible memory below 1GB
->>> for dom0.
->>>
->>> Use the recently introduced dma_bitsize field to specify the DMA width
->>> supported.
->>>
->>> Signed-off-by: Julien Grall <jgrall@amazon.com>
->>> Reported-by: Corey Minyard <minyard@acm.org>
->>> ---
->>>   xen/arch/arm/platforms/brcm-raspberry-pi.c | 1 +
->>>   1 file changed, 1 insertion(+)
->>>
->>> diff --git a/xen/arch/arm/platforms/brcm-raspberry-pi.c b/xen/arch/arm/platforms/brcm-raspberry-pi.c
->>> index b697fa2c6c0e..ad5483437b31 100644
->>> --- a/xen/arch/arm/platforms/brcm-raspberry-pi.c
->>> +++ b/xen/arch/arm/platforms/brcm-raspberry-pi.c
->>> @@ -43,6 +43,7 @@ static const struct dt_device_match rpi4_blacklist_dev[] __initconst =
->>>   PLATFORM_START(rpi4, "Raspberry Pi 4")
->>>       .compatible     = rpi4_dt_compat,
->>>       .blacklist_dev  = rpi4_blacklist_dev,
->>> +    .dma_bitsize    = 10,
->>
->> I'm confused. Should it be 30?
-> 
-> Indeed it should.  I just tested this series, and Linux fails to boot
-> with this set to 10.  With it set to 30 it works.
-> 
-> With this set to 30, you can have a:
-> 
-> Tested-by: Corey Minyard <cminyard@mvista.com>
-> 
-> for all three patches.
+At the moment, Xen is assuming that all the devices are at least 32-bit
+DMA capable. However, some SoC have devices that may be able to access
+a much restricted range. For instance, the RPI has devices that can
+only access the first 1GB of RAM.
 
-Thank you for the testing! I will fix the bug and resend the series.
+The structure platform_desc is now extended to allow a platform to
+override the DMA width. The new is used to implement
+arch_get_dma_bit_size().
 
-Cheers,
+The prototype is now moved in asm-arm/mm.h as the function is not NUMA
+specific. The implementation is done in platform.c so we don't have to
+include platform.h everywhere. This should be fine as the function is
+not expected to be called in hotpath.
 
+Signed-off-by: Julien Grall <jgrall@amazon.com>
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Tested-by: Corey Minyard <cminyard@mvista.com>
+
+---
+
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
+
+    Changes in v2:
+        - Add Corey's tested-by
+        - Add Volodymyr's reviewed-by
+
+I noticed that arch_get_dma_bit_size() is only called when there is more
+than one NUMA node. I am a bit unsure what is the reason behind it.
+
+The goal for Arm is to use arch_get_dma_bit_size() when deciding how low
+the first Dom0 bank should be allocated.
+---
+ xen/arch/arm/platform.c        | 5 +++++
+ xen/include/asm-arm/mm.h       | 2 ++
+ xen/include/asm-arm/numa.h     | 5 -----
+ xen/include/asm-arm/platform.h | 2 ++
+ 4 files changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/arm/platform.c b/xen/arch/arm/platform.c
+index 8eb0b6e57a5a..4db5bbb4c51d 100644
+--- a/xen/arch/arm/platform.c
++++ b/xen/arch/arm/platform.c
+@@ -155,6 +155,11 @@ bool platform_device_is_blacklisted(const struct dt_device_node *node)
+     return (dt_match_node(blacklist, node) != NULL);
+ }
+ 
++unsigned int arch_get_dma_bitsize(void)
++{
++    return ( platform && platform->dma_bitsize ) ? platform->dma_bitsize : 32;
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/include/asm-arm/mm.h b/xen/include/asm-arm/mm.h
+index 7df91280bc77..f8ba49b1188f 100644
+--- a/xen/include/asm-arm/mm.h
++++ b/xen/include/asm-arm/mm.h
+@@ -366,6 +366,8 @@ int arch_acquire_resource(struct domain *d, unsigned int type, unsigned int id,
+     return -EOPNOTSUPP;
+ }
+ 
++unsigned int arch_get_dma_bitsize(void);
++
+ #endif /*  __ARCH_ARM_MM__ */
+ /*
+  * Local variables:
+diff --git a/xen/include/asm-arm/numa.h b/xen/include/asm-arm/numa.h
+index 490d1f31aa14..31a6de4e2346 100644
+--- a/xen/include/asm-arm/numa.h
++++ b/xen/include/asm-arm/numa.h
+@@ -25,11 +25,6 @@ extern mfn_t first_valid_mfn;
+ #define node_start_pfn(nid) (mfn_x(first_valid_mfn))
+ #define __node_distance(a, b) (20)
+ 
+-static inline unsigned int arch_get_dma_bitsize(void)
+-{
+-    return 32;
+-}
+-
+ #endif /* __ARCH_ARM_NUMA_H */
+ /*
+  * Local variables:
+diff --git a/xen/include/asm-arm/platform.h b/xen/include/asm-arm/platform.h
+index ed4d30a1be7c..997eb2521631 100644
+--- a/xen/include/asm-arm/platform.h
++++ b/xen/include/asm-arm/platform.h
+@@ -38,6 +38,8 @@ struct platform_desc {
+      * List of devices which must not pass-through to a guest
+      */
+     const struct dt_device_match *blacklist_dev;
++    /* Override the DMA width (32-bit by default). */
++    unsigned int dma_bitsize;
+ };
+ 
+ /*
 -- 
-Julien Grall
+2.17.1
+
 
