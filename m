@@ -6,40 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 05682C433E2
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 08885C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D16B6207E8
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D16B6207E8
+	by mail.kernel.org (Postfix) with ESMTPS id D31A12075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D31A12075F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jawZ0-0004nf-I5; Tue, 19 May 2020 07:21:22 +0000
+	id 1jawZ6-0004pB-1m; Tue, 19 May 2020 07:21:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aMO8=7B=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jawYz-0004nX-EI
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 07:21:21 +0000
-X-Inumbo-ID: 506b6198-99a1-11ea-b07b-bc764e2007e4
+ id 1jawZ4-0004od-Dw
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 07:21:26 +0000
+X-Inumbo-ID: 5101dcd6-99a1-11ea-b9cf-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 506b6198-99a1-11ea-b07b-bc764e2007e4;
- Tue, 19 May 2020 07:21:11 +0000 (UTC)
+ id 5101dcd6-99a1-11ea-b9cf-bc764e2007e4;
+ Tue, 19 May 2020 07:21:12 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 5447CB210;
- Tue, 19 May 2020 07:21:12 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 4061DB211;
+ Tue, 19 May 2020 07:21:13 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v10 03/12] docs: add feature document for Xen hypervisor
- sysfs-like support
-Date: Tue, 19 May 2020 09:20:57 +0200
-Message-Id: <20200519072106.26894-4-jgross@suse.com>
+Subject: [PATCH v10 06/12] tools: add xenfs tool
+Date: Tue, 19 May 2020 09:21:00 +0200
+Message-Id: <20200519072106.26894-7-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200519072106.26894-1-jgross@suse.com>
 References: <20200519072106.26894-1-jgross@suse.com>
@@ -58,267 +57,351 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Cc: Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
  Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Julien Grall <jgrall@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
  George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On the 2019 Xen developer summit there was agreement that the Xen
-hypervisor should gain support for a hierarchical name-value store
-similar to the Linux kernel's sysfs.
-
-In the beginning there should only be basic support: entries can be
-added from the hypervisor itself only, there is a simple hypercall
-interface to read the data.
-
-Add a feature document for setting the base of a discussion regarding
-the desired functionality and the entries to add.
+Add the xenfs tool for accessing the hypervisor filesystem.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Julien Grall <jgrall@amazon.com>
+Acked-by: Wei Liu <wl@xen.org>
 ---
 V1:
-- remove the "--" prefixes of the sub-commands of the user tool
-  (Jan Beulich)
-- rename xenfs to xenhypfs (Jan Beulich)
-- add "tree" and "write" options to user tool
+- rename to xenhypfs
+- don't use "--" for subcommands
+- add write support
 
 V2:
-- move example tree to the paths description (Ian Jackson)
-- specify allowed characters for keys and values (Ian Jackson)
+- escape non-printable characters per default with cat subcommand
+  (Ian Jackson)
+- add -b option to cat subcommand (Ian Jackson)
+- add man page
 
 V3:
-- correct introduction (writable entries)
+- adapt to new hypfs interface
 
-V4:
-- add list specification
-- add entry example (Julien Grall)
-- correct date and Xen version (Julien Grall)
-- add ARM64 as possible architecture (Julien Grall)
-- add version description to the feature doc (Jan Beulich)
-
-V8:
-- clarify syntax used in hypfs-paths.pandoc (George Dunlap)
+V7:
+- added missing bool for ls output
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- docs/features/hypervisorfs.pandoc |  92 +++++++++++++++++++++++++
- docs/misc/hypfs-paths.pandoc      | 107 ++++++++++++++++++++++++++++++
- 2 files changed, 199 insertions(+)
- create mode 100644 docs/features/hypervisorfs.pandoc
- create mode 100644 docs/misc/hypfs-paths.pandoc
+ .gitignore              |   1 +
+ docs/man/xenhypfs.1.pod |  61 +++++++++++++
+ tools/misc/Makefile     |   6 ++
+ tools/misc/xenhypfs.c   | 192 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 260 insertions(+)
+ create mode 100644 docs/man/xenhypfs.1.pod
+ create mode 100644 tools/misc/xenhypfs.c
 
-diff --git a/docs/features/hypervisorfs.pandoc b/docs/features/hypervisorfs.pandoc
+diff --git a/.gitignore b/.gitignore
+index 7bd292f64d..6171b3b43f 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -368,6 +368,7 @@ tools/libxl/test_timedereg
+ tools/libxl/test_fdderegrace
+ tools/firmware/etherboot/eb-roms.h
+ tools/firmware/etherboot/gpxe-git-snapshot.tar.gz
++tools/misc/xenhypfs
+ tools/misc/xenwatchdogd
+ tools/misc/xen-hvmcrash
+ tools/misc/xen-lowmemd
+diff --git a/docs/man/xenhypfs.1.pod b/docs/man/xenhypfs.1.pod
 new file mode 100644
-index 0000000000..a0a0ead057
+index 0000000000..37aa488fcc
 --- /dev/null
-+++ b/docs/features/hypervisorfs.pandoc
-@@ -0,0 +1,92 @@
-+% Hypervisor FS
-+% Revision 1
++++ b/docs/man/xenhypfs.1.pod
+@@ -0,0 +1,61 @@
++=head1 NAME
 +
-+\clearpage
++xenhypfs - Xen tool to access Xen hypervisor file system
 +
-+# Basics
-+---------------- ---------------------
-+         Status: **Supported**
++=head1 SYNOPSIS
 +
-+  Architectures: all
++B<xenhypfs> I<subcommand> [I<options>] [I<args>]
 +
-+     Components: Hypervisor, toolstack
-+---------------- ---------------------
++=head1 DESCRIPTION
 +
-+# Overview
++The B<xenhypfs> program is used to access the Xen hypervisor file system.
++It can be used to show the available entries, to show their contents and
++(if allowed) to modify their contents.
 +
-+The Hypervisor FS is a hierarchical name-value store for reporting
-+information to guests, especially dom0. It is similar to the Linux
-+kernel's sysfs. Entries and directories are created by the hypervisor,
-+while the toolstack is able to use a hypercall to query the entry
-+values or (if allowed by the hypervisor) to modify them.
++=head1 SUBCOMMANDS
 +
-+# User details
++=over 4
 +
-+With:
++=item B<ls> I<path>
 +
-+    xenhypfs ls <path>
++List the available entries below I<path>.
 +
-+the user can list the entries of a specific path of the FS. Using:
++=item B<cat> [I<-b>] I<path>
 +
-+    xenhypfs cat <path>
++Show the contents of the entry specified by I<path>. Non-printable characters
++other than white space characters (like tab, new line) will be shown as
++B<\xnn> (B<nn> being a two digit hex number) unless the option B<-b> is
++specified.
 +
-+the content of an entry can be retrieved. Using:
++=item B<write> I<path> I<value>
 +
-+    xenhypfs write <path> <string>
++Set the contents of the entry specified by I<path> to I<value>.
 +
-+a writable entry can be modified. With:
++=item B<tree>
 +
-+    xenhypfs tree
++Show all the entries of the file system as a tree.
 +
-+the complete Hypervisor FS entry tree can be printed.
++=back
 +
-+The FS paths are documented in `docs/misc/hypfs-paths.pandoc`.
++=head1 RETURN CODES
 +
-+# Technical details
++=over 4
 +
-+Access to the hypervisor filesystem is done via the stable new hypercall
-+__HYPERVISOR_filesystem_op. This hypercall supports a sub-command
-+XEN_HYPFS_OP_get_version which will return the highest version of the
-+interface supported by the hypervisor. Additions to the interface need
-+to bump the interface version. The hypervisor is required to support the
-+previous interface versions, too (this implies that additions will always
-+require new sub-commands in order to allow the hypervisor to decide which
-+version of the interface to use).
++=item B<0>
 +
-+* hypercall interface specification
-+    * `xen/include/public/hypfs.h`
-+* hypervisor internal files
-+    * `xen/include/xen/hypfs.h`
-+    * `xen/common/hypfs.c`
-+* `libxenhypfs`
-+    * `tools/libs/libxenhypfs/*`
-+* `xenhypfs`
-+    * `tools/misc/xenhypfs.c`
-+* path documentation
-+    * `docs/misc/hypfs-paths.pandoc`
++Success
 +
-+# Testing
++=item B<1>
 +
-+Any new parameters or hardware mitigations should be verified to show up
-+correctly in the filesystem.
++Invalid usage (e.g. unknown subcommand, unknown option, missing parameter).
 +
-+# Areas for improvement
++=item B<2>
 +
-+* More detailed access rights
-+* Entries per domain and/or per cpupool
++Entry not found while traversing the tree.
 +
-+# Known issues
++=item B<3>
 +
-+* None
++Access right violation.
 +
-+# References
++=back
 +
-+* None
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 63947bfadc..9fdb13597f 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -24,6 +24,7 @@ INSTALL_SBIN-$(CONFIG_X86)     += xen-lowmemd
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-mfndump
+ INSTALL_SBIN-$(CONFIG_X86)     += xen-ucode
+ INSTALL_SBIN                   += xencov
++INSTALL_SBIN                   += xenhypfs
+ INSTALL_SBIN                   += xenlockprof
+ INSTALL_SBIN                   += xenperf
+ INSTALL_SBIN                   += xenpm
+@@ -86,6 +87,9 @@ xenperf: xenperf.o
+ xenpm: xenpm.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
++xenhypfs: xenhypfs.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenhypfs) $(APPEND_LDFLAGS)
 +
-+# History
+ xenlockprof: xenlockprof.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
+@@ -94,6 +98,8 @@ xen-hptool.o: CFLAGS += -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
+ xen-hptool: xen-hptool.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenguest) $(LDLIBS_libxenstore) $(APPEND_LDFLAGS)
+ 
++xenhypfs.o: CFLAGS += $(CFLAGS_libxenhypfs)
 +
-+------------------------------------------------------------------------
-+Date       Revision Version  Notes
-+---------- -------- -------- -------------------------------------------
-+2020-01-23 1        Xen 4.14 Document written
-+---------- -------- -------- -------------------------------------------
-diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
+ # xen-mfndump incorrectly uses libxc internals
+ xen-mfndump.o: CFLAGS += -I$(XEN_ROOT)/tools/libxc $(CFLAGS_libxencall)
+ xen-mfndump: xen-mfndump.o
+diff --git a/tools/misc/xenhypfs.c b/tools/misc/xenhypfs.c
 new file mode 100644
-index 0000000000..39539fa1b5
+index 0000000000..158b901f42
 --- /dev/null
-+++ b/docs/misc/hypfs-paths.pandoc
-@@ -0,0 +1,107 @@
-+# Xenhypfs Paths
++++ b/tools/misc/xenhypfs.c
+@@ -0,0 +1,192 @@
++#define _GNU_SOURCE
++#include <ctype.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <xenhypfs.h>
 +
-+This document attempts to define all the paths which are available
-+in the Xen hypervisor file system (hypfs).
++static struct xenhypfs_handle *hdl;
 +
-+The hypervisor file system can be accessed via the xenhypfs tool.
++static int usage(void)
++{
++    fprintf(stderr, "usage: xenhypfs ls <path>\n");
++    fprintf(stderr, "       xenhypfs cat [-b] <path>\n");
++    fprintf(stderr, "       xenhypfs write <path> <val>\n");
++    fprintf(stderr, "       xenhypfs tree\n");
 +
-+## Notation
++    return 1;
++}
 +
-+The hypervisor file system is similar to the Linux kernel's sysfs.
-+In this document directories are always specified with a trailing "/".
++static void xenhypfs_print_escaped(char *string)
++{
++    char *c;
 +
-+The following notation conventions apply:
++    for (c = string; *c; c++) {
++        if (isgraph(*c) || isspace(*c))
++            printf("%c", *c);
++        else
++            printf("\\x%02x", *c);
++    }
++    printf("\n");
++}
 +
-+        DIRECTORY/
++static int xenhypfs_cat(int argc, char *argv[])
++{
++    int ret = 0;
++    char *result;
++    char *path;
++    bool bin = false;
 +
-+        PATH = VALUES [TAGS]
++    switch (argc) {
++    case 1:
++        path = argv[0];
++        break;
 +
-+The first syntax defines a directory. It normally contains related
-+entries and the general scope of the directory is described.
++    case 2:
++        if (strcmp(argv[0], "-b"))
++            return usage();
++        bin = true;
++        path = argv[1];
++        break;
 +
-+The second syntax defines a file entry containing values which are
-+either set by the hypervisor or, if the file is writable, can be set
-+by the user.
++    default:
++        return usage();
++    }
 +
-+PATH can contain simple regex constructs following the Perl compatible
-+regexp syntax described in pcre(3) or perlre(1).
++    result = xenhypfs_read(hdl, path);
++    if (!result) {
++        perror("could not read");
++        ret = 3;
++    } else {
++        if (!bin)
++            printf("%s\n", result);
++        else
++            xenhypfs_print_escaped(result);
++        free(result);
++    }
 +
-+A hypervisor file system entry name can be any 0-delimited byte string
-+not containing any '/' character. The names "." and ".." are reserved
-+for file system internal use.
++    return ret;
++}
 +
-+VALUES are strings and can take the following forms (note that this represents
-+only the syntax used in this document):
++static int xenhypfs_wr(char *path, char *val)
++{
++    int ret;
 +
-+* STRING -- an arbitrary 0-delimited byte string.
-+* INTEGER -- An integer, in decimal representation unless otherwise
-+  noted.
-+* "a literal string" -- literal strings are contained within quotes.
-+* (VALUE | VALUE | ... ) -- a set of alternatives. Alternatives are
-+  separated by a "|" and all the alternatives are enclosed in "(" and
-+  ")".
-+* {VALUE, VALUE, ... } -- a list of possible values separated by "," and
-+  enclosed in "{" and "}".
++    ret = xenhypfs_write(hdl, path, val);
++    if (ret) {
++        perror("could not write");
++        ret = 3;
++    }
 +
-+Additional TAGS may follow as a comma separated set of the following
-+tags enclosed in square brackets.
++    return ret;
++}
 +
-+* w -- Path is writable by the user. This capability is usually
-+  limited to the control domain (e.g. dom0).
-+* ARM | ARM32 | ARM64 | X86: the path is available for the respective
-+  architecture only.
-+* PV --  Path is valid for PV capable hypervisors only.
-+* HVM -- Path is valid for HVM capable hypervisors only.
-+* CONFIG_* -- Path is valid only in case the hypervisor was built with
-+  the respective config option.
++static char *xenhypfs_type(struct xenhypfs_dirent *ent)
++{
++    char *res;
 +
-+So an entry could look like this:
++    switch (ent->type) {
++    case xenhypfs_type_dir:
++        res = "<dir>   ";
++        break;
++    case xenhypfs_type_blob:
++        res = "<blob>  ";
++        break;
++    case xenhypfs_type_string:
++        res = "<string>";
++        break;
++    case xenhypfs_type_uint:
++        res = "<uint>  ";
++        break;
++    case xenhypfs_type_int:
++        res = "<int>   ";
++        break;
++    case xenhypfs_type_bool:
++        res = "<bool>  ";
++        break;
++    default:
++        res = "<\?\?\?>   ";
++        break;
++    }
 +
-+    /cpu-bugs/active-pv/xpti = ("No"|{"dom0", "domU", "PCID-on"}) [w,X86,PV]
++    return res;
++}
 +
-+Possible values would be "No" or a list of "dom0", "domU", and "PCID-on" with
-+the list elements separated by spaces, e.g. "dom0 PCID-on".
-+The entry would be writable and it would exist on X86 only and only if the
-+hypervisor is configured to support PV guests.
++static int xenhypfs_ls(char *path)
++{
++    struct xenhypfs_dirent *ent;
++    unsigned int n, i;
++    int ret = 0;
 +
-+## Example
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if (!ent) {
++        perror("could not read dir");
++        ret = 3;
++    } else {
++        for (i = 0; i < n; i++)
++            printf("%s r%c %s\n", xenhypfs_type(ent + i),
++                   ent[i].is_writable ? 'w' : '-', ent[i].name);
 +
-+A populated Xen hypervisor file system might look like the following example:
++        free(ent);
++    }
 +
-+    /
-+        buildinfo/           directory containing build-time data
-+            config           contents of .config file used to build Xen
-+        cpu-bugs/            x86: directory of cpu bug information
-+            l1tf             "Vulnerable" or "Not vulnerable"
-+            mds              "Vulnerable" or "Not vulnerable"
-+            meltdown         "Vulnerable" or "Not vulnerable"
-+            spec-store-bypass "Vulnerable" or "Not vulnerable"
-+            spectre-v1       "Vulnerable" or "Not vulnerable"
-+            spectre-v2       "Vulnerable" or "Not vulnerable"
-+            mitigations/     directory of mitigation settings
-+                bti-thunk    "N/A", "RETPOLINE", "LFENCE" or "JMP"
-+                spec-ctrl    "No", "IBRS+" or "IBRS-"
-+                ibpb         "No" or "Yes"
-+                l1d-flush    "No" or "Yes"
-+                md-clear     "No" or "VERW"
-+                l1tf-barrier "No" or "Yes"
-+            active-hvm/      directory for mitigations active in hvm doamins
-+                msr-spec-ctrl "No" or "Yes"
-+                rsb          "No" or "Yes"
-+                eager-fpu    "No" or "Yes"
-+                md-clear     "No" or "Yes"
-+            active-pv/       directory for mitigations active in pv doamins
-+                msr-spec-ctrl "No" or "Yes"
-+                rsb          "No" or "Yes"
-+                eager-fpu    "No" or "Yes"
-+                md-clear     "No" or "Yes"
-+                xpti         "No" or list of "dom0", "domU", "PCID-on"
-+                l1tf-shadow  "No" or list of "dom0", "domU"
-+        params/              directory with hypervisor parameter values
-+                             (boot/runtime parameters)
++    return ret;
++}
 +
-+## General Paths
++static int xenhypfs_tree_sub(char *path, unsigned int depth)
++{
++    struct xenhypfs_dirent *ent;
++    unsigned int n, i;
++    int ret = 0;
++    char *p;
 +
-+#### /
++    ent = xenhypfs_readdir(hdl, path, &n);
++    if (!ent)
++        return 2;
 +
-+The root of the hypervisor file system.
++    for (i = 0; i < n; i++) {
++        printf("%*s%s%s\n", depth * 2, "", ent[i].name,
++               ent[i].type == xenhypfs_type_dir ? "/" : "");
++        if (ent[i].type == xenhypfs_type_dir) {
++            asprintf(&p, "%s%s%s", path, (depth == 1) ? "" : "/", ent[i].name);
++            if (xenhypfs_tree_sub(p, depth + 1))
++                ret = 2;
++        }
++    }
++
++    free(ent);
++
++    return ret;
++}
++
++static int xenhypfs_tree(void)
++{
++    printf("/\n");
++
++    return xenhypfs_tree_sub("/", 1);
++}
++
++int main(int argc, char *argv[])
++{
++    int ret;
++
++    hdl = xenhypfs_open(NULL, 0);
++
++    if (!hdl) {
++        fprintf(stderr, "Could not open libxenhypfs\n");
++        ret = 2;
++    } else if (argc >= 3 && !strcmp(argv[1], "cat"))
++        ret = xenhypfs_cat(argc - 2, argv + 2);
++    else if (argc == 3 && !strcmp(argv[1], "ls"))
++        ret = xenhypfs_ls(argv[2]);
++    else if (argc == 4 && !strcmp(argv[1], "write"))
++        ret = xenhypfs_wr(argv[2], argv[3]);
++    else if (argc == 2 && !strcmp(argv[1], "tree"))
++        ret = xenhypfs_tree();
++    else
++        ret = usage();
++
++    xenhypfs_close(hdl);
++
++    return ret;
++}
 -- 
 2.26.1
 
