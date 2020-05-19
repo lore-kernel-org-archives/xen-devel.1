@@ -2,65 +2,62 @@ Return-Path: <SRS0=kHyn=7B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 288ABC433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2DDB8C433E2
 	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 17:21:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0085A207D8
+	by mail.kernel.org (Postfix) with ESMTPS id 00911207FB
 	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 17:21:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="VlugWGv3"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0085A207D8
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="VZB8ZG9S"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 00911207FB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb5v0-0003vU-Aq; Tue, 19 May 2020 17:20:42 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jb5us-0003ud-JG; Tue, 19 May 2020 17:20:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=B//R=7B=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jb5uy-0003vI-Fx
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 17:20:40 +0000
-X-Inumbo-ID: 0dc478a8-99f5-11ea-b07b-bc764e2007e4
+ id 1jb5ur-0003uN-Ct
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 17:20:33 +0000
+X-Inumbo-ID: 0b64377e-99f5-11ea-a95a-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0dc478a8-99f5-11ea-b07b-bc764e2007e4;
- Tue, 19 May 2020 17:20:36 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 0b64377e-99f5-11ea-a95a-12813bfff9fa;
+ Tue, 19 May 2020 17:20:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=SOZlp61CWrsQD7qa0dasRDDLg9x7AQZ16sVemh7nqoo=; b=VlugWGv3QcqQsn6sakAdRX3wC+
- jaNvLHe2n3WAdZIvmI1rzb9fMEeBAk8bDRF0s/TStPZ2dxwYkgJiPS1FrEXBtGhFAKZptrSLBDCWq
- j0xnHURlEPqkzKUhfrclevpmamAyl9anxhdxDUvs1w1f2zjt7hZqvMLmoQmMxoYfRMnE=;
+ bh=baEkwJOPnZ+/I3Zcxf0VTvOVfRphCLzRTTzHYn+gkoI=; b=VZB8ZG9SmgSyY7eUf34BgFqJPC
+ Jh3SNSF3V6nQf5xig4egkzBJzhvKXne3/fZ4mh/TtoCSBoTVQS+NFMr0guWTnxLo/GuM9oHecGX3J
+ fxgDaql+dT1p6vwnsU5qlSCYnhtdYaV5habOxmz36uXHbzFFZADyMoRdH+EfxlCYM648=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <julien@xen.org>)
- id 1jb5ut-0006gs-Sx; Tue, 19 May 2020 17:20:35 +0000
+ id 1jb5up-0006gb-Tq; Tue, 19 May 2020 17:20:31 +0000
 Received: from 54-240-197-227.amazon.com ([54.240.197.227]
  helo=ufe34d9ed68d054.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <julien@xen.org>)
- id 1jb5ut-0003ie-Js; Tue, 19 May 2020 17:20:35 +0000
+ id 1jb5up-0003ie-JF; Tue, 19 May 2020 17:20:31 +0000
 From: Julien Grall <julien@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v2 for-4.14 3/3] xen/arm: plat: Allocate as much as possible
- memory below 1GB for dom0 for RPI
-Date: Tue, 19 May 2020 18:20:28 +0100
-Message-Id: <20200519172028.31169-4-julien@xen.org>
+Subject: [PATCH v2 for-4.14 0/3] Remove the 1GB limitation on Rasberry Pi 4
+Date: Tue, 19 May 2020 18:20:25 +0100
+Message-Id: <20200519172028.31169-1-julien@xen.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200519172028.31169-1-julien@xen.org>
-References: <20200519172028.31169-1-julien@xen.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,44 +68,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Corey Minyard <cminyard@mvista.com>, Julien Grall <jgrall@amazon.com>,
- roman@zededa.com, jeff.kubascik@dornerworks.com, minyard@acm.org
+Cc: Julien Grall <jgrall@amazon.com>, roman@zededa.com,
+ jeff.kubascik@dornerworks.com, minyard@acm.org, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Julien Grall <jgrall@amazon.com>
 
-The raspberry PI 4 has devices that can only DMA into the first GB of
-the RAM. Therefore we want allocate as much as possible memory below 1GB
-for dom0.
+Hi all,
 
-Use the recently introduced dma_bitsize field to specify the DMA width
-supported.
+At the moment, a user who wants to boot Xen on the Raspberry Pi 4 can
+only use the first GB of memory.
 
-Signed-off-by: Julien Grall <jgrall@amazon.com>
-Reported-by: Corey Minyard <minyard@acm.org>
-Tested-by: Corey Minyard <cminyard@mvista.com>
+This is because several devices cannot DMA above 1GB but Xen doesn't
+necessarily allocate memory for Dom0 below 1GB.
 
----
-    Changes in v2:
-        - 1G is 30 bits not 10!
-        - Add Corey's tested-by
----
- xen/arch/arm/platforms/brcm-raspberry-pi.c | 1 +
- 1 file changed, 1 insertion(+)
+This small series is trying to address the problem by allowing a
+platform to restrict where Dom0 banks are allocated.
 
-diff --git a/xen/arch/arm/platforms/brcm-raspberry-pi.c b/xen/arch/arm/platforms/brcm-raspberry-pi.c
-index b697fa2c6c0e..f5ae58a7d5f2 100644
---- a/xen/arch/arm/platforms/brcm-raspberry-pi.c
-+++ b/xen/arch/arm/platforms/brcm-raspberry-pi.c
-@@ -43,6 +43,7 @@ static const struct dt_device_match rpi4_blacklist_dev[] __initconst =
- PLATFORM_START(rpi4, "Raspberry Pi 4")
-     .compatible     = rpi4_dt_compat,
-     .blacklist_dev  = rpi4_blacklist_dev,
-+    .dma_bitsize    = 30,
- PLATFORM_END
- 
- /*
+This is also a candidate for Xen 4.14. Without it, a user will not be
+able to use all the RAM on the Raspberry Pi 4.
+
+This series has only be slighlty tested. I would appreciate more test on
+the Rasbperry Pi 4 to confirm this removing the restriction.
+
+Cheers,
+
+Cc: paul@xen.org
+
+Julien Grall (3):
+  xen/arm: Allow a platform to override the DMA width
+  xen/arm: Take into account the DMA width when allocating Dom0 memory
+    banks
+  xen/arm: plat: Allocate as much as possible memory below 1GB for dom0
+    for RPI
+
+ xen/arch/arm/domain_build.c                | 33 +++++++++++++---------
+ xen/arch/arm/platform.c                    |  5 ++++
+ xen/arch/arm/platforms/brcm-raspberry-pi.c |  1 +
+ xen/include/asm-arm/mm.h                   |  2 ++
+ xen/include/asm-arm/numa.h                 |  5 ----
+ xen/include/asm-arm/platform.h             |  2 ++
+ 6 files changed, 29 insertions(+), 19 deletions(-)
+
 -- 
 2.17.1
 
