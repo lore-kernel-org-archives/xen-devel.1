@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E0BE3C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54756C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B026D2075F
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B026D2075F
+	by mail.kernel.org (Postfix) with ESMTPS id 2743020758
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2743020758
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7dQ-0007JZ-1w; Tue, 19 May 2020 19:10:40 +0000
+	id 1jb7dU-0007Op-DC; Tue, 19 May 2020 19:10:44 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7dO-0007Hm-KN
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:38 +0000
-X-Inumbo-ID: 5048cd82-9a04-11ea-b9cf-bc764e2007e4
+ id 1jb7dT-0007Nk-KH
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:43 +0000
+X-Inumbo-ID: 58a87a5e-9a04-11ea-b9cf-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5048cd82-9a04-11ea-b9cf-bc764e2007e4;
- Tue, 19 May 2020 19:09:51 +0000 (UTC)
+ id 58a87a5e-9a04-11ea-b9cf-bc764e2007e4;
+ Tue, 19 May 2020 19:10:05 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vh-0001da-6z; Tue, 19 May 2020 20:02:41 +0100
+ id 1jb7Vd-0001da-4l; Tue, 19 May 2020 20:02:37 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 20/38] buster: ts-host-install: NTP not honoured bug
- remains
-Date: Tue, 19 May 2020 20:02:12 +0100
-Message-Id: <20200519190230.29519-21-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 11/38] ts-debian-di-install: Provide guest with more
+ RAM
+Date: Tue, 19 May 2020 20:02:03 +0100
+Message-Id: <20200519190230.29519-12-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -59,26 +59,35 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Debian #778564 remains open.
+buster cannot boot in so little because its initramfs and kernel are
+too large.  Bump it to 2G.
+
+However, our armhf test nodes have very little RAM.  And the Debian
+armhf does fit in them as a guest still, so use a smaller value there.
+
+Keying this off the architecture rather than the available host memory
+is better because you do need the bigger value precisely if you are
+not using armhf, and this makes osstest less dependent on a completely
+accurate and populated host properties database.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-host-install | 2 +-
+ ts-debian-di-install | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/ts-host-install b/ts-host-install
-index fe26f70f..253dbb5d 100755
---- a/ts-host-install
-+++ b/ts-host-install
-@@ -152,7 +152,7 @@ END
- 	    my $done= 0;
- 	    while (<EI>) {
- 		if (m/^server\b|^pool\b\s/) {
--		    if ($ho->{Suite} =~ m/lenny|squeeze|wheezy|jessie|stretch/) {
-+		    if ($ho->{Suite} =~ m/lenny|squeeze|wheezy|jessie|stretch|buster/) {
- 			$_= $done ? "" : "server $ntpserver\n";
- 		    } else {
- 			m/^server \Q$ntpserver\E\s/ or
+diff --git a/ts-debian-di-install b/ts-debian-di-install
+index 9abb4956..d84407cf 100755
+--- a/ts-debian-di-install
++++ b/ts-debian-di-install
+@@ -64,7 +64,7 @@ $gn ||= 'debian';
+ 
+ our $ho= selecthost($whhost);
+ 
+-our $ram_mb=    512;
++our $ram_mb= $r{arch} =~ m/^armhf/ ? 768 : 2048;
+ our $disk_mb= 10000;
+ 
+ our $guesthost= $gn.
 -- 
 2.20.1
 
