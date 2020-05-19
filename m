@@ -2,44 +2,46 @@ Return-Path: <SRS0=kHyn=7B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9405BC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 66B19C433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:03:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6A010207E8
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:02:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6A010207E8
+	by mail.kernel.org (Postfix) with ESMTPS id 3D667206C3
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:03:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D667206C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7Vn-0004af-Hw; Tue, 19 May 2020 19:02:47 +0000
+	id 1jb7Vs-0004cU-Qi; Tue, 19 May 2020 19:02:52 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7Vm-0004aK-6t
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:02:46 +0000
-X-Inumbo-ID: 4cb0cda6-9a03-11ea-9887-bc764e2007e4
+ id 1jb7Vr-0004c1-61
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:02:51 +0000
+X-Inumbo-ID: 4d086b92-9a03-11ea-ae69-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4cb0cda6-9a03-11ea-9887-bc764e2007e4;
- Tue, 19 May 2020 19:02:35 +0000 (UTC)
+ id 4d086b92-9a03-11ea-ae69-bc764e2007e4;
+ Tue, 19 May 2020 19:02:36 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Va-0001da-JW; Tue, 19 May 2020 20:02:34 +0100
+ id 1jb7Vb-0001da-A4; Tue, 19 May 2020 20:02:35 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 00/38] Upgrade most hosts/guests to buster
-Date: Tue, 19 May 2020 20:01:52 +0100
-Message-Id: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 03/38] lvcreate argments: pass --yes -Z y -W y
+Date: Tue, 19 May 2020 20:01:55 +0100
+Message-Id: <20200519190230.29519-4-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
+References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -52,85 +54,60 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Paul Durrant <xadimgnik@gmail.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-buster is Debian stable right now.  We don't want to be using
-oldstable because Debian have a history of breaking it.
+The documentation seesm to think this is the default but empirically
+it isn't.  In our environment --yes is fine.
 
-Paul: we should have a conversation about whether this should be
-pushed soon, or deferred until after the Xen 4.14 release.
+I have reported this to Debian as #953183.  Also vaguely related (and
+discovered by me at the same time) is #953185.
 
-I have yet to do a final full formal retest of this series so it may
-not be final.
+This came up while trying to get things work on buster.  I don't know
+what has changed.
 
-Ian Jackson (38):
-  ts-logs-capture: Cope if xl shutdown leaves domain running for a bit
-  ts-xen-build-prep: Install rsync
-  lvcreate argments: pass --yes -Z y -W y
-  TestSupport: allow more time for apt
-  Booting: Use `--' rather than `---' to introduce host cmdline
-  di_installcmdline_core: Pass locale on d-i command line
-  setupboot_grub2: Drop $submenu variable
-  ts-leak-check: Ignore buster's udevd too
-  Bodge systemd random seed arrangements
-  Debian guests: Write systemd random seed file
-  ts-debian-di-install: Provide guest with more RAM
-  Debian: preseed: use priority= alias
-  Debian: Specify `priority=critical' rather than locale
-  Honour 'LinuxSerialConsole <suite>' host property
-  buster: make-hosts-flight: Add to possible suites for hosts flight
-  buster: Extend grub2 uefi no install workaround
-  buster: ts-host-install: Extend net.ifnames workaround
-  buster: Deinstall the "systemd" package
-  buster: preseed partman-auto-lvm/guided_size
-  buster: ts-host-install: NTP not honoured bug remains
-  buster: Extend ARM clock workaround
-  buster: Extend guest bootloaer workaround
-  Honour DebianImageFile_SUITE_ARCH
-  buster: Specify DebianImageFile_SUITE_ARCH
-  20_linux_xen: Copy Debian buster version into our initramfs area
-  20_linux_xen: Adhoc template substitution
-  20_linux_xen: Ignore xenpolicy and config files too
-  20_linux_xen: Support Xen Security Modules (XSM/FLASK)
-  mg-debian-installer-update: support overlay-intramfs-SUITE
-  overlay-initrd-buster/sbin/reopen-console: Copy from Debian
-  overlay-initrd-buster/sbin/reopen-console: Fix #932416
-  buster: chiark-scripts: Install a new version on buster too
-  buster: Provide TftpDiVersion
-  buster: grub, arm64: extend chainloading workaround
-  buster: setupboot_grub2: Note what files exist in /boot
-  buster: setupboot_grub2: Handle missing policy file bug
-  buster: Extend workaround for dhcpd EROFS bug
-  buster: Switch to Debian buster as the default suite
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+ Osstest/TestSupport.pm | 2 +-
+ ts-xen-build-prep      | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
- Osstest.pm                                    |   2 +-
- Osstest/Debian.pm                             |  60 +++-
- Osstest/TestSupport.pm                        |  15 +-
- make-hosts-flight                             |   2 +-
- mfi-common                                    |   9 +
- mg-debian-installer-update                    |  20 ++
- overlay-buster/etc/grub.d/20_linux_xen        | 327 ++++++++++++++++++
- overlay-initrd-buster/sbin/reopen-console     | 126 +++++++
- .../override.conf                             |   3 +
- overlay/usr/local/bin/random-seed-add         |  33 ++
- production-config                             |   5 +
- sg-run-job                                    |   1 +
- ts-debian-di-fixup                            |  29 ++
- ts-debian-di-install                          |   2 +-
- ts-debian-fixup                               |   1 +
- ts-host-install                               |   4 +-
- ts-leak-check                                 |   1 +
- ts-logs-capture                               |   1 +
- ts-xen-build-prep                             |   6 +-
- 19 files changed, 617 insertions(+), 30 deletions(-)
- create mode 100755 overlay-buster/etc/grub.d/20_linux_xen
- create mode 100755 overlay-initrd-buster/sbin/reopen-console
- create mode 100644 overlay/etc/systemd/system/systemd-random-seed.service.d/override.conf
- create mode 100755 overlay/usr/local/bin/random-seed-add
- create mode 100755 ts-debian-di-fixup
-
+diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
+index 1e7da676..43766ee3 100644
+--- a/Osstest/TestSupport.pm
++++ b/Osstest/TestSupport.pm
+@@ -935,7 +935,7 @@ sub lv_create ($$$$) {
+     my ($ho, $vg, $lv, $mb) = @_;
+     my $lvdev = "/dev/$vg/$lv";
+     target_cmd_root($ho, "lvremove -f $lvdev ||:");
+-    target_cmd_root($ho, "lvcreate -L ${mb}M -n $lv $vg");
++    target_cmd_root($ho, "lvcreate --yes -Z y -W y -L ${mb}M -n $lv $vg");
+     target_cmd_root($ho, "dd if=/dev/zero of=$lvdev count=10");
+     return $lvdev;
+ }
+diff --git a/ts-xen-build-prep b/ts-xen-build-prep
+index 8e73f763..dabb9921 100755
+--- a/ts-xen-build-prep
++++ b/ts-xen-build-prep
+@@ -61,7 +61,7 @@ sub determine_vg_lv () {
+ sub lvextend_stage1 () {
+     target_cmd_root($ho, <<END);
+         set -ex; if ! test -f /root/swap_osstest_enabled; then
+-            lvcreate -L 10G -n swap_osstest_build $vg ||:
++            lvcreate --yes -Z y -W y -L 10G -n swap_osstest_build $vg ||:
+             mkswap /dev/$vg/swap_osstest_build ||:
+             swapon /dev/$vg/swap_osstest_build
+             touch /root/swap_osstest_enabled
+@@ -84,7 +84,7 @@ sub vginfo () {
+ 
+ sub lvcreate () {
+     target_cmd_output_root($ho,
+-			   "lvdisplay $lv || lvcreate -l 1 -n $lvleaf $vg");
++			   "lvdisplay $lv || lvcreate --yes -Z y -W y -l 1 -n $lvleaf $vg");
+ }
+ 
+ sub lvextend1 ($$$) {
 -- 
 2.20.1
 
