@@ -2,68 +2,51 @@ Return-Path: <SRS0=kHyn=7B=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.9 required=3.0 tests=DATE_IN_PAST_06_12,
-	DKIM_INVALID,DKIM_SIGNED,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7623CC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:23:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CAF8EC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:34:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 45E7520709
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:23:05 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="utrlcu0A"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 45E7520709
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id A3F7120709
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 08:34:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3F7120709
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jaxW9-00048n-Fc; Tue, 19 May 2020 08:22:29 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jaxhd-000555-MW; Tue, 19 May 2020 08:34:21 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mazm=7B=xen.org=wl@srs-us1.protection.inumbo.net>)
- id 1jaxW8-00048i-Lh
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 08:22:28 +0000
-X-Inumbo-ID: e0320fe0-99a9-11ea-a8e4-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e0320fe0-99a9-11ea-a8e4-12813bfff9fa;
- Tue, 19 May 2020 08:22:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID
- :Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID
- :Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:
- Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe
- :List-Post:List-Owner:List-Archive;
- bh=Rc+qzUpe0T069lskf8TXNNcQCBC0VCFC0iUiW3PNpCA=; b=utrlcu0AgRkjLf/Rsyhse2WhB7
- kT1FLIx13BMfa4ikBcMl8hbyAQsf+qc8Oh1UqY51YSLy+8W6k8LPeBnWmXV8O+MsmslsO59RW8ZQv
- cJURxTrQWgTQEvKqlZ/IP9SmN/3VQDZ7QdooKQMZcggIKy8KZgdobJS1sE5m9PW1AJDM=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <wl@xen.org>)
- id 1jaxW5-000370-QD; Tue, 19 May 2020 08:22:25 +0000
-Received: from 96.142.6.51.dyn.plus.net ([51.6.142.96] helo=debian)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <wl@xen.org>)
- id 1jaxW5-00037u-G6; Tue, 19 May 2020 08:22:25 +0000
-Date: Mon, 18 May 2020 23:24:38 +0100
-From: Wei Liu <wl@xen.org>
-To: Jason Andryuk <jandryuk@gmail.com>
-Subject: Re: [PATCH v7 00/19] Add support for qemu-xen runnning in a
- Linux-based stubdomain
-Message-ID: <20200518222438.ar6e7fzkrjr5voau@debian>
-References: <20200519015503.115236-1-jandryuk@gmail.com>
+ (envelope-from <SRS0=wtzB=7B=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jaxhc-000550-Q9
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 08:34:20 +0000
+X-Inumbo-ID: 8868d7c4-99ab-11ea-b07b-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 8868d7c4-99ab-11ea-b07b-bc764e2007e4;
+ Tue, 19 May 2020 08:34:20 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id A4F1EABE6;
+ Tue, 19 May 2020 08:34:21 +0000 (UTC)
+Subject: Re: [PATCH] x86/traps: Rework #PF[Rsvd] bit handling
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200518153820.18170-1-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <2783ddc5-9919-3c97-ba52-2f734e7d72d5@suse.com>
+Date: Tue, 19 May 2020 10:34:18 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200519015503.115236-1-jandryuk@gmail.com>
-User-Agent: NeoMutt/20180716
+In-Reply-To: <20200518153820.18170-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,17 +57,33 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Samuel Thibault <samuel.thibault@ens-lyon.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Ian Jackson <ian.jackson@citrix.com>,
- Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-I have queued up the first 5 patches for committing today.
+On 18.05.2020 17:38, Andrew Cooper wrote:
+> @@ -1439,6 +1418,18 @@ void do_page_fault(struct cpu_user_regs *regs)
+>      if ( unlikely(fixup_page_fault(addr, regs) != 0) )
+>          return;
+>  
+> +    /*
+> +     * Xen have reserved bits in its pagetables, nor do we permit PV guests to
+> +     * write any.  Such entries would be vulnerable to the L1TF sidechannel.
+> +     *
+> +     * The only logic which intentionally sets reserved bits is the shadow
+> +     * MMIO fastpath (SH_L1E_MMIO_*), which is careful not to be
+> +     * L1TF-vulnerable, and handled via the VMExit #PF intercept path, rather
+> +     * than here.
 
-Wei.
+What about SH_L1E_MAGIC and sh_l1e_gnp()? The latter gets used by
+_sh_propagate() without visible restriction to HVM.
+
+And of course every time I look at this code I wonder how we can
+get away with (quoting a comment) "We store 28 bits of GFN in
+bits 4:32 of the entry." Do we have a hidden restriction
+somewhere guaranteeing that guests won't have (emulated MMIO)
+GFNs above 1Tb when run in shadow mode?
+
+Jan
 
