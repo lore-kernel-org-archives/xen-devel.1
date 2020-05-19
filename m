@@ -6,39 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2CB3C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3F87FC433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B7AF9207E8
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:05 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B7AF9207E8
+	by mail.kernel.org (Postfix) with ESMTPS id 245B82075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 245B82075F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7cg-0005uD-RJ; Tue, 19 May 2020 19:09:54 +0000
+	id 1jb7cm-0005yq-4N; Tue, 19 May 2020 19:10:00 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7cf-0005tF-Hz
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:09:53 +0000
-X-Inumbo-ID: 44479798-9a04-11ea-b9cf-bc764e2007e4
+ id 1jb7ck-0005xW-IA
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:09:58 +0000
+X-Inumbo-ID: 45943be2-9a04-11ea-ae69-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 44479798-9a04-11ea-b9cf-bc764e2007e4;
- Tue, 19 May 2020 19:09:30 +0000 (UTC)
+ id 45943be2-9a04-11ea-ae69-bc764e2007e4;
+ Tue, 19 May 2020 19:09:33 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vh-0001da-HU; Tue, 19 May 2020 20:02:41 +0100
+ id 1jb7Vg-0001da-DV; Tue, 19 May 2020 20:02:40 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 21/38] buster: Extend ARM clock workaround
-Date: Tue, 19 May 2020 20:02:13 +0100
-Message-Id: <20200519190230.29519-22-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 18/38] buster: Deinstall the "systemd" package
+Date: Tue, 19 May 2020 20:02:10 +0100
+Message-Id: <20200519190230.29519-19-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -54,31 +54,33 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-CC: Julien Grall <julien@xen.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>
+This installs a pam rule which causes logins to hang.  It also seems
+to cause some kind of udev wedge.
+
+We are using sysvinit so this package is not desirable.  Empirically,
+removing it makes the system work.
+
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Osstest/Debian.pm | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index bec72788..6fed0b75 100644
+index 0958d080..cd8b2de0 100644
 --- a/Osstest/Debian.pm
 +++ b/Osstest/Debian.pm
-@@ -248,7 +248,7 @@ END
- 	push @xenkopt, $xenkopt;
- 	# https://bugs.xenproject.org/xen/bug/45
- 	push @xenkopt, "clk_ignore_unused"
--	    if $ho->{Suite} =~ m/wheezy|jessie|stretch/;
-+	    if $ho->{Suite} =~ m/wheezy|jessie|stretch|buster/;
+@@ -842,6 +842,7 @@ sub preseed_base ($$$;@) {
+     if ( $suite !~ /squeeze|wheezy/ ) {
+        preseed_hook_command($ho, 'late_command', $sfx, <<END)
+ in-target apt-get install -y sysvinit-core
++in-target apt-get remove -y systemd
+ END
+     }
  
- 	$xenkopt = join ' ', @xenkopt;
- 	logm("Dom0 Linux options: $xenkopt");
 -- 
 2.20.1
 
