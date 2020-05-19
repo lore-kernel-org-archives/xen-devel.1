@@ -6,40 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2688BC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 879FEC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0BBD420758
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0BBD420758
+	by mail.kernel.org (Postfix) with ESMTPS id 5CB39207E8
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5CB39207E8
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7de-0007Za-2Q; Tue, 19 May 2020 19:10:54 +0000
+	id 1jb7dj-0007fF-Ct; Tue, 19 May 2020 19:10:59 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7dd-0007Yv-Ka
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:53 +0000
-X-Inumbo-ID: 5bef4652-9a04-11ea-b07b-bc764e2007e4
+ id 1jb7di-0007eJ-K0
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:58 +0000
+X-Inumbo-ID: 5d1e0f68-9a04-11ea-9887-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5bef4652-9a04-11ea-b07b-bc764e2007e4;
- Tue, 19 May 2020 19:10:10 +0000 (UTC)
+ id 5d1e0f68-9a04-11ea-9887-bc764e2007e4;
+ Tue, 19 May 2020 19:10:13 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vd-0001da-MC; Tue, 19 May 2020 20:02:37 +0100
+ id 1jb7Vk-0001da-5E; Tue, 19 May 2020 20:02:44 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 13/38] Debian: Specify `priority=critical' rather than
- locale
-Date: Tue, 19 May 2020 20:02:05 +0100
-Message-Id: <20200519190230.29519-14-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 33/38] buster: Provide TftpDiVersion
+Date: Tue, 19 May 2020 20:02:25 +0100
+Message-Id: <20200519190230.29519-34-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -59,37 +58,23 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-In buster, it appears that specifying locale on the command line is
-not sufficient.  Rather than adding more things to the command line,
-instead, just say `priority=critical', by defaulting $debconf_priority
-to 'critical'.
-
-I think this change should be fine for earlier suites too.
-
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
+ production-config | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index c3fbc32c..8380c428 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -698,12 +698,10 @@ sub di_installcmdline_core ($$;@) {
-                "$xopts{PreseedScheme}=$ps_url",
-                "netcfg/dhcp_timeout=150",
-                "netcfg/choose_interface=$netcfg_interface",
--               "debian-installer/locale=en_GB",
-                );
+diff --git a/production-config b/production-config
+index e3870d47..6372ac9a 100644
+--- a/production-config
++++ b/production-config
+@@ -91,6 +91,7 @@ TftpNetbootGroup osstest
+ TftpDiVersion_wheezy 2016-06-08
+ TftpDiVersion_jessie 2018-06-26
+ TftpDiVersion_stretch 2020-02-10
++TftpDiVersion_buster 2020-05-19
  
--    my $debconf_priority= $xopts{DebconfPriority};
--    push @cl, "priority=$debconf_priority"
--        if defined $debconf_priority;
-+    my $debconf_priority= $xopts{DebconfPriority} // 'critical';
-+    push @cl, "priority=$debconf_priority";
-     push @cl, "rescue/enable=true" if $xopts{RescueMode};
+ DebianSnapshotBackports_jessie http://snapshot.debian.org/archive/debian/20190206T211314Z/
  
-     if ($r{syslog_server}) {
 -- 
 2.20.1
 
