@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A594DC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 256FAC433E1
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 880FB2075F
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 880FB2075F
+	by mail.kernel.org (Postfix) with ESMTPS id 0A2C72075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0A2C72075F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7cM-0005hG-NU; Tue, 19 May 2020 19:09:34 +0000
+	id 1jb7cS-0005kI-02; Tue, 19 May 2020 19:09:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7cL-0005go-H8
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:09:33 +0000
-X-Inumbo-ID: 3e4c4d34-9a04-11ea-ae69-bc764e2007e4
+ id 1jb7cQ-0005ja-I5
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:09:38 +0000
+X-Inumbo-ID: 3f8783d0-9a04-11ea-9887-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3e4c4d34-9a04-11ea-ae69-bc764e2007e4;
- Tue, 19 May 2020 19:09:20 +0000 (UTC)
+ id 3f8783d0-9a04-11ea-9887-bc764e2007e4;
+ Tue, 19 May 2020 19:09:22 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vj-0001da-Tb; Tue, 19 May 2020 20:02:44 +0100
+ id 1jb7Vk-0001da-LP; Tue, 19 May 2020 20:02:44 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 32/38] buster: chiark-scripts: Install a new version
- on buster too
-Date: Tue, 19 May 2020 20:02:24 +0100
-Message-Id: <20200519190230.29519-33-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 35/38] buster: setupboot_grub2: Note what files exist
+ in /boot
+Date: Tue, 19 May 2020 20:02:27 +0100
+Message-Id: <20200519190230.29519-36-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -59,25 +59,29 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We need various fixes that are not in buster, sadly.
+Nothing uses this yet.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- production-config | 1 +
- 1 file changed, 1 insertion(+)
+ Osstest/Debian.pm | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/production-config b/production-config
-index f0ddc132..e3870d47 100644
---- a/production-config
-+++ b/production-config
-@@ -107,6 +107,7 @@ TftpGrubVersion XXXX-XX-XX
+diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
+index 151677ed..c0b669c9 100644
+--- a/Osstest/Debian.pm
++++ b/Osstest/Debian.pm
+@@ -448,6 +448,11 @@ sub setupboot_grub2 ($$$$) {
+         get_host_property($ho, "firmware") eq "uefi" &&
+         $ho->{Suite} =~ m/jessie|stretch|buster/ && $ho->{Arch} =~ m/^arm/;
  
- DebianExtraPackages_jessie chiark-scripts_6.0.3~citrix1_all.deb
- DebianExtraPackages_stretch chiark-scripts_6.0.4~citrix1_all.deb
-+DebianExtraPackages_buster chiark-scripts_6.0.5~citrix1_all.deb
- 
- DebianExtraPackages_uefi_i386_jessie   extradebs-uefi-i386-2018-04-01/
- DebianExtraPackages_uefi_amd64_jessie  extradebs-uefi-amd64-2018-04-01/
++    my %bootfiles =
++	map { $_ => 1 }
++	split / /,
++	target_cmd_output_root($ho, "cd /boot && echo *");
++
+     my $parsemenu= sub {
+         my $f= bl_getmenu_open($ho, $rmenu, "$stash/$ho->{Name}--grub.cfg.1");
+     
 -- 
 2.20.1
 
