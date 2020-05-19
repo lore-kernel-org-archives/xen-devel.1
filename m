@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E82FC433E1
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 128F1C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:22:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E20F12075F
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E20F12075F
+	by mail.kernel.org (Postfix) with ESMTPS id D314F207C4
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D314F207C4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jawZ6-0004pb-ET; Tue, 19 May 2020 07:21:28 +0000
+	id 1jawZG-0004xj-NX; Tue, 19 May 2020 07:21:38 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aMO8=7B=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jawZ5-0004p2-Nm
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 07:21:27 +0000
-X-Inumbo-ID: 501f5d5d-99a1-11ea-a8e2-12813bfff9fa
+ id 1jawZF-0004wV-OB
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 07:21:37 +0000
+X-Inumbo-ID: 51106f6f-99a1-11ea-a8e2-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 501f5d5d-99a1-11ea-a8e2-12813bfff9fa;
- Tue, 19 May 2020 07:21:12 +0000 (UTC)
+ id 51106f6f-99a1-11ea-a8e2-12813bfff9fa;
+ Tue, 19 May 2020 07:21:13 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id DA765B21A;
- Tue, 19 May 2020 07:21:12 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id EE082B21E;
+ Tue, 19 May 2020 07:21:13 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v10 05/12] libs: add libxenhypfs
-Date: Tue, 19 May 2020 09:20:59 +0200
-Message-Id: <20200519072106.26894-6-jgross@suse.com>
+Subject: [PATCH v10 09/12] xen: add runtime parameter access support to hypfs
+Date: Tue, 19 May 2020 09:21:03 +0200
+Message-Id: <20200519072106.26894-10-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200519072106.26894-1-jgross@suse.com>
 References: <20200519072106.26894-1-jgross@suse.com>
@@ -55,795 +55,737 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
+Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Add the new library libxenhypfs for access to the hypervisor filesystem.
+Add support to read and modify values of hypervisor runtime parameters
+via the hypervisor file system.
+
+As runtime parameters can be modified via a sysctl, too, this path has
+to take the hypfs rw_lock as writer.
+
+For custom runtime parameters the connection between the parameter
+value and the file system is done via an init function which will set
+the initial value (if needed) and the leaf properties.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
-Acked-by: Wei Liu <wl@xen.org>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-V1:
-- rename to libxenhypfs
-- add xenhypfs_write()
-
 V3:
-- major rework due to new hypervisor interface
-- add decompression capability
+- complete rework
+- support custom parameters, too
+- support parameter writing
 
-V4:
-- add dependency to libz in pkgconfig file (Wei Liu)
+V6:
+- rewording in docs/misc/hypfs-paths.pandoc (Jan Beulich)
+- use memchr() (Jan Beulich)
+- use strlcat() (Jan Beulich)
+- rework to use a custom parameter init function instead of a reference
+  to a content variable, allowing to drop default strings
+- style correction (Jan Beulich)
+- dropping param_append_str() in favor of a custom function at its only
+  use site
 
 V7:
-- don't assume hypervisor's sizeof(bool) is same as in user land
+- fine tune some parameter initializations (Jan Beulich)
+- call custom_runtime_set_var() after updating the value
+- modify alignment in Arm linker script to 4 (Jan Beulich)
 
 V8:
-- add some comments regarding the semantics of the lib functions
-  (George Dunlap)
+- modify alignment in Arm linker script to 8 (Julien Grall)
+- fix ept runtime parameter reporting (Jan Beulich)
+- rebase to support CONFIG_HYPFS
+
+V9:
+- add empty line in arm linker script (Jan Beulich)
+- drop array size enum members (Jan Beulich)
+- hide struct param_hypfs completely without CONFIG_HYPFS (Jan Beulich)
+- don't write size from hypfs_write_custom() (Jan Beulich)
+- drop underscores from macro parameters (Jan Beulich)
+- add parantheses around macro parameters (Jan Beulich)
+- don't set initial string param size (Jan Beulich)
+- move code in vmcs.c in preparation of patch 12 (Jan Beulich)
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- .gitignore                          |   2 +
- tools/Rules.mk                      |   6 +
- tools/libs/Makefile                 |   1 +
- tools/libs/hypfs/Makefile           |  16 +
- tools/libs/hypfs/core.c             | 536 ++++++++++++++++++++++++++++
- tools/libs/hypfs/include/xenhypfs.h |  90 +++++
- tools/libs/hypfs/libxenhypfs.map    |  10 +
- tools/libs/hypfs/xenhypfs.pc.in     |  10 +
- 8 files changed, 671 insertions(+)
- create mode 100644 tools/libs/hypfs/Makefile
- create mode 100644 tools/libs/hypfs/core.c
- create mode 100644 tools/libs/hypfs/include/xenhypfs.h
- create mode 100644 tools/libs/hypfs/libxenhypfs.map
- create mode 100644 tools/libs/hypfs/xenhypfs.pc.in
+ docs/misc/hypfs-paths.pandoc |   9 +++
+ xen/arch/arm/xen.lds.S       |   8 +++
+ xen/arch/x86/hvm/vmx/vmcs.c  |  29 ++++++++-
+ xen/arch/x86/pv/domain.c     |  21 ++++++-
+ xen/arch/x86/xen.lds.S       |   7 +++
+ xen/common/grant_table.c     |  62 ++++++++++++++----
+ xen/common/hypfs.c           |  34 +++++++++-
+ xen/common/kernel.c          |  29 ++++++++-
+ xen/drivers/char/console.c   |  72 +++++++++++++++++++--
+ xen/include/xen/hypfs.h      |   7 +++
+ xen/include/xen/param.h      | 119 ++++++++++++++++++++++++++++++++++-
+ 11 files changed, 372 insertions(+), 25 deletions(-)
 
-diff --git a/.gitignore b/.gitignore
-index 034f44b21b..7bd292f64d 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -110,6 +110,8 @@ tools/libs/evtchn/headers.chk
- tools/libs/evtchn/xenevtchn.pc
- tools/libs/gnttab/headers.chk
- tools/libs/gnttab/xengnttab.pc
-+tools/libs/hypfs/headers.chk
-+tools/libs/hypfs/xenhypfs.pc
- tools/libs/call/headers.chk
- tools/libs/call/xencall.pc
- tools/libs/foreignmemory/headers.chk
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 5b8cf748ad..ad6073fcad 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -19,6 +19,7 @@ XEN_LIBXENGNTTAB   = $(XEN_ROOT)/tools/libs/gnttab
- XEN_LIBXENCALL     = $(XEN_ROOT)/tools/libs/call
- XEN_LIBXENFOREIGNMEMORY = $(XEN_ROOT)/tools/libs/foreignmemory
- XEN_LIBXENDEVICEMODEL = $(XEN_ROOT)/tools/libs/devicemodel
-+XEN_LIBXENHYPFS    = $(XEN_ROOT)/tools/libs/hypfs
- XEN_LIBXC          = $(XEN_ROOT)/tools/libxc
- XEN_XENLIGHT       = $(XEN_ROOT)/tools/libxl
- # Currently libxlutil lives in the same directory as libxenlight
-@@ -132,6 +133,11 @@ SHDEPS_libxendevicemodel = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLI
- LDLIBS_libxendevicemodel = $(SHDEPS_libxendevicemodel) $(XEN_LIBXENDEVICEMODEL)/libxendevicemodel$(libextension)
- SHLIB_libxendevicemodel  = $(SHDEPS_libxendevicemodel) -Wl,-rpath-link=$(XEN_LIBXENDEVICEMODEL)
+diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
+index 9a76bc383b..a111c6f25c 100644
+--- a/docs/misc/hypfs-paths.pandoc
++++ b/docs/misc/hypfs-paths.pandoc
+@@ -154,3 +154,12 @@ The major version of Xen.
+ #### /buildinfo/version/minor = INTEGER
  
-+CFLAGS_libxenhypfs = -I$(XEN_LIBXENHYPFS)/include $(CFLAGS_xeninclude)
-+SHDEPS_libxenhypfs = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_xencall)
-+LDLIBS_libxenhypfs = $(SHDEPS_libxenhypfs) $(XEN_LIBXENHYPFS)/libxenhypfs$(libextension)
-+SHLIB_libxenhypfs  = $(SHDEPS_libxenhypfs) -Wl,-rpath-link=$(XEN_LIBXENHYPFS)
+ The minor version of Xen.
 +
- # code which compiles against libxenctrl get __XEN_TOOLS__ and
- # therefore sees the unstable hypercall interfaces.
- CFLAGS_libxenctrl = -I$(XEN_LIBXC)/include $(CFLAGS_libxentoollog) $(CFLAGS_libxenforeignmemory) $(CFLAGS_libxendevicemodel) $(CFLAGS_xeninclude) -D__XEN_TOOLS__
-diff --git a/tools/libs/Makefile b/tools/libs/Makefile
-index 88901e7341..69cdfb5975 100644
---- a/tools/libs/Makefile
-+++ b/tools/libs/Makefile
-@@ -9,6 +9,7 @@ SUBDIRS-y += gnttab
- SUBDIRS-y += call
- SUBDIRS-y += foreignmemory
- SUBDIRS-y += devicemodel
-+SUBDIRS-y += hypfs
++#### /params/
++
++A directory of runtime parameters.
++
++#### /params/*
++
++The individual parameters. The description of the different parameters can be
++found in `docs/misc/xen-command-line.pandoc`.
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index a497f6a48d..549ceb9749 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -89,6 +89,14 @@ SECTIONS
+        __start_schedulers_array = .;
+        *(.data.schedulers)
+        __end_schedulers_array = .;
++
++#ifdef CONFIG_HYPFS
++       . = ALIGN(8);
++       __paramhypfs_start = .;
++       *(.data.paramhypfs)
++       __paramhypfs_end = .;
++#endif
++
+        *(.data.rel)
+        *(.data.rel.*)
+        CONSTRUCTORS
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 221af9737a..3410bc5f6d 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -97,6 +97,30 @@ static int __init parse_ept_param(const char *s)
+ }
+ custom_param("ept", parse_ept_param);
  
- ifeq ($(CONFIG_RUMP),y)
- SUBDIRS-y := toolcore
-diff --git a/tools/libs/hypfs/Makefile b/tools/libs/hypfs/Makefile
-new file mode 100644
-index 0000000000..06dd449929
---- /dev/null
-+++ b/tools/libs/hypfs/Makefile
-@@ -0,0 +1,16 @@
-+XEN_ROOT = $(CURDIR)/../../..
-+include $(XEN_ROOT)/tools/Rules.mk
++#ifdef CONFIG_HYPFS
++static char opt_ept_setting[10];
 +
-+MAJOR    = 1
-+MINOR    = 0
-+LIBNAME  := hypfs
-+USELIBS  := toollog toolcore call
-+
-+APPEND_LDFLAGS += -lz
-+
-+SRCS-y                 += core.c
-+
-+include ../libs.mk
-+
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_INCDIR = $(XEN_LIBXENHYPFS)/include
-+$(PKG_CONFIG_LOCAL): PKG_CONFIG_CFLAGS_LOCAL = $(CFLAGS_xeninclude)
-diff --git a/tools/libs/hypfs/core.c b/tools/libs/hypfs/core.c
-new file mode 100644
-index 0000000000..d4309b5ae2
---- /dev/null
-+++ b/tools/libs/hypfs/core.c
-@@ -0,0 +1,536 @@
-+/*
-+ * Copyright (c) 2019 SUSE Software Solutions Germany GmbH
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#define __XEN_TOOLS__ 1
-+
-+#define _GNU_SOURCE
-+
-+#include <errno.h>
-+#include <inttypes.h>
-+#include <stdbool.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <zlib.h>
-+
-+#include <xentoollog.h>
-+#include <xenhypfs.h>
-+#include <xencall.h>
-+#include <xentoolcore_internal.h>
-+
-+#include <xen/xen.h>
-+#include <xen/hypfs.h>
-+
-+#define BUF_SIZE 4096
-+
-+struct xenhypfs_handle {
-+    xentoollog_logger *logger, *logger_tofree;
-+    unsigned int flags;
-+    xencall_handle *xcall;
-+};
-+
-+xenhypfs_handle *xenhypfs_open(xentoollog_logger *logger,
-+                               unsigned open_flags)
++static void update_ept_param(void)
 +{
-+    xenhypfs_handle *fshdl = calloc(1, sizeof(*fshdl));
-+
-+    if (!fshdl)
-+        return NULL;
-+
-+    fshdl->flags = open_flags;
-+    fshdl->logger = logger;
-+    fshdl->logger_tofree = NULL;
-+
-+    if (!fshdl->logger) {
-+        fshdl->logger = fshdl->logger_tofree =
-+            (xentoollog_logger*)
-+            xtl_createlogger_stdiostream(stderr, XTL_PROGRESS, 0);
-+        if (!fshdl->logger)
-+            goto err;
-+    }
-+
-+    fshdl->xcall = xencall_open(fshdl->logger, 0);
-+    if (!fshdl->xcall)
-+        goto err;
-+
-+    /* No need to remember supported version, we only support V1. */
-+    if (xencall5(fshdl->xcall, __HYPERVISOR_hypfs_op,
-+                 XEN_HYPFS_OP_get_version, 0, 0, 0, 0) < 0)
-+        goto err;
-+
-+    return fshdl;
-+
-+err:
-+    xtl_logger_destroy(fshdl->logger_tofree);
-+    xencall_close(fshdl->xcall);
-+    free(fshdl);
-+    return NULL;
++    if ( opt_ept_exec_sp >= 0 )
++        snprintf(opt_ept_setting, sizeof(opt_ept_setting), "exec-sp=%d",
++                 opt_ept_exec_sp);
 +}
 +
-+int xenhypfs_close(xenhypfs_handle *fshdl)
++static void __init init_ept_param(struct param_hypfs *par)
 +{
-+    if (!fshdl)
-+        return 0;
++    update_ept_param();
++    custom_runtime_set_var(par, opt_ept_setting);
++}
++#else
++static void update_ept_param(void)
++{
++}
++#endif
 +
-+    xencall_close(fshdl->xcall);
-+    xtl_logger_destroy(fshdl->logger_tofree);
-+    free(fshdl);
++static int parse_ept_param_runtime(const char *s);
++custom_runtime_only_param("ept", parse_ept_param_runtime, init_ept_param);
++
+ static int parse_ept_param_runtime(const char *s)
+ {
+     struct domain *d;
+@@ -115,6 +139,10 @@ static int parse_ept_param_runtime(const char *s)
+ 
+     opt_ept_exec_sp = val;
+ 
++    update_ept_param();
++    custom_runtime_set_var(param_2_parfs(parse_ept_param_runtime),
++                           opt_ept_setting);
++
+     rcu_read_lock(&domlist_read_lock);
+     for_each_domain ( d )
+     {
+@@ -144,7 +172,6 @@ static int parse_ept_param_runtime(const char *s)
+ 
+     return 0;
+ }
+-custom_runtime_only_param("ept", parse_ept_param_runtime);
+ 
+ /* Dynamic (run-time adjusted) execution control flags. */
+ u32 vmx_pin_based_exec_control __read_mostly;
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 0a4a5bd001..f4e863a410 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -55,6 +55,23 @@ static __read_mostly enum {
+     PCID_NOXPTI
+ } opt_pcid = PCID_XPTI;
+ 
++#ifdef CONFIG_HYPFS
++static const char opt_pcid_2_string[][7] = {
++    [PCID_OFF] = "off",
++    [PCID_ALL] = "on",
++    [PCID_XPTI] = "xpti",
++    [PCID_NOXPTI] = "noxpti",
++};
++
++static void __init opt_pcid_init(struct param_hypfs *par)
++{
++    custom_runtime_set_var(par, opt_pcid_2_string[opt_pcid]);
++}
++#endif
++
++static int parse_pcid(const char *s);
++custom_runtime_param("pcid", parse_pcid, opt_pcid_init);
++
+ static int parse_pcid(const char *s)
+ {
+     int rc = 0;
+@@ -87,9 +104,11 @@ static int parse_pcid(const char *s)
+         break;
+     }
+ 
++    custom_runtime_set_var(param_2_parfs(parse_pcid),
++                           opt_pcid_2_string[opt_pcid]);
++
+     return rc;
+ }
+-custom_runtime_param("pcid", parse_pcid);
+ 
+ static void noreturn continue_nonidle_domain(struct vcpu *v)
+ {
+diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
+index 0e3a733cab..3ed020e26b 100644
+--- a/xen/arch/x86/xen.lds.S
++++ b/xen/arch/x86/xen.lds.S
+@@ -279,6 +279,13 @@ SECTIONS
+        __start_schedulers_array = .;
+        *(.data.schedulers)
+        __end_schedulers_array = .;
++
++#ifdef CONFIG_HYPFS
++       . = ALIGN(8);
++       __paramhypfs_start = .;
++       *(.data.paramhypfs)
++       __paramhypfs_end = .;
++#endif
+   } :text
+ 
+   DECL_SECTION(.data) {
+diff --git a/xen/common/grant_table.c b/xen/common/grant_table.c
+index 5ef7ff940d..ece670e484 100644
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -85,8 +85,43 @@ struct grant_table {
+     struct grant_table_arch arch;
+ };
+ 
+-static int parse_gnttab_limit(const char *param, const char *arg,
+-                              unsigned int *valp)
++unsigned int __read_mostly opt_max_grant_frames = 64;
++static unsigned int __read_mostly opt_max_maptrack_frames = 1024;
++
++#ifdef CONFIG_HYPFS
++#define GRANT_CUSTOM_VAL_SZ  12
++static char __read_mostly opt_max_grant_frames_val[GRANT_CUSTOM_VAL_SZ];
++static char __read_mostly opt_max_maptrack_frames_val[GRANT_CUSTOM_VAL_SZ];
++
++static void update_gnttab_par(unsigned int val, struct param_hypfs *par,
++                              char *parval)
++{
++    snprintf(parval, GRANT_CUSTOM_VAL_SZ, "%u", val);
++    custom_runtime_set_var_sz(par, parval, GRANT_CUSTOM_VAL_SZ);
++}
++
++static void __init gnttab_max_frames_init(struct param_hypfs *par)
++{
++    update_gnttab_par(opt_max_grant_frames, par, opt_max_grant_frames_val);
++}
++
++static void __init max_maptrack_frames_init(struct param_hypfs *par)
++{
++    update_gnttab_par(opt_max_maptrack_frames, par,
++                      opt_max_maptrack_frames_val);
++}
++#else
++#define update_gnttab_par(v, unused1, unused2)     update_gnttab_par(v)
++#define parse_gnttab_limit(a, v, unused1, unused2) parse_gnttab_limit(a, v)
++
++static void update_gnttab_par(unsigned int val, struct param_hypfs *par,
++                              char *parval)
++{
++}
++#endif
++
++static int parse_gnttab_limit(const char *arg, unsigned int *valp,
++                              struct param_hypfs *par, char *parval)
+ {
+     const char *e;
+     unsigned long val;
+@@ -99,28 +134,33 @@ static int parse_gnttab_limit(const char *param, const char *arg,
+         return -ERANGE;
+ 
+     *valp = val;
++    update_gnttab_par(val, par, parval);
+ 
+     return 0;
+ }
+ 
+-unsigned int __read_mostly opt_max_grant_frames = 64;
++static int parse_gnttab_max_frames(const char *arg);
++custom_runtime_param("gnttab_max_frames", parse_gnttab_max_frames,
++                     gnttab_max_frames_init);
+ 
+ static int parse_gnttab_max_frames(const char *arg)
+ {
+-    return parse_gnttab_limit("gnttab_max_frames", arg,
+-                              &opt_max_grant_frames);
++    return parse_gnttab_limit(arg, &opt_max_grant_frames,
++                              param_2_parfs(parse_gnttab_max_frames),
++                              opt_max_grant_frames_val);
+ }
+-custom_runtime_param("gnttab_max_frames", parse_gnttab_max_frames);
+ 
+-static unsigned int __read_mostly opt_max_maptrack_frames = 1024;
++static int parse_gnttab_max_maptrack_frames(const char *arg);
++custom_runtime_param("gnttab_max_maptrack_frames",
++                     parse_gnttab_max_maptrack_frames,
++                     max_maptrack_frames_init);
+ 
+ static int parse_gnttab_max_maptrack_frames(const char *arg)
+ {
+-    return parse_gnttab_limit("gnttab_max_maptrack_frames", arg,
+-                              &opt_max_maptrack_frames);
++    return parse_gnttab_limit(arg, &opt_max_maptrack_frames,
++                              param_2_parfs(parse_gnttab_max_maptrack_frames),
++                              opt_max_maptrack_frames_val);
+ }
+-custom_runtime_param("gnttab_max_maptrack_frames",
+-                     parse_gnttab_max_maptrack_frames);
+ 
+ #ifndef GNTTAB_MAX_VERSION
+ #define GNTTAB_MAX_VERSION 2
+diff --git a/xen/common/hypfs.c b/xen/common/hypfs.c
+index 9c2213a068..4aed6ae182 100644
+--- a/xen/common/hypfs.c
++++ b/xen/common/hypfs.c
+@@ -10,6 +10,7 @@
+ #include <xen/hypercall.h>
+ #include <xen/hypfs.h>
+ #include <xen/lib.h>
++#include <xen/param.h>
+ #include <xen/rwlock.h>
+ #include <public/hypfs.h>
+ 
+@@ -41,7 +42,7 @@ static void hypfs_read_lock(void)
+     this_cpu(hypfs_locked) = hypfs_read_locked;
+ }
+ 
+-static void hypfs_write_lock(void)
++void hypfs_write_lock(void)
+ {
+     ASSERT(this_cpu(hypfs_locked) == hypfs_unlocked);
+ 
+@@ -49,7 +50,7 @@ static void hypfs_write_lock(void)
+     this_cpu(hypfs_locked) = hypfs_write_locked;
+ }
+ 
+-static void hypfs_unlock(void)
++void hypfs_unlock(void)
+ {
+     enum hypfs_lock_state locked = this_cpu(hypfs_locked);
+ 
+@@ -346,6 +347,35 @@ int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
+     return 0;
+ }
+ 
++int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
++                       XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen)
++{
++    struct param_hypfs *p;
++    char *buf;
++    int ret;
++
++    ASSERT(this_cpu(hypfs_locked) == hypfs_write_locked);
++
++    buf = xzalloc_array(char, ulen);
++    if ( !buf )
++        return -ENOMEM;
++
++    ret = -EFAULT;
++    if ( copy_from_guest(buf, uaddr, ulen) )
++        goto out;
++
++    ret = -EDOM;
++    if ( memchr(buf, 0, ulen) != (buf + ulen - 1) )
++        goto out;
++
++    p = container_of(leaf, struct param_hypfs, hypfs);
++    ret = p->param->par.func(buf);
++
++ out:
++    xfree(buf);
++    return ret;
++}
++
+ static int hypfs_write(struct hypfs_entry *entry,
+                        XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned long ulen)
+ {
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index f464fe02ed..d1381d6900 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -198,7 +198,13 @@ static void __init _cmdline_parse(const char *cmdline)
+ 
+ int runtime_parse(const char *line)
+ {
+-    return parse_params(line, __param_start, __param_end);
++    int ret;
++
++    hypfs_write_lock();
++    ret = parse_params(line, __param_start, __param_end);
++    hypfs_unlock();
++
++    return ret;
+ }
+ 
+ /**
+@@ -429,6 +435,27 @@ static int __init buildinfo_init(void)
+     return 0;
+ }
+ __initcall(buildinfo_init);
++
++static HYPFS_DIR_INIT(params, "params");
++
++static int __init param_init(void)
++{
++    struct param_hypfs *param;
++
++    hypfs_add_dir(&hypfs_root, &params, true);
++
++    for ( param = __paramhypfs_start; param < __paramhypfs_end; param++ )
++    {
++        if ( param->init_leaf )
++            param->init_leaf(param);
++        else if ( param->hypfs.e.type == XEN_HYPFS_TYPE_STRING )
++            param->hypfs.e.size = strlen(param->hypfs.content) + 1;
++        hypfs_add_leaf(&params, &param->hypfs, true);
++    }
++
 +    return 0;
 +}
-+
-+static int xenhypfs_get_pathbuf(xenhypfs_handle *fshdl, const char *path,
-+                                char **path_buf)
-+{
-+    int ret = -1;
-+    int path_sz;
-+
-+    if (!fshdl) {
-+        errno = EBADF;
-+        goto out;
-+    }
-+
-+    path_sz = strlen(path) + 1;
-+    if (path_sz > XEN_HYPFS_MAX_PATHLEN)
-+    {
-+        errno = ENAMETOOLONG;
-+        goto out;
-+    }
-+
-+    *path_buf = xencall_alloc_buffer(fshdl->xcall, path_sz);
-+    if (!*path_buf) {
-+        errno = ENOMEM;
-+        goto out;
-+    }
-+    strcpy(*path_buf, path);
-+
-+    ret = path_sz;
-+
-+ out:
-+    return ret;
-+}
-+
-+static void *xenhypfs_inflate(void *in_data, size_t *sz)
-+{
-+    unsigned char *workbuf;
-+    void *content = NULL;
-+    unsigned int out_sz;
-+    z_stream z = { .opaque = NULL };
-+    int ret;
-+
-+    workbuf = malloc(BUF_SIZE);
-+    if (!workbuf)
-+        return NULL;
-+
-+    z.next_in = in_data;
-+    z.avail_in = *sz;
-+    ret = inflateInit2(&z, MAX_WBITS + 32); /* 32 == gzip */
-+
-+    for (*sz = 0; ret == Z_OK; *sz += out_sz) {
-+        z.next_out = workbuf;
-+        z.avail_out = BUF_SIZE;
-+        ret = inflate(&z, Z_SYNC_FLUSH);
-+        if (ret != Z_OK && ret != Z_STREAM_END)
-+            break;
-+
-+        out_sz = z.next_out - workbuf;
-+        content = realloc(content, *sz + out_sz);
-+        if (!content) {
-+            ret = Z_MEM_ERROR;
-+            break;
-+        }
-+        memcpy(content + *sz, workbuf, out_sz);
-+    }
-+
-+    inflateEnd(&z);
-+    if (ret != Z_STREAM_END) {
-+        free(content);
-+        content = NULL;
-+        errno = EIO;
-+    }
-+    free(workbuf);
-+    return content;
-+}
-+
-+static void xenhypfs_set_attrs(struct xen_hypfs_direntry *entry,
-+                               struct xenhypfs_dirent *dirent)
-+{
-+    dirent->size = entry->content_len;
-+
-+    switch(entry->type) {
-+    case XEN_HYPFS_TYPE_DIR:
-+        dirent->type = xenhypfs_type_dir;
-+        break;
-+    case XEN_HYPFS_TYPE_BLOB:
-+        dirent->type = xenhypfs_type_blob;
-+        break;
-+    case XEN_HYPFS_TYPE_STRING:
-+        dirent->type = xenhypfs_type_string;
-+        break;
-+    case XEN_HYPFS_TYPE_UINT:
-+        dirent->type = xenhypfs_type_uint;
-+        break;
-+    case XEN_HYPFS_TYPE_INT:
-+        dirent->type = xenhypfs_type_int;
-+        break;
-+    case XEN_HYPFS_TYPE_BOOL:
-+        dirent->type = xenhypfs_type_bool;
-+        break;
-+    default:
-+        dirent->type = xenhypfs_type_blob;
-+    }
-+
-+    switch (entry->encoding) {
-+    case XEN_HYPFS_ENC_PLAIN:
-+        dirent->encoding = xenhypfs_enc_plain;
-+        break;
-+    case XEN_HYPFS_ENC_GZIP:
-+        dirent->encoding = xenhypfs_enc_gzip;
-+        break;
-+    default:
-+        dirent->encoding = xenhypfs_enc_plain;
-+        dirent->type = xenhypfs_type_blob;
-+    }
-+
-+    dirent->is_writable = entry->max_write_len;
-+}
-+
-+void *xenhypfs_read_raw(xenhypfs_handle *fshdl, const char *path,
-+                        struct xenhypfs_dirent **dirent)
-+{
-+    void *retbuf = NULL, *content = NULL;
-+    char *path_buf = NULL;
-+    const char *name;
-+    struct xen_hypfs_direntry *entry;
-+    int ret;
-+    int sz, path_sz;
-+
-+    *dirent = NULL;
-+    ret = xenhypfs_get_pathbuf(fshdl, path, &path_buf);
-+    if (ret < 0)
-+        goto out;
-+
-+    path_sz = ret;
-+
-+    for (sz = BUF_SIZE;; sz = sizeof(*entry) + entry->content_len) {
-+        if (retbuf)
-+            xencall_free_buffer(fshdl->xcall, retbuf);
-+
-+        retbuf = xencall_alloc_buffer(fshdl->xcall, sz);
-+        if (!retbuf) {
-+            errno = ENOMEM;
-+            goto out;
-+        }
-+        entry = retbuf;
-+
-+        ret = xencall5(fshdl->xcall, __HYPERVISOR_hypfs_op, XEN_HYPFS_OP_read,
-+                       (unsigned long)path_buf, path_sz,
-+                       (unsigned long)retbuf, sz);
-+        if (!ret)
-+            break;
-+
-+        if (ret != ENOBUFS) {
-+            errno = -ret;
-+            goto out;
-+        }
-+    }
-+
-+    content = malloc(entry->content_len);
-+    if (!content)
-+        goto out;
-+    memcpy(content, entry + 1, entry->content_len);
-+
-+    name = strrchr(path, '/');
-+    if (!name)
-+        name = path;
-+    else {
-+        name++;
-+        if (!*name)
-+            name--;
-+    }
-+    *dirent = calloc(1, sizeof(struct xenhypfs_dirent) + strlen(name) + 1);
-+    if (!*dirent) {
-+        free(content);
-+        content = NULL;
-+        errno = ENOMEM;
-+        goto out;
-+    }
-+    (*dirent)->name = (char *)(*dirent + 1);
-+    strcpy((*dirent)->name, name);
-+    xenhypfs_set_attrs(entry, *dirent);
-+
-+ out:
-+    ret = errno;
-+    xencall_free_buffer(fshdl->xcall, path_buf);
-+    xencall_free_buffer(fshdl->xcall, retbuf);
-+    errno = ret;
-+
-+    return content;
-+}
-+
-+char *xenhypfs_read(xenhypfs_handle *fshdl, const char *path)
-+{
-+    char *buf, *ret_buf = NULL;
-+    struct xenhypfs_dirent *dirent;
-+    int ret;
-+
-+    buf = xenhypfs_read_raw(fshdl, path, &dirent);
-+    if (!buf)
-+        goto out;
-+
-+    switch (dirent->encoding) {
-+    case xenhypfs_enc_plain:
-+        break;
-+    case xenhypfs_enc_gzip:
-+        ret_buf = xenhypfs_inflate(buf, &dirent->size);
-+        if (!ret_buf)
-+            goto out;
-+        free(buf);
-+        buf = ret_buf;
-+        ret_buf = NULL;
-+        break;
-+    }
-+
-+    switch (dirent->type) {
-+    case xenhypfs_type_dir:
-+        errno = EISDIR;
-+        break;
-+    case xenhypfs_type_blob:
-+        errno = EDOM;
-+        break;
-+    case xenhypfs_type_string:
-+        ret_buf = buf;
-+        buf = NULL;
-+        break;
-+    case xenhypfs_type_uint:
-+    case xenhypfs_type_bool:
-+        switch (dirent->size) {
-+        case 1:
-+            ret = asprintf(&ret_buf, "%"PRIu8, *(uint8_t *)buf);
-+            break;
-+        case 2:
-+            ret = asprintf(&ret_buf, "%"PRIu16, *(uint16_t *)buf);
-+            break;
-+        case 4:
-+            ret = asprintf(&ret_buf, "%"PRIu32, *(uint32_t *)buf);
-+            break;
-+        case 8:
-+            ret = asprintf(&ret_buf, "%"PRIu64, *(uint64_t *)buf);
-+            break;
-+        default:
-+            ret = -1;
-+            errno = EDOM;
-+        }
-+        if (ret < 0)
-+            ret_buf = NULL;
-+        break;
-+    case xenhypfs_type_int:
-+        switch (dirent->size) {
-+        case 1:
-+            ret = asprintf(&ret_buf, "%"PRId8, *(int8_t *)buf);
-+            break;
-+        case 2:
-+            ret = asprintf(&ret_buf, "%"PRId16, *(int16_t *)buf);
-+            break;
-+        case 4:
-+            ret = asprintf(&ret_buf, "%"PRId32, *(int32_t *)buf);
-+            break;
-+        case 8:
-+            ret = asprintf(&ret_buf, "%"PRId64, *(int64_t *)buf);
-+            break;
-+        default:
-+            ret = -1;
-+            errno = EDOM;
-+        }
-+        if (ret < 0)
-+            ret_buf = NULL;
-+        break;
-+    }
-+
-+ out:
-+    ret = errno;
-+    free(buf);
-+    free(dirent);
-+    errno = ret;
-+
-+    return ret_buf;
-+}
-+
-+struct xenhypfs_dirent *xenhypfs_readdir(xenhypfs_handle *fshdl,
-+                                         const char *path,
-+                                         unsigned int *num_entries)
-+{
-+    void *buf, *curr;
-+    int ret;
-+    char *names;
-+    struct xenhypfs_dirent *ret_buf = NULL, *dirent;
-+    unsigned int n = 0, name_sz = 0;
-+    struct xen_hypfs_dirlistentry *entry;
-+
-+    buf = xenhypfs_read_raw(fshdl, path, &dirent);
-+    if (!buf)
-+        goto out;
-+
-+    if (dirent->type != xenhypfs_type_dir ||
-+        dirent->encoding != xenhypfs_enc_plain) {
-+        errno = ENOTDIR;
-+        goto out;
-+    }
-+
-+    if (dirent->size) {
-+        curr = buf;
-+        for (n = 1;; n++) {
-+            entry = curr;
-+            name_sz += strlen(entry->name) + 1;
-+            if (!entry->off_next)
-+                break;
-+
-+            curr += entry->off_next;
-+        }
-+    }
-+
-+    ret_buf = malloc(n * sizeof(*ret_buf) + name_sz);
-+    if (!ret_buf)
-+        goto out;
-+
-+    *num_entries = n;
-+    names = (char *)(ret_buf + n);
-+    curr = buf;
-+    for (n = 0; n < *num_entries; n++) {
-+        entry = curr;
-+        xenhypfs_set_attrs(&entry->e, ret_buf + n);
-+        ret_buf[n].name = names;
-+        strcpy(names, entry->name);
-+        names += strlen(entry->name) + 1;
-+        curr += entry->off_next;
-+    }
-+
-+ out:
-+    ret = errno;
-+    free(buf);
-+    free(dirent);
-+    errno = ret;
-+
-+    return ret_buf;
-+}
-+
-+int xenhypfs_write(xenhypfs_handle *fshdl, const char *path, const char *val)
-+{
-+    void *buf = NULL;
-+    char *path_buf = NULL, *val_end;
-+    int ret, saved_errno;
-+    int sz, path_sz;
-+    struct xen_hypfs_direntry *entry;
-+    uint64_t mask;
-+
-+    ret = xenhypfs_get_pathbuf(fshdl, path, &path_buf);
-+    if (ret < 0)
-+        goto out;
-+
-+    path_sz = ret;
-+    ret = -1;
-+
-+    sz = BUF_SIZE;
-+    buf = xencall_alloc_buffer(fshdl->xcall, sz);
-+    if (!buf) {
-+        errno = ENOMEM;
-+        goto out;
-+    }
-+
-+    ret = xencall5(fshdl->xcall, __HYPERVISOR_hypfs_op, XEN_HYPFS_OP_read,
-+                   (unsigned long)path_buf, path_sz,
-+                   (unsigned long)buf, sizeof(*entry));
-+    if (ret && errno != ENOBUFS)
-+        goto out;
-+    ret = -1;
-+    entry = buf;
-+    if (!entry->max_write_len) {
-+        errno = EACCES;
-+        goto out;
-+    }
-+    if (entry->encoding != XEN_HYPFS_ENC_PLAIN) {
-+        /* Writing compressed data currently not supported. */
-+        errno = EDOM;
-+        goto out;
-+    }
-+
-+    switch (entry->type) {
-+    case XEN_HYPFS_TYPE_STRING:
-+        if (sz < strlen(val) + 1) {
-+            sz = strlen(val) + 1;
-+            xencall_free_buffer(fshdl->xcall, buf);
-+            buf = xencall_alloc_buffer(fshdl->xcall, sz);
-+            if (!buf) {
-+                errno = ENOMEM;
-+                goto out;
-+            }
-+        }
-+        sz = strlen(val) + 1;
-+        strcpy(buf, val);
-+        break;
-+    case XEN_HYPFS_TYPE_UINT:
-+        sz = entry->content_len;
-+        errno = 0;
-+        *(unsigned long long *)buf = strtoull(val, &val_end, 0);
-+        if (errno || !*val || *val_end)
-+            goto out;
-+        mask = ~0ULL << (8 * sz);
-+        if ((*(uint64_t *)buf & mask) && ((*(uint64_t *)buf & mask) != mask)) {
-+            errno = ERANGE;
-+            goto out;
-+        }
-+        break;
-+    case XEN_HYPFS_TYPE_INT:
-+        sz = entry->content_len;
-+        errno = 0;
-+        *(unsigned long long *)buf = strtoll(val, &val_end, 0);
-+        if (errno || !*val || *val_end)
-+            goto out;
-+        mask = (sz == 8) ? 0 : ~0ULL << (8 * sz);
-+        if ((*(uint64_t *)buf & mask) && ((*(uint64_t *)buf & mask) != mask)) {
-+            errno = ERANGE;
-+            goto out;
-+        }
-+        break;
-+    case XEN_HYPFS_TYPE_BOOL:
-+        sz = entry->content_len;
-+        *(unsigned long long *)buf = 0;
-+        if (!strcmp(val, "1") || !strcmp(val, "on") || !strcmp(val, "yes") ||
-+            !strcmp(val, "true") || !strcmp(val, "enable"))
-+            *(unsigned long long *)buf = 1;
-+        else if (strcmp(val, "0") && strcmp(val, "no") && strcmp(val, "off") &&
-+                 strcmp(val, "false") && strcmp(val, "disable")) {
-+            errno = EDOM;
-+            goto out;
-+        }
-+        break;
-+    default:
-+        /* No support for other types (yet). */
-+        errno = EDOM;
-+        goto out;
-+    }
-+
-+    ret = xencall5(fshdl->xcall, __HYPERVISOR_hypfs_op,
-+                   XEN_HYPFS_OP_write_contents,
-+                   (unsigned long)path_buf, path_sz,
-+                   (unsigned long)buf, sz);
-+
-+ out:
-+    saved_errno = errno;
-+    xencall_free_buffer(fshdl->xcall, path_buf);
-+    xencall_free_buffer(fshdl->xcall, buf);
-+    errno = saved_errno;
-+    return ret;
-+}
-diff --git a/tools/libs/hypfs/include/xenhypfs.h b/tools/libs/hypfs/include/xenhypfs.h
-new file mode 100644
-index 0000000000..ab157edceb
---- /dev/null
-+++ b/tools/libs/hypfs/include/xenhypfs.h
-@@ -0,0 +1,90 @@
-+/*
-+ * Copyright (c) 2019 SUSE Software Solutions Germany GmbH
-+ *
-+ * This library is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU Lesser General Public
-+ * License as published by the Free Software Foundation;
-+ * version 2.1 of the License.
-+ *
-+ * This library is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+ * Lesser General Public License for more details.
-+ *
-+ * You should have received a copy of the GNU Lesser General Public
-+ * License along with this library; If not, see <http://www.gnu.org/licenses/>.
-+ */
-+#ifndef XENHYPFS_H
-+#define XENHYPFS_H
-+
-+#include <stdbool.h>
-+#include <stdint.h>
-+#include <sys/types.h>
-+
-+/* Callers who don't care don't need to #include <xentoollog.h> */
-+struct xentoollog_logger;
-+
-+typedef struct xenhypfs_handle xenhypfs_handle;
-+
-+struct xenhypfs_dirent {
-+    char *name;
-+    size_t size;
-+    enum {
-+        xenhypfs_type_dir,
-+        xenhypfs_type_blob,
-+        xenhypfs_type_string,
-+        xenhypfs_type_uint,
-+        xenhypfs_type_int,
-+        xenhypfs_type_bool
-+    } type;
-+    enum {
-+        xenhypfs_enc_plain,
-+        xenhypfs_enc_gzip
-+    } encoding;
-+    bool is_writable;
++__initcall(param_init);
+ #endif
+ 
+ # define DO(fn) long do_##fn
+diff --git a/xen/drivers/char/console.c b/xen/drivers/char/console.c
+index 913ae1b66a..56e24821b2 100644
+--- a/xen/drivers/char/console.c
++++ b/xen/drivers/char/console.c
+@@ -79,8 +79,28 @@ enum con_timestamp_mode
+ 
+ static enum con_timestamp_mode __read_mostly opt_con_timestamp_mode = TSM_NONE;
+ 
++#ifdef CONFIG_HYPFS
++static const char con_timestamp_mode_2_string[][7] = {
++    [TSM_NONE] = "none",
++    [TSM_DATE] = "date",
++    [TSM_DATE_MS] = "datems",
++    [TSM_BOOT] = "boot",
++    [TSM_RAW] = "raw",
 +};
 +
-+xenhypfs_handle *xenhypfs_open(struct xentoollog_logger *logger,
-+                               unsigned int open_flags);
-+int xenhypfs_close(xenhypfs_handle *fshdl);
++static void con_timestamp_mode_upd(struct param_hypfs *par)
++{
++    const char *val = con_timestamp_mode_2_string[opt_con_timestamp_mode];
 +
-+/*
-+ * Return the raw contents of a Xen hypfs entry and its dirent containing
-+ * the size, type and encoding.
-+ * Returned buffer and dirent should be freed via free().
-+ */
-+void *xenhypfs_read_raw(xenhypfs_handle *fshdl, const char *path,
-+                        struct xenhypfs_dirent **dirent);
++    custom_runtime_set_var_sz(par, val, 7);
++}
++#else
++#define con_timestamp_mode_upd(par)
++#endif
 +
-+/*
-+ * Return the contents of a Xen hypfs entry as a string.
-+ * Returned buffer should be freed via free().
-+ */
-+char *xenhypfs_read(xenhypfs_handle *fshdl, const char *path);
+ static int parse_console_timestamps(const char *s);
+-custom_runtime_param("console_timestamps", parse_console_timestamps);
++custom_runtime_param("console_timestamps", parse_console_timestamps,
++                     con_timestamp_mode_upd);
+ 
+ /* conring_size: allows a large console ring than default (16kB). */
+ static uint32_t __initdata opt_conring_size;
+@@ -143,6 +163,39 @@ static int __read_mostly xenlog_guest_lower_thresh =
+ static int parse_loglvl(const char *s);
+ static int parse_guest_loglvl(const char *s);
+ 
++#ifdef CONFIG_HYPFS
++#define LOGLVL_VAL_SZ 16
++static char xenlog_val[LOGLVL_VAL_SZ];
++static char xenlog_guest_val[LOGLVL_VAL_SZ];
 +
-+/*
-+ * Return the contents of a Xen hypfs directory in form of an array of
-+ * dirents.
-+ * Returned buffer should be freed via free().
-+ */
-+struct xenhypfs_dirent *xenhypfs_readdir(xenhypfs_handle *fshdl,
-+                                         const char *path,
-+                                         unsigned int *num_entries);
++static char *lvl2opt[] = { "none", "error", "warning", "info", "all" };
 +
-+/*
-+ * Write a Xen hypfs entry with a value. The value is converted from a string
-+ * to the appropriate type.
-+ */
-+int xenhypfs_write(xenhypfs_handle *fshdl, const char *path, const char *val);
++static void xenlog_update_val(int lower, int upper, char *val)
++{
++    snprintf(val, LOGLVL_VAL_SZ, "%s/%s", lvl2opt[lower], lvl2opt[upper]);
++}
 +
-+#endif /* XENHYPFS_H */
++static void __init xenlog_init(struct param_hypfs *par)
++{
++    xenlog_update_val(xenlog_lower_thresh, xenlog_upper_thresh, xenlog_val);
++    custom_runtime_set_var(par, xenlog_val);
++}
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/tools/libs/hypfs/libxenhypfs.map b/tools/libs/hypfs/libxenhypfs.map
-new file mode 100644
-index 0000000000..47f1edda3e
---- /dev/null
-+++ b/tools/libs/hypfs/libxenhypfs.map
-@@ -0,0 +1,10 @@
-+VERS_1.0 {
-+	global:
-+		xenhypfs_open;
-+		xenhypfs_close;
-+		xenhypfs_read_raw;
-+		xenhypfs_read;
-+		xenhypfs_readdir;
-+		xenhypfs_write;
-+	local: *; /* Do not expose anything by default */
++static void __init xenlog_guest_init(struct param_hypfs *par)
++{
++    xenlog_update_val(xenlog_guest_lower_thresh, xenlog_guest_upper_thresh,
++                      xenlog_guest_val);
++    custom_runtime_set_var(par, xenlog_guest_val);
++}
++#else
++#define xenlog_val       NULL
++#define xenlog_guest_val NULL
++
++static void xenlog_update_val(int lower, int upper, char *val)
++{
++}
++#endif
++
+ /*
+  * <lvl> := none|error|warning|info|debug|all
+  * loglvl=<lvl_print_always>[/<lvl_print_ratelimit>]
+@@ -151,8 +204,8 @@ static int parse_guest_loglvl(const char *s);
+  * Similar definitions for guest_loglvl, but applies to guest tracing.
+  * Defaults: loglvl=warning ; guest_loglvl=none/warning
+  */
+-custom_runtime_param("loglvl", parse_loglvl);
+-custom_runtime_param("guest_loglvl", parse_guest_loglvl);
++custom_runtime_param("loglvl", parse_loglvl, xenlog_init);
++custom_runtime_param("guest_loglvl", parse_guest_loglvl, xenlog_guest_init);
+ 
+ static atomic_t print_everything = ATOMIC_INIT(0);
+ 
+@@ -173,7 +226,7 @@ static int __parse_loglvl(const char *s, const char **ps)
+     return 2; /* sane fallback */
+ }
+ 
+-static int _parse_loglvl(const char *s, int *lower, int *upper)
++static int _parse_loglvl(const char *s, int *lower, int *upper, char *val)
+ {
+     *lower = *upper = __parse_loglvl(s, &s);
+     if ( *s == '/' )
+@@ -181,18 +234,21 @@ static int _parse_loglvl(const char *s, int *lower, int *upper)
+     if ( *upper < *lower )
+         *upper = *lower;
+ 
++    xenlog_update_val(*lower, *upper, val);
++
+     return *s ? -EINVAL : 0;
+ }
+ 
+ static int parse_loglvl(const char *s)
+ {
+-    return _parse_loglvl(s, &xenlog_lower_thresh, &xenlog_upper_thresh);
++    return _parse_loglvl(s, &xenlog_lower_thresh, &xenlog_upper_thresh,
++                         xenlog_val);
+ }
+ 
+ static int parse_guest_loglvl(const char *s)
+ {
+     return _parse_loglvl(s, &xenlog_guest_lower_thresh,
+-                         &xenlog_guest_upper_thresh);
++                         &xenlog_guest_upper_thresh, xenlog_guest_val);
+ }
+ 
+ static char *loglvl_str(int lvl)
+@@ -731,9 +787,11 @@ static int parse_console_timestamps(const char *s)
+     {
+     case 0:
+         opt_con_timestamp_mode = TSM_NONE;
++        con_timestamp_mode_upd(param_2_parfs(parse_console_timestamps));
+         return 0;
+     case 1:
+         opt_con_timestamp_mode = TSM_DATE;
++        con_timestamp_mode_upd(param_2_parfs(parse_console_timestamps));
+         return 0;
+     }
+     if ( *s == '\0' || /* Compat for old booleanparam() */
+@@ -750,6 +808,8 @@ static int parse_console_timestamps(const char *s)
+     else
+         return -EINVAL;
+ 
++    con_timestamp_mode_upd(param_2_parfs(parse_console_timestamps));
++
+     return 0;
+ }
+ 
+diff --git a/xen/include/xen/hypfs.h b/xen/include/xen/hypfs.h
+index 5c6a0ccece..507ed3ae0b 100644
+--- a/xen/include/xen/hypfs.h
++++ b/xen/include/xen/hypfs.h
+@@ -116,6 +116,13 @@ int hypfs_write_leaf(struct hypfs_entry_leaf *leaf,
+                      XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
+ int hypfs_write_bool(struct hypfs_entry_leaf *leaf,
+                      XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
++int hypfs_write_custom(struct hypfs_entry_leaf *leaf,
++                       XEN_GUEST_HANDLE_PARAM(void) uaddr, unsigned int ulen);
++void hypfs_write_lock(void);
++void hypfs_unlock(void);
++#else
++static inline void hypfs_write_lock(void) {}
++static inline void hypfs_unlock(void) {}
+ #endif
+ 
+ #endif /* __XEN_HYPFS_H__ */
+diff --git a/xen/include/xen/param.h b/xen/include/xen/param.h
+index a1dc3ba8f0..3fe1a06a41 100644
+--- a/xen/include/xen/param.h
++++ b/xen/include/xen/param.h
+@@ -1,6 +1,7 @@
+ #ifndef _XEN_PARAM_H
+ #define _XEN_PARAM_H
+ 
++#include <xen/hypfs.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/stdbool.h>
+@@ -80,7 +81,115 @@ extern const struct kernel_param __param_start[], __param_end[];
+ 
+ #define __rtparam         __param(__dataparam)
+ 
+-#define custom_runtime_only_param(_name, _var) \
++#ifdef CONFIG_HYPFS
++
++struct param_hypfs {
++    const struct kernel_param *param;
++    struct hypfs_entry_leaf hypfs;
++    void (*init_leaf)(struct param_hypfs *par);
 +};
-diff --git a/tools/libs/hypfs/xenhypfs.pc.in b/tools/libs/hypfs/xenhypfs.pc.in
-new file mode 100644
-index 0000000000..92a262c7a2
---- /dev/null
-+++ b/tools/libs/hypfs/xenhypfs.pc.in
-@@ -0,0 +1,10 @@
-+prefix=@@prefix@@
-+includedir=@@incdir@@
-+libdir=@@libdir@@
 +
-+Name: Xenhypfs
-+Description: The Xenhypfs library for Xen hypervisor
-+Version: @@version@@
-+Cflags: -I${includedir} @@cflagslocal@@
-+Libs: @@libsflag@@${libdir} -lxenhypfs
-+Requires.private: xentoolcore,xentoollog,xencall,z
++extern struct param_hypfs __paramhypfs_start[], __paramhypfs_end[];
++
++#define __paramhypfs      __used_section(".data.paramhypfs")
++
++#define __paramfs         static __paramhypfs  \
++    __attribute__((__aligned__(sizeof(void *)))) struct param_hypfs
++
++#define custom_runtime_set_var_sz(parfs, var, sz) \
++    { \
++        (parfs)->hypfs.content = var; \
++        (parfs)->hypfs.e.max_size = sz; \
++        (parfs)->hypfs.e.size = strlen(var) + 1; \
++    }
++#define custom_runtime_set_var(parfs, var) \
++    custom_runtime_set_var_sz(parfs, var, sizeof(var))
++
++#define param_2_parfs(par) &__parfs_##par
++
++/* initfunc needs to set size and content, e.g. via custom_runtime_set_var(). */
++#define custom_runtime_only_param(nam, variable, initfunc) \
++    __rtparam __rtpar_##variable = \
++      { .name = (nam), \
++          .type = OPT_CUSTOM, \
++          .par.func = (variable) }; \
++    __paramfs __parfs_##variable = \
++        { .param = &__rtpar_##variable, \
++          .init_leaf = (initfunc), \
++          .hypfs.e.type = XEN_HYPFS_TYPE_STRING, \
++          .hypfs.e.encoding = XEN_HYPFS_ENC_PLAIN, \
++          .hypfs.e.name = (nam), \
++          .hypfs.e.read = hypfs_read_leaf, \
++          .hypfs.e.write = hypfs_write_custom }
++#define boolean_runtime_only_param(nam, variable) \
++    __rtparam __rtpar_##variable = \
++        { .name = (nam), \
++          .type = OPT_BOOL, \
++          .len = sizeof(variable) + \
++                 BUILD_BUG_ON_ZERO(sizeof(variable) != sizeof(bool)), \
++          .par.var = &(variable) }; \
++    __paramfs __parfs_##variable = \
++        { .param = &__rtpar_##variable, \
++          .hypfs.e.type = XEN_HYPFS_TYPE_BOOL, \
++          .hypfs.e.encoding = XEN_HYPFS_ENC_PLAIN, \
++          .hypfs.e.name = (nam), \
++          .hypfs.e.size = sizeof(variable), \
++          .hypfs.e.max_size = sizeof(variable), \
++          .hypfs.e.read = hypfs_read_leaf, \
++          .hypfs.e.write = hypfs_write_bool, \
++          .hypfs.content = &(variable) }
++#define integer_runtime_only_param(nam, variable) \
++    __rtparam __rtpar_##variable = \
++        { .name = (nam), \
++          .type = OPT_UINT, \
++          .len = sizeof(variable), \
++          .par.var = &(variable) }; \
++    __paramfs __parfs_##variable = \
++        { .param = &__rtpar_##variable, \
++          .hypfs.e.type = XEN_HYPFS_TYPE_UINT, \
++          .hypfs.e.encoding = XEN_HYPFS_ENC_PLAIN, \
++          .hypfs.e.name = (nam), \
++          .hypfs.e.size = sizeof(variable), \
++          .hypfs.e.max_size = sizeof(variable), \
++          .hypfs.e.read = hypfs_read_leaf, \
++          .hypfs.e.write = hypfs_write_leaf, \
++          .hypfs.content = &(variable) }
++#define size_runtime_only_param(nam, variable) \
++    __rtparam __rtpar_##variable = \
++        { .name = (nam), \
++          .type = OPT_SIZE, \
++          .len = sizeof(variable), \
++          .par.var = &(variable) }; \
++    __paramfs __parfs_##variable = \
++        { .param = &__rtpar_##variable, \
++          .hypfs.e.type = XEN_HYPFS_TYPE_UINT, \
++          .hypfs.e.encoding = XEN_HYPFS_ENC_PLAIN, \
++          .hypfs.e.name = (nam), \
++          .hypfs.e.size = sizeof(variable), \
++          .hypfs.e.max_size = sizeof(variable), \
++          .hypfs.e.read = hypfs_read_leaf, \
++          .hypfs.e.write = hypfs_write_leaf, \
++          .hypfs.content = &(variable) }
++#define string_runtime_only_param(nam, variable) \
++    __rtparam __rtpar_##variable = \
++        { .name = (nam), \
++          .type = OPT_STR, \
++          .len = sizeof(variable), \
++          .par.var = &(variable) }; \
++    __paramfs __parfs_##variable = \
++        { .param = &__rtpar_##variable, \
++          .hypfs.e.type = XEN_HYPFS_TYPE_STRING, \
++          .hypfs.e.encoding = XEN_HYPFS_ENC_PLAIN, \
++          .hypfs.e.name = (nam), \
++          .hypfs.e.size = 0, \
++          .hypfs.e.max_size = sizeof(variable), \
++          .hypfs.e.read = hypfs_read_leaf, \
++          .hypfs.e.write = hypfs_write_leaf, \
++          .hypfs.content = &(variable) }
++
++#else
++
++#define custom_runtime_only_param(_name, _var, unused) \
+     __rtparam __rtpar_##_var = \
+       { .name = _name, \
+           .type = OPT_CUSTOM, \
+@@ -111,9 +220,13 @@ extern const struct kernel_param __param_start[], __param_end[];
+           .len = sizeof(_var), \
+           .par.var = &_var }
+ 
+-#define custom_runtime_param(_name, _var) \
++#define custom_runtime_set_var(parfs, var)
++
++#endif
++
++#define custom_runtime_param(_name, _var, initfunc) \
+     custom_param(_name, _var); \
+-    custom_runtime_only_param(_name, _var)
++    custom_runtime_only_param(_name, _var, initfunc)
+ #define boolean_runtime_param(_name, _var) \
+     boolean_param(_name, _var); \
+     boolean_runtime_only_param(_name, _var)
 -- 
 2.26.1
 
