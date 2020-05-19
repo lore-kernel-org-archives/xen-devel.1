@@ -6,40 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D2C9AC433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 321D8C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:35 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A0D37207E8
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A0D37207E8
+	by mail.kernel.org (Postfix) with ESMTPS id 14E822075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:09:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 14E822075F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7cC-0005ce-59; Tue, 19 May 2020 19:09:24 +0000
+	id 1jb7c7-0005b0-TH; Tue, 19 May 2020 19:09:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7cB-0005cI-H8
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:09:23 +0000
-X-Inumbo-ID: 3a4b0a68-9a04-11ea-b07b-bc764e2007e4
+ id 1jb7c6-0005ah-Gt
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:09:18 +0000
+X-Inumbo-ID: 3923b658-9a04-11ea-ae69-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3a4b0a68-9a04-11ea-b07b-bc764e2007e4;
- Tue, 19 May 2020 19:09:14 +0000 (UTC)
+ id 3923b658-9a04-11ea-ae69-bc764e2007e4;
+ Tue, 19 May 2020 19:09:12 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vk-0001da-Sz; Tue, 19 May 2020 20:02:44 +0100
+ id 1jb7Vg-0001da-Ud; Tue, 19 May 2020 20:02:41 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 36/38] buster: setupboot_grub2: Handle missing policy
- file bug
-Date: Tue, 19 May 2020 20:02:28 +0100
-Message-Id: <20200519190230.29519-37-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 19/38] buster: preseed partman-auto-lvm/guided_size
+Date: Tue, 19 May 2020 20:02:11 +0100
+Message-Id: <20200519190230.29519-20-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -59,38 +58,29 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is a complex interaction between update-grub and the Xen build
-system on ARM64.  Not sure exactly who to blame but since we have our
-own 20_linux_xen bodge, let's wait until we don't.
+Otherwise we get this question:
+
+  | You may use the whole volume group for guided partitioning, or part
+  | of it.  [...]
+  | Amount of volume group to use for guided partitioning:
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ Osstest/Debian.pm | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index c0b669c9..6c289cc7 100644
+index cd8b2de0..bec72788 100644
 --- a/Osstest/Debian.pm
 +++ b/Osstest/Debian.pm
-@@ -496,7 +496,17 @@ sub setupboot_grub2 ($$$$) {
- 			 " kernel $entry->{KernVer}, not $want_kernver)");
- 		} elsif ($want_xsm && !defined $entry->{Xenpolicy}) {
- 		    logm("(skipping entry at $entry->{StartLine}..$.;".
--			 " XSM policy file not present)");
-+			 " XSM policy file not mentioned)");
-+		} elsif ($ho->{Suite} =~ m/buster/ &&
-+			 defined $entry->{Xenpolicy} &&
-+			 !$bootfiles{
-+                             $entry->{Xenpolicy} =~ m{^/?} ? $' : die
-+						 }) {
-+		    # Our 20_linux_xen bodge with buster's update-grub
-+		    # generates entries which mention /boot/xenpolicy-xen
-+		    # even though that file doesn't exist on ARM64.
-+		    logm("(skipping entry at $entry->{StartLine}..$.;".
-+			 " XSM policy file not on disk!)");
- 		} else {
- 		    # yes!
- 		    last;
+@@ -938,6 +938,7 @@ d-i partman/choose_partition select finish
+ d-i partman/confirm boolean true
+ d-i partman-lvm/confirm boolean true
+ d-i partman-lvm/device_remove_lvm_span boolean true
++d-i partman-auto-lvm/guided_size string max
+ 
+ d-i partman/confirm_nooverwrite true
+ d-i partman-lvm/confirm_nooverwrite true
 -- 
 2.20.1
 
