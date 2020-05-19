@@ -6,39 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4365C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75BA5C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B977720758
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B977720758
+	by mail.kernel.org (Postfix) with ESMTPS id 5903420758
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5903420758
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7e3-00081x-SL; Tue, 19 May 2020 19:11:19 +0000
+	id 1jb7e8-00087K-Cs; Tue, 19 May 2020 19:11:24 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7e2-00080z-La
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:11:18 +0000
-X-Inumbo-ID: 62b144ea-9a04-11ea-b07b-bc764e2007e4
+ id 1jb7e7-00086U-Lp
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:11:23 +0000
+X-Inumbo-ID: 64302fb6-9a04-11ea-b9cf-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 62b144ea-9a04-11ea-b07b-bc764e2007e4;
- Tue, 19 May 2020 19:10:21 +0000 (UTC)
+ id 64302fb6-9a04-11ea-b9cf-bc764e2007e4;
+ Tue, 19 May 2020 19:10:24 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vi-0001da-Nc; Tue, 19 May 2020 20:02:42 +0100
+ id 1jb7Vi-0001da-1j; Tue, 19 May 2020 20:02:42 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 26/38] 20_linux_xen: Adhoc template substitution
-Date: Tue, 19 May 2020 20:02:18 +0100
-Message-Id: <20200519190230.29519-27-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 23/38] Honour DebianImageFile_SUITE_ARCH
+Date: Tue, 19 May 2020 20:02:15 +0100
+Message-Id: <20200519190230.29519-24-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -58,49 +58,35 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This file is a template that various build-time variables get
-substituted into.  Make thos substitutions by hand (actually, by
-copying the values our file for stretch).  And rename the file.
-
-So now we are using our file instead of the grub package's.  But it is
-the same...
+This lets us specify the whole filename, not just a version.
+This is needed because for buster we are going to use
+   debian-10.2.0-ARCH-xfce-CD-1.iso
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- .../etc/grub.d/{20_linux_xen.in => 20_linux_xen}       | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename overlay-buster/etc/grub.d/{20_linux_xen.in => 20_linux_xen} (98%)
- mode change 100644 => 100755
+ mfi-common | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/overlay-buster/etc/grub.d/20_linux_xen.in b/overlay-buster/etc/grub.d/20_linux_xen
-old mode 100644
-new mode 100755
-similarity index 98%
-rename from overlay-buster/etc/grub.d/20_linux_xen.in
-rename to overlay-buster/etc/grub.d/20_linux_xen
-index 98ef163c..fb3ed82f
---- a/overlay-buster/etc/grub.d/20_linux_xen.in
-+++ b/overlay-buster/etc/grub.d/20_linux_xen
-@@ -17,14 +17,14 @@ set -e
- # You should have received a copy of the GNU General Public License
- # along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+diff --git a/mfi-common b/mfi-common
+index b40f057e..640cf328 100644
+--- a/mfi-common
++++ b/mfi-common
+@@ -522,6 +522,15 @@ job_create_test () {
  
--prefix="@prefix@"
--exec_prefix="@exec_prefix@"
--datarootdir="@datarootdir@"
-+prefix="/usr"
-+exec_prefix="/usr"
-+datarootdir="/usr/share"
- 
- . "$pkgdatadir/grub-mkconfig_lib"
- 
--export TEXTDOMAIN=@PACKAGE@
--export TEXTDOMAINDIR="@localedir@"
-+export TEXTDOMAIN=grub
-+export TEXTDOMAINDIR="${datarootdir}/locale"
- 
- CLASS="--class gnu-linux --class gnu --class os --class xen"
- SUPPORTED_INITS="sysvinit:/lib/sysvinit/init systemd:/lib/systemd/systemd upstart:/sbin/upstart"
+ usual_debianhvm_image () {
+   local arch=$1; shift
++  if [ -n "$DEBIAN_IMAGE_FILE" ]; then
++      echo $DEBIAN_IMAGE_FILE
++      return
++  fi
++  local file=`getconfig DebianImageFile_${guestsuite}_${arch}`
++  if [ -n "$file " ]; then
++      echo $file
++      return
++  fi
+   local ver=$DEBIAN_IMAGE_VERSION
+   if [ -z "$ver" ] ; then
+       ver=`getconfig DebianImageVersion_$guestsuite`
 -- 
 2.20.1
 
