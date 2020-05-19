@@ -6,39 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 967F8C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67503C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6A5242075F
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6A5242075F
+	by mail.kernel.org (Postfix) with ESMTPS id 4B4172075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4B4172075F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7dG-00077n-6M; Tue, 19 May 2020 19:10:30 +0000
+	id 1jb7dL-0007E3-MQ; Tue, 19 May 2020 19:10:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7dE-00075c-KD
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:28 +0000
-X-Inumbo-ID: 4dce2cdc-9a04-11ea-9887-bc764e2007e4
+ id 1jb7dJ-0007By-Jy
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:33 +0000
+X-Inumbo-ID: 4f048c04-9a04-11ea-9887-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4dce2cdc-9a04-11ea-9887-bc764e2007e4;
- Tue, 19 May 2020 19:09:47 +0000 (UTC)
+ id 4f048c04-9a04-11ea-9887-bc764e2007e4;
+ Tue, 19 May 2020 19:09:48 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vc-0001da-TG; Tue, 19 May 2020 20:02:36 +0100
+ id 1jb7Vj-0001da-43; Tue, 19 May 2020 20:02:43 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 10/38] Debian guests: Write systemd random seed file
-Date: Tue, 19 May 2020 20:02:02 +0100
-Message-Id: <20200519190230.29519-11-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 28/38] 20_linux_xen: Support Xen Security Modules
+ (XSM/FLASK)
+Date: Tue, 19 May 2020 20:02:20 +0100
+Message-Id: <20200519190230.29519-29-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -58,107 +59,67 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This involves a new ts-debian-di-fixup script, which runs after
-xen-tools.
+XSM is enabled by adding "flask=enforcing" as a Xen command line
+argument, and providing the policy file as a grub module.
+
+We make entries for both with and without XSM.  If XSM is not compiled
+into Xen, then there are no policy files, so no change to the boot
+options.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm  | 14 ++++++++++++++
- sg-run-job         |  1 +
- ts-debian-di-fixup | 29 +++++++++++++++++++++++++++++
- ts-debian-fixup    |  1 +
- 4 files changed, 45 insertions(+)
- create mode 100755 ts-debian-di-fixup
+ overlay-buster/etc/grub.d/20_linux_xen | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index b8bf67dc..78d8c97e 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -49,6 +49,7 @@ BEGIN {
-                       di_installcmdline_core
-                       di_vg_name
-                       debian_dhcp_rofs_fix
-+		      debian_write_random_seed
-                       );
-     %EXPORT_TAGS = ( );
+diff --git a/overlay-buster/etc/grub.d/20_linux_xen b/overlay-buster/etc/grub.d/20_linux_xen
+index 01dfcb57..4d3294a2 100755
+--- a/overlay-buster/etc/grub.d/20_linux_xen
++++ b/overlay-buster/etc/grub.d/20_linux_xen
+@@ -84,6 +84,11 @@ esac
+ title_correction_code=
  
-@@ -1612,4 +1613,17 @@ mv '$script.new' '$script'
- END
- }
- 
-+sub debian_write_random_seed ($) {
-+    my ($gho) = @_;
-+    my $mountpoint = '/mnt';
-+    my $ho = $gho->{Host};
-+    target_cmd_root($ho, <<END);
-+        set -ex
-+        mount /dev/$gho->{Vg}/$gho->{Lv} $mountpoint
-+        umask 077
-+        dd if=/dev/urandom of=$mountpoint/var/lib/systemd/random-seed bs=1k count=1
-+END
-+    guest_umount_lv($ho, $gho);
+ linux_entry ()
++{
++  linux_entry_xsm "$@" false
++  linux_entry_xsm "$@" true
 +}
-+
- 1;
-diff --git a/sg-run-job b/sg-run-job
-index aa7953ac..9255096d 100755
---- a/sg-run-job
-+++ b/sg-run-job
-@@ -511,6 +511,7 @@ proc run-job/test-debian {} {
- 
- proc install-guest-debian-di {} {
-     run-ts . = ts-debian-di-install
-+    run-ts . = ts-debian-di-fixup + debian
-     run-ts . = ts-guest-start + debian
- }
- 
-diff --git a/ts-debian-di-fixup b/ts-debian-di-fixup
-new file mode 100755
-index 00000000..68cda2f5
---- /dev/null
-+++ b/ts-debian-di-fixup
-@@ -0,0 +1,29 @@
-+#!/usr/bin/perl -w
-+# This is part of "osstest", an automated testing framework for Xen.
-+# Copyright (C) 2009-2013 Citrix Inc.
-+# 
-+# This program is free software: you can redistribute it and/or modify
-+# it under the terms of the GNU Affero General Public License as published by
-+# the Free Software Foundation, either version 3 of the License, or
-+# (at your option) any later version.
-+# 
-+# This program is distributed in the hope that it will be useful,
-+# but WITHOUT ANY WARRANTY; without even the implied warranty of
-+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+# GNU Affero General Public License for more details.
-+# 
-+# You should have received a copy of the GNU Affero General Public License
-+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-+
-+use strict qw(vars);
-+use DBI;
-+BEGIN { unshift @INC, qw(.); }
-+use Osstest;
-+use Osstest::TestSupport;
-+use Osstest::Debian;
-+
-+tsreadconfig();
-+
-+our ($ho,$gho) = ts_get_host_guest(@ARGV);
-+
-+debian_write_random_seed($gho);
-diff --git a/ts-debian-fixup b/ts-debian-fixup
-index fef9836e..45bbcd27 100755
---- a/ts-debian-fixup
-+++ b/ts-debian-fixup
-@@ -202,6 +202,7 @@ sub writecfg () {
-     target_putfile_root($ho,10, $cfgstash, $cfgfile);
- }
- 
-+debian_write_random_seed($gho);
- savecfg();
- ether();
- target_kernkind_check($gho);
++linux_entry_xsm ()
+ {
+   os="$1"
+   version="$2"
+@@ -91,6 +96,18 @@ linux_entry ()
+   type="$4"
+   args="$5"
+   xen_args="$6"
++  xsm="$7"
++  # If user wants to enable XSM support, make sure there's
++  # corresponding policy file.
++  if ${xsm} ; then
++      xenpolicy="xenpolicy-$xen_version"
++      if test ! -e "${xen_dirname}/${xenpolicy}" ; then
++	  return
++      fi
++      xen_args="$xen_args flask=enforcing"
++      xen_version="$(gettext_printf "%s (XSM enabled)" "$xen_version")"
++      # xen_version is used for messages only; actual file is xen_basename
++  fi
+   if [ -z "$boot_device_id" ]; then
+       boot_device_id="$(grub_get_device_id "${GRUB_DEVICE}")"
+   fi
+@@ -140,6 +157,13 @@ EOF
+     sed "s/^/$submenu_indentation/" << EOF
+ 	echo	'$(echo "$message" | grub_quote)'
+ 	${module_loader}	--nounzip   ${rel_dirname}/${initrd}
++EOF
++  fi
++  if test -n "${xenpolicy}" ; then
++    message="$(gettext_printf "Loading XSM policy ...")"
++    sed "s/^/$submenu_indentation/" << EOF
++	echo	'$(echo "$message" | grub_quote)'
++	${module_loader}     ${rel_dirname}/${xenpolicy}
+ EOF
+   fi
+   sed "s/^/$submenu_indentation/" << EOF
 -- 
 2.20.1
 
