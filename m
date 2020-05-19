@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DF983C433E5
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C73C0C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B80E72075F
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B80E72075F
+	by mail.kernel.org (Postfix) with ESMTPS id A05C62075F
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 07:21:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A05C62075F
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jawYq-0004mA-Ea; Tue, 19 May 2020 07:21:12 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jawYx-0004nG-9z; Tue, 19 May 2020 07:21:19 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=aMO8=7B=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jawYp-0004m5-Hj
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 07:21:11 +0000
-X-Inumbo-ID: 50122fc4-99a1-11ea-b9cf-bc764e2007e4
+ id 1jawYv-0004mp-NJ
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 07:21:17 +0000
+X-Inumbo-ID: 51106f6c-99a1-11ea-a8e2-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 50122fc4-99a1-11ea-b9cf-bc764e2007e4;
- Tue, 19 May 2020 07:21:10 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 51106f6c-99a1-11ea-a8e2-12813bfff9fa;
+ Tue, 19 May 2020 07:21:12 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id D84F5B1FC;
- Tue, 19 May 2020 07:21:11 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id 60E3EB21B;
+ Tue, 19 May 2020 07:21:13 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v10 01/12] xen/vmx: let opt_ept_ad always reflect the current
- setting
-Date: Tue, 19 May 2020 09:20:55 +0200
-Message-Id: <20200519072106.26894-2-jgross@suse.com>
+Subject: [PATCH v10 07/12] xen: provide version information in hypfs
+Date: Tue, 19 May 2020 09:21:01 +0200
+Message-Id: <20200519072106.26894-8-jgross@suse.com>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200519072106.26894-1-jgross@suse.com>
 References: <20200519072106.26894-1-jgross@suse.com>
@@ -55,117 +55,151 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>, Kevin Tian <kevin.tian@intel.com>,
- Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-In case opt_ept_ad has not been set explicitly by the user via command
-line or runtime parameter, it is treated as "no" on Avoton cpus.
-
-Change that handling by setting opt_ept_ad to 0 for this cpu type
-explicitly if no user value has been set.
-
-By putting this into the (renamed) boot time initialization of vmcs.c
-_vmx_cpu_up() can be made static.
+Provide version and compile information in /buildinfo/ node of the
+Xen hypervisor file system. As this information is accessible by dom0
+only no additional security problem arises.
 
 Signed-off-by: Juergen Gross <jgross@suse.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/hvm/vmx/vmcs.c        | 22 +++++++++++++++-------
- xen/arch/x86/hvm/vmx/vmx.c         |  4 +---
- xen/include/asm-x86/hvm/vmx/vmcs.h |  3 +--
- 3 files changed, 17 insertions(+), 12 deletions(-)
+V3:
+- new patch
 
-diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
-index 4c23645454..221af9737a 100644
---- a/xen/arch/x86/hvm/vmx/vmcs.c
-+++ b/xen/arch/x86/hvm/vmx/vmcs.c
-@@ -315,10 +315,6 @@ static int vmx_init_vmcs_config(void)
+V4:
+- add __read_mostly annotations (Jan Beulich)
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ docs/misc/hypfs-paths.pandoc | 45 ++++++++++++++++++++++++++++++++++
+ xen/common/kernel.c          | 47 ++++++++++++++++++++++++++++++++++++
+ 2 files changed, 92 insertions(+)
+
+diff --git a/docs/misc/hypfs-paths.pandoc b/docs/misc/hypfs-paths.pandoc
+index 39539fa1b5..d730caf394 100644
+--- a/docs/misc/hypfs-paths.pandoc
++++ b/docs/misc/hypfs-paths.pandoc
+@@ -105,3 +105,48 @@ A populated Xen hypervisor file system might look like the following example:
+ #### /
  
-         if ( !opt_ept_ad )
-             _vmx_ept_vpid_cap &= ~VMX_EPT_AD_BIT;
--        else if ( /* Work around Erratum AVR41 on Avoton processors. */
--                  boot_cpu_data.x86 == 6 && boot_cpu_data.x86_model == 0x4d &&
--                  opt_ept_ad < 0 )
--            _vmx_ept_vpid_cap &= ~VMX_EPT_AD_BIT;
- 
-         /*
-          * Additional sanity checking before using EPT:
-@@ -652,7 +648,7 @@ void vmx_cpu_dead(unsigned int cpu)
-     vmx_pi_desc_fixup(cpu);
+ The root of the hypervisor file system.
++
++#### /buildinfo/
++
++A directory containing static information generated while building the
++hypervisor.
++
++#### /buildinfo/changeset = STRING
++
++Git commit of the hypervisor.
++
++#### /buildinfo/compileinfo/
++
++A directory containing information about compilation of Xen.
++
++#### /buildinfo/compileinfo/compile_by = STRING
++
++Information who compiled the hypervisor.
++
++#### /buildinfo/compileinfo/compile_date = STRING
++
++Date of the hypervisor compilation.
++
++#### /buildinfo/compileinfo/compile_domain = STRING
++
++Information about the compile domain.
++
++#### /buildinfo/compileinfo/compiler = STRING
++
++The compiler used to build Xen.
++
++#### /buildinfo/version/
++
++A directory containing version information of the hypervisor.
++
++#### /buildinfo/version/extra = STRING
++
++Extra version information.
++
++#### /buildinfo/version/major = INTEGER
++
++The major version of Xen.
++
++#### /buildinfo/version/minor = INTEGER
++
++The minor version of Xen.
+diff --git a/xen/common/kernel.c b/xen/common/kernel.c
+index 572e3fc07d..db7bd23fcb 100644
+--- a/xen/common/kernel.c
++++ b/xen/common/kernel.c
+@@ -13,6 +13,7 @@
+ #include <xen/paging.h>
+ #include <xen/guest_access.h>
+ #include <xen/hypercall.h>
++#include <xen/hypfs.h>
+ #include <xsm/xsm.h>
+ #include <asm/current.h>
+ #include <public/version.h>
+@@ -373,6 +374,52 @@ void __init do_initcalls(void)
+         (*call)();
  }
  
--int _vmx_cpu_up(bool bsp)
-+static int _vmx_cpu_up(bool bsp)
- {
-     u32 eax, edx;
-     int rc, bios_locked, cpu = smp_processor_id();
-@@ -2108,9 +2104,21 @@ static void vmcs_dump(unsigned char ch)
-     printk("**************************************\n");
- }
- 
--void __init setup_vmcs_dump(void)
-+int __init vmx_vmcs_init(void)
- {
--    register_keyhandler('v', vmcs_dump, "dump VT-x VMCSs", 1);
-+    int ret;
++#ifdef CONFIG_HYPFS
++static unsigned int __read_mostly major_version;
++static unsigned int __read_mostly minor_version;
 +
-+    if ( opt_ept_ad < 0 )
-+        /* Work around Erratum AVR41 on Avoton processors. */
-+        opt_ept_ad = !(boot_cpu_data.x86 == 6 &&
-+                       boot_cpu_data.x86_model == 0x4d);
++static HYPFS_DIR_INIT(buildinfo, "buildinfo");
++static HYPFS_DIR_INIT(compileinfo, "compileinfo");
++static HYPFS_DIR_INIT(version, "version");
++static HYPFS_UINT_INIT(major, "major", major_version);
++static HYPFS_UINT_INIT(minor, "minor", minor_version);
++static HYPFS_STRING_INIT(changeset, "changeset");
++static HYPFS_STRING_INIT(compiler, "compiler");
++static HYPFS_STRING_INIT(compile_by, "compile_by");
++static HYPFS_STRING_INIT(compile_date, "compile_date");
++static HYPFS_STRING_INIT(compile_domain, "compile_domain");
++static HYPFS_STRING_INIT(extra, "extra");
 +
-+    ret = _vmx_cpu_up(true);
++static int __init buildinfo_init(void)
++{
++    hypfs_add_dir(&hypfs_root, &buildinfo, true);
 +
-+    if ( !ret )
-+        register_keyhandler('v', vmcs_dump, "dump VT-x VMCSs", 1);
++    hypfs_string_set_reference(&changeset, xen_changeset());
++    hypfs_add_leaf(&buildinfo, &changeset, true);
 +
-+    return ret;
- }
++    hypfs_add_dir(&buildinfo, &compileinfo, true);
++    hypfs_string_set_reference(&compiler, xen_compiler());
++    hypfs_string_set_reference(&compile_by, xen_compile_by());
++    hypfs_string_set_reference(&compile_date, xen_compile_date());
++    hypfs_string_set_reference(&compile_domain, xen_compile_domain());
++    hypfs_add_leaf(&compileinfo, &compiler, true);
++    hypfs_add_leaf(&compileinfo, &compile_by, true);
++    hypfs_add_leaf(&compileinfo, &compile_date, true);
++    hypfs_add_leaf(&compileinfo, &compile_domain, true);
++
++    major_version = xen_major_version();
++    minor_version = xen_minor_version();
++    hypfs_add_dir(&buildinfo, &version, true);
++    hypfs_string_set_reference(&extra, xen_extra_version());
++    hypfs_add_leaf(&version, &extra, true);
++    hypfs_add_leaf(&version, &major, true);
++    hypfs_add_leaf(&version, &minor, true);
++
++    return 0;
++}
++__initcall(buildinfo_init);
++#endif
++
+ # define DO(fn) long do_##fn
  
- static void __init __maybe_unused build_assertions(void)
-diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
-index 6efa80e422..11a4dd94cf 100644
---- a/xen/arch/x86/hvm/vmx/vmx.c
-+++ b/xen/arch/x86/hvm/vmx/vmx.c
-@@ -2482,7 +2482,7 @@ const struct hvm_function_table * __init start_vmx(void)
- {
-     set_in_cr4(X86_CR4_VMXE);
- 
--    if ( _vmx_cpu_up(true) )
-+    if ( vmx_vmcs_init() )
-     {
-         printk("VMX: failed to initialise.\n");
-         return NULL;
-@@ -2553,8 +2553,6 @@ const struct hvm_function_table * __init start_vmx(void)
-         vmx_function_table.get_guest_bndcfgs = vmx_get_guest_bndcfgs;
-     }
- 
--    setup_vmcs_dump();
--
-     lbr_tsx_fixup_check();
-     bdf93_fixup_check();
- 
-diff --git a/xen/include/asm-x86/hvm/vmx/vmcs.h b/xen/include/asm-x86/hvm/vmx/vmcs.h
-index 95c1dea7b8..906810592f 100644
---- a/xen/include/asm-x86/hvm/vmx/vmcs.h
-+++ b/xen/include/asm-x86/hvm/vmx/vmcs.h
-@@ -21,11 +21,10 @@
- #include <xen/mm.h>
- 
- extern void vmcs_dump_vcpu(struct vcpu *v);
--extern void setup_vmcs_dump(void);
-+extern int vmx_vmcs_init(void);
- extern int  vmx_cpu_up_prepare(unsigned int cpu);
- extern void vmx_cpu_dead(unsigned int cpu);
- extern int  vmx_cpu_up(void);
--extern int  _vmx_cpu_up(bool bsp);
- extern void vmx_cpu_down(void);
- 
- struct vmcs_struct {
+ #endif
 -- 
 2.26.1
 
