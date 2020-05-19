@@ -6,40 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 54756C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89CA0C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2743020758
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:10:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2743020758
+	by mail.kernel.org (Postfix) with ESMTPS id 5FD0420758
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:11:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5FD0420758
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7dU-0007Op-DC; Tue, 19 May 2020 19:10:44 +0000
+	id 1jb7dZ-0007Ud-Nh; Tue, 19 May 2020 19:10:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7dT-0007Nk-KH
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:43 +0000
-X-Inumbo-ID: 58a87a5e-9a04-11ea-b9cf-bc764e2007e4
+ id 1jb7dY-0007TI-KL
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:10:48 +0000
+X-Inumbo-ID: 5a236182-9a04-11ea-9887-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 58a87a5e-9a04-11ea-b9cf-bc764e2007e4;
- Tue, 19 May 2020 19:10:05 +0000 (UTC)
+ id 5a236182-9a04-11ea-9887-bc764e2007e4;
+ Tue, 19 May 2020 19:10:07 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vd-0001da-4l; Tue, 19 May 2020 20:02:37 +0100
+ id 1jb7Ve-0001da-Ef; Tue, 19 May 2020 20:02:38 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 11/38] ts-debian-di-install: Provide guest with more
- RAM
-Date: Tue, 19 May 2020 20:02:03 +0100
-Message-Id: <20200519190230.29519-12-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 16/38] buster: Extend grub2 uefi no install workaround
+Date: Tue, 19 May 2020 20:02:08 +0100
+Message-Id: <20200519190230.29519-17-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -59,35 +58,27 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-buster cannot boot in so little because its initramfs and kernel are
-too large.  Bump it to 2G.
-
-However, our armhf test nodes have very little RAM.  And the Debian
-armhf does fit in them as a guest still, so use a smaller value there.
-
-Keying this off the architecture rather than the available host memory
-is better because you do need the bigger value precisely if you are
-not using armhf, and this makes osstest less dependent on a completely
-accurate and populated host properties database.
+src:grub2 is RFH in Debian, which is a contributory factor to these
+patches in #789798 and #792547 languishing.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-debian-di-install | 2 +-
+ Osstest/Debian.pm | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/ts-debian-di-install b/ts-debian-di-install
-index 9abb4956..d84407cf 100755
---- a/ts-debian-di-install
-+++ b/ts-debian-di-install
-@@ -64,7 +64,7 @@ $gn ||= 'debian';
+diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
+index 8380c428..0958d080 100644
+--- a/Osstest/Debian.pm
++++ b/Osstest/Debian.pm
+@@ -1459,7 +1459,7 @@ d-i partman-auto/expert_recipe string					\\
+ END
  
- our $ho= selecthost($whhost);
- 
--our $ram_mb=    512;
-+our $ram_mb= $r{arch} =~ m/^armhf/ ? 768 : 2048;
- our $disk_mb= 10000;
- 
- our $guesthost= $gn.
+     if (get_host_property($ho, "firmware") eq "uefi") {
+-	die unless $ho->{Suite} =~ m/jessie|stretch/;
++	die unless $ho->{Suite} =~ m/jessie|stretch|buster/;
+ 	# Prevent grub-install from making a new Debian boot entry, so
+ 	# we always reboot from the network. Debian bug #789798 proposes a
+ 	# properly preseedable solution to this.
 -- 
 2.20.1
 
