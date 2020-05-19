@@ -6,39 +6,39 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 66B19C433E1
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:03:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EA06AC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:03:09 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3D667206C3
-	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:03:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3D667206C3
+	by mail.kernel.org (Postfix) with ESMTPS id C67E1207FB
+	for <xen-devel@archiver.kernel.org>; Tue, 19 May 2020 19:03:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C67E1207FB
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jb7Vs-0004cU-Qi; Tue, 19 May 2020 19:02:52 +0000
+	id 1jb7Vy-0004eV-2z; Tue, 19 May 2020 19:02:58 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=+xc8=7B=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jb7Vr-0004c1-61
- for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:02:51 +0000
-X-Inumbo-ID: 4d086b92-9a03-11ea-ae69-bc764e2007e4
+ id 1jb7Vw-0004dz-6o
+ for xen-devel@lists.xenproject.org; Tue, 19 May 2020 19:02:56 +0000
+X-Inumbo-ID: 4d3b7140-9a03-11ea-ae69-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::3])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4d086b92-9a03-11ea-ae69-bc764e2007e4;
+ id 4d3b7140-9a03-11ea-ae69-bc764e2007e4;
  Tue, 19 May 2020 19:02:36 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jb7Vb-0001da-A4; Tue, 19 May 2020 20:02:35 +0100
+ id 1jb7Vb-0001da-Fs; Tue, 19 May 2020 20:02:35 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 03/38] lvcreate argments: pass --yes -Z y -W y
-Date: Tue, 19 May 2020 20:01:55 +0100
-Message-Id: <20200519190230.29519-4-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 04/38] TestSupport: allow more time for apt
+Date: Tue, 19 May 2020 20:01:56 +0100
+Message-Id: <20200519190230.29519-5-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
 References: <20200519190230.29519-1-ian.jackson@eu.citrix.com>
@@ -58,56 +58,37 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The documentation seesm to think this is the default but empirically
-it isn't.  In our environment --yes is fine.
+Empirically some of these operations can take longer than 30s,
+especially with a cold cache.
 
-I have reported this to Debian as #953183.  Also vaguely related (and
-discovered by me at the same time) is #953185.
-
-This came up while trying to get things work on buster.  I don't know
-what has changed.
+Note that because of host sharing and our on-host apt lock, the
+timeout needs to be the same for every apt operation: a fast operation
+could be blocked behind a slow one.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/TestSupport.pm | 2 +-
- ts-xen-build-prep      | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ Osstest/TestSupport.pm | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index 1e7da676..43766ee3 100644
+index 43766ee3..f4e9414c 100644
 --- a/Osstest/TestSupport.pm
 +++ b/Osstest/TestSupport.pm
-@@ -935,7 +935,7 @@ sub lv_create ($$$$) {
-     my ($ho, $vg, $lv, $mb) = @_;
-     my $lvdev = "/dev/$vg/$lv";
-     target_cmd_root($ho, "lvremove -f $lvdev ||:");
--    target_cmd_root($ho, "lvcreate -L ${mb}M -n $lv $vg");
-+    target_cmd_root($ho, "lvcreate --yes -Z y -W y -L ${mb}M -n $lv $vg");
-     target_cmd_root($ho, "dd if=/dev/zero of=$lvdev count=10");
-     return $lvdev;
- }
-diff --git a/ts-xen-build-prep b/ts-xen-build-prep
-index 8e73f763..dabb9921 100755
---- a/ts-xen-build-prep
-+++ b/ts-xen-build-prep
-@@ -61,7 +61,7 @@ sub determine_vg_lv () {
- sub lvextend_stage1 () {
-     target_cmd_root($ho, <<END);
-         set -ex; if ! test -f /root/swap_osstest_enabled; then
--            lvcreate -L 10G -n swap_osstest_build $vg ||:
-+            lvcreate --yes -Z y -W y -L 10G -n swap_osstest_build $vg ||:
-             mkswap /dev/$vg/swap_osstest_build ||:
-             swapon /dev/$vg/swap_osstest_build
-             touch /root/swap_osstest_enabled
-@@ -84,7 +84,7 @@ sub vginfo () {
- 
- sub lvcreate () {
-     target_cmd_output_root($ho,
--			   "lvdisplay $lv || lvcreate -l 1 -n $lvleaf $vg");
-+			   "lvdisplay $lv || lvcreate --yes -Z y -W y -l 1 -n $lvleaf $vg");
- }
- 
- sub lvextend1 ($$$) {
+@@ -637,12 +637,12 @@ sub target_install_packages_nonfree_nonconcurrent ($@) {
+     my ($ho, @packages) = @_;
+     my $slist= '/etc/apt/sources.list';
+     my $xsuites= 'contrib non-free';
+-    target_cmd_root($ho, <<END, 30);
++    target_cmd_root($ho, <<END, 300);
+     perl -i~ -pe 'next unless m/^deb/; s{ main\$}{\$& $xsuites};' $slist
+     apt-get update
+ END
+     target_run_pkgmanager_install($ho,\@packages);
+-    target_cmd_root($ho, <<END, 30);
++    target_cmd_root($ho, <<END, 300);
+     mv $slist~ $slist
+     apt-get update
+ END
 -- 
 2.20.1
 
