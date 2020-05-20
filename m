@@ -2,66 +2,49 @@ Return-Path: <SRS0=0mHu=7D=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A474DC433E2
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 02:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97D49C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 04:36:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 81F642067B
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 02:32:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 81F642067B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
+	by mail.kernel.org (Postfix) with ESMTPS id 3C036206D4
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 04:36:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3C036206D4
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=codewreck.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbb09-0000Fl-2X; Thu, 21 May 2020 02:32:05 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BsrW=7D=gmail.com=tamas.k.lengyel@srs-us1.protection.inumbo.net>)
- id 1jbb08-0000Ff-05
- for xen-devel@lists.xenproject.org; Thu, 21 May 2020 02:32:04 +0000
-X-Inumbo-ID: 41046766-9b0b-11ea-b9cf-bc764e2007e4
-Received: from mail-ot1-f49.google.com (unknown [209.85.210.49])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 41046766-9b0b-11ea-b9cf-bc764e2007e4;
- Thu, 21 May 2020 02:32:02 +0000 (UTC)
-Received: by mail-ot1-f49.google.com with SMTP id c3so4341408otr.12
- for <xen-devel@lists.xenproject.org>; Wed, 20 May 2020 19:32:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=ivGMi/gUy4Fl/JUt0Ag3q+pDqnqpG1RucRU6tciEaHo=;
- b=rPOmcE/IfRmDjyKkPhDsSgcycA3HomMbHx8ZRysVJQQ8F0J3hTJQruK0O2dm1qqdeb
- fZonUdNct1xrsVMqWX6/1Ls5iwFNrYAE65l2W2GUKmBe6hH+LWBtigWZGxoM9I5oHyYB
- j9dwO86SOQ5CGk56PG6idRXe+V9ie9K543pdfRTFuOtkwhUNaWmWfbSUSJlD4agD5yMT
- +5HdHRQ8KrOC2xQA3diPtYGcg8O0obolw/PXO4MspNO/Z3em3MPiOiVbrC8CJEdAr0To
- AacrqpvnJQK5txTe//3xLmnxjqJjW1F2D6jIFObP52SQe9orMOfK3GD42MmwZa+BCIFT
- tglA==
-X-Gm-Message-State: AOAM532zDz8ysJsE/EwZN18MtLKEEAYosynP/CQzSC67G0/gBxU8YmdY
- DuK88X65Fv0/NLCO23oRVtC3dHBHsj0=
-X-Google-Smtp-Source: ABdhPJxUduLr0BaPkbikFoD30T7EOE8KTQA1pOoCB/sAKmae1i5hjytRziYvUc3qzyOGZQnpsRZe+A==
-X-Received: by 2002:a9d:6e3:: with SMTP id 90mr5703777otx.261.1590028321780;
- Wed, 20 May 2020 19:32:01 -0700 (PDT)
-Received: from t0.lan (c-71-205-12-124.hsd1.co.comcast.net. [71.205.12.124])
- by smtp.googlemail.com with ESMTPSA id r17sm1312480ooq.2.2020.05.20.19.32.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 May 2020 19:32:01 -0700 (PDT)
-From: Tamas K Lengyel <tamas@tklengyel.com>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v2 for-4.14 3/3] xen/vm_event: Add safe to disable vm_event
-Date: Wed, 20 May 2020 20:31:54 -0600
-Message-Id: <682dde916f982e2889b2be2263418e9506a82c1e.1590028160.git.tamas@tklengyel.com>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <cover.1590028160.git.tamas@tklengyel.com>
-References: <cover.1590028160.git.tamas@tklengyel.com>
+	id 1jbcvR-0002YL-IR; Thu, 21 May 2020 04:35:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=/tWO=7C=notk.org=asmadeus@srs-us1.protection.inumbo.net>)
+ id 1jbUWX-0003bV-FF
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2020 19:37:05 +0000
+X-Inumbo-ID: 47fa91e2-9ad1-11ea-aa85-12813bfff9fa
+Received: from nautica.notk.org (unknown [91.121.71.147])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 47fa91e2-9ad1-11ea-aa85-12813bfff9fa;
+ Wed, 20 May 2020 19:37:04 +0000 (UTC)
+Received: by nautica.notk.org (Postfix, from userid 1001)
+ id C6D98C009; Wed, 20 May 2020 21:37:02 +0200 (CEST)
+Date: Wed, 20 May 2020 21:36:47 +0200
+From: Dominique Martinet <asmadeus@codewreck.org>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [V9fs-developer] [PATCH] 9p/xen: increase XEN_9PFS_RING_ORDER
+Message-ID: <20200520193647.GA17565@nautica>
+References: <20200520184113.24727-1-sstabellini@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20200520184113.24727-1-sstabellini@kernel.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Mailman-Approved-At: Thu, 21 May 2020 04:35:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,190 +55,79 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Petre Pircalabu <ppircalabu@bitdefender.com>,
- Tamas K Lengyel <tamas@tklengyel.com>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Jan Beulich <jbeulich@suse.com>,
- Alexandru Isaila <aisaila@bitdefender.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: jgross@suse.com, lucho@ionkov.net, xen-devel@lists.xenproject.org,
+ ericvh@gmail.com, linux-kernel@vger.kernel.org, rminnich@sandia.gov,
+ v9fs-developer@lists.sourceforge.net, boris.ostrovsky@oracle.com,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Instead of having to repeatedly try to disable vm_events, request a specific
-vm_event to be sent when the domain is safe to continue with shutting down
-the vm_event interface.
+Stefano Stabellini wrote on Wed, May 20, 2020:
+> From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+> 
+> Increase XEN_9PFS_RING_ORDER to 9 for performance reason. Order 9 is the
+> max allowed by the protocol.
+> 
+> We can't assume that all backends will support order 9. The xenstore
+> property max-ring-page-order specifies the max order supported by the
+> backend. We'll use max-ring-page-order for the size of the ring.
+> 
+> This means that the size of the ring is not static
+> (XEN_FLEX_RING_SIZE(9)) anymore. Change XEN_9PFS_RING_SIZE to take an
+> argument and base the calculation on the order chosen at setup time.
+> 
+> 
+> Finally, modify p9_xen_trans.maxsize to be divided by 4 compared to the
+> original value. We need to divide it by 2 because we have two rings
+> coming off the same order allocation: the in and out rings. This was a
+> mistake in the original code. Also divide it further by 2 because we
+> don't want a single request/reply to fill up the entire ring. There can
+> be multiple requests/replies outstanding at any given time and if we use
+> the full ring with one, we risk forcing the backend to wait for the
+> client to read back more replies before continuing, which is not
+> performant.
 
-Signed-off-by: Tamas K Lengyel <tamas@tklengyel.com>
----
- xen/arch/x86/hvm/hvm.c            | 38 ++++++++++++++++++++++++++-----
- xen/arch/x86/hvm/monitor.c        | 14 ++++++++++++
- xen/arch/x86/monitor.c            | 13 +++++++++++
- xen/include/asm-x86/domain.h      |  1 +
- xen/include/asm-x86/hvm/monitor.h |  1 +
- xen/include/public/domctl.h       |  2 ++
- xen/include/public/vm_event.h     |  8 +++++++
- 7 files changed, 71 insertions(+), 6 deletions(-)
+Sounds good to me overall. A couple of comments inline.
+Also worth noting I need to rebuild myself a test setup so might take a
+bit of time to actually run tests, but I might just trust you on this
+one for now if it builds with no new warning... Looks like it would
+probably work :p
 
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index e6780c685b..fc7e1e2b22 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -563,15 +563,41 @@ void hvm_do_resume(struct vcpu *v)
-         v->arch.hvm.inject_event.vector = HVM_EVENT_VECTOR_UNSET;
-     }
- 
--    if ( unlikely(v->arch.vm_event) && v->arch.monitor.next_interrupt_enabled )
-+    if ( unlikely(v->arch.vm_event) )
-     {
--        struct x86_event info;
-+        struct domain *d = v->domain;
-+
-+        if ( v->arch.monitor.next_interrupt_enabled )
-+        {
-+            struct x86_event info;
-+
-+            if ( hvm_get_pending_event(v, &info) )
-+            {
-+                hvm_monitor_interrupt(info.vector, info.type, info.error_code,
-+                                      info.cr2);
-+                v->arch.monitor.next_interrupt_enabled = false;
-+            }
-+        }
- 
--        if ( hvm_get_pending_event(v, &info) )
-+        if ( d->arch.monitor.safe_to_disable )
-         {
--            hvm_monitor_interrupt(info.vector, info.type, info.error_code,
--                                  info.cr2);
--            v->arch.monitor.next_interrupt_enabled = false;
-+            const struct vcpu *check_vcpu;
-+            bool pending_op = false;
-+
-+            for_each_vcpu ( d, check_vcpu )
-+            {
-+                if ( vm_event_check_pending_op(check_vcpu) )
-+                {
-+                    pending_op = true;
-+                    break;
-+                }
-+            }
-+
-+            if ( !pending_op )
-+            {
-+                hvm_monitor_safe_to_disable();
-+                d->arch.monitor.safe_to_disable = false;
-+            }
-         }
-     }
- }
-diff --git a/xen/arch/x86/hvm/monitor.c b/xen/arch/x86/hvm/monitor.c
-index f5d89e71d1..75fd1a4b68 100644
---- a/xen/arch/x86/hvm/monitor.c
-+++ b/xen/arch/x86/hvm/monitor.c
-@@ -300,6 +300,20 @@ bool hvm_monitor_check_p2m(unsigned long gla, gfn_t gfn, uint32_t pfec,
-     return monitor_traps(curr, true, &req) >= 0;
- }
- 
-+void hvm_monitor_safe_to_disable(void)
-+{
-+    struct vcpu *curr = current;
-+    struct arch_domain *ad = &curr->domain->arch;
-+    vm_event_request_t req = {};
-+
-+    if ( !ad->monitor.safe_to_disable )
-+        return;
-+
-+    req.reason = VM_EVENT_REASON_SAFE_TO_DISABLE;
-+
-+    monitor_traps(curr, 0, &req);
-+}
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/arch/x86/monitor.c b/xen/arch/x86/monitor.c
-index 1517a97f50..86e0ba2fbc 100644
---- a/xen/arch/x86/monitor.c
-+++ b/xen/arch/x86/monitor.c
-@@ -339,6 +339,19 @@ int arch_monitor_domctl_event(struct domain *d,
-         break;
-     }
- 
-+    case XEN_DOMCTL_MONITOR_EVENT_SAFE_TO_DISABLE:
-+    {
-+        bool old_status = ad->monitor.safe_to_disable;
-+
-+        if ( unlikely(old_status == requested_status) )
-+            return -EEXIST;
-+
-+        domain_pause(d);
-+        ad->monitor.safe_to_disable = requested_status;
-+        domain_unpause(d);
-+        break;
-+    }
-+
-     default:
-         /*
-          * Should not be reached unless arch_monitor_get_capabilities() is
-diff --git a/xen/include/asm-x86/domain.h b/xen/include/asm-x86/domain.h
-index d890ab7a22..948b750c71 100644
---- a/xen/include/asm-x86/domain.h
-+++ b/xen/include/asm-x86/domain.h
-@@ -417,6 +417,7 @@ struct arch_domain
-          */
-         unsigned int inguest_pagefault_disabled                            : 1;
-         unsigned int control_register_values                               : 1;
-+        unsigned int safe_to_disable                                       : 1;
-         struct monitor_msr_bitmap *msr_bitmap;
-         uint64_t write_ctrlreg_mask[4];
-     } monitor;
-diff --git a/xen/include/asm-x86/hvm/monitor.h b/xen/include/asm-x86/hvm/monitor.h
-index 66de24cb75..dbc113a635 100644
---- a/xen/include/asm-x86/hvm/monitor.h
-+++ b/xen/include/asm-x86/hvm/monitor.h
-@@ -52,6 +52,7 @@ bool hvm_monitor_emul_unimplemented(void);
- 
- bool hvm_monitor_check_p2m(unsigned long gla, gfn_t gfn, uint32_t pfec,
-                            uint16_t kind);
-+void hvm_monitor_safe_to_disable(void);
- 
- #endif /* __ASM_X86_HVM_MONITOR_H__ */
- 
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index cbcd25f12c..247e809a6c 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1040,6 +1040,8 @@ struct xen_domctl_psr_cmt_op {
- #define XEN_DOMCTL_MONITOR_EVENT_EMUL_UNIMPLEMENTED    10
- /* Enabled by default */
- #define XEN_DOMCTL_MONITOR_EVENT_INGUEST_PAGEFAULT     11
-+/* Always async, disables automaticaly on first event */
-+#define XEN_DOMCTL_MONITOR_EVENT_SAFE_TO_DISABLE       12
- 
- struct xen_domctl_monitor_op {
-     uint32_t op; /* XEN_DOMCTL_MONITOR_OP_* */
-diff --git a/xen/include/public/vm_event.h b/xen/include/public/vm_event.h
-index fdd3ad8a30..b66d2a8634 100644
---- a/xen/include/public/vm_event.h
-+++ b/xen/include/public/vm_event.h
-@@ -159,6 +159,14 @@
- #define VM_EVENT_REASON_DESCRIPTOR_ACCESS       13
- /* Current instruction is not implemented by the emulator */
- #define VM_EVENT_REASON_EMUL_UNIMPLEMENTED      14
-+/*
-+ * When shutting down vm_event it may not be immediately safe to complete the
-+ * process as some vCPUs may be pending synchronization. This async event
-+ * type can be used to receive a notification when its safe to finish disabling
-+ * the vm_event interface. All other event types need to be disabled before
-+ * registering to this one.
-+ */
-+#define VM_EVENT_REASON_SAFE_TO_DISABLE         15
- 
- /* Supported values for the vm_event_write_ctrlreg index. */
- #define VM_EVENT_X86_CR0    0
+> [...]
+> @@ -264,7 +265,7 @@ static irqreturn_t xen_9pfs_front_event_handler(int irq, void *r)
+>  
+>  static struct p9_trans_module p9_xen_trans = {
+>  	.name = "xen",
+> -	.maxsize = 1 << (XEN_9PFS_RING_ORDER + XEN_PAGE_SHIFT),
+> +	.maxsize = 1 << (XEN_9PFS_RING_ORDER + XEN_PAGE_SHIFT - 2),
+>  	.def = 1,
+>  	.create = p9_xen_create,
+>  	.close = p9_xen_close,
+> [...]
+> @@ -401,8 +405,10 @@ static int xen_9pfs_front_probe(struct xenbus_device *dev,
+>  		return -EINVAL;
+>  	max_ring_order = xenbus_read_unsigned(dev->otherend,
+>  					      "max-ring-page-order", 0);
+> -	if (max_ring_order < XEN_9PFS_RING_ORDER)
+> -		return -EINVAL;
+> +	if (max_ring_order > XEN_9PFS_RING_ORDER)
+> +		max_ring_order = XEN_9PFS_RING_ORDER;
+
+(If there are backends with very small max_ring_orders, we no longer
+error out when we encounter one, it might make sense to add a min
+define? Although to be honest 9p works with pretty small maxsizes so I
+don't see much reason to error out, and even order 0 will be one page
+worth.. I hope there is no xenbus that small though :))
+
+> +	if (p9_xen_trans.maxsize > XEN_FLEX_RING_SIZE(max_ring_order))
+> +		p9_xen_trans.maxsize = XEN_FLEX_RING_SIZE(max_ring_order);
+
+So base maxsize initial value is 1 << (order + page_shift - 2) ; but
+this is 1 << (order + page_shift - 1) -- I agree with the logic you gave
+in commit message so would think this needs to be shifted down one more
+like the base value as well.
+What do you think?
+
 -- 
-2.26.1
-
+Dominique
 
