@@ -2,62 +2,72 @@ Return-Path: <SRS0=v5y7=7C=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A5AFC433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:46:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 51958C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:51:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EDE9A2072C
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:46:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 130E820708
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:51:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="b6e4YPjm"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EDE9A2072C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=zededa.com header.i=@zededa.com header.b="VKLJf4RM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 130E820708
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=zededa.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbYPB-00087u-32; Wed, 20 May 2020 23:45:45 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=P2h4=7C=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jbYP9-00086q-IS
- for xen-devel@lists.xenproject.org; Wed, 20 May 2020 23:45:43 +0000
-X-Inumbo-ID: fa47af7a-9af3-11ea-aaaa-12813bfff9fa
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id fa47af7a-9af3-11ea-aaaa-12813bfff9fa;
- Wed, 20 May 2020 23:45:25 +0000 (UTC)
-Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
- (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 03272208C3;
- Wed, 20 May 2020 23:45:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590018325;
- bh=8Uhi52nEHwr6p4oqjgGMPqzF2apk7Bwz25uN3GRP/Fc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=b6e4YPjm7TkI1oOgr3Xo8IZYxje2EhZjUfcZ0kyxxDR0eWcOFPNzbEZDKqFtqYTP6
- DGJnyCco3P66kvXMuzlfjJ1at3ARO6GSJ/ORWX3M1W6ehKfPZs8ie/RZbRghJ5Ik+Z
- 2zbX0cvTPa4xUg5gXkRmvnBpQPnqfYdnsqAzFQBo=
-From: Stefano Stabellini <sstabellini@kernel.org>
-To: jgross@suse.com,
-	boris.ostrovsky@oracle.com,
-	konrad.wilk@oracle.com
-Subject: [PATCH 08/10] swiotlb-xen: introduce phys_to_dma/dma_to_phys
- translations
-Date: Wed, 20 May 2020 16:45:18 -0700
-Message-Id: <20200520234520.22563-8-sstabellini@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
+	id 1jbYUq-0001GY-PJ; Wed, 20 May 2020 23:51:36 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=Eu2h=7C=zededa.com=roman@srs-us1.protection.inumbo.net>)
+ id 1jbYUp-0001GT-Me
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2020 23:51:35 +0000
+X-Inumbo-ID: d6a41972-9af4-11ea-ae69-bc764e2007e4
+Received: from mail-qt1-x842.google.com (unknown [2607:f8b0:4864:20::842])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d6a41972-9af4-11ea-ae69-bc764e2007e4;
+ Wed, 20 May 2020 23:51:35 +0000 (UTC)
+Received: by mail-qt1-x842.google.com with SMTP id i68so4139729qtb.5
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2020 16:51:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zededa.com; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=DOijWyKqJLxNwQeBpPWMP+0S3cV6uReedydSlpIjzL4=;
+ b=VKLJf4RMzZ8GKwYeh9OqRDk2QVWEm43naydQATItag3YW/jJ5eONuUaMTKh0s95LEh
+ 8rgDtmyH+0qrLmnklWxl1XWFSu7uIlM30DG0fONhO/30xcMrA6IMw8Zp6a7iaB3GIqn2
+ S7IELd0Jg+esKrNB0DzDvAW/KK7ppEp87NWuSKApP6O63Xls3m8QUJAMgaygYnYm93JH
+ sKzRJByGxKC1qNzWU2XCfC5b2NoVQARZfqn0YAbJsqUIM8KzV+mGq5Cgw0NRP8JV1Gnv
+ Pe07AyDl+Q9k1ZW888U5f6HrlwhBFRIzybMwFGkFQVHj4NGMi0CcWVFYiQP29KvhkdNb
+ S3NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=DOijWyKqJLxNwQeBpPWMP+0S3cV6uReedydSlpIjzL4=;
+ b=LzKbqUPAs55ygMoNAnnQ5ap6VUDZH2MZ6M08K3ZRNlGtVViJLdfygrTJyHl2lXvKlw
+ 3OWt1PMDW+0j1molGsaE3Y7J1xVDzDBX2Ny+rNHn/atoX1UNuqv2EVS1u0QIbLTyTFCc
+ 7Kmg1Vy+mom0eWBFZyWXFtcCQ4+WaMsgBzwWDunzxsi3F89AwoOzC/fWS5m2cg2b5Slr
+ kWjcZO8xe6wEx8XXL2ym6Ugr7OyGwJc4e5p5s+7TKsiQeeCMEactLafPj0eKJFW9TxM0
+ HwWbaHptAU2sLg3bls5N+mXpVHxXBjwPRufIyZshiG71+39B0paasyRLTMEMs8lJ3ZDx
+ IUVA==
+X-Gm-Message-State: AOAM533tXHCVDSZfFeOj/rHTnOiu7rQnP7vVfbtsJK6fc9RhZicjiI+O
+ IaW89c51vYrjJj5Ggv2zEcM3SBj0/U5Sgnw3s7SMuQ==
+X-Google-Smtp-Source: ABdhPJxt2EESLU8nhk5tsHgnFk3RvF6RDw6Vldmiq55JHPOjOD9uPQTlMBvIBmWRF0NacS8L88rfoIbWTF1pRYQwj0s=
+X-Received: by 2002:ac8:670b:: with SMTP id e11mr8166734qtp.365.1590018694922; 
+ Wed, 20 May 2020 16:51:34 -0700 (PDT)
+MIME-Version: 1.0
 References: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
+In-Reply-To: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
+From: Roman Shaposhnik <roman@zededa.com>
+Date: Wed, 20 May 2020 16:51:23 -0700
+Message-ID: <CAMmSBy9VBxjSCRcfyiZ-RY8eyYOooeNfCqrvirhWzfpSbAQyuw@mail.gmail.com>
+Subject: Re: [PATCH 00/10] fix swiotlb-xen for RPi4
+To: Stefano Stabellini <sstabellini@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,94 +78,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org,
- linux-kernel@vger.kernel.org,
- Stefano Stabellini <stefano.stabellini@xilinx.com>
+Cc: Juergen Gross <jgross@suse.com>, tamas@tklengyel.com,
+ Konrad Wilk <konrad.wilk@oracle.com>, linux-kernel@vger.kernel.org,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+On Wed, May 20, 2020 at 4:45 PM Stefano Stabellini
+<sstabellini@kernel.org> wrote:
+>
+> Hi all,
+>
+> This series is a collection of fixes to get Linux running on the RPi4 as
+> dom0.
+>
+> Conceptually there are only two significant changes:
+>
+> - make sure not to call virt_to_page on vmalloc virt addresses (patch
+>   #1)
+> - use phys_to_dma and dma_to_phys to translate phys to/from dma
+>   addresses (all other patches)
+>
+> In particular in regards to the second part, the RPi4 is the first
+> board where Xen can run that has the property that dma addresses are
+> different from physical addresses, and swiotlb-xen was written with the
+> assumption that phys addr == dma addr.
+>
+> This series adds the phys_to_dma and dma_to_phys calls to make it work.
 
-Call dma_to_phys in is_xen_swiotlb_buffer.
-Call phys_to_dma in xen_phys_to_bus.
-Call dma_to_phys in xen_bus_to_phys.
+Great to see this! Stefano, any chance you can put it in a branch some place
+so I can test the final version?
 
-Everything is taken care of by these changes except for
-xen_swiotlb_alloc_coherent and xen_swiotlb_free_coherent, which need a
-few explicit phys_to_dma/dma_to_phys calls.
-
-Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
----
- drivers/xen/swiotlb-xen.c | 20 ++++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
-
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index c50448fd9b75..d011c4c7aa72 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -64,14 +64,16 @@ static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
- 
- 	dma |= paddr & ~XEN_PAGE_MASK;
- 
--	return dma;
-+	return phys_to_dma(dev, dma);
- }
- 
--static inline phys_addr_t xen_bus_to_phys(struct device *dev, dma_addr_t baddr)
-+static inline phys_addr_t xen_bus_to_phys(struct device *dev,
-+					  dma_addr_t dma_addr)
- {
-+	phys_addr_t baddr = dma_to_phys(dev, dma_addr);
- 	unsigned long xen_pfn = bfn_to_pfn(XEN_PFN_DOWN(baddr));
--	dma_addr_t dma = (dma_addr_t)xen_pfn << XEN_PAGE_SHIFT;
--	phys_addr_t paddr = dma;
-+	phys_addr_t paddr = (xen_pfn << XEN_PAGE_SHIFT) |
-+			    (baddr & ~XEN_PAGE_MASK);
- 
- 	paddr |= baddr & ~XEN_PAGE_MASK;
- 
-@@ -99,7 +101,7 @@ static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
- 
- static int is_xen_swiotlb_buffer(struct device *dev, dma_addr_t dma_addr)
- {
--	unsigned long bfn = XEN_PFN_DOWN(dma_addr);
-+	unsigned long bfn = XEN_PFN_DOWN(dma_to_phys(dev, dma_addr));
- 	unsigned long xen_pfn = bfn_to_local_pfn(bfn);
- 	phys_addr_t paddr = XEN_PFN_PHYS(xen_pfn);
- 
-@@ -304,11 +306,11 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 	if (hwdev && hwdev->coherent_dma_mask)
- 		dma_mask = hwdev->coherent_dma_mask;
- 
--	/* At this point dma_handle is the physical address, next we are
-+	/* At this point dma_handle is the dma address, next we are
- 	 * going to set it to the machine address.
- 	 * Do not use virt_to_phys(ret) because on ARM it doesn't correspond
- 	 * to *dma_handle. */
--	phys = *dma_handle;
-+	phys = dma_to_phys(hwdev, *dma_handle);
- 	dev_addr = xen_phys_to_bus(hwdev, phys);
- 	if (((dev_addr + size - 1 <= dma_mask)) &&
- 	    !range_straddles_page_boundary(phys, size))
-@@ -319,6 +321,7 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 			xen_free_coherent_pages(hwdev, size, ret, (dma_addr_t)phys, attrs);
- 			return NULL;
- 		}
-+		*dma_handle = phys_to_dma(hwdev, *dma_handle);
- 		SetPageXenRemapped(virt_to_page(ret));
- 	}
- 	memset(ret, 0, size);
-@@ -351,7 +354,8 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
- 	    TestClearPageXenRemapped(pg))
- 		xen_destroy_contiguous_region(phys, order);
- 
--	xen_free_coherent_pages(hwdev, size, vaddr, (dma_addr_t)phys, attrs);
-+	xen_free_coherent_pages(hwdev, size, vaddr, phys_to_dma(hwdev, phys),
-+				attrs);
- }
- 
- /*
--- 
-2.17.1
-
+Thanks,
+Roman.
 
