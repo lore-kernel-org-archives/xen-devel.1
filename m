@@ -4,55 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 256BAC433E4
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B6A86C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:45:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EB68020748
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:45:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 8A0B02072C
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:45:53 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="sBVUvkEn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EB68020748
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zrzyv7dw"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8A0B02072C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbYOr-0007xN-P6; Wed, 20 May 2020 23:45:25 +0000
+	id 1jbYP0-00080n-UB; Wed, 20 May 2020 23:45:34 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=P2h4=7C=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jbYOq-0007x1-9y
- for xen-devel@lists.xenproject.org; Wed, 20 May 2020 23:45:24 +0000
-X-Inumbo-ID: f88ee45b-9af3-11ea-aaaa-12813bfff9fa
+ id 1jbYOz-00080C-IB
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2020 23:45:33 +0000
+X-Inumbo-ID: f9473532-9af3-11ea-aaaa-12813bfff9fa
 Received: from mail.kernel.org (unknown [198.145.29.99])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f88ee45b-9af3-11ea-aaaa-12813bfff9fa;
- Wed, 20 May 2020 23:45:23 +0000 (UTC)
+ id f9473532-9af3-11ea-aaaa-12813bfff9fa;
+ Wed, 20 May 2020 23:45:24 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 88F6120873;
- Wed, 20 May 2020 23:45:22 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 58CB720899;
+ Wed, 20 May 2020 23:45:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1590018322;
- bh=Vv+EdXpTbwnuZjYd1z0k52yCJtFShb1TwXsEeRgOU74=;
+ s=default; t=1590018323;
+ bh=KOZVKoHc4nwdfLj2dJHT6a8axx8miTwmLiOrwBfDB1k=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sBVUvkEnVb5CTQSI2t90TDC/MfBITVXjrBOqmirzQIzAeJwdr1sVZyo9BaUXBQWb6
- LLUhyQ43M/LP6uZtRnjF0h93Ma1z5Q2Gci6bg0La5Pw99Q96J4Tt/c0jbgFC2I1Iiz
- ES8P300ufpQlz2z+r0K7tnfeD8kqZ32GjZyT1K4U=
+ b=Zrzyv7dwGOoZVOjzN/lI6uRiajVHs9Vwy9l2vAnumI9ByScLvTFwCz0GbKgQGL6mH
+ nHTux0QWT9tRMSYP25Dz44CDAsqapcfHK1zzX6Jz+gOjOGZU9NJy7LnunoCzzI+fz8
+ hdxrCpqYM0hQY5MHAQFgGUEtfwix69+Jsu+d9KVs=
 From: Stefano Stabellini <sstabellini@kernel.org>
 To: jgross@suse.com,
 	boris.ostrovsky@oracle.com,
 	konrad.wilk@oracle.com
-Subject: [PATCH 02/10] swiotlb-xen: remove start_dma_addr
-Date: Wed, 20 May 2020 16:45:12 -0700
-Message-Id: <20200520234520.22563-2-sstabellini@kernel.org>
+Subject: [PATCH 04/10] swiotlb-xen: add struct device* parameter to
+ xen_bus_to_phys
+Date: Wed, 20 May 2020 16:45:14 -0700
+Message-Id: <20200520234520.22563-4-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
 References: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
@@ -74,45 +76,63 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Stefano Stabellini <stefano.stabellini@xilinx.com>
 
-It is not strictly needed. Call virt_to_phys on xen_io_tlb_start
-instead. It will be useful not to have a start_dma_addr around with the
-next patches.
+The parameter is unused in this patch.
+No functional changes.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
 ---
- drivers/xen/swiotlb-xen.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ drivers/xen/swiotlb-xen.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index a42129cba36e..b5e0492b07b9 100644
+index 958ee5517e0b..9b4306a56feb 100644
 --- a/drivers/xen/swiotlb-xen.c
 +++ b/drivers/xen/swiotlb-xen.c
-@@ -52,8 +52,6 @@ static unsigned long xen_io_tlb_nslabs;
-  * Quick lookup value of the bus address of the IOTLB.
-  */
+@@ -67,7 +67,7 @@ static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
+ 	return dma;
+ }
  
--static u64 start_dma_addr;
--
- /*
-  * Both of these functions should avoid XEN_PFN_PHYS because phys_addr_t
-  * can be 32bit when dma_addr_t is 64bit leading to a loss in
-@@ -241,7 +239,6 @@ int __ref xen_swiotlb_init(int verbose, bool early)
- 		m_ret = XEN_SWIOTLB_EFIXUP;
- 		goto error;
- 	}
--	start_dma_addr = xen_virt_to_bus(xen_io_tlb_start);
- 	if (early) {
- 		if (swiotlb_init_with_tbl(xen_io_tlb_start, xen_io_tlb_nslabs,
- 			 verbose))
-@@ -389,7 +386,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
- 	 */
- 	trace_swiotlb_bounced(dev, dev_addr, size, swiotlb_force);
+-static inline phys_addr_t xen_bus_to_phys(dma_addr_t baddr)
++static inline phys_addr_t xen_bus_to_phys(struct device *dev, dma_addr_t baddr)
+ {
+ 	unsigned long xen_pfn = bfn_to_pfn(XEN_PFN_DOWN(baddr));
+ 	dma_addr_t dma = (dma_addr_t)xen_pfn << XEN_PAGE_SHIFT;
+@@ -339,7 +339,7 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
  
--	map = swiotlb_tbl_map_single(dev, start_dma_addr, phys,
-+	map = swiotlb_tbl_map_single(dev, virt_to_phys(xen_io_tlb_start), phys,
- 				     size, size, dir, attrs);
- 	if (map == (phys_addr_t)DMA_MAPPING_ERROR)
- 		return DMA_MAPPING_ERROR;
+ 	/* do not use virt_to_phys because on ARM it doesn't return you the
+ 	 * physical address */
+-	phys = xen_bus_to_phys(dev_addr);
++	phys = xen_bus_to_phys(hwdev, dev_addr);
+ 
+ 	/* Convert the size to actually allocated. */
+ 	size = 1UL << (order + XEN_PAGE_SHIFT);
+@@ -420,7 +420,7 @@ static dma_addr_t xen_swiotlb_map_page(struct device *dev, struct page *page,
+ static void xen_swiotlb_unmap_page(struct device *hwdev, dma_addr_t dev_addr,
+ 		size_t size, enum dma_data_direction dir, unsigned long attrs)
+ {
+-	phys_addr_t paddr = xen_bus_to_phys(dev_addr);
++	phys_addr_t paddr = xen_bus_to_phys(hwdev, dev_addr);
+ 
+ 	BUG_ON(dir == DMA_NONE);
+ 
+@@ -436,7 +436,7 @@ static void
+ xen_swiotlb_sync_single_for_cpu(struct device *dev, dma_addr_t dma_addr,
+ 		size_t size, enum dma_data_direction dir)
+ {
+-	phys_addr_t paddr = xen_bus_to_phys(dma_addr);
++	phys_addr_t paddr = xen_bus_to_phys(dev, dma_addr);
+ 
+ 	if (!dev_is_dma_coherent(dev))
+ 		xen_dma_sync_for_cpu(dma_addr, paddr, size, dir);
+@@ -449,7 +449,7 @@ static void
+ xen_swiotlb_sync_single_for_device(struct device *dev, dma_addr_t dma_addr,
+ 		size_t size, enum dma_data_direction dir)
+ {
+-	phys_addr_t paddr = xen_bus_to_phys(dma_addr);
++	phys_addr_t paddr = xen_bus_to_phys(dev, dma_addr);
+ 
+ 	if (is_xen_swiotlb_buffer(dma_addr))
+ 		swiotlb_tbl_sync_single(dev, paddr, size, dir, SYNC_FOR_DEVICE);
 -- 
 2.17.1
 
