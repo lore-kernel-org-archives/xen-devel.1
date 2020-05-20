@@ -2,56 +2,78 @@ Return-Path: <SRS0=v5y7=7C=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 12B32C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 08:56:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10945C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 09:04:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E2D722075F
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 08:56:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E2D722075F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id C79F12075F
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 09:04:46 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TXm3L+NI"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C79F12075F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbKWa-0001zO-NP; Wed, 20 May 2020 08:56:28 +0000
+	id 1jbKeR-0002wu-TU; Wed, 20 May 2020 09:04:35 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=txLX=7C=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jbKWZ-0001zJ-UH
- for xen-devel@lists.xenproject.org; Wed, 20 May 2020 08:56:27 +0000
-X-Inumbo-ID: c9db357c-9a77-11ea-9887-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=Cwnj=7C=gmail.com=andr2000@srs-us1.protection.inumbo.net>)
+ id 1jbKeQ-0002wo-5I
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2020 09:04:34 +0000
+X-Inumbo-ID: e944c724-9a78-11ea-ae69-bc764e2007e4
+Received: from mail-ed1-x543.google.com (unknown [2a00:1450:4864:20::543])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c9db357c-9a77-11ea-9887-bc764e2007e4;
- Wed, 20 May 2020 08:56:27 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id EDCF1AF2D;
- Wed, 20 May 2020 08:56:28 +0000 (UTC)
-Subject: Re: [PATCH] x86: refine guest_mode()
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <7b62d06c-1369-2857-81c0-45e2434357f4@suse.com>
- <1704f4f6-7e77-971c-2c94-4f6a6719c34a@citrix.com>
- <5bbe6425-396c-d934-b5af-53b594a4afbc@suse.com>
- <16939982-3ccc-f848-0694-61b154dca89a@citrix.com>
- <5ce12c86-c894-4a2c-9fa6-1c2a6007ca28@suse.com>
- <20200518145101.GV54375@Air-de-Roger>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <d58ec87e-a871-2e65-4a69-b73a168a6afa@suse.com>
-Date: Wed, 20 May 2020 10:56:26 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <20200518145101.GV54375@Air-de-Roger>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+ id e944c724-9a78-11ea-ae69-bc764e2007e4;
+ Wed, 20 May 2020 09:04:29 +0000 (UTC)
+Received: by mail-ed1-x543.google.com with SMTP id b91so2221536edf.3
+ for <xen-devel@lists.xenproject.org>; Wed, 20 May 2020 02:04:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:in-reply-to:references;
+ bh=cxVe7z5qO5Qs7eGgcvSh31+4K5/DeD3iRNuzH0HAxuk=;
+ b=TXm3L+NIb3XAHg5yp445t0VZcIT8EbggRa9KdpEROqmJVDAorllnh26t5yqkvwlDKW
+ m5PYDkHpx2PqIfT+SIzZTnPtrIR5PniAeBGoeJx6ByvxV8W+D//I+TZ1RYeMYUg56pGA
+ Hp+md7wmt/K9hc5lEXoIf2byBQ9+5h8OLAM+npMWpK346fnn0SkPoGlQP7147bPACxhH
+ +3dR3IXpZQMQ1Brb/iJZi3o/vdsQW0p5vonKvFtEjS2CyBcXcVk+qR7bE7HDDjtfZsDH
+ HbSTNn2rVoSy7Zx6d1XKPtqF5tNGZu8Gaqj8LWbvyLlPH/1Z4BQD1hv8z54IJR4yORds
+ hsTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references;
+ bh=cxVe7z5qO5Qs7eGgcvSh31+4K5/DeD3iRNuzH0HAxuk=;
+ b=UmQmGiG+8X+oIQx8szfvE3MmrpaKwo83sLuvi0p0b8zQSxQS8hbq1lfFbxb7BpRAME
+ nkj5KgRsoZT+QLBdBqP/cT+ZxsZxQIuuY9IY++PNgMlbRL3FHsP0EFNO8BlR67beVMN4
+ RW0xCP+fPg8ZQfO8HUjA80TaT4jwSvBnI4W/hc2R7O/OawBsB0Cktt8fMC2EXr93g6Kk
+ KyS6XaygQad+b81tx9YZqDNORDAtfqMNrXJtNWAh4SziZqYlhFYyV238Jvik7qYcoYA3
+ uUdFjJqIl2VR3WT1u7e4gQQ3/nbda0jO6iTGYPgSO9Z9CdvbrjIyrVxQHy9am3B1CqbM
+ K5pA==
+X-Gm-Message-State: AOAM530DLcRYdvx/GexYraIVqM4XPSZrmKN2n0ENI2g/nVejh46Ft9aI
+ vKn6ZhY1v4Wg93fh0MDJA1fj+xHA
+X-Google-Smtp-Source: ABdhPJy2i0oSG0uCwwcpW62NAlWD2JX+n/HqLBknlQfX98ojK0xiYyvde6gKBX5uCZRiWByiX3l0mA==
+X-Received: by 2002:a50:b286:: with SMTP id p6mr2541409edd.350.1589965468129; 
+ Wed, 20 May 2020 02:04:28 -0700 (PDT)
+Received: from a2klaptop.localdomain ([185.199.97.5])
+ by smtp.gmail.com with ESMTPSA id p5sm1324811edi.82.2020.05.20.02.04.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 20 May 2020 02:04:27 -0700 (PDT)
+From: Oleksandr Andrushchenko <andr2000@gmail.com>
+To: xen-devel@lists.xenproject.org, jgross@suse.com, ian.jackson@eu.citrix.com,
+ wei.liu2@citrix.com, konrad.wilk@oracle.com
+Subject: [PATCH 1/2] xen/displif: Protocol version 2
+Date: Wed, 20 May 2020 12:04:24 +0300
+Message-Id: <20200520090425.28558-2-andr2000@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200520090425.28558-1-andr2000@gmail.com>
+References: <20200520090425.28558-1-andr2000@gmail.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,105 +84,212 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 18.05.2020 16:51, Roger Pau Monné wrote:
-> On Tue, Apr 28, 2020 at 08:30:12AM +0200, Jan Beulich wrote:
->> On 27.04.2020 22:11, Andrew Cooper wrote:
->>> On 27/04/2020 16:15, Jan Beulich wrote:
->>>> On 27.04.2020 16:35, Andrew Cooper wrote:
->>>>> On 27/04/2020 09:03, Jan Beulich wrote:
->>>>>> --- a/xen/include/asm-x86/regs.h
->>>>>> +++ b/xen/include/asm-x86/regs.h
->>>>>> @@ -10,9 +10,10 @@
->>>>>>      /* Frame pointer must point into current CPU stack. */                    \
->>>>>>      ASSERT(diff < STACK_SIZE);                                                \
->>>>>>      /* If not a guest frame, it must be a hypervisor frame. */                \
->>>>>> -    ASSERT((diff == 0) || (r->cs == __HYPERVISOR_CS));                        \
->>>>>> +    if ( diff < PRIMARY_STACK_SIZE )                                          \
->>>>>> +        ASSERT(!diff || ((r)->cs == __HYPERVISOR_CS));                        \
->>>>>>      /* Return TRUE if it's a guest frame. */                                  \
->>>>>> -    (diff == 0);                                                              \
->>>>>> +    !diff || ((r)->cs != __HYPERVISOR_CS);                                    \
->>>>> The (diff == 0) already worried me before because it doesn't fail safe,
->>>>> but this makes things more problematic.  Consider the case back when we
->>>>> had __HYPERVISOR_CS32.
->>>> Yes - if __HYPERVISOR_CS32 would ever have been to be used for
->>>> anything, it would have needed checking for here.
->>>>
->>>>> Guest mode is strictly "(r)->cs & 3".
->>>> As long as CS (a) gets properly saved (it's a "manual" step for
->>>> SYSCALL/SYSRET as well as #VMEXIT) and (b) didn't get clobbered. I
->>>> didn't write this code, I don't think, so I can only guess that
->>>> there were intentions behind this along these lines.
->>>
->>> Hmm - the VMExit case might be problematic here, due to the variability
->>> in the poison used.
->>
->> "Variability" is an understatement - there's no poisoning at all
->> in release builds afaics (and to be honest it seems a somewhat
->> pointless to write the same values over and over again in debug
->> mode). With this, ...
->>
->>>>> Everything else is expectations about how things ought to be laid out,
->>>>> but for safety in release builds, the final judgement should not depend
->>>>> on the expectations evaluating true.
->>>> Well, I can switch to a purely CS.RPL based approach, as long as
->>>> we're happy to live with the possible downside mentioned above.
->>>> Of course this would then end up being a more intrusive change
->>>> than originally intended ...
->>>
->>> I'd certainly prefer to go for something which is more robust, even if
->>> it is a larger change.
->>
->> ... what's your suggestion? Basing on _just_ CS.RPL obviously won't
->> work. Not even if we put in place the guest's CS (albeit that
->> somewhat depends on the meaning we assign to the macro's returned
->> value).
-> 
-> Just to check I'm following this correctly, using CS.RPL won't work
-> for HVM guests, as HVM can legitimately use a RPL of 0 (which is not
-> the case for PV guests). Doesn't the same apply to the usage of
-> __HYPERVISOR_CS? (A HVM guest could also use the same code segment
-> value as Xen?)
+From: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
 
-Of course (and in particular Xen as a guest would). My "Basing on
-_just_ CS.RPL" wasn't meant to exclude the rest of the selector,
-but to contrast this to the case where "diff" also is involved in
-the calculation (which looks to be what Andrew would prefer to see
-go away).
+1. Change protocol version from string to integer
 
->> Using current inside the macro to determine whether the
->> guest is HVM would also seem fragile to me - there are quite a few
->> uses of guest_mode(). Which would leave passing in a const struct
->> vcpu * (or domain *), requiring to touch all call sites, including
->> Arm's.
-> 
-> Fragile or slow? Are there corner cases where guest_mode is used where
-> current is not reliable?
+Version string, which is in fact an integer, is hard to handle in the
+code that supports different protocol versions. To simplify that
+make the version an integer.
 
-This question is why I said "there are quite a few uses of
-guest_mode()" - auditing them all is just one side of the medal.
-The other is to prevent a new use appearing in the future that
-can be reached by a call path in the time window where a lazy
-context switch is pending (i.e. when current has already been
-updated, but register state hasn't been yet).
+2. Pass buffer offset with XENDISPL_OP_DBUF_CREATE
 
->> Compared to this it would seem to me that the change as presented
->> is a clear improvement without becoming overly large of a change.
-> 
-> Using the cs register is already part of the guest_mode code, even if
-> just in debug mode, hence I don't see it as a regression from existing
-> code. It however feels weird to me that the reporter of the issue
-> doesn't agree with the fix, and hence would like to know if there's a
-> way we could achieve consensus on this.
+There are cases when display data buffer is created with non-zero
+offset to the data start. Handle such cases and provide that offset
+while creating a display buffer.
 
-Indeed. I'd be happy to make further adjustments, if only I had a
-clear understanding of what is wanted (or why leaving things as
-they are is better than a little bit of an improvement).
+3. Add XENDISPL_OP_GET_EDID command
 
-Jan
+Add an optional request for reading Extended Display Identification
+Data (EDID) structure which allows better configuration of the
+display connectors over the configuration set in XenStore.
+With this change connectors may have multiple resolutions defined
+with respect to detailed timing definitions and additional properties
+normally provided by displays.
+
+If this request is not supported by the backend then visible area
+is defined by the relevant XenStore's "resolution" property.
+
+If backend provides extended display identification data (EDID) with
+XENDISPL_OP_GET_EDID request then EDID values must take precedence
+over the resolutions defined in XenStore.
+
+4. Bump protocol version to 2.
+
+Signed-off-by: Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
+---
+ xen/include/public/io/displif.h | 83 +++++++++++++++++++++++++++++++--
+ 1 file changed, 80 insertions(+), 3 deletions(-)
+
+diff --git a/xen/include/public/io/displif.h b/xen/include/public/io/displif.h
+index cc5de9cb1f35..4d43ba5078c8 100644
+--- a/xen/include/public/io/displif.h
++++ b/xen/include/public/io/displif.h
+@@ -38,7 +38,7 @@
+  *                           Protocol version
+  ******************************************************************************
+  */
+-#define XENDISPL_PROTOCOL_VERSION     "1"
++#define XENDISPL_PROTOCOL_VERSION     2
+ 
+ /*
+  ******************************************************************************
+@@ -202,6 +202,9 @@
+  *      Width and height of the connector in pixels separated by
+  *      XENDISPL_RESOLUTION_SEPARATOR. This defines visible area of the
+  *      display.
++ *      If backend provides extended display identification data (EDID) with
++ *      XENDISPL_OP_GET_EDID request then EDID values must take precedence
++ *      over the resolutions defined here.
+  *
+  *------------------ Connector Request Transport Parameters -------------------
+  *
+@@ -349,6 +352,7 @@
+ #define XENDISPL_OP_FB_DETACH         0x13
+ #define XENDISPL_OP_SET_CONFIG        0x14
+ #define XENDISPL_OP_PG_FLIP           0x15
++#define XENDISPL_OP_GET_EDID          0x16
+ 
+ /*
+  ******************************************************************************
+@@ -377,6 +381,10 @@
+ #define XENDISPL_FIELD_BE_ALLOC       "be-alloc"
+ #define XENDISPL_FIELD_UNIQUE_ID      "unique-id"
+ 
++#define XENDISPL_EDID_BLOCK_SIZE      128
++#define XENDISPL_EDID_BLOCK_COUNT     256
++#define XENDISPL_EDID_MAX_SIZE        (XENDISPL_EDID_BLOCK_SIZE * XENDISPL_EDID_BLOCK_COUNT)
++
+ /*
+  ******************************************************************************
+  *                          STATUS RETURN CODES
+@@ -451,7 +459,9 @@
+  * +----------------+----------------+----------------+----------------+
+  * |                           gref_directory                          | 40
+  * +----------------+----------------+----------------+----------------+
+- * |                             reserved                              | 44
++ * |                             data_ofs                              | 44
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 48
+  * +----------------+----------------+----------------+----------------+
+  * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
+  * +----------------+----------------+----------------+----------------+
+@@ -494,6 +504,7 @@
+  *   buffer size (buffer_sz) exceeds what can be addressed by this single page,
+  *   then reference to the next page must be supplied (see gref_dir_next_page
+  *   below)
++ * data_ofs - uint32_t, offset of the data in the buffer, octets
+  */
+ 
+ #define XENDISPL_DBUF_FLG_REQ_ALLOC       (1 << 0)
+@@ -506,6 +517,7 @@ struct xendispl_dbuf_create_req {
+     uint32_t buffer_sz;
+     uint32_t flags;
+     grant_ref_t gref_directory;
++    uint32_t data_ofs;
+ };
+ 
+ /*
+@@ -731,6 +743,42 @@ struct xendispl_page_flip_req {
+     uint64_t fb_cookie;
+ };
+ 
++/*
++ * Request EDID - request EDID describing current connector:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                | _OP_GET_EDID   |   reserved     | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                             buffer_sz                             | 8
++ * +----------------+----------------+----------------+----------------+
++ * |                          gref_directory                           | 12
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 16
++ * +----------------+----------------+----------------+----------------+
++ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 64
++ * +----------------+----------------+----------------+----------------+
++ *
++ * Notes:
++ *   - This request is optional and if not supported then visible area
++ *     is defined by the relevant XenStore's "resolution" property.
++ *   - Shared buffer, allocated for EDID storage, must not be less then
++ *     XENDISPL_EDID_MAX_SIZE octets.
++ *
++ * buffer_sz - uint32_t, buffer size to be allocated, octets
++ * gref_directory - grant_ref_t, a reference to the first shared page
++ *   describing EDID buffer references. See XENDISPL_OP_DBUF_CREATE for
++ *   grant page directory structure (struct xendispl_page_directory).
++ *
++ * See response format for this request.
++ */
++
++struct xendispl_get_edid_req {
++    uint32_t buffer_sz;
++    grant_ref_t gref_directory;
++};
++
+ /*
+  *---------------------------------- Responses --------------------------------
+  *
+@@ -753,6 +801,31 @@ struct xendispl_page_flip_req {
+  * id - uint16_t, private guest value, echoed from request
+  * status - int32_t, response status, zero on success and -XEN_EXX on failure
+  *
++ *
++ * Get EDID response - response for XENDISPL_OP_GET_EDID:
++ *         0                1                 2               3        octet
++ * +----------------+----------------+----------------+----------------+
++ * |               id                |    operation   |    reserved    | 4
++ * +----------------+----------------+----------------+----------------+
++ * |                              status                               | 8
++ * +----------------+----------------+----------------+----------------+
++ * |                             edid_sz                               | 12
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 16
++ * +----------------+----------------+----------------+----------------+
++ * |/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
++ * +----------------+----------------+----------------+----------------+
++ * |                             reserved                              | 64
++ * +----------------+----------------+----------------+----------------+
++ *
++ * edid_sz - uint32_t, size of the EDID, octets
++ */
++
++struct xendispl_get_edid_resp {
++    uint32_t edid_sz;
++};
++
++/*
+  *----------------------------------- Events ----------------------------------
+  *
+  * Events are sent via a shared page allocated by the front and propagated by
+@@ -804,6 +877,7 @@ struct xendispl_req {
+         struct xendispl_fb_detach_req fb_detach;
+         struct xendispl_set_config_req set_config;
+         struct xendispl_page_flip_req pg_flip;
++        struct xendispl_get_edid_req get_edid;
+         uint8_t reserved[56];
+     } op;
+ };
+@@ -813,7 +887,10 @@ struct xendispl_resp {
+     uint8_t operation;
+     uint8_t reserved;
+     int32_t status;
+-    uint8_t reserved1[56];
++    union {
++        struct xendispl_get_edid_resp get_edid;
++        uint8_t reserved1[56];
++    } op;
+ };
+ 
+ struct xendispl_evt {
+-- 
+2.17.1
+
 
