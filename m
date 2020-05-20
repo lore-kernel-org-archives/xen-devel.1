@@ -2,63 +2,52 @@ Return-Path: <SRS0=v5y7=7C=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B2FC4C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 14:08:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 25782C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 14:14:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8E6F8207D4
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 14:08:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8E6F8207D4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id CFA64207F9
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 14:14:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CFA64207F9
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=net-space.pl
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbPNu-0006ZY-Dt; Wed, 20 May 2020 14:07:50 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jbPU4-0007PY-5U; Wed, 20 May 2020 14:14:12 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=4N77=7C=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jbPNt-0006ZT-A4
- for xen-devel@lists.xenproject.org; Wed, 20 May 2020 14:07:49 +0000
-X-Inumbo-ID: 48ed572a-9aa3-11ea-b07b-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 48ed572a-9aa3-11ea-b07b-bc764e2007e4;
- Wed, 20 May 2020 14:07:48 +0000 (UTC)
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 98xVz1GJeLLKXYKeJAcgFHQZ3aHnKNcAeNxvoVIdbuwkn4VN4E+uzokvaB9ItCm15E37jppm5M
- lAWeVl/Sg0ECkRwiTw0PaCyKuLxGYj4kv6ioZoCVYj/aFFwh4RQLY6rLMhP+NiK9hcrEERZf9r
- l/treWeTpf9NBh4I9o2u0Udg5U3WiirQl4etGHaX9OuK0qYKe/u0yugaSyaCSFH28cFIccpXVH
- IF6ge19dVw5nUKwiV0tKDrOZYjMRMBeBKe2Ivb2LaaEjnFK+B1X/wqj+B4DX4eS7LBtisnJLCO
- 84U=
-X-SBRS: 2.7
-X-MesageID: 18249144
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,414,1583211600"; d="scan'208";a="18249144"
-Subject: Re: [PATCH] VT-x: extend LBR Broadwell errata coverage
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
- <xen-devel@lists.xenproject.org>
-References: <df6e8dad-b4c0-0821-46eb-e4aa86f8ccfa@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <e107f97b-4bb7-31ee-20d1-ddf8f7e00c21@citrix.com>
-Date: Wed, 20 May 2020 15:07:12 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ <SRS0=DIPQ=7C=net-space.pl=dkiper@srs-us1.protection.inumbo.net>)
+ id 1jbPU2-0007PP-AE
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2020 14:14:10 +0000
+X-Inumbo-ID: 2b35deb9-9aa4-11ea-aa29-12813bfff9fa
+Received: from dibed.net-space.pl (unknown [84.10.22.86])
+ by us1-amaz-eas2.inumbo.com (Halon) with SMTP
+ id 2b35deb9-9aa4-11ea-aa29-12813bfff9fa;
+ Wed, 20 May 2020 14:14:09 +0000 (UTC)
+Received: from router-fw.i.net-space.pl ([192.168.52.1]:38256 "EHLO
+ tomti.i.net-space.pl") by router-fw-old.i.net-space.pl with ESMTP
+ id S1953456AbgETNko (ORCPT <rfc822;xen-devel@lists.xenproject.org>);
+ Wed, 20 May 2020 15:40:44 +0200
+X-Comment: RFC 2476 MSA function at dibed.net-space.pl logged sender identity
+ as: dkiper
+Date: Wed, 20 May 2020 15:40:40 +0200
+From: Daniel Kiper <dkiper@net-space.pl>
+To: Ian Jackson <ian.jackson@eu.citrix.com>
+Subject: Re: [GRUB PATCH 0/2] Better Xen support
+Message-ID: <20200520134040.kwyugkbmel7y4i6q@tomti.i.net-space.pl>
+References: <20200520121420.7965-1-ian.jackson@eu.citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <df6e8dad-b4c0-0821-46eb-e4aa86f8ccfa@suse.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
-X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200520121420.7965-1-ian.jackson@eu.citrix.com>
+User-Agent: NeoMutt/20170113 (1.7.2)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,99 +58,25 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Kevin Tian <kevin.tian@intel.com>, Jun Nakajima <jun.nakajima@intel.com>,
- Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: grub-devel@gnu.org, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 20/05/2020 13:52, Jan Beulich wrote:
-> For lbr_tsx_fixup_check() simply name a few more specific errata numbers.
+On Wed, May 20, 2020 at 01:14:18PM +0100, Ian Jackson wrote:
+> Hi. As maintainer of the Xen Project upstream CI, I do testing of
+> upstream Xen builds onto Debian systems.
 >
-> For bdf93_fixup_check(), however, more models are affected. Oddly enough
-> despite being the same model and stepping, the erratum is listed for Xeon
-> E3 but not its Core counterpart.
-
-That is probably a documentation error.  These processors are made from
-the same die, and are not going to deviate in this regard.
-
-> With this it's of course also uncertain
-> whether the absence of the erratum for Xeon D is actually meaningful.
-
-Given BDE105, it is exceedingly unlikely that this erratum alone was
-fixed, leaving the other related ones present.
-
-The complicating factor is that the TSX errata were addressed in some
-later Broadwell parts.  Both these errata groups are to do with a
-mismatch of TSX metadata in LBR/LER records.
-
-The former group affects Haswell and Broadwell, but only when microcode
-has disabled TSX, and manifests in the processor rejecting
-architecturally-correct last-branch-to records.  Any mode in the list
-which still has TSX enabled in up-to-date microcode doesn't get the
-workaround.
-
-The latter group affects Broadwell only, and manifests as an
-architecturally incorrect ler-from record, which shouldn't have any TSX
-metadata to begin with.
-
+> We use grub's 20_linux_xen to do the bootloader setup.  However, it is
+> missing some features so we are carrying some patches.  Here they are
+> for your consideration.
 >
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> Regards, Ian.
 >
-> --- a/xen/arch/x86/hvm/vmx/vmx.c
-> +++ b/xen/arch/x86/hvm/vmx/vmx.c
-> @@ -2870,8 +2870,10 @@ static void __init lbr_tsx_fixup_check(v
+> Ian Jackson (2):
+>   20_linux_xen: Ignore xenpolicy and config files too
+>   20_linux_xen: Support Xen Security Modules (XSM/FLASK)
 
-There is a comment out of context here which is now stale.
+Reviewed-by: Daniel Kiper <daniel.kiper@oracle.com>
 
-If simply adding adding to the list is something you'd prefer to avoid,
-what about /* Haswell/Broadwell LBR TSX metadata errata */ or similar?
-
->      case 0x45: /* HSM182 - 4th gen Core */
->      case 0x46: /* HSM182, HSD172 - 4th gen Core (GT3) */
->      case 0x3d: /* BDM127 - 5th gen Core */
-> -    case 0x47: /* BDD117 - 5th gen Core (GT3) */
-> -    case 0x4f: /* BDF85  - Xeon E5-2600 v4 */
-> +    case 0x47: /* BDD117 - 5th gen Core (GT3)
-> +                  BDW117 - Xeon E3-1200 v4 */
-> +    case 0x4f: /* BDF85  - Xeon E5-2600 v4
-> +                  BDX88  - Xeon E7-x800 v4 */
->      case 0x56: /* BDE105 - Xeon D-1500 */
->          break;
->      default:
-> @@ -2895,15 +2897,26 @@ static void __init lbr_tsx_fixup_check(v
->  static void __init bdf93_fixup_check(void)
-
-Seeing as this is no longer just BDF93, how about ler_tsx_fixup_check() ?
-
-~Andrew
-
->  {
->      /*
-> -     * Broadwell erratum BDF93:
-> +     * Broadwell erratum BDF93 et al:
->       *
->       * Reads from MSR_LER_TO_LIP (MSR 1DEH) may return values for bits[63:61]
->       * that are not equal to bit[47].  Attempting to context switch this value
->       * may cause a #GP.  Software should sign extend the MSR.
->       */
-> -    if ( boot_cpu_data.x86_vendor == X86_VENDOR_INTEL &&
-> -         boot_cpu_data.x86 == 6 && boot_cpu_data.x86_model == 0x4f )
-> +    if ( boot_cpu_data.x86_vendor != X86_VENDOR_INTEL ||
-> +         boot_cpu_data.x86 != 6 )
-> +        return;
-> +
-> +    switch ( boot_cpu_data.x86_model )
-> +    {
-> +    case 0x3d: /* BDM131 - 5th gen Core */
-> +    case 0x47: /* BDD??? - 5th gen Core (H-Processor line)
-> +                  BDW120 - Xeon E3-1200 v4 */
-> +    case 0x4f: /* BDF93  - Xeon E5-2600 v4
-> +                  BDX93  - Xeon E7-x800 v4 */
->          bdf93_fixup_needed = true;
-> +        break;
-> +    }
->  }
->  
->  static int is_last_branch_msr(u32 ecx)
-
+Daniel
 
