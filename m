@@ -2,56 +2,62 @@ Return-Path: <SRS0=v5y7=7C=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3E933C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 22:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BB65DC433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:45:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 055B320829
-	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 22:17:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 055B320829
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8D98C20748
+	for <xen-devel@archiver.kernel.org>; Wed, 20 May 2020 23:45:49 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Z/XEnES7"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8D98C20748
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbX1n-0000Wx-Jm; Wed, 20 May 2020 22:17:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jbYOq-0007x6-HA; Wed, 20 May 2020 23:45:24 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gBXs=7C=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
- id 1jbX1m-0000Ws-D0
- for xen-devel@lists.xenproject.org; Wed, 20 May 2020 22:17:30 +0000
-X-Inumbo-ID: b168c048-9ae7-11ea-b9cf-bc764e2007e4
-Received: from ppsw-30.csi.cam.ac.uk (unknown [131.111.8.130])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b168c048-9ae7-11ea-b9cf-bc764e2007e4;
- Wed, 20 May 2020 22:17:29 +0000 (UTC)
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from 88-109-182-220.dynamic.dsl.as9105.com ([88.109.182.220]:53322
- helo=[192.168.1.219])
- by ppsw-30.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.156]:465)
- with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- id 1jbX1i-000Ef4-dM (Exim 4.92.3)
- (return-path <amc96@hermes.cam.ac.uk>); Wed, 20 May 2020 23:17:26 +0100
-Subject: Re: [PATCH v5] x86: clear RDRAND CPUID bit on AMD family 15h/16h
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <4f76749b-54bd-7c39-6c90-279ce25cb57c@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <e2cf9d9e-492d-fa24-0e9c-bf62b6704b34@citrix.com>
-Date: Wed, 20 May 2020 23:17:25 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <4f76749b-54bd-7c39-6c90-279ce25cb57c@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+ <SRS0=P2h4=7C=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jbYOp-0007ww-Hg
+ for xen-devel@lists.xenproject.org; Wed, 20 May 2020 23:45:23 +0000
+X-Inumbo-ID: f88ee45a-9af3-11ea-aaaa-12813bfff9fa
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f88ee45a-9af3-11ea-aaaa-12813bfff9fa;
+ Wed, 20 May 2020 23:45:23 +0000 (UTC)
+Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
+ (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 1812920748;
+ Wed, 20 May 2020 23:45:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1590018322;
+ bh=2rJi6KfJ7cKpdb3KgYosM8AG09eJiSBLH85aYQo6tfE=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Z/XEnES7H/3TARKOmkB1qbDupxUWdE2Iq1shY3iRXvUvUqgWMI9JC8cDHfeS8Yl+u
+ +HcspWBrKeLpETCuygnY/0/UPeXGziAinuXs3JHNLhNZdDIMXyospJd0iz+iNx4WVf
+ DXuaL5c43gHfkKb/gZV0rdGZ8hqWUrfcfPK0H0bI=
+From: Stefano Stabellini <sstabellini@kernel.org>
+To: jgross@suse.com,
+	boris.ostrovsky@oracle.com,
+	konrad.wilk@oracle.com
+Subject: [PATCH 01/10] swiotlb-xen: use vmalloc_to_page on vmalloc virt
+ addresses
+Date: Wed, 20 May 2020 16:45:11 -0700
+Message-Id: <20200520234520.22563-1-sstabellini@kernel.org>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
+References: <alpine.DEB.2.21.2005201628330.27502@sstabellini-ThinkPad-T480s>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,51 +68,50 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org,
+ linux-kernel@vger.kernel.org,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 18/05/2020 14:19, Jan Beulich wrote:
-> Inspired by Linux commit c49a0a80137c7ca7d6ced4c812c9e07a949f6f24:
->
->     There have been reports of RDRAND issues after resuming from suspend on
->     some AMD family 15h and family 16h systems. This issue stems from a BIOS
->     not performing the proper steps during resume to ensure RDRAND continues
->     to function properly.
->
->     Update the CPU initialization to clear the RDRAND CPUID bit for any family
->     15h and 16h processor that supports RDRAND. If it is known that the family
->     15h or family 16h system does not have an RDRAND resume issue or that the
->     system will not be placed in suspend, the "cpuid=rdrand" kernel parameter
->     can be used to stop the clearing of the RDRAND CPUID bit.
->
->     Note, that clearing the RDRAND CPUID bit does not prevent a processor
->     that normally supports the RDRAND instruction from executing it. So any
->     code that determined the support based on family and model won't #UD.
->
-> Warn if no explicit choice was given on affected hardware.
->
-> Check RDRAND functions at boot as well as after S3 resume (the retry
-> limit chosen is entirely arbitrary).
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+From: Boris Ostrovsky <boris.ostrovsky@oracle.com>
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Don't just assume that virt_to_page works on all virtual addresses.
+Instead add a is_vmalloc_addr check and use vmalloc_to_page on vmalloc
+virt addresses.
 
-> ---
-> Still slightly RFC, and still in particular because of the change to
-> parse_xen_cpuid(): Alternative approach suggestions are welcome. But now
-> also because with many CPUs there may now be a lot of warnings in case
-> of issues.
+Signed-off-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
+---
+ drivers/xen/swiotlb-xen.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-It would still be nice if we could find a better way of determining
-whether S3 is supported on the platform, which would at least let us
-sort server and client platforms.
+diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+index b6d27762c6f8..a42129cba36e 100644
+--- a/drivers/xen/swiotlb-xen.c
++++ b/drivers/xen/swiotlb-xen.c
+@@ -335,6 +335,7 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
+ 	int order = get_order(size);
+ 	phys_addr_t phys;
+ 	u64 dma_mask = DMA_BIT_MASK(32);
++	struct page *pg;
+ 
+ 	if (hwdev && hwdev->coherent_dma_mask)
+ 		dma_mask = hwdev->coherent_dma_mask;
+@@ -346,9 +347,11 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
+ 	/* Convert the size to actually allocated. */
+ 	size = 1UL << (order + XEN_PAGE_SHIFT);
+ 
++	pg = is_vmalloc_addr(vaddr) ? vmalloc_to_page(vaddr) :
++				      virt_to_page(vaddr);
+ 	if (!WARN_ON((dev_addr + size - 1 > dma_mask) ||
+ 		     range_straddles_page_boundary(phys, size)) &&
+-	    TestClearPageXenRemapped(virt_to_page(vaddr)))
++	    TestClearPageXenRemapped(pg))
+ 		xen_destroy_contiguous_region(phys, order);
+ 
+ 	xen_free_coherent_pages(hwdev, size, vaddr, (dma_addr_t)phys, attrs);
+-- 
+2.17.1
 
-A straight string search for _S3 in the DSDT does look to be effective,
-on a sample of 5 boxes I've tried.
-
-~Andrew
 
