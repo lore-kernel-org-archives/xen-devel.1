@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=3.4.0
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id EE4EEC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9EF43C433E1
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:18 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A3563206C3
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:16 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 60836206C3
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:18 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="tsUXmy0C"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3563206C3
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="u6DDMzGH"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 60836206C3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbnvB-0000ud-Aa; Thu, 21 May 2020 16:19:49 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jbnvF-0000vo-Iw; Thu, 21 May 2020 16:19:53 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/yRJ=7D=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jbnvA-0000uQ-2a
- for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:19:48 +0000
-X-Inumbo-ID: e24521b0-9b7e-11ea-b07b-bc764e2007e4
+ id 1jbnvD-0000vL-Qp
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:19:51 +0000
+X-Inumbo-ID: e5567c29-9b7e-11ea-ab32-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e24521b0-9b7e-11ea-b07b-bc764e2007e4;
- Thu, 21 May 2020 16:19:45 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id e5567c29-9b7e-11ea-ab32-12813bfff9fa;
+ Thu, 21 May 2020 16:19:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Sl8/Ipswh+utcciRPDSVGPSr0kxIyFRjP4FJbLloSIY=; b=tsUXmy0C9USvafkXAyIhtWgvvy
- z+N7xmDQxY/fMr85ZlyIV74Mo5iXVOP6Gx0UgADzl7NynfZKhTV+UzWOrzqAJKWoOzMm/+nJ6ID4h
- XgkUHYwhjuikcuQF+jAC2Ha/1snJM3UF9AGSbxvZy+Ty/qMtJ/GH0uYToKBv5ZDVLG2s=;
+ bh=6HfwJMUCo4w2pkMGpLCkcV69ZEzum7mNXZZZUP2qHUY=; b=u6DDMzGH5Gxw3WKDRDRVj/TT2I
+ D9Ca7wBKZU4NZyJ2TnScvbO/DttCdZIEjKzkCr72QID+AeZvrDvlnH9tAQCGs1lCgIs8Y/OWM6cWS
+ loDLyFvww/WSB7fTayunAQYoroBLDAHrQRIxIOGfw/vxBS7dMCa1gKWiGdES8Sakke+o=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jbnv6-0006nZ-9o; Thu, 21 May 2020 16:19:44 +0000
+ id 1jbnvB-0006o2-Ul; Thu, 21 May 2020 16:19:49 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=u2f063a87eabd5f.cbg10.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <paul@xen.org>)
- id 1jbnv5-00088L-RV; Thu, 21 May 2020 16:19:44 +0000
+ id 1jbnvB-00088L-Lj; Thu, 21 May 2020 16:19:49 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 1/5] xen/common: introduce a new framework for save/restore
- of 'domain' context
-Date: Thu, 21 May 2020 17:19:35 +0100
-Message-Id: <20200521161939.4508-2-paul@xen.org>
+Subject: [PATCH v5 5/5] tools/libxc: make use of domain context SHARED_INFO
+ record...
+Date: Thu, 21 May 2020 17:19:39 +0100
+Message-Id: <20200521161939.4508-6-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200521161939.4508-1-paul@xen.org>
 References: <20200521161939.4508-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -74,706 +74,416 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-To allow enlightened HVM guests (i.e. those that have PV drivers) to be
-migrated without their co-operation it will be necessary to transfer 'PV'
-state such as event channel state, grant entry state, etc.
+... in the save/restore code.
 
-Currently there is a framework (entered via the hvm_save/load() functions)
-that allows a domain's 'HVM' (architectural) state to be transferred but
-'PV' state is also common with pure PV guests and so this framework is not
-really suitable.
+This patch replaces direct mapping of the shared_info_frame (retrieved
+using XEN_DOMCTL_getdomaininfo) with save/load of the domain context
+SHARED_INFO record.
 
-This patch adds the new public header and low level implementation of a new
-common framework, entered via the domain_save/load() functions. Subsequent
-patches will introduce other parts of the framework, and code that will
-make use of it within the current version of the libxc migration stream.
-
-This patch also marks the HVM-only framework as deprecated in favour of the
-new framework.
+No modifications are made to the definition of the migration stream at
+this point. Subsequent patches will define a record in the libxc domain
+image format for passing domain context and convert the save/restore code
+to use that.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Acked-by: Julien Grall <julien@xen.org>
 ---
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
 Cc: Wei Liu <wl@xen.org>
-Cc: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Cc: "Roger Pau Monné" <roger.pau@citrix.com>
+
+NOTE: Ian requested ack from Andrew
+
+v5:
+ - Added BUILD_BUG_ON() in write_shared_info() to ensure copied data is not
+   bigger than the record buffer
 
 v4:
- - Addressed further comments from Jan
+ - write_shared_info() now needs to allocate the record data since the
+   shared info buffer is smaller than PAGE_SIZE
 
 v3:
- - Addressed comments from Julien and Jan
- - Save handlers no longer need to state entry length up-front
- - Save handlers expected to deal with multiple instances internally
- - Entries are now auto-padded to 8 byte boundary
+ - Moved basic get/set domain context functions to common code
 
 v2:
- - Allow multi-stage save/load to avoid the need to double-buffer
- - Get rid of the masks and add an 'ignore' flag instead
- - Create copy function union to preserve const save buffer
- - Deprecate HVM-only framework
+ - Re-based (now making use of DOMAIN_SAVE_FLAG_IGNORE)
 ---
- xen/common/Makefile                    |   1 +
- xen/common/save.c                      | 314 +++++++++++++++++++++++++
- xen/include/public/arch-arm/hvm/save.h |   5 +
- xen/include/public/arch-x86/hvm/save.h |   5 +
- xen/include/public/save.h              |  89 +++++++
- xen/include/xen/save.h                 | 170 +++++++++++++
- 6 files changed, 584 insertions(+)
- create mode 100644 xen/common/save.c
- create mode 100644 xen/include/public/save.h
- create mode 100644 xen/include/xen/save.h
+ tools/libxc/xc_sr_common.c         | 67 +++++++++++++++++++++++++++
+ tools/libxc/xc_sr_common.h         | 11 ++++-
+ tools/libxc/xc_sr_common_x86_pv.c  | 74 ++++++++++++++++++++++++++++++
+ tools/libxc/xc_sr_common_x86_pv.h  |  3 ++
+ tools/libxc/xc_sr_restore_x86_pv.c | 26 ++++-------
+ tools/libxc/xc_sr_save_x86_pv.c    | 44 ++++++++----------
+ tools/libxc/xg_save_restore.h      |  1 +
+ 7 files changed, 182 insertions(+), 44 deletions(-)
 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index e8cde65370..90553ba5d7 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -37,6 +37,7 @@ obj-y += radix-tree.o
- obj-y += rbtree.o
- obj-y += rcupdate.o
- obj-y += rwlock.o
-+obj-y += save.o
- obj-y += shutdown.o
- obj-y += softirq.o
- obj-y += sort.o
-diff --git a/xen/common/save.c b/xen/common/save.c
-new file mode 100644
-index 0000000000..f7b815b5ef
---- /dev/null
-+++ b/xen/common/save.c
-@@ -0,0 +1,314 @@
-+/*
-+ * save.c: Save and restore PV guest state common to all domain types.
-+ *
-+ * Copyright Amazon.com Inc. or its affiliates.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program; If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#include <xen/compile.h>
-+#include <xen/save.h>
-+
-+struct domain_context {
-+    struct domain *domain;
-+    const char *name; /* for logging purposes */
-+    struct domain_save_descriptor desc;
-+    size_t len; /* for internal accounting */
-+    union {
-+        const struct domain_save_ops *save;
-+        const struct domain_load_ops *load;
-+    } ops;
-+    void *priv;
-+};
-+
-+static struct {
-+    const char *name;
-+    domain_save_handler save;
-+    domain_load_handler load;
-+} handlers[DOMAIN_SAVE_CODE_MAX + 1];
-+
-+void __init domain_register_save_type(unsigned int typecode,
-+                                      const char *name,
-+                                      domain_save_handler save,
-+                                      domain_load_handler load)
+diff --git a/tools/libxc/xc_sr_common.c b/tools/libxc/xc_sr_common.c
+index dd9a11b4b5..1acb3765aa 100644
+--- a/tools/libxc/xc_sr_common.c
++++ b/tools/libxc/xc_sr_common.c
+@@ -138,6 +138,73 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec)
+     return 0;
+ };
+ 
++int get_domain_context(struct xc_sr_context *ctx)
 +{
-+    BUG_ON(typecode >= ARRAY_SIZE(handlers));
-+
-+    ASSERT(!handlers[typecode].save);
-+    ASSERT(!handlers[typecode].load);
-+
-+    handlers[typecode].name = name;
-+    handlers[typecode].save = save;
-+    handlers[typecode].load = load;
-+}
-+
-+int domain_save_begin(struct domain_context *c, unsigned int typecode,
-+                      unsigned int instance)
-+{
++    xc_interface *xch = ctx->xch;
++    size_t len = 0;
 +    int rc;
 +
-+    if ( typecode != c->desc.typecode )
++    if ( ctx->domain_context.buffer )
 +    {
-+        ASSERT_UNREACHABLE();
-+        return -EINVAL;
++        ERROR("Domain context already present");
++        return -1;
 +    }
-+    ASSERT(!c->desc.length); /* Should always be zero during domain_save() */
-+    ASSERT(!c->len); /* Verify domain_save_end() was called */
 +
-+    rc = c->ops.save->begin(c->priv, &c->desc);
-+    if ( rc )
-+        return rc;
++    rc = xc_domain_getcontext(xch, ctx->domid, NULL, &len);
++    if ( rc < 0 )
++    {
++        PERROR("Unable to get size of domain context");
++        return -1;
++    }
++
++    ctx->domain_context.buffer = malloc(len);
++    if ( !ctx->domain_context.buffer )
++    {
++        PERROR("Unable to allocate memory for domain context");
++        return -1;
++    }
++
++    rc = xc_domain_getcontext(xch, ctx->domid, ctx->domain_context.buffer,
++                              &len);
++    if ( rc < 0 )
++    {
++        PERROR("Unable to get domain context");
++        return -1;
++    }
++
++    ctx->domain_context.len = len;
 +
 +    return 0;
 +}
 +
-+int domain_save_data(struct domain_context *c, const void *src, size_t len)
++int set_domain_context(struct xc_sr_context *ctx)
 +{
-+    int rc = c->ops.save->append(c->priv, src, len);
-+
-+    if ( !rc )
-+        c->len += len;
-+
-+    return rc;
-+}
-+
-+#define DOMAIN_SAVE_ALIGN 8
-+
-+int domain_save_end(struct domain_context *c)
-+{
-+    struct domain *d = c->domain;
-+    size_t len = ROUNDUP(c->len, DOMAIN_SAVE_ALIGN) - c->len; /* padding */
++    xc_interface *xch = ctx->xch;
 +    int rc;
 +
-+    if ( len )
++    if ( !ctx->domain_context.buffer )
 +    {
-+        static const uint8_t pad[DOMAIN_SAVE_ALIGN] = {};
-+
-+        rc = domain_save_data(c, pad, len);
-+
-+        if ( rc )
-+            return rc;
-+    }
-+    ASSERT(IS_ALIGNED(c->len, DOMAIN_SAVE_ALIGN));
-+
-+    if ( c->name )
-+        gdprintk(XENLOG_INFO, "%pd save: %s[%u] +%zu (-%zu)\n", d, c->name,
-+                 c->desc.instance, c->len, len);
-+
-+    rc = c->ops.save->end(c->priv, c->len);
-+    c->len = 0;
-+
-+    return rc;
-+}
-+
-+int domain_save(struct domain *d, const struct domain_save_ops *ops,
-+                void *priv, bool dry_run)
-+{
-+    struct domain_context c = {
-+        .domain = d,
-+        .ops.save = ops,
-+        .priv = priv,
-+    };
-+    static const struct domain_save_header h = {
-+        .magic = DOMAIN_SAVE_MAGIC,
-+        .xen_major = XEN_VERSION,
-+        .xen_minor = XEN_SUBVERSION,
-+        .version = DOMAIN_SAVE_VERSION,
-+    };
-+    const struct domain_save_end e = {};
-+    unsigned int i;
-+    int rc;
-+
-+    ASSERT(d != current->domain);
-+    domain_pause(d);
-+
-+    c.name = !dry_run ? "HEADER" : NULL;
-+    c.desc.typecode = DOMAIN_SAVE_CODE(HEADER);
-+
-+    rc = DOMAIN_SAVE_ENTRY(HEADER, &c, 0, &h, sizeof(h));
-+    if ( rc )
-+        goto out;
-+
-+    for ( i = 0; i < ARRAY_SIZE(handlers); i++ )
-+    {
-+        domain_save_handler save = handlers[i].save;
-+
-+        if ( !save )
-+            continue;
-+
-+        c.name = !dry_run ? handlers[i].name : NULL;
-+        memset(&c.desc, 0, sizeof(c.desc));
-+        c.desc.typecode = i;
-+
-+        rc = save(d, &c, dry_run);
-+        if ( rc )
-+            goto out;
++        ERROR("Domain context not present");
++        return -1;
 +    }
 +
-+    c.name = !dry_run ? "END" : NULL;
-+    memset(&c.desc, 0, sizeof(c.desc));
-+    c.desc.typecode = DOMAIN_SAVE_CODE(END);
++    rc = xc_domain_setcontext(xch, ctx->domid, ctx->domain_context.buffer,
++                              ctx->domain_context.len);
 +
-+    rc = DOMAIN_SAVE_ENTRY(END, &c, 0, &e, sizeof(e));
-+
-+ out:
-+    domain_unpause(d);
-+
-+    return rc;
-+}
-+
-+int domain_load_begin(struct domain_context *c, unsigned int typecode,
-+                      unsigned int *instance)
-+{
-+    if ( typecode != c->desc.typecode )
++    if ( rc < 0 )
 +    {
-+        ASSERT_UNREACHABLE();
-+        return -EINVAL;
-+    }
-+
-+    ASSERT(!c->len); /* Verify domain_load_end() was called */
-+
-+    *instance = c->desc.instance;
-+
-+    return 0;
-+}
-+
-+int domain_load_data(struct domain_context *c, void *dst, size_t len)
-+{
-+    size_t copy_len = min_t(size_t, len, c->desc.length - c->len);
-+    int rc;
-+
-+    c->len += copy_len;
-+    ASSERT(c->len <= c->desc.length);
-+
-+    rc = copy_len ? c->ops.load->read(c->priv, dst, copy_len) : 0;
-+    if ( rc )
-+        return rc;
-+
-+    /* Zero extend if the entry is exhausted */
-+    len -= copy_len;
-+    if ( len )
-+    {
-+        dst += copy_len;
-+        memset(dst, 0, len);
++        PERROR("Unable to set domain context");
++        return -1;
 +    }
 +
 +    return 0;
 +}
 +
-+int domain_load_end(struct domain_context *c)
++void common_cleanup(struct xc_sr_context *ctx)
 +{
-+    struct domain *d = c->domain;
-+    size_t len = c->desc.length - c->len;
-+
-+    while ( c->len != c->desc.length ) /* unconsumed data or pad */
-+    {
-+        uint8_t pad;
-+        int rc = domain_load_data(c, &pad, sizeof(pad));
-+
-+        if ( rc )
-+            return rc;
-+
-+        if ( pad )
-+            return -EINVAL;
-+    }
-+
-+    gdprintk(XENLOG_INFO, "%pd load: %s[%u] +%zu (-%zu)\n", d, c->name,
-+             c->desc.instance, c->len, len);
-+
-+    c->len = 0;
-+
-+    return 0;
++    free(ctx->domain_context.buffer);
 +}
 +
-+int domain_load(struct domain *d, const struct domain_load_ops *ops,
-+                void *priv)
+ static void __attribute__((unused)) build_assertions(void)
+ {
+     BUILD_BUG_ON(sizeof(struct xc_sr_ihdr) != 24);
+diff --git a/tools/libxc/xc_sr_common.h b/tools/libxc/xc_sr_common.h
+index 5dd51ccb15..0d61978b08 100644
+--- a/tools/libxc/xc_sr_common.h
++++ b/tools/libxc/xc_sr_common.h
+@@ -208,6 +208,11 @@ struct xc_sr_context
+ 
+     xc_dominfo_t dominfo;
+ 
++    struct {
++        void *buffer;
++        unsigned int len;
++    } domain_context;
++
+     union /* Common save or restore data. */
+     {
+         struct /* Save data. */
+@@ -314,7 +319,7 @@ struct xc_sr_context
+                 /* The guest pfns containing the p2m leaves */
+                 xen_pfn_t *p2m_pfns;
+ 
+-                /* Read-only mapping of guests shared info page */
++                /* Pointer to shared_info (located in context buffer) */
+                 shared_info_any_t *shinfo;
+ 
+                 /* p2m generation count for verifying validity of local p2m. */
+@@ -425,6 +430,10 @@ int read_record(struct xc_sr_context *ctx, int fd, struct xc_sr_record *rec);
+ int populate_pfns(struct xc_sr_context *ctx, unsigned int count,
+                   const xen_pfn_t *original_pfns, const uint32_t *types);
+ 
++int get_domain_context(struct xc_sr_context *ctx);
++int set_domain_context(struct xc_sr_context *ctx);
++void common_cleanup(struct xc_sr_context *ctx);
++
+ #endif
+ /*
+  * Local variables:
+diff --git a/tools/libxc/xc_sr_common_x86_pv.c b/tools/libxc/xc_sr_common_x86_pv.c
+index d3d425cb82..69d9b142b8 100644
+--- a/tools/libxc/xc_sr_common_x86_pv.c
++++ b/tools/libxc/xc_sr_common_x86_pv.c
+@@ -182,6 +182,80 @@ int x86_pv_map_m2p(struct xc_sr_context *ctx)
+     return rc;
+ }
+ 
++int x86_pv_get_shinfo(struct xc_sr_context *ctx)
 +{
-+    struct domain_context c = {
-+        .domain = d,
-+        .ops.load = ops,
-+        .priv = priv,
-+    };
-+    unsigned int instance;
-+    struct domain_save_header h;
++    xc_interface *xch = ctx->xch;
++    unsigned int off = 0;
 +    int rc;
 +
-+    ASSERT(d != current->domain);
++#define GET_PTR(_x)                                                         \
++    do {                                                                    \
++        if ( ctx->domain_context.len - off < sizeof(*(_x)) )                \
++        {                                                                   \
++            ERROR("Need another %lu bytes of context, only %u available\n", \
++                  sizeof(*(_x)), ctx->domain_context.len - off);            \
++            return -1;                                                      \
++        }                                                                   \
++        (_x) = ctx->domain_context.buffer + off;                            \
++    } while (false);
 +
-+    rc = c.ops.load->read(c.priv, &c.desc, sizeof(c.desc));
++    rc = get_domain_context(ctx);
 +    if ( rc )
 +        return rc;
 +
-+    c.name = "HEADER";
-+
-+    rc = DOMAIN_LOAD_ENTRY(HEADER, &c, &instance, &h, sizeof(h));
-+    if ( rc )
-+        return rc;
-+
-+    if ( instance || h.magic != DOMAIN_SAVE_MAGIC ||
-+         h.version != DOMAIN_SAVE_VERSION )
-+        return -EINVAL;
-+
-+    domain_pause(d);
-+
-+    for (;;)
++    for ( ; ; )
 +    {
-+        unsigned int i;
-+        domain_load_handler load;
++        struct domain_save_descriptor *desc;
 +
-+        rc = c.ops.load->read(c.priv, &c.desc, sizeof(c.desc));
-+        if ( rc )
-+            return rc;
++        GET_PTR(desc);
 +
-+        rc = -EINVAL;
++        off += sizeof(*desc);
 +
-+        if ( c.desc.typecode == DOMAIN_SAVE_CODE(END) )
++        switch (desc->typecode)
 +        {
-+            struct domain_save_end e;
++        case DOMAIN_SAVE_CODE(SHARED_INFO):
++        {
++            DOMAIN_SAVE_TYPE(SHARED_INFO) *s;
 +
-+            c.name = "END";
++            GET_PTR(s);
 +
-+            rc = DOMAIN_LOAD_ENTRY(END, &c, &instance, &e, sizeof(e));
-+
-+            if ( instance )
-+                return -EINVAL;
-+
++            ctx->x86.pv.shinfo = (shared_info_any_t *)s->buffer;
++            break;
++        }
++        default:
 +            break;
 +        }
 +
-+        i = c.desc.typecode;
-+        if ( i >= ARRAY_SIZE(handlers) )
++        if ( desc->typecode == DOMAIN_SAVE_CODE(END) )
 +            break;
 +
-+        c.name = handlers[i].name;
-+        load = handlers[i].load;
-+
-+        rc = load ? load(d, &c) : -EOPNOTSUPP;
-+        if ( rc )
-+            break;
++        off += desc->length;
 +    }
 +
-+    domain_unpause(d);
++    if ( !ctx->x86.pv.shinfo )
++    {
++        ERROR("Failed to get SHARED_INFO\n");
++        return -1;
++    }
 +
-+    return rc;
++    return 0;
++
++#undef GET_PTR
 +}
 +
-+/*
-+ * Local variables:
-+ * mode: C
-+ * c-file-style: "BSD"
-+ * c-basic-offset: 4
-+ * tab-width: 4
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/include/public/arch-arm/hvm/save.h b/xen/include/public/arch-arm/hvm/save.h
-index 75b8e65bcb..d5b0c15203 100644
---- a/xen/include/public/arch-arm/hvm/save.h
-+++ b/xen/include/public/arch-arm/hvm/save.h
-@@ -26,6 +26,11 @@
- #ifndef __XEN_PUBLIC_HVM_SAVE_ARM_H__
- #define __XEN_PUBLIC_HVM_SAVE_ARM_H__
++int x86_pv_set_shinfo(struct xc_sr_context *ctx)
++{
++    xc_interface *xch = ctx->xch;
++
++    if ( !ctx->x86.pv.shinfo )
++    {
++        ERROR("SHARED_INFO buffer not present\n");
++        return -1;
++    }
++
++    return set_domain_context(ctx);
++}
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/tools/libxc/xc_sr_common_x86_pv.h b/tools/libxc/xc_sr_common_x86_pv.h
+index 2ed03309af..01442f48fb 100644
+--- a/tools/libxc/xc_sr_common_x86_pv.h
++++ b/tools/libxc/xc_sr_common_x86_pv.h
+@@ -97,6 +97,9 @@ int x86_pv_domain_info(struct xc_sr_context *ctx);
+  */
+ int x86_pv_map_m2p(struct xc_sr_context *ctx);
  
-+/*
-+ * Further use of HVM state is deprecated. New state records should only
-+ * be added to the domain state header: public/save.h
-+ */
++int x86_pv_get_shinfo(struct xc_sr_context *ctx);
++int x86_pv_set_shinfo(struct xc_sr_context *ctx);
 +
  #endif
- 
  /*
-diff --git a/xen/include/public/arch-x86/hvm/save.h b/xen/include/public/arch-x86/hvm/save.h
-index 773a380bc2..e61e2dbcd7 100644
---- a/xen/include/public/arch-x86/hvm/save.h
-+++ b/xen/include/public/arch-x86/hvm/save.h
-@@ -648,6 +648,11 @@ struct hvm_msr {
+  * Local variables:
+diff --git a/tools/libxc/xc_sr_restore_x86_pv.c b/tools/libxc/xc_sr_restore_x86_pv.c
+index 904ccc462a..21982a38ad 100644
+--- a/tools/libxc/xc_sr_restore_x86_pv.c
++++ b/tools/libxc/xc_sr_restore_x86_pv.c
+@@ -865,7 +865,7 @@ static int handle_shared_info(struct xc_sr_context *ctx,
+     xc_interface *xch = ctx->xch;
+     unsigned int i;
+     int rc = -1;
+-    shared_info_any_t *guest_shinfo = NULL;
++    shared_info_any_t *guest_shinfo;
+     const shared_info_any_t *old_shinfo = rec->data;
+ 
+     if ( !ctx->x86.pv.restore.seen_pv_info )
+@@ -878,18 +878,14 @@ static int handle_shared_info(struct xc_sr_context *ctx,
+     {
+         ERROR("X86_PV_SHARED_INFO record wrong size: length %u"
+               ", expected 4096", rec->length);
+-        goto err;
++        return -1;
+     }
+ 
+-    guest_shinfo = xc_map_foreign_range(
+-        xch, ctx->domid, PAGE_SIZE, PROT_READ | PROT_WRITE,
+-        ctx->dominfo.shared_info_frame);
+-    if ( !guest_shinfo )
+-    {
+-        PERROR("Failed to map Shared Info at mfn %#lx",
+-               ctx->dominfo.shared_info_frame);
+-        goto err;
+-    }
++    rc = x86_pv_get_shinfo(ctx);
++    if ( rc )
++        return rc;
++
++    guest_shinfo = ctx->x86.pv.shinfo;
+ 
+     MEMCPY_FIELD(guest_shinfo, old_shinfo, vcpu_info, ctx->x86.pv.width);
+     MEMCPY_FIELD(guest_shinfo, old_shinfo, arch, ctx->x86.pv.width);
+@@ -904,13 +900,7 @@ static int handle_shared_info(struct xc_sr_context *ctx,
+ 
+     MEMSET_ARRAY_FIELD(guest_shinfo, evtchn_mask, 0xff, ctx->x86.pv.width);
+ 
+-    rc = 0;
+-
+- err:
+-    if ( guest_shinfo )
+-        munmap(guest_shinfo, PAGE_SIZE);
+-
+-    return rc;
++    return x86_pv_set_shinfo(ctx);
+ }
+ 
+ /* restore_ops function. */
+diff --git a/tools/libxc/xc_sr_save_x86_pv.c b/tools/libxc/xc_sr_save_x86_pv.c
+index f3ccf5bb4b..fdd172b639 100644
+--- a/tools/libxc/xc_sr_save_x86_pv.c
++++ b/tools/libxc/xc_sr_save_x86_pv.c
+@@ -9,25 +9,6 @@ static inline bool is_canonical_address(xen_vaddr_t vaddr)
+     return ((int64_t)vaddr >> 47) == ((int64_t)vaddr >> 63);
+ }
+ 
+-/*
+- * Maps the guests shared info page.
+- */
+-static int map_shinfo(struct xc_sr_context *ctx)
+-{
+-    xc_interface *xch = ctx->xch;
+-
+-    ctx->x86.pv.shinfo = xc_map_foreign_range(
+-        xch, ctx->domid, PAGE_SIZE, PROT_READ, ctx->dominfo.shared_info_frame);
+-    if ( !ctx->x86.pv.shinfo )
+-    {
+-        PERROR("Failed to map shared info frame at mfn %#lx",
+-               ctx->dominfo.shared_info_frame);
+-        return -1;
+-    }
+-
+-    return 0;
+-}
+-
+ /*
+  * Copy a list of mfns from a guest, accounting for differences between guest
+  * and toolstack width.  Can fail if truncation would occur.
+@@ -854,13 +835,27 @@ static int write_x86_pv_p2m_frames(struct xc_sr_context *ctx)
   */
- #define HVM_SAVE_CODE_MAX 20
+ static int write_shared_info(struct xc_sr_context *ctx)
+ {
++    xc_interface *xch = ctx->xch;
+     struct xc_sr_record rec = {
+         .type = REC_TYPE_SHARED_INFO,
+         .length = PAGE_SIZE,
+-        .data = ctx->x86.pv.shinfo,
+     };
++    int rc;
  
-+/*
-+ * Further use of HVM state is deprecated. New state records should only
-+ * be added to the domain state header: public/save.h
-+ */
+-    return write_record(ctx, &rec);
++    if ( !(rec.data = calloc(1, PAGE_SIZE)) )
++    {
++        ERROR("Cannot allocate buffer for SHARED_INFO data");
++        return -1;
++    }
 +
- #endif /* __XEN_PUBLIC_HVM_SAVE_X86_H__ */
++    BUILD_BUG_ON(sizeof(*ctx->x86.pv.shinfo) > PAGE_SIZE);
++    memcpy(rec.data, ctx->x86.pv.shinfo, sizeof(*ctx->x86.pv.shinfo));
++
++    rc = write_record(ctx, &rec);
++
++    free(rec.data);
++
++    return rc;
+ }
  
  /*
-diff --git a/xen/include/public/save.h b/xen/include/public/save.h
-new file mode 100644
-index 0000000000..551dbbddb8
---- /dev/null
-+++ b/xen/include/public/save.h
-@@ -0,0 +1,89 @@
-+/*
-+ * save.h
-+ *
-+ * Structure definitions for common PV/HVM domain state that is held by
-+ * Xen and must be saved along with the domain's memory.
-+ *
-+ * Copyright Amazon.com Inc. or its affiliates.
-+ *
-+ * Permission is hereby granted, free of charge, to any person obtaining a copy
-+ * of this software and associated documentation files (the "Software"), to
-+ * deal in the Software without restriction, including without limitation the
-+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
-+ * sell copies of the Software, and to permit persons to whom the Software is
-+ * furnished to do so, subject to the following conditions:
-+ *
-+ * The above copyright notice and this permission notice shall be included in
-+ * all copies or substantial portions of the Software.
-+ *
-+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-+ * DEALINGS IN THE SOFTWARE.
-+ */
+@@ -1041,7 +1036,7 @@ static int x86_pv_setup(struct xc_sr_context *ctx)
+     if ( rc )
+         return rc;
+ 
+-    rc = map_shinfo(ctx);
++    rc = x86_pv_get_shinfo(ctx);
+     if ( rc )
+         return rc;
+ 
+@@ -1112,12 +1107,11 @@ static int x86_pv_cleanup(struct xc_sr_context *ctx)
+     if ( ctx->x86.pv.p2m )
+         munmap(ctx->x86.pv.p2m, ctx->x86.pv.p2m_frames * PAGE_SIZE);
+ 
+-    if ( ctx->x86.pv.shinfo )
+-        munmap(ctx->x86.pv.shinfo, PAGE_SIZE);
+-
+     if ( ctx->x86.pv.m2p )
+         munmap(ctx->x86.pv.m2p, ctx->x86.pv.nr_m2p_frames * PAGE_SIZE);
+ 
++    common_cleanup(ctx);
 +
-+#ifndef XEN_PUBLIC_SAVE_H
-+#define XEN_PUBLIC_SAVE_H
-+
-+#if defined(__XEN__) || defined(__XEN_TOOLS__)
-+
-+#include "xen.h"
-+
-+/* Entry data is preceded by a descriptor */
-+struct domain_save_descriptor {
-+    uint16_t typecode;
-+
-+    /*
-+     * Instance number of the entry (since there may be multiple of some
-+     * types of entries).
-+     */
-+    uint16_t instance;
-+
-+    /* Entry length not including this descriptor */
-+    uint32_t length;
-+};
-+
-+/*
-+ * Each entry has a type associated with it. DECLARE_DOMAIN_SAVE_TYPE
-+ * binds these things together, although it is not intended that the
-+ * resulting type is ever instantiated.
-+ */
-+#define DECLARE_DOMAIN_SAVE_TYPE(_x, _code, _type) \
-+    struct DOMAIN_SAVE_TYPE_##_x { char c[_code]; _type t; };
-+
-+#define DOMAIN_SAVE_CODE(_x) \
-+    (sizeof(((struct DOMAIN_SAVE_TYPE_##_x *)0)->c))
-+#define DOMAIN_SAVE_TYPE(_x) \
-+    typeof(((struct DOMAIN_SAVE_TYPE_##_x *)0)->t)
-+
-+/*
-+ * All entries will be zero-padded to the next 64-bit boundary when saved,
-+ * so there is no need to include trailing pad fields in structure
-+ * definitions.
-+ * When loading, entries will be zero-extended if the load handler reads
-+ * beyond the length specified in the descriptor.
-+ */
-+
-+/* Terminating entry */
-+struct domain_save_end {};
-+DECLARE_DOMAIN_SAVE_TYPE(END, 0, struct domain_save_end);
-+
-+#define DOMAIN_SAVE_MAGIC   0x53415645
-+#define DOMAIN_SAVE_VERSION 0x00000001
-+
-+/* Initial entry */
-+struct domain_save_header {
-+    uint32_t magic;                /* Must be DOMAIN_SAVE_MAGIC */
-+    uint16_t xen_major, xen_minor; /* Xen version */
-+    uint32_t version;              /* Save format version */
-+};
-+DECLARE_DOMAIN_SAVE_TYPE(HEADER, 1, struct domain_save_header);
-+
-+#define DOMAIN_SAVE_CODE_MAX 1
-+
-+#endif /* defined(__XEN__) || defined(__XEN_TOOLS__) */
-+
-+#endif /* XEN_PUBLIC_SAVE_H */
-diff --git a/xen/include/xen/save.h b/xen/include/xen/save.h
-new file mode 100644
-index 0000000000..f2e58bafef
---- /dev/null
-+++ b/xen/include/xen/save.h
-@@ -0,0 +1,170 @@
-+/*
-+ * save.h: support routines for save/restore
-+ *
-+ * Copyright Amazon.com Inc. or its affiliates.
-+ *
-+ * This program is free software; you can redistribute it and/or modify it
-+ * under the terms and conditions of the GNU General Public License,
-+ * version 2, as published by the Free Software Foundation.
-+ *
-+ * This program is distributed in the hope it will be useful, but WITHOUT
-+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-+ * more details.
-+ *
-+ * You should have received a copy of the GNU General Public License along with
-+ * this program; If not, see <http://www.gnu.org/licenses/>.
-+ */
-+
-+#ifndef XEN_SAVE_H
-+#define XEN_SAVE_H
-+
-+#include <xen/init.h>
-+#include <xen/sched.h>
-+#include <xen/types.h>
-+
-+#include <public/save.h>
-+
-+struct domain_context;
-+
-+int domain_save_begin(struct domain_context *c, unsigned int typecode,
-+                      unsigned int instance);
-+
-+#define DOMAIN_SAVE_BEGIN(x, c, i) \
-+    domain_save_begin((c), DOMAIN_SAVE_CODE(x), (i))
-+
-+int domain_save_data(struct domain_context *c, const void *data, size_t len);
-+int domain_save_end(struct domain_context *c);
-+
-+static inline int domain_save_entry(struct domain_context *c,
-+                                    unsigned int typecode,
-+                                    unsigned int instance, const void *src,
-+                                    size_t len)
-+{
-+    int rc;
-+
-+    rc = domain_save_begin(c, typecode, instance);
-+    if ( rc )
-+        return rc;
-+
-+    rc = domain_save_data(c, src, len);
-+    if ( rc )
-+        return rc;
-+
-+    return domain_save_end(c);
-+}
-+
-+#define DOMAIN_SAVE_ENTRY(x, c, i, s, l) \
-+    domain_save_entry((c), DOMAIN_SAVE_CODE(x), (i), (s), (l))
-+
-+int domain_load_begin(struct domain_context *c, unsigned int typecode,
-+                      unsigned int *instance);
-+
-+#define DOMAIN_LOAD_BEGIN(x, c, i) \
-+    domain_load_begin((c), DOMAIN_SAVE_CODE(x), (i))
-+
-+int domain_load_data(struct domain_context *c, void *data, size_t len);
-+int domain_load_end(struct domain_context *c);
-+
-+static inline int domain_load_entry(struct domain_context *c,
-+                                    unsigned int typecode,
-+                                    unsigned int *instance, void *dst,
-+                                    size_t len)
-+{
-+    int rc;
-+
-+    rc = domain_load_begin(c, typecode, instance);
-+    if ( rc )
-+        return rc;
-+
-+    rc = domain_load_data(c, dst, len);
-+    if ( rc )
-+        return rc;
-+
-+    return domain_load_end(c);
-+}
-+
-+#define DOMAIN_LOAD_ENTRY(x, c, i, d, l) \
-+    domain_load_entry((c), DOMAIN_SAVE_CODE(x), (i), (d), (l))
-+
-+/*
-+ * The 'dry_run' flag indicates that the caller of domain_save() (see below)
-+ * is not trying to actually acquire the data, only the size of the data.
-+ * The save handler can therefore limit work to only that which is necessary
-+ * to call domain_save_data() the correct number of times with accurate values
-+ * for 'len'.
-+ */
-+typedef int (*domain_save_handler)(const struct domain *d,
-+                                   struct domain_context *c,
-+                                   bool dry_run);
-+typedef int (*domain_load_handler)(struct domain *d,
-+                                   struct domain_context *c);
-+
-+void domain_register_save_type(unsigned int typecode, const char *name,
-+                               domain_save_handler save,
-+                               domain_load_handler load);
-+
-+/*
-+ * Register save and load handlers.
-+ *
-+ * Save handlers will be invoked in an order which copes with any inter-
-+ * entry dependencies. For now this means that HEADER will come first and
-+ * END will come last, all others being invoked in order of 'typecode'.
-+ *
-+ * Load handlers will be invoked in the order of entries present in the
-+ * buffer.
-+ */
-+#define DOMAIN_REGISTER_SAVE_LOAD(x, s, l)                    \
-+    static int __init __domain_register_##x##_save_load(void) \
-+    {                                                         \
-+        domain_register_save_type(                            \
-+            DOMAIN_SAVE_CODE(x),                              \
-+            #x,                                               \
-+            &(s),                                             \
-+            &(l));                                            \
-+                                                              \
-+        return 0;                                             \
-+    }                                                         \
-+    __initcall(__domain_register_##x##_save_load);
-+
-+/* Callback functions */
-+struct domain_save_ops {
-+    /*
-+     * Begin a new entry with the given descriptor (only type and instance
-+     * are valid).
-+     */
-+    int (*begin)(void *priv, const struct domain_save_descriptor *desc);
-+    /* Append data/padding to the buffer */
-+    int (*append)(void *priv, const void *data, size_t len);
-+    /*
-+     * Complete the entry by updating the descriptor with the total
-+     * length of the appended data (not including padding).
-+     */
-+    int (*end)(void *priv, size_t len);
-+};
-+
-+struct domain_load_ops {
-+    /* Read data/padding from the buffer */
-+    int (*read)(void *priv, void *data, size_t len);
-+};
-+
-+/*
-+ * Entry points:
-+ *
-+ * ops:     These are callback functions provided by the caller that will
-+ *          be used to write to (in the save case) or read from (in the
-+ *          load case) the context buffer. See above for more detail.
-+ * priv:    This is a pointer that will be passed to the copy function to
-+ *          allow it to identify the context buffer and the current state
-+ *          of the save or load operation.
-+ * dry_run: If this is set then the caller of domain_save() is only trying
-+ *          to acquire the total size of the data, not the data itself.
-+ *          In this case the caller may supply different ops to avoid doing
-+ *          unnecessary work.
-+ */
-+int domain_save(struct domain *d, const struct domain_save_ops *ops,
-+                void *priv, bool dry_run);
-+int domain_load(struct domain *d, const struct domain_load_ops *ops,
-+                void *priv);
-+
-+#endif /* XEN_SAVE_H */
+     return 0;
+ }
+ 
+diff --git a/tools/libxc/xg_save_restore.h b/tools/libxc/xg_save_restore.h
+index 303081df0d..296b523963 100644
+--- a/tools/libxc/xg_save_restore.h
++++ b/tools/libxc/xg_save_restore.h
+@@ -19,6 +19,7 @@
+ 
+ #include <xen/foreign/x86_32.h>
+ #include <xen/foreign/x86_64.h>
++#include <xen/save.h>
+ 
+ /*
+ ** We process save/restore/migrate in batches of pages; the below
 -- 
 2.20.1
 
