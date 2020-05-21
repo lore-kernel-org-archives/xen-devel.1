@@ -2,57 +2,61 @@ Return-Path: <SRS0=0mHu=7D=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19657C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 10:26:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 55D56C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 10:26:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DD67C20721
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 10:26:51 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DD67C20721
+	by mail.kernel.org (Postfix) with ESMTPS id 30EC320721
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 10:26:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 30EC320721
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbiP8-00016T-DK; Thu, 21 May 2020 10:26:22 +0000
+	id 1jbiPW-000181-MZ; Thu, 21 May 2020 10:26:46 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2WPz=7D=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
- id 1jbiP7-00016O-Ug
- for xen-devel@lists.xenproject.org; Thu, 21 May 2020 10:26:21 +0000
-X-Inumbo-ID: 82eff54b-9b4d-11ea-aaee-12813bfff9fa
-Received: from ppsw-40.csi.cam.ac.uk (unknown [131.111.8.140])
+ <SRS0=S6UB=7D=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jbiPV-00017t-Kv
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2020 10:26:45 +0000
+X-Inumbo-ID: 9164d8f2-9b4d-11ea-aaee-12813bfff9fa
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 82eff54b-9b4d-11ea-aaee-12813bfff9fa;
- Thu, 21 May 2020 10:26:20 +0000 (UTC)
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from 88-109-182-220.dynamic.dsl.as9105.com ([88.109.182.220]:40636
- helo=[192.168.1.219])
- by ppsw-40.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.158]:465)
- with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- id 1jbiP2-000tJn-jr (Exim 4.92.3)
- (return-path <amc96@hermes.cam.ac.uk>); Thu, 21 May 2020 11:26:16 +0100
+ id 9164d8f2-9b4d-11ea-aaee-12813bfff9fa;
+ Thu, 21 May 2020 10:26:44 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: 75XxUCYNwSU5PDE8kjHRJJnoYPfbEYOuogidHwKMPh1e+DSLxqQMLlnJ33ExmqwJtdUTpMnj7N
+ qS3fxZWWqc2XRA5mQG7uyBglXqkij/rZPJk7zWali7ClFsZ0597tgpUul6jbFiVQBQsJIhIQi+
+ pwq+6IUjyDckFYlaVU1tuqUmOOCpGHKP3/7tbmEBOKu5BeIK9MxwGQW0NylCy8LsFzoxSyh+vJ
+ OUYgsoEApNquTyHh3VeGEa2ojkuEcZHGdxXtnY1aUZzXLk95Nzzij2kVMjrrVn3F6JhV8koWjQ
+ 0FI=
+X-SBRS: 2.7
+X-MesageID: 18785460
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,417,1583211600"; d="scan'208";a="18785460"
+Date: Thu, 21 May 2020 12:26:36 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
 Subject: Re: [PATCH] x86/shadow: Reposition sh_remove_write_access_from_sl1p()
-To: paul@xen.org, 'Xen-devel' <xen-devel@lists.xenproject.org>
+Message-ID: <20200521102636.GR54375@Air-de-Roger>
 References: <20200521090428.11425-1-andrew.cooper3@citrix.com>
- <003e01d62f58$66bbcea0$34336be0$@xen.org>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <3c829c7d-2a3f-0d15-ea77-3a88df57aaaa@citrix.com>
-Date: Thu, 21 May 2020 11:26:15 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <003e01d62f58$66bbcea0$34336be0$@xen.org>
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+In-Reply-To: <20200521090428.11425-1-andrew.cooper3@citrix.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,32 +67,70 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: 'Tim Deegan' <tim@xen.org>, 'Jan Beulich' <JBeulich@suse.com>,
- 'Wei Liu' <wl@xen.org>,
- =?UTF-8?B?J1JvZ2VyIFBhdSBNb25uw6kn?= <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Tim Deegan <tim@xen.org>,
+ Wei Liu <wl@xen.org>, Jan Beulich <JBeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 21/05/2020 11:12, Paul Durrant wrote:
->> -----Original Message-----
->> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Andrew Cooper
->> Sent: 21 May 2020 10:04
->> To: Xen-devel <xen-devel@lists.xenproject.org>
->> Cc: Andrew Cooper <andrew.cooper3@citrix.com>; Tim Deegan <tim@xen.org>; Wei Liu <wl@xen.org>; Jan
->> Beulich <JBeulich@suse.com>; Roger Pau Monné <roger.pau@citrix.com>
->> Subject: [PATCH] x86/shadow: Reposition sh_remove_write_access_from_sl1p()
->>
->> When compiling with SHOPT_OUT_OF_SYNC disabled, the build fails with:
->>
->>   common.c:41:12: error: ‘sh_remove_write_access_from_sl1p’ declared ‘static’ but never defined [-
->> Werror=unused-function]
->>    static int sh_remove_write_access_from_sl1p(struct domain *d, mfn_t gmfn,
->>               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->>
->> due to an unguarded forward declaration.
-> Is this, perhaps, an argument for making SHADOW_OPTIMIZATIONS tunable via Kconfig so that randconfig could catch things like this?
+On Thu, May 21, 2020 at 10:04:28AM +0100, Andrew Cooper wrote:
+> When compiling with SHOPT_OUT_OF_SYNC disabled, the build fails with:
+> 
+>   common.c:41:12: error: ‘sh_remove_write_access_from_sl1p’ declared ‘static’ but never defined [-Werror=unused-function]
+>    static int sh_remove_write_access_from_sl1p(struct domain *d, mfn_t gmfn,
+>               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> 
+> due to an unguarded forward declaration.
+> 
+> It turns out there is no need to forward declare
+> sh_remove_write_access_from_sl1p() to begin with, so move it to just ahead of
+> its first users, which is within a larger #ifdef'd SHOPT_OUT_OF_SYNC block.
+> 
+> Fix up for style while moving it.  No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Given enough TUITS, yes.
+Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
 
-~Andrew
+> ---
+> CC: Jan Beulich <JBeulich@suse.com>
+> CC: Wei Liu <wl@xen.org>
+> CC: Roger Pau Monné <roger.pau@citrix.com>
+> CC: Tim Deegan <tim@xen.org>
+> ---
+>  xen/arch/x86/mm/shadow/common.c | 56 ++++++++++++++++++-----------------------
+>  1 file changed, 25 insertions(+), 31 deletions(-)
+> 
+> diff --git a/xen/arch/x86/mm/shadow/common.c b/xen/arch/x86/mm/shadow/common.c
+> index 0ac3f880e1..6dff240e97 100644
+> --- a/xen/arch/x86/mm/shadow/common.c
+> +++ b/xen/arch/x86/mm/shadow/common.c
+> @@ -38,9 +38,6 @@
+>  #include <xen/numa.h>
+>  #include "private.h"
+>  
+> -static int sh_remove_write_access_from_sl1p(struct domain *d, mfn_t gmfn,
+> -                                            mfn_t smfn, unsigned long offset);
+> -
+>  DEFINE_PER_CPU(uint32_t,trace_shadow_path_flags);
+>  
+>  static int sh_enable_log_dirty(struct domain *, bool log_global);
+> @@ -252,6 +249,31 @@ static inline void _sh_resync_l1(struct vcpu *v, mfn_t gmfn, mfn_t snpmfn)
+>          SHADOW_INTERNAL_NAME(sh_resync_l1, 4)(v, gmfn, snpmfn);
+>  }
+>  
+> +static int sh_remove_write_access_from_sl1p(struct domain *d, mfn_t gmfn,
+> +                                            mfn_t smfn, unsigned long off)
+> +{
+> +    struct page_info *sp = mfn_to_page(smfn);
+> +
+> +    ASSERT(mfn_valid(smfn));
+> +    ASSERT(mfn_valid(gmfn));
+> +
+> +    if ( sp->u.sh.type == SH_type_l1_32_shadow ||
+> +         sp->u.sh.type == SH_type_fl1_32_shadow )
+
+Using a switch would also be nice IMO and would avoid some of the code
+churn.
+
+Thanks, Roger.
 
