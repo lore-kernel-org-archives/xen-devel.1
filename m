@@ -2,63 +2,65 @@ Return-Path: <SRS0=0mHu=7D=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FC4BC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1C33BC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id CF94A206B6
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:07 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id E100420748
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:16 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="nRFb7j9G"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org CF94A206B6
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="UYXK/EzL"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E100420748
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbnv6-0000th-2T; Thu, 21 May 2020 16:19:44 +0000
+	id 1jbnvG-0000wH-1M; Thu, 21 May 2020 16:19:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/yRJ=7D=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jbnv5-0000tZ-3P
- for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:19:43 +0000
-X-Inumbo-ID: e0a80282-9b7e-11ea-ae69-bc764e2007e4
+ id 1jbnvF-0000vc-2l
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:19:53 +0000
+X-Inumbo-ID: e39de952-9b7e-11ea-b9cf-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e0a80282-9b7e-11ea-ae69-bc764e2007e4;
- Thu, 21 May 2020 16:19:42 +0000 (UTC)
+ id e39de952-9b7e-11ea-b9cf-bc764e2007e4;
+ Thu, 21 May 2020 16:19:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
+ In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=aF3lgFMr/vmotaadmn736tS5L3slZKqVfZEiA8oxJlI=; b=nRFb7j9Gk59bhy5a/unLlltxIA
- dZz8TkvsTjpoWkSfUeBjor+jc0IHndhfhzcxa5YMI+tVJrC1yXF4Y7rPRC0xTTtiSkFOZYpSpf3KC
- m4inZfaPTZjKF6sL2i0wEILF40CkstlxAHklosdUCtvk/0VcaPzGask8E7wPnK33Rt/s=;
+ bh=gk5Uuo1wIab8QnJ+XZOG7n7mFLhPsfwOIEwveUEZ4oE=; b=UYXK/EzL0sRrOHyvc95H5YGi0v
+ vcb9hjMzg38FDiq8G2dwW7rtDLsVRsdC7otPj3M1pRl8BQwk0rbP8wADa8KXg+OHABTu6mq/HZJPk
+ s53wYp8jtYXUK7vprDdYGP4DjPwu9WcqpxxIohpJhEqK66JHkcR+elDKOV+M5jLSkqos=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jbnv4-0006nV-7s; Thu, 21 May 2020 16:19:42 +0000
+ id 1jbnv9-0006nh-7J; Thu, 21 May 2020 16:19:47 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=u2f063a87eabd5f.cbg10.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <paul@xen.org>)
- id 1jbnv3-00088L-Uf; Thu, 21 May 2020 16:19:42 +0000
+ id 1jbnv8-00088L-UP; Thu, 21 May 2020 16:19:47 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 0/5] domain context infrastructure
-Date: Thu, 21 May 2020 17:19:34 +0100
-Message-Id: <20200521161939.4508-1-paul@xen.org>
+Subject: [PATCH v5 3/5] tools/misc: add xen-domctx to present domain context
+Date: Thu, 21 May 2020 17:19:37 +0100
+Message-Id: <20200521161939.4508-4-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200521161939.4508-1-paul@xen.org>
+References: <20200521161939.4508-1-paul@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -70,50 +72,277 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Paul Durrant <pdurrant@amazon.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+This tool is analogous to 'xen-hvmctx' which presents HVM context.
+Subsequent patches will add 'dump' functions when new records are
+introduced.
 
-Paul Durrant (5):
-  xen/common: introduce a new framework for save/restore of 'domain'
-    context
-  xen/common/domctl: introduce XEN_DOMCTL_get/setdomaincontext
-  tools/misc: add xen-domctx to present domain context
-  common/domain: add a domain context record for shared_info...
-  tools/libxc: make use of domain context SHARED_INFO record...
+Signed-off-by: Paul Durrant <pdurrant@amazon.com>
+Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Wei Liu <wl@xen.org>
 
- .gitignore                             |   1 +
- tools/flask/policy/modules/xen.if      |   4 +-
- tools/libxc/include/xenctrl.h          |   5 +
- tools/libxc/xc_domain.c                |  56 +++++
- tools/libxc/xc_sr_common.c             |  67 ++++++
- tools/libxc/xc_sr_common.h             |  11 +-
- tools/libxc/xc_sr_common_x86_pv.c      |  74 ++++++
- tools/libxc/xc_sr_common_x86_pv.h      |   3 +
- tools/libxc/xc_sr_restore_x86_pv.c     |  26 +-
- tools/libxc/xc_sr_save_x86_pv.c        |  43 ++--
- tools/libxc/xg_save_restore.h          |   1 +
- tools/misc/Makefile                    |   4 +
- tools/misc/xen-domctx.c                | 278 ++++++++++++++++++++++
- xen/common/Makefile                    |   1 +
- xen/common/domain.c                    |  65 +++++
- xen/common/domctl.c                    | 173 ++++++++++++++
- xen/common/save.c                      | 314 +++++++++++++++++++++++++
- xen/include/public/arch-arm/hvm/save.h |   5 +
- xen/include/public/arch-x86/hvm/save.h |   5 +
- xen/include/public/domctl.h            |  41 ++++
- xen/include/public/save.h              | 100 ++++++++
- xen/include/xen/save.h                 | 170 +++++++++++++
- xen/xsm/flask/hooks.c                  |   6 +
- xen/xsm/flask/policy/access_vectors    |   4 +
- 24 files changed, 1411 insertions(+), 46 deletions(-)
+NOTE: Ian requested ack from Andrew
+
+v3:
+ - Re-worked to avoid copying onto stack
+ - Added optional typecode and instance arguments
+
+v2:
+ - Change name from 'xen-ctx' to 'xen-domctx'
+---
+ .gitignore              |   1 +
+ tools/misc/Makefile     |   4 +
+ tools/misc/xen-domctx.c | 200 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 205 insertions(+)
  create mode 100644 tools/misc/xen-domctx.c
- create mode 100644 xen/common/save.c
- create mode 100644 xen/include/public/save.h
- create mode 100644 xen/include/xen/save.h
 
+diff --git a/.gitignore b/.gitignore
+index 7418ce9829..6da3030f0d 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -209,6 +209,7 @@ tools/misc/xen_cpuperf
+ tools/misc/xen-cpuid
+ tools/misc/xen-detect
+ tools/misc/xen-diag
++tools/misc/xen-domctx
+ tools/misc/xen-tmem-list-parse
+ tools/misc/xen-livepatch
+ tools/misc/xenperf
+diff --git a/tools/misc/Makefile b/tools/misc/Makefile
+index 63947bfadc..ef25524354 100644
+--- a/tools/misc/Makefile
++++ b/tools/misc/Makefile
+@@ -30,6 +30,7 @@ INSTALL_SBIN                   += xenpm
+ INSTALL_SBIN                   += xenwatchdogd
+ INSTALL_SBIN                   += xen-livepatch
+ INSTALL_SBIN                   += xen-diag
++INSTALL_SBIN                   += xen-domctx
+ INSTALL_SBIN += $(INSTALL_SBIN-y)
+ 
+ # Everything to be installed in a private bin/
+@@ -108,6 +109,9 @@ xen-livepatch: xen-livepatch.o
+ xen-diag: xen-diag.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
+ 
++xen-domctx: xen-domctx.o
++	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenctrl) $(APPEND_LDFLAGS)
++
+ xen-lowmemd: xen-lowmemd.o
+ 	$(CC) $(LDFLAGS) -o $@ $< $(LDLIBS_libxenevtchn) $(LDLIBS_libxenctrl) $(LDLIBS_libxenstore) $(APPEND_LDFLAGS)
+ 
+diff --git a/tools/misc/xen-domctx.c b/tools/misc/xen-domctx.c
+new file mode 100644
+index 0000000000..243325dfce
+--- /dev/null
++++ b/tools/misc/xen-domctx.c
+@@ -0,0 +1,200 @@
++/*
++ * xen-domctx.c
++ *
++ * Print out domain save records in a human-readable way.
++ *
++ * Copyright Amazon.com Inc. or its affiliates.
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++
++#include <inttypes.h>
++#include <stdio.h>
++#include <stdlib.h>
++#include <string.h>
++#include <errno.h>
++
++#include <xenctrl.h>
++#include <xen/xen.h>
++#include <xen/domctl.h>
++#include <xen/save.h>
++
++static void *buf = NULL;
++static size_t len, off;
++
++#define GET_PTR(_x)                                                        \
++    do {                                                                   \
++        if ( len - off < sizeof(*(_x)) )                                   \
++        {                                                                  \
++            fprintf(stderr,                                                \
++                    "error: need another %lu bytes, only %lu available\n", \
++                    sizeof(*(_x)), len - off);                             \
++            exit(1);                                                       \
++        }                                                                  \
++        (_x) = buf + off;                                                  \
++    } while (false);
++
++static void dump_header(void)
++{
++    DOMAIN_SAVE_TYPE(HEADER) *h;
++
++    GET_PTR(h);
++
++    printf("    HEADER: magic %#x, version %u\n",
++           h->magic, h->version);
++
++}
++
++static void dump_end(void)
++{
++    DOMAIN_SAVE_TYPE(END) *e;
++
++    GET_PTR(e);
++
++    printf("    END\n");
++}
++
++static void usage(const char *prog)
++{
++    fprintf(stderr, "usage: %s <domid> [ <typecode> [ <instance> ]]\n",
++            prog);
++    exit(1);
++}
++
++int main(int argc, char **argv)
++{
++    char *s, *e;
++    long domid;
++    long typecode = -1;
++    long instance = -1;
++    unsigned int entry;
++    xc_interface *xch;
++    int rc;
++
++    if ( argc < 2 || argc > 4 )
++        usage(argv[0]);
++
++    s = e = argv[1];
++    domid = strtol(s, &e, 0);
++
++    if ( *s == '\0' || *e != '\0' ||
++         domid < 0 || domid >= DOMID_FIRST_RESERVED )
++    {
++        fprintf(stderr, "invalid domid '%s'\n", s);
++        exit(1);
++    }
++
++    if ( argc >= 3 )
++    {
++        s = e = argv[2];
++        typecode = strtol(s, &e, 0);
++
++        if ( *s == '\0' || *e != '\0' )
++        {
++            fprintf(stderr, "invalid typecode '%s'\n", s);
++            exit(1);
++        }
++    }
++
++    if ( argc == 4 )
++    {
++        s = e = argv[3];
++        instance = strtol(s, &e, 0);
++
++        if ( *s == '\0' || *e != '\0' )
++        {
++            fprintf(stderr, "invalid instance '%s'\n", s);
++            exit(1);
++        }
++    }
++
++    xch = xc_interface_open(0, 0, 0);
++    if ( !xch )
++    {
++        fprintf(stderr, "error: can't open libxc handle\n");
++        exit(1);
++    }
++
++    rc = xc_domain_getcontext(xch, domid, NULL, &len);
++    if ( rc < 0 )
++    {
++        fprintf(stderr, "error: can't get record length for dom %lu: %s\n",
++                domid, strerror(errno));
++        exit(1);
++    }
++
++    buf = malloc(len);
++    if ( !buf )
++    {
++        fprintf(stderr, "error: can't allocate %lu bytes\n", len);
++        exit(1);
++    }
++
++    rc = xc_domain_getcontext(xch, domid, buf, &len);
++    if ( rc < 0 )
++    {
++        fprintf(stderr, "error: can't get domain record for dom %lu: %s\n",
++                domid, strerror(errno));
++        exit(1);
++    }
++    off = 0;
++
++    entry = 0;
++    for ( ; ; )
++    {
++        struct domain_save_descriptor *desc;
++
++        GET_PTR(desc);
++
++        off += sizeof(*desc);
++
++        if ( (typecode < 0 || typecode == desc->typecode) &&
++             (instance < 0 || instance == desc->instance) )
++        {
++            printf("[%u] type: %u instance: %u length: %u\n", entry++,
++                   desc->typecode, desc->instance, desc->length);
++
++            switch (desc->typecode)
++            {
++            case DOMAIN_SAVE_CODE(HEADER): dump_header(); break;
++            case DOMAIN_SAVE_CODE(END): dump_end(); break;
++            default:
++                printf("Unknown type %u: skipping\n", desc->typecode);
++                break;
++            }
++        }
++
++        if ( desc->typecode == DOMAIN_SAVE_CODE(END) )
++            break;
++
++        off += desc->length;
++    }
++
++    return 0;
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
 -- 
 2.20.1
 
