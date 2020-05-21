@@ -2,67 +2,59 @@ Return-Path: <SRS0=0mHu=7D=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 19AEFC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2BE74C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:27:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C6395206C3
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="5Go9HNih"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6395206C3
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id E862120748
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:27:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E862120748
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbnvQ-0001Qf-KH; Thu, 21 May 2020 16:20:04 +0000
+	id 1jbo2j-0002LR-KP; Thu, 21 May 2020 16:27:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=/yRJ=7D=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jbnvP-0001DP-3j
- for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:20:03 +0000
-X-Inumbo-ID: e4ea68a8-9b7e-11ea-b9cf-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=2WPz=7D=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1jbo2i-0002LM-Sm
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:27:36 +0000
+X-Inumbo-ID: fac560aa-9b7f-11ea-9887-bc764e2007e4
+Received: from ppsw-31.csi.cam.ac.uk (unknown [131.111.8.131])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e4ea68a8-9b7e-11ea-b9cf-bc764e2007e4;
- Thu, 21 May 2020 16:19:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
- In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=/LS/E6IoF0MQgW42gOcJtVpnONoGSVfqwfRwEvxiDwc=; b=5Go9HNihDCxMPDKISozp/bPwXd
- bOYSDD1UcGPjly5CJX0D1Q10KHKtuXh6YDNajBkVYMGsZQvM7ZdrgpnHzywOc8+MdD2SnrJLxOqLm
- 8Jz41l/9biOMYzHObvpmDqLLwLsuzce145G/81elqBWI6MrQygYmUjL/UT3gcLNEibBk=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <paul@xen.org>)
- id 1jbnvA-0006nw-PB; Thu, 21 May 2020 16:19:48 +0000
-Received: from 54-240-197-224.amazon.com ([54.240.197.224]
- helo=u2f063a87eabd5f.cbg10.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
- (envelope-from <paul@xen.org>)
- id 1jbnvA-00088L-Fg; Thu, 21 May 2020 16:19:48 +0000
-From: Paul Durrant <paul@xen.org>
-To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 4/5] common/domain: add a domain context record for
- shared_info...
-Date: Thu, 21 May 2020 17:19:38 +0100
-Message-Id: <20200521161939.4508-5-paul@xen.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200521161939.4508-1-paul@xen.org>
-References: <20200521161939.4508-1-paul@xen.org>
+ id fac560aa-9b7f-11ea-9887-bc764e2007e4;
+ Thu, 21 May 2020 16:27:36 +0000 (UTC)
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
+Received: from 88-109-182-220.dynamic.dsl.as9105.com ([88.109.182.220]:38838
+ helo=[192.168.1.219])
+ by ppsw-31.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.157]:465)
+ with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ id 1jbo2c-000KMA-LG (Exim 4.92.3)
+ (return-path <amc96@hermes.cam.ac.uk>); Thu, 21 May 2020 17:27:30 +0100
+Subject: Re: [PATCH v3 2/2] x86/idle: prevent entering C6 with in service
+ interrupts on Intel
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+References: <20200515135802.63853-1-roger.pau@citrix.com>
+ <20200515135802.63853-3-roger.pau@citrix.com>
+ <eaa63636-6e39-d401-e218-14ae37440667@citrix.com>
+ <20200521084523.GP54375@Air-de-Roger>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <84486d84-4452-af18-f7e7-753faf5a125d@citrix.com>
+Date: Thu, 21 May 2020 17:27:29 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
+In-Reply-To: <20200521084523.GP54375@Air-de-Roger>
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-GB
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,260 +66,39 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+ Wei Liu <wl@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Paul Durrant <pdurrant@amazon.com>
+On 21/05/2020 09:45, Roger Pau Monné wrote:
+> On Wed, May 20, 2020 at 10:30:11PM +0100, Andrew Cooper wrote:
+>> On 15/05/2020 14:58, Roger Pau Monne wrote:
+>>> Apply a workaround for Intel errata BDX99, CLX30, SKX100, CFW125,
+>>> BDF104, BDH85, BDM135, KWB131: "A Pending Fixed Interrupt May Be
+>>> Dispatched Before an Interrupt of The Same Priority Completes".
+>> HSM175 et al, so presumably a HSD, and HSE as well.
+>>
+>> On the broadwell side at least, BDD BDW in addition
+> But those are a different errata AFAICT ('An APIC Timer Interrupt
+> During Core C6 Entry May be Lost') and the workaround should also be
+> different I think.
 
-... and update xen-domctx to dump some information describing the record.
+Hmm, so it is.
 
-NOTE: The domain may or may not be using the embedded vcpu_info array so
-      ultimately separate context records will be added for vcpu_info when
-      this becomes necessary.
+The issue in question here definitely does affect Haswell, because that
+is where we first observed it.  There was also a report on xen-devel
+against Haswell.
 
-Signed-off-by: Paul Durrant <pdurrant@amazon.com>
----
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
-Cc: Wei Liu <wl@xen.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: George Dunlap <george.dunlap@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
+If the errata are missing, then I think Intel needs some more chasing to
+work out the real extent of the problems.
 
-v5:
- - Addressed comments from Julien
+> We should mark the lapic timer as not reliable on
+> C6 or higher states in lapic_timer_reliable_states, so that it's
+> disabled before entering sleep?
 
-v4:
- - Addressed comments from Jan
+Probably should.
 
-v3:
- - Actually dump some of the content of shared_info
-
-v2:
- - Drop the header change to define a 'Xen' page size and instead use a
-   variable length struct now that the framework makes this is feasible
- - Guard use of 'has_32bit_shinfo' in common code with CONFIG_COMPAT
----
- tools/misc/xen-domctx.c   | 78 +++++++++++++++++++++++++++++++++++++++
- xen/common/domain.c       | 65 ++++++++++++++++++++++++++++++++
- xen/include/public/save.h | 13 ++++++-
- 3 files changed, 155 insertions(+), 1 deletion(-)
-
-diff --git a/tools/misc/xen-domctx.c b/tools/misc/xen-domctx.c
-index 243325dfce..6ead7ea89d 100644
---- a/tools/misc/xen-domctx.c
-+++ b/tools/misc/xen-domctx.c
-@@ -31,6 +31,7 @@
- #include <errno.h>
- 
- #include <xenctrl.h>
-+#include <xen-tools/libs.h>
- #include <xen/xen.h>
- #include <xen/domctl.h>
- #include <xen/save.h>
-@@ -61,6 +62,82 @@ static void dump_header(void)
- 
- }
- 
-+static void print_binary(const char *prefix, const void *val, size_t size,
-+                         const char *suffix)
-+{
-+    printf("%s", prefix);
-+
-+    while ( size-- )
-+    {
-+        uint8_t octet = *(const uint8_t *)val++;
-+        unsigned int i;
-+
-+        for ( i = 0; i < 8; i++ )
-+        {
-+            printf("%u", octet & 1);
-+            octet >>= 1;
-+        }
-+    }
-+
-+    printf("%s", suffix);
-+}
-+
-+static void dump_shared_info(void)
-+{
-+    DOMAIN_SAVE_TYPE(SHARED_INFO) *s;
-+    bool has_32bit_shinfo;
-+    shared_info_any_t *info;
-+    unsigned int i, n;
-+
-+    GET_PTR(s);
-+    has_32bit_shinfo = s->flags & DOMAIN_SAVE_32BIT_SHINFO;
-+
-+    printf("    SHARED_INFO: has_32bit_shinfo: %s buffer_size: %u\n",
-+           has_32bit_shinfo ? "true" : "false", s->buffer_size);
-+
-+    info = (shared_info_any_t *)s->buffer;
-+
-+#define GET_FIELD_PTR(_f)            \
-+    (has_32bit_shinfo ?              \
-+     (const void *)&(info->x32._f) : \
-+     (const void *)&(info->x64._f))
-+#define GET_FIELD_SIZE(_f) \
-+    (has_32bit_shinfo ? sizeof(info->x32._f) : sizeof(info->x64._f))
-+#define GET_FIELD(_f) \
-+    (has_32bit_shinfo ? info->x32._f : info->x64._f)
-+
-+    n = has_32bit_shinfo ?
-+        ARRAY_SIZE(info->x32.evtchn_pending) :
-+        ARRAY_SIZE(info->x64.evtchn_pending);
-+
-+    for ( i = 0; i < n; i++ )
-+    {
-+        const char *prefix = !i ?
-+            "                 evtchn_pending: " :
-+            "                                 ";
-+
-+        print_binary(prefix, GET_FIELD_PTR(evtchn_pending[0]),
-+                 GET_FIELD_SIZE(evtchn_pending[0]), "\n");
-+    }
-+
-+    for ( i = 0; i < n; i++ )
-+    {
-+        const char *prefix = !i ?
-+            "                    evtchn_mask: " :
-+            "                                 ";
-+
-+        print_binary(prefix, GET_FIELD_PTR(evtchn_mask[0]),
-+                 GET_FIELD_SIZE(evtchn_mask[0]), "\n");
-+    }
-+
-+    printf("                 wc: version: %u sec: %u nsec: %u\n",
-+           GET_FIELD(wc_version), GET_FIELD(wc_sec), GET_FIELD(wc_nsec));
-+
-+#undef GET_FIELD
-+#undef GET_FIELD_SIZE
-+#undef GET_FIELD_PTR
-+}
-+
- static void dump_end(void)
- {
-     DOMAIN_SAVE_TYPE(END) *e;
-@@ -173,6 +250,7 @@ int main(int argc, char **argv)
-             switch (desc->typecode)
-             {
-             case DOMAIN_SAVE_CODE(HEADER): dump_header(); break;
-+            case DOMAIN_SAVE_CODE(SHARED_INFO): dump_shared_info(); break;
-             case DOMAIN_SAVE_CODE(END): dump_end(); break;
-             default:
-                 printf("Unknown type %u: skipping\n", desc->typecode);
-diff --git a/xen/common/domain.c b/xen/common/domain.c
-index 7cc9526139..9d156da84d 100644
---- a/xen/common/domain.c
-+++ b/xen/common/domain.c
-@@ -33,6 +33,7 @@
- #include <xen/xenoprof.h>
- #include <xen/irq.h>
- #include <xen/argo.h>
-+#include <xen/save.h>
- #include <asm/debugger.h>
- #include <asm/p2m.h>
- #include <asm/processor.h>
-@@ -1649,6 +1650,70 @@ int continue_hypercall_on_cpu(
-     return 0;
- }
- 
-+static int save_shared_info(const struct domain *d, struct domain_context *c,
-+                            bool dry_run)
-+{
-+    struct domain_shared_info_context ctxt = {
-+#ifdef CONFIG_COMPAT
-+        .flags = has_32bit_shinfo(d) ? DOMAIN_SAVE_32BIT_SHINFO : 0,
-+#endif
-+        .buffer_size = sizeof(shared_info_t),
-+    };
-+    size_t hdr_size = offsetof(typeof(ctxt), buffer);
-+    int rc;
-+
-+    rc = DOMAIN_SAVE_BEGIN(SHARED_INFO, c, 0);
-+    if ( rc )
-+        return rc;
-+
-+    rc = domain_save_data(c, &ctxt, hdr_size);
-+    if ( rc )
-+        return rc;
-+
-+    rc = domain_save_data(c, d->shared_info, ctxt.buffer_size);
-+    if ( rc )
-+        return rc;
-+
-+    return domain_save_end(c);
-+}
-+
-+static int load_shared_info(struct domain *d, struct domain_context *c)
-+{
-+    struct domain_shared_info_context ctxt;
-+    size_t hdr_size = offsetof(typeof(ctxt), buffer);
-+    unsigned int i;
-+    int rc;
-+
-+    rc = DOMAIN_LOAD_BEGIN(SHARED_INFO, c, &i);
-+    if ( rc )
-+        return rc;
-+
-+    if ( i ) /* expect only a single instance */
-+        return -ENXIO;
-+
-+    rc = domain_load_data(c, &ctxt, hdr_size);
-+    if ( rc )
-+        return rc;
-+
-+    if ( ctxt.buffer_size != sizeof(shared_info_t) )
-+        return -EINVAL;
-+
-+    if ( ctxt.flags & DOMAIN_SAVE_32BIT_SHINFO )
-+#ifdef CONFIG_COMPAT
-+        has_32bit_shinfo(d) = true;
-+#else
-+        return -EINVAL;
-+#endif
-+
-+    rc = domain_load_data(c, d->shared_info, sizeof(shared_info_t));
-+    if ( rc )
-+        return rc;
-+
-+    return domain_load_end(c);
-+}
-+
-+DOMAIN_REGISTER_SAVE_LOAD(SHARED_INFO, save_shared_info, load_shared_info);
-+
- /*
-  * Local variables:
-  * mode: C
-diff --git a/xen/include/public/save.h b/xen/include/public/save.h
-index 551dbbddb8..0e855a4b97 100644
---- a/xen/include/public/save.h
-+++ b/xen/include/public/save.h
-@@ -82,7 +82,18 @@ struct domain_save_header {
- };
- DECLARE_DOMAIN_SAVE_TYPE(HEADER, 1, struct domain_save_header);
- 
--#define DOMAIN_SAVE_CODE_MAX 1
-+struct domain_shared_info_context {
-+    uint32_t flags;
-+
-+#define DOMAIN_SAVE_32BIT_SHINFO 0x00000001
-+
-+    uint32_t buffer_size;
-+    uint8_t buffer[XEN_FLEX_ARRAY_DIM]; /* Implementation specific size */
-+};
-+
-+DECLARE_DOMAIN_SAVE_TYPE(SHARED_INFO, 2, struct domain_shared_info_context);
-+
-+#define DOMAIN_SAVE_CODE_MAX 2
- 
- #endif /* defined(__XEN__) || defined(__XEN_TOOLS__) */
- 
--- 
-2.20.1
-
+~Andrew
 
