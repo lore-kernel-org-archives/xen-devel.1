@@ -7,57 +7,57 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A6AFDC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19AEFC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 65BBA206C3
-	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C6395206C3
+	for <xen-devel@archiver.kernel.org>; Thu, 21 May 2020 16:20:26 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="0UcGuSWj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 65BBA206C3
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="5Go9HNih"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6395206C3
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jbnvL-0000ys-Ac; Thu, 21 May 2020 16:19:59 +0000
+	id 1jbnvQ-0001Qf-KH; Thu, 21 May 2020 16:20:04 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=/yRJ=7D=xen.org=paul@srs-us1.protection.inumbo.net>)
- id 1jbnvK-0000yS-3T
- for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:19:58 +0000
-X-Inumbo-ID: e3bbed44-9b7e-11ea-b9cf-bc764e2007e4
+ id 1jbnvP-0001DP-3j
+ for xen-devel@lists.xenproject.org; Thu, 21 May 2020 16:20:03 +0000
+X-Inumbo-ID: e4ea68a8-9b7e-11ea-b9cf-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id e3bbed44-9b7e-11ea-b9cf-bc764e2007e4;
- Thu, 21 May 2020 16:19:47 +0000 (UTC)
+ id e4ea68a8-9b7e-11ea-b9cf-bc764e2007e4;
+ Thu, 21 May 2020 16:19:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:References:
  In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=QfGmoXyhQuN/EVxQAxJlmVEjrcceHfUNWPHkPI0BpEQ=; b=0UcGuSWjabQ6qD4s4WMXkM5UJm
- JhbRjcH0xTpYT6vGQcXaa9L+rYKNtWZl+1l1QbYX6R7eyVmkvkdN7KxdYhlOncJYTSTGO5Dxp3BrJ
- 0JttAfT/5a3/Ng6JM8HMSd98J56qjwLtU0GCMlV6CFzimu4OY9Hy3bk8h8aXIGq8IzUw=;
+ bh=/LS/E6IoF0MQgW42gOcJtVpnONoGSVfqwfRwEvxiDwc=; b=5Go9HNihDCxMPDKISozp/bPwXd
+ bOYSDD1UcGPjly5CJX0D1Q10KHKtuXh6YDNajBkVYMGsZQvM7ZdrgpnHzywOc8+MdD2SnrJLxOqLm
+ 8Jz41l/9biOMYzHObvpmDqLLwLsuzce145G/81elqBWI6MrQygYmUjL/UT3gcLNEibBk=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <paul@xen.org>)
- id 1jbnv8-0006ne-1u; Thu, 21 May 2020 16:19:46 +0000
+ id 1jbnvA-0006nw-PB; Thu, 21 May 2020 16:19:48 +0000
 Received: from 54-240-197-224.amazon.com ([54.240.197.224]
  helo=u2f063a87eabd5f.cbg10.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.89)
  (envelope-from <paul@xen.org>)
- id 1jbnv7-00088L-OK; Thu, 21 May 2020 16:19:45 +0000
+ id 1jbnvA-00088L-Fg; Thu, 21 May 2020 16:19:48 +0000
 From: Paul Durrant <paul@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v5 2/5] xen/common/domctl: introduce
- XEN_DOMCTL_get/setdomaincontext
-Date: Thu, 21 May 2020 17:19:36 +0100
-Message-Id: <20200521161939.4508-3-paul@xen.org>
+Subject: [PATCH v5 4/5] common/domain: add a domain context record for
+ shared_info...
+Date: Thu, 21 May 2020 17:19:38 +0100
+Message-Id: <20200521161939.4508-5-paul@xen.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200521161939.4508-1-paul@xen.org>
 References: <20200521161939.4508-1-paul@xen.org>
@@ -74,449 +74,259 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <pdurrant@amazon.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Paul Durrant <pdurrant@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-These domctls provide a mechanism to get and set domain context from
-the toolstack.
+From: Paul Durrant <pdurrant@amazon.com>
+
+... and update xen-domctx to dump some information describing the record.
+
+NOTE: The domain may or may not be using the embedded vcpu_info array so
+      ultimately separate context records will be added for vcpu_info when
+      this becomes necessary.
 
 Signed-off-by: Paul Durrant <pdurrant@amazon.com>
-Reviewed-by: Julien Grall <julien@xen.org>
 ---
-Cc: Daniel De Graaf <dgdegra@tycho.nsa.gov>
 Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Cc: Wei Liu <wl@xen.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>
 Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
 Cc: Stefano Stabellini <sstabellini@kernel.org>
 
+v5:
+ - Addressed comments from Julien
+
 v4:
- - Add missing zero pad checks
+ - Addressed comments from Jan
 
 v3:
- - Addressed comments from Julien and Jan
- - Use vmalloc() rather than xmalloc_bytes()
+ - Actually dump some of the content of shared_info
 
 v2:
- - drop mask parameter
- - const-ify some more buffers
+ - Drop the header change to define a 'Xen' page size and instead use a
+   variable length struct now that the framework makes this is feasible
+ - Guard use of 'has_32bit_shinfo' in common code with CONFIG_COMPAT
 ---
- tools/flask/policy/modules/xen.if   |   4 +-
- tools/libxc/include/xenctrl.h       |   5 +
- tools/libxc/xc_domain.c             |  56 +++++++++
- xen/common/domctl.c                 | 173 ++++++++++++++++++++++++++++
- xen/include/public/domctl.h         |  41 +++++++
- xen/xsm/flask/hooks.c               |   6 +
- xen/xsm/flask/policy/access_vectors |   4 +
- 7 files changed, 287 insertions(+), 2 deletions(-)
+ tools/misc/xen-domctx.c   | 78 +++++++++++++++++++++++++++++++++++++++
+ xen/common/domain.c       | 65 ++++++++++++++++++++++++++++++++
+ xen/include/public/save.h | 13 ++++++-
+ 3 files changed, 155 insertions(+), 1 deletion(-)
 
-diff --git a/tools/flask/policy/modules/xen.if b/tools/flask/policy/modules/xen.if
-index 8eb2293a52..2bc9db4f64 100644
---- a/tools/flask/policy/modules/xen.if
-+++ b/tools/flask/policy/modules/xen.if
-@@ -53,7 +53,7 @@ define(`create_domain_common', `
- 	allow $1 $2:domain2 { set_cpu_policy settsc setscheduler setclaim
- 			set_vnumainfo get_vnumainfo cacheflush
- 			psr_cmt_op psr_alloc soft_reset
--			resource_map get_cpu_policy };
-+			resource_map get_cpu_policy setcontext };
- 	allow $1 $2:security check_context;
- 	allow $1 $2:shadow enable;
- 	allow $1 $2:mmu { map_read map_write adjust memorymap physmap pinpage mmuext_op updatemp };
-@@ -97,7 +97,7 @@ define(`migrate_domain_out', `
- 	allow $1 $2:hvm { gethvmc getparam };
- 	allow $1 $2:mmu { stat pageinfo map_read };
- 	allow $1 $2:domain { getaddrsize getvcpucontext pause destroy };
--	allow $1 $2:domain2 gettsc;
-+	allow $1 $2:domain2 { gettsc getcontext };
- 	allow $1 $2:shadow { enable disable logdirty };
- ')
+diff --git a/tools/misc/xen-domctx.c b/tools/misc/xen-domctx.c
+index 243325dfce..6ead7ea89d 100644
+--- a/tools/misc/xen-domctx.c
++++ b/tools/misc/xen-domctx.c
+@@ -31,6 +31,7 @@
+ #include <errno.h>
  
-diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
-index 45ff7db1e8..0ce2372e2f 100644
---- a/tools/libxc/include/xenctrl.h
-+++ b/tools/libxc/include/xenctrl.h
-@@ -867,6 +867,11 @@ int xc_domain_hvm_setcontext(xc_interface *xch,
-                              uint8_t *hvm_ctxt,
-                              uint32_t size);
+ #include <xenctrl.h>
++#include <xen-tools/libs.h>
+ #include <xen/xen.h>
+ #include <xen/domctl.h>
+ #include <xen/save.h>
+@@ -61,6 +62,82 @@ static void dump_header(void)
  
-+int xc_domain_getcontext(xc_interface *xch, uint32_t domid,
-+                         void *ctxt_buf, size_t *size);
-+int xc_domain_setcontext(xc_interface *xch, uint32_t domid,
-+                         const void *ctxt_buf, size_t size);
-+
- /**
-  * This function will return guest IO ABI protocol
-  *
-diff --git a/tools/libxc/xc_domain.c b/tools/libxc/xc_domain.c
-index 71829c2bce..e462a6f728 100644
---- a/tools/libxc/xc_domain.c
-+++ b/tools/libxc/xc_domain.c
-@@ -537,6 +537,62 @@ int xc_domain_hvm_setcontext(xc_interface *xch,
-     return ret;
  }
  
-+int xc_domain_getcontext(xc_interface *xch, uint32_t domid,
-+                         void *ctxt_buf, size_t *size)
++static void print_binary(const char *prefix, const void *val, size_t size,
++                         const char *suffix)
 +{
-+    int ret;
-+    DECLARE_DOMCTL = {
-+        .cmd = XEN_DOMCTL_getdomaincontext,
-+        .domain = domid,
-+        .u.getdomaincontext.size = *size,
-+    };
-+    DECLARE_HYPERCALL_BOUNCE(ctxt_buf, *size, XC_HYPERCALL_BUFFER_BOUNCE_OUT);
++    printf("%s", prefix);
 +
-+    if ( xc_hypercall_bounce_pre(xch, ctxt_buf) )
-+        return -1;
-+
-+    set_xen_guest_handle(domctl.u.setdomaincontext.buffer, ctxt_buf);
-+
-+    ret = do_domctl(xch, &domctl);
-+
-+    xc_hypercall_bounce_post(xch, ctxt_buf);
-+
-+    if ( ret )
-+        return ret;
-+
-+    *size = domctl.u.getdomaincontext.size;
-+    if ( *size != domctl.u.getdomaincontext.size )
++    while ( size-- )
 +    {
-+        errno = EOVERFLOW;
-+        return -1;
++        uint8_t octet = *(const uint8_t *)val++;
++        unsigned int i;
++
++        for ( i = 0; i < 8; i++ )
++        {
++            printf("%u", octet & 1);
++            octet >>= 1;
++        }
 +    }
 +
-+    return 0;
++    printf("%s", suffix);
 +}
 +
-+int xc_domain_setcontext(xc_interface *xch, uint32_t domid,
-+                         const void *ctxt_buf, size_t size)
++static void dump_shared_info(void)
 +{
-+    int ret;
-+    DECLARE_DOMCTL = {
-+        .cmd = XEN_DOMCTL_setdomaincontext,
-+        .domain = domid,
-+        .u.setdomaincontext.size = size,
-+    };
-+    DECLARE_HYPERCALL_BOUNCE_IN(ctxt_buf, size);
++    DOMAIN_SAVE_TYPE(SHARED_INFO) *s;
++    bool has_32bit_shinfo;
++    shared_info_any_t *info;
++    unsigned int i, n;
 +
-+    if ( xc_hypercall_bounce_pre(xch, ctxt_buf) )
-+        return -1;
++    GET_PTR(s);
++    has_32bit_shinfo = s->flags & DOMAIN_SAVE_32BIT_SHINFO;
 +
-+    set_xen_guest_handle(domctl.u.setdomaincontext.buffer, ctxt_buf);
++    printf("    SHARED_INFO: has_32bit_shinfo: %s buffer_size: %u\n",
++           has_32bit_shinfo ? "true" : "false", s->buffer_size);
 +
-+    ret = do_domctl(xch, &domctl);
++    info = (shared_info_any_t *)s->buffer;
 +
-+    xc_hypercall_bounce_post(xch, ctxt_buf);
++#define GET_FIELD_PTR(_f)            \
++    (has_32bit_shinfo ?              \
++     (const void *)&(info->x32._f) : \
++     (const void *)&(info->x64._f))
++#define GET_FIELD_SIZE(_f) \
++    (has_32bit_shinfo ? sizeof(info->x32._f) : sizeof(info->x64._f))
++#define GET_FIELD(_f) \
++    (has_32bit_shinfo ? info->x32._f : info->x64._f)
 +
-+    return ret;
-+}
++    n = has_32bit_shinfo ?
++        ARRAY_SIZE(info->x32.evtchn_pending) :
++        ARRAY_SIZE(info->x64.evtchn_pending);
 +
- int xc_vcpu_getcontext(xc_interface *xch,
-                        uint32_t domid,
-                        uint32_t vcpu,
-diff --git a/xen/common/domctl.c b/xen/common/domctl.c
-index a69b3b59a8..44758034a6 100644
---- a/xen/common/domctl.c
-+++ b/xen/common/domctl.c
-@@ -25,6 +25,8 @@
- #include <xen/hypercall.h>
- #include <xen/vm_event.h>
- #include <xen/monitor.h>
-+#include <xen/save.h>
-+#include <xen/vmap.h>
- #include <asm/current.h>
- #include <asm/irq.h>
- #include <asm/page.h>
-@@ -358,6 +360,168 @@ static struct vnuma_info *vnuma_init(const struct xen_domctl_vnuma *uinfo,
-     return ERR_PTR(ret);
- }
- 
-+struct domctl_context
-+{
-+    void *buffer;
-+    struct domain_save_descriptor *desc;
-+    size_t len;
-+    size_t cur;
-+};
-+
-+static int dry_run_append(void *priv, const void *data, size_t len)
-+{
-+    struct domctl_context *c = priv;
-+
-+    if ( c->len + len < c->len )
-+        return -EOVERFLOW;
-+
-+    c->len += len;
-+
-+    return 0;
-+}
-+
-+static int dry_run_begin(void *priv, const struct domain_save_descriptor *desc)
-+{
-+    return dry_run_append(priv, NULL, sizeof(*desc));
-+}
-+
-+static int dry_run_end(void *priv, size_t len)
-+{
-+    return 0;
-+}
-+
-+static struct domain_save_ops dry_run_ops = {
-+    .begin = dry_run_begin,
-+    .append = dry_run_append,
-+    .end = dry_run_end,
-+};
-+
-+static int save_begin(void *priv, const struct domain_save_descriptor *desc)
-+{
-+    struct domctl_context *c = priv;
-+
-+    if ( c->len - c->cur < sizeof(*desc) )
-+        return -ENOSPC;
-+
-+    c->desc = c->buffer + c->cur; /* stash pointer to descriptor */
-+    *c->desc = *desc;
-+
-+    c->cur += sizeof(*desc);
-+
-+    return 0;
-+}
-+
-+static int save_append(void *priv, const void *data, size_t len)
-+{
-+    struct domctl_context *c = priv;
-+
-+    if ( c->len - c->cur < len )
-+        return -ENOSPC;
-+
-+    memcpy(c->buffer + c->cur, data, len);
-+    c->cur += len;
-+
-+    return 0;
-+}
-+
-+static int save_end(void *priv, size_t len)
-+{
-+    struct domctl_context *c = priv;
-+
-+    c->desc->length = len;
-+
-+    return 0;
-+}
-+
-+static struct domain_save_ops save_ops = {
-+    .begin = save_begin,
-+    .append = save_append,
-+    .end = save_end,
-+};
-+
-+static int getdomaincontext(struct domain *d,
-+                            struct xen_domctl_getdomaincontext *gdc)
-+{
-+    struct domctl_context c = { .buffer = ZERO_BLOCK_PTR };
-+    int rc;
-+
-+    if ( d == current->domain )
-+        return -EPERM;
-+
-+    if ( gdc->pad )
-+        return -EINVAL;
-+
-+    if ( guest_handle_is_null(gdc->buffer) ) /* query for buffer size */
++    for ( i = 0; i < n; i++ )
 +    {
-+        if ( gdc->size )
-+            return -EINVAL;
++        const char *prefix = !i ?
++            "                 evtchn_pending: " :
++            "                                 ";
 +
-+        /* dry run to acquire buffer size */
-+        rc = domain_save(d, &dry_run_ops, &c, true);
-+        if ( rc )
-+            return rc;
-+
-+        gdc->size = c.len;
-+        return 0;
++        print_binary(prefix, GET_FIELD_PTR(evtchn_pending[0]),
++                 GET_FIELD_SIZE(evtchn_pending[0]), "\n");
 +    }
 +
-+    c.len = gdc->size;
-+    c.buffer = vmalloc(c.len);
-+    if ( !c.buffer )
-+        return -ENOMEM;
++    for ( i = 0; i < n; i++ )
++    {
++        const char *prefix = !i ?
++            "                    evtchn_mask: " :
++            "                                 ";
 +
-+    rc = domain_save(d, &save_ops, &c, false);
++        print_binary(prefix, GET_FIELD_PTR(evtchn_mask[0]),
++                 GET_FIELD_SIZE(evtchn_mask[0]), "\n");
++    }
 +
-+    gdc->size = c.cur;
-+    if ( !rc && copy_to_guest(gdc->buffer, c.buffer, gdc->size) )
-+        rc = -EFAULT;
++    printf("                 wc: version: %u sec: %u nsec: %u\n",
++           GET_FIELD(wc_version), GET_FIELD(wc_sec), GET_FIELD(wc_nsec));
 +
-+    vfree(c.buffer);
-+
-+    return rc;
++#undef GET_FIELD
++#undef GET_FIELD_SIZE
++#undef GET_FIELD_PTR
 +}
 +
-+static int load_read(void *priv, void *data, size_t len)
-+{
-+    struct domctl_context *c = priv;
-+
-+    if ( c->len - c->cur < len )
-+        return -ENODATA;
-+
-+    memcpy(data, c->buffer + c->cur, len);
-+    c->cur += len;
-+
-+    return 0;
-+}
-+
-+static struct domain_load_ops load_ops = {
-+    .read = load_read,
-+};
-+
-+static int setdomaincontext(struct domain *d,
-+                            const struct xen_domctl_setdomaincontext *sdc)
-+{
-+    struct domctl_context c = { .buffer = ZERO_BLOCK_PTR, .len = sdc->size };
-+    int rc;
-+
-+    if ( d == current->domain )
-+        return -EPERM;
-+
-+    if ( sdc->pad )
-+        return -EINVAL;
-+
-+    c.buffer = vmalloc(c.len);
-+    if ( !c.buffer )
-+        return -ENOMEM;
-+
-+    rc = !copy_from_guest(c.buffer, sdc->buffer, c.len) ?
-+        domain_load(d, &load_ops, &c) : -EFAULT;
-+
-+    vfree(c.buffer);
-+
-+    return rc;
-+}
-+
- long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
+ static void dump_end(void)
  {
-     long ret = 0;
-@@ -942,6 +1106,15 @@ long do_domctl(XEN_GUEST_HANDLE_PARAM(xen_domctl_t) u_domctl)
-             copyback = 1;
-         break;
- 
-+    case XEN_DOMCTL_getdomaincontext:
-+        ret = getdomaincontext(d, &op->u.getdomaincontext);
-+        copyback = !ret;
-+        break;
-+
-+    case XEN_DOMCTL_setdomaincontext:
-+        ret = setdomaincontext(d, &op->u.setdomaincontext);
-+        break;
-+
-     default:
-         ret = arch_do_domctl(op, d, u_domctl);
-         break;
-diff --git a/xen/include/public/domctl.h b/xen/include/public/domctl.h
-index 1ad34c35eb..1b133bda59 100644
---- a/xen/include/public/domctl.h
-+++ b/xen/include/public/domctl.h
-@@ -1129,6 +1129,43 @@ struct xen_domctl_vuart_op {
-                                  */
- };
- 
-+/*
-+ * XEN_DOMCTL_getdomaincontext
-+ * ---------------------------
-+ *
-+ * buffer (IN):   The buffer into which the context data should be
-+ *                copied, or NULL to query the buffer size that should
-+ *                be allocated.
-+ * size (IN/OUT): If 'buffer' is NULL then the value passed in must be
-+ *                zero, and the value passed out will be the size of the
-+ *                buffer to allocate.
-+ *                If 'buffer' is non-NULL then the value passed in must
-+ *                be the size of the buffer into which data may be copied.
-+ *                The value passed out will be the size of data written.
-+ */
-+struct xen_domctl_getdomaincontext {
-+    uint32_t size;
-+    uint32_t pad;
-+    XEN_GUEST_HANDLE_64(void) buffer;
-+};
-+
-+/* XEN_DOMCTL_setdomaincontext
-+ * ---------------------------
-+ *
-+ * buffer (IN):   The buffer from which the context data should be
-+ *                copied.
-+ * size (IN):     The size of the buffer from which data may be copied.
-+ *                This data must include DOMAIN_SAVE_CODE_HEADER at the
-+ *                start and terminate with a DOMAIN_SAVE_CODE_END record.
-+ *                Any data beyond the DOMAIN_SAVE_CODE_END record will be
-+ *                ignored.
-+ */
-+struct xen_domctl_setdomaincontext {
-+    uint32_t size;
-+    uint32_t pad;
-+    XEN_GUEST_HANDLE_64(const_void) buffer;
-+};
-+
- struct xen_domctl {
-     uint32_t cmd;
- #define XEN_DOMCTL_createdomain                   1
-@@ -1210,6 +1247,8 @@ struct xen_domctl {
- #define XEN_DOMCTL_vuart_op                      81
- #define XEN_DOMCTL_get_cpu_policy                82
- #define XEN_DOMCTL_set_cpu_policy                83
-+#define XEN_DOMCTL_getdomaincontext              84
-+#define XEN_DOMCTL_setdomaincontext              85
- #define XEN_DOMCTL_gdbsx_guestmemio            1000
- #define XEN_DOMCTL_gdbsx_pausevcpu             1001
- #define XEN_DOMCTL_gdbsx_unpausevcpu           1002
-@@ -1270,6 +1309,8 @@ struct xen_domctl {
-         struct xen_domctl_monitor_op        monitor_op;
-         struct xen_domctl_psr_alloc         psr_alloc;
-         struct xen_domctl_vuart_op          vuart_op;
-+        struct xen_domctl_getdomaincontext  getdomaincontext;
-+        struct xen_domctl_setdomaincontext  setdomaincontext;
-         uint8_t                             pad[128];
-     } u;
- };
-diff --git a/xen/xsm/flask/hooks.c b/xen/xsm/flask/hooks.c
-index 4649e6fd95..6f3db276ef 100644
---- a/xen/xsm/flask/hooks.c
-+++ b/xen/xsm/flask/hooks.c
-@@ -745,6 +745,12 @@ static int flask_domctl(struct domain *d, int cmd)
-     case XEN_DOMCTL_get_cpu_policy:
-         return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__GET_CPU_POLICY);
- 
-+    case XEN_DOMCTL_setdomaincontext:
-+        return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__SETCONTEXT);
-+
-+    case XEN_DOMCTL_getdomaincontext:
-+        return current_has_perm(d, SECCLASS_DOMAIN2, DOMAIN2__GETCONTEXT);
-+
-     default:
-         return avc_unknown_permission("domctl", cmd);
-     }
-diff --git a/xen/xsm/flask/policy/access_vectors b/xen/xsm/flask/policy/access_vectors
-index c055c14c26..fccfb9de82 100644
---- a/xen/xsm/flask/policy/access_vectors
-+++ b/xen/xsm/flask/policy/access_vectors
-@@ -245,6 +245,10 @@ class domain2
-     resource_map
- # XEN_DOMCTL_get_cpu_policy
-     get_cpu_policy
-+# XEN_DOMCTL_setdomaincontext
-+    setcontext
-+# XEN_DOMCTL_getdomaincontext
-+    getcontext
+     DOMAIN_SAVE_TYPE(END) *e;
+@@ -173,6 +250,7 @@ int main(int argc, char **argv)
+             switch (desc->typecode)
+             {
+             case DOMAIN_SAVE_CODE(HEADER): dump_header(); break;
++            case DOMAIN_SAVE_CODE(SHARED_INFO): dump_shared_info(); break;
+             case DOMAIN_SAVE_CODE(END): dump_end(); break;
+             default:
+                 printf("Unknown type %u: skipping\n", desc->typecode);
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index 7cc9526139..9d156da84d 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -33,6 +33,7 @@
+ #include <xen/xenoprof.h>
+ #include <xen/irq.h>
+ #include <xen/argo.h>
++#include <xen/save.h>
+ #include <asm/debugger.h>
+ #include <asm/p2m.h>
+ #include <asm/processor.h>
+@@ -1649,6 +1650,70 @@ int continue_hypercall_on_cpu(
+     return 0;
  }
  
- # Similar to class domain, but primarily contains domctls related to HVM domains
++static int save_shared_info(const struct domain *d, struct domain_context *c,
++                            bool dry_run)
++{
++    struct domain_shared_info_context ctxt = {
++#ifdef CONFIG_COMPAT
++        .flags = has_32bit_shinfo(d) ? DOMAIN_SAVE_32BIT_SHINFO : 0,
++#endif
++        .buffer_size = sizeof(shared_info_t),
++    };
++    size_t hdr_size = offsetof(typeof(ctxt), buffer);
++    int rc;
++
++    rc = DOMAIN_SAVE_BEGIN(SHARED_INFO, c, 0);
++    if ( rc )
++        return rc;
++
++    rc = domain_save_data(c, &ctxt, hdr_size);
++    if ( rc )
++        return rc;
++
++    rc = domain_save_data(c, d->shared_info, ctxt.buffer_size);
++    if ( rc )
++        return rc;
++
++    return domain_save_end(c);
++}
++
++static int load_shared_info(struct domain *d, struct domain_context *c)
++{
++    struct domain_shared_info_context ctxt;
++    size_t hdr_size = offsetof(typeof(ctxt), buffer);
++    unsigned int i;
++    int rc;
++
++    rc = DOMAIN_LOAD_BEGIN(SHARED_INFO, c, &i);
++    if ( rc )
++        return rc;
++
++    if ( i ) /* expect only a single instance */
++        return -ENXIO;
++
++    rc = domain_load_data(c, &ctxt, hdr_size);
++    if ( rc )
++        return rc;
++
++    if ( ctxt.buffer_size != sizeof(shared_info_t) )
++        return -EINVAL;
++
++    if ( ctxt.flags & DOMAIN_SAVE_32BIT_SHINFO )
++#ifdef CONFIG_COMPAT
++        has_32bit_shinfo(d) = true;
++#else
++        return -EINVAL;
++#endif
++
++    rc = domain_load_data(c, d->shared_info, sizeof(shared_info_t));
++    if ( rc )
++        return rc;
++
++    return domain_load_end(c);
++}
++
++DOMAIN_REGISTER_SAVE_LOAD(SHARED_INFO, save_shared_info, load_shared_info);
++
+ /*
+  * Local variables:
+  * mode: C
+diff --git a/xen/include/public/save.h b/xen/include/public/save.h
+index 551dbbddb8..0e855a4b97 100644
+--- a/xen/include/public/save.h
++++ b/xen/include/public/save.h
+@@ -82,7 +82,18 @@ struct domain_save_header {
+ };
+ DECLARE_DOMAIN_SAVE_TYPE(HEADER, 1, struct domain_save_header);
+ 
+-#define DOMAIN_SAVE_CODE_MAX 1
++struct domain_shared_info_context {
++    uint32_t flags;
++
++#define DOMAIN_SAVE_32BIT_SHINFO 0x00000001
++
++    uint32_t buffer_size;
++    uint8_t buffer[XEN_FLEX_ARRAY_DIM]; /* Implementation specific size */
++};
++
++DECLARE_DOMAIN_SAVE_TYPE(SHARED_INFO, 2, struct domain_shared_info_context);
++
++#define DOMAIN_SAVE_CODE_MAX 2
+ 
+ #endif /* defined(__XEN__) || defined(__XEN_TOOLS__) */
+ 
 -- 
 2.20.1
 
