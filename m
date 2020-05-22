@@ -6,55 +6,53 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 291DCC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 16:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93698C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 16:34:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EE6402078D
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 16:13:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE6402078D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 5529820727
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 16:34:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5529820727
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jcAIO-000657-1R; Fri, 22 May 2020 16:13:16 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jcAcT-0008No-FX; Fri, 22 May 2020 16:34:01 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=2cgu=7E=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jcAIL-00064Q-TR
- for xen-devel@lists.xenproject.org; Fri, 22 May 2020 16:13:13 +0000
-X-Inumbo-ID: 216b5274-9c47-11ea-abf6-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 216b5274-9c47-11ea-abf6-12813bfff9fa;
- Fri, 22 May 2020 16:13:11 +0000 (UTC)
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: KxPNs5keHhc+fidn6/H1Nm9Y7zYU1beE8+bp8J+5ykM+OnhXTmM65r1mXRxUpW1JVCUCLJo1YO
- ZzROBGSVu/j+QAKZE9cXmewpX5ej+JVbvfL46Dj0hNEmTCY3igcdnTAoKd/IFIHb8LBhk8SjDR
- nS4dWO0Xl126vYI19Dk3cdoxyOLwNu0T9RSsqWEJRBFciI4IlzFKTUmHKIvgVYSri+kfYNhsCR
- rVHuDwIhUOSsZcj5050J6MwQ1xcGhsDlEunnaRSro97/0hawLlz5/THJpybteRzRt5XH1kBmhm
- jE0=
-X-SBRS: 2.7
-X-MesageID: 18189347
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,422,1583211600"; d="scan'208";a="18189347"
-From: George Dunlap <george.dunlap@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH 3/5] libxl: Generate golang bindings in libxl Makefile
-Date: Fri, 22 May 2020 17:12:38 +0100
-Message-ID: <20200522161240.3748320-4-george.dunlap@citrix.com>
+ <SRS0=UE2V=7E=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
+ id 1jcAcS-0008Nj-CG
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2020 16:34:00 +0000
+X-Inumbo-ID: 0891861c-9c4a-11ea-b07b-bc764e2007e4
+Received: from mga17.intel.com (unknown [192.55.52.151])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 0891861c-9c4a-11ea-b07b-bc764e2007e4;
+ Fri, 22 May 2020 16:33:58 +0000 (UTC)
+IronPort-SDR: 0GUlAE8WTWb7Nv2TTpTc79aqv9ClrXzTz4m8utzAedEbBB2orqWneWllCFgriE7jgRyzpAQ07J
+ DHb/5OnyZzzw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 May 2020 09:33:57 -0700
+IronPort-SDR: cp+bdUzCCs1ZaOHkSL95CIMpt6nO1es0ml2hVDZF0p4hoiQPeIrJ5E0erNfpHj9Jym3aaNWHXS
+ FQunWTL8V4ow==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,422,1583222400"; d="scan'208";a="301157055"
+Received: from rpenaran-mobl.amr.corp.intel.com (HELO ubuntu.localdomain)
+ ([10.212.41.203])
+ by orsmga008.jf.intel.com with ESMTP; 22 May 2020 09:33:55 -0700
+From: Tamas K Lengyel <tamas.lengyel@intel.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v2 for-4.14 1/2] x86/mem_sharing: block interrupt injection
+ for forks
+Date: Fri, 22 May 2020 09:33:52 -0700
+Message-Id: <adfececa3e29a46f5347459a629aa534d61625aa.1590165055.git.tamas.lengyel@intel.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200522161240.3748320-1-george.dunlap@citrix.com>
-References: <20200522161240.3748320-1-george.dunlap@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,101 +63,106 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
- Ian Jackson <ian.jackson@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: Kevin Tian <kevin.tian@intel.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>,
+ Jun Nakajima <jun.nakajima@intel.com>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Tamas K Lengyel <tamas@tklengyel.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The generated golang bindings (types.gen.go and helpers.gen.go) are
-left checked in so that they can be fetched from xenbits using the
-golang tooling.  This means that they must be updated whenever
-libxl_types.idl (or other dependencies) are updated.  However, the
-golang bindings are only built optionally; we can't assume that anyone
-updating libxl_types.idl will also descend into the tools/golang tree
-to re-generate the bindings.
+When running shallow forks without device models it may be undesirable for Xen
+to inject interrupts. With Windows forks we have observed the kernel going into
+infinite loops when trying to process such interrupts, likely because it attempts
+to interact with devices that are not responding without QEMU running. By
+disabling interrupt injection the fuzzer can exercise the target code without
+interference.
 
-Fix this by re-generating the golang bindings from the libxl Makefile
-when the IDL dependencies are updated, so that anyone who updates
-libxl_types.idl will also end up updating the golang generated files
-as well.
+Forks & memory sharing are only available on Intel CPUs so this only applies
+to vmx.
 
- - Make a variable for the generated files, and a target in
-   xenlight/Makefile which will only re-generate the files.
-
- - Add a target in libxl/Makefile to call external idl generation
-   targets (currently only golang).
-
-For ease of testing, also add a specific target in libxl/Makefile just
-to check and update files generated from the IDL.
-
-This does mean that there are two potential paths for generating the
-files during a parallel build; but that shouldn't be an issue, since
-tools/golang/xenlight should never be built until after tools/libxl
-has completed building anyway.
-
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
 ---
-CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Wei Liu <wl@xen.org>
-CC: Nick Rosbrook <rosbrookn@ainfosec.com>
+v2: prohibit => block
+    minor style adjustments
 ---
- tools/golang/xenlight/Makefile |  6 +++++-
- tools/libxl/Makefile           | 12 +++++++++++-
- 2 files changed, 16 insertions(+), 2 deletions(-)
+ xen/arch/x86/hvm/vmx/intr.c      | 6 ++++++
+ xen/arch/x86/mm/mem_sharing.c    | 6 +++++-
+ xen/include/asm-x86/hvm/domain.h | 2 ++
+ xen/include/public/memory.h      | 1 +
+ 4 files changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/tools/golang/xenlight/Makefile b/tools/golang/xenlight/Makefile
-index cd0a62505f..751f916276 100644
---- a/tools/golang/xenlight/Makefile
-+++ b/tools/golang/xenlight/Makefile
-@@ -17,12 +17,16 @@ all: build
- .PHONY: package
- package: $(XEN_GOPATH)$(GOXL_PKG_DIR)
+diff --git a/xen/arch/x86/hvm/vmx/intr.c b/xen/arch/x86/hvm/vmx/intr.c
+index 000e14af49..80bfbb4787 100644
+--- a/xen/arch/x86/hvm/vmx/intr.c
++++ b/xen/arch/x86/hvm/vmx/intr.c
+@@ -256,6 +256,12 @@ void vmx_intr_assist(void)
+     if ( unlikely(v->arch.vm_event) && v->arch.vm_event->sync_event )
+         return;
  
--$(XEN_GOPATH)/src/$(XEN_GOCODE_URL)/xenlight/: xenlight.go types.gen.go helpers.gen.go
-+GOXL_GEN_FILES = types.gen.go helpers.gen.go
++#ifdef CONFIG_MEM_SHARING
++    /* Block event injection for VM fork if requested */
++    if ( unlikely(v->domain->arch.hvm.mem_sharing.block_interrupts) )
++        return;
++#endif
 +
-+$(XEN_GOPATH)/src/$(XEN_GOCODE_URL)/xenlight/: xenlight.go $(GOXL_GEN_FILES)
- 	$(INSTALL_DIR) $(XEN_GOPATH)$(GOXL_PKG_DIR)
- 	$(INSTALL_DATA) xenlight.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
- 	$(INSTALL_DATA) types.gen.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
- 	$(INSTALL_DATA) helpers.gen.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
+     /* Crank the handle on interrupt state. */
+     pt_vector = pt_update_irq(v);
  
-+idl-gen: $(GOXL_GEN_FILES)
-+
- %.gen.go: gengotypes.py $(LIBXL_SRC_DIR)/libxl_types.idl $(LIBXL_SRC_DIR)/idl.py
- 	XEN_ROOT=$(XEN_ROOT) $(PYTHON) gengotypes.py $(LIBXL_SRC_DIR)/libxl_types.idl
+diff --git a/xen/arch/x86/mm/mem_sharing.c b/xen/arch/x86/mm/mem_sharing.c
+index 7271e5c90b..0c45a8d67e 100644
+--- a/xen/arch/x86/mm/mem_sharing.c
++++ b/xen/arch/x86/mm/mem_sharing.c
+@@ -2106,7 +2106,8 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+         rc = -EINVAL;
+         if ( mso.u.fork.pad )
+             goto out;
+-        if ( mso.u.fork.flags & ~XENMEM_FORK_WITH_IOMMU_ALLOWED )
++        if ( mso.u.fork.flags &
++             ~(XENMEM_FORK_WITH_IOMMU_ALLOWED | XENMEM_FORK_BLOCK_INTERRUPTS) )
+             goto out;
  
-diff --git a/tools/libxl/Makefile b/tools/libxl/Makefile
-index 69fcf21577..2a06a7ebb8 100644
---- a/tools/libxl/Makefile
-+++ b/tools/libxl/Makefile
-@@ -218,7 +218,7 @@ testidl.c: libxl_types.idl gentest.py libxl.h $(AUTOINCS)
- .PHONY: all
- all: $(CLIENTS) $(TEST_PROGS) $(PKG_CONFIG) $(PKG_CONFIG_LOCAL) \
- 		libxenlight.so libxenlight.a libxlutil.so libxlutil.a \
--	$(AUTOSRCS) $(AUTOINCS)
-+	$(AUTOSRCS) $(AUTOINCS) idl-external
+         rc = rcu_lock_live_remote_domain_by_id(mso.u.fork.parent_domain,
+@@ -2134,6 +2135,9 @@ int mem_sharing_memop(XEN_GUEST_HANDLE_PARAM(xen_mem_sharing_op_t) arg)
+             rc = hypercall_create_continuation(__HYPERVISOR_memory_op,
+                                                "lh", XENMEM_sharing_op,
+                                                arg);
++        else if ( !rc && (mso.u.fork.flags & XENMEM_FORK_BLOCK_INTERRUPTS) )
++            d->arch.hvm.mem_sharing.block_interrupts = true;
++
+         rcu_unlock_domain(pd);
+         break;
+     }
+diff --git a/xen/include/asm-x86/hvm/domain.h b/xen/include/asm-x86/hvm/domain.h
+index 95fe18cddc..37e494d234 100644
+--- a/xen/include/asm-x86/hvm/domain.h
++++ b/xen/include/asm-x86/hvm/domain.h
+@@ -74,6 +74,8 @@ struct mem_sharing_domain
+      * to resume the search.
+      */
+     unsigned long next_shared_gfn_to_relinquish;
++
++    bool block_interrupts;
+ };
+ #endif
  
- $(LIBXL_OBJS) $(LIBXLU_OBJS) $(SAVE_HELPER_OBJS) \
- 		$(LIBXL_TEST_OBJS) $(TEST_PROG_OBJS): \
-@@ -274,6 +274,16 @@ _libxl_type%.h _libxl_type%_json.h _libxl_type%_private.h _libxl_type%.c: libxl_
- 	$(call move-if-changed,__libxl_type$(stem)_json.h,_libxl_type$(stem)_json.h)
- 	$(call move-if-changed,__libxl_type$(stem).c,_libxl_type$(stem).c)
- 
-+.PHONY: idl-external
-+idl-external:
-+	$(MAKE) -C $(XEN_ROOT)/tools/golang/xenlight idl-gen
-+
-+LIBXL_IDLGEN_FILES = _libxl_types.h _libxl_types_json.h _libxl_types_private.h _libxl_types.c \
-+	_libxl_types_internal.h _libxl_types_internal_json.h _libxl_types_internal_private.h _libxl_types_internal.c
-+
-+
-+idl-gen: $(LIBXL_GEN_FILES) idl-external
-+
- libxenlight.so: libxenlight.so.$(MAJOR)
- 	$(SYMLINK_SHLIB) $< $@
- 
+diff --git a/xen/include/public/memory.h b/xen/include/public/memory.h
+index dbd35305df..1e4959638d 100644
+--- a/xen/include/public/memory.h
++++ b/xen/include/public/memory.h
+@@ -537,6 +537,7 @@ struct xen_mem_sharing_op {
+         struct mem_sharing_op_fork {      /* OP_FORK */
+             domid_t parent_domain;        /* IN: parent's domain id */
+ #define XENMEM_FORK_WITH_IOMMU_ALLOWED (1u << 0)
++#define XENMEM_FORK_BLOCK_INTERRUPTS   (1u << 1)
+             uint16_t flags;               /* IN: optional settings */
+             uint32_t pad;                 /* Must be set to 0 */
+         } fork;
 -- 
 2.25.1
 
