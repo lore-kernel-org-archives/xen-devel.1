@@ -6,48 +6,51 @@ X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 78BD2C433E3
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 14:10:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A78EC433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 14:11:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 533112224C
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 14:10:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 533112224C
+	by mail.kernel.org (Postfix) with ESMTPS id 526A922226
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 14:11:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 526A922226
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jc7wI-0007Gj-KQ; Fri, 22 May 2020 13:42:18 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jc8Ib-0001IK-J9; Fri, 22 May 2020 14:05:21 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=knsM=7E=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jc7wI-0007Ge-0r
- for xen-devel@lists.xenproject.org; Fri, 22 May 2020 13:42:18 +0000
-X-Inumbo-ID: 0a86a730-9c32-11ea-b07b-bc764e2007e4
+ id 1jc8Ia-0001IE-Bw
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2020 14:05:20 +0000
+X-Inumbo-ID: 44890b82-9c35-11ea-abe0-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0a86a730-9c32-11ea-b07b-bc764e2007e4;
- Fri, 22 May 2020 13:42:13 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 44890b82-9c35-11ea-abe0-12813bfff9fa;
+ Fri, 22 May 2020 14:05:19 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id E5AC2B00E;
- Fri, 22 May 2020 13:42:14 +0000 (UTC)
+ by mx2.suse.de (Postfix) with ESMTP id D0DFCAD12;
+ Fri, 22 May 2020 14:05:20 +0000 (UTC)
 Subject: Re: [PATCH v4] x86/idle: prevent entering C6 with in service
  interrupts on Intel
-To: Roger Pau Monne <roger.pau@citrix.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 References: <20200521092258.82503-1-roger.pau@citrix.com>
+ <b59a2d2e-e66d-f3a1-dd85-fd7c7eccc98a@suse.com>
+ <20200522135429.GD54375@Air-de-Roger>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <b59a2d2e-e66d-f3a1-dd85-fd7c7eccc98a@suse.com>
-Date: Fri, 22 May 2020 15:42:10 +0200
+Message-ID: <5140b52a-4c47-e36d-6a04-4a24d70e539c@suse.com>
+Date: Fri, 22 May 2020 16:05:16 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200521092258.82503-1-roger.pau@citrix.com>
+In-Reply-To: <20200522135429.GD54375@Air-de-Roger>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,16 +66,32 @@ Cc: xen-devel@lists.xenproject.org, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 21.05.2020 11:22, Roger Pau Monne wrote:
-> Apply a workaround for Intel errata BDX99, CLX30, SKX100, CFW125,
-> BDF104, BDH85, BDM135, KWB131: "A Pending Fixed Interrupt May Be
-> Dispatched Before an Interrupt of The Same Priority Completes".
+On 22.05.2020 15:54, Roger Pau Monné wrote:
+> On Fri, May 22, 2020 at 03:42:10PM +0200, Jan Beulich wrote:
+>> On 21.05.2020 11:22, Roger Pau Monne wrote:
+>>> Apply a workaround for Intel errata BDX99, CLX30, SKX100, CFW125,
+>>> BDF104, BDH85, BDM135, KWB131: "A Pending Fixed Interrupt May Be
+>>> Dispatched Before an Interrupt of The Same Priority Completes".
+>>
+>> While the change looks good to me as far as Broadwell goes, I
+>> think it was before this posting that Andrew also pointed at
+>> a specific Haswell erratum instance, still on the v3 thread.
+>> Am I to imply a v5 will follow adding affected Haswell models
+>> to the table?
+> 
+> Those refer to a different errata, see:
+> 
+> https://lore.kernel.org/xen-devel/84486d84-4452-af18-f7e7-753faf5a125d@citrix.com/
+> 
+> So we believe this also affects Haswell, but the errata is not published
+> for those CPUs (yet at least). If/when it's published I'm happy to add
+> it, in the meantime I think we should go with what has been published
+> by Intel.
 
-While the change looks good to me as far as Broadwell goes, I
-think it was before this posting that Andrew also pointed at
-a specific Haswell erratum instance, still on the v3 thread.
-Am I to imply a v5 will follow adding affected Haswell models
-to the table?
+Oh, sorry, yes - should have looked at the full thread again, not
+just Andrew's initial response.
+
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
