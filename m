@@ -2,57 +2,68 @@ Return-Path: <SRS0=Ri3b=7E=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AEB3AC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 13:28:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D288C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 13:33:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7D4E32065F
-	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 13:28:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7D4E32065F
+	by mail.kernel.org (Postfix) with ESMTPS id D90D120723
+	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 13:33:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D90D120723
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jc7iQ-0004mI-6U; Fri, 22 May 2020 13:27:58 +0000
+	id 1jc7nQ-0005so-Oc; Fri, 22 May 2020 13:33:08 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=hXvX=7E=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
- id 1jc7iP-0004mD-PH
- for xen-devel@lists.xenproject.org; Fri, 22 May 2020 13:27:57 +0000
-X-Inumbo-ID: 0c3298d4-9c30-11ea-b9cf-bc764e2007e4
-Received: from ppsw-31.csi.cam.ac.uk (unknown [131.111.8.131])
+ <SRS0=L400=7E=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jc7nP-0005sa-Kw
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2020 13:33:07 +0000
+X-Inumbo-ID: c48df004-9c30-11ea-b9cf-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 0c3298d4-9c30-11ea-b9cf-bc764e2007e4;
- Fri, 22 May 2020 13:27:57 +0000 (UTC)
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from 88-109-182-220.dynamic.dsl.as9105.com ([88.109.182.220]:43970
- helo=[192.168.1.219])
- by ppsw-31.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.157]:465)
- with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- id 1jc7iM-000sCb-M2 (Exim 4.92.3)
- (return-path <amc96@hermes.cam.ac.uk>); Fri, 22 May 2020 14:27:54 +0100
-Subject: Re: [PATCH v3 1/3] x86: relax GDT check in arch_set_info_guest()
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cbed3c45-3685-4bce-9719-93b1e8a2599a@suse.com>
- <acbaead9-0f6c-3606-e809-57dafe9b3f01@suse.com>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <58510f15-68d6-c773-5166-a38c72573442@citrix.com>
-Date: Fri, 22 May 2020 14:27:54 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id c48df004-9c30-11ea-b9cf-bc764e2007e4;
+ Fri, 22 May 2020 13:33:06 +0000 (UTC)
+Authentication-Results: esa3.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: LsteYU31AyrEhPUfZTgRE8v7ddfrDt4R/9S1KCMro4qUdmaGpBJvP56a92ktwAOszUbuQMAzNk
+ ODj/MLM+IL9J7MJtz4JfurNRZLx36sMbWxxu7RxELg2rsYIaDHHCiu2gcPAI75A+TzuN1CwcwN
+ /IPGi1c5RYopwxMnnr3xqeLYeKHUVgf0v0v77NGuEn1/AIyp6avHODLYqgBoFTs5ygnTlW41Wg
+ ozwwL/d35BDvX+m6FIwAV7bis0IqPmd4mpwPAkzUDE7K5N7lWL12to+iPKVwWbzpJUdK1tj0R7
+ p9M=
+X-SBRS: 2.7
+X-MesageID: 18174891
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,421,1583211600"; d="scan'208";a="18174891"
+Date: Fri, 22 May 2020 15:32:59 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/svm: retry after unhandled NPT fault if gfn was
+ marked for recalculation
+Message-ID: <20200522133259.GC54375@Air-de-Roger>
+References: <1590097438-28829-1-git-send-email-igor.druzhinin@citrix.com>
+ <20200522100846.GV54375@Air-de-Roger>
+ <04ec4ab4-a121-c5be-0a65-316e237dd793@citrix.com>
+ <20200522102339.GX54375@Air-de-Roger>
+ <fe6e5c7f-df0f-5436-a7cd-2949464ab9a7@citrix.com>
+ <20200522111146.GZ54375@Air-de-Roger>
+ <4831dc51-cea1-2870-422b-2af7d6d1f2d6@suse.com>
+ <ef3411ac-9e7c-0ef7-ad9f-c24f8ebf32a6@citrix.com>
 MIME-Version: 1.0
-In-Reply-To: <acbaead9-0f6c-3606-e809-57dafe9b3f01@suse.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ef3411ac-9e7c-0ef7-ad9f-c24f8ebf32a6@citrix.com>
+X-ClientProxiedBy: AMSPEX02CAS02.citrite.net (10.69.22.113) To
+ AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,20 +74,38 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Wei Liu <wl@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Igor Druzhinin <igor.druzhinin@citrix.com>, wl@xen.org,
+ Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 20/05/2020 08:53, Jan Beulich wrote:
-> It is wrong for us to check frames beyond the guest specified limit
-> (in the compat case another loop bound is already correct).
->
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On Fri, May 22, 2020 at 02:11:15PM +0100, Andrew Cooper wrote:
+> On 22/05/2020 14:04, Jan Beulich wrote:
+> > On 22.05.2020 13:11, Roger Pau Monné wrote:
+> >> That being said, I also don't like the fact that logdity is handled
+> >> differently between EPT and NPT, as on EPT it's handled as a
+> >> misconfig while on NPT it's handled as a violation.
+> > Because, well, there is no concept of misconfig in NPT.
+> 
+> Indeed.  Intel chose to split EPT errors into two - MISCONFIG for
+> structural errors (not present, or reserved bits set) and VIOLATION for
+> permissions errors.
+> 
+> AMD reused the same silicon pagewalker design, so have a single
+> NPT_FAULT vmexit which behaves much more like a regular pagefault,
+> encoding structural vs permission errors in the error code.
 
-I'm still not overly convinced this is a good idea, because all it will
-allow people to do is write lazy code which breaks on older Xen.
+Maybe I should clarify, I understand that NPT doesn't have such
+differentiation regarding nested page table faults vs EPT, but I feel
+like it would be clearer if part of the code could be shared, ie:
+unify EPT resolve_misconfig and NPT do_recalc into a single function
+for example that uses the necessary p2m-> helpers for the differing
+implementations. I think we should be able to tell apart when a NPT
+page fault is a recalc one by looking at the bits in the EXITINFO1
+error field?
 
-However, if you still insist, Acked-by: Andrew Cooper
-<andrew.cooper3@citrix.com>
+Anyway, this was just a rant, and it's tangential to the issue at
+hand, sorry for distracting.
+
+Roger.
 
