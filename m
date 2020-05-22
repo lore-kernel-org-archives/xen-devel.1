@@ -2,54 +2,55 @@ Return-Path: <SRS0=Ri3b=7E=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 36083C433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4A192C433E1
 	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 16:13:31 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 13E8E2078D
+	by mail.kernel.org (Postfix) with ESMTPS id 28473207F9
 	for <xen-devel@archiver.kernel.org>; Fri, 22 May 2020 16:13:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 13E8E2078D
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 28473207F9
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jcAII-00063f-GS; Fri, 22 May 2020 16:13:10 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jcAIE-000638-8A; Fri, 22 May 2020 16:13:06 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=2cgu=7E=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jcAIG-00063T-TR
- for xen-devel@lists.xenproject.org; Fri, 22 May 2020 16:13:08 +0000
-X-Inumbo-ID: 1ca260c1-9c47-11ea-abf6-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1ca260c1-9c47-11ea-abf6-12813bfff9fa;
- Fri, 22 May 2020 16:13:03 +0000 (UTC)
-Authentication-Results: esa6.hc3370-68.iphmx.com;
+ id 1jcAID-00062x-12
+ for xen-devel@lists.xenproject.org; Fri, 22 May 2020 16:13:05 +0000
+X-Inumbo-ID: 1d602c9a-9c47-11ea-b9cf-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 1d602c9a-9c47-11ea-b9cf-bc764e2007e4;
+ Fri, 22 May 2020 16:13:04 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: H1HFa8+grZ7oFej9hGO2VMHPPWnJV8aaJrw+GbjtDg0jVZCqiLR8a8/3JJWBzAZDaiIUWJ7wvS
- 4qlm0rfOfsKkuCu97+rr9taChIiTTdlwYn58dnuegKQgRujqSYEKsy35qA5oWahlIrRO8H7S0B
- MWAmMGuWkHdl1w69dKsmUXiKsLWl+z5kxvMetkiHnOnqgVcsYc7UEFekwfbeEd3kgtMYuVAYu8
- X6T8btkJNKaSrpunjGjQlfI4Zuu36pv/fjWzZpdAEMS2rxDmSQYI2UJ+mLNlF8lELqDmearTjX
- HRo=
+IronPort-SDR: 22nWqa1HOEUlJZzT1IqShg9g3FD7lnx5clfJoCR5UU4RJeD7RLjKAHXlulsxeGBSZr9kwcBq6p
+ Oy1ENo0CiMdKvFjQsIlR7atnKsxFqvzpZeFVLjQtBXShWl6iV4DI/1GAaoekfU6IuU4PohRQ5z
+ UcyUoKQy+nuTnUzxsOgo8/6S66HWg2Rh4qxx9tDSbLlYQxPCxy9RfAfpX0QYJVLBFwb2Evo8/C
+ vEDYjbxDqkVY7Yfqxa8Llk5WySqiiCRKAURglXu/Kd46UCLf0I7rLgDmrJQN3DGtI/YdUurAaA
+ m0c=
 X-SBRS: 2.7
-X-MesageID: 18557067
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
+X-MesageID: 18454768
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,422,1583211600"; d="scan'208";a="18557067"
+X-IronPort-AV: E=Sophos;i="5.73,422,1583211600"; d="scan'208";a="18454768"
 From: George Dunlap <george.dunlap@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH 0/5] Golang build fixes
-Date: Fri, 22 May 2020 17:12:35 +0100
-Message-ID: <20200522161240.3748320-1-george.dunlap@citrix.com>
+Subject: [PATCH 5/5] gitignore: Ignore golang package directory
+Date: Fri, 22 May 2020 17:12:40 +0100
+Message-ID: <20200522161240.3748320-6-george.dunlap@citrix.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200522161240.3748320-1-george.dunlap@citrix.com>
+References: <20200522161240.3748320-1-george.dunlap@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -63,33 +64,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
- Ian Jackson <ian.jackson@citrix.com>, George Dunlap <george.dunlap@citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
+ Konrad Wilk <konrad.wilk@oracle.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Nick Rosbrook <rosbrookn@ainfosec.com>, Julien Grall <julien.grall@arm.com>,
+ Jan Beulich <jbeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is a series of patches that improve build for the golang xenlight
-bindings.  The most important patch is #3, which will update the
-generated golang bindings from the tools/libxl directory when
-libxl_types.idl is updated, even if the person building doesn't have
-the golang packages enabled.
-
-George Dunlap (5):
-  golang: Add a minimum go version to go.mod
-  golang: Add a variable for the libxl source directory
-  libxl: Generate golang bindings in libxl Makefile
-  golang/xenlight: Use XEN_PKG_DIR variable rather than open-coding
-  gitignore: Ignore golang package directory
-
- .gitignore                     |  1 +
- tools/golang/xenlight/Makefile | 12 +++++++++---
- tools/golang/xenlight/go.mod   |  2 ++
- tools/libxl/Makefile           | 12 +++++++++++-
- 4 files changed, 23 insertions(+), 4 deletions(-)
-
---
+Signed-off-by: George Dunlap <george.dunlap@citrix.com>
+---
 CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Nick Rosbrook <rosbrookn@ainfosec.com>
 CC: Wei Liu <wl@xen.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Konrad Wilk <konrad.wilk@oracle.com>
+CC: Stefano Stabellini <sstabellini@kernel.org>
+CC: Julien Grall <julien.grall@arm.com>
+CC: Nick Rosbrook <rosbrookn@ainfosec.com>
+---
+ .gitignore | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.gitignore b/.gitignore
+index 7418ce9829..caaaa15b49 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -406,6 +406,7 @@ tools/python/xen/lowlevel/xl/_pyxl_types.h
+ tools/xenstore/xenstore-watch
+ tools/xl/_paths.h
+ tools/xl/xl
++tools/golang/src
+ 
+ docs/txt/misc/*.txt
+ docs/txt/man/*.txt
+-- 
+2.25.1
+
 
