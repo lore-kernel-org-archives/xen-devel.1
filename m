@@ -2,91 +2,52 @@ Return-Path: <SRS0=HK45=7H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C3F5C433E0
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 14:28:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D1A4CC433DF
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 14:28:47 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6E16F20878
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 14:28:25 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=tklengyel-com.20150623.gappssmtp.com header.i=@tklengyel-com.20150623.gappssmtp.com header.b="14XCvgWa"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6E16F20878
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=tklengyel.com
+	by mail.kernel.org (Postfix) with ESMTPS id A31C720888
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 14:28:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A31C720888
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdE5N-00088V-Re; Mon, 25 May 2020 14:28:13 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=RZKA=7H=tklsoftware.com=tamas@srs-us1.protection.inumbo.net>)
- id 1jdE5M-00088G-83
- for xen-devel@lists.xenproject.org; Mon, 25 May 2020 14:28:12 +0000
-X-Inumbo-ID: f5e53cba-9e93-11ea-b9cf-bc764e2007e4
-Received: from mail-ed1-x542.google.com (unknown [2a00:1450:4864:20::542])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f5e53cba-9e93-11ea-b9cf-bc764e2007e4;
- Mon, 25 May 2020 14:28:11 +0000 (UTC)
-Received: by mail-ed1-x542.google.com with SMTP id e10so15173959edq.0
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2020 07:28:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tklengyel-com.20150623.gappssmtp.com; s=20150623;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=+tV9JRJ6FoJ6dNHFeSBVvjjvhV689iBU5DthCBbQEdI=;
- b=14XCvgWa7QBQQB2K8w1of7gvfhAB9ppLx4tOfy58dq5BECAwhw70sQvQnT6uCY1abE
- EhbKkwoa4E1iQy43Ld/IeyZYr7xQ/YNUHI/q+MsrD+wp075Po+DEFXuX+g2LkY3EM2cS
- JiV/eU+YRewOZ7C+xPbLWf3/2POZ4jbwUYtRqr1qlvyKS3OqqvggcjoJ/VDtq66qd9cf
- mmZ1GBA/O7Azw4BJdh2u1f5MUDIBEhqAZKlMN9N8g2rF/kvhzMgGeu6wiBJpZ1RlLqcp
- qeQjo2eL1EQNt8T/0xRUrJHbYZczVx2EIZJmNJUFrNGQJT6wEWtpTCkvrr9J7ylVvXke
- 0SOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+tV9JRJ6FoJ6dNHFeSBVvjjvhV689iBU5DthCBbQEdI=;
- b=sNny/ja3aeq97gSdeTI6rfpHHFQ4Kh/uiREnbOLGCVUThlU3XHpvWT1Lb1jxq7+A84
- rYhr87nQb1BrVkAuV757jhDkUcEgKUZ28bjdSw3ZMZ8KrjODoor3ozhYHxn1qHlq3UGD
- Y1ouGgxeIfXwmQsWS6R/A+UYrgA+Q6WnCeTrg63WRWkY7yqrsPWNHa3YQ/yvPPWpbkO0
- 7Nr+7rwlA4SD16bfVsFW/eLhQm4i2/GiESbQyEv/jwdTFRe/h5rA2Co7vQlLjiBsXkf5
- P1E9iy2pGmF4JHAVR/Bf2jgl5H03KNIaVTrJZ/gh9OpgWIA53THXj8uDliKmPY/mWo9K
- VcFw==
-X-Gm-Message-State: AOAM533kssbk2/SLvW8Sb1ki03SV/2ayh7GJJ7AVAGDedVTEJaa9E23J
- JVb/1zi6b98VTZBNJRkWr1kxlcUdyf4=
-X-Google-Smtp-Source: ABdhPJzanoClpdWHbahWwCoZAx+AFevN6DqK2Z7lvv0fTkRrQT+24XpXjsm1hXyX/eFpLGxWLiaVGw==
-X-Received: by 2002:a50:8754:: with SMTP id 20mr15980099edv.57.1590416890389; 
- Mon, 25 May 2020 07:28:10 -0700 (PDT)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com.
- [209.85.221.43])
- by smtp.gmail.com with ESMTPSA id b16sm16030130ejg.43.2020.05.25.07.28.09
- for <xen-devel@lists.xenproject.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 May 2020 07:28:09 -0700 (PDT)
-Received: by mail-wr1-f43.google.com with SMTP id r7so552954wro.1
- for <xen-devel@lists.xenproject.org>; Mon, 25 May 2020 07:28:09 -0700 (PDT)
-X-Received: by 2002:a5d:5707:: with SMTP id a7mr15227844wrv.259.1590416888945; 
- Mon, 25 May 2020 07:28:08 -0700 (PDT)
+	id 1jdE5i-0008Du-AP; Mon, 25 May 2020 14:28:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=MLe6=7H=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jdE5g-0008DM-D5
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2020 14:28:32 +0000
+X-Inumbo-ID: 00e74cf2-9e94-11ea-aee4-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 00e74cf2-9e94-11ea-aee4-12813bfff9fa;
+ Mon, 25 May 2020 14:28:30 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id B3BB1B13D;
+ Mon, 25 May 2020 14:28:31 +0000 (UTC)
+Subject: [PATCH v10 5/9] x86emul: support MOVDIR{I,64B} insns
+From: Jan Beulich <jbeulich@suse.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <d2375ecb-f662-99d8-84c2-e9f9c5cf7b9e@suse.com>
+Message-ID: <ae7ff12a-edf9-45b5-b7c9-6c5b5d0739c0@suse.com>
+Date: Mon, 25 May 2020 16:28:28 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-References: <adfececa3e29a46f5347459a629aa534d61625aa.1590165055.git.tamas.lengyel@intel.com>
- <338c26dc-a78a-4519-11f1-1b89bd1cf4db@suse.com>
- <CABfawh=WPyW383QAe_JwRC2q8W1zHXcYntjYF-Vog34baQcrfw@mail.gmail.com>
- <e5a2899c-f375-55e8-fc6c-940b70929ae6@suse.com>
- <CABfawhnB4WY6U-XcigT+X=n4e8qdDMFokMWR1Sc_s-oMeyZRWg@mail.gmail.com>
- <78714288-89b0-6a53-4f74-f2306ae6e749@suse.com>
- <CABfawhkMzpekYLqXqZZZ5Mxum-eHqMAWvAguaRakFasJKtPfFQ@mail.gmail.com>
-In-Reply-To: <CABfawhkMzpekYLqXqZZZ5Mxum-eHqMAWvAguaRakFasJKtPfFQ@mail.gmail.com>
-From: Tamas K Lengyel <tamas@tklengyel.com>
-Date: Mon, 25 May 2020 08:27:30 -0600
-X-Gmail-Original-Message-ID: <CABfawhmxMA0Tgwez_cGrTDoMtYVe5Z+sOng0QqEVMb_M6M-mQQ@mail.gmail.com>
-Message-ID: <CABfawhmxMA0Tgwez_cGrTDoMtYVe5Z+sOng0QqEVMb_M6M-mQQ@mail.gmail.com>
-Subject: Re: [PATCH v2 for-4.14 1/2] x86/mem_sharing: block interrupt
- injection for forks
-To: Jan Beulich <jbeulich@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <d2375ecb-f662-99d8-84c2-e9f9c5cf7b9e@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,85 +58,435 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Julien Grall <julien@xen.org>, Kevin Tian <kevin.tian@intel.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Jun Nakajima <jun.nakajima@intel.com>,
- Xen-devel <xen-devel@lists.xenproject.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, May 25, 2020 at 8:14 AM Tamas K Lengyel <tamas@tklengyel.com> wrote:
->
-> On Mon, May 25, 2020 at 8:06 AM Jan Beulich <jbeulich@suse.com> wrote:
-> >
-> > On 25.05.2020 15:46, Tamas K Lengyel wrote:
-> > > On Mon, May 25, 2020 at 7:06 AM Jan Beulich <jbeulich@suse.com> wrote:
-> > >>
-> > >> On 25.05.2020 14:18, Tamas K Lengyel wrote:
-> > >>> On Mon, May 25, 2020 at 12:06 AM Jan Beulich <jbeulich@suse.com> wrote:
-> > >>>>
-> > >>>> On 22.05.2020 18:33, Tamas K Lengyel wrote:
-> > >>>>> When running shallow forks without device models it may be undesirable for Xen
-> > >>>>> to inject interrupts. With Windows forks we have observed the kernel going into
-> > >>>>> infinite loops when trying to process such interrupts, likely because it attempts
-> > >>>>> to interact with devices that are not responding without QEMU running. By
-> > >>>>> disabling interrupt injection the fuzzer can exercise the target code without
-> > >>>>> interference.
-> > >>>>>
-> > >>>>> Forks & memory sharing are only available on Intel CPUs so this only applies
-> > >>>>> to vmx.
-> > >>>>
-> > >>>> Looking at e.g. mem_sharing_control() I can't seem to be able to confirm
-> > >>>> this. Would you mind pointing me at where this restriction is coming from?
-> > >>>
-> > >>> Both mem_access and mem_sharing are only implemented for EPT:
-> > >>> http://xenbits.xen.org/hg/xen-unstable.hg/file/5eadf9363c25/xen/arch/x86/mm/p2m-ept.c#l126.
-> > >>
-> > >> p2m-pt.c:p2m_type_to_flags() has a similar case label.
-> > >
-> > > It doesn't do anything though, does it? For mem_sharing to work you
-> > > actively have to restrict the memory permissions on the shared entries
-> > > to be read/execute only. That's only done for EPT.
-> >
-> > Does it not? I seems to me that it does, seeing the case sits
-> > together with the p2m_ram_ro and p2m_ram_logdirty ones:
-> >
-> >     case p2m_ram_ro:
-> >     case p2m_ram_logdirty:
-> >     case p2m_ram_shared:
-> >         return flags | P2M_BASE_FLAGS;
-> >
-> > >> And I can't
-> > >> spot a respective restriction in mem_sharing_memop(), i.e. it looks
-> > >> to me as if enabling mem-sharing on NPT (to satisfy hap_enabled()
-> > >> in mem_sharing_control()) would be possible.
-> > >
-> > > If you are looking for an explicit gate like that, then you are right,
-> > > there isn't one. You can ask the original authors of this subsystem
-> > > why that is. If you feel like adding an extra gate, I wouldn't object.
-> >
-> > Well, the question here isn't about gating - that's an independent
-> > bug if it's indeed missing. The question is whether SVM code also
-> > needs touching, as was previously requested. You tried to address
-> > this by stating an Intel-only limitation, which I couldn't find
-> > proof for (so far).
->
-> Well, as far as I'm concerned VM forking is for Intel hardware only.
-> If mem_sharing seems to work for non-Intel hw - I was unaware of that
-> - than I'll just add an extra check for the VM fork hypercall that
-> gates it. It may be possible for technically be made available for
-> other hw as well, but at this time that's completely out-of-scope.
+Introduce a new blk() hook, paralleling the rmw() one in a certain way,
+but being intended for larger data sizes, and hence its HVM intermediate
+handling function doesn't fall back to splitting the operation if the
+requested virtual address can't be mapped.
 
-Actually, I'm going to just add that gate completely for mem_sharing.
-Even if it at some time worked on other architectures (doubtful) at
-this time its a usecase that's completely abandoned and forgotten and
-as far as I'm concerned unmaintained with no plans from my side to
-ever maintain it.
+Note that SDM revision 071 doesn't specify exception behavior for
+ModRM.mod == 0b11; assuming #UD here.
 
-Tamas
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Paul Durrant <paul@xen.org>
+---
+v10: Re-base over changes earlier in the series as well as later parts
+     comitted already.
+v9: Fold in "x86/HVM: make hvmemul_blk() capable of handling r/o
+    operations". Also adjust x86_insn_is_mem_write().
+v7: Add blk_NONE. Move  harness'es setting of .blk. Correct indentation.
+    Re-base.
+v6: Fold MOVDIRI and MOVDIR64B changes again. Use blk() for both. All
+    tags dropped.
+v5: Introduce/use ->blk() hook. Correct asm() operands.
+v4: Split MOVDIRI and MOVDIR64B and move this one ahead. Re-base.
+v3: Update description.
+---
+(SDE: -tnt)
+
+--- a/tools/tests/x86_emulator/predicates.c
++++ b/tools/tests/x86_emulator/predicates.c
+@@ -510,6 +510,8 @@ static const struct {
+     /*{ 0xf6 }, { 2, 2 }, F, W }, wrss */
+     { { 0xf6 }, { 2, 2 }, T, R, pfx_66 }, /* adcx */
+     { { 0xf6 }, { 2, 2 }, T, R, pfx_f3 }, /* adox */
++    { { 0xf8 }, { 2, 2 }, F, W, pfx_66 }, /* movdir64b */
++    { { 0xf9 }, { 2, 2 }, F, W }, /* movdiri */
+ };
+ #undef CND
+ #undef REG
+--- a/tools/tests/x86_emulator/test_x86_emulator.c
++++ b/tools/tests/x86_emulator/test_x86_emulator.c
+@@ -652,6 +652,18 @@ static int cmpxchg(
+     return X86EMUL_OKAY;
+ }
+ 
++static int blk(
++    enum x86_segment seg,
++    unsigned long offset,
++    void *p_data,
++    unsigned int bytes,
++    uint32_t *eflags,
++    struct x86_emulate_state *state,
++    struct x86_emulate_ctxt *ctxt)
++{
++    return x86_emul_blk((void *)offset, p_data, bytes, eflags, state, ctxt);
++}
++
+ static int read_segment(
+     enum x86_segment seg,
+     struct segment_register *reg,
+@@ -721,6 +733,7 @@ static struct x86_emulate_ops emulops =
+     .insn_fetch = fetch,
+     .write      = write,
+     .cmpxchg    = cmpxchg,
++    .blk        = blk,
+     .read_segment = read_segment,
+     .cpuid      = emul_test_cpuid,
+     .read_cr    = emul_test_read_cr,
+@@ -2339,6 +2352,50 @@ int main(int argc, char **argv)
+         goto fail;
+     printf("okay\n");
+ 
++    printf("%-40s", "Testing movdiri %edx,(%ecx)...");
++    if ( stack_exec && cpu_has_movdiri )
++    {
++        instr[0] = 0x0f; instr[1] = 0x38; instr[2] = 0xf9; instr[3] = 0x11;
++
++        regs.eip = (unsigned long)&instr[0];
++        regs.ecx = (unsigned long)memset(res, -1, 16);
++        regs.edx = 0x44332211;
++
++        rc = x86_emulate(&ctxt, &emulops);
++        if ( (rc != X86EMUL_OKAY) ||
++             (regs.eip != (unsigned long)&instr[4]) ||
++             res[0] != 0x44332211 || ~res[1] )
++            goto fail;
++        printf("okay\n");
++    }
++    else
++        printf("skipped\n");
++
++    printf("%-40s", "Testing movdir64b 144(%edx),%ecx...");
++    if ( stack_exec && cpu_has_movdir64b )
++    {
++        instr[0] = 0x66; instr[1] = 0x0f; instr[2] = 0x38; instr[3] = 0xf8;
++        instr[4] = 0x8a; instr[5] = 0x90; instr[8] = instr[7] = instr[6] = 0;
++
++        regs.eip = (unsigned long)&instr[0];
++        for ( i = 0; i < 64; ++i )
++            res[i] = i - 20;
++        regs.edx = (unsigned long)res;
++        regs.ecx = (unsigned long)(res + 16);
++
++        rc = x86_emulate(&ctxt, &emulops);
++        if ( (rc != X86EMUL_OKAY) ||
++             (regs.eip != (unsigned long)&instr[9]) ||
++             res[15] != -5 || res[32] != 12 )
++            goto fail;
++        for ( i = 16; i < 32; ++i )
++            if ( res[i] != i )
++                goto fail;
++        printf("okay\n");
++    }
++    else
++        printf("skipped\n");
++
+     printf("%-40s", "Testing movq %mm3,(%ecx)...");
+     if ( stack_exec && cpu_has_mmx )
+     {
+--- a/tools/tests/x86_emulator/x86-emulate.h
++++ b/tools/tests/x86_emulator/x86-emulate.h
+@@ -160,6 +160,8 @@ static inline bool xcr0_mask(uint64_t ma
+ #define cpu_has_avx512_vnni (cp.feat.avx512_vnni && xcr0_mask(0xe6))
+ #define cpu_has_avx512_bitalg (cp.feat.avx512_bitalg && xcr0_mask(0xe6))
+ #define cpu_has_avx512_vpopcntdq (cp.feat.avx512_vpopcntdq && xcr0_mask(0xe6))
++#define cpu_has_movdiri    cp.feat.movdiri
++#define cpu_has_movdir64b  cp.feat.movdir64b
+ #define cpu_has_avx512_4vnniw (cp.feat.avx512_4vnniw && xcr0_mask(0xe6))
+ #define cpu_has_avx512_4fmaps (cp.feat.avx512_4fmaps && xcr0_mask(0xe6))
+ #define cpu_has_serialize  cp.feat.serialize
+--- a/xen/arch/x86/arch.mk
++++ b/xen/arch/x86/arch.mk
+@@ -47,6 +47,7 @@ $(call as-option-add,CFLAGS,CC,"rdseed %
+ $(call as-option-add,CFLAGS,CC,"clwb (%rax)",-DHAVE_AS_CLWB)
+ $(call as-option-add,CFLAGS,CC,".equ \"x\"$$(comma)1",-DHAVE_AS_QUOTED_SYM)
+ $(call as-option-add,CFLAGS,CC,"invpcid (%rax)$$(comma)%rax",-DHAVE_AS_INVPCID)
++$(call as-option-add,CFLAGS,CC,"movdiri %rax$$(comma)(%rax)",-DHAVE_AS_MOVDIR)
+ 
+ # GAS's idea of true is -1.  Clang's idea is 1
+ $(call as-option-add,CFLAGS,CC,\
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -1441,6 +1441,47 @@ static int hvmemul_rmw(
+     return rc;
+ }
+ 
++static int hvmemul_blk(
++    enum x86_segment seg,
++    unsigned long offset,
++    void *p_data,
++    unsigned int bytes,
++    uint32_t *eflags,
++    struct x86_emulate_state *state,
++    struct x86_emulate_ctxt *ctxt)
++{
++    struct hvm_emulate_ctxt *hvmemul_ctxt =
++        container_of(ctxt, struct hvm_emulate_ctxt, ctxt);
++    unsigned long addr;
++    uint32_t pfec = PFEC_page_present;
++    int rc;
++    void *mapping = NULL;
++
++    rc = hvmemul_virtual_to_linear(
++        seg, offset, bytes, NULL, hvm_access_write, hvmemul_ctxt, &addr);
++    if ( rc != X86EMUL_OKAY || !bytes )
++        return rc;
++
++    if ( x86_insn_is_mem_write(state, ctxt) )
++        pfec |= PFEC_write_access;
++
++    if ( is_x86_system_segment(seg) )
++        pfec |= PFEC_implicit;
++    else if ( hvmemul_ctxt->seg_reg[x86_seg_ss].dpl == 3 )
++        pfec |= PFEC_user_mode;
++
++    mapping = hvmemul_map_linear_addr(addr, bytes, pfec, hvmemul_ctxt);
++    if ( IS_ERR(mapping) )
++        return ~PTR_ERR(mapping);
++    if ( !mapping )
++        return X86EMUL_UNHANDLEABLE;
++
++    rc = x86_emul_blk(mapping, p_data, bytes, eflags, state, ctxt);
++    hvmemul_unmap_linear_addr(mapping, addr, bytes, hvmemul_ctxt);
++
++    return rc;
++}
++
+ static int hvmemul_write_discard(
+     enum x86_segment seg,
+     unsigned long offset,
+@@ -2518,6 +2559,7 @@ static const struct x86_emulate_ops hvm_
+     .write         = hvmemul_write,
+     .rmw           = hvmemul_rmw,
+     .cmpxchg       = hvmemul_cmpxchg,
++    .blk           = hvmemul_blk,
+     .validate      = hvmemul_validate,
+     .rep_ins       = hvmemul_rep_ins,
+     .rep_outs      = hvmemul_rep_outs,
+--- a/xen/arch/x86/x86_emulate/x86_emulate.c
++++ b/xen/arch/x86/x86_emulate/x86_emulate.c
+@@ -548,6 +548,8 @@ static const struct ext0f38_table {
+     [0xf1] = { .to_mem = 1, .two_op = 1 },
+     [0xf2 ... 0xf3] = {},
+     [0xf5 ... 0xf7] = {},
++    [0xf8] = { .simd_size = simd_other },
++    [0xf9] = { .to_mem = 1, .two_op = 1 /* Mov */ },
+ };
+ 
+ /* Shift values between src and dst sizes of pmov{s,z}x{b,w,d}{w,d,q}. */
+@@ -851,6 +853,10 @@ struct x86_emulate_state {
+         rmw_xchg,
+         rmw_xor,
+     } rmw;
++    enum {
++        blk_NONE,
++        blk_movdir,
++    } blk;
+     uint8_t modrm, modrm_mod, modrm_reg, modrm_rm;
+     uint8_t sib_index, sib_scale;
+     uint8_t rex_prefix;
+@@ -1915,6 +1921,8 @@ amd_like(const struct x86_emulate_ctxt *
+ #define vcpu_has_avx512_vpopcntdq() (ctxt->cpuid->feat.avx512_vpopcntdq)
+ #define vcpu_has_tsxldtrk()    (ctxt->cpuid->feat.tsxldtrk)
+ #define vcpu_has_rdpid()       (ctxt->cpuid->feat.rdpid)
++#define vcpu_has_movdiri()     (ctxt->cpuid->feat.movdiri)
++#define vcpu_has_movdir64b()   (ctxt->cpuid->feat.movdir64b)
+ #define vcpu_has_avx512_4vnniw() (ctxt->cpuid->feat.avx512_4vnniw)
+ #define vcpu_has_avx512_4fmaps() (ctxt->cpuid->feat.avx512_4fmaps)
+ #define vcpu_has_serialize()   (ctxt->cpuid->feat.serialize)
+@@ -2736,10 +2744,12 @@ x86_decode_0f38(
+     {
+     case 0x00 ... 0xef:
+     case 0xf2 ... 0xf5:
+-    case 0xf7 ... 0xff:
++    case 0xf7 ... 0xf8:
++    case 0xfa ... 0xff:
+         op_bytes = 0;
+         /* fall through */
+     case 0xf6: /* adcx / adox */
++    case 0xf9: /* movdiri */
+         ctxt->opcode |= MASK_INSR(vex.pfx, X86EMUL_OPC_PFX_MASK);
+         break;
+ 
+@@ -10218,6 +10228,34 @@ x86_emulate(
+                             : "0" ((uint32_t)src.val), "rm" (_regs.edx) );
+         break;
+ 
++    case X86EMUL_OPC_66(0x0f38, 0xf8): /* movdir64b r,m512 */
++        host_and_vcpu_must_have(movdir64b);
++        generate_exception_if(ea.type != OP_MEM, EXC_UD);
++        src.val = truncate_ea(*dst.reg);
++        generate_exception_if(!is_aligned(x86_seg_es, src.val, 64, ctxt, ops),
++                              EXC_GP, 0);
++        fail_if(!ops->blk);
++        state->blk = blk_movdir;
++        BUILD_BUG_ON(sizeof(*mmvalp) < 64);
++        if ( (rc = ops->read(ea.mem.seg, ea.mem.off, mmvalp, 64,
++                             ctxt)) != X86EMUL_OKAY ||
++             (rc = ops->blk(x86_seg_es, src.val, mmvalp, 64, &_regs.eflags,
++                            state, ctxt)) != X86EMUL_OKAY )
++            goto done;
++        state->simd_size = simd_none;
++        break;
++
++    case X86EMUL_OPC(0x0f38, 0xf9): /* movdiri mem,r */
++        host_and_vcpu_must_have(movdiri);
++        generate_exception_if(dst.type != OP_MEM, EXC_UD);
++        fail_if(!ops->blk);
++        state->blk = blk_movdir;
++        if ( (rc = ops->blk(dst.mem.seg, dst.mem.off, &src.val, op_bytes,
++                            &_regs.eflags, state, ctxt)) != X86EMUL_OKAY )
++            goto done;
++        dst.type = OP_NONE;
++        break;
++
+ #ifndef X86EMUL_NO_SIMD
+ 
+     case X86EMUL_OPC_VEX_66(0x0f3a, 0x00): /* vpermq $imm8,ymm/m256,ymm */
+@@ -11477,6 +11515,77 @@ int x86_emul_rmw(
+     return X86EMUL_OKAY;
+ }
+ 
++int x86_emul_blk(
++    void *ptr,
++    void *data,
++    unsigned int bytes,
++    uint32_t *eflags,
++    struct x86_emulate_state *state,
++    struct x86_emulate_ctxt *ctxt)
++{
++    switch ( state->blk )
++    {
++        /*
++         * Throughout this switch(), memory clobbers are used to compensate
++         * that other operands may not properly express the (full) memory
++         * ranges covered.
++         */
++    case blk_movdir:
++        switch ( bytes )
++        {
++#ifdef __x86_64__
++        case sizeof(uint32_t):
++# ifdef HAVE_AS_MOVDIR
++            asm ( "movdiri %0, (%1)"
++                  :: "r" (*(uint32_t *)data), "r" (ptr) : "memory" );
++# else
++            /* movdiri %esi, (%rdi) */
++            asm ( ".byte 0x0f, 0x38, 0xf9, 0x37"
++                  :: "S" (*(uint32_t *)data), "D" (ptr) : "memory" );
++# endif
++            break;
++#endif
++
++        case sizeof(unsigned long):
++#ifdef HAVE_AS_MOVDIR
++            asm ( "movdiri %0, (%1)"
++                  :: "r" (*(unsigned long *)data), "r" (ptr) : "memory" );
++#else
++            /* movdiri %rsi, (%rdi) */
++            asm ( ".byte 0x48, 0x0f, 0x38, 0xf9, 0x37"
++                  :: "S" (*(unsigned long *)data), "D" (ptr) : "memory" );
++#endif
++            break;
++
++        case 64:
++            if ( ((unsigned long)ptr & 0x3f) )
++            {
++                ASSERT_UNREACHABLE();
++                return X86EMUL_UNHANDLEABLE;
++            }
++#ifdef HAVE_AS_MOVDIR
++            asm ( "movdir64b (%0), %1" :: "r" (data), "r" (ptr) : "memory" );
++#else
++            /* movdir64b (%rsi), %rdi */
++            asm ( ".byte 0x66, 0x0f, 0x38, 0xf8, 0x3e"
++                  :: "S" (data), "D" (ptr) : "memory" );
++#endif
++            break;
++
++        default:
++            ASSERT_UNREACHABLE();
++            return X86EMUL_UNHANDLEABLE;
++        }
++        break;
++
++    default:
++        ASSERT_UNREACHABLE();
++        return X86EMUL_UNHANDLEABLE;
++    }
++
++    return X86EMUL_OKAY;
++}
++
+ static void __init __maybe_unused build_assertions(void)
+ {
+     /* Check the values against SReg3 encoding in opcode/ModRM bytes. */
+@@ -11759,6 +11868,9 @@ x86_insn_is_mem_write(const struct x86_e
+         {
+         case 0x63:                         /* ARPL */
+             return !mode_64bit();
++
++        case X86EMUL_OPC_66(0x0f38, 0xf8): /* MOVDIR64B */
++            return true;
+         }
+ 
+         return false;
+--- a/xen/arch/x86/x86_emulate/x86_emulate.h
++++ b/xen/arch/x86/x86_emulate/x86_emulate.h
+@@ -310,6 +310,22 @@ struct x86_emulate_ops
+         struct x86_emulate_ctxt *ctxt);
+ 
+     /*
++     * blk: Emulate a large (block) memory access.
++     * @p_data: [IN/OUT] (optional) Pointer to source/destination buffer.
++     * @eflags: [IN/OUT] Pointer to EFLAGS to be updated according to
++     *                   instruction effects.
++     * @state:  [IN/OUT] Pointer to (opaque) emulator state.
++     */
++    int (*blk)(
++        enum x86_segment seg,
++        unsigned long offset,
++        void *p_data,
++        unsigned int bytes,
++        uint32_t *eflags,
++        struct x86_emulate_state *state,
++        struct x86_emulate_ctxt *ctxt);
++
++    /*
+      * validate: Post-decode, pre-emulate hook to allow caller controlled
+      * filtering.
+      */
+@@ -793,6 +809,14 @@ x86_emul_rmw(
+     unsigned int bytes,
+     uint32_t *eflags,
+     struct x86_emulate_state *state,
++    struct x86_emulate_ctxt *ctxt);
++int
++x86_emul_blk(
++    void *ptr,
++    void *data,
++    unsigned int bytes,
++    uint32_t *eflags,
++    struct x86_emulate_state *state,
+     struct x86_emulate_ctxt *ctxt);
+ 
+ static inline void x86_emul_hw_exception(
+--- a/xen/include/asm-x86/cpufeature.h
++++ b/xen/include/asm-x86/cpufeature.h
+@@ -118,6 +118,8 @@
+ #define cpu_has_avx512_bitalg   boot_cpu_has(X86_FEATURE_AVX512_BITALG)
+ #define cpu_has_avx512_vpopcntdq boot_cpu_has(X86_FEATURE_AVX512_VPOPCNTDQ)
+ #define cpu_has_rdpid           boot_cpu_has(X86_FEATURE_RDPID)
++#define cpu_has_movdiri         boot_cpu_has(X86_FEATURE_MOVDIRI)
++#define cpu_has_movdir64b       boot_cpu_has(X86_FEATURE_MOVDIR64B)
+ 
+ /* CPUID level 0x80000007.edx */
+ #define cpu_has_itsc            boot_cpu_has(X86_FEATURE_ITSC)
+--- a/xen/include/public/arch-x86/cpufeatureset.h
++++ b/xen/include/public/arch-x86/cpufeatureset.h
+@@ -241,6 +241,8 @@ XEN_CPUFEATURE(AVX512_VPOPCNTDQ, 6*32+14
+ XEN_CPUFEATURE(TSXLDTRK,      6*32+16) /*a  TSX load tracking suspend/resume insns */
+ XEN_CPUFEATURE(RDPID,         6*32+22) /*A  RDPID instruction */
+ XEN_CPUFEATURE(CLDEMOTE,      6*32+25) /*A  CLDEMOTE instruction */
++XEN_CPUFEATURE(MOVDIRI,       6*32+27) /*A  MOVDIRI instruction */
++XEN_CPUFEATURE(MOVDIR64B,     6*32+28) /*A  MOVDIR64B instruction */
+ 
+ /* AMD-defined CPU features, CPUID level 0x80000007.edx, word 7 */
+ XEN_CPUFEATURE(ITSC,          7*32+ 8) /*   Invariant TSC */
+
 
