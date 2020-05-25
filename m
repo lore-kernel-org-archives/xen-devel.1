@@ -2,57 +2,79 @@ Return-Path: <SRS0=HK45=7H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-10.2 required=3.0
-	tests=HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.8 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+	DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DB4E6C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 17:41:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C0E6DC433E0
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 19:03:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B72182078B
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 17:41:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B72182078B
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 8EADA2068D
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 19:03:22 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=pass (1024-bit key) header.d=zohomail.eu header.i=elliotkillick@zohomail.eu header.b="JF22u+9r"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8EADA2068D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=reject dis=none) header.from=zohomail.eu
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdH6D-0002DT-9t; Mon, 25 May 2020 17:41:17 +0000
+	id 1jdIMq-0000jk-Dj; Mon, 25 May 2020 19:02:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=pvIA=7H=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
- id 1jdH6B-0002DO-Hk
- for xen-devel@lists.xenproject.org; Mon, 25 May 2020 17:41:15 +0000
-X-Inumbo-ID: ed4dd754-9eae-11ea-b9cf-bc764e2007e4
-Received: from ppsw-31.csi.cam.ac.uk (unknown [131.111.8.131])
+ <SRS0=775J=7H=zohomail.eu=elliotkillick@srs-us1.protection.inumbo.net>)
+ id 1jdIMo-0000jf-Uc
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2020 19:02:31 +0000
+X-Inumbo-ID: 4769079e-9eba-11ea-9887-bc764e2007e4
+Received: from sender11-pp-o93.zoho.eu (unknown [31.186.226.251])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ed4dd754-9eae-11ea-b9cf-bc764e2007e4;
- Mon, 25 May 2020 17:41:13 +0000 (UTC)
-X-Cam-AntiVirus: no malware found
-X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
-Received: from 88-109-182-220.dynamic.dsl.as9105.com ([88.109.182.220]:43642
- helo=[192.168.1.219])
- by ppsw-31.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.157]:465)
- with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
- id 1jdH68-000Mfb-Jg (Exim 4.92.3)
- (return-path <amc96@hermes.cam.ac.uk>); Mon, 25 May 2020 18:41:12 +0100
-Subject: Re: Xen PVH domU start-of-day VCPU state
-To: xen-devel@lists.xenproject.org, mirageos-devel@lists.xenproject.org,
- anil@recoil.org, dave@recoil.org, martin@lucina.net
-References: <20200525160401.GA3091@nodbug.lucina.net>
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Message-ID: <6fadfd84-0fc4-d462-a917-1c88ec0822b8@citrix.com>
-Date: Mon, 25 May 2020 18:41:11 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ id 4769079e-9eba-11ea-9887-bc764e2007e4;
+ Mon, 25 May 2020 19:02:29 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; t=1590433346; cv=none; d=zohomail.eu; s=zohoarc; 
+ b=d2kW6MvdHWurCUa2wY2E1e9zGwAc9wlYX8l+/XpzWYA45rGZZdnB3w4ZZbKdlYQHrz6NMKjsSQ6St3mRf4u4P/TxTdwM6m3ip1sj3U4TRELnkHoYJpoRvgItAjOO9/JkAaPHCJ593Xzm483O0e2aeuAE8LyJntpsrcW9ICx862o=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.eu;
+ s=zohoarc; t=1590433346;
+ h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To;
+ bh=zstc/sqbQ9WVCJVASP9+rIVmqfSTJUm3XzhTxVIi8+Q=; 
+ b=SM/gweNYX2J0P3gC3Hi1x/rsQ6zC+J0MdMhX32vPLP5QJCchksx2AwaYTd/2P63h57h8yyDYxmxcuuaT6cSfBYGAFqKkKYbhdJlba/1DkOuuRLfF5CTLCcmyn+pJzn5EyurAFpNZn0AxDVVK9WFeggWS5cAvzu7Ku4X2BtMqlNc=
+ARC-Authentication-Results: i=1; mx.zohomail.eu;
+ dkim=pass  header.i=zohomail.eu;
+ spf=pass  smtp.mailfrom=elliotkillick@zohomail.eu;
+ dmarc=pass header.from=<elliotkillick@zohomail.eu>
+ header.from=<elliotkillick@zohomail.eu>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1590433346; 
+ s=zoho; d=zohomail.eu; i=elliotkillick@zohomail.eu;
+ h=From:Subject:To:Cc:Message-ID:References:Date:MIME-Version:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ bh=zstc/sqbQ9WVCJVASP9+rIVmqfSTJUm3XzhTxVIi8+Q=;
+ b=JF22u+9rO5ikwC3gRFLNhx3N8g197yvdBWlIAA4BTfl3dsifuZTS/izLf7gdh9v5
+ DVr/QHRR6sfnn241K1xOPXFBfQubj1IFegdLlstq3zDCiR/fnxHbjIRMWaowvrXNMNQ
+ 7uDumIkcQL91C4HGEzXPJ6n40b1tuhNptnm3UM9Q=
+Received: from [10.137.0.35]
+ (CPEac202e7c9cc3-CMac202e7c9cc0.cpe.net.cable.rogers.com [99.231.147.74]) by
+ mx.zoho.eu with SMTPS id 1590433345040946.9235816899597;
+ Mon, 25 May 2020 21:02:25 +0200 (CEST)
+From: Elliot Killick <elliotkillick@zohomail.eu>
+Subject: Re: [BUG] Consistent LBR/TSX vmentry failure (0x80000022) calling
+ domain_crash() in vmx.c:3324
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <767a6155-63f1-ab0c-377a-d2a1638babf4@zohomail.eu>
+References: <36815795-223f-2b96-5401-c262294cbaa8@zohomail.eu>
+ <c715f89a-b2ba-490c-c027-b4c7d7069f42@citrix.com>
+ <2bcd2ccc-b58e-1268-68ce-3ef534534245@zohomail.eu>
+ <1b76cd6a-c6a2-c9c9-1d8b-32a9a1dbc557@citrix.com>
+ <657e7522-bd0f-bea3-7ce8-2f6c4ec72407@zohomail.eu>
+ <dc1ef4b6-9406-b625-c157-6ebec2a6afda@citrix.com>
+ <325c716c-df62-d24c-2e48-3a100e84f48d@zohomail.eu>
+ <c09d62a4-6362-8eb9-a3b0-79c429850db6@citrix.com>
+Date: Mon, 25 May 2020 19:01:31 +0000
 MIME-Version: 1.0
-In-Reply-To: <20200525160401.GA3091@nodbug.lucina.net>
+In-Reply-To: <c09d62a4-6362-8eb9-a3b0-79c429850db6@citrix.com>
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,129 +85,62 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 25/05/2020 17:04, Martin Lucina wrote:
-> Hi,
->
-> I'm trying to bootstrap a new PVH-only Xen domU OS "from scratch", to
-> replace our existing use of Mini-OS for the early boot/low-level support
-> layer in MirageOS. I've done this by creating new Xen bindings for Solo5
-> [1], basing them on our existing virtio code [2].
->
-> Unfortunately, I can't seem to get past the first few instructions on VCPU
-> boot. Here's what I have at the moment (abridged):
->
->     .section .note.solo5.xen
->
->             .align  4
->             .long   4
->             .long   4
->             .long   XEN_ELFNOTE_PHYS32_ENTRY
->             .ascii "Xen\0"
->             .long   _start32
->
->     /* ... */
->
->     .code32
->
->     ENTRY(_start32)
->             cld
->
->             lgdt (gdt64_ptr)
->             ljmp $0x10, $1f
->
->     1:      movl $0x18, %eax
->             movl %eax, %ds
->             movl %eax, %es
->             movl %eax, %ss
->
->             xorl %eax, %eax
->             movl %eax, %fs
->             movl %eax, %gs
->
-> I have verified, via xl -v create -c ..., that the domain builder appears
-> to be doing the right thing, and is interpreting the ELF NOTE correctly.
-> However, for some reason I cannot fathom, I get a triple fault on the ljmp
-> following the lgdt instruction above:
->
->     (XEN) d31v0 Triple fault - invoking HVM shutdown action 1
->     (XEN) *** Dumping Dom31 vcpu#0 state: ***
->     (XEN) ----[ Xen-4.11.4-pre  x86_64  debug=n   Not tainted ]----
->     (XEN) CPU:    0
->     (XEN) RIP:    0000:[<0000000000100028>]
->     (XEN) RFLAGS: 0000000000010002   CONTEXT: hvm guest (d31v0)
->     (XEN) rax: 0000000000000000   rbx: 0000000000116000   rcx: 0000000000000000
->     (XEN) rdx: 0000000000000000   rsi: 0000000000000000   rdi: 0000000000000000
->     (XEN) rbp: 0000000000000000   rsp: 0000000000000000   r8:  0000000000000000
->     (XEN) r9:  0000000000000000   r10: 0000000000000000   r11: 0000000000000000
->     (XEN) r12: 0000000000000000   r13: 0000000000000000   r14: 0000000000000000
->     (XEN) r15: 0000000000000000   cr0: 0000000000000011   cr4: 0000000000000000
->     (XEN) cr3: 0000000000000000   cr2: 0000000000000000
->     (XEN) fsb: 0000000000000000   gsb: 0000000000000000   gss: 0000000000000000
->     (XEN) ds: 0000   es: 0000   fs: 0000   gs: 0000   ss: 0000   cs: 0000
+On 2020-05-20 16:53, Andrew Cooper wrote:
+> On 20/05/2020 15:59, Elliot Killick wrote:
+>> On 2020-05-20 12:31, Andrew Cooper wrote:
+>>> On 20/05/2020 12:46, Elliot Killick wrote:
+>>>> processor=09: 0
+>>>> vendor_id=09: GenuineIntel
+>>>> cpu family=09: 6
+>>>> model=09=09: 60
+>>>> model name=09: Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz
+>>>> stepping=09: 3
+>>>> microcode=09: 0x27
+>>>> cpu MHz=09=09: 3299.926
+>>>> cache size=09: 6144 KB
+>>>> physical id=09: 0
+>>> Ok, so the errata is one of HSM182/HSD172.
+>>>
+>>> Xen has workaround for all of these.=C2=A0 However, I also see:
+>>>
+>>>> (XEN) ----[ Xen-4.8.5-15.fc25=C2=A0 x86_64=C2=A0 debug=3Dn=C2=A0=C2=A0=
+ Not tainted ]----
+>>> which is an obsolete version of Xen these days.=C2=A0 It looks like the=
+se
+>>> issues were first fixed in Xen 4.9, but you should upgrade to something
+>>> rather newer.
+>>>
+>>> ~Andrew
+>>>
+>> Ah, so this is originally a CPU bug which Xen has had to patch over.
+>=20
+> Yes.=C2=A0 It was an unintended consequence of Intel being forced to disa=
+ble
+> TSX in most of their Haswell/Broadwell CPUs.
+>=20
+>> As for the Xen version, that's controlled by the "distribution" of Xen I
+>> run which is Qubes. To remedy this I could run the testing stream of
+>> Qubes which currently provides the latest version of Xen (4.13) but that
+>> could bring its own set of problems.
+>=20
+> Ah, in which case Qubes will probably consider backporting the fixes.=C2=
+=A0
+> Open a bug with them, and I can probably point out a minimum set of
+> backports to make it work.
+>=20
+> ~Andrew
+>=20
 
-For extra help debugging this, you can dump the vmcs here:
+Hi, Andrew
 
-andrewcoop@andrewcoop:/local/xen.git/xen$ git d
-diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
-index 74c9f84462..8ae23545ae 100644
---- a/xen/arch/x86/hvm/hvm.c
-+++ b/xen/arch/x86/hvm/hvm.c
-@@ -1687,6 +1687,7 @@ void hvm_triple_fault(void)
-             "Triple fault - invoking HVM shutdown action %d\n",
-             reason);
-     vcpu_show_execution_state(v);
-+    vmcs_dump_vcpu(v);
-     domain_shutdown(d, reason);
- }
- 
+I've opened up a bug with Qubes here:
+https://github.com/QubesOS/qubes-issues/issues/5848
 
-which will include the segment cache, including the just loaded GDT details.
+Please highlight the required backports at your earliest convenience,
+thank you.
 
-> Cross-checking 0x100028 via gdb:
->
->     Dump of assembler code for function _start32:
->        0x00100020 <+0>:	cld
->        0x00100021 <+1>:	lgdtl  0x108040
->        0x00100028 <+8>:	ljmp   $0x10,$0x10002f
->        0x0010002f <+15>:	mov    $0x18,%eax
->
-> I've spent a couple of days trying various things and cross-checking both
-> with the Mini-OS PVH/HVM startup [3] and the Intel SDM, but no joy. I've
-> also re-checked the GDT selector values used by the original virtio code
-> which this is based on, and they appear to be fine.
->
-> This is not helped by the fact that the Xen domU PVH start-of-day VCPU
-> state does not seem to be documented anywhere, with the exception of
-> "struct hvm_start_info is passed in %ebx" as stated in
-> arch-x86/hvm/start_info.h.
-
-https://xenbits.xen.org/docs/unstable/misc/pvh.html
-
-The starting state is described there.  It is 32bit flat mode, very
-similar to multiboot's entry.
-
-> In case it's relevant, I'm testing with Xen 4.11.4 as shipped with Debian
-> 10, on an Intel Broadwell CPU.
->
-> Any ideas?
-
-Sadly no.
-
-From
-https://github.com/mato/solo5/commit/f2539d588883a2e8854998c75bdea9b10f113ed6
-
-all data looks to be linked below the 4G boundary, so the 32/64bitness
-of lgdt shouldn't matter in this case.
-
-Reordering the logic as per MiniOS/XTF will avoid the need for a 32bit
-CS selector - it is safe to run on the ABI-provided %cs until you switch
-into 64bit mode.
-
-It might also be interesting to see exactly what value is in gdt64_ptr,
-just to check that the base an limit are set sensibly.
-
-~Andrew
 
