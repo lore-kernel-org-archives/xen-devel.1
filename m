@@ -2,76 +2,78 @@ Return-Path: <SRS0=HK45=7H=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+X-Spam-Status: No, score=-9.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
 	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5A7A6C433DF
-	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 02:51:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0E37CC433E1
+	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 02:51:15 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2D1EA2075F
+	by mail.kernel.org (Postfix) with ESMTPS id D8AE22075F
 	for <xen-devel@archiver.kernel.org>; Mon, 25 May 2020 02:51:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="L6qXpcjj"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2D1EA2075F
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a5R6y24h"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8AE22075F
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jd3CR-0004LJ-CW; Mon, 25 May 2020 02:50:47 +0000
+	id 1jd3CX-0004La-KW; Mon, 25 May 2020 02:50:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=Vb8S=7H=gmail.com=jandryuk@srs-us1.protection.inumbo.net>)
- id 1jd3CQ-0004L8-Id
- for xen-devel@lists.xenproject.org; Mon, 25 May 2020 02:50:46 +0000
-X-Inumbo-ID: 884632d8-9e32-11ea-9887-bc764e2007e4
-Received: from mail-qv1-xf44.google.com (unknown [2607:f8b0:4864:20::f44])
+ id 1jd3CW-0004LS-Cv
+ for xen-devel@lists.xenproject.org; Mon, 25 May 2020 02:50:52 +0000
+X-Inumbo-ID: 8bc771ba-9e32-11ea-b9cf-bc764e2007e4
+Received: from mail-qt1-x841.google.com (unknown [2607:f8b0:4864:20::841])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 884632d8-9e32-11ea-9887-bc764e2007e4;
- Mon, 25 May 2020 02:50:46 +0000 (UTC)
-Received: by mail-qv1-xf44.google.com with SMTP id l3so7511743qvo.7
- for <xen-devel@lists.xenproject.org>; Sun, 24 May 2020 19:50:46 -0700 (PDT)
+ id 8bc771ba-9e32-11ea-b9cf-bc764e2007e4;
+ Mon, 25 May 2020 02:50:51 +0000 (UTC)
+Received: by mail-qt1-x841.google.com with SMTP id l1so12932530qtp.6
+ for <xen-devel@lists.xenproject.org>; Sun, 24 May 2020 19:50:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ds4Pyg1znJ3S0Yg3vWRMgNmyuvMQ1euqy6dagIketK0=;
- b=L6qXpcjjOcA1qYvY32zs5lbEBNrn4lYO4CNDF/NB7xae9LlITGYHYax3YmsIOiM+Sp
- jtSgD7NFMXilhhjJvcKaB3m53Bb3FHtw1MTeTrtnjfcdm0gDch061xr58+AaSlt2JGay
- E7v7NdpspaHZnLR2/3kVuluY4k5xPHwNyG8bb8yjNZALerzj8ZK/4p7Fqr2Fjo0Htb2R
- b65Ga0UDcyvOLQMMAp56Db8WjfO2k7mIKbwSOxxIcYrkADN0d3kt3FZ5eElN0wMmRrI9
- f29GsizKwpS0oNNoiBwWDbcBLnsafwZw0tyT8JfD0eGotV1EQw7nS9eN7TlY5BmZb+Yd
- 6NwQ==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=TuFE1UFStx7DhYra1LcAmMWFmhp1FfRuQDwhQTRAYLQ=;
+ b=a5R6y24hmZf7dseYfL279Z6P8Y/N4v32REhzXWvuI6RgseeMyz30DzODrA7F59/VeF
+ VVMqWBMdPM43TC/sErMk6cyiuc1FBjV3KVGIpsHiaE463qPFvnucfc980Fw/WStrE4GR
+ KrVpzAQNrqnCiRpbiUPW9pRY9XFfVINzYBEzWYc/se878fXjCqWn1oKwUQJ2YSyQfPjz
+ +ZbawcHb84gd55HRTaBj1auKqYLRYCHR6jWm12LnjRCmDScGxiY3Ok08TxB4I2bffNwL
+ oLZT96v4GZz+VoM1Cxiuy8MhumTmN6AQcU7wS89p+5fn8YnrcG4z7whjDkSl+AntixmM
+ /jOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=ds4Pyg1znJ3S0Yg3vWRMgNmyuvMQ1euqy6dagIketK0=;
- b=Vm+n91htwbg7m5fqhnwN+iCew+vnvZjHFIadjLuAzhVFM93aDAV5xels6jX6Cs/+ak
- HPWmV1/5iKC3fPjtWmTw8ZFYiIWPFgbtK/6VZHOIRp6JiCVCNaNT9hETcjgIbOiurkky
- zCMjwjLd2d/ThBx5Ak9ZVVK7RoWsGnts5HlXD7kFcM0DEptyDPWfcvT1mg5hUiQADBYp
- OiKBe2VwiQA8O5qcphxCAsuSVqZ6Xg89Q3x0gAExtvOLvS1sGFZgW07KVHrP6cwHZ2JT
- wZ77pvMRtwtT9rYQItfmoOdmgRXoaUFGSylrmK5DQG3kIKF5sEzdnDixT/6k2iOP+qLe
- dl9w==
-X-Gm-Message-State: AOAM533Vbfo7248m7BGsCGGTwEgOznCy/WRVhg4NeRtfPk+dLFNwTI2h
- rHLRLl9S116A9YDbEArbdskogCuD
-X-Google-Smtp-Source: ABdhPJwVY4tyeXHUFHKqVTHep4vSGYq3+fpnSZ41i5Zzo0H8ntsDwuXfy/s0AQhbGmkAQpLlA5F9mg==
-X-Received: by 2002:a05:6214:8e4:: with SMTP id
- dr4mr13187822qvb.97.1590375045443; 
- Sun, 24 May 2020 19:50:45 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=TuFE1UFStx7DhYra1LcAmMWFmhp1FfRuQDwhQTRAYLQ=;
+ b=uh41joMsT7lXRpfraetULzxWvqhyJSlCysB58MZdTsZNPXca4lNAfPTCO2mdZEc1we
+ J+MX3kSj2JZiW8kvXY/w+8/HUnZXMVHalgFEN9N6kt4uKCLw+YKYiMXGqlKS95WPe8ld
+ tNURRKM2QsafeWVHBXpiujtQW1YFjyi5sR+Yg5Y/LD0EaofQirE2C+kmkgz9vLti4nTb
+ yjt2rx9DybWA9aQeTJnmotJ+1NgyZJfhXXPfYhrexg5ALxCevkFCtCSg20WmjpvWwgB7
+ gRy9dbPxD+1snysbwdqnG/Yr1L4sVpmEN4XmPX9aUpsGeUdIoeB5TJ7glPUPNZAw3faV
+ VLtg==
+X-Gm-Message-State: AOAM531iT4+S2d0p+QaXj08oaIaDHVmOGxgiUXxcrVwrtaXVAi5sgYm7
+ 1c3ohMwP0Tpx2mq+OA7hfq+49Yc7
+X-Google-Smtp-Source: ABdhPJx6/03cefrmuDCSXXmpl/Oe1/sw6rOyEM8gKdoi/casVrLcDhpzCbgzgqTwZikXJCpRGw5g0A==
+X-Received: by 2002:ac8:543:: with SMTP id c3mr25433015qth.8.1590375051323;
+ Sun, 24 May 2020 19:50:51 -0700 (PDT)
 Received: from shine.lan ([2001:470:8:67e:344b:9349:9475:b6a2])
- by smtp.gmail.com with ESMTPSA id h134sm13539512qke.6.2020.05.24.19.50.44
+ by smtp.gmail.com with ESMTPSA id h134sm13539512qke.6.2020.05.24.19.50.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 May 2020 19:50:44 -0700 (PDT)
+ Sun, 24 May 2020 19:50:50 -0700 (PDT)
 From: Jason Andryuk <jandryuk@gmail.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH 0/8] Coverity fixes for vchan-socket-proxy
-Date: Sun, 24 May 2020 22:49:47 -0400
-Message-Id: <20200525024955.225415-1-jandryuk@gmail.com>
+Subject: [PATCH 1/8] vchan-socket-proxy: Ensure UNIX path NUL terminated
+Date: Sun, 24 May 2020 22:49:48 -0400
+Message-Id: <20200525024955.225415-2-jandryuk@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200525024955.225415-1-jandryuk@gmail.com>
+References: <20200525024955.225415-1-jandryuk@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -89,23 +91,45 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>, marmarek@invisiblethingslab.com,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This series addresses some Coverity reports.  To handle closing FDs, a
-state struct is introduced to track FDs closed in both main() and
-data_loop().
+Check the socket path length to ensure sun_path is NUL terminated.
 
-Jason Andryuk (8):
-  vchan-socket-proxy: Ensure UNIX path NUL terminated
-  vchan-socket-proxy: Check xs_watch return value
-  vchan-socket-proxy: Unify main return value
-  vchan-socket-proxy: Use a struct to store state
-  vchan-socket-proxy: Switch data_loop() to take state
-  vchan-socket-proxy: Set closed FDs to -1
-  vchan-socket-proxy: Cleanup resources on exit
-  vchan-socket-proxy: Handle closing shared input/output_fd
+This was spotted by Citrix's Coverity.
 
- tools/libvchan/vchan-socket-proxy.c | 164 ++++++++++++++++++----------
- 1 file changed, 106 insertions(+), 58 deletions(-)
+Signed-off-by: Jason Andryuk <jandryuk@gmail.com>
+---
+ tools/libvchan/vchan-socket-proxy.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
+diff --git a/tools/libvchan/vchan-socket-proxy.c b/tools/libvchan/vchan-socket-proxy.c
+index 13700c5d67..6d860af340 100644
+--- a/tools/libvchan/vchan-socket-proxy.c
++++ b/tools/libvchan/vchan-socket-proxy.c
+@@ -148,6 +148,12 @@ static int connect_socket(const char *path_or_fd) {
+         return fd;
+     }
+ 
++    if (strlen(path_or_fd) >= sizeof(addr.sun_path)) {
++        fprintf(stderr, "UNIX socket path \"%s\" too long (%zd >= %zd)\n",
++                path_or_fd, strlen(path_or_fd), sizeof(addr.sun_path));
++        return -1;
++    }
++
+     fd = socket(AF_UNIX, SOCK_STREAM, 0);
+     if (fd == -1)
+         return -1;
+@@ -174,6 +180,12 @@ static int listen_socket(const char *path_or_fd) {
+         return fd;
+     }
+ 
++    if (strlen(path_or_fd) >= sizeof(addr.sun_path)) {
++        fprintf(stderr, "UNIX socket path \"%s\" too long (%zd >= %zd)\n",
++                path_or_fd, strlen(path_or_fd), sizeof(addr.sun_path));
++        return -1;
++    }
++
+     /* if not a number, assume a socket path */
+     fd = socket(AF_UNIX, SOCK_STREAM, 0);
+     if (fd == -1)
 -- 
 2.25.1
 
