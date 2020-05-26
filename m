@@ -2,56 +2,54 @@ Return-Path: <SRS0=xV0j=7I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 390D9C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 41011C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 174E420870
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 174E420870
+	by mail.kernel.org (Postfix) with ESMTPS id 1342C20870
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1342C20870
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdhsO-0007xm-4x; Tue, 26 May 2020 22:16:48 +0000
+	id 1jdhsT-0007zF-EM; Tue, 26 May 2020 22:16:53 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=52a6=7I=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jdhsM-0007xL-I9
- for xen-devel@lists.xenproject.org; Tue, 26 May 2020 22:16:46 +0000
-X-Inumbo-ID: 929bb0d9-9f9e-11ea-a6c3-12813bfff9fa
+ id 1jdhsR-0007yj-I0
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2020 22:16:51 +0000
+X-Inumbo-ID: 9315abae-9f9e-11ea-a6c3-12813bfff9fa
 Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 929bb0d9-9f9e-11ea-a6c3-12813bfff9fa;
+ id 9315abae-9f9e-11ea-a6c3-12813bfff9fa;
  Tue, 26 May 2020 22:16:41 +0000 (UTC)
 Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: YeKW0jUKxEquevFRXYynJNH92Ps5LOSQIwW22tVNkuVltKfq5xh4EbEVGrfkGTyrO8gAV512nt
- Wb2UTg9xXlosgsogqdUskZf5GbR3x740niaw1lMhCPZYR8TdB/6Ke9lrE8qDVQzD9inpD7aTR1
- IUTStwAAHSrLm1JZ2+rkgi6eVnpRDiMxP182HrEZWSt1RE7OdGrHnKgKMuN6+U5X38IWIPUTaX
- 1ZOrTKVl5Gj+M53qgTzn5uaA+i6RQcW3DC5GGek2l82PwsS8mlVlLDggKGahQMMIOT67+UHB9k
- 3QA=
+IronPort-SDR: m9Edo25O6kTacSEUmULiuAAHzIyCQetXjF1b09ArClrHD6Fnoyq7QQGVutGWguCY3u0HK2th1l
+ gcVFbzRyJq40yEz0otpsn4vKT7cYLvQYe6etu9kMH7LCPm/pMuUgzBVd+hRCFkKNYfdLWbYUpw
+ 5cCVEAssQ5gXfEm3lp4MJQnLq41S2EBoZ/IDsuNIUSog/K4VZSy9t0JWxM1XHIYFzecmasECKl
+ sy8FXjwOEqwJ4rBLQIAvcEIzk3XILiby8X4a455i2tqY8mK1VXsYG+uh3fyG6GUIudTgsjXtJ3
+ GJE=
 X-SBRS: 2.7
-X-MesageID: 19238411
+X-MesageID: 19238410
 X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,439,1583211600"; d="scan'208";a="19238411"
+X-IronPort-AV: E=Sophos;i="5.73,439,1583211600"; d="scan'208";a="19238410"
 From: George Dunlap <george.dunlap@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 3/5] automation/archlinux: Add 32-bit glibc headers
-Date: Tue, 26 May 2020 23:16:10 +0100
-Message-ID: <20200526221612.900922-4-george.dunlap@citrix.com>
+Subject: [PATCH v2 0/5] Golang build fixes / improvements
+Date: Tue, 26 May 2020 23:16:07 +0100
+Message-ID: <20200526221612.900922-1-george.dunlap@citrix.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200526221612.900922-1-george.dunlap@citrix.com>
-References: <20200526221612.900922-1-george.dunlap@citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -65,41 +63,48 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Anthony Perard <anthony.perard@citrix.com>,
- Doug Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
+ Ian Jackson <ian.jackson@citrix.com>, Doug Goldstein <cardoe@cardoe.com>,
+ George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This fixes the following build error in hvmloader:
+This is a series of patches that improve build for the golang xenlight
+bindings.  The key patches are patch is #1 and #4.  Patch 1 will
+update the generated golang bindings from the tools/libxl directory
+when libxl_types.idl is updated, even if the person building doesn't
+have the golang packages enabled.  Patch 2 adds golang packages to the
+docker images which have suitable golang versions, so that the bindings
+can be tested in the CI loop.
 
-usr/include/gnu/stubs.h:7:11: fatal error: gnu/stubs-32.h: No such file or directory
+Changes in v2:
+- Document requirements to make sure the parallel build is race-free
+- Replace v1 patches 4-5 with a patch which will just remove the
+  GOPATH-related build testing
+- Introduce improvements to automation
 
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
----
-v2:
-- New
-
-CC: Doug Goldstein <cardoe@cardoe.com>
+CC: Ian Jackson <ian.jackson@citrix.com>
 CC: Wei Liu <wl@xen.org>
-CC: Anthony Perard <anthony.perard@citrix.com>
----
- automation/build/archlinux/current.dockerfile | 1 +
- 1 file changed, 1 insertion(+)
+CC: Doug Goldstein <cardoe@cardoe.com>
+CC: Nick Rosbrook <rosbrookn@ainfosec.com>
 
-diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
-index 9af5d66afc..5095de65b8 100644
---- a/automation/build/archlinux/current.dockerfile
-+++ b/automation/build/archlinux/current.dockerfile
-@@ -19,6 +19,7 @@ RUN pacman -S --refresh --sysupgrade --noconfirm --noprogressbar --needed \
-         iasl \
-         inetutils \
-         iproute \
-+        lib32-glibc \
-         libaio \
-         libcacard \
-         libgl \
--- 
+George Dunlap (5):
+  libxl: Generate golang bindings in libxl Makefile
+  golang/xenlight: Get rid of GOPATH-based build artefacts
+  automation/archlinux: Add 32-bit glibc headers
+  automation: Add golang packages to various dockerfiles
+  automation/containerize: Add a shortcut for Debian unstable
+
+ automation/build/archlinux/current.dockerfile |  2 ++
+ automation/build/debian/unstable.dockerfile   |  1 +
+ automation/build/fedora/29.dockerfile         |  1 +
+ automation/scripts/containerize               |  2 +-
+ tools/Rules.mk                                |  1 -
+ tools/golang/Makefile                         | 10 --------
+ tools/golang/xenlight/Makefile                | 24 +++++++++----------
+ tools/libxl/Makefile                          | 17 ++++++++++++-
+ 8 files changed, 32 insertions(+), 26 deletions(-)
+
+--
 2.25.1
-
 
