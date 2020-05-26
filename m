@@ -6,50 +6,49 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF987C433E0
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 46975C433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8CC2C20870
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8CC2C20870
+	by mail.kernel.org (Postfix) with ESMTPS id 2182220870
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:22 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2182220870
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdhsX-00081x-Ne; Tue, 26 May 2020 22:16:57 +0000
+	id 1jdhsd-00084P-1F; Tue, 26 May 2020 22:17:03 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=52a6=7I=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jdhsW-00081S-Ie
- for xen-devel@lists.xenproject.org; Tue, 26 May 2020 22:16:56 +0000
-X-Inumbo-ID: 929bb0da-9f9e-11ea-a6c3-12813bfff9fa
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1jdhsb-00083n-J8
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2020 22:17:01 +0000
+X-Inumbo-ID: 94daf39a-9f9e-11ea-a6c3-12813bfff9fa
+Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 929bb0da-9f9e-11ea-a6c3-12813bfff9fa;
- Tue, 26 May 2020 22:16:42 +0000 (UTC)
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ id 94daf39a-9f9e-11ea-a6c3-12813bfff9fa;
+ Tue, 26 May 2020 22:16:44 +0000 (UTC)
+Authentication-Results: esa2.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: yW0inEishecCLkrpueYmCQX7SwgD6cEnEpRYPwL4Ph6EZXjjCl2Z7efPQFhiaJZjYHQxkbcTgK
- Ckpo8xSFETBl72pDg7BjZtr5+lGfHQ7HfOoDgHFvuJFyhQ82xEutpxtW+QEuDUhGDEUaowQaRo
- sJt/n3LXVYKMmYCrms7Xe2rKT8HOi6ToR1e5qUK97kJ1xE3HZJIoYKsp4x5WwI+iSPK8F3FDU/
- Xw9GaXBfqcQ7UKIVVhCyDcYbaIs7cFSR+ZrAKG0p9oxrmMkxkDaItTgIf8mpD0B+8kUD9eEPzF
- I+Q=
+IronPort-SDR: cu8UWhvEil7kDZD8zHi5/jSJQD0btiknIDvUtyRoaZOu5JTNQNJuhxwRU8GYWVJ9i698NuCL1I
+ Mgu4pRtHmAIP88qZMM0ZJK63RxGG+g1CyXeVQHDQm9rEtnoXG5GKUIp40KJo0oXLZoehC86n6J
+ h7gEWVSr34fKFia57eCXrCS4DF5r2PaqtwfikLD59jz9b6j3m4FcBMmfvRh+4OYuJOkip8HMNW
+ KAwL/l2LPuXJ+G8kGyah9iXkbYsKo4Ce2h8M5TUg11rYR0O+jvIfzZa2TL1SETYvXyYjc0IAIa
+ 2W4=
 X-SBRS: 2.7
-X-MesageID: 19238412
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 18520581
+X-Ironport-Server: esa2.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,439,1583211600"; d="scan'208";a="19238412"
+X-IronPort-AV: E=Sophos;i="5.73,439,1583211600"; d="scan'208";a="18520581"
 From: George Dunlap <george.dunlap@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 2/5] golang/xenlight: Get rid of GOPATH-based build
- artefacts
-Date: Tue, 26 May 2020 23:16:09 +0100
-Message-ID: <20200526221612.900922-3-george.dunlap@citrix.com>
+Subject: [PATCH v2 4/5] automation: Add golang packages to various dockerfiles
+Date: Tue, 26 May 2020 23:16:11 +0100
+Message-ID: <20200526221612.900922-5-george.dunlap@citrix.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200526221612.900922-1-george.dunlap@citrix.com>
 References: <20200526221612.900922-1-george.dunlap@citrix.com>
@@ -66,117 +65,66 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Nick Rosbrook <rosbrookn@ainfosec.com>,
- Ian Jackson <ian.jackson@citrix.com>, George Dunlap <george.dunlap@citrix.com>
+Cc: Doug
+ Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>,
+ Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The original build setup used a "fake GOPATH" in tools/golang to test
-the mechanism of building from go package files installed on a
-filesystem.  With the move to modules, this isn't necessary, and leads
-to potentially confusing directories being created.  (I.e., it might
-not be obvious that files under tools/golang/src shouldn't be edited.)
+Specifically, Fedora 29, Archlinux, and Debian unstable.  This will
+cause the CI loop to detect golang build failures.
 
-Get rid of the code that creates this (now unused) intermediate
-directory.  Add direct dependencies from 'build' onto the source
-files.
+CentOS 6 and 7 don't have golang packages, and the packages in
+stretch, jessie, xenial, and trusty are too old.
 
 Signed-off-by: George Dunlap <george.dunlap@citrix.com>
 ---
 v2:
 - New
 
-CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Nick Rosbrook <rosbrookn@ainfosec.com>
+CC: Wei Liu <wl@xen.org>
+CC: Doug Goldstein <cardoe@cardoe.com>
 ---
- tools/Rules.mk                 |  1 -
- tools/golang/Makefile          | 10 ----------
- tools/golang/xenlight/Makefile | 19 ++++---------------
- 3 files changed, 4 insertions(+), 26 deletions(-)
+ automation/build/archlinux/current.dockerfile | 1 +
+ automation/build/debian/unstable.dockerfile   | 1 +
+ automation/build/fedora/29.dockerfile         | 1 +
+ 3 files changed, 3 insertions(+)
 
-diff --git a/tools/Rules.mk b/tools/Rules.mk
-index 59c72e7a88..76acaef988 100644
---- a/tools/Rules.mk
-+++ b/tools/Rules.mk
-@@ -35,7 +35,6 @@ XENSTORE_XENSTORED ?= y
- debug ?= y
- debug_symbols ?= $(debug)
- 
--XEN_GOPATH        = $(XEN_ROOT)/tools/golang
- XEN_GOCODE_URL    = golang.xenproject.org
- 
- ifeq ($(debug_symbols),y)
-diff --git a/tools/golang/Makefile b/tools/golang/Makefile
-index aba11ebc39..b022e2c5a3 100644
---- a/tools/golang/Makefile
-+++ b/tools/golang/Makefile
-@@ -1,16 +1,6 @@
- XEN_ROOT=$(CURDIR)/../..
- include $(XEN_ROOT)/tools/Rules.mk
- 
--# In order to link against a package in Go, the package must live in a
--# directory tree in the way that Go expects.  To make this possible,
--# there must be a directory such that we can set GOPATH=${dir}, and
--# the package will be under $GOPATH/src/${full-package-path}.
--
--# So we set XEN_GOPATH to $XEN_ROOT/tools/golang.  The xenlight
--# "package build" directory ($PWD/xenlight) will create the "package
--# source" directory in the proper place.  Go programs can use this
--# package by setting GOPATH=$(XEN_GOPATH).
--
- SUBDIRS-y = xenlight
- 
- .PHONY: build all
-diff --git a/tools/golang/xenlight/Makefile b/tools/golang/xenlight/Makefile
-index 8ab4cb5665..f8d8047524 100644
---- a/tools/golang/xenlight/Makefile
-+++ b/tools/golang/xenlight/Makefile
-@@ -14,17 +14,8 @@ LIBXL_SRC_DIR = ../../libxl
- .PHONY: all
- all: build
- 
--.PHONY: package
--package: $(XEN_GOPATH)$(GOXL_PKG_DIR)
--
- GOXL_GEN_FILES = types.gen.go helpers.gen.go
- 
--$(XEN_GOPATH)/src/$(XEN_GOCODE_URL)/xenlight/: xenlight.go $(GOXL_GEN_FILES)
--	$(INSTALL_DIR) $(XEN_GOPATH)$(GOXL_PKG_DIR)
--	$(INSTALL_DATA) xenlight.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
--	$(INSTALL_DATA) types.gen.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
--	$(INSTALL_DATA) helpers.gen.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
--
- # NOTE: This target is called from libxl/Makefile:all.  Since that
- # target must finish before golang/Makefile is called, this is
- # currently safe.  It must not be called from anywhere else in the
-@@ -43,23 +34,21 @@ idl-gen: $(GOXL_GEN_FILES)
- # in the LDFLAGS; and thus we need to add -L$(XEN_XENLIGHT) here
- # so that it can find the actual library.
- .PHONY: build
--build: package
-+build: xenlight.go $(GOXL_GEN_FILES)
- 	CGO_CFLAGS="$(CFLAGS_libxenlight) $(CFLAGS_libxentoollog)" CGO_LDFLAGS="$(LDLIBS_libxenlight) $(LDLIBS_libxentoollog) -L$(XEN_XENLIGHT) -L$(XEN_LIBXENTOOLLOG)" $(GO) build -x
- 
- .PHONY: install
- install: build
- 	$(INSTALL_DIR) $(DESTDIR)$(GOXL_INSTALL_DIR)
--	$(INSTALL_DATA) $(XEN_GOPATH)$(GOXL_PKG_DIR)xenlight.go $(DESTDIR)$(GOXL_INSTALL_DIR)
--	$(INSTALL_DATA) $(XEN_GOPATH)$(GOXL_PKG_DIR)types.gen.go $(DESTDIR)$(GOXL_INSTALL_DIR)
--	$(INSTALL_DATA) $(XEN_GOPATH)$(GOXL_PKG_DIR)helpers.gen.go $(DESTDIR)$(GOXL_INSTALL_DIR)
-+	$(INSTALL_DATA) xenlight.go $(DESTDIR)$(GOXL_INSTALL_DIR)
-+	$(INSTALL_DATA) types.gen.go $(DESTDIR)$(GOXL_INSTALL_DIR)
-+	$(INSTALL_DATA) helpers.gen.go $(DESTDIR)$(GOXL_INSTALL_DIR)
- 
- .PHONY: uninstall
- 	rm -rf $(DESTDIR)$(GOXL_INSTALL_DIR)
- 
- .PHONY: clean
- clean:
--	$(RM) -r $(XEN_GOPATH)$(GOXL_PKG_DIR)
--	$(RM) $(XEN_GOPATH)/pkg/*/$(XEN_GOCODE_URL)/xenlight.a
- 
- .PHONY: distclean
- distclean: clean
+diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
+index 5095de65b8..d8fbebaf79 100644
+--- a/automation/build/archlinux/current.dockerfile
++++ b/automation/build/archlinux/current.dockerfile
+@@ -16,6 +16,7 @@ RUN pacman -S --refresh --sysupgrade --noconfirm --noprogressbar --needed \
+         ghostscript \
+         git \
+         gnutls \
++        go \
+         iasl \
+         inetutils \
+         iproute \
+diff --git a/automation/build/debian/unstable.dockerfile b/automation/build/debian/unstable.dockerfile
+index d0aa5ad2bb..aeb4f3448b 100644
+--- a/automation/build/debian/unstable.dockerfile
++++ b/automation/build/debian/unstable.dockerfile
+@@ -45,6 +45,7 @@ RUN apt-get update && \
+         nasm \
+         gnupg \
+         apt-transport-https \
++        golang \
+         && \
+         apt-get autoremove -y && \
+         apt-get clean && \
+diff --git a/automation/build/fedora/29.dockerfile b/automation/build/fedora/29.dockerfile
+index 5be4a9e229..6a4e5b0413 100644
+--- a/automation/build/fedora/29.dockerfile
++++ b/automation/build/fedora/29.dockerfile
+@@ -40,5 +40,6 @@ RUN dnf -y install \
+         nasm \
+         ocaml \
+         ocaml-findlib \
++        golang \
+     && dnf clean all && \
+     rm -rf /var/cache/dnf
 -- 
 2.25.1
 
