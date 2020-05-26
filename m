@@ -2,59 +2,82 @@ Return-Path: <SRS0=xV0j=7I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-4.8 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46975C433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 804FBC433DF
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 23:58:23 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2182220870
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 22:17:22 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2182220870
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 49DC320700
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 23:58:23 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EmZuxg9r"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49DC320700
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdhsd-00084P-1F; Tue, 26 May 2020 22:17:03 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jdjS1-0008CV-Fl; Tue, 26 May 2020 23:57:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=52a6=7I=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jdhsb-00083n-J8
- for xen-devel@lists.xenproject.org; Tue, 26 May 2020 22:17:01 +0000
-X-Inumbo-ID: 94daf39a-9f9e-11ea-a6c3-12813bfff9fa
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 94daf39a-9f9e-11ea-a6c3-12813bfff9fa;
- Tue, 26 May 2020 22:16:44 +0000 (UTC)
-Authentication-Results: esa2.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: cu8UWhvEil7kDZD8zHi5/jSJQD0btiknIDvUtyRoaZOu5JTNQNJuhxwRU8GYWVJ9i698NuCL1I
- Mgu4pRtHmAIP88qZMM0ZJK63RxGG+g1CyXeVQHDQm9rEtnoXG5GKUIp40KJo0oXLZoehC86n6J
- h7gEWVSr34fKFia57eCXrCS4DF5r2PaqtwfikLD59jz9b6j3m4FcBMmfvRh+4OYuJOkip8HMNW
- KAwL/l2LPuXJ+G8kGyah9iXkbYsKo4Ce2h8M5TUg11rYR0O+jvIfzZa2TL1SETYvXyYjc0IAIa
- 2W4=
-X-SBRS: 2.7
-X-MesageID: 18520581
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,439,1583211600"; d="scan'208";a="18520581"
-From: George Dunlap <george.dunlap@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 4/5] automation: Add golang packages to various dockerfiles
-Date: Tue, 26 May 2020 23:16:11 +0100
-Message-ID: <20200526221612.900922-5-george.dunlap@citrix.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200526221612.900922-1-george.dunlap@citrix.com>
+ <SRS0=LE0D=7I=gmail.com=rosbrookn@srs-us1.protection.inumbo.net>)
+ id 1jdjRz-0008CQ-Jy
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2020 23:57:39 +0000
+X-Inumbo-ID: ae099c64-9fac-11ea-9dbe-bc764e2007e4
+Received: from mail-qv1-xf31.google.com (unknown [2607:f8b0:4864:20::f31])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id ae099c64-9fac-11ea-9dbe-bc764e2007e4;
+ Tue, 26 May 2020 23:57:39 +0000 (UTC)
+Received: by mail-qv1-xf31.google.com with SMTP id z9so10349556qvi.12
+ for <xen-devel@lists.xenproject.org>; Tue, 26 May 2020 16:57:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=4l5IN1Cyll7yznAYyy5s4ZQut9n46ETYfEZJFeYnMGw=;
+ b=EmZuxg9ricpPdFMhg4Vh+a1FpmGfUWEppKNUW1Mg9PZ3rOTDW9twgAjEnlpCs34lV8
+ TrsI7imnzTQpKQbxVdXTTpT49mDaO2tkivIl/bx/PAeU8D//uhJFo3hO9afvCjZM2Bxi
+ sxMmfZ6z1PVj1UTDUvrBzIVX4rYCDI148NUVleDzF8IpmeA9igjC9Kmrow7v2nmZuu0V
+ 8DtBn080fnL/ss1s9PQWME8XP+ugx3bnyFi6VQCJQCI3FtAQQcxd7Hu506FDLQAAuq9M
+ /PsDrw4SAWSDfIFnsLXMSV75yoiEKIUkmnyQYaiW10LwyFs6x5LIWRyO3qQM0GPXf12P
+ TkyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=4l5IN1Cyll7yznAYyy5s4ZQut9n46ETYfEZJFeYnMGw=;
+ b=V1Zuy2OfkBOwqrB++VDkODhw5qJL1C9ZuDcvPgfMv4f5fZE9OlbhJy429pcOmm9Zvs
+ oxGVvuhxuK/4EAgW4xklp1uPX3ihFYCWANceKHofJS4tt0plA+RrpYqqU4FGQgfZxd7I
+ z6MZLgpB1hX2mlgSut2Hm89B2GPbB0N3xdDgLFHaAnuR6RsWmBIP+tufUF4MTTR+9re/
+ oCu1D2HWauwP7YhS3dFtx/G83hgeud+kxCabxxeR5xGvSgXMJhN2Dk4b0ydMuVTmKNjI
+ rAcKV6SZ8FqdkQOGHnShHsLdt94C2S1b2FZR52Xxx/j1wmQB+fkKsUgQkmg940EiUAPF
+ gqBA==
+X-Gm-Message-State: AOAM533v93Qw+IV4YFDxdZ4Pi/5KA/pcnM1lsBAODc+U/DERhpzkt9VI
+ hrRIcH0HbWWcxL7AuSFTA8w=
+X-Google-Smtp-Source: ABdhPJyJr73tQv4tl5NSa5CfCVYL//2P/Bh0KkB3oftZwnAo8seL/fhTwiJU8fGqgc2AOzX155BAiA==
+X-Received: by 2002:ad4:57a1:: with SMTP id g1mr21703794qvx.27.1590537458788; 
+ Tue, 26 May 2020 16:57:38 -0700 (PDT)
+Received: from six (cpe-67-241-56-252.twcny.res.rr.com. [67.241.56.252])
+ by smtp.gmail.com with ESMTPSA id m94sm1084893qtd.29.2020.05.26.16.57.36
+ (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+ Tue, 26 May 2020 16:57:37 -0700 (PDT)
+Date: Tue, 26 May 2020 19:57:35 -0400
+From: Nick Rosbrook <rosbrookn@gmail.com>
+To: George Dunlap <george.dunlap@citrix.com>
+Subject: [PATCH v2 2/5] golang/xenlight: Get rid of GOPATH-based build
+ artefacts
+Message-ID: <20200526235735.GA2978@six>
 References: <20200526221612.900922-1-george.dunlap@citrix.com>
+ <20200526221612.900922-3-george.dunlap@citrix.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200526221612.900922-3-george.dunlap@citrix.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,67 +88,33 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Doug
- Goldstein <cardoe@cardoe.com>, George Dunlap <george.dunlap@citrix.com>,
- Wei Liu <wl@xen.org>
+Cc: Nick Rosbrook <rosbrookn@ainfosec.com>, xen-devel@lists.xenproject.org,
+ Ian Jackson <ian.jackson@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Specifically, Fedora 29, Archlinux, and Debian unstable.  This will
-cause the CI loop to detect golang build failures.
+> diff --git a/tools/golang/xenlight/Makefile b/tools/golang/xenlight/Makefile
+> index 8ab4cb5665..f8d8047524 100644
+> --- a/tools/golang/xenlight/Makefile
+> +++ b/tools/golang/xenlight/Makefile
+> @@ -14,17 +14,8 @@ LIBXL_SRC_DIR = ../../libxl
+>  .PHONY: all
+>  all: build
+>  
+> -.PHONY: package
+> -package: $(XEN_GOPATH)$(GOXL_PKG_DIR)
+> -
+>  GOXL_GEN_FILES = types.gen.go helpers.gen.go
+>  
+> -$(XEN_GOPATH)/src/$(XEN_GOCODE_URL)/xenlight/: xenlight.go $(GOXL_GEN_FILES)
+> -	$(INSTALL_DIR) $(XEN_GOPATH)$(GOXL_PKG_DIR)
+> -	$(INSTALL_DATA) xenlight.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
+> -	$(INSTALL_DATA) types.gen.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
+> -	$(INSTALL_DATA) helpers.gen.go $(XEN_GOPATH)$(GOXL_PKG_DIR)
+> -
 
-CentOS 6 and 7 don't have golang packages, and the packages in
-stretch, jessie, xenial, and trusty are too old.
+I think the GOXL_PKG_DIR variable can be removed all together too. With
+these changes it's only used to initialize GOXL_INSTALL_DIR.
 
-Signed-off-by: George Dunlap <george.dunlap@citrix.com>
----
-v2:
-- New
-
-CC: Wei Liu <wl@xen.org>
-CC: Doug Goldstein <cardoe@cardoe.com>
----
- automation/build/archlinux/current.dockerfile | 1 +
- automation/build/debian/unstable.dockerfile   | 1 +
- automation/build/fedora/29.dockerfile         | 1 +
- 3 files changed, 3 insertions(+)
-
-diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
-index 5095de65b8..d8fbebaf79 100644
---- a/automation/build/archlinux/current.dockerfile
-+++ b/automation/build/archlinux/current.dockerfile
-@@ -16,6 +16,7 @@ RUN pacman -S --refresh --sysupgrade --noconfirm --noprogressbar --needed \
-         ghostscript \
-         git \
-         gnutls \
-+        go \
-         iasl \
-         inetutils \
-         iproute \
-diff --git a/automation/build/debian/unstable.dockerfile b/automation/build/debian/unstable.dockerfile
-index d0aa5ad2bb..aeb4f3448b 100644
---- a/automation/build/debian/unstable.dockerfile
-+++ b/automation/build/debian/unstable.dockerfile
-@@ -45,6 +45,7 @@ RUN apt-get update && \
-         nasm \
-         gnupg \
-         apt-transport-https \
-+        golang \
-         && \
-         apt-get autoremove -y && \
-         apt-get clean && \
-diff --git a/automation/build/fedora/29.dockerfile b/automation/build/fedora/29.dockerfile
-index 5be4a9e229..6a4e5b0413 100644
---- a/automation/build/fedora/29.dockerfile
-+++ b/automation/build/fedora/29.dockerfile
-@@ -40,5 +40,6 @@ RUN dnf -y install \
-         nasm \
-         ocaml \
-         ocaml-findlib \
-+        golang \
-     && dnf clean all && \
-     rm -rf /var/cache/dnf
--- 
-2.25.1
-
+-NR
 
