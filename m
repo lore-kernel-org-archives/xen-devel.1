@@ -2,58 +2,73 @@ Return-Path: <SRS0=xV0j=7I=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6333EC433DF
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 14:14:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 76BD5C433E0
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 14:39:48 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3BC09207CB
-	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 14:14:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3BC09207CB
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 377DA20723
+	for <xen-devel@archiver.kernel.org>; Tue, 26 May 2020 14:39:48 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="BdyjSwVD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 377DA20723
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdaL1-0006qf-Gm; Tue, 26 May 2020 14:13:51 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jdajc-0000Lf-J2; Tue, 26 May 2020 14:39:16 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gj5j=7I=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jdaL0-0006qX-EU
- for xen-devel@lists.xenproject.org; Tue, 26 May 2020 14:13:50 +0000
-X-Inumbo-ID: 1eafe4ca-9f5b-11ea-a64b-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 1eafe4ca-9f5b-11ea-a64b-12813bfff9fa;
- Tue, 26 May 2020 14:13:49 +0000 (UTC)
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: a8e1hJP9tcy9W6KUzPsqSDXcAyUSgsjT2CQ28rO/DwSG1bVqVJdBBImOsBpm2VTW94PyzOv8Y1
- s93RDwryycUdBHFey0xCK7O7668Oy1dcSdOcVxNNdTgbDLx6QCnKf22I1vOrRsDH0N+34Tjpda
- PKRc4gC9LYKqdQJHRXR0elxZzXTMOWBsFwsy9u9fCi97SVQWlnODqdzxq92vrC9p2q9pLJKvHB
- 7UhypLSKV2vcLh0y0jdC2oEyNpbI/JDZtvNJuYt/hEj6xv86Cn7U+kOKHhGuH/ytj+xVkyBqny
- rAA=
-X-SBRS: None
-X-MesageID: 18441670
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-From: Ian Jackson <ian.jackson@citrix.com>
+ <SRS0=KTO2=7I=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
+ id 1jdajb-0000La-Qt
+ for xen-devel@lists.xenproject.org; Tue, 26 May 2020 14:39:15 +0000
+X-Inumbo-ID: abf75f04-9f5e-11ea-8993-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id abf75f04-9f5e-11ea-8993-bc764e2007e4;
+ Tue, 26 May 2020 14:39:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
+ Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=L9XIyFu6C/hpOZ/sHwuBnYy3C9RV5TetydhMcbBYHTk=; b=BdyjSwVDehE1yVQfshRSHBayj
+ hBXkzU9oJr0h7Oj4c3xdniQD99ZNmsVgG1RkVG1VHj5LuZH6aS7X0udsjEKtYiBTvHjNgwMYje/em
+ VCwTs3aoVR5ydHT/gGOXkxAYg0QysabqOUfVAxPgQae+bpo9Uioq3OQvQDumHKKRiqNIA=;
+Received: from host146.205.237.98.conversent.net ([205.237.98.146]
+ helo=infra.test-lab.xenproject.org)
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jdaja-000573-PM; Tue, 26 May 2020 14:39:14 +0000
+Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
+ by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
+ (envelope-from <osstest-admin@xenproject.org>)
+ id 1jdaja-0008PV-Gt; Tue, 26 May 2020 14:39:14 +0000
+Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
+ 4.89) (envelope-from <osstest-admin@xenproject.org>)
+ id 1jdaja-0004Me-Fm; Tue, 26 May 2020 14:39:14 +0000
+To: xen-devel@lists.xenproject.org,
+    osstest-admin@xenproject.org
+Message-ID: <osstest-150384-mainreport@xen.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24269.8360.504075.118119@mariner.uk.xensource.com>
-Date: Tue, 26 May 2020 14:59:04 +0100
-To: Jason Andryuk <jandryuk@gmail.com>
-Subject: Re: [PATCH] SUPPORT: Add linux device model stubdom to Toolstack
-In-Reply-To: <20200525025506.225959-1-jandryuk@gmail.com>
-References: <20200525025506.225959-1-jandryuk@gmail.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+Subject: [xen-unstable-smoke test] 150384: tolerable all pass - PUSHED
+X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
+ xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
+X-Osstest-Versions-This: xen=d9b29088603f8438160eb4852cedd85cb7c61a19
+X-Osstest-Versions-That: xen=354e8318d5a9b6f32fbd3c01d1a9f1970007010b
+From: osstest service owner <osstest-admin@xenproject.org>
+Date: Tue, 26 May 2020 14:39:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,17 +79,62 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, Andrew
- Cooper <Andrew.Cooper3@citrix.com>, George Dunlap <George.Dunlap@citrix.com>,
- Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Jason Andryuk writes ("[PATCH] SUPPORT: Add linux device model stubdom to Toolstack"):
-> Add qemu-xen linux device model stubdomain to the Toolstack section as a
-> Tech Preview.
+flight 150384 xen-unstable-smoke real [real]
+http://logs.test-lab.xenproject.org/osstest/logs/150384/
 
-Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Failures :-/ but no regressions.
+
+Tests which did not succeed, but are not blocking:
+ test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
+ test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
+ test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
+ test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+
+version targeted for testing:
+ xen                  d9b29088603f8438160eb4852cedd85cb7c61a19
+baseline version:
+ xen                  354e8318d5a9b6f32fbd3c01d1a9f1970007010b
+
+Last test of basis   150367  2020-05-25 17:02:04 Z    0 days
+Testing same since   150384  2020-05-26 12:01:19 Z    0 days    1 attempts
+
+------------------------------------------------------------
+People who touched revisions under test:
+  George Dunlap <george.dunlap@citrix.com>
+
+jobs:
+ build-arm64-xsm                                              pass    
+ build-amd64                                                  pass    
+ build-armhf                                                  pass    
+ build-amd64-libvirt                                          pass    
+ test-armhf-armhf-xl                                          pass    
+ test-arm64-arm64-xl-xsm                                      pass    
+ test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
+ test-amd64-amd64-libvirt                                     pass    
+
+
+------------------------------------------------------------
+sg-report-flight on osstest.test-lab.xenproject.org
+logs: /home/logs/logs
+images: /home/logs/images
+
+Logs, config files, etc. are available at
+    http://logs.test-lab.xenproject.org/osstest/logs
+
+Explanation of these reports, and of osstest in general, is at
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
+    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+
+Test harness code can be found at
+    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+
+
+Pushing revision :
+
+To xenbits.xen.org:/home/xen/git/xen.git
+   354e8318d5..d9b2908860  d9b29088603f8438160eb4852cedd85cb7c61a19 -> smoke
 
