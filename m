@@ -2,70 +2,72 @@ Return-Path: <SRS0=V1Us=7J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9FF67C433E2
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 12:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98F34C433E3
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 12:52:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6FB932053B
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 12:52:53 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 6CB8520899
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 12:52:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="GT+rFY3/"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FB932053B
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="WYnlLphK"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CB8520899
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdvXi-0001Sb-An; Wed, 27 May 2020 12:52:22 +0000
+	id 1jdvXj-0001St-3t; Wed, 27 May 2020 12:52:23 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=mVnz=7J=yandex-team.ru=rvkagan@srs-us1.protection.inumbo.net>)
- id 1jdvQw-0000f6-1I
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 12:45:22 +0000
-X-Inumbo-ID: ec23362a-a017-11ea-a740-12813bfff9fa
-Received: from forwardcorp1o.mail.yandex.net (unknown [95.108.205.193])
+ id 1jdvRB-0000g1-1k
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 12:45:37 +0000
+X-Inumbo-ID: f56b1a40-a017-11ea-a740-12813bfff9fa
+Received: from forwardcorp1j.mail.yandex.net (unknown [5.45.199.163])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ec23362a-a017-11ea-a740-12813bfff9fa;
- Wed, 27 May 2020 12:45:20 +0000 (UTC)
+ id f56b1a40-a017-11ea-a740-12813bfff9fa;
+ Wed, 27 May 2020 12:45:35 +0000 (UTC)
 Received: from mxbackcorp1o.mail.yandex.net (mxbackcorp1o.mail.yandex.net
  [IPv6:2a02:6b8:0:1a2d::301])
- by forwardcorp1o.mail.yandex.net (Yandex) with ESMTP id 2C5E72E1581;
- Wed, 27 May 2020 15:45:18 +0300 (MSK)
+ by forwardcorp1j.mail.yandex.net (Yandex) with ESMTP id BD9702E156F;
+ Wed, 27 May 2020 15:45:33 +0300 (MSK)
 Received: from iva4-7c3d9abce76c.qloud-c.yandex.net
  (iva4-7c3d9abce76c.qloud-c.yandex.net [2a02:6b8:c0c:4e8e:0:640:7c3d:9abc])
  by mxbackcorp1o.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
- yGuxnAsuRm-jBxmk9RU; Wed, 27 May 2020 15:45:18 +0300
+ RSC1xPiAcU-jSxK4aYo; Wed, 27 May 2020 15:45:33 +0300
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
  s=default; 
- t=1590583518; bh=42hnJ6RHsswvNBcGuhOx1Vid5BV/7/IOuRuXw9PtENo=;
- h=Message-Id:Date:Subject:To:From:Cc;
- b=GT+rFY3/A/0GhjPSqnGNvn8/0KVp00ezEslGbKJi1h1CVFHRFaME8nksjJwjD6zVw
- raZBgRPM5mlp8y4/rx6hWXKRnNlkNTSuGd95/scuF9tESi9pzKpbstRV6qtHXXiAtn
- i85pJ9QEsSf4mIai+JIHe8xloikKTWVzzaQUhOKI=
+ t=1590583533; bh=A0YhPbFgXOi7Ibarq6sWTVZlCf7rqVdJcWDX7rNnVYU=;
+ h=In-Reply-To:Message-Id:References:Date:Subject:To:From:Cc;
+ b=WYnlLphKioMSFrz8oFbRygNduQl/bL8tD6c/NiJkHcDsYzLrYS1UyEnm0fIViPBRC
+ /i9nB2GRviU/5H+9Xcv960vEViNd1mWl+0a99WkYzXHvzkDmt9FWAhM9XHz7hkxcjF
+ P31LzMOyFKBdeJy8/Rew0UG3//wx5+hR5FCg/rl4=
 Authentication-Results: mxbackcorp1o.mail.yandex.net;
  dkim=pass header.i=@yandex-team.ru
 Received: from dynamic-vpn.dhcp.yndx.net (dynamic-vpn.dhcp.yndx.net
  [2a02:6b8:b080:8308::1:12])
  by iva4-7c3d9abce76c.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
- bzO5qPtczO-jBWOPpYZ; Wed, 27 May 2020 15:45:11 +0300
+ bzO5qPtczO-jSWO478g; Wed, 27 May 2020 15:45:28 +0300
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (Client certificate not present)
 From: Roman Kagan <rvkagan@yandex-team.ru>
 To: qemu-devel@nongnu.org
-Subject: [PATCH v6 0/5] block: enhance handling of size-related BlockConf
- properties
-Date: Wed, 27 May 2020 15:45:06 +0300
-Message-Id: <20200527124511.986099-1-rvkagan@yandex-team.ru>
+Subject: [PATCH v6 3/5] qdev-properties: blocksize: use same limits in code
+ and description
+Date: Wed, 27 May 2020 15:45:09 +0300
+Message-Id: <20200527124511.986099-4-rvkagan@yandex-team.ru>
 X-Mailer: git-send-email 2.26.2
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20200527124511.986099-1-rvkagan@yandex-team.ru>
+References: <20200527124511.986099-1-rvkagan@yandex-team.ru>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 27 May 2020 12:52:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -91,66 +93,72 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-BlockConf includes several properties counted in bytes.=0D
-=0D
-Enhance their handling in a some aspects, specifically=0D
-=0D
-- accept common size suffixes (k, m)=0D
-- perform consistency checks on the values=0D
-- lift the upper limit on physical_block_size and logical_block_size=0D
-=0D
-Also fix the accessor for opt_io_size in virtio-blk to make it consistent w=
-ith=0D
-the size of the field.=0D
-=0D
-History:=0D
-v5 -> v6:=0D
-- fix forgotten xen-block and swim=0D
-- add prop_size32 instead of going with 64bit=0D
-=0D
-v4 -> v5:=0D
-- re-split the patches [Philippe]=0D
-- fix/reword error messages [Philippe, Kevin]=0D
-- do early return on failed consistency check [Philippe]=0D
-- use QEMU_IS_ALIGNED instead of open coding [Philippe]=0D
-- make all BlockConf size props support suffixes=0D
-- expand the log for virtio-blk opt_io_size [Michael]=0D
-=0D
-v3 -> v4:=0D
-- add patch to fix opt_io_size width in virtio-blk=0D
-- add patch to perform consistency checks [Kevin]=0D
-- check min_io_size against truncation [Kevin]=0D
-=0D
-v2 -> v3:=0D
-- mention qcow2 cluster size limit in the log and comment [Eric]=0D
-=0D
-v1 -> v2:=0D
-- cap the property at 2 MiB [Eric]=0D
-- accept size suffixes=0D
-=0D
-Roman Kagan (5):=0D
-  virtio-blk: store opt_io_size with correct size=0D
-  block: consolidate blocksize properties consistency checks=0D
-  qdev-properties: blocksize: use same limits in code and description=0D
-  block: make size-related BlockConf properties accept size suffixes=0D
-  block: lift blocksize property limit to 2 MiB=0D
-=0D
- include/hw/block/block.h     |  14 +-=0D
- include/hw/qdev-properties.h |   5 +-=0D
- hw/block/block.c             |  41 ++-=0D
- hw/block/fdc.c               |   5 +-=0D
- hw/block/nvme.c              |   5 +-=0D
- hw/block/swim.c              |   5 +-=0D
- hw/block/virtio-blk.c        |   9 +-=0D
- hw/block/xen-block.c         |   6 +-=0D
- hw/core/qdev-properties.c    |  85 +++++-=0D
- hw/ide/qdev.c                |   5 +-=0D
- hw/scsi/scsi-disk.c          |  12 +-=0D
- hw/usb/dev-storage.c         |   5 +-=0D
- tests/qemu-iotests/172.out   | 532 +++++++++++++++++------------------=0D
- 13 files changed, 420 insertions(+), 309 deletions(-)=0D
-=0D
--- =0D
-2.26.2=0D
-=0D
+Make it easier (more visible) to maintain the limits on the blocksize
+properties in sync with the respective description, by using macros both
+in the code and in the description.
+
+Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
+---
+v4 -> v5:
+- split out into separate patch [Philippe]
+
+ hw/core/qdev-properties.c | 21 +++++++++++++++------
+ 1 file changed, 15 insertions(+), 6 deletions(-)
+
+diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
+index cc924815da..249dc69bd8 100644
+--- a/hw/core/qdev-properties.c
++++ b/hw/core/qdev-properties.c
+@@ -729,6 +729,13 @@ const PropertyInfo qdev_prop_pci_devfn = {
+ 
+ /* --- blocksize --- */
+ 
++/* lower limit is sector size */
++#define MIN_BLOCK_SIZE          512
++#define MIN_BLOCK_SIZE_STR      stringify(MIN_BLOCK_SIZE)
++/* upper limit is the max power of 2 that fits in uint16_t */
++#define MAX_BLOCK_SIZE          32768
++#define MAX_BLOCK_SIZE_STR      stringify(MAX_BLOCK_SIZE)
++
+ static void set_blocksize(Object *obj, Visitor *v, const char *name,
+                           void *opaque, Error **errp)
+ {
+@@ -736,8 +743,6 @@ static void set_blocksize(Object *obj, Visitor *v, const char *name,
+     Property *prop = opaque;
+     uint16_t value, *ptr = qdev_get_prop_ptr(dev, prop);
+     Error *local_err = NULL;
+-    const int64_t min = 512;
+-    const int64_t max = 32768;
+ 
+     if (dev->realized) {
+         qdev_prop_set_after_realize(dev, name, errp);
+@@ -750,9 +755,12 @@ static void set_blocksize(Object *obj, Visitor *v, const char *name,
+         return;
+     }
+     /* value of 0 means "unset" */
+-    if (value && (value < min || value > max)) {
+-        error_setg(errp, QERR_PROPERTY_VALUE_OUT_OF_RANGE,
+-                   dev->id ? : "", name, (int64_t)value, min, max);
++    if (value && (value < MIN_BLOCK_SIZE || value > MAX_BLOCK_SIZE)) {
++        error_setg(errp,
++                   "Property %s.%s doesn't take value %" PRIu16
++                   " (minimum: " MIN_BLOCK_SIZE_STR
++                   ", maximum: " MAX_BLOCK_SIZE_STR ")",
++                   dev->id ? : "", name, value);
+         return;
+     }
+ 
+@@ -769,7 +777,8 @@ static void set_blocksize(Object *obj, Visitor *v, const char *name,
+ 
+ const PropertyInfo qdev_prop_blocksize = {
+     .name  = "uint16",
+-    .description = "A power of two between 512 and 32768",
++    .description = "A power of two between " MIN_BLOCK_SIZE_STR
++                   " and " MAX_BLOCK_SIZE_STR,
+     .get   = get_uint16,
+     .set   = set_blocksize,
+     .set_default_value = set_default_value_uint,
+-- 
+2.26.2
+
 
