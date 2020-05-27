@@ -2,59 +2,89 @@ Return-Path: <SRS0=V1Us=7J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 11348C433DF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97D45C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 20:54:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E6DEA207D3
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E6DEA207D3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 50C282088E
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 20:54:04 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="F3RR6S+Z"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50C282088E
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1oy-0006cq-2D; Wed, 27 May 2020 19:34:36 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1je33D-00059j-3I; Wed, 27 May 2020 20:53:23 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1ow-0006cN-HW
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:34:34 +0000
-X-Inumbo-ID: 130007e4-a051-11ea-81bc-bc764e2007e4
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 130007e4-a051-11ea-81bc-bc764e2007e4;
- Wed, 27 May 2020 19:34:26 +0000 (UTC)
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: NPahr4HOwB/rPxUenW5oMXduKyL+uOiKhCpIDIFNdBdKGst4pFLbAcGaUzrmUK8S5AUttl92jn
- apZJLDNuAGxnq7nvb+RwyoDq0h6KJ9aNV5JKxkAqDGy05fCpCQYS+sW5Infn+BhObaVgccfRD7
- Cniq80QEBLLaA/PichBP8Kol8/FhBO7RzKG9oVCKq0naYVLJyYLSV1aBHMrJLVBP/cEpRLYDvF
- Gyf0yoFxFWl5qT/uT969foSfPYFHrdrSEZ43ePELaNMyryXcW9PQ+rV9YGfN093+Y80M8uaY2f
- f+w=
-X-SBRS: 2.7
-X-MesageID: 18592446
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18592446"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 10/14] x86/extable: Adjust extable handling to be shadow
- stack compatible
-Date: Wed, 27 May 2020 20:18:43 +0100
-Message-ID: <20200527191847.17207-11-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
-References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
+ <SRS0=mVnz=7J=yandex-team.ru=rvkagan@srs-us1.protection.inumbo.net>)
+ id 1je33B-00059e-CL
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 20:53:21 +0000
+X-Inumbo-ID: 175459e8-a05c-11ea-a782-12813bfff9fa
+Received: from forwardcorp1j.mail.yandex.net (unknown [5.45.199.163])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 175459e8-a05c-11ea-a782-12813bfff9fa;
+ Wed, 27 May 2020 20:53:18 +0000 (UTC)
+Received: from mxbackcorp2j.mail.yandex.net (mxbackcorp2j.mail.yandex.net
+ [IPv6:2a02:6b8:0:1619::119])
+ by forwardcorp1j.mail.yandex.net (Yandex) with ESMTP id BD23D2E157F;
+ Wed, 27 May 2020 23:53:16 +0300 (MSK)
+Received: from sas2-32987e004045.qloud-c.yandex.net
+ (sas2-32987e004045.qloud-c.yandex.net [2a02:6b8:c08:b889:0:640:3298:7e00])
+ by mxbackcorp2j.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
+ Xt3ArwXecc-rCfKmK9U; Wed, 27 May 2020 23:53:16 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; 
+ t=1590612796; bh=ZsdCg7tQAxxXKqG44grgO5wkYDTDlvE1HPG0Z1dXtPA=;
+ h=In-Reply-To:Message-ID:Subject:To:From:References:Date:Cc;
+ b=F3RR6S+ZRu88QHnYWpbbvafacf6fEC/1xkhzlcxkkqo49KTGptul9Z1Oit3tDKxul
+ 3qjVktQ/i3tf08IpeyluZJm0G030wnzCELwqcpIsqxOeYX9xHAmPsfA2lnAobH2iI/
+ hWck9RjN7KSaV2qfKo+WD+82KTDgWLDtYj5bvMW8=
+Authentication-Results: mxbackcorp2j.mail.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+Received: from dynamic-vpn.dhcp.yndx.net (dynamic-vpn.dhcp.yndx.net
+ [2a02:6b8:b080:8308::1:12])
+ by sas2-32987e004045.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
+ 6CLcHCW0d0-rCX0XiYO; Wed, 27 May 2020 23:53:12 +0300
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client certificate not present)
+Date: Wed, 27 May 2020 23:53:11 +0300
+From: Roman Kagan <rvkagan@yandex-team.ru>
+To: Eric Blake <eblake@redhat.com>
+Subject: Re: [PATCH v6 4/5] block: make size-related BlockConf properties
+ accept size suffixes
+Message-ID: <20200527205311.GA373697@rvkaganb.lan>
+Mail-Followup-To: Roman Kagan <rvkagan@yandex-team.ru>,
+ Eric Blake <eblake@redhat.com>, qemu-devel@nongnu.org,
+ Kevin Wolf <kwolf@redhat.com>, xen-devel@lists.xenproject.org,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Laurent Vivier <laurent@vivier.eu>, Max Reitz <mreitz@redhat.com>,
+ qemu-block@nongnu.org,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
+ Paul Durrant <paul@xen.org>, Fam Zheng <fam@euphon.net>,
+ John Snow <jsnow@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>,
+ Keith Busch <kbusch@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Stefan Hajnoczi <stefanha@redhat.com>
+References: <20200527124511.986099-1-rvkagan@yandex-team.ru>
+ <20200527124511.986099-5-rvkagan@yandex-team.ru>
+ <d2ac3549-e63d-d737-41fa-21965c551175@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d2ac3549-e63d-d737-41fa-21965c551175@redhat.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,156 +95,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <JBeulich@suse.com>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, qemu-block@nongnu.org,
+ Paul Durrant <paul@xen.org>, John Snow <jsnow@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-devel@nongnu.org,
+ Laurent Vivier <laurent@vivier.eu>, Keith Busch <kbusch@kernel.org>,
+ Gerd Hoffmann <kraxel@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ Max Reitz <mreitz@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-When adjusting an IRET frame to recover from a fault, and equivalent
-adjustment needs making in the shadow IRET frame.
+On Wed, May 27, 2020 at 09:50:39AM -0500, Eric Blake wrote:
+> On 5/27/20 7:45 AM, Roman Kagan wrote:
+> > Several BlockConf properties represent respective sizes in bytes so it
+> > makes sense to accept size suffixes for them.
+> > 
+> > Turn them all into uint32_t and use size-suffix-capable setters/getters
+> > on them; introduce DEFINE_PROP_SIZE32 and adjust DEFINE_PROP_BLOCKSIZE
+> > for that. (Making them uint64_t and reusing DEFINE_PROP_SIZE isn't
+> > justified because guests expect at most 32bit values.)
+> > 
+> > Also, since min_io_size is exposed to the guest by scsi and virtio-blk
+> > devices as an uint16_t in units of logical blocks, introduce an
+> > additional check in blkconf_blocksizes to prevent its silent truncation.
+> > 
+> > Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
+> > ---
+> > v5 -> v6:
+> > - add prop_size32 instead of going with 64bit
+> 
+> Would it be worth adding prop_size32 as its own patch, before using it here?
 
-The adjustment in exception_with_ints_disabled() could in principle be an
-alternative block rather than an ifdef, as the only two current users of
-_PRE_EXTABLE() are IRET-to-guest instructions.  However, this is not a
-fastpath, and this form is more robust to future changes.
+I've no strong opinion on this.  Should I better split it out when
+respinning?
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
----
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Wei Liu <wl@xen.org>
-CC: Roger Pau Monné <roger.pau@citrix.com>
+> But I'll review this as-is.
+> 
+> > +++ b/hw/block/block.c
+> > @@ -96,6 +96,17 @@ bool blkconf_blocksizes(BlockConf *conf, Error **errp)
+> >           return false;
+> >       }
+> > +    /*
+> > +     * all devices which support min_io_size (scsi and virtio-blk) expose it to
+> > +     * the guest as a uint16_t in units of logical blocks
+> > +     */
+> > +    if (conf->min_io_size > conf->logical_block_size * UINT16_MAX) {
+> 
+> This risks overflow.  Better would be:
+> 
+> if (conf->min_io_size / conf->logical_block-size > UINT16_MAX)
 
-v2:
- * Break extable_shstk_fixup() out into a separate function.
- * Guard from shstk underflows, and unrealistic call traces.
----
- xen/arch/x86/traps.c        | 67 ++++++++++++++++++++++++++++++++++++++++++++-
- xen/arch/x86/x86_64/entry.S | 11 +++++++-
- 2 files changed, 76 insertions(+), 2 deletions(-)
+D'oh.  I kept it in mind and did it right initially in v4, but then
+mixed it up.  Thanks for catching!
 
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index 235a72cf4a..ce910294ea 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -363,7 +363,7 @@ static void show_guest_stack(struct vcpu *v, const struct cpu_user_regs *regs)
- }
- 
- /*
-- * Notes for get_stack_trace_bottom() and get_stack_dump_bottom()
-+ * Notes for get_{stack,shstk}*_bottom() helpers
-  *
-  * Stack pages 1 - 4:
-  *   These are all 1-page IST stacks.  Each of these stacks have an exception
-@@ -400,6 +400,18 @@ unsigned long get_stack_trace_bottom(unsigned long sp)
-     }
- }
- 
-+static unsigned long get_shstk_bottom(unsigned long sp)
-+{
-+    switch ( get_stack_page(sp) )
-+    {
-+#ifdef CONFIG_XEN_SHSTK
-+    case 0:  return ROUNDUP(sp, IST_SHSTK_SIZE) - sizeof(unsigned long);
-+    case 5:  return ROUNDUP(sp, PAGE_SIZE)      - sizeof(unsigned long);
-+#endif
-+    default: return sp - sizeof(unsigned long);
-+    }
-+}
-+
- unsigned long get_stack_dump_bottom(unsigned long sp)
- {
-     switch ( get_stack_page(sp) )
-@@ -763,6 +775,56 @@ static void do_reserved_trap(struct cpu_user_regs *regs)
-           trapnr, vec_name(trapnr), regs->error_code);
- }
- 
-+static void extable_shstk_fixup(struct cpu_user_regs *regs, unsigned long fixup)
-+{
-+    unsigned long ssp, *ptr, *base;
-+
-+    asm ( "rdsspq %0" : "=r" (ssp) : "0" (1) );
-+    if ( ssp == 1 )
-+        return;
-+
-+    ptr = _p(ssp);
-+    base = _p(get_shstk_bottom(ssp));
-+
-+    for ( ; ptr < base; ++ptr )
-+    {
-+        /*
-+         * Search for %rip.  The shstk currently looks like this:
-+         *
-+         *   ...  [Likely pointed to by SSP]
-+         *   %cs  [== regs->cs]
-+         *   %rip [== regs->rip]
-+         *   SSP  [Likely points to 3 slots higher, above %cs]
-+         *   ...  [call tree to this function, likely 2/3 slots]
-+         *
-+         * and we want to overwrite %rip with fixup.  There are two
-+         * complications:
-+         *   1) We cant depend on SSP values, because they won't differ by 3
-+         *      slots if the exception is taken on an IST stack.
-+         *   2) There are synthetic (unrealistic but not impossible) scenarios
-+         *      where %rip can end up in the call tree to this function, so we
-+         *      can't check against regs->rip alone.
-+         *
-+         * Check for both reg->rip and regs->cs matching.
-+         */
-+
-+        if ( ptr[0] == regs->rip && ptr[1] == regs->cs )
-+        {
-+            asm ( "wrssq %[fix], %[stk]"
-+                  : [stk] "=m" (*ptr)
-+                  : [fix] "r" (fixup) );
-+            return;
-+        }
-+    }
-+
-+    /*
-+     * We failed to locate and fix up the shadow IRET frame.  This could be
-+     * due to shadow stack corruption, or bad logic above.  We cannot continue
-+     * executing the interrupted context.
-+     */
-+    BUG();
-+}
-+
- static bool extable_fixup(struct cpu_user_regs *regs, bool print)
- {
-     unsigned long fixup = search_exception_table(regs);
-@@ -779,6 +841,9 @@ static bool extable_fixup(struct cpu_user_regs *regs, bool print)
-                vec_name(regs->entry_vector), regs->error_code,
-                _p(regs->rip), _p(regs->rip), _p(fixup));
- 
-+    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
-+        extable_shstk_fixup(regs, fixup);
-+
-     regs->rip = fixup;
-     this_cpu(last_extable_addr) = regs->rip;
- 
-diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
-index f7ee3dce91..78ac0df49f 100644
---- a/xen/arch/x86/x86_64/entry.S
-+++ b/xen/arch/x86/x86_64/entry.S
-@@ -708,7 +708,16 @@ exception_with_ints_disabled:
-         call  search_pre_exception_table
-         testq %rax,%rax                 # no fixup code for faulting EIP?
-         jz    1b
--        movq  %rax,UREGS_rip(%rsp)
-+        movq  %rax,UREGS_rip(%rsp)      # fixup regular stack
-+
-+#ifdef CONFIG_XEN_SHSTK
-+        mov    $1, %edi
-+        rdsspq %rdi
-+        cmp    $1, %edi
-+        je     .L_exn_shstk_done
-+        wrssq  %rax, (%rdi)             # fixup shadow stack
-+.L_exn_shstk_done:
-+#endif
-         subq  $8,UREGS_rsp(%rsp)        # add ec/ev to previous stack frame
-         testb $15,UREGS_rsp(%rsp)       # return %rsp is now aligned?
-         jz    1f                        # then there is a pad quadword already
--- 
-2.11.0
+> 
+> > +        error_setg(errp,
+> > +                   "min_io_size must not exceed " stringify(UINT16_MAX)
+> > +                   " logical blocks");
+> > +        return false;
+> > +    }
+> > +
+> >       if (!QEMU_IS_ALIGNED(conf->opt_io_size, conf->logical_block_size)) {
+> >           error_setg(errp,
+> >                      "opt_io_size must be a multiple of logical_block_size");
+> 
+> > +++ b/tests/qemu-iotests/172.out
+> > @@ -24,11 +24,11 @@ Testing:
+> >                 dev: floppy, id ""
+> >                   unit = 0 (0x0)
+> >                   drive = "floppy0"
+> > -                logical_block_size = 512 (0x200)
+> > -                physical_block_size = 512 (0x200)
+> > -                min_io_size = 0 (0x0)
+> > -                opt_io_size = 0 (0x0)
+> > -                discard_granularity = 4294967295 (0xffffffff)
+> > +                logical_block_size = 512 (512 B)
+> > +                physical_block_size = 512 (512 B)
+> > +                min_io_size = 0 (0 B)
+> > +                opt_io_size = 0 (0 B)
+> > +                discard_granularity = 4294967295 (4 GiB)
+> 
+> Although 4 GiB is not quite the same as 4294967295, the exact byte value
+> next to the approximate size is not too bad.  The mechanical fallout from
+> the change from int to size is fine to me.
 
+Thanks,
+Roman.
 
