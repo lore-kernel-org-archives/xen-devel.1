@@ -6,48 +6,49 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DB89C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11348C433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6F73A207D3
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F73A207D3
+	by mail.kernel.org (Postfix) with ESMTPS id E6DEA207D3
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E6DEA207D3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1os-0006bS-Q3; Wed, 27 May 2020 19:34:30 +0000
+	id 1je1oy-0006cq-2D; Wed, 27 May 2020 19:34:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1or-0006b7-HC
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:34:29 +0000
-X-Inumbo-ID: 107ad8aa-a051-11ea-9947-bc764e2007e4
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1je1ow-0006cN-HW
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:34:34 +0000
+X-Inumbo-ID: 130007e4-a051-11ea-81bc-bc764e2007e4
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 107ad8aa-a051-11ea-9947-bc764e2007e4;
- Wed, 27 May 2020 19:34:21 +0000 (UTC)
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ id 130007e4-a051-11ea-81bc-bc764e2007e4;
+ Wed, 27 May 2020 19:34:26 +0000 (UTC)
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: y3yuGKwlIoZ/HdGOnxeDgPPOs0wYll11M5AmTmCsBOgUvsK+Ui34zh3c7zEMnp8C8ZMwhgrbzY
- ONgNIr9ifCCY9QmRQ592wMWvYsy952D5rLRirgbTZYlYR7XasUsPjGm0wkdLgkfMMZz9RoCyEk
- inT5OCYK5wlOdtiHr/frvxX95qgNFOpt1MgEG3BNf+hFvXhmr9lkj8kxbiXv/7g5I5pd+4W6eV
- wrqjo/oLEFZOBWyrfmG/mmdmOIKhu9oh7cWsx4x6hWghUHzJNzOn9MiviLGQ+LzQgofCXVJXL3
- 6Vg=
+IronPort-SDR: NPahr4HOwB/rPxUenW5oMXduKyL+uOiKhCpIDIFNdBdKGst4pFLbAcGaUzrmUK8S5AUttl92jn
+ apZJLDNuAGxnq7nvb+RwyoDq0h6KJ9aNV5JKxkAqDGy05fCpCQYS+sW5Infn+BhObaVgccfRD7
+ Cniq80QEBLLaA/PichBP8Kol8/FhBO7RzKG9oVCKq0naYVLJyYLSV1aBHMrJLVBP/cEpRLYDvF
+ Gyf0yoFxFWl5qT/uT969foSfPYFHrdrSEZ43ePELaNMyryXcW9PQ+rV9YGfN093+Y80M8uaY2f
+ f+w=
 X-SBRS: 2.7
-X-MesageID: 18890134
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 18592446
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18890134"
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18592446"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 13/14] x86/S3: Save and restore Shadow Stack configuration
-Date: Wed, 27 May 2020 20:18:46 +0100
-Message-ID: <20200527191847.17207-14-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 10/14] x86/extable: Adjust extable handling to be shadow
+ stack compatible
+Date: Wed, 27 May 2020 20:18:43 +0100
+Message-ID: <20200527191847.17207-11-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
 References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
@@ -70,7 +71,13 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-See code for details
+When adjusting an IRET frame to recover from a fault, and equivalent
+adjustment needs making in the shadow IRET frame.
+
+The adjustment in exception_with_ints_disabled() could in principle be an
+alternative block rather than an ifdef, as the only two current users of
+_PRE_EXTABLE() are IRET-to-guest instructions.  However, this is not a
+fastpath, and this form is more robust to future changes.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -78,132 +85,135 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
-Semi-RFC - I can't actually test this path.  Currently attempting to arrange
-for someone else to.
-
 v2:
- * New, split out of "x86/shstk: Activate Supervisor Shadow Stacks"
- * Drop asm/config.h include
- * Fix order of operations to avoid multiple crashes.
+ * Break extable_shstk_fixup() out into a separate function.
+ * Guard from shstk underflows, and unrealistic call traces.
 ---
- xen/arch/x86/acpi/wakeup_prot.S | 58 +++++++++++++++++++++++++++++++++++++++++
- xen/include/asm-x86/msr-index.h |  3 +++
- xen/include/asm-x86/x86-defns.h |  1 +
- 3 files changed, 62 insertions(+)
+ xen/arch/x86/traps.c        | 67 ++++++++++++++++++++++++++++++++++++++++++++-
+ xen/arch/x86/x86_64/entry.S | 11 +++++++-
+ 2 files changed, 76 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
-index 4dba6020a7..dcc7e2327d 100644
---- a/xen/arch/x86/acpi/wakeup_prot.S
-+++ b/xen/arch/x86/acpi/wakeup_prot.S
-@@ -1,3 +1,7 @@
-+#include <asm/msr-index.h>
-+#include <asm/page.h>
-+#include <asm/processor.h>
-+
-         .file __FILE__
-         .text
-         .code64
-@@ -15,6 +19,12 @@ ENTRY(do_suspend_lowlevel)
-         mov     %cr0, %rax
-         mov     %rax, saved_cr0(%rip)
- 
-+#ifdef CONFIG_XEN_SHSTK
-+        mov     $1, %eax
-+        rdsspq  %rax
-+        mov     %rax, saved_ssp(%rip)
-+#endif
-+
-         /* enter sleep state physically */
-         mov     $3, %edi
-         call    acpi_enter_sleep_state
-@@ -48,6 +58,51 @@ ENTRY(s3_resume)
-         pushq   %rax
-         lretq
- 1:
-+#ifdef CONFIG_XEN_SHSTK
-+        /*
-+         * Restoring SSP is a little complicated, because we are intercepting
-+         * an in-use shadow stack.  Write a temporary token under the stack,
-+         * so SETSSBSY will successfully load a value useful for us, then
-+         * reset MSR_PL0_SSP to its usual value and pop the temporary token.
-+         */
-+        mov     saved_rsp(%rip), %rdi
-+        cmpq    $1, %rdi
-+        je      .L_shstk_done
-+
-+        /* Set up MSR_S_CET. */
-+        mov     $MSR_S_CET, %ecx
-+        xor     %edx, %edx
-+        mov     $CET_SHSTK_EN | CET_WRSS_EN, %eax
-+        wrmsr
-+
-+        /* Construct the temporary supervisor token under SSP. */
-+        sub     $8, %rdi
-+
-+        /* Load it into MSR_PL0_SSP. */
-+        mov     $MSR_PL0_SSP, %ecx
-+        mov     %rdi, %rdx
-+        shr     $32, %rdx
-+        mov     %edi, %eax
-+        wrmsr
-+
-+        /* Enable CET.  MSR_INTERRUPT_SSP_TABLE is set up later in load_system_tables(). */
-+        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ebx
-+        mov     %rbx, %cr4
-+
-+        /* Write the temporary token onto the shadow stack, and activate it. */
-+        wrssq   %rdi, (%rdi)
-+        setssbsy
-+
-+        /* Reset MSR_PL0_SSP back to its normal value. */
-+        and     $~(STACK_SIZE - 1), %eax
-+        or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %eax
-+        wrmsr
-+
-+        /* Pop the temporary token off the stack. */
-+        mov     $2, %eax
-+        incsspd %eax
-+.L_shstk_done:
-+#endif
- 
-         call    load_system_tables
- 
-@@ -65,6 +120,9 @@ ENTRY(s3_resume)
- 
- saved_rsp:      .quad   0
- saved_cr0:      .quad   0
-+#ifdef CONFIG_XEN_SHSTK
-+saved_ssp:      .quad   0
-+#endif
- 
- GLOBAL(saved_magic)
-         .long   0x9abcdef0
-diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
-index 85c5f20b76..cdfb7b047b 100644
---- a/xen/include/asm-x86/msr-index.h
-+++ b/xen/include/asm-x86/msr-index.h
-@@ -68,6 +68,9 @@
- 
- #define MSR_U_CET                           0x000006a0
- #define MSR_S_CET                           0x000006a2
-+#define  CET_SHSTK_EN                       (_AC(1, ULL) <<  0)
-+#define  CET_WRSS_EN                        (_AC(1, ULL) <<  1)
-+
- #define MSR_PL0_SSP                         0x000006a4
- #define MSR_PL1_SSP                         0x000006a5
- #define MSR_PL2_SSP                         0x000006a6
-diff --git a/xen/include/asm-x86/x86-defns.h b/xen/include/asm-x86/x86-defns.h
-index 5366e2d018..072c87042c 100644
---- a/xen/include/asm-x86/x86-defns.h
-+++ b/xen/include/asm-x86/x86-defns.h
-@@ -73,6 +73,7 @@
- #define X86_CR4_SMEP       0x00100000 /* enable SMEP */
- #define X86_CR4_SMAP       0x00200000 /* enable SMAP */
- #define X86_CR4_PKE        0x00400000 /* enable PKE */
-+#define X86_CR4_CET        0x00800000 /* Control-flow Enforcement Technology */
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 235a72cf4a..ce910294ea 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -363,7 +363,7 @@ static void show_guest_stack(struct vcpu *v, const struct cpu_user_regs *regs)
+ }
  
  /*
-  * XSTATE component flags in XCR0
+- * Notes for get_stack_trace_bottom() and get_stack_dump_bottom()
++ * Notes for get_{stack,shstk}*_bottom() helpers
+  *
+  * Stack pages 1 - 4:
+  *   These are all 1-page IST stacks.  Each of these stacks have an exception
+@@ -400,6 +400,18 @@ unsigned long get_stack_trace_bottom(unsigned long sp)
+     }
+ }
+ 
++static unsigned long get_shstk_bottom(unsigned long sp)
++{
++    switch ( get_stack_page(sp) )
++    {
++#ifdef CONFIG_XEN_SHSTK
++    case 0:  return ROUNDUP(sp, IST_SHSTK_SIZE) - sizeof(unsigned long);
++    case 5:  return ROUNDUP(sp, PAGE_SIZE)      - sizeof(unsigned long);
++#endif
++    default: return sp - sizeof(unsigned long);
++    }
++}
++
+ unsigned long get_stack_dump_bottom(unsigned long sp)
+ {
+     switch ( get_stack_page(sp) )
+@@ -763,6 +775,56 @@ static void do_reserved_trap(struct cpu_user_regs *regs)
+           trapnr, vec_name(trapnr), regs->error_code);
+ }
+ 
++static void extable_shstk_fixup(struct cpu_user_regs *regs, unsigned long fixup)
++{
++    unsigned long ssp, *ptr, *base;
++
++    asm ( "rdsspq %0" : "=r" (ssp) : "0" (1) );
++    if ( ssp == 1 )
++        return;
++
++    ptr = _p(ssp);
++    base = _p(get_shstk_bottom(ssp));
++
++    for ( ; ptr < base; ++ptr )
++    {
++        /*
++         * Search for %rip.  The shstk currently looks like this:
++         *
++         *   ...  [Likely pointed to by SSP]
++         *   %cs  [== regs->cs]
++         *   %rip [== regs->rip]
++         *   SSP  [Likely points to 3 slots higher, above %cs]
++         *   ...  [call tree to this function, likely 2/3 slots]
++         *
++         * and we want to overwrite %rip with fixup.  There are two
++         * complications:
++         *   1) We cant depend on SSP values, because they won't differ by 3
++         *      slots if the exception is taken on an IST stack.
++         *   2) There are synthetic (unrealistic but not impossible) scenarios
++         *      where %rip can end up in the call tree to this function, so we
++         *      can't check against regs->rip alone.
++         *
++         * Check for both reg->rip and regs->cs matching.
++         */
++
++        if ( ptr[0] == regs->rip && ptr[1] == regs->cs )
++        {
++            asm ( "wrssq %[fix], %[stk]"
++                  : [stk] "=m" (*ptr)
++                  : [fix] "r" (fixup) );
++            return;
++        }
++    }
++
++    /*
++     * We failed to locate and fix up the shadow IRET frame.  This could be
++     * due to shadow stack corruption, or bad logic above.  We cannot continue
++     * executing the interrupted context.
++     */
++    BUG();
++}
++
+ static bool extable_fixup(struct cpu_user_regs *regs, bool print)
+ {
+     unsigned long fixup = search_exception_table(regs);
+@@ -779,6 +841,9 @@ static bool extable_fixup(struct cpu_user_regs *regs, bool print)
+                vec_name(regs->entry_vector), regs->error_code,
+                _p(regs->rip), _p(regs->rip), _p(fixup));
+ 
++    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
++        extable_shstk_fixup(regs, fixup);
++
+     regs->rip = fixup;
+     this_cpu(last_extable_addr) = regs->rip;
+ 
+diff --git a/xen/arch/x86/x86_64/entry.S b/xen/arch/x86/x86_64/entry.S
+index f7ee3dce91..78ac0df49f 100644
+--- a/xen/arch/x86/x86_64/entry.S
++++ b/xen/arch/x86/x86_64/entry.S
+@@ -708,7 +708,16 @@ exception_with_ints_disabled:
+         call  search_pre_exception_table
+         testq %rax,%rax                 # no fixup code for faulting EIP?
+         jz    1b
+-        movq  %rax,UREGS_rip(%rsp)
++        movq  %rax,UREGS_rip(%rsp)      # fixup regular stack
++
++#ifdef CONFIG_XEN_SHSTK
++        mov    $1, %edi
++        rdsspq %rdi
++        cmp    $1, %edi
++        je     .L_exn_shstk_done
++        wrssq  %rax, (%rdi)             # fixup shadow stack
++.L_exn_shstk_done:
++#endif
+         subq  $8,UREGS_rsp(%rsp)        # add ec/ev to previous stack frame
+         testb $15,UREGS_rsp(%rsp)       # return %rsp is now aligned?
+         jz    1f                        # then there is a pad quadword already
 -- 
 2.11.0
 
