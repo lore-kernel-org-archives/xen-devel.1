@@ -6,50 +6,48 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 461D4C433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0376BC433DF
 	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C8F52078C
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C8F52078C
+	by mail.kernel.org (Postfix) with ESMTPS id DE8F72078C
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE8F72078C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1aC-00040U-0L; Wed, 27 May 2020 19:19:20 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1je1aB-00040L-Nh; Wed, 27 May 2020 19:19:19 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1aB-00040F-2C
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:19 +0000
-X-Inumbo-ID: f27751dd-a04e-11ea-a777-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f27751dd-a04e-11ea-a777-12813bfff9fa;
- Wed, 27 May 2020 19:19:14 +0000 (UTC)
-Authentication-Results: esa3.hc3370-68.iphmx.com;
+ id 1je1aA-000407-PL
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:18 +0000
+X-Inumbo-ID: f267606a-a04e-11ea-81bc-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f267606a-a04e-11ea-81bc-bc764e2007e4;
+ Wed, 27 May 2020 19:19:12 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: pWuwntnoMuy1EWQAtQPoeE0QeTGmXZH8kVIvZIS1A0pYGGSDK0Iaqz1Wu/VZdWrDd2uD9kdgDp
- hXxKMHV/BedfVZ5aqPmMWJrOhAWvWRxeGpuIgBZSir7iyKh8oeMf2f0WaF/cGfrcAd7N/3glxy
- tHJ2omm/L1ade4G2eT5t3rvxHGzFaH7jl3Yvgkytrz4GdSqn3vxARB6zJz5kLjF+ySOcvcH6PH
- 8JlASs/wj6vHj7T0vaC/H2ehG67bvrm00Wlm2aFUQix7eZDi5IJggYT/mX8/I6Ed5a+f1YDXP+
- KNs=
+IronPort-SDR: PqU4pUb91tB9Qzz3QFZ5kdCgJyyeaIaQRM6P1RfR9bMkxLxj5+zFmOGBmAEaXDS6T9LmWcaiR/
+ NznYQ7Ek1SAKgop8OoJXAsDup0hcFx2/qh5n7dSxICCbcOWKmVwtWImqvP+CbZs1q14aVZX8hl
+ 5omvACdCjxk6j1FDGP6amTVLSx6ufQyG5scC+Xns65sJgWJ+Ioj9Zq51LxH+cMQMtBsKpW0w9x
+ s+VKO+5C8cJvfrTjrB055dJH8Po8Js3Dq2IPx3RxeeffSWkFxxl2MViGpCKNFEGgI3v39k2QT0
+ Dgw=
 X-SBRS: 2.7
-X-MesageID: 18591104
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
+X-MesageID: 19333916
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18591104"
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="19333916"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 01/14] x86/traps: Clean up printing in {do_reserved,
- fatal}_trap()
-Date: Wed, 27 May 2020 20:18:34 +0100
-Message-ID: <20200527191847.17207-2-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 03/14] x86/shstk: Introduce Supervisor Shadow Stack support
+Date: Wed, 27 May 2020 20:18:36 +0100
+Message-ID: <20200527191847.17207-4-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
 References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
@@ -72,14 +70,12 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-For one, they render the vector in a different base.
+Introduce CONFIG_HAS_AS_CET to determine whether CET instructions are
+supported in the assembler, and CONFIG_XEN_SHSTK as the main build option.
 
-Introduce X86_EXC_* constants and vec_name() to refer to exceptions by their
-mnemonic, which starts bringing the code/diagnostics in line with the Intel
-and AMD manuals.
-
-Provide constants for every archtiecturally defined exception, even those not
-implemented by Xen yet, as do_reserved_trap() is a catch-all handler.
+Introduce cet={no-,}shstk to for a user to select whether or not to use shadow
+stacks at runtime, and X86_FEATURE_XEN_SHSTK to determine Xen's overall
+enablement of shadow stacks.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -87,125 +83,169 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
-v2:
- * Move "#" into vec_name() to skip it for the 3-character vectors
----
- xen/arch/x86/traps.c            | 26 +++++++++++++++++++++-----
- xen/include/asm-x86/processor.h |  6 +-----
- xen/include/asm-x86/x86-defns.h | 34 ++++++++++++++++++++++++++++++++++
- 3 files changed, 56 insertions(+), 10 deletions(-)
+LLVM 6 supports CET-SS instructions while only LLVM 7 supports CET-IBT
+instructions.  We'd need to split HAS_AS_CET into two if we want to support
+supervisor shadow stacks with LLVM 6.  (This demonstrates exactly why picking
+a handful of instructions to test is the right approach.)
 
-diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
-index a8300c214d..427178e649 100644
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -682,6 +682,22 @@ const char *trapstr(unsigned int trapnr)
-     return trapnr < ARRAY_SIZE(strings) ? strings[trapnr] : "???";
- }
+v2:
+ * Leave a comment identifying minimum toolchain support, to make it easier to
+   remove ifdefary in the future when bumping minima.
+ * Reindent CONFIG_XEN_SHSTK help text.
+ * Rename xen= to cet=.  Add documentation, __init.
+---
+ docs/misc/xen-command-line.pandoc | 17 +++++++++++++++++
+ xen/arch/x86/Kconfig              | 18 ++++++++++++++++++
+ xen/arch/x86/setup.c              | 30 ++++++++++++++++++++++++++++++
+ xen/include/asm-x86/cpufeature.h  |  1 +
+ xen/include/asm-x86/cpufeatures.h |  1 +
+ xen/scripts/Kconfig.include       |  4 ++++
+ 6 files changed, 71 insertions(+)
+
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index e16bb90184..d4934eabb7 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -270,6 +270,23 @@ and not running softirqs. Reduce this if softirqs are not being run frequently
+ enough. Setting this to a high value may cause boot failure, particularly if
+ the NMI watchdog is also enabled.
  
-+static const char *vec_name(unsigned int vec)
++### cet
++    = List of [ shstk=<bool> ]
++
++    Applicability: x86
++
++Controls for the use of Control-flow Enforcement Technology.  CET is group of
++hardware features designed to combat Return-oriented Programming (ROP, also
++call/jmp COP/JOP) attacks.
++
++*   The `shstk=` boolean controls whether Xen uses Shadow Stacks for its own
++    protection.
++
++    The option is available when `CONFIG_XEN_SHSTK` is compiled in, and
++    defaults to `true` on hardware supporting CET-SS.  Specifying
++    `cet=no-shstk` will cause Xen not to use Shadow Stacks even when support
++    is available in hardware.
++
+ ### clocksource (x86)
+ > `= pit | hpet | acpi | tsc`
+ 
+diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
+index b565f6831d..304a42ffb2 100644
+--- a/xen/arch/x86/Kconfig
++++ b/xen/arch/x86/Kconfig
+@@ -34,6 +34,10 @@ config ARCH_DEFCONFIG
+ config INDIRECT_THUNK
+ 	def_bool $(cc-option,-mindirect-branch-register)
+ 
++config HAS_AS_CET
++	# binutils >= 2.29 and LLVM >= 7
++	def_bool $(as-instr,wrssq %rax$(comma)0;setssbsy;endbr64)
++
+ menu "Architecture Features"
+ 
+ source "arch/Kconfig"
+@@ -97,6 +101,20 @@ config HVM
+ 
+ 	  If unsure, say Y.
+ 
++config XEN_SHSTK
++	bool "Supervisor Shadow Stacks"
++	depends on HAS_AS_CET && EXPERT = "y"
++	default y
++	---help---
++	  Control-flow Enforcement Technology (CET) is a set of features in
++	  hardware designed to combat Return-oriented Programming (ROP, also
++	  call/jump COP/JOP) attacks.  Shadow Stacks are one CET feature
++	  designed to provide return address protection.
++
++	  This option arranges for Xen to use CET-SS for its own protection.
++	  When CET-SS is active, 32bit PV guests cannot be used.  Backwards
++	  compatiblity can be provided vai the PV Shim mechanism.
++
+ config SHADOW_PAGING
+         bool "Shadow Paging"
+         default y
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 2dec7a3fc6..584589baff 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -95,6 +95,36 @@ unsigned long __initdata highmem_start;
+ size_param("highmem-start", highmem_start);
+ #endif
+ 
++static bool __initdata opt_xen_shstk = true;
++
++static int __init parse_cet(const char *s)
 +{
-+    static const char names[][4] = {
-+#define P(x) [X86_EXC_ ## x] = "#" #x
-+#define N(x) [X86_EXC_ ## x] = #x
-+        P(DE),  P(DB),  N(NMI), P(BP),  P(OF),  P(BR),  P(UD),  P(NM),
-+        P(DF),  N(CSO), P(TS),  P(NP),  P(SS),  P(GP),  P(PF),  N(SPV),
-+        P(MF),  P(AC),  P(MC),  P(XM),  P(VE),  P(CP),
-+                                        P(HV),  P(VC),  P(SX),
-+#undef N
-+#undef P
-+    };
++    const char *ss;
++    int val, rc = 0;
 +
-+    return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : "???";
++    do {
++        ss = strchr(s, ',');
++        if ( !ss )
++            ss = strchr(s, '\0');
++
++        if ( (val = parse_boolean("shstk", s, ss)) >= 0 )
++        {
++#ifdef CONFIG_XEN_SHSTK
++            opt_xen_shstk = val;
++#else
++            no_config_param("XEN_SHSTK", "cet", s, ss);
++#endif
++        }
++        else
++            rc = -EINVAL;
++
++        s = ss + 1;
++    } while ( *ss );
++
++    return rc;
 +}
++custom_param("cet", parse_cet);
 +
- /*
-  * This is called for faults at very unexpected times (e.g., when interrupts
-  * are disabled). In such situations we can't do much that is safe. We try to
-@@ -739,10 +755,9 @@ void fatal_trap(const struct cpu_user_regs *regs, bool show_remote)
-         }
-     }
+ cpumask_t __read_mostly cpu_present_map;
  
--    panic("FATAL TRAP: vector = %d (%s)\n"
--          "[error_code=%04x] %s\n",
--          trapnr, trapstr(trapnr), regs->error_code,
--          (regs->eflags & X86_EFLAGS_IF) ? "" : ", IN INTERRUPT CONTEXT");
-+    panic("FATAL TRAP: vec %u, %s[%04x]%s\n",
-+          trapnr, vec_name(trapnr), regs->error_code,
-+          (regs->eflags & X86_EFLAGS_IF) ? "" : " IN INTERRUPT CONTEXT");
- }
+ unsigned long __read_mostly xen_phys_start;
+diff --git a/xen/include/asm-x86/cpufeature.h b/xen/include/asm-x86/cpufeature.h
+index cadef4e824..b831448eba 100644
+--- a/xen/include/asm-x86/cpufeature.h
++++ b/xen/include/asm-x86/cpufeature.h
+@@ -137,6 +137,7 @@
+ #define cpu_has_aperfmperf      boot_cpu_has(X86_FEATURE_APERFMPERF)
+ #define cpu_has_lfence_dispatch boot_cpu_has(X86_FEATURE_LFENCE_DISPATCH)
+ #define cpu_has_xen_lbr         boot_cpu_has(X86_FEATURE_XEN_LBR)
++#define cpu_has_xen_shstk       boot_cpu_has(X86_FEATURE_XEN_SHSTK)
  
- static void do_reserved_trap(struct cpu_user_regs *regs)
-@@ -753,7 +768,8 @@ static void do_reserved_trap(struct cpu_user_regs *regs)
-         return;
+ #define cpu_has_msr_tsc_aux     (cpu_has_rdtscp || cpu_has_rdpid)
  
-     show_execution_state(regs);
--    panic("FATAL RESERVED TRAP %#x: %s\n", trapnr, trapstr(trapnr));
-+    panic("FATAL RESERVED TRAP: vec %u, %s[%04x]\n",
-+          trapnr, vec_name(trapnr), regs->error_code);
- }
+diff --git a/xen/include/asm-x86/cpufeatures.h b/xen/include/asm-x86/cpufeatures.h
+index b9d3cac975..d7e42d9bb6 100644
+--- a/xen/include/asm-x86/cpufeatures.h
++++ b/xen/include/asm-x86/cpufeatures.h
+@@ -38,6 +38,7 @@ XEN_CPUFEATURE(XEN_LBR,           X86_SYNTH(22)) /* Xen uses MSR_DEBUGCTL.LBR */
+ XEN_CPUFEATURE(SC_VERW_PV,        X86_SYNTH(23)) /* VERW used by Xen for PV */
+ XEN_CPUFEATURE(SC_VERW_HVM,       X86_SYNTH(24)) /* VERW used by Xen for HVM */
+ XEN_CPUFEATURE(SC_VERW_IDLE,      X86_SYNTH(25)) /* VERW used by Xen for idle */
++XEN_CPUFEATURE(XEN_SHSTK,         X86_SYNTH(26)) /* Xen uses CET Shadow Stacks */
  
- static void do_trap(struct cpu_user_regs *regs)
-diff --git a/xen/include/asm-x86/processor.h b/xen/include/asm-x86/processor.h
-index 070691882b..96deac73ed 100644
---- a/xen/include/asm-x86/processor.h
-+++ b/xen/include/asm-x86/processor.h
-@@ -43,11 +43,7 @@
- #define TRAP_virtualisation   20
- #define TRAP_nr               32
+ /* Bug words follow the synthetic words. */
+ #define X86_NR_BUG 1
+diff --git a/xen/scripts/Kconfig.include b/xen/scripts/Kconfig.include
+index 8221095ca3..e1f13e1720 100644
+--- a/xen/scripts/Kconfig.include
++++ b/xen/scripts/Kconfig.include
+@@ -31,6 +31,10 @@ cc-option = $(success,$(CC) -Werror $(CLANG_FLAGS) $(1) -E -x c /dev/null -o /de
+ # Return y if the linker supports <flag>, n otherwise
+ ld-option = $(success,$(LD) -v $(1))
  
--#define TRAP_HAVE_EC                                                    \
--    ((1u << TRAP_double_fault) | (1u << TRAP_invalid_tss) |             \
--     (1u << TRAP_no_segment) | (1u << TRAP_stack_error) |               \
--     (1u << TRAP_gp_fault) | (1u << TRAP_page_fault) |                  \
--     (1u << TRAP_alignment_check))
-+#define TRAP_HAVE_EC X86_EXC_HAVE_EC
- 
- /* Set for entry via SYSCALL. Informs return code to use SYSRETQ not IRETQ. */
- /* NB. Same as VGCF_in_syscall. No bits in common with any other TRAP_ defn. */
-diff --git a/xen/include/asm-x86/x86-defns.h b/xen/include/asm-x86/x86-defns.h
-index 8bf503220a..5366e2d018 100644
---- a/xen/include/asm-x86/x86-defns.h
-+++ b/xen/include/asm-x86/x86-defns.h
-@@ -118,4 +118,38 @@
- 
- #define X86_NR_VECTORS 256
- 
-+/* Exception Vectors */
-+#define X86_EXC_DE             0 /* Divide Error. */
-+#define X86_EXC_DB             1 /* Debug Exception. */
-+#define X86_EXC_NMI            2 /* NMI. */
-+#define X86_EXC_BP             3 /* Breakpoint. */
-+#define X86_EXC_OF             4 /* Overflow. */
-+#define X86_EXC_BR             5 /* BOUND Range. */
-+#define X86_EXC_UD             6 /* Invalid Opcode. */
-+#define X86_EXC_NM             7 /* Device Not Available. */
-+#define X86_EXC_DF             8 /* Double Fault. */
-+#define X86_EXC_CSO            9 /* Coprocessor Segment Overrun. */
-+#define X86_EXC_TS            10 /* Invalid TSS. */
-+#define X86_EXC_NP            11 /* Segment Not Present. */
-+#define X86_EXC_SS            12 /* Stack-Segment Fault. */
-+#define X86_EXC_GP            13 /* General Porection Fault. */
-+#define X86_EXC_PF            14 /* Page Fault. */
-+#define X86_EXC_SPV           15 /* PIC Spurious Interrupt Vector. */
-+#define X86_EXC_MF            16 /* Maths fault (x87 FPU). */
-+#define X86_EXC_AC            17 /* Alignment Check. */
-+#define X86_EXC_MC            18 /* Machine Check. */
-+#define X86_EXC_XM            19 /* SIMD Exception. */
-+#define X86_EXC_VE            20 /* Virtualisation Exception. */
-+#define X86_EXC_CP            21 /* Control-flow Protection. */
-+#define X86_EXC_HV            28 /* Hypervisor Injection. */
-+#define X86_EXC_VC            29 /* VMM Communication. */
-+#define X86_EXC_SX            30 /* Security Exception. */
++# $(as-instr,<instr>)
++# Return y if the assembler supports <instr>, n otherwise
++as-instr = $(success,printf "%b\n" "$(1)" | $(CC) $(CLANG_FLAGS) -c -x assembler -o /dev/null -)
 +
-+/* Bitmap of exceptions which have error codes. */
-+#define X86_EXC_HAVE_EC                                             \
-+    ((1u << X86_EXC_DF) | (1u << X86_EXC_TS) | (1u << X86_EXC_NP) | \
-+     (1u << X86_EXC_SS) | (1u << X86_EXC_GP) | (1u << X86_EXC_PF) | \
-+     (1u << X86_EXC_AC) | (1u << X86_EXC_CP) |                      \
-+     (1u << X86_EXC_VC) | (1u << X86_EXC_SX))
-+
- #endif	/* __XEN_X86_DEFNS_H__ */
+ # check if $(CC) and $(LD) exist
+ $(error-if,$(failure,command -v $(CC)),compiler '$(CC)' not found)
+ $(error-if,$(failure,command -v $(LD)),linker '$(LD)' not found)
 -- 
 2.11.0
 
