@@ -2,54 +2,52 @@ Return-Path: <SRS0=V1Us=7J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 80222C433E2
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8DB89C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:50 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5ED7F20899
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5ED7F20899
+	by mail.kernel.org (Postfix) with ESMTPS id 6F73A207D3
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:34:50 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6F73A207D3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1on-0006a7-Hc; Wed, 27 May 2020 19:34:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1je1os-0006bS-Q3; Wed, 27 May 2020 19:34:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1om-0006Zn-Lz
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:34:24 +0000
-X-Inumbo-ID: 11666ca2-a051-11ea-a779-12813bfff9fa
-Received: from esa2.hc3370-68.iphmx.com (unknown [216.71.145.153])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 11666ca2-a051-11ea-a779-12813bfff9fa;
- Wed, 27 May 2020 19:34:23 +0000 (UTC)
-Authentication-Results: esa2.hc3370-68.iphmx.com;
+ id 1je1or-0006b7-HC
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:34:29 +0000
+X-Inumbo-ID: 107ad8aa-a051-11ea-9947-bc764e2007e4
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 107ad8aa-a051-11ea-9947-bc764e2007e4;
+ Wed, 27 May 2020 19:34:21 +0000 (UTC)
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: wY10bV6tZiw8sRMAEjklee9H8RWGt6pqPgLjQ3cvNmM25+VfjtEE08bM7dz9/CBxYagtPn4LQ9
- 9ZPonaohusmVZGlVGlaSY1fLc4vEQzXgXV3Yr6ZDI1uZZZPDRKuR+aRqwlEOWGnSBSOOHK7054
- CkoiN1AupubV16bKGGtSqGLVA6RuL/rHFOrdGnXEKATOiFpGSoHyhCb4cNaAUOdEKdru+jFRi6
- EEuEuMhCcHhljANqiK7tKQo2J3/9jRGidOEUY09coR0Ek2+tzdSE5HXOIj+lJGwhLT0gjFgi0I
- pzw=
+IronPort-SDR: y3yuGKwlIoZ/HdGOnxeDgPPOs0wYll11M5AmTmCsBOgUvsK+Ui34zh3c7zEMnp8C8ZMwhgrbzY
+ ONgNIr9ifCCY9QmRQ592wMWvYsy952D5rLRirgbTZYlYR7XasUsPjGm0wkdLgkfMMZz9RoCyEk
+ inT5OCYK5wlOdtiHr/frvxX95qgNFOpt1MgEG3BNf+hFvXhmr9lkj8kxbiXv/7g5I5pd+4W6eV
+ wrqjo/oLEFZOBWyrfmG/mmdmOIKhu9oh7cWsx4x6hWghUHzJNzOn9MiviLGQ+LzQgofCXVJXL3
+ 6Vg=
 X-SBRS: 2.7
-X-MesageID: 18615173
-X-Ironport-Server: esa2.hc3370-68.iphmx.com
+X-MesageID: 18890134
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18615173"
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18890134"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 11/14] x86/alt: Adjust _alternative_instructions() to not
- create shadow stacks
-Date: Wed, 27 May 2020 20:18:44 +0100
-Message-ID: <20200527191847.17207-12-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 13/14] x86/S3: Save and restore Shadow Stack configuration
+Date: Wed, 27 May 2020 20:18:46 +0100
+Message-ID: <20200527191847.17207-14-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
 References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
@@ -72,80 +70,140 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The current alternatives algorithm clears CR0.WP and writes into .text.  This
-has a side effect of the mappings becoming shadow stacks once CET is active.
-
-Adjust _alternative_instructions() to clean up after itself.  This involves
-extending the set of bits modify_xen_mappings() to include Dirty (and Accessed
-for good measure).
+See code for details
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
 CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
----
- xen/arch/x86/alternative.c | 14 ++++++++++++++
- xen/arch/x86/mm.c          |  6 +++---
- 2 files changed, 17 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/alternative.c b/xen/arch/x86/alternative.c
-index ce2b4302e6..004e9ede25 100644
---- a/xen/arch/x86/alternative.c
-+++ b/xen/arch/x86/alternative.c
-@@ -21,6 +21,7 @@
- #include <asm/processor.h>
- #include <asm/alternative.h>
- #include <xen/init.h>
-+#include <asm/setup.h>
- #include <asm/system.h>
- #include <asm/traps.h>
- #include <asm/nmi.h>
-@@ -398,6 +399,19 @@ static void __init _alternative_instructions(bool force)
-         panic("Timed out waiting for alternatives self-NMI to hit\n");
- 
-     set_nmi_callback(saved_nmi_callback);
+Semi-RFC - I can't actually test this path.  Currently attempting to arrange
+for someone else to.
+
+v2:
+ * New, split out of "x86/shstk: Activate Supervisor Shadow Stacks"
+ * Drop asm/config.h include
+ * Fix order of operations to avoid multiple crashes.
+---
+ xen/arch/x86/acpi/wakeup_prot.S | 58 +++++++++++++++++++++++++++++++++++++++++
+ xen/include/asm-x86/msr-index.h |  3 +++
+ xen/include/asm-x86/x86-defns.h |  1 +
+ 3 files changed, 62 insertions(+)
+
+diff --git a/xen/arch/x86/acpi/wakeup_prot.S b/xen/arch/x86/acpi/wakeup_prot.S
+index 4dba6020a7..dcc7e2327d 100644
+--- a/xen/arch/x86/acpi/wakeup_prot.S
++++ b/xen/arch/x86/acpi/wakeup_prot.S
+@@ -1,3 +1,7 @@
++#include <asm/msr-index.h>
++#include <asm/page.h>
++#include <asm/processor.h>
 +
-+    /*
-+     * When Xen is using shadow stacks, the alternatives clearing CR0.WP and
-+     * writing into the mappings set dirty bits, turning the mappings into
-+     * shadow stack mappings.
-+     *
-+     * While we can execute from them, this would also permit them to be the
-+     * target of WRSS instructions, so reset the dirty after patching.
-+     */
-+    if ( cpu_has_xen_shstk )
-+        modify_xen_mappings(XEN_VIRT_START + MB(2),
-+                            (unsigned long)&__2M_text_end,
-+                            PAGE_HYPERVISOR_RX);
- }
+         .file __FILE__
+         .text
+         .code64
+@@ -15,6 +19,12 @@ ENTRY(do_suspend_lowlevel)
+         mov     %cr0, %rax
+         mov     %rax, saved_cr0(%rip)
  
- void __init alternative_instructions(void)
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 4d6d22cc41..711b12828f 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -5442,8 +5442,8 @@ int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-  * mappings, but will shatter superpages if necessary, and will destroy
-  * mappings if not passed _PAGE_PRESENT.
-  *
-- * The only flags considered are NX, RW and PRESENT.  All other input flags
-- * are ignored.
-+ * The only flags considered are NX, D, A, RW and PRESENT.  All other input
-+ * flags are ignored.
-  *
-  * It is an error to call with present flags over an unpopulated range.
-  */
-@@ -5456,7 +5456,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-     unsigned long v = s;
++#ifdef CONFIG_XEN_SHSTK
++        mov     $1, %eax
++        rdsspq  %rax
++        mov     %rax, saved_ssp(%rip)
++#endif
++
+         /* enter sleep state physically */
+         mov     $3, %edi
+         call    acpi_enter_sleep_state
+@@ -48,6 +58,51 @@ ENTRY(s3_resume)
+         pushq   %rax
+         lretq
+ 1:
++#ifdef CONFIG_XEN_SHSTK
++        /*
++         * Restoring SSP is a little complicated, because we are intercepting
++         * an in-use shadow stack.  Write a temporary token under the stack,
++         * so SETSSBSY will successfully load a value useful for us, then
++         * reset MSR_PL0_SSP to its usual value and pop the temporary token.
++         */
++        mov     saved_rsp(%rip), %rdi
++        cmpq    $1, %rdi
++        je      .L_shstk_done
++
++        /* Set up MSR_S_CET. */
++        mov     $MSR_S_CET, %ecx
++        xor     %edx, %edx
++        mov     $CET_SHSTK_EN | CET_WRSS_EN, %eax
++        wrmsr
++
++        /* Construct the temporary supervisor token under SSP. */
++        sub     $8, %rdi
++
++        /* Load it into MSR_PL0_SSP. */
++        mov     $MSR_PL0_SSP, %ecx
++        mov     %rdi, %rdx
++        shr     $32, %rdx
++        mov     %edi, %eax
++        wrmsr
++
++        /* Enable CET.  MSR_INTERRUPT_SSP_TABLE is set up later in load_system_tables(). */
++        mov     $XEN_MINIMAL_CR4 | X86_CR4_CET, %ebx
++        mov     %rbx, %cr4
++
++        /* Write the temporary token onto the shadow stack, and activate it. */
++        wrssq   %rdi, (%rdi)
++        setssbsy
++
++        /* Reset MSR_PL0_SSP back to its normal value. */
++        and     $~(STACK_SIZE - 1), %eax
++        or      $(PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8, %eax
++        wrmsr
++
++        /* Pop the temporary token off the stack. */
++        mov     $2, %eax
++        incsspd %eax
++.L_shstk_done:
++#endif
  
-     /* Set of valid PTE bits which may be altered. */
--#define FLAGS_MASK (_PAGE_NX|_PAGE_RW|_PAGE_PRESENT)
-+#define FLAGS_MASK (_PAGE_NX|_PAGE_DIRTY|_PAGE_ACCESSED|_PAGE_RW|_PAGE_PRESENT)
-     nf &= FLAGS_MASK;
+         call    load_system_tables
  
-     ASSERT(IS_ALIGNED(s, PAGE_SIZE));
+@@ -65,6 +120,9 @@ ENTRY(s3_resume)
+ 
+ saved_rsp:      .quad   0
+ saved_cr0:      .quad   0
++#ifdef CONFIG_XEN_SHSTK
++saved_ssp:      .quad   0
++#endif
+ 
+ GLOBAL(saved_magic)
+         .long   0x9abcdef0
+diff --git a/xen/include/asm-x86/msr-index.h b/xen/include/asm-x86/msr-index.h
+index 85c5f20b76..cdfb7b047b 100644
+--- a/xen/include/asm-x86/msr-index.h
++++ b/xen/include/asm-x86/msr-index.h
+@@ -68,6 +68,9 @@
+ 
+ #define MSR_U_CET                           0x000006a0
+ #define MSR_S_CET                           0x000006a2
++#define  CET_SHSTK_EN                       (_AC(1, ULL) <<  0)
++#define  CET_WRSS_EN                        (_AC(1, ULL) <<  1)
++
+ #define MSR_PL0_SSP                         0x000006a4
+ #define MSR_PL1_SSP                         0x000006a5
+ #define MSR_PL2_SSP                         0x000006a6
+diff --git a/xen/include/asm-x86/x86-defns.h b/xen/include/asm-x86/x86-defns.h
+index 5366e2d018..072c87042c 100644
+--- a/xen/include/asm-x86/x86-defns.h
++++ b/xen/include/asm-x86/x86-defns.h
+@@ -73,6 +73,7 @@
+ #define X86_CR4_SMEP       0x00100000 /* enable SMEP */
+ #define X86_CR4_SMAP       0x00200000 /* enable SMAP */
+ #define X86_CR4_PKE        0x00400000 /* enable PKE */
++#define X86_CR4_CET        0x00800000 /* Control-flow Enforcement Technology */
+ 
+ /*
+  * XSTATE component flags in XCR0
 -- 
 2.11.0
 
