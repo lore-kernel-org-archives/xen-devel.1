@@ -2,53 +2,55 @@ Return-Path: <SRS0=V1Us=7J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1FBA8C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 50870C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:20:00 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id F2BD02078C
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2BD02078C
+	by mail.kernel.org (Postfix) with ESMTPS id 3383D2078C
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:20:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3383D2078C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1aR-0004AE-QY; Wed, 27 May 2020 19:19:35 +0000
+	id 1je1aW-0004EE-4V; Wed, 27 May 2020 19:19:40 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1aP-00048o-Ps
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:33 +0000
-X-Inumbo-ID: f367e02a-a04e-11ea-9dbe-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
+ id 1je1aU-0004Cq-Pr
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:38 +0000
+X-Inumbo-ID: f5699b3e-a04e-11ea-9947-bc764e2007e4
+Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f367e02a-a04e-11ea-9dbe-bc764e2007e4;
- Wed, 27 May 2020 19:19:14 +0000 (UTC)
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ id f5699b3e-a04e-11ea-9947-bc764e2007e4;
+ Wed, 27 May 2020 19:19:17 +0000 (UTC)
+Authentication-Results: esa6.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: ljXFLm6vJNGuhH71VFga8ld5yUtQeikwNp2tlkhaq8oVuyij+A1TdxM7HaHaOeTzmRI0VV0Zng
- HPQ13O3QjuMhFyqsliSE9jkK/Ce6AvmjGeUJepoaWmrpp4JfUzKmXdGJkbqvc7Q7Jhdx9do5UB
- emcVV+uXPT4q3xgZ/xY8QjEMkUBayoYw1RdyT4cZ0tF3ltQDIcv9MUiKnqtvjlD3kq+MfHX42g
- MxgWRqulkEy6NI10dLzawMQC/ucVuUk/qbDFYjDht43OowdxWcaRE8p1ZcoNWlWNu0QNRjafMQ
- 3ac=
+IronPort-SDR: 3iRO9kwgKCNdvZIluTTdpAT/32WruaeuHu2KpnABpZyIvZ+Vr+VV4xpohS0xAvZrALgMKsTVd6
+ tWXKr9ZjuXo8i8o3L8YyYuI0aquhbf2e7yM0Kw8dJUXJ7pt/sjFnQc0aH57p3BPAFYn/aHyq1G
+ UPsZHVhzGAOR0+euvfSZAcCq7Or4hRjqb5HLesPc3oa/nqlHVoEtsOQU2lUYxXoZ4vGSdoAo4w
+ //HwxzzZoOzhP67f1BplRf2QTfz9snO/vK1N00DpAP4VYboMCNwaeDFS7Y3yVNwxzNMo+nm0bi
+ 9d4=
 X-SBRS: 2.7
-X-MesageID: 19333919
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 18946803
+X-Ironport-Server: esa6.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="19333919"
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18946803"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 00/14] x86: Support for CET Supervisor Shadow Stacks
-Date: Wed, 27 May 2020 20:18:33 +0100
-Message-ID: <20200527191847.17207-1-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 06/14] x86/shstk: Create shadow stacks
+Date: Wed, 27 May 2020 20:18:39 +0100
+Message-ID: <20200527191847.17207-7-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
+References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
@@ -68,61 +70,165 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This series implements Shadow Stack support for Xen to use.
+Introduce HYPERVISOR_SHSTK pagetable constants, which are Read-Only + Dirty.
+Use these in place of _PAGE_NONE for memguard_guard_stack().
 
-You'll need a CET-capable toolchain (Binutils >= 2.29 or LLVM >= 7), but no
-specific compiler support required.
+Supervisor shadow stacks need a token written at the top, which is most easily
+done before making the frame read only.
 
-CET-SS makes PV32 unusable, so using shadow stacks prevents the use of 32bit
-PV guests.  Compatibilty can be obtained using PV Shim.
+Allocate the shadow IST stack block in struct tss_page.  It doesn't strictly
+need to live here, but it is a convenient location (and XPTI-safe, for testing
+purposes), and placing it ahead of the TSS doesn't risk colliding with a bad
+IO Bitmap offset and turning into some IO port permissions.
 
-See patches for individual changes.
+Have load_system_tables() set up the shadow IST stack table when setting up
+the regular IST in the TSS.
 
-Andrew Cooper (14):
-  x86/traps: Clean up printing in {do_reserved,fatal}_trap()
-  x86/traps: Factor out extable_fixup() and make printing consistent
-  x86/shstk: Introduce Supervisor Shadow Stack support
-  x86/traps: Implement #CP handler and extend #PF for shadow stacks
-  x86/shstk: Re-layout the stack block for shadow stacks
-  x86/shstk: Create shadow stacks
-  x86/cpu: Adjust enable_nmis() to be shadow stack compatible
-  x86/cpu: Adjust reset_stack_and_jump() to be shadow stack compatible
-  x86/spec-ctrl: Adjust DO_OVERWRITE_RSB to be shadow stack compatible
-  x86/extable: Adjust extable handling to be shadow stack compatible
-  x86/alt: Adjust _alternative_instructions() to not create shadow stacks
-  x86/entry: Adjust guest paths to be shadow stack compatible
-  x86/S3: Save and restore Shadow Stack configuration
-  x86/shstk: Activate Supervisor Shadow Stacks
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Wei Liu <wl@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
- docs/misc/xen-command-line.pandoc   |  25 ++++
- xen/arch/x86/Kconfig                |  18 +++
- xen/arch/x86/acpi/wakeup_prot.S     |  58 +++++++++
- xen/arch/x86/alternative.c          |  14 +++
- xen/arch/x86/boot/x86_64.S          |  35 +++++-
- xen/arch/x86/cpu/common.c           |  39 +++++-
- xen/arch/x86/crash.c                |   7 ++
- xen/arch/x86/mm.c                   |  46 ++++---
- xen/arch/x86/setup.c                |  56 +++++++++
- xen/arch/x86/smpboot.c              |   3 +-
- xen/arch/x86/spec_ctrl.c            |   8 ++
- xen/arch/x86/traps.c                | 239 ++++++++++++++++++++++++++----------
- xen/arch/x86/x86_64/compat/entry.S  |   1 +
- xen/arch/x86/x86_64/entry.S         |  50 +++++++-
- xen/include/asm-x86/asm_defns.h     |   8 +-
- xen/include/asm-x86/config.h        |   5 +
- xen/include/asm-x86/cpufeature.h    |   1 +
- xen/include/asm-x86/cpufeatures.h   |   1 +
- xen/include/asm-x86/current.h       |  60 +++++++--
- xen/include/asm-x86/mm.h            |   1 -
- xen/include/asm-x86/msr-index.h     |   3 +
- xen/include/asm-x86/page.h          |   1 +
- xen/include/asm-x86/processor.h     |  60 ++++++---
- xen/include/asm-x86/spec_ctrl_asm.h |  16 ++-
- xen/include/asm-x86/x86-defns.h     |  35 ++++++
- xen/include/asm-x86/x86_64/page.h   |   1 +
- xen/scripts/Kconfig.include         |   4 +
- 27 files changed, 664 insertions(+), 131 deletions(-)
+v2:
+ * Introduce IST_SHSTK_SIZE (Name subject to improvement).
+ * Skip writing the shadow stack token for !XEN_SHSTK builds.
+ * Tweak clobbering to be correct and safe.
+---
+ xen/arch/x86/cpu/common.c         | 24 ++++++++++++++++++++++++
+ xen/arch/x86/mm.c                 | 25 +++++++++++++++++++++++--
+ xen/include/asm-x86/config.h      |  2 ++
+ xen/include/asm-x86/page.h        |  1 +
+ xen/include/asm-x86/processor.h   |  3 ++-
+ xen/include/asm-x86/x86_64/page.h |  1 +
+ 6 files changed, 53 insertions(+), 3 deletions(-)
 
+diff --git a/xen/arch/x86/cpu/common.c b/xen/arch/x86/cpu/common.c
+index 690fd8baa8..dcc9ee08de 100644
+--- a/xen/arch/x86/cpu/common.c
++++ b/xen/arch/x86/cpu/common.c
+@@ -769,6 +769,30 @@ void load_system_tables(void)
+ 	tss->rsp1 = 0x8600111111111111ul;
+ 	tss->rsp2 = 0x8600111111111111ul;
+ 
++	/* Set up the shadow stack IST. */
++	if (cpu_has_xen_shstk) {
++		volatile uint64_t *ist_ssp = this_cpu(tss_page).ist_ssp;
++
++		/*
++		 * Used entries must point at the supervisor stack token.
++		 * Unused entries are poisoned.
++		 *
++		 * This IST Table may be live, and the NMI/#MC entries must
++		 * remain valid on every instruction boundary, hence the
++		 * volatile qualifier.
++		 */
++		ist_ssp[0] = 0x8600111111111111ul;
++		ist_ssp[IST_MCE] = stack_top + (IST_MCE * IST_SHSTK_SIZE) - 8;
++		ist_ssp[IST_NMI] = stack_top + (IST_NMI * IST_SHSTK_SIZE) - 8;
++		ist_ssp[IST_DB]	 = stack_top + (IST_DB	* IST_SHSTK_SIZE) - 8;
++		ist_ssp[IST_DF]	 = stack_top + (IST_DF	* IST_SHSTK_SIZE) - 8;
++		for ( i = IST_DF + 1;
++		      i < ARRAY_SIZE(this_cpu(tss_page).ist_ssp); ++i )
++			ist_ssp[i] = 0x8600111111111111ul;
++
++		wrmsrl(MSR_INTERRUPT_SSP_TABLE, (unsigned long)ist_ssp);
++	}
++
+ 	BUILD_BUG_ON(sizeof(*tss) <= 0x67); /* Mandated by the architecture. */
+ 
+ 	_set_tssldt_desc(gdt + TSS_ENTRY, (unsigned long)tss,
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 2f1e716b6d..4d6d22cc41 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -5994,12 +5994,33 @@ void memguard_unguard_range(void *p, unsigned long l)
+ 
+ #endif
+ 
++static void write_sss_token(unsigned long *ptr)
++{
++    /*
++     * A supervisor shadow stack token is its own linear address, with the
++     * busy bit (0) clear.
++     */
++    *ptr = (unsigned long)ptr;
++}
++
+ void memguard_guard_stack(void *p)
+ {
+-    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
++    /* IST Shadow stacks.  4x 1k in stack page 0. */
++    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
++    {
++        write_sss_token(p + (IST_MCE * IST_SHSTK_SIZE) - 8);
++        write_sss_token(p + (IST_NMI * IST_SHSTK_SIZE) - 8);
++        write_sss_token(p + (IST_DB  * IST_SHSTK_SIZE) - 8);
++        write_sss_token(p + (IST_DF  * IST_SHSTK_SIZE) - 8);
++    }
++    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
+ 
++    /* Primary Shadow Stack.  1x 4k in stack page 5. */
+     p += PRIMARY_SHSTK_SLOT * PAGE_SIZE;
+-    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, _PAGE_NONE);
++    if ( IS_ENABLED(CONFIG_XEN_SHSTK) )
++        write_sss_token(p + PAGE_SIZE - 8);
++
++    map_pages_to_xen((unsigned long)p, virt_to_mfn(p), 1, PAGE_HYPERVISOR_SHSTK);
+ }
+ 
+ void memguard_unguard_stack(void *p)
+diff --git a/xen/include/asm-x86/config.h b/xen/include/asm-x86/config.h
+index f3cf5df462..2ba234383d 100644
+--- a/xen/include/asm-x86/config.h
++++ b/xen/include/asm-x86/config.h
+@@ -66,6 +66,8 @@
+ #define STACK_ORDER 3
+ #define STACK_SIZE  (PAGE_SIZE << STACK_ORDER)
+ 
++#define IST_SHSTK_SIZE 1024
++
+ #define TRAMPOLINE_STACK_SPACE  PAGE_SIZE
+ #define TRAMPOLINE_SPACE        (KB(64) - TRAMPOLINE_STACK_SPACE)
+ #define WAKEUP_STACK_MIN        3072
+diff --git a/xen/include/asm-x86/page.h b/xen/include/asm-x86/page.h
+index 5acf3d3d5a..f632affaef 100644
+--- a/xen/include/asm-x86/page.h
++++ b/xen/include/asm-x86/page.h
+@@ -364,6 +364,7 @@ void efi_update_l4_pgtable(unsigned int l4idx, l4_pgentry_t);
+                                    _PAGE_DIRTY | _PAGE_RW)
+ #define __PAGE_HYPERVISOR_UCMINUS (__PAGE_HYPERVISOR | _PAGE_PCD)
+ #define __PAGE_HYPERVISOR_UC      (__PAGE_HYPERVISOR | _PAGE_PCD | _PAGE_PWT)
++#define __PAGE_HYPERVISOR_SHSTK   (__PAGE_HYPERVISOR_RO | _PAGE_DIRTY)
+ 
+ #define MAP_SMALL_PAGES _PAGE_AVAIL0 /* don't use superpages mappings */
+ 
+diff --git a/xen/include/asm-x86/processor.h b/xen/include/asm-x86/processor.h
+index 8ab09cf7ed..859bd9e2ec 100644
+--- a/xen/include/asm-x86/processor.h
++++ b/xen/include/asm-x86/processor.h
+@@ -435,7 +435,8 @@ struct __packed tss64 {
+     uint16_t :16, bitmap;
+ };
+ struct tss_page {
+-    struct tss64 __aligned(PAGE_SIZE) tss;
++    uint64_t __aligned(PAGE_SIZE) ist_ssp[8];
++    struct tss64 tss;
+ };
+ DECLARE_PER_CPU(struct tss_page, tss_page);
+ 
+diff --git a/xen/include/asm-x86/x86_64/page.h b/xen/include/asm-x86/x86_64/page.h
+index 9876634881..26621f9519 100644
+--- a/xen/include/asm-x86/x86_64/page.h
++++ b/xen/include/asm-x86/x86_64/page.h
+@@ -171,6 +171,7 @@ static inline intpte_t put_pte_flags(unsigned int x)
+ #define PAGE_HYPERVISOR_RW      (__PAGE_HYPERVISOR_RW      | _PAGE_GLOBAL)
+ #define PAGE_HYPERVISOR_RX      (__PAGE_HYPERVISOR_RX      | _PAGE_GLOBAL)
+ #define PAGE_HYPERVISOR_RWX     (__PAGE_HYPERVISOR         | _PAGE_GLOBAL)
++#define PAGE_HYPERVISOR_SHSTK   (__PAGE_HYPERVISOR_SHSTK   | _PAGE_GLOBAL)
+ 
+ #define PAGE_HYPERVISOR         PAGE_HYPERVISOR_RW
+ #define PAGE_HYPERVISOR_UCMINUS (__PAGE_HYPERVISOR_UCMINUS | \
 -- 
 2.11.0
 
