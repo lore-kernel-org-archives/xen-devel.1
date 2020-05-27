@@ -2,71 +2,72 @@ Return-Path: <SRS0=V1Us=7J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=unavailable
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 649FFC433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 11:30:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C4EBC433DF
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 12:52:53 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 383B4206DF
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 11:30:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 383B4206DF
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6FC1320873
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 12:52:53 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="M8ZuAGhM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FC1320873
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jduFZ-0002Zw-5W; Wed, 27 May 2020 11:29:33 +0000
+	id 1jdvXj-0001T5-Jf; Wed, 27 May 2020 12:52:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=t1uD=7J=gmail.com=wei.liu.xen@srs-us1.protection.inumbo.net>)
- id 1jduFX-0002Zr-P1
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 11:29:31 +0000
-X-Inumbo-ID: 54d1e262-a00d-11ea-9dbe-bc764e2007e4
-Received: from mail-wr1-f66.google.com (unknown [209.85.221.66])
+ <SRS0=mVnz=7J=yandex-team.ru=rvkagan@srs-us1.protection.inumbo.net>)
+ id 1jdvRL-0000gl-Nl
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 12:45:47 +0000
+X-Inumbo-ID: f91d9b40-a017-11ea-8993-bc764e2007e4
+Received: from forwardcorp1p.mail.yandex.net (unknown
+ [2a02:6b8:0:1472:2741:0:8b6:217])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 54d1e262-a00d-11ea-9dbe-bc764e2007e4;
- Wed, 27 May 2020 11:29:31 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id x13so8979723wrv.4
- for <xen-devel@lists.xenproject.org>; Wed, 27 May 2020 04:29:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=7ukDdBTID2nqNbO4Nuu1d5hVjiNbzXmjnB0+7rrB2SI=;
- b=YOZ4PHMDS2V4eKlJz4rhHnIhkwbjNY7ez2xrBrVWeyoqTodkcA+LJasGuLpboA0RcQ
- hZsQ7HOGsDLQNJzcX8VUPXHLtfvOypigR5AqcEAtfxSDav44YlVbVN+e97AaA5nn+nfw
- rJyfIRJDyf5RJay6t0T4DP0BMAjiN8OMmTvNsOQh2Mg9pIBV+gUTTGlc/kjL7qNoTqvR
- cM0bSKEl0cq7DvAfnt/ldOteU0lOBd/mcq896FbRUBHKMhOz3h/CpaYwovmijN3tXtFd
- DIchCKWjRJYlP6t8YgZaoXr774VDmdALtCaQYWHPDrB2tWrxOKoAEgIuGmkgqA4Qm+JY
- BvBw==
-X-Gm-Message-State: AOAM530ks+QDBM5a7psT0SOZnoMl6RFgIOIWBwu6sxEdVe/lnxM1TSXl
- Pz3AzOt80Cq0yb/qDjCdfjE=
-X-Google-Smtp-Source: ABdhPJxjEiifR2Pzkt5OwOsAom9xHyoqgDSd3Z4ktCRMBjxCTJ5lwU4iuCjQ2+iyaTL0G9iDxSjgtw==
-X-Received: by 2002:adf:9d8f:: with SMTP id p15mr7554651wre.421.1590578970189; 
- Wed, 27 May 2020 04:29:30 -0700 (PDT)
-Received: from
- liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net
- ([51.145.34.42])
- by smtp.gmail.com with ESMTPSA id c25sm2536025wmb.44.2020.05.27.04.29.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 May 2020 04:29:29 -0700 (PDT)
-Date: Wed, 27 May 2020 11:29:28 +0000
-From: Wei Liu <wl@xen.org>
-To: Anthony PERARD <anthony.perard@citrix.com>
-Subject: Re: [PATCH v2 3/5] automation/archlinux: Add 32-bit glibc headers
-Message-ID: <20200527112928.72amqcojenrz2a46@liuwe-devbox-debian-v2.j3c5onc20sse1dnehy4noqpfcg.zx.internal.cloudapp.net>
-References: <20200526221612.900922-1-george.dunlap@citrix.com>
- <20200526221612.900922-4-george.dunlap@citrix.com>
- <20200527104316.GH2105@perard.uk.xensource.com>
+ id f91d9b40-a017-11ea-8993-bc764e2007e4;
+ Wed, 27 May 2020 12:45:42 +0000 (UTC)
+Received: from mxbackcorp2j.mail.yandex.net (mxbackcorp2j.mail.yandex.net
+ [IPv6:2a02:6b8:0:1619::119])
+ by forwardcorp1p.mail.yandex.net (Yandex) with ESMTP id 05C1E2E15A3;
+ Wed, 27 May 2020 15:45:41 +0300 (MSK)
+Received: from iva4-7c3d9abce76c.qloud-c.yandex.net
+ (iva4-7c3d9abce76c.qloud-c.yandex.net [2a02:6b8:c0c:4e8e:0:640:7c3d:9abc])
+ by mxbackcorp2j.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
+ nqQj86Bk57-jbfq4Pkl; Wed, 27 May 2020 15:45:40 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; 
+ t=1590583540; bh=5vTc+cYwJ0Yp/qYZkQZ2K2YBz+RbUpeML72x3NJFPMc=;
+ h=In-Reply-To:Message-Id:References:Date:Subject:To:From:Cc;
+ b=M8ZuAGhMsx+thLLDbKB6QLd0xI3uJHv/67y4TKRY/bZ+ez9EboHcOgdO7FSZX/7gx
+ xj/pb4AGN2vS4pgcLBcJJgBd6ZYem3Hkwx03tMjUZRDlse10PYNpKpubdCsW5rUtkS
+ Y0DVCZz3xDn0rgPyU2RF91ofdnmEY3eHdmqMoygs=
+Authentication-Results: mxbackcorp2j.mail.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+Received: from dynamic-vpn.dhcp.yndx.net (dynamic-vpn.dhcp.yndx.net
+ [2a02:6b8:b080:8308::1:12])
+ by iva4-7c3d9abce76c.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
+ bzO5qPtczO-jbWOOqOL; Wed, 27 May 2020 15:45:37 +0300
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client certificate not present)
+From: Roman Kagan <rvkagan@yandex-team.ru>
+To: qemu-devel@nongnu.org
+Subject: [PATCH v6 5/5] block: lift blocksize property limit to 2 MiB
+Date: Wed, 27 May 2020 15:45:11 +0300
+Message-Id: <20200527124511.986099-6-rvkagan@yandex-team.ru>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200527124511.986099-1-rvkagan@yandex-team.ru>
+References: <20200527124511.986099-1-rvkagan@yandex-team.ru>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200527104316.GH2105@perard.uk.xensource.com>
-User-Agent: NeoMutt/20180716
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 27 May 2020 12:52:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,46 +78,58 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
- George Dunlap <george.dunlap@citrix.com>, Wei Liu <wl@xen.org>
+Cc: Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ Eduardo Habkost <ehabkost@redhat.com>, qemu-block@nongnu.org,
+ Paul Durrant <paul@xen.org>, Eric Blake <eblake@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Max Reitz <mreitz@redhat.com>, John Snow <jsnow@redhat.com>,
+ Keith Busch <kbusch@kernel.org>, Gerd Hoffmann <kraxel@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Anthony Perard <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, May 27, 2020 at 11:43:16AM +0100, Anthony PERARD wrote:
-> On Tue, May 26, 2020 at 11:16:10PM +0100, George Dunlap wrote:
-> > This fixes the following build error in hvmloader:
-> > 
-> > usr/include/gnu/stubs.h:7:11: fatal error: gnu/stubs-32.h: No such file or directory
-> > 
-> > Signed-off-by: George Dunlap <george.dunlap@citrix.com>
-> > ---
-> >  automation/build/archlinux/current.dockerfile | 1 +
-> >  1 file changed, 1 insertion(+)
-> > 
-> > diff --git a/automation/build/archlinux/current.dockerfile b/automation/build/archlinux/current.dockerfile
-> > index 9af5d66afc..5095de65b8 100644
-> > --- a/automation/build/archlinux/current.dockerfile
-> > +++ b/automation/build/archlinux/current.dockerfile
-> > @@ -19,6 +19,7 @@ RUN pacman -S --refresh --sysupgrade --noconfirm --noprogressbar --needed \
-> >          iasl \
-> >          inetutils \
-> >          iproute \
-> > +        lib32-glibc \
-> >          libaio \
-> >          libcacard \
-> >          libgl \
-> 
-> Acked-by: Anthony PERARD <anthony.perard@citrix.com>
+Logical and physical block sizes in QEMU are limited to 32 KiB.
 
-All automation patches:
+This appears unnecessary tight, and we've seen bigger block sizes handy
+at times.
 
-Acked-by: Wei Liu <wl@xen.org>
+Lift the limitation up to 2 MiB which appears to be good enough for
+everybody, and matches the qcow2 cluster size limit.
 
-Anthony, can you generate and push the new images? Thanks.
+Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
+---
+v4 -> v5:
+- split out into separate patch [Philippe]
+- as this patch has changed significantly lose Eric's r-b
 
-Wei.
+ hw/core/qdev-properties.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-> 
-> -- 
-> Anthony PERARD
+diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
+index e7ccd4d276..ecd84262a9 100644
+--- a/hw/core/qdev-properties.c
++++ b/hw/core/qdev-properties.c
+@@ -784,9 +784,12 @@ const PropertyInfo qdev_prop_size32 = {
+ /* lower limit is sector size */
+ #define MIN_BLOCK_SIZE          512
+ #define MIN_BLOCK_SIZE_STR      stringify(MIN_BLOCK_SIZE)
+-/* upper limit is the max power of 2 that fits in uint16_t */
+-#define MAX_BLOCK_SIZE          32768
+-#define MAX_BLOCK_SIZE_STR      stringify(MAX_BLOCK_SIZE)
++/*
++ * upper limit is arbitrary, 2 MiB looks sufficient for all sensible uses, and
++ * matches qcow2 cluster size limit
++ */
++#define MAX_BLOCK_SIZE          (2 * MiB)
++#define MAX_BLOCK_SIZE_STR      "2 MiB"
+ 
+ static void set_blocksize(Object *obj, Visitor *v, const char *name,
+                           void *opaque, Error **errp)
+-- 
+2.26.2
+
 
