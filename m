@@ -6,49 +6,50 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CEF89C433E1
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A7514C433E0
 	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B5DE02078C
+	by mail.kernel.org (Postfix) with ESMTPS id 83FBA2078C
 	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5DE02078C
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 83FBA2078C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1a7-0003zk-7p; Wed, 27 May 2020 19:19:15 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1je1a7-0003zq-FO; Wed, 27 May 2020 19:19:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1a5-0003za-UD
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:13 +0000
-X-Inumbo-ID: f25930ee-a04e-11ea-81bc-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f25930ee-a04e-11ea-81bc-bc764e2007e4;
+ id 1je1a6-0003zb-5F
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:14 +0000
+X-Inumbo-ID: f27751dc-a04e-11ea-a777-12813bfff9fa
+Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f27751dc-a04e-11ea-a777-12813bfff9fa;
  Wed, 27 May 2020 19:19:12 +0000 (UTC)
-Authentication-Results: esa5.hc3370-68.iphmx.com;
+Authentication-Results: esa3.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: mbKeQ7QpZv3IAsquSsZ+NyeeuXXDsp5Ov4NaEfAcMJJ0LNNrOgQw0Ti7QwRh7vNC2an6Gox6Hs
- eZCEKK9hD4wSVxN90TtlQHL7WVq9ol/YPFFm6tWBpni7cPHg/oUYxNKCPBKRGjUCh2Ly6s3kvd
- JkNKKmQy5NMUDurQa7eM8aLs9WzGh9bZpl2MGsu0TCHcHBgh0ZFO9TZbxqmbVvDvPmMO3IqMK3
- TmThn2U46kTojFfzBjApdDj6z4gcqzab3mVmIyHk0Nr5PHI8VhwC6cUGNhMq9Yk3lWBhiiMqqq
- RkQ=
+IronPort-SDR: ija9DmiPgoPmZNcL3bjjdKcpLaVY+8guYONj0oMriHZeiKRsozlQ4o9aitlckvP1s6btqJjxh1
+ a18qRYR3chz2xqEmZi1iYjPkG72SPuWjfXyhVFoGpAviU1XOrbI66ZIQIbfdo4gTDSN5jj9AgB
+ s6lRv7mYcHllksiQ687H74WJMWuU5rfZhBYRoEdw8kjtIZt8gT6+KHdasj18k6r8n/CwzOQovE
+ kl3xiEYvA2VvsgwwvuZvjliwLI/IDNpuSXuy1dJz9R6NEaTju6WmHDxpgad7sSTQhi6ISl/cjt
+ uPA=
 X-SBRS: 2.7
-X-MesageID: 18850555
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-MesageID: 18591103
+X-Ironport-Server: esa3.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18850555"
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18591103"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 08/14] x86/cpu: Adjust reset_stack_and_jump() to be shadow
- stack compatible
-Date: Wed, 27 May 2020 20:18:41 +0100
-Message-ID: <20200527191847.17207-9-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 02/14] x86/traps: Factor out extable_fixup() and make
+ printing consistent
+Date: Wed, 27 May 2020 20:18:35 +0100
+Message-ID: <20200527191847.17207-3-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
 References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
@@ -71,11 +72,17 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-We need to unwind up to the supervisor token.  See the comment for details.
+UD faults never had any diagnostics printed, and the others were inconsistent.
 
-The use of UNLIKELY_END_SECTION in this case highlights that it isn't safe
-when it isn't the final statement of an asm().  Adjust all declarations with a
-newline.
+Don't use dprintk() because identifying traps.c is actively unhelpful in the
+message, as it is the location of the fixup, not the fault.  Use the new
+vec_name() infrastructure, rather than leaving raw numbers for the log.
+
+  (XEN) Running stub recovery selftests...
+  (XEN) Fixup #UD[0000]: ffff82d07fffd040 [ffff82d07fffd040] -> ffff82d0403ac9d6
+  (XEN) Fixup #GP[0000]: ffff82d07fffd041 [ffff82d07fffd041] -> ffff82d0403ac9d6
+  (XEN) Fixup #SS[0000]: ffff82d07fffd040 [ffff82d07fffd040] -> ffff82d0403ac9d6
+  (XEN) Fixup #BP[0000]: ffff82d07fffd041 [ffff82d07fffd041] -> ffff82d0403ac9d6
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
@@ -84,100 +91,169 @@ CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 
 v2:
- * Drop 'cmc' which was stray debugging.
- * Replace raw numbers with defines.
- * Use a real BUG frame in .fixup, to get static branch preduction working the
-   right way around.
+ * Rebase
+ * Rename to extable_fixup() to better distinguish from fixup_page_fault()
 ---
- xen/include/asm-x86/asm_defns.h |  8 +++----
- xen/include/asm-x86/current.h   | 48 ++++++++++++++++++++++++++++++++++++++---
- 2 files changed, 49 insertions(+), 7 deletions(-)
+ xen/arch/x86/traps.c | 77 ++++++++++++++++++++++++----------------------------
+ 1 file changed, 35 insertions(+), 42 deletions(-)
 
-diff --git a/xen/include/asm-x86/asm_defns.h b/xen/include/asm-x86/asm_defns.h
-index b42a19b654..035708adac 100644
---- a/xen/include/asm-x86/asm_defns.h
-+++ b/xen/include/asm-x86/asm_defns.h
-@@ -177,13 +177,13 @@ register unsigned long current_stack_pointer asm("rsp");
+diff --git a/xen/arch/x86/traps.c b/xen/arch/x86/traps.c
+index 427178e649..eeb3e146ef 100644
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -772,10 +772,31 @@ static void do_reserved_trap(struct cpu_user_regs *regs)
+           trapnr, vec_name(trapnr), regs->error_code);
+ }
  
- #ifdef __clang__ /* clang's builtin assember can't do .subsection */
- 
--#define UNLIKELY_START_SECTION ".pushsection .text.unlikely,\"ax\""
--#define UNLIKELY_END_SECTION   ".popsection"
-+#define UNLIKELY_START_SECTION ".pushsection .text.unlikely,\"ax\"\n\t"
-+#define UNLIKELY_END_SECTION   ".popsection\n\t"
- 
- #else
- 
--#define UNLIKELY_START_SECTION ".subsection 1"
--#define UNLIKELY_END_SECTION   ".subsection 0"
-+#define UNLIKELY_START_SECTION ".subsection 1\n\t"
-+#define UNLIKELY_END_SECTION   ".subsection 0\n\t"
- 
- #endif
- 
-diff --git a/xen/include/asm-x86/current.h b/xen/include/asm-x86/current.h
-index 99b66a0087..086326b81a 100644
---- a/xen/include/asm-x86/current.h
-+++ b/xen/include/asm-x86/current.h
-@@ -124,13 +124,55 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
- # define CHECK_FOR_LIVEPATCH_WORK ""
- #endif
- 
-+#ifdef CONFIG_XEN_SHSTK
-+/*
-+ * We need to unwind the primary shadow stack to its supervisor token, located
-+ * at 0x5ff8 from the base of the stack blocks.
-+ *
-+ * Read the shadow stack pointer, subtract it from 0x5ff8, divide by 8 to get
-+ * the number of slots needing popping.
-+ *
-+ * INCSSPQ can't pop more than 255 entries.  We shouldn't ever need to pop
-+ * that many entries, and getting this wrong will cause us to #DF later.  Turn
-+ * it into a BUG() now for fractionally easier debugging.
-+ */
-+# define SHADOW_STACK_WORK                                      \
-+    "mov $1, %[ssp];"                                           \
-+    "rdsspd %[ssp];"                                            \
-+    "cmp $1, %[ssp];"                                           \
-+    "je .L_shstk_done.%=;" /* CET not active?  Skip. */         \
-+    "mov $%c[skstk_base], %[val];"                              \
-+    "and $%c[stack_mask], %[ssp];"                              \
-+    "sub %[ssp], %[val];"                                       \
-+    "shr $3, %[val];"                                           \
-+    "cmp $255, %[val];" /* More than 255 entries?  Crash. */    \
-+    UNLIKELY_START(a, shstk_adjust)                             \
-+    _ASM_BUGFRAME_TEXT(0)                                       \
-+    UNLIKELY_END_SECTION                                        \
-+    "incsspq %q[val];"                                          \
-+    ".L_shstk_done.%=:"
-+#else
-+# define SHADOW_STACK_WORK ""
-+#endif
++static bool extable_fixup(struct cpu_user_regs *regs, bool print)
++{
++    unsigned long fixup = search_exception_table(regs);
 +
- #define switch_stack_and_jump(fn, instr)                                \
-     ({                                                                  \
-+        unsigned int tmp;                                               \
-         __asm__ __volatile__ (                                          \
--            "mov %0,%%"__OP"sp;"                                        \
-+            SHADOW_STACK_WORK                                           \
-+            "mov %[stk], %%rsp;"                                        \
-             instr                                                       \
--             "jmp %c1"                                                  \
--            : : "r" (guest_cpu_user_regs()), "i" (fn) : "memory" );     \
-+            "jmp %c[fun];"                                              \
-+            : [val] "=&r" (tmp),                                        \
-+              [ssp] "=&r" (tmp)                                         \
-+            : [stk] "r" (guest_cpu_user_regs()),                        \
-+              [fun] "i" (fn),                                           \
-+              [skstk_base] "i"                                          \
-+              ((PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8),               \
-+              [stack_mask] "i" (STACK_SIZE - 1),                        \
-+              _ASM_BUGFRAME_INFO(BUGFRAME_bug, __LINE__,                \
-+                                 __FILE__, NULL)                        \
-+            : "memory" );                                               \
-         unreachable();                                                  \
-     })
++    if ( unlikely(fixup == 0) )
++        return false;
++
++    /*
++     * Don't use dprintk() because the __FILE__ reference is unhelpful.
++     * Can currently be triggered by guests.  Make sure we ratelimit.
++     */
++    if ( IS_ENABLED(CONFIG_DEBUG) && print )
++        printk(XENLOG_GUEST XENLOG_WARNING "Fixup %s[%04x]: %p [%ps] -> %p\n",
++               vec_name(regs->entry_vector), regs->error_code,
++               _p(regs->rip), _p(regs->rip), _p(fixup));
++
++    regs->rip = fixup;
++    this_cpu(last_extable_addr) = regs->rip;
++
++    return true;
++}
++
+ static void do_trap(struct cpu_user_regs *regs)
+ {
+     unsigned int trapnr = regs->entry_vector;
+-    unsigned long fixup;
  
+     if ( regs->error_code & X86_XEC_EXT )
+         goto hardware_trap;
+@@ -793,14 +814,8 @@ static void do_trap(struct cpu_user_regs *regs)
+         return;
+     }
+ 
+-    if ( likely((fixup = search_exception_table(regs)) != 0) )
+-    {
+-        dprintk(XENLOG_ERR, "Trap %u: %p [%ps] -> %p\n",
+-                trapnr, _p(regs->rip), _p(regs->rip), _p(fixup));
+-        this_cpu(last_extable_addr) = regs->rip;
+-        regs->rip = fixup;
++    if ( likely(extable_fixup(regs, true)) )
+         return;
+-    }
+ 
+  hardware_trap:
+     if ( debugger_trap_fatal(trapnr, regs) )
+@@ -1108,12 +1123,8 @@ void do_invalid_op(struct cpu_user_regs *regs)
+     }
+ 
+  die:
+-    if ( (fixup = search_exception_table(regs)) != 0 )
+-    {
+-        this_cpu(last_extable_addr) = regs->rip;
+-        regs->rip = fixup;
++    if ( likely(extable_fixup(regs, true)) )
+         return;
+-    }
+ 
+     if ( debugger_trap_fatal(TRAP_invalid_op, regs) )
+         return;
+@@ -1129,16 +1140,8 @@ void do_int3(struct cpu_user_regs *regs)
+ 
+     if ( !guest_mode(regs) )
+     {
+-        unsigned long fixup;
+-
+-        if ( (fixup = search_exception_table(regs)) != 0 )
+-        {
+-            this_cpu(last_extable_addr) = regs->rip;
+-            dprintk(XENLOG_DEBUG, "Trap %u: %p [%ps] -> %p\n",
+-                    TRAP_int3, _p(regs->rip), _p(regs->rip), _p(fixup));
+-            regs->rip = fixup;
++        if ( likely(extable_fixup(regs, true)) )
+             return;
+-        }
+ 
+         if ( !debugger_trap_fatal(TRAP_int3, regs) )
+             printk(XENLOG_DEBUG "Hit embedded breakpoint at %p [%ps]\n",
+@@ -1415,7 +1418,7 @@ static int fixup_page_fault(unsigned long addr, struct cpu_user_regs *regs)
+ 
+ void do_page_fault(struct cpu_user_regs *regs)
+ {
+-    unsigned long addr, fixup;
++    unsigned long addr;
+     unsigned int error_code;
+ 
+     addr = read_cr2();
+@@ -1461,11 +1464,9 @@ void do_page_fault(struct cpu_user_regs *regs)
+         if ( pf_type != real_fault )
+             return;
+ 
+-        if ( likely((fixup = search_exception_table(regs)) != 0) )
++        if ( likely(extable_fixup(regs, false)) )
+         {
+             perfc_incr(copy_user_faults);
+-            this_cpu(last_extable_addr) = regs->rip;
+-            regs->rip = fixup;
+             return;
+         }
+ 
+@@ -1521,7 +1522,6 @@ void do_general_protection(struct cpu_user_regs *regs)
+ #ifdef CONFIG_PV
+     struct vcpu *v = current;
+ #endif
+-    unsigned long fixup;
+ 
+     if ( debugger_trap_entry(TRAP_gp_fault, regs) )
+         return;
+@@ -1588,14 +1588,8 @@ void do_general_protection(struct cpu_user_regs *regs)
+ 
+  gp_in_kernel:
+ 
+-    if ( likely((fixup = search_exception_table(regs)) != 0) )
+-    {
+-        dprintk(XENLOG_INFO, "GPF (%04x): %p [%ps] -> %p\n",
+-                regs->error_code, _p(regs->rip), _p(regs->rip), _p(fixup));
+-        this_cpu(last_extable_addr) = regs->rip;
+-        regs->rip = fixup;
++    if ( likely(extable_fixup(regs, true)) )
+         return;
+-    }
+ 
+  hardware_gp:
+     if ( debugger_trap_fatal(TRAP_gp_fault, regs) )
+@@ -1754,18 +1748,17 @@ void do_device_not_available(struct cpu_user_regs *regs)
+ 
+     if ( !guest_mode(regs) )
+     {
+-        unsigned long fixup = search_exception_table(regs);
+-
+-        gprintk(XENLOG_ERR, "#NM: %p [%ps] -> %p\n",
+-                _p(regs->rip), _p(regs->rip), _p(fixup));
+         /*
+          * We shouldn't be able to reach here, but for release builds have
+          * the recovery logic in place nevertheless.
+          */
+-        ASSERT_UNREACHABLE();
+-        BUG_ON(!fixup);
+-        regs->rip = fixup;
+-        return;
++        if ( extable_fixup(regs, true) )
++        {
++            ASSERT_UNREACHABLE();
++            return;
++        }
++
++        fatal_trap(regs, false);
+     }
+ 
+ #ifdef CONFIG_PV
 -- 
 2.11.0
 
