@@ -2,74 +2,59 @@ Return-Path: <SRS0=V1Us=7J=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7E541C433E0
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 18:55:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CEF89C433E1
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 58C612073B
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 18:55:19 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="y94/7+UY"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 58C612073B
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id B5DE02078C
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B5DE02078C
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1CI-0002Ak-83; Wed, 27 May 2020 18:54:38 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1je1a7-0003zk-7p; Wed, 27 May 2020 19:19:15 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UeBB=7J=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1je1CH-0002Af-4u
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 18:54:37 +0000
-X-Inumbo-ID: 7f5df82a-a04b-11ea-a776-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 7f5df82a-a04b-11ea-a776-12813bfff9fa;
- Wed, 27 May 2020 18:54:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=5I1JXReOWHrWHIvw53wUpwrnnjLm/8jfpP2B/coZYlY=; b=y94/7+UY2rspyQ6l9eGT7C3Oa
- wI6M275opGpAWszBtXgjezjqhUdG6GnTVhDQb85mESnKiYCfA3hjUZ+Tj4Gy2okV37iWL8yFlhypm
- Nr3Nu4FEDUKlavLdcmtnH5nSOJnhUFjxjZvizBN2MWy176J9SNsZDMklmvb3nojHTCptY=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1je1CA-0002pp-9B; Wed, 27 May 2020 18:54:30 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1je1C9-0000M3-Pm; Wed, 27 May 2020 18:54:29 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1je1C9-0007Nl-P2; Wed, 27 May 2020 18:54:29 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-150407-mainreport@xen.org>
+ <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
+ id 1je1a5-0003za-UD
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:13 +0000
+X-Inumbo-ID: f25930ee-a04e-11ea-81bc-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f25930ee-a04e-11ea-81bc-bc764e2007e4;
+ Wed, 27 May 2020 19:19:12 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: mbKeQ7QpZv3IAsquSsZ+NyeeuXXDsp5Ov4NaEfAcMJJ0LNNrOgQw0Ti7QwRh7vNC2an6Gox6Hs
+ eZCEKK9hD4wSVxN90TtlQHL7WVq9ol/YPFFm6tWBpni7cPHg/oUYxNKCPBKRGjUCh2Ly6s3kvd
+ JkNKKmQy5NMUDurQa7eM8aLs9WzGh9bZpl2MGsu0TCHcHBgh0ZFO9TZbxqmbVvDvPmMO3IqMK3
+ TmThn2U46kTojFfzBjApdDj6z4gcqzab3mVmIyHk0Nr5PHI8VhwC6cUGNhMq9Yk3lWBhiiMqqq
+ RkQ=
+X-SBRS: 2.7
+X-MesageID: 18850555
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18850555"
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Subject: [PATCH v2 08/14] x86/cpu: Adjust reset_stack_and_jump() to be shadow
+ stack compatible
+Date: Wed, 27 May 2020 20:18:41 +0100
+Message-ID: <20200527191847.17207-9-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
+References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 150407: tolerable all pass - PUSHED
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=9f3e9139fa6c3d620eb08dff927518fc88200b8d
-X-Osstest-Versions-That: xen=b66e28226dd9df8a28101438f44c0a26d63b76fa
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 27 May 2020 18:54:29 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,62 +65,120 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <JBeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 150407 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/150407/
+We need to unwind up to the supervisor token.  See the comment for details.
 
-Failures :-/ but no regressions.
+The use of UNLIKELY_END_SECTION in this case highlights that it isn't safe
+when it isn't the final statement of an asm().  Adjust all declarations with a
+newline.
 
-Tests which did not succeed, but are not blocking:
- test-amd64-amd64-libvirt     13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <JBeulich@suse.com>
+CC: Wei Liu <wl@xen.org>
+CC: Roger Pau Monné <roger.pau@citrix.com>
 
-version targeted for testing:
- xen                  9f3e9139fa6c3d620eb08dff927518fc88200b8d
-baseline version:
- xen                  b66e28226dd9df8a28101438f44c0a26d63b76fa
+v2:
+ * Drop 'cmc' which was stray debugging.
+ * Replace raw numbers with defines.
+ * Use a real BUG frame in .fixup, to get static branch preduction working the
+   right way around.
+---
+ xen/include/asm-x86/asm_defns.h |  8 +++----
+ xen/include/asm-x86/current.h   | 48 ++++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 49 insertions(+), 7 deletions(-)
 
-Last test of basis   150396  2020-05-27 08:09:48 Z    0 days
-Testing same since   150407  2020-05-27 16:00:24 Z    0 days    1 attempts
+diff --git a/xen/include/asm-x86/asm_defns.h b/xen/include/asm-x86/asm_defns.h
+index b42a19b654..035708adac 100644
+--- a/xen/include/asm-x86/asm_defns.h
++++ b/xen/include/asm-x86/asm_defns.h
+@@ -177,13 +177,13 @@ register unsigned long current_stack_pointer asm("rsp");
+ 
+ #ifdef __clang__ /* clang's builtin assember can't do .subsection */
+ 
+-#define UNLIKELY_START_SECTION ".pushsection .text.unlikely,\"ax\""
+-#define UNLIKELY_END_SECTION   ".popsection"
++#define UNLIKELY_START_SECTION ".pushsection .text.unlikely,\"ax\"\n\t"
++#define UNLIKELY_END_SECTION   ".popsection\n\t"
+ 
+ #else
+ 
+-#define UNLIKELY_START_SECTION ".subsection 1"
+-#define UNLIKELY_END_SECTION   ".subsection 0"
++#define UNLIKELY_START_SECTION ".subsection 1\n\t"
++#define UNLIKELY_END_SECTION   ".subsection 0\n\t"
+ 
+ #endif
+ 
+diff --git a/xen/include/asm-x86/current.h b/xen/include/asm-x86/current.h
+index 99b66a0087..086326b81a 100644
+--- a/xen/include/asm-x86/current.h
++++ b/xen/include/asm-x86/current.h
+@@ -124,13 +124,55 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
+ # define CHECK_FOR_LIVEPATCH_WORK ""
+ #endif
+ 
++#ifdef CONFIG_XEN_SHSTK
++/*
++ * We need to unwind the primary shadow stack to its supervisor token, located
++ * at 0x5ff8 from the base of the stack blocks.
++ *
++ * Read the shadow stack pointer, subtract it from 0x5ff8, divide by 8 to get
++ * the number of slots needing popping.
++ *
++ * INCSSPQ can't pop more than 255 entries.  We shouldn't ever need to pop
++ * that many entries, and getting this wrong will cause us to #DF later.  Turn
++ * it into a BUG() now for fractionally easier debugging.
++ */
++# define SHADOW_STACK_WORK                                      \
++    "mov $1, %[ssp];"                                           \
++    "rdsspd %[ssp];"                                            \
++    "cmp $1, %[ssp];"                                           \
++    "je .L_shstk_done.%=;" /* CET not active?  Skip. */         \
++    "mov $%c[skstk_base], %[val];"                              \
++    "and $%c[stack_mask], %[ssp];"                              \
++    "sub %[ssp], %[val];"                                       \
++    "shr $3, %[val];"                                           \
++    "cmp $255, %[val];" /* More than 255 entries?  Crash. */    \
++    UNLIKELY_START(a, shstk_adjust)                             \
++    _ASM_BUGFRAME_TEXT(0)                                       \
++    UNLIKELY_END_SECTION                                        \
++    "incsspq %q[val];"                                          \
++    ".L_shstk_done.%=:"
++#else
++# define SHADOW_STACK_WORK ""
++#endif
++
+ #define switch_stack_and_jump(fn, instr)                                \
+     ({                                                                  \
++        unsigned int tmp;                                               \
+         __asm__ __volatile__ (                                          \
+-            "mov %0,%%"__OP"sp;"                                        \
++            SHADOW_STACK_WORK                                           \
++            "mov %[stk], %%rsp;"                                        \
+             instr                                                       \
+-             "jmp %c1"                                                  \
+-            : : "r" (guest_cpu_user_regs()), "i" (fn) : "memory" );     \
++            "jmp %c[fun];"                                              \
++            : [val] "=&r" (tmp),                                        \
++              [ssp] "=&r" (tmp)                                         \
++            : [stk] "r" (guest_cpu_user_regs()),                        \
++              [fun] "i" (fn),                                           \
++              [skstk_base] "i"                                          \
++              ((PRIMARY_SHSTK_SLOT + 1) * PAGE_SIZE - 8),               \
++              [stack_mask] "i" (STACK_SIZE - 1),                        \
++              _ASM_BUGFRAME_INFO(BUGFRAME_bug, __LINE__,                \
++                                 __FILE__, NULL)                        \
++            : "memory" );                                               \
+         unreachable();                                                  \
+     })
+ 
+-- 
+2.11.0
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     pass    
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Pushing revision :
-
-To xenbits.xen.org:/home/xen/git/xen.git
-   b66e28226d..9f3e9139fa  9f3e9139fa6c3d620eb08dff927518fc88200b8d -> smoke
 
