@@ -6,50 +6,49 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CA499C433E3
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 98207C433E0
 	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:44 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B19F42078C
+	by mail.kernel.org (Postfix) with ESMTPS id 7EF6F2078C
 	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 19:19:44 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B19F42078C
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7EF6F2078C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1je1aH-00042T-MQ; Wed, 27 May 2020 19:19:25 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1je1aH-00042G-DG; Wed, 27 May 2020 19:19:25 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=/dLv=7J=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1je1aG-00041w-2S
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:24 +0000
-X-Inumbo-ID: f518fc1a-a04e-11ea-a777-12813bfff9fa
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id f518fc1a-a04e-11ea-a777-12813bfff9fa;
- Wed, 27 May 2020 19:19:17 +0000 (UTC)
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ id 1je1aF-00041n-QK
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 19:19:23 +0000
+X-Inumbo-ID: f33f80e4-a04e-11ea-81bc-bc764e2007e4
+Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id f33f80e4-a04e-11ea-81bc-bc764e2007e4;
+ Wed, 27 May 2020 19:19:13 +0000 (UTC)
+Authentication-Results: esa5.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: AqhgHtvucTXh9gKrfysPQjfVwMB0aAHR29VpIB06eomiAmpiSuq6TuZPrORn6qj4+x6hCO6gd+
- SVfFlrKExbY8F3Atho7vCyhxi4fAZnu21BA2HyMi3ltCqkKkS4O8jkHQ0LfIaBT+ViAzXYjlRf
- Xck5nRfYrDK76ervV5In3SK6anRX5eygGGYsEbTEJFpVcojs6VfxwOnIpP2Znpfl3pX2t9h21I
- tR35FF9r5Bug6GxwSAg4sHJIuukG+UQV578hX0usflysaIbNriaUFgS9dDOVaDrsVJHsfWh3+3
- 0vA=
+IronPort-SDR: Tq6+s3Zh7QaRK595E15ZFckIpIk5gndEZuDz8ttfd0qmFsoM1hkOEjbDpJmnafihXdS2HWfRcK
+ QVkAVn3Rogew9UeKYWAH/IlD37FBiRZJR2anYYwrexQOk8+W6IdikgmgQ91IBXK3pEfLaP1DAM
+ N6gd/Mt3pHXf98aiI/OYkIiMcPVmOwN4qrs210s1yoSsDlLfidrAwIRjL7qHSPnlzZBL0xbvuQ
+ 67mO7Yp3pPLaQirrO8TluPLa7vsdyPssxO/H6VF+3sCQfFEywaUHox0NAOzp6g/8KgpVgvw+RP
+ Q7A=
 X-SBRS: 2.7
-X-MesageID: 19333922
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 18850558
+X-Ironport-Server: esa5.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="19333922"
+X-IronPort-AV: E=Sophos;i="5.73,442,1583211600"; d="scan'208";a="18850558"
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 09/14] x86/spec-ctrl: Adjust DO_OVERWRITE_RSB to be shadow
- stack compatible
-Date: Wed, 27 May 2020 20:18:42 +0100
-Message-ID: <20200527191847.17207-10-andrew.cooper3@citrix.com>
+Subject: [PATCH v2 07/14] x86/cpu: Adjust enable_nmis() to be shadow stack
+ compatible
+Date: Wed, 27 May 2020 20:18:40 +0100
+Message-ID: <20200527191847.17207-8-andrew.cooper3@citrix.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20200527191847.17207-1-andrew.cooper3@citrix.com>
 References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
@@ -72,9 +71,14 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-The 32 calls need dropping from the shadow stack as well as the regular stack.
-To shorten the code, we can use the 32bit forms of RDSSP/INCSSP, but need to
-double up the input to INCSSP to counter the operand size based multiplier.
+When executing an IRET-to-self, the shadow stack must agree with the regular
+stack.  We can't manipulate SSP directly, so have to fake a shadow IRET frame
+by executing 3 CALLs, then editing the result to look correct.
+
+This is not a fastpath, is called on the BSP long before CET can be set up,
+and may be called on the crash path after CET is disabled.  Use the fact that
+INCSSP is allocated from the hint nop space to construct a test for CET being
+active which is safe on all processors.
 
 Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
@@ -83,43 +87,64 @@ CC: Jan Beulich <JBeulich@suse.com>
 CC: Wei Liu <wl@xen.org>
 CC: Roger Pau Monné <roger.pau@citrix.com>
 ---
- xen/include/asm-x86/spec_ctrl_asm.h | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+ xen/include/asm-x86/processor.h | 43 +++++++++++++++++++++++++++++++----------
+ 1 file changed, 33 insertions(+), 10 deletions(-)
 
-diff --git a/xen/include/asm-x86/spec_ctrl_asm.h b/xen/include/asm-x86/spec_ctrl_asm.h
-index c60093b090..cb34299a86 100644
---- a/xen/include/asm-x86/spec_ctrl_asm.h
-+++ b/xen/include/asm-x86/spec_ctrl_asm.h
-@@ -83,9 +83,9 @@
-  * Requires nothing
-  * Clobbers \tmp (%rax by default), %rcx
-  *
-- * Requires 256 bytes of stack space, but %rsp has no net change. Based on
-- * Google's performance numbers, the loop is unrolled to 16 iterations and two
-- * calls per iteration.
-+ * Requires 256 bytes of {,shadow}stack space, but %rsp/SSP has no net
-+ * change. Based on Google's performance numbers, the loop is unrolled to 16
-+ * iterations and two calls per iteration.
-  *
-  * The call filling the RSB needs a nonzero displacement.  A nop would do, but
-  * we use "1: pause; lfence; jmp 1b" to safely contains any ret-based
-@@ -114,6 +114,16 @@
-     sub $1, %ecx
-     jnz .L\@_fill_rsb_loop
-     mov %\tmp, %rsp                 /* Restore old %rsp */
-+
-+#ifdef CONFIG_XEN_SHSTK
-+    mov $1, %ecx
-+    rdsspd %ecx
-+    cmp $1, %ecx
-+    je .L\@_shstk_done
-+    mov $64, %ecx                   /* 64 * 4 bytes, given incsspd */
-+    incsspd %ecx                    /* Restore old SSP */
-+.L\@_shstk_done:
-+#endif
- .endm
+diff --git a/xen/include/asm-x86/processor.h b/xen/include/asm-x86/processor.h
+index 859bd9e2ec..badd7e60e5 100644
+--- a/xen/include/asm-x86/processor.h
++++ b/xen/include/asm-x86/processor.h
+@@ -545,17 +545,40 @@ static inline void enable_nmis(void)
+ {
+     unsigned long tmp;
  
- .macro DO_SPEC_CTRL_ENTRY_FROM_HVM
+-    asm volatile ( "mov %%rsp, %[tmp]     \n\t"
+-                   "push %[ss]            \n\t"
+-                   "push %[tmp]           \n\t"
+-                   "pushf                 \n\t"
+-                   "push %[cs]            \n\t"
+-                   "lea 1f(%%rip), %[tmp] \n\t"
+-                   "push %[tmp]           \n\t"
+-                   "iretq; 1:             \n\t"
+-                   : [tmp] "=&r" (tmp)
++    asm volatile ( "mov     %%rsp, %[rsp]        \n\t"
++                   "lea    .Ldone(%%rip), %[rip] \n\t"
++#ifdef CONFIG_XEN_SHSTK
++                   /* Check for CET-SS being active. */
++                   "mov    $1, %k[ssp]           \n\t"
++                   "rdsspq %[ssp]                \n\t"
++                   "cmp    $1, %k[ssp]           \n\t"
++                   "je     .Lshstk_done          \n\t"
++
++                   /* Push 3 words on the shadow stack */
++                   ".rept 3                      \n\t"
++                   "call 1f; nop; 1:             \n\t"
++                   ".endr                        \n\t"
++
++                   /* Fixup to be an IRET shadow stack frame */
++                   "wrssq  %q[cs], -1*8(%[ssp])  \n\t"
++                   "wrssq  %[rip], -2*8(%[ssp])  \n\t"
++                   "wrssq  %[ssp], -3*8(%[ssp])  \n\t"
++
++                   ".Lshstk_done:"
++#endif
++                   /* Write an IRET regular frame */
++                   "push   %[ss]                 \n\t"
++                   "push   %[rsp]                \n\t"
++                   "pushf                        \n\t"
++                   "push   %q[cs]                \n\t"
++                   "push   %[rip]                \n\t"
++                   "iretq                        \n\t"
++                   ".Ldone:                      \n\t"
++                   : [rip] "=&r" (tmp),
++                     [rsp] "=&r" (tmp),
++                     [ssp] "=&r" (tmp)
+                    : [ss] "i" (__HYPERVISOR_DS),
+-                     [cs] "i" (__HYPERVISOR_CS) );
++                     [cs] "r" (__HYPERVISOR_CS) );
+ }
+ 
+ void sysenter_entry(void);
 -- 
 2.11.0
 
