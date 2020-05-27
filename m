@@ -6,58 +6,60 @@ X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AC1B0C433E2
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 15:04:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 11372C433E0
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 15:06:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7AFA9207CB
-	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 15:04:09 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id D9EE0207CB
+	for <xen-devel@archiver.kernel.org>; Wed, 27 May 2020 15:06:06 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="t9bDoPdJ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7AFA9207CB
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="jYroH60y"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D9EE0207CB
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jdxb0-0005uq-EF; Wed, 27 May 2020 15:03:54 +0000
+	id 1jdxcw-000626-Oi; Wed, 27 May 2020 15:05:54 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=ARaW=7J=xen.org=roger@srs-us1.protection.inumbo.net>)
- id 1jdxFQ-0003lF-G0
- for xen-devel@lists.xenproject.org; Wed, 27 May 2020 14:41:36 +0000
-X-Inumbo-ID: 26d14dce-a028-11ea-9947-bc764e2007e4
+ id 1jdxcw-00061z-4P
+ for xen-devel@lists.xenproject.org; Wed, 27 May 2020 15:05:54 +0000
+X-Inumbo-ID: 8ee513b6-a02b-11ea-9947-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 26d14dce-a028-11ea-9947-bc764e2007e4;
- Wed, 27 May 2020 14:41:30 +0000 (UTC)
+ id 8ee513b6-a02b-11ea-9947-bc764e2007e4;
+ Wed, 27 May 2020 15:05:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:Content-Type:
- MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ MIME-Version:References:Message-ID:Subject:To:From:Date:Sender:Reply-To:Cc:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=62mMkHYb9wXQ+M+kXG8GvEUvOczD2Ydx/xkpqyMXgIE=; b=t9bDoPdJpvG7EfgeWOOjc4YDuD
- TBgIUh1I5IbS15gaDzI2RXn0xmXxhozo9ym2ZA6IkwT0GQBjsBGAm1uN6Xqvf71x4iNzeepQ4JYJy
- OQGbZZ0SByjGlTKnGtBCpH+gm++7SYvHkIKMBinx3+NvPjanqVHOw5RGVOPGA92abX4s=;
+ bh=6c3/y3ONIrPCVAnbVGJRw/qLH1x2DrpPzwDDCf4/n1U=; b=jYroH60y9cMXFRr0Fe/uU9l0Xb
+ M5d+GjmDIyQfj5wZrl/vLaj4iiiQlz6OnnmkMy0AKwVFaaT+8vm7JzKX+ARhpjSyslyF/RiU3VFoh
+ Gu/Ag2sngTaM5bkxKrLn/lorePV+XXewpWIMuu5x0n9mpEsuCA7Q73xT/0Yo+i1n4RmE=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <roger@xen.org>)
- id 1jdxFE-0005N6-Qq; Wed, 27 May 2020 14:41:24 +0000
+ id 1jdxcr-0005vl-Qv; Wed, 27 May 2020 15:05:49 +0000
 Received: from [93.176.191.173] (helo=localhost)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <roger@xen.org>)
- id 1jdxFE-00010X-G7; Wed, 27 May 2020 14:41:24 +0000
-Date: Wed, 27 May 2020 16:41:10 +0200
+ id 1jdxcr-0002MU-GF; Wed, 27 May 2020 15:05:49 +0000
+Date: Wed, 27 May 2020 17:05:39 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xen.org>
-To: Martin Lucina <martin@lucina.net>
+To: Martin Lucina <martin@lucina.net>,
+ =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>, anil@recoil.org,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ mirageos-devel@lists.xenproject.org, dave@recoil.org,
+ xen-devel@lists.xenproject.org
 Subject: Re: Xen PVH domU start-of-day VCPU state
-Message-ID: <20200527143644.GA1195@Air-de-Roger>
-References: <20200525160401.GA3091@nodbug.lucina.net>
- <a17fef73-382c-50b3-1e6b-5904fc3bf60f@suse.com>
- <6a22e477-c9e7-f0d7-6cb1-615137a778be@citrix.com>
+Message-ID: <20200527150539.GB1195@Air-de-Roger>
+References: <6a22e477-c9e7-f0d7-6cb1-615137a778be@citrix.com>
  <20200526085221.GB5942@nodbug.lucina.net>
  <20200526093421.GA38408@Air-de-Roger>
  <20200526100337.GB38408@Air-de-Roger>
@@ -65,12 +67,13 @@ References: <20200525160401.GA3091@nodbug.lucina.net>
  <20200526154224.GC25283@nodbug.lucina.net>
  <20200526163021.GE38408@Air-de-Roger>
  <20200527080008.GC4788@nodbug.lucina.net>
+ <20200527143644.GA1195@Air-de-Roger>
+ <20200527145702.GE4788@nodbug.lucina.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20200527080008.GC4788@nodbug.lucina.net>
-X-Mailman-Approved-At: Wed, 27 May 2020 15:03:53 +0000
+In-Reply-To: <20200527145702.GE4788@nodbug.lucina.net>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,161 +84,86 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>, anil@recoil.org,
- Andrew Cooper <andrew.cooper3@citrix.com>, mirageos-devel@lists.xenproject.org,
- dave@recoil.org, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Wed, May 27, 2020 at 10:00:08AM +0200, Martin Lucina wrote:
-> On Tuesday, 26.05.2020 at 18:30, Roger Pau Monné wrote:
-> > > Turns out that the .note.solo5.xen section as defined in boot.S was not
-> > > marked allocatable, and that was doing <something> that was confusing our
-> > > linker script[1] (?).
+On Wed, May 27, 2020 at 04:57:02PM +0200, Martin Lucina wrote:
+> On Wednesday, 27.05.2020 at 16:41, Roger Pau Monné wrote:
+> > > > > If I make this simple change:
+> > > > > 
+> > > > > --- a/bindings/xen/boot.S
+> > > > > +++ b/bindings/xen/boot.S
+> > > > > @@ -32,7 +32,7 @@
+> > > > >  #define ENTRY(x) .text; .globl x; .type x,%function; x:
+> > > > >  #define END(x)   .size x, . - x
+> > > > > 
+> > > > > -.section .note.solo5.xen
+> > > > > +.section .note.solo5.xen, "a", @note
+> > > > > 
+> > > > >         .align  4
+> > > > >         .long   4
+> > > > > 
+> > > > > then I get the expected output from readelf -lW, and I can get as far as
+> > > > > the C _start() with no issues!
+> > > > > 
+> > > > > FWIW, here's the diff of readelf -lW before/after:
+> > > > > 
+> > > > > --- before	2020-05-26 17:36:46.117885855 +0200
+> > > > > +++ after	2020-05-26 17:38:07.090508322 +0200
+> > > > > @@ -8,9 +8,9 @@
+> > > > >    INTERP         0x001000 0x0000000000100000 0x0000000000100000 0x000018 0x000018 R   0x8
+> > > > >        [Requesting program interpreter: /nonexistent/solo5/]
+> > > > >    LOAD           0x001000 0x0000000000100000 0x0000000000100000 0x00615c 0x00615c R E 0x1000
+> > > > > -  LOAD           0x008000 0x0000000000107000 0x0000000000107000 0x007120 0x00ed28 RW  0x1000
+> > > > > +  LOAD           0x008000 0x0000000000107000 0x0000000000107000 0x006120 0x00dd28 RW  0x1000
+> > > > 
+> > > > This seems suspicious, there's a change of the size of the LOAD
+> > > > section, but your change to the note type should not affect the LOAD
+> > > > section?
+> > > 
+> > > Indeed.
 > > 
-> > Hm, I would have said there was no need to load notes into memory, and
-> > hence using a MemSize of 0 would be fine.
-> > 
-> > Maybe libelf loader was somehow getting confused and not loading the
-> > image properly?
-> > 
-> > Can you paste the output of `xl -vvv create ...` when using the broken
-> > image?
+> > You could try to disassemble the text sections with objdump -d (or -D
+> > for all sections) and see if there's a difference between both
+> > versions, but having solved the issue maybe you just want to move
+> > on.
 > 
-> Here you go:
+> I have moved on, making good progress:
 > 
-> Parsing config from ./test_hello.xl
-> libxl: debug: libxl_create.c:1671:do_domain_create: Domain 0:ao 0x5593c42e7e30: create: how=(nil) callback=(nil) poller=0x5593c42e7670
-> libxl: debug: libxl_create.c:1007:initiate_domain_create: Domain 2:running bootloader
-> libxl: debug: libxl_bootloader.c:335:libxl__bootloader_run: Domain 2:no bootloader configured, using user supplied kernel
-> libxl: debug: libxl_event.c:686:libxl__ev_xswatch_deregister: watch w=0x5593c42e9590: deregister unregistered
-> libxl: debug: libxl_sched.c:82:libxl__set_vcpuaffinity: Domain 2:New soft affinity for vcpu 0 has unreachable cpus
-> domainbuilder: detail: xc_dom_allocate: cmdline="", features=""
-> domainbuilder: detail: xc_dom_kernel_file: filename="test_hello.xen"
-> domainbuilder: detail: xc_dom_malloc_filemap    : 191 kB
-> domainbuilder: detail: xc_dom_boot_xen_init: ver 4.11, caps xen-3.0-x86_64 xen-3.0-x86_32p hvm-3.0-x86_32 hvm-3.0-x86_32p hvm-3.0-x86_64
-> domainbuilder: detail: xc_dom_parse_image: called
-> domainbuilder: detail: xc_dom_find_loader: trying multiboot-binary loader ...
-> domainbuilder: detail: loader probe failed
-> domainbuilder: detail: xc_dom_find_loader: trying HVM-generic loader ...
-> domainbuilder: detail: loader probe failed
-> domainbuilder: detail: xc_dom_find_loader: trying Linux bzImage loader ...
-> domainbuilder: detail: xc_dom_probe_bzimage_kernel: kernel is not a bzImage
-> domainbuilder: detail: loader probe failed
-> domainbuilder: detail: xc_dom_find_loader: trying ELF-generic loader ...
-> domainbuilder: detail: loader probe OK
-> xc: detail: ELF: phdr: paddr=0x100000 memsz=0x6264
-> xc: detail: ELF: phdr: paddr=0x107000 memsz=0xed48
-> xc: detail: ELF: memory: 0x100000 -> 0x115d48
-> xc: detail: ELF: note: PHYS32_ENTRY = 0x100020
-> xc: detail: ELF: Found PVH image
-> xc: detail: ELF: VIRT_BASE unset, using 0
-> xc: detail: ELF_PADDR_OFFSET unset, using 0
-> xc: detail: ELF: addresses:
-> xc: detail:     virt_base        = 0x0
-> xc: detail:     elf_paddr_offset = 0x0
-> xc: detail:     virt_offset      = 0x0
-> xc: detail:     virt_kstart      = 0x100000
-> xc: detail:     virt_kend        = 0x115d48
-> xc: detail:     virt_entry       = 0x1001e0
-> xc: detail:     p2m_base         = 0xffffffffffffffff
-> domainbuilder: detail: xc_dom_parse_elf_kernel: hvm-3.0-x86_32: 0x100000 -> 0x115d48
-> domainbuilder: detail: xc_dom_mem_init: mem 256 MB, pages 0x10000 pages, 4k each
-> domainbuilder: detail: xc_dom_mem_init: 0x10000 pages
-> domainbuilder: detail: xc_dom_boot_mem_init: called
-> domainbuilder: detail: range: start=0x0 end=0x10000400
-> domainbuilder: detail: xc_dom_malloc            : 512 kB
-> xc: detail: PHYSICAL MEMORY ALLOCATION:
-> xc: detail:   4KB PAGES: 0x0000000000000c00
-> xc: detail:   2MB PAGES: 0x000000000000007a
-> xc: detail:   1GB PAGES: 0x0000000000000000
-> domainbuilder: detail: xc_dom_build_image: called
-> domainbuilder: detail: xc_dom_pfn_to_ptr_retcount: domU mapping: pfn 0x100+0x16 at 0x7f5609445000
-> domainbuilder: detail: xc_dom_alloc_segment:   kernel       : 0x100000 -> 0x116000  (pfn 0x100 + 0x16 pages)
-> xc: detail: ELF: phdr 1 at 0x7f5609445000 -> 0x7f560944b264
-> xc: detail: ELF: phdr 2 at 0x7f560944c000 -> 0x7f5609453120
-> domainbuilder: detail: xc_dom_load_acpi: 64 bytes at address fc008000
-> domainbuilder: detail: xc_dom_load_acpi: 4096 bytes at address fc000000
-> domainbuilder: detail: xc_dom_load_acpi: 28672 bytes at address fc001000
-> domainbuilder: detail: xc_dom_pfn_to_ptr_retcount: domU mapping: pfn 0x116+0x1 at 0x7f5609ace000
-> domainbuilder: detail: xc_dom_alloc_segment:   HVM start info : 0x116000 -> 0x117000  (pfn 0x116 + 0x1 pages)
-> domainbuilder: detail: alloc_pgtables_hvm: doing nothing
-> domainbuilder: detail: xc_dom_build_image  : virt_alloc_end : 0x117000
-> domainbuilder: detail: xc_dom_build_image  : virt_pgtab_end : 0x0
-> domainbuilder: detail: xc_dom_boot_image: called
-> domainbuilder: detail: xc_dom_compat_check: supported guest type: xen-3.0-x86_64
-> domainbuilder: detail: xc_dom_compat_check: supported guest type: xen-3.0-x86_32p
-> domainbuilder: detail: xc_dom_compat_check: supported guest type: hvm-3.0-x86_32 <= matches
-> domainbuilder: detail: xc_dom_compat_check: supported guest type: hvm-3.0-x86_32p
-> domainbuilder: detail: xc_dom_compat_check: supported guest type: hvm-3.0-x86_64
-> domainbuilder: detail: domain builder memory footprint
-> domainbuilder: detail:    allocated
-> domainbuilder: detail:       malloc             : 515 kB
-> domainbuilder: detail:       anon mmap          : 0 bytes
-> domainbuilder: detail:    mapped
-> domainbuilder: detail:       file mmap          : 191 kB
-> domainbuilder: detail:       domU mmap          : 92 kB
-> domainbuilder: detail: vcpu_hvm: called
-> domainbuilder: detail: xc_dom_gnttab_hvm_seed: called, pfn=0xff000
-> domainbuilder: detail: xc_dom_gnttab_hvm_seed: called, pfn=0xff001
-> domainbuilder: detail: xc_dom_release: called
-> libxl: debug: libxl_event.c:2194:libxl__ao_progress_report: ao 0x5593c42e7e30: progress report: callback queued aop=0x5593c42fea10
-> libxl: debug: libxl_event.c:1869:libxl__ao_complete: ao 0x5593c42e7e30: complete, rc=0
-> libxl: debug: libxl_event.c:1404:egc_run_callbacks: ao 0x5593c42e7e30: progress report: callback aop=0x5593c42fea10
-> libxl: debug: libxl_create.c:1708:do_domain_create: Domain 0:ao 0x5593c42e7e30: inprogress: poller=0x5593c42e7670, flags=ic
-> libxl: debug: libxl_event.c:1838:libxl__ao__destroy: ao 0x5593c42e7e30: destroy
-> xencall:buffer: debug: total allocations:233 total releases:233
-> xencall:buffer: debug: current allocations:0 maximum allocations:3
-> xencall:buffer: debug: cache current size:3
-> xencall:buffer: debug: cache hits:215 misses:3 toobig:15
-> xencall:buffer: debug: total allocations:0 total releases:0
-> xencall:buffer: debug: current allocations:0 maximum allocations:0
-> xencall:buffer: debug: cache current size:0
-> xencall:buffer: debug: cache hits:0 misses:0 toobig:0
-
-That looks fine AFAICT. The program headers seems to be correctly
-identified and sized.
-
-> > 
-> > > 
-> > > If I make this simple change:
-> > > 
-> > > --- a/bindings/xen/boot.S
-> > > +++ b/bindings/xen/boot.S
-> > > @@ -32,7 +32,7 @@
-> > >  #define ENTRY(x) .text; .globl x; .type x,%function; x:
-> > >  #define END(x)   .size x, . - x
-> > > 
-> > > -.section .note.solo5.xen
-> > > +.section .note.solo5.xen, "a", @note
-> > > 
-> > >         .align  4
-> > >         .long   4
-> > > 
-> > > then I get the expected output from readelf -lW, and I can get as far as
-> > > the C _start() with no issues!
-> > > 
-> > > FWIW, here's the diff of readelf -lW before/after:
-> > > 
-> > > --- before	2020-05-26 17:36:46.117885855 +0200
-> > > +++ after	2020-05-26 17:38:07.090508322 +0200
-> > > @@ -8,9 +8,9 @@
-> > >    INTERP         0x001000 0x0000000000100000 0x0000000000100000 0x000018 0x000018 R   0x8
-> > >        [Requesting program interpreter: /nonexistent/solo5/]
-> > >    LOAD           0x001000 0x0000000000100000 0x0000000000100000 0x00615c 0x00615c R E 0x1000
-> > > -  LOAD           0x008000 0x0000000000107000 0x0000000000107000 0x007120 0x00ed28 RW  0x1000
-> > > +  LOAD           0x008000 0x0000000000107000 0x0000000000107000 0x006120 0x00dd28 RW  0x1000
-> > 
-> > This seems suspicious, there's a change of the size of the LOAD
-> > section, but your change to the note type should not affect the LOAD
-> > section?
+>     domainbuilder: detail: xc_dom_release: called
+>     Hello, world!
+>     Solo5: Xen hvm_start_info @0x0000000000119000
+>     Solo5: magic=0x336ec578 version=1
+>     Solo5: cmdline_paddr=0x0
+>     Solo5: memmap_paddr=0x119878 entries=5
+>     Solo5: memmap[0] = { 0x0, 0x10000400, 1 }
+>     Solo5: mem_size=0x10000000
+>                 |      ___|
+>       __|  _ \  |  _ \ __ \
+>     \__ \ (   | | (   |  ) |
+>     ____/\___/ _|\___/____/
+>     Solo5: Bindings version v0.6.5-4-g57724f8-dirty
+>     Solo5: Memory map: 256 MB addressable:
+>     Solo5:   reserved @ (0x0 - 0xfffff)
+>     Solo5:       text @ (0x100000 - 0x104fff)
+>     Solo5:     rodata @ (0x105000 - 0x106fff)
+>     Solo5:       data @ (0x107000 - 0x118fff)
+>     Solo5:       heap >= 0x119000 < stack < 0x10000000
+>     Solo5: Clock source: KVM paravirtualized clock
+>     Solo5: trap: type=#GP ec=0x0 rip=0x103a96 rsp=0xfffff90 rflags=0x2
+>     Solo5: ABORT: cpu_x86_64.c:181: Fatal trap
+>     Solo5: Halted
 > 
-> Indeed.
+> (The #GP is due to the timekeeping code not yet ported to Xen).
+> 
+> Random question: With memory="256" in the xl config, why is the size of the
+> first XEN_HVM_MEMMAP_TYPE_RAM memmap entry not a multiple of PAGE_SIZE? I
+> had to align it down, since we put the stack at the top of RAM. 0x10000400
+> seems... odd.
 
-You could try to disassemble the text sections with objdump -d (or -D
-for all sections) and see if there's a difference between both
-versions, but having solved the issue maybe you just want to move
-on.
+IIRC some memory is stolen by the domain builder to place stuff (like
+the ACPI tables), and the end is not aligned to a page size boundary
+because it's not mandatory.
 
 Roger.
 
