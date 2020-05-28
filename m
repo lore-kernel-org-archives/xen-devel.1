@@ -2,80 +2,86 @@ Return-Path: <SRS0=RRgd=7K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=3.4.0
+	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0047DC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8165AC433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 22:36:07 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C0502206F1
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:57:52 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4C82F206F1
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 22:36:07 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="h1V9ZGAu"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0502206F1
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="sYf34wsp"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4C82F206F1
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeQX0-0004pr-7R; Thu, 28 May 2020 21:57:42 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=HyPx=7K=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1jeQWy-0004pm-8C
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:57:40 +0000
-X-Inumbo-ID: 3fd483c0-a12e-11ea-a843-12813bfff9fa
-Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 3fd483c0-a12e-11ea-a843-12813bfff9fa;
- Thu, 28 May 2020 21:57:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590703059;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Uy2/hCClOi0N+cvDZXjD2eV1wRJxIY+lbAjkHKJLR28=;
- b=h1V9ZGAuM0IrEHlw959s4QWtMtuxGKjTYbR415i4kmoY8g78MyxzEu7hlIFlUI5C8zjNDL
- jdnPeA5AD/ZNV85sNyGXfUHnQD8M9jUD8S8TAt7kkn8Votz3V2WFgaIoq6Om/BY9X1LYCS
- 3vNCsUe0EvwKV/YOW5xfCW513N0Qye4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-362-r5kJoFc-NyGbktdslDHbpA-1; Thu, 28 May 2020 17:57:33 -0400
-X-MC-Unique: r5kJoFc-NyGbktdslDHbpA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7CC2218FF660;
- Thu, 28 May 2020 21:57:31 +0000 (UTC)
-Received: from [10.3.112.88] (ovpn-112-88.phx2.redhat.com [10.3.112.88])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id F1F689CA0;
- Thu, 28 May 2020 21:57:22 +0000 (UTC)
-Subject: Re: [PATCH v7 7/8] qdev-properties: add getter for size32 and
- blocksize
-To: Roman Kagan <rvkagan@yandex-team.ru>, qemu-devel@nongnu.org
+	id 1jeR7W-0008B6-42; Thu, 28 May 2020 22:35:26 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=leMz=7K=yandex-team.ru=rvkagan@srs-us1.protection.inumbo.net>)
+ id 1jeR7U-0008B1-6M
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 22:35:24 +0000
+X-Inumbo-ID: 83794f0c-a133-11ea-81bc-bc764e2007e4
+Received: from forwardcorp1j.mail.yandex.net (unknown [5.45.199.163])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 83794f0c-a133-11ea-81bc-bc764e2007e4;
+ Thu, 28 May 2020 22:35:21 +0000 (UTC)
+Received: from mxbackcorp1o.mail.yandex.net (mxbackcorp1o.mail.yandex.net
+ [IPv6:2a02:6b8:0:1a2d::301])
+ by forwardcorp1j.mail.yandex.net (Yandex) with ESMTP id ACCCD2E0E4D;
+ Fri, 29 May 2020 01:35:19 +0300 (MSK)
+Received: from sas1-9998cec34266.qloud-c.yandex.net
+ (sas1-9998cec34266.qloud-c.yandex.net [2a02:6b8:c14:3a0e:0:640:9998:cec3])
+ by mxbackcorp1o.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
+ BuNyaWpDN3-ZFxKo312; Fri, 29 May 2020 01:35:19 +0300
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
+ s=default; 
+ t=1590705319; bh=8cadgulWOGNTQdBMKpVo058EzTWu105wWXqXNmDyI2Q=;
+ h=In-Reply-To:Message-ID:Subject:To:From:References:Date:Cc;
+ b=sYf34wspRvEm3uY0kJIMbV/vm1gg+TU5JxAbj4M8vapwXTBr32eWTdNBhLvq6bb6U
+ Hod9ijXHn9stbImabjisBTH/JszZKMdPX4/OHYmcMAw6QWFoXs6gk20Vmsq0qf8rhQ
+ eHr35kE05eJVjVk9Dj46B1n6R5mibG0sH1ks+Bh0=
+Authentication-Results: mxbackcorp1o.mail.yandex.net;
+ dkim=pass header.i=@yandex-team.ru
+Received: from dynamic-vpn.dhcp.yndx.net (dynamic-vpn.dhcp.yndx.net
+ [2a02:6b8:b081:1318::1:10])
+ by sas1-9998cec34266.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
+ 9jfGj8qT6B-ZFXuqeYQ; Fri, 29 May 2020 01:35:15 +0300
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (Client certificate not present)
+Date: Fri, 29 May 2020 01:35:14 +0300
+From: Roman Kagan <rvkagan@yandex-team.ru>
+To: Eric Blake <eblake@redhat.com>
+Subject: Re: [PATCH v7 4/8] qdev-properties: add size32 property type
+Message-ID: <20200528223514.GA1255099@rvkaganb.lan>
+Mail-Followup-To: Roman Kagan <rvkagan@yandex-team.ru>,
+ Eric Blake <eblake@redhat.com>, qemu-devel@nongnu.org,
+ Gerd Hoffmann <kraxel@redhat.com>, Max Reitz <mreitz@redhat.com>,
+ John Snow <jsnow@redhat.com>, Keith Busch <kbusch@kernel.org>,
+ Kevin Wolf <kwolf@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
+ Paul Durrant <paul@xen.org>, xen-devel@lists.xenproject.org,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Fam Zheng <fam@euphon.net>, qemu-block@nongnu.org,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Eduardo Habkost <ehabkost@redhat.com>
 References: <20200528213946.1636444-1-rvkagan@yandex-team.ru>
- <20200528213946.1636444-8-rvkagan@yandex-team.ru>
-From: Eric Blake <eblake@redhat.com>
-Organization: Red Hat, Inc.
-Message-ID: <d727b621-071e-e061-2c7f-d14798bdf681@redhat.com>
-Date: Thu, 28 May 2020 16:57:22 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+ <20200528213946.1636444-5-rvkagan@yandex-team.ru>
+ <78e3587a-efea-970a-b47e-8d187464d955@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20200528213946.1636444-8-rvkagan@yandex-team.ru>
-Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <78e3587a-efea-970a-b47e-8d187464d955@redhat.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,37 +94,67 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
  Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
+ Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
  Eduardo Habkost <ehabkost@redhat.com>, qemu-block@nongnu.org,
  Paul Durrant <paul@xen.org>,
- =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
+ Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, qemu-devel@nongnu.org,
  Max Reitz <mreitz@redhat.com>, Anthony Perard <anthony.perard@citrix.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Keith Busch <kbusch@kernel.org>,
- xen-devel@lists.xenproject.org, John Snow <jsnow@redhat.com>
+ xen-devel@lists.xenproject.org, John Snow <jsnow@redhat.com>,
+ Laurent Vivier <laurent@vivier.eu>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 5/28/20 4:39 PM, Roman Kagan wrote:
-> Add getter for size32, and use it for blocksize, too.
+On Thu, May 28, 2020 at 04:45:19PM -0500, Eric Blake wrote:
+> On 5/28/20 4:39 PM, Roman Kagan wrote:
+> > Introduce size32 property type which handles size suffixes (k, m) just
+> > like size property, but is uint32_t rather than uint64_t.
 > 
-> In its human-readable branch, it reports approximate size in
-> human-readable units next to the exact byte value, like the getter for
-> 64bit size does.
+> Does it handle 'g' as well? (even though the set of valid 32-bit sizes with
+> a g suffix is rather small ;)
 > 
-> Adjust the expected test output accordingly.
+> >  It's going to
+> > be useful for properties that are byte sizes but are inherently 32bit,
+> > like BlkConf.opt_io_size or .discard_granularity (they are switched to
+> > this new property type in a followup commit).
+> > 
+> > The getter for size32 is left out for a separate patch as its benefit is
+> > less obvious, and it affects test output; for now the regular uint32
+> > getter is used.
+> > 
+> > Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
+> > ---
+> > 
 > 
-> Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
-> ---
-> v6 -> v7:
-> - split out into separate patch [Eric]
+> > +static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
+> > +                       Error **errp)
+> > +{
+> > +    DeviceState *dev = DEVICE(obj);
+> > +    Property *prop = opaque;
+> > +    uint32_t *ptr = qdev_get_prop_ptr(dev, prop);
+> > +    uint64_t value;
+> > +    Error *local_err = NULL;
+> > +
+> > +    if (dev->realized) {
+> > +        qdev_prop_set_after_realize(dev, name, errp);
+> > +        return;
+> > +    }
+> > +
+> > +    visit_type_size(v, name, &value, &local_err);
+> 
+> Yes, it does.
+> 
+> Whether or not the commit message is tweaked,
+> Reviewed-by: Eric Blake <eblake@redhat.com>
 
-Reviewed-by: Eric Blake <eblake@redhat.com>
+I did this stupid stringify(UINT32_MAX) here too.  It's even uglier
+here, with an 'U' appended to the number in the brackets, but somehow it
+didn't strike me in the eye while testing.
 
--- 
-Eric Blake, Principal Software Engineer
-Red Hat, Inc.           +1-919-301-3226
-Virtualization:  qemu.org | libvirt.org
+So I'll fix this too in the respin, and drop the r-b.
 
+Thanks,
+Roman.
 
