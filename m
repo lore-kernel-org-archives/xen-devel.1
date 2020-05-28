@@ -2,63 +2,65 @@ Return-Path: <SRS0=RRgd=7K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D4E14C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id BF375C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:29:59 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id B2F6A20721
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:29:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B2F6A20721
+	by mail.kernel.org (Postfix) with ESMTPS id 9D4F420721
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:29:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9D4F420721
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeQ5a-0000S6-GX; Thu, 28 May 2020 21:29:22 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jeQ5g-0000SL-Pk; Thu, 28 May 2020 21:29:28 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LyZP=7K=gmail.com=raistlin.df@srs-us1.protection.inumbo.net>)
- id 1jeQ5Z-0000S1-Bo
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:29:21 +0000
-X-Inumbo-ID: 4a5e06f8-a12a-11ea-a83e-12813bfff9fa
+ id 1jeQ5f-0000SE-BZ
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:29:27 +0000
+X-Inumbo-ID: 4e3be89e-a12a-11ea-8993-bc764e2007e4
 Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 4a5e06f8-a12a-11ea-a83e-12813bfff9fa;
- Thu, 28 May 2020 21:29:20 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id l10so879226wrr.10
- for <xen-devel@lists.xenproject.org>; Thu, 28 May 2020 14:29:20 -0700 (PDT)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4e3be89e-a12a-11ea-8993-bc764e2007e4;
+ Thu, 28 May 2020 21:29:26 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id x6so839989wrm.13
+ for <xen-devel@lists.xenproject.org>; Thu, 28 May 2020 14:29:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:from:to:cc:date:message-id:user-agent
- :mime-version:content-transfer-encoding;
- bh=SdCpL4YJ7rILVK5R+t0Bn3JMeoXxs9gIE9CZ+hqvM/w=;
- b=SeLjkQwfxtmmoYMh1CfAw8J86FvIRnZAvmR8/nuRQMxrZRurvJaT2Nrq0dAm7R6734
- W9U74QpwV50Cs/lSzws1kyAccSZyJ7CKzlCl6xSdloIAxkTwTQIHyVzNhjRIg4dOMMsd
- l5bblpqscZiWRbjRJqhQbvRC1GWm7LMk57WxWcb8onSIA3glfi0GL5dsm3vzGhbdGEAG
- GUqCYTni/4EaS8t9QGEfPXlqcUt4AKhAxdhmWhbjMNDEpeDhdWekkMlbP2y6k+irh+Vj
- XLGBOtP7tL4FP9TeS813b0LNSXbLb+ukm1iiRkI+i8h0xKfmD71dGA4jJxMadBu5ziRS
- HKZg==
-X-Gm-Message-State: AOAM532Wyi1VZcsa9CKGtxkLWKveslo7VhD9tvrMB2az0kw3xJfX2T6F
- tDfBZJhtpN03YSNJsJ/icZ8=
-X-Google-Smtp-Source: ABdhPJyCoIGMmcnF8v9uTYF7aqYO01PCHMgMjnnglVHCOHxL4uvLI8XnpKjQzs2Q2RcO05nmYi8stg==
-X-Received: by 2002:adf:a51b:: with SMTP id i27mr5271422wrb.173.1590701359139; 
- Thu, 28 May 2020 14:29:19 -0700 (PDT)
+ h=x-gm-message-state:subject:from:to:cc:date:message-id:in-reply-to
+ :references:user-agent:mime-version:content-transfer-encoding;
+ bh=JBpkxXxyifxfXBjwP1Ac2WLMkdMOyk1zAam+z/GHBmg=;
+ b=ISUONMeK9D/WCUOtqVufpoY5qKXiYNIIA8PSggey/W7A7gYNcpu1ghO6f33Dg1Wi6n
+ 3hJ2bX/loxqIb1Cxx0OYr6MV2iG2vRdS6551jflbwQKSpRuKKxiRYhcMDPHcvDZgl+qE
+ xmgf00kfEEcx+l+1MyJZq2v8OHbASRdAdAKP0uIZIpSxJ1zFHDF6L9h0D19phBeTF175
+ krje1XT/YlJuv6yg0Eaf4QPBg1MHDV6/XR6CTIRCsNv4ieUaY/pzXxH0FArYFMJL3Aib
+ IgHw36Hul68uv780YmydvZw7LboqPhZF3NVSrH0Wt1q+zMWlDtTpmjgSOirAfGAgmUDR
+ WyGQ==
+X-Gm-Message-State: AOAM531T1Uh5gENu4d26PMQFIkTXkU0SYenQ/WG/DqKbDwSH0kbdUqfw
+ kA9Cc+SDv3VGi3Vml4L5k6sKVytE
+X-Google-Smtp-Source: ABdhPJxZDMoEaDChbbXxfLrdkKE5tLhILEdSe7ifgSNEpvEpXkayrtHxOHruayVsuicYAMU2jV2edQ==
+X-Received: by 2002:a5d:68c2:: with SMTP id p2mr5351046wrw.253.1590701365691; 
+ Thu, 28 May 2020 14:29:25 -0700 (PDT)
 Received: from [192.168.0.36] (87.78.186.89.cust.ip.kpnqwest.it.
  [89.186.78.87])
- by smtp.gmail.com with ESMTPSA id k12sm5324286wrn.42.2020.05.28.14.29.18
+ by smtp.gmail.com with ESMTPSA id d2sm6729892wrs.95.2020.05.28.14.29.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 May 2020 14:29:18 -0700 (PDT)
-Subject: [PATCH v2 0/7] xen: credit2: limit the number of CPUs per runqueue
+ Thu, 28 May 2020 14:29:25 -0700 (PDT)
+Subject: [PATCH v2 1/7] xen: credit2: factor cpu to runqueue matching in a
+ function
 From: Dario Faggioli <dfaggioli@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 28 May 2020 23:29:17 +0200
-Message-ID: <159070133878.12060.13318432301910522647.stgit@Palanthas>
+Date: Thu, 28 May 2020 23:29:24 +0200
+Message-ID: <159070136424.12060.2223986236933194278.stgit@Palanthas>
+In-Reply-To: <159070133878.12060.13318432301910522647.stgit@Palanthas>
+References: <159070133878.12060.13318432301910522647.stgit@Palanthas>
 User-Agent: StGit/0.21
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -73,97 +75,78 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, George Dunlap <george.dunlap@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hello!
+Just move the big if() condition in an inline function.
 
-Here's v2 of this series... a bit late, but technically still in time
-for code-freeze, although I understand this is quite tight! :-P
+No functional change intended.
 
-Anyway, In Credit2, the CPUs are assigned to runqueues according to the
-host topology. For instance, if we want per-socket runqueues (which is
-the default), the CPUs that are in the same socket will end up in the
-same runqueue.
-
-This is generally good for scalability, at least until the number of
-CPUs that end up in the same runqueue is not too high. In fact, all this
-CPUs will compete for the same spinlock, for making scheduling decisions
-and manipulating the scheduler data structures. Therefore, if they are
-too many, that can become a bottleneck.
-
-This has not been an issue so far, but architectures with 128 CPUs per
-socket are now available, and it is certainly unideal to have so many
-CPUs in the same runqueue, competing for the same locks, etc.
-
-Let's therefore set a cap to the total number of CPUs that can share a
-runqueue. The value is set to 16, by default, but can be changed with
-a boot command line parameter.
-
-Note also that, if the host has hyperthreading (or equivalent), and we
-are not using core-scheduling), additional care is taken to avoid splitting
-CPUs that are hyperthread siblings among different runqueues.
-
-In v2, in addition to trying to address the review comments, I've added
-the logic for doing a full rebalance of the scheduler runqueues, while
-the system is running. This is actually something that itself came up
-during review of v1, when we realized that we do not only wanted a cap,
-we also wanted some balancing, and if you want real balancing, you have
-to be able to re-arrange the runqueue layout, dynamically.
-
-It took a while because I, although I had something that looked a lot
-like the final solution implemented in this patch, could not see how to
-solve cleanly and effectively the issue of having the vCPUs in the
-runqueues, while trying to re-balance them. It was while talking with
-Juergen that we figured out that we can actually pause the domains,
-which I had not thought at... So, once again, Juergen, thanks! :-)
-
-I have done the most of the stress testing with core-scheduling
-disabled, and it has survived to anything I threw at it, but of course
-the more testing the better, and I will be able to actually do more of
-it, in the coming days.
-
-IAC, I have also verified that at least a few core-scheduling enabled
-configs also work.
-
-There are git branches here:
- git://xenbits.xen.org/people/dariof/xen.git  sched/credit2-max-cpus-runqueue-v2
- http://xenbits.xen.org/gitweb/?p=people/dariof/xen.git;a=shortlog;h=refs/heads/sched/credit2-max-cpus-runqueue-v2
-
- https://github.com/dfaggioli/xen/tree/sched/credit2-max-cpus-runqueue-v2
-
-While v1 is at the following link:
- https://lore.kernel.org/xen-devel/158818022727.24327.14309662489731832234.stgit@Palanthas/T/#m1e885a0f0a1feef83790ac179ab66512201cb770
-
-Thanks and Regards
+Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
 ---
-Dario Faggioli (7):
-      xen: credit2: factor cpu to runqueue matching in a function
-      xen: credit2: factor runqueue initialization in its own function.
-      xen: cpupool: add a back-pointer from a scheduler to its pool
-      xen: credit2: limit the max number of CPUs in a runqueue
-      xen: credit2: compute cpus per-runqueue more dynamically.
-      cpupool: create an the 'cpupool sync' infrastructure
-      xen: credit2: rebalance the number of CPUs in the scheduler runqueues
+Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Juergen Gross <jgross@suse.com>
+---
+ xen/common/sched/credit2.c |   28 +++++++++++++++++-----------
+ 1 file changed, 17 insertions(+), 11 deletions(-)
 
- docs/misc/xen-command-line.pandoc |   14 +
- xen/common/sched/cpupool.c        |   53 ++++
- xen/common/sched/credit2.c        |  437 ++++++++++++++++++++++++++++++++++---
- xen/common/sched/private.h        |    7 +
- xen/include/asm-arm/cpufeature.h  |    5 
- xen/include/asm-x86/processor.h   |    5 
- xen/include/xen/sched.h           |    1 
- 7 files changed, 491 insertions(+), 31 deletions(-)
+diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
+index 34f05c3e2a..697c9f917d 100644
+--- a/xen/common/sched/credit2.c
++++ b/xen/common/sched/credit2.c
+@@ -838,6 +838,20 @@ static inline bool same_core(unsigned int cpua, unsigned int cpub)
+            cpu_to_core(cpua) == cpu_to_core(cpub);
+ }
+ 
++static inline bool
++cpu_runqueue_match(const struct csched2_runqueue_data *rqd, unsigned int cpu)
++{
++    unsigned int peer_cpu = rqd->pick_bias;
++
++    BUG_ON(cpu_to_socket(peer_cpu) == XEN_INVALID_SOCKET_ID);
++
++    /* OPT_RUNQUEUE_CPU will never find an existing runqueue. */
++    return opt_runqueue == OPT_RUNQUEUE_ALL ||
++           (opt_runqueue == OPT_RUNQUEUE_CORE && same_core(peer_cpu, cpu)) ||
++           (opt_runqueue == OPT_RUNQUEUE_SOCKET && same_socket(peer_cpu, cpu)) ||
++           (opt_runqueue == OPT_RUNQUEUE_NODE && same_node(peer_cpu, cpu));
++}
++
+ static struct csched2_runqueue_data *
+ cpu_add_to_runqueue(struct csched2_private *prv, unsigned int cpu)
+ {
+@@ -855,21 +869,11 @@ cpu_add_to_runqueue(struct csched2_private *prv, unsigned int cpu)
+     rqd_ins = &prv->rql;
+     list_for_each_entry ( rqd, &prv->rql, rql )
+     {
+-        unsigned int peer_cpu;
+-
+         /* Remember first unused queue index. */
+         if ( !rqi_unused && rqd->id > rqi )
+             rqi_unused = true;
+ 
+-        peer_cpu = rqd->pick_bias;
+-        BUG_ON(cpu_to_socket(cpu) == XEN_INVALID_SOCKET_ID ||
+-               cpu_to_socket(peer_cpu) == XEN_INVALID_SOCKET_ID);
+-
+-        /* OPT_RUNQUEUE_CPU will never find an existing runqueue. */
+-        if ( opt_runqueue == OPT_RUNQUEUE_ALL ||
+-             (opt_runqueue == OPT_RUNQUEUE_CORE && same_core(peer_cpu, cpu)) ||
+-             (opt_runqueue == OPT_RUNQUEUE_SOCKET && same_socket(peer_cpu, cpu)) ||
+-             (opt_runqueue == OPT_RUNQUEUE_NODE && same_node(peer_cpu, cpu)) )
++        if ( cpu_runqueue_match(rqd, cpu) )
+         {
+             rqd_valid = true;
+             break;
+@@ -3744,6 +3748,8 @@ csched2_alloc_pdata(const struct scheduler *ops, int cpu)
+     struct csched2_pcpu *spc;
+     struct csched2_runqueue_data *rqd;
+ 
++    BUG_ON(cpu_to_socket(cpu) == XEN_INVALID_SOCKET_ID);
++
+     spc = xzalloc(struct csched2_pcpu);
+     if ( spc == NULL )
+         return ERR_PTR(-ENOMEM);
 
---
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
 
