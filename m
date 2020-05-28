@@ -2,70 +2,78 @@ Return-Path: <SRS0=RRgd=7K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9B43FC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:40:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6BC45C433DF
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:46:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 53D452088E
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:40:57 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 33E5D208DB
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:46:05 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="aa9r5LeB"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 53D452088E
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="DxGuYlkA"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 33E5D208DB
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeQGZ-00031V-Ea; Thu, 28 May 2020 21:40:43 +0000
+	id 1jeQLJ-0003iP-LC; Thu, 28 May 2020 21:45:37 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=leMz=7K=yandex-team.ru=rvkagan@srs-us1.protection.inumbo.net>)
- id 1jeQGX-00030V-Mx
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:40:41 +0000
-X-Inumbo-ID: defc5566-a12b-11ea-81bc-bc764e2007e4
-Received: from forwardcorp1j.mail.yandex.net (unknown [5.45.199.163])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id defc5566-a12b-11ea-81bc-bc764e2007e4;
- Thu, 28 May 2020 21:40:39 +0000 (UTC)
-Received: from mxbackcorp2j.mail.yandex.net (mxbackcorp2j.mail.yandex.net
- [IPv6:2a02:6b8:0:1619::119])
- by forwardcorp1j.mail.yandex.net (Yandex) with ESMTP id 45A832E0E4D;
- Fri, 29 May 2020 00:40:38 +0300 (MSK)
-Received: from vla5-58875c36c028.qloud-c.yandex.net
- (vla5-58875c36c028.qloud-c.yandex.net [2a02:6b8:c18:340b:0:640:5887:5c36])
- by mxbackcorp2j.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
- 3z677wbNTe-eXfGAqPR; Fri, 29 May 2020 00:40:38 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
- s=default; 
- t=1590702038; bh=Xz7jW75qNhpFVuRV01Pk9lJa6te4Bxqql0EsizkrxTU=;
- h=In-Reply-To:Message-Id:References:Date:Subject:To:From:Cc;
- b=aa9r5LeBt1dZoSoHCzm7DsFEbKay4sCQSO4XVOTcKvDtqlS/3xyG51daRWUprygk/
- IKN7DD8DHVu5oEI8TTdII34upiI1idGFbLgW+yLJ4sYrlB0CY3BZ4Sr/g9ukkY3Egy
- 4EC3E+Teqeh2keDgtvz8RmoF6z1UcVOq7x5XsQmw=
-Authentication-Results: mxbackcorp2j.mail.yandex.net;
- dkim=pass header.i=@yandex-team.ru
-Received: from dynamic-vpn.dhcp.yndx.net (dynamic-vpn.dhcp.yndx.net
- [2a02:6b8:b081:1318::1:10])
- by vla5-58875c36c028.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
- KqoauPPys3-eXXqGFjw; Fri, 29 May 2020 00:40:33 +0300
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (Client certificate not present)
-From: Roman Kagan <rvkagan@yandex-team.ru>
-To: qemu-devel@nongnu.org
-Subject: [PATCH v7 7/8] qdev-properties: add getter for size32 and blocksize
-Date: Fri, 29 May 2020 00:39:45 +0300
-Message-Id: <20200528213946.1636444-8-rvkagan@yandex-team.ru>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200528213946.1636444-1-rvkagan@yandex-team.ru>
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=HyPx=7K=redhat.com=eblake@srs-us1.protection.inumbo.net>)
+ id 1jeQLI-0003iK-Kt
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:45:36 +0000
+X-Inumbo-ID: 90269c8e-a12c-11ea-9dbe-bc764e2007e4
+Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.120])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 90269c8e-a12c-11ea-9dbe-bc764e2007e4;
+ Thu, 28 May 2020 21:45:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1590702335;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4kww8Kn7lt15WNtiBiHu7yq5dFmH5ZOSHRj6DUAGi/8=;
+ b=DxGuYlkAf7Kwf31oRSntoY9i9vQTUBKuim33NSbUjvKjBninOUujUSS2kNGYXA35H7OGfZ
+ s5qz+OTdOe0yMSkQo6QB61uI0dzemdzpV2ObkcA63ldoDyW2txEWaEJ8tD4qeg7KIF3AZD
+ ItZ7BfRRTP+BUJXj+a8U2t/nvSgY0Fk=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-97-eawdfFkvNqet1I0c3Ybv0Q-1; Thu, 28 May 2020 17:45:31 -0400
+X-MC-Unique: eawdfFkvNqet1I0c3Ybv0Q-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DC4E118FF662;
+ Thu, 28 May 2020 21:45:29 +0000 (UTC)
+Received: from [10.3.112.88] (ovpn-112-88.phx2.redhat.com [10.3.112.88])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 9680D60C87;
+ Thu, 28 May 2020 21:45:19 +0000 (UTC)
+Subject: Re: [PATCH v7 4/8] qdev-properties: add size32 property type
+To: Roman Kagan <rvkagan@yandex-team.ru>, qemu-devel@nongnu.org
 References: <20200528213946.1636444-1-rvkagan@yandex-team.ru>
+ <20200528213946.1636444-5-rvkagan@yandex-team.ru>
+From: Eric Blake <eblake@redhat.com>
+Organization: Red Hat, Inc.
+Message-ID: <78e3587a-efea-970a-b47e-8d187464d955@redhat.com>
+Date: Thu, 28 May 2020 16:45:19 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200528213946.1636444-5-rvkagan@yandex-team.ru>
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,964 +86,62 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
  Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+ =?UTF-8?Q?Daniel_P=2e_Berrang=c3=a9?= <berrange@redhat.com>,
  Eduardo Habkost <ehabkost@redhat.com>, qemu-block@nongnu.org,
- Paul Durrant <paul@xen.org>, Eric Blake <eblake@redhat.com>,
+ Paul Durrant <paul@xen.org>,
+ =?UTF-8?Q?Philippe_Mathieu-Daud=c3=a9?= <philmd@redhat.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <laurent@vivier.eu>,
  Max Reitz <mreitz@redhat.com>, Anthony Perard <anthony.perard@citrix.com>,
  Gerd Hoffmann <kraxel@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
  Paolo Bonzini <pbonzini@redhat.com>, Keith Busch <kbusch@kernel.org>,
- xen-devel@lists.xenproject.org,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- John Snow <jsnow@redhat.com>
+ xen-devel@lists.xenproject.org, John Snow <jsnow@redhat.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Add getter for size32, and use it for blocksize, too.
+On 5/28/20 4:39 PM, Roman Kagan wrote:
+> Introduce size32 property type which handles size suffixes (k, m) just
+> like size property, but is uint32_t rather than uint64_t.
 
-In its human-readable branch, it reports approximate size in
-human-readable units next to the exact byte value, like the getter for
-64bit size does.
+Does it handle 'g' as well? (even though the set of valid 32-bit sizes 
+with a g suffix is rather small ;)
 
-Adjust the expected test output accordingly.
+>  It's going to
+> be useful for properties that are byte sizes but are inherently 32bit,
+> like BlkConf.opt_io_size or .discard_granularity (they are switched to
+> this new property type in a followup commit).
+> 
+> The getter for size32 is left out for a separate patch as its benefit is
+> less obvious, and it affects test output; for now the regular uint32
+> getter is used.
+> 
+> Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
+> ---
+>
 
-Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
----
-v6 -> v7:
-- split out into separate patch [Eric]
+> +static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
+> +                       Error **errp)
+> +{
+> +    DeviceState *dev = DEVICE(obj);
+> +    Property *prop = opaque;
+> +    uint32_t *ptr = qdev_get_prop_ptr(dev, prop);
+> +    uint64_t value;
+> +    Error *local_err = NULL;
+> +
+> +    if (dev->realized) {
+> +        qdev_prop_set_after_realize(dev, name, errp);
+> +        return;
+> +    }
+> +
+> +    visit_type_size(v, name, &value, &local_err);
 
- hw/core/qdev-properties.c  |  15 +-
- tests/qemu-iotests/172.out | 530 ++++++++++++++++++-------------------
- 2 files changed, 278 insertions(+), 267 deletions(-)
+Yes, it does.
 
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index 3cbe3f56a8..8f35d494a4 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -730,6 +730,17 @@ const PropertyInfo qdev_prop_pci_devfn = {
- 
- /* --- 32bit unsigned int 'size' type --- */
- 
-+static void get_size32(Object *obj, Visitor *v, const char *name, void *opaque,
-+                       Error **errp)
-+{
-+    DeviceState *dev = DEVICE(obj);
-+    Property *prop = opaque;
-+    uint32_t *ptr = qdev_get_prop_ptr(dev, prop);
-+    uint64_t value = *ptr;
-+
-+    visit_type_size(v, name, &value, errp);
-+}
-+
- static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
-                        Error **errp)
- {
-@@ -763,7 +774,7 @@ static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
- 
- const PropertyInfo qdev_prop_size32 = {
-     .name  = "size",
--    .get = get_uint32,
-+    .get = get_size32,
-     .set = set_size32,
-     .set_default_value = set_default_value_uint,
- };
-@@ -821,7 +832,7 @@ const PropertyInfo qdev_prop_blocksize = {
-     .name  = "size",
-     .description = "A power of two between " MIN_BLOCK_SIZE_STR
-                    " and " MAX_BLOCK_SIZE_STR,
--    .get   = get_uint32,
-+    .get   = get_size32,
-     .set   = set_blocksize,
-     .set_default_value = set_default_value_uint,
- };
-diff --git a/tests/qemu-iotests/172.out b/tests/qemu-iotests/172.out
-index 59cc70aebb..e782c5957e 100644
---- a/tests/qemu-iotests/172.out
-+++ b/tests/qemu-iotests/172.out
-@@ -24,11 +24,11 @@ Testing:
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "288"
-@@ -54,11 +54,11 @@ Testing: -fda TEST_DIR/t.qcow2
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -81,22 +81,22 @@ Testing: -fdb TEST_DIR/t.qcow2
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "288"
-@@ -119,22 +119,22 @@ Testing: -fda TEST_DIR/t.qcow2 -fdb TEST_DIR/t.qcow2.2
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -160,11 +160,11 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -187,22 +187,22 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2,index=1
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "288"
-@@ -225,22 +225,22 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2 -drive if=floppy,file=TEST_DIR/t
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -266,11 +266,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -global isa-fdc.driveA=none0
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -293,11 +293,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -global isa-fdc.driveB=none0
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -320,22 +320,22 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qco
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -361,11 +361,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -device floppy,drive=none0
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -388,11 +388,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -device floppy,drive=none0,unit=1
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -415,22 +415,22 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qco
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -456,22 +456,22 @@ Testing: -fda TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -global is
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -494,22 +494,22 @@ Testing: -fdb TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -global is
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -532,11 +532,11 @@ Testing: -fda TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -global is
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -559,11 +559,11 @@ Testing: -fdb TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -global is
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -589,22 +589,22 @@ Testing: -fda TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -627,22 +627,22 @@ Testing: -fda TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -665,22 +665,22 @@ Testing: -fdb TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -703,22 +703,22 @@ Testing: -fdb TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qcow2.2 -device fl
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "floppy1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -750,22 +750,22 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.q
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -788,22 +788,22 @@ Testing: -drive if=floppy,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.q
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "floppy0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -832,22 +832,22 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qco
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -870,22 +870,22 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qco
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -908,22 +908,22 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qco
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -946,22 +946,22 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -drive if=none,file=TEST_DIR/t.qco
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none1"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-               dev: floppy, id ""
-                 unit = 1 (0x1)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -999,11 +999,11 @@ Testing: -device floppy
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = ""
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "288"
-@@ -1026,11 +1026,11 @@ Testing: -device floppy,drive-type=120
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = ""
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "120"
-@@ -1053,11 +1053,11 @@ Testing: -device floppy,drive-type=144
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = ""
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -1080,11 +1080,11 @@ Testing: -device floppy,drive-type=288
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = ""
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "288"
-@@ -1110,11 +1110,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -device floppy,drive=none0,drive-t
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "120"
-@@ -1137,11 +1137,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -device floppy,drive=none0,drive-t
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "288"
-@@ -1167,11 +1167,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -device floppy,drive=none0,logical
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
-@@ -1194,11 +1194,11 @@ Testing: -drive if=none,file=TEST_DIR/t.qcow2 -device floppy,drive=none0,physica
-               dev: floppy, id ""
-                 unit = 0 (0x0)
-                 drive = "none0"
--                logical_block_size = 512 (0x200)
--                physical_block_size = 512 (0x200)
--                min_io_size = 0 (0x0)
--                opt_io_size = 0 (0x0)
--                discard_granularity = 4294967295 (0xffffffff)
-+                logical_block_size = 512 (512 B)
-+                physical_block_size = 512 (512 B)
-+                min_io_size = 0 (0 B)
-+                opt_io_size = 0 (0 B)
-+                discard_granularity = 4294967295 (4 GiB)
-                 write-cache = "auto"
-                 share-rw = false
-                 drive-type = "144"
+Whether or not the commit message is tweaked,
+Reviewed-by: Eric Blake <eblake@redhat.com>
+
 -- 
-2.26.2
+Eric Blake, Principal Software Engineer
+Red Hat, Inc.           +1-919-301-3226
+Virtualization:  qemu.org | libvirt.org
 
 
