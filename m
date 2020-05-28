@@ -6,48 +6,48 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 82B43C433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 10:27:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57404C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 10:27:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 62233208A7
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 10:27:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 62233208A7
+	by mail.kernel.org (Postfix) with ESMTPS id 33D39208A7
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 10:27:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 33D39208A7
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeFkh-0000yC-6t; Thu, 28 May 2020 10:27:07 +0000
+	id 1jeFkl-0000zF-GG; Thu, 28 May 2020 10:27:11 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=eNTM=7K=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jeFkg-0000xw-0o
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 10:27:06 +0000
-X-Inumbo-ID: c4a47ddc-a0cd-11ea-81bc-bc764e2007e4
-Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ id 1jeFkl-0000z4-0Q
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 10:27:11 +0000
+X-Inumbo-ID: c5a7a678-a0cd-11ea-81bc-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c4a47ddc-a0cd-11ea-81bc-bc764e2007e4;
- Thu, 28 May 2020 10:27:02 +0000 (UTC)
-Authentication-Results: esa1.hc3370-68.iphmx.com;
+ id c5a7a678-a0cd-11ea-81bc-bc764e2007e4;
+ Thu, 28 May 2020 10:27:03 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: fQkIDVo0sLcVE7teoc9gsdNSHk0LZJYVkmGtBwTinVq4F+B1CnCB+KP2sR8tc1D9HVFfThXuOW
- hmHAiu7yrL7aRKo2Va/oFZ3J3jNq/w25Ay1Y4M6GwzYvOKcu/NNhtg1NI6ngAWUKR8QbmHb9Su
- VWtmXg75HJpYYzhOICrTfT7Nsffj2TqsECzh9Xzc6QmpgmL/tk8ejiQD3HJK2lWZx86ClGWqU2
- PTcZxTFdLCp8nBJQkeJ+7489ZXReTHarvqc53v2WlQNNdTbrlPkS72BePS50YqLzb0qX/N4r2m
- k6o=
+IronPort-SDR: Ib42O0XlrVzhAxmWHsx9scWP7f3LZbKckKwtcVmGNUiPu4YcwZ3KLHX6UcvZyFaCI7y6zkrMSs
+ K9X+fL1F7IuqBPMso2V6zhvkvjcqR1+4U8qxEPlecyqQZvqqG+RIwAxyv28hBVH4QesbfeFNMr
+ vt7B4FvxDxOR+X3gNj46RZrCbAmKSzHaiBLnjWcI2nsHVwZNA4Zm4FI6Hi3lP14qjTjbEEx1BF
+ 42zAHYaHosPX3R0KdKTW1HwjIJ+XyjLi0ISQ9wJ4mdI/yjreW6vuHABECilNLLRlJYElBtvebJ
+ V5M=
 X-SBRS: 2.7
-X-MesageID: 18936375
-X-Ironport-Server: esa1.hc3370-68.iphmx.com
+X-MesageID: 19379557
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,444,1583211600"; d="scan'208";a="18936375"
+X-IronPort-AV: E=Sophos;i="5.73,444,1583211600"; d="scan'208";a="19379557"
 From: Roger Pau Monne <roger.pau@citrix.com>
 To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH 1/2] freebsd10: refactor code to generate jobs
-Date: Thu, 28 May 2020 12:26:47 +0200
-Message-ID: <20200528102648.8724-2-roger.pau@citrix.com>
+Subject: [PATCH 2/2] freebsd: add FreeBSD 11 and 12 guest jobs
+Date: Thu, 28 May 2020 12:26:48 +0200
+Message-ID: <20200528102648.8724-3-roger.pau@citrix.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200528102648.8724-1-roger.pau@citrix.com>
 References: <20200528102648.8724-1-roger.pau@citrix.com>
@@ -68,49 +68,65 @@ Cc: ian.jackson@eu.citrix.com, Roger Pau Monne <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Slightly adjust the code to generate the freebsd10 jobs in order to
-avoid exiting early from the function if the dom0 arch is different
-than i386. No functional change expected, the freebsd10 jobs are still
-limited to run on an i386 dom0. No runvar diff created as part of this
-change.
+Those are based on the upstream images and are run on an amd64 dom0.
+The runvar difference is:
 
-This is a preparatory change for adding new FreeBSD 11 and 12 jobs
-that will instead use an amd64 dom0.
++test-amd64-amd64-qemuu-freebsd11-amd64 all_host_di_version 2020-02-10
++test-amd64-amd64-qemuu-freebsd12-amd64 all_host_di_version 2020-02-10
++test-amd64-amd64-qemuu-freebsd11-amd64 all_host_suite      stretch
++test-amd64-amd64-qemuu-freebsd12-amd64 all_host_suite      stretch
++test-amd64-amd64-qemuu-freebsd11-amd64 all_hostflags       arch-amd64,arch-xen-amd64,suite-stretch,purpose-test,freebsd-11
++test-amd64-amd64-qemuu-freebsd12-amd64 all_hostflags       arch-amd64,arch-xen-amd64,suite-stretch,purpose-test,freebsd-12
++test-amd64-amd64-qemuu-freebsd11-amd64 arch                amd64
++test-amd64-amd64-qemuu-freebsd12-amd64 arch                amd64
++test-amd64-amd64-qemuu-freebsd11-amd64 buildjob            build-amd64
++test-amd64-amd64-qemuu-freebsd12-amd64 buildjob            build-amd64
++test-amd64-amd64-qemuu-freebsd11-amd64 freebsd_arch        amd64
++test-amd64-amd64-qemuu-freebsd12-amd64 freebsd_arch        amd64
++test-amd64-amd64-qemuu-freebsd11-amd64 freebsd_image       FreeBSD-11.3-RELEASE-amd64.raw.xz
++test-amd64-amd64-qemuu-freebsd12-amd64 freebsd_image       FreeBSD-12.1-RELEASE-amd64.raw.xz
++test-amd64-amd64-qemuu-freebsd11-amd64 kernbuildjob        build-amd64-pvops
++test-amd64-amd64-qemuu-freebsd12-amd64 kernbuildjob        build-amd64-pvops
++test-amd64-amd64-qemuu-freebsd11-amd64 kernkind            pvops
++test-amd64-amd64-qemuu-freebsd12-amd64 kernkind            pvops
++test-amd64-amd64-qemuu-freebsd11-amd64 toolstack           xl
++test-amd64-amd64-qemuu-freebsd12-amd64 toolstack           xl
++test-amd64-amd64-qemuu-freebsd11-amd64 xenbuildjob         build-amd64
++test-amd64-amd64-qemuu-freebsd12-amd64 xenbuildjob         build-amd64
+
+Note that only amd64 versions are tested at the moment, i386 had some
+bugs that are being fixed so new releases can be tested.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 ---
- make-flight | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+Note this requires adding the freebsd-{11,12} hostflags to amd64
+hosts.
+---
+ make-flight | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
 diff --git a/make-flight b/make-flight
-index a361bcb1..af74bb4e 100755
+index af74bb4e..48dc927c 100755
 --- a/make-flight
 +++ b/make-flight
-@@ -230,19 +230,18 @@ test_matrix_branch_filter_callback () {
- 
- do_freebsd_tests () {
- 
--  if [ $xenarch != amd64 -o $dom0arch != i386 -o "$kern" != "" ]; then
-+  if [ $xenarch != amd64 -o "$kern" != "" ]; then
-     return
-   fi
- 
--  for freebsdarch in amd64 i386; do
--
-- job_create_test test-$xenarch$kern-$dom0arch$qemuu_suffix-freebsd10-$freebsdarch \
--                        test-freebsd xl $xenarch $dom0arch \
--                        freebsd_arch=$freebsdarch \
-+  if [ $dom0arch == i386 ]; then
-+    for freebsdarch in amd64 i386; do
-+      job_create_test test-$xenarch$kern-$dom0arch$qemuu_suffix-freebsd10-$freebsdarch \
-+                      test-freebsd xl $xenarch $dom0arch freebsd_arch=$freebsdarch \
+@@ -241,7 +241,20 @@ do_freebsd_tests () {
   freebsd_image=${FREEBSD_IMAGE_PREFIX-FreeBSD-10.1-CUSTOM-}$freebsdarch${FREEBSD_IMAGE_SUFFIX--20150525.raw.xz} \
--                        all_hostflags=$most_hostflags,freebsd-10
--
--  done
-+                      all_hostflags=$most_hostflags,freebsd-10
-+    done
-+  fi
+                       all_hostflags=$most_hostflags,freebsd-10
+     done
++    return
+   fi
++
++  # NB: limit to amd64 ATM due to bugs with the i386 versions (11.3 and 12.1).
++  for freebsdarch in amd64; do
++    job_create_test test-$xenarch$kern-$dom0arch$qemuu_suffix-freebsd11-$freebsdarch \
++                    test-freebsd xl $xenarch $dom0arch freebsd_arch=$freebsdarch \
++ freebsd_image=${FREEBSD_IMAGE_PREFIX-FreeBSD-11.3-RELEASE-}$freebsdarch${FREEBSD_IMAGE_SUFFIX-.raw.xz} \
++                    all_hostflags=$most_hostflags,freebsd-11
++    job_create_test test-$xenarch$kern-$dom0arch$qemuu_suffix-freebsd12-$freebsdarch \
++                    test-freebsd xl $xenarch $dom0arch freebsd_arch=$freebsdarch \
++ freebsd_image=${FREEBSD_IMAGE_PREFIX-FreeBSD-12.1-RELEASE-}$freebsdarch${FREEBSD_IMAGE_SUFFIX-.raw.xz} \
++                    all_hostflags=$most_hostflags,freebsd-12
++  done
  }
  
  do_hvm_winxp_tests () {
