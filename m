@@ -7,62 +7,60 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F06DDC433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:40:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B909C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:40:57 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id C2F252072D
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:40:45 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 27E452072D
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:40:57 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="KwxoPh7N"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C2F252072D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=yandex-team.ru header.i=@yandex-team.ru header.b="nBSx0HlW"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 27E452072D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=yandex-team.ru
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeQGS-0002xQ-5R; Thu, 28 May 2020 21:40:36 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jeQGe-00035I-09; Thu, 28 May 2020 21:40:48 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=leMz=7K=yandex-team.ru=rvkagan@srs-us1.protection.inumbo.net>)
- id 1jeQGR-0002x4-H0
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:40:35 +0000
-X-Inumbo-ID: dbf67356-a12b-11ea-a842-12813bfff9fa
-Received: from forwardcorp1p.mail.yandex.net (unknown [77.88.29.217])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id dbf67356-a12b-11ea-a842-12813bfff9fa;
- Thu, 28 May 2020 21:40:34 +0000 (UTC)
-Received: from mxbackcorp2j.mail.yandex.net (mxbackcorp2j.mail.yandex.net
- [IPv6:2a02:6b8:0:1619::119])
- by forwardcorp1p.mail.yandex.net (Yandex) with ESMTP id 368372E094D;
- Fri, 29 May 2020 00:40:33 +0300 (MSK)
+ id 1jeQGc-00034O-NF
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:40:46 +0000
+X-Inumbo-ID: e0dcd298-a12b-11ea-81bc-bc764e2007e4
+Received: from forwardcorp1j.mail.yandex.net (unknown [2a02:6b8:0:1619::183])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id e0dcd298-a12b-11ea-81bc-bc764e2007e4;
+ Thu, 28 May 2020 21:40:42 +0000 (UTC)
+Received: from mxbackcorp1o.mail.yandex.net (mxbackcorp1o.mail.yandex.net
+ [IPv6:2a02:6b8:0:1a2d::301])
+ by forwardcorp1j.mail.yandex.net (Yandex) with ESMTP id 6BB102E157C;
+ Fri, 29 May 2020 00:40:41 +0300 (MSK)
 Received: from vla5-58875c36c028.qloud-c.yandex.net
  (vla5-58875c36c028.qloud-c.yandex.net [2a02:6b8:c18:340b:0:640:5887:5c36])
- by mxbackcorp2j.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
- 6B27twZHb8-eSfuTBtm; Fri, 29 May 2020 00:40:33 +0300
+ by mxbackcorp1o.mail.yandex.net (mxbackcorp/Yandex) with ESMTP id
+ 6ayeGEvfGf-ecxW8imF; Fri, 29 May 2020 00:40:41 +0300
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yandex-team.ru;
  s=default; 
- t=1590702033; bh=RswyRtwtBWdULttAfpPdwBoW/nGa0Ey4G3dbrsYzIC8=;
+ t=1590702041; bh=5lpXMZJx3pv3PDNCloJv50KPyO1W0cyKFfB8gLTBL3Y=;
  h=In-Reply-To:Message-Id:References:Date:Subject:To:From:Cc;
- b=KwxoPh7NG4LGf33hEYMh1vMRub1HxR6OQDRFY9c+JmZ0VHWsfr4zRoFButnR8ThP9
- 97rZD1y420S4Hmiz9L6aecEAxN435n5FqK13YyO/7OC9QYB7BtiIKh2QHsCg9iYC8c
- A+vHMFWr1pNY1n36DJxND1Jqv1VrEwJ7Ax1j75y0=
-Authentication-Results: mxbackcorp2j.mail.yandex.net;
+ b=nBSx0HlWCym/ElDcHofQ6kqNW+l3CoR1a2nvOGtfo5CqGFoFTYK7ZEKQAHp5IGI8G
+ 8Xfc4GlSO4SmCRLH9inLtJg4CeAbHbdRLlJVg6eS25NLFONIs1r5bGVA/V3YcX31AV
+ 77m/0qSJr0anPFB1aJFVYU8/KhLK9fAkpJdJtixs=
+Authentication-Results: mxbackcorp1o.mail.yandex.net;
  dkim=pass header.i=@yandex-team.ru
 Received: from dynamic-vpn.dhcp.yndx.net (dynamic-vpn.dhcp.yndx.net
  [2a02:6b8:b081:1318::1:10])
  by vla5-58875c36c028.qloud-c.yandex.net (smtpcorp/Yandex) with ESMTPSA id
- KqoauPPys3-eSXqFT6u; Fri, 29 May 2020 00:40:28 +0300
+ KqoauPPys3-ecXqZD3g; Fri, 29 May 2020 00:40:38 +0300
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (Client certificate not present)
 From: Roman Kagan <rvkagan@yandex-team.ru>
 To: qemu-devel@nongnu.org
-Subject: [PATCH v7 6/8] block: make BlockConf size props 32bit and accept size
- suffixes
-Date: Fri, 29 May 2020 00:39:44 +0300
-Message-Id: <20200528213946.1636444-7-rvkagan@yandex-team.ru>
+Subject: [PATCH v7 8/8] block: lift blocksize property limit to 2 MiB
+Date: Fri, 29 May 2020 00:39:46 +0300
+Message-Id: <20200528213946.1636444-9-rvkagan@yandex-team.ru>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200528213946.1636444-1-rvkagan@yandex-team.ru>
 References: <20200528213946.1636444-1-rvkagan@yandex-team.ru>
@@ -93,114 +91,43 @@ Cc: Kevin Wolf <kwolf@redhat.com>, Fam Zheng <fam@euphon.net>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Convert all size-related properties in BlockConf to 32bit.  This will
-allow to accomodate bigger block sizes (in a followup patch).
-This also allows to make them all accept size suffixes, either via
-DEFINE_PROP_BLOCKSIZE or via DEFINE_PROP_SIZE32.
+Logical and physical block sizes in QEMU are limited to 32 KiB.
 
-Also, since min_io_size is exposed to the guest by scsi and virtio-blk
-devices as an uint16_t in units of logical blocks, introduce an
-additional check in blkconf_blocksizes to prevent its silent truncation.
+This appears unnecessarily tight, and we've seen bigger block sizes
+handy at times.
+
+Lift the limitation up to 2 MiB which appears to be good enough for
+everybody, and matches the qcow2 cluster size limit.
 
 Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
+Reviewed-by: Eric Blake <eblake@redhat.com>
 ---
 v6 -> v7:
-- split out into separate patch [Eric]
-- avoid overflow in min_io_size check [Eric]
+- fix spelling in the log [Eric]
 
- include/hw/block/block.h     | 12 ++++++------
- include/hw/qdev-properties.h |  2 +-
- hw/block/block.c             | 11 +++++++++++
- hw/core/qdev-properties.c    |  4 ++--
- 4 files changed, 20 insertions(+), 9 deletions(-)
+ hw/core/qdev-properties.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/include/hw/block/block.h b/include/hw/block/block.h
-index 784953a237..1e8b6253dd 100644
---- a/include/hw/block/block.h
-+++ b/include/hw/block/block.h
-@@ -18,9 +18,9 @@
- 
- typedef struct BlockConf {
-     BlockBackend *blk;
--    uint16_t physical_block_size;
--    uint16_t logical_block_size;
--    uint16_t min_io_size;
-+    uint32_t physical_block_size;
-+    uint32_t logical_block_size;
-+    uint32_t min_io_size;
-     uint32_t opt_io_size;
-     int32_t bootindex;
-     uint32_t discard_granularity;
-@@ -51,9 +51,9 @@ static inline unsigned int get_physical_block_exp(BlockConf *conf)
-                           _conf.logical_block_size),                    \
-     DEFINE_PROP_BLOCKSIZE("physical_block_size", _state,                \
-                           _conf.physical_block_size),                   \
--    DEFINE_PROP_UINT16("min_io_size", _state, _conf.min_io_size, 0),    \
--    DEFINE_PROP_UINT32("opt_io_size", _state, _conf.opt_io_size, 0),    \
--    DEFINE_PROP_UINT32("discard_granularity", _state,                   \
-+    DEFINE_PROP_SIZE32("min_io_size", _state, _conf.min_io_size, 0),    \
-+    DEFINE_PROP_SIZE32("opt_io_size", _state, _conf.opt_io_size, 0),    \
-+    DEFINE_PROP_SIZE32("discard_granularity", _state,                   \
-                        _conf.discard_granularity, -1),                  \
-     DEFINE_PROP_ON_OFF_AUTO("write-cache", _state, _conf.wce,           \
-                             ON_OFF_AUTO_AUTO),                          \
-diff --git a/include/hw/qdev-properties.h b/include/hw/qdev-properties.h
-index c03eadfad6..5252bb6b1a 100644
---- a/include/hw/qdev-properties.h
-+++ b/include/hw/qdev-properties.h
-@@ -200,7 +200,7 @@ extern const PropertyInfo qdev_prop_pcie_link_width;
- #define DEFINE_PROP_SIZE32(_n, _s, _f, _d)                       \
-     DEFINE_PROP_UNSIGNED(_n, _s, _f, _d, qdev_prop_size32, uint32_t)
- #define DEFINE_PROP_BLOCKSIZE(_n, _s, _f) \
--    DEFINE_PROP_UNSIGNED(_n, _s, _f, 0, qdev_prop_blocksize, uint16_t)
-+    DEFINE_PROP_UNSIGNED(_n, _s, _f, 0, qdev_prop_blocksize, uint32_t)
- #define DEFINE_PROP_PCI_HOST_DEVADDR(_n, _s, _f) \
-     DEFINE_PROP(_n, _s, _f, qdev_prop_pci_host_devaddr, PCIHostDeviceAddress)
- #define DEFINE_PROP_OFF_AUTO_PCIBAR(_n, _s, _f, _d) \
-diff --git a/hw/block/block.c b/hw/block/block.c
-index b22207c921..7410b24dee 100644
---- a/hw/block/block.c
-+++ b/hw/block/block.c
-@@ -96,6 +96,17 @@ bool blkconf_blocksizes(BlockConf *conf, Error **errp)
-         return false;
-     }
- 
-+    /*
-+     * all devices which support min_io_size (scsi and virtio-blk) expose it to
-+     * the guest as a uint16_t in units of logical blocks
-+     */
-+    if (conf->min_io_size / conf->logical_block_size > UINT16_MAX) {
-+        error_setg(errp,
-+                   "min_io_size must not exceed " stringify(UINT16_MAX)
-+                   " logical blocks");
-+        return false;
-+    }
-+
-     if (!QEMU_IS_ALIGNED(conf->opt_io_size, conf->logical_block_size)) {
-         error_setg(errp,
-                    "opt_io_size must be a multiple of logical_block_size");
 diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index a79062b428..3cbe3f56a8 100644
+index 8f35d494a4..d66a498d36 100644
 --- a/hw/core/qdev-properties.c
 +++ b/hw/core/qdev-properties.c
-@@ -782,7 +782,7 @@ static void set_blocksize(Object *obj, Visitor *v, const char *name,
- {
-     DeviceState *dev = DEVICE(obj);
-     Property *prop = opaque;
--    uint16_t *ptr = qdev_get_prop_ptr(dev, prop);
-+    uint32_t *ptr = qdev_get_prop_ptr(dev, prop);
-     uint64_t value;
-     Error *local_err = NULL;
+@@ -784,9 +784,12 @@ const PropertyInfo qdev_prop_size32 = {
+ /* lower limit is sector size */
+ #define MIN_BLOCK_SIZE          512
+ #define MIN_BLOCK_SIZE_STR      "512 B"
+-/* upper limit is the max power of 2 that fits in uint16_t */
+-#define MAX_BLOCK_SIZE          (32 * KiB)
+-#define MAX_BLOCK_SIZE_STR      "32 KiB"
++/*
++ * upper limit is arbitrary, 2 MiB looks sufficient for all sensible uses, and
++ * matches qcow2 cluster size limit
++ */
++#define MAX_BLOCK_SIZE          (2 * MiB)
++#define MAX_BLOCK_SIZE_STR      "2 MiB"
  
-@@ -821,7 +821,7 @@ const PropertyInfo qdev_prop_blocksize = {
-     .name  = "size",
-     .description = "A power of two between " MIN_BLOCK_SIZE_STR
-                    " and " MAX_BLOCK_SIZE_STR,
--    .get   = get_uint16,
-+    .get   = get_uint32,
-     .set   = set_blocksize,
-     .set_default_value = set_default_value_uint,
- };
+ static void set_blocksize(Object *obj, Visitor *v, const char *name,
+                           void *opaque, Error **errp)
 -- 
 2.26.2
 
