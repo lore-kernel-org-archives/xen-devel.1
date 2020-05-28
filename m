@@ -2,59 +2,54 @@ Return-Path: <SRS0=RRgd=7K=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A52F0C433E2
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 14:41:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 10783C433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 14:41:33 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8521220897
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 14:41:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8521220897
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id D8A98207D3
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 14:41:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8A98207D3
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeJi3-0006bx-Qy; Thu, 28 May 2020 14:40:39 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=eNTM=7K=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jeJi3-0006bs-09
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 14:40:39 +0000
-X-Inumbo-ID: 307906d6-a0f1-11ea-81bc-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 307906d6-a0f1-11ea-81bc-bc764e2007e4;
- Thu, 28 May 2020 14:40:35 +0000 (UTC)
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: sU2tFkgZwZH7RR6JIykLm+24ucLQq/ISXqXaqfdXSK70ubCNcimGSaTkRQMkKYPwvZoD9u3H3K
- u5lpE8lSe50tvxqDJRPca5ff+kY4wPKYjjPtVOEzxN72byOJ7XWeGF0b4qzmQIXWyktKCymmeI
- 8Gn21imQ/6E6nwIuEVUqBemenlq9BZ/emfRDMHrqG0QUhr/j9Lg7u6UD8xB1hxXm+Mma5rOs30
- gdinRYU9Z3l5EurwvImTMwSoH4F/LWOIUlc71H8DJgh4H65E4gQnU8CaKlSEeLLm+cNc1VdSwK
- Boo=
-X-SBRS: 2.7
-X-MesageID: 18922173
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,445,1583211600"; d="scan'208";a="18922173"
-From: Roger Pau Monne <roger.pau@citrix.com>
-To: <xen-devel@lists.xenproject.org>
-Subject: [PATCH v2 1/3] x86/mm: do not attempt to convert _PAGE_GNTTAB to a
- boolean
-Date: Thu, 28 May 2020 16:40:21 +0200
-Message-ID: <20200528144023.10814-2-roger.pau@citrix.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200528144023.10814-1-roger.pau@citrix.com>
-References: <20200528144023.10814-1-roger.pau@citrix.com>
+	id 1jeJib-0006jo-Ne; Thu, 28 May 2020 14:41:13 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=VkFg=7K=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jeJia-0006jS-NL
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 14:41:12 +0000
+X-Inumbo-ID: 45cc651e-a0f1-11ea-a7e5-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 45cc651e-a0f1-11ea-a7e5-12813bfff9fa;
+ Thu, 28 May 2020 14:41:11 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 1367DB175;
+ Thu, 28 May 2020 14:41:08 +0000 (UTC)
+Subject: Re: [PATCH v2 08/14] x86/cpu: Adjust reset_stack_and_jump() to be
+ shadow stack compatible
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200527191847.17207-1-andrew.cooper3@citrix.com>
+ <20200527191847.17207-9-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <6611fd1a-20cd-3a20-33ba-8b7ccc03c53f@suse.com>
+Date: Thu, 28 May 2020 16:41:05 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200527191847.17207-9-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,55 +60,68 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Wei Liu <wl@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Roger Pau Monne <roger.pau@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>, Wei Liu <wl@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Clang 10 complains with:
+On 27.05.2020 21:18, Andrew Cooper wrote:
+> We need to unwind up to the supervisor token.  See the comment for details.
+> 
+> The use of UNLIKELY_END_SECTION in this case highlights that it isn't safe
+> when it isn't the final statement of an asm().  Adjust all declarations with a
+> newline.
 
-mm.c:1239:10: error: converting the result of '<<' to a boolean always evaluates to true
-      [-Werror,-Wtautological-constant-compare]
-    if ( _PAGE_GNTTAB && (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
-         ^
-xen/include/asm/x86_64/page.h:161:25: note: expanded from macro '_PAGE_GNTTAB'
-#define _PAGE_GNTTAB (1U<<22)
-                        ^
+That's only one perspective to take. I'd appreciate if you undid this.
+The intention has always been ...
 
-Remove the conversion of _PAGE_GNTTAB to a boolean and instead use a
-preprocessor conditional to check if _PAGE_GNTTAB is defined.
+> --- a/xen/include/asm-x86/current.h
+> +++ b/xen/include/asm-x86/current.h
+> @@ -124,13 +124,55 @@ unsigned long get_stack_dump_bottom (unsigned long sp);
+>  # define CHECK_FOR_LIVEPATCH_WORK ""
+>  #endif
+>  
+> +#ifdef CONFIG_XEN_SHSTK
+> +/*
+> + * We need to unwind the primary shadow stack to its supervisor token, located
+> + * at 0x5ff8 from the base of the stack blocks.
+> + *
+> + * Read the shadow stack pointer, subtract it from 0x5ff8, divide by 8 to get
+> + * the number of slots needing popping.
+> + *
+> + * INCSSPQ can't pop more than 255 entries.  We shouldn't ever need to pop
+> + * that many entries, and getting this wrong will cause us to #DF later.  Turn
+> + * it into a BUG() now for fractionally easier debugging.
+> + */
+> +# define SHADOW_STACK_WORK                                      \
+> +    "mov $1, %[ssp];"                                           \
+> +    "rdsspd %[ssp];"                                            \
+> +    "cmp $1, %[ssp];"                                           \
+> +    "je .L_shstk_done.%=;" /* CET not active?  Skip. */         \
+> +    "mov $%c[skstk_base], %[val];"                              \
+> +    "and $%c[stack_mask], %[ssp];"                              \
+> +    "sub %[ssp], %[val];"                                       \
+> +    "shr $3, %[val];"                                           \
+> +    "cmp $255, %[val];" /* More than 255 entries?  Crash. */    \
+> +    UNLIKELY_START(a, shstk_adjust)                             \
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
----
-Changes since v1:
- - Use a preprocessor conditional.
----
- xen/arch/x86/mm.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+... to put suitable separators at the use sites (which, seeing all
+the other semicolons here, would be a semicolon then, not a
+newline/tab combination. If a tab was to be put anywhere, then like
+this:
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 54980b4eb1..7bcac17e2e 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -1236,7 +1236,8 @@ void put_page_from_l1e(l1_pgentry_t l1e, struct domain *l1e_owner)
-      * (Note that the undestroyable active grants are not a security hole in
-      * Xen. All active grants can safely be cleaned up when the domain dies.)
-      */
--    if ( _PAGE_GNTTAB && (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
-+#if _PAGE_GNTTAB
-+    if ( (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
-          !l1e_owner->is_shutting_down && !l1e_owner->is_dying )
-     {
-         gdprintk(XENLOG_WARNING,
-@@ -1244,6 +1245,7 @@ void put_page_from_l1e(l1_pgentry_t l1e, struct domain *l1e_owner)
-                  l1e_get_intpte(l1e));
-         domain_crash(l1e_owner);
-     }
-+#endif
- 
-     /*
-      * Remember we didn't take a type-count of foreign writable mappings
--- 
-2.26.2
+#define UNLIKELY_START_SECTION "\t.pushsection .text.unlikely,\"ax\""
+#define UNLIKELY_END_SECTION   "\t.popsection"
 
+as directives (from a cross arch perspective) are supposed to be
+indented; it's just that on most arch-es it doesn't matter (and
+hence is irrelevant here).
+
+Preferably with this aspect undone
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+As to the comment, could I talk you into replacing the two 0x5ff8
+instances by something like "last word of the shadow stack"?
+
+Jan
 
