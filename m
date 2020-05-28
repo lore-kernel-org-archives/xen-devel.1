@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-5.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+	SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6497AC433E0
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:53:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0047DC433E0
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:57:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B700206F1
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:53:49 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C0502206F1
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:57:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="BMY/AZcS"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B700206F1
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="h1V9ZGAu"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C0502206F1
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeQSx-0004fj-N1; Thu, 28 May 2020 21:53:31 +0000
+	id 1jeQX0-0004pr-7R; Thu, 28 May 2020 21:57:42 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=HyPx=7K=redhat.com=eblake@srs-us1.protection.inumbo.net>)
- id 1jeQSw-0004fe-EY
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:53:30 +0000
-X-Inumbo-ID: aaaedade-a12d-11ea-a843-12813bfff9fa
-Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.61])
+ id 1jeQWy-0004pm-8C
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:57:40 +0000
+X-Inumbo-ID: 3fd483c0-a12e-11ea-a843-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id aaaedade-a12d-11ea-a843-12813bfff9fa;
- Thu, 28 May 2020 21:53:30 +0000 (UTC)
+ id 3fd483c0-a12e-11ea-a843-12813bfff9fa;
+ Thu, 28 May 2020 21:57:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1590702809;
+ s=mimecast20190719; t=1590703059;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=GiVumsXOj6XnWRoyp7j8nZNDqWEQBH1FAMwCBk4UFKE=;
- b=BMY/AZcSltVKW5G3e7xjaLxRjPeODSZMEhl+0v2CR06asAF3ckI0cOPC6eQcVt8uoB4vFd
- 4VKMGFSiw+gBRx7+dN6HNnmKJmp7khST9UvJRZkWPu5k3D3XJ7dTLWgEv99x0Q6cGm09vK
- A/gUVW1RrGtzZZhFpFF3UJk4LaZqNSY=
+ bh=Uy2/hCClOi0N+cvDZXjD2eV1wRJxIY+lbAjkHKJLR28=;
+ b=h1V9ZGAuM0IrEHlw959s4QWtMtuxGKjTYbR415i4kmoY8g78MyxzEu7hlIFlUI5C8zjNDL
+ jdnPeA5AD/ZNV85sNyGXfUHnQD8M9jUD8S8TAt7kkn8Votz3V2WFgaIoq6Om/BY9X1LYCS
+ 3vNCsUe0EvwKV/YOW5xfCW513N0Qye4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-234-e215EmtEMfO9UYzBHDxWlg-1; Thu, 28 May 2020 17:53:25 -0400
-X-MC-Unique: e215EmtEMfO9UYzBHDxWlg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-362-r5kJoFc-NyGbktdslDHbpA-1; Thu, 28 May 2020 17:57:33 -0400
+X-MC-Unique: r5kJoFc-NyGbktdslDHbpA-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
+ [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D9E8518FF661;
- Thu, 28 May 2020 21:53:23 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7CC2218FF660;
+ Thu, 28 May 2020 21:57:31 +0000 (UTC)
 Received: from [10.3.112.88] (ovpn-112-88.phx2.redhat.com [10.3.112.88])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 0C1ED5D9CD;
- Thu, 28 May 2020 21:53:14 +0000 (UTC)
-Subject: Re: [PATCH v7 6/8] block: make BlockConf size props 32bit and accept
- size suffixes
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id F1F689CA0;
+ Thu, 28 May 2020 21:57:22 +0000 (UTC)
+Subject: Re: [PATCH v7 7/8] qdev-properties: add getter for size32 and
+ blocksize
 To: Roman Kagan <rvkagan@yandex-team.ru>, qemu-devel@nongnu.org
 References: <20200528213946.1636444-1-rvkagan@yandex-team.ru>
- <20200528213946.1636444-7-rvkagan@yandex-team.ru>
+ <20200528213946.1636444-8-rvkagan@yandex-team.ru>
 From: Eric Blake <eblake@redhat.com>
 Organization: Red Hat, Inc.
-Message-ID: <0439aa5e-413c-cf7e-83b7-1e942a882f5a@redhat.com>
-Date: Thu, 28 May 2020 16:53:14 -0500
+Message-ID: <d727b621-071e-e061-2c7f-d14798bdf681@redhat.com>
+Date: Thu, 28 May 2020 16:57:22 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.7.0
 MIME-Version: 1.0
-In-Reply-To: <20200528213946.1636444-7-rvkagan@yandex-team.ru>
+In-Reply-To: <20200528213946.1636444-8-rvkagan@yandex-team.ru>
 Content-Language: en-US
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8; format=flowed
@@ -100,33 +101,20 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 On 5/28/20 4:39 PM, Roman Kagan wrote:
-> Convert all size-related properties in BlockConf to 32bit.  This will
-> allow to accomodate bigger block sizes (in a followup patch).
-
-s/allow to accomodate/accommodate/
-
-> This also allows to make them all accept size suffixes, either via
-> DEFINE_PROP_BLOCKSIZE or via DEFINE_PROP_SIZE32.
+> Add getter for size32, and use it for blocksize, too.
 > 
-> Also, since min_io_size is exposed to the guest by scsi and virtio-blk
-> devices as an uint16_t in units of logical blocks, introduce an
-> additional check in blkconf_blocksizes to prevent its silent truncation.
+> In its human-readable branch, it reports approximate size in
+> human-readable units next to the exact byte value, like the getter for
+> 64bit size does.
+> 
+> Adjust the expected test output accordingly.
 > 
 > Signed-off-by: Roman Kagan <rvkagan@yandex-team.ru>
 > ---
+> v6 -> v7:
+> - split out into separate patch [Eric]
 
-> +    if (conf->min_io_size / conf->logical_block_size > UINT16_MAX) {
-> +        error_setg(errp,
-> +                   "min_io_size must not exceed " stringify(UINT16_MAX)
-> +                   " logical blocks");
-
-On my libc, this results in "must not exceed (65535) logical blocks".
-
-Worse, I could envision a platform where it prints something funky like:
-
-"exceed (2 * (32768) + 1) logical", based on however complex the 
-definition of UINT16_MAX is.  You're better off printing this one with 
-%d than with stringify().
+Reviewed-by: Eric Blake <eblake@redhat.com>
 
 -- 
 Eric Blake, Principal Software Engineer
