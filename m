@@ -6,59 +6,60 @@ X-Spam-Status: No, score=-6.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF375C433DF
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68265C433E1
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:30:01 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9D4F420721
-	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:29:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9D4F420721
+	by mail.kernel.org (Postfix) with ESMTPS id 46DD920721
+	for <xen-devel@archiver.kernel.org>; Thu, 28 May 2020 21:30:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 46DD920721
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeQ5g-0000SL-Pk; Thu, 28 May 2020 21:29:28 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jeQ5u-0000Un-Et; Thu, 28 May 2020 21:29:42 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=LyZP=7K=gmail.com=raistlin.df@srs-us1.protection.inumbo.net>)
- id 1jeQ5f-0000SE-BZ
- for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:29:27 +0000
-X-Inumbo-ID: 4e3be89e-a12a-11ea-8993-bc764e2007e4
-Received: from mail-wr1-f67.google.com (unknown [209.85.221.67])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4e3be89e-a12a-11ea-8993-bc764e2007e4;
- Thu, 28 May 2020 21:29:26 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id x6so839989wrm.13
- for <xen-devel@lists.xenproject.org>; Thu, 28 May 2020 14:29:26 -0700 (PDT)
+ id 1jeQ5s-0000UQ-Ob
+ for xen-devel@lists.xenproject.org; Thu, 28 May 2020 21:29:40 +0000
+X-Inumbo-ID: 560df526-a12a-11ea-a83e-12813bfff9fa
+Received: from mail-wr1-f65.google.com (unknown [209.85.221.65])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 560df526-a12a-11ea-a83e-12813bfff9fa;
+ Thu, 28 May 2020 21:29:39 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id l11so994528wru.0
+ for <xen-devel@lists.xenproject.org>; Thu, 28 May 2020 14:29:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:from:to:cc:date:message-id:in-reply-to
  :references:user-agent:mime-version:content-transfer-encoding;
- bh=JBpkxXxyifxfXBjwP1Ac2WLMkdMOyk1zAam+z/GHBmg=;
- b=ISUONMeK9D/WCUOtqVufpoY5qKXiYNIIA8PSggey/W7A7gYNcpu1ghO6f33Dg1Wi6n
- 3hJ2bX/loxqIb1Cxx0OYr6MV2iG2vRdS6551jflbwQKSpRuKKxiRYhcMDPHcvDZgl+qE
- xmgf00kfEEcx+l+1MyJZq2v8OHbASRdAdAKP0uIZIpSxJ1zFHDF6L9h0D19phBeTF175
- krje1XT/YlJuv6yg0Eaf4QPBg1MHDV6/XR6CTIRCsNv4ieUaY/pzXxH0FArYFMJL3Aib
- IgHw36Hul68uv780YmydvZw7LboqPhZF3NVSrH0Wt1q+zMWlDtTpmjgSOirAfGAgmUDR
- WyGQ==
-X-Gm-Message-State: AOAM531T1Uh5gENu4d26PMQFIkTXkU0SYenQ/WG/DqKbDwSH0kbdUqfw
- kA9Cc+SDv3VGi3Vml4L5k6sKVytE
-X-Google-Smtp-Source: ABdhPJxZDMoEaDChbbXxfLrdkKE5tLhILEdSe7ifgSNEpvEpXkayrtHxOHruayVsuicYAMU2jV2edQ==
-X-Received: by 2002:a5d:68c2:: with SMTP id p2mr5351046wrw.253.1590701365691; 
- Thu, 28 May 2020 14:29:25 -0700 (PDT)
+ bh=wP+bknS/YQFF/cic7V0+7p/sNGGep29LYMTamuMpA6Y=;
+ b=GiXcJy/GYhrFuVn2NGUdbeREpOAD9M8S3lmGVAwWC30MuNPeG2epOw+3z3pQ92NAiq
+ 9AuqQrnHUXO4b8cS6BzdS70R5ScN5Pox2wMCfd+OBxbz2oM7761vPGr35r3Dxb5dlzET
+ folZ9RzY4kCyvIpIqnuUde1cauSse3FKRPvbPzzplrRr+rMbXtOAF7rSusg6llTPj0Nn
+ hIBZZUc16dBY1et0LuHrjoMrLrt4uAhcMjLfsVhUSLAhx0J0T5C5wHbVeYwVBqMQdpqM
+ lkd3Okf0WcQtzRFvU3G+IHr4PCkqwCy2CyC7RlBGT7Twa/pLRBgSVZz3QBk/GrP87sFK
+ sKCA==
+X-Gm-Message-State: AOAM5319ij2fFo+I820nWKkCY4meFAIxLgssFVkAZxI0HM2qIHm6TolS
+ bPDo54WckDQJHPq9ok6d58fSrQap
+X-Google-Smtp-Source: ABdhPJxGVTpK4BVv64hCPnZesAphm6BdyzNlNg637ASAcJ5f6KCUWPUlc2RuiWxUibxdp0d1o5JJcw==
+X-Received: by 2002:adf:e648:: with SMTP id b8mr5534153wrn.386.1590701378810; 
+ Thu, 28 May 2020 14:29:38 -0700 (PDT)
 Received: from [192.168.0.36] (87.78.186.89.cust.ip.kpnqwest.it.
  [89.186.78.87])
- by smtp.gmail.com with ESMTPSA id d2sm6729892wrs.95.2020.05.28.14.29.24
+ by smtp.gmail.com with ESMTPSA id f128sm7844905wme.1.2020.05.28.14.29.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 May 2020 14:29:25 -0700 (PDT)
-Subject: [PATCH v2 1/7] xen: credit2: factor cpu to runqueue matching in a
- function
+ Thu, 28 May 2020 14:29:38 -0700 (PDT)
+Subject: [PATCH v2 3/7] xen: cpupool: add a back-pointer from a scheduler to
+ its pool
 From: Dario Faggioli <dfaggioli@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Thu, 28 May 2020 23:29:24 +0200
-Message-ID: <159070136424.12060.2223986236933194278.stgit@Palanthas>
+Date: Thu, 28 May 2020 23:29:37 +0200
+Message-ID: <159070137738.12060.10928971799525755388.stgit@Palanthas>
 In-Reply-To: <159070133878.12060.13318432301910522647.stgit@Palanthas>
 References: <159070133878.12060.13318432301910522647.stgit@Palanthas>
 User-Agent: StGit/0.21
@@ -79,74 +80,59 @@ Cc: Juergen Gross <jgross@suse.com>, George Dunlap <george.dunlap@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Just move the big if() condition in an inline function.
+If we need to know within which pool a particular scheduler
+is working, we can do that by querying the cpupool pointer
+of any of the sched_resource-s (i.e., ~ any of the CPUs)
+assigned to the scheduler itself.
 
-No functional change intended.
+Basically, we pick any sched_resource that we know uses that
+scheduler, and we check its *cpupool pointer. If we really
+know that the resource uses the scheduler, this is fine, as
+it also means the resource is inside the pool we are
+looking for.
+
+But, of course, we can do that for a pool/scheduler that has
+not any been given any sched_resource yet (or if we do not
+know whether or not it has any sched_resource).
+
+To overcome such limitation, add a back pointer from the
+scheduler, to its own pool.
 
 Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
 ---
-Cc: George Dunlap <george.dunlap@citrix.com>
 Cc: Juergen Gross <jgross@suse.com>
+Cc: George Dunlap <george.dunlap@citrix.com>
 ---
- xen/common/sched/credit2.c |   28 +++++++++++++++++-----------
- 1 file changed, 17 insertions(+), 11 deletions(-)
+Changes from v1:
+* new patch
+---
+ xen/common/sched/cpupool.c |    1 +
+ xen/common/sched/private.h |    1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
-index 34f05c3e2a..697c9f917d 100644
---- a/xen/common/sched/credit2.c
-+++ b/xen/common/sched/credit2.c
-@@ -838,6 +838,20 @@ static inline bool same_core(unsigned int cpua, unsigned int cpub)
-            cpu_to_core(cpua) == cpu_to_core(cpub);
- }
+diff --git a/xen/common/sched/cpupool.c b/xen/common/sched/cpupool.c
+index 0664f7fa3d..7ea641ca26 100644
+--- a/xen/common/sched/cpupool.c
++++ b/xen/common/sched/cpupool.c
+@@ -287,6 +287,7 @@ static struct cpupool *cpupool_create(
+         if ( c->sched == NULL )
+             goto err;
+     }
++    c->sched->cpupool = c;
+     c->gran = opt_sched_granularity;
  
-+static inline bool
-+cpu_runqueue_match(const struct csched2_runqueue_data *rqd, unsigned int cpu)
-+{
-+    unsigned int peer_cpu = rqd->pick_bias;
-+
-+    BUG_ON(cpu_to_socket(peer_cpu) == XEN_INVALID_SOCKET_ID);
-+
-+    /* OPT_RUNQUEUE_CPU will never find an existing runqueue. */
-+    return opt_runqueue == OPT_RUNQUEUE_ALL ||
-+           (opt_runqueue == OPT_RUNQUEUE_CORE && same_core(peer_cpu, cpu)) ||
-+           (opt_runqueue == OPT_RUNQUEUE_SOCKET && same_socket(peer_cpu, cpu)) ||
-+           (opt_runqueue == OPT_RUNQUEUE_NODE && same_node(peer_cpu, cpu));
-+}
-+
- static struct csched2_runqueue_data *
- cpu_add_to_runqueue(struct csched2_private *prv, unsigned int cpu)
- {
-@@ -855,21 +869,11 @@ cpu_add_to_runqueue(struct csched2_private *prv, unsigned int cpu)
-     rqd_ins = &prv->rql;
-     list_for_each_entry ( rqd, &prv->rql, rql )
-     {
--        unsigned int peer_cpu;
--
-         /* Remember first unused queue index. */
-         if ( !rqi_unused && rqd->id > rqi )
-             rqi_unused = true;
+     *q = c;
+diff --git a/xen/common/sched/private.h b/xen/common/sched/private.h
+index b9a5b4c01c..df50976eb2 100644
+--- a/xen/common/sched/private.h
++++ b/xen/common/sched/private.h
+@@ -275,6 +275,7 @@ struct scheduler {
+     char *opt_name;         /* option name for this scheduler    */
+     unsigned int sched_id;  /* ID for this scheduler             */
+     void *sched_data;       /* global data pointer               */
++    struct cpupool *cpupool;/* points to this scheduler's pool   */
  
--        peer_cpu = rqd->pick_bias;
--        BUG_ON(cpu_to_socket(cpu) == XEN_INVALID_SOCKET_ID ||
--               cpu_to_socket(peer_cpu) == XEN_INVALID_SOCKET_ID);
--
--        /* OPT_RUNQUEUE_CPU will never find an existing runqueue. */
--        if ( opt_runqueue == OPT_RUNQUEUE_ALL ||
--             (opt_runqueue == OPT_RUNQUEUE_CORE && same_core(peer_cpu, cpu)) ||
--             (opt_runqueue == OPT_RUNQUEUE_SOCKET && same_socket(peer_cpu, cpu)) ||
--             (opt_runqueue == OPT_RUNQUEUE_NODE && same_node(peer_cpu, cpu)) )
-+        if ( cpu_runqueue_match(rqd, cpu) )
-         {
-             rqd_valid = true;
-             break;
-@@ -3744,6 +3748,8 @@ csched2_alloc_pdata(const struct scheduler *ops, int cpu)
-     struct csched2_pcpu *spc;
-     struct csched2_runqueue_data *rqd;
+     int          (*global_init)    (void);
  
-+    BUG_ON(cpu_to_socket(cpu) == XEN_INVALID_SOCKET_ID);
-+
-     spc = xzalloc(struct csched2_pcpu);
-     if ( spc == NULL )
-         return ERR_PTR(-ENOMEM);
 
 
