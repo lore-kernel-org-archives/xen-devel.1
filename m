@@ -2,70 +2,67 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 56A3FC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1E5C1C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:29:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 247702074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:27:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 247702074D
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id DE9C52074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:29:54 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="N4AsY0nM"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DE9C52074D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedA3-0007XY-1e; Fri, 29 May 2020 11:26:51 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=K2ub=7L=citrix.com=george.dunlap@srs-us1.protection.inumbo.net>)
- id 1jedA1-0007XT-Ht
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:26:49 +0000
-X-Inumbo-ID: 48ff5ee0-a19f-11ea-9947-bc764e2007e4
-Received: from esa5.hc3370-68.iphmx.com (unknown [216.71.155.168])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 48ff5ee0-a19f-11ea-9947-bc764e2007e4;
- Fri, 29 May 2020 11:26:48 +0000 (UTC)
-Authentication-Results: esa5.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: 6grXn+OLhyh93kdoxBZnR91t4WZgnmX5+ICqZyoFk7YiiaFGEyvFonYrYct8qI6FERMJAefL0K
- Jnvk+LJMhlT0Ai7FtoNovy7DVAHiq2elTwjwmg2FXNmnHVta4R5hTGjycK2+nmkZ8W3PH42p4Z
- N/Ao0L3xv9QBaMxb6jtXg4Tj4qOoc3b1iFKnRPxms1XYu8PH+Njm8j/S0IFMgeE3NRh3WfLv2q
- ARHEpXgpEkrBIou5vcvGfokc2nB2fcflNT94yDV7WuuHeRQvNLH7ixkJ/glOwtCTaPmcqJeLNR
- QtM=
-X-SBRS: 2.7
-X-MesageID: 19001746
-X-Ironport-Server: esa5.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,448,1583211600"; d="scan'208";a="19001746"
-From: George Dunlap <George.Dunlap@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: Xen XSM/FLASK policy, grub defaults, etc.
-Thread-Topic: Xen XSM/FLASK policy, grub defaults, etc.
-Thread-Index: AQHWND0/xSJFUOR5YU28XikgbPuX46i7+DWAgALLwwCAAANFAIAABtKA
-Date: Fri, 29 May 2020 11:26:45 +0000
-Message-ID: <96F32637-E410-4EC8-937A-CFC8BE724352@citrix.com>
-References: <24270.35349.838484.116865@mariner.uk.xensource.com>
- <0D83AAA6-A205-4256-8A38-CC8122AC063D@citrix.com>
- <24272.59646.746545.343358@mariner.uk.xensource.com>
- <4a8e7cf2-8f63-d4d2-e051-9484a5b8c8ed@suse.com>
-In-Reply-To: <4a8e7cf2-8f63-d4d2-e051-9484a5b8c8ed@suse.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Apple Mail (2.3608.80.23.2.2)
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <28F1714F0E393C40ABF7D25F43EB4578@citrix.com>
-Content-Transfer-Encoding: base64
-MIME-Version: 1.0
+	id 1jedCg-0007et-N2; Fri, 29 May 2020 11:29:34 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5BQD=7L=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1jedCf-0007ei-4O
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:29:33 +0000
+X-Inumbo-ID: aa5d526e-a19f-11ea-a89b-12813bfff9fa
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id aa5d526e-a19f-11ea-a89b-12813bfff9fa;
+ Fri, 29 May 2020 11:29:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=kou7BUVm2zurtDNUWeIELcG3/VI2PHL1zpdI7tC6pEk=; b=N4AsY0nMtOb+/Lbs2sc4xyA284
+ nXSPCsgX1zRPXgYZUXVU6UIGKZdq0XLMI7SHanrc3TNE6LbEg69DMypvpSywHULWjNYSftA0KoFui
+ W0Avo0KQ4Xu386HhGfrkIn59+YbEgBJEMaZqPdxjjjZWlDzXlftAGwHs6YD1Zk3R53MM=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1jedCd-0002T8-KT; Fri, 29 May 2020 11:29:31 +0000
+Received: from 54-240-197-236.amazon.com ([54.240.197.236]
+ helo=u1bbd043a57dd5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1jecw6-0006tM-CY; Fri, 29 May 2020 11:12:26 +0000
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v7 11/15] x86/smpboot: add exit path for clone_mapping()
+Date: Fri, 29 May 2020 12:11:55 +0100
+Message-Id: <b1af8f7318ef42ae27daf40668311f53dc25591d.1590750232.git.hongyxia@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1590750232.git.hongyxia@amazon.com>
+References: <cover.1590750232.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1590750232.git.hongyxia@amazon.com>
+References: <cover.1590750232.git.hongyxia@amazon.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,43 +73,95 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, "cjwatson@debian.org" <cjwatson@debian.org>,
- Wei Liu <wl@xen.org>, Andrew Cooper <Andrew.Cooper3@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Ian Jackson <Ian.Jackson@citrix.com>, Daniel De Graaf <dgdegra@tycho.nsa.gov>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-DQoNCj4gT24gTWF5IDI5LCAyMDIwLCBhdCAxMjowMiBQTSwgSmFuIEJldWxpY2ggPGpiZXVsaWNo
-QHN1c2UuY29tPiB3cm90ZToNCj4gDQo+IE9uIDI5LjA1LjIwMjAgMTI6NTAsIElhbiBKYWNrc29u
-IHdyb3RlOg0KPj4gR2VvcmdlIER1bmxhcCB3cml0ZXMgKCJSZTogWGVuIFhTTS9GTEFTSyBwb2xp
-Y3ksIGdydWIgZGVmYXVsdHMsIGV0Yy4iKToNCj4+Pj4gT24gTWF5IDI3LCAyMDIwLCBhdCA0OjQx
-IFBNLCBJYW4gSmFja3NvbiA8aWFuLmphY2tzb25AY2l0cml4LmNvbT4gd3JvdGU6DQo+Pj4+IDMu
-IEZhaWxpbmcgdGhhdCwgWGVuIHNob3VsZCBwcm92aWRlIHNvbWUgb3RoZXIgbWVjaGFuaXNtIHdo
-aWNoIHdvdWxkDQo+Pj4+IGVuYWJsZSBzb21ldGhpbmcgbGlrZSB1cGRhdGUtZ3J1YiB0byBkZXRl
-cm1pbmUgd2hldGhlciBhIHBhcnRpY3VsYXINCj4+Pj4gaHlwZXJ2aXNvciBjYW4gc2Vuc2libHkg
-YmUgcnVuIHdpdGggYSBwb2xpY3kgZmlsZSBhbmQgZmxhc2s9ZW5mb3JjaW5nLg0KPj4+IA0KPj4+
-IFNvIHlvdSB3YW50IHVwZGF0ZS1ncnViIHRvIGNoZWNrIHdoZXRoZXIgKnRoZSBYZW4gYmluYXJ5
-IGl04oCZcyBjcmVhdGluZyBlbnRyaWVzIGZvciogaGFzIEZMQVNLIGVuYWJsZWQuICBXZSBnZW5l
-cmFsbHkgaW5jbHVkZSB0aGUgWGVuIGNvbmZpZyB1c2VkIHRvIGJ1aWxkIHRoZSBoeXBlcnZpc29y
-IOKAlCBjb3VsZCB3ZSBoYXZlIGl0IGNoZWNrIGZvciBDT05GSUdfWFNNX0ZMQVNLPw0KPj4gDQo+
-PiBUaGF0IHdvdWxkIGJlIGEgcG9zc2liaWxpdHkuICBJbmNsdWRpbmcga2VybmVsIGNvbmZpZ3Mg
-aGFzIGdvbmUgb3V0IG9mDQo+PiBmYXNoaW9uIGJ1dCBJIHRoaW5rIG1vc3QgZGlzdHJvcyBzaGlw
-IHRoZW0uDQo+PiANCj4+IEFyZSB3ZSBjb25maWRlbnQgdGhhdCB0aGlzIGNvbmZpZyBuYW1lIHdp
-bGwgcmVtYWluIHN0YWJsZSA/DQo+IA0KPiBXZWxsLCBpZiBpdCdzIHRvIGJlIHVzZWQgbGlrZSB0
-aGlzLCB0aGVuIHdlJ2xsIGhhdmUgdG8ga2VlcCBpdA0KPiBzdGFibGUgaWYgYXQgYWxsIHBvc3Np
-YmxlLiBCdXQgdGhhdCdzIHRoZSByZWFzb24gd2h5IEkgZGlzbGlrZQ0KPiB0aGUgLmNvbmZpZyBn
-cmVwLWluZyBhcHByb2FjaCAobm90IGp1c3QgZm9yIFhlbiwgYWxzbyBmb3INCj4gTGludXgpLiBJ
-dCB3b3VsZCBpbW8gYmUgYmV0dGVyIGlmIHRoZSBiaW5hcnkgaW5jbHVkZWQgc29tZXRoaW5nDQo+
-IHRoYXQgY2FuIGJlIHF1ZXJpZWQuIFN1Y2ggYSAic29tZXRoaW5nIiBpcyB0aGVuIG11Y2ggbW9y
-ZQ0KPiBsb2dpY2FsIHRvIGtlZXAgc3RhYmxlLCBpbW8uIFRoaXMgInNvbWV0aGluZyIgY291bGQg
-YmUgYW4gRUxGDQo+IG5vdGUsIGZvciBleGFtcGxlIChhc3N1bWluZyBhIHNpbWlsYXIgcHJvYmxl
-bSB0byB0aGUgb25lIGhlcmUNCj4gZG9lc24ndCBleGlzdCBmb3IgeGVuLmVmaSwgb3IgZWxzZSB3
-ZSdkIG5lZWQgdG8gZmluZCBhIHNvbHV0aW9uDQo+IHRoZXJlLCB0b28pLg0KDQpJIHRoaW5rIGFu
-IGVsZiBub3RlIG9uIHRoZSBiaW5hcnkgd291bGQgYmUgbmljZTsgYnV0IGl0IHdvbuKAmXQgaGVs
-cCB1bnRpbCBhbGwgdGhlIGRpc3Ryb3MgcGljayB1cCBYZW4gNC4xNS4NCg0KV2hpY2ggaXNu4oCZ
-dCB0byBzYXkgd2Ugc2hvdWxkbuKAmXQgZG8gaXQ7IGJ1dCBpdCBtaWdodCBiZSBuaWNlIHRvIGFs
-c28gaGF2ZSBhbiBpbnRlcm1lZGlhdGUgc29sdXRpb24gdGhhdCB3b3JrcyByaWdodCBub3csIGV2
-ZW4gaWYgaXTigJlzIG5vdCBvcHRpbWFsLg0KDQogLUdlb3JnZQ==
+From: Wei Liu <wei.liu2@citrix.com>
+
+We will soon need to clean up page table mappings in the exit path.
+
+No functional change.
+
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
+
+---
+Changed in v7:
+- edit commit message.
+- begin with rc = 0 and set it to -ENOMEM ahead of if().
+---
+ xen/arch/x86/smpboot.c | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
+index 170ab24e66..43abf2a332 100644
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -674,6 +674,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     l3_pgentry_t *pl3e;
+     l2_pgentry_t *pl2e;
+     l1_pgentry_t *pl1e;
++    int rc = 0;
+ 
+     /*
+      * Sanity check 'linear'.  We only allow cloning from the Xen virtual
+@@ -714,7 +715,7 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+             pl1e = l2e_to_l1e(*pl2e) + l1_table_offset(linear);
+             flags = l1e_get_flags(*pl1e);
+             if ( !(flags & _PAGE_PRESENT) )
+-                return 0;
++                goto out;
+             pfn = l1e_get_pfn(*pl1e);
+         }
+     }
+@@ -722,8 +723,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     if ( !(root_get_flags(rpt[root_table_offset(linear)]) & _PAGE_PRESENT) )
+     {
+         pl3e = alloc_xen_pagetable();
++        rc = -ENOMEM;
+         if ( !pl3e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl3e);
+         l4e_write(&rpt[root_table_offset(linear)],
+                   l4e_from_paddr(__pa(pl3e), __PAGE_HYPERVISOR));
+@@ -736,8 +738,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     if ( !(l3e_get_flags(*pl3e) & _PAGE_PRESENT) )
+     {
+         pl2e = alloc_xen_pagetable();
++        rc = -ENOMEM;
+         if ( !pl2e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl2e);
+         l3e_write(pl3e, l3e_from_paddr(__pa(pl2e), __PAGE_HYPERVISOR));
+     }
+@@ -752,8 +755,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
+     {
+         pl1e = alloc_xen_pagetable();
++        rc = -ENOMEM;
+         if ( !pl1e )
+-            return -ENOMEM;
++            goto out;
+         clear_page(pl1e);
+         l2e_write(pl2e, l2e_from_paddr(__pa(pl1e), __PAGE_HYPERVISOR));
+     }
+@@ -774,7 +778,9 @@ static int clone_mapping(const void *ptr, root_pgentry_t *rpt)
+     else
+         l1e_write(pl1e, l1e_from_pfn(pfn, flags));
+ 
+-    return 0;
++    rc = 0;
++ out:
++    return rc;
+ }
+ 
+ DEFINE_PER_CPU(root_pgentry_t *, root_pgt);
+-- 
+2.24.1.AMZN
+
 
