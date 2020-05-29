@@ -2,77 +2,57 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AB549C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 17:38:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 90770C433E1
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 17:40:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7F37B2065F
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 17:38:39 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="LwBq4Cx5"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7F37B2065F
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	by mail.kernel.org (Postfix) with ESMTPS id 6FADE2054F
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 17:40:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6FADE2054F
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeixE-00059E-Lp; Fri, 29 May 2020 17:38:00 +0000
+	id 1jeizg-0005tT-4Y; Fri, 29 May 2020 17:40:32 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=T8V9=7L=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jeixD-000599-F8
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 17:37:59 +0000
-X-Inumbo-ID: 22f34fd4-a1d3-11ea-a8f4-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ <SRS0=mY44=7L=hermes.cam.ac.uk=amc96@srs-us1.protection.inumbo.net>)
+ id 1jeizf-0005tN-1l
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 17:40:31 +0000
+X-Inumbo-ID: 7d4794f4-a1d3-11ea-a8f4-12813bfff9fa
+Received: from ppsw-31.csi.cam.ac.uk (unknown [131.111.8.131])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 22f34fd4-a1d3-11ea-a8f4-12813bfff9fa;
- Fri, 29 May 2020 17:37:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=48+5Rw/R1syS3jfI2y3hLLwuwfTh6AZnuM/wwuXlfZQ=; b=LwBq4Cx5+C+WrN8ZEMna1xcwc
- 4LCtyzM0acLfjU92AqrIpSlcVu6jlD+y/oVr3w3tXqwB7KkkN3MI/7M0wmTLuZSmYKHHhAZ9gv1RU
- JGJBkYhtAf941EDgEQNAQ5jsqtlOudmlTCoCtjdh4yf0VFUyxS9IU96AkSELuDKlHHlL4=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jeixB-00030g-Sv; Fri, 29 May 2020 17:37:57 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jeixB-0005PU-HH; Fri, 29 May 2020 17:37:57 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jeixB-0008Uf-GU; Fri, 29 May 2020 17:37:57 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-150495-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id 7d4794f4-a1d3-11ea-a8f4-12813bfff9fa;
+ Fri, 29 May 2020 17:40:30 +0000 (UTC)
+X-Cam-AntiVirus: no malware found
+X-Cam-ScannerInfo: http://help.uis.cam.ac.uk/email-scanner-virus
+Received: from 88-109-182-220.dynamic.dsl.as9105.com ([88.109.182.220]:38184
+ helo=[192.168.1.219])
+ by ppsw-31.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.157]:465)
+ with esmtpsa (PLAIN:amc96) (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+ id 1jeizY-000WmB-Jv (Exim 4.92.3)
+ (return-path <amc96@hermes.cam.ac.uk>); Fri, 29 May 2020 18:40:24 +0100
+Subject: Re: [XEN PATCH] xen/build: introduce CLANG_FLAGS for testing other
+ CFLAGS
+To: Anthony PERARD <anthony.perard@citrix.com>, xen-devel@lists.xenproject.org
+References: <20200529154343.1616925-1-anthony.perard@citrix.com>
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Message-ID: <b60a175b-b5f4-c094-6c76-f8a7fd9f3658@citrix.com>
+Date: Fri, 29 May 2020 18:40:23 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 150495: regressions - trouble: blocked/fail
-X-Osstest-Failures: xen-unstable-smoke:build-arm64-xsm:xen-build:fail:regression
- xen-unstable-smoke:build-amd64:xen-build:fail:regression
- xen-unstable-smoke:build-armhf:xen-build:fail:regression
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:build-check(1):blocked:nonblocking
- xen-unstable-smoke:build-amd64-libvirt:build-check(1):blocked:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:build-check(1):blocked:nonblocking
- xen-unstable-smoke:test-amd64-amd64-libvirt:build-check(1):blocked:nonblocking
- xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:build-check(1):blocked:nonblocking
-X-Osstest-Versions-This: xen=51f9df5c19f2b8a780aa2547cdf3d20736bfddcc
-X-Osstest-Versions-That: xen=1497e78068421d83956f8e82fb6e1bf1fc3b1199
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Fri, 29 May 2020 17:37:57 +0000
+In-Reply-To: <20200529154343.1616925-1-anthony.perard@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,74 +63,49 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 150495 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/150495/
+On 29/05/2020 16:43, Anthony PERARD wrote:
+> Commit 534519f0514f ("xen: Have Kconfig check $(CC)'s version")
+> introduced the use of CLANG_FLAGS in Kconfig which is used when
+> testing for other CFLAGS via $(cc-option ...) but CLANG_FLAGS doesn't
+> exist in the Xen build system. (It's a Linux/Kbuild variable that
+> haven't been added yet.)
+>
+> The missing CLANG_FLAGS isn't an issue for $(cc-option ..) but it
+> would be when $(as-instr ..) gets imported from Kbuild to tests
+> assembly instruction. We need to know if we are going to use clang's
+> assembler or not.
+>
+> CLANG_FLAGS needs to be calculated before we call Kconfig.
+>
+> So, this patch adds CLANG_FLAGS which may contain two flags which are
+> needed for further testing of $(CC)'s capabilities:
+>   -no-integrated-as
+>     This flags isn't new, but simply tested earlier so that it can be
+>     used in Kconfig. The flags is only added for x86 builds like
+>     before.
+>   -Werror=unknown-warning-option
+>     The one is new and is to make sure that the warning is enabled,
+>     even though it is by default but could be disabled in a particular
+>     build of clang, see Linux's commit e8de12fb7cde ("kbuild: Check
+>     for unknown options with cc-option usage in Kconfig and clang")
+>
+>     It is present in clang 3.0.0, according Linux's commit
+>     589834b3a009 ("kbuild: Add -Werror=unknown-warning-option to
+>     CLANG_FLAGS").
+>
+> (The "note" that say that the flags was only added once wasn't true
+> when tested on CentOS 6, so the patch uses $(or) and the flag will only
+> be added once.)
+>
+> Fixes: 534519f0514f ("xen: Have Kconfig check $(CC)'s version")
+> Signed-off-by: Anthony PERARD <anthony.perard@citrix.com>
 
-Regressions :-(
-
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- build-arm64-xsm               6 xen-build                fail REGR. vs. 150438
- build-amd64                   6 xen-build                fail REGR. vs. 150438
- build-armhf                   6 xen-build                fail REGR. vs. 150438
-
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm       1 build-check(1)               blocked  n/a
- build-amd64-libvirt           1 build-check(1)               blocked  n/a
- test-armhf-armhf-xl           1 build-check(1)               blocked  n/a
- test-amd64-amd64-libvirt      1 build-check(1)               blocked  n/a
- test-amd64-amd64-xl-qemuu-debianhvm-amd64  1 build-check(1)        blocked n/a
-
-version targeted for testing:
- xen                  51f9df5c19f2b8a780aa2547cdf3d20736bfddcc
-baseline version:
- xen                  1497e78068421d83956f8e82fb6e1bf1fc3b1199
-
-Last test of basis   150438  2020-05-28 14:01:19 Z    1 days
-Failing since        150465  2020-05-29 09:02:14 Z    0 days    6 attempts
-Testing same since   150495  2020-05-29 16:03:10 Z    0 days    1 attempts
-
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Andrew Cooper <andrew.cooper@citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Juergen Gross <jgross@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              fail    
- build-amd64                                                  fail    
- build-armhf                                                  fail    
- build-amd64-libvirt                                          blocked 
- test-armhf-armhf-xl                                          blocked 
- test-arm64-arm64-xl-xsm                                      blocked 
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    blocked 
- test-amd64-amd64-libvirt                                     blocked 
-
-
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 442 lines long.)
+Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
