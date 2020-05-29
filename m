@@ -2,54 +2,58 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C62EC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:54:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 68169C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:56:43 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D8D6120776
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:54:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8D6120776
+	by mail.kernel.org (Postfix) with ESMTPS id 3673120776
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:56:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3673120776
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jegOl-0002S6-Hx; Fri, 29 May 2020 14:54:15 +0000
+	id 1jegR1-0002bL-6y; Fri, 29 May 2020 14:56:35 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=5ub4=7L=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jegOk-0002S1-Du
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 14:54:14 +0000
-X-Inumbo-ID: 42c4807e-a1bc-11ea-a8cc-12813bfff9fa
+ (envelope-from <SRS0=jshP=7L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jegR0-0002aS-8q
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 14:56:34 +0000
+X-Inumbo-ID: 962c4814-a1bc-11ea-a8cd-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 42c4807e-a1bc-11ea-a8cc-12813bfff9fa;
- Fri, 29 May 2020 14:54:13 +0000 (UTC)
+ id 962c4814-a1bc-11ea-a8cd-12813bfff9fa;
+ Fri, 29 May 2020 14:56:33 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id A4976AC24;
- Fri, 29 May 2020 14:54:12 +0000 (UTC)
-Subject: Re: [PATCH v2 3/7] xen: cpupool: add a back-pointer from a scheduler
- to its pool
-To: Dario Faggioli <dfaggioli@suse.com>, xen-devel@lists.xenproject.org
-References: <159070133878.12060.13318432301910522647.stgit@Palanthas>
- <159070137738.12060.10928971799525755388.stgit@Palanthas>
-From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Message-ID: <01541fda-c7dc-1eac-7184-970244eaf505@suse.com>
-Date: Fri, 29 May 2020 16:54:12 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ by mx2.suse.de (Postfix) with ESMTP id 929D6B077;
+ Fri, 29 May 2020 14:56:32 +0000 (UTC)
+Subject: Re: Xen XSM/FLASK policy, grub defaults, etc.
+To: Ian Jackson <ian.jackson@citrix.com>,
+ George Dunlap <George.Dunlap@citrix.com>
+References: <24270.35349.838484.116865@mariner.uk.xensource.com>
+ <0D83AAA6-A205-4256-8A38-CC8122AC063D@citrix.com>
+ <24272.59646.746545.343358@mariner.uk.xensource.com>
+ <4a8e7cf2-8f63-d4d2-e051-9484a5b8c8ed@suse.com>
+ <96F32637-E410-4EC8-937A-CFC8BE724352@citrix.com>
+ <24273.8332.662607.125522@mariner.uk.xensource.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <5dc712c4-a57d-a387-89cd-e8a8991226a8@suse.com>
+Date: Fri, 29 May 2020 16:56:32 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <159070137738.12060.10928971799525755388.stgit@Palanthas>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <24273.8332.662607.125522@mariner.uk.xensource.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,36 +64,29 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ "cjwatson@debian.org" <cjwatson@debian.org>, Wei Liu <wl@xen.org>,
+ Andrew Cooper <Andrew.Cooper3@citrix.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Daniel De Graaf <dgdegra@tycho.nsa.gov>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 28.05.20 23:29, Dario Faggioli wrote:
-> If we need to know within which pool a particular scheduler
-> is working, we can do that by querying the cpupool pointer
-> of any of the sched_resource-s (i.e., ~ any of the CPUs)
-> assigned to the scheduler itself.
+On 29.05.2020 16:47, Ian Jackson wrote:
+> George Dunlap writes ("Re: Xen XSM/FLASK policy, grub defaults, etc."):
+>> Which isn’t to say we shouldn’t do it; but it might be nice to also have an intermediate solution that works right now, even if it’s not optimal.
 > 
-> Basically, we pick any sched_resource that we know uses that
-> scheduler, and we check its *cpupool pointer. If we really
-> know that the resource uses the scheduler, this is fine, as
-> it also means the resource is inside the pool we are
-> looking for.
+> I propose the following behaviour by updste-grub:
 > 
-> But, of course, we can do that for a pool/scheduler that has
-
-s/can/can't/ ?
-
-> not any been given any sched_resource yet (or if we do not
-> know whether or not it has any sched_resource).
+>  1. Look for an ELF note, TBD.  If it's found, make XSM boot entries.
+>     (For now, skip this step, since the ELF note is not defined.)
 > 
-> To overcome such limitation, add a back pointer from the
-> scheduler, to its own pool.
-> 
-> Signed-off-by: Dario Faggioli <dfaggioli@suse.com>
+>  2. Look for a .config alongside the Xen binary.  Look for
+>        ^CONFIG_XSM_FLASK=y
+>     If the file is is not found, or no line matches, make no XSM
+>     boot entries.
 
-Reviewed-by: Juergen Gross <jgross@suse.com>
+Sounds like a plan then, I think.
 
-
-Juergen
+Jan
 
