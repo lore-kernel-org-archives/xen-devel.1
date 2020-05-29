@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 86486C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id EE7E9C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 5B29D2074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B29D2074D
+	by mail.kernel.org (Postfix) with ESMTPS id C95972074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C95972074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedGv-0001iK-Fb; Fri, 29 May 2020 11:33:57 +0000
+	id 1jedH1-0001or-Os; Fri, 29 May 2020 11:34:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedGu-0001hk-Pg
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:56 +0000
-X-Inumbo-ID: 351ec9dc-a1a0-11ea-9dbe-bc764e2007e4
+ id 1jedGz-0001n4-R4
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:34:01 +0000
+X-Inumbo-ID: 3739ae80-a1a0-11ea-81bc-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 351ec9dc-a1a0-11ea-9dbe-bc764e2007e4;
- Fri, 29 May 2020 11:33:25 +0000 (UTC)
+ id 3739ae80-a1a0-11ea-81bc-bc764e2007e4;
+ Fri, 29 May 2020 11:33:28 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3Q-0003xZ-VG; Fri, 29 May 2020 12:20:01 +0100
+ id 1jed3R-0003xZ-Lg; Fri, 29 May 2020 12:20:01 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 14/49] Honour 'LinuxSerialConsole <suite>' host
- property
-Date: Fri, 29 May 2020 12:19:10 +0100
-Message-Id: <20200529111945.21394-15-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 17/49] buster: ts-host-install: Extend net.ifnames
+ workaround
+Date: Fri, 29 May 2020 12:19:13 +0100
+Message-Id: <20200529111945.21394-18-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -59,40 +59,27 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This works like LinuxSerialConsole.
-
-I originally wrote this to try to work around #940028, where multiple
-d-i autoinstalls run in parallel leading to hard-to-debug lossage!
-Explicitly specing the console causes it to run only on that one.
-
-However, it turns out that explicitly specifying the console does not
-always work and a better fix is needed.  Nevertheless, having added
-this feature it seems foolish to throw it away.
-
-Currently there are no hosts with this property so no functiaonal
-change.
+Really we should fix this by making a .deb in Debian that we could
+install.  But this is a longer-term project.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/TestSupport.pm | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ ts-host-install | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index ff8103f2..7eeac49f 100644
---- a/Osstest/TestSupport.pm
-+++ b/Osstest/TestSupport.pm
-@@ -1447,7 +1447,10 @@ sub get_target_property ($$;$) {
- sub get_host_native_linux_console ($) {
-     my ($ho) = @_;
+diff --git a/ts-host-install b/ts-host-install
+index 7a72a867..fe26f70f 100755
+--- a/ts-host-install
++++ b/ts-host-install
+@@ -282,7 +282,7 @@ END
  
--    my $console = get_host_property($ho, "LinuxSerialConsole", "ttyS0");
-+    my $console;
-+    $console //= get_host_property($ho, "LinuxSerialConsole $ho->{Suite}")
-+	if $ho->{Suite};
-+    $console //= get_host_property($ho, "LinuxSerialConsole", "ttyS0");
-     return $console if $console eq 'NONE';
+     # Don't use "Predictable Network Interface Names"
+     # https://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/
+-    push @hocmdline, "net.ifnames=0" if $ho->{Suite} =~ m/stretch/;
++    push @hocmdline, "net.ifnames=0" if $ho->{Suite} =~ m/stretch|buster/;
  
-     return "$console,$c{Baud}n8";
+     push @hocmdline,
+         get_host_property($ho, "linux-boot-append $ho->{Suite}", ''),
 -- 
 2.20.1
 
