@@ -2,93 +2,86 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
+	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	UNPARSEABLE_RELAY,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id AF46FC433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B38BDC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:30:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 7B345206C3
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:30:35 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 7FFC22074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:30:56 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="lCxs8Ju2"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7B345206C3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jbhoKm2h"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7FFC22074D
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedDK-0000AV-B2; Fri, 29 May 2020 11:30:14 +0000
+	id 1jedDg-0000NH-Ls; Fri, 29 May 2020 11:30:36 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=UCxL=7L=oracle.com=daniel.kiper@srs-us1.protection.inumbo.net>)
- id 1jedDJ-00009m-5a
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:30:13 +0000
-X-Inumbo-ID: c25ba118-a19f-11ea-9947-bc764e2007e4
-Received: from userp2120.oracle.com (unknown [156.151.31.85])
+ <SRS0=vz0h=7L=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
+ id 1jedDf-0000Mh-Kz
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:30:35 +0000
+X-Inumbo-ID: cf9d655a-a19f-11ea-9947-bc764e2007e4
+Received: from mail-wr1-x444.google.com (unknown [2a00:1450:4864:20::444])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id c25ba118-a19f-11ea-9947-bc764e2007e4;
- Fri, 29 May 2020 11:30:12 +0000 (UTC)
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
- by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 04TBRqwW031292;
- Fri, 29 May 2020 11:29:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=date : from : to : cc
- : subject : message-id : mime-version : content-type; s=corp-2020-01-29;
- bh=6iJ4GznZqm2hlC858ywesGuHoOqwbI3EjIs9Cz3b8xw=;
- b=lCxs8Ju2uHpWLEkPe2LPs/Zc/PUgNbNqoNOH1xPPrYxdgN+Dqlxj78SXBlz97UIGRkS3
- sfwA4zGEz5LarLDbkUp/FU+MNB1SDgQQPet2LOmUIdQE8Hp2sqpvKwLN+S18j996ZLmm
- ykS5TUe3gq7N5OFcBdOgjyfGSW1xIPKUCKm5lDzieQJ3bsg0S/1jpzJyq7LojDr8SHDZ
- JvQlybZjNvoyKfMQm4RlorKoLDvviWwlJLje7FNdjLrie1et0wDka/p2du91XQXNYETI
- AVJ1C7AL50/tHEDVHoxy7DEVQHkSAPODUOc/m3tZYaWihL71EsPHSAPSlL/ZkgDlVUjC aQ== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by userp2120.oracle.com with ESMTP id 318xbk9wc2-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 29 May 2020 11:29:54 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 04TBRfFK184985;
- Fri, 29 May 2020 11:27:54 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by aserp3020.oracle.com with ESMTP id 317j5y74m1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 29 May 2020 11:27:53 +0000
-Received: from abhmp0014.oracle.com (abhmp0014.oracle.com [141.146.116.20])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 04TBRhSd021678;
- Fri, 29 May 2020 11:27:43 GMT
-Received: from tomti.i.net-space.pl (/10.175.161.105)
- by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Fri, 29 May 2020 04:27:43 -0700
-Date: Fri, 29 May 2020 13:27:35 +0200
-From: Daniel Kiper <daniel.kiper@oracle.com>
-To: grub-devel@gnu.org, linux-kernel@vger.kernel.org,
- trenchboot-devel@googlegroups.com, x86@kernel.org,
- xen-devel@lists.xenproject.org
-Subject: [BOOTLOADER SPECIFICATION RFC] The bootloader log format for
- TrenchBoot and others
-Message-ID: <20200529112735.qln44ds6z7djheof@tomti.i.net-space.pl>
+ id cf9d655a-a19f-11ea-9947-bc764e2007e4;
+ Fri, 29 May 2020 11:30:34 +0000 (UTC)
+Received: by mail-wr1-x444.google.com with SMTP id s8so3106597wrt.9
+ for <xen-devel@lists.xenproject.org>; Fri, 29 May 2020 04:30:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
+ :mime-version:content-transfer-encoding:content-language
+ :thread-index; bh=sz1FcDFLMegKlUZkDsfZp3Ndlk2QZ4y65naYGuGgzZ4=;
+ b=jbhoKm2h1VwIxBjfDrvHZi4N3CWp0Q9vEEnRgo/8De8lsy25j4flxsOgnUO+QJz+yc
+ VPK8gGykJY3MjksCdGjYJkkZB5AEKhlTQ3Uv6W4Da+GRQQIQkPkDvuA8g5eLiOs/NqRe
+ fnytXAUA+RLp69uMCVUoL9e6GANPu2IrntVG0BMfIx2RsKzd2xk+ITkNhGQc6VEjeF4B
+ gmvcSdbNAqVmJ3kd5A721RfTFoe9QWBVeW9vPaNIjhyW3CH7wKxhpiscQ6B9I0+Nn6lx
+ lYW2i2a4sbAjrUpQZ1jM0IchNw7aIE0wpNEWckDhcirLl9EXZe1fiXKegAExzcGzXjF2
+ nXBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
+ :subject:date:message-id:mime-version:content-transfer-encoding
+ :content-language:thread-index;
+ bh=sz1FcDFLMegKlUZkDsfZp3Ndlk2QZ4y65naYGuGgzZ4=;
+ b=uMk/2GlfAMLM8Safwc5wWOyMK7w5lMxGK0koJucK1poMMaSTj2CZigarqCytxI40HX
+ eqOZ1wtQ8lmYwkdYIuflZh7+vMu73kD+CjE+OCTRuMADSgBdiIKHf+5cnExiO0a/leak
+ 462yuXOkxnc2Q4uCsYww7mixnbNlhy3ny3pZC4WAhDaYYlm6gHDPjcyKg59bjwY9TzhD
+ j2/3w0k1TZSoSwjSV3vBNHgB8x2iPj+VSWIDm/zuHGmkgnS+25A8eQiFjWEKzuppPPjp
+ e4zM5u8SzaAF4kIBWVVThy7obRBlF3xOzXi8N/EWLyjMLU7I3R3zbyQhNg8bYf2IWa3/
+ 8z/Q==
+X-Gm-Message-State: AOAM531MUPMmbXWaGmqHoDFpmLuJ7ERh/faAT6P8MGzZDeOGLxYDf0vC
+ DPsVpKKci3GIT5FR4OoRw+Q=
+X-Google-Smtp-Source: ABdhPJw5gUHgQzVpWfymafzik1vjb7np8MPJfZuQgVzbfXSev0O6vfk96ckzO5C4zvOHcPF4K2iE5Q==
+X-Received: by 2002:a5d:4d01:: with SMTP id z1mr8938355wrt.29.1590751833907;
+ Fri, 29 May 2020 04:30:33 -0700 (PDT)
+Received: from CBGR90WXYV0 ([54.239.6.187])
+ by smtp.gmail.com with ESMTPSA id l17sm10213603wmi.3.2020.05.29.04.30.32
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 29 May 2020 04:30:33 -0700 (PDT)
+From: Paul Durrant <xadimgnik@gmail.com>
+X-Google-Original-From: "Paul Durrant" <paul@xen.org>
+To: "'Ian Jackson'" <ian.jackson@eu.citrix.com>,
+ <xen-devel@lists.xenproject.org>
+References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
+In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
+Subject: RE: [OSSTEST PATCH v2 00/49] Switch to Debian buster (= Debian stable)
+Date: Fri, 29 May 2020 12:30:31 +0100
+Message-ID: <005401d635ac$90bf9510$b23ebf30$@xen.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: NeoMutt/20170113 (1.7.2)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9635
- signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- spamscore=0 suspectscore=0
- mlxlogscore=999 mlxscore=0 adultscore=0 phishscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2004280000
- definitions=main-2005290092
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9635
- signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
- spamscore=0 mlxscore=0
- lowpriorityscore=0 priorityscore=1501 phishscore=0 cotscore=-2147483648
- suspectscore=0 bulkscore=0 clxscore=1011 impostorscore=0 malwarescore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2004280000 definitions=main-2005290092
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Content-Language: en-gb
+Thread-Index: AQH6xReBsxPpGuE++Yl5QcE4sAtmFah1zWCQ
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,94 +92,139 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: michal.zygowski@3mdeb.com, eric.snowberg@oracle.com, mtottenh@akamai.com,
- ard.biesheuvel@linaro.org, dpsmith@apertussolutions.com,
- andrew.cooper3@citrix.com, konrad.wilk@oracle.com, phcoder@gmail.com,
- javierm@redhat.com, mjg59@google.com, alexander.burmashev@oracle.com,
- krystian.hebel@3mdeb.com, kanth.ghatraju@oracle.com,
- lukasz.hawrylko@linux.intel.com, ross.philipson@oracle.com, hpa@zytor.com,
- leif@nuviainc.com, pjones@redhat.com, alec.brown@oracle.com,
- piotr.krol@3mdeb.com
+Reply-To: paul@xen.org
+Cc: committers@xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hey,
+> -----Original Message-----
+> From: Ian Jackson <ian.jackson@eu.citrix.com>
+> Sent: 29 May 2020 12:19
+> To: xen-devel@lists.xenproject.org; Paul Durrant <paul@xen.org>
+> Cc: Ian Jackson <ian.jackson@eu.citrix.com>; committers@xenproject.org
+> Subject: [OSSTEST PATCH v2 00/49] Switch to Debian buster (= Debian stable)
+> 
+> This series looks about as ready as it is going to be.  Unfortunately
+> there are still two issues, each of which cropped up once in my final
+> formal retest.  See below.
+> 
+> What are people's opinions?  Should I push this to osstest pretest
+> soon after the Xen codefreeze (eg, after we get the first push after
+> freeze) ?
+> 
 
-Below you can find my rough idea of the bootloader log format which is
-generic thing but initially will be used for TrenchBoot work. I discussed
-this proposal with Ross and Daniel S. So, the idea went through initial
-sanitization. Now I would like to take feedback from other folks too.
-So, please take a look and complain...
+That sounds reasonable; I don't think we want to perturb osstest until after the first push.
 
-In general we want to pass the messages produced by the bootloader to the OS
-kernel and finally to the userspace for further processing and analysis. Below
-is the description of the structures which will be used for this thing.
+> The downside would be introducing new low-probability heisenbugs.  But
+> in my tests it seems that some existing heisenbugs may be abated.
+> It's hard to say for sure.  The upside is a lower risk that Debian
+> will break our stuff and also being able to commission a number of
+> machines which do not work with stretch (Debian oldstable).
+> 
 
-  struct bootloader_log_msgs
-  {
-    grub_uint32_t level;
-    grub_uint32_t facility;
-    char type[];
-    char msg[];
-  }
+I assume we can revert if things go badly wrong and being able to commission more machines would seem to be quite beneficial at this
+stage.
 
-  struct bootloader_log
-  {
-    grub_uint32_t version;
-    grub_uint32_t producer;
-    grub_uint32_t size;
-    grub_uint32_t next_off;
-    bootloader_log_msgs msgs[];
-  }
+  Paul
 
-The members of struct bootloader_log:
-  - version: the bootloader log format version number, 1 for now,
-  - producer: the producer/bootloader type; we can steal some values from
-    linux/Documentation/x86/boot.rst:type_of_loader,
-  - size: total size of the log buffer including the bootloader_log struct,
-  - next_off: offset in bytes, from start of the bootloader_log struct,
-    of the next byte after the last log message in the msgs[];
-    i.e. the offset of the next available log message slot,
-  - msgs: the array of log messages.
+> The two issues:
+> 
+> 1. In one test, libvirt segfaulted.  This is with osstest's own-built
+>    tested version of libvirt; osstest's own-build tested version of
+>    Linux; and osstest's own-built xen.git#master.
+> 
+>    http://logs.test-lab.xenproject.org/osstest/logs/150456/test-amd64-i386-libvirt/info.html
+>    http://logs.test-lab.xenproject.org/osstest/logs/150456/test-amd64-i386-libvirt/rimava1---var-log-
+> kern.log.gz
+>    | May 28 21:39:11 rimava1 kernel: [ 1146.326593] libvirtd[16868]: segfault at 820 ip b72535b0 sp
+> abce5090 error 4 in libc-2.28.so[b71f0000+14e000]
+> 
+> 2. In one test, the Debian installer hung.  The kernel printed many
+>    soft lockup messages.  This is with osstest's own dom0 kernel and
+>    hypervisor, but the 4.19.67-2+deb10u1 kernel from Debian.
+> 
+>    http://logs.test-lab.xenproject.org/osstest/logs/150456/test-amd64-amd64-xl-qemut-debianhvm-i386-
+> xsm/info.html
+>    http://logs.test-lab.xenproject.org/osstest/logs/150456/test-amd64-amd64-xl-qemut-debianhvm-i386-
+> xsm/godello1---var-log-xen-qemu-dm-debianhvm.guest.osstest.log.gz
+> 
+> Ian Jackson (49):
+>   ts-logs-capture: Cope if xl shutdown leaves domain running for a bit
+>   ts-xen-build-prep: Install rsync
+>   lvcreate argments: pass --yes -Z y -W y
+>   TestSupport: allow more time for apt
+>   Booting: Use `--' rather than `---' to introduce host cmdline
+>   di_installcmdline_core: Pass locale on d-i command line
+>   setupboot_grub2: Drop $submenu variable
+>   ts-leak-check: Ignore buster's udevd too
+>   Bodge systemd random seed arrangements
+>   Debian guests made with xen-tools: Write systemd random seed file
+>   ts-debian-di-install: Provide guest with more RAM
+>   Debian: preseed: use priority= alias
+>   Debian: Specify `priority=critical' rather than locale
+>   Honour 'LinuxSerialConsole <suite>' host property
+>   buster: make-hosts-flight: Add to possible suites for hosts flight
+>   buster: Extend grub2 uefi no install workaround
+>   buster: ts-host-install: Extend net.ifnames workaround
+>   buster: Deinstall the "systemd" package
+>   buster: preseed partman-auto-lvm/guided_size
+>   buster: ts-host-install: NTP not honoured bug remains
+>   buster: Extend ARM clock workaround
+>   buster: Extend guest bootloader workaround
+>   Honour DebianImageFile_SUITE_ARCH
+>   buster: Specify DebianImageFile_SUITE_ARCH
+>   20_linux_xen: Copy Debian buster version into our initramfs area
+>   20_linux_xen: Adhoc template substitution
+>   20_linux_xen: Ignore xenpolicy and config files too
+>   20_linux_xen: Support Xen Security Modules (XSM/FLASK)
+>   mg-debian-installer-update: support overlay-intramfs-SUITE
+>   overlay-initrd-buster/sbin/reopen-console: Copy from Debian
+>   overlay-initrd-buster/sbin/reopen-console: Fix #932416
+>   buster: chiark-scripts: Install a new version on buster too
+>   buster: Provide TftpDiVersion
+>   buster: grub, arm64: extend chainloading workaround
+>   buster: setupboot_grub2: Note what files exist in /boot
+>   buster: setupboot_grub2: Handle missing policy file bug
+>   buster: Extend workaround for dhcpd EROFS bug
+>   ts-xen-install: Add $ho argument to some_extradebs
+>   ts-xen-install: Move some_extradebs to Debian.pm
+>   Debian.pm: Break out standard_extradebs
+>   Debian.pm: Move standard_extradebs to ts-host-install
+>   buster: Install own linux-libc-dev package (!)
+>   setupboot_grub2: Insist on space after directives
+>   setupboot_grub2: Print line number of entry we are using
+>   setupboot_grub2: Recognise --nounzip for initramfs
+>   setupboot_grub2: Copy hv command line from grub to xen.cfg
+>   setupboot_grub2: Do not boot with XSM policy etc. unless xsm=1
+>   buster 20_linux_xen: Only load policy in XSM-enabled builds
+>   buster: Switch to Debian buster as the default suite
+> 
+>  Osstest.pm                                    |   2 +-
+>  Osstest/Debian.pm                             | 128 +++++--
+>  Osstest/TestSupport.pm                        |  15 +-
+>  make-hosts-flight                             |   2 +-
+>  mfi-common                                    |   9 +
+>  mg-debian-installer-update                    |  20 ++
+>  overlay-buster/etc/grub.d/20_linux_xen        | 327 ++++++++++++++++++
+>  overlay-initrd-buster/sbin/reopen-console     | 126 +++++++
+>  .../override.conf                             |   3 +
+>  overlay/usr/local/bin/random-seed-add         |  33 ++
+>  production-config                             |   5 +
+>  ts-debian-di-install                          |   2 +-
+>  ts-debian-fixup                               |   6 +
+>  ts-host-install                               |   6 +-
+>  ts-leak-check                                 |   1 +
+>  ts-logs-capture                               |   1 +
+>  ts-xen-build-prep                             |   6 +-
+>  ts-xen-install                                |  41 +--
+>  18 files changed, 656 insertions(+), 77 deletions(-)
+>  create mode 100755 overlay-buster/etc/grub.d/20_linux_xen
+>  create mode 100755 overlay-initrd-buster/sbin/reopen-console
+>  create mode 100644 overlay/etc/systemd/system/systemd-random-seed.service.d/override.conf
+>  create mode 100755 overlay/usr/local/bin/random-seed-add
+> 
+> --
+> 2.20.1
 
-The members of struct bootloader_log_msgs:
-  - level: similar to syslog meaning; can be used to differentiate
-    normal messages from debug messages; exact interpretation depends
-    on the current producer/bootloader type specified in the
-    bootloader_log.producer,
-  - facility: similar to syslog meaning; can be used to differentiate
-    the sources of the messages, e.g. message produced by networking
-    module; exact interpretation depends on the current producer/bootloader
-    type specified in the bootloader_log.producer,
-  - type: similar to the facility member but NUL terminated string instead of integer;
-    this will be used by GRUB for messages printed using grub_dprintf(),
-  - msg: the bootloader log message, NUL terminated string.
 
-Note: The bootloaders are free to use/ignore any given set of level,
-      facility and/or type members. Though the usage of these members
-      has to be clearly defined. Ignored integer members should be set
-      to 0. Ignored type member should contain an empty NUL terminated
-      string. msg member is mandatory but can be an empty NUL terminated
-      string.
-
-Taking into account [1] and [2] I want to make this functionality generic
-as much as possible. So, this bootloader log can be used with any bootloader
-and OS kernel. However, initially the functionality will be implemented for
-the Linux kernel and its boot protocol.
-
-In case of Linux kernel the pointer to the bootloader_log struct should
-be passed from the bootloader to the kernel through the boot_params and
-the bootloader_log struct contents should be exposed via sysfs. E.g.
-somewhere at /sys/kernel/debug or /sys/kernel/tracing or maybe we should
-create new /sys/bootloader/log node.
-
-If everybody is OK with this rough proposal then I will start working
-on making it a part of Multiboot2 specification (the text above is just
-raw description of the idea; it is not final text which land into the
-spec). If you see better place for this thing just drop me a line.
-
-Daniel
-
-[1] https://lists.gnu.org/archive/html/grub-devel/2019-10/msg00107.html
-[2] https://lists.gnu.org/archive/html/grub-devel/2019-11/msg00079.html
 
