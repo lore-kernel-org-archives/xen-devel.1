@@ -6,39 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id DFB95C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 39733C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:12 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BA268207D4
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA268207D4
+	by mail.kernel.org (Postfix) with ESMTPS id 11AC0207D4
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 11AC0207D4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedHu-0002oK-I7; Fri, 29 May 2020 11:34:58 +0000
+	id 1jedHz-0002ta-0Y; Fri, 29 May 2020 11:35:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedHs-0002md-SC
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:34:56 +0000
-X-Inumbo-ID: 4ac56d86-a1a0-11ea-8993-bc764e2007e4
+ id 1jedHx-0002sM-SP
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:35:01 +0000
+X-Inumbo-ID: 4c099578-a1a0-11ea-9dbe-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4ac56d86-a1a0-11ea-8993-bc764e2007e4;
- Fri, 29 May 2020 11:34:01 +0000 (UTC)
+ id 4c099578-a1a0-11ea-9dbe-bc764e2007e4;
+ Fri, 29 May 2020 11:34:03 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3Z-0003xZ-CA; Fri, 29 May 2020 12:20:09 +0100
+ id 1jed3Z-0003xZ-JO; Fri, 29 May 2020 12:20:09 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 40/49] Debian.pm: Break out standard_extradebs
-Date: Fri, 29 May 2020 12:19:36 +0100
-Message-Id: <20200529111945.21394-41-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 41/49] Debian.pm: Move standard_extradebs to
+ ts-host-install
+Date: Fri, 29 May 2020 12:19:37 +0100
+Message-Id: <20200529111945.21394-42-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -58,52 +59,53 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Refactor this out of ts-xen-install.  We are going to run it in
-ts-host-install.
+This makes it effect builds on Debian, too.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 7 ++++++-
- ts-xen-install    | 3 +--
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ Osstest/Debian.pm | 1 +
+ ts-host-install   | 2 ++
+ ts-xen-install    | 2 --
+ 3 files changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index d51ac493..60393ca9 100644
+index 60393ca9..2d30b3e9 100644
 --- a/Osstest/Debian.pm
 +++ b/Osstest/Debian.pm
-@@ -51,7 +51,6 @@ BEGIN {
+@@ -51,6 +51,7 @@ BEGIN {
                        di_vg_name
                        debian_dhcp_rofs_fix
  		      debian_write_random_seed_command
--		      some_extradebs
++		      some_extradebs standard_extradebs
                        );
      %EXPORT_TAGS = ( );
  
-@@ -1684,4 +1683,10 @@ sub some_extradebs ($$) {
+diff --git a/ts-host-install b/ts-host-install
+index 253dbb5d..924c1e06 100755
+--- a/ts-host-install
++++ b/ts-host-install
+@@ -146,6 +146,8 @@ END
+             qw(amd64-microcode intel-microcode));
      }
- }
  
-+sub standard_extradebs ($) {
-+    my ($ho) = @_;
-+    # $c{ DebianExtraPackages_<suite> }
-+    some_extradebs($ho, [ 'DebianExtraPackages', $ho->{Suite} ]);
-+}
++    standard_extradebs($ho);
 +
- 1;
+     my $ntpserver = get_target_property($ho, 'NtpServer');
+     if ($ntpserver) {
+ 	target_editfile_root($ho, '/etc/ntp.conf', sub {
 diff --git a/ts-xen-install b/ts-xen-install
-index d67cd121..965fd519 100755
+index 965fd519..5d4f8b0d 100755
 --- a/ts-xen-install
 +++ b/ts-xen-install
-@@ -74,8 +74,7 @@ sub packages () {
+@@ -74,8 +74,6 @@ sub packages () {
  sub extradebs () {
      my $suite = $ho->{Suite};
  
--    # $c{ DebianExtraPackages_<suite> }
--    some_extradebs($ho, [ 'DebianExtraPackages', $suite ]);
-+    standard_extradebs($ho);
- 
+-    standard_extradebs($ho);
+-
      # $c{ DebianExtraPackages_<firmware>_<arch>_<suite> }
      my $firmware = get_host_property($ho, "firmware");
+     some_extradebs($ho, [ 'DebianExtraPackages', $firmware, $ho->{Arch}, $suite ]);
 -- 
 2.20.1
 
