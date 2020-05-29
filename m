@@ -6,39 +6,39 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3DDBEC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E7FBC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:32 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1B6582074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1B6582074D
+	by mail.kernel.org (Postfix) with ESMTPS id 3A2482074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:32 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A2482074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedGI-00017I-1F; Fri, 29 May 2020 11:33:18 +0000
+	id 1jedGN-0001BU-B7; Fri, 29 May 2020 11:33:23 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedGG-00016T-Pb
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:16 +0000
-X-Inumbo-ID: 2379c542-a1a0-11ea-81bc-bc764e2007e4
+ id 1jedGL-0001AN-Pc
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:21 +0000
+X-Inumbo-ID: 256280b0-a1a0-11ea-9dbe-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2379c542-a1a0-11ea-81bc-bc764e2007e4;
- Fri, 29 May 2020 11:32:55 +0000 (UTC)
+ id 256280b0-a1a0-11ea-9dbe-bc764e2007e4;
+ Fri, 29 May 2020 11:32:58 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3X-0003xZ-P8; Fri, 29 May 2020 12:20:08 +0100
+ id 1jed3S-0003xZ-4N; Fri, 29 May 2020 12:20:02 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 37/49] buster: Extend workaround for dhcpd EROFS bug
-Date: Fri, 29 May 2020 12:19:33 +0100
-Message-Id: <20200529111945.21394-38-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 19/49] buster: preseed partman-auto-lvm/guided_size
+Date: Fri, 29 May 2020 12:19:15 +0100
+Message-Id: <20200529111945.21394-20-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -58,24 +58,29 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+Otherwise we get this question:
+
+  | You may use the whole volume group for guided partitioning, or part
+  | of it.  [...]
+  | Amount of volume group to use for guided partitioning:
+
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Osstest/Debian.pm | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index 51217fb4..49d94b9b 100644
+index a328160e..bac33d00 100644
 --- a/Osstest/Debian.pm
 +++ b/Osstest/Debian.pm
-@@ -1624,7 +1624,7 @@ sub debian_dhcp_rofs_fix ($$) {
-     # / is still ro.  In stretch, the isc dhcp client spins requesting
-     # an address and then sending a DHCPDECLINE (and then, usually,
-     # eventually works).
--    return '' unless $ho->{Suite} =~ m/stretch/;
-+    return '' unless $ho->{Suite} =~ m/stretch|buster/;
-     my $script = "$rootdir/lib/udev/ifupdown-hotplug";
-     <<END.<<'ENDQ'.<<END
- set -ex
+@@ -938,6 +938,7 @@ d-i partman/choose_partition select finish
+ d-i partman/confirm boolean true
+ d-i partman-lvm/confirm boolean true
+ d-i partman-lvm/device_remove_lvm_span boolean true
++d-i partman-auto-lvm/guided_size string max
+ 
+ d-i partman/confirm_nooverwrite true
+ d-i partman-lvm/confirm_nooverwrite true
 -- 
 2.20.1
 
