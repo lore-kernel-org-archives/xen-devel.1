@@ -2,69 +2,53 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E7505C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C7AF6C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:35:56 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AF990207BC
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:26:09 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="e25Z1Hpt"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF990207BC
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	by mail.kernel.org (Postfix) with ESMTPS id 9E5852074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:35:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9E5852074D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeZOp-0005cC-BX; Fri, 29 May 2020 07:25:51 +0000
+	id 1jeZY7-0006WW-E7; Fri, 29 May 2020 07:35:27 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=mKAR=7L=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jeZOo-0005c7-Bu
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 07:25:50 +0000
-X-Inumbo-ID: 9eef271c-a17d-11ea-81bc-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ (envelope-from <SRS0=jshP=7L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jeZY6-0006WR-4Y
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 07:35:26 +0000
+X-Inumbo-ID: f52bc116-a17e-11ea-8993-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 9eef271c-a17d-11ea-81bc-bc764e2007e4;
- Fri, 29 May 2020 07:25:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=avu625cK9g/Vkyk5Cu/wReuBeqnDW8McW9abrjzuw2k=; b=e25Z1HptLuji0F/REtUTm9IQyT
- E3IA+pSglAscxwPxluBVKIGiRvD5I4BX+eKMe6SnZJD/WVWA+hQqfoLcxbylOn/Phk343YJ5OmYG7
- sz8tK+Ypqf3ixY0M9JlPu9xRkLdO6Oui8/69rIVyqf2h48sTA45mp0OxhruMh8Egorng=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jeZOl-0004sH-Du; Fri, 29 May 2020 07:25:47 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jeZOl-0000lA-6Y; Fri, 29 May 2020 07:25:47 +0000
-Subject: Re: [PATCH v2 3/3] clang: don't define nocall
-To: Roger Pau Monne <roger.pau@citrix.com>, xen-devel@lists.xenproject.org
-References: <20200528144023.10814-1-roger.pau@citrix.com>
- <20200528144023.10814-4-roger.pau@citrix.com>
-From: Julien Grall <julien@xen.org>
-Message-ID: <8aa8d35f-2928-2096-a47c-26659c5a43a2@xen.org>
-Date: Fri, 29 May 2020 08:25:44 +0100
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.8.1
+ id f52bc116-a17e-11ea-8993-bc764e2007e4;
+ Fri, 29 May 2020 07:35:24 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id A12EEB032;
+ Fri, 29 May 2020 07:35:22 +0000 (UTC)
+Subject: Re: [RFC PATCH 1/1] xen: Use a global mapping for runstate
+To: Julien Grall <julien@xen.org>
+References: <cover.1590675919.git.bertrand.marquis@arm.com>
+ <03e7cd740922bfbaa479f22d81d9de06f718a305.1590675919.git.bertrand.marquis@arm.com>
+ <e63a83a1-7d71-9cc5-517a-275e17880e2b@xen.org>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <dcfbca54-4773-9f43-1826-f5137a41bd9f@suse.com>
+Date: Fri, 29 May 2020 09:35:18 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <20200528144023.10814-4-roger.pau@citrix.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <e63a83a1-7d71-9cc5-517a-275e17880e2b@xen.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,54 +60,42 @@ List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+ "paul@xen.org" <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, "Xia,
+ Hongyan" <hongyxia@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>, xen-devel@lists.xenproject.org,
+ nd@arm.com, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Hi Roger,
-
-On 28/05/2020 15:40, Roger Pau Monne wrote:
-> Clang doesn't support attribute error, and the possible equivalents
-> like diagnose_if don't seem to work well in this case as they trigger
-> when when the function is not called (just by being used by the
-> APPEND_CALL macro).
-
-OOI, could you share the diagnose_if change you tried?
-
+On 28.05.2020 20:54, Julien Grall wrote:
+> On 28/05/2020 16:25, Bertrand Marquis wrote:
+>> At the moment on Arm, a Linux guest running with KTPI enabled will
+>> cause the following error when a context switch happens in user mode:
+>> (XEN) p2m.c:1890: d1v0: Failed to walk page-table va 0xffffff837ebe0cd0
+>>
+>> This patch is modifying runstate handling to map the area given by the
+>> guest inside Xen during the hypercall.
+>> This is removing the guest virtual to physical conversion during context
+>> switches which removes the bug
 > 
-> Define nocall to a noop on clang until a proper solution can be found.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> It would be good to spell out that a virtual address is not stable. So 
+> relying on it is wrong.
 
-Acked-by: Julien Grall <jgrall@amazon.com>
+Guests at present are permitted to change the mapping underneath the
+virtual address provided (this may not be the best idea, but the
+interface is like it is). Therefore I don't think the present
+interface can be changed like this. Instead a new interface will need
+adding which takes a guest physical address instead. (Which, in the
+end, will merely be one tiny step towards making the hypercall
+interfaces use guest physical addresses. And it would be nice if an
+overall concept was hashed out first how that conversion should
+occur, such that the change here could at least be made fit that
+planned model. For example, an option might be to retain all present
+hypercall numbering and simply dedicate a bit in the top level
+hypercall numbers indicating whether _all_ involved addresses for
+that operation are physical vs virtual ones.)
 
-> ---
->   xen/include/xen/compiler.h | 6 +++++-
->   1 file changed, 5 insertions(+), 1 deletion(-)
-> 
-> diff --git a/xen/include/xen/compiler.h b/xen/include/xen/compiler.h
-> index c22439b7a4..225e09e5f7 100644
-> --- a/xen/include/xen/compiler.h
-> +++ b/xen/include/xen/compiler.h
-> @@ -20,7 +20,11 @@
->   
->   #define __weak        __attribute__((__weak__))
->   
-> -#define nocall        __attribute__((error("Nonstandard ABI")))
-> +#if !defined(__clang__)
-> +# define nocall        __attribute__((error("Nonstandard ABI")))
-> +#else
-> +# define nocall
-> +#endif
->   
->   #if (!defined(__clang__) && (__GNUC__ == 4) && (__GNUC_MINOR__ < 5))
->   #define unreachable() do {} while (1)
-> 
-
-Cheers,
-
--- 
-Julien Grall
+Jan
 
