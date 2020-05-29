@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C6073C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C2221C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:38 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A3EEB206A4
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A3EEB206A4
+	by mail.kernel.org (Postfix) with ESMTPS id 9BCC0206A4
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9BCC0206A4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedIJ-0003DJ-8W; Fri, 29 May 2020 11:35:23 +0000
+	id 1jedIO-0003Jp-Hm; Fri, 29 May 2020 11:35:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedIH-0003By-Ss
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:35:21 +0000
-X-Inumbo-ID: 539bf114-a1a0-11ea-9dbe-bc764e2007e4
+ id 1jedIM-0003HT-T9
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:35:26 +0000
+X-Inumbo-ID: 54de43ec-a1a0-11ea-8993-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 539bf114-a1a0-11ea-9dbe-bc764e2007e4;
- Fri, 29 May 2020 11:34:16 +0000 (UTC)
+ id 54de43ec-a1a0-11ea-8993-bc764e2007e4;
+ Fri, 29 May 2020 11:34:18 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3a-0003xZ-Kc; Fri, 29 May 2020 12:20:10 +0100
+ id 1jed3Q-0003xZ-N1; Fri, 29 May 2020 12:20:00 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 45/49] setupboot_grub2: Recognise --nounzip for
- initramfs
-Date: Fri, 29 May 2020 12:19:41 +0100
-Message-Id: <20200529111945.21394-46-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 13/49] Debian: Specify `priority=critical' rather than
+ locale
+Date: Fri, 29 May 2020 12:19:09 +0100
+Message-Id: <20200529111945.21394-14-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -59,27 +59,37 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Modern versions of update-grub like to add this.  We need to spot this
-so that under EFI we generate the right things in xen.cfg.
+In buster, it appears that specifying locale on the command line is
+not sufficient.  Rather than adding more things to the command line,
+instead, just say `priority=critical', by defaulting $debconf_priority
+to 'critical'.
+
+I think this change should be fine for earlier suites too.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Osstest/Debian.pm | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index 615047cb..de53c1ac 100644
+index 345aff68..7b311a14 100644
 --- a/Osstest/Debian.pm
 +++ b/Osstest/Debian.pm
-@@ -551,7 +551,7 @@ sub setupboot_grub2 ($$$$) {
-                 $entry->{KernVer}= $2;
-                 $entry->{KernOpts}= $3;
-             }
--            if (m/^\s*module2?\s+(?:\/boot)?\/(initrd\S+)/) {
-+            if (m/^\s*module2?\s+(?:--nounzip\s+)*(?:\/boot)?\/(initrd\S+)/) {
-                 $entry->{Initrd}= $1;
-             }
- 	    if (m/^\s*module2?\s*\/(xenpolicy\S+)/) {
+@@ -698,12 +698,10 @@ sub di_installcmdline_core ($$;@) {
+                "$xopts{PreseedScheme}=$ps_url",
+                "netcfg/dhcp_timeout=150",
+                "netcfg/choose_interface=$netcfg_interface",
+-               "debian-installer/locale=en_GB",
+                );
+ 
+-    my $debconf_priority= $xopts{DebconfPriority};
+-    push @cl, "priority=$debconf_priority"
+-        if defined $debconf_priority;
++    my $debconf_priority= $xopts{DebconfPriority} // 'critical';
++    push @cl, "priority=$debconf_priority";
+     push @cl, "rescue/enable=true" if $xopts{RescueMode};
+ 
+     if ($r{syslog_server}) {
 -- 
 2.20.1
 
