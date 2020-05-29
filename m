@@ -2,61 +2,67 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CBABC433E2
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 57DBEC433E0
 	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:12:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24D72207F5
+	by mail.kernel.org (Postfix) with ESMTPS id 24DB0208A7
 	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:12:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ep28E21r"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24D72207F5
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="RyNqcxQd"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24DB0208A7
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jecvu-0004mH-87; Fri, 29 May 2020 11:12:14 +0000
+	id 1jecvz-0004mv-NJ; Fri, 29 May 2020 11:12:19 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5BQD=7L=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jecvs-0004m7-Tv
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:12:12 +0000
-X-Inumbo-ID: 3eac4bbc-a19d-11ea-9dbe-bc764e2007e4
+ id 1jecvx-0004me-SZ
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:12:17 +0000
+X-Inumbo-ID: 3fbe03e2-a19d-11ea-9dbe-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3eac4bbc-a19d-11ea-9dbe-bc764e2007e4;
- Fri, 29 May 2020 11:12:12 +0000 (UTC)
+ id 3fbe03e2-a19d-11ea-9dbe-bc764e2007e4;
+ Fri, 29 May 2020 11:12:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+ Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=FEfIwhqHFmiOENKi3fOR0wow9f3racvpv9g6qH4tbJo=; b=ep28E21rfFLIRerArhIEm3AUIJ
- utXF2oObWEN5vrSnWiLAKxnXyKbsbBJKqAJR/Y9j8yCM5cfWy1kgvYLC6zlzIGviaMskyg6YUUW4p
- Z2k4lZLXBXrhj9sjiL+CgG5iVB/W77dKuCYwSdwXJl952JGjV0/CqI3SsUoCLSftJsZ0=;
+ bh=wpKga3yyO5WYBCcsTT/9ZqLEb5cI9pIQiRxp5mp3PjU=; b=RyNqcxQd5F8o0SmM/SdkYCxZ/x
+ /HD7oLZYAEojQE/q/FHNkVirpBbrotQnDPYk2oVVfYNC06Kqto67WzrWaSMf6KUnOqiQ84152Myp+
+ Ar172xs0z4a8Quc2UZ1w5C3wxWMb1IQqUY0FIVyBg3ROhNs24vlQC0kNkyxXrlXiqkME=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jecvq-00021e-LK; Fri, 29 May 2020 11:12:10 +0000
+ id 1jecvt-00021p-H9; Fri, 29 May 2020 11:12:13 +0000
 Received: from 54-240-197-236.amazon.com ([54.240.197.236]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jecvq-0006tM-AS; Fri, 29 May 2020 11:12:10 +0000
+ id 1jecvt-0006tM-79; Fri, 29 May 2020 11:12:13 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v7 00/15] switch to domheap for Xen page tables
-Date: Fri, 29 May 2020 12:11:44 +0100
-Message-Id: <cover.1590750232.git.hongyxia@amazon.com>
+Subject: [PATCH v7 02/15] x86/mm: make sure there is one exit path for
+ modify_xen_mappings
+Date: Fri, 29 May 2020 12:11:46 +0100
+Message-Id: <3edeb558a0586cf5ecb235c9159cd00fe1197b9e.1590750232.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1590750232.git.hongyxia@amazon.com>
+References: <cover.1590750232.git.hongyxia@amazon.com>
+In-Reply-To: <cover.1590750232.git.hongyxia@amazon.com>
+References: <cover.1590750232.git.hongyxia@amazon.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -67,70 +73,91 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
- Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Jan Beulich <jbeulich@suse.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Hongyan Xia <hongyxia@amazon.com>
+From: Wei Liu <wei.liu2@citrix.com>
 
-This series rewrites all the remaining functions and finally makes the
-switch from xenheap to domheap for Xen page tables, so that they no
-longer need to rely on the direct map, which is a big step towards
-removing the direct map.
+We will soon need to handle dynamically mapping / unmapping page
+tables in the said function. Since dynamic mappings may map and unmap
+pl3e in different iterations, lift pl3e out of the loop.
 
-This series depends on the following mini-series:
-https://lists.xenproject.org/archives/html/xen-devel/2020-04/msg00730.html
+No functional change.
+
+Signed-off-by: Wei Liu <wei.liu2@citrix.com>
+Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
 
 ---
-Changed in v7:
-- rebase and cleanup.
-- address comments in v6.
-- add alloc_map_clear_xen_pt() helper to simplify the patches in this
-  series.
+Changed since v4:
+- drop the end_of_loop goto label.
 
-Changed in v6:
-- drop the patches that have already been merged.
-- rebase and cleanup.
-- rewrite map_pages_to_xen() and modify_xen_mappings() in a way that
-  does not require an end_of_loop goto label.
+Changed since v3:
+- remove asserts on rc since it never gets changed to anything else.
+---
+ xen/arch/x86/mm.c | 15 +++++++++++----
+ 1 file changed, 11 insertions(+), 4 deletions(-)
 
-Hongyan Xia (2):
-  x86/mm: drop old page table APIs
-  x86: switch to use domheap page for page tables
-
-Wei Liu (13):
-  x86/mm: map_pages_to_xen would better have one exit path
-  x86/mm: make sure there is one exit path for modify_xen_mappings
-  x86/mm: rewrite virt_to_xen_l*e
-  x86/mm: switch to new APIs in map_pages_to_xen
-  x86/mm: switch to new APIs in modify_xen_mappings
-  x86_64/mm: introduce pl2e in paging_init
-  x86_64/mm: switch to new APIs in paging_init
-  x86_64/mm: switch to new APIs in setup_m2p_table
-  efi: use new page table APIs in copy_mapping
-  efi: switch to new APIs in EFI code
-  x86/smpboot: add exit path for clone_mapping()
-  x86/smpboot: switch clone_mapping() to new APIs
-  x86/mm: drop _new suffix for page table APIs
-
- xen/arch/x86/domain_page.c |  11 +-
- xen/arch/x86/efi/runtime.h |  13 +-
- xen/arch/x86/mm.c          | 273 +++++++++++++++++++++++--------------
- xen/arch/x86/setup.c       |   4 +-
- xen/arch/x86/smpboot.c     |  70 ++++++----
- xen/arch/x86/x86_64/mm.c   |  82 ++++++-----
- xen/common/efi/boot.c      |  87 +++++++-----
- xen/common/efi/efi.h       |   3 +-
- xen/common/efi/runtime.c   |   8 +-
- xen/common/vmap.c          |   1 +
- xen/include/asm-x86/mm.h   |   7 +-
- xen/include/asm-x86/page.h |  13 +-
- 12 files changed, 354 insertions(+), 218 deletions(-)
-
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index d99f9bc133..462682ba70 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -5457,10 +5457,12 @@ int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+ {
+     bool locking = system_state > SYS_STATE_boot;
++    l3_pgentry_t *pl3e;
+     l2_pgentry_t *pl2e;
+     l1_pgentry_t *pl1e;
+     unsigned int  i;
+     unsigned long v = s;
++    int rc = -ENOMEM;
+ 
+     /* Set of valid PTE bits which may be altered. */
+ #define FLAGS_MASK (_PAGE_NX|_PAGE_RW|_PAGE_PRESENT)
+@@ -5471,7 +5473,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+ 
+     while ( v < e )
+     {
+-        l3_pgentry_t *pl3e = virt_to_xen_l3e(v);
++        pl3e = virt_to_xen_l3e(v);
+ 
+         if ( !pl3e || !(l3e_get_flags(*pl3e) & _PAGE_PRESENT) )
+         {
+@@ -5504,7 +5506,8 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+             /* PAGE1GB: shatter the superpage and fall through. */
+             l2t = alloc_xen_pagetable();
+             if ( !l2t )
+-                return -ENOMEM;
++                goto out;
++
+             for ( i = 0; i < L2_PAGETABLE_ENTRIES; i++ )
+                 l2e_write(l2t + i,
+                           l2e_from_pfn(l3e_get_pfn(*pl3e) +
+@@ -5561,7 +5564,8 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+                 /* PSE: shatter the superpage and try again. */
+                 l1t = alloc_xen_pagetable();
+                 if ( !l1t )
+-                    return -ENOMEM;
++                    goto out;
++
+                 for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
+                     l1e_write(&l1t[i],
+                               l1e_from_pfn(l2e_get_pfn(*pl2e) + i,
+@@ -5694,7 +5698,10 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+     flush_area(NULL, FLUSH_TLB_GLOBAL);
+ 
+ #undef FLAGS_MASK
+-    return 0;
++    rc = 0;
++
++ out:
++    return rc;
+ }
+ 
+ #undef flush_area
 -- 
 2.24.1.AMZN
 
