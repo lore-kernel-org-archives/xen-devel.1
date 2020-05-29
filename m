@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AB39C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4D727C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:49 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 33DA7207BC
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 33DA7207BC
+	by mail.kernel.org (Postfix) with ESMTPS id 27D7E2074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 27D7E2074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedHU-0002MD-Us; Fri, 29 May 2020 11:34:32 +0000
+	id 1jedHa-0002S8-8Q; Fri, 29 May 2020 11:34:38 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedHT-0002L4-Qg
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:34:31 +0000
-X-Inumbo-ID: 43e1ff52-a1a0-11ea-8993-bc764e2007e4
+ id 1jedHY-0002Qo-Qx
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:34:36 +0000
+X-Inumbo-ID: 45167a06-a1a0-11ea-8993-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 43e1ff52-a1a0-11ea-8993-bc764e2007e4;
- Fri, 29 May 2020 11:33:49 +0000 (UTC)
+ id 45167a06-a1a0-11ea-8993-bc764e2007e4;
+ Fri, 29 May 2020 11:33:51 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3U-0003xZ-A8; Fri, 29 May 2020 12:20:04 +0100
+ id 1jed3a-0003xZ-3W; Fri, 29 May 2020 12:20:10 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 29/49] mg-debian-installer-update: support
- overlay-intramfs-SUITE
-Date: Fri, 29 May 2020 12:19:25 +0100
-Message-Id: <20200529111945.21394-30-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 43/49] setupboot_grub2: Insist on space after
+ directives
+Date: Fri, 29 May 2020 12:19:39 +0100
+Message-Id: <20200529111945.21394-44-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -59,53 +59,47 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This lets us patch the installer more easily.
-
-No uses yet.
+These parsing regexps were all wrong!
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- mg-debian-installer-update | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ Osstest/Debian.pm | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/mg-debian-installer-update b/mg-debian-installer-update
-index f1e682f9..fb4fe2ab 100755
---- a/mg-debian-installer-update
-+++ b/mg-debian-installer-update
-@@ -33,6 +33,8 @@ sbase=$site/dists/$suite
- 
- src=$sbase/main/installer-$arch/current/images/netboot/
- 
-+osstest_dir="$(pwd)"
-+
- case ${suite}_${arch} in
-     lenny_armhf|squeeze_armhf|lenny_arm64|squeeze_arm64|wheezy_arm64)
-         # No such thing.
-@@ -188,6 +190,24 @@ if [ "x$specialkernel" != x ]; then
-     rm -rf x
- fi
- 
-+overlay_initrd=$osstest_dir/overlay-initrd-$suite
-+if [ -e "$overlay_initrd" ]; then
-+    for f in $files; do
-+        s=${f/:*} ; d=${f/*:}
-+        case "$d" in
-+            *initrd*)
-+                echo "adding $overlay_initrd to $d"
-+                (
-+                    set -e
-+                    cd "$overlay_initrd"
-+                    find -print0 | cpio -0 -Hnewc -o \
-+                        | gzip -9nf
-+                ) >>$d.new
-+                ;;
-+        esac
-+    done
-+fi
-+
- for f in $files; do
-         s=${f/:*} ; d=${f/*:}
-         mv -f $d.new $d
+diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
+index 2d30b3e9..a20569e5 100644
+--- a/Osstest/Debian.pm
++++ b/Osstest/Debian.pm
+@@ -529,17 +529,17 @@ sub setupboot_grub2 ($$$$) {
+             if (m/^\s*submenu\s+[\'\"](.*)[\'\"].*\{\s*$/) {
+                 push @offsets,(0);
+             }
+-            if (m/^\s*chainloader\s*\/EFI\/osstest\/xen.efi/) {
++            if (m/^\s*chainloader\s+\/EFI\/osstest\/xen.efi/) {
+                 die unless $entry;
+                 $entry->{Hv}= $1;
+                 $entry->{Chainload} = 1;
+             }
+-            if (m/^\s*multiboot2?\s*(?:\/boot)?\/(xen\-[0-9][-+.0-9a-z]*\S+)/) {
++            if (m/^\s*multiboot2?\s+(?:\/boot)?\/(xen\-[0-9][-+.0-9a-z]*\S+)/) {
+                 die unless $entry;
+                 $entry->{Hv}= $1;
+                 $entry->{Chainload} = 0;
+             }
+-            if (m/^\s*multiboot2?\s*(?:\/boot)?\/(vmlinu[xz]-(\S+))\s+(.*)/) {
++            if (m/^\s*multiboot2?\s+(?:\/boot)?\/(vmlinu[xz]-(\S+))\s+(.*)/) {
+                 die unless $entry;
+                 $entry->{KernOnly}= $1;
+                 $entry->{KernVer}= $2;
+@@ -551,7 +551,7 @@ sub setupboot_grub2 ($$$$) {
+                 $entry->{KernVer}= $2;
+                 $entry->{KernOpts}= $3;
+             }
+-            if (m/^\s*module2?\s*(?:\/boot)?\/(initrd\S+)/) {
++            if (m/^\s*module2?\s+(?:\/boot)?\/(initrd\S+)/) {
+                 $entry->{Initrd}= $1;
+             }
+ 	    if (m/^\s*module2?\s*\/(xenpolicy\S+)/) {
 -- 
 2.20.1
 
