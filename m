@@ -6,39 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5E7FBC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 94257C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:37 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 3A2482074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3A2482074D
+	by mail.kernel.org (Postfix) with ESMTPS id 6D95B2074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D95B2074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedGN-0001BU-B7; Fri, 29 May 2020 11:33:23 +0000
+	id 1jedGS-0001GS-Kt; Fri, 29 May 2020 11:33:28 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedGL-0001AN-Pc
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:21 +0000
-X-Inumbo-ID: 256280b0-a1a0-11ea-9dbe-bc764e2007e4
+ id 1jedGQ-0001Ep-QA
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:26 +0000
+X-Inumbo-ID: 2696c888-a1a0-11ea-9947-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 256280b0-a1a0-11ea-9dbe-bc764e2007e4;
- Fri, 29 May 2020 11:32:58 +0000 (UTC)
+ id 2696c888-a1a0-11ea-9947-bc764e2007e4;
+ Fri, 29 May 2020 11:33:00 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3S-0003xZ-4N; Fri, 29 May 2020 12:20:02 +0100
+ id 1jed3Y-0003xZ-Qw; Fri, 29 May 2020 12:20:08 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 19/49] buster: preseed partman-auto-lvm/guided_size
-Date: Fri, 29 May 2020 12:19:15 +0100
-Message-Id: <20200529111945.21394-20-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 38/49] ts-xen-install: Add $ho argument to
+ some_extradebs
+Date: Fri, 29 May 2020 12:19:34 +0100
+Message-Id: <20200529111945.21394-39-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -58,29 +59,42 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Otherwise we get this question:
-
-  | You may use the whole volume group for guided partitioning, or part
-  | of it.  [...]
-  | Amount of volume group to use for guided partitioning:
+This is going to move to Debian.pm.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- Osstest/Debian.pm | 1 +
- 1 file changed, 1 insertion(+)
+ ts-xen-install | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index a328160e..bac33d00 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -938,6 +938,7 @@ d-i partman/choose_partition select finish
- d-i partman/confirm boolean true
- d-i partman-lvm/confirm boolean true
- d-i partman-lvm/device_remove_lvm_span boolean true
-+d-i partman-auto-lvm/guided_size string max
+diff --git a/ts-xen-install b/ts-xen-install
+index 08b4ea23..6196a890 100755
+--- a/ts-xen-install
++++ b/ts-xen-install
+@@ -71,8 +71,8 @@ sub packages () {
+         if toolstack($ho)->{ExtraPackages};
+ }
  
- d-i partman/confirm_nooverwrite true
- d-i partman-lvm/confirm_nooverwrite true
+-sub some_extradebs ($) {
+-    my ($items) = @_;
++sub some_extradebs ($$) {
++    my ($ho, $items) = @_;
+     my $cfgvar = join('_', @$items);
+     my $specs = $c{$cfgvar};
+     if (!length $specs) {
+@@ -111,11 +111,11 @@ sub extradebs () {
+     my $suite = $ho->{Suite};
+ 
+     # $c{ DebianExtraPackages_<suite> }
+-    some_extradebs([ 'DebianExtraPackages', $suite ]);
++    some_extradebs($ho, [ 'DebianExtraPackages', $suite ]);
+ 
+     # $c{ DebianExtraPackages_<firmware>_<arch>_<suite> }
+     my $firmware = get_host_property($ho, "firmware");
+-    some_extradebs([ 'DebianExtraPackages', $firmware, $ho->{Arch}, $suite ]);
++    some_extradebs($ho, [ 'DebianExtraPackages', $firmware, $ho->{Arch}, $suite ]);
+ }
+ 
+ sub extract () {
 -- 
 2.20.1
 
