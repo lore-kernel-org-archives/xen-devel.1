@@ -7,31 +7,31 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3EB55C433E2
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:29:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 00DB7C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:30:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 0E2782074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:29:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C8C4D2074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:30:03 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="Hg5LjaMQ"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0E2782074D
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="UUmeVUHB"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C8C4D2074D
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedCk-0007fp-1y; Fri, 29 May 2020 11:29:38 +0000
+	id 1jedCp-0007iS-KH; Fri, 29 May 2020 11:29:43 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5BQD=7L=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jedCj-0007fZ-He
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:29:37 +0000
-X-Inumbo-ID: aa7f56ca-a19f-11ea-8993-bc764e2007e4
+ id 1jedCo-0007i1-IT
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:29:42 +0000
+X-Inumbo-ID: aaa08e44-a19f-11ea-8993-bc764e2007e4
 Received: from mail.xenproject.org (unknown [104.130.215.37])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id aa7f56ca-a19f-11ea-8993-bc764e2007e4;
+ id aaa08e44-a19f-11ea-8993-bc764e2007e4;
  Fri, 29 May 2020 11:29:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
@@ -39,24 +39,24 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=YEyP3e+saUdHL++my7j7Pco1QGzdKCrNuWAbFZKB+YE=; b=Hg5LjaMQaMU/5alHCjUNBW7F+B
- hF58DQTvFPakeGUaZ7p4xWQLjenzZepZ/PuKHRBfHRwgu1wBOpcH5a2L3CvoNemSTLjGT0Cauq27i
- 9kXu+IyZTmStxI/LWBrvBJD22cRE4IvRf9aLGoYsIQ0UX1liBHttDaGcbli7LCi2gx7o=;
+ bh=2o9JVrYNzYpbIDhDtoJt6aTVVTe+wwF1KohL4X9QeEI=; b=UUmeVUHBq3KFFYf6JCLtTyrDHe
+ OZC9zxH5tLQ2pjF700HYmblMl5iNoFMqxydO6LfCdZcP1HWWK3hkwe4dzvYrEDWT4NHmqA7Y/eRcR
+ h98KKJDMn3GWQ9t7Aa5KKQg0xE9IJIdWvj79DIwi152wN0tlPkWTqWeh1KoEsMgKBWlc=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jedCd-0002TA-MX; Fri, 29 May 2020 11:29:31 +0000
+ id 1jedCd-0002TI-RP; Fri, 29 May 2020 11:29:31 +0000
 Received: from 54-240-197-236.amazon.com ([54.240.197.236]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jecwC-0006tM-5z; Fri, 29 May 2020 11:12:32 +0000
+ id 1jecw9-0006tM-9R; Fri, 29 May 2020 11:12:29 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v7 15/15] x86/mm: drop _new suffix for page table APIs
-Date: Fri, 29 May 2020 12:11:59 +0100
-Message-Id: <5f4c9dddc7f34228d348d3d445e754fe0b59d269.1590750232.git.hongyxia@amazon.com>
+Subject: [PATCH v7 13/15] x86/mm: drop old page table APIs
+Date: Fri, 29 May 2020 12:11:57 +0100
+Message-Id: <cb75e682b8597828b46bcbd79ee3aadeba6ebf53.1590750232.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590750232.git.hongyxia@amazon.com>
 References: <cover.1590750232.git.hongyxia@amazon.com>
@@ -78,268 +78,135 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>, julien@xen.org,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Wei Liu <wei.liu2@citrix.com>
+From: Hongyan Xia <hongyxia@amazon.com>
 
-No functional change.
+Two sets of old APIs, alloc/free_xen_pagetable() and lXe_to_lYe(), are
+now dropped to avoid the dependency on direct map.
+
+There are two special cases which still have not been re-written into
+the new APIs, thus need special treatment:
+
+rpt in smpboot.c cannot use ephemeral mappings yet. The problem is that
+rpt is read and written in context switch code, but the mapping
+infrastructure is NOT context-switch-safe, meaning we cannot map rpt in
+one domain and unmap in another. Before the mapping infrastructure
+supports context switches, rpt has to be globally mapped.
+
+Also, lXe_to_lYe() during Xen image relocation cannot be converted into
+map/unmap pairs. We cannot hold on to mappings while the mapping
+infrastructure is being relocated! It is enough to remove the direct map
+in the second e820 pass, so we still use the direct map (<4GiB) in Xen
+relocation (which is during the first e820 pass).
 
 Signed-off-by: Wei Liu <wei.liu2@citrix.com>
 Signed-off-by: Hongyan Xia <hongyxia@amazon.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
- xen/arch/x86/mm.c        | 44 ++++++++++++++++++++--------------------
- xen/arch/x86/smpboot.c   |  6 +++---
- xen/arch/x86/x86_64/mm.c |  2 +-
- xen/include/asm-x86/mm.h |  4 ++--
- 4 files changed, 28 insertions(+), 28 deletions(-)
+ xen/arch/x86/mm.c          | 14 --------------
+ xen/arch/x86/setup.c       |  4 ++--
+ xen/arch/x86/smpboot.c     |  4 ++--
+ xen/include/asm-x86/mm.h   |  2 --
+ xen/include/asm-x86/page.h |  5 -----
+ 5 files changed, 4 insertions(+), 25 deletions(-)
 
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 16f1aa3344..bf35a1a998 100644
+index 26694e2f30..38cfa3ce25 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -356,7 +356,7 @@ void __init arch_init_memory(void)
-             ASSERT(root_pgt_pv_xen_slots < ROOT_PAGETABLE_PV_XEN_SLOTS);
-             if ( l4_table_offset(split_va) == l4_table_offset(split_va - 1) )
-             {
--                mfn_t l3mfn = alloc_xen_pagetable_new();
-+                mfn_t l3mfn = alloc_xen_pagetable();
- 
-                 if ( !mfn_eq(l3mfn, INVALID_MFN) )
-                 {
-@@ -4914,7 +4914,7 @@ int mmcfg_intercept_write(
-  * them. The caller must check whether the allocation has succeeded, and only
-  * pass valid MFNs to map_domain_page().
-  */
--mfn_t alloc_xen_pagetable_new(void)
-+mfn_t alloc_xen_pagetable(void)
- {
-     if ( system_state != SYS_STATE_early_boot )
-     {
-@@ -4929,7 +4929,7 @@ mfn_t alloc_xen_pagetable_new(void)
+@@ -4908,20 +4908,6 @@ int mmcfg_intercept_write(
+     return X86EMUL_OKAY;
  }
  
- /* mfn can be INVALID_MFN */
--void free_xen_pagetable_new(mfn_t mfn)
-+void free_xen_pagetable(mfn_t mfn)
- {
-     if ( system_state != SYS_STATE_early_boot && !mfn_eq(mfn, INVALID_MFN) )
-         free_domheap_page(mfn_to_page(mfn));
-@@ -4937,7 +4937,7 @@ void free_xen_pagetable_new(mfn_t mfn)
- 
- void *alloc_map_clear_xen_pt(mfn_t *pmfn)
- {
+-void *alloc_xen_pagetable(void)
+-{
 -    mfn_t mfn = alloc_xen_pagetable_new();
-+    mfn_t mfn = alloc_xen_pagetable();
-     void *ret;
- 
-     if ( mfn_eq(mfn, INVALID_MFN) )
-@@ -4983,7 +4983,7 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
-         }
-         if ( locking )
-             spin_unlock(&map_pgdir_lock);
--        free_xen_pagetable_new(l3mfn);
-+        free_xen_pagetable(l3mfn);
-     }
- 
-     return map_l3t_from_l4e(*pl4e) + l3_table_offset(v);
-@@ -5018,7 +5018,7 @@ static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
-         }
-         if ( locking )
-             spin_unlock(&map_pgdir_lock);
--        free_xen_pagetable_new(l2mfn);
-+        free_xen_pagetable(l2mfn);
-     }
- 
-     BUG_ON(l3e_get_flags(*pl3e) & _PAGE_PSE);
-@@ -5057,7 +5057,7 @@ l1_pgentry_t *virt_to_xen_l1e(unsigned long v)
-         }
-         if ( locking )
-             spin_unlock(&map_pgdir_lock);
--        free_xen_pagetable_new(l1mfn);
-+        free_xen_pagetable(l1mfn);
-     }
- 
-     BUG_ON(l2e_get_flags(*pl2e) & _PAGE_PSE);
-@@ -5166,10 +5166,10 @@ int map_pages_to_xen(
-                         ol2e = l2t[i];
-                         if ( (l2e_get_flags(ol2e) & _PAGE_PRESENT) &&
-                              !(l2e_get_flags(ol2e) & _PAGE_PSE) )
--                            free_xen_pagetable_new(l2e_get_mfn(ol2e));
-+                            free_xen_pagetable(l2e_get_mfn(ol2e));
-                     }
-                     unmap_domain_page(l2t);
--                    free_xen_pagetable_new(l3e_get_mfn(ol3e));
-+                    free_xen_pagetable(l3e_get_mfn(ol3e));
-                 }
-             }
- 
-@@ -5208,7 +5208,7 @@ int map_pages_to_xen(
-                 continue;
-             }
- 
--            l2mfn = alloc_xen_pagetable_new();
-+            l2mfn = alloc_xen_pagetable();
-             if ( mfn_eq(l2mfn, INVALID_MFN) )
-                 goto out;
- 
-@@ -5236,7 +5236,7 @@ int map_pages_to_xen(
-                 spin_unlock(&map_pgdir_lock);
-             flush_area(virt, flush_flags);
- 
--            free_xen_pagetable_new(l2mfn);
-+            free_xen_pagetable(l2mfn);
-         }
- 
-         pl2e = virt_to_xen_l2e(virt);
-@@ -5270,7 +5270,7 @@ int map_pages_to_xen(
-                         flush_flags(l1e_get_flags(l1t[i]));
-                     flush_area(virt, flush_flags);
-                     unmap_domain_page(l1t);
--                    free_xen_pagetable_new(l2e_get_mfn(ol2e));
-+                    free_xen_pagetable(l2e_get_mfn(ol2e));
-                 }
-             }
- 
-@@ -5315,7 +5315,7 @@ int map_pages_to_xen(
-                     goto check_l3;
-                 }
- 
--                l1mfn = alloc_xen_pagetable_new();
-+                l1mfn = alloc_xen_pagetable();
-                 if ( mfn_eq(l1mfn, INVALID_MFN) )
-                     goto out;
- 
-@@ -5342,7 +5342,7 @@ int map_pages_to_xen(
-                     spin_unlock(&map_pgdir_lock);
-                 flush_area(virt, flush_flags);
- 
--                free_xen_pagetable_new(l1mfn);
-+                free_xen_pagetable(l1mfn);
-             }
- 
-             pl1e  = map_l1t_from_l2e(*pl2e) + l1_table_offset(virt);
-@@ -5408,7 +5408,7 @@ int map_pages_to_xen(
-                     flush_area(virt - PAGE_SIZE,
-                                FLUSH_TLB_GLOBAL |
-                                FLUSH_ORDER(PAGETABLE_ORDER));
--                    free_xen_pagetable_new(l2e_get_mfn(ol2e));
-+                    free_xen_pagetable(l2e_get_mfn(ol2e));
-                 }
-                 else if ( locking )
-                     spin_unlock(&map_pgdir_lock);
-@@ -5459,7 +5459,7 @@ int map_pages_to_xen(
-                 flush_area(virt - PAGE_SIZE,
-                            FLUSH_TLB_GLOBAL |
-                            FLUSH_ORDER(2*PAGETABLE_ORDER));
--                free_xen_pagetable_new(l3e_get_mfn(ol3e));
-+                free_xen_pagetable(l3e_get_mfn(ol3e));
-             }
-             else if ( locking )
-                 spin_unlock(&map_pgdir_lock);
-@@ -5548,7 +5548,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-             }
- 
-             /* PAGE1GB: shatter the superpage and fall through. */
--            l2mfn = alloc_xen_pagetable_new();
-+            l2mfn = alloc_xen_pagetable();
-             if ( mfn_eq(l2mfn, INVALID_MFN) )
-                 goto out;
- 
-@@ -5572,7 +5572,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-             if ( locking )
-                 spin_unlock(&map_pgdir_lock);
- 
--            free_xen_pagetable_new(l2mfn);
-+            free_xen_pagetable(l2mfn);
-         }
- 
-         /*
-@@ -5608,7 +5608,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-             {
-                 l1_pgentry_t *l1t;
-                 /* PSE: shatter the superpage and try again. */
--                mfn_t l1mfn = alloc_xen_pagetable_new();
-+                mfn_t l1mfn = alloc_xen_pagetable();
- 
-                 if ( mfn_eq(l1mfn, INVALID_MFN) )
-                     goto out;
-@@ -5632,7 +5632,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-                 if ( locking )
-                     spin_unlock(&map_pgdir_lock);
- 
--                free_xen_pagetable_new(l1mfn);
-+                free_xen_pagetable(l1mfn);
-             }
-         }
-         else
-@@ -5699,7 +5699,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-                 if ( locking )
-                     spin_unlock(&map_pgdir_lock);
-                 flush_area(NULL, FLUSH_TLB_GLOBAL); /* flush before free */
--                free_xen_pagetable_new(l1mfn);
-+                free_xen_pagetable(l1mfn);
-             }
-             else if ( locking )
-                 spin_unlock(&map_pgdir_lock);
-@@ -5744,7 +5744,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-                 if ( locking )
-                     spin_unlock(&map_pgdir_lock);
-                 flush_area(NULL, FLUSH_TLB_GLOBAL); /* flush before free */
--                free_xen_pagetable_new(l2mfn);
-+                free_xen_pagetable(l2mfn);
-             }
-             else if ( locking )
-                 spin_unlock(&map_pgdir_lock);
+-
+-    return mfn_eq(mfn, INVALID_MFN) ? NULL : mfn_to_virt(mfn_x(mfn));
+-}
+-
+-void free_xen_pagetable(void *v)
+-{
+-    mfn_t mfn = v ? virt_to_mfn(v) : INVALID_MFN;
+-
+-    free_xen_pagetable_new(mfn);
+-}
+-
+ /*
+  * For these PTE APIs, the caller must follow the alloc-map-unmap-free
+  * lifecycle, which means explicitly mapping the PTE pages before accessing
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 2dec7a3fc6..b08b69ff5d 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1190,7 +1190,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+                     continue;
+                 *pl4e = l4e_from_intpte(l4e_get_intpte(*pl4e) +
+                                         xen_phys_start);
+-                pl3e = l4e_to_l3e(*pl4e);
++                pl3e = __va(l4e_get_paddr(*pl4e));
+                 for ( j = 0; j < L3_PAGETABLE_ENTRIES; j++, pl3e++ )
+                 {
+                     /* Not present, 1GB mapping, or already relocated? */
+@@ -1200,7 +1200,7 @@ void __init noreturn __start_xen(unsigned long mbi_p)
+                         continue;
+                     *pl3e = l3e_from_intpte(l3e_get_intpte(*pl3e) +
+                                             xen_phys_start);
+-                    pl2e = l3e_to_l2e(*pl3e);
++                    pl2e = __va(l3e_get_paddr(*pl3e));
+                     for ( k = 0; k < L2_PAGETABLE_ENTRIES; k++, pl2e++ )
+                     {
+                         /* Not present, PSE, or already relocated? */
 diff --git a/xen/arch/x86/smpboot.c b/xen/arch/x86/smpboot.c
-index 9cdf198fd6..a20540e36a 100644
+index 186211ccc9..9cdf198fd6 100644
 --- a/xen/arch/x86/smpboot.c
 +++ b/xen/arch/x86/smpboot.c
-@@ -901,15 +901,15 @@ static void cleanup_cpu_root_pgt(unsigned int cpu)
-                     continue;
+@@ -808,7 +808,7 @@ static int setup_cpu_root_pgt(unsigned int cpu)
+     if ( !opt_xpti_hwdom && !opt_xpti_domu )
+         return 0;
  
-                 ASSERT(!(l2e_get_flags(l2t[i2]) & _PAGE_PSE));
--                free_xen_pagetable_new(l2e_get_mfn(l2t[i2]));
-+                free_xen_pagetable(l2e_get_mfn(l2t[i2]));
-             }
+-    rpt = alloc_xen_pagetable();
++    rpt = alloc_xenheap_page();
+     if ( !rpt )
+         return -ENOMEM;
  
-             unmap_domain_page(l2t);
--            free_xen_pagetable_new(l2mfn);
-+            free_xen_pagetable(l2mfn);
-         }
- 
-         unmap_domain_page(l3t);
--        free_xen_pagetable_new(l3mfn);
-+        free_xen_pagetable(l3mfn);
+@@ -912,7 +912,7 @@ static void cleanup_cpu_root_pgt(unsigned int cpu)
+         free_xen_pagetable_new(l3mfn);
      }
  
-     free_xenheap_page(rpt);
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index cfc3de9091..91d7b24da8 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -621,7 +621,7 @@ void __init paging_init(void)
-     UNMAP_DOMAIN_PAGE(l3_ro_mpt);
+-    free_xen_pagetable(rpt);
++    free_xenheap_page(rpt);
  
-     /* Create user-accessible L2 directory to map the MPT for compat guests. */
--    l2_ro_mpt_mfn = alloc_xen_pagetable_new();
-+    l2_ro_mpt_mfn = alloc_xen_pagetable();
-     if ( mfn_eq(l2_ro_mpt_mfn, INVALID_MFN) )
-         goto nomem;
-     compat_idle_pg_table_l2 = map_domain_page_global(l2_ro_mpt_mfn);
+     /* Also zap the stub mapping for this CPU. */
+     if ( stub_linear )
 diff --git a/xen/include/asm-x86/mm.h b/xen/include/asm-x86/mm.h
-index 2ac0cdab83..482fbd9d39 100644
+index 42d1a78731..2ac0cdab83 100644
 --- a/xen/include/asm-x86/mm.h
 +++ b/xen/include/asm-x86/mm.h
-@@ -583,8 +583,8 @@ int vcpu_destroy_pagetables(struct vcpu *);
+@@ -583,8 +583,6 @@ int vcpu_destroy_pagetables(struct vcpu *);
  void *do_page_walk(struct vcpu *v, unsigned long addr);
  
  /* Allocator functions for Xen pagetables. */
--mfn_t alloc_xen_pagetable_new(void);
--void free_xen_pagetable_new(mfn_t mfn);
-+mfn_t alloc_xen_pagetable(void);
-+void free_xen_pagetable(mfn_t mfn);
+-void *alloc_xen_pagetable(void);
+-void free_xen_pagetable(void *v);
+ mfn_t alloc_xen_pagetable_new(void);
+ void free_xen_pagetable_new(mfn_t mfn);
  void *alloc_map_clear_xen_pt(mfn_t *pmfn);
+diff --git a/xen/include/asm-x86/page.h b/xen/include/asm-x86/page.h
+index 3854feb3ea..ec66ad8df6 100644
+--- a/xen/include/asm-x86/page.h
++++ b/xen/include/asm-x86/page.h
+@@ -188,11 +188,6 @@ static inline l4_pgentry_t l4e_from_paddr(paddr_t pa, unsigned int flags)
+ #define l4e_has_changed(x,y,flags) \
+     ( !!(((x).l4 ^ (y).l4) & ((PADDR_MASK&PAGE_MASK)|put_pte_flags(flags))) )
  
- l1_pgentry_t *virt_to_xen_l1e(unsigned long v);
+-/* Pagetable walking. */
+-#define l2e_to_l1e(x)              ((l1_pgentry_t *)__va(l2e_get_paddr(x)))
+-#define l3e_to_l2e(x)              ((l2_pgentry_t *)__va(l3e_get_paddr(x)))
+-#define l4e_to_l3e(x)              ((l3_pgentry_t *)__va(l4e_get_paddr(x)))
+-
+ #define map_l1t_from_l2e(x)        (l1_pgentry_t *)map_domain_page(l2e_get_mfn(x))
+ #define map_l2t_from_l3e(x)        (l2_pgentry_t *)map_domain_page(l3e_get_mfn(x))
+ #define map_l3t_from_l4e(x)        (l3_pgentry_t *)map_domain_page(l4e_get_mfn(x))
 -- 
 2.24.1.AMZN
 
