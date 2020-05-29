@@ -2,54 +2,52 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C103EC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:56:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 756F8C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:58:10 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A004720776
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:56:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A004720776
+	by mail.kernel.org (Postfix) with ESMTPS id 4F12720776
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 14:58:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4F12720776
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jegQx-0002a7-Ut; Fri, 29 May 2020 14:56:31 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BsAk=7L=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1jegQw-0002a2-LB
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 14:56:30 +0000
-X-Inumbo-ID: 93ec1868-a1bc-11ea-8993-bc764e2007e4
+	id 1jegSN-0002ky-I5; Fri, 29 May 2020 14:57:59 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=jshP=7L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jegSM-0002kt-DU
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 14:57:58 +0000
+X-Inumbo-ID: c82b2eb6-a1bc-11ea-a8cd-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 93ec1868-a1bc-11ea-8993-bc764e2007e4;
- Fri, 29 May 2020 14:56:30 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id c82b2eb6-a1bc-11ea-a8cd-12813bfff9fa;
+ Fri, 29 May 2020 14:57:57 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 1B0A2B066;
- Fri, 29 May 2020 14:56:29 +0000 (UTC)
-Message-ID: <2357c1d259ab09715ef747ff7e19c0a3a99bb1d0.camel@suse.com>
-Subject: Re: [PATCH v2 3/7] xen: cpupool: add a back-pointer from a
- scheduler to its pool
-From: Dario Faggioli <dfaggioli@suse.com>
-To: =?ISO-8859-1?Q?J=FCrgen_Gro=DF?= <jgross@suse.com>, 
- xen-devel@lists.xenproject.org
-Date: Fri, 29 May 2020 16:56:27 +0200
-In-Reply-To: <01541fda-c7dc-1eac-7184-970244eaf505@suse.com>
-References: <159070133878.12060.13318432301910522647.stgit@Palanthas>
- <159070137738.12060.10928971799525755388.stgit@Palanthas>
- <01541fda-c7dc-1eac-7184-970244eaf505@suse.com>
-Organization: SUSE
-Content-Type: multipart/signed; micalg="pgp-sha256";
- protocol="application/pgp-signature"; boundary="=-/rqpfXBmpkig0s0hs6mi"
-User-Agent: Evolution 3.36.2 
+ by mx2.suse.de (Postfix) with ESMTP id 9D60BAC24;
+ Fri, 29 May 2020 14:57:56 +0000 (UTC)
+Subject: Re: [PATCH] x86/hvm: Improve error information in handle_pio()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+References: <20200528130738.12816-1-andrew.cooper3@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <58d93dbe-11e3-ac1b-c2b5-b410ae837726@suse.com>
+Date: Fri, 29 May 2020 16:57:57 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
+In-Reply-To: <20200528130738.12816-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,70 +58,26 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: George Dunlap <george.dunlap@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ Paul Durrant <paul.durrant@citrix.com>,
+ =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?= <marmarek@invisiblethingslab.com>,
+ Wei Liu <wl@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+On 28.05.2020 15:07, Andrew Cooper wrote:
+> domain_crash() should always have a message which emitted even in release
 
---=-/rqpfXBmpkig0s0hs6mi
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Oh, forgot to say: The wording here looks somewhat strange (and thus
+unclear) to me.
 
-On Fri, 2020-05-29 at 16:54 +0200, J=C3=BCrgen Gro=C3=9F wrote:
-> On 28.05.20 23:29, Dario Faggioli wrote:
-> > If we need to know within which pool a particular scheduler
-> > is working, we can do that by querying the cpupool pointer
-> > of any of the sched_resource-s (i.e., ~ any of the CPUs)
-> > assigned to the scheduler itself.
-> >=20
-> > Basically, we pick any sched_resource that we know uses that
-> > scheduler, and we check its *cpupool pointer. If we really
-> > know that the resource uses the scheduler, this is fine, as
-> > it also means the resource is inside the pool we are
-> > looking for.
-> >=20
-> > But, of course, we can do that for a pool/scheduler that has
->=20
-> s/can/can't/ ?
->=20
-And I even wrote "of course"... :-/
-
-Yes, _of_course_, I meant can't. :-)
-
-> Reviewed-by: Juergen Gross <jgross@suse.com>
->=20
-Thanks and Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-/rqpfXBmpkig0s0hs6mi
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl7RIpsACgkQFkJ4iaW4
-c+746BAA09a/GMnZjoDq+IgIMq9SGtf8GV0nwXAHyjoWsyDih2qWtYKt0zskwirp
-DO5PwXLoYhy9GMbS/n1kPpcTTLyPx7a9wNfQ6hAo40SMLhrMF59+HIgU+pq2gv50
-lrSOIxqw1cB1bE+Uz6oGg30K6Ru0D40aUnGWOshqGY7RfeS43MlzBU0AvRUlx+cu
-GAuUd1dTMccYMZozth8owJZtOXYL1lslv9gEyuGs09GePdb0aG21LV568HkqKyEQ
-kwHE1Xzueatol90yV2BSmYZBv91nD26UTb3q5fM0GOU+DInaG4GiUdqpBgyyKyX4
-qcJlm7HbG+5qmQ/d/s8h4cWJYqezqZBfrxcxUF0NIhEDz+YTrx0vzA2o8wePRoqK
-l0NXpIKekM2ZUSpCmoM7fs+Ri7Q56JbNQVd0NzI+bUHibb+CsnmESh8Moa+KSI8l
-0Gnapj8Ksj7FssdQLJz/GfdPLLKhHLsFlHKa/Sh0GJ7w+7k2II7AHaKGwkhIGoqG
-nOHJIvk6BesBKoDjMsjaqml5DhnuE42OmjcnITGXL5s27oB0U2UWezKdnjiTtDTd
-/35CSb/OguS85rbEaD3Flu31vNrgd39tUU2vj+E+y1c/IeY9fPY1/cbcqQOFsyg7
-iyB7CHTgUDaLTdhZDO6gWK95ygohA1/CLeOXfngDCSaydwrq7sM=
-=7dp5
------END PGP SIGNATURE-----
-
---=-/rqpfXBmpkig0s0hs6mi--
+> builds, so something more useful than this is presented.
+> 
+>   (XEN) domain_crash called from io.c:171
+>   (XEN) domain_crash called from io.c:171
+>   (XEN) domain_crash called from io.c:171
+>   ...
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
 
