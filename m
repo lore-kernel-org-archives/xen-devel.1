@@ -2,53 +2,72 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-6.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id C7AF6C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:35:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5C244C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:40:26 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 9E5852074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:35:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 9E5852074D
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 2B85520663
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 07:40:26 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="BSwN0RYN"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2B85520663
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jeZY7-0006WW-E7; Fri, 29 May 2020 07:35:27 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jeZck-0007Jp-0o; Fri, 29 May 2020 07:40:14 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jshP=7L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jeZY6-0006WR-4Y
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 07:35:26 +0000
-X-Inumbo-ID: f52bc116-a17e-11ea-8993-bc764e2007e4
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id f52bc116-a17e-11ea-8993-bc764e2007e4;
- Fri, 29 May 2020 07:35:24 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id A12EEB032;
- Fri, 29 May 2020 07:35:22 +0000 (UTC)
-Subject: Re: [RFC PATCH 1/1] xen: Use a global mapping for runstate
-To: Julien Grall <julien@xen.org>
-References: <cover.1590675919.git.bertrand.marquis@arm.com>
- <03e7cd740922bfbaa479f22d81d9de06f718a305.1590675919.git.bertrand.marquis@arm.com>
- <e63a83a1-7d71-9cc5-517a-275e17880e2b@xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <dcfbca54-4773-9f43-1826-f5137a41bd9f@suse.com>
-Date: Fri, 29 May 2020 09:35:18 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <e63a83a1-7d71-9cc5-517a-275e17880e2b@xen.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+ (envelope-from <SRS0=3I2r=7L=redhat.com=kraxel@srs-us1.protection.inumbo.net>)
+ id 1jeZci-0007Jk-Ah
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 07:40:12 +0000
+X-Inumbo-ID: a02a850c-a17f-11ea-a877-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id a02a850c-a17f-11ea-a877-12813bfff9fa;
+ Fri, 29 May 2020 07:40:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1590738010;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
+ references:references; bh=ssGDGVmdYGoZoZzLhx8dAk7n43EOoBPZwcr8nrwVXFM=;
+ b=BSwN0RYN/l0QxejSfnU1qCsKqZczhSsM5ek7vW28DsJabwLtrAi/IUcfpeaCOr799dxeEC
+ yBgXc+byZ9uoSZZSB61ewFdPvVZZvWa66FVzTjY46Zj/YT5KbiaBKsIukkqD0O5RJI5oHg
+ bcFLObFkUyZ1ucS4Uk7ZbKMUqEhRTJE=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-218-9Zu2jfIcPd2yPb2z-z5D6w-1; Fri, 29 May 2020 03:40:08 -0400
+X-MC-Unique: 9Zu2jfIcPd2yPb2z-z5D6w-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 98693107ACF2;
+ Fri, 29 May 2020 07:40:07 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-113-50.ams2.redhat.com
+ [10.36.113.50])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 7FDFE10013DB;
+ Fri, 29 May 2020 07:39:58 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 6100F9DB0; Fri, 29 May 2020 09:39:57 +0200 (CEST)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: qemu-devel@nongnu.org
+Subject: [PATCH v3 4/4] microvm: move virtio base to 0xfeb00000
+Date: Fri, 29 May 2020 09:39:57 +0200
+Message-Id: <20200529073957.8018-5-kraxel@redhat.com>
+In-Reply-To: <20200529073957.8018-1-kraxel@redhat.com>
+References: <20200529073957.8018-1-kraxel@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,43 +78,39 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Wei Liu <wl@xen.org>,
- "paul@xen.org" <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>, "Xia,
- Hongyan" <hongyxia@amazon.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>, xen-devel@lists.xenproject.org,
- nd@arm.com, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+ Eduardo Habkost <ehabkost@redhat.com>, Sergio Lopez <slp@redhat.com>,
+ Paul Durrant <paul@xen.org>, "Michael S. Tsirkin" <mst@redhat.com>,
+ imammedo@redhat.com, Gerd Hoffmann <kraxel@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, xen-devel@lists.xenproject.org,
+ Anthony Perard <anthony.perard@citrix.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, philmd@redhat.com,
+ Richard Henderson <rth@twiddle.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 28.05.2020 20:54, Julien Grall wrote:
-> On 28/05/2020 16:25, Bertrand Marquis wrote:
->> At the moment on Arm, a Linux guest running with KTPI enabled will
->> cause the following error when a context switch happens in user mode:
->> (XEN) p2m.c:1890: d1v0: Failed to walk page-table va 0xffffff837ebe0cd0
->>
->> This patch is modifying runstate handling to map the area given by the
->> guest inside Xen during the hypercall.
->> This is removing the guest virtual to physical conversion during context
->> switches which removes the bug
-> 
-> It would be good to spell out that a virtual address is not stable. So 
-> relying on it is wrong.
+Place virtio-mmio devices near the other mmio regions,
+next ioapic is at @ 0xfec00000.
 
-Guests at present are permitted to change the mapping underneath the
-virtual address provided (this may not be the best idea, but the
-interface is like it is). Therefore I don't think the present
-interface can be changed like this. Instead a new interface will need
-adding which takes a guest physical address instead. (Which, in the
-end, will merely be one tiny step towards making the hypercall
-interfaces use guest physical addresses. And it would be nice if an
-overall concept was hashed out first how that conversion should
-occur, such that the change here could at least be made fit that
-planned model. For example, an option might be to retain all present
-hypercall numbering and simply dedicate a bit in the top level
-hypercall numbers indicating whether _all_ involved addresses for
-that operation are physical vs virtual ones.)
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+---
+ include/hw/i386/microvm.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Jan
+diff --git a/include/hw/i386/microvm.h b/include/hw/i386/microvm.h
+index ba68d1f22bb3..fd34b78e0d2a 100644
+--- a/include/hw/i386/microvm.h
++++ b/include/hw/i386/microvm.h
+@@ -26,7 +26,7 @@
+ #include "hw/i386/x86.h"
+ 
+ /* Platform virtio definitions */
+-#define VIRTIO_MMIO_BASE      0xc0000000
++#define VIRTIO_MMIO_BASE      0xfeb00000
+ #define VIRTIO_IRQ_BASE       5
+ #define VIRTIO_NUM_TRANSPORTS 8
+ #define VIRTIO_CMDLINE_MAXLEN 64
+-- 
+2.18.4
+
 
