@@ -2,54 +2,61 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4671EC433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:02:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CBABC433E2
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:12:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1C5FD2075A
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:02:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1C5FD2075A
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
+	by mail.kernel.org (Postfix) with ESMTPS id 24D72207F5
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:12:41 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="ep28E21r"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24D72207F5
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jecmO-0003qU-9e; Fri, 29 May 2020 11:02:24 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jecvu-0004mH-87; Fri, 29 May 2020 11:12:14 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=jshP=7L=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jecmM-0003qP-Tx
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:02:22 +0000
-X-Inumbo-ID: de166b08-a19b-11ea-a893-12813bfff9fa
-Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id de166b08-a19b-11ea-a893-12813bfff9fa;
- Fri, 29 May 2020 11:02:21 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 9C6B7AD09;
- Fri, 29 May 2020 11:02:19 +0000 (UTC)
-Subject: Re: Xen XSM/FLASK policy, grub defaults, etc.
-To: Ian Jackson <ian.jackson@citrix.com>
-References: <24270.35349.838484.116865@mariner.uk.xensource.com>
- <0D83AAA6-A205-4256-8A38-CC8122AC063D@citrix.com>
- <24272.59646.746545.343358@mariner.uk.xensource.com>
-From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <4a8e7cf2-8f63-d4d2-e051-9484a5b8c8ed@suse.com>
-Date: Fri, 29 May 2020 13:02:20 +0200
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.8.0
-MIME-Version: 1.0
-In-Reply-To: <24272.59646.746545.343358@mariner.uk.xensource.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+ (envelope-from <SRS0=5BQD=7L=xen.org=hx242@srs-us1.protection.inumbo.net>)
+ id 1jecvs-0004m7-Tv
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:12:12 +0000
+X-Inumbo-ID: 3eac4bbc-a19d-11ea-9dbe-bc764e2007e4
+Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 3eac4bbc-a19d-11ea-9dbe-bc764e2007e4;
+ Fri, 29 May 2020 11:12:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+ s=20200302mail; h=Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ MIME-Version:Content-Type:Content-Transfer-Encoding:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+ List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=FEfIwhqHFmiOENKi3fOR0wow9f3racvpv9g6qH4tbJo=; b=ep28E21rfFLIRerArhIEm3AUIJ
+ utXF2oObWEN5vrSnWiLAKxnXyKbsbBJKqAJR/Y9j8yCM5cfWy1kgvYLC6zlzIGviaMskyg6YUUW4p
+ Z2k4lZLXBXrhj9sjiL+CgG5iVB/W77dKuCYwSdwXJl952JGjV0/CqI3SsUoCLSftJsZ0=;
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1jecvq-00021e-LK; Fri, 29 May 2020 11:12:10 +0000
+Received: from 54-240-197-236.amazon.com ([54.240.197.236]
+ helo=u1bbd043a57dd5a.ant.amazon.com)
+ by xenbits.xenproject.org with esmtpsa
+ (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+ (envelope-from <hx242@xen.org>)
+ id 1jecvq-0006tM-AS; Fri, 29 May 2020 11:12:10 +0000
+From: Hongyan Xia <hx242@xen.org>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH v7 00/15] switch to domheap for Xen page tables
+Date: Fri, 29 May 2020 12:11:44 +0100
+Message-Id: <cover.1590750232.git.hongyxia@amazon.com>
+X-Mailer: git-send-email 2.17.1
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,38 +67,71 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- "cjwatson@debian.org" <cjwatson@debian.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <Andrew.Cooper3@citrix.com>,
- George Dunlap <George.Dunlap@citrix.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Daniel De Graaf <dgdegra@tycho.nsa.gov>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, julien@xen.org,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 29.05.2020 12:50, Ian Jackson wrote:
-> George Dunlap writes ("Re: Xen XSM/FLASK policy, grub defaults, etc."):
->>> On May 27, 2020, at 4:41 PM, Ian Jackson <ian.jackson@citrix.com> wrote:
->>> 3. Failing that, Xen should provide some other mechanism which would
->>> enable something like update-grub to determine whether a particular
->>> hypervisor can sensibly be run with a policy file and flask=enforcing.
->>
->> So you want update-grub to check whether *the Xen binary it’s creating entries for* has FLASK enabled.  We generally include the Xen config used to build the hypervisor — could we have it check for CONFIG_XSM_FLASK?
-> 
-> That would be a possibility.  Including kernel configs has gone out of
-> fashion but I think most distros ship them.
-> 
-> Are we confident that this config name will remain stable ?
+From: Hongyan Xia <hongyxia@amazon.com>
 
-Well, if it's to be used like this, then we'll have to keep it
-stable if at all possible. But that's the reason why I dislike
-the .config grep-ing approach (not just for Xen, also for
-Linux). It would imo be better if the binary included something
-that can be queried. Such a "something" is then much more
-logical to keep stable, imo. This "something" could be an ELF
-note, for example (assuming a similar problem to the one here
-doesn't exist for xen.efi, or else we'd need to find a solution
-there, too).
+This series rewrites all the remaining functions and finally makes the
+switch from xenheap to domheap for Xen page tables, so that they no
+longer need to rely on the direct map, which is a big step towards
+removing the direct map.
 
-Jan
+This series depends on the following mini-series:
+https://lists.xenproject.org/archives/html/xen-devel/2020-04/msg00730.html
+
+---
+Changed in v7:
+- rebase and cleanup.
+- address comments in v6.
+- add alloc_map_clear_xen_pt() helper to simplify the patches in this
+  series.
+
+Changed in v6:
+- drop the patches that have already been merged.
+- rebase and cleanup.
+- rewrite map_pages_to_xen() and modify_xen_mappings() in a way that
+  does not require an end_of_loop goto label.
+
+Hongyan Xia (2):
+  x86/mm: drop old page table APIs
+  x86: switch to use domheap page for page tables
+
+Wei Liu (13):
+  x86/mm: map_pages_to_xen would better have one exit path
+  x86/mm: make sure there is one exit path for modify_xen_mappings
+  x86/mm: rewrite virt_to_xen_l*e
+  x86/mm: switch to new APIs in map_pages_to_xen
+  x86/mm: switch to new APIs in modify_xen_mappings
+  x86_64/mm: introduce pl2e in paging_init
+  x86_64/mm: switch to new APIs in paging_init
+  x86_64/mm: switch to new APIs in setup_m2p_table
+  efi: use new page table APIs in copy_mapping
+  efi: switch to new APIs in EFI code
+  x86/smpboot: add exit path for clone_mapping()
+  x86/smpboot: switch clone_mapping() to new APIs
+  x86/mm: drop _new suffix for page table APIs
+
+ xen/arch/x86/domain_page.c |  11 +-
+ xen/arch/x86/efi/runtime.h |  13 +-
+ xen/arch/x86/mm.c          | 273 +++++++++++++++++++++++--------------
+ xen/arch/x86/setup.c       |   4 +-
+ xen/arch/x86/smpboot.c     |  70 ++++++----
+ xen/arch/x86/x86_64/mm.c   |  82 ++++++-----
+ xen/common/efi/boot.c      |  87 +++++++-----
+ xen/common/efi/efi.h       |   3 +-
+ xen/common/efi/runtime.c   |   8 +-
+ xen/common/vmap.c          |   1 +
+ xen/include/asm-x86/mm.h   |   7 +-
+ xen/include/asm-x86/page.h |  13 +-
+ 12 files changed, 354 insertions(+), 218 deletions(-)
+
+-- 
+2.24.1.AMZN
+
 
