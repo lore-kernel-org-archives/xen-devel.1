@@ -2,52 +2,47 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 0BF00C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 10:20:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3D150C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 10:30:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D9DE9206C3
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 10:20:40 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D9DE9206C3
+	by mail.kernel.org (Postfix) with ESMTPS id 153F12074B
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 10:30:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 153F12074B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jec7p-0007aG-Gl; Fri, 29 May 2020 10:20:29 +0000
+	id 1jecH3-0007ui-Gh; Fri, 29 May 2020 10:30:01 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=BsAk=7L=suse.com=dfaggioli@srs-us1.protection.inumbo.net>)
- id 1jec7p-0007aB-66
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 10:20:29 +0000
-X-Inumbo-ID: 043dd8a8-a196-11ea-a88b-12813bfff9fa
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5ub4=7L=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jecH1-0007sh-V7
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 10:29:59 +0000
+X-Inumbo-ID: 572bcec0-a197-11ea-a88b-12813bfff9fa
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 043dd8a8-a196-11ea-a88b-12813bfff9fa;
- Fri, 29 May 2020 10:20:28 +0000 (UTC)
+ id 572bcec0-a197-11ea-a88b-12813bfff9fa;
+ Fri, 29 May 2020 10:29:56 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 023CCB11F;
- Fri, 29 May 2020 10:20:26 +0000 (UTC)
-Message-ID: <78e986122386915cacba8b4c3b572a460f9622e1.camel@suse.com>
-Subject: Re: [PATCH 0/3] Automation: improve openSUSE containers + podman
-From: Dario Faggioli <dfaggioli@suse.com>
+ by mx2.suse.de (Postfix) with ESMTP id 8DBD3AC2C;
+ Fri, 29 May 2020 10:29:55 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Date: Fri, 29 May 2020 12:20:25 +0200
-In-Reply-To: <86969ba1ea7e270267cfaa3408a89b55c86b3dca.camel@suse.com>
-References: <158827088416.19371.17008531228521109457.stgit@Palanthas>
- <86969ba1ea7e270267cfaa3408a89b55c86b3dca.camel@suse.com>
-Organization: SUSE
-Content-Type: multipart/signed; micalg="pgp-sha256";
- protocol="application/pgp-signature"; boundary="=-3lN/oI1im3UMHAh5rfeP"
-User-Agent: Evolution 3.36.2 
+Subject: [PATCH] tools: fix Rules.mk library make variables
+Date: Fri, 29 May 2020 12:29:53 +0200
+Message-Id: <20200529102953.12714-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -58,76 +53,44 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Doug Goldstein <cardoe@cardoe.com>, Wei Liu <wl@xen.org>
+Cc: Juergen Gross <jgross@suse.com>, Ian Jackson <ian.jackson@eu.citrix.com>,
+ Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
+Both SHDEPS_libxendevicemodel and SHDEPS_libxenhypfs have a bug by
+adding $(SHLIB_xencall) instead of $(SHLIB_libxencall).
 
---=-3lN/oI1im3UMHAh5rfeP
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The former seems not to have any negative impact, probably because
+it is not used anywhere in Xen without the correct $(SHLIB_libxencall)
+being used, too.
 
-On Thu, 2020-05-21 at 09:43 +0200, Dario Faggioli wrote:
-> On Thu, 2020-04-30 at 20:27 +0200, Dario Faggioli wrote:
-> > Hello,
-> >=20
-> > This short series contains some improvements for building Xen in
-> > openSUSE containers. In fact, the build dependencies inside the
-> > Tumbleweed container are updated and more handy helpers are added,
-> > in
-> > containerize, for referring to both Leap and Tumbleweed containers.
-> >=20
-> > In addition to that, in patch 3, the containerize script is
-> > enhanced
-> > so
-> > that it is now possible to use podman, instead of docker. Rootless
-> > mode
-> > for podman also works (provided the system is properly configured)
-> > which,
-> > IMO, is rather nice.
-> >=20
-> > Docker of course continue to work, and is kept as the default.
-> >=20
-> Ping?
->
-Ping^2? :-D
+Fixes: 86234eafb95295 ("libs: add libxenhypfs")
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/Rules.mk | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Adding Wei. get-maintainers.pl seems told me I should no Cc him, so I
-dind't, but I've seen automation/ stuff Acked-by him recently, so...
-
-Thanks and Regards
---=20
-Dario Faggioli, Ph.D
-http://about.me/dario.faggioli
-Virtualization Software Engineer
-SUSE Labs, SUSE https://www.suse.com/
--------------------------------------------------------------------
-<<This happens because _I_ choose it to happen!>> (Raistlin Majere)
-
-
---=-3lN/oI1im3UMHAh5rfeP
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEES5ssOj3Vhr0WPnOLFkJ4iaW4c+4FAl7Q4ekACgkQFkJ4iaW4
-c+4Qug/+PmeZZaWX05mKFCir7jn9Xs/ZmFB/wn0nuPWeD2OxfuljSt22VPhMgM97
-qz6s1BHgZuFEbEZUFflwxJN2349Uo2fPrMhCyqgbsrxRNjbKjFYGtWW0iqvnaenN
-NJ222mH6TOodrfWQ8WBUCW3fooMuNi3GZJxLW8C5olsPxv3HK3647gSntGheWpob
-HDtT8dAEwLK4AJEZccc5ZaIUB7I9f0sSAtO2lbEEITVNi4QMD9dqu8Lv/S2rffZ+
-CjVPJy2IeanIv4q59j2pgTny7RfiiluoSoF1xMyjKTnqOWy//X+S+S0EhGG3R6Ep
-NHmxmgG2SMP9yFPY6jvWWh/XoylBUF6JGXnKeljt32wao7J903uDv9bIOs+jnTtg
-movSk0TDdujaiWw6Irj3SKejr+YqgOOJHoekxXNsGOdQx/TjTWVAoqp446yBVseb
-ltMrTyjM1nfO53LHQrim4S6zEe+amJ3NM0P3aN2Wds82Qm0es5fCxgGmYsUZI8I2
-mMES962iSk32TGBkeTkhwgFi6Wcd1ZKhXmlpjva2rICqNFwDnd4pRGyjGg14L87z
-swOY1Y/XzIW5fMQ0YE293ugN/DwyTQOOg+ZO2KHjl250f3XueLc8/E1k1/1rIqXd
-QqgwKm2ILNWTpcilup2eCi2gHDQ2nyUwj29lKvny2nyJuJzZs84=
-=AZEr
------END PGP SIGNATURE-----
-
---=-3lN/oI1im3UMHAh5rfeP--
+diff --git a/tools/Rules.mk b/tools/Rules.mk
+index 518bb5660a..936fb83fa4 100644
+--- a/tools/Rules.mk
++++ b/tools/Rules.mk
+@@ -128,12 +128,12 @@ LDLIBS_libxenforeignmemory = $(SHDEPS_libxenforeignmemory) $(XEN_LIBXENFOREIGNME
+ SHLIB_libxenforeignmemory  = $(SHDEPS_libxenforeignmemory) -Wl,-rpath-link=$(XEN_LIBXENFOREIGNMEMORY)
+ 
+ CFLAGS_libxendevicemodel = -I$(XEN_LIBXENDEVICEMODEL)/include $(CFLAGS_xeninclude)
+-SHDEPS_libxendevicemodel = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_xencall)
++SHDEPS_libxendevicemodel = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_libxencall)
+ LDLIBS_libxendevicemodel = $(SHDEPS_libxendevicemodel) $(XEN_LIBXENDEVICEMODEL)/libxendevicemodel$(libextension)
+ SHLIB_libxendevicemodel  = $(SHDEPS_libxendevicemodel) -Wl,-rpath-link=$(XEN_LIBXENDEVICEMODEL)
+ 
+ CFLAGS_libxenhypfs = -I$(XEN_LIBXENHYPFS)/include $(CFLAGS_xeninclude)
+-SHDEPS_libxenhypfs = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_xencall)
++SHDEPS_libxenhypfs = $(SHLIB_libxentoollog) $(SHLIB_libxentoolcore) $(SHLIB_libxencall)
+ LDLIBS_libxenhypfs = $(SHDEPS_libxenhypfs) $(XEN_LIBXENHYPFS)/libxenhypfs$(libextension)
+ SHLIB_libxenhypfs  = $(SHDEPS_libxenhypfs) -Wl,-rpath-link=$(XEN_LIBXENHYPFS)
+ 
+-- 
+2.26.2
 
 
