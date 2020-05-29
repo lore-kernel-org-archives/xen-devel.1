@@ -6,39 +6,39 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 68678C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:32:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0A9C4C433DF
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:05 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 4292D2074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:32:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4292D2074D
+	by mail.kernel.org (Postfix) with ESMTPS id DA04F2074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DA04F2074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedFo-0000oB-2s; Fri, 29 May 2020 11:32:48 +0000
+	id 1jedFt-0000qd-Cd; Fri, 29 May 2020 11:32:53 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedFm-0000ne-OR
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:32:46 +0000
-X-Inumbo-ID: 1a487112-a1a0-11ea-81bc-bc764e2007e4
+ id 1jedFr-0000pw-Og
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:32:51 +0000
+X-Inumbo-ID: 1b6d7fc4-a1a0-11ea-8993-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 1a487112-a1a0-11ea-81bc-bc764e2007e4;
- Fri, 29 May 2020 11:32:40 +0000 (UTC)
+ id 1b6d7fc4-a1a0-11ea-8993-bc764e2007e4;
+ Fri, 29 May 2020 11:32:41 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3T-0003xZ-OK; Fri, 29 May 2020 12:20:03 +0100
+ id 1jed3Z-0003xZ-3J; Fri, 29 May 2020 12:20:09 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 26/49] 20_linux_xen: Adhoc template substitution
-Date: Fri, 29 May 2020 12:19:22 +0100
-Message-Id: <20200529111945.21394-27-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 39/49] ts-xen-install: Move some_extradebs to Debian.pm
+Date: Fri, 29 May 2020 12:19:35 +0100
+Message-Id: <20200529111945.21394-40-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -58,49 +58,120 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This file is a template that various build-time variables get
-substituted into.  Make thos substitutions by hand (actually, by
-copying the values our file for stretch).  And rename the file.
-
-So now we are using our file instead of the grub package's.  But it is
-the same...
-
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- .../etc/grub.d/{20_linux_xen.in => 20_linux_xen}       | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
- rename overlay-buster/etc/grub.d/{20_linux_xen.in => 20_linux_xen} (98%)
- mode change 100644 => 100755
+ Osstest/Debian.pm | 38 ++++++++++++++++++++++++++++++++++++++
+ ts-xen-install    | 36 ------------------------------------
+ 2 files changed, 38 insertions(+), 36 deletions(-)
 
-diff --git a/overlay-buster/etc/grub.d/20_linux_xen.in b/overlay-buster/etc/grub.d/20_linux_xen
-old mode 100644
-new mode 100755
-similarity index 98%
-rename from overlay-buster/etc/grub.d/20_linux_xen.in
-rename to overlay-buster/etc/grub.d/20_linux_xen
-index 98ef163c..fb3ed82f
---- a/overlay-buster/etc/grub.d/20_linux_xen.in
-+++ b/overlay-buster/etc/grub.d/20_linux_xen
-@@ -17,14 +17,14 @@ set -e
- # You should have received a copy of the GNU General Public License
- # along with GRUB.  If not, see <http://www.gnu.org/licenses/>.
+diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
+index 49d94b9b..d51ac493 100644
+--- a/Osstest/Debian.pm
++++ b/Osstest/Debian.pm
+@@ -24,6 +24,7 @@ use POSIX;
  
--prefix="@prefix@"
--exec_prefix="@exec_prefix@"
--datarootdir="@datarootdir@"
-+prefix="/usr"
-+exec_prefix="/usr"
-+datarootdir="/usr/share"
+ use IO::File;
+ use File::Copy;
++use File::Basename;
  
- . "$pkgdatadir/grub-mkconfig_lib"
+ use Osstest;
+ use Osstest::TestSupport;
+@@ -50,6 +51,7 @@ BEGIN {
+                       di_vg_name
+                       debian_dhcp_rofs_fix
+ 		      debian_write_random_seed_command
++		      some_extradebs
+                       );
+     %EXPORT_TAGS = ( );
  
--export TEXTDOMAIN=@PACKAGE@
--export TEXTDOMAINDIR="@localedir@"
-+export TEXTDOMAIN=grub
-+export TEXTDOMAINDIR="${datarootdir}/locale"
+@@ -1646,4 +1648,40 @@ sub debian_write_random_seed_command ($) {
+ END
+ }
  
- CLASS="--class gnu-linux --class gnu --class os --class xen"
- SUPPORTED_INITS="sysvinit:/lib/sysvinit/init systemd:/lib/systemd/systemd upstart:/sbin/upstart"
++sub some_extradebs ($$) {
++    my ($ho, $items) = @_;
++    my $cfgvar = join('_', @$items);
++    my $specs = $c{$cfgvar};
++    if (!length $specs) {
++	logm("$cfgvar: no extra debs");
++	return;
++    }
++    my $counter = 0;
++    my $rsync_installed;
++    foreach my $spec (split /\s+/, $specs) {
++	my $path = $spec;
++	$path = "$c{Images}/$path" unless $path =~ m{^/|^\./};
++	my ($ontarget, $dpkgopts);
++	if ($path =~ m{/$}) {
++	    $ontarget = "extrapackages-$cfgvar-$counter"; $counter++;
++	    $dpkgopts = '-iGROEB';
++	    logm("$cfgvar: updating packages from directory $path");
++	    target_install_packages($ho, qw(rsync)) unless $rsync_installed++;
++	    target_putfile_root($ho,300, "$path/.", $ontarget, '-r');
++	} elsif ($path =~ m{\.deb$}) {
++	    $path =~ s{_\.deb}{ "_$ho->{Arch}.deb" }e;
++	    logm("$cfgvar: installing $path");
++	    $ontarget = basename($path);
++	    $dpkgopts = '-iB';
++	    target_putfile_root($ho,300, $path, $ontarget);
++	} else {
++	    die "no / or . deb in $spec ?";
++	}
++	target_cmd_root($ho,
++			"dpkg --force-confold $dpkgopts $ontarget </dev/null",
++			300);
++	target_run_pkgmanager_install($ho, [], 0,1);
++    }
++}
++
+ 1;
+diff --git a/ts-xen-install b/ts-xen-install
+index 6196a890..d67cd121 100755
+--- a/ts-xen-install
++++ b/ts-xen-install
+@@ -71,42 +71,6 @@ sub packages () {
+         if toolstack($ho)->{ExtraPackages};
+ }
+ 
+-sub some_extradebs ($$) {
+-    my ($ho, $items) = @_;
+-    my $cfgvar = join('_', @$items);
+-    my $specs = $c{$cfgvar};
+-    if (!length $specs) {
+-	logm("$cfgvar: no extra debs");
+-	return;
+-    }
+-    my $counter = 0;
+-    my $rsync_installed;
+-    foreach my $spec (split /\s+/, $specs) {
+-	my $path = $spec;
+-	$path = "$c{Images}/$path" unless $path =~ m{^/|^\./};
+-	my ($ontarget, $dpkgopts);
+-	if ($path =~ m{/$}) {
+-	    $ontarget = "extrapackages-$cfgvar-$counter"; $counter++;
+-	    $dpkgopts = '-iGROEB';
+-	    logm("$cfgvar: updating packages from directory $path");
+-	    target_install_packages($ho, qw(rsync)) unless $rsync_installed++;
+-	    target_putfile_root($ho,300, "$path/.", $ontarget, '-r');
+-	} elsif ($path =~ m{\.deb$}) {
+-	    $path =~ s{_\.deb}{ "_$ho->{Arch}.deb" }e;
+-	    logm("$cfgvar: installing $path");
+-	    $ontarget = basename($path);
+-	    $dpkgopts = '-iB';
+-	    target_putfile_root($ho,300, $path, $ontarget);
+-	} else {
+-	    die "no / or . deb in $spec ?";
+-	}
+-	target_cmd_root($ho,
+-			"dpkg --force-confold $dpkgopts $ontarget </dev/null",
+-			300);
+-	target_run_pkgmanager_install($ho, [], 0,1);
+-    }
+-}
+-
+ sub extradebs () {
+     my $suite = $ho->{Suite};
+ 
 -- 
 2.20.1
 
