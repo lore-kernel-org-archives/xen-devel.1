@@ -6,39 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A5A25C433DF
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 86486C433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:06 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 829202074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 829202074D
+	by mail.kernel.org (Postfix) with ESMTPS id 5B29D2074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:34:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5B29D2074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedGr-0001e1-5p; Fri, 29 May 2020 11:33:53 +0000
+	id 1jedGv-0001iK-Fb; Fri, 29 May 2020 11:33:57 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedGp-0001co-QA
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:51 +0000
-X-Inumbo-ID: 32caa9a8-a1a0-11ea-9947-bc764e2007e4
+ id 1jedGu-0001hk-Pg
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:56 +0000
+X-Inumbo-ID: 351ec9dc-a1a0-11ea-9dbe-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 32caa9a8-a1a0-11ea-9947-bc764e2007e4;
- Fri, 29 May 2020 11:33:21 +0000 (UTC)
+ id 351ec9dc-a1a0-11ea-9dbe-bc764e2007e4;
+ Fri, 29 May 2020 11:33:25 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3T-0003xZ-52; Fri, 29 May 2020 12:20:03 +0100
+ id 1jed3Q-0003xZ-VG; Fri, 29 May 2020 12:20:01 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 23/49] Honour DebianImageFile_SUITE_ARCH
-Date: Fri, 29 May 2020 12:19:19 +0100
-Message-Id: <20200529111945.21394-24-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 14/49] Honour 'LinuxSerialConsole <suite>' host
+ property
+Date: Fri, 29 May 2020 12:19:10 +0100
+Message-Id: <20200529111945.21394-15-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -58,35 +59,40 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This lets us specify the whole filename, not just a version.
-This is needed because for buster we are going to use
-   debian-10.2.0-ARCH-xfce-CD-1.iso
+This works like LinuxSerialConsole.
+
+I originally wrote this to try to work around #940028, where multiple
+d-i autoinstalls run in parallel leading to hard-to-debug lossage!
+Explicitly specing the console causes it to run only on that one.
+
+However, it turns out that explicitly specifying the console does not
+always work and a better fix is needed.  Nevertheless, having added
+this feature it seems foolish to throw it away.
+
+Currently there are no hosts with this property so no functiaonal
+change.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- mfi-common | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ Osstest/TestSupport.pm | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/mfi-common b/mfi-common
-index b40f057e..640cf328 100644
---- a/mfi-common
-+++ b/mfi-common
-@@ -522,6 +522,15 @@ job_create_test () {
+diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
+index ff8103f2..7eeac49f 100644
+--- a/Osstest/TestSupport.pm
++++ b/Osstest/TestSupport.pm
+@@ -1447,7 +1447,10 @@ sub get_target_property ($$;$) {
+ sub get_host_native_linux_console ($) {
+     my ($ho) = @_;
  
- usual_debianhvm_image () {
-   local arch=$1; shift
-+  if [ -n "$DEBIAN_IMAGE_FILE" ]; then
-+      echo $DEBIAN_IMAGE_FILE
-+      return
-+  fi
-+  local file=`getconfig DebianImageFile_${guestsuite}_${arch}`
-+  if [ -n "$file " ]; then
-+      echo $file
-+      return
-+  fi
-   local ver=$DEBIAN_IMAGE_VERSION
-   if [ -z "$ver" ] ; then
-       ver=`getconfig DebianImageVersion_$guestsuite`
+-    my $console = get_host_property($ho, "LinuxSerialConsole", "ttyS0");
++    my $console;
++    $console //= get_host_property($ho, "LinuxSerialConsole $ho->{Suite}")
++	if $ho->{Suite};
++    $console //= get_host_property($ho, "LinuxSerialConsole", "ttyS0");
+     return $console if $console eq 'NONE';
+ 
+     return "$console,$c{Baud}n8";
 -- 
 2.20.1
 
