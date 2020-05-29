@@ -2,47 +2,44 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D7D2C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4685DC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:37:27 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EAF47207D4
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:35:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EAF47207D4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id 1DBD0206A4
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:37:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1DBD0206A4
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedIj-0003jb-1A; Fri, 29 May 2020 11:35:49 +0000
+	id 1jedK6-0004Oc-Jo; Fri, 29 May 2020 11:37:14 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedIg-0003hV-Ul
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:35:46 +0000
-X-Inumbo-ID: 5ea31d30-a1a0-11ea-9947-bc764e2007e4
-Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=5ub4=7L=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jedK5-0004OR-Mb
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:37:13 +0000
+X-Inumbo-ID: bcdbc276-a1a0-11ea-81bc-bc764e2007e4
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 5ea31d30-a1a0-11ea-9947-bc764e2007e4;
- Fri, 29 May 2020 11:34:34 +0000 (UTC)
-Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
- by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
- (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3a-0003xZ-Ui; Fri, 29 May 2020 12:20:11 +0100
-From: Ian Jackson <ian.jackson@eu.citrix.com>
+ id bcdbc276-a1a0-11ea-81bc-bc764e2007e4;
+ Fri, 29 May 2020 11:37:12 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 64992AE5E;
+ Fri, 29 May 2020 11:37:11 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 46/49] setupboot_grub2: Copy hv command line from grub
- to xen.cfg
-Date: Fri, 29 May 2020 12:19:42 +0100
-Message-Id: <20200529111945.21394-47-ian.jackson@eu.citrix.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
-References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
+Subject: [PATCH v3] docs: update xenstore-migration.md
+Date: Fri, 29 May 2020 13:37:09 +0200
+Message-Id: <20200529113709.17489-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -55,68 +52,162 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This reuses all of the stuff that update-grub, etc., have put there.
+Update connection record details:
 
-In particular without this we never have flask=enforcing!
+- make flags common for sockets and domains (makes it easier to have a
+  C union for conn-spec)
+- add pending incoming data (needed for handling partially read
+  requests when doing live update)
+- add partial response length (needed for proper split to individual
+  responses after live update)
 
-We have to do something about the ${xen_rm_opts} that appear in these
-entries.  In principle there might be many variable expansions, but in
-practice there is only this one It applies only to x86, and this use
-of chainloading to xen.efi and reading xen.cfg applies only to arm64.
-And anyway we weren't putting it these things in before.  So OK...
-
-Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
 ---
- Osstest/Debian.pm | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+V2:
+- added out-resp-len to connection record
 
-diff --git a/Osstest/Debian.pm b/Osstest/Debian.pm
-index de53c1ac..c18bf718 100644
---- a/Osstest/Debian.pm
-+++ b/Osstest/Debian.pm
-@@ -534,10 +534,11 @@ sub setupboot_grub2 ($$$$) {
-                 $entry->{Hv}= $1;
-                 $entry->{Chainload} = 1;
-             }
--            if (m/^\s*multiboot2?\s+(?:\/boot)?\/(xen\-[0-9][-+.0-9a-z]*\S+)/) {
-+            if (m/^\s*multiboot2?\s+(?:\/boot)?\/(xen\-[0-9][-+.0-9a-z]*\S+)\s+(.*)/) {
-                 die unless $entry;
-                 $entry->{Hv}= $1;
-                 $entry->{Chainload} = 0;
-+		$entry->{HvOpts} = $2;
-             }
-             if (m/^\s*multiboot2?\s+(?:\/boot)?\/(vmlinu[xz]-(\S+))\s+(.*)/) {
-                 die unless $entry;
-@@ -575,7 +576,7 @@ sub setupboot_grub2 ($$$$) {
-             # Propagate relevant fields of the main entry over to the
-             # chain entry for use of subsequent code.
-             foreach (qw(KernVer KernDom0 KernOnly KernOpts
--                        Initrd Xenpolicy)) {
-+                        Initrd Xenpolicy HvOpts)) {
- 		next unless $entry->{$_};
- 		die if $chainentry->{$_};
- 		$chainentry->{$_} = $entry->{$_};
-@@ -604,12 +605,14 @@ sub setupboot_grub2 ($$$$) {
+V3:
+- better commit message (Julien Grall)
+- same sequence for fields and detailed descriptions (Julien Grall)
+- some wording corrected (Paul Durrant)
+
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ docs/designs/xenstore-migration.md | 72 +++++++++++++++++-------------
+ 1 file changed, 41 insertions(+), 31 deletions(-)
+
+diff --git a/docs/designs/xenstore-migration.md b/docs/designs/xenstore-migration.md
+index 34a2afd17e..2ce2c836f5 100644
+--- a/docs/designs/xenstore-migration.md
++++ b/docs/designs/xenstore-migration.md
+@@ -147,43 +147,60 @@ the domain being migrated.
+ ```
+     0       1       2       3       4       5       6       7    octet
+ +-------+-------+-------+-------+-------+-------+-------+-------+
+-| conn-id                       | conn-type     | conn-spec
++| conn-id                       | conn-type     | flags         |
+++-------------------------------+---------------+---------------+
++| conn-spec
+ ...
+-+-------------------------------+-------------------------------+
+-| data-len                      | data
+-+-------------------------------+
+++---------------+---------------+-------------------------------+
++| in-data-len   | out-resp-len  | out-data-len                  |
+++---------------+---------------+-------------------------------+
++| data
+ ...
+ ```
  
- 	if ($need_uefi_chainload) {
- 	    my $entry= $parsemenu->();
-+	    my $hvopts = $entry->{HvOpts};
-+	    $hvopts =~ s/\$\{\w+\}//g; # delete these and hope!
- 	    my $xencfg = <<END;
- [global]
- default=osstest
  
- [osstest]
--options=$xenhopt
-+options=$hvopts
- kernel=vmlinuz $entry->{KernOpts}
- END
-             $xencfg .= "ramdisk=initrd.gz\n" if $entry->{Initrd};
+-| Field       | Description                                     |
+-|-------------|-------------------------------------------------|
+-| `conn-id`   | A non-zero number used to identify this         |
+-|             | connection in subsequent connection-specific    |
+-|             | records                                         |
+-|             |                                                 |
+-| `conn-type` | 0x0000: shared ring                             |
+-|             | 0x0001: socket                                  |
+-|             | 0x0002 - 0xFFFF: reserved for future use        |
+-|             |                                                 |
+-| `conn-spec` | See below                                       |
+-|             |                                                 |
+-| `data-len`  | The length (in octets) of any pending data not  |
+-|             | yet written to the connection                   |
+-|             |                                                 |
+-| `data`      | Pending data (may be empty)                     |
++| Field          | Description                                  |
++|----------------|----------------------------------------------|
++| `conn-id`      | A non-zero number used to identify this      |
++|                | connection in subsequent connection-specific |
++|                | records                                      |
++|                |                                              |
++| `conn-type`    | 0x0000: shared ring                          |
++|                | 0x0001: socket                               |
++|                | 0x0002 - 0xFFFF: reserved for future use     |
++|                |                                              |
++| `flags`        | A bit-wise OR of:                            |
++|                | 0001: read-only                              |
++|                |                                              |
++| `conn-spec`    | See below                                    |
++|                |                                              |
++| `in-data-len`  | The length (in octets) of any data read      |
++|                | from the connection not yet processed        |
++|                |                                              |
++| `out-resp-len` | The length (in octets) of a partial response |
++|                | not yet written to the connection            |
++|                |                                              |
++| `out-data-len` | The length (in octets) of any pending data   |
++|                | not yet written to the connection, including |
++|                | a partial response (see `out-resp-len`)      |
++|                |                                              |
++| `data`         | Pending data: first in-data-len octets of    |
++|                | read data, then out-data-len octets of       |
++|                | written data (any of both may be empty)      |
+ 
+-The format of `conn-spec` is dependent upon `conn-type`.
++In case of live update the connection record for the connection via which
++the live update command was issued will contain the response for the live
++update command in the pending not yet written data.
+ 
+ \pagebreak
+ 
++The format of `conn-spec` is dependent upon `conn-type`.
++
+ For `shared ring` connections it is as follows:
+ 
+ 
+ ```
+     0       1       2       3       4       5       6       7    octet
+-                                                +-------+-------+
+-                                                | flags         |
+ +---------------+---------------+---------------+---------------+
+ | domid         | tdomid        | evtchn                        |
+ +-------------------------------+-------------------------------+
+@@ -198,8 +215,6 @@ For `shared ring` connections it is as follows:
+ |           | it has been subject to an SET_TARGET              |
+ |           | operation [2] or DOMID_INVALID [3] otherwise      |
+ |           |                                                   |
+-| `flags`   | Must be zero                                      |
+-|           |                                                   |
+ | `evtchn`  | The port number of the interdomain channel used   |
+ |           | by `domid` to communicate with xenstored          |
+ |           |                                                   |
+@@ -211,8 +226,6 @@ For `socket` connections it is as follows:
+ 
+ 
+ ```
+-                                                +-------+-------+
+-                                                | flags         |
+ +---------------+---------------+---------------+---------------+
+ | socket-fd                     | pad                           |
+ +-------------------------------+-------------------------------+
+@@ -221,9 +234,6 @@ For `socket` connections it is as follows:
+ 
+ | Field       | Description                                     |
+ |-------------|-------------------------------------------------|
+-| `flags`     | A bit-wise OR of:                               |
+-|             | 0001: read-only                                 |
+-|             |                                                 |
+ | `socket-fd` | The file descriptor of the connected socket     |
+ 
+ This type of connection is only relevant for live update, where the xenstored
+@@ -398,4 +408,4 @@ explanation of node permissions.
+ 
+ [3] See https://xenbits.xen.org/gitweb/?p=xen.git;a=blob;f=xen/include/public/xen.h;hb=HEAD#l612
+ 
+-[4] https://wiki.xen.org/wiki/XenBus
+\ No newline at end of file
++[4] https://wiki.xen.org/wiki/XenBus
 -- 
-2.20.1
+2.26.2
 
 
