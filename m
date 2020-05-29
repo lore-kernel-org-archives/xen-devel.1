@@ -6,40 +6,40 @@ X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 94257C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 0C51DC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:42 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 6D95B2074D
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:37 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6D95B2074D
+	by mail.kernel.org (Postfix) with ESMTPS id D8CB42074D
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:33:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D8CB42074D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jedGS-0001GS-Kt; Fri, 29 May 2020 11:33:28 +0000
+	id 1jedGW-0001Kp-Uj; Fri, 29 May 2020 11:33:32 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jedGQ-0001Ep-QA
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:26 +0000
-X-Inumbo-ID: 2696c888-a1a0-11ea-9947-bc764e2007e4
+ id 1jedGV-0001Jq-PE
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:33:31 +0000
+X-Inumbo-ID: 29472bf4-a1a0-11ea-9dbe-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 2696c888-a1a0-11ea-9947-bc764e2007e4;
- Fri, 29 May 2020 11:33:00 +0000 (UTC)
+ id 29472bf4-a1a0-11ea-9dbe-bc764e2007e4;
+ Fri, 29 May 2020 11:33:05 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3Y-0003xZ-Qw; Fri, 29 May 2020 12:20:08 +0100
+ id 1jed3U-0003xZ-SX; Fri, 29 May 2020 12:20:05 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 38/49] ts-xen-install: Add $ho argument to
- some_extradebs
-Date: Fri, 29 May 2020 12:19:34 +0100
-Message-Id: <20200529111945.21394-39-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 32/49] buster: chiark-scripts: Install a new version
+ on buster too
+Date: Fri, 29 May 2020 12:19:28 +0100
+Message-Id: <20200529111945.21394-33-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -59,42 +59,25 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This is going to move to Debian.pm.
+We need various fixes that are not in buster, sadly.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- ts-xen-install | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ production-config | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/ts-xen-install b/ts-xen-install
-index 08b4ea23..6196a890 100755
---- a/ts-xen-install
-+++ b/ts-xen-install
-@@ -71,8 +71,8 @@ sub packages () {
-         if toolstack($ho)->{ExtraPackages};
- }
+diff --git a/production-config b/production-config
+index f0ddc132..e3870d47 100644
+--- a/production-config
++++ b/production-config
+@@ -107,6 +107,7 @@ TftpGrubVersion XXXX-XX-XX
  
--sub some_extradebs ($) {
--    my ($items) = @_;
-+sub some_extradebs ($$) {
-+    my ($ho, $items) = @_;
-     my $cfgvar = join('_', @$items);
-     my $specs = $c{$cfgvar};
-     if (!length $specs) {
-@@ -111,11 +111,11 @@ sub extradebs () {
-     my $suite = $ho->{Suite};
+ DebianExtraPackages_jessie chiark-scripts_6.0.3~citrix1_all.deb
+ DebianExtraPackages_stretch chiark-scripts_6.0.4~citrix1_all.deb
++DebianExtraPackages_buster chiark-scripts_6.0.5~citrix1_all.deb
  
-     # $c{ DebianExtraPackages_<suite> }
--    some_extradebs([ 'DebianExtraPackages', $suite ]);
-+    some_extradebs($ho, [ 'DebianExtraPackages', $suite ]);
- 
-     # $c{ DebianExtraPackages_<firmware>_<arch>_<suite> }
-     my $firmware = get_host_property($ho, "firmware");
--    some_extradebs([ 'DebianExtraPackages', $firmware, $ho->{Arch}, $suite ]);
-+    some_extradebs($ho, [ 'DebianExtraPackages', $firmware, $ho->{Arch}, $suite ]);
- }
- 
- sub extract () {
+ DebianExtraPackages_uefi_i386_jessie   extradebs-uefi-i386-2018-04-01/
+ DebianExtraPackages_uefi_amd64_jessie  extradebs-uefi-amd64-2018-04-01/
 -- 
 2.20.1
 
