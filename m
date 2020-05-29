@@ -7,57 +7,58 @@ X-Spam-Status: No, score=-9.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 57DBEC433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AEA3C433E1
 	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:12:41 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 24DB0208A7
+	by mail.kernel.org (Postfix) with ESMTPS id 24C94207D4
 	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:12:41 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="RyNqcxQd"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24DB0208A7
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="GcVxU7bQ"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 24C94207D4
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jecvz-0004mv-NJ; Fri, 29 May 2020 11:12:19 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jecvv-0004mN-FS; Fri, 29 May 2020 11:12:15 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=5BQD=7L=xen.org=hx242@srs-us1.protection.inumbo.net>)
- id 1jecvx-0004me-SZ
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:12:17 +0000
-X-Inumbo-ID: 3fbe03e2-a19d-11ea-9dbe-bc764e2007e4
+ id 1jecvt-0004mC-U2
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:12:13 +0000
+X-Inumbo-ID: 3ee7014e-a19d-11ea-a898-12813bfff9fa
 Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 3fbe03e2-a19d-11ea-9dbe-bc764e2007e4;
- Fri, 29 May 2020 11:12:14 +0000 (UTC)
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 3ee7014e-a19d-11ea-a898-12813bfff9fa;
+ Fri, 29 May 2020 11:12:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
  s=20200302mail; h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
  Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
  Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
  Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
  List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=wpKga3yyO5WYBCcsTT/9ZqLEb5cI9pIQiRxp5mp3PjU=; b=RyNqcxQd5F8o0SmM/SdkYCxZ/x
- /HD7oLZYAEojQE/q/FHNkVirpBbrotQnDPYk2oVVfYNC06Kqto67WzrWaSMf6KUnOqiQ84152Myp+
- Ar172xs0z4a8Quc2UZ1w5C3wxWMb1IQqUY0FIVyBg3ROhNs24vlQC0kNkyxXrlXiqkME=;
+ bh=A+TE2n44MU/U8wnXdQo51DXLXvHrK7RSZBV8BhLXJJ8=; b=GcVxU7bQKTXHQY6PTyJu3C7UEz
+ Mw3s/kYHsHjPzbFI861iCTrCgWJE0+RTWSjMFZz48QdFzyzxwaKT40QcShQvUGsVvBPeqzS3JlTHg
+ QpKIRDitTFRtMfjlnszZ4oY03G9BPopkAAYydfo/IN0KmjXIuiLQsW/T1PhAURVC2Ums=;
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jecvt-00021p-H9; Fri, 29 May 2020 11:12:13 +0000
+ id 1jecvs-00021g-31; Fri, 29 May 2020 11:12:12 +0000
 Received: from 54-240-197-236.amazon.com ([54.240.197.236]
  helo=u1bbd043a57dd5a.ant.amazon.com)
  by xenbits.xenproject.org with esmtpsa
  (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
  (envelope-from <hx242@xen.org>)
- id 1jecvt-0006tM-79; Fri, 29 May 2020 11:12:13 +0000
+ id 1jecvr-0006tM-Pa; Fri, 29 May 2020 11:12:12 +0000
 From: Hongyan Xia <hx242@xen.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v7 02/15] x86/mm: make sure there is one exit path for
- modify_xen_mappings
-Date: Fri, 29 May 2020 12:11:46 +0100
-Message-Id: <3edeb558a0586cf5ecb235c9159cd00fe1197b9e.1590750232.git.hongyxia@amazon.com>
+Subject: [PATCH v7 01/15] x86/mm: map_pages_to_xen would better have one exit
+ path
+Date: Fri, 29 May 2020 12:11:45 +0100
+Message-Id: <03c70130ab8ad216bacc9900e2a920fae32a824b.1590750232.git.hongyxia@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1590750232.git.hongyxia@amazon.com>
 References: <cover.1590750232.git.hongyxia@amazon.com>
@@ -81,9 +82,10 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 From: Wei Liu <wei.liu2@citrix.com>
 
-We will soon need to handle dynamically mapping / unmapping page
-tables in the said function. Since dynamic mappings may map and unmap
-pl3e in different iterations, lift pl3e out of the loop.
+We will soon rewrite the function to handle dynamically mapping and
+unmapping of page tables. Since dynamic mappings may map and unmap pages
+in different iterations of the while loop, we need to lift pl3e out of
+the loop.
 
 No functional change.
 
@@ -95,61 +97,82 @@ Changed since v4:
 - drop the end_of_loop goto label.
 
 Changed since v3:
-- remove asserts on rc since it never gets changed to anything else.
+- remove asserts on rc since rc never gets changed to anything else.
+- reword commit message.
 ---
- xen/arch/x86/mm.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
+ xen/arch/x86/mm.c | 20 +++++++++++++-------
+ 1 file changed, 13 insertions(+), 7 deletions(-)
 
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index d99f9bc133..462682ba70 100644
+index 54980b4eb1..d99f9bc133 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -5457,10 +5457,12 @@ int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
- int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+@@ -5068,9 +5068,11 @@ int map_pages_to_xen(
+     unsigned int flags)
  {
      bool locking = system_state > SYS_STATE_boot;
-+    l3_pgentry_t *pl3e;
-     l2_pgentry_t *pl2e;
-     l1_pgentry_t *pl1e;
++    l3_pgentry_t *pl3e, ol3e;
+     l2_pgentry_t *pl2e, ol2e;
+     l1_pgentry_t *pl1e, ol1e;
      unsigned int  i;
-     unsigned long v = s;
 +    int rc = -ENOMEM;
  
-     /* Set of valid PTE bits which may be altered. */
- #define FLAGS_MASK (_PAGE_NX|_PAGE_RW|_PAGE_PRESENT)
-@@ -5471,7 +5473,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
+ #define flush_flags(oldf) do {                 \
+     unsigned int o_ = (oldf);                  \
+@@ -5088,10 +5090,11 @@ int map_pages_to_xen(
  
-     while ( v < e )
+     while ( nr_mfns != 0 )
      {
--        l3_pgentry_t *pl3e = virt_to_xen_l3e(v);
-+        pl3e = virt_to_xen_l3e(v);
+-        l3_pgentry_t ol3e, *pl3e = virt_to_xen_l3e(virt);
++        pl3e = virt_to_xen_l3e(virt);
  
-         if ( !pl3e || !(l3e_get_flags(*pl3e) & _PAGE_PRESENT) )
-         {
-@@ -5504,7 +5506,8 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-             /* PAGE1GB: shatter the superpage and fall through. */
+         if ( !pl3e )
+-            return -ENOMEM;
++            goto out;
++
+         ol3e = *pl3e;
+ 
+         if ( cpu_has_page1gb &&
+@@ -5181,7 +5184,7 @@ int map_pages_to_xen(
+ 
              l2t = alloc_xen_pagetable();
-             if ( !l2t )
+             if ( l2t == NULL )
 -                return -ENOMEM;
 +                goto out;
-+
+ 
              for ( i = 0; i < L2_PAGETABLE_ENTRIES; i++ )
                  l2e_write(l2t + i,
-                           l2e_from_pfn(l3e_get_pfn(*pl3e) +
-@@ -5561,7 +5564,8 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-                 /* PSE: shatter the superpage and try again. */
-                 l1t = alloc_xen_pagetable();
-                 if ( !l1t )
+@@ -5210,7 +5213,7 @@ int map_pages_to_xen(
+ 
+         pl2e = virt_to_xen_l2e(virt);
+         if ( !pl2e )
+-            return -ENOMEM;
++            goto out;
+ 
+         if ( ((((virt >> PAGE_SHIFT) | mfn_x(mfn)) &
+                ((1u << PAGETABLE_ORDER) - 1)) == 0) &&
+@@ -5254,7 +5257,7 @@ int map_pages_to_xen(
+             {
+                 pl1e = virt_to_xen_l1e(virt);
+                 if ( pl1e == NULL )
 -                    return -ENOMEM;
 +                    goto out;
-+
+             }
+             else if ( l2e_get_flags(*pl2e) & _PAGE_PSE )
+             {
+@@ -5282,7 +5285,7 @@ int map_pages_to_xen(
+ 
+                 l1t = alloc_xen_pagetable();
+                 if ( l1t == NULL )
+-                    return -ENOMEM;
++                    goto out;
+ 
                  for ( i = 0; i < L1_PAGETABLE_ENTRIES; i++ )
                      l1e_write(&l1t[i],
-                               l1e_from_pfn(l2e_get_pfn(*pl2e) + i,
-@@ -5694,7 +5698,10 @@ int modify_xen_mappings(unsigned long s, unsigned long e, unsigned int nf)
-     flush_area(NULL, FLUSH_TLB_GLOBAL);
+@@ -5428,7 +5431,10 @@ int map_pages_to_xen(
  
- #undef FLAGS_MASK
+ #undef flush_flags
+ 
 -    return 0;
 +    rc = 0;
 +
@@ -157,7 +180,7 @@ index d99f9bc133..462682ba70 100644
 +    return rc;
  }
  
- #undef flush_area
+ int populate_pt_range(unsigned long virt, unsigned long nr_mfns)
 -- 
 2.24.1.AMZN
 
