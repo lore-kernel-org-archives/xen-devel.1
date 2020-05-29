@@ -2,43 +2,44 @@ Return-Path: <SRS0=vhhj=7L=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 6E406C433E0
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id CBB6AC433E0
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:20:34 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 468CA206E2
-	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:20:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 468CA206E2
+	by mail.kernel.org (Postfix) with ESMTPS id A10A0206E2
+	for <xen-devel@archiver.kernel.org>; Fri, 29 May 2020 11:20:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A10A0206E2
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jed3j-0006Vh-R5; Fri, 29 May 2020 11:20:19 +0000
+	id 1jed3p-0006YA-7W; Fri, 29 May 2020 11:20:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=gj5c=7L=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jed3j-0006VV-Bl
- for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:20:19 +0000
-X-Inumbo-ID: 54f13c1a-a19e-11ea-9dbe-bc764e2007e4
+ id 1jed3o-0006Xq-CZ
+ for xen-devel@lists.xenproject.org; Fri, 29 May 2020 11:20:24 +0000
+X-Inumbo-ID: 550ce9f6-a19e-11ea-9947-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 54f13c1a-a19e-11ea-9dbe-bc764e2007e4;
+ id 550ce9f6-a19e-11ea-9947-bc764e2007e4;
  Fri, 29 May 2020 11:19:59 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jed3O-0003xZ-Ik; Fri, 29 May 2020 12:19:58 +0100
+ id 1jed3O-0003xZ-R1; Fri, 29 May 2020 12:19:58 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 04/49] TestSupport: allow more time for apt
-Date: Fri, 29 May 2020 12:19:00 +0100
-Message-Id: <20200529111945.21394-5-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 05/49] Booting: Use `--' rather than `---' to
+ introduce host cmdline
+Date: Fri, 29 May 2020 12:19:01 +0100
+Message-Id: <20200529111945.21394-6-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
 References: <20200529111945.21394-1-ian.jackson@eu.citrix.com>
@@ -58,12 +59,18 @@ Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Empirically some of these operations can take longer than 30s,
-especially with a cold cache.
+Because systemd did something obnoxious, the kernel retaliated in the
+game of Core Wars by hiding all arguments before `--' from userspace.
+So use `---' instead so that all the arguments remain visible.
 
-Note that because of host sharing and our on-host apt lock, the
-timeout needs to be the same for every apt operation: a fast operation
-could be blocked behind a slow one.
+This in some sense now applies to host installs a change we had
+already made to Debian HVM guests.  See osstest#493b7395
+  ts-debian-hvm-install: Use ---, and no longer duplicate $gconsole
+and https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=762007
+  Kernel command line handling change breaks d-i user-params functionality
+
+This change is fine for all non-ancient versions of Debian, so I have
+not made it conditional.
 
 Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
@@ -71,23 +78,26 @@ Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/Osstest/TestSupport.pm b/Osstest/TestSupport.pm
-index 43766ee3..f4e9414c 100644
+index f4e9414c..ff8103f2 100644
 --- a/Osstest/TestSupport.pm
 +++ b/Osstest/TestSupport.pm
-@@ -637,12 +637,12 @@ sub target_install_packages_nonfree_nonconcurrent ($@) {
-     my ($ho, @packages) = @_;
-     my $slist= '/etc/apt/sources.list';
-     my $xsuites= 'contrib non-free';
--    target_cmd_root($ho, <<END, 30);
-+    target_cmd_root($ho, <<END, 300);
-     perl -i~ -pe 'next unless m/^deb/; s{ main\$}{\$& $xsuites};' $slist
-     apt-get update
- END
-     target_run_pkgmanager_install($ho,\@packages);
--    target_cmd_root($ho, <<END, 30);
-+    target_cmd_root($ho, <<END, 300);
-     mv $slist~ $slist
-     apt-get update
+@@ -2909,7 +2909,7 @@ label overwrite
+ 	menu label ^Overwrite
+ 	menu default
+ 	kernel $kern
+-	append $dicmd initrd=$initrd -- $hocmd
++	append $dicmd initrd=$initrd --- $hocmd
+ 	ipappend $xopts{ipappend}
+ 	$dtbs
+ default overwrite
+@@ -2956,7 +2956,7 @@ sub setup_netboot_di_uefi ($$$$$;%) {
+ set default=0
+ set timeout=5
+ menuentry 'overwrite' {
+-  linux $kern $dicmd -- $hocmd
++  linux $kern $dicmd --- $hocmd
+   initrd $initrd
+ }
  END
 -- 
 2.20.1
