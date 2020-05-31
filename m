@@ -2,75 +2,79 @@ Return-Path: <SRS0=rAxK=7N=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	USER_AGENT_GIT autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5DEEFC433E0
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 614ACC433E1
 	for <xen-devel@archiver.kernel.org>; Sun, 31 May 2020 17:38:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 2C2732074A
+	by mail.kernel.org (Postfix) with ESMTPS id 2C54B2074B
 	for <xen-devel@archiver.kernel.org>; Sun, 31 May 2020 17:38:52 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RRupkXgr"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C2732074A
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=amsat.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QYvY3gXU"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 2C54B2074B
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=amsat.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jfRue-0003XJ-Te; Sun, 31 May 2020 17:38:20 +0000
+	id 1jfRuo-0003Xu-Ck; Sun, 31 May 2020 17:38:30 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=yblG=7N=gmail.com=philippe.mathieu.daude@srs-us1.protection.inumbo.net>)
- id 1jfRud-0003XE-Co
- for xen-devel@lists.xenproject.org; Sun, 31 May 2020 17:38:19 +0000
-X-Inumbo-ID: 83958332-a365-11ea-8993-bc764e2007e4
-Received: from mail-wr1-x432.google.com (unknown [2a00:1450:4864:20::432])
+ id 1jfRun-0003Xp-9M
+ for xen-devel@lists.xenproject.org; Sun, 31 May 2020 17:38:29 +0000
+X-Inumbo-ID: 85503244-a365-11ea-8993-bc764e2007e4
+Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 83958332-a365-11ea-8993-bc764e2007e4;
- Sun, 31 May 2020 17:38:18 +0000 (UTC)
-Received: by mail-wr1-x432.google.com with SMTP id p5so3252198wrw.9
- for <xen-devel@lists.xenproject.org>; Sun, 31 May 2020 10:38:18 -0700 (PDT)
+ id 85503244-a365-11ea-8993-bc764e2007e4;
+ Sun, 31 May 2020 17:38:21 +0000 (UTC)
+Received: by mail-wr1-x442.google.com with SMTP id l10so9153100wrr.10
+ for <xen-devel@lists.xenproject.org>; Sun, 31 May 2020 10:38:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=sender:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=szrK4QZPlIWx7hRKiEEGeyw3BNLUYHyOmBgpWr2R+Zs=;
- b=RRupkXgrGQxJyX5hU1YPGP3v77tjIwZaUEnwXH0Ycbz02nIC6z6jqL9K8VtpiGoZir
- oA5pe+0bmwn1mXRbgMEVLrpCh0d0sQKIqycavfwLuiXSOjZIKwvCbubwBhoyDEBNPMCT
- s+JJpU2UR3ihqsLIA18rk+lRx9dyVpfl+cDN3EjfVf2e36iXhgEEGnJ27Qv/8ZBGlMox
- ykuYCjITpXiI6USr1w2maE1SCHGk41hkpnblFQV9vLwdJzdQ3YlpFxieC+56rAU2D7yq
- 5PNPRsTkvV+wrpFl90mqzCJzSIssp7+Q7OTmU3vfT7rPQLnXsnh1Vs2G+XHB/+/JcrN8
- ISPA==
+ h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=z6MXV/mZkWfnz890Yo+s0rvg8AHT39PfBFvpsFHjWdc=;
+ b=QYvY3gXUnPTn17LDoEHOKbq6Mu4mCC5ZirXYyRfQqjW5yMjkLaLcPgaNmCokzrSMk1
+ iS14BZGt5nbepXJHY+8YKtfXPZXZoNrZ+xgr27SkIjDH7+NfBvh7a00/wX4juM+cvnwK
+ kJvp8SHZ9O1Fw+foevpkIx2zJ5dHganq6zkOmnCCVuUfWTlmW+u0u0wAD+jVqP2ieGrl
+ iT20yzOXUuxrY/CD15YcZTH3BtjOGqMctoePxbz/lG6hLw9EA8Dkfw7WaiJU7nfxWIpo
+ pcD/IKA8vgRB1+wufffNFi3pgiHvatdIAE+NJgbDW7auOUENhXlhJYpgVbftvrr2aaPq
+ uw9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
- :mime-version:content-transfer-encoding;
- bh=szrK4QZPlIWx7hRKiEEGeyw3BNLUYHyOmBgpWr2R+Zs=;
- b=iaEx/eA5Oy1smoexw5EvhpmlJJan0tebB+f5rkecZP4x1mIqUk3EgCw7eaezH4EF3o
- b1rS6wK4UrjKVfld4D043hpn9ki3OYif1EfNqW7sbFUYNFYQaHNxuB/n8TQBoMJci/Fi
- NE+HSYjon57+mHol8rgyvSQhSmgRSow7ASCLHws3KRQorF0d6BX4GugnT9FvbBWc2rlz
- ouLbeyS5RLOBhpO7JKTADfiAV04TBH1HlhLbTaD9U+u7Sl+Py6o7Y5+FH2Vns0GCrpgh
- 4NrUDSO9IFZdiyKhfjql34Q/vsLwtAAzLexX4CMQn7JW544wbRVKPxjqii+8PBwkIDl/
- OLdA==
-X-Gm-Message-State: AOAM531O4/O5du2Q7rERE2vP3Mz6Zvn1aViY4BBEOw+iNPp9HXh3jn0m
- fJZ7Qnz5naMuoK426upaSpY=
-X-Google-Smtp-Source: ABdhPJzi1VbONK1FgNfUM2ScOB+Tk4wTN8mIKjCc/CNlbtzbBZvFo/IjBHFzqkbrQE86Hdu0UVxctg==
-X-Received: by 2002:adf:8b55:: with SMTP id v21mr19093025wra.187.1590946697876; 
- Sun, 31 May 2020 10:38:17 -0700 (PDT)
+ :in-reply-to:references:mime-version:content-transfer-encoding;
+ bh=z6MXV/mZkWfnz890Yo+s0rvg8AHT39PfBFvpsFHjWdc=;
+ b=PrBmLFsWRjv/R7/rDPQA/9Vsx26MAeMfHU1beU7QYbwKpBdV8AG3YXX/dRVGOb6tFu
+ g7Krm0pb3roAjRPftReMah8/7X/Zct308exG9/7FowSouN/s39XCiPFceyEdkaLYMFP7
+ /MYGVZ+nDmX2koZcASeZmxEQ06rbBRlooLECAm1ZyHDCqVouxoWRtFMqIhiT357Gnyzj
+ GDshLHazbxTsdZehdXgLjYHx1q/2fEYSPl3FntitWoihntUk7LSEPovea7iWEnFqhgSh
+ J8V1p4sYFDVVPSyDBfRZ7ekEdFsgGl62RbOchWJoZHJl1dlB329eMpmW5MNmcsCGSMz9
+ nxmQ==
+X-Gm-Message-State: AOAM530ufPxts58hCr/SzEx3RgO8DUr0TQkj4LsShPhmBRNO/lsAIbZF
+ ulgvQ7lX4jfRH8Jjuis+PcU=
+X-Google-Smtp-Source: ABdhPJxmf1AHg9yOHBeUWTlVu63d2WHNpQGKdZws+bxSgk4Mw6bA+b97Z+h44ot+Y4hgdoKMFKkyYw==
+X-Received: by 2002:a5d:5351:: with SMTP id t17mr4028148wrv.287.1590946700911; 
+ Sun, 31 May 2020 10:38:20 -0700 (PDT)
 Received: from localhost.localdomain (43.red-83-51-162.dynamicip.rima-tde.net.
  [83.51.162.43])
- by smtp.gmail.com with ESMTPSA id l19sm7973121wmj.14.2020.05.31.10.38.15
+ by smtp.gmail.com with ESMTPSA id l19sm7973121wmj.14.2020.05.31.10.38.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 May 2020 10:38:16 -0700 (PDT)
+ Sun, 31 May 2020 10:38:20 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <f4bug@amsat.org>
 To: qemu-devel@nongnu.org
-Subject: [PATCH 0/8] hw: Fix some incomplete memory region size
-Date: Sun, 31 May 2020 19:38:06 +0200
-Message-Id: <20200531173814.8734-1-f4bug@amsat.org>
+Subject: [PATCH 2/8] hw/pci-host/prep: Correct RAVEN bus bridge memory region
+ size
+Date: Sun, 31 May 2020 19:38:08 +0200
+Message-Id: <20200531173814.8734-3-f4bug@amsat.org>
 X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20200531173814.8734-1-f4bug@amsat.org>
+References: <20200531173814.8734-1-f4bug@amsat.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Type: text/plain; charset="utf-8"
@@ -102,40 +106,42 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 memory_region_set_size() handle the 16 Exabytes limit by
-special-casing the UINT64_MAX value.
-This is not a problem for the 32-bit maximum, 4 GiB, but
-in some places we incorrectly use UINT32_MAX instead of
-4 GiB, and end up missing 1 byte in the memory region.
+special-casing the UINT64_MAX value. This is not a problem
+for the 32-bit maximum, 4 GiB.
+By using the UINT32_MAX value, the bm-raven MemoryRegion
+ends up missing 1 byte:
 
-This series fixes the cases I encountered.
-Also included few patches while reviewing, I replaced some
-magic values by the IEC binary prefix equivalent.
+  $ qemu-system-ppc -M prep -S -monitor stdio -usb
+  memory-region: bm-raven
+    0000000000000000-00000000fffffffe (prio 0, i/o): bm-raven
+      0000000000000000-000000003effffff (prio 0, i/o): alias bm-pci-memory @pci-memory 0000000000000000-000000003effffff
+      0000000080000000-00000000ffffffff (prio 0, i/o): alias bm-system @system 0000000000000000-000000007fffffff
 
-Regards,
+Fix by using the correct value. We now have:
 
-Phil.
+  memory-region: bm-raven
+    0000000000000000-00000000ffffffff (prio 0, i/o): bm-raven
+      0000000000000000-000000003effffff (prio 0, i/o): alias bm-pci-memory @pci-memory 0000000000000000-000000003effffff
+      0000000080000000-00000000ffffffff (prio 0, i/o): alias bm-system @system 0000000000000000-000000007fffffff
 
-Philippe Mathieu-Daudé (8):
-  hw/arm/aspeed: Correct DRAM container region size
-  hw/pci-host/prep: Correct RAVEN bus bridge memory region size
-  hw/pci/pci_bridge: Correct pci_bridge_io memory region size
-  hw/pci/pci_bridge: Use the IEC binary prefix definitions
-  hw/pci-host: Use the IEC binary prefix definitions
-  hw/hppa/dino: Use the IEC binary prefix definitions
-  hw/i386/xen/xen-hvm: Use the IEC binary prefix definitions
-  target/i386/cpu: Use the IEC binary prefix definitions
+Signed-off-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+---
+ hw/pci-host/prep.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- hw/arm/aspeed.c         | 2 +-
- hw/hppa/dino.c          | 4 ++--
- hw/i386/xen/xen-hvm.c   | 3 ++-
- hw/pci-host/i440fx.c    | 3 ++-
- hw/pci-host/prep.c      | 2 +-
- hw/pci-host/q35.c       | 2 +-
- hw/pci-host/versatile.c | 5 +++--
- hw/pci/pci_bridge.c     | 7 ++++---
- target/i386/cpu.c       | 2 +-
- 9 files changed, 17 insertions(+), 13 deletions(-)
-
+diff --git a/hw/pci-host/prep.c b/hw/pci-host/prep.c
+index 1a02e9a670..88e2fc66a9 100644
+--- a/hw/pci-host/prep.c
++++ b/hw/pci-host/prep.c
+@@ -294,7 +294,7 @@ static void raven_pcihost_initfn(Object *obj)
+                              &s->pci_memory, &s->pci_io, 0, TYPE_PCI_BUS);
+ 
+     /* Bus master address space */
+-    memory_region_init(&s->bm, obj, "bm-raven", UINT32_MAX);
++    memory_region_init(&s->bm, obj, "bm-raven", 4 * GiB);
+     memory_region_init_alias(&s->bm_pci_memory_alias, obj, "bm-pci-memory",
+                              &s->pci_memory, 0,
+                              memory_region_size(&s->pci_memory));
 -- 
 2.21.3
 
