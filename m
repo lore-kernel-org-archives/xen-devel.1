@@ -6,56 +6,54 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id CDCFCC433DF
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5AC0AC433E1
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id A7F9E2077D
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org A7F9E2077D
+	by mail.kernel.org (Postfix) with ESMTPS id 3480C2077D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 3480C2077D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jfkOA-0006a6-Dz; Mon, 01 Jun 2020 13:22:02 +0000
+	id 1jfkOK-0006f4-LQ; Mon, 01 Jun 2020 13:22:12 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OmQg=7O=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
- id 1jfkO9-0006Zz-SF
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 13:22:01 +0000
-X-Inumbo-ID: ddea53d0-a40a-11ea-ab1b-12813bfff9fa
+ id 1jfkOJ-0006eX-Se
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 13:22:11 +0000
+X-Inumbo-ID: dea7aff3-a40a-11ea-ab1b-12813bfff9fa
 Received: from mga12.intel.com (unknown [192.55.52.136])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id ddea53d0-a40a-11ea-ab1b-12813bfff9fa;
- Mon, 01 Jun 2020 13:21:56 +0000 (UTC)
-IronPort-SDR: Ji+TwovGG1LW3mC7YDXtNoadPZpzsZgTKai+7RNf0SB1nKJj3xYVIwGblJs44kWIDMGttKAe2H
- WuVxZrpAZHRg==
+ id dea7aff3-a40a-11ea-ab1b-12813bfff9fa;
+ Mon, 01 Jun 2020 13:21:59 +0000 (UTC)
+IronPort-SDR: ExGWDZMH5GWwQEkJjcFMcIanFAIhhumLpPK09RcYRo00igFeixwnxOyffCGITwYPRMc2ZfeJrJ
+ VJJc76bbQ2/g==
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga008.jf.intel.com ([10.7.209.65])
  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2020 06:21:54 -0700
-IronPort-SDR: vyNToxXCPi1GYxEewQa8wW777KqdP2qZ/RwvvSPnmhxqv3gdY14S+abDy4+ksqb8Di5N8DUPHz
- Jb66VM7jxTIg==
+ 01 Jun 2020 06:21:57 -0700
+IronPort-SDR: AAatOggz3HYKUTbjHTpoBX7UjXaEbcFir0FwqigBWNA8hm4nXhBOwsx5nL1oNXc1iPQidkp7gn
+ YQY/Qpjej3yA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,460,1583222400"; d="scan'208";a="303887260"
+X-IronPort-AV: E=Sophos;i="5.73,460,1583222400"; d="scan'208";a="303887289"
 Received: from alayek-mobl.amr.corp.intel.com (HELO ubuntu.localdomain)
  ([10.209.11.99])
- by orsmga008.jf.intel.com with ESMTP; 01 Jun 2020 06:21:54 -0700
+ by orsmga008.jf.intel.com with ESMTP; 01 Jun 2020 06:21:57 -0700
 From: Tamas K Lengyel <tamas.lengyel@intel.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v19 for-4.14 02/13] tools/libxc: xc_memshr_fork with
- interrupts blocked
-Date: Mon,  1 Jun 2020 06:21:36 -0700
-Message-Id: <03b382a38c62b5431c63d00f9acffacf43b55c1d.1591017086.git.tamas.lengyel@intel.com>
+Subject: [PATCH v19 for-4.14 07/13] tools/libxl: Adjust libxl__build_pre
+Date: Mon,  1 Jun 2020 06:21:41 -0700
+Message-Id: <d03d1a6c6b50ea11e88d6e49621057deed31abfb.1591017086.git.tamas.lengyel@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1591017086.git.tamas.lengyel@intel.com>
 References: <cover.1591017086.git.tamas.lengyel@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
@@ -67,58 +65,70 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>,
- Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>,
- =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
+Cc: Anthony PERARD <anthony.perard@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ Tamas K Lengyel <tamas.lengyel@intel.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Toolstack side for creating forks with interrupt injection blocked.
+Skips parts not relevant for VM forks. No functional change in existing code,
+only relocating some bits that don't need to be done at the very end.
 
 Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
-Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
-Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
 ---
- tools/libxc/include/xenctrl.h | 3 ++-
- tools/libxc/xc_memshr.c       | 4 +++-
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ tools/libxl/libxl_dom.c | 23 ++++++++++++++---------
+ 1 file changed, 14 insertions(+), 9 deletions(-)
 
-diff --git a/tools/libxc/include/xenctrl.h b/tools/libxc/include/xenctrl.h
-index f9e17ae424..5eeee1de46 100644
---- a/tools/libxc/include/xenctrl.h
-+++ b/tools/libxc/include/xenctrl.h
-@@ -2241,7 +2241,8 @@ int xc_memshr_range_share(xc_interface *xch,
- int xc_memshr_fork(xc_interface *xch,
-                    uint32_t source_domain,
-                    uint32_t client_domain,
--                   bool allow_with_iommu);
-+                   bool allow_with_iommu,
-+                   bool block_interrupts);
+diff --git a/tools/libxl/libxl_dom.c b/tools/libxl/libxl_dom.c
+index dd1aff89a3..1b55097a1a 100644
+--- a/tools/libxl/libxl_dom.c
++++ b/tools/libxl/libxl_dom.c
+@@ -249,9 +249,12 @@ int libxl__build_pre(libxl__gc *gc, uint32_t domid,
+     libxl_domain_build_info *const info = &d_config->b_info;
+     libxl_ctx *ctx = libxl__gc_owner(gc);
+     char *xs_domid, *con_domid;
+-    int rc;
++    int rc = 0;
+     uint64_t size;
  
- /*
-  * Note: this function is only intended to be used on short-lived forks that
-diff --git a/tools/libxc/xc_memshr.c b/tools/libxc/xc_memshr.c
-index 2300cc7075..a6cfd7dccf 100644
---- a/tools/libxc/xc_memshr.c
-+++ b/tools/libxc/xc_memshr.c
-@@ -240,7 +240,7 @@ int xc_memshr_debug_gref(xc_interface *xch,
++    if (state->forked_vm)
++        goto skip_fork;
++
+     if (xc_domain_max_vcpus(ctx->xch, domid, info->max_vcpus) != 0) {
+         LOG(ERROR, "Couldn't set max vcpu count");
+         return ERROR_FAIL;
+@@ -374,6 +377,16 @@ int libxl__build_pre(libxl__gc *gc, uint32_t domid,
+         return ERROR_FAIL;
+     }
+ 
++    if ( (rc = libxl__arch_domain_create(gc, d_config, domid)) )
++        return rc;
++
++    /* Construct a CPUID policy, but only for brand new domains.  Domains
++     * being migrated-in/restored have CPUID handled during the
++     * static_data_done() callback. */
++    if (!state->restore)
++        libxl__cpuid_legacy(ctx, domid, info);
++
++skip_fork:
+     xs_domid = xs_read(ctx->xsh, XBT_NULL, "/tool/xenstored/domid", NULL);
+     state->store_domid = xs_domid ? atoi(xs_domid) : 0;
+     free(xs_domid);
+@@ -385,14 +398,6 @@ int libxl__build_pre(libxl__gc *gc, uint32_t domid,
+     state->store_port = xc_evtchn_alloc_unbound(ctx->xch, domid, state->store_domid);
+     state->console_port = xc_evtchn_alloc_unbound(ctx->xch, domid, state->console_domid);
+ 
+-    rc = libxl__arch_domain_create(gc, d_config, domid);
+-
+-    /* Construct a CPUID policy, but only for brand new domains.  Domains
+-     * being migrated-in/restored have CPUID handled during the
+-     * static_data_done() callback. */
+-    if (!state->restore)
+-        libxl__cpuid_legacy(ctx, domid, info);
+-
+     return rc;
  }
  
- int xc_memshr_fork(xc_interface *xch, uint32_t pdomid, uint32_t domid,
--                   bool allow_with_iommu)
-+                   bool allow_with_iommu, bool block_interrupts)
- {
-     xen_mem_sharing_op_t mso;
- 
-@@ -251,6 +251,8 @@ int xc_memshr_fork(xc_interface *xch, uint32_t pdomid, uint32_t domid,
- 
-     if ( allow_with_iommu )
-         mso.u.fork.flags |= XENMEM_FORK_WITH_IOMMU_ALLOWED;
-+    if ( block_interrupts )
-+        mso.u.fork.flags |= XENMEM_FORK_BLOCK_INTERRUPTS;
- 
-     return xc_memshr_memop(xch, domid, &mso);
- }
 -- 
 2.25.1
 
