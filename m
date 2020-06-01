@@ -1,79 +1,50 @@
 Return-Path: <SRS0=DHYy=7O=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
-X-Spam-Level: **
-X-Spam-Status: No, score=2.4 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
-	DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,HTML_MESSAGE,MAILING_LIST_MULTI,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Level: 
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 14EBBC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 12:21:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EDF5C433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 12:45:04 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D513B20679
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 12:21:17 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="A9BhzkkN"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D513B20679
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id 4856720679
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 12:45:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4856720679
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jfjQn-0000p4-95; Mon, 01 Jun 2020 12:20:41 +0000
+	id 1jfjo1-0002dy-Hu; Mon, 01 Jun 2020 12:44:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=E93A=7O=gmail.com=buycomputer40@srs-us1.protection.inumbo.net>)
- id 1jfjQm-0000oz-5c
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 12:20:40 +0000
-X-Inumbo-ID: 4d683118-a402-11ea-8993-bc764e2007e4
-Received: from mail-lj1-x231.google.com (unknown [2a00:1450:4864:20::231])
+ <SRS0=Um2E=7O=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
+ id 1jfjo1-0002dr-51
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 12:44:41 +0000
+X-Inumbo-ID: a5ccaf0c-a405-11ea-9947-bc764e2007e4
+Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 4d683118-a402-11ea-8993-bc764e2007e4;
- Mon, 01 Jun 2020 12:20:39 +0000 (UTC)
-Received: by mail-lj1-x231.google.com with SMTP id o9so7853048ljj.6
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2020 05:20:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=oWaSScPdF0/LBmZ/G8Aq2m32ZqmFc/6qkFfGD8k3UD0=;
- b=A9BhzkkN6NyjQx0Vt/b6gkwh5Q9VamXnhfXr4KFqQWmQnBPwhAcZHltq1hEptUQ6dy
- ZmPINi1CssA43O8icizcJKRqEQQ862NUE5pw0Tkc38SyeOHWPbfobmUP6bDokTXf7e0s
- o3SyBzKYTZGDD6Me5cpmS64eH7KWYoYUT1GCwQIaWKWPsCLiuMWAL0epQfhRHU4QK7NC
- Lm6oyMeLB/E9UxWap3AUPa7IwmuRTvhIdYAitekA85XBsEgcpdy0jRj9vrDqKY5qExAr
- UQG8jSujMT8C9ATrnmagJGm6r1L6Aq0cCXbRf1k5n+t2ZprGymLtyFVACRnzGIwG/57A
- w2Uw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=oWaSScPdF0/LBmZ/G8Aq2m32ZqmFc/6qkFfGD8k3UD0=;
- b=rV/I3EDqItP4BxfUwlFc7r3MN2HfWXzQ5tQte3iGYfDKEo4kJ0yFr1wHsbFAYs1JAE
- 97yMnrZ40M2yFC22xx7v7JLmVZgESaEWxeFicTFe/l0mvmeGn5WZCd3FNUYUHAOjwHDc
- mrQsgRuCFYhuk0LFraenw0SovtSeey/8tYtZudHNymRArwsZvppdniLYFvP3rG0CXg1H
- ENSn7dOzUjlTvO2GfNrgukSfAaDzSsAHdqCUZKIR+HmLKyVTRJ2YNHLMKvKNUunnh6Jl
- fvisbgL97ZBAnN2JoMvRmadoyPBynTgtQKn1W3d3VgL7PSmzuGICX6gIUIlJ8he9vNKJ
- qSOw==
-X-Gm-Message-State: AOAM530hLRfg1FQAI7FagvrPVdGOZo3ypmDkpAU4Av1Ym1QendYL2ARq
- THNpr8FunGqxjpGEh4rNTIICXNyYH3XkNcxhXUY=
-X-Google-Smtp-Source: ABdhPJwTm3RfwGpbNOTTw9xuUm60S9zzPUiP8o4pCehKWu2KgF2wYiyl3+JsUsnQbdqJd2A4DRZXptcSDYqUaiqNYkU=
-X-Received: by 2002:a05:651c:105a:: with SMTP id
- x26mr10692350ljm.159.1591014037989; 
- Mon, 01 Jun 2020 05:20:37 -0700 (PDT)
+ id a5ccaf0c-a405-11ea-9947-bc764e2007e4;
+ Mon, 01 Jun 2020 12:44:35 +0000 (UTC)
+Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
+ by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
+ (return-path ijackson@chiark.greenend.org.uk)
+ id 1jfjnu-0006zf-Qv; Mon, 01 Jun 2020 13:44:34 +0100
+From: Ian Jackson <ian.jackson@eu.citrix.com>
+To: xen-devel@lists.xenproject.org
+Subject: [OSSTEST PATCH 2/4] cs-bisection-step: flight_rmap Disassemble the
+ revisions query
+Date: Mon,  1 Jun 2020 13:44:28 +0100
+Message-Id: <20200601124430.29761-2-ian.jackson@eu.citrix.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200601124430.29761-1-ian.jackson@eu.citrix.com>
+References: <20200601124430.29761-1-ian.jackson@eu.citrix.com>
 MIME-Version: 1.0
-References: <CANSXg2FGtiDT05sQUpSAshAsdP4wSjPgQbfw_+aKJuAzSwvJuQ@mail.gmail.com>
- <da7e41b5-88a1-13ab-d52b-0652c16608af@suse.com>
- <MWHPR11MB1645DC1C5782DDA28C9BB1CB8CB30@MWHPR11MB1645.namprd11.prod.outlook.com>
- <CANSXg2EiauZfTMsmqzcB2ShUCr67rB+mHBm4EVtWhMaUL8NL-w@mail.gmail.com>
- <MWHPR11MB1645086209CC9A97D5805DA68C8E0@MWHPR11MB1645.namprd11.prod.outlook.com>
-In-Reply-To: <MWHPR11MB1645086209CC9A97D5805DA68C8E0@MWHPR11MB1645.namprd11.prod.outlook.com>
-From: buy computer <buycomputer40@gmail.com>
-Date: Mon, 1 Jun 2020 15:20:25 +0300
-Message-ID: <CANSXg2EU5X2_Cz5a+wZaomNzQ-iFYdjME-4NuLy+=RqEm__Uhw@mail.gmail.com>
-Subject: Re: iommu=no-igfx
-To: "Tian, Kevin" <kevin.tian@intel.com>
-Content-Type: multipart/alternative; boundary="000000000000912c6b05a704d248"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,50 +55,84 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
---000000000000912c6b05a704d248
-Content-Type: text/plain; charset="UTF-8"
+Break out various pieces that we are going to need to reuse for the
+other version of this query (which won't have the url join).
 
-On Thu, May 28, 2020 at 11:34 AM Tian, Kevin <kevin.tian@intel.com> wrote:
+Also, rather than retrieving the `tree_<tree>' runvar and calculating
+the tree name from that, use the `[built_]revision_<tree>' runvar from
+rev.
 
-> You may search dma_map* in drivers/gpu/drm/i915, and then print mapped
-> addresses to see any match in VT-d reported faulting addresses. For
-> example, __setup_page_dma might be one example that you want to check.
->
+No overall functional change.
 
-Unfortunately, I'm not really clear on how to do that too. I've found
-drivers/gpu/drm/i915, and it contains one file, i915.ko. Using cat prints
-out unformatted text. How do I access this data? Internet searches have
-again come up dry for me, sorry if this question isn't on the level.
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+ cs-bisection-step | 28 +++++++++++++++++++---------
+ 1 file changed, 19 insertions(+), 9 deletions(-)
 
---000000000000912c6b05a704d248
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+diff --git a/cs-bisection-step b/cs-bisection-step
+index f9ef1558..b36bac05 100755
+--- a/cs-bisection-step
++++ b/cs-bisection-step
+@@ -227,19 +227,30 @@ END
+ 	       AND flight = ?
+ END
+ 
+-    my $sth= db_prepare(<<END);
+-
+-        SELECT url.val AS uval,
++    my $qtxt_common_results = <<END;
++               rev.name AS revname,
+ 	       rev.val AS rval,
+ 	       rev.job AS job,
+       ${\ other_revision_job_suffix('rev.job','rev.use',' ') } AS othrev,
+-	       url.name AS longname
+-
++END
++    my $qtxt_common_tables = <<END;
+ 	    FROM tmp_build_info AS rev
++END
++    my $qtxt_common_rev_condition = <<END;
++                 (rev.name LIKE E'built\\_revision\\_%' OR
++                  rev.name LIKE E'revision\\_%')
++END
++
++    my $sth= db_prepare(<<END);
++        SELECT
++$qtxt_common_results
++	       url.val AS uval
++
++$qtxt_common_tables
+       CROSS JOIN tmp_build_info AS url
+ 
+-           WHERE (rev.name LIKE E'built\\_revision\\_%' OR
+-                  rev.name LIKE E'revision\\_%')
++           WHERE
++$qtxt_common_rev_condition
+   	     AND  url.name LIKE E'tree\\_%'
+ 	     AND  url.use = rev.use
+ 	     AND  url.job = rev.job
+@@ -247,7 +258,6 @@ END
+                   rev.name = 'revision_'       || substr(url.name,6))
+ 
+ 	   ORDER by url.val;
+-	  
+ END
+     $sth->execute();
+     my $row;
+@@ -255,7 +265,7 @@ END
+     my (@ttreenames, @ttreeurls, @trevisions);
+     while ($row= $sth->fetchrow_hashref()) {
+         next if $row->{othrev} eq 'DISCARD';
+-        $row->{longname} =~ m/^tree_/ or die "$row->{longname} ?";
++        $row->{revname} =~ m/^(?:built_)?revision_/ or die "$row->{revname} ?";
+         my $name= $'; #'
+         print DEBUG " $flight.$row->{job} uval=$row->{uval}".
+             " rval=$row->{rval} name=$name othrev=\`$row->{othrev}'\n";
+-- 
+2.20.1
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Thu, May 28, 2020 at 11:34 AM Tian=
-, Kevin &lt;<a href=3D"mailto:kevin.tian@intel.com">kevin.tian@intel.com</a=
->&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px=
- 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
-
-
-
-
-
-<div lang=3D"EN-US">
-<div class=3D"gmail-m_292198233990659600WordSection1">
-<p class=3D"MsoNormal">You may search dma_map* in drivers/gpu/drm/i915, and=
- then print mapped addresses to see any match in VT-d reported faulting add=
-resses. For example, __setup_page_dma might be one example that you want to=
- check.<u></u><u></u></p>
-</div></div></blockquote><div><br></div><div>Unfortunately, I&#39;m not rea=
-lly clear on how to do that too. I&#39;ve found drivers/gpu/drm/i915, and i=
-t contains one file, i915.ko. Using cat prints out unformatted text. How do=
- I access this data? Internet searches have again come up dry for me, sorry=
- if this question isn&#39;t on the level. <br></div></div></div>
-
---000000000000912c6b05a704d248--
 
