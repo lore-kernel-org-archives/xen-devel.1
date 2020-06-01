@@ -6,50 +6,49 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id D58D0C433E2
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3644CC433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id AF4402077D
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org AF4402077D
+	by mail.kernel.org (Postfix) with ESMTPS id 10D132077D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:22:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10D132077D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=intel.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jfkOM-0006gj-VH; Mon, 01 Jun 2020 13:22:14 +0000
+	id 1jfkOS-0006kj-HI; Mon, 01 Jun 2020 13:22:20 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=OmQg=7O=intel.com=tamas.lengyel@srs-us1.protection.inumbo.net>)
- id 1jfkOM-0006gF-2B
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 13:22:14 +0000
-X-Inumbo-ID: df4e475e-a40a-11ea-8993-bc764e2007e4
+ id 1jfkOR-0006jj-3Z
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 13:22:19 +0000
+X-Inumbo-ID: dfe0775a-a40a-11ea-8993-bc764e2007e4
 Received: from mga12.intel.com (unknown [192.55.52.136])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id df4e475e-a40a-11ea-8993-bc764e2007e4;
- Mon, 01 Jun 2020 13:21:59 +0000 (UTC)
-IronPort-SDR: OiTlxfAXUtm6i+b2l+ZzI3kOknlRorIT78wliQmC8X7xL8saYQAuXRKZOVfQwoA2mtJDAwL2eV
- eMpEY7raiHSQ==
+ id dfe0775a-a40a-11ea-8993-bc764e2007e4;
+ Mon, 01 Jun 2020 13:22:00 +0000 (UTC)
+IronPort-SDR: eYkBbxAJMifG3uobCYKDtbUo66UTDRrtjr6rSuqfo4WRxHjrY2Wu0njUu8noRvfReD46pBDn1i
+ gCp64f2LXSDQ==
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga008.jf.intel.com ([10.7.209.65])
  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jun 2020 06:21:57 -0700
-IronPort-SDR: CVuO+4ehU7TfZV95N6Qju9mNN4lwVMxQYdLjW2RpEurT0ArwV6c/GEHsjkX9BPecavBOl1FcS4
- GhG+5ki6KQBg==
+ 01 Jun 2020 06:21:59 -0700
+IronPort-SDR: 1cKPzYsYfgfjZpS+CJvwDNcWA1oIpmOii7uxMrS2NR4p369xdncM4O4Cb+skp6ZkpXnKytCb/w
+ 9KI+RA07J8JQ==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,460,1583222400"; d="scan'208";a="303887281"
+X-IronPort-AV: E=Sophos;i="5.73,460,1583222400"; d="scan'208";a="303887304"
 Received: from alayek-mobl.amr.corp.intel.com (HELO ubuntu.localdomain)
  ([10.209.11.99])
- by orsmga008.jf.intel.com with ESMTP; 01 Jun 2020 06:21:56 -0700
+ by orsmga008.jf.intel.com with ESMTP; 01 Jun 2020 06:21:58 -0700
 From: Tamas K Lengyel <tamas.lengyel@intel.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v19 for-4.14 06/13] tools/libxl: adjust
- domcreate_bootloader_done
-Date: Mon,  1 Jun 2020 06:21:40 -0700
-Message-Id: <0772dc7d3002e02b2c5775b32980a7719a4176b7.1591017086.git.tamas.lengyel@intel.com>
+Subject: [PATCH v19 for-4.14 09/13] tools/libxl: libxl__build_hvm_fork
+Date: Mon,  1 Jun 2020 06:21:43 -0700
+Message-Id: <688d79b662bce099e847329426dd6fd61479f8c2.1591017086.git.tamas.lengyel@intel.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <cover.1591017086.git.tamas.lengyel@intel.com>
 References: <cover.1591017086.git.tamas.lengyel@intel.com>
@@ -71,46 +70,84 @@ Cc: Anthony PERARD <anthony.perard@citrix.com>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Add special handling when only the the device model needs launching for forks.
+Add libxl__build_hvm_fork function that performs only the steps needed for VM
+forks, skipping a large chunk of libxl__build_hvm.
 
 Signed-off-by: Tamas K Lengyel <tamas.lengyel@intel.com>
 ---
- tools/libxl/libxl_create.c   | 9 +++++++++
- tools/libxl/libxl_internal.h | 1 +
- 2 files changed, 10 insertions(+)
+ tools/libxl/libxl_dom.c | 32 +++++++++++++++++++++++++++++---
+ 1 file changed, 29 insertions(+), 3 deletions(-)
 
-diff --git a/tools/libxl/libxl_create.c b/tools/libxl/libxl_create.c
-index 3f0745acc6..ab3ac096ee 100644
---- a/tools/libxl/libxl_create.c
-+++ b/tools/libxl/libxl_create.c
-@@ -1376,6 +1376,15 @@ static void domcreate_bootloader_done(libxl__egc *egc,
-         return;
-     }
+diff --git a/tools/libxl/libxl_dom.c b/tools/libxl/libxl_dom.c
+index 52d49437cc..28117f0907 100644
+--- a/tools/libxl/libxl_dom.c
++++ b/tools/libxl/libxl_dom.c
+@@ -741,14 +741,15 @@ static int hvm_build_set_params(xc_interface *handle, uint32_t domid,
+                                 libxl_domain_build_info *info,
+                                 int store_evtchn, unsigned long *store_mfn,
+                                 int console_evtchn, unsigned long *console_mfn,
+-                                domid_t store_domid, domid_t console_domid)
++                                domid_t store_domid, domid_t console_domid,
++                                bool forked_vm)
+ {
+     struct hvm_info_table *va_hvm;
+     uint8_t *va_map, sum;
+     uint64_t str_mfn, cons_mfn;
+     int i;
  
-+    if (d_config->dm_restore_file) {
-+        dcs->srs.dcs = dcs;
-+        dcs->srs.ao = ao;
-+        state->forked_vm = true;
-+        rc = libxl__domain_build(gc, d_config, domid, state);
-+        domcreate_rebuild_done(egc, dcs, rc);
-+        return;
-+    }
+-    if (info->type == LIBXL_DOMAIN_TYPE_HVM) {
++    if (info->type == LIBXL_DOMAIN_TYPE_HVM && !forked_vm) {
+         va_map = xc_map_foreign_range(handle, domid,
+                                       XC_PAGE_SIZE, PROT_READ | PROT_WRITE,
+                                       HVM_INFO_PFN);
+@@ -1053,6 +1054,28 @@ out:
+     return rc;
+ }
+ 
++static int libxl__build_hvm_fork(libxl__gc *gc, uint32_t domid,
++                                 libxl_domain_config *d_config,
++                                 libxl__domain_build_state *state)
++{
++    libxl_ctx *ctx = libxl__gc_owner(gc);
++    libxl_domain_build_info *const info = &d_config->b_info;
 +
-     /* Prepare environment for domcreate_stream_done */
-     dcs->srs.dcs = dcs;
++    int rc = hvm_build_set_params(ctx->xch, domid, info, state->store_port,
++                                  &state->store_mfn, state->console_port,
++                                  &state->console_mfn, state->store_domid,
++                                  state->console_domid, state->forked_vm);
++
++    if ( rc )
++        return rc;
++
++    return xc_dom_gnttab_seed(ctx->xch, domid, true,
++                              state->console_mfn,
++                              state->store_mfn,
++                              state->console_domid,
++                              state->store_domid);
++}
++
+ int libxl__build_hvm(libxl__gc *gc, uint32_t domid,
+               libxl_domain_config *d_config,
+               libxl__domain_build_state *state)
+@@ -1064,6 +1087,9 @@ int libxl__build_hvm(libxl__gc *gc, uint32_t domid,
+     struct xc_dom_image *dom = NULL;
+     bool device_model = info->type == LIBXL_DOMAIN_TYPE_HVM ? true : false;
  
-diff --git a/tools/libxl/libxl_internal.h b/tools/libxl/libxl_internal.h
-index 19b367daca..eaae955658 100644
---- a/tools/libxl/libxl_internal.h
-+++ b/tools/libxl/libxl_internal.h
-@@ -1376,6 +1376,7 @@ typedef struct {
++    if (state->forked_vm)
++        return libxl__build_hvm_fork(gc, domid, d_config, state);
++
+     xc_dom_loginit(ctx->xch);
  
-     char *saved_state;
-     int dm_monitor_fd;
-+    bool forked_vm;
- 
-     libxl__file_reference pv_kernel;
-     libxl__file_reference pv_ramdisk;
+     /*
+@@ -1188,7 +1214,7 @@ int libxl__build_hvm(libxl__gc *gc, uint32_t domid,
+     rc = hvm_build_set_params(ctx->xch, domid, info, state->store_port,
+                                &state->store_mfn, state->console_port,
+                                &state->console_mfn, state->store_domid,
+-                               state->console_domid);
++                               state->console_domid, false);
+     if (rc != 0) {
+         LOG(ERROR, "hvm build set params failed");
+         goto out;
 -- 
 2.25.1
 
