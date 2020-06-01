@@ -4,54 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9F9F8C433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:41:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 181CAC433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:54:52 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 69E5A2068D
-	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:41:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 69E5A2068D
+	by mail.kernel.org (Postfix) with ESMTPS id D7C2B2077D
+	for <xen-devel@archiver.kernel.org>; Mon,  1 Jun 2020 13:54:51 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D7C2B2077D
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jfkgV-0001E7-2T; Mon, 01 Jun 2020 13:40:59 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jfktY-0002Gh-LR; Mon, 01 Jun 2020 13:54:28 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QfgE=7O=citrix.com=andrew.cooper3@srs-us1.protection.inumbo.net>)
- id 1jfkgT-0001E2-D3
- for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 13:40:57 +0000
-X-Inumbo-ID: 84e9b336-a40d-11ea-81bc-bc764e2007e4
-Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 84e9b336-a40d-11ea-81bc-bc764e2007e4;
- Mon, 01 Jun 2020 13:40:56 +0000 (UTC)
-Authentication-Results: esa4.hc3370-68.iphmx.com;
+ <SRS0=3ele=7O=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
+ id 1jfktX-0002GY-D6
+ for xen-devel@lists.xenproject.org; Mon, 01 Jun 2020 13:54:27 +0000
+X-Inumbo-ID: 67c38028-a40f-11ea-ab1d-12813bfff9fa
+Received: from esa1.hc3370-68.iphmx.com (unknown [216.71.145.142])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 67c38028-a40f-11ea-ab1d-12813bfff9fa;
+ Mon, 01 Jun 2020 13:54:26 +0000 (UTC)
+Authentication-Results: esa1.hc3370-68.iphmx.com;
  dkim=none (message not signed) header.i=none
-IronPort-SDR: EiEC/4LNeYzNvajZEdL3Yks2kRlluXttvjFpXKdHb7DO0ZMwGZoFv6vXdEGnI43ZsuBkXp6oG9
- X5h6LMaGyEg0QQCDGSfXrMx+6HNtG5xQEqGw3YiIkEJswL6NlEuv2plg+U4QrTvpA3ueqZZivg
- I4sfJ83kT+H4K56t0xe53B4C23kHA5qeN1KeHy4sMMClQ8sAEVeWG0q/t7OW6XCxBZfORqQay4
- uAGPFyWcsY3bWVY2ndCWps9y9He5bu9b5suoPwI3pkzpcA4ODVLhdM8bqg8E2AFkV/OdRnhZa8
- q0I=
+IronPort-SDR: 4qt90VmACEPxtLEgjd+wGQwkhHFgATKLovXG0ynly1zRDj7WrmW/W0blK63cKyHDinM669+Ubb
+ FrfZMH+NTlS8oriz16y3K5dciQ/MBzZ+u58ZQw5J0RxIHnB8QD+S8TQghNeedCabEV1wUtu2uK
+ FGpVh1l+MCYedB2sqm5iBL/IcpzmAF2xiJGROuN3Ix8gMMGQfoNDT8iIt6eHvgDa2SE2clruoV
+ 9xkn27QDFx+zpcB3v572iwdVAImHcD5KCZwf17uO001kYr9qd8L4ixhBqa6kKzMKS4EzFLb0si
+ 2Hc=
 X-SBRS: 2.7
-X-MesageID: 19661962
-X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-MesageID: 19215687
+X-Ironport-Server: esa1.hc3370-68.iphmx.com
 X-Remote-IP: 162.221.158.21
 X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,460,1583211600"; d="scan'208";a="19661962"
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Subject: [PATCH for-4.14] docs/ucode: Extend runtime microcode loading
- documentation
-Date: Mon, 1 Jun 2020 14:40:25 +0100
-Message-ID: <20200601134025.24142-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.11.0
+X-IronPort-AV: E=Sophos;i="5.73,461,1583211600"; d="scan'208";a="19215687"
+From: Roger Pau Monne <roger.pau@citrix.com>
+To: <xen-devel@lists.xenproject.org>
+Subject: [PATCH v3 1/2] x86/mm: do not attempt to convert _PAGE_GNTTAB to a
+ boolean
+Date: Mon, 1 Jun 2020 15:53:24 +0200
+Message-ID: <20200601135325.34156-2-roger.pau@citrix.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200601135325.34156-1-roger.pau@citrix.com>
+References: <20200601135325.34156-1-roger.pau@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -62,76 +66,66 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, Wei Liu <wl@xen.org>,
- Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
- George Dunlap <George.Dunlap@eu.citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>, Jan
- Beulich <JBeulich@suse.com>, Ian Jackson <ian.jackson@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Roger Pau Monne <roger.pau@citrix.com>, Wei Liu <wl@xen.org>,
+ Jan Beulich <jbeulich@suse.com>, paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Extend the disclaimer about runtime loading.  While we've done our best to
-make the mechaism reliable, the safety of late loading does ultimately depend
-on the contents of the blobs.
+Clang 10 complains with:
 
-Extend the xen-ucode portion with examples of how to use it.
+mm.c:1239:10: error: converting the result of '<<' to a boolean always evaluates to true
+      [-Werror,-Wtautological-constant-compare]
+    if ( _PAGE_GNTTAB && (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
+         ^
+xen/include/asm/x86_64/page.h:161:25: note: expanded from macro '_PAGE_GNTTAB'
+#define _PAGE_GNTTAB (1U<<22)
+                        ^
 
-Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Remove the conversion of _PAGE_GNTTAB to a boolean and instead use a
+preprocessor conditional to check if _PAGE_GNTTAB is defined.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-CC: George Dunlap <George.Dunlap@eu.citrix.com>
-CC: Ian Jackson <ian.jackson@citrix.com>
-CC: Jan Beulich <JBeulich@suse.com>
-CC: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-CC: Stefano Stabellini <sstabellini@kernel.org>
-CC: Wei Liu <wl@xen.org>
-CC: Julien Grall <julien@xen.org>
-CC: Paul Durrant <paul@xen.org>
----
- docs/admin-guide/microcode-loading.rst | 22 +++++++++++++++++++---
- 1 file changed, 19 insertions(+), 3 deletions(-)
+Changes since v2:
+ - Add comment.
 
-diff --git a/docs/admin-guide/microcode-loading.rst b/docs/admin-guide/microcode-loading.rst
-index 5f0f661a2e..8cd5d0351b 100644
---- a/docs/admin-guide/microcode-loading.rst
-+++ b/docs/admin-guide/microcode-loading.rst
-@@ -104,8 +104,8 @@ modules to find any CPIO archives, and search the archive for the applicable
- file.  Xen will stop searching at the first match.
+Changes since v1:
+ - Use a preprocessor conditional.
+---
+ xen/arch/x86/mm.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 53e3dcb2d4..e376fc7e8f 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -1235,8 +1235,14 @@ void put_page_from_l1e(l1_pgentry_t l1e, struct domain *l1e_owner)
+      *
+      * (Note that the undestroyable active grants are not a security hole in
+      * Xen. All active grants can safely be cleaned up when the domain dies.)
++     *
++     * NB: the preprocessor conditional is required in order to prevent clang's
++     * -Wtautological-constant-compare complaining about converting the result
++     * of a << into a bool is always true if it's evaluated directly in the if
++     * condition.
+      */
+-    if ( _PAGE_GNTTAB && (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
++#if _PAGE_GNTTAB
++    if ( (l1e_get_flags(l1e) & _PAGE_GNTTAB) &&
+          !l1e_owner->is_shutting_down && !l1e_owner->is_dying )
+     {
+         gdprintk(XENLOG_WARNING,
+@@ -1244,6 +1250,7 @@ void put_page_from_l1e(l1_pgentry_t l1e, struct domain *l1e_owner)
+                  l1e_get_intpte(l1e));
+         domain_crash(l1e_owner);
+     }
++#endif
  
- 
--Run time microcode loading
----------------------------
-+Runtime microcode loading
-+-------------------------
- 
- .. warning::
- 
-@@ -113,7 +113,23 @@ Run time microcode loading
-    or at boot time.  Not all microcode updates (or parts thereof) can be
-    applied at runtime.
- 
--The ``xen-ucode`` utility can be used to initiate a runtime microcode load.
-+   Given the proprietry nature of microcode, we are unable to make any claim
-+   that a runtime microcode is risk-free.  Any runtime microcode loading needs
-+   adequate testing on a dev instance before being rolled out to production
-+   systems.
-+
-+The ``xen-ucode`` utility can be used to initiate a runtime microcode load::
-+
-+  [root@host ~]# xen-ucode
-+  xen-ucode: Xen microcode updating tool
-+  Usage: xen-ucode <microcode blob>
-+  [root@host ~]#
-+
-+e.g. With a Linux dom0 on a Haswell system::
-+
-+  [root@host ~]# xen-ucode /lib/firmware/intel-ucode/06-3c-03
-+  [root@host ~]#
-+
- It will pass the blob to Xen, which will check to see whether the blob is
- correct for the processor, and newer than the running microcode.
- 
+     /*
+      * Remember we didn't take a type-count of foreign writable mappings
 -- 
-2.11.0
+2.26.2
 
 
