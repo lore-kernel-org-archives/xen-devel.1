@@ -2,87 +2,50 @@ Return-Path: <SRS0=d7tj=7P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 95DCBC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 05:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3C8BFC433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 06:00:54 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 50323206A2
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 05:30:50 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="ZyGRy+SX"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 50323206A2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	by mail.kernel.org (Postfix) with ESMTPS id 01A5320734
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 06:00:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 01A5320734
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jfzVG-000085-0f; Tue, 02 Jun 2020 05:30:22 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jfzyP-0002nx-E2; Tue, 02 Jun 2020 06:00:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=PmCl=7P=redhat.com=mst@srs-us1.protection.inumbo.net>)
- id 1jfzVD-000080-OG
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2020 05:30:20 +0000
-X-Inumbo-ID: 255ab7c8-a492-11ea-9dbe-bc764e2007e4
-Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.120])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id 255ab7c8-a492-11ea-9dbe-bc764e2007e4;
- Tue, 02 Jun 2020 05:30:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591075818;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=qzoUxl/WLYb+063eW2TIeYv68TR2Bx8Y1d1JB0krKgI=;
- b=ZyGRy+SXgEYFXq6JNlVCwDe92HiUNkW0jfkU9jj0A29vb5iDmx1FPR2H0rd+hWSy9Lk5nq
- pDdmTDnpZjX674rtKeuAO30Z4HAxwo/iqsfuIPnlxX+Hp4ZqyopHzuI/DvbOFr4vTLjXSM
- bIO+cpXummYQb2EWtcWLxwJeO7+7B7I=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-388-0NEp_VBUMfeNpBWwLBdMqg-1; Tue, 02 Jun 2020 01:30:17 -0400
-X-MC-Unique: 0NEp_VBUMfeNpBWwLBdMqg-1
-Received: by mail-wm1-f71.google.com with SMTP id j128so498769wmj.6
- for <xen-devel@lists.xenproject.org>; Mon, 01 Jun 2020 22:30:16 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=qzoUxl/WLYb+063eW2TIeYv68TR2Bx8Y1d1JB0krKgI=;
- b=f5nVgZS4aPeCSpz7HOxgQFnB2whtQz4ju7VKnY61AT7GFuL0MwVvvFOBTWLP5HlV0R
- eGGhg6BOTvRxfgDLUZ9fwCA/4Dq8qpk+9EDpffUK4aceorsS+su2Ok1ODnlAHYjVvtN+
- wvmLbAuaFdvYojV+s0BQEDzBMujlP8R5v4LkPkb7O+Ao3Y1DxaCtAsMX/1hT6ZC1Rm3f
- BrEaxdOb7b1oTvDrb4/c64oua7DwIaentGvpmgdRwT9tX9GkeDajUeUy39aH/tnELAC2
- +wtfzD+HEV7Kw50fXtwuWZYZkNheM9uyoHs3Ayf7rKgT9a0zKznJdrUs29dJLaxNofCa
- n0Xg==
-X-Gm-Message-State: AOAM533NtBWOQRhUMRyLJpIUA46AtVisCKXVldWm+QcGcOVo6i1Jfivu
- Lxf+DN2TNO32UDaHqlRFotpJW//SdNbtJsJkkkphkbRSP5aZoN2zxPm8HMWf475DEOJRyYtW845
- Pj8zA6PRQEV1xF7wKlE/YpX7IRb0=
-X-Received: by 2002:adf:fb0f:: with SMTP id c15mr26298839wrr.410.1591075815776; 
- Mon, 01 Jun 2020 22:30:15 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxm9pd8/UBwSfLvzSGS3kH8718EtuelpkpKCVpKrXAc490C5Bc8iBs799ATExgZ/w+YruoNzg==
-X-Received: by 2002:adf:fb0f:: with SMTP id c15mr26298819wrr.410.1591075815494; 
- Mon, 01 Jun 2020 22:30:15 -0700 (PDT)
-Received: from redhat.com (bzq-109-64-41-91.red.bezeqint.net. [109.64.41.91])
- by smtp.gmail.com with ESMTPSA id
- 30sm2040428wrd.47.2020.06.01.22.30.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Jun 2020 22:30:14 -0700 (PDT)
-Date: Tue, 2 Jun 2020 01:30:11 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Gerd Hoffmann <kraxel@redhat.com>
-Subject: Re: [PATCH v3 0/4] microvm: memory config tweaks
-Message-ID: <20200602012911-mutt-send-email-mst@kernel.org>
-References: <20200529073957.8018-1-kraxel@redhat.com>
+ (envelope-from <SRS0=d8pY=7P=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jfzyO-0002ns-HM
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2020 06:00:28 +0000
+X-Inumbo-ID: 59a040db-a496-11ea-ab98-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id 59a040db-a496-11ea-ab98-12813bfff9fa;
+ Tue, 02 Jun 2020 06:00:25 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 252CDAFB0;
+ Tue,  2 Jun 2020 06:00:26 +0000 (UTC)
+From: Juergen Gross <jgross@suse.com>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH-for-4.14 2/2] tools: make libxenhypfs interface more future
+ proof
+Date: Tue,  2 Jun 2020 08:00:21 +0200
+Message-Id: <20200602060021.23289-3-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200602060021.23289-1-jgross@suse.com>
+References: <20200602060021.23289-1-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20200529073957.8018-1-kraxel@redhat.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,57 +56,102 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Eduardo Habkost <ehabkost@redhat.com>, Sergio Lopez <slp@redhat.com>,
- Paul Durrant <paul@xen.org>, qemu-devel@nongnu.org, imammedo@redhat.com,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>, xen-devel@lists.xenproject.org,
- Anthony Perard <anthony.perard@citrix.com>,
- Paolo Bonzini <pbonzini@redhat.com>, philmd@redhat.com,
- Richard Henderson <rth@twiddle.net>
+Cc: Juergen Gross <jgross@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, Wei Liu <wl@xen.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Fri, May 29, 2020 at 09:39:53AM +0200, Gerd Hoffmann wrote:
-> With more microvm memory config tweaks split this into its owns series,
-> the microvm acpi patch series is already big enough ...
+As compilers are free to choose the width of an enum they should be
+avoided in stable interfaces when declaring a variable. So the
+struct xenhypfs_dirent definition should be modified to have explicitly
+sized members for type and encoding and the related enums should be
+defined separately.
 
-Okay.
+Additionally it is better to have a larger flags member in that struct
+with the "writable" indicator occupying only a single bit. This will
+make future additions easier.
 
-We might want to add pci to microvm and maybe we'll need more space
-then, but let's leave this for another day.
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+ tools/libs/hypfs/core.c             |  2 +-
+ tools/libs/hypfs/include/xenhypfs.h | 31 +++++++++++++++++------------
+ tools/misc/xenhypfs.c               |  3 ++-
+ 3 files changed, 21 insertions(+), 15 deletions(-)
 
-Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
-
-
-> v2:
->  - use 3G split.
->  - add patch to move virtio-mmio region.
->  - pick up acks & reviews.
-> v3:
->  - fix xen build.
->  - pick up acks & reviews.
-> 
-> take care,
->   Gerd
-> 
-> Gerd Hoffmann (4):
->   microvm: use 3G split unconditionally
->   microvm: drop max-ram-below-4g support
->   x86: move max-ram-below-4g to pc
->   microvm: move virtio base to 0xfeb00000
-> 
->  include/hw/i386/microvm.h |  2 +-
->  include/hw/i386/pc.h      |  2 ++
->  include/hw/i386/x86.h     |  4 ----
->  hw/i386/microvm.c         | 35 +----------------------------
->  hw/i386/pc.c              | 46 +++++++++++++++++++++++++++++++++++++++
->  hw/i386/pc_piix.c         | 10 ++++-----
->  hw/i386/pc_q35.c          | 10 ++++-----
->  hw/i386/x86.c             | 46 ---------------------------------------
->  hw/i386/xen/xen-hvm.c     |  2 +-
->  9 files changed, 61 insertions(+), 96 deletions(-)
-> 
-> -- 
-> 2.18.4
+diff --git a/tools/libs/hypfs/core.c b/tools/libs/hypfs/core.c
+index d4309b5ae2..c91e165705 100644
+--- a/tools/libs/hypfs/core.c
++++ b/tools/libs/hypfs/core.c
+@@ -204,7 +204,7 @@ static void xenhypfs_set_attrs(struct xen_hypfs_direntry *entry,
+         dirent->type = xenhypfs_type_blob;
+     }
+ 
+-    dirent->is_writable = entry->max_write_len;
++    dirent->flags = entry->max_write_len ? XENHYPFS_FLAG_WRITABLE : 0;
+ }
+ 
+ void *xenhypfs_read_raw(xenhypfs_handle *fshdl, const char *path,
+diff --git a/tools/libs/hypfs/include/xenhypfs.h b/tools/libs/hypfs/include/xenhypfs.h
+index ab157edceb..25432d2a16 100644
+--- a/tools/libs/hypfs/include/xenhypfs.h
++++ b/tools/libs/hypfs/include/xenhypfs.h
+@@ -26,22 +26,27 @@ struct xentoollog_logger;
+ 
+ typedef struct xenhypfs_handle xenhypfs_handle;
+ 
++enum xenhypfs_type {
++    xenhypfs_type_dir,
++    xenhypfs_type_blob,
++    xenhypfs_type_string,
++    xenhypfs_type_uint,
++    xenhypfs_type_int,
++    xenhypfs_type_bool,
++};
++
++enum xenhypfs_encoding {
++    xenhypfs_enc_plain,
++    xenhypfs_enc_gzip
++};
++
+ struct xenhypfs_dirent {
+     char *name;
+     size_t size;
+-    enum {
+-        xenhypfs_type_dir,
+-        xenhypfs_type_blob,
+-        xenhypfs_type_string,
+-        xenhypfs_type_uint,
+-        xenhypfs_type_int,
+-        xenhypfs_type_bool
+-    } type;
+-    enum {
+-        xenhypfs_enc_plain,
+-        xenhypfs_enc_gzip
+-    } encoding;
+-    bool is_writable;
++    unsigned short type;
++    unsigned short encoding;
++    unsigned int flags;
++#define XENHYPFS_FLAG_WRITABLE  0x00000001
+ };
+ 
+ xenhypfs_handle *xenhypfs_open(struct xentoollog_logger *logger,
+diff --git a/tools/misc/xenhypfs.c b/tools/misc/xenhypfs.c
+index 5145b8969f..5da24aed90 100644
+--- a/tools/misc/xenhypfs.c
++++ b/tools/misc/xenhypfs.c
+@@ -125,7 +125,8 @@ static int xenhypfs_ls(char *path)
+     } else {
+         for (i = 0; i < n; i++)
+             printf("%s r%c %s\n", xenhypfs_type(ent + i),
+-                   ent[i].is_writable ? 'w' : '-', ent[i].name);
++                   (ent[i].flags & XENHYPFS_FLAG_WRITABLE) ? 'w' : '-',
++                   ent[i].name);
+ 
+         free(ent);
+     }
+-- 
+2.26.2
 
 
