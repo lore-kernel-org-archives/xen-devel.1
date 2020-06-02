@@ -6,41 +6,40 @@ X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
 	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id F084EC433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 12:59:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2A148C433E1
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 12:59:28 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D0C9620663
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 12:59:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D0C9620663
+	by mail.kernel.org (Postfix) with ESMTPS id 0AAD420663
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 12:59:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 0AAD420663
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jg6VW-0002dO-Qq; Tue, 02 Jun 2020 12:59:06 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jg6Vb-0002eQ-2n; Tue, 02 Jun 2020 12:59:11 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=d8pY=7P=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jg6VV-0002d6-J1
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2020 12:59:05 +0000
-X-Inumbo-ID: d6265100-a4d0-11ea-abee-12813bfff9fa
+ id 1jg6VZ-0002e9-Tc
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2020 12:59:09 +0000
+X-Inumbo-ID: d62fb358-a4d0-11ea-9947-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d6265100-a4d0-11ea-abee-12813bfff9fa;
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id d62fb358-a4d0-11ea-9947-bc764e2007e4;
  Tue, 02 Jun 2020 12:59:04 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id A592AAF69;
+ by mx2.suse.de (Postfix) with ESMTP id DD6A3AF72;
  Tue,  2 Jun 2020 12:59:05 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH-for-4.14 v2 1/2] xen: fix build with CONFIG_HYPFS_CONFIG
- enabled
-Date: Tue,  2 Jun 2020 14:58:59 +0200
-Message-Id: <20200602125900.4424-2-jgross@suse.com>
+Subject: [PATCH-for-4.14 v2 2/2] xen/config: disable hypervisor filesystem for
+ pv-shim
+Date: Tue,  2 Jun 2020 14:59:00 +0200
+Message-Id: <20200602125900.4424-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200602125900.4424-1-jgross@suse.com>
 References: <20200602125900.4424-1-jgross@suse.com>
@@ -56,44 +55,32 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, paul@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wl@xen.org>, paul@xen.org,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Commit 58263ed7713e ("xen: add /buildinfo/config entry to hypervisor
-filesystem") added a dependency to .config, but the hypervisor's build
-config could be have another name via setting KCONFIG_CONFIG.
+The pv-shim doesn't need the hypervisor filesystem, so disable it.
 
-Fix that by using $(KCONFIG_CONFIG) instead. Additionally reference
-the config file via $(XEN_ROOT) instead of a relative path.
-
-Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
 Signed-off-by: Juergen Gross <jgross@suse.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
-V2:
-- accept an absolute path in KCONFIG_CONFIG (Jan Beulich)
----
- xen/common/Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ xen/arch/x86/configs/pvshim_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/xen/common/Makefile b/xen/common/Makefile
-index 91581e1815..fc2c8eb4a3 100644
---- a/xen/common/Makefile
-+++ b/xen/common/Makefile
-@@ -75,7 +75,8 @@ obj-$(CONFIG_UBSAN) += ubsan/
- obj-$(CONFIG_NEEDS_LIBELF) += libelf/
- obj-$(CONFIG_HAS_DEVICE_TREE) += libfdt/
- 
--config.gz: ../.config
-+CONF_FILE := $(if $(patsubst /%,,$(KCONFIG_CONFIG)),$(XEN_ROOT)/xen/$(KCONFIG_CONFIG),$(KCONFIG_CONFIG))
-+config.gz: $(CONF_FILE)
- 	gzip -c $< >$@
- 
- config_data.o: config.gz
+diff --git a/xen/arch/x86/configs/pvshim_defconfig b/xen/arch/x86/configs/pvshim_defconfig
+index 9710aa6238..830660e022 100644
+--- a/xen/arch/x86/configs/pvshim_defconfig
++++ b/xen/arch/x86/configs/pvshim_defconfig
+@@ -6,6 +6,7 @@ CONFIG_PV_SHIM=y
+ CONFIG_PV_SHIM_EXCLUSIVE=y
+ CONFIG_NR_CPUS=32
+ # Disable features not used by the PV shim
++# CONFIG_HYPFS is not set
+ # CONFIG_SHADOW_PAGING is not set
+ # CONFIG_BIGMEM is not set
+ # CONFIG_HVM_FEP is not set
 -- 
 2.26.2
 
