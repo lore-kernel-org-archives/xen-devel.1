@@ -2,44 +2,47 @@ Return-Path: <SRS0=d7tj=7P=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3B51EC433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 97215C433E0
 	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 11:41:29 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 10EF2206A2
-	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 11:41:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 10EF2206A2
+	by mail.kernel.org (Postfix) with ESMTPS id 78184206A2
+	for <xen-devel@archiver.kernel.org>; Tue,  2 Jun 2020 11:41:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 78184206A2
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jg5Hy-0002WB-2C; Tue, 02 Jun 2020 11:41:02 +0000
+	id 1jg5I3-0002Xt-AJ; Tue, 02 Jun 2020 11:41:07 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=d8pY=7P=suse.com=jgross@srs-us1.protection.inumbo.net>)
- id 1jg5Hw-0002W2-Ef
- for xen-devel@lists.xenproject.org; Tue, 02 Jun 2020 11:41:00 +0000
-X-Inumbo-ID: ea9fb35c-a4c5-11ea-9dbe-bc764e2007e4
+ id 1jg5I1-0002WP-FN
+ for xen-devel@lists.xenproject.org; Tue, 02 Jun 2020 11:41:05 +0000
+X-Inumbo-ID: eab6ee8c-a4c5-11ea-9dbe-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id ea9fb35c-a4c5-11ea-9dbe-bc764e2007e4;
+ id eab6ee8c-a4c5-11ea-9dbe-bc764e2007e4;
  Tue, 02 Jun 2020 11:40:54 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 78663AD5D;
+ by mx2.suse.de (Postfix) with ESMTP id DC1E7ABF4;
  Tue,  2 Jun 2020 11:40:55 +0000 (UTC)
 From: Juergen Gross <jgross@suse.com>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH-for-4.14 0/2] xen: build fixes for CONFIG_HYPFS
-Date: Tue,  2 Jun 2020 13:40:48 +0200
-Message-Id: <20200602114050.5964-1-jgross@suse.com>
+Subject: [PATCH-for-4.14 2/2] xen/config: disable hypervisor filesystem for
+ pv-shim
+Date: Tue,  2 Jun 2020 13:40:50 +0200
+Message-Id: <20200602114050.5964-3-jgross@suse.com>
 X-Mailer: git-send-email 2.26.2
+In-Reply-To: <20200602114050.5964-1-jgross@suse.com>
+References: <20200602114050.5964-1-jgross@suse.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -52,25 +55,31 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Wei Liu <wl@xen.org>, paul@xen.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- Ian Jackson <ian.jackson@eu.citrix.com>,
- George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+Cc: Juergen Gross <jgross@suse.com>, Wei Liu <wl@xen.org>, paul@xen.org,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
  =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Fixing an issue Andrew met, and disabling CONFIG_HYPFS in pv-shim.
+The pv-shim doesn't need the hypervisor filesystem, so disable it.
 
-Juergen Gross (2):
-  xen: fix build with CONFIG_HYPFS_CONFIG enabled
-  xen/config: disable hypervisor filesystem for pv-shim
-
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
  xen/arch/x86/configs/pvshim_defconfig | 1 +
- xen/common/Makefile                   | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ 1 file changed, 1 insertion(+)
 
+diff --git a/xen/arch/x86/configs/pvshim_defconfig b/xen/arch/x86/configs/pvshim_defconfig
+index 9710aa6238..830660e022 100644
+--- a/xen/arch/x86/configs/pvshim_defconfig
++++ b/xen/arch/x86/configs/pvshim_defconfig
+@@ -6,6 +6,7 @@ CONFIG_PV_SHIM=y
+ CONFIG_PV_SHIM_EXCLUSIVE=y
+ CONFIG_NR_CPUS=32
+ # Disable features not used by the PV shim
++# CONFIG_HYPFS is not set
+ # CONFIG_SHADOW_PAGING is not set
+ # CONFIG_BIGMEM is not set
+ # CONFIG_HVM_FEP is not set
 -- 
 2.26.2
 
