@@ -3,72 +3,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 030A8C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 06:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id C1C5CC433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 06:11:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BDBBE205CB
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 06:03:39 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id F2A672068D
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 06:11:21 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="1zD5Ddhh"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BDBBE205CB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=aepfle.de header.i=@aepfle.de header.b="YMud8+oj"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org F2A672068D
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=aepfle.de
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgMUH-00017o-VL; Wed, 03 Jun 2020 06:02:53 +0000
+	id 1jgMcB-000288-T1; Wed, 03 Jun 2020 06:11:03 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/GLy=7Q=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jgMUG-00017i-Cn
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 06:02:52 +0000
-X-Inumbo-ID: d8ba9f5e-a55f-11ea-81bc-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=ICuR=7Q=aepfle.de=olaf@srs-us1.protection.inumbo.net>)
+ id 1jgMc9-000283-Dr
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 06:11:02 +0000
+X-Inumbo-ID: fe1b139a-a560-11ea-9947-bc764e2007e4
+Received: from mo4-p01-ob.smtp.rzone.de (unknown [81.169.146.165])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id d8ba9f5e-a55f-11ea-81bc-bc764e2007e4;
- Wed, 03 Jun 2020 06:02:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6DBE/X5SGiWjsyA5R6sp9gKcGII5yathg9/uFXEI32k=; b=1zD5DdhhNMmffnr1obeb0/7NB
- 4I74rHlhJYnxyUhji1tzeTbk+DmEqmc6wv6MfGf6Su8CMh/CQO92lCRHOnIbSaxgb7QvvM2vKztxA
- mCLaT+VN3ZRMDuqzHwpGn70qBsnQ/adwYi5OfxlAQvEGPxhItgn9bdQpkXH85lNiBrQ8I=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jgMUA-0003cm-5g; Wed, 03 Jun 2020 06:02:46 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jgMU9-0005iu-OZ; Wed, 03 Jun 2020 06:02:45 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jgMU9-0002AE-Nt; Wed, 03 Jun 2020 06:02:45 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-150637-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ id fe1b139a-a560-11ea-9947-bc764e2007e4;
+ Wed, 03 Jun 2020 06:10:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1591164658;
+ s=strato-dkim-0002; d=aepfle.de;
+ h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:
+ X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
+ bh=rl+vparLycNdfteqAgJA+SUTyfN1PPe3UardQIEADzU=;
+ b=YMud8+ojFndirgjcaw4Hu7K5knUED87IbyLmobLq3xpDVAduU3Bg5vOgIWLmrzdS+z
+ iDnwGYCGHmXWzQbbd8kEDcC92wfuEMxvlLemxVB3sY8ny+jsWI0teqTy+082ecGdvDvF
+ V2sAa66GG1czsToRtvS9bNsFP9fT5ABqsTYFp6c7w3G5yLDodUMNtwMlpJU2+Dvpgv9P
+ XiYkicNIr0nk9/11RTRhAKR7TpANsfB1P8I9cgy0a4Fpy6QdRpXyoRfT3IPbP2bvzUxd
+ HQYniAPtTjAJF4VdUwROCGSOdSsv1zb5MUiWHLqhT419B8T1aFVVJidTfrkSUvzNUK8E
+ 20HA==
+X-RZG-AUTH: ":P2EQZWCpfu+qG7CngxMFH1J+3q8wa/QXkBR9MXjAuzBW/OdlBZQ4AHSS325Ojw=="
+X-RZG-CLASS-ID: mo00
+Received: from aepfle.de by smtp.strato.de (RZmta 46.9.1 SBL|AUTH)
+ with ESMTPSA id 205482w536Av04J
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Wed, 3 Jun 2020 08:10:57 +0200 (CEST)
+Date: Wed, 3 Jun 2020 08:10:53 +0200
+From: Olaf Hering <olaf@aepfle.de>
+To: =?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Subject: Re: [Xen-devel] [PATCH v3 5/9] libs: add libxenhypfs
+Message-ID: <20200603061053.GA19484@aepfle.de>
+References: <20200121084330.18309-1-jgross@suse.com>
+ <20200121084330.18309-6-jgross@suse.com>
+ <20200131155753.gyv4n67oz3znsxt5@debian>
+ <f26c60d0-d056-2841-1b94-ef6dc397d995@suse.com>
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 150637: regressions - FAIL
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:guest-start:fail:regression
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=99a76a88d5e7f4693bb6b286e366006e1da1c954
-X-Osstest-Versions-That: xen=1497e78068421d83956f8e82fb6e1bf1fc3b1199
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 03 Jun 2020 06:02:45 +0000
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="fUYQa+Pmc3FrFX/N"
+Content-Disposition: inline
+In-Reply-To: <f26c60d0-d056-2841-1b94-ef6dc397d995@suse.com>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,79 +74,53 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+ George Dunlap <George.Dunlap@eu.citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>, xen-devel@lists.xenproject.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 150637 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/150637/
 
-Regressions :-(
+--fUYQa+Pmc3FrFX/N
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-amd64-libvirt     12 guest-start              fail REGR. vs. 150438
+On Mon, Feb 03, J=C3=BCrgen Gro=C3=9F wrote:
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+> On 31.01.20 16:57, Wei Liu wrote:
+> > On Tue, Jan 21, 2020 at 09:43:26AM +0100, Juergen Gross wrote:
+> > > +Requires.private: xentoolcore,xentoollog,xencall
+> > Need to list libz here?
+> Probably, yes.
 
-version targeted for testing:
- xen                  99a76a88d5e7f4693bb6b286e366006e1da1c954
-baseline version:
- xen                  1497e78068421d83956f8e82fb6e1bf1fc3b1199
+See "rpm -qf --provides /usr/include/zlib.h" for the proper value within th=
+e "pkgconfig" namespace.
+It is 'zlib' instead of 'z'.
 
-Last test of basis   150438  2020-05-28 14:01:19 Z    5 days
-Failing since        150465  2020-05-29 09:02:14 Z    4 days   36 attempts
-Testing same since   150629  2020-06-02 21:00:40 Z    0 days    3 attempts
+Olaf
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Andrew Cooper <andrew.cooper@citrix.com>
-  Anthony PERARD <anthony.perard@citrix.com>
-  Dario Faggioli <dfaggioli@suse.com>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Jason Andryuk <jandryuk@gmail.com>
-  Juergen Gross <jgross@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Olaf Hering <olaf@aepfle.de>
-  Paul Durrant <paul@xen.org>
-  Paul Durrant <pdurrant@amazon.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wl@xen.org>
+--fUYQa+Pmc3FrFX/N
+Content-Type: application/pgp-signature; name="signature.asc"
 
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    pass    
- test-amd64-amd64-libvirt                                     fail    
+-----BEGIN PGP SIGNATURE-----
 
+iQIzBAEBCAAdFiEE97o7Um30LT3B+5b/86SN7mm1DoAFAl7XPucACgkQ86SN7mm1
+DoAA/Q//XnekQcHQ7IfLcQDfvQrVoG+JEKrdpEB1OUAElnYSSj8Z8+uhwYeC4pnY
+KPgCD8tgatMGW6UVsPyLTHnTObX3MqOIRR/50nO/PXrhTGIuBfAxymebBtA3ooQW
+3oxEsNibcv19bXTWFqYGQQexXPcQWZ4l8szh49iWB0S+FbAKH1c8B/F52D3ZeKTT
+gAvQc5M7ceJ/vl1r2lkkAaa6qPmIiVPKdqxfwHfJkPAN9cVtz5ZGN85foPQu1iep
+WrXDqbRxZ5uZwMRf++tqYJTlx4uKdt6s7BHxCN/oKF5QsqL/oDvVjsKae5Lq5pKG
+ht3FQfsPQ8ebzjhQhGW5X9K82BVF+ctYnKFREEen3O7YeWBzn4wTyD+jxx0uSzrk
+ecstwu9NQZuLXtWwR4ohKkTmVTpDyHywqzBYnz5azOTHJjsVW21UMBa/TH/25QsJ
+sthgUBI0pHWmlfRVghhGESwDqMKD/iHQte3B/EDpVvG1DILRqWpHw7HG7Xa44Vbm
+8Xs6RzLWw/9loHy2YB88vNQC1OOpfpkllSP3VuyL5fTgDrS55WdBBpuTxEqSBkrm
+1gheDq11ApWqEF+8O3xKOqP4v0nJbqnvRphVoNxfTCMlFKXqxrbCJNXDRRLbVCRk
+YRUj3q+HKpdgv+0bKC8e9jOGxpN0u2g5AL3+RpOF99KyVBq2PLY=
+=ES5v
+-----END PGP SIGNATURE-----
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
-
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
-
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
-
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
-
-
-Not pushing.
-
-(No revision log; it would be 1494 lines long.)
+--fUYQa+Pmc3FrFX/N--
 
