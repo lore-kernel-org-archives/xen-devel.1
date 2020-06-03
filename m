@@ -4,60 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 X-Spam-Level: 
 X-Spam-Status: No, score=-9.8 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_GIT autolearn=unavailable autolearn_force=no
-	version=3.4.0
+	USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 84498C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id AC7ADC433DF
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:32:19 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 543902067B
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:23:26 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 746982067B
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:32:19 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="A6ia45bn"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 543902067B
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="Twr04paC"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 746982067B
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgbn3-0004xM-Ce; Wed, 03 Jun 2020 22:23:17 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jgbvU-0006hC-9z; Wed, 03 Jun 2020 22:32:00 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=0WRj=7Q=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jgbn2-0004wH-6e
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 22:23:16 +0000
-X-Inumbo-ID: c42582a0-a5e8-11ea-adbf-12813bfff9fa
+ id 1jgbvT-0006h7-1j
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 22:31:59 +0000
+X-Inumbo-ID: 092b3416-a5ea-11ea-81bc-bc764e2007e4
 Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id c42582a0-a5e8-11ea-adbf-12813bfff9fa;
- Wed, 03 Jun 2020 22:22:53 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 092b3416-a5ea-11ea-81bc-bc764e2007e4;
+ Wed, 03 Jun 2020 22:31:58 +0000 (UTC)
 Received: from sstabellini-ThinkPad-T480s.hsd1.ca.comcast.net
  (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 6D5D6207ED;
- Wed,  3 Jun 2020 22:22:52 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id B954F2067B;
+ Wed,  3 Jun 2020 22:31:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591222972;
- bh=+z55nUlwZHxq9stQuss6H0bHixpaR3RARWD3UmReZtk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=A6ia45bnDvUyQkxDk+aoX+tqGp81s5QYe9FvIOXr9V8o56IcdT842aYnX5xSpdRLf
- EcLyEWx6YxKPWFBZRUWoL3CSCiAne8JEWk5TnFtJEl42rqbJt+bTaCv0a3cIBYT0Cn
- jviQoYUCQs/dtqo1eNn6gWFdozsjjrBggRJoOsJ0=
+ s=default; t=1591223518;
+ bh=y0pwcX6CXfJoRYSOzlsliNS8HcDu032oeBcqYJ8YDtg=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Twr04paC3T7wh/8UQkngPzj2fBcGsMrA0yjHW6GpY1X0O340Ms5VtN0WgInBTuZtw
+ X4FOAYf/+EyibX0EXZsJ4qKvGzC9ACNfyp/mgXoo5k9AT18Ed0iBLn5ojOdXCyn+ez
+ 3zLEBDh7vgrLLVPd1tUJdcY86TBV6aFrDrYsFBlQ=
 From: Stefano Stabellini <sstabellini@kernel.org>
-To: jgross@suse.com,
-	boris.ostrovsky@oracle.com,
-	konrad.wilk@oracle.com
-Subject: [PATCH v2 08/11] swiotlb-xen: introduce phys_to_dma/dma_to_phys
- translations
-Date: Wed,  3 Jun 2020 15:22:44 -0700
-Message-Id: <20200603222247.11681-8-sstabellini@kernel.org>
+To: julien@xen.org
+Subject: [PATCH] xen/rpi4: implement watchdog-based reset
+Date: Wed,  3 Jun 2020 15:31:56 -0700
+Message-Id: <20200603223156.12767-1-sstabellini@kernel.org>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
-References: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -68,110 +61,106 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: sstabellini@kernel.org, roman@zededa.com, linux-kernel@vger.kernel.org,
- tamas@tklengyel.com, xen-devel@lists.xenproject.org,
+Cc: cminyard@mvista.com, tamas@tklengyel.com, roman@zededa.com,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org,
  Stefano Stabellini <stefano.stabellini@xilinx.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-From: Stefano Stabellini <stefano.stabellini@xilinx.com>
+Touching the watchdog is required to be able to reboot the board.
 
-With some devices physical addresses are different than dma addresses.
-To be able to deal with these cases, we need to call phys_to_dma on
-physical addresses (including machine addresses in Xen terminology)
-before returning them from xen_swiotlb_alloc_coherent and
-xen_swiotlb_map_page.
-
-We also need to convert dma addresses back to physical addresses using
-dma_to_phys in xen_swiotlb_free_coherent and xen_swiotlb_unmap_page if
-we want to do any operations on them.
-
-Call dma_to_phys in is_xen_swiotlb_buffer.
-Call phys_to_dma in xen_phys_to_bus.
-Call dma_to_phys in xen_bus_to_phys.
-
-Everything is taken care of by these changes except for
-xen_swiotlb_alloc_coherent and xen_swiotlb_free_coherent, which need a
-few explicit phys_to_dma/dma_to_phys calls.
+The implementation is based on
+drivers/watchdog/bcm2835_wdt.c:__bcm2835_restart in Linux.
 
 Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-Tested-by: Corey Minyard <cminyard@mvista.com>
-Tested-by: Roman Shaposhnik <roman@zededa.com>
 ---
-Changes in v2:
-- improve commit message
----
- drivers/xen/swiotlb-xen.c | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
+ xen/arch/arm/platforms/brcm-raspberry-pi.c | 60 ++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
 
-diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-index 0a6cb67f0fc4..60ef07440905 100644
---- a/drivers/xen/swiotlb-xen.c
-+++ b/drivers/xen/swiotlb-xen.c
-@@ -64,16 +64,16 @@ static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
+diff --git a/xen/arch/arm/platforms/brcm-raspberry-pi.c b/xen/arch/arm/platforms/brcm-raspberry-pi.c
+index f5ae58a7d5..0214ae2b3c 100644
+--- a/xen/arch/arm/platforms/brcm-raspberry-pi.c
++++ b/xen/arch/arm/platforms/brcm-raspberry-pi.c
+@@ -18,6 +18,10 @@
+  */
  
- 	dma |= paddr & ~XEN_PAGE_MASK;
+ #include <asm/platform.h>
++#include <xen/delay.h>
++#include <xen/mm.h>
++#include <xen/vmap.h>
++#include <asm/io.h>
  
--	return dma;
-+	return phys_to_dma(dev, dma);
- }
- 
--static inline phys_addr_t xen_bus_to_phys(struct device *dev, dma_addr_t baddr)
-+static inline phys_addr_t xen_bus_to_phys(struct device *dev,
-+					  dma_addr_t dma_addr)
+ static const char *const rpi4_dt_compat[] __initconst =
  {
-+	phys_addr_t baddr = dma_to_phys(dev, dma_addr);
- 	unsigned long xen_pfn = bfn_to_pfn(XEN_PFN_DOWN(baddr));
--	dma_addr_t dma = (dma_addr_t)xen_pfn << XEN_PAGE_SHIFT;
--	phys_addr_t paddr = dma;
--
--	paddr |= baddr & ~XEN_PAGE_MASK;
-+	phys_addr_t paddr = (xen_pfn << XEN_PAGE_SHIFT) |
-+			    (baddr & ~XEN_PAGE_MASK);
+@@ -37,12 +41,68 @@ static const struct dt_device_match rpi4_blacklist_dev[] __initconst =
+      * The aux peripheral also shares a page with the aux UART.
+      */
+     DT_MATCH_COMPATIBLE("brcm,bcm2835-aux"),
++    /* Special device used for rebooting */
++    DT_MATCH_COMPATIBLE("brcm,bcm2835-pm"),
+     { /* sentinel */ },
+ };
  
- 	return paddr;
- }
-@@ -99,7 +99,7 @@ static inline int range_straddles_page_boundary(phys_addr_t p, size_t size)
++
++#define PM_PASSWORD         0x5a000000
++#define PM_RSTC             0x1c
++#define PM_WDOG             0x24
++#define PM_RSTC_WRCFG_FULL_RESET    0x00000020
++#define PM_RSTC_WRCFG_CLR           0xffffffcf
++
++static void __iomem *rpi4_map_watchdog(void)
++{
++    void __iomem *base;
++    struct dt_device_node *node;
++    paddr_t start, len;
++    int ret;
++
++    node = dt_find_compatible_node(NULL, NULL, "brcm,bcm2835-pm");
++    if ( !node )
++        return NULL;
++
++    ret = dt_device_get_address(node, 0, &start, &len);
++    if ( ret )
++    {
++        dprintk(XENLOG_ERR, "Cannot read watchdog register address\n");
++        return NULL;
++    }
++
++    base = ioremap_nocache(start & PAGE_MASK, PAGE_SIZE);
++    if ( !base )
++    {
++        dprintk(XENLOG_ERR, "Unable to map watchdog register!\n");
++        return NULL;
++    }
++
++    return base;
++}
++
++static void rpi4_reset(void)
++{
++    u32 val;
++    void __iomem *base = rpi4_map_watchdog();
++    if ( !base )
++        return;
++
++    /* use a timeout of 10 ticks (~150us) */
++    writel(10 | PM_PASSWORD, base + PM_WDOG);
++    val = readl(base + PM_RSTC);
++    val &= PM_RSTC_WRCFG_CLR;
++    val |= PM_PASSWORD | PM_RSTC_WRCFG_FULL_RESET;
++    writel(val, base + PM_RSTC);
++
++    /* No sleeping, possibly atomic. */
++    mdelay(1);
++}
++
+ PLATFORM_START(rpi4, "Raspberry Pi 4")
+     .compatible     = rpi4_dt_compat,
+     .blacklist_dev  = rpi4_blacklist_dev,
++    .reset = rpi4_reset,
+     .dma_bitsize    = 30,
+ PLATFORM_END
  
- static int is_xen_swiotlb_buffer(struct device *dev, dma_addr_t dma_addr)
- {
--	unsigned long bfn = XEN_PFN_DOWN(dma_addr);
-+	unsigned long bfn = XEN_PFN_DOWN(dma_to_phys(dev, dma_addr));
- 	unsigned long xen_pfn = bfn_to_local_pfn(bfn);
- 	phys_addr_t paddr = XEN_PFN_PHYS(xen_pfn);
- 
-@@ -304,11 +304,11 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 	if (hwdev && hwdev->coherent_dma_mask)
- 		dma_mask = hwdev->coherent_dma_mask;
- 
--	/* At this point dma_handle is the physical address, next we are
-+	/* At this point dma_handle is the dma address, next we are
- 	 * going to set it to the machine address.
- 	 * Do not use virt_to_phys(ret) because on ARM it doesn't correspond
- 	 * to *dma_handle. */
--	phys = *dma_handle;
-+	phys = dma_to_phys(hwdev, *dma_handle);
- 	dev_addr = xen_phys_to_bus(hwdev, phys);
- 	if (((dev_addr + size - 1 <= dma_mask)) &&
- 	    !range_straddles_page_boundary(phys, size))
-@@ -319,6 +319,7 @@ xen_swiotlb_alloc_coherent(struct device *hwdev, size_t size,
- 			xen_free_coherent_pages(hwdev, size, ret, (dma_addr_t)phys, attrs);
- 			return NULL;
- 		}
-+		*dma_handle = phys_to_dma(hwdev, *dma_handle);
- 		SetPageXenRemapped(virt_to_page(ret));
- 	}
- 	memset(ret, 0, size);
-@@ -351,7 +352,8 @@ xen_swiotlb_free_coherent(struct device *hwdev, size_t size, void *vaddr,
- 	    TestClearPageXenRemapped(pg))
- 		xen_destroy_contiguous_region(phys, order);
- 
--	xen_free_coherent_pages(hwdev, size, vaddr, (dma_addr_t)phys, attrs);
-+	xen_free_coherent_pages(hwdev, size, vaddr, phys_to_dma(hwdev, phys),
-+				attrs);
- }
- 
- /*
 -- 
 2.17.1
 
