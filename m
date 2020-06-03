@@ -2,59 +2,53 @@ Return-Path: <SRS0=iXbS=7Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1A663C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 09:52:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 19E63C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 10:03:39 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id EA68F206A2
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 09:52:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EA68F206A2
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id EAF6420734
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 10:03:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EAF6420734
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgQ4F-0007PY-Gg; Wed, 03 Jun 2020 09:52:15 +0000
+	id 1jgQF0-00008N-J7; Wed, 03 Jun 2020 10:03:22 +0000
 Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
  helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=I/nL=7Q=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
- id 1jgQ4E-0007PO-OI
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 09:52:14 +0000
-X-Inumbo-ID: e691a79c-a57f-11ea-acd3-12813bfff9fa
-Received: from esa6.hc3370-68.iphmx.com (unknown [216.71.155.175])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=n250=7Q=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
+ id 1jgQEz-00008I-5K
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 10:03:21 +0000
+X-Inumbo-ID: 73c36d52-a581-11ea-acd3-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
  by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id e691a79c-a57f-11ea-acd3-12813bfff9fa;
- Wed, 03 Jun 2020 09:52:14 +0000 (UTC)
-Authentication-Results: esa6.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: GWqx20nbRQ5mQca92paAidzTrGGh/rAd7kPxvmds8CSIyLwxxAd9Xmbncc2XvP40iHHdo5D9PN
- YwuYb4VPzkbbqfG+PqivFRh40M+rdHeC0/UNUjlljYvN84qoNqnnvsf1esQyNwVH9kV8NCjhmz
- PWv0cYZj47bv0ycXZXNBj/rC+Ddsc0WXckwjXu1SFEBSLRwEZ4OnI/JCuT8iNt70rvXTHHUEAx
- /5ASFaOE7oGZHPibf6BouB9dHqqkAXLWkWz4lL4OwCLZqhCYlDk/R/5Kyoa+h57U7o/vRr5IYC
- qyw=
-X-SBRS: 2.7
-X-MesageID: 19452395
-X-Ironport-Server: esa6.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,467,1583211600"; d="scan'208";a="19452395"
-From: Ian Jackson <ian.jackson@citrix.com>
+ id 73c36d52-a581-11ea-acd3-12813bfff9fa;
+ Wed, 03 Jun 2020 10:03:20 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id 43B14AEEF;
+ Wed,  3 Jun 2020 10:03:22 +0000 (UTC)
+Subject: Re: [PATCH v2] x86/svm: do not try to handle recalc NPT faults
+ immediately
+To: Igor Druzhinin <igor.druzhinin@citrix.com>
+References: <1591116981-30162-1-git-send-email-igor.druzhinin@citrix.com>
+From: Jan Beulich <jbeulich@suse.com>
+Message-ID: <37e6e543-564d-2625-b8d9-ccca6106efd2@suse.com>
+Date: Wed, 3 Jun 2020 12:03:18 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Message-ID: <24279.29385.267956.941601@mariner.uk.xensource.com>
-Date: Wed, 3 Jun 2020 10:52:09 +0100
-To: Roger Pau Monne <roger.pau@citrix.com>
-Subject: Re: [PATCH 0/2] osstest: update FreeBSD guest tests
-In-Reply-To: <20200528102648.8724-1-roger.pau@citrix.com>
-References: <20200528102648.8724-1-roger.pau@citrix.com>
-X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
+In-Reply-To: <1591116981-30162-1-git-send-email-igor.druzhinin@citrix.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -65,19 +59,65 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: wl@xen.org, Paul Durrant <paul@xen.org>, andrew.cooper3@citrix.com,
+ george.dunlap@citrix.com, xen-devel@lists.xenproject.org, roger.pau@citrix.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-Roger Pau Monne writes ("[PATCH 0/2] osstest: update FreeBSD guest tests"):
-> The following series adds FreeBSD 11 and 12 guests tests to osstest.
-> ATM this is only tested on amd64, since the i386 versions had a bug.
+On 02.06.2020 18:56, Igor Druzhinin wrote:
+> A recalculation NPT fault doesn't always require additional handling
+> in hvm_hap_nested_page_fault(), moreover in general case if there is no
+> explicit handling done there - the fault is wrongly considered fatal.
 > 
-> The result can be seen at:
+> This covers a specific case of migration with vGPU assigned on AMD:
+> at a moment log-dirty is enabled globally, recalculation is requested
+> for the whole guest memory including directly mapped MMIO regions of vGPU
+> which causes a page fault being raised at the first access to those;
+> but due to MMIO P2M type not having any explicit handling in
+> hvm_hap_nested_page_fault() a domain is erroneously crashed with unhandled
+> SVM violation.
 > 
-> http://logs.test-lab.xenproject.org/osstest/logs/150428/
+> Instead of trying to be opportunistic - use safer approach and handle
+> P2M recalculation in a separate NPT fault by attempting to retry after
+> making the necessary adjustments. This is aligned with Intel behavior
+> where there are separate VMEXITs for recalculation and EPT violations
+> (faults) and only faults are handled in hvm_hap_nested_page_fault().
+> Do it by also unifying do_recalc return code with Intel implementation
+> where returning 1 means P2M was actually changed.
+> 
+> Since there was no case previously where p2m_pt_handle_deferred_changes()
+> could return a positive value - it's safe to replace ">= 0" with just "== 0"
+> in VMEXIT_NPF handler. finish_type_change() is also not affected by the
+> change as being able to deal with >0 return value of p2m->recalc from
+> EPT implementation.
+> 
+> Reviewed-by: Roger Pau Monné <roger.pau@citrix.com>
+> Signed-off-by: Igor Druzhinin <igor.druzhinin@citrix.com>
 
-Oh, I forgot to say, both patches
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+albeit preferably with ...
 
-Acked-by: Ian Jackson <ian.jackson@eu.citrix.com>
+> @@ -448,12 +451,14 @@ static int do_recalc(struct p2m_domain *p2m, unsigned long gfn)
+>              clear_recalc(l1, e);
+>          err = p2m->write_p2m_entry(p2m, gfn, pent, e, level + 1);
+>          ASSERT(!err);
+> +
+> +        recalc_done = true;
+>      }
+>  
+>   out:
+>      unmap_domain_page(table);
+>  
+> -    return err;
+> +    return err ?: (recalc_done ? 1 : 0);
+
+... this shrunk to
+
+    return err ?: recalc_done;
+
+(easily doable while committing).
+
+Also Cc Paul.
+
+Jan
 
