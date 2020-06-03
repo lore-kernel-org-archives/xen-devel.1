@@ -2,75 +2,58 @@ Return-Path: <SRS0=iXbS=7Q=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-12.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	INCLUDES_PULL_REQUEST,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 8C7B6C433E0
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:15:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 088A0C433E0
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:22:55 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 49CC8205CB
-	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:15:59 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id C9BFB2067B
+	for <xen-devel@archiver.kernel.org>; Wed,  3 Jun 2020 22:22:54 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xenproject.org header.i=@xenproject.org header.b="Lv44RZRw"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 49CC8205CB
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xenproject.org
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="UliQ4Xc0"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C9BFB2067B
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgbfS-0003Vv-Sb; Wed, 03 Jun 2020 22:15:26 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jgbmT-0004ZP-NW; Wed, 03 Jun 2020 22:22:41 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=/GLy=7Q=xenproject.org=osstest-admin@srs-us1.protection.inumbo.net>)
- id 1jgbfS-0003Vq-DK
- for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 22:15:26 +0000
-X-Inumbo-ID: b5a74084-a5e7-11ea-adbe-12813bfff9fa
-Received: from mail.xenproject.org (unknown [104.130.215.37])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id b5a74084-a5e7-11ea-adbe-12813bfff9fa;
- Wed, 03 Jun 2020 22:15:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=xenproject.org; s=20200302mail; h=Date:From:Subject:MIME-Version:
- Content-Transfer-Encoding:Content-Type:Message-ID:To:Sender:Reply-To:Cc:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=6OxDBR2snl2npbb3UJyTDf5nnFn7wmPqkfhbUfEImWk=; b=Lv44RZRwtSks8k5VAADEVdz7P
- 4z3sfaEbJKsO+kYuNyhSvtEejTECw1wvD1xlK5lbM8QNZsD/TE+Ust77+NAwHYRBLsevyxMZJg+2J
- NOg9TwMETRuHVQgls7bLcO0hDEiEGIjFFU9WwWlTDbHuoJbfsTTzzmvbOxeM+0k0oKq8g=;
-Received: from host146.205.237.98.conversent.net ([205.237.98.146]
- helo=infra.test-lab.xenproject.org)
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jgbfK-0008Lc-UV; Wed, 03 Jun 2020 22:15:18 +0000
-Received: from [172.16.144.3] (helo=osstest.test-lab.xenproject.org)
- by infra.test-lab.xenproject.org with esmtp (Exim 4.89)
- (envelope-from <osstest-admin@xenproject.org>)
- id 1jgbfK-0005f2-Me; Wed, 03 Jun 2020 22:15:18 +0000
-Received: from osstest by osstest.test-lab.xenproject.org with local (Exim
- 4.89) (envelope-from <osstest-admin@xenproject.org>)
- id 1jgbfK-0005TK-M1; Wed, 03 Jun 2020 22:15:18 +0000
-To: xen-devel@lists.xenproject.org,
-    osstest-admin@xenproject.org
-Message-ID: <osstest-150664-mainreport@xen.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+ <SRS0=0WRj=7Q=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jgbmS-0004ZK-Da
+ for xen-devel@lists.xenproject.org; Wed, 03 Jun 2020 22:22:40 +0000
+X-Inumbo-ID: bc40f006-a5e8-11ea-9dbe-bc764e2007e4
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id bc40f006-a5e8-11ea-9dbe-bc764e2007e4;
+ Wed, 03 Jun 2020 22:22:40 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 0902F2067B;
+ Wed,  3 Jun 2020 22:22:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1591222959;
+ bh=FbZizFCbXTo82zhp90elPXeQrp3LeJltCz9UBkieMa0=;
+ h=Date:From:To:cc:Subject:From;
+ b=UliQ4Xc0s6kZlNyoqhnZToK1IzE2Oj4wUjDuW8fE4ZVtpg23emU+hIIetm/p3gS6X
+ I5fikv0SrWzGlcMWVVAA/OXGN5h8aK+xYKoyKk0nyhLQCEVjiGuNTKdL5S/YGdf+Y6
+ zofhZFz2KDHQnFwvSm3nSU0DF9MBACdKFzRLyvTM=
+Date: Wed, 3 Jun 2020 15:22:38 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: jgross@suse.com, boris.ostrovsky@oracle.com, konrad.wilk@oracle.com
+Subject: [PATCH v2 00/11] fix swiotlb-xen for RPi4
+Message-ID: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-Subject: [xen-unstable-smoke test] 150664: regressions - FAIL
-X-Osstest-Failures: xen-unstable-smoke:test-amd64-amd64-libvirt:guest-start:fail:regression
- xen-unstable-smoke:test-amd64-amd64-xl-qemuu-debianhvm-amd64:debian-hvm-install:fail:heisenbug
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-arm64-arm64-xl-xsm:saverestore-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:migrate-support-check:fail:nonblocking
- xen-unstable-smoke:test-armhf-armhf-xl:saverestore-support-check:fail:nonblocking
-X-Osstest-Versions-This: xen=d9f58cd54fe2f05e1f05e2fe254684bd1840de8e
-X-Osstest-Versions-That: xen=1497e78068421d83956f8e82fb6e1bf1fc3b1199
-From: osstest service owner <osstest-admin@xenproject.org>
-Date: Wed, 03 Jun 2020 22:15:18 +0000
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,82 +64,67 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
+Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, tamas@tklengyel.com,
+ linux-kernel@vger.kernel.org, roman@zededa.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-flight 150664 xen-unstable-smoke real [real]
-http://logs.test-lab.xenproject.org/osstest/logs/150664/
+Hi all,
 
-Regressions :-(
+This series is a collection of fixes to get Linux running on the RPi4 as
+dom0.
 
-Tests which did not succeed and are blocking,
-including tests which could not be run:
- test-amd64-amd64-libvirt     12 guest-start              fail REGR. vs. 150438
+Conceptually there are only two significant changes:
 
-Tests which are failing intermittently (not blocking):
- test-amd64-amd64-xl-qemuu-debianhvm-amd64 10 debian-hvm-install fail pass in 150658
+- make sure not to call virt_to_page on vmalloc virt addresses (patch
+  #1)
+- use phys_to_dma and dma_to_phys to translate phys to/from dma
+  addresses (all other patches)
 
-Tests which did not succeed, but are not blocking:
- test-arm64-arm64-xl-xsm      13 migrate-support-check        fail   never pass
- test-arm64-arm64-xl-xsm      14 saverestore-support-check    fail   never pass
- test-armhf-armhf-xl          13 migrate-support-check        fail   never pass
- test-armhf-armhf-xl          14 saverestore-support-check    fail   never pass
+In particular in regards to the second part, the RPi4 is the first
+board where Xen can run that has the property that dma addresses are
+different from physical addresses, and swiotlb-xen was written with the
+assumption that phys addr == dma addr.
 
-version targeted for testing:
- xen                  d9f58cd54fe2f05e1f05e2fe254684bd1840de8e
-baseline version:
- xen                  1497e78068421d83956f8e82fb6e1bf1fc3b1199
+This series adds the phys_to_dma and dma_to_phys calls to make it work.
 
-Last test of basis   150438  2020-05-28 14:01:19 Z    6 days
-Failing since        150465  2020-05-29 09:02:14 Z    5 days   41 attempts
-Testing same since   150649  2020-06-03 13:01:44 Z    0 days    3 attempts
+Cheers,
 
-------------------------------------------------------------
-People who touched revisions under test:
-  Andrew Cooper <andrew.cooper3@citrix.com>
-  Andrew Cooper <andrew.cooper@citrix.com>
-  Anthony PERARD <anthony.perard@citrix.com>
-  Dario Faggioli <dfaggioli@suse.com>
-  Ian Jackson <ian.jackson@eu.citrix.com>
-  Jan Beulich <jbeulich@suse.com>
-  Jason Andryuk <jandryuk@gmail.com>
-  Juergen Gross <jgross@suse.com>
-  Julien Grall <jgrall@amazon.com>
-  Olaf Hering <olaf@aepfle.de>
-  Paul Durrant <paul@xen.org>
-  Paul Durrant <pdurrant@amazon.com>
-  Roger Pau Monné <roger.pau@citrix.com>
-  Tamas K Lengyel <tamas@tklengyel.com>
-  Wei Liu <wl@xen.org>
-
-jobs:
- build-arm64-xsm                                              pass    
- build-amd64                                                  pass    
- build-armhf                                                  pass    
- build-amd64-libvirt                                          pass    
- test-armhf-armhf-xl                                          pass    
- test-arm64-arm64-xl-xsm                                      pass    
- test-amd64-amd64-xl-qemuu-debianhvm-amd64                    fail    
- test-amd64-amd64-libvirt                                     fail    
+Stefano
 
 
-------------------------------------------------------------
-sg-report-flight on osstest.test-lab.xenproject.org
-logs: /home/logs/logs
-images: /home/logs/images
 
-Logs, config files, etc. are available at
-    http://logs.test-lab.xenproject.org/osstest/logs
+The following changes since commit b85051e755b0e9d6dd8f17ef1da083851b83287d:
 
-Explanation of these reports, and of osstest in general, is at
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README.email;hb=master
-    http://xenbits.xen.org/gitweb/?p=osstest.git;a=blob;f=README;hb=master
+  Merge tag 'fixes-for-5.7-rc6' of git://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux (2020-05-20 13:23:55 -0700)
 
-Test harness code can be found at
-    http://xenbits.xen.org/gitweb?p=osstest.git;a=summary
+are available in the Git repository at:
 
+  https://git.kernel.org/pub/scm/linux/kernel/git/sstabellini/xen.git fix-rpi4-v2 
 
-Not pushing.
+for you to fetch changes up to 49783ba67f75da3490d2c01ed9b445d8a89bbb0d:
 
-(No revision log; it would be 1522 lines long.)
+  xen/arm: call dma_to_phys on the dma_addr_t parameter of dma_cache_maint (2020-06-03 15:05:53 -0700)
+
+----------------------------------------------------------------
+Boris Ostrovsky (1):
+      swiotlb-xen: use vmalloc_to_page on vmalloc virt addresses
+
+Stefano Stabellini (10):
+      swiotlb-xen: remove start_dma_addr
+      swiotlb-xen: add struct device* parameter to xen_phys_to_bus
+      swiotlb-xen: add struct device* parameter to xen_bus_to_phys
+      swiotlb-xen: add struct device* parameter to xen_dma_sync_for_cpu
+      swiotlb-xen: add struct device* parameter to xen_dma_sync_for_device
+      swiotlb-xen: add struct device* parameter to is_xen_swiotlb_buffer
+      swiotlb-xen: introduce phys_to_dma/dma_to_phys translations
+      swiotlb-xen: rename xen_phys_to_bus to xen_phys_to_dma and xen_bus_to_phys to xen_dma_to_phys
+      xen/arm: introduce phys/dma translations in xen_dma_sync_for_*
+      xen/arm: call dma_to_phys on the dma_addr_t parameter of dma_cache_maint
+
+ arch/arm/xen/mm.c         | 32 +++++++++++++++++++-------------
+ drivers/xen/swiotlb-xen.c | 72 +++++++++++++++++++++++++++++++++++++-----------------------------------
+ include/xen/swiotlb-xen.h | 10 ++++++----
+ 3 files changed, 62 insertions(+), 52 deletions(-)
+
 
