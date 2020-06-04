@@ -2,74 +2,100 @@ Return-Path: <SRS0=3Mnr=7R=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.0 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-5.1 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_NONE,
+	SPF_PASS,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4B56AC433E0
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 17:19:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8048FC433E0
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 17:48:11 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 1D52020C09
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 17:19:37 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 5058F206DC
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 17:48:11 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=xen.org header.i=@xen.org header.b="RupD+k6L"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 1D52020C09
-Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=xen.org
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.b="h/tHb5PG"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 5058F206DC
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=oracle.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgtWS-0008Ok-Us; Thu, 04 Jun 2020 17:19:20 +0000
+	id 1jgtxt-0002gx-9a; Thu, 04 Jun 2020 17:47:41 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=uZ5H=7R=xen.org=julien@srs-us1.protection.inumbo.net>)
- id 1jgtWQ-0008OC-Sz
- for xen-devel@lists.xenproject.org; Thu, 04 Jun 2020 17:19:18 +0000
-X-Inumbo-ID: 85998bfe-a687-11ea-81bc-bc764e2007e4
-Received: from mail.xenproject.org (unknown [104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=ZXme=7R=oracle.com=boris.ostrovsky@srs-us1.protection.inumbo.net>)
+ id 1jgtxs-0002gs-NP
+ for xen-devel@lists.xenproject.org; Thu, 04 Jun 2020 17:47:40 +0000
+X-Inumbo-ID: 7b07b932-a68b-11ea-8993-bc764e2007e4
+Received: from userp2130.oracle.com (unknown [156.151.31.86])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 85998bfe-a687-11ea-81bc-bc764e2007e4;
- Thu, 04 Jun 2020 17:19:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
- s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=gyUeud3LAHOQgArjc8k9cmbOBFeQ4cDOX7SmrC9NY90=; b=RupD+k6Ldk8z1x8bgfjerbCVXq
- lgWAF8lhO2wE/17bNw6yv+JuQ87nFUJ+SAyrBBjmNp/pAaFI05VOazcyMbtt82Qexs9gYmvW+JfcK
- K4KHNX0ouJSpFFXgHhoLFaIq/HvcSkgjOtGK0vfupgnBMYHL8QMR3mK14COt9VZCwMbg=;
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jgtWN-0002OE-Qk; Thu, 04 Jun 2020 17:19:15 +0000
-Received: from [54.239.6.185] (helo=a483e7b01a66.ant.amazon.com)
- by xenbits.xenproject.org with esmtpsa
- (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.92)
- (envelope-from <julien@xen.org>)
- id 1jgtWN-0005bf-It; Thu, 04 Jun 2020 17:19:15 +0000
-Subject: Re: [PATCH] xen/rpi4: implement watchdog-based reset
-To: Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Andr=c3=a9_Przywara?= <andre.przywara@arm.com>
-References: <20200603223156.12767-1-sstabellini@kernel.org>
- <3b3fa1cd-e50a-66f7-f5ac-eebc6f1d0953@xen.org>
- <24026a53-044b-843c-e548-22bb8325e5a7@arm.com>
- <alpine.DEB.2.21.2006040916370.6774@sstabellini-ThinkPad-T480s>
- <fb58e72b-2731-9d1b-5fb1-1fc14e3ef31f@arm.com>
- <alpine.DEB.2.21.2006040940140.6774@sstabellini-ThinkPad-T480s>
-From: Julien Grall <julien@xen.org>
-Message-ID: <d0e9dec8-40c6-13c3-724f-aa05e1ec3063@xen.org>
-Date: Thu, 4 Jun 2020 18:19:12 +0100
+ id 7b07b932-a68b-11ea-8993-bc764e2007e4;
+ Thu, 04 Jun 2020 17:47:38 +0000 (UTC)
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+ by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 054Hg1B1108564;
+ Thu, 4 Jun 2020 17:47:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=subject : from : to :
+ cc : references : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=H+yjHdHVMgAwN/YdZHBsmqCfOgg0+bl2Ldo7Ah9xkgY=;
+ b=h/tHb5PG66kAghNFzUd4Vx1LQoi84zpsyWuil5mUNGpR75OinkDaDwpEWmF82WG66zPA
+ 9HQSynWSTEUs4S+nwEVmkL8TvXLYIV69wL30uXv0J5rd79GuLgJiEW/GBIyy5tKFf52+
+ Po6sn/SimYgWZQAeivgWvl5yWSTver6PhtoJo2K5NpejDCyDkyw6JJGhDuhdsICAU2kC
+ 54hI2iCtEVFoCGmQ90vIj2wK+1lHF2YLMo/yO4Yf5rdW4UUewUKbgyzrEnJr1bGqsS45
+ x2QeRmLAsAcLoR7f0C2QSjjbkMZ36FOXSRyDj+7+GKndxG3v7EkwFlr3vaWS6C91apHy cw== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+ by userp2130.oracle.com with ESMTP id 31evvn2ukg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 04 Jun 2020 17:47:36 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+ by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 054HbPvP128619;
+ Thu, 4 Jun 2020 17:47:36 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+ by userp3030.oracle.com with ESMTP id 31c1e25s33-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 04 Jun 2020 17:47:36 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+ by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 054HlY4G002987;
+ Thu, 4 Jun 2020 17:47:34 GMT
+Received: from [10.39.223.159] (/10.39.223.159)
+ by default (Oracle Beehive Gateway v4.0)
+ with ESMTP ; Thu, 04 Jun 2020 10:47:34 -0700
+Subject: Re: [PATCH v2 08/11] swiotlb-xen: introduce phys_to_dma/dma_to_phys
+ translations
+From: boris.ostrovsky@oracle.com
+To: Stefano Stabellini <sstabellini@kernel.org>, jgross@suse.com,
+ konrad.wilk@oracle.com
+References: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
+ <20200603222247.11681-8-sstabellini@kernel.org>
+ <af4c8c3f-6bb5-5b42-8589-8fe66fc7621a@oracle.com>
+Organization: Oracle Corporation
+Message-ID: <4aba4b53-5f24-6c7e-d874-682313eb1798@oracle.com>
+Date: Thu, 4 Jun 2020 13:47:32 -0400
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.9.0
+ Gecko/20100101 Thunderbird/68.8.1
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.21.2006040940140.6774@sstabellini-ThinkPad-T480s>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <af4c8c3f-6bb5-5b42-8589-8fe66fc7621a@oracle.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9642
+ signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ mlxlogscore=999
+ spamscore=0 bulkscore=0 adultscore=0 suspectscore=0 mlxscore=0
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2006040123
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9642
+ signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ cotscore=-2147483648 suspectscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 mlxscore=0 priorityscore=1501
+ bulkscore=0 impostorscore=0 adultscore=0 mlxlogscore=999 spamscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2004280000 definitions=main-2006040123
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,97 +106,28 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, roman@zededa.com, tamas@tklengyel.com,
- Stefano Stabellini <stefano.stabellini@xilinx.com>, cminyard@mvista.com
+Cc: xen-devel@lists.xenproject.org, tamas@tklengyel.com,
+ linux-kernel@vger.kernel.org,
+ Stefano Stabellini <stefano.stabellini@xilinx.com>, roman@zededa.com
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
 
+On 6/4/20 1:46 PM, Boris Ostrovsky wrote:
+> On 6/3/20 6:22 PM, Stefano Stabellini wrote:
+>> diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
+>> index 0a6cb67f0fc4..60ef07440905 100644
+>> --- a/drivers/xen/swiotlb-xen.c
+>> +++ b/drivers/xen/swiotlb-xen.c
+>> @@ -64,16 +64,16 @@ static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
+>
+> Weren't you going to rename this to xen_phys_to_dma()? (And the the one
+> below to xen_dma_to_phys())?
 
-On 04/06/2020 17:46, Stefano Stabellini wrote:
-> On Thu, 4 Jun 2020, André Przywara wrote:
->> On 04/06/2020 17:24, Stefano Stabellini wrote:
->>> On Thu, 4 Jun 2020, André Przywara wrote:
->>>> On 04/06/2020 09:48, Julien Grall wrote:
->>>>
->>>> Hi,
->>>>
->>>>> On 03/06/2020 23:31, Stefano Stabellini wrote:
->>>>>> Touching the watchdog is required to be able to reboot the board.
->>>>>
->>>>> In general the preferred method is PSCI. Does it mean RPI 4 doesn't
->>>>> support PSCI at all?
->>>>
->>>> There is mainline Trusted Firmware (TF-A) support for the RPi4 for a few
->>>> months now, which includes proper PSCI support (both for SMP bringup and
->>>> system reset/shutdown). At least that should work, if not, it's a bug.
->>>> An EDK-2 build for RPi4 bundles TF-A automatically, but you can use TF-A
->>>> without it, with or without U-Boot: It works as a drop-in replacement
->>>> for armstub.bin. Instruction for building it (one line!) are here:
->>>> https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/tree/docs/plat/rpi4.rst
->>>>
->>>>>>
->>>>>> The implementation is based on
->>>>>> drivers/watchdog/bcm2835_wdt.c:__bcm2835_restart in Linux.
->>>>>
->>>>> Can you give the baseline? This would allow us to track an issue and
->>>>> port them.
->>>>
->>>> Given the above I don't think it's a good idea to add extra platform
->>>> specific code to Xen.
->>>
->>> The RPi4, at least the one I have, doesn't come with any TF, and it
->>
->> My RPi4 didn't come with anything, actually ;-) It's just a matter of
->> what you put in the uSD card slot.
->>
->>> doesn't come with PSCI in device tree.
->>
->> TF-A patches the PSCI nodes in:
->> https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git/commit/plat/rpi/rpi4?id=f67fa69cb6937a7fc559bbec4a7acce5edefa888
->>
->>> As a user, I would rather have
->>> this patch (even downstream) than having to introduce TF in my build and
->>> deployment just to be able to reboot.
->>
->> I get your point, but would rather put more pressure on people using
->> TF-A. After all you run without CPU hotplug, A72 errata workarounds and
->> without Spectre/Meltdown fixes. What was the IP address of your board
->> again? ;-)
-> 
-> Please send a pull request to remove __bcm2835_restart from the Linux
-> kernel, once it is removed from there I'd be happy to take it away from
-> Xen too ;-)
 
-Xen is not a slave of Linux. We make our own informed decision ;).
+Nevermind, I see you did that in the next patch.
 
-> 
-> I know I am being cheeky but we have enough battles to fight and enough
-> problems with Xen -- I don't think we should use the hypervisor as a
-> leverage to get people to use or upgrade TF. We just need to get good
-> functionalities to our users with the less amount of friction possible.
 
-Well it is nice to have functionality but you also need to have Xen 
-running reliably and safely. No-one wants to drive in car with no brake 
-on a windy road. Or maybe I am wrong? ;)
+-boris
 
-> 
-> Everything you mentioned are good reason to use TF, and this patch does
-> not take anything away from it. My suggestion would be to work with
-> raspberrypi.org to have TF installed by default by the 	.
-
-We actually did use the hypervisor as a leverage in the past. A pretty 
-good example is RPI 3.
-
-Anyway, the patch is pretty simple and limited to the platform. So I 
-would be inclined to accept it.
-
-Although this is just sweeping stability concern under the carpet and 
-hoping for the best. What are the odds this is going to be used in 
-production like that?
-
-Cheers,
-
--- 
-Julien Grall
 
