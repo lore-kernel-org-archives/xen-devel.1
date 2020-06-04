@@ -2,44 +2,47 @@ Return-Path: <SRS0=3Mnr=7R=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=no
-	autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
+	URIBL_BLOCKED,USER_AGENT_GIT autolearn=ham autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 178ECC433DF
+	by smtp.lore.kernel.org (Postfix) with ESMTP id B7010C433E0
 	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 12:45:21 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id E113B2064C
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 12:45:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org E113B2064C
+	by mail.kernel.org (Postfix) with ESMTPS id 947EF2064C
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 12:45:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 947EF2064C
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=eu.citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgpF4-0005VX-FN; Thu, 04 Jun 2020 12:45:06 +0000
+	id 1jgpF8-0005W0-OH; Thu, 04 Jun 2020 12:45:10 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
  <SRS0=IlcT=7R=chiark.greenend.org.uk=ijackson@srs-us1.protection.inumbo.net>)
- id 1jgpF2-0005VR-Dw
- for xen-devel@lists.xenproject.org; Thu, 04 Jun 2020 12:45:04 +0000
-X-Inumbo-ID: 35bab20a-a661-11ea-9947-bc764e2007e4
+ id 1jgpF7-0005Vi-E5
+ for xen-devel@lists.xenproject.org; Thu, 04 Jun 2020 12:45:09 +0000
+X-Inumbo-ID: 36fed506-a661-11ea-81bc-bc764e2007e4
 Received: from chiark.greenend.org.uk (unknown [2001:ba8:1e3::])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id 35bab20a-a661-11ea-9947-bc764e2007e4;
- Thu, 04 Jun 2020 12:45:03 +0000 (UTC)
+ id 36fed506-a661-11ea-81bc-bc764e2007e4;
+ Thu, 04 Jun 2020 12:45:05 +0000 (UTC)
 Received: from [172.18.45.5] (helo=zealot.relativity.greenend.org.uk)
  by chiark.greenend.org.uk (Debian Exim 4.84_2 #1) with esmtp
  (return-path ijackson@chiark.greenend.org.uk)
- id 1jgpF0-0006vr-PK; Thu, 04 Jun 2020 13:45:02 +0100
+ id 1jgpF2-0006vr-U6; Thu, 04 Jun 2020 13:45:05 +0100
 From: Ian Jackson <ian.jackson@eu.citrix.com>
 To: xen-devel@lists.xenproject.org
-Subject: [OSSTEST PATCH 0/4] bisection: Skip some useless repros
-Date: Thu,  4 Jun 2020 13:44:55 +0100
-Message-Id: <20200604124459.18453-1-ian.jackson@eu.citrix.com>
+Subject: [OSSTEST PATCH 2/4] cs-bisection-step: need_repro: Provision for
+ $xinfo
+Date: Thu,  4 Jun 2020 13:44:57 +0100
+Message-Id: <20200604124459.18453-3-ian.jackson@eu.citrix.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200604124459.18453-1-ian.jackson@eu.citrix.com>
+References: <20200604124459.18453-1-ian.jackson@eu.citrix.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
@@ -52,32 +55,40 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Ian Jackson <ian.jackson@eu.citrix.com>, Paul Durrant <xadimgnik@gmail.com>
+Cc: Ian Jackson <ian.jackson@eu.citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This arranges for an ongoing bisection to be able to restart more
-efficiently when the staging tip advances, and yet the test being
-bisected still fails.
+This becomes part of the message but right now it is juse "".
 
-This will speed up the current osstest bisection of the smoke test
-libvirt failure.
+So no functional change yet.
 
-There are no code changes outside the bisector and the bisector is not
-itself subject to the osstest self-test.  I am therefore going to
-force-push these four changes straight into osstest production.
-(Obviously I have tested them locally and seen that bisection still
-basically works and also that this fixes the issue.)
+Signed-off-by: Ian Jackson <ian.jackson@eu.citrix.com>
+---
+ cs-bisection-step | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Ian Jackson (4):
-  cs-bisection-step: need_repro_sequence: Provide info to callback
-  cs-bisection-step: need_repro: Provision for $xinfo
-  cs-bisection-step: need_repro: Support $consider_parents
-  cs-bisection-step: Do not needlessly repro on tip
-
- cs-bisection-step | 34 ++++++++++++++++++++++++++++------
- 1 file changed, 28 insertions(+), 6 deletions(-)
-
+diff --git a/cs-bisection-step b/cs-bisection-step
+index 35085e89..90e0601a 100755
+--- a/cs-bisection-step
++++ b/cs-bisection-step
+@@ -828,6 +828,7 @@ sub need_repro ($$$) {
+     return 1 if conflicted_warning($n, $what);
+ 
+     my $fl= $n->{Flights} || [];
++    my $xinfo='';
+     foreach my $f (sort { $a->{Flight} <=> $b->{Flight} } @$fl) {
+         next unless $f->{Flight} > $repro_lastflight;
+ 	if ($f->{Result} ne $st) {
+@@ -837,7 +838,7 @@ sub need_repro ($$$) {
+ 	}
+         print STDERR " ".
+             ($repro_count ? "Repro" : "Result").
+-            " found: flight $f->{Flight} ($st), for $what\n";
++            " found: flight $f->{Flight} ($st), for $what$xinfo\n";
+         $repro_lastflight= $f->{Flight};
+         $repro_firstflight ||= $f->{Flight};
+         return 0;
 -- 
 2.20.1
 
