@@ -2,88 +2,55 @@ Return-Path: <SRS0=3Mnr=7R=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1
 	autolearn=no autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1F662C433DF
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 08:16:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 2359AC433DF
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 08:25:46 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id DF691206C3
-	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 08:16:38 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PgzxATi+"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org DF691206C3
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id EE4BE205CB
+	for <xen-devel@archiver.kernel.org>; Thu,  4 Jun 2020 08:25:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org EE4BE205CB
+Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jgl38-000416-AX; Thu, 04 Jun 2020 08:16:30 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=EphU=7R=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jgl36-00040u-Oe
- for xen-devel@lists.xenproject.org; Thu, 04 Jun 2020 08:16:28 +0000
-X-Inumbo-ID: b02f3d56-a63b-11ea-81bc-bc764e2007e4
-Received: from mail-wm1-x32f.google.com (unknown [2a00:1450:4864:20::32f])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b02f3d56-a63b-11ea-81bc-bc764e2007e4;
- Thu, 04 Jun 2020 08:16:28 +0000 (UTC)
-Received: by mail-wm1-x32f.google.com with SMTP id r9so4306912wmh.2
- for <xen-devel@lists.xenproject.org>; Thu, 04 Jun 2020 01:16:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=0kzTUsAILuup2XHBaZJ9VmrOmJ8KV8vfdvWS4tomuL4=;
- b=PgzxATi+cjGGK+/FErIbu1HM6HKn61VlQj0TJacPUUz6RfZ8LLDvCAeUz0iclQl+Tr
- h83gMH3/O73FpvVmptyRlrEsLgrzAUNk2gK1gAMFvpdpys+oeSoA+wzVw7mlToDamaT9
- 7eS2X44qa7degm0q8U/cq8CVfRlazvv5P/Pu+Rwb41SgxvqohSXm1oaZN7HtX62JnoNf
- tM/4YfTzLtpHQaxknIComLPLcku0Wnlb5mrc9trOLGvXcZ9pz/ZghIjS0LNCjC3Mz1xg
- rt4N6X8dP7fk7Q9KTG/nOyzHIeyjw53gkcrBLy6/v38xmdTfJ7Sbre4Nm8VLNve3ZNQr
- satQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:references:in-reply-to:subject
- :date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=0kzTUsAILuup2XHBaZJ9VmrOmJ8KV8vfdvWS4tomuL4=;
- b=bCke1OqdGdyy+7N2mVzqlK0yU617cEWCe11LrC4koIu/P5a43EkKt0H0DNhWIHA8Oy
- 4mU3gVZhjSawlFbxJkbKXUf4wiR3uWJIFXCeSLafgNx9jcutCejwf2wX9XkdzgzUsX5v
- pfjl9MNNZvOfmyHrpWpd+CZFVEkyRzO7AImphMhP0kevwQm3XOogmaEyit38euYQF5Re
- 5/AXlxvG/H8CJTdHRMAoUCQC2M+i3D72zZFPqqmffVNTiHw5olsq4j0sPJgQvRHBsgma
- iT336xbl5p7uiA66WdwrHJJC54VSLTBnfqJYtw5vd8Fd594j3LyRqzedtGHqzPwptBIk
- S1tg==
-X-Gm-Message-State: AOAM532rfo/AdnWvv+EWJ73qR1vQbwgeMQnPucSSgG2GLU7eA0n/XBVh
- Onn6++UVbB1YMm7GiAmVjVg=
-X-Google-Smtp-Source: ABdhPJyMLVjwiXBSeTEOpFxIHkG8MPyGNaT5eib3zyfpYoOt6rO4pCG1NoTTiI0hSpKbkTlws4zt2w==
-X-Received: by 2002:a7b:cd83:: with SMTP id y3mr2801082wmj.5.1591258587409;
- Thu, 04 Jun 2020 01:16:27 -0700 (PDT)
-Received: from CBGR90WXYV0 ([54.239.6.187])
- by smtp.gmail.com with ESMTPSA id h12sm6598995wro.80.2020.06.04.01.16.26
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Thu, 04 Jun 2020 01:16:26 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: =?utf-8?Q?'J=C3=BCrgen_Gro=C3=9F'?= <jgross@suse.com>,
- <xen-devel@lists.xenproject.org>
+	id 1jglBp-00050k-6p; Thu, 04 Jun 2020 08:25:29 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=pUjb=7R=suse.com=jgross@srs-us1.protection.inumbo.net>)
+ id 1jglBn-00050f-3i
+ for xen-devel@lists.xenproject.org; Thu, 04 Jun 2020 08:25:27 +0000
+X-Inumbo-ID: f0c42588-a63c-11ea-ae3d-12813bfff9fa
+Received: from mx2.suse.de (unknown [195.135.220.15])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
+ id f0c42588-a63c-11ea-ae3d-12813bfff9fa;
+ Thu, 04 Jun 2020 08:25:26 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+ by mx2.suse.de (Postfix) with ESMTP id B7777AC96;
+ Thu,  4 Jun 2020 08:25:28 +0000 (UTC)
+Subject: Re: Xenstore quota and driver domains
+To: paul@xen.org, xen-devel@lists.xenproject.org
 References: <35df958d-eff8-9ca7-fd72-05694f07248d@suse.com>
  <006701d63a47$408511c0$c18f3540$@xen.org>
  <f7fe86f0-f8b0-ebb2-4d01-d3b59bc38d41@suse.com>
-In-Reply-To: <f7fe86f0-f8b0-ebb2-4d01-d3b59bc38d41@suse.com>
-Subject: RE: Xenstore quota and driver domains
-Date: Thu, 4 Jun 2020 09:16:25 +0100
-Message-ID: <006801d63a48$7173f750$545be5f0$@xen.org>
+ <006801d63a48$7173f750$545be5f0$@xen.org>
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Message-ID: <ed822418-7209-625e-99b9-bd87098c1150@suse.com>
+Date: Thu, 4 Jun 2020 10:25:24 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQJua4BClDl1csHN5IQ1VoJLzvIqqgHU1vnUAjwCJFOndzHUwA==
+In-Reply-To: <006801d63a48$7173f750$545be5f0$@xen.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,43 +61,47 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: J=C3=BCrgen Gro=C3=9F <jgross@suse.com>
-> Sent: 04 June 2020 09:11
-> To: paul@xen.org; xen-devel@lists.xenproject.org
-> Subject: Re: Xenstore quota and driver domains
->=20
-> On 04.06.20 10:07, Paul Durrant wrote:
-> >> -----Original Message-----
-> >> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf =
-Of J=C3=BCrgen Gro=C3=9F
-> >> Sent: 04 June 2020 06:03
-> >> To: xen-devel@lists.xenproject.org
-> >> Subject: Xenstore quota and driver domains
-> >>
-> >> A recent report on xen-users surfaced a problem we have with driver
-> >> domains in medium sized or large configuration: the driver domain =
-can
-> >> easily hit the default Xenstore quota (in the report it was a =
-driver
-> >> domain for disks which hit the quota when 15 domUs were active at =
-the
-> >> same time).
-> >
-> > Which quota is hit? Node or watch?
->=20
-> Node.
->=20
+On 04.06.20 10:16, Paul Durrant wrote:
+>> -----Original Message-----
+>> From: Jürgen Groß <jgross@suse.com>
+>> Sent: 04 June 2020 09:11
+>> To: paul@xen.org; xen-devel@lists.xenproject.org
+>> Subject: Re: Xenstore quota and driver domains
+>>
+>> On 04.06.20 10:07, Paul Durrant wrote:
+>>>> -----Original Message-----
+>>>> From: Xen-devel <xen-devel-bounces@lists.xenproject.org> On Behalf Of Jürgen Groß
+>>>> Sent: 04 June 2020 06:03
+>>>> To: xen-devel@lists.xenproject.org
+>>>> Subject: Xenstore quota and driver domains
+>>>>
+>>>> A recent report on xen-users surfaced a problem we have with driver
+>>>> domains in medium sized or large configuration: the driver domain can
+>>>> easily hit the default Xenstore quota (in the report it was a driver
+>>>> domain for disks which hit the quota when 15 domUs were active at the
+>>>> same time).
+>>>
+>>> Which quota is hit? Node or watch?
+>>
+>> Node.
+>>
+> 
+> Ok. Since each individual backend is going to watch at least its frontend's 'state' node then a watch quota of 128 is still probably going to be restrictive for a global driver domain so this ought to be settable on a per-domain basis as well as the node quota.
 
-Ok. Since each individual backend is going to watch at least its =
-frontend's 'state' node then a watch quota of 128 is still probably =
-going to be restrictive for a global driver domain so this ought to be =
-settable on a per-domain basis as well as the node quota.
+TBH I'd go with any quota to be settable via the new interface.
 
-  Paul
+Currently we have:
 
+- number of nodes
+- max size of a node
+- number of watches
+- number of concurrent active transactions
+
+and there might be more coming in the future.
+
+
+Juergen
 
