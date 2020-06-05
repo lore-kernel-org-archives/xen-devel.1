@@ -2,52 +2,54 @@ Return-Path: <SRS0=7n4I=7S=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 07126C433E0
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2020 08:54:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A9BEFC433E0
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2020 09:10:02 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id D6F88207D0
-	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2020 08:54:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org D6F88207D0
+	by mail.kernel.org (Postfix) with ESMTPS id 7C3122074B
+	for <xen-devel@archiver.kernel.org>; Fri,  5 Jun 2020 09:10:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 7C3122074B
 Authentication-Results: mail.kernel.org; dmarc=none (p=none dis=none) header.from=suse.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jh87U-0007zt-OD; Fri, 05 Jun 2020 08:54:32 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jh8Ly-0000l9-6M; Fri, 05 Jun 2020 09:09:30 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=thT7=7S=suse.com=jbeulich@srs-us1.protection.inumbo.net>)
- id 1jh87S-0007ze-SW
- for xen-devel@lists.xenproject.org; Fri, 05 Jun 2020 08:54:30 +0000
-X-Inumbo-ID: 2acbeebe-a70a-11ea-af8f-12813bfff9fa
+ id 1jh8Lw-0000l4-RE
+ for xen-devel@lists.xenproject.org; Fri, 05 Jun 2020 09:09:28 +0000
+X-Inumbo-ID: 41b835ae-a70c-11ea-96fb-bc764e2007e4
 Received: from mx2.suse.de (unknown [195.135.220.15])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 2acbeebe-a70a-11ea-af8f-12813bfff9fa;
- Fri, 05 Jun 2020 08:54:30 +0000 (UTC)
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 41b835ae-a70c-11ea-96fb-bc764e2007e4;
+ Fri, 05 Jun 2020 09:09:27 +0000 (UTC)
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
- by mx2.suse.de (Postfix) with ESMTP id 82A39AFC6;
- Fri,  5 Jun 2020 08:54:32 +0000 (UTC)
-Subject: Re: [PATCH] x86/Intel: insert Ice Lake and Comet Lake model numbers
-To: =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
-References: <baa738ce-0398-48df-e94e-dc8b86a35f6c@suse.com>
- <20200605080216.GI1195@Air-de-Roger>
- <32c4cdf7-0fdd-8b12-ee42-dfe8fe096935@suse.com>
- <20200605084644.GJ1195@Air-de-Roger>
+ by mx2.suse.de (Postfix) with ESMTP id 15D32AAC6;
+ Fri,  5 Jun 2020 09:09:30 +0000 (UTC)
+Subject: Re: handle_pio looping during domain shutdown, with qemu 4.2.0 in
+ stubdom
+To: =?UTF-8?Q?Marek_Marczykowski-G=c3=b3recki?=
+ <marmarek@invisiblethingslab.com>
+References: <20200604014621.GA203658@mail-itl>
+ <4dcc0092-6f6d-5d63-06cb-15b2fec244db@suse.com>
+ <ecca6d68-9b86-0549-1e1a-308704e11aad@citrix.com>
+ <c58d7d90-94cb-fa3e-a5ad-c3fb85b921a9@suse.com>
+ <20200604142542.GC98582@mail-itl>
 From: Jan Beulich <jbeulich@suse.com>
-Message-ID: <d24f6ebc-7b3c-d560-c073-3c039542ebf8@suse.com>
-Date: Fri, 5 Jun 2020 10:54:22 +0200
+Message-ID: <3b4dbb2f-7a0a-29a8-cca7-0cb641e8338d@suse.com>
+Date: Fri, 5 Jun 2020 11:09:25 +0200
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
  Thunderbird/68.8.1
 MIME-Version: 1.0
-In-Reply-To: <20200605084644.GJ1195@Air-de-Roger>
+In-Reply-To: <20200604142542.GC98582@mail-itl>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -61,56 +63,102 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Paul Durrant <paul@xen.org>, Wei Liu <wl@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Paul Durrant <paul@xen.org>,
+ xen-devel <xen-devel@lists.xenproject.org>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On 05.06.2020 10:46, Roger Pau Monné wrote:
-> On Fri, Jun 05, 2020 at 10:10:01AM +0200, Jan Beulich wrote:
->> On 05.06.2020 10:02, Roger Pau Monné wrote:
->>> On Fri, Jun 05, 2020 at 09:51:09AM +0200, Jan Beulich wrote:
->>>> Both match prior generation processors as far as LBR and C-state MSRs
->>>> go (SDM rev 072) as well as applicability of the if_pschange_mc erratum
->>>> (recent spec updates).
->>>>
->>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>> ---
->>>> Such changes having been subject to backporting in the past, this
->>>> change may want considering for 4.14.
->>>> ---
->>>> I'm leaving alone spec_ctrl.c, albeit there's a scary looking erratum
->>>> for Ice Lake indicating that MDS_NO may wrongly be set. But this is
->>>> apparently addressed by ucode update, so we may not need to deal with
->>>> it in software.
->>>>
->>>> --- a/xen/arch/x86/acpi/cpu_idle.c
->>>> +++ b/xen/arch/x86/acpi/cpu_idle.c
+On 04.06.2020 16:25, Marek Marczykowski-Górecki wrote:
+> On Thu, Jun 04, 2020 at 02:36:26PM +0200, Jan Beulich wrote:
+>> On 04.06.2020 13:13, Andrew Cooper wrote:
+>>> On 04/06/2020 08:08, Jan Beulich wrote:
+>>>> On 04.06.2020 03:46, Marek Marczykowski-Górecki wrote:
+>>>>> Then, we get the main issue:
+>>>>>
+>>>>>     (XEN) d3v0 handle_pio port 0xb004 read 0x0000
+>>>>>     (XEN) d3v0 Weird PIO status 1, port 0xb004 read 0xffff
+>>>>>     (XEN) domain_crash called from io.c:178
+>>>>>
+>>>>> Note, there was no XEN_DOMCTL_destroydomain for domain 3 nor its stubdom
+>>>>> yet. But XEN_DMOP_remote_shutdown for domain 3 was called already.
+>>>> I'd guess an issue with the shutdown deferral logic. Did you / can
+>>>> you check whether XEN_DMOP_remote_shutdown managed to pause all
+>>>> CPUs (I assume it didn't, since once they're paused there shouldn't
+>>>> be any I/O there anymore, and hence no I/O emulation)?
 >>>
->>> What about mwait-idle? I guess we pick that from Linux and no patch
->>> has been added so far?
+>>> The vcpu in question is talking to Qemu, so will have v->defer_shutdown
+>>> intermittently set, and skip the pause in domain_shutdown()
+>>>
+>>> I presume this lack of pause is to allow the vcpu in question to still
+>>> be scheduled to consume the IOREQ reply?  (Its fairly opaque logic with
+>>> 0 clarifying details).
+>>>
+>>> What *should* happen is that, after consuming the reply, the vcpu should
+>>> notice and pause itself, at which point it would yield to the
+>>> scheduler.  This is the purpose of vcpu_{start,end}_shutdown_deferral().
+>>>
+>>> Evidentially, this is not happening.
 >>
->> Correct. I've looked at recent history there, and I'm uncertain they'll
->> add further models there. They look to prefer to use ACPI _CST now again
->> with, as it seems, not overly much of a difference to the ACPI driver
->> (which, if we were to follow, I'd rather see us integrate there).
+>> We can't tell yet, until ...
+>>
+>>> Marek: can you add a BUG() after the weird PIO printing?  That should
+>>> confirm whether we're getting into handle_pio() via the
+>>> handle_hvm_io_completion() path, or via the vmexit path (at which case,
+>>> we're fully re-entering the guest).
+>>
+>> ... we know this. handle_pio() gets called from handle_hvm_io_completion()
+>> after having called hvm_wait_for_io() -> hvm_io_assist() ->
+>> vcpu_end_shutdown_deferral(), so the issue may be that we shouldn't call
+>> handle_pio() (etc) at all anymore in this state. IOW perhaps
+>> hvm_wait_for_io() should return "!sv->vcpu->domain->is_shutting_down"
+>> instead of plain "true"?
+>>
+>> Adding Paul to Cc, as being the maintainer here.
 > 
-> Urg, OK, that's a shame as using mwait-idle was IMO better from a Xen
-> PoV as we didn't rely on dom0 in order to discover C states. I wonder
-> if we could continue to update mwait-idle on our own for newer models.
+> Got it, by sticking BUG() just before that domain_crash() in
+> handle_pio(). And also vcpu 0 of both HVM domains do have
+> v->defer_shutdown.
 
-This would be nice indeed, but would require Intel to provide us with
-the necessary data.
+As per the log they did get it set. I'd be curious of the flag's
+value (as well as v->paused_for_shutdown's) at the point of the
+problematic handle_pio() invocation (see below). It may be
+worthwhile to instrument vcpu_check_shutdown() (inside its if())
+- before exiting to guest context (in order to then come back
+and call handle_pio()) the vCPU ought to be getting through
+there. No indication of it doing so would be a sign that there's
+a code path bypassing the call to vcpu_end_shutdown_deferral().
 
-> FWIW, wikichip also lists 6c and 6a [0] as Ice Lake Server model versions,
-> but I'm not sure if this has been confirmed in any way?
+> (XEN) hvm.c:1620:d6v0 All CPUs offline -- powering off.
+> (XEN) d3v0 handle_pio port 0xb004 read 0x0000
+> (XEN) d3v0 handle_pio port 0xb004 read 0x0000
+> (XEN) d3v0 handle_pio port 0xb004 write 0x0001
+> (XEN) d3v0 handle_pio port 0xb004 write 0x2001
+> (XEN) d4v0 XEN_DMOP_remote_shutdown domain 3 reason 0
+> (XEN) d4v0 domain 3 domain_shutdown vcpu_id 0 defer_shutdown 1
+> (XEN) d4v0 XEN_DMOP_remote_shutdown domain 3 done
+> (XEN) hvm.c:1620:d5v0 All CPUs offline -- powering off.
+> (XEN) d1v0 handle_pio port 0xb004 read 0x0000
+> (XEN) d1v0 handle_pio port 0xb004 read 0x0000
+> (XEN) d1v0 handle_pio port 0xb004 write 0x0001
+> (XEN) d1v0 handle_pio port 0xb004 write 0x2001
+> (XEN) d2v0 XEN_DMOP_remote_shutdown domain 1 reason 0
+> (XEN) d2v0 domain 1 domain_shutdown vcpu_id 0 defer_shutdown 1
+> (XEN) d2v0 XEN_DMOP_remote_shutdown domain 1 done
+> (XEN) grant_table.c:3702:d0v0 Grant release 0x3 ref 0x11d flags 0x2 d6
+> (XEN) grant_table.c:3702:d0v0 Grant release 0x4 ref 0x11e flags 0x2 d6
+> (XEN) d3v0 handle_pio port 0xb004 read 0x0000
 
-SDM vol 4 confirms this, but mentions the two model numbers exclusively
-in the table matching signatures to model names ("Future Intel Xeon
-processors based on Ice Lake microarchitecture"). Without there being an
-actual table for these I don't think we should "speculatively" add the
-numbers anywhere.
+Perhaps in this message could you also log
+v->domain->is_shutting_down, v->defer_shutdown, and
+v->paused_for_shutdown? (Would be nice if, after having made
+changes to your debugging patch, you could point again at the
+precise version you've used for the log provided.)
+
+> (XEN) d3v0 Unexpected PIO status 1, port 0xb004 read 0xffff
+> (XEN) Xen BUG at io.c:178
+
+Btw, instead of BUG(), WARN() or dump_execution_state() would
+likely also do, keeping Xen alive.
 
 Jan
 
