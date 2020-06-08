@@ -7,78 +7,78 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 3068BC433E1
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 34654C433DF
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:04:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 04A5B206C3
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:04:03 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 045A2206C3
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:04:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="gOYOLjUa"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 04A5B206C3
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="i0gWMupY"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 045A2206C3
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiKFd-0005xS-Ns; Mon, 08 Jun 2020 16:03:53 +0000
-Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+	id 1jiKFi-00062l-1o; Mon, 08 Jun 2020 16:03:58 +0000
+Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
+ helo=us1-amaz-eas2.inumbo.com)
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1jiKFc-0005vx-F5
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:03:52 +0000
-X-Inumbo-ID: a2574c78-a9a1-11ea-96fb-bc764e2007e4
-Received: from us-smtp-1.mimecast.com (unknown [205.139.110.120])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id a2574c78-a9a1-11ea-96fb-bc764e2007e4;
- Mon, 08 Jun 2020 16:03:46 +0000 (UTC)
+ id 1jiKFg-00060k-AE
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:03:56 +0000
+X-Inumbo-ID: a7c53adb-a9a1-11ea-b292-12813bfff9fa
+Received: from us-smtp-1.mimecast.com (unknown [207.211.31.120])
+ by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
+ id a7c53adb-a9a1-11ea-b292-12813bfff9fa;
+ Mon, 08 Jun 2020 16:03:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632226;
+ s=mimecast20190719; t=1591632235;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7kyMhVQ9HQhJiyo6QGAHK03lmBlbuIzucxY+SHtzpks=;
- b=gOYOLjUa3SErlNwXKlU2eDT1PAPgwl56xFbNvTRv1I+orIWRKljvuZIHlyKYUO3X8I+VnW
- ZH9iIDPjakh67DKxqGNUmOotSSVu2eamUItw4Apf3m72m65Vc7w3Eq2e63AJOejSWJQH8z
- a4rRuj2/dpj4UfSpz/DQndVeQ3ze48g=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-512-VnuTzJqdMgCI7cGKIB3R5A-1; Mon, 08 Jun 2020 12:03:42 -0400
-X-MC-Unique: VnuTzJqdMgCI7cGKIB3R5A-1
-Received: by mail-wm1-f71.google.com with SMTP id r1so7252wmh.7
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:03:42 -0700 (PDT)
+ bh=qfeQjgHHg6Ez9waCGJmOrJzAr/zUBGXbuFUiyuF/Rfo=;
+ b=i0gWMupYQnQaFUEqTKaVJBfEe2HNXu7+J/baMmXCmjt4r32d3aYvlLPLRjroSb/5hxImAc
+ uC3PbyJL9Znc/AfU8nlK8C59RGAgTKM1qMcX+L4K9FxhXkQhXrh66avYo1etStY+pgnPup
+ Oq+k1H8cr0en46mXrLNzlbEfZfcry30=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-177-fkrCQdsqMBKNuS5RKU1dOA-1; Mon, 08 Jun 2020 12:03:54 -0400
+X-MC-Unique: fkrCQdsqMBKNuS5RKU1dOA-1
+Received: by mail-wr1-f70.google.com with SMTP id o1so7301067wrm.17
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:03:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=7kyMhVQ9HQhJiyo6QGAHK03lmBlbuIzucxY+SHtzpks=;
- b=TkTYh/ov6JLnFrIv4kKTxAjg55WgTvOZR3/o6hBG36P8kT2BrskRYvt14WS3MSdDrO
- hPGHeXl4X0RSatxDFoax63UvBBhkk2Kw+yHf3dAagWwOI3o3uwj3pdg9L/E981hbnKsC
- XpAV9uT7UYlQyYrW3Mf8E2zQ1yrCgRVSLDLCiGhcs9f5yj3XnsmMl5sRDONx27YFn4hi
- cvtEN8R11Lwbzou00/9C61frIUXezVTanV+AN6SWZ+9aHjG6SCmigToG2oNXOlXVdqkI
- SyHpGk1hNqOPwICsS1z/L0URVXptXZnK2vt04ACjZqVi9ZD0mEIL/SKQere3kD0hQOCh
- 1I1Q==
-X-Gm-Message-State: AOAM530ezekEqph+KK957aLtZwbznHL8VNsvBvYdwP7LqzU0y+cRzAsj
- FD0918qH51tFHGpgqJlaWX97pQsV23S/8EU/yxZIPQS1UHwUaQ6ASMdZ+/YKyhaeAJxkoc4FBeM
- WpHm4uwcZ9MISeGQFZnqt5NxEQjE=
-X-Received: by 2002:a5d:6087:: with SMTP id w7mr26621418wrt.158.1591632221506; 
- Mon, 08 Jun 2020 09:03:41 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyEzYn7IfaprZ27/xV2VCZHXx76WBbSnolmOS6yBDnvZe3b82K5DvPVvnhVs7yLdMTrFxNPeQ==
-X-Received: by 2002:a5d:6087:: with SMTP id w7mr26621373wrt.158.1591632221329; 
- Mon, 08 Jun 2020 09:03:41 -0700 (PDT)
+ bh=qfeQjgHHg6Ez9waCGJmOrJzAr/zUBGXbuFUiyuF/Rfo=;
+ b=rWixmA5Q8jXZw28KKwt/9OhtlIq9ugTF60XXRG7wSYDZ1vLWtRiSmTvVbcQBxBlxAZ
+ G9aobf6c+tEjBcYVl80sbW6l1PvE5+PbxQge7+aQ1xTIJ4yBNQrsBxdSKLtjTWELXZJp
+ PbrW/PaLPK+WuLcy9Hr/Fm6Li2ubxhjg1ASA1V+gK9Sat2Xb3rVcc0dlmRs3ty8y2sQF
+ DT6PIFvJmdTBkTeB6eyERNM+JYcsLKVmP8u7ePr3hZdfddcFcYJ6C68hILgn+WqueTel
+ 6DWmjyRojgVjCXalDrefm53MFOPWr2KkWRmCF/XldPmLSKOKPzsFnPkmPuWqLj1j26Ia
+ g7RA==
+X-Gm-Message-State: AOAM533HrBHZO/Jw4mXWXWC3OtUIxIAGS1dC+zASiB0xFik6A9iE7Uu4
+ hiEdLzlv7UaM8rss6mZs/1p6FGwifUepbRvn881GdseL3L1KHtfYOCFpHKuYJaI/ufv355RfH/z
+ D50ypoDmTORQ4IeHb0tnMef0i8Iw=
+X-Received: by 2002:a7b:cd04:: with SMTP id f4mr54308wmj.3.1591632232863;
+ Mon, 08 Jun 2020 09:03:52 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxLcq9fw++IqBSfctMa2VnenePzSclzDPUX9srn5OE/PiQtrx427TCsmbU35rGSbrlanE52/A==
+X-Received: by 2002:a7b:cd04:: with SMTP id f4mr54282wmj.3.1591632232663;
+ Mon, 08 Jun 2020 09:03:52 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id o82sm8088wmo.40.2020.06.08.09.03.39
+ by smtp.gmail.com with ESMTPSA id q4sm4466wma.47.2020.06.08.09.03.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:03:40 -0700 (PDT)
+ Mon, 08 Jun 2020 09:03:52 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [RFC PATCH 30/35] hw/ppc/virtex_ml507: Emit warning when old code is
- used
-Date: Mon,  8 Jun 2020 18:00:39 +0200
-Message-Id: <20200608160044.15531-31-philmd@redhat.com>
+Subject: [RFC PATCH 32/35] hw/riscv: Emit warning when old code is used
+Date: Mon,  8 Jun 2020 18:00:41 +0200
+Message-Id: <20200608160044.15531-33-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
@@ -128,31 +128,54 @@ This code hasn't been QOM'ified yet. Warn the user.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/ppc/virtex_ml507.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ hw/riscv/riscv_htif.c  | 4 ++++
+ hw/riscv/sifive_uart.c | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/hw/ppc/virtex_ml507.c b/hw/ppc/virtex_ml507.c
-index 0dacfcd236..17b8036c38 100644
---- a/hw/ppc/virtex_ml507.c
-+++ b/hw/ppc/virtex_ml507.c
-@@ -40,7 +40,7 @@
- #include "qemu/log.h"
- #include "qemu/option.h"
- #include "exec/address-spaces.h"
--
+diff --git a/hw/riscv/riscv_htif.c b/hw/riscv/riscv_htif.c
+index ca87a5cf9f..bd080dbefb 100644
+--- a/hw/riscv/riscv_htif.c
++++ b/hw/riscv/riscv_htif.c
+@@ -30,6 +30,7 @@
+ #include "hw/riscv/riscv_htif.h"
+ #include "qemu/timer.h"
+ #include "qemu/error-report.h"
 +#include "hw/qdev-deprecated.h"
- #include "hw/ppc/ppc.h"
- #include "hw/ppc/ppc4xx.h"
- #include "hw/qdev-properties.h"
-@@ -95,6 +95,8 @@ static PowerPCCPU *ppc440_init_xilinx(const char *cpu_type, uint32_t sysclk)
-     CPUPPCState *env;
-     qemu_irq *irqs;
  
+ #define RISCV_DEBUG_HTIF 0
+ #define HTIF_DEBUG(fmt, ...)                                                   \
+@@ -238,6 +239,9 @@ HTIFState *htif_mm_init(MemoryRegion *address_space, MemoryRegion *main_mem,
+     uint64_t fromhost_offset = fromhost_addr - base;
+ 
+     HTIFState *s = g_malloc0(sizeof(HTIFState));
++
 +    qdev_warn_deprecated_function_used();
 +
-     cpu = POWERPC_CPU(cpu_create(cpu_type));
-     env = &cpu->env;
+     s->address_space = address_space;
+     s->main_mem = main_mem;
+     s->main_mem_ram_ptr = memory_region_get_ram_ptr(main_mem);
+diff --git a/hw/riscv/sifive_uart.c b/hw/riscv/sifive_uart.c
+index 9350482662..1a5890d5f7 100644
+--- a/hw/riscv/sifive_uart.c
++++ b/hw/riscv/sifive_uart.c
+@@ -25,6 +25,7 @@
+ #include "hw/hw.h"
+ #include "hw/irq.h"
+ #include "hw/riscv/sifive_uart.h"
++#include "hw/qdev-deprecated.h"
  
+ /*
+  * Not yet implemented:
+@@ -183,6 +184,9 @@ SiFiveUARTState *sifive_uart_create(MemoryRegion *address_space, hwaddr base,
+     Chardev *chr, qemu_irq irq)
+ {
+     SiFiveUARTState *s = g_malloc0(sizeof(SiFiveUARTState));
++
++    qdev_warn_deprecated_function_used();
++
+     s->irq = irq;
+     qemu_chr_fe_init(&s->chr, chr, &error_abort);
+     qemu_chr_fe_set_handlers(&s->chr, uart_can_rx, uart_rx, uart_event,
 -- 
 2.21.3
 
