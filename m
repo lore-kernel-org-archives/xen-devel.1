@@ -7,78 +7,77 @@ X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
 	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
 	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BF08EC433E0
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:03:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7A653C433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:03:22 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8F1AA206A4
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:03:08 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4A39E206A4
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:03:22 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="fpmhIKFv"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8F1AA206A4
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="TGCSDTjS"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4A39E206A4
 Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiKEl-0004zF-DM; Mon, 08 Jun 2020 16:02:59 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jiKEy-0005DE-Nc; Mon, 08 Jun 2020 16:03:12 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1jiKEj-0004xK-Fa
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:02:57 +0000
-X-Inumbo-ID: 84dd67cc-a9a1-11ea-b292-12813bfff9fa
-Received: from us-smtp-delivery-1.mimecast.com (unknown [205.139.110.61])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTP
- id 84dd67cc-a9a1-11ea-b292-12813bfff9fa;
- Mon, 08 Jun 2020 16:02:57 +0000 (UTC)
+ id 1jiKEy-0005Cr-E2
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:03:12 +0000
+X-Inumbo-ID: 8c86487c-a9a1-11ea-9ad7-bc764e2007e4
+Received: from us-smtp-delivery-1.mimecast.com (unknown [207.211.31.81])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 8c86487c-a9a1-11ea-9ad7-bc764e2007e4;
+ Mon, 08 Jun 2020 16:03:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632177;
+ s=mimecast20190719; t=1591632189;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=L3z7/2H5A05Y0veUntj0sB8fSeRKRdeeSYeKdBwF4Hw=;
- b=fpmhIKFvXLBpniJCwiDDDhPv207fXRcRPf8Fyzb5skveGIlLOsn5quV6q8sdbFQl24gin0
- pn8EXow3zBSue5C8vbvUVw2Mp3zYD3fBOtJEipjW+o09za2eUlMYrD7hIhzVutB/3tAQPA
- bz1mHO1dTKHznxeOYtNDRhN1EJmjMr0=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-184-7XjA2IgJMUC4pFDJteqlGQ-1; Mon, 08 Jun 2020 12:02:55 -0400
-X-MC-Unique: 7XjA2IgJMUC4pFDJteqlGQ-1
-Received: by mail-wr1-f69.google.com with SMTP id t5so7327475wro.20
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:02:55 -0700 (PDT)
+ bh=RKgZ6rumXDcRDPMbmvtvFrKHcFm+r1xyGKVfqjvJc6Q=;
+ b=TGCSDTjSjVESFM0s9RVzGVk/nBmwY3w+YYNoJXfVGVMfhPDDGxFeej0/JMo2m9OXNii0Se
+ 5ohss3AoEbYC/QoJy4IGccOvaXAcun9zOqJUwkVdWdt1iqJ4uHDFtb6GI/BAsLcyfvGkoC
+ 3LKehgJXvpYrVHtx0Rs3Q7sKTOixG8U=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-103-2ic1ciL8M6qX7rYM_hrwlw-1; Mon, 08 Jun 2020 12:03:06 -0400
+X-MC-Unique: 2ic1ciL8M6qX7rYM_hrwlw-1
+Received: by mail-wr1-f72.google.com with SMTP id m14so7339203wrj.12
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:03:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=L3z7/2H5A05Y0veUntj0sB8fSeRKRdeeSYeKdBwF4Hw=;
- b=XwQ4gqHPIImJ644DyU7+b98n6CPZSplRgJZAkqXd/bH4qMPsRGu2jra8/JhzP46H1L
- uMHXlYwB8lFJq2Bm2A6IaP3r+FxIOUPwE+PgUn5UOLf/I8D6q6r2P5V2LF6ixmMGIciY
- EVsJ3FT3vHPvLZzbBm9Q2NrisnLhRonyn2T56QKC8yMFltfEOizJqsE7en4CHAU4IZ3X
- xCzZXOcF79vIKu1ARmstd8kdinumyifP/S6IjTskfi+4yrWrlPzXhP/VdSSpF6PvOZhF
- 1dp8UjPVvyfGjXdeC5A0TZA9fWVOzc56PHybTStSQVEfror9mlNG25CmzcK5q3ST8Vnk
- b1eQ==
-X-Gm-Message-State: AOAM533n5E7CIXKUfeS7o08hCVtT/nEPwrosY/10o4b1fDgL9rMcUWHV
- dr0VRu1gn9Ez0IzTcPjkpmK6mxUJHEmswoOBSak8TCccoFwbuwIvFjSdwMn6MTtsgqSHcvT1O/L
- 3anfwIPjeuAOY6oHolu+Ju+o1Jvw=
-X-Received: by 2002:a5d:4841:: with SMTP id n1mr25485583wrs.64.1591632174026; 
- Mon, 08 Jun 2020 09:02:54 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxxA5a/fZ3ZxfFd0NOMzf3yCM2KT4oTBQZPfei9kF9bupOnm+jcw1E0PX8MzjNlME16qgafXA==
-X-Received: by 2002:a5d:4841:: with SMTP id n1mr25485541wrs.64.1591632173820; 
- Mon, 08 Jun 2020 09:02:53 -0700 (PDT)
+ bh=RKgZ6rumXDcRDPMbmvtvFrKHcFm+r1xyGKVfqjvJc6Q=;
+ b=exPvCKM6LgFWZoRWsyPVJe+KZcFa308yGKEH2nWMb6PQymKNOKVVQOBsMPytjkpdMs
+ GimAVuEHnccJB8dtfSmijNCvZ5ZB3AzWv64yG+tVCk/ck0KRum0eYsFWogExsYpcCcXh
+ 86qjl0/7wLw1uaeI+66O1hqD4IZKR+CQphM5NOKGa8I/d5H2Slg5PS/YiEz06ZKiMqfm
+ 4ZZ1em9pjYGL141w7d+9kB9TW8BUhLtAQiSDeM9ztWUgNBSlAO8+ctgVlYbRCLsx3Jvt
+ OCn9fJigQtgHKNSM59F/A5/VHrrpUI8JILjQOhCY2eHoC9utBNSNr7ovHfaoADfuCLad
+ PRfw==
+X-Gm-Message-State: AOAM532Adv+fYOUWe0111xzS5bNKfZVKKXvhWhNEygH9X6ALW3rap+IW
+ u/Smfi8PrhtHvAHa6CW6e11j9+xk4UXiRhSzCVZaIGLFzKTIhIrUfsfVMPXUu5m8kEunf5Y3tJC
+ Pg21w6ZnoLZ71X9sW3F/oCJAS/UI=
+X-Received: by 2002:a1c:a906:: with SMTP id s6mr21527wme.171.1591632185578;
+ Mon, 08 Jun 2020 09:03:05 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzU3FFzPx8GJONXk2lb2PRS9hlQzh1ioPeLu4txPuU4I7Pa7KejCTY0NavLN6WE+tDOlF/rwQ==
+X-Received: by 2002:a1c:a906:: with SMTP id s6mr21489wme.171.1591632185399;
+ Mon, 08 Jun 2020 09:03:05 -0700 (PDT)
 Received: from localhost.localdomain
  (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id q8sm49134wmq.1.2020.06.08.09.02.51
+ by smtp.gmail.com with ESMTPSA id g25sm30434wmh.18.2020.06.08.09.03.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:02:53 -0700 (PDT)
+ Mon, 08 Jun 2020 09:03:04 -0700 (PDT)
 From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
 To: qemu-devel@nongnu.org
-Subject: [RFC PATCH 22/35] hw/m68k/mcf520x: Emit warning when old code is used
-Date: Mon,  8 Jun 2020 18:00:31 +0200
-Message-Id: <20200608160044.15531-23-philmd@redhat.com>
+Subject: [RFC PATCH 24/35] hw/misc/cbus: Emit warning when old code is used
+Date: Mon,  8 Jun 2020 18:00:33 +0200
+Message-Id: <20200608160044.15531-25-philmd@redhat.com>
 X-Mailer: git-send-email 2.21.3
 In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
 References: <20200608160044.15531-1-philmd@redhat.com>
@@ -128,61 +127,30 @@ This code hasn't been QOM'ified yet. Warn the user.
 
 Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
 ---
- hw/m68k/mcf5206.c | 5 +++++
- hw/m68k/mcf5208.c | 3 +++
- 2 files changed, 8 insertions(+)
+ hw/misc/cbus.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/hw/m68k/mcf5206.c b/hw/m68k/mcf5206.c
-index a2fef04f8e..ec0d176674 100644
---- a/hw/m68k/mcf5206.c
-+++ b/hw/m68k/mcf5206.c
-@@ -16,6 +16,7 @@
- #include "qemu/timer.h"
- #include "hw/ptimer.h"
- #include "sysemu/sysemu.h"
+diff --git a/hw/misc/cbus.c b/hw/misc/cbus.c
+index 3c3721ad2d..24e197684f 100644
+--- a/hw/misc/cbus.c
++++ b/hw/misc/cbus.c
+@@ -25,6 +25,7 @@
+ #include "hw/irq.h"
+ #include "hw/misc/cbus.h"
+ #include "sysemu/runstate.h"
 +#include "hw/qdev-deprecated.h"
  
- /* General purpose timer module.  */
- typedef struct {
-@@ -144,6 +145,8 @@ static m5206_timer_state *m5206_timer_init(qemu_irq irq)
+ //#define DEBUG
+ 
+@@ -135,6 +136,8 @@ CBus *cbus_init(qemu_irq dat)
  {
-     m5206_timer_state *s;
+     CBusPriv *s = (CBusPriv *) g_malloc0(sizeof(*s));
  
 +    qdev_warn_deprecated_function_used();
 +
-     s = g_new0(m5206_timer_state, 1);
-     s->timer = ptimer_init(m5206_timer_trigger, s, PTIMER_POLICY_DEFAULT);
-     s->irq = irq;
-@@ -566,6 +569,8 @@ qemu_irq *mcf5206_init(MemoryRegion *sysmem, uint32_t base, M68kCPU *cpu)
-     m5206_mbar_state *s;
-     qemu_irq *pic;
- 
-+    qdev_warn_deprecated_function_used();
-+
-     s = g_new0(m5206_mbar_state, 1);
- 
-     memory_region_init_io(&s->iomem, NULL, &m5206_mbar_ops, s,
-diff --git a/hw/m68k/mcf5208.c b/hw/m68k/mcf5208.c
-index 2ab9701ad6..72627f6833 100644
---- a/hw/m68k/mcf5208.c
-+++ b/hw/m68k/mcf5208.c
-@@ -26,6 +26,7 @@
- #include "hw/sysbus.h"
- #include "elf.h"
- #include "exec/address-spaces.h"
-+#include "hw/qdev-deprecated.h"
- 
- #define SYS_FREQ 166666666
- 
-@@ -191,6 +192,8 @@ static void mcf5208_sys_init(MemoryRegion *address_space, qemu_irq *pic)
-     m5208_timer_state *s;
-     int i;
- 
-+    qdev_warn_deprecated_function_used();
-+
-     /* SDRAMC.  */
-     memory_region_init_io(iomem, NULL, &m5208_sys_ops, NULL, "m5208-sys", 0x00004000);
-     memory_region_add_subregion(address_space, 0xfc0a8000, iomem);
+     s->dat_out = dat;
+     s->cbus.clk = qemu_allocate_irq(cbus_clk, s, 0);
+     s->cbus.dat = qemu_allocate_irq(cbus_dat, s, 0);
 -- 
 2.21.3
 
