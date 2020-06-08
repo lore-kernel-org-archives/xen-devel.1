@@ -2,65 +2,118 @@ Return-Path: <SRS0=4XJi=7W=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-8.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,
-	URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=unavailable autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.2 required=3.0 tests=DKIM_SIGNED,DKIM_VALID,
+	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,
+	SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A8D28C433E0
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 03:47:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 95E2AC433DF
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 04:17:14 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 71A7720775
-	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 03:47:20 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 57D2A207ED
+	for <xen-devel@archiver.kernel.org>; Tue,  9 Jun 2020 04:17:14 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="szvpOm92"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 71A7720775
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+	dkim=pass (1024-bit key) header.d=bitdefender.onmicrosoft.com header.i=@bitdefender.onmicrosoft.com header.b="IFje1UGs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 57D2A207ED
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=bitdefender.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiVDt-0003M8-Pw; Tue, 09 Jun 2020 03:46:49 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
+	id 1jiVh4-0005xY-Mv; Tue, 09 Jun 2020 04:16:58 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=aF9f=7W=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
- id 1jiVDs-0003M3-8v
- for xen-devel@lists.xenproject.org; Tue, 09 Jun 2020 03:46:48 +0000
-X-Inumbo-ID: d7b691b4-aa03-11ea-b2d6-12813bfff9fa
-Received: from mail.kernel.org (unknown [198.145.29.99])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id d7b691b4-aa03-11ea-b2d6-12813bfff9fa;
- Tue, 09 Jun 2020 03:46:47 +0000 (UTC)
-Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 290FA20775;
- Tue,  9 Jun 2020 03:46:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=default; t=1591674406;
- bh=CLVBI8sBETJZRH84szWPKCZET1iujXSN9tbuwfeKbHg=;
- h=Date:From:To:cc:Subject:In-Reply-To:References:From;
- b=szvpOm92h48+ZA24If+05vk6Wfwxi/L131yipzhT9g8mQHN4DH0DTIT7B+iggFhDF
- X57oYj2xWOE309TL6GGGSydM1y7maSWzRK7sQ/B6AMBiK4FDXcucquhA+GlQKDnfXn
- 8/07/ySp7LJP2CL1E0l3cM4c8dfuklUuSvf8DBRo=
-Date: Mon, 8 Jun 2020 20:46:45 -0700 (PDT)
-From: Stefano Stabellini <sstabellini@kernel.org>
-X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
-To: Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 08/11] swiotlb-xen: introduce phys_to_dma/dma_to_phys
- translations
-In-Reply-To: <alpine.DEB.2.21.2006081558400.2815@sstabellini-ThinkPad-T480s>
-Message-ID: <alpine.DEB.2.21.2006082045430.2815@sstabellini-ThinkPad-T480s>
-References: <alpine.DEB.2.21.2006031506590.6774@sstabellini-ThinkPad-T480s>
- <20200603222247.11681-8-sstabellini@kernel.org>
- <20200608070850.GD15742@infradead.org>
- <alpine.DEB.2.21.2006081558400.2815@sstabellini-ThinkPad-T480s>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+ <SRS0=f2DJ=7V=bitdefender.com=rcojocaru@srs-us1.protection.inumbo.net>)
+ id 1jiP87-00025z-GI
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 21:16:27 +0000
+X-Inumbo-ID: 4f31e48c-a9cd-11ea-b7bb-bc764e2007e4
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com (unknown
+ [40.107.7.102]) by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 4f31e48c-a9cd-11ea-b7bb-bc764e2007e4;
+ Mon, 08 Jun 2020 21:16:25 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AIgwRbf5VjnUiogij1+0HRFkMm3YCKXScGhMXJgbWmr+CBAUXrH535WM8YVJuwhBi4w1xO3RwAxgNuD91afHQMkuNsf+wpCoC8oAJdgEazlzvVB1i4l5FOVMB7np5iHqwprAGFEtRCpTvJushH2Y8OBuwLNvWd0bXJT7tHbRseDwO9dqRSFbgjVGfIjPmVUFEfKUVc8HLM67tp8Koa6g8yhkDw/SPsZHq0vCJgtWr0XI2BHfu+CoZcfGK3RtKsjFdwe+2Pqvv0NIhbg7xdShmSJ3MColsFcvvIUGB0Wz9Q2gNPXS33x/qUMlwX9MPMycAreVmm+2eH+SOEF9X6Py4Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1BMyGPbmxiYGh7C6IwlCMGwsJeFFFqYdhaaLHnlr1MU=;
+ b=HfyPkxwofWW40j8I3a+cT0cf1a3hiBWFtpuJtRK0WNLpEtwcFnHqPOZITDNIuP3XxDkcAltw+M5rP6ViQoaHPUFoVh+RundO7CHZN9/zE0XJQn/BqQqo0OdnxBoCzYsErpTSAOKZYfMWFuaB7cXju6AlYiK5eKgBn1EitqsNNCDqfqZu4O9GLUeb9Xi4IKL0wdMqcnL4uG7qTGmvZ4FWp6pabJfmzVS1c5c7E8aT4L8wSMt+ZHdZIuIHL2dvIRO8CijvK0YjHBnYiFA3tmXnXQrT6/5Gb8heR9Adlul1Cu6XVp0z4IMyFsaBrE1JDq9+5HHmJ8RJn62+CO9Qev39tg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bitdefender.com; dmarc=pass action=none
+ header.from=bitdefender.com; dkim=pass header.d=bitdefender.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bitdefender.onmicrosoft.com; s=selector2-bitdefender-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1BMyGPbmxiYGh7C6IwlCMGwsJeFFFqYdhaaLHnlr1MU=;
+ b=IFje1UGsOi8VNYyQEYF7snF/MYG6vo5mAGfE9aRqLvZqmR5Fslhyuc4cw6q1Xn+27fG4BVIRxVTrVOK5ZekXGaLeqHqgTwr1WKnBtAS5bKoLKLduUtYm0fJWgiVu/nupgHhH5OioOYANmr29XR5GQYHvO13ereMWnBVlsU93css=
+Authentication-Results: bitdefender.com; dkim=none (message not signed)
+ header.d=none;bitdefender.com; dmarc=none action=none
+ header.from=bitdefender.com;
+Received: from DB8PR02MB5434.eurprd02.prod.outlook.com (2603:10a6:10:e5::15)
+ by DB8PR02MB5564.eurprd02.prod.outlook.com (2603:10a6:10:e1::33) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.20; Mon, 8 Jun
+ 2020 21:16:22 +0000
+Received: from DB8PR02MB5434.eurprd02.prod.outlook.com
+ ([fe80::3c22:239a:7f84:7572]) by DB8PR02MB5434.eurprd02.prod.outlook.com
+ ([fe80::3c22:239a:7f84:7572%5]) with mapi id 15.20.3066.023; Mon, 8 Jun 2020
+ 21:16:22 +0000
+Subject: Re: [PATCH v4 for-4.14] x86/monitor: revert default behavior when
+ monitoring register write events
+To: Tamas K Lengyel <tamas@tklengyel.com>
+References: <20200603125237.100041-1-tamas@tklengyel.com>
+ <20200603150721.GF1195@Air-de-Roger>
+ <be627680-5ab2-d93d-b042-2b6aadbdcd8d@suse.com>
+ <ffa44e09-a9fd-8fff-16af-e0991db3cb9b@bitdefender.com>
+ <CABfawhnNC3yCuG+xNicyjA_Qo89qpvXKL-Cp9wAc4Cq=Xv8BYQ@mail.gmail.com>
+ <aded2ba0-3a16-bee5-d3e0-98bf5beb068d@bitdefender.com>
+ <CABfawh=s6OL54ckemhvjWRQWu_apmV6--L0+bRY9xEQKaPj16Q@mail.gmail.com>
+From: Razvan Cojocaru <rcojocaru@bitdefender.com>
+Message-ID: <fdedc03a-57cf-3899-93d1-db491ecbbc5d@bitdefender.com>
+Date: Tue, 9 Jun 2020 00:16:15 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
+In-Reply-To: <CABfawh=s6OL54ckemhvjWRQWu_apmV6--L0+bRY9xEQKaPj16Q@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US-large
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR06CA0131.eurprd06.prod.outlook.com
+ (2603:10a6:803:a0::24) To DB8PR02MB5434.eurprd02.prod.outlook.com
+ (2603:10a6:10:e5::15)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.228.119] (82.137.38.55) by
+ VI1PR06CA0131.eurprd06.prod.outlook.com (2603:10a6:803:a0::24) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3066.18 via Frontend Transport; Mon, 8 Jun 2020 21:16:21 +0000
+X-Originating-IP: [82.137.38.55]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c59c2ed7-edc4-4156-c55c-08d80bf131df
+X-MS-TrafficTypeDiagnostic: DB8PR02MB5564:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DB8PR02MB55649198F2139BC4E8C09E2EAB850@DB8PR02MB5564.eurprd02.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+X-Forefront-PRVS: 042857DBB5
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 6egoxf1Qs/itY71To2uEADxLcQ3JFd0DW6zD/eP7LPHqliJT1lCRU+YZg6842awWxTWQUMiTuLZoKENT8e/ru83bPVulrfmDH/DS9bz3kly27Exp8FSmO/jseSVZEwE8H6KRBqdzVLwfFQs0RPD81DagrLaVxuHMEEt+U5F91CmJNNCTYgHfIiqSbIlJ2HDflTbTXXdyjDkDdG6MfRvvjI8YPIrDbGv+/nCcGaSkqhZnmuu1Gwb7CFuUtsDO3yBKmB8CZxbvmWz2DTrDKZ3K/SV37TK1QC1F+gN3Avd4sZaUHrI+EfNhfb50STh3EU3JxvQOhoO3K1fkRDDRBX65spFTFitTqWloaWKIXEXa5o2/kuG7fzdO11z9kP3Ys75c
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB8PR02MB5434.eurprd02.prod.outlook.com; PTR:; CAT:NONE;
+ SFTY:;
+ SFS:(346002)(136003)(396003)(39860400002)(376002)(366004)(26005)(186003)(83380400001)(16526019)(7416002)(8676002)(8936002)(4326008)(86362001)(31686004)(107886003)(478600001)(6666004)(31696002)(5660300002)(66946007)(66556008)(16576012)(6916009)(316002)(54906003)(6486002)(36756003)(52116002)(2616005)(66476007)(53546011)(956004)(2906002)(43740500002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData: qk5VsOYQzqvkfcccRj+FF+Q9YHRbY2qePXPj9K54Vm0xXranBPuRTca8V/v53SvA3ylke0RcvovVryeRHEqYRAyVTTJhA6CNtBIslMtLePypph3HyVy8WvTMhpmMMoSdOFhWJiK5Q4aExwg/LthSBKHqwpqgfZIaofnzyPOIYSKgviJd8gD+O27pZnhHz6N0EzFQk74+AwWvv/iz+MOJHQt4NnQiz1FtIzNX1kHEgXmKBGpGuwE9TxQJf1ztf3hgEa3POOROZwwvIVw5pmUai2IFWANqd2EuMYFdsAijTG4Pr9tfZWg1hYGgKZJcAo+4h/gkDJWFUUiif0ycAMp0NfyvEXJkkPbSH2JAVUtrhg+jQoRBkYCPhCvEi6whWejUpHNV1WXG4O0SJevxmJcKnZySYJYg5h46SPzTNydltjX8K8mikiFvk+HE4A4onJNkzfiFwwG9y80TUjHl2shss305etPfsppdyee+8Fkv5R4=
+X-OriginatorOrg: bitdefender.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c59c2ed7-edc4-4156-c55c-08d80bf131df
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jun 2020 21:16:22.6496 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 487baf29-f1da-469a-9221-243f830c36f3
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FozwZKQmh1Li3QC9Appi7PboI9kP2vP4yl3B+8nzRAHMXhMuX0TA4brOb6eju5X8WBLbUp1TUyC7KMZdKNmsLwvMJofatjz9RvjWv2hgmCM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR02MB5564
+X-Mailman-Approved-At: Tue, 09 Jun 2020 04:16:56 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,85 +124,89 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: jgross@suse.com, tamas@tklengyel.com, konrad.wilk@oracle.com,
- roman@zededa.com, linux-kernel@vger.kernel.org,
- Christoph Hellwig <hch@infradead.org>, xen-devel@lists.xenproject.org,
- boris.ostrovsky@oracle.com, Stefano Stabellini <stefano.stabellini@xilinx.com>
+Cc: Petre Pircalabu <ppircalabu@bitdefender.com>,
+ Andrei LUTAS <vlutas@bitdefender.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Wei Liu <wl@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Mihai_Don=c8=9bu?= <mdontu@bitdefender.com>,
+ Ian Jackson <ian.jackson@eu.citrix.com>,
+ George Dunlap <george.dunlap@citrix.com>, Jan Beulich <jbeulich@suse.com>,
+ Alexandru Isaila <aisaila@bitdefender.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=c3=a9?= <roger.pau@citrix.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, 8 Jun 2020, Stefano Stabellini wrote:
-> On Mon, 8 Jun 2020, Christoph Hellwig wrote:
-> > On Wed, Jun 03, 2020 at 03:22:44PM -0700, Stefano Stabellini wrote:
-> > > From: Stefano Stabellini <stefano.stabellini@xilinx.com>
-> > > 
-> > > With some devices physical addresses are different than dma addresses.
-> > > To be able to deal with these cases, we need to call phys_to_dma on
-> > > physical addresses (including machine addresses in Xen terminology)
-> > > before returning them from xen_swiotlb_alloc_coherent and
-> > > xen_swiotlb_map_page.
-> > > 
-> > > We also need to convert dma addresses back to physical addresses using
-> > > dma_to_phys in xen_swiotlb_free_coherent and xen_swiotlb_unmap_page if
-> > > we want to do any operations on them.
-> > > 
-> > > Call dma_to_phys in is_xen_swiotlb_buffer.
-> > > Call phys_to_dma in xen_phys_to_bus.
-> > > Call dma_to_phys in xen_bus_to_phys.
-> > > 
-> > > Everything is taken care of by these changes except for
-> > > xen_swiotlb_alloc_coherent and xen_swiotlb_free_coherent, which need a
-> > > few explicit phys_to_dma/dma_to_phys calls.
-> > > 
-> > > Signed-off-by: Stefano Stabellini <stefano.stabellini@xilinx.com>
-> > > Tested-by: Corey Minyard <cminyard@mvista.com>
-> > > Tested-by: Roman Shaposhnik <roman@zededa.com>
-> > > ---
-> > > Changes in v2:
-> > > - improve commit message
-> > > ---
-> > >  drivers/xen/swiotlb-xen.c | 22 ++++++++++++----------
-> > >  1 file changed, 12 insertions(+), 10 deletions(-)
-> > > 
-> > > diff --git a/drivers/xen/swiotlb-xen.c b/drivers/xen/swiotlb-xen.c
-> > > index 0a6cb67f0fc4..60ef07440905 100644
-> > > --- a/drivers/xen/swiotlb-xen.c
-> > > +++ b/drivers/xen/swiotlb-xen.c
-> > > @@ -64,16 +64,16 @@ static inline dma_addr_t xen_phys_to_bus(struct device *dev, phys_addr_t paddr)
-> > >  
-> > >  	dma |= paddr & ~XEN_PAGE_MASK;
-> > >  
-> > > -	return dma;
-> > > +	return phys_to_dma(dev, dma);
-> > 
-> > So looking at this function:
-> > 
-> > The dma name for something passed to phys_to_dma is really
-> > weird.
+On 6/8/20 11:44 PM, Tamas K Lengyel wrote:
+> On Mon, Jun 8, 2020 at 2:14 PM Razvan Cojocaru
+> <rcojocaru@bitdefender.com> wrote:
+>>
+>> On 6/8/20 10:54 PM, Tamas K Lengyel wrote:
+>>> On Mon, Jun 8, 2020 at 12:58 PM Razvan Cojocaru
+>>>> And last but not least, the proper sequence is: 1. unsubscribe from
+>>>> register write events, 2. process all events "still in the chamber"
+>>>> (keep checking the ring buffer for a while), 3. detach from the guest
+>>>> (disable the vm_event subsystem). Not ideal perhaps (in that it's not
+>>>> guaranteed that a VCPU won't resume after a longer period than our
+>>>> timeout), but if the sequence is followed there should be no guest hangs
+>>>> or crashes (at least none that we or our clients have observed so far).
+>>>
+>>> Incorrect. That's not enough. You also have to wait for all the vCPUs
+>>> to get scheduled before disabling vm_event or otherwise the emulation
+>>> is skipped entirely. Please read the patch message. If the user
+>>> decides to disable vm_event after getting a CR3 event delivered, the
+>>> CR3 never gets updated and results in the guest crashing in
+>>> unpredictable ways. Same happens with all the other registers.
+>>
+>> I did read the patch message. As I've previously stated ("it's not
+>> guaranteed that a VCPU won't resume after a longer period than our
+>> timeout"), it's not ideal, and I've made no claim that the problem does
+>> not exist or that it shouldn't be fixed - but really if you've got a
+>> VCPU that will wait more than a couple of seconds to get scheduled then
+>> you've got a bigger problem with the VM.
 > 
-> Yeah, that is true, I am not sure why I chose that confusing name. I'll
-> rename it.
-> 
-> 
-> > The fact that the comments says don't use XEN_PFN_PHYS
-> > beause of the type mismatch while nothing but swiotlb-xen is the only
-> > user of XEN_PFN_PHYS is also weird.  I think XEN_PFN_PHYS needs to move
-> > to swiotlb-xen first, then use a hardcoded u64 for the size, and the
-> > split the function into a phys_to_xen_phys (or so) function where
-> > the result gets passed to phys_to_dma.
-> 
-> I understand what you are suggesting about having something like:
-> 
->     xen_phys_to_dma(...)
->     {
->         phys_addr_t phys = xen_phys_to_bus(dev, paddr)
->         return phys_to_dma(phys);
->     }
-> 
-> I thought about it myself. I'll do it.
-> 
-> But I don't think I understood the comment about XEN_PFN_PHYS.
+> Sorry, missed the part where you say you knew about this issue. We
+> didn't and it was absolutely not documented anywhere and certainly not
+> mentioned in the original patch that added the feature. It literally
+> took us years to figure out what the hell is going on. While as you it
+> can be a couple seconds before its safe to disable it can be a lot
+> longer depending on the system state, how many VMs are running and how
+> many vCPUs are active on the VM. There is absolutely necessary
+> use-cases where you want to keep the VM paused after a CR3 event is
+> received and exit vm_event afterwards. This bug totally blocks those
+> use-cases. Not to mention that it's a total mess having an interface
+> where the user has to guess when its safe to do something. If this was
+> pointed out when the patch was made I would have objected to that
+> being merged.
 
-You meant to move the #define from the header to swiotlb-xen.c, didn't
-you, and to use a cast to u64 instead of phys_addr_t?
+No, we didn't know about the issue. It's apparently not my most eloquent
+evening. I was merely saying that I did understand what the issue was
+from your description, and offering an explanation on why we've never
+seen this in QA or production. Of course the issue would have been
+mentioned at least (but ideally not exist to begin with) had it been known.
+
+We do take several passes through the ring buffer (and as a side-effect
+reduce the probability of a race occuring to almost zero), but we do
+that to make sure we've cleaned up all EPT vm_events; the fact that it
+has helped with _this_ issue is a coincidence.
+
+IIRC Windows, at least, will be upset if a VCPU is stuck for too long.
+
+As for how the vm_event system behaves:
+
+1. A security application that is unable to _prevent_ things being done
+to a system is not doing a very good job, since in that case you can
+only collect stats and not veto anything. I would argue that the default
+for such a monitoring application should be the current one (all events
+should be pre-action).
+
+2. This is further supported by the fact that that's exactly how the EPT
+vm_events work: you get a "I want to write to this page" event _before_
+the write occurs. If register writes behave differently, you have _two_
+different models: one where you get an event post-action, and one where
+you get one pre-action.
+
+
+Hope that's clearer,
+Razvan
 
