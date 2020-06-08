@@ -2,91 +2,74 @@ Return-Path: <SRS0=2oDP=7V=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
-	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=3.4.0
+X-Spam-Status: No, score=-2.3 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS,USER_AGENT_SANE_1 autolearn=no
+	autolearn_force=no version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BD3CFC433DF
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:04:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 7C019C433E1
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:14:08 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 8B15C206A4
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:04:38 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPS id 4FE242063A
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:14:08 +0000 (UTC)
 Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="hHuCqph2"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 8B15C206A4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=kernel.org header.i=@kernel.org header.b="ijKc48iD"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 4FE242063A
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiKGD-0006Yh-8m; Mon, 08 Jun 2020 16:04:29 +0000
+	id 1jiKPF-0007zQ-6s; Mon, 08 Jun 2020 16:13:49 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
- id 1jiKGB-0006XS-Gq
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:04:27 +0000
-X-Inumbo-ID: b225dce6-a9a1-11ea-9ad7-bc764e2007e4
-Received: from us-smtp-1.mimecast.com (unknown [205.139.110.120])
- by us1-rack-iad1.inumbo.com (Halon) with ESMTP
- id b225dce6-a9a1-11ea-9ad7-bc764e2007e4;
- Mon, 08 Jun 2020 16:04:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1591632253;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6eEd/TZ2fHyvBWvIJ4C8+kCwxjhDxL4elOTIEe035mA=;
- b=hHuCqph27roUMrw8KtTy81Vhjqjimm2gQFdWrtk41rDRuw/AAQL/FGDN+E/vILI+7D7M9l
- Cf6aI1OpL2Myp5c83nUbd8VUPB9/U+RLB+YwkHjMkYWYG1e2/Ir/E7225JnSAgqNU3nr+Q
- OzbpBlhXHBMN4jbDT6y74tv+0IPLcZc=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-6-qzWtedKVO1eW0Ed_00J5cg-1; Mon, 08 Jun 2020 12:04:11 -0400
-X-MC-Unique: qzWtedKVO1eW0Ed_00J5cg-1
-Received: by mail-wr1-f72.google.com with SMTP id s17so7307327wrt.7
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:04:11 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=6eEd/TZ2fHyvBWvIJ4C8+kCwxjhDxL4elOTIEe035mA=;
- b=gOsNnegEhpTrAEqpo9b+wFaqfwW2py9DSIesFlJ0GUxW9MSZmJ2otxrXiI5ggoQ99D
- njyzLfJxhiuM8DqvQ0hxDf0QGAO8xc/1msMKoEDuakWzYSIWztMTixkZnd5Po5SF7EXA
- PMCGW6Wo2yPTbHMZj7/tkTecFGTNrwt2Er1j5P1mBDJDqt2SysuDv4xKZI2194eTyS7K
- UUqKUnSAPI9OFsCRJXel/ZlOI9+0AoYRawkjuRGQVgWZTthWoGhLLrvjg8PNzosiSw0C
- 0fcaB5lTr6ByoCh1iDNSq0udZ3V49odal6gr0CEISOTN+RArWcTuKcwPhz9uOf8GJUSt
- NsHA==
-X-Gm-Message-State: AOAM533J5y2qHCguCUcRydEQINkrFOorTMuZ3HdcLOhCuTOPjvF08u76
- aMX1nm85ua/4dzi897HliYbPFVTuFSHBzYg4DyLud5+j++dPgVx23X+poMytK+WpstqY//bEiLl
- WBtd4UW9x/+x70gVM31yYI3/3Vfk=
-X-Received: by 2002:a1c:bb05:: with SMTP id l5mr29005wmf.141.1591632250058;
- Mon, 08 Jun 2020 09:04:10 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxwleTjEs6m/0F9WTXFTKcyesoS9BhM/fhVRhaP0ZaaZMgPHfTC+huUmGRS6bDSqa1xeeej4Q==
-X-Received: by 2002:a1c:bb05:: with SMTP id l5mr28952wmf.141.1591632249790;
- Mon, 08 Jun 2020 09:04:09 -0700 (PDT)
-Received: from localhost.localdomain
- (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
- by smtp.gmail.com with ESMTPSA id j16sm243025wre.21.2020.06.08.09.04.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Jun 2020 09:04:09 -0700 (PDT)
-From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
-To: qemu-devel@nongnu.org
-Subject: [RFC PATCH 35/35] hw/xtensa/xtfpga: Emit warning when old code is used
-Date: Mon,  8 Jun 2020 18:00:44 +0200
-Message-Id: <20200608160044.15531-36-philmd@redhat.com>
-X-Mailer: git-send-email 2.21.3
-In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
-References: <20200608160044.15531-1-philmd@redhat.com>
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=yn46=7V=kernel.org=sstabellini@srs-us1.protection.inumbo.net>)
+ id 1jiKPE-0007zL-Pq
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:13:48 +0000
+X-Inumbo-ID: 08c0ebc6-a9a3-11ea-9ad7-bc764e2007e4
+Received: from mail.kernel.org (unknown [198.145.29.99])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
+ id 08c0ebc6-a9a3-11ea-9ad7-bc764e2007e4;
+ Mon, 08 Jun 2020 16:13:48 +0000 (UTC)
+Received: from localhost (c-67-164-102-47.hsd1.ca.comcast.net [67.164.102.47])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 6E19A206D5;
+ Mon,  8 Jun 2020 16:13:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=default; t=1591632827;
+ bh=LOpsTFq0ZkH2cN8y/1ahan3fKry7WioraIBzGJYpYKc=;
+ h=Date:From:To:cc:Subject:In-Reply-To:References:From;
+ b=ijKc48iDnvfE6umhezyzgLNp2NmeFP2lfaMZux/yz2F4m8OhpMwcFrUa8I7Yj7jUb
+ Qevc38IayBOhthG+N6Sfq18A7Wuha4JxG2d4D2F9YrJ8R3upwMcCQTQuhIhXoy8q+2
+ 19DFUjHR74KUxwCoS4pWw6FIRyUXAg4Zws9MKJv0=
+Date: Mon, 8 Jun 2020 09:13:46 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+X-X-Sender: sstabellini@sstabellini-ThinkPad-T480s
+To: CodeWiz2280 <codewiz2280@gmail.com>
+Subject: Re: Keystone Issue
+In-Reply-To: <CALYbLDizxgaXJzhNVeKVZ6q-Hbttm1T+ZPP7f-1PDvi49VFOjA@mail.gmail.com>
+Message-ID: <alpine.DEB.2.21.2006080911500.2815@sstabellini-ThinkPad-T480s>
+References: <CALYbLDiNtHZusupf8=yhKtw1EA7HjMP3o3+WGdv9Omv9v8yVHg@mail.gmail.com>
+ <3ff17aa9-0aae-d598-40ce-4e90d4e50cc7@xen.org>
+ <00E14EAD-BD23-4A3A-872E-0C47C26B7B41@arm.com>
+ <c2466674-a56e-08a4-7f3f-2438d5565953@xen.org>
+ <CALYbLDjNptWfVMGjw801y6f0zu40b2pzBnLS+w2Zx5eVStCUYQ@mail.gmail.com>
+ <da23ecc8-60f0-8a26-58d5-ea692dcf0102@xen.org>
+ <CALYbLDhpwbHTrjDaNmfW81m5Fqt6HbfqoqbGDH1qUxxJtMBmEA@mail.gmail.com>
+ <8C6A23AE-6C2B-411F-ACAD-F5574211E8ED@arm.com>
+ <CALYbLDiOX0JW_=6AgAb+m5q++3WvQtivJRy+ePrp5pJXd7T9Vg@mail.gmail.com>
+ <14244e49-e1ac-a29d-bbd9-bd4c202bf186@xen.org>
+ <CALYbLDjCdDvwja1VoahJmnrKDfKyw7DNhYBBcmJv70QDA4+6Ag@mail.gmail.com>
+ <77006AAF-BC3B-4C6E-BDFC-577CF87DE64E@arm.com>
+ <CALYbLDheT8jWSAqJJZvvjzWGvygJaJ6UG7ejgpLLYeQB-tCsJA@mail.gmail.com>
+ <CALYbLDjZu-YzqZPjCk785=4hpd3BRsoXeotd3ygESD_Ezm63Yg@mail.gmail.com>
+ <99E77330-049F-4471-ABF9-13F9AB4E95B5@arm.com>
+ <CALYbLDizxgaXJzhNVeKVZ6q-Hbttm1T+ZPP7f-1PDvi49VFOjA@mail.gmail.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=UTF-8;
-	text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -97,61 +80,160 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: Peter Maydell <peter.maydell@linaro.org>,
- Sagar Karandikar <sagark@eecs.berkeley.edu>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
- Max Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
- Gerd Hoffmann <kraxel@redhat.com>,
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
- Magnus Damm <magnus.damm@gmail.com>, Markus Armbruster <armbru@redhat.com>,
- Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
- Anthony Perard <anthony.perard@citrix.com>,
- =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
- David Gibson <david@gibson.dropbear.id.au>,
- Andrzej Zaborowski <balrogg@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>,
- Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
- xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
- Stafford Horne <shorne@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
- Richard Henderson <rth@twiddle.net>,
- "Daniel P . Berrange" <berrange@redhat.com>, Thomas Huth <huth@tuxfamily.org>,
- Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
- =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
- Michael Walle <michael@walle.cc>, qemu-ppc@nongnu.org,
- Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
+Cc: xen-devel <xen-devel@lists.xenproject.org>, nd <nd@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <Bertrand.Marquis@arm.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-This code hasn't been QOM'ified yet. Warn the user.
 
-Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
----
- hw/xtensa/xtfpga.c | 3 +++
- 1 file changed, 3 insertions(+)
 
-diff --git a/hw/xtensa/xtfpga.c b/hw/xtensa/xtfpga.c
-index 60ccc74f5f..a3c82dc81a 100644
---- a/hw/xtensa/xtfpga.c
-+++ b/hw/xtensa/xtfpga.c
-@@ -50,6 +50,7 @@
- #include "xtensa_memory.h"
- #include "hw/xtensa/mx_pic.h"
- #include "migration/vmstate.h"
-+#include "hw/qdev-deprecated.h"
- 
- typedef struct XtfpgaFlashDesc {
-     hwaddr base;
-@@ -129,6 +130,8 @@ static XtfpgaFpgaState *xtfpga_fpga_init(MemoryRegion *address_space,
- {
-     XtfpgaFpgaState *s = g_malloc(sizeof(XtfpgaFpgaState));
- 
-+    qdev_warn_deprecated_function_used();
-+
-     memory_region_init_io(&s->iomem, NULL, &xtfpga_fpga_ops, s,
-                           "xtfpga.fpga", 0x10000);
-     memory_region_add_subregion(address_space, base, &s->iomem);
--- 
-2.21.3
+On Mon, 8 Jun 2020, CodeWiz2280 wrote:
+> It actually shows only 1 interrupt for any of the devices in that list
+> (e.g. spi, ttyS0, ethernet) so you're probably right on the money with
+> it being an interrupt acknowledge issue.  Any help you can provide is
+> greatly appreciated.
+> 
+> On Mon, Jun 8, 2020 at 4:40 AM Bertrand Marquis
+> <Bertrand.Marquis@arm.com> wrote:
+> >
+> >
+> >
+> > > On 5 Jun 2020, at 20:12, CodeWiz2280 <codewiz2280@gmail.com> wrote:
+> > >
+> > > On Fri, Jun 5, 2020 at 11:05 AM CodeWiz2280 <codewiz2280@gmail.com> wrote:
+> > >>
+> > >> On Fri, Jun 5, 2020 at 8:47 AM Bertrand Marquis
+> > >> <Bertrand.Marquis@arm.com> wrote:
+> > >>>
+> > >>>
+> > >>>
+> > >>>> On 5 Jun 2020, at 13:42, CodeWiz2280 <codewiz2280@gmail.com> wrote:
+> > >>>>
+> > >>>> On Fri, Jun 5, 2020 at 8:30 AM Julien Grall <julien@xen.org> wrote:
+> > >>>>>
+> > >>>>> Hi,
+> > >>>>>
+> > >>>>> On 05/06/2020 13:25, CodeWiz2280 wrote:
+> > >>>>>> The Keystone uses the netcp driver, which has interrupts from 40-79
+> > >>>>>> listed in the device tree (arch/arm/boot/keystone-k2e-netcp.dtsi).
+> > >>>>>> I'm using the same device tree between my non-xen standalone kernel
+> > >>>>>> and my dom0 kernel booted by xen.  In the standalone (non-xen) kernel
+> > >>>>>> the ethernet works fine, but I don't see any of its interrupts in the
+> > >>>>>> output of /proc/iomem.  I'm not seeing them in /proc/iomem when
+> > >>>>>> running dom0 under Xen either.  When booting with Xen I get this
+> > >>>>>> behavior where the ifconfig output shows 1 RX message and 1 TX
+> > >>>>>> message, and then nothing else.
+> > >>>>>
+> > >>>>> I am not sure whether this is a typo in the e-mail. /proc/iomem is
+> > >>>>> listing the list of the MMIO regions. You want to use /proc/interrupts.
+> > >>>>>
+> > >>>>> Can you confirm which path you are dumping?
+> > >>>> Yes, that was a typo.  Sorry about that.  I meant that I am dumping
+> > >>>> /proc/interrupts and do not
+> > >>>> see them under the non-xen kernel or xen booted dom0.
+> > >>>
+> > >>> Could you post both /proc/interrupts content ?
+> > >>
+> > >> Standalone non-xen kernel (Ethernet works)
+> > >> # cat /proc/interrupts
+> > >>           CPU0       CPU1       CPU2       CPU3
+> > >> 17:          0          0          0          0     GICv2  29 Level
+> > >>  arch_timer
+> > >> 18:       9856       1202        457        650     GICv2  30 Level
+> > >>  arch_timer
+> > >> 21:          0          0          0          0     GICv2 142 Edge
+> > >>  timer-keystone
+> > >> 22:          0          0          0          0     GICv2  52 Edge      arm-pmu
+> > >> 23:          0          0          0          0     GICv2  53 Edge      arm-pmu
+> > >> 24:          0          0          0          0     GICv2  54 Edge      arm-pmu
+> > >> 25:          0          0          0          0     GICv2  55 Edge      arm-pmu
+> > >> 26:          0          0          0          0     GICv2  36 Edge
+> > >>  26202a0.keystone_irq
+> > >> 27:       1435          0          0          0     GICv2 309 Edge      ttyS0
+> > >> 29:          0          0          0          0     GICv2 315 Edge
+> > >>  2530000.i2c
+> > >> 30:          1          0          0          0     GICv2 318 Edge
+> > >>  2530400.i2c
+> > >> 31:          0          0          0          0     GICv2 321 Edge
+> > >>  2530800.i2c
+> > >> 32:         69          0          0          0     GICv2 324 Edge
+> > >>  21000400.spi
+> > >> 33:          0          0          0          0     GICv2 328 Edge
+> > >>  21000600.spi
+> > >> 34:          0          0          0          0     GICv2 332 Edge
+> > >>  21000800.spi
+> > >> 70:          0          0          0          0     GICv2 417 Edge
+> > >>  ks-pcie-error-irq
+> > >> 79:          0          0          0          0   PCI-MSI   0 Edge
+> > >>  PCIe PME, aerdrv
+> > >> 88:         57          0          0          0     GICv2  80 Level
+> > >>  hwqueue-528
+> > >> 89:         57          0          0          0     GICv2  81 Level
+> > >>  hwqueue-529
+> > >> 90:         47          0          0          0     GICv2  82 Level
+> > >>  hwqueue-530
+> > >> 91:         41          0          0          0     GICv2  83 Level
+> > >>  hwqueue-531
+> > >> IPI0:          0          0          0          0  CPU wakeup interrupts
+> > >> IPI1:          0          0          0          0  Timer broadcast interrupts
+> > >> IPI2:        730        988       1058        937  Rescheduling interrupts
+> > >> IPI3:          2          3          4          6  Function call interrupts
+> > >> IPI4:          0          0          0          0  CPU stop interrupts
+> > >> IPI5:          0          0          0          0  IRQ work interrupts
+> > >> IPI6:          0          0          0          0  completion interrupts
+> > >>
+> > >> Xen dom0 (Ethernet stops)
+> > >> # cat /proc/interrupts
+> > >>           CPU0
+> > >> 18:      10380     GIC-0  27 Level     arch_timer
+> > >> 19:          0     GIC-0 142 Edge      timer-keystone
+> > >> 20:         88     GIC-0  16 Level     events
+> > >> 21:          0   xen-dyn     Edge    -event     xenbus
+> > >> 22:          0     GIC-0  36 Edge      26202a0.keystone_irq
+> > >> 23:          1     GIC-0 312 Edge      ttyS0
+> > >> 25:          1     GIC-0 318 Edge
+> > >> 27:          1     GIC-0 324 Edge      21000400.spi
+> > >> 28:          0     GIC-0 328 Edge      21000600.spi
+> > >> 29:          0     GIC-0 332 Edge      21000800.spi
+> > >> 65:          0     GIC-0 417 Edge      ks-pcie-error-irq
+> > >> 74:          0   PCI-MSI   0 Edge      PCIe PME, aerdrv
+> > >> 83:          1     GIC-0  80 Level     hwqueue-528
+> > >> 84:          1     GIC-0  81 Level     hwqueue-529
+> > >> 85:          1     GIC-0  82 Level     hwqueue-530
+> > >> 86:          1     GIC-0  83 Level     hwqueue-531
+> > >> 115:         87   xen-dyn     Edge    -virq      hvc_console
+> > >> IPI0:          0  CPU wakeup interrupts
+> > >> IPI1:          0  Timer broadcast interrupts
+> > >> IPI2:          0  Rescheduling interrupts
+> > >> IPI3:          0  Function call interrupts
+> > >> IPI4:          0  CPU stop interrupts
+> > >> IPI5:          0  IRQ work interrupts
+> > >> IPI6:          0  completion interrupts
+> > >> Err:          0
+> > > After getting a chance to look at this a little more, I believe the
+> > > TX/RX interrupts for the ethernets map like this:
+> > >
+> > > eth0 Rx  - hwqueue-528
+> > > eth1 Rx - hwqueue-529
+> > > eth0 Tx  - hwqueue-530
+> > > eth1 Tx - hwqueue-531
+> > >>
+> > > The interrupt counts in the standlone working kernel seem to roughly
+> > > correspond to the counts of Tx/Rx messages in ifconfig.  Going on
+> > > that, its clear that only 1 interrupt has been received for Tx and 1
+> > > for Rx in the Xen Dom0 equivalent.  Any thoughts on this?
+> >
+> > This definitely look like an interrupt acknowledgement issue.
+> > This could be caused by 2 things I remember of:
+> > - front vs level interrupts
+> > - a problem with forwarded interrupt acknowledgement.
+> > I think there was something related to that where the vcpu ack was not properly
+> > handled on a keystone and I had to change the way the interrupt was acked for
+> > forwarded hardware interrupts.
 
+Is there maybe some sort of secondary interrupt controller (secondary in
+addition to the GIC) or interrupt "concentrator" on KeyStone?
+
+Or is it just a small deviation from normal GIC behavior?
 
