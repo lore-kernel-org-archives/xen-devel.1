@@ -2,63 +2,91 @@ Return-Path: <SRS0=2oDP=7V=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,SPF_PASS,URIBL_BLOCKED
-	autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-9.6 required=3.0 tests=DKIM_INVALID,DKIM_SIGNED,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,MAILING_LIST_MULTI,SIGNED_OFF_BY,
+	SPF_HELO_NONE,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1292C433DF
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 15:56:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F3819C433E1
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:01:17 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id BA1D4206A4
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 15:56:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org BA1D4206A4
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
+	by mail.kernel.org (Postfix) with ESMTPS id B9011206A4
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 16:01:17 +0000 (UTC)
+Authentication-Results: mail.kernel.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="hGxdcVcs"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org B9011206A4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=redhat.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiK8I-0002EV-2j; Mon, 08 Jun 2020 15:56:18 +0000
-Received: from all-amaz-eas1.inumbo.com ([34.197.232.57]
- helo=us1-amaz-eas2.inumbo.com)
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=QWP5=7V=citrix.com=roger.pau@srs-us1.protection.inumbo.net>)
- id 1jiK8H-0002EP-Gr
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 15:56:17 +0000
-X-Inumbo-ID: 96097db6-a9a0-11ea-b292-12813bfff9fa
-Received: from esa3.hc3370-68.iphmx.com (unknown [216.71.145.155])
- by us1-amaz-eas2.inumbo.com (Halon) with ESMTPS
- id 96097db6-a9a0-11ea-b292-12813bfff9fa;
- Mon, 08 Jun 2020 15:56:17 +0000 (UTC)
-Authentication-Results: esa3.hc3370-68.iphmx.com;
- dkim=none (message not signed) header.i=none
-IronPort-SDR: TdRVyyo1WdLADr7FIMNHOZuR+T+wR9CKWiMtxMpEb3QPJgm/ybSpj2olenmc5Yzzipw/SqPL5E
- RM3hdg5St3t51PeEqInlFaENnzNAApIPJ51WiQASDUUkcijtq3Im4ibtKYg5wjMx9cHjRAa+F4
- XSQO5LyK6YcR0bFzsNZcesRPFrJp/l0E9nwBNVDoLnvTHf7GY4KwiUben+B0SwQM9rU7qyue3Q
- y9emQU14tSTkQXrkhOOs8dEQd0i/S30ziZwFPVGOux0yAMfnHvUUYMRowm0dcHyG79bpvGfH1l
- ytk=
-X-SBRS: 2.7
-X-MesageID: 19491858
-X-Ironport-Server: esa3.hc3370-68.iphmx.com
-X-Remote-IP: 162.221.158.21
-X-Policy: $RELAYED
-X-IronPort-AV: E=Sophos;i="5.73,487,1583211600"; d="scan'208";a="19491858"
-Date: Mon, 8 Jun 2020 17:56:06 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>
-To: Jan Beulich <jbeulich@suse.com>
-Subject: Re: [PATCH for-4.14 v3] x86/rtc: provide mediated access to RTC for
- PVH dom0
-Message-ID: <20200608155606.GB722@Air-de-Roger>
-References: <20200608102948.7327-1-roger.pau@citrix.com>
- <71e0d073-165b-8fcc-62b9-3fb028b3c526@suse.com>
+	id 1jiKCu-0003dU-Ur; Mon, 08 Jun 2020 16:01:04 +0000
+Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <SRS0=8Blr=7V=redhat.com=philmd@srs-us1.protection.inumbo.net>)
+ id 1jiKCs-0003dE-P0
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 16:01:03 +0000
+X-Inumbo-ID: 4048688c-a9a1-11ea-96fb-bc764e2007e4
+Received: from us-smtp-1.mimecast.com (unknown [205.139.110.61])
+ by us1-rack-iad1.inumbo.com (Halon) with ESMTP
+ id 4048688c-a9a1-11ea-96fb-bc764e2007e4;
+ Mon, 08 Jun 2020 16:01:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1591632062;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=awCHYAXUOGkS+dWmNDQ4SQqbGqK/3LMSf+67fZKCnc0=;
+ b=hGxdcVcsKerpNh8hVCPX8Y1x22DRvRxYIw46laa93thi57uFOujzCSQzFi9PtKIQezKVBo
+ k9BS5sBLplQdy7CefpaEVoIdGL2pyabxn2+RT+UCZ/dPJbinJ4bpKejEcTk3aYhxNaf563
+ bx1J2Z+T7jhovnySAi5yyjuNkqp3rLQ=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-444-jxBAYABvNP-dfB1xUFNYOQ-1; Mon, 08 Jun 2020 12:00:58 -0400
+X-MC-Unique: jxBAYABvNP-dfB1xUFNYOQ-1
+Received: by mail-wr1-f72.google.com with SMTP id e1so7365875wrm.3
+ for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 09:00:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=awCHYAXUOGkS+dWmNDQ4SQqbGqK/3LMSf+67fZKCnc0=;
+ b=jaf1vPJvewdOa7scZRM/7jlONt9wuY8S40MAt9jKMvW0+/DTgwZhHmjcW/uCEWOFmP
+ kLKINGyoN5L+Gxd/o5QEeoKTVd/4vQckdOMRwkU8l4gdGTwKA8SCgf3P0uS0LrN/wCAM
+ CUROka6HthXHjjvmlq3adrNSqY2vvobEalioZ9RbhMgrntXcJ+Sm54embelSwSKyb3ki
+ 05GbxMAQ4ZbneFBrJ10BwjzAsLZXPEFuha/JaRf3nDk2wZfQBzx+rL1/APlEnkErEA2b
+ tD8vGCo8Y2g2PShWMQJLyLMq8UteUo8fSIzq6RLF+1IZZ/Hrp+4UY9Kg5vSoL8TrPLz0
+ jclw==
+X-Gm-Message-State: AOAM533LstCtlvmY/HyQ4Lh0BRqzq7IOJPhF484RjsppIhNUpVXf5mXN
+ T6zNIi8CWXAmZbJyhspz5OaQND9fATu2/r9o/RaAyqSvcqNqvy7kzT5nuP+Y/Nyiaj+uHNFwiu8
+ PFS63X/x6uiWFJhKAqxr7B/dUKfM=
+X-Received: by 2002:a1c:a3c5:: with SMTP id m188mr48570wme.152.1591632053816; 
+ Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJziyL5raG4PwAXzO4TG14Cp0iz1q12d2PaRjnoEeXVkhA3kNQMidurFs0yP2smspC0uLUhA1g==
+X-Received: by 2002:a1c:a3c5:: with SMTP id m188mr48526wme.152.1591632053569; 
+ Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
+Received: from localhost.localdomain
+ (181.red-88-10-103.dynamicip.rima-tde.net. [88.10.103.181])
+ by smtp.gmail.com with ESMTPSA id w10sm187197wrp.16.2020.06.08.09.00.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Jun 2020 09:00:53 -0700 (PDT)
+From: =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>
+To: qemu-devel@nongnu.org
+Subject: [RFC PATCH 01/35] qom/object: Update documentation
+Date: Mon,  8 Jun 2020 18:00:10 +0200
+Message-Id: <20200608160044.15531-2-philmd@redhat.com>
+X-Mailer: git-send-email 2.21.3
+In-Reply-To: <20200608160044.15531-1-philmd@redhat.com>
+References: <20200608160044.15531-1-philmd@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=UTF-8;
+	text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <71e0d073-165b-8fcc-62b9-3fb028b3c526@suse.com>
-X-ClientProxiedBy: AMSPEX02CAS01.citrite.net (10.69.22.112) To
- AMSPEX02CL02.citrite.net (10.69.22.126)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -69,91 +97,73 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- Wei Liu <wl@xen.org>, paul@xen.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+ Sagar Karandikar <sagark@eecs.berkeley.edu>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+ Max Filippov <jcmvbkbc@gmail.com>, Alistair Francis <Alistair.Francis@wdc.com>,
+ Gerd Hoffmann <kraxel@redhat.com>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Paul Durrant <paul@xen.org>,
+ Magnus Damm <magnus.damm@gmail.com>, Markus Armbruster <armbru@redhat.com>,
+ Marcel Apfelbaum <marcel.apfelbaum@gmail.com>,
+ Anthony Perard <anthony.perard@citrix.com>,
+ =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+ David Gibson <david@gibson.dropbear.id.au>,
+ Andrzej Zaborowski <balrogg@gmail.com>, Eduardo Habkost <ehabkost@redhat.com>,
+ Alistair Francis <alistair@alistair23.me>, qemu-arm@nongnu.org,
+ xen-devel@lists.xenproject.org, qemu-riscv@nongnu.org,
+ Stafford Horne <shorne@gmail.com>, Palmer Dabbelt <palmer@dabbelt.com>,
+ Richard Henderson <rth@twiddle.net>,
+ "Daniel P . Berrange" <berrange@redhat.com>, Thomas Huth <huth@tuxfamily.org>,
+ Bastian Koppelmann <kbastian@mail.uni-paderborn.de>,
+ =?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@redhat.com>,
+ Michael Walle <michael@walle.cc>, qemu-ppc@nongnu.org,
+ Paolo Bonzini <pbonzini@redhat.com>, Aurelien Jarno <aurelien@aurel32.net>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-On Mon, Jun 08, 2020 at 01:47:26PM +0200, Jan Beulich wrote:
-> On 08.06.2020 12:29, Roger Pau Monne wrote:
-> > Mediated access to the RTC was provided for PVHv1 dom0 using the PV
-> > code paths (guest_io_{write/read}), but those accesses where never
-> > implemented for PVHv2 dom0. This patch provides such mediated accesses
-> > to the RTC for PVH dom0, just like it's provided for a classic PV
-> > dom0.
-> > 
-> > Pull out some of the RTC logic from guest_io_{read/write} into
-> > specific helpers that can be used by both PV and HVM guests. The
-> > setup of the handlers for PVH is done in rtc_init, which is already
-> > used to initialize the fully emulated RTC.
-> > 
-> > Without this a Linux PVH dom0 will read garbage when trying to access
-> > the RTC, and one vCPU will be constantly looping in
-> > rtc_timer_do_work.
-> > 
-> > Note that such issue doesn't happen on domUs because the ACPI
-> > NO_CMOS_RTC flag is set in FADT, which prevents the OS from accessing
-> > the RTC. Also the X86_EMU_RTC flag is not set for PVH dom0, as the
-> > accesses are not emulated but rather forwarded to the physical
-> > hardware.
-> > 
-> > No functional change expected for classic PV dom0.
-> > 
-> > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> 
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> preferably with ...
-> 
-> > @@ -1110,6 +1111,67 @@ static unsigned long get_cmos_time(void)
-> >      return mktime(rtc.year, rtc.mon, rtc.day, rtc.hour, rtc.min, rtc.sec);
-> >  }
-> >  
-> > +/* Helpers for guest accesses to the physical RTC. */
-> > +unsigned int rtc_guest_read(unsigned int port)
-> > +{
-> > +    const struct domain *currd = current->domain;
-> > +    unsigned long flags;
-> > +    unsigned int data = ~0;
-> > +
-> > +    switch ( port )
-> > +    {
-> > +    case RTC_PORT(0):
-> > +        /*
-> > +         * All PV domains are allowed to read the latched value of the first
-> > +         * RTC port. This is useful in order to store data when debugging.
-> > +         */
-> 
-> ... at least the 2nd sentence of this and ...
-> 
-> > +void rtc_guest_write(unsigned int port, unsigned int data)
-> > +{
-> > +    struct domain *currd = current->domain;
-> > +    unsigned long flags;
-> > +
-> > +    switch ( port )
-> > +    {
-> > +    case RTC_PORT(0):
-> > +        /*
-> > +         * All PV domains are allowed to write to the latched value of the
-> > +         * first RTC port. This is useful in order to store data when
-> > +         * debugging.
-> > +         */
-> 
-> ... this comment dropped again. This justification of the possible
-> usefulness is my very private guessing. Just like the original code
-> was, I think we could leave this uncommented altogether.
+The documentation was introduced in 2f28d2ff9dc, then
+0d09e41a51 and a27bd6c77 moved the headers around.
+Update the comment.
 
-Hm, as you wish. I would prefer to leave something similar to the
-first part of the comment, what about:
+Signed-off-by: Philippe Mathieu-Daudé <philmd@redhat.com>
+---
+ include/qom/object.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-/*
- * All PV domains (and PVH dom0) are allowed to write/read to the
- * latched value of the first RTC port, as there's no access to the
- * physical IO ports.
- */
+diff --git a/include/qom/object.h b/include/qom/object.h
+index fd453dc8d6..eb560bf32f 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -45,7 +45,7 @@ typedef struct InterfaceInfo InterfaceInfo;
+  * <example>
+  *   <title>Creating a minimal type</title>
+  *   <programlisting>
+- * #include "qdev.h"
++ * #include "hw/qdev-core.h"
+  *
+  * #define TYPE_MY_DEVICE "my-device"
+  *
+@@ -146,7 +146,7 @@ typedef struct InterfaceInfo InterfaceInfo;
+  * <example>
+  *   <title>Overriding a virtual function</title>
+  *   <programlisting>
+- * #include "qdev.h"
++ * #include "hw/qdev-core.h"
+  *
+  * void my_device_class_init(ObjectClass *klass, void *class_data)
+  * {
+@@ -170,7 +170,7 @@ typedef struct InterfaceInfo InterfaceInfo;
+  * <example>
+  *   <title>Defining an abstract class</title>
+  *   <programlisting>
+- * #include "qdev.h"
++ * #include "hw/qdev-core.h"
+  *
+  * typedef struct MyDeviceClass
+  * {
+-- 
+2.21.3
 
-I can adjust and then add a newline after the break in the RTC_PORT(0)
-case which I missed.
-
-Thanks, Roger.
 
