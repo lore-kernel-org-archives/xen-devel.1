@@ -2,89 +2,72 @@ Return-Path: <SRS0=2oDP=7V=lists.xenproject.org=xen-devel-bounces@kernel.org>
 X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 	aws-us-west-2-korg-lkml-1.web.codeaurora.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=3.0 tests=DKIM_ADSP_CUSTOM_MED,
-	DKIM_INVALID,DKIM_SIGNED,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,MAILING_LIST_MULTI,SIGNED_OFF_BY,SPF_HELO_NONE,
-	SPF_PASS autolearn=no autolearn_force=no version=3.4.0
+X-Spam-Status: No, score=-0.8 required=3.0 tests=HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_NONE,SPF_PASS autolearn=no autolearn_force=no
+	version=3.4.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id B5EDDC433E1
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 15:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F0930C433E0
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 15:15:40 +0000 (UTC)
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPS id 854902064C
-	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 15:07:26 +0000 (UTC)
-Authentication-Results: mail.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="GqCBO1Ms"
-DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 854902064C
-Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by mail.kernel.org (Postfix) with ESMTPS id C6839206A4
+	for <xen-devel@archiver.kernel.org>; Mon,  8 Jun 2020 15:15:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org C6839206A4
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=citrix.com
 Authentication-Results: mail.kernel.org; spf=pass smtp.mailfrom=xen-devel-bounces@lists.xenproject.org
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1jiJMd-0005nc-FH; Mon, 08 Jun 2020 15:07:03 +0000
+	id 1jiJUj-0006uL-To; Mon, 08 Jun 2020 15:15:25 +0000
 Received: from us1-rack-iad1.inumbo.com ([172.99.69.81])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=9p0X=7V=gmail.com=xadimgnik@srs-us1.protection.inumbo.net>)
- id 1jiJMc-0005nW-Lp
- for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 15:07:02 +0000
-X-Inumbo-ID: b4b51e3e-a999-11ea-9b55-bc764e2007e4
-Received: from mail-wr1-x442.google.com (unknown [2a00:1450:4864:20::442])
+ <SRS0=iXsd=7V=citrix.com=ian.jackson@srs-us1.protection.inumbo.net>)
+ id 1jiJUi-0006uG-MC
+ for xen-devel@lists.xenproject.org; Mon, 08 Jun 2020 15:15:24 +0000
+X-Inumbo-ID: dfbad9ec-a99a-11ea-96fb-bc764e2007e4
+Received: from esa4.hc3370-68.iphmx.com (unknown [216.71.155.144])
  by us1-rack-iad1.inumbo.com (Halon) with ESMTPS
- id b4b51e3e-a999-11ea-9b55-bc764e2007e4;
- Mon, 08 Jun 2020 15:07:02 +0000 (UTC)
-Received: by mail-wr1-x442.google.com with SMTP id y17so17764577wrn.11
- for <xen-devel@lists.xenproject.org>; Mon, 08 Jun 2020 08:07:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:reply-to:to:cc:references:in-reply-to:subject:date:message-id
- :mime-version:content-transfer-encoding:content-language
- :thread-index; bh=QB5BKohjXJ32ObghKFMDps1tKYPC1acdJx9MCMAOsC0=;
- b=GqCBO1MsYlAi/jAEUcqsWXRH770V1vlToZ2+rFS14pFsdhBJKHq6itHPaplghJLKHu
- BN0VfP5nXHP/ihJqZrv6NwbEjtVDPst143ppNVV8cK3yxbE0BaC4nCC2VfWE3Y+EVdeo
- qD9g+fy/FnRiyOmNtt9uKJK+TGAmxsIyELu3momWxT+OGr4szstDXbCyYXhC1o7Oynt0
- jBLUtyzVC/tI4KI8QbxqXfHjBUcpNESJlVF8gK4VYqpZrDrj8YAunxRp+np0Yev7h24/
- 8rRxMNPZ25tVd/tCdEkz2Eu2LYXdYWQCBtjAmPUc5ogD4KJAySUxrqjJH6PukCVL0oTa
- 89NA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:reply-to:to:cc:references:in-reply-to
- :subject:date:message-id:mime-version:content-transfer-encoding
- :content-language:thread-index;
- bh=QB5BKohjXJ32ObghKFMDps1tKYPC1acdJx9MCMAOsC0=;
- b=uCGp+PDE2SkSvRz0ADjqNkB+dn+BP3zaM/r4blnX3HbbOhjUsGfRg+CFNj2qSCemcS
- VVuO+QIZR+C3ornPKiu4Pk95NaMP5jIHE8GP/fFOFeF92ff4ScXjrg8hI7/MqXKAA6mG
- QSbzWac6+EuEuGffDsUjMJlA9H4YGk6tvdRvm9fHcViOOP/jUW7ORyZZNlhG/CgoyyCE
- 5wDiCOot113FEVkT7NrCfVESoV5ctEoH1fOoqcEXU/IhPEP+c/PZUHv73dKcAHb9aAbJ
- 3JLEtTjPXm2YGOPpPJWQDoU1vldE8duHnyiY5z2zky6nyY9Ea56C2acEbRZqWDXoybde
- LHsw==
-X-Gm-Message-State: AOAM530rVLirELpqvhAp00IuJrrmTYryBsvfi9/OiftCCLSxfqeMOAO5
- GIqo73+zlZYaJIIF13flyio=
-X-Google-Smtp-Source: ABdhPJzAMXwWHE/RsCcwmdSNbSaJl0ri5Y5vMAp64ThZ2XsYp4AQAslGOX2H7FKuSc+W/z3AE4COCg==
-X-Received: by 2002:adf:dcc3:: with SMTP id x3mr23255066wrm.93.1591628821191; 
- Mon, 08 Jun 2020 08:07:01 -0700 (PDT)
-Received: from CBGR90WXYV0 ([54.239.6.187])
- by smtp.gmail.com with ESMTPSA id p7sm20599wro.26.2020.06.08.08.06.59
- (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
- Mon, 08 Jun 2020 08:07:00 -0700 (PDT)
-From: Paul Durrant <xadimgnik@gmail.com>
-X-Google-Original-From: "Paul Durrant" <paul@xen.org>
-To: "'George Dunlap'" <George.Dunlap@citrix.com>,
- "'Nick Rosbrook'" <rosbrookn@gmail.com>
-References: <20200606161025.19057-1-rosbrookn@ainfosec.com>
- <B9F0A2FB-CF09-46DA-A136-54D6ABA17B4B@citrix.com>
- <34A9DEE3-7408-4717-853B-43BD5BA7B6C8@citrix.com>
-In-Reply-To: <34A9DEE3-7408-4717-853B-43BD5BA7B6C8@citrix.com>
-Subject: RE: [PATCH for-4.14] golang/xenlight: remove call to go fmt in
- gengotypes.py
-Date: Mon, 8 Jun 2020 16:06:59 +0100
-Message-ID: <004501d63da6$75d9ecd0$618dc670$@xen.org>
+ id dfbad9ec-a99a-11ea-96fb-bc764e2007e4;
+ Mon, 08 Jun 2020 15:15:23 +0000 (UTC)
+Authentication-Results: esa4.hc3370-68.iphmx.com;
+ dkim=none (message not signed) header.i=none
+IronPort-SDR: iUCmOXMdZG+HF4p9TX04tVXlCNTQQYV4PuUveK3lr/b7BcmdnOY+lIk2xHnEccd71XpE8PW3ef
+ TOHd2pNaR/x/vUWktFTUH/QWbl8dLzOHmxuoPgXaRQ/6WxSYOReTBWb8hFaiFwTDU+qe+ZXqLt
+ 5CMi7dTza1erwETLhiX0XZ4em21DnUVr4+8sAWv4f+Qvs5rSBDQmnVpkQEwknAigEFa8Jzo7P6
+ a7heS3orSCzPNTiNO6Niub2of3gnXnCYChdqztNFglCCrUL8SGXvxglkUMGvACGGgmNBihj386
+ BSA=
+X-SBRS: 2.7
+X-MesageID: 20244468
+X-Ironport-Server: esa4.hc3370-68.iphmx.com
+X-Remote-IP: 162.221.158.21
+X-Policy: $RELAYED
+X-IronPort-AV: E=Sophos;i="5.73,487,1583211600"; d="scan'208";a="20244468"
+From: Ian Jackson <ian.jackson@citrix.com>
 MIME-Version: 1.0
-Content-Type: text/plain;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: Microsoft Outlook 16.0
-Content-Language: en-gb
-Thread-Index: AQMZuxlWX/GkGcJw6dDksLH66QFH1QGz0NGjAkULNCymKA+YwA==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-ID: <24286.22007.498299.812546@mariner.uk.xensource.com>
+Date: Mon, 8 Jun 2020 16:15:03 +0100
+To: "paul@xen.org" <paul@xen.org>
+Subject: Re: 4.14.0-rc1 blocked on goland build failure - decision needed [and
+ 1 more messages]
+In-Reply-To: <24286.20279.622221.291800@mariner.uk.xensource.com>,
+ <4DD3680F-7EE6-4C97-B070-DFFE86AE7D4A@citrix.com>
+References: <005201d635a9$2b9bbc20$82d33460$@xen.org>
+ <2C4D8F6A-1498-4F13-923C-AAF2960D531F@citrix.com>
+ <007401d635c2$6b14a150$413de3f0$@xen.org>
+ <001201d63b5b$d8ebe7d0$8ac3b770$@xen.org>
+ <DC327618-2416-47D9-832E-AE8198060A97@citrix.com>
+ <002901d63d7f$2301a6a0$6904f3e0$@xen.org>
+ <24286.12984.247498.799575@mariner.uk.xensource.com>
+ <003001d63d93$9a4bbcf0$cee336d0$@xen.org>
+ <24286.18072.880121.172973@mariner.uk.xensource.com>
+ <003301d63d9e$97de3e60$c79abb20$@xen.org>
+ <24286.20279.622221.291800@mariner.uk.xensource.com>
+ <24286.20424.998938.535648@mariner.uk.xensource.com>
+ <4DD3680F-7EE6-4C97-B070-DFFE86AE7D4A@citrix.com>
+X-Mailer: VM 8.2.0b under 24.5.1 (i686-pc-linux-gnu)
 X-BeenThere: xen-devel@lists.xenproject.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,59 +78,42 @@ List-Post: <mailto:xen-devel@lists.xenproject.org>
 List-Help: <mailto:xen-devel-request@lists.xenproject.org?subject=help>
 List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
-Reply-To: paul@xen.org
-Cc: 'Nick Rosbrook' <rosbrookn@ainfosec.com>,
- 'Xen-devel' <xen-devel@lists.xenproject.org>, 'Wei Liu' <wl@xen.org>,
- 'Ian Jackson' <Ian.Jackson@citrix.com>
+Cc: Xen-devel <xen-devel@lists.xenproject.org>,
+ George Dunlap <George.Dunlap@citrix.com>, Wei Liu <wl@xen.org>,
+ Nick Rosbrook <rosbrookn@gmail.com>
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 
-> -----Original Message-----
-> From: George Dunlap <George.Dunlap@citrix.com>
-> Sent: 08 June 2020 15:16
-> To: Nick Rosbrook <rosbrookn@gmail.com>
-> Cc: Xen-devel <xen-devel@lists.xenproject.org>; Nick Rosbrook =
-<rosbrookn@ainfosec.com>; Ian Jackson
-> <Ian.Jackson@citrix.com>; Wei Liu <wl@xen.org>; Paul Durrant =
-<paul@xen.org>
-> Subject: Re: [PATCH for-4.14] golang/xenlight: remove call to go fmt =
-in gengotypes.py
->=20
-> CC=E2=80=99ing release manager
->=20
-> > On Jun 8, 2020, at 12:39 PM, George Dunlap =
-<george.dunlap@citrix.com> wrote:
-> >
-> >>
-> >> On Jun 6, 2020, at 5:10 PM, Nick Rosbrook <rosbrookn@gmail.com> =
-wrote:
-> >>
-> >> Since the golang bindings are now set to be re-generated whenever a
-> >> change is made to tools/libxl/libxl_types.idl, the call to go fmt =
-in
-> >> gengotypes.py results in a dirty git tree for users without go
-> >> installed.
-> >>
-> >> As an immediate fix, just remove the call to go fmt from =
-gengotypes.py.
-> >> While here, make sure the DO NOT EDIT comment and package =
-declaration
-> >> remain formatted correctly. All other generated code is left
-> >> un-formatted for now.
-> >>
-> >> Signed-off-by: Nick Rosbrook <rosbrookn@ainfosec.com>
-> >
-> > Reviewed-by: George Dunlap <george.dunlap@citrix.com>
->=20
-> Paul, this is a fix to the build system that only affects the =
-formatting of some generated code.  (At
-> the moment, the generated code will look differently depending on =
-whether you have golang installed or
-> not.)
+Ian Jackson writes ("4.14.0-rc1 blocked on goland build failure - decision needed"):
+> Hi, Paul.  For those on xen-devel: context is that Paul asked me to
+> cut 4.14.0-rc1.  The checklist asks me to perform a test build.
+> 
+> My 32-bit tools test build failed.  I think the problem is probably
+> specific to 32-bit userland on 64-bit Linux kernel.  I will send a
+> second followup mail not CC Paul with technical details.
 
-Ok, that sounds low risk.
+George Dunlap writes ("Re: 4.14.0-rc1 blocked on goland build failure - decision needed"):
+> Actually, I don’t think this has anything to do with 32-bit userspace, but instead has to do with the version of go: The version in stretch is 1.7 and chokes on this for some reason.  I haven’t had time to track down why.  It does work for golang 1.11.
+> 
+> Options are:
+> 
+> 1. Document that if you have a version of golang older than 1.11, you need to add `—disable-golang` 
 
-Release-acked-by: Paul Durrant <paul@xen.org>
+I suggest we do this for -rc1 and then consider our options.
 
+I have added this option to my pre-release test build and the build
+works now.
 
+> 2. Modify configure to check for the go version, and only enable if the version is > 1.11
+> 
+> 3. Try to root-cause the issue.
+> 
+> I’m inclined to say we should go with #1 for this RC, then either #2 or #3.
+
+Also please send a patch to osstest to install the relevant golang
+packages.  Even for stretch where it won't be supported.  Currently I
+would expect that patch to cause tests to regress, so the
+corresponding xen patch(es) should go in (and be backported) first.
+
+Ian.
 
